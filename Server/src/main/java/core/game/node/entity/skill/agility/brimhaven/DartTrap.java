@@ -5,10 +5,9 @@ import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.node.entity.Entity;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
-import core.game.system.task.LocationLogoutTask;
-import core.game.system.task.LogoutTask;
 import core.game.system.task.MovementHook;
 import core.game.system.task.Pulse;
+import kotlin.Unit;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
@@ -31,7 +30,13 @@ public final class DartTrap implements MovementHook {
 		final Player player = (Player) e;
 		final Location start = l.transform(-dir.getStepX(), -dir.getStepY(), 0);
 		e.lock(6);
-		e.addExtension(LogoutTask.class, new LocationLogoutTask(13, start));
+		if(e.isPlayer())
+		{
+			e.asPlayer().logoutListeners.put("dart-trap", p -> {
+				p.setLocation(start);
+				return Unit.INSTANCE;
+			});
+		}
 		final Location startProj = l.transform(dir.getStepX() * 5, dir.getStepY() * 5, 0);
 		GameWorld.getPulser().submit(new Pulse(2, e) {
 			boolean failed;
@@ -77,12 +82,14 @@ public final class DartTrap implements MovementHook {
 					if (failed) {
 						player.getPacketDispatch().sendMessage("You were hit by some darts, something on them makes you feel dizzy!");
 						player.getSkills().updateLevel(Skills.AGILITY, -(2 + RandomFunction.randomize(2)), 0);
+						player.logoutListeners.remove("dart-trap");
 						return true;
 					}
 					setDelay(2);
 					AgilityHandler.walk(player, -1, l, l.transform(dir.getStepX() << 1, dir.getStepY() << 1, 0), null, 30.0, null);
 				} else if (count == 4) {
 					PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.RESET, 0, 0, 0, 0, 0));
+					player.logoutListeners.remove("dart-trap");
 					return true;
 				}
 				return false;

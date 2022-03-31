@@ -13,7 +13,6 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
@@ -24,7 +23,7 @@ import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 
@@ -50,13 +49,13 @@ public final class StrongHoldSecurityPlugin extends MapZone implements Plugin<Ob
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		ZoneBuilder.configure(this);
-		PluginManager.definePlugin(new ExplorerDialogue());
-		PluginManager.definePlugin(new StrongholdDialogue());
-		PluginManager.definePlugin(new GrainOfPlentyDialogue());
-		PluginManager.definePlugin(new GiftOfPeaceDialogue());
-		PluginManager.definePlugin(new CradleOfLifeDialogue());
-		PluginManager.definePlugin(new BoxOfHealthDialogue());
-		PluginManager.definePlugin(new OptionHandler() {
+		ClassScanner.definePlugin(new ExplorerDialogue());
+		ClassScanner.definePlugin(new StrongholdDialogue());
+		ClassScanner.definePlugin(new GrainOfPlentyDialogue());
+		ClassScanner.definePlugin(new GiftOfPeaceDialogue());
+		ClassScanner.definePlugin(new CradleOfLifeDialogue());
+		ClassScanner.definePlugin(new BoxOfHealthDialogue());
+		ClassScanner.definePlugin(new OptionHandler() {
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
 				SceneryDefinition.forId(16154).getHandlers().put("option:climb-down", this);

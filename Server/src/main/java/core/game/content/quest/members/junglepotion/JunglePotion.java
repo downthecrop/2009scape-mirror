@@ -9,7 +9,7 @@ import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
 import core.game.world.update.flag.context.Animation;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
 
@@ -37,9 +37,9 @@ public final class JunglePotion extends Quest {
 	
 	@Override
 	public Quest newInstance(Object object) {
-		PluginManager.definePlugin(new TrufitusDialogue());
-		PluginManager.definePlugin(new JogreCavernDialogue());
-		PluginManager.definePlugin(new JunglePotionPlugin());
+		ClassScanner.definePlugin(new TrufitusDialogue());
+		ClassScanner.definePlugin(new JogreCavernDialogue());
+		ClassScanner.definePlugin(new JunglePotionPlugin());
 		return this;
 	}
 

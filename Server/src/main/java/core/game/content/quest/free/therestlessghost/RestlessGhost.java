@@ -6,7 +6,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the restless ghost quest.
@@ -35,7 +35,7 @@ public class RestlessGhost extends Quest {
 
 	@Override
 	public Quest newInstance(Object object) {
-		PluginManager.definePlugin(new OldCronDialogue());
+		ClassScanner.definePlugin(new OldCronDialogue());
 		return this;
 	}
 

@@ -8,7 +8,7 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 
@@ -35,7 +35,7 @@ public final class CrystalChestPlugin extends UseWithHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		addHandler(172, OBJECT_TYPE, this);
-		PluginManager.definePlugin(new OptionHandler() {
+		ClassScanner.definePlugin(new OptionHandler() {
 
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {

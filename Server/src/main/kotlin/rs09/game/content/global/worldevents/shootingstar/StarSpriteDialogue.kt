@@ -11,7 +11,7 @@ import core.tools.RandomFunction
 import org.json.simple.JSONObject
 import org.rs09.consts.Items
 import rs09.ServerStore
-import rs09.ServerStore.getBoolean
+import rs09.ServerStore.Companion.getBoolean
 import rs09.game.node.entity.state.newsys.states.ShootingStarState
 import rs09.tools.END_DIALOGUE
 import rs09.tools.secondsToTicks

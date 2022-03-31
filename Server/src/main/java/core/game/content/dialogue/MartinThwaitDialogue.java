@@ -9,7 +9,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the dialogue used for martin thwait.
@@ -161,7 +161,7 @@ public final class MartinThwaitDialogue extends DialoguePlugin {
 
 	@Override
 	public void init() {
-		PluginManager.definePlugin(new OptionHandler() {
+		ClassScanner.definePlugin(new OptionHandler() {
 
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {

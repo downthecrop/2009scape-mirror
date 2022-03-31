@@ -11,7 +11,7 @@ import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the bogrog npc.
@@ -23,7 +23,7 @@ public final class BogrogPlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		NPCDefinition.forId(4472).getHandlers().put("option:swap", this);
-		PluginManager.definePlugin(new BogrogDialogue());
+		ClassScanner.definePlugin(new BogrogDialogue());
 		return this;
 	}
 

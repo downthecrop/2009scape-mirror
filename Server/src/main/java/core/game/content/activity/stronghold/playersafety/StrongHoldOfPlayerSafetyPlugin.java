@@ -12,7 +12,7 @@ import core.net.packet.context.CameraContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * @author Tyler Telis
@@ -47,10 +47,10 @@ public class StrongHoldOfPlayerSafetyPlugin implements Plugin<Object> {
 
 	@Override
 	public Plugin<Object> newInstance(Object object) throws Throwable {
-		PluginManager.definePlugin(new PSOptionHandler());
-		PluginManager.definePlugin(new GuardDialoguePlugin());
-		PluginManager.definePlugin(new PlayerSafetyTest());
-		PluginManager.definePlugin(new ProfessorHenryDialogue());
+		ClassScanner.definePlugin(new PSOptionHandler());
+		ClassScanner.definePlugin(new GuardDialoguePlugin());
+		ClassScanner.definePlugin(new PlayerSafetyTest());
+		ClassScanner.definePlugin(new ProfessorHenryDialogue());
 		return this;
 	}
 

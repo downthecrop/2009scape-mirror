@@ -23,7 +23,7 @@ import core.game.world.map.Location;
 import rs09.game.world.repository.Repository;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 
@@ -75,7 +75,7 @@ public class BasketofEggsEvent extends HolidayEvent {
 	 */
 	public BasketofEggsEvent() {
 		super("Basket of Eggs", HolidayType.EASTER, 1086, 16, 2);
-		PluginManager.definePlugins(new BasketofEggsPlugin(), new EasterBunnyDialogue(), new RubberchickenPlugin(), new ChocolateEggPlugin(), new EasterItemPlugin());
+		ClassScanner.definePlugins(new BasketofEggsPlugin(), new EasterBunnyDialogue(), new RubberchickenPlugin(), new ChocolateEggPlugin(), new EasterItemPlugin());
 	}
 
 	@Override

@@ -2,9 +2,10 @@ package rs09.game.system.command.sets
 
 import core.plugin.Initializable
 import rs09.game.system.command.Command
+import rs09.game.system.command.Privilege
 
 @Initializable
-class ConfigCommandSet : CommandSet(Command.Privilege.ADMIN){
+class ConfigCommandSet : CommandSet(Privilege.ADMIN){
     override fun defineCommands() {
 
         /**

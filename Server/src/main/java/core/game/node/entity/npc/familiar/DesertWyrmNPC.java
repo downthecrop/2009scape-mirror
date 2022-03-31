@@ -29,7 +29,7 @@ import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the Desert Wyrm familiar.
@@ -76,7 +76,7 @@ public final class DesertWyrmNPC extends Forager {
 
 	@Override
 	public void configureFamiliar() {
-		PluginManager.definePlugin(new OptionHandler() {
+		ClassScanner.definePlugin(new OptionHandler() {
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
 				for (int i : getIds()) {

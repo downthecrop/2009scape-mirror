@@ -7,7 +7,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.world.map.Location;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the mercenary captain dialogue plugin.
@@ -46,7 +46,7 @@ public final class MercenaryCaptainDialogue extends DialoguePlugin {
 	@Override
 	public void init() {
 		super.init();
-		PluginManager.definePlugin(new MercenaryCaptain());
+		ClassScanner.definePlugin(new MercenaryCaptain());
 	}
 
 	@Override

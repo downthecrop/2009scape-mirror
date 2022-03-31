@@ -9,7 +9,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the shelves in the kitchen room.
@@ -20,7 +20,7 @@ public final class ShelfPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new ShelfDialogue());
+		ClassScanner.definePlugin(new ShelfDialogue());
 		for (int i = 13545; i < 13552; i++) {
 			SceneryDefinition.forId(i).getHandlers().put("option:search", this);
 		}

@@ -11,7 +11,7 @@ import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
 /**
@@ -51,7 +51,7 @@ public final class DesertGuardDialogue extends DialoguePlugin {
 	@Override
 	public void init() {
 		super.init();
-		PluginManager.definePlugin(new DesertGuardNPC());
+		ClassScanner.definePlugin(new DesertGuardNPC());
 	}
 
 	@Override

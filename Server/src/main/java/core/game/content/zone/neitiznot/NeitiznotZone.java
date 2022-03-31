@@ -8,7 +8,7 @@ import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBuilder;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the neitiznot zone.
@@ -27,7 +27,7 @@ public class NeitiznotZone extends MapZone implements Plugin<Object> {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		ZoneBuilder.configure(this);
-		PluginManager.definePlugins(new MawnisBurowgarDialogue(), new ThakkradYakDialogue(), new YakArmourPlugin(), new YakArmourPlugin());
+		ClassScanner.definePlugins(new MawnisBurowgarDialogue(), new ThakkradYakDialogue(), new YakArmourPlugin(), new YakArmourPlugin());
 		return this;
 	}
 

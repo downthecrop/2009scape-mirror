@@ -5,7 +5,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * The main type for the lost city Quest.
@@ -93,11 +93,11 @@ public class LostCity extends Quest {
 
 	@Override
 	public Quest newInstance(Object object) {
-		PluginManager.definePlugin(new LostCityPlugin());
-		PluginManager.definePlugin(new TreeSpiritNPC());
-		PluginManager.definePlugin(new ShamusDialogue());
-		PluginManager.definePlugin(new WarriorDialogue());
-		PluginManager.definePlugin(new DramenStaffPlugin());
+		ClassScanner.definePlugin(new LostCityPlugin());
+		ClassScanner.definePlugin(new TreeSpiritNPC());
+		ClassScanner.definePlugin(new ShamusDialogue());
+		ClassScanner.definePlugin(new WarriorDialogue());
+		ClassScanner.definePlugin(new DramenStaffPlugin());
 		return this;
 	}
 

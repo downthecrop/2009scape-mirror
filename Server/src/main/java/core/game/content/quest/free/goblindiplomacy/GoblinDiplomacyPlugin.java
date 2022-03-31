@@ -12,7 +12,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import rs09.game.world.GameWorld;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.StringUtils;
 
 /**
@@ -42,7 +42,7 @@ public final class GoblinDiplomacyPlugin extends OptionHandler {
 		for (GoblinMailPlugin.GoblinMail mail : GoblinMailPlugin.GoblinMail.values()) {
 			ItemDefinition.forId(mail.getProduct().getId()).getHandlers().put("option:wear", this);
 		}
-		PluginManager.definePlugin(new GoblinMailPlugin());
+		ClassScanner.definePlugin(new GoblinMailPlugin());
 		return this;
 	}
 

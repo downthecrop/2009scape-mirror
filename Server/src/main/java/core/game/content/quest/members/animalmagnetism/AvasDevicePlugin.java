@@ -7,7 +7,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Plugin;
 import rs09.game.node.entity.state.newsys.states.AvaDeviceState;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the equippage event of an ava device.
@@ -19,7 +19,7 @@ public final class AvasDevicePlugin implements Plugin<Object> {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		AnimalMagnetism.AVAS_ACCUMULATOR.getDefinition().getHandlers().put("equipment", this);
 		AnimalMagnetism.AVAS_ATTRACTOR.getDefinition().getHandlers().put("equipment", this);
-		PluginManager.definePlugin(new DisableDevicePlugin());
+		ClassScanner.definePlugin(new DisableDevicePlugin());
 		return this;
 	}
 

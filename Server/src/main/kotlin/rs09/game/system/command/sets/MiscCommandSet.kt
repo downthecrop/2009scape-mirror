@@ -28,6 +28,7 @@ import rs09.game.node.entity.state.newsys.states.FarmingState
 import rs09.game.system.SystemLogger
 import rs09.game.system.command.Command
 import rs09.game.system.command.CommandMapping
+import rs09.game.system.command.Privilege
 import rs09.game.world.repository.Repository
 import rs09.tools.stringtools.colorize
 import java.awt.Toolkit
@@ -35,17 +36,17 @@ import java.awt.datatransfer.StringSelection
 import java.util.*
 
 @Initializable
-class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
+class MiscCommandSet : CommandSet(Privilege.ADMIN){
     override fun defineCommands() {
 
         /**
          * Toggles debug mode
          */
-        define("debug", Command.Privilege.STANDARD){ player, _ ->
+        define("debug", Privilege.STANDARD){ player, _ ->
             player.toggleDebug()
         }
 
-        define("calc_accuracy", Command.Privilege.STANDARD){ player, args ->
+        define("calc_accuracy", Privilege.STANDARD){ player, args ->
             val handler = player.getSwingHandler(false)
             player.sendMessage("handler type: ${handler.type}")
             player.sendMessage("calculateAccuracy: ${handler.calculateAccuracy(player)}")
@@ -63,7 +64,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         /**
          * Prints player's current location
          */
-        define("loc", Command.Privilege.STANDARD){ player, _->
+        define("loc", Privilege.STANDARD){ player, _->
             val l = player.location
             val r = player.viewport.region
             var obj: Scenery? = null
@@ -82,18 +83,18 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         /**
          * Tells the player to use loc
          */
-        define("pos", Command.Privilege.STANDARD){ player, _->
+        define("pos", Privilege.STANDARD){ player, _->
             notify(player, "Do you mean ::loc?")
         }
 
         /**
          * Tells the player to use loc
          */
-        define("coords", Command.Privilege.STANDARD){ player, _->
+        define("coords", Privilege.STANDARD){ player, _->
             notify(player, "Do you mean ::loc?")
         }
 
-        define("calcmaxhit", Command.Privilege.STANDARD) { player, _ ->
+        define("calcmaxhit", Privilege.STANDARD) { player, _ ->
             val swingHandler = player.getSwingHandler(false)
             val hit = swingHandler.calculateHit(player, player, 1.0)
             notify(player, "max hit (${(swingHandler as Object).getClass().getName()}): ${hit}")
@@ -119,7 +120,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         /**
          * Lists the players currently online
          */
-        define("players", Command.Privilege.MODERATOR){ player, _ ->
+        define("players", Privilege.MODERATOR){ player, _ ->
             val rights = player.rights.ordinal
             if (player!!.interfaceManager.isOpened && player.interfaceManager.opened.id != Components.QUESTJOURNAL_SCROLL_275 || player.locks.isMovementLocked || player.locks.isTeleportLocked) {
                 reject(player, "Please finish what you're doing first.")
@@ -146,14 +147,14 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         /**
          * Opens the credit/voting shop
          */
-        define("shop", Command.Privilege.STANDARD){ player, _ ->
+        define("shop", Privilege.STANDARD){ player, _ ->
             player.interfaceManager.open(Component(Components.CREDIT_SHOP))
         }
 
         /**
          * Shows the player a list of currently active GE sell offers
          */
-        define("ge", Command.Privilege.STANDARD) { player, args ->
+        define("ge", Privilege.STANDARD) { player, args ->
             if(args.size < 2){
                 reject(player, "Usage: ::ge mode", "Available modes: buying, selling, search, bots, botsearch")
             }
@@ -194,7 +195,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         /**
          * Reply to PMs (also enables tab-to-reply)
          */
-        define("reply", Command.Privilege.STANDARD){ player, _ ->
+        define("reply", Privilege.STANDARD){ player, _ ->
             if(player.interfaceManager.isOpened){
                 reject(player, "<col=e74c3c>Please finish what you're doing first.")
             }
@@ -342,14 +343,14 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             val varbitID = args[1].toInt()
             notify(player, "${varbitID}: ${VarbitDefinition.forId(varbitID, 0)}")
         }
-        define("togglexp",Command.Privilege.STANDARD){ player, args ->
+        define("togglexp", Privilege.STANDARD){ player, args ->
             val enabled = player.varpManager.get(2501).getVarbit(0)?.value == 1
             player.varpManager.get(2501).setVarbit(0,if(enabled) 0 else 1).send(player)
             notify(player, "XP drops are now " + colorize("%R" + if(!enabled) "ON." else "OFF."))
             player.varpManager.flagSave(2501)
         }
 
-        define("xpconfig",Command.Privilege.STANDARD){player,args ->
+        define("xpconfig", Privilege.STANDARD){ player, args ->
             if(args.size < 3){
                 reject(player,"Usage: ::xpconfig track|mode type",
                     "Track types: total|recent",
@@ -403,7 +404,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             player.varpManager.flagSave(2501)
         }
 
-        define("toggleslayer",Command.Privilege.STANDARD){player,_ ->
+        define("toggleslayer", Privilege.STANDARD){ player, _ ->
             val disabled = player.varpManager.get(2502).getVarbit(0)?.value == 1
             player.varpManager.get(2502).setVarbit(0,if(disabled) 0 else 1).send(player)
             if(!disabled){
@@ -414,7 +415,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             notify(player,"Slayer task tracker is now " + (if(disabled) colorize("%RON") else colorize("%ROFF")) + ".")
         }
 
-        define("setvarbit",Command.Privilege.ADMIN){
+        define("setvarbit", Privilege.ADMIN){
             player,args ->
             if(args.size < 4){
                 reject(player,"Usage: ::setvarbit index offset value")
@@ -429,7 +430,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
 
             player.varpManager.get(index!!).setVarbit(offset!!, value!!).send(player)
         }
-        define("setvarc", Command.Privilege.ADMIN) { player, args ->
+        define("setvarc", Privilege.ADMIN) { player, args ->
             if(args.size < 3){
                 reject(player,"Usage: ::setvarc index value")
             }
@@ -443,7 +444,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             player.packetDispatch.sendVarcUpdate(index!!, value!!)
         }
 
-        define("grow",Command.Privilege.ADMIN){player,_ ->
+        define("grow", Privilege.ADMIN){ player, _ ->
             val state: FarmingState = player.states.get("farming") as FarmingState? ?: return@define
 
             for(patch in state.getPatches()){
@@ -451,7 +452,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             }
         }
 
-        define("finishbins",Command.Privilege.ADMIN){player,_ ->
+        define("finishbins", Privilege.ADMIN){ player, _ ->
             val state: FarmingState = player.states.get("farming") as FarmingState? ?: return@define
 
             for(bin in state.getBins()){
@@ -459,26 +460,26 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             }
         }
 
-        define("testlady",Command.Privilege.ADMIN){player,_ ->
+        define("testlady", Privilege.ADMIN){ player, _ ->
             player.antiMacroHandler.event = RandomEvents.RIVER_TROLL.npc.create(player)
             player.antiMacroHandler.event!!.init()
         }
 
-        define("revent",Command.Privilege.ADMIN){player,_ ->
+        define("revent", Privilege.ADMIN){ player, _ ->
             println(player.pulseManager.current)
             player.antiMacroHandler.fireEvent()
         }
 
-        define("addcredits",Command.Privilege.ADMIN){player,_ ->
+        define("addcredits", Privilege.ADMIN){ player, _ ->
             player.details.credits += 100
         }
 
-        define("resetgwdropes",Command.Privilege.STANDARD){player,_ ->
+        define("resetgwdropes", Privilege.STANDARD){ player, _ ->
             player.varpManager.get(1048).clearBitRange(0,31)
             player.varpManager.get(1048).send(player)
         }
 
-        define("resetmistag",Command.Privilege.STANDARD){player,_ ->
+        define("resetmistag", Privilege.STANDARD){ player, _ ->
             player.removeAttribute("mistag-greeted")
         }
 
@@ -503,7 +504,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
                 notify(player,"No parent NPC found.")
             }
         }
-        define("infinitespecial",Command.Privilege.ADMIN){player,args ->
+        define("infinitespecial", Privilege.ADMIN){ player, args ->
             val usageStr = "Usage: ::infinitespecial true|false"
             if(args.size < 2){
                 reject(player, usageStr)
@@ -514,7 +515,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
                 else -> reject(player, usageStr)
             }
         }
-        define("allow_aggro", Command.Privilege.ADMIN) { player, args ->
+        define("allow_aggro", Privilege.ADMIN) { player, args ->
             val usageStr = "Usage: ::allow_aggro true | false"
             if(args.size < 2) {
                 reject(player, usageStr)
@@ -527,7 +528,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             }
         }
 
-        define("confirmrules", Command.Privilege.STANDARD) { player, args ->
+        define("confirmrules", Privilege.STANDARD) { player, args ->
             if(getAttribute(player,"rules:confirmed", false))
                 reject(player, "You have already confirmed the rules.")
             if(args.size < 2)

@@ -46,7 +46,6 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.system.communication.CommunicationInfo;
 import core.game.system.monitor.PlayerMonitor;
-import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
 import core.game.world.map.*;
 import core.game.world.map.build.DynamicRegion;
@@ -66,7 +65,6 @@ import core.net.packet.context.SkillContext;
 import core.net.packet.out.BuildDynamicScene;
 import core.net.packet.out.SkillLevel;
 import core.net.packet.out.UpdateSceneGraph;
-import core.plugin.Plugin;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
 import kotlin.Unit;
@@ -345,10 +343,6 @@ public class Player extends Entity {
 	 * Brawling Gloves manager
 	 */
 	private final BrawlingGlovesManager brawlingGlovesManager = new BrawlingGlovesManager(this);
-	/**
-	 * The logout plugins.
-	 */
-	private List<Plugin<Player>> logoutPlugins;
 
 	/**
 	 * The boolean for the player playing.
@@ -424,21 +418,9 @@ public class Player extends Entity {
 		if (force) {
 			Repository.getDisconnectionQueue().remove(getName());
 		}
+		GameWorld.getLogoutListeners().forEach((it) -> it.logout(this));
 		setPlaying(false);
 		getWalkingQueue().reset();
-		LogoutTask task = getExtension(LogoutTask.class);
-		if (task != null) {
-			task.fire(this);
-		}
-		if (logoutPlugins != null && !logoutPlugins.isEmpty()) {
-			logoutPlugins.stream().filter(Objects::nonNull).forEach(plugin -> {
-				try {
-					plugin.newInstance(this);
-				} catch (Throwable throwable) {
-					throwable.printStackTrace();
-				}
-			});
-		}
 		if(!logoutListeners.isEmpty()){
 			logoutListeners.forEach((key,method) -> method.invoke(this));
 		}
@@ -1327,25 +1309,6 @@ public class Player extends Entity {
 	 */
 	public AudioManager getAudioManager() {
 		return audioManager;
-	}
-
-	/**
-	 * Gets the logoutPlugins.
-	 * @return the logoutPlugins
-	 */
-	public List<Plugin<Player>> getLogoutPlugins() {
-		if (logoutPlugins == null) {
-			logoutPlugins = new ArrayList<>(20);
-		}
-		return logoutPlugins;
-	}
-
-	/**
-	 * Sets the balogoutPlugins.
-	 * @param logoutPlugins the logoutPlugins to set.
-	 */
-	public void setLogoutPlugins(List<Plugin<Player>> logoutPlugins) {
-		this.logoutPlugins = logoutPlugins;
 	}
 
 	/**

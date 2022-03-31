@@ -6,9 +6,10 @@ import core.net.packet.context.MusicContext
 import core.net.packet.out.MusicPacket
 import core.plugin.Initializable
 import rs09.game.system.command.Command
+import rs09.game.system.command.Privilege
 
 @Initializable
-class MusicCommandSet : CommandSet(Command.Privilege.STANDARD){
+class MusicCommandSet : CommandSet(Privilege.STANDARD){
     override fun defineCommands() {
 
         /**
@@ -43,7 +44,7 @@ class MusicCommandSet : CommandSet(Command.Privilege.STANDARD){
          * Command that unlocks all music tracks for the player
          * Restricted to ADMIN access only.
          */
-        define("allmusic", Command.Privilege.ADMIN){ player, _ ->
+        define("allmusic", Privilege.ADMIN){ player, _ ->
             for (me in MusicEntry.getSongs().values) {
                 player.musicPlayer.unlock(me.id)
             }

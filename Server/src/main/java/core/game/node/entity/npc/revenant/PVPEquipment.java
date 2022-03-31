@@ -4,7 +4,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.equipment.DegradableEquipment;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the degrading of PVP armour.
@@ -26,7 +26,7 @@ public class PVPEquipment extends DegradableEquipment {
 	 * Initializes the PVP equipment degrading.
 	 */
 	public static void init() {
-		PluginManager.definePlugin(new PVPEquipment(1, null));
+		ClassScanner.definePlugin(new PVPEquipment(1, null));
 	}
 
 	@Override

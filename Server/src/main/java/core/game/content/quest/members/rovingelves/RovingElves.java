@@ -5,7 +5,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * The Roving Elves quest.
@@ -94,11 +94,11 @@ public class RovingElves extends Quest {
 
 	@Override
 	public Quest newInstance(Object object) {
-		PluginManager.definePlugin(new RovingElvesPlugin());
-		PluginManager.definePlugin(new RovingElvesObstacles());
-		PluginManager.definePlugin(new ElunedDialogue());
-		PluginManager.definePlugin(new IslwynDialogue());
-		PluginManager.definePlugin(new MossGiantGuardianNPC());
+		ClassScanner.definePlugin(new RovingElvesPlugin());
+		ClassScanner.definePlugin(new RovingElvesObstacles());
+		ClassScanner.definePlugin(new ElunedDialogue());
+		ClassScanner.definePlugin(new IslwynDialogue());
+		ClassScanner.definePlugin(new MossGiantGuardianNPC());
 		return this;
 	}
 

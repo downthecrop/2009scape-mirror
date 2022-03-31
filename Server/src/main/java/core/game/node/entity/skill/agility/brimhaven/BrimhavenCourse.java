@@ -9,9 +9,8 @@ import core.game.node.Node;
 import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
-import core.game.system.task.LocationLogoutTask;
-import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
+import kotlin.Unit;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
@@ -123,7 +122,10 @@ public final class BrimhavenCourse extends OptionHandler {
 		player.getAppearance().setAnimations(Animation.create(1118 + m));
 		player.getAppearance().sync();
 		AgilityHandler.climb(player, -1, new Animation(1117 + m), start.transform(dir), 0.0, null);
-		player.addExtension(LogoutTask.class, new LocationLogoutTask(22, start));
+		player.logoutListeners.put("brimcourse", p -> {
+			p.setLocation(start);
+			return Unit.INSTANCE;
+		});
 		GameWorld.getPulser().submit(new Pulse(3, player) {
 			Location last = start.transform(dir);
 			int count;
@@ -134,17 +136,18 @@ public final class BrimhavenCourse extends OptionHandler {
 					if (AgilityHandler.hasFailed(player, 1, 0.15)) {
 						player.getAppearance().setAnimations();
 						player.getAppearance().sync();
-						LogoutTask task = player.getExtension(LogoutTask.class);
-						task.setDelay(2);
 						AgilityHandler.fail(player, 2, last.transform(0, 0, -3), Animation.create(1119 + m), getHitAmount(player), "You missed a hand hold!");
+						player.logoutListeners.remove("brimcourse");
 						return true;
 					}
 				} else if (count == 6) {
 					player.getAppearance().setAnimations();
 					player.getAppearance().sync();
 					AgilityHandler.forceWalk(player, -1, last, last.transform(dir), Animation.create(1120 + m), 5, getExp(player, 22.0), null).setDirection(faceDirection);
+					player.logoutListeners.remove("brimcourse");
 					return true;
 				}
+				player.logoutListeners.remove("brimcourse");
 				AgilityHandler.forceWalk(player, -1, last, last = last.transform(dir), Animation.create(1118 + m), 5, 0.0, null).setDirection(faceDirection);
 				return false;
 			}
@@ -186,7 +189,10 @@ public final class BrimhavenCourse extends OptionHandler {
 		player.getAppearance().setAnimations(Animation.create(745));
 		final Location start = player.getLocation();
 		ForceMovement.run(player, start.transform(dir), start.transform(dir.getStepX() << 1, dir.getStepY() << 1, 0), Animation.create(742), Animation.create(744));
-		player.addExtension(LogoutTask.class, new LocationLogoutTask(5, start));
+		player.logoutListeners.put("brimcourse", p -> {
+			p.setLocation(start);
+			return Unit.INSTANCE;
+		});
 		GameWorld.getPulser().submit(new Pulse(2, player) {
 			boolean failed;
 			int count;
@@ -201,14 +207,15 @@ public final class BrimhavenCourse extends OptionHandler {
 					}
 					setDelay(7);
 					AgilityHandler.walk(player, -1, player.getLocation().transform(dir), player.getLocation().transform(dir.getStepX() * 7, dir.getStepY() * 7, 0), Animation.create(662), 0.0, null);
-					player.addExtension(LogoutTask.class, new LocationLogoutTask(9, start));
 				} else if (count == 2) {
 					if (failed) {
 						player.getAppearance().setAnimations();
 						player.getAppearance().sync();
 						AgilityHandler.fail(player, 2, player.getLocation().transform(0, 0, -3), Animation.create(768), getHitAmount(player), "You missed a hand hold!");
+						player.logoutListeners.remove("brimcourse");
 						return true;
 					}
+					player.logoutListeners.remove("brimcourse");
 					AgilityHandler.forceWalk(player, -1, player.getLocation(), player.getLocation().transform(dir), Animation.create(743), 10, getExp(player, 14.0), null);
 					return true;
 				}
@@ -273,7 +280,6 @@ public final class BrimhavenCourse extends OptionHandler {
 					return true;
 				}
 			});
-			player.addExtension(LogoutTask.class, new LocationLogoutTask(8, start));
 			return;
 		}
 		AgilityHandler.walk(player, -1, start, end, ForceMovement.WALK_ANIMATION, getExp(player, 6.0), null);
@@ -288,7 +294,10 @@ public final class BrimhavenCourse extends OptionHandler {
 		final Direction dir = Direction.getLogicalDirection(player.getLocation(), object.getLocation());
 		AgilityHandler.forceWalk(player, -1, player.getLocation(), object.getLocation(), Animation.create(741), 10, 0, null);
 		final Location start = player.getLocation();
-		player.addExtension(LogoutTask.class, new LocationLogoutTask(12, start));
+		player.logoutListeners.put("brimcourse", p -> {
+			p.setLocation(start);
+			return Unit.INSTANCE;
+		});
 		player.lock(12);
 		GameWorld.getPulser().submit(new Pulse(2, player) {
 			int count = 0;
@@ -300,9 +309,11 @@ public final class BrimhavenCourse extends OptionHandler {
 					player.unlock();
 					player.lock(2);
 					AgilityHandler.fail(player, 2, player.getLocation().transform(d.getStepX() << 1, d.getStepY() << 1, -3), Animation.create(764), getHitAmount(player), "You lost your balance!");
+					player.logoutListeners.remove("brimcourse");
 					return true;
 				}
 				AgilityHandler.forceWalk(player, -1, player.getLocation(), player.getLocation().transform(dir), Animation.create(741), 10, count == 5 ? getExp(player, 18.0) : 0, null);
+				player.logoutListeners.remove("brimcourse");
 				return ++count == 6;
 			}
 		});

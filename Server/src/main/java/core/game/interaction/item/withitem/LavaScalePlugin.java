@@ -7,7 +7,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 
@@ -29,7 +29,7 @@ public final class LavaScalePlugin extends UseWithHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		addHandler(233, ITEM_TYPE, this);
-		PluginManager.definePlugin(new AntifireMakePlugin());
+		ClassScanner.definePlugin(new AntifireMakePlugin());
 		return this;
 	}
 

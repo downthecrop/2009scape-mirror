@@ -30,7 +30,7 @@ import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 
@@ -164,7 +164,7 @@ public final class CatapultRoom extends MapZone implements Plugin<Object> {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		ZoneBuilder.configure(this);
-		PluginManager.definePlugin(new OptionHandler() {
+		ClassScanner.definePlugin(new OptionHandler() {
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
 				ItemDefinition.forId(SHIELD_ID).getHandlers().put("option:wield", this);
@@ -195,7 +195,7 @@ public final class CatapultRoom extends MapZone implements Plugin<Object> {
 				return true;
 			}
 		});
-		PluginManager.definePlugin(new ComponentPlugin() {
+		ClassScanner.definePlugin(new ComponentPlugin() {
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
 				ComponentDefinition.put(411, this);

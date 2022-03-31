@@ -9,11 +9,12 @@ import rs09.game.system.SystemLogger
 import rs09.game.system.command.Command
 import rs09.game.system.command.CommandPlugin
 import core.plugin.Initializable
+import rs09.game.system.command.Privilege
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 
 @Initializable
-class SpawnCommandSet : CommandSet(Command.Privilege.ADMIN){
+class SpawnCommandSet : CommandSet(Privilege.ADMIN){
     override fun defineCommands() {
         /**
          * Spawns an npc with the given ID

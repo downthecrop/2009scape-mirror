@@ -15,11 +15,6 @@ class Command(val name: String, val privilege: Privilege, val handle: (Player, A
         }
     }
 
-    enum class Privilege{
-        STANDARD,
-        MODERATOR,
-        ADMIN
-    }
 }
 
 object CommandMapping {

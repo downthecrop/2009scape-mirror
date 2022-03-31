@@ -16,7 +16,7 @@ import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles wilderness levers.
@@ -38,7 +38,7 @@ public final class WildernessLeverPlugin extends OptionHandler {
 				SceneryDefinition.forId(id).getHandlers().put("option:pull", this);
 			}
 		}
-		PluginManager.definePlugin(new LeverDialogue());
+		ClassScanner.definePlugin(new LeverDialogue());
 		return this;
 	}
 

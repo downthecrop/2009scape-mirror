@@ -5,9 +5,10 @@ import core.game.node.scenery.SceneryBuilder
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
-import rs09.ServerStore.getBoolean
-import rs09.ServerStore.getInt
-import rs09.ServerStore.getString
+import rs09.ServerStore.Companion.getBoolean
+import rs09.ServerStore.Companion.getInt
+import rs09.ServerStore.Companion.getString
+
 import rs09.game.ai.general.scriptrepository.ShootingStarBot
 import rs09.game.world.repository.Repository
 

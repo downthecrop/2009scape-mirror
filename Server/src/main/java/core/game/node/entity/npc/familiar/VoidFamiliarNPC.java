@@ -19,7 +19,7 @@ import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * The plugin used to load void familiar npcs.
@@ -36,10 +36,10 @@ public final class VoidFamiliarNPC implements Plugin<Object> {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new VoidRavagerNPC());
-		PluginManager.definePlugin(new VoidShifterNPC());
-		PluginManager.definePlugin(new VoidSpinnerNPC());
-		PluginManager.definePlugin(new VoidTorcherNPC());
+		ClassScanner.definePlugin(new VoidRavagerNPC());
+		ClassScanner.definePlugin(new VoidShifterNPC());
+		ClassScanner.definePlugin(new VoidSpinnerNPC());
+		ClassScanner.definePlugin(new VoidTorcherNPC());
 		return this;
 	}
 
@@ -251,7 +251,7 @@ public final class VoidFamiliarNPC implements Plugin<Object> {
 
 		@Override
 		public void configureFamiliar() {
-			PluginManager.definePlugin(new OptionHandler() {
+			ClassScanner.definePlugin(new OptionHandler() {
 
 				@Override
 				public Plugin<Object> newInstance(Object arg) throws Throwable {

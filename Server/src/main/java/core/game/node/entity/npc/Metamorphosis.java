@@ -9,7 +9,7 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
 /**
@@ -45,7 +45,7 @@ public abstract class Metamorphosis extends OptionHandler {
 			NPCDefinition.forId(id).getHandlers().put("option:metamorphosis", this);
 		}
 		if (getDialoguePlugin() != null) {
-			PluginManager.definePlugin(getDialoguePlugin());
+			ClassScanner.definePlugin(getDialoguePlugin());
 		}
 		return this;
 	}

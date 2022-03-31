@@ -12,8 +12,8 @@ import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
 import org.rs09.consts.Components
 import rs09.ServerStore
-import rs09.ServerStore.getInt
-import rs09.ServerStore.getString
+import rs09.ServerStore.Companion.getInt
+import rs09.ServerStore.Companion.getString
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
 import rs09.game.world.GameWorld

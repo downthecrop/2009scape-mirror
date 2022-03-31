@@ -15,7 +15,7 @@ import core.game.node.item.WeightedChanceItem;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.dialogue.DialoguePlugin;
@@ -55,8 +55,8 @@ public class FishbowlPlugin extends OptionHandler {
             def.getHandlers().put("option:feed", this);
             def.getHandlers().put("option:drop", this);
         }
-        PluginManager.definePlugin(new FishbowlDialogue());
-        PluginManager.definePlugin(new FeedPetFishHandler());
+        ClassScanner.definePlugin(new FishbowlDialogue());
+        ClassScanner.definePlugin(new FeedPetFishHandler());
         new AquariumPlugin().newInstance(arg);
         return this;
     }
@@ -220,7 +220,7 @@ public class FishbowlPlugin extends OptionHandler {
         @Override
         public Plugin<Object> newInstance(Object arg) throws Throwable {
             SceneryDefinition.forId(10091).getHandlers().put("option:fish-in", this);
-            PluginManager.definePlugin(new TinyNetHandler());
+            ClassScanner.definePlugin(new TinyNetHandler());
             return this;
         }
 

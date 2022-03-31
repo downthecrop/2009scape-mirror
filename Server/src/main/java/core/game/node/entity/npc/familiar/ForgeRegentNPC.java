@@ -15,7 +15,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.player.FaceLocationFlag;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.game.node.entity.skill.SkillBonus;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.firemaking.FireMakingPulse;
@@ -64,7 +64,7 @@ public class ForgeRegentNPC extends Familiar {
 
 	@Override
 	public void configureFamiliar() {
-		PluginManager.definePlugin(new ForgeRegentFiremake());
+		ClassScanner.definePlugin(new ForgeRegentFiremake());
 	}
 
 	@Override

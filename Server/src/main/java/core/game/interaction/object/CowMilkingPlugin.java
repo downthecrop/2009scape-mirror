@@ -12,7 +12,7 @@ import core.game.system.task.Pulse;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the plugin used to milk a cow.
@@ -83,7 +83,7 @@ public final class CowMilkingPlugin extends OptionHandler {
 		SceneryDefinition.forId(8689).getHandlers().put("option:milk", this);
 		SceneryDefinition.forId(12111).getHandlers().put("option:milk", this);
 		SceneryDefinition.setOptionHandler("steal-cowbell", this);
-		PluginManager.definePlugin(new BucketHandler());
+		ClassScanner.definePlugin(new BucketHandler());
 		return this;
 	}
 

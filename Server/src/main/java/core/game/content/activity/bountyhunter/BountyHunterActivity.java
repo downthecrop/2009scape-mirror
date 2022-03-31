@@ -28,7 +28,7 @@ import core.game.world.map.zone.impl.WildernessZone;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
 import java.util.*;
@@ -170,7 +170,7 @@ public final class BountyHunterActivity extends ActivityPlugin {
 					break;
 				}
 			}
-			PluginManager.definePlugin(new ComponentPlugin() {
+			ClassScanner.definePlugin(new ComponentPlugin() {
 				@Override
 				public Plugin<Object> newInstance(Object arg) throws Throwable {
 					ComponentDefinition.put(657, this);
@@ -194,8 +194,8 @@ public final class BountyHunterActivity extends ActivityPlugin {
 
 			});
 			BHScoreBoard.init();
-			PluginManager.definePlugin(new BountyLocateSpell());
-			PluginManager.definePlugin(new BHOptionHandler());
+			ClassScanner.definePlugin(new BountyLocateSpell());
+			ClassScanner.definePlugin(new BHOptionHandler());
 			ActivityManager.register(new BountyHunterActivity(CraterType.MID_LEVEL));
 			ActivityManager.register(new BountyHunterActivity(CraterType.HIGH_LEVEL));
 		}

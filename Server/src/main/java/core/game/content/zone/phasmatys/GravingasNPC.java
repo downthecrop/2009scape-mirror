@@ -5,7 +5,7 @@ import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
 /**
@@ -50,7 +50,7 @@ public final class GravingasNPC extends AbstractNPC {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new GravingasDialogue());
+		ClassScanner.definePlugin(new GravingasDialogue());
 		return super.newInstance(arg);
 	}
 

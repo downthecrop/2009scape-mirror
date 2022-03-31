@@ -1,6 +1,5 @@
 package core.game.interaction.item.toys;
 
-import core.cache.def.impl.ItemDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -13,7 +12,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 @Initializable
 public class SnowGlobePlugin extends OptionHandler {
@@ -25,7 +24,7 @@ public class SnowGlobePlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        PluginManager.definePlugin(new SnowGlobeInterface());
+        ClassScanner.definePlugin(new SnowGlobeInterface());
         return this;
     }
 

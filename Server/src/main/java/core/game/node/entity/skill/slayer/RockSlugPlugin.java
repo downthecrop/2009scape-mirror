@@ -12,7 +12,7 @@ import core.game.world.map.Location;
 import core.game.world.map.path.Pathfinder;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the interactions of a rock slug.
@@ -33,8 +33,8 @@ public final class RockSlugPlugin implements Plugin<Object> {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new RockSlugNPC());
-		PluginManager.definePlugin(new SaltBagHandler());
+		ClassScanner.definePlugin(new RockSlugNPC());
+		ClassScanner.definePlugin(new SaltBagHandler());
 		return this;
 	}
 

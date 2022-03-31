@@ -3,7 +3,7 @@ package core.game.content.ttrail;
 import core.game.node.entity.player.link.emote.Emotes;
 import core.game.world.map.zone.ZoneBorders;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Initializes the emote clue plugins.
@@ -140,7 +140,7 @@ public final class EmoteCluePlugin extends EmoteClueScroll {
 		register(new EmoteCluePlugin("draynor-market-yawn", 2737, ClueLevel.EASY, emote, new int[][] { { 1097 }, { 1191 }, { 1295 } }, "Yawn in Draynor<br>Marketplace.<br>Equip studded leather<br>chaps, an iron<br>kiteshield and a steel<br>longsword.", new ZoneBorders(3075, 3245, 3086, 3255)));
 		register(new EmoteCluePlugin("castle-wars-yawn", 2739, ClueLevel.MEDIUM, emote, Emotes.SHRUG, new int[][] { { 1698 }, { 1329 }, WILDY_CAPES }, "Yawn in the Castle<br>Wars lobby. Shrug<br>before you talk to me.<br>Equip ruby amulet, a<br>mithril scimitar and a<br>Wilderness cape.", new ZoneBorders(2434, 3061, 2464, 3102)));
 		register(new EmoteCluePlugin("rogue-gen-yawn", 2741, ClueLevel.HARD, emote, new int[][] { { 1183 }, { 2487 }, { 1275 } }, "Yawn in the rogues'<br>general store. Beware<br>of double agents!<br>Equip an adamant<br>square shield, blue<br>dragon vambraces<br>and a rune pickaxe.", new ZoneBorders(3024, 3699, 3027, 3704)));
-		PluginManager.definePlugin(new UriNPC());
+		ClassScanner.definePlugin(new UriNPC());
 		return this;
 	}
 

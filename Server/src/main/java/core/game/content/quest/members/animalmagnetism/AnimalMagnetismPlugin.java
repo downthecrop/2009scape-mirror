@@ -31,7 +31,7 @@ import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
 /**
@@ -219,7 +219,7 @@ public final class AnimalMagnetismPlugin extends OptionHandler {
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			PluginManager.definePlugin(new OptionHandler() {
+			ClassScanner.definePlugin(new OptionHandler() {
 				@Override
 				public Plugin<Object> newInstance(Object arg) throws Throwable {
 					NPCDefinition.forId(5208).getHandlers().put("option:chop", this);

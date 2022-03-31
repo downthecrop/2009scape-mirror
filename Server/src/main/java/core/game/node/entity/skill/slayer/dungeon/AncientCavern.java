@@ -28,7 +28,7 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.MinimapStateContext;
 import core.net.packet.out.MinimapState;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
 /**
@@ -58,7 +58,7 @@ public final class AncientCavern extends MapZone implements Plugin<Object> {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		ZoneBuilder.configure(this);
-		PluginManager.definePlugin(new OptionHandler() {
+		ClassScanner.definePlugin(new OptionHandler() {
 
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {

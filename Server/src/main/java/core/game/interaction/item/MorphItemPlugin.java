@@ -10,7 +10,7 @@ import core.game.node.item.Item;
 import rs09.game.world.GameWorld;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
 /**
@@ -42,7 +42,7 @@ public class MorphItemPlugin implements Plugin<Object> {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		ItemDefinition.forId(7927).getHandlers().put("equipment", this);
 		ItemDefinition.forId(6583).getHandlers().put("equipment", this);
-		PluginManager.definePlugin(new MorphInterfacePlugin());
+		ClassScanner.definePlugin(new MorphInterfacePlugin());
 		return this;
 	}
 

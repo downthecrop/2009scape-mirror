@@ -4,6 +4,7 @@ import core.game.node.entity.player.Player
 import rs09.game.system.command.Command
 import rs09.game.system.command.CommandMapping
 import core.plugin.Plugin
+import rs09.game.system.command.Privilege
 import rs09.tools.stringtools.colorize
 
 /**
@@ -13,7 +14,7 @@ import rs09.tools.stringtools.colorize
  * @author Ceikry
  * @param defaultPrivilege the default privilege level for all commands in this set.
  */
-abstract class CommandSet(val defaultPrivilege: Command.Privilege) : Plugin<Any?> {
+abstract class CommandSet(val defaultPrivilege: Privilege) : Plugin<Any?> {
     override fun newInstance(arg: Any?): Plugin<Any?> {
         defineCommands()
         return this
@@ -50,7 +51,7 @@ abstract class CommandSet(val defaultPrivilege: Command.Privilege) : Plugin<Any?
      * @param name the name of the command. Example: ::example would be just "example"
      * @param privilege (optional) privilege override from the set default.
      */
-    fun define(name: String, privilege: Command.Privilege = defaultPrivilege, handle: (Player, Array<String>) -> Unit){
+    fun define(name: String, privilege: Privilege = defaultPrivilege, handle: (Player, Array<String>) -> Unit){
         CommandMapping.register(Command(name, privilege, handle))
     }
 }

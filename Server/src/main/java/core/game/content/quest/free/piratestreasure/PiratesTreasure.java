@@ -6,7 +6,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the pirates treasure quest.
@@ -55,7 +55,7 @@ public final class PiratesTreasure extends Quest {
 
 	@Override
 	public Quest newInstance(Object object) {
-		PluginManager.definePlugin(new PiratesTreasurePlugin());
+		ClassScanner.definePlugin(new PiratesTreasurePlugin());
 		return this;
 	}
 

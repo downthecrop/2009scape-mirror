@@ -31,7 +31,7 @@ import core.net.packet.context.MinimapStateContext;
 import core.net.packet.out.CameraViewPacket;
 import core.net.packet.out.MinimapState;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the summoning training room.
@@ -235,7 +235,7 @@ public final class SummoningTrainingRoom extends OptionHandler {
 
 		@Override
 		public void register() {
-			PluginManager.definePlugin(new FluffyDialogue());
+			ClassScanner.definePlugin(new FluffyDialogue());
 		}
 
 		/**

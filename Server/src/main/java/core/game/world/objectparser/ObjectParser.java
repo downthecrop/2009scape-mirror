@@ -1,5 +1,6 @@
 package core.game.world.objectparser;
 
+import api.StartupListener;
 import rs09.ServerConstants;
 import core.game.node.scenery.Scenery;
 import rs09.game.world.GameWorld;
@@ -17,9 +18,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 
-@Initializable
-@PluginManifest(name="ObjectParser")
-public class ObjectParser extends StartupPlugin {
+public class ObjectParser implements StartupListener {
 
     public void parseObjects(){
         if(ServerConstants.OBJECT_PARSER_PATH == null) return;
@@ -101,18 +100,7 @@ public class ObjectParser extends StartupPlugin {
     }
 
     @Override
-    public void run() {
+    public void startup() {
         parseObjects();
-    }
-
-    @Override
-    public Plugin<Object> newInstance(Object arg) throws Throwable {
-        GameWorld.getSTARTUP_PLUGINS().add(this);
-        return this;
-    }
-
-    @Override
-    public Object fireEvent(String identifier, Object... args) {
-        return null;
     }
 }

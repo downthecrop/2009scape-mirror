@@ -11,7 +11,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the demon slayer quest.
@@ -55,7 +55,7 @@ public class DemonSlayer extends Quest {
 	
 	@Override
 	public Quest newInstance(Object object) {
-		PluginManager.definePlugins(new DemonSlayerPlugin(), new DSlayerDrainPlugin(), new DemonSlayerCutscene(), new WallyCutscenePlugin(), new GypsyArisDialogue(), new SirPyrsinDialogue(), new TraibornDialogue(), new CaptainRovinDialogue());
+		ClassScanner.definePlugins(new DemonSlayerPlugin(), new DSlayerDrainPlugin(), new DemonSlayerCutscene(), new WallyCutscenePlugin(), new GypsyArisDialogue(), new SirPyrsinDialogue(), new TraibornDialogue(), new CaptainRovinDialogue());
 		return this;
 	} 
 

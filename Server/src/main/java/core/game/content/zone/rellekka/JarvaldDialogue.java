@@ -5,9 +5,8 @@ import core.game.content.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.system.task.LocationLogoutTask;
-import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
+import kotlin.Unit;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 
@@ -199,7 +198,10 @@ public final class JarvaldDialogue extends DialoguePlugin {
 	public void sail(final Player player, final boolean to) {
 		player.lock();
 		player.getInterfaceManager().open(new Component(224));
-		player.addExtension(LogoutTask.class, new LocationLogoutTask(5, to ? Location.create(2544, 3759, 0) : Location.create(2620, 3685, 0)));
+		player.logoutListeners.put("jarvald", player1 -> {
+			player.setLocation(to ? Location.create(2544, 3759, 0) : Location.create(2620, 3685, 0));
+			return Unit.INSTANCE;
+		});
 		GameWorld.getPulser().submit(new Pulse(1, player) {
 			int count;
 
@@ -212,6 +214,7 @@ public final class JarvaldDialogue extends DialoguePlugin {
 					player.getProperties().setTeleportLocation(to ? Location.create(2544, 3759, 0) : Location.create(2620, 3685, 0));
 					player.getDialogueInterpreter().close();
 					player.getDialogueInterpreter().sendDialogue("The ship arrives at " + (to ? "Waterbirth Island" : "Rellekka") + ".");
+					player.logoutListeners.remove("jarvald");
 					return true;
 				}
 				return false;

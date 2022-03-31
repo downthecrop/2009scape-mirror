@@ -2,17 +2,13 @@ package core.game.interaction.npc.sorceress_app;
 
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
-import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.scenery.Scenery;
-import core.game.world.map.Location;
-import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Teleport option for Sorceress Apprentice
@@ -39,7 +35,7 @@ public class SorceressApprenticePlugin extends OptionHandler {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		NPCDefinition.forId(5532).getHandlers().put("option:teleport", this);
 		SceneryDefinition.forId(21781).getHandlers().put("option:climb-up", this);
-		PluginManager.definePlugin(new SorceressApprenticeDialogue());
+		ClassScanner.definePlugin(new SorceressApprenticeDialogue());
 		return this;
 	}
 

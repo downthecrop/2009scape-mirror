@@ -25,7 +25,7 @@ import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +54,7 @@ public class WildernessAreaZone extends MapZone implements Plugin<Object> {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		ZoneBuilder.configure(this);
-		PluginManager.definePlugins(new MandrithDialoguePlugin(), new PilesDialoguePlugin(), new PilesItemHandler(), new RuniteGolemNPC());
+		ClassScanner.definePlugins(new MandrithDialoguePlugin(), new PilesDialoguePlugin(), new PilesItemHandler(), new RuniteGolemNPC());
 		return this;
 	}
 

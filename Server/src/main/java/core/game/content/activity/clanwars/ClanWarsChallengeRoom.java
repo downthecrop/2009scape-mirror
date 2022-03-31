@@ -12,7 +12,7 @@ import core.game.world.map.zone.ZoneRestriction;
 import core.game.world.map.zone.impl.WildernessZone;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the clan wars challenge room.
@@ -86,7 +86,7 @@ public final class ClanWarsChallengeRoom extends MapZone implements Plugin<Objec
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		ZoneBuilder.configure(this);
-		PluginManager.definePlugin(new CWChallengeOption());
+		ClassScanner.definePlugin(new CWChallengeOption());
 		return this;
 	}
 

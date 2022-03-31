@@ -15,7 +15,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the loading of a cockatrice familiar.
@@ -31,12 +31,12 @@ public final class CockatriceFamiliarNPC implements Plugin<Object> {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new SpiritCockatrice());
-		PluginManager.definePlugin(new SpiritGuthatrice());
-		PluginManager.definePlugin(new SpiritZamatrice());
-		PluginManager.definePlugin(new SpiritPengatrice());
-		PluginManager.definePlugin(new SpiritCoraxatrice());
-		PluginManager.definePlugin(new SpiritVulatrice());
+		ClassScanner.definePlugin(new SpiritCockatrice());
+		ClassScanner.definePlugin(new SpiritGuthatrice());
+		ClassScanner.definePlugin(new SpiritZamatrice());
+		ClassScanner.definePlugin(new SpiritPengatrice());
+		ClassScanner.definePlugin(new SpiritCoraxatrice());
+		ClassScanner.definePlugin(new SpiritVulatrice());
 		return this;
 	}
 

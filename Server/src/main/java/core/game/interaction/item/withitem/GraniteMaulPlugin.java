@@ -10,7 +10,7 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * The plugin used to make the granite maul into the ornamental version.
@@ -30,7 +30,7 @@ public final class GraniteMaulPlugin extends UseWithHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new GraniteMaulRevertHandler());
+		ClassScanner.definePlugin(new GraniteMaulRevertHandler());
 		addHandler(14793, ITEM_TYPE, this);
 		return this;
 	}

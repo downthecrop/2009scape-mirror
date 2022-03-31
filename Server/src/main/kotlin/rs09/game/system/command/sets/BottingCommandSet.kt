@@ -7,11 +7,12 @@ import rs09.game.ai.general.GeneralBotCreator
 import rs09.game.ai.general.scriptrepository.PlayerScripts
 import rs09.game.ai.general.scriptrepository.Script
 import rs09.game.system.command.Command
+import rs09.game.system.command.Privilege
 import rs09.game.world.GameWorld
 import rs09.tools.stringtools.colorize
 
 @Initializable
-class BottingCommandSet : CommandSet(Command.Privilege.STANDARD) {
+class BottingCommandSet : CommandSet(Privilege.STANDARD) {
     override fun defineCommands() {
         define("scripts"){player, _ ->
             if(GameWorld.settings?.enabled_botting != true){

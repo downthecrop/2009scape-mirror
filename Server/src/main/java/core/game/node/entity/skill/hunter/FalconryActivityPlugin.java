@@ -17,7 +17,7 @@ import core.game.node.item.Item;
 import core.game.world.map.Location;
 import core.game.world.map.zone.ZoneBorders;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the activity used during falconry practice.
@@ -99,7 +99,7 @@ public final class FalconryActivityPlugin extends ActivityPlugin {
 
 	@Override
 	public void register() {
-		PluginManager.definePlugin(new FalconryPlugin());
+		ClassScanner.definePlugin(new FalconryPlugin());
 	}
 
 	/**
@@ -130,7 +130,7 @@ public final class FalconryActivityPlugin extends ActivityPlugin {
 			for (FalconCatch falconCatch : FalconCatch.values()) {
 				NPCDefinition.forId(falconCatch.getNpc()).getHandlers().put("option:catch", this);
 			}
-			PluginManager.definePlugin(new Plugin<Object>() {
+			ClassScanner.definePlugin(new Plugin<Object>() {
 
 				@Override
 				public Plugin<Object> newInstance(Object arg) throws Throwable {

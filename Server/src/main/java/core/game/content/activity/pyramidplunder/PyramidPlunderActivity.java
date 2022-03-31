@@ -7,7 +7,7 @@ import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import rs09.game.content.activity.pyramidplunder.PlunderSession;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the Pyramid plunder activity.
@@ -64,8 +64,8 @@ public final class PyramidPlunderActivity extends ActivityPlugin {
 
 	@Override
 	public void register() {
-		PluginManager.definePlugin(new GuardMummyDialogue());
-		PluginManager.definePlugin(new PyramidOptionHandler());
+		ClassScanner.definePlugin(new GuardMummyDialogue());
+		ClassScanner.definePlugin(new PyramidOptionHandler());
 		mummy = NPC.create(4476, Location.create(1968, 4427, 2));
 		mummy.init();
 		registerRegion(7749);

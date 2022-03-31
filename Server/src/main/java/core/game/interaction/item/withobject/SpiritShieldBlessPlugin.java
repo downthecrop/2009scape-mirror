@@ -10,7 +10,7 @@ import rs09.game.world.repository.Repository;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the blessing of Spirit shields.
@@ -29,7 +29,7 @@ public class SpiritShieldBlessPlugin extends UseWithHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		addHandler(24343, OBJECT_TYPE, this);
-		PluginManager.definePlugin(new SpiritShieldMakePlugin());
+		ClassScanner.definePlugin(new SpiritShieldMakePlugin());
 		return this;
 	}
 

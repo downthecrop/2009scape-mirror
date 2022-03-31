@@ -1,9 +1,9 @@
 package core.game.node.entity.skill.hunter;
 
+import api.StartupListener;
 import core.game.node.entity.skill.hunter.bnet.BNetTypes;
 import core.game.node.entity.skill.hunter.bnet.ImplingNode;
 import rs09.game.world.GameWorld;
-import core.game.world.callback.CallBack;
 import core.game.world.map.Location;
 import core.tools.RandomFunction;
 
@@ -14,7 +14,7 @@ import java.util.Random;
  * @author Vexia
  * @author Emperor
  */
-public final class ImpetuousImpulses implements CallBack {
+public final class ImpetuousImpulses implements StartupListener {
 
 	/**
 	 * The random instance used.
@@ -145,9 +145,8 @@ public final class ImpetuousImpulses implements CallBack {
 	}
 
 	@Override
-	public boolean call() {
+	public void startup() {
 		spawnImps();
-		return true;
 	}
 
 }

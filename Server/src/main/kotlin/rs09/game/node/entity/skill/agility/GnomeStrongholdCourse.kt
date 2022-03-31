@@ -8,8 +8,6 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.agility.AgilityCourse
 import core.game.node.entity.skill.agility.AgilityHandler
-import core.game.system.task.LocationLogoutTask
-import core.game.system.task.LogoutTask
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
@@ -94,7 +92,6 @@ class GnomeStrongholdCourse
                 AgilityHandler.forceWalk(player, -1, Location.create(x, 3433, 0), Location.create(x, 3435, 0), Animation.create(844), 10, 0.0, null, 5)
                 player.lock()
                 AgilityHandler.forceWalk(player, 6, Location.create(x, 3435, 0), Location.create(x, 3437, 0), Animation.create(10579), 20, 7.5, null, 8)
-                player.addExtension(LogoutTask::class.java, LocationLogoutTask(12, Location.create(x, 3430, 0)))
                 return true
             }
         }

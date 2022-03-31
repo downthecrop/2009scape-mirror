@@ -20,7 +20,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.game.content.global.action.PickupHandler;
 import rs09.game.world.GameWorld;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the mage arena activity.
@@ -41,12 +41,12 @@ public final class MageArenaPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(MAGE_ARENA);
-		PluginManager.definePlugin(new KolodionNPC());
-		PluginManager.definePlugin(new MageArenaNPC());
-		PluginManager.definePlugin(new LundailDialogue());
-		PluginManager.definePlugin(new KolodionDialogue());
-		PluginManager.definePlugin(new ChamberGuardianDialogue());
+		ClassScanner.definePlugin(MAGE_ARENA);
+		ClassScanner.definePlugin(new KolodionNPC());
+		ClassScanner.definePlugin(new MageArenaNPC());
+		ClassScanner.definePlugin(new LundailDialogue());
+		ClassScanner.definePlugin(new KolodionDialogue());
+		ClassScanner.definePlugin(new ChamberGuardianDialogue());
 		ItemDefinition.forId(2412).getHandlers().put("option:drop", this);
 		ItemDefinition.forId(2413).getHandlers().put("option:drop", this);
 		ItemDefinition.forId(2414).getHandlers().put("option:drop", this);

@@ -5,7 +5,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import rs09.game.content.dialogue.region.varrock.KingRoaldDialogue;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the shield of arrav quest.
@@ -59,7 +59,7 @@ public class ShieldofArrav extends Quest {
 
 	@Override
 	public Quest newInstance(Object object) {
-		PluginManager.definePlugins(new CertificatePlugin(), new CuratorHaigHalenDialogue(), new JohnnyBeardNPC(), new JonnytheBeardPlugin(), new KatrineDialogue(), new KingRoaldDialogue(), new ReldoDialogue(), new ShieldArravPlugin(), new ShieldofArravBook(), new StravenDialogue(), new WeaponsMasterDialogue());
+		ClassScanner.definePlugins(new CertificatePlugin(), new CuratorHaigHalenDialogue(), new JohnnyBeardNPC(), new JonnytheBeardPlugin(), new KatrineDialogue(), new KingRoaldDialogue(), new ReldoDialogue(), new ShieldArravPlugin(), new ShieldofArravBook(), new StravenDialogue(), new WeaponsMasterDialogue());
 		return this;
 	}
 	

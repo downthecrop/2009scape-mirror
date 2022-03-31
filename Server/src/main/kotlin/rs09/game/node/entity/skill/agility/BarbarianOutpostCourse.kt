@@ -20,7 +20,7 @@ import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import rs09.game.world.GameWorld
-import rs09.plugin.PluginManager
+import rs09.plugin.ClassScanner
 
 /**
  * Handles the barbarian outpost course.
@@ -180,7 +180,7 @@ class BarbarianOutpostCourse
         NPCDefinition.forId(385).handlers["option:pick-up"] = this
 		NPCDefinition.forId(386).handlers["option:pick-up"] = this
 		NPCDefinition.forId(387).handlers["option:pick-up"] = this
-        PluginManager.definePlugin(BarbarianGuardDialogue())
+        ClassScanner.definePlugin(BarbarianGuardDialogue())
     }
 
     override fun getDestination(node: Node, n: Node): Location? {

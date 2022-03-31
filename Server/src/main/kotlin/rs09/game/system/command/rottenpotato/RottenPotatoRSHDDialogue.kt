@@ -37,7 +37,7 @@ class RottenPotatoRSHDDialogue(player: Player? = null) : DialoguePlugin(player) 
                     //Wipe Bots
                     1 -> AIRepository.PulseRepository.toTypedArray().forEach { it.stop(); it.botScript.bot.clear(); AIPlayer.deregister((it.botScript.bot as AIPlayer).uid) }.also { player.sendMessage(colorize("%RBots wiped.")); end() }
                     //Spawn Bots
-                    2 -> ImmerseWorld.init().also { player.sendMessage(colorize("%RBots Respawning...")); end() }
+                    2 -> ImmerseWorld.spawnBots().also { player.sendMessage(colorize("%RBots Respawning...")); end() }
                     //Force Log All Online Players
                     3 -> {
                         Repository.disconnectionQueue.clear().also { end() }

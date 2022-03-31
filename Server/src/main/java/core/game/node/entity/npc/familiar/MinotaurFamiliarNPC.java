@@ -13,7 +13,7 @@ import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 
@@ -27,12 +27,12 @@ public final class MinotaurFamiliarNPC implements Plugin<Object> {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new BronzeMinotaurNPC());
-		PluginManager.definePlugin(new IronMinotaurNPC());
-		PluginManager.definePlugin(new SteelMinotaurNPC());
-		PluginManager.definePlugin(new MithrilMinotaurNPC());
-		PluginManager.definePlugin(new AdamantMinotaurNPC());
-		PluginManager.definePlugin(new RuneMinotaurNPC());
+		ClassScanner.definePlugin(new BronzeMinotaurNPC());
+		ClassScanner.definePlugin(new IronMinotaurNPC());
+		ClassScanner.definePlugin(new SteelMinotaurNPC());
+		ClassScanner.definePlugin(new MithrilMinotaurNPC());
+		ClassScanner.definePlugin(new AdamantMinotaurNPC());
+		ClassScanner.definePlugin(new RuneMinotaurNPC());
 		return this;
 	}
 

@@ -3,10 +3,9 @@ package core.game.node.entity.skill.agility.brimhaven;
 import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
-import core.game.system.task.LocationLogoutTask;
-import core.game.system.task.LogoutTask;
 import core.game.system.task.MovementHook;
 import core.game.system.task.Pulse;
+import kotlin.Unit;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
@@ -26,7 +25,13 @@ public final class BladeTrap implements MovementHook {
 			final Player player = (Player) e;
 			final Location start = l.transform(-dir.getStepX(), -dir.getStepY(), 0);
 			e.lock(5);
-			e.addExtension(LogoutTask.class, new LocationLogoutTask(5, start));
+			if(e.isPlayer())
+			{
+				e.asPlayer().logoutListeners.put("blade-trap", p -> {
+					p.setLocation(start);
+					return Unit.INSTANCE;
+				});
+			}
 			GameWorld.getPulser().submit(new Pulse(2, e) {
 				@Override
 				public boolean pulse() {
@@ -39,6 +44,7 @@ public final class BladeTrap implements MovementHook {
 					}
 					Location loc = player.getLocation();
 					AgilityHandler.failWalk(player, 1, loc, loc.transform(direction), loc.transform(direction), Animation.create(846), 10, 3, "You were hit by the saw blade!").setDirection(d);
+					player.logoutListeners.remove("blade-trap");
 					return true;
 				}
 			});

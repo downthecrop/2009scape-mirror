@@ -1,5 +1,6 @@
 package core.game.node.entity.npc.drop;
 
+import api.StartupListener;
 import rs09.ServerConstants;
 import core.game.node.item.Item;
 import core.game.node.item.WeightedChanceItem;
@@ -17,11 +18,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static rs09.game.system.SystemLogger.logInfo;
+
 /**
  * Handles the rare drop table.
  * @author Ceikry
  */
-public final class RareDropTable {
+public final class RareDropTable implements StartupListener {
 
 	/**
 	 * The item id of the item representing the rare drop table slot in a drop
@@ -51,15 +54,14 @@ public final class RareDropTable {
 
 	public RareDropTable() throws ParserConfigurationException {}
 
-	/**
-	 * Initializes the rare drop table.
-	 */
-	public static void init(){
+	@Override
+	public void startup() {
 		if(ServerConstants.RDT_DATA_PATH != null && !new File(ServerConstants.RDT_DATA_PATH).exists()){
 			SystemLogger.logErr("Can't locate RDT file at " + ServerConstants.RDT_DATA_PATH);
 			return;
 		}
 		parse(ServerConstants.RDT_DATA_PATH);
+		logInfo("Initialized Rare Drop Table from " + ServerConstants.RDT_DATA_PATH);
 	}
 
 	/**

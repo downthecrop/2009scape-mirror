@@ -89,6 +89,7 @@ class MajorUpdateWorker {
                 GameWorld.pulse()
                 //disconnect all players waiting to be disconnected
                 Repository.disconnectionQueue.update()
+                GameWorld.tickListeners.forEach { it.tick() }
                 //tick all manager plugins
                 Managers.tick()
             }

@@ -8,7 +8,7 @@ import core.plugin.Initializable
 import core.tools.RandomFunction
 import org.rs09.consts.Items
 import rs09.ServerStore
-import rs09.ServerStore.getInt
+import rs09.ServerStore.Companion.getInt
 import rs09.game.content.global.WeightBasedTable
 import rs09.game.content.global.WeightedItem
 import rs09.game.interaction.InteractionListener

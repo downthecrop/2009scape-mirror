@@ -11,7 +11,7 @@ import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import org.rs09.consts.Items;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the gargoyle npc.
@@ -65,7 +65,7 @@ public final class GargoyleNPC extends AbstractNPC {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new RockHammerHandler());
+		ClassScanner.definePlugin(new RockHammerHandler());
 		return super.newInstance(arg);
 	}
 

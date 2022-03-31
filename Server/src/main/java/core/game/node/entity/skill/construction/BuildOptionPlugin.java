@@ -13,7 +13,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.game.node.entity.skill.construction.Hotspot;
 import rs09.game.system.SystemLogger;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * The build option handling plugin.
@@ -27,7 +27,7 @@ public final class BuildOptionPlugin extends OptionHandler {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		SceneryDefinition.setOptionHandler("build", this);
 		SceneryDefinition.setOptionHandler("remove", this);
-		PluginManager.definePlugin(new RemoveDialogue());
+		ClassScanner.definePlugin(new RemoveDialogue());
 		return this;
 	}
 

@@ -14,7 +14,7 @@ import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the warrior guild options.
@@ -35,7 +35,7 @@ public final class WarriorsGuild extends OptionHandler {
 		SceneryDefinition.forId(1530).getHandlers().put("option:open", this);
 		NPCDefinition.forId(4287).getHandlers().put("option:claim-shield", this);
 		NPCDefinition.setOptionHandler("claim-tokens", this);
-		PluginManager.definePlugin(new ClaimTokenDialogue());
+		ClassScanner.definePlugin(new ClaimTokenDialogue());
 		return this;
 	}
 

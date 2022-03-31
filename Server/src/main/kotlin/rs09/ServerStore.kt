@@ -1,19 +1,21 @@
 package rs09
 
+import api.ShutdownListener
+import api.StartupListener
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import rs09.game.system.SystemLogger
+import rs09.game.system.SystemLogger.logShutdown
+import rs09.game.system.SystemLogger.logStartup
 import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
 import javax.script.ScriptEngineManager
 
-object ServerStore {
-    val fileMap = HashMap<String,JSONObject>()
-    var counter = 0
-
-    fun init(){
+class ServerStore : StartupListener, ShutdownListener {
+    override fun startup() {
+        logStartup("Parsing server store...")
         val dir = File(ServerConstants.STORE_PATH!!)
         if(!dir.exists()){
             dir.mkdirs()
@@ -41,8 +43,8 @@ object ServerStore {
         }
     }
 
-    @JvmStatic
-    fun save() {
+    override fun shutdown() {
+        logShutdown("Saving server store...")
         val dir = File(ServerConstants.DATA_PATH + File.separator + "serverstore")
         if(!dir.exists()){
             dir.mkdirs()
@@ -63,63 +65,68 @@ object ServerStore {
         }
     }
 
-    @JvmStatic
-    fun getArchive(name: String): JSONObject {
-        if(fileMap[name] == null){
-            fileMap[name] = JSONObject()
+    companion object {
+        val fileMap = HashMap<String,JSONObject>()
+        var counter = 0
+
+        @JvmStatic
+        fun getArchive(name: String): JSONObject {
+            if(fileMap[name] == null){
+                fileMap[name] = JSONObject()
+            }
+
+            return fileMap[name]!!
         }
 
-        return fileMap[name]!!
-    }
-
-    fun setArchive(name: String, data: JSONObject){
-        fileMap[name] = data
-    }
-
-    fun clearDailyEntries() {
-        fileMap.keys.toTypedArray().forEach {
-            if(it.toLowerCase().contains("daily")) fileMap[it]?.clear()
+        fun setArchive(name: String, data: JSONObject){
+            fileMap[name] = data
         }
-    }
 
-    fun clearWeeklyEntries() {
-        fileMap.keys.toTypedArray().forEach {
-            if(it.toLowerCase().contains("weekly")) fileMap[it]?.clear()
+        fun clearDailyEntries() {
+            fileMap.keys.toTypedArray().forEach {
+                if(it.toLowerCase().contains("daily")) fileMap[it]?.clear()
+            }
         }
-    }
 
-    @JvmStatic
-    fun JSONObject.getInt(key: String): Int {
-        return when(val value = this[key]){
-            is Long -> value.toInt()
-            is Double -> value.toInt()
-            is Float -> value.toInt()
-            is Int -> value
-            is Nothing -> 0
-            else -> 0
+        fun clearWeeklyEntries() {
+            fileMap.keys.toTypedArray().forEach {
+                if(it.toLowerCase().contains("weekly")) fileMap[it]?.clear()
+            }
         }
-    }
 
-    @JvmStatic
-    fun JSONObject.getString(key: String): String {
-        return this[key] as? String ?: "nothing"
-    }
-
-    @JvmStatic
-    fun JSONObject.getLong(key: String): Long {
-        return this[key] as? Long ?: 0L
-    }
-
-    @JvmStatic
-    fun JSONObject.getBoolean(key: String): Boolean {
-        return this[key] as? Boolean ?: false
-    }
-
-    fun List<Int>.toJSONArray(): JSONArray{
-        val jArray = JSONArray()
-        for(i in this){
-            jArray.add(i)
+        @JvmStatic
+        fun JSONObject.getInt(key: String): Int {
+            return when(val value = this[key]){
+                is Long -> value.toInt()
+                is Double -> value.toInt()
+                is Float -> value.toInt()
+                is Int -> value
+                is Nothing -> 0
+                else -> 0
+            }
         }
-        return jArray
+
+        @JvmStatic
+        fun JSONObject.getString(key: String): String {
+            return this[key] as? String ?: "nothing"
+        }
+
+        @JvmStatic
+        fun JSONObject.getLong(key: String): Long {
+            return this[key] as? Long ?: 0L
+        }
+
+        @JvmStatic
+        fun JSONObject.getBoolean(key: String): Boolean {
+            return this[key] as? Boolean ?: false
+        }
+
+        fun List<Int>.toJSONArray(): JSONArray{
+            val jArray = JSONArray()
+            for(i in this){
+                jArray.add(i)
+            }
+            return jArray
+        }
     }
 }

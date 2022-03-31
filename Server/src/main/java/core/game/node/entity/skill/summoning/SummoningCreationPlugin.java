@@ -8,11 +8,10 @@ import core.game.component.ComponentPlugin;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.RunScript;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import kotlin.Unit;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents a component plugin used to handle the summoning creation of a
@@ -26,7 +25,7 @@ public final class SummoningCreationPlugin extends ComponentPlugin {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		ComponentDefinition.put(669, this);
 		ComponentDefinition.put(673, this);
-		PluginManager.definePlugin(new ObeliskHandler());
+		ClassScanner.definePlugin(new ObeliskHandler());
 		return this;
 	}
 

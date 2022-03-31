@@ -18,7 +18,7 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.game.content.activity.mta.EnchantSpell;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the mage training area interactions.
@@ -52,7 +52,7 @@ public class MageTrainingArenaPlugin extends OptionHandler {
 		ItemDefinition.forId(TelekineticZone.STATUE).getHandlers().put("option:observe", this);
 		ItemDefinition.forId(TelekineticZone.STATUE).getHandlers().put("option:reset", this);
 		NPCDefinition.forId(3102).getHandlers().put("option:talk-to", this);
-		PluginManager.definePlugins(new CharmedWarriorDialogue(), new EntranceGuardianDialogue(), new RewardsGuardianDialogue(), new ProgressHatDialogue(), new EnchantmentGuardianDialogue(), new EnchantSpell(),  new GraveyardGuardianDialogue(), new AlchemyGuardianDialogue(), new TelekineticGrabSpell(), new TelekineticGuardianDialogue(), new MazeGuardianDialogue());
+		ClassScanner.definePlugins(new CharmedWarriorDialogue(), new EntranceGuardianDialogue(), new RewardsGuardianDialogue(), new ProgressHatDialogue(), new EnchantmentGuardianDialogue(), new EnchantSpell(),  new GraveyardGuardianDialogue(), new AlchemyGuardianDialogue(), new TelekineticGrabSpell(), new TelekineticGuardianDialogue(), new MazeGuardianDialogue());
 		return this;
 	}
 

@@ -13,7 +13,7 @@ import core.game.system.task.Pulse;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles an orb viewing interface.
@@ -54,7 +54,7 @@ public final class OrbViewingInterface extends ComponentPlugin {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		ComponentDefinition.put(374, this);
 		ComponentDefinition.put(649, this);
-		PluginManager.definePlugin(new OptionHandler() {
+		ClassScanner.definePlugin(new OptionHandler() {
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
 				SceneryDefinition.forId(9391).getHandlers().put("option:look-into", this);

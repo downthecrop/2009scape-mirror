@@ -10,7 +10,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.plugin.Plugin;
 import rs09.game.system.config.ShopParser;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the dialogue plugin used to handle the candle maker npc.
@@ -45,7 +45,7 @@ public final class CandleMakerDialogue extends DialoguePlugin {
 	@Override
 	public void init() {
 		super.init();
-		PluginManager.definePlugin(new OptionHandler() {
+		ClassScanner.definePlugin(new OptionHandler() {
 
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {

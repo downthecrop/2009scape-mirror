@@ -15,7 +15,7 @@ import core.game.node.scenery.Scenery;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the hero guild.
@@ -28,7 +28,7 @@ public final class HeroGuildPlugin extends OptionHandler {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		SceneryDefinition.forId(2624).getHandlers().put("option:open", this);
 		SceneryDefinition.forId(2625).getHandlers().put("option:open", this);
-		PluginManager.definePlugin(new JewelleryRechargePlugin());
+		ClassScanner.definePlugin(new JewelleryRechargePlugin());
 		return this;
 	}
 

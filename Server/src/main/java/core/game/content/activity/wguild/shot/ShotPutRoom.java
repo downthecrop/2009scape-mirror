@@ -22,7 +22,7 @@ import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
 /**
@@ -33,7 +33,7 @@ import core.tools.RandomFunction;
 public final class ShotPutRoom extends DialoguePlugin {
 
 	static {
-		PluginManager.definePlugin(new OptionHandler() {
+		ClassScanner.definePlugin(new OptionHandler() {
 
 			@Override
 			public boolean handle(final Player player, Node node, String option) {

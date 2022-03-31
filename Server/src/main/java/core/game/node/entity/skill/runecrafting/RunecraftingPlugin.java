@@ -22,7 +22,7 @@ import core.plugin.Plugin;
 import rs09.game.content.global.travel.EssenceTeleport;
 import rs09.game.node.entity.skill.runecrafting.RunePouchPlugin;
 import rs09.game.world.GameWorld;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles runecraftign related options.
@@ -34,11 +34,11 @@ public class RunecraftingPlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		addNodes();
-		PluginManager.definePlugin(new TiaraPlugin());
-		PluginManager.definePlugin(new RunePouchPlugin());
-		PluginManager.definePlugin(new EnchantTiaraPlugin());
-		PluginManager.definePlugin(new MysteriousRuinPlugin());
-		PluginManager.definePlugin(new CombinationRunePlugin());
+		ClassScanner.definePlugin(new TiaraPlugin());
+		ClassScanner.definePlugin(new RunePouchPlugin());
+		ClassScanner.definePlugin(new EnchantTiaraPlugin());
+		ClassScanner.definePlugin(new MysteriousRuinPlugin());
+		ClassScanner.definePlugin(new CombinationRunePlugin());
 		SceneryDefinition.forId(2492).getHandlers().put("option:use", this);
 		NPCDefinition.forId(553).getHandlers().put("option:teleport", this);
 		NPCDefinition.forId(2328).getHandlers().put("option:teleport", this);

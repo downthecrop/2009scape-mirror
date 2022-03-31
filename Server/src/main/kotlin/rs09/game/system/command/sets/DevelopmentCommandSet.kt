@@ -10,9 +10,10 @@ import core.plugin.Initializable
 import org.rs09.consts.Items
 import rs09.game.content.global.NPCDropTable
 import rs09.game.system.command.Command
+import rs09.game.system.command.Privilege
 
 @Initializable
-class DevelopmentCommandSet : CommandSet(Command.Privilege.ADMIN) {
+class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
     val farmKitItems = arrayListOf(Items.RAKE_5341, Items.SPADE_952, Items.SEED_DIBBER_5343, Items.WATERING_CAN8_5340, Items.SECATEURS_5329, Items.GARDENING_TROWEL_5325)
 
     override fun defineCommands() {

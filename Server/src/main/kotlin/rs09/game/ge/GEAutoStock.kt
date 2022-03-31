@@ -1,5 +1,6 @@
 package rs09.game.ge
 
+import api.StartupListener
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
@@ -7,7 +8,11 @@ import rs09.ServerConstants
 import java.io.File
 import java.io.FileReader
 
-class GEAutoStock {
+class GEAutoStock : StartupListener {
+    override fun startup() {
+        autostock()
+    }
+
     companion object {
         // autostock format should be identical to the botoffers json format.
         private val DB_PATH = "data" + File.separator + "eco" + File.separator + "autostock.json"

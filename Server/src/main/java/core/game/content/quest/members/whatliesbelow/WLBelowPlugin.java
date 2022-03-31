@@ -19,7 +19,7 @@ import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the what lies below options.
@@ -30,14 +30,14 @@ public class WLBelowPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new OutlawNPC());
-		PluginManager.definePlugin(new KingRoaldNPC());
+		ClassScanner.definePlugin(new OutlawNPC());
+		ClassScanner.definePlugin(new KingRoaldNPC());
 		ActivityManager.register(new WLBelowCutscene());
-		PluginManager.definePlugin(new FolderHandler());
-		PluginManager.definePlugin(new MetalWandHandler());
-		PluginManager.definePlugin(new AnnaJonesDialogue());
-		PluginManager.definePlugin(new SurokMagisDialogue());
-		PluginManager.definePlugin(new RatBurgissDialogue());
+		ClassScanner.definePlugin(new FolderHandler());
+		ClassScanner.definePlugin(new MetalWandHandler());
+		ClassScanner.definePlugin(new AnnaJonesDialogue());
+		ClassScanner.definePlugin(new SurokMagisDialogue());
+		ClassScanner.definePlugin(new RatBurgissDialogue());
 		SceneryDefinition.forId(23095).getHandlers().put("option:use", this);
 		SceneryDefinition.forId(23058).getHandlers().put("option:enter", this);
 		SceneryDefinition.forId(23057).getHandlers().put("option:excavate", this);

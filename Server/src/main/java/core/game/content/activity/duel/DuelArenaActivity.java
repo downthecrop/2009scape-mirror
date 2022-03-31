@@ -16,7 +16,7 @@ import core.game.world.map.Location;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
 /**
@@ -141,8 +141,8 @@ public final class DuelArenaActivity extends ActivityPlugin {
 		}
 		parseScoreboard();
 		register(new ZoneBorders(3325, 3201, 3396, 3280));
-		PluginManager.definePlugin(new DuelArea.ForfeitTrapdoorPlugin());
-		PluginManager.definePlugins(new DuelSession(null, null, false), new DuelComponentPlugin(), new ChallengeOptionPlugin());
+		ClassScanner.definePlugin(new DuelArea.ForfeitTrapdoorPlugin());
+		ClassScanner.definePlugins(new DuelSession(null, null, false), new DuelComponentPlugin(), new ChallengeOptionPlugin());
 	}
 
 	/**

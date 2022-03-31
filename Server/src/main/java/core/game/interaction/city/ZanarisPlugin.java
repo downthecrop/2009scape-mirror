@@ -13,7 +13,7 @@ import core.game.node.entity.player.link.TeleportManager.TeleportType;
 import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the zanaris city plugin.
@@ -24,7 +24,7 @@ public final class ZanarisPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new MagicDoorDialogue());
+		ClassScanner.definePlugin(new MagicDoorDialogue());
 		SceneryDefinition.forId(12094).getHandlers().put("option:use", this);
 		SceneryDefinition.forId(12045).getHandlers().put("option:open", this);
 		SceneryDefinition.forId(12047).getHandlers().put("option:open", this);

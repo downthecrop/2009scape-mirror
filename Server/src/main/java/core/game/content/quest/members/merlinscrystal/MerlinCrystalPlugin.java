@@ -29,7 +29,7 @@ import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the Merlin's Crystal Dialogue/Interactions.
@@ -59,8 +59,8 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new MerlinCrystalDialogue());
-		PluginManager.definePlugin(new MerlinCrystalItemHandler());
+		ClassScanner.definePlugin(new MerlinCrystalDialogue());
+		ClassScanner.definePlugin(new MerlinCrystalItemHandler());
 		SceneryDefinition.forId(63).getHandlers().put("option:hide-in", this);
 		SceneryDefinition.forId(40026).getHandlers().put("option:climb-up", this);
 		SceneryDefinition.forId(72).getHandlers().put("option:open", this);

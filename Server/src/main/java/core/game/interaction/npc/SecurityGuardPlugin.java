@@ -8,7 +8,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import org.rs09.consts.Items;
 
 @Initializable
@@ -16,7 +16,7 @@ public final class SecurityGuardPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new SecurityGuardDialogue());
+		ClassScanner.definePlugin(new SecurityGuardDialogue());
 		return this;
 	}
 

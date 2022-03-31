@@ -35,7 +35,7 @@ import core.net.packet.context.CameraContext;
 import core.net.packet.context.CameraContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the draynor bank robbery cutscene plugin.
@@ -228,7 +228,7 @@ public final class DBRCutscenePlugin extends CutscenePlugin {
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-		PluginManager.definePlugin(new BluePhatItem());
+		ClassScanner.definePlugin(new BluePhatItem());
 	}
 
 	@Override

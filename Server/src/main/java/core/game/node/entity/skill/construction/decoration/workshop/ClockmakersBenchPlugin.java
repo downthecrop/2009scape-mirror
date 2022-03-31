@@ -15,7 +15,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the clockmakers bench in the workshop
@@ -77,7 +77,7 @@ public class ClockmakersBenchPlugin extends OptionHandler {
 		SceneryDefinition.forId(13710).getHandlers().put("option:craft", this);
 		SceneryDefinition.forId(13711).getHandlers().put("option:craft", this);
 		SceneryDefinition.forId(13712).getHandlers().put("option:craft", this);
-		PluginManager.definePlugin(new ClockmakerBenchDialogue());
+		ClassScanner.definePlugin(new ClockmakerBenchDialogue());
 		return this;
 	}
 

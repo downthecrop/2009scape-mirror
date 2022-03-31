@@ -5,10 +5,11 @@ import core.game.world.map.Location
 import core.plugin.Initializable
 import rs09.ServerConstants
 import rs09.game.system.command.Command
+import rs09.game.system.command.Privilege
 import rs09.game.world.repository.Repository
 
 @Initializable
-class TeleportCommandSet : CommandSet(Command.Privilege.ADMIN){
+class TeleportCommandSet : CommandSet(Privilege.ADMIN){
     override fun defineCommands() {
         /**
          * Allows teleporting by location name

@@ -8,7 +8,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.plugin.PluginManifest;
 
 @PluginManifest(name="ShootingStars")
@@ -24,7 +24,7 @@ public class StarChartPlugin extends ComponentPlugin {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        PluginManager.definePlugin(new StarChartOptions());
+        ClassScanner.definePlugin(new StarChartOptions());
         ComponentDefinition.forId(iface.getId()).setPlugin(this);
         return this;
     }

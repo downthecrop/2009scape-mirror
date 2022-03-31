@@ -1,5 +1,6 @@
 package core.game.system;
 
+import api.ShutdownListener;
 import core.game.ge.GrandExchangeDatabase;
 import core.game.interaction.object.dmc.DMCHandler;
 import core.game.node.entity.player.Player;
@@ -9,6 +10,7 @@ import rs09.ServerConstants;
 import rs09.ServerStore;
 import rs09.game.content.global.GlobalKillCounter;
 import rs09.game.system.SystemLogger;
+import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
 
 import java.io.File;
@@ -37,12 +39,18 @@ public final class SystemTermination {
 		SystemLogger.logInfo("[SystemTerminator] Initializing termination sequence - do not shutdown!");
 		try {
 			Server.setRunning(false);
-			for(Player player : Repository.getPlayers()){
-				DMCHandler dmc = player.getAttribute("dmc",null);
-				if(dmc != null){
-					dmc.clear(false);
+			for (Iterator<Player> it = Repository.getPlayers().iterator(); it.hasNext();) {
+				try {
+					Player p = it.next();
+					if (p != null && !p.isArtificial()) { // Should never be null.
+						p.getDetails().save();
+						p.clear();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
+			GameWorld.getShutdownListeners().forEach(ShutdownListener::shutdown);
 			if(ServerConstants.DATA_PATH != null)
 				save(ServerConstants.DATA_PATH);
 		} catch (Throwable e) {
@@ -62,27 +70,6 @@ public final class SystemTermination {
 			file.mkdirs();
 		}
 		Server.getReactor().terminate();
-		for (Iterator<Player> it = Repository.getPlayers().iterator(); it.hasNext();) {
-			try {
-				Player p = it.next();
-				if (p != null && !p.isArtificial()) { // Should never be null.
-/*					p.removeAttribute("combat-time");
-					p.clear();
-					PlayerParser.save(p);*/
-					p.getDetails().save();
-					p.getLogoutPlugins().forEach(playerPlugin -> {
-						try {
-							playerPlugin.newInstance(p);
-						} catch (Throwable throwable) {
-							throwable.printStackTrace();
-						}
-					});
-					p.clear();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
 		long start = System.currentTimeMillis();
 		while(!Repository.getDisconnectionQueue().isEmpty() && System.currentTimeMillis() - start < 5000L){
 			Repository.getDisconnectionQueue().update();
@@ -91,15 +78,7 @@ public final class SystemTermination {
 			} catch (Exception ignored) {}
 		}
 		Repository.getDisconnectionQueue().update();
-        GlobalKillCounter.save();
-		GrandExchangeDatabase.save();
 		SystemLogger.flushLogs();
-		SystemLogger.logInfo("[SystemTerminator] Saved Grand Exchange databases!");
 		Repository.getDisconnectionQueue().clear();
-		SystemLogger.logInfo("[SystemTerminator] Saving Server Store...");
-		ServerStore.save();
-		SystemLogger.logInfo("[SystemTerminator] Server Store Saved!");
-//		ServerStore.dump(directory + "store/");
-		SystemLogger.logInfo("[SystemTerminator] Saved player accounts!");
 	}
 }

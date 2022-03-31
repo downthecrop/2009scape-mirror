@@ -8,6 +8,7 @@ import rs09.game.world.GameWorld
 import core.game.world.map.Location
 import rs09.game.world.repository.Repository
 import core.plugin.Initializable
+import rs09.game.system.command.Privilege
 import java.util.concurrent.TimeUnit
 
 @Initializable
@@ -15,7 +16,7 @@ import java.util.concurrent.TimeUnit
  * Moderation commands
  * @author Ceikry
  */
-class ModerationCommandSet : CommandSet(Command.Privilege.MODERATOR){
+class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
     override fun defineCommands() {
         val MAX_JAIL_TIME = 1800 //Max jail time (in seconds)
 
@@ -24,7 +25,7 @@ class ModerationCommandSet : CommandSet(Command.Privilege.MODERATOR){
          * Kick a player
          * =============================================================================================================
          */
-        define("kick", Command.Privilege.ADMIN){ player, args ->
+        define("kick", Privilege.ADMIN){ player, args ->
             val playerToKick: Player? = Repository.getPlayerByName(args[1])
             if (playerToKick != null) {
                 playerToKick.clear(true)

@@ -102,4 +102,14 @@ object SystemLogger {
             }
         } catch(ignored: Exception){}
     }
+
+    @JvmStatic fun logStartup(message: String)
+    {
+        SystemLogger.logInfo("[STARTUP] $message")
+    }
+
+    @JvmStatic fun logShutdown(message: String)
+    {
+        SystemLogger.logInfo("[SHUTDOWN] $message")
+    }
 }

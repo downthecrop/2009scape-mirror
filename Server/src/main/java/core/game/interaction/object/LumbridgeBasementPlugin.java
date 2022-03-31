@@ -1,14 +1,12 @@
 package core.game.interaction.object;
 
 import core.cache.def.impl.SceneryDefinition;
-import core.game.content.dialogue.DialoguePlugin;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
 import core.game.node.Node;
 import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.npc.AbstractNPC;
-import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
@@ -19,7 +17,7 @@ import core.game.world.map.Location;
 import core.game.world.map.path.Pathfinder;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 
@@ -55,7 +53,7 @@ public class LumbridgeBasementPlugin extends OptionHandler {
 		SceneryDefinition.forId(40849).getHandlers().put("option:jump-down", this);
 		SceneryDefinition.forId(40260).getHandlers().put("option:climb-through", this);
 		SceneryDefinition.forId(41077).getHandlers().put("option:crawl-through", this);
-		PluginManager.definePlugins(new LightCreatureNPC(), new LightCreatureHandler());
+		ClassScanner.definePlugins(new LightCreatureNPC(), new LightCreatureHandler());
 		SceneryBuilder.add(new Scenery(40260, Location.create(2526, 5828, 2), 2));
 		return this;
 	}

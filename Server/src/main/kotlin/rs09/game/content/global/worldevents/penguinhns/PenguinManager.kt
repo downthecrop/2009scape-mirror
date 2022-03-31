@@ -6,7 +6,7 @@ import rs09.game.system.SystemLogger
 import core.game.world.map.Location
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
-import rs09.ServerStore.toJSONArray
+import rs09.ServerStore.Companion.toJSONArray
 import java.util.*
 
 class PenguinManager{

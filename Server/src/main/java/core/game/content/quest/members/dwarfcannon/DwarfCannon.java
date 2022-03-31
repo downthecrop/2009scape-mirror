@@ -4,7 +4,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.game.node.entity.skill.Skills;
 
 /**
@@ -48,11 +48,11 @@ public class DwarfCannon extends Quest {
 	
 	@Override
 	public Quest newInstance(Object object) {
-		PluginManager.definePlugin(new LollkDialogue());
-		PluginManager.definePlugin(new NulodionDialogue());
-		PluginManager.definePlugin(new CaptainLawgofNPC());
-		PluginManager.definePlugin(new CaptainLawgofDialogue());
-		PluginManager.definePlugin(new DwarfCannonPlugin());
+		ClassScanner.definePlugin(new LollkDialogue());
+		ClassScanner.definePlugin(new NulodionDialogue());
+		ClassScanner.definePlugin(new CaptainLawgofNPC());
+		ClassScanner.definePlugin(new CaptainLawgofDialogue());
+		ClassScanner.definePlugin(new DwarfCannonPlugin());
 		return this;
 	}
 

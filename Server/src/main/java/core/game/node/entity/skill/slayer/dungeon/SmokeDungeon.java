@@ -16,7 +16,7 @@ import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
 import java.util.ArrayList;
@@ -71,7 +71,7 @@ public final class SmokeDungeon extends MapZone implements Plugin<Object> {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new OptionHandler() {
+		ClassScanner.definePlugin(new OptionHandler() {
 
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {

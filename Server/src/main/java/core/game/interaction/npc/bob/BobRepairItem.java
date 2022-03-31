@@ -7,7 +7,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the plugin used to handle an item being used on bob.
@@ -28,7 +28,7 @@ public final class BobRepairItem extends UseWithHandler {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		addHandler(519, NPC_TYPE, this);
 		addHandler(3797, NPC_TYPE, this);
-		PluginManager.definePlugin(new BobDialogue());
+		ClassScanner.definePlugin(new BobDialogue());
 		return this;
 	}
 

@@ -21,7 +21,7 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.CameraContext;
 import core.net.packet.context.CameraContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the husband of alice's npc dialogue.
@@ -64,7 +64,7 @@ public final class AliceHusbandDialogue extends DialoguePlugin {
 	@Override
 	public void init() {
 		super.init();
-		PluginManager.definePlugin(new ChickenCatchScene());
+		ClassScanner.definePlugin(new ChickenCatchScene());
 	}
 
 	@Override
