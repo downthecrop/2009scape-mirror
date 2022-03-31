@@ -1,6 +1,6 @@
 package rs09.plugin
 
-import api.LoginListener
+import api.*
 import core.game.content.activity.ActivityManager
 import core.game.content.activity.ActivityPlugin
 import core.game.content.dialogue.DialoguePlugin
@@ -12,20 +12,20 @@ import core.plugin.PluginManifest
 import core.plugin.PluginType
 import io.github.classgraph.ClassGraph
 import io.github.classgraph.ClassInfo
+import rs09.game.ai.general.scriptrepository.PlayerScripts
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InterfaceListener
 import rs09.game.node.entity.skill.magic.SpellListener
 import rs09.game.system.SystemLogger
-import rs09.game.system.command.Command
 import rs09.game.world.GameWorld
 import java.util.*
 import java.util.function.Consumer
 
 /**
- * Represents a class used to handle the loading of all plugins.
+ * A class used to reflectively scan the classpath and load classes
  * @author Ceikry
  */
-object PluginManager {
+object ClassScanner {
     var disabledPlugins = HashMap<String, Boolean>()
     /**
      * The amount of plugins loaded.
@@ -44,10 +44,10 @@ object PluginManager {
     private val lastLoaded: String? = null
 
     /**
-     * Initializes the plugin manager.
+     * Scan the classpath for reflection-loaded content classes such as listeners, "plugins", etc
      */
 	@JvmStatic
-	fun init() {
+	fun scanAndLoad() {
         try {
             load()
             loadedPlugins!!.clear()
@@ -56,11 +56,14 @@ object PluginManager {
         } catch (t: Throwable) {
             SystemLogger.logErr("Error initializing Plugins -> " + t.localizedMessage + " for file -> " + lastLoaded)
             t.printStackTrace()
+        } catch (e: Exception) {
+            SystemLogger.logErr("Error initializing Plugins -> " + e.localizedMessage + " for file -> " + lastLoaded)
+            e.printStackTrace()
         }
     }
 
     fun load() {
-        var result = ClassGraph().enableClassInfo().enableAnnotationInfo().scan()
+        val result = ClassGraph().enableClassInfo().enableAnnotationInfo().scan()
         result.getClassesWithAnnotation("core.plugin.Initializable").forEach(Consumer { p: ClassInfo ->
             try {
                 definePlugin(p.loadClass().newInstance() as Plugin<Object>)
@@ -70,27 +73,38 @@ object PluginManager {
                 e.printStackTrace()
             }
         })
-        result.getSubclasses("rs09.game.system.command.Command").forEach {
-            try {
-                definePlugin(it.loadClass().newInstance() as Plugin<Command>).also { System.out.println("Initializing $it") }
-            } catch (e: Exception) {e.printStackTrace()}
+        result.getClassesWithAnnotation("rs09.game.ai.general.scriptrepository.PlayerCompatible").forEach { res ->
+            val description = res.getAnnotationInfo("rs09.game.ai.general.scriptrepository.ScriptDescription").parameterValues[0].value as Array<String>
+            val identifier = res.getAnnotationInfo("rs09.game.ai.general.scriptrepository.ScriptIdentifier").parameterValues[0].value.toString()
+            val name = res.getAnnotationInfo("rs09.game.ai.general.scriptrepository.ScriptName").parameterValues[0].value.toString()
+            PlayerScripts.identifierMap[identifier] =
+                PlayerScripts.PlayerScript(identifier, description, name, res.loadClass())
         }
-        result.getClassesImplementing("api.LoginListener").forEach {
+        result.getClassesImplementing("api.StartupListener").filter { !it.isAbstract }.forEach {
+            try {
+                val clazz = it.loadClass().newInstance() as StartupListener
+                GameWorld.startupListeners.add(clazz)
+            } catch (e: Exception)
+            {
+                SystemLogger.logErr("Error loading startup listener: ${it.simpleName}, ${e.localizedMessage}")
+                e.printStackTrace()
+            }
+        }
+        result.getClassesImplementing("api.ShutdownListener").filter { !it.isAbstract }.forEach {
+            val clazz = it.loadClass().newInstance() as ShutdownListener
+            GameWorld.shutdownListeners.add(clazz)
+        }
+        result.getClassesImplementing("api.LoginListener").filter { !it.isAbstract }.forEach {
             val clazz = it.loadClass().newInstance() as LoginListener
             GameWorld.loginListeners.add(clazz)
         }
-        result.getSubclasses("rs09.game.interaction.InteractionListener").forEach {
-            val clazz = it.loadClass().newInstance() as InteractionListener
-            clazz.defineListeners()
-            clazz.defineDestinationOverrides()
+        result.getClassesImplementing("api.LogoutListener").filter { !it.isAbstract }.forEach {
+            val clazz = it.loadClass().newInstance() as LogoutListener
+            GameWorld.logoutListeners.add(clazz)
         }
-        result.getSubclasses("rs09.game.interaction.InterfaceListener").forEach {
-            val clazz = it.loadClass().newInstance() as InterfaceListener
-            clazz.defineListeners()
-        }
-        result.getSubclasses("rs09.game.node.entity.skill.magic.SpellListener").forEach {
-            val clazz = it.loadClass().newInstance() as SpellListener
-            clazz.defineListeners()
+        result.getClassesImplementing("api.TickListener").filter { !it.isAbstract }.forEach {
+            val clazz = it.loadClass().newInstance() as TickListener
+            GameWorld.tickListeners.add(clazz)
         }
     }
 

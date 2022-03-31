@@ -17,7 +17,7 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
 import rs09.game.world.GameWorld
-import rs09.plugin.PluginManager.definePlugin
+import rs09.plugin.ClassScanner.definePlugin
 
 /**
  * Handles the lectern

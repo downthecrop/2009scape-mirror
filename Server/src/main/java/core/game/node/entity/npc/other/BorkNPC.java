@@ -27,7 +27,7 @@ import core.net.packet.out.CameraViewPacket;
 import core.net.packet.out.MinimapState;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 import core.game.content.activity.ActivityPlugin;
 import core.game.content.activity.CutscenePlugin;
@@ -255,10 +255,10 @@ public class BorkNPC extends AbstractNPC {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new BorkCutscene());
-		PluginManager.definePlugin(new DagonDialogue());
-		PluginManager.definePlugin(new OrkLegion());
-		PluginManager.definePlugin(new DagonElite());
+		ClassScanner.definePlugin(new BorkCutscene());
+		ClassScanner.definePlugin(new DagonDialogue());
+		ClassScanner.definePlugin(new OrkLegion());
+		ClassScanner.definePlugin(new DagonElite());
 		return super.newInstance(arg);
 	}
 

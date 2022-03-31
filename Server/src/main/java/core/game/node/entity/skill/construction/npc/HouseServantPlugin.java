@@ -5,7 +5,7 @@ import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles interaction with the house servant.
@@ -39,7 +39,7 @@ public class HouseServantPlugin extends UseWithHandler {
 		addHandler(4239, NPC_TYPE, this);
 		addHandler(4241, NPC_TYPE, this);
 		addHandler(4243, NPC_TYPE, this);
-		PluginManager.definePlugin(new HouseServantDialogue());
+		ClassScanner.definePlugin(new HouseServantDialogue());
 		return this;
 	}
 

@@ -9,7 +9,7 @@ import core.game.node.entity.skill.hunter.bnet.ImplingNode;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 import core.game.content.activity.puropuro.ElnockInquisitorDialogue.ElnockExchangeInterfaceHandler.ElnockExchange;
 
@@ -188,7 +188,7 @@ public final class ElnockInquisitorDialogue extends DialoguePlugin {
 	@Override
 	public void init() {
 		super.init();
-		PluginManager.definePlugin(new ElnockExchangeInterfaceHandler());
+		ClassScanner.definePlugin(new ElnockExchangeInterfaceHandler());
 	}
 
 	@Override

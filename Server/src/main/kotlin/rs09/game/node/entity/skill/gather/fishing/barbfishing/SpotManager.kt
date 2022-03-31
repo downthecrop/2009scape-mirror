@@ -1,5 +1,7 @@
 package rs09.game.node.entity.skill.gather.fishing.barbfishing
 
+import api.StartupListener
+import api.TickListener
 import core.game.node.entity.npc.NPC
 import core.game.world.map.Location
 import core.plugin.CorePluginTypes.ManagerPlugin
@@ -10,12 +12,11 @@ import core.tools.RandomFunction
 import rs09.game.node.entity.skill.gather.fishing.barbfishing.SpotManager.Companion.locations
 import rs09.game.node.entity.skill.gather.fishing.barbfishing.SpotManager.Companion.usedLocations
 
-@Initializable
 /**
  * Manages fishing spot spawning and relocation
  * @author Ceikry
  */
-class SpotManager : ManagerPlugin() {
+class SpotManager : TickListener, StartupListener {
     var ticks = 0
     val spots = ArrayList<BarbFishingSpot>()
 
@@ -39,12 +40,10 @@ class SpotManager : ManagerPlugin() {
         }
     }
 
-    override fun newInstance(arg: Any?): Plugin<Any> {
+    override fun startup() {
         for(i in 0 until 5){
             spots.add(BarbFishingSpot(getNewLoc(), getNewTTL()).also { it.init() })
         }
-        Managers.register(this)
-        return this
     }
 }
 

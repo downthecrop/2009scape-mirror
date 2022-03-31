@@ -218,7 +218,6 @@ class AIPCommandPlugin : CommandPlugin() {
                 return true
             }
             "immerse", "immersiveworld", "immersive" -> {
-                ImmerseWorld.init()
                 player.sendMessage("Started immersive world, 2")
                 return true
             }

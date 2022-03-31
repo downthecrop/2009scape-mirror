@@ -5,7 +5,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.equipment.DegradableEquipment;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the degrading of corrupt equipment.
@@ -27,7 +27,7 @@ public class CorruptEquipment extends DegradableEquipment {
 	 * Initializes the corrupt equipment degarding.
 	 */
 	public static void init() {
-		PluginManager.definePlugin(new CorruptEquipment(EquipmentContainer.SLOT_CHEST, new int[] {13958, 13960}));
+		ClassScanner.definePlugin(new CorruptEquipment(EquipmentContainer.SLOT_CHEST, new int[] {13958, 13960}));
 	}
 
 	@Override

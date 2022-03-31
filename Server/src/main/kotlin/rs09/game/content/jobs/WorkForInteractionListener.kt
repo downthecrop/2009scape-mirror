@@ -13,7 +13,7 @@ import core.game.node.item.Item
 import org.json.simple.JSONObject
 import org.rs09.consts.Items
 import rs09.ServerStore
-import rs09.ServerStore.getInt
+import rs09.ServerStore.Companion.getInt
 import rs09.game.Event
 import rs09.game.interaction.InteractionListener
 import rs09.game.system.SystemLogger

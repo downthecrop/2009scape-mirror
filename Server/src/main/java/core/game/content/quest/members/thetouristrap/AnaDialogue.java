@@ -12,7 +12,7 @@ import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * The dialogue plugin used to handle the ana npc.
@@ -51,8 +51,8 @@ public final class AnaDialogue extends DialoguePlugin {
 	@Override
 	public void init() {
 		super.init();
-		PluginManager.definePlugin(new AnaNPC());
-		PluginManager.definePlugin(new AnaBarrelHandler());
+		ClassScanner.definePlugin(new AnaNPC());
+		ClassScanner.definePlugin(new AnaBarrelHandler());
 	}
 
 	@Override

@@ -22,7 +22,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles a gravestone npc.
@@ -169,7 +169,7 @@ public class GraveStoneNPC extends AbstractNPC {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new GraveStonePlugin());
+		ClassScanner.definePlugin(new GraveStonePlugin());
 		return super.newInstance(arg);
 	}
 

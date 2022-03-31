@@ -9,10 +9,9 @@ import core.game.component.ComponentPlugin;
 import core.game.container.impl.EquipmentContainer;
 import core.plugin.Initializable;
 import org.rs09.consts.Items;
-import core.game.node.entity.Entity;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.link.diary.DiaryType;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.dialogue.FacialExpression;
@@ -58,7 +57,7 @@ public final class RangingGuildPlugin extends OptionHandler {
         new BowArrowSalesman().init();
         new WarningInterface().newInstance(arg);
         new CompetitionJudge().init();
-        PluginManager.definePlugin(new TowerArcher());
+        ClassScanner.definePlugin(new TowerArcher());
         return this;
     }
 

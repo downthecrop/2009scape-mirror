@@ -1,5 +1,6 @@
 package core.game.node.entity.npc.drop;
 
+import api.StartupListener;
 import rs09.ServerConstants;
 import core.game.node.item.Item;
 import core.game.node.item.WeightedChanceItem;
@@ -17,11 +18,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static rs09.game.system.SystemLogger.logInfo;
+
 /**
  * Handles the Chaos Elemental's minor drop table. It is supposed to roll this table alongside its standard major drops on the main table.
  * @author Crash
  */
-public final class CELEMinorTable {
+public final class CELEMinorTable implements StartupListener {
 
 	/**
 	 * The item id of the item representing the C. Ele minor drop table slot in a drop
@@ -51,15 +54,14 @@ public final class CELEMinorTable {
 
 	public CELEMinorTable() throws ParserConfigurationException {}
 
-	/**
-	 * Initializes the C. Ele minor table.
-	 */
-	public static void init(){
+	@Override
+	public void startup() {
 		if(ServerConstants.CELEDT_DATA_PATH != null && !new File(ServerConstants.CELEDT_DATA_PATH).exists()){
 			SystemLogger.logErr("Can't locate CELEDT file at " + ServerConstants.CELEDT_DATA_PATH);
 			return;
 		}
 		parse(ServerConstants.CELEDT_DATA_PATH);
+		logInfo("Loaded up Chaos Elemental drop table from " + ServerConstants.CELEDT_DATA_PATH);
 	}
 
 	/**

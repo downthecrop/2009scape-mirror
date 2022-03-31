@@ -7,9 +7,8 @@ import core.game.interaction.MovementPulse;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
-import core.game.system.task.LocationLogoutTask;
-import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
+import kotlin.Unit;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
@@ -138,6 +137,10 @@ public final class AgilityHandler {
 	 * @return The force movement instance, if force movement is used.
 	 */
 	public static ForceMovement forceWalk(final Player player, final int courseIndex, Location start, Location end, Animation animation, int speed, final double experience, final String message) {
+		player.logoutListeners.put("forcewalk", p -> {
+			p.setLocation(player.getLocation().transform(0,0,0));
+			return Unit.INSTANCE;
+		});
 		ForceMovement movement = new ForceMovement(player, start, end, animation, speed) {
 			@Override
 			public void stop() {
@@ -149,6 +152,7 @@ public final class AgilityHandler {
 					player.getSkills().addExperience(Skills.AGILITY, experience, true);
 				}
 				setObstacleFlag(player, courseIndex);
+				player.logoutListeners.remove("forcewalk");
 			}
 		};
 		movement.start();
@@ -167,6 +171,10 @@ public final class AgilityHandler {
 	 * @return The force movement instance, if force movement is used.
 	 */
 	public static ForceMovement forceWalk(final Player player, final int courseIndex, Location start, Location end, Animation animation, int speed, final double experience, final String message, int delay) {
+		player.logoutListeners.put("forcewalk", p -> {
+			p.setLocation(player.getLocation().transform(0,0,0));
+			return Unit.INSTANCE;
+		});
 		if (delay < 1) {
 			return forceWalk(player, courseIndex, start, end, animation, speed, experience, message);
 		}
@@ -181,6 +189,7 @@ public final class AgilityHandler {
 					player.getSkills().addExperience(Skills.AGILITY, experience, true);
 				}
 				setObstacleFlag(player, courseIndex);
+				player.logoutListeners.remove("forcewalk");
 			}
 		};
 		GameWorld.getPulser().submit(new Pulse(delay, player) {
@@ -264,10 +273,10 @@ public final class AgilityHandler {
 		int ticks = player.getWalkingQueue().getQueue().size();
 		player.getImpactHandler().setDisabledTicks(ticks);
 		player.lock(1 + ticks);
-		LogoutTask task = player.getExtension(LogoutTask.class);
-		if (task == null || !(task instanceof LocationLogoutTask) || !((LocationLogoutTask) task).isValid()) {
-			player.addExtension(LogoutTask.class, new LocationLogoutTask(1 + ticks, start));
-		}
+		player.logoutListeners.put("agility", p -> {
+			p.setLocation(start);
+			return Unit.INSTANCE;
+		});
 		if (animation != null) {
 			player.getAppearance().setAnimations(animation);
 		}
@@ -286,6 +295,7 @@ public final class AgilityHandler {
 					player.getSkills().addExperience(Skills.AGILITY, experience, true);
 				}
 				setObstacleFlag(player, courseIndex);
+				player.logoutListeners.remove("agility");
 				return true;
 			}
 		});

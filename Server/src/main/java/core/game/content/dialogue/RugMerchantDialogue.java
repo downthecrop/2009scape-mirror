@@ -17,7 +17,7 @@ import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import org.rs09.consts.Items;
 
 import static rs09.tools.stringtools.GlobalsKt.colorize;
@@ -65,7 +65,7 @@ public final class RugMerchantDialogue extends DialoguePlugin {
 	@Override
 	public void init() {
 		super.init();
-		PluginManager.definePlugin(new RugMerchantPlugin());
+		ClassScanner.definePlugin(new RugMerchantPlugin());
 	}
 
 	/**

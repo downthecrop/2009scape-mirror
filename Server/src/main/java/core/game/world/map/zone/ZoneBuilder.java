@@ -1,6 +1,6 @@
 package core.game.world.map.zone;
 
-import core.game.world.callback.CallBack;
+import api.StartupListener;
 import core.game.world.map.zone.impl.*;
 
 
@@ -8,17 +8,16 @@ import core.game.world.map.zone.impl.*;
  * Loads all the default zones.
  * @author Emperor
  */
-public class ZoneBuilder implements CallBack {
+public class ZoneBuilder implements StartupListener {
 
 	@Override
-	public boolean call() {
+	public void startup() {
 		configure(WildernessZone.getInstance());
 		configure(MultiwayCombatZone.getInstance());
 		configure(new ModeratorZone());
 		configure(new DarkZone());
 		configure(new KaramjaZone());
 		configure(new BankZone());
-		return true;
 	}
 
 	/**

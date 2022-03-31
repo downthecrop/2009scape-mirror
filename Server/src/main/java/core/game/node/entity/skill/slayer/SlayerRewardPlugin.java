@@ -14,7 +14,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the slayer reward interface plugin.
@@ -44,7 +44,7 @@ public class SlayerRewardPlugin extends ComponentPlugin {
 		ComponentDefinition.forId(161).setPlugin(this);//assignment
 		ComponentDefinition.forId(163).setPlugin(this);//learn
 		ComponentDefinition.forId(164).setPlugin(this);//buy
-		PluginManager.definePlugins(new SlayerMasterPlugin(), new SlayerHelmCraftPlugin());
+		ClassScanner.definePlugins(new SlayerMasterPlugin(), new SlayerHelmCraftPlugin());
 		return this;
 	}
 
@@ -345,7 +345,7 @@ public class SlayerRewardPlugin extends ComponentPlugin {
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
 			addHandler(SPINY_HELMET.getId(), ITEM_TYPE, this);
-			PluginManager.definePlugin(new OptionHandler() {
+			ClassScanner.definePlugin(new OptionHandler() {
 
 				@Override
 				public Plugin<Object> newInstance(Object arg) throws Throwable {

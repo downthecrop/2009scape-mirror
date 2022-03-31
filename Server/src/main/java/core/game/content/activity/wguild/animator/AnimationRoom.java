@@ -8,9 +8,8 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
-import core.game.system.task.ItemLogoutTask;
-import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
+import kotlin.Unit;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.zone.MapZone;
@@ -112,7 +111,7 @@ public final class AnimationRoom extends MapZone implements Plugin<Object> {
 	 */
 	private void animateArmour(final Player player, final Scenery object, final ArmourSet set) {
 		if (!player.getInventory().containItems(set.getPieces())) {
-			player.getDialogueInterpreter().sendDialogue("You need a plate body, playe legs and full helm of the same type to", "activate the armour animator.");
+			player.getDialogueInterpreter().sendDialogue("You need a plate body, plate legs and full helm of the same type to", "activate the armour animator.");
 			return;
 		}
 		if (player.getAttribute("animated_set") != null) {
@@ -134,7 +133,10 @@ public final class AnimationRoom extends MapZone implements Plugin<Object> {
 						}
 					}
 					player.getAudioManager().send(1909);
-					player.addExtension(LogoutTask.class, new ItemLogoutTask(5, new Item(set.getPieces()[0]), new Item(set.getPieces()[1]), new Item(set.getPieces()[2])));
+					player.logoutListeners.put("animation-room", player1 -> {
+						for(int item : set.getPieces()) player1.getInventory().add(new Item(item));
+						return Unit.INSTANCE;
+					});
 					player.getDialogueInterpreter().sendPlainMessage(true, "The animator hums, something appears to be working.", "You stand back...");
 					spawn = true;
 					super.setDelay(4);
@@ -146,7 +148,6 @@ public final class AnimationRoom extends MapZone implements Plugin<Object> {
 					ForceMovement.run(player, player.getLocation().transform(0, 1, 0)).setDirection(Direction.SOUTH);
 					return false;
 				}
-				player.removeExtension(LogoutTask.class);
 				player.getInterfaceManager().closeChatbox();
 				NPC npc = new AnimatedArmour(player, object.getLocation(), set);
 				player.setAttribute("animated_set", npc);

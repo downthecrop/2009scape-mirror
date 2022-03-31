@@ -4,7 +4,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.plugin.Initializable;
 import rs09.game.content.quest.members.merlinsquest.TheLadyOfTheLake;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the merlin's crystal quest.
@@ -77,7 +77,7 @@ public final class MerlinCrystal extends Quest {
 
 	@Override
 	public Quest newInstance(Object object) {
-		PluginManager.definePlugins(new CrateCutscenePlugin(),
+		ClassScanner.definePlugins(new CrateCutscenePlugin(),
 				new MerlinCrystalPlugin(),
 				new ArheinShopDialogue(),
 				new BeggarDialogue(),

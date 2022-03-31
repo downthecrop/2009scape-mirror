@@ -13,12 +13,13 @@ import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListeners
 import rs09.game.interaction.SpadeDigListener
 import rs09.game.system.command.Command
+import rs09.game.system.command.Privilege
 import rs09.game.world.GameWorld
 import rs09.tools.END_DIALOGUE
 import java.util.*
 
 @Initializable
-class FunCommandSet : CommandSet(Command.Privilege.ADMIN) {
+class FunCommandSet : CommandSet(Privilege.ADMIN) {
 
     var npcs: List<NPC> = ArrayList()
 
@@ -46,7 +47,7 @@ class FunCommandSet : CommandSet(Command.Privilege.ADMIN) {
         /**
          * Transform a player's appearance into that of an NPC.
          */
-        define("pnpc", Command.Privilege.MODERATOR){ player, args ->
+        define("pnpc", Privilege.MODERATOR){ player, args ->
             if(args.size < 2){
                 reject(player, "Usage: ::pnpc <npcid>")
                 return@define
@@ -120,7 +121,7 @@ class FunCommandSet : CommandSet(Command.Privilege.ADMIN) {
         /**
          * Opens up the makeover interface
          */
-        define("makeover", Command.Privilege.MODERATOR){ player, _ ->
+        define("makeover", Privilege.MODERATOR){ player, _ ->
             CharacterDesign.open(player)
         }
 

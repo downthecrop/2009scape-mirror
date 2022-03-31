@@ -1,5 +1,6 @@
 package rs09.game.content.activity.fishingtrawler
 
+import api.LogoutListener
 import core.game.component.Component
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
@@ -36,12 +37,15 @@ private const val HOLE_NORTH_Y = 26
 private const val HOLE_SOUTH_Y = 23
 private const val LEAKING_ID = 2167
 private const val PATCHED_ID = 2168
-class FishingTrawlerSession(var region: DynamicRegion, val activity: FishingTrawlerActivity) {
+
+class FishingTrawlerSession(val activity: FishingTrawlerActivity? = null) : LogoutListener {
+    constructor(region: DynamicRegion, activity: FishingTrawlerActivity) : this(activity) {this.region = region; this.base = region.baseLocation}
     var players: ArrayList<Player> = ArrayList()
     var netRipped = false
     var fishAmount = 0
     var timeLeft = secondsToTicks(600)
-    var base = region.baseLocation
+    lateinit var region: DynamicRegion
+    lateinit var base: Location
     var isActive = false
     var boatSank = false
     var hole_locations = ArrayList<Location>()
@@ -71,7 +75,6 @@ class FishingTrawlerSession(var region: DynamicRegion, val activity: FishingTraw
             updateOverlay(player)
             player.properties.teleportLocation = base.transform(36,24,0)
             player.setAttribute("ft-session",this)
-            player.logoutPlugins.add(TrawlerLogoutPlugin())
             player.stateManager.set(EntityState.TELEBLOCK,timeLeft)
         }
     }
@@ -137,7 +140,6 @@ class FishingTrawlerSession(var region: DynamicRegion, val activity: FishingTraw
                 for(player in session.players){
                     player.interfaceManager.closeOverlay()
                     player.properties.teleportLocation = Location.create(2666, 3162, 0)
-                    player.logoutPlugins.clear()
                     player.incrementAttribute("/save:$STATS_BASE:$FISHING_TRAWLER_GAMES_WON")
                 }
             }
@@ -267,19 +269,10 @@ class FishingTrawlerSession(var region: DynamicRegion, val activity: FishingTraw
     fun updateOverlay(player: Player){
         FishingTrawlerOverlay.sendUpdate(player,((waterAmount / 500.0) * 100).toInt(),netRipped,fishAmount,TimeUnit.SECONDS.toMinutes(ticksToSeconds(timeLeft).toLong()).toInt() + 1)
     }
-}
 
-class TrawlerLogoutPlugin : Plugin<Player>{
-    override fun newInstance(arg: Player?): Plugin<Player> {
-        arg?.location = Location.create(2667, 3161, 0)
-        val session: FishingTrawlerSession? = arg?.getAttribute("ft-session",null)
-        session ?: return this
-        session.players.remove(arg)
-        return this
+    override fun logout(player: Player) {
+        val session = player.getAttribute<FishingTrawlerSession?>("ft-session",null) ?: return
+        player.location = Location.create(2667, 3161, 0)
+        session.players.remove(player)
     }
-
-    override fun fireEvent(identifier: String?, vararg args: Any?): Any {
-        return Unit
-    }
-
 }

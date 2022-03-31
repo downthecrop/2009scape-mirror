@@ -1,5 +1,6 @@
 package rs09.game.content.activity.allfiredup
 
+import api.LogoutListener
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.system.task.Pulse
@@ -12,7 +13,7 @@ import rs09.tools.stringtools.colorize
  * Handles keeping track of lit beacons and their burn time remaining
  * @author Ceikry
  */
-class AFUSession(val player: Player) {
+class AFUSession(val player: Player? = null) : LogoutListener {
     private val beaconTimers = Array(14){i -> BeaconTimer(0,AFUBeacon.values()[i])}
     private val logInventories = Array(14){Item(0,0)}
     private val beaconWatched = Array(14){false}
@@ -22,7 +23,7 @@ class AFUSession(val player: Player) {
         isActive = true
         GameWorld.Pulser.submit(object: Pulse(){
             override fun pulse(): Boolean {
-                player.setAttribute("afu-pulse",this)
+                player!!.setAttribute("afu-pulse",this)
                 beaconTimers.forEach {timer ->
                     timer.ticks--
                     if(timer.ticks == 300) timer.beacon.diminish(player).also {
@@ -40,8 +41,7 @@ class AFUSession(val player: Player) {
                 return !isActive
             }
         })
-        player.setAttribute("afu-session",this)
-        player.logoutPlugins.add(AFULogoutPlugin())
+        player!!.setAttribute("afu-session",this)
     }
 
     fun getLitBeacons(): Int{
@@ -111,20 +111,12 @@ class AFUSession(val player: Player) {
         }
     }
 
-    internal class BeaconTimer(var ticks: Int, val beacon: AFUBeacon)
-
-    class AFULogoutPlugin: Plugin<Player> {
-        override fun newInstance(arg: Player?): Plugin<Player> {
-            arg ?: return this
-            AFUBeacon.resetAllBeacons(arg)
-            val session: AFUSession? = arg.getAttribute("afu-session",null)
-            session?.end()
-            arg.removeAttribute("afu-session")
-            return this
-        }
-
-        override fun fireEvent(identifier: String?, vararg args: Any?): Any {
-            return Unit
-        }
+    override fun logout(player: Player) {
+        AFUBeacon.resetAllBeacons(player)
+        val session: AFUSession? = player.getAttribute("afu-session",null)
+        session?.end()
+        player.removeAttribute("afu-session")
     }
+
+    internal class BeaconTimer(var ticks: Int, val beacon: AFUBeacon)
 }

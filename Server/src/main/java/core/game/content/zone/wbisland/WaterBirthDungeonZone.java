@@ -30,7 +30,7 @@ import rs09.game.world.repository.Repository;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the waterbirth dungeon zone.
@@ -49,10 +49,10 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 	 */
 	public WaterBirthDungeonZone() {
 		super("Water birth dungeon", true, ZoneRestriction.RANDOM_EVENTS);
-		PluginManager.definePlugin(new DagannothKingNPC());
-		PluginManager.definePlugin(new DoorSupportNPC());
-		PluginManager.definePlugin(new DungeonOptionHandler());
-		PluginManager.definePlugin(new SpinolypNPC());
+		ClassScanner.definePlugin(new DagannothKingNPC());
+		ClassScanner.definePlugin(new DoorSupportNPC());
+		ClassScanner.definePlugin(new DungeonOptionHandler());
+		ClassScanner.definePlugin(new SpinolypNPC());
 	}
 
 	@Override

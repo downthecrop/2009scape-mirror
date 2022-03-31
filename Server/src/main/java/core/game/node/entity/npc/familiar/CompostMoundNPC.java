@@ -21,7 +21,7 @@ import core.tools.RandomFunction;
 import org.rs09.consts.Items;
 import rs09.game.node.entity.skill.farming.CompostBin;
 import rs09.game.node.entity.skill.farming.CompostBins;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the Compost Mound familiar.
@@ -59,9 +59,9 @@ public class CompostMoundNPC extends Forager {
 
 	@Override
 	public void configureFamiliar() {
-		PluginManager.definePlugin(new CompostBucketPlugin());
+		ClassScanner.definePlugin(new CompostBucketPlugin());
 		if (!DialogueInterpreter.contains(getIds()[1])) {
-			PluginManager.definePlugin(new CompostMoundDialogue());
+			ClassScanner.definePlugin(new CompostMoundDialogue());
 		}
 	}
 

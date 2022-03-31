@@ -19,7 +19,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.game.node.entity.combat.CombatPulse;
 import rs09.game.world.GameWorld;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 import java.util.concurrent.TimeUnit;
 
@@ -37,7 +37,7 @@ public final class DragonfireShieldPlugin extends OptionHandler {
 		ItemDefinition.forId(11283).getHandlers().put("option:operate", this);
 		ItemDefinition.forId(11284).getHandlers().put("option:inspect", this);
 		ItemDefinition.forId(11284).getHandlers().put("option:operate", this);
-		PluginManager.definePlugin(new DFSItemPlugin());
+		ClassScanner.definePlugin(new DFSItemPlugin());
 		return this;
 	}
 

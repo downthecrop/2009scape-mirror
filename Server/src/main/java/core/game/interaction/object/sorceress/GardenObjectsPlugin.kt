@@ -1,25 +1,18 @@
 package core.game.interaction.`object`.sorceress
 
-import rs09.plugin.PluginManager.definePlugin
-import rs09.game.world.GameWorld.Pulser
 import core.plugin.Initializable
-import core.game.interaction.OptionHandler
 import core.plugin.Plugin
-import core.cache.def.impl.SceneryDefinition
 import core.game.component.Component
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler
-import core.game.node.Node
 import core.game.node.scenery.Scenery
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
-import core.game.system.task.LocationLogoutTask
-import core.game.system.task.LogoutTask
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
@@ -30,7 +23,7 @@ import core.net.packet.out.MinimapState
 import core.tools.RandomFunction
 import rs09.game.interaction.InteractionListener
 import rs09.game.world.GameWorld
-import rs09.plugin.PluginManager
+import rs09.plugin.ClassScanner
 
 
 class GardenObjectsPlugin : InteractionListener() {
@@ -44,13 +37,13 @@ class GardenObjectsPlugin : InteractionListener() {
     override fun defineListeners() {
         SqirkJuicePlugin().newInstance(null)
         SqirkMakingDialogue().init()
-        PluginManager.definePlugin(SorceressGardenObject())
+        ClassScanner.definePlugin(SorceressGardenObject())
 
         on(SQIRK_TREES, SCENERY, "pick-fruit"){player, node ->
             val def = SeasonDefinitions.forTreeId(node.id)
             if (def != null) {
                 player.lock()
-                player.addExtension(LogoutTask::class.java, LocationLogoutTask(99, def.respawn))
+                player.logoutListeners["garden"] = {p -> p.location = def.respawn}
                 player.animate(PICK_FRUIT)
                 player.skills.addExperience(Skills.THIEVING, def.exp, true)
                 player.skills.addExperience(Skills.FARMING, def.farmExp, true)
@@ -63,7 +56,7 @@ class GardenObjectsPlugin : InteractionListener() {
                             PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 2))
                         } else if (counter == 3) player.properties.teleportLocation = def.respawn else if (counter == 4) {
                             player.unlock()
-                            player.removeExtension(LogoutTask::class.java)
+                            player.logoutListeners.remove("garden")
                             player.packetDispatch.sendMessage("An elemental force emanating from the garden teleports you away.")
                             PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 0))
                             player.interfaceManager.close()
@@ -137,7 +130,7 @@ class GardenObjectsPlugin : InteractionListener() {
      */
     private fun handleElementalGarden(player: Player, `object`: Scenery, herbDef: HerbDefinition) {
         player.lock()
-        player.addExtension(LogoutTask::class.java, LocationLogoutTask(99, herbDef.respawn))
+        player.logoutListeners["garden"] = {p -> p.location = herbDef.respawn}
         player.animate(ANIMATION)
         player.skills.addExperience(Skills.FARMING, herbDef.exp, true)
         GameWorld.Pulser.submit(object : Pulse(2, player) {
@@ -156,7 +149,7 @@ class GardenObjectsPlugin : InteractionListener() {
                     PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 0))
                     player.interfaceManager.close()
                     player.interfaceManager.closeOverlay()
-                    player.removeExtension(LogoutTask::class.java)
+                    player.logoutListeners.remove("garden")
                     player.unlock()
                     return true
                 }

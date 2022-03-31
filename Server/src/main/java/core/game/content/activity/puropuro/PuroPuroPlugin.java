@@ -32,7 +32,7 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.MinimapStateContext;
 import core.net.packet.out.MinimapState;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
 /**
@@ -74,11 +74,11 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		PULSE.stop();
 		ZoneBuilder.configure(this);
-		PluginManager.definePlugin(new FairyAerykaDialogue());
-		PluginManager.definePlugin(new WanderingImplingDialogue());
-		PluginManager.definePlugin(new ElnockInquisitorDialogue());
-		PluginManager.definePlugin(new PuroOptionHandler());
-		PluginManager.definePlugin(new ImpDefenderNPC());
+		ClassScanner.definePlugin(new FairyAerykaDialogue());
+		ClassScanner.definePlugin(new WanderingImplingDialogue());
+		ClassScanner.definePlugin(new ElnockInquisitorDialogue());
+		ClassScanner.definePlugin(new PuroOptionHandler());
+		ClassScanner.definePlugin(new ImpDefenderNPC());
 		return this;
 	}
 

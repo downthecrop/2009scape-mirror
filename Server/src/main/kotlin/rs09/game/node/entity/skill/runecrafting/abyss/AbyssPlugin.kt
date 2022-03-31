@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.runecrafting.abyss
 
 import api.*
-import rs09.plugin.PluginManager.definePlugin
+import rs09.plugin.ClassScanner.definePlugin
 import rs09.tools.stringtools.colorize
 import rs09.game.system.SystemLogger.logInfo
 import core.game.node.scenery.Scenery

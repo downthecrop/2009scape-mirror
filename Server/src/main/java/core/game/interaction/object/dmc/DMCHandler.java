@@ -1,5 +1,6 @@
 package core.game.interaction.object.dmc;
 
+import api.LogoutListener;
 import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.impl.Projectile;
@@ -10,7 +11,6 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
-import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
@@ -19,6 +19,7 @@ import core.game.world.map.zone.ZoneRestriction;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import org.jetbrains.annotations.NotNull;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.world.GameWorld;
 
@@ -26,7 +27,7 @@ import rs09.game.world.GameWorld;
  * Handles a player's Dwarf Multi-cannon.
  * @author Emperor
  */
-public final class DMCHandler {
+public final class DMCHandler implements LogoutListener {
 
 	/**
 	 * The player.
@@ -44,11 +45,6 @@ public final class DMCHandler {
 	private int cannonballs;
 
 	/**
-	 * The logout plugin.
-	 */
-	private Plugin<Player> logoutPlugin;
-
-	/**
 	 * The firing pulse.
 	 */
 	private Pulse firingPulse;
@@ -62,6 +58,10 @@ public final class DMCHandler {
 	 * The decaying pulse.
 	 */
 	private Pulse decayPulse;
+
+	public DMCHandler() {
+		this.player = null;
+	}
 
 	/**
 	 * Constructs a new {@code DMCHandler} {@code Object}
@@ -219,19 +219,6 @@ public final class DMCHandler {
 					}
 					return true;
 				}
-				player.addExtension(LogoutTask.class, new LogoutTask() {
-					int amount = count + 1;
-
-					@Override
-					public void run(Player player) {
-						for (int i = 0; i < amount; i++) {
-							player.getInventory().add(new Item(6 + (i * 2)));
-						}
-						if (object != null) {
-							SceneryBuilder.remove(object);
-						}
-					}
-				});
 				switch (count) {
 				case 0:
 					object = SceneryBuilder.add(new Scenery(7, spawn));
@@ -265,19 +252,15 @@ public final class DMCHandler {
 	 */
 	public void configure(Scenery cannon) {
 		this.cannon = cannon;
-		player.removeExtension(LogoutTask.class);
-		player.getLogoutPlugins().add(logoutPlugin = new Plugin<Player>() {
-			@Override
-			public Plugin<Player> newInstance(Player arg) throws Throwable {
-				clear(false);
-				return this;
-			}
+	}
 
-			@Override
-			public Object fireEvent(String identifier, Object... args) {
-				return null;
-			}
-		});
+	@Override
+	public void logout(@NotNull Player player) {
+		if(player.getAttribute("dmc") != null)
+		{
+			DMCHandler handler = player.getAttribute("dmc");
+			handler.clear(false);
+		}
 	}
 
 	/**
@@ -290,7 +273,6 @@ public final class DMCHandler {
 		}
 		SceneryBuilder.remove(cannon);
 		player.removeAttribute("dmc");
-		player.getLogoutPlugins().remove(logoutPlugin);
 		if (!pickup) {
 			player.getSavedData().getActivityData().setLostCannon(true);
 			return;

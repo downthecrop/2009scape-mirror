@@ -14,7 +14,7 @@ import core.game.node.scenery.Scenery;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the option handler used for smithing.
@@ -46,7 +46,7 @@ public final class SmithingPlugin extends UseWithHandler {
 		addHandler(26817, OBJECT_TYPE, this);
 		addHandler(37622, OBJECT_TYPE, this);
 		addHandler(42027, OBJECT_TYPE, this);
-		PluginManager.definePlugin(new OptionHandler() {
+		ClassScanner.definePlugin(new OptionHandler() {
 
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {

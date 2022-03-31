@@ -9,7 +9,7 @@ import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
 /**
@@ -67,7 +67,7 @@ public class RomilyWeaklaxDialogue extends DialoguePlugin {
     @Override
 	public void init() {
     	super.init();
-    	PluginManager.definePlugin(new RomilyWildPieHandler());
+    	ClassScanner.definePlugin(new RomilyWildPieHandler());
 	}
 
     @Override

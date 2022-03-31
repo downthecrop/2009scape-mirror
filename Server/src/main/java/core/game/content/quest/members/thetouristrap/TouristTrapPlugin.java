@@ -32,7 +32,7 @@ import core.game.world.map.RegionManager;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
 import core.game.content.quest.members.thetouristrap.TouristTrapPlugin.AnnaCartHandler.AnnaCartCutscene;
@@ -117,16 +117,16 @@ public final class TouristTrapPlugin extends OptionHandler {
         TouristTrap.TECHNICAL_PLANS.getDefinition().getHandlers().put("option:read", this);
         TouristTrap.ANNA_BARREL.getDefinition().getHandlers().put("option:look", this);
         TouristTrap.ANNA_BARREL.getDefinition().getHandlers().put("option:drop", this);
-        PluginManager.definePlugin(new BedabinKeyHandler());
-        PluginManager.definePlugin(new BedabinAnvilHandler());
-        PluginManager.definePlugin(new BarrelDialogue());
-        PluginManager.definePlugin(new WinchDialogue());
-        PluginManager.definePlugin(new MineCartDialogue());
-        PluginManager.definePlugin(new AnnaCartHandler());
-        PluginManager.definePlugin(new AnnaCartCutscene());
-        PluginManager.definePlugin(new AnnaWinchHandler());
-        PluginManager.definePlugin(new WinchCutscene());
-        PluginManager.definePlugin(new CartDialogue());
+        ClassScanner.definePlugin(new BedabinKeyHandler());
+        ClassScanner.definePlugin(new BedabinAnvilHandler());
+        ClassScanner.definePlugin(new BarrelDialogue());
+        ClassScanner.definePlugin(new WinchDialogue());
+        ClassScanner.definePlugin(new MineCartDialogue());
+        ClassScanner.definePlugin(new AnnaCartHandler());
+        ClassScanner.definePlugin(new AnnaCartCutscene());
+        ClassScanner.definePlugin(new AnnaWinchHandler());
+        ClassScanner.definePlugin(new WinchCutscene());
+        ClassScanner.definePlugin(new CartDialogue());
         return this;
     }
 
@@ -963,7 +963,7 @@ public final class TouristTrapPlugin extends OptionHandler {
         @Override
         public void init() {
             super.init();
-            PluginManager.definePlugin(new MiningCartCutscene());
+            ClassScanner.definePlugin(new MiningCartCutscene());
         }
 
         @Override
@@ -1386,8 +1386,8 @@ public final class TouristTrapPlugin extends OptionHandler {
         @Override
         public Plugin<Object> newInstance(Object arg) {
             addHandler(2672, OBJECT_TYPE, this);
-            PluginManager.definePlugin(new PrototypeDartHandler());
-            PluginManager.definePlugin(new BedabinAnvilDialogue());
+            ClassScanner.definePlugin(new PrototypeDartHandler());
+            ClassScanner.definePlugin(new BedabinAnvilDialogue());
             return this;
         }
 
@@ -1459,7 +1459,7 @@ public final class TouristTrapPlugin extends OptionHandler {
             @Override
             public Plugin<Object> newInstance(Object arg) {
                 addHandler(TouristTrap.PROTOTYPE_DART_TIP.getId(), ITEM_TYPE, this);
-                PluginManager.definePlugin(new ProtoTypeDialogue());
+                ClassScanner.definePlugin(new ProtoTypeDialogue());
                 return this;
             }
 

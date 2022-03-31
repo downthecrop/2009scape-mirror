@@ -1,11 +1,8 @@
 package rs09.game.world
 
-import api.LoginListener
+import api.*
 import core.cache.Cache
 import core.cache.def.impl.SceneryDefinition
-import core.game.ge.GrandExchangeDatabase
-import core.game.node.entity.npc.drop.RareDropTable
-import core.game.node.entity.npc.drop.CELEMinorTable
 import core.game.node.entity.player.Player
 import core.game.system.SystemManager
 import core.game.system.SystemState
@@ -22,13 +19,13 @@ import rs09.game.node.entity.state.newsys.StateRepository
 import rs09.game.system.SystemLogger
 import rs09.game.system.SystemLogger.logInfo
 import rs09.game.system.config.ConfigParser
-import rs09.game.world.callback.CallbackHub
 import rs09.game.world.repository.Repository
-import rs09.plugin.PluginManager
+import rs09.plugin.ClassScanner
 import rs09.worker.MajorUpdateWorker
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.function.Consumer
+import kotlin.collections.ArrayList
 
 /**
  * Represents the game world.
@@ -47,6 +44,30 @@ object GameWorld {
      */
     @JvmStatic
     val loginListeners = ArrayList<LoginListener>()
+
+    /**
+     * Logout listeners
+     */
+    @JvmStatic
+    val logoutListeners = ArrayList<LogoutListener>()
+
+    /**
+     * Tick listeners
+     */
+    @JvmStatic
+    val tickListeners = ArrayList<TickListener>()
+
+    /**
+     * Startup Listeners
+     */
+    @JvmStatic
+    val startupListeners = ArrayList<StartupListener>()
+
+    /**
+     * Shutdown Listeners
+     */
+    @JvmStatic
+    val shutdownListeners = ArrayList<ShutdownListener>()
 
     @JvmStatic
     val STARTUP_PLUGINS: List<StartupPlugin> = ArrayList()
@@ -135,32 +156,19 @@ object GameWorld {
      */
     @Throws(Throwable::class)
     fun prompt(run: Boolean, directory: String?){
-        SystemLogger.logInfo("Prompting ${settings?.name} Game World...")
+        logInfo("Prompting ${settings?.name} Game World...")
         Cache.init(ServerConstants.CACHE_PATH)
         databaseManager = DatabaseManager(ServerConstants.DATABASE)
         databaseManager!!.connect()
-        GrandExchangeDatabase.init()
         configParser.prePlugin()
-        PluginManager.init()
+        ClassScanner.scanAndLoad()
         configParser.postPlugin()
-        RareDropTable.init()
-        logInfo("Initialized Rare Drop Table from " + ServerConstants.RDT_DATA_PATH)
-        CELEMinorTable.init()
-        logInfo("Initialized Chaos Elemental (Minor) Drop Table from " + ServerConstants.CELEDT_DATA_PATH)        
-        if (settings!!.enable_bots) {
-            ImmerseWorld.init()
-        }
-        CallbackHub.call()
-        STARTUP_PLUGINS.forEach(Consumer { plugin: StartupPlugin? ->
-            plugin?.run()
-        })
+        startupListeners.forEach { it.startup() }
         if (run) {
             SystemManager.flag(if (settings?.isDevMode == true) SystemState.PRIVATE else SystemState.ACTIVE)
         }
         SceneryDefinition.getDefinitions().values.forEach(Consumer { obj: SceneryDefinition -> obj.examine })
         System.gc()
-        PlayerScripts.init()
-        StateRepository.init()
         SystemLogger.initTradeLogger()
     }
 

@@ -8,7 +8,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.item.Item;
 import core.game.node.entity.player.Player;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the jiminua dialogue plugin.
@@ -38,7 +38,7 @@ public final class JiminuaDialogue extends DialoguePlugin {
 
     @Override
     public DialoguePlugin newInstance(Player player) {
-        PluginManager.definePlugin(new JiminuaUnnoteHandler());
+        ClassScanner.definePlugin(new JiminuaUnnoteHandler());
         return new JiminuaDialogue(player);
     }
 

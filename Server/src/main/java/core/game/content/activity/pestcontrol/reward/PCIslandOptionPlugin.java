@@ -6,7 +6,7 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the option plugin used to handle the pc island related nodes.
@@ -20,7 +20,7 @@ public final class PCIslandOptionPlugin extends OptionHandler {
 		for (int id : new int[] { 3786, 3788, 3789, 5956 }) {
 			NPCDefinition.forId(id).getHandlers().put("option:exchange", this);
 		}
-		PluginManager.definePlugin(new PCRewardInterface());
+		ClassScanner.definePlugin(new PCRewardInterface());
 		return this;
 	}
 

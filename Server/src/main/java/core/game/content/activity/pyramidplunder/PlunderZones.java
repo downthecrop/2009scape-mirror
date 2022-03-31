@@ -11,8 +11,6 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
-import core.game.system.task.LocationLogoutTask;
-import core.game.system.task.LogoutTask;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
@@ -21,6 +19,7 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import kotlin.Unit;
 import rs09.game.Varp;
 import rs09.game.content.activity.pyramidplunder.PlunderSession;
 
@@ -112,10 +111,19 @@ public class PlunderZones implements Plugin<Object> {
                 if(session != null){
                     session.resetVars();
                 }
-                e.asPlayer().addExtension(LogoutTask.class, new LocationLogoutTask(12, Location.create(3288, 2801, 0)));
+                e.asPlayer().logoutListeners.put("plunder-logout", player -> {
+                    player.setLocation(Location.create(3288, 2801, 0));
+                    return Unit.INSTANCE;
+                });
                 updateRoomVarp(e.asPlayer());
             }
             return true;
+        }
+
+        @Override
+        public boolean leave(Entity e, boolean logout) {
+            e.asPlayer().logoutListeners.remove("plunder-logout");
+            return super.leave(e, logout);
         }
 
         public void updateRoomVarp(Player player){

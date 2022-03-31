@@ -9,6 +9,7 @@ import org.rs09.consts.NPCs;
 import rs09.game.content.global.GlobalKillCounter;
 import rs09.game.interaction.InterfaceListener
 import rs09.game.system.command.Command
+import rs09.game.system.command.Privilege
 import rs09.game.system.command.sets.CommandSet
 import rs09.game.world.repository.Repository
 
@@ -167,7 +168,7 @@ fun prepareInterface(player: Player,other: Player, page: Int){
 data class StatsPageInfo(val other: Player, val page: Int) {}
 
 @Initializable
-class StatsCommandSet : CommandSet(Command.Privilege.STANDARD) {
+class StatsCommandSet : CommandSet(Privilege.STANDARD) {
     override fun defineCommands() {
         define("stats"){player,args ->
             if(args.size == 1){

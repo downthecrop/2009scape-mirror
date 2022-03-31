@@ -1,6 +1,5 @@
 package core.game.content.global.action;
 
-import api.ContentAPIKt;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
@@ -8,13 +7,12 @@ import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.scenery.Constructed;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
-import core.game.system.task.LocationLogoutTask;
-import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.path.Pathfinder;
+import kotlin.Unit;
 import rs09.game.system.config.DoorConfigLoader;
 import rs09.game.world.GameWorld;
 
@@ -98,9 +96,12 @@ public final class DoorActionHandler {
         final Scenery second = (object.getId() == 3) ? null : getSecondDoor(object, entity);
         entity.lock(4);
         final Location loc = entity.getLocation();
-        entity.addExtension(LogoutTask.class, new LocationLogoutTask(4, loc));
         if (entity instanceof Player) {
             ((Player) entity).getAudioManager().send(new Audio(3419));
+            entity.asPlayer().logoutListeners.put("autowalk", player -> {
+                player.setLocation(loc);
+                return Unit.INSTANCE;
+            });
         }
 		GameWorld.getPulser().submit(new Pulse(1) {
             boolean opened = false;
@@ -134,6 +135,8 @@ public final class DoorActionHandler {
                     if (object.getId() == 2406 && player.getLocation().withinDistance(Location.create(3202,3169,0))) {
                         player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 1, 6);
                     }
+
+                    entity.asPlayer().logoutListeners.remove("autowalk");
                 }
 
                 // Reset door to inactive
@@ -379,7 +382,13 @@ public final class DoorActionHandler {
         }
         entity.lock(4);
         final Location loc = entity.getLocation();
-        entity.addExtension(LogoutTask.class, new LocationLogoutTask(4, loc));
+        if(entity instanceof Player)
+        {
+            entity.asPlayer().logoutListeners.put("autowalk", player -> {
+                player.setLocation(loc);
+                return Unit.INSTANCE;
+            });
+        }
         object.setCharge(IN_USE_CHARGE);
         second.setCharge(IN_USE_CHARGE);
 		GameWorld.getPulser().submit(new Pulse(1) {
@@ -394,6 +403,10 @@ public final class DoorActionHandler {
                     entity.getWalkingQueue().addPath(l.getX(), l.getY());
                     opened = true;
                     return false;
+                }
+                if(entity instanceof Player)
+                {
+                    entity.asPlayer().logoutListeners.remove("autowalk");
                 }
                 object.setCharge(1000);
                 if (second != null) {

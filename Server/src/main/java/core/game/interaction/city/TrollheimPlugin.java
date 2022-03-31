@@ -33,7 +33,7 @@ import core.net.packet.context.CameraContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the plugin used to handle all trollheim node interations.
@@ -156,12 +156,12 @@ public final class TrollheimPlugin extends OptionHandler {
 																						// ladder
 		SceneryDefinition.forId(18833).getHandlers().put("option:climb-down", this);// stronghold
 																							// ladder
-		PluginManager.definePlugin(new SabaDialogue());
-		PluginManager.definePlugin(new WoundedSoldier());
-		PluginManager.definePlugin(new WarningZone());
+		ClassScanner.definePlugin(new SabaDialogue());
+		ClassScanner.definePlugin(new WoundedSoldier());
+		ClassScanner.definePlugin(new WarningZone());
 		ActivityManager.register(new WarningCutscene());
-		PluginManager.definePlugin(new TenzingDialogue());
-		PluginManager.definePlugin(new TrollNPC());
+		ClassScanner.definePlugin(new TenzingDialogue());
+		ClassScanner.definePlugin(new TrollNPC());
 		return this;
 	}
 

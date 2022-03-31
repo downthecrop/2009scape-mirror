@@ -8,7 +8,7 @@ import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import org.json.simple.JSONObject
 import rs09.ServerStore
-import rs09.ServerStore.getInt
+import rs09.ServerStore.Companion.getInt
 import rs09.game.system.SystemLogger
 import java.util.concurrent.TimeUnit
 

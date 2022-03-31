@@ -15,7 +15,7 @@ import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.game.node.entity.skill.construction.Hotspot;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * PortalChamberPlugin
@@ -112,7 +112,7 @@ public class PortalChamberPlugin extends OptionHandler {
 		for (int i = 13615; i <= 13635; i++) {
 			SceneryDefinition.forId(i).getHandlers().put("option:enter", this);
 		}
-		PluginManager.definePlugin(new DirectPortalDialogue());
+		ClassScanner.definePlugin(new DirectPortalDialogue());
 		return this;
 	}
 

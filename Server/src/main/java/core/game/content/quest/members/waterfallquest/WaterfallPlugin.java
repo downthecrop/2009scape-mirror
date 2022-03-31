@@ -21,13 +21,12 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
-import core.game.system.task.LocationLogoutTask;
-import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import kotlin.Unit;
+import rs09.plugin.ClassScanner;
 
 /**
  * Master plugin file for the Waterfall quest.
@@ -101,7 +100,7 @@ public final class WaterfallPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new WaterfallUseWithHandler());
+		ClassScanner.definePlugin(new WaterfallUseWithHandler());
 		NPCDefinition.forId(305).getHandlers().put("option:talk-to", this);
 		SceneryDefinition.forId(1987).getHandlers().put("option:board", this);
 		SceneryDefinition.forId(2020).getHandlers().put("option:climb", this);
@@ -276,7 +275,10 @@ public final class WaterfallPlugin extends OptionHandler {
 			break;
 		case 10283:
 		case 1996:
-			player.addExtension(LogoutTask.class, new LocationLogoutTask(10, player.getLocation()));
+			player.logoutListeners.put("waterfall", player1 -> {
+				player1.setLocation(player.getLocation().transform(0,0,0));
+				return Unit.INSTANCE;
+			});
 			player.getPacketDispatch().sendGraphic(68);
 			player.lock(6);
 			AgilityHandler.walk(player, -1, player.getLocation(), new Location(2512, 3471, 0), Animation.create(164), 0, null);
@@ -287,6 +289,7 @@ public final class WaterfallPlugin extends OptionHandler {
 				public boolean pulse() {
 					player.getPacketDispatch().sendMessage("You are washed downstream but feel lucky to be alive.");
 					player.teleport(new Location(2527, 3413));
+					player.logoutListeners.remove("waterfall");
 					return true;
 				}
 			});
@@ -431,7 +434,10 @@ public final class WaterfallPlugin extends OptionHandler {
 				if (SWIMMERS.size() == 0 || ROPES.size() == 0) {
 					handleObjects(true, player);
 				}
-				player.addExtension(LogoutTask.class, new LocationLogoutTask(13, player.getLocation()));
+				player.logoutListeners.put("waterfall", player1 -> {
+					player1.setLocation(player.getLocation().transform(0,0,0));
+					return Unit.INSTANCE;
+				});
 				player.getPulseManager().run(new Pulse(2, player) {
 					@Override
 					public boolean pulse() {
@@ -443,6 +449,7 @@ public final class WaterfallPlugin extends OptionHandler {
 								player.teleport(new Location(2513, 3468));
 								player.faceLocation(new Location(2512, 3468, 0));
 								player.animate(Animation.create(780));
+								player.logoutListeners.remove("waterfall");
 								return true;
 							}
 

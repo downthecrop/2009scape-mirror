@@ -15,7 +15,7 @@ import core.plugin.PluginManifest;
 import core.plugin.PluginType;
 import kotlin.Unit;
 import rs09.game.world.repository.Repository;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the house portal options.
@@ -32,7 +32,7 @@ public final class PortalOptionPlugin extends OptionHandler {
 		}
 		SceneryDefinition.forId(13405).getHandlers().put("option:lock", this);
 		SceneryDefinition.forId(13405).getHandlers().put("option:enter", this);
-		PluginManager.definePlugin(new PortalDialogue());
+		ClassScanner.definePlugin(new PortalDialogue());
 		return this;
 	}
 
