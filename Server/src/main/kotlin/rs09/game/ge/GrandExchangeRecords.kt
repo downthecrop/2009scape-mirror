@@ -41,15 +41,59 @@ import java.util.*
  * @author Angle
  */
 
-class GrandExchangeRecords(private val player: Player) {
+class GrandExchangeRecords(private val player: Player? = null) : PersistPlayer, LoginListener {
     var history = arrayOfNulls<GrandExchangeOffer>(5)
     val offerRecords = arrayOfNulls<OfferRecord>(6)
+
+    override fun login(player: Player) {
+        val instance = GrandExchangeRecords(player)
+        instance.init()
+        player.setAttribute("ge-records", instance)
+    }
+
+    override fun parsePlayer(player: Player, data: JSONObject) {
+        /**
+         * Parse history from JSON
+         */
+        val historyRaw = data["ge-history"]
+        if(historyRaw != null){
+            val history = historyRaw as JSONArray
+            for (i in history.indices) {
+                val offer = history[i] as JSONObject
+                val o = GrandExchangeOffer()
+                o.itemID = offer["itemId"].toString().toInt()
+                o.sell = offer["isSell"] as Boolean
+                o.totalCoinExchange = (offer["totalCoinExchange"].toString().toInt())
+                o.completedAmount = (offer["completedAmount"].toString().toInt())
+                getInstance(player).history[i] = o
+            }
+        }
+    }
+
+    override fun savePlayer(player: Player, save: JSONObject) {
+        /**
+         * Save history to JSON
+         */
+        val history = JSONArray()
+        getInstance(player).history.map {
+            if(it != null){
+                val historyEntry = JSONObject()
+                historyEntry["isSell"] = it.sell
+                historyEntry["itemId"] = it.itemID.toString()
+                historyEntry["totalCoinExchange"] = it.totalCoinExchange.toString()
+                historyEntry["completedAmount"] = it.completedAmount.toString()
+                history.add(historyEntry)
+                SystemLogger.logInfo("Adding history entry for ${it.itemID}")
+            }
+        }
+        save["ge-history"] = history
+    }
 
     /**
      * Opens the collection box.
      */
     fun openCollectionBox() {
-        if (!player.bankPinManager.isUnlocked) {
+        if (!player!!.bankPinManager.isUnlocked) {
             player.bankPinManager.openType(3)
             return
         }
@@ -143,7 +187,7 @@ class GrandExchangeRecords(private val player: Player) {
          */
         val conn = GEDB.connect()
         val stmt = conn.createStatement()
-        val offer_records = stmt.executeQuery("SELECT * from player_offers where player_uid = ${player.details.uid} AND offer_state < 6")
+        val offer_records = stmt.executeQuery("SELECT * from player_offers where player_uid = ${player!!.details.uid} AND offer_state < 6")
 
         val needsIndex = ArrayDeque<GrandExchangeOffer>()
 
@@ -175,23 +219,6 @@ class GrandExchangeRecords(private val player: Player) {
         }
 
         visualizeRecords()
-
-        /**
-         * Parse history from JSON
-         */
-        val historyRaw = geData["history"]
-        if(historyRaw != null){
-            val history = historyRaw as JSONArray
-            for (i in history.indices) {
-                val offer = history[i] as JSONObject
-                var o = GrandExchangeOffer()
-                o.itemID = offer["itemId"].toString().toInt()
-                o.sell = offer["isSell"] as Boolean
-                o.totalCoinExchange = (offer["totalCoinExchange"].toString().toInt())
-                o.completedAmount = (offer["completedAmount"].toString().toInt())
-                history[i] = o
-            }
-        }
     }
 
     /**
@@ -210,7 +237,7 @@ class GrandExchangeRecords(private val player: Player) {
             }
         }
         if (updated) {
-            sendMessage(player, "You have items from the Grand Exchange waiting in your collection box.")
+            sendMessage(player!!, "You have items from the Grand Exchange waiting in your collection box.")
         }
     }
 
@@ -242,4 +269,11 @@ class GrandExchangeRecords(private val player: Player) {
     }
 
     data class OfferRecord(val uid: Long, val slot: Int)
+
+    companion object {
+        @JvmStatic fun getInstance(player: Player? = null): GrandExchangeRecords
+        {
+            return player?.getAttribute("ge-records", GrandExchangeRecords()) ?: GrandExchangeRecords()
+        }
+    }
 }

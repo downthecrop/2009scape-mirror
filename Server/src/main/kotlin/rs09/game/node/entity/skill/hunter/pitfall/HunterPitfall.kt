@@ -12,6 +12,7 @@ import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
+import core.game.node.entity.skill.hunter.HunterManager
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
 import core.game.system.task.Pulse
@@ -176,9 +177,9 @@ class PitfallListeners : InteractionListener() {
                 return@on true
             }
 
-            val maxTraps = player.hunterManager.maximumTraps
+            val maxTraps = HunterManager.getInstance(player).maximumTraps
             if(player.getAttribute("pitfall:count", 0) >= maxTraps) {
-                player.sendMessage("You can't set up more than ${maxTraps} pitfall traps at your hunter level.")
+                player.sendMessage("You can't set up more than $maxTraps pitfall traps at your hunter level.")
                 return@on true
             }
             player.incrementAttribute("pitfall:count", 1)

@@ -2,6 +2,7 @@ package core.game.node.entity.skill.slayer;
 
 import org.json.simple.JSONObject;
 import rs09.ServerStore;
+import rs09.game.node.entity.skill.slayer.SlayerManager;
 import rs09.game.world.GameWorld;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.dialogue.FacialExpression;
@@ -224,7 +225,7 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
                 end();
                 break;
             case -1: // vannaka - has options for achievement diary
-                if (!player.getSlayer().hasStarted()) {
+                if (!SlayerManager.getInstance(player).hasStarted()) {
                     options("Who are you?", "Do you have anything for trade?", "Er...nothing...", "I have a question about my Achievement Diary.");
                     stage = 1;
                 } else {
@@ -244,7 +245,7 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
 						break;
 					}
 				}
-                if (!player.getSlayer().hasStarted()) {
+                if (!SlayerManager.getInstance(player).hasStarted()) {
                     options("Who are you?", "Do you have anything for trade?", "Er...nothing...");
                     stage = 1;
                 } else {
@@ -359,8 +360,8 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
             case 504:
                 if (player.getInventory().freeSlots() != 0) {
                     player.getInventory().add(GEM);
-                    player.getSlayer().generate(master);
-                    interpreter.sendDialogues(master.getNpc(), getExpression(master), "We'll start you off hunting " + player.getSlayer().getTaskName() + "'s, you'll need to", "kill " + player.getSlayer().getAmount() + " of them.");
+                    SlayerManager.getInstance(player).generate(master);
+                    interpreter.sendDialogues(master.getNpc(), getExpression(master), "We'll start you off hunting " + SlayerManager.getInstance(player).getTaskName() + "'s, you'll need to", "kill " + SlayerManager.getInstance(player).getAmount() + " of them.");
                     stage = 510;
                 } else if (player.getInventory().freeSlots() == 0) {
                     player("Sorry, I don't have enough inventory space.");
@@ -491,12 +492,12 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
                     stage = 99;
                     break;
                 }
-                if (!player.getSlayer().hasTask()) {
-                    player.getSlayer().generate(master);
-                    if (player.getSlayer().getTask() == Tasks.JAD) {
+                if (!SlayerManager.getInstance(player).hasTask()) {
+                    SlayerManager.getInstance(player).generate(master);
+                    if (SlayerManager.getInstance(player).getTask() == Tasks.JAD) {
                         interpreter.sendDialogues(master.getNpc(), getExpression(master), "Excellent, you're doing great. Your new task is to", "defeat the almighty TzTok-Jad.");
                     } else {
-                        interpreter.sendDialogues(master.getNpc(), getExpression(master), "Excellent, you're doing great. Your new task is to kill", "" + player.getSlayer().getAmount() + " " + player.getSlayer().getTaskName() + "s.");
+                        interpreter.sendDialogues(master.getNpc(), getExpression(master), "Excellent, you're doing great. Your new task is to kill", "" + SlayerManager.getInstance(player).getAmount() + " " + SlayerManager.getInstance(player).getTaskName() + "s.");
                     }
                     stage = 844;
                     break;
@@ -505,12 +506,12 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
                     interpreter.sendDialogues(master.getNpc(), getExpression(master), "You're still hunting something. But let me check something...");
                     stage = 847;
                 } else {
-                    player.getSlayer().flags.setTaskStreak(0);
-                    player.getSlayer().generate(master);
-                    if (player.getSlayer().getTask() == Tasks.JAD) {
+                    SlayerManager.getInstance(player).flags.setTaskStreak(0);
+                    SlayerManager.getInstance(player).generate(master);
+                    if (SlayerManager.getInstance(player).getTask() == Tasks.JAD) {
                         interpreter.sendDialogues(master.getNpc(), getExpression(master), "Excellent, you're doing great. Your new task is to", "defeat the almighty TzTok-Jad.");
                     } else {
-                        interpreter.sendDialogues(master.getNpc(), getExpression(master), "Excellent, you're doing great. Your new task is to kill", "" + player.getSlayer().getAmount() + " " + player.getSlayer().getTaskName() + "'s.");
+                        interpreter.sendDialogues(master.getNpc(), getExpression(master), "Excellent, you're doing great. Your new task is to kill", "" + SlayerManager.getInstance(player).getAmount() + " " + SlayerManager.getInstance(player).getTaskName() + "'s.");
                     }
                     stage = 844;
                 }
@@ -526,7 +527,7 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
             case 845:
                 switch (buttonId) {
                     case 1:
-                        interpreter.sendDialogues(master.getNpc(), getExpression(master), player.getSlayer().getTask().getTip());
+                        interpreter.sendDialogues(master.getNpc(), getExpression(master), SlayerManager.getInstance(player).getTask().getTip());
                         stage = 860;
                         break;
                     case 2:
@@ -538,7 +539,7 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
                         if(rerolls == 10){
                             stage++;
                         } else {
-                            player.getSlayer().clear();
+                            SlayerManager.getInstance(player).clear();
                             getStoreFile().put(player.getUsername().toLowerCase(), rerolls + 1);
                             stage = 701;
                         }
@@ -566,7 +567,7 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
                 switch(buttonId){
                     case 1:
                         playerl(FacialExpression.FRIENDLY, "Yes, please.");
-                        player.getSlayer().clear();
+                        SlayerManager.getInstance(player).clear();
                         getStoreFile().put(player.getUsername().toLowerCase(), rerolls + 1);
                         stage = 701;
                         break;

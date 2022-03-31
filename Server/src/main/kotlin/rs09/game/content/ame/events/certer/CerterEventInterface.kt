@@ -3,6 +3,7 @@ package rs09.game.content.ame.events.certer
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import org.rs09.consts.Items
+import rs09.game.content.ame.RandomEventManager
 import rs09.game.interaction.InterfaceListener
 
 class CerterEventInterface : InterfaceListener() {
@@ -36,7 +37,7 @@ class CerterEventInterface : InterfaceListener() {
             val correctAnswer = player.getAttribute("certer:correctIndex", 0)
             player.setAttribute("certer:correct", correctAnswer == answer)
             player.interfaceManager.close()
-            player.dialogueInterpreter.open(CerterDialogue(false), player.antiMacroHandler.event?.asNpc())
+            player.dialogueInterpreter.open(CerterDialogue(false), RandomEventManager.getInstance(player)!!.event?.asNpc())
             return@on true
         }
 

@@ -1,7 +1,15 @@
 package rs09.game.node.entity.skill.slayer
 
+import api.LoginListener
+import api.PersistPlayer
+import api.events.EventHook
+import api.events.NPCKillEvent
+import api.getAttribute
+import api.rewardXP
 import core.cache.def.impl.NPCDefinition
+import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
+import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.slayer.Master
 import core.game.node.entity.skill.slayer.Tasks
 import org.json.simple.JSONArray
@@ -10,23 +18,44 @@ import rs09.game.Event
 import java.util.*
 
 /**
- * Manages the players slayer task.
+ * Manages the players slayer data.
  * @author Ceikry
  */
-class SlayerManager(val player: Player) {
-
-    init {
-        player.hook(Event.NPCKilled, SlayerKillHook)
+class SlayerManager(val player: Player? = null) : LoginListener, PersistPlayer, EventHook<NPCKillEvent> {
+    override fun login(player: Player) {
+        val instance = SlayerManager(player)
+        player.hook(Event.NPCKilled, instance)
+        player.setAttribute("slayer-manager", instance)
     }
 
     /**
      * The player's slayer flags
      */
 	@JvmField
-	val flags: SlayerFlags = SlayerFlags(player)
+	val flags: SlayerFlags = SlayerFlags()
 
-    fun parse(slayerData: JSONObject) {
+    override fun savePlayer(player: Player, save: JSONObject) {
+        val slayer = JSONObject()
+        val slayerManager = getInstance(player)
+        if(slayerManager.removed.isNotEmpty()) {
+            val removedTasks = JSONArray()
+            slayerManager.removed.map {
+                removedTasks.add(it.ordinal.toString())
+            }
+            slayer["removedTasks"] = removedTasks
+        }
+        slayer["taskStreak"] = slayerManager.flags.taskStreak.toString()
+        slayer["totalTasks"] = slayerManager.flags.completedTasks.toString()
+        slayer["equipmentFlags"] = slayerManager.flags.equipmentFlags
+        slayer["taskFlags"] = slayerManager.flags.taskFlags
+        slayer["rewardFlags"] = slayerManager.flags.rewardFlags
+        save["slayer"] = slayer
+    }
+
+    override fun parsePlayer(player: Player, data: JSONObject) {
+        val slayerData = data["slayer"] as JSONObject
         val m = slayerData["master"]
+        val flags = getInstance(player).flags
         if (m != null) {
             flags.setMaster(Master.forId(m.toString().toInt()))
         }
@@ -71,13 +100,48 @@ class SlayerManager(val player: Player) {
         if (slayerData.containsKey("rewardFlags")) flags.rewardFlags = slayerData["rewardFlags"].toString().toInt()
     }
 
+    override fun process(entity: Entity, event: NPCKillEvent) {
+        val npc = event.npc
+        val player = entity as? Player ?: return
+        val slayer = getInstance(player)
+        val flags = slayer.flags
+
+        if (slayer.hasTask() && npc.id in slayer.task!!.npcs) {
+            rewardXP(player, Skills.SLAYER, npc.skills.maximumLifepoints.toDouble())
+            slayer.decrementAmount(1)
+            if(slayer.hasTask()) return
+            flags.taskStreak = flags.taskStreak + 1
+            flags.completedTasks = flags.completedTasks + 1
+            if ((flags.completedTasks > 4 || flags.canEarnPoints()) && flags.getMaster() != Master.TURAEL && flags.getPoints() < 64000) {
+                var points = flags.getMaster().taskPoints[0]
+                if (flags.taskStreak % 50 == 0) {
+                    points = flags.getMaster().taskPoints[2]
+                } else if (flags.taskStreak % 10 == 0) {
+                    points = flags.getMaster().taskPoints[1]
+                }
+                flags.incrementPoints(points)
+                if (flags.getPoints() > 64000) {
+                    flags.setPoints(64000)
+                }
+                player.sendMessages("You've completed " + flags.taskStreak + " tasks in a row and received " + points + " points, with a total of " + flags.getPoints(), "You have completed " + flags.completedTasks + " tasks in total. Return to a Slayer master.")
+            } else if (flags.completedTasks == 4) {
+                player.sendMessage("You've completed your task; you will start gaining points on your next task!")
+                flags.flagCanEarnPoints()
+            } else if (flags.getMaster() == Master.TURAEL) {
+                player.sendMessages("You've completed your task; Tasks from Turael do not award points.", "Return to a Slayer master.")
+            } else {
+                player.sendMessages("You've completed your task; Complete " + (4 - flags.completedTasks) + " more task(s) to start gaining points.", "Return to a Slayer master.")
+            }
+        }
+    }
+
     /**
      * Method used to assign a new task for a player.
      * @param master the master to give the task.
      */
     fun generate(master: Master) {
-        val task = SlayerUtils.generate(player, master) ?: return
-        SlayerUtils.assign(player, task, master)
+        val task = SlayerUtils.generate(player!!, master) ?: return
+        SlayerUtils.assign(player!!, task, master)
     }
 
     /**
@@ -137,7 +201,7 @@ class SlayerManager(val player: Player) {
 
     fun decrementAmount(amount: Int) {
         flags.decrementTaskAmount(amount)
-        player.varpManager.get(2502).setVarbit(0, flags.taskFlags shr 4).send(player)
+        player!!.varpManager.get(2502).setVarbit(0, flags.taskFlags shr 4).send(player)
     }
 
     /**
@@ -169,4 +233,11 @@ class SlayerManager(val player: Player) {
         get() = flags.removed
     val isCanEarnPoints: Boolean
         get() = flags.canEarnPoints()
+
+    companion object {
+        @JvmStatic fun getInstance(player: Player) : SlayerManager
+        {
+            return getAttribute(player, "slayer-manager", SlayerManager())
+        }
+    }
 }

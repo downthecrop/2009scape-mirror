@@ -2,6 +2,7 @@ package core.game.node.entity.skill.slayer;
 
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
+import rs09.game.node.entity.skill.slayer.SlayerManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -247,7 +248,7 @@ public enum Master {
 	}
 
 	public static boolean hasSameTask(Master master, Player player){
-		return master.tasks.stream().filter(task -> task.task == player.getSlayer().getTask()).count() != 0;
+		return master.tasks.stream().filter(task -> task.task == SlayerManager.getInstance(player).getTask()).count() != 0;
 	}
 
 	public static class Task{
