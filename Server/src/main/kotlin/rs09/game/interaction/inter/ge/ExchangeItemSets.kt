@@ -22,7 +22,7 @@ class ExchangeItemSets : InterfaceListener() {
         }
 
         onClose(Components.EXCHANGE_ITEMSETS_645){player, _ ->
-            val listener = getAttribute(player, "ge-listener", null)
+            val listener = getAttribute<InventoryListener?>(player, "ge-listener", null)
             player.inventory.listeners.remove(listener)
             player.interfaceManager.closeSingleTab()
             player.removeAttribute("container-key")
