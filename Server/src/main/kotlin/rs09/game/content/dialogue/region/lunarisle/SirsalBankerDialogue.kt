@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
+import rs09.game.ge.GrandExchangeRecords
 
 /**
  * @author qmqz
@@ -37,7 +38,7 @@ class SirsalBankerDialogue(player: Player? = null) : DialoguePlugin(player){
             1 -> when (buttonId) {
                 1 -> end().also { player.bank.open() }
                 2 -> end().also { player.bankPinManager.openSettings() }
-                3 -> end().also { player.exchangeRecords.openCollectionBox() }
+                3 -> end().also { GrandExchangeRecords.getInstance(player).openCollectionBox() }
                 4 -> player(FacialExpression.HALF_ASKING, "What is this place?").also { stage = 5 }
             }
 

@@ -22,6 +22,7 @@ import kotlinx.coroutines.launch
 import org.rs09.consts.Components
 import rs09.ServerConstants
 import rs09.game.content.activity.fishingtrawler.TrawlerLoot
+import rs09.game.content.ame.RandomEventManager
 import rs09.game.content.ame.RandomEvents
 import rs09.game.ge.GrandExchange
 import rs09.game.node.entity.state.newsys.states.FarmingState
@@ -461,13 +462,13 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         }
 
         define("testlady", Privilege.ADMIN){ player, _ ->
-            player.antiMacroHandler.event = RandomEvents.RIVER_TROLL.npc.create(player)
-            player.antiMacroHandler.event!!.init()
+            RandomEventManager.getInstance(player)!!.event = RandomEvents.RIVER_TROLL.npc.create(player)
+            RandomEventManager.getInstance(player)!!.event!!.init()
         }
 
         define("revent", Privilege.ADMIN){ player, _ ->
             println(player.pulseManager.current)
-            player.antiMacroHandler.fireEvent()
+            RandomEventManager.getInstance(player)!!.fireEvent()
         }
 
         define("addcredits", Privilege.ADMIN){ player, _ ->

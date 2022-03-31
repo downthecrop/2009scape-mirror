@@ -14,6 +14,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import rs09.game.node.entity.skill.slayer.SlayerManager;
 import rs09.plugin.ClassScanner;
 
 /**
@@ -60,27 +61,27 @@ public class SlayerRewardPlugin extends ComponentPlugin {
 			switch (button) {
 			case 23://reassign
 			case 26:
-				if (!player.getSlayer().hasTask()) {
+				if (!SlayerManager.getInstance(player).hasTask()) {
 					player.sendMessage("You don't have an active task right now.");
 					break;
 				}
 				if (purchase(player, 30)) {
-					player.getSlayer().clear();
+					SlayerManager.getInstance(player).clear();
 					player.sendMessage("You have canceled your current task.");
 				}
 				break;
 			case 24:
 			case 27:
-				if (player.getSlayer().getTask() == null) {
+				if (SlayerManager.getInstance(player).getTask() == null) {
 					player.sendMessage("You don't have a slayer task.");
 					break;
 				}
-				if (player.getSlayer().getRemoved().size() >= 4) {
+				if (SlayerManager.getInstance(player).getRemoved().size() >= 4) {
 					player.sendMessage("You can't remove anymore tasks.");
 					break;
 				}
-				if (player.getSlayer().getSlayerPoints() >= 30 && !player.isAdmin()) {
-					int size = player.getSlayer().getRemoved().size();
+				if (SlayerManager.getInstance(player).getSlayerPoints() >= 30 && !player.isAdmin()) {
+					int size = SlayerManager.getInstance(player).getRemoved().size();
 					int qp = player.getQuestRepository().getAvailablePoints();
 					if (size == 0 && qp < 50) {
 						player.sendMessage("You need 50 quest points as a requirement in order to block one task.");
@@ -97,8 +98,8 @@ public class SlayerRewardPlugin extends ComponentPlugin {
 					}
 				}
 				if (purchase(player, 100)) {
-					player.getSlayer().getRemoved().add(player.getSlayer().getTask());
-					player.getSlayer().clear();
+					SlayerManager.getInstance(player).getRemoved().add(SlayerManager.getInstance(player).getTask());
+					SlayerManager.getInstance(player).clear();
 					updateInterface(player, player.getInterfaceManager().getOpened());
 				}
 				break;	
@@ -107,10 +108,10 @@ public class SlayerRewardPlugin extends ComponentPlugin {
 			case 38:
 			case 39:
 				int index = 3 - (39 - button);
-				if (player.getSlayer().getRemoved().isEmpty() || index > player.getSlayer().getRemoved().size() - 1 || player.getSlayer().getRemoved().get(index) == null) {
+				if (SlayerManager.getInstance(player).getRemoved().isEmpty() || index > SlayerManager.getInstance(player).getRemoved().size() - 1 || SlayerManager.getInstance(player).getRemoved().get(index) == null) {
 					break;
 				}
-				player.getSlayer().getRemoved().remove(index);
+				SlayerManager.getInstance(player).getRemoved().remove(index);
 				updateInterface(player, player.getInterfaceManager().getOpened());
 				break;
 			case 15:
@@ -131,34 +132,34 @@ public class SlayerRewardPlugin extends ComponentPlugin {
 				break;
 			case 22://Broad arrows
 			case 29:
-				if (player.getSlayer().flags.isBroadsUnlocked()) {
+				if (SlayerManager.getInstance(player).flags.isBroadsUnlocked()) {
 					player.sendMessage("You don't need to learn this ability again.");
 					break;
 				}
 				if (purchase(player, 300)) {
-					player.getSlayer().flags.unlockBroads();
+					SlayerManager.getInstance(player).flags.unlockBroads();
 					updateInterface(player, component);
 				}
 				break;
 			case 23://Slayer ring
 			case 30:
-				if (player.getSlayer().flags.isRingUnlocked()) {
+				if (SlayerManager.getInstance(player).flags.isRingUnlocked()) {
 					player.sendMessage("You don't need to learn this ability again.");
 					break;
 				}
 				if (purchase(player, 300)) {
-					player.getSlayer().flags.unlockRing();
+					SlayerManager.getInstance(player).flags.unlockRing();
 					updateInterface(player, component);
 				}
 				break;
 			case 24://Slayer helm
 			case 31:
-				if (player.getSlayer().flags.isHelmUnlocked()) {
+				if (SlayerManager.getInstance(player).flags.isHelmUnlocked()) {
 					player.sendMessage("You don't need to learn this ability again.");
 					break;
 				}
 				if (purchase(player, 400)) {
-					player.getSlayer().flags.unlockHelm();
+					SlayerManager.getInstance(player).flags.unlockHelm();
 					updateInterface(player, component);
 				}
 				break;
@@ -180,7 +181,7 @@ public class SlayerRewardPlugin extends ComponentPlugin {
 				break;
 			case 26://ring of slaying
 			case 33:
-				if (player.getInventory().freeSlots() < 1 && player.getSlayer().getSlayerPoints() >= 75) {
+				if (player.getInventory().freeSlots() < 1 && SlayerManager.getInstance(player).getSlayerPoints() >= 75) {
 					player.sendMessage("You don't have enough inventory space.");
 					break;
 				}
@@ -220,11 +221,11 @@ public class SlayerRewardPlugin extends ComponentPlugin {
 	 * @return {@code True} if purchased.
 	 */
 	private boolean purchase(Player player, int amount) {
-		if (player.getSlayer().getSlayerPoints() < amount) {
+		if (SlayerManager.getInstance(player).getSlayerPoints() < amount) {
 			player.sendMessage("You need " + amount + " slayer points in order to purchase this reward.");
 			return false;
 		}
-		player.getSlayer().setSlayerPoints(player.getSlayer().getSlayerPoints() - amount);
+		SlayerManager.getInstance(player).setSlayerPoints(SlayerManager.getInstance(player).getSlayerPoints() - amount);
 		updateInterface(player, player.getInterfaceManager().getOpened());
 		return true;
 	}
@@ -249,7 +250,7 @@ public class SlayerRewardPlugin extends ComponentPlugin {
 			return;
 		}
 		String space = "";
-		String num = String.valueOf(player.getSlayer().getSlayerPoints());
+		String num = String.valueOf(SlayerManager.getInstance(player).getSlayerPoints());
 		if (num != "0")  {
 			for (int i = 0; i < num.length(); i++) {
 				space += " ";
@@ -261,31 +262,31 @@ public class SlayerRewardPlugin extends ComponentPlugin {
 			String[] letters = new String[] {"A", "B", "C", "D"};
 			Tasks task = null;
 			for (int i = 0; i < 4; i++) {
-				task = i > player.getSlayer().getRemoved().size() - 1 ? null : player.getSlayer().getRemoved().get(i);
+				task = i > SlayerManager.getInstance(player).getRemoved().size() - 1 ? null : SlayerManager.getInstance(player).getRemoved().get(i);
 				player.getPacketDispatch().sendString(task == null ? letters[i] : task.getName(), open.getId(), childs[i]);
 			}  
-			player.getPacketDispatch().sendString(space + player.getSlayer().getSlayerPoints(), open.getId(), 19);
+			player.getPacketDispatch().sendString(space + SlayerManager.getInstance(player).getSlayerPoints(), open.getId(), 19);
 			break;
 		case 163://learn
 			for (int i = 0; i < 3; i++) {
 				switch(i){
 					case 0:
-						player.getPacketDispatch().sendInterfaceConfig(open.getId(), 25 + i, !player.getSlayer().flags.isBroadsUnlocked());
+						player.getPacketDispatch().sendInterfaceConfig(open.getId(), 25 + i, !SlayerManager.getInstance(player).flags.isBroadsUnlocked());
 						break;
 					case 1:
-						player.getPacketDispatch().sendInterfaceConfig(open.getId(), 25 + i, !player.getSlayer().flags.isRingUnlocked());
+						player.getPacketDispatch().sendInterfaceConfig(open.getId(), 25 + i, !SlayerManager.getInstance(player).flags.isRingUnlocked());
 						break;
 					case 2:
-						player.getPacketDispatch().sendInterfaceConfig(open.getId(), 25 + i, !player.getSlayer().flags.isHelmUnlocked());
+						player.getPacketDispatch().sendInterfaceConfig(open.getId(), 25 + i, !SlayerManager.getInstance(player).flags.isHelmUnlocked());
 						break;
 					default:
 						break;
 				}
 			}
-			player.getPacketDispatch().sendString(space + player.getSlayer().getSlayerPoints(), open.getId(), 18);
+			player.getPacketDispatch().sendString(space + SlayerManager.getInstance(player).getSlayerPoints(), open.getId(), 18);
 			break;
 		case 164://buy
-			player.getPacketDispatch().sendString(space + player.getSlayer().getSlayerPoints(), open.getId(), 20);
+			player.getPacketDispatch().sendString(space + SlayerManager.getInstance(player).getSlayerPoints(), open.getId(), 20);
 			break;
 		}
 	}
@@ -381,7 +382,7 @@ public class SlayerRewardPlugin extends ComponentPlugin {
 				player.sendMessage("You need a Crafting level of at least 55 in order to do this.");
 				return true;
 			}
-			if (!player.getSlayer().flags.isHelmUnlocked()) {
+			if (!SlayerManager.getInstance(player).flags.isHelmUnlocked()) {
 				player.sendMessage("You need to unlock the ability to do that first.");
 				return true;
 			}

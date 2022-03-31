@@ -129,7 +129,7 @@ public final class DeadfallSetting extends TrapSetting {
 
 	@Override
 	public boolean exceedsLimit(Player player) {
-		return player.getHunterManager().getTrapAmount() > 0 ? true : false;
+		return HunterManager.getInstance(player).getTrapAmount() > 0;
 	}
 
 	/**

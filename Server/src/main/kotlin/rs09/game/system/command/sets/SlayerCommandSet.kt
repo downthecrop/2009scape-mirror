@@ -2,6 +2,7 @@ package rs09.game.system.command.sets
 
 import core.game.node.entity.npc.NPC
 import core.plugin.Initializable
+import rs09.game.node.entity.skill.slayer.SlayerManager
 import rs09.game.system.command.Command
 import rs09.game.system.command.Privilege
 
@@ -13,8 +14,8 @@ class SlayerCommandSet : CommandSet(Privilege.ADMIN){
          */
         define("finishtask"){player,_ ->
             notify(player, "Kill the npc that spawned to finish your task.")
-            player.slayer.amount = 1
-            val finisher = NPC(player.slayer.task?.npcs?.get(0) ?: 0, player.location)
+            SlayerManager.getInstance(player).amount = 1
+            val finisher = NPC(SlayerManager.getInstance(player).task?.npcs?.get(0) ?: 0, player.location)
             finisher.isRespawn = false
             finisher.init()
         }
@@ -32,7 +33,7 @@ class SlayerCommandSet : CommandSet(Privilege.ADMIN){
                 reject(player,"Amount needs to be a valid integer!")
             }
 
-            player.slayer.slayerPoints = amount!!
+            SlayerManager.getInstance(player).slayerPoints = amount!!
             notify(player, "Set slayer points to $amount.")
         }
     }

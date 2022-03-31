@@ -1,5 +1,6 @@
 package rs09.game.node.entity.player.info.login
 
+import api.LoginListener
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.PlayerDetails
 import core.game.node.entity.player.info.login.LoginConfiguration
@@ -14,10 +15,12 @@ import core.net.amsc.ManagementServerState
 import core.net.amsc.WorldCommunicator
 import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
+import rs09.game.world.GameWorld.loginListeners
 import rs09.game.world.repository.Repository
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.locks.Lock
 import java.util.concurrent.locks.ReentrantLock
+import java.util.function.Consumer
 
 /**
  * Parses the login of a player.
@@ -105,14 +108,21 @@ class LoginParser(
             reconnect(player, type)
             return
         }
-        if(!PlayerParser.parse(player)){
+        try {
+            val parser = PlayerParser.parse(player)
+                ?: throw IllegalStateException("Failed parsing save for: " + player.username) //Parse core
+            loginListeners.forEach(Consumer { listener: LoginListener -> listener.login(player) }) //Run our login hooks
+            parser.runContentHooks() //Run our saved-content-parsing hooks
+        }
+        catch (e: Exception)
+        {
+            e.printStackTrace()
             Repository.removePlayer(player)
             Repository.LOGGED_IN_PLAYERS.remove(player.username)
             Repository.lobbyPlayers.remove(player)
             Repository.playerNames.remove(player.name)
             MSPacketRepository.sendPlayerRemoval(player.name)
             flag(Response.ERROR_LOADING_PROFILE)
-            return
         }
         //Repository.getPlayerNames().put(player.getName(), player);
         GameWorld.Pulser.submit(object : Pulse(1) {
@@ -141,8 +151,12 @@ class LoginParser(
                     }
                 } catch (t: Throwable) {
                     t.printStackTrace()
+                    Repository.removePlayer(player)
+                    Repository.LOGGED_IN_PLAYERS.remove(player.username)
+                    Repository.lobbyPlayers.remove(player)
                     Repository.playerNames.remove(player.name)
                     MSPacketRepository.sendPlayerRemoval(player.name)
+                    flag(Response.ERROR_LOADING_PROFILE)
                 }
                 return true
             }

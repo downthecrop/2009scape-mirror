@@ -15,6 +15,7 @@ import core.plugin.Plugin;
 import core.plugin.Initializable;
 import core.tools.StringUtils;
 import kotlin.Unit;
+import rs09.game.node.entity.skill.slayer.SlayerManager;
 
 /**
  * Represents the interface plugin used for jewellery crafting.
@@ -186,7 +187,7 @@ public final class JewelleryInterface extends ComponentPlugin {
 			});
 			return true;
 		}
-		if(!player.getSlayer().flags.isRingUnlocked() && data.equals(JewelleryItem.SLAYER_RING)){
+		if(!SlayerManager.getInstance(player).flags.isRingUnlocked() && data.equals(JewelleryItem.SLAYER_RING)){
 			player.sendMessages("You don't know how to make this. Talk to any Slayer master in order to learn the", "ability that creates Slayer rings.");
 			return true;
 		}

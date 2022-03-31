@@ -43,7 +43,7 @@ class BarbarianOutpostCourse
         val id = node.id
         getCourse(player)
         when (id) {
-            2115, 2116 -> if (!player.barcrawlManager.isFinished || player.barcrawlManager.isStarted) {
+            2115, 2116 -> if (!BarcrawlManager.getInstance(player).isFinished || BarcrawlManager.getInstance(player).isStarted) {
                 player.dialogueInterpreter.open(384)
             } else {
                 DoorActionHandler.handleAutowalkDoor(player, node as Scenery)
@@ -65,7 +65,7 @@ class BarbarianOutpostCourse
 				sendMessage(player, "You climb the low wall...")
                 AgilityHandler.forceWalk(player, flag, node.location.transform(-1, 0, 0), node.location.transform(1, 0, 0), Animation.create(839), 10, 13.5, null)
             }
-            455 -> player.barcrawlManager.read()
+            455 -> BarcrawlManager.getInstance(player).read()
             385 -> {
                 sendMessage(player, "The scorpion stings you!")
                 player.impactHandler.manualHit(player, 3, HitsplatType.NORMAL)
@@ -217,9 +217,9 @@ class BarbarianOutpostCourse
         }
 
         override fun open(vararg args: Any): Boolean {
-            if (!player.barcrawlManager.isStarted) {
+            if (!BarcrawlManager.getInstance(player).isStarted) {
                 npc("O, waddya want?")
-            } else if (player.barcrawlManager.isFinished && !player.barcrawlManager.isStarted) {
+            } else if (BarcrawlManager.getInstance(player).isFinished && !BarcrawlManager.getInstance(player).isStarted) {
                 npc("'Ello friend.")
                 stage = 50
             } else {
@@ -250,7 +250,7 @@ class BarbarianOutpostCourse
                     stage++
                 }
                 4 -> end()
-                5 -> if (player.barcrawlManager.isFinished) {
+                5 -> if (BarcrawlManager.getInstance(player).isFinished) {
                     npc("You may pass if you like. You are a true", "barbarian now.")
                     stage = 4
                 } else {
@@ -280,8 +280,8 @@ class BarbarianOutpostCourse
                     stage++
                 }
                 10 -> {
-                    player.barcrawlManager.reset()
-                    player.barcrawlManager.isStarted = true
+                    BarcrawlManager.getInstance(player).reset()
+                    BarcrawlManager.getInstance(player).isStarted = true
                     player.inventory.add(BarcrawlManager.BARCRAWL_CARD, player)
                     interpreter.sendDialogue("The guard hands you a Barcrawl card.")
                     stage++
@@ -295,10 +295,10 @@ class BarbarianOutpostCourse
                     stage++
                 }
                 13 -> end()
-                20 -> if (!player.barcrawlManager.hasCard()) {
+                20 -> if (!BarcrawlManager.getInstance(player).hasCard()) {
                     player("I've lost my barcrawl card...")
                     stage = 23
-                } else if (player.barcrawlManager.isFinished) {
+                } else if (BarcrawlManager.getInstance(player).isFinished) {
                     player("I tink I jusht 'bout done dem all... but I losht count...")
                     stage = 24
                 } else {
@@ -318,7 +318,7 @@ class BarbarianOutpostCourse
                     if (!player.inventory.containsItem(BarcrawlManager.BARCRAWL_CARD)) {
                         end()
                     }
-                    player.barcrawlManager.isStarted = false
+                    BarcrawlManager.getInstance(player).isStarted = false
                     player.bank.remove(BarcrawlManager.BARCRAWL_CARD)
                     player.inventory.remove(BarcrawlManager.BARCRAWL_CARD)
                     interpreter.sendDialogue("You give the card to the barbarian.")

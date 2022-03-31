@@ -81,11 +81,6 @@ public final class LoginConfiguration {
         } else {
             configureGameWorld(player);
         }
-
-        if(!player.isArtificial())
-        {
-            GameWorld.getLoginListeners().forEach((listener) -> listener.login(player));
-        }
     }
 
     /**
@@ -220,10 +215,8 @@ public final class LoginConfiguration {
         player.getPacketDispatch().sendRunEnergy();
         player.getFamiliarManager().login();
         player.getInterfaceManager().openDefaultTabs();
-        player.getExchangeRecords().init();
         player.getPacketDispatch().sendString("Friends List - World " + GameWorld.getSettings().getWorldId(), 550, 3);
         player.getConfigManager().init();
-        player.getAntiMacroHandler().init();
         player.getQuestRepository().syncronizeTab(player);
         player.getGraveManager().update();
         player.getInterfaceManager().close();

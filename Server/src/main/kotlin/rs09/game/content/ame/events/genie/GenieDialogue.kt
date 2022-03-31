@@ -7,6 +7,7 @@ import core.game.component.Component
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
+import rs09.game.content.ame.RandomEventManager
 import rs09.game.content.dialogue.DialogueFile
 import rs09.tools.END_DIALOGUE
 
@@ -15,7 +16,7 @@ class GenieDialogue : DialogueFile() {
         val assigned = player!!.getAttribute("genie:item",0)
         npcl(FacialExpression.NEUTRAL, "Ah, so you are there, ${player!!.name.capitalize()}. I'm so glad you summoned me. Please take this lamp and make your wish.")
 		addItemOrDrop(player!!, assigned)
-        player!!.antiMacroHandler.event?.terminate()
+        RandomEventManager.getInstance(player!!)!!.event?.terminate()
         stage = END_DIALOGUE
     }
 }

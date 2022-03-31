@@ -1,6 +1,7 @@
 package rs09.game.content.ame.events
 
 import core.game.node.entity.player.Player
+import rs09.game.content.ame.RandomEventManager
 import rs09.game.content.ame.events.supriseexam.SurpriseExamUtils
 import rs09.game.content.dialogue.DialogueFile
 
@@ -22,11 +23,11 @@ class MysteriousOldManDialogue(val type: String) : DialogueFile() {
                     1 -> {
                         end()
                         teleport(player!!,type)
-                        player!!.antiMacroHandler.event?.terminate()
+                        RandomEventManager.getInstance(player!!)?.event?.terminate()
                     }
                     2 -> {
                         end()
-                        player!!.antiMacroHandler.event?.terminate()
+                        RandomEventManager.getInstance(player!!)?.event?.terminate()
                     }
                 }
             }

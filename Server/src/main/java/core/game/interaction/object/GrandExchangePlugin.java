@@ -12,6 +12,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
+import rs09.game.ge.GrandExchangeRecords;
 import rs09.game.interaction.inter.ge.ExchangeItemSets;
 import rs09.game.interaction.inter.ge.StockMarket;
 
@@ -46,6 +47,7 @@ public final class GrandExchangePlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
+		GrandExchangeRecords records = GrandExchangeRecords.getInstance(player);
 		if (player.getIronmanManager().checkRestriction() && !option.equals("sets")) {
 		    return true;
 		}
@@ -61,14 +63,14 @@ public final class GrandExchangePlugin extends OptionHandler {
 			StockMarket.openFor(player);
 			break;
 		case "history":
-			player.getExchangeRecords().openHistoryLog(player);
+			records.openHistoryLog(player);
 			break;
 		case "collect":
 			if (!GrandExchangeDatabase.hasInitialized()) {
 				player.getDialogueInterpreter().sendDialogue("The Grand Exchange desk seems to be closed...");
 				break;
 			}
-			player.getExchangeRecords().openCollectionBox();
+			records.openCollectionBox();
 			break;
 		case "info-logs":
 			GEGuidePrice.open(player, GuideType.LOGS);
@@ -139,7 +141,7 @@ public final class GrandExchangePlugin extends OptionHandler {
 				player.getBank().open();
 				break;
 			case "collect":
-				player.getExchangeRecords().openCollectionBox();
+				GrandExchangeRecords.getInstance(player).openCollectionBox();
 				break;
 			}
 			return true;
