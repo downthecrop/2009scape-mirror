@@ -139,7 +139,10 @@ object PlunderUtils {
 
     fun resetObjectVarbits(player: Player)
     {
-        val varp = player.varpManager.get(821)
+        var varp = player.varpManager.get(821)
+        varp.clear()
+        varp.send(player)
+        varp = player.varpManager.get(820)
         varp.clear()
         varp.send(player)
         PlunderData.doorVarbits.forEach { player.varpManager.setVarbit(it, 0) }
