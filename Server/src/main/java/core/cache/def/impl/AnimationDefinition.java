@@ -141,7 +141,7 @@ public final class AnimationDefinition {
 										int i_22_ = buffer.get() & 0xFF;
 										if ((i_22_ ^ 0xffffffff) < -1) {
 											handledSounds[i_21_] = new int[i_22_];
-											handledSounds[i_21_][0] = ByteBufferUtils.getTriByte(buffer);
+											handledSounds[i_21_][0] = ByteBufferUtils.getMedium(buffer);
 											for (int i_23_ = 1; ((i_22_ ^ 0xffffffff) < (i_23_ ^ 0xffffffff)); i_23_++) {
 												handledSounds[i_21_][i_23_] = buffer.getShort() & 0xFFFF;
 											}
