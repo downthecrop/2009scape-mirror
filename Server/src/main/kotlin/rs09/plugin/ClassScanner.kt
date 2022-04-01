@@ -82,7 +82,7 @@ object ClassScanner {
             PlayerScripts.identifierMap[identifier] =
                 PlayerScripts.PlayerScript(identifier, description, name, res.loadClass())
         }
-        result.getClassesImplementing("api.StartupListener").forEach {
+        result.getClassesImplementing("api.StartupListener").filter { !it.isAbstract }.forEach {
             try {
                 val clazz = it.loadClass().newInstance() as StartupListener
                 GameWorld.startupListeners.add(clazz)
