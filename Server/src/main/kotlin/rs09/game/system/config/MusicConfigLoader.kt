@@ -1,5 +1,6 @@
 package rs09.game.system.config
 
+import core.cache.def.impl.DataMap
 import rs09.ServerConstants
 import core.game.node.entity.player.link.music.MusicEntry
 import core.game.node.entity.player.link.music.MusicZone
@@ -12,6 +13,10 @@ import org.json.simple.parser.JSONParser
 import java.io.FileReader
 
 class MusicConfigLoader {
+    //1351 -> buttonID:songID
+    //1345 -> buttonID:songName (capitalized)
+    //1347 -> buttonID:songName (lowercase)
+
     val parser = JSONParser()
     var reader: FileReader? = null
     fun load(){
@@ -19,15 +24,18 @@ class MusicConfigLoader {
         reader = FileReader(ServerConstants.CONFIG_PATH + "music_configs.json")
         var configs = parser.parse(reader) as JSONArray
 
+        val songs = DataMap.get(1351)
+        val names = DataMap.get(1345)
+
+        for((index, songId) in songs.dataStore)
+        {
+            val entry = MusicEntry(songId as Int, names.getString(index as Int), index)
+            MusicEntry.getSongs().putIfAbsent(songId, entry)
+        }
+
         for(config in configs){
             val e = config as JSONObject
             val musicId = Integer.parseInt(e["id"].toString())
-            val entry = MusicEntry(
-                    musicId,
-                    e["name"].toString(),
-                    Integer.parseInt(e["indexId"].toString())
-            )
-            MusicEntry.getSongs().putIfAbsent(entry.id,entry)
             val string = e["borders"].toString()
             val borderArray = string.split("-")
             var tokens: Array<String>? = null

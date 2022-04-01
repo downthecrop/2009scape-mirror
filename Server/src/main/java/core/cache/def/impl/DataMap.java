@@ -31,7 +31,7 @@ public class DataMap {
 
     public int defaultInt;
 
-    private HashMap<Integer, Object> dataStore = new HashMap<>();
+    public HashMap<Integer, Object> dataStore = new HashMap<>();
 
     public DataMap(int id) {
         this.id = id;
