@@ -56,7 +56,14 @@ class PacketWriteQueue : TickListener {
                 write(packet?.out ?: break, packet?.context ?: break)
             if (packetsToWrite.isNotEmpty()) {
                 SystemLogger.logWarn("Packet queue was NOT empty! Remaining packets: ${packetsToWrite.size}")
-                for (pkt in packetsToWrite) SystemLogger.logWarn("${pkt.out.javaClass.simpleName} <- ${pkt.context}")
+                try {
+                    for (pkt in packetsToWrite) SystemLogger.logWarn("${pkt.out.javaClass.simpleName} <- ${pkt.context}")
+                } catch (e: Exception)
+                {
+                    e.printStackTrace()
+                } finally {
+                    packetsToWrite.clear()
+                }
             }
             val queueIter = packetsToQueue.iterator()
             while (queueIter.hasNext()) {
