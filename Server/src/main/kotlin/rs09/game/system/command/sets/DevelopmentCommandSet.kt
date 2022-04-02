@@ -75,6 +75,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
                 val file = index.getFileData(26, fID)
                 if(file != null){
                     val def = Struct.parse(fID, file)
+                    if(def.dataStore.isEmpty()) continue //no data in struct.
                     writer.write(def.toString())
                     writer.newLine()
                 }
@@ -98,6 +99,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
                     val file = index.getFileData(cID, fID)
                     if(file != null){
                         val def = DataMap.parse((cID shl 8) or fID, file)
+                        if(def.keyType == '?') continue //Empty definition - only a 0 present in the cachefile data.
                         writer.write(def.toString())
                         writer.newLine()
                     }

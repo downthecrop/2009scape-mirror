@@ -8,6 +8,7 @@ import core.tools.CP1252;
 import rs09.game.system.SystemLogger;
 
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,9 +24,9 @@ public class DataMap {
      */
     private final int id;
 
-    public char keyType;
+    public char keyType = '?';
 
-    public char valueType;
+    public char valueType = '?';
 
     public String defaultString;
 

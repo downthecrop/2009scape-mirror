@@ -22,7 +22,7 @@ public class Struct {
      */
     private final int id;
 
-    private HashMap<Integer, Object> dataStore = new HashMap<>();
+    public HashMap<Integer, Object> dataStore = new HashMap<>();
 
     public Struct(int id) {
         this.id = id;
