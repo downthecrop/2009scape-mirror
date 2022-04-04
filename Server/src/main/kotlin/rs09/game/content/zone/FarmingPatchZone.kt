@@ -6,75 +6,52 @@ import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
-import core.game.system.task.Pulse
-import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBorders
-import core.game.world.map.zone.ZoneBuilder
-import core.plugin.Initializable
-import core.plugin.Plugin
 import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.DialogueFile
-import rs09.tools.secondsToTicks
-import java.util.concurrent.TimeUnit
 
-@Initializable
-class FarmingPatchZone : MapZone("farming patch", true), Plugin<Any> {
+class FarmingPatchZone : MapArea, TickListener {
+    private val playersInZone = hashMapOf<Player,Int>()
 
-    val playersInZone = hashMapOf<Player,Int>()
-
-    override fun configure() {
-        registerRegion(12083)
-        registerRegion(10548)
-        register(ZoneBorders(3594,3521,3608,3532))
-        submitWorldPulse(zonePulse)
+    override fun defineAreaBorders(): Array<ZoneBorders> {
+        return arrayOf(
+            getRegionBorders(12083),
+            getRegionBorders(10548),
+            ZoneBorders(3594,3521,3608,3532)
+        )
     }
 
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        ZoneBuilder.configure(this)
-        return this
-    }
-
-    override fun fireEvent(identifier: String?, vararg args: Any?): Any {
-        return Unit
-    }
-
-    override fun enter(e: Entity?): Boolean {
-        if(e is Player && playersInZone[e] == null && getStatLevel(e, Skills.FARMING) <= 15) {
-            playersInZone[e] = 0
+    override fun areaEnter(entity: Entity) {
+        if(entity is Player && playersInZone[entity] == null && getStatLevel(entity, Skills.FARMING) <= 15) {
+            playersInZone[entity] = 0
         }
-        return super.enter(e)
     }
 
-    override fun leave(e: Entity?, logout: Boolean): Boolean {
-        if(e is Player){
-            playersInZone.remove(e)
-        }
-        return super.enter(e)
+    override fun areaLeave(entity: Entity) {
+        if(entity is Player)
+            playersInZone.remove(entity)
     }
 
-    val zonePulse = object : Pulse(){
-        override fun pulse(): Boolean {
-            playersInZone.toList().forEach { (player, ticks) ->
-                if(ticks == secondsToTicks(TimeUnit.MINUTES.toSeconds(5).toInt())){
-                    val npc = NPC(NPCs.GITHAN_7122)
-                    npc.location = player.location
-                    npc.init()
-                    npc.moveStep()
-                    npc.face(player)
-                    openDialogue(player, SpiritDialogue(true), npc)
-                } else if (ticks == secondsToTicks(TimeUnit.MINUTES.toSeconds(10).toInt())){
-                    val npc = NPC(NPCs.GITHAN_7122)
-                    npc.location = player.location
-                    npc.init()
-                    npc.moveStep()
-                    npc.face(player)
-                    openDialogue(player, SpiritDialogue(false), npc)
-                    playersInZone.remove(player)
-                }
-
-                playersInZone[player] = ticks + 1
+    override fun tick() {
+        playersInZone.toList().forEach { (player, ticks) ->
+            if(ticks == 500){
+                val npc = NPC(NPCs.GITHAN_7122)
+                npc.location = player.location
+                npc.init()
+                npc.moveStep()
+                npc.face(player)
+                openDialogue(player, SpiritDialogue(true), npc)
+            } else if (ticks == 1000){
+                val npc = NPC(NPCs.GITHAN_7122)
+                npc.location = player.location
+                npc.init()
+                npc.moveStep()
+                npc.face(player)
+                openDialogue(player, SpiritDialogue(false), npc)
+                playersInZone.remove(player)
             }
-            return false
+
+            playersInZone[player] = ticks + 1
         }
     }
 
@@ -94,5 +71,4 @@ class FarmingPatchZone : MapZone("farming patch", true), Plugin<Any> {
             poofClear(npc ?: return)
         }
     }
-
 }

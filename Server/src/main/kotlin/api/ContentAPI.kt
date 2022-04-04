@@ -715,6 +715,15 @@ fun findLocalNPCs(entity: Entity, ids: IntArray, distance: Int): List<NPC>{
 }
 
 /**
+ * @param regionId the ID of the region
+ * @return a [ZoneBorders] encapsulating the entire region indicated by the provided regionId
+ */
+fun getRegionBorders(regionId: Int) : ZoneBorders
+{
+    return ZoneBorders.forRegion(regionId)
+}
+
+/**
  * Gets the value of an attribute key from the Entity's attributes store
  * @param entity the entity to get the attribute from
  * @param attribute the attribute key to use
