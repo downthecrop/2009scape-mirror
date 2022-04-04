@@ -1,5 +1,6 @@
 package rs09.game.node.entity.player.info.login
 
+import api.PersistPlayer
 import core.game.interaction.item.brawling_gloves.BrawlingGloves
 import core.game.node.entity.combat.CombatSpell
 import core.game.node.entity.player.Player
@@ -18,6 +19,7 @@ import rs09.game.node.entity.skill.farming.CompostBins
 import rs09.game.node.entity.skill.farming.FarmingPatch
 import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
+import java.io.File
 import java.io.FileReader
 import java.util.*
 
@@ -27,8 +29,11 @@ import java.util.*
  * @param player: The player we are parsing.
  */
 class PlayerSaveParser(val player: Player) {
+    companion object {
+        val contentHooks = ArrayList<PersistPlayer>()
+    }
     var parser = JSONParser()
-    var reader: FileReader? = FileReader(ServerConstants.PLAYER_SAVE_PATH + player.name + ".json")
+    var reader: FileReader? = null
     var saveFile: JSONObject? = null
     var read = true
 
@@ -36,8 +41,12 @@ class PlayerSaveParser(val player: Player) {
     val bin_varps = CompostBins.values().map { it.varpIndex }.toIntArray()
 
     init {
-        reader
-                ?: SystemLogger.logWarn("Couldn't find save file for ${player.name}, or save is corrupted.").also { read = false }
+        val JSON = File(ServerConstants.PLAYER_SAVE_PATH + player.name + ".json")
+        if(JSON.exists())
+        {
+            reader = FileReader(JSON)
+        }
+        reader ?: SystemLogger.logWarn("Couldn't find save file for ${player.name}, or save is corrupted.").also { read = false }
         if (read) {
             saveFile = parser.parse(reader) as JSONObject
         }
@@ -45,46 +54,38 @@ class PlayerSaveParser(val player: Player) {
 
     fun parse() = GlobalScope.launch {
         if (read) {
-            launch {
-                parseCore()
-                parseAttributes()
-                parseSkills()
-                parseSettings()
-                parseSlayer()
-                parseQuests()
-                parseAppearance()
-                parseGrave()
-                parseVarps()
-                parseStates()
-            }
-            launch {
-                parseSpellbook()
-                parseGrandExchange()
-                parseSavedData()
-                parseAutocastSpell()
-                parseFarming()
-                parseConfigs()
-                parseMonitor()
-            }
-            launch {
-                parseMusic()
-                parseFamiliars()
-                parseBarCrawl()
-                parseAntiMacro()
-                parseTT()
-                parseBankPin()
-            }
-            launch {
-                parseHouse()
-                parseIronman()
-                parseEmoteManager()
-                parseStatistics()
-                parseBrawlingGloves()
-                parseAchievements()
-                parsePouches()
-            }
+            parseCore()
+            parseAttributes()
+            parseSkills()
+            parseSettings()
+            parseQuests()
+            parseAppearance()
+            parseGrave()
+            parseVarps()
+            parseStates()
+            parseSpellbook()
+            parseSavedData()
+            parseAutocastSpell()
+            parseFarming()
+            parseConfigs()
+            parseMonitor()
+            parseMusic()
+            parseFamiliars()
+            parseBankPin()
+            parseHouse()
+            parseIronman()
+            parseEmoteManager()
+            parseStatistics()
+            parseAchievements()
+            parsePouches()
             parsePouches()
         }
+    }
+
+    fun runContentHooks()
+    {
+        if(read)
+            contentHooks.forEach{it.parsePlayer(player, saveFile!!)}
     }
 
     fun parseVarps(){
@@ -124,16 +125,6 @@ class PlayerSaveParser(val player: Player) {
             }
         } else {
             player.gameAttributes.parse(player.name + ".xml")
-        }
-    }
-
-    fun parseBrawlingGloves() {
-        if (saveFile!!.containsKey("brawlingGloves")) {
-            val bgData: JSONArray = saveFile!!["brawlingGloves"] as JSONArray
-            for (bg in bgData) {
-                val glove = bg as JSONObject
-                player.brawlingGlovesManager.registerGlove(BrawlingGloves.forIndicator(glove.get("gloveId").toString().toInt()).id, glove.get("charges").toString().toInt())
-            }
         }
     }
 
@@ -186,14 +177,6 @@ class PlayerSaveParser(val player: Player) {
         player.bankPinManager.parse(bpData)
     }
 
-    fun parseTT() {
-        val ttData = saveFile!!["treasureTrails"] as JSONObject
-        player.treasureTrailManager.parse(ttData)
-    }
-
-    fun parseAntiMacro() {
-    }
-
     fun parseStates() {
         player.states.clear()
         SystemLogger.logErr("Parsing states")
@@ -209,11 +192,6 @@ class PlayerSaveParser(val player: Player) {
                 player.states.put(stateId,stateClass)
             }
         }
-    }
-
-    fun parseBarCrawl() {
-        val barCrawlData = saveFile!!["barCrawl"] as JSONObject
-        player.barcrawlManager.parse(barCrawlData)
     }
 
     fun parseFamiliars() {
@@ -301,14 +279,6 @@ class PlayerSaveParser(val player: Player) {
         player.savedData.globalData.parse(globalData)
     }
 
-    fun parseGrandExchange() {
-        val geData: Any? = saveFile!!["grand_exchange"]
-        if (geData != null) {
-            player.exchangeRecords.parse(geData as JSONObject)
-        }
-
-    }
-
     fun parseSpellbook() {
         val spellbookData = (saveFile!!["spellbook"] as String).toInt()
         player.spellBookManager.setSpellBook(SpellBookManager.SpellBook.forInterface(spellbookData))
@@ -330,12 +300,6 @@ class PlayerSaveParser(val player: Player) {
         saveFile ?: return
         val questData = saveFile!!["quests"] as JSONObject
         player.questRepository.parse(questData)
-    }
-
-    fun parseSlayer() {
-        saveFile ?: return
-        val slayerData = saveFile!!["slayer"] as JSONObject
-        player.slayer.parse(slayerData)
     }
 
     fun parseCore() {

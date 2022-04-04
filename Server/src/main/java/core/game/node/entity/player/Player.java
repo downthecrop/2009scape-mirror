@@ -8,10 +8,8 @@ import core.game.container.impl.EquipmentContainer;
 import core.game.container.impl.InventoryListener;
 import core.game.content.activity.pyramidplunder.PlunderObjectManager;
 import core.game.content.dialogue.DialogueInterpreter;
-import core.game.content.quest.miniquest.barcrawl.BarcrawlManager;
 import core.game.content.ttrail.TreasureTrailManager;
 import core.game.interaction.Interaction;
-import core.game.interaction.item.brawling_gloves.BrawlingGlovesManager;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
@@ -24,6 +22,7 @@ import core.game.node.entity.player.info.RenderInfo;
 import core.game.node.entity.player.info.Rights;
 import core.game.node.entity.player.info.UIDInfo;
 import core.game.node.entity.player.info.login.LoginConfiguration;
+import core.game.node.entity.player.info.login.PlayerParser;
 import core.game.node.entity.player.link.*;
 import core.game.node.entity.player.link.appearance.Appearance;
 import core.game.node.entity.player.link.audio.AudioManager;
@@ -38,8 +37,6 @@ import core.game.node.entity.player.link.request.RequestManager;
 import core.game.node.entity.player.link.skillertasks.SkillerTasks;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.construction.HouseManager;
-import core.game.node.entity.skill.hunter.HunterManager;
-import rs09.game.node.entity.skill.slayer.SlayerManager;
 import core.game.node.entity.skill.summoning.familiar.FamiliarManager;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
@@ -69,14 +66,15 @@ import core.tools.RandomFunction;
 import core.tools.StringUtils;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
+import org.json.simple.JSONObject;
 import org.rs09.consts.Items;
 import rs09.GlobalStats;
 import rs09.ServerConstants;
 import rs09.game.VarpManager;
-import rs09.game.content.ame.RandomEventManager;
 import rs09.game.ge.GrandExchangeRecords;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.node.entity.combat.equipment.EquipmentDegrader;
+import rs09.game.node.entity.player.info.login.PlayerSaveParser;
 import rs09.game.node.entity.player.info.login.PlayerSaver;
 import rs09.game.node.entity.skill.runecrafting.PouchManager;
 import rs09.game.node.entity.state.newsys.State;
@@ -220,11 +218,6 @@ public class Player extends Entity {
 	private final HintIconManager hintIconManager = new HintIconManager();
 
 	/**
-	 * The slayer manager.
-	 */
-	private final SlayerManager slayer = new SlayerManager(this);
-
-	/**
 	 * The quest repository.
 	 */
 	private QuestRepository questRepository = new QuestRepository(this);
@@ -243,11 +236,6 @@ public class Player extends Entity {
 	 * The grave stone manager.
 	 */
 	private final GraveManager graveManager = new GraveManager(this);
-
-	/**
-	 * The new grand exchange interface manager.
-	 */
-	public final GrandExchangeRecords exchangeRecords = new GrandExchangeRecords(this);
 
 	/**
 	 * The familiar manager.
@@ -299,26 +287,6 @@ public class Player extends Entity {
 	private final HouseManager houseManager = new HouseManager();
 
 	/**
-	 * The barcrawl miniquest manager.
-	 */
-	private final BarcrawlManager barcrawlManager = new BarcrawlManager(this);
-
-	/**
-	 * The anti macro handler.
-	 */
-	private final RandomEventManager antiMacroHandler = new RandomEventManager(this);
-
-	/**
-	 * The hunter manager.
-	 */
-	private final HunterManager hunterManager = new HunterManager(this);
-
-	/**
-	 * The treasure trail manager.
-	 */
-	private final TreasureTrailManager treasureTrailManager = new TreasureTrailManager(this);
-
-	/**
 	 * The audio manager.
 	 */
 	private final AudioManager audioManager = new AudioManager(this);
@@ -337,12 +305,6 @@ public class Player extends Entity {
 	 * The Ironman manager.
 	 */
 	private final IronmanManager ironmanManager = new IronmanManager(this);
-
-
-	/**
-	 * Brawling Gloves manager
-	 */
-	private final BrawlingGlovesManager brawlingGlovesManager = new BrawlingGlovesManager(this);
 
 	/**
 	 * The boolean for the player playing.
@@ -411,16 +373,12 @@ public class Player extends Entity {
 	 * @param force If we should force removal, a player engaged in combat will otherwise remain active until out of combat.
 	 */
 	public void clear(boolean force) {
-		/*if (!force && allowRemoval()) {
-			Repository.getDisconnectionQueue().add(this, true);
-			return;
-		}*/
 		if (force) {
 			Repository.getDisconnectionQueue().remove(getName());
 		}
-		GameWorld.getLogoutListeners().forEach((it) -> it.logout(this));
 		setPlaying(false);
 		getWalkingQueue().reset();
+		GameWorld.getLogoutListeners().forEach((it) -> it.logout(this));
 		if(!logoutListeners.isEmpty()){
 			logoutListeners.forEach((key,method) -> method.invoke(this));
 		}
@@ -432,7 +390,6 @@ public class Player extends Entity {
 		super.clear();
 		getZoneMonitor().clear();
 		CommunicationInfo.notifyPlayers(this, false, false);
-		hunterManager.logout();
 		HouseManager.leave(this);
 		UpdateSequence.getRenderablePlayers().remove(this);
 		Repository.getDisconnectionQueue().add(this);
@@ -480,8 +437,6 @@ public class Player extends Entity {
 	@Override
 	public void tick() {
 		super.tick();
-		antiMacroHandler.tick();
-		hunterManager.pulse();
 		musicPlayer.tick();
 		if(getAttribute("fire:immune",0) > 0){
 			int time = getAttribute("fire:immune",0) - GameWorld.getTicks();
@@ -1143,14 +1098,6 @@ public class Player extends Entity {
 	}
 
 	/**
-	 * Gets the slayer.
-	 * @return The slayer.
-	 */
-	public SlayerManager getSlayer() {
-		return slayer;
-	}
-
-	/**
 	 * Checks if the player is artifical (AIPlayer).
 	 * @return {@code True} if so.
 	 */
@@ -1264,38 +1211,6 @@ public class Player extends Entity {
 	}
 
 	/**
-	 * Gets the barcrawlManager.
-	 * @return The barcrawlManager.
-	 */
-	public BarcrawlManager getBarcrawlManager() {
-		return barcrawlManager;
-	}
-
-	/**
-	 * Gets the antiMacroHandler.
-	 * @return The antiMacroHandler.
-	 */
-	public RandomEventManager getAntiMacroHandler() {
-		return antiMacroHandler;
-	}
-
-	/**
-	 * Gets the hunterManager.
-	 * @return The hunterManager.
-	 */
-	public HunterManager getHunterManager() {
-		return hunterManager;
-	}
-
-	/**
-	 * Gets the btreasureTrailManager.
-	 * @return the treasureTrailManager
-	 */
-	public TreasureTrailManager getTreasureTrailManager() {
-		return treasureTrailManager;
-	}
-
-	/**
 	 * Gets the graveManager.
 	 * @return the graveManager
 	 */
@@ -1404,10 +1319,6 @@ public class Player extends Entity {
 	public void setArcheryTotal(int archeryTotal) {
 		this.archeryTotal = archeryTotal;
 	}
-
-	public BrawlingGlovesManager getBrawlingGlovesManager() { return brawlingGlovesManager;}
-
-	public GrandExchangeRecords getExchangeRecords() { return exchangeRecords; }
 
 	public boolean hasActiveState(String key){
 		State state = states.get(key);

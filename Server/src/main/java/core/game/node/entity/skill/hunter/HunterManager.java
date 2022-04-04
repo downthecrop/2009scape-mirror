@@ -1,9 +1,16 @@
 package core.game.node.entity.skill.hunter;
 
+import api.LoginListener;
+import api.LogoutListener;
+import api.events.EventHook;
+import api.events.TickEvent;
+import core.game.node.entity.Entity;
 import core.game.node.entity.skill.Skills;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
+import org.jetbrains.annotations.NotNull;
+import rs09.game.Event;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,7 +20,7 @@ import java.util.List;
  * Manages the players hunter state.
  * @author Vexia
  */
-public final class HunterManager {
+public final class HunterManager implements LoginListener, LogoutListener, EventHook<TickEvent> {
 
 	/**
 	 * The list of active traps.
@@ -33,10 +40,32 @@ public final class HunterManager {
 		this.player = player;
 	}
 
-	/**
-	 * Calles every game pulse.
-	 */
-	public void pulse() {
+	public HunterManager() {
+		this.player = null;
+	}
+
+	@Override
+	public void login(@NotNull Player player) {
+		HunterManager instance = new HunterManager(player);
+		player.hook(Event.getTick(), instance);
+		player.setAttribute("hunter-manager", instance);
+	}
+
+	@Override
+	public void logout(@NotNull Player player) {
+		HunterManager instance = getInstance(player);
+		Iterator<TrapWrapper> iterator = instance.traps.iterator();
+		TrapWrapper wrapper = null;
+		while (iterator.hasNext()) {
+			wrapper = iterator.next();
+			if (wrapper.getType().getSettings().clear(wrapper, 0)) {
+				iterator.remove();
+			}
+		}
+	}
+
+	@Override
+	public void process(@NotNull Entity entity, @NotNull TickEvent event) {
 		if (traps.size() == 0) {
 			return;
 		}
@@ -45,20 +74,6 @@ public final class HunterManager {
 		while (iterator.hasNext()) {
 			wrapper = iterator.next();
 			if (wrapper.cycle()) {
-				iterator.remove();
-			}
-		}
-	}
-
-	/**
-	 * Called when the player logs out.
-	 */
-	public void logout() {
-		Iterator<TrapWrapper> iterator = traps.iterator();
-		TrapWrapper wrapper = null;
-		while (iterator.hasNext()) {
-			wrapper = iterator.next();
-			if (wrapper.getType().getSettings().clear(wrapper, 0)) {
 				iterator.remove();
 			}
 		}
@@ -179,4 +194,8 @@ public final class HunterManager {
 		return traps;
 	}
 
+	public static HunterManager getInstance(Player player)
+	{
+		return player.getAttribute("hunter-manager");
+	}
 }

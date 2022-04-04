@@ -1,9 +1,12 @@
 package core.game.content.quest.miniquest.barcrawl;
 
+import api.LoginListener;
+import api.PersistPlayer;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
 
 import core.game.node.item.Item;
+import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -13,7 +16,7 @@ import java.nio.ByteBuffer;
  * Manages the players barcrawl quest.
  * @author 'Vexia
  */
-public final class BarcrawlManager {
+public final class BarcrawlManager implements LoginListener, PersistPlayer {
 
 	/**
 	 * The barcrawl card.
@@ -53,12 +56,36 @@ public final class BarcrawlManager {
 		this.player = player;
 	}
 
-	public void parse(JSONObject data){
-		started = (boolean) data.get("started");
-		JSONArray barsVisisted = (JSONArray) data.get("bars");
+	public BarcrawlManager() {this.player = null;}
+
+	@Override
+	public void login(@NotNull Player player) {
+		BarcrawlManager instance = new BarcrawlManager(player);
+		player.setAttribute("barcrawl-inst", instance);
+	}
+
+	@Override
+	public void parsePlayer(@NotNull Player player, @NotNull JSONObject data) {
+		JSONObject bcData = (JSONObject) data.get("barCrawl");
+		if(bcData == null) return;
+		JSONArray barsVisisted = (JSONArray) bcData.get("bars");
+		BarcrawlManager instance = getInstance(player);
+		instance.started = (boolean) bcData.get("started");
 		for(int i = 0; i < barsVisisted.size(); i++){
-			bars[i] = (boolean) barsVisisted.get(i);
+			instance.bars[i] = (boolean) barsVisisted.get(i);
 		}
+	}
+
+	@Override
+	public void savePlayer(@NotNull Player player, @NotNull JSONObject save) {
+		BarcrawlManager instance = getInstance(player);
+		JSONObject barCrawl = new JSONObject();
+		barCrawl.put("started", instance.started);
+		JSONArray barsVisited = new JSONArray();
+		for(boolean visited : instance.bars)
+			barsVisited.add(visited);
+		barCrawl.put("bars",barsVisited);
+		save.put("barCrawl",barCrawl);
 	}
 
 	/**
@@ -152,5 +179,10 @@ public final class BarcrawlManager {
 
 	public boolean[] getBars() {
 		return bars;
+	}
+
+	public static BarcrawlManager getInstance(Player player)
+	{
+		return player.getAttribute("barcrawl-inst", new BarcrawlManager());
 	}
 }

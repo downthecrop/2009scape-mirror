@@ -148,11 +148,11 @@ public final class HunterPlugin extends OptionHandler {
 			final Player player = event.getPlayer();
 			final Scenery object = event.getUsedWith() instanceof Scenery ? (Scenery) event.getUsedWith() : (Scenery) event.getUsed();
 			final Item item = event.getUsedItem();
-			if (!player.getHunterManager().isOwner(object)) {
+			if (HunterManager.getInstance(player).isOwner(object)) {
 				player.sendMessage("This isn't your trap!");
 				return true;
 			}
-			final TrapWrapper wrapper = player.getHunterManager().getWrapper(object);
+			final TrapWrapper wrapper = HunterManager.getInstance(player).getWrapper(object);
 			if (item.getId() == 594) {
 				wrapper.smoke();
 			} else {

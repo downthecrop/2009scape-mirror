@@ -28,6 +28,7 @@ import rs09.game.ai.pvp.PVPAIPBuilderUtils
 import rs09.game.ai.resource.ResourceAIPActions
 import rs09.game.ai.skillingbot.SkillingBotsBuilder
 import rs09.game.ai.wilderness.PvPBotsBuilder
+import rs09.game.node.entity.skill.slayer.SlayerManager
 import java.util.*
 
 /**
@@ -195,7 +196,7 @@ class AIPCommandPlugin : CommandPlugin() {
                 return true
             }
             "slayerpoints" -> {
-                player.slayer.slayerPoints = 50000
+                SlayerManager.getInstance(player).slayerPoints = 50000
                 return true
             }
             "dragonbot" -> {
@@ -265,11 +266,11 @@ class AIPCommandPlugin : CommandPlugin() {
             }
             "ranger" -> {
             }
-            "removetask" -> return if (!player.slayer.hasTask()) {
+            "removetask" -> return if (!SlayerManager.getInstance(player).hasTask()) {
                 player.sendMessage("You don't have an active task right now.")
                 true
             } else {
-                player.slayer.clear()
+                SlayerManager.getInstance(player).clear()
                 player.sendMessage("You have canceled your current task.")
                 true
             }

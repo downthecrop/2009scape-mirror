@@ -5,6 +5,7 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.fletching.Fletching;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
+import rs09.game.node.entity.skill.slayer.SlayerManager;
 
 /**
  * Represents the arrow head pulse to complete the headless arrow.
@@ -43,7 +44,7 @@ public class ArrowHeadPulse extends SkillPulse<Item> {
 	@Override
 	public boolean checkRequirements() {
 		if (arrow.unfinished == 4160) {
-			if (!player.getSlayer().flags.isBroadsUnlocked()) {
+			if (!SlayerManager.getInstance(player).flags.isBroadsUnlocked()) {
 				player.getDialogueInterpreter().sendDialogue("You need to unlock the ability to create broad arrows.");
 				return false;
 			}

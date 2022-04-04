@@ -18,6 +18,7 @@ import org.rs09.consts.Components
 import rs09.ServerConstants
 import rs09.game.Event
 import rs09.game.camerautils.PlayerCamera
+import rs09.game.content.ame.RandomEventManager
 import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
 
@@ -231,7 +232,7 @@ abstract class Cutscene(val player: Player) {
         player.lock()
         player.hook(Event.SelfDeath, CUTSCENE_DEATH_HOOK)
         player.logoutListeners["cutscene"] = {player -> player.location = exitLocation; player.getCutscene()?.end() }
-        player.antiMacroHandler.enabled = false
+        RandomEventManager.getInstance(player)!!.enabled = false
     }
 
     /**
@@ -260,7 +261,7 @@ abstract class Cutscene(val player: Player) {
                         clearNPCs()
                         player.unhook(CUTSCENE_DEATH_HOOK)
                         player.logoutListeners.remove("cutscene")
-                        player.antiMacroHandler.enabled = true
+                        RandomEventManager.getInstance(player)!!.enabled = false
                         return true
                     }
                 }

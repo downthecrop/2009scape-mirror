@@ -4,6 +4,7 @@ import core.game.ge.GrandExchangeDatabase;
 import core.game.node.entity.npc.NPC;
 import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
+import rs09.game.ge.GrandExchangeRecords;
 import rs09.game.interaction.inter.ge.ExchangeItemSets;
 import rs09.game.interaction.inter.ge.StockMarket;
 
@@ -102,7 +103,7 @@ public final class GrandExchangeClerk extends DialoguePlugin {
 			break;
 		case 21:
 			end();
-			player.getExchangeRecords().openCollectionBox();
+			GrandExchangeRecords.getInstance(player).openCollectionBox();
 			break;
 		case 30:
 			npc("If that is your wish.");
@@ -110,7 +111,7 @@ public final class GrandExchangeClerk extends DialoguePlugin {
 			break;
 		case 31:
 			end();
-			player.getExchangeRecords().openHistoryLog(player);
+			GrandExchangeRecords.getInstance(player).openHistoryLog(player);
 			break;
 		case 40:
 			npc("It would be my pleasure, sir.");

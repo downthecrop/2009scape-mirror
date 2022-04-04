@@ -1,8 +1,11 @@
 package core.game.content.ttrail;
 
+import api.LoginListener;
+import api.PersistPlayer;
 import core.game.node.entity.player.Player;
 
 import core.tools.RandomFunction;
+import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -12,7 +15,7 @@ import java.nio.ByteBuffer;
  * Handles the treasure trail of a player.
  * @author Vexia
  */
-public final class TreasureTrailManager {
+public final class TreasureTrailManager implements LoginListener, PersistPlayer {
 
 	/**
 	 * The ids of the clues.
@@ -56,6 +59,53 @@ public final class TreasureTrailManager {
 	 */
 	public TreasureTrailManager(Player player) {
 		this.player = player;
+	}
+
+	public TreasureTrailManager() {this.player = null;}
+
+	@Override
+	public void login(@NotNull Player player) {
+		TreasureTrailManager instance = new TreasureTrailManager(player);
+		player.setAttribute("tt-manager", instance);
+	}
+
+	@Override
+	public void parsePlayer(@NotNull Player player, @NotNull JSONObject data) {
+		TreasureTrailManager instance = getInstance(player);
+		JSONObject ttData = (JSONObject) data.get("treasureTrails");
+		if(ttData == null) return;
+		JSONArray cc = (JSONArray) ttData.get("completedClues");
+		for(int i = 0; i < cc.size(); i++)
+		{
+			instance.completedClues[i] = Integer.parseInt(cc.get(i).toString());
+		}
+		if(ttData.containsKey("trail"))
+		{
+			JSONObject trail = (JSONObject) ttData.get("trail");
+			instance.clueId = Integer.parseInt(trail.get("clueId").toString());
+			instance.trailLength = Integer.parseInt(trail.get("length").toString());
+			instance.trailStage = Integer.parseInt(trail.get("stage").toString());
+		}
+	}
+
+	@Override
+	public void savePlayer(@NotNull Player player, @NotNull JSONObject save) {
+		TreasureTrailManager instance = getInstance(player);
+		JSONObject treasureTrailManager = new JSONObject();
+		if(instance.hasTrail()){
+			JSONObject trail = new JSONObject();
+			trail.put("clueId", Integer.toString(instance.clueId));
+			trail.put("length", Integer.toString(instance.trailLength));
+			trail.put("stage", Integer.toString(instance.trailStage));
+			treasureTrailManager.put("trail",trail);
+		}
+		JSONArray completedClues = new JSONArray();
+		for(int clue : instance.completedClues)
+		{
+			completedClues.add(Integer.toString(clue));
+		}
+		treasureTrailManager.put("completedClues",completedClues);
+		save.put("treasureTrails",treasureTrailManager);
 	}
 
 	public void parse(JSONObject data){
@@ -239,4 +289,8 @@ public final class TreasureTrailManager {
 		this.trailStage = trailStage;
 	}
 
+	public static TreasureTrailManager getInstance(Player player)
+	{
+		return player.getAttribute("tt-manager", new TreasureTrailManager());
+	}
 }

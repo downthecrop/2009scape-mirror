@@ -92,7 +92,7 @@ class StockMarket : InterfaceListener() {
         on(Components.STOCKMARKET_105){player, _, op, button, _, _ ->
             val tempOffer = getAttribute(player, "ge-temp", GrandExchangeOffer())
             var openedIndex = getAttribute(player, "ge-index", -1)
-            var openedOffer = player.exchangeRecords.getOffer(openedIndex)
+            var openedOffer = GrandExchangeRecords.getInstance(player).getOffer(openedIndex)
 
             when(button)
             {
@@ -105,19 +105,19 @@ class StockMarket : InterfaceListener() {
                 203 -> abortOffer(player, openedOffer)
                 18,34,50,69,88,107 -> {
                     openedIndex = (button - 18) shr 4
-                    openedOffer = player.exchangeRecords.getOffer(openedIndex)
+                    openedOffer = GrandExchangeRecords.getInstance(player).getOffer(openedIndex)
                     if(op == 205) abortOffer(player, openedOffer)
                     else updateVarbits(player, openedOffer, openedIndex)
                 }
                 30,46,62,81,100,119 -> {
                     openedIndex = (button - 30) shr 4
-                    openedOffer = player.exchangeRecords.getOffer(openedIndex)
+                    openedOffer = GrandExchangeRecords.getInstance(player).getOffer(openedIndex)
                     updateVarbits(player, openedOffer, openedIndex)
                     player.interfaceManager.openChatbox(Components.OBJDIALOG_389)
                 }
                 31,47,63,82,101,120 -> {
                     openedIndex = (button - 31) shr 4
-                    openedOffer = player.exchangeRecords.getOffer(openedIndex)
+                    openedOffer = GrandExchangeRecords.getInstance(player).getOffer(openedIndex)
                     updateVarbits(player, openedOffer, openedIndex, true)
                     player.interfaceManager.openSingleTab(Component(Components.STOCKSIDE_107)).open(player)
                     player.packetDispatch.sendRunScript(
@@ -257,7 +257,7 @@ class StockMarket : InterfaceListener() {
             }
             if(GrandExchange.dispatch(player, offer))
             {
-                player.exchangeRecords.offerRecords[offer.index] = GrandExchangeRecords.OfferRecord(offer.uid,offer.index)
+                GrandExchangeRecords.getInstance(player).offerRecords[offer.index] = GrandExchangeRecords.OfferRecord(offer.uid,offer.index)
                 player.removeAttribute("ge-temp")
             }
             else
@@ -276,7 +276,7 @@ class StockMarket : InterfaceListener() {
             }
             if(GrandExchange.dispatch(player, offer) && removeItem(player, Item(995, total)))
             {
-                player.exchangeRecords.offerRecords[offer.index] = GrandExchangeRecords.OfferRecord(offer.uid, offer.index)
+                GrandExchangeRecords.getInstance(player).offerRecords[offer.index] = GrandExchangeRecords.OfferRecord(offer.uid, offer.index)
                 player.removeAttribute("ge-temp")
             }
         }
@@ -371,10 +371,10 @@ class StockMarket : InterfaceListener() {
                 {
                     val newHistory = arrayOfNulls<GrandExchangeOffer>(5)
                     newHistory[0] = offer
-                    System.arraycopy(player.exchangeRecords.history, 0, newHistory, 1, 4)
-                    player.exchangeRecords.history = newHistory
+                    System.arraycopy(GrandExchangeRecords.getInstance(player).history, 0, newHistory, 1, 4)
+                    GrandExchangeRecords.getInstance(player).history = newHistory
                 }
-                player.exchangeRecords.offerRecords[offer.index] = null
+                GrandExchangeRecords.getInstance(player).offerRecords[offer.index] = null
                 toMainInterface(player)
             }
             offer.update()

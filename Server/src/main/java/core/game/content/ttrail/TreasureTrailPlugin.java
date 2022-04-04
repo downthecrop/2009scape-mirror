@@ -145,7 +145,7 @@ public final class TreasureTrailPlugin extends OptionHandler {
 		 * @return {@code True} if so.
 		 */
 		private boolean hasClue(Player player) {
-			return player.getTreasureTrailManager().hasClue();
+			return TreasureTrailManager.getInstance(player).hasClue();
 		}
 
 	}

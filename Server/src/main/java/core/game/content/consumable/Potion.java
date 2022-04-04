@@ -1,5 +1,6 @@
 package core.game.content.consumable;
 
+import core.game.content.quest.miniquest.barcrawl.BarcrawlManager;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.Item;
@@ -21,7 +22,7 @@ public class Potion extends Drink {
         if (nextItemId != -1) {
             player.getInventory().replace(new Item(nextItemId), item.getSlot());
         } else {
-            if (player.getBarcrawlManager().isFinished()) {
+            if (BarcrawlManager.getInstance(player).isFinished()) {
                 player.getInventory().remove(item);
             } else {
                 player.getInventory().replace(new Item(VIAL), item.getSlot());

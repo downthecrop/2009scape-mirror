@@ -1,5 +1,6 @@
 package rs09.game.node.entity.player.info.login
 
+import api.PersistPlayer
 import core.game.container.Container
 import core.game.interaction.item.brawling_gloves.BrawlingGloves
 import core.game.node.entity.player.Player
@@ -28,51 +29,36 @@ import javax.script.ScriptEngineManager
  * @author Ceikry
  */
 class PlayerSaver (val player: Player){
-    private fun populate(): JSONObject = runBlocking{
+    companion object {
+        val contentHooks = ArrayList<PersistPlayer>()
+    }
+    private fun populate(): JSONObject {
         val saveFile = JSONObject()
-        val a = launch {
-            saveCoreData(saveFile)
-            saveSkills(saveFile)
-            saveSettings(saveFile)
-            saveSlayer(saveFile)
-            saveQuests(saveFile)
-            saveAppearance(saveFile)
-            saveSpellbook(saveFile)
-            saveVarps(saveFile)
-        }
-        val b = launch {
-            saveGraveType(saveFile)
-            saveGrandExchangeData(saveFile)
-            saveSavedData(saveFile)
-            saveAutocast(saveFile)
-            saveFarming(saveFile)
-            saveConfigs(saveFile)
-            savePlayerMonitor(saveFile)
-        }
-        val c = launch {
-            saveMusicPlayer(saveFile)
-            saveFamiliarManager(saveFile)
-            saveBarCrawl(saveFile)
-            saveStateManager(saveFile)
-            saveAntiMacroHandler(saveFile)
-            saveTreasureTrails(saveFile)
-            saveBankPinData(saveFile)
-        }
-        val d = launch {
-            saveHouseData(saveFile)
-            saveAchievementData(saveFile)
-            saveIronManData(saveFile)
-            saveEmoteData(saveFile)
-            saveStatManager(saveFile)
-            saveBrawlingGloves(saveFile)
-            saveAttributes(saveFile)
-        }
-        a.join()
-        b.join()
-        c.join()
-        d.join()
+        saveCoreData(saveFile)
+        saveSkills(saveFile)
+        saveSettings(saveFile)
+        saveQuests(saveFile)
+        saveAppearance(saveFile)
+        saveSpellbook(saveFile)
+        saveVarps(saveFile)
+        saveGraveType(saveFile)
+        saveSavedData(saveFile)
+        saveAutocast(saveFile)
+        saveConfigs(saveFile)
+        savePlayerMonitor(saveFile)
+        saveMusicPlayer(saveFile)
+        saveFamiliarManager(saveFile)
+        saveStateManager(saveFile)
+        saveBankPinData(saveFile)
+        saveHouseData(saveFile)
+        saveAchievementData(saveFile)
+        saveIronManData(saveFile)
+        saveEmoteData(saveFile)
+        saveStatManager(saveFile)
+        saveAttributes(saveFile)
         savePouches(saveFile)
-        saveFile
+        contentHooks.forEach { it.savePlayer(player, saveFile) }
+        return saveFile
     }
     fun save() = runBlocking {
         val manager = ScriptEngineManager()
@@ -135,19 +121,6 @@ class PlayerSaver (val player: Player){
                 attrs.add(attr)
             }
             root.put("attributes",attrs)
-        }
-    }
-
-    fun saveBrawlingGloves(root: JSONObject){
-        if(player.brawlingGlovesManager.GloveCharges.isNotEmpty()){
-            val brawlingGloves = JSONArray()
-            player.brawlingGlovesManager.GloveCharges.map {
-                val brawlingGlove = JSONObject()
-                brawlingGlove.put("gloveId",BrawlingGloves.forId(it.key).indicator.toString())
-                brawlingGlove.put("charges",it.value.toString())
-                brawlingGloves.add(brawlingGlove)
-            }
-            root.put("brawlingGloves",brawlingGloves)
         }
     }
 
@@ -277,33 +250,6 @@ class PlayerSaver (val player: Player){
         root.put("bankPinManager",bankPinManager)
     }
 
-    fun saveTreasureTrails(root: JSONObject){
-        val treasureTrailManager = JSONObject()
-        if(player.treasureTrailManager.hasTrail()){
-            val trail = JSONObject()
-            trail.put("clueId",player.treasureTrailManager.clueId.toString())
-            trail.put("length",player.treasureTrailManager.trailLength.toString())
-            trail.put("stage",player.treasureTrailManager.trailStage.toString())
-            treasureTrailManager.put("trail",trail)
-        }
-        val completedClues = JSONArray()
-        player.treasureTrailManager.completedClues.map {
-            completedClues.add(it.toString())
-        }
-        treasureTrailManager.put("completedClues",completedClues)
-        root.put("treasureTrails",treasureTrailManager)
-    }
-
-    fun saveAntiMacroHandler(root: JSONObject){
-        /*if(player.antiMacroHandler.isSaveRequired){
-            val antiMacroEvent = JSONObject()
-            if(player.antiMacroHandler.hasEvent()){
-                antiMacroEvent.put("eventName",player.antiMacroHandler.event.name)
-                root.put("antiMacroEvent",antiMacroEvent)
-            }
-        }*/
-    }
-
     fun saveStateManager(root: JSONObject){
         val states = JSONArray()
         player.states.forEach{key,clazz ->
@@ -315,17 +261,6 @@ class PlayerSaver (val player: Player){
             }
         }
         root.put("states",states)
-    }
-
-    fun saveBarCrawl(root: JSONObject){
-        val barCrawl = JSONObject()
-        barCrawl.put("started",player.barcrawlManager.isStarted)
-        val barsVisited = JSONArray()
-        player.barcrawlManager.bars.map {
-            barsVisited.add(it)
-        }
-        barCrawl.put("bars",barsVisited)
-        root.put("barCrawl",barCrawl)
     }
 
     fun saveFamiliarManager(root: JSONObject){
@@ -393,56 +328,6 @@ class PlayerSaver (val player: Player){
             idx++
         }
         root.put("configs",configs)
-    }
-
-    fun saveFarming(root: JSONObject){
-        /*val farming = JSONObject()
-        if(player.farmingManager.equipment.container.itemCount() != 0) {
-            val equipment = saveContainer(player.farmingManager.equipment.container)
-            farming.put("equipment",equipment)
-        }
-        if(player.farmingManager.compostManager.bins.size != 0){
-            val bins = JSONArray()
-            player.farmingManager.compostManager.bins.map { compostBin ->
-                val bin = JSONObject()
-                bin.put("wrapperId",compostBin.wrapperId.toString())
-                if(compostBin.timeStamp != 0L){
-                    bin.put("timeStamp",compostBin.timeStamp.toString())
-                }
-                if(compostBin.compostLevel > 0) {
-                    bin.put("compostLevel",compostBin.compostLevel.toString())
-                }
-                if(compostBin.container.itemCount() > 0) {
-                    val compostContainer = saveContainer(compostBin.container)
-                    bin.put("compostContainer", compostContainer)
-                }
-                bins.add(bin)
-            }
-            farming.put("bins",bins)
-            player.farmingManager.seedlingManager.save(farming)
-        }
-
-        if(player.farmingManager.patches.size != 0){
-            val wrappers = JSONArray()
-            player.farmingManager.patches.map {
-                val wrapper = JSONObject()
-                wrapper.put("wrapperId",it.wrapperId.toString())
-                if(player.farmingManager.amuletBoundWrapper == player.farmingManager.getPatchWrapper(it.wrapperId))
-                    farming.put("farmingAmuletWrapperID",it.wrapperId)
-                val cycle = JSONObject()
-                cycle.put("compostThreshold",it.cycle.compostThreshold.toString())
-                cycle.put("growthTime",it.cycle.growthTime.toString())
-                cycle.put("harvestAmount",it.cycle.harvestAmount.toString())
-                cycle.put("protection",it.cycle.isProtected)
-                wrapper.put("cycle",cycle)
-                if(it.node != null){
-                    wrapper.put("nodeId",it.patch.getNodePosition(it.node).toString())
-                }
-                wrappers.add(wrapper)
-            }
-            farming.put("wrappers",wrappers)
-        }
-        root.put("farming",farming)*/
     }
 
     fun saveAutocast(root: JSONObject){
@@ -631,36 +516,6 @@ class PlayerSaver (val player: Player){
         root.put("activityData",activityData)
     }
 
-
-    fun saveGrandExchangeData(root: JSONObject){
-        val grandExchange = JSONObject()
-        if(player.exchangeRecords.hasActiveOffer()){
-            val offers = JSONArray()
-            player.exchangeRecords.offerRecords.map {
-                if(it != null){
-                    val offer = JSONObject()
-                    offer["index"] = it.slot.toString()
-                    offer["uid"] = it.uid.toString()
-                    offers.add(offer)
-                }
-            }
-            grandExchange["offers"] = offers
-        }
-        val history = JSONArray()
-        player.exchangeRecords.history.map {
-            if(it != null){
-                val historyEntry = JSONObject()
-                historyEntry["isSell"] = it.sell
-                historyEntry["itemId"] = it.itemID.toString()
-                historyEntry["totalCoinExchange"] = it.totalCoinExchange.toString()
-                historyEntry["completedAmount"] = it.completedAmount.toString()
-                history.add(historyEntry)
-            }
-        }
-        grandExchange["history"] = history
-        root["grand_exchange"] = grandExchange
-    }
-
     fun saveGraveType(root: JSONObject){
         root.put("grave_type",player.graveManager.type.ordinal.toString())
     }
@@ -695,24 +550,6 @@ class PlayerSaver (val player: Player){
         }
         quests.put("questStages",questStages)
         root.put("quests",quests)
-    }
-
-    fun saveSlayer(root: JSONObject){
-        val slayer = JSONObject()
-        val slayerManager = player.slayer
-        if(slayerManager.removed.isNotEmpty()) {
-            val removedTasks = JSONArray()
-            slayerManager.removed.map {
-                removedTasks.add(it.ordinal.toString())
-            }
-            slayer.put("removedTasks",removedTasks)
-        }
-        slayer.put("taskStreak",slayerManager.flags.taskStreak.toString())
-        slayer.put("totalTasks",slayerManager.flags.completedTasks.toString())
-        slayer.put("equipmentFlags",slayerManager.flags.equipmentFlags)
-        slayer.put("taskFlags", slayerManager.flags.taskFlags)
-        slayer.put("rewardFlags", slayerManager.flags.rewardFlags)
-        root.put("slayer",slayer)
     }
 
     fun saveSettings(root: JSONObject){

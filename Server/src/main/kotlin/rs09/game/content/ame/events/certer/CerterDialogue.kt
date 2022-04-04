@@ -3,6 +3,7 @@ package rs09.game.content.ame.events.certer
 import api.addItemOrDrop
 import core.game.component.Component
 import core.game.node.entity.player.link.emote.Emotes
+import rs09.game.content.ame.RandomEventManager
 import rs09.game.content.dialogue.DialogueFile
 import rs09.tools.END_DIALOGUE
 
@@ -29,13 +30,13 @@ class CerterDialogue(val initial: Boolean) : DialogueFile() {
                     npc("Sorry, I don't think so.").also {
                         player!!.setAttribute("certer:reward", true)
                         stage = END_DIALOGUE
-                        player!!.antiMacroHandler.event?.terminate()
+                        RandomEventManager.getInstance(player!!)?.event?.terminate()
                     }
                 } else {
                     npc("Thank you, I hope you like your present. I must be", "leaving now though.").also {
                         player!!.setAttribute("certer:reward", true)
                         stage = END_DIALOGUE
-                        player!!.antiMacroHandler.event?.loot!!.roll().forEach { addItemOrDrop(player!!, it.id, it.amount) }
+                        RandomEventManager.getInstance(player!!)!!.event!!.loot!!.roll().forEach { addItemOrDrop(player!!, it.id, it.amount) }
                     }
                 }
             }
@@ -50,7 +51,7 @@ class CerterDialogue(val initial: Boolean) : DialogueFile() {
             // Wave goodbye
             npc!!.animate(Emotes.WAVE.animation)
             // Terminate the event
-            player!!.antiMacroHandler.event?.terminate()
+            RandomEventManager.getInstance(player!!)?.event?.terminate()
         } else {
             player!!.setAttribute("random:pause", false)
         }

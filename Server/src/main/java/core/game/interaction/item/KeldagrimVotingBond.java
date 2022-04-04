@@ -155,12 +155,12 @@
 //						interpreter.sendItemMessage(14807, "Sorry, you don't have enough inventory space.");
 //						return true;
 //					}
-//					if (player.getTreasureTrailManager().hasClue()) {
+//					if (TreasureTrailManager.getInstance(player).hasClue()) {
 //						interpreter.sendItemMessage(14807, "Sorry, you already have a clue scroll.");
 //						break;
 //					}
-//					if (player.getTreasureTrailManager().hasTrail()) {
-//						player.getTreasureTrailManager().clearTrail();
+//					if (TreasureTrailManager.getInstance(player).hasTrail()) {
+//						TreasureTrailManager.getInstance(player).clearTrail();
 //					}
 //					Item clue = ClueScrollPlugin.getClue(RandomFunction.getRandomElement(ClueLevel.values()));
 //					if (player.getInventory().remove(BOND)) {

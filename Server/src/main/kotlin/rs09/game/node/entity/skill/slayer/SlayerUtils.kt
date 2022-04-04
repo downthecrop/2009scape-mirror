@@ -31,20 +31,20 @@ object SlayerUtils {
 
     fun canBeAssigned(player: Player, task: Tasks): Boolean
     {
-        return player.getSkills().getLevel(Skills.SLAYER) >= task.levelReq && !player.slayer.flags.removed.contains(task)
+        return player.getSkills().getLevel(Skills.SLAYER) >= task.levelReq && !SlayerManager.getInstance(player).flags.removed.contains(task)
     }
 
     fun assign(player: Player, task: Tasks, master: Master)
     {
-        player.slayer.master = master
-        player.slayer.task = task
-        player.slayer.amount = RandomFunction.random(master.assignment_range[0], master.assignment_range[1])
+        SlayerManager.getInstance(player).master = master
+        SlayerManager.getInstance(player).task = task
+        SlayerManager.getInstance(player).amount = RandomFunction.random(master.assignment_range[0], master.assignment_range[1])
         if (master == Master.DURADEL) {
             player.achievementDiaryManager.finishTask(player, DiaryType.KARAMJA, 2, 8)
         } else if (master == Master.VANNAKA) {
             player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 1, 14)
         }
-        player.varpManager.get(2502).setVarbit(0, player.slayer.flags.taskFlags shr 4).send(player)
+        player.varpManager.get(2502).setVarbit(0, SlayerManager.getInstance(player).flags.taskFlags shr 4).send(player)
     }
 
     @JvmStatic

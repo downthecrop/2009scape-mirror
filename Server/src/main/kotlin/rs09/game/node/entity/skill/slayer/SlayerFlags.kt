@@ -1,6 +1,5 @@
 package rs09.game.node.entity.skill.slayer
 
-import core.game.node.entity.player.Player
 import core.game.node.entity.skill.slayer.Master
 import core.game.node.entity.skill.slayer.Tasks
 
@@ -8,7 +7,7 @@ import core.game.node.entity.skill.slayer.Tasks
  * Bitflag-based system for storing slayer-related data for a player and various helper functions.
  * @author Ceikry
  */
-class SlayerFlags(val player: Player) {
+class SlayerFlags {
     var taskFlags = 0
     var rewardFlags = 0
     var equipmentFlags = 0

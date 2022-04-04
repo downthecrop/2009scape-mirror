@@ -10,6 +10,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import rs09.game.node.entity.skill.slayer.SlayerManager;
 
 /**
  * Represents the plugin used to handle enchanted jewellery transportation.
@@ -27,7 +28,7 @@ public final class EnchantedGemPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		player.sendMessage("You're assigned to kill " + NPCDefinition.forId((player.getSlayer().getTask().getNpcs()[0])).getName().toLowerCase() + "s; only " + player.getSlayer().getAmount() + " more to go.");
+		player.sendMessage("You're assigned to kill " + NPCDefinition.forId((SlayerManager.getInstance(player).getTask().getNpcs()[0])).getName().toLowerCase() + "s; only " + SlayerManager.getInstance(player).getAmount() + " more to go.");
 		return true;
 	}
 

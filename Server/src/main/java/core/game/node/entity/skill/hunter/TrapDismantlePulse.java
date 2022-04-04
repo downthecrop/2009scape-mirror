@@ -27,6 +27,8 @@ public final class TrapDismantlePulse extends SkillPulse<Scenery> {
 	 */
 	private int ticks;
 
+	private final HunterManager instance;
+
 	/**
 	 * Constructs a new {@code TrapDismantlePulse} {@code Object}.
 	 * @param player the player.
@@ -36,11 +38,12 @@ public final class TrapDismantlePulse extends SkillPulse<Scenery> {
 		super(player, node);
 		this.trap = wrapper.getType();
 		this.wrapper = wrapper;
+		this.instance = HunterManager.getInstance(player);
 	}
 
 	@Override
 	public boolean checkRequirements() {
-		if (wrapper == null || !player.getHunterManager().isOwner(node)) {
+		if (wrapper == null || !instance.isOwner(node)) {
 			player.sendMessage("This isn't your trap!");
 			return false;
 		}
@@ -66,7 +69,7 @@ public final class TrapDismantlePulse extends SkillPulse<Scenery> {
 			return false;
 		}
 		if (wrapper.getType().getSettings().clear(wrapper, 1)) {
-			player.getHunterManager().deregister(wrapper);
+			instance.deregister(wrapper);
 			if (wrapper.isCaught()) {
 				if (wrapper.getType().equals(Traps.BOX_TRAP)) {
 					for (int i : wrapper.getReward().getNpcIds()) {

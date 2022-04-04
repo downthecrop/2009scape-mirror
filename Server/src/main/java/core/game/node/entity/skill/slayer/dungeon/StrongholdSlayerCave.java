@@ -74,8 +74,8 @@ public class StrongholdSlayerCave extends MapZone implements Plugin<Object> {
 				return true;
 			}
 			attack: {
-				if (player.getSlayer().getMaster() == Master.NIEVE) {
-					for (int i : player.getSlayer().getTask().getNpcs()) {
+				if (SlayerManager.getInstance(player).getMaster() == Master.NIEVE) {
+					for (int i : SlayerManager.getInstance(player).getTask().getNpcs()) {
 						if (i != id) {
 							continue;
 						}
@@ -206,8 +206,8 @@ public class StrongholdSlayerCave extends MapZone implements Plugin<Object> {
 			return super.continueAttack(player, target, style, message);
 		}
 		int id = target.getId();
-		if (player.getSlayer().getMaster() == Master.NIEVE) {
-			for (int i : player.getSlayer().getTask().getNpcs()) {
+		if (SlayerManager.getInstance(player).getMaster() == Master.NIEVE) {
+			for (int i : SlayerManager.getInstance(player).getTask().getNpcs()) {
 				if (i != id) {
 					continue;
 				}

@@ -1,6 +1,7 @@
 package core.game.node.entity.skill;
 
 import core.game.interaction.item.brawling_gloves.BrawlingGloves;
+import core.game.interaction.item.brawling_gloves.BrawlingGlovesManager;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.ImpactHandler;
 import core.game.node.entity.npc.NPC;
@@ -218,14 +219,15 @@ public final class Skills {
 		boolean already200m = this.experience[slot] == 200000000;
 		double experienceAdd = (experience * mod);
 		//check if a player has brawling gloves and, if equipped, modify xp
-		if(!player.getBrawlingGlovesManager().GloveCharges.isEmpty()){
+		BrawlingGlovesManager bgManager = BrawlingGlovesManager.getInstance(player);
+		if(!bgManager.GloveCharges.isEmpty()){
 			Item gloves = BrawlingGloves.forSkill(slot) == null ? null : new Item(BrawlingGloves.forSkill(slot).getId());
 			if(gloves == null && (slot == Skills.STRENGTH || slot == Skills.DEFENCE)){
 				gloves = new Item (BrawlingGloves.forSkill(Skills.ATTACK).getId());
 			}
 			if(gloves != null && player.getEquipment().containsItem(gloves)){
-				experienceAdd += experienceAdd * player.getBrawlingGlovesManager().getExperienceBonus();
-				player.getBrawlingGlovesManager().updateCharges(gloves.getId(),1);
+				experienceAdd += experienceAdd * bgManager.getExperienceBonus();
+				bgManager.updateCharges(gloves.getId(),1);
 			}
 		}
 		//Check for Flame Gloves and Ring of Fire

@@ -4,6 +4,7 @@ import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
 
+import rs09.game.ge.GrandExchangeRecords;
 import rs09.game.interaction.inter.ge.StockMarket;
 import rs09.game.world.GameWorld;
 import core.net.packet.PacketRepository;
@@ -202,7 +203,7 @@ public class BankPinManager {
 				player.getBank().open();
 			}
 		} else if (buttonId == 3) {
-			player.getExchangeRecords().openCollectionBox();
+			GrandExchangeRecords.getInstance(player).openCollectionBox();
 		} else if (buttonId == 4) {
 			StockMarket.openFor(player);
 		}
