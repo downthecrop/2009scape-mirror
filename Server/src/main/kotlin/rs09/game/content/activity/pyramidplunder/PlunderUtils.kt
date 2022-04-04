@@ -70,6 +70,11 @@ object PlunderUtils {
         else
             getRoom(current.room + 1)
 
+        if(PlunderData.playerLocations.filter { it.value == next }.isEmpty()) //if no one is in the next room
+        {
+            PlunderData.doors[next.room] = PlunderData.doorVarbits.random() //reshuffle the next room's exit door
+        }
+
         teleport(player, next.entrance)
         PlunderData.playerLocations[player] = next
     }
@@ -172,14 +177,6 @@ object PlunderUtils {
     {
         val room = getRoom(player)!!.room
         return PlunderData.doors[room - 1]
-    }
-
-    fun shuffleDoors()
-    {
-        for(i in 0 until 8)
-        {
-            PlunderData.doors[i] = PlunderData.doorVarbits.random()
-        }
     }
 
     fun rollSceptre(player: Player): Boolean
