@@ -1,6 +1,7 @@
 package core.game.node.entity.player.info.login;
 
 import core.game.node.entity.player.Player;
+import org.json.simple.JSONObject;
 import rs09.ServerConstants;
 import rs09.game.node.entity.player.info.login.PlayerSaveParser;
 import rs09.game.node.entity.player.info.login.PlayerSaver;
@@ -17,23 +18,15 @@ public final class PlayerParser {
 	 * Parses or creates the player's save file depending on whether or not it exists.
 	 * @param player The player.
 	 */
-	public static boolean parse(Player player) {
-		File JSON = new File(ServerConstants.PLAYER_SAVE_PATH + player.getName() + ".json");
+	public static PlayerSaveParser parse(Player player) {
+		PlayerSaveParser parser = new PlayerSaveParser(player);
 
 		try {
-			if (JSON.exists()) { //parse the new JSON type.
-				new PlayerSaveParser(player).parse();
-			} else { //Create new save
-				if(!(new File(ServerConstants.PLAYER_SAVE_PATH + "template/template.json")).exists()){
-					return true;
-				}
-				makeFromTemplate(player);
-				new PlayerSaveParser(player).parse();
-			}
-			return true;
+			parser.parse();
+			return parser;
 		} catch (Exception e){
 			e.printStackTrace();
-			return false;
+			return null;
 		}
 	}
 	/**

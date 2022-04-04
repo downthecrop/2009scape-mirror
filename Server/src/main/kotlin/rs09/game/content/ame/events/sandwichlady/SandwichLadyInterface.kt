@@ -2,6 +2,7 @@ package rs09.game.content.ame.events.sandwichlady
 
 import core.game.node.item.Item
 import org.rs09.consts.Items
+import rs09.game.content.ame.RandomEventManager
 import rs09.game.interaction.InterfaceListener
 
 class SandwichLadyInterface  : InterfaceListener(){
@@ -31,7 +32,7 @@ class SandwichLadyInterface  : InterfaceListener(){
 
             player.setAttribute("sandwich-lady:choice",item.id)
             player.interfaceManager.close()
-            player.dialogueInterpreter.open(SandwichLadyDialogue(true),player.antiMacroHandler.event)
+            player.dialogueInterpreter.open(SandwichLadyDialogue(true), RandomEventManager.getInstance(player)!!.event)
             return@on true
         }
     }

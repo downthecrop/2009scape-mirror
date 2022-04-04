@@ -2,6 +2,7 @@ package rs09.game.content.ame.events.drilldemon
 
 import core.game.content.dialogue.FacialExpression
 import core.game.system.task.Pulse
+import rs09.game.content.ame.RandomEventManager
 import rs09.game.content.dialogue.DialogueFile
 import rs09.tools.END_DIALOGUE
 import rs09.tools.START_DIALOGUE
@@ -9,7 +10,7 @@ import rs09.tools.START_DIALOGUE
 class SeargentDamienDialogue(val isCorrect: Boolean = false) : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         var correctAmt = player!!.getAttribute(DrillDemonUtils.DD_CORRECT_COUNTER,0)
-        if(correctAmt == 4 && player!!.antiMacroHandler.event == null) {
+        if(correctAmt == 4 && RandomEventManager.getInstance(player!!)!!.event == null) {
             when(stage){
                 0 -> npc(FacialExpression.OLD_NORMAL,"My god you actually did it, you limp","wristed worm-bodied MAGGOT! Take this","and get out of my sight.").also { stage++ }
                 1 -> {
@@ -24,7 +25,7 @@ class SeargentDamienDialogue(val isCorrect: Boolean = false) : DialogueFile() {
                     })
                 }
             }
-        } else if(player!!.antiMacroHandler.event == null){
+        } else if(RandomEventManager.getInstance(player!!)!!.event == null){
             when(stage){
                 START_DIALOGUE -> if(isCorrect) npc(FacialExpression.OLD_NORMAL,"Good! Now...").also { stage++ } else npc(FacialExpression.OLD_ANGRY1,"WRONG, MAGGOT!").also { stage++ }
                 1 -> {
@@ -40,12 +41,12 @@ class SeargentDamienDialogue(val isCorrect: Boolean = false) : DialogueFile() {
                     1 -> {
                         end()
                         DrillDemonUtils.teleport(player!!)
-                        player!!.antiMacroHandler.event?.terminate()
+                        RandomEventManager.getInstance(player!!)!!.event?.terminate()
                         stage = END_DIALOGUE
                     }
                     2 -> {
                         end()
-                        player!!.antiMacroHandler.event?.terminate()
+                        RandomEventManager.getInstance(player!!)!!.event?.terminate()
                         stage = END_DIALOGUE
                     }
                 }

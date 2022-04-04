@@ -15,8 +15,11 @@ import io.github.classgraph.ClassInfo
 import rs09.game.ai.general.scriptrepository.PlayerScripts
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InterfaceListener
+import rs09.game.node.entity.player.info.login.PlayerSaveParser
+import rs09.game.node.entity.player.info.login.PlayerSaver
 import rs09.game.node.entity.skill.magic.SpellListener
 import rs09.game.system.SystemLogger
+import rs09.game.system.command.Command
 import rs09.game.world.GameWorld
 import java.util.*
 import java.util.function.Consumer
@@ -105,6 +108,15 @@ object ClassScanner {
         result.getClassesImplementing("api.TickListener").filter { !it.isAbstract }.forEach {
             val clazz = it.loadClass().newInstance() as TickListener
             GameWorld.tickListeners.add(clazz)
+        }
+        result.getClassesImplementing("api.PersistPlayer").filter { !it.isAbstract }.forEach {
+            val clazz = it.loadClass().newInstance() as PersistPlayer
+            PlayerSaver.contentHooks.add(clazz)
+            PlayerSaveParser.contentHooks.add(clazz)
+        }
+        result.getClassesImplementing("api.PersistWorld").filter { !it.isAbstract }.forEach {
+            val clazz = it.loadClass().newInstance() as PersistPlayer
+            PlayerSaver.contentHooks.add(clazz)
         }
     }
 

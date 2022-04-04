@@ -1,5 +1,6 @@
 package core.game.node.entity.skill.hunter;
 
+import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.hunter.NetTrapSetting.NetTrap;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
@@ -88,6 +89,8 @@ public final class TrapWrapper {
 	 */
 	private int ticks;
 
+	private HunterManager instance;
+
 	/**
 	 * Constructs a new {@code TrapWrapper} {@code Object}.
 	 * @param player the player.
@@ -100,7 +103,8 @@ public final class TrapWrapper {
 		this.object = object;
 		this.originalId = object.getId();
 		this.ticks = GameWorld.getTicks() + (100);
-		this.object.getAttributes().setAttribute("trap-uid", player.getHunterManager().getUid());
+		this.instance = HunterManager.getInstance(player);
+		this.object.getAttributes().setAttribute("trap-uid", instance.getUid());
 	}
 
 	/**
@@ -125,7 +129,7 @@ public final class TrapWrapper {
 		Scenery newObject = object.transform(id);
 		SceneryBuilder.remove(object);
 		this.object = SceneryBuilder.add(newObject);
-		this.object.getAttributes().setAttribute("trap-uid", player.getHunterManager().getUid());
+		this.object.getAttributes().setAttribute("trap-uid", instance.getUid());
 	}
 
 	/**
@@ -136,7 +140,7 @@ public final class TrapWrapper {
 			player.sendMessage("This trap has already been smoked.");
 			return;
 		}
-		if (player.getHunterManager().getStaticLevel() < 39) {
+		if (player.skills.getStaticLevel(Skills.HUNTER) < 39) {
 			player.sendMessage("You need a Hunter level of at least 39 to be able to smoke traps.");
 			return;
 		}

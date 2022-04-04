@@ -496,7 +496,7 @@ public enum ClueLevel {
 				return;
 			}
 		}
-		if (player.getTreasureTrailManager().isCompleted() || GameWorld.getSettings().isDevMode()) {
+		if (TreasureTrailManager.getInstance(player).isCompleted() || GameWorld.getSettings().isDevMode()) {
 			final List<Item> rewards = getLoot(player);
 			player.getInterfaceManager().open(new Component(364).setCloseEvent(new CloseEvent() {
 				private boolean given;
@@ -515,10 +515,10 @@ public enum ClueLevel {
 			if (casket != null) {
 				player.getInventory().remove(casket);
 			}
-			player.getTreasureTrailManager().incrementClues(this);
-			player.getTreasureTrailManager().clearTrail();
+			TreasureTrailManager.getInstance(player).incrementClues(this);
+			TreasureTrailManager.getInstance(player).clearTrail();
 			player.sendMessage("Well done, you've completed the Treasure Trail!");
-			player.sendMessage(getChatColor(this) + "You have completed " + player.getTreasureTrailManager().getCompletedClues(this) + " " + this.getName().toLowerCase() + " Treasure Trails.</col>");
+			player.sendMessage(getChatColor(this) + "You have completed " + TreasureTrailManager.getInstance(player).getCompletedClues(this) + " " + this.getName().toLowerCase() + " Treasure Trails.</col>");
 			long value = 0;
 			for (Item item : rewards) {
 				value += item.getValue();
@@ -538,7 +538,7 @@ public enum ClueLevel {
 		} else {
 			player.getInventory().add(clue);
 		}
-		player.getTreasureTrailManager().setClueId(clue.getId());
+		TreasureTrailManager.getInstance(player).setClueId(clue.getId());
 		player.getDialogueInterpreter().sendItemMessage(clue, "You've found another clue!");
 	}
 

@@ -94,16 +94,18 @@ public enum Traps {
 	 * @param object the object.
 	 */
 	public void dismantle(Player player, Scenery object) {
-		if (!player.getHunterManager().isOwner(object)) {
+		HunterManager instance = HunterManager.getInstance(player);
+
+		if (!instance.isOwner(object)) {
 			player.sendMessage("This isn't your trap!");
 			return;
 		}
-		if (player.getHunterManager().getWrapper(object) == null) {
+		if (instance.getWrapper(object) == null) {
 			SystemLogger.logErr("NO WRAPPER (HUNTER DISMANTLE)");
 			return;
 		}
 		player.faceLocation(object.getLocation());
-		player.getPulseManager().run(new TrapDismantlePulse(player, object, player.getHunterManager().getWrapper(object)));
+		player.getPulseManager().run(new TrapDismantlePulse(player, object, instance.getWrapper(object)));
 	}
 
 	/**

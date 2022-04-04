@@ -17,7 +17,7 @@ class TutorialLoginCheck : LoginListener {
                 setAttribute(player, "/save:tutorial:complete", true)
                 return
             }
-            GameWorld.Pulser.submit(object : Pulse() {
+            GameWorld.Pulser.submit(object : Pulse(2) {
                 override fun pulse(): Boolean {
                     TutorialStage.load(player, getAttribute(player, "tutorial:stage", 0), true)
                     return true
