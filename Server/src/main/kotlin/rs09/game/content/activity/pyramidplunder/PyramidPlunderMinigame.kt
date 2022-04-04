@@ -251,6 +251,12 @@ class PyramidPlunderMinigame : InteractionListener(), TickListener, LogoutListen
             val anim = Animation(CHECK_ANIM)
             val duration = animationDuration(anim)
 
+            if(PlunderUtils.getRoom(player)!!.room == 8)
+            {
+                sendMessage(player, "This is the final room. I should probably just leave instead.")
+                return@on true
+            }
+
             animate(player, anim)
             player.lock()
             val rate =

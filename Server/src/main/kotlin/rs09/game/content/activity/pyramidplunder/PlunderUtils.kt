@@ -266,7 +266,7 @@ object PlunderUtils {
         //tier 2 -> sarcophagus
         //tier 3 -> chest
         val room = getRoom(player)!!.room
-        val divisor = room * (tier * 35)
+        val divisor = (room * 2) * (tier * 35)
         val goldRate = divisor / 650
         val stoneRate = divisor / 250
 
