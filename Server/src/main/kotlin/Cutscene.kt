@@ -261,7 +261,7 @@ abstract class Cutscene(val player: Player) {
                         clearNPCs()
                         player.unhook(CUTSCENE_DEATH_HOOK)
                         player.logoutListeners.remove("cutscene")
-                        RandomEventManager.getInstance(player)!!.enabled = false
+                        RandomEventManager.getInstance(player)!!.enabled = true
                         return true
                     }
                 }
