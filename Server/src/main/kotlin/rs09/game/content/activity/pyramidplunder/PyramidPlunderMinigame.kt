@@ -374,7 +374,6 @@ class PyramidPlunderMinigame : InteractionListener(), TickListener, LogoutListen
             PlunderUtils.registerPlayer(player)
             PlunderUtils.loadNextRoom(player)
             PlunderUtils.openOverlay(player)
-            PlunderUtils.shuffleDoors()
         }
     }
 }
