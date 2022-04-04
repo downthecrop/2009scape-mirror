@@ -11,6 +11,7 @@ import core.game.system.mysql.SQLManager;
 import core.game.system.mysql.SQLTable;
 import core.game.system.mysql.impl.PlayerSQLHandler;
 import core.net.amsc.WorldCommunicator;
+import rs09.game.ge.GrandExchangeRecords;
 
 import java.math.BigInteger;
 import java.sql.Connection;
@@ -108,7 +109,7 @@ public final class PlayerSQLManager {
 		table.getColumn("credits").updateValue(player.getDetails().credits);
 		table.getColumn("bank").updateValue(player.getBank().format());
 		table.getColumn("lastLogin").updateValue(player.getDetails().getLastLogin());
-		table.getColumn("ge").updateValue(player.getExchangeRecords().format());
+		table.getColumn("ge").updateValue(GrandExchangeRecords.getInstance(player).format());
 		table.getColumn("inventory").updateValue(player.getInventory().format());
 		table.getColumn("equipment").updateValue(player.getEquipment().format());
 		table.getColumn("netWorth").updateValue(player.getMonitor().getNetworth());

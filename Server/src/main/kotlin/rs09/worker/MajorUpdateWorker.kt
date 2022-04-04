@@ -79,9 +79,6 @@ class MajorUpdateWorker {
                     sequence.start()
                     sequence.run()
                     sequence.end()
-                    GlobalScope.launch {
-                        PacketWriteQueue.flush()
-                    }
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }

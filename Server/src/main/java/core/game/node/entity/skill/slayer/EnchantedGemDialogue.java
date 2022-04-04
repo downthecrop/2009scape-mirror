@@ -6,6 +6,7 @@ import core.game.content.dialogue.FacialExpression;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Direction;
 import core.plugin.Initializable;
+import rs09.game.node.entity.skill.slayer.SlayerManager;
 
 /**
  * Rerpresents the enchanted gem dialogue.
@@ -46,7 +47,7 @@ public final class EnchantedGemDialogue extends DialoguePlugin {
 	public boolean open(Object... args) {
 		player.faceLocation(player.getLocation().transform(1, 0, 0));
 		player.setDirection(Direction.EAST);
-		interpreter.sendDialogues(player.getSlayer().getMaster().getNpc(), FacialExpression.HALF_GUILTY, "Hello there " + player.getUsername() + ", what can I help you with?");
+		interpreter.sendDialogues(SlayerManager.getInstance(player).getMaster().getNpc(), FacialExpression.HALF_GUILTY, "Hello there " + player.getUsername() + ", what can I help you with?");
 		stage = 0;
 		return true;
 	}
@@ -87,13 +88,13 @@ public final class EnchantedGemDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 10:
-			if (!player.getSlayer().hasTask()) {
-				interpreter.sendDialogues(player.getSlayer().getMaster().getNpc(), FacialExpression.HALF_GUILTY, "You need something new to hunt. Come and see me", "When you can and I'll give you a new task.");
+			if (!SlayerManager.getInstance(player).hasTask()) {
+				interpreter.sendDialogues(SlayerManager.getInstance(player).getMaster().getNpc(), FacialExpression.HALF_GUILTY, "You need something new to hunt. Come and see me", "When you can and I'll give you a new task.");
 				stage = 11;
 				break;
 			}
-			interpreter.sendDialogues(player.getSlayer().getMaster().getNpc(), FacialExpression.HALF_GUILTY, "You're currently assigned to kill "  + (player.getSlayer().getTask() == Tasks.JAD ? " TzTok-Jad!" : NPCDefinition.forId((player.getSlayer().getTask().getNpcs()[0])).getName().toLowerCase() + "'s;"), "only " + player.getSlayer().getAmount() + " more to go.");
-			player.varpManager.get(2502).setVarbit(0,player.getSlayer().flags.getTaskFlags() >> 4).send(player);
+			interpreter.sendDialogues(SlayerManager.getInstance(player).getMaster().getNpc(), FacialExpression.HALF_GUILTY, "You're currently assigned to kill "  + (SlayerManager.getInstance(player).getTask() == Tasks.JAD ? " TzTok-Jad!" : NPCDefinition.forId((SlayerManager.getInstance(player).getTask().getNpcs()[0])).getName().toLowerCase() + "'s;"), "only " + SlayerManager.getInstance(player).getAmount() + " more to go.");
+			player.varpManager.get(2502).setVarbit(0,SlayerManager.getInstance(player).flags.getTaskFlags() >> 4).send(player);
 			stage = 11;
 			break;
 		case 11:
@@ -103,20 +104,20 @@ public final class EnchantedGemDialogue extends DialoguePlugin {
 		case 12:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player.getSlayer().getMaster().getNpc(), FacialExpression.HALF_GUILTY, "My name's " + NPCDefinition.forId(player.getSlayer().getMaster().getNpc()).getName() + ", I'm the Slayer Master best able", "to train you.");
+				interpreter.sendDialogues(SlayerManager.getInstance(player).getMaster().getNpc(), FacialExpression.HALF_GUILTY, "My name's " + NPCDefinition.forId(SlayerManager.getInstance(player).getMaster().getNpc()).getName() + ", I'm the Slayer Master best able", "to train you.");
 				stage = 21;
 				break;
 			case 2:
-				interpreter.sendDialogues(player.getSlayer().getMaster().getNpc(), FacialExpression.HALF_GUILTY, "You'll find me in " + masterLocation() + ", I'll be here when you need a", "new task.");
+				interpreter.sendDialogues(SlayerManager.getInstance(player).getMaster().getNpc(), FacialExpression.HALF_GUILTY, "You'll find me in " + masterLocation() + ", I'll be here when you need a", "new task.");
 				stage = 31;
 				break;
 			case 3:
-				if (!player.getSlayer().hasTask()) {
-					interpreter.sendDialogues(player.getSlayer().getMaster().getNpc(), FacialExpression.HALF_GUILTY, "You need something new to hunt.");
+				if (!SlayerManager.getInstance(player).hasTask()) {
+					interpreter.sendDialogues(SlayerManager.getInstance(player).getMaster().getNpc(), FacialExpression.HALF_GUILTY, "You need something new to hunt.");
 					stage = 99;
 					break;
 				}
-				interpreter.sendDialogues(player.getSlayer().getMaster().getNpc(), FacialExpression.HALF_GUILTY, player.getSlayer().getTask().getTip());
+				interpreter.sendDialogues(SlayerManager.getInstance(player).getMaster().getNpc(), FacialExpression.HALF_GUILTY, SlayerManager.getInstance(player).getTask().getTip());
 				stage = 401;
 				break;
 			case 4:
@@ -129,7 +130,7 @@ public final class EnchantedGemDialogue extends DialoguePlugin {
 			}
 			break;
 		case 20:
-			interpreter.sendDialogues(player.getSlayer().getMaster().getNpc(), FacialExpression.HALF_GUILTY, "My name's " + NPCDefinition.forId(player.getSlayer().getMaster().getNpc()).getName() + ", I'm the Slayer Master best able", "to train you.");
+			interpreter.sendDialogues(SlayerManager.getInstance(player).getMaster().getNpc(), FacialExpression.HALF_GUILTY, "My name's " + NPCDefinition.forId(SlayerManager.getInstance(player).getMaster().getNpc()).getName() + ", I'm the Slayer Master best able", "to train you.");
 			stage = 21;
 			break;
 		case 21:
@@ -143,16 +144,16 @@ public final class EnchantedGemDialogue extends DialoguePlugin {
 				stage = 10;
 				break;
 			case 2:
-				interpreter.sendDialogues(player.getSlayer().getMaster().getNpc(), FacialExpression.HALF_GUILTY, "You'll find me in " + masterLocation() + ", I'll be here when you need a", "new task.");
+				interpreter.sendDialogues(SlayerManager.getInstance(player).getMaster().getNpc(), FacialExpression.HALF_GUILTY, "You'll find me in " + masterLocation() + ", I'll be here when you need a", "new task.");
 				stage = 31;
 				break;
 			case 3:
-				if (!player.getSlayer().hasTask()) {
-					interpreter.sendDialogues(player.getSlayer().getMaster().getNpc(), FacialExpression.HALF_GUILTY, "You need something new to hunt.");
+				if (!SlayerManager.getInstance(player).hasTask()) {
+					interpreter.sendDialogues(SlayerManager.getInstance(player).getMaster().getNpc(), FacialExpression.HALF_GUILTY, "You need something new to hunt.");
 					stage = 99;
 					break;
 				}
-				interpreter.sendDialogues(player.getSlayer().getMaster().getNpc(), FacialExpression.HALF_GUILTY, player.getSlayer().getTask().getTip());
+				interpreter.sendDialogues(SlayerManager.getInstance(player).getMaster().getNpc(), FacialExpression.HALF_GUILTY, SlayerManager.getInstance(player).getTask().getTip());
 				stage = 401;
 				break;
 			case 4:
@@ -163,7 +164,7 @@ public final class EnchantedGemDialogue extends DialoguePlugin {
 			}
 			break;
 		case 30:
-			interpreter.sendDialogues(player.getSlayer().getMaster().getNpc(), FacialExpression.HALF_GUILTY, "You'll find me in " + masterLocation() + ", I'll be here when you need a", "new task.");
+			interpreter.sendDialogues(SlayerManager.getInstance(player).getMaster().getNpc(), FacialExpression.HALF_GUILTY, "You'll find me in " + masterLocation() + ", I'll be here when you need a", "new task.");
 			stage = 31;
 			break;
 		case 31:
@@ -177,16 +178,16 @@ public final class EnchantedGemDialogue extends DialoguePlugin {
 				stage = 10;
 				break;
 			case 2:
-				interpreter.sendDialogues(player.getSlayer().getMaster().getNpc(), FacialExpression.HALF_GUILTY, "My name's " + NPCDefinition.forId(player.getSlayer().getMaster().getNpc()).getName() + ", I'm the Slayer Master best able", "to train you.");
+				interpreter.sendDialogues(SlayerManager.getInstance(player).getMaster().getNpc(), FacialExpression.HALF_GUILTY, "My name's " + NPCDefinition.forId(SlayerManager.getInstance(player).getMaster().getNpc()).getName() + ", I'm the Slayer Master best able", "to train you.");
 				stage = 21;
 				break;
 			case 3:
-				if (!player.getSlayer().hasTask()) {
-					interpreter.sendDialogues(player.getSlayer().getMaster().getNpc(), FacialExpression.HALF_GUILTY, "You need something new to hunt.");
+				if (!SlayerManager.getInstance(player).hasTask()) {
+					interpreter.sendDialogues(SlayerManager.getInstance(player).getMaster().getNpc(), FacialExpression.HALF_GUILTY, "You need something new to hunt.");
 					stage = 0;
 					break;
 				}
-				interpreter.sendDialogues(player.getSlayer().getMaster().getNpc(), FacialExpression.HALF_GUILTY, player.getSlayer().getTask().getTip());
+				interpreter.sendDialogues(SlayerManager.getInstance(player).getMaster().getNpc(), FacialExpression.HALF_GUILTY, SlayerManager.getInstance(player).getTask().getTip());
 				stage = 401;
 				break;
 			case 4:
@@ -197,12 +198,12 @@ public final class EnchantedGemDialogue extends DialoguePlugin {
 			}
 			break;
 		case 400:
-			if (!player.getSlayer().hasTask()) {
-				interpreter.sendDialogues(player.getSlayer().getMaster().getNpc(), FacialExpression.HALF_GUILTY, "You need something new to hunt.");
+			if (!SlayerManager.getInstance(player).hasTask()) {
+				interpreter.sendDialogues(SlayerManager.getInstance(player).getMaster().getNpc(), FacialExpression.HALF_GUILTY, "You need something new to hunt.");
 				stage = 0;
 				break;
 			}
-			interpreter.sendDialogues(player.getSlayer().getMaster().getNpc(), FacialExpression.HALF_GUILTY, player.getSlayer().getTask().getTip());
+			interpreter.sendDialogues(SlayerManager.getInstance(player).getMaster().getNpc(), FacialExpression.HALF_GUILTY, SlayerManager.getInstance(player).getTask().getTip());
 			stage = 401;
 			break;
 		case 401:
@@ -220,11 +221,11 @@ public final class EnchantedGemDialogue extends DialoguePlugin {
 				stage = 10;
 				break;
 			case 2:
-				interpreter.sendDialogues(player.getSlayer().getMaster().getNpc(), FacialExpression.HALF_GUILTY, "My name's " + NPCDefinition.forId(player.getSlayer().getMaster().getNpc()).getName() + ", I'm the Slayer Master best able", "to train you.");
+				interpreter.sendDialogues(SlayerManager.getInstance(player).getMaster().getNpc(), FacialExpression.HALF_GUILTY, "My name's " + NPCDefinition.forId(SlayerManager.getInstance(player).getMaster().getNpc()).getName() + ", I'm the Slayer Master best able", "to train you.");
 				stage = 21;
 				break;
 			case 3:
-				interpreter.sendDialogues(player.getSlayer().getMaster().getNpc(), FacialExpression.HALF_GUILTY, "You'll find me in " + masterLocation() + ", I'll be here when you need a", "new task.");
+				interpreter.sendDialogues(SlayerManager.getInstance(player).getMaster().getNpc(), FacialExpression.HALF_GUILTY, "You'll find me in " + masterLocation() + ", I'll be here when you need a", "new task.");
 				stage = 31;
 				break;
 			case 4:
@@ -243,17 +244,17 @@ public final class EnchantedGemDialogue extends DialoguePlugin {
 	 * @return the location.
 	 */
 	public String masterLocation() {
-		if (player.getSlayer().getMaster().getNpc() == Master.MAZCHNA.getNpc())
+		if (SlayerManager.getInstance(player).getMaster().getNpc() == Master.MAZCHNA.getNpc())
 			return "Canifis";
-		else if (player.getSlayer().getMaster().getNpc() == Master.TURAEL.getNpc())
+		else if (SlayerManager.getInstance(player).getMaster().getNpc() == Master.TURAEL.getNpc())
 			return "Taverley";
-		else if (player.getSlayer().getMaster().getNpc() == Master.CHAELDAR.getNpc())
+		else if (SlayerManager.getInstance(player).getMaster().getNpc() == Master.CHAELDAR.getNpc())
 			return "Zanaris";
-		else if (player.getSlayer().getMaster().getNpc() == Master.VANNAKA.getNpc())
+		else if (SlayerManager.getInstance(player).getMaster().getNpc() == Master.VANNAKA.getNpc())
 			return "Edgeville dungeon";
-		else if (player.getSlayer().getMaster().getNpc() == Master.DURADEL.getNpc())
+		else if (SlayerManager.getInstance(player).getMaster().getNpc() == Master.DURADEL.getNpc())
 			return "Shilo village";
-		else if(player.getSlayer().getMaster() == null) {
+		else if(SlayerManager.getInstance(player).getMaster() == null) {
 			return "the Gnome Stronghold";
 		}
 		return null;

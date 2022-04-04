@@ -107,14 +107,14 @@ public abstract class ClueScrollPlugin extends MapZone implements Plugin<Object>
 	 * @param clue the clue.
 	 */
 	public void nextStage(Player player, Item clue) {
-		if (!player.getTreasureTrailManager().hasTrail() || player.getTreasureTrailManager().hasTrail() && clue.getId() != player.getTreasureTrailManager().getClueId()) {
-			player.getTreasureTrailManager().startTrail(this);
+		if (!TreasureTrailManager.getInstance(player).hasTrail() || TreasureTrailManager.getInstance(player).hasTrail() && clue.getId() != TreasureTrailManager.getInstance(player).getClueId()) {
+			TreasureTrailManager.getInstance(player).startTrail(this);
 		}
-		int currentStage = player.getTreasureTrailManager().getTrailStage();
-		if (currentStage >= player.getTreasureTrailManager().getTrailLength()) {
-			player.getTreasureTrailManager().clearTrail();
+		int currentStage = TreasureTrailManager.getInstance(player).getTrailStage();
+		if (currentStage >= TreasureTrailManager.getInstance(player).getTrailLength()) {
+			TreasureTrailManager.getInstance(player).clearTrail();
 		} else {
-			player.getTreasureTrailManager().incrementStage();
+			TreasureTrailManager.getInstance(player).incrementStage();
 		}
 	}
 

@@ -439,7 +439,7 @@ fun getAudio(id: Int, volume: Int = 10, delay: Int = 1): Audio {
  * @param type the type of hit splat to use, ImpactHandler.HitsplatType is an enum containing these options.
  */
 
-fun impact(entity: Entity, amount: Int, type: ImpactHandler.HitsplatType) {
+fun impact(entity: Entity, amount: Int, type: ImpactHandler.HitsplatType = ImpactHandler.HitsplatType.NORMAL) {
     entity.impactHandler.manualHit(entity, amount, type)
 }
 
@@ -715,6 +715,15 @@ fun findLocalNPCs(entity: Entity, ids: IntArray, distance: Int): List<NPC>{
 }
 
 /**
+ * @param regionId the ID of the region
+ * @return a [ZoneBorders] encapsulating the entire region indicated by the provided regionId
+ */
+fun getRegionBorders(regionId: Int) : ZoneBorders
+{
+    return ZoneBorders.forRegion(regionId)
+}
+
+/**
  * Gets the value of an attribute key from the Entity's attributes store
  * @param entity the entity to get the attribute from
  * @param attribute the attribute key to use
@@ -855,7 +864,7 @@ fun getVarpValue(player: Player, varpIndex: Int): Int{
  */
 
 fun getVarbitValue(player: Player, varpIndex: Int, offset: Int): Int {
-    return player.varpManager.get(varpIndex).getVarbitValue(offset)
+    return player.varpManager.get(varpIndex).getVarbitValue(offset) ?: 0
 }
 
 /**

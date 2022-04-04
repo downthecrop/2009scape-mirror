@@ -26,7 +26,7 @@ class VarpManager(val player: Player) {
 
     fun set(index: Int, value: Int){
         get(index).varbits.clear()
-        get(index).varbits.add(Varbit(value,0))
+        get(index).varbits[0] = value
         get(index).send(player)
     }
 
@@ -35,7 +35,14 @@ class VarpManager(val player: Player) {
     }
 
     fun setVarbit(varbitIndex: Int, value: Int){
-        PacketRepository.send(core.net.packet.out.Varbit::class.java, VarbitContext(player, varbitIndex, value))
+        val def = VarbitDefinition.forId(varbitIndex)
+        get(def.configId).setVarbit(def.bitShift, value)
+        get(def.configId).send(player)
+    }
+
+    fun getVarbit(varbitIndex: Int){
+        val def = VarbitDefinition.forId(varbitIndex)
+        get(def.configId).getVarbit(def.bitShift)
     }
 
     fun flagSave(index: Int){
@@ -70,7 +77,7 @@ class VarpManager(val player: Player) {
             val bitArray = JSONArray()
             for(varbit in varp.varbits){
                 val varbitobj = JSONObject()
-                varbitobj.put("offset",varbit.offset.toString())
+                varbitobj.put("offset",varbit.key.toString())
                 varbitobj.put("value",varbit.value.toString())
                 bitArray.add(varbitobj)
             }

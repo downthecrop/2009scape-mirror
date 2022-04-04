@@ -19,6 +19,7 @@ import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.zone.ZoneRestriction;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import rs09.game.node.entity.skill.slayer.SlayerManager;
 import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
 
@@ -160,12 +161,11 @@ public final class TzhaarFightCavesPlugin extends ActivityPlugin {
 				}
 			}
 			player.getPacketDispatch().sendMessage("You were victorious!");
-
 			if (!practice) {
 				BossKillCounter.addtoKillcount(player, 2745);
-				if (player.getSlayer().getTask() == Tasks.JAD) {
+				if (SlayerManager.getInstance(player).getTask() == Tasks.JAD) {
 					player.getSkills().addExperience(Skills.SLAYER, 25000);
-					player.getSlayer().clear();
+					SlayerManager.getInstance(player).clear();
 					player.sendMessage("You receive 25,000 slayer experience for defeating TzTok-Jad.");
 				}
 				player.getDialogueInterpreter().sendDialogues(2617, null, "You even defeated TzTok-Jad, I am most impressed!", "Please accept this gift as a reward.");
