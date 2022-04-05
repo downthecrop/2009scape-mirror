@@ -50,7 +50,7 @@ public class RandomFunction {
 	 * @return true if you hit the roll, false otherwise
 	 */
 	public static boolean roll(int chance){
-		return random(chance) == chance / 2;
+		return random(chance + 1) == chance / 2;
 	}
 
 	/**

@@ -18,7 +18,7 @@ class BlastFurnaceInterfaceListener : InterfaceListener() {
         on(Components.BLAST_FURNACE_BAR_STOCK_28){ player, _, _, buttonID, _, _ ->
             val bar = BFBars.forId(buttonID) ?: return@on false
             val isAll = buttonID == bar.allButtonId
-            val playerAmt = player.varpManager.get(bar.varpIndex).getVarbitValue(bar.offset)
+            val playerAmt = player.varpManager.get(bar.varpIndex).getVarbitValue(bar.offset) ?: 0
             if(playerAmt == 0) return@on true
 
             var amtToWithdraw = if(isAll) playerAmt else 1

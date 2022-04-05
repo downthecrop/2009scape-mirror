@@ -123,7 +123,7 @@ class AFURepairClimbHandler : InteractionListener() {
         }
 
         fun isRepaired(player: Player): Boolean{
-            return player.varpManager.get(varp).getVarbit(offset)?.value == 1
+            return player.varpManager.get(varp).getVarbit(offset) == 1
         }
     }
 

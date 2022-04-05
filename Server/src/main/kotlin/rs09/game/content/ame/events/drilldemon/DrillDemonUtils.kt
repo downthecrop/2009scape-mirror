@@ -74,7 +74,7 @@ object DrillDemonUtils {
     }
 
     fun getMatTask(id: Int, player: Player): Int{
-        return player.varpManager.get(DD_SIGN_VARP).getVarbitValue(getOffsetForID(id))
+        return player.varpManager.get(DD_SIGN_VARP).getVarbitValue(getOffsetForID(id)) ?: 0
     }
 
     fun cleanup(player: Player){

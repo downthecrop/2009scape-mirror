@@ -7,37 +7,28 @@ import core.game.node.entity.player.Player
  * @author Ceikry
  */
 class Varp(val index: Int) {
-    val varbits = ArrayList<Varbit>()
+    val varbits = HashMap<Int, Int>()
     var save = false
 
     fun setVarbit(offset: Int, value: Int): Varp{
-        for(vb in varbits){
-            if (vb.offset == offset){
-                varbits.remove(vb)
-                break
-            }
-        }
-        varbits.add(Varbit(value,offset))
+        varbits[offset] = value
         return this
     }
 
     fun getValue(): Int{
         var config = 0
-        for(varbit in varbits){
-            config = config or (varbit.value shl varbit.offset)
+        for((index,value) in varbits.entries){
+            config = config or (value shl index)
         }
         return config
     }
 
-    fun getVarbit(offset: Int): Varbit?{
-        for(varbit in varbits){
-           if(varbit.offset == offset) return varbit
-        }
-        return null
+    fun getVarbit(offset: Int): Int?{
+        return getVarbitValue(offset)
     }
 
-    fun getVarbitValue(offset: Int): Int{
-        return getVarbit(offset)?.value ?: 0
+    fun getVarbitValue(offset: Int): Int {
+        return varbits[offset] ?: 0
     }
 
     fun send(player: Player){
@@ -50,19 +41,15 @@ class Varp(val index: Int) {
     }
 
     fun clearBitRange(first : Int, last : Int){
-        for(varbit in varbits){
-            if(varbit.offset in first..last){
-                varbit.value = 0
-            }
-        }
+        for(i in first..last) varbits.remove(i)
     }
 
     fun getBitRangeValue(first: Int, last: Int): Int{
         var product = 0
-        for(varbit in varbits){
-            if(varbit.offset in first..last){
-                product = product or (varbit.value shl varbit.offset)
-            }
+        for (i in first..last)
+        {
+            val value = varbits[i] ?: 0
+            product = product or (value shl i)
         }
         return product
     }

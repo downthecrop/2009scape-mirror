@@ -830,6 +830,12 @@ public class SceneryDefinition extends Definition<Scenery> {
 				}
 			}
 		}
+		if(childrenIds != null) {
+			for (int i = 0; i < childrenIds.length; ++i) {
+				SceneryDefinition def = forId(childrenIds[i]);
+				def.configFileId = configFileId;
+			}
+		}
 		if (anInt3855 == -1) {
 			anInt3855 = clipType == 0 ? 0 : 1;
 		}

@@ -439,7 +439,7 @@ fun getAudio(id: Int, volume: Int = 10, delay: Int = 1): Audio {
  * @param type the type of hit splat to use, ImpactHandler.HitsplatType is an enum containing these options.
  */
 
-fun impact(entity: Entity, amount: Int, type: ImpactHandler.HitsplatType) {
+fun impact(entity: Entity, amount: Int, type: ImpactHandler.HitsplatType = ImpactHandler.HitsplatType.NORMAL) {
     entity.impactHandler.manualHit(entity, amount, type)
 }
 
@@ -855,7 +855,7 @@ fun getVarpValue(player: Player, varpIndex: Int): Int{
  */
 
 fun getVarbitValue(player: Player, varpIndex: Int, offset: Int): Int {
-    return player.varpManager.get(varpIndex).getVarbitValue(offset)
+    return player.varpManager.get(varpIndex).getVarbitValue(offset) ?: 0
 }
 
 /**

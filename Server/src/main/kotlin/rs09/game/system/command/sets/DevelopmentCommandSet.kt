@@ -1,16 +1,25 @@
 package rs09.game.system.command.sets
 
+import api.sendMessage
+import core.cache.Cache
 import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.VarbitDefinition
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
 import core.game.node.entity.npc.drop.NPCDropTables
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.item.Item
+import core.net.packet.context.PlayerContext
+import core.net.packet.out.ResetInterface
+import core.net.packet.out.Varbit
 import core.plugin.Initializable
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.rs09.consts.Items
 import rs09.game.content.global.NPCDropTable
 import rs09.game.system.command.Command
 import rs09.game.system.command.Privilege
+import rs09.net.packet.PacketWriteQueue
 
 @Initializable
 class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
@@ -56,6 +65,29 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             }
 
             container.open(player)
+        }
+
+        define("varbits") { player, args ->
+            if(args.size < 2)
+                reject(player, "Usage: ::list_varbits varpIndex")
+
+            val varp = args[1].toIntOrNull() ?: reject(player, "Please use a valid int for the varpIndex.")
+            GlobalScope.launch {
+                sendMessage(player, "========== Found Varbits for Varp $varp ==========")
+                for(id in 0 until 10000)
+                {
+                    val def = VarbitDefinition.forId(id)
+                    if(def.configId == varp)
+                    {
+                        sendMessage(player, "${def.id} -> [offset: ${def.bitShift}, upperBound: ${def.bitSize}]")
+                    }
+                }
+                sendMessage(player, "=========================================")
+            }
+        }
+
+        define("testpacket") { player, _ ->
+            PacketWriteQueue.write(ResetInterface(), PlayerContext(player))
         }
     }
 }

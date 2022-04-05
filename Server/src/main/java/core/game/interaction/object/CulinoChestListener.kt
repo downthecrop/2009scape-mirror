@@ -2,7 +2,6 @@ package core.game.interaction.`object`
 
 import api.getUsedOption
 import core.game.world.map.RegionManager.getObject
-import core.game.content.global.shop.CulinomancerShop.openShop
 import core.plugin.Initializable
 import core.game.interaction.OptionHandler
 import core.plugin.Plugin
@@ -24,7 +23,7 @@ class CulinoChestListener : InteractionListener() {
 
     override fun defineListeners() {
         on(CULINO_CHEST, SCENERY, "buy-items","buy-food"){player, _ ->
-            openShop(player, food = getUsedOption(player).toLowerCase() == "buy-food")
+            CulinomancerShop.openShop(player, food = getUsedOption(player).toLowerCase() == "buy-food")
             return@on true
         }
 
