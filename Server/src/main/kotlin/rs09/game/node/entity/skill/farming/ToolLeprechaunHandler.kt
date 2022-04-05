@@ -11,6 +11,7 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import org.rs09.consts.Components
 import org.rs09.consts.NPCs
+import rs09.game.content.activity.vinesweeper.Vinesweeper
 
 val TL_IDS = arrayOf(NPCs.TOOL_LEPRECHAUN_3021,NPCs.GOTH_LEPRECHAUN_8000,NPCs.TOOL_LEPRECHAUN_4965,NPCs.TECLYN_2861)
 @Initializable
@@ -28,7 +29,7 @@ class ToolLeprechaunHandler : OptionHandler() {
         node ?: return false
         when(option){
             "exchange" -> player?.interfaceManager?.open(Component(Components.FARMING_TOOLS_125))
-            "teleport" -> VinesweeperTeleport.teleport(node!! as NPC, player!!)
+            "teleport" -> Vinesweeper.Companion.VinesweeperTeleport.teleport(node!! as NPC, player!!)
         }
         return true
     }

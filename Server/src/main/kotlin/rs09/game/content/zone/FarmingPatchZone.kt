@@ -27,7 +27,7 @@ class FarmingPatchZone : MapArea, TickListener {
         }
     }
 
-    override fun areaLeave(entity: Entity) {
+    override fun areaLeave(entity: Entity, logout: Boolean) {
         if(entity is Player)
             playersInZone.remove(entity)
     }
