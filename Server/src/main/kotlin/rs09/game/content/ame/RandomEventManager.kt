@@ -29,6 +29,7 @@ class RandomEventManager(val player: Player? = null) : LoginListener, EventHook<
         player.hook(Event.Tick, instance)
         setAttribute(player, "random-manager", instance)
         instance.rollNextSpawn()
+        instance.enabled = true
         SystemLogger.logRE("Initialized REManager for ${player.username}.")
     }
 

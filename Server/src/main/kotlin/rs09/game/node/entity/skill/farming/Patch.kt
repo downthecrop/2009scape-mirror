@@ -88,7 +88,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
     }
 
     fun getCurrentState(): Int{
-        return player.varpManager.get(patch.varpIndex).getVarbitValue(patch.varpOffset)
+        return player.varpManager.get(patch.varpIndex).getVarbitValue(patch.varpOffset) ?: 0
     }
 
     fun setCurrentState(state: Int){

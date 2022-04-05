@@ -52,7 +52,7 @@ class PlayerSaveParser(val player: Player) {
         }
     }
 
-    fun parse() = GlobalScope.launch {
+    fun parse() {
         if (read) {
             parseCore()
             parseAttributes()

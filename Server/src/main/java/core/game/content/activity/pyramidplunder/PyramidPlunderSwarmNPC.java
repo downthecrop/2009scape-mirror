@@ -15,8 +15,8 @@ public final class PyramidPlunderSwarmNPC extends PyramidPlunderNPC {
      */
     private static final int[] IDS = new int[] { 2001 };
 
-    public PyramidPlunderSwarmNPC(int id, Location location, Player player) {
-        super(id, location, player);
+    public PyramidPlunderSwarmNPC(Location location, Player player) {
+        super(IDS[0], location, player);
     }
 
     @Override
