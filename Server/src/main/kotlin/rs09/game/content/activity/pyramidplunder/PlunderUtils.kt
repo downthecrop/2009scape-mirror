@@ -72,7 +72,7 @@ object PlunderUtils {
 
         if(PlunderData.playerLocations.filter { it.value == next }.isEmpty()) //if no one is in the next room
         {
-            PlunderData.doors[next.room] = PlunderData.doorVarbits.random() //reshuffle the next room's exit door
+            PlunderData.doors[next.room - 1] = PlunderData.doorVarbits.random() //reshuffle the next room's exit door
         }
 
         teleport(player, next.entrance)
