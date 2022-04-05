@@ -6,7 +6,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
 
-class CatOnArdougneCivilian: InteractionListener() {
+class CatOnArdougneCivilian: InteractionListener {
 
     private val civilians = intArrayOf(
         NPCs.CIVILIAN_785,

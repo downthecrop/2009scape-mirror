@@ -1,7 +1,6 @@
 package rs09.game.content.global.worldevents.shootingstar
 
 import api.*
-import core.game.content.global.worldevents.shootingstar.ScoreboardManager
 import core.game.node.scenery.Scenery
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.SkillPulse
@@ -50,7 +49,7 @@ class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: Shootin
             player.incrementAttribute("/save:shooting-star:bonus-xp", bonusXp)
             Repository.sendNews(player.username + " is the discoverer of the crashed star near " + star.location + "!")
             player.sendMessage("You have ${player.skills.experienceMutiplier * player.getAttribute("shooting-star:bonus-xp", 0).toDouble()} bonus xp towards mining stardust.")
-            ScoreboardManager.submit(player)
+            ShootingStarPlugin.submitScoreBoard(player)
             star.isDiscovered = true
             return player.skills.getLevel(Skills.MINING) >= star.miningLevel
         }
@@ -63,7 +62,7 @@ class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: Shootin
             player.packetDispatch.sendMessage("You do not have a pickaxe to use.")
             return false
         }
-        if (player.inventory.freeSlots() < 1 && !player.inventory.contains(ShootingStarOptionHandler.STAR_DUST, 1)) {
+        if (player.inventory.freeSlots() < 1 && !player.inventory.contains(ShootingStarPlugin.STAR_DUST, 1)) {
             player.dialogueInterpreter.sendDialogue("Your inventory is too full to hold any more stardust.")
             return false
         }
@@ -98,8 +97,8 @@ class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: Shootin
         }
 
         player.skills.addExperience(Skills.MINING, xp)
-        if (ShootingStarOptionHandler.getStarDust(player) < 200) {
-            player.inventory.add(Item(ShootingStarOptionHandler.STAR_DUST, 1))
+        if (ShootingStarPlugin.getStarDust(player) < 200) {
+            player.inventory.add(Item(ShootingStarPlugin.STAR_DUST, 1))
         }
         if(!inInventory(player, Items.ANCIENT_BLUEPRINT_14651) && !inBank(player, Items.ANCIENT_BLUEPRINT_14651)){
             rollBlueprint(player)

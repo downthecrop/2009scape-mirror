@@ -3,7 +3,7 @@ package rs09.game.node.entity.skill.gather.fishing.barbfishing
 import core.game.node.item.Item
 import rs09.game.interaction.InteractionListener
 
-class BarbFishInteractionListeners : InteractionListener() {
+class BarbFishInteractionListeners : InteractionListener {
     override fun defineListeners() {
 
         on(25268,SCENERY,"search"){ player, _ ->

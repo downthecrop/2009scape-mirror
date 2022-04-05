@@ -11,7 +11,7 @@ import rs09.game.interaction.InteractionListener
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
-class MountedGlory : InteractionListener() {
+class MountedGlory : InteractionListener {
 
     val MOUNTED_GLORY = 13523
 

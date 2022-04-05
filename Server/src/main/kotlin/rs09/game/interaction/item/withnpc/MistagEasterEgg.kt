@@ -9,7 +9,7 @@ import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
 import rs09.tools.END_DIALOGUE
 
-class MistagEasterEgg : InteractionListener() {
+class MistagEasterEgg : InteractionListener {
     val DIAMOND = Items.DIAMOND_1601
     val MISTAG = NPCs.MISTAG_2084
     val ZANIK_RING = 14649

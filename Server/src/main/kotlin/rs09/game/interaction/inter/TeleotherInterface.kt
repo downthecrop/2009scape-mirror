@@ -6,10 +6,10 @@ import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Components
 import rs09.game.interaction.InterfaceListener
 
-class TeleotherInterface : InterfaceListener() {
+class TeleotherInterface : InterfaceListener {
     val IFACE = Components.TELEPORT_OTHER_326
 
-    override fun defineListeners() {
+    override fun defineInterfaceListeners() {
         on(IFACE){player, _, _, button, _, _ ->
             if(button == 5){
                 player.lock(2)

@@ -10,7 +10,7 @@ import rs09.GlobalStats
 import rs09.game.interaction.InteractionListener
 import rs09.game.system.SystemLogger
 
-class VarrockGuardSignpost : InteractionListener() {
+class VarrockGuardSignpost : InteractionListener {
     override fun defineListeners() {
             val zone = object : MapZone("Varrock Guards", true){
                 override fun interact(e: Entity?, target: Node?, option: Option?): Boolean {

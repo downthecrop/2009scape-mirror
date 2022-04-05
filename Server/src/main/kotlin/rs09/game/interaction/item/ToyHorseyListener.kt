@@ -11,7 +11,7 @@ import rs09.game.interaction.InteractionListener
  * Interaction listener for the Toy Horsey item
  * @author Woah
  */
-class ToyHorseListener : InteractionListener() {
+class ToyHorseListener : InteractionListener {
 
     // Map of horse item ids to their correct emote
     val HORSEY_MAP = mapOf(

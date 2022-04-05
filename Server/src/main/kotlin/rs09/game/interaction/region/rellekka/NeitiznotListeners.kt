@@ -12,7 +12,7 @@ import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
 
-class NeitiznotListeners : InteractionListener() {
+class NeitiznotListeners : InteractionListener {
     val STUMP = 21305
 
     override fun defineListeners() {

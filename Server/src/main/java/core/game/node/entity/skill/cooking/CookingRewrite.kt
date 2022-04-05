@@ -17,7 +17,7 @@ import rs09.game.node.entity.skill.cooking.CookingDialogue
  * @author Ceikry
  * @author bushtail - added bear meat for sinew making
  */
-class CookingRewrite : InteractionListener() {
+class CookingRewrite : InteractionListener {
 
     val RAW_FOODS: IntArray
 

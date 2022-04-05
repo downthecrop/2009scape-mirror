@@ -6,9 +6,9 @@ import api.setInterfaceText
 import core.game.world.map.Location
 import rs09.game.interaction.InterfaceListener
 
-class TTDoorCodeInterfaceListener : InterfaceListener() {
+class TTDoorCodeInterfaceListener : InterfaceListener {
 
-    override fun defineListeners() {
+    override fun defineInterfaceListeners() {
         val LETTERONEBACK = 10
         val LETTERONEFORWARD = 11
         val LETTERTWOBACK = 12

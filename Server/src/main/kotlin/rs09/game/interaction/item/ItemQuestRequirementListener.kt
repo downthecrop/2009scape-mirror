@@ -6,7 +6,7 @@ import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InteractionListeners.run
 
-class ItemQuestRequirementListener : InteractionListener() {
+class ItemQuestRequirementListener : InteractionListener {
 
     private val fremennikIslesEquipment = intArrayOf(Items.HELM_OF_NEITIZNOT_10828, Items.HELM_OF_NEITIZNOT_E_12680, Items.HELM_OF_NEITIZNOT_CHARGED_12681)
     private val fremennikTrialsEquipment = intArrayOf(Items.BERSERKER_HELM_3751, Items.BERSERKER_HELM_13408, Items.BERSERKER_HELM_E_12674, Items.BERSERKER_HELM_CHARGED_12675,

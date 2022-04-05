@@ -11,7 +11,7 @@ import rs09.game.interaction.`object`.dialogues.CrateDialogues
  * @author qmqz
  */
 
-class CrateHandler : InteractionListener() {
+class CrateHandler : InteractionListener {
 
     private val monkeyAmuletMouldCrate = 4724
     private val threadCrate = 4718

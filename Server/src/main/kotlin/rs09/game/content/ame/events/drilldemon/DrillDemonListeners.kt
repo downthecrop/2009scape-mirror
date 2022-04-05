@@ -5,7 +5,7 @@ import core.game.system.task.Pulse
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
 
-class DrillDemonListeners : InteractionListener() {
+class DrillDemonListeners : InteractionListener {
     val MATS = intArrayOf(10076,10077,10078,10079)
     override fun defineListeners() {
 

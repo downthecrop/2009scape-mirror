@@ -5,7 +5,7 @@ import org.rs09.consts.Scenery
 import rs09.GlobalStats
 import rs09.game.interaction.InteractionListener
 
-class ChurchSignListener : InteractionListener() {
+class ChurchSignListener : InteractionListener {
 
     val CHURCH_SIGN = Scenery.SIGNPOST_31299
 

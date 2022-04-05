@@ -11,7 +11,7 @@ import java.util.*
  * Handles coal truck interactions
  * @author ceik
  */
-class CoalTruckInteractionListeners : InteractionListener() {
+class CoalTruckInteractionListeners : InteractionListener {
 
     val SEERS_VILLAGE_COAL_TRUCK_2114 = 2114
     val seersVillageTrucks = ZoneBorders(2690,3502,2699,3508)

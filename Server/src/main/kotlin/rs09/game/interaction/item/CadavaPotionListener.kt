@@ -8,7 +8,7 @@ import rs09.game.interaction.InteractionListener
  * @author bushtail
  */
 
-class CadavaPotionListener : InteractionListener() {
+class CadavaPotionListener : InteractionListener {
 
     var POTION = Items.CADAVA_POTION_756
 

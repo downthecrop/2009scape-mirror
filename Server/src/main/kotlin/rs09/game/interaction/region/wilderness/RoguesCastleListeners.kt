@@ -13,7 +13,7 @@ import rs09.game.content.global.WeightBasedTable
 import rs09.game.content.global.WeightedItem
 import rs09.game.interaction.InteractionListener
 
-class RoguesCastleListeners : InteractionListener() {
+class RoguesCastleListeners : InteractionListener {
 
     val CHEST_ANIM = getAnimation(536)
     val FLOOR_1_CHESTS = intArrayOf(14773, 14774)

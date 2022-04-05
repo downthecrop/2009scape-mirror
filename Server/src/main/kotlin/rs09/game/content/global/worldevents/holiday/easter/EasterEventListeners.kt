@@ -7,7 +7,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
 
-class EasterEventListeners : InteractionListener() {
+class EasterEventListeners : InteractionListener {
 
     val EGG_ATTRIBUTE = "/save:easter:eggs"
     val eggs = intArrayOf(Items.EASTER_EGG_11027, Items.EASTER_EGG_11028, Items.EASTER_EGG_11029, Items.EASTER_EGG_11030)

@@ -9,7 +9,7 @@ import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.inter.ExperienceInterface
 
-class SupriseExamListeners : InteractionListener() {
+class SupriseExamListeners : InteractionListener {
     val MORDAUT = NPCs.MR_MORDAUT_6117
     val BOOK_OF_KNOWLEDGE = Items.BOOK_OF_KNOWLEDGE_11640
     override fun defineListeners() {

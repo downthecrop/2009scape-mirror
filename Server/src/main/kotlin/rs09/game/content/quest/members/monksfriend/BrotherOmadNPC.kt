@@ -205,7 +205,7 @@ class BrotherOmadDialogue : DialogueFile() {
  * Handles BrotherCedricListener to launch the dialogue
  * @author Kya
  */
-class BrotherOmadListener : InteractionListener() {
+class BrotherOmadListener : InteractionListener {
     override fun defineListeners() {
         on(NPCs.BROTHER_OMAD_279, NPC, "talk-to"){ player, _ ->
             player.dialogueInterpreter.open(BrotherOmadDialogue(), NPC(NPCs.BROTHER_OMAD_279))

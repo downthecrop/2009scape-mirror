@@ -26,7 +26,7 @@ import rs09.game.world.GameWorld
 import rs09.plugin.ClassScanner
 
 
-class GardenObjectsPlugin : InteractionListener() {
+class GardenObjectsPlugin : InteractionListener {
 
     val SQIRK_TREES = intArrayOf(21767, 21768, 21769, 21766)
     val FOUNTAIN = 21764

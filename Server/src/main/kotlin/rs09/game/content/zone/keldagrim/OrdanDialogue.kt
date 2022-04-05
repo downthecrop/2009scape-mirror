@@ -50,7 +50,7 @@ class OrdanDialogue(player: Player? = null) : DialoguePlugin(player) {
      * just comment those options out if you don't want em
      * aka "WOW I CAN'T BELIEVE IT'S ALL CONDITIONALS*/
 
-    class OrdanUnnoteListener : InteractionListener() {
+    class OrdanUnnoteListener : InteractionListener {
         val notedOre = intArrayOf(
             Items.IRON_ORE_441,
             Items.COPPER_ORE_437,

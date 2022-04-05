@@ -11,7 +11,7 @@ import rs09.game.interaction.InteractionListener
  * @author afaroutdude / Ceikry
  */
 private const val BARS = 37668
-class DemonTauntHandler : InteractionListener(){
+class DemonTauntHandler : InteractionListener{
 
     override fun defineListeners() {
         on(BARS,SCENERY,"taunt-through"){ player, _ ->

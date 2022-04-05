@@ -15,7 +15,7 @@ private val RINGS = intArrayOf(12003, 12094, 12095, 14058, 14061, 14064, 14067, 
 private const val MAIN_RING = 12128
 
 
-class FairyRingPlugin : InteractionListener() {
+class FairyRingPlugin : InteractionListener {
 
     override fun defineListeners() {
 

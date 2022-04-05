@@ -8,7 +8,7 @@ import rs09.game.content.dialogue.region.examcentre.ArchaeologistcalExpertUsedOn
 import rs09.game.content.dialogue.region.examcentre.ZooknockDialogueFile
 import rs09.game.interaction.InteractionListener
 
-open class ZooknockListener() : InteractionListener() {
+open class ZooknockListener() : InteractionListener {
     val goldBar = Items.GOLD_BAR_2357
     val monkeyAmuletMould = Items.MAMULET_MOULD_4020
     val monkeyDentures = Items.MONKEY_DENTURES_4006

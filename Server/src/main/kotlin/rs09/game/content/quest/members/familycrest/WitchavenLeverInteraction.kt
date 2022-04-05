@@ -32,7 +32,7 @@ fun doDoor(player: Player, scenery: Scenery) {
 
 }
 
-class WitchavenLeverInteraction : InteractionListener() {
+class WitchavenLeverInteraction : InteractionListener {
 	val DOWN_ANIMATION = Animation(2140)
 	val UP_ANIMATION = Animation(2139)
 

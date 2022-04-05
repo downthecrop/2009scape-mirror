@@ -9,7 +9,7 @@ import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
 
 val graphics = 482
-class HatEasterEgg :  InteractionListener(){
+class HatEasterEgg : InteractionListener {
 
     val MACHINE = 20040
     val WIZ_HAT = Items.WIZARD_HAT_579

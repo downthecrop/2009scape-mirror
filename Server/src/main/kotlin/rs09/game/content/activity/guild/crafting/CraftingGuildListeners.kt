@@ -13,7 +13,7 @@ import rs09.game.interaction.InteractionListener
  * @author bushtail
  */
 
-class CraftingGuildListeners : InteractionListener() {
+class CraftingGuildListeners : InteractionListener {
     private val GUILD_DOOR = Scenery.GUILD_DOOR_2647
     private val APRON = Items.BROWN_APRON_1757
     private val CAPE = Items.CRAFTING_CAPE_9780

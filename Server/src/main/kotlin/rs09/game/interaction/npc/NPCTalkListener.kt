@@ -13,7 +13,7 @@ import rs09.game.system.SystemLogger
  * Handles the NPC talk-to option.
  * @author Ceikry
  */
-class NPCTalkListener : InteractionListener() {
+class NPCTalkListener : InteractionListener {
 
     val barCrawlNPCs = intArrayOf(733,848,735,739,737,738,731,568,3217,736,734)
 

@@ -85,6 +85,9 @@ object ClassScanner {
                 if(clazz is TickListener) GameWorld.tickListeners.add(clazz)
                 if(clazz is StartupListener) GameWorld.startupListeners.add(clazz)
                 if(clazz is ShutdownListener) GameWorld.shutdownListeners.add(clazz)
+                if(clazz is InteractionListener) clazz.defineListeners().also { clazz.defineDestinationOverrides() }
+                if(clazz is InterfaceListener) clazz.defineInterfaceListeners()
+                if(clazz is Commands) clazz.defineCommands()
                 if(clazz is PersistPlayer) {
                     PlayerSaver.contentHooks.add(clazz)
                     PlayerSaveParser.contentHooks.add(clazz)

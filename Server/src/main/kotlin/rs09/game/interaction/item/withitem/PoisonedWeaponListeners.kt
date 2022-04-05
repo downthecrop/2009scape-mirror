@@ -7,7 +7,7 @@ import rs09.game.interaction.InteractionListener
 import kotlin.collections.toIntArray
 import kotlin.math.min
 
-class PoisonedWeaponListeners : InteractionListener() {
+class PoisonedWeaponListeners : InteractionListener {
     override fun defineListeners() {
         val poisons = intArrayOf(Items.WEAPON_POISON_187, Items.WEAPON_POISON_PLUS_5937, Items.WEAPON_POISON_PLUS_PLUS_5940)
         val poisonableItems = PoisonSets.itemMap.keys.toIntArray()

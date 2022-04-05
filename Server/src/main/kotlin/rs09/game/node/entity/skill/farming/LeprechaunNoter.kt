@@ -8,7 +8,7 @@ import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
 
-class LeprechaunNoter : InteractionListener() {
+class LeprechaunNoter : InteractionListener {
 
     val CROPS = Plantable.values().map{ it.harvestItem }.toIntArray()
     val LEPRECHAUNS = intArrayOf(NPCs.TOOL_LEPRECHAUN_3021,NPCs.GOTH_LEPRECHAUN_8000,NPCs.TOOL_LEPRECHAUN_4965,NPCs.TECLYN_2861)

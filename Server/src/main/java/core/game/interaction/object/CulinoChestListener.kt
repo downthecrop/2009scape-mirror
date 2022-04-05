@@ -18,7 +18,7 @@ import rs09.game.interaction.InteractionListener
  * Handles the culino chest options.
  * @author Ceikry
  */
-class CulinoChestListener : InteractionListener() {
+class CulinoChestListener : InteractionListener {
     val CULINO_CHEST = Scenery.CHEST_12309
 
     override fun defineListeners() {

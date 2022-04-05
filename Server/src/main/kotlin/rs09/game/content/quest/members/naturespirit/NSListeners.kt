@@ -20,7 +20,7 @@ import rs09.game.system.SystemLogger
 import rs09.game.system.config.ShopParser
 import rs09.tools.END_DIALOGUE
 
-class NSListeners : InteractionListener() {
+class NSListeners : InteractionListener {
 
     val GROTTO_TREE = 3517
     val GROTTO_ENTRANCE = 3516
