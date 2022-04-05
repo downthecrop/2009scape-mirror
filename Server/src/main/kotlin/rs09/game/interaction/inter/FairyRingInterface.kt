@@ -21,12 +21,12 @@ val RING_3 = arrayOf('p','s','r','q')
  * Handles the fairy ring interface
  * @author Ceikry
  */
-class FairyRingInterface : InterfaceListener(){
+class FairyRingInterface : InterfaceListener{
 
     val RINGS = 734
     val TRAVEL_LOG = 735
 
-    override fun defineListeners() {
+    override fun defineInterfaceListeners() {
 
         onOpen(RINGS){player, _ ->
             player.interfaceManager.openSingleTab(Component(TRAVEL_LOG))

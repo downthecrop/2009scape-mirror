@@ -6,7 +6,7 @@ import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
 
-class OilFishingRodListener : InteractionListener() {
+class OilFishingRodListener : InteractionListener {
     override fun defineListeners() {
         onUseWith(ITEM, Items.BLAMISH_OIL_1582, Items.FISHING_ROD_307) {player, used, with ->
             player.pulseManager.run(object : Pulse() {

@@ -11,7 +11,7 @@ import rs09.game.content.dialogue.KjallakOnChopDialogue
 import rs09.game.interaction.InteractionListener
 import rs09.game.node.entity.skill.gather.mining.MiningSkillPulse
 
-class GatheringSkillOptionListeners : InteractionListener() {
+class GatheringSkillOptionListeners : InteractionListener {
 
     val ETCETERIA_REGION = 10300
 

@@ -5,7 +5,7 @@ import org.rs09.consts.Items
 import rs09.game.content.ame.RandomEventManager
 import rs09.game.interaction.InterfaceListener
 
-class SandwichLadyInterface  : InterfaceListener(){
+class SandwichLadyInterface  : InterfaceListener{
 
     val SANDWICH_INTERFACE = 297
     val baguette = Items.BAGUETTE_6961
@@ -16,7 +16,7 @@ class SandwichLadyInterface  : InterfaceListener(){
     val kebab = Items.KEBAB_1971
     val chocobar = Items.CHOCOLATE_BAR_1973
 
-    override fun defineListeners() {
+    override fun defineInterfaceListeners() {
         on(SANDWICH_INTERFACE){player, _, _, buttonID, _, _ ->
             val item =
             when(buttonID) {

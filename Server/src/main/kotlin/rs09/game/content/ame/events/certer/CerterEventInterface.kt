@@ -6,7 +6,7 @@ import org.rs09.consts.Items
 import rs09.game.content.ame.RandomEventManager
 import rs09.game.interaction.InterfaceListener
 
-class CerterEventInterface : InterfaceListener() {
+class CerterEventInterface : InterfaceListener {
     val CERTER_INTERFACE = 184
     val OPTION_A_CHILD = 1
     val OPTION_B_CHILD = 2
@@ -31,7 +31,7 @@ class CerterEventInterface : InterfaceListener() {
         Items.NULL_6198 to "A necklace."
     )
     val falseOptions = arrayOf("An axe.", "An arrow.", "A pair of boots.", "A pair of gloves.", "A staff.", "A bow.", "A feather.", "The disenfrachaised youth of 1940's Columbia.")
-    override fun defineListeners() {
+    override fun defineInterfaceListeners() {
         on(CERTER_INTERFACE) { player, _, _, buttonID, _, _ ->
             val answer = buttonID - 7
             val correctAnswer = player.getAttribute("certer:correctIndex", 0)

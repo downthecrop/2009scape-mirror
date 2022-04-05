@@ -7,7 +7,7 @@ import core.game.node.item.Item
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
 
-class WGuildListeners : InteractionListener() {
+class WGuildListeners : InteractionListener {
     override fun defineListeners() {
         onEquip(Items.DEFENSIVE_SHIELD_8856){player, node ->
             if (node is Item) {

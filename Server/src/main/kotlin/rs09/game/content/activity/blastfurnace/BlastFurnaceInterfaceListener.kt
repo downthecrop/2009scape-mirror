@@ -11,9 +11,9 @@ import rs09.game.interaction.InterfaceListener
  * @author definitely phil who didn't get help from ceikry at all haha :)
  * @version 69.0
  */
-class BlastFurnaceInterfaceListener : InterfaceListener() {
+class BlastFurnaceInterfaceListener : InterfaceListener {
 
-    override fun defineListeners() {
+    override fun defineInterfaceListeners() {
 
         on(Components.BLAST_FURNACE_BAR_STOCK_28){ player, _, _, buttonID, _, _ ->
             val bar = BFBars.forId(buttonID) ?: return@on false

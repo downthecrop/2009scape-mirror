@@ -4,7 +4,7 @@ import api.*
 import core.game.world.map.Location
 import rs09.game.interaction.InteractionListener
 
-class WizardGuildPortals : InteractionListener() {
+class WizardGuildPortals : InteractionListener {
 
     val WTOWER_PORTAL = 2156
     val DWTOWER_PORTAL = 2157

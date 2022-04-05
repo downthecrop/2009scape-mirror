@@ -20,7 +20,7 @@ import rs09.game.system.config.ItemConfigParser
  * @author Ceikry
  * @author Woah
  */
-class EquipHandler : InteractionListener() {
+class EquipHandler : InteractionListener {
 
     override fun defineListeners() {
 

@@ -6,17 +6,14 @@ import core.game.world.map.Location
 import core.tools.RandomFunction
 import org.rs09.consts.Items
 import rs09.game.ai.general.GeneralBotCreator
-import rs09.game.ai.general.ScriptAPI
-import rs09.game.content.global.worldevents.WorldEvents
-import rs09.game.content.global.worldevents.shootingstar.ShootingStarEvent
-import rs09.game.interaction.InteractionListener.Companion.SCENERY
+import rs09.game.content.global.worldevents.shootingstar.ShootingStarPlugin
+import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InteractionListeners
-import kotlin.concurrent.timer
 
 class ShootingStarBot : Script() {
     private var state = State.FULL_IDLE
     private var timerCountdown = 0
-    val star = (WorldEvents.get("shooting-stars") as? ShootingStarEvent)!!.star
+    val star = ShootingStarPlugin.getStar()
 
     override fun tick() {
         bot.fullRestore()
@@ -36,7 +33,7 @@ class ShootingStarBot : Script() {
             }
 
             State.MINING -> {
-                InteractionListeners.run(star.starObject.id, SCENERY, "mine", bot, star.starObject)
+                InteractionListeners.run(star.starObject.id, InteractionListener.SCENERY, "mine", bot, star.starObject)
             }
 
             State.TELEPORT_BACK -> {

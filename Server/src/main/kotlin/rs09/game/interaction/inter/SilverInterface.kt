@@ -11,12 +11,12 @@ import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InterfaceListener
 
-class SilverInterface : InterfaceListener() {
+class SilverInterface : InterfaceListener {
 
     val IFACE = Components.CRAFTING_SILVER_CASTING_438
     val ANIM = getAnimation(899)
 
-    override fun defineListeners() {
+    override fun defineInterfaceListeners() {
         onOpen(IFACE){player, _ ->
             sendItemOnInterface(player, IFACE, 17, 1718)
             sendItemOnInterface(player, IFACE, 24, 1724)
@@ -89,7 +89,7 @@ class SilverInterface : InterfaceListener() {
     }
 }
 
-class SilverBarUseWith : InteractionListener() {
+class SilverBarUseWith : InteractionListener {
     val FURNACES = intArrayOf(2966, 3044, 3294, 4304, 6189, 11009, 11010, 11666, 12100, 12809, 18497, 18525, 18526, 21879, 22721, 26814, 28433, 28434, 30021, 30510, 36956, 37651)
     override fun defineListeners() {
         onUseWith(SCENERY, Items.SILVER_BAR_2355, *FURNACES){ player, _, _ ->

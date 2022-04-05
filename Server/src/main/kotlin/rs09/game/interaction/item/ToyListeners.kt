@@ -6,7 +6,7 @@ import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
 
-class ToyListeners : InteractionListener() {
+class ToyListeners : InteractionListener {
     companion object {
         val MARIONETTES = intArrayOf(Items.RED_MARIONETTE_6867, Items.GREEN_MARIONETTE_6866, Items.BLUE_MARIONETTE_6865)
         private val MARIONETTE_JUMP = Animation(3003)

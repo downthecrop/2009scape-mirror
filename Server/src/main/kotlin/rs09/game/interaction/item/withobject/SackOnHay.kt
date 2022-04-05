@@ -5,7 +5,7 @@ import api.*
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
 
-class SackOnHay : InteractionListener() {
+class SackOnHay : InteractionListener {
     val SACK = Items.EMPTY_SACK_5418
     val HAY = intArrayOf(36892, 36894, 36896, 300, 34593, 298, 299)
 

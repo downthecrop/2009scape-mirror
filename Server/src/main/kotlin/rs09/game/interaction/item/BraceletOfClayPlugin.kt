@@ -8,7 +8,7 @@ import rs09.game.interaction.InteractionListener
  * Handles the bracelet of clay operate option.
  * @author Ceikry
  */
-class BraceletOfClayPlugin : InteractionListener() {
+class BraceletOfClayPlugin : InteractionListener {
 
     override fun defineListeners() {
 

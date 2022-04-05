@@ -19,7 +19,7 @@ private val LIGHT_ANIM = Animation(7307)
  * Handles interactions for beacons
  * @author Ceikry
  */
-class AFUBeaconListeners : InteractionListener(){
+class AFUBeaconListeners : InteractionListener{
 
     override fun defineListeners() {
         on(SCENERY,"add-logs","light"){ player, node ->

@@ -11,7 +11,7 @@ import rs09.tools.END_DIALOGUE
 /**
  * Handles the Staff of the Raven's (2021 Hween Reward) Recolor Transformation
  */
-class StaffOfTheRaven : InteractionListener() {
+class StaffOfTheRaven : InteractionListener {
     val ids = intArrayOf(14654, 14655, 14656)
     override fun defineListeners() {
         on(ids, ITEM, "recolor", "operate"){player, node ->

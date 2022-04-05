@@ -10,7 +10,7 @@ import rs09.game.interaction.InteractionListener
  * @author: bushtail
  */
 
-class ProspectListener : InteractionListener() {
+class ProspectListener : InteractionListener {
 
     override fun defineListeners() {
         on(SCENERY, "prospect") { player, node ->

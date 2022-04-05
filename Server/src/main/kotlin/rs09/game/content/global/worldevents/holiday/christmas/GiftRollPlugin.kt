@@ -48,7 +48,7 @@ class GiftRollPlugin : XPGainPlugin() {
     }
 }
 
-class XMASMboxHandler : InteractionListener() {
+class XMASMboxHandler : InteractionListener {
     val MBOX = Items.MYSTERY_BOX_6199
 
     override fun defineListeners() {

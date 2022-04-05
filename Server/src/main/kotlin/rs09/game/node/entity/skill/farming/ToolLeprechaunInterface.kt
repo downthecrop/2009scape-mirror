@@ -10,12 +10,12 @@ import org.rs09.consts.Items
 import rs09.game.interaction.InterfaceListener
 
 private const val varp = 615
-class ToolLeprechaunInterface : InterfaceListener() {
+class ToolLeprechaunInterface : InterfaceListener {
 
     private val FARMING_TOOLS = Components.FARMING_TOOLS_125
     private val TOOLS_SIDE = Components.FARMING_TOOLS_SIDE_126
 
-    override fun defineListeners() {
+    override fun defineInterfaceListeners() {
 
         onOpen(FARMING_TOOLS){player, component ->
             player.varpManager?.flagSave(varp)

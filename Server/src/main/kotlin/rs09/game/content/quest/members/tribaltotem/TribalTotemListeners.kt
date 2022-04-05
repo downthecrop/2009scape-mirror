@@ -10,7 +10,7 @@ import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
 
-class TribalTotemListeners : InteractionListener(){
+class TribalTotemListeners : InteractionListener{
 
     val frontDoor = 2706
     val wizCrate = 2707
