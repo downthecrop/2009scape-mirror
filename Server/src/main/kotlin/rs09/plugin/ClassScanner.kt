@@ -101,7 +101,7 @@ object ClassScanner {
                         }
 
                         override fun leave(e: Entity?, logout: Boolean): Boolean {
-                            clazz.areaLeave(e ?: return super.leave(null, logout))
+                            clazz.areaLeave(e ?: return super.leave(null, logout), logout)
                             return super.leave(e, logout)
                         }
 

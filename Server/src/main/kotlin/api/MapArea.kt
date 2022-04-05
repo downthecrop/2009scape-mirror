@@ -13,6 +13,6 @@ interface MapArea {
     fun defineAreaBorders() : Array<ZoneBorders>
     fun getRestrictions() : Array<ZoneRestriction> {return arrayOf()}
     fun areaEnter(entity: Entity) {}
-    fun areaLeave(entity: Entity) {}
+    fun areaLeave(entity: Entity, logout: Boolean) {}
     fun entityStep(entity: Entity, location: Location, lastLocation: Location) {}
 }
