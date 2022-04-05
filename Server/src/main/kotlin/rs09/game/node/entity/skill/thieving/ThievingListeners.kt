@@ -13,7 +13,7 @@ import rs09.game.interaction.InteractionListener
 import rs09.game.system.SystemLogger
 import rs09.tools.secondsToTicks
 
-class ThievingListeners : InteractionListener() {
+class ThievingListeners : InteractionListener {
 
     private val PICKPOCKET_ANIM = Animation(881,Animator.Priority.HIGH)
     private val NPC_ANIM = Animation(422)

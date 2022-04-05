@@ -46,9 +46,9 @@ object RulesAndInfo {
     }
 }
 
-class RulesListener : InterfaceListener()
+class RulesListener : InterfaceListener
 {
-    override fun defineListeners() {
+    override fun defineInterfaceListeners() {
         onClose(384){player, _ ->
             if(!getAttribute(player, "rules:confirmed", false))
                 runTask(player, 1) { RulesAndInfo.openFor(player); sendDialogue(player, "Please read the rules.") }

@@ -4,7 +4,7 @@ import api.*
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
 
-class DSEquipListeners : InteractionListener() {
+class DSEquipListeners : InteractionListener {
 
     private val restrictedItems = intArrayOf(
         Items.RUNE_PLATEBODY_1127,

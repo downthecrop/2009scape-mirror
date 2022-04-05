@@ -3,7 +3,7 @@ package rs09.game.node.entity.skill
 import core.game.node.entity.combat.CombatStyle
 import rs09.game.interaction.InteractionListener
 
-class AttackListener : InteractionListener() {
+class AttackListener : InteractionListener {
     override fun defineListeners() {
         on(NPC, "attack"){player, npc ->
             //Makes sure player uses correct attack styles for lumbridge dummies

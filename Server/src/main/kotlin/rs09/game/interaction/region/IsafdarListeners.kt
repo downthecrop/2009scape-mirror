@@ -9,7 +9,7 @@ import rs09.game.interaction.InteractionListener
  * @author Sir Kermit
  */
 
-class IsafdarListeners : InteractionListener() {
+class IsafdarListeners : InteractionListener {
 
     val CAVE_ENTRANCE = 4006
     val CAVE_EXIT = 4007

@@ -6,7 +6,7 @@ import org.rs09.consts.Items
 import rs09.game.content.global.action.PickupHandler
 import rs09.game.interaction.InteractionListener
 
-class WineOfZamorakInteraction : InteractionListener() {
+class WineOfZamorakInteraction : InteractionListener {
 
     override fun defineListeners() {
         on(Items.WINE_OF_ZAMORAK_245,GROUNDITEM,"take"){player, wine ->

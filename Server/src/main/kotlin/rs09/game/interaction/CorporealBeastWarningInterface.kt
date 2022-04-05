@@ -8,11 +8,11 @@ import rs09.game.world.GameWorld
  * Handles the corporeal beast warning interface
  * @author Ceikry
  */
-class CorporealBeastWarningInterface : InterfaceListener(){
+class CorporealBeastWarningInterface : InterfaceListener{
 
     val COMPONENT_ID = 650
 
-    override fun defineListeners() {
+    override fun defineInterfaceListeners() {
         on(COMPONENT_ID,17){player,component,_,_,_,_ ->
             if(player.getAttribute("corp-beast-cave-delay",0) <= GameWorld.ticks) {
                 player.properties.teleportLocation = player.location.transform(4, 0, 0).also { close(player,component) }

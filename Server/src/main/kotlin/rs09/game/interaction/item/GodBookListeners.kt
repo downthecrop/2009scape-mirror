@@ -9,7 +9,7 @@ import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
 import rs09.tools.END_DIALOGUE
 
-class GodBookListeners : InteractionListener() {
+class GodBookListeners : InteractionListener {
 
     val GB_SARADOMIN = Items.HOLY_BOOK_3840
     val GB_ZAMORAK = Items.UNHOLY_BOOK_3842

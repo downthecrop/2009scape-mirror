@@ -4,9 +4,9 @@ import api.sendMessage
 import core.game.container.access.BitregisterAssembler
 import rs09.game.interaction.InterfaceListener
 
-class SeerLockInterfaceListener : InterfaceListener() {
+class SeerLockInterfaceListener : InterfaceListener {
 
-   override fun defineListeners() {
+   override fun defineInterfaceListeners() {
        val LETTERONEBACK = 39
        val LETTERONEFORWARD = 40
        val LETTERTWOBACK = 35

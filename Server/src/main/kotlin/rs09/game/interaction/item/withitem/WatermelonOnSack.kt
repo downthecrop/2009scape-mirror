@@ -6,7 +6,7 @@ import core.game.node.entity.skill.Skills
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
 
-class WatermelonOnSack : InteractionListener() {
+class WatermelonOnSack : InteractionListener {
     val SACK = Items.HAY_SACK_6058
     val WATERMELON = Items.WATERMELON_5982
 

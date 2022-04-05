@@ -11,7 +11,7 @@ import rs09.game.interaction.InteractionListener
  * Handles the lighting of the torches of the Chapel.
  * @author Splinter
  */
-class BurnerListener : InteractionListener() {
+class BurnerListener : InteractionListener {
 
     val IDs = intArrayOf(13202,13203,13204,13205,13206,13207,13208,13209,13210,13211,13212,13213)
 

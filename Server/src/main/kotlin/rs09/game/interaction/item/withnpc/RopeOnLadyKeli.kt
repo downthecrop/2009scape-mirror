@@ -5,7 +5,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
 
-class RopeOnLadyKeli : InteractionListener() {
+class RopeOnLadyKeli : InteractionListener {
     override fun defineListeners() {
         val PAR = "Prince Ali Rescue"
 

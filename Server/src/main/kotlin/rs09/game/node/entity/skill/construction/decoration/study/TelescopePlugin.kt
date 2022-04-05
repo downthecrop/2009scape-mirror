@@ -11,8 +11,7 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.RandomFunction
-import rs09.game.content.global.worldevents.WorldEvents
-import rs09.game.content.global.worldevents.shootingstar.ShootingStarEvent
+import rs09.game.content.global.worldevents.shootingstar.ShootingStarPlugin
 import rs09.game.world.GameWorld.Pulser
 import java.util.concurrent.TimeUnit
 
@@ -27,7 +26,7 @@ class TelescopePlugin : OptionHandler() {
     }
 
     override fun handle(player: Player?, node: Node?, option: String?): Boolean {
-        val star = (WorldEvents.get("shooting-stars") as ShootingStarEvent).star
+        val star = ShootingStarPlugin.getStar()
         val delay: Int = 25000 + (25000 / 3)
         val timeLeft = delay - star.ticks
         val fakeTimeLeftBecauseFuckPlayers = TimeUnit.MILLISECONDS.toMinutes(timeLeft * 600L) + if(RandomFunction.random(0,100) % 2 == 0) 2 else -2

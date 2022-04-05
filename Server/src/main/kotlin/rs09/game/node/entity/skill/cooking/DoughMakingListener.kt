@@ -7,7 +7,7 @@ import org.rs09.consts.Items
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
 
-class DoughMakingListener : InteractionListener() {
+class DoughMakingListener : InteractionListener {
     val sourceReturnMap = hashMapOf(
         Items.BUCKET_OF_WATER_1929 to Items.BUCKET_1925,
         Items.BOWL_OF_WATER_1921 to Items.BOWL_1923,

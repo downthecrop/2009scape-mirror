@@ -13,8 +13,8 @@ import core.game.node.entity.player.Player
 import org.rs09.consts.Components
 import rs09.game.interaction.InterfaceListener
 
-class ExchangeItemSets : InterfaceListener() {
-    override fun defineListeners() {
+class ExchangeItemSets : InterfaceListener {
+    override fun defineInterfaceListeners() {
         onOpen(Components.EXCHANGE_ITEMSETS_645) { player, _ ->
             val listener: InventoryListener
             setAttribute(player, "ge-listener", InventoryListener(player).also { listener = it })

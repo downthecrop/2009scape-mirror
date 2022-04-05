@@ -109,7 +109,7 @@ class BrotherCedricDialogue : DialogueFile() {
  * Handles BrotherCedricListener to launch the dialogue
  * @author Kya
  */
-class BrotherCedricListener : InteractionListener() {
+class BrotherCedricListener : InteractionListener {
     override fun defineListeners() {
         on(NPCs.BROTHER_CEDRIC_280, NPC, "talk-to"){ player, _ ->
             player.dialogueInterpreter.open(BrotherCedricDialogue(), NPC(NPCs.BROTHER_CEDRIC_280))

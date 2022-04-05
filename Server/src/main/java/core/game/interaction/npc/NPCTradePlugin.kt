@@ -20,7 +20,7 @@ import rs09.tools.END_DIALOGUE
  * @author Ceikry
  * @version 1.0
  */
-class NPCTradePlugin : InteractionListener() {
+class NPCTradePlugin : InteractionListener {
     override fun defineListeners() {
         on(NPC, "trade", "shop"){player, node ->
             val npc = node as NPC

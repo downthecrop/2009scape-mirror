@@ -7,7 +7,7 @@ import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InterfaceListener
 
-class NPCContactInterface : InterfaceListener() {
+class NPCContactInterface : InterfaceListener {
     val contactNPCs = arrayOf(NPCs.HONEST_JIMMY_4362, NPCs.BERT_3108, NPCs.ADVISOR_GHRIM_1375, NPCs.TURAEL_8273, NPCs.LANTHUS_1526, NPCs.SUMONA_7780, NPCs.MAZCHNA_8274, NPCs.DURADEL_8275, NPCs.VANNAKA_1597, NPCs.DARK_MAGE_2262, NPCs.CHAELDAR_1598, NPCs.CYRISUS_432, NPCs.LARRY_5424)
     val DialogueFiles = arrayOf<DialogueFile?>(
         /*TODO("Honest Jimmy"),
@@ -25,7 +25,7 @@ class NPCContactInterface : InterfaceListener() {
         TODO("Larry")*/
         )
     val INTER = 429
-    override fun defineListeners() {
+    override fun defineInterfaceListeners() {
 
         //Remove a bunch of the buttons/heads so that people don't
         //waste runes on spells that aren't implemented

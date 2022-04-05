@@ -30,7 +30,7 @@ import rs09.game.system.config.ItemConfigParser
 import rs09.game.world.GameWorld
 import rs09.game.world.GameWorld.Pulser
 
-class TFTInteractionListeners : InteractionListener(){
+class TFTInteractionListeners : InteractionListener{
 
     val BEER = Items.BEER_1917
     val WORKER = NPCs.COUNCIL_WORKMAN_1287

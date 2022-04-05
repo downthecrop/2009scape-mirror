@@ -9,7 +9,7 @@ import rs09.game.interaction.InteractionListener
  * @author bushtail
  */
 
-class FredChestListener : InteractionListener() {
+class FredChestListener : InteractionListener {
     val SHUT = Scenery.CLOSED_CHEST_37009
     val OPEN = Scenery.OPEN_CHEST_37010
 

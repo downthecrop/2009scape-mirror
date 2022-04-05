@@ -5,11 +5,11 @@ import org.rs09.consts.Components
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InterfaceListener
 
-class SEPatternInterface : InterfaceListener() {
+class SEPatternInterface : InterfaceListener {
 
     val COMPONENT = Components.PATTERN_NEXT_103
 
-    override fun defineListeners() {
+    override fun defineInterfaceListeners() {
 
         on(COMPONENT){player, component, opcode, buttonID, slot, itemID ->
             val index = buttonID - 10

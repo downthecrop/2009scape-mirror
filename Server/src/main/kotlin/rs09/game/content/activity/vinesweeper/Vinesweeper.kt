@@ -131,7 +131,7 @@ object VinesweeperTeleport {
     }
 }
 
-class VinesweeperListener : InteractionListener() {
+class VinesweeperListener : InteractionListener {
     fun dig(player: Player, loc: Location) {
         if(isSeed(loc)) {
             val oldPoints = player.getAttribute("vinesweeper:points", 0)
@@ -439,7 +439,7 @@ class VinesweeperZone : MapZone("Vinesweeper", true) {
     }
 }
 
-class VinesweeperRewards : InterfaceListener() {
+class VinesweeperRewards : InterfaceListener {
     val IFACE = 686
     val TRADE_FOR_XP_BUTTON = 53
     val XP_CONFIRM = 72
@@ -506,7 +506,7 @@ class VinesweeperRewards : InterfaceListener() {
         }
     }
 
-    override fun defineListeners() {
+    override fun defineInterfaceListeners() {
         onOpen(IFACE) { _, _ ->
             /*for((buttonID, reward) in REWARDS) {
                 sendItemOnInterface(player, IFACE, buttonID, reward.itemID, 5)

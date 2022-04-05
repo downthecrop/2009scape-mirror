@@ -199,10 +199,10 @@ class StatsCommandSet : CommandSet(Privilege.STANDARD) {
 
 }
 
-class StatsInterface : InterfaceListener() {
+class StatsInterface : InterfaceListener {
     val COMPONENT_ID = 26
 
-    override fun defineListeners() {
+    override fun defineInterfaceListeners() {
         on(COMPONENT_ID, 61) { player, _, _, _, _, _ ->
             val info: StatsPageInfo? = player.getAttribute("stats-page-info", null)
             if(info != null) {

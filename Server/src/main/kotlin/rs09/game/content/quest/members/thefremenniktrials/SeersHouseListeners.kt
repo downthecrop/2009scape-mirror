@@ -16,7 +16,7 @@ import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
 import rs09.tools.stringtools.RED
 
-class SeersHouseListeners : InteractionListener() {
+class SeersHouseListeners : InteractionListener {
 
     val WESTDOOR = 4165
     val EASTDOOR = 4166
