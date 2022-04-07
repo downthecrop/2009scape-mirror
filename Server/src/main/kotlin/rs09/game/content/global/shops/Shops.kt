@@ -3,24 +3,45 @@ package rs09.game.content.global.shops
 import api.*
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
+import core.game.node.entity.player.Player
 import core.game.node.entity.skill.crafting.TanningProduct
-import core.game.node.item.Item
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
+import org.rs09.consts.Components
 import org.rs09.consts.NPCs
 import rs09.ServerConstants
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.InterfaceListener
 import rs09.game.system.SystemLogger
 import rs09.tools.END_DIALOGUE
 import java.io.FileReader
 
 /**
  * The "controller" class for shops. Handles opening shops from various NPC interactions and updating stock, etc.
+ * Note: If you wish to enable personalized shops, add and set the personalized_shops entry to true in the world section of the server config.
+ * ex:
+ * ```toml
+ * [world]
+ * personalized_shops = true
+ * ```
  */
-class Shops : StartupListener, TickListener, InteractionListener, Commands {
-    val shopsById = HashMap<Int,Shop>()
-    val shopsByNpc = HashMap<Int,Shop>()
+class Shops : StartupListener, TickListener, InteractionListener, InterfaceListener, Commands {
+    companion object {
+        @JvmStatic val personalizedShops = "world.personalized_shops"
+        @JvmStatic val shopsById = HashMap<Int,Shop>()
+        @JvmStatic val shopsByNpc = HashMap<Int,Shop>()
+
+        @JvmStatic fun openId(player: Player, id: Int)
+        {
+            shopsById[id]?.openFor(player)
+        }
+
+        fun logShop(msg: String)
+        {
+            SystemLogger.logInfo("[SHOPS] $msg")
+        }
+    }
 
     override fun startup() {
         val path = ServerConstants.CONFIG_PATH + "shops.json"
@@ -60,9 +81,8 @@ class Shops : StartupListener, TickListener, InteractionListener, Commands {
 
             npcs.map { shopsByNpc[it] = shop }
             shopsById[id] = shop
+            ++shopCount
         }
-
-        ++shopCount
 
         logShop("Parsed $shopCount shops.")
     }
@@ -82,8 +102,8 @@ class Shops : StartupListener, TickListener, InteractionListener, Commands {
                 openInterface(player, 732)
                 return@on true
             }
-            logShop("Opening shop [NPC: (${npc.name},${npc.id}), Player: ${player.username}]")
-            return@on npc.openShop(player)
+            shopsByNpc[npc.id]?.openFor(player) ?: return@on false
+            return@on true
         }
 
         on(NPCs.SIEGFRIED_ERKLE_933, NPC, "trade"){ player, node ->
@@ -92,7 +112,7 @@ class Shops : StartupListener, TickListener, InteractionListener, Commands {
                 sendNPCDialogue(player, NPCs.SIEGFRIED_ERKLE_933, "I'm sorry, adventurer, but you need 40 quest points to buy from me.")
                 return@on true
             }
-            node.asNpc().openShop(player)
+            shopsByNpc[node.id]?.openFor(player)
             return@on true
         }
 
@@ -100,7 +120,7 @@ class Shops : StartupListener, TickListener, InteractionListener, Commands {
             if (!isQuestComplete(player, "Fremennik Trials")) {
                 sendNPCDialogue(player, NPCs.FUR_TRADER_1316, "I don't sell to outerlanders.", FacialExpression.ANNOYED).also { END_DIALOGUE }
             } else {
-                END_DIALOGUE.also { node.asNpc().openShop(player) }
+                shopsByNpc[node.id]?.openFor(player)
             }
             return@on true
         }
@@ -109,8 +129,97 @@ class Shops : StartupListener, TickListener, InteractionListener, Commands {
             if (!isQuestComplete(player, "Fremennik Trials")) {
                 sendNPCDialogue(player, NPCs.FISH_MONGER_1315, "I don't sell to outerlanders.", FacialExpression.ANNOYED).also { END_DIALOGUE }
             } else {
-                END_DIALOGUE.also { node.asNpc().openShop(player) }
+                shopsByNpc[node.id]?.openFor(player)
             }
+            return@on true
+        }
+    }
+
+    override fun defineInterfaceListeners() {
+        on(Components.SHOP_TEMPLATE_620){player, _, opcode, buttonID, slot, _ ->
+            val OP_VALUE = 155
+            val OP_BUY_1 = 196
+            val OP_BUY_5 = 124
+            val OP_BUY_10 = 199
+            val OP_BUY_X = 234
+            val OP_EXAMINE = 9
+
+            val shop = getAttribute<Shop?>(player, "shop", null) ?: return@on false
+            val isMainStock = getAttribute(player, "shop-main", true)
+
+            when(buttonID)
+            {
+                26 -> shop.showTab(player, false).also { return@on true }
+                25 -> shop.showTab(player, true).also { return@on true }
+                27,29 -> return@on true
+            }
+
+            val price = shop.getBuyPrice(player, slot)
+
+            when(opcode)
+            {
+                OP_VALUE -> sendMessage(player, "${getItemName(if (isMainStock) shop.stock[slot].itemId else shop.playerStock[slot].id)}: This item currently costs ${price.amount} ${price.name.toLowerCase()}.")
+                OP_BUY_1 -> shop.buy(player, slot, 1)
+                OP_BUY_5 -> shop.buy(player, slot, 5)
+                OP_BUY_10 -> shop.buy(player, slot, 10)
+                OP_BUY_X -> sendInputDialogue(player, true, "Enter the amount to buy:"){value ->
+                    val amt = value as Int
+                    shop.buy(player, slot, amt)
+                }
+                OP_EXAMINE -> sendMessage(player, itemDefinition(shop.stock[slot].itemId).examine)
+            }
+
+            return@on true
+        }
+
+        onOpen(Components.SHOP_TEMPLATE_SIDE_621) {player, _ ->
+            val settings = IfaceSettingsBuilder()
+                .enableOptions(0 until 9)
+                .build()
+            player.packetDispatch.sendIfaceSettings(settings, 0, 621, 0, 28)
+            player.packetDispatch.sendRunScript(150, "IviiiIsssssssss", "", "", "", "", "Sell X", "Sell 10", "Sell 5", "Sell 1", "Value", -1, 0, 7, 4, 93, 621 shl 16);
+            return@onOpen true
+        }
+
+        onClose(Components.SHOP_TEMPLATE_620) { player, _ ->
+            val shop = getAttribute<Shop?>(player, "shop", null) ?: return@onClose true
+            val listener = Shop.listenerInstances[player.username.hashCode()] ?: return@onClose true
+
+            if(getServerConfig().getBoolean(personalizedShops, false))
+                shop.stockInstances[player.username.hashCode()]?.listeners?.remove(listener)
+            else
+                shop.stockInstances[ServerConstants.SERVER_NAME.hashCode()]!!.listeners.remove(listener)
+
+            shop.playerStock.listeners.remove(listener)
+            player.interfaceManager.closeSingleTab()
+            return@onClose true
+        }
+
+        on(Components.SHOP_TEMPLATE_SIDE_621){player, component, opcode, buttonID, slot, itemID ->
+            val OP_VALUE = 155
+            val OP_SELL_1 = 196
+            val OP_SELL_5 = 124
+            val OP_SELL_10 = 199
+            val OP_SELL_X = 234
+
+            val shop = getAttribute<Shop?>(player, "shop", null) ?: return@on false
+
+            val (_,price) = shop.getSellPrice(player, slot)
+
+            val valueMsg = if(price.amount == -1) "This shop will not buy that item." else "${player.inventory[slot].name}: This shop will buy this item for ${price.amount} ${price.name.toLowerCase()}."
+
+            when(opcode)
+            {
+                OP_VALUE -> sendMessage(player, valueMsg)
+                OP_SELL_1 -> shop.sell(player, slot, 1)
+                OP_SELL_5 -> shop.sell(player, slot, 5)
+                OP_SELL_10 -> shop.sell(player, slot, 10)
+                OP_SELL_X -> sendInputDialogue(player, true, "Enter the amount to sell:"){value ->
+                    val amt = value as Int
+                    shop.sell(player, slot, amt)
+                }
+            }
+
             return@on true
         }
     }
@@ -125,11 +234,6 @@ class Shops : StartupListener, TickListener, InteractionListener, Commands {
             }
             return@setDest node.location
         }
-    }
-
-    fun logShop(msg: String)
-    {
-        SystemLogger.logInfo("[SHOPS] $msg")
     }
 
     override fun defineCommands() {

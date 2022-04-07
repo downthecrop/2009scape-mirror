@@ -6,6 +6,7 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import rs09.game.content.global.shops.Shops;
 import rs09.game.system.config.ShopParser;
 
 /**
@@ -18,7 +19,7 @@ public final class BuyCrateOptionPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		ShopParser.Companion.openUid(player, 93);
+		Shops.openId(player, 93);
 		return true;
 	}
 

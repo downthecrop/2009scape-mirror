@@ -9,6 +9,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.plugin.Plugin;
+import rs09.game.content.global.shops.Shops;
 import rs09.game.system.config.ShopParser;
 import rs09.plugin.ClassScanner;
 
@@ -58,7 +59,7 @@ public final class CandleMakerDialogue extends DialoguePlugin {
 				NPC npc = node.asNpc();
 				Quest quest = player.getQuestRepository().getQuest("Merlin's Crystal");
 				if (quest.getStage(player) > 60) {
-					ShopParser.Companion.openUid(player, 198);
+					Shops.openId(player, 198);
 				} else {
 					npc.openShop(player);
 				}
@@ -175,7 +176,7 @@ public final class CandleMakerDialogue extends DialoguePlugin {
 		case 30:
 			end();
 			if (quest.getStage(player) > 60) {
-				ShopParser.Companion.openUid(player, 198);
+				Shops.openId(player, 198);
 			} else {
 				npc.openShop(player);
 			}

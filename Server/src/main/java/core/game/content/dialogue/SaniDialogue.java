@@ -4,6 +4,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.Skills;
 import core.plugin.Initializable;
+import rs09.game.content.global.shops.Shops;
 import rs09.game.system.config.ShopParser;
 
 /**
@@ -135,7 +136,7 @@ public class SaniDialogue extends DialoguePlugin {
 	 * @param uid The uid.
 	 */
 	private void openWeaponShop(Player player, int uid) {
-		ShopParser.Companion.openUid(player, uid);
+		Shops.openId(player, uid);
 	}
 
 	@Override

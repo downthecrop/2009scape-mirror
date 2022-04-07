@@ -32,6 +32,7 @@ import core.game.world.update.flag.npc.NPCForceChat;
 import core.game.world.update.flag.npc.NPCSwitchId;
 import core.tools.RandomFunction;
 import rs09.game.content.global.GlobalKillCounter;
+import rs09.game.content.global.shops.Shops;
 import rs09.game.content.jobs.JobManager;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.system.config.NPCConfigParser;
@@ -309,6 +310,8 @@ public class NPC extends Entity {
 				return n.openShop(player);
 			}
 		}
+
+		Shops.getShopsByNpc().get(id).openFor(player);
 		
 		//Fix for issue #11 for shops keeping dialogue open.
 		DialoguePlugin dialogue = player.getDialogueInterpreter().getDialogue();
