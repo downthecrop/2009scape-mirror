@@ -117,11 +117,11 @@ public final class BankContainer extends Container {
 		player.getInventory().getListeners().add(listener);
 		player.getInventory().refresh();
 		player.varpManager.get(1249).setVarbit(0,lastAmountX).send(player);
-		player.getPacketDispatch().sendAccessMask(1278, 73, 762, 0, ServerConstants.BANK_SIZE);
+		player.getPacketDispatch().sendIfaceSettings(1278, 73, 762, 0, ServerConstants.BANK_SIZE);
 		BitregisterAssembler assembly = new BitregisterAssembler(0, 1, 2, 3, 4, 5);
 		assembly.enableExamineOption();
 		assembly.enableSlotSwitch();
-		player.getPacketDispatch().sendAccessMask(assembly.calculateRegister(), 0, 763, 0, 27);
+		player.getPacketDispatch().sendIfaceSettings(assembly.calculateRegister(), 0, 763, 0, 27);
 		player.getPacketDispatch().sendRunScript(1451, "");
 		open = true;
 		setTabConfigurations();
@@ -148,11 +148,11 @@ public final class BankContainer extends Container {
 		player.getInventory().getListeners().add(player.getBank().listener);
 		player.getInventory().refresh();
 		player.varpManager.get(1249).setVarbit(0,lastAmountX).send(player);
-		player.getPacketDispatch().sendAccessMask(1278, 73, 762, 0, SIZE);
+		player.getPacketDispatch().sendIfaceSettings(1278, 73, 762, 0, SIZE);
 		BitregisterAssembler assembly = new BitregisterAssembler(0, 1, 2, 3, 4, 5);
 		assembly.enableExamineOption();
 		assembly.enableSlotSwitch();
-		player.getPacketDispatch().sendAccessMask(assembly.calculateRegister(), 0, 763, 0, 27);
+		player.getPacketDispatch().sendIfaceSettings(assembly.calculateRegister(), 0, 763, 0, 27);
 		player.getPacketDispatch().sendRunScript(1451, "");
 		open = true;
 		this.player.getBank().setTabConfigurations(player);

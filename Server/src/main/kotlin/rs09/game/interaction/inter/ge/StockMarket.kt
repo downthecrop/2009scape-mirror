@@ -29,8 +29,8 @@ class StockMarket : InterfaceListener {
     override fun defineInterfaceListeners() {
         onOpen(Components.STOCKMARKET_105){player, _ ->
             player.packetDispatch.sendInterfaceConfig(105, 193, true)
-            player.packetDispatch.sendAccessMask(6, 211, 105, -1, -1)
-            player.packetDispatch.sendAccessMask(6, 209, 105, -1, -1)
+            player.packetDispatch.sendIfaceSettings(6, 211, 105, -1, -1)
+            player.packetDispatch.sendIfaceSettings(6, 209, 105, -1, -1)
             player.varpManager.get(1112).setVarbit(0, -1).send(player)
             return@onOpen true
         }

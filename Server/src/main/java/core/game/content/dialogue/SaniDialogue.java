@@ -79,7 +79,6 @@ public class SaniDialogue extends DialoguePlugin {
 				break;
 			case 2:
 				end();
-				ShopParser.Companion.getSHOPS().get(4905).open(player);
 				break;
 			}
 			break;

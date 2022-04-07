@@ -79,7 +79,7 @@ public class StakeContainer extends Container {
 	public void open() {
 		player.getInterfaceManager().openSingleTab(OVERLAY);
 		player.getPacketDispatch().sendRunScript(150, "IviiiIssssssss", INVY_PARAMS);
-		player.getPacketDispatch().sendAccessMask(1278, 0, 336, 0, 27);
+		player.getPacketDispatch().sendIfaceSettings(1278, 0, 336, 0, 27);
 		PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, 2, 93, player.getInventory(), false));
 	}
 

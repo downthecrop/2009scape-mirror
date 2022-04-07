@@ -8,7 +8,9 @@ import core.game.node.entity.player.Player;
  * @date 5/02/2013
  * @author Stacx
  * @author Emperor
+ * @deprecated This is a really bad way of doing what this class needs to do. Please use {@link api.IfaceSettingsBuilder}.
  */
+@Deprecated()
 public final class BitregisterAssembler {
 
 	/**
@@ -102,7 +104,7 @@ public final class BitregisterAssembler {
 		if (offset >= length) {
 			throw new RuntimeException("Offset cannot excess length. length = " + length);
 		}
-		player.getPacketDispatch().sendAccessMask(assembler.calculateRegister(), childIndex, interfaceIndex, offset, length);
+		player.getPacketDispatch().sendIfaceSettings(assembler.calculateRegister(), childIndex, interfaceIndex, offset, length);
 	}
 	
 	/**

@@ -1,3 +1,126 @@
+package rs09.game.content.global.shops
+
+import api.*
+import core.game.container.Container
+import core.game.container.ContainerEvent
+import core.game.container.ContainerListener
+import core.game.node.entity.player.Player
+import core.game.node.item.Item
+import core.net.packet.PacketRepository
+import core.net.packet.context.ContainerContext
+import core.net.packet.out.ContainerPacket
+import org.rs09.consts.Components
+import org.rs09.consts.Items
+import rs09.ServerConstants
+import rs09.game.world.GameWorld
+
+data class ShopItem(val itemId: Int, val amount: Int, val restockRate: Int = 100)
+
+class ShopListener(val player: Player) : ContainerListener
+{
+    var enabled = false
+    override fun update(c: Container?, event: ContainerEvent?) {
+        PacketRepository.send(ContainerPacket::class.java, ContainerContext(player, -1, -1, 92, event!!.items, false, *event.slots))
+    }
+
+    override fun refresh(c: Container?) {
+        PacketRepository.send(ContainerPacket::class.java, ContainerContext(player, -1, -1, 92, c!!.toArray(), c.capacity(), false))
+    }
+}
+
+class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean = false, val currency: Int = Items.COINS_995, val highAlch: Boolean = false)
+{
+    val stockInstances = HashMap<Int, Container>()
+    val listenerInstances = HashMap<Int, ShopListener>()
+    val needsUpdate = HashMap<Int, Boolean>()
+    var needsPstockUpdate = false
+    val playerStock = Container(40)
+    val restockRates = HashMap<Int,Int>()
+
+    init {
+        if(!getServerConfig().getBoolean("world.personalized_stock", false))
+            stockInstances[ServerConstants.SERVER_NAME.hashCode()] = generateStockContainer()
+    }
+
+    fun openFor(player: Player)
+    {
+        val cont = getContainer(player)
+
+        cont.refresh()
+
+        val settings = IfaceSettingsBuilder()
+            .enableOptions(0..9)
+            .build()
+
+        val main = true
+        player.packetDispatch.sendInterfaceConfig(620, 23, !main)
+        player.packetDispatch.sendInterfaceConfig(620, 24, main)
+        player.packetDispatch.sendInterfaceConfig(620, 29, !main)
+        player.packetDispatch.sendInterfaceConfig(620, 25, main)
+        player.packetDispatch.sendInterfaceConfig(620, 27, main)
+        player.packetDispatch.sendInterfaceConfig(620, 26, false)
+
+        player.packetDispatch.sendIfaceSettings(settings, 23, Components.SHOP_TEMPLATE_620, 0, cont.capacity())
+        player.packetDispatch.sendRunScript(25, "vg", 868, 92) //Run CS2 script 25, with args 868? and 92(our container id)
+        openInterface(player, Components.SHOP_TEMPLATE_620)
+
+    }
+
+    private fun getContainer(player: Player) : Container
+    {
+        val container = if(getServerConfig().getBoolean("world.personalized_stock", false))
+            stockInstances[player.username.hashCode()] ?: generateStockContainer().also { stockInstances[player.username.hashCode()] = it }
+        else
+            stockInstances[ServerConstants.SERVER_NAME.hashCode()]!!
+
+        var listener = listenerInstances[player.username.hashCode()]
+
+        if(listener != null && listener.player != player)
+        {
+            container.listeners.remove(listener)
+        }
+
+        if(listener == null || listener.player != player)
+        {
+            listenerInstances[player.username.hashCode()] = ShopListener(player).also { listener = it }
+            container.listeners.add(listener)
+        }
+
+        return container
+    }
+
+    private fun generateStockContainer(): Container
+    {
+        val container = Container(40)
+        for(item in stock) {
+            container.add(Item(item.itemId,item.amount))
+            restockRates[item.itemId] = item.restockRate
+        }
+
+        return container
+    }
+
+    fun restock()
+    {
+        stockInstances.filter { needsUpdate[it.key] == true }.forEach{ (player,cont) ->
+            for(i in 0 until cont.capacity())
+            {
+                if(GameWorld.ticks % stock[i].restockRate != 0) continue
+
+                if(cont[i].amount < stock[i].amount){
+                    cont[i].amount++
+                    cont.event.flag(i, cont[i])
+                }
+                else if(cont[i].amount > stock[i].amount){
+                    cont[i].amount--
+                    cont.event.flag(i, cont[i])
+                }
+                if(cont[i].amount != stock[i].amount) needsUpdate[player] = true
+            }
+        }
+    }
+}
+/*
 package core.game.content.global.shop
 
 import api.amountInInventory
@@ -30,154 +153,31 @@ import java.lang.IndexOutOfBoundsException
 import java.util.Arrays
 import java.util.ArrayList
 
+*/
 /**
  * A class representing a shop.
  *
  * @author 'Vexia
  * @author Jamix77
- */
+ *//*
+
 open class Shop @JvmOverloads constructor(
-    /**
-     * Represents the title of the shop.
-     */
     val title: String,
-    /**
-     * Represents the items in the store.
-     */
-    var items: Array<Item>,
-    /**
-     * Represents if it's a general store.
-     */
+    var items: Array<ShopItem>,
     val isGeneral: Boolean,
-    /**
-     * Represents the currency the shop allows.
-     */
     val currency: Int = COINS,
-    /**
-     * If the shop buys for high alch.
-     */
     val isHighAlch: Boolean = false
-) {
-    /**
-     * Gets the containers.
-     *
-     * @return The containers.
-     */
-    /**
-     * Represents the shop containers.
-     */
+)
+{
     val containers = arrayOf(Container(40, ContainerType.SHOP), Container(40, ContainerType.SHOP))
-    /**
-     * Gets the viewers.
-     *
-     * @return The viewers.
-     */
-    /**
-     * Represents the list of shop viewers.
-     */
     val viewers: List<ShopViewer> = ArrayList(20)
-    /**
-     * Gets the title.
-     *
-     * @return The title.
-     */
-    /**
-     * Gets the items.
-     *
-     * @return The items.
-     */
-    /**
-     * Gets the general.
-     *
-     * @return The general.
-     */
-    /**
-     * Gets the currency.
-     *
-     * @return The currency.
-     */
-    /**
-     * Gets the bhighAlch.
-     *
-     * @return the highAlch
-     */
-    /**
-     * Gets the SellAllFor value.
-     *
-     * @return the sellAllFor
-     */
-    /**
-     * Sell price for all shop items, if needed.
-     */
     var sellAllFor = 0
         private set
-    /**
-     * Gets the lastRestock.
-     *
-     * @return the lastRestock
-     */
-    /**
-     * Sets the balastRestock.
-     *
-     * @param lastRestock the lastRestock to set.
-     */
-    /**
-     * The last restock.
-     */
     var lastRestock = 0
-    /**
-     * Check if shop should restock.
-     *
-     * @return the restock
-     */
-    /**
-     * Sets the restock.
-     *
-     * @param reStock
-     */
-    /**
-     * If the shop should restock.
-     */
     var isRestock = false
-    /**
-     * Gets the pointShop.
-     *
-     * @return the pointShop
-     */
-    /**
-     * Sets the pointShop.
-     *
-     * @param pointShop the pointShop to set.
-     */
-    /**
-     * If it's a point shop.
-     */
     var isPointShop = false
-    /**
-     * Gets the npcs.
-     *
-     * @return the npcs
-     */
-    /**
-     * Sets the banpcs.
-     *
-     * @param npcs the npcs to set.
-     */
-    /**
-     * The npcs of the shop.
-     */
     var npcs: IntArray = intArrayOf()
 
-    /**
-     * Constructs a new `Shop` `Object`.
-     *
-     * @param title    the title.
-     * @param items    the items.
-     * @param general  the general.
-     * @param currency the currency.
-     * @param highAlch if high alch.
-     * @param restock  if restock.
-     */
     constructor(
         title: String,
         items: Array<Item>,
@@ -191,14 +191,16 @@ open class Shop @JvmOverloads constructor(
         isRestock = restock
     }
 
-    /**
+    */
+/**
      * Constructs a new `Shop` `Object`
      *
      * @param title the shop title
      * @param items items the shop can handle
      * @param general is this a general store
      * @param currency what currency is used
-     */
+     *//*
+
     constructor(title: String, items: Array<Item>, npcs: IntArray, general: Boolean, currency: Int) : this(
         title,
         items,
@@ -209,21 +211,25 @@ open class Shop @JvmOverloads constructor(
         this.npcs = npcs
     }
 
-    /**
+    */
+/**
      * Constructs a new `Shop` `Object`.
      *
      * @param title   the title.
      * @param general the general.
-     */
+     *//*
+
     constructor(title: String, general: Boolean) : this(title, GENERAL_STORE_ITEMS, general) {}
 
-    /**
+    */
+/**
      * Constructs a new `Shop` `Object`.
      *
      * @param title    the title.
      * @param general  the general.
      * @param highAlch if highAlch.
-     */
+     *//*
+
     constructor(title: String, general: Boolean, highAlch: Boolean) : this(
         title,
         GENERAL_STORE_ITEMS,
@@ -233,13 +239,15 @@ open class Shop @JvmOverloads constructor(
     ) {
     }
 
-    /**
+    */
+/**
      * Constructs a new `Shop` `Object`.
      *
      * @param title    the title.
      * @param general  the general.
      * @param highAlch if highAlch.
-     */
+     *//*
+
     constructor(title: String, general: Boolean, currency: Int, highAlch: Boolean) : this(
         title,
         GENERAL_STORE_ITEMS,
@@ -249,14 +257,16 @@ open class Shop @JvmOverloads constructor(
     ) {
     }
 
-    /**
+    */
+/**
      * Constructs a new `Shop` `Object`.
      *
      * @param title   the title.
      * @param items   the items.
      * @param npcs    the npcs.
      * @param general the general.
-     */
+     *//*
+
     constructor(title: String, items: Array<Item>, npcs: IntArray, general: Boolean) : this(
         title,
         items,
@@ -267,25 +277,29 @@ open class Shop @JvmOverloads constructor(
         this.npcs = npcs
     }
 
-    /**
+    */
+/**
      * Constructs a new `Shop` `Object`.
      *
      * @param title   the title.
      * @param npcs    the npcs.
      * @param general the general.
-     */
+     *//*
+
     constructor(title: String, npcs: IntArray, general: Boolean) : this(title, GENERAL_STORE_ITEMS, npcs, general) {
         this.npcs = npcs
     }
 
-    /**
+    */
+/**
      * Constructs a new `Shop` `Object`.
      *
      * @param title    the title.
      * @param npcs     the npcs.
      * @param general  the general.
      * @param highAlch if highAlch.
-     */
+     *//*
+
     constructor(title: String, npcs: IntArray, general: Boolean, highAlch: Boolean) : this(
         title,
         GENERAL_STORE_ITEMS,
@@ -296,11 +310,13 @@ open class Shop @JvmOverloads constructor(
         this.npcs = npcs
     }
 
-    /**
+    */
+/**
      * Method used to open the shop.
      *
      * @param player the shop.
-     */
+     *//*
+
     fun open(player: Player) {
         ShopViewer.extend(player, this).open()
 
@@ -332,12 +348,14 @@ open class Shop @JvmOverloads constructor(
         update()
     }
 
-    /**
+    */
+/**
      * Method used to buy an item from the shop.
      *
      * @param slot   the slot.
      * @param amount the amount.
-     */
+     *//*
+
     fun buy(player: Player, slot: Int, amount: Int, tabIndex: Int) {
         var amount = amount
         if (tabIndex == 1 && player.ironmanManager.checkRestriction()) {
@@ -404,12 +422,14 @@ open class Shop @JvmOverloads constructor(
         }
     }
 
-    /**
+    */
+/**
      * Method used to sell an item to the shop.
      *
      * @param slot   the slot.
      * @param amount the amount.
-     */
+     *//*
+
     fun sell(player: Player, slot: Int, amount: Int, tabIndex: Int) {
         var amount = amount
         var tabIndex = tabIndex
@@ -462,14 +482,16 @@ open class Shop @JvmOverloads constructor(
         }
     }
 
-    /**
+    */
+/**
      * Values an item.
      *
      * @param player the player.
      * @param viewer the viewer.
      * @param item   the item.
      * @param sell   the sell.
-     */
+     *//*
+
     fun value(player: Player, viewer: ShopViewer, item: Item, sell: Boolean) {
         if (sell) {
             if (isPointShop || item.id == viewer.shop.currency || !item.definition.isTradeable || !viewer.shop.itemAllowed(
@@ -497,12 +519,14 @@ open class Shop @JvmOverloads constructor(
         }
     }
 
-    /**
+    */
+/**
      * Method used to send a stock
      *
      * @param player
      * @param tabIndex
-     */
+     *//*
+
     fun sendStock(player: Player, tabIndex: Int) {
         val main = tabIndex == 0
         player.packetDispatch.sendInterfaceConfig(620, 23, !main)
@@ -514,18 +538,22 @@ open class Shop @JvmOverloads constructor(
         player.packetDispatch.sendAccessMask(1278, if (main) 23 else 24, 620, 0, 40)
     }
 
-    /**
+    */
+/**
      * Method used to update the viewers.
-     */
+     *//*
+
     fun update() {
         for (viewer in viewers) {
             viewer.update()
         }
     }
 
-    /**
+    */
+/**
      * Method used to restock the shop.
-     */
+     *//*
+
     fun restock() {
         for (container in containers) {
             for (i in container.toArray().indices) {
@@ -554,14 +582,16 @@ open class Shop @JvmOverloads constructor(
         update()
     }
 
-    /**
+    */
+/**
      * Checks if the player can sell an item to the shop.
      *
      * @param player the player.
      * @param item   the item.
      * @param def    the def.
      * @return `True` if so.
-     */
+     *//*
+
     open fun canSell(player: Player, item: Item, def: ItemDefinition): Boolean {
         if (isPointShop || item.definition.hasDestroyAction() || !def.isTradeable || !itemAllowed(item.id)) {
             player.packetDispatch.sendMessage("You can't sell this item to this shop.")
@@ -574,29 +604,34 @@ open class Shop @JvmOverloads constructor(
         return true
     }
 
-    /**
+    */
+/**
      * Gets the amount to buy/sell.
      *
      * @param player the player.
      * @param add    the added item.
      * @return the amount.
-     */
+     *//*
+
     fun getAmount(player: Player?, add: Item): Int {
         return add.amount
     }
 
-    /**
+    */
+/**
      * Checks if the player can buy the item.
      *
      * @param player   the player.
      * @param currency the currency.
      * @return `True` if so.
-     */
+     *//*
+
     fun handleBuy(player: Player, currency: Item?): Boolean {
         return isPointShop || player.inventory.remove(currency)
     }
 
-    /**
+    */
+/**
      * Checks if the player can buy from the shop.
      *
      * @param player   the player.
@@ -604,7 +639,8 @@ open class Shop @JvmOverloads constructor(
      * @param price    the price.
      * @param currency the currency.
      * @return `True` if they can buy.
-     */
+     *//*
+
     fun canBuy(player: Player, item: Item, price: Int, currency: Item): Boolean {
         if (!isPointShop && !player.inventory.containsItem(currency)) {
             player.packetDispatch.sendMessage(
@@ -619,39 +655,47 @@ open class Shop @JvmOverloads constructor(
         return true
     }
 
-    /**
+    */
+/**
      * Gets the points.
      *
      * @param player the player.
      * @return the points.
-     */
+     *//*
+
     fun getPoints(player: Player?): Int {
         return 0
     }
 
-    /**
+    */
+/**
      * Decrements the points.
      *
      * @param player    the player.
      * @param decrement the decrementation.
-     */
+     *//*
+
     fun decrementPoints(player: Player?, decrement: Int) {}
 
-    /**
+    */
+/**
      * Gets the points name.
      *
      * @return the name.
-     */
+     *//*
+
     val pointsName: String
         get() = ""
 
-    /**
+    */
+/**
      * Gets the value gained for selling this item to a certain shop.
      *
      * @param item   The item to sell.
      * @param player the player.
      * @return The value.
-     */
+     *//*
+
     fun getSellingValue(item: Item, player: Player): Int {
         var item = item
         if (!item.definition.isUnnoted) {
@@ -665,13 +709,15 @@ open class Shop @JvmOverloads constructor(
         return getSellingValue(player, amount, item)
     }
 
-    /**
+    */
+/**
      * Gets the selling value formula based.
      *
      * @param amount the amount.
      * @param item   the item.
      * @return the selling value.
-     */
+     *//*
+
     private fun getSellingValue(player: Player, amount: Int, item: Item): Int {
         val id = player.getAttribute("shop:originalId", item.id)
         if (item.amount > amountInInventory(player, id)) {
@@ -699,12 +745,14 @@ open class Shop @JvmOverloads constructor(
         return value
     }
 
-    /**
+    */
+/**
      * Gets the buying price.
      *
      * @param item the item.
      * @return the price.
-     */
+     *//*
+
     open fun getBuyPrice(item: Item, player: Player): Int {
         var item = item
         item = Item(item.id, 1)
@@ -734,12 +782,14 @@ open class Shop @JvmOverloads constructor(
         return if (sellAllFor > 0) sellAllFor else price
     }
 
-    /**
+    */
+/**
      * Checks if the item is allowed to be sold to the shop.
      *
      * @param itemId the item id.
      * @return `True` if so.
-     */
+     *//*
+
     fun itemAllowed(itemId: Int): Boolean {
         if (isGeneral) {
             return true
@@ -756,12 +806,14 @@ open class Shop @JvmOverloads constructor(
         return false
     }
 
-    /**
+    */
+/**
      * Gets the container the item should go to.
      *
      * @param item the item.
      * @return the container.
-     */
+     *//*
+
     fun getContainer(item: Item): Container {
         val itemId = item.id
         var noteId = ItemDefinition.forId(itemId).noteId
@@ -776,21 +828,25 @@ open class Shop @JvmOverloads constructor(
         return getContainer(1)
     }
 
-    /**
+    */
+/**
      * Creates a copy of this shop.
      *
      * @return the shop.
-     */
+     *//*
+
     fun copy(): Shop {
         return Shop(title, items, isGeneral, currency, isHighAlch)
     }
 
-    /**
+    */
+/**
      * Gets the container on the slot.
      *
      * @param tabIndex the tab index.
      * @return the container.
-     */
+     *//*
+
     fun getContainer(tabIndex: Int): Container {
         if (tabIndex > containers.size) {
             throw IndexOutOfBoundsException("Error! Shop tab index out of bounds.")
@@ -809,9 +865,11 @@ open class Shop @JvmOverloads constructor(
     }
 
     companion object {
-        /**
+        */
+/**
          * Represents the general store items.
-         */
+         *//*
+
         val GENERAL_STORE_ITEMS = arrayOf(
             Item(EMPTY_POT_1931, 5),
             Item(JUG_1935, 5),
@@ -826,22 +884,29 @@ open class Shop @JvmOverloads constructor(
             Item(SECURITY_BOOK_9003, 5)
         )
 
-        /**
+        */
+/**
          * Represents the coins item.
-         */
+         *//*
+
         private const val COINS = 995
 
-        /**
+        */
+/**
          * Represents the tokkul item id.
-         */
+         *//*
+
         private const val TOKKUL = 6529
 
-        /**
+        */
+/**
          * Represents the archery ticket item id
-         */
+         *//*
+
         private const val ARCHERY_TICKET = 1464
     }
-    /**
+    */
+/**
      * Constructs a new `Shop` `Object`.
      *
      * @param title    the title.
@@ -849,17 +914,20 @@ open class Shop @JvmOverloads constructor(
      * @param isGeneral  the general.
      * @param currency the currency.
      * @param isHighAlch if high alch.
-     */
-    /**
+     *//*
+
+    */
+/**
      * Constructs a new `Shop` `Object`.
      *
      * @param title   the title.
      * @param items   the items.
      * @param general the general.
-     */
+     *//*
+
     init {
         this.getContainer(0).add(*items)
         isRestock = true
         lastRestock = ticks + 100
     }
-}
+}*/

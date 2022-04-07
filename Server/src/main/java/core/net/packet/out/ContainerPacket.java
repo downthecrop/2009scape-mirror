@@ -24,7 +24,7 @@ public final class ContainerPacket implements OutgoingPacket<ContainerContext> {
 			buffer = new IoBuffer(slotBased ? 22 : 105, PacketHeader.SHORT);
 			buffer.putShort(context.getInterfaceId());
 			buffer.putShort(context.getChildId());
-			buffer.putShort(context.getType());
+			buffer.putShort(context.getContainerId());
 			if (slotBased) {
 				for (int slot : context.getSlots()) {
 					buffer.putSmart(slot);

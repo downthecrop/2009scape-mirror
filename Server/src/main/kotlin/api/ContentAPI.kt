@@ -1,6 +1,7 @@
 package api
 
 import Cutscene
+import com.moandjiezana.toml.Toml
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.SceneryDefinition
 import core.game.component.Component
@@ -45,6 +46,7 @@ import rs09.game.content.global.GlobalKillCounter
 import rs09.game.interaction.InteractionListeners
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.ItemConfigParser
+import rs09.game.system.config.ServerConfigParser
 import rs09.game.world.GameWorld
 import rs09.game.world.GameWorld.Pulser
 import rs09.game.world.repository.Repository
@@ -1456,4 +1458,9 @@ fun Player.getCutscene(): Cutscene? {
 
 fun Player.getCutsceneStage(): Int {
     return getAttribute(this, Cutscene.ATTRIBUTE_CUTSCENE_STAGE, 0)
+}
+
+fun getServerConfig() : Toml
+{
+    return ServerConfigParser.tomlData ?: Toml()
 }

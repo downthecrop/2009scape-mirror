@@ -3,7 +3,6 @@ package core.game.node.entity.npc;
 import api.events.NPCKillEvent;
 import core.cache.def.impl.NPCDefinition;
 import core.game.content.dialogue.DialoguePlugin;
-import core.game.content.global.shop.Shop;
 import core.game.interaction.Interaction;
 import core.game.interaction.MovementPulse;
 import core.game.node.entity.Entity;
@@ -140,11 +139,6 @@ public class NPC extends Entity {
 	 * If the npc can never walk.
 	 */
 	private boolean neverWalks;
-
-	/**
-	 * The shop of this npc.
-	 */
-	private Shop shop;
 	
 	/**
 	 * The force talk string.
@@ -234,18 +228,6 @@ public class NPC extends Entity {
 				npc.size = size;
 			}
 		}
-		if (definition.hasAction("trade")) {
-			shop = ShopParser.Companion.getSHOPS().get(getId());
-			if (shop != null) {
-				shop = shop.copy();
-			}
-		}
-		if (definition.hasAction("sew")) {
-			shop = ShopParser.Companion.getSHOPS().get(getId());
-			if (shop != null) {
-				shop = shop.copy();
-			}
-		}
 	}
 
 	@Override
@@ -321,23 +303,12 @@ public class NPC extends Entity {
 	 * @return {@code True} if so.
 	 */
 	public boolean openShop(Player player) {
-		shop = null;
-		if(shop != null){
-			player.debug("testing new shop for: " + name);
-		}
-		if (shop == null) {
-			shop = ShopParser.Companion.getSHOPS().get(getId());
-			if (shop == null) {
-				return false;
-			}
-		}
 		if (getName().contains("assistant")) {
 			NPC n = RegionManager.getNpc(this, getId() - 1);
 			if (n != null) {
 				return n.openShop(player);
 			}
 		}
-		shop.open(player);
 		
 		//Fix for issue #11 for shops keeping dialogue open.
 		DialoguePlugin dialogue = player.getDialogueInterpreter().getDialogue();
@@ -467,14 +438,6 @@ public class NPC extends Entity {
 							Pathfinder.find(this, l, true, Pathfinder.DUMB).walk(this);
 						}
 					}
-				}
-			}
-		}
-		if (shop != null) {
-			if (shop.getLastRestock() < GameWorld.getTicks()) {
-				if (shop.isRestock()) {
-					shop.restock();
-					shop.setLastRestock(GameWorld.getTicks() + 100);
 				}
 			}
 		}
@@ -940,22 +903,6 @@ public class NPC extends Entity {
 			}
 		}
 		return this;
-	}
-
-	/**
-	 * Gets the shop.
-	 * @return the shop
-	 */
-	public Shop getShop() {
-		return shop;
-	}
-
-	/**
-	 * Sets the bashop.
-	 * @param shop the shop to set.
-	 */
-	public void setShop(Shop shop) {
-		this.shop = shop;
 	}
 
 	/**

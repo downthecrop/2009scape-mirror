@@ -1,3 +1,4 @@
+/*
 package core.game.content.global.shop
 
 import api.LoginListener
@@ -140,4 +141,4 @@ class CulinomancerShop : LoginListener {
             Item(Items.BUCKET_1925, 1)
         )
     }
-}
+}*/

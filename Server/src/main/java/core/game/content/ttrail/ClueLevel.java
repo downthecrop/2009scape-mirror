@@ -524,7 +524,7 @@ public enum ClueLevel {
 				value += item.getValue();
 			}
 			player.sendMessage("<col=990000>Your clue is worth approximately " + NumberFormat.getInstance().format(value) + " coins!</col>");
-			player.getPacketDispatch().sendAccessMask(1278, 4, 364, 0, 6);
+			player.getPacketDispatch().sendIfaceSettings(1278, 4, 364, 0, 6);
 			InterfaceContainer.generateItems(player, rewards.toArray(new Item[] {}), new String[] { "" }, 364, 4, 3, 3);
 			return;
 		}

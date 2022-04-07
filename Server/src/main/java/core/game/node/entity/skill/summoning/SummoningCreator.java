@@ -60,7 +60,7 @@ public final class SummoningCreator {
 	public static final void configure(final Player player, final boolean pouch) {
 		player.getInterfaceManager().open(pouch ? SUMMONING_COMPONENT : SCROLL_COMPONENT);
 		player.getPacketDispatch().sendRunScript(pouch ? 757 : 765, pouch ? "Iiissssss" : "Iiisssss", pouch ? POUCH_PARAMS : SCROLL_PARAMS);
-		player.getPacketDispatch().sendAccessMask(pouch ? 190 : 126, 15, pouch ? 669 : 673, 0, 78);
+		player.getPacketDispatch().sendIfaceSettings(pouch ? 190 : 126, 15, pouch ? 669 : 673, 0, 78);
 	}
 
 	/**
