@@ -2,7 +2,10 @@ package rs09.game.system.command.sets
 
 import core.game.node.entity.player.link.TeleportManager
 import core.game.world.map.Location
+import core.game.world.map.RegionManager
 import core.plugin.Initializable
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import rs09.ServerConstants
 import rs09.game.system.command.Command
 import rs09.game.system.command.Privilege
@@ -46,12 +49,73 @@ class TeleportCommandSet : CommandSet(Privilege.ADMIN){
                 player.properties.teleportLocation = Location.create(x, y, z)
                 return@define
             }
+            if (args.size == 2 && args[1].contains("_"))
+            {
+                val tokens = args[1].split("_")
+                if(tokens.size == 4) {
+                    val regionX = tokens[0].toInt()
+                    val regionY = tokens[1].toInt()
+                    val offsetX = tokens[2].toInt()
+                    val offsetY = tokens[3].toInt()
+
+                    val xCoord = (regionX shl 6) or offsetX
+                    val yCoord = (regionY shl 6) or offsetY
+
+                    player.properties.teleportLocation = Location.create(xCoord, yCoord, 0)
+                }
+                else if(tokens.size == 2){
+                    val regionX = tokens[0].toInt()
+                    val regionY = tokens[1].toInt()
+
+                    player.properties.teleportLocation = Location.create((regionX shl 6) or 15, (regionY shl 6) or 15, 0)
+                }
+                else reject(player, "Usage: regionX_regionY OR regionX_regionY_offsetX_offsetY")
+                return@define
+            }
             if (args.size < 2) {
-                reject(player,"syntax error: x, y, (optional) z")
+                reject(player,"Usage: x,y,(optional)z OR regionX_regionY OR regionX_regionY_offsetX_offsetY")
             }
             player.properties.teleportLocation = Location.create(args[1].toInt(), args[2].toInt(), if (args.size > 3) args[3].toInt() else 0)
         }
 
+        /**
+         * Teleport to the first object with the given name in the given regionX regionY
+         */
+        define("teleobj"){player, args ->
+            if(args.size < 3) reject(player, "Usage: regionX_regionY Object Name")
+            var objName = ""
+            for(i in 2 until args.size) objName += (args[i] + if(i + 1 == args.size) "" else " ")
+
+            val tokens = args[1].split("_")
+            if(tokens.size != 2) reject(player, "Usage: regionX_regionY Object Name")
+            val regionX = tokens[0].toInt()
+            val regionY = tokens[1].toInt()
+
+            val regionId = (regionX shl 8) or regionY
+            val region = RegionManager.forId(regionId)
+
+            GlobalScope.launch {
+                for (plane in region.planes) {
+                    for (objects in plane.objects.filterNotNull()) {
+                        for (parent in objects.filterNotNull()) {
+                            if (parent.childs != null) {
+                                for (obj in parent.childs.filterNotNull()) {
+                                    if (obj.name.equals(objName, ignoreCase = true)) {
+                                        player.properties.teleportLocation = obj.location
+                                        return@launch
+                                    }
+                                }
+                            } else {
+                                if (parent.name.equals(objName, ignoreCase = true)) {
+                                    player.properties.teleportLocation = parent.location
+                                    return@launch
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         /**
          * Teleport to a specific player
