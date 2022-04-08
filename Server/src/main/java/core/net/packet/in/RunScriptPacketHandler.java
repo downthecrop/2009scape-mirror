@@ -30,6 +30,13 @@ public class RunScriptPacketHandler implements IncomingPacket {
 		} else {
 			value = buffer.getInt();
 		}
+		if(value instanceof Integer)
+		{
+			if((int) value <= 0){
+				player.removeAttribute("runscript");
+				return;
+			}
+		}
 		try {
 			script.invoke(value);
 		} catch (NumberFormatException nfe){

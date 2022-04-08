@@ -254,6 +254,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
 
     fun buy(player: Player, slot: Int, amount: Int)
     {
+        if(amount !in 1..Integer.MAX_VALUE) return
         val isMainStock = getAttribute(player, "shop-main", false)
         if(!isMainStock && player.ironmanManager.isIronman)
         {
@@ -322,6 +323,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
 
     fun sell(player: Player, slot: Int, amount: Int)
     {
+        if(amount !in 1..Integer.MAX_VALUE) return
         val playerInventory = player.inventory[slot]
         if(playerInventory.id in intArrayOf(Items.COINS_995, Items.TOKKUL_6529, Items.ARCHERY_TICKET_1464))
         {
