@@ -102,6 +102,7 @@ class MainGameInterface : InterfaceListener {
             player.packetDispatch.sendMessage("You can't do this right now.")
             return
         }
+        player.interfaceManager.close()
         player.interfaceManager.openWindowsPane(Component(755))
         val posHash = player.location.z shl 28 or (player.location.x shl 14) or player.location.y
         player.packetDispatch.sendScriptConfigs(622, posHash, "", 0)
