@@ -166,7 +166,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
                     val amt = value as Int
                     shop.buy(player, slot, amt)
                 }
-                OP_EXAMINE -> sendMessage(player, itemDefinition(shop.stock[slot].itemId).examine)
+                OP_EXAMINE -> sendMessage(player, itemDefinition(if (isMainStock) shop.stock[slot].itemId else shop.playerStock[slot].id).examine)
             }
 
             return@on true

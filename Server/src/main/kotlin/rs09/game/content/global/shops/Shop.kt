@@ -235,6 +235,8 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
     }
 
     private fun getGPSell(item: Item, stockAmount: Int, currentAmt: Int): Int{
+        if(item.noteChange != item.id)
+            item.id = item.noteChange
         var mod: Int
         mod = if(stockAmount == 0) 70
         else if(currentAmt == 0) 100
@@ -334,9 +336,9 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
 
         if(currency == Items.COINS_995){
             var amt = item.amount
-            var inStockAmt = container!![slot].amount
+            var inStockAmt = container!![slot]?.amount ?: 0
             while(amt-- > 1)
-                profit.amount += getGPSell(Item(item.id, 1), container[slot].amount, ++inStockAmt)
+                profit.amount += getGPSell(Item(item.id, 1), if (container == playerStock) inStockAmt else container[slot].amount, ++inStockAmt)
         } else {
             profit.amount = profit.amount * item.amount
         }
@@ -356,6 +358,10 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
                 showTab(player, true)
             }
             addItem(player, profit.id, profit.amount)
+            if(item.noteChange != item.id)
+            {
+                item.id = item.noteChange
+            }
             container?.add(item)
             container?.refresh()
             if(getServerConfig().getBoolean(Shops.personalizedShops, false)){
