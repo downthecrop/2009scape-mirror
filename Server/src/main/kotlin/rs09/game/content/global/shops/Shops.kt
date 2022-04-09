@@ -51,8 +51,9 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
         val reader = FileReader(path)
         val data = JSONParser().parse(reader) as JSONArray
 
-        fun parseStock(stock: String): ArrayList<ShopItem>{
+        fun parseStock(stock: String, id: Int): ArrayList<ShopItem>{
             val items = ArrayList<ShopItem>()
+            val idsInStock = HashMap<Int, Boolean>()
             if(stock.isEmpty()){
                 return items
             }
@@ -61,7 +62,11 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
                 var amount = tokens[1].trim()
                 if(amount == "inf")
                     amount = "-1"
-                items.add(ShopItem(tokens[0].toInt(), amount.toInt(), tokens.getOrNull(2)?.toIntOrNull() ?: 100))
+                val item = tokens[0].toInt()
+                if(idsInStock[item] != null)
+                    SystemLogger.logWarn("[SHOPS] MALFORMED STOCK IN SHOP ID $id FOR ITEM $item")
+                else
+                    items.add(ShopItem(item, amount.toInt(), tokens.getOrNull(2)?.toIntOrNull() ?: 100))
             }
             return items
         }
@@ -73,7 +78,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
             val id = shopData["id"].toString().toInt()
             val title = shopData["title"].toString()
             val general = shopData["general_store"].toString().toBoolean()
-            val stock = parseStock(shopData["stock"].toString()).toTypedArray()
+            val stock = parseStock(shopData["stock"].toString(), id).toTypedArray()
             val npcs = if(shopData["npcs"].toString().isNotBlank()) shopData["npcs"].toString().split(",").map { it.toInt() }.toIntArray() else intArrayOf()
             val currency = shopData["currency"].toString().toInt()
             val highAlch = shopData["high_alch"].toString() == "1"
