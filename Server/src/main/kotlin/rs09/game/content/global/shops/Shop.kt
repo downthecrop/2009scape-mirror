@@ -15,6 +15,7 @@ import org.rs09.consts.Components
 import org.rs09.consts.Items
 import rs09.ServerConstants
 import rs09.game.content.global.shops.Shops.Companion.logShop
+import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
 import java.lang.Integer.max
 import java.lang.Integer.min
@@ -166,34 +167,17 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
     {
         val shopCont = getAttribute<Container?>(player, "shop-cont", null) ?: return Pair(null, Item(-1,-1))
         val item = player.inventory[slot]
-        var shopSlot: Int = -1
-        var isPlayerStock = false
-        for((stockSlot, shopItem) in stock.withIndex())
-        {
-            if(shopItem.itemId == item.id)
-                shopSlot = stockSlot
-        }
-        if(shopSlot == -1)
-        {
-            for((stockSlot, playerStockItem) in playerStock.toArray().withIndex())
-            {
-                if(playerStockItem == null) continue
-                if(playerStockItem.id == item.id) {
-                    shopSlot = stockSlot
-                    isPlayerStock = true
-                }
-            }
-        }
+        var (isPlayerStock, shopSlot) = getStockSlot(item.id)
 
         val stockAmt =
             if(isPlayerStock)
-                playerStock.getAmount(item.id)
+                0
             else{
                 if(shopSlot != -1) stock[shopSlot].amount
                 else 0
             }
         val currentAmt =
-            if(isPlayerStock) stockAmt
+            if(isPlayerStock) playerStock.getAmount(item.id)
             else {
                 if(shopSlot != -1) shopCont[shopSlot].amount
                 else {
@@ -209,7 +193,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
             else -> getGPSell(Item(item.id, 1), stockAmt, currentAmt)
         }
 
-        if(!general && stockAmt == 0)
+        if(!general && stockAmt == 0 && shopSlot == -1)
         {
             return Pair(null, Item(-1,-1))
         }
@@ -336,11 +320,13 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         if(amount > player.inventory.getAmount(item.id))
             item.amount = player.inventory.getAmount(item.id)
 
-        if(currency == Items.COINS_995){
+        if(currency == Items.COINS_995 && item.amount > 1){
+            val id = if(!item.definition.isUnnoted) item.noteChange else item.id
+            val (isPlayerStock, shopSlot) = getStockSlot(id)
             var amt = item.amount
-            var inStockAmt = container!![slot]?.amount ?: 0
+            var inStockAmt = container!![shopSlot]?.amount ?: playerStock.getAmount(id)
             while(amt-- > 1)
-                profit.amount += getGPSell(Item(item.id, 1), if (container == playerStock) inStockAmt else container[slot].amount, ++inStockAmt)
+                profit.amount += getGPSell(Item(item.id, 1), if (isPlayerStock) 0 else stock[shopSlot].amount, ++inStockAmt)
         } else {
             profit.amount = profit.amount * item.amount
         }
@@ -372,6 +358,31 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
                 needsUpdate[ServerConstants.SERVER_NAME.hashCode()] = true
             }
         }
+    }
+
+    fun getStockSlot(itemId: Int): Pair<Boolean, Int>
+    {
+        var shopSlot: Int = -1
+        var isPlayerStock = false
+        val notechange = itemDefinition(itemId).noteId
+        for((stockSlot, shopItem) in stock.withIndex())
+        {
+            if(shopItem.itemId == itemId || shopItem.itemId == notechange)
+                shopSlot = stockSlot
+        }
+        if(shopSlot == -1)
+        {
+            for((stockSlot, playerStockItem) in playerStock.toArray().withIndex())
+            {
+                if(playerStockItem == null) continue
+                if(playerStockItem.id == itemId || playerStockItem.id == notechange) {
+                    shopSlot = stockSlot
+                    isPlayerStock = true
+                }
+            }
+        }
+
+        return Pair(isPlayerStock, shopSlot)
     }
 
     companion object {
