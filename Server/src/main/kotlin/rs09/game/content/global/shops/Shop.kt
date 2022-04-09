@@ -235,7 +235,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
     }
 
     private fun getGPSell(item: Item, stockAmount: Int, currentAmt: Int): Int{
-        if(item.noteChange != item.id)
+        if(!item.definition.isUnnoted)
             item.id = item.noteChange
         var mod: Int
         mod = if(stockAmount == 0) 70
@@ -360,7 +360,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
                 showTab(player, true)
             }
             addItem(player, profit.id, profit.amount)
-            if(item.noteChange != item.id)
+            if(!item.definition.isUnnoted)
             {
                 item.id = item.noteChange
             }
