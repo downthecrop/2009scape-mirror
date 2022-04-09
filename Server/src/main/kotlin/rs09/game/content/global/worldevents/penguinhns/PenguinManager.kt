@@ -18,10 +18,9 @@ class PenguinManager{
 
         fun registerTag(player: Player, location: Location){
             val ordinal = Penguin.forLocation(location)?.ordinal ?: -1
-            if(tagMapping[ordinal] == null){
-                tagMapping[ordinal] = JSONArray()
-            }
-            tagMapping[ordinal]?.add(player.username.toLowerCase())
+            val list = tagMapping[ordinal] ?: JSONArray()
+            list.add(player.username.toLowerCase())
+            tagMapping[ordinal] = list
             updateStoreFile()
         }
 
@@ -31,7 +30,7 @@ class PenguinManager{
 
         private fun updateStoreFile(){
             val jsonTags = JSONArray()
-            tagMapping.forEach { (ordinal,taggers) ->
+            tagMapping.filter { it.value.isNotEmpty() }.forEach { (ordinal,taggers) ->
                 SystemLogger.logInfo("$ordinal - ${taggers.first()}")
                 val tag = JSONObject()
                 tag["ordinal"] = ordinal
