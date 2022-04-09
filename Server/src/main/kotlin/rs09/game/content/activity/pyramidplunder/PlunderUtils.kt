@@ -267,8 +267,8 @@ object PlunderUtils {
         //tier 3 -> chest
         val room = getRoom(player)!!.room
         val divisor = (room * 2) * (tier * 35)
-        val goldRate = divisor / 650
-        val stoneRate = divisor / 250
+        val goldRate = divisor / 650.0
+        val stoneRate = divisor / 250.0
 
         val roll = RandomFunction.RANDOM.nextDouble()
         if(goldRate > roll)
