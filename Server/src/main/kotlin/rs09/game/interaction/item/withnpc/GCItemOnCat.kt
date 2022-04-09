@@ -17,7 +17,7 @@ class GCItemOnCat : InteractionListener() {
 
         onUseWith(NPC, Items.BUCKET_OF_MILK_1927, NPCs.GERTRUDES_CAT_2997) {player, used, with ->
             if(questStage(player, GERTCAT) == 20 && removeItem(player, used.asItem())){
-                addItem(player, Items.EMPTY_BUCKET_3727)
+                addItem(player, Items.BUCKET_1925)
                 animate(player, BEND_DOWN) //bend down
                 sendChat(with.asNpc(), "Mew!")
                 setQuestStage(player, GERTCAT, 30)
