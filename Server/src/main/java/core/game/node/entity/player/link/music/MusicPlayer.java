@@ -168,7 +168,7 @@ public final class MusicPlayer {
 	 */
 	public void play(MusicEntry entry) {
 		PacketRepository.send(MusicPacket.class, new MusicContext(player, entry.getId()));
-		PacketRepository.send(StringPacket.class, new StringContext(player, entry.getName(), 187, 14));
+		PacketRepository.send(StringPacket.class, new StringContext(player, entry.getName() + (player.isDebug() ? (" (" + entry.getId() + ")") : ""), 187, 14));
 		currentMusicId = entry.getId();
 		playing = true;
 	}

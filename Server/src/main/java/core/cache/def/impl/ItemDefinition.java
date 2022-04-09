@@ -495,7 +495,7 @@ public class ItemDefinition extends Definition<Item> {
 				}
 				for (int index = 0; index < length; index++) {
 					boolean string = (buffer.get() & 0xFF) == 1;
-					int key = ByteBufferUtils.getTriByte(buffer);
+					int key = ByteBufferUtils.getMedium(buffer);
 					Object value = string ? ByteBufferUtils.getString(buffer) : buffer.getInt();
 					def.clientScriptData.put(key, value);
 				}

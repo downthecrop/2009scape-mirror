@@ -33,7 +33,7 @@ public final class JS5ReadEvent extends IoReadEvent {
 			switch (opcode) {
 			case 0:
 			case 1:
-				int request = ByteBufferUtils.getTriByte(buffer);
+				int request = ByteBufferUtils.getMedium(buffer);
 				//System.out.println("Requested file " + request);
 				int container = request >> 16 & 0xFF;
 				//System.out.println("In container " + container);
@@ -62,7 +62,7 @@ public final class JS5ReadEvent extends IoReadEvent {
 				buffer.getInt();
 				break;
 			case 6:
-				ByteBufferUtils.getTriByte(buffer); // Value should be 3
+				ByteBufferUtils.getMedium(buffer); // Value should be 3
 				// buffer.getShort(); // Value should be 0
 				break;
 			case 7:

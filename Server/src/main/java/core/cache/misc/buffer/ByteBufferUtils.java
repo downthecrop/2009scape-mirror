@@ -105,7 +105,7 @@ public final class ByteBufferUtils {
 	 * @param buffer The buffer.
 	 * @return The value.
 	 */
-	public static int getTriByte(ByteBuffer buffer) {
+	public static int getMedium(ByteBuffer buffer) {
 		return ((buffer.get() & 0xFF) << 16) + ((buffer.get() & 0xFF) << 8) + (buffer.get() & 0xFF);
 	}
 
