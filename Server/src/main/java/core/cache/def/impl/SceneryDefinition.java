@@ -792,7 +792,7 @@ public class SceneryDefinition extends Definition<Scenery> {
 				int length = buffer.get() & 0xFF;
 				for (int i = 0; i < length; i++) {
 					boolean string = buffer.get() == 1;
-					ByteBufferUtils.getTriByte(buffer); // script id
+					ByteBufferUtils.getMedium(buffer); // script id
 					if (!string) {
 						buffer.getInt(); // Value
 					} else {

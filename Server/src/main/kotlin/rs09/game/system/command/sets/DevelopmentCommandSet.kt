@@ -2,23 +2,25 @@ package rs09.game.system.command.sets
 
 import api.sendMessage
 import core.cache.Cache
+import core.cache.def.impl.DataMap
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.VarbitDefinition
+import core.cache.def.impl.Struct
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
-import core.game.node.entity.npc.drop.NPCDropTables
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.item.Item
 import core.net.packet.context.PlayerContext
 import core.net.packet.out.ResetInterface
-import core.net.packet.out.Varbit
 import core.plugin.Initializable
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.rs09.consts.Items
-import rs09.game.content.global.NPCDropTable
-import rs09.game.system.command.Command
+import rs09.game.system.SystemLogger
 import rs09.game.system.command.Privilege
+import java.io.BufferedWriter
+import java.io.File
+import java.io.FileWriter
 import rs09.net.packet.PacketWriteQueue
 
 @Initializable
@@ -47,6 +49,64 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
 
         define("killme") { player, _ ->
             player.impactHandler.manualHit(player, player.skills.lifepoints, HitsplatType.NORMAL)
+        }
+
+        define("struct") {player, args ->
+            val mapId = args[1].toIntOrNull() ?: return@define
+
+            val def = Struct.get(mapId)
+            SystemLogger.logInfo(def.toString())
+        }
+
+        define("datamap") {player, args ->
+            val mapId = args[1].toIntOrNull() ?: return@define
+
+            val def = DataMap.get(mapId)
+            SystemLogger.logInfo(def.toString())
+        }
+
+        define("dumpstructs") {player, _ ->
+            val dump = File("structs.txt")
+            val writer = BufferedWriter(FileWriter(dump))
+            val index = Cache.getIndexes()[2]
+            val containers = index.information.containers[26].filesIndexes
+            for(fID in containers)
+            {
+                val file = index.getFileData(26, fID)
+                if(file != null){
+                    val def = Struct.parse(fID, file)
+                    if(def.dataStore.isEmpty()) continue //no data in struct.
+                    writer.write(def.toString())
+                    writer.newLine()
+                }
+            }
+            writer.flush()
+            writer.close()
+        }
+
+        define("dumpdatamaps") {player, _ ->
+            val index = Cache.getIndexes()[17]
+            val containers = index.information.containersIndexes
+
+            val dump = File("datamaps.txt")
+            val writer = BufferedWriter(FileWriter(dump))
+
+            for(cID in containers)
+            {
+                val fileIndexes = index.information.containers[cID].filesIndexes
+                for(fID in fileIndexes)
+                {
+                    val file = index.getFileData(cID, fID)
+                    if(file != null){
+                        val def = DataMap.parse((cID shl 8) or fID, file)
+                        if(def.keyType == '?') continue //Empty definition - only a 0 present in the cachefile data.
+                        writer.write(def.toString())
+                        writer.newLine()
+                    }
+                }
+            }
+            writer.flush()
+            writer.close()
         }
 
         define("rolldrops") { player: Player, args: Array<String> ->
