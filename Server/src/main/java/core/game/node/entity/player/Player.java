@@ -592,7 +592,7 @@ public class Player extends Entity {
 			}
 			GroundItemManager.create(new Item(526), getLocation(), k);
 			final Container[] c = DeathTask.getContainers(this);
-			boolean gravestone = graveManager.generateable() && getIronmanManager().getMode() != IronmanMode.ULTIMATE;
+			boolean gravestone = graveManager.generateable();
 			int seconds = graveManager.getType().getDecay() * 60;
 			int ticks = (1000 * seconds) / 600;
 			List<GroundItem> items = new ArrayList<>(20);
