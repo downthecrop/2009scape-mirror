@@ -15,6 +15,9 @@ class KangaiMauDialogue(player: Player? = null) : DialoguePlugin(player) {
         if(!player.questRepository.hasStarted("Tribal Totem")){
             npcl(FacialExpression.HAPPY,"Hello. I'm Kangai Mau of the Rantuki Tribe.")
             stage = 0
+        } else if(isQuestComplete(player, "Tribal Totem")) {
+            npcl(FacialExpression.HAPPY, "Many greetings esteemed thief.")
+            stage = 40
         }
         else if(player.inventory.containsAtLeastOneItem(Items.TOTEM_1857)){
             npcl(FacialExpression.ASKING,"Have you got our totem back?")
@@ -66,8 +69,12 @@ class KangaiMauDialogue(player: Player? = null) : DialoguePlugin(player) {
                 if(!isQuestComplete(player, "Tribal Totem") && removeItem(player, Items.TOTEM_1857)) {
                         player.questRepository.getQuest("Tribal Totem").finish(player)
                         stage = 1000
+                } else {
+                    stage = 1000
                 }
             }
+
+            40 -> player(FacialExpression.NEUTRAL, "Hey.").also { stage = 1000 }
 
             1000 -> end()
         }
