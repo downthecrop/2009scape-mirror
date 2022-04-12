@@ -9,7 +9,7 @@ import java.util.*
  * Listener for enchanted jewellery options
  * @author Ceikry
  */
-class EnchantedJewelleryListener : InteractionListener() {
+class EnchantedJewelleryListener : InteractionListener {
     val IDs: IntArray
 
     init {

@@ -18,7 +18,7 @@ import rs09.game.node.entity.npc.other.BlastFurnaceOre
  * That lives in OrdanDialogue.kt
  * @author phil lips*/
 
-class BlastFurnaceListeners : InteractionListener() {
+class BlastFurnaceListeners : InteractionListener {
 
     val disLoc = getScenery(1941, 4963, 0)
     val brokenPotPipe = 9117

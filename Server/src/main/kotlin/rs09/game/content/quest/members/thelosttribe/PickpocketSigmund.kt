@@ -13,7 +13,7 @@ import rs09.game.world.GameWorld
  * handles pickpocketing sigmund during the lost tribe quest
  * @author Ceikry
  */
-class PickpocketSigmund : InteractionListener(){
+class PickpocketSigmund : InteractionListener{
     val SIGMUND = NPCs.SIGMUND_2082
 
     override fun defineListeners() {

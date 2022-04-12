@@ -5,7 +5,7 @@ import api.*
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
 
-class HaySackOnSpear : InteractionListener() {
+class HaySackOnSpear : InteractionListener {
     val HAYSACK = Items.HAY_SACK_6057
     val SPEAR = Items.BRONZE_SPEAR_1237
 

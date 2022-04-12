@@ -8,7 +8,7 @@ import core.game.node.entity.player.link.diary.DiaryType
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
 
-class BonesOnStrayDog : InteractionListener() {
+class BonesOnStrayDog : InteractionListener {
     override fun defineListeners() {
         val bones = Bones.array
         val dogs = intArrayOf(NPCs.STRAY_DOG_4766, NPCs.STRAY_DOG_4767, NPCs.STRAY_DOG_5917, NPCs.STRAY_DOG_5918)

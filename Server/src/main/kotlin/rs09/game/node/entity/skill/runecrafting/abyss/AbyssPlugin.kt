@@ -24,7 +24,7 @@ import rs09.game.world.GameWorld
  * A plugin used to handle the abyss.
  * @author cfunny
  */
-class AbyssPlugin : InteractionListener() {
+class AbyssPlugin : InteractionListener {
 
     val OBSTACLE = AbbysalObstacle.values().filter { it != AbbysalObstacle.MINE && it != AbbysalObstacle.SQUEEZE && it != AbbysalObstacle.PASSAGE && it != AbbysalObstacle.CHOP }.map { it.option }.toTypedArray()
     val miningObstacle = 7158

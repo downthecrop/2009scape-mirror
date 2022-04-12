@@ -10,7 +10,6 @@ import core.net.packet.context.StringContext;
 import core.net.packet.out.MusicPacket;
 import core.net.packet.out.StringPacket;
 
-import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -80,7 +79,7 @@ public final class MusicPlayer {
 		for (int i = 0; i < CONFIG_IDS.length; i++) {
 			value |= 2 << i;
 		}
-		player.getPacketDispatch().sendAccessMask(value, 1, 187, 0, CONFIG_IDS.length * 64);
+		player.getPacketDispatch().sendIfaceSettings(value, 1, 187, 0, CONFIG_IDS.length * 64);
 		if (!unlocked.containsKey(TUTORIAL_MUSIC)) {
 			unlock(TUTORIAL_MUSIC, false);
 		}

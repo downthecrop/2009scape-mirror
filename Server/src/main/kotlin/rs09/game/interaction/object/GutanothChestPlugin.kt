@@ -14,7 +14,7 @@ import rs09.game.world.GameWorld
 import java.util.concurrent.TimeUnit
 
 private const val CHEST = 2827
-class GutanothChestInteractionHandler : InteractionListener(){
+class GutanothChestInteractionHandler : InteractionListener{
 
     override fun defineListeners() {
 

@@ -97,14 +97,14 @@ public final class PacketDispatch {
 
 	/**
 	 * Send a access mask.
-	 * @param id The access mask id.
+	 * @param settingsHash The access mask settingsHash.
 	 * @param childId The access mask child id.
 	 * @param interfaceId The access mask interface Id.
 	 * @param offset The access mask off set.
 	 * @param length The access mask length.
 	 */
-	public void sendAccessMask(int id, int childId, int interfaceId, int offset, int length) {
-		PacketRepository.send(AccessMask.class, new AccessMaskContext(player, id, childId, interfaceId, offset, length));
+	public void sendIfaceSettings(int settingsHash, int childId, int interfaceId, int offset, int length) {
+		PacketRepository.send(AccessMask.class, new AccessMaskContext(player, settingsHash, childId, interfaceId, offset, length));
 	}
 
 	/**

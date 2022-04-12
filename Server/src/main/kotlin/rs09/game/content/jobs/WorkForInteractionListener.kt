@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit
  * Handles the work-for actions for the NPCs
  * @author Ceikry
  */
-class WorkForInteractionListener : InteractionListener(), LoginListener {
+class WorkForInteractionListener : InteractionListener, LoginListener {
     val possibleWeaponLooks = arrayListOf(
         Items.BRONZE_SCIMITAR_1321,
         Items.STEEL_SCIMITAR_1325,

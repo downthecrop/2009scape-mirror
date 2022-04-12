@@ -9,7 +9,7 @@ import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
 import rs09.tools.END_DIALOGUE
 
-class NPCDepositListener : InteractionListener() {
+class NPCDepositListener : InteractionListener {
 
     override fun defineListeners() {
         on(NPCs.PEER_THE_SEER_1288, NPC,"deposit") { player, _ ->

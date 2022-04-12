@@ -82,9 +82,9 @@ public final class ChestViewer {
 	 */
 	public void update(int type, ContainerEvent event) {
 		if (event == null) {
-			player.getPacketDispatch().sendAccessMask(1278, 27, 647, 0, 10);
-			player.getPacketDispatch().sendAccessMask(1278, 28, 647, 0, 10);
-			player.getPacketDispatch().sendAccessMask(1278, 29, 647, 0, 10);
+			player.getPacketDispatch().sendIfaceSettings(1278, 27, 647, 0, 10);
+			player.getPacketDispatch().sendIfaceSettings(1278, 28, 647, 0, 10);
+			player.getPacketDispatch().sendIfaceSettings(1278, 29, 647, 0, 10);
 			switch (type) {
 			case 0:
 				player.getPacketDispatch().sendRunScript(150, "IviiiIsssssssss", BEING_DROPPED);
@@ -310,14 +310,14 @@ public final class ChestViewer {
 					player.getPacketDispatch().sendRunScript(150, "IviiiIsssssssss", INV_OPTIONS);
 					PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 90, c.toArray(), 10, false));
 					PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 94, player.getInventory(), false));
-					player.getPacketDispatch().sendAccessMask(1278, 0, 648, 0, 28);
+					player.getPacketDispatch().sendIfaceSettings(1278, 0, 648, 0, 28);
 				}
 			}
 
 			@Override
 			public void refresh(Container c) {
 				if (c instanceof DepositContainer) {
-					player.getPacketDispatch().sendAccessMask(1278, 0, 648, 0, 28);
+					player.getPacketDispatch().sendIfaceSettings(1278, 0, 648, 0, 28);
 					player.getPacketDispatch().sendRunScript(150, "IviiiIsssssssss", ACCEPT);
 					player.getPacketDispatch().sendRunScript(150, "IviiiIsssssssss", INV_OPTIONS);
 					PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 94, player.getInventory(), false));

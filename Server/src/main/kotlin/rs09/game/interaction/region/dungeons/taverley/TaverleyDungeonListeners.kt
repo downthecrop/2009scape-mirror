@@ -6,7 +6,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.Scenery
 import rs09.game.interaction.InteractionListener
 
-class TaverleyDungeonListeners : InteractionListener() {
+class TaverleyDungeonListeners : InteractionListener {
 
     val BD_GATE = Scenery.GATE_2623
     val JAIL_DOOR = Scenery.DOOR_31838

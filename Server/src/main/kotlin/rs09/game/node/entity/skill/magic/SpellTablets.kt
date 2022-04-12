@@ -7,7 +7,7 @@ import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
 import rs09.game.node.entity.skill.magic.spellconsts.Modern
 
-class SpellTablets : InteractionListener() {
+class SpellTablets : InteractionListener {
     val B2P_TABLET = Items.BONES_TO_PEACHES_8015
     val B2B_TABLET = Items.BONES_TO_BANANAS_8014
     override fun defineListeners() {

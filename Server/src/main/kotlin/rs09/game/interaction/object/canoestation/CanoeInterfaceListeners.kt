@@ -17,7 +17,7 @@ import org.rs09.consts.Components
 import rs09.game.interaction.InterfaceListener
 import kotlin.math.abs
 
-class CanoeInterfaceListeners : InterfaceListener() {
+class CanoeInterfaceListeners : InterfaceListener {
 
     val SHAPE_INTERFACE = Components.CANOE_52
     val DESTINATION_INTERFACE = Components.CANOE_STATIONS_MAP_53
@@ -26,7 +26,7 @@ class CanoeInterfaceListeners : InterfaceListener() {
     private val locationChilds = intArrayOf(50, 47, 44, 36)
 
 
-    override fun defineListeners() {
+    override fun defineInterfaceListeners() {
 
         onOpen(SHAPE_INTERFACE){player, _ ->
             CanoeUtils.checkCanoe(player,Canoe.DUGOUT)

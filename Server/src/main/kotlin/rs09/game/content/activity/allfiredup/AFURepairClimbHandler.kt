@@ -16,7 +16,7 @@ import java.util.*
  * Handles repairing and climbing of the 3 beacon shortcuts needed to access them
  * @author Ceikry
  */
-class AFURepairClimbHandler : InteractionListener() {
+class AFURepairClimbHandler : InteractionListener {
 
     val repairIDs = intArrayOf(38480,38470,38494)
     val climbIDs = intArrayOf(38469,38471,38486,38481,38469)

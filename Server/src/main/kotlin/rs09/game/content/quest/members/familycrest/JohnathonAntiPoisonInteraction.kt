@@ -6,7 +6,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
 
-class JohnathonAntiPosionInteraction: InteractionListener() {
+class JohnathonAntiPosionInteraction: InteractionListener {
     override fun defineListeners() {
         val poisons = intArrayOf(Items.ANTIPOISON4_2446, Items.ANTIPOISON3_175, Items.ANTIPOISON2_177, Items.ANTIPOISON1_179)
 

@@ -29,7 +29,7 @@ public final class ContainerContext implements Context {
 	/**
 	 * The container type.
 	 */
-	private final int type;
+	private final int containerId;
 
 	/**
 	 * The items.
@@ -73,12 +73,12 @@ public final class ContainerContext implements Context {
 	 * @param player The player.
 	 * @param interfaceId The interface id.
 	 * @param childId The child id.
-	 * @param type The container type.
+	 * @param containerId The container type.
 	 * @param container The container.
 	 * @param split If the container should be split.
 	 */
-	public ContainerContext(Player player, int interfaceId, int childId, int type, Container container, boolean split) {
-		this(player, interfaceId, childId, type, container.toArray(), container.toArray().length, split);
+	public ContainerContext(Player player, int interfaceId, int childId, int containerId, Container container, boolean split) {
+		this(player, interfaceId, childId, containerId, container.toArray(), container.toArray().length, split);
 	}
 
 	/**
@@ -86,12 +86,12 @@ public final class ContainerContext implements Context {
 	 * @param player The player.
 	 * @param interfaceId The interface id.
 	 * @param childId The child id.
-	 * @param type The container type.
+	 * @param containerId The container type.
 	 * @param items The items.
 	 * @param split If the container should be split.
 	 */
-	public ContainerContext(Player player, int interfaceId, int childId, int type, Item[] items, boolean split) {
-		this(player, interfaceId, childId, type, items, items.length, split);
+	public ContainerContext(Player player, int interfaceId, int childId, int containerId, Item[] items, boolean split) {
+		this(player, interfaceId, childId, containerId, items, items.length, split);
 	}
 
 	/**
@@ -99,16 +99,16 @@ public final class ContainerContext implements Context {
 	 * @param player The player.
 	 * @param interfaceId The interface id.
 	 * @param childId The child id.
-	 * @param type The container type.
+	 * @param containerId The container containerId.
 	 * @param items The items.
 	 * @param length The length.
 	 * @param split If the container should be split.
 	 */
-	public ContainerContext(Player player, int interfaceId, int childId, int type, Item[] items, int length, boolean split) {
+	public ContainerContext(Player player, int interfaceId, int childId, int containerId, Item[] items, int length, boolean split) {
 		this.player = player;
 		this.interfaceId = interfaceId;
 		this.childId = childId;
-		this.type = type;
+		this.containerId = containerId;
 		this.items = items;
 		this.length = length;
 		this.split = split;
@@ -120,16 +120,16 @@ public final class ContainerContext implements Context {
 	 * @param player The player.
 	 * @param interfaceId The interface id.
 	 * @param childId The child id.
-	 * @param type The container type.
+	 * @param containerId The container containerId.
 	 * @param items The items.
 	 * @param split If the container should be split.
 	 * @param slots The slots to update.
 	 */
-	public ContainerContext(Player player, int interfaceId, int childId, int type, Item[] items, boolean split, int... slots) {
+	public ContainerContext(Player player, int interfaceId, int childId, int containerId, Item[] items, boolean split, int... slots) {
 		this.player = player;
 		this.interfaceId = interfaceId;
 		this.childId = childId;
-		this.type = type;
+		this.containerId = containerId;
 		this.items = items;
 		this.length = items.length;
 		this.split = split;
@@ -153,8 +153,8 @@ public final class ContainerContext implements Context {
 	 * Gets the type.
 	 * @return The type.
 	 */
-	public int getType() {
-		return type;
+	public int getContainerId() {
+		return containerId;
 	}
 
 	/**

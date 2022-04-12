@@ -13,7 +13,7 @@ import rs09.game.interaction.InteractionListener
  * Handles tutorial-specific node interactions
  * @author Ceikry
  */
-class TutorialListeners : InteractionListener() {
+class TutorialListeners : InteractionListener {
     val GUIDE_HOUSE_DOOR = 3014
     val COOKS_DOOR = 3017
     val COOKS_EXIT = 3018

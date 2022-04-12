@@ -113,8 +113,8 @@ public final class EquipmentInterface extends ComponentPlugin {
 				boolean skulled = p.getSkullManager().isSkulled();
 				boolean usingProtect = p.getPrayer().get(PrayerType.PROTECT_ITEMS);
 				p.getInterfaceManager().openComponent(102);
-				p.getPacketDispatch().sendAccessMask(211, 0, 2, 6684690, 4);
-				p.getPacketDispatch().sendAccessMask(212, 0, 2, 6684693, 42);
+				p.getPacketDispatch().sendIfaceSettings(211, 0, 2, 6684690, 4);
+				p.getPacketDispatch().sendIfaceSettings(212, 0, 2, 6684693, 42);
 				Container[] itemArray = DeathTask.getContainers(p);
 				Container kept = itemArray[0];
 				int state = 0; // 1=familiar carrying items
@@ -166,11 +166,11 @@ public final class EquipmentInterface extends ComponentPlugin {
 				BitregisterAssembler assembly = new BitregisterAssembler(new String[] { "Equip" });
 				assembly.enableExamineOption();
 				assembly.enableSlotSwitch();
-				p.getPacketDispatch().sendAccessMask(assembly.calculateRegister(), 0, 670, 0, 27);
+				p.getPacketDispatch().sendIfaceSettings(assembly.calculateRegister(), 0, 670, 0, 27);
 				p.getInventory().getListeners().add(listener);
 				p.getInventory().refresh();
 				ItemDefinition.statsUpdate(p);
-				p.getPacketDispatch().sendAccessMask(1278, 14, 667, 0, 13);
+				p.getPacketDispatch().sendIfaceSettings(1278, 14, 667, 0, 13);
 				break;
 			}
 		}

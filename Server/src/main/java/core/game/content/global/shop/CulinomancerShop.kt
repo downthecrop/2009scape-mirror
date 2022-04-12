@@ -7,6 +7,8 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import org.rs09.consts.Items
+import rs09.game.content.global.shops.Shop
+import rs09.game.content.global.shops.ShopItem
 import rs09.game.world.GameWorld
 import java.lang.Integer.min
 import kotlin.collections.HashMap
@@ -42,7 +44,7 @@ class CulinomancerShop : LoginListener {
         //Open methods for the shops - should check player's QP and whether they already have a container generated
         @JvmStatic
         fun openShop(player: Player, food: Boolean) {
-            getShop(player, food).open(player)
+            getShop(player, food).openFor(player)
         }
 
         //Retrieve a player's shop - should generate the shop if it does not exist.
@@ -67,24 +69,24 @@ class CulinomancerShop : LoginListener {
         }
 
         //Generate default food stock based on an amount of total QP.
-        private fun generateFoodStock(points: Int): Array<Item> {
-            val stock = Array(foodStock.size) { Item(0, 0) }
+        private fun generateFoodStock(points: Int): Array<ShopItem> {
+            val stock = Array(foodStock.size) { ShopItem(0, 0) }
             val maxQty = when (val qpTier = (points / 18) - 1) {
                 0, 1, 2, 3, 4 -> 1 + qpTier
                 else -> qpTier + (qpTier + (qpTier - 5)) //5 = 10, 6 = 13, 7 = 15, etc
             }
             for ((index, item) in foodStock.withIndex()) {
-                stock[index].id = item.id
+                stock[index].itemId = item.id
                 stock[index].amount = if (item.id == Items.PIZZA_BASE_2283) 1 else maxQty
             }
             return stock
         }
 
         //Generate default gear stock based on an amount of total QP.
-        private fun generateGearStock(points: Int): Array<Item> {
-            val stock = Array(gearStock.size) { Item(0, 0) }
+        private fun generateGearStock(points: Int): Array<ShopItem> {
+            val stock = Array(gearStock.size) { ShopItem(0, 0) }
             val qpTier = (points / 18)
-            for ((index, item) in stock.withIndex()) item.id = gearStock[index]
+            for ((index, item) in stock.withIndex()) item.itemId = gearStock[index]
 
             for (i in 0 until min(qpTier, 10)) {
                 stock[i].amount = 30

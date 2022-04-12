@@ -6,7 +6,7 @@ import core.cache.def.impl.ItemDefinition
 import rs09.game.interaction.InteractionListener
 import rs09.game.system.SystemLogger
 
-class HatStand : InteractionListener() {
+class HatStand : InteractionListener {
 
     val hats = ItemDefinition.getDefinitions().values.filter { it.getConfiguration("equipment_slot",0) == EquipmentSlot.HAT.ordinal }.map { it.id }.toIntArray()
     val hat_stand = 374

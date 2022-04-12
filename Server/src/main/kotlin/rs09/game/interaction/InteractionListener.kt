@@ -1,17 +1,21 @@
 package rs09.game.interaction
 
+import api.ContentInterface
 import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
 
-abstract class InteractionListener : Listener{
-    companion object {
-        val ITEM = 0
-        val SCENERY = 1
-        val NPC = 2
-        val GROUNDITEM = 3
-    }
+interface InteractionListener : ContentInterface{
+    val ITEM: Int
+        get() = 0
+    val SCENERY: Int
+        get() = 1
+    val NPC: Int
+        get() = 2
+    val GROUNDITEM: Int
+        get() = 3
+
     fun on(id: Int, type: Int, vararg option: String,handler: (player: Player, node: Node) -> Boolean){
         InteractionListeners.add(id,type,option,handler)
     }
@@ -64,5 +68,15 @@ abstract class InteractionListener : Listener{
 
     fun onDig(location: Location,method: (player: Player) -> Unit){
         SpadeDigListener.registerListener(location,method)
+    }
+
+    fun defineListeners()
+
+    companion object
+    {
+        val ITEM = 0
+        val SCENERY = 1
+        val NPC = 2
+        val GROUNDITEM = 3
     }
 }

@@ -17,11 +17,12 @@ import org.rs09.consts.Scenery
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
 
+
 /**
  * The "controller" class for pyramid plunder. Handles per-tick updates, logout hooks, and defines interaction listeners for the minigame.
  * @author Ceikry
  */
-class PyramidPlunderMinigame : InteractionListener(), TickListener, LogoutListener {
+class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener {
     override fun tick() {
         val playersToExpel = PlunderUtils.decrementTimeRemaining()
         playersToExpel.forEach {player -> PlunderUtils.expel(player, false) }

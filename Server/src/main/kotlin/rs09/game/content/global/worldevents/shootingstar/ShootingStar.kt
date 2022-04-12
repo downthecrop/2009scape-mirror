@@ -71,15 +71,15 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
             starSprite.location = starObject.location
             starSprite.init()
             spriteSpawned = true
-            ShootingStarEvent.getStoreFile().clear()
+            ShootingStarPlugin.getStoreFile().clear()
             return
         }
         level = getNextType()
         maxDust = level.totalStardust
         dustLeft = level.totalStardust
 
-        ShootingStarEvent.getStoreFile()["level"] = level.ordinal
-        ShootingStarEvent.getStoreFile()["isDiscovered"] = isDiscovered
+        ShootingStarPlugin.getStoreFile()["level"] = level.ordinal
+        ShootingStarPlugin.getStoreFile()["isDiscovered"] = isDiscovered
 
         val newStar = Scenery(level.objectId, starObject.location)
         SceneryBuilder.replace(starObject, newStar)
@@ -114,10 +114,10 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
      * Rebuilds some of the variables with new information.
      */
     fun rebuildVars(){
-        if(firstStar && ShootingStarEvent.getStoreFile().isNotEmpty()){
-            level = ShootingStarType.values()[ShootingStarEvent.getStoreFile().getInt("level")]
-            location = ShootingStarEvent.getStoreFile().getString("location")
-            isDiscovered = ShootingStarEvent.getStoreFile().getBoolean("isDiscovered")
+        if(firstStar && ShootingStarPlugin.getStoreFile().isNotEmpty()){
+            level = ShootingStarType.values()[ShootingStarPlugin.getStoreFile().getInt("level")]
+            location = ShootingStarPlugin.getStoreFile().getString("location")
+            isDiscovered = ShootingStarPlugin.getStoreFile().getBoolean("isDiscovered")
         } else {
             level = ShootingStarType.values().random()
             location = crash_locations.entries.random().key
@@ -128,9 +128,9 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
         dustLeft = level.totalStardust
         starObject = Scenery(level.objectId, crash_locations.get(location))
 
-        ShootingStarEvent.getStoreFile()["level"] = level.ordinal
-        ShootingStarEvent.getStoreFile()["location"] = location
-        ShootingStarEvent.getStoreFile()["isDiscovered"] = false
+        ShootingStarPlugin.getStoreFile()["level"] = level.ordinal
+        ShootingStarPlugin.getStoreFile()["location"] = location
+        ShootingStarPlugin.getStoreFile()["isDiscovered"] = false
 
         ticks = 0
         firstStar = false

@@ -19,7 +19,7 @@ import rs09.game.interaction.InteractionListener
 import rs09.game.world.GameWorld
 import rs09.tools.END_DIALOGUE
 
-class TrickOrTreatHandler : InteractionListener() {
+class TrickOrTreatHandler : InteractionListener {
     override fun defineListeners() {
         on(NPC, "trick-or-treat"){player, node ->
             val hasDone5 = getDailyTrickOrTreats(player) == 5

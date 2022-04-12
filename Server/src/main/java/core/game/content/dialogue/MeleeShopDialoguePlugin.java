@@ -1,16 +1,18 @@
+/*
 package core.game.content.dialogue;
 
-import core.game.content.global.shop.Shop;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 
+*/
 /**
  * Package -> core.game.content.dialogue
  * Created on -> 9/10/2016 @10:33 PM for 530
  *
  * @author Ethan Kyle Millard
- */
+ *//*
+
 @Initializable
 public class MeleeShopDialoguePlugin extends DialoguePlugin {
 
@@ -18,9 +20,11 @@ public class MeleeShopDialoguePlugin extends DialoguePlugin {
 
 
     public MeleeShopDialoguePlugin() {
-        /**
+        */
+/**
          * Empty
-         */
+         *//*
+
     }
 
     public MeleeShopDialoguePlugin(Player player) {
@@ -61,3 +65,4 @@ public class MeleeShopDialoguePlugin extends DialoguePlugin {
         return new int[] { 5503 };
     }
 }
+*/

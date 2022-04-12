@@ -4,7 +4,7 @@ import core.game.node.Node
 import core.game.node.entity.player.Player
 import rs09.game.interaction.InteractionListener
 
-class FarmerPayOptionHandler : InteractionListener() {
+class FarmerPayOptionHandler : InteractionListener {
 
     override fun defineListeners() {
         on(NPC,"pay","pay (north)","pay (north-west)"){player,node ->

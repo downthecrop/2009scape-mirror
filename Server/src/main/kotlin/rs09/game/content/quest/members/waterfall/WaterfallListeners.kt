@@ -4,7 +4,7 @@ import core.game.world.map.Location
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
 
-class WaterfallListeners : InteractionListener(){
+class WaterfallListeners : InteractionListener{
 
     val HUDON = NPCs.HUDON_305
     override fun defineListeners() {

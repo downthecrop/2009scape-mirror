@@ -13,7 +13,7 @@ import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.region.jatizso.LeftieRightieDialogue
 import rs09.game.interaction.InteractionListener
 
-class JatizsoListeners : InteractionListener() {
+class JatizsoListeners : InteractionListener {
     val GATES_CLOSED = intArrayOf(21403,21405)
     val NORTH_GATE_ZONE = ZoneBorders(2414,3822,2417,3825)
     val WEST_GATE_ZONE = ZoneBorders(2386,3797,2390,3801)

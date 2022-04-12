@@ -21,7 +21,7 @@ import org.rs09.consts.Items.YELLOW_FEATHER_10090
 import rs09.game.content.dialogue.SkillDialogueHandler
 import rs09.game.interaction.InteractionListener
 
-class FletchingListeners : InteractionListener() {
+class FletchingListeners : InteractionListener {
 
     val LIMBIDs = Fletching.Limb.values().map(Fletching.Limb::limb).toIntArray()
     val STOCKIDs = Fletching.Limb.values().map(Fletching.Limb::stock).toIntArray()

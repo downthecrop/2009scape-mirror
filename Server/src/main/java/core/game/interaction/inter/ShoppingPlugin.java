@@ -1,3 +1,4 @@
+/*
 package core.game.interaction.inter;
 
 import static api.ContentAPIKt.*;
@@ -15,11 +16,13 @@ import core.plugin.Plugin;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
+*/
 /**
  * Represents the plugin used to handle the shopping interface.
  * @author 'Vexia
  * @version 1.0
- */
+ *//*
+
 @Initializable
 public final class ShoppingPlugin extends ComponentPlugin {
 
@@ -97,13 +100,15 @@ public final class ShoppingPlugin extends ComponentPlugin {
 		return true;
 	}
 
-	/**
+	*/
+/**
 	 * Method used to value an item.
 	 * @param player the player.
 	 * @param viewer the viewer.
 	 * @param item the item.
 	 * @param sell the sell.
-	 */
+	 *//*
+
 	private void value(final Player player, final ShopViewer viewer, final Item item, final boolean sell) {
 		if (item == null) {
 			return;
@@ -111,11 +116,13 @@ public final class ShoppingPlugin extends ComponentPlugin {
 		viewer.getShop().value(player, viewer, item, sell);
 	}
 
-	/**
+	*/
+/**
 	 * Gets the run script for selling an item.
 	 * @return the script.
 	 * @param slot the slot.
-	 */
+	 *//*
+
 	private Function1 getRunScript(final ShopViewer viewer, final int slot, final int componentId) {
 		return (value) -> {
 			switch (componentId){
@@ -130,12 +137,15 @@ public final class ShoppingPlugin extends ComponentPlugin {
 		};
 	}
 
-	/**
+	*/
+/**
 	 * Gets the amount by the opcode.
 	 * @param opcode the opcode.
 	 * @return the amount.
-	 */
+	 *//*
+
 	private int getAmount(int opcode) {
 		return opcode == 196 ? 1 : opcode == 124 ? 5 : opcode == 199 ? 10 : -1;
 	}
 }
+*/

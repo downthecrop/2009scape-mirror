@@ -7,6 +7,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import rs09.game.content.global.shops.Shops;
 import rs09.game.system.config.ShopParser;
 
 /**
@@ -39,11 +40,11 @@ public final class GabootyTrade extends OptionHandler {
                         return true;
 
                     case "trade-co-op":
-                        ShopParser.Companion.openUid(player, 226);
+                        Shops.openId(player, 226);
                         return true;
 
                     case "trade-drinks":
-                        ShopParser.Companion.openUid(player, 227);
+                        Shops.openId(player, 227);
                         return true;
                 }
                 break;

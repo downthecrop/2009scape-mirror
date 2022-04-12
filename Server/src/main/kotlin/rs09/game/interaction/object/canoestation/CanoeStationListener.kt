@@ -8,7 +8,7 @@ import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Components
 import rs09.game.interaction.InteractionListener
 
-class CanoeStationListener : InteractionListener() {
+class CanoeStationListener : InteractionListener {
 
     private val STATION_IDs = intArrayOf(12140, 12141, 12142, 12143, 12144, 12145, 12146, 12147, 12148, 12151, 12152, 12153, 12154, 12155, 12156, 12157, 12158, 12144, 12146, 12149, 12150, 12157)
     private val STAGE_TREE_NONINTERACTABLE = 9

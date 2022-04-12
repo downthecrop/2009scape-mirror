@@ -14,13 +14,14 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.global.action.PickupHandler
+import rs09.game.content.global.shops.Shops
 import rs09.game.interaction.InteractionListener
 import rs09.game.node.entity.npc.other.MortMyreGhastNPC
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.ShopParser
 import rs09.tools.END_DIALOGUE
 
-class NSListeners : InteractionListener() {
+class NSListeners : InteractionListener {
 
     val GROTTO_TREE = 3517
     val GROTTO_ENTRANCE = 3516
@@ -101,7 +102,7 @@ class NSListeners : InteractionListener() {
 
         on(WISHING_WELL, SCENERY, "make-wish"){player, node ->
             if(player.questRepository.isComplete("Nature Spirit") && player.questRepository.isComplete("Wolf Whistle"))
-                ShopParser.openUid(player, 241)
+                Shops.openId(player, 241)
             else
                 sendDialogue(player, "You can't do that yet.")
 

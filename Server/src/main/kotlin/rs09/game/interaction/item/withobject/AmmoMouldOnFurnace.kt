@@ -12,7 +12,7 @@ import org.rs09.consts.Items
 import rs09.game.content.dialogue.SkillDialogueHandler
 import rs09.game.interaction.InteractionListener
 
-class AmmoMouldOnFurnace : InteractionListener(){
+class AmmoMouldOnFurnace : InteractionListener{
     private val furnaces = intArrayOf(4304, 6189, 11010, 11666, 12100, 12809, 18497, 26814, 30021, 30510, 36956, 37651)  // abstract when smelting converted to kotlin
     private val levelRequirement = 35
 

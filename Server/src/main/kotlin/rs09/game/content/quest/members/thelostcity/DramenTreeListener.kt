@@ -7,7 +7,7 @@ import core.game.node.entity.skill.gather.SkillingTool
 import core.game.world.map.Location
 import rs09.game.interaction.InteractionListener
 
-class DramenTreeListener : InteractionListener() {
+class DramenTreeListener : InteractionListener {
 
     val DRAMEN_TREE = 1292
 

@@ -34,7 +34,7 @@ import core.tools.RandomFunction
  */
 val SINISTER_CHEST_HERBS = arrayOf(Item(205, 2), Item(207, 3), Item(209), Item(211), Item(213), Item(219))
 
-public class YanilleAgilityDungeonListeners : InteractionListener() {
+public class YanilleAgilityDungeonListeners : InteractionListener {
     override fun defineListeners() {
         ZoneBuilder.configure(YanilleAgilityDungeon());
 

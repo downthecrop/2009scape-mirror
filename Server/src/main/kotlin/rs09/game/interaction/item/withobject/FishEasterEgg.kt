@@ -5,7 +5,7 @@ import core.game.node.entity.skill.gather.woodcutting.WoodcuttingNode
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
 
-class FishEasterEgg : InteractionListener() {
+class FishEasterEgg : InteractionListener {
     val TREE_IDs = WoodcuttingNode.values().map { it.id }.toIntArray()
 
     val fish = intArrayOf(Items.RAW_HERRING_345, Items.HERRING_347)

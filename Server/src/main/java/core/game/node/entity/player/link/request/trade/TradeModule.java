@@ -272,10 +272,10 @@ public final class TradeModule implements RequestModule {
 		player.getInterfaceManager().open(MAIN_INTERFACE);
 		player.getInterfaceManager().openSingleTab(OVERLAY_INTERFACE);
 		player.getInventory().refresh();
-		player.getPacketDispatch().sendAccessMask(1278, 30, 335, 0, 27);
-		player.getPacketDispatch().sendAccessMask(1026, 32, 335, 0, 27);
-		player.getPacketDispatch().sendAccessMask(1278, 0, 336, 0, 27);
-		player.getPacketDispatch().sendAccessMask(2360446, 0, 335, 0, 27);
+		player.getPacketDispatch().sendIfaceSettings(1278, 30, 335, 0, 27);
+		player.getPacketDispatch().sendIfaceSettings(1026, 32, 335, 0, 27);
+		player.getPacketDispatch().sendIfaceSettings(1278, 0, 336, 0, 27);
+		player.getPacketDispatch().sendIfaceSettings(2360446, 0, 335, 0, 27);
 		player.getPacketDispatch().sendRunScript(150, "IviiiIsssssssss", INVENTORY_PARAMS);
 		player.getPacketDispatch().sendRunScript(150, "IviiiIsssssssss", TRADE_PARAMS);
 		player.getPacketDispatch().sendRunScript(695, "IviiiIsssssssss", PARTENER_PARAMS);

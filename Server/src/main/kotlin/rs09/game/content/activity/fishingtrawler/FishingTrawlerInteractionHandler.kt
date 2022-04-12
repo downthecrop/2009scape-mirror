@@ -22,7 +22,7 @@ import kotlin.math.ceil
  * Option handler for fishing trawler
  * @author Ceikry
  */
-class FishingTrawlerInteractionHandler : InteractionListener() {
+class FishingTrawlerInteractionHandler : InteractionListener {
     val ENTRANCE_PLANK = 2178
     val EXIT_PLANK = 2179
     val HOLE = 2167

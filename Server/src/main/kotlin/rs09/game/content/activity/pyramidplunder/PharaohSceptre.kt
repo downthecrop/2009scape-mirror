@@ -1,4 +1,4 @@
-package core.game.interaction.item
+package rs09.game.content.activity.pyramidplunder
 
 import api.EquipmentSlot
 import api.openDialogue
@@ -21,7 +21,7 @@ import rs09.tools.END_DIALOGUE
  * Adds functionality to the pharoah's scepter
  * @author ceik
  */
-class PharoahSceptre : InteractionListener() {
+class PharaohSceptre : InteractionListener {
     override fun defineListeners() {
         val SCEPTRES = intArrayOf(Items.PHARAOHS_SCEPTRE_9044, Items.PHARAOHS_SCEPTRE_9046, Items.PHARAOHS_SCEPTRE_9048, Items.PHARAOHS_SCEPTRE_9050)
 

@@ -7,7 +7,7 @@ import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.region.examcentre.ArchaeologistcalExpertUsedOnDialogueFile
 import rs09.game.interaction.InteractionListener
 
-open class ArchaeologicalExpertListener() : InteractionListener() {
+open class ArchaeologicalExpertListener() : InteractionListener {
     val staff = Items.ANCIENT_STAFF_4675
     val unidentifiedLiquid = Items.UNIDENTIFIED_LIQUID_702
     val nitroglycerin = Items.NITROGLYCERIN_703

@@ -26,7 +26,7 @@ import rs09.game.interaction.InteractionListener
  *
  * @author Vexia
  */
-class ExplorersRingPlugin : InteractionListener() {
+class ExplorersRingPlugin : InteractionListener {
 
     val RINGS = intArrayOf(Items.EXPLORERS_RING_1_13560, Items.EXPLORERS_RING_2_13561, Items.EXPLORERS_RING_3_13562)
     val CABBAGE_PORT = Location.create(3051, 3291, 0)

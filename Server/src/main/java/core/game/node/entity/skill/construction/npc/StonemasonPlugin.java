@@ -2,7 +2,6 @@ package core.game.node.entity.skill.construction.npc;
 
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
-import core.game.content.global.shop.Shop;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -16,11 +15,11 @@ import core.plugin.Plugin;
  */
 @Initializable
 public class StonemasonPlugin extends OptionHandler {
-	
-	/**
+/*
+	*//**
 	 * The store that sells supplies.
-	 */
-	private static final SupplyStore STORE = new SupplyStore();
+	 *//*
+	private static final SupplyStore STORE = new SupplyStore();*/
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
@@ -34,21 +33,20 @@ public class StonemasonPlugin extends OptionHandler {
 		switch (option) {
 		case "trade":
 		case "talk-to":
-			STORE.open(player);
 			break;
 		}
 		return true;
 	}
-	
-	/**
+/*
+	*//**
 	 * Stonemason's store.
 	 * @author Splinter
-	 */
+	 *//*
 	public static class SupplyStore extends Shop {
 
-		/**
+		*//**
 		 * Constructs a new {@Code SupplyStore} {@Code Object}
-		 */
+		 *//*
 		public SupplyStore() {
 			super("Keldagrim Stonemason", new Item[] { new Item(3420, 1000), new Item(8786, 20), new Item(8784, 20), new Item(8788, 10) }, false);
 		}
@@ -73,6 +71,6 @@ public class StonemasonPlugin extends OptionHandler {
 			}
 			return -1;
 		}
-	}
+	}*/
 	
 }

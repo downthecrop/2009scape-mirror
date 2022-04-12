@@ -9,7 +9,7 @@ import rs09.game.interaction.InteractionListener
  * @author bushtail
  */
 
-class GnomeCopterSignListener : InteractionListener() {
+class GnomeCopterSignListener : InteractionListener {
     val SIGN = Scenery.ADVERTISEMENT_30037
     override fun defineListeners() {
         on(SIGN, SCENERY, "read") { player, _ ->

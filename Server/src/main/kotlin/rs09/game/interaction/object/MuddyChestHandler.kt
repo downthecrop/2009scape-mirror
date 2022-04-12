@@ -12,7 +12,7 @@ import rs09.game.interaction.InteractionListener
  * Handles the muddy chest
  * @author Ceikry
  */
-class MuddyChestHandler : InteractionListener() {
+class MuddyChestHandler : InteractionListener {
 
     private val CHEST = 170
 

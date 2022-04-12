@@ -10,7 +10,7 @@ import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
 import rs09.game.world.GameWorld.Pulser
 
-class GCItemOnCat : InteractionListener() {
+class GCItemOnCat : InteractionListener {
     override fun defineListeners() {
         val GERTCAT = "Gertrude's Cat"
         val BEND_DOWN = 827
