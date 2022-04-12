@@ -9,7 +9,7 @@ import rs09.game.interaction.InteractionListener
  * @author bushtail
  */
 
-class CowFieldSignListener : InteractionListener() {
+class CowFieldSignListener : InteractionListener {
 
     val SIGN = Scenery.SIGNPOST_31297
 

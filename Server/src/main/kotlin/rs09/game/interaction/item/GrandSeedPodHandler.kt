@@ -30,7 +30,7 @@ private const val LAUNCH_ANIMATION = 4547
  * Handles the grand tree pod options
  * @author Ceikry
  */
-class GrandSeedPodHandler : InteractionListener() {
+class GrandSeedPodHandler : InteractionListener {
 
     override fun defineListeners() {
         on(Items.GRAND_SEED_POD_9469, ITEM, "squash", "launch"){player, _ ->

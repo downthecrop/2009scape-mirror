@@ -13,7 +13,7 @@ import core.game.content.quest.PluginInteraction
 import core.game.content.quest.PluginInteractionManager
 import rs09.game.interaction.InteractionListener
 
-class PenguinSpyingHandler : InteractionListener(){
+class PenguinSpyingHandler : InteractionListener{
 
     override fun defineListeners() {
         on(PENGUINS, NPC, "spy-on"){player, node ->

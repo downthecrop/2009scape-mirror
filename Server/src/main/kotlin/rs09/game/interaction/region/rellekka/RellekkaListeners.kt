@@ -13,7 +13,7 @@ import rs09.game.util.region.rellekka.RellekkaUtils
  * @author Ceikry
  */
 
-class RellekkaListeners : InteractionListener() {
+class RellekkaListeners : InteractionListener {
 
     val UP1A = Location.create(2715, 3798, 0)
     val UP1B = Location.create(2716, 3798, 0)

@@ -10,7 +10,7 @@ import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
 
-class PoisonChaliceOnKingArthur : InteractionListener() {
+class PoisonChaliceOnKingArthur : InteractionListener {
     override fun defineListeners() {
         onUseWith(NPC, Items.POISON_CHALICE_197, NPCs.KING_ARTHUR_251){player, used, with ->
             player.dialogueInterpreter.open(PoisonChaliceOnKingArthurDialogue(),with)

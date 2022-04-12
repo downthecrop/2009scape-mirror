@@ -11,7 +11,7 @@ import rs09.game.interaction.InteractionListener
 import rs09.game.node.entity.skill.magic.SpellListener
 import rs09.game.node.entity.skill.magic.spellconsts.Modern
 
-class MTAListeners : InteractionListener() {
+class MTAListeners : InteractionListener {
     override fun defineListeners() {
         on(NPCs.MAZE_GUARDIAN_3102,NPC,"talk-to"){player,node ->
             player.dialogueInterpreter.open(node.id, node)

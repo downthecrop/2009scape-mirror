@@ -11,14 +11,14 @@ import org.rs09.consts.Components
 import rs09.game.interaction.InterfaceListener
 import rs09.game.world.GameWorld.settings
 
-class MainGameInterface : InterfaceListener() {
+class MainGameInterface : InterfaceListener {
     val TOPLEVEL = Components.TOPLEVEL_548
     val TOPLEVEL_FS = Components.TOPLEVEL_FULLSCREEN_746
     val RUN_BUTTON = Components.TOPSTAT_RUN_750
     val FILTER_BUTTONS = Components.FILTERBUTTONS_751
     val REPORT_ABUSE = Components.SNAPSHOT_MAIN_553
 
-    override fun defineListeners() {
+    override fun defineInterfaceListeners() {
         on(FILTER_BUTTONS){player, _, _, buttonID, _, _ ->
             if(buttonID == 27)
                 openReport(player)
@@ -102,6 +102,7 @@ class MainGameInterface : InterfaceListener() {
             player.packetDispatch.sendMessage("You can't do this right now.")
             return
         }
+        player.interfaceManager.close()
         player.interfaceManager.openWindowsPane(Component(755))
         val posHash = player.location.z shl 28 or (player.location.x shl 14) or player.location.y
         player.packetDispatch.sendScriptConfigs(622, posHash, "", 0)

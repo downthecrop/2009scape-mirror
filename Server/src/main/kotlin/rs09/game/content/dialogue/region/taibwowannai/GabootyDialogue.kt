@@ -5,6 +5,7 @@ import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
+import rs09.game.content.global.shops.Shops
 import rs09.game.system.config.ShopParser
 
 /**
@@ -116,8 +117,8 @@ class GabootyDialogue(player: Player? = null) : DialoguePlugin(player){
             "you know, a little more of this, a little less of that, it all",
             "adds up and makes for an interesting tipple!").also { stage = 23 }
 
-            90 -> end().also { ShopParser.Companion.openUid(player,226) }
-            91 -> end().also { ShopParser.Companion.openUid(player,227) }
+            90 -> end().also { Shops.openId(player,226) }
+            91 -> end().also { Shops.openId(player,227) }
             99 -> end()
         }
 

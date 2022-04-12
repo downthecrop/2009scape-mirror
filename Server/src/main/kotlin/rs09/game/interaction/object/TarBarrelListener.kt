@@ -15,7 +15,7 @@ import rs09.game.interaction.InteractionListener
  * Option(s):
  *  "Take-from"
  */
-class TarBarrelListener : InteractionListener() {
+class TarBarrelListener : InteractionListener {
 
     val FULL_TAR_BARREL_16860 = 16860
     val EMPTY_TAR_BARREL_16688 = 16688

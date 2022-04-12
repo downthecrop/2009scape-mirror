@@ -2,34 +2,13 @@ package rs09.game.ge
 
 import api.*
 import core.cache.def.impl.ItemDefinition
-import core.game.component.CloseEvent
 import core.game.component.Component
-import core.game.component.InterfaceType
-import core.game.container.Container
-import core.game.container.ContainerEvent
-import core.game.container.ContainerListener
-import core.game.container.access.BitregisterAssembler
-import core.game.container.access.InterfaceContainer
-import core.game.ge.GEItemSet
-import core.game.ge.GrandExchangeDatabase
-import core.game.ge.GrandExchangeEntry
 import core.game.ge.OfferState
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.audio.Audio
-import core.game.node.item.Item
-import core.game.system.monitor.PlayerMonitor
-import core.net.packet.PacketRepository
-import core.net.packet.context.ConfigContext
-import core.net.packet.context.ContainerContext
-import core.net.packet.out.Config
-import core.net.packet.out.ContainerPacket
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.rs09.consts.Components
-import org.rs09.consts.Items
-import rs09.game.ai.AIPlayer
 import rs09.game.system.SystemLogger
-import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
 
@@ -98,12 +77,12 @@ class GrandExchangeRecords(private val player: Player? = null) : PersistPlayer, 
             return
         }
         player.interfaceManager.openComponent(Components.STOCKCOLLECT_109)
-        player.packetDispatch.sendAccessMask(6, 18, 109, 0, 2)
-        player.packetDispatch.sendAccessMask(6, 23, 109, 0, 2)
-        player.packetDispatch.sendAccessMask(6, 28, 109, 0, 2)
-        player.packetDispatch.sendAccessMask(6, 36, 109, 0, 2)
-        player.packetDispatch.sendAccessMask(6, 44, 109, 0, 2)
-        player.packetDispatch.sendAccessMask(6, 52, 109, 0, 2)
+        player.packetDispatch.sendIfaceSettings(6, 18, 109, 0, 2)
+        player.packetDispatch.sendIfaceSettings(6, 23, 109, 0, 2)
+        player.packetDispatch.sendIfaceSettings(6, 28, 109, 0, 2)
+        player.packetDispatch.sendIfaceSettings(6, 36, 109, 0, 2)
+        player.packetDispatch.sendIfaceSettings(6, 44, 109, 0, 2)
+        player.packetDispatch.sendIfaceSettings(6, 52, 109, 0, 2)
 
         visualizeRecords()
     }

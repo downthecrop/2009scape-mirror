@@ -7,12 +7,12 @@ import org.rs09.consts.Components
 import org.rs09.consts.Items
 import rs09.game.interaction.InterfaceListener
 
-class CreditShopInterface : InterfaceListener() {
+class CreditShopInterface : InterfaceListener {
 
     val CREDIT_SHOP = Components.CREDIT_SHOP
     val TEXT_CHILD = 39
 
-    override fun defineListeners() {
+    override fun defineInterfaceListeners() {
         on(CREDIT_SHOP){player, component, opcode, buttonID, slot, itemID ->
             val item = getItem(buttonID)
 

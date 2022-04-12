@@ -7,7 +7,7 @@ import core.game.world.update.flag.context.Animation
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
 
-class BrimhavenDungeonListeners : InteractionListener() {
+class BrimhavenDungeonListeners : InteractionListener {
 
     val EXIT = 5084
     val SANIBOCH = NPCs.SANIBOCH_1595

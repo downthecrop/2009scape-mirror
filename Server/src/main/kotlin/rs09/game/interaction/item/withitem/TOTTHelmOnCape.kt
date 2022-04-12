@@ -7,7 +7,7 @@ import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
 import rs09.tools.END_DIALOGUE
 
-class TOTTHelmOnCape : InteractionListener() {
+class TOTTHelmOnCape : InteractionListener {
     override fun defineListeners() {
         onUseWith(ITEM, Items.SLAYER_HELMET_13263, Items.SLAYER_CAPE_9786, Items.SLAYER_CAPET_9787){ player, used, with ->
             val alreadyHasHelm = getAttribute(player, "cape_perks:tott:helmet-stored", false)

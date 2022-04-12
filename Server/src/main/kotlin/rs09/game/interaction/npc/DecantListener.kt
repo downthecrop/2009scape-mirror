@@ -8,7 +8,7 @@ import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
 import rs09.tools.END_DIALOGUE
 
-class DecantListener : InteractionListener() {
+class DecantListener : InteractionListener {
 
     override fun defineListeners() {
         on(NPC,"decant"){player, node ->

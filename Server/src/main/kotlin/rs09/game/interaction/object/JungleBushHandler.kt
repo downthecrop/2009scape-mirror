@@ -14,7 +14,7 @@ import rs09.game.world.GameWorld
  * Handles the chopping down of dense jungle, mainly to grant access to the Kharazi Jungle.
  * @author Ceikry
  */
-class JungleBushHandler : InteractionListener(){
+class JungleBushHandler : InteractionListener{
     val chopped_bush = 2895
     val chop_a  = Animation(910)
     val chop_b  = Animation(2382)

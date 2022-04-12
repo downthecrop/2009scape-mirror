@@ -9,7 +9,7 @@ import rs09.game.content.global.WeightedItem
 import rs09.game.interaction.InteractionListener
 import rs09.game.system.SystemLogger
 
-class ImplingJarListener : InteractionListener() {
+class ImplingJarListener : InteractionListener {
 
     val JARS = ImplingLoot.values().map { it.jarId }.toIntArray()
 

@@ -7,7 +7,7 @@ import core.game.system.task.Pulse
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
 
-class EnchantedValleyListeners : InteractionListener() {
+class EnchantedValleyListeners : InteractionListener {
     val ENCHANTED_V_TREE = 16265
     val TREE_SPIRIT_IDS = intArrayOf(NPCs.TREE_SPIRIT_438,NPCs.TREE_SPIRIT_439,NPCs.TREE_SPIRIT_440,NPCs.TREE_SPIRIT_441,NPCs.TREE_SPIRIT_442,NPCs.TREE_SPIRIT_443)
     override fun defineListeners() {

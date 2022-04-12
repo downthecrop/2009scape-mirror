@@ -8,7 +8,7 @@ import org.rs09.consts.Items
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
 
-class CiderOnForester : InteractionListener() {
+class CiderOnForester : InteractionListener {
     override fun defineListeners() {
         val ids = intArrayOf(1,2,3,4,5)
 

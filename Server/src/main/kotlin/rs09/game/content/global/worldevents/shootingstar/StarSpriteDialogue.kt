@@ -7,6 +7,7 @@ import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
+import core.plugin.Initializable
 import core.tools.RandomFunction
 import org.json.simple.JSONObject
 import org.rs09.consts.Items
@@ -21,6 +22,7 @@ import java.util.concurrent.TimeUnit
 /**
  * Dialogue for the star sprite.
  */
+@Initializable
 class StarSpriteDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     /**
@@ -70,7 +72,7 @@ class StarSpriteDialogue(player: Player? = null) : DialoguePlugin(player) {
         } else if (inInventory(player, Items.ANCIENT_BLUEPRINT_14651) && getAttribute(player, "star-ring:bp-shown", false)) {
              playerl(FacialExpression.HALF_ASKING, "So about those rings...")
              stage = 2000
-        } else if (getStoreFile().getBoolean(player.username.toLowerCase()) || !player.getInventory().contains(ShootingStarOptionHandler.STAR_DUST, 1)) {
+        } else if (getStoreFile().getBoolean(player.username.toLowerCase()) || !player.getInventory().contains(ShootingStarPlugin.STAR_DUST, 1)) {
              npc("Hello, strange creature.")
              stage = 0
         } else {
@@ -185,8 +187,8 @@ class StarSpriteDialogue(player: Player? = null) : DialoguePlugin(player) {
             41 -> end()
             50 -> {
                 val wearingRing = inEquipment(player, Items.RING_OF_THE_STAR_SPRITE_14652)
-                val dust = if (player.getInventory().getAmount(ShootingStarOptionHandler.STAR_DUST) > 200) 200 else player.getInventory().getAmount(ShootingStarOptionHandler.STAR_DUST)
-                if (player.getInventory().remove(Item(ShootingStarOptionHandler.STAR_DUST, dust))) {
+                val dust = if (player.getInventory().getAmount(ShootingStarPlugin.STAR_DUST) > 200) 200 else player.getInventory().getAmount(ShootingStarPlugin.STAR_DUST)
+                if (player.getInventory().remove(Item(ShootingStarPlugin.STAR_DUST, dust))) {
                     val cosmicRunes = (Math.ceil(0.76 * dust) * AMPLIFIER).toInt()
                     val astralRunes = (Math.ceil(0.26 * dust) * AMPLIFIER).toInt()
                     val goldOre = (Math.ceil(0.1 * dust) * AMPLIFIER).toInt()

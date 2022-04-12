@@ -20,7 +20,7 @@ import kotlin.random.Random
  * @author Sir Kermit
  */
 
-class MorytaniaListeners : InteractionListener() {
+class MorytaniaListeners : InteractionListener {
 
     val SWAMP_GATES = intArrayOf(Scenery.GATE_3506, Scenery.GATE_3507)
     val GROTTO_EXIT = intArrayOf(3525, 3526)

@@ -148,7 +148,7 @@ val GRAAHK_PIT = 19231
 val LARUPIA_PIT = 19232
 val KYATT_PIT = 19233
 
-class PitfallListeners : InteractionListener() {
+class PitfallListeners : InteractionListener {
 
     override fun defineListeners() {
         setDest(SCENERY, intArrayOf(PIT, SPIKED_PIT, LARUPIA_PIT, GRAAHK_PIT, KYATT_PIT), "trap", "jump", "dismantle") { player, node ->

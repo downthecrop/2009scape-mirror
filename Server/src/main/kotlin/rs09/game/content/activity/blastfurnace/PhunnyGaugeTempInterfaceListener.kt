@@ -7,9 +7,9 @@ import rs09.game.interaction.InterfaceListener
  * Only updates the gauge if people are actually looking at it
  * @author phil lips*/
 
-class PhunnyGaugeTempInterfaceListener : InterfaceListener(){
+class PhunnyGaugeTempInterfaceListener : InterfaceListener {
 
-    override fun defineListeners() {
+    override fun defineInterfaceListeners() {
         onOpen(30) {player, component ->
             BlastFurnace.gaugeViewList.add(player)
             return@onOpen true
