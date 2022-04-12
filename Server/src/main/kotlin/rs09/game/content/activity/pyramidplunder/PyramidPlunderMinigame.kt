@@ -223,7 +223,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
         on(Scenery.GRAND_GOLD_CHEST_16473, SCENERY, "search") { player, node ->
             animate(player, OPEN_CHEST_ANIM)
             runTask(player){
-                if(true)
+                if(RandomFunction.roll(25))
                 {
                     val swarm = PyramidPlunderSwarmNPC(player.location, player)
                     swarm.isRespawn = false
