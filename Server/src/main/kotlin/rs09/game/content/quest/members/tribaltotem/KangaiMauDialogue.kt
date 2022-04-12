@@ -1,5 +1,6 @@
 package rs09.game.content.quest.members.tribaltotem
 
+import api.isQuestComplete
 import api.removeItem
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
@@ -14,6 +15,9 @@ class KangaiMauDialogue(player: Player? = null) : DialoguePlugin(player) {
         if(!player.questRepository.hasStarted("Tribal Totem")){
             npcl(FacialExpression.HAPPY,"Hello. I'm Kangai Mau of the Rantuki Tribe.")
             stage = 0
+        } else if(isQuestComplete(player, "Tribal Totem")) {
+            npcl(FacialExpression.HAPPY, "Many greetings esteemed thief.")
+            stage = 40
         }
         else if(player.inventory.containsAtLeastOneItem(Items.TOTEM_1857)){
             npcl(FacialExpression.ASKING,"Have you got our totem back?")
@@ -62,10 +66,15 @@ class KangaiMauDialogue(player: Player? = null) : DialoguePlugin(player) {
             35 -> playerl(FacialExpression.HAPPY,"Yes I have.").also { stage++ }
             36 -> npcl(FacialExpression.HAPPY,"You have??? Many thanks brave adventurer! Here, have some freshly cooked Karamjan fish, caught specially by my tribe.").also { stage++ }
             37 -> sendDialogue("You hand over the totem").also {
-                removeItem(player,Items.TOTEM_1857)
-                player.questRepository.getQuest("Tribal Totem").finish(player)
-                stage = 1000
+                if(!isQuestComplete(player, "Tribal Totem") && removeItem(player, Items.TOTEM_1857)) {
+                        player.questRepository.getQuest("Tribal Totem").finish(player)
+                        stage = 1000
+                } else {
+                    stage = 1000
+                }
             }
+
+            40 -> player(FacialExpression.NEUTRAL, "Hey.").also { stage = 1000 }
 
             1000 -> end()
         }
