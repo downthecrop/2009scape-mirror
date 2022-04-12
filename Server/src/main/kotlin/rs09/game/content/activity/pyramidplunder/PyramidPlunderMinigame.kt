@@ -111,9 +111,8 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
         on(intArrayOf(*SEALED_URNS, *SNAKE_URNS), SCENERY, "search") { player, node ->
             animate(player, URN_CHECK)
             player.faceLocation(node.location)
-            player.lock()
+            lock(player, 1)
             runTask(player, 1) {
-                player.unlock()
                 if(!PlunderUtils.rollUrnSuccess(player))
                 {
                     animate(player, URN_BIT)
@@ -128,7 +127,6 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
                     addItemOrDrop(player, PlunderUtils.rollArtifact(player, 1))
                     player.varpManager.setVarbit(node.asScenery().definition.varbitID, 1)
                 }
-                player.unlock()
             }
             return@on true
         }
@@ -137,9 +135,8 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
             val urn = node.asScenery()
             animate(player, URN_CHECK)
             player.faceLocation(node.location)
-            player.lock()
+            lock(player, 1)
             runTask(player, 1){
-                player.unlock()
                 animate(player, URN_BIT)
                 player.varpManager.setVarbit(urn.definition.varbitID, 2)
                 animateScenery(urn, SNAKE_URN_ANIM)
@@ -166,9 +163,8 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
         on(CHARMED_SNAKES, SCENERY, "search") { player, node ->
             animate(player, URN_CHECK)
             player.faceLocation(node.location)
-            player.lock()
+            lock(player, 1)
             runTask(player, 1) {
-                player.unlock()
                 if(!PlunderUtils.rollUrnSuccess(player, true))
                 {
                     animate(player, URN_BIT)
@@ -183,7 +179,6 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
                     rewardXP(player, Skills.THIEVING, PlunderUtils.getUrnXp(player, false) * 0.66)
                     player.varpManager.setVarbit(node.asScenery().definition.varbitID, 1)
                 }
-                player.unlock()
             }
             return@on true
         }
@@ -218,7 +213,6 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
                         {
                             addItemOrDrop(player, PlunderUtils.rollArtifact(player, 2))
                         }
-                        player.unlock()
                     }
                     return true
                 }
@@ -259,7 +253,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
             }
 
             animate(player, anim)
-            player.lock()
+            lock(player, duration)
             val rate =
                 if(inInventory(player, Items.LOCKPICK_1523))
                 {
@@ -272,7 +266,6 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
                     3
                 }
             runTask(player, duration){
-                player.unlock()
                 if(RandomFunction.roll(rate))
                 {
                     val varbitId = node.asScenery().definition.varbitID
