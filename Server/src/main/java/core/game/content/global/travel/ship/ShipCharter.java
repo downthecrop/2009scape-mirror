@@ -139,7 +139,7 @@ public final class ShipCharter {
 		BRIMHAVEN(Location.create(2763, 3238, 1), 28, new int[] { 0, 480, 480, 925, 400, 3650, 1600, 400, 3200, 3800 }, Location.create(2760, 3238, 0), 6, 17){
 			@Override
 			public int getCost(Player player, Destination destination) {
-				boolean hasGloves = player.hasItem(new Item(Items.KARAMJA_GLOVES_1_11136));
+				boolean hasGloves = DiaryType.KARAMJA.hasRewardEquipment(player);
 				if(destination == PORT_KHAZARD && hasGloves) return 15;
 				return super.getCost(player, destination);
 			}
@@ -147,7 +147,7 @@ public final class ShipCharter {
 		PORT_SARIM(Location.create(3038, 3189, 1), 30, new int[] { 1600, 1000, 0, 325, 1280, 650, 1280, 400, 3200, 1400 }, Location.create(3039, 3193, 0), 8, 19){
 			@Override
 			public int getCost(Player player, Destination destination) {
-				boolean hasGloves = player.hasItem(new Item(Items.KARAMJA_GLOVES_1_11136));
+				boolean hasGloves = DiaryType.KARAMJA.hasRewardEquipment(player);
 				if(destination == KARAMJA && hasGloves) return 15;
 				return super.getCost(player, destination);
 			}
@@ -156,7 +156,7 @@ public final class ShipCharter {
 		KARAMJA(Location.create(2957, 3158, 1), 27, new int[] { 200, 480, 0, 225, 400, 1850, 0, 200, 3200, 2000 }, Location.create(2954, 3156, 0), 5, 16) {
 			@Override
 			public int getCost(Player player, Destination destination) {
-				boolean hasGloves = player.hasItem(new Item(Items.KARAMJA_GLOVES_1_11136));
+				boolean hasGloves = DiaryType.KARAMJA.hasRewardEquipment(player);
 				if(destination == PORT_SARIM && hasGloves) return 15;
 				return super.getCost(player, destination);
 			}
@@ -164,7 +164,7 @@ public final class ShipCharter {
 		PORT_KHAZARD(Location.create(2674, 3141, 1), 29, new int[] { 1600, 1000, 0, 325, 180, 650, 1280, 400, 3200, 1400 }, Location.create(2674, 3144, 0), 7, 18){
 			@Override
 			public int getCost(Player player, Destination destination) {
-				boolean hasGloves = player.hasItem(new Item(Items.KARAMJA_GLOVES_1_11136));
+				boolean hasGloves = DiaryType.KARAMJA.hasRewardEquipment(player);
 				if(destination == BRIMHAVEN && hasGloves) return 15;
 				return super.getCost(player, destination);
 			}
