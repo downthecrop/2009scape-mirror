@@ -112,6 +112,8 @@ object ClassScanner {
                     }
                     for(border in clazz.defineAreaBorders()) zone.register(border)
                     ZoneBuilder.configure(zone)
+                    SystemLogger.logInfo("Configured zone: ${clazz.javaClass.simpleName + "MapArea"}")
+                    MapArea.zoneMaps[clazz.javaClass.simpleName + "MapArea"] = zone
                 }
             } catch (e: Exception) {
                 SystemLogger.logErr("Error loading content: ${it.simpleName}, ${e.localizedMessage}")

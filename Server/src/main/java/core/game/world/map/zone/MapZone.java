@@ -14,6 +14,7 @@ import core.game.world.map.Region;
 import core.game.world.map.RegionManager;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  * Represents a map zone.
@@ -299,6 +300,15 @@ public abstract class MapZone implements Zone {
 		}
 	}
 
+	public void unregister(ZoneBorders borders) {
+		for (Integer id : borders.getRegionIds()) {
+			Region r = RegionManager.forId(id);
+			if (r != null) {
+				r.remove(new RegionZone(this, borders));
+			}
+		}
+	}
+
 	/**
 	 * Registers this zone in the region for the given id.
 	 * @param regionId The region id.
@@ -378,7 +388,7 @@ public abstract class MapZone implements Zone {
 	 * @return The uid.
 	 */
 	public int getUid() {
-		return uid;
+		return getName().hashCode();
 	}
 
 	/**
@@ -455,4 +465,17 @@ public abstract class MapZone implements Zone {
 		this.zoneType = type;
 	}
 
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		MapZone mapZone = (MapZone) o;
+		return getUid() == mapZone.getUid();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(uid, name, overlappable, fireRandomEvents, restriction, zoneType);
+	}
 }
