@@ -24,6 +24,11 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.5.20'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
     implementation group: 'com.moandjiezana.toml', name: 'toml4j', version: '0.7.2'
+
+    //Unit Tests
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
     implementation files(
             "libs/PrimitiveExtensions-1.0.jar",
             "libs/ConstLib-1.4.jar",
@@ -35,6 +40,10 @@ dependencies {
             "libs/colormath-jvm-2.0.0.jar",
             "libs/sqlite-jdbc.jar"
     )
+}
+
+test {
+    useJUnitPlatform()
 }
 
 /*sourceSets {
