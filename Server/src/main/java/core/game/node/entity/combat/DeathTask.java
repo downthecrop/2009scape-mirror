@@ -168,7 +168,8 @@ public final class DeathTask extends NodeTask {
 	 * @return {@code True} if so.
 	 */
 	public static boolean isDead(Entity e) {
-		return e.getAttribute("state:death", false);
+		if (e instanceof NPC) return ((NPC) e).getRespawnTick() > GameWorld.getTicks() || e.getAttribute("state:death", false);
+		else return e.getAttribute("state:death", false);
 	}
 
 	/**
