@@ -14,6 +14,7 @@ import core.plugin.PluginManifest;
 import core.plugin.PluginType;
 import rs09.game.content.dialogue.DialogueFile;
 import rs09.game.content.dialogue.EmptyPlugin;
+import rs09.game.content.dialogue.Topic;
 import rs09.game.system.SystemLogger;
 import rs09.game.system.config.ItemConfigParser;
 
@@ -31,6 +32,7 @@ import static rs09.tools.DialogueConstKt.END_DIALOGUE;
  */
 @PluginManifest(type = PluginType.DIALOGUE)
 public final class DialogueInterpreter {
+    public ArrayList<Topic<?>> activeTopics = new ArrayList<>();
 
     /**
      * The dialogue plugins.
@@ -136,7 +138,23 @@ public final class DialogueInterpreter {
             close();
             return;
         }
-        if(player.getDialogueInterpreter().getDialogue().file != null){
+        DialogueFile file = dialogue.file;
+        if (!activeTopics.isEmpty()) {
+            Topic<?> topic = activeTopics.get(buttonId - 2);
+            sendDialogues(player, topic.getExpr(), topic.getText());
+
+            if(topic.getToStage() instanceof DialogueFile) {
+                DialogueFile topicFile = (DialogueFile) topic.getToStage();
+                dialogue.loadFile(topicFile);
+            } else if(topic.getToStage() instanceof Integer) {
+                int stage = (Integer) topic.getToStage();
+                if (file == null) dialogue.stage = stage;
+                else file.setStage(stage);
+            }
+            activeTopics.clear();
+            return;
+        }
+        if(file != null){
             player.getDialogueInterpreter().getDialogue().file.handle(componentId,buttonId - 1);
             return;
         }
@@ -160,6 +178,7 @@ public final class DialogueInterpreter {
                 d.close();
             }
         }
+        activeTopics.clear();
         return dialogue == null;
     }
 

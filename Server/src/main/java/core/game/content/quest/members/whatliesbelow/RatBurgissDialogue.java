@@ -7,6 +7,7 @@ import core.game.node.entity.player.link.diary.AchievementDiary;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
+import rs09.game.node.entity.player.link.diary.dialogues.RatBurgissDiaryDialogue;
 
 /**
  * The rat burgiss dialogue.
@@ -66,126 +67,6 @@ public class RatBurgissDialogue extends DialoguePlugin {
 
     @Override
     public boolean handle(int interfaceId, int buttonId) {
-		if (isDiary) {
-			// https://www.youtube.com/watch?v=j-wvq79hUgU&t=309s
-			switch (stage) {
-				case 999:
-					end();
-					break;
-				case -1:
-					// when available, "Can I change my Varrock teleport point?" is option 2
-					options("What is the Achievement Diary?", "What are the rewards?", "How do I claim the rewards?", "See you later.");
-					stage++;
-					break;
-				case 0:
-					if (diary == null) {
-						diary = player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK);
-					}
-					switch (buttonId) {
-						case 1:
-							player("What is the Achievement Diary?");
-							stage = 410;
-							break;
-						case 2:
-							player("What are the rewards?");
-							stage = 420;
-							break;
-						case 3:
-							player("How do I claim the rewards?");
-							stage = 430;
-							break;
-						case 4:
-							player("See you later.");
-							stage = 999;
-							break;
-					}
-					break;
-				case 440:
-					npc("You have? Excellent! Well done.");
-					stage++;
-					break;
-				case 441:
-					player("Thank you. Uh... can I have the reward?");
-					stage++;
-					break;
-				case 442:
-					npc("Reward? Ah yes! Of course. Your reward, it's right", "here.");
-					stage = 444;
-					break;
-				case 444:
-					diary.setLevelRewarded(level);
-					for (Item i : diary.getType().getRewards(level)) {
-						player.getInventory().add(i, player);
-					}
-					npc("Now, this body armour is magically enhanced to help", "you with your Smithing and Mining. There is a", "furnace, not far from here, in Edgeville. Use this", "armour there and, when smelting ores up to and");
-					stage++;
-					break;
-				case 445:
-					npc("including steel, you will have a chance of making an", "extra bar every time. Also, when you mine with this", "armour on, you will have a chance of Mining extra", "ores from rocks up to and including coal.");
-					stage++;
-					break;
-				case 446:
-					npc("Bear in mind that you will need to be wearing the", "armour for either of these to work. I will speak to the", "shopkeepers around Varrock who sell armour and", "weapons to get you better prices when you are wearing");
-					stage++;
-					break;
-				case 447:
-					npc("the Varrock armour.");
-					stage = 449;
-					break;
-				case 449:
-					npc("I can also change your Varrock Teleport spell so that it", "takes you to the Grand Exchange, if you'd find that more convenient.");
-					stage++;
-					break;
-				case 450:
-					npc("As an extra reward, you can also have this old magical", "lamp to help you with your skills. I was going to use it", "myself, but I don't really need it.");
-					stage++;
-					break;
-				case 451:
-					player("Wow, thanks!");
-					stage++;
-					break;
-				case 452:
-					npc("If you should lose this armour, come back and see me", "for another set.");
-					stage = -1;
-					break;
-
-				case 460:
-					player.getInventory().add(diary.getType().getRewards(level)[0], player);
-					npc("You better be more careful this time.");
-					stage = 999;
-					break;
-
-				case 410:
-					npc("It's a diary that helps you keep track of particular", "achievements. Here in Varrock it can help you", "discover some quite useful things. Eventually, with", "enough exploration, the people of Varrock will reward");
-					stage++;
-					break;
-				case 411:
-					npc("you.");
-					stage++;
-					break;
-				case 412:
-					npc("You can see what tasks you have listed by clicking on", "the green button in the Quest List.");
-					stage = 999;
-					break;
-				case 420:
-					npc("Well, there's three different levels of Varrock Armour,", "which match up with the three levels of difficulty. Each", "has the same rewards as the previous level, and an", "additional one too... but I won't spoil your surprise.");
-					stage++;
-					break;
-				case 421:
-					npc("Rest assured, the people of Varrock are happy to see", "you visiting the land.");
-					stage = 999;
-					break;
-				case 430:
-					npc("Just complete the tasks so they're all ticked off, then", "you can claim your reward. Most of them are", "straightforward; you might find some require quests to", "be started, if not finished.");
-					stage++;
-					break;
-				case 431:
-					npc("To claim the different Varrock Armour, speak to Vannaka", "Reldo, and myself.");
-					stage = 999;
-					break;
-			}
-			return true;
-		}
         if (stage == -1) {
             switch (buttonId) {
                 case 1:
@@ -194,7 +75,7 @@ public class RatBurgissDialogue extends DialoguePlugin {
                     break;
                 case 2:
                 	player("I have a question about my Achievement Diary.");
-                	stage = 900;
+                	loadFile(new RatBurgissDiaryDialogue());
                     break;
             }
             return true;
