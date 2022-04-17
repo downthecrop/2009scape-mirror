@@ -1,5 +1,6 @@
 package core.game.interaction;
 
+import api.events.InteractionEvent;
 import core.game.container.Container;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
