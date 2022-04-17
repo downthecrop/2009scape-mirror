@@ -11,7 +11,7 @@ compileJava {
 
 compileKotlin {
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = JavaVersion.VERSION_11
         freeCompilerArgs += '-XXLanguage:-NewInference'
     }
 }
