@@ -38,7 +38,7 @@ public final class ZoneBorders {
 	/**
 	 * The plane required to be on.
 	 */
-	private int plane;
+	private int plane = 0;
 
 	/**
 	 * The list of exceptions.
@@ -231,7 +231,7 @@ public final class ZoneBorders {
 	public Location getRandomLoc() {
 	    int x = northEastX - southWestX == 0 ? southWestX : new Random().nextInt(northEastX - southWestX + 1) + southWestX;
 	    int y = northEastY - southWestY == 0 ? southWestY : new Random().nextInt(northEastY - southWestY + 1) + southWestY;
-		return new Location(x, y);
+		return new Location(x, y, plane);
 	}
 
 	/**
