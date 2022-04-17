@@ -1,40 +1,27 @@
 package rs09.game.node.entity.skill.skillcapeperks
 
-import core.cache.def.impl.ItemDefinition
-import core.game.node.entity.player.Player
-import core.game.node.item.Item
-import core.plugin.Initializable
-import core.plugin.Plugin
+import rs09.game.interaction.InteractionListener
 
-@Initializable
-class SkillcapeEquipmentPlugin : Plugin<Item> {
-    override fun newInstance(arg: Item?): Plugin<Item> {
+class SkillcapeEquipmentPlugin : InteractionListener {
+    override fun defineListeners() {
+        val capeIds = ArrayList<Int>()
         for(cape in core.game.content.global.SkillcapePerks.values()){
-            cape.skillcapeIds.forEach {
-                ItemDefinition.forId(it).handlers["equipment"] = this
-            }
+            cape.skillcapeIds.forEach { capeIds.add(it) }
         }
-        return this
-    }
+        val capes = capeIds.toIntArray()
 
-    override fun fireEvent(identifier: String?, vararg args: Any?): Any {
-        val player = args[0] as Player
-        val id = (args[1] as Item).id
-
-        val skillcape = Skillcape.forId(id)
-        val perk = SkillcapePerks.forSkillcape(skillcape)
-
-        when(identifier){
-
-            "equip" -> {
-                perk.activate(player)
-            }
-
-            "unequip" -> {
-                perk.deactivate(player)
-            }
+        onEquip(capes){player, node ->
+            val skillcape = Skillcape.forId(node.id)
+            val perk = SkillcapePerks.forSkillcape(skillcape)
+            perk.activate(player)
+            return@onEquip true
         }
-        return true;
-    }
 
+        onUnequip(capes){player, node ->
+            val skillcape = Skillcape.forId(node.id)
+            val perk = SkillcapePerks.forSkillcape(skillcape)
+            perk.deactivate(player)
+            return@onUnequip true
+        }
+    }
 }
