@@ -5,6 +5,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
+import org.rs09.consts.Items;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import rs09.game.world.repository.Repository;
@@ -135,11 +136,39 @@ public final class ShipCharter {
 		CATHERBY(Location.create(2792, 3417, 1), 25, new int[] { 480, 0, 480, 625, 1600, 3250, 1000, 1600, 3200, 3400 }, Location.create(2797, 3414, 0), 3, 14),
 		PORT_PHASMATYS(Location.create(3705, 3503, 1), 24, new int[] { 3650, 3250, 1850, 0, 0, 0, 2050, 1850, 3200, 1100 }, Location.create(3702, 3502, 0), 2, 13),
 		CRANDOR(new Location(2792, 3417, 1), 32, new int[] { 0, 480, 480, 925, 400, 3650, 1600, 400, 3200, 3800 }, null, 10, 21),
-		BRIMHAVEN(Location.create(2763, 3238, 1), 28, new int[] { 0, 480, 480, 925, 400, 3650, 1600, 400, 3200, 3800 }, Location.create(2760, 3238, 0), 6, 17),
-		PORT_SARIM(Location.create(3038, 3189, 1), 30, new int[] { 1600, 1000, 0, 325, 1280, 650, 1280, 400, 3200, 1400 }, Location.create(3039, 3193, 0), 8, 19),
+		BRIMHAVEN(Location.create(2763, 3238, 1), 28, new int[] { 0, 480, 480, 925, 400, 3650, 1600, 400, 3200, 3800 }, Location.create(2760, 3238, 0), 6, 17){
+			@Override
+			public int getCost(Player player, Destination destination) {
+				boolean hasGloves = DiaryType.KARAMJA.hasRewardEquipment(player);
+				if(destination == PORT_KHAZARD && hasGloves) return 15;
+				return super.getCost(player, destination);
+			}
+		},
+		PORT_SARIM(Location.create(3038, 3189, 1), 30, new int[] { 1600, 1000, 0, 325, 1280, 650, 1280, 400, 3200, 1400 }, Location.create(3039, 3193, 0), 8, 19){
+			@Override
+			public int getCost(Player player, Destination destination) {
+				boolean hasGloves = DiaryType.KARAMJA.hasRewardEquipment(player);
+				if(destination == KARAMJA && hasGloves) return 15;
+				return super.getCost(player, destination);
+			}
+		},
 		PORT_TYRAS(Location.create(2142, 3122, 0), 23, new int[] { 3200, 3200, 3200, 1600, 3200, 3200, 3200, 3200, 0, 3200 }, Location.create(2143, 3122, 0), 1, 12),
-		KARAMJA(Location.create(2957, 3158, 1), 27, new int[] { 200, 480, 0, 225, 400, 1850, 0, 200, 3200, 2000 }, Location.create(2954, 3156, 0), 5, 16),
-		PORT_KHAZARD(Location.create(2674, 3141, 1), 29, new int[] { 1600, 1000, 0, 325, 180, 650, 1280, 400, 3200, 1400 }, Location.create(2674, 3144, 0), 7, 18),
+		KARAMJA(Location.create(2957, 3158, 1), 27, new int[] { 200, 480, 0, 225, 400, 1850, 0, 200, 3200, 2000 }, Location.create(2954, 3156, 0), 5, 16) {
+			@Override
+			public int getCost(Player player, Destination destination) {
+				boolean hasGloves = DiaryType.KARAMJA.hasRewardEquipment(player);
+				if(destination == PORT_SARIM && hasGloves) return 15;
+				return super.getCost(player, destination);
+			}
+		},
+		PORT_KHAZARD(Location.create(2674, 3141, 1), 29, new int[] { 1600, 1000, 0, 325, 180, 650, 1280, 400, 3200, 1400 }, Location.create(2674, 3144, 0), 7, 18){
+			@Override
+			public int getCost(Player player, Destination destination) {
+				boolean hasGloves = DiaryType.KARAMJA.hasRewardEquipment(player);
+				if(destination == BRIMHAVEN && hasGloves) return 15;
+				return super.getCost(player, destination);
+			}
+		},
 		SHIPYARD(Location.create(3001, 3032, 0), 26, new int[] { 400, 1600, 200, 225, 720, 1850, 400, 0, 3200, 900 }, Location.create(3001, 3032, 0), 4, 15),
 		OO_GLOG(Location.create(2623, 2857, 0), 33, new int[] { 300, 3400, 2000, 550, 5000, 2800, 1400, 900, 3200, 0}, Location.create(2622, 2857, 0), 11, 22),
 		MOS_LE_HARMLESS(Location.create(3671, 2931, 0), 31, new int[] { 725, 625, 1025, 0, 1025, 0, 325, 275, 1600, 500 }, Location.create(3671, 2933, 0), 9, 20);
