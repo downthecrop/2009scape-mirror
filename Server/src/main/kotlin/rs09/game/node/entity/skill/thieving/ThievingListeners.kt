@@ -17,8 +17,7 @@ class ThievingListeners : InteractionListener {
 
     private val PICKPOCKET_ANIM = Animation(881,Animator.Priority.HIGH)
     private val NPC_ANIM = Animation(422)
-    private val STUN_ANIMATION = Animation(424,Animator.Priority.VERY_HIGH)
-    private val SOUND = Audio(2727, 1, 0)
+    private val SUCCESS = Audio(2581, 1, 0)
 
     override fun defineListeners() {
 
@@ -52,18 +51,23 @@ class ThievingListeners : InteractionListener {
 
             player.animator.animate(PICKPOCKET_ANIM)
             val chance = RandomFunction.randomDouble(1.0,100.0)
-            val failTreshold = pickpocketData.getSuccessChance(player) + successMod
+            val failThreshold = pickpocketData.getSuccessChance(player) + successMod
 
-            if(chance > failTreshold){
-                player.stateManager.set(EntityState.STUNNED, secondsToTicks(pickpocketData.stunTime))
+            if(chance > failThreshold){
                 node.asNpc().face(player)
                 node.asNpc().animator.animate(NPC_ANIM)
-                player.animator.animate(STUN_ANIMATION)
-                player.audioManager.send(SOUND)
+
+                val hitSoundId = 518 + RandomFunction.random(4) // choose 1 of 4 possible hit noises
+                player.audioManager.send(hitSoundId, 1, 20) // OSRS defines a delay of 20
+
+                player.stateManager.set(EntityState.STUNNED, secondsToTicks(pickpocketData.stunTime))
                 player.lock(secondsToTicks(pickpocketData.stunTime))
+
                 player.impactHandler.manualHit(node.asNpc(),RandomFunction.random(pickpocketData.stunDamageMin,pickpocketData.stunDamageMax),ImpactHandler.HitsplatType.NORMAL)
+
                 node.asNpc().face(null)
             } else {
+                player.audioManager.send(SUCCESS)
                 player.lock(2)
                 pickpocketData.table.roll().forEach { player.inventory.add(it) }
                 player.skills.addExperience(Skills.THIEVING,pickpocketData.experience)

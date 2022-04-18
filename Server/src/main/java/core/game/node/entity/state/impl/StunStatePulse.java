@@ -1,8 +1,11 @@
 package core.game.node.entity.state.impl;
 
 import core.game.node.entity.Entity;
+import core.game.node.entity.impl.Animator;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.state.StatePulse;
+import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 
 import java.nio.ByteBuffer;
@@ -17,6 +20,10 @@ public final class StunStatePulse extends StatePulse {
 	 * The stun graphic.
 	 */
 	private static final Graphics STUN_GRAPHIC = new Graphics(80, 96);
+
+	private static final Audio STUN_AUDIO = new Audio(2727, 1, 0);
+
+	private static final Animation STUN_ANIM = new Animation(424, Animator.Priority.VERY_HIGH);
 	
 	/**
 	 * The stun message.
@@ -50,7 +57,8 @@ public final class StunStatePulse extends StatePulse {
 		entity.getLocks().lock(getDelay());
 		entity.graphics(STUN_GRAPHIC);
 		if (entity instanceof Player) {
-			entity.asPlayer().getAudioManager().send(3201);
+			entity.asPlayer().getAudioManager().send(STUN_AUDIO);
+			entity.animate(STUN_ANIM);
 			((Player) entity).getPacketDispatch().sendMessage(stunMessage);
 		}
 	}
