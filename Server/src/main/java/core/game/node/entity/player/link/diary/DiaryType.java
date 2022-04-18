@@ -1,5 +1,6 @@
 package core.game.node.entity.player.link.diary;
 
+import core.game.node.entity.player.Player;
 import org.rs09.consts.Items;
 import core.game.node.item.Item;
 
@@ -542,6 +543,15 @@ public enum DiaryType {
      */
     public int getNpc(int level) {
         return npcs[level];
+    }
+
+    public boolean hasRewardEquipment(Player player) {
+        for(Item[] tier : getRewards()) {
+            for(Item item : tier) {
+                if(!item.getName().toLowerCase().contains("lamp") && player.hasItem(item)) return true;
+            }
+        }
+        return false;
     }
 
     /**
