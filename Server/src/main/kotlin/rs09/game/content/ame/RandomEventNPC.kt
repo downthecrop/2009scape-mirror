@@ -54,6 +54,10 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
 
     override fun tick() {
         super.tick()
+        if(player.getAttribute<RandomEventNPC?>("re-npc", null) != this){
+            terminate()
+            return
+        }
         if (!player.getAttribute("random:pause", false)) {
             ticksLeft--
         }
@@ -76,6 +80,7 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
         timerPaused = false
         spawnLocation ?: terminate()
         location = spawnLocation
+        player.setAttribute("re-npc", this)
         super.init()
     }
 
@@ -98,6 +103,11 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
             player.properties.teleportLocation = Location.create(3212, 9620, 0)
         }
         player.graphics(SMOKE_GRAPHICS)
+    }
+
+    override fun clear() {
+        super.clear()
+        if(player.getAttribute<RandomEventNPC?>("re-npc", null) == this) player.removeAttribute("re-npc")
     }
 
     abstract fun talkTo(npc: NPC)

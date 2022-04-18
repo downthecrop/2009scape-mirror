@@ -149,6 +149,18 @@ public class Region {
 		}
 	}
 
+	public void remove(RegionZone zone) {
+		regionZones.remove(zone);
+		for (RegionPlane plane : planes) {
+			for (NPC npc : plane.getNpcs()) {
+				npc.getZoneMonitor().updateLocation(npc.getLocation());
+			}
+			for (Player p : plane.getPlayers()) {
+				p.getZoneMonitor().updateLocation(p.getLocation());
+			}
+		}
+	}
+
 	/**
 	 * Adds a player to this region.
 	 * @param player The player.
