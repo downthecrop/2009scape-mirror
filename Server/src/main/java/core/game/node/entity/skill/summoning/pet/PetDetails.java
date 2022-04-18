@@ -2,6 +2,8 @@ package core.game.node.entity.skill.summoning.pet;
 
 
 
+import rs09.game.world.GameWorld;
+
 import java.nio.ByteBuffer;
 
 /**
@@ -38,7 +40,11 @@ public final class PetDetails {
 	 * @param amount The amount.
 	 */
 	public void updateHunger(double amount) {
-		hunger += amount;
+		if(GameWorld.getSettings().isDevMode()){
+			hunger += amount * 100;
+		} else {
+			hunger += amount;
+		}
 		if (hunger < 0.0) {
 			hunger = 0.0;
 		} else if (hunger > 100.0) {
