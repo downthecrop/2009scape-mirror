@@ -60,6 +60,7 @@ class BarbarianOutpostCourse
             1948 -> {
                 if (player.location.x > node.location.x) {
                     player.packetDispatch.sendMessage("You cannot climb from this side.")
+                    return true //who missed this return? lol.
                 }
                 val flag = if (node.location == Location(2536, 3553, 0)) 4 else if (node.location == Location(2539, 3553, 0)) 5 else 6
 				sendMessage(player, "You climb the low wall...")
