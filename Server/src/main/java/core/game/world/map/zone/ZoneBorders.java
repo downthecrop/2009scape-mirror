@@ -6,6 +6,7 @@ import core.tools.RandomFunction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -267,5 +268,18 @@ public final class ZoneBorders {
 
 	public boolean insideRegion(Node n) {
 		return insideBorder(n.getLocation().getRegionX(), n.getLocation().getRegionY());
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		ZoneBorders that = (ZoneBorders) o;
+		return southWestX == that.southWestX && southWestY == that.southWestY && northEastX == that.northEastX && northEastY == that.northEastY && plane == that.plane && zeroPlaneCheck == that.zeroPlaneCheck && Objects.equals(exceptions, that.exceptions);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(southWestX, southWestY, northEastX, northEastY, plane, exceptions, zeroPlaneCheck);
 	}
 }

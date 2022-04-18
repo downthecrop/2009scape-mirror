@@ -1,5 +1,7 @@
 package core.game.world.map.zone;
 
+import java.util.Objects;
+
 /**
  * Represents a zone inside a single region of the world map.
  * @author Emperor
@@ -42,4 +44,16 @@ public final class RegionZone {
 		return zone;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		RegionZone that = (RegionZone) o;
+		return Objects.equals(zone, that.zone) && Objects.equals(borders, that.borders);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(zone, borders);
+	}
 }

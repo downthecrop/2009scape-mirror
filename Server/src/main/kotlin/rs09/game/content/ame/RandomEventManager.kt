@@ -46,6 +46,7 @@ class RandomEventManager(val player: Player? = null) : LoginListener, EventHook<
             nextSpawn = GameWorld.ticks + 3000
             return
         }
+        if (getAttribute<RandomEventNPC?>(player, "re-npc", null) != null) return
         val currentAction = player.pulseManager.current.toString()
         val ame: RandomEvents = if(currentAction.contains("WoodcuttingSkillPulse") && Random.nextBoolean()){
             RandomEvents.TREE_SPIRIT

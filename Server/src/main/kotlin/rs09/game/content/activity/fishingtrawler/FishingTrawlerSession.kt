@@ -1,7 +1,10 @@
 package rs09.game.content.activity.fishingtrawler
 
 import api.LogoutListener
+import api.MapArea
+import api.getRegionBorders
 import core.game.component.Component
+import core.game.node.entity.Entity
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
 import core.game.node.entity.npc.NPC
@@ -12,6 +15,8 @@ import core.game.system.task.Pulse
 import rs09.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.map.build.DynamicRegion
+import core.game.world.map.zone.ZoneBorders
+import core.game.world.map.zone.ZoneRestriction
 import core.game.world.update.flag.context.Animation
 import core.plugin.Plugin
 import core.tools.*
@@ -20,6 +25,7 @@ import org.rs09.consts.Items
 import rs09.game.node.entity.player.info.stats.FISHING_TRAWLER_GAMES_WON
 import rs09.game.node.entity.player.info.stats.FISHING_TRAWLER_SHIPS_SANK
 import rs09.game.node.entity.player.info.stats.STATS_BASE
+import rs09.game.system.SystemLogger
 import rs09.tools.secondsToTicks
 import rs09.tools.ticksToSeconds
 import java.util.concurrent.TimeUnit
@@ -38,7 +44,7 @@ private const val HOLE_SOUTH_Y = 23
 private const val LEAKING_ID = 2167
 private const val PATCHED_ID = 2168
 
-class FishingTrawlerSession(val activity: FishingTrawlerActivity? = null) : LogoutListener {
+class FishingTrawlerSession(val activity: FishingTrawlerActivity? = null) : LogoutListener, MapArea {
     constructor(region: DynamicRegion, activity: FishingTrawlerActivity) : this(activity) {this.region = region; this.base = region.baseLocation}
     var players: ArrayList<Player> = ArrayList()
     var netRipped = false
@@ -77,6 +83,7 @@ class FishingTrawlerSession(val activity: FishingTrawlerActivity? = null) : Logo
             player.setAttribute("ft-session",this)
             player.stateManager.set(EntityState.TELEBLOCK,timeLeft)
         }
+        zone.register(getRegionBorders(region.id))
     }
 
     fun swapBoatType(fromRegion: Int){
@@ -129,6 +136,7 @@ class FishingTrawlerSession(val activity: FishingTrawlerActivity? = null) : Logo
                 session.boatSank = true
                 session.isActive = false
                 session.swapBoatType(7755)
+                session.zone.unregister(getRegionBorders(session.region.id))
             }
 
             if(RandomFunction.random(100) <= 9){
@@ -142,6 +150,7 @@ class FishingTrawlerSession(val activity: FishingTrawlerActivity? = null) : Logo
                     player.properties.teleportLocation = Location.create(2666, 3162, 0)
                     player.incrementAttribute("/save:$STATS_BASE:$FISHING_TRAWLER_GAMES_WON")
                 }
+                session.zone.unregister(getRegionBorders(session.region.id))
             }
 
             for(player in session.players){
@@ -274,5 +283,23 @@ class FishingTrawlerSession(val activity: FishingTrawlerActivity? = null) : Logo
         val session = player.getAttribute<FishingTrawlerSession?>("ft-session",null) ?: return
         player.location = Location.create(2667, 3161, 0)
         session.players.remove(player)
+    }
+
+    override fun defineAreaBorders(): Array<ZoneBorders> {
+        return arrayOf()
+    }
+
+    override fun getRestrictions(): Array<ZoneRestriction> {
+        return arrayOf(ZoneRestriction.CANNON, ZoneRestriction.FIRES, ZoneRestriction.RANDOM_EVENTS)
+    }
+
+    override fun areaEnter(entity: Entity) {
+        super.areaEnter(entity)
+        SystemLogger.logInfo("ENTERED FTZ")
+    }
+
+    override fun areaLeave(entity: Entity, logout: Boolean) {
+        super.areaLeave(entity, logout)
+        SystemLogger.logInfo("EXITED FTZ")
     }
 }
