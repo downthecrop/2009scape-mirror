@@ -141,6 +141,7 @@ public final class AgilityHandler {
 			p.setLocation(player.getLocation().transform(0,0,0));
 			return Unit.INSTANCE;
 		});
+		lock(player, ((int) start.getDistance(end)) * 3);
 		ForceMovement movement = new ForceMovement(player, start, end, animation, speed) {
 			@Override
 			public void stop() {
@@ -175,6 +176,7 @@ public final class AgilityHandler {
 			p.setLocation(player.getLocation().transform(0,0,0));
 			return Unit.INSTANCE;
 		});
+		lock(player, ((int) start.getDistance(end)) * 3);
 		if (delay < 1) {
 			return forceWalk(player, courseIndex, start, end, animation, speed, experience, message);
 		}
