@@ -1,5 +1,6 @@
 package core.game.interaction;
 
+import api.events.InteractionEvent;
 import core.game.container.Container;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
@@ -82,6 +83,7 @@ public class Interaction {
 			} else {
 				player.getPulseManager().runUnhandledAction(player, pulseType);
 			}
+			player.dispatch(new InteractionEvent(node, option.getName().toLowerCase()));
 		} catch (Exception e){
 			e.printStackTrace();
 			SystemLogger.logErr(this.getClass().getName() + e.getMessage());
