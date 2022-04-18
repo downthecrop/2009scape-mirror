@@ -1,5 +1,6 @@
 package core.game.node.entity.npc.bosses.wilderness;
 
+import api.ContentAPIKt;
 import core.game.content.global.BossKillCounter;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
@@ -18,6 +19,8 @@ import core.plugin.Initializable;
 import core.tools.RandomFunction;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.node.entity.combat.handlers.MultiSwingHandler;
+
+import static api.ContentAPIKt.getPathableRandomLocalCoordinate;
 
 /**
  * Handles the chaos elemental npc.
@@ -141,13 +144,7 @@ public class ChaosElementalNPC extends AbstractNPC {
 				}
 				else if (attack.getProjectile().getProjectileId() == 554) {
 					player.getAudioManager().send(new Audio(346), true); // C. Elemental Confusion Impact SFX
-					Location loc = getRandomLoc(entity);
-					while (!RegionManager.isTeleportPermitted(loc) || RegionManager.getObject(loc) != null) {
-						loc = getRandomLoc(entity);
-					}
-					if (loc.equals(player.getLocation())) {
-						loc = entity.getLocation();
-					}
+					Location loc = getPathableRandomLocalCoordinate(player, 10, entity.getLocation(), 3);
 					player.teleport(loc);
 				} else if (attack.getProjectile().getProjectileId() == 551) {
 					player.getAudioManager().send(new Audio(353), true); // C. Elemental Madness Impact SFX

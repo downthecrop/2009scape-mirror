@@ -19,7 +19,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.emote.Emotes
-import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.player.link.quest.QuestRepository
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.gather.SkillingTool
@@ -1463,4 +1462,21 @@ fun Player.getCutsceneStage(): Int {
 fun getServerConfig() : Toml
 {
     return ServerConfigParser.tomlData ?: Toml()
+}
+
+fun getPathableRandomLocalCoordinate(target: Entity, radius: Int, center: Location, maxAttempts: Int = 3): Location {
+    val swCorner = center.transform(-radius,-radius, center.z)
+    val neCorner = center.transform(radius, radius,  center.z)
+    val borders = ZoneBorders(swCorner.x, swCorner.y, neCorner.x, neCorner.y, center.z)
+
+    var attempts = maxAttempts
+    var success: Boolean
+    while (attempts-- > 0) {
+        val dest = borders.randomLoc
+        val path = Pathfinder.find(target, dest)
+        success = path.isSuccessful && !path.isMoveNear
+        if (success) return dest
+    }
+
+    return target.location
 }
