@@ -134,4 +134,12 @@ abstract class DialogueFile {
         player?.dialogueInterpreter?.sendDialogue(*messages)
     }
 
+    fun showTopics(vararg topics: Topic<*>) {
+        val validTopics = ArrayList<String>()
+        topics.filter { if(it is IfTopic) it.showCondition else true }.forEach {
+                topic -> interpreter!!.activeTopics.add(topic)
+                validTopics.add(topic.text)
+        }
+        options(*validTopics.toTypedArray())
+    }
 }

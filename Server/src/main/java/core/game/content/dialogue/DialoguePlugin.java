@@ -8,6 +8,8 @@ import core.plugin.Plugin;
 import core.plugin.PluginManifest;
 import core.plugin.PluginType;
 import rs09.game.content.dialogue.DialogueFile;
+import rs09.game.content.dialogue.IfTopic;
+import rs09.game.content.dialogue.Topic;
 
 import java.util.ArrayList;
 
@@ -331,4 +333,14 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 		return player(expr, splitLines(msg));
 	}
 
+	public void showTopics(Topic<?>... topics) {
+		ArrayList<String> validTopics = new ArrayList<>();
+		for(Topic<?> topic : topics)
+		{
+			if(topic instanceof IfTopic && !((IfTopic<?>) topic).getShowCondition()) continue;
+			interpreter.activeTopics.add(topic);
+			validTopics.add(topic.getText());
+		}
+		options(validTopics.toArray(new String[0]));
+	}
 }
