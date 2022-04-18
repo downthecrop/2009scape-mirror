@@ -33,7 +33,7 @@ public class AbyssalDemonNPC extends AbstractNPC {
 				boolean npc = RandomFunction.random(100) <= 50;
 				Entity source = npc ? victim : entity;
 				Entity teleported = npc ? entity : victim;
-				Location loc = getPathableRandomLocalCoordinate(teleported, 1, source.getLocation());
+				Location loc = getPathableRandomLocalCoordinate(teleported, 1, source.getLocation(), 3);
 				teleported.graphics(Graphics.create(409));
 				teleported.teleport(loc, 1);
 			}

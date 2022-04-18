@@ -144,7 +144,7 @@ public class ChaosElementalNPC extends AbstractNPC {
 				}
 				else if (attack.getProjectile().getProjectileId() == 554) {
 					player.getAudioManager().send(new Audio(346), true); // C. Elemental Confusion Impact SFX
-					Location loc = getPathableRandomLocalCoordinate(player, 10, entity.getLocation());
+					Location loc = getPathableRandomLocalCoordinate(player, 10, entity.getLocation(), 3);
 					player.teleport(loc);
 				} else if (attack.getProjectile().getProjectileId() == 551) {
 					player.getAudioManager().send(new Audio(353), true); // C. Elemental Madness Impact SFX
