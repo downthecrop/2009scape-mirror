@@ -42,9 +42,9 @@ public final class PetDetails {
 	public void updateHunger(double amount) {
 		if(GameWorld.getSettings().isDevMode()){
 			hunger += amount * 100;
-			return;
+		} else {
+			hunger += amount;
 		}
-		hunger += amount;
 		if (hunger < 0.0) {
 			hunger = 0.0;
 		} else if (hunger > 100.0) {
