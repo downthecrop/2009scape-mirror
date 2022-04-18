@@ -60,8 +60,18 @@ public final class Pet extends Familiar {
 			petDetails.updateHunger(petDetails.getStage() == 0 ? 0.025 : 0.018);
 		}
 		double hunger = petDetails.getHunger();
-		if (hunger >= 90.0 && hunger < 90.025) {
+		if (hunger >= 75.0 && hunger <= 90.0 && hunger % 5 == 0) {
+			owner.sendMessage("<col=ff0000>Your pet is getting hungry.</col>");
+		}
+		else if (hunger >= 90.0 && hunger % 1 == 0) {
 			owner.getPacketDispatch().sendMessage("<col=ff0000>Your pet is starving, feed it before it runs off.</col>");
+		}
+		if (hunger >= 100.0 && growthRate != 0 && pet.getFood().length != 0) {
+			owner.getFamiliarManager().dismiss(false);
+			owner.getFamiliarManager().setFamiliar(null);
+			owner.getConfigManager().set(1175, 0);
+			owner.sendMessage("<col=ff0000>Your pet has run away.</col>");
+			return;
 		}
 		double growth = petDetails.getGrowth();
 		if (pet.getGrowthRate() > 0.000) {
