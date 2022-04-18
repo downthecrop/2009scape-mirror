@@ -1,5 +1,6 @@
 package core.game.node.entity.npc.agg;
 
+import core.game.node.entity.npc.NPC;
 import rs09.ServerConstants;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.DeathTask;
@@ -187,7 +188,11 @@ public final class AggressiveHandler {
 	 * @return The allowTolerance.
 	 */
 	public boolean isAllowTolerance() {
-		return allowTolerance;
+		boolean configSetting = true;
+		if(entity instanceof NPC){
+			configSetting = ((NPC) entity).getDefinition().getConfiguration("can_tolerate", true);
+		}
+		return allowTolerance && configSetting;
 	}
 
 	/**
