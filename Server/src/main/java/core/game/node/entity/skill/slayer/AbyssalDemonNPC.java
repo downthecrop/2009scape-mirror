@@ -13,6 +13,8 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 
+import static api.ContentAPIKt.getPathableRandomLocalCoordinate;
+
 /**
  * Handles the abyssal npc.
  * @author Vexia
@@ -31,11 +33,9 @@ public class AbyssalDemonNPC extends AbstractNPC {
 				boolean npc = RandomFunction.random(100) <= 50;
 				Entity source = npc ? victim : entity;
 				Entity teleported = npc ? entity : victim;
-				Location loc = source.getLocation().transform(Direction.values()[RandomFunction.random(Direction.values().length)], 1);
-				if (loc != null && !loc.equals(source.getLocation()) && RegionManager.isTeleportPermitted(loc) && RegionManager.getObject(loc) == null) {
-					teleported.graphics(Graphics.create(409));
-					teleported.teleport(loc, 1);
-				}
+				Location loc = getPathableRandomLocalCoordinate(teleported, 1, source.getLocation(), 3);
+				teleported.graphics(Graphics.create(409));
+				teleported.teleport(loc, 1);
 			}
 			return super.swing(entity, victim, state);
 		}
