@@ -1,5 +1,6 @@
 package rs09.game.node.entity.skill.magic
 
+import api.getAttribute
 import core.game.content.activity.mta.impl.GraveyardZone
 import core.game.content.global.Bones
 import core.game.node.entity.Entity
@@ -62,7 +63,9 @@ class ModernListeners : SpellListener("modern"){
         onCast(Modern.VARROCK_TELEPORT,NONE){player, _->
             requires(player,25, arrayOf(Item(Items.FIRE_RUNE_554),Item(Items.AIR_RUNE_556,3),Item(Items.LAW_RUNE_563)))
             player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK,1, 13)
-            sendTeleport(player,35.0,Location.create(3213, 3424, 0))
+            val alternateTeleport = getAttribute(player, "diaries:varrock:alttele", false)
+            val dest = if(alternateTeleport) Location.create(3165, 3472, 0) else Location.create(3213, 3424, 0)
+            sendTeleport(player,35.0, dest)
         }
 
         onCast(Modern.LUMBRIDGE_TELEPORT,NONE){player,_ ->
