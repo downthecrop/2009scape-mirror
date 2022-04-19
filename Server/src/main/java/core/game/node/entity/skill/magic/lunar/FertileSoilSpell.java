@@ -4,6 +4,7 @@ import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.equipment.SpellType;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.entity.skill.magic.MagicSpell;
 import core.game.node.entity.skill.magic.Runes;
@@ -33,7 +34,7 @@ public final class FertileSoilSpell extends MagicSpell {
 	/**
 	 * Represents the animaton to use.
 	 */
-	private static final Animation ANIMATION = new Animation(722);
+	private static final Animation ANIMATION = new Animation(724);
 
 	/**
 	 * Constructs a new {@code FertileSoilSpell} {@code Object}.
@@ -69,6 +70,7 @@ public final class FertileSoilSpell extends MagicSpell {
 		player.sendMessage("You fertilize the soil.");
 		player.graphics(GRAPHIC);
 		player.animate(ANIMATION);
+		player.getAudioManager().send(2891, 1, 1);
 		return true;
 	}
 }
