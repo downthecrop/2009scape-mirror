@@ -18,8 +18,6 @@ import java.sql.Connection
 object GEDB {
     private var pathString = ""
     private var connection: Connection? = null
-    private var connectionOpened: TimeStamp? = null
-    private const val CONNECTION_LIFE_MS = 30 * 60 * 1000 // 30 minutes
 
     //This needs to be a separate method, so we can call it after the server config has been parsed
     fun init()
@@ -33,17 +31,11 @@ object GEDB {
 
     fun connect(): Connection
     {
-        if (connection != null && !connection!!.isClosed && connectionOpened != null && connectionOpened!!.duration(false, "") > CONNECTION_LIFE_MS)
-        {
-            connection!!.close()
-            connectionOpened = null
-        }
         if (connection == null || connection!!.isClosed)
         {
             val ds = SQLiteDataSource()
             ds.url = "jdbc:sqlite:$pathString"
             connection = ds.connection
-            connectionOpened = TimeStamp()
         }
         return connection!!
     }
