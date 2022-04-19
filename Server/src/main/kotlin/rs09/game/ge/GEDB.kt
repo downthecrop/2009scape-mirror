@@ -1,8 +1,6 @@
 package rs09.game.ge
 
 import core.cache.def.impl.ItemDefinition
-import core.game.ge.OfferState
-import core.game.node.entity.player.link.audio.Audio
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
@@ -10,17 +8,15 @@ import org.sqlite.SQLiteDataSource
 import rs09.ServerConstants
 import java.io.File
 import java.io.FileReader
-import java.lang.Integer.min
 import java.sql.Connection
-import java.sql.DriverManager
 
 /**
  * Collection of methods for interacting with the grand exchange databases
  * @author Ceikry
  */
 object GEDB {
-    var pathString = ""
-    var connection: Connection? = null
+    private var pathString = ""
+    private var connection: Connection? = null
 
     //This needs to be a separate method, so we can call it after the server config has been parsed
     fun init()
@@ -34,7 +30,7 @@ object GEDB {
 
     fun connect(): Connection
     {
-        if(connection == null || connection?.isClosed == true)
+        if (connection == null || connection!!.isClosed)
         {
             val ds = SQLiteDataSource()
             ds.url = "jdbc:sqlite:$pathString"
@@ -161,5 +157,6 @@ object GEDB {
                 statement.execute("insert into price_index(item_id, value) values(${def.id},${def.value})")
             }
         }
+        statement.close()
     }
 }
