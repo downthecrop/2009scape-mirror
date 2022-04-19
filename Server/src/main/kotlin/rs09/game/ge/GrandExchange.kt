@@ -104,6 +104,7 @@ class GrandExchange : StartupListener {
                         if(offer.amountLeft != before)
                             SystemLogger.logGE("Purchased FROM BOT ${offer.amountLeft - before}x ${getItemName(offer.itemID)}")
                     }
+                    botStmt.close()
                 }
                 sellStmt.close()
             }
