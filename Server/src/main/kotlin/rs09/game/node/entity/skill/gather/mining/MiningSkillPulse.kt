@@ -7,8 +7,6 @@ import core.game.container.impl.EquipmentContainer
 import core.game.content.dialogue.FacialExpression
 import core.game.content.global.SkillingPets
 import core.game.node.Node
-import core.game.node.scenery.Scenery
-import core.game.node.scenery.SceneryBuilder
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.npc.drop.DropFrequency
 import core.game.node.entity.player.Player
@@ -18,7 +16,10 @@ import core.game.node.entity.skill.gather.SkillingTool
 import core.game.node.entity.skill.gather.mining.MiningNode
 import core.game.node.item.ChanceItem
 import core.game.node.item.Item
+import core.game.node.scenery.Scenery
+import core.game.node.scenery.SceneryBuilder
 import core.game.system.task.Pulse
+import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import core.tools.StringUtils
@@ -37,6 +38,15 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
     private var isMiningGems = false
     private var ticks = 0
     protected var resetAnimation = true
+
+    // Perfect Gold Ore in Witchhaven Dungeon (Family Crest)
+    private val perfectGoldOreLocations = listOf(
+            Location(2735, 9695, 0),
+            Location(2737, 9689, 0),
+            Location(2740, 9684, 0),
+            Location(2737, 9683, 0),
+    )
+
     fun message(type: Int) {
         if (type == 0) {
             player.packetDispatch.sendMessage("You swing your pickaxe at the rock...")
@@ -66,6 +76,12 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
         }
         if (resource == null) {
             return
+        }
+        if (resource!!.id == 2099 &&
+            !perfectGoldOreLocations.contains(node.location) ) {
+            // Perfect Gold Ore Id's outside of Witchhaven
+            // are replaced with a normal gold rock.
+            resource = MiningNode.forId(2098)
         }
         if (resource!!.id == 2491) {
             isMiningEssence = true
