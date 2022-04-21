@@ -107,7 +107,7 @@ public final class FurnaceOptionPlugin extends OptionHandler {
 		/**
 		 * Represents the ids.
 		 */
-		private static final int[] IDS = new int[] { 4304, 6189, 11010, 11666, 12100, 12809, 14921, 18497, 26814, 30021, 30510, 36956, 37651 };
+		public static final int[] furnaceIDS = new int[] { 4304, 6189, 11010, 11666, 12100, 12809, 14921, 18497, 26814, 30021, 30510, 36956, 37651 };
 
 		/**
 		 * Constructs a new {@code SmeltUseWithHandler} {@code Object}.
@@ -118,7 +118,7 @@ public final class FurnaceOptionPlugin extends OptionHandler {
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			for (int i : IDS) {
+			for (int i : furnaceIDS) {
 				addHandler(i, OBJECT_TYPE, this);
 			}
 			return this;
