@@ -102,7 +102,7 @@ After setting up git lfs, you may need to run `git lfs pull` in the root of the 
 <h4>Note: It is required for a developer submitting a PR to use Intellij IDEA as your integrated development environment.</h4>
 
 * Intellij IDEA
-* Java SE Development Kit Version 1.8/OpenJDK 1.8 (preferred)
+* Java SE Development Kit Version 11/OpenJDK 11 (preferred)
 * Gradle (optional - Installs with Intellij on project build)
 * Xampp
 
@@ -112,7 +112,7 @@ After setting up git lfs, you may need to run `git lfs pull` in the root of the 
 <details>
 <summary> </summary>
 
-1. Install <a href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html">JDK version 1.8</a>
+1. Install <a href="https://www.oracle.com/java/technologies/downloads/#java11-windows">JDK version 11</a>
     * Scroll down until you see Windows x86 and Windows x64
     * If you are running a 64bit verison of Windows (standard), select Windows x64
     * Accept the terms and conditions, after reading them of course, and login to oracle
@@ -141,7 +141,7 @@ After setting up git lfs, you may need to run `git lfs pull` in the root of the 
 <details>
 <summary> </summary>
 
-1. Install <a href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html">JDK version 1.8</a>
+1. Install <a href="https://www.oracle.com/java/technologies/downloads/#java11-mac">JDK version 11</a>
     * Scroll down until you see macOS x64
     * select macOS x64
     * Accept the terms and conditions, after reading them of course, and login to oracle
@@ -170,14 +170,14 @@ After setting up git lfs, you may need to run `git lfs pull` in the root of the 
 <details>
 <summary> </summary>
 
-1. Install JDK version 1.8 through <a href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html">Oracle</a> or through <a href="https://openjdk.java.net/install/">command line</a>
+1. Install JDK version 11 through <a href="https://www.oracle.com/java/technologies/downloads/#java11-linux">Oracle</a> or through <a href="https://openjdk.java.net/install/">command line</a>
     * Debian, Ubuntu, etc.
     ```sh
-    sudo apt install openjdk-8-jdk
+    sudo apt install openjdk-11-jdk
     ```
     * Fedora, Oracle Linux, Red Hat Enterprise Linux, etc.
     ```sh
-    su -c "yum install java-1.8.0-openjdk"
+    su -c "yum install java-11-openjdk"
     ```  
   
 2. Install Intellij IDEA through <a href="https://www.jetbrains.com/idea/">Intellij Website</a> or through <a href="https://www.jetbrains.com/help/idea/installation-guide.html#snap">Command Line</a>
@@ -224,7 +224,7 @@ After setting up git lfs, you may need to run `git lfs pull` in the root of the 
     * On the right hand side you should see your Github Repository for 2009Scape
     * Select it and hit "Clone"
     * The project should instantly start building on import. Give it some time because it is going through and compiling alot of files
-    * In Intellij go to File -> Project Structure -> Project and verify your Project SDK is set to JDK "1.8"
+    * In Intellij go to File -> Project Structure -> Project and verify your Project SDK is set to JDK "11"
     * Setup through Intellij should now be finished!
     
 ### Running the project
