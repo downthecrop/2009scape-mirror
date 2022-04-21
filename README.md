@@ -141,7 +141,7 @@ After setting up git lfs, you may need to run `git lfs pull` in the root of the 
 <details>
 <summary> </summary>
 
-1. Install <a href="https://www.oracle.com/java/technologies/downloads/#java11-mac">JDK version 1.11</a>
+1. Install <a href="https://www.oracle.com/java/technologies/downloads/#java11-mac">JDK version 11</a>
     * Scroll down until you see macOS x64
     * select macOS x64
     * Accept the terms and conditions, after reading them of course, and login to oracle
@@ -170,7 +170,7 @@ After setting up git lfs, you may need to run `git lfs pull` in the root of the 
 <details>
 <summary> </summary>
 
-1. Install JDK version 1.11 through <a href="https://www.oracle.com/java/technologies/downloads/#java11-linux">Oracle</a> or through <a href="https://openjdk.java.net/install/">command line</a>
+1. Install JDK version 11 through <a href="https://www.oracle.com/java/technologies/downloads/#java11-linux">Oracle</a> or through <a href="https://openjdk.java.net/install/">command line</a>
     * Debian, Ubuntu, etc.
     ```sh
     sudo apt install openjdk-11-jdk
