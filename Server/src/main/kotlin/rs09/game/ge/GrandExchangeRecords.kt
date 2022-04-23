@@ -47,6 +47,45 @@ class GrandExchangeRecords(private val player: Player? = null) : PersistPlayer, 
                 getInstance(player).history[i] = o
             }
         }
+
+        /**
+         * Read offers from the database
+         */
+        val conn = GEDB.connect()
+        val stmt = conn.createStatement()
+        val offer_records = stmt.executeQuery("SELECT * from player_offers where player_uid = ${player.details.uid} AND offer_state < 6")
+        val instance = getInstance(player)
+
+        val needsIndex = ArrayDeque<GrandExchangeOffer>()
+
+        while (offer_records.next()) {
+            val offer = GrandExchangeOffer.fromQuery(offer_records)
+            if (offer.index == -1) //used to index old (converted from JSON) offers
+                needsIndex.push(offer)
+            else
+                instance.offerRecords[offer.index] = OfferRecord(offer.uid, offer.index)
+        }
+        stmt.close()
+
+        if (needsIndex.isNotEmpty()) {
+            for ((index, offer) in offerRecords.withIndex()) {
+                if (offer == null) {
+                    val o = needsIndex.pop()
+                    o.index = index
+                    instance.offerRecords[o.index] = OfferRecord(o.uid, o.index)
+                    o.update() //write the new index to the database
+                }
+            }
+
+            while(needsIndex.isNotEmpty()) //If we enter this loop, there were more offers than can fit inside the 6 slots. This should never happen - at least, not anymore. Can't speak for JSON offers.
+            {
+                val o = needsIndex.pop()
+                SystemLogger.logGE("[WARN] PLAYER HAD EXTRA OFFER - RECOMMEND IMMEDIATE REFUND OF CONTENTS -> OFFER UID: ${o.uid}")
+                SystemLogger.logGE("[WARN] AS PER ABOVE MESSAGE, REFUND CONTENTS OF OFFER AND MANUALLY SET offer_state = 6")
+            }
+        }
+
+        instance.visualizeRecords()
     }
 
     override fun savePlayer(player: Player, save: JSONObject) {
@@ -91,8 +130,6 @@ class GrandExchangeRecords(private val player: Player? = null) : PersistPlayer, 
     {
         val conn = GEDB.connect()
         val stmt = conn.createStatement()
-
-        val sb = StringBuilder()
 
         for (record in offerRecords) {
             if (record != null) {
@@ -158,46 +195,6 @@ class GrandExchangeRecords(private val player: Player? = null) : PersistPlayer, 
                     NumberFormat.getNumberInstance(Locale.US).format(o.totalCoinExchange.toLong()) + " gp", 643, 40 + i
             )
         }
-    }
-
-    fun parse(geData: JSONObject) {
-        /**
-         * Read offers from the database
-         */
-        val conn = GEDB.connect()
-        val stmt = conn.createStatement()
-        val offer_records = stmt.executeQuery("SELECT * from player_offers where player_uid = ${player!!.details.uid} AND offer_state < 6")
-
-        val needsIndex = ArrayDeque<GrandExchangeOffer>()
-
-        while (offer_records.next()) {
-            val offer = GrandExchangeOffer.fromQuery(offer_records)
-            if (offer.index == -1) //used to index old (converted from JSON) offers
-                needsIndex.push(offer)
-            else
-                offerRecords[offer.index] = OfferRecord(offer.uid, offer.index)
-        }
-        stmt.close()
-
-        if (needsIndex.isNotEmpty()) {
-            for ((index, offer) in offerRecords.withIndex()) {
-                if (offer == null) {
-                    val o = needsIndex.pop()
-                    o.index = index
-                    offerRecords[o.index] = OfferRecord(o.uid, o.index)
-                    o.update() //write the new index to the database
-                }
-            }
-
-            while(needsIndex.isNotEmpty()) //If we enter this loop, there were more offers than can fit inside the 6 slots. This should never happen - at least, not anymore. Can't speak for JSON offers.
-            {
-                val o = needsIndex.pop()
-                SystemLogger.logGE("[WARN] PLAYER HAD EXTRA OFFER - RECOMMEND IMMEDIATE REFUND OF CONTENTS -> OFFER UID: ${o.uid}")
-                SystemLogger.logGE("[WARN] AS PER ABOVE MESSAGE, REFUND CONTENTS OF OFFER AND MANUALLY SET offer_state = 6")
-            }
-        }
-
-        visualizeRecords()
     }
 
     /**
