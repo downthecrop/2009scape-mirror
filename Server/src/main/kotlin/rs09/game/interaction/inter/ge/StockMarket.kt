@@ -108,6 +108,9 @@ class StockMarket : InterfaceListener {
                     openedOffer = GrandExchangeRecords.getInstance(player).getOffer(openedIndex)
                     if(op == 205) abortOffer(player, openedOffer)
                     else updateVarbits(player, openedOffer, openedIndex)
+                    if(openedOffer != null) {
+                        player.packetDispatch.sendString(GrandExchange.getOfferStats(openedOffer.itemID, openedOffer.sell), 105, 142)
+                    }
                 }
                 30,46,62,81,100,119 -> {
                     openedIndex = (button - 30) shr 4
