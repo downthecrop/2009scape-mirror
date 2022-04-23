@@ -1,10 +1,13 @@
 package plugin.quest.members.familycrest
 
 
+import api.addItem
+import api.animate;
+import api.removeItem
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler
 import core.game.node.entity.skill.Skills
-import core.game.node.item.Item
+import core.game.node.entity.skill.smithing.FurnaceOptionPlugin
 import core.game.system.task.Pulse
 import core.plugin.Initializable
 import core.plugin.Plugin
@@ -15,11 +18,12 @@ import rs09.game.world.GameWorld.Pulser
 @Initializable
 class PerfectGoldSmeltingHandler : UseWithHandler(Items.PERFECT_GOLD_ORE_446){
 
-    val furnaceIDs = listOf(2349, 2351, 2353, 2359, 2361, 2363, 2366, 2368, 9467, 11286, 1540, 11710, 11712, 11714, 11666, 11686, 11688, 11692)
+
+    private val furnaceIDs: IntArray = FurnaceOptionPlugin.SmeltUseWithHandler.furnaceIDS;
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        for(furnaces in furnaceIDs){
-            addHandler(furnaces, OBJECT_TYPE, this)
+        for(furnace in furnaceIDs){
+            addHandler(furnace, OBJECT_TYPE, this)
         }
         return this
     }
@@ -27,16 +31,18 @@ class PerfectGoldSmeltingHandler : UseWithHandler(Items.PERFECT_GOLD_ORE_446){
     override fun handle(event: NodeUsageEvent?): Boolean {
 
         event ?: return false
+        val player = event.player
 
-            Pulser.submit(object : Pulse(2, event.player) {
+            Pulser.submit(object : Pulse(2, player) {
                 override fun pulse(): Boolean {
-                    event.player.inventory.remove(Item(446))
-                    event.player.inventory.add(Item(2365))
-                    event.player.skills.addExperience(Skills.SMITHING,22.5)
+                    if(removeItem(player,Items.PERFECT_GOLD_ORE_446)){
+                        animate(player,3243)
+                        addItem(player,Items.PERFECT_GOLD_BAR_2365)
+                        player.skills.addExperience(Skills.SMITHING,22.5)
+                    }
                     return true
                 }
             })
             return true
-
     }
 }
