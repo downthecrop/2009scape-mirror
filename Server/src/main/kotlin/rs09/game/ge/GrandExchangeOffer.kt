@@ -60,6 +60,7 @@ class GrandExchangeOffer() {
 
     fun addWithdrawItem(id: Int, amount: Int)
     {
+        if(amount == 0) return
         //loop checking if the item is already present first
         for(item in withdraw)
             if(item != null && item.id == id)
