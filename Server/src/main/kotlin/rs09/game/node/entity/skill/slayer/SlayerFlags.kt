@@ -74,11 +74,11 @@ class SlayerFlags {
      * Get/Set canEarnPoints flag
      */
     fun canEarnPoints(): Boolean {
-        return (taskFlags shr 16) and 1 == 1
+        return (taskFlags shr 20) and 1 == 1
     }
 
     fun flagCanEarnPoints() {
-        taskFlags = taskFlags or (1 shl 16)
+        taskFlags = taskFlags or (1 shl 20)
     }
     /**
      *==============================================
@@ -146,6 +146,14 @@ class SlayerFlags {
      */
     fun hasTask(): Boolean{
         return getTaskAmount() != 0
+    }
+
+    fun fullClear() {
+        taskFlags = 0
+        rewardFlags = 0
+        equipmentFlags = 0
+        completedTasks = 0
+        taskStreak = 0
     }
 
 }
