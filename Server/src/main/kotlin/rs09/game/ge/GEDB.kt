@@ -18,13 +18,16 @@ object GEDB {
     private var pathString = ""
     private var connection: Connection? = null
 
-    //This needs to be a separate method, so we can call it after the server config has been parsed
-    fun init()
-    {
-        pathString = File(ServerConstants.GRAND_EXCHANGE_DATA_PATH + "grandexchange.db").absolutePath
+    fun init() {
+        init(File(ServerConstants.GRAND_EXCHANGE_DATA_PATH + "grandexchange.db").absolutePath)
+    }
 
+    //This needs to be a separate method, so we can call it after the server config has been parsed
+    fun init(path: String)
+    {
+        pathString = path
         //Check if the grandexchange.db file already exists. If not, create it and create the tables.
-        if(!File(pathString).exists())
+        if(!File(path).exists())
             generateAndTransfer()
     }
 
