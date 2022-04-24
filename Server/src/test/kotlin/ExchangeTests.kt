@@ -1,12 +1,16 @@
 import core.game.ge.OfferState
+import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.fail
 import rs09.game.ge.GEDB
 import rs09.game.ge.GrandExchange
 import rs09.game.ge.GrandExchangeOffer
+import rs09.game.system.SystemLogger
+import kotlin.random.Random
 
-class ExchangeTests {
+@TestInstance(TestInstance.Lifecycle.PER_CLASS) class ExchangeTests {
     companion object {
         private const val TEST_DB_PATH = "ge_test.db"
         init {
@@ -16,7 +20,7 @@ class ExchangeTests {
         fun generateOffer(itemId: Int, amount: Int, price: Int, sale: Boolean) : GrandExchangeOffer {
             val offer = GrandExchangeOffer()
             val uid = "test ${System.currentTimeMillis()}".hashCode()
-            offer.offerState = OfferState.PENDING
+            offer.offerState = OfferState.REGISTERED
             offer.itemID = itemId
             offer.offeredValue = price
             offer.amount = amount

@@ -44,6 +44,8 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    dependsOn cleanTest
+    testLogging.showStandardStreams = true
 }
 
 /*sourceSets {
