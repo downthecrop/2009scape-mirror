@@ -39,6 +39,7 @@ public final class SystemTermination {
 		SystemLogger.logInfo("[SystemTerminator] Initializing termination sequence - do not shutdown!");
 		try {
 			Server.setRunning(false);
+			Server.getReactor().terminate();
 			for (Iterator<Player> it = Repository.getPlayers().iterator(); it.hasNext();) {
 				try {
 					Player p = it.next();
