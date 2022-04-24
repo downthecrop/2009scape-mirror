@@ -15,7 +15,7 @@ class RegionTests {
         init {
             ServerConfigParser.parse("worldprops/default.conf")
             XteaParser().load()
-            Cache.init(this.javaClass.getResource("cache")?.path.toString())
+            Cache.init(this::class.java.getResource("cache")?.path.toString())
         }
     }
 
@@ -23,6 +23,18 @@ class RegionTests {
         val region = RegionManager.forId(12850)
         Region.load(region)
         Assertions.assertNotEquals(0, region.objectCount, "Region has no objects! (Failed to parse?)")
+    }
+
+    @Test fun shouldHaveDifferentIdForDynamicCopy() {
+        val region = RegionManager.forId(12850)
+        val dynamic = DynamicRegion.create(12850)
+        Assertions.assertNotEquals(region.regionId, (dynamic.x shl 8) or dynamic.y)
+    }
+
+    @Test fun dynamicRegionCreationShouldNotReplaceOriginal() {
+        val region = RegionManager.forId(12850)
+        val dynamic = DynamicRegion.create(12850)
+        Assertions.assertEquals(false, RegionManager.forId(12850) is DynamicRegion)
     }
 
     @Test fun testDynamicRegionHasSameObjects() {
