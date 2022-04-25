@@ -224,6 +224,7 @@ class GrandExchangeOffer() {
             o.itemID = result.getInt("item_id")
             o.offeredValue = GrandExchange.getRecommendedPrice(o.itemID, true)
             o.isBot = true
+            o.timeStamp = System.currentTimeMillis()
             return o
         }
 

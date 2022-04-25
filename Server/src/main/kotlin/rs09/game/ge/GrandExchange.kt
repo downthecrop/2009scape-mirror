@@ -1,24 +1,23 @@
 package rs09.game.ge
 
-import api.StartupListener
-import api.getItemName
-import api.itemDefinition
-import api.sendMessage
+import api.*
 import core.game.ge.GrandExchangeDatabase
 import core.game.ge.OfferState
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.PlayerDetails
 import core.game.node.entity.player.link.audio.Audio
 import rs09.game.system.SystemLogger
+import rs09.game.system.command.Privilege
 import rs09.game.system.config.ItemConfigParser
 import rs09.game.world.repository.Repository
 import java.lang.Integer.max
+import java.sql.ResultSet
 
 /**
  * Handles the exchanging of offers, offer update thread, etc.
  * @author Ceikry
  */
-class GrandExchange : StartupListener {
+class GrandExchange : StartupListener, Commands {
     /**
      * Fallback safety check to make sure we don't start the GE twice under any circumstance
      */
@@ -41,23 +40,42 @@ class GrandExchange : StartupListener {
         val t = Thread {
             Thread.currentThread().name = "GE Update Worker"
             while(true) {
-                val conn = GEDB.connect()
-                val stmt = conn.createStatement()
-                val buy_offer = stmt.executeQuery("SELECT * from player_offers where is_sale = 0")
-                val buyOffers = ArrayList<GrandExchangeOffer>()
+                with(GEDB.connect()) {
+                    val conn = this
 
-                while(buy_offer.next())
-                {
-                    val offer = GrandExchangeOffer.fromQuery(buy_offer)
-                    if(!offer.isActive) continue
-                    buyOffers.add(offer)
+                    val botStmt = conn.createStatement()
+                    val botOffers = botStmt.executeQuery("SELECT * from bot_offers")
+                    while(botOffers.next()) {
+                        val bot = GrandExchangeOffer.fromBotQuery(botOffers)
+                        val buyStmt = conn.createStatement()
+                        val buyOffer = buyStmt.executeQuery("SELECT * FROM player_offers WHERE item_id = ${bot.itemID} AND offer_state < 4 AND NOT offer_state = 2 AND offered_value >= ${bot.offeredValue}")
+                        val buyOffers = ArrayList<GrandExchangeOffer>()
+                        while(buyOffer.next()) buyOffers.add(GrandExchangeOffer.fromQuery(buyOffer))
+                        buyStmt.close()
+
+                        for(offer in buyOffers.sortedBy { it.offeredValue }.reversed()) {
+                            if (bot.amountLeft <= 0) break
+                            exchange(bot, offer)
+                        }
+                    }
+                    botStmt.close()
+
+                    val stmt = conn.createStatement()
+                    val activeOffer = stmt.executeQuery("SELECT * from player_offers where offer_state < 4 AND NOT offer_state = 2 AND is_sale = true")
+                    val activeOffers = ArrayList<GrandExchangeOffer>()
+
+                    while(activeOffer.next())
+                    {
+                        val offer = GrandExchangeOffer.fromQuery(activeOffer)
+                        if(!offer.isActive) continue
+                        activeOffers.add(offer)
+                    }
+
+                    for(offer in activeOffers)
+                        processOffer(offer)
+
+                    stmt.close()
                 }
-
-                for(offer in buyOffers)
-                    processOffer(offer)
-
-                stmt.close()
-
                 Thread.sleep(15_000) //sleep for 15 seconds
             }
         }.start()
@@ -65,48 +83,53 @@ class GrandExchange : StartupListener {
         isRunning = true
     }
 
+    override fun defineCommands() {
+        define("addbotoffer", Privilege.ADMIN) {player, strings ->
+            val id = strings[1].toInt()
+            val amount = strings[2].toInt()
+            addBotOffer(id, amount)
+            notify(player, "Added ${amount}x ${getItemName(id)} to the bot offers.")
+        }
+    }
+
     companion object {
         fun processOffer(offer: GrandExchangeOffer)
         {
-            val conn = GEDB.connect()
-            if(offer.isActive)
-            {
-                val sellStmt = conn.createStatement()
-                val sell_offer = sellStmt.executeQuery("SELECT * from player_offers where item_id = ${offer.itemID} AND is_sale = 1 AND offer_state < 4 AND NOT offer_state = 2")
-                var bestOffer: GrandExchangeOffer? = null
-
-                while(sell_offer.next())
-                {
-                    val otherOffer = GrandExchangeOffer.fromQuery(sell_offer)
-                    if(!otherOffer.isActive) continue
-                    if(otherOffer.offeredValue > offer.offeredValue) continue
-                    if(bestOffer == null) bestOffer = otherOffer
-                    else if(otherOffer.offeredValue < bestOffer.offeredValue) bestOffer = otherOffer
+            with (GEDB.connect()) {
+                val conn = this
+                if(offer.isActive) {
+                    val stmt = conn.createStatement()
+                    val olderOffers = stmt.executeQuery("SELECT * FROM player_offers WHERE item_id = ${offer.itemID} AND is_sale = ${!offer.sell} AND offer_state < 4 AND NOT offer_state = 2 AND time_stamp < ${offer.timeStamp}")
+                    if(tryOffers(offer, olderOffers, true)) return
+                    val newerOffers = stmt.executeQuery("SELECT * FROM player_offers WHERE item_id = ${offer.itemID} AND is_sale = ${!offer.sell} AND offer_state < 4 AND NOT offer_state = 2 AND time_stamp >= ${offer.timeStamp}")
+                    if(tryOffers(offer, newerOffers, false)) return
                 }
+            }
+        }
 
-                if(bestOffer != null)
-                {
-                    val before = offer.amountLeft
-                    exchange(offer,bestOffer)
-                    if(offer.amountLeft != before)
-                        SystemLogger.logGE("Purchased ${before - offer.amountLeft}x ${getItemName(offer.itemID)} @ B:${offer.offeredValue}/S:${bestOffer.offeredValue} gp each.")
-                }
+        private fun tryOffers(offer: GrandExchangeOffer, set: ResultSet, offerBiased: Boolean) : Boolean {
+            var bestOffer: GrandExchangeOffer? = null
+            while(set.next()) {
+                val otherOffer = GrandExchangeOffer.fromQuery(set)
+                if (otherOffer.amountLeft < 1 || offer.amountLeft < 1) continue
+                val buyOffer = if(otherOffer.sell) offer else otherOffer
+                val sellOffer = if(otherOffer.sell) otherOffer else offer
+                if (buyOffer.offeredValue < sellOffer.offeredValue) continue
+                bestOffer = if (bestOffer == null) otherOffer
+                else compareOffers(offer, otherOffer, bestOffer, offerBiased)
+            }
+            set.close()
+            if(bestOffer != null) exchange(offer, bestOffer)
+            return bestOffer != null
+        }
 
-                if(offer.amountLeft > 0)
-                {
-                    val botStmt = conn.createStatement()
-                    val bot_offer = botStmt.executeQuery("SELECT * from bot_offers where item_id = ${offer.itemID}")
-                    if(bot_offer.next())
-                    {
-                        val botOffer = GrandExchangeOffer.fromBotQuery(bot_offer)
-                        val before = offer.amountLeft
-                        exchange(offer, botOffer)
-                        if(offer.amountLeft != before)
-                            SystemLogger.logGE("Purchased FROM BOT ${offer.amountLeft - before}x ${getItemName(offer.itemID)}")
-                    }
-                    botStmt.close()
-                }
-                sellStmt.close()
+        private fun compareOffers(offer: GrandExchangeOffer, first: GrandExchangeOffer, second: GrandExchangeOffer, biased: Boolean) : GrandExchangeOffer {
+            return if(offer.sell) {
+                if(biased) if(first.offeredValue > second.offeredValue) first else second
+                else if(first.offeredValue < second.offeredValue) first else second
+            } else {
+                if(biased) if(first.offeredValue < second.offeredValue) first else second
+                else if(first.offeredValue > second.offeredValue) first else second
             }
         }
 
@@ -233,6 +256,8 @@ class GrandExchange : StartupListener {
             val seller = if(offer.sell) offer else other
             val buyer = if(offer == seller) other else offer
 
+            val sellerBias = seller.timeStamp > buyer.timeStamp
+
             //If the buyer is buying for less than the seller is selling for, don't exchange
             if(seller.offeredValue > buyer.offeredValue) return
 
@@ -242,10 +267,10 @@ class GrandExchange : StartupListener {
             if(seller.amountLeft < 1 && seller.player != null)
                 seller.player!!.audioManager.send(Audio(4042,1,1))
 
-            seller.addWithdrawItem(995, amount * seller.offeredValue)
+            seller.addWithdrawItem(995, amount * if(sellerBias) buyer.offeredValue else seller.offeredValue)
             buyer.addWithdrawItem(seller.itemID, amount)
 
-            if(seller.offeredValue < buyer.offeredValue)
+            if(!sellerBias)
                 buyer.addWithdrawItem(995, amount * (buyer.offeredValue - seller.offeredValue))
 
             if(seller.amountLeft < 1)
@@ -253,8 +278,8 @@ class GrandExchange : StartupListener {
             if(buyer.amountLeft < 1)
                 buyer.offerState = OfferState.COMPLETED
 
-            seller.totalCoinExchange += seller.offeredValue * amount
-            buyer.totalCoinExchange += seller.offeredValue * amount
+            seller.totalCoinExchange += if(sellerBias) buyer.offeredValue else seller.offeredValue * amount
+            buyer.totalCoinExchange += if(sellerBias) buyer.offeredValue else seller.offeredValue * amount
 
             seller.update()
             val sellerPlayer = Repository.uid_map[seller.playerUID]
