@@ -7,6 +7,7 @@ import rs09.ServerConstants
 import rs09.game.ai.ArtificialSession
 import rs09.game.content.global.shops.Shop
 import rs09.game.content.global.shops.ShopItem
+import rs09.game.system.config.ConfigParser
 import rs09.game.system.config.ServerConfigParser
 import rs09.game.system.config.XteaParser
 import rs09.game.world.GameWorld
@@ -28,8 +29,9 @@ object TestUtils {
     fun preTestSetup() {
         if(ServerConstants.DATA_PATH == null) {
             ServerConfigParser.parse("worldprops/test.conf")
-            XteaParser().load()
             Cache.init(this::class.java.getResource("cache").path.toString())
+            ConfigParser().prePlugin()
+            ConfigParser().postPlugin()
         }
     }
 
