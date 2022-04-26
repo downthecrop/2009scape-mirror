@@ -12,11 +12,7 @@ import rs09.game.system.config.XteaParser
 
 class RegionTests {
     companion object {
-        init {
-            ServerConfigParser.parse("worldprops/default.conf")
-            XteaParser().load()
-            Cache.init(this::class.java.getResource("cache")?.path.toString())
-        }
+        init {TestUtils.preTestSetup();}
     }
 
     @Test fun testRegionLoad() {
