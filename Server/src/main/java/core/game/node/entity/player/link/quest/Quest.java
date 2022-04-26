@@ -117,6 +117,9 @@ public abstract class Quest implements Plugin<Object> {
 	 * @param player The player.
 	 */
 	public void finish(Player player) {
+		if(player.getQuestRepository().isComplete(name)) {
+			throw new IllegalStateException("Tried to complete quest " + name + " twice, which is not allowed!");
+		}
 		for (int i = 0; i < 18; i++) {
 			if (i == 9 || i == 3 || i == 6) {
 				continue;
