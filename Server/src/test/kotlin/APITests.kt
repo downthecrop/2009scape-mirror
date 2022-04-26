@@ -13,8 +13,8 @@ import rs09.game.node.entity.skill.slayer.SlayerManager
 import rs09.game.system.SystemLogger
 
 object APITests {
-    val testPlayer = Player(PlayerDetails("test", "testing"))
-    val testPlayer2 = Player(PlayerDetails("test2", "testing"))
+    val testPlayer = TestUtils.getMockPlayer("test")
+    val testPlayer2 = TestUtils.getMockPlayer("test2")
 
     @Test fun testIfaceSettings(){
         var builder = IfaceSettingsBuilder()

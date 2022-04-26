@@ -39,8 +39,8 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
 {
     val stockInstances = HashMap<Int, Container>()
     val playerStock = if (general) generalPlayerStock else Container(40, ContainerType.SHOP)
-    private val needsUpdate = HashMap<Int, Boolean>()
-    private val restockRates = HashMap<Int,Int>()
+    val needsUpdate = HashMap<Int, Boolean>()
+    val restockRates = HashMap<Int,Int>()
 
     init {
         if(!getServerConfig().getBoolean(Shops.personalizedShops, false))
@@ -93,7 +93,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         setAttribute(player, "shop-main", main)
     }
 
-    private fun getContainer(player: Player) : Container
+    public fun getContainer(player: Player) : Container
     {
         val container = if(getServerConfig().getBoolean(Shops.personalizedShops, false))
             stockInstances[player.username.hashCode()] ?: generateStockContainer().also { stockInstances[player.username.hashCode()] = it }
@@ -131,6 +131,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         stockInstances.filter { needsUpdate[it.key] == true }.forEach{ (player,cont) ->
             for(i in 0 until cont.capacity())
             {
+                if(cont[i] == null) continue
                 if(stock.size < i + 1) break
                 if(GameWorld.ticks % stock[i].restockRate != 0) continue
 
@@ -236,29 +237,29 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         return max(price, 1)
     }
 
-    fun buy(player: Player, slot: Int, amount: Int)
+    fun buy(player: Player, slot: Int, amount: Int) : TransactionStatus
     {
-        if(amount !in 1..Integer.MAX_VALUE) return
+        if(amount !in 1..Integer.MAX_VALUE) return TransactionStatus.Failure("Invalid amount: $amount")
         val isMainStock = getAttribute(player, "shop-main", false)
         if(!isMainStock && player.ironmanManager.isIronman)
         {
             sendDialogue(player, "As an ironman, you cannot buy from player stock in shops.")
-            return
+            return TransactionStatus.Failure("Ironman buying from player stock")
         }
-        val cont = if (isMainStock) getAttribute<Container?>(player, "shop-cont", null) ?: return else playerStock
+        val cont = if (isMainStock) getAttribute<Container?>(player, "shop-cont", null) ?: return TransactionStatus.Failure("Invalid shop-cont attr") else playerStock
         val inStock = cont[slot]
         val item = Item(inStock.id, amount)
         if(inStock.amount < amount)
             item.amount = inStock.amount
 
-        if(inStock.amount > stock[slot].amount && !getServerConfig().getBoolean(Shops.personalizedShops, false))
+        if(inStock.amount > stock[slot].amount && !getServerConfig().getBoolean(Shops.personalizedShops, false) && player.ironmanManager.isIronman)
         {
             sendDialogue(player, "As an ironman, you cannot buy overstocked items from shops.")
-            return
+            return TransactionStatus.Failure("Ironman overstock purchase")
         }
 
         val cost = getBuyPrice(player, slot)
-        if(cost.id == -1) sendMessage(player, "This shop cannot sell that item.").also { return }
+        if(cost.id == -1) sendMessage(player, "This shop cannot sell that item.").also { return TransactionStatus.Failure("Shop cannot sell this item")}
 
         if(currency == Items.COINS_995){
             var amt = item.amount
@@ -276,7 +277,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
                 if(!hasSpaceFor(player, item)) {
                     addItem(player, cost.id, cost.amount)
                     sendMessage(player, "You don't have enough inventory space to buy that many.")
-                    return
+                    return TransactionStatus.Failure("Not enough inventory space")
                 }
 
                 if(!isMainStock && cont[slot].amount - item.amount == 0)
@@ -303,20 +304,22 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         {
             sendMessage(player, "You don't have enough ${cost.name.toLowerCase()} to buy that many.")
         }
+
+        return TransactionStatus.Success()
     }
 
-    fun sell(player: Player, slot: Int, amount: Int)
+    fun sell(player: Player, slot: Int, amount: Int) : TransactionStatus
     {
-        if(amount !in 1..Integer.MAX_VALUE) return
+        if(amount !in 1..Integer.MAX_VALUE) return TransactionStatus.Failure("Invalid amount: $amount")
         val playerInventory = player.inventory[slot]
         if(playerInventory.id in intArrayOf(Items.COINS_995, Items.TOKKUL_6529, Items.ARCHERY_TICKET_1464))
         {
             sendMessage(player, "You can't sell currency to a shop.")
-            return
+            return TransactionStatus.Failure("Tried to sell currency - ${playerInventory.id}")
         }
         val item = Item(playerInventory.id, amount)
         val (container,profit) = getSellPrice(player, slot)
-        if(profit.amount == -1) sendMessage(player, "This item can't be sold to this shop.").also { return }
+        if(profit.amount == -1) sendMessage(player, "This item can't be sold to this shop.").also { return TransactionStatus.Failure("Can't sell this item to this shop - ${playerInventory.id}, general: $general, price: $profit") }
         if(amount > player.inventory.getAmount(item.id))
             item.amount = player.inventory.getAmount(item.id)
 
@@ -336,7 +339,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
             if(!hasSpaceFor(player, profit)){
                 sendMessage(player, "You don't have enough space to do that.")
                 addItem(player, item.id, item.amount)
-                return
+                return TransactionStatus.Failure("Did not have enough inventory space")
             }
             if(container == playerStock && getAttribute(player, "shop-main", false)){
                 showTab(player, false)
@@ -358,6 +361,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
                 needsUpdate[ServerConstants.SERVER_NAME.hashCode()] = true
             }
         }
+        return TransactionStatus.Success()
     }
 
     fun getStockSlot(itemId: Int): Pair<Boolean, Int>
@@ -382,6 +386,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
             }
         }
 
+        if(shopSlot == -1) isPlayerStock = true
         return Pair(isPlayerStock, shopSlot)
     }
 
@@ -389,5 +394,10 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         //General stores globally share player stock (weird quirk, right?)
         val generalPlayerStock = Container(40, ContainerType.SHOP)
         val listenerInstances = HashMap<Int, ShopListener>()
+    }
+
+    sealed class TransactionStatus {
+        class Success : TransactionStatus()
+        class Failure(val reason: String) : TransactionStatus()
     }
 }
