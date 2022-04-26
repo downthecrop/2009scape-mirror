@@ -198,11 +198,19 @@ public final class HouseManager {
 		player.lock(1);
 		player.sendMessage("House location: " + region.getBaseLocation() + ", entry: " + getEnterLocation());
 		player.getProperties().setTeleportLocation(getEnterLocation());
-		player.getInterfaceManager().openComponent(399);
+		openLoadInterface(player);
 		player.getConfigManager().set(261, buildingMode);
 		player.getConfigManager().set(262, getRoomAmount());
-		player.getAudioManager().send(new Audio(984));
 		player.getMusicPlayer().unlock(454, true);
+	}
+
+	public void openLoadInterface(Player player) {
+		player.getInterfaceManager().openComponent(399);
+		player.getAudioManager().send(new Audio(984));
+		submitCloseLoadInterfacePulse(player);
+	}
+
+	public void submitCloseLoadInterfacePulse(Player player) {
 		GameWorld.getPulser().submit(new Pulse(1, player) {
 			@Override
 			public boolean pulse() {
@@ -212,7 +220,6 @@ public final class HouseManager {
 						player.getDialogueInterpreter().sendDialogues(servant.getType().getId(), servant.getType().getId() == 4243 ? FacialExpression.HALF_GUILTY : null, "Welcome.");
 					}
 				}
-//				player.getInterfaceManager().switchWindowMode(1);
 				player.getInterfaceManager().close();
 				return true;
 			}
@@ -685,7 +692,7 @@ public final class HouseManager {
 	 * @return {@code True} if an active region for the house exists.
 	 */
 	public boolean isLoaded() {
-		return region != null && region.isActive() || dungeon != null && dungeon.isActive();
+		return (region != null) || (dungeon != null);
 	}
 
 	/**
