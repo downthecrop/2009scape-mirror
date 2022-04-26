@@ -1,4 +1,7 @@
+import core.game.node.entity.player.link.music.MusicEntry
 import core.game.node.entity.skill.construction.HouseManager
+import core.game.node.entity.skill.construction.Servant
+import core.game.node.entity.skill.construction.ServantType
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -20,5 +23,23 @@ class HouseManagerTests {
         Assertions.assertEquals(399, testPlayer.interfaceManager.opened.id)
         TestUtils.advanceTicks(5)
         Assertions.assertNotEquals(null, testPlayer.interfaceManager.opened)
+    }
+
+    @Test fun enterShouldSendServantIfHasOne() {
+        manager.servant = Servant(ServantType.BUTLER)
+        manager.enter(testPlayer, false)
+        TestUtils.advanceTicks(5)
+        Assertions.assertEquals(true, manager.servant.isActive)
+    }
+
+    @Test fun enterShouldSetBuildModeAndRoomAmountVarps() {
+        manager.enter(testPlayer, false)
+        Assertions.assertEquals(true, testPlayer.varpManager.get(261).varbits.isNotEmpty())
+        Assertions.assertEquals(true, testPlayer.varpManager.get(262).varbits.isNotEmpty())
+    }
+
+    @Test fun enterShouldUnlockPOHMusicTrack() {
+        manager.enter(testPlayer, false)
+        Assertions.assertEquals(true, testPlayer.musicPlayer.unlocked.contains(MusicEntry.forId(454).index))
     }
 }

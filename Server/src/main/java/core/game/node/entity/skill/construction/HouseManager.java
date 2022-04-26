@@ -199,8 +199,8 @@ public final class HouseManager {
 		player.sendMessage("House location: " + region.getBaseLocation() + ", entry: " + getEnterLocation());
 		player.getProperties().setTeleportLocation(getEnterLocation());
 		openLoadInterface(player);
-		player.getConfigManager().set(261, buildingMode);
-		player.getConfigManager().set(262, getRoomAmount());
+		checkForAndSpawnServant(player);
+		updateVarbits(player, buildingMode);
 		player.getMusicPlayer().unlock(454, true);
 	}
 
@@ -214,16 +214,30 @@ public final class HouseManager {
 		GameWorld.getPulser().submit(new Pulse(1, player) {
 			@Override
 			public boolean pulse() {
-				if (hasServant()){
-					spawnServant();
-					if (servant.isGreet()){
-						player.getDialogueInterpreter().sendDialogues(servant.getType().getId(), servant.getType().getId() == 4243 ? FacialExpression.HALF_GUILTY : null, "Welcome.");
-					}
-				}
 				player.getInterfaceManager().close();
 				return true;
 			}
 		});
+	}
+
+	public void checkForAndSpawnServant(Player player) {
+		if(!hasServant()) return;
+
+		GameWorld.getPulser().submit(new Pulse(1, player) {
+			@Override
+			public boolean pulse() {
+				spawnServant();
+				if (servant.isGreet()){
+					player.getDialogueInterpreter().sendDialogues(servant.getType().getId(), servant.getType().getId() == 4243 ? FacialExpression.HALF_GUILTY : null, "Welcome.");
+				}
+				return true;
+			}
+		});
+	}
+
+	public void updateVarbits(Player player, boolean build) {
+		player.varpManager.get(261).setVarbit(0, build ? 1 : 0);
+		player.varpManager.get(262).setVarbit(0, getRoomAmount());
 	}
 
 	/**
