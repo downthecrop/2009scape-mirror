@@ -373,7 +373,7 @@ public final class HouseManager {
 	 * Creates the default house.
 	 * @param location The house location.
 	 */
-	public void create(HouseLocation location) {
+	public void createNewHouseAt(HouseLocation location) {
 		clearRooms();
 		Room room = rooms[0][4][3] = new Room(RoomProperties.GARDEN);
 		room.configure(style);
@@ -427,7 +427,7 @@ public final class HouseManager {
 			for (int x = 0; x < 8; x++) {
 				for (int y = 0; y < 8; y++) {
 					Room room = rooms[3][x][y];
-					if (hasRoom(3, x, y)) {
+					if (hasRoomAt(3, x, y)) {
 						BuildRegionChunk copy = room.getChunk().copy(dungeon.getPlanes()[0]);
 						dungeon.replaceChunk(0, x, y, copy, from);
 						room.loadDecorations(3, copy, this);
@@ -524,7 +524,7 @@ public final class HouseManager {
 	 * @param roomY The room y-coordinate.
 	 * @return {@code True} if so.
 	 */
-	public boolean hasRoom(int z, int roomX, int roomY) {
+	public boolean hasRoomAt(int z, int roomX, int roomY) {
 		Room room = rooms[z][roomX][roomY];
 		return room != null && !room.getProperties().isRoof();
 	}
