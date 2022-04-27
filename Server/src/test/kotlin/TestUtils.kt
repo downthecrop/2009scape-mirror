@@ -28,7 +28,7 @@ object TestUtils {
 
     fun preTestSetup() {
         if(ServerConstants.DATA_PATH == null) {
-            ServerConfigParser.parse("worldprops/test.conf")
+            ServerConfigParser.parse(this::class.java.getResource("test.conf"))
             Cache.init(this::class.java.getResource("cache").path.toString())
             ConfigParser().prePlugin()
             ConfigParser().postPlugin()
