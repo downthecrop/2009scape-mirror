@@ -386,61 +386,73 @@ public final class HouseManager {
 	 * @return The region.
 	 */
 	public DynamicRegion construct() {
-		Region from = RegionManager.forId(style.getRegionId());
-		Region.load(from, true);
-		RegionChunk defaultChunk = from.getPlanes()[style.getPlane()].getRegionChunk(1, 0);
-		RegionChunk defaultSkyChunk = from.getPlanes()[1].getRegionChunk(0,0);
 		houseRegion = getPreparedRegion();
 		configureRoofs();
-		for (int z = 0; z < 4; z++) {
-			for (int x = 0; x < 8; x++) {
-				for (int y = 0; y < 8; y++) {
-					if(z == 3){
-						houseRegion.replaceChunk(z, x, y, defaultSkyChunk.copy(houseRegion.getPlanes()[z]), from);
-						 continue;
-					}
-					Room room = rooms[z][x][y];
-					if (room != null) {
-						if (room.getProperties().isRoof() && buildingMode) {
-							continue;
-						}
-						BuildRegionChunk copy = room.getChunk().copy(houseRegion.getPlanes()[z]);
-						houseRegion.replaceChunk(z, x, y, copy, from);
-						room.loadDecorations(z, copy, this);
-					} else {
-						houseRegion.replaceChunk(z, x, y, z != 0 ? null : defaultChunk.copy(houseRegion.getPlanes()[0]), from);
-					}
-				}
-			}
-		}
+		prepareHouseChunks(style, houseRegion, buildingMode, rooms);
+
 		if (hasDungeon()) {
-			defaultChunk = from.getPlanes()[style.getPlane()].getRegionChunk(3, 0);
 			dungeonRegion = getPreparedRegion();
-			for (int x = 0; x < 8; x++) {
-				for (int y = 0; y < 8; y++) {
-					Room room = rooms[3][x][y];
-					if (hasRoomAt(3, x, y)) {
-						BuildRegionChunk copy = room.getChunk().copy(dungeonRegion.getPlanes()[0]);
-						dungeonRegion.replaceChunk(0, x, y, copy, from);
-						room.loadDecorations(3, copy, this);
-					} else {
-						dungeonRegion.replaceChunk(0, x, y, buildingMode ? null : defaultChunk.copy(dungeonRegion.getPlanes()[0]), from);
-					}
-				}
-			}
-			houseRegion.link(dungeonRegion);
+			prepareDungeonChunks(style, dungeonRegion, buildingMode, houseRegion, rooms[3]);
 		}
+
 		ZoneBuilder.configure(zone);
 		return houseRegion;
 	}
 
-	public DynamicRegion getPreparedRegion() {
+	private DynamicRegion getPreparedRegion() {
 		ZoneBorders borders = DynamicRegion.reserveArea(8,8);
 		DynamicRegion region = new DynamicRegion(-1, borders.getSouthWestX() >> 6, borders.getSouthWestY() >> 6);
 		region.setBorders(borders);
 		region.setUpdateAllPlanes(true);
 		RegionManager.addRegion(region.getId(), region);
 		return region;
+	}
+
+	private void prepareHouseChunks(HousingStyle style, DynamicRegion target, boolean buildingMode, Room[][][] rooms) {
+		Region from = RegionManager.forId(style.getRegionId());
+		Region.load(from, true);
+		RegionChunk defaultChunk = from.getPlanes()[style.getPlane()].getRegionChunk(1, 0);
+		RegionChunk defaultSkyChunk = from.getPlanes()[1].getRegionChunk(0,0);
+		for (int z = 0; z < 4; z++) {
+			for (int x = 0; x < 8; x++) {
+				for (int y = 0; y < 8; y++) {
+					if(z == 3){
+						target.replaceChunk(z, x, y, defaultSkyChunk.copy(target.getPlanes()[z]), from);
+						continue;
+					}
+					Room room = rooms[z][x][y];
+					if (room != null) {
+						if (room.getProperties().isRoof() && buildingMode) {
+							continue;
+						}
+						BuildRegionChunk copy = room.getChunk().copy(target.getPlanes()[z]);
+						target.replaceChunk(z, x, y, copy, from);
+						room.loadDecorations(z, copy, this);
+					} else {
+						target.replaceChunk(z, x, y, z != 0 ? null : defaultChunk.copy(target.getPlanes()[0]), from);
+					}
+				}
+			}
+		}
+	}
+
+	private void prepareDungeonChunks(HousingStyle style, DynamicRegion target, boolean buildingMode, DynamicRegion house, Room[][] rooms) {
+		Region from = RegionManager.forId(style.getRegionId());
+		Region.load(from, true);
+		RegionChunk defaultChunk = from.getPlanes()[style.getPlane()].getRegionChunk(3, 0);
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+				Room room = rooms[x][y];
+				if (room != null) {
+					BuildRegionChunk copy = room.getChunk().copy(target.getPlanes()[0]);
+					target.replaceChunk(0, x, y, copy, from);
+					room.loadDecorations(3, copy, this);
+				} else {
+					target.replaceChunk(0, x, y, buildingMode ? null : defaultChunk.copy(target.getPlanes()[0]), from);
+				}
+			}
+		}
+		house.link(target);
 	}
 
 	/**
