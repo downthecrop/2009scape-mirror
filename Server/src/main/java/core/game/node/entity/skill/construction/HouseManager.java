@@ -392,7 +392,7 @@ public final class HouseManager {
 
 		if (hasDungeon()) {
 			dungeonRegion = getPreparedRegion();
-			prepareDungeonChunks(style, dungeonRegion, buildingMode, houseRegion, rooms[3]);
+			prepareDungeonChunks(style, dungeonRegion, houseRegion, buildingMode, rooms[3]);
 		}
 
 		ZoneBuilder.configure(zone);
@@ -436,7 +436,7 @@ public final class HouseManager {
 		}
 	}
 
-	private void prepareDungeonChunks(HousingStyle style, DynamicRegion target, boolean buildingMode, DynamicRegion house, Room[][] rooms) {
+	private void prepareDungeonChunks(HousingStyle style, DynamicRegion target, DynamicRegion house, boolean buildingMode, Room[][] rooms) {
 		Region from = RegionManager.forId(style.getRegionId());
 		Region.load(from, true);
 		RegionChunk defaultChunk = from.getPlanes()[style.getPlane()].getRegionChunk(3, 0);
