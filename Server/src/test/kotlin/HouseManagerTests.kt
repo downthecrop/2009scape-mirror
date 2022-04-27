@@ -41,6 +41,12 @@ class HouseManagerTests {
         Assertions.assertNotEquals(null, newManager.region.borders)
     }
 
+    @Test fun constructShouldSetUpdateAllPlanes() {
+        val newManager = HouseManager()
+        newManager.construct()
+        Assertions.assertEquals(true, newManager.region.isUpdateAllPlanes)
+    }
+
     @Test fun createShouldPlaceGardenInRooms() {
         manager.createNewHouseAt(HouseLocation.RIMMINGTON)
         Assertions.assertEquals(true, manager.hasRoomAt(0, 4, 3))
