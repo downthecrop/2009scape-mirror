@@ -29,10 +29,16 @@ class HouseManagerTests {
         Assertions.assertEquals(true, RegionManager.forId(newManager.region.id) == newManager.region)
     }
 
-    @Test fun constructShouldSetTheRegion() {
+    @Test fun constructShouldSetTheRegionInTheHouseManager() {
         val newManager = HouseManager()
         newManager.construct()
         Assertions.assertNotEquals(null, newManager.region)
+    }
+
+    @Test fun constructShouldSetTheRegionBorders() {
+        val newManager = HouseManager()
+        newManager.construct()
+        Assertions.assertNotEquals(null, newManager.region.borders)
     }
 
     @Test fun createShouldPlaceGardenInRooms() {
