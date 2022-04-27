@@ -523,7 +523,7 @@ public class HouseServantDialogue extends DialoguePlugin {
 
 			@Override
 			public boolean pulse() {
-				if (player == null || player.getHouseManager().getRegion() != player.getViewport().getRegion()) { //TODO: Check if in dungeon?
+				if (player == null || player.getHouseManager().getHouseRegion() != player.getViewport().getRegion()) { //TODO: Check if in dungeon?
 					return true;
 				}
 				int amt = player.getBank().getAmount(item.getId());

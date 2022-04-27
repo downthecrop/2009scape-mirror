@@ -20,38 +20,38 @@ class HouseManagerTests {
         val newManager = HouseManager()
         newManager.createNewHouseAt(HouseLocation.RIMMINGTON) //add a room to it, already tested below
         newManager.construct()
-        Assertions.assertNotEquals(0, newManager.region.planes[0].getRegionChunk(4, 3).objects.size)
+        Assertions.assertNotEquals(0, newManager.houseRegion.planes[0].getRegionChunk(4, 3).objects.size)
     }
 
     @Test fun constructShouldRegisterNewRegionToRegionManager() {
         val newManager = HouseManager()
         newManager.construct()
-        Assertions.assertEquals(true, RegionManager.forId(newManager.region.id) == newManager.region)
+        Assertions.assertEquals(true, RegionManager.forId(newManager.houseRegion.id) == newManager.houseRegion)
     }
 
     @Test fun constructShouldSetTheRegionInTheHouseManager() {
         val newManager = HouseManager()
         newManager.construct()
-        Assertions.assertNotEquals(null, newManager.region)
+        Assertions.assertNotEquals(null, newManager.houseRegion)
     }
 
     @Test fun constructShouldSetTheRegionBorders() {
         val newManager = HouseManager()
         newManager.construct()
-        Assertions.assertNotEquals(null, newManager.region.borders)
+        Assertions.assertNotEquals(null, newManager.houseRegion.borders)
     }
 
     @Test fun constructShouldSetUpdateAllPlanes() {
         val newManager = HouseManager()
         newManager.construct()
-        Assertions.assertEquals(true, newManager.region.isUpdateAllPlanes)
+        Assertions.assertEquals(true, newManager.houseRegion.isUpdateAllPlanes)
     }
 
     @Test fun constructShouldReplacePlanes1And2UnusedChunksAndAllPlane3ChunksWithEmptyChunks() {
         val newManager = HouseManager()
         newManager.construct()
         for(z in 1..3)
-            for (objs in newManager.region.planes[z].objects)
+            for (objs in newManager.houseRegion.planes[z].objects)
                 for (obj in objs) Assertions.assertEquals(null, obj)
     }
 
