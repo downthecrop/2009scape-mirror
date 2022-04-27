@@ -15669,9 +15669,9 @@
     "high_alchemy": "900",
     "weight": "2.2",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Staff of air"
   },
   {
@@ -15708,9 +15708,9 @@
     "high_alchemy": "900",
     "weight": "2.2",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Staff of water"
   },
   {
@@ -15747,9 +15747,9 @@
     "high_alchemy": "900",
     "weight": "2.2",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Staff of earth"
   },
   {
@@ -15786,9 +15786,9 @@
     "high_alchemy": "900",
     "weight": "2.2",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "1426",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Staff of fire"
   },
   {
@@ -15903,9 +15903,9 @@
     "high_alchemy": "9300",
     "weight": "2.25",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Fire battlestaff"
   },
   {
@@ -15942,9 +15942,9 @@
     "high_alchemy": "9300",
     "weight": "2.2",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Water battlestaff"
   },
   {
@@ -15982,9 +15982,9 @@
     "high_alchemy": "9300",
     "weight": "2.25",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Air battlestaff"
   },
   {
@@ -16022,9 +16022,9 @@
     "high_alchemy": "9300",
     "weight": "2.2",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Earth battlestaff"
   },
   {
@@ -32518,9 +32518,9 @@
     "high_alchemy": "10200",
     "weight": "2.2",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Lava battlestaff"
   },
   {
@@ -32549,9 +32549,9 @@
     "high_alchemy": "27000",
     "weight": "2",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Mystic lava staff"
   },
   {
@@ -32667,6 +32667,7 @@
     "attack_speed": "4",
     "two_handed": "true",
     "weapon_interface": "9",
+    "equip_audio": "1003",
     "render_anim": "2583",
     "defence_anim": "397",
     "equipment_slot": "3",
@@ -32676,7 +32677,6 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3095",
-    "equip_audio": "1003",
     "bonuses": "3,4,-4,0,0,1,2,1,0,0,0,5,0,0,0"
   },
   {
@@ -32690,6 +32690,7 @@
     "attack_speed": "4",
     "two_handed": "true",
     "weapon_interface": "9",
+    "equip_audio": "1003",
     "render_anim": "2583",
     "defence_anim": "397",
     "equipment_slot": "3",
@@ -32699,7 +32700,6 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3096",
-    "equip_audio": "1003",
     "bonuses": "4,6,-4,0,0,2,3,1,0,0,0,7,0,0,0"
   },
   {
@@ -32714,6 +32714,7 @@
     "attack_speed": "4",
     "two_handed": "true",
     "weapon_interface": "9",
+    "equip_audio": "1003",
     "render_anim": "2583",
     "defence_anim": "397",
     "equipment_slot": "3",
@@ -32723,7 +32724,6 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3097",
-    "equip_audio": "1003",
     "bonuses": "8,11,-4,0,0,3,6,2,0,0,0,12,0,0,0"
   },
   {
@@ -32737,6 +32737,7 @@
     "attack_speed": "4",
     "two_handed": "true",
     "weapon_interface": "9",
+    "equip_audio": "1003",
     "render_anim": "2583",
     "defence_anim": "397",
     "equipment_slot": "3",
@@ -32746,7 +32747,6 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3098",
-    "equip_audio": "1003",
     "bonuses": "10,14,-4,0,0,4,7,2,0,0,0,14,0,0,0"
   },
   {
@@ -32760,6 +32760,7 @@
     "attack_speed": "4",
     "two_handed": "true",
     "weapon_interface": "9",
+    "equip_audio": "1003",
     "render_anim": "2583",
     "defence_anim": "397",
     "equipment_slot": "3",
@@ -32769,7 +32770,6 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3099",
-    "equip_audio": "1003",
     "bonuses": "11,16,-4,0,0,4,8,2,0,0,0,17,0,0,0"
   },
   {
@@ -32782,6 +32782,7 @@
     "attack_speed": "4",
     "two_handed": "true",
     "weapon_interface": "9",
+    "equip_audio": "1003",
     "render_anim": "2583",
     "defence_anim": "397",
     "equipment_slot": "3",
@@ -32791,7 +32792,6 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3100",
-    "equip_audio": "1003",
     "bonuses": "18,23,-4,0,0,6,12,3,0,0,0,24,0,0,0"
   },
   {
@@ -32806,6 +32806,7 @@
     "attack_speed": "4",
     "two_handed": "true",
     "weapon_interface": "9",
+    "equip_audio": "1003",
     "render_anim": "2583",
     "defence_anim": "397",
     "equipment_slot": "3",
@@ -32816,7 +32817,6 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3101",
-    "equip_audio": "1003",
     "bonuses": "26,38,-4,0,0,10,19,5,0,0,0,39,0,0,0"
   },
   {
@@ -40581,10 +40581,10 @@
     "high_alchemy": "72000",
     "weight": "0.45",
     "weapon_interface": "11",
+    "equip_audio": "2249",
     "render_anim": "620",
     "lendable": "true",
     "attack_audios": "2720,0,0,0",
-    "equip_audio": "2249",
     "name": "Abyssal whip"
   },
   {
@@ -63089,6 +63089,7 @@
     "ge_buy_limit": "100",
     "examine": "A razor sharp ring of obsidian.",
     "durability": null,
+    "tokkul_price": "375",
     "low_alchemy": "100",
     "high_alchemy": "150",
     "attack_speed": "4",
@@ -63109,6 +63110,7 @@
     "ge_buy_limit": "10",
     "examine": "A razor sharp sword of obsidian.",
     "durability": null,
+    "tokkul_price": "60000",
     "low_alchemy": "16000",
     "high_alchemy": "24000",
     "weight": "1.8",
@@ -63130,6 +63132,7 @@
     "ge_buy_limit": "10",
     "examine": "A spiked shield of Obsidian.",
     "durability": null,
+    "tokkul_price": "67500",
     "low_alchemy": "18000",
     "high_alchemy": "27000",
     "weight": "3.6",
@@ -63148,6 +63151,7 @@
     "ge_buy_limit": "10",
     "examine": "A large knife of Obsidian.",
     "durability": null,
+    "tokkul_price": "37500",
     "low_alchemy": "10000",
     "high_alchemy": "15000",
     "weight": "0.4",
@@ -63169,6 +63173,7 @@
     "turn90cw_anim": "1207",
     "examine": "A staff of obsidian.",
     "walk_anim": "1205",
+    "tokkul_price": "52500",
     "low_alchemy": "14000",
     "turn90ccw_anim": "1208",
     "attack_speed": "6",
@@ -63200,6 +63205,7 @@
     "ge_buy_limit": "10",
     "examine": "A mace of obsidian.",
     "durability": null,
+    "tokkul_price": "45000",
     "low_alchemy": "12000",
     "high_alchemy": "18000",
     "weight": "1.8",
@@ -63220,6 +63226,7 @@
     "turn90cw_anim": "1663",
     "examine": "A maul of obsidian.",
     "walk_anim": "1663",
+    "tokkul_price": "75000",
     "low_alchemy": "20000",
     "turn90ccw_anim": "1663",
     "attack_speed": "7",
@@ -63492,9 +63499,9 @@
     "high_alchemy": "10200",
     "weight": "2.2",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Mud battlestaff"
   },
   {
@@ -63563,6 +63570,7 @@
     "ge_buy_limit": "100",
     "examine": "A cape woven of obsidian plates.",
     "durability": null,
+    "tokkul_price": "90000",
     "low_alchemy": "24000",
     "high_alchemy": "36000",
     "weight": "1.8",
@@ -63782,6 +63790,7 @@
     "attack_speed": "4",
     "two_handed": "true",
     "weapon_interface": "9",
+    "equip_audio": "1003",
     "render_anim": "2583",
     "defence_anim": "397",
     "equipment_slot": "3",
@@ -63791,7 +63800,6 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "6587",
-    "equip_audio": "1003",
     "bonuses": "10,14,-4,0,0,4,7,2,0,0,0,14,1,0,0"
   },
   {
@@ -95042,6 +95050,7 @@
     "turn90ccw_anim": "822",
     "weapon_interface": "12",
     "turn180_anim": "5438",
+    "equip_audio": "3277",
     "render_anim": "1171",
     "equipment_slot": "3",
     "stand_anim": "5363",
@@ -95050,7 +95059,6 @@
     "archery_ticket_price": "0",
     "id": "10487",
     "stand_turn_anim": "823",
-    "equip_audio": "3277",
     "bonuses": "-100,-100,-50,0,0,0,0,0,0,0,0,-10,0,0,0"
   },
   {
@@ -95161,29 +95169,29 @@
     "high_alchemy": "461",
     "destroy": "true",
     "weight": "4.5",
+    "equip_audio": "3284",
     "equipment_slot": "1",
     "destroy_message": "I can buy a replacement from Ava in Draynor Manor; she will charge me 999 coins for this service.",
     "name": "Ava's attractor",
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "10498",
-    "equip_audio": "3284",
     "bonuses": "0,0,0,0,2,0,0,0,2,0,0,0,0,0,0"
   },
   {
-    "destroy_message": "I can obtain a replacement for this from Ava in Draynor Manor. She will need 999 coins to buy the lower",
     "shop_price": "999",
     "examine": "A superior bagged chicken ready to serve you, magnet in claw.",
     "durability": null,
-    "name": "Ava's accumulator",
-    "tradeable": "false",
     "destroy": "true",
     "weight": "4.5",
+    "equip_audio": "3284",
+    "equipment_slot": "1",
+    "destroy_message": "I can obtain a replacement for this from Ava in Draynor Manor. She will need 999 coins to buy the lower",
+    "name": "Ava's accumulator",
+    "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "10499",
-    "bonuses": "0,0,0,0,4,0,1,0,4,0,0,0,0,0,0",
-    "equip_audio": "3284",
-    "equipment_slot": "1"
+    "bonuses": "0,0,0,0,4,0,1,0,4,0,0,0,0,0,0"
   },
   {
     "destroy_message": "I can obtain a replacement for this from the crone who lives west of the Port Phasmatys farm.",
@@ -102227,10 +102235,10 @@
     "high_alchemy": "72001",
     "weight": "1.9",
     "weapon_interface": "16",
+    "equip_audio": "3738",
     "render_anim": "1",
     "lendable": "true",
     "attack_audios": "3731,0,0,0",
-    "equip_audio": "3738",
     "name": "Dark bow"
   },
   {
@@ -106231,9 +106239,9 @@
     "high_alchemy": "10200",
     "weight": "2",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Steam battlestaff"
   },
   {
@@ -122887,15 +122895,15 @@
     "two_handed": "true",
     "weapon_interface": "16",
     "absorb": "0,0,0",
+    "equip_audio": "3738",
     "render_anim": "303",
     "lendable": "true",
     "destroy_message": "Drop",
     "grand_exchange_price": "86850",
+    "attack_audios": "3731,0,0,0",
     "name": "Dark bow",
     "archery_ticket_price": "0",
     "id": "13405",
-    "attack_audios": "3731,0,0,0",
-    "equip_audio": "3738",
     "bonuses": "0,0,0,0,95,0,0,0,0,0,0,0,0,0,0"
   },
   {
@@ -128239,13 +128247,13 @@
     "two_handed": "true",
     "weapon_interface": "9",
     "absorb": "0,0,0",
+    "equip_audio": "1003",
     "lendable": "true",
     "destroy_message": "Drop",
     "grand_exchange_price": "6535",
     "name": "Rune claws",
     "archery_ticket_price": "0",
     "id": "13764",
-    "equip_audio": "1003",
     "bonuses": "26,38,-4,0,0,10,19,5,0,0,0,39,0,0,0"
   },
   {
@@ -137782,9 +137790,9 @@
     "high_alchemy": "40500",
     "destroy": "true",
     "weapon_interface": "9",
+    "equip_audio": "1003",
     "render_anim": "2583",
     "lendable": "true",
-    "equip_audio": "1003",
     "name": "Dragon claws"
   },
   {
@@ -137815,13 +137823,13 @@
     "two_handed": "true",
     "weapon_interface": "9",
     "absorb": "0,0,0",
+    "equip_audio": "1003",
     "lendable": "true",
     "destroy_message": "Drop",
     "grand_exchange_price": "1472441",
     "name": "Dragon claws",
     "archery_ticket_price": "0",
     "id": "14486",
-    "equip_audio": "1003",
     "bonuses": "41,57,-4,0,0,13,26,7,0,0,0,56,0,0,0"
   },
   {
