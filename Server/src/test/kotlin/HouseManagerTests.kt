@@ -1,9 +1,10 @@
 import api.forceWalk
 import core.game.node.entity.player.link.music.MusicEntry
+import core.game.node.entity.skill.construction.HouseLocation
 import core.game.node.entity.skill.construction.HouseManager
 import core.game.node.entity.skill.construction.Servant
 import core.game.node.entity.skill.construction.ServantType
-import org.junit.Assert
+import core.game.world.map.RegionManager
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -14,6 +15,30 @@ class HouseManagerTests {
 
     val manager = HouseManager()
     val testPlayer = TestUtils.getMockPlayer("test")
+
+    @Test fun constructShouldLoadTheConstructedRegion() {
+        val newManager = HouseManager()
+        newManager.createNewHouseAt(HouseLocation.RIMMINGTON) //add a room to it, already tested below
+        newManager.construct()
+        Assertions.assertNotEquals(0, newManager.region.planes[0].getRegionChunk(4, 3).objects.size)
+    }
+
+    @Test fun constructShouldRegisterNewRegionToRegionManager() {
+        val newManager = HouseManager()
+        newManager.construct()
+        Assertions.assertEquals(true, RegionManager.forId(newManager.region.id) == newManager.region)
+    }
+
+    @Test fun constructShouldSetTheRegion() {
+        val newManager = HouseManager()
+        newManager.construct()
+        Assertions.assertNotEquals(null, newManager.region)
+    }
+
+    @Test fun createShouldPlaceGardenInRooms() {
+        manager.createNewHouseAt(HouseLocation.RIMMINGTON)
+        Assertions.assertEquals(true, manager.hasRoomAt(0, 4, 3))
+    }
 
     @Test fun enterShouldConstructDynamicRegionIfItHasNotBeenConstructed() {
         manager.enter(testPlayer, false)
