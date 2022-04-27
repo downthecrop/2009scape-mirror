@@ -776,7 +776,7 @@ public final class HouseManager {
 	 * Gets the region.
 	 * @return The region.
 	 */
-	public Region getRegion() {
+	public DynamicRegion getRegion() {
 		return region;
 	}
 
