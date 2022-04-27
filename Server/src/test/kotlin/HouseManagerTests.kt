@@ -55,6 +55,25 @@ class HouseManagerTests {
                 for (obj in objs) Assertions.assertEquals(null, obj)
     }
 
+    @Test fun leaveShouldPlaceThePlayerAtTheHouseLocationExitLocation() {
+        val newManager = HouseManager()
+        val newPlayer = TestUtils.getMockPlayer("test3")
+        newManager.construct()
+        newManager.enter(newPlayer, false)
+        TestUtils.advanceTicks(5)
+        HouseManager.leave(newPlayer)
+        Assertions.assertEquals(newManager.location.exitLocation, newPlayer.location)
+    }
+
+    @Test fun toggleBuildingModeShouldChangeBuildingMode() {
+        val newManager = HouseManager()
+        val newPlayer = TestUtils.getMockPlayer("test4")
+        newManager.enter(newPlayer, false)
+        TestUtils.advanceTicks(5)
+        newManager.toggleBuildingMode(newPlayer, true)
+        Assertions.assertEquals(true, newManager.isBuildingMode)
+    }
+
     @Test fun createShouldPlaceGardenInRooms() {
         manager.createNewHouseAt(HouseLocation.RIMMINGTON)
         Assertions.assertEquals(true, manager.hasRoomAt(0, 4, 3))
