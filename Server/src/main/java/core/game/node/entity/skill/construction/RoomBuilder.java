@@ -103,7 +103,7 @@ public final class RoomBuilder {
 					break;					
 				case RECURSIVE:
 					room.setAllDecorationIndex(hotspot.getDecorationIndex(deco), h.getHotspot());
-					Scenery[][] objects = player.getHouseManager().getRegion().getPlanes()[l.getZ()].getChunks()[l.getLocalX() >> 3][l.getLocalY() >> 3].getObjects();
+					Scenery[][] objects = player.getHouseManager().getHouseRegion().getPlanes()[l.getZ()].getChunks()[l.getLocalX() >> 3][l.getLocalY() >> 3].getObjects();
 					for (int j = 0; j < objects.length; j++) {
 						for (int k = 0; k < objects[j].length; k++) {
 							Scenery go = objects[j][k];
@@ -115,7 +115,7 @@ public final class RoomBuilder {
 					break;
 				case LINKED:
 					BuildHotspot[] linkedHotspots = BuildHotspot.getLinkedHotspots(h.getHotspot());
-					BuildRegionChunk chunk = (BuildRegionChunk) player.getHouseManager().getRegion().getPlanes()[l.getZ()].getChunks()[l.getLocalX() >> 3][l.getLocalY() >> 3];			
+					BuildRegionChunk chunk = (BuildRegionChunk) player.getHouseManager().getHouseRegion().getPlanes()[l.getZ()].getChunks()[l.getLocalX() >> 3][l.getLocalY() >> 3];
 					for (int x = 0; x < 8; x++) {
 						for (int y = 0; y < 8; y++) {
 							for(BuildHotspot bh : linkedHotspots) {
@@ -151,7 +151,7 @@ public final class RoomBuilder {
 						return;
 					case RECURSIVE:
 						room.setAllDecorationIndex(-1, hotspot.getHotspot());
-						Scenery[][] objects = player.getHouseManager().getRegion().getPlanes()[l.getZ()].getChunks()[l.getLocalX() >> 3][l.getLocalY() >> 3].getObjects();
+						Scenery[][] objects = player.getHouseManager().getHouseRegion().getPlanes()[l.getZ()].getChunks()[l.getLocalX() >> 3][l.getLocalY() >> 3].getObjects();
 						for (int j = 0; j < objects.length; j++) {
 							for (int k = 0; k < objects[j].length; k++) {
 								Scenery go = objects[j][k];

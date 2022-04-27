@@ -166,7 +166,7 @@ public final class BuildingUtils {
 		int roomX = object.getLocation().getChunkX();
 		int roomY = object.getLocation().getChunkY();
 		int z = object.getLocation().getZ();
-		Region region = player.getHouseManager().getRegion();
+		Region region = player.getHouseManager().getHouseRegion();
 		if (HouseManager.isInDungeon(player)) {
 			region = player.getHouseManager().getDungeonRegion();
 			z = 3;
@@ -265,7 +265,7 @@ public final class BuildingUtils {
 						Hotspot h = r.getStairs();
 						if (h != null) {
 							h.setDecorationIndex(decIndex);
-							Region reg = plane == 3 ? player.getHouseManager().getDungeonRegion() : player.getHouseManager().getRegion();
+							Region reg = plane == 3 ? player.getHouseManager().getDungeonRegion() : player.getHouseManager().getHouseRegion();
 							if (reg == null) {
 								continue;
 							}
@@ -352,7 +352,7 @@ public final class BuildingUtils {
 		}
 		Location l = object.getLocation();
 		Room room = player.getHouseManager().getRooms()[l.getZ()][l.getChunkX()][l.getChunkY()];
-		Region region = player.getHouseManager().getRegion();
+		Region region = player.getHouseManager().getHouseRegion();
 		if (HouseManager.isInDungeon(player)) {
 			region = player.getHouseManager().getDungeonRegion();
 			room = player.getHouseManager().getRooms()[3][l.getChunkX()][l.getChunkY()];
@@ -396,7 +396,7 @@ public final class BuildingUtils {
 						Hotspot h = r.getStairs();
 						if (h != null) {
 							h.setDecorationIndex(-1);
-							Region reg = plane == 3 ? player.getHouseManager().getDungeonRegion() : player.getHouseManager().getRegion();
+							Region reg = plane == 3 ? player.getHouseManager().getDungeonRegion() : player.getHouseManager().getHouseRegion();
 							if (reg == null) {
 								continue;
 							}

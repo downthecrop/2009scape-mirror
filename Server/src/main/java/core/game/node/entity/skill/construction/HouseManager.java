@@ -34,12 +34,12 @@ public final class HouseManager {
 	/**
 	 * The current region.
 	 */
-	private DynamicRegion region;
+	private DynamicRegion houseRegion;
 
 	/**
 	 * The current region.
 	 */
-	private DynamicRegion dungeon;
+	private DynamicRegion dungeonRegion;
 
 	/**
 	 * The house location.
@@ -186,7 +186,7 @@ public final class HouseManager {
 		}
 		player.setAttribute("poh_entry", HouseManager.this);
 		player.lock(1);
-		player.sendMessage("House location: " + region.getBaseLocation() + ", entry: " + getEnterLocation());
+		player.sendMessage("House location: " + houseRegion.getBaseLocation() + ", entry: " + getEnterLocation());
 		player.getProperties().setTeleportLocation(getEnterLocation());
 		openLoadInterface(player);
 		checkForAndSpawnServant(player);
@@ -240,7 +240,7 @@ public final class HouseManager {
 	 */
 	public static void leave(Player player) {
 		HouseManager house = player.getAttribute("poh_entry", player.getHouseManager());
-		if (house.getRegion() == null){
+		if (house.getHouseRegion() == null){
 			return;
 		}
 		if (house.isInHouse(player)) {
@@ -278,10 +278,10 @@ public final class HouseManager {
 		int diffX = player.getLocation().getLocalX();
 		int diffY = player.getLocation().getLocalY();
 		int diffZ = player.getLocation().getZ();
-		boolean inDungeon = player.getViewport().getRegion() == dungeon;
+		boolean inDungeon = player.getViewport().getRegion() == dungeonRegion;
 		this.buildingMode = buildingMode;
 		construct();
-		Location newLoc = (dungeon == null ? region : (inDungeon ? dungeon : region)).getBaseLocation().transform(diffX,diffY,diffZ);
+		Location newLoc = (dungeonRegion == null ? houseRegion : (inDungeon ? dungeonRegion : houseRegion)).getBaseLocation().transform(diffX,diffY,diffZ);
 		player.getProperties().setTeleportLocation(newLoc);
 	}
 
@@ -291,15 +291,15 @@ public final class HouseManager {
 	 */
 	public void expelGuests(Player player) {
 		if (isLoaded()) {
-			for (RegionPlane plane : region.getPlanes()) {
+			for (RegionPlane plane : houseRegion.getPlanes()) {
 				for (Player p : plane.getPlayers()) {
 					if (p != player) {
 						leave(p);
 					}
 				}
 			}
-			if (dungeon != null) {
-				for (RegionPlane plane : dungeon.getPlanes()) {
+			if (dungeonRegion != null) {
+				for (RegionPlane plane : dungeonRegion.getPlanes()) {
 					for (Player p : plane.getPlayers()) {
 						if (p != player) {
 							leave(p);
@@ -315,7 +315,7 @@ public final class HouseManager {
 	 * @return The entering location.
 	 */
 	public Location getEnterLocation() {
-		if (region == null) {
+		if (houseRegion == null) {
 			SystemLogger.logErr("House wasn't constructed yet!");
 			return null;
 		}
@@ -327,7 +327,7 @@ public final class HouseManager {
 						if (h.getDecorationIndex() > -1) {
 							Decoration d = h.getHotspot().getDecorations()[h.getDecorationIndex()];
 							if (d == Decoration.PORTAL) {
-								return region.getBaseLocation().transform(x * 8 + h.getChunkX(), y * 8 + h.getChunkY() + 2, 0);
+								return houseRegion.getBaseLocation().transform(x * 8 + h.getChunkX(), y * 8 + h.getChunkY() + 2, 0);
 							}
 						}
 					}
@@ -390,17 +390,14 @@ public final class HouseManager {
 		Region.load(from, true);
 		RegionChunk defaultChunk = from.getPlanes()[style.getPlane()].getRegionChunk(1, 0);
 		RegionChunk defaultSkyChunk = from.getPlanes()[1].getRegionChunk(0,0);
-		ZoneBorders borders = DynamicRegion.reserveArea(8,8);
-		region = new DynamicRegion(-1, borders.getSouthWestX() >> 6, borders.getSouthWestY() >> 6);
-        region.setBorders(borders);
-		region.setUpdateAllPlanes(true);
-		RegionManager.addRegion(region.getId(), region);
+		houseRegion = getPreparedRegion();
+		RegionManager.addRegion(houseRegion.getId(), houseRegion);
 		configureRoofs();
 		for (int z = 0; z < 4; z++) {
 			for (int x = 0; x < 8; x++) {
 				for (int y = 0; y < 8; y++) {
 					if(z == 3){
-						region.replaceChunk(z, x, y, defaultSkyChunk.copy(region.getPlanes()[z]), from);
+						houseRegion.replaceChunk(z, x, y, defaultSkyChunk.copy(houseRegion.getPlanes()[z]), from);
 						 continue;
 					}
 					Room room = rooms[z][x][y];
@@ -408,37 +405,42 @@ public final class HouseManager {
 						if (room.getProperties().isRoof() && buildingMode) {
 							continue;
 						}
-						BuildRegionChunk copy = room.getChunk().copy(region.getPlanes()[z]);
-						region.replaceChunk(z, x, y, copy, from);
+						BuildRegionChunk copy = room.getChunk().copy(houseRegion.getPlanes()[z]);
+						houseRegion.replaceChunk(z, x, y, copy, from);
 						room.loadDecorations(z, copy, this);
 					} else {
-						region.replaceChunk(z, x, y, z != 0 ? null : defaultChunk.copy(region.getPlanes()[0]), from);
+						houseRegion.replaceChunk(z, x, y, z != 0 ? null : defaultChunk.copy(houseRegion.getPlanes()[0]), from);
 					}
 				}
 			}
 		}
 		if (hasDungeon()) {
 			defaultChunk = from.getPlanes()[style.getPlane()].getRegionChunk(3, 0);
-			borders = DynamicRegion.reserveArea(8, 8);
-			dungeon = new DynamicRegion(-1, borders.getSouthWestX() >> 6, borders.getSouthWestY() >> 6);
-			dungeon.setBorders(borders);
-			dungeon.setUpdateAllPlanes(true);
-			RegionManager.addRegion(dungeon.getId(), dungeon);
+			dungeonRegion = getPreparedRegion();
+			RegionManager.addRegion(dungeonRegion.getId(), dungeonRegion);
 			for (int x = 0; x < 8; x++) {
 				for (int y = 0; y < 8; y++) {
 					Room room = rooms[3][x][y];
 					if (hasRoomAt(3, x, y)) {
-						BuildRegionChunk copy = room.getChunk().copy(dungeon.getPlanes()[0]);
-						dungeon.replaceChunk(0, x, y, copy, from);
+						BuildRegionChunk copy = room.getChunk().copy(dungeonRegion.getPlanes()[0]);
+						dungeonRegion.replaceChunk(0, x, y, copy, from);
 						room.loadDecorations(3, copy, this);
 					} else {
-						dungeon.replaceChunk(0, x, y, buildingMode ? null : defaultChunk.copy(dungeon.getPlanes()[0]), from);
+						dungeonRegion.replaceChunk(0, x, y, buildingMode ? null : defaultChunk.copy(dungeonRegion.getPlanes()[0]), from);
 					}
 				}
 			}
-			region.link(dungeon);
+			houseRegion.link(dungeonRegion);
 		}
 		ZoneBuilder.configure(zone);
+		return houseRegion;
+	}
+
+	public DynamicRegion getPreparedRegion() {
+		ZoneBorders borders = DynamicRegion.reserveArea(8,8);
+		DynamicRegion region = new DynamicRegion(-1, borders.getSouthWestX() >> 6, borders.getSouthWestY() >> 6);
+		region.setBorders(borders);
+		region.setUpdateAllPlanes(true);
 		return region;
 	}
 
@@ -469,7 +471,7 @@ public final class HouseManager {
 	 */
 	public Room getRoom(Location l) {
 		int z = l.getZ();
-		if (dungeon != null && l.getRegionId() == dungeon.getId()) {
+		if (dungeonRegion != null && l.getRegionId() == dungeonRegion.getId()) {
 			z = 3;
 		}
 		return rooms[z][l.getChunkX()][l.getChunkY()];
@@ -539,7 +541,7 @@ public final class HouseManager {
 		}
 		int diffX = player.getLocation().getLocalX();
 		int diffY = player.getLocation().getLocalY();
-		player.getProperties().setTeleportLocation(dungeon.getBaseLocation().transform(diffX, diffY, 0));
+		player.getProperties().setTeleportLocation(dungeonRegion.getBaseLocation().transform(diffX, diffY, 0));
 	}
 
 	/**
@@ -680,7 +682,7 @@ public final class HouseManager {
 	 * @return {@code True} if so.
 	 */
 	public boolean isInHouse(Player player) {
-		return isLoaded() && (player.getViewport().getRegion() == region || player.getViewport().getRegion() == dungeon);
+		return isLoaded() && (player.getViewport().getRegion() == houseRegion || player.getViewport().getRegion() == dungeonRegion);
 	}
 
 	/**
@@ -689,7 +691,7 @@ public final class HouseManager {
 	 * @return {@code True} if so.
 	 */
 	public static boolean isInDungeon(Player player) {
-		return player.getViewport().getRegion() == player.getHouseManager().dungeon;
+		return player.getViewport().getRegion() == player.getHouseManager().dungeonRegion;
 	}
 
 	/**
@@ -697,7 +699,7 @@ public final class HouseManager {
 	 * @return {@code True} if an active region for the house exists.
 	 */
 	public boolean isLoaded() {
-		return (region != null) || (dungeon != null);
+		return (houseRegion != null) || (dungeonRegion != null);
 	}
 
 	/**
@@ -776,8 +778,8 @@ public final class HouseManager {
 	 * Gets the region.
 	 * @return The region.
 	 */
-	public DynamicRegion getRegion() {
-		return region;
+	public DynamicRegion getHouseRegion() {
+		return houseRegion;
 	}
 
 	/**
@@ -785,7 +787,7 @@ public final class HouseManager {
 	 * @return The dungeon region.
 	 */
 	public Region getDungeonRegion() {
-		return dungeon;
+		return dungeonRegion;
 	}
 
 	/**
