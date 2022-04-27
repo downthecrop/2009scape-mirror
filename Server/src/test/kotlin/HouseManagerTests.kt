@@ -1,10 +1,10 @@
-import api.forceWalk
 import core.game.node.entity.player.link.music.MusicEntry
 import core.game.node.entity.skill.construction.HouseLocation
 import core.game.node.entity.skill.construction.HouseManager
 import core.game.node.entity.skill.construction.Servant
 import core.game.node.entity.skill.construction.ServantType
 import core.game.world.map.RegionManager
+import core.game.world.map.path.Pathfinder
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -47,6 +47,14 @@ class HouseManagerTests {
         Assertions.assertEquals(true, newManager.region.isUpdateAllPlanes)
     }
 
+    @Test fun constructShouldReplacePlanes1And2UnusedChunksAndAllPlane3ChunksWithEmptyChunks() {
+        val newManager = HouseManager()
+        newManager.construct()
+        for(z in 1..3)
+            for (objs in newManager.region.planes[z].objects)
+                for (obj in objs) Assertions.assertEquals(null, obj)
+    }
+
     @Test fun createShouldPlaceGardenInRooms() {
         manager.createNewHouseAt(HouseLocation.RIMMINGTON)
         Assertions.assertEquals(true, manager.hasRoomAt(0, 4, 3))
@@ -87,7 +95,7 @@ class HouseManagerTests {
         val separatePlayer = TestUtils.getMockPlayer("test2")
         separateManager.enter(separatePlayer, false)
         TestUtils.advanceTicks(5)
-        forceWalk(separatePlayer, separatePlayer.location.transform(10,10,0), "smart")
+        Pathfinder.find(separatePlayer, separatePlayer.location.transform(10,10,0)).walk(separatePlayer)
         TestUtils.advanceTicks(20)
         val localX = separatePlayer.location.localX
         val localY = separatePlayer.location.localY
