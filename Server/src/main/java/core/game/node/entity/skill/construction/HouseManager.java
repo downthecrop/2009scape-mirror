@@ -391,7 +391,6 @@ public final class HouseManager {
 		RegionChunk defaultChunk = from.getPlanes()[style.getPlane()].getRegionChunk(1, 0);
 		RegionChunk defaultSkyChunk = from.getPlanes()[1].getRegionChunk(0,0);
 		houseRegion = getPreparedRegion();
-		RegionManager.addRegion(houseRegion.getId(), houseRegion);
 		configureRoofs();
 		for (int z = 0; z < 4; z++) {
 			for (int x = 0; x < 8; x++) {
@@ -417,7 +416,6 @@ public final class HouseManager {
 		if (hasDungeon()) {
 			defaultChunk = from.getPlanes()[style.getPlane()].getRegionChunk(3, 0);
 			dungeonRegion = getPreparedRegion();
-			RegionManager.addRegion(dungeonRegion.getId(), dungeonRegion);
 			for (int x = 0; x < 8; x++) {
 				for (int y = 0; y < 8; y++) {
 					Room room = rooms[3][x][y];
@@ -441,6 +439,7 @@ public final class HouseManager {
 		DynamicRegion region = new DynamicRegion(-1, borders.getSouthWestX() >> 6, borders.getSouthWestY() >> 6);
 		region.setBorders(borders);
 		region.setUpdateAllPlanes(true);
+		RegionManager.addRegion(region.getId(), region);
 		return region;
 	}
 
