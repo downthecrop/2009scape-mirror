@@ -1,7 +1,9 @@
+import api.forceWalk
 import core.game.node.entity.player.link.music.MusicEntry
 import core.game.node.entity.skill.construction.HouseManager
 import core.game.node.entity.skill.construction.Servant
 import core.game.node.entity.skill.construction.ServantType
+import org.junit.Assert
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -41,5 +43,20 @@ class HouseManagerTests {
     @Test fun enterShouldUnlockPOHMusicTrack() {
         manager.enter(testPlayer, false)
         Assertions.assertEquals(true, testPlayer.musicPlayer.unlocked.contains(MusicEntry.forId(454).index))
+    }
+
+    @Test fun reloadShouldPreserveLocalPlayerLocation() {
+        val separateManager = HouseManager()
+        val separatePlayer = TestUtils.getMockPlayer("test2")
+        separateManager.enter(separatePlayer, false)
+        TestUtils.advanceTicks(5)
+        forceWalk(separatePlayer, separatePlayer.location.transform(10,10,0), "smart")
+        TestUtils.advanceTicks(20)
+        val localX = separatePlayer.location.localX
+        val localY = separatePlayer.location.localY
+        separateManager.reload(separatePlayer, true)
+        TestUtils.advanceTicks(20)
+        Assertions.assertEquals(localX, separatePlayer.location.localX)
+        Assertions.assertEquals(localY, separatePlayer.location.localY)
     }
 }

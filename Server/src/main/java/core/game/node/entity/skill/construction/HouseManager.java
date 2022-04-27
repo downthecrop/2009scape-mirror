@@ -175,23 +175,13 @@ public final class HouseManager {
 	}
 
 	/**
-	 * Enters the player's house.
-	 * @param player The player entering.
-	 * @param buildingMode If building mode is enabled.
-	 * @param teleport if the entry was a teleport.
-	 */
-	public void enter(final Player player, boolean buildingMode, boolean teleport) {
-		enter(player, buildingMode);
-	}
-
-	/**
 	 * Enter's the player's house.
 	 * @param player
 	 * @param buildingMode
 	 */
 	public void enter(final Player player, boolean buildingMode) {
-		if (HouseManager.this.buildingMode != buildingMode || !isLoaded()) {
-			HouseManager.this.buildingMode = buildingMode;
+		if (this.buildingMode != buildingMode || !isLoaded()) {
+			this.buildingMode = buildingMode;
 			construct();
 		}
 		player.setAttribute("poh_entry", HouseManager.this);
@@ -201,16 +191,16 @@ public final class HouseManager {
 		openLoadInterface(player);
 		checkForAndSpawnServant(player);
 		updateVarbits(player, buildingMode);
-		player.getMusicPlayer().unlock(454, true);
+		unlockMusicTrack(player);
 	}
 
-	public void openLoadInterface(Player player) {
+	private void openLoadInterface(Player player) {
 		player.getInterfaceManager().openComponent(399);
 		player.getAudioManager().send(new Audio(984));
 		submitCloseLoadInterfacePulse(player);
 	}
 
-	public void submitCloseLoadInterfacePulse(Player player) {
+	private void submitCloseLoadInterfacePulse(Player player) {
 		GameWorld.getPulser().submit(new Pulse(1, player) {
 			@Override
 			public boolean pulse() {
@@ -220,7 +210,7 @@ public final class HouseManager {
 		});
 	}
 
-	public void checkForAndSpawnServant(Player player) {
+	private void checkForAndSpawnServant(Player player) {
 		if(!hasServant()) return;
 
 		GameWorld.getPulser().submit(new Pulse(1, player) {
@@ -235,9 +225,13 @@ public final class HouseManager {
 		});
 	}
 
-	public void updateVarbits(Player player, boolean build) {
+	private void updateVarbits(Player player, boolean build) {
 		player.varpManager.get(261).setVarbit(0, build ? 1 : 0);
 		player.varpManager.get(262).setVarbit(0, getRoomAmount());
+	}
+
+	private void unlockMusicTrack(Player player) {
+		player.getMusicPlayer().unlock(454, true);
 	}
 
 	/**
@@ -281,17 +275,14 @@ public final class HouseManager {
 	 * @param buildingMode If building mode should be enabled.
 	 */
 	public void reload(Player player, boolean buildingMode) {
-		DynamicRegion r = region;
-		if ((player.getViewport().getRegion() == dungeon)) {
-			r = dungeon;
-		}
-		int diffX = player.getLocation().getX() - r.getBaseLocation().getX();
-		int diffY = player.getLocation().getY() - r.getBaseLocation().getY();
-		int diffZ = player.getLocation().getZ() - r.getBaseLocation().getZ();
-		region = null;
-		dungeon = null;
-		enter(player, buildingMode, false);
-		player.getProperties().setTeleportLocation((player.getViewport().getRegion() == dungeon ? dungeon : region).getBaseLocation().transform(diffX, diffY, diffZ));
+		int diffX = player.getLocation().getLocalX();
+		int diffY = player.getLocation().getLocalY();
+		int diffZ = player.getLocation().getZ();
+		boolean inDungeon = player.getViewport().getRegion() == dungeon;
+		this.buildingMode = buildingMode;
+		construct();
+		Location newLoc = (dungeon == null ? region : (inDungeon ? dungeon : region)).getBaseLocation().transform(diffX,diffY,diffZ);
+		player.getProperties().setTeleportLocation(newLoc);
 	}
 
 	/**
