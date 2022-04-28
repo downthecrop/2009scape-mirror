@@ -318,7 +318,6 @@ public final class DynamicRegion extends Region {
 		chunks[z][x][y] = chunk;
 		p.getChunks()[x][y] = chunk;
 		if (chunk == null) {
-			SystemLogger.logInfo("Chunk null");
 			for (int i = x << 3; i < (x + 1) << 3; i++) {
 				for (int j = y << 3; j < (y + 1) << 3; j++) {
 					p.getFlags().getClippingFlags()[i][j] = -1;
