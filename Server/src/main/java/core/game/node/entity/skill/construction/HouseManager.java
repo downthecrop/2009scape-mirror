@@ -4,6 +4,8 @@ package core.game.node.entity.skill.construction;
 //import org.arios.game.content.global.DeadmanTimedAction;
 //import org.arios.game.node.entity.player.info.login.SavingModule;
 
+import api.regionspec.RegionSpecification;
+import api.regionspec.contracts.FillChunkContract;
 import core.game.content.dialogue.FacialExpression;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
@@ -15,6 +17,8 @@ import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
 import core.game.world.update.flag.context.Animation;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import rs09.game.node.entity.skill.construction.Hotspot;
@@ -23,6 +27,9 @@ import rs09.game.world.GameWorld;
 
 import java.awt.*;
 import java.nio.ByteBuffer;
+
+import static api.regionspec.RegionSpecificationKt.fillWith;
+import static api.regionspec.RegionSpecificationKt.using;
 
 /**
  * Manages the player's house.
@@ -408,50 +415,77 @@ public final class HouseManager {
 		return region;
 	}
 
+	private class RoomLoadContract extends FillChunkContract {
+		Room[][][] rooms;
+		HouseManager manager;
+		boolean buildingMode;
+
+		public RoomLoadContract(HouseManager manager, boolean buildingMode, Room[][][] rooms) {
+			this.rooms = rooms;
+			this.manager = manager;
+			this.buildingMode = buildingMode;
+		}
+
+		@Override
+		public BuildRegionChunk getChunk(int x, int y, int plane, @NotNull DynamicRegion dyn) {
+			BuildRegionChunk chunk = rooms[plane][x][y].getChunk().copy(dyn.getPlanes()[plane]);
+			return chunk;
+		}
+
+		@Override
+		public void afterSetting(@Nullable BuildRegionChunk chunk, int x, int y, int plane, @NotNull DynamicRegion dyn) {
+			rooms[plane][x][y].loadDecorations(dyn != manager.dungeonRegion ? plane : 3, chunk, manager);
+		}
+	}
+
 	private void prepareHouseChunks(HousingStyle style, DynamicRegion target, boolean buildingMode, Room[][][] rooms) {
 		Region from = RegionManager.forId(style.getRegionId());
 		Region.load(from, true);
 		RegionChunk defaultChunk = from.getPlanes()[style.getPlane()].getRegionChunk(1, 0);
 		RegionChunk defaultSkyChunk = from.getPlanes()[1].getRegionChunk(0,0);
-		for (int z = 0; z < 4; z++) {
-			for (int x = 0; x < 8; x++) {
-				for (int y = 0; y < 8; y++) {
-					if(z == 3){
-						target.replaceChunk(z, x, y, defaultSkyChunk.copy(target.getPlanes()[z]), from);
-						continue;
-					}
-					Room room = rooms[z][x][y];
-					if (room != null) {
-						if (room.getProperties().isRoof() && buildingMode) {
-							continue;
-						}
-						BuildRegionChunk copy = room.getChunk().copy(target.getPlanes()[z]);
-						target.replaceChunk(z, x, y, copy, from);
-						room.loadDecorations(z, copy, this);
-					} else {
-						target.replaceChunk(z, x, y, z != 0 ? null : defaultChunk.copy(target.getPlanes()[0]), from);
-					}
-				}
-			}
-		}
+
+		RoomLoadContract loadRooms = new RoomLoadContract(this, buildingMode, rooms);
+		RegionSpecification spec = new RegionSpecification(
+				using(target),
+				fillWith(defaultChunk)
+						.from(from)
+						.onPlanes(0)
+						.onCondition((destX, destY, plane) -> rooms[plane][destX][destY] == null),
+				fillWith((RegionChunk) null)
+						.from(from)
+						.onPlanes(1,2)
+						.onCondition((destX, destY, plane) -> rooms[plane][destX][destY] == null),
+				fillWith(defaultSkyChunk)
+						.from(from)
+						.onPlanes(3),
+				loadRooms
+						.from(from)
+						.onPlanes(0,1,2)
+						.onCondition((destX,destY,plane) -> rooms[plane][destX][destY] != null)
+		);
+
+		spec.build();
 	}
 
 	private void prepareDungeonChunks(HousingStyle style, DynamicRegion target, DynamicRegion house, boolean buildingMode, Room[][] rooms) {
 		Region from = RegionManager.forId(style.getRegionId());
 		Region.load(from, true);
 		RegionChunk defaultChunk = from.getPlanes()[style.getPlane()].getRegionChunk(3, 0);
-		for (int x = 0; x < 8; x++) {
-			for (int y = 0; y < 8; y++) {
-				Room room = rooms[x][y];
-				if (room != null) {
-					BuildRegionChunk copy = room.getChunk().copy(target.getPlanes()[0]);
-					target.replaceChunk(0, x, y, copy, from);
-					room.loadDecorations(3, copy, this);
-				} else {
-					target.replaceChunk(0, x, y, buildingMode ? null : defaultChunk.copy(target.getPlanes()[0]), from);
-				}
-			}
-		}
+
+		RoomLoadContract loadRooms = new RoomLoadContract(this, buildingMode, new Room[][][]{rooms});
+		RegionSpecification spec = new RegionSpecification(
+				using(target),
+				fillWith((x,y,plane,region) -> buildingMode ? null : defaultChunk)
+						.from(from)
+						.onPlanes(0)
+						.onCondition((destX, destY, plane) -> rooms[destX][destY] == null),
+				loadRooms
+						.from(from)
+						.onPlanes(0)
+						.onCondition((destX, destY, plane) -> rooms[destX][destY] != null)
+		);
+
+		spec.build();
 		house.link(target);
 	}
 

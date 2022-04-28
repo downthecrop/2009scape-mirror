@@ -17,7 +17,7 @@ class RegionSpecification(val regionContract: RegionSpecContract = EmptyRegionCo
     }
 }
 
-fun fillWith(chunk: RegionChunk): FillChunkContract {
+fun fillWith(chunk: RegionChunk?): FillChunkContract {
     return FillChunkContract(chunk)
 }
 
@@ -27,4 +27,8 @@ fun fillWith(delegate: (Int, Int, Int, Region) -> RegionChunk?) : FillChunkContr
 
 fun copyOf(regionId: Int): RegionSpecContract {
     return CloneRegionContract(regionId)
+}
+
+fun using(region: DynamicRegion) : UseExistingRegionContract {
+    return UseExistingRegionContract(region)
 }
