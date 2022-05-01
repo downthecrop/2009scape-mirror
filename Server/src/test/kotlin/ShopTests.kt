@@ -114,4 +114,22 @@ class ShopTests {
             general.restock()
         }
     }
+
+    @Test fun playerStockShouldNeverBeNull() {
+        Assertions.assertNotNull(general.playerStock)
+    }
+
+    @Test fun shouldAllowBuyingFromPlayerStockOnMultipleRows() {
+        for(i in 0 until 100) {
+            general.playerStock.add(Item(i + 3100, 1)) //make sure we populate several rows of items
+        }
+        testPlayer.inventory.add(Item(995, 100000))
+        testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
+        testPlayer.setAttribute("shop-main", false)
+        var status: Shop.TransactionStatus = Shop.TransactionStatus.Success()
+        Assertions.assertDoesNotThrow({
+            status = general.buy(testPlayer, 36, 1)
+        }, "Error selling to shop: ${general.playerStock}")
+        Assertions.assertEquals(true, status is Shop.TransactionStatus.Success)
+    }
 }

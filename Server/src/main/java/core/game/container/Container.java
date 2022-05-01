@@ -1025,4 +1025,15 @@ public class Container {
         return event;
     }
 
+    @Override
+    public String toString() {
+        return "Container{" +
+                "items=" + Arrays.toString(items) +
+                ", capacity=" + capacity +
+                ", sortType=" + sortType +
+                ", type=" + type +
+                ", event=" + event +
+                ", listeners=" + listeners +
+                '}';
+    }
 }
