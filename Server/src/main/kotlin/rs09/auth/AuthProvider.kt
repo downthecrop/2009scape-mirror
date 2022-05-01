@@ -13,5 +13,5 @@ abstract class AuthProvider<T: AccountStorageProvider> {
 
     abstract fun createAccountWith(info: UserAccountInfo) : Boolean
 
-    abstract fun checkLogin(username: String, password: String) : LoginResponse
+    abstract fun checkLogin(username: String, password: String) : Pair<AuthResponse,UserAccountInfo?>
 }

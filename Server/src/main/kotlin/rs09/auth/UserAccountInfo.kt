@@ -1,6 +1,6 @@
 package rs09.auth
 
-data class UserAccountInfo(
+class UserAccountInfo(
     var username: String,
     var password: String,
     var uid: Int,
@@ -25,5 +25,9 @@ data class UserAccountInfo(
         @JvmStatic fun createDefault() : UserAccountInfo {
             return UserAccountInfo("", "", 0, 0, 0, 0, "", "", "", 0L, 0L, "", "", "", "", "", 0L, 0L, false)
         }
+    }
+
+    override fun toString(): String {
+        return "USER:$username,PASS:$password,UID:$uid,RIGHTS:$rights,CREDITS:$credits,ICON:$icon,IP:$ip,LASTIP:$lastUsedIp"
     }
 }

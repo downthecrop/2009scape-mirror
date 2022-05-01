@@ -9,7 +9,6 @@ import core.game.node.entity.player.info.PlayerDetails
 import core.game.node.entity.player.info.UIDInfo
 import core.game.node.entity.player.info.login.LoginType
 import core.game.node.entity.player.info.login.Response
-import core.game.node.entity.player.info.portal.PlayerSQLManager
 import core.game.system.task.TaskExecutor
 import core.net.Constants
 import core.net.IoReadEvent
@@ -17,10 +16,11 @@ import core.net.IoSession
 import core.net.amsc.WorldCommunicator
 import core.tools.StringUtils
 import rs09.ServerConstants
+import rs09.auth.AuthResponse
 import rs09.game.node.entity.player.info.login.LoginParser
 import rs09.game.system.SystemLogger
+import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
-import java.lang.Runnable
 import java.math.BigInteger
 import java.nio.ByteBuffer
 import java.util.*
@@ -40,12 +40,12 @@ class LoginReadEvent
         SystemLogger.logInfo("login read")
         val opcode: Int = buffer.get().toInt()
         if (buffer.short.toInt() != buffer.remaining()) {
-            session.write(Response.BAD_SESSION_ID)
+            session.write(AuthResponse.BadSessionID)
             return
         }
         val build = buffer.int
         if (build != Constants.REVISION) { // || buffer.getInt() != Constants.CLIENT_BUILD) {
-            session.write(Response.UPDATED)
+            session.write(AuthResponse.Updated)
             return
         }
         when (opcode) {
@@ -90,7 +90,7 @@ class LoginReadEvent
             buffer = getRSABlock(buffer)
             buffer.rewind()
             if(buffer.get().toInt() != 10){
-                session.write(Response.COULD_NOT_LOGIN)
+                session.write(AuthResponse.CouldNotLogin)
                 return
             }
             val isaacSeed = getISAACSeed(buffer)
@@ -106,32 +106,17 @@ class LoginReadEvent
             session.clientInfo = ClientInfo(displayMode, windowMode, screenWidth, screenHeight)
             val b = buffer
             SystemLogger.logInfo("spawning thread to handle login")
-            TaskExecutor.executeSQL {
-                SystemLogger.logInfo("login thread start")
-                Thread.currentThread().name = "Login Password Response"
-                SystemLogger.logInfo("login thread named")
-                try {
-                    val username = StringUtils.longToString(b.long)
-                    SystemLogger.logInfo("got username")
-                    val password = ByteBufferUtils.getString(b)
-                    SystemLogger.logInfo("got password")
-                    val response = PlayerSQLManager.getCredentialResponse(username, password)
-                    SystemLogger.logInfo("got sql response")
-                    if (response != Response.SUCCESSFUL) {
-                        SystemLogger.logInfo("not success :(")
-                        session.write(response, true)
-                        return@executeSQL
-                    }
-                    SystemLogger.logInfo("great success, attempting login")
-                    login(PlayerDetails(username, password), session, b, opcode)
-                    SystemLogger.logInfo("done")
-                } catch (e: Exception) {
-                    SystemLogger.logInfo("big whoops")
-                    e.printStackTrace()
-                    session.write(Response.COULD_NOT_LOGIN)
-                }
-                SystemLogger.logInfo("end login thread")
+            val username = StringUtils.longToString(b.long)
+            val password = ByteBufferUtils.getString(b)
+            val (response, info) = GameWorld.authenticator.checkLogin(username, password)
+            if (response != AuthResponse.Success) {
+                session.write(response, true)
+                SystemLogger.logInfo("Login failed at auth stage")
+                return
             }
+            val details = PlayerDetails(username, password)
+            details.accountInfo = info
+            login(details, session, opcode)
         }
 
         /**
@@ -142,13 +127,13 @@ class LoginReadEvent
          * @param opcode the opcode.
          */
         @JvmStatic
-        private fun login(details: PlayerDetails, session: IoSession, buffer: ByteBuffer, opcode: Int) {
+        private fun login(details: PlayerDetails, session: IoSession, opcode: Int) {
             SystemLogger.logInfo("login")
             if(!Repository.LOGGED_IN_PLAYERS.contains(details.username))
                 Repository.LOGGED_IN_PLAYERS.add(details.username)
             val parser = LoginParser(details, LoginType.fromType(opcode))
             details.session = session
-            details.info.translate(UIDInfo(details.ipAddress, ByteBufferUtils.getString(buffer), ByteBufferUtils.getString(buffer), ByteBufferUtils.getString(buffer)))
+            details.info.translate(UIDInfo(details.ipAddress, "", "", ""))
             if (WorldCommunicator.isEnabled()) {
                 WorldCommunicator.register(parser)
             } else {

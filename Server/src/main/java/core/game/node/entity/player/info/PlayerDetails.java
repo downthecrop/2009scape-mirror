@@ -4,6 +4,9 @@ import core.game.node.entity.player.info.portal.Icon;
 import core.game.node.entity.player.info.portal.PlayerSQLManager;
 import core.game.system.communication.CommunicationInfo;
 import core.net.IoSession;
+import org.jetbrains.annotations.NotNull;
+import rs09.auth.UserAccountInfo;
+import rs09.game.world.GameWorld;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,11 +21,21 @@ public class PlayerDetails {
 	 * The sql manager for this account.
 	 */
 	private final PlayerSQLManager sqlManager = new PlayerSQLManager(this);
+
+	public UserAccountInfo accountInfo = UserAccountInfo.createDefault();
 	
 	/**
 	 * The communication info.
 	 */
 	private final CommunicationInfo communicationInfo = new CommunicationInfo();
+
+	public int getCredits() {
+		return accountInfo.getCredits();
+	}
+
+	public void setCredits(int amount) {
+		accountInfo.setCredits(amount);
+	}
 
 
 	/**
@@ -30,58 +43,6 @@ public class PlayerDetails {
 	 */
 	private final UIDInfo info = new UIDInfo();
 
-	/**
-	 * The username of the account.
-	 */
-	private final String username;
-
-	/**
-	 * The password of the account.
-	 */
-	private String password;
-
-	/**
-	 * The unique id of the account.
-	 */
-	private int uid;
-
-	/**
-	 * The account's last game login.
-	 */
-	private long lastLogin = -1;
-
-	/**
-	 * The account's last game login.
-	 */
-	private long timePlayed = 0;
-	
-	/**
-	 * The time the player is muted for.
-	 */
-	private long muteTime;
-	
-	/**
-	 * The time the player is banned for.
-	 */
-	private long banTime;
-
-	/**
-	 * If the sql data has been parsed.
-	 */
-	private boolean parsed;
-	
-	/**
-	 * The rights of the player.
-	 */
-	private Rights rights = Rights.REGULAR_PLAYER;
-
-	/**
-	 * The chat icon value.
-	 */
-	private Icon icon;
-
-	public int credits;
-	
 	/**
 	 * Represents the session.
 	 */
@@ -93,9 +54,6 @@ public class PlayerDetails {
 	 * @param password the password to set.
 	 */
 	public PlayerDetails(String username, String password) {
-		this.username = username;
-		this.password = password;
-		this.uid = username.hashCode();
 	}
 	
 	/**
@@ -105,54 +63,13 @@ public class PlayerDetails {
 	public PlayerDetails(String username) {
 		this(username, null);
 	}
-	
-	/**
-	 * Parses the details from the database for this object.
-	 * @return {@code True} if parsed.
-	 */
-	public boolean parse() {
-		if (sqlManager.parse()) {
-			return parsed = true;
-		}
-		return parsed = false;
-	}
-	
-	/**
-	 * Saves the player's details.
-	 * @return {@code True} if saved.
-	 */
-	public boolean save() {
-		sqlManager.save();
-		return true;
-	}
-	
-	/**
-	 * Gets the player details for an account name.
-	 * @param username the username.
-	 * @return the player details.
-	 */
-	public static PlayerDetails getDetails(String username) {
-		PlayerDetails details = new PlayerDetails(username);
-		if (!details.parse()) {
-			return details = null;
-		}
-		return details;
-	}
-	
-	/**
-	 * Checks if the ban is permanent.
-	 * @return {@code True} if so.
-	 */
-	public boolean isPermBan() {
-		return TimeUnit.MILLISECONDS.toDays(banTime - System.currentTimeMillis()) > 1000;
-	}
 
 	/**
 	 * Checks if the player is muted.
 	 * @return {@code True} if so.
 	 */
 	public boolean isBanned() {
-		return banTime > System.currentTimeMillis();
+		return accountInfo.getBanEndTime() > System.currentTimeMillis();
 	}
 	
 	/**
@@ -160,7 +77,7 @@ public class PlayerDetails {
 	 * @return {@code True} if so.
 	 */
 	public boolean isPermMute() {
-		return TimeUnit.MILLISECONDS.toDays(muteTime - System.currentTimeMillis()) > 1000;
+		return TimeUnit.MILLISECONDS.toDays(accountInfo.getMuteEndTime() - System.currentTimeMillis()) > 1000;
 	}
 
 	/**
@@ -168,7 +85,7 @@ public class PlayerDetails {
 	 * @return {@code True} if so.
 	 */
 	public boolean isMuted() {
-		return muteTime > System.currentTimeMillis();
+		return accountInfo.getMuteEndTime() > System.currentTimeMillis();
 	}
 
 	/**
@@ -184,7 +101,7 @@ public class PlayerDetails {
 	 * @return The rights.
 	 */
 	public Rights getRights() {
-		return rights;
+		return Rights.values()[accountInfo.getRights()];
 	}
 
 	/**
@@ -192,7 +109,7 @@ public class PlayerDetails {
 	 * @param rights The credentials to set.
 	 */
 	public void setRights(Rights rights) {
-		this.rights = rights;
+		this.accountInfo.setRights(rights.ordinal());
 	}
 
 	/**
@@ -216,7 +133,7 @@ public class PlayerDetails {
 	 * @param password the password.
 	 */
 	public void setPassword(final String password) {
-		this.password = password;
+		this.accountInfo.setPassword(password);
 	}
 
 	/**
@@ -225,7 +142,7 @@ public class PlayerDetails {
 	 */
 
 	public String getUsername() {
-		return username;
+		return this.accountInfo.getUsername();
 	}
 
 	/**
@@ -233,7 +150,7 @@ public class PlayerDetails {
 	 * @return the uid.
 	 */
 	public int getUid() {
-		return uid;
+		return this.accountInfo.getUid();
 	}
 
 	/**
@@ -241,7 +158,7 @@ public class PlayerDetails {
 	 * @param uid the uid.
 	 */
 	public void setUid(int uid) {
-		this.uid = uid;
+
 	}
 
 	/**
@@ -249,15 +166,7 @@ public class PlayerDetails {
 	 * @return The password.
 	 */
 	public String getPassword() {
-		return password;
-	}
-
-	/**
-	 * Checks if the details have been parsed.
-	 * @return {@code True} if parsed.
-	 */
-	public boolean isParsed() {
-		return parsed;
+		return this.accountInfo.getPassword();
 	}
 
 	/**
@@ -316,7 +225,7 @@ public class PlayerDetails {
 	 * @return the icon.
 	 */
 	public Icon getIcon() {
-		return icon;
+		return Icon.values()[this.accountInfo.getIcon()];
 	}
 
 	/**
@@ -324,7 +233,7 @@ public class PlayerDetails {
 	 * @param icon the icon to set
 	 */
 	public void setIcon(Icon icon) {
-		this.icon = icon;
+		this.accountInfo.setIcon(icon.ordinal());
 	}
 
 	/**
@@ -332,7 +241,7 @@ public class PlayerDetails {
 	 * @return the lastLogin.
 	 */
 	public long getLastLogin() {
-		return lastLogin;
+		return this.accountInfo.getLastLogin();
 	}
 
 	/**
@@ -340,7 +249,7 @@ public class PlayerDetails {
 	 * @param lastLogin the lastLogin to set
 	 */
 	public void setLastLogin(long lastLogin) {
-		this.lastLogin = lastLogin;
+		this.accountInfo.setLastLogin(lastLogin);
 	}
 
 	/**
@@ -348,7 +257,7 @@ public class PlayerDetails {
 	 * @return the timePlayed.
 	 */
 	public long getTimePlayed() {
-		return timePlayed;
+		return this.accountInfo.getTimePlayed();
 	}
 
 	/**
@@ -356,7 +265,7 @@ public class PlayerDetails {
 	 * @param timePlayed the timePlayed to set
 	 */
 	public void setTimePlayed(long timePlayed) {
-		this.timePlayed = timePlayed;
+		this.accountInfo.setTimePlayed(timePlayed);
 	}
 	
 	/**
@@ -364,7 +273,7 @@ public class PlayerDetails {
 	 * @param muteTime the mute time.
 	 */
 	public void setMuteTime(long muteTime) {
-		this.muteTime = muteTime;
+		this.accountInfo.setMuteEndTime(muteTime);
 	}
 	
 	/**
@@ -372,7 +281,7 @@ public class PlayerDetails {
 	 * @return The mute time.
 	 */
 	public long getMuteTime() {
-		return muteTime;
+		return this.accountInfo.getMuteEndTime();
 	}
 
 	/**
@@ -380,7 +289,7 @@ public class PlayerDetails {
 	 * @return the banTime.
 	 */
 	public long getBanTime() {
-		return banTime;
+		return this.accountInfo.getBanEndTime();
 	}
 
 	/**
@@ -388,12 +297,14 @@ public class PlayerDetails {
 	 * @param banTime the banTime to set
 	 */
 	public void setBanTime(long banTime) {
-		this.banTime = banTime;
+		this.accountInfo.setBanEndTime(banTime);
 	}
 
-	@Override
-	public String toString() {
-		return "PlayerDetails [sqlManager=" + sqlManager + ", communicationInfo=" + communicationInfo + ", info=" + info + ", username=" + username + ", password=" + password + ", uid=" + uid + ", lastLogin=" + lastLogin + ", muteTime=" + muteTime + ", parsed=" + parsed + ", rights=" + rights + ", icon=" + icon + ", session=" + session + "]";
+	public void save() {
+		GameWorld.accountStorage.update(accountInfo);
 	}
 
+	public static PlayerDetails getDetails(@NotNull String username) {
+		return new PlayerDetails(username, "");
+	}
 }

@@ -14,11 +14,18 @@ import core.plugin.CorePluginTypes.StartupPlugin
 import core.tools.RandomFunction
 import core.tools.mysql.DatabaseManager
 import rs09.ServerConstants
+import rs09.auth.AuthProvider
+import rs09.auth.DevelopmentAuthenticator
+import rs09.auth.ProductionAuthenticator
+import rs09.game.node.entity.state.newsys.StateRepository
 import rs09.game.system.SystemLogger
 import rs09.game.system.SystemLogger.logInfo
 import rs09.game.system.config.ConfigParser
 import rs09.game.world.repository.Repository
 import rs09.plugin.ClassScanner
+import rs09.storage.AccountStorageProvider
+import rs09.storage.InMemoryStorageProvider
+import rs09.storage.SQLStorageProvider
 import rs09.worker.MajorUpdateWorker
 import java.text.SimpleDateFormat
 import java.util.*
@@ -83,6 +90,11 @@ object GameWorld {
      */
     @JvmStatic
     var settings: GameSettings? = null
+    @JvmStatic
+    lateinit var authenticator: AuthProvider<*>
+    @JvmStatic
+    lateinit var accountStorage: AccountStorageProvider
+
     /**
      * The current amount of (600ms) cycles elapsed.
      */
@@ -160,6 +172,15 @@ object GameWorld {
         Cache.init(ServerConstants.CACHE_PATH)
         databaseManager = DatabaseManager(ServerConstants.DATABASE)
         databaseManager!!.connect()
+        if (settings!!.isDevMode) {
+            authenticator = DevelopmentAuthenticator()
+            accountStorage = InMemoryStorageProvider()
+            (authenticator as DevelopmentAuthenticator).configureFor(accountStorage as InMemoryStorageProvider)
+        } else {
+            authenticator = ProductionAuthenticator()
+            accountStorage = SQLStorageProvider()
+            (authenticator as ProductionAuthenticator).configureFor(accountStorage as SQLStorageProvider)
+        }
         configParser.prePlugin()
         ClassScanner.scanClasspath()
         ClassScanner.loadPureInterfaces()

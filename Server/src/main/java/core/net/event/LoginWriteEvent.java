@@ -6,6 +6,7 @@ import core.net.EventProducer;
 import core.net.IoSession;
 import core.net.IoWriteEvent;
 import core.net.producer.GameEventProducer;
+import rs09.auth.AuthResponse;
 
 import java.nio.ByteBuffer;
 
@@ -31,10 +32,10 @@ public final class LoginWriteEvent extends IoWriteEvent {
 
 	@Override
 	public void write(IoSession session, Object context) {
-		Response response = (Response) context;
+		AuthResponse response = (AuthResponse) context;
 		ByteBuffer buffer = ByteBuffer.allocate(500);
-		buffer.put((byte) response.opcode());
-		switch (response.opcode()) {
+		buffer.put((byte) response.ordinal());
+		switch (response.ordinal()) {
 			case 2: //successful login
 				buffer.put(getWorldResponse(session));
 				session.setProducer(GAME_PRODUCER);

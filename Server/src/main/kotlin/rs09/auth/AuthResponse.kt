@@ -1,6 +1,6 @@
 package rs09.auth
 
-enum class LoginResponse {
+enum class AuthResponse {
     UnexpectedError,
     CouldNotAd,
     Success,

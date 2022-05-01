@@ -5,11 +5,13 @@ import core.game.node.entity.player.info.portal.PlayerSQLManager;
 import core.game.system.SystemManager;
 import core.game.system.mysql.SQLEntryHandler;
 import core.game.system.mysql.SQLManager;
+import core.game.system.task.Pulse;
 import core.game.system.task.TaskExecutor;
 import core.net.Constants;
 import core.net.IoSession;
 import kotlin.Unit;
 import rs09.ServerConstants;
+import rs09.auth.UserAccountInfo;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
 import rs09.net.event.LoginReadEvent;
@@ -57,6 +59,7 @@ public class AccountRegister extends SQLEntryHandler<RegistryDetails> {
 	 */
 	public static void read(final IoSession session, int opcode, ByteBuffer buffer) {
 		int day,month,year,country;
+		UserAccountInfo info = UserAccountInfo.createDefault();
 		switch (opcode) {
 			case 147://details
 				day = buffer.get();
@@ -67,6 +70,7 @@ public class AccountRegister extends SQLEntryHandler<RegistryDetails> {
 				break;
 			case 186://username
 				final String username = ByteBufferUtils.getString(buffer).replace(" ", "_").toLowerCase().replace("|", "");
+				info.setUsername(username);
 				if (username.length() <= 0 || username.length() > 12) {
 					response(session, RegistryResponse.INVALID_USERNAME);
 					break;
@@ -77,23 +81,18 @@ public class AccountRegister extends SQLEntryHandler<RegistryDetails> {
 					break;
 				}
 				System.out.println(username);
-				TaskExecutor.executeSQL(() -> {
-					try {
-						if (PlayerSQLManager.hasSqlAccount(username, "username")) {
-							response(session, RegistryResponse.NOT_AVAILBLE_USER);
-							return Unit.INSTANCE;
-						}
-						response(session, RegistryResponse.SUCCESS);
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-					return Unit.INSTANCE;
-				});
+				if (!GameWorld.authenticator.canCreateAccountWith(info)) {
+					response(session, RegistryResponse.NOT_AVAILBLE_USER);
+					return;
+				}
+				response(session, RegistryResponse.SUCCESS);
 				break;
 			case 36://Register details
+				SystemLogger.logInfo("Made it to final stage");
 				buffer.get(); //Useless size being written that is already written in the RSA block
 				buffer = LoginReadEvent.getRSABlock(buffer);
 				if(buffer.get() != 10){ //RSA header (aka did this decrypt properly)
+					SystemLogger.logInfo("Decryption failed during registration :(");
 					response(session, RegistryResponse.CANNOT_CREATE);
 					break;
 				}
@@ -106,6 +105,8 @@ public class AccountRegister extends SQLEntryHandler<RegistryDetails> {
 				final String name = ByteBufferUtils.getString(buffer).replace(" ", "_").toLowerCase().replace("|", "");
 				buffer.getInt();
 				String password = ByteBufferUtils.getString(buffer);
+				info.setUsername(name);
+				info.setPassword(password);
 				if (password.length() < 5 || password.length() > 20) {
 					response(session, RegistryResponse.INVALID_PASS_LENGTH);
 					break;
@@ -126,21 +127,17 @@ public class AccountRegister extends SQLEntryHandler<RegistryDetails> {
 				year = buffer.getShort();
 				country = buffer.getShort();
 				buffer.getInt();
-				@SuppressWarnings("deprecation")
-				final RegistryDetails details = new RegistryDetails(name, SystemManager.getEncryption().hashPassword(password), new Date(year, month, day), country);
-				TaskExecutor.execute(() -> {
-					try {
-						if (PlayerSQLManager.hasSqlAccount(name, "username")) {
-							response(session, RegistryResponse.CANNOT_CREATE);
-							return Unit.INSTANCE;
-						}
-						SQLEntryHandler.write(new AccountRegister(details));
+				if (!GameWorld.authenticator.canCreateAccountWith(info)) {
+					response(session, RegistryResponse.CANNOT_CREATE);
+					return;
+				}
+				GameWorld.authenticator.createAccountWith(info);
+				GameWorld.getPulser().submit(new Pulse() {
+					@Override
+					public boolean pulse() {
 						response(session, RegistryResponse.SUCCESS);
-					} catch (SQLException e) {
-						e.printStackTrace();
-						response(session, RegistryResponse.CANNOT_CREATE);
+						return true;
 					}
-					return Unit.INSTANCE;
 				});
 				break;
 			default:

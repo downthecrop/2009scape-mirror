@@ -106,7 +106,7 @@ public final class LoginConfiguration {
         player.getPacketDispatch().sendString("Discord Invite", 378, 14);
         player.getPacketDispatch().sendString("Discord Invite", 378, 129);
         player.getPacketDispatch().sendString("Credits", 378, 94);
-        player.getPacketDispatch().sendString(player.getDetails().credits + "", 378, 96);
+        player.getPacketDispatch().sendString(player.getDetails().getCredits() + "", 378, 96);
         player.getPacketDispatch().sendString(" ", 378, 229);
         player.getPacketDispatch().sendString("Want to contribute to 2009scape? <br>Visit the github using the link below!", 378, 230);
         player.getPacketDispatch().sendString(" ", 378, 231);
