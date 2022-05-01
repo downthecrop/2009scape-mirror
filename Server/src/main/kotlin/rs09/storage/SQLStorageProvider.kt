@@ -1,10 +1,7 @@
 package rs09.storage
 
 import rs09.auth.UserAccountInfo
-import java.sql.Connection
-import java.sql.DriverManager
-import java.sql.PreparedStatement
-import java.sql.SQLDataException
+import java.sql.*
 
 class SQLStorageProvider : AccountStorageProvider {
     lateinit var connection: Connection
@@ -59,7 +56,7 @@ class SQLStorageProvider : AccountStorageProvider {
                 "timePlayed," +
                 "lastLogin," +
                 "online" +
-                ") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);")
+                ") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);", Statement.RETURN_GENERATED_KEYS)
         compiledUpdateInfoQuery = connection.prepareStatement("UPDATE members SET " +
                 "username = ?," +
                 "password = ?," +
@@ -151,6 +148,10 @@ class SQLStorageProvider : AccountStorageProvider {
         compiledInsertInfoQuery.setLong(17, info.lastLogin)
         compiledInsertInfoQuery.setBoolean(18, info.online)
         compiledInsertInfoQuery.execute()
+        val result = compiledInsertInfoQuery.generatedKeys
+        if(result.next()){
+            info.uid = result.getInt(1)
+        }
     }
 
     override fun update(info: UserAccountInfo) {
