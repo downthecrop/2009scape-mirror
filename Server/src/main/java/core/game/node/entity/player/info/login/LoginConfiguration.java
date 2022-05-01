@@ -266,10 +266,11 @@ public final class LoginConfiguration {
      * @return the last login.
      */
     public static String getLastLogin(Player player) {
-        String lastIp = (String) player.getDetails().getSqlManager().getTable().getColumn("lastGameIp").getValue();
-        if (lastIp == null || lastIp == "") {
+        String lastIp = player.getDetails().accountInfo.getLastUsedIp();
+        if (lastIp.equals("")) {
             lastIp = player.getDetails().getIpAddress();
         }
+        player.getDetails().accountInfo.setLastUsedIp(player.getDetails().getIpAddress());
         String string = "You last logged in @timeAgo from: " + lastIp;
         long time = player.getDetails().getLastLogin();
         Date lastLogin = new Date(time);

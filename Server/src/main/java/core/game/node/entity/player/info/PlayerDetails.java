@@ -1,7 +1,6 @@
 package core.game.node.entity.player.info;
 
 import core.game.node.entity.player.info.portal.Icon;
-import core.game.node.entity.player.info.portal.PlayerSQLManager;
 import core.game.system.communication.CommunicationInfo;
 import core.net.IoSession;
 import org.jetbrains.annotations.NotNull;
@@ -16,12 +15,6 @@ import java.util.concurrent.TimeUnit;
  * 
  */
 public class PlayerDetails {
-	
-	/**
-	 * The sql manager for this account.
-	 */
-	private final PlayerSQLManager sqlManager = new PlayerSQLManager(this);
-
 	public UserAccountInfo accountInfo = UserAccountInfo.createDefault();
 	
 	/**
@@ -51,17 +44,9 @@ public class PlayerDetails {
 	/**
 	 * Constructs a new {@code PlayerDetails}.
 	 * @param username the username to set.
-	 * @param password the password to set.
-	 */
-	public PlayerDetails(String username, String password) {
-	}
-	
-	/**
- * Constructs a new {@Code PlayerDetails} {@Code Object}
-	 * @param username the username to set.
 	 */
 	public PlayerDetails(String username) {
-		this(username, null);
+		accountInfo.setUsername(username);
 	}
 
 	/**
@@ -86,14 +71,6 @@ public class PlayerDetails {
 	 */
 	public boolean isMuted() {
 		return accountInfo.getMuteEndTime() > System.currentTimeMillis();
-	}
-
-	/**
-	 * Gets the sql manager.
-	 * @return the sql manager.
-	 */
-	public PlayerSQLManager getSqlManager() {
-		return sqlManager;
 	}
 
 	/**
@@ -308,6 +285,6 @@ public class PlayerDetails {
 	}
 
 	public static PlayerDetails getDetails(@NotNull String username) {
-		return new PlayerDetails(username, "");
+		return new PlayerDetails(username);
 	}
 }

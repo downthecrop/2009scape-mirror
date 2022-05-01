@@ -8,7 +8,6 @@ import core.game.node.entity.player.info.ClientInfo
 import core.game.node.entity.player.info.PlayerDetails
 import core.game.node.entity.player.info.UIDInfo
 import core.game.node.entity.player.info.login.LoginType
-import core.game.node.entity.player.info.login.Response
 import core.game.system.task.TaskExecutor
 import core.net.Constants
 import core.net.IoReadEvent
@@ -114,7 +113,7 @@ class LoginReadEvent
                 SystemLogger.logInfo("Login failed at auth stage")
                 return
             }
-            val details = PlayerDetails(username, password)
+            val details = PlayerDetails(username)
             details.accountInfo = info
             login(details, session, opcode)
         }
