@@ -77,7 +77,7 @@ class SQLStorageProvider : AccountStorageProvider {
                 "timePlayed = ?," +
                 "lastLogin = ?," +
                 "online = ?" +
-                " WHERE username = ?;"
+                " WHERE uid = ?;"
         )
     }
 
@@ -120,6 +120,15 @@ class SQLStorageProvider : AccountStorageProvider {
     }
 
     override fun store(info: UserAccountInfo) {
+        val emptyInfo = UserAccountInfo.createDefault()
+        if(info == emptyInfo) {
+            throw IllegalStateException("Tried to store empty data!")
+        }
+        emptyInfo.username = info.username
+        if(info == emptyInfo) {
+            throw IllegalStateException("Tried to store empty data!")
+        }
+
         if (checkUsernameTaken(info.username)) {
             throw SQLDataException("Account already exists!")
         }
@@ -145,6 +154,19 @@ class SQLStorageProvider : AccountStorageProvider {
     }
 
     override fun update(info: UserAccountInfo) {
+        val emptyInfo = UserAccountInfo.createDefault()
+        if(info == emptyInfo) {
+            throw IllegalStateException("Tried to store empty data!")
+        }
+        emptyInfo.username = info.username
+        if(info == emptyInfo) {
+            throw IllegalStateException("Tried to store empty data!")
+        }
+        emptyInfo.password = info.password
+        if(info == emptyInfo) {
+            throw IllegalStateException("Tried to store empty data!")
+        }
+
         compiledUpdateInfoQuery.setString(1, info.username)
         compiledUpdateInfoQuery.setString(2, info.password)
         compiledUpdateInfoQuery.setInt(3, info.rights)
@@ -161,7 +183,7 @@ class SQLStorageProvider : AccountStorageProvider {
         compiledUpdateInfoQuery.setLong(14, info.timePlayed)
         compiledUpdateInfoQuery.setLong(15, info.lastLogin)
         compiledUpdateInfoQuery.setBoolean(16, info.online)
-        compiledUpdateInfoQuery.setString(17, info.username)
+        compiledUpdateInfoQuery.setInt(17, info.uid)
         compiledUpdateInfoQuery.execute()
     }
 

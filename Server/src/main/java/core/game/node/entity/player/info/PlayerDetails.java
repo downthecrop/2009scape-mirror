@@ -301,7 +301,10 @@ public class PlayerDetails {
 	}
 
 	public void save() {
-		GameWorld.accountStorage.update(accountInfo);
+		if(isBanned()) return;
+		try {
+			GameWorld.getAccountStorage().update(accountInfo);
+		} catch (IllegalStateException ignored) {}
 	}
 
 	public static PlayerDetails getDetails(@NotNull String username) {

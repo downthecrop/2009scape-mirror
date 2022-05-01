@@ -1,6 +1,6 @@
 package rs09.auth
 
-import rs09.game.system.SystemLogger
+import core.game.node.entity.player.Player
 import rs09.storage.InMemoryStorageProvider
 
 class DevelopmentAuthenticator : AuthProvider<InMemoryStorageProvider>() {
@@ -25,5 +25,15 @@ class DevelopmentAuthenticator : AuthProvider<InMemoryStorageProvider>() {
         info.rights = 2
         storageProvider.store(info)
         return true
+    }
+
+    override fun checkPassword(player: Player, password: String): Boolean {
+        return password == player.details.password
+    }
+
+    override fun updatePassword(username: String, newPassword: String) {
+        val info = storageProvider.getAccountInfo(username)
+        info.password = newPassword
+        storageProvider.update(info)
     }
 }

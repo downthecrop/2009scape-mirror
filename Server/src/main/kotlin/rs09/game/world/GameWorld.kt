@@ -18,6 +18,7 @@ import rs09.auth.AuthProvider
 import rs09.auth.DevelopmentAuthenticator
 import rs09.auth.ProductionAuthenticator
 import rs09.game.node.entity.state.newsys.StateRepository
+import rs09.game.system.Auth
 import rs09.game.system.SystemLogger
 import rs09.game.system.SystemLogger.logInfo
 import rs09.game.system.config.ConfigParser
@@ -100,9 +101,6 @@ object GameWorld {
      */
     @JvmStatic
     var ticks = 0
-    @JvmStatic
-    var databaseManager: DatabaseManager? = null
-        private set
 
     @JvmStatic
     var Pulser = PulseRunner()
@@ -170,18 +168,12 @@ object GameWorld {
     fun prompt(run: Boolean, directory: String?){
         logInfo("Prompting ${settings?.name} Game World...")
         Cache.init(ServerConstants.CACHE_PATH)
-        databaseManager = DatabaseManager(ServerConstants.DATABASE)
-        databaseManager!!.connect()
-        if (settings!!.isDevMode) {
-            authenticator = DevelopmentAuthenticator()
-            accountStorage = InMemoryStorageProvider()
-            (authenticator as DevelopmentAuthenticator).configureFor(accountStorage as InMemoryStorageProvider)
-        } else {
-            authenticator = ProductionAuthenticator()
-            accountStorage = SQLStorageProvider()
-            (authenticator as ProductionAuthenticator).configureFor(accountStorage as SQLStorageProvider)
-        }
-        configParser.prePlugin()
+        //go overboard with checks to make sure dev mode authenticator never triggers on live
+        Auth.configureFor(
+            settings!!.isDevMode
+                    && ServerConstants.MS_SECRET_KEY == "2009scape_development"
+        )
+        ConfigParser().prePlugin()
         ClassScanner.scanClasspath()
         ClassScanner.loadPureInterfaces()
         worldPersists.forEach { it.parse() }

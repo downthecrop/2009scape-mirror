@@ -1,5 +1,6 @@
 package rs09.auth
 
+import core.game.node.entity.player.Player
 import core.game.system.SystemManager
 import rs09.ServerConstants
 import rs09.storage.AccountStorageProvider
@@ -46,5 +47,15 @@ class ProductionAuthenticator : AuthProvider<AccountStorageProvider>() {
             return Pair(AuthResponse.CouldNotLogin, null)
         }
         return Pair(AuthResponse.Success, info)
+    }
+
+    override fun checkPassword(player: Player, password: String): Boolean {
+        return SystemManager.getEncryption().checkPassword(password, player.details.password)
+    }
+
+    override fun updatePassword(username: String, newPassword: String) {
+        val info = storageProvider.getAccountInfo(username)
+        info.password = SystemManager.getEncryption().hashPassword(newPassword)
+        storageProvider.update(info)
     }
 }

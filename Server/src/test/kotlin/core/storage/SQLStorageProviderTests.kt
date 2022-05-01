@@ -1,5 +1,6 @@
 package core.storage
 
+import core.auth.ProductionAuthenticatorTests
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -79,5 +80,22 @@ class SQLStorageProviderTests {
         storage.update(userData)
         val data = storage.getAccountInfo(userData.username)
         Assertions.assertEquals(2, data.rights)
+    }
+
+    @Test fun shouldNotAllowStoreOrUpdateEmptyData() {
+        val info = UserAccountInfo.createDefault()
+        Assertions.assertThrows(IllegalStateException::class.java) {
+            storage.store(info)
+        }
+        Assertions.assertThrows(IllegalStateException::class.java) {
+            storage.update(info)
+        }
+        info.username = "test"
+        Assertions.assertThrows(IllegalStateException::class.java) {
+            storage.store(info)
+        }
+        Assertions.assertThrows(IllegalStateException::class.java) {
+            storage.update(info)
+        }
     }
 }

@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player;
 import core.net.packet.IncomingPacket;
 import core.net.packet.IoBuffer;
 import core.tools.StringUtils;
+import rs09.game.world.GameWorld;
 
 import java.io.File;
 
@@ -21,8 +22,7 @@ public class ReportAbusePacket implements IncomingPacket {
 		String target = StringUtils.longToString(buffer.getLong());
 		Rule rule = Rule.forId(buffer.get());
 		boolean mute = buffer.get() == 1;
-		File file = new File(ServerConstants.PLAYER_SAVE_PATH + target + ".save");
-		if (!file.exists()) {
+		if (!GameWorld.getAccountStorage().checkUsernameTaken(target.toLowerCase())) {
 			player.getPacketDispatch().sendMessage("Invalid player name.");
 			return;
 		}

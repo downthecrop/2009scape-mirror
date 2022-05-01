@@ -81,7 +81,7 @@ public class AccountRegister extends SQLEntryHandler<RegistryDetails> {
 					break;
 				}
 				System.out.println(username);
-				if (!GameWorld.authenticator.canCreateAccountWith(info)) {
+				if (!GameWorld.getAuthenticator().canCreateAccountWith(info)) {
 					response(session, RegistryResponse.NOT_AVAILBLE_USER);
 					return;
 				}
@@ -127,11 +127,11 @@ public class AccountRegister extends SQLEntryHandler<RegistryDetails> {
 				year = buffer.getShort();
 				country = buffer.getShort();
 				buffer.getInt();
-				if (!GameWorld.authenticator.canCreateAccountWith(info)) {
+				if (!GameWorld.getAuthenticator().canCreateAccountWith(info)) {
 					response(session, RegistryResponse.CANNOT_CREATE);
 					return;
 				}
-				GameWorld.authenticator.createAccountWith(info);
+				GameWorld.getAuthenticator().createAccountWith(info);
 				GameWorld.getPulser().submit(new Pulse() {
 					@Override
 					public boolean pulse() {

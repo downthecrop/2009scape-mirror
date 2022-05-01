@@ -385,6 +385,7 @@ public class Player extends Entity {
 		CommunicationInfo.notifyPlayers(this, false, false);
 		HouseManager.leave(this);
 		UpdateSequence.getRenderablePlayers().remove(this);
+		details.save();
 		Repository.getDisconnectionQueue().add(this);
 	}
 
