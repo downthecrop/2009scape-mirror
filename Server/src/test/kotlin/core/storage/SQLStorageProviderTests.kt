@@ -37,9 +37,9 @@ class SQLStorageProviderTests {
         val data = UserAccountInfo.createDefault()
         data.username = "test123123"
         data.password = "test"
+        testAccountNames.add("test123123")
         storage.store(data)
         val exists = storage.checkUsernameTaken("test")
-        testAccountNames.add("test123123")
         Assertions.assertEquals(true, exists)
     }
 
@@ -48,9 +48,9 @@ class SQLStorageProviderTests {
         data.username = "test111"
         data.password = "test"
         data.rights = 2
+        testAccountNames.add("test111")
         storage.store(data)
         val accountInfo = storage.getAccountInfo("test111")
-        testAccountNames.add("test111")
         Assertions.assertEquals(2, accountInfo.rights)
     }
 
@@ -79,6 +79,7 @@ class SQLStorageProviderTests {
         val userData = UserAccountInfo.createDefault()
         userData.username = "bepis"
         userData.password = "test"
+        testAccountNames.add("bepis")
         storage.store(userData)
         storage.remove(userData)
         Assertions.assertEquals(false, storage.checkUsernameTaken("bepis"))
