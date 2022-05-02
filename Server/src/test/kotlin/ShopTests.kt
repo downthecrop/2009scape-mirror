@@ -4,6 +4,8 @@ import org.junit.Assert
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import rs09.game.content.global.shops.Shop
+import rs09.game.content.global.shops.Shops
+import rs09.game.system.config.ShopParser
 
 class ShopTests {
     val testPlayer = TestUtils.getMockPlayer("test")
@@ -131,5 +133,12 @@ class ShopTests {
             status = general.buy(testPlayer, 36, 1)
         }, "Error selling to shop: ${general.playerStock}")
         Assertions.assertEquals(true, status is Shop.TransactionStatus.Success)
+    }
+
+    @Test fun invalidStockJsonShouldNotCauseItemShift() {
+        val invalidJson = "{1277,10,100}-{1277,10,100}-{1279,10,100}"
+        val stock = Shops.parseStock(invalidJson, -1)
+        Assertions.assertEquals(2, stock.size)
+        Assertions.assertEquals(20, stock[0].amount)
     }
 }
