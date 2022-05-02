@@ -6,10 +6,8 @@ class UserAccountInfo(
     var uid: Int,
     var rights: Int,
     var credits: Int,
-    var icon: Int,
     var ip: String,
     var lastUsedIp: String,
-    var computerName: String,
     var muteEndTime: Long,
     var banEndTime: Long,
     var contacts: String,
@@ -23,12 +21,12 @@ class UserAccountInfo(
 ) {
     companion object {
         @JvmStatic fun createDefault() : UserAccountInfo {
-            return UserAccountInfo("", "", 0, 0, 0, 0, "", "", "", 0L, 0L, "", "", "", "", "", 0L, 0L, false)
+            return UserAccountInfo("", "", 0, 0, 0,  "", "", 0L, 0L, "", "", "", "", "", 0L, 0L, false)
         }
     }
 
     override fun toString(): String {
-        return "USER:$username,PASS:$password,UID:$uid,RIGHTS:$rights,CREDITS:$credits,ICON:$icon,IP:$ip,LASTIP:$lastUsedIp"
+        return "USER:$username,PASS:$password,UID:$uid,RIGHTS:$rights,CREDITS:$credits,IP:$ip,LASTIP:$lastUsedIp"
     }
 
     override fun equals(other: Any?): Boolean {
@@ -42,10 +40,8 @@ class UserAccountInfo(
         if (uid != other.uid) return false
         if (rights != other.rights) return false
         if (credits != other.credits) return false
-        if (icon != other.icon) return false
         if (ip != other.ip) return false
         if (lastUsedIp != other.lastUsedIp) return false
-        if (computerName != other.computerName) return false
         if (muteEndTime != other.muteEndTime) return false
         if (banEndTime != other.banEndTime) return false
         if (contacts != other.contacts) return false
@@ -66,10 +62,8 @@ class UserAccountInfo(
         result = 31 * result + uid
         result = 31 * result + rights
         result = 31 * result + credits
-        result = 31 * result + icon
         result = 31 * result + ip.hashCode()
         result = 31 * result + lastUsedIp.hashCode()
-        result = 31 * result + computerName.hashCode()
         result = 31 * result + muteEndTime.hashCode()
         result = 31 * result + banEndTime.hashCode()
         result = 31 * result + contacts.hashCode()

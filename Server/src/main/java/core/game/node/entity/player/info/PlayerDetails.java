@@ -198,22 +198,6 @@ public class PlayerDetails {
 	}
 
 	/**
-	 * Gets the icon.
-	 * @return the icon.
-	 */
-	public Icon getIcon() {
-		return Icon.values()[this.accountInfo.getIcon()];
-	}
-
-	/**
-	 * Sets the icon.
-	 * @param icon the icon to set
-	 */
-	public void setIcon(Icon icon) {
-		this.accountInfo.setIcon(icon.ordinal());
-	}
-
-	/**
 	 * Gets the lastLogin.
 	 * @return the lastLogin.
 	 */

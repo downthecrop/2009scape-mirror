@@ -868,7 +868,6 @@ public class Player extends Entity {
 		if (this.details != null) {
 			details.setBanTime(this.details.getBanTime());
 			details.setMuteTime(this.details.getMuteTime());
-			details.setIcon(this.details.getIcon());
 		}
 		details.getSession().setObject(this);
 		this.details = details;

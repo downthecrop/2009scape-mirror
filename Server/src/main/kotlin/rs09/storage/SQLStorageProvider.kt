@@ -22,10 +22,8 @@ class SQLStorageProvider : AccountStorageProvider {
                 "UID," +
                 "rights," +
                 "credits," +
-                "icon," +
                 "ip," +
                 "lastGameIp," +
-                "computerName," +
                 "muteTime," +
                 "banTime," +
                 "contacts," +
@@ -42,10 +40,8 @@ class SQLStorageProvider : AccountStorageProvider {
                 "password," +
                 "rights," +
                 "credits," +
-                "icon," +
                 "ip," +
                 "lastGameIp," +
-                "computerName," +
                 "muteTime," +
                 "banTime," +
                 "contacts," +
@@ -56,13 +52,12 @@ class SQLStorageProvider : AccountStorageProvider {
                 "timePlayed," +
                 "lastLogin," +
                 "online" +
-                ") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);", Statement.RETURN_GENERATED_KEYS)
+                ") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);", Statement.RETURN_GENERATED_KEYS)
         compiledUpdateInfoQuery = connection.prepareStatement("UPDATE members SET " +
                 "username = ?," +
                 "password = ?," +
                 "rights = ?," +
                 "credits = ?," +
-                "icon = ?," +
                 "lastGameIp = ?," +
                 "muteTime = ?," +
                 "banTime = ?," +
@@ -96,20 +91,18 @@ class SQLStorageProvider : AccountStorageProvider {
                 result.getInt(3),
                 result.getInt(4),
                 result.getInt(5),
-                result.getInt(6),
+                result.getString(6),
                 result.getString(7),
-                result.getString(8),
-                result.getString(9),
-                result.getLong(10),
-                result.getLong(11),
+                result.getLong(8),
+                result.getLong(9),
+                result.getString(10),
+                result.getString(11),
                 result.getString(12),
                 result.getString(13),
                 result.getString(14),
-                result.getString(15),
-                result.getString(16),
-                result.getLong(17),
-                result.getLong(18),
-                result.getBoolean(19)
+                result.getLong(15),
+                result.getLong(16),
+                result.getBoolean(17)
             )
         } else {
             return UserAccountInfo.createDefault()
@@ -133,20 +126,18 @@ class SQLStorageProvider : AccountStorageProvider {
         compiledInsertInfoQuery.setString(2, info.password)
         compiledInsertInfoQuery.setInt(3, info.rights)
         compiledInsertInfoQuery.setInt(4, info.credits)
-        compiledInsertInfoQuery.setInt(5, info.icon)
+        compiledInsertInfoQuery.setString(5, info.ip)
         compiledInsertInfoQuery.setString(6, info.ip)
-        compiledInsertInfoQuery.setString(7, info.ip)
-        compiledInsertInfoQuery.setString(8, info.computerName)
-        compiledInsertInfoQuery.setLong(9, info.muteEndTime)
-        compiledInsertInfoQuery.setLong(10, info.banEndTime)
-        compiledInsertInfoQuery.setString(11, info.contacts)
-        compiledInsertInfoQuery.setString(12, info.blocked)
-        compiledInsertInfoQuery.setString(13, info.clanName)
-        compiledInsertInfoQuery.setString(14, info.currentClan)
-        compiledInsertInfoQuery.setString(15, info.clanReqs)
-        compiledInsertInfoQuery.setLong(16, info.timePlayed)
-        compiledInsertInfoQuery.setLong(17, info.lastLogin)
-        compiledInsertInfoQuery.setBoolean(18, info.online)
+        compiledInsertInfoQuery.setLong(7, info.muteEndTime)
+        compiledInsertInfoQuery.setLong(8, info.banEndTime)
+        compiledInsertInfoQuery.setString(9, info.contacts)
+        compiledInsertInfoQuery.setString(10, info.blocked)
+        compiledInsertInfoQuery.setString(11, info.clanName)
+        compiledInsertInfoQuery.setString(12, info.currentClan)
+        compiledInsertInfoQuery.setString(13, info.clanReqs)
+        compiledInsertInfoQuery.setLong(14, info.timePlayed)
+        compiledInsertInfoQuery.setLong(15, info.lastLogin)
+        compiledInsertInfoQuery.setBoolean(16, info.online)
         compiledInsertInfoQuery.execute()
         val result = compiledInsertInfoQuery.generatedKeys
         if(result.next()){
@@ -172,19 +163,18 @@ class SQLStorageProvider : AccountStorageProvider {
         compiledUpdateInfoQuery.setString(2, info.password)
         compiledUpdateInfoQuery.setInt(3, info.rights)
         compiledUpdateInfoQuery.setInt(4, info.credits)
-        compiledUpdateInfoQuery.setInt(5, info.credits)
-        compiledUpdateInfoQuery.setString(6, info.ip)
-        compiledUpdateInfoQuery.setLong(7, info.muteEndTime)
-        compiledUpdateInfoQuery.setLong(8, info.banEndTime)
-        compiledUpdateInfoQuery.setString(9, info.contacts)
-        compiledUpdateInfoQuery.setString(10, info.blocked)
-        compiledUpdateInfoQuery.setString(11, info.clanName)
-        compiledUpdateInfoQuery.setString(12, info.currentClan)
-        compiledUpdateInfoQuery.setString(13, info.clanReqs)
-        compiledUpdateInfoQuery.setLong(14, info.timePlayed)
-        compiledUpdateInfoQuery.setLong(15, info.lastLogin)
-        compiledUpdateInfoQuery.setBoolean(16, info.online)
-        compiledUpdateInfoQuery.setInt(17, info.uid)
+        compiledUpdateInfoQuery.setString(5, info.ip)
+        compiledUpdateInfoQuery.setLong(6, info.muteEndTime)
+        compiledUpdateInfoQuery.setLong(7, info.banEndTime)
+        compiledUpdateInfoQuery.setString(8, info.contacts)
+        compiledUpdateInfoQuery.setString(9, info.blocked)
+        compiledUpdateInfoQuery.setString(10, info.clanName)
+        compiledUpdateInfoQuery.setString(11, info.currentClan)
+        compiledUpdateInfoQuery.setString(12, info.clanReqs)
+        compiledUpdateInfoQuery.setLong(13, info.timePlayed)
+        compiledUpdateInfoQuery.setLong(14, info.lastLogin)
+        compiledUpdateInfoQuery.setBoolean(15, info.online)
+        compiledUpdateInfoQuery.setInt(16, info.uid)
         compiledUpdateInfoQuery.execute()
     }
 
