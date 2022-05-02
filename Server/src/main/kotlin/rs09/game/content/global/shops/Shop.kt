@@ -246,13 +246,13 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
             sendDialogue(player, "As an ironman, you cannot buy from player stock in shops.")
             return TransactionStatus.Failure("Ironman buying from player stock")
         }
-        val cont = if (isMainStock) getAttribute<Container?>(player, "shop-cont", null) ?: return TransactionStatus.Failure("Invalid shop-cont attr") else playerStock
+        val cont = if (isMainStock) (getAttribute<Container?>(player, "shop-cont", null) ?: return TransactionStatus.Failure("Invalid shop-cont attr")) else playerStock
         val inStock = cont[slot]
         val item = Item(inStock.id, amount)
         if(inStock.amount < amount)
             item.amount = inStock.amount
 
-        if(inStock.amount > stock[slot].amount && !getServerConfig().getBoolean(Shops.personalizedShops, false) && player.ironmanManager.isIronman)
+        if(isMainStock && inStock.amount > stock[slot].amount && !getServerConfig().getBoolean(Shops.personalizedShops, false) && player.ironmanManager.isIronman)
         {
             sendDialogue(player, "As an ironman, you cannot buy overstocked items from shops.")
             return TransactionStatus.Failure("Ironman overstock purchase")

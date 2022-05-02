@@ -41,15 +41,6 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
         {
             SystemLogger.logInfo("[SHOPS] $msg")
         }
-    }
-
-    override fun startup() {
-        val path = ServerConstants.CONFIG_PATH + "shops.json"
-        var shopCount = 0
-        logShop("Using JSON path: $path")
-
-        val reader = FileReader(path)
-        val data = JSONParser().parse(reader) as JSONArray
 
         fun parseStock(stock: String, id: Int): ArrayList<ShopItem>{
             val items = ArrayList<ShopItem>()
@@ -63,13 +54,28 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
                 if(amount == "inf")
                     amount = "-1"
                 val item = tokens[0].toInt()
-                if(idsInStock[item] != null)
+                if(idsInStock[item] != null) {
                     SystemLogger.logWarn("[SHOPS] MALFORMED STOCK IN SHOP ID $id FOR ITEM $item")
-                else
+                    items.forEach { if(it.itemId == item) {
+                        it.amount += amount.toInt()
+                        return@map
+                    }}
+                } else {
                     items.add(ShopItem(item, amount.toInt(), tokens.getOrNull(2)?.toIntOrNull() ?: 100))
+                    idsInStock[item] = true
+                }
             }
             return items
         }
+    }
+
+    override fun startup() {
+        val path = ServerConstants.CONFIG_PATH + "shops.json"
+        var shopCount = 0
+        logShop("Using JSON path: $path")
+
+        val reader = FileReader(path)
+        val data = JSONParser().parse(reader) as JSONArray
 
         for(rawShop in data)
         {
