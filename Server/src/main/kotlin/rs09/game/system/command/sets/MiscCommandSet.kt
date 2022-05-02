@@ -421,7 +421,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
                 reject(player,"Usage: ::setvarbit varbit value")
             }
             val index = args[1].toIntOrNull()
-            val value = args[3].toIntOrNull()
+            val value = args[2].toIntOrNull()
 
             if(index == null || value == null){
                 reject(player,"Usage ::setvarbit index offset value")
