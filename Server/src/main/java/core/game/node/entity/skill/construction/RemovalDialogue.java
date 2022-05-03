@@ -68,7 +68,7 @@ public final class RemovalDialogue extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		if (stage == 0) {
 			if (buttonId == 1) {
-				if (plane == 0 && player.getHouseManager().hasRoom(1, pos[0], pos[1])) {
+				if (plane == 0 && player.getHouseManager().hasRoomAt(1, pos[0], pos[1])) {
 					interpreter.sendPlainMessage(false, "You can't remove a room supporting another room.");
 					stage = 1;
 					return true;

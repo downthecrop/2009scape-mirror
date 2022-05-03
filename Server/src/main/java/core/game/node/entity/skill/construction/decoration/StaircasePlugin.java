@@ -132,7 +132,7 @@ public final class StaircasePlugin extends OptionHandler {
 		} else {
 			Location destination = l.transform(0, 0, z);
 			if (player.getViewport().getRegion() == house.getDungeonRegion()) {
-				destination = house.getRegion().getBaseLocation().transform(l.getLocalX(), l.getLocalY(), 0);
+				destination = house.getHouseRegion().getBaseLocation().transform(l.getLocalX(), l.getLocalY(), 0);
 			}
 			else if (plane == 3) {
 				destination = house.getDungeonRegion().getBaseLocation().transform(l.getLocalX(), l.getLocalY(), 0);

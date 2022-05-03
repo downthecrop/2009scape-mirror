@@ -10,6 +10,7 @@ import rs09.game.system.SystemLogger
 import rs09.game.world.GameSettings
 import rs09.game.world.GameWorld
 import java.io.File
+import java.net.URL
 import kotlin.system.exitProcess
 
 /**
@@ -23,8 +24,17 @@ object ServerConfigParser {
 
     fun parse(path: String){
         confFile = File(parsePath(path))
+        parseFromFile(confFile)
+    }
+
+    fun parse(path: URL?) {
+        confFile = File(path!!.toURI())
+        parseFromFile(confFile)
+    }
+
+    private fun parseFromFile(confFile: File?) {
         if(!confFile!!.canonicalFile.exists()){
-            SystemLogger.logErr("${confFile!!.canonicalFile} does not exist in the current working directory.")
+            SystemLogger.logErr("${confFile.canonicalFile} does not exist.")
             exitProcess(0)
         } else {
             try {
@@ -32,7 +42,7 @@ object ServerConfigParser {
                 parseServerSettings()
                 parseGameSettings()
             } catch (e: java.lang.IllegalStateException) {
-                SystemLogger.logErr("Passed config file is not a TOML file. Path: ${confFile!!.canonicalPath}")
+                SystemLogger.logErr("Passed config file is not a TOML file. Path: ${confFile.canonicalPath}")
                 SystemLogger.logErr("Exception received: $e")
                 SystemLogger.logAlert("Shutting down...")
                 exitProcess(0)

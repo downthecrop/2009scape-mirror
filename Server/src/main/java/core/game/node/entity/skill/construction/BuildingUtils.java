@@ -166,7 +166,7 @@ public final class BuildingUtils {
 		int roomX = object.getLocation().getChunkX();
 		int roomY = object.getLocation().getChunkY();
 		int z = object.getLocation().getZ();
-		Region region = player.getHouseManager().getRegion();
+		Region region = player.getHouseManager().getHouseRegion();
 		if (HouseManager.isInDungeon(player)) {
 			region = player.getHouseManager().getDungeonRegion();
 			z = 3;
@@ -265,7 +265,7 @@ public final class BuildingUtils {
 						Hotspot h = r.getStairs();
 						if (h != null) {
 							h.setDecorationIndex(decIndex);
-							Region reg = plane == 3 ? player.getHouseManager().getDungeonRegion() : player.getHouseManager().getRegion();
+							Region reg = plane == 3 ? player.getHouseManager().getDungeonRegion() : player.getHouseManager().getHouseRegion();
 							if (reg == null) {
 								continue;
 							}
@@ -352,7 +352,7 @@ public final class BuildingUtils {
 		}
 		Location l = object.getLocation();
 		Room room = player.getHouseManager().getRooms()[l.getZ()][l.getChunkX()][l.getChunkY()];
-		Region region = player.getHouseManager().getRegion();
+		Region region = player.getHouseManager().getHouseRegion();
 		if (HouseManager.isInDungeon(player)) {
 			region = player.getHouseManager().getDungeonRegion();
 			room = player.getHouseManager().getRooms()[3][l.getChunkX()][l.getChunkY()];
@@ -396,7 +396,7 @@ public final class BuildingUtils {
 						Hotspot h = r.getStairs();
 						if (h != null) {
 							h.setDecorationIndex(-1);
-							Region reg = plane == 3 ? player.getHouseManager().getDungeonRegion() : player.getHouseManager().getRegion();
+							Region reg = plane == 3 ? player.getHouseManager().getDungeonRegion() : player.getHouseManager().getHouseRegion();
 							if (reg == null) {
 								continue;
 							}
@@ -589,7 +589,7 @@ public final class BuildingUtils {
 		if (HouseManager.isInDungeon(player)) {
 			z = 3;
 		}
-		if (player.getHouseManager().hasRoom(z, location[0], location[1])) {
+		if (player.getHouseManager().hasRoomAt(z, location[0], location[1])) {
 			return location;
 		}
 		return null;
@@ -666,7 +666,7 @@ public final class BuildingUtils {
 		else if (player.getHouseManager().hasExit(z, roomX - 1, roomY, Direction.EAST)) {
 			exits[2] = 1;
 		}
-		else if (player.getHouseManager().hasRoom(z, roomX - 1, roomY)) {
+		else if (player.getHouseManager().hasRoomAt(z, roomX - 1, roomY)) {
 			exits[2] = -1;
 		}
 		if (roomY == 7) {
@@ -675,7 +675,7 @@ public final class BuildingUtils {
 		else if (player.getHouseManager().hasExit(z, roomX, roomY + 1, Direction.SOUTH)) {
 			exits[3] = 1;
 		}
-		else if (player.getHouseManager().hasRoom(z, roomX, roomY + 1)) {
+		else if (player.getHouseManager().hasRoomAt(z, roomX, roomY + 1)) {
 			exits[3] = -1;
 		}
 		if (roomX == 7) {
@@ -684,7 +684,7 @@ public final class BuildingUtils {
 		else if (player.getHouseManager().hasExit(z, roomX + 1, roomY, Direction.WEST)) {
 			exits[0] = 1;
 		}
-		else if (player.getHouseManager().hasRoom(z, roomX + 1, roomY)) {
+		else if (player.getHouseManager().hasRoomAt(z, roomX + 1, roomY)) {
 			exits[0] = -1;
 		}
 		if (roomY == 0) {
@@ -693,7 +693,7 @@ public final class BuildingUtils {
 		else if (player.getHouseManager().hasExit(z, roomX, roomY - 1, Direction.NORTH)) {
 			exits[1] = 1;
 		}
-		else if (player.getHouseManager().hasRoom(z, roomX, roomY - 1)) {
+		else if (player.getHouseManager().hasRoomAt(z, roomX, roomY - 1)) {
 			exits[1] = -1;
 		}
 		return exits;

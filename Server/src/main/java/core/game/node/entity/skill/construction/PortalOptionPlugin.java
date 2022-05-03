@@ -116,7 +116,7 @@ public final class PortalOptionPlugin extends OptionHandler {
 						player.sendMessage("<col=FF0000>Speak with an estate agent to change your house location.");
 						break;
 					}
-					player.getHouseManager().enter(player, buttonId == 2, true);
+					player.getHouseManager().enter(player, buttonId == 2);
 					break;
 				case 3:
 					if(player.getIronmanManager().isIronman()){
@@ -147,7 +147,7 @@ public final class PortalOptionPlugin extends OptionHandler {
 							return Unit.INSTANCE;
 						}
 						p.setAttribute("poh_owner", (String) value);
-						p.getHouseManager().enter(player, false, false);
+						p.getHouseManager().enter(player, false);
 						return Unit.INSTANCE;
 					});
 					break;

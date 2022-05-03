@@ -10,6 +10,9 @@ import core.game.world.map.*;
 import core.game.world.map.zone.RegionZone;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.impl.MultiwayCombatZone;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import rs09.game.system.SystemLogger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,6 +79,13 @@ public final class DynamicRegion extends Region {
 		super(x, y);
 		this.regionId = regionId;
 		this.chunks = new RegionChunk[4][SIZE >> 3][SIZE >> 3];
+	}
+
+	public DynamicRegion(@NotNull ZoneBorders borders) {
+		this(-1, borders.getSouthWestX() >> 6, borders.getSouthWestY() >> 6);
+		setBorders(borders);
+		setUpdateAllPlanes(true);
+		RegionManager.addRegion(getId(), this);
 	}
 
 	/**
