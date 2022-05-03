@@ -4,10 +4,12 @@ import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.system.task.Pulse;
 import core.net.Constants;
 import core.net.IoSession;
+import rs09.ServerConstants;
 import rs09.auth.UserAccountInfo;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
 import rs09.net.event.LoginReadEvent;
+import rs09.net.packet.in.Login;
 
 import java.nio.ByteBuffer;
 import java.util.regex.Matcher;
@@ -63,7 +65,7 @@ public class AccountRegister {
 			case 36://Register details
 				SystemLogger.logInfo("Made it to final stage");
 				buffer.get(); //Useless size being written that is already written in the RSA block
-				buffer = LoginReadEvent.getRSABlock(buffer);
+				buffer = Login.decryptRSABuffer(buffer, ServerConstants.EXPONENT, ServerConstants.MODULUS);
 				if(buffer.get() != 10){ //RSA header (aka did this decrypt properly)
 					SystemLogger.logInfo("Decryption failed during registration :(");
 					response(session, RegistryResponse.CANNOT_CREATE);
