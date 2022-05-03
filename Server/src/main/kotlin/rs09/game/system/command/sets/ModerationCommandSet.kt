@@ -119,7 +119,7 @@ class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
                 GameWorld.Pulser.submit(object : Pulse(2) {
                     override fun pulse(): Boolean {
                         val info = GameWorld.accountStorage.getAccountInfo(name)
-                        info.banEndTime = System.currentTimeMillis() + durationMillis
+                        info.muteEndTime = System.currentTimeMillis() + durationMillis
                         GameWorld.accountStorage.update(info)
                         return true
                     }
