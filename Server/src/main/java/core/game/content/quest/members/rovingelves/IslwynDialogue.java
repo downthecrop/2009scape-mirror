@@ -211,8 +211,6 @@ public class IslwynDialogue extends DialoguePlugin {
 				if (!player.getInventory().add(new Item(4222, 1))) {
 					GroundItemManager.create(new Item(4222, 1), player);
 				}
-				end();
-				quest.setStage(player, 100);
 				quest.finish(player);
 			}
 			end();
@@ -222,8 +220,6 @@ public class IslwynDialogue extends DialoguePlugin {
 				if (!player.getInventory().add(new Item(4233, 1))) {
 					GroundItemManager.create(new Item(4233, 1), player);
 				}
-				end();
-				quest.setStage(player, 100);
 				quest.finish(player);
 			}
 			end();
