@@ -136,7 +136,6 @@ public class BoyDialoguePlugin extends DialoguePlugin {
                 next();
                 break;
             case 14:
-                quest.setStage(player, 100);
                 quest.finish(player);
                 finish();
                 break;
