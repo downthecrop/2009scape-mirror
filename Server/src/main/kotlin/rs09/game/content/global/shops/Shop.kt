@@ -223,9 +223,6 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         if(!item.definition.isUnnoted)
             item.id = item.noteChange
 
-        var base = item.definition.getAlchemyValue(true)
-        if (highAlch) return base
-
         var mod: Int
         mod = if(stockAmount == 0) 70
         else if(currentAmt == 0) 100
@@ -233,6 +230,13 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         else 100 - (100 - 70) * currentAmt / stockAmount
         if(mod < 1) mod = 1
         mod = max(70, min(100, mod))
+
+        val haPrice = item.definition.getAlchemyValue(true)
+        val base = if (highAlch) {
+            haPrice.toDouble()
+        } else {
+            haPrice / 2.0
+        }
 
         val price: Int = ceil(base * mod.toDouble() / 100.0).toInt()
         return max(price, 1)

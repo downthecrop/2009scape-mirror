@@ -15,8 +15,9 @@ class ShopTests {
     }
     val testPlayer = TestUtils.getMockPlayer("test")
     val testIronman = TestUtils.getMockPlayer("test2", IronmanMode.STANDARD)
-    val nonGeneral = TestUtils.getMockShop("Not General", false, Item(4151, 1))
-    val general = TestUtils.getMockShop("General", true, Item(4151, 1))
+    val nonGeneral = TestUtils.getMockShop("Not General", false, false, Item(4151, 1))
+    val general = TestUtils.getMockShop("General", true, false, Item(4151, 1))
+    val highAlch = TestUtils.getMockShop("High(af) Alch", true, true, Item(4151, 1))
 
     @BeforeEach fun beforeEach() {
         testPlayer.inventory.clear()
@@ -47,11 +48,24 @@ class ShopTests {
         assertTransactionSuccess(status)
     }
 
-    @Test fun shouldSellUnstockedItemToGeneralStoreAt70PercentHAValue() {
+    @Test fun shouldSellUnstockedItemToGeneralStoreAt70PercentOfHalfHighAlchValue() {
         val saleItem = Items.RUNE_MED_HELM_1147
         testPlayer.inventory.add(Item(saleItem, 1))
         testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
         val status = general.sell(testPlayer, 0, 1)
+        assertTransactionSuccess(status)
+        Assertions.assertEquals(Items.COINS_995, testPlayer.inventory[0].id)
+        Assertions.assertEquals(
+            (ItemDefinition.forId(saleItem).getAlchemyValue(true) * 0.5 * 0.7).roundToInt(),
+            testPlayer.inventory[0].amount
+        )
+    }
+
+    @Test fun shouldSellUnstockedItemToHighAlchStoreAt70PercentHighAlchValue() {
+        val saleItem = Items.RUNE_MED_HELM_1147
+        testPlayer.inventory.add(Item(saleItem, 1))
+        testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
+        val status = highAlch.sell(testPlayer, 0, 1)
         assertTransactionSuccess(status)
         Assertions.assertEquals(Items.COINS_995, testPlayer.inventory[0].id)
         Assertions.assertEquals(
