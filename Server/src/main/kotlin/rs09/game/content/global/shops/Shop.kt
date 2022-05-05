@@ -222,6 +222,10 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
     private fun getGPSell(item: Item, stockAmount: Int, currentAmt: Int): Int{
         if(!item.definition.isUnnoted)
             item.id = item.noteChange
+
+        var base = item.definition.getAlchemyValue(true)
+        if (highAlch) return base
+
         var mod: Int
         mod = if(stockAmount == 0) 70
         else if(currentAmt == 0) 100
@@ -229,9 +233,6 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         else 100 - (100 - 70) * currentAmt / stockAmount
         if(mod < 1) mod = 1
         mod = max(70, min(100, mod))
-
-        var base = if (highAlch) item.definition.getAlchemyValue(true) else item.definition.value
-        base = max(base, item.definition.value)
 
         val price: Int = ceil(base * mod.toDouble() / 100.0).toInt()
         return max(price, 1)

@@ -1,3 +1,4 @@
+import core.cache.def.impl.ItemDefinition
 import core.game.node.entity.player.link.IronmanMode
 import core.game.node.item.Item
 import org.junit.jupiter.api.Assertions
@@ -53,7 +54,10 @@ class ShopTests {
         val status = general.sell(testPlayer, 0, 1)
         assertTransactionSuccess(status)
         Assertions.assertEquals(Items.COINS_995, testPlayer.inventory[0].id)
-        Assertions.assertEquals((Item(saleItem).definition.getAlchemyValue(true) * 0.7).roundToInt(), testPlayer.inventory[0].amount)
+        Assertions.assertEquals(
+            (ItemDefinition.forId(saleItem).getAlchemyValue(true) * 0.7).roundToInt(),
+            testPlayer.inventory[0].amount
+        )
     }
 
     @Test fun shouldSellUnstockedItemToGeneralStoreAsIronman() {
