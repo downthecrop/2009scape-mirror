@@ -1,23 +1,35 @@
 import core.game.node.entity.player.link.IronmanMode
 import core.game.node.item.Item
-import org.junit.Assert
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.rs09.consts.Items
 import rs09.game.content.global.shops.Shop
 import rs09.game.content.global.shops.Shops
-import rs09.game.system.config.ShopParser
+import kotlin.math.roundToInt
 
 class ShopTests {
+    companion object {
+        init {TestUtils.preTestSetup()}
+    }
     val testPlayer = TestUtils.getMockPlayer("test")
     val testIronman = TestUtils.getMockPlayer("test2", IronmanMode.STANDARD)
     val nonGeneral = TestUtils.getMockShop("Not General", false, Item(4151, 1))
     val general = TestUtils.getMockShop("General", true, Item(4151, 1))
 
+    @BeforeEach fun beforeEach() {
+        testPlayer.inventory.clear()
+    }
+
+    fun assertTransactionSuccess(status: Shop.TransactionStatus) {
+        Assertions.assertEquals(true, status is Shop.TransactionStatus.Success, "Transaction failure: ${if(status is Shop.TransactionStatus.Failure) status.reason else ""}")
+    }
+
     @Test fun shouldSellItemToStore() {
         testPlayer.inventory.add(Item(4151, 1))
         testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
         val status = general.sell(testPlayer, 0, 1)
-        Assertions.assertEquals(true, status is Shop.TransactionStatus.Success, "Transaction failed: ${if(status is Shop.TransactionStatus.Failure) status.reason else ""}")
+        assertTransactionSuccess(status)
     }
 
     @Test fun shouldNotSellUnstockedItemToStandardStore() {
@@ -31,28 +43,38 @@ class ShopTests {
         testPlayer.inventory.add(Item(1, 1))
         testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
         val status = general.sell(testPlayer, 0, 1)
-        Assertions.assertEquals(true, status is Shop.TransactionStatus.Success, "Transaction failure: ${if(status is Shop.TransactionStatus.Failure) status.reason else ""}")
+        assertTransactionSuccess(status)
+    }
+
+    @Test fun shouldSellUnstockedItemToGeneralStoreAt70PercentHAValue() {
+        val saleItem = Items.RUNE_MED_HELM_1147
+        testPlayer.inventory.add(Item(saleItem, 1))
+        testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
+        val status = general.sell(testPlayer, 0, 1)
+        assertTransactionSuccess(status)
+        Assertions.assertEquals(Items.COINS_995, testPlayer.inventory[0].id)
+        Assertions.assertEquals((Item(saleItem).definition.getAlchemyValue(true) * 0.7).roundToInt(), testPlayer.inventory[0].amount)
     }
 
     @Test fun shouldSellUnstockedItemToGeneralStoreAsIronman() {
         testIronman.inventory.add(Item(1, 1))
         testIronman.setAttribute("shop-cont", general.getContainer(testPlayer))
         val status = general.sell(testIronman, 0, 1)
-        Assertions.assertEquals(true, status is Shop.TransactionStatus.Success, "Transaction failure: ${if(status is Shop.TransactionStatus.Failure) status.reason else ""}")
+        assertTransactionSuccess(status)
     }
 
     @Test fun shouldSellStackOfUnstockedItemsToPlayerStock() {
         testPlayer.inventory.add(Item(1, 20))
         testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
         val status = general.sell(testPlayer, 0, 20)
-        Assertions.assertEquals(true, status is Shop.TransactionStatus.Success, "Transaction failure: ${if(status is Shop.TransactionStatus.Failure) status.reason else ""}")
+        assertTransactionSuccess(status)
     }
 
     @Test fun shouldPutSoldUnstockedItemsInPlayerStock() {
         testPlayer.inventory.add(Item(2,1))
         testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
         val status = general.sell(testPlayer, 0, 1)
-        Assertions.assertEquals(true, status is Shop.TransactionStatus.Success, "Transaction failure: ${if(status is Shop.TransactionStatus.Failure) status.reason else ""}")
+        assertTransactionSuccess(status)
         Assertions.assertEquals(1, general.playerStock.getAmount(2))
         Assertions.assertEquals(0, general.getContainer(testPlayer).getAmount(2))
     }
@@ -62,7 +84,7 @@ class ShopTests {
         testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
         testPlayer.setAttribute("shop-main", true)
         val status = general.buy(testPlayer, 0, 1)
-        Assertions.assertEquals(true, status is Shop.TransactionStatus.Success, "Transaction failure: ${if(status is Shop.TransactionStatus.Failure) status.reason else ""}")
+        assertTransactionSuccess(status)
     }
 
     @Test fun shouldAllowStandardPlayerToBuyOverstock() {
@@ -71,7 +93,7 @@ class ShopTests {
         testPlayer.setAttribute("shop-main", true)
         general.getContainer(testPlayer).add(Item(4151, 100))
         val status = general.buy(testPlayer, 0, 1)
-        Assertions.assertEquals(true, status is Shop.TransactionStatus.Success, "Transaction failure: ${if(status is Shop.TransactionStatus.Failure) status.reason else ""}")
+        assertTransactionSuccess(status)
     }
 
     @Test fun shouldAllowStandardPlayerToBuyPlayerStock() {
@@ -80,7 +102,7 @@ class ShopTests {
         testPlayer.setAttribute("shop-main", false)
         general.playerStock.add(Item(4151, 100))
         val status = general.buy(testPlayer, 0, 1)
-        Assertions.assertEquals(true, status is Shop.TransactionStatus.Success, "Transaction failure: ${if(status is Shop.TransactionStatus.Failure) status.reason else ""}")
+        assertTransactionSuccess(status)
     }
 
     @Test fun shouldNotAllowIronmanToBuyOverstock() {
@@ -128,11 +150,11 @@ class ShopTests {
         testPlayer.inventory.add(Item(995, 100000))
         testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
         testPlayer.setAttribute("shop-main", false)
-        var status: Shop.TransactionStatus = Shop.TransactionStatus.Success()
+        var status: Shop.TransactionStatus = Shop.TransactionStatus.Failure("Test did not assign transaction status.")
         Assertions.assertDoesNotThrow({
             status = general.buy(testPlayer, 36, 1)
         }, "Error selling to shop: ${general.playerStock}")
-        Assertions.assertEquals(true, status is Shop.TransactionStatus.Success)
+        assertTransactionSuccess(status)
     }
 
     @Test fun invalidStockJsonShouldNotCauseItemShift() {
