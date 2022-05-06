@@ -13,7 +13,7 @@ class CouncilWorkerDialogue(player: Player? = null) : DialoguePlugin(player){
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if(questStage(player, "Fremennik Trials") in 1..99){
-            loadFile(CouncilWorkerFTDialogue(1))
+            player.dialogueInterpreter.open((CouncilWorkerFTDialogue(1)))
         } else {
             npc(FacialExpression.FRIENDLY,"'Ello there.").also { stage = 0 }
         }
