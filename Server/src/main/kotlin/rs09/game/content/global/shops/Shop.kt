@@ -19,6 +19,7 @@ import rs09.game.world.GameWorld
 import java.lang.Integer.max
 import java.lang.Integer.min
 import kotlin.math.ceil
+import kotlin.math.roundToInt
 
 data class ShopItem(var itemId: Int, var amount: Int, val restockRate: Int = 100)
 
@@ -236,7 +237,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         if (overstock > 10) {
             overstock = 10
         }
-        val price = ceil(base - (item.definition.value * 0.03 * overstock)).toInt()
+        val price = (base - (item.definition.value * 0.03 * overstock)).roundToInt()
         if (price < 1) {
             return 1
         }
