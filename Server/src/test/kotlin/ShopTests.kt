@@ -124,9 +124,52 @@ class ShopTests {
         }
     }
 
+    @Test fun shouldSellNotedUnstockedItemForSamePriceAsUnnoted() {
+        val saleItemId = Items.RUNE_MED_HELM_1147
+        var notedSaleItemId = Items.RUNE_MED_HELM_1148
+        val shopContainer = highAlch.getContainer(testPlayer)
+        Assertions.assertFalse(shopContainer.containItems(saleItemId), "Pre-assertion, shop container should not have the unstocked item to begin with.")
+        testPlayer.setAttribute("shop-cont", shopContainer)
+        val playerStock = highAlch.playerStock
+        Assertions.assertFalse(playerStock.containItems(saleItemId), "Pre-assertion, player stock should not have the unstocked item to begin with.")
+        testPlayer.inventory.add(Item(saleItemId, 1))
+        var status = highAlch.sell(testPlayer, 0, 1)
+        assertTransactionSuccess(status)
+        testPlayer.inventory.clear()
+        val notedSaleItem = Item(notedSaleItemId, 1)
+        testPlayer.inventory.add(notedSaleItem)
+        val alchValue = notedSaleItem.definition.getAlchemyValue(true)
+        val value = notedSaleItem.definition.value
+        status = highAlch.sell(testPlayer, 0, 1)
+        assertTransactionSuccess(status)
+        val expectedCoins = (alchValue.toDouble() - value * 0.03).roundToInt()
+
+        val coinItem = testPlayer.inventory[0]
+        Assertions.assertEquals(Items.COINS_995, coinItem.id)
+        Assertions.assertEquals(
+            expectedCoins,
+            coinItem.amount,
+            "Selling noted item should yield the same devalued price as base item."
+        )
+    }
+
+    @Test fun minimumSellPriceShouldBe1Coin() {
+        testPlayer.inventory.add(Item(Items.EMPTY_POT_1931, 1))
+        testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
+        val status = general.sell(testPlayer, 0, 1)
+        assertTransactionSuccess(status)
+        val coinItem = testPlayer.inventory[0]
+        Assertions.assertEquals(Items.COINS_995, coinItem.id)
+        Assertions.assertEquals(
+            1,
+            coinItem.amount,
+            "1 coin should be the minimum selling price."
+        )
+    }
+
     @Test fun shouldSellUnstockedItemToGeneralStoreAsIronman() {
         testIronman.inventory.add(Item(1, 1))
-        testIronman.setAttribute("shop-cont", general.getContainer(testPlayer))
+        testIronman.setAttribute("shop-cont", general.getContainer(testIronman))
         val status = general.sell(testIronman, 0, 1)
         assertTransactionSuccess(status)
     }
