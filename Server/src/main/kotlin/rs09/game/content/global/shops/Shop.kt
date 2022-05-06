@@ -15,11 +15,11 @@ import org.rs09.consts.Components
 import org.rs09.consts.Items
 import rs09.ServerConstants
 import rs09.game.content.global.shops.Shops.Companion.logShop
-import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
 import java.lang.Integer.max
 import java.lang.Integer.min
 import kotlin.math.ceil
+import kotlin.math.roundToInt
 
 data class ShopItem(var itemId: Int, var amount: Int, val restockRate: Int = 100)
 
@@ -220,26 +220,18 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
     }
 
     private fun getGPSell(item: Item, stockAmount: Int, currentAmt: Int): Int{
-        if(!item.definition.isUnnoted)
+        if (!item.definition.isUnnoted) {
             item.id = item.noteChange
-
-        var mod: Int
-        mod = if(stockAmount == 0) 70
-        else if(currentAmt == 0) 100
-        else if(currentAmt >= stockAmount) 70
-        else 100 - (100 - 70) * currentAmt / stockAmount
-        if(mod < 1) mod = 1
-        mod = max(70, min(100, mod))
-
-        val haPrice = item.definition.getAlchemyValue(true)
-        val base = if (highAlch) {
-            haPrice.toDouble()
-        } else {
-            haPrice / 2.0
         }
-
-        val price: Int = ceil(base * mod.toDouble() / 100.0).toInt()
-        return max(price, 1)
+        val base = item.definition.getAlchemyValue(highAlch)
+        var overstock = currentAmt - stockAmount
+        if (overstock < 0) {
+            return base
+        }
+        if (overstock > 10) {
+            overstock = 10
+        }
+        return (base - (item.definition.value * 0.03 * overstock)).roundToInt()
     }
 
     fun buy(player: Player, slot: Int, amount: Int) : TransactionStatus

@@ -1,4 +1,3 @@
-import core.cache.def.impl.ItemDefinition
 import core.game.node.entity.player.link.IronmanMode
 import core.game.node.item.Item
 import org.junit.jupiter.api.Assertions
@@ -7,23 +6,32 @@ import org.junit.jupiter.api.Test
 import org.rs09.consts.Items
 import rs09.game.content.global.shops.Shop
 import rs09.game.content.global.shops.Shops
+import kotlin.math.min
 import kotlin.math.roundToInt
 
 class ShopTests {
     companion object {
         init {TestUtils.preTestSetup()}
     }
-    val testPlayer = TestUtils.getMockPlayer("test")
-    val testIronman = TestUtils.getMockPlayer("test2", IronmanMode.STANDARD)
-    val nonGeneral = TestUtils.getMockShop("Not General", false, false, Item(4151, 1))
-    val general = TestUtils.getMockShop("General", true, false, Item(4151, 1))
-    val highAlch = TestUtils.getMockShop("High(af) Alch", true, true, Item(4151, 1))
+
+    private val testPlayer = TestUtils.getMockPlayer("test")
+    private val testIronman = TestUtils.getMockPlayer("test2", IronmanMode.STANDARD)
+    var nonGeneral = TestUtils.getMockShop("Not General", false, false, Item(4151, 1))
+    var general = TestUtils.getMockShop("General", true, false, Item(4151, 1))
+    var highAlch = TestUtils.getMockShop("High(af) Alch", true, true, Item(4151, 1))
 
     @BeforeEach fun beforeEach() {
-        testPlayer.inventory.clear()
+        val testPlayers = arrayOf(testPlayer, testIronman)
+        for (player in testPlayers) {
+            player.inventory.clear()
+            player.attributes.remove("shop-cont")
+        }
+        nonGeneral.playerStock.clear()
+        general.playerStock.clear()
+        highAlch.playerStock.clear()
     }
 
-    fun assertTransactionSuccess(status: Shop.TransactionStatus) {
+    private fun assertTransactionSuccess(status: Shop.TransactionStatus) {
         Assertions.assertEquals(true, status is Shop.TransactionStatus.Success, "Transaction failure: ${if(status is Shop.TransactionStatus.Failure) status.reason else ""}")
     }
 
@@ -48,30 +56,72 @@ class ShopTests {
         assertTransactionSuccess(status)
     }
 
-    @Test fun shouldSellUnstockedItemToGeneralStoreAt70PercentOfHalfHighAlchValue() {
-        val saleItem = Items.RUNE_MED_HELM_1147
-        testPlayer.inventory.add(Item(saleItem, 1))
-        testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
-        val status = general.sell(testPlayer, 0, 1)
-        assertTransactionSuccess(status)
-        Assertions.assertEquals(Items.COINS_995, testPlayer.inventory[0].id)
-        Assertions.assertEquals(
-            (ItemDefinition.forId(saleItem).getAlchemyValue(true) * 0.5 * 0.7).roundToInt(),
-            testPlayer.inventory[0].amount
-        )
+    @Test fun shouldSellUnstockedItemToGeneralStoreUsingLowAlchBaseValue() {
+        //starts at 40% value - a.k.a. low alch price
+        //drops 3% value per item stocked
+        //bottoms out at 10% value (25% of the low alch price) after 10 items stocked
+        val saleItemId = Items.RUNE_MED_HELM_1147
+        val shopContainer = general.getContainer(testPlayer)
+        Assertions.assertFalse(shopContainer.containItems(saleItemId), "Pre-assertion, shop container should not have the unstocked item to begin with.")
+        testPlayer.setAttribute("shop-cont", shopContainer)
+        val playerStock = general.playerStock
+        Assertions.assertFalse(playerStock.containItems(saleItemId), "Pre-assertion, player stock should not have the unstocked item to begin with.")
+        val saleItem = Item(saleItemId, 1)
+        val alchValue = saleItem.definition.getAlchemyValue(false)
+        val value = saleItem.definition.value
+        Assertions.assertEquals((value * 0.4).roundToInt(), alchValue, "Pre-assertion, low alch value should be 40% value.")
+
+        for (i in 0..14) {
+            val expectedCoins = (alchValue.toDouble() - value * min(0.03 * i, 0.30)).roundToInt()
+            testPlayer.inventory.add(saleItem.copy())
+            Assertions.assertEquals(saleItemId, testPlayer.inventory.getId(0), "Pre-assertion, should have item in inventory slot 0.")
+
+            val status = general.sell(testPlayer, 0, 1)
+
+            assertTransactionSuccess(status)
+            val coinItem = testPlayer.inventory[0]
+            Assertions.assertEquals(Items.COINS_995, coinItem.id)
+            Assertions.assertEquals(
+                expectedCoins,
+                coinItem.amount,
+                "Selling item $i should yield the expected price."
+            )
+            testPlayer.inventory.clear()
+        }
     }
 
-    @Test fun shouldSellUnstockedItemToHighAlchStoreAt70PercentHighAlchValue() {
-        val saleItem = Items.RUNE_MED_HELM_1147
-        testPlayer.inventory.add(Item(saleItem, 1))
-        testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
-        val status = highAlch.sell(testPlayer, 0, 1)
-        assertTransactionSuccess(status)
-        Assertions.assertEquals(Items.COINS_995, testPlayer.inventory[0].id)
-        Assertions.assertEquals(
-            (ItemDefinition.forId(saleItem).getAlchemyValue(true) * 0.7).roundToInt(),
-            testPlayer.inventory[0].amount
-        )
+    @Test fun shouldSellUnstockedItemToHighAlchStoreUsingHighAlchBaseValue() {
+        //starts at 60% value - a.k.a. high alch price
+        //drops 3% value per item stocked
+        //bottoms out at 30% value (50% of the high alch price) after 10 items stocked
+        val saleItemId = Items.RUNE_MED_HELM_1147
+        val shopContainer = highAlch.getContainer(testPlayer)
+        Assertions.assertFalse(shopContainer.containItems(saleItemId), "Pre-assertion, shop container should not have the unstocked item to begin with.")
+        testPlayer.setAttribute("shop-cont", shopContainer)
+        val playerStock = highAlch.playerStock
+        Assertions.assertFalse(playerStock.containItems(saleItemId), "Pre-assertion, player stock should not have the unstocked item to begin with.")
+        val saleItem = Item(saleItemId, 1)
+        val alchValue = saleItem.definition.getAlchemyValue(true)
+        val value = saleItem.definition.value
+        Assertions.assertEquals((value * 0.6).roundToInt(), alchValue, "Pre-assertion, high alch value should be 60% value.")
+
+        for (i in 0..14) {
+            val expectedCoins = (alchValue.toDouble() - value * min(0.03 * i, 0.30)).roundToInt()
+            testPlayer.inventory.add(saleItem.copy())
+            Assertions.assertEquals(saleItemId, testPlayer.inventory.getId(0), "Pre-assertion, should have item in inventory slot 0.")
+
+            val status = highAlch.sell(testPlayer, 0, 1)
+
+            assertTransactionSuccess(status)
+            val coinItem = testPlayer.inventory[0]
+            Assertions.assertEquals(Items.COINS_995, coinItem.id)
+            Assertions.assertEquals(
+                expectedCoins,
+                coinItem.amount,
+                "Selling item $i should yield the expected price."
+            )
+            testPlayer.inventory.clear()
+        }
     }
 
     @Test fun shouldSellUnstockedItemToGeneralStoreAsIronman() {
