@@ -15,11 +15,11 @@ import org.rs09.consts.Components
 import org.rs09.consts.Items
 import rs09.ServerConstants
 import rs09.game.content.global.shops.Shops.Companion.logShop
-import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
 import java.lang.Integer.max
 import java.lang.Integer.min
 import kotlin.math.ceil
+import kotlin.math.roundToInt
 
 data class ShopItem(var itemId: Int, var amount: Int, val restockRate: Int = 100)
 
@@ -168,7 +168,14 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
     {
         val shopCont = getAttribute<Container?>(player, "shop-cont", null) ?: return Pair(null, Item(-1,-1))
         val item = player.inventory[slot]
-        var (isPlayerStock, shopSlot) = getStockSlot(item.id)
+        val shopItemId = if (item.definition.isUnnoted) {
+            item.id
+        }
+        else
+        {
+            item.noteChange
+        }
+        var (isPlayerStock, shopSlot) = getStockSlot(shopItemId)
 
         val stockAmt =
             if(isPlayerStock)
@@ -178,7 +185,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
                 else 0
             }
         val currentAmt =
-            if(isPlayerStock) playerStock.getAmount(item.id)
+            if(isPlayerStock) playerStock.getAmount(shopItemId)
             else {
                 if(shopSlot != -1) shopCont[shopSlot].amount
                 else {
@@ -191,7 +198,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         {
             Items.TOKKUL_6529 -> item.definition.getConfiguration("tokkul_price", 1)
             Items.ARCHERY_TICKET_1464 -> item.definition.getConfiguration("archery_ticket_price", 1)
-            else -> getGPSell(Item(item.id, 1), stockAmt, currentAmt)
+            else -> getGPSell(Item(shopItemId, 1), stockAmt, currentAmt)
         }
 
         if(!general && stockAmt == 0 && shopSlot == -1)
@@ -202,7 +209,8 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         return Pair(if (isPlayerStock) playerStock else shopCont, Item(currency, price))
     }
 
-    private fun getGPCost(item: Item, stockAmount: Int, currentAmt: Int): Int{
+    private fun getGPCost(item: Item, stockAmount: Int, currentAmt: Int): Int
+    {
         var mod: Int
         mod = if(stockAmount == 0) 100
         else if(currentAmt == 0) 130
@@ -219,22 +227,21 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         return max(price, 1)
     }
 
-    private fun getGPSell(item: Item, stockAmount: Int, currentAmt: Int): Int{
-        if(!item.definition.isUnnoted)
-            item.id = item.noteChange
-        var mod: Int
-        mod = if(stockAmount == 0) 70
-        else if(currentAmt == 0) 100
-        else if(currentAmt >= stockAmount) 70
-        else 100 - (100 - 70) * currentAmt / stockAmount
-        if(mod < 1) mod = 1
-        mod = max(70, min(100, mod))
-
-        var base = if (highAlch) item.definition.getAlchemyValue(true) else item.definition.value
-        base = max(base, item.definition.value)
-
-        val price: Int = ceil(base * mod.toDouble() / 100.0).toInt()
-        return max(price, 1)
+    private fun getGPSell(item: Item, stockAmount: Int, currentAmt: Int): Int
+    {
+        val base = item.definition.getAlchemyValue(highAlch)
+        var overstock = currentAmt - stockAmount
+        if (overstock < 0) {
+            return base
+        }
+        if (overstock > 10) {
+            overstock = 10
+        }
+        val price = (base - (item.definition.value * 0.03 * overstock)).roundToInt()
+        if (price < 1) {
+            return 1
+        }
+        return price
     }
 
     fun buy(player: Player, slot: Int, amount: Int) : TransactionStatus

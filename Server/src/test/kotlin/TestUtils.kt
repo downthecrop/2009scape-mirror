@@ -22,8 +22,13 @@ object TestUtils {
         return p
     }
 
-    fun getMockShop(name: String, general: Boolean, vararg stock: Item) : Shop {
-        return Shop(name, stock.map { ShopItem(it.id, it.amount, 100) }.toTypedArray(), general)
+    fun getMockShop(name: String, general: Boolean, highAlch: Boolean, vararg stock: Item) : Shop {
+        return Shop(
+            name,
+            stock.map { ShopItem(it.id, it.amount, 100) }.toTypedArray(),
+            general,
+            highAlch = highAlch
+        )
     }
 
     fun preTestSetup() {
