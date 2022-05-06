@@ -187,6 +187,7 @@ public final class PacketRepository {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void send(Class<? extends OutgoingPacket> clazz, Context context) {
+		if(context.getPlayer().getSession() == null) return;
 		OutgoingPacket p = OUTGOING_PACKETS.get(clazz);
 		if (p == null) {
 			SystemLogger.logErr("Invalid outgoing packet [handler=" + clazz + ", context=" + context + "].");

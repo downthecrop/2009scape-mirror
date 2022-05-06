@@ -44,9 +44,9 @@ public final class HouseZone extends MapZone {
         if (previousDungeon != -1) {
             unregisterRegion(previousDungeon);
         }
-        registerRegion(house.getRegion().getId());
+        registerRegion(house.getHouseRegion().getId());
         if (house.getDungeonRegion() != null) {
-            registerRegion(house.getRegion().getId());
+            registerRegion(house.getHouseRegion().getId());
         }
     }
 
