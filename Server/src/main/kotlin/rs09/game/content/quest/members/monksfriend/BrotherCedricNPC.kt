@@ -1,6 +1,8 @@
 package rs09.game.content.quest.members.monksfriend
 
+import api.questStage
 import api.sendItemDialogue
+import api.setQuestStage
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.item.Item
@@ -16,7 +18,8 @@ import rs09.tools.END_DIALOGUE
  */
 class BrotherCedricDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = player!!.questRepository.getStage("Monk's Friend")
+        val questName = "Monk's Friend"
+        val questStage = questStage(player!!, questName)
         when {
             questStage < 30 -> {
                 when(stage) {
@@ -33,7 +36,7 @@ class BrotherCedricDialogue : DialogueFile() {
                     0 -> playerl(FacialExpression.HAPPY, "Brother Cedric are you okay?").also{stage++}
                     1 -> npcl(FacialExpression.DRUNK, "Yeesshhh, I'm very, very drunk..hic..up..").also{stage++}
                     2 -> playerl(FacialExpression.NEUTRAL, "Brother Omad needs the wine for the party.").also{stage++}
-                    3 -> npcl(FacialExpression.SAD, "Oh dear, oh dear, I knew I had to do something!").also{stage = END_DIALOGUE}.also{setQuest(player!!, 40)}
+                    3 -> npcl(FacialExpression.SAD, "Oh dear, oh dear, I knew I had to do something!").also{stage = END_DIALOGUE}.also{ setQuestStage(player!!, questName, 40) }
                 }
             }
             questStage == 40 -> {
@@ -51,7 +54,7 @@ class BrotherCedricDialogue : DialogueFile() {
                         sendItemDialogue(player!!, Items.JUG_OF_WATER_1937, "You hand the monk a jug of water.")
                         stage=0
                         player!!.inventory.remove(Item(Items.JUG_OF_WATER_1937))
-                        setQuest(player!!, 41)
+                        setQuestStage(player!!, questName, 41)
                     }
                 }
             }
@@ -69,7 +72,7 @@ class BrotherCedricDialogue : DialogueFile() {
                     }
                     5 -> npcl(FacialExpression.HAPPY, "In that case I'd better drink more wine! It helps me think.").also {stage=END_DIALOGUE}
                     10 -> npcl(FacialExpression.HAPPY, "Excellent, I just need some wood.").also{stage++}
-                    11 -> playerl(FacialExpression.NEUTRAL, "Ok, I'll see what I can find.").also{stage = END_DIALOGUE}.also{setQuest(player!!, 42)}
+                    11 -> playerl(FacialExpression.NEUTRAL, "Ok, I'll see what I can find.").also{stage = END_DIALOGUE}.also{setQuestStage(player!!, questName, 42)}
                 }
             }
             questStage == 42 -> {
@@ -86,7 +89,7 @@ class BrotherCedricDialogue : DialogueFile() {
                     4 -> playerl(FacialExpression.HAPPY, "Ok! I'll see you later!").also{
                         stage=END_DIALOGUE
                         player!!.inventory.remove(Item(Items.LOGS_1511))
-                        setQuest(player!!, 50)
+                        setQuestStage(player!!, questName, 50)
                     }
                 }
             }

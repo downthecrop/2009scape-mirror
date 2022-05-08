@@ -22,7 +22,8 @@ import rs09.tools.END_DIALOGUE
 */
 class BrotherOmadDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = player!!.questRepository.getStage("Monk's Friend")
+        val questName = "Monk's Friend"
+        val questStage = questStage(player!!, questName)
         when (questStage) {
             0 -> {
                 when(stage) {
@@ -69,7 +70,7 @@ class BrotherOmadDialogue : DialogueFile() {
                     }
                     31 -> npcl(FacialExpression.HAPPY, "Really, that's excellent, well done! Maybe now I will be able to get some rest.").also{stage++}
                     32 -> npcl(FacialExpression.SAD, "*yawn*..I'm off to bed! Farewell brave traveller!").also{player!!.inventory.remove(Item(Items.CHILDS_BLANKET_90))
-                        setQuest(player!!, 20); stage = END_DIALOGUE}
+                        setQuestStage(player!!, questName, 20); stage = END_DIALOGUE}
                 }
             }
             20 -> {
@@ -103,7 +104,7 @@ class BrotherOmadDialogue : DialogueFile() {
                     996 -> npcl(FacialExpression.NEUTRAL, "Okay traveller, take care.").also{stage = END_DIALOGUE}
                     997 -> npcl(FacialExpression.NEUTRAL, "Of course, but we need the wine first.").also{stage = END_DIALOGUE}
                     42 -> npcl(FacialExpression.FRIENDLY, "Oh, he won't be far. Probably out in the forest.").also{stage++}
-                    43 -> playerl(FacialExpression.FRIENDLY, "Ok, I'll go and find him.").also { stage = END_DIALOGUE}.also{ setQuest(player!!, 30);}
+                    43 -> playerl(FacialExpression.FRIENDLY, "Ok, I'll go and find him.").also { stage = END_DIALOGUE}.also{ setQuestStage(player!!, questName, 30)}
                 }
             }
             30 -> {
@@ -191,7 +192,6 @@ class BrotherOmadDialogue : DialogueFile() {
                     }
                     25 -> if (questComplete) {
                         player!!.questRepository.getQuest("Monk's Friend").finish(player)
-                        player!!.questRepository.getQuest("Monk's Friend").setStage(player, 100)
                     }
                 }
                 count++
