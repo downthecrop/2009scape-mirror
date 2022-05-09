@@ -28,7 +28,7 @@ import rs09.game.world.GameWorld.Pulser
 
 class TFTInteractionListeners : InteractionListener{
 
-    private val BEER = Items.BEER_3803
+    private val BEER = intArrayOf(Items.BEER_3803,Items.BEER_1917)
     private val WORKER = NPCs.COUNCIL_WORKMAN_1287
     private val FISH_ALTAR = 4141
     private val FISH = intArrayOf(Items.RAW_SHARK_383,Items.RAW_SEA_TURTLE_395,Items.RAW_MANTA_RAY_389)
