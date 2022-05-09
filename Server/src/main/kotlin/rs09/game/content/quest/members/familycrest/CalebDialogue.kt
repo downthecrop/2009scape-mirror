@@ -1,10 +1,15 @@
 package core.game.content.quest.members.familycrest
 
+import api.addItem
+import api.inInventory
+import api.removeItem
+import api.setAttribute
 import core.game.content.dialogue.DialoguePlugin
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
+import org.rs09.consts.Items
 
 
 @Initializable
@@ -201,28 +206,35 @@ class CalebDialogue (player: Player? = null): DialoguePlugin(player) {
                 player.inventory.add(CREST_PIECE)
             }
             406 -> npc("I suggest you be less careless in the future. ",
-                    "The crest is extremely valuable, and utterly irreplacable.").also{stage = 1000}
+                    "The crest is extremely valuable, and utterly irreplaceable.").also{stage = 1000}
 
             6000 -> when(buttonId){
-                1-> if(DoMissingGuantletCheck() != -1){
-                    var gauntletID = DoMissingGuantletCheck()
+                1 -> {
+                    val givingGauntletsId = Items.COOKING_GAUNTLETS_775
+                    if (inInventory(player, givingGauntletsId)) {
+                        npc("You already have the Cooking gauntlets.")
+                    }
+                    else {
+                        val otherGauntlets =
+                            if (inInventory(player, Items.CHAOS_GAUNTLETS_777)) Items.CHAOS_GAUNTLETS_777
+                            else if (inInventory(player, Items.GOLDSMITH_GAUNTLETS_776)) Items.GOLDSMITH_GAUNTLETS_776
+                            else if (inInventory(player, Items.FAMILY_GAUNTLETS_778)) Items.FAMILY_GAUNTLETS_778
+                            else -1
 
-                    if(gauntletID == 775){
-                        npc("You already have the Cooking Guantlets.")
-                        stage = 1000
+                        if (otherGauntlets == -1) {
+                            npc("You do not have the gauntlets with you in your inventory")
+                        }
+                        else {
+                            npc("Here you go")
+                            if (removeItem(player, otherGauntlets)) {
+                                addItem(player, givingGauntletsId)
+                                setAttribute(player, "/save:family-crest:gauntlets", givingGauntletsId)
+                            }
+                        }
                     }
-                    else{
-                        npc("Here you go")
-                        player.inventory.remove(Item(gauntletID))
-                        player.inventory.add(Item(775))
-                        stage = 1000
-                    }
-                }
-                else{
-                    npc("You do not have the guantlets with you in your inventory")
                     stage = 1000
                 }
-                2-> player("Never mind").also{stage = 1000}
+                2 -> player("Never mind").also{ stage = 1000 }
             }
 
             1000 -> end()

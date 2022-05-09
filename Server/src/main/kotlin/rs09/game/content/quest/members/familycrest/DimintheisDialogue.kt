@@ -27,16 +27,11 @@ class DimintheisDialogue(player: Player? = null): DialoguePlugin(player) {
         val questComplete = isQuestComplete(player, questName)
 
         if (questStage == 20 && inInventory(player, Items.FAMILY_CREST_782)) {
-            if (removeItem(player, Items.FAMILY_CREST_782)) {
-                player("I have retrieved your crest.").also{ stage = 5000 }
-            }
-            else {
-                stage = 1000
-            }
+            player("I have retrieved your crest.").also{ stage = 5000 }
             return true;
         }
 
-        val hasGauntlets = hasAnyItem(player, Items.COOKING_GAUNTLETS_775, Items.GOLDSMITH_GAUNTLETS_776, Items.CHAOS_GAUNTLETS_777, Items.FAMILY_GAUNTLETS_778)
+        val hasGauntlets = hasAnItem(player, Items.COOKING_GAUNTLETS_775, Items.GOLDSMITH_GAUNTLETS_776, Items.CHAOS_GAUNTLETS_777, Items.FAMILY_GAUNTLETS_778).first != null
 
         if (questComplete && hasGauntlets) {
             npc("Thank you for saving our family honour,  ",
@@ -172,12 +167,14 @@ class DimintheisDialogue(player: Player? = null): DialoguePlugin(player) {
                     "Take them to one of my sons, " ,
                     "they should be able to imbue them with a skill for you.").also {
                         stage = 1000
-                        finishQuest(player, questName)
+                        if (removeItem(player, Items.FAMILY_CREST_782)) {
+                            finishQuest(player, questName)
+                        }
                     }
 
             6000 -> npc("Not to worry, here they are").also {
                 stage = 1000
-                addItem(player, Items.FAMILY_GAUNTLETS_778)
+                addItem(player, getAttribute(player, "family-crest:gauntlets", Items.FAMILY_GAUNTLETS_778))
             }
 
             1000 -> end()

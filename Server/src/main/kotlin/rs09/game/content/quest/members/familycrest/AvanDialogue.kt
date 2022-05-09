@@ -1,10 +1,12 @@
 package core.game.content.quest.members.familycrest
 
+import api.*
 import core.game.content.dialogue.DialoguePlugin
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
+import org.rs09.consts.Items
 
 @Initializable
 class AvanDialogue (player: Player? = null): DialoguePlugin(player) {
@@ -174,39 +176,37 @@ class AvanDialogue (player: Player? = null): DialoguePlugin(player) {
                     player.inventory.add(CREST_PIECE_AVAN)}
 
             6000 -> when(buttonId){
-                1-> if(DoMissingGuantletCheck() != -1){
-                    var gauntletID = DoMissingGuantletCheck()
+                1 -> {
+                    val givingGauntletsId = Items.GOLDSMITH_GAUNTLETS_776
+                    if (inInventory(player, givingGauntletsId)) {
+                        npc("You already have the Goldsmith gauntlets.")
+                    }
+                    else {
+                        val otherGauntlets =
+                            if (inInventory(player, Items.COOKING_GAUNTLETS_775)) Items.COOKING_GAUNTLETS_775
+                            else if (inInventory(player, Items.CHAOS_GAUNTLETS_777)) Items.CHAOS_GAUNTLETS_777
+                            else if (inInventory(player, Items.FAMILY_GAUNTLETS_778)) Items.FAMILY_GAUNTLETS_778
+                            else -1
 
-                    if(gauntletID == 776){
-                        npc("You already have the Goldsmith guantlets.")
-                        stage = 1000
+                        if (otherGauntlets == -1) {
+                            npc("You do not have the gauntlets with you in your inventory")
+                        }
+                        else {
+                            npc("Here you go")
+                            if (removeItem(player, otherGauntlets)) {
+                                addItem(player, givingGauntletsId)
+                                setAttribute(player, "/save:family-crest:gauntlets", givingGauntletsId)
+                            }
+                        }
                     }
-                    else{
-                        npc("Here you go")
-                        player.inventory.remove(Item(gauntletID))
-                        player.inventory.add(Item(776))
-                        stage = 1000
-                    }
-                }
-                else{
-                    npc("You do not have the guantlets with you in your inventory")
                     stage = 1000
                 }
-                2-> player("Never mind").also{stage = 1000}
+                2 -> player("Never mind").also{ stage = 1000 }
             }
             1000 -> end()
         }
 
         return true
-    }
-
-    private fun DoMissingGuantletCheck(): Int{
-        var itemsToCheck = listOf(775, 776, 777, 778)
-        for(item in itemsToCheck){
-            if(player.inventory.containItems(item))
-                return item
-        }
-        return -1
     }
 
     override fun getIds(): IntArray {
