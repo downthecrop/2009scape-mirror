@@ -21,7 +21,7 @@ class UserAccountInfo(
 ) {
     companion object {
         @JvmStatic fun createDefault() : UserAccountInfo {
-            return UserAccountInfo("", "", 0, 0, 0,  "", "", 0L, 0L, "", "", "", "", "", 0L, 0L, false)
+            return UserAccountInfo("", "", 0, 0, 0,  "", "", 0L, 0L, "", "", "", "", "1,0,8,9", 0L, 0L, false)
         }
     }
 

@@ -1,6 +1,7 @@
 package rs09.storage
 
 import rs09.auth.UserAccountInfo
+import java.lang.Long.max
 import java.sql.*
 
 class SQLStorageProvider : AccountStorageProvider {
@@ -8,7 +9,7 @@ class SQLStorageProvider : AccountStorageProvider {
     var connectionUsername = ""
     var connectionPassword = ""
 
-    private fun getConnection(): Connection {
+    fun getConnection(): Connection {
         Class.forName("com.mysql.cj.jdbc.Driver")
         return DriverManager.getConnection(connectionString, connectionUsername, connectionPassword)
     }
@@ -33,30 +34,32 @@ class SQLStorageProvider : AccountStorageProvider {
 
     override fun getAccountInfo(username: String): UserAccountInfo {
         val conn = getConnection()
-        conn.use {
-            val compiledAccountInfoQuery = it.prepareStatement(accountInfoQuery)
+        conn.use { con ->
+            val compiledAccountInfoQuery = con.prepareStatement(accountInfoQuery)
             compiledAccountInfoQuery.setString(1, username.toLowerCase())
             val result = compiledAccountInfoQuery.executeQuery()
             if (result.next()) {
-                return UserAccountInfo(
-                    username,
-                    result.getString(2),
-                    result.getInt(3),
-                    result.getInt(4),
-                    result.getInt(5),
-                    result.getString(6),
-                    result.getString(7),
-                    result.getLong(8),
-                    result.getLong(9),
-                    result.getString(10),
-                    result.getString(11),
-                    result.getString(12),
-                    result.getString(13),
-                    result.getString(14),
-                    result.getLong(15),
-                    result.getLong(16),
-                    result.getBoolean(17)
-                )
+                val userData = UserAccountInfo.createDefault()
+                userData.username = username
+
+                result.getString(2)?.let { userData.password = it }
+                result.getInt(3).let { userData.uid = it }
+                result.getInt(4).let { userData.rights = it }
+                result.getInt(5).let { userData.credits = it }
+                result.getString(6)?.let { userData.ip = it }
+                result.getString(7)?.let { userData.lastUsedIp = it }
+                result.getLong(8).let { userData.muteEndTime = max(0L, it) }
+                result.getLong(9).let { userData.banEndTime = max(0L, it) }
+                result.getString(10)?.let { userData.contacts = it }
+                result.getString(11)?.let { userData.blocked = it }
+                result.getString(12)?.let { userData.clanName = it }
+                result.getString(13)?.let { userData.currentClan = it }
+                result.getString(14)?.let { userData.clanReqs = it }
+                result.getLong(15).let { userData.timePlayed = max(0L, it) }
+                result.getLong(16).let { userData.lastLogin = max(0L, it) }
+                result.getBoolean(17).let { userData.online = it }
+
+                return userData
             } else {
                 return UserAccountInfo.createDefault()
             }

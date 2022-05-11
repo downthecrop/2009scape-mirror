@@ -113,4 +113,38 @@ class SQLStorageProviderTests {
             storage.update(info)
         }
     }
+
+    @Test fun shouldSetDefaultValuesWhenDBFieldIsNull() {
+        val defaultData = UserAccountInfo.createDefault()
+
+        //manually insert a definitely-mostly-null entry into the DB
+        val conn = storage.getConnection()
+        conn.use {
+            val stmt = conn.prepareStatement("INSERT INTO members (username) VALUES (?);")
+            stmt.setString(1, "nulltestacc")
+            testAccountNames.add("nulltestacc")
+            stmt.execute()
+        }
+
+        var data: UserAccountInfo = UserAccountInfo.createDefault()
+        Assertions.assertDoesNotThrow {
+            data = storage.getAccountInfo("nulltestacc")
+        }
+
+        Assertions.assertEquals(defaultData.password, data.password)
+        Assertions.assertEquals(defaultData.rights, data.rights)
+        Assertions.assertEquals(defaultData.credits, data.credits)
+        Assertions.assertEquals(defaultData.ip, data.ip)
+        Assertions.assertEquals(defaultData.lastUsedIp, data.lastUsedIp)
+        Assertions.assertEquals(defaultData.muteEndTime, data.muteEndTime)
+        Assertions.assertEquals(defaultData.banEndTime, data.banEndTime)
+        Assertions.assertEquals(defaultData.contacts, data.contacts)
+        Assertions.assertEquals(defaultData.blocked, data.blocked)
+        Assertions.assertEquals(defaultData.clanName, data.clanName)
+        Assertions.assertEquals(defaultData.currentClan, data.currentClan)
+        Assertions.assertEquals(defaultData.clanReqs, data.clanReqs)
+        Assertions.assertEquals(defaultData.timePlayed, data.timePlayed)
+        Assertions.assertEquals(defaultData.lastLogin, data.lastLogin)
+        Assertions.assertEquals(defaultData.online, data.online)
+    }
 }
