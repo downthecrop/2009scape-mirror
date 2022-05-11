@@ -1,4 +1,4 @@
-package core.game.content.quest.members.familycrest
+package rs09.game.content.quest.members.familycrest
 
 import api.*
 import core.game.content.dialogue.DialoguePlugin
@@ -21,8 +21,8 @@ class AvanDialogue (player: Player? = null): DialoguePlugin(player) {
         npc = (args[0] as NPC).getShownNPC(player)
         val qstage = player?.questRepository?.getStage("Family Crest") ?: -1
 
-        if(qstage == 100){
-            options("Can you enchant these gauntlets for me?", "Nevermind")
+        if (qstage == 100) {
+            options("Can you change my gauntlets for me?", "Nevermind")
             stage = 6000
             return true
         }
@@ -175,37 +175,47 @@ class AvanDialogue (player: Player? = null): DialoguePlugin(player) {
                     "it is a priceless family heirloom.").also{stage = 1000
                     player.inventory.add(CREST_PIECE_AVAN)}
 
-            6000 -> when(buttonId){
-                1 -> {
-                    val givingGauntletsId = Items.GOLDSMITH_GAUNTLETS_776
-                    if (inInventory(player, givingGauntletsId)) {
-                        npc("You already have the Goldsmith gauntlets.")
-                    }
-                    else {
-                        val otherGauntlets =
-                            if (inInventory(player, Items.COOKING_GAUNTLETS_775)) Items.COOKING_GAUNTLETS_775
-                            else if (inInventory(player, Items.CHAOS_GAUNTLETS_777)) Items.CHAOS_GAUNTLETS_777
-                            else if (inInventory(player, Items.FAMILY_GAUNTLETS_778)) Items.FAMILY_GAUNTLETS_778
-                            else -1
-
-                        if (otherGauntlets == -1) {
-                            npc("You do not have the gauntlets with you in your inventory")
-                        }
-                        else {
-                            npc("Here you go")
-                            if (removeItem(player, otherGauntlets)) {
-                                addItem(player, givingGauntletsId)
-                                setAttribute(player, "/save:family-crest:gauntlets", givingGauntletsId)
-                            }
-                        }
-                    }
-                    stage = 1000
+            6000 -> when (buttonId) {
+                1 ->  {
+                    var freeThisTime = getAttribute(player, "family-crest:gauntlets", Items.FAMILY_GAUNTLETS_778) == Items.FAMILY_GAUNTLETS_778
+                    npc("Yes certainly, though it will cost you 25,000 coins" + if (freeThisTime) " next time." else ".").also { stage = 6001 }
                 }
                 2 -> player("Never mind").also{ stage = 1000 }
             }
+            6001 -> options("Great thanks!", "No that's okay thanks.").also{ stage++ }
+            6002 -> when (buttonId) {
+                1 -> {
+                    stage = 1000
+                    val givingGauntletsId = Items.GOLDSMITH_GAUNTLETS_776
+                    if (inInventory(player, givingGauntletsId)) {
+                        npc("You already have the Goldsmith gauntlets.")
+                        return true
+                    }
+                    val otherGauntlets =
+                        if (inInventory(player, Items.COOKING_GAUNTLETS_775)) Items.COOKING_GAUNTLETS_775
+                        else if (inInventory(player, Items.CHAOS_GAUNTLETS_777)) Items.CHAOS_GAUNTLETS_777
+                        else if (inInventory(player, Items.FAMILY_GAUNTLETS_778)) Items.FAMILY_GAUNTLETS_778
+                        else -1
+                    if (otherGauntlets == -1) {
+                        npc("You do not have the gauntlets with you in your inventory.")
+                        return true
+                    }
+                    val fee = 25000
+                    if (getAttribute(player, "family-crest:gauntlets", Items.FAMILY_GAUNTLETS_778) != Items.FAMILY_GAUNTLETS_778 && !inInventory(player, Items.COINS_995, fee)) {
+                        npc("You do not have enough coins.")
+                        return true
+                    }
+                    if (removeItem(player, Item(Items.COINS_995, fee)) && removeItem(player, otherGauntlets)) {
+                        addItem(player, givingGauntletsId)
+                        setAttribute(player, "/save:family-crest:gauntlets", givingGauntletsId)
+                        end()
+                    }
+                }
+                2 -> end()
+            }
+
             1000 -> end()
         }
-
         return true
     }
 

@@ -1,10 +1,7 @@
-package plugin.quest.members.familycrest
+package rs09.game.content.quest.members.familycrest
 
 
-import api.addItem
-import api.inInventory
-import api.removeItem
-import api.setAttribute
+import api.*
 import core.game.content.dialogue.DialoguePlugin
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -23,14 +20,14 @@ class JohnathonDialogue(player: Player? = null): DialoguePlugin(player)  {
         npc = (args[0] as NPC).getShownNPC(player)
         val qstage = player?.questRepository?.getStage("Family Crest") ?: -1
 
-        if(qstage == 100){
-            options("Can you enchant these gauntlets for me?", "Nevermind")
+        if (qstage == 100) {
+            options("Can you change my gauntlets for me?", "Nevermind")
             stage = 6000
             return true
         }
 
         if(qstage < 16){
-            npc("I dont feel so well... maybe we can talk later")
+            npc("I don't feel so well... maybe we can talk later")
             stage = 1000;
         }
         else{
@@ -47,7 +44,7 @@ class JohnathonDialogue(player: Player? = null): DialoguePlugin(player)  {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when(stage){
+        when(stage) {
 
             1 -> npc("That... I am...").also { stage++ }
             2 -> player("I am here to retrieve your fragment " ,
@@ -55,7 +52,7 @@ class JohnathonDialogue(player: Player? = null): DialoguePlugin(player)  {
             3 -> npc("The... poison... it is all... " ,
                     "too much... My head... " ,
                     "will not... stop spinning...").also { stage++ }
-            4 -> sendDialogue("Sweat is pouring down Jonathons'face.").also { stage = 1000
+            4 -> sendDialogue("Sweat is pouring down Jonathons' face.").also { stage = 1000
             player.questRepository.getQuest("Family Crest").setStage(player, 17);
             }
 
@@ -94,47 +91,48 @@ class JohnathonDialogue(player: Player? = null): DialoguePlugin(player)  {
                 4 -> npc("My thanks for the assistance adventure").also{stage = 1000}
 
             }
-            6000 -> when(buttonId){
+            6000 -> when (buttonId) {
+                1 ->  {
+                    var freeThisTime = getAttribute(player, "family-crest:gauntlets", Items.FAMILY_GAUNTLETS_778) == Items.FAMILY_GAUNTLETS_778
+                    npc("Yes certainly, though it will cost you 25,000 coins" + if (freeThisTime) " next time." else ".").also { stage = 6001 }
+                }
+                2 -> player("Never mind").also{ stage = 1000 }
+            }
+            6001 -> options("Great thanks!", "No that's okay thanks.").also{ stage++ }
+            6002 -> when (buttonId) {
                 1 -> {
+                    stage = 1000
                     val givingGauntletsId = Items.CHAOS_GAUNTLETS_777
                     if (inInventory(player, givingGauntletsId)) {
                         npc("You already have the Chaos gauntlets.")
+                        return true
                     }
-                    else {
-                        val otherGauntlets =
-                            if (inInventory(player, Items.COOKING_GAUNTLETS_775)) Items.COOKING_GAUNTLETS_775
-                            else if (inInventory(player, Items.GOLDSMITH_GAUNTLETS_776)) Items.GOLDSMITH_GAUNTLETS_776
-                            else if (inInventory(player, Items.FAMILY_GAUNTLETS_778)) Items.FAMILY_GAUNTLETS_778
-                            else -1
-
-                        if (otherGauntlets == -1) {
-                            npc("You do not have the gauntlets with you in your inventory")
-                        }
-                        else {
-                            npc("Here you go")
-                            if (removeItem(player, otherGauntlets)) {
-                                addItem(player, givingGauntletsId)
-                                setAttribute(player, "/save:family-crest:gauntlets", givingGauntletsId)
-                            }
-                        }
+                    val otherGauntlets =
+                        if (inInventory(player, Items.COOKING_GAUNTLETS_775)) Items.COOKING_GAUNTLETS_775
+                        else if (inInventory(player, Items.GOLDSMITH_GAUNTLETS_776)) Items.GOLDSMITH_GAUNTLETS_776
+                        else if (inInventory(player, Items.FAMILY_GAUNTLETS_778)) Items.FAMILY_GAUNTLETS_778
+                        else -1
+                    if (otherGauntlets == -1) {
+                        npc("You do not have the gauntlets with you in your inventory.")
+                        return true
                     }
-                    stage = 1000
+                    val fee = 25000
+                    if (getAttribute(player, "family-crest:gauntlets", Items.FAMILY_GAUNTLETS_778) != Items.FAMILY_GAUNTLETS_778 && !inInventory(player, Items.COINS_995, fee)) {
+                        npc("You do not have enough coins.")
+                        return true
+                    }
+                    if (removeItem(player, Item(Items.COINS_995, fee)) && removeItem(player, otherGauntlets)) {
+                        addItem(player, givingGauntletsId)
+                        setAttribute(player, "/save:family-crest:gauntlets", givingGauntletsId)
+                        end()
+                    }
                 }
-                2 -> player("Never mind").also{ stage = 1000 }
+                2 -> end()
             }
 
             1000 -> end()
         }
-        return true;
-    }
-
-    private fun DoMissingGuantletCheck(): Int{
-        var itemsToCheck = listOf(775, 776, 777, 778)
-        for(item in itemsToCheck){
-            if(player.inventory.containItems(item))
-                return item
-        }
-        return -1
+        return true
     }
 
     override fun getIds(): IntArray {
