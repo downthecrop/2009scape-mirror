@@ -147,4 +147,35 @@ class SQLStorageProviderTests {
         Assertions.assertEquals(defaultData.lastLogin, data.lastLogin)
         Assertions.assertEquals(defaultData.online, data.online)
     }
+
+    @Test fun updatingPropertiesOnTheDatabaseEndShouldBePreservedWhenFetchingAccountInfo() {
+        val conn = storage.getConnection()
+        conn.use {
+            val stmt = conn.prepareStatement("INSERT INTO members (username) VALUES (?);")
+            stmt.setString(1, "dbupdateacc")
+            testAccountNames.add("dbupdateacc")
+            stmt.execute()
+            stmt.close()
+
+            val stmt2 = conn.prepareStatement("UPDATE members SET rights = 2 WHERE username = \"dbupdateacc\";")
+            stmt2.execute()
+        }
+
+        val info = storage.getAccountInfo("dbupdateacc")
+        Assertions.assertEquals(2, info.rights)
+        info.rights = 1
+        storage.update(info)
+
+        val info2 = storage.getAccountInfo("dbupdateacc")
+        Assertions.assertEquals(1, info2.rights)
+
+        val conn2 = storage.getConnection()
+        conn2.use {
+            val stmt = conn2.prepareStatement("UPDATE members SET rights = 2 WHERE username = \"dbupdateacc\";")
+            stmt.execute()
+        }
+
+        val info3 = storage.getAccountInfo("dbupdateacc")
+        Assertions.assertEquals(2, info3.rights)
+    }
 }
