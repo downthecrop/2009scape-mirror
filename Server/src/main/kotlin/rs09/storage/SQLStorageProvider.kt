@@ -42,21 +42,21 @@ class SQLStorageProvider : AccountStorageProvider {
                 val userData = UserAccountInfo.createDefault()
                 userData.username = username
 
-                result.getString(2)?.let { userData.password = it }
-                result.getInt(3).let { userData.uid = it }
-                result.getInt(4).let { userData.rights = it }
-                result.getInt(5).let { userData.credits = it }
-                result.getString(6)?.let { userData.ip = it }
-                result.getString(7)?.let { userData.lastUsedIp = it }
-                result.getLong(8).let { userData.muteEndTime = max(0L, it) }
-                result.getLong(9).let { userData.banEndTime = max(0L, it) }
+                result.getString(2) ?.let { userData.password = it }
+                result.getInt(3)     .let { userData.uid = it }
+                result.getInt(4)     .let { userData.rights = it }
+                result.getInt(5)     .let { userData.credits = it }
+                result.getString(6) ?.let { userData.ip = it }
+                result.getString(7) ?.let { userData.lastUsedIp = it }
+                result.getLong(8)    .let { userData.muteEndTime = max(0L, it) }
+                result.getLong(9)    .let { userData.banEndTime = max(0L, it) }
                 result.getString(10)?.let { userData.contacts = it }
                 result.getString(11)?.let { userData.blocked = it }
                 result.getString(12)?.let { userData.clanName = it }
                 result.getString(13)?.let { userData.currentClan = it }
                 result.getString(14)?.let { userData.clanReqs = it }
-                result.getLong(15).let { userData.timePlayed = max(0L, it) }
-                result.getLong(16).let { userData.lastLogin = max(0L, it) }
+                result.getLong(15)   .let { userData.timePlayed = max(0L, it) }
+                result.getLong(16)   .let { userData.lastLogin = max(0L, it) }
                 result.getBoolean(17).let { userData.online = it }
 
                 return userData
