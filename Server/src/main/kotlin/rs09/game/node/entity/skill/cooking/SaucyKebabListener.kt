@@ -20,7 +20,7 @@ class SaucyKebabListener : InteractionListener {
 
     override fun defineListeners() {
         onUseWith(ITEM, kebabMap.keys.toIntArray(), sauce) { player, used, with ->
-            if(removeItem(player!!, used.asItem()) && removeItem(player!!, with.asItem())) {
+            if(removeItem(player, used.asItem()) && removeItem(player, with.asItem())) {
                 return@onUseWith addItem(player, Items.SUPER_KEBAB_4608)
             }
             return@onUseWith false
