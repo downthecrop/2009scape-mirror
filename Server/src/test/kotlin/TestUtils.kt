@@ -7,15 +7,14 @@ import core.game.node.entity.player.link.IronmanMode
 import core.game.node.item.Item
 import core.net.IoSession
 import core.net.packet.IoBuffer
+import org.rs09.consts.Items
 import rs09.ServerConstants
 import rs09.game.content.global.shops.Shop
 import rs09.game.content.global.shops.ShopItem
-import rs09.game.system.SystemLogger
 import rs09.game.system.config.ConfigParser
 import rs09.game.system.config.ServerConfigParser
 import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
-import rs09.plugin.ClassScanner
 import java.nio.ByteBuffer
 
 object TestUtils {
@@ -33,6 +32,14 @@ object TestUtils {
             stock.map { ShopItem(it.id, it.amount, 100) }.toTypedArray(),
             general,
             highAlch = highAlch
+        )
+    }
+
+    fun getMockTokkulShop(name: String, vararg stock: Item) : Shop {
+        return Shop(
+            name,
+            stock.map { ShopItem(it.id, it.amount, 100) }.toTypedArray(),
+            currency = Items.TOKKUL_6529
         )
     }
 
