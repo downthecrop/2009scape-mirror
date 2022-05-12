@@ -57,8 +57,8 @@ class TFTInteractionListeners : InteractionListener{
     //private val FREMENNIK_HELMS = intArrayOf(Items.ARCHER_HELM_3749, Items.BERSERKER_HELM_3751, Items.WARRIOR_HELM_3753, Items.FARSEER_HELM_3755/*, Items.HELM_OF_NEITIZNOT_10828 Should this be included?*/)
 
     override fun defineListeners() {
-        onUseWith(NPC,BEER,WORKER){ player, _, _ ->
-            player.dialogueInterpreter.open(CouncilWorkerFTDialogue(0,true), NPC(WORKER))
+        onUseWith(NPC,BEER,WORKER){ player, beer, _ ->
+            player.dialogueInterpreter.open(CouncilWorkerFTDialogue(0,true,beer.id), NPC(WORKER))
             return@onUseWith true
         }
 

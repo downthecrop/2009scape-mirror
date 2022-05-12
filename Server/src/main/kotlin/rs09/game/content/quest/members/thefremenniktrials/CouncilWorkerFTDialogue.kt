@@ -8,7 +8,7 @@ import rs09.tools.START_DIALOGUE
 
 const val COUNCIL_WORKER = 1287
 
-class CouncilWorkerFTDialogue(val questStage: Int,var isBeerInteraction: Boolean = false) : DialogueFile(){
+class CouncilWorkerFTDialogue(val questStage: Int, var isBeerInteraction: Boolean = false, val beerId: Int? = null) : DialogueFile(){
 
     override fun handle(componentID: Int, buttonID: Int) {
 
@@ -17,8 +17,13 @@ class CouncilWorkerFTDialogue(val questStage: Int,var isBeerInteraction: Boolean
                 START_DIALOGUE -> {npc(COUNCIL_WORKER,"Oh, thank you much ${if(player!!.isMale) "sir" else "miss"}");stage++}
                 1 -> {
                     npc(COUNCIL_WORKER,"Ta very much like. That'll hit the spot nicely.. Here,","You can have this. I picked it up as a souvenir on me","last holz.")
-                    if(removeItem(player!!, Items.BEER_3803) || removeItem(player!!, Items.BEER_1917))
+                    if(beerId != null){
+                        if(removeItem(player!!, beerId)){
+                            addItem(player!!, Items.STRANGE_OBJECT_3713)
+                        }
+                    } else if(removeItem(player!!, Items.BEER_3803) || removeItem(player!!, Items.BEER_1917)) {
                         addItem(player!!, Items.STRANGE_OBJECT_3713)
+                    }
                     stage = END_DIALOGUE
                 }
             }
