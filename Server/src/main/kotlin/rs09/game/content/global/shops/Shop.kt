@@ -259,6 +259,11 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         if(inStock.amount < amount)
             item.amount = inStock.amount
 
+        if(inStock.amount == 0) {
+            sendMessage(player, "This item is out of stock.")
+            return TransactionStatus.Failure("Shop item out of stock.")
+        }
+
         if(isMainStock && inStock.amount > stock[slot].amount && !getServerConfig().getBoolean(Shops.personalizedShops, false) && player.ironmanManager.isIronman)
         {
             sendDialogue(player, "As an ironman, you cannot buy overstocked items from shops.")
