@@ -275,7 +275,7 @@ class ShopTests {
         Assertions.assertEquals(20, stock[0].amount)
     }
 
-    @Test fun buying0StockItemFromNormalStockShouldNotDeductGold() {
+    @Test fun buying0StockItemFromNormalStockShouldNotSucceedNorDeductGold() {
         testPlayer.inventory.clear()
         testPlayer.inventory.add(Item(995, Integer.MAX_VALUE))
         testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
