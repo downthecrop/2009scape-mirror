@@ -161,8 +161,8 @@ public final class EquipmentContainer extends Container {
 		else {
 			//put things back if we couldn't remove everything
 			for(Item item : current) {
-				if(!player.getInventory().containsItem(item)) {
-					player.getInventory().add(item);
+				if(!containsItem(item)) {
+					add(item);
 				}
 			}
 		}
