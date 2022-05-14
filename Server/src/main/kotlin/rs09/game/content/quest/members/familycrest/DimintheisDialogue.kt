@@ -31,7 +31,7 @@ class DimintheisDialogue(player: Player? = null): DialoguePlugin(player) {
             return true;
         }
 
-        val hasGauntlets = hasAnItem(player, Items.COOKING_GAUNTLETS_775, Items.GOLDSMITH_GAUNTLETS_776, Items.CHAOS_GAUNTLETS_777, Items.FAMILY_GAUNTLETS_778).first != null
+        val hasGauntlets = hasAnItem(player, Items.COOKING_GAUNTLETS_775, Items.GOLDSMITH_GAUNTLETS_776, Items.CHAOS_GAUNTLETS_777, Items.FAMILY_GAUNTLETS_778).container != null
 
         if (questComplete && hasGauntlets) {
             npc("Thank you for saving our family honour,  ",
