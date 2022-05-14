@@ -274,4 +274,33 @@ class ShopTests {
         Assertions.assertEquals(2, stock.size)
         Assertions.assertEquals(20, stock[0].amount)
     }
+
+    @Test fun buying0StockItemFromNormalStockShouldNotSucceedNorDeductGold() {
+        testPlayer.inventory.clear()
+        testPlayer.inventory.add(Item(995, Integer.MAX_VALUE))
+        testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
+        testPlayer.setAttribute("shop-main", true)
+        val inStockAmount = general.getContainer(testPlayer).get(0).amount
+
+        //Buy out existing stock
+        var status: Shop.TransactionStatus = Shop.TransactionStatus.Success()
+
+        Assertions.assertDoesNotThrow {
+            status = general.buy(testPlayer, 0, inStockAmount)
+        }
+        Assertions.assertEquals(true, status is Shop.TransactionStatus.Success, "Transaction failure: ${if(status is Shop.TransactionStatus.Failure) (status as Shop.TransactionStatus.Failure).reason else ""}")
+        Assertions.assertEquals(0, general.getContainer(testPlayer).getAmount(0), "Buying all stock didn't... buy all stock.")
+
+        testPlayer.inventory.replace(null, 1) //Remove the items we purchased
+
+        val remainingGP = testPlayer.inventory.getAmount(995)
+
+        Assertions.assertDoesNotThrow {
+            status = general.buy(testPlayer, 0, 10)
+        }
+
+        Assertions.assertEquals(true, status is Shop.TransactionStatus.Failure, "Status was not Failure for buying 0-stock item!")
+        Assertions.assertEquals(remainingGP, testPlayer.inventory.getAmount(995), "Coins were deducted for buying 0-stock item!")
+        Assertions.assertNull(testPlayer.inventory.get(1), "Player received purchased item despite being 0-stock!")
+    }
 }
