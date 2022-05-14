@@ -11,10 +11,12 @@ import org.rs09.consts.Items
 import rs09.ServerConstants
 import rs09.game.content.global.shops.Shop
 import rs09.game.content.global.shops.ShopItem
+import rs09.game.system.SystemLogger
 import rs09.game.system.config.ConfigParser
 import rs09.game.system.config.ServerConfigParser
 import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
+import rs09.game.world.update.UpdateSequence
 import java.nio.ByteBuffer
 
 object TestUtils {
@@ -23,6 +25,7 @@ object TestUtils {
         p.details.session = MockSession()
         p.ironmanManager.mode = ironman
         Repository.addPlayer(p)
+        //Update sequence has a separate list of players for some reason...
         return p
     }
 
@@ -53,6 +56,7 @@ object TestUtils {
     }
 
     fun advanceTicks(amount: Int) {
+        SystemLogger.logInfo("Advancing ticks by $amount.")
         for(i in 0 until amount) {
             GameWorld.majorUpdateWorker.handleTickActions()
         }
