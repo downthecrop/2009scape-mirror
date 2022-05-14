@@ -133,11 +133,11 @@ fun isEquipped(player: Player, id: Int): Boolean {
 data class ContainerisedItem(val container: core.game.container.Container?, val itemId: Int)
 
 /**
- * Check if player has any of the specified item IDs equipped, in inventory, or in bank
+ * Check if player has any of the specified item IDs equipped, in inventory, or in banks
  * Returns a ContainerisedItem containing the container and the item ID if found, otherwise ContainerisedItem(null, -1) if not found
  */
 fun hasAnItem(player: Player, vararg ids: Int): ContainerisedItem {
-    for (searchSpace in arrayOf(player.inventory, player.equipment, player.bank)) {
+    for (searchSpace in arrayOf(player.inventory, player.equipment, player.bankPrimary, player.bankSecondary)) {
         for (id in ids) {
             if (searchSpace.containItems(id)) {
                 return ContainerisedItem(searchSpace, id)
