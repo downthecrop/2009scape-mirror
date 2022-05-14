@@ -49,7 +49,13 @@ class KoscheiNPC constructor(id: Int = 0, location: Location? = null, session: K
 
     override fun init() {
         super.init()
-        Pulser.submit(KoscheiSpawnPulse(session?.player, this))
+
+        /**
+         * Ensure the player is in the arena then spawn.
+         */
+        if (session?.player?.location?.regionId == 10653)
+            Pulser.submit(KoscheiSpawnPulse(session.player, this))
+        else session?.close()
     }
 
     override fun handleTickActions() {

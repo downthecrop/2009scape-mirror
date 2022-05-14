@@ -4,7 +4,6 @@ import api.*
 import core.game.node.entity.player.link.quest.QuestRepository
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
-import rs09.game.interaction.InteractionListeners.run
 
 class ItemQuestRequirementListener : InteractionListener {
 
@@ -40,6 +39,8 @@ class ItemQuestRequirementListener : InteractionListener {
     private val questCapes = intArrayOf(9813,9814)
 
     override fun defineListeners() {
+
+        /*
         onEquip(fremennikIslesEquipment) { player, _ ->
             if (!isQuestComplete(player, "Fremennik Isles")) {
                 sendMessage(player, "You must have completed The Fremennik Isles to equip this.")
@@ -48,17 +49,18 @@ class ItemQuestRequirementListener : InteractionListener {
             return@onEquip true
         }
 
-        onEquip(fremennikTrialsEquipment) { player, _ ->
-            if (!isQuestComplete(player, "Fremennik Trials")) {
-                sendMessage(player, "You must have completed The Fremennik Trials to equip this.")
+        onEquip(fremennikIslesDuringQuestEquipment){ player, _ ->
+            if (questStage(player, "Fremennik Isles") > 0) {
+                sendMessage(player, "You must have started The Fremennik Isles to equip this.")
                 return@onEquip false
             }
             return@onEquip true
         }
+         */
 
-        onEquip(fremennikIslesDuringQuestEquipment){ player, _ ->
-            if (questStage(player, "Fremennik Isles") > 0) {
-                sendMessage(player, "You must have started The Fremennik Isles to equip this.")
+        onEquip(fremennikTrialsEquipment.plus(fremennikIslesEquipment)) { player, _ ->
+            if (!isQuestComplete(player, "Fremennik Trials")) {
+                sendMessage(player, "You must have completed The Fremennik Trials to equip this.")
                 return@onEquip false
             }
             return@onEquip true
