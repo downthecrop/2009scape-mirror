@@ -232,7 +232,11 @@ public final class QuestRepository {
      * @return The stage.
      */
     public int getStage(String name) {
-        return getStage(QUESTS.get(name));
+        var quest = QUESTS.get(name);
+        if (quest == null) {
+            return 0;
+        }
+        return getStage(quest);
     }
 
     /**
