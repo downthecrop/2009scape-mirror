@@ -15,12 +15,6 @@ import rs09.game.interaction.InterfaceListener
 
 class ExchangeItemSets : InterfaceListener {
     override fun defineInterfaceListeners() {
-        onOpen(Components.EXCHANGE_ITEMSETS_645) { player, _ ->
-            val listener: InventoryListener
-            setAttribute(player, "ge-listener", InventoryListener(player).also { listener = it })
-            player.inventory.listeners.add(listener)
-        }
-
         onClose(Components.EXCHANGE_ITEMSETS_645){player, _ ->
             val listener = getAttribute<InventoryListener?>(player, "ge-listener", null)
             player.inventory.listeners.remove(listener)
@@ -37,6 +31,9 @@ class ExchangeItemSets : InterfaceListener {
         {
             openInterface(player, Components.EXCHANGE_ITEMSETS_645)
             player.interfaceManager.openSingleTab(Component(Components.EXCHANGE_SETS_SIDE_644))
+            val listener: InventoryListener
+            setAttribute(player, "ge-listener", InventoryListener(player).also { listener = it })
+            player.inventory.listeners.add(listener)
         }
     }
 
@@ -62,9 +59,9 @@ class ExchangeItemSets : InterfaceListener {
                             player.inventory.toArray(),
                             arrayOf("Examine", "Exchange", "Components"),
                             Components.EXCHANGE_SETS_SIDE_644,
-                            16,
-                            15,
-                            10
+                            0,
+                            7,
+                            4
                     )
             )
 
