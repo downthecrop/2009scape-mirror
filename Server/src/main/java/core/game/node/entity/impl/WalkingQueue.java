@@ -70,6 +70,9 @@ public final class WalkingQueue {
 		boolean isPlayer = entity instanceof Player;
 		this.walkDir = -1;
 		this.runDir = -1;
+		if(entity.getLocation() == null) {
+			return;
+		}
 		if (updateTeleport()) {
 			return;
 		}
