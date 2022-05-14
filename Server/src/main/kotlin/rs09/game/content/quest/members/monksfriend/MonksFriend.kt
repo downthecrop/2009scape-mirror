@@ -64,8 +64,3 @@ class MonksFriend: Quest("Monk's Friend", 89, 88, 1, 30, 0, 1, 80) {
         player.inventory.add(Item(563, 8))
     }
 }
-
-fun setQuest(player: Player, stage: Int){
-    player.questRepository.getQuest("Monk's Friend").setStage(player, stage)
-}
-

@@ -56,7 +56,6 @@ import rs09.game.world.repository.Repository
  * @param pickaxe whether or not we are trying to get a pickaxe.
  * @return the tool which meets the requirements or null if none.
  */
-
 fun getTool(player: Player, pickaxe: Boolean): SkillingTool? {
     return if(pickaxe) SkillingTool.getPickaxe(player) else SkillingTool.getHatchet(player)
 }
@@ -68,7 +67,6 @@ fun getTool(player: Player, pickaxe: Boolean): SkillingTool? {
  * @param level the level to check against
  * @return true if the check succeeds, false otherwise
  */
-
 fun hasLevelDyn(player: Player, skill: Int, level: Int): Boolean {
     return player.skills.getLevel(skill) >= level
 }
@@ -80,7 +78,6 @@ fun hasLevelDyn(player: Player, skill: Int, level: Int): Boolean {
  * @param level the level to check against
  * @return true if the check succeeds, false otherwise
  */
-
 fun hasLevelStat(player: Player, skill: Int, level: Int): Boolean {
     return player.skills.getStaticLevel(skill) >= level
 }
@@ -92,7 +89,6 @@ fun hasLevelStat(player: Player, skill: Int, level: Int): Boolean {
  * @param amount the amount to check for
  * @return true if the player has >= the given item in the given amount, false otherwise.
  */
-
 fun inInventory(player: Player, item: Int, amount: Int = 1): Boolean {
     return player.inventory.contains(item, amount)
 }
@@ -103,7 +99,6 @@ fun inInventory(player: Player, item: Int, amount: Int = 1): Boolean {
  * @param id the ID of the item to check for the amount of
  * @return the amount of the given ID in the player's inventory
  */
-
 fun amountInInventory(player: Player, id: Int): Int{
     return player.inventory.getAmount(id)
 }
@@ -114,7 +109,6 @@ fun amountInInventory(player: Player, id: Int): Int{
  * @param id the ID of the item to check for
  * @return the amount of the ID in the player's bank.
  */
-
 fun amountInBank(player: Player, id: Int): Int{
     return player.bank.getAmount(id)
 }
@@ -125,7 +119,6 @@ fun amountInBank(player: Player, id: Int): Int{
  * @param id the ID of the item to check for
  * @return the amount of the ID in the player's equipment.
  */
-
 fun amountInEquipment(player: Player, id: Int): Int{
     return player.equipment.getAmount(id)
 }
@@ -135,6 +128,23 @@ fun amountInEquipment(player: Player, id: Int): Int{
  */
 fun isEquipped(player: Player, id: Int): Boolean {
     return amountInEquipment(player, id) > 0
+}
+
+data class ContainerisedItem(val container: core.game.container.Container?, val itemId: Int)
+
+/**
+ * Check if player has any of the specified item IDs equipped, in inventory, or in banks
+ * Returns a ContainerisedItem containing the container and the item ID if found, otherwise ContainerisedItem(null, -1) if not found
+ */
+fun hasAnItem(player: Player, vararg ids: Int): ContainerisedItem {
+    for (searchSpace in arrayOf(player.inventory, player.equipment, player.bankPrimary, player.bankSecondary)) {
+        for (id in ids) {
+            if (searchSpace.containItems(id)) {
+                return ContainerisedItem(searchSpace, id)
+            }
+        }
+    }
+    return ContainerisedItem(null, -1)
 }
 
 /**
@@ -155,7 +165,6 @@ fun hasGodItem(player: Player, god: God): Boolean
  * @param item the ID or Item object to remove from the player's inventory
  * @param container the Container to remove the items from. An enum exists for this in the api package called Container. Ex: api.Container.BANK
  */
-
 fun <T> removeItem(player: Player, item: T, container: Container = Container.INVENTORY): Boolean {
     item ?: return false
     val it = when (item) {
@@ -213,7 +222,6 @@ fun replaceSlot(player: Player, slot: Int, item: Item, container: Container = Co
  * @param id the ID of the item to add to the player's inventory
  * @param amount the amount of the ID to add to the player's inventory, defaults to 1
  */
-
 fun addItemOrDrop(player: Player, id: Int, amount: Int = 1){
     val item = Item(id, amount)
     if(!player.inventory.add(item)) GroundItemManager.create(item,player)
@@ -223,7 +231,6 @@ fun addItemOrDrop(player: Player, id: Int, amount: Int = 1){
  * Clears an NPC with the "poof" smoke graphics commonly seen with random event NPCs.
  * @param npc the NPC object to initialize
  */
-
 fun poofClear(npc: NPC){
     submitWorldPulse(object : Pulse(){
         var counter = 0
@@ -246,7 +253,6 @@ fun poofClear(npc: NPC){
  * @param amount the amount to check for, defaults to 1
  * @return true if the item exists in the given amount in the player's bank
  */
-
 fun inBank(player: Player, item: Int, amount: Int = 1): Boolean {
     return player.bank.contains(item, amount)
 }
@@ -258,7 +264,6 @@ fun inBank(player: Player, item: Int, amount: Int = 1): Boolean {
  * @param amount the amount to check for, defaults to 1
  * @return true if the item exists in the given amount in the player's equipment
  */
-
 fun inEquipment(player: Player, item: Int, amount: Int = 1): Boolean {
     return player.equipment.contains(item, amount)
 }
@@ -268,7 +273,6 @@ fun inEquipment(player: Player, item: Int, amount: Int = 1): Boolean {
  * @param player the player to check
  * @return the number of free slots in the player's inventory
  */
-
 fun freeSlots(player: Player): Int {
     return player.inventory.freeSlots()
 }
@@ -278,7 +282,6 @@ fun freeSlots(player: Player): Int {
  * @param id the ID of the animation to use
  * @return an Animation object with the given ID.
  */
-
 fun getAnimation(id: Int): Animation {
     return Animation(id)
 }
@@ -289,7 +292,6 @@ fun getAnimation(id: Int): Animation {
  * @param priority the Animator.Priority enum instance to represent the desired priority
  * @return an Animation object with the given ID and priority
  */
-
 fun getAnimationWithPriority(id: Int, priority: Animator.Priority): Animation {
     return Animation(id, Animator.Priority.values()[priority.ordinal])
 }
@@ -298,7 +300,6 @@ fun getAnimationWithPriority(id: Int, priority: Animator.Priority): Animation {
  * Reset a player's animator
  * @param player the player whose animator to reset
  */
-
 fun resetAnimator(player: Player) {
     player.animator.animate(Animation(-1, Animator.Priority.VERY_HIGH))
 }
@@ -308,7 +309,6 @@ fun resetAnimator(player: Player) {
  *  @param animation the Animation object to check the duration of
  *  @return the number of ticks the given animation lasts for
  */
-
 fun animationDuration(animation: Animation): Int {
     return animation.definition.durationTicks
 }
@@ -319,7 +319,6 @@ fun animationDuration(animation: Animation): Int {
  * @param skill the Skill ID to reward XP for. There is a Skills enum you can use for this. Example: Skills.STRENGTH
  * @param amount the amount, including decimal place, of experience to award
  */
-
 fun rewardXP(player: Player, skill: Int, amount: Double) {
     player.skills.addExperience(skill, amount)
 }
@@ -331,7 +330,6 @@ fun rewardXP(player: Player, skill: Int, amount: Double) {
  * @param for_ticks the number of ticks the object should be replaced for. Use -1 for permanent.
  * @param loc the location to move the new object to if necessary. Defaults to null.
  */
-
 fun replaceScenery(toReplace: Scenery, with: Int, for_ticks: Int, loc: Location? = null) {
     val newLoc = when(loc){
         null -> toReplace.location
@@ -353,7 +351,6 @@ fun replaceScenery(toReplace: Scenery, with: Int, for_ticks: Int, loc: Location?
  * @Param rotation the Direction of the rotation it should use. Direction.NORTH, Direction.SOUTH, etc
  * @param loc the location to move the new object to if necessary. Defaults to null.
  */
-
 fun replaceScenery(toReplace: Scenery, with: Int, for_ticks: Int, rotation: Direction, loc: Location? = null){
     val newLoc = when(loc){
         null -> toReplace.location
@@ -382,7 +379,6 @@ fun replaceScenery(toReplace: Scenery, with: Int, for_ticks: Int, rotation: Dire
  * @param id the ID of the item to get the name of
  * @return the name of the item
  */
-
 fun getItemName(id: Int): String {
     return ItemDefinition.forId(id).name
 }
@@ -391,7 +387,6 @@ fun getItemName(id: Int): String {
  * Removes a ground item
  * @param node the GroundItem object to remove
  */
-
 fun removeGroundItem(node: GroundItem) {
     GroundItemManager.destroy(node)
 }
@@ -401,7 +396,6 @@ fun removeGroundItem(node: GroundItem) {
  * @param node the GroundItem object to check the validity of
  * @return true if the node is valid, false otherwise
  */
-
 fun isValidGroundItem(node: GroundItem): Boolean {
     return GroundItemManager.getItems().contains(node)
 }
@@ -412,7 +406,6 @@ fun isValidGroundItem(node: GroundItem): Boolean {
  * @param item the Item to check against
  * @return true if the player's inventory has space for the item
  */
-
 fun hasSpaceFor(player: Player, item: Item): Boolean {
     return player.inventory.hasSpaceFor(item)
 }
@@ -420,7 +413,6 @@ fun hasSpaceFor(player: Player, item: Item): Boolean {
 /**
  * Get the number of ticks passed since server startup
  */
-
 fun getWorldTicks(): Int {
     return GameWorld.ticks
 }
@@ -428,7 +420,6 @@ fun getWorldTicks(): Int {
 /**
  * Gets an Audio object with specified id, volume, etc
  */
-
 fun getAudio(id: Int, volume: Int = 10, delay: Int = 1): Audio {
     return Audio(id, volume, delay)
 }
@@ -439,7 +430,6 @@ fun getAudio(id: Int, volume: Int = 10, delay: Int = 1): Audio {
  * @param amount the amount of damage to deal
  * @param type the type of hit splat to use, ImpactHandler.HitsplatType is an enum containing these options.
  */
-
 fun impact(entity: Entity, amount: Int, type: ImpactHandler.HitsplatType = ImpactHandler.HitsplatType.NORMAL) {
     entity.impactHandler.manualHit(entity, amount, type)
 }
@@ -449,7 +439,6 @@ fun impact(entity: Entity, amount: Int, type: ImpactHandler.HitsplatType = Impac
  * @param id the ID of the item to get the definition of
  * @return the ItemDefinition for the given ID.
  */
-
 fun itemDefinition(id: Int): ItemDefinition {
     return ItemDefinition.forId(id)
 }
@@ -457,7 +446,6 @@ fun itemDefinition(id: Int): ItemDefinition {
 /**
  * Send an object animation
  */
-
 fun animateScenery(player: Player, obj: Scenery, animationId: Int, global: Boolean = false) {
     player.packetDispatch.sendSceneryAnimation(obj, getAnimation(animationId), global)
 }
@@ -465,7 +453,6 @@ fun animateScenery(player: Player, obj: Scenery, animationId: Int, global: Boole
 /**
  * Send an object animation independent of a player
  */
-
 fun animateScenery(obj: Scenery, animationId: Int){
     val animation = Animation(animationId)
     animation.setObject(obj)
@@ -475,7 +462,6 @@ fun animateScenery(obj: Scenery, animationId: Int){
 /**
  * Produce a ground item owned by the player
  */
-
 fun produceGroundItem(player: Player, item: Int) {
     GroundItemManager.create(Item(item), player)
 }
@@ -483,7 +469,6 @@ fun produceGroundItem(player: Player, item: Int) {
 /**
  * Spawns a projectile
  */
-
 fun spawnProjectile(source: Entity, dest: Entity, projectileId: Int) {
     Projectile.create(source, dest, projectileId).send()
 }
@@ -499,7 +484,6 @@ fun spawnProjectile(source: Entity, dest: Entity, projectileId: Int) {
  * @param speed the speed the projectile travels at
  * @param angle the angle the projectile travels at
  */
-
 fun spawnProjectile(source: Location, dest: Location, projectile: Int, startHeight: Int, endHeight: Int, delay: Int, speed: Int, angle: Int){
     Projectile.create(source, dest, projectile, startHeight, endHeight, delay, speed, angle, source.getDistance(dest).toInt()).send()
 }
@@ -510,7 +494,6 @@ fun spawnProjectile(source: Location, dest: Location, projectile: Int, startHeig
  * @param toFace the thing to face
  * @param duration how long you wish to face the thing for
  */
-
 fun face(entity: Entity, toFace: Node, duration: Int = -1) {
     if (duration == -1) {
         when (toFace) {
@@ -530,7 +513,6 @@ fun face(entity: Entity, toFace: Node, duration: Int = -1) {
  * @param player the player to open the interface for
  * @param id the ID of the interface to open
  */
-
 fun openInterface(player: Player, id: Int) {
     player.interfaceManager.open(Component(id))
 }
@@ -540,7 +522,6 @@ fun openInterface(player: Player, id: Int) {
  * @param player the player to open the interface for
  * @param id the ID of the interface to open
  */
-
 fun openOverlay(player: Player, id: Int){
     player.interfaceManager.openOverlay(Component(id))
 }
@@ -549,7 +530,6 @@ fun openOverlay(player: Player, id: Int){
  * Closes any open overlays for the given player
  * @param player the player to close for
  */
-
 fun closeOverlay(player: Player){
     player.interfaceManager.closeOverlay()
 }
@@ -559,7 +539,6 @@ fun closeOverlay(player: Player){
  * @param entity the entity to run the emote on
  * @param emote the Emotes enum entry to run
  */
-
 fun emote(entity: Entity, emote: Emotes) {
     entity.animate(emote.animation)
 }
@@ -568,7 +547,6 @@ fun emote(entity: Entity, emote: Emotes) {
  * Sends a message to the given player.
  * @param player the player to send the message to.
  */
-
 fun sendMessage(player: Player, message: String) {
     player.sendMessage(message)
 }
@@ -578,7 +556,6 @@ fun sendMessage(player: Player, message: String) {
  * @param entity the entity to send the chat for
  * @param message the message to display
  */
-
 fun sendChat(entity: Entity, message: String) {
     entity.sendChat(message)
 }
@@ -588,7 +565,6 @@ fun sendChat(entity: Entity, message: String) {
  * @param player the player to send the dialogue to
  * @param message the message to send, lines are split automatically.
  */
-
 fun sendDialogue(player: Player, message: String) {
     player.dialogueInterpreter.sendDialogue(*splitLines(message))
 }
@@ -599,7 +575,6 @@ fun sendDialogue(player: Player, message: String) {
  * @param anim the animation to play, can be an ID or an Animation object.
  * @param forced whether or not to force the animation (usually not necessary)
  */
-
 fun <T> animate(entity: Entity, anim: T, forced: Boolean = false) {
     val animation = when(anim){
         is Int -> Animation(anim)
@@ -620,7 +595,6 @@ fun <T> animate(entity: Entity, anim: T, forced: Boolean = false) {
  * @param audio the Audio to play
  * @param global if other nearby entities should be able to hear it
  */
-
 fun playAudio(player: Player, audio: Audio, global: Boolean = false) {
     player.audioManager.send(audio, global)
 }
@@ -631,7 +605,6 @@ fun playAudio(player: Player, audio: Audio, global: Boolean = false) {
  * @param dialogue either the dialogue key or an instance of a DialogueFile
  * @param args various args to pass to the opened dialogue
  */
-
 fun openDialogue(player: Player, dialogue: Any, vararg args: Any) {
     player.dialogueInterpreter.close()
     when (dialogue) {
@@ -647,7 +620,6 @@ fun openDialogue(player: Player, dialogue: Any, vararg args: Any) {
  * @param id the ID of the NPC to locate
  * @returns an NPC instance matching the ID if it finds one, null otherwise
  */
-
 fun findNPC(id: Int): NPC? {
     return Repository.findNPC(id)
 }
@@ -658,7 +630,6 @@ fun findNPC(id: Int): NPC? {
  * @param y the Y coordinate to use
  * @param z the Z coordinate to use
  */
-
 fun getScenery(x: Int, y: Int, z: Int): Scenery?{
     return RegionManager.getObject(z,x,y)
 }
@@ -667,7 +638,6 @@ fun getScenery(x: Int, y: Int, z: Int): Scenery?{
  * Gets the spawned scenery from the world map using the given Location object.
  * @param loc the Location object to use.
  */
-
 fun getScenery(loc: Location): Scenery?{
     return RegionManager.getObject(loc)
 }
@@ -678,7 +648,6 @@ fun getScenery(loc: Location): Scenery?{
  * @param id the ID of the NPC to locate
  * @returns an NPC instance matching the ID if it finds one, null otherwise
  */
-
 fun findNPC(refLoc: Location, id: Int): NPC? {
     return Repository.npcs.firstOrNull { it.id == id && it.location.withinDistance(refLoc) }
 }
@@ -689,7 +658,6 @@ fun findNPC(refLoc: Location, id: Int): NPC? {
  * @param id the ID of the NPC to locate
  * @returns an NPC matching the given ID or null if none is found
  */
-
 fun findLocalNPC(entity: Entity, id: Int): NPC? {
     return RegionManager.getLocalNpcs(entity).firstOrNull { it.id == id }
 }
@@ -699,7 +667,6 @@ fun findLocalNPC(entity: Entity, id: Int): NPC? {
  * @param entity the entity to check around
  * @param ids the IDs of the NPCs to look for
  */
-
 fun findLocalNPCs(entity: Entity, ids: IntArray): List<NPC>{
     return RegionManager.getLocalNpcs(entity).filter { it.id in ids }.toList()
 }
@@ -710,7 +677,6 @@ fun findLocalNPCs(entity: Entity, ids: IntArray): List<NPC>{
  * @param ids the IDs of the NPCs to look for
  * @param distance The maximum distance to the entity.
  */
-
 fun findLocalNPCs(entity: Entity, ids: IntArray, distance: Int): List<NPC>{
     return RegionManager.getLocalNpcs(entity, distance).filter { it.id in ids }.toList()
 }
@@ -730,7 +696,6 @@ fun getRegionBorders(regionId: Int) : ZoneBorders
  * @param attribute the attribute key to use
  * @param default the default value to return if the attribute does not exist
  */
-
 fun <T> getAttribute(entity: Entity, attribute: String, default: T): T {
     return entity.getAttribute(attribute, default)
 }
@@ -741,7 +706,6 @@ fun <T> getAttribute(entity: Entity, attribute: String, default: T): T {
  * @param attribute the attribute key to use
  * @param value the value to set the attribute to
  */
-
 fun <T> setAttribute(entity: Entity, attribute: String, value: T) {
     entity.setAttribute(attribute, value)
 }
@@ -751,7 +715,6 @@ fun <T> setAttribute(entity: Entity, attribute: String, value: T) {
  * @param entity the entity to lock
  * @param duration the number of ticks to lock for
  */
-
 fun lock(entity: Entity, duration: Int) {
     entity.lock(duration)
 }
@@ -761,7 +724,6 @@ fun lock(entity: Entity, duration: Int) {
  * @param entity the entity to lock
  * @param duration the duration in ticks to lock for
  */
-
 fun lockInteractions(entity: Entity, duration: Int) {
     entity.locks.lockInteractions(duration)
 }
@@ -770,7 +732,6 @@ fun lockInteractions(entity: Entity, duration: Int) {
  * Unlocks the given entity
  * @param entity the entity to unlock
  */
-
 fun unlock(entity: Entity) {
     entity.unlock()
 }
@@ -781,7 +742,6 @@ fun unlock(entity: Entity) {
  * @param transformTo the ID of the NPC to turn into
  * @param restoreTicks the number of ticks until the NPC returns to normal
  */
-
 fun transformNpc(npc: NPC, transformTo: Int, restoreTicks: Int){
     npc.transform(transformTo)
     Pulser.submit(object : Pulse(restoreTicks){
@@ -795,7 +755,6 @@ fun transformNpc(npc: NPC, transformTo: Int, restoreTicks: Int){
 /**
  * Produces a Location object using the given x,y,z values
  */
-
 fun location(x: Int, y: Int, z: Int): Location{
     return Location.create(x,y,z)
 }
@@ -817,7 +776,6 @@ fun inBorders(entity: Entity, swX: Int, swY: Int, neX: Int, neY: Int): Boolean {
 /**
  * AHeals the given entity for the given number of hitpoints
  */
-
 fun heal(entity: Entity, amount: Int){
     entity.skills.heal(amount)
 }
@@ -829,7 +787,6 @@ fun heal(entity: Entity, amount: Int){
  * @param offset the offset of the desired varbit inside the varp.
  * @param value the value to set the varbit to
  */
-
 fun setVarbit(player: Player, varpIndex: Int, offset: Int, value: Int, save: Boolean = false){
     player.varpManager.get(varpIndex).setVarbit(offset,value).send(player)
     if(save) player.varpManager.flagSave(varpIndex)
@@ -840,7 +797,6 @@ fun setVarbit(player: Player, varpIndex: Int, offset: Int, value: Int, save: Boo
  * @param player the player to clear for
  * @param varpIndex the index of the varp to clear
  */
-
 fun clearVarp(player: Player, varpIndex: Int){
     player.varpManager.get(varpIndex).clear()
 }
@@ -851,7 +807,6 @@ fun clearVarp(player: Player, varpIndex: Int){
  * @param varpIndex the index of the varp to calculate the value of
  * @return the value of the varp
  */
-
 fun getVarpValue(player: Player, varpIndex: Int): Int{
     return player.varpManager.get(varpIndex).getValue()
 }
@@ -863,7 +818,6 @@ fun getVarpValue(player: Player, varpIndex: Int): Int{
  * @param offset the offset of the varbit inside the varp
  * @return the value of the given varbit
  */
-
 fun getVarbitValue(player: Player, varpIndex: Int, offset: Int): Int {
     return player.varpManager.get(varpIndex).getVarbitValue(offset) ?: 0
 }
@@ -874,7 +828,6 @@ fun getVarbitValue(player: Player, varpIndex: Int, offset: Int): Int {
  * @param dest the Location object to walk to
  * @param type the type of pathfinder to use. "smart" for the SMART pathfinder, "clip" for the noclip pathfinder, anything else for DUMB.
  */
-
 fun forceWalk(entity: Entity, dest: Location, type: String){
     if(type == "clip"){
         ForceMovement(entity, dest, 10, 10).run()
@@ -892,7 +845,6 @@ fun forceWalk(entity: Entity, dest: Location, type: String){
  * Interrupts a given entity's walking queue
  * @param entity the entity to interrupt
  */
-
 fun stopWalk(entity: Entity){
     entity.walkingQueue.reset()
 }
@@ -903,7 +855,6 @@ fun stopWalk(entity: Entity){
  * @param slot the Equipment slot to use, EquipmentSlot enum contains the options.
  * @return the Item in the given slot, or null if none.
  */
-
 fun getItemFromEquipment(player: Player, slot: EquipmentSlot): Item? {
     return player.equipment.get(slot.ordinal)
 }
@@ -920,7 +871,6 @@ fun getChildren(scenery: Int): IntArray {
  * @param node the node to adjust the charge of
  * @param amount the amount to adjust by
  */
-
 fun adjustCharge(node: Node, amount: Int){
     when(node){
         is Item -> node.charge += amount
@@ -934,7 +884,6 @@ fun adjustCharge(node: Node, amount: Int){
  * @param node the node whose charge to check
  * @return amount of charges the node has, or -1 if the node does not accept charges.
  */
-
 fun getCharge(node: Node): Int{
     when(node){
         is Item -> return node.charge
@@ -948,7 +897,6 @@ fun getCharge(node: Node): Int{
  * @param node the node to set the charge for
  * @param charge the amount to set the node's charge to (default is 1000)
  */
-
 fun setCharge(node: Node, charge: Int){
     when(node){
         is Item -> node.charge = charge
@@ -962,7 +910,6 @@ fun setCharge(node: Node, charge: Int){
  * @param player the player to get the used option for.
  * @return the option the player used
  */
-
 fun getUsedOption(player: Player): String {
     return player.getAttribute("interact:option","INVALID")
 }
@@ -973,7 +920,6 @@ fun getUsedOption(player: Player): String {
  * @param anim the Animation object to use, can also be an ID.
  * @param gfx the Graphics object to use, can also be an ID.
  */
-
 fun <A,G> visualize(entity: Entity, anim: A, gfx: G){
     val animation = when(anim){
         is Int -> Animation(anim)
@@ -994,7 +940,6 @@ fun <A,G> visualize(entity: Entity, anim: A, gfx: G){
  * Used to submit a pulse to the GameWorld's Pulser.
  * @param pulse the Pulse object to submit
  */
-
 fun submitWorldPulse(pulse: Pulse){
     GameWorld.Pulser.submit(pulse)
 }
@@ -1005,7 +950,6 @@ fun submitWorldPulse(pulse: Pulse){
  * @param loc the Location object to move them to
  * @param type the teleport type to use (defaults to instant). An enum exists as TeleportManager.TeleportType.
  */
-
 fun teleport(entity: Entity, loc: Location, type: TeleportManager.TeleportType = TeleportManager.TeleportType.INSTANT){
     if(type == TeleportManager.TeleportType.INSTANT) entity.properties.teleportLocation = loc
     else entity.teleporter.send(loc,type)
@@ -1017,7 +961,6 @@ fun teleport(entity: Entity, loc: Location, type: TeleportManager.TeleportType =
  * @param skill the Skill to set. A Skills enum exists that can be used. Ex: Skills.STRENGTH
  * @param level the level to set the skill to
  */
-
 fun setTempLevel(entity: Entity, skill: Int, level: Int){
     entity.skills.setLevel(skill, level)
 }
@@ -1028,7 +971,6 @@ fun setTempLevel(entity: Entity, skill: Int, level: Int){
  * @param skill the Skill to get the level of. A Skills enum exists that can be used. Ex: Skills.STRENGTH
  * @return the static level of the skill
  */
-
 fun getStatLevel(entity: Entity, skill: Int): Int {
     return entity.skills.getStaticLevel(skill)
 }
@@ -1039,7 +981,6 @@ fun getStatLevel(entity: Entity, skill: Int): Int {
  * @param skill the Skill to get the level of. A Skills enum exists that can be used. Ex: Skills.STRENGTH
  * @return the dynamic level of the skill
  */
-
 fun getDynLevel(entity: Entity, skill: Int): Int {
     return entity.skills.getLevel(skill)
 }
@@ -1050,7 +991,6 @@ fun getDynLevel(entity: Entity, skill: Int): Int {
  * @param skill the Skill to adjust. A Skills enum exists that can be used. Ex: Skills.STRENGTH
  * @param amount the amount to adjust the skill by. Ex-Buff: 5, Ex-Debuff: -5
  */
-
 fun adjustLevel(entity: Entity, skill: Int, amount: Int){
     entity.skills.setLevel(skill, entity.skills.getStaticLevel(skill) + amount)
 }
@@ -1061,7 +1001,6 @@ fun adjustLevel(entity: Entity, skill: Int, amount: Int){
  * @param item the item to remove. Can be an Item object or an ID.
  * @param container the Container to remove the item from. An enum exists for this called Container. Ex: Container.BANK
  */
-
 fun <T> removeAll(player: Player, item: T, container: Container){
     val it = when(item){
         is Item -> item.id
@@ -1083,7 +1022,6 @@ fun <T> removeAll(player: Player, item: T, container: Container){
  * @param iface the ID of the interface to use
  * @param child the index of the child to send the string to
  */
-
 fun setInterfaceText(player: Player, string: String, iface: Int, child: Int){
     player.packetDispatch.sendString(string,iface,child)
 }
@@ -1092,7 +1030,6 @@ fun setInterfaceText(player: Player, string: String, iface: Int, child: Int){
  * Closes any open (non-chat) interfaces for the player
  * @param player the player to close the interface for
  */
-
 fun closeInterface(player: Player){
     player.interfaceManager.close()
 }
@@ -1101,7 +1038,6 @@ fun closeInterface(player: Player){
  * Closes any opened tab interfaces for the player
  * @param player the player to close the tab for
  */
-
 fun closeTabInterface(player: Player){
     player.interfaceManager.closeSingleTab()
 }
@@ -1112,7 +1048,6 @@ fun closeTabInterface(player: Player){
  * @param msg the message to send.
  * @param expr the FacialExpression to use. An enum exists for these called FacialExpression. Defaults to FacialExpression.FRIENDLY
  */
-
 fun sendPlayerDialogue(player: Player, msg: String, expr: FacialExpression = FacialExpression.FRIENDLY){
     player.dialogueInterpreter.sendDialogues(player, expr, *splitLines(msg))
 }
@@ -1123,7 +1058,6 @@ fun sendPlayerDialogue(player: Player, msg: String, expr: FacialExpression = Fac
  * @param iface the ID of the interface to send it to
  * @param child the index of the child on the interface to send the model to
  */
-
 fun sendPlayerOnInterface(player: Player, iface: Int, child: Int){
     player.packetDispatch.sendPlayerOnInterface(iface,child)
 }
@@ -1135,7 +1069,6 @@ fun sendPlayerOnInterface(player: Player, iface: Int, child: Int){
  * @param msg the message to send.
  * @param expr the FacialExpression to use. An enum exists for these called FacialExpression. Defaults to FacialExpression.FRIENDLY
  */
-
 fun sendNPCDialogue(player: Player, npc: Int, msg: String, expr: FacialExpression = FacialExpression.FRIENDLY){
     player.dialogueInterpreter.sendDialogues(npc, expr, *splitLines(msg))
 }
@@ -1147,7 +1080,6 @@ fun sendNPCDialogue(player: Player, npc: Int, msg: String, expr: FacialExpressio
  * @param iface the ID of the interface to send the animation to
  * @param child the index of the child on the interface to send the model to
  */
-
 fun sendAnimationOnInterface(player: Player, anim: Int, iface: Int, child: Int){
     player.packetDispatch.sendAnimationInterface(anim,iface,child)
 }
@@ -1157,7 +1089,6 @@ fun sendAnimationOnInterface(player: Player, anim: Int, iface: Int, child: Int){
  * @param player the player to register the listener for
  * @param handler the method to run when the listener is invoked (when the player logs out)
  */
-
 fun registerLogoutListener(player: Player, key: String, handler: (p: Player) -> Unit){
     player.logoutListeners[key] = handler
 }
@@ -1167,7 +1098,6 @@ fun registerLogoutListener(player: Player, key: String, handler: (p: Player) -> 
  * @param player the player to remove the logout listner from
  * @param key the key of the logout listener to remove.
  */
-
 fun clearLogoutListener(player: Player, key: String){
     player.logoutListeners.remove(key)
 }
@@ -1180,7 +1110,6 @@ fun clearLogoutListener(player: Player, key: String){
  * @param item the ID of the item to send
  * @param amount the amount of the item to send - defaults to 1
  */
-
 fun sendItemOnInterface(player: Player, iface: Int, child: Int, item: Int, amount: Int = 1){
     player.packetDispatch.sendItemOnInterface(item,amount,iface,child)
 }
@@ -1191,7 +1120,6 @@ fun sendItemOnInterface(player: Player, iface: Int, child: Int, item: Int, amoun
  * @param item the ID of the item to show
  * @param message the text to display
  */
-
 fun sendItemDialogue(player: Player, item: Int, message: String){
     player.dialogueInterpreter.sendItemMessage(item, *splitLines(message))
 }
@@ -1203,7 +1131,6 @@ fun sendItemDialogue(player: Player, item: Int, message: String){
  * @param item2 the ID of the second item to show
  * @param message the text to display
  */
-
 fun sendDoubleItemDialogue(player: Player, item1: Int, item2: Int, message: String){
     player.dialogueInterpreter.sendDoubleItemMessage(item1, item2, message)
 }
@@ -1215,7 +1142,6 @@ fun sendDoubleItemDialogue(player: Player, item1: Int, item2: Int, message: Stri
  * @param prompt what to prompt the player
  * @param handler the method that handles the value gained from the input dialogue
  */
-
 fun sendInputDialogue(player: Player, numeric: Boolean, prompt: String, handler: (value: Any) -> Unit){
     if(numeric) sendInputDialogue(player, InputType.NUMERIC, prompt, handler)
     else sendInputDialogue(player, InputType.STRING_SHORT, prompt, handler)
@@ -1228,7 +1154,6 @@ fun sendInputDialogue(player: Player, numeric: Boolean, prompt: String, handler:
  * @param prompt what to prompt the player
  * @param handler the method that handles the value from the input dialogue
  */
-
 fun sendInputDialogue(player: Player, type: InputType, prompt: String, handler: (value: Any) -> Unit){
     when(type){
         InputType.NUMERIC, InputType.STRING_SHORT -> player.dialogueInterpreter.sendInput(type != InputType.NUMERIC, prompt)
@@ -1243,7 +1168,6 @@ fun sendInputDialogue(player: Player, type: InputType, prompt: String, handler: 
  * @param entity the entity to make flee
  * @param from the entity to flee from
  */
-
 fun flee(entity: Entity, from: Entity){
     lock(entity, 5)
     face(entity, from, 5)
@@ -1259,7 +1183,6 @@ fun flee(entity: Entity, from: Entity){
  * @param entity the entity to submit the pulse to
  * @param pulse the pulse to submit
  */
-
 fun submitIndividualPulse(entity: Entity, pulse: Pulse){
     entity.pulseManager.run(pulse)
 }
@@ -1267,7 +1190,6 @@ fun submitIndividualPulse(entity: Entity, pulse: Pulse){
 /**
  * Similar to submitIndividualPulse, but for non-repeating tasks, with a cleaner syntax.
  */
-
 fun runTask(entity: Entity, delay: Int = 0, task: () -> Unit){
     entity.pulseManager.run(object : Pulse(delay) {
         override fun pulse(): Boolean {
@@ -1282,23 +1204,20 @@ fun runTask(entity: Entity, delay: Int = 0, task: () -> Unit){
  * @param player the player to get the QP for
  * @return the number of QP the player has
  */
-
-fun getQP(player: Player): Int{
+fun getQP(player: Player): Int {
     return player.questRepository.points
 }
 
 /**
  * Gets the stage for the given quest for the given player
  */
-
-fun questStage(player: Player, quest: String): Int{
+fun questStage(player: Player, quest: String): Int {
     return player.questRepository.getStage(quest)
 }
 
 /**
  * Sets the stage for the given quest for the given player
  */
-
 fun setQuestStage(player: Player, quest: String, stage: Int) {
     player.questRepository.setStage(QuestRepository.getQuests()[quest]!!, stage)
     player.questRepository.syncronizeTab(player)
@@ -1307,9 +1226,27 @@ fun setQuestStage(player: Player, quest: String, stage: Int) {
 /**
  * Check if a quest is complete
  */
-
 fun isQuestComplete(player: Player, quest: String): Boolean {
     return player.questRepository.getStage(quest) == 100
+}
+
+
+/**
+ * Check if a player meets the requirements to start a quest, and then starts it if they do. Returns success bool
+ */
+fun startQuest(player: Player, quest: String): Boolean {
+    val quest = player.questRepository.getQuest(quest)
+    val canStart = quest.hasRequirements(player)
+    if (!canStart) return false
+    quest.start(player)
+    return true
+}
+
+/**
+ * Finishes a quest, gives rewards, marks as completed, etc
+ */
+fun finishQuest(player: Player, quest: String) {
+    player.questRepository.getQuest(quest).finish(player)
 }
 
 /**
@@ -1317,7 +1254,6 @@ fun isQuestComplete(player: Player, quest: String): Boolean {
  * @param id the ID of the scenery to get the definition for.
  * @return the scenery definition
  */
-
 fun sceneryDefinition(id: Int): SceneryDefinition{
     return SceneryDefinition.forId(id)
 }
@@ -1327,7 +1263,6 @@ fun sceneryDefinition(id: Int): SceneryDefinition{
  * @param zone the zone to register
  * @param borders the ZoneBorders that compose the zone
  */
-
 fun registerMapZone(zone: MapZone, borders: ZoneBorders){
     ZoneBuilder.configure(zone)
     zone.register(borders)
@@ -1340,7 +1275,6 @@ fun registerMapZone(zone: MapZone, borders: ZoneBorders){
  * @param child the child on the interface to animate.
  * @param anim the ID of the animation to use.
  */
-
 fun animateInterface(player: Player, iface: Int, child: Int, anim: Int){
     player.packetDispatch.sendAnimationInterface(anim,iface,child)
 }
@@ -1350,7 +1284,6 @@ fun animateInterface(player: Player, iface: Int, child: Int, anim: Int){
  * @param ladderLoc the location of the ladder/stairs object you want to climb.
  * @param dest the destination for the climb.
  */
-
 fun addClimbDest(ladderLoc: Location, dest: Location){
     SpecialLadders.add(ladderLoc,dest)
 }
@@ -1359,7 +1292,6 @@ fun addClimbDest(ladderLoc: Location, dest: Location){
  * Sends a news announcement in game chat.
  * @param message the message to announce
  */
-
 fun sendNews(message: String){
     Repository.sendNews(message, 12, "CC6600")
 }
@@ -1369,7 +1301,6 @@ fun sendNews(message: String){
  * @param gfx the Graphics object, or the Integer ID of the graphics, to send. Either works.
  * @param location the location to send it to
  */
-
 fun <G> sendGraphics(gfx: G, location: Location){
     when(gfx){
         is Int -> Graphics.send(Graphics(gfx),location)
@@ -1390,7 +1321,6 @@ fun announceIfRare(player: Player, item: Item) {
  * @param player the player
  * @return a List<String> of skill names
  */
-
 fun getMasteredSkillNames(player: Player): List<String> {
     val hasMastered = player.getSkills().masteredSkills > 0
     val masteredSkills = ArrayList<String>()
@@ -1415,7 +1345,6 @@ fun getMasteredSkillNames(player: Player): List<String> {
  * @author ceik
  * @author James Triantafylos
  */
-
 fun dumpContainer(player: Player, container: core.game.container.Container) {
     val bank = player.bank
     container.toArray().filterNotNull().forEach { item ->
@@ -1446,7 +1375,6 @@ fun dumpContainer(player: Player, container: core.game.container.Container) {
  * @param player the player.
  * @return boolean indicating presence of house.
  */
-
 fun hasHouse(player: Player): Boolean {
     return player.houseManager.hasHouse()
 }

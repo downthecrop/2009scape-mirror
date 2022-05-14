@@ -1,6 +1,8 @@
-package plugin.quest.members.familycrest
+package rs09.game.content.quest.members.familycrest
 
 
+import api.addItem
+import api.setAttribute
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
@@ -8,6 +10,7 @@ import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import rs09.game.system.SystemLogger
 
 /**
 * Represents the "Family Crest" quest.
@@ -116,10 +119,10 @@ class FamilyCrest: Quest("Family Crest", 59, 58, 1, 148, 0, 1, 11) {
         drawReward(player,"A choice of special abilities for the gauntlets",ln++)
         drawReward(player,"for the gauntlets",ln++)
 
-        if(!player.inventory.add(Item(Items.FAMILY_GAUNTLETS_778))){
-            GroundItemManager.create(Item(Items.FAMILY_GAUNTLETS_778),player)
+        if (!addItem(player, Items.FAMILY_GAUNTLETS_778)) {
+            SystemLogger.logErr("Failed to give gauntlets to ${player.username} at end of quest, this should not occur due to crest item removal needed to finish quest.")
         }
-
+        setAttribute(player, "/save:family-crest:gauntlets", Items.FAMILY_GAUNTLETS_778)
     }
 
     /*override fun getConfig(player: Player?, stage: Int): IntArray {

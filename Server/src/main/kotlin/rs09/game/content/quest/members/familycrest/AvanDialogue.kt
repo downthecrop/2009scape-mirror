@@ -1,10 +1,12 @@
-package core.game.content.quest.members.familycrest
+package rs09.game.content.quest.members.familycrest
 
+import api.*
 import core.game.content.dialogue.DialoguePlugin
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
+import org.rs09.consts.Items
 
 @Initializable
 class AvanDialogue (player: Player? = null): DialoguePlugin(player) {
@@ -19,8 +21,8 @@ class AvanDialogue (player: Player? = null): DialoguePlugin(player) {
         npc = (args[0] as NPC).getShownNPC(player)
         val qstage = player?.questRepository?.getStage("Family Crest") ?: -1
 
-        if(qstage == 100){
-            options("Can you enchant these gauntlets for me?", "Nevermind")
+        if (qstage == 100) {
+            options("Can you change my gauntlets for me?", "Nevermind")
             stage = 6000
             return true
         }
@@ -173,40 +175,33 @@ class AvanDialogue (player: Player? = null): DialoguePlugin(player) {
                     "it is a priceless family heirloom.").also{stage = 1000
                     player.inventory.add(CREST_PIECE_AVAN)}
 
-            6000 -> when(buttonId){
-                1-> if(DoMissingGuantletCheck() != -1){
-                    var gauntletID = DoMissingGuantletCheck()
-
-                    if(gauntletID == 776){
-                        npc("You already have the Goldsmith guantlets.")
-                        stage = 1000
-                    }
-                    else{
-                        npc("Here you go")
-                        player.inventory.remove(Item(gauntletID))
-                        player.inventory.add(Item(776))
-                        stage = 1000
-                    }
+            6000 -> when (buttonId) {
+                1 ->  {
+                    var freeThisTime = getAttribute(player, "family-crest:gauntlets", Items.FAMILY_GAUNTLETS_778) == Items.FAMILY_GAUNTLETS_778
+                    npc("Yes certainly, though it will cost you 25,000 coins" + if (freeThisTime) " next time." else ".").also { stage = 6001 }
                 }
-                else{
-                    npc("You do not have the guantlets with you in your inventory")
-                    stage = 1000
-                }
-                2-> player("Never mind").also{stage = 1000}
+                2 -> player("Never mind").also{ stage = 1000 }
             }
+            6001 -> options("Great thanks!", "No that's okay thanks.").also{ stage++ }
+            6002 -> when (buttonId) {
+                1 -> {
+                    stage = 1000
+                    val givingGauntletsId = Items.GOLDSMITH_GAUNTLETS_776
+                    val npcString = SwapGauntletsHelper.swapGauntlets(player, givingGauntletsId)
+                    if (npcString == "")
+                    {
+                        end()
+                    }
+                    else {
+                        npc(npcString)
+                    }
+                }
+                2 -> end()
+            }
+
             1000 -> end()
         }
-
         return true
-    }
-
-    private fun DoMissingGuantletCheck(): Int{
-        var itemsToCheck = listOf(775, 776, 777, 778)
-        for(item in itemsToCheck){
-            if(player.inventory.containItems(item))
-                return item
-        }
-        return -1
     }
 
     override fun getIds(): IntArray {
