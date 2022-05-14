@@ -217,28 +217,13 @@ class CalebDialogue (player: Player? = null): DialoguePlugin(player) {
                 1 -> {
                     stage = 1000
                     val givingGauntletsId = Items.COOKING_GAUNTLETS_775
-                    if (inInventory(player, givingGauntletsId)) {
-                        npc("You already have the Cooking gauntlets.")
-                        return true
-                    }
-                    val otherGauntlets =
-                        if (inInventory(player, Items.CHAOS_GAUNTLETS_777)) Items.CHAOS_GAUNTLETS_777
-                        else if (inInventory(player, Items.GOLDSMITH_GAUNTLETS_776)) Items.GOLDSMITH_GAUNTLETS_776
-                        else if (inInventory(player, Items.FAMILY_GAUNTLETS_778)) Items.FAMILY_GAUNTLETS_778
-                        else -1
-                    if (otherGauntlets == -1) {
-                        npc("You do not have the gauntlets with you in your inventory.")
-                        return true
-                    }
-                    val fee = 25000
-                    if (getAttribute(player, "family-crest:gauntlets", Items.FAMILY_GAUNTLETS_778) != Items.FAMILY_GAUNTLETS_778 && !inInventory(player, Items.COINS_995, fee)) {
-                        npc("You do not have enough coins.")
-                        return true
-                    }
-                    if (removeItem(player, Item(Items.COINS_995, fee)) && removeItem(player, otherGauntlets)) {
-                        addItem(player, givingGauntletsId)
-                        setAttribute(player, "/save:family-crest:gauntlets", givingGauntletsId)
+                    val npcString = SwapGauntletsHelper.swapGauntlets(player, givingGauntletsId)
+                    if (npcString == "")
+                    {
                         end()
+                    }
+                    else {
+                        npc(npcString)
                     }
                 }
                 2 -> end()
