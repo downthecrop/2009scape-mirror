@@ -1,4 +1,4 @@
-package plugin.quest.members.familycrest
+package rs09.game.content.quest.members.familycrest
 
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler

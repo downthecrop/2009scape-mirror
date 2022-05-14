@@ -1,4 +1,4 @@
-package core.game.content.quest.members.familycrest
+package rs09.game.content.quest.members.familycrest
 
 import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.player.Player
