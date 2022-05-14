@@ -196,7 +196,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
 
         val price = when(currency)
         {
-            Items.TOKKUL_6529 -> item.definition.getConfiguration("tokkul_price", 1)
+            Items.TOKKUL_6529 -> (item.definition.getConfiguration("tokkul_price", 1) / 10.0).toInt()  // selling items authentically return 10x less tokkul (floored/truncated) than the item's shop price
             Items.ARCHERY_TICKET_1464 -> item.definition.getConfiguration("archery_ticket_price", 1)
             else -> getGPSell(Item(shopItemId, 1), stockAmt, currentAmt)
         }

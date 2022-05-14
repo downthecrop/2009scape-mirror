@@ -16,9 +16,10 @@ class ShopTests {
 
     private val testPlayer = TestUtils.getMockPlayer("test")
     private val testIronman = TestUtils.getMockPlayer("test2", IronmanMode.STANDARD)
-    var nonGeneral = TestUtils.getMockShop("Not General", false, false, Item(4151, 1))
-    var general = TestUtils.getMockShop("General", true, false, Item(4151, 1))
-    var highAlch = TestUtils.getMockShop("High(af) Alch", true, true, Item(4151, 1))
+    private var nonGeneral = TestUtils.getMockShop("Not General", false, false, Item(4151, 1))
+    private var general = TestUtils.getMockShop("General", true, false, Item(4151, 1))
+    private var highAlch = TestUtils.getMockShop("High(af) Alch", true, true, Item(4151, 1))
+    private var tokkulShop = TestUtils.getMockTokkulShop("Tokkul", Item(Items.DEATH_RUNE_560, 10))
 
     @BeforeEach fun beforeEach() {
         val testPlayers = arrayOf(testPlayer, testIronman)
@@ -29,6 +30,7 @@ class ShopTests {
         nonGeneral.playerStock.clear()
         general.playerStock.clear()
         highAlch.playerStock.clear()
+        tokkulShop.playerStock.clear()
     }
 
     private fun assertTransactionSuccess(status: Shop.TransactionStatus) {
@@ -165,6 +167,27 @@ class ShopTests {
             coinItem.amount,
             "1 coin should be the minimum selling price."
         )
+    }
+
+    @Test fun tokkulShouldBe10xLessValuableWhenSellingAStockedItem() {
+        val startingTokkul = 5000
+        testPlayer.inventory.add(Item(Items.TOKKUL_6529, startingTokkul))
+        testPlayer.setAttribute("shop-cont", tokkulShop.getContainer(testPlayer))
+        testPlayer.setAttribute("shop-main", true)
+        var status = tokkulShop.buy(testPlayer, 0, 1)  // 1 death rune
+        assertTransactionSuccess(status)
+        Assertions.assertEquals(Items.TOKKUL_6529, testPlayer.inventory[0].id, "Pre-assertion: First item should still be the currency used.")
+        val cost = startingTokkul - testPlayer.inventory[0].amount
+        status = tokkulShop.sell(testPlayer, 1, 1)  // back to starting stock
+        assertTransactionSuccess(status)
+        testPlayer.inventory.clear()
+        testPlayer.inventory.add(Item(Items.DEATH_RUNE_560, 1))
+
+        status = tokkulShop.sell(testPlayer, 0, 1)  // sell 1 death rune to fresh shop
+        assertTransactionSuccess(status)
+
+        Assertions.assertEquals(Items.TOKKUL_6529, testPlayer.inventory[0].id, "Expected same currency back.")
+        Assertions.assertEquals((cost / 10.0).toInt(), testPlayer.inventory[0].amount, "Expected 10 times less for selling than for cost of buying.")
     }
 
     @Test fun shouldSellUnstockedItemToGeneralStoreAsIronman() {
