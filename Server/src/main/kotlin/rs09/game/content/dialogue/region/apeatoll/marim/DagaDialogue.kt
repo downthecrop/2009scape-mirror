@@ -42,9 +42,7 @@ class DagaDialogue(player: Player? = null) : DialoguePlugin(player){
 
             32 -> when (buttonId) {
                 1 -> if (inInventory(player, Items.COINS_995, 100000)) {
-                    end()
-                    removeItem(player, Item(Items.COINS_995, 100000), Container.INVENTORY)
-                    addItem(player, Items.DRAGON_SCIMITAR_4587, 1)
+                    end().also { return removeItem(player, Item(Items.COINS_995, 100000)) && addItem(player, Items.DRAGON_SCIMITAR_4587, 1) }
                 } else {
                     npcl(FacialExpression.OLD_NORMAL, "Sorry but you don't have enough to buy one, at the moment it costs 100,000 gold coins.").also { stage = END_DIALOGUE }
                 }
