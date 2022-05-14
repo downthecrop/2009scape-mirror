@@ -134,7 +134,7 @@ data class ContainerisedItem(val container: core.game.container.Container?, val 
 
 /**
  * Check if player has any of the specified item IDs equipped, in inventory, or in bank
- * Returns a Pair containing the container and the item ID if found, otherwise Pair(null, null) if not found
+ * Returns a ContainerisedItem containing the container and the item ID if found, otherwise ContainerisedItem(null, -1) if not found
  */
 fun hasAnItem(player: Player, vararg ids: Int): ContainerisedItem {
     for (searchSpace in arrayOf(player.inventory, player.equipment, player.bank)) {
