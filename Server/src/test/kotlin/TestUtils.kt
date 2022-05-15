@@ -21,11 +21,11 @@ import java.nio.ByteBuffer
 
 object TestUtils {
     fun getMockPlayer(name: String, ironman: IronmanMode = IronmanMode.NONE): Player {
-        val p = Player(PlayerDetails(name))
-        p.details.session = MockSession()
+        val p = MockPlayer(name)
         p.ironmanManager.mode = ironman
         Repository.addPlayer(p)
         //Update sequence has a separate list of players for some reason...
+        UpdateSequence.renderablePlayers.add(p)
         return p
     }
 
@@ -60,6 +60,16 @@ object TestUtils {
         for(i in 0 until amount) {
             GameWorld.majorUpdateWorker.handleTickActions()
         }
+    }
+}
+
+class MockPlayer(name: String) : Player(PlayerDetails(name)) {
+    init {
+        this.details.session = MockSession()
+    }
+
+    override fun update() {
+        //do nothing. This is for rendering stuff. We don't render a mock player. Not until the spaghetti is less spaghetti.
     }
 }
 
