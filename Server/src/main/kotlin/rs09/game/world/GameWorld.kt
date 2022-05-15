@@ -160,11 +160,12 @@ object GameWorld {
         Cache.init(ServerConstants.CACHE_PATH)
         databaseManager = DatabaseManager(ServerConstants.DATABASE)
         databaseManager!!.connect()
-        ConfigParser().parseConfigs()
+        configParser.prePlugin()
         ClassScanner.scanClasspath()
         ClassScanner.loadPureInterfaces()
         worldPersists.forEach { it.parse() }
         ClassScanner.loadSideEffectfulPlugins()
+        configParser.postPlugin()
         startupListeners.forEach { it.startup() }
         if (run) {
             SystemManager.flag(if (settings?.isDevMode == true) SystemState.PRIVATE else SystemState.ACTIVE)
