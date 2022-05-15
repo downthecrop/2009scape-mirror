@@ -20,7 +20,7 @@ class BonesOnFaladorSheepdog : InteractionListener {
     override fun defineListeners() {
         onUseWith(NPC, BONES, SHEEP_DOG_NPC) { player, used, with ->
             if (removeItem(player, used.asItem())) {
-                animate(player, BONE_BURY_ANIMATION, true)
+                animate(player, BONE_BURY_ANIMATION)
                 sendDialogue(player, "You give the dog some nice ${used.name.toLowerCase()}. It happily gnaws on them.")
                 sendChat(with.asNpc(), "Woof woof!")
             }
