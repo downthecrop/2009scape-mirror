@@ -86,10 +86,11 @@ object GameWorld {
     @JvmStatic
     var settings: GameSettings? = null
     @JvmStatic
-    lateinit var authenticator: AuthProvider<*>
+    val authenticator: AuthProvider<*>
+        get() = Auth.authenticator
     @JvmStatic
-    lateinit var accountStorage: AccountStorageProvider
-
+    val accountStorage: AccountStorageProvider
+        get() = Auth.storageProvider
     /**
      * The current amount of (600ms) cycles elapsed.
      */
