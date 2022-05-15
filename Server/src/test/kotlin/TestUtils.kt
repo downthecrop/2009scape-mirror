@@ -47,7 +47,8 @@ object TestUtils {
         if(ServerConstants.DATA_PATH == null) {
             ServerConfigParser.parse(this::class.java.getResource("test.conf"))
             Cache.init(this::class.java.getResource("cache").path.toString())
-            ConfigParser().parseConfigs()
+            ConfigParser().prePlugin()
+            ConfigParser().postPlugin()
         }
     }
 
