@@ -1,5 +1,6 @@
 package rs09.game.interaction.item.withnpc
 
+import api.animate
 import api.removeItem
 import api.sendChat
 import api.sendDialogue
@@ -19,7 +20,7 @@ class BonesOnFaladorSheepdog : InteractionListener {
     override fun defineListeners() {
         onUseWith(NPC, BONES, SHEEP_DOG_NPC) { player, used, with ->
             if (removeItem(player, used.asItem())) {
-                player.animate(BONE_BURY_ANIMATION)
+                animate(player, BONE_BURY_ANIMATION, true)
                 sendDialogue(player, "You give the dog some nice ${used.name.toLowerCase()}. It happily gnaws on them.")
                 sendChat(with.asNpc(), "Woof woof!")
             }
