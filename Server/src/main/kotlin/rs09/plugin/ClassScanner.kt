@@ -11,21 +11,19 @@ import core.game.node.entity.player.link.quest.QuestRepository
 import core.game.world.map.Location
 import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBuilder
-import core.game.world.map.zone.ZoneMonitor
 import core.plugin.Plugin
 import core.plugin.PluginManifest
 import core.plugin.PluginType
 import io.github.classgraph.ClassGraph
 import io.github.classgraph.ClassInfo
+import io.github.classgraph.ScanResult
 import rs09.game.ai.general.scriptrepository.PlayerScripts
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InterfaceListener
-import rs09.game.interaction.Listener
 import rs09.game.node.entity.player.info.login.PlayerSaveParser
 import rs09.game.node.entity.player.info.login.PlayerSaver
-import rs09.game.node.entity.skill.magic.SpellListener
 import rs09.game.system.SystemLogger
-import rs09.game.system.command.Command
+import rs09.game.system.SystemLogger.logStartup
 import rs09.game.world.GameWorld
 import java.util.*
 import java.util.function.Consumer
@@ -37,9 +35,12 @@ import java.util.function.Consumer
 object ClassScanner {
     var disabledPlugins = HashMap<String, Boolean>()
     /**
-     * The amount of plugins loaded.
+     * The amount of content interfaces loaded.
      */
     var amountLoaded = 0
+        private set
+
+    var numPlugins = 0
         private set
 
     /**
@@ -52,16 +53,20 @@ object ClassScanner {
      */
     private val lastLoaded: String? = null
 
+    lateinit var scanResults: ScanResult
+
+    @JvmStatic fun scanClasspath() {
+        scanResults = ClassGraph().enableClassInfo().enableAnnotationInfo().scan()
+    }
+
     /**
      * Scan the classpath for reflection-loaded content classes such as listeners, "plugins", etc
      */
 	@JvmStatic
-	fun scanAndLoad() {
+	fun loadPureInterfaces() {
         try {
-            load()
-            loadedPlugins!!.clear()
-            loadedPlugins = null
-            SystemLogger.logInfo("Initialized $amountLoaded plugins...")
+            loadContentInterfacesFrom(scanResults)
+            logStartup("Loaded $amountLoaded content interfaces.")
         } catch (t: Throwable) {
             SystemLogger.logErr("Error initializing Plugins -> " + t.localizedMessage + " for file -> " + lastLoaded)
             t.printStackTrace()
@@ -71,13 +76,8 @@ object ClassScanner {
         }
     }
 
-    fun load() {
-        val result = ClassGraph().enableClassInfo().enableAnnotationInfo().scan()
-        result.getClassesWithAnnotation("core.plugin.Initializable").forEach(Consumer { p: ClassInfo ->
-            val clazz = p.loadClass().newInstance()
-            if(clazz is Plugin<*>) definePlugin(clazz)
-        })
-        result.getClassesImplementing("api.ContentInterface").filter { !it.isAbstract }.forEach {
+    private fun loadContentInterfacesFrom(scanResults: ScanResult) {
+        scanResults.getClassesImplementing("api.ContentInterface").filter { !it.isAbstract }.forEach {
             try {
                 val clazz = it.loadClass().newInstance()
                 if(clazz is LoginListener) GameWorld.loginListeners.add(clazz)
@@ -85,6 +85,7 @@ object ClassScanner {
                 if(clazz is TickListener) GameWorld.tickListeners.add(clazz)
                 if(clazz is StartupListener) GameWorld.startupListeners.add(clazz)
                 if(clazz is ShutdownListener) GameWorld.shutdownListeners.add(clazz)
+                if(clazz is PersistWorld) GameWorld.worldPersists.add(clazz)
                 if(clazz is InteractionListener) clazz.defineListeners().also { clazz.defineDestinationOverrides() }
                 if(clazz is InterfaceListener) clazz.defineInterfaceListeners()
                 if(clazz is Commands) clazz.defineCommands()
@@ -115,12 +116,35 @@ object ClassScanner {
                     SystemLogger.logInfo("Configured zone: ${clazz.javaClass.simpleName + "MapArea"}")
                     MapArea.zoneMaps[clazz.javaClass.simpleName + "MapArea"] = zone
                 }
+                amountLoaded++
             } catch (e: Exception) {
                 SystemLogger.logErr("Error loading content: ${it.simpleName}, ${e.localizedMessage}")
                 e.printStackTrace()
             }
         }
-        result.getClassesWithAnnotation("rs09.game.ai.general.scriptrepository.PlayerCompatible").forEach { res ->
+    }
+
+    @JvmStatic
+    fun loadSideEffectfulPlugins() {
+        try {
+            loadedPlugins!!.clear()
+            loadPluginsFrom(scanResults)
+            logStartup("We still have $numPlugins legacy plugins being loaded.")
+        } catch (t: Throwable) {
+            SystemLogger.logErr("Error initializing Plugins -> " + t.localizedMessage + " for file -> " + lastLoaded)
+            t.printStackTrace()
+        } catch (e: Exception) {
+            SystemLogger.logErr("Error initializing Plugins -> " + e.localizedMessage + " for file -> " + lastLoaded)
+            e.printStackTrace()
+        }
+    }
+
+    private fun loadPluginsFrom(scanResults: ScanResult) {
+        scanResults.getClassesWithAnnotation("core.plugin.Initializable").forEach(Consumer { p: ClassInfo ->
+            val clazz = p.loadClass().newInstance()
+            if(clazz is Plugin<*>) definePlugin(clazz)
+        })
+        scanResults.getClassesWithAnnotation("rs09.game.ai.general.scriptrepository.PlayerCompatible").forEach { res ->
             val description = res.getAnnotationInfo("rs09.game.ai.general.scriptrepository.ScriptDescription").parameterValues[0].value as Array<String>
             val identifier = res.getAnnotationInfo("rs09.game.ai.general.scriptrepository.ScriptIdentifier").parameterValues[0].value.toString()
             val name = res.getAnnotationInfo("rs09.game.ai.general.scriptrepository.ScriptName").parameterValues[0].value.toString()
@@ -171,7 +195,7 @@ object ClassScanner {
                     else -> SystemLogger.logWarn("Unknown Manifest: " + manifest.type)
                 }
             }
-            amountLoaded++
+            numPlugins++
         } catch (e: Throwable) {
             e.printStackTrace()
         }

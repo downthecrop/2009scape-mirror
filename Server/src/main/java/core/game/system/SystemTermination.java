@@ -1,5 +1,6 @@
 package core.game.system;
 
+import api.PersistWorld;
 import api.ShutdownListener;
 import core.game.ge.GrandExchangeDatabase;
 import core.game.interaction.object.dmc.DMCHandler;
@@ -52,6 +53,7 @@ public final class SystemTermination {
 				}
 			}
 			GameWorld.getShutdownListeners().forEach(ShutdownListener::shutdown);
+			GameWorld.getWorldPersists().forEach(PersistWorld::save);
 			if(ServerConstants.DATA_PATH != null)
 				save(ServerConstants.DATA_PATH);
 		} catch (Throwable e) {

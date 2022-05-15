@@ -13,9 +13,7 @@ import core.game.world.map.RegionManager
 import core.plugin.CorePluginTypes.StartupPlugin
 import core.tools.RandomFunction
 import core.tools.mysql.DatabaseManager
-import rs09.game.ai.general.scriptrepository.PlayerScripts
 import rs09.ServerConstants
-import rs09.game.node.entity.state.newsys.StateRepository
 import rs09.game.system.SystemLogger
 import rs09.game.system.SystemLogger.logInfo
 import rs09.game.system.config.ConfigParser
@@ -32,6 +30,8 @@ import kotlin.collections.ArrayList
  * @author Ceikry
  */
 object GameWorld {
+    @JvmStatic
+    val worldPersists = ArrayList<PersistWorld>()
 
     /**
      * The major update worker.
@@ -160,9 +160,11 @@ object GameWorld {
         Cache.init(ServerConstants.CACHE_PATH)
         databaseManager = DatabaseManager(ServerConstants.DATABASE)
         databaseManager!!.connect()
-        configParser.prePlugin()
-        ClassScanner.scanAndLoad()
-        configParser.postPlugin()
+        ConfigParser().parseConfigs()
+        ClassScanner.scanClasspath()
+        ClassScanner.loadPureInterfaces()
+        worldPersists.forEach { it.parse() }
+        ClassScanner.loadSideEffectfulPlugins()
         startupListeners.forEach { it.startup() }
         if (run) {
             SystemManager.flag(if (settings?.isDevMode == true) SystemState.PRIVATE else SystemState.ACTIVE)

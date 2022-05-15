@@ -1,5 +1,6 @@
 package rs09
 
+import api.PersistWorld
 import api.ShutdownListener
 import api.StartupListener
 import org.json.simple.JSONArray
@@ -13,8 +14,8 @@ import java.io.FileReader
 import java.io.FileWriter
 import javax.script.ScriptEngineManager
 
-class ServerStore : StartupListener, ShutdownListener {
-    override fun startup() {
+class ServerStore : PersistWorld {
+    override fun parse() {
         logStartup("Parsing server store...")
         val dir = File(ServerConstants.STORE_PATH!!)
         if(!dir.exists()){
@@ -41,9 +42,11 @@ class ServerStore : StartupListener, ShutdownListener {
                 return@forEach
             }
         }
+
+        logStartup("Initialized $counter store files.")
     }
 
-    override fun shutdown() {
+    override fun save() {
         logShutdown("Saving server store...")
         val dir = File(ServerConstants.DATA_PATH + File.separator + "serverstore")
         if(!dir.exists()){
