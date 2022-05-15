@@ -1,13 +1,12 @@
 package core.net.packet.in;
 
 import api.ContentAPIKt;
-import core.game.ge.GrandExchangeDatabase;
-import core.game.ge.GrandExchangeEntry;
 import core.game.node.entity.player.Player;
 import core.net.packet.IncomingPacket;
 import core.net.packet.IoBuffer;
 import rs09.game.ge.GrandExchange;
 import rs09.game.ge.GrandExchangeOffer;
+import rs09.game.ge.PriceIndex;
 import rs09.game.interaction.inter.ge.StockMarket;
 
 /**
@@ -23,8 +22,7 @@ public class GrandExchangePacket implements IncomingPacket {
 		int index = player.getAttribute("ge-index", -1);
 		offer.setItemID(itemId);
 		offer.setSell(false);
-		GrandExchangeEntry entry = GrandExchangeDatabase.getDatabase().get(itemId);
-		if(entry == null || !ContentAPIKt.itemDefinition(itemId).isTradeable())
+		if(!PriceIndex.canTrade(offer.getItemID()))
 		{
 			ContentAPIKt.sendMessage(player, "That item is blacklisted from the grand exchange.");
 			return;

@@ -6,6 +6,7 @@ import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import org.sqlite.SQLiteDataSource
 import rs09.ServerConstants
+import rs09.game.system.SystemLogger
 import java.io.File
 import java.io.FileReader
 import java.sql.Connection
@@ -16,7 +17,9 @@ import java.sql.Connection
  */
 object GEDB {
     private var pathString = ""
-    private var connection: Connection? = null
+    public var connection: Connection? = null
+    private var initialized = false
+    private var connectionRefs = 0
 
     fun init() {
         init(File(ServerConstants.GRAND_EXCHANGE_DATA_PATH + "grandexchange.db").absolutePath)
@@ -25,13 +28,24 @@ object GEDB {
     //This needs to be a separate method, so we can call it after the server config has been parsed
     fun init(path: String)
     {
+        if(initialized) return
         pathString = path
         //Check if the grandexchange.db file already exists. If not, create it and create the tables.
         if(!File(path).exists())
             generateAndTransfer()
     }
 
-    fun connect(): Connection
+    @JvmStatic fun run(closure: (conn: Connection) -> Unit) {
+        connectionRefs++
+        val con = connect()
+        closure.invoke(con)
+        connectionRefs--
+        if(connectionRefs == 0) {
+            con.close()
+        }
+    }
+
+    private fun connect(): Connection
     {
         if (connection == null || connection!!.isClosed)
         {
@@ -152,14 +166,14 @@ object GEDB {
             }
             reader.close()
         }
+        statement.close()
 
 
         //price index isn't worth transferring, so we're just going to make a new one.
         ItemDefinition.getDefinitions().values.forEach { def ->
             if(def.isTradeable){
-                statement.execute("insert into price_index(item_id, value) values(${def.id},${def.value})")
+                PriceIndex.allowItem(def.id)
             }
         }
-        statement.close()
     }
 }
