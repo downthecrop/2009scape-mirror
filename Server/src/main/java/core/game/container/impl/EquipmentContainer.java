@@ -1,5 +1,6 @@
 package core.game.container.impl;
 
+import api.EquipmentSlot;
 import core.game.container.Container;
 import core.game.container.ContainerEvent;
 import core.game.container.ContainerListener;
@@ -13,8 +14,13 @@ import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
 import core.net.packet.out.WeightUpdate;
 import core.plugin.Plugin;
+import org.jetbrains.annotations.Nullable;
+import rs09.game.interaction.InteractionListeners;
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
+import rs09.game.system.SystemLogger;
 import rs09.game.system.config.ItemConfigParser;
+
+import java.util.ArrayList;
 
 /**
  * Represents the equipment container.
@@ -64,87 +70,174 @@ public final class EquipmentContainer extends Container {
 
 	/**
 	 * Adds an item to the equipment container.
-	 * @param item The item to add.
+	 * @param newItem The item to add.
 	 * @param inventorySlot The inventory slot of the item.
 	 * @param fire If we should refresh.
 	 * @param fromInventory If the item is being equipped from the inventory.
 	 * @return {@code True} if succesful, {@code false} if not.
 	 */
-	public boolean add(Item item, int inventorySlot, boolean fire, boolean fromInventory) {
-		int slot = item.getDefinition().getConfiguration(ItemConfigParser.EQUIP_SLOT, -1);
-		if (slot == -1 && item.getDefinition().getConfiguration(ItemConfigParser.WEAPON_INTERFACE, -1) != -1) {
-			slot = SLOT_WEAPON;
-		}
-//		slot = 3;
-		if (slot < 0) {
-			return false; // Item can't be equipped.
-		}
-		if (!item.getDefinition().hasRequirement(player, true, true)) {
+	public boolean add(Item newItem, int inventorySlot, boolean fire, boolean fromInventory) {
+		int equipmentSlot = newItem.getDefinition().getConfiguration(ItemConfigParser.EQUIP_SLOT, -1);
+		if (!isEquippable(newItem, equipmentSlot)) return false;
+
+		ArrayList<Item> itemsToRemove = new ArrayList<>();
+
+		Item currentItem = super.get(equipmentSlot);
+		if(currentItem != null) itemsToRemove.add(currentItem);
+
+		Item secondaryEquip = getSecondaryEquipIfApplicable(newItem, equipmentSlot);
+		if(secondaryEquip != null) itemsToRemove.add(secondaryEquip);
+
+		if(fromInventory && !player.getInventory().remove(newItem, inventorySlot, true)) {
 			return false;
 		}
-		Item current = super.get(slot);
-		if (current != null && current.getId() == item.getId() && current.getDefinition().isStackable()) {
-			int amount = getMaximumAdd(item);
-			if (item.getAmount() > amount) {
-				amount += current.getAmount();
-			} else {
-				amount = current.getAmount() + item.getAmount();
+
+		if (!itemsToRemove.isEmpty()) {
+			ArrayList<Item> invalidatedEntries = new ArrayList<>();
+			for(Item current : itemsToRemove) {
+				if(current.getId() == newItem.getId() && current.getDefinition().isStackable()) {
+					addStackableItemToExistingStack(newItem, fromInventory, equipmentSlot, current);
+					invalidatedEntries.add(current);
+				}
 			}
-			if (fromInventory) {
-				player.getInventory().remove(new Item(item.getId(), amount - current.getAmount()));
+			itemsToRemove.removeAll(invalidatedEntries);
+
+			if(itemsToRemove.isEmpty()) {
+				return true;
 			}
-			replace(new Item(item.getId(), amount), slot);
-			return true;
+
+			boolean successfullyRemovedAll = tryUnequipCurrent(itemsToRemove, newItem);
+
+			if(!successfullyRemovedAll) {
+				if (fromInventory) player.getInventory().add(newItem); //add the item back in case we weren't able to remove the currently equipped item(s)
+				return false;
+			}
 		}
-		if (fromInventory && current != null) {
-			Plugin<Object> plugin = current.getDefinition().getConfiguration("equipment", null);
-			if (plugin != null) {
-				Object object = plugin.fireEvent("unequip", player, current, item);
-				if (object != null && !((Boolean) object)) {
-					return true;
+
+		super.replace(newItem, equipmentSlot, fire);
+		setWeaponInterfaceWeaponName(newItem);
+		return true;
+	}
+
+	private boolean isEquippable(Item newItem, int slot) {
+		if (slot < 0) {
+			return false;
+		}
+		return newItem.getDefinition().hasRequirement(player, true, true);
+	}
+
+	private void setWeaponInterfaceWeaponName(Item newItem) {
+		if (newItem.getSlot() == SLOT_WEAPON) {
+			player.getPacketDispatch().sendString(newItem.getName(), 92, 0);
+		}
+	}
+
+	private boolean tryUnequipCurrent(ArrayList<Item> current, Item newItem) {
+		if(current.isEmpty()) return true;
+		int freeSlots = player.getInventory().freeSlots();
+		int neededSlots = getNeededSlotsToUnequip(current);
+
+		boolean hasSpaceForUnequippedItems = freeSlots >= neededSlots;
+
+		if(!hasSpaceForUnequippedItems) {
+			player.getPacketDispatch().sendMessage("Not enough space in your inventory!");
+			return false;
+		}
+
+		boolean listenersSayWeCanUnequip = runUnequipHooks(current, newItem);
+
+		boolean allRemoved = true;
+		for(Item item : current) {
+			if(!remove(item)) {
+				allRemoved = false;
+				break;
+			}
+		}
+
+		boolean allAdded = allRemoved;
+		if(allRemoved) {
+			for (Item item : current) {
+				if (!player.getInventory().add(item)) {
+					allAdded = false;
+					break;
 				}
 			}
 		}
-		if (fromInventory && !player.getInventory().remove(item, inventorySlot, true)) {
-			return false;
-		}
-		Item secondary = null;
-		if (item.getDefinition().getConfiguration(ItemConfigParser.TWO_HANDED, false)) {
-			secondary = get(SLOT_SHIELD);
-		} else if (slot == SLOT_SHIELD) {
-			secondary = get(SLOT_WEAPON);
-			if (secondary != null && !secondary.getDefinition().getConfiguration(ItemConfigParser.TWO_HANDED, false)) {
-				secondary = null;
+
+		if (listenersSayWeCanUnequip && allRemoved && allAdded) return true;
+		else {
+			//put things back if we couldn't remove everything
+			for(Item item : current) {
+				if(!containsItem(item)) {
+					add(item);
+				}
 			}
 		}
-		int currentSlot = -1;
-		if (current != null) {
-			currentSlot = inventorySlot;
-			if (current.getDefinition().isStackable() && player.getInventory().contains(current.getId(), 1)) {
-				currentSlot = -1;
+
+		return false;
+	}
+
+	private int getNeededSlotsToUnequip(ArrayList<Item> current) {
+		int neededSlots = 0;
+
+		for(Item item : current) {
+			if(!item.getDefinition().isStackable()) {
+				neededSlots++;
+			} else {
+				if(player.getInventory().getAmount(item.getId()) == 0) {
+					neededSlots++;
+				}
 			}
 		}
-		if (current != null && !player.getInventory().add(current, true, inventorySlot)) {
-			player.getInventory().add(item);
-			player.getPacketDispatch().sendMessage("Not enough space in your inventory!");
-			return false;
+		return neededSlots;
+	}
+
+	@Nullable
+	private Item getSecondaryEquipIfApplicable(Item newItem, int equipmentSlot) {
+		Item secondaryEquipItem = null;
+		if (newItem.getDefinition().getConfiguration(ItemConfigParser.TWO_HANDED, false)) {
+			secondaryEquipItem = get(SLOT_SHIELD);
+		} else if (equipmentSlot == SLOT_SHIELD) {
+			Item inSlot = player.getEquipment().get(SLOT_WEAPON);
+			if(inSlot != null && inSlot.getDefinition().getConfiguration(ItemConfigParser.TWO_HANDED, false))
+				secondaryEquipItem = get(SLOT_WEAPON);
 		}
-		if (secondary != null && !player.getInventory().add(secondary)) {
-			if (current != null && currentSlot != -1) {
-				player.getInventory().remove(current, currentSlot, false);
+		return secondaryEquipItem;
+	}
+
+	private boolean runUnequipHooks(ArrayList<Item> currentItems, Item newItem) {
+		boolean canContinue = true;
+
+		for(Item currentItem : currentItems) {
+			Plugin<Object> plugin = currentItem.getDefinition().getConfiguration("equipment", null);
+			if (plugin != null) {
+				Object object = plugin.fireEvent("unequip", player, currentItem, newItem);
+				if (object != null && !((Boolean) object)) {
+					canContinue = false;
+					break;
+				}
 			}
-			player.getInventory().add(item);
-			player.getPacketDispatch().sendMessage("Not enough space in your inventory!");
-			return false;
+
+			canContinue = InteractionListeners.run(currentItem.getId(), player, currentItem, false);
+
+			if(!canContinue) break;
 		}
-		super.replace(item, slot, fire);
-		if (item.getSlot() == SLOT_WEAPON) {
-			player.getPacketDispatch().sendString(item.getName(), 92, 0);
+
+		return canContinue;
+	}
+
+	private void addStackableItemToExistingStack(Item item, boolean fromInventory, int slot, Item current) {
+		int amount = getMaximumAdd(item);
+		if (item.getAmount() > amount) {
+			amount += current.getAmount();
+		} else {
+			amount = current.getAmount() + item.getAmount();
 		}
-		if (secondary != null) {
-			super.remove(secondary);
+		Item transferItem = new Item(current.getId(), amount);
+		if (fromInventory) {
+			player.getInventory().remove(transferItem);
 		}
-		return true;
+		replace(transferItem, slot);
 	}
 
 	/**
