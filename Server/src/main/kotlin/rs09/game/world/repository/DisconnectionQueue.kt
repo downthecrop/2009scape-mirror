@@ -195,12 +195,6 @@ class DisconnectionQueue {
     fun save(player: Player, sql: Boolean): Boolean {
         try {
             PlayerParser.save(player)
-            if (sql) {
-                player.details.sqlManager.update(player)
-                player.details.save()
-                /*SQLEntryHandler.write(HighscoreSQLHandler(player))
-                SQLEntryHandler.write(PlayerLogSQLHandler(player.monitor, player.name))*/
-            }
             return true
         } catch (t: Throwable) {
             t.printStackTrace()

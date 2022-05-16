@@ -385,6 +385,7 @@ public class Player extends Entity {
 		CommunicationInfo.notifyPlayers(this, false, false);
 		HouseManager.leave(this);
 		UpdateSequence.getRenderablePlayers().remove(this);
+		details.save();
 		Repository.getDisconnectionQueue().add(this);
 	}
 
@@ -867,7 +868,6 @@ public class Player extends Entity {
 		if (this.details != null) {
 			details.setBanTime(this.details.getBanTime());
 			details.setMuteTime(this.details.getMuteTime());
-			details.setIcon(this.details.getIcon());
 		}
 		details.getSession().setObject(this);
 		this.details = details;

@@ -16,6 +16,7 @@ import core.net.packet.context.MessageContext;
 import core.net.packet.out.CommunicationMessage;
 import core.net.packet.out.ContactPackets;
 import core.net.packet.out.UpdateClanChat;
+import rs09.auth.AuthResponse;
 import rs09.game.node.entity.player.info.login.LoginParser;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
@@ -306,17 +307,17 @@ public final class MSPacketRepository {
 		LoginParser parser = WorldCommunicator.finishLoginAttempt(username);
 		if (parser != null) {
 			PlayerDetails details = parser.getDetails();
-			Response response = Response.get(opcode);
+			AuthResponse response = AuthResponse.values()[opcode];
 			Player player = null;
 			switch (response) {
-				case ALREADY_ONLINE:
+				case AlreadyOnline:
 					player = Repository.getPlayerByName(username);
 					if (player == null || player.getSession().isActive() || !player.getSession().getAddress().equals(details.getSession().getAddress())) {
 						details.getSession().write(response, true);
 						break;
 					}
 					player.getPacketDispatch().sendLogout();
-				case SUCCESSFUL:
+				case Success:
 					if (!details.getSession().isActive()) {
 						sendPlayerRemoval(username);
 						break;
@@ -326,10 +327,10 @@ public final class MSPacketRepository {
 					} else {
 						player.updateDetails(details);
 					}
-					parser.initialize(player, response == Response.ALREADY_ONLINE);
+					parser.initialize(player, response == AuthResponse.AlreadyOnline);
 					break;
 
-				case MOVING_WORLD:
+				case MovingWorld:
 					details.getSession().setServerKey(buffer.get());
 				default:
 					details.getSession().write(response, true);

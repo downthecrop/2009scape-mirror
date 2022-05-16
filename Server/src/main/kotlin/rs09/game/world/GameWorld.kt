@@ -12,13 +12,15 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.plugin.CorePluginTypes.StartupPlugin
 import core.tools.RandomFunction
-import core.tools.mysql.DatabaseManager
 import rs09.ServerConstants
+import rs09.auth.AuthProvider
+import rs09.game.system.Auth
 import rs09.game.system.SystemLogger
 import rs09.game.system.SystemLogger.logInfo
 import rs09.game.system.config.ConfigParser
 import rs09.game.world.repository.Repository
 import rs09.plugin.ClassScanner
+import rs09.storage.AccountStorageProvider
 import rs09.worker.MajorUpdateWorker
 import java.text.SimpleDateFormat
 import java.util.*
@@ -83,14 +85,17 @@ object GameWorld {
      */
     @JvmStatic
     var settings: GameSettings? = null
+    @JvmStatic
+    val authenticator: AuthProvider<*>
+        get() = Auth.authenticator
+    @JvmStatic
+    val accountStorage: AccountStorageProvider
+        get() = Auth.storageProvider
     /**
      * The current amount of (600ms) cycles elapsed.
      */
     @JvmStatic
     var ticks = 0
-    @JvmStatic
-    var databaseManager: DatabaseManager? = null
-        private set
 
     @JvmStatic
     var Pulser = PulseRunner()
@@ -158,9 +163,12 @@ object GameWorld {
     fun prompt(run: Boolean, directory: String?){
         logInfo("Prompting ${settings?.name} Game World...")
         Cache.init(ServerConstants.CACHE_PATH)
-        databaseManager = DatabaseManager(ServerConstants.DATABASE)
-        databaseManager!!.connect()
-        configParser.prePlugin()
+        //go overboard with checks to make sure dev mode authenticator never triggers on live
+        Auth.configureFor(
+            settings!!.isDevMode
+                    && ServerConstants.MS_SECRET_KEY == "2009scape_development"
+        )
+        ConfigParser().prePlugin()
         ClassScanner.scanClasspath()
         ClassScanner.loadPureInterfaces()
         worldPersists.forEach { it.parse() }

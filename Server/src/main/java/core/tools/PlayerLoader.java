@@ -19,8 +19,8 @@ public final class PlayerLoader {
      * @return the player.
      */
     public static Player getPlayerFile(String name) {
-        final PlayerDetails playerDetails = new PlayerDetails(name, "");
-        playerDetails.parse();
+        final PlayerDetails playerDetails = new PlayerDetails(name);
+        //playerDetails.parse();
         final Player player = new Player(playerDetails);
         PlayerParser.parse(player);
 //        GameWorld.getWorld().getAccountService().loadPlayer(player);
@@ -34,8 +34,8 @@ public final class PlayerLoader {
      * @return the details
      */
     public static PlayerDetails getPlayerDetailFile(String name) {
-        final PlayerDetails playerDetails = new PlayerDetails(name, "");
-        playerDetails.parse();
+        final PlayerDetails playerDetails = new PlayerDetails(name);
+       // playerDetails.parse();
         return playerDetails;
     }
 }

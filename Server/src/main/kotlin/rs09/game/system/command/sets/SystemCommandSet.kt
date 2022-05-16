@@ -1,17 +1,18 @@
 package rs09.game.system.command.sets
 
-import core.cache.Cache
-import core.cache.def.Definition
+import api.InputType
+import api.runTask
+import api.sendDialogue
+import api.sendInputDialogue
 import core.cache.def.impl.ItemDefinition
-import core.game.node.entity.player.info.login.Response
-import core.game.node.entity.player.info.portal.PlayerSQLManager
 import core.game.node.item.Item
 import core.game.system.SystemManager
 import core.game.system.SystemState
 import core.plugin.Initializable
 import org.rs09.consts.Items
-import rs09.game.system.command.Command
+import rs09.game.system.SystemLogger
 import rs09.game.system.command.Privilege
+import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
 import kotlin.system.exitProcess
 
@@ -40,31 +41,29 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
          * Allows a player to reset their password
          */
         define("resetpassword", Privilege.STANDARD) { player, args ->
-            if (args.size != 3) {
-                reject(player, "Usage: ::resetpassword current new", "WARNING: THIS IS PERMANENT.", "WARNING: PASSWORD CAN NOT CONTAIN SPACES.")
+            sendInputDialogue(player, InputType.STRING_SHORT, "Enter Current Password:"){value ->
+                val pass = value.toString()
+                SystemLogger.logInfo(pass)
+                runTask(player) {
+                    if (GameWorld.authenticator.checkPassword(player, pass)) {
+                        sendInputDialogue(player, InputType.STRING_SHORT, "Enter New Password:") { value2 ->
+                            val newPass = value2.toString()
+                            if (pass == newPass) {
+                                sendDialogue(player, "Failed: Passwords Match")
+                            } else if (newPass.length !in 5..20) {
+                                sendDialogue(player, "Failed: Password Too Long Or Too Short")
+                            } else if (newPass == player.details.accountInfo.username) {
+                                sendDialogue(player, "Failed: Password Is Username")
+                            } else {
+                                GameWorld.authenticator.updatePassword(player.details.accountInfo.username, newPass)
+                                sendDialogue(player, "Success: Password Updated!")
+                            }
+                        }
+                    } else {
+                        sendDialogue(player, "Fail: Wrong Password.")
+                    }
+                }
             }
-            val oldPass = args[1]
-            var newPass = args[2]
-
-            if (PlayerSQLManager.getCredentialResponse(player.details.username, oldPass) != Response.SUCCESSFUL) {
-                reject(player, "INVALID PASSWORD!")
-            }
-
-            if (newPass.length < 5 || newPass.length > 20) {
-                reject(player, "NEW PASSWORD MUST BE BETWEEN 5 AND 20 CHARACTERS")
-            }
-
-            if (newPass == player.username) {
-                reject(player, "PASSWORD CAN NOT BE SAME AS USERNAME.")
-            }
-
-            if (newPass == oldPass) {
-                reject(player, "PASSWORDS CAN NOT BE THE SAME")
-            }
-
-            newPass = SystemManager.getEncryption().hashPassword(newPass)
-            PlayerSQLManager.updatePassword(player.username.toLowerCase().replace(" ", "_"), newPass)
-            notify(player, "Password updated successfully.")
         }
 
         /**
@@ -75,9 +74,9 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
                 reject(player, "Usage: ::resetpasswordother user new", "WARNING: THIS IS PERMANENT.", "WARNING: PASSWORD CAN NOT CONTAIN SPACES.")
             }
             val otherUser = args[1]
-            var newPass = args[2]
+            val newPass = args[2]
 
-            if (PlayerSQLManager.hasSqlAccount(otherUser, "username")) {
+            if (GameWorld.accountStorage.checkUsernameTaken(otherUser)) {
 
                 if (newPass.length < 5 || newPass.length > 20) {
                     reject(player, "NEW PASSWORD MUST BE BETWEEN 5 AND 20 CHARACTERS")
@@ -87,8 +86,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
                     reject(player, "PASSWORD CAN NOT BE SAME AS USERNAME.")
                 }
 
-                newPass = SystemManager.getEncryption().hashPassword(newPass)
-                PlayerSQLManager.updatePassword(otherUser.toLowerCase().replace(" ","_"),newPass)
+                GameWorld.authenticator.updatePassword(otherUser, newPass)
                 notify(player, "Password updated successfully.")
 
             } else {
