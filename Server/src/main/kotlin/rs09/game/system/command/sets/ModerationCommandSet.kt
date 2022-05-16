@@ -2,7 +2,6 @@ package rs09.game.system.command.sets
 
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
-import rs09.game.system.command.Command
 import core.game.system.task.Pulse
 import rs09.game.world.GameWorld
 import core.game.world.map.Location
@@ -25,7 +24,7 @@ class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
          * Kick a player
          * =============================================================================================================
          */
-        define("kick", Privilege.ADMIN){ player, args ->
+        define("kick", Privilege.MODERATOR){ player, args ->
             val playerToKick: Player? = Repository.getPlayerByName(args[1])
             if (playerToKick != null) {
                 playerToKick.clear(true)
@@ -38,6 +37,100 @@ class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
          * =============================================================================================================
          */
 
+        /**
+         * Ban a player
+         * =============================================================================================================
+         */
+        define("ban", Privilege.ADMIN){ player, args ->
+            val name = args[1]
+            if(!GameWorld.accountStorage.checkUsernameTaken(name)) {
+                reject(player, "Invalid username: $name")
+            }
+            val playerToKick: Player? = Repository.getPlayerByName(name)
+            val durationString = args[2]
+            val durationTokens = durationString.toCharArray()
+            var intToken = ""
+            var durationMillis = 0L
+            var durationUnit: TimeUnit = TimeUnit.NANOSECONDS
+            for(token in durationTokens){
+                if(token.toString().toIntOrNull() != null) intToken += token
+                else {
+                    val durationInt: Int = (intToken.toIntOrNull() ?: -1).also { if(it == -1) reject(player, "Invalid duration: $intToken") }
+                    durationUnit = when(token) {
+                        'd' -> TimeUnit.DAYS
+                        's' -> TimeUnit.SECONDS
+                        'm' -> TimeUnit.MINUTES
+                        'h' -> TimeUnit.HOURS
+                        else -> TimeUnit.SECONDS
+                    }
+                    durationMillis = durationUnit.toMillis(durationInt.toLong())
+                }
+            }
+
+            playerToKick?.details?.accountInfo?.banEndTime = System.currentTimeMillis() + durationMillis
+            playerToKick?.clear(true)
+            GameWorld.Pulser.submit(object : Pulse(2) {
+                override fun pulse(): Boolean {
+                    val info = GameWorld.accountStorage.getAccountInfo(name)
+                    info.banEndTime = System.currentTimeMillis() + durationMillis
+                    GameWorld.accountStorage.update(info)
+                    return true
+                }
+            })
+
+            notify(player, "Banned user $name for $intToken ${durationUnit.name.toLowerCase()}.")
+        }
+        /**
+         * =============================================================================================================
+         */
+
+        /**
+         * Mute a player
+         * =============================================================================================================
+         */
+        define("mute", Privilege.MODERATOR){ player, args ->
+            val name = args[1]
+            if(!GameWorld.accountStorage.checkUsernameTaken(name)) {
+                reject(player, "Invalid username: $name")
+            }
+            val playerToMute: Player? = Repository.getPlayerByName(name)
+            val durationString = args[2]
+            val durationTokens = durationString.toCharArray()
+            var intToken = ""
+            var durationMillis = 0L
+            var durationUnit: TimeUnit = TimeUnit.NANOSECONDS
+            for(token in durationTokens){
+                if(token.toString().toIntOrNull() != null) intToken += token
+                else {
+                    val durationInt: Int = (intToken.toIntOrNull() ?: -1).also { if(it == -1) reject(player, "Invalid duration: $intToken") }
+                    durationUnit = when(token) {
+                        'd' -> TimeUnit.DAYS
+                        's' -> TimeUnit.SECONDS
+                        'm' -> TimeUnit.MINUTES
+                        'h' -> TimeUnit.HOURS
+                        else -> TimeUnit.SECONDS
+                    }
+                    durationMillis = durationUnit.toMillis(durationInt.toLong())
+                }
+            }
+
+            playerToMute?.details?.accountInfo?.muteEndTime = System.currentTimeMillis() + durationMillis
+            if(playerToMute == null) { //Player was offline at the time
+                GameWorld.Pulser.submit(object : Pulse(2) {
+                    override fun pulse(): Boolean {
+                        val info = GameWorld.accountStorage.getAccountInfo(name)
+                        info.muteEndTime = System.currentTimeMillis() + durationMillis
+                        GameWorld.accountStorage.update(info)
+                        return true
+                    }
+                })
+            }
+
+            notify(player, "Muted user $name for $intToken ${durationUnit.name.toLowerCase()}.")
+        }
+        /**
+         * =============================================================================================================
+         */
 
         /**
          * Jail a player

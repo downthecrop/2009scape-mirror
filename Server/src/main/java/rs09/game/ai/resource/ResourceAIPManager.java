@@ -57,21 +57,6 @@ public class ResourceAIPManager {
     }
 
     public ResourceAIPManager load(Player player) {
-        try {
-            Statement statement = GameWorld.getDatabaseManager().connections().get("global").createStatement();
-
-            ResultSet result = statement.executeQuery("SELECT * FROM `members` WHERE username='" + player.getUsername() + "'");
-           // Results result = new Results(GameWorld.getDatabaseManager().query("global", "SELECT * FROM `members` WHERE username='" + player.getUsername() + "'"));
-
-            while (result.next()) {
-                String eventName = result.getString("taskName");
-                String eventTime = result.getString("taskTime");
-                reActivate(eventName, Long.valueOf(eventTime));
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return this;
     }
 
@@ -87,7 +72,6 @@ public class ResourceAIPManager {
             StringBuilder query = new StringBuilder();
             query.append("UPDATE `members` SET `taskName`='" + entry.getKey().getTaskName() + "',`taskTime`='" + entry.getValue() + "' WHERE `username`='" + player.getUsername() + "'");
             System.out.println("ResourceAIPManager: " + query.toString());
-            GameWorld.getDatabaseManager().update("global", query.toString());
 
         }
         return this;

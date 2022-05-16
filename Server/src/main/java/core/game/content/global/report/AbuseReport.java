@@ -1,6 +1,7 @@
 package core.game.content.global.report;
 
 import core.game.node.entity.player.Player;
+import rs09.game.system.command.CommandMapping;
 
 /**
  * Represents an abuse report to file.
@@ -45,6 +46,9 @@ public final class AbuseReport {
 	 * @param player the player.
 	 */
 	public void construct(Player player, boolean mute) {
+		if (mute) {
+			CommandMapping.INSTANCE.get("mute").attemptHandling(player, new String[] {"mute", victim, "48h"});
+		}
 		player.getPacketDispatch().sendMessage("Thank-you, your abuse report has been received.");
 	}
 

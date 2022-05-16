@@ -13,6 +13,7 @@ import core.game.system.task.Pulse
 import core.net.amsc.MSPacketRepository
 import core.net.amsc.ManagementServerState
 import core.net.amsc.WorldCommunicator
+import rs09.auth.AuthResponse
 import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
 import rs09.game.world.GameWorld.loginListeners
@@ -70,7 +71,7 @@ class LoginParser(
         } catch (t: Throwable) {
             t.printStackTrace()
             try {
-                flag(Response.ERROR_LOADING_PROFILE)
+                flag(AuthResponse.ErrorLoadingProfile)
                 Repository.LOGGED_IN_PLAYERS.remove(details.username)
             } catch (e: Throwable) {
                 e.printStackTrace()
@@ -84,10 +85,6 @@ class LoginParser(
      */
     private fun handleLogin() {
         val p = worldInstance
-        if (!details.parse()) {
-            flag(Response.INVALID_LOGIN_SERVER)
-            return
-        }
         val player = p ?: Player(details)
         player.setAttribute("login_type", type)
         if (p != null) { // Reconnecting
@@ -122,7 +119,7 @@ class LoginParser(
             Repository.lobbyPlayers.remove(player)
             Repository.playerNames.remove(player.name)
             MSPacketRepository.sendPlayerRemoval(player.name)
-            flag(Response.ERROR_LOADING_PROFILE)
+            flag(AuthResponse.ErrorLoadingProfile)
         }
         //Repository.getPlayerNames().put(player.getName(), player);
         GameWorld.Pulser.submit(object : Pulse(1) {
@@ -140,7 +137,7 @@ class LoginParser(
                             Repository.addPlayer(player)
                         }
                         player.details.session.setObject(player)
-                        flag(Response.SUCCESSFUL)
+                        flag(AuthResponse.Success)
                         player.init()
                         player.monitor.log(player.details.ipAddress, PlayerMonitor.ADDRESS_LOG)
                         player.monitor.log(player.details.serial, PlayerMonitor.ADDRESS_LOG)
@@ -156,7 +153,7 @@ class LoginParser(
                     Repository.lobbyPlayers.remove(player)
                     Repository.playerNames.remove(player.name)
                     MSPacketRepository.sendPlayerRemoval(player.name)
-                    flag(Response.ERROR_LOADING_PROFILE)
+                    flag(AuthResponse.ErrorLoadingProfile)
                 }
                 return true
             }
@@ -185,7 +182,7 @@ class LoginParser(
         Repository.disconnectionQueue.remove(details.username)
         player.initReconnect()
         player.isActive = true
-        flag(Response.SUCCESSFUL)
+        flag(AuthResponse.Success)
         player.updateSceneGraph(true)
         player.configManager.init()
         LoginConfiguration.configureGameWorld(player)
@@ -208,22 +205,22 @@ class LoginParser(
         //This is supposed to prevent the double-logging issue. Will it work? Who knows.
         if (Repository.LOGGED_IN_PLAYERS.contains(details.username)) {
             SystemLogger.logWarn("LOGGED_IN_PLAYERS contains ${details.username}")
-            return flag(Response.ALREADY_ONLINE)
+            return flag(AuthResponse.AlreadyOnline)
         }
         if (WorldCommunicator.getState() == ManagementServerState.CONNECTING) {
-            return flag(Response.LOGIN_SERVER_OFFLINE)
+            return flag(AuthResponse.LoginServerOffline)
         }
         if (!details.session.isActive) {
             return false
         }
         if (SystemManager.isUpdating()) {
-            return flag(Response.UPDATING)
+            return flag(AuthResponse.Updating)
         }
         if (Repository.getPlayerByName(details.username).also { gamePlayer = it } != null && gamePlayer!!.session.isActive) {
-            return flag(Response.ALREADY_ONLINE)
+            return flag(AuthResponse.AlreadyOnline)
         }
         return if (details.isBanned) {
-            flag(Response.ACCOUNT_DISABLED)
+            flag(AuthResponse.AccountDisabled)
         } else true
     }
 
@@ -232,9 +229,9 @@ class LoginParser(
      * @param response the [Response].
      * @return `True` if successfully logged in.
      */
-    fun flag(response: Response): Boolean {
+    fun flag(response: AuthResponse): Boolean {
         details.session.write(response, true)
-        return response == Response.SUCCESSFUL
+        return response == AuthResponse.Success
     }
 
     companion object {

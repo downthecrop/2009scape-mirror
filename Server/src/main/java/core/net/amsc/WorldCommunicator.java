@@ -8,6 +8,7 @@ import core.net.IoSession;
 import core.net.NioReactor;
 import core.net.producer.MSHSEventProducer;
 import kotlin.Unit;
+import rs09.auth.AuthResponse;
 import rs09.game.node.entity.player.info.login.LoginParser;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
@@ -73,15 +74,11 @@ public final class WorldCommunicator {
 	public static void register(final LoginParser parser) {
 		LoginParser p = loginAttempts.get(parser.getDetails().getUsername());
 		if (p != null && GameWorld.getTicks() - p.getTimeStamp() < 50 && p.getDetails().getRights() == Rights.REGULAR_PLAYER) {
-			parser.getDetails().getSession().write(Response.ALREADY_ONLINE, true);
+			parser.getDetails().getSession().write(AuthResponse.AlreadyOnline, true);
 			return;
 		}
 		loginAttempts.put(parser.getDetails().getUsername(), parser);
 		TaskExecutor.executeSQL(() -> {
-			if (!parser.getDetails().parse()) {
-				parser.getDetails().getSession().write(Response.INVALID_LOGIN_SERVER, true);
-				return Unit.INSTANCE;
-			}
 			MSPacketRepository.sendPlayerRegistry(parser);
 			return Unit.INSTANCE;
 		});

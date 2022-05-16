@@ -60,7 +60,7 @@ class EasterBunnyDialogueFile(val NEED_BASKET : Boolean) : DialogueFile() {
                                 player!!.dialogueInterpreter.sendDialogue("You need 5 eggs to afford that.")
                             } else {
                                 player!!.incrementAttribute(EGG_ATTRIBUTE, -5)
-                                player!!.details.credits += 1
+                                player!!.details.accountInfo.credits += 1
                                 player!!.dialogueInterpreter.sendDialogue(
                                     "You turn in 5 eggs in exchange for a credit.",
                                     "You now have ${player!!.getAttribute(EGG_ATTRIBUTE, 0)} eggs."

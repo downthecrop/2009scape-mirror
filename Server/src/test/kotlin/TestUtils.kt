@@ -19,7 +19,7 @@ import java.nio.ByteBuffer
 
 object TestUtils {
     fun getMockPlayer(name: String, ironman: IronmanMode = IronmanMode.NONE): Player {
-        val p = Player(PlayerDetails(name, name))
+        val p = Player(PlayerDetails(name))
         p.details.session = MockSession()
         p.ironmanManager.mode = ironman
         Repository.addPlayer(p)

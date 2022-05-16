@@ -5,6 +5,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.ClientInfo;
 import core.game.node.entity.player.info.login.Response;
 import core.game.system.task.Pulse;
+import rs09.auth.AuthResponse;
 import rs09.game.world.GameWorld;
 import core.net.producer.HSEventProducer;
 import core.net.producer.LoginEventProducer;
@@ -142,7 +143,7 @@ public class IoSession {
 		if (context == null) {
 			throw new IllegalStateException("Invalid writing context!");
 		}
-		if (!(context instanceof Response) && producer instanceof LoginEventProducer) {
+		if (!(context instanceof AuthResponse) && producer instanceof LoginEventProducer) {
 			// new Throwable().printStackTrace();
 			return;
 		}
