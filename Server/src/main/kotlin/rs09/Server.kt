@@ -109,7 +109,8 @@ object Server {
                         it.flush()
                         it.close()
                     }
-                    exitProcess(0)
+                    if(!SystemManager.isTerminated())
+                        exitProcess(0)
                 }
                 delay(625)
             }
