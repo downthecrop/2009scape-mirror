@@ -570,7 +570,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         val offerAmounts = HashMap<Int,Int>()
         val offerPrice = HashMap<Int,Int>()
 
-        val offers = GrandExchange.getBotOffers().filter { getItemName(it.itemID).contains(searchTerm, true) }
+        val offers = GrandExchange.getBotOffers().filter { getItemName(it.itemID).contains(searchTerm, true) || getItemName(it.itemID).equals(searchTerm, true) }
 
         for(offer in offers)
         {
