@@ -2,6 +2,8 @@ package core.game.system.communication;
 
 import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.node.entity.player.Player;
+import org.jetbrains.annotations.NotNull;
+import rs09.auth.UserAccountInfo;
 import rs09.game.system.SystemLogger;
 import core.game.system.monitor.PlayerMonitor;
 import core.game.system.mysql.SQLTable;
@@ -18,10 +20,7 @@ import core.net.packet.out.ContactPackets;
 import core.tools.StringUtils;
 
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 /**
@@ -633,5 +632,55 @@ public final class CommunicationInfo {
 	 */
 	public void setLootShare(boolean lootShare) {
 		this.lootShare = lootShare;
+	}
+
+	public void parse(@NotNull UserAccountInfo accountInfo) {
+		blocked.addAll(Arrays.asList(accountInfo.getBlocked().split(",")));
+		clanName = accountInfo.getClanName();
+		currentClan = accountInfo.getCurrentClan();
+
+		String clanReqs = accountInfo.getClanReqs();
+		String[] tokens = clanReqs.split(",");
+		ClanRank rank = null;
+		int ordinal = 0;
+		for (int i = 0; i < tokens.length; i++) {
+			ordinal = Integer.parseInt(tokens[i]);
+			if (ordinal < 0 || ordinal > ClanRank.values().length -1) {
+				continue;
+			}
+			rank = ClanRank.values()[ordinal];
+			switch (i) {
+				case 0:
+					joinRequirement = rank;
+					break;
+				case 1:
+					messageRequirement = rank;
+					break;
+				case 2:
+					if (ordinal < 3 || ordinal > 8) {
+						break;
+					}
+					kickRequirement = rank;
+					break;
+				case 3:
+					lootRequirement = rank;
+					break;
+			}
+		}
+
+		String contacts = accountInfo.getContacts();
+		if (!contacts.isEmpty()) {
+			String[] datas = contacts.split("~");
+			Contact contact = null;
+			for (String d : datas) {
+				tokens = d.replace("{", "").replace("}", "").split(",");
+				if (tokens.length == 0) {
+					continue;
+				}
+				contact = new Contact(tokens[0]);
+				contact.setRank(ClanRank.values()[Integer.parseInt(tokens[1])]);
+				this.contacts.put(tokens[0], contact);
+			}
+		}
 	}
 }
