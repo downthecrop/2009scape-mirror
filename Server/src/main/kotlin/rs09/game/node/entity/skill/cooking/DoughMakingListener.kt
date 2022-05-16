@@ -53,6 +53,14 @@ class DoughMakingListener : InteractionListener {
                     end()
                     val selectedDoughProduct = DoughProduct.values()[buttonID - 1]
                     if (hasLevelDyn(player!!, Skills.COOKING, selectedDoughProduct.requiredCookingLevel)) {
+                        if (freeSlots(player!!) < 1) {
+                            sendMessage(
+                                player!!,
+                                "Not enough space in your inventory."
+                            )
+                            return@runTask
+                        }
+
                         if (removeItem(player!!, waterContainer) && removeItem(player!!, flourContainer)) {
                             addItem(player!!, selectedDoughProduct.itemId)
                             player!!.dispatch(ResourceProducedEvent(selectedDoughProduct.itemId, 1, player!!))
