@@ -5,6 +5,7 @@ import core.game.ge.OfferState
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.PlayerDetails
 import core.game.node.entity.player.link.audio.Audio
+import rs09.ServerConstants
 import rs09.game.system.SystemLogger
 import rs09.game.system.command.Privilege
 import rs09.game.system.config.ItemConfigParser
@@ -306,6 +307,7 @@ class GrandExchange : StartupListener, Commands {
 
         private fun canUpdatePriceIndex(seller: GrandExchangeOffer, buyer: GrandExchangeOffer): Boolean {
             if(seller.playerUID == buyer.playerUID) return false
+            if(!ServerConstants.BOTS_INFLUENCE_PRICE_INDEX && (seller.isBot || buyer.isBot)) return false;
             return true
         }
 

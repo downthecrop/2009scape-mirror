@@ -682,7 +682,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
     }
 
     fun showOffers(player: Player, searchTerm: String){
-        val offers = GrandExchange.getValidOffers().filter { getItemName(it.itemID).contains(searchTerm, true) }
+        val offers = GrandExchange.getValidOffers().filter { getItemName(it.itemID).contains(searchTerm, true) || getItemName(it.itemID).equals(searchTerm, true) }
         val buyingAmount = HashMap<Int, Int>()
         val buyingHighest = HashMap<Int, Int>()
         val sellingAmount = HashMap<Int,Int>()

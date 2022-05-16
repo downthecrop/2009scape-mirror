@@ -13,6 +13,9 @@ import java.math.BigInteger
 class ServerConstants {
 	companion object {
 		@JvmField
+		var BOTS_INFLUENCE_PRICE_INDEX = true
+
+        @JvmField
 		var SHUTDOWN_HOOK: Thread = Thread(SystemShutdownHook())
 
 		@JvmField
