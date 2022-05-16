@@ -56,10 +56,22 @@ object PriceIndex {
         val oldInfo = getInfo(id) ?: return
         val newInfo = oldInfo.copy()
 
+        val volumeResetThreshold =
+            if (pricePerUnit >= 1000000) 500
+            else if (pricePerUnit >= 100000) 1000
+            else if (pricePerUnit >= 25000) 2500
+            else 10000
+
         newInfo.totalValue += (amount * pricePerUnit)
         newInfo.uniqueTrades += amount
         newInfo.lastUpdate = System.currentTimeMillis()
         newInfo.currentValue = (newInfo.totalValue / newInfo.uniqueTrades).toInt()
+
+        if (newInfo.uniqueTrades > volumeResetThreshold) {
+            val newAmt = (0.1 * volumeResetThreshold).toInt()
+            newInfo.uniqueTrades = newAmt
+            newInfo.totalValue = newAmt.toLong() * newInfo.currentValue
+        }
 
         updateInfo(newInfo)
     }
