@@ -43,7 +43,7 @@ class MajorUpdateWorker {
             val start = System.currentTimeMillis()
             Server.heartbeat()
 
-            GlobalScope.launch { handleTickActions() }
+            handleTickActions()
 
             //Handle daily restart if enabled
             if(sdf.format(Date()).toInt() == 0){
