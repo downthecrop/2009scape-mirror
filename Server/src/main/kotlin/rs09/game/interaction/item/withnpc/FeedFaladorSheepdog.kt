@@ -24,27 +24,27 @@ class FeedFaladorSheepdog : InteractionListener {
     }
 
     override fun defineListeners() {
-        onUseWithWildcard(NPC, { _, npc -> npc == SHEEP_DOG_NPC }, { player, used, with ->
+        onUseAnyWith(NPC, SHEEP_DOG_NPC) { player, used, with ->
             if (CONSUMABLE_BONES.contains(used.id)) {
                 if (!removeItem(player, used.asItem())) {
-                    return@onUseWithWildcard true
+                    return@onUseAnyWith true
                 }
                 sendDialogue(player, "You give the dog some nice ${used.name.toLowerCase()}. It happily gnaws on them.")
             } else if (CONSUMABLE_MEATS.contains(used.id)) {
                 if (!removeItem(player, used.asItem())) {
-                    return@onUseWithWildcard true
+                    return@onUseAnyWith true
                 }
                 sendDialogue(player, "You give the dog a nice piece of meat. It gobbles it up.")
             } else {
                 sendMessage(player, "The dog doesn't seem interested in that.")
                 sendChat(with.asNpc(), "Grrrr!")
-                return@onUseWithWildcard true
+                return@onUseAnyWith true
             }
 
             animate(player, FEED_ANIMATION)
             sendChat(with.asNpc(), "Woof woof!")
 
-            return@onUseWithWildcard true
-        })
+            return@onUseAnyWith true
+        }
     }
 }
