@@ -9,6 +9,7 @@ import core.tools.RandomFunction
 import org.rs09.consts.Items
 import rs09.game.content.ame.RandomEventNPC
 import rs09.game.content.global.WeightBasedTable
+import java.lang.Integer.max
 
 val ids = 2463..2468
 
@@ -18,7 +19,7 @@ class EvilChickenNPC(override var loot: WeightBasedTable? = null) : RandomEventN
 
     override fun init() {
         super.init()
-        val index = (player.properties.combatLevel / 20) - 1
+        val index = max(0, (player.properties.combatLevel / 20) - 1)
         val id = ids.toList()[index]
         this.transform(id)
         this.attack(player)

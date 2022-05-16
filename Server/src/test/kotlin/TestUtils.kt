@@ -11,18 +11,21 @@ import org.rs09.consts.Items
 import rs09.ServerConstants
 import rs09.game.content.global.shops.Shop
 import rs09.game.content.global.shops.ShopItem
+import rs09.game.system.SystemLogger
 import rs09.game.system.config.ConfigParser
 import rs09.game.system.config.ServerConfigParser
 import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
+import rs09.game.world.update.UpdateSequence
 import java.nio.ByteBuffer
 
 object TestUtils {
     fun getMockPlayer(name: String, ironman: IronmanMode = IronmanMode.NONE): Player {
-        val p = Player(PlayerDetails(name))
-        p.details.session = MockSession()
+        val p = MockPlayer(name)
         p.ironmanManager.mode = ironman
         Repository.addPlayer(p)
+        //Update sequence has a separate list of players for some reason...
+        UpdateSequence.renderablePlayers.add(p)
         return p
     }
 
@@ -53,9 +56,20 @@ object TestUtils {
     }
 
     fun advanceTicks(amount: Int) {
+        SystemLogger.logInfo("Advancing ticks by $amount.")
         for(i in 0 until amount) {
             GameWorld.majorUpdateWorker.handleTickActions()
         }
+    }
+}
+
+class MockPlayer(name: String) : Player(PlayerDetails(name)) {
+    init {
+        this.details.session = MockSession()
+    }
+
+    override fun update() {
+        //do nothing. This is for rendering stuff. We don't render a mock player. Not until the spaghetti is less spaghetti.
     }
 }
 

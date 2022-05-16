@@ -2,6 +2,7 @@ package core.game.node.entity;
 
 import api.events.Event;
 import api.events.EventHook;
+import api.events.TickEvent;
 import core.game.content.holiday.HolidayEvent;
 import core.game.interaction.DestinationFlag;
 import core.game.node.Node;
@@ -216,6 +217,7 @@ public abstract class Entity extends Node {
 	 * This methods gets called before the {@link #update()} method.
 	 */
 	public void tick() {
+		dispatch(new TickEvent(GameWorld.getTicks()));
 		skills.pulse();
 		walkingQueue.update();
 		updateMasks.prepare(this);
