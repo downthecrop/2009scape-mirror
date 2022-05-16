@@ -1,5 +1,6 @@
 package core.game.container.impl;
 
+import api.EquipmentSlot;
 import core.game.container.Container;
 import core.game.container.ContainerEvent;
 import core.game.container.ContainerListener;
@@ -16,6 +17,7 @@ import core.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
 import rs09.game.interaction.InteractionListeners;
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
+import rs09.game.system.SystemLogger;
 import rs09.game.system.config.ItemConfigParser;
 
 import java.util.ArrayList;
@@ -100,6 +102,10 @@ public final class EquipmentContainer extends Container {
 			}
 			itemsToRemove.removeAll(invalidatedEntries);
 
+			if(itemsToRemove.isEmpty()) {
+				return true;
+			}
+
 			boolean successfullyRemovedAll = tryUnequipCurrent(itemsToRemove, newItem);
 
 			if(!successfullyRemovedAll) {
@@ -127,6 +133,7 @@ public final class EquipmentContainer extends Container {
 	}
 
 	private boolean tryUnequipCurrent(ArrayList<Item> current, Item newItem) {
+		if(current.isEmpty()) return true;
 		int freeSlots = player.getInventory().freeSlots();
 		int neededSlots = getNeededSlotsToUnequip(current);
 
@@ -226,10 +233,11 @@ public final class EquipmentContainer extends Container {
 		} else {
 			amount = current.getAmount() + item.getAmount();
 		}
+		Item transferItem = new Item(current.getId(), amount);
 		if (fromInventory) {
-			player.getInventory().remove(new Item(item.getId(), amount - current.getAmount()));
+			player.getInventory().remove(transferItem);
 		}
-		replace(new Item(item.getId(), amount), slot);
+		replace(transferItem, slot);
 	}
 
 	/**

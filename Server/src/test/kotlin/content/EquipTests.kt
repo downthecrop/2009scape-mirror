@@ -116,4 +116,13 @@ class EquipTests {
         InteractionListeners.run(Items.WOODEN_SHIELD_1171, InteractionListener.ITEM, "equip", p, p.inventory[1])
         Assertions.assertEquals(Items.BRONZE_SWORD_1277, p.equipment[EquipmentSlot.WEAPON.ordinal]?.id ?: -1)
     }
+
+    @Test fun equippingStackableItemShouldAddToExistingStackInEquipmentIfApplicable() {
+        val p = TestUtils.getMockPlayer("bill")
+        p.equipment.replace(Item(Items.BRONZE_ARROW_882, 100), EquipmentSlot.AMMO.ordinal)
+        p.inventory.add(Item(Items.BRONZE_ARROW_882, 200))
+
+        InteractionListeners.run(Items.BRONZE_ARROW_882, InteractionListener.ITEM, "equip", p, p.inventory[0])
+        Assertions.assertEquals(300, p.equipment[EquipmentSlot.AMMO.ordinal].amount)
+    }
 }
