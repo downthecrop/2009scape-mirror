@@ -38,7 +38,7 @@ class UpdateSequence
         playersList = renderablePlayers
         npcList = Repository.renderableNpcs
         lobbyList!!.map{ PacketRepository.send(ClearMinimapFlag::class.java, PlayerContext(it)) }
-        playersList!!.forEach(Player::tick)
+        renderablePlayers.forEach(Player::tick)
         npcList!!.forEach(NPC::tick)
     }
 

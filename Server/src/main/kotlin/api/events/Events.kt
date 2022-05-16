@@ -13,4 +13,4 @@ data class InteractionEvent(val target: Node, val option: String) : Event
 data class ButtonClickedEvent(val iface: Int, val buttonId: Int) : Event
 data class UsedWithEvent(val used: Int, val with: Int) : Event
 data class SelfDeath(val killer: Entity) : Event
-data class TickEvent(val source: Entity) : Event
+data class TickEvent(val worldTicks: Int) : Event

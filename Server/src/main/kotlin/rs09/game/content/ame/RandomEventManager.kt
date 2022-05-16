@@ -14,9 +14,6 @@ import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
 import kotlin.random.Random
 
-private const val AVG_DELAY_TICKS = 6000 // 60 minutes
-private const val MIN_DELAY_TICKS = AVG_DELAY_TICKS / 2
-private const val MAX_DELAY_TICKS = MIN_DELAY_TICKS + AVG_DELAY_TICKS // window of 60 min centered on 60 min (30 to 90 min)
 class RandomEventManager(val player: Player? = null) : LoginListener, EventHook<TickEvent> {
     var event: RandomEventNPC? = null
     var enabled: Boolean = false
@@ -47,7 +44,7 @@ class RandomEventManager(val player: Player? = null) : LoginListener, EventHook<
             return
         }
         if (getAttribute<RandomEventNPC?>(player, "re-npc", null) != null) return
-        val currentAction = player.pulseManager.current.toString()
+        val currentAction = player.pulseManager.current?.toString() ?: "None"
         val ame: RandomEvents = if(currentAction.contains("WoodcuttingSkillPulse") && Random.nextBoolean()){
             RandomEvents.TREE_SPIRIT
         } else if(currentAction.contains("FishingPulse") && Random.nextBoolean()){
@@ -62,6 +59,7 @@ class RandomEventManager(val player: Player? = null) : LoginListener, EventHook<
         event = ame.npc.create(player,ame.loot,ame.type)
         if (event!!.spawnLocation == null) {
             nextSpawn = GameWorld.ticks + 3000
+            SystemLogger.logWarn("Tried to spawn random event for ${player.username} but spawn location was null!")
             return
         }
         event!!.init()
@@ -74,6 +72,10 @@ class RandomEventManager(val player: Player? = null) : LoginListener, EventHook<
     }
 
     companion object {
+        const val AVG_DELAY_TICKS = 6000 // 60 minutes
+        const val MIN_DELAY_TICKS = AVG_DELAY_TICKS / 2
+        const val MAX_DELAY_TICKS = MIN_DELAY_TICKS + AVG_DELAY_TICKS // window of 60 min centered on 60 min (30 to 90 min)
+
         @JvmStatic fun getInstance(player: Player): RandomEventManager?
         {
             return getAttribute(player, "random-manager", null)
