@@ -89,15 +89,15 @@ import kotlin.random.Random
     }
 
     @Test fun playerTradingWithThemselvesShouldNotBeAbleToInfluencePrices() {
-        val defaultPrice = GrandExchange.getRecommendedPrice(1333)
+        val defaultPrice = GrandExchange.getRecommendedPrice(4151)
         val modifiedPrice = defaultPrice * 1.15
 
         for(i in 0 until 100) {
-            val sellOffer = generateOffer(1333, 1, modifiedPrice.toInt(), true, "test")
-            val buyOffer = generateOffer(1333, 1, modifiedPrice.toInt(), false, "test")
+            val sellOffer = generateOffer(4151, 1, modifiedPrice.toInt(), true, "test")
+            val buyOffer = generateOffer(4151, 1, modifiedPrice.toInt(), false, "test")
             GrandExchange.exchange(sellOffer,buyOffer)
         }
 
-        Assertions.assertEquals(defaultPrice, GrandExchange.getRecommendedPrice(1333))
+        Assertions.assertEquals(defaultPrice, GrandExchange.getRecommendedPrice(4151))
     }
 }

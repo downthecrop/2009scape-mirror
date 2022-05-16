@@ -293,7 +293,8 @@ class GrandExchange : StartupListener, Commands {
             seller.totalCoinExchange += totalCoinXC
             buyer.totalCoinExchange += totalCoinXC
 
-            PriceIndex.addTrade(offer.itemID, amount, (totalCoinXC / amount))
+            if(canUpdatePriceIndex(seller, buyer))
+                PriceIndex.addTrade(offer.itemID, amount, (totalCoinXC / amount))
 
             seller.update()
             val sellerPlayer = Repository.uid_map[seller.playerUID]
@@ -301,6 +302,11 @@ class GrandExchange : StartupListener, Commands {
             buyer.update()
             val buyerPlayer = Repository.uid_map[buyer.playerUID]
             GrandExchangeRecords.getInstance(buyerPlayer).visualizeRecords()
+        }
+
+        private fun canUpdatePriceIndex(seller: GrandExchangeOffer, buyer: GrandExchangeOffer): Boolean {
+            if(seller.playerUID == buyer.playerUID) return false
+            return true
         }
 
         fun getValidOffers(): List<GrandExchangeOffer>
