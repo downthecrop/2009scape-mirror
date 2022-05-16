@@ -31,6 +31,7 @@ class LoginReadEvent(session: IoSession?, buffer: ByteBuffer?) : IoReadEvent(ses
 
         val details = PlayerDetails(info.username)
         details.accountInfo = accountInfo
+        details.communication.parse(accountInfo)
         session.clientInfo = ClientInfo(info.displayMode, info.windowMode, info.screenWidth, info.screenHeight)
         session.isaacPair = info.isaacPair
 
