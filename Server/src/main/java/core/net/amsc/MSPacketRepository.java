@@ -312,11 +312,11 @@ public final class MSPacketRepository {
 			switch (response) {
 				case AlreadyOnline:
 					player = Repository.getPlayerByName(username);
-					if (player == null || player.getSession().isActive() || !player.getSession().getAddress().equals(details.getSession().getAddress())) {
+/*					if (player == null || player.getSession().isActive() || !player.getSession().getAddress().equals(details.getSession().getAddress())) {
 						details.getSession().write(response, true);
 						break;
-					}
-					player.getPacketDispatch().sendLogout();
+					}*/
+					if (player != null) player.getPacketDispatch().sendLogout();
 				case Success:
 					if (!details.getSession().isActive()) {
 						sendPlayerRemoval(username);
