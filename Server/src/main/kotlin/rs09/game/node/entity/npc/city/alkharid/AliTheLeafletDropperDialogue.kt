@@ -57,7 +57,7 @@ class AliTheLeafletDropperDialogue(player: Player? = null) : DialoguePlugin(play
             304 -> npcl(FacialExpression.CHILD_THINKING, "It also entitles you to money off your next purchase in any of the shops listed on it. It's Ali's way of getting on the good side of the traders.").also { stage++ }
             305 -> player(FacialExpression.ASKING, "Which shops?").also {
                 if(player.inventory.containItems(Items.AL_KHARID_FLYER_7922)) {
-                    npcl(FacialExpression.CHILD_SUSPICIOUS, "Are you trying to be funny or has age turned your brain to mush? Look at the flyer you already have!")
+                    npcl(FacialExpression.CHILD_SUSPICIOUS, "Are you trying to be funny or has age turned your brain to mush? Look at the flyer you already have!").also { stage = END_DIALOGUE }
                 } else {
                     if(addItem(player, Items.AL_KHARID_FLYER_7922)) {
                         npcl(FacialExpression.CHILD_FRIENDLY, "Here! Take one and let me get back to work.").also { stage = END_DIALOGUE }
