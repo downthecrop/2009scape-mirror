@@ -1399,9 +1399,9 @@ public class ItemDefinition extends Definition<Item> {
 			return forId(noteId).getAlchemyValue(highAlchemy);
 		}
 		if (highAlchemy) {
-			return getConfiguration(ItemConfigParser.HIGH_ALCHEMY, 0);
+			return getConfiguration(ItemConfigParser.HIGH_ALCHEMY, (int)Math.rint(value * 0.6));
 		}
-		return getConfiguration(ItemConfigParser.LOW_ALCHEMY, 0);
+		return getConfiguration(ItemConfigParser.LOW_ALCHEMY, (int)Math.rint(value * 0.4));
 	}
 
 	/**
