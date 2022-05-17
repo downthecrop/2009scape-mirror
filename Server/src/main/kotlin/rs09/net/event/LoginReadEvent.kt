@@ -2,6 +2,7 @@ package rs09.net.event
 
 import core.game.node.entity.player.info.ClientInfo
 import core.game.node.entity.player.info.PlayerDetails
+import core.game.system.communication.CommunicationInfo
 import core.net.IoReadEvent
 import core.net.IoSession
 import rs09.auth.AuthResponse
