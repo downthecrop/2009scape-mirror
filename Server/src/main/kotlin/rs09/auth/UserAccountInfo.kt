@@ -21,8 +21,29 @@ class UserAccountInfo(
 ) {
     companion object {
         @JvmStatic fun createDefault() : UserAccountInfo {
-            return UserAccountInfo("", "", 0, 0, 0,  "", "", 0L, 0L, "", "", "", "", "1,0,8,9", 0L, 0L, false)
+            return UserAccountInfo("", "", 0, 0, 0,  "", "", 0L, 0L, "", "", "", "", "1,0,8,9", 0L, 0L, false).also { it.setInitialReferenceValues() }
         }
+    }
+
+    lateinit var initialValues: Array<Any>
+
+    fun setInitialReferenceValues() {
+        initialValues = toArray()
+    }
+
+    fun getChangedFields(): Pair<ArrayList<Int>, Array<Any>> {
+        val current = toArray()
+        val changed = ArrayList<Int>()
+
+        for(i in current.indices) {
+            if (current[i] != initialValues[i]) changed.add(i)
+        }
+
+        return Pair(changed, current)
+    }
+
+    fun toArray(): Array<Any> {
+        return arrayOf(username, password, uid, rights, credits, ip, lastUsedIp, muteEndTime, banEndTime, contacts, blocked, clanName, currentClan, clanReqs, timePlayed, lastLogin, online)
     }
 
     override fun toString(): String {

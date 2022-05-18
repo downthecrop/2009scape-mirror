@@ -178,4 +178,24 @@ class SQLStorageProviderTests {
         val info3 = storage.getAccountInfo("dbupdateacc")
         Assertions.assertEquals(2, info3.rights)
     }
+
+    @Test fun shouldCorrectlyUpdateMultipleChangedValues() {
+        val userData = UserAccountInfo.createDefault()
+        userData.username = "borpis2"
+        userData.password = "test"
+        testAccountNames.add("borpis2")
+        storage.store(userData)
+
+        val lastLogin = System.currentTimeMillis()
+
+        userData.credits = 2
+        userData.lastLogin = lastLogin
+        userData.currentClan = "3009scape"
+        storage.update(userData)
+
+        val data = storage.getAccountInfo(userData.username)
+        Assertions.assertEquals(2, data.credits, "Wrong data: $data")
+        Assertions.assertEquals(lastLogin, data.lastLogin, "Wrong data: $data")
+        Assertions.assertEquals("3009scape", data.currentClan, "Wrong data: $data")
+    }
 }

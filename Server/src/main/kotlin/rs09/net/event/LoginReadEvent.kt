@@ -2,6 +2,7 @@ package rs09.net.event
 
 import core.game.node.entity.player.info.ClientInfo
 import core.game.node.entity.player.info.PlayerDetails
+import core.game.system.communication.CommunicationInfo
 import core.net.IoReadEvent
 import core.net.IoSession
 import rs09.auth.AuthResponse
@@ -31,6 +32,7 @@ class LoginReadEvent(session: IoSession?, buffer: ByteBuffer?) : IoReadEvent(ses
 
         val details = PlayerDetails(info.username)
         details.accountInfo = accountInfo
+        details.communication.parse(accountInfo)
         session.clientInfo = ClientInfo(info.displayMode, info.windowMode, info.screenWidth, info.screenHeight)
         session.isaacPair = info.isaacPair
 

@@ -14,86 +14,23 @@ import core.net.amsc.MSPacketRepository
 import core.net.amsc.ManagementServerState
 import core.net.amsc.WorldCommunicator
 import rs09.auth.AuthResponse
-import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
 import rs09.game.world.GameWorld.loginListeners
 import rs09.game.world.repository.Repository
-import java.util.concurrent.TimeUnit
 import java.util.concurrent.locks.Lock
 import java.util.concurrent.locks.ReentrantLock
 import java.util.function.Consumer
 
 /**
  * Parses the login of a player.
- * @author Emperor
- * @author Vexia
  */
-class LoginParser(
-        /**
-         * The player details file.
-         */
-        val details: PlayerDetails,
-        /**
-         * The login type.
-         */
-        private val type: LoginType
-) : Runnable {
-    /**
-     * Gets the player details.
-     * @return The player details.
-     */
-
+class LoginParser(val details: PlayerDetails, private val type: LoginType) {
     /**
      * The player in the game, used for reconnect login type.
      */
     private var gamePlayer: Player? = null
 
-    /**
-     * Gets the timeStamp.
-     * @return the timeStamp
-     */
-    /**
-     * The time stamp.
-     */
-    val timeStamp: Int
-    override fun run() {
-        try {
-            LOCK.tryLock(1000L, TimeUnit.MILLISECONDS)
-        } catch (e: Exception) {
-            println(e)
-            LOCK.unlock()
-            return
-        }
-        try {
-            if (validateRequest()) {
-                handleLogin()
-            }
-        } catch (t: Throwable) {
-            t.printStackTrace()
-            try {
-                flag(AuthResponse.ErrorLoadingProfile)
-                Repository.LOGGED_IN_PLAYERS.remove(details.username)
-            } catch (e: Throwable) {
-                e.printStackTrace()
-            }
-        }
-        LOCK.unlock()
-    }
-
-    /**
-     * Handles the actual login.
-     */
-    private fun handleLogin() {
-        val p = worldInstance
-        val player = p ?: Player(details)
-        player.setAttribute("login_type", type)
-        if (p != null) { // Reconnecting
-            p.updateDetails(details)
-            reconnect(p, type)
-            return
-        }
-        initialize(player, false)
-    }
+    val timeStamp: Int = GameWorld.ticks
 
     /**
      * Initializes the player.
@@ -101,8 +38,9 @@ class LoginParser(
      * @param reconnect If the player data should be parsed.
      */
     fun initialize(player: Player, reconnect: Boolean) {
+        if(!validateRequest()) return
         if (reconnect) {
-            reconnect(player, type)
+            reconnect(player)
             return
         }
         try {
@@ -161,24 +99,11 @@ class LoginParser(
     }
 
     /**
-     * Gets the player instance in the current world.
-     * @return The player instance, if found.
-     */
-    private val worldInstance: Player?
-        private get() {
-            var player = Repository.disconnectionQueue[details.username]
-            if (player == null) {
-                player = gamePlayer
-            }
-            return player
-        }
-
-    /**
      * Initializes a reconnecting player.
      * @param player The player.
      * @param type The login type.
      */
-    private fun reconnect(player: Player, type: LoginType) {
+    private fun reconnect(player: Player) {
         Repository.disconnectionQueue.remove(details.username)
         player.initReconnect()
         player.isActive = true
@@ -202,11 +127,6 @@ class LoginParser(
      * @return `True` if the request is valid.
      */
     private fun validateRequest(): Boolean {
-        //This is supposed to prevent the double-logging issue. Will it work? Who knows.
-        if (Repository.LOGGED_IN_PLAYERS.contains(details.username)) {
-            SystemLogger.logWarn("LOGGED_IN_PLAYERS contains ${details.username}")
-            return flag(AuthResponse.AlreadyOnline)
-        }
         if (WorldCommunicator.getState() == ManagementServerState.CONNECTING) {
             return flag(AuthResponse.LoginServerOffline)
         }
@@ -232,21 +152,5 @@ class LoginParser(
     fun flag(response: AuthResponse): Boolean {
         details.session.write(response, true)
         return response == AuthResponse.Success
-    }
-
-    companion object {
-        /**
-         * The lock used to disable 2 of the same player being logged in.
-         */
-        private val LOCK: Lock = ReentrantLock()
-    }
-
-    /**
-     * Constructs a new `LoginParser` `Object`.
-     * @param details the player details.
-     * @param type The login type.
-     */
-    init {
-        timeStamp = GameWorld.ticks
     }
 }
