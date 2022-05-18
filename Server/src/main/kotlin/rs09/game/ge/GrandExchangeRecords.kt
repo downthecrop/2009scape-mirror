@@ -26,7 +26,6 @@ class GrandExchangeRecords(private val player: Player? = null) : PersistPlayer, 
 
     override fun login(player: Player) {
         val instance = GrandExchangeRecords(player)
-        instance.init()
         player.setAttribute("ge-records", instance)
     }
 
@@ -86,7 +85,7 @@ class GrandExchangeRecords(private val player: Player? = null) : PersistPlayer, 
             }
         }
 
-        instance.visualizeRecords()
+        instance.init()
     }
 
     override fun savePlayer(player: Player, save: JSONObject) {
