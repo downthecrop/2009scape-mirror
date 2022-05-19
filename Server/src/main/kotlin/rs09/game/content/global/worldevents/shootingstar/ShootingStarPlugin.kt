@@ -113,22 +113,13 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
 
     private class RingDialogue(val shouldWarn: Boolean, val star: ShootingStar) : DialogueFile(){
         override fun handle(componentID: Int, buttonID: Int) {
-            if(shouldWarn){
-                when(stage) {
-                    0 -> dialogue("WARNING: That mining site is located in the wilderness.").also { stage++ }
-                    1 -> player!!.dialogueInterpreter.sendOptions("Continue?","Yes","No").also { stage++ }
-                    2 -> when(buttonID){
-                        1 -> teleport(player!!, star).also { end() }
-                        2 -> end()
-                    }
-                }
-            } else {
-                when(stage){
-                    0 -> player!!.dialogueInterpreter.sendOptions("Teleport to the Star?", "Yes", "No").also { stage++ }
-                    1 -> when(buttonID){
-                        1 -> teleport(player!!, star).also { end() }
-                        2 -> end()
-                    }
+            when (stage) {
+                0 -> dialogue(if (star.spriteSpawned) "The star sprite has already been freed." else "The star sprite is still trapped.").also { if (shouldWarn) stage++ else stage += 2 }
+                1 -> dialogue("WARNING: The star is located in the wilderness.").also { stage++ }
+                2 -> player!!.dialogueInterpreter.sendOptions("Teleport to the star?", "Yes", "No").also { stage++ }
+                3 -> when (buttonID) {
+                    1 -> teleport(player!!, star).also { end() }
+                    2 -> end()
                 }
             }
         }
