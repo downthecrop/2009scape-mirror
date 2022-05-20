@@ -5,7 +5,6 @@ import core.cache.def.Definition;
 import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.container.Container;
 import core.game.content.global.action.DropItemHandler;
-import core.game.ge.GrandExchangeDatabase;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -1416,7 +1415,7 @@ public class ItemDefinition extends Definition<Item> {
 		if (!getConfiguration(ItemConfigParser.TRADEABLE, false)) {
 			return false;
 		}
-		return !unnoted || GrandExchangeDatabase.getDatabase().get(getId()) != null;
+		return true;
 	}
 
 	/**

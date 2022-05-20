@@ -1,6 +1,5 @@
 package core.game.content.dialogue;
 
-import core.game.ge.GrandExchangeDatabase;
 import core.game.node.entity.npc.NPC;
 import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
@@ -51,11 +50,6 @@ public final class GrandExchangeClerk extends DialoguePlugin {
 
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
-		if (stage < 50 && stage > 5 && !GrandExchangeDatabase.hasInitialized()) {
-			npc("The Grand Exchange is currently unavailable,", "it will be back soon!");
-			stage = 51;
-			return true;
-		}
 		switch (stage) {
 		case 0:
 			npc("Good day to you, sir, How can I help?");

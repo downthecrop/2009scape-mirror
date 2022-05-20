@@ -95,61 +95,57 @@ class GrandExchangeOffer() {
 
     fun update()
     {
-        val conn = GEDB.connect()
-
-        if(isBot)
-        {
-            val stmt = conn.prepareStatement("UPDATE bot_offers SET amount = ? WHERE item_id = ?")
-            stmt.setInt(1, amountLeft)
-            stmt.setInt(2, itemID)
-            stmt.executeUpdate()
-            stmt.close()
-        }
-        else
-        {
-            val stmt = conn.prepareStatement("UPDATE player_offers SET amount_complete = ?, offer_state = ?, total_coin_xc = ?, withdraw_items = ?, slot_index = ? WHERE uid = ?")
-            stmt.setInt(1, completedAmount)
-            stmt.setInt(2, offerState.ordinal)
-            stmt.setInt(3, totalCoinExchange)
-            stmt.setString(4, encodeWithdraw())
-            stmt.setInt(5, index)
-            stmt.setLong(6, uid)
-            stmt.executeUpdate()
-            stmt.close()
+        GEDB.run {conn ->
+            if(isBot)
+            {
+                val stmt = conn.prepareStatement("UPDATE bot_offers SET amount = ? WHERE item_id = ?")
+                stmt.setInt(1, amountLeft)
+                stmt.setInt(2, itemID)
+                stmt.executeUpdate()
+                stmt.close()
+            }
+            else
+            {
+                val stmt = conn.prepareStatement("UPDATE player_offers SET amount_complete = ?, offer_state = ?, total_coin_xc = ?, withdraw_items = ?, slot_index = ? WHERE uid = ?")
+                stmt.setInt(1, completedAmount)
+                stmt.setInt(2, offerState.ordinal)
+                stmt.setInt(3, totalCoinExchange)
+                stmt.setString(4, encodeWithdraw())
+                stmt.setInt(5, index)
+                stmt.setLong(6, uid)
+                stmt.executeUpdate()
+                stmt.close()
+            }
         }
     }
 
     /** Called when writing a brand new offer to the database. Should not be used under any other circumstance **/
     fun writeNew()
     {
-        val conn = GEDB.connect()
+        GEDB.run { conn ->
+            if (isBot) {
+                val stmt = conn.createStatement()
+                val result = stmt.executeQuery("SELECT * from bot_offers where item_id = $itemID")
+                val isExists = result.next()
 
-        if(isBot)
-        {
-            val stmt = conn.createStatement()
-            val result = stmt.executeQuery("SELECT * from bot_offers where item_id = $itemID")
-            val isExists = result.next()
-
-            if(isExists)
-            {
-                val oldAmount = result.getInt("amount")
-                stmt.executeUpdate("UPDATE bot_offers set amount = ${oldAmount + amount} where item_id = $itemID")
+                if (isExists) {
+                    val oldAmount = result.getInt("amount")
+                    stmt.executeUpdate("UPDATE bot_offers set amount = ${oldAmount + amount} where item_id = $itemID")
+                } else
+                    stmt.executeUpdate("INSERT INTO bot_offers(item_id,amount) values($itemID,$amount)")
+                stmt.close()
+            } else {
+                val stmt = conn.createStatement()
+                stmt.executeUpdate(
+                    "INSERT INTO player_offers(player_uid, item_id, amount_total, offered_value, time_stamp, offer_state, is_sale, slot_index) " +
+                            "values($playerUID,$itemID,$amount,$offeredValue,${System.currentTimeMillis()},${offerState.ordinal},${if (sell) 1 else 0}, $index)"
+                )
+                val nowuid = stmt.executeQuery("SELECT last_insert_rowid()")
+                uid = nowuid.getLong(1)
+                visualize(player)
+                stmt.close()
             }
-            else
-                stmt.executeUpdate("INSERT INTO bot_offers(item_id,amount) values($itemID,$amount)")
-            stmt.close()
         }
-        else
-        {
-            val stmt = conn.createStatement()
-            stmt.executeUpdate("INSERT INTO player_offers(player_uid, item_id, amount_total, offered_value, time_stamp, offer_state, is_sale, slot_index) " +
-                    "values($playerUID,$itemID,$amount,$offeredValue,${System.currentTimeMillis()},${offerState.ordinal},${if(sell) 1 else 0}, $index)")
-            val nowuid = stmt.executeQuery("SELECT last_insert_rowid()")
-            uid = nowuid.getLong(1)
-            visualize(player)
-            stmt.close()
-        }
-
     }
 
     private fun encodeWithdraw() : String

@@ -3,8 +3,6 @@ package rs09.game.interaction.inter.ge
 import api.*
 import core.game.component.Component
 import core.game.container.access.BitregisterAssembler
-import core.game.ge.GrandExchangeDatabase
-import core.game.ge.GrandExchangeEntry
 import core.game.ge.OfferState
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.audio.Audio
@@ -18,6 +16,7 @@ import org.rs09.consts.Components
 import rs09.game.ge.GrandExchange
 import rs09.game.ge.GrandExchangeOffer
 import rs09.game.ge.GrandExchangeRecords
+import rs09.game.ge.PriceIndex
 import rs09.game.interaction.InterfaceListener
 import rs09.game.system.SystemLogger
 
@@ -69,8 +68,7 @@ class StockMarket : InterfaceListener {
                     var id = item.id
                     if(!item.definition.isUnnoted)
                         id = item.noteChange
-                    val itemDb = GrandExchangeDatabase.getDatabase()[id]
-                    if(itemDb == null || !item.definition.isTradeable)
+                    if(!PriceIndex.canTrade(id))
                     {
                         sendMessage(player, "This item can't be sold on the Grand Exchange.")
                         return@on true
@@ -316,11 +314,10 @@ class StockMarket : InterfaceListener {
         fun updateVarbits(player: Player, offer: GrandExchangeOffer?, index: Int, sale: Boolean? = null)
         {
             val isSale = sale ?: offer?.sell ?: false
-            val entry: GrandExchangeEntry? = GrandExchangeDatabase.getDatabase()[offer?.itemID ?: -1]
             var lowPrice = 0
             var highPrice = 0
-            val recommendedPrice = GrandExchange.getRecommendedPrice(entry?.itemId ?: 0)
-            if (entry != null) {
+            val recommendedPrice = GrandExchange.getRecommendedPrice(offer?.itemID ?: 0)
+            if (PriceIndex.canTrade(offer?.itemID ?: 0)) {
                 lowPrice = (recommendedPrice * 0.95).toInt()
                 highPrice = (recommendedPrice * 1.05).toInt()
             }

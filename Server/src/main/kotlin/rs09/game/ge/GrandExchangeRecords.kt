@@ -26,7 +26,6 @@ class GrandExchangeRecords(private val player: Player? = null) : PersistPlayer, 
 
     override fun login(player: Player) {
         val instance = GrandExchangeRecords(player)
-        instance.init()
         player.setAttribute("ge-records", instance)
     }
 
@@ -51,21 +50,22 @@ class GrandExchangeRecords(private val player: Player? = null) : PersistPlayer, 
         /**
          * Read offers from the database
          */
-        val conn = GEDB.connect()
-        val stmt = conn.createStatement()
-        val offer_records = stmt.executeQuery("SELECT * from player_offers where player_uid = ${player.details.uid} AND offer_state < 6")
+        val needsIndex = ArrayDeque<GrandExchangeOffer>()
         val instance = getInstance(player)
 
-        val needsIndex = ArrayDeque<GrandExchangeOffer>()
+        GEDB.run { conn ->
+            val stmt = conn.createStatement()
+            val offer_records = stmt.executeQuery("SELECT * from player_offers where player_uid = ${player.details.uid} AND offer_state < 6")
 
-        while (offer_records.next()) {
-            val offer = GrandExchangeOffer.fromQuery(offer_records)
-            if (offer.index == -1) //used to index old (converted from JSON) offers
-                needsIndex.push(offer)
-            else
-                instance.offerRecords[offer.index] = OfferRecord(offer.uid, offer.index)
+            while (offer_records.next()) {
+                val offer = GrandExchangeOffer.fromQuery(offer_records)
+                if (offer.index == -1) //used to index old (converted from JSON) offers
+                    needsIndex.push(offer)
+                else
+                    instance.offerRecords[offer.index] = OfferRecord(offer.uid, offer.index)
+            }
+            stmt.close()
         }
-        stmt.close()
 
         if (needsIndex.isNotEmpty()) {
             for ((index, offer) in offerRecords.withIndex()) {
@@ -85,7 +85,7 @@ class GrandExchangeRecords(private val player: Player? = null) : PersistPlayer, 
             }
         }
 
-        instance.visualizeRecords()
+        instance.init()
     }
 
     override fun savePlayer(player: Player, save: JSONObject) {
@@ -128,22 +128,22 @@ class GrandExchangeRecords(private val player: Player? = null) : PersistPlayer, 
 
     fun visualizeRecords()
     {
-        val conn = GEDB.connect()
-        val stmt = conn.createStatement()
+        GEDB.run { conn ->
+            val stmt = conn.createStatement()
 
-        for (record in offerRecords) {
-            if (record != null) {
-                val offer_raw = stmt.executeQuery("select * from player_offers where uid = ${record.uid}")
-                if(offer_raw.next())
-                {
-                    val offer = GrandExchangeOffer.fromQuery(offer_raw)
-                    if(offer.offerState == OfferState.REMOVED) continue
-                    offer.index = record.slot
-                    offer.visualize(player)
+            for (record in offerRecords) {
+                if (record != null) {
+                    val offer_raw = stmt.executeQuery("select * from player_offers where uid = ${record.uid}")
+                    if (offer_raw.next()) {
+                        val offer = GrandExchangeOffer.fromQuery(offer_raw)
+                        if (offer.offerState == OfferState.REMOVED) continue
+                        offer.index = record.slot
+                        offer.visualize(player)
+                    }
                 }
             }
+            stmt.close()
         }
-        stmt.close()
     }
 
     fun getOffer(index: Int) : GrandExchangeOffer?
@@ -155,18 +155,19 @@ class GrandExchangeRecords(private val player: Player? = null) : PersistPlayer, 
     fun getOffer(record: OfferRecord?) : GrandExchangeOffer?
     {
         record ?: return null
-        val conn = GEDB.connect()
-        val stmt = conn.createStatement()
-        val offer_raw = stmt.executeQuery("select * from player_offers where uid = ${record.uid}")
-        if(offer_raw.next())
-        {
-            val offer = GrandExchangeOffer.fromQuery(offer_raw)
-            offer.index = record.slot
+        var offerToReturn: GrandExchangeOffer? = null
+        GEDB.run { conn ->
+            val stmt = conn.createStatement()
+            val offer_raw = stmt.executeQuery("select * from player_offers where uid = ${record.uid}")
+            if (offer_raw.next()) {
+                val offer = GrandExchangeOffer.fromQuery(offer_raw)
+                offer.index = record.slot
+                stmt.close()
+                offerToReturn = offer
+            }
             stmt.close()
-            return offer
         }
-        stmt.close()
-        return null
+        return offerToReturn
     }
 
     /**
