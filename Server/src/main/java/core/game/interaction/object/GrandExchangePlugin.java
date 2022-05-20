@@ -4,7 +4,6 @@ import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.ge.GEGuidePrice;
-import core.game.ge.GrandExchangeDatabase;
 import core.game.ge.GEGuidePrice.GuideType;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -56,20 +55,12 @@ public final class GrandExchangePlugin extends OptionHandler {
 			player.getDialogueInterpreter().open(6528, NPC.create(6528, player.getLocation()));
 			break;
 		case "exchange":
-			if (!GrandExchangeDatabase.hasInitialized()) {
-				player.getDialogueInterpreter().sendDialogue("The Grand Exchange desk seems to be closed...");
-				break;
-			}
 			StockMarket.openFor(player);
 			break;
 		case "history":
 			records.openHistoryLog(player);
 			break;
 		case "collect":
-			if (!GrandExchangeDatabase.hasInitialized()) {
-				player.getDialogueInterpreter().sendDialogue("The Grand Exchange desk seems to be closed...");
-				break;
-			}
 			records.openCollectionBox();
 			break;
 		case "info-logs":

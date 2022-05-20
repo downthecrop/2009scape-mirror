@@ -8,18 +8,20 @@ import rs09.game.ge.GEDB
 import rs09.game.ge.GrandExchange
 import rs09.game.ge.GrandExchangeOffer
 import rs09.game.system.SystemLogger
+import java.io.File
 import kotlin.random.Random
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS) class ExchangeTests {
     companion object {
         private const val TEST_DB_PATH = "ge_test.db"
         init {
+            TestUtils.preTestSetup()
             GEDB.init(TEST_DB_PATH)
         }
 
-        fun generateOffer(itemId: Int, amount: Int, price: Int, sale: Boolean) : GrandExchangeOffer {
+        fun generateOffer(itemId: Int, amount: Int, price: Int, sale: Boolean, username: String = "test ${System.currentTimeMillis()}") : GrandExchangeOffer {
             val offer = GrandExchangeOffer()
-            val uid = "test ${System.currentTimeMillis()}".hashCode()
+            val uid = username.hashCode()
             offer.offerState = OfferState.REGISTERED
             offer.itemID = itemId
             offer.offeredValue = price
@@ -32,14 +34,18 @@ import kotlin.random.Random
             offer.writeNew()
             return offer
         }
+
+        @AfterAll fun cleanup() {
+            File(TEST_DB_PATH).delete()
+        }
     }
 
     @Test fun testPlaceOffer() {
         val offer = generateOffer(4151, 1, 100000, true)
         val uid = offer.playerUID
 
-        with (GEDB.connect()) {
-            val stmt = this.createStatement()
+        GEDB.run { conn ->
+            val stmt = conn.createStatement()
             val result = stmt.executeQuery("select * from player_offers where player_uid = $uid")
             val thisOffer = if(result.next()) GrandExchangeOffer.fromQuery(result) else fail("Offer did not exist!")
             Assertions.assertEquals(offer.itemID, thisOffer.itemID)
@@ -65,5 +71,33 @@ import kotlin.random.Random
         val buyOffer = generateOffer(4151, 1, 100000, false)
         GrandExchange.exchange(sellOffer,buyOffer)
         Assertions.assertEquals(null, buyOffer.withdraw[0]) //Buyer should not get any items, sell offer is higher
+    }
+
+    @Test fun manyCompletedOffersAboveDefaultPriceShouldInfluencePriceUpwards() {
+        val defaultPrice = GrandExchange.getRecommendedPrice(4151)
+        val modifiedPrice = defaultPrice * 1.15
+
+        for(i in 0 until 100) {
+            val sellOffer = generateOffer(4151, 1, modifiedPrice.toInt(), true, "test1")
+            val buyOffer = generateOffer(4151, 1, modifiedPrice.toInt(), false, "test2")
+            GrandExchange.exchange(sellOffer,buyOffer)
+        }
+
+        val newPrice = GrandExchange.getRecommendedPrice(4151)
+
+        Assertions.assertEquals(true, newPrice > defaultPrice, "Price was not influenced in the expected way! New Price: $newPrice, default: $defaultPrice")
+    }
+
+    @Test fun playerTradingWithThemselvesShouldNotBeAbleToInfluencePrices() {
+        val defaultPrice = GrandExchange.getRecommendedPrice(4151)
+        val modifiedPrice = defaultPrice * 1.15
+
+        for(i in 0 until 100) {
+            val sellOffer = generateOffer(4151, 1, modifiedPrice.toInt(), true, "test")
+            val buyOffer = generateOffer(4151, 1, modifiedPrice.toInt(), false, "test")
+            GrandExchange.exchange(sellOffer,buyOffer)
+        }
+
+        Assertions.assertEquals(defaultPrice, GrandExchange.getRecommendedPrice(4151))
     }
 }

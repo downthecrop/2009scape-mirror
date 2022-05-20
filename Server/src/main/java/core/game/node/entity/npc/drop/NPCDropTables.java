@@ -3,7 +3,6 @@ package core.game.node.entity.npc.drop;
 import static api.ContentAPIKt.*;
 import core.cache.def.impl.NPCDefinition;
 import core.game.content.global.Bones;
-import core.game.ge.GrandExchangeDatabase;
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
@@ -18,10 +17,8 @@ import core.tools.StringUtils;
 import rs09.game.ai.AIPlayer;
 import rs09.game.ai.AIRepository;
 import rs09.game.ai.general.GeneralBotCreator;
-import rs09.game.content.global.GlobalKillCounter;
 import rs09.game.content.global.NPCDropTable;
 import rs09.game.ge.GrandExchange;
-import rs09.game.system.config.ItemConfigParser;
 import rs09.game.world.repository.Repository;
 
 import java.util.ArrayList;
@@ -144,7 +141,7 @@ public final class NPCDropTables {
 	 */
 	public Player getLooter(Player player, NPC npc, Item item) {
 		int itemId = item.getDefinition().isUnnoted() ? item.getId() : item.getNoteChange();
-		if (player != null && npc.getProperties().isMultiZone() && (GrandExchangeDatabase.getDatabase().get(itemId) != null || item.getName().endsWith("charm")) && player.getCommunication().getClan() != null && player.getCommunication().isLootShare() && player.getCommunication().getLootRequirement().ordinal() >= player.getCommunication().getClan().getLootRequirement().ordinal() && !player.getIronmanManager().isIronman()) {
+		if (player != null && npc.getProperties().isMultiZone() && (item.getDefinition().isTradeable() || item.getName().endsWith("charm")) && player.getCommunication().getClan() != null && player.getCommunication().isLootShare() && player.getCommunication().getLootRequirement().ordinal() >= player.getCommunication().getClan().getLootRequirement().ordinal() && !player.getIronmanManager().isIronman()) {
 			Player looter = player;
 			List<Player> players = RegionManager.getLocalPlayers(npc, 16);
 			List<Player> looters = new ArrayList<>(20);
