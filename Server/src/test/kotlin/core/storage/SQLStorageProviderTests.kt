@@ -32,17 +32,6 @@ class SQLStorageProviderTests {
         }
     }
 
-    @Test
-    fun shouldReturnTrueIfUsernameExists() {
-        val data = UserAccountInfo.createDefault()
-        data.username = "test123123"
-        data.password = "test"
-        testAccountNames.add("test123123")
-        storage.store(data)
-        val exists = storage.checkUsernameTaken("test")
-        Assertions.assertEquals(true, exists)
-    }
-
     @Test fun shouldReturnCorrectUserData() {
         val data = UserAccountInfo.createDefault()
         data.username = "test111"
