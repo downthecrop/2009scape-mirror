@@ -49,7 +49,7 @@ class CulinomancerShop : LoginListener {
 
         //Retrieve a player's shop - should generate the shop if it does not exist.
         fun getShop(player: Player, food: Boolean): Shop {
-            val uid = player.details.uid
+            val uid = player.details.usernameHashcode
             val points = player.questRepository.points
             val tier = (points / 18)
             if (tier != getAttribute(player, "culino-tier", 0)) //If player tier has changed

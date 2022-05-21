@@ -1,6 +1,5 @@
 package core.game.node.entity.player.info;
 
-import core.game.node.entity.player.info.portal.Icon;
 import core.game.system.communication.CommunicationInfo;
 import core.net.IoSession;
 import org.jetbrains.annotations.NotNull;
@@ -126,16 +125,8 @@ public class PlayerDetails {
 	 * Gets the uid.
 	 * @return the uid.
 	 */
-	public int getUid() {
-		return this.accountInfo.getUid();
-	}
-
-	/**
-	 * Sets the uid.
-	 * @param uid the uid.
-	 */
-	public void setUid(int uid) {
-
+	public int getUsernameHashcode() {  //was getUid, but that was such an amazing and descriptive name for what this method actually does that I just had to change it!
+		return this.getUsername().hashCode(); //this SHOULD return accountInfo.uid BUT Arios is an amazing codebase, and they used username hashcodes when players already had a UID assigned by the DB. Genius!
 	}
 
 	/**

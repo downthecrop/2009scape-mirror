@@ -244,9 +244,9 @@ class GrandExchange : StartupListener, Commands {
             }
 
             if ( player.isArtificial )
-                offer.playerUID = PlayerDetails.getDetails("2009scape").uid.also { offer.isBot = true }
+                offer.playerUID = PlayerDetails.getDetails("2009scape").usernameHashcode.also { offer.isBot = true }
             else
-                offer.playerUID = player.details.uid
+                offer.playerUID = player.details.usernameHashcode
 
             offer.offerState = OfferState.REGISTERED
             //GrandExchangeRecords.getInstance(player).update(offer)
