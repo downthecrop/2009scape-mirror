@@ -68646,6 +68646,8 @@
     "attack_speed": "4",
     "weapon_interface": "6",
     "equipment_slot": "3",
+    "attack_anims": "390,390,381,390",
+    "attack_audios": "2500,2500,2517,2500",
     "name": "Lucky cutlass",
     "archery_ticket_price": "0",
     "id": "7140",
