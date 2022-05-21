@@ -55,7 +55,7 @@ class GrandExchangeRecords(private val player: Player? = null) : PersistPlayer, 
 
         GEDB.run { conn ->
             val stmt = conn.createStatement()
-            val offer_records = stmt.executeQuery("SELECT * from player_offers where player_uid = ${player.details.uid} AND offer_state < 6")
+            val offer_records = stmt.executeQuery("SELECT * from player_offers where player_uid = ${player.details.usernameHashcode} AND offer_state < 6")
 
             while (offer_records.next()) {
                 val offer = GrandExchangeOffer.fromQuery(offer_records)

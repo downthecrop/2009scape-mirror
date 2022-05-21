@@ -104,7 +104,7 @@ public class GroundItem extends Item {
 	 * @return {@code True} if so.
 	 */
 	public boolean droppedBy(Player p) {
-		if (dropper != null && p.getDetails().getUid() == dropper.getDetails().getUid()) {
+		if (dropper != null && p.getDetails().getUsernameHashcode() == dropper.getDetails().getUsernameHashcode()) {
 			dropper = p;
 			return true;
 		}
