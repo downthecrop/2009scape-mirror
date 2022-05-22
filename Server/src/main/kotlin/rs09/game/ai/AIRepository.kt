@@ -42,5 +42,9 @@ class AIRepository {
         fun getOffer(player: Player): GrandExchangeOffer? {
             return GEOffers[player]
         }
+
+        @JvmStatic fun clearAllBots() {
+            PulseRepository.toTypedArray().forEach { it.stop(); it.botScript.bot.clear(); AIPlayer.deregister((it.botScript.bot as AIPlayer).uid) }
+        }
     }
 }
