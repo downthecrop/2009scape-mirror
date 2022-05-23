@@ -8,7 +8,7 @@ import org.rs09.consts.Items
 import rs09.game.content.ame.RandomEventNPC
 import rs09.game.world.GameWorld
 
-class RandomEventManager {
+class RandomEventManagerTests {
     companion object {init {
         TestUtils.preTestSetup()
     }}
