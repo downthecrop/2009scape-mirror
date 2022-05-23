@@ -1,4 +1,7 @@
 import core.game.ge.OfferState
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -7,6 +10,7 @@ import org.junit.jupiter.api.fail
 import rs09.game.ge.GEDB
 import rs09.game.ge.GrandExchange
 import rs09.game.ge.GrandExchangeOffer
+import rs09.game.ge.PriceIndex
 import rs09.game.system.SystemLogger
 import java.io.File
 import kotlin.random.Random
@@ -99,5 +103,16 @@ import kotlin.random.Random
         }
 
         Assertions.assertEquals(defaultPrice, GrandExchange.getRecommendedPrice(4151))
+    }
+
+    @Test fun concurrentlySubmittedOffersShouldNotThrowExceptions(){
+        runBlocking {
+            val a = GlobalScope.launch { for(i in 0 until 5) {PriceIndex.allowItem(i); GrandExchange.addBotOffer(i, 1)} }
+            val b = GlobalScope.launch { for(i in 0 until 5) {PriceIndex.allowItem(i); GrandExchange.addBotOffer(i, 1)} }
+            a.join()
+            b.join()
+            Assertions.assertEquals(false, a.isCancelled)
+            Assertions.assertEquals(false, b.isCancelled)
+        }
     }
 }

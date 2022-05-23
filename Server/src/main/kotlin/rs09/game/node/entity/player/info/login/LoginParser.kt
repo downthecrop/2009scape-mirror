@@ -43,11 +43,10 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
             reconnect(player)
             return
         }
+        lateinit var parser: PlayerSaveParser
         try {
-            val parser = PlayerParser.parse(player)
+            parser = PlayerParser.parse(player)
                 ?: throw IllegalStateException("Failed parsing save for: " + player.username) //Parse core
-            loginListeners.forEach(Consumer { listener: LoginListener -> listener.login(player) }) //Run our login hooks
-            parser.runContentHooks() //Run our saved-content-parsing hooks
         }
         catch (e: Exception)
         {
@@ -74,6 +73,8 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
                         if (!Repository.players.contains(player)) {
                             Repository.addPlayer(player)
                         }
+                        loginListeners.forEach(Consumer { listener: LoginListener -> listener.login(player) }) //Run our login hooks
+                        parser.runContentHooks() //Run our saved-content-parsing hooks
                         player.details.session.setObject(player)
                         flag(AuthResponse.Success)
                         player.init()
