@@ -43,37 +43,38 @@ class GrandExchange : StartupListener, Commands {
                 GEDB.run { conn ->
                     val botStmt = conn.createStatement()
                     val botOffers = botStmt.executeQuery("SELECT * from bot_offers")
-                    while(botOffers.next()) {
+                    while (botOffers.next()) {
                         val bot = GrandExchangeOffer.fromBotQuery(botOffers)
                         val buyStmt = conn.createStatement()
-                        val buyOffer = buyStmt.executeQuery("SELECT * FROM player_offers WHERE item_id = ${bot.itemID} AND offer_state < 4 AND NOT offer_state = 2 AND offered_value >= ${bot.offeredValue}")
+                        val buyOffer =
+                            buyStmt.executeQuery("SELECT * FROM player_offers WHERE item_id = ${bot.itemID} AND offer_state < 4 AND NOT offer_state = 2 AND offered_value >= ${bot.offeredValue}")
                         val buyOffers = ArrayList<GrandExchangeOffer>()
-                        while(buyOffer.next()) buyOffers.add(GrandExchangeOffer.fromQuery(buyOffer))
+                        while (buyOffer.next()) buyOffers.add(GrandExchangeOffer.fromQuery(buyOffer))
                         buyStmt.close()
 
-                        for(offer in buyOffers.sortedBy { it.offeredValue }.reversed()) {
+                        for (offer in buyOffers.sortedBy { it.offeredValue }.reversed()) {
                             if (bot.amountLeft <= 0) break
                             exchange(bot, offer)
                         }
                     }
                     botStmt.close()
+                }
 
+                val activeOffers = ArrayList<GrandExchangeOffer>()
+                GEDB.run { conn ->
                     val stmt = conn.createStatement()
-                    val activeOffer = stmt.executeQuery("SELECT * from player_offers where offer_state < 4 AND NOT offer_state = 2 AND is_sale = true")
-                    val activeOffers = ArrayList<GrandExchangeOffer>()
+                    val activeOffer =
+                        stmt.executeQuery("SELECT * from player_offers where offer_state < 4 AND NOT offer_state = 2 AND is_sale = true")
 
-                    while(activeOffer.next())
-                    {
+                    while (activeOffer.next()) {
                         val offer = GrandExchangeOffer.fromQuery(activeOffer)
-                        if(!offer.isActive) continue
+                        if (!offer.isActive) continue
                         activeOffers.add(offer)
                     }
-
-                    for(offer in activeOffers)
-                        processOffer(offer)
-
-                    stmt.close()
                 }
+                for(offer in activeOffers)
+                    processOffer(offer)
+
                 Thread.sleep(15_000) //sleep for 15 seconds
             }
         }.start()
