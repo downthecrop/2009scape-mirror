@@ -5,6 +5,7 @@ import api.ShutdownListener;
 import core.game.node.entity.player.Player;
 import rs09.Server;
 import rs09.ServerConstants;
+import rs09.game.ai.AIRepository;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
@@ -34,8 +35,13 @@ public final class SystemTermination {
 	public void terminate() {
 		SystemLogger.logInfo("[SystemTerminator] Initializing termination sequence - do not shutdown!");
 		try {
+			SystemLogger.logInfo("[SystemTerminator] Stopping all bots...");
+			AIRepository.clearAllBots();
+			SystemLogger.logInfo("[SystemTerminator] Shutting down networking...");
 			Server.setRunning(false);
 			Server.getReactor().terminate();
+			SystemLogger.logInfo("[SystemTerminator] Stopping all pulses...");
+			GameWorld.getMajorUpdateWorker().stop();
 			for (Iterator<Player> it = Repository.getPlayers().iterator(); it.hasNext();) {
 				try {
 					Player p = it.next();

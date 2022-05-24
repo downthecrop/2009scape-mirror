@@ -28,6 +28,8 @@ object PriceIndex {
     }
 
     fun allowItem(id: Int) {
+        if(canTrade(id)) return
+
         GEDB.run { conn ->
             val stmt = conn.prepareStatement(INSERT_QUERY)
             stmt.setInt(1, id)

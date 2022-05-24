@@ -10,6 +10,8 @@ import rs09.game.system.SystemLogger
 import java.io.File
 import java.io.FileReader
 import java.sql.Connection
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.locks.ReentrantLock
 
 /**
  * Collection of methods for interacting with the grand exchange databases
@@ -20,6 +22,8 @@ object GEDB {
     public var connection: Connection? = null
     private var initialized = false
     private var connectionRefs = 0
+    private var obtainConnectionLock = ReentrantLock()
+    private var dbRunLock = ReentrantLock()
 
     fun init() {
         init(File(ServerConstants.GRAND_EXCHANGE_DATA_PATH + "grandexchange.db").absolutePath)
@@ -36,23 +40,32 @@ object GEDB {
     }
 
     @JvmStatic fun run(closure: (conn: Connection) -> Unit) {
+        dbRunLock.tryLock(10000L, TimeUnit.MILLISECONDS)
+
         connectionRefs++
         val con = connect()
         closure.invoke(con)
         connectionRefs--
+
         if(connectionRefs == 0) {
             con.close()
         }
+
+        dbRunLock.unlock()
     }
 
     private fun connect(): Connection
     {
+        obtainConnectionLock.tryLock(10000L, TimeUnit.MILLISECONDS)
+
         if (connection == null || connection!!.isClosed)
         {
             val ds = SQLiteDataSource()
             ds.url = "jdbc:sqlite:$pathString"
             connection = ds.connection
         }
+
+        obtainConnectionLock.unlock()
         return connection!!
     }
 

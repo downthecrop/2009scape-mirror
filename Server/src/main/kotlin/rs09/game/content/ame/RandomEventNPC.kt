@@ -92,7 +92,7 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
     fun noteAndTeleport() {
         for (item in player.inventory.toArray()) {
             if (item == null) continue
-            if (item.noteChange != item.id && item.noteChange != -1) {
+            if (item.definition.isUnnoted) {
                 player.inventory.remove(item)
                 player.inventory.add(Item(item.noteChange, item.amount))
             }

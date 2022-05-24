@@ -368,10 +368,10 @@ public class Player extends Entity {
 		if (force) {
 			Repository.getDisconnectionQueue().remove(getName());
 		}
-		GameWorld.getLogoutListeners().forEach((it) -> it.logout(this));
+		if (!isArtificial())
+			GameWorld.getLogoutListeners().forEach((it) -> it.logout(this));
 		setPlaying(false);
 		getWalkingQueue().reset();
-		GameWorld.getLogoutListeners().forEach((it) -> it.logout(this));
 		if(!logoutListeners.isEmpty()){
 			logoutListeners.forEach((key,method) -> method.invoke(this));
 		}

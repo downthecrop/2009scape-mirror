@@ -32,6 +32,7 @@ import kotlin.system.exitProcess
  * @author Ceikry
  */
 class MajorUpdateWorker {
+    var running: Boolean = false
     var started = false
     val sequence = UpdateSequence()
     val sdf = SimpleDateFormat("HHmmss")
@@ -39,7 +40,7 @@ class MajorUpdateWorker {
         Thread.currentThread().name = "Major Update Worker"
         started = true
         Thread.sleep(600L)
-        while(true){
+        while(running){
             val start = System.currentTimeMillis()
             Server.heartbeat()
 
@@ -75,6 +76,8 @@ class MajorUpdateWorker {
             ServerMonitor.eventQueue.add(GuiEvent.UpdatePulseCount(GameWorld.Pulser.TASKS.size))*/
             Thread.sleep(max(600 - (end - start), 0))
         }
+
+        SystemLogger.logInfo("Update worker stopped.")
     }
 
     fun handleTickActions() {
@@ -127,10 +130,13 @@ class MajorUpdateWorker {
 
     fun start() {
         if(!started){
+            running = true
             worker.start()
         }
+    }
 
-        //if (ServerConstants.ALLOW_GUI)
-        //    ServerMonitor.open()
+    fun stop() {
+        running = false
+        worker.interrupt()
     }
 }
