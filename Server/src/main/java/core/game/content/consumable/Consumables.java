@@ -56,7 +56,8 @@ public enum Consumables {
 	KARAMBWANJI(new Food(new int[] {3151}, new HealingEffect(3))),
 	STUFFED_SNAKE(new Food(new int[] {7579}, new HealingEffect(20), "You eat the stuffed snake-it's quite a meal! It tastes like chicken.")),
 	CRAYFISH(new Food(new int[] {13433}, new HealingEffect(2))),
-	
+	GIANT_FROG_LEGS(new Food(new int [] {4517}, new HealingEffect(6))),
+
 	/** Breads */
 	BREAD(new Food(new int[] {2309}, new HealingEffect(5))),
 	BAGUETTE(new Food(new int[] {6961}, new HealingEffect(6))),
