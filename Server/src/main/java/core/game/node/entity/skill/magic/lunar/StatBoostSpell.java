@@ -8,6 +8,7 @@ import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.equipment.SpellType;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.audio.Audio;
 import rs09.game.ai.AIPlayer;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.item.Item;
@@ -42,7 +43,7 @@ public final class StatBoostSpell extends MagicSpell {
 		final Potion potion = (Potion) Consumables.getConsumableById(item.getId());
 		player.getInterfaceManager().setViewedTab(6);
 		if (potion == null) {
-			player.getPacketDispatch().sendMessage("For use of this spell use only one a potion.");
+			player.getPacketDispatch().sendMessage("You can only cast this spell on a potion.");
 			return false;
 		}
 		if (!item.getDefinition().isTradeable() || item.getName().toLowerCase().contains("restore") || item.getName().toLowerCase().contains("zamorak") || item.getName().toLowerCase().contains("saradomin") || item.getName().toLowerCase().contains("combat")) {
@@ -75,6 +76,7 @@ public final class StatBoostSpell extends MagicSpell {
 				continue;
 			}
 			o.graphics(GRAPHICS);
+			o.getAudioManager().send(new Audio (2902), true);
 			potion.getEffect().activate(o);
 			size++;
 		}
@@ -84,6 +86,7 @@ public final class StatBoostSpell extends MagicSpell {
 		}
 		super.meetsRequirements(player, true, true);
 		potion.getEffect().activate(player);
+		player.getAudioManager().send(new Audio (2901), true);
 		player.animate(ANIMATION);
 		player.graphics(GRAPHICS);
 		player.getInventory().remove(item);

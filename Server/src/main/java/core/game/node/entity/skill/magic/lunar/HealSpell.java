@@ -9,6 +9,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.combat.equipment.SpellType;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.item.Item;
 import core.game.world.map.RegionManager;
@@ -104,6 +105,8 @@ public final class HealSpell extends MagicSpell {
 			player.getImpactHandler().manualHit(player, transfer, null);
 			o.getSkills().heal(transfer);
 			player.animate(ANIMATION);
+			player.getAudioManager().send(new Audio(2895), true);
+			o.getAudioManager().send(new Audio(2892), true);
 			o.graphics(GRAPHICS);
 		} else {
 			List<Player> players = RegionManager.getLocalPlayers(player, 1);
@@ -127,7 +130,9 @@ public final class HealSpell extends MagicSpell {
 			}
 			player.getImpactHandler().manualHit(player, percentage, HitsplatType.NORMAL);
 			player.animate(ANIMATION_G);
+			player.getAudioManager().send(new Audio(2894), true);
 			for (Player p : players) {
+				p.getAudioManager().send(new Audio(2892), true);
 				p.graphics(GRAPHICS_G);
 				p.getSkills().heal(percentage);
 			}
