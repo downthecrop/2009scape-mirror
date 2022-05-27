@@ -16,7 +16,6 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
 
-import static api.ContentAPIKt.playAudio;
 
 /**
  * The cure group spell.
