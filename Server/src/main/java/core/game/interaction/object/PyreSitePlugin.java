@@ -22,6 +22,7 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import org.rs09.consts.Items;
 import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
 import rs09.plugin.ClassScanner;
@@ -44,17 +45,17 @@ public final class PyreSitePlugin extends OptionHandler {
 	/**
 	 * The chewed bones item.
 	 */
-	private static final Item CHEWED_BONES = new Item(11338);
+	private static final Item CHEWED_BONES = new Item(Items.CHEWED_BONES_11338);
 
 	/**
 	 * The mangled bones item.
 	 */
-	private static final Item MANGLED_BONES = new Item(11337);
+	private static final Item MANGLED_BONES = new Item(Items.MANGLED_BONES_11337);
 
 	/**
 	 * The dragon full helm item (1/250) chance.
 	 */
-	private static final Item DFH = new Item(11335);
+	private static final Item DFH = new Item(Items.DRAGON_FULL_HELM_11335);
 
 	/**
 	 * The list of used pyre ship locations. 
@@ -205,7 +206,7 @@ public final class PyreSitePlugin extends OptionHandler {
 	 * @return the random item.
 	 */
 	private Item getRandomItem(Player player) {
-		if (RandomFunction.random(2) == 1 && RandomFunction.random(250) == 10) {
+		if (RandomFunction.random(250) == 10) {
 			Repository.sendNews(player.getUsername() + " has just received a Dragon Full Helm from the Pyre Ship.");
 			return DFH;
 		}
