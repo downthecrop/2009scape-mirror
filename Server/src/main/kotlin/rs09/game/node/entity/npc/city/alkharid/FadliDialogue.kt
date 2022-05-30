@@ -60,8 +60,10 @@ class FadliDialogue(player: Player? = null) : DialoguePlugin(player) {
 class FadliListener : InteractionListener {
     override fun defineListeners() {
         on(NPCs.FADLI_958, "buy") { player, node ->
-            node.asNpc().openShop(player)
-            return@on true
+            if(node.asNpc().openShop(player)) {
+                return@on true
+            }
+            return@on false
         }
     }
 }
