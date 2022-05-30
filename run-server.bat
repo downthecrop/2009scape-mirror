@@ -1,4 +1,10 @@
 cd Server
-.\mvnw.bat package
+
+if !exist hasRan.txt (
+    .\mvnw.cmd clean
+    copy NUL hasRan.txt
+)
+
+.\mvnw.cmd package
 move target\*-with-dependencies.jar server.jar
 java -jar server.jar
