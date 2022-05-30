@@ -8,6 +8,7 @@ import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.equipment.SpellType;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
@@ -116,6 +117,7 @@ public final class StringJewellerySpell extends MagicSpell {
 				return false;
 			}
 			if (meetsRequirements(player, true, true) && player.getInventory().remove(node)) {
+				player.getAudioManager().send(2903, 1, 1);
 				player.getInventory().add(new Item(STRUNG[getIndex()]));
 				player.getSkills().addExperience(Skills.CRAFTING, 4, true);
 				player.getSkills().addExperience(Skills.MAGIC, 83, true);

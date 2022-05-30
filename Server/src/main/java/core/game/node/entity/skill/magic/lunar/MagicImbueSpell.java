@@ -7,6 +7,7 @@ import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.equipment.SpellType;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.item.Item;
 import rs09.game.world.GameWorld;
@@ -61,6 +62,7 @@ public class MagicImbueSpell extends MagicSpell {
 		player.lock(ANIMATION.getDuration() + 1);
 		player.graphics(GRAPHIC);
 		player.animate(ANIMATION);
+		player.getAudioManager().send(2888, 1, 1);
 		player.getPacketDispatch().sendMessage("You are charged to combine runes!");
 		return true;
 	}

@@ -82,6 +82,7 @@ public final class StatSpySpell extends MagicSpell {
 			});
 			player.graphics(EYE);
 			o.graphics(GRAPHIC);
+			player.getAudioManager().send(3621);
 			for (int[] element : SKILLS) {
 				player.getPacketDispatch().sendString("" + o.getSkills().getLevel(element[0]) + "", 523, element[1]);
 				player.getPacketDispatch().sendString("" + o.getSkills().getStaticLevel(element[0]) + "", 523, element[2]);

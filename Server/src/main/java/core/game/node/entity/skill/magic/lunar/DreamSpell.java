@@ -61,7 +61,7 @@ public final class DreamSpell extends MagicSpell {
 	public boolean cast(Entity entity, Node target) {
 		final Player p = (Player) entity;
 		if (p.getSkills().getLifepoints() == p.getSkills().getStaticLevel(Skills.HITPOINTS)) {
-			p.getPacketDispatch().sendMessage("You already have full hitpoints.");
+			p.getPacketDispatch().sendMessage("You have no need to cast this spell since your hitpoints are already full.");
 			return false;
 		}
 		if (!meetsRequirements(entity, true, true)) {

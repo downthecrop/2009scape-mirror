@@ -6,6 +6,7 @@ import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.equipment.SpellType;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.entity.state.EntityState;
 import core.game.node.item.Item;
@@ -55,9 +56,11 @@ public final class CureMeSpell extends MagicSpell {
 		if (!meetsRequirements(entity, true, true)) {
 			return false;
 		}
+		p.getAudioManager().send(2880);
 		p.animate(ANIMATION);
 		p.graphics(GRAPHIC);
 		p.getStateManager().remove(EntityState.POISONED);
+		p.getAudioManager().send(2900);
 		return true;
 	}
 

@@ -7,6 +7,7 @@ import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.equipment.SpellType;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.entity.state.EntityState;
 import core.game.node.item.Item;
@@ -14,6 +15,7 @@ import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
+
 
 /**
  * The cure group spell.
@@ -54,6 +56,7 @@ public final class CureGroupSpell extends MagicSpell {
 		}
 		p.animate(ANIMATION);
 		p.graphics(GRAPHIC);
+		p.getAudioManager().send(new Audio (2882), true);
 		p.getStateManager().remove(EntityState.POISONED);
 		for (Player players : RegionManager.getLocalPlayers(p, 1)) {
 			Player o = (Player) players;
@@ -64,6 +67,7 @@ public final class CureGroupSpell extends MagicSpell {
 				continue;
 			}
 			o.getStateManager().remove(EntityState.POISONED);
+			o.getAudioManager().send(new Audio(2889), true);
 			o.graphics(GRAPHIC);
 		}
 		return true;

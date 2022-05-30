@@ -7,6 +7,7 @@ import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.equipment.SpellType;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
@@ -76,6 +77,7 @@ public class SuperglassMakeSpell extends MagicSpell {
 		player.lock(4);
 		player.graphics(GRAPHIC);
 		player.animate(ANIMATION);
+		player.getAudioManager().send(2896, 1, 1);
 		for (int i = 0; i < sand; i++) {
 			if (hasSet(player, setIndex)) {
 				if (player.getInventory().remove(BUCKET_OF_SAND, SETS[setIndex])) {

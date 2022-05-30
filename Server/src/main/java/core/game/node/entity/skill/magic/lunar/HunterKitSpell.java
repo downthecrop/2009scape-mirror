@@ -9,6 +9,7 @@ import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.equipment.SpellType;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
@@ -89,6 +90,7 @@ public final class HunterKitSpell extends MagicSpell {
 			p.lock(5);
 			p.animate(ANIMATION);
 			p.graphics(GRAPHIC);
+			p.getAudioManager().send(3615, 1, 1);
 		}
 		return true;
 	}

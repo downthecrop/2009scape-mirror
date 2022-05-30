@@ -81,7 +81,7 @@ public final class VengeanceSpell extends MagicSpell {
 		visualize(entity, p);
 		entity.setAttribute("vengeance_delay", ticks + 50);
 		p.setAttribute("vengeance", true);
-		p.getAudioManager().send(vengOther ? 2907 : 2908);
+		p.getAudioManager().send(vengOther ? 2908 : 2907);
 		return true;
 	}
 
