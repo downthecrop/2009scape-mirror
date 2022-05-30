@@ -178,7 +178,7 @@ After setting up git lfs, you may need to run `git lfs pull` in the root of the 
 2. Start the Management Server with run-ms.sh
 3. Start the game server with run-server.sh
 
-#### Windows (Helpful: <a href="https://www.wikihow.com/Run-a-Batch-File-from-the-Command-Line-on-Windows">How to run a .bat file</a>)
+#### Windows
 1. Make sure your database is running (see above)
 2. Start the Management Server with run-ms.bat
 3. Start the game server with run-server.bat
