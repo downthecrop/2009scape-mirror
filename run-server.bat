@@ -1,6 +1,6 @@
 cd Server
 
-if !exist hasRan.txt (
+if NOT exist hasRan.txt (
     .\mvnw.cmd clean
     copy NUL hasRan.txt
 )
