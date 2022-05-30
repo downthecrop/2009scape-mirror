@@ -13,7 +13,7 @@ import rs09.tools.END_DIALOGUE
  * @author bushtail
  */
 
-class AablaDialogue : DialoguePlugin() {
+class AablaDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun newInstance(player: Player?): DialoguePlugin {
         return AablaDialogue()
     }

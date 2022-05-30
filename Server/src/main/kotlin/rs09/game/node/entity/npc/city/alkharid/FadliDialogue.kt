@@ -13,9 +13,9 @@ import rs09.tools.END_DIALOGUE
  * @author bushtail
  */
 
-class FadliDialogue : DialoguePlugin() {
+class FadliDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun newInstance(player: Player?): DialoguePlugin {
-        return FadliDialogue()
+        return FadliDialogue(player)
     }
 
     override fun open(vararg args: Any?): Boolean {

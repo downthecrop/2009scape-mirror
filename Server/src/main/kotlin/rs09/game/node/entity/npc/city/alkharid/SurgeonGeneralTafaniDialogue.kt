@@ -15,9 +15,9 @@ import rs09.tools.END_DIALOGUE
  * @author bushtail
  */
 
-class SurgeonGeneralTafaniDialogue : DialoguePlugin() {
+class SurgeonGeneralTafaniDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun newInstance(player: Player?): DialoguePlugin {
-        return SurgeonGeneralTafaniDialogue()
+        return SurgeonGeneralTafaniDialogue(player)
     }
 
     override fun open(vararg args: Any?): Boolean {

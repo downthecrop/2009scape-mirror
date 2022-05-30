@@ -10,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import org.rs09.consts.Animations
 import org.rs09.consts.NPCs
-import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.dialogue.Topic
 import rs09.tools.END_DIALOGUE
 
@@ -18,9 +17,9 @@ import rs09.tools.END_DIALOGUE
  * @author bushtail
  */
 
-class JaraahDialogue : DialoguePlugin() {
+class JaraahDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun newInstance(player: Player?): DialoguePlugin {
-        return JaraahDialogue()
+        return JaraahDialogue(player)
     }
 
     override fun open(vararg args: Any?): Boolean {
