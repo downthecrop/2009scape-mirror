@@ -26,7 +26,6 @@
 * [History of this Codebase](#history-of-this-codebase)
 * [Our Core Values](#our-core-values) 
 * [Contributing](#contributing)
-* [Video Setup Tutorial](#video-setup-tutorial)
 * [Setup for Content Developers](#content-developers-setting-up-the-project)
   * [Github Setup](#github-setup)
   * [Prerequisites](#prerequisites)
@@ -98,12 +97,7 @@ To obtain large binary files for the repo such as the cache, make sure you have 
 After setting up git lfs, you may need to run `git lfs pull` in the root of the cloned repo to download essential binaries.
 
 ### Prerequisites
-
-<h4>Note: It is required for a developer submitting a PR to use Intellij IDEA as your integrated development environment.</h4>
-
-* Intellij IDEA
 * Java SE Development Kit Version 11/OpenJDK 11 (preferred)
-* Gradle (optional - Installs with Intellij on project build)
 * Xampp
 
 ## Prereq Installation
@@ -118,20 +112,7 @@ After setting up git lfs, you may need to run `git lfs pull` in the root of the 
     * Accept the terms and conditions, after reading them of course, and login to oracle
     * Download and install like any normal application
     
-2. Install <a href="https://www.jetbrains.com/idea/">Intellij IDEA</a>
-    * Click "Download" on the main page
-    * Ensure "Windows" is selected at the top
-    * Select "Community download"
-    * Download and install like any normal application
-    
-3. Install <a href="https://gradle.org/">Gradle</a>
-    * Click on "Install Gradle" 
-    * Scroll down to "Installing manually" 
-    * Download "Binary-only"
-    * Scroll down until you see "Microsoft Windows users"
-    * Follow the instructions listed on the website
-    
-4. Install <a href="https://www.apachefriends.org/index.html">Xampp</a>
+2. Install <a href="https://www.apachefriends.org/index.html">Xampp</a>
     * Click on "Xampp for Windows"
     * Download
     * Install as Administrator
@@ -146,21 +127,8 @@ After setting up git lfs, you may need to run `git lfs pull` in the root of the 
     * select macOS x64
     * Accept the terms and conditions, after reading them of course, and login to oracle
     * Download and install like any normal mac application
-
-2. Install <a href="https://www.jetbrains.com/idea/">Intellij IDEA</a>
-    * Click "Download" on the main page
-    * Select "Mac" towards the top of the main page
-    * Select "Community download"
-    * Download and install like any normal application
     
-3. Install <a href="https://gradle.org/">Gradle</a>
-    * Click on "Install Gradle" 
-    * Scroll down to "Installing manually" 
-    * Download "Binary-only"
-    * Scroll down until you see "Linux & MacOS users"
-    * Follow the instructions listed on the website
-    
-4. Install <a href="https://www.apachefriends.org/index.html">Xampp</a>
+2. Install <a href="https://www.apachefriends.org/index.html">Xampp</a>
     * Click on "Xampp for OS X"
     * Download
     * Install as Administrator
@@ -178,23 +146,9 @@ After setting up git lfs, you may need to run `git lfs pull` in the root of the 
     * Fedora, Oracle Linux, Red Hat Enterprise Linux, etc.
     ```sh
     su -c "yum install java-11-openjdk"
-    ```  
-  
-2. Install Intellij IDEA through <a href="https://www.jetbrains.com/idea/">Intellij Website</a> or through <a href="https://www.jetbrains.com/help/idea/installation-guide.html#snap">Command Line</a>
-    * Debian, Ubuntu, etc.
-    ```sh
-    sudo snap install intellij-idea-community --classic
-    ```
-
-3. Install Gradle through the <a href="https://gradle.org/">Gradle Website</a> or through <a href="https://gradle.org/">Command Line</a>
-    * Click install Gradle
-    * If you're installing through Command Line follow : Installing with a package manager
-    * If you're installing through Download follow : Installing manually : Linux & MacOS users
-    ```sh
-    sdk install gradle 6.6.1
     ```
     
-4. Install <a href="https://www.apachefriends.org/index.html">Xampp</a>
+2. Install <a href="https://www.apachefriends.org/index.html">Xampp</a> OR Set up DB server of your choice.
     * Click install "XAMPP for Linux"
     * Install like any normal Linux program
 </details>
@@ -202,12 +156,12 @@ After setting up git lfs, you may need to run `git lfs pull` in the root of the 
 
 ### Project Setup
 
-1. Open Xampp
+- Open Xampp (Skip if you roll your own database and know what you're doing.)
     * On Windows make sure you run Xampp as administrator
-    * On the left hand side make sure you tick the two "Service" boxes for Apache and MySQL
+    * On the left-hand side make sure you tick the two "Service" boxes for Apache and MySQL
     * For both Apache and MySQL click "Start" under Actions
     * After doing that navigate to the <a href="https://localhost/phpmyadmin/">PHP My Admin LOCAL SITE</a>
-    * Once opened, on the left hand side click the three "disks" that say "New"
+    * Once opened, on the left-hand side click the three "disks" that say "New"
     * In the "Database name" bar type: global
     * Press the "Create" button
     * A three disk "global" should appear on the left hand side
@@ -216,40 +170,18 @@ After setting up git lfs, you may need to run `git lfs pull` in the root of the 
     * Navigate to your 2009Scape project folder
     * Go to Server/db_exports/ and import global.sql
     * It may take a moment to import, when It is done importing Xampp is all set up!
-
-2. Open Intellij
-    * Select Get from Version Control
-    * Click on "Github", and you will be asked to login
-    * Change your directory to wherever you want the project to load, or keep it default
-    * On the right hand side you should see your Github Repository for 2009Scape
-    * Select it and hit "Clone"
-    * The project should instantly start building on import. Give it some time because it is going through and compiling alot of files
-    * In Intellij go to File -> Project Structure -> Project and verify your Project SDK is set to JDK "11"
-    * Setup through Intellij should now be finished!
     
 ### Running the project
 
-1. Navigate to the right hand side of Intellij where it says "Gradle"
-    * Gradle is very useful when it comes to running and compiling the project
-    * The only tabs we are concerned about are "Management-Server" and "Server"
-    * Each of these have a "Tasks" folder and an "application" folder inside of "Tasks"
-    <br>
-2. Click on the "application" folder for the Management-Server and double-click "run"
-    * The management server is used for things such as player data(not saves), highscores, and world information
-    <br>
-3. Click on the "application" folder for the Server and double-click "run"
-    * Please note this may take a minute or two to build, it is compiling a lot of files!
-    * If you receive an error on server start, check and make sure that your worldprops/default.conf is pointing to the correct paths
-    * * Server debug mode/other information can be changed in worldprops/default.conf
-    <br>
-4. Clone the <a href="https://gitlab.com/2009scape/legacy-client">legacy-client</a> repo and follow the same Intellij setup steps
-    * Click on the "application" folder for the Client and double-click "run"
-    * If you receive an error on client run open your build.gradle to verify that the mainClassName is set to the correct location
-    * Due to client work that is on going a lot of files get changed and new paths for the main class are created
-    * **FIX** In your build.gradle change the mainClassName and Main-Class attributes to 'org.runite.jagex.Client'
-    * If Gradle run still does not work, launch the Client by navigating to Client/src/main/java/org.runite/jagex/Client
-    * Right click on the client and select Run 'Client.main()'
-    * Client debugging options can be found inside of config.json
+####Linux / OSX
+1. Make sure your database of choice is running (see above)
+2. Start the Management Server with run-ms.sh
+3. Start the game server with run-server.sh
+
+#### Windows
+1. Make sure your database is running (see above)
+2. Start the Management Server with run-ms.bat
+3. Start the game server with run-server.bat
 
 ### License
 
@@ -258,12 +190,6 @@ We use the AGPL 3.0 license, which can be found <a href="https://www.gnu.org/lic
 ### Contact
 
 <h4>Reminder: There is no official support for setting up your own server. Do not ping/dm developers about setting up your server. Community support is available in the discord server.</h4>
-
-### Video Setup Tutorial
-Occexe made a nice video showing you how to set it up if you'd prefer that. Please note many things have changed since this was filmed and the steps are no longer strictly accurate. Check it out here:
-
-[![View Tutorial](http://img.youtube.com/vi/3oQcsZdrRcE/0.jpg)](http://www.youtube.com/watch?v=3oQcsZdrRcE "2009Scape Setup")
-
 
 
 [license-shield]: https://img.shields.io/badge/license-AGPL--3.0-informational
