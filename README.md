@@ -172,7 +172,7 @@ After setting up git lfs, you may need to run `git lfs pull` in the root of the 
     * It may take a moment to import, when It is done importing Xampp is all set up!
     
 ### Running the project
-
+***Note: If you choose not to use the provided run scripts, you *must* run `mvn clean` before it will build correctly.***
 ####Linux / OSX
 1. Make sure your database of choice is running (see above)
 2. Start the Management Server with run-ms.sh
@@ -182,6 +182,33 @@ After setting up git lfs, you may need to run `git lfs pull` in the root of the 
 1. Make sure your database is running (see above)
 2. Start the Management Server with run-ms.bat
 3. Start the game server with run-server.bat
+
+### IDE Integration: IntelliJ IDEA (Recommended)
+1. Click the "Project" tab on the left hand side.
+2. In the top left where the "Project" drop down is, click Project Files
+3. Expand the Management-Server folder
+4. Right click pom.xml and click "Add Maven Project"
+5. Expand the Server folder
+6. Right click pom.xml and click "Add Maven Project"
+7. Restart IntelliJ
+8. You should now have ready-made run configurations in the top right: [Windows] Run MS, [Windows] Run Server, [Linux] Run MS, [Linux] Run Server
+
+### IDE Integration: Eclipse
+Note: This section could use improvement. If you have a better way to integrate the project with eclipse, feel free to open an MR!
+1. Make sure you have the [Eclipse Maven Plugin](https://stackoverflow.com/a/25993960/1971003) installed.
+2. In Eclipse, click File -> Import
+3. Type Maven in the search box
+4. Under "Select an Import Source," select "Existing Maven Project."
+5. Next
+6. Click browse, and select the Management-Server folder.
+7. Repeat steps 2-6 for the Server folder.
+
+### IDE Integration: Netbeans
+Note: This section could use improvement. If you have a better way to integrate the project with netbeans, feel free to open an MR!
+
+1. Select File -> Open Project
+2. Select the Management-Server folder to open the MS project.
+3. Select the Server folder to open the Server project.
 
 ### License
 
