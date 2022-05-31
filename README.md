@@ -173,6 +173,7 @@ After setting up git lfs, you may need to run `git lfs pull` in the root of the 
     
 ### Running the project
 ***Note: If you choose not to use the provided run scripts, you *must* run `mvn clean` before it will build correctly.***
+
 ####Linux / OSX
 1. Make sure your database of choice is running (see above)
 2. Start the Management Server with run-ms.sh
