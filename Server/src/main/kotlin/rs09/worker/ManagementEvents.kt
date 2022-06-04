@@ -4,12 +4,15 @@ import com.google.protobuf.Message
 import core.game.system.communication.CommunicationInfo
 import core.net.packet.PacketRepository
 import core.net.packet.context.ContactContext
+import core.net.packet.context.MessageContext
+import core.net.packet.out.CommunicationMessage
 import core.net.packet.out.ContactPackets
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import proto.management.PlayerStatusUpdate
+import proto.management.PrivateMessage
 import proto.management.RequestContactInfo
 import proto.management.SendContactInfo
 import proto.management.SendContactInfo.Contact
@@ -94,6 +97,25 @@ object ManagementEvents {
                     ContactContext(p, ContactContext.IGNORE_LIST_TYPE)
                 )
 
+            }
+
+            is PrivateMessage -> {
+                val sender = Repository.getPlayerByName(event.sender)
+                val receiver = Repository.getPlayerByName(event.receiver)
+
+                if (sender != null) {
+                    PacketRepository.send(
+                        CommunicationMessage::class.java,
+                        MessageContext(sender, event.receiver, event.rank, MessageContext.SEND_MESSAGE, event.message)
+                    )
+                }
+
+                if (receiver != null) {
+                    PacketRepository.send(
+                        CommunicationMessage::class.java,
+                        MessageContext(receiver, event.sender, event.rank, MessageContext.RECIEVE_MESSAGE, event.message)
+                    )
+                }
             }
         }
     }

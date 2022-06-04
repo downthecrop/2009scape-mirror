@@ -3,6 +3,7 @@ package core.game.system.communication;
 import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.node.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
+import proto.management.PrivateMessage;
 import rs09.auth.UserAccountInfo;
 import rs09.game.system.SystemLogger;
 import core.game.system.monitor.PlayerMonitor;
@@ -18,6 +19,7 @@ import core.net.packet.context.MessageContext;
 import core.net.packet.out.CommunicationMessage;
 import core.net.packet.out.ContactPackets;
 import core.tools.StringUtils;
+import rs09.worker.ManagementEvents;
 
 import java.nio.ByteBuffer;
 import java.util.*;
@@ -299,10 +301,12 @@ public final class CommunicationInfo {
 	 */
 	public static void sendMessage(Player player, String target, String message) {
 		if (WorldCommunicator.isEnabled()) {
-			StringBuilder sb = new StringBuilder(message);
-			sb.append(" => ").append(target);
-			player.getMonitor().log(sb.toString(), PlayerMonitor.PRIVATE_CHAT_LOG);
-			MSPacketRepository.sendPrivateMessage(player, target, message);
+			PrivateMessage.Builder builder = PrivateMessage.newBuilder();
+			builder.setSender(player.getName());
+			builder.setRank(player.getDetails().getRights().ordinal());
+			builder.setMessage(message);
+			builder.setReceiver(target);
+			ManagementEvents.publish(builder.build());
 			return;
 		}
 		if (!player.getDetails().getCommunication().contacts.containsKey(target)) {
