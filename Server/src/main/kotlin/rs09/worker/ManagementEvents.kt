@@ -38,7 +38,6 @@ object ManagementEvents {
     }
 
     private fun handleEvent(event: Message) {
-        SystemLogger.logInfo("Handling ${event.toString()}")
         when (event) {
 
             is PlayerStatusUpdate -> {
@@ -62,10 +61,10 @@ object ManagementEvents {
                 val contacts = CommunicationInfo.parseContacts(info.contacts)
 
                 for ((username, _) in contacts) {
-                    Repository.getPlayerByName(username) ?: continue
+                    val online = Repository.getPlayerByName(username) != null
                     val cbuild = Contact.newBuilder()
                     cbuild.username = username
-                    cbuild.world = GameWorld.settings!!.worldId
+                    cbuild.world = if (online) GameWorld.settings!!.worldId else 0
                     response.addContacts(cbuild)
                 }
 
@@ -73,8 +72,6 @@ object ManagementEvents {
             }
 
             is SendContactInfo -> {
-                SystemLogger.logInfo("Got Request__>__>__>__>_>")
-
                 val p = Repository.getPlayerByName(event.username) ?: return
 
                 PacketRepository.send(
