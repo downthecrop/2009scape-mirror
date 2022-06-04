@@ -63,16 +63,6 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
             override fun pulse(): Boolean {
                 try {
                     if (details.session.isActive) {
-                        val p = Repository.getPlayerByName(player.name)
-                        if (p != null) {
-                            p.clear()
-                            Repository.playerNames.remove(p.name)
-                            Repository.lobbyPlayers.remove(p)
-                            Repository.removePlayer(p)
-                        }
-                        if (!Repository.players.contains(player)) {
-                            Repository.addPlayer(player)
-                        }
                         loginListeners.forEach(Consumer { listener: LoginListener -> listener.login(player) }) //Run our login hooks
                         parser.runContentHooks() //Run our saved-content-parsing hooks
                         player.details.session.setObject(player)
@@ -112,15 +102,9 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
         player.updateSceneGraph(true)
         player.configManager.init()
         LoginConfiguration.configureGameWorld(player)
-        Repository.playerNames[player.name] = player
-        GameWorld.Pulser.submit(object : Pulse(1) {
-            override fun pulse(): Boolean {
-                if (!Repository.players.contains(player)) {
-                    Repository.addPlayer(player)
-                }
-                return true
-            }
-        })
+        if (!Repository.players.contains(player)) {
+            Repository.addPlayer(player)
+        }
     }
 
     /**
@@ -133,9 +117,6 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
         }
         if (SystemManager.isUpdating()) {
             return flag(AuthResponse.Updating)
-        }
-        if (Repository.getPlayerByName(details.username).also { gamePlayer = it } != null && gamePlayer!!.session.isActive) {
-            return flag(AuthResponse.AlreadyOnline)
         }
         return if (details.isBanned) {
             flag(AuthResponse.AccountDisabled)

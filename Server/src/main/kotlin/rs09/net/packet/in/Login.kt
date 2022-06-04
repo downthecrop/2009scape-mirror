@@ -9,9 +9,9 @@ import core.game.node.entity.player.info.UIDInfo
 import core.game.node.entity.player.info.login.LoginType
 import core.net.Constants
 import core.net.IoSession
-import core.net.amsc.WorldCommunicator
 import core.tools.StringUtils
 import proto.management.PlayerStatusUpdate
+import proto.management.RequestContactInfo
 import rs09.ServerConstants
 import rs09.auth.AuthResponse
 import rs09.game.node.entity.player.info.login.LoginParser
@@ -113,15 +113,26 @@ object Login {
             Repository.LOGGED_IN_PLAYERS.add(details.username)
         details.session = session
         details.info.translate(UIDInfo(details.ipAddress, "DEPRECATED", "DEPRECATED", "DEPRECATED"))
-        LoginParser(details, LoginType.fromType(opcode)).initialize(Player(details), opcode == RECONNECT_LOGIN_OP)
+        val player = Player(details)
+        if (!Repository.players.contains(player)) {
+            Repository.addPlayer(player)
+        }
+        LoginParser(details, LoginType.fromType(opcode)).initialize(player, opcode == RECONNECT_LOGIN_OP)
         sendMSEvents(details)
     }
 
     private fun sendMSEvents(details: PlayerDetails) {
-        var event = PlayerStatusUpdate.newBuilder()
-        event.username = details.username
-        event.world = GameWorld.settings!!.worldId
-        event.notifyFriendsOnly = false
-        ManagementEvents.publish(event.build())
+        val statusEvent = PlayerStatusUpdate.newBuilder()
+        statusEvent.username = details.username
+        statusEvent.world = GameWorld.settings!!.worldId
+        statusEvent.notifyFriendsOnly = false
+        ManagementEvents.publish(statusEvent.build())
+
+        val contactEvent = RequestContactInfo.newBuilder()
+        contactEvent.username = details.username
+        contactEvent.world = GameWorld.settings!!.worldId
+        ManagementEvents.publish(contactEvent.build())
+
+
     }
 }
