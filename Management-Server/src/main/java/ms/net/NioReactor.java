@@ -116,7 +116,7 @@ public final class NioReactor implements Runnable {
 					}
 				} else {
 					System.out.println("SLEEPING");
-					Thread.sleep(200);
+					Thread.sleep(10);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
