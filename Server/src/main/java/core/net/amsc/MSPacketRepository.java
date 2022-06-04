@@ -35,10 +35,10 @@ public final class MSPacketRepository {
 	 *
      */
 	public static void sendInfoUpdate(Player player) {
-		IoBuffer buffer = new IoBuffer(14, PacketHeader.BYTE);
+/*		IoBuffer buffer = new IoBuffer(14, PacketHeader.BYTE);
 		buffer.putString(player.getName());
 		buffer.put(Rights.getChatIcon(player));
-		WorldCommunicator.getSession().write(buffer);
+		WorldCommunicator.getSession().write(buffer);*/
 		player.getAppearance().sync();
 	}
 

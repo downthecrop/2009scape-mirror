@@ -1,0 +1,53 @@
+syntax = "proto2";
+
+package management;
+
+option java_multiple_files = true;
+option java_package = "proto.management";
+option java_outer_classname = "ManagementProtos";
+
+message PlayerStatusUpdate {
+  enum Type {
+    LOGIN = 0;
+    LOGOUT = 1;
+  }
+
+  required Type type = 1;
+  required string username = 2;
+  required int32 world = 3;
+}
+
+message ClanMessage {
+  required string sender = 1;
+  required string clanName = 2;
+  required string message = 3;
+}
+
+message PrivateMessage {
+  required string sender = 1;
+  required string receiver = 2;
+  required string message = 3;
+  required int32 rank = 4;
+}
+
+message FriendUpdate {
+  enum Type {
+    ADD = 0;
+    REMOVE = 1;
+  }
+
+  required Type type = 1;
+  required string username = 2;
+  required string friend = 3;
+}
+
+message BlockedUpdate {
+  enum Type {
+    ADD = 0;
+    REMOVE = 1;
+  }
+
+  required Type type = 1;
+  required string username = 2;
+  required string friend = 3;
+}
