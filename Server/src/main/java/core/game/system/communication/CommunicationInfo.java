@@ -37,7 +37,7 @@ public final class CommunicationInfo {
 	/**
 	 * The clan ranks.
 	 */
-	private final Map<String, Contact> contacts = new HashMap<>();
+	private Map<String, Contact> contacts = new HashMap<>();
 
 	/**
 	 * The list of blocked players.
@@ -669,6 +669,12 @@ public final class CommunicationInfo {
 		}
 
 		String contacts = accountInfo.getContacts();
+		this.contacts = parseContacts(contacts);
+	}
+
+	public static HashMap<String, Contact> parseContacts(String contacts) {
+		HashMap<String, Contact> theseContacts = new HashMap<>();
+		String[] tokens;
 		if (!contacts.isEmpty()) {
 			String[] datas = contacts.split("~");
 			Contact contact = null;
@@ -679,8 +685,10 @@ public final class CommunicationInfo {
 				}
 				contact = new Contact(tokens[0]);
 				contact.setRank(ClanRank.values()[Integer.parseInt(tokens[1])]);
-				this.contacts.put(tokens[0], contact);
+				theseContacts.put(tokens[0], contact);
 			}
 		}
+
+		return theseContacts;
 	}
 }

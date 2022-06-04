@@ -128,9 +128,6 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
      * @return `True` if the request is valid.
      */
     private fun validateRequest(): Boolean {
-        if (WorldCommunicator.getState() == ManagementServerState.CONNECTING) {
-            return flag(AuthResponse.LoginServerOffline)
-        }
         if (!details.session.isActive) {
             return false
         }

@@ -3,6 +3,7 @@ package rs09.net.packet.`in`
 import core.cache.crypto.ISAACCipher
 import core.cache.crypto.ISAACPair
 import core.cache.misc.buffer.ByteBufferUtils
+import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.PlayerDetails
 import core.game.node.entity.player.info.UIDInfo
 import core.game.node.entity.player.info.login.LoginType
@@ -10,11 +11,14 @@ import core.net.Constants
 import core.net.IoSession
 import core.net.amsc.WorldCommunicator
 import core.tools.StringUtils
+import proto.management.PlayerStatusUpdate
 import rs09.ServerConstants
 import rs09.auth.AuthResponse
 import rs09.game.node.entity.player.info.login.LoginParser
 import rs09.game.system.SystemLogger
+import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
+import rs09.worker.ManagementEvents
 import java.math.BigInteger
 import java.nio.BufferUnderflowException
 import java.nio.ByteBuffer
@@ -109,6 +113,15 @@ object Login {
             Repository.LOGGED_IN_PLAYERS.add(details.username)
         details.session = session
         details.info.translate(UIDInfo(details.ipAddress, "DEPRECATED", "DEPRECATED", "DEPRECATED"))
-        WorldCommunicator.register(LoginParser(details, LoginType.fromType(opcode)))
+        LoginParser(details, LoginType.fromType(opcode)).initialize(Player(details), opcode == RECONNECT_LOGIN_OP)
+        sendMSEvents(details)
+    }
+
+    private fun sendMSEvents(details: PlayerDetails) {
+        var event = PlayerStatusUpdate.newBuilder()
+        event.username = details.username
+        event.world = GameWorld.settings!!.worldId
+        event.notifyFriendsOnly = false
+        ManagementEvents.publish(event.build())
     }
 }
