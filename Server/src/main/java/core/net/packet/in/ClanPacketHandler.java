@@ -4,12 +4,14 @@ import core.game.node.entity.player.Player;
 import core.game.system.communication.ClanRank;
 import core.game.system.communication.ClanRepository;
 import core.game.system.communication.CommunicationInfo;
+import proto.management.JoinClanRequest;
 import rs09.game.world.repository.Repository;
 import core.net.amsc.MSPacketRepository;
 import core.net.amsc.WorldCommunicator;
 import core.net.packet.IncomingPacket;
 import core.net.packet.IoBuffer;
 import core.tools.StringUtils;
+import rs09.worker.ManagementEvents;
 
 /**
  * Handles incoming clan packets.
@@ -27,7 +29,10 @@ public class ClanPacketHandler implements IncomingPacket {
 				player.getPacketDispatch().sendMessage("Attempting to join channel...:clan:");
 			}
 			if (WorldCommunicator.isEnabled()) {
-				MSPacketRepository.sendJoinClan(player, name);
+				JoinClanRequest.Builder builder = JoinClanRequest.newBuilder();
+				builder.setClanName(name);
+				builder.setUsername(player.getName());
+				ManagementEvents.publish(builder.build());
 				return;
 			}
 			if (player.getCommunication().getClan() != null) {

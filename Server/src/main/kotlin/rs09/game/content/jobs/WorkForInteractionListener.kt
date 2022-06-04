@@ -132,6 +132,7 @@ class WorkForInteractionListener : InteractionListener, LoginListener {
             if(entity !is Player) return
 
             val job = getAttribute(entity, "jobs:id", -1)
+            if (job !in 0 until SlayingJob.values().size) return
             val ids = SlayingJob.values()[job].ids
 
             if(event.npc.id in ids){

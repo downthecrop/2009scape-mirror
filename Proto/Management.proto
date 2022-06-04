@@ -61,3 +61,38 @@ message BlockedUpdate {
   required string username = 2;
   required string friend = 3;
 }
+
+message RequestClanInfo {
+  required int32 world = 1;
+  required string clanOwner = 2;
+}
+
+message SendClanInfo {
+  message ClanMember {
+    required string username = 1;
+    required int32 world = 2;
+  }
+
+  required string clanOwner = 1;
+  required bool hasInfo = 2;
+  optional string clanName = 3;
+  optional int32 joinRequirement = 4;
+  optional int32 kickRequirement = 5;
+  optional int32 messageRequirement = 6;
+  optional int32 lootRequirement = 7;
+  repeated ClanMember members = 8;
+}
+
+message JoinClanRequest {
+  required string username = 1;
+  required string clanName = 2;
+}
+
+message LeaveClanRequest {
+  required string username = 1;
+  required string clanName = 2;
+}
+
+message ClanSettingsUpdate {
+
+}

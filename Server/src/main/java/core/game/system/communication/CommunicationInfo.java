@@ -644,9 +644,21 @@ public final class CommunicationInfo {
 		currentClan = accountInfo.getCurrentClan();
 
 		String clanReqs = accountInfo.getClanReqs();
+		ClanRank[] reqs = parseClanRequirements(clanReqs);
+		joinRequirement = reqs[0];
+		messageRequirement = reqs[1];
+		kickRequirement = reqs[2];
+		lootRequirement = reqs[3];
+
+		String contacts = accountInfo.getContacts();
+		this.contacts = parseContacts(contacts);
+	}
+
+	public static ClanRank[] parseClanRequirements(String clanReqs) {
+		ClanRank[] requirements = new ClanRank[4];
 		String[] tokens = clanReqs.split(",");
-		ClanRank rank = null;
-		int ordinal = 0;
+		ClanRank rank;
+		int ordinal;
 		for (int i = 0; i < tokens.length; i++) {
 			ordinal = Integer.parseInt(tokens[i]);
 			if (ordinal < 0 || ordinal > ClanRank.values().length -1) {
@@ -655,25 +667,25 @@ public final class CommunicationInfo {
 			rank = ClanRank.values()[ordinal];
 			switch (i) {
 				case 0:
-					joinRequirement = rank;
+					requirements[0] = rank;
 					break;
 				case 1:
-					messageRequirement = rank;
+					requirements[1] = rank;
 					break;
 				case 2:
 					if (ordinal < 3 || ordinal > 8) {
+						requirements[2] = ClanRank.ADMINISTRATOR;
 						break;
 					}
-					kickRequirement = rank;
+					requirements[2] = rank;
 					break;
 				case 3:
-					lootRequirement = rank;
+					requirements[3] = rank;
 					break;
 			}
 		}
 
-		String contacts = accountInfo.getContacts();
-		this.contacts = parseContacts(contacts);
+		return requirements;
 	}
 
 	public static HashMap<String, Contact> parseContacts(String contacts) {
@@ -681,7 +693,7 @@ public final class CommunicationInfo {
 		String[] tokens;
 		if (!contacts.isEmpty()) {
 			String[] datas = contacts.split("~");
-			Contact contact = null;
+			Contact contact;
 			for (String d : datas) {
 				tokens = d.replace("{", "").replace("}", "").split(",");
 				if (tokens.length == 0) {
