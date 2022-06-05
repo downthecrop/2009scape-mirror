@@ -32,12 +32,28 @@ error()
     exit -1;
 }
 
+clean_ms()
+{
+    cd $MS_SRC
+
+    if [[ "$CLEANOPT" == *"m"* ]]; then
+	echo "Cleaning the management server."
+        sh mvnw clean || error "Failed to clean the MS."
+    fi
+}
+
+clean_gs()
+{
+    cd $GS_SRC;
+    if [[ "$CLEANOPT" == *"g"* ]]; then
+	echo "Cleaning the game server."
+        sh mvnw clean || error "Failed to clean the game server. Giving up."
+    fi
+}
+
 build_ms()
 {
     cd $MS_SRC
-    if [[ "$CLEANOPT" == *"m"* ]]; then
-        sh mvnw clean
-    fi
 
     sh mvnw package $SKIPTEST || \
 	error "Failed to build the management server. Giving up";
@@ -46,9 +62,6 @@ build_ms()
 build_gs()
 {
     cd $GS_SRC;
-    if [[ "$CLEANOPT" == *"g"* ]]; then
-        sh mvnw clean
-    fi
 
     sh mvnw package $SKIPTEST || \
 	error "Failed to build the game server. Giving up."
@@ -92,12 +105,22 @@ then
     error "Invalid cleaning option '$CLEANOPT'. Valid options are 'm', 'g', 'mg' or none."
 fi
 
-if [ $BUILD_MS -eq 0 ] && [ $BUILD_GS -eq 0 ]; then
-    error "Need to build at least one of the modules. See -h for details."
+if [ $BUILD_MS -eq 0 ] && [ $BUILD_GS -eq 0 ] && [[ $CLEANOPT == "" ]]; then
+    error "Need to build or clean at least one of the modules. See -h for details."
 fi
+
+# Conditionals inside the functions.
+clean_gs
+clean_ms
+# -----------
 
 if [ -d $_JAR_DIR ]; then
     rm -r $_JAR_DIR
+fi
+
+if [ $BUILD_MS -ne 1 ] && [ $BUILD_GS -ne 1 ]; then
+    echo "No build options specified. Stop."
+    exit 0
 fi
 
 mkdir -p $_JAR_DIR || error "Failed to create build directory.";

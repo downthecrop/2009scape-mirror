@@ -1,0 +1,123 @@
+#!/bin/bash
+SCRIPT_DIR=$(cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P)
+GS_SRC=$SCRIPT_DIR/Server
+
+FORCE_REBUILD=0
+REFRESH_BUILD=1
+
+# 0: parallel
+# 1: fancy tmux
+# 2: tests only
+RUN_MODE=0
+
+help()
+{
+    echo "Usage: $0 [-h] [-q] [-r] [-t] [-x]"
+    echo "  -h: Display this message."
+    echo "  -q: Don't perform the incremental build."
+    echo "  -r: Force clean rebuild."
+    echo "  -t: Only run tests, not the JARs."
+    echo "  -x: Run in a fancy tmux session."
+}
+
+error()
+{
+    echo $1;
+    exit -1;
+}
+
+rebuild_project()
+{
+    $SCRIPT_DIR/build -qmgcmg
+}
+
+refresh_project()
+{
+    $SCRIPT_DIR/build -qmg
+}
+
+verify_binaries_exist()
+{
+    if [ ! -f $SCRIPT_DIR/builddir/ms.jar ]; then
+        error "Management server binary does not exist.";
+    fi
+
+    if [ ! -f $SCRIPT_DIR/build/server.jar ]; then
+        error "Game server binary does not exist.";
+    fi
+}
+
+run_server_parallel()
+{
+    which java || error "Java is not installed."
+
+    echo "Running in parallel. All logs redirected to proper files."
+
+    java -jar ms.jar > ms_stdout.log 2> ms_stderr.log \
+    & java -jar server.jar & wait
+}
+
+run_server_tmux()
+{
+    if ! [ -x "$(command -v tmux)" ]; then
+        error "tmux is not installed. Install tmux or don't use this option."
+    fi
+
+    tmux new-session "java -jar ms.jar" \; split-window -h "java -jar server.jar"
+}
+
+run_server_tests()
+{
+    cd $GS_SRC
+    sh mvnw test
+}
+
+while getopts "hqrtx" arg; do
+    case $arg in
+        h)
+            help
+            exit 0
+            ;;
+        q)
+            REFRESH_BUILD=0
+            ;;
+        r)
+            FORCE_REBUILD=1
+            ;;
+        t)
+            RUN_MODE=2
+            ;;
+        x)
+            RUN_MODE=1
+            ;;
+    esac
+done
+if [ ! -d $GS_SRC/target ]; then
+    rebuild_project || error "Failed to perform a clean build."
+else
+    if [ $FORCE_REBUILD -eq 1 ]; then
+        rebuild_project || error "Failed to perform a clean build."
+    else
+        if [ $REFRESH_BUILD -eq 1 ]; then
+            refresh_project || error "Failed to perform an incremental build."
+        fi
+    fi
+fi;
+
+cd $SCRIPT_DIR/builddir || error "Failed to navigate to the build directory."
+
+case $RUN_MODE in
+    0)
+        # The trap will allow the script to kill the background
+        # Java instances upon exiting.
+        trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
+        
+        run_server_parallel
+        ;;
+    1)
+        run_server_tmux
+        ;;
+    2)
+        run_server_tests
+        ;;
+esac
