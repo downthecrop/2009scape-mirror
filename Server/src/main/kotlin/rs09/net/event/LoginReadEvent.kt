@@ -17,27 +17,22 @@ import java.nio.ByteBuffer
  */
 class LoginReadEvent(session: IoSession?, buffer: ByteBuffer?) : IoReadEvent(session, buffer) {
     override fun read(session: IoSession, buffer: ByteBuffer) {
-        SystemLogger.logInfo("--A")
         val (response, info) = Login.decodeFromBuffer(buffer)
-        SystemLogger.logInfo("A")
         if(response != AuthResponse.Success || info == null) {
             session.write(response)
             return
         }
-        SystemLogger.logInfo("B")
         val (authResponse, accountInfo) = GameWorld.authenticator.checkLogin(info.username, info.password)
 
         if(authResponse != AuthResponse.Success || accountInfo == null) {
             session.write(authResponse)
             return
         }
-        SystemLogger.logInfo("C")
         val details = PlayerDetails(info.username)
         details.accountInfo = accountInfo
         details.communication.parse(accountInfo)
         session.clientInfo = ClientInfo(info.displayMode, info.windowMode, info.screenWidth, info.screenHeight)
         session.isaacPair = info.isaacPair
-        SystemLogger.logInfo("D")
         Login.proceedWith(session, details, info.opcode)
     }
 }

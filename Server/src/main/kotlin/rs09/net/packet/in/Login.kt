@@ -74,6 +74,11 @@ object Login {
             info.isaacPair = produceISAACPairFrom(decryptedBuffer)
             info.username = StringUtils.longToString(decryptedBuffer.long)
             info.password = ByteBufferUtils.getString(decryptedBuffer)
+
+            if (Repository.getPlayerByName(info.username) != null) {
+                return Pair(AuthResponse.AlreadyOnline, info)
+            }
+
             return Pair(AuthResponse.Success, info)
         } catch (e: Exception) {
             SystemLogger.logErr("Exception encountered during login packet parsing! See stack trace below.")

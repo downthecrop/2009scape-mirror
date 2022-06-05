@@ -316,7 +316,7 @@ object ManagementEvents {
 
         }
     }
-
+    
     private fun queueUntilClanInfo(clanName: String, message: Message) {
         val queue = waitingOnClanInfo.getOrPut(clanName) {LinkedList()}
         queue.offer(message)
