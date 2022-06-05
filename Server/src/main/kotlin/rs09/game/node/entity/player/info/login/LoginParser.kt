@@ -55,7 +55,6 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
             Repository.LOGGED_IN_PLAYERS.remove(player.username)
             Repository.lobbyPlayers.remove(player)
             Repository.playerNames.remove(player.name)
-            MSPacketRepository.sendPlayerRemoval(player.name)
             flag(AuthResponse.ErrorLoadingProfile)
         }
         //Repository.getPlayerNames().put(player.getName(), player);
@@ -73,7 +72,6 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
                         player.monitor.log(player.details.macAddress, PlayerMonitor.ADDRESS_LOG)
                     } else {
                         Repository.playerNames.remove(player.name)
-                        MSPacketRepository.sendPlayerRemoval(player.name)
                     }
                 } catch (t: Throwable) {
                     t.printStackTrace()
@@ -81,7 +79,6 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
                     Repository.LOGGED_IN_PLAYERS.remove(player.username)
                     Repository.lobbyPlayers.remove(player)
                     Repository.playerNames.remove(player.name)
-                    MSPacketRepository.sendPlayerRemoval(player.name)
                     flag(AuthResponse.ErrorLoadingProfile)
                 }
                 return true

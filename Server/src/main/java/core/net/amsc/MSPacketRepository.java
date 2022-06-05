@@ -29,21 +29,6 @@ import java.nio.ByteBuffer;
  * @author Emperor
  */
 public final class MSPacketRepository {
-
-	/**
-	 * Sends the player removal packet.
-	 *
-	 * @param username The name of the player to remove.
-	 */
-	public static void sendPlayerRemoval(String username) {
-		if (!WorldCommunicator.isEnabled()) {
-			return;
-		}
-		IoBuffer buffer = new IoBuffer(1, PacketHeader.BYTE);
-		buffer.putString(username);
-		WorldCommunicator.getSession().write(buffer);
-	}
-
 	/**
 	 * Sends a contact update.
 	 *

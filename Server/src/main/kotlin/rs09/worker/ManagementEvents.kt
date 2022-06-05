@@ -16,6 +16,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import proto.management.ClanMessage
+import proto.management.FriendUpdate
 import proto.management.JoinClanRequest
 import proto.management.LeaveClanRequest
 import proto.management.PlayerStatusUpdate
@@ -111,6 +112,13 @@ object ManagementEvents {
                     ContactContext(p, ContactContext.IGNORE_LIST_TYPE)
                 )
 
+            }
+
+            is FriendUpdate -> {
+                val remove = event.type == FriendUpdate.Type.REMOVE
+                val f = Repository.getPlayerByName(event.friend)
+                val p = Repository.getPlayerByName(event.username)
+                val world = if (f != null) GameWorld.settings!!.worldId else 0
             }
 
             is PrivateMessage -> {
