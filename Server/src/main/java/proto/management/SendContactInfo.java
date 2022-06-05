@@ -18,6 +18,7 @@ private static final long serialVersionUID = 0L;
   private SendContactInfo() {
     username_ = "";
     contacts_ = java.util.Collections.emptyList();
+    blocked_ = com.google.protobuf.LazyStringArrayList.EMPTY;
   }
 
   @java.lang.Override
@@ -66,6 +67,15 @@ private static final long serialVersionUID = 0L;
                 input.readMessage(proto.management.SendContactInfo.Contact.PARSER, extensionRegistry));
             break;
           }
+          case 26: {
+            com.google.protobuf.ByteString bs = input.readBytes();
+            if (!((mutable_bitField0_ & 0x00000004) != 0)) {
+              blocked_ = new com.google.protobuf.LazyStringArrayList();
+              mutable_bitField0_ |= 0x00000004;
+            }
+            blocked_.add(bs);
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -83,6 +93,9 @@ private static final long serialVersionUID = 0L;
     } finally {
       if (((mutable_bitField0_ & 0x00000002) != 0)) {
         contacts_ = java.util.Collections.unmodifiableList(contacts_);
+      }
+      if (((mutable_bitField0_ & 0x00000004) != 0)) {
+        blocked_ = blocked_.getUnmodifiableView();
       }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
@@ -902,6 +915,41 @@ private static final long serialVersionUID = 0L;
     return contacts_.get(index);
   }
 
+  public static final int BLOCKED_FIELD_NUMBER = 3;
+  private com.google.protobuf.LazyStringList blocked_;
+  /**
+   * <code>repeated string blocked = 3;</code>
+   * @return A list containing the blocked.
+   */
+  public com.google.protobuf.ProtocolStringList
+      getBlockedList() {
+    return blocked_;
+  }
+  /**
+   * <code>repeated string blocked = 3;</code>
+   * @return The count of blocked.
+   */
+  public int getBlockedCount() {
+    return blocked_.size();
+  }
+  /**
+   * <code>repeated string blocked = 3;</code>
+   * @param index The index of the element to return.
+   * @return The blocked at the given index.
+   */
+  public java.lang.String getBlocked(int index) {
+    return blocked_.get(index);
+  }
+  /**
+   * <code>repeated string blocked = 3;</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the blocked at the given index.
+   */
+  public com.google.protobuf.ByteString
+      getBlockedBytes(int index) {
+    return blocked_.getByteString(index);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -932,6 +980,9 @@ private static final long serialVersionUID = 0L;
     for (int i = 0; i < contacts_.size(); i++) {
       output.writeMessage(2, contacts_.get(i));
     }
+    for (int i = 0; i < blocked_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, blocked_.getRaw(i));
+    }
     unknownFields.writeTo(output);
   }
 
@@ -947,6 +998,14 @@ private static final long serialVersionUID = 0L;
     for (int i = 0; i < contacts_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(2, contacts_.get(i));
+    }
+    {
+      int dataSize = 0;
+      for (int i = 0; i < blocked_.size(); i++) {
+        dataSize += computeStringSizeNoTag(blocked_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getBlockedList().size();
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -970,6 +1029,8 @@ private static final long serialVersionUID = 0L;
     }
     if (!getContactsList()
         .equals(other.getContactsList())) return false;
+    if (!getBlockedList()
+        .equals(other.getBlockedList())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -988,6 +1049,10 @@ private static final long serialVersionUID = 0L;
     if (getContactsCount() > 0) {
       hash = (37 * hash) + CONTACTS_FIELD_NUMBER;
       hash = (53 * hash) + getContactsList().hashCode();
+    }
+    if (getBlockedCount() > 0) {
+      hash = (37 * hash) + BLOCKED_FIELD_NUMBER;
+      hash = (53 * hash) + getBlockedList().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
@@ -1131,6 +1196,8 @@ private static final long serialVersionUID = 0L;
       } else {
         contactsBuilder_.clear();
       }
+      blocked_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bitField0_ = (bitField0_ & ~0x00000004);
       return this;
     }
 
@@ -1172,6 +1239,11 @@ private static final long serialVersionUID = 0L;
       } else {
         result.contacts_ = contactsBuilder_.build();
       }
+      if (((bitField0_ & 0x00000004) != 0)) {
+        blocked_ = blocked_.getUnmodifiableView();
+        bitField0_ = (bitField0_ & ~0x00000004);
+      }
+      result.blocked_ = blocked_;
       result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
@@ -1251,6 +1323,16 @@ private static final long serialVersionUID = 0L;
             contactsBuilder_.addAllMessages(other.contacts_);
           }
         }
+      }
+      if (!other.blocked_.isEmpty()) {
+        if (blocked_.isEmpty()) {
+          blocked_ = other.blocked_;
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          ensureBlockedIsMutable();
+          blocked_.addAll(other.blocked_);
+        }
+        onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -1612,6 +1694,115 @@ private static final long serialVersionUID = 0L;
         contacts_ = null;
       }
       return contactsBuilder_;
+    }
+
+    private com.google.protobuf.LazyStringList blocked_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    private void ensureBlockedIsMutable() {
+      if (!((bitField0_ & 0x00000004) != 0)) {
+        blocked_ = new com.google.protobuf.LazyStringArrayList(blocked_);
+        bitField0_ |= 0x00000004;
+       }
+    }
+    /**
+     * <code>repeated string blocked = 3;</code>
+     * @return A list containing the blocked.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getBlockedList() {
+      return blocked_.getUnmodifiableView();
+    }
+    /**
+     * <code>repeated string blocked = 3;</code>
+     * @return The count of blocked.
+     */
+    public int getBlockedCount() {
+      return blocked_.size();
+    }
+    /**
+     * <code>repeated string blocked = 3;</code>
+     * @param index The index of the element to return.
+     * @return The blocked at the given index.
+     */
+    public java.lang.String getBlocked(int index) {
+      return blocked_.get(index);
+    }
+    /**
+     * <code>repeated string blocked = 3;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the blocked at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getBlockedBytes(int index) {
+      return blocked_.getByteString(index);
+    }
+    /**
+     * <code>repeated string blocked = 3;</code>
+     * @param index The index to set the value at.
+     * @param value The blocked to set.
+     * @return This builder for chaining.
+     */
+    public Builder setBlocked(
+        int index, java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureBlockedIsMutable();
+      blocked_.set(index, value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string blocked = 3;</code>
+     * @param value The blocked to add.
+     * @return This builder for chaining.
+     */
+    public Builder addBlocked(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureBlockedIsMutable();
+      blocked_.add(value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string blocked = 3;</code>
+     * @param values The blocked to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllBlocked(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureBlockedIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, blocked_);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string blocked = 3;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearBlocked() {
+      blocked_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bitField0_ = (bitField0_ & ~0x00000004);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string blocked = 3;</code>
+     * @param value The bytes of the blocked to add.
+     * @return This builder for chaining.
+     */
+    public Builder addBlockedBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureBlockedIsMutable();
+      blocked_.add(value);
+      onChanged();
+      return this;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

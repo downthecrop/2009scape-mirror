@@ -38,6 +38,7 @@ message SendContactInfo {
 
   required string username = 1;
   repeated Contact contacts = 2;
+  repeated string blocked = 3;
 }
 
 message FriendUpdate {
@@ -71,6 +72,7 @@ message SendClanInfo {
   message ClanMember {
     required string username = 1;
     required int32 world = 2;
+    required int32 rank = 3;
   }
 
   required string clanOwner = 1;

@@ -25,29 +25,13 @@ public class ClanPacketHandler implements IncomingPacket {
 		case 104:
 			long nameLong = buffer.getLong();
 			String name = StringUtils.longToString(nameLong);
-			if (nameLong != 0l) {
+			if (nameLong != 0L) {
 				player.getPacketDispatch().sendMessage("Attempting to join channel...:clan:");
 			}
-			if (WorldCommunicator.isEnabled()) {
-				JoinClanRequest.Builder builder = JoinClanRequest.newBuilder();
-				builder.setClanName(name);
-				builder.setUsername(player.getName());
-				ManagementEvents.publish(builder.build());
-				return;
-			}
-			if (player.getCommunication().getClan() != null) {
-				player.getCommunication().getClan().leave(player, true);
-				player.getCommunication().setClan(null);
-				return;
-			}
-			ClanRepository clan = ClanRepository.get(name);
-			if (clan == null || clan.getName().equals("Chat disabled")) {
-				player.getPacketDispatch().sendMessage("The channel you tried to join does not exist.");
-				break;
-			}
-			if (clan.enter(player)) {
-				player.getCommunication().setClan(clan);
-			}
+			JoinClanRequest.Builder builder = JoinClanRequest.newBuilder();
+			builder.setClanName(name);
+			builder.setUsername(player.getName());
+			ManagementEvents.publish(builder.build());
 			break;
 		case 188:
 			int rank = buffer.getA();
@@ -64,7 +48,7 @@ public class ClanPacketHandler implements IncomingPacket {
 				MSPacketRepository.sendClanKick(player.getName(), name);
 				break;
 			}
-			clan = player.getCommunication().getClan();
+			ClanRepository clan = player.getCommunication().getClan();
 			Player target = Repository.getPlayerByName(name);
 			if (clan == null || target == null) {
 				break;

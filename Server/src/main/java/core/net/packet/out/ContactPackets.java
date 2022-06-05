@@ -21,7 +21,7 @@ public final class ContactPackets implements OutgoingPacket<ContactContext> {
 		Player player = context.getPlayer();
 		switch (context.getType()) {
 		case ContactContext.UPDATE_STATE_TYPE:
-			buffer = new IoBuffer(197).put(WorldCommunicator.getState().value());
+			buffer = new IoBuffer(197).put(2); //always put the AVAILABLE state.
 			break;
 		case ContactContext.IGNORE_LIST_TYPE:
 			buffer = new IoBuffer(126, PacketHeader.SHORT);

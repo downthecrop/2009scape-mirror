@@ -242,30 +242,12 @@ public final class CommunicationInfo {
 	 * @param message The message to send.
 	 */
 	public static void sendMessage(Player player, String target, String message) {
-		if (WorldCommunicator.isEnabled()) {
-			PrivateMessage.Builder builder = PrivateMessage.newBuilder();
-			builder.setSender(player.getName());
-			builder.setRank(player.getDetails().getRights().ordinal());
-			builder.setMessage(message);
-			builder.setReceiver(target);
-			ManagementEvents.publish(builder.build());
-			return;
-		}
-		if (!player.getDetails().getCommunication().contacts.containsKey(target)) {
-			return;
-		}
-		Player p = Repository.getPlayerByName(target);
-		if (p == null || !p.isActive() || !showActive(p, player)) {
-			player.getPacketDispatch().sendMessage("That player is currently offline.");
-			return;
-		}
-		if (!GameWorld.getSettings().isDevMode()) {
-			StringBuilder sb = new StringBuilder(message);
-			sb.append(" => ").append(target);
-			player.getMonitor().log(sb.toString(), PlayerMonitor.PRIVATE_CHAT_LOG);
-		}
-		PacketRepository.send(CommunicationMessage.class, new MessageContext(player, p, MessageContext.SEND_MESSAGE, message));
-		PacketRepository.send(CommunicationMessage.class, new MessageContext(p, player, MessageContext.RECIEVE_MESSAGE, message));
+		PrivateMessage.Builder builder = PrivateMessage.newBuilder();
+		builder.setSender(player.getName());
+		builder.setRank(player.getDetails().getRights().ordinal());
+		builder.setMessage(message);
+		builder.setReceiver(target);
+		ManagementEvents.publish(builder.build());
 	}
 
 	/**
@@ -648,5 +630,41 @@ public final class CommunicationInfo {
 		}
 
 		return theseContacts;
+	}
+
+	public String getContactString() {
+		StringBuilder sb = new StringBuilder();
+
+		int index = 0;
+		for (Contact contact : contacts.values()) {
+			sb.append("{");
+			sb.append(contact.getUsername());
+			sb.append(",");
+			sb.append(contact.getRank().ordinal());
+			sb.append("}");
+			if (index++ < contacts.size() - 1) sb.append("~");
+		}
+
+		return sb.toString();
+	}
+
+	public String getBlockedString() {
+		StringBuilder sb = new StringBuilder();
+
+		int index = 0;
+		for (String block : blocked) {
+			sb.append(block);
+			if (index++ < blocked.size() - 1) sb.append(",");
+		}
+
+		return sb.toString();
+	}
+
+	public String getClanReqString() {
+		return
+				joinRequirement.ordinal()
+				+ "," + messageRequirement.ordinal()
+				+ "," + kickRequirement.ordinal()
+				+ "," + lootRequirement.ordinal();
 	}
 }

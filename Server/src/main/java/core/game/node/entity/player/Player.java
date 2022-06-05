@@ -396,10 +396,12 @@ public class Player extends Entity {
 		statusBuilder.setNotifyFriendsOnly(false);
 		ManagementEvents.publish(statusBuilder.build());
 
-		LeaveClanRequest.Builder clanBuilder = LeaveClanRequest.newBuilder();
-		clanBuilder.setUsername(getName());
-		clanBuilder.setClanName(getCommunication().getClan().getOwner().toLowerCase().replace(" ", "_"));
-		ManagementEvents.publish(clanBuilder.build());
+		if (getCommunication().getClan() != null) {
+			LeaveClanRequest.Builder clanBuilder = LeaveClanRequest.newBuilder();
+			clanBuilder.setUsername(getName());
+			clanBuilder.setClanName(getCommunication().getClan().getOwner().toLowerCase().replace(" ", "_"));
+			ManagementEvents.publish(clanBuilder.build());
+		}
 	}
 
 	public void toggleWardrobe(boolean intoWardrobe){

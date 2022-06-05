@@ -114,4 +114,8 @@ object SystemLogger {
     {
         SystemLogger.logInfo("[SHUTDOWN] $message")
     }
+
+    fun logMS(s: String) {
+        if(s.isNotBlank()) t.println("${getTime()}: ${TextColors.gray("[  MS] $s")}")
+    }
 }

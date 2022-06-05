@@ -78,7 +78,7 @@ object Server {
             SystemLogger.logErr("Port " + (43594 + GameWorld.settings?.worldId!!) + " is already in use!")
             throw e
         }
-        WorldCommunicator.connect()
+        //WorldCommunicator.connect()
         SystemLogger.logInfo(GameWorld.settings?.name + " flags " + GameWorld.settings?.toString())
         SystemLogger.logInfo(GameWorld.settings?.name + " started in " + t.duration(false, "") + " milliseconds.")
         val scanner = Scanner(System.`in`)

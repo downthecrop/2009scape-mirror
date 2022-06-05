@@ -47,4 +47,29 @@ public interface SendContactInfoOrBuilder extends
    */
   proto.management.SendContactInfo.ContactOrBuilder getContactsOrBuilder(
       int index);
+
+  /**
+   * <code>repeated string blocked = 3;</code>
+   * @return A list containing the blocked.
+   */
+  java.util.List<java.lang.String>
+      getBlockedList();
+  /**
+   * <code>repeated string blocked = 3;</code>
+   * @return The count of blocked.
+   */
+  int getBlockedCount();
+  /**
+   * <code>repeated string blocked = 3;</code>
+   * @param index The index of the element to return.
+   * @return The blocked at the given index.
+   */
+  java.lang.String getBlocked(int index);
+  /**
+   * <code>repeated string blocked = 3;</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the blocked at the given index.
+   */
+  com.google.protobuf.ByteString
+      getBlockedBytes(int index);
 }

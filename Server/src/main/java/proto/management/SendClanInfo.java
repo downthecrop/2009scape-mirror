@@ -164,6 +164,17 @@ private static final long serialVersionUID = 0L;
      * @return The world.
      */
     int getWorld();
+
+    /**
+     * <code>required int32 rank = 3;</code>
+     * @return Whether the rank field is set.
+     */
+    boolean hasRank();
+    /**
+     * <code>required int32 rank = 3;</code>
+     * @return The rank.
+     */
+    int getRank();
   }
   /**
    * Protobuf type {@code management.SendClanInfo.ClanMember}
@@ -221,6 +232,11 @@ private static final long serialVersionUID = 0L;
             case 16: {
               bitField0_ |= 0x00000002;
               world_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              rank_ = input.readInt32();
               break;
             }
             default: {
@@ -323,6 +339,25 @@ private static final long serialVersionUID = 0L;
       return world_;
     }
 
+    public static final int RANK_FIELD_NUMBER = 3;
+    private int rank_;
+    /**
+     * <code>required int32 rank = 3;</code>
+     * @return Whether the rank field is set.
+     */
+    @java.lang.Override
+    public boolean hasRank() {
+      return ((bitField0_ & 0x00000004) != 0);
+    }
+    /**
+     * <code>required int32 rank = 3;</code>
+     * @return The rank.
+     */
+    @java.lang.Override
+    public int getRank() {
+      return rank_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -335,6 +370,10 @@ private static final long serialVersionUID = 0L;
         return false;
       }
       if (!hasWorld()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasRank()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -351,6 +390,9 @@ private static final long serialVersionUID = 0L;
       if (((bitField0_ & 0x00000002) != 0)) {
         output.writeInt32(2, world_);
       }
+      if (((bitField0_ & 0x00000004) != 0)) {
+        output.writeInt32(3, rank_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -366,6 +408,10 @@ private static final long serialVersionUID = 0L;
       if (((bitField0_ & 0x00000002) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, world_);
+      }
+      if (((bitField0_ & 0x00000004) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, rank_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -392,6 +438,11 @@ private static final long serialVersionUID = 0L;
         if (getWorld()
             != other.getWorld()) return false;
       }
+      if (hasRank() != other.hasRank()) return false;
+      if (hasRank()) {
+        if (getRank()
+            != other.getRank()) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -410,6 +461,10 @@ private static final long serialVersionUID = 0L;
       if (hasWorld()) {
         hash = (37 * hash) + WORLD_FIELD_NUMBER;
         hash = (53 * hash) + getWorld();
+      }
+      if (hasRank()) {
+        hash = (37 * hash) + RANK_FIELD_NUMBER;
+        hash = (53 * hash) + getRank();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -548,6 +603,8 @@ private static final long serialVersionUID = 0L;
         bitField0_ = (bitField0_ & ~0x00000001);
         world_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
+        rank_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -583,6 +640,10 @@ private static final long serialVersionUID = 0L;
         if (((from_bitField0_ & 0x00000002) != 0)) {
           result.world_ = world_;
           to_bitField0_ |= 0x00000002;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.rank_ = rank_;
+          to_bitField0_ |= 0x00000004;
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -641,6 +702,9 @@ private static final long serialVersionUID = 0L;
         if (other.hasWorld()) {
           setWorld(other.getWorld());
         }
+        if (other.hasRank()) {
+          setRank(other.getRank());
+        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -652,6 +716,9 @@ private static final long serialVersionUID = 0L;
           return false;
         }
         if (!hasWorld()) {
+          return false;
+        }
+        if (!hasRank()) {
           return false;
         }
         return true;
@@ -796,6 +863,45 @@ private static final long serialVersionUID = 0L;
       public Builder clearWorld() {
         bitField0_ = (bitField0_ & ~0x00000002);
         world_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int rank_ ;
+      /**
+       * <code>required int32 rank = 3;</code>
+       * @return Whether the rank field is set.
+       */
+      @java.lang.Override
+      public boolean hasRank() {
+        return ((bitField0_ & 0x00000004) != 0);
+      }
+      /**
+       * <code>required int32 rank = 3;</code>
+       * @return The rank.
+       */
+      @java.lang.Override
+      public int getRank() {
+        return rank_;
+      }
+      /**
+       * <code>required int32 rank = 3;</code>
+       * @param value The rank to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRank(int value) {
+        bitField0_ |= 0x00000004;
+        rank_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 rank = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearRank() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        rank_ = 0;
         onChanged();
         return this;
       }

@@ -100,30 +100,30 @@ public final class ManagementProtos {
       "\t\022\017\n\007message\030\003 \002(\t\"Q\n\016PrivateMessage\022\016\n\006" +
       "sender\030\001 \002(\t\022\020\n\010receiver\030\002 \002(\t\022\017\n\007messag" +
       "e\030\003 \002(\t\022\014\n\004rank\030\004 \002(\005\"5\n\022RequestContactI" +
-      "nfo\022\020\n\010username\030\001 \002(\t\022\r\n\005world\030\002 \002(\005\"\206\001\n" +
+      "nfo\022\020\n\010username\030\001 \002(\t\022\r\n\005world\030\002 \002(\005\"\227\001\n" +
       "\017SendContactInfo\022\020\n\010username\030\001 \002(\t\0225\n\010co" +
       "ntacts\030\002 \003(\0132#.management.SendContactInf" +
-      "o.Contact\032*\n\007Contact\022\020\n\010username\030\001 \002(\t\022\r" +
-      "\n\005world\030\002 \001(\005\"z\n\014FriendUpdate\022+\n\004type\030\001 " +
-      "\002(\0162\035.management.FriendUpdate.Type\022\020\n\010us" +
-      "ername\030\002 \002(\t\022\016\n\006friend\030\003 \002(\t\"\033\n\004Type\022\007\n\003" +
-      "ADD\020\000\022\n\n\006REMOVE\020\001\"|\n\rBlockedUpdate\022,\n\004ty" +
-      "pe\030\001 \002(\0162\036.management.BlockedUpdate.Type" +
-      "\022\020\n\010username\030\002 \002(\t\022\016\n\006friend\030\003 \002(\t\"\033\n\004Ty" +
-      "pe\022\007\n\003ADD\020\000\022\n\n\006REMOVE\020\001\"3\n\017RequestClanIn" +
-      "fo\022\r\n\005world\030\001 \002(\005\022\021\n\tclanOwner\030\002 \002(\t\"\220\002\n" +
-      "\014SendClanInfo\022\021\n\tclanOwner\030\001 \002(\t\022\017\n\007hasI" +
-      "nfo\030\002 \002(\010\022\020\n\010clanName\030\003 \001(\t\022\027\n\017joinRequi" +
-      "rement\030\004 \001(\005\022\027\n\017kickRequirement\030\005 \001(\005\022\032\n" +
-      "\022messageRequirement\030\006 \001(\005\022\027\n\017lootRequire" +
-      "ment\030\007 \001(\005\0224\n\007members\030\010 \003(\0132#.management" +
-      ".SendClanInfo.ClanMember\032-\n\nClanMember\022\020" +
-      "\n\010username\030\001 \002(\t\022\r\n\005world\030\002 \002(\005\"5\n\017JoinC" +
-      "lanRequest\022\020\n\010username\030\001 \002(\t\022\020\n\010clanName" +
-      "\030\002 \002(\t\"6\n\020LeaveClanRequest\022\020\n\010username\030\001" +
-      " \002(\t\022\020\n\010clanName\030\002 \002(\t\"\024\n\022ClanSettingsUp" +
-      "dateB&\n\020proto.managementB\020ManagementProt" +
-      "osP\001"
+      "o.Contact\022\017\n\007blocked\030\003 \003(\t\032*\n\007Contact\022\020\n" +
+      "\010username\030\001 \002(\t\022\r\n\005world\030\002 \001(\005\"z\n\014Friend" +
+      "Update\022+\n\004type\030\001 \002(\0162\035.management.Friend" +
+      "Update.Type\022\020\n\010username\030\002 \002(\t\022\016\n\006friend\030" +
+      "\003 \002(\t\"\033\n\004Type\022\007\n\003ADD\020\000\022\n\n\006REMOVE\020\001\"|\n\rBl" +
+      "ockedUpdate\022,\n\004type\030\001 \002(\0162\036.management.B" +
+      "lockedUpdate.Type\022\020\n\010username\030\002 \002(\t\022\016\n\006f" +
+      "riend\030\003 \002(\t\"\033\n\004Type\022\007\n\003ADD\020\000\022\n\n\006REMOVE\020\001" +
+      "\"3\n\017RequestClanInfo\022\r\n\005world\030\001 \002(\005\022\021\n\tcl" +
+      "anOwner\030\002 \002(\t\"\236\002\n\014SendClanInfo\022\021\n\tclanOw" +
+      "ner\030\001 \002(\t\022\017\n\007hasInfo\030\002 \002(\010\022\020\n\010clanName\030\003" +
+      " \001(\t\022\027\n\017joinRequirement\030\004 \001(\005\022\027\n\017kickReq" +
+      "uirement\030\005 \001(\005\022\032\n\022messageRequirement\030\006 \001" +
+      "(\005\022\027\n\017lootRequirement\030\007 \001(\005\0224\n\007members\030\010" +
+      " \003(\0132#.management.SendClanInfo.ClanMembe" +
+      "r\032;\n\nClanMember\022\020\n\010username\030\001 \002(\t\022\r\n\005wor" +
+      "ld\030\002 \002(\005\022\014\n\004rank\030\003 \002(\005\"5\n\017JoinClanReques" +
+      "t\022\020\n\010username\030\001 \002(\t\022\020\n\010clanName\030\002 \002(\t\"6\n" +
+      "\020LeaveClanRequest\022\020\n\010username\030\001 \002(\t\022\020\n\010c" +
+      "lanName\030\002 \002(\t\"\024\n\022ClanSettingsUpdateB&\n\020p" +
+      "roto.managementB\020ManagementProtosP\001"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -158,7 +158,7 @@ public final class ManagementProtos {
     internal_static_management_SendContactInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_management_SendContactInfo_descriptor,
-        new java.lang.String[] { "Username", "Contacts", });
+        new java.lang.String[] { "Username", "Contacts", "Blocked", });
     internal_static_management_SendContactInfo_Contact_descriptor =
       internal_static_management_SendContactInfo_descriptor.getNestedTypes().get(0);
     internal_static_management_SendContactInfo_Contact_fieldAccessorTable = new
@@ -194,7 +194,7 @@ public final class ManagementProtos {
     internal_static_management_SendClanInfo_ClanMember_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_management_SendClanInfo_ClanMember_descriptor,
-        new java.lang.String[] { "Username", "World", });
+        new java.lang.String[] { "Username", "World", "Rank", });
     internal_static_management_JoinClanRequest_descriptor =
       getDescriptor().getMessageTypes().get(9);
     internal_static_management_JoinClanRequest_fieldAccessorTable = new

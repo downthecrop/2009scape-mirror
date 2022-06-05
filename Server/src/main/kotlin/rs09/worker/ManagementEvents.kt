@@ -2,6 +2,7 @@ package rs09.worker
 
 import api.sendMessage
 import com.google.protobuf.Message
+import core.game.node.entity.player.Player
 import core.game.system.communication.ClanEntry
 import core.game.system.communication.ClanRank
 import core.game.system.communication.ClanRepository
@@ -34,6 +35,7 @@ import java.util.Deque
 import java.util.LinkedList
 import java.util.concurrent.BlockingDeque
 import java.util.concurrent.LinkedBlockingDeque
+import kotlin.reflect.jvm.internal.impl.descriptors.Visibilities.Private
 
 /**
  * Processes management-related events e.g clan messages, etc.
@@ -48,6 +50,22 @@ object ManagementEvents {
         while (isRunning) {
             val event = withContext(Dispatchers.IO) { eventQueue.take() }
             handleEvent(event)
+            handleLoggingFor(event)
+        }
+    }
+
+    private fun handleLoggingFor(event: Message) {
+        when (event) {
+            is PlayerStatusUpdate -> SystemLogger.logMS("${event.username} -(WLD)> ${event.world}")
+            is RequestContactInfo -> SystemLogger.logMS("${event.username} -> RQ CONTACT INFO")
+            is SendContactInfo -> SystemLogger.logMS("${event.username} <- SND CONTACT INFO")
+            is PrivateMessage -> SystemLogger.logMS("[PM] ${event.sender}->${event.receiver}: ${event.message}")
+            is ClanMessage -> SystemLogger.logMS("[CM:${event.clanName}] ${event.sender}: ${event.message}")
+            is JoinClanRequest -> SystemLogger.logMS("${event.username} +CL ${event.clanName}")
+            is LeaveClanRequest -> SystemLogger.logMS("${event.username} -CL ${event.clanName}")
+            is RequestClanInfo -> SystemLogger.logMS("REQUEST CLAN INFO: ${event.clanOwner}")
+            is SendClanInfo -> SystemLogger.logMS("RECEIVE CLAN INFO: ${event.clanOwner}->${event.clanName}")
+
         }
     }
 
@@ -86,6 +104,9 @@ object ManagementEvents {
                     response.addContacts(cbuild)
                 }
 
+                val blocked = info.blocked.split(",")
+                for (user in blocked) response.addBlocked(user)
+
                 publish(response.build())
             }
 
@@ -97,6 +118,9 @@ object ManagementEvents {
                     ContactContext(p, ContactContext.UPDATE_STATE_TYPE)
                 )
 
+                p.communication.contacts.clear()
+                p.communication.blocked.clear()
+
                 for (contact in event.contactsList) {
                     val c = core.game.system.communication.Contact(contact.username)
                     p.communication.contacts[contact.username] = c
@@ -107,18 +131,15 @@ object ManagementEvents {
                     )
                 }
 
+                for (blocked in event.blockedList) {
+                    p.communication.blocked.add(blocked)
+                }
+
                 PacketRepository.send(
                     ContactPackets::class.java,
                     ContactContext(p, ContactContext.IGNORE_LIST_TYPE)
                 )
 
-            }
-
-            is FriendUpdate -> {
-                val remove = event.type == FriendUpdate.Type.REMOVE
-                val f = Repository.getPlayerByName(event.friend)
-                val p = Repository.getPlayerByName(event.username)
-                val world = if (f != null) GameWorld.settings!!.worldId else 0
             }
 
             is PrivateMessage -> {
@@ -191,6 +212,7 @@ object ManagementEvents {
                         val cmBuilder = ClanMember.newBuilder()
                         cmBuilder.username = member.name
                         cmBuilder.world = member.worldId
+                        cmBuilder.rank = (clan.ranks[member.name] ?: ClanRank.NONE).ordinal
                         response.addMembers(cmBuilder)
                     }
                 }
@@ -209,7 +231,7 @@ object ManagementEvents {
 
                     for (member in event.membersList) {
                         val entry = ClanEntry(member.username, member.world)
-                        clan.ranks[member.username] = ClanRank.NONE //TODO: SEND AND SET ACTUAL RANKS
+                        clan.ranks[member.username] = ClanRank.values()[member.rank]
                         if (member.world == GameWorld.settings!!.worldId) {
                             val p = Repository.getPlayerByName(member.username)
                             entry.player = p
@@ -262,7 +284,7 @@ object ManagementEvents {
         val queue = waitingOnClanInfo.getOrPut(clanName) {LinkedList()}
         queue.offer(message)
 
-        if (hasRequestedClanInfo[clanName] == false) {
+        if (hasRequestedClanInfo[clanName] == null) {
             val request = RequestClanInfo.newBuilder()
             request.clanOwner = clanName
             request.world = GameWorld.settings!!.worldId
@@ -272,6 +294,6 @@ object ManagementEvents {
     }
 
     private fun shouldWaitForClanInfo(clanName: String): Boolean {
-        return ClanRepository.get(clanName) == null && hasRequestedClanInfo[clanName] == false
+        return ClanRepository.get(clanName) == null && hasRequestedClanInfo[clanName] == null
     }
 }
