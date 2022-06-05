@@ -453,7 +453,7 @@ public final class CommunicationInfo {
 	 * @return The currentClan.
 	 */
 	public String getCurrentClan() {
-		return currentClan;
+		return currentClan == null ? "" : currentClan;
 	}
 
 	/**

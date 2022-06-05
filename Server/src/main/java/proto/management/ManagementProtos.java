@@ -80,6 +80,16 @@ public final class ManagementProtos {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_management_LeaveClanRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_management_ClanJoinNotification_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_management_ClanJoinNotification_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_management_ClanLeaveNotification_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_management_ClanLeaveNotification_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_management_ClanSettingsUpdate_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -122,8 +132,12 @@ public final class ManagementProtos {
       "ld\030\002 \002(\005\022\014\n\004rank\030\003 \002(\005\"5\n\017JoinClanReques" +
       "t\022\020\n\010username\030\001 \002(\t\022\020\n\010clanName\030\002 \002(\t\"6\n" +
       "\020LeaveClanRequest\022\020\n\010username\030\001 \002(\t\022\020\n\010c" +
-      "lanName\030\002 \002(\t\"\024\n\022ClanSettingsUpdateB&\n\020p" +
-      "roto.managementB\020ManagementProtosP\001"
+      "lanName\030\002 \002(\t\"I\n\024ClanJoinNotification\022\020\n" +
+      "\010username\030\001 \002(\t\022\020\n\010clanName\030\002 \002(\t\022\r\n\005wor" +
+      "ld\030\003 \002(\005\"J\n\025ClanLeaveNotification\022\020\n\010use" +
+      "rname\030\001 \002(\t\022\020\n\010clanName\030\002 \002(\t\022\r\n\005world\030\003" +
+      " \002(\005\"\024\n\022ClanSettingsUpdateB&\n\020proto.mana" +
+      "gementB\020ManagementProtosP\001"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -207,8 +221,20 @@ public final class ManagementProtos {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_management_LeaveClanRequest_descriptor,
         new java.lang.String[] { "Username", "ClanName", });
-    internal_static_management_ClanSettingsUpdate_descriptor =
+    internal_static_management_ClanJoinNotification_descriptor =
       getDescriptor().getMessageTypes().get(11);
+    internal_static_management_ClanJoinNotification_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_management_ClanJoinNotification_descriptor,
+        new java.lang.String[] { "Username", "ClanName", "World", });
+    internal_static_management_ClanLeaveNotification_descriptor =
+      getDescriptor().getMessageTypes().get(12);
+    internal_static_management_ClanLeaveNotification_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_management_ClanLeaveNotification_descriptor,
+        new java.lang.String[] { "Username", "ClanName", "World", });
+    internal_static_management_ClanSettingsUpdate_descriptor =
+      getDescriptor().getMessageTypes().get(13);
     internal_static_management_ClanSettingsUpdate_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_management_ClanSettingsUpdate_descriptor,

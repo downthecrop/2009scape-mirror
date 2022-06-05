@@ -23,6 +23,11 @@ public class ClanPacketHandler implements IncomingPacket {
 	public void decode(Player player, int opcode, IoBuffer buffer) {
 		switch (buffer.opcode()) {
 		case 104:
+			if (player.getCommunication().getClan() != null) {
+				player.getCommunication().getClan().leave(player, true);
+				player.getCommunication().setClan(null);
+				return;
+			}
 			long nameLong = buffer.getLong();
 			String name = StringUtils.longToString(nameLong);
 			if (nameLong != 0L) {

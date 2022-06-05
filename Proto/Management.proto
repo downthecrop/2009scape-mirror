@@ -95,6 +95,18 @@ message LeaveClanRequest {
   required string clanName = 2;
 }
 
+message ClanJoinNotification {
+  required string username = 1;
+  required string clanName = 2;
+  required int32 world = 3;
+}
+
+message ClanLeaveNotification {
+  required string username = 1;
+  required string clanName = 2;
+  required int32 world = 3;
+}
+
 message ClanSettingsUpdate {
 
 }

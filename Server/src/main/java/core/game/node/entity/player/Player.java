@@ -64,6 +64,7 @@ import core.tools.StringUtils;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import org.rs09.consts.Items;
+import proto.management.ClanLeaveNotification;
 import proto.management.LeaveClanRequest;
 import proto.management.PlayerStatusUpdate;
 import rs09.GlobalStats;
@@ -382,10 +383,10 @@ public class Player extends Entity {
 		interfaceManager.closeSingleTab();
 		super.clear();
 		getZoneMonitor().clear();
-		sendLogoutEvents();
 		HouseManager.leave(this);
 		UpdateSequence.getRenderablePlayers().remove(this);
 		details.save();
+		sendLogoutEvents();
 		Repository.getDisconnectionQueue().add(this);
 	}
 
@@ -397,10 +398,11 @@ public class Player extends Entity {
 		ManagementEvents.publish(statusBuilder.build());
 
 		if (getCommunication().getClan() != null) {
-			LeaveClanRequest.Builder clanBuilder = LeaveClanRequest.newBuilder();
-			clanBuilder.setUsername(getName());
-			clanBuilder.setClanName(getCommunication().getClan().getOwner().toLowerCase().replace(" ", "_"));
-			ManagementEvents.publish(clanBuilder.build());
+			ClanLeaveNotification.Builder event = ClanLeaveNotification.newBuilder();
+			event.setUsername(getName());
+			event.setWorld(GameWorld.getSettings().getWorldId());
+			event.setClanName(getCommunication().getClan().getOwner());
+			ManagementEvents.publish(event.build());
 		}
 	}
 

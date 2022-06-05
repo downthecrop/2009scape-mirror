@@ -16,6 +16,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import proto.management.ClanJoinNotification
+import proto.management.ClanLeaveNotification
 import proto.management.ClanMessage
 import proto.management.FriendUpdate
 import proto.management.JoinClanRequest
@@ -65,6 +67,8 @@ object ManagementEvents {
             is LeaveClanRequest -> SystemLogger.logMS("${event.username} -CL ${event.clanName}")
             is RequestClanInfo -> SystemLogger.logMS("REQUEST CLAN INFO: ${event.clanOwner}")
             is SendClanInfo -> SystemLogger.logMS("RECEIVE CLAN INFO: ${event.clanOwner}->${event.clanName}")
+            is ClanJoinNotification -> SystemLogger.logMS("${event.username} JOINED CLAN ${event.clanName}")
+            is ClanLeaveNotification -> SystemLogger.logMS("${event.username} LEFT CLAN ${event.clanName}")
         }
     }
 
@@ -178,6 +182,20 @@ object ManagementEvents {
                 }
             }
 
+            is ClanJoinNotification -> {
+                if (event.world == GameWorld.settings!!.worldId) return
+
+                if (shouldWaitForClanInfo(event.clanName)) {
+                    queueUntilClanInfo(event.clanName, event)
+                    return
+                }
+
+                val clan = ClanRepository.get(event.clanName)
+                val entry = ClanEntry(event.username, event.world)
+                clan.players.add(entry)
+                clan.update()
+            }
+
             is LeaveClanRequest -> {
                 val p = Repository.getPlayerByName(event.username) ?: return
 
@@ -193,6 +211,18 @@ object ManagementEvents {
                 } else {
                     clan.leave(p, true)
                 }
+            }
+
+            is ClanLeaveNotification -> {
+                if (shouldWaitForClanInfo(event.clanName)) {
+                    queueUntilClanInfo(event.clanName, event)
+                    return
+                }
+
+                val clan = ClanRepository.get(event.clanName)
+                val entry = clan.players.firstOrNull { it.name.equals(event.username) } ?: return
+                clan.players.remove(entry)
+                clan.update()
             }
 
             is RequestClanInfo -> {
