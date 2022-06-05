@@ -259,6 +259,7 @@ public class PlayerDetails {
 			accountInfo.setBlocked(communicationInfo.getBlockedString());
 			accountInfo.setClanName(communicationInfo.getClanName());
 			accountInfo.setClanReqs(communicationInfo.getClanReqString());
+			accountInfo.setCurrentClan(communicationInfo.getCurrentClan());
 			GameWorld.getAccountStorage().update(accountInfo);
 		} catch (IllegalStateException ignored) {}
 	}

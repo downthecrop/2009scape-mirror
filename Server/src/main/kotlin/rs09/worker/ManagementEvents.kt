@@ -65,7 +65,6 @@ object ManagementEvents {
             is LeaveClanRequest -> SystemLogger.logMS("${event.username} -CL ${event.clanName}")
             is RequestClanInfo -> SystemLogger.logMS("REQUEST CLAN INFO: ${event.clanOwner}")
             is SendClanInfo -> SystemLogger.logMS("RECEIVE CLAN INFO: ${event.clanOwner}->${event.clanName}")
-
         }
     }
 

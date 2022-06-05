@@ -10,6 +10,7 @@ import core.game.node.entity.player.info.login.LoginType
 import core.net.Constants
 import core.net.IoSession
 import core.tools.StringUtils
+import proto.management.JoinClanRequest
 import proto.management.PlayerStatusUpdate
 import proto.management.RequestContactInfo
 import rs09.ServerConstants
@@ -19,6 +20,7 @@ import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
 import rs09.worker.ManagementEvents
+import rs09.worker.ManagementEvents.publish
 import java.math.BigInteger
 import java.nio.BufferUnderflowException
 import java.nio.ByteBuffer
@@ -126,13 +128,18 @@ object Login {
         statusEvent.username = details.username
         statusEvent.world = GameWorld.settings!!.worldId
         statusEvent.notifyFriendsOnly = false
-        ManagementEvents.publish(statusEvent.build())
+        publish(statusEvent.build())
 
         val contactEvent = RequestContactInfo.newBuilder()
         contactEvent.username = details.username
         contactEvent.world = GameWorld.settings!!.worldId
-        ManagementEvents.publish(contactEvent.build())
+        publish(contactEvent.build())
 
-
+        if (!details.communication.currentClan.isNullOrEmpty() && details.communication.clan == null) {
+            val clanEvent = JoinClanRequest.newBuilder()
+            clanEvent.username = details.username
+            clanEvent.clanName = details.communication.currentClan
+            publish(clanEvent.build())
+        }
     }
 }
