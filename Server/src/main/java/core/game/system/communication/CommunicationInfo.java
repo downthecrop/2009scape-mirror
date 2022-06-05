@@ -351,7 +351,6 @@ public final class CommunicationInfo {
 	 * @param clanRank The clan rank to set.
 	 */
 	public static void updateClanRank(Player player, String contact, ClanRank clanRank) {
-		SystemLogger.logInfo("Update Clan Rank00[0[0[0[0[0[0[0");
 		CommunicationInfo info = player.getDetails().getCommunication();
 		Contact c = info.contacts.get(contact);
 		if (c == null) {
