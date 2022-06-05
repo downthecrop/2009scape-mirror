@@ -34,24 +34,24 @@ error()
 
 build_ms()
 {
-    if [[ $CLEANOPT == "*m*" ]]; then
-        sh mvnw clean || \ 
-            error "Failed to clean the management server. Giving up";
+    cd $MS_SRC
+    if [[ "$CLEANOPT" == *"m"* ]]; then
+        sh mvnw clean
     fi
 
-    (cd $MS_SRC && sh mvnw package $SKIPTEST) || \
-        error "Failed to build management server. Giving up.";
+    sh mvnw package $SKIPTEST || \
+	error "Failed to build the management server. Giving up";
 }
 
 build_gs()
 {
-    if [[ $CLEANOPT == "*g*" ]]; then
-        sh mvnw clean || \ 
-            error "Failed to clean the management server. Giving up";
+    cd $GS_SRC;
+    if [[ "$CLEANOPT" == *"g"* ]]; then
+        sh mvnw clean
     fi
 
-    (cd $GS_SRC && sh mvnw package $SKIPTEST) || \
-        error "Failed to build the game server. Giving up.";
+    sh mvnw package $SKIPTEST || \
+	error "Failed to build the game server. Giving up."
 }
 
 while getopts "hqmgc:o:d" arg; do
