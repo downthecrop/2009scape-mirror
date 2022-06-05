@@ -7,6 +7,8 @@ MS_SRC=$SCRIPT_DIR/Management-Server
 FORCE_REBUILD=0
 REFRESH_BUILD=1
 
+GAMESERVER_ONLY=1
+
 # 0: parallel
 # 1: fancy tmux
 # 2: tests only
@@ -20,28 +22,39 @@ help()
     echo "  -r: Force clean rebuild."
     echo "  -t: Only run tests, not the JARs."
     echo "  -x: Run in a fancy tmux session."
+    echo "  -g: Build + run only the game server (no management server)."
 }
 
 error()
 {
-    echo $1;
-    exit -1;
+    echo "$1";
+    exit 1;
 }
 
 rebuild_project()
 {
-    $SCRIPT_DIR/build -qmgcmg
+    if [ $GAMESERVER_ONLY ]; then
+      $SCRIPT_DIR/build -qgcg
+    else
+      $SCRIPT_DIR/build -qmgcmg
+    fi
 }
 
 refresh_project()
 {
-    $SCRIPT_DIR/build -qmg
+    if [ $GAMESERVER_ONLY ]; then
+      $SCRIPT_DIR/build -qg
+    else
+      $SCRIPT_DIR/build -qmg
+    fi
 }
 
 verify_binaries_exist()
 {
-    if [ ! -f $SCRIPT_DIR/builddir/ms.jar ]; then
-        error "Management server binary does not exist.";
+    if ! [ $GAMESERVER_ONLY ]; then
+      if [ ! -f $SCRIPT_DIR/builddir/ms.jar ]; then
+          error "Management server binary does not exist.";
+      fi
     fi
 
     if [ ! -f $SCRIPT_DIR/build/server.jar ]; then
@@ -57,8 +70,12 @@ run_server_parallel()
 
     echo "Running in parallel. All logs redirected to proper files."
 
-    cd $MS_SRC && java -jar $BUILD_DIR/ms.jar > ms_stdout.log 2> ms_stderr.log \
-    & cd $GS_SRC && java -jar $BUILD_DIR/server.jar & wait
+    if [ $GAMESERVER_ONLY ]; then
+      cd "$GS_SRC" && java -jar "$BUILD_DIR/server.jar"
+    else
+      cd "$MS_SRC" && java -jar "$BUILD_DIR/ms.jar" > ms_stdout.log 2> ms_stderr.log \
+      & cd "$GS_SRC" && java -jar "$BUILD_DIR/server.jar" & wait
+    fi
 }
 
 run_server_tmux()
@@ -67,17 +84,21 @@ run_server_tmux()
         error "tmux is not installed. Install tmux or don't use this option."
     fi
 
-    tmux new-session "cd $MS_SRC && java -jar $BUILD_DIR/ms.jar" \; \
-         split-window -h "cd $GS_SRC && java -jar $BUILD_DIR/server.jar"
+    if [ $GAMESERVER_ONLY ]; then
+      tmux new-session "cd $GS_SRC && java -jar $BUILD_DIR/server.jar"
+    else
+      tmux new-session "cd $MS_SRC && java -jar $BUILD_DIR/ms.jar" \; \
+           split-window -h "cd $GS_SRC && java -jar $BUILD_DIR/server.jar"
+    fi
 }
 
 run_server_tests()
 {
-    cd $GS_SRC
+    cd "$GS_SRC" || error "Could not change to GameServer source directory."
     sh mvnw test
 }
 
-while getopts ":hqrtx" arg; do
+while getopts ":ghqrtx" arg; do
     case $arg in
         h)
             help
@@ -95,9 +116,15 @@ while getopts ":hqrtx" arg; do
         x)
             RUN_MODE=1
             ;;
+        g)
+            GAMESERVER_ONLY=0
+            ;;
+        *)
+            error "Argument -$arg is not a known or valid argument."
+            ;;
     esac
 done
-if [ ! -d $GS_SRC/target ]; then
+if [ ! -d "$GS_SRC/target" ]; then
     rebuild_project || error "Failed to perform a clean build."
 else
     if [ $FORCE_REBUILD -eq 1 ]; then
@@ -109,7 +136,7 @@ else
     fi
 fi;
 
-cd $SCRIPT_DIR/builddir || error "Failed to navigate to the build directory."
+cd "$SCRIPT_DIR/builddir" || error "Failed to navigate to the build directory."
 
 case $RUN_MODE in
     0)
