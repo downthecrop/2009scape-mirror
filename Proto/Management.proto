@@ -16,6 +16,7 @@ message ClanMessage {
   required string sender = 1;
   required string clanName = 2;
   required string message = 3;
+  required int32 rank = 4;
 }
 
 message PrivateMessage {
@@ -34,6 +35,7 @@ message SendContactInfo {
   message Contact {
     required string username = 1;
     optional int32 world = 2;
+    optional int32 rank = 3;
   }
 
   required string username = 1;

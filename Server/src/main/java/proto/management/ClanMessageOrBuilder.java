@@ -57,4 +57,15 @@ public interface ClanMessageOrBuilder extends
    */
   com.google.protobuf.ByteString
       getMessageBytes();
+
+  /**
+   * <code>required int32 rank = 4;</code>
+   * @return Whether the rank field is set.
+   */
+  boolean hasRank();
+  /**
+   * <code>required int32 rank = 4;</code>
+   * @return The rank.
+   */
+  int getRank();
 }

@@ -35,6 +35,7 @@ public class ChatPacket implements IncomingPacket {
 				builder.setSender(player.getName());
 				builder.setClanName(player.getCommunication().getClan().getOwner().toLowerCase().replace(" ", "_"));
 				builder.setMessage(message.substring(1));
+				builder.setRank(player.getDetails().getRights().ordinal());
 				ManagementEvents.publish(builder.build());
 				return;
 			}

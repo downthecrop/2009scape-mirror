@@ -101,11 +101,12 @@ object ManagementEvents {
                 val info = GameWorld.accountStorage.getAccountInfo(event.username)
                 val contacts = CommunicationInfo.parseContacts(info.contacts)
 
-                for ((username, _) in contacts) {
+                for ((username, contact) in contacts) {
                     val online = Repository.getPlayerByName(username) != null
                     val cbuild = Contact.newBuilder()
                     cbuild.username = username
                     cbuild.world = if (online) GameWorld.settings!!.worldId else 0
+                    cbuild.rank = contact.rank.ordinal
                     response.addContacts(cbuild)
                 }
 
@@ -130,6 +131,7 @@ object ManagementEvents {
                     val c = core.game.system.communication.Contact(contact.username)
                     p.communication.contacts[contact.username] = c
                     c.worldId = contact.world
+                    c.rank = ClanRank.values()[contact.rank]
                     PacketRepository.send(
                         ContactPackets::class.java,
                         ContactContext(p, contact.username, contact.world)
@@ -277,11 +279,15 @@ object ManagementEvents {
                     if (info.clanName.isNotEmpty()) {
                         val reqs = CommunicationInfo.parseClanRequirements(info.clanReqs)
                         val c = ClanRepository(event.clanOwner)
+                        val contacts = CommunicationInfo.parseContacts(info.contacts)
                         c.name = info.clanName
                         c.joinRequirement = reqs[0]
                         c.messageRequirement = reqs[1]
                         c.kickRequirement = reqs[2]
                         c.lootRequirement = reqs[3]
+                        for ((username, contact) in contacts) {
+                            c.ranks[username] = contact.rank
+                        }
                         ClanRepository.getClans()[event.clanOwner] = c
                     }
                 }
@@ -303,7 +309,7 @@ object ManagementEvents {
                 for (member in clan.players.filter { it.player != null }) {
                     PacketRepository.send(
                         CommunicationMessage::class.java,
-                        MessageContext(member.player, event.sender, 0, MessageContext.CLAN_MESSAGE, event.message)
+                        MessageContext(member.player, event.sender, event.rank, MessageContext.CLAN_MESSAGE, event.message)
                     )
                 }
             }

@@ -89,11 +89,6 @@ public final class ManagementProtos {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_management_ClanLeaveNotification_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_management_ClanSettingsUpdate_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_management_ClanSettingsUpdate_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -105,39 +100,39 @@ public final class ManagementProtos {
     java.lang.String[] descriptorData = {
       "\n\020Management.proto\022\nmanagement\"P\n\022Player" +
       "StatusUpdate\022\020\n\010username\030\001 \002(\t\022\r\n\005world\030" +
-      "\002 \002(\005\022\031\n\021notifyFriendsOnly\030\003 \002(\010\"@\n\013Clan" +
+      "\002 \002(\005\022\031\n\021notifyFriendsOnly\030\003 \002(\010\"N\n\013Clan" +
       "Message\022\016\n\006sender\030\001 \002(\t\022\020\n\010clanName\030\002 \002(" +
-      "\t\022\017\n\007message\030\003 \002(\t\"Q\n\016PrivateMessage\022\016\n\006" +
-      "sender\030\001 \002(\t\022\020\n\010receiver\030\002 \002(\t\022\017\n\007messag" +
-      "e\030\003 \002(\t\022\014\n\004rank\030\004 \002(\005\"5\n\022RequestContactI" +
-      "nfo\022\020\n\010username\030\001 \002(\t\022\r\n\005world\030\002 \002(\005\"\227\001\n" +
-      "\017SendContactInfo\022\020\n\010username\030\001 \002(\t\0225\n\010co" +
-      "ntacts\030\002 \003(\0132#.management.SendContactInf" +
-      "o.Contact\022\017\n\007blocked\030\003 \003(\t\032*\n\007Contact\022\020\n" +
-      "\010username\030\001 \002(\t\022\r\n\005world\030\002 \001(\005\"z\n\014Friend" +
-      "Update\022+\n\004type\030\001 \002(\0162\035.management.Friend" +
-      "Update.Type\022\020\n\010username\030\002 \002(\t\022\016\n\006friend\030" +
-      "\003 \002(\t\"\033\n\004Type\022\007\n\003ADD\020\000\022\n\n\006REMOVE\020\001\"|\n\rBl" +
-      "ockedUpdate\022,\n\004type\030\001 \002(\0162\036.management.B" +
-      "lockedUpdate.Type\022\020\n\010username\030\002 \002(\t\022\016\n\006f" +
-      "riend\030\003 \002(\t\"\033\n\004Type\022\007\n\003ADD\020\000\022\n\n\006REMOVE\020\001" +
-      "\"3\n\017RequestClanInfo\022\r\n\005world\030\001 \002(\005\022\021\n\tcl" +
-      "anOwner\030\002 \002(\t\"\236\002\n\014SendClanInfo\022\021\n\tclanOw" +
-      "ner\030\001 \002(\t\022\017\n\007hasInfo\030\002 \002(\010\022\020\n\010clanName\030\003" +
-      " \001(\t\022\027\n\017joinRequirement\030\004 \001(\005\022\027\n\017kickReq" +
-      "uirement\030\005 \001(\005\022\032\n\022messageRequirement\030\006 \001" +
-      "(\005\022\027\n\017lootRequirement\030\007 \001(\005\0224\n\007members\030\010" +
-      " \003(\0132#.management.SendClanInfo.ClanMembe" +
-      "r\032;\n\nClanMember\022\020\n\010username\030\001 \002(\t\022\r\n\005wor" +
-      "ld\030\002 \002(\005\022\014\n\004rank\030\003 \002(\005\"5\n\017JoinClanReques" +
-      "t\022\020\n\010username\030\001 \002(\t\022\020\n\010clanName\030\002 \002(\t\"6\n" +
-      "\020LeaveClanRequest\022\020\n\010username\030\001 \002(\t\022\020\n\010c" +
-      "lanName\030\002 \002(\t\"I\n\024ClanJoinNotification\022\020\n" +
-      "\010username\030\001 \002(\t\022\020\n\010clanName\030\002 \002(\t\022\r\n\005wor" +
-      "ld\030\003 \002(\005\"J\n\025ClanLeaveNotification\022\020\n\010use" +
-      "rname\030\001 \002(\t\022\020\n\010clanName\030\002 \002(\t\022\r\n\005world\030\003" +
-      " \002(\005\"\024\n\022ClanSettingsUpdateB&\n\020proto.mana" +
-      "gementB\020ManagementProtosP\001"
+      "\t\022\017\n\007message\030\003 \002(\t\022\014\n\004rank\030\004 \002(\005\"Q\n\016Priv" +
+      "ateMessage\022\016\n\006sender\030\001 \002(\t\022\020\n\010receiver\030\002" +
+      " \002(\t\022\017\n\007message\030\003 \002(\t\022\014\n\004rank\030\004 \002(\005\"5\n\022R" +
+      "equestContactInfo\022\020\n\010username\030\001 \002(\t\022\r\n\005w" +
+      "orld\030\002 \002(\005\"\245\001\n\017SendContactInfo\022\020\n\010userna" +
+      "me\030\001 \002(\t\0225\n\010contacts\030\002 \003(\0132#.management." +
+      "SendContactInfo.Contact\022\017\n\007blocked\030\003 \003(\t" +
+      "\0328\n\007Contact\022\020\n\010username\030\001 \002(\t\022\r\n\005world\030\002" +
+      " \001(\005\022\014\n\004rank\030\003 \001(\005\"z\n\014FriendUpdate\022+\n\004ty" +
+      "pe\030\001 \002(\0162\035.management.FriendUpdate.Type\022" +
+      "\020\n\010username\030\002 \002(\t\022\016\n\006friend\030\003 \002(\t\"\033\n\004Typ" +
+      "e\022\007\n\003ADD\020\000\022\n\n\006REMOVE\020\001\"|\n\rBlockedUpdate\022" +
+      ",\n\004type\030\001 \002(\0162\036.management.BlockedUpdate" +
+      ".Type\022\020\n\010username\030\002 \002(\t\022\016\n\006friend\030\003 \002(\t\"" +
+      "\033\n\004Type\022\007\n\003ADD\020\000\022\n\n\006REMOVE\020\001\"3\n\017RequestC" +
+      "lanInfo\022\r\n\005world\030\001 \002(\005\022\021\n\tclanOwner\030\002 \002(" +
+      "\t\"\236\002\n\014SendClanInfo\022\021\n\tclanOwner\030\001 \002(\t\022\017\n" +
+      "\007hasInfo\030\002 \002(\010\022\020\n\010clanName\030\003 \001(\t\022\027\n\017join" +
+      "Requirement\030\004 \001(\005\022\027\n\017kickRequirement\030\005 \001" +
+      "(\005\022\032\n\022messageRequirement\030\006 \001(\005\022\027\n\017lootRe" +
+      "quirement\030\007 \001(\005\0224\n\007members\030\010 \003(\0132#.manag" +
+      "ement.SendClanInfo.ClanMember\032;\n\nClanMem" +
+      "ber\022\020\n\010username\030\001 \002(\t\022\r\n\005world\030\002 \002(\005\022\014\n\004" +
+      "rank\030\003 \002(\005\"5\n\017JoinClanRequest\022\020\n\010usernam" +
+      "e\030\001 \002(\t\022\020\n\010clanName\030\002 \002(\t\"6\n\020LeaveClanRe" +
+      "quest\022\020\n\010username\030\001 \002(\t\022\020\n\010clanName\030\002 \002(" +
+      "\t\"I\n\024ClanJoinNotification\022\020\n\010username\030\001 " +
+      "\002(\t\022\020\n\010clanName\030\002 \002(\t\022\r\n\005world\030\003 \002(\005\"J\n\025" +
+      "ClanLeaveNotification\022\020\n\010username\030\001 \002(\t\022" +
+      "\020\n\010clanName\030\002 \002(\t\022\r\n\005world\030\003 \002(\005B&\n\020prot" +
+      "o.managementB\020ManagementProtosP\001"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -154,7 +149,7 @@ public final class ManagementProtos {
     internal_static_management_ClanMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_management_ClanMessage_descriptor,
-        new java.lang.String[] { "Sender", "ClanName", "Message", });
+        new java.lang.String[] { "Sender", "ClanName", "Message", "Rank", });
     internal_static_management_PrivateMessage_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_management_PrivateMessage_fieldAccessorTable = new
@@ -178,7 +173,7 @@ public final class ManagementProtos {
     internal_static_management_SendContactInfo_Contact_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_management_SendContactInfo_Contact_descriptor,
-        new java.lang.String[] { "Username", "World", });
+        new java.lang.String[] { "Username", "World", "Rank", });
     internal_static_management_FriendUpdate_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_management_FriendUpdate_fieldAccessorTable = new
@@ -233,12 +228,6 @@ public final class ManagementProtos {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_management_ClanLeaveNotification_descriptor,
         new java.lang.String[] { "Username", "ClanName", "World", });
-    internal_static_management_ClanSettingsUpdate_descriptor =
-      getDescriptor().getMessageTypes().get(13);
-    internal_static_management_ClanSettingsUpdate_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_management_ClanSettingsUpdate_descriptor,
-        new java.lang.String[] { });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
