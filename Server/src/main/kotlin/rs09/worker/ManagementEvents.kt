@@ -25,7 +25,6 @@ import proto.management.SendClanInfo
 import proto.management.SendClanInfo.ClanMember
 import proto.management.SendContactInfo
 import proto.management.SendContactInfo.Contact
-import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
 import java.util.Deque
@@ -145,6 +144,7 @@ object ManagementEvents {
                     sendMessage(p, "The channel you tried to join does not exist.:clan:")
                 } else {
                     clan.enter(p)
+                    p.communication.clan = clan
                 }
             }
 
@@ -161,7 +161,7 @@ object ManagementEvents {
                 if (clan == null) {
                     sendMessage(p, "Error leaving clan. Please relog.")
                 } else {
-                    clan.leave(p, true)
+                    clan.leave(p, false)
                 }
             }
 

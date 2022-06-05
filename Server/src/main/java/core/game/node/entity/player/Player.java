@@ -64,6 +64,7 @@ import core.tools.StringUtils;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import org.rs09.consts.Items;
+import proto.management.LeaveClanRequest;
 import proto.management.PlayerStatusUpdate;
 import rs09.GlobalStats;
 import rs09.ServerConstants;
@@ -389,11 +390,16 @@ public class Player extends Entity {
 	}
 
 	private void sendLogoutEvents() {
-		PlayerStatusUpdate.Builder builder = PlayerStatusUpdate.newBuilder();
-		builder.setUsername(this.name);
-		builder.setWorld(0); //offline
-		builder.setNotifyFriendsOnly(false);
-		ManagementEvents.publish(builder.build());
+		PlayerStatusUpdate.Builder statusBuilder = PlayerStatusUpdate.newBuilder();
+		statusBuilder.setUsername(this.name);
+		statusBuilder.setWorld(0); //offline
+		statusBuilder.setNotifyFriendsOnly(false);
+		ManagementEvents.publish(statusBuilder.build());
+
+		LeaveClanRequest.Builder clanBuilder = LeaveClanRequest.newBuilder();
+		clanBuilder.setUsername(getName());
+		clanBuilder.setClanName(getCommunication().getClan().getOwner().toLowerCase().replace(" ", "_"));
+		ManagementEvents.publish(clanBuilder.build());
 	}
 
 	public void toggleWardrobe(boolean intoWardrobe){
