@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import proto.management.ClanMessage
 import proto.management.JoinClanRequest
 import proto.management.LeaveClanRequest
 import proto.management.PlayerStatusUpdate
@@ -227,6 +228,22 @@ object ManagementEvents {
                 val queuedEvents = waitingOnClanInfo[event.clanOwner] ?: return
                 while (queuedEvents.peek() != null) {
                     publish(queuedEvents.pop())
+                }
+            }
+
+            is ClanMessage -> {
+                if (shouldWaitForClanInfo(event.clanName)) {
+                    queueUntilClanInfo(event.clanName, event)
+                    return
+                }
+
+                val clan = ClanRepository.get(event.clanName)
+
+                for (member in clan.players.filter { it.player != null }) {
+                    PacketRepository.send(
+                        CommunicationMessage::class.java,
+                        MessageContext(member.player, event.sender, 0, MessageContext.CLAN_MESSAGE, event.message)
+                    )
                 }
             }
 
