@@ -168,10 +168,7 @@ public final class LoginConfiguration {
                 e.printStackTrace();
             }
         }
-        player.getCommunication().sync(player);
-        if (WorldCommunicator.isEnabled()) {
-            MSPacketRepository.sendInfoUpdate(player);
-        }
+        player.getAppearance().sync();
     }
 
     /**

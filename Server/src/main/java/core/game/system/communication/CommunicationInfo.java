@@ -236,64 +236,6 @@ public final class CommunicationInfo {
 	}
 
 	/**
-	 * Synchronizes the contact lists.
-	 */
-	public void sync(Player player) {
-		if (WorldCommunicator.isEnabled()) {
-			if (!player.isArtificial()) {
-				MSPacketRepository.requestCommunicationInfo(player.getName());
-			}
-			return;
-		}
-		if (player.getSettings().getPrivateChatSetting() != 2) {
-			notifyPlayers(player, true, false);
-		}
-		PacketRepository.send(ContactPackets.class, new ContactContext(player, ContactContext.UPDATE_STATE_TYPE));
-		PacketRepository.send(ContactPackets.class, new ContactContext(player, ContactContext.IGNORE_LIST_TYPE));
-		for (String name : contacts.keySet()) {
-			Player p = Repository.getPlayerByName(name);
-			int worldId = 0;
-			if (p != null && showActive(player, p)) {
-				worldId = GameWorld.getSettings().getWorldId();
-			}
-			PacketRepository.send(ContactPackets.class, new ContactContext(player, name, worldId));
-		}
-		if (currentClan != null && !player.isArtificial() && (clan = ClanRepository.get(currentClan)) != null) {
-			clan.enter(player);
-		}
-	}
-
-	/**
-	 * Notifies all other players.
-	 * @param online If this player is online.
-	 * @param chatSetting If it was a chat setting change.
-	 */
-	public static void notifyPlayers(Player player, boolean online, boolean chatSetting) {
-		if (WorldCommunicator.isEnabled()) {
-			if (!online && !chatSetting) {
-				MSPacketRepository.sendPlayerRemoval(player.getName());
-			}
-			return;
-		}
-		for (Player p : Repository.getPlayers()) {
-			if (p == player || !p.isActive()) {
-				continue;
-			}
-			if (hasContact(p, player.getName())) {
-				int worldId = 0;
-				if (online && showActive(p, player)) {
-					worldId = GameWorld.getSettings().getWorldId();
-				}
-				p.getCommunication().getContacts().get(player.getName()).setWorldId(worldId);
-				PacketRepository.send(ContactPackets.class, new ContactContext(p, player.getName(), worldId));
-			}
-		}
-		if (!online && !chatSetting && player.getCommunication().getClan() != null) {
-			player.getCommunication().getClan().leave(player, true);
-		}
-	}
-
-	/**
 	 * Sends a message to the target.
 	 * @param player The player sending the message.
 	 * @param target The target.
