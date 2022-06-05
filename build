@@ -16,11 +16,11 @@ _JAR_DIR="$SCRIPT_DIR/builddir"
 
 help()
 {
-    echo "Usage: $0 [-h] <-m | -g> [-c <a|m|g>] [-o <path>]";
+    echo "Usage: $0 [-h] <-m | -g> [-c <m|g>] [-o <path>]";
     echo "  -h: Display this message.";
     echo "  -m: Build the management server.";
     echo "  -g: Build the game server.";
-    echo "  -c: Clean: m: management, g: game build directory. "
+    echo "  -c: Clean: m: management, g: gameserver. "
     echo "      Can specify both. Need at least one if present.";
     echo "  -o: Specify jar-file directory."
     echo "  -q: Quick build - will skip tests.";
@@ -93,7 +93,7 @@ then
 fi
 
 if [ $BUILD_MS -eq 0 ] && [ $BUILD_GS -eq 0 ]; then
-    error "Need to at least build one of the modules. See -h for details."
+    error "Need to build at least one of the modules. See -h for details."
 fi
 
 if [ -d $_JAR_DIR ]; then
@@ -117,6 +117,6 @@ fi
 if [ $BUILD_GS -eq 1 ]; then
     build_gs
 
-    # Will never execute if build_ms fails because it quits upon failure.
+    # Will never execute if build_gs fails because it quits upon failure.
     mv -v $GS_SRC/target/*-with-dependencies.jar $_JAR_DIR/server.jar
 fi
