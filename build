@@ -124,11 +124,6 @@ if [ $BUILD_MS -ne 1 ] && [ $BUILD_GS -ne 1 ]; then
 fi
 
 mkdir -p $_JAR_DIR || error "Failed to create build directory.";
-ln -vs $GS_SRC/data $_JAR_DIR/data
-ln -vs $GS_SRC/worldprops $_JAR_DIR/worldprops
-ln -vs $MS_SRC/managementprops $_JAR_DIR/managementprops
-
-ls -la $_JAR_DIR
 
 if [ $BUILD_MS -eq 1 ]; then
     build_ms

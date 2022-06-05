@@ -1,6 +1,8 @@
 #!/bin/bash
 SCRIPT_DIR=$(cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P)
+BUILD_DIR=$SCRIPT_DIR/builddir
 GS_SRC=$SCRIPT_DIR/Server
+MS_SRC=$SCRIPT_DIR/Management-Server
 
 FORCE_REBUILD=0
 REFRESH_BUILD=1
@@ -49,12 +51,14 @@ verify_binaries_exist()
 
 run_server_parallel()
 {
-    which java || error "Java is not installed."
+    if ! [ -x "$(command -v java)" ]; then 
+        error "Java is not installed."
+    fi
 
     echo "Running in parallel. All logs redirected to proper files."
 
-    java -jar ms.jar > ms_stdout.log 2> ms_stderr.log \
-    & java -jar server.jar & wait
+    cd $MS_SRC && java -jar $BUILD_DIR/ms.jar > ms_stdout.log 2> ms_stderr.log \
+    & cd $GS_SRC && java -jar $BUILD_DIR/server.jar & wait
 }
 
 run_server_tmux()
@@ -63,7 +67,8 @@ run_server_tmux()
         error "tmux is not installed. Install tmux or don't use this option."
     fi
 
-    tmux new-session "java -jar ms.jar" \; split-window -h "java -jar server.jar"
+    tmux new-session "cd $MS_SRC && java -jar $BUILD_DIR/ms.jar" \; \
+         split-window -h "cd $GS_SRC && java -jar $BUILD_DIR/server.jar"
 }
 
 run_server_tests()
@@ -72,7 +77,7 @@ run_server_tests()
     sh mvnw test
 }
 
-while getopts "hqrtx" arg; do
+while getopts ":hqrtx" arg; do
     case $arg in
         h)
             help
@@ -111,7 +116,7 @@ case $RUN_MODE in
         # The trap will allow the script to kill the background
         # Java instances upon exiting.
         trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
-        
+
         run_server_parallel
         ;;
     1)
