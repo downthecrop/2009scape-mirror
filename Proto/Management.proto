@@ -106,7 +106,3 @@ message ClanLeaveNotification {
   required string clanName = 2;
   required int32 world = 3;
 }
-
-message ClanSettingsUpdate {
-
-}

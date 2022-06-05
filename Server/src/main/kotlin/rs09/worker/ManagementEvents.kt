@@ -51,8 +51,10 @@ object ManagementEvents {
     val job = GlobalScope.launch {
         while (isRunning) {
             val event = withContext(Dispatchers.IO) { eventQueue.take() }
-            handleEvent(event)
-            handleLoggingFor(event)
+            try {
+                handleEvent(event)
+                handleLoggingFor(event)
+            } catch (ignored: Exception) {}
         }
     }
 
