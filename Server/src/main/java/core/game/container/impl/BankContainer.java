@@ -117,7 +117,6 @@ public final class BankContainer extends Container {
 		player.getInventory().getListeners().add(listener);
 		player.getInventory().refresh();
 		player.varpManager.get(1249).setVarbit(0,lastAmountX).send(player);
-		player.getPacketDispatch().sendIfaceSettings(1278, 73, 762, 0, ServerConstants.BANK_SIZE);
 		BitregisterAssembler assembly = new BitregisterAssembler(0, 1, 2, 3, 4, 5);
 		assembly.enableExamineOption();
 		assembly.enableSlotSwitch();

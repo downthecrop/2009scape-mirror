@@ -2,6 +2,7 @@ package core.game.interaction.object;
 
 import static api.ContentAPIKt.*;
 
+import api.IfaceSettingsBuilder;
 import api.events.InteractionEvent;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
@@ -401,6 +402,8 @@ public final class BankingPlugin extends OptionHandler {
         public void open(Player player, Component component) {
             super.open(player, component);
             player.getBank().sendBankSpace();
+            int settings = new IfaceSettingsBuilder().enableAllOptions().enableSlotSwitch().setInterfaceEventsDepth(2).build();
+            player.getPacketDispatch().sendIfaceSettings(settings, 73, 762, 0, 496);
         }
 
         @Override
