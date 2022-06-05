@@ -1,0 +1,122 @@
+#!/bin/bash
+
+SCRIPT_DIR=$(cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P)
+
+BUILD_MS=0
+BUILD_GS=0
+CLEAN_MS=0
+CLEAN_GS=0
+SKIPTEST=""
+
+GS_SRC=$SCRIPT_DIR/Server
+MS_SRC=$SCRIPT_DIR/Management-Server
+
+CLEANOPT=""
+_JAR_DIR="$SCRIPT_DIR/builddir"
+
+help()
+{
+    echo "Usage: $0 [-h] <-m | -g> [-c <a|m|g>] [-o <path>]";
+    echo "  -h: Display this message.";
+    echo "  -m: Build the management server.";
+    echo "  -g: Build the game server.";
+    echo "  -c: Clean: m: management, g: game build directory. "
+    echo "      Can specify both. Need at least one if present.";
+    echo "  -o: Specify jar-file directory."
+    echo "  -q: Quick build - will skip tests.";
+}
+
+error()
+{
+    echo $1;
+    exit -1;
+}
+
+build_ms()
+{
+    if [[ $CLEANOPT == "*m*" ]]; then
+        sh mvnw clean || \ 
+            error "Failed to clean the management server. Giving up";
+    fi
+
+    (cd $MS_SRC && sh mvnw package $SKIPTEST) || \
+        error "Failed to build management server. Giving up.";
+}
+
+build_gs()
+{
+    if [[ $CLEANOPT == "*g*" ]]; then
+        sh mvnw clean || \ 
+            error "Failed to clean the management server. Giving up";
+    fi
+
+    (cd $GS_SRC && sh mvnw package $SKIPTEST) || \
+        error "Failed to build the game server. Giving up.";
+}
+
+while getopts "hqmgc:o:d" arg; do
+    case $arg in
+        h)
+            help
+            exit 0
+            ;;
+        m)
+            BUILD_MS=1
+            ;;
+        g)
+            BUILD_GS=1
+            ;;
+        c)
+            CLEANOPT=${OPTARG}
+            ;;
+        o)
+            _JAR_DIR=${OPTARG}
+            ;;
+        d)
+            echo "BUILD_MS=$BUILD_MS"
+            echo "BUILD_GS=$BUILD_GS"
+            echo "CLEANOPT=$CLEANOPT"
+            echo "_JAR_DIR=$_JAR_DIR"
+            ;;
+        q)
+            SKIPTEST="-DskipTests"
+            ;;
+    esac
+done
+
+if [[ $CLEANOPT != "m" ]]       \
+    && [[ $CLEANOPT != "g" ]]   \
+    && [[ $CLEANOPT != "mg" ]]  \
+    && [[ $CLEANOPT != "" ]]; 
+then
+    error "Invalid cleaning option '$CLEANOPT'. Valid options are 'm', 'g', 'mg' or none."
+fi
+
+if [ $BUILD_MS -eq 0 ] && [ $BUILD_GS -eq 0 ]; then
+    error "Need to at least build one of the modules. See -h for details."
+fi
+
+if [ -d $_JAR_DIR ]; then
+    rm -r $_JAR_DIR
+fi
+
+mkdir -p $_JAR_DIR || error "Failed to create build directory.";
+ln -vs $GS_SRC/data $_JAR_DIR/data
+ln -vs $GS_SRC/worldprops $_JAR_DIR/worldprops
+ln -vs $MS_SRC/managementprops $_JAR_DIR/managementprops
+
+ls -la $_JAR_DIR
+
+if [ $BUILD_MS -eq 1 ]; then
+    build_ms
+
+    # Will never execute if build_ms fails because it quits upon failure.
+    mv -v $MS_SRC/target/*-with-dependencies.jar $_JAR_DIR/ms.jar
+fi
+
+if [ $BUILD_GS -eq 1 ]; then
+    build_gs
+
+    # Will never execute if build_ms fails because it quits upon failure.
+    mv -v $GS_SRC/target/*-with-dependencies.jar $_JAR_DIR/server.jar
+fi
