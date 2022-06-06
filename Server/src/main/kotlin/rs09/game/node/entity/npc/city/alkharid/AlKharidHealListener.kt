@@ -2,6 +2,7 @@ package rs09.game.node.entity.npc.city.alkharid
 
 import api.*
 import core.game.content.dialogue.FacialExpression
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.skill.Skills
 import org.rs09.consts.Animations
 import org.rs09.consts.NPCs
@@ -16,7 +17,7 @@ import rs09.tools.END_DIALOGUE
 class AlKharidHealListener : InteractionListener {
     override fun defineListeners() {
         on(getIds(), NPC, "heal") { player, node ->
-            openDialogue(player, AlKharidHealDialogue())
+            openDialogue(player, AlKharidHealDialogue(), node.asNpc())
             return@on true
         }
     }
