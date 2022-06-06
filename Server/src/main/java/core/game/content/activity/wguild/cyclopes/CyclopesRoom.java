@@ -111,7 +111,7 @@ public final class CyclopesRoom extends MapZone implements Plugin<Object> {
 	public boolean death(Entity e, Entity killer) {
 		if (killer instanceof Player && e instanceof NPC && (e.getId() == 4292 || e.getId() == 4291)) {
 			int defenderId = getDefenderIndex((Player) killer);
-			if (RandomFunction.randomize(32) == 10) {
+			if (RandomFunction.randomize(50) == 10) {
 				if (++defenderId == DEFENDERS.length) {
 					defenderId--;
 				}
