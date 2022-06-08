@@ -1,0 +1,171 @@
+#!/bin/bash
+SCRIPT_DIR=$(cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P)
+LOG_DIR=$SCRIPT_DIR/logs
+BUILD_DIR=$SCRIPT_DIR/builddir
+GS_SRC=$SCRIPT_DIR/Server
+MS_SRC=$SCRIPT_DIR/Management-Server
+
+FORCE_REBUILD=0
+REFRESH_BUILD=1
+
+GAMESERVER_ONLY=1
+
+GS_EXEC="cd $GS_SRC && java -Dnashorn.args=--no-deprecation-warning -jar $BUILD_DIR/server.jar"
+MS_EXEC="cd $MS_SRC && java -Dnashorn.args=--no-deprecation-warning -jar $BUILD_DIR/ms.jar"
+
+# 0: parallel
+# 1: fancy tmux
+# 2: tests only
+RUN_MODE=0
+
+help()
+{
+    echo "Usage: $0 [-h] [-q] [-r] [-t] [-x] [-g] [-e <filename>] [-o <filename>]"
+    echo "  -h: Display this message."
+    echo "  -q: Don't perform the incremental build."
+    echo "  -r: Force clean rebuild."
+    echo "  -t: Only run tests, not the JARs."
+    echo "  -x: Run in a fancy tmux session."
+    echo "  -g: Build + run only the game server (no management server)."
+    echo "  -e: Write STDERR to 'logs/filename' as well as the terminal.";
+    echo "  -o: Write STDOUT to 'logs/filename' as well as the terminal."
+}
+
+error()
+{
+    echo "$1";
+    exit 1;
+}
+
+rebuild_project()
+{
+    if [ $GAMESERVER_ONLY ]; then
+      $SCRIPT_DIR/build -qgcg
+    else
+      $SCRIPT_DIR/build -qmgcmg
+    fi
+}
+
+refresh_project()
+{
+    if [ $GAMESERVER_ONLY ]; then
+      $SCRIPT_DIR/build -qg
+    else
+      $SCRIPT_DIR/build -qmg
+    fi
+}
+
+verify_binaries_exist()
+{
+    if ! [ $GAMESERVER_ONLY ]; then
+      if [ ! -f $SCRIPT_DIR/builddir/ms.jar ]; then
+          error "Management server binary does not exist.";
+      fi
+    fi
+
+    if [ ! -f $SCRIPT_DIR/build/server.jar ]; then
+        error "Game server binary does not exist.";
+    fi
+}
+
+run_server_parallel()
+{
+    if ! [ -x "$(command -v java)" ]; then 
+        error "Java is not installed."
+    fi
+
+    echo "Running in parallel. All logs redirected to proper files."
+
+    if [ $GAMESERVER_ONLY ]; then
+        sh -c "$GS_EXEC" & wait
+    else
+        sh -c "$MS_EXEC > $LOG_DIR/ms_stdout.log 2> $LOG_DIR/ms_stderr.log & $GS_EXEC" & wait
+    fi
+}
+
+run_server_tmux()
+{
+    if ! [ -x "$(command -v tmux)" ]; then
+        error "tmux is not installed. Install tmux or don't use this option."
+    fi
+
+    if [ $GAMESERVER_ONLY ]; then
+        tmux new-session "$GS_EXEC"
+    else
+        tmux new-session "$MS_EXEC" \; \
+            split-window -h "$GS_EXEC"
+    fi
+}
+
+run_server_tests()
+{
+    cd "$GS_SRC" || error "Could not change to GameServer source directory."
+    sh mvnw test
+}
+
+while getopts ":ghqrtxe:o:" arg; do
+    case $arg in
+        h)
+            help
+            exit 0
+            ;;
+        q)
+            REFRESH_BUILD=0
+            ;;
+        r)
+            FORCE_REBUILD=1
+            ;;
+        t)
+            RUN_MODE=2
+            ;;
+        o)
+            GS_EXEC="$GS_EXEC > >(tee $LOG_DIR/${OPTARG})"
+            ;;
+        e)
+            GS_EXEC="$GS_EXEC 2> >(tee $LOG_DIR/${OPTARG})"
+            ;;
+        x)
+            RUN_MODE=1
+            ;;
+        g)
+            GAMESERVER_ONLY=0
+            ;;
+        *)
+            error "Argument -$arg is not a known or valid argument."
+            ;;
+    esac
+done
+
+if [ ! -d $LOG_DIR ]; then
+    mkdir -p $LOG_DIR
+fi
+
+if [ ! -d $GS_SRC/target ]; then
+    rebuild_project || error "Failed to perform a clean build."
+else
+    if [ $FORCE_REBUILD -eq 1 ]; then
+        rebuild_project || error "Failed to perform a clean build."
+    else
+        if [ $REFRESH_BUILD -eq 1 ]; then
+            refresh_project || error "Failed to perform an incremental build."
+        fi
+    fi
+fi;
+
+cd "$SCRIPT_DIR/builddir" || error "Failed to navigate to the build directory."
+
+case $RUN_MODE in
+    0)
+        # The trap will allow the script to kill the background
+        # Java instances upon exiting.
+        trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
+
+        run_server_parallel
+        ;;
+    1)
+        run_server_tmux
+        ;;
+    2)
+        run_server_tests
+        ;;
+esac
