@@ -1,4 +1,5 @@
 builddir
+logs
 Management-Server/target/*
 Management-Server/.gradle
 Management-Server/build/
