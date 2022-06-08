@@ -10,6 +10,11 @@ import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
+import org.jetbrains.annotations.NotNull;
+import rs09.game.system.SystemLogger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a scenery.
@@ -30,7 +35,7 @@ public class Scenery extends Node {
 	/**
 	 * The rotation.
 	 */
-	private final int rotation;
+	private int rotation;
 
 	/**
 	 * The object's definition.
@@ -309,6 +314,10 @@ public class Scenery extends Node {
 		return rotation;
 	}
 
+	public void setRotation(int rot) {
+		rotation = rot;
+	}
+
 	/**
 	 * @return the location
 	 */
@@ -426,4 +435,37 @@ public class Scenery extends Node {
 		this.wrapper = wrapper;
 	}
 
+	@SuppressWarnings("SuspiciousNameCombination")
+	@NotNull
+	public List<Location> getOccupiedTiles() {
+		List<Location> occupied = new ArrayList<>();
+		occupied.add(location);
+
+		int sizeX = getSizeX();
+		int sizeY = getSizeY();
+
+		if (rotation % 2 == 1) {
+			int tmp = sizeX;
+			sizeX = sizeY;
+			sizeY = tmp;
+		}
+
+		boolean sub = rotation >= 2;
+
+		if (sizeX > 1) {
+			for (int i = 1; i < sizeX; i++) {
+				int modifier = sub ? -i : i;
+				occupied.add(location.transform(modifier, 0, 0));
+			}
+		}
+
+		if (sizeY > 1) {
+			for (int i = 1; i < sizeY; i++) {
+				int modifier = sub ? -i : i;
+				occupied.add(location.transform(0, modifier, 0));
+			}
+		}
+
+		return occupied;
+	}
 }
