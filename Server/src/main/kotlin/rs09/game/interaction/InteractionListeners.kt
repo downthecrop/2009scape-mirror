@@ -14,7 +14,7 @@ import rs09.game.system.SystemLogger
 object InteractionListeners {
     private val listeners = HashMap<String,(Player, Node) -> Boolean>(1000)
     private val useWithListeners = HashMap<String,(Player,Node,Node) -> Boolean>(1000)
-    private val useAnyWithListeners = HashMap<String, (Player, Node, Node) -> Boolean>(1000)
+    private val useAnyWithListeners = HashMap<String, (Player, Node, Node) -> Boolean>(10)
     private val useWithWildcardListeners = HashMap<Int, ArrayList<Pair<(Int, Int) -> Boolean, (Player, Node, Node) -> Boolean>>>(10)
     private val destinationOverrides = HashMap<String,(Entity, Node) -> Location>(100)
     private val equipListeners = HashMap<String,(Player,Node) -> Boolean>(10)
