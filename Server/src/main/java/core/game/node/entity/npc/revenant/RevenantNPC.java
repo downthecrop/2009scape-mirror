@@ -16,6 +16,7 @@ import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.impl.WildernessZone;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
+import rs09.game.content.zone.wilderness.RevenantController;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.system.config.NPCConfigParser;
 import rs09.game.world.GameWorld;
@@ -88,7 +89,7 @@ public class RevenantNPC extends AbstractNPC {
 	@Override
 	public void init() {
 		super.init();
-		RevenantPlugin.getRevenants().add(this);
+		RevenantController.registerRevenant(this);
 		int spawnAnim = getDefinition().getConfiguration(NPCConfigParser.SPAWN_ANIMATION, -1);
 		if (spawnAnim != -1) {
 			animate(new Animation(spawnAnim));
@@ -98,8 +99,7 @@ public class RevenantNPC extends AbstractNPC {
 	@Override
 	public void clear() {
 		super.clear();
-		RevenantPlugin.getRevenants().remove(this);
-		RevenantPlugin.spawn();
+		RevenantController.unregisterRevenant(this);
 	}
 
 	@Override
@@ -121,7 +121,7 @@ public class RevenantNPC extends AbstractNPC {
 			}
 			setAttribute("eat-delay", GameWorld.getTicks() + 6);
 		}
-		if (!getLocks().isMovementLocked()) {
+/*		if (!getLocks().isMovementLocked()) {
 			if (!getPulseManager().hasPulseRunning() && !getProperties().getCombatPulse().isAttacking() && !getProperties().getCombatPulse().isInCombat() && nextWalk < GameWorld.getTicks()) {
 				setNextWalk();
 				Location l = getMovementDestination();
@@ -129,7 +129,7 @@ public class RevenantNPC extends AbstractNPC {
 					Pathfinder.find(this, l, true, Pathfinder.SMART).walk(this);
 				}
 			}
-		}
+		}*/
 		if (aggressiveHandler != null && aggressiveHandler.selectTarget()) {
 			return;
 		}

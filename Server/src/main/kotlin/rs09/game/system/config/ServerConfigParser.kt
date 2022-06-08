@@ -115,6 +115,7 @@ object ServerConfigParser {
         ServerConstants.SERVER_GE_NAME = data.getString("world.name_ge") ?: ServerConstants.SERVER_NAME
         ServerConstants.RULES_AND_INFO_ENABLED = data.getBoolean("world.show_rules", true)
         ServerConstants.BOTS_INFLUENCE_PRICE_INDEX = data.getBoolean("world.bots_influence_ge_price", true)
+        ServerConstants.REVENANT_POPULATION = data.getLong("world.revenant_population", 30L).toInt()
     }
 
 

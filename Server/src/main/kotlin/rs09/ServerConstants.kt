@@ -13,6 +13,9 @@ import java.math.BigInteger
 class ServerConstants {
 	companion object {
 		@JvmField
+		var REVENANT_POPULATION: Int = 30
+
+        @JvmField
 		var BOTS_INFLUENCE_PRICE_INDEX = true
 
         @JvmField
