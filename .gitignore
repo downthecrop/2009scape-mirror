@@ -25,5 +25,5 @@ gradle
 **/*.swp
 **/*.swo
 build/kotlin/sessions/
-/Management-Server/.run/*
-/Server/.run/*
+Management-Server/.run/*
+Server/.run/*
