@@ -67,7 +67,6 @@ class DoughMakingListener : InteractionListener {
 
                             val emptyWaterContainerId = FULL_WATER_CONTAINERS_TO_EMPTY_CONTAINERS[waterContainer.id]!!
                             addItem(player!!, emptyWaterContainerId)
-                            player!!.dispatch(ResourceProducedEvent(emptyWaterContainerId, 1, player!!))
 
                             addItem(player!!, Items.EMPTY_POT_1931)
                             player!!.dispatch(ResourceProducedEvent(Items.EMPTY_POT_1931, 1, player!!))
