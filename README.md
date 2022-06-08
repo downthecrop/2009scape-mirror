@@ -174,7 +174,7 @@ After setting up git lfs, you may need to run `git lfs pull` in the root of the 
 ### Running the project
 ***Note: If you choose not to use the provided run scripts, you *must* run `mvn clean` before it will build correctly.***
 
-####Linux / OSX
+#### Linux / OSX
 1. Make sure your database of choice is running (see above)
 2. Start the Management Server with run-ms.sh
 3. Start the game server with run-server.sh
@@ -191,8 +191,9 @@ After setting up git lfs, you may need to run `git lfs pull` in the root of the 
 4. Right click pom.xml and click "Add Maven Project"
 5. Expand the Server folder
 6. Right click pom.xml and click "Add Maven Project"
-7. Restart IntelliJ
+7. In IntelliJ, File -> Invalidate Caches -> Invalidate Caches and Restart
 8. You should now have ready-made run configurations in the top right: [Windows] Run MS, [Windows] Run Server, [Linux] Run MS, [Linux] Run Server
+9. Go ahead and use the Run Server configuration for your OS to make sure everything worked.
 
 ### IDE Integration: Eclipse
 Note: This section could use improvement. If you have a better way to integrate the project with eclipse, feel free to open an MR!
