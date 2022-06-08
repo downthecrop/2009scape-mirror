@@ -4,6 +4,7 @@ import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import rs09.tools.END_DIALOGUE
 
@@ -12,6 +13,7 @@ import rs09.tools.END_DIALOGUE
  * "Henceforth, you shall be called... Craig."
  */
 
+@Initializable
 class AlKharidShopKeeperDialogue(player: Player? = null) : DialoguePlugin() {
     override fun newInstance(player: Player?): DialoguePlugin {
         return AlKharidShopKeeperDialogue(player)

@@ -8,6 +8,7 @@ import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
 import org.rs09.consts.Animations
 import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.Topic
@@ -17,6 +18,7 @@ import rs09.tools.END_DIALOGUE
  * @author bushtail
  */
 
+@Initializable
 class JaraahDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun newInstance(player: Player?): DialoguePlugin {
         return JaraahDialogue(player)

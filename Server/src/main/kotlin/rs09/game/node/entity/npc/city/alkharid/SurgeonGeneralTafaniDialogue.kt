@@ -7,6 +7,7 @@ import core.game.content.global.Skillcape
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.*
 import rs09.tools.END_DIALOGUE
@@ -15,6 +16,7 @@ import rs09.tools.END_DIALOGUE
  * @author bushtail
  */
 
+@Initializable
 class SurgeonGeneralTafaniDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun newInstance(player: Player?): DialoguePlugin {
         return SurgeonGeneralTafaniDialogue(player)
