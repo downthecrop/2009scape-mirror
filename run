@@ -20,13 +20,15 @@ RUN_MODE=0
 
 help()
 {
-    echo "Usage: $0 [-h] [-q] [-r] [-t] [-x]"
+    echo "Usage: $0 [-h] [-q] [-r] [-t] [-x] [-g] [-e <filename>] [-o <filename>]"
     echo "  -h: Display this message."
     echo "  -q: Don't perform the incremental build."
     echo "  -r: Force clean rebuild."
     echo "  -t: Only run tests, not the JARs."
     echo "  -x: Run in a fancy tmux session."
     echo "  -g: Build + run only the game server (no management server)."
+    echo "  -e: Write STDERR to 'logs/filename' as well as the terminal.";
+    echo "  -o: Write STDOUT to 'logs/filename' as well as the terminal."
 }
 
 error()
