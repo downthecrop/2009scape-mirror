@@ -68,23 +68,6 @@ public final class WorldCommunicator {
 	}
 
 	/**
-	 * Registers a login attempt.
-	 * @param parser The login attempt.
-	 */
-	public static void register(final LoginParser parser) {
-		LoginParser p = loginAttempts.get(parser.getDetails().getUsername());
-		if (p != null && GameWorld.getTicks() - p.getTimeStamp() < 50 && p.getDetails().getRights() == Rights.REGULAR_PLAYER) {
-			parser.getDetails().getSession().write(AuthResponse.AlreadyOnline, true);
-			return;
-		}
-		loginAttempts.put(parser.getDetails().getUsername(), parser);
-		TaskExecutor.executeSQL(() -> {
-			MSPacketRepository.sendPlayerRegistry(parser);
-			return Unit.INSTANCE;
-		});
-	}
-
-	/**
 	 * Attempts to connect to the management server.
 	 */
 	public static void connect() {

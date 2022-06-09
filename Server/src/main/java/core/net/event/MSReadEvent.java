@@ -60,11 +60,6 @@ public final class MSReadEvent extends IoReadEvent {
 			byte[] data = new byte[size];
 			buffer.get(data);
 			last = opcode;
-			try {
-				MSPacketRepository.handleIncoming(opcode, ByteBuffer.wrap(data));
-			} catch (Throwable t) {
-				t.printStackTrace();
-			}
 		}
 	}
 

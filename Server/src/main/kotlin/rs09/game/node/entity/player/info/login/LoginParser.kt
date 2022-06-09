@@ -55,7 +55,6 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
             Repository.LOGGED_IN_PLAYERS.remove(player.username)
             Repository.lobbyPlayers.remove(player)
             Repository.playerNames.remove(player.name)
-            MSPacketRepository.sendPlayerRemoval(player.name)
             flag(AuthResponse.ErrorLoadingProfile)
         }
         //Repository.getPlayerNames().put(player.getName(), player);
@@ -63,16 +62,6 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
             override fun pulse(): Boolean {
                 try {
                     if (details.session.isActive) {
-                        val p = Repository.getPlayerByName(player.name)
-                        if (p != null) {
-                            p.clear()
-                            Repository.playerNames.remove(p.name)
-                            Repository.lobbyPlayers.remove(p)
-                            Repository.removePlayer(p)
-                        }
-                        if (!Repository.players.contains(player)) {
-                            Repository.addPlayer(player)
-                        }
                         loginListeners.forEach(Consumer { listener: LoginListener -> listener.login(player) }) //Run our login hooks
                         parser.runContentHooks() //Run our saved-content-parsing hooks
                         player.details.session.setObject(player)
@@ -83,7 +72,6 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
                         player.monitor.log(player.details.macAddress, PlayerMonitor.ADDRESS_LOG)
                     } else {
                         Repository.playerNames.remove(player.name)
-                        MSPacketRepository.sendPlayerRemoval(player.name)
                     }
                 } catch (t: Throwable) {
                     t.printStackTrace()
@@ -91,7 +79,6 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
                     Repository.LOGGED_IN_PLAYERS.remove(player.username)
                     Repository.lobbyPlayers.remove(player)
                     Repository.playerNames.remove(player.name)
-                    MSPacketRepository.sendPlayerRemoval(player.name)
                     flag(AuthResponse.ErrorLoadingProfile)
                 }
                 return true
@@ -112,15 +99,9 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
         player.updateSceneGraph(true)
         player.configManager.init()
         LoginConfiguration.configureGameWorld(player)
-        Repository.playerNames[player.name] = player
-        GameWorld.Pulser.submit(object : Pulse(1) {
-            override fun pulse(): Boolean {
-                if (!Repository.players.contains(player)) {
-                    Repository.addPlayer(player)
-                }
-                return true
-            }
-        })
+        if (!Repository.players.contains(player)) {
+            Repository.addPlayer(player)
+        }
     }
 
     /**
@@ -128,17 +109,11 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
      * @return `True` if the request is valid.
      */
     private fun validateRequest(): Boolean {
-        if (WorldCommunicator.getState() == ManagementServerState.CONNECTING) {
-            return flag(AuthResponse.LoginServerOffline)
-        }
         if (!details.session.isActive) {
             return false
         }
         if (SystemManager.isUpdating()) {
             return flag(AuthResponse.Updating)
-        }
-        if (Repository.getPlayerByName(details.username).also { gamePlayer = it } != null && gamePlayer!!.session.isActive) {
-            return flag(AuthResponse.AlreadyOnline)
         }
         return if (details.isBanned) {
             flag(AuthResponse.AccountDisabled)
