@@ -1,0 +1,110 @@
+syntax = "proto2";
+
+package management;
+
+option java_multiple_files = true;
+option java_package = "proto.management";
+option java_outer_classname = "ManagementProtos";
+
+message PlayerStatusUpdate {
+  required string username = 1;
+  required int32 world = 2;
+  required bool notifyFriendsOnly = 3;
+}
+
+message ClanMessage {
+  required string sender = 1;
+  required string clanName = 2;
+  required string message = 3;
+  required int32 rank = 4;
+}
+
+message PrivateMessage {
+  required string sender = 1;
+  required string receiver = 2;
+  required string message = 3;
+  required int32 rank = 4;
+}
+
+message RequestContactInfo {
+  required string username = 1;
+  required int32 world = 2;
+}
+
+message SendContactInfo {
+  message Contact {
+    required string username = 1;
+    optional int32 world = 2;
+    optional int32 rank = 3;
+  }
+
+  required string username = 1;
+  repeated Contact contacts = 2;
+  repeated string blocked = 3;
+}
+
+message FriendUpdate {
+  enum Type {
+    ADD = 0;
+    REMOVE = 1;
+  }
+
+  required Type type = 1;
+  required string username = 2;
+  required string friend = 3;
+}
+
+message BlockedUpdate {
+  enum Type {
+    ADD = 0;
+    REMOVE = 1;
+  }
+
+  required Type type = 1;
+  required string username = 2;
+  required string friend = 3;
+}
+
+message RequestClanInfo {
+  required int32 world = 1;
+  required string clanOwner = 2;
+}
+
+message SendClanInfo {
+  message ClanMember {
+    required string username = 1;
+    required int32 world = 2;
+    required int32 rank = 3;
+  }
+
+  required string clanOwner = 1;
+  required bool hasInfo = 2;
+  optional string clanName = 3;
+  optional int32 joinRequirement = 4;
+  optional int32 kickRequirement = 5;
+  optional int32 messageRequirement = 6;
+  optional int32 lootRequirement = 7;
+  repeated ClanMember members = 8;
+}
+
+message JoinClanRequest {
+  required string username = 1;
+  required string clanName = 2;
+}
+
+message LeaveClanRequest {
+  required string username = 1;
+  required string clanName = 2;
+}
+
+message ClanJoinNotification {
+  required string username = 1;
+  required string clanName = 2;
+  required int32 world = 3;
+}
+
+message ClanLeaveNotification {
+  required string username = 1;
+  required string clanName = 2;
+  required int32 world = 3;
+}

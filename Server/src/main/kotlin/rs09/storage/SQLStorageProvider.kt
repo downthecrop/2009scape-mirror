@@ -1,7 +1,9 @@
 package rs09.storage
 
+import core.game.system.communication.CommunicationInfo
 import rs09.auth.UserAccountInfo
 import rs09.game.system.SystemLogger
+import rs09.game.world.repository.Repository
 import java.lang.Long.max
 import java.sql.*
 
@@ -155,6 +157,24 @@ class SQLStorageProvider : AccountStorageProvider {
         }
     }
 
+    override fun getOnlineFriends(username: String): List<String> {
+        val friends = ArrayList<String>()
+        var fTokens = ""
+        val conn = getConnection()
+        conn.use {
+            val friendsQuery = it.prepareStatement(GET_ALL_FRIENDS_QUERY)
+            friendsQuery.setString(1, username)
+            val f = friendsQuery.executeQuery()
+            if (f.next()) {
+                fTokens = f.getString(1)
+            }
+        }
+        val contacts = CommunicationInfo.parseContacts(fTokens)
+        for ((friendName, _) in contacts) if (Repository.getPlayerByName(friendName) != null) friends.add(friendName)
+
+        return friends
+    }
+
     companion object {
         private const val usernameQuery = "SELECT username FROM members WHERE username = ?;"
         private const val removeInfoQuery = "DELETE FROM members WHERE username = ?;"
@@ -227,5 +247,7 @@ class SQLStorageProvider : AccountStorageProvider {
             15 to "lastLogin",
             16 to "online"
         )
+
+        private val GET_ALL_FRIENDS_QUERY = "SELECT contacts FROM players WHERE username = ?;"
     }
 }

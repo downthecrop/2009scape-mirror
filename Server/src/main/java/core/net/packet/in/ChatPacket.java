@@ -3,6 +3,7 @@ package core.net.packet.in;
 import core.game.node.entity.player.Player;
 import core.game.system.monitor.PlayerMonitor;
 import core.game.system.task.Pulse;
+import proto.management.ClanMessage;
 import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.ChatMessage;
 import core.game.world.update.flag.player.ChatFlag;
@@ -11,6 +12,7 @@ import core.net.amsc.WorldCommunicator;
 import core.net.packet.IncomingPacket;
 import core.net.packet.IoBuffer;
 import core.tools.StringUtils;
+import rs09.worker.ManagementEvents;
 
 /**
  * Represents the incoming chat packet.
@@ -29,15 +31,12 @@ public class ChatPacket implements IncomingPacket {
 				return;
 			}
 			if (message.startsWith("/") && player.getCommunication().getClan() != null) {
-				StringBuilder sb = new StringBuilder(message);
-				sb.append(" => ").append(player.getName()).append(" (owned by ").append(player.getCommunication().getClan().getOwner()).append(")");
-				String m = sb.toString();
-				player.getMonitor().log(m.replace(m.charAt(0), ' ').trim(), PlayerMonitor.CLAN_CHAT_LOG);
-				if (WorldCommunicator.isEnabled()) {
-					MSPacketRepository.sendClanMessage(player, message.substring(1));
-				} else {
-					player.getCommunication().getClan().message(player, message.substring(1));
-				}
+				ClanMessage.Builder builder = ClanMessage.newBuilder();
+				builder.setSender(player.getName());
+				builder.setClanName(player.getCommunication().getClan().getOwner().toLowerCase().replace(" ", "_"));
+				builder.setMessage(message.substring(1));
+				builder.setRank(player.getDetails().getRights().ordinal());
+				ManagementEvents.publish(builder.build());
 				return;
 			}
 			player.getMonitor().log(message, PlayerMonitor.PUBLIC_CHAT_LOG);

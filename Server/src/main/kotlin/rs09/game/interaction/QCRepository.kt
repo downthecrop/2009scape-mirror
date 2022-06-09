@@ -10,12 +10,13 @@ import core.game.node.entity.skill.Skills
 import core.game.system.task.Pulse
 import core.game.world.update.flag.context.ChatMessage
 import core.game.world.update.flag.player.ChatFlag
-import core.net.amsc.MSPacketRepository
-import core.net.amsc.WorldCommunicator
+import proto.management.ClanMessage
 import rs09.game.node.entity.skill.slayer.SlayerManager
 import rs09.game.world.GameWorld.Pulser
 import rs09.net.packet.`in`.QCPacketType
+import rs09.worker.ManagementEvents.publish
 import java.nio.ByteBuffer
+import java.util.*
 
 
 /**
@@ -41,11 +42,11 @@ object QCRepository {
 
 
         if(forClan) {
-            if (WorldCommunicator.isEnabled()) {
-                MSPacketRepository.sendClanMessage(player, qcString)
-            } else {
-                player?.communication?.clan?.message(player, qcString)
-            }
+            val builder = ClanMessage.newBuilder()
+            builder.sender = player!!.name
+            builder.clanName = player.communication.clan.owner.lowercase(Locale.getDefault()).replace(" ", "_")
+            builder.message = qcString
+            publish(builder.build())
         } else {
             val ctx = ChatMessage(player, qcString, 0, qcString.length)
             ctx.isQuickChat = true

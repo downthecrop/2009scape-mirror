@@ -191,11 +191,6 @@ public final class Settings {
 			publicChatSetting = pub;
 			update = true;
 		}
-		if (privateChatSetting != priv) {
-			privateChatSetting = priv;
-			update = true;
-			CommunicationInfo.notifyPlayers(player, privateChatSetting != 2, true);
-		}
 		if (tradeSetting != trade) {
 			tradeSetting = trade;
 			update = true;

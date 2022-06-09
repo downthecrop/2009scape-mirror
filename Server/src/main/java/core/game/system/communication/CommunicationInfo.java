@@ -3,6 +3,7 @@ package core.game.system.communication;
 import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.node.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
+import proto.management.PrivateMessage;
 import rs09.auth.UserAccountInfo;
 import rs09.game.system.SystemLogger;
 import core.game.system.monitor.PlayerMonitor;
@@ -18,6 +19,7 @@ import core.net.packet.context.MessageContext;
 import core.net.packet.out.CommunicationMessage;
 import core.net.packet.out.ContactPackets;
 import core.tools.StringUtils;
+import rs09.worker.ManagementEvents;
 
 import java.nio.ByteBuffer;
 import java.util.*;
@@ -37,7 +39,7 @@ public final class CommunicationInfo {
 	/**
 	 * The clan ranks.
 	 */
-	private final Map<String, Contact> contacts = new HashMap<>();
+	private Map<String, Contact> contacts = new HashMap<>();
 
 	/**
 	 * The list of blocked players.
@@ -234,92 +236,18 @@ public final class CommunicationInfo {
 	}
 
 	/**
-	 * Synchronizes the contact lists.
-	 */
-	public void sync(Player player) {
-		if (WorldCommunicator.isEnabled()) {
-			if (!player.isArtificial()) {
-				MSPacketRepository.requestCommunicationInfo(player.getName());
-			}
-			return;
-		}
-		if (player.getSettings().getPrivateChatSetting() != 2) {
-			notifyPlayers(player, true, false);
-		}
-		PacketRepository.send(ContactPackets.class, new ContactContext(player, ContactContext.UPDATE_STATE_TYPE));
-		PacketRepository.send(ContactPackets.class, new ContactContext(player, ContactContext.IGNORE_LIST_TYPE));
-		for (String name : contacts.keySet()) {
-			Player p = Repository.getPlayerByName(name);
-			int worldId = 0;
-			if (p != null && showActive(player, p)) {
-				worldId = GameWorld.getSettings().getWorldId();
-			}
-			PacketRepository.send(ContactPackets.class, new ContactContext(player, name, worldId));
-		}
-		if (currentClan != null && !player.isArtificial() && (clan = ClanRepository.get(currentClan)) != null) {
-			clan.enter(player);
-		}
-	}
-
-	/**
-	 * Notifies all other players.
-	 * @param online If this player is online.
-	 * @param chatSetting If it was a chat setting change.
-	 */
-	public static void notifyPlayers(Player player, boolean online, boolean chatSetting) {
-		if (WorldCommunicator.isEnabled()) {
-			if (!online && !chatSetting) {
-				MSPacketRepository.sendPlayerRemoval(player.getName());
-			}
-			return;
-		}
-		for (Player p : Repository.getPlayers()) {
-			if (p == player || !p.isActive()) {
-				continue;
-			}
-			if (hasContact(p, player.getName())) {
-				int worldId = 0;
-				if (online && showActive(p, player)) {
-					worldId = GameWorld.getSettings().getWorldId();
-				}
-				p.getCommunication().getContacts().get(player.getName()).setWorldId(worldId);
-				PacketRepository.send(ContactPackets.class, new ContactContext(p, player.getName(), worldId));
-			}
-		}
-		if (!online && !chatSetting && player.getCommunication().getClan() != null) {
-			player.getCommunication().getClan().leave(player, true);
-		}
-	}
-
-	/**
 	 * Sends a message to the target.
 	 * @param player The player sending the message.
 	 * @param target The target.
 	 * @param message The message to send.
 	 */
 	public static void sendMessage(Player player, String target, String message) {
-		if (WorldCommunicator.isEnabled()) {
-			StringBuilder sb = new StringBuilder(message);
-			sb.append(" => ").append(target);
-			player.getMonitor().log(sb.toString(), PlayerMonitor.PRIVATE_CHAT_LOG);
-			MSPacketRepository.sendPrivateMessage(player, target, message);
-			return;
-		}
-		if (!player.getDetails().getCommunication().contacts.containsKey(target)) {
-			return;
-		}
-		Player p = Repository.getPlayerByName(target);
-		if (p == null || !p.isActive() || !showActive(p, player)) {
-			player.getPacketDispatch().sendMessage("That player is currently offline.");
-			return;
-		}
-		if (!GameWorld.getSettings().isDevMode()) {
-			StringBuilder sb = new StringBuilder(message);
-			sb.append(" => ").append(target);
-			player.getMonitor().log(sb.toString(), PlayerMonitor.PRIVATE_CHAT_LOG);
-		}
-		PacketRepository.send(CommunicationMessage.class, new MessageContext(player, p, MessageContext.SEND_MESSAGE, message));
-		PacketRepository.send(CommunicationMessage.class, new MessageContext(p, player, MessageContext.RECIEVE_MESSAGE, message));
+		PrivateMessage.Builder builder = PrivateMessage.newBuilder();
+		builder.setSender(player.getName());
+		builder.setRank(player.getDetails().getRights().ordinal());
+		builder.setMessage(message);
+		builder.setReceiver(target);
+		ManagementEvents.publish(builder.build());
 	}
 
 	/**
@@ -525,7 +453,7 @@ public final class CommunicationInfo {
 	 * @return The currentClan.
 	 */
 	public String getCurrentClan() {
-		return currentClan;
+		return currentClan == null ? "" : currentClan;
 	}
 
 	/**
@@ -640,9 +568,21 @@ public final class CommunicationInfo {
 		currentClan = accountInfo.getCurrentClan();
 
 		String clanReqs = accountInfo.getClanReqs();
+		ClanRank[] reqs = parseClanRequirements(clanReqs);
+		joinRequirement = reqs[0];
+		messageRequirement = reqs[1];
+		kickRequirement = reqs[2];
+		lootRequirement = reqs[3];
+
+		String contacts = accountInfo.getContacts();
+		this.contacts = parseContacts(contacts);
+	}
+
+	public static ClanRank[] parseClanRequirements(String clanReqs) {
+		ClanRank[] requirements = new ClanRank[4];
 		String[] tokens = clanReqs.split(",");
-		ClanRank rank = null;
-		int ordinal = 0;
+		ClanRank rank;
+		int ordinal;
 		for (int i = 0; i < tokens.length; i++) {
 			ordinal = Integer.parseInt(tokens[i]);
 			if (ordinal < 0 || ordinal > ClanRank.values().length -1) {
@@ -651,27 +591,33 @@ public final class CommunicationInfo {
 			rank = ClanRank.values()[ordinal];
 			switch (i) {
 				case 0:
-					joinRequirement = rank;
+					requirements[0] = rank;
 					break;
 				case 1:
-					messageRequirement = rank;
+					requirements[1] = rank;
 					break;
 				case 2:
 					if (ordinal < 3 || ordinal > 8) {
+						requirements[2] = ClanRank.ADMINISTRATOR;
 						break;
 					}
-					kickRequirement = rank;
+					requirements[2] = rank;
 					break;
 				case 3:
-					lootRequirement = rank;
+					requirements[3] = rank;
 					break;
 			}
 		}
 
-		String contacts = accountInfo.getContacts();
+		return requirements;
+	}
+
+	public static HashMap<String, Contact> parseContacts(String contacts) {
+		HashMap<String, Contact> theseContacts = new HashMap<>();
+		String[] tokens;
 		if (!contacts.isEmpty()) {
 			String[] datas = contacts.split("~");
-			Contact contact = null;
+			Contact contact;
 			for (String d : datas) {
 				tokens = d.replace("{", "").replace("}", "").split(",");
 				if (tokens.length == 0) {
@@ -679,8 +625,46 @@ public final class CommunicationInfo {
 				}
 				contact = new Contact(tokens[0]);
 				contact.setRank(ClanRank.values()[Integer.parseInt(tokens[1])]);
-				this.contacts.put(tokens[0], contact);
+				theseContacts.put(tokens[0], contact);
 			}
 		}
+
+		return theseContacts;
+	}
+
+	public String getContactString() {
+		StringBuilder sb = new StringBuilder();
+
+		int index = 0;
+		for (Contact contact : contacts.values()) {
+			sb.append("{");
+			sb.append(contact.getUsername());
+			sb.append(",");
+			sb.append(contact.getRank().ordinal());
+			sb.append("}");
+			if (index++ < contacts.size() - 1) sb.append("~");
+		}
+
+		return sb.toString();
+	}
+
+	public String getBlockedString() {
+		StringBuilder sb = new StringBuilder();
+
+		int index = 0;
+		for (String block : blocked) {
+			sb.append(block);
+			if (index++ < blocked.size() - 1) sb.append(",");
+		}
+
+		return sb.toString();
+	}
+
+	public String getClanReqString() {
+		return
+				joinRequirement.ordinal()
+				+ "," + messageRequirement.ordinal()
+				+ "," + kickRequirement.ordinal()
+				+ "," + lootRequirement.ordinal();
 	}
 }

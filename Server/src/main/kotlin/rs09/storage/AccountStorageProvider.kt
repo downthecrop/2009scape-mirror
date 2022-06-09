@@ -8,4 +8,5 @@ interface AccountStorageProvider {
     fun store(info: UserAccountInfo)
     fun update(info: UserAccountInfo)
     fun remove(info: UserAccountInfo)
+    fun getOnlineFriends(username: String) : List<String>
 }

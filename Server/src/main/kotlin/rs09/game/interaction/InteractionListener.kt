@@ -16,7 +16,7 @@ interface InteractionListener : ContentInterface{
     val GROUNDITEM: Int
         get() = 3
 
-    fun on(id: Int, type: Int, vararg option: String,handler: (player: Player, node: Node) -> Boolean){
+    fun on(id: Int, type: Int, vararg option: String, handler: (player: Player, node: Node) -> Boolean){
         InteractionListeners.add(id,type,option,handler)
     }
     fun on(ids: IntArray, type: Int, vararg option: String, handler: (player: Player, node: Node) -> Boolean){

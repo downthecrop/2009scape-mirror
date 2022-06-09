@@ -6,6 +6,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.PlayerDetails;
 import core.game.node.entity.player.info.Rights;
 import core.game.system.monitor.PlayerMonitor;
+import proto.management.ClanJoinNotification;
+import proto.management.ClanLeaveNotification;
 import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
 import core.net.amsc.WorldCommunicator;
@@ -14,6 +16,7 @@ import core.net.packet.context.ClanContext;
 import core.net.packet.context.MessageContext;
 import core.net.packet.out.CommunicationMessage;
 import core.net.packet.out.UpdateClanChat;
+import rs09.worker.ManagementEvents;
 
 import java.util.*;
 
@@ -123,6 +126,13 @@ public final class ClanRepository {
 		if (!players.contains(entry)) {
 			players.add(entry);
 		}
+
+		ClanJoinNotification.Builder event = ClanJoinNotification.newBuilder();
+		event.setUsername(player.getName());
+		event.setWorld(GameWorld.getSettings().getWorldId());
+		event.setClanName(owner);
+		ManagementEvents.publish(event.build());
+
 		player.getPacketDispatch().sendMessage("Now talking in clan channel " + name + ":clan:");
 		player.getPacketDispatch().sendMessage("To talk, start each line of chat with the / symbol.:clan:");
 		update();
@@ -258,6 +268,12 @@ public final class ClanRepository {
 		if (clanWar != null && !isDefault()) {
 			clanWar.fireEvent("leavefc", player);
 		}
+
+		ClanLeaveNotification.Builder event = ClanLeaveNotification.newBuilder();
+		event.setClanName(owner);
+		event.setUsername(player.getName());
+		event.setWorld(GameWorld.getSettings().getWorldId());
+		ManagementEvents.publish(event.build());
 	}
 
 	/**

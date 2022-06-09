@@ -20,7 +20,6 @@ import core.game.node.entity.player.info.RenderInfo;
 import core.game.node.entity.player.info.Rights;
 import core.game.node.entity.player.info.UIDInfo;
 import core.game.node.entity.player.info.login.LoginConfiguration;
-import core.game.node.entity.player.info.login.PlayerParser;
 import core.game.node.entity.player.link.*;
 import core.game.node.entity.player.link.appearance.Appearance;
 import core.game.node.entity.player.link.audio.AudioManager;
@@ -64,14 +63,15 @@ import core.tools.RandomFunction;
 import core.tools.StringUtils;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
-import org.json.simple.JSONObject;
 import org.rs09.consts.Items;
+import proto.management.ClanLeaveNotification;
+import proto.management.LeaveClanRequest;
+import proto.management.PlayerStatusUpdate;
 import rs09.GlobalStats;
 import rs09.ServerConstants;
 import rs09.game.VarpManager;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.node.entity.combat.equipment.EquipmentDegrader;
-import rs09.game.node.entity.player.info.login.PlayerSaveParser;
 import rs09.game.node.entity.player.info.login.PlayerSaver;
 import rs09.game.node.entity.skill.runecrafting.PouchManager;
 import rs09.game.node.entity.state.newsys.State;
@@ -84,6 +84,7 @@ import rs09.game.world.update.NPCRenderer;
 import rs09.game.world.update.PlayerRenderer;
 import rs09.game.world.update.UpdateSequence;
 import rs09.tools.TickUtilsKt;
+import rs09.worker.ManagementEvents;
 
 import java.util.*;
 
@@ -382,11 +383,27 @@ public class Player extends Entity {
 		interfaceManager.closeSingleTab();
 		super.clear();
 		getZoneMonitor().clear();
-		CommunicationInfo.notifyPlayers(this, false, false);
 		HouseManager.leave(this);
 		UpdateSequence.getRenderablePlayers().remove(this);
 		details.save();
+		sendLogoutEvents();
 		Repository.getDisconnectionQueue().add(this);
+	}
+
+	private void sendLogoutEvents() {
+		PlayerStatusUpdate.Builder statusBuilder = PlayerStatusUpdate.newBuilder();
+		statusBuilder.setUsername(this.name);
+		statusBuilder.setWorld(0); //offline
+		statusBuilder.setNotifyFriendsOnly(false);
+		ManagementEvents.publish(statusBuilder.build());
+
+		if (getCommunication().getClan() != null) {
+			ClanLeaveNotification.Builder event = ClanLeaveNotification.newBuilder();
+			event.setUsername(getName());
+			event.setWorld(GameWorld.getSettings().getWorldId());
+			event.setClanName(getCommunication().getClan().getOwner());
+			ManagementEvents.publish(event.build());
+		}
 	}
 
 	public void toggleWardrobe(boolean intoWardrobe){

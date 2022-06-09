@@ -170,8 +170,6 @@ class TutorialMagicTutorDialogue(player: Player? = null) : DialoguePlugin(player
                         "at any time, look for a signpost or use the Lumbridge Home Port Spell."
                     )
                     stage = 12
-                    if(WorldCommunicator.isEnabled())
-                        MSPacketRepository.sendInfoUpdate(player)
                     TutorialStage.removeHintIcon(player)
 
                     player.unhook(TutorialKillReceiver)

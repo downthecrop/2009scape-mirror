@@ -255,6 +255,11 @@ public class PlayerDetails {
 	public void save() {
 		if(isBanned()) return;
 		try {
+			accountInfo.setContacts(communicationInfo.getContactString());
+			accountInfo.setBlocked(communicationInfo.getBlockedString());
+			accountInfo.setClanName(communicationInfo.getClanName());
+			accountInfo.setClanReqs(communicationInfo.getClanReqString());
+			accountInfo.setCurrentClan(communicationInfo.getCurrentClan());
 			GameWorld.getAccountStorage().update(accountInfo);
 		} catch (IllegalStateException ignored) {}
 	}

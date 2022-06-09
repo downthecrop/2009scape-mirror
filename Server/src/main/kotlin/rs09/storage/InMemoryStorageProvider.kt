@@ -24,4 +24,8 @@ class InMemoryStorageProvider : AccountStorageProvider {
     override fun remove(info: UserAccountInfo) {
         storage.remove(info.username)
     }
+
+    override fun getOnlineFriends(username: String): List<String> {
+        return ArrayList()
+    }
 }

@@ -125,7 +125,6 @@ public final class LumbridgeGuideDialogue extends DialoguePlugin {
 			break;
 		case 807:
 			player.getIronmanManager().setMode(IronmanMode.NONE);
-			MSPacketRepository.sendInfoUpdate(player);
 			end();
 			break;
 		case 10:

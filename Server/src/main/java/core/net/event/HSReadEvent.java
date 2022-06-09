@@ -6,6 +6,7 @@ import core.net.IoSession;
 import core.net.lobby.WorldList;
 import core.net.registry.AccountRegister;
 import core.tools.RandomFunction;
+import rs09.game.system.SystemLogger;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
@@ -64,6 +65,7 @@ public final class HSReadEvent extends IoReadEvent {
 			WorldList.sendUpdate(session, updateStamp);
 			break;
 		default:
+			SystemLogger.logInfo("PKT " + opcode);
 			session.disconnect();
 			break;
 		}

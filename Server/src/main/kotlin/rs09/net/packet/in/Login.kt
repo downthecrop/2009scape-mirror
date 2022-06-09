@@ -3,18 +3,24 @@ package rs09.net.packet.`in`
 import core.cache.crypto.ISAACCipher
 import core.cache.crypto.ISAACPair
 import core.cache.misc.buffer.ByteBufferUtils
+import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.PlayerDetails
 import core.game.node.entity.player.info.UIDInfo
 import core.game.node.entity.player.info.login.LoginType
 import core.net.Constants
 import core.net.IoSession
-import core.net.amsc.WorldCommunicator
 import core.tools.StringUtils
+import proto.management.JoinClanRequest
+import proto.management.PlayerStatusUpdate
+import proto.management.RequestContactInfo
 import rs09.ServerConstants
 import rs09.auth.AuthResponse
 import rs09.game.node.entity.player.info.login.LoginParser
 import rs09.game.system.SystemLogger
+import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
+import rs09.worker.ManagementEvents
+import rs09.worker.ManagementEvents.publish
 import java.math.BigInteger
 import java.nio.BufferUnderflowException
 import java.nio.ByteBuffer
@@ -68,6 +74,11 @@ object Login {
             info.isaacPair = produceISAACPairFrom(decryptedBuffer)
             info.username = StringUtils.longToString(decryptedBuffer.long)
             info.password = ByteBufferUtils.getString(decryptedBuffer)
+
+            if (Repository.getPlayerByName(info.username) != null) {
+                return Pair(AuthResponse.AlreadyOnline, info)
+            }
+
             return Pair(AuthResponse.Success, info)
         } catch (e: Exception) {
             SystemLogger.logErr("Exception encountered during login packet parsing! See stack trace below.")
@@ -109,6 +120,31 @@ object Login {
             Repository.LOGGED_IN_PLAYERS.add(details.username)
         details.session = session
         details.info.translate(UIDInfo(details.ipAddress, "DEPRECATED", "DEPRECATED", "DEPRECATED"))
-        WorldCommunicator.register(LoginParser(details, LoginType.fromType(opcode)))
+        val player = Player(details)
+        if (!Repository.players.contains(player)) {
+            Repository.addPlayer(player)
+        }
+        LoginParser(details, LoginType.fromType(opcode)).initialize(player, opcode == RECONNECT_LOGIN_OP)
+        sendMSEvents(details)
+    }
+
+    private fun sendMSEvents(details: PlayerDetails) {
+        val statusEvent = PlayerStatusUpdate.newBuilder()
+        statusEvent.username = details.username
+        statusEvent.world = GameWorld.settings!!.worldId
+        statusEvent.notifyFriendsOnly = false
+        publish(statusEvent.build())
+
+        val contactEvent = RequestContactInfo.newBuilder()
+        contactEvent.username = details.username
+        contactEvent.world = GameWorld.settings!!.worldId
+        publish(contactEvent.build())
+
+        if (!details.communication.currentClan.isNullOrEmpty() && details.communication.clan == null) {
+            val clanEvent = JoinClanRequest.newBuilder()
+            clanEvent.username = details.username
+            clanEvent.clanName = details.communication.currentClan
+            publish(clanEvent.build())
+        }
     }
 }
