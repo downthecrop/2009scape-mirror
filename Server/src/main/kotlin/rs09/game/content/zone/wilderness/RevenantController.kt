@@ -9,13 +9,19 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.npc.revenant.RevenantNPC
 import core.game.node.entity.npc.revenant.RevenantType
 import core.game.node.entity.player.link.TeleportManager
+import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
+import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
 import rs09.ServerConstants
 import rs09.game.system.SystemLogger
 import rs09.game.system.command.Privilege
+import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class RevenantController : TickListener, Commands {
 
@@ -24,6 +30,7 @@ class RevenantController : TickListener, Commands {
         private val taskTimeRemaining = HashMap<RevenantNPC, Int>()
         private val currentTask = HashMap<RevenantNPC, RevenantTask>()
         private var expectedRevAmount: Int = ServerConstants.REVENANT_POPULATION
+        private var groupPatrolQueue = ArrayList<RevenantNPC>()
 
         @JvmStatic fun registerRevenant(revenantNPC: RevenantNPC) {
             trackedRevenants.add(revenantNPC)
@@ -144,18 +151,54 @@ class RevenantController : TickListener, Commands {
             }
         },
         PATROLLING_ROUTE {
+            private val MAXIMUM_GROUP_PATROL_LEVEL = 105
+
             override fun assign(revenantNPC: RevenantNPC) {
-                revenantNPC.setAttribute("route", routes.random())
-                revenantNPC.setAttribute("routeidx", -1)
+                if (canGroup(revenantNPC)) {
+                    addToPatrolGroup(revenantNPC)
+                } else {
+                    revenantNPC.setAttribute("route", routes.random())
+                    revenantNPC.setAttribute("routeidx", -1)
+                }
             }
 
+            private fun addToPatrolGroup(revenantNPC: RevenantNPC) {
+                revenantNPC.setAttribute("group", true)
+                groupPatrolQueue.add(revenantNPC)
+
+                if (groupPatrolQueue.size == 3) {
+                    val groupRoute = routes.random()
+                    for (rev in groupPatrolQueue) {
+                        rev.setAttribute("route", groupRoute)
+                        rev.setAttribute("routeidx", -1)
+                    }
+                    groupPatrolQueue.clear()
+                }
+            }
+
+            private fun canGroup(revenantNPC: RevenantNPC) =
+                revenantNPC.properties.currentCombatLevel <= MAXIMUM_GROUP_PATROL_LEVEL && RandomFunction.nextBool()
+
             override fun execute(revenantNPC: RevenantNPC) {
-                val route = revenantNPC.getAttribute<Array<Location>>("route")!!
+                val isGroup = revenantNPC.getAttribute("group", false)
+                val route = revenantNPC.getAttribute<Array<Location>>("route", null)
                 val routeIdx = revenantNPC.getAttribute("routeidx", -1)
 
                 if (!canMove(revenantNPC)) return
 
+                if (isGroup && route == null) { //if this is a grouped rev and we are waiting on more revs still
+                    taskTimeRemaining[revenantNPC] = 50 //just to make sure it doesn't time out roaming...
+                    RANDOM_ROAM.execute(revenantNPC)
+                    return
+                }
+
                 if (routeIdx == -1) {
+                    GameWorld.Pulser.submit(object : Pulse() {
+                        override fun pulse(): Boolean {
+                            Graphics.send(Graphics(86), revenantNPC.location)
+                            return true
+                        }
+                    })
                     teleport(revenantNPC, route[0], TeleportManager.TeleportType.INSTANT)
                     revenantNPC.setAttribute("routeidx", 1)
                 } else {
@@ -164,9 +207,10 @@ class RevenantController : TickListener, Commands {
                         revenantNPC.setAttribute("done", true)
                         return
                     }
+                    val pathVariance = if (isGroup) 4 else 10
                     val nextLoc = route[routeIdx].transform(
-                        RandomFunction.random(-10, 10),
-                        RandomFunction.random(-10,10),
+                        RandomFunction.random(-pathVariance, pathVariance),
+                        RandomFunction.random(-pathVariance, pathVariance),
                         0
                     )
                     revenantNPC.pulseManager.run(object : MovementPulse(revenantNPC, nextLoc) {
