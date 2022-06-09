@@ -13,7 +13,9 @@ import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import core.tools.RandomFunction
 import rs09.ServerConstants
+import rs09.game.system.SystemLogger
 import rs09.game.system.command.Privilege
+import rs09.game.world.repository.Repository
 
 class RevenantController : TickListener, Commands {
 
@@ -27,12 +29,14 @@ class RevenantController : TickListener, Commands {
             trackedRevenants.add(revenantNPC)
             taskTimeRemaining[revenantNPC] = 0
             currentTask[revenantNPC] = RevenantTask.NONE
+            Repository.RENDERABLE_NPCS.add(revenantNPC)
         }
 
         @JvmStatic fun unregisterRevenant(revenantNPC: RevenantNPC) {
             trackedRevenants.remove(revenantNPC)
             taskTimeRemaining.remove(revenantNPC)
             currentTask.remove(revenantNPC)
+            Repository.RENDERABLE_NPCS.remove(revenantNPC)
         }
 
         val routes = listOf(
@@ -59,7 +63,7 @@ class RevenantController : TickListener, Commands {
     }
 
     private fun spawnMissingRevenants() {
-        val amountToSpawn = trackedRevenants.size - expectedRevAmount
+        val amountToSpawn = expectedRevAmount - trackedRevenants.size
 
         if (amountToSpawn <= 0) return
 
@@ -82,6 +86,14 @@ class RevenantController : TickListener, Commands {
         define("setrevcap", Privilege.ADMIN) {player, strings ->
             val amt = strings[1].toInt()
             expectedRevAmount = amt
+        }
+
+        define("listrevs", Privilege.ADMIN) {player, strings ->
+            for (rev in trackedRevenants) {
+                SystemLogger.logInfo("REV ${rev.id}-${rev.name} @ ${rev.location.toString()}")
+            }
+
+            SystemLogger.logInfo("Total of ${trackedRevenants.size} revenants spawned.")
         }
     }
 
