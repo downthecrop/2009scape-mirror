@@ -179,6 +179,8 @@ object GameWorld {
             SystemManager.flag(if (settings?.isDevMode == true) SystemState.PRIVATE else SystemState.ACTIVE)
         }
         SceneryDefinition.getDefinitions().values.forEach(Consumer { obj: SceneryDefinition -> obj.examine })
+        //force early loading of all commonly accessed regions
+        (7483..15420).forEach(RegionManager::forId)
         System.gc()
         SystemLogger.initTradeLogger()
     }
