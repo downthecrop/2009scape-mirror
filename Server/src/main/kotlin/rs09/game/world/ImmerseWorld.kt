@@ -31,7 +31,7 @@ class ImmerseWorld : StartupListener {
                     immerseSeersAndCatherby()
                     immerseLumbridgeDraynor()
                     immerseVarrock()
-                    // immerseWilderness() temp disabled due to unbalanced exchange rates
+                    immerseWilderness()
                     immerseFishingGuild()
                     immerseAdventurer()
                     // immerseSlayer()
@@ -193,21 +193,19 @@ class ImmerseWorld : StartupListener {
         }
 
         fun immerseWilderness() {
-            val wilderness = Location.create(2979, 3603, 0)
-            for (i in (0..1)) {
-                GeneralBotCreator(
-                    GreenDragonKiller(CombatStyle.MELEE),
-                    assembler.assembleMeleeDragonBot(CombatBotAssembler.Tier.HIGH, wilderness)
-                )
-                GeneralBotCreator(
-                    GreenDragonKiller(CombatStyle.MELEE),
-                    assembler.assembleMeleeDragonBot(CombatBotAssembler.Tier.MED, wilderness)
-                )
-                GeneralBotCreator(
-                    GreenDragonKiller(CombatStyle.RANGE),
-                    assembler.assembleRangedBot(CombatBotAssembler.Tier.HIGH, wilderness)
-                )
-            }
+            val wilderness = Location.create(3092, 3493, 0)
+            GeneralBotCreator(
+                GreenDragonKiller(CombatStyle.MELEE),
+                assembler.assembleMeleeDragonBot(CombatBotAssembler.Tier.MED, wilderness)
+            )
+            GeneralBotCreator(
+                GreenDragonKiller(CombatStyle.MELEE),
+                assembler.assembleMeleeDragonBot(CombatBotAssembler.Tier.MED, wilderness)
+            )
+            GeneralBotCreator(
+                GreenDragonKiller(CombatStyle.MELEE),
+                assembler.assembleMeleeBot(CombatBotAssembler.Tier.MED, wilderness)
+            )
         }
 
         fun immerseFalador() {
