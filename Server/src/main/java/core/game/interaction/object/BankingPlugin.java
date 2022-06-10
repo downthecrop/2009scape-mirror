@@ -50,11 +50,6 @@ public final class BankingPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        SceneryDefinition.setOptionHandler("use-quickly", this);
-        SceneryDefinition.setOptionHandler("use", this);
-        SceneryDefinition.setOptionHandler("bank", this);
-        SceneryDefinition.setOptionHandler("collect", this);
-        SceneryDefinition.setOptionHandler("deposit", this);
         new BankingInterface().newInstance(arg);
         new BankDepositInterface().newInstance(arg);
         new BankNPCPlugin().newInstance(arg);
@@ -65,61 +60,8 @@ public final class BankingPlugin extends OptionHandler {
 
     @Override
     public boolean handle(Player player, Node node, String option) {
-        final Scenery object = (Scenery) node;
-        if (player.getIronmanManager().checkRestriction(IronmanMode.ULTIMATE)) {
-            return true;
-        }
-        if (object.getName().contains("Bank") || object.getName().contains("Deposit")) {
-            //TODO: REPLACE THIS ALL WITH A LISTENER. I DONT FEEL LIKE IT RIGHT NOW.
-            player.dispatch(new InteractionEvent(object, option));
-            switch (option) {
-                case "use":
-//				final Location l = object.getLocation();
-//				final Location p = player.getLocation();
-//				final NPC npc = Repository.findNPC(l.transform(l.getX() - p.getX(), l.getY() - p.getY(), 0));
-//				if (node.getId() == 4483) {
-//					player.getBank().open();
-//					return true;
-//				}
-//				if (npc != null && DialogueInterpreter.contains(npc.getId())) {
-//					npc.faceLocation(node.getLocation());
-//					player.getDialogueInterpreter().open(npc.getId(), npc.getId());
-//				} else {
-//					player.getDialogueInterpreter().open(494);
-//				}
-//				return true;
-                case "use-quickly":
-                case "bank":
-                    player.getBankPinManager().openType(1);
-                    checkAchievements(player);
-                    return true;
-                case "collect":
-                    GrandExchangeRecords.getInstance(player).openCollectionBox();
-                    return true;
-                case "deposit":
-                    openDepositBox(player);
-                    return true;
-            }
-        }
+        player.sendChat(":crab: :crab: :crab: RETARDED PLUGIN IS GONE :crab: :crab: :crab:");
         return true;
-    }
-
-    /**
-     * Method used to open the deposit box.
-     *
-     * @param player the player.
-     */
-    private void openDepositBox(final Player player) {
-        player.getInterfaceManager().open(new Component(11)).setCloseEvent(new CloseEvent() {
-            @Override
-            public boolean close(Player player, Component c) {
-                player.getInterfaceManager().openDefaultTabs();
-                return true;
-            }
-        });
-        //player.getInterfaceManager().closeDefaultTabs();
-        player.getInterfaceManager().removeTabs(0, 1, 2, 3, 4, 5, 6);
-        InterfaceContainer.generateItems(player, player.getInventory().toArray(), new String[]{"Examine", "Deposit-X", "Deposit-All", "Deposit-10", "Deposit-5", "Deposit-1",}, 11, 15, 5, 7);
     }
 
     /**
@@ -394,30 +336,17 @@ public final class BankingPlugin extends OptionHandler {
         @Override
         public Plugin<Object> newInstance(Object arg) throws Throwable {
             ComponentDefinition.put(763, this);
-            ComponentDefinition.put(762, this);
-            ComponentDefinition.put(767, this);
             return this;
         }
 
         @Override
         public void open(Player player, Component component) {
-            super.open(player, component);
-            player.getBank().sendBankSpace();
-            int settings = new IfaceSettingsBuilder().enableAllOptions().enableSlotSwitch().setInterfaceEventsDepth(2).build();
-            player.getPacketDispatch().sendIfaceSettings(settings, 73, 762, 0, 496);
         }
 
         @Override
         public boolean handle(final Player p, Component component, int opcode, int button, final int slot, int itemId) {
             final Item item = component.getId() == 762 ? p.getBank().get(slot) : p.getInventory().get(slot);
             switch (component.getId()) {
-                case 767:
-                    switch (button) {
-                        case 10:
-                            p.getBank().open();
-                            break;
-                    }
-                    break;
                 case 762:
                     switch (button) {
                         case 18:
