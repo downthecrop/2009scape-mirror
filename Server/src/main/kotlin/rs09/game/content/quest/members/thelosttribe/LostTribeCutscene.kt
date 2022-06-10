@@ -105,7 +105,6 @@ class LostTribeCutscene(player: Player) : Cutscene(player) {
             }
             19 -> {
                 end {
-                    player.questRepository.getQuest("Lost Tribe").setStage(player, 100)
                     player.questRepository.getQuest("Lost Tribe").finish(player)
                 }
             }
