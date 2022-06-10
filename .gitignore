@@ -1,5 +1,6 @@
 builddir
 logs
+out/
 Management-Server/target/*
 Management-Server/.gradle
 Management-Server/build/
@@ -11,6 +12,9 @@ Server/**/*.class
 Server/build/
 Server/.gradle/
 Server/data/eco/grand_exchange_db.emp
+Server/data/eco/grandexchange.db
+Server/data/serverstore/
+Server/data/global_kill_stats.json
 Server/ge_test.db
 Management-Server/managementprops/
 Server/worldprops/
@@ -25,3 +29,4 @@ gradle
 **/*.swp
 **/*.swo
 build/kotlin/sessions/
+**/*.iml
