@@ -27,6 +27,7 @@ import core.game.system.task.Pulse;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
+import core.game.node.entity.player.link.appearance.Gender;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -241,7 +242,7 @@ public final class BankingPlugin extends OptionHandler {
                     stage = 11;
                     break;
                 case 11:
-                    player(FacialExpression.LAUGH,"Well of course I can, a man of my","status could afford a measly bank fee");
+                    player(FacialExpression.LAUGH,"Well of course I can, a " + (player.getAppearance().getGender() == Gender.FEMALE ? "woman" : "man") + " of my","status could afford a measly bank fee");
                     stage = 12;
                     break;
                 case 12:
