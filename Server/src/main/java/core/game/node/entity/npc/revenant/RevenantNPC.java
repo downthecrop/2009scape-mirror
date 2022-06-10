@@ -83,6 +83,7 @@ public class RevenantNPC extends AbstractNPC {
 		getAggressiveHandler().setChanceRatio(9);
 		getAggressiveHandler().setAllowTolerance(false);
 		getProperties().setCombatTimeOut(120);
+		configureBonuses();
 		super.configure();
 		this.swingHandler = new RevenantCombatHandler(getProperties().getAttackAnimation(), getProperties().getMagicAnimation(), getProperties().getRangeAnimation());
 	}
