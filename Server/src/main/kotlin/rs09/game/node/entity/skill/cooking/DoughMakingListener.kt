@@ -69,7 +69,6 @@ class DoughMakingListener : InteractionListener {
                             addItem(player!!, emptyWaterContainerId)
 
                             addItem(player!!, Items.EMPTY_POT_1931)
-                            player!!.dispatch(ResourceProducedEvent(Items.EMPTY_POT_1931, 1, player!!))
 
                             sendMessage(
                                 player!!,
