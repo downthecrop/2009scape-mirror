@@ -45,7 +45,6 @@ public final class BankingPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        new BankDepositInterface().newInstance(arg);
         new BankNPCPlugin().newInstance(arg);
         new BankNPC().newInstance(arg);
         new BankerDialogue().init();
@@ -314,82 +313,6 @@ public final class BankingPlugin extends OptionHandler {
          */
         public void setId(int id) {
             this.id = id;
-        }
-
-    }
-
-    /**
-     * Represents the bank deposit interface handler.
-     *
-     * @author 'Vexia
-     * @version 1.0
-     */
-    public static final class BankDepositInterface extends ComponentPlugin {
-
-        /**
-         * Represents the deposit animation.
-         */
-        private static final Animation DEPOSIT_ANIMATION = new Animation(834);
-
-        @Override
-        public Plugin<Object> newInstance(Object arg) throws Throwable {
-            ComponentDefinition.put(11, this);
-            return this;
-        }
-
-        @Override
-        public boolean handle(final Player p, Component component, int opcode, int button, final int slot, int itemId) {
-            final Item item = p.getInventory().get(slot);
-            if (item == null && button != 15 && button != 13) {
-                return true;
-            }
-            switch (component.getId()) {
-                case 11:
-                    p.animate(DEPOSIT_ANIMATION);
-                    switch (opcode) {
-                        case 155: // Deposit items
-                            p.getBank().addItem(slot, 1);
-                            break;
-                        case 196:
-                            p.getBank().addItem(slot, 5);
-                            break;
-                        case 124:
-                            p.getBank().addItem(slot, 10);
-                            break;
-                        case 199:
-                            p.getPulseManager().run(new Pulse(1, p) {
-                                @Override
-                                public boolean pulse() {
-                                    p.getBank().addItem(slot, p.getInventory().getAmount(item));
-                                    InterfaceContainer.generateItems(p, p.getInventory().toArray(), new String[]{"Examine", "Deposit-X", "Deposit-All", "Deposit-10", "Deposit-5", "Deposit-1",}, 11, 15, 5, 7);
-                                    return true;
-                                }
-                            });
-                            return true;
-                        case 234:
-                            sendInputDialogue(p, false, "Enter the amount:", (value) -> {
-                                String s = value.toString();
-                                s = s.replace("k","000");
-                                s = s.replace("K","000");
-                                int val = Integer.parseInt(s);
-                                p.getBank().addItem(slot, val);
-                                InterfaceContainer.generateItems(p, p.getInventory().toArray(), new String[]{"Examine", "Deposit-X", "Deposit-All", "Deposit-10", "Deposit-5", "Deposit-1",}, 11, 15, 5, 7);
-                                return Unit.INSTANCE;
-                            });
-                            break;
-                        case 168:
-                            p.sendMessage(item.getDefinition().getExamine());
-                            break;
-                    }
-                    switch (button) {
-                        case 13:
-                            p.getFamiliarManager().dumpBob();
-                            break;
-                    }
-                    break;
-            }
-            InterfaceContainer.generateItems(p, p.getInventory().toArray(), new String[]{"Examine", "Deposit-X", "Deposit-All", "Deposit-10", "Deposit-5", "Deposit-1",}, 11, 15, 5, 7);
-            return true;
         }
 
     }
