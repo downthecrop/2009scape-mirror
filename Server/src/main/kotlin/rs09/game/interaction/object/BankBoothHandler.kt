@@ -71,9 +71,10 @@ class BankBoothHandler : InteractionListener {
         }
 
         player.bank.open()
-        updateAchivementDiary(player)
+        updateAchivementDiary(player);
 
         return true
+        TODO("Rip this out and put it in a proper achivement diary listener.")
     }
 
     private fun regularBankBoothUse(player: Player, node: Node): Boolean {

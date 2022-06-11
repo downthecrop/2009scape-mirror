@@ -46,6 +46,11 @@ private val BANK_TABS = intArrayOf(
 private const val OP_SET_TAB = 155
 private const val OP_COLLAPSE_TAB = 196
 
+/**
+ * Allows the user to interact with the Bank Interface.
+ *
+ * @author vddCore
+ */
 class BankInterface : InterfaceListener {
 
     private fun onBankInterfaceOpen(player: Player, component: Component): Boolean {
