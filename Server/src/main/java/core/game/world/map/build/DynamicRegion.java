@@ -320,8 +320,8 @@ public final class DynamicRegion extends Region {
 		if (chunk == null) {
 			for (int i = x << 3; i < (x + 1) << 3; i++) {
 				for (int j = y << 3; j < (y + 1) << 3; j++) {
-					p.getFlags().getClippingFlags()[i][j] = -1;
-					p.getProjectileFlags().getClippingFlags()[i][j] = -1;
+					p.getFlags().invalidateFlag(i, j);
+					p.getProjectileFlags().invalidateFlag(i, j);
 					Scenery object = p.getObjects()[i][j];
 					if (object != null) {
 						LandscapeParser.removeScenery(object);
@@ -344,8 +344,8 @@ public final class DynamicRegion extends Region {
 					int fromX = (l.getX() - regionBase.getX()) + i;
 					int fromY = (l.getY() - regionBase.getY()) + j;
 					p.getFlags().getLandscape()[toX][toY] = rp.getFlags().getLandscape()[fromX][fromY];
-					p.getFlags().getClippingFlags()[toX][toY] = rp.getFlags().getClippingFlags()[fromX][fromY];
-					p.getProjectileFlags().getClippingFlags()[toX][toY] = rp.getProjectileFlags().getClippingFlags()[fromX][fromY];
+					p.getFlags().flag(fromX, fromY, rp.getFlags().getFlag(fromX, fromY));
+					p.getProjectileFlags().flag(fromX, fromY, rp.getFlags().getFlag(fromX, fromY));
 					Scenery[] objects = { rp.getChunkObject(fromX, fromY) };
 					RegionChunk ch = rp.getChunks()[fromX >> 3][fromY >> 3];
 					if (ch instanceof BuildRegionChunk) {
