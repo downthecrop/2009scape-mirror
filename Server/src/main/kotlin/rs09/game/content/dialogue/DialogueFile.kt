@@ -18,12 +18,18 @@ abstract class DialogueFile {
     var dialoguePlugin: DialoguePlugin? = null
 
     abstract fun handle(componentID: Int, buttonID: Int)
+
     fun load(player: Player, npc: NPC?, interpreter: DialogueInterpreter): DialogueFile{
         this.player = player
         this.npc = npc
         this.interpreter = interpreter
+
+        loaded()
+
         return this
     }
+
+    open fun loaded() { }
 
     open fun npc(vararg messages: String?): Component? {
         return if (npc == null) {
