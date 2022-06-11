@@ -21,6 +21,7 @@ object RegionManager {
      * The region cache mapping.
      */
     private val REGION_CACHE: MutableMap<Int, Region> = HashMap()
+    @JvmStatic val CLIPPING_FLAGS = Array(4) {Array(100) {Array(200) {Array(64) {Array(64) {-1} } } } }
 
     public val LOCK = ReentrantLock()
 
@@ -80,16 +81,31 @@ object RegionManager {
      */
     @JvmStatic
     fun getClippingFlag(z: Int, x: Int, y: Int): Int {
-        var x = x
-        var y = y
-        val region = forId(((x shr 6) shl 8) or (y shr 6))
-        Region.load(region)
-        if (!region.isHasFlags) {
-            return -1
+        val regionX = x shr 6
+        val regionY = y shr 6
+        val localX = x and 63
+        val localY = y and 63
+        return getClippingFlag(z, regionX, regionY, localX, localY)
+    }
+
+    /**
+     * Gets the clipping flags using Jagex-style coords
+     * e.g 0_50_50_13_13 gets plane 0, region 50-50 (12850), (13, 13) which is in lumbridge.
+     */
+    @JvmStatic
+    fun getClippingFlag(z: Int, regionX: Int, regionY: Int, localX: Int, localY: Int) : Int {
+        var flag = CLIPPING_FLAGS[z][regionX][regionY][localX][localY]
+
+        if (flag == -1) {
+            val r = forId((regionX shr 8) or regionY)
+            if (!r.isLoaded)
+                Region.load(r)
+            if (!r.isHasFlags)
+                return -1
+            flag = CLIPPING_FLAGS[z][regionX][regionY][localX][localY]
         }
-        x -= (x shr 6) shl 6
-        y -= (y shr 6) shl 6
-        return region.planes[z].flags.clippingFlags[x][y]
+
+        return flag
     }
 
     /**

@@ -1,6 +1,9 @@
 package core.game.world.map.build;
 
 import core.game.world.map.RegionManager;
+import rs09.game.system.SystemLogger;
+
+import static java.lang.Math.max;
 
 /**
  * Holds a region's flags like clipping flags, members, ...
@@ -71,7 +74,11 @@ public final class RegionFlags {
 	 * @param y The y-coordinate.
 	 */
 	public void flagSolidTile(int x, int y) {
-		clippingFlags[x][y] |= 0x200000;
+		flag(x,y,0x200000);
+	}
+
+	public void flagEmptyTile(int x, int y) {
+		flag(x, y, 0);
 	}
 
 	/**
@@ -80,7 +87,7 @@ public final class RegionFlags {
 	 * @param y The y-coordinate.
 	 */
 	public void flagTileObject(int x, int y) {
-		clippingFlags[x][y] |= 0x40000;
+		flag(x,y,0x40000);
 	}
 
 	/**
@@ -93,6 +100,7 @@ public final class RegionFlags {
 			return;
 		}
 		if ((clippingFlags[x][y] & 0x40000) != 0) {
+			RegionManager.getCLIPPING_FLAGS()[plane][baseX >> 6][baseY >> 6][x][y] &= ~0x40000;
 			clippingFlags[x][y] &= ~0x40000;
 		}
 	}
@@ -125,12 +133,19 @@ public final class RegionFlags {
 	 */
 	public void flag(int x, int y, int clipdata) {
 		if (x > -1 && x < 64 && y > -1 && y < 64) {
+			addToFlagCache(plane, this.baseX >> 6, this.baseY >> 6, x, y, clipdata);
 			clippingFlags[x][y] |= clipdata;
 		} else {
 			RegionManager.addClippingFlag(plane, baseX + x, baseY + y, projectile, clipdata);
 		}
 	}
-	
+
+	private void addToFlagCache(int plane, int regionX, int regionY, int localX, int localY, int clipdata) {
+		if (projectile) return;
+		int current = RegionManager.getCLIPPING_FLAGS()[plane][regionX][regionY][localX][localY];
+		current = max(0, current) | clipdata;
+		RegionManager.getCLIPPING_FLAGS()[plane][regionX][regionY][localX][localY] = current;
+	}
 
 	/**
 	 * Unflags a solid object (type 10/11).
@@ -164,6 +179,7 @@ public final class RegionFlags {
 		}
 		if (x > -1 && x < 64 && y > -1 && y < 64) {
 			if ((clippingFlags[x][y] & clipdata) != 0) {
+				RegionManager.getCLIPPING_FLAGS()[plane][this.baseX >> 6][this.baseY >> 6][x][y] &= ~clipdata;
 				clippingFlags[x][y] &= ~clipdata;
 			}
 		} else {
