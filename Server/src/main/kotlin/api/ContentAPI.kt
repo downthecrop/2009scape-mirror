@@ -1125,6 +1125,17 @@ fun sendItemDialogue(player: Player, item: Int, message: String){
 }
 
 /**
+ * Sends a dialogue box with a single item of certain amount and some text
+ * @param player the player to send it to
+ * @param item the ID of the item to show
+ * @param amount the amount affecting appearance of the shown item
+ * @param message the text to display
+ */
+fun sendItemDialogue(player: Player, item: Int, amount: Int, message: String){
+    player.dialogueInterpreter.sendItemMessage(Item(item, amount), *splitLines(message))
+}
+
+/**
  * Sends a dialogue box with two items and some text
  * @param player the player to send it to
  * @param item1 the ID of the first item to show

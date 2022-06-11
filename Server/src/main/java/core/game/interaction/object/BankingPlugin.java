@@ -2,11 +2,7 @@ package core.game.interaction.object;
 
 import static api.ContentAPIKt.*;
 
-import api.IfaceSettingsBuilder;
-import api.events.InteractionEvent;
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.SceneryDefinition;
-import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -32,7 +28,6 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import kotlin.Unit;
-import rs09.game.content.dialogue.DepositAllDialogue;
 import rs09.game.ge.GrandExchangeRecords;
 import rs09.game.ge.GrandExchangeOffer;
 import rs09.game.world.GameWorld;
@@ -50,7 +45,6 @@ public final class BankingPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        new BankingInterface().newInstance(arg);
         new BankDepositInterface().newInstance(arg);
         new BankNPCPlugin().newInstance(arg);
         new BankNPC().newInstance(arg);
@@ -184,7 +178,7 @@ public final class BankingPlugin extends OptionHandler {
                     stage = 11;
                     break;
                 case 11:
-                    player(FacialExpression.LAUGH,"Well of course I can, a " + (player.isMale() ? "man" : "woman") + " of my","status could afford a measly bank fee");
+                    player(FacialExpression.LAUGH,"Well of course I can, a man of my","status could afford a measly bank fee");
                     stage = 12;
                     break;
                 case 12:
@@ -320,179 +314,6 @@ public final class BankingPlugin extends OptionHandler {
          */
         public void setId(int id) {
             this.id = id;
-        }
-
-    }
-
-    /**
-     * Represents the component plugin used to handle banking interfaces.
-     *
-     * @author Emperor
-     * @author 'Vexia
-     * @version 1.0
-     */
-    public static final class BankingInterface extends ComponentPlugin {
-
-        @Override
-        public Plugin<Object> newInstance(Object arg) throws Throwable {
-            ComponentDefinition.put(763, this);
-            return this;
-        }
-
-        @Override
-        public void open(Player player, Component component) {
-        }
-
-        @Override
-        public boolean handle(final Player p, Component component, int opcode, int button, final int slot, int itemId) {
-            final Item item = component.getId() == 762 ? p.getBank().get(slot) : p.getInventory().get(slot);
-            switch (component.getId()) {
-                case 762:
-                    switch (button) {
-                        case 18:
-                            p.getDialogueInterpreter().open(new DepositAllDialogue().getID());
-                            return true;
-                        case 23:
-                            p.getDialogueInterpreter().sendOptions("Select an Option", "Check bank value", "Banking assistance", "Close");
-                            p.getDialogueInterpreter().addAction(new DialogueAction() {
-
-                                @Override
-                                public void handle(Player player, int buttonId) {
-                                    switch (buttonId) {
-                                        case 2:
-                                            p.getDialogueInterpreter().sendItemMessage(new Item(995, 50000), "<br>Your bank is worth approximately <col=a52929>" + NumberFormat.getInstance().format(p.getBank().getWealth()) + "</col> coins.");
-                                            break;
-                                        case 3:
-                                            p.getBank().close();
-                                            p.getInterfaceManager().open(new Component(767));
-                                            break;
-                                        case 4:
-                                            p.getDialogueInterpreter().close();
-                                            break;
-                                    }
-                                }
-
-                            });
-                            break;
-                        case 14:
-                            p.getBank().setInsertItems(!p.getBank().isInsertItems());
-                            return true;
-                        case 16:
-                            p.getBank().setNoteItems(!p.getBank().isNoteItems());
-                            return true;
-                        case 73:
-                            int amount = 0;
-                            switch (opcode) {
-                                case 155:
-                                    amount = 1;
-                                    break;
-                                case 196:
-                                    amount = 5;
-                                    break;
-                                case 124:
-                                    amount = 10;
-                                    break;
-                                case 199:
-                                    amount = p.getBank().getLastAmountX();
-                                    break;
-                                case 234:
-                                    sendInputDialogue(p, false, "Enter the amount:", (value) -> {
-                                        String s = value.toString();
-                                        s = s.replace("k","000");
-                                        s = s.replace("K","000");
-                                        s = s.replace("m","000000");
-                                        s = s.replace("M","000000");
-                                        int val = Integer.parseInt(s);
-                                        p.getBank().takeItem(slot, val);
-                                        p.getBank().updateLastAmountX(val);
-                                        return Unit.INSTANCE;
-                                    });
-                                    break;
-                                case 9:
-                                    p.sendMessage(p.getBank().get(slot).getDefinition().getExamine());
-                                    break;
-                                case 168:
-                                    amount = p.getBank().getAmount(item);
-                                    break;
-                                case 166:
-                                    amount = p.getBank().getAmount(item) - 1;
-                                    break;
-                                default:
-                                    return false;
-                            }
-                            if (amount > 0) {
-                                final int withdraw = amount;
-						GameWorld.getPulser().submit(new Pulse(1, p) {
-                                    @Override
-                                    public boolean pulse() {
-                                        if (item == null) {
-                                            return true;
-                                        }
-                                        p.getBank().takeItem(slot, withdraw);
-                                        return true;
-                                    }
-                                });
-                            }
-                            return true;
-                        case 20://search
-                            p.setAttribute("search", true);
-                            break;
-                        case 41:
-                        case 39:
-                        case 37:
-                        case 35:
-                        case 33:
-                        case 31:
-                        case 29:
-                        case 27:
-                        case 25:
-                            if (p.getAttribute("search", false)) {
-                                p.getBank().reopen();
-                            }
-                            int tabIndex = -((button - 41) / 2);
-                            switch (opcode) {
-                                case 155:
-                                    p.getBank().setTabIndex(tabIndex);
-                                    return true;
-                                case 196:
-                                    p.getBank().collapseTab(tabIndex);
-                                    return true;
-                            }
-                            return false;
-                    }
-                    break;
-                case 763:// overlay.
-                    switch (opcode) {
-                        case 155:
-                            p.getBank().addItem(slot, 1);
-                            break;
-                        case 196:
-                            p.getBank().addItem(slot, 5);
-                            break;
-                        case 124:
-                            p.getBank().addItem(slot, 10);
-                            break;
-                        case 199:
-                            p.getBank().addItem(slot, p.getBank().getLastAmountX());
-                            break;
-                        case 234:
-                            sendInputDialogue(p, false, "Enter the amount:", (value) -> {
-                                String s = value.toString();
-                                s = s.replace("k","000");
-                                s = s.replace("K","000");
-                                int val = Integer.parseInt(s);
-                                p.getBank().addItem(slot, val);
-                                p.getBank().updateLastAmountX(val);
-                                return Unit.INSTANCE;
-                            });
-                            break;
-                        case 168:
-                            p.getBank().addItem(slot, p.getInventory().getAmount(item));
-                            break;
-                    }
-                    break;
-            }
-            return true;
         }
 
     }
