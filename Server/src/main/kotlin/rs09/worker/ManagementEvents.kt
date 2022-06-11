@@ -149,6 +149,13 @@ object ManagementEvents {
 
             }
 
+            is FriendUpdate -> {
+                val remove = event.type == FriendUpdate.Type.REMOVE
+                val f = Repository.getPlayerByName(event.friend)
+                val p = Repository.getPlayerByName(event.username)
+                val world = if (f != null) GameWorld.settings!!.worldId else 0
+            }
+
             is PrivateMessage -> {
                 val sender = Repository.getPlayerByName(event.sender)
                 val receiver = Repository.getPlayerByName(event.receiver)
