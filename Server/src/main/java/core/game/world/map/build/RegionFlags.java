@@ -1,6 +1,7 @@
 package core.game.world.map.build;
 
 import core.game.world.map.RegionManager;
+import kotlin.Pair;
 import rs09.game.system.SystemLogger;
 
 import static java.lang.Math.max;
@@ -12,6 +13,11 @@ import static java.lang.Math.max;
  */
 public final class RegionFlags {
 
+	public static final int TILE_OBJECT = 0x40000;
+	public static final int EMPTY_TILE = 0;
+	public static final int SOLID_TILE = 0x200000;
+	public static final int OBJ_10_PROJECTILE = 0x20000;
+	public static final int OBJ_10 = 0x100;
 	/**
 	 * The plane.
 	 */
@@ -31,11 +37,6 @@ public final class RegionFlags {
 	 * The base y-coordinate.
 	 */
 	private final int baseY;
-
-	/**
-	 * The clipping flags.
-	 */
-	private int[][] clippingFlags;
 	
 	/**
 	 * The landscape data.
@@ -45,7 +46,7 @@ public final class RegionFlags {
 	/**
 	 * If the flags are set for projectile clipping
 	 */
-	private boolean projectile;
+	private final boolean projectile;
 
 	/**
 	 * Constructs a new {@code RegionFlags} {@code Object}.
@@ -74,11 +75,11 @@ public final class RegionFlags {
 	 * @param y The y-coordinate.
 	 */
 	public void flagSolidTile(int x, int y) {
-		flag(x,y,0x200000);
+		flag(x, y, SOLID_TILE);
 	}
 
 	public void flagEmptyTile(int x, int y) {
-		flag(x, y, 0);
+		flag(x, y, EMPTY_TILE);
 	}
 
 	/**
@@ -87,7 +88,7 @@ public final class RegionFlags {
 	 * @param y The y-coordinate.
 	 */
 	public void flagTileObject(int x, int y) {
-		flag(x,y,0x40000);
+		flag(x, y, TILE_OBJECT);
 	}
 
 	/**
@@ -96,13 +97,7 @@ public final class RegionFlags {
 	 * @param y The y-coordinate.
 	 */
 	public void unflagTileObject(int x, int y) {
-		if (clippingFlags == null) {
-			return;
-		}
-		if ((clippingFlags[x][y] & 0x40000) != 0) {
-			RegionManager.getCLIPPING_FLAGS()[plane][baseX >> 6][baseY >> 6][x][y] &= ~0x40000;
-			clippingFlags[x][y] &= ~0x40000;
-		}
+		unflag(x, y, TILE_OBJECT);
 	}
 
 	/**
@@ -114,9 +109,9 @@ public final class RegionFlags {
 	 * @param projectileClipped If the object is solid.
 	 */
 	public void flagSolidObject(int x, int y, int sizeX, int sizeY, boolean projectileClipped) {
-		int clipdata = 0x100;
+		int clipdata = OBJ_10;
 		if (projectileClipped) {
-			clipdata += 0x20000;
+			clipdata += OBJ_10_PROJECTILE;
 		}
 		for (int i = x; i < x + sizeX; i++) {
 			for (int j = y; j < y + sizeY; j++) {
@@ -133,18 +128,10 @@ public final class RegionFlags {
 	 */
 	public void flag(int x, int y, int clipdata) {
 		if (x > -1 && x < 64 && y > -1 && y < 64) {
-			addToFlagCache(plane, this.baseX >> 6, this.baseY >> 6, x, y, clipdata);
-			clippingFlags[x][y] |= clipdata;
+			addFlag(x, y, clipdata);
 		} else {
 			RegionManager.addClippingFlag(plane, baseX + x, baseY + y, projectile, clipdata);
 		}
-	}
-
-	private void addToFlagCache(int plane, int regionX, int regionY, int localX, int localY, int clipdata) {
-		if (projectile) return;
-		int current = RegionManager.getCLIPPING_FLAGS()[plane][regionX][regionY][localX][localY];
-		current = max(0, current) | clipdata;
-		RegionManager.getCLIPPING_FLAGS()[plane][regionX][regionY][localX][localY] = current;
 	}
 
 	/**
@@ -156,9 +143,9 @@ public final class RegionFlags {
 	 * @param projectileClipped If the object is solid.
 	 */
 	public void unflagSolidObject(int x, int y, int sizeX, int sizeY, boolean projectileClipped) {
-		int clipdata = 0x100;
+		int clipdata = OBJ_10;
 		if (projectileClipped) {
-			clipdata += 0x20000;
+			clipdata += OBJ_10_PROJECTILE;
 		}
 		for (int i = x; i < x + sizeX; i++) {
 			for (int j = y; j < y + sizeY; j++) {
@@ -174,17 +161,45 @@ public final class RegionFlags {
 	 * @param clipdata The clip data.
 	 */
 	public void unflag(int x, int y, int clipdata) {
-		if (clippingFlags == null) {
-			return;
-		}
 		if (x > -1 && x < 64 && y > -1 && y < 64) {
-			if ((clippingFlags[x][y] & clipdata) != 0) {
-				RegionManager.getCLIPPING_FLAGS()[plane][this.baseX >> 6][this.baseY >> 6][x][y] &= ~clipdata;
-				clippingFlags[x][y] &= ~clipdata;
-			}
+			removeFlag(x, y, clipdata);
 		} else {
 			RegionManager.removeClippingFlag(plane, baseX + x, baseY + y, projectile, clipdata);
 		}
+	}
+
+	private Pair<Integer, Integer> getFlagIndex(int x, int y) {
+		return new Pair<>(((baseX >> 6) << 8) | (baseY >> 6), (plane * 64 * 64) + (x * 64) + y);
+	}
+
+	public int getFlag(int x, int y) {
+		Pair<Integer, Integer> indices = getFlagIndex(x, y);
+		return RegionManager.getFlags(indices.getFirst(), projectile)[indices.getSecond()];
+	}
+
+	public void addFlag(int x, int y, int clipdata) {
+		int current = getFlag(x, y);
+		Pair<Integer, Integer> indices = getFlagIndex(x, y);
+		RegionManager.getFlags(indices.getFirst(), projectile)[indices.getSecond()] = max(0, current) | clipdata;
+	}
+
+	public void removeFlag(int x, int y, int clipdata) {
+		int current = getFlag(x, y);
+		Pair<Integer, Integer> indices = getFlagIndex(x, y);
+		if ((current & clipdata) == 0) return;
+		current = max(0, current) & ~clipdata;
+
+		RegionManager.getFlags(indices.getFirst(), projectile)[indices.getSecond()] = current;
+	}
+
+	public void clearFlag(int x, int y) {
+		Pair<Integer, Integer> indices = getFlagIndex(x, y);
+		RegionManager.getFlags(indices.getFirst(), projectile)[indices.getSecond()] = 0;
+	}
+
+	public void invalidateFlag(int x, int y) {
+		Pair<Integer, Integer> indices = getFlagIndex(x, y);
+		RegionManager.getFlags(indices.getFirst(), projectile)[indices.getSecond()] = -1;
 	}
 
 	/**
@@ -482,13 +497,6 @@ public final class RegionFlags {
 	}
 
 	/**
-	 * Unloads the clipping flags.
-	 */
-	public void unload() {
-		clippingFlags = null;
-	}
-
-	/**
 	 * Gets the members.
 	 * @return The members.
 	 */
@@ -502,22 +510,6 @@ public final class RegionFlags {
 	 */
 	public void setMembers(boolean members) {
 		this.members = members;
-	}
-
-	/**
-	 * Gets the clippingFlags.
-	 * @return The clippingFlags.
-	 */
-	public int[][] getClippingFlags() {
-		return clippingFlags;
-	}
-
-	/**
-	 * Sets the clippingFlags.
-	 * @param clippingFlags The clippingFlags to set.
-	 */
-	public void setClippingFlags(int[][] clippingFlags) {
-		this.clippingFlags = clippingFlags;
 	}
 
 	/**

@@ -97,7 +97,7 @@ object Server {
                 }
             }
         }
-/*        GlobalScope.launch {
+        GlobalScope.launch {
             delay(20000)
             while(running){
                 if(System.currentTimeMillis() - lastHeartbeat > 7200 && running){
@@ -114,7 +114,7 @@ object Server {
                 }
                 delay(625)
             }
-        }*/
+        }
     }
 
     @JvmStatic

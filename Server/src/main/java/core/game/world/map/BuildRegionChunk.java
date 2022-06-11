@@ -90,7 +90,7 @@ public class BuildRegionChunk extends RegionChunk {
 					objects[i][x][y] = null;
 				}
 				plane.getObjects()[baseX + x][baseY + y] = null;
-				plane.getFlags().getClippingFlags()[baseX + x][baseY + y] = 0;
+				plane.getFlags().clearFlag(baseX + x, baseY + y);
 			}
 		}
 		clear();
