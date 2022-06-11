@@ -217,5 +217,8 @@ class ServerConstants {
 
 		@JvmField
 		var DISCORD_GE_WEBHOOK = ""
+
+		@JvmField
+		var PRELOAD_MAP = false
 	}
 }
