@@ -945,6 +945,23 @@ fun submitWorldPulse(pulse: Pulse){
 }
 
 /**
+ * Used to submit a pulse to the GameWorld's Pulser, albeit with a cleaner syntax.
+ * @param task an anonymous function that will be run in the Pulse
+ * @return the newly submitted Pulse
+ */
+fun runWorldTask(task: () -> Unit) : Pulse {
+    val pulse = object : Pulse() {
+        override fun pulse(): Boolean {
+            task.invoke()
+            return true
+        }
+    }
+
+    submitWorldPulse(pulse)
+    return pulse
+}
+
+/**
  * Teleports or "instantly moves" an entity to a given Location object.
  * @param entity the entity to move
  * @param loc the Location object to move them to
@@ -1120,19 +1137,16 @@ fun sendItemOnInterface(player: Player, iface: Int, child: Int, item: Int, amoun
  * @param item the ID of the item to show
  * @param message the text to display
  */
-fun sendItemDialogue(player: Player, item: Int, message: String){
-    player.dialogueInterpreter.sendItemMessage(item, *splitLines(message))
-}
+fun sendItemDialogue(player: Player, item: Any, message: String){
+    val dialogueItem = when(item) {
+        is Item -> item
+        is Int -> Item(item)
+        else -> {
+            throw java.lang.IllegalArgumentException("Expected an Item or an Int, got ${item::class.java.simpleName}.")
+        }
+    }
 
-/**
- * Sends a dialogue box with a single item of certain amount and some text
- * @param player the player to send it to
- * @param item the ID of the item to show
- * @param amount the amount affecting appearance of the shown item
- * @param message the text to display
- */
-fun sendItemDialogue(player: Player, item: Int, amount: Int, message: String){
-    player.dialogueInterpreter.sendItemMessage(Item(item, amount), *splitLines(message))
+    player.dialogueInterpreter.sendItemMessage(dialogueItem, *splitLines(message))
 }
 
 /**
