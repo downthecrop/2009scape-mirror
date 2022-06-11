@@ -207,7 +207,7 @@ object InteractionListeners {
         val flag = when(type){
             3 -> DestinationFlag.ITEM
             2 -> DestinationFlag.ENTITY
-            1 -> DestinationFlag.OBJECT
+            1 -> null
             else -> DestinationFlag.OBJECT
         }
 

@@ -5,6 +5,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.impl.WalkingQueue;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
@@ -241,26 +242,33 @@ public abstract class MovementPulse extends Pulse {
         if (last != null && last.equals(destination.getLocation()) && !inside) {
             return;
         }
+
         Location loc = null;
+
         if (destinationFlag != null && overrideMethod == null) {
             loc = destinationFlag.getDestination(mover, destination);
         }
-        if(overrideMethod != null){
+        else if(overrideMethod != null){
             loc = overrideMethod.invoke(mover,destination);
             if(loc == destination.getLocation()) loc = destinationFlag.getDestination(mover,destination);
         }
-        if (loc == null && optionHandler != null) {
-            loc = optionHandler.getDestination(mover, destination);
+
+        if (loc == null) {
+            if (optionHandler != null) {
+                loc = optionHandler.getDestination(mover, destination);
+            }
+            else if (useHandler != null) {
+                loc = useHandler.getDestination((Player) mover, destination);
+            }
+            else if (inside) {
+                loc = findBorderLocation();
+            }
         }
-        if (loc == null && useHandler != null) {
-            loc = useHandler.getDestination((Player) mover, destination);
-        }
-        if (loc == null && inside) {
-            loc = findBorderLocation();
-        }
+
         if (destination == null) {
             return;
         }
+
         Location ml = mover.getLocation();
         Location dl = destination.getLocation();
         // Lead the target if they're walking/running, unless they're already within interaction range
