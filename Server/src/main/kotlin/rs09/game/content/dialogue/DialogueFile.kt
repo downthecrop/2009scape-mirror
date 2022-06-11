@@ -24,12 +24,8 @@ abstract class DialogueFile {
         this.npc = npc
         this.interpreter = interpreter
 
-        loaded()
-
         return this
     }
-
-    open fun loaded() { }
 
     open fun npc(vararg messages: String?): Component? {
         return if (npc == null) {

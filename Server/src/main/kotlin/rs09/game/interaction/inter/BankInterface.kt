@@ -4,6 +4,7 @@ import api.*
 import core.game.component.Component
 import core.game.node.entity.player.Player
 import org.rs09.consts.Components
+import org.rs09.consts.Items
 import rs09.ServerConstants
 import rs09.game.content.dialogue.BankHelpDialogue
 import rs09.game.content.dialogue.BankDepositDialogue
@@ -118,16 +119,14 @@ class BankInterface : InterfaceListener {
         val item = player.bank.get(slot)
             ?: return true
 
-        // Is this okay not to be submitted to the GameWorld.pulser
-        // and executed directly like below?
         when (opcode) {
-            OP_AMOUNT_ONE -> player.bank.takeItem(slot, 1)
-            OP_AMOUNT_FIVE -> player.bank.takeItem(slot, 5)
-            OP_AMOUNT_TEN -> player.bank.takeItem(slot, 10)
-            OP_AMOUNT_LAST_X -> player.bank.takeItem(slot, player.bank.lastAmountX)
-            OP_AMOUNT_X -> transferX(player, slot, true)
-            OP_AMOUNT_ALL -> player.bank.takeItem(slot, player.bank.getAmount(item))
-            OP_AMOUNT_ALL_BUT_ONE -> player.bank.takeItem(slot, player.bank.getAmount(item) - 1)
+            OP_AMOUNT_ONE -> runWorldTask { player.bank.takeItem(slot, 1) }
+            OP_AMOUNT_FIVE -> runWorldTask { player.bank.takeItem(slot, 5) }
+            OP_AMOUNT_TEN -> runWorldTask { player.bank.takeItem(slot, 10) }
+            OP_AMOUNT_LAST_X -> runWorldTask { player.bank.takeItem(slot, player.bank.lastAmountX) }
+            OP_AMOUNT_X -> runWorldTask { transferX(player, slot, true) }
+            OP_AMOUNT_ALL -> runWorldTask { player.bank.takeItem(slot, player.bank.getAmount(item)) }
+            OP_AMOUNT_ALL_BUT_ONE -> runWorldTask { player.bank.takeItem(slot, player.bank.getAmount(item) - 1) }
             OP_EXAMINE -> sendMessage(player, item.definition.examine)
             else -> player.debug("Unknown bank menu opcode $opcode")
         }
@@ -164,7 +163,6 @@ class BankInterface : InterfaceListener {
         onOpen(Components.BANK_V2_MAIN_762, ::onBankInterfaceOpen)
 
         on(Components.BANK_V2_MAIN_762, BANK_TABS, ::handleTabInteraction)
-
         on(Components.BANK_V2_MAIN_762, MENU_ELEMENT, ::handleBankMenu)
         on(Components.BANK_V2_SIDE_763, ::handleInventoryMenu)
 
