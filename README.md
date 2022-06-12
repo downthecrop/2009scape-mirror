@@ -176,8 +176,7 @@ After setting up git lfs, you may need to run `git lfs pull` in the root of the 
 
 #### Linux / OSX
 1. Make sure your database of choice is running (see above)
-2. Start the Management Server with run-ms.sh
-3. Start the game server with run-server.sh
+2. Start the game server with the included run script. E.G ./run g
 
 #### Windows
 1. Make sure your database is running (see above)
