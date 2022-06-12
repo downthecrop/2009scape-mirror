@@ -23,14 +23,14 @@ class BankerNPC : AbstractNPC {
         super.init()
 
         for (side in Direction.values()) {
-            val boothLocation = location.transform(side.stepX, side.stepY, 0)
+            val boothLocation = location.transform(side)
             val bankObject = getScenery(boothLocation)
 
             if (bankObject != null && bankObject.id in BankBoothHandler.BANK_BOOTHS) {
                 direction = side
-                setAttribute("facing_booth", true)
                 isWalks = false
 
+                setAttribute("facing_booth", true)
                 break
             }
         }
