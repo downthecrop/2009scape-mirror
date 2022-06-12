@@ -34,7 +34,7 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
             //"Neitiznot runite mine" to Location.create(2376, 3835, 0), // Near the Neitiznot runite mine (requires Fremennik Trials) currently inaccessible as bridge does not work
             "Ardougne mining site" to Location.create(2600, 3232, 0), // Ardougne mining site (Monastery)
             "Ardougne eastern mine" to Location.create(2706, 3334, 0), // Ardougne mining site (Legends Guild)
-            "Kandarin Coal trucks" to Location.create(2590, 3482, 0), // Kandarin Coal trucks
+            "Kandarin Coal trucks" to Location.create(2589, 3485, 0), // Kandarin Coal trucks
             "Yanille Bank" to Location.create(2603, 3087, 0), // Yanille Bank (Wizards' Guild)
             "Port Khazard mine" to Location.create(2626, 3140, 0), // Mining spot north-east of Yanille / Port Khazard mine
             "Al Kharid bank" to Location.create(3276, 3176, 0), // Al Kharid bank
