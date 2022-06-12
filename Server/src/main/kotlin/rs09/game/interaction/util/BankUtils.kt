@@ -6,8 +6,7 @@ import core.game.node.entity.player.Player
 
 object BankUtils {
 
-    // I don't like having a *Utils class for singular methods...
-    //
+    // TODO(I don't like having a *Utils class for singular methods...)
     fun transferX(player: Player, slot: Int, withdraw: Boolean) {
         sendInputDialogue(player, false, "Enter the amount: ") { value ->
             var input = value.toString().lowercase()

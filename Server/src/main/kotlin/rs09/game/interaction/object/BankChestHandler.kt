@@ -30,9 +30,7 @@ class BankChestHandler : InteractionListener {
         }
 
         player.bank.open()
-
         return true
-        TODO("Rip this out and put it in a proper achivement diary listener.")
     }
 
     override fun defineListeners() {
