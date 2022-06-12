@@ -242,7 +242,7 @@ public final class BankingPlugin extends OptionHandler {
                     stage = 11;
                     break;
                 case 11:
-                    player(FacialExpression.LAUGH,"Well of course I can, a " + (player.isMale ? "man" : "woman") + " of my","status could afford a measly bank fee");
+                    player(FacialExpression.LAUGH,"Well of course I can, a " + (player.isMale() ? "man" : "woman") + " of my","status could afford a measly bank fee");
                     stage = 12;
                     break;
                 case 12:
