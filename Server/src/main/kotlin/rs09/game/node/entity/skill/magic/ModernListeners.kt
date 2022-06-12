@@ -55,6 +55,9 @@ class ModernListeners : SpellListener("modern"){
     override fun defineListeners() {
 
         onCast(Modern.HOME_TELEPORT,NONE){player, _ ->
+            if (!getAttribute(player, "tutorial:complete", false)) {
+                return@onCast
+            }
             requires(player)
             player.teleporter.send(ServerConstants.HOME_LOCATION,TeleportManager.TeleportType.HOME)
             setDelay(player,true)
