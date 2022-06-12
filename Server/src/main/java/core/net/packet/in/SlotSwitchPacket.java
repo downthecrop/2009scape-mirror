@@ -7,6 +7,8 @@ import core.game.node.item.Item;
 import core.net.packet.IncomingPacket;
 import core.net.packet.IoBuffer;
 
+import static api.ContentAPIKt.getAttribute;
+
 /**
  * Represents the packet to handle an item slot switch.
  * @author 'Vexia
@@ -82,7 +84,7 @@ public class SlotSwitchPacket implements IncomingPacket {
 		
 		final Item item = container.get(slot);
 		final Item second = container.get(secondSlot);
-		if (player.getInterfaceManager().hasChatbox()) {
+		if (player.getInterfaceManager().hasChatbox() && !getAttribute(player, "close_c_", false)) {
 			player.getInterfaceManager().closeChatbox();
 			switchItem(secondSlot,slot,container,insert,player);
 			container.refresh();
