@@ -1,17 +1,9 @@
 package rs09.game.interaction.`object`
 
-import api.toIntArray
-import core.game.component.CloseEvent
-import core.game.component.Component
-import core.game.component.InterfaceType
-import core.game.container.access.InterfaceContainer
 import core.game.content.dialogue.DialogueInterpreter
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.IronmanMode
-import core.game.node.entity.player.link.diary.DiaryType
-import core.game.world.map.Location
-import org.rs09.consts.Components
 import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import rs09.ServerConstants
@@ -71,10 +63,7 @@ class BankBoothHandler : InteractionListener {
         }
 
         player.bank.open()
-        updateAchivementDiary(player);
-
         return true
-        TODO("Rip this out and put it in a proper achivement diary listener.")
     }
 
     private fun regularBankBoothUse(player: Player, node: Node): Boolean {
@@ -110,18 +99,6 @@ class BankBoothHandler : InteractionListener {
     private fun collectBankBoothUse(player: Player, node: Node): Boolean {
         GrandExchangeRecords.getInstance(player).openCollectionBox()
         return true
-    }
-
-    // It makes no sense to have it here.
-    private fun updateAchivementDiary(player: Player) {
-        if (player.location.withinDistance(Location(3092, 3243, 0))) {
-            player.achievementDiaryManager.finishTask(
-                player,
-                DiaryType.LUMBRIDGE,
-                1,
-                15
-            )
-        }
     }
 
     override fun defineListeners() {
