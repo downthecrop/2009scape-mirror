@@ -1,5 +1,6 @@
 package api.events
 
+import core.game.component.Component
 import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
@@ -14,3 +15,5 @@ data class ButtonClickedEvent(val iface: Int, val buttonId: Int) : Event
 data class UsedWithEvent(val used: Int, val with: Int) : Event
 data class SelfDeath(val killer: Entity) : Event
 data class TickEvent(val worldTicks: Int) : Event
+data class InterfaceOpenEvent(val component: Component) : Event
+data class InterfaceCloseEvent(val component: Component) : Event
