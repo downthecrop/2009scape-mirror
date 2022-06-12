@@ -207,6 +207,8 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
      * @return `True` if so.
      */
     open fun isAttackable(entity: Entity, victim: Entity): InteractionType? {
+        if (type == CombatStyle.MELEE && Pathfinder.find(entity, victim.location).isMoveNear) return InteractionType.NO_INTERACT
+
         val comp = entity.getAttribute("autocast_component",null) as Component?
         if((comp != null || type == CombatStyle.MAGIC) && (entity.properties.autocastSpell == null || entity.properties.autocastSpell.spellId == 0) && entity is Player){
             val weapEx = entity.getExtension<Any>(WeaponInterface::class.java) as WeaponInterface?
