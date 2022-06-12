@@ -4,6 +4,7 @@ import api.*
 import api.sendMessage
 import core.game.component.Component
 import core.game.node.entity.player.Player
+import core.game.node.entity.skill.summoning.familiar.FamiliarManager
 import org.rs09.consts.Animations
 import org.rs09.consts.Components
 import rs09.game.interaction.InterfaceListener

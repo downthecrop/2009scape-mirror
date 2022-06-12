@@ -11,51 +11,26 @@ import rs09.game.ge.GrandExchangeRecords
 import rs09.game.interaction.InteractionListener
 import rs09.game.world.repository.Repository
 
-private val BANK_BOOTHS = intArrayOf(
-    Scenery.BANK_BOOTH_2213,
-    Scenery.BANK_BOOTH_2214,
-    Scenery.BANK_BOOTH_3045,
-    Scenery.BANK_BOOTH_5276,
-    Scenery.BANK_BOOTH_6084,
-    Scenery.BANK_BOOTH_10517,
-    Scenery.BANK_BOOTH_11338,
-    Scenery.BANK_BOOTH_11402,
-    Scenery.BANK_BOOTH_11758,
-    Scenery.BANK_BOOTH_12798,
-    Scenery.BANK_BOOTH_12799,
-    Scenery.BANK_BOOTH_12800,
-    Scenery.BANK_BOOTH_12801,
-    Scenery.BANK_BOOTH_14367,
-    Scenery.BANK_BOOTH_14368,
-    Scenery.BANK_BOOTH_16700,
-    Scenery.BANK_BOOTH_18491,
-    Scenery.BANK_BOOTH_19230,
-    Scenery.BANK_BOOTH_20325,
-    Scenery.BANK_BOOTH_20326,
-    Scenery.BANK_BOOTH_20327,
-    Scenery.BANK_BOOTH_20328,
-    Scenery.BANK_BOOTH_22819,
-    Scenery.BANK_BOOTH_24914,
-    Scenery.BANK_BOOTH_25808,
-    Scenery.BANK_BOOTH_26972,
-    Scenery.BANK_BOOTH_29085,
-    Scenery.BANK_BOOTH_30015,
-    Scenery.BANK_BOOTH_30016,
-    Scenery.BANK_BOOTH_34205,
-    Scenery.BANK_BOOTH_34752,
-    Scenery.BANK_BOOTH_35647,
-    Scenery.BANK_BOOTH_35648,
-    Scenery.BANK_BOOTH_36262,
-    Scenery.BANK_BOOTH_36786,
-    Scenery.BANK_BOOTH_37474
-)
-
 /**
  * Allows the user to interact with bank booths.
  *
  * @author vddCore
  */
 class BankBoothHandler : InteractionListener {
+
+    companion object {
+        val BANK_BOOTHS = intArrayOf(
+            Scenery.BANK_BOOTH_2213, Scenery.BANK_BOOTH_2214, Scenery.BANK_BOOTH_3045, Scenery.BANK_BOOTH_5276,
+            Scenery.BANK_BOOTH_6084, Scenery.BANK_BOOTH_10517, Scenery.BANK_BOOTH_11338, Scenery.BANK_BOOTH_11402,
+            Scenery.BANK_BOOTH_11758, Scenery.BANK_BOOTH_12798, Scenery.BANK_BOOTH_12799, Scenery.BANK_BOOTH_12800,
+            Scenery.BANK_BOOTH_12801, Scenery.BANK_BOOTH_14367, Scenery.BANK_BOOTH_14368, Scenery.BANK_BOOTH_16700,
+            Scenery.BANK_BOOTH_18491, Scenery.BANK_BOOTH_19230, Scenery.BANK_BOOTH_20325, Scenery.BANK_BOOTH_20326,
+            Scenery.BANK_BOOTH_20327, Scenery.BANK_BOOTH_20328, Scenery.BANK_BOOTH_22819, Scenery.BANK_BOOTH_24914,
+            Scenery.BANK_BOOTH_25808, Scenery.BANK_BOOTH_26972, Scenery.BANK_BOOTH_29085, Scenery.BANK_BOOTH_30015,
+            Scenery.BANK_BOOTH_30016, Scenery.BANK_BOOTH_34205, Scenery.BANK_BOOTH_34752, Scenery.BANK_BOOTH_35647,
+            Scenery.BANK_BOOTH_35648, Scenery.BANK_BOOTH_36262, Scenery.BANK_BOOTH_36786, Scenery.BANK_BOOTH_37474
+        )
+    }
 
     private fun quickBankBoothUse(player: Player, node: Node): Boolean {
         if (player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {

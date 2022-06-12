@@ -1,28 +1,20 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.NPCDefinition;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.dialogue.FacialExpression;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
-import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.IronmanMode;
 import core.game.node.entity.player.link.appearance.Gender;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
-import core.game.node.scenery.Scenery;
-import core.game.world.map.Direction;
-import core.game.world.map.Location;
-import core.game.world.map.RegionManager;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.game.ge.GrandExchangeRecords;
 import rs09.game.ge.GrandExchangeOffer;
+import rs09.game.ge.GrandExchangeRecords;
 import rs09.game.world.GameWorld;
-
-import java.text.NumberFormat;
 
 /**
  * Represents the plugin used for anything related to banking.
@@ -35,8 +27,6 @@ public final class BankingPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        new BankNPCPlugin().newInstance(arg);
-        new BankNPC().newInstance(arg);
         new BankerDialogue().init();
         return this;
     }
@@ -303,113 +293,5 @@ public final class BankingPlugin extends OptionHandler {
             this.id = id;
         }
 
-    }
-
-    /**
-     * Represents the plugin used to handle the banker npc.
-     *
-     * @author 'Vexia
-     * @author Emperor
-     * @version 1.01
-     */
-    public static final class BankNPCPlugin extends OptionHandler {
-
-        @Override
-        public Plugin<Object> newInstance(Object arg) throws Throwable {
-            NPCDefinition.setOptionHandler("bank", this);
-            NPCDefinition.setOptionHandler("collect", this);
-            return this;
-        }
-
-        @Override
-        public boolean handle(Player player, Node node, String option) {
-            final NPC npc = ((NPC) node);
-            npc.faceLocation(node.getLocation());
-            if (option.equals("bank")) {
-                player.getBank().open();
-            } else {
-                GrandExchangeRecords.getInstance(player).openCollectionBox();
-            }
-            return true;
-        }
-
-        @Override
-        public Location getDestination(Node n, Node node) {
-            NPC npc = (NPC) node;
-            if (npc.getAttribute("facing_booth", false)) {
-                Direction dir = npc.getDirection();
-                return npc.getLocation().transform(dir.getStepX() << 1, dir.getStepY() << 1, 0);
-            }
-            if (npc.getId() == 6533) {
-                return Location.create(3167, 3489, 0);// ge bankers.
-            } else if (npc.getId() == 6534) {
-                return Location.create(3167, 3490, 0);// ge bankers.
-            } else if (npc.getId() == 6535) {
-                return Location.create(3162, 3489, 0);
-            } else if (npc.getId() == 6532) {
-                return Location.create(3162, 3489, 0);
-            } else if (npc.getId() == 4907) {
-                return npc.getLocation().transform(0, -2, 0);
-            }
-            return super.getDestination(npc, node);
-        }
-    }
-
-    /**
-     * Represents the abstract npc of a banker.
-     *
-     * @author 'Vexia
-     * @author Emperor
-     * @version 1.2
-     */
-    public static final class BankNPC extends AbstractNPC {
-
-        /**
-         * Represents the ids of this class.
-         */
-        private final int[] IDS = new int[]{4907, 44, 45, 166, 494, 495, 496, 497, 498, 499, 902, 1036, 1360, 1702, 2163, 2164, 2354, 2355, 2568, 2569, 2570, 2619, 3046, 3198, 3199, 4296, 4519, 5257, 5258, 5259, 5260, 5383, 5488, 5776, 5777, 5898, 5912, 5913, 6200, 6362, 6532, 6533, 6534, 6535, 6538, 7049, 7050, 7445, 7446, 7605};
-
-        /**
-         * Constructs a new {@code BankNPC} {@code Object}.
-         */
-        public BankNPC() {
-            super(0, null);
-        }
-
-        @Override
-        public void init() {
-            super.init();
-            for (int i = 0; i < 4; i++) {
-                Direction dir = Direction.get(i);
-                Location loc = getLocation().transform(dir.getStepX(), dir.getStepY(), 0);
-                Scenery bank = RegionManager.getObject(loc);
-                if (bank != null && bank.getName().equals("Bank booth")) {
-                    setDirection(dir);
-                    setAttribute("facing_booth", true);
-                    super.setWalks(false);
-                    break;
-                }
-            }
-        }
-
-        /**
-         * Constructs a new {@code BankNPC} {@code Object}.
-         *
-         * @param id       The NPC id.
-         * @param location The location.
-         */
-        private BankNPC(int id, Location location) {
-            super(id, location);
-        }
-
-        @Override
-        public AbstractNPC construct(int id, Location location, Object... objects) {
-            return new BankNPC(id, location);
-        }
-
-        @Override
-        public int[] getIds() {
-            return IDS;
-        }
     }
 }
