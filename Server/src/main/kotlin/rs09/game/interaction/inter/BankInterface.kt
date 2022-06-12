@@ -71,7 +71,7 @@ class BankInterface : InterfaceListener {
             ServerConstants.BANK_SIZE
         )
 
-        return true
+        return false
     }
 
     private fun handleTabInteraction(player: Player, component: Component, opcode: Int, buttonID: Int, slot: Int, itemID: Int): Boolean {
@@ -95,8 +95,6 @@ class BankInterface : InterfaceListener {
 
         return true
     }
-
-
 
     private fun handleBankMenu(player: Player, component: Component, opcode: Int, buttonID: Int, slot: Int, itemID: Int): Boolean {
         val item = player.bank.get(slot)
@@ -129,7 +127,7 @@ class BankInterface : InterfaceListener {
             OP_AMOUNT_X -> BankUtils.transferX(player, slot, false)
             OP_AMOUNT_ALL -> player.bank.addItem(slot, player.inventory.getAmount(item))
             OP_EXAMINE -> sendMessage(player, item.definition.examine)
-            else -> player.debug("Unknown inventory menu $opcode")
+            else -> player.debug("Unknown inventory menu opcode $opcode")
         }
 
         return true

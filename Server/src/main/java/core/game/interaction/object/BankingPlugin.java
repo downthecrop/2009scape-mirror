@@ -1,13 +1,6 @@
 package core.game.interaction.object;
 
-import static api.ContentAPIKt.*;
-
 import core.cache.def.impl.NPCDefinition;
-import core.game.component.Component;
-import core.game.component.ComponentDefinition;
-import core.game.component.ComponentPlugin;
-import core.game.container.access.InterfaceContainer;
-import core.game.content.dialogue.DialogueAction;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.dialogue.FacialExpression;
 import core.game.interaction.OptionHandler;
@@ -20,14 +13,11 @@ import core.game.node.entity.player.link.appearance.Gender;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
-import core.game.system.task.Pulse;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
-import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import kotlin.Unit;
 import rs09.game.ge.GrandExchangeRecords;
 import rs09.game.ge.GrandExchangeOffer;
 import rs09.game.world.GameWorld;
@@ -252,7 +242,6 @@ public final class BankingPlugin extends OptionHandler {
                                 case 2:
                                 case 3:
                                     player.getBankPinManager().openType(buttonId);
-                                    checkAchievements(player);
                                     end();
                                     break;
                                 case 4:
@@ -275,7 +264,6 @@ public final class BankingPlugin extends OptionHandler {
                                 case 2:
                                 case 3:
                                     player.getBankPinManager().openType(buttonId);
-                                    checkAchievements(player);
                                     end();
                                     break;
                                 case 4:
@@ -339,7 +327,6 @@ public final class BankingPlugin extends OptionHandler {
             npc.faceLocation(node.getLocation());
             if (option.equals("bank")) {
                 player.getBank().open();
-                checkAchievements(player);
             } else {
                 GrandExchangeRecords.getInstance(player).openCollectionBox();
             }
@@ -425,11 +412,4 @@ public final class BankingPlugin extends OptionHandler {
             return IDS;
         }
     }
-
-    private static void checkAchievements(Player player) {
-		// Access the bank in Draynor Village
-		if (player.getLocation().withinDistance(Location.create(3092, 3243, 0))) {
-			player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 1, 15);
-		}
-	}
 }
