@@ -26,7 +26,7 @@ enum class Bones
     BONES(2530, 4.5),
     BONES_2(526, 4.5),
     WOLF_BONES(2859, 4.5),
-    BURNST_BONES(528, 4.5),
+    BURNT_BONES(528, 4.5),
     MONKEY_BONES(3183, 5.0),
     MONKEY_BONES2(3179, 5.0),
     BAT_BONES(530, 5.3),
