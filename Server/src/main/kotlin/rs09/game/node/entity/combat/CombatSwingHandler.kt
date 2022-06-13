@@ -210,9 +210,10 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
      * @return `True` if so.
      */
     open fun isAttackable(entity: Entity, victim: Entity): InteractionType? {
-        val stepType = canStepTowards(entity, victim)
-
-        if (stepType != InteractionType.STILL_INTERACT) return stepType
+        if (type == CombatStyle.MELEE) {
+            val stepType = canStepTowards(entity, victim)
+            if (stepType != InteractionType.STILL_INTERACT) return stepType
+        }
 
         val comp = entity.getAttribute("autocast_component",null) as Component?
         if((comp != null || type == CombatStyle.MAGIC) && (entity.properties.autocastSpell == null || entity.properties.autocastSpell.spellId == 0) && entity is Player){
