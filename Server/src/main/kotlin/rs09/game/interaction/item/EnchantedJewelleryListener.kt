@@ -1,6 +1,6 @@
 package rs09.game.interaction.item
 
-import core.game.content.global.EnchantedJewellery
+import rs09.game.content.global.EnchantedJewellery
 import rs09.game.content.global.EnchantedJewelleryDialogueFile
 import rs09.game.interaction.InteractionListener
 import java.util.*
