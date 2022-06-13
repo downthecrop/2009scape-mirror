@@ -15,15 +15,18 @@ import core.game.world.map.path.Pathfinder;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.impl.WildernessZone;
 import core.game.world.update.flag.context.Animation;
+import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import rs09.game.content.zone.wilderness.RevenantController;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.system.config.NPCConfigParser;
 import rs09.game.world.GameWorld;
 
 /**
  * Handles a revenant NPC.
- * @author Vexia
+ * @author Ceikry-ish (mostly Vexia code still)
  */
+@Initializable
 public class RevenantNPC extends AbstractNPC {
 
 	/**
@@ -74,21 +77,21 @@ public class RevenantNPC extends AbstractNPC {
 		setWalks(true);
 		setRespawn(false);
 		setAggressive(true);
+		setRenderable(true);
 		setDefaultBehavior();
 		getAggressiveHandler().setRadius(64 * 2);
 		getAggressiveHandler().setChanceRatio(9);
 		getAggressiveHandler().setAllowTolerance(false);
 		getProperties().setCombatTimeOut(120);
-		configureRoute();
-		super.configure();
 		configureBonuses();
+		super.configure();
 		this.swingHandler = new RevenantCombatHandler(getProperties().getAttackAnimation(), getProperties().getMagicAnimation(), getProperties().getRangeAnimation());
 	}
 
 	@Override
 	public void init() {
 		super.init();
-		RevenantPlugin.getRevenants().add(this);
+		RevenantController.registerRevenant(this);
 		int spawnAnim = getDefinition().getConfiguration(NPCConfigParser.SPAWN_ANIMATION, -1);
 		if (spawnAnim != -1) {
 			animate(new Animation(spawnAnim));
@@ -98,8 +101,7 @@ public class RevenantNPC extends AbstractNPC {
 	@Override
 	public void clear() {
 		super.clear();
-		RevenantPlugin.getRevenants().remove(this);
-		RevenantPlugin.spawn();
+		RevenantController.unregisterRevenant(this);
 	}
 
 	@Override
@@ -111,7 +113,11 @@ public class RevenantNPC extends AbstractNPC {
 	}
 
 	@Override
-	public void handleTickActions() {
+	public void tick() {
+		skills.pulse();
+		getWalkingQueue().update();
+		if (this.getViewport().getRegion().isActive())
+			getUpdateMasks().prepare(this);
 		if (!DeathTask.isDead(this) && getSkills().getLifepoints() <= (getSkills().getStaticLevel(Skills.HITPOINTS) / 2) && getAttribute("eat-delay", 0) < GameWorld.getTicks()) {
 			lock(3);
 			getProperties().getCombatPulse().delayNextAttack(3);
@@ -120,15 +126,6 @@ public class RevenantNPC extends AbstractNPC {
 				p.getAudioManager().send(2393);
 			}
 			setAttribute("eat-delay", GameWorld.getTicks() + 6);
-		}
-		if (!getLocks().isMovementLocked()) {
-			if (!getPulseManager().hasPulseRunning() && !getProperties().getCombatPulse().isAttacking() && !getProperties().getCombatPulse().isInCombat() && nextWalk < GameWorld.getTicks()) {
-				setNextWalk();
-				Location l = getMovementDestination();
-				if (canMove(l)) {
-					Pathfinder.find(this, l, true, Pathfinder.SMART).walk(this);
-				}
-			}
 		}
 		if (aggressiveHandler != null && aggressiveHandler.selectTarget()) {
 			return;
