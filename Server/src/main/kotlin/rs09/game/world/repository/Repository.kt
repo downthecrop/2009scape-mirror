@@ -1,6 +1,7 @@
 package rs09.game.world.repository
 
 import core.game.node.entity.npc.NPC
+import core.game.node.entity.npc.revenant.RevenantNPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
@@ -37,7 +38,7 @@ object Repository {
     /**
      * The renderable NPCs.
      */
-    private val RENDERABLE_NPCS: MutableList<NPC> = CopyOnWriteArrayList()
+    public val RENDERABLE_NPCS: MutableList<NPC> = CopyOnWriteArrayList()
 
     /**
      * A mapping holding the players sorted by their names.
@@ -100,6 +101,7 @@ object Repository {
      */
     @JvmStatic
     fun addRenderableNPC(npc: NPC) {
+        if (npc is RevenantNPC) return // hack to make sure we can update revenants every tick.
         if (!RENDERABLE_NPCS.contains(npc)) {
             RENDERABLE_NPCS.add(npc)
             npc.isRenderable = true
@@ -112,6 +114,7 @@ object Repository {
      */
     @JvmStatic
     fun removeRenderableNPC(npc: NPC) {
+        if (npc is RevenantNPC) return // hack to make sure we can update revenants every tick.
         RENDERABLE_NPCS.remove(npc)
         npc.isRenderable = false
     }

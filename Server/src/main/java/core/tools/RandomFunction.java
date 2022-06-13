@@ -293,4 +293,8 @@ public class RandomFunction {
 		}
 		return RANDOM.nextInt(value);
 	}
+
+    public static boolean nextBool() {
+        return RANDOM.nextBoolean();
+    }
 }
