@@ -14,7 +14,6 @@ import java.util.List;
  * @author Emperor
  */
 public final class DumbPathfinder extends Pathfinder {
-
 	/**
 	 * If a path can be found.
 	 */
@@ -103,7 +102,7 @@ public final class DumbPathfinder extends Pathfinder {
 			found = true;
 			switch (dir) {
 				case NORTH:
-					if ((clipMaskSupplier.getClippingFlag(z, x, y + 1) & 0x12c0120) != 0) {
+					if ((clipMaskSupplier.getClippingFlag(z, x, y + 1) & PREVENT_NORTH) != 0) {
 						found = false;
 						break;
 					}
@@ -111,7 +110,7 @@ public final class DumbPathfinder extends Pathfinder {
 					y++;
 					break;
 				case NORTH_EAST:
-					if ((clipMaskSupplier.getClippingFlag(z, x + 1, y) & 0x12c0180) != 0 || (clipMaskSupplier.getClippingFlag(z, x, y + 1) & 0x12c0120) != 0 || (clipMaskSupplier.getClippingFlag(z, x + 1, y + 1) & 0x12c01e0) != 0) {
+					if ((clipMaskSupplier.getClippingFlag(z, x + 1, y) & PREVENT_EAST) != 0 || (clipMaskSupplier.getClippingFlag(z, x, y + 1) & PREVENT_NORTH) != 0 || (clipMaskSupplier.getClippingFlag(z, x + 1, y + 1) & PREVENT_NORTHEAST) != 0) {
 						found = false;
 						break;
 					}
@@ -120,7 +119,7 @@ public final class DumbPathfinder extends Pathfinder {
 					y++;
 					break;
 				case EAST:
-					if ((clipMaskSupplier.getClippingFlag(z, x + 1, y) & 0x12c0180) != 0) {
+					if ((clipMaskSupplier.getClippingFlag(z, x + 1, y) & PREVENT_EAST) != 0) {
 						found = false;
 						break;
 					}
@@ -128,7 +127,7 @@ public final class DumbPathfinder extends Pathfinder {
 					x++;
 					break;
 				case SOUTH_EAST:
-					if ((clipMaskSupplier.getClippingFlag(z, x + 1, y) & 0x12c0180) != 0 || (clipMaskSupplier.getClippingFlag(z, x, y - 1) & 0x12c0102) != 0 || (clipMaskSupplier.getClippingFlag(z, x + 1, y - 1) & 0x12c0183) != 0) {
+					if ((clipMaskSupplier.getClippingFlag(z, x + 1, y) & PREVENT_EAST) != 0 || (clipMaskSupplier.getClippingFlag(z, x, y - 1) & PREVENT_SOUTH) != 0 || (clipMaskSupplier.getClippingFlag(z, x + 1, y - 1) & PREVENT_SOUTHEAST) != 0) {
 						found = false;
 						break;
 					}
@@ -137,7 +136,7 @@ public final class DumbPathfinder extends Pathfinder {
 					y--;
 					break;
 				case SOUTH:
-					if ((clipMaskSupplier.getClippingFlag(z, x, y - 1) & 0x12c0102) != 0) {
+					if ((clipMaskSupplier.getClippingFlag(z, x, y - 1) & PREVENT_SOUTH) != 0) {
 						found = false;
 						break;
 					}
@@ -145,7 +144,7 @@ public final class DumbPathfinder extends Pathfinder {
 					y--;
 					break;
 				case SOUTH_WEST:
-					if ((clipMaskSupplier.getClippingFlag(z, x - 1, y) & 0x12c0108) != 0 || (clipMaskSupplier.getClippingFlag(z, x, y - 1) & 0x12c0102) != 0 || (clipMaskSupplier.getClippingFlag(z, x - 1, y - 1) & 0x12c010e) != 0) {
+					if ((clipMaskSupplier.getClippingFlag(z, x - 1, y) & PREVENT_WEST) != 0 || (clipMaskSupplier.getClippingFlag(z, x, y - 1) & PREVENT_SOUTH) != 0 || (clipMaskSupplier.getClippingFlag(z, x - 1, y - 1) & PREVENT_SOUTHWEST) != 0) {
 						found = false;
 						break;
 					}
@@ -154,7 +153,7 @@ public final class DumbPathfinder extends Pathfinder {
 					y--;
 					break;
 				case WEST:
-					if ((clipMaskSupplier.getClippingFlag(z, x - 1, y) & 0x12c0108) != 0) {
+					if ((clipMaskSupplier.getClippingFlag(z, x - 1, y) & PREVENT_WEST) != 0) {
 						found = false;
 						break;
 					}
@@ -162,7 +161,7 @@ public final class DumbPathfinder extends Pathfinder {
 					x--;
 					break;
 				case NORTH_WEST:
-					if ((clipMaskSupplier.getClippingFlag(z, x - 1, y) & 0x12c0108) != 0 || (clipMaskSupplier.getClippingFlag(z, x, y + 1) & 0x12c0120) != 0 || (clipMaskSupplier.getClippingFlag(z, x - 1, y + 1) & 0x12c0138) != 0) {
+					if ((clipMaskSupplier.getClippingFlag(z, x - 1, y) & PREVENT_WEST) != 0 || (clipMaskSupplier.getClippingFlag(z, x, y + 1) & PREVENT_NORTH) != 0 || (clipMaskSupplier.getClippingFlag(z, x - 1, y + 1) & PREVENT_NORTHWEST) != 0) {
 						found = false;
 						break;
 					}
