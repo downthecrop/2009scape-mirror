@@ -66,7 +66,10 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
 
             val condition: (Player) -> Boolean = when(star.location.toLowerCase()){
                 "canifis bank" -> { p -> p.questRepository.isComplete("Priest in Peril")}
+                //"Burgh de Rott bank" -> { p -> p.questRepository.isComplete("Priest in Peril")} // for now, require this as it is in Morytania. remove when appropriate quests added - Crash
                 "crafting guild" -> {p -> hasLevelStat(p, Skills.CRAFTING, 40) }
+                "lletya bank" -> {p -> p.questRepository.isComplete("Roving Elves")}
+                "jatizso mine" -> {p -> p.questRepository.isComplete("Fremennik Trials")}
                 "south crandor mining site" -> {p -> p.questRepository.isComplete("Dragon Slayer")}
                 else -> {_ -> true}
             }
@@ -79,6 +82,8 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
             val shouldWarn = when(star.location){
                 "North Edgeville mining site",
                 "Southern wilderness mine",
+                "Wilderness Volcano bank",
+                "Wilderness hobgoblin mine",
                 "Pirates' Hideout mine",
                 "Lava Maze mining site",
                 "Mage Arena bank" -> true
