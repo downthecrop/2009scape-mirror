@@ -1181,6 +1181,10 @@ fun sendInputDialogue(player: Player, numeric: Boolean, prompt: String, handler:
  */
 fun sendInputDialogue(player: Player, type: InputType, prompt: String, handler: (value: Any) -> Unit){
     when(type){
+        InputType.AMOUNT -> {
+            player.setAttribute("parseamount", true)
+            player.dialogueInterpreter.sendInput(true, prompt)
+        }
         InputType.NUMERIC, InputType.STRING_SHORT -> player.dialogueInterpreter.sendInput(type != InputType.NUMERIC, prompt)
         InputType.STRING_LONG -> player.dialogueInterpreter.sendLongInput(prompt)
         InputType.MESSAGE -> player.dialogueInterpreter.sendMessageInput(prompt)
