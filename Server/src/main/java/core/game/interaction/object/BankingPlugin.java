@@ -20,6 +20,7 @@ import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.IronmanMode;
+import core.game.node.entity.player.link.appearance.Gender;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
@@ -241,7 +242,7 @@ public final class BankingPlugin extends OptionHandler {
                     stage = 11;
                     break;
                 case 11:
-                    player(FacialExpression.LAUGH,"Well of course I can, a man of my","status could afford a measly bank fee");
+                    player(FacialExpression.LAUGH,"Well of course I can, a " + (player.isMale() ? "man" : "woman") + " of my","status could afford a measly bank fee");
                     stage = 12;
                     break;
                 case 12:
