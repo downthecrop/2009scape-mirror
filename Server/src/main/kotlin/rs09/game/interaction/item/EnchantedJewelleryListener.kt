@@ -1,7 +1,6 @@
 package rs09.game.interaction.item
 
 import api.openDialogue
-import api.sendDialogue
 import api.sendMessage
 import core.game.node.Node
 import core.game.node.entity.player.Player
