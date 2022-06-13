@@ -161,17 +161,27 @@ public enum EnchantedJewellery {
 		if (!player.getZoneMonitor().teleport(1, item)) {
 			return false;
 		}
-		player.lock();
-		player.visualize(ANIMATION, GRAPHICS);
-        player.getAudioManager().send(new Audio(200), true);
-		player.getImpactHandler().setDisabledTicks(4);
-		GameWorld.getPulser().submit(new Pulse(4) {
+		GameWorld.getPulser().submit(new Pulse(0) {
+			int count = 0;
 			@Override
 			public boolean pulse() {
-				player.unlock();
-				player.getProperties().setTeleportLocation(location);
-				player.getAnimator().reset();
-				return true;
+				switch(count){
+					case 0: {
+						player.lock();
+						player.visualize(ANIMATION, GRAPHICS);
+						player.getAudioManager().send(new Audio(200), true);
+						player.getImpactHandler().setDisabledTicks(4);
+						break;
+					}
+					case 4: {
+						player.unlock();
+						player.getProperties().setTeleportLocation(location);
+						player.getAnimator().reset();
+						return true;
+					}
+				}
+				count += 1;
+				return false;
 			}
 		});
 		return true;
