@@ -1,0 +1,386 @@
+package rs09.game.content.global
+
+import api.*
+import core.cache.def.impl.NPCDefinition
+import core.game.content.dialogue.FacialExpression
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.audio.Audio
+import core.game.node.entity.player.link.diary.DiaryType
+import core.game.node.entity.skill.slayer.Tasks
+import core.game.node.item.Item
+import core.game.system.task.Pulse
+import core.game.world.map.Location
+import core.game.world.update.flag.context.Animation
+import core.game.world.update.flag.context.Graphics
+import org.rs09.consts.Items
+import rs09.game.node.entity.skill.slayer.SlayerManager.Companion.getInstance
+import rs09.game.world.GameWorld.Pulser
+import java.util.*
+
+/**
+ * Represents an enchanted jewellery.
+ * @author Vexia & downthecrop
+ */
+enum class EnchantedJewellery(
+
+    val options: Array<String>,
+    val locations: Array<Location>, crumble: Boolean, vararg val ids: Int) {
+        RING_OF_SLAYING(
+                arrayOf(
+                    "Sumona in Pollnivneach.",
+                    "Morytania Slayer Tower.",
+                    "Rellekka Slayer Caves.",
+                    "Nowhere. Give me a slayer update."
+                ),
+                arrayOf(
+                    Location.create(3313, 2960, 0),
+                    Location.create(3429, 3533, 0),
+                    Location.create(2793, 3615, 0),
+                ),
+        true,
+                Items.RING_OF_SLAYING8_13281,
+                Items.RING_OF_SLAYING7_13282,
+                Items.RING_OF_SLAYING6_13283,
+                Items.RING_OF_SLAYING5_13284,
+                Items.RING_OF_SLAYING4_13285,
+                Items.RING_OF_SLAYING3_13286,
+                Items.RING_OF_SLAYING2_13287,
+                Items.RING_OF_SLAYING1_13288
+        ),
+
+        RING_OF_DUELING(
+                arrayOf("Al Kharid Duel Arena.", "Castle Wars Arena.", "Fist of Guthix", "Nowhere."),
+                arrayOf(
+                    Location.create(3314, 3235, 0),
+                    Location.create(2442, 3089, 0),
+                    Location.create(1693, 5600, 0)
+                ),
+        true,
+                Items.RING_OF_DUELLING8_2552,
+                Items.RING_OF_DUELLING7_2554,
+                Items.RING_OF_DUELLING6_2556,
+                Items.RING_OF_DUELLING5_2558,
+                Items.RING_OF_DUELLING4_2560,
+                Items.RING_OF_DUELLING3_2562,
+                Items.RING_OF_DUELLING2_2564,
+                Items.RING_OF_DUELLING1_2566
+        ),
+        AMULET_OF_GLORY(
+                arrayOf("Edgeville", "Karamja", "Draynor Village", "Al-Kharid", "Nowhere."),
+                arrayOf(Location.create(3087, 3495, 0),
+                        Location.create(2919, 3175, 0),
+                        Location.create(3104, 3249, 0),
+                        Location.create(3304, 3124, 0)),
+                Items.AMULET_OF_GLORY4_1712,
+                Items.AMULET_OF_GLORY3_1710,
+                Items.AMULET_OF_GLORY2_1708,
+                Items.AMULET_OF_GLORY1_1706,
+                Items.AMULET_OF_GLORY_1704
+        ),
+        AMULET_OF_GLORY_T(
+                arrayOf("Edgeville", "Karamja", "Draynor Village", "Al-Kharid", "Nowhere."),
+                arrayOf(Location.create(3087, 3495, 0),
+                        Location.create(2919, 3175, 0),
+                        Location.create(3081, 3250, 0),
+                        Location.create(3304, 3124, 0)),
+                Items.AMULET_OF_GLORYT4_10354,
+                Items.AMULET_OF_GLORYT3_10356,
+                Items.AMULET_OF_GLORYT2_10358,
+                Items.AMULET_OF_GLORYT1_10360,
+                Items.AMULET_OF_GLORYT_10362
+        ),
+        GAMES_NECKLACE(
+                arrayOf("Burthorpe Games Room.", "Barbarian Outpost.", "Clan Wars.", "Wilderness Volcano.", "Corporeal Beast"),
+                arrayOf(
+                    Location.create(2899, 3563, 0),
+                    Location.create(2520, 3571, 0),
+                    Location.create(3266, 3686, 0),
+                    Location.create(3179, 3685, 0),
+                    Location.create(2885, 4372, 2)
+                ),
+        true,
+                Items.GAMES_NECKLACE8_3853,
+                Items.GAMES_NECKLACE7_3855,
+                Items.GAMES_NECKLACE6_3857,
+                Items.GAMES_NECKLACE5_3859,
+                Items.GAMES_NECKLACE4_3861,
+                Items.GAMES_NECKLACE3_3863,
+                Items.GAMES_NECKLACE2_3865,
+                Items.GAMES_NECKLACE1_3867
+        ),
+        DIGSITE_PENDANT(arrayOf<String>(),
+                arrayOf(
+                    Location.create(3342, 3445, 0)
+                ),
+        true,
+                Items.DIGSITE_PENDANT_5_11194,
+                Items.DIGSITE_PENDANT_4_11193,
+                Items.DIGSITE_PENDANT_3_11192,
+                Items.DIGSITE_PENDANT_2_11191,
+                Items.DIGSITE_PENDANT_1_11190
+        ),
+        COMBAT_BRACELET(
+                arrayOf("Champions' Guild", "Monastery", "Ranging Guild", "Warriors' Guild", "Nowhere."),
+                arrayOf(
+                    Location.create(3191, 3365, 0),
+                    Location.create(3052, 3472, 0),
+                    Location.create(2657, 3439, 0),
+                    Location.create(2878, 3546, 0)
+                ),
+                Items.COMBAT_BRACELET4_11118,
+                Items.COMBAT_BRACELET3_11120,
+                Items.COMBAT_BRACELET2_11122,
+                Items.COMBAT_BRACELET1_11124,
+                Items.COMBAT_BRACELET_11126
+        ),
+        SKILLS_NECKLACE(
+                arrayOf("Fishing Guild", "Mining Guild", "Crafting Guild", "Cooking Guild", "Nowhere."),
+                arrayOf(
+                    Location.create(2611, 3392, 0),
+                    Location.create(3016, 3338, 0),
+                    Location.create(2933, 3290, 0),
+                    Location.create(3143, 3442, 0)
+                ),
+                Items.SKILLS_NECKLACE4_11105,
+                Items.SKILLS_NECKLACE3_11107,
+                Items.SKILLS_NECKLACE2_11109,
+                Items.SKILLS_NECKLACE1_11111,
+                Items.SKILLS_NECKLACE_11113
+        ),
+        RING_OF_WEALTH(
+                arrayOf("Grand Exchange", "Nowhere."),
+                arrayOf(
+                    Location.create(3163, 3464, 0)
+                ),
+                Items.RING_OF_WEALTH4_14646,
+                Items.RING_OF_WEALTH3_14644,
+                Items.RING_OF_WEALTH2_14642,
+                Items.RING_OF_WEALTH1_14640,
+                Items.RING_OF_WEALTH_14638
+        );
+
+    val isCrumble: Boolean = crumble
+
+    /**
+     * Constructs a new `EnchantedJewelleryPlugin` `Object`.
+     * @param options the options.
+     * @param locations the locations.
+     * @param ids the ids.
+     */
+    constructor(options: Array<String>, locations: Array<Location>, vararg ids: Int) : this(options, locations, false, *ids)
+
+    /**
+     * Method used to teleport the player to the desired location.
+     * @param player the player.
+     * @param item the item.
+     * @param index the index.
+     * @param operate If the player is operating.
+     */
+     fun use(player: Player, item: Item, index: Int, operate: Boolean) {
+        if (index + 1 == ids.size || item.slot < 0) {
+            return
+        }
+        if (index > locations.size - 1) {
+            if (item.id in RING_OF_SLAYING.ids){
+                sendMessage(player,"DEBUG: hasTask ${!getInstance(player).hasTask()}")
+                if (!getInstance(player).hasTask()) {
+                    sendNPCDialogue(player,getInstance(player).master!!.npc, "You need something new to hunt. Come and see me When you can and I'll give you a new task.", FacialExpression.HALF_GUILTY)
+                    return
+                }
+                sendNPCDialogue(player,getInstance(player).master!!.npc, "You're currently assigned to kill ${if (getInstance(player).task == Tasks.JAD) " TzTok-Jad!" else NPCDefinition.forId(getInstance(player).task!!.npcs[0]).name.toLowerCase()}'s; only ${getInstance(player).amount} more to go.",FacialExpression.HALF_GUILTY)
+
+                // Slayer tracker UI
+                player.varpManager.get(2502).setVarbit(0, getInstance(player).flags.taskFlags shr 4).send(player)
+            }
+            return
+        }
+        val itemIndex = getItemIndex(item)
+        var replace = item
+        if (!isLast(itemIndex)) {
+            if (!(isCrumble && itemIndex == ids.size - 1)) {
+                replace = getReplace(getNext(itemIndex))
+            }
+        } else {
+            if (!isCrumble) {
+                replace = getReplace(ids[ids.size - 1])
+            }
+        }
+        if ((!operate && !inInventory(player,item.id)) || (operate && !inEquipment(player,item.id))) {
+            sendMessage(player,"Ooops, you don't have it anymore ;)")
+            return
+        }
+        if (canTeleport(player, replace)) {
+            Pulser.submit(object : Pulse(0) {
+                private var count = 0
+                private var location = getLocation(index)
+                override fun pulse(): Boolean {
+                    when (count) {
+                        0 -> {
+                            player.lock()
+                            visualize(player,ANIMATION, GRAPHICS)
+                            playAudio(player,Audio(200),true)
+                            player.impactHandler.disabledTicks = 4
+                        }
+                        3 -> {
+                            player.unlock()
+                            player.properties.teleportLocation = location
+                            player.animator.reset()
+                            if (!isLast(itemIndex) && !(isCrumble && itemIndex == ids.size - 1)) {
+                                if (operate) {
+                                    replaceSlot(player,item.slot,replace,Container.EQUIPMENT)
+                                } else {
+                                    replaceSlot(player,item.slot,replace)
+                                }
+                            } else {
+                                if (isCrumble) {
+                                    if (operate) {
+                                        removeItem(player,item, Container.EQUIPMENT)
+                                    } else {
+                                        if (item.name.contains("slaying")) {
+                                            replaceSlot(player,item.slot,Item(Items.ENCHANTED_GEM_4155))
+                                            sendMessage(player,"Your Ring of Slaying reverts back into a regular enchanted gem.")
+                                        } else {
+                                            removeItem(player,item)
+                                        }
+                                    }
+                                }
+                            }
+                            return true
+                        }
+                    }
+                    count += 1
+                    return false
+                }
+            })
+
+            if (getLocation(index).withinDistance(Location(2657, 3439, 0))) {
+                player.achievementDiaryManager.finishTask(player, DiaryType.SEERS_VILLAGE, 2, 0)
+            }
+        }
+    }
+
+    /**
+     * Method used to determine if a player can teleport
+     * @param player the player.
+     * @param item the item.
+     */
+    private fun canTeleport(player: Player, item: Item): Boolean {
+        if (player.isTeleBlocked) {
+            sendMessage(player,"A magical force has stopped you from teleporting.")
+            return false
+        }
+        if (!player.zoneMonitor.teleport(1, item)) {
+            return false
+        }
+        return true
+    }
+
+    /**
+     * Gets the replacement item.
+     * @param id the id.
+     * @return the item.
+     */
+    private fun getReplace(id: Int): Item {
+        return Item(id)
+    }
+
+    /**
+     * Gets the name.
+     * @param item the item.
+     * @return the name.
+     */
+     fun getName(item: Item): String {
+        var name = item.name.lowercase(Locale.getDefault()).replace("(t", "(").replace("(", "").replace(")", "")
+        for (number in NUMBERS) {
+            name = name.replace(number, '/')
+        }
+        return name.trim { it <= ' ' }.replace("/", "")
+    }
+
+    /**
+     * Gets the name type.
+     * @param item the item.
+     * @return
+     */
+    fun getNameType(item: Item): String {
+        return if (this == GAMES_NECKLACE) "games necklace" else if (this == DIGSITE_PENDANT) "necklace" else if (this == COMBAT_BRACELET) "bracelet" else if (this == SKILLS_NECKLACE) "necklace" else item.name.lowercase(Locale.getDefault()).split(" ").toTypedArray()[0]
+    }
+
+    /**
+     * Checks if the index is last.
+     * @param index the index.
+     * @return `True` if so.
+     */
+    fun isLast(index: Int): Boolean {
+        return if (!isCrumble) index == ids.size - 1 else index == ids.size
+    }
+
+    /**
+     * Gets the next index.
+     * @param index the index.
+     * @return the new id
+     */
+    private fun getNext(index: Int): Int {
+        return ids[index + 1]
+    }
+
+    /**
+     * Gets the location.
+     * @param index the index.
+     * @return the location.
+     */
+    private fun getLocation(index: Int): Location {
+        val i = if (index > locations.size) locations.size - 1 else index
+        return locations[i]
+    }
+
+    /**
+     * Gets the index.
+     * @param item the item.
+     * @return the item index.
+     */
+    fun getItemIndex(item: Item): Int {
+        return ids.indexOf(item.id)
+    }
+
+    companion object {
+        /**
+         * Represents the teleport animation.
+         */
+        private val ANIMATION = Animation(714)
+
+        /**
+         * Represents the graphics to use.
+         */
+        private val GRAPHICS = Graphics(308, 100, 50)
+
+        /**
+         * Represents the charge numbers.
+         */
+        private val NUMBERS = charArrayOf('1', '2', '3', '4', '5', '6', '7', '8')
+
+        /**
+         * Gets the charges of an item.
+         * @param item the item.
+         * @return the charges.
+         */
+        fun getCharges(item: Item): String {
+            val tokens = item.name.replace("(t", "(").replace("(", " ").replace(")", "").split(" ").toTypedArray()
+            return tokens[tokens.size - 1]
+        }
+
+        /**
+         * Gets the enchanted jewellery.
+         * @param item the item.
+         * @return `EnchantedJewellery`.
+         */
+        fun forItem(item: Item): EnchantedJewellery? {
+            for (jewellery in values()) {
+                if (item.id in jewellery.ids) {
+                    return jewellery
+                }
+            }
+            return null
+        }
+    }
+}
