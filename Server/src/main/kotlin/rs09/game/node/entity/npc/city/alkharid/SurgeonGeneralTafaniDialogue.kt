@@ -44,9 +44,8 @@ class SurgeonGeneralTafaniDialogue(player: Player? = null) : DialoguePlugin(play
 
             301 -> npcl(FacialExpression.LAUGH, "I work here, so yes!").also { stage = END_DIALOGUE }
 
-            401 -> player(FacialExpression.ASKING, "Can I buy a Skillcape of Hitpoints from you?").also { stage++ }
-            402 -> npcl(FacialExpression.FRIENDLY, "Why, certainly my friend. However, owning such an item makes you part of an elite group and that privilege will cost you 99000 coins.").also { stage++ }
-            403 -> showTopics(
+            401 -> npcl(FacialExpression.FRIENDLY, "Why, certainly my friend. However, owning such an item makes you part of an elite group and that privilege will cost you 99000 coins.").also { stage++ }
+            402 -> showTopics(
                 Topic(FacialExpression.HALF_GUILTY, "Sorry, that's much too pricey.", 411),
                 Topic(FacialExpression.HAPPY, "Sure, that's not too expensive for such a magnificent cape.", 421)
             )
