@@ -28,18 +28,20 @@ class EnchantedJewelleryListener : InteractionListener {
             player.pulseManager.current.stop()
             val item = node.asItem()
             val jewellery = EnchantedJewellery.forItem(item)
-            if (jewellery.isLast(jewellery.getItemIndex(item))) {
+            if (jewellery?.isLast(jewellery.getItemIndex(item)) == true) {
                 player.packetDispatch.sendMessage("The " + jewellery.getNameType(item) + " has lost its charge.")
                 player.packetDispatch.sendMessage("It will need to be recharged before you can use it again.")
                 return@on true
             }
-            player.packetDispatch.sendMessage("You rub the " + jewellery.getNameType(item) + "...")
+            if (jewellery != null) {
+                player.packetDispatch.sendMessage("You rub the " + jewellery.getNameType(item) + "...")
+            }
 
             if (jewellery == EnchantedJewellery.DIGSITE_PENDANT) {
                 jewellery.use(player, item, 0, player.equipment.containsItem(item))
                 return@on true
             } else {
-                player.dialogueInterpreter.open(EnchantedJewelleryDialogueFile(jewellery,item))
+                player.dialogueInterpreter.open(jewellery?.let { EnchantedJewelleryDialogueFile(it,item) })
             }
             return@on true
         }
