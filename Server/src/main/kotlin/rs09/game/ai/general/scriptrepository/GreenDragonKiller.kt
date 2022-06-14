@@ -160,7 +160,7 @@ class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Scr
 
             State.BUYING_FOOD -> {
                 state = State.TO_DRAGONS
-                bot.bank.add(Item(food,100))
+                bot.bank.add(Item(food,50))
                 bot.bank.refresh()
                 scriptAPI.withdraw(food, 10)
             }
@@ -244,7 +244,7 @@ class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Scr
 
     override fun newInstance(): Script {
         val script = GreenDragonKiller(style)
-        val tier = CombatBotAssembler.Tier.HIGH
+        val tier = CombatBotAssembler.Tier.MED
         script.bot = CombatBotAssembler().assembleMeleeDragonBot(tier, bot.startLocation)
         return script
     }
