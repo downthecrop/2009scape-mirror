@@ -40,7 +40,7 @@ class AlKharidHealDialogue(val skipFirst: Boolean) : DialogueFile() {
             1 -> npcl(FacialExpression.FRIENDLY, "Of course!").also { stage++ }
             2 -> {
                 animate(npc!!, Animations.HUMAN_PICKPOCKETING_881)
-                if(getDynLevel(player!!, Skills.HITPOINTS) == getStatLevel(player!!, Skills.HITPOINTS)) {
+                if(player!!.skills.lifepoints == getStatLevel(player!!, Skills.HITPOINTS)) {
                     npcl(FacialExpression.FRIENDLY, "You look healthy to me!")
                 } else {
                     player!!.skills.heal(21)
