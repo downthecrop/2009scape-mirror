@@ -194,18 +194,13 @@ class ImmerseWorld : StartupListener {
 
         fun immerseWilderness() {
             val wilderness = Location.create(3092, 3493, 0)
-            GeneralBotCreator(
-                GreenDragonKiller(CombatStyle.MELEE),
-                assembler.assembleMeleeDragonBot(CombatBotAssembler.Tier.MED, wilderness)
-            )
-            GeneralBotCreator(
-                GreenDragonKiller(CombatStyle.MELEE),
-                assembler.assembleMeleeDragonBot(CombatBotAssembler.Tier.MED, wilderness)
-            )
-            GeneralBotCreator(
-                GreenDragonKiller(CombatStyle.MELEE),
-                assembler.assembleMeleeBot(CombatBotAssembler.Tier.MED, wilderness)
-            )
+
+            repeat(6) {
+                GeneralBotCreator (
+                    GreenDragonKiller(CombatStyle.MELEE),
+                    assembler.assembleMeleeDragonBot(CombatBotAssembler.Tier.MED, wilderness)
+                )
+            }
         }
 
         fun immerseFalador() {
