@@ -31,7 +31,7 @@ class SurgeonGeneralTafaniDialogue(player: Player? = null) : DialoguePlugin(play
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage) {
             100 -> showTopics(
-                Topic("Can you heal me?", AlKharidHealDialogue()),
+                Topic("Can you heal me?", AlKharidHealDialogue(true)),
                 Topic("Do you see a lot of injured fighters?", 201),
                 Topic("Do you come here often?", 301),
                 IfTopic("Can I buy a Skillcape of Hitpoints from you?", 401, hasLevelStat(player, Skills.HITPOINTS, 99)),

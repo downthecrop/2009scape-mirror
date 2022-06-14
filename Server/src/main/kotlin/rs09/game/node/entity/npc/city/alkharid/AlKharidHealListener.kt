@@ -17,7 +17,7 @@ import rs09.tools.END_DIALOGUE
 class AlKharidHealListener : InteractionListener {
     override fun defineListeners() {
         on(getIds(), NPC, "heal") { player, node ->
-            openDialogue(player, AlKharidHealDialogue(), node.asNpc())
+            openDialogue(player, AlKharidHealDialogue(false), node.asNpc())
             return@on true
         }
     }
@@ -32,8 +32,9 @@ class AlKharidHealListener : InteractionListener {
     }
 }
 
-class AlKharidHealDialogue() : DialogueFile() {
+class AlKharidHealDialogue(val skipFirst: Boolean) : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
+        if (stage == 0 && skipFirst) stage++
         when(stage) {
             0 -> player(FacialExpression.ASKING, "Can you heal me?").also { stage++ }
             1 -> npcl(FacialExpression.FRIENDLY, "Of course!").also { stage++ }

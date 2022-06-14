@@ -29,7 +29,7 @@ class SabreenDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage) {
             0 -> showTopics(
-                Topic("Can you heal me?", AlKharidHealDialogue()),
+                Topic("Can you heal me?", AlKharidHealDialogue(true)),
                 Topic("Do you see a lot of injured fighters?", 101),
                 Topic("Do you come here often?", 201)
             )
