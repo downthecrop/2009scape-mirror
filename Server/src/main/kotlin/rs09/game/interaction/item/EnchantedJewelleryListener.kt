@@ -28,7 +28,6 @@ class EnchantedJewelleryListener : InteractionListener {
             return@on true
         }
     }
-
     private fun handle(player: Player, node: Node, isEquipped: Boolean) {
         player.pulseManager.current.stop()
         val item = node.asItem()
