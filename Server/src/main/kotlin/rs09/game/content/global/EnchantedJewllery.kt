@@ -199,17 +199,9 @@ enum class EnchantedJewellery(
      * @param player the player.
      * @param item the used jewellery item.
      * @param buttonID the button id.
-     * @param isOp If the player is operating.
+     * @param isEquipped If the player is operating.
      */
-     fun use(player: Player, item: Item, buttonID: Int, isOp: Boolean) {
-        // Error handling
-        if ((!isOp && !inInventory(player,item.id)) ||
-            (isOp && !inEquipment(player,item.id))
-        ) {
-            sendMessage(player,"Ooops, you don't have it anymore ;)")
-            return
-        }
-        // Nowhere option
+     fun use(player: Player, item: Item, buttonID: Int, isEquipped: Boolean) {
         if (buttonID > locations.size - 1) {
             if (isSlayerRing(item.id)){
                 slayerProgressDialogue(player)
@@ -218,6 +210,9 @@ enum class EnchantedJewellery(
         }
         val itemIndex = getItemIndex(item)
         val nextJewellery = Item(getNext(itemIndex))
+        sendMessage(player,"DEBUG: itemIndex $itemIndex")
+        sendMessage(player,"DEBUG: nextJewellery $nextJewellery")
+        sendMessage(player,"DEBUG: Can teleport ${canTeleport(player, nextJewellery)}")
         if (canTeleport(player, nextJewellery)) {
             Pulser.submit(object : Pulse(0) {
                 private var count = 0
@@ -233,10 +228,10 @@ enum class EnchantedJewellery(
                         3 -> {
                             player.properties.teleportLocation = location
                             player.animator.reset()
-                            if (isLastCharge(itemIndex)) {
-                                if (isCrumble) crumbleJewellery(player,item,isOp)
+                            if (isLastItemId(itemIndex)) {
+                                if (isCrumble) crumbleJewellery(player,item,isEquipped)
                             } else {
-                                replaceJewellery(player,item,nextJewellery, isOp)
+                                replaceJewellery(player,item,nextJewellery, isEquipped)
                             }
                             player.unlock()
                             return true
@@ -261,15 +256,15 @@ enum class EnchantedJewellery(
         }
     }
 
-    private fun crumbleJewellery(player: Player, item: Item, isOp: Boolean){
-        if(isSlayerRing(item.id)){
-            addItem(player,Items.ENCHANTED_GEM_4155)
-            sendMessage(player,"Your Ring of Slaying reverts back into a regular enchanted gem.")
-        }
-        if (isOp) {
+    private fun crumbleJewellery(player: Player, item: Item, isEquipped: Boolean){
+        if (isEquipped) {
             removeItem(player,item, Container.EQUIPMENT)
         } else {
             removeItem(player,item)
+        }
+        if(isSlayerRing(item.id)){
+            addItem(player,Items.ENCHANTED_GEM_4155)
+            sendMessage(player,"Your Ring of Slaying reverts back into a regular enchanted gem.")
         }
     }
 
@@ -293,26 +288,17 @@ enum class EnchantedJewellery(
     }
 
     private fun canTeleport(player: Player, item: Item): Boolean {
-        if (player.isTeleBlocked) {
-            sendMessage(player,"A magical force has stopped you from teleporting.")
-            return false
-        }
         if (!player.zoneMonitor.teleport(1, item)) {
             return false
         }
         return true
     }
 
-     fun getName(item: Item): String {
-        var name = item.name.lowercase(Locale.getDefault()).replace("(t", "(")
-                .replace("(", "").replace(")", "")
-        for (number in NUMBERS) {
-            name = name.replace(number, '/')
-        }
-        return name.trim { it <= ' ' }.replace("/", "")
+     fun getJewelleryName(item: Item): String {
+         return item.name.replace(""" ?\(t?[0-9]?\)""".toRegex(),"")
     }
 
-    fun getNameType(item: Item): String {
+    fun getJewelleryType(item: Item): String {
         return when {
             this == GAMES_NECKLACE -> {
                 "games necklace"
@@ -332,20 +318,23 @@ enum class EnchantedJewellery(
         }
     }
 
-    fun isLastCharge(index: Int): Boolean {
+    fun isLastItemId(index: Int): Boolean {
         return index == ids.size - 1
     }
 
     private fun getNext(index: Int): Int {
-        if(index == ids.size - 1){
-            return ids[index]
+        val i = index + 1
+        if(i > ids.size - 1){
+            return ids[ids.size - 1]
         }
-        return ids[index + 1]
+        return ids[i]
     }
 
     private fun getLocation(index: Int): Location {
-        val i = if (index > locations.size - 1) locations.size - 1 else index
-        return locations[i]
+       if (index > locations.size - 1) {
+            return locations[locations.size - 1]
+        }
+        return locations[index]
     }
 
     fun getItemIndex(item: Item): Int {
@@ -357,13 +346,6 @@ enum class EnchantedJewellery(
         private val ANIMATION = Animation(714)
         private val AUDIO = Audio(200)
         private val GRAPHICS = Graphics(308, 100, 50)
-        private val NUMBERS = charArrayOf('1', '2', '3', '4', '5', '6', '7', '8')
-
-        fun getCharges(item: Item): String {
-            val tokens = item.name.replace("(t", "(").replace("(", " ")
-                    .replace(")", "").split(" ").toTypedArray()
-            return tokens[tokens.size - 1]
-        }
 
         fun forItem(item: Item): EnchantedJewellery? {
             for (jewellery in values()) {

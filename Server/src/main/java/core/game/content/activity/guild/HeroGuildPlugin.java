@@ -98,7 +98,7 @@ public final class HeroGuildPlugin extends OptionHandler {
 			player.animate(Animation.create(832));
 			Item rechargedItem = new Item(jewellery.getIds()[0]);
 			player.getInventory().replace(rechargedItem, event.getUsedItem().getSlot());
-			String name = jewellery.getName(rechargedItem);
+			String name = jewellery.getJewelleryName(rechargedItem);
 			if (!fam) {
 				player.sendMessage("You dip the " + name + " in the fountain...");
 			} else {
