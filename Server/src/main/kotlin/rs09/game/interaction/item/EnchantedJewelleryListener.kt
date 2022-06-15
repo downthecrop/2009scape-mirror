@@ -1,8 +1,14 @@
 package rs09.game.interaction.item
 
+import api.sendDialogue
+import api.sendMessage
+import core.game.node.Node
+import core.game.node.entity.player.Player
+import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.global.EnchantedJewellery
-import rs09.game.content.global.EnchantedJewelleryDialogueFile
 import rs09.game.interaction.InteractionListener
+import rs09.tools.END_DIALOGUE
+import rs09.tools.START_DIALOGUE
 import java.util.*
 
 /**
@@ -10,7 +16,7 @@ import java.util.*
  * @author Ceikry
  */
 class EnchantedJewelleryListener : InteractionListener {
-    val IDs: IntArray
+    val ids: IntArray
 
     init {
         val idsList = ArrayList<Int>()
@@ -19,32 +25,45 @@ class EnchantedJewelleryListener : InteractionListener {
                 idsList.add(id)
             }
         }
-        IDs = idsList.toIntArray()
+        ids = idsList.toIntArray()
     }
 
     override fun defineListeners() {
-
-        on(IDs,ITEM,"rub","operate"){player,node ->
-            player.pulseManager.current.stop()
-            val item = node.asItem()
-            val jewellery = EnchantedJewellery.forItem(item)
-            if (jewellery?.isLast(jewellery.getItemIndex(item)) == true) {
-                player.packetDispatch.sendMessage("The " + jewellery.getNameType(item) + " has lost its charge.")
-                player.packetDispatch.sendMessage("It will need to be recharged before you can use it again.")
-                return@on true
-            }
-            if (jewellery != null) {
-                player.packetDispatch.sendMessage("You rub the " + jewellery.getNameType(item) + "...")
-            }
-
-            if (jewellery == EnchantedJewellery.DIGSITE_PENDANT) {
-                jewellery.use(player, item, 0, player.equipment.containsItem(item))
-                return@on true
-            } else {
-                player.dialogueInterpreter.open(jewellery?.let { EnchantedJewelleryDialogueFile(it,item) })
-            }
+        on(ids,ITEM,"operate"){ player, node ->
+            handle(player,node,true)
             return@on true
         }
-
+        on(ids,ITEM,"rub"){ player, node ->
+            handle(player,node,false)
+            return@on true;
+        }
+    }
+    private fun handle(player: Player, node: Node, isOp: Boolean){
+        player.pulseManager.current.stop()
+        val item = node.asItem()
+        val jewellery = EnchantedJewellery.forItem(item)
+        if (jewellery != null) {
+            if (jewellery.isLastCharge(jewellery.getItemIndex(item)) && !jewellery.isCrumble) {
+                sendMessage(player,"The ${jewellery.getNameType(item)} has lost its charge.")
+                sendMessage(player,"It will need to be recharged before you can use it again.")
+                return
+            }
+            sendMessage(player,"You rub the ${jewellery.getNameType(item)}...")
+            if (jewellery.options.isNotEmpty()) {
+                player.dialogueInterpreter.open(object : DialogueFile(){
+                    override fun handle(componentID: Int, buttonID: Int) {
+                        when(stage){
+                            START_DIALOGUE -> {
+                                interpreter!!.sendOptions("Where would you like to go?", *jewellery.options)
+                                stage++
+                            }
+                            1 -> end().also{ jewellery.use(player, item, buttonID - 1,isOp) }
+                        }
+                    }
+                })
+            } else {
+                jewellery.use(player, item, 0, isOp)
+            }
+        }
     }
 }
