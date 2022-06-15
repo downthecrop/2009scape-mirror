@@ -10,15 +10,18 @@ import core.game.node.entity.player.link.InterfaceManager
 import core.game.node.entity.player.link.IronmanMode
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.item.Item
+import core.game.system.communication.ClanRepository
 import core.game.world.map.Location
 import core.net.amsc.MSPacketRepository
 import core.net.amsc.WorldCommunicator
 import core.plugin.Initializable
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
+import proto.management.JoinClanRequest
 import rs09.game.interaction.inter.RulesAndInfo
 import rs09.game.world.GameWorld
 import rs09.tools.END_DIALOGUE
+import rs09.worker.ManagementEvents
 
 /**
  * Handles the magic tutor's dialogue
@@ -179,6 +182,14 @@ class TutorialMagicTutorDialogue(player: Player? = null) : DialoguePlugin(player
                     player.unhook(TutorialInteractionReceiver)
                     player.unhook(TutorialButtonReceiver)
                     RulesAndInfo.openFor(player)
+
+                    player.communication.currentClan = "2009scape"
+
+                    val clanJoin = JoinClanRequest.newBuilder()
+                    clanJoin.clanName = "2009scape"
+                    clanJoin.username = player.name
+
+                    ManagementEvents.publish(clanJoin.build())
                 }
 
                 12 -> {
