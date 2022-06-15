@@ -205,13 +205,15 @@ enum class EnchantedJewellery(
      */
      fun use(player: Player, item: Item, buttonID: Int, isOp: Boolean) {
         // Error handling
-        if ((!isOp && !inInventory(player,item.id)) || (isOp && !inEquipment(player,item.id))) {
+        if ((!isOp && !inInventory(player,item.id)) ||
+            (isOp && !inEquipment(player,item.id))
+        ) {
             sendMessage(player,"Ooops, you don't have it anymore ;)")
             return
         }
         // Nowhere option
         if (buttonID > locations.size - 1) {
-            if (item.id in RING_OF_SLAYING.ids){
+            if (isSlayerRing(item.id)){
                 slayerProgressDialogue(player)
             }
             return
@@ -234,9 +236,7 @@ enum class EnchantedJewellery(
                             player.properties.teleportLocation = location
                             player.animator.reset()
                             if (isLastCharge(itemIndex)) {
-                                if (isCrumble) {
-                                    crumbleJewellery(player,item,isOp)
-                                }
+                                if (isCrumble) crumbleJewellery(player,item,isOp)
                             } else {
                                 replaceJewellery(player,item,nextJewellery, isOp)
                             }
@@ -267,7 +267,7 @@ enum class EnchantedJewellery(
         if (isOp) {
             removeItem(player,item, Container.EQUIPMENT)
         } else {
-            if (item.name.contains("slaying")) {
+            if (isSlayerRing(item.id)) {
                 replaceSlot(player,item.slot,Item(Items.ENCHANTED_GEM_4155))
                 sendMessage(player,"Your Ring of Slaying reverts back into a regular enchanted gem.")
             } else {
@@ -276,14 +276,23 @@ enum class EnchantedJewellery(
         }
     }
 
+    private fun isSlayerRing(id: Int): Boolean{
+        return (id in RING_OF_SLAYING.ids)
+    }
+
     private fun slayerProgressDialogue(player: Player){
-        if (!getInstance(player).hasTask()) {
-            sendNPCDialogue(player,getInstance(player).master!!.npc, "You need something new to hunt. Come and see me When you can and I'll give you a new task.", FacialExpression.HALF_GUILTY)
+        val slayerManager = getInstance(player)
+        if (!slayerManager.hasTask()) {
+            sendNPCDialogue(player,slayerManager.master!!.npc, "You need something new to hunt. Come and " +
+                    "see me When you can and I'll give you a new task.", FacialExpression.HALF_GUILTY)
             return
         }
-        sendNPCDialogue(player,getInstance(player).master!!.npc, "You're currently assigned to kill ${if (getInstance(player).task == Tasks.JAD) " TzTok-Jad!" else NPCDefinition.forId(getInstance(player).task!!.npcs[0]).name.lowercase(Locale.getDefault())}'s; only ${getInstance(player).amount} more to go.",FacialExpression.FRIENDLY)
+        sendNPCDialogue(player,slayerManager.master!!.npc, "You're currently " +
+                "assigned to kill ${slayerManager.taskName.lowercase(Locale.getDefault())}'s; " +
+                "only ${slayerManager.amount} more to go.",FacialExpression.FRIENDLY)
+
         // Slayer tracker UI
-        player.varpManager.get(2502).setVarbit(0, getInstance(player).flags.taskFlags shr 4).send(player)
+        player.varpManager.get(2502).setVarbit(0, slayerManager.flags.taskFlags shr 4).send(player)
     }
 
     private fun canTeleport(player: Player, item: Item): Boolean {
@@ -298,7 +307,8 @@ enum class EnchantedJewellery(
     }
 
      fun getName(item: Item): String {
-        var name = item.name.lowercase(Locale.getDefault()).replace("(t", "(").replace("(", "").replace(")", "")
+        var name = item.name.lowercase(Locale.getDefault()).replace("(t", "(")
+                .replace("(", "").replace(")", "")
         for (number in NUMBERS) {
             name = name.replace(number, '/')
         }
@@ -337,7 +347,7 @@ enum class EnchantedJewellery(
     }
 
     private fun getLocation(index: Int): Location {
-        val i = if (index > locations.size) locations.size - 1 else index
+        val i = if (index > locations.size - 1) locations.size - 1 else index
         return locations[i]
     }
 
@@ -353,7 +363,8 @@ enum class EnchantedJewellery(
         private val NUMBERS = charArrayOf('1', '2', '3', '4', '5', '6', '7', '8')
 
         fun getCharges(item: Item): String {
-            val tokens = item.name.replace("(t", "(").replace("(", " ").replace(")", "").split(" ").toTypedArray()
+            val tokens = item.name.replace("(t", "(").replace("(", " ")
+                    .replace(")", "").split(" ").toTypedArray()
             return tokens[tokens.size - 1]
         }
 
