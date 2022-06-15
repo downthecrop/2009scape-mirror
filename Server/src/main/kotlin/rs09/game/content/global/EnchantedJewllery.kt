@@ -1,12 +1,10 @@
 package rs09.game.content.global
 
 import api.*
-import core.cache.def.impl.NPCDefinition
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.diary.DiaryType
-import core.game.node.entity.skill.slayer.Tasks
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.map.Location
@@ -264,15 +262,14 @@ enum class EnchantedJewellery(
     }
 
     private fun crumbleJewellery(player: Player, item: Item, isOp: Boolean){
+        if(isSlayerRing(item.id)){
+            addItem(player,Items.ENCHANTED_GEM_4155)
+            sendMessage(player,"Your Ring of Slaying reverts back into a regular enchanted gem.")
+        }
         if (isOp) {
             removeItem(player,item, Container.EQUIPMENT)
         } else {
-            if (isSlayerRing(item.id)) {
-                replaceSlot(player,item.slot,Item(Items.ENCHANTED_GEM_4155))
-                sendMessage(player,"Your Ring of Slaying reverts back into a regular enchanted gem.")
-            } else {
-                removeItem(player,item)
-            }
+            removeItem(player,item)
         }
     }
 
