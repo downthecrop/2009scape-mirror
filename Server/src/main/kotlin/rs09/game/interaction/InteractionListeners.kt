@@ -18,6 +18,7 @@ object InteractionListeners {
     private val useWithWildcardListeners = HashMap<Int, ArrayList<Pair<(Int, Int) -> Boolean, (Player, Node, Node) -> Boolean>>>(10)
     private val destinationOverrides = HashMap<String,(Entity, Node) -> Location>(100)
     private val equipListeners = HashMap<String,(Player,Node) -> Boolean>(10)
+    val instantClasses = HashSet<String>()
 
     @JvmStatic
     fun add(id: Int, type: Int, option: Array<out String>, method: (Player,Node) -> Boolean){
@@ -161,7 +162,7 @@ object InteractionListeners {
     @JvmStatic
     fun run(used: Node, with: Node, type: Int,player: Player): Boolean{
         val flag = when(type){
-            2 -> DestinationFlag.ENTITY
+            2, 4 -> DestinationFlag.ENTITY
             1 -> DestinationFlag.OBJECT
             else -> DestinationFlag.OBJECT
         }
@@ -170,7 +171,8 @@ object InteractionListeners {
 
         var flipped = false
 
-        val method = get(used.id,with.id,type) ?: get(with.id,used.id,type).also { flipped = true } ?: return false
+        val method = if (with is Player) get(-1, used.id, 4) ?: return false
+                     else get(used.id,with.id,type) ?: get(with.id,used.id,type).also { flipped = true } ?: return false
 
         val destOverride = if(flipped) {
             getOverride(type, used.id, "use") ?: getOverride(type, with.id) ?: getOverride(type, "use")
@@ -179,7 +181,7 @@ object InteractionListeners {
         }
 
 
-        if(type != 0) {
+        if(type != 0 && !isUseWithInstant(method)) {
             if(player.locks.isMovementLocked) return false
             player.pulseManager.run(object : MovementPulse(player, with, flag, destOverride) {
                 override fun pulse(): Boolean {
@@ -206,6 +208,7 @@ object InteractionListeners {
     @JvmStatic
     fun run(id: Int, type: Int, option: String, player: Player, node: Node): Boolean{
         val flag = when(type){
+            4 -> DestinationFlag.ENTITY
             3 -> DestinationFlag.ITEM
             2 -> DestinationFlag.ENTITY
             1 -> null
@@ -226,7 +229,7 @@ object InteractionListeners {
             return true
         }
 
-        if(type != 0) {
+        if(type != 0 && !isInstant(method)) {
             if(player.locks.isMovementLocked) return false
             player.pulseManager.run(object : MovementPulse(player, node, flag, destOverride) {
                 override fun pulse(): Boolean {
@@ -256,5 +259,15 @@ object InteractionListeners {
         for (w in with) {
             useAnyWithListeners["$w:$type"] = handler
         }
+    }
+
+    fun isInstant(handler: (Player, Node) -> Boolean): Boolean {
+        val className = handler.javaClass.name.substringBefore("$")
+        return instantClasses.contains(className)
+    }
+
+    fun isUseWithInstant(handler: (player: Player, used: Node, with: Node) -> Boolean): Boolean {
+        val className = handler.javaClass.name.substringBefore("$")
+        return instantClasses.contains(className)
     }
 }
