@@ -37,7 +37,7 @@ enum class EnchantedJewellery(
                     Location.create(3429, 3533, 0),
                     Location.create(2793, 3615, 0),
                 ),
-        true,
+            true,
                 Items.RING_OF_SLAYING8_13281,
                 Items.RING_OF_SLAYING7_13282,
                 Items.RING_OF_SLAYING6_13283,
@@ -59,7 +59,7 @@ enum class EnchantedJewellery(
                     Location.create(2442, 3089, 0),
                     Location.create(1693, 5600, 0)
                 ),
-        true,
+            true,
                 Items.RING_OF_DUELLING8_2552,
                 Items.RING_OF_DUELLING7_2554,
                 Items.RING_OF_DUELLING6_2556,
@@ -113,7 +113,7 @@ enum class EnchantedJewellery(
                     Location.create(3179, 3685, 0),
                     Location.create(2885, 4372, 2)
                 ),
-        true,
+            true,
                 Items.GAMES_NECKLACE8_3853,
                 Items.GAMES_NECKLACE7_3855,
                 Items.GAMES_NECKLACE6_3857,
@@ -127,7 +127,7 @@ enum class EnchantedJewellery(
                 arrayOf(
                     Location.create(3342, 3445, 0)
                 ),
-        true,
+            true,
                 Items.DIGSITE_PENDANT_5_11194,
                 Items.DIGSITE_PENDANT_4_11193,
                 Items.DIGSITE_PENDANT_3_11192,
@@ -190,17 +190,17 @@ enum class EnchantedJewellery(
 
     /**
      * Constructs a new `EnchantedJewelleryPlugin` `Object`.
-     * @param options the options.
-     * @param locations the locations.
-     * @param ids the ids.
+     * @param options the dialogue options.
+     * @param locations the teleport locations.
+     * @param ids the ordered item ids.
      */
     constructor(options: Array<String>, locations: Array<Location>, vararg ids: Int) : this(options, locations, false, *ids)
 
     /**
      * Method used to teleport the player to the desired location.
      * @param player the player.
-     * @param item the item.
-     * @param buttonID the buttonid.
+     * @param item the used jewellery item.
+     * @param buttonID the button id.
      * @param isOp If the player is operating.
      */
      fun use(player: Player, item: Item, buttonID: Int, isOp: Boolean) {
@@ -212,19 +212,12 @@ enum class EnchantedJewellery(
         // Nowhere option
         if (buttonID > locations.size - 1) {
             if (item.id in RING_OF_SLAYING.ids){
-                sendMessage(player,"DEBUG: hasTask ${!getInstance(player).hasTask()}")
-                if (!getInstance(player).hasTask()) {
-                    sendNPCDialogue(player,getInstance(player).master!!.npc, "You need something new to hunt. Come and see me When you can and I'll give you a new task.", FacialExpression.HALF_GUILTY)
-                    return
-                }
-                sendNPCDialogue(player,getInstance(player).master!!.npc, "You're currently assigned to kill ${if (getInstance(player).task == Tasks.JAD) " TzTok-Jad!" else NPCDefinition.forId(getInstance(player).task!!.npcs[0]).name.toLowerCase()}'s; only ${getInstance(player).amount} more to go.",FacialExpression.FRIENDLY)
-                // Slayer tracker UI
-                player.varpManager.get(2502).setVarbit(0, getInstance(player).flags.taskFlags shr 4).send(player)
+                slayerProgressDialogue(player)
             }
             return
         }
         val itemIndex = getItemIndex(item)
-        var nextJewellery = Item(getNext(itemIndex))
+        val nextJewellery = Item(getNext(itemIndex))
         if (canTeleport(player, nextJewellery)) {
             Pulser.submit(object : Pulse(0) {
                 private var count = 0
@@ -242,23 +235,10 @@ enum class EnchantedJewellery(
                             player.animator.reset()
                             if (isLastCharge(itemIndex)) {
                                 if (isCrumble) {
-                                    if (isOp) {
-                                        removeItem(player,item, Container.EQUIPMENT)
-                                    } else {
-                                        if (item.name.contains("slaying")) {
-                                            replaceSlot(player,item.slot,Item(Items.ENCHANTED_GEM_4155))
-                                            sendMessage(player,"Your Ring of Slaying reverts back into a regular enchanted gem.")
-                                        } else {
-                                            removeItem(player,item)
-                                        }
-                                    }
+                                    crumbleJewellery(player,item,isOp)
                                 }
                             } else {
-                                if (isOp) {
-                                    replaceSlot(player,item.slot,nextJewellery,Container.EQUIPMENT)
-                                } else {
-                                    replaceSlot(player,item.slot,nextJewellery)
-                                }
+                                replaceJewellery(player,item,nextJewellery, isOp)
                             }
                             player.unlock()
                             return true
@@ -275,11 +255,37 @@ enum class EnchantedJewellery(
         }
     }
 
-    /**
-     * Method used to determine if a player can teleport
-     * @param player the player.
-     * @param item the item.
-     */
+    private fun replaceJewellery(player: Player,item: Item, nextJewellery: Item, isOp: Boolean){
+        if (isOp) {
+            replaceSlot(player,item.slot,nextJewellery,Container.EQUIPMENT)
+        } else {
+            replaceSlot(player,item.slot,nextJewellery)
+        }
+    }
+
+    private fun crumbleJewellery(player: Player, item: Item, isOp: Boolean){
+        if (isOp) {
+            removeItem(player,item, Container.EQUIPMENT)
+        } else {
+            if (item.name.contains("slaying")) {
+                replaceSlot(player,item.slot,Item(Items.ENCHANTED_GEM_4155))
+                sendMessage(player,"Your Ring of Slaying reverts back into a regular enchanted gem.")
+            } else {
+                removeItem(player,item)
+            }
+        }
+    }
+
+    private fun slayerProgressDialogue(player: Player){
+        if (!getInstance(player).hasTask()) {
+            sendNPCDialogue(player,getInstance(player).master!!.npc, "You need something new to hunt. Come and see me When you can and I'll give you a new task.", FacialExpression.HALF_GUILTY)
+            return
+        }
+        sendNPCDialogue(player,getInstance(player).master!!.npc, "You're currently assigned to kill ${if (getInstance(player).task == Tasks.JAD) " TzTok-Jad!" else NPCDefinition.forId(getInstance(player).task!!.npcs[0]).name.lowercase(Locale.getDefault())}'s; only ${getInstance(player).amount} more to go.",FacialExpression.FRIENDLY)
+        // Slayer tracker UI
+        player.varpManager.get(2502).setVarbit(0, getInstance(player).flags.taskFlags shr 4).send(player)
+    }
+
     private fun canTeleport(player: Player, item: Item): Boolean {
         if (player.isTeleBlocked) {
             sendMessage(player,"A magical force has stopped you from teleporting.")
@@ -342,7 +348,7 @@ enum class EnchantedJewellery(
     companion object {
 
         private val ANIMATION = Animation(714)
-        private val AUDIO = Audio(200);
+        private val AUDIO = Audio(200)
         private val GRAPHICS = Graphics(308, 100, 50)
         private val NUMBERS = charArrayOf('1', '2', '3', '4', '5', '6', '7', '8')
 
