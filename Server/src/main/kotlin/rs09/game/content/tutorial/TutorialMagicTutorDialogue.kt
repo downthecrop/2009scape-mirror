@@ -18,6 +18,7 @@ import core.plugin.Initializable
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import proto.management.JoinClanRequest
+import rs09.ServerConstants
 import rs09.game.interaction.inter.RulesAndInfo
 import rs09.game.world.GameWorld
 import rs09.tools.END_DIALOGUE
@@ -183,13 +184,15 @@ class TutorialMagicTutorDialogue(player: Player? = null) : DialoguePlugin(player
                     player.unhook(TutorialButtonReceiver)
                     RulesAndInfo.openFor(player)
 
-                    player.communication.currentClan = "2009scape"
+                    if (GameWorld.settings!!.enable_default_clan) {
+                        player.communication.currentClan = ServerConstants.SERVER_NAME
 
-                    val clanJoin = JoinClanRequest.newBuilder()
-                    clanJoin.clanName = "2009scape"
-                    clanJoin.username = player.name
+                        val clanJoin = JoinClanRequest.newBuilder()
+                        clanJoin.clanName = ServerConstants.SERVER_NAME
+                        clanJoin.username = player.name
 
-                    ManagementEvents.publish(clanJoin.build())
+                        ManagementEvents.publish(clanJoin.build())
+                    }
                 }
 
                 12 -> {
