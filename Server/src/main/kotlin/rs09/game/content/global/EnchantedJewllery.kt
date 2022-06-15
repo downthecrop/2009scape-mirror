@@ -49,7 +49,11 @@ enum class EnchantedJewellery(
         ),
 
         RING_OF_DUELING(
-                arrayOf("Al Kharid Duel Arena.", "Castle Wars Arena.", "Fist of Guthix", "Nowhere."),
+                arrayOf(
+                    "Al Kharid Duel Arena.",
+                    "Castle Wars Arena.",
+                    "Fist of Guthix", "Nowhere."
+                ),
                 arrayOf(
                     Location.create(3314, 3235, 0),
                     Location.create(2442, 3089, 0),
@@ -66,11 +70,19 @@ enum class EnchantedJewellery(
                 Items.RING_OF_DUELLING1_2566
         ),
         AMULET_OF_GLORY(
-                arrayOf("Edgeville", "Karamja", "Draynor Village", "Al-Kharid", "Nowhere."),
-                arrayOf(Location.create(3087, 3495, 0),
-                        Location.create(2919, 3175, 0),
-                        Location.create(3104, 3249, 0),
-                        Location.create(3304, 3124, 0)),
+                arrayOf(
+                    "Edgeville",
+                    "Karamja",
+                    "Draynor Village",
+                    "Al-Kharid",
+                    "Nowhere."
+                ),
+                arrayOf(
+                    Location.create(3087, 3495, 0),
+                    Location.create(2919, 3175, 0),
+                    Location.create(3104, 3249, 0),
+                    Location.create(3304, 3124, 0)
+                ),
                 Items.AMULET_OF_GLORY4_1712,
                 Items.AMULET_OF_GLORY3_1710,
                 Items.AMULET_OF_GLORY2_1708,
@@ -78,11 +90,8 @@ enum class EnchantedJewellery(
                 Items.AMULET_OF_GLORY_1704
         ),
         AMULET_OF_GLORY_T(
-                arrayOf("Edgeville", "Karamja", "Draynor Village", "Al-Kharid", "Nowhere."),
-                arrayOf(Location.create(3087, 3495, 0),
-                        Location.create(2919, 3175, 0),
-                        Location.create(3081, 3250, 0),
-                        Location.create(3304, 3124, 0)),
+                AMULET_OF_GLORY.options,
+                AMULET_OF_GLORY.locations,
                 Items.AMULET_OF_GLORYT4_10354,
                 Items.AMULET_OF_GLORYT3_10356,
                 Items.AMULET_OF_GLORYT2_10358,
@@ -90,7 +99,13 @@ enum class EnchantedJewellery(
                 Items.AMULET_OF_GLORYT_10362
         ),
         GAMES_NECKLACE(
-                arrayOf("Burthorpe Games Room.", "Barbarian Outpost.", "Clan Wars.", "Wilderness Volcano.", "Corporeal Beast"),
+                arrayOf(
+                    "Burthorpe Games Room.",
+                    "Barbarian Outpost.",
+                    "Clan Wars.",
+                    "Wilderness Volcano.",
+                    "Corporeal Beast"
+                ),
                 arrayOf(
                     Location.create(2899, 3563, 0),
                     Location.create(2520, 3571, 0),
@@ -120,7 +135,13 @@ enum class EnchantedJewellery(
                 Items.DIGSITE_PENDANT_1_11190
         ),
         COMBAT_BRACELET(
-                arrayOf("Champions' Guild", "Monastery", "Ranging Guild", "Warriors' Guild", "Nowhere."),
+                arrayOf(
+                    "Champions' Guild",
+                    "Monastery",
+                    "Ranging Guild",
+                    "Warriors' Guild",
+                    "Nowhere."
+                ),
                 arrayOf(
                     Location.create(3191, 3365, 0),
                     Location.create(3052, 3472, 0),
@@ -134,7 +155,13 @@ enum class EnchantedJewellery(
                 Items.COMBAT_BRACELET_11126
         ),
         SKILLS_NECKLACE(
-                arrayOf("Fishing Guild", "Mining Guild", "Crafting Guild", "Cooking Guild", "Nowhere."),
+                arrayOf(
+                    "Fishing Guild",
+                    "Mining Guild",
+                    "Crafting Guild",
+                    "Cooking Guild",
+                    "Nowhere."
+                ),
                 arrayOf(
                     Location.create(2611, 3392, 0),
                     Location.create(3016, 3338, 0),
@@ -173,67 +200,49 @@ enum class EnchantedJewellery(
      * Method used to teleport the player to the desired location.
      * @param player the player.
      * @param item the item.
-     * @param index the index.
-     * @param operate If the player is operating.
+     * @param buttonID the buttonid.
+     * @param isOp If the player is operating.
      */
-     fun use(player: Player, item: Item, index: Int, operate: Boolean) {
-        if (index + 1 == ids.size || item.slot < 0) {
+     fun use(player: Player, item: Item, buttonID: Int, isOp: Boolean) {
+        // Error handling
+        if ((!isOp && !inInventory(player,item.id)) || (isOp && !inEquipment(player,item.id))) {
+            sendMessage(player,"Ooops, you don't have it anymore ;)")
             return
         }
-        if (index > locations.size - 1) {
+        // Nowhere option
+        if (buttonID > locations.size - 1) {
             if (item.id in RING_OF_SLAYING.ids){
                 sendMessage(player,"DEBUG: hasTask ${!getInstance(player).hasTask()}")
                 if (!getInstance(player).hasTask()) {
                     sendNPCDialogue(player,getInstance(player).master!!.npc, "You need something new to hunt. Come and see me When you can and I'll give you a new task.", FacialExpression.HALF_GUILTY)
                     return
                 }
-                sendNPCDialogue(player,getInstance(player).master!!.npc, "You're currently assigned to kill ${if (getInstance(player).task == Tasks.JAD) " TzTok-Jad!" else NPCDefinition.forId(getInstance(player).task!!.npcs[0]).name.toLowerCase()}'s; only ${getInstance(player).amount} more to go.",FacialExpression.HALF_GUILTY)
-
+                sendNPCDialogue(player,getInstance(player).master!!.npc, "You're currently assigned to kill ${if (getInstance(player).task == Tasks.JAD) " TzTok-Jad!" else NPCDefinition.forId(getInstance(player).task!!.npcs[0]).name.toLowerCase()}'s; only ${getInstance(player).amount} more to go.",FacialExpression.FRIENDLY)
                 // Slayer tracker UI
                 player.varpManager.get(2502).setVarbit(0, getInstance(player).flags.taskFlags shr 4).send(player)
             }
             return
         }
         val itemIndex = getItemIndex(item)
-        var replace = item
-        if (!isLast(itemIndex)) {
-            if (!(isCrumble && itemIndex == ids.size - 1)) {
-                replace = getReplace(getNext(itemIndex))
-            }
-        } else {
-            if (!isCrumble) {
-                replace = getReplace(ids[ids.size - 1])
-            }
-        }
-        if ((!operate && !inInventory(player,item.id)) || (operate && !inEquipment(player,item.id))) {
-            sendMessage(player,"Ooops, you don't have it anymore ;)")
-            return
-        }
-        if (canTeleport(player, replace)) {
+        var nextJewellery = Item(getNext(itemIndex))
+        if (canTeleport(player, nextJewellery)) {
             Pulser.submit(object : Pulse(0) {
                 private var count = 0
-                private var location = getLocation(index)
+                private var location = getLocation(buttonID)
                 override fun pulse(): Boolean {
                     when (count) {
                         0 -> {
                             player.lock()
                             visualize(player,ANIMATION, GRAPHICS)
-                            playAudio(player,Audio(200),true)
+                            playAudio(player,AUDIO,true)
                             player.impactHandler.disabledTicks = 4
                         }
                         3 -> {
-                            player.unlock()
                             player.properties.teleportLocation = location
                             player.animator.reset()
-                            if (!isLast(itemIndex) && !(isCrumble && itemIndex == ids.size - 1)) {
-                                if (operate) {
-                                    replaceSlot(player,item.slot,replace,Container.EQUIPMENT)
-                                } else {
-                                    replaceSlot(player,item.slot,replace)
-                                }
-                            } else {
+                            if (isLastCharge(itemIndex)) {
                                 if (isCrumble) {
-                                    if (operate) {
+                                    if (isOp) {
                                         removeItem(player,item, Container.EQUIPMENT)
                                     } else {
                                         if (item.name.contains("slaying")) {
@@ -244,7 +253,14 @@ enum class EnchantedJewellery(
                                         }
                                     }
                                 }
+                            } else {
+                                if (isOp) {
+                                    replaceSlot(player,item.slot,nextJewellery,Container.EQUIPMENT)
+                                } else {
+                                    replaceSlot(player,item.slot,nextJewellery)
+                                }
                             }
+                            player.unlock()
                             return true
                         }
                     }
@@ -253,7 +269,7 @@ enum class EnchantedJewellery(
                 }
             })
 
-            if (getLocation(index).withinDistance(Location(2657, 3439, 0))) {
+            if (getLocation(buttonID).withinDistance(Location(2657, 3439, 0))) {
                 player.achievementDiaryManager.finishTask(player, DiaryType.SEERS_VILLAGE, 2, 0)
             }
         }
@@ -275,20 +291,6 @@ enum class EnchantedJewellery(
         return true
     }
 
-    /**
-     * Gets the replacement item.
-     * @param id the id.
-     * @return the item.
-     */
-    private fun getReplace(id: Int): Item {
-        return Item(id)
-    }
-
-    /**
-     * Gets the name.
-     * @param item the item.
-     * @return the name.
-     */
      fun getName(item: Item): String {
         var name = item.name.lowercase(Locale.getDefault()).replace("(t", "(").replace("(", "").replace(")", "")
         for (number in NUMBERS) {
@@ -297,83 +299,58 @@ enum class EnchantedJewellery(
         return name.trim { it <= ' ' }.replace("/", "")
     }
 
-    /**
-     * Gets the name type.
-     * @param item the item.
-     * @return
-     */
     fun getNameType(item: Item): String {
-        return if (this == GAMES_NECKLACE) "games necklace" else if (this == DIGSITE_PENDANT) "necklace" else if (this == COMBAT_BRACELET) "bracelet" else if (this == SKILLS_NECKLACE) "necklace" else item.name.lowercase(Locale.getDefault()).split(" ").toTypedArray()[0]
+        return when {
+            this == GAMES_NECKLACE -> {
+                "games necklace"
+            }
+            this == DIGSITE_PENDANT -> {
+                "necklace"
+            }
+            this == COMBAT_BRACELET -> {
+                "bracelet"
+            }
+            this == SKILLS_NECKLACE -> {
+                "necklace"
+            }
+            else -> {
+                item.name.lowercase(Locale.getDefault()).split(" ").toTypedArray()[0]
+            }
+        }
     }
 
-    /**
-     * Checks if the index is last.
-     * @param index the index.
-     * @return `True` if so.
-     */
-    fun isLast(index: Int): Boolean {
-        return if (!isCrumble) index == ids.size - 1 else index == ids.size
+    fun isLastCharge(index: Int): Boolean {
+        return index == ids.size - 1
     }
 
-    /**
-     * Gets the next index.
-     * @param index the index.
-     * @return the new id
-     */
     private fun getNext(index: Int): Int {
+        if(index == ids.size - 1){
+            return ids[index]
+        }
         return ids[index + 1]
     }
 
-    /**
-     * Gets the location.
-     * @param index the index.
-     * @return the location.
-     */
     private fun getLocation(index: Int): Location {
         val i = if (index > locations.size) locations.size - 1 else index
         return locations[i]
     }
 
-    /**
-     * Gets the index.
-     * @param item the item.
-     * @return the item index.
-     */
     fun getItemIndex(item: Item): Int {
         return ids.indexOf(item.id)
     }
 
     companion object {
-        /**
-         * Represents the teleport animation.
-         */
+
         private val ANIMATION = Animation(714)
-
-        /**
-         * Represents the graphics to use.
-         */
+        private val AUDIO = Audio(200);
         private val GRAPHICS = Graphics(308, 100, 50)
-
-        /**
-         * Represents the charge numbers.
-         */
         private val NUMBERS = charArrayOf('1', '2', '3', '4', '5', '6', '7', '8')
 
-        /**
-         * Gets the charges of an item.
-         * @param item the item.
-         * @return the charges.
-         */
         fun getCharges(item: Item): String {
             val tokens = item.name.replace("(t", "(").replace("(", " ").replace(")", "").split(" ").toTypedArray()
             return tokens[tokens.size - 1]
         }
 
-        /**
-         * Gets the enchanted jewellery.
-         * @param item the item.
-         * @return `EnchantedJewellery`.
-         */
         fun forItem(item: Item): EnchantedJewellery? {
             for (jewellery in values()) {
                 if (item.id in jewellery.ids) {
