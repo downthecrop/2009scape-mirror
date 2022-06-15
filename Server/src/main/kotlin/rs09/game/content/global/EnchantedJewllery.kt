@@ -210,9 +210,6 @@ enum class EnchantedJewellery(
         }
         val itemIndex = getItemIndex(item)
         val nextJewellery = Item(getNext(itemIndex))
-        sendMessage(player,"DEBUG: itemIndex $itemIndex")
-        sendMessage(player,"DEBUG: nextJewellery $nextJewellery")
-        sendMessage(player,"DEBUG: Can teleport ${canTeleport(player, nextJewellery)}")
         if (canTeleport(player, nextJewellery)) {
             Pulser.submit(object : Pulse(0) {
                 private var count = 0
@@ -288,10 +285,7 @@ enum class EnchantedJewellery(
     }
 
     private fun canTeleport(player: Player, item: Item): Boolean {
-        if (!player.zoneMonitor.teleport(1, item)) {
-            return false
-        }
-        return true
+        return player.zoneMonitor.teleport(1, item)
     }
 
      fun getJewelleryName(item: Item): String {
