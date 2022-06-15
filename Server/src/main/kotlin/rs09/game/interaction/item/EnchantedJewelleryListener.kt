@@ -1,13 +1,11 @@
 package rs09.game.interaction.item
 
-import api.sendDialogue
 import api.sendMessage
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.global.EnchantedJewellery
 import rs09.game.interaction.InteractionListener
-import rs09.tools.END_DIALOGUE
 import rs09.tools.START_DIALOGUE
 import java.util.*
 
@@ -38,17 +36,17 @@ class EnchantedJewelleryListener : InteractionListener {
             return@on true;
         }
     }
-    private fun handle(player: Player, node: Node, isOp: Boolean){
+    private fun handle(player: Player, node: Node, isEquipped: Boolean){
         player.pulseManager.current.stop()
         val item = node.asItem()
         val jewellery = EnchantedJewellery.forItem(item)
         if (jewellery != null) {
-            if (jewellery.isLastCharge(jewellery.getItemIndex(item)) && !jewellery.isCrumble) {
-                sendMessage(player,"The ${jewellery.getNameType(item)} has lost its charge.")
+            if (jewellery.isLastItemId(jewellery.getItemIndex(item)) && !jewellery.isCrumble) {
+                sendMessage(player,"The ${jewellery.getJewelleryType(item)} has lost its charge.")
                 sendMessage(player,"It will need to be recharged before you can use it again.")
                 return
             }
-            sendMessage(player,"You rub the ${jewellery.getNameType(item)}...")
+            sendMessage(player,"You rub the ${jewellery.getJewelleryType(item)}...")
             if (jewellery.options.isNotEmpty()) {
                 player.dialogueInterpreter.open(object : DialogueFile(){
                     override fun handle(componentID: Int, buttonID: Int) {
@@ -57,12 +55,12 @@ class EnchantedJewelleryListener : InteractionListener {
                                 interpreter!!.sendOptions("Where would you like to go?", *jewellery.options)
                                 stage++
                             }
-                            1 -> end().also{ jewellery.use(player, item, buttonID - 1,isOp) }
+                            1 -> end().also{ jewellery.use(player, item, buttonID - 1,isEquipped) }
                         }
                     }
                 })
             } else {
-                jewellery.use(player, item, 0, isOp)
+                jewellery.use(player, item, 0, isEquipped)
             }
         }
     }
