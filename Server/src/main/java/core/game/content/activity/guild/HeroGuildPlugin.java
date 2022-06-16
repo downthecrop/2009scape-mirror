@@ -79,7 +79,9 @@ public final class HeroGuildPlugin extends OptionHandler {
 		@Override
 		public boolean handle(NodeUsageEvent event) {
 			final Player player = event.getPlayer();
-			final EnchantedJewellery jewellery = EnchantedJewellery.Companion.forItem(event.getUsedItem());
+			final EnchantedJewellery jewellery;
+			assert event.getUsedItem() != null;
+			jewellery = EnchantedJewellery.Companion.getIdMap().get(event.getUsedItem().getId());
 			if (jewellery == null && event.getUsedItem().getId() != 2572) {
 				return true;
 			}
