@@ -230,6 +230,15 @@
         <artifactId>maven-failsafe-plugin</artifactId>
         <version>2.22.0</version>
       </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.2.1</version>
+        <configuration>
+          <mainClass>rs09.Server</mainClass>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   <repositories>
