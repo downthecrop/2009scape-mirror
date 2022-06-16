@@ -1,8 +1,11 @@
 package rs09.game.content.global
 
 import api.*
+import api.events.ResourceProducedEvent
+import api.events.TeleportEvent
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
@@ -234,6 +237,7 @@ enum class EnchantedJewellery(
                                 replaceJewellery(player, item, nextJewellery, isEquipped)
                             }
                             unlock(player)
+                            player.dispatch(TeleportEvent(TeleportManager.TeleportType.NORMAL, 1,location))
                             return true
                         }
                     }
@@ -241,10 +245,6 @@ enum class EnchantedJewellery(
                     return false
                 }
             })
-
-            if (getLocation(buttonID).withinDistance(Location(2657, 3439, 0))) {
-                player.achievementDiaryManager.finishTask(player, DiaryType.SEERS_VILLAGE, 2, 0)
-            }
         }
     }
 
