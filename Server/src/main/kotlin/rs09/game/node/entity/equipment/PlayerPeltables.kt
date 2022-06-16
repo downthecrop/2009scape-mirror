@@ -9,11 +9,9 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.map.path.Pathfinder
-import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
-import rs09.game.interaction.item.withnpc.graphics
 
 
 class PlayerPeltables : InteractionListener {
