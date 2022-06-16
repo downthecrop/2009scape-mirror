@@ -42,10 +42,10 @@ class JaraahDialogue(player: Player? = null) : DialoguePlugin(player) {
             // Jaraah has to be special and have different dialogue for the heal listener so I am repeating it here.
             101 -> {
                 animate(npc!!, Animations.HUMAN_PICKPOCKETING_881)
-                if(getDynLevel(player!!, Skills.HITPOINTS) == getStatLevel(player!!, Skills.HITPOINTS)) {
-                    npcl(FacialExpression.FRIENDLY, "You look healthy to me!")
-                } else {
+                if(player!!.skills.lifepoints < getStatLevel(player!!, Skills.HITPOINTS)) {
                     player!!.skills.heal(21)
+                    npcl(FacialExpression.FRIENDLY, "There you go!")
+                } else {
                     npcl(FacialExpression.FRIENDLY, "Okay, this will hurt you more than it will me.")
                 }
                 stage = END_DIALOGUE
