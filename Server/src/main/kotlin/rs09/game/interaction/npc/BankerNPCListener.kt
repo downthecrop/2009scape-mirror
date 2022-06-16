@@ -1,9 +1,5 @@
 package rs09.game.interaction.npc
 
-import api.openDialogue
-import api.sendChat
-import core.game.content.dialogue.DialogueInterpreter
-import core.game.interaction.`object`.BankingPlugin.BankerDialogue
 import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
@@ -32,6 +28,7 @@ class BankerNPCListener : InteractionListener {
 
             NPCs.GHOST_BANKER_1702, NPCs.GNOME_BANKER_166, NPCs.NARDAH_BANKER_3046,
             NPCs.OGRESS_BANKER_7049, NPCs.OGRESS_BANKER_7050, NPCs.SIRSAL_BANKER_4519,
+            NPCs.FADLI_958,
         )
 
         fun provideDestinationOverride(entity: Entity, node: Node): Location {

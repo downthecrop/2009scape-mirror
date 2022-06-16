@@ -34,6 +34,6 @@ class BankChestHandler : InteractionListener {
     }
 
     override fun defineListeners() {
-        on(BANK_CHESTS, SCENERY, "bank", handler = ::useBankChest)
+        on(BANK_CHESTS, SCENERY, "bank", "use", handler = ::useBankChest)
     }
 }
