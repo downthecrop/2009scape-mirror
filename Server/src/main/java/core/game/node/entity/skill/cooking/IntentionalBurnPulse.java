@@ -30,8 +30,12 @@ public class IntentionalBurnPulse extends StandardCookingPulse {
         }
         if(cook(player,null,false,initial,product)) {
             amount--;
+        } else {
+            return true;
         }
-        return amount < 1;
+        // we are always one off a normal cooking pulse because
+        // the first tick is handled outside of this class.
+        return amount <= 1;
     }
 
     @Override
