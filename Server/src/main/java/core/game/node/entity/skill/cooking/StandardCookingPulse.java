@@ -53,7 +53,7 @@ public class StandardCookingPulse extends Pulse {
 
     @Override
     public boolean pulse() {
-        if (!checkRequirements()) {
+        if (amount < 1 || !checkRequirements()) {
             return true;
         }
         return reward();
