@@ -220,20 +220,20 @@ enum class EnchantedJewellery(
                 override fun pulse(): Boolean {
                     when (count) {
                         0 -> {
-                            player.lock()
+                            lock(player,4)
                             visualize(player, ANIMATION, GRAPHICS)
                             playAudio(player, AUDIO, true)
                             player.impactHandler.disabledTicks = 4
                         }
                         3 -> {
-                            player.properties.teleportLocation = location
-                            player.animator.reset()
+                            teleport(player,location)
+                            resetAnimator(player)
                             if (isLastItemIndex(itemIndex)) {
                                 if (isCrumble) crumbleJewellery(player, item, isEquipped)
                             } else {
                                 replaceJewellery(player, item, nextJewellery, isEquipped)
                             }
-                            player.unlock()
+                            unlock(player)
                             return true
                         }
                     }
@@ -284,7 +284,7 @@ enum class EnchantedJewellery(
                 "only ${slayerManager.amount} more to go.", FacialExpression.FRIENDLY)
 
         // Slayer tracker UI
-        player.varpManager.get(2502).setVarbit(0, slayerManager.flags.taskFlags shr 4).send(player)
+        setVarbit(player, 2502, 0, slayerManager.flags.taskFlags shr 4)
     }
 
     private fun canTeleport(player: Player, item: Item): Boolean {
@@ -316,7 +316,7 @@ enum class EnchantedJewellery(
             this == DIGSITE_PENDANT -> "necklace"
             this == COMBAT_BRACELET -> "bracelet"
             this == SKILLS_NECKLACE -> "necklace"
-            else -> item.name.lowercase(Locale.getDefault()).split(" ").toTypedArray()[0]
+            else -> item.name.split(" ")[0].lowercase(Locale.getDefault())
         }
     }
 
@@ -327,18 +327,15 @@ enum class EnchantedJewellery(
     }
 
     companion object {
-
         private val ANIMATION = Animation(714)
         private val AUDIO = Audio(200)
         private val GRAPHICS = Graphics(308, 100, 50)
+        val idMap = HashMap<Int, EnchantedJewellery>()
 
-        fun forItem(item: Item): EnchantedJewellery? {
-            for (jewellery in values()) {
-                if (item.id in jewellery.ids) {
-                    return jewellery
-                }
+        init {
+            values().forEach { entry ->
+                entry.ids.forEach { idMap[it] = entry }
             }
-            return null
         }
     }
 }
