@@ -1,8 +1,11 @@
 package rs09.game.interaction.item
 
+import api.openDialogue
+import api.sendDialogue
 import api.sendMessage
 import core.game.node.Node
 import core.game.node.entity.player.Player
+import core.game.node.item.Item
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.global.EnchantedJewellery
 import rs09.game.interaction.InteractionListener
@@ -42,17 +45,19 @@ class EnchantedJewelleryListener : InteractionListener {
                 jewellery.use(player, item, 0, isEquipped)
                 return
             }
-            player.dialogueInterpreter.open(object : DialogueFile() {
-                override fun handle(componentID: Int, buttonID: Int) {
-                    when (stage) {
-                        START_DIALOGUE -> {
-                            interpreter!!.sendOptions("Where would you like to go?", *jewellery.options)
-                            stage++
-                        }
-                        1 -> end().also { jewellery.use(player, item, buttonID - 1, isEquipped) }
-                    }
+            openDialogue(player,EnchantedJewelleryDialogueFile(jewellery,item,isEquipped))
+        }
+    }
+
+    class EnchantedJewelleryDialogueFile(val jewellery: EnchantedJewellery, val item: Item, val isEquipped: Boolean) : DialogueFile() {
+        override fun handle(componentID: Int, buttonID: Int) {
+            when (stage) {
+                START_DIALOGUE -> {
+                    interpreter!!.sendOptions("Where would you like to go?", *jewellery.options)
+                    stage++
                 }
-            })
+                1 -> end().also { jewellery.use(player!!, item, buttonID - 1, isEquipped) }
+            }
         }
     }
 }
