@@ -7,24 +7,14 @@ import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.global.EnchantedJewellery
 import rs09.game.interaction.InteractionListener
 import rs09.tools.START_DIALOGUE
-import java.util.*
 
 /**
  * Listener for enchanted jewellery options
  * @author Ceikry & downthecrop
  */
 class EnchantedJewelleryListener : InteractionListener {
-    val ids: IntArray
 
-    init {
-        val idsList = ArrayList<Int>()
-        for (j in EnchantedJewellery.values()) {
-            for (id in j.ids) {
-                idsList.add(id)
-            }
-        }
-        ids = idsList.toIntArray()
-    }
+    val ids = EnchantedJewellery.idMap.keys.toIntArray()
 
     override fun defineListeners() {
         on(ids, ITEM, "operate") { player, node ->
@@ -40,7 +30,7 @@ class EnchantedJewelleryListener : InteractionListener {
     private fun handle(player: Player, node: Node, isEquipped: Boolean) {
         player.pulseManager.current.stop()
         val item = node.asItem()
-        val jewellery = EnchantedJewellery.forItem(item)
+        val jewellery = EnchantedJewellery.idMap[item.id]
         if (jewellery != null) {
             if (jewellery.isLastItemIndex(jewellery.getItemIndex(item)) && !jewellery.isCrumble) {
                 sendMessage(player, "The ${jewellery.getJewelleryType(item)} has lost its charge.")
