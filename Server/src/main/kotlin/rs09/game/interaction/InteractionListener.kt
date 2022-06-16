@@ -82,7 +82,6 @@ interface InteractionListener : ContentInterface{
     fun flagInstant() {
         val name = this::class.java.name
         InteractionListeners.instantClasses.add(name)
-        SystemLogger.logInfo(name)
     }
 
     fun defineListeners()
