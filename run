@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPT_DIR=$(cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P)
+SCRIPT_DIR=$(cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit; pwd -P)
 LOG_DIR=$SCRIPT_DIR/logs
 BUILD_DIR=$SCRIPT_DIR/builddir
 GS_SRC=$SCRIPT_DIR/Server
@@ -40,30 +40,30 @@ error()
 rebuild_project()
 {
     if [ $GAMESERVER_ONLY ]; then
-      $SCRIPT_DIR/build -qgcg
+      "$SCRIPT_DIR"/build -qgcg
     else
-      $SCRIPT_DIR/build -qmgcmg
+      "$SCRIPT_DIR"/build -qmgcmg
     fi
 }
 
 refresh_project()
 {
     if [ $GAMESERVER_ONLY ]; then
-      $SCRIPT_DIR/build -qg
+      "$SCRIPT_DIR"/build -qg
     else
-      $SCRIPT_DIR/build -qmg
+      "$SCRIPT_DIR"/build -qmg
     fi
 }
 
 verify_binaries_exist()
 {
     if ! [ $GAMESERVER_ONLY ]; then
-      if [ ! -f $SCRIPT_DIR/builddir/ms.jar ]; then
+      if [ ! -f "$SCRIPT_DIR"/builddir/ms.jar ]; then
           error "Management server binary does not exist.";
       fi
     fi
 
-    if [ ! -f $SCRIPT_DIR/build/server.jar ]; then
+    if [ ! -f "$SCRIPT_DIR"/build/server.jar ]; then
         error "Game server binary does not exist.";
     fi
 }
@@ -136,11 +136,11 @@ while getopts ":ghqrtxe:o:" arg; do
     esac
 done
 
-if [ ! -d $LOG_DIR ]; then
-    mkdir -p $LOG_DIR
+if [ ! -d "$LOG_DIR" ]; then
+    mkdir -p "$LOG_DIR"
 fi
 
-if [ ! -d $GS_SRC/target ]; then
+if [ ! -d "$GS_SRC"/target ]; then
     rebuild_project || error "Failed to perform a clean build."
 else
     if [ $FORCE_REBUILD -eq 1 ]; then
@@ -158,7 +158,7 @@ case $RUN_MODE in
     0)
         # The trap will allow the script to kill the background
         # Java instances upon exiting.
-        trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
+        trap 'trap - SIGTERM && kill -- -$$' SIGINT SIGTERM EXIT
 
         run_server_parallel
         ;;
