@@ -1,12 +1,18 @@
 package rs09.game.content.dialogue.region.rellekka
 
+import api.addItem
 import api.questStage
+import api.sendItemDialogue
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.diary.AchievementDiary
+import core.game.node.entity.player.link.diary.DiaryType
 import core.plugin.Initializable
+import org.rs09.consts.Items;
 import rs09.game.content.quest.members.thefremenniktrials.CouncilWorkerFTDialogue
+import rs09.game.content.dialogue.region.rellekka.CouncilWorkerDiaryDialogue
 
 @Initializable
 class CouncilWorkerDialogue(player: Player? = null) : DialoguePlugin(player){
@@ -14,8 +20,13 @@ class CouncilWorkerDialogue(player: Player? = null) : DialoguePlugin(player){
         npc = args[0] as NPC
         if(questStage(player, "Fremennik Trials") in 1..99){
             player.dialogueInterpreter.open((CouncilWorkerFTDialogue(1)))
-        } else {
-            npc(FacialExpression.FRIENDLY,"'Ello there.").also { stage = 0 }
+        }
+        else if(player.achievementDiaryManager.getDiary(DiaryType.FREMENNIK).isComplete(0, true)){
+            player.dialogueInterpreter.open((CouncilWorkerDiaryDialogue()))
+        }
+        else{
+            player(FacialExpression.FRIENDLY,"Hello.")
+            npc(FacialExpression.FRIENDLY,"How do. You planning on crossing this here bridge and heading up to Rellekka then?").also { stage = 0 }
         }
         return true
     }
