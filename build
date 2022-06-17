@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 SCRIPT_DIR=$(cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit; pwd -P)
 
@@ -33,20 +33,23 @@ error()
 clean_ms()
 {
     cd "$MS_SRC" || exit
-
-    if [[ "$CLEANOPT" == *"m"* ]]; then
-	echo "Cleaning the management server."
-        sh mvnw clean || error "Failed to clean the MS."
-    fi
+	case "$CLEANOPT" in
+		*"m"*)
+			echo "Cleaning the management server."
+			sh mvnw clean || error "Failed to clean the MS."
+			;;
+	esac
 }
 
 clean_gs()
 {
     cd "$GS_SRC" || exit
-    if [[ "$CLEANOPT" == *"g"* ]]; then
-	echo "Cleaning the game server."
-        sh mvnw clean || error "Failed to clean the game server. Giving up."
-    fi
+	case "$CLEANOPT" in
+		*"g"*)
+			echo "Cleaning the game server."
+            sh mvnw clean || error "Failed to clean the game server. Giving up."
+			;;
+	esac
 }
 
 build_ms()
@@ -105,15 +108,15 @@ while getopts "hqmgc:o:d" arg; do
     esac
 done
 
-if [[ $CLEANOPT != "m" ]]       \
-    && [[ $CLEANOPT != "g" ]]   \
-    && [[ $CLEANOPT != "mg" ]]  \
-    && [[ $CLEANOPT != "" ]]; 
+if [ "$CLEANOPT" != "m" ]       \
+    && [ "$CLEANOPT" != "g" ]   \
+    && [ "$CLEANOPT" != "mg" ]  \
+    && [ "$CLEANOPT" != "" ]; 
 then
     error "Invalid cleaning option '$CLEANOPT'. Valid options are 'm', 'g', 'mg' or none."
 fi
 
-if [ $BUILD_MS -eq 0 ] && [ $BUILD_GS -eq 0 ] && [[ $CLEANOPT == "" ]]; then
+if [ $BUILD_MS -eq 0 ] && [ $BUILD_GS -eq 0 ] && [ -z "$CLEANOPT" ]; then
     error "Need to build or clean at least one of the modules. See -h for details."
 fi
 

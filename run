@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 SCRIPT_DIR=$(cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit; pwd -P)
 LOG_DIR=$SCRIPT_DIR/logs
 BUILD_DIR=$SCRIPT_DIR/builddir
@@ -158,7 +158,7 @@ case $RUN_MODE in
     0)
         # The trap will allow the script to kill the background
         # Java instances upon exiting.
-        trap 'trap - SIGTERM && kill -- -$$' SIGINT SIGTERM EXIT
+        trap 'trap - SIGTERM && kill -- -$$' INT TERM EXIT
 
         run_server_parallel
         ;;
