@@ -432,6 +432,7 @@ public class NPC extends Entity {
 			if (dialoguePlayer == null || !dialoguePlayer.isActive() || !dialoguePlayer.getInterfaceManager().hasChatbox()) {
 				dialoguePlayer = null;
 				if (walks && !getPulseManager().hasPulseRunning() && !getProperties().getCombatPulse().isAttacking() && !getProperties().getCombatPulse().isInCombat() && nextWalk < GameWorld.getTicks()) {
+					if (RandomFunction.nextBool()) return;
 					setNextWalk();
 					Location l = getMovementDestination();
 					if (canMove(l)) {
