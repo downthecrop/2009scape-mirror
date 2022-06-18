@@ -9,7 +9,7 @@ import core.net.packet.context.ContainerContext
 import core.net.packet.context.GrandExchangeContext
 import core.net.packet.out.ContainerPacket
 import core.net.packet.out.GrandExchangePacket
-import rs09.game.system.SystemLogger
+import discord.Discord
 import rs09.game.world.repository.Repository
 import java.sql.ResultSet
 
@@ -144,6 +144,7 @@ class GrandExchangeOffer() {
                 uid = nowuid.getLong(1)
                 visualize(player)
                 stmt.close()
+                Discord.postNewOffer(sell, itemID, offeredValue, amount, player?.username ?: "Unknown")
             }
         }
     }

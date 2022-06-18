@@ -211,5 +211,8 @@ class ServerConstants {
 
 		@JvmField
 		var DAILY_RESTART = false
+
+		@JvmField
+		var DISCORD_GE_WEBHOOK = ""
 	}
 }
