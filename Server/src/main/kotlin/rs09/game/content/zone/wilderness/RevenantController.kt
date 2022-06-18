@@ -19,9 +19,11 @@ import rs09.game.system.SystemLogger
 import rs09.game.system.command.Privilege
 import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
+import java.lang.Integer.min
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
+import kotlin.math.max
 
 class RevenantController : TickListener, Commands {
 
@@ -70,7 +72,7 @@ class RevenantController : TickListener, Commands {
     }
 
     private fun spawnMissingRevenants() {
-        val amountToSpawn = expectedRevAmount - trackedRevenants.size
+        val amountToSpawn = min(5, expectedRevAmount - trackedRevenants.size) //only spawn 5 at a time
 
         if (amountToSpawn <= 0) return
 
@@ -101,6 +103,10 @@ class RevenantController : TickListener, Commands {
             }
 
             SystemLogger.logInfo("Total of ${trackedRevenants.size} revenants spawned.")
+        }
+
+        define("clearrevs", Privilege.ADMIN) {_, _ ->
+            for (rev in trackedRevenants.toTypedArray()) rev.clear()
         }
     }
 
