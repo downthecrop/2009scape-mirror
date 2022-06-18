@@ -5,6 +5,7 @@ import core.game.ge.OfferState
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.PlayerDetails
 import core.game.node.entity.player.link.audio.Audio
+import discord.Discord
 import rs09.ServerConstants
 import rs09.game.system.SystemLogger
 import rs09.game.system.command.Privilege
@@ -297,6 +298,14 @@ class GrandExchange : StartupListener, Commands {
 
             if(canUpdatePriceIndex(seller, buyer))
                 PriceIndex.addTrade(offer.itemID, amount, (totalCoinXC / amount))
+
+            if (seller.amountLeft > 0) {
+                Discord.postOfferUpdate(true, seller.itemID, seller.offeredValue, seller.amountLeft)
+            }
+
+            if (buyer.amountLeft > 0) {
+                Discord.postOfferUpdate(false, buyer.itemID, buyer.offeredValue, buyer.amountLeft)
+            }
 
             seller.update()
             val sellerPlayer = Repository.uid_map[seller.playerUID]
