@@ -11,6 +11,7 @@ import rs09.game.system.SystemLogger
 import rs09.game.system.command.Privilege
 import rs09.game.system.config.ItemConfigParser
 import rs09.game.world.repository.Repository
+import rs09.tools.stringtools.colorize
 import java.lang.Integer.max
 import java.sql.ResultSet
 
@@ -101,6 +102,13 @@ class GrandExchange : StartupListener, Commands {
             val id = strings[1].toInt()
             PriceIndex.allowItem(id)
             notify(player, "Allowed ${getItemName(id)} for GE trade.")
+        }
+
+        define("geprivacy", Privilege.STANDARD) {player, _ ->
+            val current = getAttribute(player, "ge-exclude", false)
+            val new = !current
+            notify(player, "Your name is now ${if (new) colorize("%RHIDDEN") else colorize("%RSHOWN")}.")
+            setAttribute(player, "/save:ge-exclude", new)
         }
     }
 
@@ -253,8 +261,9 @@ class GrandExchange : StartupListener, Commands {
             offer.offerState = OfferState.REGISTERED
             //GrandExchangeRecords.getInstance(player).update(offer)
 
-            if (offer.sell) {
-                Repository.sendNews(player.username + " just offered " + offer.amount + " " + getItemName(offer.itemID) + " on the GE.")
+            if (offer.sell && !player.isArtificial) {
+                val username = if (getAttribute(player, "ge-exclude", false)) "?????" else player.username
+                Repository.sendNews(username + " just offered " + offer.amount + " " + getItemName(offer.itemID) + " on the GE.")
             }
 
             offer.writeNew()
@@ -299,6 +308,7 @@ class GrandExchange : StartupListener, Commands {
             if(canUpdatePriceIndex(seller, buyer))
                 PriceIndex.addTrade(offer.itemID, amount, (totalCoinXC / amount))
 
+/*
             if (seller.amountLeft > 0) {
                 Discord.postOfferUpdate(true, seller.itemID, seller.offeredValue, seller.amountLeft)
             }
@@ -306,6 +316,7 @@ class GrandExchange : StartupListener, Commands {
             if (buyer.amountLeft > 0) {
                 Discord.postOfferUpdate(false, buyer.itemID, buyer.offeredValue, buyer.amountLeft)
             }
+*/
 
             seller.update()
             val sellerPlayer = Repository.uid_map[seller.playerUID]
