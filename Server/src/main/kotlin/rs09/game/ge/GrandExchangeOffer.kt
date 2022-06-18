@@ -1,5 +1,6 @@
 package rs09.game.ge
 
+import api.getAttribute
 import core.cache.def.impl.ItemDefinition
 import core.game.ge.OfferState
 import core.game.node.entity.player.Player
@@ -144,7 +145,11 @@ class GrandExchangeOffer() {
                 uid = nowuid.getLong(1)
                 visualize(player)
                 stmt.close()
-                Discord.postNewOffer(sell, itemID, offeredValue, amount, player?.username ?: "Unknown")
+
+                val username = if (getAttribute(player!!, "ge-exclude", false)) "?????"
+                else player?.username ?: "?????"
+
+                Discord.postNewOffer(sell, itemID, offeredValue, amount, username)
             }
         }
     }
