@@ -86,6 +86,7 @@ class PlayerSaveParser(val player: Player) {
     {
         if(read)
             contentHooks.forEach{it.parsePlayer(player, saveFile!!)}
+        player.details.saveParsed = true
     }
 
     fun parseVarps(){

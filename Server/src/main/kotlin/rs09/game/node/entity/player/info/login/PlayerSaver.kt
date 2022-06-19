@@ -61,6 +61,7 @@ class PlayerSaver (val player: Player){
         return saveFile
     }
     fun save() = runBlocking {
+        if (!player.details.saveParsed) return@runBlocking
         val manager = ScriptEngineManager()
         val scriptEngine = manager.getEngineByName("JavaScript")
         scriptEngine.put("jsonString", populate().toJSONString())
