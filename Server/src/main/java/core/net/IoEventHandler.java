@@ -61,12 +61,19 @@ public class IoEventHandler {
 		ReadableByteChannel channel = (ReadableByteChannel) key.channel();
 		ByteBuffer buffer = ByteBuffer.allocate(100_000);
 		IoSession session = (IoSession) key.attachment();
-		if (channel.read(buffer) == -1) {
-			if(session != null && session.getPlayer() != null){
-				Repository.getDisconnectionQueue().add(session.getPlayer());
+		try {
+			if (channel.read(buffer) == -1) {
+				if (session != null && session.getPlayer() != null) {
+					Repository.getDisconnectionQueue().add(session.getPlayer());
+				}
+				key.cancel();
+				return;
 			}
-			key.cancel();
-			return;
+		} catch (IOException e) {
+			if (e.getMessage().contains("reset by peer")) {
+				session.disconnect();
+				session.getPlayer().clear(true);
+			} else e.printStackTrace();
 		}
 		buffer.flip();
 		if (session == null) {
