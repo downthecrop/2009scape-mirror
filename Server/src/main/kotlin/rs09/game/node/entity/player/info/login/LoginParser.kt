@@ -41,9 +41,19 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
         if(!validateRequest(player)) return
 
         if (reconnect) {
-            reconnect(player)
+            Repository.removePlayer(player)
+            Repository.LOGGED_IN_PLAYERS.remove(player.username)
+            Repository.lobbyPlayers.remove(player)
+            Repository.playerNames.remove(player.name)
+
+            flag(AuthResponse.UnexpectedError)
             return
+// FIXME: CEIKRY PLEASE SAVE YOUR WHIP FOR SOMEONE ELSE
+//
+//            reconnect(player)
+//            return
         }
+
         lateinit var parser: PlayerSaveParser
         try {
             parser = PlayerParser.parse(player)
@@ -93,6 +103,9 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
      * @param type The login type.
      */
     private fun reconnect(player: Player) {
+        if (!Repository.disconnectionQueue.contains(details.username))
+            return
+
         Repository.disconnectionQueue.remove(details.username)
         player.initReconnect()
         player.isActive = true
