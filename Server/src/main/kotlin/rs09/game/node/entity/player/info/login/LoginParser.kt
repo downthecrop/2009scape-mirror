@@ -38,7 +38,8 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
      * @param reconnect If the player data should be parsed.
      */
     fun initialize(player: Player, reconnect: Boolean) {
-        if(!validateRequest()) return
+        if(!validateRequest(player)) return
+
         if (reconnect) {
             reconnect(player)
             return
@@ -108,7 +109,10 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
      * Checks if the login request is valid.
      * @return `True` if the request is valid.
      */
-    private fun validateRequest(): Boolean {
+    private fun validateRequest(player: Player?): Boolean {
+        if(player == null) {
+            return false;
+        }
         if (!details.session.isActive) {
             return false
         }
