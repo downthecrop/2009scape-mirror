@@ -7,6 +7,7 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.repository.NodeList
 import rs09.ServerConstants
+import rs09.game.world.update.UpdateSequence
 import java.util.*
 import java.util.concurrent.CopyOnWriteArrayList
 
@@ -146,6 +147,7 @@ object Repository {
         players.remove(player)
         uid_map.remove(player.details.usernameHashcode)
         playerNames.remove(player.name)
+        UpdateSequence.renderablePlayers.remove(player)
     }
 
     /**

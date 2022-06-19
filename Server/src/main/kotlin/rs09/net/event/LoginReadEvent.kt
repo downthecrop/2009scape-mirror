@@ -33,6 +33,7 @@ class LoginReadEvent(session: IoSession?, buffer: ByteBuffer?) : IoReadEvent(ses
         details.communication.parse(accountInfo)
         session.clientInfo = ClientInfo(info.displayMode, info.windowMode, info.screenWidth, info.screenHeight)
         session.isaacPair = info.isaacPair
+        session.associatedUsername = info.username
         Login.proceedWith(session, details, info.opcode)
     }
 }

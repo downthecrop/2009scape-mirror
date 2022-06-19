@@ -350,7 +350,6 @@ public class Player extends Entity {
 		if (!artificial) {
 			getProperties().setSpawnLocation(ServerConstants.HOME_LOCATION);
 			getDetails().getSession().setObject(this);
-			getDetails().getSession().setLastPing(System.currentTimeMillis() + 10_000L);
 		}
 		super.init();
 		LoginConfiguration.configureLobby(this);
@@ -473,10 +472,6 @@ public class Player extends Entity {
 				removeAttribute("poison:immunity");
 				getAudioManager().send(2607);
 			}
-		}
-		if (!artificial && (System.currentTimeMillis() - getSession().getLastPing()) > 20_000L) {
-			details.getSession().disconnect();
-			getSession().setLastPing(Long.MAX_VALUE);
 		}
 		if(getAttribute("infinite-special", false)) {
 			settings.setSpecialEnergy(100);
