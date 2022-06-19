@@ -40,6 +40,8 @@ public class PlayerDetails {
 	 */
 	private IoSession session;
 
+	public boolean saveParsed = false;
+
 	/**
 	 * Constructs a new {@code PlayerDetails}.
 	 * @param username the username to set.
@@ -253,6 +255,7 @@ public class PlayerDetails {
 	}
 
 	public void save() {
+		if(!saveParsed) return;
 		if(isBanned()) return;
 		try {
 			accountInfo.setContacts(communicationInfo.getContactString());

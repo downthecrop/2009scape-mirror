@@ -1,15 +1,8 @@
 package rs09.worker
 
 import api.submitWorldPulse
-import core.game.system.SystemManager
-import core.game.system.SystemState
 import core.game.system.task.Pulse
 import core.plugin.CorePluginTypes.Managers
-import gui.GuiEvent
-import gui.ServerMonitor
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import rs09.Server
 import rs09.ServerConstants
 import rs09.ServerStore
@@ -18,13 +11,10 @@ import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
 import rs09.game.world.update.UpdateSequence
-import rs09.net.packet.PacketWriteQueue
 import rs09.tools.stringtools.colorize
 import java.lang.Long.max
-import java.lang.Long.min
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.system.exitProcess
 
 /**
@@ -45,6 +35,15 @@ class MajorUpdateWorker {
             Server.heartbeat()
 
             handleTickActions()
+
+            for (player in Repository.players.filter {!it.isArtificial}) {
+                if (System.currentTimeMillis() - player.session.lastPing > 20000L) {
+                    player?.details?.session?.disconnect()
+                    player?.session?.lastPing = Long.MAX_VALUE
+                    player?.clear(true)
+                    Repository.removePlayer(player)
+                }
+            }
 
             //Handle daily restart if enabled
             if(sdf.format(Date()).toInt() == 0){

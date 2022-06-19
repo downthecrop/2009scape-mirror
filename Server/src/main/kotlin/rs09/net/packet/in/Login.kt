@@ -121,11 +121,19 @@ object Login {
         details.session = session
         details.info.translate(UIDInfo(details.ipAddress, "DEPRECATED", "DEPRECATED", "DEPRECATED"))
         val player = Player(details)
-        if (!Repository.players.contains(player)) {
+        if (Repository.getPlayerByName(player.name) == null) {
             Repository.addPlayer(player)
         }
-        LoginParser(details, LoginType.fromType(opcode)).initialize(player, opcode == RECONNECT_LOGIN_OP)
-        sendMSEvents(details)
+        session.lastPing = System.currentTimeMillis()
+        try {
+            LoginParser(details, LoginType.fromType(opcode)).initialize(player, opcode == RECONNECT_LOGIN_OP)
+            sendMSEvents(details)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            session.disconnect()
+            Repository.removePlayer(player)
+            player.clear(true)
+        }
     }
 
     private fun sendMSEvents(details: PlayerDetails) {

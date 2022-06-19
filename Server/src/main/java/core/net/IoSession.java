@@ -9,6 +9,7 @@ import rs09.auth.AuthResponse;
 import rs09.game.world.GameWorld;
 import core.net.producer.HSEventProducer;
 import core.net.producer.LoginEventProducer;
+import rs09.game.world.repository.Repository;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -113,6 +114,8 @@ public class IoSession {
 	 * The client info.
 	 */
 	private ClientInfo clientInfo;
+
+	public String associatedUsername;
 
 	/**
 	 * Constructs a new {@code IoSession}.
@@ -329,6 +332,9 @@ public class IoSession {
 	 * @return The player.
 	 */
 	public Player getPlayer() {
+		if (object == null) {
+			object = Repository.getPlayerByName(associatedUsername);
+		}
 		return object instanceof Player ? ((Player) object) : null;
 	}
 	

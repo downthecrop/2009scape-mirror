@@ -25,6 +25,9 @@ import java.util.function.Consumer
  * Parses the login of a player.
  */
 class LoginParser(val details: PlayerDetails, private val type: LoginType) {
+    companion object {
+        var monkeywrench  = true
+    }
     /**
      * The player in the game, used for reconnect login type.
      */
@@ -39,10 +42,6 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
      */
     fun initialize(player: Player, reconnect: Boolean) {
         if(!validateRequest()) return
-        if (reconnect) {
-            reconnect(player)
-            return
-        }
         lateinit var parser: PlayerSaveParser
         try {
             parser = PlayerParser.parse(player)
@@ -65,8 +64,12 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
                         loginListeners.forEach(Consumer { listener: LoginListener -> listener.login(player) }) //Run our login hooks
                         parser.runContentHooks() //Run our saved-content-parsing hooks
                         player.details.session.setObject(player)
-                        flag(AuthResponse.Success)
-                        player.init()
+                        if (reconnect) {
+                            reconnect(player)
+                        } else {
+                            flag(AuthResponse.Success)
+                            player.init()
+                        }
                         player.monitor.log(player.details.ipAddress, PlayerMonitor.ADDRESS_LOG)
                         player.monitor.log(player.details.serial, PlayerMonitor.ADDRESS_LOG)
                         player.monitor.log(player.details.macAddress, PlayerMonitor.ADDRESS_LOG)

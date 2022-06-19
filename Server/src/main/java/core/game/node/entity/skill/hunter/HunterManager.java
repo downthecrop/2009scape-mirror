@@ -54,6 +54,7 @@ public final class HunterManager implements LoginListener, LogoutListener, Event
 	@Override
 	public void logout(@NotNull Player player) {
 		HunterManager instance = getInstance(player);
+		if (instance == null) return;
 		Iterator<TrapWrapper> iterator = instance.traps.iterator();
 		TrapWrapper wrapper = null;
 		while (iterator.hasNext()) {
