@@ -75,6 +75,10 @@ object Login {
             info.username = StringUtils.longToString(decryptedBuffer.long)
             info.password = ByteBufferUtils.getString(decryptedBuffer)
 
+// FIXME: This appears to be the focal point of
+//        login persistence after log-out happens.
+//        Repository still contains player data.
+
             if (Repository.getPlayerByName(info.username) != null) {
                 return Pair(AuthResponse.AlreadyOnline, info)
             }

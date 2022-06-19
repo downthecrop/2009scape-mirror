@@ -58,6 +58,9 @@ public final class LoginWriteEvent extends IoWriteEvent {
 	private static ByteBuffer getWorldResponse(IoSession session) {
 		ByteBuffer buffer = ByteBuffer.allocate(150);
 		Player player = session.getPlayer();
+
+		System.out.println(player);
+
 		buffer.put((byte) player.getDetails().getRights().ordinal());
 		buffer.put((byte) 0);
 		buffer.put((byte) 0);
