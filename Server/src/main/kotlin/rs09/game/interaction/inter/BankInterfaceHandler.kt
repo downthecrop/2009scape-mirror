@@ -26,7 +26,6 @@ class BankInterfaceHandler : InterfaceListener {
             ServerConstants.BANK_SIZE
         )
 
-        player.sendChat("onBankInterfaceOpen listener finished")
         return true
     }
 
