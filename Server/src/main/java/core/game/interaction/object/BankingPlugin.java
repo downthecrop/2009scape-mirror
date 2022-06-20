@@ -1,43 +1,20 @@
 package core.game.interaction.object;
 
-import static api.ContentAPIKt.*;
-
-import api.IfaceSettingsBuilder;
-import api.events.InteractionEvent;
-import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.SceneryDefinition;
-import core.game.component.CloseEvent;
-import core.game.component.Component;
-import core.game.component.ComponentDefinition;
-import core.game.component.ComponentPlugin;
-import core.game.container.access.InterfaceContainer;
-import core.game.content.dialogue.DialogueAction;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.dialogue.FacialExpression;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
-import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.IronmanMode;
 import core.game.node.entity.player.link.appearance.Gender;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
-import core.game.node.scenery.Scenery;
-import core.game.system.task.Pulse;
-import core.game.world.map.Direction;
-import core.game.world.map.Location;
-import core.game.world.map.RegionManager;
-import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import kotlin.Unit;
-import rs09.game.content.dialogue.DepositAllDialogue;
-import rs09.game.ge.GrandExchangeRecords;
 import rs09.game.ge.GrandExchangeOffer;
+import rs09.game.ge.GrandExchangeRecords;
 import rs09.game.world.GameWorld;
-
-import java.text.NumberFormat;
 
 /**
  * Represents the plugin used for anything related to banking.
@@ -50,76 +27,14 @@ public final class BankingPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        SceneryDefinition.setOptionHandler("use-quickly", this);
-        SceneryDefinition.setOptionHandler("use", this);
-        SceneryDefinition.setOptionHandler("bank", this);
-        SceneryDefinition.setOptionHandler("collect", this);
-        SceneryDefinition.setOptionHandler("deposit", this);
-        new BankingInterface().newInstance(arg);
-        new BankDepositInterface().newInstance(arg);
-        new BankNPCPlugin().newInstance(arg);
-        new BankNPC().newInstance(arg);
         new BankerDialogue().init();
         return this;
     }
 
     @Override
     public boolean handle(Player player, Node node, String option) {
-        final Scenery object = (Scenery) node;
-        if (player.getIronmanManager().checkRestriction(IronmanMode.ULTIMATE)) {
-            return true;
-        }
-        if (object.getName().contains("Bank") || object.getName().contains("Deposit")) {
-            //TODO: REPLACE THIS ALL WITH A LISTENER. I DONT FEEL LIKE IT RIGHT NOW.
-            player.dispatch(new InteractionEvent(object, option));
-            switch (option) {
-                case "use":
-//				final Location l = object.getLocation();
-//				final Location p = player.getLocation();
-//				final NPC npc = Repository.findNPC(l.transform(l.getX() - p.getX(), l.getY() - p.getY(), 0));
-//				if (node.getId() == 4483) {
-//					player.getBank().open();
-//					return true;
-//				}
-//				if (npc != null && DialogueInterpreter.contains(npc.getId())) {
-//					npc.faceLocation(node.getLocation());
-//					player.getDialogueInterpreter().open(npc.getId(), npc.getId());
-//				} else {
-//					player.getDialogueInterpreter().open(494);
-//				}
-//				return true;
-                case "use-quickly":
-                case "bank":
-                    player.getBankPinManager().openType(1);
-                    checkAchievements(player);
-                    return true;
-                case "collect":
-                    GrandExchangeRecords.getInstance(player).openCollectionBox();
-                    return true;
-                case "deposit":
-                    openDepositBox(player);
-                    return true;
-            }
-        }
+        player.sendChat(":crab: :crab: :crab: RETARDED PLUGIN IS GONE :crab: :crab: :crab:");
         return true;
-    }
-
-    /**
-     * Method used to open the deposit box.
-     *
-     * @param player the player.
-     */
-    private void openDepositBox(final Player player) {
-        player.getInterfaceManager().open(new Component(11)).setCloseEvent(new CloseEvent() {
-            @Override
-            public boolean close(Player player, Component c) {
-                player.getInterfaceManager().openDefaultTabs();
-                return true;
-            }
-        });
-        //player.getInterfaceManager().closeDefaultTabs();
-        player.getInterfaceManager().removeTabs(0, 1, 2, 3, 4, 5, 6);
-        InterfaceContainer.generateItems(player, player.getInventory().toArray(), new String[]{"Examine", "Deposit-X", "Deposit-All", "Deposit-10", "Deposit-5", "Deposit-1",}, 11, 15, 5, 7);
     }
 
     /**
@@ -317,7 +232,6 @@ public final class BankingPlugin extends OptionHandler {
                                 case 2:
                                 case 3:
                                     player.getBankPinManager().openType(buttonId);
-                                    checkAchievements(player);
                                     end();
                                     break;
                                 case 4:
@@ -340,7 +254,6 @@ public final class BankingPlugin extends OptionHandler {
                                 case 2:
                                 case 3:
                                     player.getBankPinManager().openType(buttonId);
-                                    checkAchievements(player);
                                     end();
                                     break;
                                 case 4:
@@ -381,382 +294,4 @@ public final class BankingPlugin extends OptionHandler {
         }
 
     }
-
-    /**
-     * Represents the component plugin used to handle banking interfaces.
-     *
-     * @author Emperor
-     * @author 'Vexia
-     * @version 1.0
-     */
-    public static final class BankingInterface extends ComponentPlugin {
-
-        @Override
-        public Plugin<Object> newInstance(Object arg) throws Throwable {
-            ComponentDefinition.put(763, this);
-            ComponentDefinition.put(762, this);
-            ComponentDefinition.put(767, this);
-            return this;
-        }
-
-        @Override
-        public void open(Player player, Component component) {
-            super.open(player, component);
-            player.getBank().sendBankSpace();
-            int settings = new IfaceSettingsBuilder().enableAllOptions().enableSlotSwitch().setInterfaceEventsDepth(2).build();
-            player.getPacketDispatch().sendIfaceSettings(settings, 73, 762, 0, 496);
-        }
-
-        @Override
-        public boolean handle(final Player p, Component component, int opcode, int button, final int slot, int itemId) {
-            final Item item = component.getId() == 762 ? p.getBank().get(slot) : p.getInventory().get(slot);
-            switch (component.getId()) {
-                case 767:
-                    switch (button) {
-                        case 10:
-                            p.getBank().open();
-                            break;
-                    }
-                    break;
-                case 762:
-                    switch (button) {
-                        case 18:
-                            p.getDialogueInterpreter().open(new DepositAllDialogue().getID());
-                            return true;
-                        case 23:
-                            p.getDialogueInterpreter().sendOptions("Select an Option", "Check bank value", "Banking assistance", "Close");
-                            p.getDialogueInterpreter().addAction(new DialogueAction() {
-
-                                @Override
-                                public void handle(Player player, int buttonId) {
-                                    switch (buttonId) {
-                                        case 2:
-                                            p.getDialogueInterpreter().sendItemMessage(new Item(995, 50000), "<br>Your bank is worth approximately <col=a52929>" + NumberFormat.getInstance().format(p.getBank().getWealth()) + "</col> coins.");
-                                            break;
-                                        case 3:
-                                            p.getBank().close();
-                                            p.getInterfaceManager().open(new Component(767));
-                                            break;
-                                        case 4:
-                                            p.getDialogueInterpreter().close();
-                                            break;
-                                    }
-                                }
-
-                            });
-                            break;
-                        case 14:
-                            p.getBank().setInsertItems(!p.getBank().isInsertItems());
-                            return true;
-                        case 16:
-                            p.getBank().setNoteItems(!p.getBank().isNoteItems());
-                            return true;
-                        case 73:
-                            int amount = 0;
-                            switch (opcode) {
-                                case 155:
-                                    amount = 1;
-                                    break;
-                                case 196:
-                                    amount = 5;
-                                    break;
-                                case 124:
-                                    amount = 10;
-                                    break;
-                                case 199:
-                                    amount = p.getBank().getLastAmountX();
-                                    break;
-                                case 234:
-                                    sendInputDialogue(p, false, "Enter the amount:", (value) -> {
-                                        String s = value.toString();
-                                        s = s.replace("k","000");
-                                        s = s.replace("K","000");
-                                        s = s.replace("m","000000");
-                                        s = s.replace("M","000000");
-                                        int val = Integer.parseInt(s);
-                                        p.getBank().takeItem(slot, val);
-                                        p.getBank().updateLastAmountX(val);
-                                        return Unit.INSTANCE;
-                                    });
-                                    break;
-                                case 9:
-                                    p.sendMessage(p.getBank().get(slot).getDefinition().getExamine());
-                                    break;
-                                case 168:
-                                    amount = p.getBank().getAmount(item);
-                                    break;
-                                case 166:
-                                    amount = p.getBank().getAmount(item) - 1;
-                                    break;
-                                default:
-                                    return false;
-                            }
-                            if (amount > 0) {
-                                final int withdraw = amount;
-						GameWorld.getPulser().submit(new Pulse(1, p) {
-                                    @Override
-                                    public boolean pulse() {
-                                        if (item == null) {
-                                            return true;
-                                        }
-                                        p.getBank().takeItem(slot, withdraw);
-                                        return true;
-                                    }
-                                });
-                            }
-                            return true;
-                        case 20://search
-                            p.setAttribute("search", true);
-                            break;
-                        case 41:
-                        case 39:
-                        case 37:
-                        case 35:
-                        case 33:
-                        case 31:
-                        case 29:
-                        case 27:
-                        case 25:
-                            if (p.getAttribute("search", false)) {
-                                p.getBank().reopen();
-                            }
-                            int tabIndex = -((button - 41) / 2);
-                            switch (opcode) {
-                                case 155:
-                                    p.getBank().setTabIndex(tabIndex);
-                                    return true;
-                                case 196:
-                                    p.getBank().collapseTab(tabIndex);
-                                    return true;
-                            }
-                            return false;
-                    }
-                    break;
-                case 763:// overlay.
-                    switch (opcode) {
-                        case 155:
-                            p.getBank().addItem(slot, 1);
-                            break;
-                        case 196:
-                            p.getBank().addItem(slot, 5);
-                            break;
-                        case 124:
-                            p.getBank().addItem(slot, 10);
-                            break;
-                        case 199:
-                            p.getBank().addItem(slot, p.getBank().getLastAmountX());
-                            break;
-                        case 234:
-                            sendInputDialogue(p, false, "Enter the amount:", (value) -> {
-                                String s = value.toString();
-                                s = s.replace("k","000");
-                                s = s.replace("K","000");
-                                int val = Integer.parseInt(s);
-                                p.getBank().addItem(slot, val);
-                                p.getBank().updateLastAmountX(val);
-                                return Unit.INSTANCE;
-                            });
-                            break;
-                        case 168:
-                            p.getBank().addItem(slot, p.getInventory().getAmount(item));
-                            break;
-                    }
-                    break;
-            }
-            return true;
-        }
-
-    }
-
-    /**
-     * Represents the bank deposit interface handler.
-     *
-     * @author 'Vexia
-     * @version 1.0
-     */
-    public static final class BankDepositInterface extends ComponentPlugin {
-
-        /**
-         * Represents the deposit animation.
-         */
-        private static final Animation DEPOSIT_ANIMATION = new Animation(834);
-
-        @Override
-        public Plugin<Object> newInstance(Object arg) throws Throwable {
-            ComponentDefinition.put(11, this);
-            return this;
-        }
-
-        @Override
-        public boolean handle(final Player p, Component component, int opcode, int button, final int slot, int itemId) {
-            final Item item = p.getInventory().get(slot);
-            if (item == null && button != 15 && button != 13) {
-                return true;
-            }
-            switch (component.getId()) {
-                case 11:
-                    p.animate(DEPOSIT_ANIMATION);
-                    switch (opcode) {
-                        case 155: // Deposit items
-                            p.getBank().addItem(slot, 1);
-                            break;
-                        case 196:
-                            p.getBank().addItem(slot, 5);
-                            break;
-                        case 124:
-                            p.getBank().addItem(slot, 10);
-                            break;
-                        case 199:
-                            p.getPulseManager().run(new Pulse(1, p) {
-                                @Override
-                                public boolean pulse() {
-                                    p.getBank().addItem(slot, p.getInventory().getAmount(item));
-                                    InterfaceContainer.generateItems(p, p.getInventory().toArray(), new String[]{"Examine", "Deposit-X", "Deposit-All", "Deposit-10", "Deposit-5", "Deposit-1",}, 11, 15, 5, 7);
-                                    return true;
-                                }
-                            });
-                            return true;
-                        case 234:
-                            sendInputDialogue(p, false, "Enter the amount:", (value) -> {
-                                String s = value.toString();
-                                s = s.replace("k","000");
-                                s = s.replace("K","000");
-                                int val = Integer.parseInt(s);
-                                p.getBank().addItem(slot, val);
-                                InterfaceContainer.generateItems(p, p.getInventory().toArray(), new String[]{"Examine", "Deposit-X", "Deposit-All", "Deposit-10", "Deposit-5", "Deposit-1",}, 11, 15, 5, 7);
-                                return Unit.INSTANCE;
-                            });
-                            break;
-                        case 168:
-                            p.sendMessage(item.getDefinition().getExamine());
-                            break;
-                    }
-                    switch (button) {
-                        case 13:
-                            p.getFamiliarManager().dumpBob();
-                            break;
-                    }
-                    break;
-            }
-            InterfaceContainer.generateItems(p, p.getInventory().toArray(), new String[]{"Examine", "Deposit-X", "Deposit-All", "Deposit-10", "Deposit-5", "Deposit-1",}, 11, 15, 5, 7);
-            return true;
-        }
-
-    }
-
-    /**
-     * Represents the plugin used to handle the banker npc.
-     *
-     * @author 'Vexia
-     * @author Emperor
-     * @version 1.01
-     */
-    public static final class BankNPCPlugin extends OptionHandler {
-
-        @Override
-        public Plugin<Object> newInstance(Object arg) throws Throwable {
-            NPCDefinition.setOptionHandler("bank", this);
-            NPCDefinition.setOptionHandler("collect", this);
-            return this;
-        }
-
-        @Override
-        public boolean handle(Player player, Node node, String option) {
-            final NPC npc = ((NPC) node);
-            npc.faceLocation(node.getLocation());
-            if (option.equals("bank")) {
-                player.getBank().open();
-                checkAchievements(player);
-            } else {
-                GrandExchangeRecords.getInstance(player).openCollectionBox();
-            }
-            return true;
-        }
-
-        @Override
-        public Location getDestination(Node n, Node node) {
-            NPC npc = (NPC) node;
-            if (npc.getAttribute("facing_booth", false)) {
-                Direction dir = npc.getDirection();
-                return npc.getLocation().transform(dir.getStepX() << 1, dir.getStepY() << 1, 0);
-            }
-            if (npc.getId() == 6533) {
-                return Location.create(3167, 3489, 0);// ge bankers.
-            } else if (npc.getId() == 6534) {
-                return Location.create(3167, 3490, 0);// ge bankers.
-            } else if (npc.getId() == 6535) {
-                return Location.create(3162, 3489, 0);
-            } else if (npc.getId() == 6532) {
-                return Location.create(3162, 3489, 0);
-            } else if (npc.getId() == 4907) {
-                return npc.getLocation().transform(0, -2, 0);
-            }
-            return super.getDestination(npc, node);
-        }
-    }
-
-    /**
-     * Represents the abstract npc of a banker.
-     *
-     * @author 'Vexia
-     * @author Emperor
-     * @version 1.2
-     */
-    public static final class BankNPC extends AbstractNPC {
-
-        /**
-         * Represents the ids of this class.
-         */
-        private final int[] IDS = new int[]{4907, 44, 45, 166, 494, 495, 496, 497, 498, 499, 902, 1036, 1360, 1702, 2163, 2164, 2354, 2355, 2568, 2569, 2570, 2619, 3046, 3198, 3199, 4296, 4519, 5257, 5258, 5259, 5260, 5383, 5488, 5776, 5777, 5898, 5912, 5913, 6200, 6362, 6532, 6533, 6534, 6535, 6538, 7049, 7050, 7445, 7446, 7605};
-
-        /**
-         * Constructs a new {@code BankNPC} {@code Object}.
-         */
-        public BankNPC() {
-            super(0, null);
-        }
-
-        @Override
-        public void init() {
-            super.init();
-            for (int i = 0; i < 4; i++) {
-                Direction dir = Direction.get(i);
-                Location loc = getLocation().transform(dir.getStepX(), dir.getStepY(), 0);
-                Scenery bank = RegionManager.getObject(loc);
-                if (bank != null && bank.getName().equals("Bank booth")) {
-                    setDirection(dir);
-                    setAttribute("facing_booth", true);
-                    super.setWalks(false);
-                    break;
-                }
-            }
-        }
-
-        /**
-         * Constructs a new {@code BankNPC} {@code Object}.
-         *
-         * @param id       The NPC id.
-         * @param location The location.
-         */
-        private BankNPC(int id, Location location) {
-            super(id, location);
-        }
-
-        @Override
-        public AbstractNPC construct(int id, Location location, Object... objects) {
-            return new BankNPC(id, location);
-        }
-
-        @Override
-        public int[] getIds() {
-            return IDS;
-        }
-    }
-
-    private static void checkAchievements(Player player) {
-		// Access the bank in Draynor Village
-		if (player.getLocation().withinDistance(Location.create(3092, 3243, 0))) {
-			player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 1, 15);
-		}
-	}
 }

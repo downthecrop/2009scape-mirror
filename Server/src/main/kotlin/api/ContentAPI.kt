@@ -945,6 +945,23 @@ fun submitWorldPulse(pulse: Pulse){
 }
 
 /**
+ * Used to submit a pulse to the GameWorld's Pulser, albeit with a cleaner syntax.
+ * @param task an anonymous function that will be run in the Pulse
+ * @return the newly submitted Pulse
+ */
+fun runWorldTask(task: () -> Unit) : Pulse {
+    val pulse = object : Pulse() {
+        override fun pulse(): Boolean {
+            task.invoke()
+            return true
+        }
+    }
+
+    submitWorldPulse(pulse)
+    return pulse
+}
+
+/**
  * Teleports or "instantly moves" an entity to a given Location object.
  * @param entity the entity to move
  * @param loc the Location object to move them to
@@ -1120,8 +1137,16 @@ fun sendItemOnInterface(player: Player, iface: Int, child: Int, item: Int, amoun
  * @param item the ID of the item to show
  * @param message the text to display
  */
-fun sendItemDialogue(player: Player, item: Int, message: String){
-    player.dialogueInterpreter.sendItemMessage(item, *splitLines(message))
+fun sendItemDialogue(player: Player, item: Any, message: String){
+    val dialogueItem = when(item) {
+        is Item -> item
+        is Int -> Item(item)
+        else -> {
+            throw java.lang.IllegalArgumentException("Expected an Item or an Int, got ${item::class.java.simpleName}.")
+        }
+    }
+
+    player.dialogueInterpreter.sendItemMessage(dialogueItem, *splitLines(message))
 }
 
 /**
@@ -1156,6 +1181,10 @@ fun sendInputDialogue(player: Player, numeric: Boolean, prompt: String, handler:
  */
 fun sendInputDialogue(player: Player, type: InputType, prompt: String, handler: (value: Any) -> Unit){
     when(type){
+        InputType.AMOUNT -> {
+            player.setAttribute("parseamount", true)
+            player.dialogueInterpreter.sendInput(true, prompt)
+        }
         InputType.NUMERIC, InputType.STRING_SHORT -> player.dialogueInterpreter.sendInput(type != InputType.NUMERIC, prompt)
         InputType.STRING_LONG -> player.dialogueInterpreter.sendLongInput(prompt)
         InputType.MESSAGE -> player.dialogueInterpreter.sendMessageInput(prompt)
