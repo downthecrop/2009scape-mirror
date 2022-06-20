@@ -429,7 +429,10 @@ class ScriptAPI(private val bot: Player) {
      * A function for teleporting the bot to the GE
      * @author Ceikry
      */
-    fun teleportToGE(){
+    fun teleportToGE() : Boolean{
+        if (bot.isTeleBlocked) {
+            return false
+        }
         bot.lock()
         bot.visualize(ANIMATIONUP, GRAPHICSUP)
         bot.impactHandler.disabledTicks = 4
@@ -442,6 +445,7 @@ class ScriptAPI(private val bot: Player) {
                 return true
             }
         })
+        return true
     }
 
     /**
@@ -555,7 +559,10 @@ class ScriptAPI(private val bot: Player) {
      * @param loc the location to teleport to
      * @author Ceikry
      */
-    fun teleport(loc: Location){
+    fun teleport(loc: Location) : Boolean {
+        if (bot.isTeleBlocked) {
+            return false
+        }
         bot.lock()
         bot.visualize(ANIMATIONUP, GRAPHICSUP)
         bot.impactHandler.disabledTicks = 4
@@ -568,6 +575,7 @@ class ScriptAPI(private val bot: Player) {
                 return true
             }
         })
+        return true
     }
 
     /**

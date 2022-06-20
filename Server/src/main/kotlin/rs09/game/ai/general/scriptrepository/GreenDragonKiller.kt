@@ -86,9 +86,9 @@ class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Scr
                 if(players.isEmpty()){
                     state = State.TO_DRAGONS
                 } else {
-                    if(bot.skullManager.level < 21 && bot.stateManager.get(EntityState.TELEBLOCK) != null){
-                        scriptAPI.teleportToGE()
-                        state = State.REFRESHING
+                    if(bot.skullManager.level < 21){
+                        if (scriptAPI.teleportToGE())
+                            state = State.REFRESHING
                         return
                     }
                     sendTrashTalk()
