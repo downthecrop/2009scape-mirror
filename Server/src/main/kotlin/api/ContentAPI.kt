@@ -1195,7 +1195,7 @@ fun sendInputDialogue(player: Player, type: InputType, prompt: String, handler: 
         InputType.STRING_LONG -> player.dialogueInterpreter.sendLongInput(prompt)
         InputType.MESSAGE -> player.dialogueInterpreter.sendMessageInput(prompt)
     }
-    
+
     player.setAttribute("runscript", handler)
 }
 
@@ -1378,48 +1378,45 @@ fun getMasteredSkillNames(player: Player): List<String> {
  * Empties the provided container into the player's bank.
  * @param player the player
  * @param container the container to be emptied.
- * @return True if entire container was successfully emptied, false otherwise.
+ * @return The amount of items which were successfully transferred to the bank.
  *
  * @author ceik
  * @author James Triantafylos
  * @author vddCore
  */
-fun dumpContainer(player: Player, container: core.game.container.Container): Boolean {
+fun dumpContainer(player: Player, container: core.game.container.Container): Int {
     val bank = player.bank
-    var dumpedEverything = true
+    var dumpedCount = 0
 
-    container.toArray().filterNotNull().forEach { item ->
-        if (!bank.hasSpaceFor(item)) {
-            sendMessage(player, "You have no more space in your bank.")
-            dumpedEverything = false
-
-            return@forEach
-        }
-
-        if (!bank.canAdd(item)) {
-            sendMessage(player, "A magical force prevents you from banking the ${item.name}.")
-            dumpedEverything = false
-
-            return@forEach
-        } else {
-            if (container is EquipmentContainer) {
-                if (!InteractionListeners.run(item.id, player, item, false)) {
-                    sendMessage(player, "A magical force prevents you from removing your ${item.name}.")
-                    dumpedEverything = false
-
-                    return@forEach
-                }
+    run beginDepositing@{
+        container.toArray().filterNotNull().forEach { item ->
+            if (!bank.hasSpaceFor(item)) {
+                sendMessage(player, "You have no more space in your bank.")
+                return@beginDepositing
             }
 
-            container.remove(item)
-            bank.add(unnote(item))
+            if (!bank.canAdd(item)) {
+                sendMessage(player, "A magical force prevents you from banking the ${item.name}.")
+                return@forEach
+            } else {
+                if (container is EquipmentContainer) {
+                    if (!InteractionListeners.run(item.id, player, item, false)) {
+                        sendMessage(player, "A magical force prevents you from removing your ${item.name}.")
+                        return@forEach
+                    }
+                }
+
+                container.remove(item)
+                bank.add(unnote(item))
+                dumpedCount++
+            }
         }
     }
 
     container.update()
     bank.update()
 
-    return dumpedEverything
+    return dumpedCount
 }
 
 /**
@@ -1446,12 +1443,24 @@ fun dumpBeastOfBurden(player: Player) {
     val beast: BurdenBeast = (famMan.familiar as BurdenBeast)
 
     if (beast.container.isEmpty) {
-        sendMessage(player, "Your ${famMan.familiar.name}'s inventory is empty.")
+        sendMessage(player, "Your familiar's inventory is empty.")
         return
     }
 
-    if (dumpContainer(player, beast.container)) {
-       sendMessage(player, "Your Beast's inventory was deposited into your bank.")
+    val itemCount = beast.container.itemCount()
+    val dumpedCount = dumpContainer(player, beast.container)
+
+
+    when {
+        dumpedCount == itemCount -> sendMessage(player, "Your familiar's inventory was deposited into your bank.")
+        dumpedCount > 0 -> {
+            val remainPhrase = when {
+                (itemCount - dumpedCount == 1) -> "item remains"
+                else -> "items remain"
+            }
+
+            sendMessage(player, "${itemCount - dumpedCount} $remainPhrase in your familiar's inventory.")
+        }
     }
 }
 
