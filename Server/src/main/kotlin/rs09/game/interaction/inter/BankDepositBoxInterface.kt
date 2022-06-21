@@ -42,8 +42,14 @@ class BankDepositBoxInterface : InterfaceListener {
                 OP_AMOUNT_ONE -> player.bank.addItem(slot, 1)
                 OP_AMOUNT_FIVE -> player.bank.addItem(slot, 5)
                 OP_AMOUNT_TEN -> player.bank.addItem(slot, 10)
-                OP_AMOUNT_X -> BankUtils.transferX(player, slot, false)
-                OP_AMOUNT_ALL -> player.bank.addItem(slot, player.bank.getAmount(item))
+                OP_AMOUNT_X -> BankUtils.transferX(
+                    player,
+                    slot,
+                    false,
+                    // Needs to have a callback here because the depositing moment is independent from the world task.
+                    player.bank::refreshDepositBoxInterface
+                )
+                OP_AMOUNT_ALL -> player.bank.addItem(slot, player.inventory.getAmount(item))
                 else -> player.debug("Unknown deposit box menu opcode $opcode")
             }
 
@@ -57,7 +63,7 @@ class BankDepositBoxInterface : InterfaceListener {
     override fun defineInterfaceListeners() {
         on(Components.BANK_DEPOSIT_BOX_11, ::handleDepositBoxMenu)
         on(Components.BANK_DEPOSIT_BOX_11, BUTTON_DEPOSIT_BOB) { player, _, _, _, _, _ ->
-            player.familiarManager.dumpBob(); true
+            dumpBeastOfBurden(player); true
         }
     }
 }

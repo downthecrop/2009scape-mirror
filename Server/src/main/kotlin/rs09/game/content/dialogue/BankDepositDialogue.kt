@@ -44,10 +44,9 @@ class BankDepositDialogue : DialogueFile() {
                     }
                 }
 
-                3 -> {
+                3 -> player?.let {
                     end()
-
-                    player?.familiarManager?.dumpBob()
+                    dumpBeastOfBurden(it)
                 }
 
                 4 -> end()

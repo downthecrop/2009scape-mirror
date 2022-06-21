@@ -22,6 +22,7 @@ import core.game.node.entity.player.link.emote.Emotes
 import core.game.node.entity.player.link.quest.QuestRepository
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.gather.SkillingTool
+import core.game.node.entity.skill.summoning.familiar.BurdenBeast
 import core.game.node.item.GroundItem
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
@@ -1181,10 +1182,20 @@ fun sendInputDialogue(player: Player, numeric: Boolean, prompt: String, handler:
  */
 fun sendInputDialogue(player: Player, type: InputType, prompt: String, handler: (value: Any) -> Unit){
     when(type){
-        InputType.NUMERIC, InputType.STRING_SHORT -> player.dialogueInterpreter.sendInput(type != InputType.NUMERIC, prompt)
+        InputType.AMOUNT -> {
+            player.setAttribute("parseamount", true)
+            player.dialogueInterpreter.sendInput(true, prompt)
+        }
+
+        InputType.NUMERIC, InputType.STRING_SHORT -> player.dialogueInterpreter.sendInput(
+            type != InputType.NUMERIC,
+            prompt
+        )
+
         InputType.STRING_LONG -> player.dialogueInterpreter.sendLongInput(prompt)
         InputType.MESSAGE -> player.dialogueInterpreter.sendMessageInput(prompt)
     }
+    
     player.setAttribute("runscript", handler)
 }
 
@@ -1364,35 +1375,117 @@ fun getMasteredSkillNames(player: Player): List<String> {
 }
 
 /**
- * Dumps the given player's given container into that player's bank.
+ * Empties the provided container into the player's bank.
  * @param player the player
- * @param container the player's container to dump.
+ * @param container the container to be emptied.
+ * @return True if entire container was successfully emptied, false otherwise.
+ *
  * @author ceik
  * @author James Triantafylos
+ * @author vddCore
  */
-fun dumpContainer(player: Player, container: core.game.container.Container) {
+fun dumpContainer(player: Player, container: core.game.container.Container): Boolean {
     val bank = player.bank
+    var dumpedEverything = true
+
     container.toArray().filterNotNull().forEach { item ->
         if (!bank.hasSpaceFor(item)) {
-            player.packetDispatch.sendMessage("You have no more space in your bank.")
-            return
+            sendMessage(player, "You have no more space in your bank.")
+            dumpedEverything = false
+
+            return@forEach
         }
+
         if (!bank.canAdd(item)) {
-            player.packetDispatch.sendMessage("A magical force prevents you from banking your " + item.name + ".")
-            return
+            sendMessage(player, "A magical force prevents you from banking the ${item.name}.")
+            dumpedEverything = false
+
+            return@forEach
         } else {
             if (container is EquipmentContainer) {
-                if(!InteractionListeners.run(item.id,player,item,false)) {
-                    player.packetDispatch.sendMessage("A magical force prevents you from removing that item.")
-                    return
+                if (!InteractionListeners.run(item.id, player, item, false)) {
+                    sendMessage(player, "A magical force prevents you from removing your ${item.name}.")
+                    dumpedEverything = false
+
+                    return@forEach
                 }
             }
+
             container.remove(item)
-            bank.add(if (item.definition.isUnnoted) item else Item(item.noteChange, item.amount))
+            bank.add(unnote(item))
         }
     }
+
     container.update()
     bank.update()
+
+    return dumpedEverything
+}
+
+/**
+ * Attempts to empty the player's Beast of Burden's inventory
+ * into the player's bank.
+ *
+ * @param player The player whose Beast of Burden's inventory to empty.
+ *
+ * @author vddCore
+ */
+fun dumpBeastOfBurden(player: Player) {
+    val famMan = player.familiarManager
+
+    if (!famMan.hasFamiliar()) {
+        sendMessage(player, "You don't have a familiar.")
+        return
+    }
+
+    if (famMan.familiar !is BurdenBeast) {
+        sendMessage(player, "Your familiar is not a Beast of Burden.")
+        return
+    }
+
+    val beast: BurdenBeast = (famMan.familiar as BurdenBeast)
+
+    if (beast.container.isEmpty) {
+        sendMessage(player, "Your ${famMan.familiar.name}'s inventory is empty.")
+        return
+    }
+
+    if (dumpContainer(player, beast.container)) {
+       sendMessage(player, "Your Beast's inventory was deposited into your bank.")
+    }
+}
+
+/**
+ * Converts an item into its noted representation.
+ *
+ * @param item The item to convert.
+ * @return Noted form of the item or the item itself if it's already, or cannot be, noted.
+ *
+ * @author vddCore
+ */
+fun note(item: Item): Item {
+    if (!item.definition.isUnnoted)
+        return item
+
+    if (item.definition.noteId < 0)
+        return item
+
+    return Item(item.definition.noteId, item.amount, item.charge)
+}
+
+/**
+ * Converts a noted item into its unnoted representation.
+ *
+ * @param item The item to convert.
+ * @return Unnoted form of the item, or the item itself if it's already unnoted.
+ *
+ * @author vddCore
+ */
+fun unnote(item: Item): Item {
+    if (item.definition.isUnnoted)
+        return item
+
+    return Item(item.noteChange, item.amount, item.charge)
 }
 
 /**
@@ -1412,8 +1505,7 @@ fun Player.getCutsceneStage(): Int {
     return getAttribute(this, Cutscene.ATTRIBUTE_CUTSCENE_STAGE, 0)
 }
 
-fun getServerConfig() : Toml
-{
+fun getServerConfig() : Toml {
     return ServerConfigParser.tomlData ?: Toml()
 }
 

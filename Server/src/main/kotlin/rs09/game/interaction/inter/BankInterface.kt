@@ -139,13 +139,20 @@ class BankInterface : InterfaceListener {
         on(Components.BANK_V2_MAIN_762) { player, component, opcode, buttonID, slot, itemID ->
             when (buttonID) {
                 MAIN_BUTTON_HELP -> openDialogue(player, BankHelpDialogue())
-                MAIN_BUTTON_CLOSE -> player.bank.open()
                 MAIN_BUTTON_BOB_DEPOSIT -> openDialogue(player, BankDepositDialogue())
                 MAIN_BUTTON_INSERT_MODE -> player.bank.isInsertItems = !player.bank.isInsertItems
                 MAIN_BUTTON_NOTE_MODE -> player.bank.isNoteItems = !player.bank.isNoteItems
                 MAIN_BUTTON_SEARCH_BANK -> setAttribute(player, "search", true)
                 MENU_ELEMENT -> handleBankMenu(player, component, opcode, buttonID, slot, itemID)
                 in BANK_TABS -> handleTabInteraction(player, component, opcode, buttonID, slot, itemID)
+            }
+
+            return@on true
+        }
+
+        on(Components.BANK_V2_HELP_767) { player, component, opcode, buttonID, slot, itemID ->
+            when (buttonID) {
+                MAIN_BUTTON_CLOSE -> player.bank.open()
             }
 
             return@on true
