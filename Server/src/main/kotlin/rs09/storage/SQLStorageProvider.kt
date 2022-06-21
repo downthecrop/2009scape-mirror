@@ -61,7 +61,7 @@ class SQLStorageProvider : AccountStorageProvider {
                 result.getLong(15)      .let { userData.timePlayed = max(0L, it) }
                 result.getLong(16)      .let { userData.lastLogin = max(0L, it) }
                 result.getBoolean(17)   .let { userData.online = it }
-                result.getTimestamp(18) .let { userData.joinDate = it }
+                result.getTimestamp(18) .let { userData.joinDate = it ?: Timestamp(System.currentTimeMillis()) }
 
                 userData.setInitialReferenceValues()
                 return userData
