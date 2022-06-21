@@ -1,7 +1,11 @@
 package rs09.game.interaction.`object`
 
+import api.hasSealOfPassage
+import api.openDialogue
+import api.sendMessage
 import core.game.content.dialogue.DialogueInterpreter
 import core.game.node.Node
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.IronmanMode
 import org.rs09.consts.NPCs
@@ -9,6 +13,7 @@ import org.rs09.consts.Scenery
 import rs09.ServerConstants
 import rs09.game.ge.GrandExchangeRecords
 import rs09.game.interaction.InteractionListener
+import rs09.game.node.entity.npc.other.BankerNPC
 import rs09.game.world.repository.Repository
 
 /**
@@ -32,8 +37,35 @@ class BankBoothHandler : InteractionListener {
         )
     }
 
+    private fun tryInvokeBankerDialogue(player: Player, node: Node) {
+        val boothLocation = node.location
+        val playerLocation = player.location
+
+        // TODO: Fix NPCs larger than 1 tile.
+        // Fuck you, Vexia. Never show up whenever I'm around.
+        Repository.findNPC(
+            boothLocation.transform(
+                boothLocation.x - playerLocation.x,
+                boothLocation.y - playerLocation.y,
+                0
+            )
+        )?.let {
+            if (DialogueInterpreter.contains(it.id)) {
+                it.faceLocation(node.location)
+                openDialogue(player, it.id, NPC(it.id, it.location))
+            } else {
+                player.dialogueInterpreter.open(NPCs.BANKER_494)
+            }
+        }
+    }
+
     private fun quickBankBoothUse(player: Player, node: Node): Boolean {
         if (player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {
+            return true
+        }
+
+        if (BankerNPC.checkLunarIsleRestriction(player, node)) {
+            tryInvokeBankerDialogue(player, node)
             return true
         }
 
@@ -50,28 +82,16 @@ class BankBoothHandler : InteractionListener {
             return quickBankBoothUse(player, node)
         }
 
-        val boothLocation = node.location
-        val playerLocation = player.location
-
-        val bankerNPC = Repository.findNPC(
-            boothLocation.transform(
-                boothLocation.x - playerLocation.x,
-                boothLocation.y - playerLocation.y,
-                0
-            )
-        )
-
-        if (bankerNPC != null && DialogueInterpreter.contains(bankerNPC.id)) {
-            bankerNPC.faceLocation(node.location)
-            player.dialogueInterpreter.open(bankerNPC.id, bankerNPC.id)
-        } else {
-            player.dialogueInterpreter.open(NPCs.BANKER_494)
-        }
-
+        tryInvokeBankerDialogue(player, node)
         return true
     }
 
     private fun collectBankBoothUse(player: Player, node: Node): Boolean {
+        if (BankerNPC.checkLunarIsleRestriction(player, node)) {
+            tryInvokeBankerDialogue(player, node)
+            return true
+        }
+
         GrandExchangeRecords.getInstance(player).openCollectionBox()
         return true
     }

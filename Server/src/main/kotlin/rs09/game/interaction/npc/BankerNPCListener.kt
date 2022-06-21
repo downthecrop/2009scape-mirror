@@ -1,13 +1,22 @@
 package rs09.game.interaction.npc
 
+import api.getScenery
+import api.location
+import api.openDialogue
 import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
+import core.game.node.entity.player.Player
 import core.game.world.map.Direction
 import core.game.world.map.Location
+import core.game.world.map.path.Pathfinder
 import org.rs09.consts.NPCs
+import rs09.game.content.dialogue.region.lunarisle.SirsalBankerDialogue
 import rs09.game.ge.GrandExchangeRecords
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.`object`.BankBoothHandler
+import rs09.game.node.entity.npc.other.BankerNPC
+import rs09.game.system.SystemLogger
 
 /**
  * Allows the user to interact with banker NPC options.
@@ -28,38 +37,68 @@ class BankerNPCListener : InteractionListener {
 
             NPCs.GHOST_BANKER_1702, NPCs.GNOME_BANKER_166, NPCs.NARDAH_BANKER_3046,
             NPCs.OGRESS_BANKER_7049, NPCs.OGRESS_BANKER_7050, NPCs.SIRSAL_BANKER_4519,
-            NPCs.FADLI_958,
+
+            NPCs.FADLI_958, NPCs.ARNOLD_LYDSPOR_3824, NPCs.MAGNUS_GRAM_5488
         )
 
         fun provideDestinationOverride(entity: Entity, node: Node): Location {
             val npc = node as NPC
 
-            if (npc.getAttribute("facing_booth", false)) {
-                return npc.location.transform(
-                    npc.direction.stepX shl 1,
-                    npc.direction.stepY shl 1,
-                    0
-                )
-            }
-
             return when(npc.id) {
-                NPCs.BANKER_6533, NPCs.BANKER_6534 -> npc.location.transform(Direction.EAST, 1)
-                NPCs.BANKER_6535, NPCs.BANKER_6532 -> npc.location.transform(Direction.WEST, 1)
-                NPCs.BANK_TUTOR_4907 -> npc.location.transform(Direction.SOUTH, 2)
-                else -> npc.location
+                NPCs.OGRESS_BANKER_7049,
+                NPCs.OGRESS_BANKER_7050 -> {
+                    return npc.location.transform(Direction.EAST, 2)
+                }
+
+                else -> {
+                    if (npc is BankerNPC) {
+                        npc.findAdjacentBankBoothLocation()?.let {
+                            return it.second
+                        }
+                    }
+
+                    val path = Pathfinder.find(entity, node)
+
+                    if (path.isSuccessful) {
+                        val pt = path.points.last
+                        SystemLogger.logInfo("Found! ${pt.x}, ${pt.y}")
+                        return Location(pt.x, pt.y)
+                    }
+
+                    return npc.location
+                }
             }
         }
     }
 
     override fun defineListeners() {
         on(BANKER_NPCS, NPC, "bank") { player, node ->
-            (node as NPC).faceLocation(null)
+            val npc = node as NPC
+
+            if (BankerNPC.checkLunarIsleRestriction(player, node)) {
+                openDialogue(player, npc.id, npc)
+                return@on true
+            }
+
+            npc.faceLocation(null)
             player.bank.open(); true
         }
 
         on(BANKER_NPCS, NPC, "collect") { player, node ->
-            (node as NPC).faceLocation(null)
+            val npc = node as NPC
+
+            if (BankerNPC.checkLunarIsleRestriction(player, node)) {
+                openDialogue(player, npc.id, npc)
+                return@on true
+            }
+
+            npc.faceLocation(null)
             GrandExchangeRecords.getInstance(player).openCollectionBox(); true
+        }
+
+        on(BANKER_NPCS, NPC, "talk-to") { player, node ->
+            val npc = node as NPC
+            openDialogue(player, npc.id, npc); true
         }
     }
 
