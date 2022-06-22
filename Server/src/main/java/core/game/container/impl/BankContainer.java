@@ -91,7 +91,27 @@ public final class BankContainer extends Container {
 			return true;
 		});
 		player.getInterfaceManager().removeTabs(0, 1, 2, 3, 4, 5, 6);
-		InterfaceContainer.generateItems(player, player.getInventory().toArray(), new String[]{"Examine", "Deposit-X", "Deposit-All", "Deposit-10", "Deposit-5", "Deposit-1"}, 11, 15, 5, 7);
+		refreshDepositBoxInterface();
+	}
+
+	/**
+	 * Invalidates the visual state of deposit box interface
+	 * forcing the client to re-draw the items
+	 */
+	public void refreshDepositBoxInterface()
+	{
+		InterfaceContainer.generateItems(
+			player,
+			player.getInventory().toArray(),
+			new String[] {
+				"Examine",
+				"Deposit-X",
+				"Deposit-All",
+				"Deposit-10",
+				"Deposit-5",
+				"Deposit-1"
+			}, 11, 15, 5, 7
+		);
 	}
 
 	/**
@@ -498,6 +518,13 @@ public final class BankContainer extends Container {
 	 */
 	public void setTabIndex(int tabIndex) {
 		this.tabIndex = tabIndex;
+
+		/*
+		 * Kludge to update the interface
+		 * after dumping all to prevent
+		 * "invisible" items in slots.
+		 */
+		update(true);
 	}
 
 	/**

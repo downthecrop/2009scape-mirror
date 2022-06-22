@@ -282,28 +282,6 @@ public final class FamiliarManager {
 	}
 
 	/**
-	 * Dumps the bob.
-	 */
-	public void dumpBob() {
-		if (!hasFamiliar()) {
-			player.getPacketDispatch().sendMessage("You don't have a familiar.");
-			return;
-		}
-		Familiar familiar = getFamiliar();
-		if (!familiar.isBurdenBeast()) {
-			player.getPacketDispatch().sendMessage("Your familiar is not a beast of burden.");
-			return;
-		}
-		BurdenBeast beast = ((BurdenBeast) familiar);
-		if (!player.getBank().hasSpaceFor(beast.getContainer())) {
-			player.getPacketDispatch().sendMessage("There is not enough space left in your bank.");
-			return;
-		}
-		player.getBank().addAll(beast.getContainer());
-		beast.getContainer().clear();
-	}
-
-	/**
 	 * Makes the pet eat.
 	 * @param foodId The food item id.
 	 * @param npc The pet NPC.

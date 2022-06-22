@@ -1,5 +1,7 @@
 package core.game.node.entity.player.link;
 
+import api.events.InterfaceCloseEvent;
+import api.events.InterfaceOpenEvent;
 import core.game.component.Component;
 import core.game.component.InterfaceType;
 import core.game.node.entity.combat.equipment.WeaponInterface;
@@ -125,8 +127,13 @@ public final class InterfaceManager {
 			SystemLogger.logErr("Set interface type to WINDOW_PANE for component " + windowsPane.getId() + ", definition requires updating!");
 			windowsPane.getDefinition().setType(InterfaceType.WINDOW_PANE);
 		}
+
 		PacketRepository.send(WindowsPane.class, new WindowsPaneContext(player, windowsPane.getId(), overlap ? 1 : 0));
 		windowsPane.open(player);
+
+		if (opened != null)
+			player.dispatch(new InterfaceOpenEvent(opened));
+
 		return windowsPane;
 	}
 
@@ -136,8 +143,12 @@ public final class InterfaceManager {
 			SystemLogger.logErr("Set interface type to WINDOW_PANE for component " + windowsPane.getId() + ", definition requires updating!");
 			windowsPane.getDefinition().setType(InterfaceType.SINGLE_TAB);
 		}
+
 		PacketRepository.send(WindowsPane.class, new WindowsPaneContext(player, windowsPane.getId(), type));
 		windowsPane.open(player);
+
+		if (opened != null)
+			player.dispatch(new InterfaceOpenEvent(opened));
 	}
 
 	/**
@@ -161,7 +172,11 @@ public final class InterfaceManager {
 			return null;
 		}
 		component.open(player);
-		return opened = component;
+
+		opened = component;
+		player.dispatch(new InterfaceOpenEvent(opened));
+
+		return opened;
 	}
 
 	/**
@@ -191,6 +206,7 @@ public final class InterfaceManager {
 		if (opened != null && opened.close(player)) {
 			if (opened != null && (!opened.getDefinition().isWalkable() || opened.getId() == 14)) {
 				PacketRepository.send(CloseInterface.class, new InterfaceContext(player, opened.getDefinition().getWindowPaneId(isResizable()), opened.getDefinition().getChildId(isResizable()), opened.getId(), opened.getDefinition().isWalkable()));
+				player.dispatch(new InterfaceCloseEvent(opened));
 			}
 			opened = null;
 		}
