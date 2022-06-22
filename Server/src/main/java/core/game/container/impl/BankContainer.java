@@ -518,6 +518,13 @@ public final class BankContainer extends Container {
 	 */
 	public void setTabIndex(int tabIndex) {
 		this.tabIndex = tabIndex;
+
+		/*
+		 * Kludge to update the interface
+		 * after dumping all to prevent
+		 * "invisible" items in slots.
+		 */
+		update(true);
 	}
 
 	/**
