@@ -50,7 +50,7 @@ class DiaryEventHook : LoginListener, Commands {
                     finishTask(
                         entity,
                         DiaryType.LUMBRIDGE,
-                        0,
+                        1,
                         TASK_DRAYNOR_BANK
                     )
                 }
