@@ -392,6 +392,9 @@ public final class WildernessZone extends MapZone {
 	 * @return the level.
 	 */
 	public static int getWilderness(Entity e) {
+		if (e.getLocation().getY() < 3524) {
+			return -1;
+		}
 		final int regionId = e.getViewport().getRegion().getId();
 		int offsetY = 3524;
 		if (regionId == 12443 || e.getViewport().getRegion().getId() == 12444) {
