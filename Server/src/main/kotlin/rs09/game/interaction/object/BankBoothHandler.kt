@@ -1,13 +1,13 @@
 package rs09.game.interaction.`object`
 
-import api.hasSealOfPassage
 import api.openDialogue
-import api.sendMessage
 import core.game.content.dialogue.DialogueInterpreter
 import core.game.node.Node
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.IronmanMode
+import core.game.world.map.Direction
+import core.game.world.map.Location
 import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import rs09.ServerConstants
@@ -37,19 +37,50 @@ class BankBoothHandler : InteractionListener {
         )
     }
 
-    private fun tryInvokeBankerDialogue(player: Player, node: Node) {
-        val boothLocation = node.location
-        val playerLocation = player.location
+    /**
+     * Searches an area in the order described
+     * by each number with X being the location
+     * of node being interacted with.
+     *
+     *    [1]
+     * [4][X][2]
+     *    [3]
+     */
+    private fun locateAdjacentBankerLinear(node: Node): NPC? {
+        for (dir in arrayOf(Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST)) {
+            Repository.findNPC(node.location.transform(dir))?.let { return it }
+        }
 
-        // TODO: Fix NPCs larger than 1 tile.
-        // Fuck you, Vexia. Never show up whenever I'm around.
-        Repository.findNPC(
-            boothLocation.transform(
-                boothLocation.x - playerLocation.x,
-                boothLocation.y - playerLocation.y,
-                0
-            )
-        )?.let {
+        return null
+    }
+
+    /**
+     * If size is 1 then the following method
+     * searches a square area in the following
+     * order with X being the location of node
+     * that was interacted with.
+     *
+     * ->[   ]
+     *   [ X ]
+     *   [   ]->
+     *
+     */
+    private fun locateAdjacentBankerSquare(node: Node, size: Int = 1): NPC? {
+        for (y in (node.location.y - size)..(node.location.y + size)) {
+            for (x in (node.location.x - size)..(node.location.x + size)) {
+                Repository.findNPC(Location(x, y))?.let { return it }
+            }
+        }
+
+        return null
+    }
+
+    private fun tryInvokeBankerDialogue(player: Player, node: Node) {
+        /**
+         * First, we look for regular bankers that neatly stand in front of the bank booth.
+         * If that fails, we expand the search to a larger area.
+         */
+        (locateAdjacentBankerLinear(node) ?: locateAdjacentBankerSquare(node, 2))?.let {
             if (DialogueInterpreter.contains(it.id)) {
                 it.faceLocation(node.location)
                 openDialogue(player, it.id, NPC(it.id, it.location))

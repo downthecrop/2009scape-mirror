@@ -45,10 +45,12 @@ class BankerNPCListener : InteractionListener {
             val npc = node as NPC
 
             return when(npc.id) {
+                /* Ogress bankers are 2x2 with their spawn being offset to south-western tile. */
                 NPCs.OGRESS_BANKER_7049,
-                NPCs.OGRESS_BANKER_7050 -> {
-                    return npc.location.transform(Direction.EAST, 2)
-                }
+                NPCs.OGRESS_BANKER_7050 -> npc.location.transform(3, 1, 0)
+
+                /* Magnus has no bank booth nearby so we need to handle that edge case here. */
+                NPCs.MAGNUS_GRAM_5488 -> npc.location.transform(Direction.NORTH, 2)
 
                 else -> {
                     if (npc is BankerNPC) {
@@ -61,7 +63,6 @@ class BankerNPCListener : InteractionListener {
 
                     if (path.isSuccessful) {
                         val pt = path.points.last
-                        SystemLogger.logInfo("Found! ${pt.x}, ${pt.y}")
                         return Location(pt.x, pt.y)
                     }
 
