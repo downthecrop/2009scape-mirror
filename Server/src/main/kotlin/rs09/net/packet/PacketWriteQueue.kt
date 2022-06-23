@@ -41,15 +41,6 @@ class PacketWriteQueue : TickListener {
         }
 
         @JvmStatic
-        fun pop(): QueuedPacket<*>? {
-            return try {
-                packetsToWrite.pop()
-            } catch (e: NoSuchElementException) {
-                null
-            }
-        }
-
-        @JvmStatic
         fun flush() {
             queueLock.lock()
 
