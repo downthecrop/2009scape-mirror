@@ -45,6 +45,7 @@ import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.dialogue.SkillDialogueHandler
 import rs09.game.content.global.GlobalKillCounter
 import rs09.game.interaction.InteractionListeners
+import rs09.game.node.entity.skill.slayer.SlayerManager
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.ItemConfigParser
 import rs09.game.system.config.ServerConfigParser
@@ -1563,4 +1564,25 @@ fun getPathableRandomLocalCoordinate(target: Entity, radius: Int, center: Locati
     }
 
     return target.location
+}
+
+
+/**
+ * Returns the name of the player's active slayer task.
+ * @author bushtail
+ * @param player the player whose task we are checking.
+ * @return the name of the slayer task.
+ */
+fun getSlayerTaskName(player : Player) : String {
+    return SlayerManager.getInstance(player).taskName
+}
+
+/**
+ * Returns the player's remaining kills for their active slayer task.
+ * @author bushtail
+ * @param player the player whose task we are checking.
+ * @return the remaining kills of the slayer task.
+ */
+fun getSlayerTaskKillsRemaining(player : Player) : Int {
+    return SlayerManager.getInstance(player).amount
 }
