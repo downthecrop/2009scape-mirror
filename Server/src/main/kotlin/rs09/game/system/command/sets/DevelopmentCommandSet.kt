@@ -122,6 +122,8 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             val npcId = args[1].toInt()
             val amount = args[2].toInt()
 
+            container.clear()
+
             for(i in 0..amount)
             {
                 val drops = NPCDefinition.forId(npcId).dropTables.table.roll()
