@@ -76,12 +76,6 @@ public class AggressiveBehavior {
                 if (RegionManager.forId(regionId).isTolerated(target.asPlayer())) {
                     return false;
                 }
-				int ticks = GameWorld.getTicks() - npc.getAggressiveHandler().getPlayerTolerance()[target.getIndex()];
-				if (ticks > 3000) {
-					npc.getAggressiveHandler().getPlayerTolerance()[target.getIndex()] = GameWorld.getTicks();
-				} else if (ticks > 1500) {
-					return false;
-				}
 			}
 		}
 		int level = target.getProperties().getCurrentCombatLevel();
