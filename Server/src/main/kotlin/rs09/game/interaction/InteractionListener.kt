@@ -5,6 +5,7 @@ import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
+import rs09.game.system.SystemLogger
 
 interface InteractionListener : ContentInterface{
     val ITEM: Int
@@ -15,6 +16,8 @@ interface InteractionListener : ContentInterface{
         get() = 2
     val GROUNDITEM: Int
         get() = 3
+    val PLAYER: Int
+        get() = 4
 
     fun on(id: Int, type: Int, vararg option: String, handler: (player: Player, node: Node) -> Boolean){
         InteractionListeners.add(id,type,option,handler)
@@ -36,6 +39,9 @@ interface InteractionListener : ContentInterface{
     }
     fun onUseAnyWith(type: Int, vararg with: Int, handler: (player: Player, used: Node, with: Node) -> Boolean) {
         InteractionListeners.add(type, with, handler)
+    }
+    fun onUseWithPlayer(vararg used: Int, handler: (player: Player, used: Node, with: Node) -> Boolean) {
+        InteractionListeners.add(PLAYER, used, handler)
     }
     // Note: wildcard listeners incur overhead on every use-with interaction, only use them as a space-time tradeoff when something
     // is actually supposed to have a response to every item used with it (e.g. imp boxes, certain quest npcs)
@@ -73,6 +79,11 @@ interface InteractionListener : ContentInterface{
         SpadeDigListener.registerListener(location,method)
     }
 
+    fun flagInstant() {
+        val name = this::class.java.name
+        InteractionListeners.instantClasses.add(name)
+    }
+
     fun defineListeners()
 
     companion object
@@ -81,5 +92,6 @@ interface InteractionListener : ContentInterface{
         val SCENERY = 1
         val NPC = 2
         val GROUNDITEM = 3
+        val PLAYER = 4
     }
 }

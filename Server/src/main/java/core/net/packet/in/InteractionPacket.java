@@ -322,8 +322,11 @@ public final class InteractionPacket implements IncomingPacket {
 			PacketRepository.send(ClearMinimapFlag.class, new PlayerContext(player));
 			return;
 		}
-		handleAIPLegion(player, 2, optionIndex, index);
-		target.getInteraction().handle(player, option);
+
+		if (!InteractionListeners.run(-1, InteractionListener.Companion.getPLAYER(), option.getName().toLowerCase(), player, target)) {
+			handleAIPLegion(player, 2, optionIndex, index);
+			target.getInteraction().handle(player, option);
+		}
 	}
 
 	/**
