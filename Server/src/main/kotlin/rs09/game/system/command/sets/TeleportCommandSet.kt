@@ -52,24 +52,45 @@ class TeleportCommandSet : CommandSet(Privilege.ADMIN){
             if (args.size == 2 && args[1].contains("_"))
             {
                 val tokens = args[1].split("_")
-                if(tokens.size == 4) {
-                    val regionX = tokens[0].toInt()
-                    val regionY = tokens[1].toInt()
-                    val offsetX = tokens[2].toInt()
-                    val offsetY = tokens[3].toInt()
+                when (tokens.size) {
+                    2 -> {
+                        val regionX = tokens[0].toInt()
+                        val regionY = tokens[1].toInt()
 
-                    val xCoord = (regionX shl 6) or offsetX
-                    val yCoord = (regionY shl 6) or offsetY
+                        player.properties.teleportLocation = Location.create((regionX shl 6) or 15, (regionY shl 6) or 15, 0)
+                    }
+                    3 -> {
+                        val plane = tokens[0].toInt()
+                        val regionX = tokens[1].toInt()
+                        val regionY = tokens[2].toInt()
 
-                    player.properties.teleportLocation = Location.create(xCoord, yCoord, 0)
+                        player.properties.teleportLocation = Location.create((regionX shl 6) or 15, (regionY shl 6) or 15, plane)
+                    }
+                    4 -> {
+                        val regionX = tokens[0].toInt()
+                        val regionY = tokens[1].toInt()
+                        val offsetX = tokens[2].toInt()
+                        val offsetY = tokens[3].toInt()
+
+                        val xCoord = (regionX shl 6) or offsetX
+                        val yCoord = (regionY shl 6) or offsetY
+
+                        player.properties.teleportLocation = Location.create(xCoord, yCoord, 0)
+                    }
+                    5 -> {
+                        val plane = tokens[0].toInt()
+                        val regionX = tokens[1].toInt()
+                        val regionY = tokens[2].toInt()
+                        val offsetX = tokens[3].toInt()
+                        val offsetY = tokens[4].toInt()
+
+                        val xCoord = (regionX shl 6) or offsetX
+                        val yCoord = (regionY shl 6) or offsetY
+
+                        player.properties.teleportLocation = Location.create(xCoord, yCoord, plane)
+                    }
+                    else -> reject(player, "Usage: regionX_regionY OR regionX_regionY_offsetX_offsetY")
                 }
-                else if(tokens.size == 2){
-                    val regionX = tokens[0].toInt()
-                    val regionY = tokens[1].toInt()
-
-                    player.properties.teleportLocation = Location.create((regionX shl 6) or 15, (regionY shl 6) or 15, 0)
-                }
-                else reject(player, "Usage: regionX_regionY OR regionX_regionY_offsetX_offsetY")
                 return@define
             }
             if (args.size < 2) {
