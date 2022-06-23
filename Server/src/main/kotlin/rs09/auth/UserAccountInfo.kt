@@ -24,7 +24,7 @@ class UserAccountInfo(
 ) {
     companion object {
         @JvmStatic fun createDefault() : UserAccountInfo {
-            return UserAccountInfo("", "", 0, 0, 0,  "", "", 0L, 0L, "", "", "", "", "1,0,8,9", 0L, 0L, false, joinDate = Timestamp(0L)).also { it.setInitialReferenceValues() }
+            return UserAccountInfo("", "", 0, 0, 0,  "", "", 0L, 0L, "", "", "", "", "1,0,8,9", 0L, 0L, false, joinDate = Timestamp(System.currentTimeMillis())).also { it.setInitialReferenceValues() }
         }
     }
 
@@ -76,7 +76,6 @@ class UserAccountInfo(
         if (timePlayed != other.timePlayed) return false
         if (lastLogin != other.lastLogin) return false
         if (online != other.online) return false
-        if (joinDate != other.joinDate) return false
 
         return true
     }
@@ -99,7 +98,6 @@ class UserAccountInfo(
         result = 31 * result + timePlayed.hashCode()
         result = 31 * result + lastLogin.hashCode()
         result = 31 * result + online.hashCode()
-        result = 31 * result + joinDate.hashCode()
         return result
     }
 
