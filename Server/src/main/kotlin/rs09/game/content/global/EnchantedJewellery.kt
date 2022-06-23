@@ -1,10 +1,11 @@
 package rs09.game.content.global
 
 import api.*
+import api.events.TeleportEvent
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.audio.Audio
-import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.map.Location
@@ -234,6 +235,7 @@ enum class EnchantedJewellery(
                                 replaceJewellery(player, item, nextJewellery, isEquipped)
                             }
                             unlock(player)
+                            player.dispatch(TeleportEvent(TeleportManager.TeleportType.NORMAL, 1,location))
                             return true
                         }
                     }
@@ -241,10 +243,6 @@ enum class EnchantedJewellery(
                     return false
                 }
             })
-
-            if (getLocation(buttonID).withinDistance(Location(2657, 3439, 0))) {
-                player.achievementDiaryManager.finishTask(player, DiaryType.SEERS_VILLAGE, 2, 0)
-            }
         }
     }
 
@@ -280,8 +278,8 @@ enum class EnchantedJewellery(
             return
         }
         sendNPCDialogue(player, slayerManager.master!!.npc, "You're currently " +
-                "assigned to kill ${slayerManager.taskName.lowercase(Locale.getDefault())}'s; " +
-                "only ${slayerManager.amount} more to go.", FacialExpression.FRIENDLY)
+                "assigned to kill ${getSlayerTaskName(player).lowercase(Locale.getDefault())}'s; " +
+                "only ${getSlayerTaskKillsRemaining(player)} more to go.", FacialExpression.FRIENDLY)
 
         // Slayer tracker UI
         setVarbit(player, 2502, 0, slayerManager.flags.taskFlags shr 4)
