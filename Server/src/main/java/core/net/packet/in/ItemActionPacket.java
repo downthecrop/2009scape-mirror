@@ -100,6 +100,9 @@ public class ItemActionPacket implements IncomingPacket {
 			if(PluginInteractionManager.handle(player,event)){
 				return;
 			}
+			if(InteractionListeners.run(item, target, 4, player)){
+				return;
+			}
 			if(player.getZoneMonitor().useWith(used,player)){
 				return;
 			}

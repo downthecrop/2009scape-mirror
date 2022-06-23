@@ -101,7 +101,7 @@ public class ChristmasEvent extends HolidayEvent {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		if (isActive()) {
-			ClassScanner.definePlugins(new ChristmasEventOptionPlugin(), new SnowmanItemHandler(), new SnowImpDialogue(), new SnowmanHatComponentPlugin(), new QueenOfSnowDialogue(), new SnowballItemPlugin(), new SnowmanNPC(), new PeltOptionHandler());
+			ClassScanner.definePlugins(new ChristmasEventOptionPlugin(), new SnowmanItemHandler(), new SnowImpDialogue(), new SnowmanHatComponentPlugin(), new QueenOfSnowDialogue(), new SnowmanNPC(), new PeltOptionHandler());
 		}
 		return super.newInstance(arg);
 	}
@@ -1078,39 +1078,5 @@ public class ChristmasEvent extends HolidayEvent {
 			return new int[] {6747, 6748, 6749};
 		}
 
-	}
-
-	/**
-	 * Handles the snow ball item plugin.
-	 * @author Vexia
-	 *
-	 */
-	public class SnowballItemPlugin implements Plugin<Object> {
-
-		@Override
-		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			BALL_OF_SNOW.getDefinition().getHandlers().put("equipment", this);
-			return this;
-		}
-
-		@Override
-		public Object fireEvent(String identifier, Object... args) {
-			final Player player = (Player) args[0];
-			@SuppressWarnings("unused")
-			Item item = (Item) args[1];
-			final Item other = args.length == 2 ? null : (Item) args[2];
-			if (other != null) {
-				identifier = "equip";
-			}
-			switch (identifier) {
-			case "equip":
-				player.getInteraction().set(PELT_OPTION);
-				break;
-			case "unequip":
-				player.getInteraction().remove(PELT_OPTION);
-				break;
-			}
-			return true;
-		}
 	}
 }
