@@ -6,6 +6,7 @@ import core.net.packet.out.*
 import rs09.game.system.SystemLogger
 import java.util.*
 import java.util.concurrent.locks.ReentrantLock
+import kotlin.NoSuchElementException
 import kotlin.collections.ArrayList
 
 class PacketWriteQueue : TickListener {
@@ -51,13 +52,21 @@ class PacketWriteQueue : TickListener {
         @JvmStatic
         fun flush() {
             queueLock.lock()
-            var packet: QueuedPacket<*>?
-            while (pop().also { packet = it } != null)
-                write(packet?.out ?: break, packet?.context ?: break)
+
+            var hasEnded = false
+            while (!hasEnded) {
+                try {
+                    val packet = packetsToWrite.pop()
+                    write(packet?.out ?: continue, packet.context ?: continue)
+                } catch (e: NoSuchElementException) {
+                    hasEnded = true
+                }
+            }
+
             if (packetsToWrite.isNotEmpty()) {
                 SystemLogger.logWarn("Packet queue was NOT empty! Remaining packets: ${packetsToWrite.size}")
                 try {
-                    for (pkt in packetsToWrite) SystemLogger.logWarn("${pkt.out.javaClass.simpleName} <- ${pkt.context}")
+                    for (pkt in packetsToWrite) SystemLogger.logWarn("${pkt?.out?.javaClass?.simpleName ?: "NULL"} <- ${pkt?.context ?: "NULL"}")
                 } catch (e: Exception)
                 {
                     e.printStackTrace()
@@ -65,12 +74,14 @@ class PacketWriteQueue : TickListener {
                     packetsToWrite.clear()
                 }
             }
+
+            queueLock.unlock()
+
             val queueIter = packetsToQueue.iterator()
             while (queueIter.hasNext()) {
                 packetsToWrite.add(queueIter.next())
                 queueIter.remove()
             }
-            queueLock.unlock()
         }
 
         @Suppress("UNCHECKED_CAST")
