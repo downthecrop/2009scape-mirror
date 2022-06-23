@@ -111,6 +111,9 @@ class ServerConstants {
 		var BANK_SIZE: Int = 496
 
 		@JvmField
+		var BANK_BOOTH_QUICK_OPEN: Boolean = false
+
+		@JvmField
 		var GE_AUTOSAVE_FREQUENCY = secondsToTicks(3600) //1 hour
 
 		@JvmField

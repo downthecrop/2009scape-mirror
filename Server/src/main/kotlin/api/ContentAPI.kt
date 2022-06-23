@@ -22,6 +22,7 @@ import core.game.node.entity.player.link.emote.Emotes
 import core.game.node.entity.player.link.quest.QuestRepository
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.gather.SkillingTool
+import core.game.node.entity.skill.summoning.familiar.BurdenBeast
 import core.game.node.item.GroundItem
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
@@ -39,6 +40,7 @@ import core.game.world.map.zone.ZoneBuilder
 import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
+import org.rs09.consts.Items
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.dialogue.SkillDialogueHandler
 import rs09.game.content.global.GlobalKillCounter
@@ -57,7 +59,7 @@ import rs09.game.world.repository.Repository
  * @return the tool which meets the requirements or null if none.
  */
 fun getTool(player: Player, pickaxe: Boolean): SkillingTool? {
-    return if(pickaxe) SkillingTool.getPickaxe(player) else SkillingTool.getHatchet(player)
+    return if (pickaxe) SkillingTool.getPickaxe(player) else SkillingTool.getHatchet(player)
 }
 
 /**
@@ -99,7 +101,7 @@ fun inInventory(player: Player, item: Int, amount: Int = 1): Boolean {
  * @param id the ID of the item to check for the amount of
  * @return the amount of the given ID in the player's inventory
  */
-fun amountInInventory(player: Player, id: Int): Int{
+fun amountInInventory(player: Player, id: Int): Int {
     return player.inventory.getAmount(id)
 }
 
@@ -109,7 +111,7 @@ fun amountInInventory(player: Player, id: Int): Int{
  * @param id the ID of the item to check for
  * @return the amount of the ID in the player's bank.
  */
-fun amountInBank(player: Player, id: Int): Int{
+fun amountInBank(player: Player, id: Int): Int {
     return player.bank.getAmount(id)
 }
 
@@ -119,7 +121,7 @@ fun amountInBank(player: Player, id: Int): Int{
  * @param id the ID of the item to check for
  * @return the amount of the ID in the player's equipment.
  */
-fun amountInEquipment(player: Player, id: Int): Int{
+fun amountInEquipment(player: Player, id: Int): Int {
     return player.equipment.getAmount(id)
 }
 
@@ -153,9 +155,8 @@ fun hasAnItem(player: Player, vararg ids: Int): ContainerisedItem {
  * @param god the God whose equipment we are checking for
  * @return true if the player has an item corresponding to the given god, false otherwise
  */
-fun hasGodItem(player: Player, god: God): Boolean
-{
-    god.validItems.forEach { if(amountInEquipment(player, it) > 0) return true }
+fun hasGodItem(player: Player, god: God): Boolean {
+    god.validItems.forEach { if (amountInEquipment(player, it) > 0) return true }
     return false
 }
 
@@ -173,7 +174,7 @@ fun <T> removeItem(player: Player, item: T, container: Container = Container.INV
         else -> throw IllegalStateException("Invalid value passed for item")
     }
 
-    return when(container){
+    return when (container) {
         Container.INVENTORY -> player.inventory.remove(it)
         Container.BANK -> player.bank.remove(it)
         Container.EQUIPMENT -> player.equipment.remove(it)
@@ -189,7 +190,7 @@ fun <T> removeItem(player: Player, item: T, container: Container = Container.INV
  * @return true if the item was successfully added
  */
 fun addItem(player: Player, id: Int, amount: Int = 1, container: Container = Container.INVENTORY): Boolean {
-    val cont = when(container){
+    val cont = when (container) {
         Container.INVENTORY -> player.inventory
         Container.BANK -> player.bank
         Container.EQUIPMENT -> player.equipment
@@ -207,7 +208,7 @@ fun addItem(player: Player, id: Int, amount: Int = 1, container: Container = Con
  * @return the item that was previously in the slot, or null if none.
  */
 fun replaceSlot(player: Player, slot: Int, item: Item, container: Container = Container.INVENTORY): Item? {
-    val cont = when(container) {
+    val cont = when (container) {
         Container.INVENTORY -> player.inventory
         Container.EQUIPMENT -> player.equipment
         Container.BANK -> player.bank
@@ -222,20 +223,20 @@ fun replaceSlot(player: Player, slot: Int, item: Item, container: Container = Co
  * @param id the ID of the item to add to the player's inventory
  * @param amount the amount of the ID to add to the player's inventory, defaults to 1
  */
-fun addItemOrDrop(player: Player, id: Int, amount: Int = 1){
+fun addItemOrDrop(player: Player, id: Int, amount: Int = 1) {
     val item = Item(id, amount)
-    if(!player.inventory.add(item)) GroundItemManager.create(item,player)
+    if (!player.inventory.add(item)) GroundItemManager.create(item, player)
 }
 
 /**
  * Clears an NPC with the "poof" smoke graphics commonly seen with random event NPCs.
  * @param npc the NPC object to initialize
  */
-fun poofClear(npc: NPC){
-    submitWorldPulse(object : Pulse(){
+fun poofClear(npc: NPC) {
+    submitWorldPulse(object : Pulse() {
         var counter = 0
         override fun pulse(): Boolean {
-            when(counter++){
+            when (counter++) {
                 2 -> {
                     npc.isInvisible = true; Graphics.send(Graphics(86), npc.location)
                 }
@@ -331,14 +332,14 @@ fun rewardXP(player: Player, skill: Int, amount: Double) {
  * @param loc the location to move the new object to if necessary. Defaults to null.
  */
 fun replaceScenery(toReplace: Scenery, with: Int, for_ticks: Int, loc: Location? = null) {
-    val newLoc = when(loc){
+    val newLoc = when (loc) {
         null -> toReplace.location
         else -> loc
     }
     if (for_ticks == -1) {
-        SceneryBuilder.replace(toReplace, toReplace.transform(with,toReplace.rotation,newLoc))
+        SceneryBuilder.replace(toReplace, toReplace.transform(with, toReplace.rotation, newLoc))
     } else {
-        SceneryBuilder.replace(toReplace, toReplace.transform(with,toReplace.rotation, newLoc), for_ticks)
+        SceneryBuilder.replace(toReplace, toReplace.transform(with, toReplace.rotation, newLoc), for_ticks)
     }
     toReplace.isActive = false
 }
@@ -351,12 +352,12 @@ fun replaceScenery(toReplace: Scenery, with: Int, for_ticks: Int, loc: Location?
  * @Param rotation the Direction of the rotation it should use. Direction.NORTH, Direction.SOUTH, etc
  * @param loc the location to move the new object to if necessary. Defaults to null.
  */
-fun replaceScenery(toReplace: Scenery, with: Int, for_ticks: Int, rotation: Direction, loc: Location? = null){
-    val newLoc = when(loc){
+fun replaceScenery(toReplace: Scenery, with: Int, for_ticks: Int, rotation: Direction, loc: Location? = null) {
+    val newLoc = when (loc) {
         null -> toReplace.location
         else -> loc
     }
-    val rot = when(rotation){
+    val rot = when (rotation) {
         Direction.NORTH_WEST -> 0
         Direction.NORTH -> 1
         Direction.NORTH_EAST -> 2
@@ -367,9 +368,9 @@ fun replaceScenery(toReplace: Scenery, with: Int, for_ticks: Int, rotation: Dire
         Direction.WEST -> 3
     }
     if (for_ticks == -1) {
-        SceneryBuilder.replace(toReplace, toReplace.transform(with,rot, newLoc))
+        SceneryBuilder.replace(toReplace, toReplace.transform(with, rot, newLoc))
     } else {
-        SceneryBuilder.replace(toReplace, toReplace.transform(with,rot,newLoc), for_ticks)
+        SceneryBuilder.replace(toReplace, toReplace.transform(with, rot, newLoc), for_ticks)
     }
     toReplace.isActive = false
 }
@@ -453,7 +454,7 @@ fun animateScenery(player: Player, obj: Scenery, animationId: Int, global: Boole
 /**
  * Send an object animation independent of a player
  */
-fun animateScenery(obj: Scenery, animationId: Int){
+fun animateScenery(obj: Scenery, animationId: Int) {
     val animation = Animation(animationId)
     animation.setObject(obj)
     getRegionChunk(obj.location).flag(AnimateObjectUpdateFlag(animation))
@@ -484,8 +485,27 @@ fun spawnProjectile(source: Entity, dest: Entity, projectileId: Int) {
  * @param speed the speed the projectile travels at
  * @param angle the angle the projectile travels at
  */
-fun spawnProjectile(source: Location, dest: Location, projectile: Int, startHeight: Int, endHeight: Int, delay: Int, speed: Int, angle: Int){
-    Projectile.create(source, dest, projectile, startHeight, endHeight, delay, speed, angle, source.getDistance(dest).toInt()).send()
+fun spawnProjectile(
+    source: Location,
+    dest: Location,
+    projectile: Int,
+    startHeight: Int,
+    endHeight: Int,
+    delay: Int,
+    speed: Int,
+    angle: Int
+) {
+    Projectile.create(
+        source,
+        dest,
+        projectile,
+        startHeight,
+        endHeight,
+        delay,
+        speed,
+        angle,
+        source.getDistance(dest).toInt()
+    ).send()
 }
 
 /**
@@ -522,7 +542,7 @@ fun openInterface(player: Player, id: Int) {
  * @param player the player to open the interface for
  * @param id the ID of the interface to open
  */
-fun openOverlay(player: Player, id: Int){
+fun openOverlay(player: Player, id: Int) {
     player.interfaceManager.openOverlay(Component(id))
 }
 
@@ -530,7 +550,7 @@ fun openOverlay(player: Player, id: Int){
  * Closes any open overlays for the given player
  * @param player the player to close for
  */
-fun closeOverlay(player: Player){
+fun closeOverlay(player: Player) {
     player.interfaceManager.closeOverlay()
 }
 
@@ -576,7 +596,7 @@ fun sendDialogue(player: Player, message: String) {
  * @param forced whether or not to force the animation (usually not necessary)
  */
 fun <T> animate(entity: Entity, anim: T, forced: Boolean = false) {
-    val animation = when(anim){
+    val animation = when (anim) {
         is Int -> Animation(anim)
         is Animation -> anim
         else -> throw IllegalStateException("Invalid value passed for anim")
@@ -630,15 +650,15 @@ fun findNPC(id: Int): NPC? {
  * @param y the Y coordinate to use
  * @param z the Z coordinate to use
  */
-fun getScenery(x: Int, y: Int, z: Int): Scenery?{
-    return RegionManager.getObject(z,x,y)
+fun getScenery(x: Int, y: Int, z: Int): Scenery? {
+    return RegionManager.getObject(z, x, y)
 }
 
 /**
  * Gets the spawned scenery from the world map using the given Location object.
  * @param loc the Location object to use.
  */
-fun getScenery(loc: Location): Scenery?{
+fun getScenery(loc: Location): Scenery? {
     return RegionManager.getObject(loc)
 }
 
@@ -667,7 +687,7 @@ fun findLocalNPC(entity: Entity, id: Int): NPC? {
  * @param entity the entity to check around
  * @param ids the IDs of the NPCs to look for
  */
-fun findLocalNPCs(entity: Entity, ids: IntArray): List<NPC>{
+fun findLocalNPCs(entity: Entity, ids: IntArray): List<NPC> {
     return RegionManager.getLocalNpcs(entity).filter { it.id in ids }.toList()
 }
 
@@ -677,7 +697,7 @@ fun findLocalNPCs(entity: Entity, ids: IntArray): List<NPC>{
  * @param ids the IDs of the NPCs to look for
  * @param distance The maximum distance to the entity.
  */
-fun findLocalNPCs(entity: Entity, ids: IntArray, distance: Int): List<NPC>{
+fun findLocalNPCs(entity: Entity, ids: IntArray, distance: Int): List<NPC> {
     return RegionManager.getLocalNpcs(entity, distance).filter { it.id in ids }.toList()
 }
 
@@ -685,8 +705,7 @@ fun findLocalNPCs(entity: Entity, ids: IntArray, distance: Int): List<NPC>{
  * @param regionId the ID of the region
  * @return a [ZoneBorders] encapsulating the entire region indicated by the provided regionId
  */
-fun getRegionBorders(regionId: Int) : ZoneBorders
-{
+fun getRegionBorders(regionId: Int): ZoneBorders {
     return ZoneBorders.forRegion(regionId)
 }
 
@@ -742,9 +761,9 @@ fun unlock(entity: Entity) {
  * @param transformTo the ID of the NPC to turn into
  * @param restoreTicks the number of ticks until the NPC returns to normal
  */
-fun transformNpc(npc: NPC, transformTo: Int, restoreTicks: Int){
+fun transformNpc(npc: NPC, transformTo: Int, restoreTicks: Int) {
     npc.transform(transformTo)
-    Pulser.submit(object : Pulse(restoreTicks){
+    Pulser.submit(object : Pulse(restoreTicks) {
         override fun pulse(): Boolean {
             npc.reTransform()
             return true
@@ -755,14 +774,14 @@ fun transformNpc(npc: NPC, transformTo: Int, restoreTicks: Int){
 /**
  * Produces a Location object using the given x,y,z values
  */
-fun location(x: Int, y: Int, z: Int): Location{
-    return Location.create(x,y,z)
+fun location(x: Int, y: Int, z: Int): Location {
+    return Location.create(x, y, z)
 }
 
 /**
  * Checks if the given entity is within the given ZoneBorders
  */
-fun inBorders(entity: Entity, borders: ZoneBorders): Boolean{
+fun inBorders(entity: Entity, borders: ZoneBorders): Boolean {
     return borders.insideBorder(entity)
 }
 
@@ -770,13 +789,13 @@ fun inBorders(entity: Entity, borders: ZoneBorders): Boolean{
  * Checks if the given entity is within the given borders
  */
 fun inBorders(entity: Entity, swX: Int, swY: Int, neX: Int, neY: Int): Boolean {
-    return ZoneBorders(swX,swY,neX,neY).insideBorder(entity)
+    return ZoneBorders(swX, swY, neX, neY).insideBorder(entity)
 }
 
 /**
  * AHeals the given entity for the given number of hitpoints
  */
-fun heal(entity: Entity, amount: Int){
+fun heal(entity: Entity, amount: Int) {
     entity.skills.heal(amount)
 }
 
@@ -787,9 +806,9 @@ fun heal(entity: Entity, amount: Int){
  * @param offset the offset of the desired varbit inside the varp.
  * @param value the value to set the varbit to
  */
-fun setVarbit(player: Player, varpIndex: Int, offset: Int, value: Int, save: Boolean = false){
-    player.varpManager.get(varpIndex).setVarbit(offset,value).send(player)
-    if(save) player.varpManager.flagSave(varpIndex)
+fun setVarbit(player: Player, varpIndex: Int, offset: Int, value: Int, save: Boolean = false) {
+    player.varpManager.get(varpIndex).setVarbit(offset, value).send(player)
+    if (save) player.varpManager.flagSave(varpIndex)
 }
 
 /**
@@ -797,7 +816,7 @@ fun setVarbit(player: Player, varpIndex: Int, offset: Int, value: Int, save: Boo
  * @param player the player to clear for
  * @param varpIndex the index of the varp to clear
  */
-fun clearVarp(player: Player, varpIndex: Int){
+fun clearVarp(player: Player, varpIndex: Int) {
     player.varpManager.get(varpIndex).clear()
 }
 
@@ -807,7 +826,7 @@ fun clearVarp(player: Player, varpIndex: Int){
  * @param varpIndex the index of the varp to calculate the value of
  * @return the value of the varp
  */
-fun getVarpValue(player: Player, varpIndex: Int): Int{
+fun getVarpValue(player: Player, varpIndex: Int): Int {
     return player.varpManager.get(varpIndex).getValue()
 }
 
@@ -828,12 +847,12 @@ fun getVarbitValue(player: Player, varpIndex: Int, offset: Int): Int {
  * @param dest the Location object to walk to
  * @param type the type of pathfinder to use. "smart" for the SMART pathfinder, "clip" for the noclip pathfinder, anything else for DUMB.
  */
-fun forceWalk(entity: Entity, dest: Location, type: String){
-    if(type == "clip"){
+fun forceWalk(entity: Entity, dest: Location, type: String) {
+    if (type == "clip") {
         ForceMovement(entity, dest, 10, 10).run()
         return
     }
-    val pathfinder = when(type){
+    val pathfinder = when (type) {
         "smart" -> Pathfinder.SMART
         else -> Pathfinder.DUMB
     }
@@ -845,7 +864,7 @@ fun forceWalk(entity: Entity, dest: Location, type: String){
  * Interrupts a given entity's walking queue
  * @param entity the entity to interrupt
  */
-fun stopWalk(entity: Entity){
+fun stopWalk(entity: Entity) {
     entity.walkingQueue.reset()
 }
 
@@ -871,8 +890,8 @@ fun getChildren(scenery: Int): IntArray {
  * @param node the node to adjust the charge of
  * @param amount the amount to adjust by
  */
-fun adjustCharge(node: Node, amount: Int){
-    when(node){
+fun adjustCharge(node: Node, amount: Int) {
+    when (node) {
         is Item -> node.charge += amount
         is Scenery -> node.charge += amount
         else -> SystemLogger.logErr("Attempt to adjust the charge of invalid type: ${node.javaClass.simpleName}")
@@ -884,11 +903,12 @@ fun adjustCharge(node: Node, amount: Int){
  * @param node the node whose charge to check
  * @return amount of charges the node has, or -1 if the node does not accept charges.
  */
-fun getCharge(node: Node): Int{
-    when(node){
+fun getCharge(node: Node): Int {
+    when (node) {
         is Item -> return node.charge
         is Scenery -> return node.charge
-        else -> SystemLogger.logErr("Attempt to get charge of invalid type: ${node.javaClass.simpleName}").also { return -1 }
+        else -> SystemLogger.logErr("Attempt to get charge of invalid type: ${node.javaClass.simpleName}")
+            .also { return -1 }
     }
 }
 
@@ -897,8 +917,8 @@ fun getCharge(node: Node): Int{
  * @param node the node to set the charge for
  * @param charge the amount to set the node's charge to (default is 1000)
  */
-fun setCharge(node: Node, charge: Int){
-    when(node){
+fun setCharge(node: Node, charge: Int) {
+    when (node) {
         is Item -> node.charge = charge
         is Scenery -> node.charge = charge
         else -> SystemLogger.logErr("Attempt to set the charge of invalid type: ${node.javaClass.simpleName}")
@@ -911,7 +931,7 @@ fun setCharge(node: Node, charge: Int){
  * @return the option the player used
  */
 fun getUsedOption(player: Player): String {
-    return player.getAttribute("interact:option","INVALID")
+    return player.getAttribute("interact:option", "INVALID")
 }
 
 /**
@@ -920,28 +940,45 @@ fun getUsedOption(player: Player): String {
  * @param anim the Animation object to use, can also be an ID.
  * @param gfx the Graphics object to use, can also be an ID.
  */
-fun <A,G> visualize(entity: Entity, anim: A, gfx: G){
-    val animation = when(anim){
+fun <A, G> visualize(entity: Entity, anim: A, gfx: G) {
+    val animation = when (anim) {
         is Int -> Animation(anim)
         is Animation -> anim
         else -> throw IllegalStateException("Invalid parameter passed for animation.")
     }
 
-    val graphics = when(gfx){
+    val graphics = when (gfx) {
         is Int -> Graphics(gfx)
         is Graphics -> gfx
         else -> throw IllegalStateException("Invalid parameter passed for graphics.")
     }
 
-    entity.visualize(animation,graphics)
+    entity.visualize(animation, graphics)
 }
 
 /**
  * Used to submit a pulse to the GameWorld's Pulser.
  * @param pulse the Pulse object to submit
  */
-fun submitWorldPulse(pulse: Pulse){
+fun submitWorldPulse(pulse: Pulse) {
     GameWorld.Pulser.submit(pulse)
+}
+
+/**
+ * Used to submit a pulse to the GameWorld's Pulser, albeit with a cleaner syntax.
+ * @param task an anonymous function that will be run in the Pulse
+ * @return the newly submitted Pulse
+ */
+fun runWorldTask(task: () -> Unit): Pulse {
+    val pulse = object : Pulse() {
+        override fun pulse(): Boolean {
+            task.invoke()
+            return true
+        }
+    }
+
+    submitWorldPulse(pulse)
+    return pulse
 }
 
 /**
@@ -950,9 +987,9 @@ fun submitWorldPulse(pulse: Pulse){
  * @param loc the Location object to move them to
  * @param type the teleport type to use (defaults to instant). An enum exists as TeleportManager.TeleportType.
  */
-fun teleport(entity: Entity, loc: Location, type: TeleportManager.TeleportType = TeleportManager.TeleportType.INSTANT){
-    if(type == TeleportManager.TeleportType.INSTANT) entity.properties.teleportLocation = loc
-    else entity.teleporter.send(loc,type)
+fun teleport(entity: Entity, loc: Location, type: TeleportManager.TeleportType = TeleportManager.TeleportType.INSTANT) {
+    if (type == TeleportManager.TeleportType.INSTANT) entity.properties.teleportLocation = loc
+    else entity.teleporter.send(loc, type)
 }
 
 /**
@@ -961,7 +998,7 @@ fun teleport(entity: Entity, loc: Location, type: TeleportManager.TeleportType =
  * @param skill the Skill to set. A Skills enum exists that can be used. Ex: Skills.STRENGTH
  * @param level the level to set the skill to
  */
-fun setTempLevel(entity: Entity, skill: Int, level: Int){
+fun setTempLevel(entity: Entity, skill: Int, level: Int) {
     entity.skills.setLevel(skill, level)
 }
 
@@ -991,7 +1028,7 @@ fun getDynLevel(entity: Entity, skill: Int): Int {
  * @param skill the Skill to adjust. A Skills enum exists that can be used. Ex: Skills.STRENGTH
  * @param amount the amount to adjust the skill by. Ex-Buff: 5, Ex-Debuff: -5
  */
-fun adjustLevel(entity: Entity, skill: Int, amount: Int){
+fun adjustLevel(entity: Entity, skill: Int, amount: Int) {
     entity.skills.setLevel(skill, entity.skills.getStaticLevel(skill) + amount)
 }
 
@@ -1001,14 +1038,14 @@ fun adjustLevel(entity: Entity, skill: Int, amount: Int){
  * @param item the item to remove. Can be an Item object or an ID.
  * @param container the Container to remove the item from. An enum exists for this called Container. Ex: Container.BANK
  */
-fun <T> removeAll(player: Player, item: T, container: Container){
-    val it = when(item){
+fun <T> removeAll(player: Player, item: T, container: Container) {
+    val it = when (item) {
         is Item -> item.id
         is Int -> item
         else -> throw IllegalStateException("Invalid value passed as item")
     }
 
-    when(container){
+    when (container) {
         Container.EQUIPMENT -> player.equipment.remove(Item(it, amountInEquipment(player, it)))
         Container.BANK -> player.bank.remove(Item(it, amountInBank(player, it)))
         Container.INVENTORY -> player.inventory.remove(Item(it, amountInInventory(player, it)))
@@ -1022,15 +1059,15 @@ fun <T> removeAll(player: Player, item: T, container: Container){
  * @param iface the ID of the interface to use
  * @param child the index of the child to send the string to
  */
-fun setInterfaceText(player: Player, string: String, iface: Int, child: Int){
-    player.packetDispatch.sendString(string,iface,child)
+fun setInterfaceText(player: Player, string: String, iface: Int, child: Int) {
+    player.packetDispatch.sendString(string, iface, child)
 }
 
 /**
  * Closes any open (non-chat) interfaces for the player
  * @param player the player to close the interface for
  */
-fun closeInterface(player: Player){
+fun closeInterface(player: Player) {
     player.interfaceManager.close()
 }
 
@@ -1038,7 +1075,7 @@ fun closeInterface(player: Player){
  * Closes any opened tab interfaces for the player
  * @param player the player to close the tab for
  */
-fun closeTabInterface(player: Player){
+fun closeTabInterface(player: Player) {
     player.interfaceManager.closeSingleTab()
 }
 
@@ -1048,7 +1085,7 @@ fun closeTabInterface(player: Player){
  * @param msg the message to send.
  * @param expr the FacialExpression to use. An enum exists for these called FacialExpression. Defaults to FacialExpression.FRIENDLY
  */
-fun sendPlayerDialogue(player: Player, msg: String, expr: FacialExpression = FacialExpression.FRIENDLY){
+fun sendPlayerDialogue(player: Player, msg: String, expr: FacialExpression = FacialExpression.FRIENDLY) {
     player.dialogueInterpreter.sendDialogues(player, expr, *splitLines(msg))
 }
 
@@ -1058,8 +1095,8 @@ fun sendPlayerDialogue(player: Player, msg: String, expr: FacialExpression = Fac
  * @param iface the ID of the interface to send it to
  * @param child the index of the child on the interface to send the model to
  */
-fun sendPlayerOnInterface(player: Player, iface: Int, child: Int){
-    player.packetDispatch.sendPlayerOnInterface(iface,child)
+fun sendPlayerOnInterface(player: Player, iface: Int, child: Int) {
+    player.packetDispatch.sendPlayerOnInterface(iface, child)
 }
 
 /**
@@ -1069,7 +1106,7 @@ fun sendPlayerOnInterface(player: Player, iface: Int, child: Int){
  * @param msg the message to send.
  * @param expr the FacialExpression to use. An enum exists for these called FacialExpression. Defaults to FacialExpression.FRIENDLY
  */
-fun sendNPCDialogue(player: Player, npc: Int, msg: String, expr: FacialExpression = FacialExpression.FRIENDLY){
+fun sendNPCDialogue(player: Player, npc: Int, msg: String, expr: FacialExpression = FacialExpression.FRIENDLY) {
     player.dialogueInterpreter.sendDialogues(npc, expr, *splitLines(msg))
 }
 
@@ -1080,8 +1117,8 @@ fun sendNPCDialogue(player: Player, npc: Int, msg: String, expr: FacialExpressio
  * @param iface the ID of the interface to send the animation to
  * @param child the index of the child on the interface to send the model to
  */
-fun sendAnimationOnInterface(player: Player, anim: Int, iface: Int, child: Int){
-    player.packetDispatch.sendAnimationInterface(anim,iface,child)
+fun sendAnimationOnInterface(player: Player, anim: Int, iface: Int, child: Int) {
+    player.packetDispatch.sendAnimationInterface(anim, iface, child)
 }
 
 /**
@@ -1089,7 +1126,7 @@ fun sendAnimationOnInterface(player: Player, anim: Int, iface: Int, child: Int){
  * @param player the player to register the listener for
  * @param handler the method to run when the listener is invoked (when the player logs out)
  */
-fun registerLogoutListener(player: Player, key: String, handler: (p: Player) -> Unit){
+fun registerLogoutListener(player: Player, key: String, handler: (p: Player) -> Unit) {
     player.logoutListeners[key] = handler
 }
 
@@ -1098,7 +1135,7 @@ fun registerLogoutListener(player: Player, key: String, handler: (p: Player) -> 
  * @param player the player to remove the logout listner from
  * @param key the key of the logout listener to remove.
  */
-fun clearLogoutListener(player: Player, key: String){
+fun clearLogoutListener(player: Player, key: String) {
     player.logoutListeners.remove(key)
 }
 
@@ -1110,8 +1147,8 @@ fun clearLogoutListener(player: Player, key: String){
  * @param item the ID of the item to send
  * @param amount the amount of the item to send - defaults to 1
  */
-fun sendItemOnInterface(player: Player, iface: Int, child: Int, item: Int, amount: Int = 1){
-    player.packetDispatch.sendItemOnInterface(item,amount,iface,child)
+fun sendItemOnInterface(player: Player, iface: Int, child: Int, item: Int, amount: Int = 1) {
+    player.packetDispatch.sendItemOnInterface(item, amount, iface, child)
 }
 
 /**
@@ -1120,8 +1157,16 @@ fun sendItemOnInterface(player: Player, iface: Int, child: Int, item: Int, amoun
  * @param item the ID of the item to show
  * @param message the text to display
  */
-fun sendItemDialogue(player: Player, item: Int, message: String){
-    player.dialogueInterpreter.sendItemMessage(item, *splitLines(message))
+fun sendItemDialogue(player: Player, item: Any, message: String) {
+    val dialogueItem = when (item) {
+        is Item -> item
+        is Int -> Item(item)
+        else -> {
+            throw java.lang.IllegalArgumentException("Expected an Item or an Int, got ${item::class.java.simpleName}.")
+        }
+    }
+
+    player.dialogueInterpreter.sendItemMessage(dialogueItem, *splitLines(message))
 }
 
 /**
@@ -1131,7 +1176,7 @@ fun sendItemDialogue(player: Player, item: Int, message: String){
  * @param item2 the ID of the second item to show
  * @param message the text to display
  */
-fun sendDoubleItemDialogue(player: Player, item1: Int, item2: Int, message: String){
+fun sendDoubleItemDialogue(player: Player, item1: Int, item2: Int, message: String) {
     player.dialogueInterpreter.sendDoubleItemMessage(item1, item2, message)
 }
 
@@ -1142,8 +1187,8 @@ fun sendDoubleItemDialogue(player: Player, item1: Int, item2: Int, message: Stri
  * @param prompt what to prompt the player
  * @param handler the method that handles the value gained from the input dialogue
  */
-fun sendInputDialogue(player: Player, numeric: Boolean, prompt: String, handler: (value: Any) -> Unit){
-    if(numeric) sendInputDialogue(player, InputType.NUMERIC, prompt, handler)
+fun sendInputDialogue(player: Player, numeric: Boolean, prompt: String, handler: (value: Any) -> Unit) {
+    if (numeric) sendInputDialogue(player, InputType.NUMERIC, prompt, handler)
     else sendInputDialogue(player, InputType.STRING_SHORT, prompt, handler)
 }
 
@@ -1154,12 +1199,22 @@ fun sendInputDialogue(player: Player, numeric: Boolean, prompt: String, handler:
  * @param prompt what to prompt the player
  * @param handler the method that handles the value from the input dialogue
  */
-fun sendInputDialogue(player: Player, type: InputType, prompt: String, handler: (value: Any) -> Unit){
-    when(type){
-        InputType.NUMERIC, InputType.STRING_SHORT -> player.dialogueInterpreter.sendInput(type != InputType.NUMERIC, prompt)
+fun sendInputDialogue(player: Player, type: InputType, prompt: String, handler: (value: Any) -> Unit) {
+    when (type) {
+        InputType.AMOUNT -> {
+            player.setAttribute("parseamount", true)
+            player.dialogueInterpreter.sendInput(true, prompt)
+        }
+
+        InputType.NUMERIC, InputType.STRING_SHORT -> player.dialogueInterpreter.sendInput(
+            type != InputType.NUMERIC,
+            prompt
+        )
+
         InputType.STRING_LONG -> player.dialogueInterpreter.sendLongInput(prompt)
         InputType.MESSAGE -> player.dialogueInterpreter.sendMessageInput(prompt)
     }
+
     player.setAttribute("runscript", handler)
 }
 
@@ -1168,14 +1223,14 @@ fun sendInputDialogue(player: Player, type: InputType, prompt: String, handler: 
  * @param entity the entity to make flee
  * @param from the entity to flee from
  */
-fun flee(entity: Entity, from: Entity){
+fun flee(entity: Entity, from: Entity) {
     lock(entity, 5)
     face(entity, from, 5)
 
     val diffX = entity.location.x - from.location.x
     val diffY = entity.location.y - from.location.y
 
-    forceWalk(entity, entity.location.transform(diffX,diffY,0), "DUMB")
+    forceWalk(entity, entity.location.transform(diffX, diffY, 0), "DUMB")
 }
 
 /**
@@ -1183,14 +1238,14 @@ fun flee(entity: Entity, from: Entity){
  * @param entity the entity to submit the pulse to
  * @param pulse the pulse to submit
  */
-fun submitIndividualPulse(entity: Entity, pulse: Pulse){
+fun submitIndividualPulse(entity: Entity, pulse: Pulse) {
     entity.pulseManager.run(pulse)
 }
 
 /**
  * Similar to submitIndividualPulse, but for non-repeating tasks, with a cleaner syntax.
  */
-fun runTask(entity: Entity, delay: Int = 0, task: () -> Unit){
+fun runTask(entity: Entity, delay: Int = 0, task: () -> Unit) {
     entity.pulseManager.run(object : Pulse(delay) {
         override fun pulse(): Boolean {
             task.invoke()
@@ -1254,7 +1309,7 @@ fun finishQuest(player: Player, quest: String) {
  * @param id the ID of the scenery to get the definition for.
  * @return the scenery definition
  */
-fun sceneryDefinition(id: Int): SceneryDefinition{
+fun sceneryDefinition(id: Int): SceneryDefinition {
     return SceneryDefinition.forId(id)
 }
 
@@ -1263,7 +1318,7 @@ fun sceneryDefinition(id: Int): SceneryDefinition{
  * @param zone the zone to register
  * @param borders the ZoneBorders that compose the zone
  */
-fun registerMapZone(zone: MapZone, borders: ZoneBorders){
+fun registerMapZone(zone: MapZone, borders: ZoneBorders) {
     ZoneBuilder.configure(zone)
     zone.register(borders)
 }
@@ -1275,8 +1330,8 @@ fun registerMapZone(zone: MapZone, borders: ZoneBorders){
  * @param child the child on the interface to animate.
  * @param anim the ID of the animation to use.
  */
-fun animateInterface(player: Player, iface: Int, child: Int, anim: Int){
-    player.packetDispatch.sendAnimationInterface(anim,iface,child)
+fun animateInterface(player: Player, iface: Int, child: Int, anim: Int) {
+    player.packetDispatch.sendAnimationInterface(anim, iface, child)
 }
 
 /**
@@ -1284,15 +1339,15 @@ fun animateInterface(player: Player, iface: Int, child: Int, anim: Int){
  * @param ladderLoc the location of the ladder/stairs object you want to climb.
  * @param dest the destination for the climb.
  */
-fun addClimbDest(ladderLoc: Location, dest: Location){
-    SpecialLadders.add(ladderLoc,dest)
+fun addClimbDest(ladderLoc: Location, dest: Location) {
+    SpecialLadders.add(ladderLoc, dest)
 }
 
 /**
  * Sends a news announcement in game chat.
  * @param message the message to announce
  */
-fun sendNews(message: String){
+fun sendNews(message: String) {
     Repository.sendNews(message, 12, "CC6600")
 }
 
@@ -1301,9 +1356,9 @@ fun sendNews(message: String){
  * @param gfx the Graphics object, or the Integer ID of the graphics, to send. Either works.
  * @param location the location to send it to
  */
-fun <G> sendGraphics(gfx: G, location: Location){
-    when(gfx){
-        is Int -> Graphics.send(Graphics(gfx),location)
+fun <G> sendGraphics(gfx: G, location: Location) {
+    when (gfx) {
+        is Int -> Graphics.send(Graphics(gfx), location)
         is Graphics -> Graphics.send(gfx, location)
     }
 }
@@ -1325,12 +1380,12 @@ fun getMasteredSkillNames(player: Player): List<String> {
     val hasMastered = player.getSkills().masteredSkills > 0
     val masteredSkills = ArrayList<String>()
 
-    if(hasMastered){
+    if (hasMastered) {
         for ((skillId, skillName) in Skills.SKILL_NAME.withIndex()) {
             //phil you were looping every skill and performing a string comparison (another loop) for every one here.
             //that's some real shit code bro.
             //you were also performing a dynamic level check rather than a static.
-            if(hasLevelStat(player, skillId, 99)){
+            if (hasLevelStat(player, skillId, 99)) {
                 masteredSkills.add(skillName)
             }
         }
@@ -1339,35 +1394,137 @@ fun getMasteredSkillNames(player: Player): List<String> {
 }
 
 /**
- * Dumps the given player's given container into that player's bank.
+ * Empties the provided container into the player's bank.
  * @param player the player
- * @param container the player's container to dump.
+ * @param container the container to be emptied.
+ * @return The amount of items which were successfully transferred to the bank.
+ *
  * @author ceik
  * @author James Triantafylos
+ * @author vddCore
  */
-fun dumpContainer(player: Player, container: core.game.container.Container) {
+fun dumpContainer(player: Player, container: core.game.container.Container): Int {
     val bank = player.bank
-    container.toArray().filterNotNull().forEach { item ->
-        if (!bank.hasSpaceFor(item)) {
-            player.packetDispatch.sendMessage("You have no more space in your bank.")
-            return
-        }
-        if (!bank.canAdd(item)) {
-            player.packetDispatch.sendMessage("A magical force prevents you from banking your " + item.name + ".")
-            return
-        } else {
-            if (container is EquipmentContainer) {
-                if(!InteractionListeners.run(item.id,player,item,false)) {
-                    player.packetDispatch.sendMessage("A magical force prevents you from removing that item.")
-                    return
-                }
+    var dumpedCount = 0
+
+    run beginDepositing@{
+        container.toArray().filterNotNull().forEach { item ->
+            if (!bank.hasSpaceFor(item)) {
+                sendMessage(player, "You have no more space in your bank.")
+                return@beginDepositing
             }
-            container.remove(item)
-            bank.add(if (item.definition.isUnnoted) item else Item(item.noteChange, item.amount))
+
+            if (!bank.canAdd(item)) {
+                sendMessage(player, "A magical force prevents you from banking the ${item.name}.")
+                return@forEach
+            } else {
+                if (container is EquipmentContainer) {
+                    if (!InteractionListeners.run(item.id, player, item, false)) {
+                        sendMessage(player, "A magical force prevents you from removing your ${item.name}.")
+                        return@forEach
+                    }
+                }
+
+                container.remove(item)
+                bank.add(unnote(item))
+                dumpedCount++
+            }
         }
     }
+
     container.update()
     bank.update()
+
+    return dumpedCount
+}
+
+/**
+ * Attempts to empty the player's Beast of Burden's inventory
+ * into the player's bank.
+ *
+ * @param player The player whose Beast of Burden's inventory to empty.
+ *
+ * @author vddCore
+ */
+fun dumpBeastOfBurden(player: Player) {
+    val famMan = player.familiarManager
+
+    if (!famMan.hasFamiliar()) {
+        sendMessage(player, "You don't have a familiar.")
+        return
+    }
+
+    if (famMan.familiar !is BurdenBeast) {
+        sendMessage(player, "Your familiar is not a Beast of Burden.")
+        return
+    }
+
+    val beast: BurdenBeast = (famMan.familiar as BurdenBeast)
+
+    if (beast.container.isEmpty) {
+        sendMessage(player, "Your familiar's inventory is empty.")
+        return
+    }
+
+    val itemCount = beast.container.itemCount()
+    val dumpedCount = dumpContainer(player, beast.container)
+
+
+    when {
+        dumpedCount == itemCount -> sendMessage(player, "Your familiar's inventory was deposited into your bank.")
+        dumpedCount > 0 -> {
+            val remainPhrase = when {
+                (itemCount - dumpedCount == 1) -> "item remains"
+                else -> "items remain"
+            }
+
+            sendMessage(player, "${itemCount - dumpedCount} $remainPhrase in your familiar's inventory.")
+        }
+    }
+}
+
+/**
+ * Converts an item into its noted representation.
+ *
+ * @param item The item to convert.
+ * @return Noted form of the item or the item itself if it's already, or cannot be, noted.
+ *
+ * @author vddCore
+ */
+fun note(item: Item): Item {
+    if (!item.definition.isUnnoted)
+        return item
+
+    if (item.definition.noteId < 0)
+        return item
+
+    return Item(item.definition.noteId, item.amount, item.charge)
+}
+
+/**
+ * Converts a noted item into its unnoted representation.
+ *
+ * @param item The item to convert.
+ * @return Unnoted form of the item, or the item itself if it's already unnoted.
+ *
+ * @author vddCore
+ */
+fun unnote(item: Item): Item {
+    if (item.definition.isUnnoted)
+        return item
+
+    return Item(item.noteChange, item.amount, item.charge)
+}
+
+/**
+ * Checks if the player has the Seal of Passage equipped or if it's present in the inventory.
+ *
+ * @param player The player to inspect for item's presence.
+ * @return True if Seal of Passage present, false otherwise.
+ */
+fun hasSealOfPassage(player: Player): Boolean {
+    return isEquipped(player, Items.SEAL_OF_PASSAGE_9083)
+            || inInventory(player, Items.SEAL_OF_PASSAGE_9083)
 }
 
 /**
@@ -1387,14 +1544,13 @@ fun Player.getCutsceneStage(): Int {
     return getAttribute(this, Cutscene.ATTRIBUTE_CUTSCENE_STAGE, 0)
 }
 
-fun getServerConfig() : Toml
-{
+fun getServerConfig(): Toml {
     return ServerConfigParser.tomlData ?: Toml()
 }
 
 fun getPathableRandomLocalCoordinate(target: Entity, radius: Int, center: Location, maxAttempts: Int = 3): Location {
-    val swCorner = center.transform(-radius,-radius, center.z)
-    val neCorner = center.transform(radius, radius,  center.z)
+    val swCorner = center.transform(-radius, -radius, center.z)
+    val neCorner = center.transform(radius, radius, center.z)
     val borders = ZoneBorders(swCorner.x, swCorner.y, neCorner.x, neCorner.y, center.z)
 
     var attempts = maxAttempts

@@ -375,8 +375,17 @@ public final class WalkingQueue {
 	 * @param running The running flag (ctrl + click reward).
 	 */
 	public void reset(boolean running) {
+		Location loc = entity.getLocation();
+
+		if (loc == null) {
+			throw new IllegalStateException(
+				"The entity location provided was null."
+				+ "Are you sure anything down the stack trace isn't providing an NPC with a null location?"
+			);
+		}
+
 		walkingQueue.clear();
-		walkingQueue.add(new Point(entity.getLocation().getX(), entity.getLocation().getY()));
+		walkingQueue.add(new Point(loc.getX(), loc.getY()));
 		this.running = running;
 	}
 

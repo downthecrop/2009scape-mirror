@@ -1,6 +1,7 @@
 package core.game.content.zone.phasmatys;
 
 import static api.ContentAPIKt.*;
+
 import core.game.content.global.Bones;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.Option;
@@ -22,6 +23,7 @@ import core.game.world.map.zone.ZoneBuilder;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.NPCs;
 import rs09.plugin.ClassScanner;
 
 /**
@@ -65,6 +67,13 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
             player = e.asPlayer();
             if (target instanceof NPC) {
                 NPC npc = (NPC) target;
+
+                if (npc.getId() == NPCs.GHOST_BANKER_1702) {
+                    // Kludge to prevent this module from overriding NPC
+                    // handling until I rip this piece of Vexia shit out.
+                    return false;
+                }
+
                 if ((npc.getName().toLowerCase().contains("ghost") || npc.getName().equalsIgnoreCase("velorina") || npc.getName().contains("husband")) && !hasAmulet(player)) {
                     player.getDialogueInterpreter().open("ghosty dialogue", target);
                     return true;
@@ -76,13 +85,13 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
                     return true;
                 case 5267:
                     player.animate(Animation.create(536));
-					sendMessage(player, "The trapdoor opens...");
+                    sendMessage(player, "The trapdoor opens...");
                     SceneryBuilder.replace((Scenery) target, ((Scenery) target).transform(5268));
                     return true;
                 case 5268:
                     if (option.getName().equals("Close")) {
                         player.animate(Animation.create(535));
-						sendMessage(player, "You close the trapdoor.");
+                        sendMessage(player, "You close the trapdoor.");
                         SceneryBuilder.replace((Scenery) target, ((Scenery) target).transform(5267));
                     } else {
                         sendMessage(player, "You climb down through the trapdoor...");
@@ -94,11 +103,11 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
                         SceneryBuilder.replace(target.asScenery(), target.asScenery().transform(7435));
                     }
                     break;
-				case 7435: // open trapdoor in bar
-					if (option.getName().equalsIgnoreCase("close")) {
-						SceneryBuilder.replace(target.asScenery(), target.asScenery().transform(7434));
-					}
-					break;
+                case 7435: // open trapdoor in bar
+                    if (option.getName().equalsIgnoreCase("close")) {
+                        SceneryBuilder.replace(target.asScenery(), target.asScenery().transform(7434));
+                    }
+                    break;
                 case 9308:
                     if (player.getSkills().getStaticLevel(Skills.AGILITY) < 58) {
                         player.sendMessage("You need an agility level of at least 58 to climb down this wall.");
@@ -255,9 +264,9 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
     /**
      * Checks if bones are in the hopper.
      *
-     * @param player the player.
+     * @param player   the player.
      * @param inHopper in the hopper or in the bin.
-     * @param object the object.
+     * @param object   the object.
      * @return {@code True} if so.
      */
     public static boolean hasBones(Player player, Scenery object, boolean inHopper) {

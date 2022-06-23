@@ -7,7 +7,6 @@ import rs09.game.content.activity.gnomecooking.*
 import rs09.game.content.ame.RandomEventManager
 import rs09.game.content.ame.RandomEvents
 import rs09.game.interaction.InteractionListener
-import rs09.game.system.SystemLogger
 
 /**
  * Handles the NPC talk-to option.
@@ -66,5 +65,7 @@ class NPCTalkListener : InteractionListener {
             }
             return@setDest node.location
         }
+
+        setDest(NPC, BankerNPCListener.BANKER_NPCS, "talk-to", handler = BankerNPCListener::provideDestinationOverride)
     }
 }

@@ -12,4 +12,6 @@ object Event {
     @JvmStatic val UsedWith = UsedWithEvent::class.java
     @JvmStatic val SelfDeath = SelfDeath::class.java
     @JvmStatic val Tick = TickEvent::class.java
+    @JvmStatic val InterfaceOpened = InterfaceOpenEvent::class.java
+    @JvmStatic val InterfaceClosed = InterfaceCloseEvent::class.java
 }

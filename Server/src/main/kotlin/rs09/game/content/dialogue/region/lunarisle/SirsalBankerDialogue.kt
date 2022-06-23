@@ -1,25 +1,24 @@
 package rs09.game.content.dialogue.region.lunarisle
 
+import api.hasSealOfPassage
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
-import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.ge.GrandExchangeRecords
 
 /**
  * @author qmqz
  */
-
 @Initializable
 class SirsalBankerDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
 
-        if (player.inventory.contains(Items.SEAL_OF_PASSAGE_9083, 1) || player.equipment.contains(Items.SEAL_OF_PASSAGE_9083, 1)) {
+        if (hasSealOfPassage(player)) {
             npc(FacialExpression.FRIENDLY, "Good day, how may I help you?").also { stage = 0 }
         } else {
             player(FacialExpression.FRIENDLY, "Hi, I...").also { stage = 2 }

@@ -116,6 +116,7 @@ object ServerConfigParser {
         ServerConstants.RULES_AND_INFO_ENABLED = data.getBoolean("world.show_rules", true)
         ServerConstants.BOTS_INFLUENCE_PRICE_INDEX = data.getBoolean("world.bots_influence_ge_price", true)
         ServerConstants.REVENANT_POPULATION = data.getLong("world.revenant_population", 30L).toInt()
+        ServerConstants.BANK_BOOTH_QUICK_OPEN = data.getBoolean("world.bank_booth_quick_open", false)
         ServerConstants.DISCORD_GE_WEBHOOK = data.getString("server.discord_webhook", "")
     }
 

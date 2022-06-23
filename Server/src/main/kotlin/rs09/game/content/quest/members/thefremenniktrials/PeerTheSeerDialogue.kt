@@ -239,7 +239,7 @@ class PeerTheSeerDialogue(player: Player? = null) : DialoguePlugin(player) {
                 3 -> playerl(FacialExpression.HAPPY,"Nothing really, I just stopped by to say hello").also { stage = 160 }
             }
             202 -> npcl(FacialExpression.HAPPY,"Of course, ${player.getAttribute("fremennikname","dingle")}. I am always happy to aid those who have earned the right to wear Fremennik sea boots.").also {
-                BankingPlugin.BankDepositInterface()
+                player.bank.openDepositBox()
                 stage = 1000
             }
 

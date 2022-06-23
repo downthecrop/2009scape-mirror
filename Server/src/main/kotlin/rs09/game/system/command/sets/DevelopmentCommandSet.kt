@@ -38,6 +38,10 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             }
         }
 
+        define("region") {player, args ->
+            sendMessage(player, "Region ID: ${player.viewport.region.regionId}")
+        }
+
         define("spellbook"){player, args ->
             if(args.size < 2){
                 reject(player,"Usage: ::spellbook [int]. 0 = MODERN, 1 = ANCIENTS, 2 = LUNARS")
