@@ -1,7 +1,6 @@
 package rs09.game.node.entity.combat
 
 import core.game.component.Component
-import core.game.container.Container
 import core.game.container.impl.EquipmentContainer
 import core.game.node.Node
 import core.game.node.entity.Entity
@@ -15,8 +14,12 @@ import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.prayer.PrayerType
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.summoning.familiar.Familiar
+import core.game.world.map.Direction
+import core.game.world.map.Location
 import core.game.world.map.RegionManager
+import core.game.world.map.RegionManager.getClippingFlag
 import core.game.world.map.path.Pathfinder
+import core.game.world.map.path.Pathfinder.*
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import rs09.game.system.SystemLogger
@@ -207,6 +210,11 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
      * @return `True` if so.
      */
     open fun isAttackable(entity: Entity, victim: Entity): InteractionType? {
+        if (type == CombatStyle.MELEE) {
+            val stepType = canStepTowards(entity, victim)
+            if (stepType != InteractionType.STILL_INTERACT) return stepType
+        }
+
         val comp = entity.getAttribute("autocast_component",null) as Component?
         if((comp != null || type == CombatStyle.MAGIC) && (entity.properties.autocastSpell == null || entity.properties.autocastSpell.spellId == 0) && entity is Player){
             val weapEx = entity.getExtension<Any>(WeaponInterface::class.java) as WeaponInterface?
@@ -232,6 +240,74 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
         if (el.x >= vl.x && el.x < evl.x && el.y >= vl.y && el.y < evl.y || el.z != vl.z) {
             return InteractionType.NO_INTERACT
         }
+        return InteractionType.STILL_INTERACT
+    }
+
+    private fun canStepTowards(entity: Entity, victim: Entity): InteractionType {
+        val closestVictimTile = victim.getClosestOccupiedTile(entity.location)
+        val closestEntityTile = entity.getClosestOccupiedTile(closestVictimTile)
+        val dir = closestEntityTile.deriveDirection(closestVictimTile)
+            ?: return InteractionType.STILL_INTERACT //if we cannot derive a direction, it's because both tiles are the same, so hand off control to the main logic which already handles this case
+        var next = closestEntityTile
+
+        while (next.getDistance(closestVictimTile) > 3) { //skip the initial gap in distance if it exists, because standard pathfinding would already stop us before this point if something was between us and the NPC or vice versa
+            next = next.transform(dir)
+        }
+
+        var result: InteractionType = InteractionType.STILL_INTERACT
+        val maxIterations = next.getDistance(closestVictimTile).toInt()
+        for (i in 0..maxIterations) { //step towards the target tile, checking if anything would obstruct us on the way, and immediately breaking + returning if it does.
+            next = next.transform(dir)
+            result = checkStepInterval(dir, next)
+            if (result == InteractionType.NO_INTERACT) break
+        }
+
+
+        return result
+    }
+
+    private fun checkStepInterval(
+        dir: Direction,
+        next: Location
+    ): InteractionType {
+        val components = next.getStepComponents(dir)
+
+        when (dir) {
+            Direction.NORTH -> if (getClippingFlag(next) and PREVENT_NORTH != 0) return InteractionType.NO_INTERACT
+            Direction.EAST  -> if (getClippingFlag(next) and PREVENT_EAST  != 0) return InteractionType.NO_INTERACT
+            Direction.SOUTH -> if (getClippingFlag(next) and PREVENT_SOUTH != 0) return InteractionType.NO_INTERACT
+            Direction.WEST  -> if (getClippingFlag(next) and PREVENT_WEST  != 0) return InteractionType.NO_INTERACT
+
+            Direction.NORTH_EAST -> {
+                if (getClippingFlag(components[0]) and PREVENT_EAST != 0
+                    || getClippingFlag(components[1]) and PREVENT_NORTH != 0
+                    || getClippingFlag(next) and PREVENT_NORTHEAST != 0
+                ) return InteractionType.NO_INTERACT
+            }
+
+            Direction.NORTH_WEST -> {
+                if (getClippingFlag(components[0]) and PREVENT_WEST != 0
+                    || getClippingFlag(components[1]) and PREVENT_NORTH != 0
+                    || getClippingFlag(next) and PREVENT_NORTHWEST != 0
+                ) return InteractionType.NO_INTERACT
+            }
+
+            Direction.SOUTH_EAST -> {
+                if (getClippingFlag(components[0]) and PREVENT_EAST != 0
+                    || getClippingFlag(components[1]) and PREVENT_SOUTH != 0
+                    || getClippingFlag(next) and PREVENT_SOUTHEAST != 0
+                ) return InteractionType.NO_INTERACT
+            }
+
+            Direction.SOUTH_WEST -> {
+                if (getClippingFlag(components[0]) and PREVENT_WEST != 0
+                    || getClippingFlag(components[1]) and PREVENT_SOUTH != 0
+                    || getClippingFlag(next) and PREVENT_SOUTHWEST != 0
+                ) return InteractionType.NO_INTERACT
+            }
+
+        }
+
         return InteractionType.STILL_INTERACT
     }
 

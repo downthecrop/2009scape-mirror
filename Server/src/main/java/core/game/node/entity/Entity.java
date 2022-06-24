@@ -20,6 +20,9 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.entity.state.EntityState;
 import core.game.node.entity.state.StateManager;
 import core.game.system.task.Pulse;
+import core.game.world.map.zone.ZoneBorders;
+import org.jetbrains.annotations.NotNull;
+import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.Viewport;
@@ -33,6 +36,7 @@ import rs09.game.world.update.UpdateMasks;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -780,10 +784,6 @@ public abstract class Entity extends Node {
 		attributes.setAttribute(key, value);
 	}
 
-	public void setExpirableAttribute(String key, Object value, Long timeToLive){
-		attributes.setExpirableAttribute(key,value,timeToLive);
-	}
-
 	/**
 	 * Gets an attribute.
 	 * @param key The attribute name.
@@ -938,4 +938,34 @@ public abstract class Entity extends Node {
 		this.invisible = invisible;
 	}
 
+    public Location getClosestOccupiedTile(@NotNull Location other) {
+		List<Location> occupied = getOccupiedTiles();
+
+		Location closest = location;
+		if (occupied.size() > 1) {
+			double lowest = 9999;
+			for (Location tile : occupied) {
+				double dist = tile.getDistance(other);
+				if (dist < lowest) {
+					lowest = dist;
+					closest = tile;
+				}
+			}
+		}
+
+		return closest;
+    }
+
+	public List<Location> getOccupiedTiles() {
+		ArrayList<Location> occupied = new ArrayList<>();
+
+		Location northEast = location.transform(size, size, 0);
+
+		for (int x = location.getX(); x < northEast.getX(); x++) {
+			for (int y = location.getY(); y < northEast.getY(); y++) {
+				occupied.add(Location.create(x, y, location.getZ()));
+			}
+		}
+		return occupied;
+	}
 }

@@ -24,7 +24,9 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.path.Pathfinder
 import core.game.world.update.flag.context.Animation
+import core.game.world.update.flag.context.ChatMessage
 import core.game.world.update.flag.context.Graphics
+import core.game.world.update.flag.player.ChatFlag
 import core.tools.RandomFunction
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -97,6 +99,11 @@ class ScriptAPI(private val bot: Player) {
             }
         }
         return entity
+    }
+
+    fun sendChat(message: String) {
+        bot.sendChat(message)
+        bot.updateMasks.register(ChatFlag(ChatMessage(bot, message, 0, 0)))
     }
 
     /**
@@ -422,7 +429,10 @@ class ScriptAPI(private val bot: Player) {
      * A function for teleporting the bot to the GE
      * @author Ceikry
      */
-    fun teleportToGE(){
+    fun teleportToGE() : Boolean{
+        if (bot.isTeleBlocked) {
+            return false
+        }
         bot.lock()
         bot.visualize(ANIMATIONUP, GRAPHICSUP)
         bot.impactHandler.disabledTicks = 4
@@ -435,6 +445,7 @@ class ScriptAPI(private val bot: Player) {
                 return true
             }
         })
+        return true
     }
 
     /**
@@ -548,7 +559,10 @@ class ScriptAPI(private val bot: Player) {
      * @param loc the location to teleport to
      * @author Ceikry
      */
-    fun teleport(loc: Location){
+    fun teleport(loc: Location) : Boolean {
+        if (bot.isTeleBlocked) {
+            return false
+        }
         bot.lock()
         bot.visualize(ANIMATIONUP, GRAPHICSUP)
         bot.impactHandler.disabledTicks = 4
@@ -561,6 +575,7 @@ class ScriptAPI(private val bot: Player) {
                 return true
             }
         })
+        return true
     }
 
     /**

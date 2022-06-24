@@ -9,6 +9,15 @@ import core.game.world.map.RegionManager;
 import rs09.game.world.map.path.SmartPathfinder;
 
 public abstract class Pathfinder {
+	public static final int PREVENT_NORTH = 0x12c0120;
+	public static final int PREVENT_EAST = 0x12c0180;
+	public static final int PREVENT_NORTHEAST = 0x12c01e0;
+	public static final int PREVENT_SOUTH = 0x12c0102;
+	public static final int PREVENT_SOUTHEAST = 0x12c0183;
+	public static final int PREVENT_WEST = 0x12c0108;
+	public static final int PREVENT_SOUTHWEST = 0x12c010e;
+	public static final int PREVENT_NORTHWEST = 0x12c0138;
+
 
 	/**
 	 * The smart path finder.

@@ -125,14 +125,11 @@ public class Component {
 	 * @param c The component.
 	 */
 	public static void setUnclosable(Player p, Component c) {
-		p.setAttribute("close_c_", false);
+		p.setAttribute("close_c_", true);
 		c.setCloseEvent(new CloseEvent() {
 			@Override
 			public boolean close(Player player, Component c) {
-				if (!player.getAttribute("close_c_", false)) {
-					return false;
-				}
-				return true;
+				return !player.getAttribute("close_c_", false);
 			}
 		});
 	}

@@ -5,8 +5,11 @@ import core.game.node.Node;
 import core.game.world.map.path.Path;
 import core.game.world.map.path.Pathfinder;
 import core.tools.RandomFunction;
+import org.jetbrains.annotations.NotNull;
+import rs09.game.system.SystemLogger;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a location on the world map.
@@ -490,5 +493,46 @@ public final class Location extends Node {
 	 */
 	public void setZ(int z) {
 		this.z = z;
+	}
+
+	@NotNull
+	public List<Location> getStepComponents(Direction dir) {
+		List<Location> output = new ArrayList<>(2);
+		int stepX = dir.getStepX();
+		int stepY = dir.getStepY();
+
+		if (stepX != 0) output.add(transform(stepX, 0, 0));
+		if (stepY != 0) output.add(transform(0, stepY, 0));
+		return output;
+	}
+
+	public Direction deriveDirection(Location location) {
+		int diffX = location.x - this.x;
+		int diffY = location.y - this.y;
+
+		diffX = diffX >= 0 ? Math.min(diffX, 1) : -1;
+		diffY = diffY >= 0 ? Math.min(diffY, 1) : -1;
+
+		StringBuilder sb = new StringBuilder();
+
+		if (diffY != 0) {
+			if (diffY > 0) {
+				sb.append("NORTH");
+			} else {
+				sb.append("SOUTH");
+			}
+		}
+
+		if (diffX != 0) {
+			if (sb.length() > 0) sb.append("_");
+			if (diffX > 0) {
+				sb.append("EAST");
+			} else {
+				sb.append("WEST");
+			}
+		}
+
+		if (sb.length() == 0) return null;
+		return Direction.valueOf(sb.toString());
 	}
 }
