@@ -14,7 +14,6 @@ import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
-import rs09.tools.stringtools.RED
 
 class SeersHouseListeners : InteractionListener {
 

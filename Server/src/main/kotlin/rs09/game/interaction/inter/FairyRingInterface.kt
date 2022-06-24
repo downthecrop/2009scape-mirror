@@ -108,7 +108,10 @@ class FairyRingInterface : InterfaceListener{
         val ring2index = player.getAttribute("fr:ring2",0)
         val ring3index = player.getAttribute("fr:ring3",0)
         val code = "${RING_1[ring1index]}${RING_2[ring2index]}${RING_3[ring3index]}"
-        val ring: FairyRing? = FairyRing.valueOf(code.toUpperCase())
+        val ring: FairyRing? = try {
+            FairyRing.valueOf(code.uppercase())
+        } catch (e: Exception) { null }
+
         var tile = ring?.tile
         if(ring == FairyRing.CIP){
             sendDialogue(player, "The ring seems to reject you.")
