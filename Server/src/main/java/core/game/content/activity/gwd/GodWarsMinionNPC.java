@@ -41,6 +41,7 @@ public final class GodWarsMinionNPC extends AbstractNPC {
 	@Override
 	public void init() {
 		super.init();
+		getAggressiveHandler().setAllowTolerance(false);
 	}
 
 	@Override
