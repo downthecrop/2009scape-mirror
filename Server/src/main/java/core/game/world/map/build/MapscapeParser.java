@@ -60,6 +60,7 @@ public final class MapscapeParser {
 		for (int z = 0; z < 4; z++) {
 			for (int x = 0; x < 64; x++) {
 				for (int y = 0; y < 64; y++) {
+					r.getPlanes()[z].getFlags().flagEmptyTile(x,y);
 					if ((mapscape[z][x][y] & 0x1) == 1) {
 						int plane = z;
 						if ((mapscape[1][x][y] & 0x2) == 2) {

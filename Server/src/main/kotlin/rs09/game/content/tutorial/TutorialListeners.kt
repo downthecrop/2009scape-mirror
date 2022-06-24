@@ -5,9 +5,11 @@ import core.game.content.dialogue.FacialExpression
 import core.game.content.global.action.ClimbActionHandler
 import core.game.content.global.action.DoorActionHandler
 import core.game.node.scenery.Scenery
+import core.game.system.task.Pulse
 import core.game.world.map.Location
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.world.repository.Repository
 
 /**
  * Handles tutorial-specific node interactions
@@ -19,6 +21,7 @@ class TutorialListeners : InteractionListener {
     val COOKS_EXIT = 3018
     val QUEST_ENTER = 3019
     val QUEST_LADDER = 3029
+    val QUEST_EXIT_LADDER = 3028
     val COMBAT_EXIT = 3030
     val BANK_EXIT = 3024
     val FINANCE_EXIT = 3025
@@ -80,12 +83,28 @@ class TutorialListeners : InteractionListener {
         }
 
         on(QUEST_LADDER, SCENERY, "climb-down") {player, ladder ->
-            if(getAttribute(player, "tutorial:stage", 0) != 29)
+            if(getAttribute(player, "tutorial:stage", 0) < 29)
                 return@on true
 
-            setAttribute(player, "tutorial:stage", 30)
-            TutorialStage.load(player, 30)
+            if (getAttribute(player, "tutorial:stage", 0) == 29) {
+                setAttribute(player, "tutorial:stage", 30)
+                TutorialStage.load(player, 30)
+            }
             ClimbActionHandler.climbLadder(player, ladder.asScenery(), "climb-down")
+        }
+
+        on(QUEST_EXIT_LADDER, SCENERY, "climb-up") { player, ladder ->
+            ClimbActionHandler.climbLadder(player, ladder.asScenery(), "climb-up")
+
+            submitWorldPulse(object : Pulse(2) {
+                override fun pulse(): Boolean {
+                    val questTutor = Repository.findNPC(NPCs.QUEST_GUIDE_949) ?: return true
+                    sendChat(questTutor, "What are you doing, ${player.username}? Get back down the ladder.")
+                    return true
+                }
+            })
+
+            return@on true
         }
 
         on(COMBAT_GATES, SCENERY, "open"){player, gate ->

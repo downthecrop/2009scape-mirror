@@ -11,6 +11,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.prayer.PrayerType;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
+import rs09.game.ai.AIPlayer;
 import rs09.game.world.GameWorld;
 import core.game.world.map.zone.ZoneType;
 
@@ -144,7 +145,7 @@ public final class ImpactHandler {
 		if (disabledTicks > GameWorld.getTicks()) {
 			return null;
 		}
-		if (entity instanceof Player && !(entity.getAttribute("tutorial:complete",false))) {
+		if (entity instanceof Player && !(entity instanceof AIPlayer) && !(entity.getAttribute("tutorial:complete",false))) {
 			Impact impact = new Impact(source, 0, style, HitsplatType.MISS);
 			impactQueue.add(impact);
 			return impact;

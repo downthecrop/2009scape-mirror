@@ -193,9 +193,6 @@ public class RevenantNPC extends AbstractNPC {
 
 	@Override
 	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
-		if (entity.asPlayer().isArtificial()) {
-			return false;
-		}
 		if (entity instanceof Player) {
 			if (!checkCombatLevel(entity.asPlayer()) && !entity.asPlayer().isAdmin()) {
                 if(message) {

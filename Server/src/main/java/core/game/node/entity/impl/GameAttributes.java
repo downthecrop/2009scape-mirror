@@ -136,23 +136,12 @@ public final class GameAttributes {
 	 */
 	public void setAttribute(String key, Object value) {
 		if (key.startsWith("/save:")) {
-			key = key.substring(6, key.length());
+			key = key.substring(6);
 			if (!savedAttributes.contains(key)) {
 				savedAttributes.add(key);
 			}
 		}
 		attributes.put(key, value);
-	}
-
-	/**
-	 * Sets an inherently temporary (but saved cross-session) key.
-	 * @param key the key to set
-	 * @param value the value to assign to the key
-	 * @param timeToLive the time (in milliseconds) that the key will be valid for
-	 */
-	public void setExpirableAttribute(String key, Object value, Long timeToLive){
-		setAttribute(key,value);
-		keyExpirations.put(key,System.currentTimeMillis() + timeToLive);
 	}
 
 	/**
@@ -163,9 +152,6 @@ public final class GameAttributes {
 	@SuppressWarnings("unchecked")
 	public <T> T getAttribute(String key) {
 		key = key.replace("/save:","");
-		if (!attributes.containsKey(key)) {
-			return null;
-		}
 		return (T) attributes.get(key);
 	}
 
@@ -181,9 +167,6 @@ public final class GameAttributes {
 		Object object = attributes.get(string);
 		if (object != null) {
 			return (T) object;
-		}
-		if(keyExpirations.containsKey(string) && keyExpirations.get(string) < System.currentTimeMillis()){
-			return fail;
 		}
 		return fail;
 	}

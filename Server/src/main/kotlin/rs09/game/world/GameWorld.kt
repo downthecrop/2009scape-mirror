@@ -9,6 +9,7 @@ import core.game.system.SystemState
 import core.game.system.task.Pulse
 import core.game.system.task.TaskExecutor
 import core.game.world.map.Location
+import core.game.world.map.Region
 import core.game.world.map.RegionManager
 import core.plugin.CorePluginTypes.StartupPlugin
 import core.tools.RandomFunction
@@ -179,6 +180,12 @@ object GameWorld {
             SystemManager.flag(if (settings?.isDevMode == true) SystemState.PRIVATE else SystemState.ACTIVE)
         }
         SceneryDefinition.getDefinitions().values.forEach(Consumer { obj: SceneryDefinition -> obj.examine })
+
+        if (ServerConstants.PRELOAD_MAP) {
+            //force early loading of all commonly accessed regions to improve performance at the cost of memory usage
+            (7483..15420).forEach { id -> RegionManager.forId(id).also { Region.load(it) } }
+        }
+
         System.gc()
         SystemLogger.initTradeLogger()
     }

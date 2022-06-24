@@ -301,8 +301,8 @@ public class Region {
 			byte[][][] mapscapeData = new byte[4][SIZE][SIZE];
 			for (RegionPlane plane : r.planes) {
 				plane.getFlags().setLandscape(new boolean[SIZE][SIZE]);
-				plane.getFlags().setClippingFlags(new int[SIZE][SIZE]);
-				plane.getProjectileFlags().setClippingFlags(new int[SIZE][SIZE]);
+				//plane.getFlags().setClippingFlags(new int[SIZE][SIZE]);
+				//plane.getProjectileFlags().setClippingFlags(new int[SIZE][SIZE]);
 			}
 			if (mapscapeId > -1) {
 				ByteBuffer mapscape = ByteBuffer.wrap(Cache.getIndexes()[5].getCacheFile().getContainerUnpackedData(mapscapeId));

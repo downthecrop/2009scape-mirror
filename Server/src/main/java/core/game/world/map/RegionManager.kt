@@ -11,6 +11,7 @@ import rs09.game.system.SystemLogger
 import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.locks.ReentrantLock
+import kotlin.collections.HashMap
 
 /**
  * Manages the regions.
@@ -21,6 +22,8 @@ object RegionManager {
      * The region cache mapping.
      */
     private val REGION_CACHE: MutableMap<Int, Region> = HashMap()
+    @JvmStatic val CLIPPING_FLAGS = HashMap<Int, Array<Int>>()
+    @JvmStatic val PROJECTILE_FLAGS = HashMap<Int, Array<Int>>()
 
     public val LOCK = ReentrantLock()
 
@@ -80,16 +83,50 @@ object RegionManager {
      */
     @JvmStatic
     fun getClippingFlag(z: Int, x: Int, y: Int): Int {
-        var x = x
-        var y = y
-        val region = forId(((x shr 6) shl 8) or (y shr 6))
-        Region.load(region)
-        if (!region.isHasFlags) {
-            return -1
+        val regionX = x shr 6
+        val regionY = y shr 6
+        val localX = x and 63
+        val localY = y and 63
+        return getClippingFlag(z, regionX, regionY, localX, localY)
+    }
+
+    /**
+     * Gets the clipping flags using Jagex-style coords
+     * e.g 0_50_50_13_13 gets plane 0, region 50-50 (12850), (13, 13) which is in lumbridge.
+     */
+    @JvmStatic
+    fun getClippingFlag(z: Int, regionX: Int, regionY: Int, localX: Int, localY: Int, projectile: Boolean = false) : Int {
+        val (region, index) = getFlagIndex(z, regionX, regionY, localX, localY)
+        var flag = getFlags(region, projectile)[index]
+
+        if (flag == -1) {
+            val r = forId((regionX shr 8) or regionY)
+            if (!r.isLoaded)
+                Region.load(r)
+            if (!r.isHasFlags)
+                return -1
+            flag = getFlags(region, projectile)[index]
         }
-        x -= (x shr 6) shl 6
-        y -= (y shr 6) shl 6
-        return region.planes[z].flags.clippingFlags[x][y]
+
+        return flag
+    }
+
+    private fun getFlagIndex(z: Int, regionX: Int, regionY: Int, localX: Int, localY: Int) : Pair<Int,Int> {
+        return Pair((regionX shl 8) or regionY, (z * 64 * 64) + (localX * 64) + localY)
+    }
+
+    @JvmStatic
+    fun getFlags(regionX: Int, regionY: Int, projectile: Boolean) : Array<Int> {
+        val region = (regionX shl 8) or regionY
+        return getFlags(region, projectile)
+    }
+
+    @JvmStatic
+    fun getFlags(regionId: Int, projectile: Boolean) : Array<Int> {
+        return if (projectile)
+            PROJECTILE_FLAGS.getOrPut (regionId) {Array(16384){0}}
+        else
+            CLIPPING_FLAGS.getOrPut (regionId) {Array(16384){-1}}
     }
 
     /**
@@ -134,26 +171,6 @@ object RegionManager {
         x -= x shr 6 shl 6
         y -= y shr 6 shl 6
         return region.planes[z].flags.landscape[x][y]
-    }
-
-    /**
-     * Sets the clipping flag on the given location.
-     * @param l The location.
-     * @param flag The flag to set.
-     */
-    @JvmStatic
-    fun setClippingFlag(l: Location, flag: Int) {
-        var x = l.x
-        var y = l.y
-        val z = l.z
-        val region = forId(((x shr 6) shl 8) or (y shr 6))
-        Region.load(region)
-        if (!region.isHasFlags) {
-            return
-        }
-        x -= x shr 6 shl 6
-        y -= y shr 6 shl 6
-        region.planes[z].flags.clippingFlags[x][y] = flag
     }
 
     /**
@@ -217,16 +234,11 @@ object RegionManager {
      */
     @JvmStatic
     fun getProjectileFlag(z: Int, x: Int, y: Int): Int {
-        var x = x
-        var y = y
-        val region = forId(((x shr 6) shl 8) or (y shr 6))
-        Region.load(region)
-        if (!region.isHasFlags) {
-            return -1
-        }
-        x -= (x shr 6) shl 6
-        y -= (y shr 6) shl 6
-        return region.planes[z].projectileFlags.clippingFlags[x][y]
+        val regionX = x shr 6
+        val regionY = y shr 6
+        val localX = x and 63
+        val localY = y and 63
+        return getClippingFlag(z, regionX, regionY, localX, localY, true)
     }
 
     /**

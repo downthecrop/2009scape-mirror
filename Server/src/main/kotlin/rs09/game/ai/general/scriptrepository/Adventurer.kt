@@ -457,8 +457,7 @@ class Adventurer(val style: CombatStyle): Script() {
             .replace("@name", localPlayer.username)
             .replace("@timer", until.toString())
 
-        bot.sendChat(chat)
-        bot.updateMasks.register(ChatFlag(ChatMessage(bot, chat, 0, 0)))
+        scriptAPI.sendChat(chat)
     }
 
     enum class State{

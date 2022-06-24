@@ -194,7 +194,7 @@ public class RegionChunk {
 				copy[x][y] = objects[x][y];
 				staticCopy[x][y] = plane.getObjects()[baseX + x][baseY + y];
 				objects[x][y] = plane.getObjects()[baseX + x][baseY + y] = null;
-				plane.getFlags().getClippingFlags()[baseX + x][baseY + y] = 0;
+				plane.getFlags().clearFlag(baseX + x, baseY + y);
 			}
 		}
 		rotation = direction.toInteger();

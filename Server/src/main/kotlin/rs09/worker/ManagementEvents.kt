@@ -30,6 +30,8 @@ import proto.management.SendClanInfo
 import proto.management.SendClanInfo.ClanMember
 import proto.management.SendContactInfo
 import proto.management.SendContactInfo.Contact
+import rs09.ServerConstants
+import rs09.auth.UserAccountInfo
 import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
@@ -262,40 +264,29 @@ object ManagementEvents {
 
             is SendClanInfo -> {
                 if (event.hasInfo) {
-                    val clan = ClanRepository.getClans().getOrPut(event.clanOwner) { ClanRepository(event.clanOwner) }
-                    clan.name = event.clanName
-                    clan.joinRequirement = ClanRank.values()[event.joinRequirement]
-                    clan.kickRequirement = ClanRank.values()[event.kickRequirement]
-                    clan.messageRequirement = ClanRank.values()[event.messageRequirement]
-                    clan.lootRequirement = ClanRank.values()[event.lootRequirement]
-
-                    for (member in event.membersList) {
-                        val entry = ClanEntry(member.username, member.world)
-                        clan.ranks[member.username] = ClanRank.values()[member.rank]
-                        if (member.world == GameWorld.settings!!.worldId) {
-                            val p = Repository.getPlayerByName(member.username)
-                            entry.player = p
-                            p?.communication?.clan = clan
-                        }
-                        clan.players.add(entry)
-                    }
-
-                    clan.update()
+                    initializeClanFrom(event)
                 } else {
-                    val info = GameWorld.accountStorage.getAccountInfo(event.clanOwner)
+                    var info = GameWorld.accountStorage.getAccountInfo(event.clanOwner)
                     if (info.clanName.isNotEmpty()) {
-                        val reqs = CommunicationInfo.parseClanRequirements(info.clanReqs)
-                        val c = ClanRepository(event.clanOwner)
-                        val contacts = CommunicationInfo.parseContacts(info.contacts)
-                        c.name = info.clanName
-                        c.joinRequirement = reqs[0]
-                        c.messageRequirement = reqs[1]
-                        c.kickRequirement = reqs[2]
-                        c.lootRequirement = reqs[3]
-                        for ((username, contact) in contacts) {
-                            c.ranks[username] = contact.rank
+                        initializeClanWith(info)
+                    } else {
+                        SystemLogger.logMS("Creating default server clan")
+                        if (GameWorld.settings!!.enable_default_clan && event.clanOwner == ServerConstants.SERVER_NAME) {
+                            //Create a user with the default clan and some basic settings and stick them in the account storage
+                            if (info == UserAccountInfo.createDefault()) {
+                                info.username = ServerConstants.SERVER_NAME
+                                info.password = ServerConstants.MS_SECRET_KEY
+                                info.rights = 2
+                                SystemLogger.logAlert("Creating default server account: ${info.username}, password is your MS_SECRET_KEY!")
+                                GameWorld.authenticator.createAccountWith(info)
+                                info = GameWorld.accountStorage.getAccountInfo(event.clanOwner)
+                            }
+
+                            info.clanName = "Global"
+                            info.clanReqs = "-1,-1,7,7" //Any join, any message, owner kick, owner loot
+                            GameWorld.accountStorage.update(info)
+                            initializeClanWith(info)
                         }
-                        ClanRepository.getClans()[event.clanOwner] = c
                     }
                 }
 
@@ -323,7 +314,44 @@ object ManagementEvents {
 
         }
     }
-    
+
+    private fun initializeClanFrom(event: SendClanInfo) {
+        val clan = ClanRepository.getClans().getOrPut(event.clanOwner) { ClanRepository(event.clanOwner) }
+        clan.name = event.clanName
+        clan.joinRequirement = ClanRank.values()[event.joinRequirement]
+        clan.kickRequirement = ClanRank.values()[event.kickRequirement]
+        clan.messageRequirement = ClanRank.values()[event.messageRequirement]
+        clan.lootRequirement = ClanRank.values()[event.lootRequirement]
+
+        for (member in event.membersList) {
+            val entry = ClanEntry(member.username, member.world)
+            clan.ranks[member.username] = ClanRank.values()[member.rank]
+            if (member.world == GameWorld.settings!!.worldId) {
+                val p = Repository.getPlayerByName(member.username)
+                entry.player = p
+                p?.communication?.clan = clan
+            }
+            clan.players.add(entry)
+        }
+
+        clan.update()
+    }
+
+    private fun initializeClanWith(info: UserAccountInfo) {
+        val reqs = CommunicationInfo.parseClanRequirements(info.clanReqs)
+        val c = ClanRepository(info.username)
+        val contacts = CommunicationInfo.parseContacts(info.contacts)
+        c.name = info.clanName
+        c.joinRequirement = reqs[0]
+        c.messageRequirement = reqs[1]
+        c.kickRequirement = reqs[2]
+        c.lootRequirement = reqs[3]
+        for ((username, contact) in contacts) {
+            c.ranks[username] = contact.rank
+        }
+        ClanRepository.getClans()[info.username] = c
+    }
+
     private fun queueUntilClanInfo(clanName: String, message: Message) {
         val queue = waitingOnClanInfo.getOrPut(clanName) {LinkedList()}
         queue.offer(message)

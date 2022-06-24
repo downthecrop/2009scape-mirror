@@ -8,6 +8,7 @@ import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.combat.InteractionType
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
+import core.game.node.entity.skill.prayer.BoneBuryingOptionPlugin
 import core.game.node.entity.state.EntityState
 import core.game.node.item.Item
 import core.game.system.task.Pulse
@@ -15,6 +16,7 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.impl.WildernessZone
+import core.tools.RandomFunction
 import org.rs09.consts.Items
 import rs09.game.ai.AIRepository
 import rs09.game.ai.pvmbots.CombatBotAssembler
@@ -25,16 +27,24 @@ import rs09.game.node.entity.combat.handlers.RangeSwingHandler
 import kotlin.random.Random
 
 /**
- * A bot script for killing green dragons in the wilderness.. Capable of banking, selling on ge, buying on ge, eating and more.
+ * A bot script for killing green dragons in the wilderness.. Capable of banking, selling on ge, eating, trash talking, buries bones when fleeing and more.
  * @param style The combat style the bot is going to use.
  * @param area (optional) What area the bot tries to kill dragons in.
  * @author Ceikry
  */
 class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Script() {
-    var state = State.KILLING
+    companion object {
+        val westDragons = ZoneBorders(2971,3606,2991,3628)
+        val wildernessLine = ZoneBorders(3078,3523,3096,3523)
+        val edgevilleLine = ZoneBorders(3078,3520,3096,3520)
+        val bankZone = ZoneBorders(3092,3489,3094,3493)
+        val trashTalkLines = arrayOf("Bro, seriously?", "Ffs.", "Jesus christ.", "????", "Friendly!", "Get a life dude", "Do you mind??? lol", "Lol.", "Kek.", "One sec burying all the bones.", "Yikes.", "Yeet", "Ah shit, here we go again.", "Cmonnnn", "Plz", "Do you have nothing better to do?", "Cmon bro pls", "I just need to get my prayer up bro jesus", "Reeeeeee", "I cant believe you've done this", "Really m8", "Zomg", "Aaaaaaaaaaaaaaaaaaaaa", "Rofl.", "Oh god oh fuck oh shit", "....", ":|", "A q p", "Hcim btw", "I hope the revenants kill your mum", "Wrap your ass titties", "Why do this", "Bruh", "Straight sussin no cap fr fr", "This ain't bussin dawg", "Really bro?")
+    }
+    var state = State.TO_BANK
     var handler: CombatSwingHandler? = null
     var lootDelay = 0
     var offerMade = false
+    var trashTalkDelay = 0
 
     var food = if (Random.nextBoolean()){
         Items.LOBSTER_379
@@ -45,27 +55,17 @@ class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Scr
     }
 
     var myBorders: ZoneBorders? = null
-    val type = when(style){
-        CombatStyle.MELEE -> CombatBotAssembler.Type.MELEE
-        CombatStyle.MAGIC -> CombatBotAssembler.Type.MAGE
-        CombatStyle.RANGE -> CombatBotAssembler.Type.RANGE
-    }
+    val type = CombatBotAssembler.Type.MELEE
 
-    val westDragons = ZoneBorders(2971,3606,2991,3628)
-    val wildernessLine = ZoneBorders(3078,3523,3096,3523)
-    val edgevilleLine = ZoneBorders(3078,3520,3096,3520)
-    val bankZone = ZoneBorders(3092,3489,3094,3493)
     override fun tick() {
         if(!bot.isActive){
             running = false
             return
         }
-        if(bot.inventory.getAmount(food) < 3 && state == State.KILLING)
-            state = State.TO_BANK
-        scriptAPI.eat(food)
+
+        checkFoodStockAndEat()
+
         when(state){
-
-
 
             State.KILLING -> {
                 bot.properties.combatPulse.temporaryHandler = handler
@@ -86,11 +86,13 @@ class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Scr
                 if(players.isEmpty()){
                     state = State.TO_DRAGONS
                 } else {
-                    if(bot.skullManager.level < 21 && bot.stateManager.get(EntityState.TELEBLOCK) != null){
-                        scriptAPI.teleportToGE()
-                        state = State.REFRESHING
+                    if(bot.skullManager.level < 21){
+                        if (scriptAPI.teleportToGE())
+                            state = State.REFRESHING
                         return
                     }
+                    sendTrashTalk()
+                    attemptToBuryBone()
                     scriptAPI.walkTo(WildernessZone.getInstance().borders.random().randomLoc)
                 }
             }
@@ -107,7 +109,7 @@ class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Scr
                     }
                     return
                 }
-                items.forEach {it: Item -> scriptAPI.takeNearestGroundItem(it.id)}
+                items.toTypedArray().forEach {it: Item -> scriptAPI.takeNearestGroundItem(it.id)}
             }
 
             State.TO_BANK -> {
@@ -157,25 +159,10 @@ class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Scr
             }
 
             State.BUYING_FOOD -> {
-                    if(!offerMade)
-                    {
-                        scriptAPI.buyFromGE(bot, food, 100)
-                        offerMade = true
-                    } else
-                    {
-                        val offer = AIRepository.getOffer(bot)
-                        if (offer == null) {
-                            offerMade = false
-                        } else {
-                            if (offer.completedAmount == offer.amount) {
-                                state = State.TO_DRAGONS
-                                offer.offerState = OfferState.REMOVED
-                                bot.bank.add(Item(offer.itemID, offer.completedAmount))
-                                bot.bank.refresh()
-                                scriptAPI.withdraw(food, 10)
-                            }
-                        }
-                    }
+                state = State.TO_DRAGONS
+                bot.bank.add(Item(food,50))
+                bot.bank.refresh()
+                scriptAPI.withdraw(food, 10)
             }
 
             State.TO_DRAGONS -> {
@@ -236,13 +223,29 @@ class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Scr
         }
     }
 
+    private fun attemptToBuryBone() {
+        if (bot.inventory.containsAtLeastOneItem(Items.DRAGON_BONES_536)) {
+            BoneBuryingOptionPlugin().handle(bot, bot.inventory.get(Item(Items.DRAGON_BONES_536)), "bury")
+        }
+    }
+
+    private fun checkFoodStockAndEat() {
+        if (bot.inventory.getAmount(food) < 3 && state == State.KILLING)
+            state = State.TO_BANK
+        scriptAPI.eat(food)
+    }
+
+    private fun sendTrashTalk() {
+        if (trashTalkDelay-- == 0)
+            scriptAPI.sendChat(trashTalkLines.random())
+        else
+            trashTalkDelay = RandomFunction.random(10, 30)
+    }
+
     override fun newInstance(): Script {
         val script = GreenDragonKiller(style)
-        val tier = CombatBotAssembler.Tier.HIGH
-        if(type == CombatBotAssembler.Type.RANGE)
-            script.bot = CombatBotAssembler().assembleRangeDragonBot(tier,bot.startLocation)
-        else
-            script.bot = CombatBotAssembler().assembleMeleeDragonBot(tier, bot.startLocation)
+        val tier = CombatBotAssembler.Tier.MED
+        script.bot = CombatBotAssembler().assembleMeleeDragonBot(tier, bot.startLocation)
         return script
     }
 
@@ -262,11 +265,7 @@ class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Scr
     }
 
     init {
-        handler = when(style){
-            CombatStyle.MELEE -> MeleeSwinger(this)
-            CombatStyle.MAGIC -> MageSwinger(this)
-            CombatStyle.RANGE -> RangeSwinger(this)
-        }
+        handler = MeleeSwinger(this)
         equipment.add(Item(Items.ANTI_DRAGON_SHIELD_1540))
         myBorders = westDragons
         skills[Skills.AGILITY] = 99
@@ -276,22 +275,10 @@ class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Scr
 
     internal class MeleeSwinger(val script: GreenDragonKiller) : MeleeSwingHandler() {
         override fun canSwing(entity: Entity, victim: Entity): InteractionType? {
-            if(script.state == State.TO_BANK) {script.bot.pulseManager.current.stop()}
-            if(victim is Player) {script.state = State.RUNNING; script.bot.pulseManager.current.stop()}
-            return super.canSwing(entity, victim)
-        }
-    }
-
-    internal class MageSwinger(val script: GreenDragonKiller) : MagicSwingHandler() {
-        override fun canSwing(entity: Entity, victim: Entity): InteractionType? {
-            if(victim is Player) {script.state = State.RUNNING; script.bot.pulseManager.current.stop()}
-            return super.canSwing(entity, victim)
-        }
-    }
-
-    internal class RangeSwinger(val script: GreenDragonKiller) : RangeSwingHandler() {
-        override fun canSwing(entity: Entity, victim: Entity): InteractionType? {
-            if(victim is Player) {script.state = State.RUNNING; script.bot.pulseManager.current.stop()}
+            if(victim is Player || victim.name.contains("revenant", ignoreCase = true)) {
+                script.state = State.RUNNING
+                script.bot.pulseManager.current.stop()
+            }
             return super.canSwing(entity, victim)
         }
     }
