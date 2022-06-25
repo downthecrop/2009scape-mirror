@@ -19,6 +19,7 @@ import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Components
 import org.rs09.consts.Items
 import rs09.game.node.entity.skill.farming.FarmingPatch
+import rs09.game.node.entity.skill.magic.LunarListeners.JewelleryString.Companion.productOfString
 import rs09.game.node.entity.skill.magic.spellconsts.Lunar
 import rs09.game.system.config.NPCConfigParser
 
@@ -161,6 +162,12 @@ class LunarListeners : SpellListener("lunar") {
             requires(player, 86, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.NATURE_RUNE_561, 1), Item(Items.EARTH_RUNE_557, 15)))
             plankMake(player, node!!.asItem())
         }
+
+        onCast(Lunar.STRING_JEWELLERY, ITEM) { player, node ->
+            requires(player, 80, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.EARTH_RUNE_557, 10), Item(Items.WATER_RUNE_555, 5)))
+
+
+        }
     }
 
     private fun plankMake(player: Player, item: Item) {
@@ -263,7 +270,7 @@ class LunarListeners : SpellListener("lunar") {
         for(item in player.inventory.toArray()){
             if(item == null) continue
             val pie = CookableItems.forId(item.id) ?: continue
-            if(!pie.name.toLowerCase().contains("pie")) continue
+            if(!pie.name.lowercase().contains("pie")) continue
             if(player.skills.getLevel(Skills.COOKING) < pie.level) continue
             playerPies.add(item)
         }
@@ -318,5 +325,48 @@ class LunarListeners : SpellListener("lunar") {
             it.packetDispatch.sendString(destName,Components.TELEPORT_OTHER_326,3)
         }
         sendTeleport(player,xp,loc)
+    }
+
+    private fun stringJewellery(player: Player, item : Item) {
+        val playerJewellery = ArrayList<Item>()
+        for(item in player.inventory.toArray()){
+            if(item == null) continue
+            if(!productOfString.containsValue(item.id)) continue
+            playerJewellery.add(item)
+        }
+
+        player.pulseManager.run(object : Pulse(){
+            var counter = 0
+            override fun pulse(): Boolean {
+                if(playerJewellery.isEmpty()) return true
+                if(counter == 0) delay = BAKE_PIE_ANIM.definition.durationTicks + 1
+                val item = playerJewellery.get(0)
+                val pie = CookableItems.forId(item.id)
+                visualizeSpell(player, BAKE_PIE_ANIM, BAKE_PIE_GFX, 2879)
+                addXP(player,60.0)
+                player.skills.addExperience(Skills.COOKING,pie.experience)
+                setDelay(player,false)
+                player.inventory.remove(item)
+                player.inventory.add(Item())
+                playerJewellery.remove(item)
+                if(playerJewellery.isNotEmpty()) removeRunes(player,false) else removeRunes(player,true)
+                return false
+            }
+        })
+    }
+
+    private enum class JewelleryString(val unstrung : Int, val strung : Int) {
+        GOLD(Items.GOLD_AMULET_1673, Items.GOLD_AMULET_1692),
+        SAPPHIRE(Items.SAPPHIRE_AMULET_1675, Items.SAPPHIRE_AMULET_1694),
+        EMERALD(Items.EMERALD_AMULET_1677, Items.EMERALD_AMULET_1696),
+        RUBY(Items.RUBY_AMULET_1679, Items.RUBY_AMULET_1698),
+        DIAMOND(Items.DIAMOND_AMULET_1681, Items.DIAMOND_AMULET_1700),
+        DRAGONSTONE(Items.DRAGONSTONE_AMMY_1683, Items.DRAGONSTONE_AMMY_1702),
+        ONYX(Items.ONYX_AMULET_6579, Items.ONYX_AMULET_6581),
+        HOLY(Items.UNSTRUNG_SYMBOL_1714, Items.UNBLESSED_SYMBOL_1716),
+        UNHOLY(Items.UNSTRUNG_EMBLEM_1720, Items.UNPOWERED_SYMBOL_1722);
+        companion object {
+            val productOfString = JewelleryString.values().map { it.unstrung to it.strung }.toMap()
+        }
     }
 }
