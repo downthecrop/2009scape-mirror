@@ -4,6 +4,7 @@ import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.diary.DiaryType
 import core.plugin.Initializable
 import rs09.tools.END_DIALOGUE
 
@@ -49,7 +50,7 @@ class OttoGodblessedDialogue(player: Player? = null) : DialoguePlugin(player) {
             25 -> npc("Look, just... grab the pole under my bed","and go click on that fishing spot.").also { stage++ }
             26 -> player(FacialExpression.ASKING,"...click?").also { stage++ }
             27 -> npc(FacialExpression.FURIOUS, "JUST GO DO IT!").also { stage++; player.setAttribute("/save:barbtraining:fishing",true) }
-            28 -> end()
+            28 -> end().also { player.achievementDiaryManager.finishTask(player, DiaryType.FREMENNIK,0,4) }
         }
         return true
     }
