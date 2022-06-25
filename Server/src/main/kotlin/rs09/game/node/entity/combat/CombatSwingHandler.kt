@@ -256,7 +256,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
 
         var result: InteractionType = InteractionType.STILL_INTERACT
         val maxIterations = next.getDistance(closestVictimTile).toInt()
-        for (i in 0..maxIterations) { //step towards the target tile, checking if anything would obstruct us on the way, and immediately breaking + returning if it does.
+        for (i in 0 until maxIterations) { //step towards the target tile, checking if anything would obstruct us on the way, and immediately breaking + returning if it does.
             next = next.transform(dir)
             result = checkStepInterval(dir, next)
             if (result == InteractionType.NO_INTERACT) break
