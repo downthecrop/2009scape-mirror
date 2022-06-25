@@ -26,11 +26,15 @@ class DiaryEventHook : LoginListener, Commands {
         player.hook(Event.Interaction, DiaryInteractionEvents)
         player.hook(Event.InterfaceOpened, DiaryInterfaceOpenEvents)
         player.hook(Event.InterfaceClosed, DiaryInterfaceCloseEvents)
+        player.hook(Event.PickedUp, DiaryPickupEvents)
     }
 
     companion object {
         private fun finishTask(entity: Player, diary: DiaryType, index: Int, task: Int) {
             entity.achievementDiaryManager.finishTask(entity, diary, index, task)
+        }
+        private fun taskCompleted(entity: Player, diary: DiaryType,index: Int,task: Int): Boolean {
+            return entity.achievementDiaryManager.hasCompletedTask(diary,index,task)
         }
     }
 
@@ -78,6 +82,8 @@ class DiaryEventHook : LoginListener, Commands {
                     24350, 24361 -> if (regionId == 12854) finishTask(entity, DiaryType.VARROCK, 0, 18)
                     in 115..122 -> if (event.option == "burst") finishTask(entity, DiaryType.FALADOR, 0, 12)
                     16149 -> finishTask(entity, DiaryType.VARROCK, 0, 4)
+                    29944 -> if(regionId == 10552 && event.option == "renew-points") finishTask(entity, DiaryType.FREMENNIK,0,8)
+                    //18137 -> if(regionId == 10810 && event.option == "examine") finishTask(entity, DiaryType.FREMENNIK,0,2)
                     //2112 -> if()
                 }
         }
@@ -101,11 +107,63 @@ class DiaryEventHook : LoginListener, Commands {
         }
     }
 
+    private object DiaryPickupEvents : EventHook<PickUpEvent>
+    {
+        override fun process(entity: Entity, event: PickUpEvent) {
+            if(entity !is Player) return
+            val regionId = entity.viewport.region.id
+
+            val Karamja = intArrayOf(10801,10802,11053,11054,11055,11056,11057,11058,11309,
+                11310,11311,11312,11313,11314,11565,11566,11567,11568,11569,11821,11822,11823)
+
+                when(event.itemId){
+
+                    Items.SEAWEED_401 -> {
+                        if(regionId == 10810 && !taskCompleted(entity,DiaryType.FREMENNIK,0,5)){
+                            when(entity.getAttribute("RellekaSeaweed",0)){
+                                0 -> entity.setAttribute("/save:RellekaSeaweed",1)
+                                1 -> entity.incrementAttribute("RellekaSeaweed")
+                                2 -> {
+                                    finishTask(entity, DiaryType.FREMENNIK,0,5)
+                                    entity.removeAttribute("RellekkaSeaweed")
+                                }
+                            }
+                        }
+                        if(regionId in Karamja && !taskCompleted(entity,DiaryType.KARAMJA, 0, 7)){
+                            when(entity.getAttribute("KaramjaSeaweed", 0)){
+                                0 -> entity.setAttribute("/save:KaramjaSeaweed",1)
+                                in 1..3 -> entity.incrementAttribute("KaramjaSeaweed")
+                                4 -> {
+                                    finishTask(entity,DiaryType.KARAMJA,0,7)
+                                    entity.removeAttribute("KaramjaSeaweed")
+                                }
+                            }
+                        }
+                    }
+
+                    Items.PALM_LEAF_2339 -> {
+                        if(regionId in Karamja && !taskCompleted(entity,DiaryType.KARAMJA,2,7)){
+                            when(entity.getAttribute("KaramjaPalms",0)){
+                                0 -> entity.setAttribute("/save:KaramjaPalms",1)
+                                in 1..3 -> entity.incrementAttribute("KaramjaPalms")
+                                4 -> {
+                                    finishTask(entity,DiaryType.KARAMJA,2,7)
+                                    entity.removeAttribute("KaramjaPalms")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+    }
+
     private object DiaryGatherHooks : EventHook<ResourceProducedEvent> {
         override fun process(entity: Entity, event: ResourceProducedEvent) {
             if (entity !is Player) return
             val regionId = entity.viewport.region.id
-            when (event.itemId) {
+            val RellekkaFishingSpots = intArrayOf(NPCs.FISHING_SPOT_324, NPCs.FISHING_SPOT_334, NPCs.FISHING_SPOT_322, NPCs.FISHING_SPOT_309)
+            when(event.itemId)
+            {
                 //Cut a log from a teak tree
                 Items.TEAK_LOGS_6333 -> finishTask(entity, DiaryType.KARAMJA, 1, 7)
                 //Cut a log from a mahogany tree
@@ -227,6 +285,15 @@ class DiaryEventHook : LoginListener, Commands {
 
             if (event.source.id == Scenery.COOKING_RANGE_114 && regionId == 12850)
                 finishTask(entity, DiaryType.LUMBRIDGE, 0, 7)
+
+            if(event.source.id == NPCs.FISHING_SPOT_324 && regionId == 10553)
+                finishTask(entity, DiaryType.FREMENNIK, 0, 7)
+
+                //Fish off of any of Rellekka's piers
+                //in RellekkaFishingSpots -> {
+                   // if(entity.viewport.region.id == 10553)
+                        //finishTask(entity, DiaryType.FREMENNIK, 0, 7)
+                //}
         }
     }
 
@@ -244,6 +311,8 @@ class DiaryEventHook : LoginListener, Commands {
         val metalDragons =
             intArrayOf(NPCs.BRONZE_DRAGON_1590, NPCs.IRON_DRAGON_1591, NPCs.STEEL_DRAGON_1592, NPCs.STEEL_DRAGON_3590)
         val lumZombies = intArrayOf(NPCs.ZOMBIE_73, NPCs.ZOMBIE_74)
+        val fremCrabs = intArrayOf(NPCs.ROCK_CRAB_1265,NPCs.ROCK_CRAB_1267,NPCs.GIANT_ROCK_CRAB_2452,NPCs.GIANT_ROCK_CRAB_2885)
+        val fremCrawlers = intArrayOf(NPCs.CAVE_CRAWLER_1600,NPCs.CAVE_CRAWLER_1601,NPCs.CAVE_CRAWLER_1602,NPCs.CAVE_CRAWLER_1603,NPCs.CAVE_CRAWLER_7787,NPCs.CAVE_CRAWLER_7812)
 
         override fun process(entity: Entity, event: NPCKillEvent) {
             if (entity !is Player) return
@@ -258,6 +327,28 @@ class DiaryEventHook : LoginListener, Commands {
                     // Obtain a cow-hide from a cow in the field north-east of Lumbridge
                     if (entity.viewport.region.id == 12850 || entity.viewport.region.id == 12851) {
                         finishTask(entity, DiaryType.LUMBRIDGE, 1, 1)
+                    }
+                }
+
+                in fremCrawlers ->{
+                    if(entity.viewport.region.id == 11164){
+                        finishTask(entity,DiaryType.FREMENNIK,0,0)
+                    }
+                }
+
+                in fremCrabs -> {
+                    if (entity.viewport.region.id == 10810 || entity.viewport.region.id == 10042) {
+                        when(entity.getAttribute("FremCrabs",0)){
+                            0 -> entity.setAttribute("/save:FremCrabs",1)
+                            in 1..3 -> entity.incrementAttribute("FremCrabs")
+                            4 -> finishTask(entity,DiaryType.FREMENNIK, 0, 1)
+                        }
+                    }
+                }
+
+                NPCs.BLACK_UNICORN_133 -> {
+                    if (entity.viewport.region.id in 10808..10809){
+                        finishTask(entity,DiaryType.FREMENNIK,0,9)
                     }
                 }
 

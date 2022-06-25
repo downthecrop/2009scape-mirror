@@ -344,16 +344,16 @@ public enum DiaryType {
             new String[]{"Easy", "Medium", "Hard"},
             new String[][]{
                     {
-                            "Kill a cave crawler in the Fremennik Slayer Dungeon", // TODO
-                            "Kill five rock crabs on the shore near Rellekka or on<br><br>Waterbirth Island", // TODO
-                            "Find the highest tree on the Fremennik mainland", // TODO
-                            "View the rewards in the Barbarian Assault tutorial", // TODO
-                            "Speak to Otto Godblessed about barbarian training", // TODO
-                            "Collect three seaweed from the shore north-east of Rellekka", // TODO
-                            "Find the Hunting Expert on the northern ice plains", // TODO
-                            "Catch a fish off one of Rellekka's piers", // TODO
-                            "Recharge your Summoning points near Rellekka's gate", // TODO
-                            "Kill an adult black unicorn" // TODO
+                            "Kill a cave crawler in the Fremennik Slayer Dungeon",
+                            "Kill five rock crabs on the shore near Rellekka or on<br><br>Waterbirth Island",
+                            "Find the highest tree on the Fremennik mainland",
+                            "View the rewards in the Barbarian Assault tutorial", // TODO: Move this to appropriate dialogue once Barbarian Assault is implemented
+                            "Speak to Otto Godblessed about barbarian training", // TODO: Move this to an appropriate point once the entirety of Barbarian training is implemented
+                            "Collect three seaweed from the shore north-east of Rellekka",
+                            "Find the Hunting Expert on the northern ice plains", // TODO: Transcribe the appropriate authentic dialogue for this NPC. Mockup dialogue implemented as a bandaid.
+                            "Catch a fish off one of Rellekka's piers", // TODO: Make this check for any Fishing Spots within the Rellekkan region ID list. Currently only checks the "Cage/Harpoon" Fishing spots at the northeastern most pier.
+                            "Recharge your Summoning points near Rellekka's gate",
+                            "Kill an adult black unicorn"
                     },
                     {
                             "Learn of the history of the Fremennik and the Outerlanders<br><br>from Chieftain Brundt", // TODO

@@ -270,6 +270,6 @@ public final class HuntingExpert extends DialoguePlugin {
 
 	@Override
 	public int[] getIds() {
-		return new int[] { 5112, 5113 };
+		return new int[] { 5113 };
 	}
 }
