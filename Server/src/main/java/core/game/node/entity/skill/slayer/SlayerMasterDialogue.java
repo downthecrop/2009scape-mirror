@@ -709,7 +709,7 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
 
     @Override
     public int[] getIds() {
-        return new int[]{70, 1598, 1596, 1597, 1599, 8275, 8273, 8274, 8649};
+        return new int[]{70, 1598, 1596, 1597, 1599, 7780, 8275, 8273, 8274, 8649};
     }
 
     private JSONObject getStoreFile() {

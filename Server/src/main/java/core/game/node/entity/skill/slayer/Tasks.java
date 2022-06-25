@@ -43,6 +43,7 @@ public enum Tasks {
     DUST_DEVILS(70, new int[] { 1624 }, new String[] { "Dust Devils use clouds of dust, sand, ash and whatever", "else they can inhale to blind and disorientate", "their victims." }, 65,  false),
     DWARF(6, new int[] { 118, 120, 121, 382, 3219, 3220, 3221, 3268, 3269, 3270, 3271, 3272, 3273, 3274, 3275, 3294, 3295, 4316, 5880, 5881, 5882, 5883, 5884, 5885, 2130, 2131, 2132, 2133, 3276, 3277, 3278, 3279, 119, 2423 }, new String[] { "They are slightly resistant to Magic attacks, and", "are not recommended for low levels." }, 1,  false),
     EARTH_WARRIORS(35, new int[] { 124 }, new String[] { "An Earth warrior is a monster made of earth which fights using melee." }, 1,  false),
+    ELVES(70, new int[] { 1183, 1184, 2359, 2360, 2361, 2362, 7438, 7439, 7440, 7441 }, new String[]{"Elves are agile creatures."}, 1, false),
     FIRE_GIANTS(65, new int[] { 110, 1582, 1583, 1584, 1585, 1586, 7003, 7004 }, new String[] { "Like other giants, Fire Giants often wield large weapons", "learn to recognise what kind of weapon it is, and act accordingly." }, 1,  false),
     FLESH_CRAWLERS(15, new int[] { 4389, 4390, 4391 }, new String[] { "Flesh crawlers are medium level monsters found on", "level 2 of the Stronghold of Security." }, 1,  false),
     GARGOYLES(80, new int[] { 1610, 1611, 6389 }, new String[] { "Gargoyles are winged creatures of stone. You'll need to fight them to", "near death before breaking them apart with a rock hammer." }, 75,  false),
