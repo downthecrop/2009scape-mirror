@@ -76,6 +76,8 @@ class CharlieTheTrampDialogue(player: Player? = null) : DialoguePlugin(player){
                 if (!player.questRepository.hasStarted(q)) {
                     player.questRepository.getQuest(q).start(player)
                     player.questRepository.getQuest(q).setStage(player,50)
+                } else if (!ShieldofArrav.isBlackArm(player) && !ShieldofArrav.isPhoenix(player)) {
+                    player.questRepository.getQuest(q).setStage(player, 50)
                 }
                 end()
             }
