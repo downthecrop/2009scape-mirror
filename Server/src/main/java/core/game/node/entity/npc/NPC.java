@@ -413,7 +413,11 @@ public class NPC extends Entity {
 	public void handleTickActions() {
 		if (!getLocks().isInteractionLocked()) {
 			if (!getLocks().isMovementLocked()) {
-				if (!pathBoundMovement && walkRadius > 0 && !getLocation().withinDistance(getProperties().getSpawnLocation(), (int)(walkRadius * 1.5))) {
+				if (!pathBoundMovement
+						&& walkRadius > 0
+						&& !getLocation().withinDistance(getProperties().getSpawnLocation(), (int)(walkRadius * 1.5))
+						&& inCombat())
+				{
 					if(!isNeverWalks()){
 						if(walkRadius == 0)
 							walkRadius = 3;
