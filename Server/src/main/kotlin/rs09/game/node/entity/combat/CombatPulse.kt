@@ -286,7 +286,8 @@ class CombatPulse(
                     victim.skills.updateLevel(Skills.DEFENCE, -drain, victim.skills.getStaticLevel(Skills.DEFENCE) - drain)
                 }
             }
-            victim.walkingQueue.reset()
+            if (!victim.locks.isMovementLocked)
+                victim.walkingQueue.reset()
         }
         setVictim(victim)
         entity.onAttack(victim as Entity?)
