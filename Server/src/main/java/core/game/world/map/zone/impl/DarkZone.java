@@ -1,5 +1,8 @@
 package core.game.world.map.zone.impl;
 
+import api.LoginListener;
+import api.events.EventHook;
+import api.events.UsedWithEvent;
 import core.game.component.Component;
 import core.game.content.global.LightSource;
 import core.game.interaction.Option;
@@ -13,14 +16,20 @@ import core.game.system.task.Pulse;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.RegionZone;
 import core.game.world.map.zone.ZoneBorders;
+import kotlin.Unit;
+import org.jetbrains.annotations.NotNull;
+import rs09.game.Event;
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
 import rs09.game.world.GameWorld;
+
+import static api.ContentAPIKt.getItemName;
+import static api.ContentAPIKt.runTask;
 
 /**
  * Handles a dark area.
  * @author Emperor
  */
-public final class DarkZone extends MapZone {
+public final class DarkZone extends MapZone implements EventHook<UsedWithEvent>{
 
 	/**
 	 * The darkness overlay.
@@ -128,6 +137,7 @@ public final class DarkZone extends MapZone {
 				player.getInterfaceManager().openOverlay(new Component(source.getInterfaceId()));
 			}
 		}
+		e.hook(Event.getUsedWith(), this);
 		return true;
 	}
 
@@ -136,6 +146,7 @@ public final class DarkZone extends MapZone {
 		if (e instanceof Player) {
 			((Player) e).getInterfaceManager().closeOverlay();
 		}
+		e.unhook(this);
 		return true;
 	}
 
@@ -186,5 +197,15 @@ public final class DarkZone extends MapZone {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public void process(@NotNull Entity entity, @NotNull UsedWithEvent event) {
+		boolean isTinderbox = getItemName(event.getUsed()).equals("Tinderbox") || getItemName(event.getWith()).equals("Tinderbox");
+
+		if (isTinderbox && entity instanceof Player) runTask(entity, 2, () -> {
+			checkDarkArea(entity.asPlayer());
+			return Unit.INSTANCE;
+		});
 	}
 }
