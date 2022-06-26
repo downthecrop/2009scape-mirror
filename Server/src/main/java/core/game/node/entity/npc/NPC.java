@@ -412,6 +412,7 @@ public class NPC extends Entity {
 	 */
 	public void handleTickActions() {
 		if (!getLocks().isInteractionLocked()) {
+			boolean shouldUpdateNextwalk = false;
 			if (!pathBoundMovement && walkRadius > 0 && !getLocation().withinDistance(getProperties().getSpawnLocation(), walkRadius)) {
 				if(!isNeverWalks()){
 					if(walkRadius == 0)
@@ -420,12 +421,16 @@ public class NPC extends Entity {
 				if (aggressiveHandler != null) {
 					aggressiveHandler.setPauseTicks(walkRadius + 1);
 				}
+				shouldUpdateNextwalk = true;
 			}
 			if (aggressive && aggressiveHandler != null && aggressiveHandler.selectTarget()) {
 				return;
 			}
 			if (getProperties().getCombatPulse().isAttacking()) {
 				return;
+			}
+			if (shouldUpdateNextwalk) {
+				nextWalk = GameWorld.getTicks() + walkRadius + 1;
 			}
 		}
 		if (!getLocks().isMovementLocked()) {
