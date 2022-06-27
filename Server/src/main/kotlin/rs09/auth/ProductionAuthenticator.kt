@@ -6,6 +6,7 @@ import rs09.ServerConstants
 import rs09.storage.AccountStorageProvider
 import rs09.storage.SQLStorageProvider
 import java.sql.SQLDataException
+import java.sql.Timestamp
 
 class ProductionAuthenticator : AuthProvider<AccountStorageProvider>() {
     override fun configureFor(provider: AccountStorageProvider) {
@@ -18,6 +19,7 @@ class ProductionAuthenticator : AuthProvider<AccountStorageProvider>() {
     override fun createAccountWith(info: UserAccountInfo): Boolean {
         try {
             info.password = SystemManager.getEncryption().hashPassword(info.password)
+            info.joinDate = Timestamp(System.currentTimeMillis())
             storageProvider.store(info)
         } catch (e: SQLDataException) {
             return false

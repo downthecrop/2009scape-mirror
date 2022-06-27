@@ -45,22 +45,23 @@ class SQLStorageProvider : AccountStorageProvider {
                 val userData = UserAccountInfo.createDefault()
                 userData.username = username
 
-                result.getString(2) ?.let { userData.password = it }
-                result.getInt(3)     .let { userData.uid = it }
-                result.getInt(4)     .let { userData.rights = it }
-                result.getInt(5)     .let { userData.credits = it }
-                result.getString(6) ?.let { userData.ip = it }
-                result.getString(7) ?.let { userData.lastUsedIp = it }
-                result.getLong(8)    .let { userData.muteEndTime = max(0L, it) }
-                result.getLong(9)    .let { userData.banEndTime = max(0L, it) }
-                result.getString(10)?.let { userData.contacts = it }
-                result.getString(11)?.let { userData.blocked = it }
-                result.getString(12)?.let { userData.clanName = it }
-                result.getString(13)?.let { userData.currentClan = it }
-                result.getString(14)?.let { userData.clanReqs = it }
-                result.getLong(15)   .let { userData.timePlayed = max(0L, it) }
-                result.getLong(16)   .let { userData.lastLogin = max(0L, it) }
-                result.getBoolean(17).let { userData.online = it }
+                result.getString(2)    ?.let { userData.password = it }
+                result.getInt(3)        .let { userData.uid = it }
+                result.getInt(4)        .let { userData.rights = it }
+                result.getInt(5)        .let { userData.credits = it }
+                result.getString(6)    ?.let { userData.ip = it }
+                result.getString(7)    ?.let { userData.lastUsedIp = it }
+                result.getLong(8)       .let { userData.muteEndTime = max(0L, it) }
+                result.getLong(9)       .let { userData.banEndTime = max(0L, it) }
+                result.getString(10)   ?.let { userData.contacts = it }
+                result.getString(11)   ?.let { userData.blocked = it }
+                result.getString(12)   ?.let { userData.clanName = it }
+                result.getString(13)   ?.let { userData.currentClan = it }
+                result.getString(14)   ?.let { userData.clanReqs = it }
+                result.getLong(15)      .let { userData.timePlayed = max(0L, it) }
+                result.getLong(16)      .let { userData.lastLogin = max(0L, it) }
+                result.getBoolean(17)   .let { userData.online = it }
+                result.getTimestamp(18) .let { userData.joinDate = it ?: Timestamp(System.currentTimeMillis()) }
 
                 userData.setInitialReferenceValues()
                 return userData
@@ -102,6 +103,7 @@ class SQLStorageProvider : AccountStorageProvider {
             compiledInsertInfoQuery.setLong(14, info.timePlayed)
             compiledInsertInfoQuery.setLong(15, info.lastLogin)
             compiledInsertInfoQuery.setBoolean(16, info.online)
+            compiledInsertInfoQuery.setTimestamp(17, info.joinDate)
             compiledInsertInfoQuery.execute()
             val result = compiledInsertInfoQuery.generatedKeys
             if (result.next()) {
@@ -195,7 +197,8 @@ class SQLStorageProvider : AccountStorageProvider {
                 "clanReqs," +
                 "timePlayed," +
                 "lastLogin," +
-                "online" +
+                "online," +
+                "joined_date" +
                 " FROM members WHERE username = ?;"
         private const val insertInfoQuery = "INSERT INTO members (" +
                 "username," +
@@ -213,8 +216,9 @@ class SQLStorageProvider : AccountStorageProvider {
                 "clanReqs," +
                 "timePlayed," +
                 "lastLogin," +
-                "online" +
-                ") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
+                "online," +
+                "joined_date" +
+                ") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
 
         private fun buildUpdateInfoQuery(updatedIndices: ArrayList<Int>) : String {
             val sb = StringBuilder("UPDATE members SET ")
