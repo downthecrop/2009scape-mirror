@@ -143,8 +143,9 @@ class BankBoothHandler : InteractionListener {
         if (item.noteChange != item.id) {
             if (item.definition.isUnnoted) {
                 val amount = amountInInventory(player, item.id)
-                removeItem(player, Item(item.id, amount))
-                addItem(player, item.noteChange, amount)
+                if (removeItem(player, Item(item.id, amount))) {
+                    addItem(player, item.noteChange, amount)
+                }
             } else {
                 var amount = item.amount
                 val freeSlotCount = freeSlots(player)
@@ -153,8 +154,9 @@ class BankBoothHandler : InteractionListener {
                     amount = freeSlotCount
                 }
 
-                removeItem(player, Item(item.id, amount))
-                addItem(player, item.noteChange, amount)
+                if (removeItem(player, Item(item.id, amount))) {
+                    addItem(player, item.noteChange, amount)
+                }
             }
 
             return true
