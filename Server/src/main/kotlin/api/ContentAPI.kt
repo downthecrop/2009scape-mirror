@@ -112,8 +112,8 @@ fun amountInInventory(player: Player, id: Int): Int {
  * @param id the ID of the item to check for
  * @return the amount of the ID in the player's bank.
  */
-fun amountInBank(player: Player, id: Int): Int {
-    return player.bank.getAmount(id)
+fun amountInBank(player: Player, id: Int, includeSecondary: Boolean = true): Int {
+    return player.bank.getAmount(id) + if (includeSecondary) player.bankSecondary.getAmount(id) else 0
 }
 
 /**
@@ -177,7 +177,7 @@ fun <T> removeItem(player: Player, item: T, container: Container = Container.INV
 
     return when (container) {
         Container.INVENTORY -> player.inventory.remove(it)
-        Container.BANK -> player.bank.remove(it)
+        Container.BANK -> player.bank.remove(it) || player.bankSecondary.remove(it)
         Container.EQUIPMENT -> player.equipment.remove(it)
     }
 }
@@ -256,7 +256,7 @@ fun poofClear(npc: NPC) {
  * @return true if the item exists in the given amount in the player's bank
  */
 fun inBank(player: Player, item: Int, amount: Int = 1): Boolean {
-    return player.bank.contains(item, amount)
+    return player.bank.contains(item, amount) || player.bankSecondary.contains(item, amount)
 }
 
 /**
@@ -1048,7 +1048,11 @@ fun <T> removeAll(player: Player, item: T, container: Container) {
 
     when (container) {
         Container.EQUIPMENT -> player.equipment.remove(Item(it, amountInEquipment(player, it)))
-        Container.BANK -> player.bank.remove(Item(it, amountInBank(player, it)))
+        Container.BANK -> {
+            val amountInPrimary = amountInBank(player, it, false)
+            val amountInSecondary = amountInBank(player, it, true) - amountInPrimary
+            player.bank.remove(Item(it, amountInPrimary)) && player.bankSecondary.remove(Item(it, amountInSecondary))
+        }
         Container.INVENTORY -> player.inventory.remove(Item(it, amountInInventory(player, it)))
     }
 }
