@@ -11,7 +11,6 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.summoning.familiar.Familiar;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
-import core.game.world.map.path.Pathfinder;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.impl.WildernessZone;
 import core.game.world.update.flag.context.Animation;
@@ -188,13 +187,13 @@ public class RevenantNPC extends AbstractNPC {
 
 	@Override
 	public boolean continueAttack(Entity target, CombatStyle style, boolean message) {
-		return target instanceof Player ? checkCombatLevel(target.asPlayer()) : true;
+		return target instanceof Player ? hasAcceptableCombatLevel(target.asPlayer()) : true;
 	}
 
 	@Override
 	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 		if (entity instanceof Player) {
-			if (!checkCombatLevel(entity.asPlayer()) && !entity.asPlayer().isAdmin()) {
+			if (!hasAcceptableCombatLevel(entity.asPlayer()) && !entity.asPlayer().isAdmin()) {
                 if(message) {
                     entity.asPlayer().sendMessage("The level difference between you and your opponent is too great.");
                 }
@@ -206,7 +205,7 @@ public class RevenantNPC extends AbstractNPC {
 			if (owner == null) {
 				return false;
 			}
-			if (!checkCombatLevel(owner)) {
+			if (!hasAcceptableCombatLevel(owner)) {
 				return false;
 			}
 		}
@@ -218,7 +217,7 @@ public class RevenantNPC extends AbstractNPC {
 		if (!(target instanceof Player)) {
 			return false;
 		}
-		return checkCombatLevel(target.asPlayer());
+		return hasAcceptableCombatLevel(target.asPlayer());
 	}
 
 	@Override
@@ -252,17 +251,14 @@ public class RevenantNPC extends AbstractNPC {
 	 * @param player the player.
 	 * @return {@code True} if so.
 	 */
-	private boolean checkCombatLevel(Player player) {
+	private boolean hasAcceptableCombatLevel(Player player) {
 		int level = WildernessZone.getWilderness(this);
 		if (player.getSkullManager().getLevel() < level) {
 			level = player.getSkullManager().getLevel();
 		}
 		int combat = getProperties().getCurrentCombatLevel();
 		int targetCombat = player.getProperties().getCurrentCombatLevel();
-		if (combat - level > targetCombat || combat + level < targetCombat) {
-			return false;
-		}
-		return true;
+		return Math.abs(combat - targetCombat) <= level;
 	}
 
 	/**
