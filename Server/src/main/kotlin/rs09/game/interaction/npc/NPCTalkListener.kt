@@ -17,7 +17,6 @@ class NPCTalkListener : InteractionListener {
     val barCrawlNPCs = intArrayOf(733,848,735,739,737,738,731,568,3217,736,734)
 
     override fun defineListeners() {
-
         on(barCrawlNPCs, NPC, "talk-to", "talk"){player, node ->
             val type = BarcrawlType.forId(node.id)
             val instance = BarcrawlManager.getInstance(player)
@@ -52,20 +51,5 @@ class NPCTalkListener : InteractionListener {
             }
             return@on player.dialogueInterpreter.open(npc.id, npc)
         }
-
-    }
-
-    override fun defineDestinationOverrides() {
-        setDest(NPC,"talk","talk-to"){_,node ->
-            val npc = node as NPC
-            if (npc.getAttribute("facing_booth", false)) {
-                val offsetX = npc.direction.stepX shl 1
-                val offsetY = npc.direction.stepY shl 1
-                return@setDest npc.location.transform(offsetX, offsetY, 0)
-            }
-            return@setDest node.location
-        }
-
-        setDest(NPC, BankerNPCListener.BANKER_NPCS, "talk-to", handler = BankerNPCListener::provideDestinationOverride)
     }
 }

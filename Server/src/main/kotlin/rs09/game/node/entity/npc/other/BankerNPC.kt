@@ -2,23 +2,43 @@ package rs09.game.node.entity.npc.other
 
 import api.getScenery
 import api.hasSealOfPassage
-import core.game.content.dialogue.DialogueInterpreter
+import api.openDialogue
 import core.game.node.Node
+import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.IronmanMode
 import core.game.world.map.Direction
 import core.game.world.map.Location
+import core.game.world.map.path.Pathfinder
 import core.plugin.Initializable
-import rs09.game.interaction.npc.BankerNPCListener
+import org.rs09.consts.NPCs
+import rs09.game.ge.GrandExchangeRecords
+import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.`object`.BankBoothHandler
 
 private const val LUNAR_ISLE_BANK_REGION = 8253
 
 @Initializable
-class BankerNPC : AbstractNPC {
-
+class BankerNPC : AbstractNPC, InteractionListener {
     companion object {
+        val BANKER_IDS = intArrayOf(
+            NPCs.BANKER_44, NPCs.BANKER_45, NPCs.BANKER_494, NPCs.BANKER_495, NPCs.BANKER_496, NPCs.BANKER_497,
+            NPCs.BANKER_498, NPCs.BANKER_499, NPCs.BANKER_1036, NPCs.BANKER_1360, NPCs.BANKER_2163, NPCs.BANKER_2164,
+            NPCs.BANKER_2354, NPCs.BANKER_2355, NPCs.BANKER_2568, NPCs.BANKER_2569, NPCs.BANKER_2570, NPCs.BANKER_3198,
+            NPCs.BANKER_3199, NPCs.BANKER_5258, NPCs.BANKER_5259, NPCs.BANKER_5260, NPCs.BANKER_5261, NPCs.BANKER_5776,
+            NPCs.BANKER_5777, NPCs.BANKER_5912, NPCs.BANKER_5913, NPCs.BANKER_6200, NPCs.BANKER_6532, NPCs.BANKER_6533,
+            NPCs.BANKER_6534, NPCs.BANKER_6535, NPCs.BANKER_6538, NPCs.BANKER_7445, NPCs.BANKER_7446, NPCs.BANKER_7605,
+
+            NPCs.BANK_TUTOR_4907,
+
+            NPCs.GHOST_BANKER_1702, NPCs.GNOME_BANKER_166, NPCs.NARDAH_BANKER_3046,
+            NPCs.OGRESS_BANKER_7049, NPCs.OGRESS_BANKER_7050, NPCs.SIRSAL_BANKER_4519,
+
+            NPCs.FADLI_958, NPCs.MAGNUS_GRAM_5488
+        )
+
         /**
          * This is poorly named, but performs a few checks to see if the player
          * is trying to access the bank on the Lunar Isle and returns a boolean
@@ -47,7 +67,43 @@ class BankerNPC : AbstractNPC {
         return BankerNPC(id, location)
     }
 
-    fun findAdjacentBankBoothLocation(): Pair<Direction, Location>? {
+    private fun attemptBank(player: Player, node: Node): Boolean {
+        val npc = node as NPC
+
+        if (player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {
+            return true
+        }
+
+        if (checkLunarIsleRestriction(player, node)) {
+            openDialogue(player, npc.id, npc)
+            return true
+        }
+
+        npc.faceLocation(null)
+        player.bank.open();
+
+        return true
+    }
+
+    private fun attemptCollect(player: Player, node: Node): Boolean {
+        val npc = node as NPC
+
+        if (player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {
+            return true
+        }
+
+        if (checkLunarIsleRestriction(player, node)) {
+            openDialogue(player, npc.id, npc)
+            return true
+        }
+
+        npc.faceLocation(null)
+        GrandExchangeRecords.getInstance(player).openCollectionBox();
+
+        return true
+    }
+
+    private fun findAdjacentBankBoothLocation(): Pair<Direction, Location>? {
         for (side in arrayOf(Direction.SOUTH, Direction.WEST, Direction.NORTH, Direction.EAST)) {
             val boothLocation = location.transform(side)
             val sceneryObject = getScenery(boothLocation)
@@ -58,6 +114,49 @@ class BankerNPC : AbstractNPC {
         }
 
         return null
+    }
+
+    private fun provideDestinationOverride(entity: Entity, node: Node): Location {
+        val npc = node as NPC
+
+        return when(npc.id) {
+            /* Ogress bankers are 2x2 with their spawn being offset to south-western tile. */
+            NPCs.OGRESS_BANKER_7049,
+            NPCs.OGRESS_BANKER_7050 -> npc.location.transform(3, 1, 0)
+
+            /* Magnus has no bank booth nearby so we need to handle that edge case here. */
+            NPCs.MAGNUS_GRAM_5488 -> npc.location.transform(Direction.NORTH, 2)
+
+            else -> {
+                if (npc is BankerNPC) {
+                    npc.findAdjacentBankBoothLocation()?.let {
+                        return it.second
+                    }
+                }
+
+                val path = Pathfinder.find(entity, node)
+
+                if (path.isSuccessful) {
+                    val pt = path.points.last
+                    return Location(pt.x, pt.y)
+                }
+
+                return npc.location
+            }
+        }
+    }
+
+    override fun defineListeners() {
+        on(BANKER_IDS, NPC, "bank", handler = ::attemptBank)
+        on(BANKER_IDS, NPC, "collect", handler = ::attemptCollect)
+        on(BANKER_IDS, NPC, "talk-to") { player, node ->
+            val npc = node as NPC
+            openDialogue(player, npc.id, npc); true
+        }
+    }
+
+    override fun defineDestinationOverrides() {
+        setDest(NPC, BANKER_IDS, "bank", "collect", "talk-to", handler = ::provideDestinationOverride)
     }
 
     override fun init() {
@@ -73,5 +172,5 @@ class BankerNPC : AbstractNPC {
         }
     }
 
-    override fun getIds(): IntArray = BankerNPCListener.BANKER_NPCS
+    override fun getIds(): IntArray = BANKER_IDS
 }
