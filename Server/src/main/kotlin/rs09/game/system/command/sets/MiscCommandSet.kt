@@ -31,6 +31,7 @@ import rs09.game.system.command.CommandMapping
 import rs09.game.system.command.Privilege
 import rs09.game.world.repository.Repository
 import rs09.tools.stringtools.colorize
+import java.awt.HeadlessException
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 import java.util.*
@@ -76,9 +77,14 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             SystemLogger.logInfo("Viewport: " + l.getSceneX(player.playerFlags.lastSceneGraph) + "," + l.getSceneY(player.playerFlags.lastSceneGraph))
             val loc = "Location.create(" + l.x + ", " + l.y + ", " + l.z + ")"
             SystemLogger.logInfo(loc + "; " + player.playerFlags.lastSceneGraph + ", " + l.localX + ", " + l.localY)
-            val stringSelection = StringSelection(loc)
-            val clpbrd = Toolkit.getDefaultToolkit().systemClipboard
-            clpbrd.setContents(stringSelection, null)
+            try {
+                val stringSelection = StringSelection(loc)
+                val clpbrd = Toolkit.getDefaultToolkit().systemClipboard
+                clpbrd.setContents(stringSelection, null)
+                notify(player, "Coordinates copied to clipboard.")
+            } catch (e: HeadlessException) {
+                reject(player, "NOTE: Paste will not be available due to remote server.")
+            }
         }
 
         /**

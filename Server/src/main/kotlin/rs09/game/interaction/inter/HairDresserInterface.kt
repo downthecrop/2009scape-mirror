@@ -174,7 +174,7 @@ class HairDresserInterface : ComponentPlugin(){
         when(button){
             199 -> player.setAttribute("beard-setting",false)
             200 -> player.setAttribute("beard-setting",true)
-            68,196 -> pay(player)
+            68,196,274 -> pay(player)
             else -> when(component?.id){
                 592 -> { //Female
                     if(femaleColorButtonRange.contains(button)){
