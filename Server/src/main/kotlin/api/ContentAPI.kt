@@ -446,6 +446,25 @@ fun itemDefinition(id: Int): ItemDefinition {
 }
 
 /**
+ * Check whether a node contains an interaction option.
+ *
+ * @param node: An NPC, a scenery object or an item to inspect.
+ * @param option: The name of the interaction option to check for existence of.
+ *
+ * @return A Boolean value indicating the presence of the specified option in the given node.
+ *
+ * @author vddCore
+ */
+fun hasOption(node: Node, option: String): Boolean {
+    return when(node) {
+        is NPC -> node.definition.hasAction(option)
+        is Scenery -> node.definition.hasAction(option)
+        is Item -> node.definition.hasAction(option)
+        else -> throw IllegalArgumentException("Expected an NPC, Scenery or an Item, got ${node.javaClass.simpleName}.")
+    }
+}
+
+/**
  * Send an object animation
  */
 fun animateScenery(player: Player, obj: Scenery, animationId: Int, global: Boolean = false) {
