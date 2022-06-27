@@ -1,11 +1,12 @@
 package rs09.game.interaction.`object`
 
-import api.openDialogue
+import api.*
 import core.game.content.dialogue.DialogueInterpreter
 import core.game.node.Node
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.IronmanMode
+import core.game.node.item.Item
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import org.rs09.consts.NPCs
@@ -127,9 +128,51 @@ class BankBoothHandler : InteractionListener {
         return true
     }
 
+    private fun attemptToConvertItems(player: Player, used: Node, with: Node): Boolean {
+        if (!ServerConstants.BANK_BOOTH_NOTE_UIM && player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {
+            return true
+        }
+
+        if (BankerNPC.checkLunarIsleRestriction(player, with)) {
+            tryInvokeBankerDialogue(player, with)
+            return true
+        }
+
+        val item = used as Item
+
+        if (item.noteChange != item.id) {
+            if (item.definition.isUnnoted) {
+                val amount = amountInInventory(player, item.id)
+                if (removeItem(player, Item(item.id, amount))) {
+                    addItem(player, item.noteChange, amount)
+                }
+            } else {
+                var amount = item.amount
+                val freeSlotCount = freeSlots(player)
+
+                if (amount > freeSlotCount) {
+                    amount = freeSlotCount
+                }
+
+                if (removeItem(player, Item(item.id, amount))) {
+                    addItem(player, item.noteChange, amount)
+                }
+            }
+
+            return true
+        }
+
+        sendMessage(player, "This item can't be noted.")
+        return true
+    }
+
     override fun defineListeners() {
         on(BANK_BOOTHS, SCENERY, "use-quickly", "bank", handler = ::quickBankBoothUse)
         on(BANK_BOOTHS, SCENERY, "use", handler = ::regularBankBoothUse)
         on(BANK_BOOTHS, SCENERY, "collect", handler = ::collectBankBoothUse)
+
+        if (ServerConstants.BANK_BOOTH_NOTE_ENABLED) {
+            onUseAnyWith(SCENERY, *BANK_BOOTHS, handler = ::attemptToConvertItems)
+        }
     }
 }

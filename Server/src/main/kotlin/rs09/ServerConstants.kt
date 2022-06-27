@@ -114,6 +114,12 @@ class ServerConstants {
 		var BANK_BOOTH_QUICK_OPEN: Boolean = false
 
 		@JvmField
+		var BANK_BOOTH_NOTE_ENABLED: Boolean = true
+
+		@JvmField
+		var BANK_BOOTH_NOTE_UIM: Boolean = true
+
+		@JvmField
 		var GE_AUTOSAVE_FREQUENCY = secondsToTicks(3600) //1 hour
 
 		@JvmField

@@ -118,6 +118,8 @@ object ServerConfigParser {
         ServerConstants.PRELOAD_MAP = data.getBoolean("server.preload_map", false)
         ServerConstants.REVENANT_POPULATION = data.getLong("world.revenant_population", 30L).toInt()
         ServerConstants.BANK_BOOTH_QUICK_OPEN = data.getBoolean("world.bank_booth_quick_open", false)
+        ServerConstants.BANK_BOOTH_NOTE_ENABLED = data.getBoolean("world.bank_booth_note_enabled", true)
+        ServerConstants.BANK_BOOTH_NOTE_UIM = data.getBoolean("world.bank_booth_note_uim", true)
         ServerConstants.DISCORD_GE_WEBHOOK = data.getString("server.discord_webhook", "")
     }
 
