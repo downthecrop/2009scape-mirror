@@ -16,7 +16,6 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.PlayerContext;
 import core.net.packet.out.ClearMinimapFlag;
 import org.rs09.consts.Items;
-import rs09.game.interaction.ItemOnBankBooth;
 import rs09.game.interaction.InteractionListeners;
 import rs09.game.node.entity.skill.farming.CompostBins;
 import rs09.game.node.entity.skill.farming.FarmingPatch;
@@ -234,10 +233,7 @@ public class ItemActionPacket implements IncomingPacket {
 			if(PluginInteractionManager.handle(player,event)){
 				return;
 			}
-			if(object.getName().toLowerCase().contains("bank booth")){
-				new ItemOnBankBooth().handle(event);
-				return;
-			}
+
 			try {
 				UseWithHandler.run(event);
 			} catch (Exception e){
