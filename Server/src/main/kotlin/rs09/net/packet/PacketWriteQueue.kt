@@ -16,8 +16,8 @@ class PacketWriteQueue : TickListener {
 
     companion object {
         private val queueLock = ReentrantLock()
-        private val packetsToQueue = ArrayList<QueuedPacket<*>>(1000)
-        private val packetsToWrite = LinkedList<QueuedPacket<*>>()
+        private val packetsToQueue = ArrayList<QueuedPacket<*>?>(1000)
+        private val packetsToWrite = LinkedList<QueuedPacket<*>?>()
 
         @JvmStatic
         fun <T> handle(packet: OutgoingPacket<T>, context: T) {
@@ -57,7 +57,7 @@ class PacketWriteQueue : TickListener {
             if (packetsToWrite.isNotEmpty()) {
                 SystemLogger.logWarn("Packet queue was NOT empty! Remaining packets: ${packetsToWrite.size}")
                 try {
-                    for (pkt in packetsToWrite) SystemLogger.logWarn("${pkt?.out?.javaClass?.simpleName ?: "NULL"} <- ${pkt?.context ?: "NULL"}")
+                    for (pkt: QueuedPacket<*>? in packetsToWrite) SystemLogger.logWarn("${pkt?.out?.javaClass?.simpleName ?: "NULL"} <- ${pkt?.context ?: "NULL"}")
                 } catch (e: Exception)
                 {
                     e.printStackTrace()
