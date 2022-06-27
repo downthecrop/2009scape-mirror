@@ -280,7 +280,7 @@ abstract class Cutscene(val player: Player) {
                 clearNPCs()
                 player.unhook(CUTSCENE_DEATH_HOOK)
                 player.logoutListeners.remove("cutscene")
-                RandomEventManager.getInstance(player)!!.enabled = true
+                RandomEventManager.getInstance(player)?.enabled = true
                 PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 0))
             }
         })
