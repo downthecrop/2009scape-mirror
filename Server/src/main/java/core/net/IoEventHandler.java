@@ -72,7 +72,8 @@ public class IoEventHandler {
 		} catch (IOException e) {
 			if (e.getMessage().contains("reset by peer")) {
 				session.disconnect();
-				session.getPlayer().clear(true);
+				if (session.getPlayer() != null)
+					session.getPlayer().clear(true);
 			} else e.printStackTrace();
 		}
 		buffer.flip();
