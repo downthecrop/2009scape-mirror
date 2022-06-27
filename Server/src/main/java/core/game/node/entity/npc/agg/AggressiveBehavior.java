@@ -4,6 +4,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.DeathTask;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import core.game.world.map.zone.impl.WildernessZone;
 import rs09.game.world.GameWorld;
 import core.game.world.map.RegionManager;
 
@@ -71,16 +72,10 @@ public class AggressiveBehavior {
 		}
 		if (entity instanceof NPC && target instanceof Player) {
 			NPC npc = (NPC) entity;
-			if (npc.getAggressiveHandler() != null && npc.getAggressiveHandler().isAllowTolerance()) {
+			if (npc.getAggressiveHandler() != null && npc.getAggressiveHandler().isAllowTolerance() && WildernessZone.getWilderness(npc) == -1) {
                 if (RegionManager.forId(regionId).isTolerated(target.asPlayer())) {
                     return false;
                 }
-				int ticks = GameWorld.getTicks() - npc.getAggressiveHandler().getPlayerTolerance()[target.getIndex()];
-				if (ticks > 3000) {
-					npc.getAggressiveHandler().getPlayerTolerance()[target.getIndex()] = GameWorld.getTicks();
-				} else if (ticks > 1500) {
-					return false;
-				}
 			}
 		}
 		int level = target.getProperties().getCurrentCombatLevel();

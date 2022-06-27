@@ -94,115 +94,39 @@ public final class WildernessZone extends MapZone {
 	 */
 	@Override
 	public boolean death(Entity e, Entity killer) {
-		try {
-			if (e instanceof UriNPC) {
-				e.finalizeDeath(killer);
+		if (e instanceof NPC)
+			rollWildernessExclusiveLoot(e, killer);
+		return false; //DONT override default death handling.
+	}
+
+	private void rollWildernessExclusiveLoot(Entity e, Entity killer) {
+		//Roll for PVP gear and Brawling Gloves from revenants
+		if (e instanceof NPC && killer instanceof Player && (e.asNpc().getName().contains("Revenant") || e.getId() == NPCs.CHAOS_ELEMENTAL_3200)) {
+
+			boolean gloveDrop = e.getId() == NPCs.CHAOS_ELEMENTAL_3200 ? RandomFunction.roll(75) : RandomFunction.roll(100);
+			if (gloveDrop) {
+				byte glove = (byte) RandomFunction.random(1, 13);
+				Item reward = new Item(BrawlingGloves.forIndicator(glove).getId());
+				GroundItemManager.create(reward, e.asNpc().getDropLocation(), killer.asPlayer());
+				Repository.sendNews(killer.getUsername() + " has received " + reward.getName().toLowerCase() + " from a " + e.asNpc().getName() + "!");
 			}
-			if(e instanceof Player){
-				Player player = e.asPlayer();
-				player.getSettings().setSpecialEnergy(100);
-				player.getSettings().updateRunEnergy(player.getSettings().getRunEnergy() - 100);
-				Player owner = killer instanceof Player ? (Player) killer : player;
-				player.getPacketDispatch().sendMessage("Oh dear, you are dead!");
-				player.incrementAttribute("/save:"+STATS_BASE+":"+STATS_DEATHS);
 
-				//If player was a Hardcore Ironman, announce that they died
-				if (player.getIronmanManager().getMode().equals(IronmanMode.HARDCORE)){ //if this was checkRestriction, ultimate irons would be moved to HARDCORE_DEAD as well
-					String gender = player.isMale() ? "Man " : "Woman ";
-					Repository.sendNews("Hardcore Iron " + gender + " " + player.getUsername() +" has fallen. Total Level: " + player.getSkills().getTotalLevel()); // Not enough room for XP
-					player.getIronmanManager().setMode(IronmanMode.STANDARD);
-					player.getSavedData().getActivityData().setHardcoreDeath(true);
-					player.sendMessage("You have fallen as a Hardcore Iron Man, your Hardcore status has been revoked.");
-				}
-
-				player.getPacketDispatch().sendTempMusic(90);
-				if (player.getDetails().getRights() != Rights.ADMINISTRATOR) {
-					GroundItemManager.create(new Item(526), player.getLocation(), owner);
-					final Container[] c = DeathTask.getContainers(player);
-					boolean gravestone = player.getGraveManager().generateable() && player.getIronmanManager().getMode() != IronmanMode.ULTIMATE && !(killer instanceof Player);
-					int seconds = player.getGraveManager().getType().getDecay() * 60;
-					int ticks = (1000 * seconds) / 600;
-					List<GroundItem> items = new ArrayList<>(20);
-					for (Item item : c[1].toArray()) {
-						if (item != null) {
-							GroundItem ground;
-							if (item.hasItemPlugin()) {
-								item = item.getPlugin().getDeathItem(item);
-							}
-							if (!item.getDefinition().isTradeable()) {
-								ground = new GroundItem(item, player.getLocation(), gravestone ? ticks + 100 : 200, player);
-							} else {
-								ground = new GroundItem(item.getDropItem(), player.getLocation(), owner);
-							}
-							items.add(ground);
-							ground.setDropper(owner); //Checking for ironman mode in any circumstance for death items is inaccurate to how it works in both 2009scapes.
-							GroundItemManager.create(ground);
-						}
-					}
-					player.getEquipment().clear();
-					player.getInventory().clear();
-					if(!player.getSkullManager().isSkulled() || killer instanceof NPC) {
-						player.getInventory().addAll(c[0]);
+			int combatLevel = e.asNpc().getDefinition().getCombatLevel();
+			int dropRate = getNewDropRate(combatLevel);
+			for (int j : PVP_GEAR) {
+				boolean chance = RandomFunction.roll(dropRate);
+				if (chance) {
+					Item reward;
+					if (j == 13879 || j == 13883) { // checks if it's a javelin or throwing axe
+						reward = new Item(j, RandomFunction.random(15, 50));
 					} else {
-						for(Item item : c[0].toArray()){
-							GroundItemManager.create(item,player.getLocation(),owner);
-						}
+						reward = new Item(j);
 					}
-					player.getFamiliarManager().dismiss();
-
-				}
-				player.getSkullManager().setSkulled(false);
-				player.removeAttribute("combat-time");
-				player.getPrayer().reset();
-				player.getAppearance().sync();
-				if (GameWorld.isEconomyWorld() && !player.getSavedData().getGlobalData().isDeathScreenDisabled()) {
-					player.getInterfaceManager().open(new Component(153));
-				}
-				if (!player.getSavedData().getGlobalData().isDeathScreenDisabled()) {
-					player.getInterfaceManager().open(new Component(153));
+					Repository.sendNews(killer.asPlayer().getUsername() + " has received a " + reward.getName() + " from a " + e.asNpc().getName() + "!");
+					GroundItemManager.create(reward, ((NPC) e).getDropLocation(), killer.asPlayer());
 				}
 			}
-
-			//Roll for PVP gear and Brawling Gloves from revenants
-			if (e instanceof NPC && killer instanceof Player && (e.asNpc().getName().contains("Revenant") || e.getId() == NPCs.CHAOS_ELEMENTAL_3200)) {
-
-				boolean gloveDrop = e.getId() == NPCs.CHAOS_ELEMENTAL_3200 ? RandomFunction.roll(75) : RandomFunction.roll(100);
-				if (gloveDrop) {
-					byte glove = (byte) RandomFunction.random(1, 13);
-					Item reward = new Item(BrawlingGloves.forIndicator(glove).getId());
-					GroundItemManager.create(reward, e.asNpc().getDropLocation(), killer.asPlayer());
-					Repository.sendNews(killer.getUsername() + " has received " + reward.getName().toLowerCase() + " from a " + e.asNpc().getName() + "!");
-				}
-
-				int combatLevel = e.asNpc().getDefinition().getCombatLevel();
-				int dropRate = getNewDropRate(combatLevel);
-				for (int j : PVP_GEAR) {
-					boolean chance = RandomFunction.roll(dropRate);
-					if (chance) {
-						Item reward;
-						if (j == 13879 || j == 13883) { // checks if it's a javelin or throwing axe
-							reward = new Item(j, RandomFunction.random(15, 50));
-						} else {
-							reward = new Item(j);
-						}
-						Repository.sendNews(killer.asPlayer().getUsername() + " has received a " + reward.getName() + " from a " + e.asNpc().getName() + "!");
-						GroundItemManager.create(reward, ((NPC) e).getDropLocation(), killer.asPlayer());
-						return true;
-					}
-				}
-			}
-
-			if (e instanceof NPC) {
-				e.asNpc().getDefinition().getDropTables().drop(e.asNpc(), killer);
-				e.asNpc().setRespawnTick(GameWorld.getTicks() + e.asNpc().getDefinition().getConfiguration(NPCConfigParser.RESPAWN_DELAY, 17));
-				if (!e.asNpc().isRespawn()) {
-					e.asNpc().clear();
-				}
-			}
-		} catch (Exception f){
-			System.out.println("Unhandled NPC death in wilderness:  " + e.getId());
 		}
-		return true;
 	}
 
 	/**
@@ -392,6 +316,9 @@ public final class WildernessZone extends MapZone {
 	 * @return the level.
 	 */
 	public static int getWilderness(Entity e) {
+		if (e.getLocation().getY() < 3524) {
+			return -1;
+		}
 		final int regionId = e.getViewport().getRegion().getId();
 		int offsetY = 3524;
 		if (regionId == 12443 || e.getViewport().getRegion().getId() == 12444) {
