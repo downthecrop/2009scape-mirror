@@ -178,13 +178,7 @@ public abstract class Entity extends Node {
 	 */
 	public void unhook(EventHook hook)
 	{
-		GameWorld.getPulser().submit(new Pulse() {
-			@Override
-			public boolean pulse() {
-				for(ArrayList<EventHook> s : hooks.values()) s.remove(hook);
-				return true;
-			}
-		});
+		for(ArrayList<EventHook> s : hooks.values()) s.remove(hook);
 	}
 
 	/**
