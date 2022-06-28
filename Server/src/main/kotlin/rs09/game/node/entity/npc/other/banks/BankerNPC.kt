@@ -14,9 +14,11 @@ import core.game.world.map.Location
 import core.game.world.map.path.Pathfinder
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
+import org.rs09.consts.Scenery
 import rs09.game.ge.GrandExchangeRecords
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.`object`.BankBoothHandler
+import kotlin.reflect.jvm.internal.impl.utils.SmartList
 
 @Initializable
 class BankerNPC : AbstractNPC, InteractionListener {
@@ -31,7 +33,7 @@ class BankerNPC : AbstractNPC, InteractionListener {
             NPCs.BANKER_5777, NPCs.BANKER_5912, NPCs.BANKER_5913, NPCs.BANKER_6200, NPCs.BANKER_6532, NPCs.BANKER_6533,
             NPCs.BANKER_6534, NPCs.BANKER_6535, NPCs.BANKER_6538, NPCs.BANKER_7445, NPCs.BANKER_7446, NPCs.BANKER_7605,
 
-            NPCs.BANK_TUTOR_4907,
+            NPCs.BANK_TUTOR_4907, NPCs.JADE_4296,
 
             NPCs.GHOST_BANKER_1702, NPCs.GNOME_BANKER_166, NPCs.NARDAH_BANKER_3046,
             NPCs.OGRESS_BANKER_7049, NPCs.OGRESS_BANKER_7050, NPCs.SIRSAL_BANKER_4519,
@@ -124,6 +126,9 @@ class BankerNPC : AbstractNPC, InteractionListener {
             NPCs.OGRESS_BANKER_7049,
             NPCs.OGRESS_BANKER_7050 -> npc.location.transform(3, 1, 0)
 
+            NPCs.BANKER_6532, NPCs.BANKER_6533,
+            NPCs.BANKER_6534, NPCs.BANKER_6535 -> npc.location.transform(npc.direction, 1)
+
             /* Magnus has no bank booth nearby so we need to handle that edge case here. */
             NPCs.MAGNUS_GRAM_5488 -> npc.location.transform(Direction.NORTH, 2)
 
@@ -134,13 +139,6 @@ class BankerNPC : AbstractNPC, InteractionListener {
                     }
                 }
 
-                val path = Pathfinder.find(entity, node)
-
-                if (path.isSuccessful) {
-                    val pt = path.points.last
-                    return Location(pt.x, pt.y)
-                }
-
                 return npc.location
             }
         }
@@ -149,10 +147,6 @@ class BankerNPC : AbstractNPC, InteractionListener {
     override fun defineListeners() {
         on(NPC_IDS, NPC, "bank", handler = ::attemptBank)
         on(NPC_IDS, NPC, "collect", handler = ::attemptCollect)
-        on(NPC_IDS, NPC, "talk-to") { player, node ->
-            val npc = node as NPC
-            openDialogue(player, npc.id, npc); true
-        }
     }
 
     override fun defineDestinationOverrides() {
