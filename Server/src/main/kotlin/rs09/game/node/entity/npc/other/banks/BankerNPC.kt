@@ -1,4 +1,4 @@
-package rs09.game.node.entity.npc.other
+package rs09.game.node.entity.npc.other.banks
 
 import api.getScenery
 import api.hasSealOfPassage
@@ -18,12 +18,12 @@ import rs09.game.ge.GrandExchangeRecords
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.`object`.BankBoothHandler
 
-private const val LUNAR_ISLE_BANK_REGION = 8253
-
 @Initializable
 class BankerNPC : AbstractNPC, InteractionListener {
     companion object {
-        val BANKER_IDS = intArrayOf(
+        private const val LUNAR_ISLE_BANK_REGION = 8253
+
+        val NPC_IDS = intArrayOf(
             NPCs.BANKER_44, NPCs.BANKER_45, NPCs.BANKER_494, NPCs.BANKER_495, NPCs.BANKER_496, NPCs.BANKER_497,
             NPCs.BANKER_498, NPCs.BANKER_499, NPCs.BANKER_1036, NPCs.BANKER_1360, NPCs.BANKER_2163, NPCs.BANKER_2164,
             NPCs.BANKER_2354, NPCs.BANKER_2355, NPCs.BANKER_2568, NPCs.BANKER_2569, NPCs.BANKER_2570, NPCs.BANKER_3198,
@@ -57,6 +57,42 @@ class BankerNPC : AbstractNPC, InteractionListener {
 
             return false
         }
+
+        fun attemptBank(player: Player, node: Node): Boolean {
+            val npc = node as NPC
+
+            if (player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {
+                return true
+            }
+
+            if (checkLunarIsleRestriction(player, node)) {
+                openDialogue(player, npc.id, npc)
+                return true
+            }
+
+            npc.faceLocation(null)
+            player.bank.open()
+
+            return true
+        }
+
+        fun attemptCollect(player: Player, node: Node): Boolean {
+            val npc = node as NPC
+
+            if (player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {
+                return true
+            }
+
+            if (checkLunarIsleRestriction(player, node)) {
+                openDialogue(player, npc.id, npc)
+                return true
+            }
+
+            npc.faceLocation(null)
+            GrandExchangeRecords.getInstance(player).openCollectionBox()
+
+            return true
+        }
     }
 
     //Constructor spaghetti because Arios I guess
@@ -65,42 +101,6 @@ class BankerNPC : AbstractNPC, InteractionListener {
 
     override fun construct(id: Int, location: Location, vararg objects: Any?): AbstractNPC {
         return BankerNPC(id, location)
-    }
-
-    private fun attemptBank(player: Player, node: Node): Boolean {
-        val npc = node as NPC
-
-        if (player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {
-            return true
-        }
-
-        if (checkLunarIsleRestriction(player, node)) {
-            openDialogue(player, npc.id, npc)
-            return true
-        }
-
-        npc.faceLocation(null)
-        player.bank.open();
-
-        return true
-    }
-
-    private fun attemptCollect(player: Player, node: Node): Boolean {
-        val npc = node as NPC
-
-        if (player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {
-            return true
-        }
-
-        if (checkLunarIsleRestriction(player, node)) {
-            openDialogue(player, npc.id, npc)
-            return true
-        }
-
-        npc.faceLocation(null)
-        GrandExchangeRecords.getInstance(player).openCollectionBox();
-
-        return true
     }
 
     private fun findAdjacentBankBoothLocation(): Pair<Direction, Location>? {
@@ -147,16 +147,16 @@ class BankerNPC : AbstractNPC, InteractionListener {
     }
 
     override fun defineListeners() {
-        on(BANKER_IDS, NPC, "bank", handler = ::attemptBank)
-        on(BANKER_IDS, NPC, "collect", handler = ::attemptCollect)
-        on(BANKER_IDS, NPC, "talk-to") { player, node ->
+        on(NPC_IDS, NPC, "bank", handler = ::attemptBank)
+        on(NPC_IDS, NPC, "collect", handler = ::attemptCollect)
+        on(NPC_IDS, NPC, "talk-to") { player, node ->
             val npc = node as NPC
             openDialogue(player, npc.id, npc); true
         }
     }
 
     override fun defineDestinationOverrides() {
-        setDest(NPC, BANKER_IDS, "bank", "collect", "talk-to", handler = ::provideDestinationOverride)
+        setDest(NPC, NPC_IDS, "bank", "collect", "talk-to", handler = ::provideDestinationOverride)
     }
 
     override fun init() {
@@ -172,5 +172,5 @@ class BankerNPC : AbstractNPC, InteractionListener {
         }
     }
 
-    override fun getIds(): IntArray = BANKER_IDS
+    override fun getIds(): IntArray = NPC_IDS
 }
