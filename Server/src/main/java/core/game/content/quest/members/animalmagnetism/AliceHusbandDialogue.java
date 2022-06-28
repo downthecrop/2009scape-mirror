@@ -397,8 +397,7 @@ public final class AliceHusbandDialogue extends DialoguePlugin {
 				stage++;
 				break;
 			case 4:
-				stage++;
-				close();
+				end();
 				new AnmaCutscene(player).start();
 				break;
 			}
