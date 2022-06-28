@@ -1591,9 +1591,16 @@ fun getPathableRandomLocalCoordinate(target: Entity, radius: Int, center: Locati
     return target.location
 }
 
+/**
+ * Returns the player's active slayer task.
+ * @author bushtail
+ * @param player the player whose task we are checking.
+ * @return the slayer task.
+ */
 fun getSlayerTask(player : Player) : Tasks? {
     return SlayerManager.getInstance(player).task
 }
+
 /**
  * Returns the name of the player's active slayer task.
  * @author bushtail
