@@ -280,7 +280,10 @@ enum class EnchantedJewellery(
         sendNPCDialogue(player, slayerManager.master!!.npc, "You're currently " +
                 "assigned to kill ${getSlayerTaskName(player).lowercase(Locale.getDefault())}'s; " +
                 "only ${getSlayerTaskKillsRemaining(player)} more to go.", FacialExpression.FRIENDLY)
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3ac55a4de924ee3692d4982ea8a15050512270d5
         // Slayer tracker UI
         setVarbit(player, 2502, 0, slayerManager.flags.taskFlags shr 4)
     }
