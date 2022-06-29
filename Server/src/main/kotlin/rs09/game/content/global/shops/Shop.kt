@@ -258,6 +258,8 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         val item = Item(inStock.id, amount)
         if(inStock.amount < amount)
             item.amount = inStock.amount
+        if (item.amount > player.inventory.getMaximumAdd(item))
+            item.amount = player.inventory.getMaximumAdd(item)
 
         if(inStock.amount == 0) {
             sendMessage(player, "This item is out of stock.")
