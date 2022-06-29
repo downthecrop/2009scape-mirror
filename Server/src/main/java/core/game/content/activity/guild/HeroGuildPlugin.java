@@ -1,7 +1,7 @@
 package core.game.content.activity.guild;
 
 import core.cache.def.impl.SceneryDefinition;
-import core.game.content.global.EnchantedJewellery;
+import rs09.game.content.global.EnchantedJewellery;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.node.entity.skill.summoning.familiar.Familiar;
 import core.game.interaction.NodeUsageEvent;
@@ -79,7 +79,9 @@ public final class HeroGuildPlugin extends OptionHandler {
 		@Override
 		public boolean handle(NodeUsageEvent event) {
 			final Player player = event.getPlayer();
-			final EnchantedJewellery jewellery = EnchantedJewellery.forItem(event.getUsedItem());
+			final EnchantedJewellery jewellery;
+			assert event.getUsedItem() != null;
+			jewellery = EnchantedJewellery.Companion.getIdMap().get(event.getUsedItem().getId());
 			if (jewellery == null && event.getUsedItem().getId() != 2572) {
 				return true;
 			}
@@ -96,15 +98,9 @@ public final class HeroGuildPlugin extends OptionHandler {
 			}
 			player.lock(1);
 			player.animate(Animation.create(832));
-			if(event.getUsedItem().getId() == 2572){
-				player.getInventory().replace(new Item(14646), event.getUsedItem().getSlot());
-			} else {
-				player.getInventory().replace(new Item(jewellery.getIds()[0]), event.getUsedItem().getSlot());
-			}
-			String name = event.getUsedItem().getName().toLowerCase();
-			for (int i = 0; i < 4; i++) {
-				name = name.replace("(" + (i + 1) + ")", "").trim();
-			}
+			Item rechargedItem = new Item(jewellery.getIds()[0]);
+			player.getInventory().replace(rechargedItem, event.getUsedItem().getSlot());
+			String name = jewellery.getJewelleryName(rechargedItem);
 			if (!fam) {
 				player.sendMessage("You dip the " + name + " in the fountain...");
 			} else {
