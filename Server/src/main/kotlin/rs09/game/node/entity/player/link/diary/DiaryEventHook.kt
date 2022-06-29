@@ -298,8 +298,14 @@ class DiaryEventHook : LoginListener, Commands {
     }
 
     private object DiaryTeleportHooks : EventHook<TeleportEvent> {
+        val rangingGuild = Location(2657, 3439, 0)
         override fun process(entity: Entity, event: TeleportEvent) {
-            TODO("Not yet implemented")
+            if(entity !is Player) return
+            when(event.source){
+                1 -> if (event.location.withinDistance(rangingGuild)) {
+                    finishTask(entity, DiaryType.SEERS_VILLAGE, 2, 0)
+                }
+            }
         }
     }
 

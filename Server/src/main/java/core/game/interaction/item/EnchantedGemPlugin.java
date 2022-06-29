@@ -3,7 +3,7 @@ package core.game.interaction.item;
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
 import core.game.content.dialogue.DialoguePlugin;
-import core.game.content.global.EnchantedJewellery;
+import rs09.game.content.global.EnchantedJewellery;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
