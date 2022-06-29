@@ -12,6 +12,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
+import rs09.game.content.quest.members.anma.AnmaCutscene;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
@@ -33,11 +34,6 @@ public final class AliceHusbandDialogue extends DialoguePlugin {
 	 * The quest.
 	 */
 	private Quest quest;
-
-	/**
-	 * The chicken catch scene.
-	 */
-	private ChickenCatchScene scene;
 
 	/**
 	 * Constructs a new {@code AliceHusbandDialogue} {@code Object}.
@@ -64,7 +60,6 @@ public final class AliceHusbandDialogue extends DialoguePlugin {
 	@Override
 	public void init() {
 		super.init();
-		ClassScanner.definePlugin(new ChickenCatchScene());
 	}
 
 	@Override
@@ -402,186 +397,8 @@ public final class AliceHusbandDialogue extends DialoguePlugin {
 				stage++;
 				break;
 			case 4:
-				stage++;
-				close();
-				ActivityManager.start(player, ChickenCatchScene.NAME, false, this);
-				break;
-			case 5:
-				close();
-				player.face(scene.chicken);
-				scene.walk(scene.husband, 46, 9);
-				scene.walk(scene.chicken, 46, 9);
-				GameWorld.getPulser().submit(new Pulse(1, player) {
-					int counter;
-
-					@Override
-					public boolean pulse() {
-						switch (++counter) {
-						case 3:
-							scene.walk(scene.husband, 53, 8);
-							scene.walk(scene.chicken, 52, 8);
-							break;
-						case 11:
-							scene.walk(scene.chicken, 40, 10);
-							scene.walk(scene.husband, 40, 10);
-							break;
-						case 22:
-							npc("Git 'ere, yer pesky bird!");
-							stage++;
-							return true;
-						}
-						return false;
-					}
-				});
-				break;
-			case 6:
-				stage++;
-				close();
-				scene.husband.getAnimator().forceAnimation(new Animation(5377, Priority.HIGH));
-				scene.walk(scene.husband, 51, 8);
-				scene.walk(scene.chicken, 45, 10);
-				GameWorld.getPulser().submit(new Pulse(1, player) {
-					int counter;
-
-					@Override
-					public boolean pulse() {
-						switch (++counter) {
-						case 2:
-							scene.husband.getAnimator().forceAnimation(new Animation(5377, Priority.HIGH));
-							break;
-						case 5:
-							scene.husband.getAnimator().forceAnimation(new Animation(5377, Priority.HIGH));
-							break;
-						case 7:
-							scene.walk(scene.chicken, 47, 7);
-							break;
-						case 8:
-							scene.husband.animate(new Animation(5377, Priority.HIGH));
-							break;
-						case 12:
-							scene.walk(scene.chicken, 47, 11);
-							break;
-						case 17:
-							npc("Where'd she go?");
-							return true;
-						}
-						return false;
-					}
-				});
-				break;
-			case 7:
-				close();
-				stage++;
-				scene.allice.init();
-				scene.cow.init();
-				scene.cowKiller.init();
-				scene.walk(scene.allice, 48, 8);
-				scene.walk(scene.cowKiller, 46, 9);
-				scene.walk(scene.cow, 46, 10);
-				scene.walk(scene.husband, 44, 10);
-				GameWorld.getPulser().submit(new Pulse(1, player) {
-					int counter;
-
-					@Override
-					public boolean pulse() {
-						switch (++counter) {
-						case 2:
-							scene.walk(scene.chicken, 45, 9);
-							break;
-						case 8:
-							scene.allice.face(player);
-							scene.husband.face(player);
-							npc("Git orf my laaand!");
-							return true;
-						}
-						return false;
-					}
-				});
-				break;
-			case 8:
-				interpreter.sendDialogues(scene.allice, null, "You heard my husband: leave now!");
-				stage++;
-				break;
-			case 9:
-				scene.allice.face(scene.cowKiller);
-				scene.cowKiller.face(scene.allice);
-				interpreter.sendDialogues(scene.cowKiller, null, "Always the same; I can never get these animals to", "myself.");
-				stage = 20;
-				break;
-			case 20:
-				scene.cowKiller.animate(Animation.create(2067));
-				scene.cowKiller.faceTemporary(scene.cow, 1);
-				scene.cow.getImpactHandler().manualHit(scene.cowKiller, scene.cow.getSkills().getLifepoints(), HitsplatType.NORMAL);
-				interpreter.sendDialogues(scene.allice, null, "You killed Bessie!");
-				stage++;
-				break;
-			case 21:
-				interpreter.sendDialogues(scene.cowKiller, null, "Buying cowhides and feathers - ahh, that chicken is", "next, feathers for me!");
-				stage++;
-				break;
-			case 22:
-				close();
-				stage++;
-				scene.allice.face(scene.husband);
-				scene.walk(scene.cowKiller, 46, 10);
-				GameWorld.getPulser().submit(new Pulse(1, player) {
-					int count;
-
-					@Override
-					public boolean pulse() {
-						switch (++count) {
-						case 4:
-							scene.cowKiller.animate(Animation.create(832));
-							break;
-						case 6:
-							scene.cowKiller.face(scene.chicken);
-							scene.chicken.sendChat("Woo woo!");
-							break;
-						case 8:
-							scene.husband.face(scene.cowKiller);
-							scene.walk(scene.chicken, 45, 10);
-							break;
-						case 10:
-							scene.cowKiller.animate(Animation.create(2067));
-							scene.chicken.getImpactHandler().manualHit(player, 0, HitsplatType.MISS);
-							scene.chicken.face(scene.husband);
-							break;
-						case 12:
-							interpreter.sendDialogues(5209, null, "Woo woo woo!");
-							break;
-						}
-						return false;
-					}
-
-				});
-				break;
-			case 23:
-				close();
-				stage++;
-				GameWorld.getPulser().submit(new Pulse(1, player) {
-					int counter;
-
-					@Override
-					public boolean pulse() {
-						switch (++counter) {
-						case 1:
-							scene.husband.animate(Animation.create(5377));
-							break;
-						case 3:
-							scene.chicken.clear();
-							break;
-						case 6:
-							player("Well, that's one way to catch a chicken, I suppose.");
-							return true;
-						}
-						return false;
-					}
-				});
-				break;
-			case 24:
-				quest.setStage(player, 20);
-				close();
-				scene.stop(true);
+				end();
+				new AnmaCutscene(player).start();
 				break;
 			}
 			break;
@@ -607,123 +424,6 @@ public final class AliceHusbandDialogue extends DialoguePlugin {
 			player.getInventory().add(new Item(10487, amount), player);
 			npc("Great! I'm laying away me tokens for some killer cows.", "That'll learn them bones rustlers.");
 		}
-	}
-
-	/**
-	 * Handles the cutscene used to catch a chicken.
-	 * @author Vexia
-	 */
-	public static final class ChickenCatchScene extends CutscenePlugin {
-
-		/**
-		 * The name of the cutscene.
-		 */
-		public static final String NAME = "am:chicken";
-
-		/**
-		 * The npcs used.
-		 */
-		public NPC chicken, husband, cowKiller, cow, allice;
-
-		/**
-		 * Constructs a new {@code ChickenCatchScene} {@code Object}.
-		 */
-		public ChickenCatchScene() {
-			super(NAME);
-		}
-
-		/**
-		 * Constructs a new {@code ChickenCatchScene} {@code Object}.
-		 * @param player the player.
-		 */
-		public ChickenCatchScene(Player player) {
-			super(NAME);
-			this.player = player;
-		}
-
-		@Override
-		public ActivityPlugin newInstance(Player p) throws Throwable {
-			return new ChickenCatchScene(p);
-		}
-
-		@Override
-		public boolean start(final Player player, boolean login, Object... args) {
-			setNpcs();
-			AliceHusbandDialogue dial = (AliceHusbandDialogue) args[0];
-			dial.scene = this;
-			return super.start(player, login, args);
-		}
-
-		@Override
-		public void open() {
-			super.open();
-			player.getLocks().lock();
-			Location loc = player.getLocation();
-			int height = 480, xRot = -6, yRot = -28;
-			PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.POSITION, loc.getX() + 2, loc.getY() + 3, height, 1, 100));
-			PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.ROTATION, loc.getX() + xRot, loc.getY() + yRot, height, 1, 100));
-			player.faceTemporary(chicken, 1);
-			player.getLocks().lockMovement(GameWorld.getTicks() + 1000000);
-			player.getDialogueInterpreter().sendDialogues(5202, null, "Here, chicky chicky!");
-		}
-
-		@Override
-		public boolean leave(final Entity e, boolean logout) {
-			chicken.clear();
-			husband.clear();
-			cowKiller.clear();
-			allice.clear();
-			cow.clear();
-			return super.leave(e, logout);
-		}
-
-		/**
-		 * Sets the npc instances.
-		 */
-		private void setNpcs() {
-			chicken = NPC.create(1692, base.transform(44, 10, 0));
-			husband = NPC.create(5205, base.transform(42, 10, 0));
-			cow = NPC.create(5211, base.transform(42, 10, 0));
-			cowKiller = NPC.create(5210, base.transform(51, 8, 0));
-			allice = NPC.create(5212, base.transform(47, 5, 0));
-			allice.setWalks(false);
-			cow.setWalks(false);
-			cowKiller.setWalks(false);
-			chicken.setWalks(false);
-			husband.setWalks(false);
-			husband.init();
-			chicken.init();
-			chicken.faceLocation(husband.getLocation());
-			walk(husband, chicken.getLocation().getX() - 1, chicken.getLocation().getY());
-		}
-
-		/**
-		 * Walks an npc.
-		 * @param npc the npc.
-		 */
-		public void walk(NPC npc, int x, int y) {
-			Location loc = base.transform(x, y, 0);
-			npc.getWalkingQueue().reset();
-			Pathfinder.find(npc, loc).walk(npc);
-		}
-
-		@Override
-		public Location getStartLocation() {
-			return base.transform(46, 13, 0);
-		}
-
-		@Override
-		public Location getSpawnLocation() {
-			return null;
-		}
-
-		@Override
-		public void configure() {
-			region = DynamicRegion.create(14391);
-			setRegionBase();
-			registerRegion(region.getId());
-		}
-
 	}
 
 	@Override

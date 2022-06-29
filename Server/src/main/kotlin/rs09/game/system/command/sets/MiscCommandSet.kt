@@ -21,9 +21,11 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.rs09.consts.Components
 import rs09.ServerConstants
+import rs09.game.camerautils.PlayerCamera
 import rs09.game.content.activity.fishingtrawler.TrawlerLoot
 import rs09.game.content.ame.RandomEventManager
 import rs09.game.content.ame.RandomEvents
+import rs09.game.content.quest.members.anma.AnmaCutscene
 import rs09.game.ge.GrandExchange
 import rs09.game.node.entity.state.newsys.states.FarmingState
 import rs09.game.system.SystemLogger
@@ -60,6 +62,48 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
                 player.sendMessage("npc: ${npc.name}. npc defence: ${npc.skills.getLevel(Skills.DEFENCE)}")
                 player.sendMessage("calculateDefence: ${handler.calculateDefence(npc, player)}")
             }
+        }
+
+        define("movcam", Privilege.ADMIN) {player, args ->
+            val regionX = args[1].toIntOrNull() ?: return@define
+            val regionY = args[2].toIntOrNull() ?: return@define
+            var height = 300
+            var speed = 100
+
+            if (args.size > 3)
+                height = args[3].toIntOrNull() ?: return@define
+
+            if (args.size > 4)
+                speed = args[4].toIntOrNull() ?: return@define
+
+            val region = RegionManager.forId(player.location.regionId)
+            val base = region.baseLocation
+
+            val globalLoc = base.transform(regionX, regionY, 0)
+            PlayerCamera(player).panTo(globalLoc.x, globalLoc.y, height, speed)
+        }
+
+        define("rotcam", Privilege.ADMIN) {player, args ->
+            val regionX = args[1].toIntOrNull() ?: return@define
+            val regionY = args[2].toIntOrNull() ?: return@define
+            var height = 300
+            var speed = 100
+
+            if (args.size > 3)
+                height = args[3].toIntOrNull() ?: return@define
+
+            if (args.size > 4)
+                speed = args[4].toIntOrNull() ?: return@define
+
+            val region = RegionManager.forId(player.location.regionId)
+            val base = region.baseLocation
+
+            val globalLoc = base.transform(regionX, regionY, 0)
+            PlayerCamera(player).rotateTo(globalLoc.x, globalLoc.y, height, speed)
+        }
+
+        define("anmacs", Privilege.ADMIN) { player, _ ->
+            AnmaCutscene(player).start()
         }
 
         /**

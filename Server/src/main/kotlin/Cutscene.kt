@@ -14,6 +14,10 @@ import core.game.world.map.Location
 import core.game.world.map.Region
 import core.game.world.map.RegionManager
 import core.game.world.map.build.DynamicRegion
+import core.game.world.map.path.Pathfinder
+import core.net.packet.PacketRepository
+import core.net.packet.context.MinimapStateContext
+import core.net.packet.out.MinimapState
 import org.rs09.consts.Components
 import rs09.ServerConstants
 import rs09.game.Event
@@ -94,7 +98,7 @@ abstract class Cutscene(val player: Player) {
     fun move(entity: Entity, regionX: Int, regionY: Int)
     {
         logCutscene("Moving ${entity.username} to LOCAL[$regionX,$regionY].")
-        entity.pulseManager.run(object : MovementPulse(entity, base.transform(regionX,regionY,0)) {
+        entity.pulseManager.run(object : MovementPulse(entity, base.transform(regionX,regionY,0), Pathfinder.SMART) {
             override fun pulse(): Boolean {
                 return true
             }
@@ -223,6 +227,7 @@ abstract class Cutscene(val player: Player) {
         region = RegionManager.forId(player.location.regionId)
         base = RegionManager.forId(player.location.regionId).baseLocation
         setup()
+        PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 2))
         runStage(player.getCutsceneStage())
         setAttribute(player, ATTRIBUTE_CUTSCENE, this)
         setAttribute(player, ATTRIBUTE_CUTSCENE_STAGE, 0)
@@ -262,6 +267,7 @@ abstract class Cutscene(val player: Player) {
                         player.unhook(CUTSCENE_DEATH_HOOK)
                         player.logoutListeners.remove("cutscene")
                         RandomEventManager.getInstance(player)!!.enabled = true
+                        PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 0))
                         return true
                     }
                 }
