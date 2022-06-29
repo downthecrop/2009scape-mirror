@@ -16,6 +16,7 @@ import rs09.game.Event
 import rs09.game.system.command.Privilege
 
 private const val TASK_DRAYNOR_BANK = 15
+private const val TASK_LUMBRIDGE_GENERAL_STORE = 18
 
 class DiaryEventHook : LoginListener, Commands {
     override fun login(player: Player) {
@@ -56,6 +57,15 @@ class DiaryEventHook : LoginListener, Commands {
                         DiaryType.LUMBRIDGE,
                         1,
                         TASK_DRAYNOR_BANK
+                    )
+                }
+
+                12850 -> if (event.component.id == Components.SHOP_TEMPLATE_620) {
+                    finishTask(
+                        entity,
+                        DiaryType.LUMBRIDGE,
+                        0,
+                        TASK_LUMBRIDGE_GENERAL_STORE
                     )
                 }
             }
