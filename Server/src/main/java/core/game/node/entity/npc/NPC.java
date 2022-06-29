@@ -413,10 +413,11 @@ public class NPC extends Entity {
 	public void handleTickActions() {
 		if (!getLocks().isInteractionLocked()) {
 			if (!getLocks().isMovementLocked()) {
-				if (!pathBoundMovement
+				if (
+						!pathBoundMovement
 						&& walkRadius > 0
 						&& !getLocation().withinDistance(getProperties().getSpawnLocation(), (int)(walkRadius * 1.5))
-						&& inCombat())
+					)	
 				{
 					if(!isNeverWalks()){
 						if(walkRadius == 0)
@@ -428,7 +429,7 @@ public class NPC extends Entity {
 					nextWalk = GameWorld.getTicks() + walkRadius + 1;
 					getLocks().lockMovement(100);
 					getImpactHandler().setDisabledTicks(100);
-					GameWorld.getPulser().submit(new MovementPulse(this, getProperties().getSpawnLocation(), Pathfinder.SMART) {
+					getPulseManager().run(new MovementPulse(this, getProperties().getSpawnLocation(), Pathfinder.SMART) {
 						@Override
 						public boolean pulse() {
 							getProperties().getCombatPulse().stop();
