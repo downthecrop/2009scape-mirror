@@ -188,6 +188,9 @@ public class WoodcuttingSkillPulse extends Pulse {
                     SceneryBuilder.replace(node, node.transform(0), resource.getRespawnDuration());
                 }
                 node.setActive(false);
+
+                // TODO: Extract this someplace appropriate.
+                player.getAudioManager().send(2734);
                 return true;
             }
         }
