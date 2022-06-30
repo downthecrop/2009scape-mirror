@@ -232,7 +232,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * List all commands
          */
-        define("commands"){player, args ->
+        define("commands", Privilege.STANDARD, "::commands <lt>page<gt>", "Lists all the commands (you are here.)"){player, args ->
             val page = if (args.size > 1) (args[1].toIntOrNull() ?: 1) - 1 else 0
             var lineid = 11
             var pages = CommandMapping.getPageIndices(player.rights.ordinal)
