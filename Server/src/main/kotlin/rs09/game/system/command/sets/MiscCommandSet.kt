@@ -232,14 +232,55 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * List all commands
          */
-        define("commands"){player,_ ->
+        define("commands"){player, args ->
+            val page = if (args.size > 1) (args[1].toIntOrNull() ?: 1) - 1 else 0
+            var lineid = 11
+            var pages = CommandMapping.getPageIndices(player.rights.ordinal)
+            var end = if (page < (pages.size - 1)) pages[page + 1] else CommandMapping.getCommands().size
+
+            if (page < 0) {
+                reject(player, "Usage: ::commands <lt>page<gt>")
+            }
+
             for (i in 0..310) {
                 player.packetDispatch.sendString("", Components.QUESTJOURNAL_SCROLL_275, i)
             }
-            var lineid = 11
-            player.packetDispatch.sendString("Commands",Components.QUESTJOURNAL_SCROLL_275,2)
-            for(line in CommandMapping.getNames().sorted())
-                player.packetDispatch.sendString(line,Components.QUESTJOURNAL_SCROLL_275,lineid++)
+
+            player.packetDispatch.sendString(
+                "Commands" + if (pages.size > 1) " (${page + 1}/${pages.size})" else "", 
+                Components.QUESTJOURNAL_SCROLL_275,
+                2
+            )
+
+            
+            for(i in pages[page] until end) {
+                var command = CommandMapping.getCommands()[i]
+                var title = "${command.name}"
+                var rights = command.privilege.ordinal
+                var icon = rights - 1
+
+    
+                if (rights > player.rights.ordinal) continue
+
+                if (rights > 0)
+                    title = "(<img=$icon>) $title"
+
+                player.packetDispatch.sendString(title, Components.QUESTJOURNAL_SCROLL_275, lineid++)
+
+                if (command.usage.isNotEmpty())
+                    player.packetDispatch.sendString("Usage: ${command.usage}", Components.QUESTJOURNAL_SCROLL_275, lineid++)
+
+                if (command.description.isNotEmpty())
+                    player.packetDispatch.sendString(command.description, Components.QUESTJOURNAL_SCROLL_275, lineid++)
+                
+                player.packetDispatch.sendString("<str>-------------------------------</str>", Components.QUESTJOURNAL_SCROLL_275, lineid++)
+
+                if (lineid > 306) {
+                    player.packetDispatch.sendString("To view the next page, use ::commands ${page + 2}", Components.QUESTJOURNAL_SCROLL_275, lineid)
+                    break
+                }
+
+            }
             player.interfaceManager.open(Component(Components.QUESTJOURNAL_SCROLL_275))
         }
 
