@@ -14,6 +14,11 @@ import rs09.tools.stringtools.colorize
 @Initializable
 class BottingCommandSet : CommandSet(Privilege.STANDARD) {
     override fun defineCommands() {
+
+        if (GameWorld.settings?.enabled_botting != true) {
+            return
+        }
+
         define("scripts"){player, _ ->
             if(GameWorld.settings?.enabled_botting != true){
                 player.sendChat("I just tried to do something silly!")
