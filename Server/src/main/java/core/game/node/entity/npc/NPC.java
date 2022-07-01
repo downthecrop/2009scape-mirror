@@ -429,7 +429,7 @@ public class NPC extends Entity {
 					nextWalk = GameWorld.getTicks() + walkRadius + 1;
 					getLocks().lockMovement(100);
 					getImpactHandler().setDisabledTicks(100);
-					getPulseManager().run(new MovementPulse(this, getProperties().getSpawnLocation(), Pathfinder.SMART) {
+					GameWorld.getPulser().submit(new MovementPulse(this, getProperties().getSpawnLocation(), Pathfinder.SMART) {
 						@Override
 						public boolean pulse() {
 							getProperties().getCombatPulse().stop();
