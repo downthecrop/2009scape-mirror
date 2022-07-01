@@ -365,7 +365,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             }
         }
 
-        define("log", Privilege.ADMIN, "", "Used for logging multiple npc-spawn-formatted locations. Call ::logdone when finished."){player,_ ->
+        define("log", Privilege.ADMIN){player,_ ->
             var log: ArrayList<String>? = player.getAttribute("loc-log")
             log = log ?: ArrayList<String>()
             val locString = "{${player.location.x},${player.location.y},${player.location.z},1,0}"

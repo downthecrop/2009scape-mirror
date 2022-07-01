@@ -40,7 +40,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Allows a player to reset their password
          */
-        define("resetpassword", Privilege.STANDARD, "", "Resets your password. WARNING: Case insensitive due to dialogue limitations.") { player, args ->
+        define("resetpassword", Privilege.STANDARD, "", "WARNING: Case insensitive due to dialogue limitations.") { player, args ->
             sendInputDialogue(player, InputType.STRING_SHORT, "Enter Current Password:"){value ->
                 val pass = value.toString()
                 SystemLogger.logInfo(pass)
@@ -130,7 +130,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
             }
         }
 
-        define("removeitem", Privilege.ADMIN, "::removeitem <lt>LOC<gt> <lt>USERNAME<gt> <lt>ITEM ID<gt> <lt>AMOUNT<gt>", "Removes the amount of the given item from the player's LOC. LOC = bank,inventory,equipment") { player, args ->
+        define("removeitem", Privilege.ADMIN, "::removeitem <lt>LOC<gt> <lt>USERNAME<gt> <lt>ITEM ID<gt> <lt>AMOUNT<gt>", "LOC = bank,inventory,equipment") { player, args ->
             if (args.size == 4 || args.size == 5) {
                 val itemLoc = args[1].toLowerCase()
                 val victim = Repository.getPlayerByName(args[2])

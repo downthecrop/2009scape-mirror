@@ -17,7 +17,7 @@ class TeleportCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Allows teleporting by location name
          */
-        define("to"){player,args ->
+        define("to", Privilege.ADMIN, "::to <lt>String<gt>", "See ServerConstants.TELEPORT_DESTINATIONS"){player,args ->
             var destination: Location? = null
             val place = args.slice(1 until args.size).joinToString(" ")
             for (destinations in ServerConstants.TELEPORT_DESTINATIONS) {
@@ -40,7 +40,7 @@ class TeleportCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Teleport to location using coordinates
          */
-        define("tele"){player,args ->
+        define("tele", Privilege.ADMIN, "::tele <lt>X<gt> <lt>Y<gt> <lt>Z<gt> OR <lt>JAGCOORD<gt>", "JAGCOORD is Z_REGIONX_REGIONY_LOCALX_LOCALY"){player,args ->
             if (args.size == 2 && args[1].contains(",")) {
                 val args2 = args[1].split(",".toRegex()).toTypedArray()
                 val x = args2[1].toInt() shl 6 or args2[3].toInt()
@@ -102,7 +102,7 @@ class TeleportCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Teleport to the first object with the given name in the given regionX regionY
          */
-        define("teleobj"){player, args ->
+        define("teleobj", Privilege.ADMIN, "::teleobj <lt>RX_RY<gt> <lt>OBJ NAME<gt>", "Teleports to the first object with the given name."){player, args ->
             if(args.size < 3) reject(player, "Usage: regionX_regionY Object Name")
             var objName = ""
             for(i in 2 until args.size) objName += (args[i] + if(i + 1 == args.size) "" else " ")
@@ -141,7 +141,7 @@ class TeleportCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Teleport to a specific player
          */
-        define("teleto"){player,args ->
+        define("teleto", Privilege.ADMIN, "::teleto <lt>USERNAME<gt>", "Teleports to the named player."){player,args ->
             if (args.size < 1) {
                 reject(player,"syntax error: name")
             }
@@ -160,7 +160,7 @@ class TeleportCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Teleport a specific player to you
          */
-        define("teletome"){player,args ->
+        define("teletome", Privilege.ADMIN, "::teletome <lt>USERNAME<gt>", "Teleports the given user to you."){player,args ->
             if (args.size < 1) {
                 reject(player,"syntax error: name")
             }
@@ -179,7 +179,7 @@ class TeleportCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Teleports to the server's home location
          */
-        define("home"){player,_ ->
+        define("home", Privilege.ADMIN, "", "Teleports to ServerConstants.HOME_LOCATION"){player,_ ->
             player.properties.teleportLocation = ServerConstants.HOME_LOCATION
         }
     }
