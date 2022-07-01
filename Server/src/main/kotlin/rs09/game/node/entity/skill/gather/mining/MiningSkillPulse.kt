@@ -38,6 +38,7 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
     private var isMiningGems = false
     private var ticks = 0
     protected var resetAnimation = true
+    private val GEM_ROCKS = intArrayOf(23567, 23566, 23568, 23560, 23561, 23562)
 
     // Perfect Gold Ore in Witchhaven Dungeon (Family Crest)
     private val perfectGoldOreLocations = listOf(
@@ -105,7 +106,11 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
             return false
         }
         if (player.inventory.freeSlots() < 1) {
-            player.dialogueInterpreter.sendDialogue("Your inventory is too full to hold any more " + ItemDefinition.forId(resource!!.getReward()).name.toLowerCase() + ".")
+            if(resource!!.identifier == 13.toByte()) {
+                player.dialogueInterpreter.sendDialogue("Your inventory is too full to hold any more gems.")
+                return false
+            }
+            player.dialogueInterpreter.sendDialogue("Your inventory is too full to hold any more " + ItemDefinition.forId(resource!!.getReward()).name.lowercase() + ".")
             return false
         }
         return true
@@ -158,10 +163,10 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
 
             //send the message for the resource reward
             if (isMiningGems) {
-                val gemName = ItemDefinition.forId(reward).name.toLowerCase()
+                val gemName = ItemDefinition.forId(reward).name.lowercase()
                 player.sendMessage("You get " + (if (StringUtils.isPlusN(gemName)) "an" else "a") + " " + gemName + ".")
             } else {
-                player.packetDispatch.sendMessage("You get some " + ItemDefinition.forId(reward).name.toLowerCase() + ".")
+                player.packetDispatch.sendMessage("You get some " + ItemDefinition.forId(reward).name.lowercase() + ".")
             }
             //give the reward
             player.inventory.add(Item(reward, rewardAmount))
@@ -172,7 +177,7 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
             if (!isMiningEssence) {
                 var chance = 282
                 var altered = false
-                if (Item(player.equipment.getId(12)).name.toLowerCase().contains("ring of wealth") || inEquipment(player, Items.RING_OF_THE_STAR_SPRITE_14652)) {
+                if (Item(player.equipment.getId(12)).name.lowercase().contains("ring of wealth") || inEquipment(player, Items.RING_OF_THE_STAR_SPRITE_14652)) {
                     chance = (chance / 1.5).toInt()
                     altered = true
                 }
