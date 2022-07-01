@@ -14,11 +14,7 @@ class ProspectListener : InteractionListener {
 
     override fun defineListeners() {
         on(SCENERY, "prospect") { player, node ->
-            val rock = SkillingResource.forId(node.id)
-            if(rock == null) {
-                sendMessage(player, "There is no ore currently available in this rock.")
-                return@on true
-            }
+            val rock = SkillingResource.forId(node.asScenery().id)
             /** Check if the rock contains gems */
             if(MiningNode.forId(node.id).identifier == 13.toByte()) {
                 sendMessage(player,"You examine the rock for ores...")
@@ -29,7 +25,14 @@ class ProspectListener : InteractionListener {
                         return true
                     }
                 })
+                return@on true
             }
+
+            if(rock == null) {
+                sendMessage(player, "There is no ore currently available in this rock.")
+                return@on false
+            }
+
             /** If it doesn't contain gems */
             else {
                 sendMessage(player,"You examine the rock for ores...")
