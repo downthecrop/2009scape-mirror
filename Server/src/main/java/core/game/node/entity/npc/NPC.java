@@ -412,13 +412,42 @@ public class NPC extends Entity {
 	 */
 	public void handleTickActions() {
 		if (!getLocks().isInteractionLocked()) {
-			if (!pathBoundMovement && walkRadius > 0 && !getLocation().withinDistance(getProperties().getSpawnLocation(), walkRadius)) {
-				if(!isNeverWalks()){
-					if(walkRadius == 0)
-						walkRadius = 3;
+			if (!getLocks().isMovementLocked()) {
+				if (
+						!pathBoundMovement
+						&& walkRadius > 0
+						&& !getLocation().withinDistance(getProperties().getSpawnLocation(), (int)(walkRadius * 1.5))
+					)	
+				{
+					if(!isNeverWalks()){
+						if(walkRadius == 0)
+							walkRadius = 3;
+					}
+					if (aggressiveHandler != null) {
+						aggressiveHandler.setPauseTicks(walkRadius + 1);
+					}
+					nextWalk = GameWorld.getTicks() + walkRadius + 1;
+					getLocks().lockMovement(100);
+					getImpactHandler().setDisabledTicks(100);
+					setAttribute("return-to-spawn", true);
+					GameWorld.getPulser().submit(new MovementPulse(this, getProperties().getSpawnLocation(), Pathfinder.SMART) {
+						@Override
+						public boolean pulse() {
+							getProperties().getCombatPulse().stop();
+							getLocks().unlockMovement();
+							fullRestore();
+							getImpactHandler().setDisabledTicks(0);
+							removeAttribute("return-to-spawn");
+							return true;
+						}
+					});
+					return;
 				}
-				if (aggressiveHandler != null) {
-					aggressiveHandler.setPauseTicks(walkRadius + 1);
+				if (dialoguePlayer == null || !dialoguePlayer.isActive() || !dialoguePlayer.getInterfaceManager().hasChatbox()) {
+					dialoguePlayer = null;
+					if (walks && !getPulseManager().hasPulseRunning() && !getProperties().getCombatPulse().isAttacking() && !getProperties().getCombatPulse().isInCombat() && nextWalk < GameWorld.getTicks()) {
+						if (walkToNextDest()) return;
+					}
 				}
 			}
 			if (aggressive && aggressiveHandler != null && aggressiveHandler.selectTarget()) {
@@ -428,27 +457,24 @@ public class NPC extends Entity {
 				return;
 			}
 		}
-		if (!getLocks().isMovementLocked()) {
-			if (dialoguePlayer == null || !dialoguePlayer.isActive() || !dialoguePlayer.getInterfaceManager().hasChatbox()) {
-				dialoguePlayer = null;
-				if (walks && !getPulseManager().hasPulseRunning() && !getProperties().getCombatPulse().isAttacking() && !getProperties().getCombatPulse().isInCombat() && nextWalk < GameWorld.getTicks()) {
-					if (RandomFunction.nextBool()) return;
-					setNextWalk();
-					Location l = getMovementDestination();
-					if (canMove(l)) {
-						if((Boolean) definition.getHandlers().getOrDefault("water_npc",false)){
-							Pathfinder.findWater(this,l,true,Pathfinder.DUMB).walk(this);
-						} else {
-							Pathfinder.find(this, l, true, Pathfinder.DUMB).walk(this);
-						}
-					}
-				}
-			}
-		}
 		if (forceTalk != null && getAttribute("lastForceTalk", 0) < GameWorld.getTicks()) {
 			sendChat(forceTalk);
 			setAttribute("lastForceTalk", GameWorld.getTicks() + RandomFunction.random(15, 30));
 		}
+	}
+
+	private boolean walkToNextDest() {
+		if (RandomFunction.nextBool()) return true;
+		setNextWalk();
+		Location l = getMovementDestination();
+		if (canMove(l)) {
+			if((Boolean) definition.getHandlers().getOrDefault("water_npc",false)){
+				Pathfinder.findWater(this,l,true,Pathfinder.DUMB).walk(this);
+			} else {
+				Pathfinder.find(this, l, true, Pathfinder.DUMB).walk(this);
+			}
+		}
+		return false;
 	}
 
 	/**
