@@ -1,4 +1,4 @@
-package rs09.game.node.entity.npc.other
+package rs09.game.node.entity.npc
 
 import core.cache.def.impl.NPCDefinition
 import core.game.interaction.OptionHandler

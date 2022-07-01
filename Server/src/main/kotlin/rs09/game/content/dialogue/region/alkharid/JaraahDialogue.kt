@@ -1,4 +1,4 @@
-package rs09.game.node.entity.npc.city.alkharid
+package rs09.game.content.dialogue.region.alkharid
 
 import api.animate
 import api.getDynLevel

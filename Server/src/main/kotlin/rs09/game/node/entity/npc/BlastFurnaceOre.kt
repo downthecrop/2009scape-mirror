@@ -1,4 +1,4 @@
-package rs09.game.node.entity.npc.other
+package rs09.game.node.entity.npc
 
 import api.*
 import core.game.node.entity.npc.AbstractNPC
@@ -21,15 +21,15 @@ class BlastFurnaceOre : AbstractNPC {
 
     constructor(owner: Player, variant: BFOreVariant, amount: Int) : super(
         when(variant){
-            BFOreVariant.IRON         -> NPCs.IRON_ORE_2556
-            BFOreVariant.COPPER       -> NPCs.COPPER_ORE_2555
-            BFOreVariant.TIN          -> NPCs.TIN_ORE_2554
-            BFOreVariant.COAL         -> NPCs.COAL_2562
-            BFOreVariant.MITHRIL      -> NPCs.MITHRIL_ORE_2557
-            BFOreVariant.ADAMANT      -> NPCs.ADAMANTITE_ORE_2558
-            BFOreVariant.SILVER       -> NPCs.SILVER_ORE_2560
-            BFOreVariant.GOLD         -> NPCs.GOLD_ORE_2561
-            BFOreVariant.RUNITE       -> NPCs.RUNITE_ORE_2559
+            BFOreVariant.IRON -> NPCs.IRON_ORE_2556
+            BFOreVariant.COPPER -> NPCs.COPPER_ORE_2555
+            BFOreVariant.TIN -> NPCs.TIN_ORE_2554
+            BFOreVariant.COAL -> NPCs.COAL_2562
+            BFOreVariant.MITHRIL -> NPCs.MITHRIL_ORE_2557
+            BFOreVariant.ADAMANT -> NPCs.ADAMANTITE_ORE_2558
+            BFOreVariant.SILVER -> NPCs.SILVER_ORE_2560
+            BFOreVariant.GOLD -> NPCs.GOLD_ORE_2561
+            BFOreVariant.RUNITE -> NPCs.RUNITE_ORE_2559
         }, Location.create(1942, 4966, 0)) {this.owner = owner; isRespawn = false; }
 
     var owner: Player? = null

@@ -16,9 +16,8 @@ import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.global.action.PickupHandler
 import rs09.game.content.global.shops.Shops
 import rs09.game.interaction.InteractionListener
-import rs09.game.node.entity.npc.other.MortMyreGhastNPC
+import rs09.game.node.entity.npc.MortMyreGhastNPC
 import rs09.game.system.SystemLogger
-import rs09.game.system.config.ShopParser
 import rs09.tools.END_DIALOGUE
 
 class NSListeners : InteractionListener {

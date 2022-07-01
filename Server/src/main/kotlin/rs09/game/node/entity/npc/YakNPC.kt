@@ -1,4 +1,4 @@
-package rs09.game.node.entity.npc.other
+package rs09.game.node.entity.npc
 
 import core.game.node.entity.npc.AbstractNPC
 import core.game.world.map.Location

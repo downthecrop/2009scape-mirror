@@ -14,7 +14,7 @@ import org.rs09.consts.Scenery
 import rs09.ServerConstants
 import rs09.game.ge.GrandExchangeRecords
 import rs09.game.interaction.InteractionListener
-import rs09.game.node.entity.npc.other.banks.BankerNPC
+import rs09.game.node.entity.npc.BankerNPC
 import rs09.game.world.repository.Repository
 
 /**

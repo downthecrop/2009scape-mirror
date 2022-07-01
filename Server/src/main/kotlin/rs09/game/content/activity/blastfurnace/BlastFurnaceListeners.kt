@@ -9,8 +9,8 @@ import core.game.system.task.Pulse
 import rs09.game.interaction.InteractionListener
 import core.game.world.map.Location
 import org.rs09.consts.Items
-import rs09.game.node.entity.npc.other.BFOreVariant
-import rs09.game.node.entity.npc.other.BlastFurnaceOre
+import rs09.game.node.entity.npc.BFOreVariant
+import rs09.game.node.entity.npc.BlastFurnaceOre
 
 /**"Most" of the listeners for blast furnace live in this funny little file, handles
  * listeners for most things from interacting with the temp gauge to putting ore on the

@@ -1,4 +1,4 @@
-package rs09.game.node.entity.npc.city.pollnivneach
+package rs09.game.content.dialogue.region.pollnivneach
 
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression

@@ -1,4 +1,4 @@
-package rs09.game.node.entity.npc.city.piscatoris
+package rs09.game.content.dialogue.region.piscatoris
 
 import api.addItemOrDrop
 import api.sendItemDialogue
@@ -11,7 +11,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.Topic
 import rs09.game.content.global.shops.Shops
-import rs09.game.node.entity.npc.other.banks.BankerNPC
+import rs09.game.node.entity.npc.BankerNPC
 import rs09.tools.END_DIALOGUE
 import rs09.tools.START_DIALOGUE
 

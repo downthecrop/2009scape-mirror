@@ -1,4 +1,4 @@
-package rs09.game.node.entity.npc.other.banks
+package rs09.game.node.entity.npc
 
 import api.getScenery
 import api.hasSealOfPassage
@@ -11,14 +11,11 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.IronmanMode
 import core.game.world.map.Direction
 import core.game.world.map.Location
-import core.game.world.map.path.Pathfinder
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
-import org.rs09.consts.Scenery
 import rs09.game.ge.GrandExchangeRecords
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.`object`.BankBoothHandler
-import kotlin.reflect.jvm.internal.impl.utils.SmartList
 
 @Initializable
 class BankerNPC : AbstractNPC, InteractionListener {
@@ -145,8 +142,8 @@ class BankerNPC : AbstractNPC, InteractionListener {
     }
 
     override fun defineListeners() {
-        on(NPC_IDS, NPC, "bank", handler = ::attemptBank)
-        on(NPC_IDS, NPC, "collect", handler = ::attemptCollect)
+        on(NPC_IDS, NPC, "bank", handler = Companion::attemptBank)
+        on(NPC_IDS, NPC, "collect", handler = Companion::attemptCollect)
     }
 
     override fun defineDestinationOverrides() {

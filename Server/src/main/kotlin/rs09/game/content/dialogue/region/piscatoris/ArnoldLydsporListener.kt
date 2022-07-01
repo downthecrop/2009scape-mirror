@@ -1,9 +1,9 @@
-package rs09.game.node.entity.npc.city.piscatoris
+package rs09.game.content.dialogue.region.piscatoris
 
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
-import rs09.game.node.entity.npc.other.banks.BankerNPC
+import rs09.game.node.entity.npc.BankerNPC
 
 /**
  * Provides banker interactions for Arnold Lydspor
