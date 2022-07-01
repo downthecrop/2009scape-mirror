@@ -429,6 +429,7 @@ public class NPC extends Entity {
 					nextWalk = GameWorld.getTicks() + walkRadius + 1;
 					getLocks().lockMovement(100);
 					getImpactHandler().setDisabledTicks(100);
+					setAttribute("return-to-spawn", true);
 					GameWorld.getPulser().submit(new MovementPulse(this, getProperties().getSpawnLocation(), Pathfinder.SMART) {
 						@Override
 						public boolean pulse() {
@@ -436,6 +437,7 @@ public class NPC extends Entity {
 							getLocks().unlockMovement();
 							fullRestore();
 							getImpactHandler().setDisabledTicks(0);
+							removeAttribute("return-to-spawn");
 							return true;
 						}
 					});
