@@ -39,7 +39,7 @@ class ProspectListener : InteractionListener {
                 /** Get the name of the rock's reward and sends a message to the player */
                 player.pulseManager.run(object : Pulse(3) {
                     override fun pulse(): Boolean {
-                        sendMessage(player, "This rock contains ${itemDefinition(rock.reward).name.toLowerCase()}.")
+                        sendMessage(player, "This rock contains ${itemDefinition(rock.reward).name.lowercase()}.")
                         return true
                     }
                 })
