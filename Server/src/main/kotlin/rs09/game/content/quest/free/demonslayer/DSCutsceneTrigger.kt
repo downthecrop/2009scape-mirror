@@ -1,7 +1,6 @@
 package rs09.game.content.quest.free.demonslayer
 
 import api.*
-import rs09.game.system.SystemLogger
 import core.game.world.map.zone.ZoneBorders
 import core.game.content.activity.ActivityManager
 import core.game.node.entity.Entity
@@ -17,8 +16,6 @@ class DSCutsceneTrigger : MapArea {
   override fun areaEnter(entity: Entity) {
     if (entity !is Player) return
 
-    SystemLogger.logInfo("Detected entry")
-    
     val quest = entity.questRepository.getQuest("Demon Slayer")
     val alreadyInCutscene = getAttribute(entity, "demon-slayer:cutscene", false)
     val hasSilverlight = inInventory(entity, Items.SILVERLIGHT_2402) || inEquipment(entity, Items.SILVERLIGHT_2402)
@@ -28,10 +25,4 @@ class DSCutsceneTrigger : MapArea {
       setAttribute(entity, "demon-slayer:cutscene", true)
     }
   }
-
-  override fun areaLeave(entity: Entity, _logout: Boolean) {
-    if (entity !is Player) return
-    removeAttribute(entity, "demon-slayer:cutscene")
-  }
-
 }
