@@ -10,8 +10,16 @@ REFRESH_BUILD=1
 
 GAMESERVER_ONLY=1
 
-GS_EXEC="cd $GS_SRC && java -Dnashorn.args=--no-deprecation-warning -jar $BUILD_DIR/server.jar"
-MS_EXEC="cd $MS_SRC && java -Dnashorn.args=--no-deprecation-warning -jar $BUILD_DIR/ms.jar"
+if [ -z "${JAVA_HOME}" ]; then
+  # If JAVA_HOME is unset, use whatever is available in the user's PATH.
+  JAVA_BIN="java"
+else
+  # Else use the java binary from JAVA_HOME.
+  JAVA_BIN="${JAVA_HOME}/bin/java"
+fi
+
+GS_EXEC="cd $GS_SRC && ${JAVA_BIN} -Dnashorn.args=--no-deprecation-warning -jar $BUILD_DIR/server.jar"
+MS_EXEC="cd $MS_SRC && ${JAVA_BIN} -Dnashorn.args=--no-deprecation-warning -jar $BUILD_DIR/ms.jar"
 
 # 0: parallel
 # 1: fancy tmux
@@ -70,7 +78,7 @@ verify_binaries_exist()
 
 run_server_parallel()
 {
-    if ! [ -x "$(command -v java)" ]; then 
+    if ! [ -x "$(command -v "${JAVA_BIN}")" ]; then
         error "Java is not installed."
     fi
 
