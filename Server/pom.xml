@@ -57,15 +57,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.rs09</groupId>
-      <artifactId>consts</artifactId>
+      <groupId>org.rs09.consts</groupId>
+      <artifactId>ConstLib</artifactId>
       <version>1.4</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.rs09</groupId>
-      <artifactId>primextends</artifactId>
-      <version>1.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -247,5 +241,20 @@
       <name>Maven Central</name>
       <url>https://repo.maven.apache.org/maven2/</url>
     </repository>
+    <repository>
+      <id>gitlab-maven</id>
+      <url>https://gitlab.com/api/v4/projects/32237206/packages/maven</url>
+    </repository>
   </repositories>
+  <distributionManagement>
+    <repository>
+      <id>gitlab-maven</id>
+      <url>https://gitlab.com/api/v4/projects/32237206/packages/maven</url>
+    </repository>
+
+    <snapshotRepository>
+      <id>gitlab-maven</id>
+      <url>https://gitlab.com/api/v4/projects/32237206/packages/maven</url>
+    </snapshotRepository>
+  </distributionManagement>
 </project>

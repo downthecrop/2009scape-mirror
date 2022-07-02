@@ -1,10 +1,10 @@
 package rs09.game.node.entity.combat.equipment
 
+import api.getNext
+import api.isLast
+import api.isNextLast
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
-import org.rs09.primextends.getNext
-import org.rs09.primextends.isLast
-import org.rs09.primextends.isNextLast
 
 /**
  * Handles equipment degrading

@@ -20,8 +20,6 @@ import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
-import org.rs09.primextends.getNext
-import org.rs09.primextends.isLast
 import rs09.game.interaction.InteractionListener
 import rs09.game.system.config.ItemConfigParser
 import rs09.game.world.GameWorld.Pulser
