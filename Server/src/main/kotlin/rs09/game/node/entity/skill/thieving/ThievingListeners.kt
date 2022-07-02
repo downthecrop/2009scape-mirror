@@ -1,11 +1,17 @@
 package rs09.game.node.entity.skill.thieving
 
+import api.runTask
+import api.runWorldTask
+import api.submitIndividualPulse
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.skill.Skills
+import core.game.node.entity.skill.thieving.Stall
+import core.game.node.entity.skill.thieving.StallThiefPulse
 import core.game.node.entity.state.EntityState
+import core.game.node.scenery.Scenery
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import org.rs09.consts.Items
@@ -76,6 +82,20 @@ class ThievingListeners : InteractionListener {
             return@on true
         }
 
+        on(SCENERY, "steal-from", "steal from") { player, node ->
+            node as Scenery
+
+            submitIndividualPulse(
+                player,
+                StallThiefPulse(
+                    player,
+                    node,
+                    Stall.forObject(node)
+                )
+            )
+
+            return@on true
+        }
     }
 
     fun getHAMItemCount(player: Player): Int{
