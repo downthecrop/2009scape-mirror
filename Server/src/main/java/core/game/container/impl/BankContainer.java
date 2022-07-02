@@ -1,6 +1,7 @@
 package core.game.container.impl;
 
 import core.game.container.access.InterfaceContainer;
+import org.rs09.consts.Vars;
 import rs09.ServerConstants;
 import core.game.component.Component;
 import core.game.container.*;
@@ -475,7 +476,7 @@ public final class BankContainer extends Container {
 	 * @return If items have to be noted {@code true}.
 	 */
 	public boolean isNoteItems() {
-		return player.varpManager.getVarbit(7001) == 1;
+		return player.varpManager.getVarbit(Vars.VARBIT_IFACE_BANK_NOTE_MODE) == 1;
 	}
 
 	/**
@@ -483,8 +484,8 @@ public final class BankContainer extends Container {
 	 * @param noteItems If items have to be noted {@code true}.
 	 */
 	public void setNoteItems(boolean noteItems) {
-		player.varpManager.flagSave(7001, true);
-		player.varpManager.setVarbit(7001, noteItems ? 1 : 0);
+		player.varpManager.flagSave(Vars.VARBIT_IFACE_BANK_NOTE_MODE, true);
+		player.varpManager.setVarbit(Vars.VARBIT_IFACE_BANK_NOTE_MODE, noteItems ? 1 : 0);
 	}
 
 	/**
@@ -523,8 +524,8 @@ public final class BankContainer extends Container {
 	 * @param insertItems The insert items value.
 	 */
 	public void setInsertItems(boolean insertItems) {
-		player.varpManager.setVarbit(7000, insertItems ? 1 : 0);
-		player.varpManager.flagSave(7000, true);
+		player.varpManager.setVarbit(Vars.VARBIT_IFACE_BANK_INSERT_MODE, insertItems ? 1 : 0);
+		player.varpManager.flagSave(Vars.VARBIT_IFACE_BANK_INSERT_MODE, true);
 	}
 	
 	/**
@@ -532,7 +533,7 @@ public final class BankContainer extends Container {
 	 * @return {@code True} if inserting items mode is enabled.
 	 */
 	public boolean isInsertItems() {
-		return player.varpManager.getVarbit(7000) == 1;
+		return player.varpManager.getVarbit(Vars.VARBIT_IFACE_BANK_INSERT_MODE) == 1;
 	}
 	
 	/**

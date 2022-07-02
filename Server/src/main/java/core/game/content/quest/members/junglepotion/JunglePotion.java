@@ -80,7 +80,7 @@ public final class JunglePotion extends Quest {
 		player.getSkills().addExperience(Skills.HERBLORE, 775);
 		player.getQuestRepository().syncronizeTab(player);
 		player.varpManager.get(534).setVarbit(15,2).setVarbit(18,2).setVarbit(21,2).setVarbit(24,2).setVarbit(12,2).send(player);
-		player.varpManager.flagSave(534);
+		player.varpManager.flagSave(534, false);
 	}
 
 	@Override
