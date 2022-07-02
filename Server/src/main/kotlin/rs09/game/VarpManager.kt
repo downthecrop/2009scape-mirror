@@ -48,12 +48,23 @@ class VarpManager(val player: Player) {
         return get(def.varpId).getVarbit(def.startBit)
     }
 
-    fun flagSave(index: Int){
-        get(index).save = true
+    fun flagSave(index: Int, isVarbit: Boolean = false){
+        if (isVarbit) {
+            val def = VarbitDefinition.forId(index)
+            flagSave(def.varpId, false)
+        } else {
+            get(index).save = true
+        }
     }
 
-    fun unflagSave(index: Int){
-        get(index).save = false
+    fun unflagSave(index: Int, isVarbit: Boolean = false){
+        if (isVarbit) {
+            val def = VarbitDefinition.forId(index)
+            unflagSave(def.varpId, false)
+        }
+        else {
+            get(index).save = false
+        }
     }
 
     fun sendAllVarps(){

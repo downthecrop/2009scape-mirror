@@ -143,7 +143,7 @@ public final class ConfigurationManager {
 	public void set(int id, int value, boolean saved) {
 		player.varpManager.get(id).setVarbit(0,value).send(player);
 		if (saved) {
-			player.varpManager.flagSave(id);
+			player.varpManager.flagSave(id, false);
 		}
 	}
 

@@ -73,7 +73,7 @@ public final class QuestRepository {
             for (Quest quest : QUESTS.values()) {
                 config = quest.getConfig(player, getStage(quest));
                 player.varpManager.get(config[0]).setVarbit(0,config[1]).send(player);
-                player.varpManager.flagSave(config[0]);
+                player.varpManager.flagSave(config[0], false);
                 player.setAttribute("/save:quest-varps-converted",true);
 //            System.out.println(quest.getName() + " - > stage =  " + getStage(quest) + " - configs = { " + config[0] + " " + config[1] + " }");
             }
