@@ -14,7 +14,7 @@ import org.rs09.consts.Scenery
 import rs09.ServerConstants
 import rs09.game.ge.GrandExchangeRecords
 import rs09.game.interaction.InteractionListener
-import rs09.game.node.entity.npc.other.BankerNPC
+import rs09.game.node.entity.npc.BankerNPC
 import rs09.game.world.repository.Repository
 
 /**
@@ -25,16 +25,19 @@ import rs09.game.world.repository.Repository
 class BankBoothHandler : InteractionListener {
 
     companion object {
+        val INOPERABLE_BANK_BOOTHS = intArrayOf(
+            Scenery.BANK_BOOTH_12800, Scenery.BANK_BOOTH_12801, Scenery.BANK_BOOTH_36262, Scenery.BANK_BOOTH_35648
+        )
+
         val BANK_BOOTHS = intArrayOf(
             Scenery.BANK_BOOTH_2213, Scenery.BANK_BOOTH_2214, Scenery.BANK_BOOTH_3045, Scenery.BANK_BOOTH_5276,
             Scenery.BANK_BOOTH_6084, Scenery.BANK_BOOTH_10517, Scenery.BANK_BOOTH_11338, Scenery.BANK_BOOTH_11402,
-            Scenery.BANK_BOOTH_11758, Scenery.BANK_BOOTH_12798, Scenery.BANK_BOOTH_12799, Scenery.BANK_BOOTH_12800,
-            Scenery.BANK_BOOTH_12801, Scenery.BANK_BOOTH_14367, Scenery.BANK_BOOTH_14368, Scenery.BANK_BOOTH_16700,
-            Scenery.BANK_BOOTH_18491, Scenery.BANK_BOOTH_19230, Scenery.BANK_BOOTH_20325, Scenery.BANK_BOOTH_20326,
-            Scenery.BANK_BOOTH_20327, Scenery.BANK_BOOTH_20328, Scenery.BANK_BOOTH_22819, Scenery.BANK_BOOTH_24914,
-            Scenery.BANK_BOOTH_25808, Scenery.BANK_BOOTH_26972, Scenery.BANK_BOOTH_29085, Scenery.BANK_BOOTH_30015,
-            Scenery.BANK_BOOTH_30016, Scenery.BANK_BOOTH_34205, Scenery.BANK_BOOTH_34752, Scenery.BANK_BOOTH_35647,
-            Scenery.BANK_BOOTH_35648, Scenery.BANK_BOOTH_36262, Scenery.BANK_BOOTH_36786, Scenery.BANK_BOOTH_37474
+            Scenery.BANK_BOOTH_11758, Scenery.BANK_BOOTH_12798, Scenery.BANK_BOOTH_12799, Scenery.BANK_BOOTH_14367,
+            Scenery.BANK_BOOTH_14368, Scenery.BANK_BOOTH_16700, Scenery.BANK_BOOTH_18491, Scenery.BANK_BOOTH_19230,
+            Scenery.BANK_BOOTH_20325, Scenery.BANK_BOOTH_20326, Scenery.BANK_BOOTH_20327, Scenery.BANK_BOOTH_20328,
+            Scenery.BANK_BOOTH_22819, Scenery.BANK_BOOTH_24914, Scenery.BANK_BOOTH_25808, Scenery.BANK_BOOTH_26972,
+            Scenery.BANK_BOOTH_29085, Scenery.BANK_BOOTH_30015, Scenery.BANK_BOOTH_30016, Scenery.BANK_BOOTH_34205,
+            Scenery.BANK_BOOTH_34752, Scenery.BANK_BOOTH_35647, Scenery.BANK_BOOTH_36786, Scenery.BANK_BOOTH_37474
         )
     }
 
@@ -49,7 +52,7 @@ class BankBoothHandler : InteractionListener {
      */
     private fun locateAdjacentBankerLinear(node: Node): NPC? {
         for (dir in arrayOf(Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST)) {
-            Repository.findNPC(node.location.transform(dir))?.let { return it }
+            Repository.findNPC(node.location.transform(dir))?.let { return it as? BankerNPC }
         }
 
         return null
@@ -69,7 +72,7 @@ class BankBoothHandler : InteractionListener {
     private fun locateAdjacentBankerSquare(node: Node, size: Int = 1): NPC? {
         for (y in (node.location.y - size)..(node.location.y + size)) {
             for (x in (node.location.x - size)..(node.location.x + size)) {
-                Repository.findNPC(Location(x, y))?.let { return it }
+                Repository.findNPC(Location(x, y))?.let { return it as? BankerNPC }
             }
         }
 
@@ -129,6 +132,13 @@ class BankBoothHandler : InteractionListener {
     }
 
     private fun attemptToConvertItems(player: Player, used: Node, with: Node): Boolean {
+        if (!hasOption(with, "use")) {
+            sendMessage(player, "You shouldn't be able to do that with object ${with.id}.")
+            sendMessage(player, "Please screenshot this and report to the developers.")
+
+            return true
+        }
+
         if (!ServerConstants.BANK_BOOTH_NOTE_UIM && player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {
             return true
         }

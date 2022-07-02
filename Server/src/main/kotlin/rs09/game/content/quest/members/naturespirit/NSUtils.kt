@@ -2,20 +2,15 @@ package rs09.game.content.quest.members.naturespirit
 
 import api.Container
 import api.*
-import core.game.node.Node
-import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
-import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.RegionManager.forId
-import core.game.world.map.RegionManager.lock
 import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
 import org.rs09.consts.Items
-import rs09.game.node.entity.npc.other.MortMyreGhastNPC
+import rs09.game.node.entity.npc.MortMyreGhastNPC
 
 object NSUtils {
     fun flagFungusPlaced(player: Player) {
