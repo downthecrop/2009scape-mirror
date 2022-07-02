@@ -10,8 +10,11 @@ import java.util.*
 
 class PulseRunner {
     val TASKS = ArrayList<Pulse>()
+
     fun submit(pulse: Pulse){
-        TASKS.add(pulse)
+        synchronized(this.TASKS) {
+            TASKS.add(pulse)
+        }
     }
 }
 /*
