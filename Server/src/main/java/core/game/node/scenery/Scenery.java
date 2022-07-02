@@ -11,7 +11,6 @@ import core.game.system.task.Pulse;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import org.jetbrains.annotations.NotNull;
-import rs09.game.system.SystemLogger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -229,7 +228,7 @@ public class Scenery extends Node {
 		if (def.getVarbitID() > -1) {
 			VarbitDefinition config = def.getConfigFile();
 			if (config != null) {
-				player.varpManager.get(config.getConfigId()).setVarbit(config.getBitShift(),index).send(player);
+				player.varpManager.get(config.getVarpId()).setVarbit(config.getStartBit(),index).send(player);
 			}
 		} else if (def.getConfigId() > -1) {
 			player.varpManager.get(def.getConfigId()).setVarbit(0,index);

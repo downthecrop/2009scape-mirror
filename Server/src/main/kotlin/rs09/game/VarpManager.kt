@@ -1,9 +1,8 @@
 package rs09.game
 
+import api.events.VarbitUpdateEvent
 import core.cache.def.impl.VarbitDefinition
 import core.game.node.entity.player.Player
-import core.net.packet.PacketRepository
-import core.net.packet.context.VarbitContext
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import rs09.game.node.entity.skill.farming.FarmingPatch
@@ -31,18 +30,22 @@ class VarpManager(val player: Player) {
     }
 
     fun setVarbit(def: VarbitDefinition, value: Int){
-        get(def.configId).setVarbit(def.bitShift,value).send(player)
+        get(def.varpId).setVarbit(def.startBit,value).send(player)
+
+        player.dispatch(VarbitUpdateEvent(def.id, value))
     }
 
     fun setVarbit(varbitIndex: Int, value: Int){
         val def = VarbitDefinition.forId(varbitIndex)
-        get(def.configId).setVarbit(def.bitShift, value)
-        get(def.configId).send(player)
+        get(def.varpId).setVarbit(def.startBit, value)
+        get(def.varpId).send(player)
+
+        player.dispatch(VarbitUpdateEvent(varbitIndex, value))
     }
 
-    fun getVarbit(varbitIndex: Int){
+    fun getVarbit(varbitIndex: Int): Int{
         val def = VarbitDefinition.forId(varbitIndex)
-        get(def.configId).getVarbit(def.bitShift)
+        return get(def.varpId).getVarbit(def.startBit)
     }
 
     fun flagSave(index: Int){

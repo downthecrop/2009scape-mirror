@@ -23,7 +23,7 @@ class Varp(val index: Int) {
         return config
     }
 
-    fun getVarbit(offset: Int): Int?{
+    fun getVarbit(offset: Int): Int {
         return getVarbitValue(offset)
     }
 

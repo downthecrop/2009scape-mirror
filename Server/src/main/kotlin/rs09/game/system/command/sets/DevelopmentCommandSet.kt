@@ -156,9 +156,9 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
                 for(id in 0 until 10000)
                 {
                     val def = VarbitDefinition.forId(id)
-                    if(def.configId == varp)
+                    if(def.varpId == varp)
                     {
-                        sendMessage(player, "${def.id} -> [offset: ${def.bitShift}, upperBound: ${def.bitSize}]")
+                        sendMessage(player, "${def.id} -> [offset: ${def.startBit}, upperBound: ${def.endBit}]")
                     }
                 }
                 sendMessage(player, "=========================================")

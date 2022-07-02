@@ -26,6 +26,7 @@ class ConfigParser : Commands {
         GroundSpawnLoader().load()
         MusicConfigLoader().load()
         RangedConfigLoader().load()
+        CustomVarbitParser().load()
     }
 
     fun reloadConfigs(callback: () -> Unit) {

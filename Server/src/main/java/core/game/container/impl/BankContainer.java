@@ -68,11 +68,6 @@ public final class BankContainer extends Container {
 	private final int[] tabStartSlot = new int[TAB_SIZE];
 
 	/**
-	 * If inserting items is enabled.
-	 */
-	private boolean insertItems;
-
-	/**
 	 * Construct a new {@code BankContainer} {@code Object}.
 	 * @param player The player reference.
 	 */
@@ -532,7 +527,7 @@ public final class BankContainer extends Container {
 	 * @param insertItems The insert items value.
 	 */
 	public void setInsertItems(boolean insertItems) {
-		this.insertItems = insertItems;
+		player.varpManager.setVarbit(7000, insertItems ? 1 : 0);
 	}
 	
 	/**
@@ -540,7 +535,7 @@ public final class BankContainer extends Container {
 	 * @return {@code True} if inserting items mode is enabled.
 	 */
 	public boolean isInsertItems() {
-		return insertItems;
+		return player.varpManager.getVarbit(7000) == 1;
 	}
 	
 	/**
