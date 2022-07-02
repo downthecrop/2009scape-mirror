@@ -210,6 +210,10 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
      * @return `True` if so.
      */
     open fun isAttackable(entity: Entity, victim: Entity): InteractionType? {
+        if (victim.getAttribute("return-to-spawn", false)) {
+            return InteractionType.NO_INTERACT
+        }
+
         if (type == CombatStyle.MELEE) {
             val stepType = canStepTowards(entity, victim)
             if (stepType != InteractionType.STILL_INTERACT) return stepType

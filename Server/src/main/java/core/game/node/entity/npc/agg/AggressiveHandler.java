@@ -90,15 +90,13 @@ public final class AggressiveHandler {
 		}
 		if (target != null) {
 			target.setAttribute("aggressor", entity);
-			if (target != entity.getProperties().getCombatPulse().getVictim()) {
-				if (entity.getProperties().getCombatPulse().isAttacking()) {
-					entity.getProperties().getCombatPulse().setVictim(target);
-					entity.face(target);
-				} else {
-					entity.getProperties().getCombatPulse().attack(target);
-				}
-				return true;
+			if (entity.getProperties().getCombatPulse().isAttacking()) {
+				entity.getProperties().getCombatPulse().setVictim(target);
+				entity.face(target);
+			} else {
+				entity.getProperties().getCombatPulse().attack(target);
 			}
+			return true;
 		}
 		return entity.getProperties().getCombatPulse().isAttacking();
 	}
