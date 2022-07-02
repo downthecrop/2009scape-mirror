@@ -1,4 +1,4 @@
-package rs09.game.node.entity.npc.other
+package rs09.game.node.entity.npc
 
 import api.Container
 import api.*
@@ -8,7 +8,6 @@ import core.game.interaction.MovementPulse
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.npc.AbstractNPC
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.world.map.Location

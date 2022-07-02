@@ -1,4 +1,4 @@
-package rs09.game.node.entity.npc.city.alkharid
+package rs09.game.content.dialogue.region.alkharid
 
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
@@ -15,9 +15,9 @@ import rs09.tools.END_DIALOGUE
  */
 
 @Initializable
-class SabreenDialogue(player: Player? = null) : DialoguePlugin(player) {
+class AablaDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun newInstance(player: Player?): DialoguePlugin {
-        return SabreenDialogue(player)
+        return AablaDialogue(player)
     }
 
     override fun open(vararg args: Any?): Boolean {
@@ -44,6 +44,6 @@ class SabreenDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SABREEN_960)
+        return intArrayOf(NPCs.AABLA_959)
     }
 }

@@ -1,12 +1,10 @@
-package rs09.game.node.entity.npc.other
+package rs09.game.node.entity.npc
 
 import api.*
 import core.game.node.entity.npc.AbstractNPC
 import core.game.world.map.Location
 import core.plugin.Initializable
-import core.tools.RandomFunction
 import org.rs09.consts.NPCs
-import rs09.game.system.SystemLogger
 
 @Initializable
 class IceTrollJatizsoCaves : AbstractNPC {
