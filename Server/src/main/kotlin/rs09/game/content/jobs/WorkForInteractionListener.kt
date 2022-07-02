@@ -5,6 +5,7 @@ import SlayingJob
 import api.*
 import api.events.EventHook
 import api.events.NPCKillEvent
+import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -85,9 +86,20 @@ class WorkForInteractionListener : InteractionListener, LoginListener {
 
             val type = typeMap[node.id] ?: return@on false
             jobId = if(type == 0) {
-                var job = gatheringMap[node.id]?.filter { checkRequirement(player, it) }?.random()
-                amount = job?.getAmount() ?: 0
-                job?.ordinal ?: 0
+                val job = gatheringMap[node.id]?.filter { checkRequirement(player, it) }?.randomOrNull()
+
+                if (job == null) {
+                    sendNPCDialogue(
+                        player,
+                        node.id,
+                        "I'm sorry, I don't currently have any jobs that you're qualified for.",
+                        FacialExpression.HALF_THINKING
+                    )
+                    return@on true
+                }
+
+                amount = job.getAmount()
+                job.ordinal
             } else {
                 SlayingJob.values().random().ordinal.also { amount = SlayingJob.values()[it].getAmount() }
             }
