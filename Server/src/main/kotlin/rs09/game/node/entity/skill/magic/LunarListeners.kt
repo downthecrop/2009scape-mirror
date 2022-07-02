@@ -336,13 +336,15 @@ class LunarListeners : SpellListener("lunar") {
             playerJewellery.add(item)
         }
 
-        if(playerJewellery.isEmpty()) {
+        if(playerJewellery.isEmpty()){
+            player.sendMessage("You need jewellery in order to use this spell.")
             return
         }
 
         player.pulseManager.run(object : Pulse(){
             var counter = 0
             override fun pulse(): Boolean {
+                if(playerJewellery.isEmpty()) return true
                 if(counter == 0) delay = STRING_JEWELLERY_ANIM.definition.durationTicks + 1
                 val item = playerJewellery[0]
                 val strung = JewelleryString.forId(item.id)
