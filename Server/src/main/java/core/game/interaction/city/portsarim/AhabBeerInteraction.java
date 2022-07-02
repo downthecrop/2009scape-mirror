@@ -5,6 +5,10 @@ import core.game.interaction.SpecialGroundInteraction;
 import core.game.interaction.SpecialGroundItems;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import core.game.world.map.RegionManager;
+import org.rs09.consts.NPCs;
+
+import static api.ContentAPIKt.findLocalNPC;
 
 /**
  * Handles Ahab's beer in port sarim
@@ -20,7 +24,7 @@ public class AhabBeerInteraction extends SpecialGroundInteraction {
         configure();
         if(option.getName() == "take"){
             player.faceLocation(SpecialGroundItems.AHAB_BEER.getLocation());
-            player.getDialogueInterpreter().open(DIALOGUE_KEY, new NPC(2692), false);
+            player.getDialogueInterpreter().open(DIALOGUE_KEY, findLocalNPC(player, NPCs.AHAB_2692), false);
         } else {
             player.debug("Unhandled option: " + option.getName());
         }
