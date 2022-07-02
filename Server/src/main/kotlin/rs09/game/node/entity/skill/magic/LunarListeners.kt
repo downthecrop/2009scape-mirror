@@ -2,7 +2,6 @@ package rs09.game.node.entity.skill.magic
 
 import api.*
 import core.game.component.Component
-import core.game.node.Node
 import core.game.node.scenery.Scenery
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -34,6 +33,8 @@ class LunarListeners : SpellListener("lunar") {
     private val NPC_CONTACT_GFX = Graphics(730,130)
     private val PLANK_MAKE_ANIM = Animation(6298)
     private val PLANK_MAKE_GFX = Graphics(1063, 120)
+    private val STRING_JEWELLERY_ANIM = Animation(4412)
+    private val STRING_JEWELLERY_GFX = Graphics(728, 100)
 
     override fun defineListeners() {
 
@@ -163,10 +164,9 @@ class LunarListeners : SpellListener("lunar") {
             plankMake(player, node!!.asItem())
         }
 
-        onCast(Lunar.STRING_JEWELLERY, ITEM) { player, node ->
+        onCast(Lunar.STRING_JEWELLERY, NONE) { player, _ ->
             requires(player, 80, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.EARTH_RUNE_557, 10), Item(Items.WATER_RUNE_555, 5)))
-
-
+            stringJewellery(player)
         }
     }
 
@@ -327,29 +327,34 @@ class LunarListeners : SpellListener("lunar") {
         sendTeleport(player,xp,loc)
     }
 
-    private fun stringJewellery(player: Player, item : Item) {
+    private fun stringJewellery(player: Player) {
         val playerJewellery = ArrayList<Item>()
+
         for(item in player.inventory.toArray()){
             if(item == null) continue
-            if(!productOfString.containsValue(item.id)) continue
+            if(!JewelleryString.unstrungContains(item.id)) continue
             playerJewellery.add(item)
+        }
+
+        if(playerJewellery.isEmpty()) {
+            return
         }
 
         player.pulseManager.run(object : Pulse(){
             var counter = 0
             override fun pulse(): Boolean {
-                if(playerJewellery.isEmpty()) return true
-                if(counter == 0) delay = BAKE_PIE_ANIM.definition.durationTicks + 1
-                val item = playerJewellery.get(0)
-                val pie = CookableItems.forId(item.id)
-                visualizeSpell(player, BAKE_PIE_ANIM, BAKE_PIE_GFX, 2879)
-                addXP(player,60.0)
-                player.skills.addExperience(Skills.COOKING,pie.experience)
+                if(counter == 0) delay = STRING_JEWELLERY_ANIM.definition.durationTicks + 1
+                val item = playerJewellery[0]!!
+                val strung = JewelleryString.forId(item.id)
+                sendMessage(player, strung.toString())
                 setDelay(player,false)
-                player.inventory.remove(item)
-                player.inventory.add(Item())
-                playerJewellery.remove(item)
-                if(playerJewellery.isNotEmpty()) removeRunes(player,false) else removeRunes(player,true)
+                if(player.inventory.remove(item) && player.inventory.add(Item(strung))) {
+                    visualizeSpell(player, STRING_JEWELLERY_ANIM, STRING_JEWELLERY_GFX, 2903)
+                    player.skills.addExperience(Skills.CRAFTING, 4.0)
+                    player.skills.addExperience(Skills.MAGIC, 83.0)
+                    playerJewellery.remove(item)
+                    if(playerJewellery.isNotEmpty()) removeRunes(player,false) else removeRunes(player,true)
+                }
                 return false
             }
         })
@@ -363,10 +368,19 @@ class LunarListeners : SpellListener("lunar") {
         DIAMOND(Items.DIAMOND_AMULET_1681, Items.DIAMOND_AMULET_1700),
         DRAGONSTONE(Items.DRAGONSTONE_AMMY_1683, Items.DRAGONSTONE_AMMY_1702),
         ONYX(Items.ONYX_AMULET_6579, Items.ONYX_AMULET_6581),
+        SALVE(Items.SALVE_SHARD_4082, Items.SALVE_AMULET_4081),
         HOLY(Items.UNSTRUNG_SYMBOL_1714, Items.UNBLESSED_SYMBOL_1716),
         UNHOLY(Items.UNSTRUNG_EMBLEM_1720, Items.UNPOWERED_SYMBOL_1722);
         companion object {
-            val productOfString = JewelleryString.values().map { it.unstrung to it.strung }.toMap()
+            val productOfString = values().associate { it.unstrung to it.strung }
+            fun forId(id : Int) : Int {
+                return productOfString[id]!!
+            }
+
+            fun unstrungContains(id : Int) : Boolean {
+                return productOfString.contains(id)
+            }
+
         }
     }
 }
