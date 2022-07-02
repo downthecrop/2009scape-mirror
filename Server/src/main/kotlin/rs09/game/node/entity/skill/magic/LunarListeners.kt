@@ -344,7 +344,7 @@ class LunarListeners : SpellListener("lunar") {
             var counter = 0
             override fun pulse(): Boolean {
                 if(counter == 0) delay = STRING_JEWELLERY_ANIM.definition.durationTicks + 1
-                val item = playerJewellery[0]!!
+                val item = playerJewellery[0]
                 val strung = JewelleryString.forId(item.id)
                 sendMessage(player, strung.toString())
                 setDelay(player,false)
