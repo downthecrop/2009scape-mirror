@@ -143,6 +143,7 @@ class GrandExchangeOffer() {
                 )
                 val nowuid = stmt.executeQuery("SELECT last_insert_rowid()")
                 uid = nowuid.getLong(1)
+                GrandExchangeRecords.getInstance(player).offerRecords[index] = GrandExchangeRecords.OfferRecord(uid, index)
                 visualize(player)
                 stmt.close()
 
