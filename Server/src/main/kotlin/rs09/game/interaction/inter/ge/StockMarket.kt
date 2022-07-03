@@ -258,7 +258,6 @@ class StockMarket : InterfaceListener {
             }
             if(GrandExchange.dispatch(player, offer))
             {
-                GrandExchangeRecords.getInstance(player).offerRecords[offer.index] = GrandExchangeRecords.OfferRecord(offer.uid,offer.index)
                 player.removeAttribute("ge-temp")
             }
             else
@@ -277,7 +276,6 @@ class StockMarket : InterfaceListener {
             }
             if(GrandExchange.dispatch(player, offer) && removeItem(player, Item(995, total)))
             {
-                GrandExchangeRecords.getInstance(player).offerRecords[offer.index] = GrandExchangeRecords.OfferRecord(offer.uid, offer.index)
                 player.removeAttribute("ge-temp")
             }
         }
