@@ -106,7 +106,9 @@ class MajorUpdateWorker {
 
         //remove all null or finished pulses from the list
         rmlist.forEach {
-            GameWorld.Pulser.TASKS.remove(it)
+            synchronized(GameWorld.Pulser.TASKS) {
+                GameWorld.Pulser.TASKS.remove(it)
+            }
         }
 
         rmlist.clear()
