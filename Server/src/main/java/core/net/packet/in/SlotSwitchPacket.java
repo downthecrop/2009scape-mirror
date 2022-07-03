@@ -39,6 +39,14 @@ public class SlotSwitchPacket implements IncomingPacket {
 						int tabIndex = BankContainer.getArrayIndex(withChildId);
 		                if (tabIndex > -1) {
 		                    secondSlot = tabIndex == 10 ? player.getBank().freeSlot() : player.getBank().getTabStartSlot()[tabIndex] + player.getBank().getItemsInTab(tabIndex);
+
+							Item inSlot = player.getBank().get(slot);
+
+							if (secondSlot == -1 && player.getBank().remove(inSlot)) {
+								player.getBank().add(inSlot);
+								return;
+							}
+
 		                    childId = player.getBank().getTabByItemSlot(slot);
 		                    if (secondSlot > slot) {
 		                        player.getBank().insert(slot, secondSlot - 1);
