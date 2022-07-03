@@ -81,6 +81,7 @@ public final class EquipmentInterface extends ComponentPlugin {
 				GameWorld.getPulser().submit(new Pulse(1, p) {
 					@Override
 					public boolean pulse() {
+						if (item == null) return true;
 						InteractionListeners.run(item.getId(),0,"equip",p, item);
 						return true;
 					}
