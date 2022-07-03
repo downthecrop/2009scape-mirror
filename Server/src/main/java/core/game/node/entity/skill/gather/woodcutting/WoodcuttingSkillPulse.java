@@ -9,6 +9,7 @@ import core.game.content.global.SkillingPets;
 import core.game.node.entity.impl.Animator;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.gather.SkillingTool;
@@ -17,11 +18,15 @@ import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
 import core.game.world.map.Location;
+import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
 import rs09.game.node.entity.skill.farming.FarmingPatch;
 import rs09.game.node.entity.skill.farming.Patch;
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_BASE;
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_LOGS;
@@ -32,6 +37,8 @@ import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_
  * @author ceik
  */
 public class WoodcuttingSkillPulse extends Pulse {
+    private int[] woodcuttingSounds = { 3038, 3039, 3040, 3041, 3042 };
+
     private WoodcuttingNode resource;
     private int ticks;
     private Player player;
@@ -99,7 +106,18 @@ public class WoodcuttingSkillPulse extends Pulse {
     }
 
     public void animate() {
-        if(!player.getAnimator().isAnimating()) player.animate(SkillingTool.getHatchet(player).getAnimation());
+        if(!player.getAnimator().isAnimating()) {
+            player.animate(SkillingTool.getHatchet(player).getAnimation());
+
+            List<Player> playersAroundMe = RegionManager.getSurroundingPlayers(player);
+            int soundIndex = RandomFunction.random(0, woodcuttingSounds.length);
+
+            player.getAudioManager().send(
+                new Audio(woodcuttingSounds[soundIndex]),
+                playersAroundMe,
+                player.getLocation()
+            );
+        }
     }
 
     public boolean reward() {
@@ -188,6 +206,9 @@ public class WoodcuttingSkillPulse extends Pulse {
                     SceneryBuilder.replace(node, node.transform(0), resource.getRespawnDuration());
                 }
                 node.setActive(false);
+
+                // TODO: Extract this someplace appropriate.
+                player.getAudioManager().send(2734);
                 return true;
             }
         }
