@@ -22,6 +22,7 @@ import core.game.node.entity.player.link.emote.Emotes
 import core.game.node.entity.player.link.quest.QuestRepository
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.gather.SkillingTool
+import core.game.node.entity.skill.slayer.Tasks
 import core.game.node.entity.skill.summoning.familiar.BurdenBeast
 import core.game.node.item.GroundItem
 import core.game.node.item.GroundItemManager
@@ -41,6 +42,7 @@ import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
+import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.dialogue.SkillDialogueHandler
 import rs09.game.content.global.GlobalKillCounter
@@ -1589,6 +1591,15 @@ fun getPathableRandomLocalCoordinate(target: Entity, radius: Int, center: Locati
     return target.location
 }
 
+/**
+ * Returns the player's active slayer task.
+ * @author bushtail
+ * @param player the player whose task we are checking.
+ * @return the slayer task.
+ */
+fun getSlayerTask(player : Player) : Tasks? {
+    return SlayerManager.getInstance(player).task
+}
 
 /**
  * Returns the name of the player's active slayer task.
@@ -1608,4 +1619,65 @@ fun getSlayerTaskName(player : Player) : String {
  */
 fun getSlayerTaskKillsRemaining(player : Player) : Int {
     return SlayerManager.getInstance(player).amount
+}
+
+/**
+ * Returns the player's slayer master as npc.
+ * @author bushtail
+ * @param player the player whose master we are checking.
+ * @return the slayer master as NPC.
+ */
+fun getSlayerMaster(player : Player) : NPC {
+    return findNPC(SlayerManager.getInstance(player).master?.npc as Int) as NPC
+}
+
+/**
+ * Returns the player's slayer master location as string.
+ * @author bushtail
+ * @param player the player whose master we are checking.
+ * @return the slayer master location as String.
+ */
+fun getSlayerMasterLocation(player : Player) : String {
+    return when(getSlayerMaster(player).id) {
+        NPCs.CHAELDAR_1598 -> "Zanaris"
+        NPCs.DURADEL_8275 -> "Shilo Village"
+        NPCs.MAZCHNA_8274 -> "Canifis"
+        NPCs.TURAEL_8273 -> "Taverly"
+        NPCs.VANNAKA_1597 -> "Edgeville Dungeon"
+        else -> "The Backrooms"
+    }
+}
+
+/**
+ * Returns the player's slayer task tip as String.
+ * @author bushtail
+ * @param player the player whose task tip we are checking.
+ * @return the task tip as String.
+ */
+fun getSlayerTip(player : Player) : Array<out String> {
+    return if(hasSlayerTask(player)) {
+        SlayerManager.getInstance(player).task?.tip!!
+    } else {
+        arrayOf("You need something new to hunt.")
+    }
+}
+
+/**
+ * Returns the player's slayer task flags as Int.
+ * @author bushtail
+ * @param player the player whose task flags we are checking.
+ * @return the task flags as Int.
+ */
+fun getSlayerTaskFlags(player : Player) : Int {
+    return SlayerManager.getInstance(player).flags.taskFlags
+}
+
+/**
+ * Returns whether or not the player has a task.
+ * @author bushtail
+ * @param player the player whose task we are checking.
+ * @return has task as Boolean.
+ */
+fun hasSlayerTask(player : Player) : Boolean {
+    return SlayerManager.getInstance(player).hasTask()
 }
