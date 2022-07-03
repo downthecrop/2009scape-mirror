@@ -16,8 +16,9 @@ import rs09.game.Event
 import rs09.game.system.command.Privilege
 
 private const val TASK_DRAYNOR_BANK = 15
+private const val TASK_LUMBRIDGE_GENERAL_STORE = 18
 
-class DiaryEventHook : LoginListener, Commands {
+class DiaryEventHook : LoginListener {
     override fun login(player: Player) {
         player.hook(Event.ResourceProduced, DiaryGatherHooks)
         player.hook(Event.Teleport, DiaryTeleportHooks)
@@ -56,6 +57,15 @@ class DiaryEventHook : LoginListener, Commands {
                         DiaryType.LUMBRIDGE,
                         1,
                         TASK_DRAYNOR_BANK
+                    )
+                }
+
+                12850 -> if (event.component.id == Components.SHOP_TEMPLATE_620) {
+                    finishTask(
+                        entity,
+                        DiaryType.LUMBRIDGE,
+                        0,
+                        TASK_LUMBRIDGE_GENERAL_STORE
                     )
                 }
             }
@@ -422,23 +432,6 @@ class DiaryEventHook : LoginListener, Commands {
 
             if (getAttribute(entity, "diary:seers:tower-archers", 0) == 0xF)
                 finishTask(entity, DiaryType.SEERS_VILLAGE, 1, 6)
-        }
-    }
-
-    override fun defineCommands() {
-        define("cleardiary", Privilege.ADMIN) { player, _ ->
-            // I know this sucks but it's only for debugging.
-            // Please don't slap me, daddy.
-            //
-            for (type in DiaryType.values()) {
-                val diary = player.achievementDiaryManager.getDiary(type)
-                for (level in 0 until diary.levelStarted.size) {
-                    for (task in 0 until diary.taskCompleted[level].size) {
-                        diary.resetTask(player, level, task)
-                    }
-                }
-            }
-            sendMessage(player, "All achievement diaries cleared successfully.")
         }
     }
 }

@@ -9,6 +9,7 @@ import core.cache.def.impl.Struct
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.SpellBookManager
+import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
 import core.net.packet.context.PlayerContext
 import core.net.packet.out.ResetInterface
@@ -36,6 +37,18 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             for(item in farmKitItems){
                 player.inventory.add(Item(item))
             }
+        }
+
+        define("cleardiary", Privilege.ADMIN) { player, _ ->
+            for (type in DiaryType.values()) {
+                val diary = player.achievementDiaryManager.getDiary(type)
+                for (level in 0 until diary.levelStarted.size) {
+                    for (task in 0 until diary.taskCompleted[level].size) {
+                        diary.resetTask(player, level, task)
+                    }
+                }
+            }
+            sendMessage(player, "All achievement diaries cleared successfully.")
         }
 
         define("region") {player, args ->
