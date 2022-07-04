@@ -349,7 +349,7 @@ class LunarListeners : SpellListener("lunar") {
                 setDelay(player,false)
                 if(removeItem(player, item) && addItem(player, strung)) {
                     visualizeSpell(player, STRING_JEWELLERY_ANIM, STRING_JEWELLERY_GFX, 2903)
-                    player.skills.addExperience(Skills.CRAFTING, 4.0)
+                    rewardXP(player, Skills.CRAFTING, 4.0)
                     addXP(player, 83.0)
                     playerJewellery.remove(item)
                     if(playerJewellery.isNotEmpty()) removeRunes(player,false) else removeRunes(player,true)
