@@ -184,7 +184,6 @@ public final class GnomeCopterActivity extends ActivityPlugin {
 					player.getInterfaceManager().restoreTabs();
 					usedLandingPads[pad] = false;
 					player.removeAttribute("gc:flying");
-					player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 2, 1);
 					return true;
 				}
 				return false;

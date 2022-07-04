@@ -1,8 +1,6 @@
 package core.game.node.entity;
 
-import api.events.Event;
-import api.events.EventHook;
-import api.events.TickEvent;
+import api.events.*;
 import core.game.content.holiday.HolidayEvent;
 import core.game.interaction.DestinationFlag;
 import core.game.node.Node;
@@ -776,6 +774,7 @@ public abstract class Entity extends Node {
 	 */
 	public void setAttribute(String key, Object value) {
 		attributes.setAttribute(key, value);
+		dispatch(new AttributeSetEvent(this, key, value));
 	}
 
 	/**
@@ -819,6 +818,7 @@ public abstract class Entity extends Node {
 	 */
 	public void removeAttribute(String string) {
 		attributes.removeAttribute(string);
+		dispatch(new AttributeRemoveEvent(this, string));
 	}
 
 	/**

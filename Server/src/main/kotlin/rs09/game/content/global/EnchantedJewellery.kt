@@ -235,7 +235,7 @@ enum class EnchantedJewellery(
                                 replaceJewellery(player, item, nextJewellery, isEquipped)
                             }
                             unlock(player)
-                            player.dispatch(TeleportEvent(TeleportManager.TeleportType.NORMAL, 1,location))
+                            player.dispatch(TeleportEvent(TeleportManager.TeleportType.NORMAL, item, location))
                             return true
                         }
                     }

@@ -16,4 +16,6 @@ object Event {
     @JvmStatic val InterfaceOpened = InterfaceOpenEvent::class.java
     @JvmStatic val InterfaceClosed = InterfaceCloseEvent::class.java
     @JvmStatic val VarbitUpdated = VarbitUpdateEvent::class.java
+    @JvmStatic val AttributeSet = AttributeSetEvent::class.java
+    @JvmStatic val AttributeRemoved = AttributeRemoveEvent::class.java
 }
