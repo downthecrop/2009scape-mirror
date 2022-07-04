@@ -4,6 +4,7 @@ import api.*
 
 import org.rs09.consts.NPCs
 import org.rs09.consts.Items
+import org.rs09.consts.Graphics
 
 import rs09.game.interaction.InteractionListener
 import core.plugin.Initializable
@@ -44,6 +45,8 @@ class BloatedToadNPC : AbstractNPC {
         if (entity == this) continue
         impact(entity, RandomFunction.random(1, 3))
       }
+
+      sendGraphics(Graphics.TOAD_DETONATION_240, this.location)
 
       clear()
     }
