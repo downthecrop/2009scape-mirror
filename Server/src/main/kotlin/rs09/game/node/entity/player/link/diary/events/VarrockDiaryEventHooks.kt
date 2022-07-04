@@ -4,6 +4,7 @@ import api.MapArea
 import api.events.EventHook
 import api.events.InteractionEvent
 import api.events.ResourceProducedEvent
+import api.events.SpellCastEvent
 import api.inBorders
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
@@ -14,6 +15,7 @@ import org.rs09.consts.Scenery
 import rs09.game.Event
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
+import rs09.game.node.entity.skill.magic.spellconsts.Modern
 
 class VarrockDiaryEventHooks : MapArea, DiaryEventHookBase() {
     companion object {
@@ -117,6 +119,7 @@ class VarrockDiaryEventHooks : MapArea, DiaryEventHookBase() {
     override fun login(player: Player) {
         player.hook(Event.Interaction, InteractionEvents)
         player.hook(Event.ResourceProduced, ResourceProductionEvents)
+        player.hook(Event.SpellCast, SpellCastEvents)
     }
 
     private object InteractionEvents : EventHook<InteractionEvent> {
@@ -179,6 +182,23 @@ class VarrockDiaryEventHooks : MapArea, DiaryEventHookBase() {
                         DiaryType.VARROCK,
                         DiaryLevel.EASY,
                         EasyTasks.PATERDOMUS_MINE_LIMESTONE
+                    )
+                }
+            }
+        }
+    }
+
+    private object SpellCastEvents : EventHook<SpellCastEvent> {
+        override fun process(entity: Entity, event: SpellCastEvent) {
+            if (entity !is Player) return
+
+            when (event.spellId) {
+                Modern.VARROCK_TELEPORT -> {
+                    finishTask(
+                        entity,
+                        DiaryType.VARROCK,
+                        DiaryLevel.MEDIUM,
+                        MediumTasks.CAST_VARROCK_TELEPORT_SPELL
                     )
                 }
             }

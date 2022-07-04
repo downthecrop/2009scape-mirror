@@ -5,7 +5,7 @@ import api.events.*
 object Event {
     @JvmStatic val ResourceProduced = ResourceProducedEvent::class.java
     @JvmStatic val NPCKilled = NPCKillEvent::class.java
-    @JvmStatic val Teleport = TeleportEvent::class.java
+    @JvmStatic val Teleported = TeleportEvent::class.java
     @JvmStatic val FireLit = LitFireEvent::class.java
     @JvmStatic val Interaction = InteractionEvent::class.java
     @JvmStatic val ButtonClicked = ButtonClickedEvent::class.java
@@ -18,4 +18,6 @@ object Event {
     @JvmStatic val VarbitUpdated = VarbitUpdateEvent::class.java
     @JvmStatic val AttributeSet = AttributeSetEvent::class.java
     @JvmStatic val AttributeRemoved = AttributeRemoveEvent::class.java
+    @JvmStatic val SpellCast = SpellCastEvent::class.java
+    @JvmStatic val ItemAlchemized = ItemAlchemizedEvent::class.java
 }

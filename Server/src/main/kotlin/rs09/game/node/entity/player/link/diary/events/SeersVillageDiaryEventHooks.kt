@@ -22,6 +22,8 @@ class SeersVillageDiaryEventHooks : MapArea, DiaryEventHookBase() {
         private const val ATTRIBUTE_SHARK_COOKED_COUNT = "diary:seers:shark-cooked"
 
         private val SEERS_VILLAGE_AREA = ZoneBorders(2687, 3455, 2742, 3507)
+        private val SEERS_BANK_AREA = ZoneBorders(2721, 3490, 2730, 3493)
+
         private val RANGING_GUILD_LOCATION = Location(2657, 3439)
 
         private val COMBAT_BRACELETS = arrayOf(
@@ -83,7 +85,8 @@ class SeersVillageDiaryEventHooks : MapArea, DiaryEventHookBase() {
         player.hook(Event.AttributeSet, AttributeSetEvents)
         player.hook(Event.FireLit, FiremakingEvents)
         player.hook(Event.ResourceProduced, ResourceProductionEvents)
-        player.hook(Event.Teleport, TeleportEvents)
+        player.hook(Event.Teleported, TeleportEvents)
+        player.hook(Event.ItemAlchemized, AlchemizationEvents)
     }
 
     private object AttributeSetEvents : EventHook<AttributeSetEvent> {
@@ -206,11 +209,11 @@ class SeersVillageDiaryEventHooks : MapArea, DiaryEventHookBase() {
 
                     Items.SHARK_385 -> {
                         if (isEquipped(entity, Items.COOKING_GAUNTLETS_775)) {
-                           setAttribute(
-                               entity,
-                               "/save:${ATTRIBUTE_SHARK_COOKED_COUNT}",
-                               getAttribute(entity, ATTRIBUTE_SHARK_COOKED_COUNT, 0) + 1
-                           )
+                            setAttribute(
+                                entity,
+                                "/save:${ATTRIBUTE_SHARK_COOKED_COUNT}",
+                                getAttribute(entity, ATTRIBUTE_SHARK_COOKED_COUNT, 0) + 1
+                            )
                         }
                     }
                 }
@@ -232,6 +235,23 @@ class SeersVillageDiaryEventHooks : MapArea, DiaryEventHookBase() {
                             HardTasks.RANGING_GUILD_TELEPORT
                         )
                     }
+                }
+            }
+        }
+    }
+
+    private object AlchemizationEvents : EventHook<ItemAlchemizedEvent> {
+        override fun process(entity: Entity, event: ItemAlchemizedEvent) {
+            if (entity !is Player) return
+
+            if (inBorders(entity, SEERS_BANK_AREA)) {
+                if (event.itemId == Items.MAGIC_SHORTBOW_861 && event.isHigh) {
+                    finishTask(
+                        entity,
+                        DiaryType.SEERS_VILLAGE,
+                        DiaryLevel.HARD,
+                        HardTasks.HIGH_ALCH_MAGIC_SHORTBOW_INSIDE_BANK
+                    )
                 }
             }
         }
