@@ -221,9 +221,9 @@ public class Container {
         if (maximum == 0) {
             return false;
         }
-//		if (preferredSlot > -1 && items[preferredSlot] != null) {
-//			preferredSlot = -1;
-//		}
+        if (preferredSlot > -1 && items[preferredSlot] != null) {
+            preferredSlot = -1;
+        }
         if (item.getAmount() > maximum) {
             item.setAmount(maximum);
         }
