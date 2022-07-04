@@ -330,31 +330,31 @@ class LunarListeners : SpellListener("lunar") {
     private fun stringJewellery(player: Player) {
         val playerJewellery = ArrayList<Item>()
 
-        for(item in player.inventory.toArray()){
+        for(item in player.inventory.toArray()) {
             if(item == null) continue
             if(!JewelleryString.unstrungContains(item.id)) continue
             playerJewellery.add(item)
         }
 
 
-        player.pulseManager.run(object : Pulse(){
+
+        player.pulseManager.run(object : Pulse() {
             var counter = 0
             override fun pulse(): Boolean {
-                if(playerJewellery.isEmpty()) return true
-                if(!inInventory(player, Items.ASTRAL_RUNE_9075, 2) || !inInventory(player, Items.EARTH_RUNE_557, 10) || !inInventory(player, Items.WATER_RUNE_555, 5)) return true
+                if(playerJewellery.isEmpty()) return false
+                requires(player, 80, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.EARTH_RUNE_557, 10), Item(Items.WATER_RUNE_555, 5)))
                 if(counter == 0) delay = STRING_JEWELLERY_ANIM.definition.durationTicks + 1
                 val item = playerJewellery[0]
                 val strung = JewelleryString.forId(item.id)
-                sendMessage(player, strung.toString())
                 setDelay(player,false)
-                if(player.inventory.remove(item) && player.inventory.add(Item(strung))) {
+                if(removeItem(player, item) && addItem(player, strung)) {
                     visualizeSpell(player, STRING_JEWELLERY_ANIM, STRING_JEWELLERY_GFX, 2903)
                     player.skills.addExperience(Skills.CRAFTING, 4.0)
-                    player.skills.addExperience(Skills.MAGIC, 83.0)
+                    addXP(player, 83.0)
                     playerJewellery.remove(item)
                     if(playerJewellery.isNotEmpty()) removeRunes(player,false) else removeRunes(player,true)
                 }
-                return false
+                return true
             }
         })
     }
