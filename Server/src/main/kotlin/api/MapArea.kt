@@ -11,7 +11,7 @@ import core.game.world.map.zone.ZoneRestriction
  * Interface that allows a class to define a map area.
  * Optionally-overridable methods include [getRestrictions], [areaEnter], [areaLeave] and [entityStep]
  */
-interface MapArea {
+interface MapArea : ContentInterface {
     var zone: MapZone
         get(){
             return zoneMaps[this.javaClass.simpleName + "MapArea"]!!

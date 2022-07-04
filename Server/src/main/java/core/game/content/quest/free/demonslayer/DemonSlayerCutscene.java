@@ -177,7 +177,7 @@ public final class DemonSlayerCutscene extends CutscenePlugin {
 
 	@Override
 	public void register() {
-		register(new ZoneBorders(3222, 3364, 3234, 3375));
+		//register(new ZoneBorders(3222, 3364, 3234, 3375));
 		try {
 			new DarkWizardNPC().newInstance(null);
 			new DelrithNPC().newInstance(null);
