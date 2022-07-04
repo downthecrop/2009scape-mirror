@@ -751,6 +751,10 @@ fun <T> setAttribute(entity: Entity, attribute: String, value: T) {
     entity.setAttribute(attribute, value)
 }
 
+fun removeAttribute(entity: Entity, attribute: String) {
+    entity.removeAttribute(attribute)
+}
+
 /**
  * Locks the given entity for the given number of ticks
  * @param entity the entity to lock
