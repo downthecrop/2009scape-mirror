@@ -105,7 +105,7 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
             sendMessage(player, "You do not have a pickaxe to use.")
             return false
         }
-        if (hasSpaceFor(player, Item(resource!!.reward))) {
+        if (freeSlots(player) == 0) {
             if(resource!!.identifier == 13.toByte()) {
                 sendDialogue(player,"Your inventory is too full to hold any more gems.")
                 return false
@@ -177,7 +177,8 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
             if (!isMiningEssence) {
                 var chance = 282
                 var altered = false
-                if (getItemFromEquipment(player, EquipmentSlot.RING)!!.name.lowercase().contains("ring of wealth") || inEquipment(player, Items.RING_OF_THE_STAR_SPRITE_14652)) {
+                var ring = getItemFromEquipment(player, EquipmentSlot.RING)
+                if (ring != null && ring.name.lowercase().contains("ring of wealth") || inEquipment(player, Items.RING_OF_THE_STAR_SPRITE_14652)) {
                     chance = (chance / 1.5).toInt()
                     altered = true
                 }

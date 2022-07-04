@@ -18,7 +18,7 @@ class ProspectListener : InteractionListener {
 
             if(rock == null) {
                 sendMessage(player, "There is no ore currently available in this rock.")
-                return@on false
+                return@on true
             }
 
             /** Check if the rock contains gems */
