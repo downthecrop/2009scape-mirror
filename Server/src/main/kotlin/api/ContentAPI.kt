@@ -16,6 +16,7 @@ import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.HintIconManager
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.emote.Emotes
@@ -1782,6 +1783,15 @@ class SkillDialogueBuilder {
  */
 fun registerHintIcon(player: Player, location: Location, height: Int) {
     setAttribute(player, "hinticon", HintIconManager.registerHintIcon(player, location, 1, -1, player.hintIconManager.freeSlot(), height, 3))
+}
+
+/**
+ * Registers a hint icon for the given Node.
+ * @param player the player to show a hint icon to.
+ * @param node the Node to register a hint icon for.
+ */
+fun registerHintIcon(player: Player, node: Node) {
+    setAttribute(player, "hinticon", HintIconManager.registerHintIcon(player, node))
 }
 
 /** 

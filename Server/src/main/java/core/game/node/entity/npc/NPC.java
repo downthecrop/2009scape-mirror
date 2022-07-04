@@ -667,7 +667,7 @@ public class NPC extends Entity {
 	 * Transforms this NPC.
 	 * @param id The new NPC id.
 	 */
-	public void transform(int id) {
+	public NPC transform(int id) {
 		this.id = id;
 		this.definition = NPCDefinition.forId(id);
 		super.name = definition.getName();
@@ -680,6 +680,7 @@ public class NPC extends Entity {
 			getUpdateMasks().unregisterSynced(NPCSwitchId.getOrdinal());
 		}
 		getUpdateMasks().register(new NPCSwitchId(id), id != originalId);
+		return this;
 	}
 
 	/**

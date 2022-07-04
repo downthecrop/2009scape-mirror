@@ -11,6 +11,7 @@ import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 
 import core.plugin.Initializable
+import core.game.node.item.Item
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
@@ -81,13 +82,13 @@ class RantzChompyBirdDialogue(val quest: Quest) : DialogueFile() {
   }
 
   private fun handleImpatienceDialogue(player: Player?, buttonId: Int) {
-    val hasArrows = amountInInventory(player, Items.OGRE_ARROW_2866) > 0 
+    val hasArrows = amountInInventory(player!!, Items.OGRE_ARROW_2866) > 0 
     
     when(stage) {
 	    0 -> npcl("Hey you creature... Have you made me da stabbers? I wanna stick da chompy?").also { stage++ }
 	    
       1 -> {
-        if (hasArrows) {
+        if (!hasArrows) {
           playerl("Er not exactly?").also { stage++ }
         } else {
           playerl(FacialExpression.ANNOYED, "Well, yes actually, as you asked so nicely. Here you go! Here's your 'stabbers'.")
@@ -107,8 +108,8 @@ class RantzChompyBirdDialogue(val quest: Quest) : DialogueFile() {
 	    8 -> npcl("The hulking ogre nods excitedly.").also { stage = END_DIALOGUE }
     
       100 -> {
-        sendItemDialogue(player, Item(Items.OGRE_ARROW_2866, 20), "Rantz takes six ogre arrows off you.") 
-        removeItem(player, Item(Items.OGRE_ARROW_2866, 6))
+        sendItemDialogue(player!!, Item(Items.OGRE_ARROW_2866, 20), "Rantz takes six ogre arrows off you.") 
+        removeItem(player!!, Item(Items.OGRE_ARROW_2866, 6))
         stage++
       }
 
@@ -121,7 +122,7 @@ class RantzChompyBirdDialogue(val quest: Quest) : DialogueFile() {
   }
 
   private fun handleToadsiesDialogue(player: Player?, buttonId: Int) {
-    val hasToads = amountInInventory(player, Items.BLOATED_TOAD_2875) > 0
+    val hasToads = amountInInventory(player!!, Items.BLOATED_TOAD_2875) > 0
 
     when(stage) {
       0 -> npcl("Hey you creature you still here?").also { stage++ }
@@ -151,7 +152,7 @@ class RantzChompyBirdDialogue(val quest: Quest) : DialogueFile() {
       11 -> npcl("Ok creature? You got dat? Over here by der no tree's place.").also { stage = 5 }
       12 -> npcl("Duh! You creature is a bit stoopid yes? Us needs to sneaky, sneaky.. and stick da chompy! Den we can eat da chompy!").also { stage = 5 }
    
-      100 -> sendItemDialogue(player, Items.BLOATED_TOAD_2875, "You show the bloated toad to Rantz. He nods with approval.").also { stage++ }
+      100 -> sendItemDialogue(player!!, Items.BLOATED_TOAD_2875, "You show the bloated toad to Rantz. He nods with approval.").also { stage++ }
       101 -> npcl("Dat's a good fatsy toady, now we's need to put it for da chompy to come.").also { stage++ }
       102 -> {
         playerl("Where do I put the 'fatsy toadies'?").also { stage++ }
@@ -163,8 +164,8 @@ class RantzChompyBirdDialogue(val quest: Quest) : DialogueFile() {
 
   private fun handlePlaceToadsiesDialogue(player: Player?, buttonId: Int) {
     npcl("Over 'dere creature, put da toadies over der! ~ The ogre points to a clearing to the south. ~")
-    clearHintIcon(player)
-    registerHintIcon(player, ChompyBird.TOAD_LOCATION, 5)
+    clearHintIcon(player!!)
+    registerHintIcon(player!!, ChompyBird.TOAD_LOCATION, 5) //TODO: ADD OFFSETS WHEN WE UNFUCK ARIOS'S MISTAKES, YEET
     stage = END_DIALOGUE
   }
 
@@ -195,7 +196,8 @@ class RantzChompyBirdDialogue(val quest: Quest) : DialogueFile() {
       }
       7 -> npcl("Oh, ok... I lend you other stabby thrower... but creature don't better cry when it hurts itself.").also { stage++ }
       8 -> {
-        sendItemDialogue(player, Items.OGRE_BOW_2883, "Rantz hands over an ogre bow. It's huge! You can barely drawn back the string!")
+        sendItemDialogue(player!!, Items.OGRE_BOW_2883, "Rantz hands over an ogre bow. It's huge! You can barely drawn back the string!")
+        addItemOrDrop(player!!, Items.OGRE_BOW_2883)
         stage = END_DIALOGUE
         quest.setStage(player, 60)
       }
@@ -203,7 +205,7 @@ class RantzChompyBirdDialogue(val quest: Quest) : DialogueFile() {
   }
 
   private fun handleWaitingForChompyDialogue(player: Player?, buttonId: Int) {
-    val hasChompyBird = amountInInventory(player, Items.RAW_CHOMPY_2876) > 0
+    val hasChompyBird = amountInInventory(player!!, Items.RAW_CHOMPY_2876) > 0
 
     when(stage) {
       0 -> npcl("Hey You! Got da chompy yet?").also { stage++ }
@@ -217,7 +219,7 @@ class RantzChompyBirdDialogue(val quest: Quest) : DialogueFile() {
       }
       2 -> npcl("Well hurry up and get some, we is hungry!").also { stage = END_DIALOGUE }
     
-      100 -> sendItemDialogue(player, Items.RAW_CHOMPY_2876, "You show Rantz the freshly plucked chompy carcass.").also { stage++ }
+      100 -> sendItemDialogue(player!!, Items.RAW_CHOMPY_2876, "You show Rantz the freshly plucked chompy carcass.").also { stage++ }
       101 -> npcl("Dat's a great chompy, you musta got a lucky shot wiv da stabbie chucker.").also { stage++ }
       102 -> npcl("Okay's now you's needs to cook da chompy! Slurp! You's can cook it's over der! ~Rantz points to a nearby spit roast.~").also { stage++ }
       103 -> npcl("But's we's particular about our chompy yumms. Me's wants <RANTZ COOKING INGREDIENT> wiv mine! Fycie and Bugs want something wiv der's as well, go and ask 'em wat dey want.").also { stage++ }
@@ -231,7 +233,7 @@ class RantzChompyBirdDialogue(val quest: Quest) : DialogueFile() {
   }
 
   private fun handleWaitingForCookedChompy(player: Player?, buttonId: Int) {
-    val hasCookedChompy = amountInInventory(player, Items.SEASONED_CHOMPY_2882) > 0
+    val hasCookedChompy = amountInInventory(player!!, Items.SEASONED_CHOMPY_2882) > 0
   
     when (stage) {
       0 -> npcl("Hey You! Cook da chompy yet?").also { stage++ }
@@ -245,7 +247,7 @@ class RantzChompyBirdDialogue(val quest: Quest) : DialogueFile() {
       }
       2 -> npcl("Well hurry up, we is hungry!").also { stage = END_DIALOGUE }
     
-      100 -> sendItemDialogue(player, Items.SEASONED_CHOMPY_2882, "You hand over the cooked chompy bird to Rantz.").also { stage++ }
+      100 -> sendItemDialogue(player!!, Items.SEASONED_CHOMPY_2882, "You hand over the cooked chompy bird to Rantz.").also { stage++ }
       101 -> npcl("Hey hey! We got da delicious chompy bird Yay! This looks really tasty as well!").also { stage++ }
       102 -> npcl("Tank's very much for da chompy... Fycie an Bugs like very much da chompy yumms!").also { stage++ }
       103 -> npcl("~The family of ogres sit down together~").also { stage++ }
