@@ -5,6 +5,7 @@ import org.junit.After
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import rs09.ServerConstants
 import rs09.auth.UserAccountInfo
 import rs09.game.system.SystemLogger
 import rs09.storage.SQLStorageProvider
@@ -15,7 +16,7 @@ class SQLStorageProviderTests {
         val storage = SQLStorageProvider()
         val testAccountNames = ArrayList<String>()
         init {
-            storage.configure("localhost", "global", "root", "")
+            storage.configure("localhost", ServerConstants.DATABASE_NAME!!, ServerConstants.DATABASE_USER!!, ServerConstants.DATABASE_PASS!!)
             val details = UserAccountInfo.createDefault()
             details.rights = 2
             details.username = "test"
