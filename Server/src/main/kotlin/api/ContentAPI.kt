@@ -1614,13 +1614,14 @@ fun getPathableRandomLocalCoordinate(target: Entity, radius: Int, center: Locati
  * @param noun the noun to check grammar rules against.
  * @return either 'a $noun' or 'an $noun' depending on the first letter.
  */
-fun prependGrammarArticle(noun : String) : String {
+fun prependArticle(noun : String) : String {
     if(noun == null) return noun
     return when(noun[0]) {
         'a', 'e', 'i', 'o', 'u' -> "an $noun"
         else -> "a $noun"
     }
 }
+
 
 /**
  * Returns the player's active slayer task.

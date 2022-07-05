@@ -3,7 +3,6 @@ package rs09.game.node.entity.skill.gather.mining
 import api.*
 import api.events.ResourceProducedEvent
 import core.cache.def.impl.ItemDefinition
-import core.game.container.impl.EquipmentContainer
 import core.game.content.dialogue.FacialExpression
 import core.game.content.global.SkillingPets
 import core.game.node.Node
@@ -15,14 +14,12 @@ import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.gather.SkillingTool
 import core.game.node.entity.skill.gather.mining.MiningNode
 import core.game.node.item.ChanceItem
-import core.game.node.item.Item
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
-import core.tools.StringUtils
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.node.entity.player.info.stats.STATS_BASE
@@ -164,7 +161,7 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
             //send the message for the resource reward
             if (isMiningGems) {
                 val gemName = getItemName(reward).lowercase()
-                sendMessage(player, "You get ${prependGrammarArticle(gemName)}.")
+                sendMessage(player, "You get ${prependArticle(gemName)}.")
             } else {
                 sendMessage(player, "You get some ${getItemName(reward).lowercase()}.")
             }
@@ -197,7 +194,7 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
             }
 
             //transform to depleted version
-            if (!isMiningEssence && resource!!.getRespawnRate() != 0) {
+            if (!isMiningEssence && resource!!.respawnRate != 0) {
                 SceneryBuilder.replace(node as Scenery, Scenery(resource!!.emptyId, node.getLocation(), node.type, node.rotation), resource!!.respawnDuration)
                 node.setActive(false)
                 return true
