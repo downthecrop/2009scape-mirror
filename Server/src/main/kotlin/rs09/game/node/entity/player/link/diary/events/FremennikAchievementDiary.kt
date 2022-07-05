@@ -1,21 +1,22 @@
 package rs09.game.node.entity.player.link.diary.events
 
-import api.events.InteractionEvent
-import api.events.NPCKillEvent
-import api.events.PickUpEvent
-import api.events.ResourceProducedEvent
+import api.events.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
+import rs09.game.content.dialogue.region.barbarianassault.CaptainCainDialogue
+import rs09.game.content.dialogue.region.rellekka.HuntingExpertRellekkaDialogue
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 
-class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.KARAMJA) {
+class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
     companion object {
         private const val ATTRIBUTE_SEAWEED_PICKED = "diary:fremennik:seaweed-picked"
         private const val ATTRIBUTE_ROCK_CRAB_KILLCOUNT = "diary:fremennik:rock-crabs-killed"
+        private const val ATTRIBUTE_BARBARIAN_FISHING_TRAINING = "barbtraining:fishing"
+        private const val ATTRIBUTE_BARBARIAN_HUNTING_TRAINING = "barbtraining:hunting"
 
         private val FISHING_SPOTS = arrayOf(
             NPCs.FISHING_SPOT_309, NPCs.FISHING_SPOT_334,
@@ -36,7 +37,7 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.KARAMJA) {
             const val KILL_5_ROCK_CRABS = 1
             const val MAINLAND_FIND_HIGHEST_TREE = 2
             const val BARBARIAN_ASSAULT_VIEW_REWARDS = 3
-            const val SPEAK_TO_OTTO_GODBLESSED = 4
+            const val OTTO_GODBLESSED_LEARN_BARBARIAN_FISHING = 4
             const val PICK_3_SEAWEED = 5
             const val FIND_HUNTING_EXPERT = 6
             const val PIER_CATCH_FISH = 7
@@ -71,14 +72,50 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.KARAMJA) {
         }
     }
 
+    override fun onAttributeSet(player: Player, event: AttributeSetEvent) {
+        when (event.attribute) {
+            "/save:${ATTRIBUTE_BARBARIAN_FISHING_TRAINING}" -> {
+                if (event.value !is Boolean) return
+
+                if (event.value) {
+                    finishTask(
+                        player,
+                        DiaryLevel.EASY,
+                        EasyTasks.OTTO_GODBLESSED_LEARN_BARBARIAN_FISHING
+                    )
+                }
+            }
+        }
+    }
+
     override fun onInteracted(player: Player, event: InteractionEvent) {
         when (player.viewport.region.id) {
-            10552 -> if(event.option == "renew-points"
+            10552 -> if (event.option == "renew-points"
                         && event.target.id == Scenery.SMALL_OBELISK_29944) {
                 finishTask(
                     player,
                     DiaryLevel.EASY,
                     EasyTasks.GATE_OBELISK_RECHARGE_POINTS
+                )
+            }
+        }
+    }
+
+    override fun onDialogueOpened(player: Player, event: DialogueOpenEvent) {
+        when (event.dialogue) {
+            is CaptainCainDialogue -> {
+                finishTask(
+                    player,
+                    DiaryLevel.EASY,
+                    EasyTasks.BARBARIAN_ASSAULT_VIEW_REWARDS
+                )
+            }
+
+            is HuntingExpertRellekkaDialogue -> {
+                finishTask(
+                    player,
+                    DiaryLevel.EASY,
+                    EasyTasks.FIND_HUNTING_EXPERT
                 )
             }
         }

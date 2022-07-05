@@ -9,6 +9,7 @@ import org.rs09.consts.Components
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
+import rs09.game.content.dialogue.region.lumbridge.DukeHoracioDialogue
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 import rs09.game.node.entity.skill.magic.spellconsts.Modern
@@ -153,6 +154,16 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
                     BeginnerTasks.WIZARDS_TOWER_CLIMB_TO_TOP
                 )
             }
+        }
+    }
+
+    override fun onDialogueOpened(player: Player, event: DialogueOpenEvent) {
+        if (event.dialogue is DukeHoracioDialogue) {
+            finishTask(
+                player,
+                DiaryLevel.BEGINNER,
+                BeginnerTasks.CASTLE_SPEAK_TO_DUKE_HORACIO
+            )
         }
     }
 

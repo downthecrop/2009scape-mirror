@@ -57,6 +57,24 @@ abstract class DiaryEventHookBase(val diaryType: DiaryType) : MapArea, LoginList
         }
     }
 
+    class DialogueOpenEvents(val owner: DiaryEventHookBase) : EventHook<DialogueOpenEvent> {
+        override fun process(entity: Entity, event: DialogueOpenEvent) {
+            forEligibleEntityDo(entity, event, owner::onDialogueOpened)
+        }
+    }
+
+    class DialogueCloseEvents(val owner: DiaryEventHookBase) : EventHook<DialogueCloseEvent> {
+        override fun process(entity: Entity, event: DialogueCloseEvent) {
+            forEligibleEntityDo(entity, event, owner::onDialogueClosed)
+        }
+    }
+
+    class DialogueOptionSelectionEvents(val owner: DiaryEventHookBase) : EventHook<DialogueOptionSelectionEvent> {
+        override fun process(entity: Entity, event: DialogueOptionSelectionEvent) {
+            forEligibleEntityDo(entity, event, owner::onDialogueOptionSelected)
+        }
+    }
+
     class UseWithEvents(val owner: DiaryEventHookBase) : EventHook<UseWithEvent> {
         override fun process(entity: Entity, event: UseWithEvent) {
             forEligibleEntityDo(entity, event, owner::onUsedWith)
@@ -124,6 +142,9 @@ abstract class DiaryEventHookBase(val diaryType: DiaryType) : MapArea, LoginList
         player.hook(Event.FireLit, FiremakingEvents(this))
         player.hook(Event.Interacted, InteractionEvents(this))
         player.hook(Event.ButtonClicked, ButtonClickEvents(this))
+        player.hook(Event.DialogueOpened, DialogueOpenEvents(this))
+        player.hook(Event.DialogueOptionSelected, DialogueOptionSelectionEvents(this))
+        player.hook(Event.DialogueClosed, DialogueCloseEvents(this))
         player.hook(Event.UsedWith, UseWithEvents(this))
         player.hook(Event.PickedUp, PickUpEvents(this))
         player.hook(Event.InterfaceOpened, InterfaceOpenEvents(this))
@@ -205,6 +226,9 @@ abstract class DiaryEventHookBase(val diaryType: DiaryType) : MapArea, LoginList
     protected open fun onFireLit(player: Player, event: LitFireEvent) {}
     protected open fun onInteracted(player: Player, event: InteractionEvent) {}
     protected open fun onButtonClicked(player: Player, event: ButtonClickEvent) {}
+    protected open fun onDialogueOpened(player: Player, event: DialogueOpenEvent) {}
+    protected open fun onDialogueClosed(player: Player, event: DialogueCloseEvent) {}
+    protected open fun onDialogueOptionSelected(player: Player, event: DialogueOptionSelectionEvent) {}
     protected open fun onUsedWith(player: Player, event: UseWithEvent) {}
     protected open fun onPickedUp(player: Player, event: PickUpEvent) {}
     protected open fun onInterfaceOpened(player: Player, event: InterfaceOpenEvent) {}

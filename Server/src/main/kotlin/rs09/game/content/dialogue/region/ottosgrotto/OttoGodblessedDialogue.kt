@@ -6,12 +6,14 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.plugin.Initializable
+import org.rs09.consts.NPCs
+import rs09.game.content.dialogue.Topic
 import rs09.tools.END_DIALOGUE
+import rs09.tools.START_DIALOGUE
 
 /**
  * Represents the dialogue plugin used for Otto
- * @author Splinter
- * @version 1.0
+ * @author vddCore
  */
 @Initializable
 class OttoGodblessedDialogue(player: Player? = null) : DialoguePlugin(player) {
@@ -22,40 +24,69 @@ class OttoGodblessedDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc("Good day, you seem a hearty warrior. Maybe even", "some barbarian blood in that body of yours?")
-        stage = -1
-        return true
-    }
 
-    override fun init() {
-        super.init()
+        npcl(
+            FacialExpression.HAPPY,
+            "Good day, you seem a hearty warrior. "
+            + "Maybe even some barbarian blood in that body of yours?"
+        )
+
+        return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            -1 -> options("Ask about barbarian training", "Nevermind.").also { stage++ }
-            0 -> when(buttonId){
-                1 -> player("Is there anything you can teach me?").also { stage = 20 }
-                2 -> stage++
+            START_DIALOGUE -> showTopics(
+                Topic(FacialExpression.ASKING, "Is there anything you can teach me?", 1),
+                Topic(FacialExpression.NEUTRAL, "Nevermind.", END_DIALOGUE)
+            )
+
+            1 -> npcl(
+                FacialExpression.FRIENDLY,
+                "I can teach you how to fish."
+            ).also { stage++ }
+
+            2 -> playerl(
+                FacialExpression.HALF_ROLLING_EYES,
+                "Oh, that's pretty underwhelming. But uhhh, okay!"
+            ).also { stage++ }
+
+            3 -> npcl(
+                FacialExpression.FRIENDLY,
+                "Alright, so here's what you gotta do: you need to grab a pole and some bait, and then... "
+                + "Fling it into the water!"
+            ).also { stage++ }
+
+            4 -> playerl(
+                FacialExpression.HALF_ASKING,
+                "The whole... Pole?"
+            ).also { stage++ }
+
+            5 -> npcl(
+                FacialExpression.ANNOYED,
+                "No, not the whole pole!"
+            ).also { stage++ }
+
+            6 -> npcl(
+                FacialExpression.ANNOYED,
+                "Look. Just... Grab the pole from under my bed and go click on that fishing spot."
+            ).also { stage++ }
+
+            7 -> playerl(
+                FacialExpression.STRUGGLE,
+                "...click?"
+            ).also { stage++ }
+
+            8 -> npcl(
+                FacialExpression.FURIOUS,
+                "JUST GO DO IT!"
+            ).also {
+                stage = END_DIALOGUE;
+                player.setAttribute("/save:barbtraining:fishing", true)
             }
-
-            1 -> stage = END_DIALOGUE
-
-
-            20 -> npc("I can teach you how to fish.").also { stage++ }
-            21 -> player("Oh, that's pretty underwhelming. But uhhh, okay!").also { stage++ }
-            22 -> npc("Alright so here's what you gotta do:","You need to grab a pole and some bait, and then","fling it into the water!").also { stage++ }
-            23 -> player("The whole pole?").also { stage++ }
-            24 -> npc(FacialExpression.ANGRY, "No, not the whole pole!").also { stage++ }
-            25 -> npc("Look, just... grab the pole under my bed","and go click on that fishing spot.").also { stage++ }
-            26 -> player(FacialExpression.ASKING,"...click?").also { stage++ }
-            27 -> npc(FacialExpression.FURIOUS, "JUST GO DO IT!").also { stage++; player.setAttribute("/save:barbtraining:fishing",true) }
-            28 -> end().also { player.achievementDiaryManager.finishTask(player, DiaryType.FREMENNIK,0,4) }
         }
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(2725)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.OTTO_GODBLESSED_2725)
 }

@@ -23,7 +23,6 @@ class CaptainCainDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npcl(FacialExpression.FRIENDLY, "Hello, there, adventurer. Say, you wouldn't happen to be interested in purchasing a Fighter Torso would you?")
-        player.achievementDiaryManager.finishTask(player,DiaryType.FREMENNIK,0,3)
         stage = 0
         return true
     }

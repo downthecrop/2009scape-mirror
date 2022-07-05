@@ -20,4 +20,7 @@ object Event {
     @JvmStatic val AttributeRemoved = AttributeRemoveEvent::class.java
     @JvmStatic val SpellCast = SpellCastEvent::class.java
     @JvmStatic val ItemAlchemized = ItemAlchemizationEvent::class.java
+    @JvmStatic val DialogueOpened = DialogueOpenEvent::class.java
+    @JvmStatic val DialogueOptionSelected = DialogueOptionSelectionEvent::class.java
+    @JvmStatic val DialogueClosed = DialogueCloseEvent::class.java
 }
