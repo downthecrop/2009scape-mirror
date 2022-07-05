@@ -14,7 +14,7 @@ import org.rs09.consts.Scenery
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 
-class FaladorAchievementDiary : DiaryEventHookBase() {
+class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
     companion object {
         private val MINING_GUILD_AREA = ZoneBorders(3016, 9731, 3055, 9756)
         private val DARK_WIZARDS_TOWER_ROOF_AREA = ZoneBorders(2904, 3331, 2911, 3338, 2)
@@ -103,7 +103,6 @@ class FaladorAchievementDiary : DiaryEventHookBase() {
             inBorders(player, MINING_GUILD_AREA) -> {
                 finishTask(
                     player,
-                    DiaryType.FALADOR,
                     DiaryLevel.HARD,
                     HardTasks.ENTER_MINING_GUILD
                 )
@@ -113,7 +112,6 @@ class FaladorAchievementDiary : DiaryEventHookBase() {
                 if (areEquipped(player, *PROSELYTE_FULL_ARMOR)) {
                     finishTask(
                         player,
-                        DiaryType.FALADOR,
                         DiaryLevel.HARD,
                         HardTasks.DARK_WIZARDS_TOWER_ASCEND_IN_FULL_PROSELYTE_ARMOR
                     )
@@ -123,7 +121,6 @@ class FaladorAchievementDiary : DiaryEventHookBase() {
             inBorders(player, WHITE_KNIGHTS_CASTLE_ROOF_AREA) -> {
                 finishTask(
                     player,
-                    DiaryType.FALADOR,
                     DiaryLevel.EASY,
                     EasyTasks.WHITE_KNIGHTS_CASTLE_CLIMB_TO_TOP
                 )
@@ -137,7 +134,6 @@ class FaladorAchievementDiary : DiaryEventHookBase() {
                 if (event.option == "burst" && event.target.id in PARTY_BALLOONS) {
                     finishTask(
                         player,
-                        DiaryType.FALADOR,
                         DiaryLevel.EASY,
                         EasyTasks.POP_PARTY_BALLOON
                     )
@@ -153,7 +149,6 @@ class FaladorAchievementDiary : DiaryEventHookBase() {
                     if (inBorders(player, PARK_TREE_PATCH_AREA)) {
                         finishTask(
                             player,
-                            DiaryType.FALADOR,
                             DiaryLevel.HARD,
                             HardTasks.CUT_DOWN_GROWN_YEW_OR_MAGIC_TREE
                         )
@@ -168,7 +163,6 @@ class FaladorAchievementDiary : DiaryEventHookBase() {
             11828 -> if (event.npc.id in PARK_DUCKS && inBorders(event.npc, PARK_POND_AREA)) {
                 finishTask(
                     player,
-                    DiaryType.FALADOR,
                     DiaryLevel.EASY,
                     EasyTasks.PARK_KILL_A_DUCK
                 )
@@ -177,7 +171,6 @@ class FaladorAchievementDiary : DiaryEventHookBase() {
             12181 -> if (event.npc.id in SKELETAL_WYVERNS) {
                 finishTask(
                     player,
-                    DiaryType.FALADOR,
                     DiaryLevel.HARD,
                     HardTasks.ICE_DUNGEON_KILL_SKELETAL_WYVERN
                 )

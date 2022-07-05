@@ -13,7 +13,7 @@ import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 import rs09.game.node.entity.skill.magic.spellconsts.Modern
 
-class VarrockAchivementDiary : DiaryEventHookBase() {
+class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
     companion object {
         private val VARROCK_ROOF_AREA = ZoneBorders(3201, 3467, 3225, 3497, 3)
         private val SOS_LEVEL_2_AREA = ZoneBorders(2040, 5241, 2046, 5246)
@@ -93,7 +93,6 @@ class VarrockAchivementDiary : DiaryEventHookBase() {
             inBorders(player, VARROCK_ROOF_AREA) -> {
                 finishTask(
                     player,
-                    DiaryType.VARROCK,
                     DiaryLevel.EASY,
                     EasyTasks.FIND_HIGHEST_POINT
                 )
@@ -102,7 +101,6 @@ class VarrockAchivementDiary : DiaryEventHookBase() {
             inBorders(player, SOS_LEVEL_2_AREA) -> {
                 finishTask(
                     player,
-                    DiaryType.VARROCK,
                     DiaryLevel.EASY,
                     EasyTasks.VISIT_SOS_LEVEL2
                 )
@@ -116,7 +114,6 @@ class VarrockAchivementDiary : DiaryEventHookBase() {
                 if (event.target.id == 26934) {
                     finishTask(
                         player,
-                        DiaryType.VARROCK,
                         DiaryLevel.EASY,
                         EasyTasks.EDGEVILLE_ENTER_DUNGEON_SOUTH
                     )
@@ -130,7 +127,6 @@ class VarrockAchivementDiary : DiaryEventHookBase() {
             12341 -> if (event.itemId == Items.RAW_TROUT_335) {
                 finishTask(
                     player,
-                    DiaryType.VARROCK,
                     DiaryLevel.EASY,
                     EasyTasks.BARBARIAN_VILLAGE_CATCH_TROUT
                 )
@@ -139,7 +135,6 @@ class VarrockAchivementDiary : DiaryEventHookBase() {
             13108 -> if (event.itemId == Items.IRON_ORE_440) {
                 finishTask(
                     player,
-                    DiaryType.VARROCK,
                     DiaryLevel.EASY,
                     EasyTasks.MINE_IRON_SOUTHEAST
                 )
@@ -150,7 +145,6 @@ class VarrockAchivementDiary : DiaryEventHookBase() {
                     && event.source.id == Scenery.DYING_TREE_24168) {
                     finishTask(
                         player,
-                        DiaryType.VARROCK,
                         DiaryLevel.EASY,
                         EasyTasks.LUMBERYARD_CHOP_DYING_TREE
                     )
@@ -160,7 +154,6 @@ class VarrockAchivementDiary : DiaryEventHookBase() {
             13366 -> if (event.itemId == Items.LIMESTONE_3211) {
                 finishTask(
                     player,
-                    DiaryType.VARROCK,
                     DiaryLevel.EASY,
                     EasyTasks.PATERDOMUS_MINE_LIMESTONE
                 )
@@ -173,7 +166,6 @@ class VarrockAchivementDiary : DiaryEventHookBase() {
             Modern.VARROCK_TELEPORT -> {
                 finishTask(
                     player,
-                    DiaryType.VARROCK,
                     DiaryLevel.MEDIUM,
                     MediumTasks.CAST_VARROCK_TELEPORT_SPELL
                 )

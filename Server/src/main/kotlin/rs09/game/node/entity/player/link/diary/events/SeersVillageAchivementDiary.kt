@@ -12,7 +12,7 @@ import org.rs09.consts.NPCs
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 
-class SeersVillageAchivementDiary : DiaryEventHookBase() {
+class SeersVillageAchivementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) {
     companion object {
         private const val ATTRIBUTE_CUT_YEW_COUNT = "diary:seers:cut-yew"
         private const val ATTRIBUTE_BASS_CAUGHT = "diary:seers:bass-caught"
@@ -30,6 +30,16 @@ class SeersVillageAchivementDiary : DiaryEventHookBase() {
             Items.COMBAT_BRACELET_11126, Items.COMBAT_BRACELET4_11118,
             Items.COMBAT_BRACELET3_11120, Items.COMBAT_BRACELET2_11122,
             Items.COMBAT_BRACELET1_11124
+        )
+
+        private val RANGING_GUILD_ARCHERS = arrayOf(
+            NPCs.TOWER_ARCHER_688, NPCs.TOWER_ARCHER_689,
+            NPCs.TOWER_ARCHER_690, NPCs.TOWER_ARCHER_691
+        )
+
+        private val WORKSHOP_ELEMENTALS = arrayOf(
+            NPCs.FIRE_ELEMENTAL_1019, NPCs.EARTH_ELEMENTAL_1020,
+            NPCs.AIR_ELEMENTAL_1021, NPCs.WATER_ELEMENTAL_1022
         )
 
         object EasyTasks {
@@ -77,83 +87,12 @@ class SeersVillageAchivementDiary : DiaryEventHookBase() {
         }
     }
 
-    override fun onAttributeSet(player: Player, event: AttributeSetEvent) {
-        when (event.attribute) {
-            "/save:${ATTRIBUTE_CUT_YEW_COUNT}" -> {
-                if (event.value !is Int) return
-
-                if (event.value >= 5) {
-                    finishTask(
-                        player,
-                        DiaryType.SEERS_VILLAGE,
-                        DiaryLevel.HARD,
-                        HardTasks.CUT_5_YEW_LOGS
-                    )
-                }
-            }
-
-            "/save:${ATTRIBUTE_SHARK_CAUGHT_COUNT}" -> {
-                if (event.value !is Int) return
-
-                if (event.value >= 5) {
-                    finishTask(
-                        player,
-                        DiaryType.SEERS_VILLAGE,
-                        DiaryLevel.HARD,
-                        HardTasks.CATHERBY_CATCH_5_SHARKS
-                    )
-                }
-            }
-
-            "/save:${ATTRIBUTE_SHARK_COOKED_COUNT}" -> {
-                if (event.value !is Int) return
-
-                if (event.value >= 5) {
-                    finishTask(
-                        player,
-                        DiaryType.SEERS_VILLAGE,
-                        DiaryLevel.HARD,
-                        HardTasks.CATHERBY_COOK_5_SHARKS_WITH_COOKING_GAUNTLETS
-                    )
-                }
-            }
-
-            "/save:${ATTRIBUTE_ELEMENTAL_KILL_FLAGS}" -> {
-                if (event.value !is Int) return
-
-                /* It's a bit-field. Set in the combat event handlers. */
-                if (event.value == 0xF) {
-                    finishTask(
-                        player,
-                        DiaryType.SEERS_VILLAGE,
-                        DiaryLevel.MEDIUM,
-                        MediumTasks.DEFEAT_EACH_ELEMENTAL_TYPE
-                    )
-                }
-            }
-
-            "/save:${ATTRIBUTE_ARCHER_KILL_FLAGS}" -> {
-                if (event.value !is Int) return
-
-                if (event.value == 0xF) {
-                    finishTask(
-                        player,
-                        DiaryType.SEERS_VILLAGE,
-                        DiaryLevel.MEDIUM,
-                        MediumTasks.RANGING_GUILD_KILL_EACH_TOWER_GUARD
-                    )
-                }
-            }
-        }
-    }
-
     override fun onFireLit(player: Player, event: LitFireEvent) {
         when {
             inBorders(player, SEERS_VILLAGE_AREA) -> {
                 if (event.logId == Items.MAGIC_LOGS_1513) {
                     finishTask(
                         player,
-                        DiaryType.SEERS_VILLAGE,
                         DiaryLevel.HARD,
                         HardTasks.LIGHT_MAGIC_LOG
                     )
@@ -165,10 +104,12 @@ class SeersVillageAchivementDiary : DiaryEventHookBase() {
     override fun onResourceProduced(player: Player, event: ResourceProducedEvent) {
         when (player.viewport.region.id) {
             10806 -> if (event.itemId == Items.YEW_LOGS_1515) {
-                setAttribute(
+                progressIncrementalTask(
                     player,
-                    "/save:${ATTRIBUTE_CUT_YEW_COUNT}",
-                    getAttribute(player, ATTRIBUTE_CUT_YEW_COUNT, 0) + 1
+                    DiaryLevel.HARD,
+                    HardTasks.CUT_5_YEW_LOGS,
+                    ATTRIBUTE_CUT_YEW_COUNT,
+                    5
                 )
             }
 
@@ -176,7 +117,6 @@ class SeersVillageAchivementDiary : DiaryEventHookBase() {
                 Items.RAW_MACKEREL_353 -> {
                     finishTask(
                         player,
-                        DiaryType.SEERS_VILLAGE,
                         DiaryLevel.EASY,
                         EasyTasks.CATCH_MACKEREL
                     )
@@ -196,7 +136,6 @@ class SeersVillageAchivementDiary : DiaryEventHookBase() {
                     if (getAttribute(player, ATTRIBUTE_BASS_CAUGHT, false)) {
                         finishTask(
                             player,
-                            DiaryType.SEERS_VILLAGE,
                             DiaryLevel.MEDIUM,
                             MediumTasks.CATHERBY_CATCH_AND_COOK_BASS
                         )
@@ -204,19 +143,23 @@ class SeersVillageAchivementDiary : DiaryEventHookBase() {
                 }
 
                 Items.RAW_SHARK_383 -> {
-                    setAttribute(
+                    progressIncrementalTask(
                         player,
-                        "/save:${ATTRIBUTE_SHARK_CAUGHT_COUNT}",
-                        getAttribute(player, ATTRIBUTE_SHARK_CAUGHT_COUNT, 0) + 1
+                        DiaryLevel.HARD,
+                        HardTasks.CATHERBY_CATCH_5_SHARKS,
+                        ATTRIBUTE_SHARK_CAUGHT_COUNT,
+                        5
                     )
                 }
 
                 Items.SHARK_385 -> {
                     if (isEquipped(player, Items.COOKING_GAUNTLETS_775)) {
-                        setAttribute(
+                        progressIncrementalTask(
                             player,
-                            "/save:${ATTRIBUTE_SHARK_COOKED_COUNT}",
-                            getAttribute(player, ATTRIBUTE_SHARK_COOKED_COUNT, 0) + 1
+                            DiaryLevel.HARD,
+                            HardTasks.CATHERBY_COOK_5_SHARKS_WITH_COOKING_GAUNTLETS,
+                            ATTRIBUTE_SHARK_COOKED_COUNT,
+                            5
                         )
                     }
                 }
@@ -226,80 +169,27 @@ class SeersVillageAchivementDiary : DiaryEventHookBase() {
 
     override fun onNpcKilled(player: Player, event: NPCKillEvent) {
         when (player.viewport.region.id) {
-            10906 -> {
-                val current = getAttribute(player, ATTRIBUTE_ELEMENTAL_KILL_FLAGS, 0)
-
-                when (event.npc.id) {
-                    NPCs.FIRE_ELEMENTAL_1019 -> {
-                        setAttribute(
-                            player,
-                            "/save:${ATTRIBUTE_ELEMENTAL_KILL_FLAGS}",
-                            current or (1 shl 0)
-                        )
-                    }
-
-                    NPCs.EARTH_ELEMENTAL_1020 -> {
-                        setAttribute(
-                            player,
-                            "/save:${ATTRIBUTE_ELEMENTAL_KILL_FLAGS}",
-                            current or (1 shl 1)
-                        )
-                    }
-
-                    NPCs.AIR_ELEMENTAL_1021 -> {
-                        setAttribute(
-                            player,
-                            "/save:${ATTRIBUTE_ELEMENTAL_KILL_FLAGS}",
-                            current or (1 shl 2)
-                        )
-                    }
-
-                    NPCs.WATER_ELEMENTAL_1022 -> {
-                        setAttribute(
-                            player,
-                            "/save:${ATTRIBUTE_ELEMENTAL_KILL_FLAGS}",
-                            current or (1 shl 3)
-                        )
-                    }
-                }
+            10906 -> if (event.npc.id in WORKSHOP_ELEMENTALS) {
+                progressFlaggedTask(
+                    player,
+                    DiaryLevel.MEDIUM,
+                    MediumTasks.DEFEAT_EACH_ELEMENTAL_TYPE,
+                    ATTRIBUTE_ELEMENTAL_KILL_FLAGS,
+                    event.npc.id - NPCs.FIRE_ELEMENTAL_1019,
+                    0xF
+                )
             }
 
-            10549 -> {
-                val current = getAttribute(player, ATTRIBUTE_ARCHER_KILL_FLAGS, 0)
-
-                when (event.npc.id) {
-                    NPCs.TOWER_ARCHER_688 -> {
-                        setAttribute(
-                            player,
-                            "/save:${ATTRIBUTE_ARCHER_KILL_FLAGS}",
-                            current or (1 shl 0)
-                        )
-                    }
-
-                    NPCs.TOWER_ARCHER_689 -> {
-                        setAttribute(
-                            player,
-                            "/save:${ATTRIBUTE_ARCHER_KILL_FLAGS}",
-                            current or (1 shl 1)
-                        )
-                    }
-
-                    NPCs.TOWER_ARCHER_690 -> {
-                        setAttribute(
-                            player,
-                            "/save:${ATTRIBUTE_ARCHER_KILL_FLAGS}",
-                            current or (1 shl 2)
-                        )
-                    }
-
-                    NPCs.TOWER_ARCHER_691-> {
-                        setAttribute(
-                            player,
-                            "/save:${ATTRIBUTE_ARCHER_KILL_FLAGS}",
-                            current or (1 shl 3)
-                        )
-                    }
-                }
+            10549 -> if (event.npc.id in RANGING_GUILD_ARCHERS) {
+                progressFlaggedTask(
+                    player,
+                    DiaryLevel.MEDIUM,
+                    MediumTasks.RANGING_GUILD_KILL_EACH_TOWER_GUARD,
+                    ATTRIBUTE_ARCHER_KILL_FLAGS,
+                    /* Thanks for sequential NPC IDs, Jagex! */
+                    event.npc.id - NPCs.TOWER_ARCHER_688,
+                    0xF
+                )
             }
         }
     }
@@ -310,7 +200,6 @@ class SeersVillageAchivementDiary : DiaryEventHookBase() {
                 if (event.location == RANGING_GUILD_LOCATION) {
                     finishTask(
                         player,
-                        DiaryType.SEERS_VILLAGE,
                         DiaryLevel.HARD,
                         HardTasks.RANGING_GUILD_TELEPORT
                     )
@@ -324,7 +213,6 @@ class SeersVillageAchivementDiary : DiaryEventHookBase() {
             if (event.itemId == Items.MAGIC_SHORTBOW_861 && event.isHigh) {
                 finishTask(
                     player,
-                    DiaryType.SEERS_VILLAGE,
                     DiaryLevel.HARD,
                     HardTasks.HIGH_ALCH_MAGIC_SHORTBOW_INSIDE_BANK
                 )

@@ -13,7 +13,7 @@ import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 import rs09.game.node.entity.skill.magic.spellconsts.Modern
 
-class LumbridgeAchivementDiary : DiaryEventHookBase() {
+class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
 
     companion object {
         private val DEAD_TREES = arrayOf(
@@ -105,7 +105,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
             inBorders(player, CASTLE_ROOF_AREA) -> {
                 finishTask(
                     player,
-                    DiaryType.LUMBRIDGE,
                     DiaryLevel.BEGINNER,
                     BeginnerTasks.CASTLE_CLIMB_TO_HIGHEST_POINT
                 )
@@ -118,7 +117,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
             "gc:flying" -> {
                 finishTask(
                     player,
-                    DiaryType.LUMBRIDGE,
                     DiaryLevel.MEDIUM,
                     MediumTasks.RIDE_GNOMECOPTER
                 )
@@ -131,7 +129,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
             12338 -> if (event.component.id == Components.BANK_V2_MAIN_762) {
                 finishTask(
                     player,
-                    DiaryType.LUMBRIDGE,
                     DiaryLevel.EASY,
                     EasyTasks.DRAYNOR_ACCESS_BANK
                 )
@@ -140,7 +137,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
             12850 -> if (event.component.id == Components.SHOP_TEMPLATE_620) {
                 finishTask(
                     player,
-                    DiaryType.LUMBRIDGE,
                     DiaryLevel.BEGINNER,
                     BeginnerTasks.BROWSE_GENERAL_STORE
                 )
@@ -153,7 +149,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
             12337 -> if (event.target.id == 12537) {
                 finishTask(
                     player,
-                    DiaryType.LUMBRIDGE,
                     DiaryLevel.BEGINNER,
                     BeginnerTasks.WIZARDS_TOWER_CLIMB_TO_TOP
                 )
@@ -166,7 +161,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
             12593, 12849 -> if (event.logId == Items.LOGS_1511) {
                 finishTask(
                     player,
-                    DiaryType.LUMBRIDGE,
                     DiaryLevel.EASY,
                     EasyTasks.SWAMP_LIGHT_NORMAL_LOGS
                 )
@@ -176,7 +170,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
                 if (inBorders(player, CASTLE_COURTYARD_AREA)) {
                     finishTask(
                         player,
-                        DiaryType.LUMBRIDGE,
                         DiaryLevel.MEDIUM,
                         MediumTasks.CASTLE_LIGHT_WILLOW_LOGS
                     )
@@ -190,7 +183,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
             12596 -> if (event.itemId == Items.CLAY_434) {
                 finishTask(
                     player,
-                    DiaryType.LUMBRIDGE,
                     DiaryLevel.BEGINNER,
                     BeginnerTasks.CHAMPIONS_GUILD_MINE_CLAY
                 )
@@ -201,7 +193,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
                     Items.RAW_SHRIMPS_317 -> {
                         finishTask(
                             player,
-                            DiaryType.LUMBRIDGE,
                             DiaryLevel.BEGINNER,
                             BeginnerTasks.SWAMP_CATCH_SHRIMPS
                         )
@@ -210,7 +201,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
                     Items.COPPER_ORE_436 -> {
                         finishTask(
                             player,
-                            DiaryType.LUMBRIDGE,
                             DiaryLevel.BEGINNER,
                             BeginnerTasks.SWAMP_MINE_COPPER_ORE
                         )
@@ -219,7 +209,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
                     Items.COAL_453 -> {
                         finishTask(
                             player,
-                            DiaryType.LUMBRIDGE,
                             DiaryLevel.MEDIUM,
                             MediumTasks.SWAMP_MINE_COAL
                         )
@@ -229,7 +218,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
                         if (event.source.id in DEAD_TREES) {
                             finishTask(
                                 player,
-                                DiaryType.LUMBRIDGE,
                                 DiaryLevel.EASY,
                                 EasyTasks.SWAMP_CUT_DEAD_TREE
                             )
@@ -240,7 +228,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
                         if (event.original == Items.RAW_RAT_MEAT_2134) {
                             finishTask(
                                 player,
-                                DiaryType.LUMBRIDGE,
                                 DiaryLevel.EASY,
                                 EasyTasks.SWAMP_COOK_RAT_MEAT_ON_CAMPFIRE
                             )
@@ -253,7 +240,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
                 Items.WILLOW_LOGS_1519 -> {
                     finishTask(
                         player,
-                        DiaryType.LUMBRIDGE,
                         DiaryLevel.MEDIUM,
                         MediumTasks.RIVER_GATHER_WILLOW_LOGS
                     )
@@ -262,7 +248,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
                 Items.RAW_PIKE_349 -> {
                     finishTask(
                         player,
-                        DiaryType.LUMBRIDGE,
                         DiaryLevel.EASY,
                         EasyTasks.RIVER_CATCH_PIKE
                     )
@@ -271,7 +256,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
                 Items.RAW_SALMON_331 -> {
                     finishTask(
                         player,
-                        DiaryType.LUMBRIDGE,
                         DiaryLevel.MEDIUM,
                         MediumTasks.RIVER_CATCH_SALMON
                     )
@@ -282,7 +266,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
                         && event.source.id == Scenery.COOKING_RANGE_114) {
                         finishTask(
                             player,
-                            DiaryType.LUMBRIDGE,
                             DiaryLevel.MEDIUM,
                             MediumTasks.CASTLE_COOK_LOBSTER_ON_RANGE
                         )
@@ -294,7 +277,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
                 Items.IRON_ORE_440 -> {
                     finishTask(
                         player,
-                        DiaryType.LUMBRIDGE,
                         DiaryLevel.EASY,
                         EasyTasks.AL_KHARID_MINE_IRON
                     )
@@ -303,7 +285,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
                 Items.SILVER_ORE_442 -> {
                     finishTask(
                         player,
-                        DiaryType.LUMBRIDGE,
                         DiaryLevel.MEDIUM,
                         MediumTasks.AL_KHARID_MINE_SILVER
                     )
@@ -320,7 +301,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
                         || inBorders(player, COW_PEN_AREA_2)) {
                         finishTask(
                             player,
-                            DiaryType.LUMBRIDGE,
                             DiaryLevel.EASY,
                             EasyTasks.COWFIELD_OBTAIN_COW_HIDE
                         )
@@ -335,7 +315,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
             12593, 12849 -> if (event.npc.id == NPCs.GIANT_RAT_86) {
                 finishTask(
                     player,
-                    DiaryType.LUMBRIDGE,
                     DiaryLevel.EASY,
                     EasyTasks.SWAMP_KILL_GIANT_RAT
                 )
@@ -344,7 +323,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
             12438, 12439 -> if (event.npc.id in ZOMBIES) {
                 finishTask(
                     player,
-                    DiaryType.LUMBRIDGE,
                     DiaryLevel.EASY,
                     EasyTasks.DRAYNOR_JAIL_SEWER_KILL_ZOMBIE
                 )
@@ -357,7 +335,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase() {
             Modern.LUMBRIDGE_TELEPORT -> {
                 finishTask(
                     player,
-                    DiaryType.LUMBRIDGE,
                     DiaryLevel.MEDIUM,
                     MediumTasks.CAST_LUMBRIDGE_TELEPORT
                 )

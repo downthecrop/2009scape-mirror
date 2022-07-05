@@ -3,13 +3,15 @@ package rs09.game.node.entity.player.link.diary
 import api.LoginListener
 import api.MapArea
 import api.events.*
+import api.getAttribute
+import api.setAttribute
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.world.map.zone.ZoneBorders
 import rs09.game.Event
 
-abstract class DiaryEventHookBase : MapArea, LoginListener {
+abstract class DiaryEventHookBase(val diaryType: DiaryType) : MapArea, LoginListener {
     protected companion object {
         private fun<T> forEligibleEntityDo(entity: Entity, event: T, handler: (Player, T) -> Unit) {
             if (entity !is Player) return
@@ -131,26 +133,68 @@ abstract class DiaryEventHookBase : MapArea, LoginListener {
         player.hook(Event.ItemAlchemized, ItemAlchemizationEvents(this))
     }
 
-    protected fun finishTask(entity: Player, diary: DiaryType, level: DiaryLevel, task: Int) {
+    protected fun progressIncrementalTask(player: Player, level: DiaryLevel, task: Int, attribute: String, maxProgress: Int) {
+        if (isTaskCompleted(player, level, task)) return
+
         val levelName = level.name.lowercase().replaceFirstChar { c -> c.uppercase() }
-        val levelIndex = diary.levelNames.indexOf(levelName)
+        val levelIndex = diaryType.levelNames.indexOf(levelName)
 
-        if (levelIndex < 0) {
-            throw IllegalArgumentException("'$levelName' was not found in diary '$diary'.")
+        val newValue = getAttribute(player, attribute, 0) + 1
+
+        setAttribute(
+            player,
+            "/save:${attribute}",
+            newValue
+        )
+
+        if (newValue < maxProgress) {
+            player.achievementDiaryManager.updateTask(player, diaryType, levelIndex, task, false)
+        } else {
+            finishTask(player, level, task)
         }
-
-        entity.achievementDiaryManager.finishTask(entity, diary, levelIndex, task)
     }
 
-    protected fun isTaskCompleted(entity: Player, diary: DiaryType, level: DiaryLevel, task: Int): Boolean {
+    protected fun progressFlaggedTask(player: Player, level: DiaryLevel, task: Int, attribute: String, bit: Int, targetValue: Int) {
+        if (isTaskCompleted(player, level, task)) return
+
         val levelName = level.name.lowercase().replaceFirstChar { c -> c.uppercase() }
-        val levelIndex = diary.levelNames.indexOf(levelName)
+        val levelIndex = diaryType.levelNames.indexOf(levelName)
+
+        val newValue = getAttribute(player, attribute, 0) + 1
+
+        setAttribute(
+            player,
+            "/save:${attribute}",
+            newValue or bit
+        )
+
+        if (newValue != targetValue) {
+            player.achievementDiaryManager.updateTask(player, diaryType, levelIndex, task, false)
+        } else {
+            finishTask(player, level, task)
+        }
+    }
+
+    protected fun finishTask(player: Player, level: DiaryLevel, task: Int) {
+        val levelName = level.name.lowercase().replaceFirstChar { c -> c.uppercase() }
+        val levelIndex = diaryType.levelNames.indexOf(levelName)
 
         if (levelIndex < 0) {
-            throw IllegalArgumentException("'$levelName' was not found in diary '$diary'.")
+            throw IllegalArgumentException("'$levelName' was not found in diary '$diaryType'.")
         }
 
-        return entity.achievementDiaryManager.hasCompletedTask(diary, levelIndex, task)
+        player.achievementDiaryManager.finishTask(player, diaryType, levelIndex, task)
+    }
+
+    protected fun isTaskCompleted(player: Player, level: DiaryLevel, task: Int): Boolean {
+        val levelName = level.name.lowercase().replaceFirstChar { c -> c.uppercase() }
+        val levelIndex = diaryType.levelNames.indexOf(levelName)
+
+        if (levelIndex < 0) {
+            throw IllegalArgumentException("'$levelName' was not found in diary '$diaryType'.")
+        }
+
+        return player.achievementDiaryManager.hasCompletedTask(diaryType, levelIndex, task)
     }
 
     protected open fun onAreaVisited(player: Player) {}
