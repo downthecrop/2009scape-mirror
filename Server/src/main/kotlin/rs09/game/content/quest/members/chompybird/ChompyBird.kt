@@ -31,8 +31,10 @@ class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 1, Vars.VARP_QUEST_C
     val CAVE_EXIT = Location.create(2630, 2997, 0) 
     val TOAD_LOCATION = Location.create(2636, 2966, 0)
     val ATTR_ING_RANTZ = "/save:chompybird:rantz-ingredient"
-    val ATTR_ING_BUGS  = "/save:chompybird:rantz-ingredient"
-    val ATTR_ING_FYCIE = "/save:chompybird:rantz-ingredient"
+    val ATTR_ING_BUGS  = "/save:chompybird:bugs-ingredient"
+    val ATTR_ING_FYCIE = "/save:chompybird:fycie-ingredient"
+    val ATTR_BUGS_ASKED = "/save:chompybird:bugs-asked"
+    val ATTR_FYCIE_ASKED = "/save:chompybird:fycie-asked"
   }
 
   override fun drawJournal(player: Player, stage: Int) {
@@ -114,6 +116,46 @@ class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 1, Vars.VARP_QUEST_C
       }
 
       return@on true
+    }
+
+    onUseWith(SCENERY, Items.RAW_CHOMPY_2876, 3375) {player, used, _ -> 
+      val rantzIngredient = getAttribute(player, ATTR_ING_RANTZ, -1)
+      val bugsIngredient = getAttribute(player, ATTR_ING_BUGS, -1)
+      val fycieIngredient = getAttribute(player, ATTR_ING_FYCIE, -1)
+
+      if (rantzIngredient == -1) {
+        sendDialogue(player, "I don't have a reason to do this yet.")
+        return@onUseWith true
+      }
+
+      if (
+        amountInInventory(player, rantzIngredient) > 0
+        && amountInInventory(player, bugsIngredient) > 0
+        && amountInInventory(player, fycieIngredient) > 0
+      ) {
+        lock(player, 5)
+        setVarbit(player, Vars.VARBIT_QUEST_CHOMPY_SPITROAST, 1)
+        animate(player, Animations.HUMAN_COOKING_RANGE)
+        runTask(player, 4) {
+          setVarbit(player, Vars.VARBIT_QUEST_CHOMPY_SPITROAST, 0)
+          sendItemDialogue(
+            player,
+            Items.SEASONED_CHOMPY_2882,
+            "You use the ${getItemName(rantzIngredient).lowercase()}, ${getItemName(bugsIngredient).lowercase()} and the ${getItemName(fycieIngredient)} with the chompy bird to make a seasoned chompy."
+          )
+          if (
+            removeItem(player, used.asItem())
+            && removeItem(player, rantzIngredient)
+            && removeItem(player, bugsIngredient)
+            && removeItem(player, fycieIngredient)
+          ) addItem(player, Items.SEASONED_CHOMPY_2882)
+        }
+      } else {
+        sendDialogue(player, "I don't have all the ingredients I need yet.")
+        player.debug("Required Items: $rantzIngredient, $bugsIngredient, $fycieIngredient")
+      }
+
+      return@onUseWith true
     }
 
     onUseWith(SCENERY, Items.OGRE_BELLOWS_2871, 684) {player, used, _ -> 

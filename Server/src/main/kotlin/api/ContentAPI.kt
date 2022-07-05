@@ -4,6 +4,7 @@ import Cutscene
 import com.moandjiezana.toml.Toml
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.VarbitDefinition
 import core.game.component.Component
 import core.game.container.impl.EquipmentContainer
 import core.game.content.dialogue.FacialExpression
@@ -857,6 +858,21 @@ fun heal(entity: Entity, amount: Int) {
 fun setVarbit(player: Player, varpIndex: Int, offset: Int, value: Int, save: Boolean = false) {
     player.varpManager.get(varpIndex).setVarbit(offset, value).send(player)
     if (save) player.varpManager.flagSave(varpIndex)
+}
+
+/**
+ * Sets the given varbit for the given player.
+ * @param player the player to set the varbit for.
+ * @param varbitId the ID of the varbit to set.
+ * @param value the value to set the varbit to.
+ * @param save whether or not we should save this setting (default false)
+ */
+fun setVarbit(player: Player, varbitId: Int, value: Int, save: Boolean = false) {
+    player.varpManager.setVarbit(varbitId, value)
+    if (save) {
+        val def = VarbitDefinition.forId(varbitId)
+        player.varpManager.flagSave(def.configId)
+    }
 }
 
 /**

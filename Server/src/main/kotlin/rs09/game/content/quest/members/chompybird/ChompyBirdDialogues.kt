@@ -33,7 +33,7 @@ class RantzDialogue(player: Player? = null) : DialoguePlugin(player) {
     val chompyStage = chompyBird.getStage(player)
 
     when (chompyStage) {
-      in 0..65 -> loadFile(RantzChompyBirdDialogue(chompyBird))
+      in 0 until 100 -> loadFile(RantzChompyBirdDialogue(chompyBird))
     }
 
     player.dialogueInterpreter.handle(0,0)
@@ -41,8 +41,110 @@ class RantzDialogue(player: Player? = null) : DialoguePlugin(player) {
     return true
   }
 
-  override fun handle(compenentId: Int, buttonId: Int) : Boolean {
+  override fun handle(componentId: Int, buttonId: Int) : Boolean {
     return true
+  }
+}
+
+@Initializable
+class BugsDialogue(player: Player? = null) : DialoguePlugin(player) {
+  override fun getIds() : IntArray {
+    return intArrayOf(NPCs.BUGS_1012)
+  }
+
+  override fun newInstance(player: Player?) : DialoguePlugin {
+    return BugsDialogue(player)
+  }
+
+  override fun open(vararg args: Any?) : Boolean {
+    npc = args[0] as NPC
+
+    val chompyBird = player.questRepository.getQuest("Big Chompy Bird Hunting")
+    val chompyStage = chompyBird.getStage(player)
+
+    when (chompyStage) {
+      in 0 until 100 -> loadFile(BugsChompyBirdDialogue(chompyBird))
+    }
+
+    player.dialogueInterpreter.handle(0,0)
+
+    return true
+  }
+
+  override fun handle(componentId: Int, buttonId: Int) : Boolean {
+    return true
+  }
+}
+
+@Initializable
+class FycieDialogue(player: Player? = null) : DialoguePlugin(player) {
+  override fun getIds() : IntArray {
+    return intArrayOf(NPCs.FYCIE_1011)
+  }
+
+  override fun newInstance(player: Player?) : DialoguePlugin {
+    return FycieDialogue(player)
+  }
+
+  override fun open(vararg args: Any?) : Boolean {
+    npc = args[0] as NPC
+
+    val chompyBird = player.questRepository.getQuest("Big Chompy Bird Hunting")
+    val chompyStage = chompyBird.getStage(player)
+
+    when (chompyStage) {
+      in 0 until 100 -> loadFile(FycieChompyBirdDialogue(chompyBird))
+    }
+
+    player.dialogueInterpreter.handle(0,0)
+
+    return true
+  }
+
+  override fun handle(componentId: Int, buttonId: Int) : Boolean {
+    return true
+  }
+}
+
+class BugsChompyBirdDialogue(val quest: Quest) : DialogueFile() {
+  override fun handle(componentId: Int, buttonId: Int) {
+    when (quest.getStage(player)) {
+      in 0 until 20 -> npcl("You's better talk to Dad, him chasey sneaky da chompy.").also { stage = END_DIALOGUE }
+      in 20 until 70 -> handleBellowsDialogue(player, buttonId)
+      in 70 until 90 -> handleIngredientDialogue(player, buttonId)
+    }
+  }
+
+  private fun handleBellowsDialogue(player: Player?, buttonId: Int) {
+    when(stage) {
+      0 -> playerl("Rantz said that you play with the fatsy toadies, what are they?").also { stage++ }
+      1 -> npcl("Oh, we sometimes use da blower on da toadies but Dad don't let us get in da locked box no more. He he it was good fun making da toadies fat on da swamp gas.").also { stage = END_DIALOGUE }
+    }
+  }
+
+  private fun handleIngredientDialogue(player: Player?, buttonId: Int) {
+    val bugsIngredient = getAttribute(player!!, ChompyBird.ATTR_ING_BUGS, -1)
+    when(stage) {
+      0 -> npcl("Dad say's you's making da chompy for us! Slurp! Me's has to have ${getItemName(bugsIngredient)} wiv mine! Chompy is our favourite yummms!").also { stage = END_DIALOGUE }
+    }
+    setAttribute(player!!, ChompyBird.ATTR_BUGS_ASKED, true)
+  }
+}
+
+class FycieChompyBirdDialogue(val quest: Quest) : DialogueFile() {
+  override fun handle(componentId: Int, buttonId: Int) {
+    when (quest.getStage(player)) {
+      in 0 until 70 -> npcl("You's better talk to Dad, We not talk to wierdly 'umans.").also { stage = END_DIALOGUE } 
+      in 70 until 90 -> handleIngredientDialogue(player, buttonId)
+    }
+  }
+
+  private fun handleIngredientDialogue(player: Player?, buttonId: Int) {
+    val fycieIngredient = getAttribute(player!!, ChompyBird.ATTR_ING_FYCIE, -1)
+    when(stage) {
+      0 -> npcl("Dad say's you's roasting da chompy for us! Slurp! Me's wants ${getItemName(fycieIngredient)} wiv mine! Yummy can't wait to eats it.").also { stage = END_DIALOGUE }
+    }
+    setAttribute(player!!, ChompyBird.ATTR_FYCIE_ASKED, true)
   }
 }
 
@@ -207,6 +309,9 @@ class RantzChompyBirdDialogue(val quest: Quest) : DialogueFile() {
   private fun handleWaitingForChompyDialogue(player: Player?, buttonId: Int) {
     val hasChompyBird = amountInInventory(player!!, Items.RAW_CHOMPY_2876) > 0
 
+    assignRandomIngredients(player ?: return)
+    val rantzIngredient = getAttribute(player, ChompyBird.ATTR_ING_RANTZ, -1)
+
     when(stage) {
       0 -> npcl("Hey You! Got da chompy yet?").also { stage++ }
       1 -> {
@@ -222,7 +327,7 @@ class RantzChompyBirdDialogue(val quest: Quest) : DialogueFile() {
       100 -> sendItemDialogue(player!!, Items.RAW_CHOMPY_2876, "You show Rantz the freshly plucked chompy carcass.").also { stage++ }
       101 -> npcl("Dat's a great chompy, you musta got a lucky shot wiv da stabbie chucker.").also { stage++ }
       102 -> npcl("Okay's now you's needs to cook da chompy! Slurp! You's can cook it's over der! ~Rantz points to a nearby spit roast.~").also { stage++ }
-      103 -> npcl("But's we's particular about our chompy yumms. Me's wants <RANTZ COOKING INGREDIENT> wiv mine! Fycie and Bugs want something wiv der's as well, go and ask 'em wat dey want.").also { stage++ }
+      103 -> npcl("But's we's particular about our chompy yumms. Me's wants ${getItemName(rantzIngredient)} wiv mine! Fycie and Bugs want something wiv der's as well, go and ask 'em wat dey want.").also { stage++ }
       104 -> playerl("What! Now I've got the chompy bird, you expect me to cook it as well?").also { stage++ } 
       105 -> npcl("Yep, da spit's over der! Last time Rantz did yummies, got very bad, did bad things to food.. and belly.").also { stage++ }
       106 -> {
@@ -252,7 +357,22 @@ class RantzChompyBirdDialogue(val quest: Quest) : DialogueFile() {
       102 -> npcl("Tank's very much for da chompy... Fycie an Bugs like very much da chompy yumms!").also { stage++ }
       103 -> npcl("~The family of ogres sit down together~").also { stage++ }
       104 -> npcl("~and enjoy your well cooked chompy bird.~").also { stage++ }
-      105 -> playerl("It's my pleasure!").also { stage = END_DIALOGUE }
+      105 -> playerl("It's my pleasure!").also { stage = END_DIALOGUE; quest.finish(player) }
     }
+  }
+
+  private fun assignRandomIngredients(player: Player) {
+    val possibleIngredients = arrayListOf(
+      Items.ONION_1957,
+      Items.DOOGLE_LEAVES_1573,
+      Items.EQUA_LEAVES_2128,
+      Items.TOMATO_1982,
+      Items.POTATO_1942,
+      Items.CABBAGE_1965
+    )
+
+    setAttribute(player, ChompyBird.ATTR_ING_RANTZ, possibleIngredients.random().also { possibleIngredients.remove(it) }) 
+    setAttribute(player, ChompyBird.ATTR_ING_BUGS, possibleIngredients.random().also { possibleIngredients.remove(it) })
+    setAttribute(player, ChompyBird.ATTR_ING_FYCIE, possibleIngredients.random().also { possibleIngredients.remove(it) })
   }
 }
