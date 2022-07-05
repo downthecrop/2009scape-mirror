@@ -25,7 +25,7 @@ import kotlin.math.min
 import java.util.Random
 
 @Initializable
-class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 1, Vars.VARP_QUEST_CHOMPY, 0, 1, 65), InteractionListener {
+class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 2, Vars.VARP_QUEST_CHOMPY, 0, 1, 65), InteractionListener {
   companion object {
     val CAVE_ENTRANCE = Location.create(2646, 9378, 0)
     val CAVE_EXIT = Location.create(2630, 2997, 0) 
@@ -49,7 +49,7 @@ class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 1, Vars.VARP_QUEST_C
       line(player, "Level 30 !!Ranged??", ln++, getStatLevel(player, Skills.RANGE) >= 30)
       line(player, "Ability to defend against !!level 64 wolves?? and !!level 70 ogres<n>??for short periods of time.", ln++, false)
     } else {
-      if (stage in 0 until 20) {
+      if (stage == 10) {
         line(player, "Rantz needs me to make 'stabbers'. To do this I need:", ln++, false)
         line(player, "- !!Achey Logs??", ln++, false)
         line(player, "- !!Wolf Bones??", ln++, false)
@@ -58,19 +58,75 @@ class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 1, Vars.VARP_QUEST_C
         line(player, "attach !!feathers?? to these !!shafts??, and then tip them", ln++, false)
         line(player, "with !!wolf bones?? chiseled into !!tips??.", ln++, false)
         line(player, "At least, that's what I think he was getting at.", ln++, false)
+      } else if (stage > 10) {
+        line(player, "I created 'stabbers' for Rantz.", ln++, true)
       }
-      else if (stage in 20 until 30) {
+
+      if (stage == 20) {
         line(player, "Rantz needs me to obtain a bloated swamp toad.", ln++, false)
         line(player, "To do this, I need to take !!billows?? from the !!locked", ln++, false)
         line(player, "!!chest?? in his cave, and then head to the !!swamp to", ln++, false)
         line(player, "!!the south??. There, I should !!use the billows?? on the", ln++, false)
         line(player, "!!swamp bubbles?? to fill them with swamp gas. Then I can", ln++, false)
         line(player, "use the !!billows?? to fill the !!swamp toads?? with gas.", ln++, false)
+      } else if (stage > 20) {
+        line(player, "I learned how to collect swamp gas and conduct toad inflation.", ln++, true)
       }
-      else if (stage in 30 until 65) {
+
+      if (stage == 30) {
         line(player, "Rantz needs me to place the swamp toad to bait out a 'chompy'.", ln++, false)
+      } else if (stage > 30) {
+        line(player, "I learned how to use the toads to bait chompies.", ln++, true)
+      }
+
+      if (stage == 40) {
+        line(player, "I should return to Rantz and let him know.", ln++, false)
+      }
+
+      if (stage == 50) {
+        line(player, "Rantz keeps missing the birds. Perhaps I should try.", ln++, false)
+      } else if (stage > 50) {
+        line(player, "Rantz gave me his bow so that I could try to catch a chompy.", ln++, true)
+      }
+
+      if (stage == 60) {
+        line(player, "I should use what I've learned to try to bait and kill a chompy bird.", ln++, false)
+      }
+
+      if (stage == 70) {
+        line(player, "I managed to hunt and kill a chompy bird, and now Rantz wants", ln++, false)
+        line(player, "me to cook the bird for him! And to make it even worse, he and", ln++, false)
+        line(player, "his children want special ingredients! Those are listed below:", ln++, false)
+        line(player, "- Rantz wants: !!${getItemName(getAttribute(player, ATTR_ING_RANTZ, -1))}??", ln++, false)
+        line(player, "- ${if(getAttribute(player, ATTR_BUGS_ASKED, false)) "Bugs wants: !!${getItemName(getAttribute(player, ATTR_ING_BUGS, -1))}??" else "I still need to ask !!Bugs??."}", ln++, false)
+        line(player, "- ${if(getAttribute(player, ATTR_FYCIE_ASKED, false)) "Fycie wants: !!${getItemName(getAttribute(player, ATTR_ING_FYCIE, -1))}??" else "I still need to ask !!Fycie??."}", ln++, false)
+      } else if (stage > 70) {
+        line(player, "I seasoned and cooked the chompy bird for Rantz and his kids.", ln++, true)
+        line(player, "!!QUEST COMPLETE!??", ln++, false)
       }
     }
+  }
+
+  override fun finish(player: Player?) {
+    super.finish(player)
+    player :? return
+
+    var ln = 10
+    player.packetDispatch.sendItemZoomOnInterface(Items.OGRE_BOW_2883, 230, 277, 5)
+    drawReward(player, "2 Quest Points, 262 Fletching", ln++)
+    drawReward(player, "XP, 1470 Cooking XP, 735", ln++)
+    drawReward(player, "Ranged XP", ln++)
+    drawReward(player, "Ogre Bow", ln++)
+    drawReward(player, "Ability to make Ogre Arrows", ln++)
+    rewardXP(player, Skills.FLETCHING, 262.0)
+    rewardXP(player, Skills.COOKING, 1470.0)
+    rewardXP(player, Skills.RANGED, 735.0)
+    removeItem(player, Items.SEASONED_CHOMPY_2882)
+    removeAttribute(player, ATTR_ING_BUGS)
+    removeAttribute(player, ATTR_BUGS_ASKED)
+    removeAttribute(player, ATTR_ING_RANTZ)
+    removeAttribute(player, ATTR_ING_FYCIE)
+    removeAttribute(player, ATTR_FYCIE_ASKED)
   }
 
   override fun newInstance(`object`: Any?): Quest { return this }
@@ -136,6 +192,8 @@ class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 1, Vars.VARP_QUEST_C
         lock(player, 5)
         setVarbit(player, Vars.VARBIT_QUEST_CHOMPY_SPITROAST, 1)
         animate(player, Animations.HUMAN_COOKING_RANGE)
+        sendMessage(player, "You carefully place the chompy bird on the spit-roast.")
+        sendMessage(player, "You add the other ingredients and cook the food.")
         runTask(player, 4) {
           setVarbit(player, Vars.VARBIT_QUEST_CHOMPY_SPITROAST, 0)
           sendItemDialogue(
@@ -149,6 +207,8 @@ class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 1, Vars.VARP_QUEST_C
             && removeItem(player, bugsIngredient)
             && removeItem(player, fycieIngredient)
           ) addItem(player, Items.SEASONED_CHOMPY_2882)
+          sendMessage(player, "Eventually the chompy is cooked")
+          sendMessage(player, "It has been deliciously seasoned to taste wonderful for ogres.")
         }
       } else {
         sendDialogue(player, "I don't have all the ingredients I need yet.")
