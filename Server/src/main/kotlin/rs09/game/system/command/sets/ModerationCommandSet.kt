@@ -41,7 +41,7 @@ class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
          * Ban a player
          * =============================================================================================================
          */
-        define("ban", Privilege.ADMIN){ player, args ->
+        define("ban", Privilege.ADMIN, "::ban <lt>USERNAME<gt> <lt>TIME<gt>", "Bans the user. Time format: <lt>INT<gt>d/s/m/h ex: 30d for 30 days."){ player, args ->
             val name = args[1]
             if(!GameWorld.accountStorage.checkUsernameTaken(name)) {
                 reject(player, "Invalid username: $name")
@@ -88,7 +88,7 @@ class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
          * Mute a player
          * =============================================================================================================
          */
-        define("mute", Privilege.MODERATOR){ player, args ->
+        define("mute", Privilege.MODERATOR, "::mute <lt>USERNAME<gt> <lt>TIME<gt>", "Mutes the user. Time format: <lt>INT<gt>d/s/m/h ex: 30d for 30 days."){ player, args ->
             val name = args[1]
             if(!GameWorld.accountStorage.checkUsernameTaken(name)) {
                 reject(player, "Invalid username: $name")
@@ -136,7 +136,7 @@ class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
          * Jail a player
          * =============================================================================================================
          */
-        define("jail"){player,args ->
+        define("jail", Privilege.MODERATOR, "::jail <lt>SECONDS<gt> <lt>USERNAME<gt>", "Sends the player to the jail cells in Varrock."){player,args ->
             if(args.size < 3) {
                 reject(player,"Usage: ::jail <seconds> <player>")
             }

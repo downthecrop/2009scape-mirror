@@ -33,7 +33,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Gives the player a set of tools used to test farming stuff.
          */
-        define("farmkit"){player,_ ->
+        define("farmkit", Privilege.ADMIN, "", "Provides a kit of various farming equipment."){player,_ ->
             for(item in farmKitItems){
                 player.inventory.add(Item(item))
             }
@@ -51,11 +51,11 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             sendMessage(player, "All achievement diaries cleared successfully.")
         }
 
-        define("region") {player, args ->
+        define("region", Privilege.STANDARD, "", "Prints your current Region ID.") {player, args ->
             sendMessage(player, "Region ID: ${player.viewport.region.regionId}")
         }
 
-        define("spellbook"){player, args ->
+        define("spellbook", Privilege.ADMIN, "::spellbook <lt>book ID<gt> (0 = MODERN, 1 = ANCIENTS, 2 = LUNARS)", "Swaps your spellbook to the given book ID."){player, args ->
             if(args.size < 2){
                 reject(player,"Usage: ::spellbook [int]. 0 = MODERN, 1 = ANCIENTS, 2 = LUNARS")
             }
@@ -64,7 +64,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             player.spellBookManager.update(player)
         }
 
-        define("killme") { player, _ ->
+        define("killme", Privilege.ADMIN, "", "Does exactly what it says on the tin.") { player, _ ->
             player.impactHandler.manualHit(player, player.skills.lifepoints, HitsplatType.NORMAL)
         }
 
@@ -82,7 +82,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             SystemLogger.logInfo(def.toString())
         }
 
-        define("dumpstructs") {player, _ ->
+        define("dumpstructs", Privilege.ADMIN, "", "Dumps all the cache structs to structs.txt") {player, _ ->
             val dump = File("structs.txt")
             val writer = BufferedWriter(FileWriter(dump))
             val index = Cache.getIndexes()[2]
@@ -101,7 +101,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             writer.close()
         }
 
-        define("dumpdatamaps") {player, _ ->
+        define("dumpdatamaps", Privilege.ADMIN, "", "Dumps all the cache data maps to datamaps.txt") {player, _ ->
             val index = Cache.getIndexes()[17]
             val containers = index.information.containersIndexes
 
@@ -126,7 +126,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             writer.close()
         }
 
-        define("rolldrops") { player: Player, args: Array<String> ->
+        define("rolldrops", Privilege.ADMIN, "::rolldrops <lt>NPC ID<gt> <lt>AMOUNT<gt>", "Rolls the given NPC drop table AMOUNT times.") { player: Player, args: Array<String> ->
             if(args.size < 2){
                 reject(player,"Usage: ::rolldrops npcid amount")
             }
@@ -146,9 +146,9 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             container.open(player)
         }
 
-        define("varbits") { player, args ->
+        define("varbits", Privilege.ADMIN, "::varbits <lt>Varp ID<gt>", "Lists all the varbits assigned to the given varp.") { player, args ->
             if(args.size < 2)
-                reject(player, "Usage: ::list_varbits varpIndex")
+                reject(player, "Usage: ::varbits varpIndex")
 
             val varp = args[1].toIntOrNull() ?: reject(player, "Please use a valid int for the varpIndex.")
             GlobalScope.launch {

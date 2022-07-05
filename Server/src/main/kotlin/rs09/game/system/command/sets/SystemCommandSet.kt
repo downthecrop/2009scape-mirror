@@ -40,7 +40,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Allows a player to reset their password
          */
-        define("resetpassword", Privilege.STANDARD) { player, args ->
+        define("resetpassword", Privilege.STANDARD, "", "WARNING: Case insensitive due to dialogue limitations.") { player, args ->
             sendInputDialogue(player, InputType.STRING_SHORT, "Enter Current Password:"){value ->
                 val pass = value.toString()
                 SystemLogger.logInfo(pass)
@@ -69,7 +69,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Allows an Administrator to reset a password
          */
-        define("setpasswordother", Privilege.ADMIN) { player, args ->
+        define("setpasswordother", Privilege.ADMIN, "::resetpasswordother <lt>USERNAME<gt> <lt>NEW<gt>", "Gives the username password NEW.") { player, args ->
             if (args.size != 3) {
                 reject(player, "Usage: ::resetpasswordother user new", "WARNING: THIS IS PERMANENT.", "WARNING: PASSWORD CAN NOT CONTAIN SPACES.")
             }
@@ -94,7 +94,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
             }
         }
 
-        define("giveitem", Privilege.ADMIN) { player, args ->
+        define("giveitem", Privilege.ADMIN, "::giveitem <lt>USERNAME<gt> <lt>ITEM ID<gt> <lt>AMOUNT<gt>", "Gives the user the amount of the given item.") { player, args ->
             if (args.size == 3 || args.size == 4) {
                 val victim = Repository.getPlayerByName(args[1])
                 val itemID = args[2].toIntOrNull()
@@ -130,7 +130,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
             }
         }
 
-        define("removeitem", Privilege.ADMIN) { player, args ->
+        define("removeitem", Privilege.ADMIN, "::removeitem <lt>LOC<gt> <lt>USERNAME<gt> <lt>ITEM ID<gt> <lt>AMOUNT<gt>", "LOC = bank,inventory,equipment") { player, args ->
             if (args.size == 4 || args.size == 5) {
                 val itemLoc = args[1].toLowerCase()
                 val victim = Repository.getPlayerByName(args[2])
@@ -181,7 +181,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
             }
         }
 
-        define("removeitemall", Privilege.ADMIN) { player, args ->
+        define("removeitemall", Privilege.ADMIN, "::removeitemall <lt>USERNAME<gt> <lt>ITEM ID<gt>", "Removes ALL of a given item from the player.") { player, args ->
             if (args.size == 3) {
                 val victim = Repository.getPlayerByName(args[1])
                 val itemID = args[2].toIntOrNull()
@@ -229,7 +229,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
             }
         }
 
-        define("potato") { player, _ ->
+        define("potato", Privilege.ADMIN, "", "Gives you a rotten potato.") { player, _ ->
             player.inventory.add(Item(Items.ROTTEN_POTATO_5733))
         }
 
