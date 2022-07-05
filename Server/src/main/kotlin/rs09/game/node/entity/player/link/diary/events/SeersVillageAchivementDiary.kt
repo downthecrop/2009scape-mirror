@@ -175,7 +175,7 @@ class SeersVillageAchivementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) 
                     DiaryLevel.MEDIUM,
                     MediumTasks.DEFEAT_EACH_ELEMENTAL_TYPE,
                     ATTRIBUTE_ELEMENTAL_KILL_FLAGS,
-                    event.npc.id - NPCs.FIRE_ELEMENTAL_1019,
+                    1 shl (event.npc.id - NPCs.FIRE_ELEMENTAL_1019),
                     0xF
                 )
             }
@@ -187,7 +187,7 @@ class SeersVillageAchivementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) 
                     MediumTasks.RANGING_GUILD_KILL_EACH_TOWER_GUARD,
                     ATTRIBUTE_ARCHER_KILL_FLAGS,
                     /* Thanks for sequential NPC IDs, Jagex! */
-                    event.npc.id - NPCs.TOWER_ARCHER_688,
+                    1 shl (event.npc.id - NPCs.TOWER_ARCHER_688),
                     0xF
                 )
             }

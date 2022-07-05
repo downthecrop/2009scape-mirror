@@ -1,5 +1,6 @@
 package rs09.game.node.entity.player.link.diary.events
 
+import api.events.NPCKillEvent
 import api.events.PickUpEvent
 import api.events.ResourceProducedEvent
 import api.inBorders
@@ -20,10 +21,21 @@ class KaramjaAchievementDiary : DiaryEventHookBase(DiaryType.KARAMJA) {
         private val BANANA_FISHING_SPOT_AREA = ZoneBorders(2923, 3173, 2928, 3182)
         private val TAI_BWO_WANNAI_WOODCUTTING_AREA = ZoneBorders(2817, 3076, 2829, 3090)
 
+        private val KET_ZEKS = arrayOf(
+            NPCs.KET_ZEK_2743,
+            NPCs.KET_ZEK_2744
+        )
+
+        private val METAL_DRAGONS = arrayOf(
+            NPCs.BRONZE_DRAGON_1590,
+            NPCs.IRON_DRAGON_1591,
+            NPCs.STEEL_DRAGON_1592
+        )
+
         object EasyTasks {
             const val PICK_5_BANANAS = 0
             const val TRAVEL_TO_MOSS_GIANTS_VIA_ROPESWING = 1
-            const val MINE_GOLD_NORTHWEST = 2
+            const val BRIMHAVEN_MINE_GOLD = 2
             const val MUSA_POINT_CHARTER_SHIP_TO_PORT_SARIM = 3
             const val BRIMHAVEN_CHARTER_SHIP_TO_ARDOUGNE = 4
             const val CAIRN_ISLE_VISIT = 5
@@ -56,7 +68,7 @@ class KaramjaAchievementDiary : DiaryEventHookBase(DiaryType.KARAMJA) {
 
         object HardTasks {
             const val FIGHT_PITS_BECOME_CHAMPION = 0
-            const val KILL_KET_ZEK = 1
+            const val FIGHT_CAVE_KILL_KET_ZEK = 1
             const val EAT_OOMLIE_WRAP = 2
             const val CRAFT_NATURE_RUNES = 3
             const val COOK_KARAMBWAN_PROPERLY = 4
@@ -75,6 +87,14 @@ class KaramjaAchievementDiary : DiaryEventHookBase(DiaryType.KARAMJA) {
                     player,
                     DiaryLevel.MEDIUM,
                     MediumTasks.MINE_RED_TOPAZ
+                )
+            }
+
+            10802 -> if (event.itemId == Items.GOLD_ORE_444) {
+                finishTask(
+                    player,
+                    DiaryLevel.EASY,
+                    EasyTasks.BRIMHAVEN_MINE_GOLD
                 )
             }
         }
@@ -111,6 +131,34 @@ class KaramjaAchievementDiary : DiaryEventHookBase(DiaryType.KARAMJA) {
                         )
                     }
                 }
+            }
+        }
+    }
+
+    override fun onNpcKilled(player: Player, event: NPCKillEvent) {
+        when (player.viewport.region.id) {
+            512 -> if (event.npc.id in KET_ZEKS) {
+                finishTask(
+                    player,
+                    DiaryLevel.HARD,
+                    HardTasks.FIGHT_CAVE_KILL_KET_ZEK
+                )
+            }
+
+            10899, 10900 -> if (event.npc.id in METAL_DRAGONS) {
+                finishTask(
+                    player,
+                    DiaryLevel.HARD,
+                    HardTasks.BRIMHAVEN_DUNGEON_KILL_METAL_DRAGON
+                )
+            }
+
+            11412 -> if (event.npc.id == NPCs.JOGRE_113) {
+                finishTask(
+                    player,
+                    DiaryLevel.EASY,
+                    EasyTasks.POTHOLE_DUNGEON_KILL_JOGRE
+                )
             }
         }
     }
