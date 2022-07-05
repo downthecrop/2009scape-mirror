@@ -370,6 +370,7 @@ public class DuelArea extends MapZone {
 	 * @param p the player.
 	 */
 	private void leave(Player p) {
+		p.getProperties().setSafeZone(false);
 		if (p.getAttribute("duel:ammo", null) != null) {
 			List<GroundItem> ammo = p.getAttribute("duel:ammo");
 			Container c = new Container(40);

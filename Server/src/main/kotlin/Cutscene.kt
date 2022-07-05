@@ -256,22 +256,32 @@ abstract class Cutscene(val player: Player) {
                     8 -> player.properties.teleportLocation = exitLocation
                     9 -> fadeFromBlack()
                     16 -> {
-                        endActions?.invoke()
-                        player.removeAttribute(ATTRIBUTE_CUTSCENE)
-                        player.removeAttribute(ATTRIBUTE_CUTSCENE_STAGE)
-                        player.properties.isSafeZone = false
-                        player.properties.safeRespawn = ServerConstants.HOME_LOCATION
-                        player.interfaceManager.restoreTabs()
-                        player.unlock()
-                        clearNPCs()
-                        player.unhook(CUTSCENE_DEATH_HOOK)
-                        player.logoutListeners.remove("cutscene")
-                        RandomEventManager.getInstance(player)!!.enabled = true
-                        PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 0))
+                        try {
+                            endActions?.invoke()
+                        } catch (e: Exception) {
+                            SystemLogger.logErr("There's some bad nasty code in ${this::class.java.simpleName} end actions!")
+                            e.printStackTrace()
+                        }
                         return true
                     }
                 }
                 return false
+            }
+
+            override fun stop() {
+                super.stop()
+                player ?: return
+                player.removeAttribute(ATTRIBUTE_CUTSCENE)
+                player.removeAttribute(ATTRIBUTE_CUTSCENE_STAGE)
+                player.properties.isSafeZone = false
+                player.properties.safeRespawn = ServerConstants.HOME_LOCATION
+                player.interfaceManager.restoreTabs()
+                player.unlock()
+                clearNPCs()
+                player.unhook(CUTSCENE_DEATH_HOOK)
+                player.logoutListeners.remove("cutscene")
+                RandomEventManager.getInstance(player)?.enabled = true
+                PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 0))
             }
         })
     }
