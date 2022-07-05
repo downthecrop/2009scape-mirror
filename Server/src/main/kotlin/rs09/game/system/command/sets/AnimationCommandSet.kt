@@ -20,7 +20,7 @@ class AnimationCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Force the player to play animation <Animation ID>
          */
-        define("anim"){ player, args ->
+        define("anim", Privilege.ADMIN, "::anim <lt>Animation ID<gt>", "Plays the animation with the given ID."){ player, args ->
             if (args.size < 2) {
                 reject(player, "Syntax error: ::anim <Animation ID>")
             }
@@ -31,7 +31,7 @@ class AnimationCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Force the player to loop animation <Animation ID>
          */
-        define("loopanim"){ player, args ->
+        define("loopanim", Privilege.ADMIN, "::loopanim <lt>Animation ID<gt> <lt>Times<gt>", "Plays the animation with the given ID the given number of times"){ player, args ->
             if (args.size < 2) {
                 reject(player, "Syntax error: ::loopanim <Animation ID> <Loop Amount>")
             }
@@ -53,7 +53,7 @@ class AnimationCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Change the player's render animation to <Render Animation ID>
          */
-        define("ranim"){ player, args ->
+        define("ranim", Privilege.ADMIN, "::ranim <lt>Render Anim ID<gt>", "Sets the player's render (walk/idle) animation."){ player, args ->
             if (args.size < 2) {
                 reject(player, "Syntax error: ::ranim <Render Animation ID>")
             }
@@ -69,7 +69,7 @@ class AnimationCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Reset the player's render animation to default
          */
-        define("ranimreset"){ player, _ ->
+        define("ranimreset", Privilege.ADMIN, "", "Resets the player's render (walk/idle) animation to default."){ player, _ ->
             player.appearance.prepareBodyData(player)
             player.appearance.setDefaultAnimations()
             player.appearance.setAnimations()

@@ -29,7 +29,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Force animation + messages on all NPCs in a radius of 10 from the player.
          */
-        define("npcareaanim") { player, args ->
+        define("npcareaanim", Privilege.ADMIN, "::npcareaanim <lt>Animation ID<gt> <lt>String<gt>") { player, args ->
             if (args.size < 3) {
                 reject(player, "Syntax error: ::npcareaanim <Animation ID> <String>")
             }
@@ -47,7 +47,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Transform a player's appearance into that of an NPC.
          */
-        define("pnpc", Privilege.MODERATOR){ player, args ->
+        define("pnpc", Privilege.MODERATOR, "::pnpc <lt>NPC ID<gt>", "Transforms the player into the given NPC."){ player, args ->
             if(args.size < 2){
                 reject(player, "Usage: ::pnpc <npcid>")
                 return@define
@@ -66,14 +66,14 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Open bank
          */
-        define("bank"){ player, _ ->
+        define("bank", Privilege.ADMIN, "", "Opens your bank."){ player, _ ->
             player.getBank().open()
         }
 
         /**
          * Toggle invisibility
          */
-        define("invis"){ player, _ ->
+        define("invis", Privilege.ADMIN, "", "Makes you invisible to others."){ player, _ ->
             player.isInvisible = !player.isInvisible
             notify(player,"You are now ${if (player.isInvisible) "invisible" else "visible"} to others.")
         }
@@ -82,7 +82,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Toggle 1-hit kills
          */
-        define("1hit"){ player, _ ->
+        define("1hit", Privilege.ADMIN, "", "Makes you kill things in 1 hit."){ player, _ ->
             player.setAttribute("1hko", !player.getAttribute("1hko", false))
             notify(player,"1-hit KO mode " + if (player.getAttribute("1hko", false)) "on." else "off.")
         }
@@ -91,7 +91,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Toggle god mode
          */
-        define("god"){ player, _ ->
+        define("god", Privilege.ADMIN, "", "Makes you invulnerable to damage."){ player, _ ->
             player.setAttribute("godMode", !player.getAttribute("godMode", false))
             notify(player,"God mode ${if (player.getAttribute("godMode", false)) "enabled." else "disabled."}")
         }

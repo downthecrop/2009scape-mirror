@@ -41,7 +41,7 @@ class ConfigCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Opens an interface component
          */
-        define("iface"){player, args ->
+        define("iface", Privilege.ADMIN, "::iface <lt>Interface ID<gt>", "Opens the interface with the given ID."){player, args ->
             if (args.size < 2) {
                 reject(player, "usage: iface id")
                 return@define
