@@ -2,15 +2,12 @@ package rs09.game.node.entity.player.link.diary.events
 
 import api.*
 import api.events.*
-import core.game.node.entity.Entity
-import core.game.node.entity.combat.equipment.SpellType
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
-import rs09.game.Event
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 
@@ -81,178 +78,150 @@ class SeersVillageDiaryEventHooks : MapArea, DiaryEventHookBase() {
         return arrayOf()
     }
 
-    override fun login(player: Player) {
-        player.hook(Event.AttributeSet, AttributeSetEvents)
-        player.hook(Event.FireLit, FiremakingEvents)
-        player.hook(Event.ResourceProduced, ResourceProductionEvents)
-        player.hook(Event.Teleported, TeleportEvents)
-        player.hook(Event.ItemAlchemized, AlchemizationEvents)
-    }
+    override fun onAttributeSet(player: Player, event: AttributeSetEvent) {
+        when (event.attribute) {
+            "/save:${ATTRIBUTE_CUT_YEW_COUNT}" -> {
+                if (event.value !is Int) return
 
-    private object AttributeSetEvents : EventHook<AttributeSetEvent> {
-        override fun process(entity: Entity, event: AttributeSetEvent) {
-            if (entity !is Player) return
-
-            when (event.attribute) {
-                "/save:${ATTRIBUTE_CUT_YEW_COUNT}" -> {
-                    if (event.value !is Int) return
-
-                    if (event.value >= 5) {
-                        finishTask(
-                            entity,
-                            DiaryType.SEERS_VILLAGE,
-                            DiaryLevel.HARD,
-                            HardTasks.CUT_5_YEW_LOGS
-                        )
-                    }
-                }
-
-                "/save:${ATTRIBUTE_SHARK_CAUGHT_COUNT}" -> {
-                    if (event.value !is Int) return
-
-                    if (event.value >= 5) {
-                        finishTask(
-                            entity,
-                            DiaryType.SEERS_VILLAGE,
-                            DiaryLevel.HARD,
-                            HardTasks.CATHERBY_CATCH_5_SHARKS
-                        )
-                    }
-                }
-
-                "/save:${ATTRIBUTE_SHARK_COOKED_COUNT}" -> {
-                    if (event.value !is Int) return
-
-                    if (event.value >= 5) {
-                        finishTask(
-                            entity,
-                            DiaryType.SEERS_VILLAGE,
-                            DiaryLevel.HARD,
-                            HardTasks.CATHERBY_COOK_5_SHARKS_WITH_COOKING_GAUNTLETS
-                        )
-                    }
-                }
-            }
-        }
-    }
-
-    private object FiremakingEvents : EventHook<LitFireEvent> {
-        override fun process(entity: Entity, event: LitFireEvent) {
-            if (entity !is Player) return
-
-            when {
-                inBorders(entity, SEERS_VILLAGE_AREA) -> {
-                    if (event.logId == Items.MAGIC_LOGS_1513) {
-                        finishTask(
-                            entity,
-                            DiaryType.SEERS_VILLAGE,
-                            DiaryLevel.HARD,
-                            HardTasks.LIGHT_MAGIC_LOG
-                        )
-                    }
-                }
-            }
-        }
-    }
-
-    private object ResourceProductionEvents : EventHook<ResourceProducedEvent> {
-        override fun process(entity: Entity, event: ResourceProducedEvent) {
-            if (entity !is Player) return
-
-            when (entity.viewport.region.id) {
-                10806 -> if (event.itemId == Items.YEW_LOGS_1515) {
-                    setAttribute(
-                        entity,
-                        "/save:${ATTRIBUTE_CUT_YEW_COUNT}",
-                        getAttribute(entity, ATTRIBUTE_CUT_YEW_COUNT, 0) + 1
-                    )
-                }
-
-                11317 -> when (event.itemId) {
-                    Items.RAW_MACKEREL_353 -> {
-                        finishTask(
-                            entity,
-                            DiaryType.SEERS_VILLAGE,
-                            DiaryLevel.EASY,
-                            EasyTasks.CATCH_MACKEREL
-                        )
-                    }
-
-                    Items.RAW_BASS_363 -> {
-                        if (!getAttribute(entity, ATTRIBUTE_BASS_CAUGHT, false)) {
-                            setAttribute(
-                                entity,
-                                "/save:${ATTRIBUTE_BASS_CAUGHT}",
-                                true
-                            )
-                        }
-                    }
-
-                    Items.BASS_365 -> {
-                        if (getAttribute(entity, ATTRIBUTE_BASS_CAUGHT, false)) {
-                            finishTask(
-                                entity,
-                                DiaryType.SEERS_VILLAGE,
-                                DiaryLevel.MEDIUM,
-                                MediumTasks.CATHERBY_CATCH_AND_COOK_BASS
-                            )
-                        }
-                    }
-
-                    Items.RAW_SHARK_383 -> {
-                        setAttribute(
-                            entity,
-                            "/save:${ATTRIBUTE_SHARK_CAUGHT_COUNT}",
-                            getAttribute(entity, ATTRIBUTE_SHARK_CAUGHT_COUNT, 0) + 1
-                        )
-                    }
-
-                    Items.SHARK_385 -> {
-                        if (isEquipped(entity, Items.COOKING_GAUNTLETS_775)) {
-                            setAttribute(
-                                entity,
-                                "/save:${ATTRIBUTE_SHARK_COOKED_COUNT}",
-                                getAttribute(entity, ATTRIBUTE_SHARK_COOKED_COUNT, 0) + 1
-                            )
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private object TeleportEvents : EventHook<TeleportEvent> {
-        override fun process(entity: Entity, event: TeleportEvent) {
-            if (entity !is Player) return
-
-            when (event.source) {
-                is Item -> if (event.source.id in COMBAT_BRACELETS) {
-                    if (entity.location.equals(RANGING_GUILD_LOCATION)) {
-                        finishTask(
-                            entity,
-                            DiaryType.SEERS_VILLAGE,
-                            DiaryLevel.HARD,
-                            HardTasks.RANGING_GUILD_TELEPORT
-                        )
-                    }
-                }
-            }
-        }
-    }
-
-    private object AlchemizationEvents : EventHook<ItemAlchemizedEvent> {
-        override fun process(entity: Entity, event: ItemAlchemizedEvent) {
-            if (entity !is Player) return
-
-            if (inBorders(entity, SEERS_BANK_AREA)) {
-                if (event.itemId == Items.MAGIC_SHORTBOW_861 && event.isHigh) {
+                if (event.value >= 5) {
                     finishTask(
-                        entity,
+                        player,
                         DiaryType.SEERS_VILLAGE,
                         DiaryLevel.HARD,
-                        HardTasks.HIGH_ALCH_MAGIC_SHORTBOW_INSIDE_BANK
+                        HardTasks.CUT_5_YEW_LOGS
                     )
                 }
+            }
+
+            "/save:${ATTRIBUTE_SHARK_CAUGHT_COUNT}" -> {
+                if (event.value !is Int) return
+
+                if (event.value >= 5) {
+                    finishTask(
+                        player,
+                        DiaryType.SEERS_VILLAGE,
+                        DiaryLevel.HARD,
+                        HardTasks.CATHERBY_CATCH_5_SHARKS
+                    )
+                }
+            }
+
+            "/save:${ATTRIBUTE_SHARK_COOKED_COUNT}" -> {
+                if (event.value !is Int) return
+
+                if (event.value >= 5) {
+                    finishTask(
+                        player,
+                        DiaryType.SEERS_VILLAGE,
+                        DiaryLevel.HARD,
+                        HardTasks.CATHERBY_COOK_5_SHARKS_WITH_COOKING_GAUNTLETS
+                    )
+                }
+            }
+        }
+    }
+
+    override fun onFireLit(player: Player, event: LitFireEvent) {
+        when {
+            inBorders(player, SEERS_VILLAGE_AREA) -> {
+                if (event.logId == Items.MAGIC_LOGS_1513) {
+                    finishTask(
+                        player,
+                        DiaryType.SEERS_VILLAGE,
+                        DiaryLevel.HARD,
+                        HardTasks.LIGHT_MAGIC_LOG
+                    )
+                }
+            }
+        }
+    }
+
+    override fun onResourceProduced(player: Player, event: ResourceProducedEvent) {
+        when (player.viewport.region.id) {
+            10806 -> if (event.itemId == Items.YEW_LOGS_1515) {
+                setAttribute(
+                    player,
+                    "/save:${ATTRIBUTE_CUT_YEW_COUNT}",
+                    getAttribute(player, ATTRIBUTE_CUT_YEW_COUNT, 0) + 1
+                )
+            }
+
+            11317 -> when (event.itemId) {
+                Items.RAW_MACKEREL_353 -> {
+                    finishTask(
+                        player,
+                        DiaryType.SEERS_VILLAGE,
+                        DiaryLevel.EASY,
+                        EasyTasks.CATCH_MACKEREL
+                    )
+                }
+
+                Items.RAW_BASS_363 -> {
+                    if (!getAttribute(player, ATTRIBUTE_BASS_CAUGHT, false)) {
+                        setAttribute(
+                            player,
+                            "/save:${ATTRIBUTE_BASS_CAUGHT}",
+                            true
+                        )
+                    }
+                }
+
+                Items.BASS_365 -> {
+                    if (getAttribute(player, ATTRIBUTE_BASS_CAUGHT, false)) {
+                        finishTask(
+                            player,
+                            DiaryType.SEERS_VILLAGE,
+                            DiaryLevel.MEDIUM,
+                            MediumTasks.CATHERBY_CATCH_AND_COOK_BASS
+                        )
+                    }
+                }
+
+                Items.RAW_SHARK_383 -> {
+                    setAttribute(
+                        player,
+                        "/save:${ATTRIBUTE_SHARK_CAUGHT_COUNT}",
+                        getAttribute(player, ATTRIBUTE_SHARK_CAUGHT_COUNT, 0) + 1
+                    )
+                }
+
+                Items.SHARK_385 -> {
+                    if (isEquipped(player, Items.COOKING_GAUNTLETS_775)) {
+                        setAttribute(
+                            player,
+                            "/save:${ATTRIBUTE_SHARK_COOKED_COUNT}",
+                            getAttribute(player, ATTRIBUTE_SHARK_COOKED_COUNT, 0) + 1
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onTeleported(player: Player, event: TeleportEvent) {
+        when (event.source) {
+            is Item -> if (event.source.id in COMBAT_BRACELETS) {
+                if (player.location.equals(RANGING_GUILD_LOCATION)) {
+                    finishTask(
+                        player,
+                        DiaryType.SEERS_VILLAGE,
+                        DiaryLevel.HARD,
+                        HardTasks.RANGING_GUILD_TELEPORT
+                    )
+                }
+            }
+        }
+    }
+
+    override fun onItemAlchemized(player: Player, event: ItemAlchemizationEvent) {
+        if (inBorders(player, SEERS_BANK_AREA)) {
+            if (event.itemId == Items.MAGIC_SHORTBOW_861 && event.isHigh) {
+                finishTask(
+                    player,
+                    DiaryType.SEERS_VILLAGE,
+                    DiaryLevel.HARD,
+                    HardTasks.HIGH_ALCH_MAGIC_SHORTBOW_INSIDE_BANK
+                )
             }
         }
     }

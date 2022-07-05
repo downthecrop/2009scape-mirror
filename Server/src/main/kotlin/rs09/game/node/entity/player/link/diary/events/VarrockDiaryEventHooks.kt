@@ -1,23 +1,19 @@
 package rs09.game.node.entity.player.link.diary.events
 
-import api.MapArea
-import api.events.EventHook
 import api.events.InteractionEvent
 import api.events.ResourceProducedEvent
 import api.events.SpellCastEvent
 import api.inBorders
-import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
 import org.rs09.consts.Scenery
-import rs09.game.Event
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 import rs09.game.node.entity.skill.magic.spellconsts.Modern
 
-class VarrockDiaryEventHooks : MapArea, DiaryEventHookBase() {
+class VarrockDiaryEventHooks : DiaryEventHookBase() {
     companion object {
         private val VARROCK_ROOF_AREA = ZoneBorders(3201, 3467, 3225, 3497, 3)
         private val SOS_LEVEL_2_AREA = ZoneBorders(2040, 5241, 2046, 5246)
@@ -92,22 +88,20 @@ class VarrockDiaryEventHooks : MapArea, DiaryEventHookBase() {
         )
     }
 
-    override fun areaEnter(entity: Entity) {
-        if (entity !is Player) return
-
+    override fun onAreaVisited(player: Player) {
         when {
-            inBorders(entity, VARROCK_ROOF_AREA) -> {
+            inBorders(player, VARROCK_ROOF_AREA) -> {
                 finishTask(
-                    entity,
+                    player,
                     DiaryType.VARROCK,
                     DiaryLevel.EASY,
                     EasyTasks.FIND_HIGHEST_POINT
                 )
             }
 
-            inBorders(entity, SOS_LEVEL_2_AREA) -> {
+            inBorders(player, SOS_LEVEL_2_AREA) -> {
                 finishTask(
-                    entity,
+                    player,
                     DiaryType.VARROCK,
                     DiaryLevel.EASY,
                     EasyTasks.VISIT_SOS_LEVEL2
@@ -116,91 +110,73 @@ class VarrockDiaryEventHooks : MapArea, DiaryEventHookBase() {
         }
     }
 
-    override fun login(player: Player) {
-        player.hook(Event.Interaction, InteractionEvents)
-        player.hook(Event.ResourceProduced, ResourceProductionEvents)
-        player.hook(Event.SpellCast, SpellCastEvents)
-    }
-
-    private object InteractionEvents : EventHook<InteractionEvent> {
-        override fun process(entity: Entity, event: InteractionEvent) {
-            if (entity !is Player) return
-
-            when (entity.viewport.region.id) {
-                12342 -> {
-                    if (event.target.id == 26934) {
-                        finishTask(
-                            entity,
-                            DiaryType.VARROCK,
-                            DiaryLevel.EASY,
-                            EasyTasks.EDGEVILLE_ENTER_DUNGEON_SOUTH
-                        )
-                    }
-                }
-            }
-        }
-    }
-
-    private object ResourceProductionEvents : EventHook<ResourceProducedEvent> {
-        override fun process(entity: Entity, event: ResourceProducedEvent) {
-            if (entity !is Player) return
-
-            when (entity.viewport.region.id) {
-                12341 -> if (event.itemId == Items.RAW_TROUT_335) {
+    override fun onInteracted(player: Player, event: InteractionEvent) {
+        when (player.viewport.region.id) {
+            12342 -> {
+                if (event.target.id == 26934) {
                     finishTask(
-                        entity,
+                        player,
                         DiaryType.VARROCK,
                         DiaryLevel.EASY,
-                        EasyTasks.BARBARIAN_VILLAGE_CATCH_TROUT
-                    )
-                }
-
-                13108 -> if (event.itemId == Items.IRON_ORE_440) {
-                    finishTask(
-                        entity,
-                        DiaryType.VARROCK,
-                        DiaryLevel.EASY,
-                        EasyTasks.MINE_IRON_SOUTHEAST
-                    )
-                }
-
-                13110 -> {
-                    if (event.itemId == Items.LOGS_1511
-                        && event.source.id == Scenery.DYING_TREE_24168) {
-                        finishTask(
-                            entity,
-                            DiaryType.VARROCK,
-                            DiaryLevel.EASY,
-                            EasyTasks.LUMBERYARD_CHOP_DYING_TREE
-                        )
-                    }
-                }
-
-                13366 -> if (event.itemId == Items.LIMESTONE_3211) {
-                    finishTask(
-                        entity,
-                        DiaryType.VARROCK,
-                        DiaryLevel.EASY,
-                        EasyTasks.PATERDOMUS_MINE_LIMESTONE
+                        EasyTasks.EDGEVILLE_ENTER_DUNGEON_SOUTH
                     )
                 }
             }
         }
     }
 
-    private object SpellCastEvents : EventHook<SpellCastEvent> {
-        override fun process(entity: Entity, event: SpellCastEvent) {
-            if (entity !is Player) return
+    override fun onResourceProduced(player: Player, event: ResourceProducedEvent) {
+        when (player.viewport.region.id) {
+            12341 -> if (event.itemId == Items.RAW_TROUT_335) {
+                finishTask(
+                    player,
+                    DiaryType.VARROCK,
+                    DiaryLevel.EASY,
+                    EasyTasks.BARBARIAN_VILLAGE_CATCH_TROUT
+                )
+            }
 
-            when (event.spellId) {
-                Modern.VARROCK_TELEPORT -> {
+            13108 -> if (event.itemId == Items.IRON_ORE_440) {
+                finishTask(
+                    player,
+                    DiaryType.VARROCK,
+                    DiaryLevel.EASY,
+                    EasyTasks.MINE_IRON_SOUTHEAST
+                )
+            }
+
+            13110 -> {
+                if (event.itemId == Items.LOGS_1511
+                    && event.source.id == Scenery.DYING_TREE_24168) {
                     finishTask(
-                        entity,
+                        player,
                         DiaryType.VARROCK,
-                        DiaryLevel.MEDIUM,
-                        MediumTasks.CAST_VARROCK_TELEPORT_SPELL
+                        DiaryLevel.EASY,
+                        EasyTasks.LUMBERYARD_CHOP_DYING_TREE
                     )
                 }
+            }
+
+            13366 -> if (event.itemId == Items.LIMESTONE_3211) {
+                finishTask(
+                    player,
+                    DiaryType.VARROCK,
+                    DiaryLevel.EASY,
+                    EasyTasks.PATERDOMUS_MINE_LIMESTONE
+                )
+            }
+        }
+    }
+
+    override fun onSpellCast(player: Player, event: SpellCastEvent) {
+        when (event.spellId) {
+            Modern.VARROCK_TELEPORT -> {
+                finishTask(
+                    player,
+                    DiaryType.VARROCK,
+                    DiaryLevel.MEDIUM,
+                    MediumTasks.CAST_VARROCK_TELEPORT_SPELL
+                )
             }
         }
     }

@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.magic
 
-import api.events.ItemAlchemizedEvent
+import api.events.ItemAlchemizationEvent
 import api.events.TeleportEvent
 import api.getAttribute
 import core.game.content.activity.mta.impl.GraveyardZone
@@ -17,7 +17,6 @@ import core.game.node.entity.skill.smithing.smelting.Bar
 import core.game.node.entity.skill.smithing.smelting.SmeltingPulse
 import core.game.node.item.Item
 import core.game.world.map.Location
-import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
@@ -74,7 +73,6 @@ class ModernListeners : SpellListener("modern"){
 
         onCast(Modern.LUMBRIDGE_TELEPORT,NONE){player,_ ->
             requires(player,31, arrayOf(Item(Items.EARTH_RUNE_557),Item(Items.AIR_RUNE_556,3),Item(Items.LAW_RUNE_563)))
-            player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 2, 2)
             sendTeleport(player,41.0,Location.create(3221, 3219, 0))
         }
 
@@ -241,7 +239,7 @@ class ModernListeners : SpellListener("modern"){
             if(coins.amount > 0)
                 player.inventory.add(coins)
 
-            player.dispatch(ItemAlchemizedEvent(item.id, high))
+            player.dispatch(ItemAlchemizationEvent(item.id, high))
 
             addXP(player,if(high) 65.0 else 31.0)
             showMagicTab(player)

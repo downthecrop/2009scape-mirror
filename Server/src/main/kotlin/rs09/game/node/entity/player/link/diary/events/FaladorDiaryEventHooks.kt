@@ -1,24 +1,20 @@
 package rs09.game.node.entity.player.link.diary.events
 
-import api.MapArea
 import api.areEquipped
-import api.events.EventHook
 import api.events.InteractionEvent
 import api.events.NPCKillEvent
 import api.events.ResourceProducedEvent
 import api.inBorders
-import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
-import rs09.game.Event
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 
-class FaladorDiaryEventHooks : MapArea, DiaryEventHookBase() {
+class FaladorDiaryEventHooks : DiaryEventHookBase() {
     companion object {
         private val MINING_GUILD_AREA = ZoneBorders(3016, 9731, 3055, 9756)
         private val DARK_WIZARDS_TOWER_ROOF_AREA = ZoneBorders(2904, 3331, 2911, 3338, 2)
@@ -102,23 +98,21 @@ class FaladorDiaryEventHooks : MapArea, DiaryEventHookBase() {
         )
     }
 
-    override fun areaEnter(entity: Entity) {
-        if (entity !is Player) return
-
+    override fun onAreaVisited(player: Player) {
         when {
-            inBorders(entity, MINING_GUILD_AREA) -> {
+            inBorders(player, MINING_GUILD_AREA) -> {
                 finishTask(
-                    entity,
+                    player,
                     DiaryType.FALADOR,
                     DiaryLevel.HARD,
                     HardTasks.ENTER_MINING_GUILD
                 )
             }
 
-            inBorders(entity, DARK_WIZARDS_TOWER_ROOF_AREA) -> {
-                if (areEquipped(entity, *PROSELYTE_FULL_ARMOR)) {
+            inBorders(player, DARK_WIZARDS_TOWER_ROOF_AREA) -> {
+                if (areEquipped(player, *PROSELYTE_FULL_ARMOR)) {
                     finishTask(
-                        entity,
+                        player,
                         DiaryType.FALADOR,
                         DiaryLevel.HARD,
                         HardTasks.DARK_WIZARDS_TOWER_ASCEND_IN_FULL_PROSELYTE_ARMOR
@@ -126,9 +120,9 @@ class FaladorDiaryEventHooks : MapArea, DiaryEventHookBase() {
                 }
             }
 
-            inBorders(entity, WHITE_KNIGHTS_CASTLE_ROOF_AREA) -> {
+            inBorders(player, WHITE_KNIGHTS_CASTLE_ROOF_AREA) -> {
                 finishTask(
-                    entity,
+                    player,
                     DiaryType.FALADOR,
                     DiaryLevel.EASY,
                     EasyTasks.WHITE_KNIGHTS_CASTLE_CLIMB_TO_TOP
@@ -137,24 +131,31 @@ class FaladorDiaryEventHooks : MapArea, DiaryEventHookBase() {
         }
     }
 
-    override fun login(player: Player) {
-        player.hook(Event.Interaction, InteractionEvents)
-        player.hook(Event.ResourceProduced, ResourceProductionEvents)
-        player.hook(Event.NPCKilled, CombatEvents)
+    override fun onInteracted(player: Player, event: InteractionEvent) {
+        when (player.viewport.region.id) {
+            12084 -> {
+                if (event.option == "burst" && event.target.id in PARTY_BALLOONS) {
+                    finishTask(
+                        player,
+                        DiaryType.FALADOR,
+                        DiaryLevel.EASY,
+                        EasyTasks.POP_PARTY_BALLOON
+                    )
+                }
+            }
+        }
     }
 
-    private object InteractionEvents : EventHook<InteractionEvent> {
-        override fun process(entity: Entity, event: InteractionEvent) {
-            if (entity !is Player) return
-
-            when (entity.viewport.region.id) {
-                12084 -> {
-                    if (event.option == "burst" && event.target.id in PARTY_BALLOONS) {
+    override fun onResourceProduced(player: Player, event: ResourceProducedEvent) {
+        when (player.viewport.region.id) {
+            11828 -> when (event.itemId) {
+                Items.YEW_LOGS_1515, Items.MAGIC_LOGS_1513 -> {
+                    if (inBorders(player, PARK_TREE_PATCH_AREA)) {
                         finishTask(
-                            entity,
+                            player,
                             DiaryType.FALADOR,
-                            DiaryLevel.EASY,
-                            EasyTasks.POP_PARTY_BALLOON
+                            DiaryLevel.HARD,
+                            HardTasks.CUT_DOWN_GROWN_YEW_OR_MAGIC_TREE
                         )
                     }
                 }
@@ -162,49 +163,24 @@ class FaladorDiaryEventHooks : MapArea, DiaryEventHookBase() {
         }
     }
 
-    private object ResourceProductionEvents : EventHook<ResourceProducedEvent> {
-        override fun process(entity: Entity, event: ResourceProducedEvent) {
-            if (entity !is Player) return
-
-            when (entity.viewport.region.id) {
-                11828 -> when (event.itemId) {
-                    Items.YEW_LOGS_1515, Items.MAGIC_LOGS_1513 -> {
-                        if (inBorders(entity, PARK_TREE_PATCH_AREA)) {
-                            finishTask(
-                                entity,
-                                DiaryType.FALADOR,
-                                DiaryLevel.HARD,
-                                HardTasks.CUT_DOWN_GROWN_YEW_OR_MAGIC_TREE
-                            )
-                        }
-                    }
-                }
+    override fun onNpcKilled(player: Player, event: NPCKillEvent) {
+        when (player.viewport.region.id) {
+            11828 -> if (event.npc.id in PARK_DUCKS && inBorders(event.npc, PARK_POND_AREA)) {
+                finishTask(
+                    player,
+                    DiaryType.FALADOR,
+                    DiaryLevel.EASY,
+                    EasyTasks.PARK_KILL_A_DUCK
+                )
             }
-        }
-    }
 
-    private object CombatEvents : EventHook<NPCKillEvent> {
-        override fun process(entity: Entity, event: NPCKillEvent) {
-            if (entity !is Player) return
-
-            when (entity.viewport.region.id) {
-                11828 -> if (event.npc.id in PARK_DUCKS && inBorders(event.npc, PARK_POND_AREA)) {
-                    finishTask(
-                        entity,
-                        DiaryType.FALADOR,
-                        DiaryLevel.EASY,
-                        EasyTasks.PARK_KILL_A_DUCK
-                    )
-                }
-
-                12181 -> if (event.npc.id in SKELETAL_WYVERNS) {
-                    finishTask(
-                        entity,
-                        DiaryType.FALADOR,
-                        DiaryLevel.HARD,
-                        HardTasks.ICE_DUNGEON_KILL_SKELETAL_WYVERN
-                    )
-                }
+            12181 -> if (event.npc.id in SKELETAL_WYVERNS) {
+                finishTask(
+                    player,
+                    DiaryType.FALADOR,
+                    DiaryLevel.HARD,
+                    HardTasks.ICE_DUNGEON_KILL_SKELETAL_WYVERN
+                )
             }
         }
     }

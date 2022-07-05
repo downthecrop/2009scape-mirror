@@ -15,9 +15,9 @@ import org.rs09.consts.NPCs
  * Event receivers for tutorial island
  * @author Ceikry
  */
-object TutorialButtonReceiver : EventHook<ButtonClickedEvent>
+object TutorialButtonReceiver : EventHook<ButtonClickEvent>
 {
-    override fun process(entity: Entity, event: ButtonClickedEvent) {
+    override fun process(entity: Entity, event: ButtonClickEvent) {
         if(entity !is Player) return
 
         when(getAttribute(entity, "tutorial:stage", 0))
@@ -277,9 +277,9 @@ object TutorialFireReceiver : EventHook<LitFireEvent>
     }
 }
 
-object TutorialUseWithReceiver : EventHook<UsedWithEvent>
+object TutorialUseWithReceiver : EventHook<UseWithEvent>
 {
-    override fun process(entity: Entity, event: UsedWithEvent) {
+    override fun process(entity: Entity, event: UseWithEvent) {
         if(entity !is Player) return
 
 

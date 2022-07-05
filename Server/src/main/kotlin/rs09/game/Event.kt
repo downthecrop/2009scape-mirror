@@ -7,10 +7,10 @@ object Event {
     @JvmStatic val NPCKilled = NPCKillEvent::class.java
     @JvmStatic val Teleported = TeleportEvent::class.java
     @JvmStatic val FireLit = LitFireEvent::class.java
-    @JvmStatic val Interaction = InteractionEvent::class.java
-    @JvmStatic val ButtonClicked = ButtonClickedEvent::class.java
-    @JvmStatic val UsedWith = UsedWithEvent::class.java
-    @JvmStatic val SelfDeath = SelfDeath::class.java
+    @JvmStatic val Interacted = InteractionEvent::class.java
+    @JvmStatic val ButtonClicked = ButtonClickEvent::class.java
+    @JvmStatic val UsedWith = UseWithEvent::class.java
+    @JvmStatic val SelfDeath = SelfDeathEvent::class.java
     @JvmStatic val Tick = TickEvent::class.java
     @JvmStatic val PickedUp = PickUpEvent::class.java
     @JvmStatic val InterfaceOpened = InterfaceOpenEvent::class.java
@@ -19,5 +19,5 @@ object Event {
     @JvmStatic val AttributeSet = AttributeSetEvent::class.java
     @JvmStatic val AttributeRemoved = AttributeRemoveEvent::class.java
     @JvmStatic val SpellCast = SpellCastEvent::class.java
-    @JvmStatic val ItemAlchemized = ItemAlchemizedEvent::class.java
+    @JvmStatic val ItemAlchemized = ItemAlchemizationEvent::class.java
 }

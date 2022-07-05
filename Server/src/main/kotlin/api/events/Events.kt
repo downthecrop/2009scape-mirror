@@ -14,9 +14,9 @@ data class NPCKillEvent(val npc: NPC) : Event
 data class TeleportEvent(val type: TeleportType, val method: TeleportMethod, val source: Any, val location: Location) : Event
 data class LitFireEvent(val logId: Int) : Event
 data class InteractionEvent(val target: Node, val option: String) : Event
-data class ButtonClickedEvent(val iface: Int, val buttonId: Int) : Event
-data class UsedWithEvent(val used: Int, val with: Int) : Event
-data class SelfDeath(val killer: Entity) : Event
+data class ButtonClickEvent(val iface: Int, val buttonId: Int) : Event
+data class UseWithEvent(val used: Int, val with: Int) : Event
+data class SelfDeathEvent(val killer: Entity) : Event
 data class TickEvent(val worldTicks: Int) : Event
 data class PickUpEvent(val itemId: Int) : Event
 data class InterfaceOpenEvent(val component: Component) : Event
@@ -24,5 +24,6 @@ data class InterfaceCloseEvent(val component: Component) : Event
 data class AttributeSetEvent(val entity: Entity, val attribute: String, val value: Any) : Event
 data class AttributeRemoveEvent(val entity: Entity, val attribute: String) : Event
 data class SpellCastEvent(val spellBook: SpellBook, val spellId: Int) : Event
+data class ItemAlchemizationEvent(val itemId: Int, val isHigh: Boolean) : Event
 data class ItemAlchemizedEvent(val itemId: Int, val isHigh: Boolean) : Event
 data class VarbitUpdateEvent(val offset: Int, val value: Int) : Event
