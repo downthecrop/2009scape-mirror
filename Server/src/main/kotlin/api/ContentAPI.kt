@@ -1610,6 +1610,7 @@ fun getPathableRandomLocalCoordinate(target: Entity, radius: Int, center: Locati
 
 /**
  * Prepends 'a' or 'an' to a noun depending on whether it starts with a vowel.
+ * I'll add proper English rule-following when Apple adds a consistent kernel.
  * @author bushtail
  * @param noun the noun to check grammar rules against.
  * @return either 'a $noun' or 'an $noun' depending on the first letter.
