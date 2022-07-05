@@ -1609,6 +1609,20 @@ fun getPathableRandomLocalCoordinate(target: Entity, radius: Int, center: Locati
 }
 
 /**
+ * Prepends 'a' or 'an' to a noun depending on whether it starts with a vowel.
+ * @author bushtail
+ * @param noun the noun to check grammar rules against.
+ * @return either 'a $noun' or 'an $noun' depending on the first letter.
+ */
+fun prependGrammarArticle(noun : String) : String {
+    if(noun == null) return noun
+    return when(noun[0]) {
+        'a', 'e', 'i', 'o', 'u' -> "an $noun"
+        else -> "a $noun"
+    }
+}
+
+/**
  * Returns the player's active slayer task.
  * @author bushtail
  * @param player the player whose task we are checking.

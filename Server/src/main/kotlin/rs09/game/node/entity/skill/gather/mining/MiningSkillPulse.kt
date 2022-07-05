@@ -133,7 +133,7 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
         }
 
         //actual reward calculations
-        var reward = resource!!.getReward()
+        var reward = resource!!.reward
         var rewardAmount = 0
         if (reward > 0) {
             reward = calculateReward(reward) // calculate rewards
@@ -143,7 +143,7 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
             SkillingPets.checkPetDrop(player, SkillingPets.GOLEM) // roll for pet
 
             //add experience
-            val experience = resource!!.getExperience() * rewardAmount
+            val experience = resource!!.experience * rewardAmount
             rewardXP(player, Skills.MINING, experience)
 
             //Handle bracelet of clay
@@ -163,10 +163,10 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
 
             //send the message for the resource reward
             if (isMiningGems) {
-                val gemName = ItemDefinition.forId(reward).name.lowercase()
-                sendMessage(player, "You get ${(if (StringUtils.isPlusN(gemName)) "an" else "a")} ${gemName}.")
+                val gemName = getItemName(reward).lowercase()
+                sendMessage(player, "You get ${prependGrammarArticle(gemName)}.")
             } else {
-                sendMessage(player, "You get some ${resource!!.name.lowercase()}.")
+                sendMessage(player, "You get some ${getItemName(reward).lowercase()}.")
             }
             //give the reward
             addItem(player, reward, rewardAmount)
