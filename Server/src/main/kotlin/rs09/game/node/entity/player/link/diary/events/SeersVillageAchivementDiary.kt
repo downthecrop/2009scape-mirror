@@ -8,15 +8,18 @@ import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
+import org.rs09.consts.NPCs
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 
-class SeersVillageAchivementDiary : MapArea, DiaryEventHookBase() {
+class SeersVillageAchivementDiary : DiaryEventHookBase() {
     companion object {
         private const val ATTRIBUTE_CUT_YEW_COUNT = "diary:seers:cut-yew"
         private const val ATTRIBUTE_BASS_CAUGHT = "diary:seers:bass-caught"
         private const val ATTRIBUTE_SHARK_CAUGHT_COUNT = "diary:seers:shark-caught"
         private const val ATTRIBUTE_SHARK_COOKED_COUNT = "diary:seers:shark-cooked"
+        private const val ATTRIBUTE_ELEMENTAL_KILL_FLAGS = "diary:seers:elemental-kills"
+        private const val ATTRIBUTE_ARCHER_KILL_FLAGS = "diary:seers:archer-kills"
 
         private val SEERS_VILLAGE_AREA = ZoneBorders(2687, 3455, 2742, 3507)
         private val SEERS_BANK_AREA = ZoneBorders(2721, 3490, 2730, 3493)
@@ -51,7 +54,7 @@ class SeersVillageAchivementDiary : MapArea, DiaryEventHookBase() {
             const val FIND_HIGHEST_POINT = 3
             const val DEFEAT_EACH_ELEMENTAL_TYPE = 4
             const val TELEPORT_TO_CAMELOT = 5
-            const val RANGING_GUILD_KILL_1_GUARD_ON_EACH_TOWER = 6
+            const val RANGING_GUILD_KILL_EACH_TOWER_GUARD = 6
             const val RANGING_GUILD_JUDGE_1000_ARCHERY_TICKETS = 7
             const val RANGING_GUILD_BUY_SOMETHING_FOR_TICKETS = 8
             const val USE_FAMILIAR_TO_LIGHT_MAPLE_LOGS = 9
@@ -72,10 +75,6 @@ class SeersVillageAchivementDiary : MapArea, DiaryEventHookBase() {
             const val CHARGE_5_WATER_ORBS_AT_ONCE = 9
             const val GRAPPLE_FROM_WATER_OBELISK_TO_CATHERBY_SHORE = 10
         }
-    }
-
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf()
     }
 
     override fun onAttributeSet(player: Player, event: AttributeSetEvent) {
@@ -115,6 +114,33 @@ class SeersVillageAchivementDiary : MapArea, DiaryEventHookBase() {
                         DiaryType.SEERS_VILLAGE,
                         DiaryLevel.HARD,
                         HardTasks.CATHERBY_COOK_5_SHARKS_WITH_COOKING_GAUNTLETS
+                    )
+                }
+            }
+
+            "/save:${ATTRIBUTE_ELEMENTAL_KILL_FLAGS}" -> {
+                if (event.value !is Int) return
+
+                /* It's a bit-field. Set in the combat event handlers. */
+                if (event.value == 0xF) {
+                    finishTask(
+                        player,
+                        DiaryType.SEERS_VILLAGE,
+                        DiaryLevel.MEDIUM,
+                        MediumTasks.DEFEAT_EACH_ELEMENTAL_TYPE
+                    )
+                }
+            }
+
+            "/save:${ATTRIBUTE_ARCHER_KILL_FLAGS}" -> {
+                if (event.value !is Int) return
+
+                if (event.value == 0xF) {
+                    finishTask(
+                        player,
+                        DiaryType.SEERS_VILLAGE,
+                        DiaryLevel.MEDIUM,
+                        MediumTasks.RANGING_GUILD_KILL_EACH_TOWER_GUARD
                     )
                 }
             }
@@ -198,10 +224,90 @@ class SeersVillageAchivementDiary : MapArea, DiaryEventHookBase() {
         }
     }
 
+    override fun onNpcKilled(player: Player, event: NPCKillEvent) {
+        when (player.viewport.region.id) {
+            10906 -> {
+                val current = getAttribute(player, ATTRIBUTE_ELEMENTAL_KILL_FLAGS, 0)
+
+                when (event.npc.id) {
+                    NPCs.FIRE_ELEMENTAL_1019 -> {
+                        setAttribute(
+                            player,
+                            "/save:${ATTRIBUTE_ELEMENTAL_KILL_FLAGS}",
+                            current or (1 shl 0)
+                        )
+                    }
+
+                    NPCs.EARTH_ELEMENTAL_1020 -> {
+                        setAttribute(
+                            player,
+                            "/save:${ATTRIBUTE_ELEMENTAL_KILL_FLAGS}",
+                            current or (1 shl 1)
+                        )
+                    }
+
+                    NPCs.AIR_ELEMENTAL_1021 -> {
+                        setAttribute(
+                            player,
+                            "/save:${ATTRIBUTE_ELEMENTAL_KILL_FLAGS}",
+                            current or (1 shl 2)
+                        )
+                    }
+
+                    NPCs.WATER_ELEMENTAL_1022 -> {
+                        setAttribute(
+                            player,
+                            "/save:${ATTRIBUTE_ELEMENTAL_KILL_FLAGS}",
+                            current or (1 shl 3)
+                        )
+                    }
+                }
+            }
+
+            10549 -> {
+                val current = getAttribute(player, ATTRIBUTE_ARCHER_KILL_FLAGS, 0)
+
+                when (event.npc.id) {
+                    NPCs.TOWER_ARCHER_688 -> {
+                        setAttribute(
+                            player,
+                            "/save:${ATTRIBUTE_ARCHER_KILL_FLAGS}",
+                            current or (1 shl 0)
+                        )
+                    }
+
+                    NPCs.TOWER_ARCHER_689 -> {
+                        setAttribute(
+                            player,
+                            "/save:${ATTRIBUTE_ARCHER_KILL_FLAGS}",
+                            current or (1 shl 1)
+                        )
+                    }
+
+                    NPCs.TOWER_ARCHER_690 -> {
+                        setAttribute(
+                            player,
+                            "/save:${ATTRIBUTE_ARCHER_KILL_FLAGS}",
+                            current or (1 shl 2)
+                        )
+                    }
+
+                    NPCs.TOWER_ARCHER_691-> {
+                        setAttribute(
+                            player,
+                            "/save:${ATTRIBUTE_ARCHER_KILL_FLAGS}",
+                            current or (1 shl 3)
+                        )
+                    }
+                }
+            }
+        }
+    }
+
     override fun onTeleported(player: Player, event: TeleportEvent) {
         when (event.source) {
             is Item -> if (event.source.id in COMBAT_BRACELETS) {
-                if (player.location.equals(RANGING_GUILD_LOCATION)) {
+                if (event.location == RANGING_GUILD_LOCATION) {
                     finishTask(
                         player,
                         DiaryType.SEERS_VILLAGE,

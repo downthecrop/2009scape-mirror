@@ -6,6 +6,7 @@ import api.events.*
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
+import core.game.world.map.zone.ZoneBorders
 import rs09.game.Event
 
 abstract class DiaryEventHookBase : MapArea, LoginListener {
@@ -94,6 +95,10 @@ abstract class DiaryEventHookBase : MapArea, LoginListener {
         override fun process(entity: Entity, event: ItemAlchemizationEvent) {
             forEligibleEntityDo(entity, event, owner::onItemAlchemized)
         }
+    }
+
+    override fun defineAreaBorders(): Array<ZoneBorders> {
+        return arrayOf()
     }
 
     final override fun areaEnter(entity: Entity) {
