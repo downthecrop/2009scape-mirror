@@ -13,7 +13,7 @@ import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 import rs09.game.node.entity.skill.magic.spellconsts.Modern
 
-class LumbridgeDiaryEventHooks : DiaryEventHookBase() {
+class LumbridgeAchivementDiary : DiaryEventHookBase() {
 
     companion object {
         private val DEAD_TREES = arrayOf(

@@ -11,7 +11,7 @@ import org.rs09.consts.Items
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 
-class SeersVillageDiaryEventHooks : MapArea, DiaryEventHookBase() {
+class SeersVillageAchivementDiary : MapArea, DiaryEventHookBase() {
     companion object {
         private const val ATTRIBUTE_CUT_YEW_COUNT = "diary:seers:cut-yew"
         private const val ATTRIBUTE_BASS_CAUGHT = "diary:seers:bass-caught"

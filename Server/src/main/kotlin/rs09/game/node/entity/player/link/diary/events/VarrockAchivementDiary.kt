@@ -13,7 +13,7 @@ import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 import rs09.game.node.entity.skill.magic.spellconsts.Modern
 
-class VarrockDiaryEventHooks : DiaryEventHookBase() {
+class VarrockAchivementDiary : DiaryEventHookBase() {
     companion object {
         private val VARROCK_ROOF_AREA = ZoneBorders(3201, 3467, 3225, 3497, 3)
         private val SOS_LEVEL_2_AREA = ZoneBorders(2040, 5241, 2046, 5246)

@@ -14,7 +14,7 @@ import org.rs09.consts.Scenery
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 
-class FaladorDiaryEventHooks : DiaryEventHookBase() {
+class FaladorAchievementDiary : DiaryEventHookBase() {
     companion object {
         private val MINING_GUILD_AREA = ZoneBorders(3016, 9731, 3055, 9756)
         private val DARK_WIZARDS_TOWER_ROOF_AREA = ZoneBorders(2904, 3331, 2911, 3338, 2)
