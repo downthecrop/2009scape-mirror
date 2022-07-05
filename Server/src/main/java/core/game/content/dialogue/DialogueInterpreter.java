@@ -120,7 +120,10 @@ public final class DialogueInterpreter {
             return false;
         }
 
-        player.dispatch(new DialogueOpenEvent(dialogue));
+        if (dialogue != null) {
+            player.dispatch(new DialogueOpenEvent(dialogue));
+        }
+
         return true;
     }
 
