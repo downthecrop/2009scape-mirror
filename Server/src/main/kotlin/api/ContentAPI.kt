@@ -500,6 +500,18 @@ fun produceGroundItem(player: Player, item: Int) {
 }
 
 /**
+ * Produces a ground item with the given ID and amount at the given location
+ * @param owner the owner of the ground item, use null for none.
+ * @param id the id of the item.
+ * @param amount the amount of the item.
+ * @param location the location of the item.
+ * @return the created ground item.
+ */
+fun produceGroundItem(owner: Player?, id: Int, amount: Int, location: Location) : GroundItem {
+   return GroundItemManager.create(Item(id, amount), location, owner) 
+}
+
+/**
  * Spawns a projectile
  */
 fun spawnProjectile(source: Entity, dest: Entity, projectileId: Int) {

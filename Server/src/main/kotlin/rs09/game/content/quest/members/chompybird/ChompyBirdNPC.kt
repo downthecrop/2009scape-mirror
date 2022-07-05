@@ -7,20 +7,25 @@ import org.rs09.consts.Items
 import org.rs09.consts.Animations
 
 import core.plugin.Initializable
+import core.tools.RandomFunction
 import core.game.system.task.Pulse
+
+import core.game.node.Node
 import core.game.node.entity.Entity
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.npc.AbstractNPC
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle
-import core.game.world.update.flag.context.Animation
+
 import core.game.world.map.Location
 import core.game.world.map.path.Pathfinder
 import core.game.interaction.MovementPulse
+import rs09.game.interaction.InteractionListener
+import core.game.world.update.flag.context.Animation
 
 @Initializable
-class ChompyBirdNPC : AbstractNPC {
+class ChompyBirdNPC : AbstractNPC, InteractionListener {
   constructor() : super(NPCs.CHOMPY_BIRD_1550, null, true)
   private constructor(id: Int, location: Location) : super(id, location) {}
 
@@ -69,9 +74,7 @@ class ChompyBirdNPC : AbstractNPC {
     return attackable && hasOgreBow
   }
 
-  override fun canAttack(victim: Entity) : Boolean {
-    return false
-  }
+  override fun attack(node: Node) {}
 
   override fun checkImpact(state: BattleState) {
     super.checkImpact(state)
@@ -95,27 +98,74 @@ class ChompyBirdNPC : AbstractNPC {
     }
   }
 
+  override fun tick() {
+    if (this.inCombat() && this.skills.lifepoints > 0) {
+      val newLoc = this.location.transform(
+        RandomFunction.random(-2,2),
+        RandomFunction.random(-2,2),
+        0
+      )
+      submitIndividualPulse(this, object : MovementPulse(this, newLoc, Pathfinder.DUMB) {
+        override fun pulse() : Boolean { return true }
+      })
+    }
+    super.tick()
+  }
+
   override fun handleTickActions() {
     if (id == NPCs.CHOMPY_BIRD_1550) {
       if (getAttribute("toad_eaten", false)) {
         super.handleTickActions()
       }
-      if (timeToLive-- <= 0 && !this.inCombat()) {
+      if (timeToLive-- <= 0) {
         animate(Animation(Animations.CHOMPY_FLY_AWAY_6767))
         runTask(this, 2) { clear() }
         timeToLive = 100
       }
-    } 
-  }
-
-  override fun finalizeDeath(killer: Entity) {
-    properties.teleportLocation = null
-    runTask(this, 2) { 
-      val newSelf = transform(NPCs.CHOMPY_BIRD_1016)
-      newSelf.isNeverWalks = true
-      newSelf.isWalks = false
-      newSelf.walkRadius = 0
+    } else {
+      if (timeToLive-- <= 0)
+        clear()
     }
   }
 
+  override fun finalizeDeath(killer: Entity) {
+    properties.teleportLocation = null 
+    val newSelf = transform(NPCs.CHOMPY_BIRD_1016)
+    newSelf.isNeverWalks = true
+    newSelf.isWalks = false
+    newSelf.walkRadius = 0
+    timeToLive = 200
+    
+    this.pulseManager.clear()
+    this.walkingQueue.reset()
+
+    if (killer is Player) {
+      sendMessage(killer, "You scratch a notch on your bow for the chompy bird kill.")
+      val old = killer.getAttribute("chompy-kills", 0)
+      killer.setAttribute("/save:chompy-kills", old + 1)
+    }
+  }
+  
+  override fun defineListeners() {
+    on(NPCs.CHOMPY_BIRD_1016, NPC, "pluck") { player, node -> 
+      val bird = node.asNpc() 
+
+      if (!bird.getAttribute("plucked", false)) {
+        addItem(player, Items.FEATHER_314, RandomFunction.random(25, 32))
+        produceGroundItem(player, Items.BONES_526, 1, bird.location)
+        produceGroundItem(player, Items.RAW_CHOMPY_2876, 1, bird.location)
+        bird.clear()
+      }
+
+      bird.setAttribute("plucked", true)
+
+      return@on true
+    }
+
+    on(Items.OGRE_BOW_2883, ITEM, "check kills") { player, _ -> 
+      val amount = player.getAttribute("chompy-kills", 0)
+      sendDialogue(player, "You have killed $amount chompy birds.")
+      return@on true
+    }
+  }
 }

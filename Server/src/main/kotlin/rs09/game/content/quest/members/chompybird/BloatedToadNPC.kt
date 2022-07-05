@@ -62,6 +62,7 @@ class BloatedToadNPC : AbstractNPC {
       chompy.location = spawn
       chompy.setAttribute("owner", owner)
       chompy.setAttribute("toad", this)
+      chompy.walkingQueue.update() 
 
       chompy.init()
       sendChat(chompy, "Squawk!")
