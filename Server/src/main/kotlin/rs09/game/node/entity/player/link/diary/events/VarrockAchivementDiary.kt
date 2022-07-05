@@ -1,14 +1,14 @@
 package rs09.game.node.entity.player.link.diary.events
 
-import api.events.InteractionEvent
-import api.events.ResourceProducedEvent
-import api.events.SpellCastEvent
+import api.events.*
 import api.inBorders
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.world.map.zone.ZoneBorders
+import org.rs09.consts.Components
 import org.rs09.consts.Items
 import org.rs09.consts.Scenery
+import rs09.game.content.dialogue.region.varrock.ElsieDialogue
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 import rs09.game.node.entity.skill.magic.spellconsts.Modern
@@ -108,6 +108,19 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
         }
     }
 
+    override fun onInterfaceOpened(player: Player, event: InterfaceOpenEvent) {
+        when (event.component.id) {
+            Components.THESSALIA_CLOTHES_MALE_591,
+            Components.THESSALIA_CLOTHES_FEMALE_594 -> {
+                finishTask(
+                    player,
+                    DiaryLevel.EASY,
+                    EasyTasks.THESSALIA_BROWSE_CLOTHES
+                )
+            }
+        }
+    }
+
     override fun onInteracted(player: Player, event: InteractionEvent) {
         when (player.viewport.region.id) {
             12342 -> {
@@ -118,6 +131,18 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
                         EasyTasks.EDGEVILLE_ENTER_DUNGEON_SOUTH
                     )
                 }
+            }
+        }
+    }
+
+    override fun onDialogueOptionSelected(player: Player, event: DialogueOptionSelectionEvent) {
+        when (event.dialogue) {
+            is ElsieDialogue -> if (event.currentStage == 12) {
+                finishTask(
+                    player,
+                    DiaryLevel.EASY,
+                    EasyTasks.ELSIE_TELL_A_STORY
+                )
             }
         }
     }
@@ -142,7 +167,8 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
 
             13110 -> {
                 if (event.itemId == Items.LOGS_1511
-                    && event.source.id == Scenery.DYING_TREE_24168) {
+                    && event.source.id == Scenery.DYING_TREE_24168
+                ) {
                     finishTask(
                         player,
                         DiaryLevel.EASY,
