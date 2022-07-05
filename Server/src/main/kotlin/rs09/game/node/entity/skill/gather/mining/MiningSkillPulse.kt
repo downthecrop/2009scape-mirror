@@ -157,13 +157,12 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
                     }
                 }
             }
-
+            val rewardName = getItemName(reward).lowercase()
             //send the message for the resource reward
             if (isMiningGems) {
-                val gemName = getItemName(reward).lowercase()
-                sendMessage(player, "You get ${prependArticle(gemName)}.")
+                sendMessage(player, "You get ${prependArticle(rewardName)}.")
             } else {
-                sendMessage(player, "You get some ${getItemName(reward).lowercase()}.")
+                sendMessage(player, "You get some ${rewardName.lowercase()}.")
             }
             //give the reward
             addItem(player, reward, rewardAmount)
