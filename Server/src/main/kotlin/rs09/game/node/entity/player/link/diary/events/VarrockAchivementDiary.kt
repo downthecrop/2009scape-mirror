@@ -171,15 +171,18 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
     }
 
     override fun onButtonClicked(player: Player, event: ButtonClickEvent) {
-        when (player.viewport.region.id) {
-            12342 -> {
-                if (event.iface == Components.CANOE_52
-                    && Canoe.getCanoeFromChild(event.buttonId) == Canoe.WAKA) {
-                    finishTask(
-                        player,
-                        DiaryLevel.HARD,
-                        HardTasks.EDGEVILLE_MAKE_WAKA_CANOE
-                    )
+        /* This gets fired even on the login screen, and we don't have a region there, so... */
+        player.viewport.region?.let {
+            when (it.id) {
+                12342 -> {
+                    if (event.iface == Components.CANOE_52
+                        && Canoe.getCanoeFromChild(event.buttonId) == Canoe.WAKA) {
+                        finishTask(
+                            player,
+                            DiaryLevel.HARD,
+                            HardTasks.EDGEVILLE_MAKE_WAKA_CANOE
+                        )
+                    }
                 }
             }
         }

@@ -11,6 +11,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import rs09.game.interaction.inter.FairyRing
+import rs09.game.interaction.item.withnpc.PoisonChaliceOnKingArthurDialogue
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 
@@ -223,6 +224,20 @@ class SeersVillageAchivementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) 
                             MediumTasks.TRANSPORT_FULL_LOAD_OF_COAL
                         )
                     }
+                }
+            }
+        }
+    }
+
+    override fun onDialogueOptionSelected(player: Player, event: DialogueOptionSelectionEvent) {
+        when (event.dialogue) {
+            is PoisonChaliceOnKingArthurDialogue -> {
+                if (event.currentStage == 4) {
+                    finishTask(
+                        player,
+                        DiaryLevel.EASY,
+                        EasyTasks.TAKE_POISON_TO_KING_ARTHUR
+                    )
                 }
             }
         }
