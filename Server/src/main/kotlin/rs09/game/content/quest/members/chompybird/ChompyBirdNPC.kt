@@ -143,6 +143,7 @@ class ChompyBirdNPC : AbstractNPC, InteractionListener {
       sendMessage(killer, "You scratch a notch on your bow for the chompy bird kill.")
       val old = killer.getAttribute("chompy-kills", 0)
       killer.setAttribute("/save:chompy-kills", old + 1)
+      ChompyHat.checkForNewRank(killer)
     }
   }
   

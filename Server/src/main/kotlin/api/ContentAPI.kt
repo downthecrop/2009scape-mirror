@@ -635,6 +635,15 @@ fun sendDialogue(player: Player, message: String) {
 }
 
 /**
+ * Sends a message to the player's dialogue box
+ * @param player the player to send the dialogue to
+ * @param lines the lines of dialogue to send. No automatic splitting.
+ */
+fun sendDialogueLines(player: Player, vararg message: String) {
+    player.dialogueInterpreter.sendDialogue(*message)
+}
+
+/**
  * Plays an animation on the entity
  * @param entity the entity to animate
  * @param anim the animation to play, can be an ID or an Animation object.
