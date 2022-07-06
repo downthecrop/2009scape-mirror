@@ -72,7 +72,7 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
     }
 
     protected fun fulfillTaskRequirement(player: Player, level: DiaryLevel, task: Int, attribute: String) {
-        if (isTaskRequirementFulfilled(player, attribute)) return
+        if (getAttribute(player, attribute, false)) return
 
         player.achievementDiaryManager.updateTask(
             player,
@@ -85,8 +85,10 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
         setAttribute(player, "/save:$attribute", true)
     }
 
-    protected fun isTaskRequirementFulfilled(player: Player, attribute: String): Boolean {
-        return getAttribute(player, attribute, false)
+    protected fun whenTaskRequirementFulfilled(player: Player, attribute: String, doWhat: () -> Unit) {
+        if (getAttribute(player, attribute, false)) {
+            doWhat()
+        }
     }
 
     protected fun progressIncrementalTask(player: Player, level: DiaryLevel, task: Int, attribute: String, maxProgress: Int) {

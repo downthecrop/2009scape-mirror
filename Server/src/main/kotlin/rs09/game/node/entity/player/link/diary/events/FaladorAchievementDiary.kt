@@ -24,6 +24,7 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
         private val PARK_TREE_PATCH_AREA = ZoneBorders(3002, 3371, 3006, 3375)
         private val PARK_POND_AREA = ZoneBorders(2987, 3381, 2994, 3386)
         private val WAYNES_CHAINS_AREA = ZoneBorders(2969, 3310, 2975, 3314)
+        private val SARAHS_FARMING_SHOP_AREA = ZoneBorders(3021, 3285, 3040, 3296)
 
         private val PROSELYTE_FULL_ARMOR = intArrayOf(
             Items.PROSELYTE_SALLET_9672,
@@ -183,7 +184,7 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
 
     override fun onItemPurchasedFromShop(player: Player, event: ItemShopPurchaseEvent) {
         when {
-            inBorders(player, WAYNES_CHAINS_AREA) -> if (event.itemId == Items.BLACK_CHAINBODY_1107) {
+            inBorders(player, WAYNES_CHAINS_AREA) && (event.itemId == Items.BLACK_CHAINBODY_1107) -> {
                 fulfillTaskRequirement(
                     player,
                     DiaryLevel.EASY,
@@ -191,13 +192,21 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
                     ATTRIBUTE_BLACK_CHAINBODY_PURCHASED
                 )
             }
+
+            inBorders(player, SARAHS_FARMING_SHOP_AREA) && (event.itemId == Items.AMULET_OF_FARMING8_12622) -> {
+                finishTask(
+                    player,
+                    DiaryLevel.EASY,
+                    EasyTasks.PORT_SARIM_SARAH_BUY_FARMING_AMULET
+                )
+            }
         }
     }
 
     override fun onItemEquipped(player: Player, event: ItemEquipEvent) {
         when {
-            inBorders(player, WAYNES_CHAINS_AREA) -> if (event.itemId == Items.BLACK_CHAINBODY_1107) {
-                if (isTaskRequirementFulfilled(player, ATTRIBUTE_BLACK_CHAINBODY_PURCHASED)) {
+            inBorders(player, WAYNES_CHAINS_AREA) && (event.itemId == Items.BLACK_CHAINBODY_1107) -> {
+                whenTaskRequirementFulfilled(player, ATTRIBUTE_BLACK_CHAINBODY_PURCHASED) {
                     finishTask(
                         player,
                         DiaryLevel.EASY,
