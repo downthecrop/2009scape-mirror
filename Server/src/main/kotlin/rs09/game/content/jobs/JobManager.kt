@@ -39,7 +39,7 @@ object JobManager {
             }
         }
 
-        player.setAttribute("jobs:amount", new)
+        setAttribute(player, "jobs:amount", new)
     }
 
     @JvmStatic

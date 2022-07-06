@@ -10,7 +10,6 @@ import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
