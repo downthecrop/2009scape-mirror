@@ -78,8 +78,7 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
         }
         if (resource!!.id == 2099 &&
             !perfectGoldOreLocations.contains(node.location) ) {
-            // Perfect Gold Ore Id's outside of Witchhaven
-            // are replaced with a normal gold rock.
+            // Perfect Gold Ore IDs outside of Witchhaven are replaced with a normal gold rock.
             resource = MiningNode.forId(2098)
         }
         if (resource!!.id == 2491) {
