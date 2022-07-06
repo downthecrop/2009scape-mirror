@@ -21,7 +21,7 @@ class CanoeInterfaceListeners : InterfaceListener {
 
     val SHAPE_INTERFACE = Components.CANOE_52
     val DESTINATION_INTERFACE = Components.CANOE_STATIONS_MAP_53
-    val EDGEVILLE_REGION = 12342
+
     private val boatChilds = intArrayOf(47, 48, 3, 6, 49)
     private val locationChilds = intArrayOf(50, 47, 44, 36)
 
@@ -51,9 +51,6 @@ class CanoeInterfaceListeners : InterfaceListener {
             player.pulseManager.run(object : Pulse(3) {
                 override fun pulse(): Boolean {
                     if (RandomFunction.random(if (canoe == Canoe.WAKA) 8 else 6) == 1) {
-                        if (player.location.regionId == EDGEVILLE_REGION && canoe == Canoe.WAKA) {
-                            player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 2, 10)
-                        }
                         player.varpManager.setVarbit(varbit,CanoeUtils.getCraftValue(canoe,false))
                         player.skills.addExperience(Skills.WOODCUTTING, canoe.experience)
                         player.unlock()

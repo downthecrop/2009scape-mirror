@@ -2,6 +2,7 @@ package rs09.game.node.entity.player.link.diary.events
 
 import api.events.*
 import api.inBorders
+import core.game.content.global.travel.canoe.Canoe
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
@@ -165,6 +166,21 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
                     DiaryLevel.EASY,
                     EasyTasks.EDGEVILLE_ENTER_DUNGEON_SOUTH
                 )
+            }
+        }
+    }
+
+    override fun onButtonClicked(player: Player, event: ButtonClickEvent) {
+        when (player.viewport.region.id) {
+            12342 -> {
+                if (event.iface == Components.CANOE_52
+                    && Canoe.getCanoeFromChild(event.buttonId) == Canoe.WAKA) {
+                    finishTask(
+                        player,
+                        DiaryLevel.HARD,
+                        HardTasks.EDGEVILLE_MAKE_WAKA_CANOE
+                    )
+                }
             }
         }
     }

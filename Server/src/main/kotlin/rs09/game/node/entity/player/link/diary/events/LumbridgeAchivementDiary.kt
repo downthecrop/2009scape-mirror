@@ -36,6 +36,7 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
         private val CASTLE_COURTYARD_AREA = ZoneBorders(3226, 3229, 3217, 3208)
         private val COW_PEN_AREA_1 = ZoneBorders(3253, 3255, 3265, 3297)
         private val COW_PEN_AREA_2 = ZoneBorders(3245, 3278, 3253, 3298)
+        private val WIZARDS_TOWER_TOP_FLOOR_AREA = ZoneBorders(3103, 3155, 3115, 3165, 2)
 
         object BeginnerTasks {
             const val CASTLE_CLIMB_TO_HIGHEST_POINT = 0
@@ -104,6 +105,12 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
             CASTLE_ROOF_AREA,
             DiaryLevel.BEGINNER,
             BeginnerTasks.CASTLE_CLIMB_TO_HIGHEST_POINT
+        ),
+
+        Triple(
+            WIZARDS_TOWER_TOP_FLOOR_AREA,
+            DiaryLevel.BEGINNER,
+            BeginnerTasks.WIZARDS_TOWER_CLIMB_TO_TOP
         )
     )
 
@@ -278,11 +285,12 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
 
     override fun onInteracted(player: Player, event: InteractionEvent) {
         when (player.viewport.region.id) {
-            12337 -> if (event.target.id == 12537) {
+            12337 -> if (event.target.id == Scenery.RAILING_37668
+                         && event.option == "taunt-through") {
                 finishTask(
                     player,
-                    DiaryLevel.BEGINNER,
-                    BeginnerTasks.WIZARDS_TOWER_CLIMB_TO_TOP
+                    DiaryLevel.EASY,
+                    EasyTasks.WIZARDS_TOWER_TAUNT_DEMON
                 )
             }
         }
