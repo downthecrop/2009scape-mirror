@@ -9,6 +9,9 @@ object Event {
     @JvmStatic val FireLit = LitFireEvent::class.java
     @JvmStatic val Interacted = InteractionEvent::class.java
     @JvmStatic val ButtonClicked = ButtonClickEvent::class.java
+    @JvmStatic val DialogueOpened = DialogueOpenEvent::class.java
+    @JvmStatic val DialogueOptionSelected = DialogueOptionSelectionEvent::class.java
+    @JvmStatic val DialogueClosed = DialogueCloseEvent::class.java
     @JvmStatic val UsedWith = UseWithEvent::class.java
     @JvmStatic val SelfDeath = SelfDeathEvent::class.java
     @JvmStatic val Tick = TickEvent::class.java
@@ -20,9 +23,6 @@ object Event {
     @JvmStatic val AttributeRemoved = AttributeRemoveEvent::class.java
     @JvmStatic val SpellCast = SpellCastEvent::class.java
     @JvmStatic val ItemAlchemized = ItemAlchemizationEvent::class.java
-    @JvmStatic val DialogueOpened = DialogueOpenEvent::class.java
-    @JvmStatic val DialogueOptionSelected = DialogueOptionSelectionEvent::class.java
-    @JvmStatic val DialogueClosed = DialogueCloseEvent::class.java
     @JvmStatic val ItemEquipped = ItemEquipEvent::class.java
     @JvmStatic val ItemUnequipped = ItemUnequipEvent::class.java
     @JvmStatic val ItemPurchased = ItemShopPurchaseEvent::class.java

@@ -11,6 +11,7 @@ import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
+import rs09.game.content.dialogue.region.falador.RisingSunInnBartenderDialogue
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 
@@ -140,6 +141,20 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
                         player,
                         DiaryLevel.EASY,
                         EasyTasks.POP_PARTY_BALLOON
+                    )
+                }
+            }
+        }
+    }
+
+    override fun onDialogueOptionSelected(player: Player, event: DialogueOptionSelectionEvent) {
+        when (event.dialogue) {
+            is RisingSunInnBartenderDialogue -> {
+                if (event.currentStage in 12..14) {
+                    finishTask(
+                        player,
+                        DiaryLevel.EASY,
+                        EasyTasks.RISING_SUN_BUY_A_STATBOOST
                     )
                 }
             }
