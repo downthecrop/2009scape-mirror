@@ -546,7 +546,7 @@
   {
     "itemId": "2866",
     "name": "Ogre arrow",
-    "start_graphic": "243,96",
+    "start_graphic": "243,60",
     "darkbow_graphic": "",
     "projectile": "242,40,36,41,46,5,0",
     "poison_damage": "0"

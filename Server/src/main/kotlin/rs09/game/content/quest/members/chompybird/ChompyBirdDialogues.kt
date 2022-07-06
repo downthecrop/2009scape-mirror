@@ -35,6 +35,14 @@ class RantzDialogue(player: Player? = null) : DialoguePlugin(player) {
     val chompyBird = player.questRepository.getQuest("Big Chompy Bird Hunting")
     val chompyStage = chompyBird.getStage(player)
 
+    val hasOgreBow = inInventory(player, Items.OGRE_BOW_2883) || inEquipment(player, Items.OGRE_BOW_2883) || inBank(player, Items.OGRE_BOW_2883)
+
+    if (stage in 60 until 100 && !hasOgreBow) {
+      stage = 201
+      player.dialogueInterpreter.handle(0,0)
+      return true
+    }
+
     when (chompyStage) {
       in 0 until 100 -> loadFile(RantzChompyBirdDialogue(chompyBird))
     }
