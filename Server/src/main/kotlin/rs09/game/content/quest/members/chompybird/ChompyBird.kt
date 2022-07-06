@@ -109,7 +109,7 @@ class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 2, Vars.VARP_QUEST_C
 
   override fun finish(player: Player?) {
     super.finish(player)
-    player :? return
+    player ?: return
 
     var ln = 10
     player.packetDispatch.sendItemZoomOnInterface(Items.OGRE_BOW_2883, 230, 277, 5)
@@ -120,7 +120,7 @@ class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 2, Vars.VARP_QUEST_C
     drawReward(player, "Ability to make Ogre Arrows", ln++)
     rewardXP(player, Skills.FLETCHING, 262.0)
     rewardXP(player, Skills.COOKING, 1470.0)
-    rewardXP(player, Skills.RANGED, 735.0)
+    rewardXP(player, Skills.RANGE, 735.0)
     removeItem(player, Items.SEASONED_CHOMPY_2882)
     removeAttribute(player, ATTR_ING_BUGS)
     removeAttribute(player, ATTR_BUGS_ASKED)

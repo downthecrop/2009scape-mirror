@@ -11,6 +11,7 @@ import core.plugin.Initializable
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.RegionManager
 import core.game.world.map.Location
 import core.tools.RandomFunction
@@ -76,10 +77,29 @@ class BloatedToadNPC : AbstractNPC {
 }
 
 
-class BloatedToadListeners : InteractionListener {
+class BloatedToadListeners : InteractionListener, StartupListener {
+  lateinit var borders: ZoneBorders
+
+  override fun startup() {
+    borders = ZoneBorders(2432, 2944, 2687, 3071)
+    borders.addException(ZoneBorders.forRegion(10287))
+    borders.addException(ZoneBorders.forRegion(10031))
+    borders.addException(ZoneBorders.forRegion(9775))
+  }
+
   override fun defineListeners() {
     on(Items.BLOATED_TOAD_2875, ITEM, "drop") {player, used ->
       val quest = player.questRepository.getQuest("Big Chompy Bird Hunting")
+
+      if (!borders.insideBorder(player)) {
+        sendPlayerDialogue(player, "I probably wouldn't catch many chompies here.")
+        return@on true
+      }
+
+      if (quest.getStage(player) < 30) {
+        sendPlayerDialogue(player, "I don't know what you want from me.")
+        return@on true
+      }
 
       if (quest.getStage(player) in 30..40) {
         if (player.location == Location.create(2635, 2966, 0) || player.location == Location.create(2636, 2966, 0)){
