@@ -25,6 +25,7 @@ import org.rs09.consts.NPCs
 import rs09.game.node.entity.player.info.stats.STATS_BASE
 import rs09.game.node.entity.player.info.stats.STATS_ROCKS
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks
+import rs09.tools.stringtools.*
 
 /**
  * Mining skill pulse
