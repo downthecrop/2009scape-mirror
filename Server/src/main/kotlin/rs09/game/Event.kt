@@ -27,4 +27,5 @@ object Event {
     @JvmStatic val ItemUnequipped = ItemUnequipEvent::class.java
     @JvmStatic val ItemPurchased = ItemShopPurchaseEvent::class.java
     @JvmStatic val ItemSold = ItemShopSellEvent::class.java
+    @JvmStatic val JobAssigned = JobAssignmentEvent::class.java
 }

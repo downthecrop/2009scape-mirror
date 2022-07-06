@@ -1,6 +1,8 @@
+package rs09.game.content.jobs.impl
+
 import core.tools.RandomFunction
 
-enum class SlayingJob(val lower: Int, val upper: Int, vararg val ids: Int) {
+enum class SlayingJobs(val lower: Int, val upper: Int, vararg val ids: Int) {
     CHICKEN(25,26,41,1017),
     COW(25,25,397,1766,81,1767),
     GIANT_SPIDER(22,25,59,60),

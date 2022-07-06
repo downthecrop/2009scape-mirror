@@ -1,8 +1,10 @@
 package rs09.game.content.global.travel
 
+import api.events.TeleportEvent
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
 import core.game.system.task.Pulse
@@ -11,6 +13,7 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
+import rs09.game.node.entity.skill.magic.TeleportMethod
 
 /**
  * Represents a utilitity class for rune essence teleporting.
@@ -20,7 +23,15 @@ object EssenceTeleport {
     /**
      * Array of all the possible `Location` locations.
      */
-    val LOCATIONS = arrayOf(Location.create(2911, 4832, 0), Location.create(2913, 4837, 0), Location.create(2930, 4850, 0), Location.create(2894, 4811, 0), Location.create(2896, 4845, 0), Location.create(2922, 4820, 0), Location.create(2931, 4813, 0))
+    val LOCATIONS = arrayOf(
+        Location.create(2911, 4832, 0),
+        Location.create(2913, 4837, 0),
+        Location.create(2930, 4850, 0),
+        Location.create(2894, 4811, 0),
+        Location.create(2896, 4845, 0),
+        Location.create(2922, 4820, 0),
+        Location.create(2931, 4813, 0)
+    )
 
     /**
      * Represents the animation to use.
@@ -65,16 +76,20 @@ object EssenceTeleport {
                             }
                         }
                         player.savedData.globalData.essenceTeleporter = npc.id
-                        val loc: Location =Location.create(2922, 4820, 0)
+
+                        val loc = LOCATIONS[RandomFunction.random(0, LOCATIONS.size)]
                         player.properties.teleportLocation = loc
 
-                        if (npc.id == 553) {
-                            player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 0, 1)
-                        }
-                        if (npc.id == 300) {
-                            player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 1, 14)
-                        }
+                        player.dispatch(
+                            TeleportEvent(
+                                TeleportManager.TeleportType.TELE_OTHER,
+                                TeleportMethod.NPC,
+                                npc,
+                                loc
+                            )
+                        )
                     }
+
                     3 -> {
                         player.graphics(Graphics(110))
                         player.unlock()

@@ -69,6 +69,7 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
         player.hook(Event.ItemUnequipped, EventHandler(this, ::onItemUnequipped))
         player.hook(Event.ItemPurchased, EventHandler(this, ::onItemPurchasedFromShop))
         player.hook(Event.ItemSold, EventHandler(this, ::onItemSoldToShop))
+        player.hook(Event.JobAssigned, EventHandler(this, ::onJobAssigned))
     }
 
     protected fun fulfillTaskRequirement(player: Player, level: DiaryLevel, task: Int, attribute: String) {
@@ -189,4 +190,5 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
     protected open fun onItemUnequipped(player: Player, event: ItemUnequipEvent) {}
     protected open fun onItemPurchasedFromShop(player: Player, event: ItemShopPurchaseEvent) {}
     protected open fun onItemSoldToShop(player: Player, event: ItemShopSellEvent) {}
+    protected open fun onJobAssigned(player: Player, event: JobAssignmentEvent) {}
 }

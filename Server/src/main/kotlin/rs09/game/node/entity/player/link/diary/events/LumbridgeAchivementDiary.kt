@@ -2,6 +2,7 @@ package rs09.game.node.entity.player.link.diary.events
 
 import api.events.*
 import api.inBorders
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.world.map.zone.ZoneBorders
@@ -10,8 +11,10 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import rs09.game.content.dialogue.region.lumbridge.DukeHoracioDialogue
+import rs09.game.content.jobs.JobType
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
+import rs09.game.node.entity.skill.magic.TeleportMethod
 import rs09.game.node.entity.skill.magic.spellconsts.Modern
 
 class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
@@ -109,82 +112,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
                     DiaryLevel.BEGINNER,
                     BeginnerTasks.CASTLE_CLIMB_TO_HIGHEST_POINT
                 )
-            }
-        }
-    }
-
-    override fun onAttributeRemoved(player: Player, event: AttributeRemoveEvent) {
-        when (event.attribute) {
-            "gc:flying" -> {
-                finishTask(
-                    player,
-                    DiaryLevel.MEDIUM,
-                    MediumTasks.RIDE_GNOMECOPTER
-                )
-            }
-        }
-    }
-
-    override fun onInterfaceOpened(player: Player, event: InterfaceOpenEvent) {
-        when (player.viewport.region.id) {
-            12338 -> if (event.component.id == Components.BANK_V2_MAIN_762) {
-                finishTask(
-                    player,
-                    DiaryLevel.EASY,
-                    EasyTasks.DRAYNOR_ACCESS_BANK
-                )
-            }
-
-            12850 -> if (event.component.id == Components.SHOP_TEMPLATE_620) {
-                finishTask(
-                    player,
-                    DiaryLevel.BEGINNER,
-                    BeginnerTasks.BROWSE_GENERAL_STORE
-                )
-            }
-        }
-    }
-
-    override fun onInteracted(player: Player, event: InteractionEvent) {
-        when (player.viewport.region.id) {
-            12337 -> if (event.target.id == 12537) {
-                finishTask(
-                    player,
-                    DiaryLevel.BEGINNER,
-                    BeginnerTasks.WIZARDS_TOWER_CLIMB_TO_TOP
-                )
-            }
-        }
-    }
-
-    override fun onDialogueOpened(player: Player, event: DialogueOpenEvent) {
-        if (event.dialogue is DukeHoracioDialogue) {
-            finishTask(
-                player,
-                DiaryLevel.BEGINNER,
-                BeginnerTasks.CASTLE_SPEAK_TO_DUKE_HORACIO
-            )
-        }
-    }
-
-    override fun onFireLit(player: Player, event: LitFireEvent) {
-        when (player.viewport.region.id) {
-            12593, 12849 -> if (event.logId == Items.LOGS_1511) {
-                finishTask(
-                    player,
-                    DiaryLevel.EASY,
-                    EasyTasks.SWAMP_LIGHT_NORMAL_LOGS
-                )
-            }
-
-            12850 -> if (event.logId == Items.WILLOW_LOGS_1519) {
-                if (inBorders(player, CASTLE_COURTYARD_AREA)) {
-                    finishTask(
-                        player,
-                        DiaryLevel.MEDIUM,
-                        MediumTasks.CASTLE_LIGHT_WILLOW_LOGS
-                    )
-                }
             }
         }
     }
@@ -304,23 +231,6 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
         }
     }
 
-    override fun onPickedUp(player: Player, event: PickUpEvent) {
-        when (player.viewport.region.id) {
-            12850, 12851 -> {
-                if (event.itemId == Items.COWHIDE_1739) {
-                    if (inBorders(player, COW_PEN_AREA_1)
-                        || inBorders(player, COW_PEN_AREA_2)) {
-                        finishTask(
-                            player,
-                            DiaryLevel.EASY,
-                            EasyTasks.COWFIELD_OBTAIN_COW_HIDE
-                        )
-                    }
-                }
-            }
-        }
-    }
-
     override fun onNpcKilled(player: Player, event: NPCKillEvent) {
         when (player.viewport.region.id) {
             12593, 12849 -> if (event.npc.id == NPCs.GIANT_RAT_86) {
@@ -341,6 +251,111 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
         }
     }
 
+    override fun onTeleported(player: Player, event: TeleportEvent) {
+        when (event.source) {
+            is NPC -> if (event.method == TeleportMethod.NPC && event.source.id == NPCs.SEDRIDOR_300) {
+                finishTask(
+                    player,
+                    DiaryLevel.EASY,
+                    EasyTasks.WIZARDS_TOWER_TELEPORT_ESSENCE_MINE
+                )
+            }
+        }
+    }
+
+    override fun onFireLit(player: Player, event: LitFireEvent) {
+        when (player.viewport.region.id) {
+            12593, 12849 -> if (event.logId == Items.LOGS_1511) {
+                finishTask(
+                    player,
+                    DiaryLevel.EASY,
+                    EasyTasks.SWAMP_LIGHT_NORMAL_LOGS
+                )
+            }
+
+            12850 -> if (event.logId == Items.WILLOW_LOGS_1519) {
+                if (inBorders(player, CASTLE_COURTYARD_AREA)) {
+                    finishTask(
+                        player,
+                        DiaryLevel.MEDIUM,
+                        MediumTasks.CASTLE_LIGHT_WILLOW_LOGS
+                    )
+                }
+            }
+        }
+    }
+
+    override fun onInteracted(player: Player, event: InteractionEvent) {
+        when (player.viewport.region.id) {
+            12337 -> if (event.target.id == 12537) {
+                finishTask(
+                    player,
+                    DiaryLevel.BEGINNER,
+                    BeginnerTasks.WIZARDS_TOWER_CLIMB_TO_TOP
+                )
+            }
+        }
+    }
+
+    override fun onAttributeRemoved(player: Player, event: AttributeRemoveEvent) {
+        when (event.attribute) {
+            "gc:flying" -> {
+                finishTask(
+                    player,
+                    DiaryLevel.MEDIUM,
+                    MediumTasks.RIDE_GNOMECOPTER
+                )
+            }
+        }
+    }
+
+    override fun onDialogueOpened(player: Player, event: DialogueOpenEvent) {
+        if (event.dialogue is DukeHoracioDialogue) {
+            finishTask(
+                player,
+                DiaryLevel.BEGINNER,
+                BeginnerTasks.CASTLE_SPEAK_TO_DUKE_HORACIO
+            )
+        }
+    }
+
+    override fun onPickedUp(player: Player, event: PickUpEvent) {
+        when (player.viewport.region.id) {
+            12850, 12851 -> {
+                if (event.itemId == Items.COWHIDE_1739) {
+                    if (inBorders(player, COW_PEN_AREA_1)
+                        || inBorders(player, COW_PEN_AREA_2)) {
+                        finishTask(
+                            player,
+                            DiaryLevel.EASY,
+                            EasyTasks.COWFIELD_OBTAIN_COW_HIDE
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onInterfaceOpened(player: Player, event: InterfaceOpenEvent) {
+        when (player.viewport.region.id) {
+            12338 -> if (event.component.id == Components.BANK_V2_MAIN_762) {
+                finishTask(
+                    player,
+                    DiaryLevel.EASY,
+                    EasyTasks.DRAYNOR_ACCESS_BANK
+                )
+            }
+
+            12850 -> if (event.component.id == Components.SHOP_TEMPLATE_620) {
+                finishTask(
+                    player,
+                    DiaryLevel.BEGINNER,
+                    BeginnerTasks.BROWSE_GENERAL_STORE
+                )
+            }
+        }
+    }
+
     override fun onSpellCast(player: Player, event: SpellCastEvent) {
         when (event.spellId) {
             Modern.LUMBRIDGE_TELEPORT -> {
@@ -348,6 +363,18 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
                     player,
                     DiaryLevel.MEDIUM,
                     MediumTasks.CAST_LUMBRIDGE_TELEPORT
+                )
+            }
+        }
+    }
+
+    override fun onJobAssigned(player: Player, event: JobAssignmentEvent) {
+        when (player.viewport.region.id) {
+            12849 -> if (event.employerNpc.id == NPCs.FISHING_TUTOR_4901) {
+                finishTask(
+                    player,
+                    DiaryLevel.BEGINNER,
+                    BeginnerTasks.SWAMP_FISHING_TUTOR_GET_A_JOB
                 )
             }
         }

@@ -2,15 +2,18 @@ package rs09.game.node.entity.player.link.diary.events
 
 import api.events.*
 import api.inBorders
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Components
 import org.rs09.consts.Items
+import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import rs09.game.content.dialogue.region.varrock.ElsieDialogue
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
+import rs09.game.node.entity.skill.magic.TeleportMethod
 import rs09.game.node.entity.skill.magic.spellconsts.Modern
 
 class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
@@ -108,45 +111,6 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
         }
     }
 
-    override fun onInterfaceOpened(player: Player, event: InterfaceOpenEvent) {
-        when (event.component.id) {
-            Components.THESSALIA_CLOTHES_MALE_591,
-            Components.THESSALIA_CLOTHES_FEMALE_594 -> {
-                finishTask(
-                    player,
-                    DiaryLevel.EASY,
-                    EasyTasks.THESSALIA_BROWSE_CLOTHES
-                )
-            }
-        }
-    }
-
-    override fun onInteracted(player: Player, event: InteractionEvent) {
-        when (player.viewport.region.id) {
-            12342 -> {
-                if (event.target.id == 26934) {
-                    finishTask(
-                        player,
-                        DiaryLevel.EASY,
-                        EasyTasks.EDGEVILLE_ENTER_DUNGEON_SOUTH
-                    )
-                }
-            }
-        }
-    }
-
-    override fun onDialogueOptionSelected(player: Player, event: DialogueOptionSelectionEvent) {
-        when (event.dialogue) {
-            is ElsieDialogue -> if (event.currentStage == 12) {
-                finishTask(
-                    player,
-                    DiaryLevel.EASY,
-                    EasyTasks.ELSIE_TELL_A_STORY
-                )
-            }
-        }
-    }
-
     override fun onResourceProduced(player: Player, event: ResourceProducedEvent) {
         when (player.viewport.region.id) {
             12341 -> if (event.itemId == Items.RAW_TROUT_335) {
@@ -182,6 +146,55 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
                     player,
                     DiaryLevel.EASY,
                     EasyTasks.PATERDOMUS_MINE_LIMESTONE
+                )
+            }
+        }
+    }
+
+    override fun onTeleported(player: Player, event: TeleportEvent) {
+        when (event.source) {
+            is NPC -> if (event.method == TeleportMethod.NPC && event.source.id == NPCs.AUBURY_553) {
+                finishTask(
+                    player,
+                    DiaryLevel.EASY,
+                    EasyTasks.AUBURY_TELEPORT_ESSENCE_MINE
+                )
+            }
+        }
+    }
+
+    override fun onInteracted(player: Player, event: InteractionEvent) {
+        when (player.viewport.region.id) {
+            12342 -> if (event.target.id == 26934) {
+                finishTask(
+                    player,
+                    DiaryLevel.EASY,
+                    EasyTasks.EDGEVILLE_ENTER_DUNGEON_SOUTH
+                )
+            }
+        }
+    }
+
+    override fun onDialogueOptionSelected(player: Player, event: DialogueOptionSelectionEvent) {
+        when (event.dialogue) {
+            is ElsieDialogue -> if (event.currentStage == 12) {
+                finishTask(
+                    player,
+                    DiaryLevel.EASY,
+                    EasyTasks.ELSIE_TELL_A_STORY
+                )
+            }
+        }
+    }
+
+    override fun onInterfaceOpened(player: Player, event: InterfaceOpenEvent) {
+        when (event.component.id) {
+            Components.THESSALIA_CLOTHES_MALE_591,
+            Components.THESSALIA_CLOTHES_FEMALE_594 -> {
+                finishTask(
+                    player,
+                    DiaryLevel.EASY,
+                    EasyTasks.THESSALIA_BROWSE_CLOTHES
                 )
             }
         }
