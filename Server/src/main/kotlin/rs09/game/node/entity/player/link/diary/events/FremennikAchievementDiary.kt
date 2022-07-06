@@ -1,13 +1,17 @@
 package rs09.game.node.entity.player.link.diary.events
 
 import api.events.*
+import api.inBorders
+import api.teleport
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
+import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import rs09.game.content.dialogue.region.barbarianassault.CaptainCainDialogue
 import rs09.game.content.dialogue.region.rellekka.HuntingExpertRellekkaDialogue
+import rs09.game.interaction.inter.FairyRing
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 
@@ -17,6 +21,8 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
         private const val ATTRIBUTE_ROCK_CRAB_KILLCOUNT = "diary:fremennik:rock-crabs-killed"
         private const val ATTRIBUTE_BARBARIAN_FISHING_TRAINING = "barbtraining:fishing"
         private const val ATTRIBUTE_BARBARIAN_HUNTING_TRAINING = "barbtraining:hunting"
+
+        private val WINDSWEPT_TREE_AREA = ZoneBorders(2740, 3718, 2750, 3737)
 
         private val FISHING_SPOTS = arrayOf(
             NPCs.FISHING_SPOT_309, NPCs.FISHING_SPOT_334,
@@ -53,7 +59,7 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
             const val CHARM_FOSSEGRIMEN_RAW_BASS = 4
             const val KILL_ICE_TROLL_WHILE_WEARING_YAK_ARMOR = 5
             const val MAKE_CHEESE_WITH_CHURN = 6
-            const val USE_FAIRY_RING_TELE_MOUNTAINTOP = 7
+            const val DIAL_FAIRY_RING_MOUNTAINTOP = 7
             const val BROWSE_BOOT_COLORS_YRSA = 8
             const val HUNT_SABRE_TOOTHED_KYATT = 9
             const val STEAL_FISH_FROM_STALL = 10
@@ -71,6 +77,14 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
             const val GET_MAHOGANY_FROM_ETCETERIA = 8
         }
     }
+
+    override val areaDefinitions get() = arrayOf(
+         Triple(
+            WINDSWEPT_TREE_AREA,
+            DiaryLevel.EASY,
+            EasyTasks.MAINLAND_FIND_HIGHEST_TREE
+        )
+    )
 
     override fun onAttributeSet(player: Player, event: AttributeSetEvent) {
         when (event.attribute) {
@@ -91,7 +105,8 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
     override fun onInteracted(player: Player, event: InteractionEvent) {
         when (player.viewport.region.id) {
             10552 -> if (event.option == "renew-points"
-                        && event.target.id == Scenery.SMALL_OBELISK_29944) {
+                && event.target.id == Scenery.SMALL_OBELISK_29944
+            ) {
                 finishTask(
                     player,
                     DiaryLevel.EASY,
@@ -174,6 +189,16 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
                     3
                 )
             }
+        }
+    }
+
+    override fun onFairyRingDialed(player: Player, event: FairyRingDialEvent) {
+        if (event.fairyRing == FairyRing.DKS) {
+            finishTask(
+                player,
+                DiaryLevel.MEDIUM,
+                MediumTasks.DIAL_FAIRY_RING_MOUNTAINTOP
+            )
         }
     }
 }

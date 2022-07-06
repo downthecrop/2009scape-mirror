@@ -1,10 +1,7 @@
 package rs09.game.node.entity.player.link.diary
 
-import api.LoginListener
-import api.MapArea
+import api.*
 import api.events.*
-import api.getAttribute
-import api.setAttribute
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
@@ -13,7 +10,7 @@ import rs09.game.Event
 
 abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, LoginListener {
     protected companion object {
-        private fun<T> forEligibleEntityDo(entity: Entity, event: T, handler: (Player, T) -> Unit) {
+        private fun <T> forEligibleEntityDo(entity: Entity, event: T, handler: (Player, T) -> Unit) {
             if (entity !is Player) return
             if (entity.isArtificial) return
 
@@ -30,9 +27,10 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
         }
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf()
-    }
+    open val areaDefinitions get() = arrayOf<Triple<ZoneBorders, DiaryLevel, Int>>()
+
+    final override fun defineAreaBorders(): Array<ZoneBorders>
+        = areaDefinitions.map { def -> def.first }.toTypedArray()
 
     final override fun areaEnter(entity: Entity) {
         if (entity !is Player) return
@@ -70,6 +68,7 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
         player.hook(Event.ItemPurchased, EventHandler(this, ::onItemPurchasedFromShop))
         player.hook(Event.ItemSold, EventHandler(this, ::onItemSoldToShop))
         player.hook(Event.JobAssigned, EventHandler(this, ::onJobAssigned))
+        player.hook(Event.FairyRingDialed, EventHandler(this, ::onFairyRingDialed))
     }
 
     protected fun fulfillTaskRequirement(player: Player, level: DiaryLevel, task: Int, attribute: String) {
@@ -92,7 +91,13 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
         }
     }
 
-    protected fun progressIncrementalTask(player: Player, level: DiaryLevel, task: Int, attribute: String, maxProgress: Int) {
+    protected fun progressIncrementalTask(
+        player: Player,
+        level: DiaryLevel,
+        task: Int,
+        attribute: String,
+        maxProgress: Int
+    ) {
         if (isTaskCompleted(player, level, task)) return
 
         val newValue = getAttribute(player, attribute, 0) + 1
@@ -116,7 +121,14 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
         }
     }
 
-    protected fun progressFlaggedTask(player: Player, level: DiaryLevel, task: Int, attribute: String, bit: Int, targetValue: Int) {
+    protected fun progressFlaggedTask(
+        player: Player,
+        level: DiaryLevel,
+        task: Int,
+        attribute: String,
+        bit: Int,
+        targetValue: Int
+    ) {
         if (isTaskCompleted(player, level, task)) return
 
         val newValue = getAttribute(player, attribute, 0) + 1
@@ -168,7 +180,18 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
         return levelIndex
     }
 
-    protected open fun onAreaVisited(player: Player) {}
+    protected open fun onAreaVisited(player: Player) {
+        for (area in areaDefinitions) {
+            if (inBorders(player, area.first)) {
+                finishTask(
+                    player,
+                    area.second,
+                    area.third
+                )
+            }
+        }
+    }
+
     protected open fun onAreaLeft(player: Player) {}
     protected open fun onResourceProduced(player: Player, event: ResourceProducedEvent) {}
     protected open fun onNpcKilled(player: Player, event: NPCKillEvent) {}
@@ -191,4 +214,5 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
     protected open fun onItemPurchasedFromShop(player: Player, event: ItemShopPurchaseEvent) {}
     protected open fun onItemSoldToShop(player: Player, event: ItemShopSellEvent) {}
     protected open fun onJobAssigned(player: Player, event: JobAssignmentEvent) {}
+    protected open fun onFairyRingDialed(player: Player, event: FairyRingDialEvent) {}
 }

@@ -99,23 +99,13 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
         }
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(
-            CASTLE_ROOF_AREA
+    override val areaDefinitions get() = arrayOf(
+        Triple(
+            CASTLE_ROOF_AREA,
+            DiaryLevel.BEGINNER,
+            BeginnerTasks.CASTLE_CLIMB_TO_HIGHEST_POINT
         )
-    }
-
-    override fun onAreaVisited(player: Player) {
-        when {
-            inBorders(player, CASTLE_ROOF_AREA) -> {
-                finishTask(
-                    player,
-                    DiaryLevel.BEGINNER,
-                    BeginnerTasks.CASTLE_CLIMB_TO_HIGHEST_POINT
-                )
-            }
-        }
-    }
+    )
 
     override fun onResourceProduced(player: Player, event: ResourceProducedEvent) {
         when (player.viewport.region.id) {

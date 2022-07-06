@@ -17,8 +17,8 @@ class BonesOnStrayDog : InteractionListener {
             if(removeItem(player, used.asItem())){
                 sendMessage(player, "You feed your dog bones.")
                 sendChat(with.asNpc(), "Woof")
-                player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 0, 8)
             }
+
             return@onUseWith true
         }
     }

@@ -1,6 +1,7 @@
 package rs09.game.interaction.inter
 
 import api.*
+import api.events.FairyRingDialEvent
 import core.game.component.Component
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.player.Player
@@ -138,22 +139,11 @@ class FairyRingInterface : InterfaceListener{
             }
         }
         closeInterface(player)
-        if(ring == FairyRing.ALS && !player.achievementDiaryManager.hasCompletedTask(DiaryType.SEERS_VILLAGE,2,4)){
-            player.achievementDiaryManager.finishTask(player,DiaryType.SEERS_VILLAGE,2,4)
+
+        ring.let {
+            player.dispatch(FairyRingDialEvent(it!!))
             teleport(player, tile!!, TeleportManager.TeleportType.FAIRY_RING)
         }
-        else if(ring == FairyRing.DKS && !player.achievementDiaryManager.hasCompletedTask(DiaryType.FREMENNIK,1,7)){
-            player.achievementDiaryManager.finishTask(player,DiaryType.FREMENNIK,1,7)
-            teleport(player, tile!!, TeleportManager.TeleportType.FAIRY_RING)
-        }
-        else if(ring == FairyRing.AIQ && !player.achievementDiaryManager.hasCompletedTask(DiaryType.FALADOR,2,4)){
-            player.achievementDiaryManager.finishTask(player,DiaryType.FALADOR,2,4)
-            teleport(player, tile!!, TeleportManager.TeleportType.FAIRY_RING)
-        }
-        else if(ring == FairyRing.DKR && !player.achievementDiaryManager.hasCompletedTask(DiaryType.VARROCK,1,19)){
-            player.achievementDiaryManager.finishTask(player,DiaryType.VARROCK,1,19)
-            teleport(player, tile!!, TeleportManager.TeleportType.FAIRY_RING)
-        }else teleport(player, tile!!, TeleportManager.TeleportType.FAIRY_RING)
     }
 }
 

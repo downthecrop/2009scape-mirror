@@ -9,6 +9,8 @@ import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
+import org.rs09.consts.Scenery
+import rs09.game.interaction.inter.FairyRing
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 
@@ -20,9 +22,11 @@ class SeersVillageAchivementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) 
         private const val ATTRIBUTE_SHARK_COOKED_COUNT = "diary:seers:shark-cooked"
         private const val ATTRIBUTE_ELEMENTAL_KILL_FLAGS = "diary:seers:elemental-kills"
         private const val ATTRIBUTE_ARCHER_KILL_FLAGS = "diary:seers:archer-kills"
+        private const val ATTRIBUTE_COAL_TRUCK_FULL = "diary:seers:coal-truck-full"
 
         private val SEERS_VILLAGE_AREA = ZoneBorders(2687, 3455, 2742, 3507)
         private val SEERS_BANK_AREA = ZoneBorders(2721, 3490, 2730, 3493)
+        private val SEERS_COAL_TRUCKS_AREA = ZoneBorders(2690, 3502, 2699, 3508)
 
         private val RANGING_GUILD_LOCATION = Location(2657, 3439)
 
@@ -77,27 +81,13 @@ class SeersVillageAchivementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) 
             const val CUT_5_YEW_LOGS = 1
             const val FLETCH_MAGIC_SHORTBOW_INSIDE_BANK = 2
             const val ENTER_SEERS_COURTHOUSE_WITH_PIETY = 3
-            const val MCGRUBORS_WOOD_USE_FAIRY_RING = 4
+            const val DIAL_FAIRY_RING_MCGRUBORS_WOOD = 4
             const val LIGHT_MAGIC_LOG = 5
             const val HIGH_ALCH_MAGIC_SHORTBOW_INSIDE_BANK = 6
             const val CATHERBY_CATCH_5_SHARKS = 7
             const val CATHERBY_COOK_5_SHARKS_WITH_COOKING_GAUNTLETS = 8
             const val CHARGE_5_WATER_ORBS_AT_ONCE = 9
             const val GRAPPLE_FROM_WATER_OBELISK_TO_CATHERBY_SHORE = 10
-        }
-    }
-
-    override fun onFireLit(player: Player, event: LitFireEvent) {
-        when {
-            inBorders(player, SEERS_VILLAGE_AREA) -> {
-                if (event.logId == Items.MAGIC_LOGS_1513) {
-                    finishTask(
-                        player,
-                        DiaryLevel.HARD,
-                        HardTasks.LIGHT_MAGIC_LOG
-                    )
-                }
-            }
         }
     }
 
@@ -208,6 +198,53 @@ class SeersVillageAchivementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) 
         }
     }
 
+    override fun onFireLit(player: Player, event: LitFireEvent) {
+        when {
+            inBorders(player, SEERS_VILLAGE_AREA) -> {
+                if (event.logId == Items.MAGIC_LOGS_1513) {
+                    finishTask(
+                        player,
+                        DiaryLevel.HARD,
+                        HardTasks.LIGHT_MAGIC_LOG
+                    )
+                }
+            }
+        }
+    }
+
+    override fun onInteracted(player: Player, event: InteractionEvent) {
+        when {
+            inBorders(player, SEERS_COAL_TRUCKS_AREA) -> {
+                whenTaskRequirementFulfilled(player, ATTRIBUTE_COAL_TRUCK_FULL) {
+                    if (event.option == "remove-coal") {
+                        finishTask(
+                            player,
+                            DiaryLevel.MEDIUM,
+                            MediumTasks.TRANSPORT_FULL_LOAD_OF_COAL
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onAttributeSet(player: Player, event: AttributeSetEvent) {
+        when (event.attribute) {
+            "/save:coal-truck-inventory" -> {
+                if (event.value !is Int) return
+
+                if (event.value >= 120) {
+                    fulfillTaskRequirement(
+                        player,
+                        DiaryLevel.MEDIUM,
+                        MediumTasks.TRANSPORT_FULL_LOAD_OF_COAL,
+                        ATTRIBUTE_COAL_TRUCK_FULL
+                    )
+                }
+            }
+        }
+    }
+
     override fun onItemAlchemized(player: Player, event: ItemAlchemizationEvent) {
         if (inBorders(player, SEERS_BANK_AREA)) {
             if (event.itemId == Items.MAGIC_SHORTBOW_861 && event.isHigh) {
@@ -217,6 +254,16 @@ class SeersVillageAchivementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) 
                     HardTasks.HIGH_ALCH_MAGIC_SHORTBOW_INSIDE_BANK
                 )
             }
+        }
+    }
+
+    override fun onFairyRingDialed(player: Player, event: FairyRingDialEvent) {
+        if (event.fairyRing == FairyRing.ALS) {
+            finishTask(
+                player,
+                DiaryLevel.HARD,
+                HardTasks.DIAL_FAIRY_RING_MCGRUBORS_WOOD
+            )
         }
     }
 }

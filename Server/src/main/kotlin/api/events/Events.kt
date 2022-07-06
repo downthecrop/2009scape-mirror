@@ -10,6 +10,7 @@ import core.game.node.entity.player.link.TeleportManager.TeleportType
 import core.game.node.item.Item
 import core.game.world.map.Location
 import rs09.game.content.jobs.JobType
+import rs09.game.interaction.inter.FairyRing
 import rs09.game.node.entity.skill.magic.TeleportMethod
 
 data class ResourceProducedEvent(val itemId: Int, val amount: Int, val source: Node, val original: Int = -1) : Event
@@ -36,4 +37,5 @@ data class ItemUnequipEvent(val itemId: Int, val slotId: Int) : Event
 data class ItemShopPurchaseEvent(val itemId: Int, val amount: Int, val currency: Item) : Event
 data class ItemShopSellEvent(val itemId: Int, val amount: Int, val currency: Item) : Event
 data class JobAssignmentEvent(val jobType: JobType, val employerNpc: NPC) : Event
+data class FairyRingDialEvent(val fairyRing: FairyRing) : Event
 data class VarbitUpdateEvent(val offset: Int, val value: Int) : Event

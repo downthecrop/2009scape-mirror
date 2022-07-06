@@ -4,6 +4,7 @@ import api.areEquipped
 import api.events.*
 import api.inBorders
 import api.setAttribute
+import api.teleport
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.world.map.zone.Zone
@@ -12,6 +13,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import rs09.game.content.dialogue.region.falador.RisingSunInnBartenderDialogue
+import rs09.game.interaction.inter.FairyRing
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 
@@ -95,43 +97,26 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
         }
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(
-            MINING_GUILD_AREA,
-            DARK_WIZARDS_TOWER_ROOF_AREA,
-            WHITE_KNIGHTS_CASTLE_ROOF_AREA
+    override val areaDefinitions
+        get() = arrayOf(
+            Triple(
+                MINING_GUILD_AREA,
+                DiaryLevel.HARD,
+                HardTasks.ENTER_MINING_GUILD
+            ),
+
+            Triple(
+                DARK_WIZARDS_TOWER_ROOF_AREA,
+                DiaryLevel.HARD,
+                HardTasks.DARK_WIZARDS_TOWER_ASCEND_IN_FULL_PROSELYTE_ARMOR
+            ),
+
+            Triple(
+                WHITE_KNIGHTS_CASTLE_ROOF_AREA,
+                DiaryLevel.EASY,
+                EasyTasks.WHITE_KNIGHTS_CASTLE_CLIMB_TO_TOP
+            )
         )
-    }
-
-    override fun onAreaVisited(player: Player) {
-        when {
-            inBorders(player, MINING_GUILD_AREA) -> {
-                finishTask(
-                    player,
-                    DiaryLevel.HARD,
-                    HardTasks.ENTER_MINING_GUILD
-                )
-            }
-
-            inBorders(player, DARK_WIZARDS_TOWER_ROOF_AREA) -> {
-                if (areEquipped(player, *PROSELYTE_FULL_ARMOR)) {
-                    finishTask(
-                        player,
-                        DiaryLevel.HARD,
-                        HardTasks.DARK_WIZARDS_TOWER_ASCEND_IN_FULL_PROSELYTE_ARMOR
-                    )
-                }
-            }
-
-            inBorders(player, WHITE_KNIGHTS_CASTLE_ROOF_AREA) -> {
-                finishTask(
-                    player,
-                    DiaryLevel.EASY,
-                    EasyTasks.WHITE_KNIGHTS_CASTLE_CLIMB_TO_TOP
-                )
-            }
-        }
-    }
 
     override fun onInteracted(player: Player, event: InteractionEvent) {
         when (player.viewport.region.id) {
@@ -229,6 +214,16 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
                     )
                 }
             }
+        }
+    }
+
+    override fun onFairyRingDialed(player: Player, event: FairyRingDialEvent) {
+        if (event.fairyRing == FairyRing.AIQ) {
+            finishTask(
+                player,
+                DiaryLevel.HARD,
+                HardTasks.DIAL_FAIRY_RING_MUDSKIPPER_POINT
+            )
         }
     }
 }

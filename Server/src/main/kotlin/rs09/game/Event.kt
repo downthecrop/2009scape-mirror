@@ -28,4 +28,5 @@ object Event {
     @JvmStatic val ItemPurchased = ItemShopPurchaseEvent::class.java
     @JvmStatic val ItemSold = ItemShopSellEvent::class.java
     @JvmStatic val JobAssigned = JobAssignmentEvent::class.java
+    @JvmStatic val FairyRingDialed = FairyRingDialEvent::class.java
 }
