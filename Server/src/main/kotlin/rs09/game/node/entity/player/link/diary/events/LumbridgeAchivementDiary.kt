@@ -12,6 +12,7 @@ import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import rs09.game.content.dialogue.region.lumbridge.DukeHoracioDialogue
 import rs09.game.content.jobs.JobType
+import rs09.game.content.quest.free.dragonslayer.DukeHoracioDSDialogue
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 import rs09.game.node.entity.skill.magic.TeleportMethod
@@ -316,6 +317,20 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
                 DiaryLevel.BEGINNER,
                 BeginnerTasks.CASTLE_SPEAK_TO_DUKE_HORACIO
             )
+        }
+    }
+
+    override fun onDialogueOptionSelected(player: Player, event: DialogueOptionSelectionEvent) {
+        when (event.dialogue) {
+            is DukeHoracioDSDialogue -> {
+                if (event.currentStage == 12) {
+                    finishTask(
+                        player,
+                        DiaryLevel.MEDIUM,
+                        MediumTasks.CASTLE_OBTAIN_ANTIDRAGON_SHIELD
+                    )
+                }
+            }
         }
     }
 
