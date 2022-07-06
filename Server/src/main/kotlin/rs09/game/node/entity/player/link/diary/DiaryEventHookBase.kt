@@ -11,7 +11,7 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.world.map.zone.ZoneBorders
 import rs09.game.Event
 
-abstract class DiaryEventHookBase(val diaryType: DiaryType) : MapArea, LoginListener {
+abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, LoginListener {
     protected companion object {
         private fun<T> forEligibleEntityDo(entity: Entity, event: T, handler: (Player, T) -> Unit) {
             if (entity !is Player) return
@@ -21,99 +21,12 @@ abstract class DiaryEventHookBase(val diaryType: DiaryType) : MapArea, LoginList
         }
     }
 
-    class ResourceProductionEvents(val owner: DiaryEventHookBase) : EventHook<ResourceProducedEvent> {
-        override fun process(entity: Entity, event: ResourceProducedEvent) {
-            forEligibleEntityDo(entity, event, owner::onResourceProduced)
-        }
-    }
-
-    class NPCKillEvents(val owner: DiaryEventHookBase) : EventHook<NPCKillEvent> {
-        override fun process(entity: Entity, event: NPCKillEvent) {
-            forEligibleEntityDo(entity, event, owner::onNpcKilled)
-        }
-    }
-
-    class TeleportEvents(val owner: DiaryEventHookBase) : EventHook<TeleportEvent> {
-        override fun process(entity: Entity, event: TeleportEvent) {
-            forEligibleEntityDo(entity, event, owner::onTeleported)
-        }
-    }
-
-    class FiremakingEvents(val owner: DiaryEventHookBase) : EventHook<LitFireEvent> {
-        override fun process(entity: Entity, event: LitFireEvent) {
-            forEligibleEntityDo(entity, event, owner::onFireLit)
-        }
-    }
-
-    class InteractionEvents(val owner: DiaryEventHookBase) : EventHook<InteractionEvent> {
-        override fun process(entity: Entity, event: InteractionEvent) {
-            forEligibleEntityDo(entity, event, owner::onInteracted)
-        }
-    }
-
-    class ButtonClickEvents(val owner: DiaryEventHookBase) : EventHook<ButtonClickEvent> {
-        override fun process(entity: Entity, event: ButtonClickEvent) {
-            forEligibleEntityDo(entity, event, owner::onButtonClicked)
-        }
-    }
-
-    class DialogueOpenEvents(val owner: DiaryEventHookBase) : EventHook<DialogueOpenEvent> {
-        override fun process(entity: Entity, event: DialogueOpenEvent) {
-            forEligibleEntityDo(entity, event, owner::onDialogueOpened)
-        }
-    }
-
-    class DialogueCloseEvents(val owner: DiaryEventHookBase) : EventHook<DialogueCloseEvent> {
-        override fun process(entity: Entity, event: DialogueCloseEvent) {
-            forEligibleEntityDo(entity, event, owner::onDialogueClosed)
-        }
-    }
-
-    class DialogueOptionSelectionEvents(val owner: DiaryEventHookBase) : EventHook<DialogueOptionSelectionEvent> {
-        override fun process(entity: Entity, event: DialogueOptionSelectionEvent) {
-            forEligibleEntityDo(entity, event, owner::onDialogueOptionSelected)
-        }
-    }
-
-    class UseWithEvents(val owner: DiaryEventHookBase) : EventHook<UseWithEvent> {
-        override fun process(entity: Entity, event: UseWithEvent) {
-            forEligibleEntityDo(entity, event, owner::onUsedWith)
-        }
-    }
-
-    class PickUpEvents(val owner: DiaryEventHookBase) : EventHook<PickUpEvent> {
-        override fun process(entity: Entity, event: PickUpEvent) {
-            forEligibleEntityDo(entity, event, owner::onPickedUp)
-        }
-    }
-
-    class InterfaceOpenEvents(val owner: DiaryEventHookBase) : EventHook<InterfaceOpenEvent> {
-        override fun process(entity: Entity, event: InterfaceOpenEvent) {
-            forEligibleEntityDo(entity, event, owner::onInterfaceOpened)
-        }
-    }
-
-    class AttributeSetEvents(val owner: DiaryEventHookBase) : EventHook<AttributeSetEvent> {
-        override fun process(entity: Entity, event: AttributeSetEvent) {
-            forEligibleEntityDo(entity, event, owner::onAttributeSet)
-        }
-    }
-
-    class AttributeRemoveEvents(val owner: DiaryEventHookBase) : EventHook<AttributeRemoveEvent> {
-        override fun process(entity: Entity, event: AttributeRemoveEvent) {
-            forEligibleEntityDo(entity, event, owner::onAttributeRemoved)
-        }
-    }
-
-    class SpellCastEvents(val owner: DiaryEventHookBase) : EventHook<SpellCastEvent> {
-        override fun process(entity: Entity, event: SpellCastEvent) {
-            forEligibleEntityDo(entity, event, owner::onSpellCast)
-        }
-    }
-
-    class ItemAlchemizationEvents(val owner: DiaryEventHookBase) : EventHook<ItemAlchemizationEvent> {
-        override fun process(entity: Entity, event: ItemAlchemizationEvent) {
-            forEligibleEntityDo(entity, event, owner::onItemAlchemized)
+    class EventHandler<T : api.events.Event>(
+        private val owner: DiaryEventHookBase,
+        private val handler: (Player, T) -> Unit
+    ) : EventHook<T> {
+        override fun process(entity: Entity, event: T) {
+            forEligibleEntityDo(entity, event, handler)
         }
     }
 
@@ -136,29 +49,48 @@ abstract class DiaryEventHookBase(val diaryType: DiaryType) : MapArea, LoginList
     }
 
     final override fun login(player: Player) {
-        player.hook(Event.ResourceProduced, ResourceProductionEvents(this))
-        player.hook(Event.NPCKilled, NPCKillEvents(this))
-        player.hook(Event.Teleported, TeleportEvents(this))
-        player.hook(Event.FireLit, FiremakingEvents(this))
-        player.hook(Event.Interacted, InteractionEvents(this))
-        player.hook(Event.ButtonClicked, ButtonClickEvents(this))
-        player.hook(Event.DialogueOpened, DialogueOpenEvents(this))
-        player.hook(Event.DialogueOptionSelected, DialogueOptionSelectionEvents(this))
-        player.hook(Event.DialogueClosed, DialogueCloseEvents(this))
-        player.hook(Event.UsedWith, UseWithEvents(this))
-        player.hook(Event.PickedUp, PickUpEvents(this))
-        player.hook(Event.InterfaceOpened, InterfaceOpenEvents(this))
-        player.hook(Event.AttributeSet, AttributeSetEvents(this))
-        player.hook(Event.AttributeRemoved, AttributeRemoveEvents(this))
-        player.hook(Event.SpellCast, SpellCastEvents(this))
-        player.hook(Event.ItemAlchemized, ItemAlchemizationEvents(this))
+        player.hook(Event.ResourceProduced, EventHandler(this, ::onResourceProduced))
+        player.hook(Event.NPCKilled, EventHandler(this, ::onNpcKilled))
+        player.hook(Event.Teleported, EventHandler(this, ::onTeleported))
+        player.hook(Event.FireLit, EventHandler(this, ::onFireLit))
+        player.hook(Event.Interacted, EventHandler(this, ::onInteracted))
+        player.hook(Event.ButtonClicked, EventHandler(this, ::onButtonClicked))
+        player.hook(Event.DialogueOpened, EventHandler(this, ::onDialogueOpened))
+        player.hook(Event.DialogueOptionSelected, EventHandler(this, ::onDialogueOptionSelected))
+        player.hook(Event.DialogueClosed, EventHandler(this, ::onDialogueClosed))
+        player.hook(Event.UsedWith, EventHandler(this, ::onUsedWith))
+        player.hook(Event.PickedUp, EventHandler(this, ::onPickedUp))
+        player.hook(Event.InterfaceOpened, EventHandler(this, ::onInterfaceOpened))
+        player.hook(Event.AttributeSet, EventHandler(this, ::onAttributeSet))
+        player.hook(Event.AttributeRemoved, EventHandler(this, ::onAttributeRemoved))
+        player.hook(Event.SpellCast, EventHandler(this, ::onSpellCast))
+        player.hook(Event.ItemAlchemized, EventHandler(this, ::onItemAlchemized))
+        player.hook(Event.ItemEquipped, EventHandler(this, ::onItemEquipped))
+        player.hook(Event.ItemUnequipped, EventHandler(this, ::onItemUnequipped))
+        player.hook(Event.ItemPurchased, EventHandler(this, ::onItemPurchasedFromShop))
+        player.hook(Event.ItemSold, EventHandler(this, ::onItemSoldToShop))
+    }
+
+    protected fun fulfillTaskRequirement(player: Player, level: DiaryLevel, task: Int, attribute: String) {
+        if (isTaskRequirementFulfilled(player, attribute)) return
+
+        player.achievementDiaryManager.updateTask(
+            player,
+            diaryType,
+            findIndexFor(level),
+            task,
+            false
+        )
+
+        setAttribute(player, "/save:$attribute", true)
+    }
+
+    protected fun isTaskRequirementFulfilled(player: Player, attribute: String): Boolean {
+        return getAttribute(player, attribute, false)
     }
 
     protected fun progressIncrementalTask(player: Player, level: DiaryLevel, task: Int, attribute: String, maxProgress: Int) {
         if (isTaskCompleted(player, level, task)) return
-
-        val levelName = level.name.lowercase().replaceFirstChar { c -> c.uppercase() }
-        val levelIndex = diaryType.levelNames.indexOf(levelName)
 
         val newValue = getAttribute(player, attribute, 0) + 1
 
@@ -169,7 +101,13 @@ abstract class DiaryEventHookBase(val diaryType: DiaryType) : MapArea, LoginList
         )
 
         if (newValue < maxProgress) {
-            player.achievementDiaryManager.updateTask(player, diaryType, levelIndex, task, false)
+            player.achievementDiaryManager.updateTask(
+                player,
+                diaryType,
+                findIndexFor(level),
+                task,
+                false
+            )
         } else {
             finishTask(player, level, task)
         }
@@ -177,9 +115,6 @@ abstract class DiaryEventHookBase(val diaryType: DiaryType) : MapArea, LoginList
 
     protected fun progressFlaggedTask(player: Player, level: DiaryLevel, task: Int, attribute: String, bit: Int, targetValue: Int) {
         if (isTaskCompleted(player, level, task)) return
-
-        val levelName = level.name.lowercase().replaceFirstChar { c -> c.uppercase() }
-        val levelIndex = diaryType.levelNames.indexOf(levelName)
 
         val newValue = getAttribute(player, attribute, 0) + 1
 
@@ -190,24 +125,36 @@ abstract class DiaryEventHookBase(val diaryType: DiaryType) : MapArea, LoginList
         )
 
         if (newValue != targetValue) {
-            player.achievementDiaryManager.updateTask(player, diaryType, levelIndex, task, false)
+            player.achievementDiaryManager.updateTask(
+                player,
+                diaryType,
+                findIndexFor(level),
+                task,
+                false
+            )
         } else {
             finishTask(player, level, task)
         }
     }
 
     protected fun finishTask(player: Player, level: DiaryLevel, task: Int) {
-        val levelName = level.name.lowercase().replaceFirstChar { c -> c.uppercase() }
-        val levelIndex = diaryType.levelNames.indexOf(levelName)
-
-        if (levelIndex < 0) {
-            throw IllegalArgumentException("'$levelName' was not found in diary '$diaryType'.")
-        }
-
-        player.achievementDiaryManager.finishTask(player, diaryType, levelIndex, task)
+        player.achievementDiaryManager.finishTask(
+            player,
+            diaryType,
+            findIndexFor(level),
+            task
+        )
     }
 
-    protected fun isTaskCompleted(player: Player, level: DiaryLevel, task: Int): Boolean {
+    private fun isTaskCompleted(player: Player, level: DiaryLevel, task: Int): Boolean {
+        return player.achievementDiaryManager.hasCompletedTask(
+            diaryType,
+            findIndexFor(level),
+            task
+        )
+    }
+
+    private fun findIndexFor(level: DiaryLevel): Int {
         val levelName = level.name.lowercase().replaceFirstChar { c -> c.uppercase() }
         val levelIndex = diaryType.levelNames.indexOf(levelName)
 
@@ -215,7 +162,7 @@ abstract class DiaryEventHookBase(val diaryType: DiaryType) : MapArea, LoginList
             throw IllegalArgumentException("'$levelName' was not found in diary '$diaryType'.")
         }
 
-        return player.achievementDiaryManager.hasCompletedTask(diaryType, levelIndex, task)
+        return levelIndex
     }
 
     protected open fun onAreaVisited(player: Player) {}
@@ -236,4 +183,8 @@ abstract class DiaryEventHookBase(val diaryType: DiaryType) : MapArea, LoginList
     protected open fun onAttributeRemoved(player: Player, event: AttributeRemoveEvent) {}
     protected open fun onSpellCast(player: Player, event: SpellCastEvent) {}
     protected open fun onItemAlchemized(player: Player, event: ItemAlchemizationEvent) {}
+    protected open fun onItemEquipped(player: Player, event: ItemEquipEvent) {}
+    protected open fun onItemUnequipped(player: Player, event: ItemUnequipEvent) {}
+    protected open fun onItemPurchasedFromShop(player: Player, event: ItemShopPurchaseEvent) {}
+    protected open fun onItemSoldToShop(player: Player, event: ItemShopSellEvent) {}
 }

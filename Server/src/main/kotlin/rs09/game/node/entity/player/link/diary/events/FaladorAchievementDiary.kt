@@ -1,12 +1,12 @@
 package rs09.game.node.entity.player.link.diary.events
 
 import api.areEquipped
-import api.events.InteractionEvent
-import api.events.NPCKillEvent
-import api.events.ResourceProducedEvent
+import api.events.*
 import api.inBorders
+import api.setAttribute
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
+import core.game.world.map.zone.Zone
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
@@ -16,11 +16,14 @@ import rs09.game.node.entity.player.link.diary.DiaryLevel
 
 class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
     companion object {
+        private const val ATTRIBUTE_BLACK_CHAINBODY_PURCHASED = "diary:falador:black-chain-bought"
+
         private val MINING_GUILD_AREA = ZoneBorders(3016, 9731, 3055, 9756)
         private val DARK_WIZARDS_TOWER_ROOF_AREA = ZoneBorders(2904, 3331, 2911, 3338, 2)
         private val WHITE_KNIGHTS_CASTLE_ROOF_AREA = ZoneBorders(2955, 3333, 2996, 3354, 3)
         private val PARK_TREE_PATCH_AREA = ZoneBorders(3002, 3371, 3006, 3375)
         private val PARK_POND_AREA = ZoneBorders(2987, 3381, 2994, 3386)
+        private val WAYNES_CHAINS_AREA = ZoneBorders(2969, 3310, 2975, 3314)
 
         private val PROSELYTE_FULL_ARMOR = intArrayOf(
             Items.PROSELYTE_SALLET_9672,
@@ -174,6 +177,33 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
                     DiaryLevel.HARD,
                     HardTasks.ICE_DUNGEON_KILL_SKELETAL_WYVERN
                 )
+            }
+        }
+    }
+
+    override fun onItemPurchasedFromShop(player: Player, event: ItemShopPurchaseEvent) {
+        when {
+            inBorders(player, WAYNES_CHAINS_AREA) -> if (event.itemId == Items.BLACK_CHAINBODY_1107) {
+                fulfillTaskRequirement(
+                    player,
+                    DiaryLevel.EASY,
+                    EasyTasks.WAYNE_BUY_AND_WEAR_BLACK_CHAINBODY,
+                    ATTRIBUTE_BLACK_CHAINBODY_PURCHASED
+                )
+            }
+        }
+    }
+
+    override fun onItemEquipped(player: Player, event: ItemEquipEvent) {
+        when {
+            inBorders(player, WAYNES_CHAINS_AREA) -> if (event.itemId == Items.BLACK_CHAINBODY_1107) {
+                if (isTaskRequirementFulfilled(player, ATTRIBUTE_BLACK_CHAINBODY_PURCHASED)) {
+                    finishTask(
+                        player,
+                        DiaryLevel.EASY,
+                        EasyTasks.WAYNE_BUY_AND_WEAR_BLACK_CHAINBODY
+                    )
+                }
             }
         }
     }

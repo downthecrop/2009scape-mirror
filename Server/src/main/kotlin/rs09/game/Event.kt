@@ -23,4 +23,8 @@ object Event {
     @JvmStatic val DialogueOpened = DialogueOpenEvent::class.java
     @JvmStatic val DialogueOptionSelected = DialogueOptionSelectionEvent::class.java
     @JvmStatic val DialogueClosed = DialogueCloseEvent::class.java
+    @JvmStatic val ItemEquipped = ItemEquipEvent::class.java
+    @JvmStatic val ItemUnequipped = ItemUnequipEvent::class.java
+    @JvmStatic val ItemPurchased = ItemShopPurchaseEvent::class.java
+    @JvmStatic val ItemSold = ItemShopSellEvent::class.java
 }

@@ -1,6 +1,8 @@
 package rs09.game.content.global.shops
 
 import api.*
+import api.events.ItemShopPurchaseEvent
+import api.events.ItemShopSellEvent
 import core.game.component.Component
 import core.game.container.Container
 import core.game.container.ContainerEvent
@@ -319,6 +321,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
             sendMessage(player, "You don't have enough ${cost.name.toLowerCase()} to buy that many.")
         }
 
+        player.dispatch(ItemShopPurchaseEvent(item.id, item.amount, cost))
         return TransactionStatus.Success()
     }
 
@@ -387,6 +390,8 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
                 needsUpdate[ServerConstants.SERVER_NAME.hashCode()] = true
             }
         }
+
+        player.dispatch(ItemShopSellEvent(item.id, item.amount, profit))
         return TransactionStatus.Success()
     }
 

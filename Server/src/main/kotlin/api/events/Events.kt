@@ -7,10 +7,10 @@ import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.link.SpellBookManager.SpellBook
 import core.game.node.entity.player.link.TeleportManager.TeleportType
+import core.game.node.item.Item
 import core.game.world.map.Location
 import rs09.game.node.entity.skill.magic.TeleportMethod
 
-data class VarbitUpdateEvent(val offset: Int, val value: Int) : Event
 data class ResourceProducedEvent(val itemId: Int, val amount: Int, val source: Node, val original: Int = -1) : Event
 data class NPCKillEvent(val npc: NPC) : Event
 data class TeleportEvent(val type: TeleportType, val method: TeleportMethod, val source: Any, val location: Location) : Event
@@ -30,4 +30,8 @@ data class AttributeSetEvent(val entity: Entity, val attribute: String, val valu
 data class AttributeRemoveEvent(val entity: Entity, val attribute: String) : Event
 data class SpellCastEvent(val spellBook: SpellBook, val spellId: Int) : Event
 data class ItemAlchemizationEvent(val itemId: Int, val isHigh: Boolean) : Event
-data class ItemAlchemizedEvent(val itemId: Int, val isHigh: Boolean) : Event
+data class ItemEquipEvent(val itemId: Int, val slotId: Int) : Event
+data class ItemUnequipEvent(val itemId: Int, val slotId: Int) : Event
+data class ItemShopPurchaseEvent(val itemId: Int, val amount: Int, val currency: Item) : Event
+data class ItemShopSellEvent(val itemId: Int, val amount: Int, val currency: Item) : Event
+data class VarbitUpdateEvent(val offset: Int, val value: Int) : Event
