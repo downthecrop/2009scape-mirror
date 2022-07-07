@@ -19,3 +19,4 @@ data class TickEvent(val worldTicks: Int) : Event
 data class PickUpEvent(val itemId: Int) : Event
 data class InterfaceOpenEvent(val component: Component) : Event
 data class InterfaceCloseEvent(val component: Component) : Event
+data class VarbitUpdateEvent(val offset: Int, val value: Int) : Event

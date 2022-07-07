@@ -915,20 +915,20 @@ public final class NPCDefinition extends Definition<NPC> {
 	 */
 	public int getConfigId() {
 		if(configFileId != -1) {
-			return VarbitDefinition.forNPCID(configFileId).getConfigId();
+			return VarbitDefinition.forNPCID(configFileId).getVarpId();
 		} else return configFileId;
 	}
 
 	public int getVarbitOffset() {
 		if(configFileId != -1){
-			return VarbitDefinition.forNPCID(configFileId).getBitShift();
+			return VarbitDefinition.forNPCID(configFileId).getStartBit();
 		}
 		return -1;
 	}
 
 	public int getVarbitSize() {
 		if(configFileId != -1){
-			return VarbitDefinition.forNPCID(configFileId).getBitSize() - VarbitDefinition.forNPCID(configFileId).getBitShift();
+			return VarbitDefinition.forNPCID(configFileId).getEndBit() - VarbitDefinition.forNPCID(configFileId).getStartBit();
 		}
 		return -1;
 	}

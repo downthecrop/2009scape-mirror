@@ -1,6 +1,5 @@
 package core.net.packet.in;
 
-import api.events.InteractionEvent;
 import core.cache.def.impl.SceneryDefinition;
 import core.cache.def.impl.VarbitDefinition;
 import core.game.content.quest.PluginInteractionManager;
@@ -27,11 +26,8 @@ import rs09.game.interaction.InteractionListener;
 import rs09.game.interaction.InteractionListeners;
 import rs09.game.world.repository.Repository;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
-import java.util.function.IntPredicate;
 
 /**
  * Handles the incoming interaction packets.
@@ -284,7 +280,7 @@ public final class InteractionPacket implements IncomingPacket {
 		player.debug(object + ", original=" + objectId + ", option=" + option.getName() + "");
 		player.debug("dir=" + object.getDirection());
 		VarbitDefinition def = VarbitDefinition.forObjectID(SceneryDefinition.forId(objectId).getVarbitID());
-		player.debug("Varp ID=" + def.getConfigId() + " Offset=" + def.getBitShift() + " Size=" + def.getBitSize());
+		player.debug("Varp ID=" + def.getVarpId() + " Offset=" + def.getStartBit() + " Size=" + def.getEndBit());
 		player.debug("Varbit: " + def.getId());
 		if (option.getHandler() != null) {
 			player.debug("Object handler: " + option.getHandler().getClass().getSimpleName());
