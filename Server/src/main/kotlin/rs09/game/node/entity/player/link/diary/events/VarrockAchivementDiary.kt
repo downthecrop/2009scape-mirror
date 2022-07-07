@@ -2,6 +2,7 @@ package rs09.game.node.entity.player.link.diary.events
 
 import api.events.*
 import api.inBorders
+import core.game.content.global.Bones
 import core.game.content.global.travel.canoe.Canoe
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -205,7 +206,7 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
         when {
             inBorders(player, VARROCK_PROVINCE_AREA) -> {
                 when (event.used) {
-                    Items.BONES_526 -> if (event.with in STRAY_DOGS) {
+                    in Bones.array -> if (event.with in STRAY_DOGS) {
                         finishTask(
                             player,
                             DiaryLevel.EASY,
