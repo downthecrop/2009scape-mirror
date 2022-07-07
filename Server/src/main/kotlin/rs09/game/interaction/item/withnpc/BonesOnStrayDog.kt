@@ -28,7 +28,10 @@ class BonesOnStrayDog : InteractionListener {
             var woof = "Woof"
 
             if (removeItem(player, used)) {
-                sendMessage(player, "You feed your dog bones.")
+                sendMessage(
+                    player,
+                    "You feed the ${with.definition.name.lowercase()} your ${used.definition.name.lowercase()}."
+                )
 
                 when (used.id) {
                     Items.BURNT_BONES_528 -> {
