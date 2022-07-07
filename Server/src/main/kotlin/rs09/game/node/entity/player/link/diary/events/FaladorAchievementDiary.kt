@@ -3,17 +3,15 @@ package rs09.game.node.entity.player.link.diary.events
 import api.areEquipped
 import api.events.*
 import api.inBorders
-import api.setAttribute
-import api.teleport
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
-import core.game.world.map.zone.Zone
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import rs09.game.content.dialogue.region.falador.RisingSunInnBartenderDialogue
 import rs09.game.interaction.inter.FairyRing
+import rs09.game.node.entity.player.link.diary.AreaDiaryTask
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 
@@ -29,10 +27,16 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
         private val WAYNES_CHAINS_AREA = ZoneBorders(2969, 3310, 2975, 3314)
         private val SARAHS_FARMING_SHOP_AREA = ZoneBorders(3021, 3285, 3040, 3296)
 
-        private val PROSELYTE_FULL_ARMOR = intArrayOf(
+        private val PROSELYTE_FULL_ARMOR_MALE = intArrayOf(
             Items.PROSELYTE_SALLET_9672,
             Items.PROSELYTE_HAUBERK_9674,
             Items.PROSELYTE_CUISSE_9676
+        )
+
+        private val PROSELYTE_FULL_ARMOR_FEMALE = intArrayOf(
+            Items.PROSELYTE_SALLET_9672,
+            Items.PROSELYTE_HAUBERK_9674,
+            Items.PROSELYTE_TASSET_9678
         )
 
         private val PARTY_BALLOONS = intArrayOf(
@@ -97,25 +101,28 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
         }
     }
 
-    override val areaDefinitions
+    override val areaTasks
         get() = arrayOf(
-            Triple(
+            AreaDiaryTask(
+                WHITE_KNIGHTS_CASTLE_ROOF_AREA,
+                DiaryLevel.EASY,
+                EasyTasks.WHITE_KNIGHTS_CASTLE_CLIMB_TO_TOP
+            ),
+
+            AreaDiaryTask(
                 MINING_GUILD_AREA,
                 DiaryLevel.HARD,
                 HardTasks.ENTER_MINING_GUILD
             ),
 
-            Triple(
+            AreaDiaryTask(
                 DARK_WIZARDS_TOWER_ROOF_AREA,
                 DiaryLevel.HARD,
-                HardTasks.DARK_WIZARDS_TOWER_ASCEND_IN_FULL_PROSELYTE_ARMOR
-            ),
-
-            Triple(
-                WHITE_KNIGHTS_CASTLE_ROOF_AREA,
-                DiaryLevel.EASY,
-                EasyTasks.WHITE_KNIGHTS_CASTLE_CLIMB_TO_TOP
-            )
+                HardTasks.DARK_WIZARDS_TOWER_ASCEND_IN_FULL_PROSELYTE_ARMOR,
+            ) { player ->
+                areEquipped(player, *PROSELYTE_FULL_ARMOR_MALE)
+                || areEquipped(player, *PROSELYTE_FULL_ARMOR_FEMALE)
+            }
         )
 
     override fun onInteracted(player: Player, event: InteractionEvent) {

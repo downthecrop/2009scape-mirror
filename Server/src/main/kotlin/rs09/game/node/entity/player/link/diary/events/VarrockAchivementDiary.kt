@@ -13,6 +13,7 @@ import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import rs09.game.content.dialogue.region.varrock.ElsieDialogue
 import rs09.game.interaction.inter.FairyRing
+import rs09.game.node.entity.player.link.diary.AreaDiaryTask
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 import rs09.game.node.entity.skill.magic.TeleportMethod
@@ -92,14 +93,14 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
         }
     }
 
-    override val areaDefinitions get() = arrayOf(
-        Triple(
+    override val areaTasks get() = arrayOf(
+        AreaDiaryTask(
             VARROCK_ROOF_AREA,
             DiaryLevel.EASY,
             EasyTasks.FIND_HIGHEST_POINT
         ),
 
-        Triple(
+        AreaDiaryTask(
             SOS_LEVEL_2_AREA,
             DiaryLevel.EASY,
             EasyTasks.VISIT_SOS_LEVEL2

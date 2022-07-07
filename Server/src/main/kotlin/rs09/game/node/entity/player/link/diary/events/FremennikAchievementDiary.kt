@@ -1,8 +1,6 @@
 package rs09.game.node.entity.player.link.diary.events
 
 import api.events.*
-import api.inBorders
-import api.teleport
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.world.map.zone.ZoneBorders
@@ -12,6 +10,7 @@ import org.rs09.consts.Scenery
 import rs09.game.content.dialogue.region.barbarianassault.CaptainCainDialogue
 import rs09.game.content.dialogue.region.rellekka.HuntingExpertRellekkaDialogue
 import rs09.game.interaction.inter.FairyRing
+import rs09.game.node.entity.player.link.diary.AreaDiaryTask
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 
@@ -78,8 +77,8 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
         }
     }
 
-    override val areaDefinitions get() = arrayOf(
-         Triple(
+    override val areaTasks get() = arrayOf(
+         AreaDiaryTask(
             WINDSWEPT_TREE_AREA,
             DiaryLevel.EASY,
             EasyTasks.MAINLAND_FIND_HIGHEST_TREE

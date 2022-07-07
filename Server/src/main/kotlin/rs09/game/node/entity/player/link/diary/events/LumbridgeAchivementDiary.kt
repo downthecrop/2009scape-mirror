@@ -2,6 +2,7 @@ package rs09.game.node.entity.player.link.diary.events
 
 import api.events.*
 import api.inBorders
+import api.questStage
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
@@ -13,6 +14,7 @@ import org.rs09.consts.Scenery
 import rs09.game.content.dialogue.region.lumbridge.DukeHoracioDialogue
 import rs09.game.content.jobs.JobType
 import rs09.game.content.quest.free.dragonslayer.DukeHoracioDSDialogue
+import rs09.game.node.entity.player.link.diary.AreaDiaryTask
 import rs09.game.node.entity.player.link.diary.DiaryEventHookBase
 import rs09.game.node.entity.player.link.diary.DiaryLevel
 import rs09.game.node.entity.skill.magic.TeleportMethod
@@ -100,19 +102,20 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
         }
     }
 
-    override val areaDefinitions get() = arrayOf(
-        Triple(
-            CASTLE_ROOF_AREA,
-            DiaryLevel.BEGINNER,
-            BeginnerTasks.CASTLE_CLIMB_TO_HIGHEST_POINT
-        ),
+    override val areaTasks
+        get() = arrayOf(
+            AreaDiaryTask(
+                CASTLE_ROOF_AREA,
+                DiaryLevel.BEGINNER,
+                BeginnerTasks.CASTLE_CLIMB_TO_HIGHEST_POINT
+            ),
 
-        Triple(
-            WIZARDS_TOWER_TOP_FLOOR_AREA,
-            DiaryLevel.BEGINNER,
-            BeginnerTasks.WIZARDS_TOWER_CLIMB_TO_TOP
+            AreaDiaryTask(
+                WIZARDS_TOWER_TOP_FLOOR_AREA,
+                DiaryLevel.BEGINNER,
+                BeginnerTasks.WIZARDS_TOWER_CLIMB_TO_TOP
+            )
         )
-    )
 
     override fun onResourceProduced(player: Player, event: ResourceProducedEvent) {
         when (player.viewport.region.id) {
@@ -199,7 +202,8 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
 
                 Items.LOBSTER_379 -> {
                     if (event.original == Items.RAW_LOBSTER_377
-                        && event.source.id == Scenery.COOKING_RANGE_114) {
+                        && event.source.id == Scenery.COOKING_RANGE_114
+                    ) {
                         finishTask(
                             player,
                             DiaryLevel.MEDIUM,
@@ -210,7 +214,8 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
 
                 Items.UNSTRUNG_SYMBOL_1714 -> {
                     if (event.original == Items.SILVER_BAR_2355
-                        && event.source.id == Scenery.FURNACE_36956) {
+                        && event.source.id == Scenery.FURNACE_36956
+                    ) {
                         finishTask(
                             player,
                             DiaryLevel.MEDIUM,
@@ -297,7 +302,8 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
     override fun onInteracted(player: Player, event: InteractionEvent) {
         when (player.viewport.region.id) {
             12337 -> if (event.target.id == Scenery.RAILING_37668
-                         && event.option == "taunt-through") {
+                && event.option == "taunt-through"
+            ) {
                 finishTask(
                     player,
                     DiaryLevel.EASY,
@@ -332,7 +338,10 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
     override fun onDialogueOptionSelected(player: Player, event: DialogueOptionSelectionEvent) {
         when (event.dialogue) {
             is DukeHoracioDSDialogue -> {
-                if (event.currentStage == 12) {
+                val dragonSlayerStage = questStage(player, "Dragon Slayer")
+
+                if ((dragonSlayerStage == 100 && event.currentStage == 4)
+                    || event.currentStage == 12) {
                     finishTask(
                         player,
                         DiaryLevel.MEDIUM,
@@ -343,12 +352,14 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
         }
     }
 
+
     override fun onPickedUp(player: Player, event: PickUpEvent) {
         when (player.viewport.region.id) {
             12850, 12851 -> {
                 if (event.itemId == Items.COWHIDE_1739) {
                     if (inBorders(player, COW_PEN_AREA_1)
-                        || inBorders(player, COW_PEN_AREA_2)) {
+                        || inBorders(player, COW_PEN_AREA_2)
+                    ) {
                         finishTask(
                             player,
                             DiaryLevel.EASY,

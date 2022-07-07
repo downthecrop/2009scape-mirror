@@ -27,10 +27,10 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
         }
     }
 
-    open val areaDefinitions get() = arrayOf<Triple<ZoneBorders, DiaryLevel, Int>>()
+    open val areaTasks get() = arrayOf<AreaDiaryTask>()
 
     final override fun defineAreaBorders(): Array<ZoneBorders>
-        = areaDefinitions.map { def -> def.first }.toTypedArray()
+        = areaTasks.map { task -> task.zoneBorders }.toTypedArray()
 
     final override fun areaEnter(entity: Entity) {
         if (entity !is Player) return
@@ -85,9 +85,10 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
         setAttribute(player, "/save:$attribute", true)
     }
 
-    protected fun whenTaskRequirementFulfilled(player: Player, attribute: String, doWhat: () -> Unit) {
+    protected fun whenTaskRequirementFulfilled(player: Player, attribute: String, then: () -> Unit) {
         if (getAttribute(player, attribute, false)) {
-            doWhat()
+            then()
+            removeAttribute(player, attribute)
         }
     }
 
@@ -118,6 +119,7 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
             )
         } else {
             finishTask(player, level, task)
+            removeAttribute(player, attribute)
         }
     }
 
@@ -149,6 +151,7 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
             )
         } else {
             finishTask(player, level, task)
+            removeAttribute(player, attribute)
         }
     }
 
@@ -181,12 +184,12 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
     }
 
     protected open fun onAreaVisited(player: Player) {
-        for (area in areaDefinitions) {
-            if (inBorders(player, area.first)) {
+        areaTasks.forEach {
+            it.whenSatisfied(player) {
                 finishTask(
                     player,
-                    area.second,
-                    area.third
+                    it.diaryLevel,
+                    it.taskId
                 )
             }
         }
