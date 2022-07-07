@@ -21,7 +21,7 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
         private const val ATTRIBUTE_BARBARIAN_FISHING_TRAINING = "barbtraining:fishing"
         private const val ATTRIBUTE_BARBARIAN_HUNTING_TRAINING = "barbtraining:hunting"
 
-        private val WINDSWEPT_TREE_AREA = ZoneBorders(2743  , 3718, 2750, 3737)
+        private val WINDSWEPT_TREE_AREA = ZoneBorders(2743, 3718, 2750, 3737)
 
         private val FISHING_SPOTS = arrayOf(
             NPCs.FISHING_SPOT_309, NPCs.FISHING_SPOT_334,

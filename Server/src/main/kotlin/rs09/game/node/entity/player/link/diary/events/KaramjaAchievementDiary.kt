@@ -82,7 +82,7 @@ class KaramjaAchievementDiary : DiaryEventHookBase(DiaryType.KARAMJA) {
 
     override fun onResourceProduced(player: Player, event: ResourceProducedEvent) {
         when (player.viewport.region.id) {
-            11310, 11410 -> if (event.itemId == Items.RED_TOPAZ_1613) {
+            11310, 11410 -> if (event.itemId == Items.UNCUT_RED_TOPAZ_1629) {
                 finishTask(
                     player,
                     DiaryLevel.MEDIUM,
