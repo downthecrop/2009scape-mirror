@@ -207,6 +207,17 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
                         )
                     }
                 }
+
+                Items.UNSTRUNG_SYMBOL_1714 -> {
+                    if (event.original == Items.SILVER_BAR_2355
+                        && event.source.id == Scenery.FURNACE_36956) {
+                        finishTask(
+                            player,
+                            DiaryLevel.MEDIUM,
+                            MediumTasks.CRAFT_HOLY_SYMBOL
+                        )
+                    }
+                }
             }
 
             13107 -> when (event.itemId) {
