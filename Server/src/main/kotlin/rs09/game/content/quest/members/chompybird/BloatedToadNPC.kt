@@ -81,7 +81,7 @@ class BloatedToadListeners : InteractionListener, StartupListener {
   lateinit var borders: ZoneBorders
 
   override fun startup() {
-    borders = ZoneBorders(2432, 2944, 2687, 3071)
+    borders = ZoneBorders(2368, 2944, 2687, 3071)
     borders.addException(ZoneBorders.forRegion(10287))
     borders.addException(ZoneBorders.forRegion(10031))
     borders.addException(ZoneBorders.forRegion(9775))
