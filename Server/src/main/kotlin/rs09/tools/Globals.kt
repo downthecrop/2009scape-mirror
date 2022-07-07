@@ -39,3 +39,22 @@ fun String.shuffle(): String{
     }
     return new
 }
+
+/**
+ * Prepends 'a' or 'an' to a noun depending on whether it starts with a vowel.
+ * @author bushtail
+ * @param noun the noun to check grammar rules against.
+ * @return either 'a $noun' or 'an $noun' depending on the first letter.
+ */
+fun prependArticle(noun : String) : String {
+    if(noun == null) return noun
+    val exceptions = hashMapOf("unicorn" to "a", "herb" to "an", "hour" to "an")
+    if(exceptions.contains(noun.lowercase())) {
+        return "${exceptions[noun.lowercase()]} $noun"
+    }
+    return when(noun[0]) {
+        'a', 'e', 'i', 'o', 'u' -> "an $noun"
+        else -> "a $noun"
+    }
+}
+
