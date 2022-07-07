@@ -83,7 +83,7 @@ enum class FarmingPatch(val varpIndex: Int, val varpOffset: Int, val type: Patch
         fun forObjectID(id: Int): FarmingPatch?{
             val objDef = SceneryDefinition.forId(id)
             val def = VarbitDefinition.forObjectID(objDef.varbitID)
-            return patches[def.configId shl def.bitShift]
+            return patches[def.varpId shl def.startBit]
         }
     }
 

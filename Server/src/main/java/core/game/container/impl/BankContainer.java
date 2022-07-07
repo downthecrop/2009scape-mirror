@@ -1,6 +1,7 @@
 package core.game.container.impl;
 
 import core.game.container.access.InterfaceContainer;
+import org.rs09.consts.Vars;
 import rs09.ServerConstants;
 import core.game.component.Component;
 import core.game.container.*;
@@ -43,11 +44,6 @@ public final class BankContainer extends Container {
 	private final BankListener listener;
 
 	/**
-	 * Set {@code true} to note items.
-	 */
-	private boolean noteItems;
-
-	/**
 	 * If the bank is open.
 	 */
 	private boolean open;
@@ -66,11 +62,6 @@ public final class BankContainer extends Container {
 	 * The tab start indexes.
 	 */
 	private final int[] tabStartSlot = new int[TAB_SIZE];
-
-	/**
-	 * If inserting items is enabled.
-	 */
-	private boolean insertItems;
 
 	/**
 	 * Construct a new {@code BankContainer} {@code Object}.
@@ -287,7 +278,7 @@ public final class BankContainer extends Container {
 		}
 		item = new Item(item.getId(), amount, item.getCharge());
 		int noteId = item.getDefinition().getNoteId();
-		Item add = noteItems && noteId > 0 ? new Item(noteId, amount, item.getCharge()) : item;
+		Item add = isNoteItems() && noteId > 0 ? new Item(noteId, amount, item.getCharge()) : item;
 		int maxCount = player.getInventory().getMaximumAdd(add);
 		if (amount > maxCount) {
 			item.setAmount(maxCount);
@@ -297,7 +288,7 @@ public final class BankContainer extends Container {
 				return;
 			}
 		}
-		if (noteItems && noteId < 0) {
+		if (isNoteItems() && noteId < 0) {
 			player.getPacketDispatch().sendMessage("This item can't be withdrawn as a note.");
 			add = item;
 		}
@@ -485,7 +476,7 @@ public final class BankContainer extends Container {
 	 * @return If items have to be noted {@code true}.
 	 */
 	public boolean isNoteItems() {
-		return noteItems;
+		return player.varpManager.getVarbit(Vars.VARBIT_IFACE_BANK_NOTE_MODE) == 1;
 	}
 
 	/**
@@ -493,7 +484,8 @@ public final class BankContainer extends Container {
 	 * @param noteItems If items have to be noted {@code true}.
 	 */
 	public void setNoteItems(boolean noteItems) {
-		this.noteItems = noteItems;
+		player.varpManager.flagSave(Vars.VARBIT_IFACE_BANK_NOTE_MODE, true);
+		player.varpManager.setVarbit(Vars.VARBIT_IFACE_BANK_NOTE_MODE, noteItems ? 1 : 0);
 	}
 
 	/**
@@ -532,7 +524,8 @@ public final class BankContainer extends Container {
 	 * @param insertItems The insert items value.
 	 */
 	public void setInsertItems(boolean insertItems) {
-		this.insertItems = insertItems;
+		player.varpManager.setVarbit(Vars.VARBIT_IFACE_BANK_INSERT_MODE, insertItems ? 1 : 0);
+		player.varpManager.flagSave(Vars.VARBIT_IFACE_BANK_INSERT_MODE, true);
 	}
 	
 	/**
@@ -540,7 +533,7 @@ public final class BankContainer extends Container {
 	 * @return {@code True} if inserting items mode is enabled.
 	 */
 	public boolean isInsertItems() {
-		return insertItems;
+		return player.varpManager.getVarbit(Vars.VARBIT_IFACE_BANK_INSERT_MODE) == 1;
 	}
 	
 	/**

@@ -44,7 +44,7 @@ class CanoeStationListener : InteractionListener {
                 return@on true
             }
             player.lock()
-            player.varpManager.get(varbit.configId).clearBitRange(0,31)
+            player.varpManager.get(varbit.varpId).clearBitRange(0,31)
             player.faceLocation(CanoeUtils.getFaceLocation(player.location))
             player.animate(axe.animation)
             player.varpManager.setVarbit(varbit,STAGE_TREE_NONINTERACTABLE)

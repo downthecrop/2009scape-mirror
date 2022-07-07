@@ -25,7 +25,7 @@ enum class CompostBins(val varpIndex: Int, val varpOffest: Int) {
         fun forObjectID(id: Int): CompostBins?{
             val objDef = SceneryDefinition.forId(id)
             val def = VarbitDefinition.forObjectID(objDef.varbitID)
-            return bins[def.configId shl def.bitShift]
+            return bins[def.varpId shl def.startBit]
         }
     }
 

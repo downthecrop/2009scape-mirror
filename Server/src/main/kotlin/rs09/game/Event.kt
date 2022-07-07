@@ -15,4 +15,5 @@ object Event {
     @JvmStatic val PickedUp = PickUpEvent::class.java
     @JvmStatic val InterfaceOpened = InterfaceOpenEvent::class.java
     @JvmStatic val InterfaceClosed = InterfaceCloseEvent::class.java
+    @JvmStatic val VarbitUpdated = VarbitUpdateEvent::class.java
 }

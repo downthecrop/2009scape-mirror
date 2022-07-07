@@ -497,8 +497,8 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 	 */
 	public static void addConfig(final Player player, final int objectId, final int value, boolean save) {
 		final VarbitDefinition definition = VarbitDefinition.forObjectID(SceneryDefinition.forId(objectId).getVarbitID());
-		final int oldVal = (definition.getValue(player) << definition.getBitShift());
-		final int newVal = (value << definition.getBitShift());
+		final int oldVal = (definition.getValue(player) << definition.getStartBit());
+		final int newVal = (value << definition.getStartBit());
 		player.getConfigManager().set(CONFIG_ID, (player.getConfigManager().get(CONFIG_ID) - oldVal) + newVal, save);
 	}
 

@@ -2,7 +2,6 @@ package core.cache.def.impl;
 
 import core.cache.Cache;
 import core.game.node.entity.player.Player;
-import rs09.game.world.GameWorld;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
@@ -32,17 +31,17 @@ public final class VarbitDefinition {
 	/**
 	 * The config id.
 	 */
-	private int configId;
+	private int varpId;
 
 	/**
 	 * The bit shift amount.
 	 */
-	private int bitShift;
+	private int startBit;
 
 	/**
 	 * The bit amount.
 	 */
-	private int bitSize;
+	private int endBit;
 
 	/**
 	 * Constructs a new {@code ConfigFileDefinition} {@code Object}.
@@ -50,6 +49,14 @@ public final class VarbitDefinition {
 	 */
 	public VarbitDefinition(int id) {
 		this.id = id;
+	}
+
+	public VarbitDefinition(int varpId, int id, int startBit, int endBit)
+	{
+		this.varpId = varpId;
+		this.id = id;
+		this.startBit = startBit;
+		this.endBit = endBit;
 	}
 
 	/**
@@ -81,11 +88,11 @@ public final class VarbitDefinition {
 	}
 
 	public static VarbitDefinition forId(int id){
-		/*VarbitDefinition def = MAPPING.get(id);
+		VarbitDefinition def = MAPPING.get(id);
 		if (def != null) {
 			return def;
-		}*/
-		VarbitDefinition def;
+		}
+
 		def = new VarbitDefinition(id);
 		byte[] bs = Cache.getIndexes()[22].getFileData(id >>> 10, id & 0x3ff);
 		if (bs != null) {
@@ -93,9 +100,9 @@ public final class VarbitDefinition {
 			int opcode = 0;
 			while ((opcode = buffer.get() & 0xFF) != 0) {
 				if (opcode == 1) {
-					def.configId = buffer.getShort() & 0xFFFF;
-					def.bitShift = buffer.get() & 0xFF;
-					def.bitSize = buffer.get() & 0xFF;
+					def.varpId = buffer.getShort() & 0xFFFF;
+					def.startBit = buffer.get() & 0xFF;
+					def.endBit = buffer.get() & 0xFF;
 				}
 			}
 		}
@@ -103,14 +110,14 @@ public final class VarbitDefinition {
 		return def;
 	}
 
-	public static void main(String... args) throws Throwable {
-		GameWorld.prompt(false);
-		for (int i = 0; i < 15000; i++) {
-			VarbitDefinition def = forObjectID(i);
-			if (def != null && def.configId == 33) {
-				System.out.println("Config file [id=" + i + ", shift=" + def.bitShift + "]!");
-			}
-		}
+	public static void create(int varpId, int varbitId, int startBit, int endBit){
+		VarbitDefinition def = new VarbitDefinition(
+			varpId,
+			varbitId,
+			startBit,
+			endBit
+		);
+		MAPPING.put(varbitId, def);
 	}
 
 	/**
@@ -119,12 +126,12 @@ public final class VarbitDefinition {
 	 * @return The config value.
 	 */
 	public int getValue(Player player) {
-		int size = BITS[bitSize - bitShift];
-		int bitValue = player.varpManager.get(getConfigId()).getBitRangeValue(getBitShift(), getBitShift() + (bitSize - bitShift));
+		int size = BITS[endBit - startBit];
+		int bitValue = player.varpManager.get(getVarpId()).getBitRangeValue(getStartBit(), getStartBit() + (endBit - startBit));
 		if(bitValue != 0){
-			return size & (bitValue >>> bitShift);
+			return size & (bitValue >>> startBit);
 		}
-		return size & (player.getConfigManager().get(configId) >>> bitShift);
+		return size & (player.getConfigManager().get(varpId) >>> startBit);
 	}
 
 	/**
@@ -143,32 +150,20 @@ public final class VarbitDefinition {
 		return id;
 	}
 
-	/**
-	 * Gets the configId.
-	 * @return The configId.
-	 */
-	public int getConfigId() {
-		return configId;
+	public int getVarpId() {
+		return varpId;
 	}
 
-	/**
-	 * Gets the bitShift.
-	 * @return The bitShift.
-	 */
-	public int getBitShift() {
-		return bitShift;
+	public int getStartBit() {
+		return startBit;
 	}
 
-	/**
-	 * Gets the bitSize.
-	 * @return The bitSize.
-	 */
-	public int getBitSize() {
-		return bitSize;
+	public int getEndBit() {
+		return endBit;
 	}
 
 	@Override
 	public String toString() {
-		return "ConfigFileDefinition [id=" + id + ", configId=" + configId + ", bitShift=" + bitShift + ", bitSize=" + bitSize + "]";
+		return "ConfigFileDefinition [id=" + id + ", configId=" + varpId + ", bitShift=" + startBit + ", bitSize=" + endBit + "]";
 	}
 }

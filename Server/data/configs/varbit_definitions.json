@@ -1,0 +1,19 @@
+[
+  {
+    "description": "Bank insert mode",
+
+    "varpId": "304",
+    "varbitId": "7000",
+    "startBit": "0",
+    "endBit": "0"
+  },
+
+  {
+    "description": "Bank note mode",
+
+    "varpId": "115",
+    "varbitId": "7001",
+    "startBit": "0",
+    "endBit": "0"
+  }
+]

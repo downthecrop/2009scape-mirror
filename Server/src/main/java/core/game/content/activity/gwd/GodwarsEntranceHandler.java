@@ -43,14 +43,14 @@ public final class GodwarsEntranceHandler extends OptionHandler {
 				return true;
 			}
 			player.varpManager.get(1048).setVarbit(0,1).send(player);
-			player.varpManager.flagSave(1048);
+			player.varpManager.flagSave(1048, false);
 			return true;
 		case 26341:
 			if (player.getSkills().getStaticLevel(Skills.AGILITY) < 15) {
 				player.getPacketDispatch().sendMessage("You need an Agility level of 15 to enter this.");
 				return true;
 			}
-			if (player.varpManager.get(1048).getVarbit(4) == null) {
+			if (player.varpManager.get(1048).getVarbit(4) == 0) {
 				player.getDialogueInterpreter().sendDialogues(6201, FacialExpression.HALF_GUILTY, "Cough... Hey, over here.");
 				return true;
 			}

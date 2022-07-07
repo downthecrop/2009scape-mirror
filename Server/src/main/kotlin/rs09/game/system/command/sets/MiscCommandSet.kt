@@ -117,7 +117,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             notify(player,"Region: [id=" + l.regionId + ", active=" + r.isActive + ", instanced=" + (r is DynamicRegion) + "], obj=" + RegionManager.getObject(l) + ".")
             notify(player, "Jagex: ${l.z}_${l.regionId shr 8}_${l.regionId and 0xFF}_${l.localX}_${l.localY}")
             notify(player,"Object: " + RegionManager.getObject(l).also{obj = it} + ".")
-            notify(player,"Object Varp: " + obj?.definition?.configFile?.configId + " offset: " + obj?.definition?.configFile?.bitShift + " size: " + (obj?.definition?.configFile?.bitShift?.minus(obj?.definition?.configFile?.bitShift!!)))
+            notify(player,"Object Varp: " + obj?.definition?.configFile?.varpId + " offset: " + obj?.definition?.configFile?.startBit + " size: " + (obj?.definition?.configFile?.startBit?.minus(obj?.definition?.configFile?.startBit!!)))
             SystemLogger.logInfo("Viewport: " + l.getSceneX(player.playerFlags.lastSceneGraph) + "," + l.getSceneY(player.playerFlags.lastSceneGraph))
             val loc = "Location.create(" + l.x + ", " + l.y + ", " + l.z + ")"
             SystemLogger.logInfo(loc + "; " + player.playerFlags.lastSceneGraph + ", " + l.localX + ", " + l.localY)
@@ -427,7 +427,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
                 reject(player,"Syntax: ::getobjectvarp objectid")
             }
             val objectID = args[1].toInt()
-            notify(player, "${VarbitDefinition.forObjectID(SceneryDefinition.forId(objectID).varbitID).configId}")
+            notify(player, "${VarbitDefinition.forObjectID(SceneryDefinition.forId(objectID).varbitID).varpId}")
         }
 
         define("define_varbit", Privilege.ADMIN, "::define_varbit <lt>VARBIT ID<gt>", "Prints information about the given varbit."){ player, args ->
