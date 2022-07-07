@@ -191,7 +191,7 @@ class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 2, Vars.VARP_QUEST_C
       ) {
         lock(player, 5)
         setVarbit(player, Vars.VARBIT_QUEST_CHOMPY_SPITROAST, 1)
-        animate(player, Animations.HUMAN_COOKING_RANGE)
+        animate(player, Animations.HUMAN_COOKING_RANGE_896)
         sendMessage(player, "You carefully place the chompy bird on the spit-roast.")
         sendMessage(player, "You add the other ingredients and cook the food.")
         runTask(player, 4) {
