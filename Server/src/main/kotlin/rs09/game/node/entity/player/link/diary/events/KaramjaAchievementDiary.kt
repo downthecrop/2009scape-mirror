@@ -137,14 +137,6 @@ class KaramjaAchievementDiary : DiaryEventHookBase(DiaryType.KARAMJA) {
 
     override fun onNpcKilled(player: Player, event: NPCKillEvent) {
         when (player.viewport.region.id) {
-            512 -> if (event.npc.id in KET_ZEKS) {
-                finishTask(
-                    player,
-                    DiaryLevel.HARD,
-                    HardTasks.FIGHT_CAVE_KILL_KET_ZEK
-                )
-            }
-
             10899, 10900 -> if (event.npc.id in METAL_DRAGONS) {
                 finishTask(
                     player,
@@ -158,6 +150,15 @@ class KaramjaAchievementDiary : DiaryEventHookBase(DiaryType.KARAMJA) {
                     player,
                     DiaryLevel.EASY,
                     EasyTasks.POTHOLE_DUNGEON_KILL_JOGRE
+                )
+            }
+
+            /* Ket-Zek only appears in an instanced Fight Cave area. */
+            else -> if (event.npc.id in KET_ZEKS) {
+                finishTask(
+                    player,
+                    DiaryLevel.HARD,
+                    HardTasks.FIGHT_CAVE_KILL_KET_ZEK
                 )
             }
         }

@@ -133,17 +133,22 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
         bit: Int,
         targetValue: Int
     ) {
-        if (isTaskCompleted(player, level, task)) return
+        if (isTaskCompleted(player, level, task)) {
+            return
+        }
 
-        val newValue = getAttribute(player, attribute, 0) + 1
-
-        setAttribute(
-            player,
-            "/save:${attribute}",
-            newValue or bit
-        )
+        val oldValue = getAttribute(player, attribute, 0)
+        val newValue = oldValue or bit
 
         if (newValue != targetValue) {
+            if ((oldValue and bit) != 0) return
+
+            setAttribute(
+                player,
+                "/save:${attribute}",
+                newValue
+            )
+
             player.achievementDiaryManager.updateTask(
                 player,
                 diaryType,

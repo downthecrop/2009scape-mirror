@@ -114,17 +114,16 @@ class SeersVillageAchivementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) 
                 }
 
                 Items.RAW_BASS_363 -> {
-                    if (!getAttribute(player, ATTRIBUTE_BASS_CAUGHT, false)) {
-                        setAttribute(
-                            player,
-                            "/save:${ATTRIBUTE_BASS_CAUGHT}",
-                            true
-                        )
-                    }
+                    fulfillTaskRequirement(
+                        player,
+                        DiaryLevel.MEDIUM,
+                        MediumTasks.CATHERBY_CATCH_AND_COOK_BASS,
+                        ATTRIBUTE_BASS_CAUGHT
+                    )
                 }
 
                 Items.BASS_365 -> {
-                    if (getAttribute(player, ATTRIBUTE_BASS_CAUGHT, false)) {
+                    whenTaskRequirementFulfilled(player, ATTRIBUTE_BASS_CAUGHT) {
                         finishTask(
                             player,
                             DiaryLevel.MEDIUM,
