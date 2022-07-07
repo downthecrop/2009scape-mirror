@@ -880,7 +880,7 @@ fun setVarbit(player: Player, varbitId: Int, value: Int, save: Boolean = false) 
     player.varpManager.setVarbit(varbitId, value)
     if (save) {
         val def = VarbitDefinition.forId(varbitId)
-        player.varpManager.flagSave(def.configId)
+        player.varpManager.flagSave(def.varpId)
     }
 }
 
