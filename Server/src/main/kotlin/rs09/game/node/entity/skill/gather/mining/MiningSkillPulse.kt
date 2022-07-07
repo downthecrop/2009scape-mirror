@@ -29,14 +29,15 @@ import rs09.tools.stringtools.*
 
 /**
  * Mining skill pulse
- * @author ceik
+ * @author Ceikry
+ * @author bushtail -> maintenance July 2022
  */
 class MiningSkillPulse(private val player: Player, private val node: Node) : Pulse(1, player, node) {
     private var resource: MiningNode? = null
     private var isMiningEssence = false
     private var isMiningGems = false
     private var ticks = 0
-    protected var resetAnimation = true
+    private var resetAnimation = true
 
     // Perfect Gold Ore in Witchhaven Dungeon (Family Crest)
     private val perfectGoldOreLocations = listOf(
@@ -78,7 +79,7 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
         }
         if (resource!!.id == 2099 &&
             !perfectGoldOreLocations.contains(node.location) ) {
-            // Perfect Gold Ore IDs outside of Witchhaven are replaced with a normal gold rock.
+            // Perfect Gold Ore IDs outside Witchhaven are replaced with a normal gold rock.
             resource = MiningNode.forId(2098)
         }
         if (resource!!.id == 2491) {
@@ -129,9 +130,9 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
             return false
         }
 
-        //actual reward calculations
+        // Reward logic
         var reward = resource!!.reward
-        var rewardAmount = 0
+        var rewardAmount : Int
         if (reward > 0) {
             reward = calculateReward(reward) // calculate rewards
             rewardAmount = calculateRewardAmount(reward) // calculate amount
@@ -139,11 +140,11 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
             player.dispatch(ResourceProducedEvent(reward, rewardAmount, node))
             SkillingPets.checkPetDrop(player, SkillingPets.GOLEM) // roll for pet
 
-            //add experience
+            // Reward mining experience
             val experience = resource!!.experience * rewardAmount
             rewardXP(player, Skills.MINING, experience)
 
-            //Handle bracelet of clay
+            // If player is wearing Bracelet of Clay, soften
             if(reward == Items.CLAY_434){
                 val bracelet = getItemFromEquipment(player, EquipmentSlot.HANDS)
                 if(bracelet != null && bracelet.id == Items.BRACELET_OF_CLAY_11074){
@@ -152,28 +153,32 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
                     reward = Items.SOFT_CLAY_1761
                     sendMessage(player, "Your bracelet of clay softens the clay for you.")
                     if(bracelet.charge <= 0){
-                        sendMessage(player, "Your bracelet of clay crumbles to dust.")
-                        removeItem(player, bracelet)
+                        if(removeItem(player, bracelet)) {
+                            sendMessage(player, "Your bracelet of clay crumbles to dust.")
+                        }
                     }
                 }
             }
             val rewardName = getItemName(reward).lowercase()
-            //send the message for the resource reward
+
+            // Send the message for the resource reward
             if (isMiningGems) {
                 sendMessage(player, "You get ${prependArticle(rewardName)}.")
             } else {
                 sendMessage(player, "You get some ${rewardName.lowercase()}.")
             }
-            //give the reward
-            addItem(player, reward, rewardAmount)
-            var rocksMined = getAttribute(player, "$STATS_BASE:$STATS_ROCKS",0)
-            setAttribute(player, "/save:$STATS_BASE:$STATS_ROCKS",++rocksMined)
 
-            //calculate bonus gem for mining
+            // Give the mining reward, increment 'rocks mined' attribute
+            if(addItem(player, reward, rewardAmount)) {
+                var rocksMined = getAttribute(player, "$STATS_BASE:$STATS_ROCKS", 0)
+                setAttribute(player, "/save:$STATS_BASE:$STATS_ROCKS", ++rocksMined)
+            }
+
+            // Calculate bonus gem chance while mining
             if (!isMiningEssence) {
                 var chance = 282
                 var altered = false
-                var ring = getItemFromEquipment(player, EquipmentSlot.RING)
+                val ring = getItemFromEquipment(player, EquipmentSlot.RING)
                 if (ring != null && ring.name.lowercase().contains("ring of wealth") || inEquipment(player, Items.RING_OF_THE_STAR_SPRITE_14652)) {
                     chance = (chance / 1.5).toInt()
                     altered = true
@@ -192,7 +197,7 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
                 }
             }
 
-            //transform to depleted version
+            // Transform ore to depleted version
             if (!isMiningEssence && resource!!.respawnRate != 0) {
                 SceneryBuilder.replace(node as Scenery, Scenery(resource!!.emptyId, node.getLocation(), node.type, node.rotation), resource!!.respawnDuration)
                 node.setActive(false)
@@ -205,7 +210,7 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
     private fun calculateRewardAmount(reward: Int): Int {
         var amount = 1
 
-        //checks for varrock armor from varrock diary and rolls chance at extra ore
+        // If player is wearing Varrock armour from diary, roll chance at extra ore
         if (!isMiningEssence && player.achievementDiaryManager.getDiary(DiaryType.VARROCK).level != -1) {
             when (reward) {
                 Items.CLAY_434, Items.COPPER_ORE_436, Items.TIN_ORE_438, Items.LIMESTONE_3211, Items.BLURITE_ORE_668, Items.IRON_ORE_440, Items.ELEMENTAL_ORE_2892, Items.SILVER_ORE_442, Items.COAL_453 -> if (player.achievementDiaryManager.armour >= 0 && RandomFunction.random(100) <= 10) {
@@ -223,7 +228,7 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
             }
         }
 
-        //check for bonus ore from shooting star buff
+        // If player has mining boost from Shooting Star, roll chance at extra ore
         if (player.hasActiveState("shooting-star")) {
             if (RandomFunction.getRandom(5) == 3) {
                 sendMessage(player, "...you manage to mine a second ore thanks to the Star Sprite.")
