@@ -1514,6 +1514,19 @@ fun dumpBeastOfBurden(player: Player) {
 }
 
 /**
+ * Gets the player's familiar boost in the given skill
+ *
+ * @param player The player who owns the familiar.
+ * @param skill The skill to check boost of.
+ * @return The amount of skill boost gained from the player's familiar.
+ *
+ * @author bushtail
+ */
+fun getFamiliarBoost(player : Player, skill : Int) : Int {
+    return player.familiarManager.getBoost(skill)
+}
+
+/**
  * Converts an item into its noted representation.
  *
  * @param item The item to convert.
