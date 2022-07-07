@@ -5,6 +5,7 @@ import rs09.tools.stringtools.colorize
 
 import org.rs09.consts.Items
 
+import rs09.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
 
 import java.util.*
@@ -51,6 +52,22 @@ enum class ChompyHat(val id: Int, val kills: Int, val rankName: String) {
         hats.add(hat.id)
       }
       return hats
+    }
+  }
+}
+
+class ChompyEquipListener : InteractionListener {
+  override fun defineListeners() {
+    ChompyHat.values().forEach { hat -> 
+      onEquip(hat.id) {player, node -> 
+        val kills = getAttribute(player, "chompy-kills", 0)
+        if (kills < hat.kills) {
+          sendItemDialogue(player, node.id, "You haven't earned this!")
+          removeItem(player, node.asItem())
+          return@onEquip false
+        }
+        return@onEquip true
+      }
     }
   }
 }
