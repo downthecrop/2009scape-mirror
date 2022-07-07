@@ -79,7 +79,7 @@ class ElsieDialogue(player: Player? = null) : DialoguePlugin(player) {
             4 -> playerl(
                 FacialExpression.ROLLING_EYES,
                 "I'll think about it."
-            ).also { stage = END_DIALOGUE }
+            ).also { stage = START_DIALOGUE }
 
             5 -> npcl(
                 FacialExpression.NEUTRAL,
@@ -165,12 +165,12 @@ class ElsieDialogue(player: Player? = null) : DialoguePlugin(player) {
             ).also { stage++ }
 
             21 -> npcl(
-                FacialExpression.HALF_THINKING,
+                FacialExpression.FRIENDLY,
                 "But it really did us all good to see someone wasn't afraid of the scum who live at that end of town."
             ).also { stage++ }
 
             22 -> npcl(
-                FacialExpression.HALF_GUILTY,
+                FacialExpression.NEUTRAL,
                 "Old Father Packett was furious, but Dissy just laughed it off. "
                 + "Dissy left town after that, saying he wanted to see the world."
             ).also { stage++ }
