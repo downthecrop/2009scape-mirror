@@ -18,7 +18,6 @@ object Event {
     @JvmStatic val PickedUp = PickUpEvent::class.java
     @JvmStatic val InterfaceOpened = InterfaceOpenEvent::class.java
     @JvmStatic val InterfaceClosed = InterfaceCloseEvent::class.java
-    @JvmStatic val VarbitUpdated = VarbitUpdateEvent::class.java
     @JvmStatic val AttributeSet = AttributeSetEvent::class.java
     @JvmStatic val AttributeRemoved = AttributeRemoveEvent::class.java
     @JvmStatic val SpellCast = SpellCastEvent::class.java
@@ -29,4 +28,8 @@ object Event {
     @JvmStatic val ItemSold = ItemShopSellEvent::class.java
     @JvmStatic val JobAssigned = JobAssignmentEvent::class.java
     @JvmStatic val FairyRingDialed = FairyRingDialEvent::class.java
+    @JvmStatic val VarbitUpdated = VarbitUpdateEvent::class.java
+    @JvmStatic val DynamicSkillLevelChanged = DynamicSkillLevelChangeEvent::class.java
+    @JvmStatic val SummoningPointsRecharged = SummoningPointsRechargeEvent::class.java
+    @JvmStatic val PrayerPointsRecharged = PrayerPointsRechargeEvent::class.java
 }

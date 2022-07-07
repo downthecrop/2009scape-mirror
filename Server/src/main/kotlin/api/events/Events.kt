@@ -39,3 +39,6 @@ data class ItemShopSellEvent(val itemId: Int, val amount: Int, val currency: Ite
 data class JobAssignmentEvent(val jobType: JobType, val employerNpc: NPC) : Event
 data class FairyRingDialEvent(val fairyRing: FairyRing) : Event
 data class VarbitUpdateEvent(val offset: Int, val value: Int) : Event
+data class DynamicSkillLevelChangeEvent(val skillId: Int, val oldValue: Int, val newValue: Int): Event
+data class SummoningPointsRechargeEvent(val obelisk: Node) : Event
+data class PrayerPointsRechargeEvent(val altar: Node) : Event

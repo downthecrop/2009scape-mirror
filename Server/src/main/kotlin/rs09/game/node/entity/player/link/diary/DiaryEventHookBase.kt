@@ -69,6 +69,8 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
         player.hook(Event.ItemSold, EventHandler(this, ::onItemSoldToShop))
         player.hook(Event.JobAssigned, EventHandler(this, ::onJobAssigned))
         player.hook(Event.FairyRingDialed, EventHandler(this, ::onFairyRingDialed))
+        player.hook(Event.SummoningPointsRecharged, EventHandler(this, ::onSummoningPointsRecharged))
+        player.hook(Event.PrayerPointsRecharged, EventHandler(this, ::onPrayerPointsRecharged))
     }
 
     protected fun fulfillTaskRequirement(player: Player, level: DiaryLevel, task: Int, attribute: String) {
@@ -218,4 +220,6 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
     protected open fun onItemSoldToShop(player: Player, event: ItemShopSellEvent) {}
     protected open fun onJobAssigned(player: Player, event: JobAssignmentEvent) {}
     protected open fun onFairyRingDialed(player: Player, event: FairyRingDialEvent) {}
+    protected open fun onSummoningPointsRecharged(player: Player, event: SummoningPointsRechargeEvent) {}
+    protected open fun onPrayerPointsRecharged(player: Player, event: PrayerPointsRechargeEvent) {}
 }

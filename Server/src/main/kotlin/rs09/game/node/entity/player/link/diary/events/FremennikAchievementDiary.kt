@@ -101,20 +101,6 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
         }
     }
 
-    override fun onInteracted(player: Player, event: InteractionEvent) {
-        when (player.viewport.region.id) {
-            10552 -> if (event.option == "renew-points"
-                && event.target.id == Scenery.SMALL_OBELISK_29944
-            ) {
-                finishTask(
-                    player,
-                    DiaryLevel.EASY,
-                    EasyTasks.GATE_OBELISK_RECHARGE_POINTS
-                )
-            }
-        }
-    }
-
     override fun onDialogueOpened(player: Player, event: DialogueOpenEvent) {
         when (event.dialogue) {
             is CaptainCainDialogue -> {
@@ -198,6 +184,18 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
                 DiaryLevel.MEDIUM,
                 MediumTasks.DIAL_FAIRY_RING_MOUNTAINTOP
             )
+        }
+    }
+
+    override fun onSummoningPointsRecharged(player: Player, event: SummoningPointsRechargeEvent) {
+        when (player.viewport.region.id) {
+            10552 -> if (event.obelisk.id == Scenery.SMALL_OBELISK_29944) {
+                finishTask(
+                    player,
+                    DiaryLevel.EASY,
+                    EasyTasks.GATE_OBELISK_RECHARGE_POINTS
+                )
+            }
         }
     }
 }
