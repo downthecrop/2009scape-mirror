@@ -71,7 +71,7 @@ public final class EquipmentContainer extends Container {
 	/**
 	 * Adds an item to the equipment container.
 	 * @param newItem The item to add.
-	 * @param inventorySlot The inventory slot of the item.
+	 * @param inventorySlot The inventory slot of the item to add.
 	 * @param fire If we should refresh.
 	 * @param fromInventory If the item is being equipped from the inventory.
 	 * @return {@code True} if succesful, {@code false} if not.
@@ -106,7 +106,7 @@ public final class EquipmentContainer extends Container {
 				return true;
 			}
 
-			boolean successfullyRemovedAll = tryUnequipCurrent(itemsToRemove, newItem);
+			boolean successfullyRemovedAll = tryUnequipCurrent(itemsToRemove, newItem, inventorySlot);
 
 			if(!successfullyRemovedAll) {
 				if (fromInventory) player.getInventory().add(newItem); //add the item back in case we weren't able to remove the currently equipped item(s)
@@ -132,7 +132,7 @@ public final class EquipmentContainer extends Container {
 		}
 	}
 
-	private boolean tryUnequipCurrent(ArrayList<Item> current, Item newItem) {
+	private boolean tryUnequipCurrent(ArrayList<Item> current, Item newItem, int preferredSlot) {
 		if(current.isEmpty()) return true;
 		int freeSlots = player.getInventory().freeSlots();
 		int neededSlots = getNeededSlotsToUnequip(current);
@@ -157,7 +157,7 @@ public final class EquipmentContainer extends Container {
 		boolean allAdded = allRemoved;
 		if(allRemoved) {
 			for (Item item : current) {
-				if (!player.getInventory().add(item)) {
+				if (!player.getInventory().add(item, true, preferredSlot)) {
 					allAdded = false;
 					break;
 				}
