@@ -7,6 +7,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.Graphics
 
 import rs09.game.interaction.InteractionListener
+import rs09.game.system.command.Privilege
 import core.plugin.Initializable
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.npc.NPC
@@ -77,8 +78,9 @@ class BloatedToadNPC : AbstractNPC {
 }
 
 
-class BloatedToadListeners : InteractionListener, StartupListener {
+class BloatedToadListeners : InteractionListener, StartupListener, Commands {
   lateinit var borders: ZoneBorders
+  val extraBorders = ArrayList<ZoneBorders>()
 
   override fun startup() {
     borders = ZoneBorders(2368, 2944, 2687, 3071)
@@ -87,11 +89,42 @@ class BloatedToadListeners : InteractionListener, StartupListener {
     borders.addException(ZoneBorders.forRegion(9775))
   }
 
+  override fun defineCommands() {
+    define("toadzone", Privilege.MODERATOR, "", "Toad inflation.") {player, _ -> 
+      val swloc = player.location.transform(-15,-15,0)
+      val neloc = player.location.transform(15,15,0)
+      val newBorders = ZoneBorders(swloc.x, swloc.y, neloc.x, neloc.y) 
+      extraBorders.add(newBorders)
+      for (i in 0 until 10) {
+        val npc = NPC(NPCs.SWAMP_TOAD_1013, newBorders.randomLoc)
+        npc.isRespawn = true
+        npc.isWalks = true
+        npc.isNeverWalks = false
+        npc.init()
+      }
+    }
+
+    define("toadbomb", Privilege.ADMIN, "", "Toad detoadation.") {player, _ -> 
+      val swloc = player.location.transform(-5,-5,0)
+      val neloc = player.location.transform(5,5,0)
+      for (x in swloc.x until neloc.x) {
+        for (y in swloc.y until neloc.y) {
+          val npc = BloatedToadNPC().construct(NPCs.BLOATED_TOAD_1014, Location.create(x, y, swloc.z))
+          npc.isNeverWalks = true
+          npc.isWalks = false
+          (npc as BloatedToadNPC).ticksToLive = 5
+          npc.init()
+        }
+      }
+    }
+  } 
+
   override fun defineListeners() {
     on(Items.BLOATED_TOAD_2875, ITEM, "drop") {player, used ->
       val quest = player.questRepository.getQuest("Big Chompy Bird Hunting")
+      val inExtraBorder = extraBorders.filter { it.insideBorder(player) }.count() > 0
 
-      if (!borders.insideBorder(player)) {
+      if (!borders.insideBorder(player) && !inExtraBorder) {
         sendPlayerDialogue(player, "I probably wouldn't catch many chompies here.")
         return@on true
       }
