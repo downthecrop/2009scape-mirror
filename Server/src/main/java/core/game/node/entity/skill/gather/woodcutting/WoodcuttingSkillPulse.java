@@ -21,6 +21,7 @@ import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
 import rs09.game.node.entity.skill.farming.FarmingPatch;
 import rs09.game.node.entity.skill.farming.Patch;
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
@@ -37,7 +38,13 @@ import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_
  * @author ceik
  */
 public class WoodcuttingSkillPulse extends Pulse {
-    private int[] woodcuttingSounds = { 3038, 3039, 3040, 3041, 3042 };
+    private int[] woodcuttingSounds = {
+        Sounds.WOODCUTTING_HIT_3038,
+        Sounds.WOODCUTTING_HIT_3039,
+        Sounds.WOODCUTTING_HIT_3040,
+        Sounds.WOODCUTTING_HIT_3041,
+        Sounds.WOODCUTTING_HIT_3042
+    };
 
     private WoodcuttingNode resource;
     private int ticks;
@@ -109,7 +116,11 @@ public class WoodcuttingSkillPulse extends Pulse {
         if(!player.getAnimator().isAnimating()) {
             player.animate(SkillingTool.getHatchet(player).getAnimation());
 
-            List<Player> playersAroundMe = RegionManager.getSurroundingPlayers(player);
+            List<Player> playersAroundMe = RegionManager.getLocalPlayers(player, 2)
+                .stream()
+                .filter(p -> !p.getUsername().equals(player.getUsername()))
+                .collect(Collectors.toList());
+
             int soundIndex = RandomFunction.random(0, woodcuttingSounds.length);
 
             player.getAudioManager().send(
@@ -207,8 +218,7 @@ public class WoodcuttingSkillPulse extends Pulse {
                 }
                 node.setActive(false);
 
-                // TODO: Extract this someplace appropriate.
-                player.getAudioManager().send(2734);
+                player.getAudioManager().send(Sounds.TREE_FALLING_2734);
                 return true;
             }
         }
