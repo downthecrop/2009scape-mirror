@@ -59,7 +59,7 @@
     <dependency>
       <groupId>org.rs09.consts</groupId>
       <artifactId>ConstLib</artifactId>
-      <version>1.4</version>
+      <version>[1.4.0,)</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
