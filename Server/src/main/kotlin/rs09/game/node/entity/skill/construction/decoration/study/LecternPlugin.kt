@@ -1,5 +1,6 @@
 package rs09.game.node.entity.skill.construction.decoration.study
 
+import api.*
 import core.cache.def.impl.SceneryDefinition
 import core.game.component.Component
 import core.game.component.ComponentDefinition
@@ -11,6 +12,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.construction.Decoration
+import core.game.node.entity.skill.magic.MagicStaff
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
@@ -18,6 +20,7 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import rs09.game.world.GameWorld
 import rs09.plugin.ClassScanner.definePlugin
+import rs09.game.interaction.InterfaceListener
 
 /**
  * Handles the lectern
@@ -90,6 +93,10 @@ class LecternPlugin : OptionHandler() {
                 return false
             }
             for (item in requiredItems) {
+                val staff = MagicStaff.forId(item.id)
+                if (staff != null && player.equipment.containsAtLeastOneItem(staff.staves)) {
+                    continue;
+                }
                 if (!player.inventory.containsItem(item)) {
                     //TODO staffs
                     player.sendMessage("You don't have enough materials.")
@@ -120,7 +127,6 @@ class LecternPlugin : OptionHandler() {
         for (i in 13642..13648) {
             SceneryDefinition.forId(i).handlers["option:study"] = this
         }
-        definePlugin(TeleTabInterface())
         return this
     }
 
@@ -131,17 +137,12 @@ class LecternPlugin : OptionHandler() {
             var counter = 0
             override fun pulse(): Boolean {
                 when(counter++){
-                    0 -> player.animator.animate(Animation(3649)).also { player.lock() }
-                    8 -> player.interfaceManager.open(Component(400)).also { player.unlock(); return true }
+                    0 -> player.animator.animate(Animation(1894)).also { player.lock() }
+                    1 -> player.interfaceManager.open(Component(400)).also { player.unlock(); return true }
                 }
                 return false
             }
         })
-        /*var bits = 0 We dumb so we comment it out haha code go brrrrr
-        for (t in TeleTabButton.values()) {
-            if (t.canMake(player)) bits = bits or (1 shl t.buttonId)
-        }
-        player.configManager[2005] = bits*/
         return true
     }
 
@@ -149,45 +150,67 @@ class LecternPlugin : OptionHandler() {
      * TeleTabInterface
      * @author Ceikry
      */
-    private class TeleTabInterface : ComponentPlugin() {
-        @Throws(Throwable::class)
-        override fun newInstance(arg: Any?): Plugin<Any>? {
-            ComponentDefinition.put(400, this)
-            return this
-        }
-
-        override fun handle(player: Player, component: Component, opcode: Int, button: Int, slot: Int, itemId: Int): Boolean {
-            val ttb = TeleTabButton.forId(button)
-            if (ttb != null && ttb.canMake(player)) {
-                player.interfaceManager.close()
-                player.pulseManager.run(object : Pulse(1) {
-                    override fun pulse(): Boolean {
-                        if (!ttb.canMake(player)) {
-                            return true
-                        }
-                        if (player.inventory.freeSlots() == 0) {
-                            player.sendMessage("You don't have enough space in your inventory to make this.")
-                            return true
-                        }
-                        if (player.inventory.remove(*ttb.requiredItems.toTypedArray())) {
-                            player.inventory.add(ttb.tabItem)
-                            player.skills.addExperience(Skills.MAGIC, ttb.xp / 2.toDouble(), true)
-                            //TODO Add correct lectern animation.
-                            player.animate(Animation(4460))
-                            //////////////////////////////
-                            super.setDelay(9)
-                            if (ttb == TeleTabButton.VARROCK
-                                    && (player.getAttribute("ttb:objectid", 0) == Decoration.MAHOGANY_EAGLE_LECTERN.objectId
-                                            || player.getAttribute("ttb:objectid", 0) == Decoration.MAHOGANY_DEMON_LECTERN.objectId)) {
-                                player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 2, 8)
-                            }
-                        }
-                        return false
-                    }
-                })
+    class TeleTabInterface : InterfaceListener {
+        val decorationVarps = hashMapOf(
+            Decoration.OAK_LECTERN to Pair(0, 0),
+            Decoration.EAGLE_LECTERN to Pair(1, 0),
+            Decoration.DEMON_LECTERN to Pair(0, 1),
+            Decoration.TEAK_EAGLE_LECTERN to Pair(2, 0),
+            Decoration.TEAK_DEMON_LECTERN to Pair(0, 2),
+            Decoration.MAHOGANY_EAGLE_LECTERN to Pair(3, 0),
+            Decoration.MAHOGANY_DEMON_LECTERN to Pair(0, 3),
+        )
+        override fun defineInterfaceListeners() {
+            onOpen(400) { player, component -> 
+                val id = player.getAttribute("ttb:objectid", 0)
+                val deco = Decoration.forObjectId(id)
+                val values = decorationVarps[deco] ?: Pair(0, 0)
+                player.varpManager.get(261).setVarbit(0, values.first).send(player)
+                player.varpManager.get(262).setVarbit(0, values.second).send(player)
+                return@onOpen true
             }
-            player.animate(Animation(-1))
-            return true
+            on(400) { player, _, _, buttonID, _, _ ->
+                val ttb = TeleTabButton.forId(buttonID)
+                if (ttb != null && ttb.canMake(player)) {
+                    player.interfaceManager.close()
+                    var requiredItemsCountingStaves = ttb.requiredItems.filter({ item ->
+                        val staff = MagicStaff.forId(item.id);
+                        !(staff != null && player.equipment.containsAtLeastOneItem(staff.staves))
+                    }).toTypedArray()
+                    player.pulseManager.run(object : Pulse(1) {
+                        var counter = 0
+                        override fun pulse(): Boolean {
+                            when(counter++) {
+                                0 -> {
+                                    if (!ttb.canMake(player)) {
+                                        return true
+                                    }
+                                    //TODO Add correct lectern animation (should look like raising arms progressively higher 3 times).
+                                    player.animate(Animation(782))
+                                }
+                                2 -> {
+                                    if (player.inventory.remove(*requiredItemsCountingStaves)) {
+                                        // Should never drop, since soft clay was successfully removed
+                                        addItemOrDrop(player, ttb.tabItem.id)
+                                        player.skills.addExperience(Skills.MAGIC, ttb.xp / 2.toDouble(), true)
+                                        if (ttb == TeleTabButton.VARROCK
+                                                && (player.getAttribute("ttb:objectid", 0) == Decoration.MAHOGANY_EAGLE_LECTERN.objectId
+                                                        || player.getAttribute("ttb:objectid", 0) == Decoration.MAHOGANY_DEMON_LECTERN.objectId)) {
+                                            player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 2, 8)
+                                        }
+                                    } else {
+                                        return true
+                                    }
+                                }
+                            }
+                            counter %= 6
+                            return false
+                        }
+                    })
+                }
+                player.animate(Animation(-1))
+                return@on true
+            }
         }
     }
 
