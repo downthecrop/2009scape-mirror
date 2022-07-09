@@ -1322,11 +1322,12 @@ fun submitIndividualPulse(entity: Entity, pulse: Pulse) {
 /**
  * Similar to submitIndividualPulse, but for non-repeating tasks, with a cleaner syntax.
  */
-fun runTask(entity: Entity, delay: Int = 0, task: () -> Unit) {
+fun runTask(entity: Entity, delay: Int = 0, repeatTimes: Int = 1, task: () -> Unit) {
+    var cycles = repeatTimes
     entity.pulseManager.run(object : Pulse(delay) {
         override fun pulse(): Boolean {
             task.invoke()
-            return true
+            return --cycles == 0
         }
     })
 }
@@ -1778,7 +1779,7 @@ fun sendSkillDialogue(player: Player, init: SkillDialogueBuilder.() -> Unit) {
         else -> null
     }
 
-    val handler = object : SkillDialogueHandler(player, type, *builder.items) {
+    object : SkillDialogueHandler(player, type, *builder.items) {
         override fun create(amount: Int, index: Int) {
             builder.creationCallback(builder.items[index].id, amount)
         }
@@ -1786,7 +1787,7 @@ fun sendSkillDialogue(player: Player, init: SkillDialogueBuilder.() -> Unit) {
         override fun getAll(index: Int): Int {
             return builder.totalAmountCallback(builder.items[index].id)
         }
-    }.display()
+    }.open()
 }
 
 class SkillDialogueBuilder {

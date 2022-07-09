@@ -288,49 +288,56 @@ class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 2, Vars.VARP_QUEST_C
         return@onUseWith true
       }
 
-      object : SkillDialogueHandler(player, SkillDialogue.ONE_OPTION, Item(Items.WOLFBONE_ARROWTIPS_2861, 5)){
-        override fun create(amount: Int, index: Int) {
-          var actualAmount = min(amount, maxAmount)
-
-          submitIndividualPulse(player, object : Pulse(2) {
-            override fun pulse() : Boolean {
-              if (removeItem(player, Item(used.id))) {
-                addItem(player, Items.WOLFBONE_ARROWTIPS_2861, 4)
-                rewardXP(player, Skills.FLETCHING, 2.5)
-                actualAmount -= 1
-              }
-              return actualAmount == 0
-            }
-          })
+      fun process() {
+        if (removeItem(player, Item(used.id))) {
+          addItem(player, Items.WOLFBONE_ARROWTIPS_2861, 4)
+          rewardXP(player, Skills.FLETCHING, 2.5)
         }
-      }.open()
+      }
+
+      sendSkillDialogue(player) {
+        create { id, amount -> 
+          var actualAmount = min(amount, maxAmount)
+          runTask(
+            player,
+            delay = 2,
+            repeatTimes = actualAmount,
+            task = ::process
+          )
+        }
+        withItems(Item(Items.WOLFBONE_ARROWTIPS_2861, 5))
+      }
 
       return@onUseWith true
     }
 
     onUseWith(ITEM, Items.WOLFBONE_ARROWTIPS_2861, Items.FLIGHTED_OGRE_ARROW_2865) {player, used, with -> 
-      val tips = amountInInventory(player, Items.WOLFBONE_ARROWTIPS_2861)
-      val shafts = amountInInventory(player, Items.FLIGHTED_OGRE_ARROW_2865)
-      val maxArrows = min(tips, shafts)
+      fun getMaxAmount(_unused: Int = 0): Int {
+          val tips = amountInInventory(player, Items.WOLFBONE_ARROWTIPS_2861)
+          val shafts = amountInInventory(player, Items.FLIGHTED_OGRE_ARROW_2865)
+          return min(tips, shafts)
+      }     
 
-      object : SkillDialogueHandler(player, SkillDialogue.ONE_OPTION, Item(Items.OGRE_ARROW_2866, 5)) {
-        override fun create(amount: Int, index: Int) {
-          var maxActualAmount = min(6 * amount, maxArrows)
-
-          submitIndividualPulse(player, object : Pulse(2) {
-            override fun pulse() : Boolean {
-              val amountThisIter = min(6, maxActualAmount)
-              if (removeItem(player, Item(used.id, amountThisIter)) && removeItem(player, Item(with.id, amountThisIter))) {
-                addItem(player, Items.OGRE_ARROW_2866, amountThisIter)
-                maxActualAmount -= amountThisIter
-                rewardXP(player, Skills.FLETCHING, 6.0)
-              }
-              return maxActualAmount == 0
-            }
-          })
+      fun process() {
+        val amountThisIter = min(6, getMaxAmount())
+        if (removeItem(player, Item(used.id, amountThisIter)) && removeItem(player, Item(with.id, amountThisIter))) {
+          addItem(player, Items.OGRE_ARROW_2866, amountThisIter)
+          rewardXP(player, Skills.FLETCHING, 6.0)
         }
-      }.open()
+      }
 
+      sendSkillDialogue(player) {
+        create { id, amount -> 
+          runTask(
+            player,
+            delay = 2,
+            repeatTimes = min(amount, getMaxAmount() / 6 + 1),
+            task = ::process
+          )
+        }
+        calculateMaxAmount(::getMaxAmount)
+        withItems(Item(Items.OGRE_ARROW_2866, 5))
+      }
       return@onUseWith true
     }
 
