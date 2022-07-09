@@ -672,7 +672,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             offerPrice[offer.itemID] = offer.offeredValue
         }
 
-        val entries = offerAmounts.entries
+        val entries = offerAmounts.entries.sortedBy({ e -> getItemName(e.key) })
         var lineId = 11
         setScrollTitle(player, "Bot Stock - \"$searchTerm\"")
         for(i in 0..299) {
@@ -698,7 +698,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             offerPrice[offer.itemID] = offer.offeredValue
         }
 
-        val entries = offerAmounts.entries
+        val entries = offerAmounts.entries.sortedBy({ e -> getItemName(e.key) })
         var lineId = 11
         setScrollTitle(player, "Bot Stock")
         for(i in 0..299) {
@@ -730,7 +730,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             lowestPrice[offer.itemID] = price
         }
 
-        val entries = offerAmounts.entries
+        val entries = offerAmounts.entries.sortedBy({ e -> getItemName(e.key) })
         var lineId = 11
         setScrollTitle(player, "Active Sell Offers")
         for(i in 0..299) {
@@ -762,7 +762,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             highestPrice[offer.itemID] = price
         }
 
-        val entries = offerAmounts.entries
+        val entries = offerAmounts.entries.sortedBy({ e -> getItemName(e.key) })
         var lineId = 11
         setScrollTitle(player, "Active Buy Offers")
         for(i in 0..299) {
