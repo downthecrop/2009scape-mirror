@@ -1,5 +1,8 @@
 package core.game.content.dialogue;
 
+import api.events.DialogueCloseEvent;
+import api.events.DialogueOpenEvent;
+import api.events.DialogueOptionSelectionEvent;
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
 import core.game.component.Component;
@@ -116,6 +119,11 @@ public final class DialogueInterpreter {
             dialogue = null;
             return false;
         }
+
+        if (dialogue != null) {
+            player.dispatch(new DialogueOpenEvent(dialogue));
+        }
+
         return true;
     }
 
@@ -154,11 +162,28 @@ public final class DialogueInterpreter {
             activeTopics.clear();
             return;
         }
+
         if(file != null){
-            player.getDialogueInterpreter().getDialogue().file.handle(componentId,buttonId - 1);
-            return;
+            player.dispatch(
+                new DialogueOptionSelectionEvent(
+                    file,
+                    file.getStage(),
+                    buttonId - 1
+                )
+            );
+
+            file.handle(componentId,buttonId - 1);
+        } else {
+            player.dispatch(
+                new DialogueOptionSelectionEvent(
+                    dialogue,
+                    dialogue.stage,
+                    buttonId - 1
+                )
+            );
+
+            dialogue.handle(componentId, buttonId - 1);//here
         }
-        player.getDialogueInterpreter().getDialogue().handle(componentId, buttonId - 1);//here
     }
 
     /**
@@ -176,6 +201,7 @@ public final class DialogueInterpreter {
                 DialoguePlugin d = dialogue;
                 dialogue = null;
                 d.close();
+                player.dispatch(new DialogueCloseEvent(d));
             }
         }
         activeTopics.clear();

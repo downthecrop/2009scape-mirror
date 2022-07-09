@@ -1,6 +1,6 @@
 package core.game.interaction;
 
-import api.events.UsedWithEvent;
+import api.events.UseWithEvent;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
@@ -144,7 +144,7 @@ public abstract class UseWithHandler implements Plugin<Object> {
                 event.getPlayer().getPulseManager().run(new Pulse(1, event.getPlayer(), event.getUsed(), event.getUsedWith()) {
                     @Override
                     public boolean pulse() {
-                        event.getPlayer().dispatch(new UsedWithEvent(event.getUsed().getId(), event.getUsedWith().getId()));
+                        event.getPlayer().dispatch(new UseWithEvent(event.getUsed().getId(), event.getUsedWith().getId()));
                         boolean handled = false;
                         if (event.getPlayer() != null) {
                             event.getPlayer().getInterfaceManager().close();
@@ -170,7 +170,7 @@ public abstract class UseWithHandler implements Plugin<Object> {
             event.getPlayer().getPulseManager().run(new MovementPulse(event.getPlayer(), event.getUsedWith(), handler.get(0)) {
                 @Override
                 public boolean pulse() {
-                    event.getPlayer().dispatch(new UsedWithEvent(event.getUsed().getId(), event.getUsedWith().getId()));
+                    event.getPlayer().dispatch(new UseWithEvent(event.getUsed().getId(), event.getUsedWith().getId()));
                     event.getPlayer().faceLocation(FaceLocationFlag.getFaceLocation(event.getPlayer(), event.getUsedWith()));
                     boolean handled = false;
                     Item used = (Item) event.getUsed();

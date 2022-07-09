@@ -1,82 +1,111 @@
 package rs09.game.content.jobs
 
-import GatheringJobs
-import SlayingJob
+import api.*
+import rs09.game.content.jobs.impl.GatheringJobs
+import rs09.game.content.jobs.impl.SlayingJobs
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import org.json.simple.JSONObject
+import org.rs09.consts.Items
 import rs09.ServerStore
 import rs09.ServerStore.Companion.getInt
-import rs09.game.system.SystemLogger
-import java.util.concurrent.TimeUnit
 
 object JobManager {
     @JvmStatic
     fun updateJobRemaining(player: Player, amount: Int = 0) {
-        val cur = player.getAttribute("jobs:amount",0)
+        val cur = getAttribute(player, "jobs:amount", 0)
         val new = cur - amount
-        val jobType = player.getAttribute("jobs:type",0)
-        val jobId = player.getAttribute("jobs:id",0)
+        val jobType = JobType.values()[getAttribute(player, "jobs:type", 0)]
+        val jobId = getAttribute(player, "jobs:id", 0)
 
-        var gJob: GatheringJobs? = null
-        var sJob: SlayingJob? = null
+        when (jobType) {
+            JobType.GATHERING -> { }
 
-        if(jobType == 0){
-            gJob = GatheringJobs.values()[jobId]
-        } else {
-            sJob = SlayingJob.values()[jobId]
+            JobType.SLAYING -> {
+                val job = SlayingJobs.values()[jobId]
+
+                if (new % 5 == 0 && new > 0) {
+                    sendMessage(
+                        player,
+                        "You have $new ${NPC(job.ids[0]).name.lowercase()} left to go."
+                    )
+                } else if (new == 0) {
+                    sendMessage(
+                        player,
+                        "<col=00AA00>You have completed your job.</col>"
+                    )
+                }
+            }
         }
 
-        if(new % 5 == 0 && sJob != null && new > 0){
-            player.sendMessage("You have $new ${NPC(sJob.ids[0]).name.toLowerCase()} left to go.")
-        }
-        if(new == 0 && sJob != null){
-            player.sendMessage("You have completed your job.")
-        }
-        player.setAttribute("jobs:amount",new)
+        setAttribute(player, "jobs:amount", new)
     }
 
     @JvmStatic
-    fun rewardPlayer(player: Player, npc: NPC){
-        val amt = player.getAttribute("jobs:original_amount",0)
-        val type = player.getAttribute("jobs:type",0)
-        val jobId = player.getAttribute("jobs:id",0)
-        if(type == 0){
-            val it = Item(GatheringJobs.values()[jobId].itemId)
-            var amount = player.inventory.getAmount(it)
-            val needed = player.getAttribute("jobs:amount",0)
-            if(amount == 0){
-                player.dialogueInterpreter.open(CancelJobDialogueFile(),npc)
-                SystemLogger.logAlert("Opening CancelJob")
-                return
-            }
-            if(amount < needed){
-                player.dialogueInterpreter.sendItemMessage(GatheringJobs.values()[jobId].itemId,"You still need to gather ${needed - amount} more.")
-                player.inventory.remove(Item(it.id,amount))
-                player.setAttribute("jobs:amount",needed - amount)
-                return
-            }
-            if(amount > needed) amount = needed
-            player.inventory.remove(Item(it.id,amount))
-        } else {
-            val needed = player.getAttribute("jobs:amount",0)
-            if(needed > 0){
-                player.dialogueInterpreter.sendDialogue("You still need to kill $needed more ${NPC(SlayingJob.values()[jobId].ids[0]).name.toLowerCase()}.")
-                return
-            }
-            player.dialogueInterpreter.sendDialogue("Excellent work, thank you! Here's your reward.")
-        }
-        if(!player.inventory.add(Item(995,250 * amt))){
-            GroundItemManager.create(Item(995,250 * amt),player.centerLocation,player)
-        }
-        player.removeAttribute("jobs:id")
-        player.removeAttribute("jobs:amount")
-        player.removeAttribute("jobs:original_amount")
-        player.removeAttribute("jobs:type")
+    fun rewardPlayer(player: Player, npc: NPC) {
+        val amt = getAttribute(player, "jobs:original_amount", 0)
+        val jobType = JobType.values()[getAttribute(player, "jobs:type", 0)]
+        val jobId = getAttribute(player, "jobs:id", 0)
 
-        getStoreFile()[player.username.toLowerCase()] = getStoreFile().getInt(player.username.toLowerCase()) + 1
+        when (jobType) {
+            JobType.GATHERING -> {
+                val it = Item(GatheringJobs.values()[jobId].itemId)
+                var amount = amountInInventory(player, it.id)
+                val needed = getAttribute(player, "jobs:amount", 0)
+
+                if (amount == 0) {
+                    openDialogue(player, CancelJobDialogueFile(), npc)
+                    return
+                }
+
+                if (amount < needed) {
+                    sendItemDialogue(
+                        player,
+                        GatheringJobs.values()[jobId].itemId,
+                        "You still need to gather ${needed - amount} more."
+                    )
+
+                    removeItem(player, Item(it.id, amount))
+                    setAttribute(player, "jobs:amount", needed - amount)
+
+                    return
+                }
+
+                if (amount > needed) {
+                    amount = needed
+                }
+
+                removeItem(player, Item(it.id, amount))
+            }
+
+            JobType.SLAYING -> {
+                val needed = getAttribute(player, "jobs:amount", 0)
+
+                if (needed > 0) {
+                    sendDialogue(
+                        player,
+                        "You still need to kill $needed more ${NPC(SlayingJobs.values()[jobId].ids[0]).name.lowercase()}."
+                    )
+
+                    return
+                }
+
+                sendDialogue(
+                    player,
+                    "Excellent work, thank you! Here's your reward."
+                )
+            }
+        }
+
+        addItemOrDrop(player, Items.COINS_995, 250 * amt)
+
+        removeAttribute(player, "jobs:id")
+        removeAttribute(player, "jobs:amount")
+        removeAttribute(player, "jobs:original_amount")
+        removeAttribute(player, "jobs:type")
+
+        getStoreFile()[player.username.lowercase()] = getStoreFile().getInt(player.username.lowercase()) + 1
     }
 
     fun getStoreFile(): JSONObject {

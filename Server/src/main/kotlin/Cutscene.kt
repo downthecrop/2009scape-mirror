@@ -1,6 +1,6 @@
 import api.*
 import api.events.EventHook
-import api.events.SelfDeath
+import api.events.SelfDeathEvent
 import core.game.component.Component
 import core.game.content.dialogue.FacialExpression
 import core.game.interaction.MovementPulse
@@ -362,9 +362,9 @@ abstract class Cutscene(val player: Player) {
     companion object {
         const val ATTRIBUTE_CUTSCENE = "cutscene"
         const val ATTRIBUTE_CUTSCENE_STAGE = "cutscene:stage"
-        object CUTSCENE_DEATH_HOOK : EventHook<SelfDeath>
+        object CUTSCENE_DEATH_HOOK : EventHook<SelfDeathEvent>
         {
-            override fun process(entity: Entity, event: SelfDeath) {
+            override fun process(entity: Entity, event: SelfDeathEvent) {
                 if(entity !is Player) return
                 entity.getCutscene()?.end() ?: entity.unhook(this)
             }

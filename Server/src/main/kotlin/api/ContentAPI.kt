@@ -135,6 +135,15 @@ fun isEquipped(player: Player, id: Int): Boolean {
     return amountInEquipment(player, id) > 0
 }
 
+/**
+ * Check that a set of items is equipped by the given player
+ */
+fun areEquipped(player: Player, vararg ids: Int): Boolean {
+    return ids.all { id ->
+        amountInEquipment(player, id) > 0
+    }
+}
+
 data class ContainerisedItem(val container: core.game.container.Container?, val itemId: Int)
 
 /**

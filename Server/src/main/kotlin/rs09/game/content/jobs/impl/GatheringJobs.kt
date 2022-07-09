@@ -1,3 +1,5 @@
+package rs09.game.content.jobs.impl
+
 import core.game.node.entity.skill.Skills
 import core.tools.RandomFunction
 

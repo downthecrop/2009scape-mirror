@@ -33,8 +33,7 @@ class DukeHoracioDialogue(player: Player? = null) : DialoguePlugin(player) {
         if (!sendChoices()) {
             interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Greetings. Welcome to my castle.")
         }
-        // Speak to the Duke of Lumbridge
-        player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 0, 2)
+
         return true
     }
 

@@ -1,5 +1,6 @@
 package core.game.node.entity.skill;
 
+import api.events.DynamicSkillLevelChangeEvent;
 import core.game.interaction.item.brawling_gloves.BrawlingGloves;
 import core.game.interaction.item.brawling_gloves.BrawlingGlovesManager;
 import core.game.node.entity.Entity;
@@ -604,9 +605,13 @@ public final class Skills {
 		} else if (slot == PRAYER) {
 			prayerPoints = level;
 		}
+
+		int previousLevel = dynamicLevels[slot];
 		dynamicLevels[slot] = level;
+
 		if (entity instanceof Player) {
 			PacketRepository.send(SkillLevel.class, new SkillContext((Player) entity, slot));
+			entity.dispatch(new DynamicSkillLevelChangeEvent(slot, previousLevel, level));
 		}
 	}
 

@@ -170,7 +170,7 @@ class ThessaliaInterface : ComponentPlugin(){
     override fun handle(player: Player?, component: Component?, opcode: Int, button: Int, slot: Int, itemId: Int): Boolean {
         player ?: return false
         when(button){
-            181,180 -> pay(player)
+            181,180,297 -> pay(player)
             else -> when(component?.id){
                 THESSALIA_MALE_COMPONENT -> {
                     when(button){

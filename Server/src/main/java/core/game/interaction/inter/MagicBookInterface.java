@@ -1,5 +1,6 @@
 package core.game.interaction.inter;
 
+import api.events.SpellCastEvent;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -34,7 +35,20 @@ public final class MagicBookInterface extends ComponentPlugin {
 		if (GameWorld.getTicks() < player.getAttribute("magic:delay", -1)) {
 			return true;
 		}
+
+		SpellBook spellBook = component.getId() == 192
+				? SpellBook.MODERN
+				: component.getId() == 193
+					? SpellBook.ANCIENT
+					: SpellBook.LUNAR;
+
 		SpellListeners.run(button, SpellListener.NONE, SpellUtils.getBookFromInterface(component.getId()),player,null);
-		return MagicSpell.castSpell(player, component.getId() == 192 ? SpellBook.MODERN : component.getId() == 193 ? SpellBook.ANCIENT : SpellBook.LUNAR, button, player);
+		boolean result = MagicSpell.castSpell(player, spellBook, button, player);
+
+		if (result) {
+			player.dispatch(new SpellCastEvent(spellBook, button));
+		}
+
+		return result;
 	}
 }

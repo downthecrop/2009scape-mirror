@@ -1,5 +1,6 @@
 package core.game.content.activity.tzhaar;
 
+import api.events.NPCKillEvent;
 import core.game.content.activity.ActivityPlugin;
 import core.game.content.global.BossKillCounter;
 import core.game.interaction.Option;
@@ -257,6 +258,10 @@ public final class TzhaarFightCavesPlugin extends ActivityPlugin {
 		} else {
 			leave((Player) e, e.getAttribute("fc_wave", 0));
 		}
+
+		/* Kludge to fix this plugin overriding the base NPC death finalization
+		 * resulting in not dispatching the proper NPC kill event. */
+		killer.dispatch(new NPCKillEvent(e.asNpc()));
 		return true;
 	}
 

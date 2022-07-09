@@ -29,7 +29,7 @@ object TutorialStage {
         if(login)
         {
             player.hook(Event.ButtonClicked, TutorialButtonReceiver)
-            player.hook(Event.Interaction, TutorialInteractionReceiver)
+            player.hook(Event.Interacted, TutorialInteractionReceiver)
             player.hook(Event.ResourceProduced, TutorialResourceReceiver)
             player.hook(Event.UsedWith, TutorialUseWithReceiver)
             player.hook(Event.FireLit, TutorialFireReceiver)

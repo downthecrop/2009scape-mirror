@@ -4,14 +4,15 @@ import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.diary.DiaryType
 import core.plugin.Initializable
+import org.rs09.consts.NPCs
+import rs09.game.content.dialogue.Topic
 import rs09.tools.END_DIALOGUE
+import rs09.tools.START_DIALOGUE
 
 /**
  * Represents the dialogue plugin used for the Hunting Expert in the Rellekkan Hunter area
- * @author Crash
- * @version 1.0
+ * @author vddcore
  */
 @Initializable
 class HuntingExpertRellekkaDialogue(player: Player? = null) : DialoguePlugin(player) {
@@ -22,40 +23,67 @@ class HuntingExpertRellekkaDialogue(player: Player? = null) : DialoguePlugin(pla
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc("Good day, you seem to have a keen eye. Maybe even", "some hunter's blood in that body of yours?")
-        stage = -1
-        return true
-    }
 
-    override fun init() {
-        super.init()
+        npcl(
+            FacialExpression.HAPPY,
+            "Good day, you seem to have a keen eye. "
+            + "Maybe even some hunter's blood in that body of yours?"
+        )
+
+        return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            -1 -> options("Ask about polar hunting", "Nevermind.").also { stage++ }
-            0 -> when(buttonId){
-                1 -> player("Is there anything you can teach me?").also { stage = 20 }
-                2 -> stage++
-            }
+            START_DIALOGUE -> showTopics(
+                Topic(FacialExpression.ASKING, "Is there anything you can teach me?", 1),
+                Topic(FacialExpression.NEUTRAL, "Nevermind.", END_DIALOGUE)
+            )
 
-            1 -> stage = END_DIALOGUE
+            1 -> npcl(
+                FacialExpression.FRIENDLY,
+                "I can teach you how to hunt."
+            ).also { stage++ }
 
+            2 -> playerl(
+                FacialExpression.THINKING,
+                "What kind of creatures can I hunt?"
+            ).also { stage++ }
 
-            20 -> npc("I can teach you how to hunt.").also { stage++ }
-            21 -> player("What kind of creatures can I hunt?").also { stage++ }
-            22 -> npc("Many creatures in many ways.","You need to make some traps","and catch birds!").also { stage++ }
-            23 -> player("Birds?").also { stage++ }
-            24 -> npc(FacialExpression.ANGRY, "Yes, birds! Like these ones here!").also { stage++ }
-            25 -> npc("Look, just... get some Hunting gear","and go set up some traps.").also { stage++ }
-            26 -> player(FacialExpression.ASKING,"Is that it?").also { stage++ }
-            27 -> npc(FacialExpression.FURIOUS, "JUST GO DO IT!").also { stage++ }
-            28 -> end().also { player.achievementDiaryManager.finishTask(player, DiaryType.FREMENNIK,0,6) }
+            3 -> npcl(
+                FacialExpression.FRIENDLY,
+                "Many creatures in many ways. You need to make some traps "
+                + "and catch birds!"
+            ).also { stage++ }
+
+            4 -> playerl(
+                FacialExpression.HALF_ASKING,
+                "Birds?"
+            ).also { stage++ }
+
+            5 -> npcl(
+                FacialExpression.ANNOYED,
+                "Yes, birds! Like the ones here!"
+            ).also { stage++ }
+
+            6 -> npcl(
+                FacialExpression.ANNOYED,
+                "Look. Just... Get some hunting gear and go set up some traps."
+            ).also { stage++ }
+
+            7 -> playerl(
+                FacialExpression.HALF_ROLLING_EYES,
+                "Is that it?"
+            ).also { stage++ }
+
+            8 -> npcl(
+                FacialExpression.FURIOUS,
+                "JUST GO DO IT!"
+            ).also { stage = END_DIALOGUE }
         }
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(5112)
-    }
+    override fun getIds(): IntArray
+        = intArrayOf(NPCs.HUNTING_EXPERT_5112)
 }

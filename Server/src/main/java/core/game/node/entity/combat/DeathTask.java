@@ -1,6 +1,6 @@
 package core.game.node.entity.combat;
 
-import api.events.SelfDeath;
+import api.events.SelfDeathEvent;
 import core.game.container.Container;
 import core.game.container.ContainerType;
 import core.game.node.Node;
@@ -85,7 +85,7 @@ public final class DeathTask extends NodeTask {
 		e.getImpactHandler().getImpactLog().clear();// check if this needs to be
 													// before finalize
 		e.getImpactHandler().setDisabledTicks(4);
-		e.dispatch(new SelfDeath(killer));
+		e.dispatch(new SelfDeathEvent(killer));
 	}
 
 	@Override

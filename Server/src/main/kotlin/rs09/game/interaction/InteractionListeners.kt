@@ -1,7 +1,7 @@
 package rs09.game.interaction
 
 import api.events.InteractionEvent
-import api.events.UsedWithEvent
+import api.events.UseWithEvent
 import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
 import core.game.interaction.Option
@@ -9,7 +9,6 @@ import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
-import rs09.game.system.SystemLogger
 
 object InteractionListeners {
     private val listeners = HashMap<String,(Player, Node) -> Boolean>(1000)
@@ -189,16 +188,16 @@ object InteractionListeners {
                         return true
                     }
                     player.faceLocation(with.location)
-                    if(flipped) player.dispatch(UsedWithEvent(with.id, used.id))
-                    else player.dispatch(UsedWithEvent(used.id, with.id))
+                    if(flipped) player.dispatch(UseWithEvent(with.id, used.id))
+                    else player.dispatch(UseWithEvent(used.id, with.id))
                     if(flipped) method.invoke(player,with,used)
                     else method.invoke(player,used,with)
                     return true
                 }
             })
         } else {
-            if(flipped) player.dispatch(UsedWithEvent(with.id, used.id))
-            else player.dispatch(UsedWithEvent(used.id, with.id))
+            if(flipped) player.dispatch(UseWithEvent(with.id, used.id))
+            else player.dispatch(UseWithEvent(used.id, with.id))
             if(flipped) method.invoke(player,with,used)
             else method.invoke(player,used,with)
         }
