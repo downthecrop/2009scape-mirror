@@ -27,6 +27,7 @@ class ConfigParser : Commands {
         MusicConfigLoader().load()
         RangedConfigLoader().load()
         CustomVarbitParser().load()
+        ClueRewardParser().load()
     }
 
     fun reloadConfigs(callback: () -> Unit) {
