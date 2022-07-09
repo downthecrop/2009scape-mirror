@@ -45,17 +45,31 @@ class ShopTests {
     }
 
     @Test fun shouldNotSellUnstockedItemToStandardStore() {
-        testPlayer.inventory.add(Item(1, 1))
+        testPlayer.inventory.add(Item(1511, 1))
         testPlayer.setAttribute("shop-cont", nonGeneral.getContainer(testPlayer))
         val status = nonGeneral.sell(testPlayer, 0, 1)
         Assertions.assertEquals(true, status is Shop.TransactionStatus.Failure)
     }
 
     @Test fun shouldSellUnstockedItemToGeneralStore() {
-        testPlayer.inventory.add(Item(1, 1))
+        testPlayer.inventory.add(Item(1511, 1))
         testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
         val status = general.sell(testPlayer, 0, 1)
         assertTransactionSuccess(status)
+    }
+
+    @Test fun shouldNotSellDestroyable() {
+        testPlayer.inventory.add(Item(1, 795))
+        testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
+        val status = general.sell(testPlayer, 0, 1)
+        Assertions.assertEquals(true, status is Shop.TransactionStatus.Failure)
+    }
+
+    @Test fun shouldNotSellUntradeable() {
+        testPlayer.inventory.add(Item(1, 1799))
+        testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
+        val status = general.sell(testPlayer, 0, 1)
+        Assertions.assertEquals(true, status is Shop.TransactionStatus.Failure)
     }
 
     @Test fun shouldSellUnstockedItemToGeneralStoreUsingLowAlchBaseValue() {
@@ -191,14 +205,14 @@ class ShopTests {
     }
 
     @Test fun shouldSellUnstockedItemToGeneralStoreAsIronman() {
-        testIronman.inventory.add(Item(1, 1))
+        testIronman.inventory.add(Item(1511, 1))
         testIronman.setAttribute("shop-cont", general.getContainer(testIronman))
         val status = general.sell(testIronman, 0, 1)
         assertTransactionSuccess(status)
     }
 
     @Test fun shouldSellStackOfUnstockedItemsToPlayerStock() {
-        testPlayer.inventory.add(Item(1, 20))
+        testPlayer.inventory.add(Item(1512, 20))
         testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
         val status = general.sell(testPlayer, 0, 20)
         assertTransactionSuccess(status)

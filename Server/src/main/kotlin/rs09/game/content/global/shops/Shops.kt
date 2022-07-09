@@ -9,6 +9,7 @@ import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import org.rs09.consts.Components
+import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.ServerConstants
 import rs09.game.interaction.InteractionListener
@@ -216,8 +217,15 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
             val shop = getAttribute<Shop?>(player, "shop", null) ?: return@on false
 
             val (_,price) = shop.getSellPrice(player, slot)
+            val def = itemDefinition(player.inventory[slot].id)
 
-            val valueMsg = if(price.amount == -1) "This shop will not buy that item." else "${player.inventory[slot].name}: This shop will buy this item for ${price.amount} ${price.name.toLowerCase()}."
+            val valueMsg = when {
+                (price.amount == -1)
+                || !def.isTradeable
+                || def.id in intArrayOf(Items.COINS_995, Items.TOKKUL_6529, Items.ARCHERY_TICKET_1464)
+                || def.hasDestroyAction()  -> "This shop will not buy that item."
+                else -> "${player.inventory[slot].name}: This shop will buy this item for ${price.amount} ${price.name.lowercase()}."
+            }
 
             when(opcode)
             {
