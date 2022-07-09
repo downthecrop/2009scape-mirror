@@ -1707,3 +1707,70 @@ fun getSlayerTaskFlags(player : Player) : Int {
 fun hasSlayerTask(player : Player) : Boolean {
     return SlayerManager.getInstance(player).hasTask()
 }
+
+
+/** 
+ * Skill Dialogue builder.
+ * @param player the player to send the dialogue for.
+ * Use like:
+ * sendSkillDialogue(player) {
+ *    withItems(Items.EXAMPLE_0, Items.EXAMPLE_1)
+ *    create { id, amount -> 
+ *       doSomethingWith(id, amount) 
+ *    }
+ *    calculateMaxAmount { id -> 
+ *       return someAmount
+ *    }
+ * }
+ */
+fun sendSkillDialogue(player: Player, init: SkillDialogueBuilder.() -> Unit) {
+    val builder = SkillDialogueBuilder()
+    builder.player = player
+    builder.init()
+
+    if (builder.items.size !in 1..5) {
+        throw IllegalStateException("Invalid number of items passed to skill dialogue (min 1, max 5): ${builder.items.size}")
+    }
+
+    val type = when (builder.items.size) {
+        1 -> SkillDialogueHandler.SkillDialogue.ONE_OPTION
+        2 -> SkillDialogueHandler.SkillDialogue.TWO_OPTION
+        3 -> SkillDialogueHandler.SkillDialogue.THREE_OPTION
+        4 -> SkillDialogueHandler.SkillDialogue.FOUR_OPTION
+        5 -> SkillDialogueHandler.SkillDialogue.FIVE_OPTION
+        else -> null
+    }
+
+    val handler = object : SkillDialogueHandler(player, type, *builder.items) {
+        override fun create(amount: Int, index: Int) {
+            builder.creationCallback(builder.items[index].id, amount)
+        }
+
+        override fun getAll(index: Int): Int {
+            return builder.totalAmountCallback(builder.items[index].id)
+        }
+    }.display()
+}
+
+class SkillDialogueBuilder {
+    internal lateinit var player: Player
+    internal var items: Array<Item> = arrayOf<Item>()
+    internal var creationCallback: (itemId: Int, amount: Int) -> Unit = {_,_ -> }
+    internal var totalAmountCallback: (itemId: Int) -> Int = {id -> amountInInventory(player, id)}
+
+    fun withItems(vararg item: Item) {
+        items = arrayOf(*item)
+    }
+
+    fun withItems(vararg item: Int) {
+        items = item.map { Item(it) }.toTypedArray()
+    }
+
+    fun create(method: (itemId: Int, amount: Int) -> Unit) {
+        creationCallback = method
+    }
+
+    fun calculateMaxAmount(method: (itemId: Int) -> Int) {
+        totalAmountCallback = method
+    }
+}
