@@ -53,7 +53,7 @@ class BloatedToadNPC : AbstractNPC {
       clear()
     }
 
-    if (!chompySpawned && RandomFunction.random(5) == 3) { 
+    if (!chompySpawned && RandomFunction.random(20) == 5) { //Arbitrary random number matching (ryan: updated this from 1/5 to 1/20 because 1/5 was debug stuff.) 
       val chompy = NPC.create(NPCs.CHOMPY_BIRD_1550, this.location)
       val spawn = getPathableRandomLocalCoordinate(chompy, 4, this.location, 3)
       if (spawn == null || spawn == this.location) return
