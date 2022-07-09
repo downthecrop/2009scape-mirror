@@ -68,7 +68,7 @@ public final class TreasureTrailPlugin extends OptionHandler {
 			if (!player.getInventory().containsItem(node.asItem())) {
 				return true;
 			}
-			ClueLevel.forCasket((Item) node).open(player, (Item) node);
+			ClueLevel.open(player, (Item) node);
 			break;
 		case "look through":
 			player.getInterfaceManager().open(new Component(365));
