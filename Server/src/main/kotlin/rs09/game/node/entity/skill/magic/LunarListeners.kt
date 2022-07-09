@@ -21,6 +21,7 @@ import rs09.game.node.entity.skill.farming.FarmingPatch
 import rs09.game.node.entity.skill.magic.LunarListeners.JewelleryString.Companion.productOfString
 import rs09.game.node.entity.skill.magic.spellconsts.Lunar
 import rs09.game.system.config.NPCConfigParser
+import java.util.Deque
 
 class LunarListeners : SpellListener("lunar") {
     private val BAKE_PIE_ANIM = Animation(4413)
@@ -165,7 +166,6 @@ class LunarListeners : SpellListener("lunar") {
         }
 
         onCast(Lunar.STRING_JEWELLERY, NONE) { player, _ ->
-            requires(player, 80, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.EARTH_RUNE_557, 10), Item(Items.WATER_RUNE_555, 5)))
             stringJewellery(player)
         }
     }
@@ -328,7 +328,7 @@ class LunarListeners : SpellListener("lunar") {
     }
 
     private fun stringJewellery(player: Player) {
-        val playerJewellery = ArrayList<Item>()
+        val playerJewellery = ArrayDeque<Item>()
 
         for(item in player.inventory.toArray()) {
             if(item == null) continue
@@ -341,20 +341,20 @@ class LunarListeners : SpellListener("lunar") {
         player.pulseManager.run(object : Pulse() {
             var counter = 0
             override fun pulse(): Boolean {
-                if(playerJewellery.isEmpty()) return false
                 requires(player, 80, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.EARTH_RUNE_557, 10), Item(Items.WATER_RUNE_555, 5)))
-                if(counter == 0) delay = STRING_JEWELLERY_ANIM.definition.durationTicks + 1
+                if(counter == 0) delay = animationDuration(STRING_JEWELLERY_ANIM) + 1
                 val item = playerJewellery[0]
                 val strung = JewelleryString.forId(item.id)
                 setDelay(player,false)
                 if(removeItem(player, item) && addItem(player, strung)) {
+                    removeRunes(player, true)
                     visualizeSpell(player, STRING_JEWELLERY_ANIM, STRING_JEWELLERY_GFX, 2903)
                     rewardXP(player, Skills.CRAFTING, 4.0)
                     addXP(player, 83.0)
                     playerJewellery.remove(item)
-                    if(playerJewellery.isNotEmpty()) removeRunes(player,false) else removeRunes(player,true)
                 }
-                return true
+                counter++
+                return playerJewellery.isEmpty()
             }
         })
     }
