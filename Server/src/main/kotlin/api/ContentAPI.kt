@@ -1708,7 +1708,6 @@ fun hasSlayerTask(player : Player) : Boolean {
     return SlayerManager.getInstance(player).hasTask()
 }
 
-
 /** 
  * Skill Dialogue builder.
  * @param player the player to send the dialogue for.
@@ -1773,4 +1772,24 @@ class SkillDialogueBuilder {
     fun calculateMaxAmount(method: (itemId: Int) -> Int) {
         totalAmountCallback = method
     }
+}
+
+/** 
+ * Registers a hint icon with the given height at the given location
+ * @param player the player to register the hint icon for
+ * @param height the height of the hint icon
+ * @param location the location of the hint icon
+ */
+fun registerHintIcon(player: Player, location: Location, height: Int) {
+    setAttribute(player, "hinticon", HintIconManager.registerHintIcon(player, location, 1, -1, player.hintIconManager.freeSlot(), height, 3))
+}
+
+/** 
+ * Clears the active ContentAPI-originated hint icon
+ * @param player the player to clear the active hint icon for
+ */
+fun clearHintIcon(player: Player) {
+    val slot = getAttribute(player, "hinticon", -1)
+    player.removeAttribute("hinticon")
+    HintIconManager.removeHintIcon(player, slot)
 }
