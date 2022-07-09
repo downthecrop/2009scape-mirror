@@ -332,6 +332,18 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
             return TransactionStatus.Failure("Tried to sell currency - ${playerInventory.id}")
         }
         val item = Item(playerInventory.id, amount)
+        val def = itemDefinition(item.id)
+
+        if (def.hasDestroyAction()) {
+            sendMessage(player, "You can't sell this item.")
+            return TransactionStatus.Failure("Attempt to sell a destroyable - ${playerInventory.id}.")
+        }
+
+        if (!def.isTradeable) {
+            sendMessage(player, "You can't sell this item.")
+            return TransactionStatus.Failure("Attempt to sell an untradeable - ${playerInventory.id}.")
+        }
+
         val (container,profit) = getSellPrice(player, slot)
         if(profit.amount == -1) sendMessage(player, "This item can't be sold to this shop.").also { return TransactionStatus.Failure("Can't sell this item to this shop - ${playerInventory.id}, general: $general, price: $profit") }
         if(amount > player.inventory.getAmount(item.id))
