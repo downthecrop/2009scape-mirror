@@ -1,5 +1,7 @@
 package rs09.game.node.entity.skill.magic
 
+import api.events.ItemAlchemizationEvent
+import api.events.TeleportEvent
 import api.getAttribute
 import core.game.content.activity.mta.impl.GraveyardZone
 import core.game.content.global.Bones
@@ -15,7 +17,6 @@ import core.game.node.entity.skill.smithing.smelting.Bar
 import core.game.node.entity.skill.smithing.smelting.SmeltingPulse
 import core.game.node.item.Item
 import core.game.world.map.Location
-import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
@@ -65,7 +66,6 @@ class ModernListeners : SpellListener("modern"){
 
         onCast(Modern.VARROCK_TELEPORT,NONE){player, _->
             requires(player,25, arrayOf(Item(Items.FIRE_RUNE_554),Item(Items.AIR_RUNE_556,3),Item(Items.LAW_RUNE_563)))
-            player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK,1, 13)
             val alternateTeleport = getAttribute(player, "diaries:varrock:alttele", false)
             val dest = if(alternateTeleport) Location.create(3165, 3472, 0) else Location.create(3213, 3424, 0)
             sendTeleport(player,35.0, dest)
@@ -73,7 +73,6 @@ class ModernListeners : SpellListener("modern"){
 
         onCast(Modern.LUMBRIDGE_TELEPORT,NONE){player,_ ->
             requires(player,31, arrayOf(Item(Items.EARTH_RUNE_557),Item(Items.AIR_RUNE_556,3),Item(Items.LAW_RUNE_563)))
-            player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 2, 2)
             sendTeleport(player,41.0,Location.create(3221, 3219, 0))
         }
 
@@ -240,9 +239,7 @@ class ModernListeners : SpellListener("modern"){
             if(coins.amount > 0)
                 player.inventory.add(coins)
 
-            if((item.id == Items.MAGIC_SHORTBOW_861 || item.id == Items.MAGIC_LONGBOW_859) && high && ZoneBorders(2721,3493,2730,3487).insideBorder(player)){
-                player.achievementDiaryManager.finishTask(player, DiaryType.SEERS_VILLAGE, 2, 6);
-            }
+            player.dispatch(ItemAlchemizationEvent(item.id, high))
 
             addXP(player,if(high) 65.0 else 31.0)
             showMagicTab(player)
@@ -256,7 +253,12 @@ class ModernListeners : SpellListener("modern"){
             player.sendMessage("A magical force prevents you from teleporting.")
             return
         }
-        if(player.teleporter.send(location,TeleportManager.TeleportType.NORMAL)) {
+
+        val teleType = TeleportManager.TeleportType.NORMAL
+
+        if (player.teleporter.send(location, teleType)) {
+            player.dispatch(TeleportEvent(teleType, TeleportMethod.SPELL, -1, location))
+
             removeRunes(player)
             addXP(player, xp)
             setDelay(player, true)
@@ -275,7 +277,9 @@ class ModernListeners : SpellListener("modern"){
             return
         }
 
-        player.teleporter.send(loc,TeleportManager.TeleportType.NORMAL)
+        val teleType = TeleportManager.TeleportType.NORMAL
+
+        player.teleporter.send(loc, teleType)
         removeRunes(player)
         addXP(player,30.0)
         setDelay(player,true)

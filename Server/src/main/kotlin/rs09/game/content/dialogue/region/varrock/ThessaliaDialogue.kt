@@ -7,6 +7,7 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import org.rs09.consts.Components
 
 @Initializable
 class ThessaliaDialogue(player: Player? = null): DialoguePlugin(player) {
@@ -15,13 +16,12 @@ class ThessaliaDialogue(player: Player? = null): DialoguePlugin(player) {
         //The trade argument is handled elsewhere
         if (args.size == 3) { //Right-Click 'Change-Clothes' Option
             if (player.equipment.isEmpty) {
-                player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 0, 0)
                 if (player.isMale) {
                     end()
-                    player.interfaceManager.open(Component(591))
+                    player.interfaceManager.open(Component(Components.THESSALIA_CLOTHES_MALE_591))
                 } else {
                     end()
-                    player.interfaceManager.open(Component(594))
+                    player.interfaceManager.open(Component(Components.THESSALIA_CLOTHES_FEMALE_594))
                 }
             } else { //Has some armour equipped
                 interpreter.sendDialogues(548, FacialExpression.WORRIED, "You can't try them on while wearing armour. Take", "it off and speak to me again.")
@@ -110,13 +110,12 @@ class ThessaliaDialogue(player: Player? = null): DialoguePlugin(player) {
                 stage = 52
             }
             31 -> if (player.equipment.isEmpty) {
-                player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 0, 0)
                 if (player.isMale) {
                     end()
-                    player.interfaceManager.open(Component(591))
+                    player.interfaceManager.open(Component(Components.THESSALIA_CLOTHES_MALE_591))
                 } else {
                     end()
-                    player.interfaceManager.open(Component(594))
+                    player.interfaceManager.open(Component(Components.THESSALIA_CLOTHES_FEMALE_594))
                 }
             }
             49 -> {

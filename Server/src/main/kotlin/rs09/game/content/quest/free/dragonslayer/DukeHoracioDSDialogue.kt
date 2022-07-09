@@ -51,8 +51,6 @@ class DukeHoracioDSDialogue(val questStage: Int) : DialogueFile() {
                         GroundItemManager.create(DragonSlayer.SHIELD, player)
                     }
                     interpreter!!.sendItemMessage(DragonSlayer.SHIELD, "The Duke hands you a heavy orange shield.")
-                    // Obtain an Anti-dragonbreath shield from Duke Horacio
-                    player!!.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 2, 5)
                     stage = END_DIALOGUE
                 }
             }
@@ -80,8 +78,6 @@ class DukeHoracioDSDialogue(val questStage: Int) : DialogueFile() {
                         GroundItemManager.create(DragonSlayer.SHIELD, player)
                     }
                     interpreter!!.sendItemMessage(DragonSlayer.SHIELD, "The Duke hands you the shield.")
-                    // Obtain an Anti-dragonbreath shield from Duke Horacio
-                    player!!.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 2, 5)
                     stage = END_DIALOGUE
                 }
             }

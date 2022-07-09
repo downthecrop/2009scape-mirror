@@ -12,6 +12,7 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
+import rs09.game.node.entity.skill.magic.TeleportMethod
 import rs09.game.node.entity.skill.slayer.SlayerManager.Companion.getInstance
 import rs09.game.world.GameWorld.Pulser
 import java.util.*
@@ -108,8 +109,8 @@ enum class EnchantedJewellery(
             arrayOf(
                     Location.create(2899, 3563, 0),
                     Location.create(2520, 3571, 0),
-                    Location.create(3266, 3686, 0),
                     Location.create(3179, 3685, 0),
+                    Location.create(3266, 3686, 0),
                     Location.create(2885, 4372, 2)
             ),
             true,
@@ -235,7 +236,7 @@ enum class EnchantedJewellery(
                                 replaceJewellery(player, item, nextJewellery, isEquipped)
                             }
                             unlock(player)
-                            player.dispatch(TeleportEvent(TeleportManager.TeleportType.NORMAL, 1,location))
+                            player.dispatch(TeleportEvent(TeleportManager.TeleportType.NORMAL, TeleportMethod.JEWELRY, item, location))
                             return true
                         }
                     }

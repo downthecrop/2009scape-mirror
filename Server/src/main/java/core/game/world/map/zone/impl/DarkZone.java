@@ -1,8 +1,7 @@
 package core.game.world.map.zone.impl;
 
-import api.LoginListener;
 import api.events.EventHook;
-import api.events.UsedWithEvent;
+import api.events.UseWithEvent;
 import core.game.component.Component;
 import core.game.content.global.LightSource;
 import core.game.interaction.Option;
@@ -29,7 +28,7 @@ import static api.ContentAPIKt.runTask;
  * Handles a dark area.
  * @author Emperor
  */
-public final class DarkZone extends MapZone implements EventHook<UsedWithEvent>{
+public final class DarkZone extends MapZone implements EventHook<UseWithEvent>{
 
 	/**
 	 * The darkness overlay.
@@ -200,7 +199,7 @@ public final class DarkZone extends MapZone implements EventHook<UsedWithEvent>{
 	}
 
 	@Override
-	public void process(@NotNull Entity entity, @NotNull UsedWithEvent event) {
+	public void process(@NotNull Entity entity, @NotNull UseWithEvent event) {
 		boolean isTinderbox = getItemName(event.getUsed()).equals("Tinderbox") || getItemName(event.getWith()).equals("Tinderbox");
 
 		if (isTinderbox && entity instanceof Player) runTask(entity, 2, () -> {
