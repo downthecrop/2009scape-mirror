@@ -3,16 +3,9 @@ package rs09
 import core.game.system.SystemManager
 import core.game.system.SystemState
 import core.game.system.mysql.SQLManager
-import core.gui.ConsoleFrame
 import core.net.NioReactor
-import core.net.amsc.WorldCommunicator
 import core.tools.TimeStamp
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import rs09.game.content.global.GlobalKillCounter;
-import rs09.game.ge.GEAutoStock
-import rs09.game.ge.GEDB
+import kotlinx.coroutines.*
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.ServerConfigParser
 import rs09.game.world.GameWorld
@@ -97,22 +90,33 @@ object Server {
                 }
             }
         }
-        GlobalScope.launch {
-            delay(20000)
-            while(running){
-                if(System.currentTimeMillis() - lastHeartbeat > 7200 && running){
-                    SystemLogger.logErr("Triggering reboot due to heartbeat timeout")
-                    SystemLogger.logErr("Creating thread dump...")
-                    val dump = threadDump(true, true)
-                    FileWriter("latestdump.txt").use {
-                        it.write(dump)
-                        it.flush()
-                        it.close()
+
+        if (ServerConstants.WATCHDOG_ENABLED) {
+            GlobalScope.launch {
+                delay(20000)
+                while (running) {
+                    if (System.currentTimeMillis() - lastHeartbeat > 7200 && running) {
+                        SystemLogger.logErr("Triggering reboot due to heartbeat timeout")
+                        SystemLogger.logErr("Creating thread dump...")
+                        val dump = threadDump(true, true)
+
+                        withContext(Dispatchers.IO) {
+                            FileWriter("latestdump.txt").use {
+
+                                if (dump != null) {
+                                    it.write(dump)
+                                }
+
+                                it.flush()
+                                it.close()
+                            }
+                        }
+
+                        if (!SystemManager.isTerminated())
+                            exitProcess(0)
                     }
-                    if(!SystemManager.isTerminated())
-                        exitProcess(0)
+                    delay(625)
                 }
-                delay(625)
             }
         }
     }
