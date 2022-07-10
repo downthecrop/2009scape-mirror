@@ -2,19 +2,19 @@
 
 <br />
 <p align="center">
-  <a href="https://github.com/woahscam/2009Scape">
+  <a href="https://gitlab.com/200scape/2009scape">
     <img src="https://i.imgur.com/RsfVfkB.png" alt="Logo" width="300" height="67">
   </a>
   <h3 align="center">An open source MMORPG emulation server</h3>
 
-  <h1 align="center"><a href="https://2009Scape.org/"><strong>Play the live server »</strong></a></h1>
+  <h1 align="center"><a href="https://2009scape.org/"><strong>Play the live server »</strong></a></h1>
   <p align="center">
     <br />
     <br />
-    <a href="https://2009Scape.org/">Community Hosted Server</a>
+    <a href="https://2009scape.org/">Community Hosted Server</a>
     ·
     <a href="https://discord.gg/43YPGND">Discord Invite</a>
-    ·    <a href="https://gitlab.com/2009Scape/2009Scape/-/issues">Report Bug</a>
+    ·    <a href="https://gitlab.com/2009scape/2009scape/-/issues">Report Bug</a>
   </p>
 <h3>NOTE: Bug reports and support are only accepted by/offered to players of our live hosted server. We will not provide support to those running their own copies.</h3>
 
@@ -36,7 +36,7 @@
 
 ## Live Server Information
 
-Did you know that the 2009Scape Development Team hosts the main branch of this repo that you can connect to and play? Come join a growing community of people that love to grind out skills, quest, and hangout together. A download link for the launcher can be found [here](https://2009Scape.org). Connecting to the live server is also one of the easiest ways to identify bugs/typos/missing features. Identifying these issues help developers, whether already on the project, or are even brand new to the project, fix bugs and issues in an expedited rate.
+Did you know that the 2009Scape Development Team hosts the main branch of this repo that you can connect to and play? Come join a growing community of people that love to grind out skills, quest, and hangout together. A download link for the launcher can be found [here](https://2009scape.org). Connecting to the live server is also one of the easiest ways to identify bugs/typos/missing features. Identifying these issues help developers, whether already on the project, or are even brand new to the project, fix bugs and issues in an expedited rate.
 
 ## History of this Codebase
 
@@ -66,13 +66,13 @@ In the current climate of RuneScape Private Servers in general, we believe it's 
 
 There are many ways everyone can contribute! From the most seasoned programmers to those who do not have the most remote clue how code works! Below are some things that can always use some love from the community.
 
-* **Wiki Editors**: Did you know we have a wiki? Well it's always in need of people to fill it out and stay on top of it. Editing the wiki is one of the easiest ways you can contribute to 2009Scape! If you're an active player and have the will, there's so much you could be helping out with over at the wiki. [Click here to go to the wiki](http://play.2009Scape.org/wiki).
+* **Wiki Editors**: Did you know we have a wiki? Well it's always in need of people to fill it out and stay on top of it. Editing the wiki is one of the easiest ways you can contribute to 2009Scape! If you're an active player and have the will, there's so much you could be helping out with over at the wiki. [Click here to go to the wiki](http://play.2009scape.org/wiki).
 
 
-* **JSON editors**: We could always use more JSON editors! Please note that JSON editing **must** be done using the [Thanos Tool](https://gitlab.com/2009Scape/rs09-thanos-tool/-/jobs/artifacts/master/raw/build/libs/thanostool.jar?job=build).
+* **JSON editors**: We could always use more JSON editors! Please note that JSON editing **must** be done using the [Thanos Tool](https://gitlab.com/2009scape/rs09-thanos-tool/-/jobs/artifacts/master/raw/build/libs/thanostool.jar?job=build).
 
 
-* **Authenticity Auditors**: As a remake, authenticity is central to our core values! We could always use someone to go through the game and create large lists of simple tasks that can be done to bring us closer to the authentic 2009 game! The preferred way to do this is one-area-at-a-time. If you want to see an example of some audits we've done in the past, take a look [here](https://gitlab.com/2009Scape/2009Scape/-/issues/46).
+* **Authenticity Auditors**: As a remake, authenticity is central to our core values! We could always use someone to go through the game and create large lists of simple tasks that can be done to bring us closer to the authentic 2009 game! The preferred way to do this is one-area-at-a-time. If you want to see an example of some audits we've done in the past, take a look [here](https://gitlab.com/2009scape/2009scape/-/issues/46).
 
 
 * **Code Contributors**: As a remake, we have massive amounts of content that need to be implemented or corrected. If you know how to program or are willing to learn, this is where you could be extremely helpful! We need everything from quests, to dialogue, to mini-games, to skills that still need to be corrected or implemented. This is perhaps one of the most valuable ways someone could help out the project! If you are interested in developing content, reach out in the development channel of the Discord.
