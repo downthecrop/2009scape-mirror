@@ -21,8 +21,13 @@ class PulseRunner {
             val pulse = pulses.take()
 
             val elapsedTime = measure {
-                if (!pulse.update()) {
-                    pulses.add(pulse)
+                try {
+                    if (!pulse.update()) {
+                        pulses.add(pulse)
+                    }
+                } catch (e: Exception) {
+                    SystemLogger.logErr("Pulse execution error. Stack trace below.")
+                    e.printStackTrace()
                 }
             }
 

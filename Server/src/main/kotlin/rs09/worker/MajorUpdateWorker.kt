@@ -29,13 +29,13 @@ class MajorUpdateWorker {
         Thread.currentThread().name = "Major Update Worker"
         started = true
         Thread.sleep(600L)
-        while(running){
+        while (running) {
             val start = System.currentTimeMillis()
             Server.heartbeat()
 
             handleTickActions()
 
-            for (player in Repository.players.filter {!it.isArtificial}) {
+            for (player in Repository.players.filter { !it.isArtificial }) {
                 if (System.currentTimeMillis() - player.session.lastPing > 20000L) {
                     player?.details?.session?.disconnect()
                     player?.session?.lastPing = Long.MAX_VALUE
@@ -45,14 +45,14 @@ class MajorUpdateWorker {
             }
 
             //Handle daily restart if enabled
-            if(sdf.format(Date()).toInt() == 0){
+            if (sdf.format(Date()).toInt() == 0) {
 
-                if(GameWorld.checkDay() == 1) {//monday
+                if (GameWorld.checkDay() == 1) {//monday
                     ServerStore.clearWeeklyEntries()
                 }
 
                 ServerStore.clearDailyEntries()
-                if(ServerConstants.DAILY_RESTART ) {
+                if (ServerConstants.DAILY_RESTART) {
                     Repository.sendNews(colorize("%RSERVER GOING DOWN FOR DAILY RESTART IN 5 MINUTES!"))
                     ServerConstants.DAILY_RESTART = false
                     submitWorldPulse(object : Pulse(100) {
@@ -78,8 +78,10 @@ class MajorUpdateWorker {
         SystemLogger.logInfo("Update worker stopped.")
     }
 
-    fun handleTickActions() {
-        GameWorld.Pulser.updateAll()
+    fun handleTickActions(skipPulseUpdate: Boolean = false) {
+        if (!skipPulseUpdate) {
+            GameWorld.Pulser.updateAll()
+        }
 
         try {
             sequence.start()
@@ -98,7 +100,7 @@ class MajorUpdateWorker {
     }
 
     fun start() {
-        if(!started){
+        if (!started) {
             running = true
             worker.start()
         }
