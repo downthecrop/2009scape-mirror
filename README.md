@@ -129,25 +129,6 @@ Start the game server with the included run script. Use `./run -h` for more info
 
 Start the game server with `run-server.bat`
 
-### Optional IDE Integration: Eclipse
-
-Note: This section could use improvement. If you have a better way to integrate the project with eclipse, feel free to open an MR!
-1. Make sure you have the [Eclipse Maven Plugin](https://stackoverflow.com/a/25993960/1971003) installed.
-2. In Eclipse, click File -> Import
-3. Type Maven in the search box
-4. Under "Select an Import Source," select "Existing Maven Project."
-5. Next
-6. Click browse, and select the Management-Server folder.
-7. Repeat steps 2-6 for the Server folder.
-
-### Optional IDE Integration: Netbeans
-
-Note: This section could use improvement. If you have a better way to integrate the project with netbeans, feel free to open an MR!
-
-1. Select File -> Open Project
-2. Select the Management-Server folder to open the MS project.
-3. Select the Server folder to open the Server project.
-
 ### License
 
 We use the AGPL 3.0 license, which can be found [here](https://www.gnu.org/licenses/agpl-3.0.en.html). Please be sure to read and understand the license. Failure to follow the guidelines outlined in the license will result in legal action. If you know or hear of anyone breaking this license, please send a report, with proof, to Red Bracket#8151, ceikry#2724, or woahscam#8535 on discord or email woahscam@hotmail.com. **We WILL NOT change the license to fit your needs.**
