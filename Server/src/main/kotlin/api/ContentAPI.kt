@@ -48,7 +48,9 @@ import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.dialogue.SkillDialogueHandler
 import rs09.game.content.global.GlobalKillCounter
+import rs09.game.ge.GrandExchangeRecords
 import rs09.game.interaction.InteractionListeners
+import rs09.game.interaction.inter.ge.StockMarket
 import rs09.game.node.entity.skill.slayer.SlayerManager
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.ItemConfigParser
@@ -469,7 +471,7 @@ fun itemDefinition(id: Int): ItemDefinition {
  * @author vddCore
  */
 fun hasOption(node: Node, option: String): Boolean {
-    return when(node) {
+    return when (node) {
         is NPC -> node.definition.hasAction(option)
         is Scenery -> node.definition.hasAction(option)
         is Item -> node.definition.hasAction(option)
@@ -509,7 +511,7 @@ fun produceGroundItem(player: Player, item: Int) {
  * @return the created ground item.
  */
 fun produceGroundItem(owner: Player?, id: Int, amount: Int, location: Location) : GroundItem {
-   return GroundItemManager.create(Item(id, amount), location, owner) 
+   return GroundItemManager.create(Item(id, amount), location, owner)
 }
 
 /**
@@ -1570,7 +1572,7 @@ fun dumpBeastOfBurden(player: Player) {
  *
  * @author bushtail
  */
-fun getFamiliarBoost(player : Player, skill : Int) : Int {
+fun getFamiliarBoost(player: Player, skill: Int): Int {
     return player.familiarManager.getBoost(skill)
 }
 
@@ -1662,7 +1664,7 @@ fun getPathableRandomLocalCoordinate(target: Entity, radius: Int, center: Locati
  * @param player the player whose task we are checking.
  * @return the slayer task.
  */
-fun getSlayerTask(player : Player) : Tasks? {
+fun getSlayerTask(player: Player): Tasks? {
     return SlayerManager.getInstance(player).task
 }
 
@@ -1672,7 +1674,7 @@ fun getSlayerTask(player : Player) : Tasks? {
  * @param player the player whose task we are checking.
  * @return the name of the slayer task.
  */
-fun getSlayerTaskName(player : Player) : String {
+fun getSlayerTaskName(player: Player): String {
     return SlayerManager.getInstance(player).taskName
 }
 
@@ -1682,7 +1684,7 @@ fun getSlayerTaskName(player : Player) : String {
  * @param player the player whose task we are checking.
  * @return the remaining kills of the slayer task.
  */
-fun getSlayerTaskKillsRemaining(player : Player) : Int {
+fun getSlayerTaskKillsRemaining(player: Player): Int {
     return SlayerManager.getInstance(player).amount
 }
 
@@ -1692,7 +1694,7 @@ fun getSlayerTaskKillsRemaining(player : Player) : Int {
  * @param player the player whose master we are checking.
  * @return the slayer master as NPC.
  */
-fun getSlayerMaster(player : Player) : NPC {
+fun getSlayerMaster(player: Player): NPC {
     return findNPC(SlayerManager.getInstance(player).master?.npc as Int) as NPC
 }
 
@@ -1702,8 +1704,8 @@ fun getSlayerMaster(player : Player) : NPC {
  * @param player the player whose master we are checking.
  * @return the slayer master location as String.
  */
-fun getSlayerMasterLocation(player : Player) : String {
-    return when(getSlayerMaster(player).id) {
+fun getSlayerMasterLocation(player: Player): String {
+    return when (getSlayerMaster(player).id) {
         NPCs.CHAELDAR_1598 -> "Zanaris"
         NPCs.DURADEL_8275 -> "Shilo Village"
         NPCs.MAZCHNA_8274 -> "Canifis"
@@ -1719,8 +1721,8 @@ fun getSlayerMasterLocation(player : Player) : String {
  * @param player the player whose task tip we are checking.
  * @return the task tip as String.
  */
-fun getSlayerTip(player : Player) : Array<out String> {
-    return if(hasSlayerTask(player)) {
+fun getSlayerTip(player: Player): Array<out String> {
+    return if (hasSlayerTask(player)) {
         SlayerManager.getInstance(player).task?.tip!!
     } else {
         arrayOf("You need something new to hunt.")
@@ -1733,7 +1735,7 @@ fun getSlayerTip(player : Player) : Array<out String> {
  * @param player the player whose task flags we are checking.
  * @return the task flags as Int.
  */
-fun getSlayerTaskFlags(player : Player) : Int {
+fun getSlayerTaskFlags(player: Player): Int {
     return SlayerManager.getInstance(player).flags.taskFlags
 }
 
@@ -1743,20 +1745,91 @@ fun getSlayerTaskFlags(player : Player) : Int {
  * @param player the player whose task we are checking.
  * @return has task as Boolean.
  */
-fun hasSlayerTask(player : Player) : Boolean {
+fun hasSlayerTask(player: Player): Boolean {
     return SlayerManager.getInstance(player).hasTask()
 }
 
-/** 
+/**
+ * Opens the given player's Grand Exchange interface.
+ *
+ * @author vddCore
+ * @param player The player whose Grand Exchange interface to open.
+ */
+fun openGrandExchange(player: Player) {
+    StockMarket.openFor(player)
+}
+
+/**
+ * Checks if the player has any items to collect from the Grand Exchange
+ *
+ * @author vddCore
+ * @param player The player whose Grand Exchange collection box to inspect.
+ */
+fun hasAwaitingGrandExchangeCollections(player: Player): Boolean {
+    val records = GrandExchangeRecords.getInstance(player)
+
+    for (record in records.offerRecords) {
+        val offer = records.getOffer(record)
+
+        return offer != null
+                && offer.withdraw[0] != null
+                && offer.withdraw[1] != null
+    }
+
+    return false
+}
+
+/**
+ * Opens the given player's Grand Exchange collection box.
+ *
+ * @author vddCore
+ * @param player The player whose collection box to open.
+ */
+fun openGrandExchangeCollectionBox(player: Player) {
+    GrandExchangeRecords.getInstance(player).openCollectionBox()
+}
+
+/**
+ * Opens the given player's bank account. If the player has a PIN set,
+ * the PIN interface will be shown first.
+ *
+ * @author vddCore
+ * @param player The player whose bank account to open.
+ */
+fun openBankAccount(player: Player) {
+    player.bank.open()
+}
+
+/**
+ * Opens the given player's bank deposit box interface.
+ *
+ * @author vddCore
+ * @param player The player whose bank account to open.
+ */
+fun openDepositBox(player: Player) {
+    player.bank.openDepositBox()
+}
+
+/**
+ * Opens the given player's bank PIN settings interface.
+ *
+ * @author vddCore
+ * @param player The player whose PIN settings to open.
+ */
+fun openBankPinSettings(player: Player) {
+    player.bankPinManager.openSettings()
+}
+
+/**
  * Skill Dialogue builder.
  * @param player the player to send the dialogue for.
  * Use like:
  * sendSkillDialogue(player) {
  *    withItems(Items.EXAMPLE_0, Items.EXAMPLE_1)
- *    create { id, amount -> 
- *       doSomethingWith(id, amount) 
+ *    create { id, amount ->
+ *       doSomethingWith(id, amount)
  *    }
- *    calculateMaxAmount { id -> 
+ *    calculateMaxAmount { id ->
  *       return someAmount
  *    }
  * }
@@ -1813,7 +1886,7 @@ class SkillDialogueBuilder {
     }
 }
 
-/** 
+/**
  * Registers a hint icon with the given height at the given location
  * @param player the player to register the hint icon for
  * @param height the height of the hint icon
@@ -1832,7 +1905,7 @@ fun registerHintIcon(player: Player, node: Node) {
     setAttribute(player, "hinticon", HintIconManager.registerHintIcon(player, node))
 }
 
-/** 
+/**
  * Clears the active ContentAPI-originated hint icon
  * @param player the player to clear the active hint icon for
  */
