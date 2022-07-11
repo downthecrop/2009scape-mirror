@@ -1709,7 +1709,7 @@ fun getSlayerMasterLocation(player: Player): String {
         NPCs.CHAELDAR_1598 -> "Zanaris"
         NPCs.DURADEL_8275 -> "Shilo Village"
         NPCs.MAZCHNA_8274 -> "Canifis"
-        NPCs.TURAEL_8273 -> "Taverly"
+        NPCs.TURAEL_8273 -> "Taverley"
         NPCs.VANNAKA_1597 -> "Edgeville Dungeon"
         else -> "The Backrooms"
     }
