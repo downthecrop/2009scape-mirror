@@ -66,7 +66,7 @@ In the current climate of RuneScape Private Servers in general, we believe it's 
 
 There are many ways everyone can contribute! From the most seasoned programmers to those who do not have the most remote clue how code works! Below are some things that can always use some love from the community.
 
-* **Content Testers**: I'm putting this one up top because of its importance. We, the contributors and developers, aren't perfect. Sometimes, we make mistakes. This is where you come in - If you want a sneak peek at upcoming content, have a knack for breaking things, or just want to contribute to the project without making code changes, you can become a tester! If you are interested in becoming a tester, reach out in the testing channel of the discord.
+* **Content Testers**: I'm putting this one up top because of its importance. We, the contributors and developers, aren't perfect. Sometimes, we make mistakes. This is where you come in - If you want a sneak peek at upcoming content, have a knack for breaking things, or just want to contribute to the project without making code changes, you can become a tester! If you are interested in becoming a tester, reach out in the testing channel of the discord. [Why become a tester?](#why-become-a-tester)
 
 
 * **Wiki Editors**: Did you know we have a wiki? Well it's always in need of people to fill it out and stay on top of it. Editing the wiki is one of the easiest ways you can contribute to 2009Scape! If you're an active player and have the will, there's so much you could be helping out with over at the wiki. [Click here to go to the wiki](https://cdn.2009scape.org/wiki/doku.php?id=start).
@@ -142,3 +142,15 @@ We use the AGPL 3.0 license, which can be found [here](https://www.gnu.org/licen
 
 [license-shield]: https://img.shields.io/badge/license-AGPL--3.0-informational
 [license-url]: https://www.gnu.org/licenses/agpl-3.0.en.html
+
+### Why become a tester?
+
+Before content hits Live, it has to be tested. We can, but do not want to do this alone, and would love the help! But don't worry, there is something in it for you. Credits! Keep in mind that credits will only be awarded to people who thoroughly test the content and provide detailed reports on them. Like votes or HoF you must claim them in the #claim-to-fame channel on discord or matrix.
+
+* If you test smaller things like bug fixes there is a 2 credit reward.
+* If you test full quests or minigames you will be rewarded 5 credits.
+* If you find a bug in the content you are testing that hasn't already been found you will earn an extra credit.
+
+These credits can be spent in the 2009Scape Reward Shop. It's important to be clear that credits are gained by contributions to the project. We cannot and will not accept donations (of any kind), especially not in exchange for in-game credits or perks.
+
+Testers are not the only people who can gain credits - other ways of earning credits can be found on [the 2009Scape website](https://2009scape.org/site/game_guide/credits.html).
