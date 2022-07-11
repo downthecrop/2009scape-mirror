@@ -110,13 +110,14 @@ To obtain large binary files for the repo such as the cache, [install Git LFS](h
 3. Expand the Server folder
 4. Right click `pom.xml` and click "Add Maven Project"
 5. In IntelliJ, File -> Invalidate Caches -> Invalidate Caches and Restart
-6. You should now have ready-made run configurations in the top right (obsolete scripts have been stricken through):
+6. After setting up Git LFS, you may need to run `git lfs pull` in the root of the cloned repo to download essential binaries
+7. You should now have ready-made run configurations in the top right (obsolete scripts have been stricken through):
     * ~~[Windows] Run MS~~
     * [Windows] Run Server
     * ~~[Linux] Run MS~~
     * [Linux] Run Server
-7. Ensure your working directory (the root of the project) is set in the run configuration editor.
-8. Go ahead and use the `Run Server` configuration for your OS to make sure everything worked.
+8. Ensure your working directory (the root of the project) is set in the run configuration editor.
+9. Go ahead and use the `Run Server` configuration for your OS to make sure everything worked.
 
 ### Running the project
 
