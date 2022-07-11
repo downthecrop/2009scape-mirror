@@ -139685,5 +139685,21 @@
     "examine": "Item container for C. Ele Minor Drop Table. You should not be able to obtain this item.",
     "name": "C. Ele Minor Drop Table",
     "id": "799"
+  },
+  {
+    "examine": "This will unlock something. (Waterfall Quest)",
+    "name": "A key",
+    "tradeable": "false",
+    "weight": "0.01",
+    "archery_ticket_price": "0",
+    "id": "293"
+  },
+  {
+    "examine": "This will unlock something. (Waterfall dungeon)",
+    "name": "A key",
+    "tradeable": "false",
+    "archery_ticket_price": "0",
+    "weight": "0.01",
+    "id": "298"
   }
 ]
