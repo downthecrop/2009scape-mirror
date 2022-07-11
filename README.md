@@ -61,12 +61,15 @@ In the current climate of RuneScape Private Servers in general, we believe it's 
 
 ## Contributing
 
-**Note: All merge requests MUST be made using the defaut MR template you can select from the dropdown when creating a new merge request. Merge requests that do not use this template will not be accepted.**
+**Note: All merge requests MUST be made using the defaut MR template. Merge requests that do not use this template will not be accepted.**
 **More information on Kotlin can be found [here](https://kotlinlang.org/).**
 
 There are many ways everyone can contribute! From the most seasoned programmers to those who do not have the most remote clue how code works! Below are some things that can always use some love from the community.
 
-* **Wiki Editors**: Did you know we have a wiki? Well it's always in need of people to fill it out and stay on top of it. Editing the wiki is one of the easiest ways you can contribute to 2009Scape! If you're an active player and have the will, there's so much you could be helping out with over at the wiki. [Click here to go to the wiki](http://play.2009scape.org/wiki).
+* **Content Testers**: I'm putting this one up top because of its importance. We, the contributors and developers, aren't perfect. Sometimes, we make mistakes. This is where you come in - If you want a sneak peek at upcoming content, have a knack for breaking things, or just want to contribute to the project without making code changes, you can become a tester! If you are interested in becoming a tester, reach out in the testing channel of the discord.
+
+
+* **Wiki Editors**: Did you know we have a wiki? Well it's always in need of people to fill it out and stay on top of it. Editing the wiki is one of the easiest ways you can contribute to 2009Scape! If you're an active player and have the will, there's so much you could be helping out with over at the wiki. [Click here to go to the wiki](https://cdn.2009scape.org/wiki/doku.php?id=start).
 
 
 * **JSON editors**: We could always use more JSON editors! Please note that JSON editing **must** be done using the [Thanos Tool](https://gitlab.com/2009scape/rs09-thanos-tool/-/jobs/artifacts/master/raw/build/libs/thanostool.jar?job=build).
@@ -83,14 +86,16 @@ There are many ways everyone can contribute! From the most seasoned programmers 
 
 1. Create a GitLab account if you haven't done so already.
 
-3. Click "Fork" in the top right-hand side of our GitLab page.
+2. Click "Fork" in the top right-hand side of our GitLab page.
 
 **If at anytime you have an issue with GitLab please refer to the [GitLab help center](https://gitlab.com/help).**
 
 ### Prerequisites
 
-* Eclipse Temurin JDK 11 (preferred) or the Java SE Development Kit Version 11
-* Git LFS
+These are mandatory. If you don't install ***both*** of these programs prior to 
+
+* [Eclipse Temurin JDK 11 (preferred)](https://adoptium.net) or the Java SE Development Kit Version 11
+* [Git LFS](https://git-lfs.github.com/)
 
 ## Pre-req Installation
 
@@ -98,24 +103,20 @@ Install JDK version 11 through [Adoptium](https://adoptium.net) or through your 
 
 To obtain large binary files for the repo such as the cache, [install Git LFS](https://git-lfs.github.com/).
 
-After setting up Git LFS, you may need to run `git lfs pull` in the root of the cloned repo to download essential binaries.
-    
 ### Project Setup
 
 1. Click the "Project" tab on the left-hand side.
 2. In the top left where the "Project" drop down is, click Project Files
-3. Expand the Management-Server folder
+3. Expand the Server folder
 4. Right click `pom.xml` and click "Add Maven Project"
-5. Expand the Server folder
-6. Right click `pom.xml` and click "Add Maven Project"
-7. In IntelliJ, File -> Invalidate Caches -> Invalidate Caches and Restart
-8. You should now have ready-made run configurations in the top right:
-    * [Windows] Run MS
+5. In IntelliJ, File -> Invalidate Caches -> Invalidate Caches and Restart
+6. You should now have ready-made run configurations in the top right (obsolete scripts have been stricken through):
+    * ~~[Windows] Run MS~~
     * [Windows] Run Server
-    * [Linux] Run MS
+    * ~~[Linux] Run MS~~
     * [Linux] Run Server
-9. Ensure your working directory (the root of the project) is set in the run configuration editor.
-10. Go ahead and use the `Run Server` configuration for your OS to make sure everything worked.
+7. Ensure your working directory (the root of the project) is set in the run configuration editor.
+8. Go ahead and use the `Run Server` configuration for your OS to make sure everything worked.
 
 ### Running the project
 
