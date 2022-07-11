@@ -1,8 +1,6 @@
 package rs09.game.node.entity.npc
 
-import api.getScenery
-import api.hasSealOfPassage
-import api.openDialogue
+import api.*
 import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
@@ -13,9 +11,8 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
-import rs09.game.ge.GrandExchangeRecords
 import rs09.game.interaction.InteractionListener
-import rs09.game.interaction.`object`.BankBoothHandler
+import rs09.game.interaction.`object`.BankBoothListener
 
 @Initializable
 class BankerNPC : AbstractNPC, InteractionListener {
@@ -35,7 +32,8 @@ class BankerNPC : AbstractNPC, InteractionListener {
             NPCs.GHOST_BANKER_1702, NPCs.GNOME_BANKER_166, NPCs.NARDAH_BANKER_3046,
             NPCs.OGRESS_BANKER_7049, NPCs.OGRESS_BANKER_7050, NPCs.SIRSAL_BANKER_4519,
 
-            NPCs.FADLI_958, NPCs.MAGNUS_GRAM_5488
+            NPCs.FADLI_958, NPCs.MAGNUS_GRAM_5488,
+            NPCs.EMERALD_BENEDICT_2271, NPCs.GUNDAI_902,
         )
 
         /**
@@ -70,7 +68,7 @@ class BankerNPC : AbstractNPC, InteractionListener {
             }
 
             npc.faceLocation(null)
-            player.bank.open()
+            openBankAccount(player)
 
             return true
         }
@@ -88,7 +86,7 @@ class BankerNPC : AbstractNPC, InteractionListener {
             }
 
             npc.faceLocation(null)
-            GrandExchangeRecords.getInstance(player).openCollectionBox()
+            openGrandExchangeCollectionBox(player)
 
             return true
         }
@@ -107,7 +105,7 @@ class BankerNPC : AbstractNPC, InteractionListener {
             val boothLocation = location.transform(side)
             val sceneryObject = getScenery(boothLocation)
 
-            if (sceneryObject != null && sceneryObject.id in BankBoothHandler.BANK_BOOTHS) {
+            if (sceneryObject != null && sceneryObject.id in BankBoothListener.BANK_BOOTHS) {
                 return Pair(side, boothLocation.transform(side, 1))
             }
         }

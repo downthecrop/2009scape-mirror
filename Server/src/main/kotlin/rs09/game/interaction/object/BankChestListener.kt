@@ -1,5 +1,6 @@
 package rs09.game.interaction.`object`
 
+import api.openBankAccount
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.IronmanMode
@@ -23,13 +24,13 @@ private val BANK_CHESTS = intArrayOf(
  *
  * @author vddCore
  */
-class BankChestHandler : InteractionListener {
+class BankChestListener : InteractionListener {
     private fun useBankChest(player: Player, node: Node): Boolean {
         if (player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {
             return true
         }
 
-        player.bank.open()
+        openBankAccount(player)
         return true
     }
 

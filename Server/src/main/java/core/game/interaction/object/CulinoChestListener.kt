@@ -1,16 +1,8 @@
 package core.game.interaction.`object`
 
 import api.getUsedOption
-import core.game.world.map.RegionManager.getObject
-import core.plugin.Initializable
-import core.game.interaction.OptionHandler
-import core.plugin.Plugin
-import core.cache.def.impl.SceneryDefinition
+import api.openBankAccount
 import core.game.content.global.shop.CulinomancerShop
-import core.game.node.scenery.SceneryBuilder
-import core.game.node.entity.player.Player
-import core.game.node.Node
-import core.game.world.map.Location
 import org.rs09.consts.Scenery
 import rs09.game.interaction.InteractionListener
 
@@ -19,16 +11,18 @@ import rs09.game.interaction.InteractionListener
  * @author Ceikry
  */
 class CulinoChestListener : InteractionListener {
-    val CULINO_CHEST = Scenery.CHEST_12309
+    companion object {
+        private const val CULINO_CHEST = Scenery.CHEST_12309
+    }
 
     override fun defineListeners() {
-        on(CULINO_CHEST, SCENERY, "buy-items","buy-food"){player, _ ->
-            CulinomancerShop.openShop(player, food = getUsedOption(player).toLowerCase() == "buy-food")
+        on(CULINO_CHEST, SCENERY, "buy-items", "buy-food"){player, _ ->
+            CulinomancerShop.openShop(player, food = getUsedOption(player).lowercase() == "buy-food")
             return@on true
         }
 
         on(CULINO_CHEST, SCENERY, "bank"){player, _ ->
-            player.bank.open()
+            openBankAccount(player)
             return@on true
         }
     }

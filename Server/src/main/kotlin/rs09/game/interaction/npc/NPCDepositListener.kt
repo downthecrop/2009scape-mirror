@@ -1,6 +1,7 @@
 package rs09.game.interaction.npc
 
 import api.isEquipped
+import api.openDepositBox
 import api.sendNPCDialogue
 import api.setInterfaceText
 import core.game.content.dialogue.FacialExpression
@@ -16,7 +17,7 @@ class NPCDepositListener : InteractionListener {
             if (isEquipped(player, Items.FREMENNIK_SEA_BOOTS_1_14571) ||
                 isEquipped(player, Items.FREMENNIK_SEA_BOOTS_2_14572) ||
                 isEquipped(player, Items.FREMENNIK_SEA_BOOTS_3_14573)) {
-                player.bank.openDepositBox()
+                openDepositBox(player)
                 setInterfaceText(player, "Peer the Seer's Deposits", 11, 12)
             } else {
                 sendNPCDialogue(player, NPCs.PEER_THE_SEER_1288,

@@ -1,24 +1,15 @@
-package rs09.game.interaction.inter
+package rs09.game.interaction.inter.bank
 
-import api.*
+import api.animate
+import api.dumpBeastOfBurden
+import api.runWorldTask
 import api.sendMessage
 import core.game.component.Component
 import core.game.node.entity.player.Player
-import core.game.node.entity.skill.summoning.familiar.FamiliarManager
 import org.rs09.consts.Animations
 import org.rs09.consts.Components
 import rs09.game.interaction.InterfaceListener
 import rs09.game.interaction.util.BankUtils
-
-private const val BUTTON_DEPOSIT_BOB = 13
-
-private const val MENU_ELEMENT = 11
-private const val OP_AMOUNT_ONE = 155
-private const val OP_AMOUNT_FIVE = 196
-private const val OP_AMOUNT_TEN = 124
-private const val OP_AMOUNT_ALL = 199
-private const val OP_AMOUNT_X = 234
-private const val OP_EXAMINE = 168
 
 /**
  * Allows the user to interact with the
@@ -27,6 +18,17 @@ private const val OP_EXAMINE = 168
  * @author vddCore
  */
 class BankDepositBoxInterface : InterfaceListener {
+    companion object {
+        private const val BUTTON_DEPOSIT_BOB = 13
+
+        private const val MENU_ELEMENT = 11
+        private const val OP_AMOUNT_ONE = 155
+        private const val OP_AMOUNT_FIVE = 196
+        private const val OP_AMOUNT_TEN = 124
+        private const val OP_AMOUNT_ALL = 199
+        private const val OP_AMOUNT_X = 234
+        private const val OP_EXAMINE = 168
+    }
 
     private fun handleDepositBoxMenu(player: Player, component: Component, opcode: Int, buttonID: Int, slot: Int, itemID: Int): Boolean {
         val item = player.inventory.get(slot)
@@ -49,7 +51,10 @@ class BankDepositBoxInterface : InterfaceListener {
                     // Needs to have a callback here because the depositing moment is independent from the world task.
                     player.bank::refreshDepositBoxInterface
                 )
-                OP_AMOUNT_ALL -> player.bank.addItem(slot, player.inventory.getAmount(item))
+                OP_AMOUNT_ALL -> player.bank.addItem(
+                    slot,
+                    player.inventory.getAmount(item)
+                )
                 else -> player.debug("Unknown deposit box menu opcode $opcode")
             }
 
@@ -62,7 +67,10 @@ class BankDepositBoxInterface : InterfaceListener {
 
     override fun defineInterfaceListeners() {
         on(Components.BANK_DEPOSIT_BOX_11, ::handleDepositBoxMenu)
-        on(Components.BANK_DEPOSIT_BOX_11, BUTTON_DEPOSIT_BOB) { player, _, _, _, _, _ ->
+        on(
+            Components.BANK_DEPOSIT_BOX_11,
+            BUTTON_DEPOSIT_BOB
+        ) { player, _, _, _, _, _ ->
             dumpBeastOfBurden(player); true
         }
     }
