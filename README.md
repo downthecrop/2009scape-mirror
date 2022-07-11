@@ -154,3 +154,5 @@ Before content hits Live, it has to be tested. We can, but do not want to do thi
 These credits can be spent in the 2009Scape Reward Shop. It's important to be clear that credits are gained by contributions to the project. We cannot and will not accept donations (of any kind), especially not in exchange for in-game credits or perks.
 
 Testers are not the only people who can gain credits - other ways of earning credits can be found on [the 2009Scape website](https://2009scape.org/site/game_guide/credits.html).
+
+Please be patient! The Credit system is not fully complete yet, so it will take a long time for credits to be awarded. 
