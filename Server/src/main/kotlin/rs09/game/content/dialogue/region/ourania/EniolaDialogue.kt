@@ -6,7 +6,6 @@ import api.openInterface
 import api.setAttribute
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.Components
@@ -17,25 +16,18 @@ import rs09.tools.START_DIALOGUE
 
 @Initializable
 class EniolaDialogue(player: Player? = null) : DialoguePlugin(player) {
-    override fun newInstance(player: Player?): DialoguePlugin {
-        return EniolaDialogue(player)
-    }
-
-    override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-
-        npcl(FacialExpression.HALF_GUILTY, "Good day, how may I help you?")
-
-        if (!hasAwaitingGrandExchangeCollections(player)) {
-            stage = 1
-        }
-
-        return true
-    }
-
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            START_DIALOGUE -> {
+            START_DIALOGUE -> npcl(
+                FacialExpression.NEUTRAL,
+                "Good day, how may I help you?"
+            ).also {
+                if (hasAwaitingGrandExchangeCollections(player)) {
+                    stage++
+                } else { stage += 2 }
+            }
+
+            1 -> {
                 npcl(
                     FacialExpression.NEUTRAL,
                     "Before we go any further, I should inform you that you " +
@@ -45,20 +37,16 @@ class EniolaDialogue(player: Player? = null) : DialoguePlugin(player) {
                 stage++
             }
 
-            1 -> {
-                playerl(FacialExpression.ASKING, "Who are you?")
+            2 -> playerl(FacialExpression.ASKING, "Who are you?")
                 .also { stage++ }
-            }
 
-            2 -> {
-                npcl(
-                    FacialExpression.NEUTRAL,
-                    "How frightfully rude of me, my dear ${if (player.isMale) "sir" else "lady"}. " +
-                    "My name is Eniola and I work for that excellent enterprise, the Bank of Gielinor."
-                ).also { stage++ }
-            }
+            3 -> npcl(
+                FacialExpression.NEUTRAL,
+                "How frightfully rude of me, my dear ${if (player.isMale) "sir" else "lady"}. " +
+                "My name is Eniola and I work for that excellent enterprise, the Bank of Gielinor."
+            ).also { stage++ }
 
-            3 -> showTopics(
+            4 -> showTopics(
                 Topic(FacialExpression.HALF_THINKING, "If you work for the bank, what are you doing here?", 10),
                 Topic(FacialExpression.NEUTRAL, "I'd like to access my bank account, please.", 30),
                 Topic(FacialExpression.NEUTRAL, "I'd like to check my PIN settings.", 31),
@@ -80,7 +68,7 @@ class EniolaDialogue(player: Player? = null) : DialoguePlugin(player) {
 
             12 -> npcl(
                 FacialExpression.HALF_GUILTY,
-                "The Z.M.I, that is, the Zamorakian Magical Institute, required my services " +
+                "The Z.M.I. - that is - the Zamorakian Magical Institute, required my services " +
                 "upon discovery of this altar."
             ).also { stage++ }
 

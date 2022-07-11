@@ -1820,6 +1820,63 @@ fun openBankPinSettings(player: Player) {
     player.bankPinManager.openSettings()
 }
 
+enum class SecondaryBankAccountActivationResult {
+    SUCCESS,
+    ALREADY_ACTIVE,
+    NOT_ENOUGH_MONEY,
+    INTERNAL_FAILURE
+}
+/**
+ * Activates the secondary bank account and handles all the fees required.
+ *
+ * @author vddCore
+ * @param player The player whose secondary bank account to activate.
+ * @returns Whether the operation was successful or not.
+ */
+fun activateSecondaryBankAccount(player: Player): SecondaryBankAccountActivationResult {
+    if (getAttribute(player, "UnlockedSecondaryBank", false)) {
+        return SecondaryBankAccountActivationResult.ALREADY_ACTIVE
+    }
+
+    val cost = 5000000
+    val coinsInInventory = amountInInventory(player, Items.COINS_995)
+    val coinsInBank = amountInBank(player, Items.COINS_995)
+    val coinsTotal = coinsInInventory + coinsInBank
+
+    if (cost > coinsTotal) {
+        return SecondaryBankAccountActivationResult.NOT_ENOUGH_MONEY
+    }
+
+    val operationResult = if (cost > coinsInInventory) {
+        val amountToTakeFromBank = cost - coinsInInventory
+
+        removeItem(player, Item(Items.COINS_995, coinsInInventory), Container.INVENTORY)
+                && removeItem(player, Item(Items.COINS_995, amountToTakeFromBank), Container.BANK)
+    } else {
+        removeItem(player, Item(Items.COINS_995, cost))
+    }
+
+    return if (operationResult) {
+        setAttribute(player, "/save:UnlockedSecondaryBank", true)
+        SecondaryBankAccountActivationResult.SUCCESS
+    } else {
+        sendMessage(player, "$cost;$coinsInInventory;$coinsInBank;$coinsTotal")
+        SecondaryBankAccountActivationResult.INTERNAL_FAILURE
+    }
+}
+
+/**
+ * Toggles between the player's primary and/or secondary bank account.
+ * Has no effect if the secondary bank account hasn't been activated.
+ *
+ * @param player The player whose bank accounts to toggle.
+ */
+fun toggleBankAccount(player: Player) {
+    if (!getAttribute(player, "UnlockedSecondaryBank", false)) return
+
+    player.useSecondaryBank = !player.useSecondaryBank
+}
+
 /**
  * Skill Dialogue builder.
  * @param player the player to send the dialogue for.
