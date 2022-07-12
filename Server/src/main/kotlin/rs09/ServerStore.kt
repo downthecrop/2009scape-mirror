@@ -144,8 +144,8 @@ class ServerStore : PersistWorld {
          * these methods are wrapped by more convenient ones that allow access for a particular player, see below.
          */
         fun NPCItemFilename(npc: Int, item: Int, period: String = "daily"): String {
-            val itemName = getItemName(item)
-            val npcName = NPC(npc).name
+            val itemName = getItemName(item).lowercase().replace(" ","-")
+            val npcName = NPC(npc).name.lowercase()
             return "$period-$npcName-$itemName"
         }
         fun NPCItemMemory(npc: Int, item: Int, period: String = "daily"): JSONObject {
