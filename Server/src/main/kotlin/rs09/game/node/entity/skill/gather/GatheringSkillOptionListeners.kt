@@ -16,7 +16,7 @@ class GatheringSkillOptionListeners : InteractionListener {
     val ETCETERIA_REGION = 10300
 
     override fun defineListeners() {
-        on(SCENERY,"chop-down","chop down","cut down"){ player, node ->
+        on(SCENERY,"chop-down","chop down","cut down","chop"){ player, node ->
             if(player.location.regionId == ETCETERIA_REGION){
                 player.dialogueInterpreter.open(KjallakOnChopDialogue(), NPC(NPCs.CARPENTER_KJALLAK_3916))
                 return@on true

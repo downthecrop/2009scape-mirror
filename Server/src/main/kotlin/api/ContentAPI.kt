@@ -4,6 +4,7 @@ import Cutscene
 import com.moandjiezana.toml.Toml
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.SceneryDefinition
+import core.cache.def.impl.VarbitDefinition
 import core.game.component.Component
 import core.game.container.impl.EquipmentContainer
 import core.game.content.dialogue.FacialExpression
@@ -16,6 +17,7 @@ import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.HintIconManager
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.emote.Emotes
@@ -499,6 +501,18 @@ fun produceGroundItem(player: Player, item: Int) {
 }
 
 /**
+ * Produces a ground item with the given ID and amount at the given location
+ * @param owner the owner of the ground item, use null for none.
+ * @param id the id of the item.
+ * @param amount the amount of the item.
+ * @param location the location of the item.
+ * @return the created ground item.
+ */
+fun produceGroundItem(owner: Player?, id: Int, amount: Int, location: Location) : GroundItem {
+   return GroundItemManager.create(Item(id, amount), location, owner) 
+}
+
+/**
  * Spawns a projectile
  */
 fun spawnProjectile(source: Entity, dest: Entity, projectileId: Int) {
@@ -618,6 +632,15 @@ fun sendChat(entity: Entity, message: String) {
  */
 fun sendDialogue(player: Player, message: String) {
     player.dialogueInterpreter.sendDialogue(*splitLines(message))
+}
+
+/**
+ * Sends a message to the player's dialogue box
+ * @param player the player to send the dialogue to
+ * @param lines the lines of dialogue to send. No automatic splitting.
+ */
+fun sendDialogueLines(player: Player, vararg message: String) {
+    player.dialogueInterpreter.sendDialogue(*message)
 }
 
 /**
@@ -844,6 +867,21 @@ fun heal(entity: Entity, amount: Int) {
 fun setVarbit(player: Player, varpIndex: Int, offset: Int, value: Int, save: Boolean = false) {
     player.varpManager.get(varpIndex).setVarbit(offset, value).send(player)
     if (save) player.varpManager.flagSave(varpIndex)
+}
+
+/**
+ * Sets the given varbit for the given player.
+ * @param player the player to set the varbit for.
+ * @param varbitId the ID of the varbit to set.
+ * @param value the value to set the varbit to.
+ * @param save whether or not we should save this setting (default false)
+ */
+fun setVarbit(player: Player, varbitId: Int, value: Int, save: Boolean = false) {
+    player.varpManager.setVarbit(varbitId, value)
+    if (save) {
+        val def = VarbitDefinition.forId(varbitId)
+        player.varpManager.flagSave(def.varpId)
+    }
 }
 
 /**
@@ -1284,11 +1322,12 @@ fun submitIndividualPulse(entity: Entity, pulse: Pulse) {
 /**
  * Similar to submitIndividualPulse, but for non-repeating tasks, with a cleaner syntax.
  */
-fun runTask(entity: Entity, delay: Int = 0, task: () -> Unit) {
+fun runTask(entity: Entity, delay: Int = 0, repeatTimes: Int = 1, task: () -> Unit) {
+    var cycles = repeatTimes
     entity.pulseManager.run(object : Pulse(delay) {
         override fun pulse(): Boolean {
             task.invoke()
-            return true
+            return --cycles == 0
         }
     })
 }
@@ -1706,4 +1745,99 @@ fun getSlayerTaskFlags(player : Player) : Int {
  */
 fun hasSlayerTask(player : Player) : Boolean {
     return SlayerManager.getInstance(player).hasTask()
+}
+
+/** 
+ * Skill Dialogue builder.
+ * @param player the player to send the dialogue for.
+ * Use like:
+ * sendSkillDialogue(player) {
+ *    withItems(Items.EXAMPLE_0, Items.EXAMPLE_1)
+ *    create { id, amount -> 
+ *       doSomethingWith(id, amount) 
+ *    }
+ *    calculateMaxAmount { id -> 
+ *       return someAmount
+ *    }
+ * }
+ */
+fun sendSkillDialogue(player: Player, init: SkillDialogueBuilder.() -> Unit) {
+    val builder = SkillDialogueBuilder()
+    builder.player = player
+    builder.init()
+
+    if (builder.items.size !in 1..5) {
+        throw IllegalStateException("Invalid number of items passed to skill dialogue (min 1, max 5): ${builder.items.size}")
+    }
+
+    val type = when (builder.items.size) {
+        1 -> SkillDialogueHandler.SkillDialogue.ONE_OPTION
+        2 -> SkillDialogueHandler.SkillDialogue.TWO_OPTION
+        3 -> SkillDialogueHandler.SkillDialogue.THREE_OPTION
+        4 -> SkillDialogueHandler.SkillDialogue.FOUR_OPTION
+        5 -> SkillDialogueHandler.SkillDialogue.FIVE_OPTION
+        else -> null
+    }
+
+    object : SkillDialogueHandler(player, type, *builder.items) {
+        override fun create(amount: Int, index: Int) {
+            builder.creationCallback(builder.items[index].id, amount)
+        }
+
+        override fun getAll(index: Int): Int {
+            return builder.totalAmountCallback(builder.items[index].id)
+        }
+    }.open()
+}
+
+class SkillDialogueBuilder {
+    internal lateinit var player: Player
+    internal var items: Array<Item> = arrayOf<Item>()
+    internal var creationCallback: (itemId: Int, amount: Int) -> Unit = {_,_ -> }
+    internal var totalAmountCallback: (itemId: Int) -> Int = {id -> amountInInventory(player, id)}
+
+    fun withItems(vararg item: Item) {
+        items = arrayOf(*item)
+    }
+
+    fun withItems(vararg item: Int) {
+        items = item.map { Item(it) }.toTypedArray()
+    }
+
+    fun create(method: (itemId: Int, amount: Int) -> Unit) {
+        creationCallback = method
+    }
+
+    fun calculateMaxAmount(method: (itemId: Int) -> Int) {
+        totalAmountCallback = method
+    }
+}
+
+/** 
+ * Registers a hint icon with the given height at the given location
+ * @param player the player to register the hint icon for
+ * @param height the height of the hint icon
+ * @param location the location of the hint icon
+ */
+fun registerHintIcon(player: Player, location: Location, height: Int) {
+    setAttribute(player, "hinticon", HintIconManager.registerHintIcon(player, location, 1, -1, player.hintIconManager.freeSlot(), height, 3))
+}
+
+/**
+ * Registers a hint icon for the given Node.
+ * @param player the player to show a hint icon to.
+ * @param node the Node to register a hint icon for.
+ */
+fun registerHintIcon(player: Player, node: Node) {
+    setAttribute(player, "hinticon", HintIconManager.registerHintIcon(player, node))
+}
+
+/** 
+ * Clears the active ContentAPI-originated hint icon
+ * @param player the player to clear the active hint icon for
+ */
+fun clearHintIcon(player: Player) {
+    val slot = getAttribute(player, "hinticon", -1)
+    player.removeAttribute("hinticon")
+    HintIconManager.removeHintIcon(player, slot)
 }
