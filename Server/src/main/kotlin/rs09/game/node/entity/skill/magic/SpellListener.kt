@@ -33,7 +33,7 @@ abstract class SpellListener(val bookName: String) : Listener {
         SpellListeners.add(spellID,type,ids,bookName,method)
     }
 
-    fun requires(player: Player, magicLevel: Int = 0, runes: Array<Item> = arrayOf<Item>(), specialEquipment: IntArray = intArrayOf()){
+    fun requires(player: Player, magicLevel: Int = 0, runes: Array<Item> = arrayOf<Item>(), specialEquipment: IntArray = intArrayOf()) {
         if(player.getAttribute("magic-delay",0) > GameWorld.ticks){
             throw IllegalStateException()
         }
@@ -46,7 +46,7 @@ abstract class SpellListener(val bookName: String) : Listener {
         }
         for(rune in runes){
             if(!SpellUtils.hasRune(player,rune)){
-                player.sendMessage("You don't have enough ${rune.definition.name.toLowerCase()}s to cast this spell.")
+                player.sendMessage("You don't have enough ${rune.definition.name.lowercase()}s to cast this spell.")
                 throw IllegalStateException()
             }
         }

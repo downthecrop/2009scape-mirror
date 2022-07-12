@@ -2,7 +2,6 @@ package rs09.game.node.entity.skill.magic
 
 import api.*
 import core.game.component.Component
-import core.game.node.Node
 import core.game.node.scenery.Scenery
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -19,8 +18,10 @@ import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Components
 import org.rs09.consts.Items
 import rs09.game.node.entity.skill.farming.FarmingPatch
+import rs09.game.node.entity.skill.magic.LunarListeners.JewelleryString.Companion.productOfString
 import rs09.game.node.entity.skill.magic.spellconsts.Lunar
 import rs09.game.system.config.NPCConfigParser
+import java.util.Deque
 
 class LunarListeners : SpellListener("lunar") {
     private val BAKE_PIE_ANIM = Animation(4413)
@@ -33,6 +34,8 @@ class LunarListeners : SpellListener("lunar") {
     private val NPC_CONTACT_GFX = Graphics(730,130)
     private val PLANK_MAKE_ANIM = Animation(6298)
     private val PLANK_MAKE_GFX = Graphics(1063, 120)
+    private val STRING_JEWELLERY_ANIM = Animation(4412)
+    private val STRING_JEWELLERY_GFX = Graphics(728, 100)
 
     override fun defineListeners() {
 
@@ -161,6 +164,10 @@ class LunarListeners : SpellListener("lunar") {
             requires(player, 86, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.NATURE_RUNE_561, 1), Item(Items.EARTH_RUNE_557, 15)))
             plankMake(player, node!!.asItem())
         }
+
+        onCast(Lunar.STRING_JEWELLERY, NONE) { player, _ ->
+            stringJewellery(player)
+        }
     }
 
     private fun plankMake(player: Player, item: Item) {
@@ -263,7 +270,7 @@ class LunarListeners : SpellListener("lunar") {
         for(item in player.inventory.toArray()){
             if(item == null) continue
             val pie = CookableItems.forId(item.id) ?: continue
-            if(!pie.name.toLowerCase().contains("pie")) continue
+            if(!pie.name.lowercase().contains("pie")) continue
             if(player.skills.getLevel(Skills.COOKING) < pie.level) continue
             playerPies.add(item)
         }
@@ -318,5 +325,62 @@ class LunarListeners : SpellListener("lunar") {
             it.packetDispatch.sendString(destName,Components.TELEPORT_OTHER_326,3)
         }
         sendTeleport(player,xp,loc)
+    }
+
+    private fun stringJewellery(player: Player) {
+        val playerJewellery = ArrayDeque<Item>()
+
+        for(item in player.inventory.toArray()) {
+            if(item == null) continue
+            if(!JewelleryString.unstrungContains(item.id)) continue
+            playerJewellery.add(item)
+        }
+
+
+
+        player.pulseManager.run(object : Pulse() {
+            var counter = 0
+            override fun pulse(): Boolean {
+                removeAttribute(player, "spell:runes")
+                requires(player, 80, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.EARTH_RUNE_557, 10), Item(Items.WATER_RUNE_555, 5)))
+                if(counter == 0) delay = animationDuration(STRING_JEWELLERY_ANIM) + 1
+                val item = playerJewellery[0]
+                val strung = JewelleryString.forId(item.id)
+                setDelay(player,false)
+                if(removeItem(player, item) && addItem(player, strung)) {
+                    removeRunes(player, true)
+                    visualizeSpell(player, STRING_JEWELLERY_ANIM, STRING_JEWELLERY_GFX, 2903)
+                    rewardXP(player, Skills.CRAFTING, 4.0)
+                    addXP(player, 83.0)
+                    playerJewellery.remove(item)
+                }
+                counter++
+                return playerJewellery.isEmpty()
+            }
+        })
+    }
+
+    private enum class JewelleryString(val unstrung : Int, val strung : Int) {
+        GOLD(Items.GOLD_AMULET_1673, Items.GOLD_AMULET_1692),
+        SAPPHIRE(Items.SAPPHIRE_AMULET_1675, Items.SAPPHIRE_AMULET_1694),
+        EMERALD(Items.EMERALD_AMULET_1677, Items.EMERALD_AMULET_1696),
+        RUBY(Items.RUBY_AMULET_1679, Items.RUBY_AMULET_1698),
+        DIAMOND(Items.DIAMOND_AMULET_1681, Items.DIAMOND_AMULET_1700),
+        DRAGONSTONE(Items.DRAGONSTONE_AMMY_1683, Items.DRAGONSTONE_AMMY_1702),
+        ONYX(Items.ONYX_AMULET_6579, Items.ONYX_AMULET_6581),
+        SALVE(Items.SALVE_SHARD_4082, Items.SALVE_AMULET_4081),
+        HOLY(Items.UNSTRUNG_SYMBOL_1714, Items.UNBLESSED_SYMBOL_1716),
+        UNHOLY(Items.UNSTRUNG_EMBLEM_1720, Items.UNPOWERED_SYMBOL_1722);
+        companion object {
+            val productOfString = values().associate { it.unstrung to it.strung }
+            fun forId(id : Int) : Int {
+                return productOfString[id]!!
+            }
+
+            fun unstrungContains(id : Int) : Boolean {
+                return productOfString.contains(id)
+            }
+
+        }
     }
 }
