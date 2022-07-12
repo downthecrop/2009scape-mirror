@@ -20,7 +20,7 @@ class BankerNPC : AbstractNPC, InteractionListener {
 
         val SPECIAL_NPC_IDS = intArrayOf(
             NPCs.SIRSAL_BANKER_4519, NPCs.FADLI_958, NPCs.BANK_TUTOR_4907,
-            NPCs.EMERALD_BENEDICT_2271,
+            NPCs.EMERALD_BENEDICT_2271, NPCs.OGRESS_BANKER_7049, NPCs.OGRESS_BANKER_7050,
 
             /* Maximillian Sackville - Near Wilderness bounty-hunter area. */
             NPCs.BANKER_6538
@@ -37,8 +37,7 @@ class BankerNPC : AbstractNPC, InteractionListener {
 
             NPCs.JADE_4296,
 
-            NPCs.GHOST_BANKER_1702, NPCs.GNOME_BANKER_166, NPCs.NARDAH_BANKER_3046,
-            NPCs.OGRESS_BANKER_7049, NPCs.OGRESS_BANKER_7050,  NPCs.MAGNUS_GRAM_5488,
+            NPCs.GHOST_BANKER_1702, NPCs.GNOME_BANKER_166, NPCs.NARDAH_BANKER_3046, NPCs.MAGNUS_GRAM_5488
         )
 
         private val ALL_BANKER_NPC_IDS = intArrayOf(
