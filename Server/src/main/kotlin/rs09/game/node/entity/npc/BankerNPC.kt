@@ -142,12 +142,12 @@ class BankerNPC : AbstractNPC, InteractionListener {
     }
 
     override fun defineListeners() {
-        on(intArrayOf(*NPC_IDS, *SPECIAL_NPC_IDS), NPC, "bank", handler = Companion::attemptBank)
-        on(intArrayOf(*NPC_IDS, *SPECIAL_NPC_IDS), NPC, "collect", handler = Companion::attemptCollect)
+        on(ALL_BANKER_NPC_IDS, NPC, "bank", handler = Companion::attemptBank)
+        on(ALL_BANKER_NPC_IDS, NPC, "collect", handler = Companion::attemptCollect)
     }
 
     override fun defineDestinationOverrides() {
-        setDest(NPC, intArrayOf(*NPC_IDS, *SPECIAL_NPC_IDS), "bank", "collect", "talk-to", handler = ::provideDestinationOverride)
+        setDest(NPC, ALL_BANKER_NPC_IDS, "bank", "collect", "talk-to", handler = ::provideDestinationOverride)
     }
 
     override fun init() {
@@ -163,5 +163,5 @@ class BankerNPC : AbstractNPC, InteractionListener {
         }
     }
 
-    override fun getIds(): IntArray = intArrayOf(*NPC_IDS, *SPECIAL_NPC_IDS)
+    override fun getIds(): IntArray = ALL_BANKER_NPC_IDS
 }
