@@ -79,7 +79,6 @@ public final class MerlinCrystal extends Quest {
 	public Quest newInstance(Object object) {
 		ClassScanner.definePlugins(new CrateCutscenePlugin(),
 				new MerlinCrystalPlugin(),
-				new ArheinShopDialogue(),
 				new BeggarDialogue(),
 				new CandleMakerDialogue(),
 				new KingArthurDialogue(),
