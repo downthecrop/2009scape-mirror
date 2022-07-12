@@ -4,9 +4,11 @@ import api.*
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.IronmanMode
 import core.plugin.Initializable
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
+import rs09.game.content.dialogue.IfTopic
 import rs09.game.content.dialogue.Topic
 import rs09.tools.END_DIALOGUE
 import rs09.tools.START_DIALOGUE
@@ -27,9 +29,25 @@ class ArnoldLydsporDialogue(player: Player? = null) : DialoguePlugin(player) {
             ).also { stage++ }
 
             1 -> showTopics(
-                Topic("Can you open my bank account, please?", 2),
-                Topic(FacialExpression.NEUTRAL, "I'd like to check my bank PIN settings.", 3),
-                Topic(FacialExpression.NEUTRAL, "I'd like to collect items.", 4),
+                IfTopic(
+                    FacialExpression.ASKING,
+                    "Can you open my bank account, please?",
+                    2,
+                    !hasIronmanRestriction(player, IronmanMode.ULTIMATE)
+                ),
+
+                IfTopic(
+                    FacialExpression.NEUTRAL,
+                    "I'd like to check my bank PIN settings.",
+                    3,
+                    !hasIronmanRestriction(player, IronmanMode.ULTIMATE)
+                ),
+                IfTopic(
+                    FacialExpression.NEUTRAL,
+                    "I'd like to collect items.",
+                    4,
+                    !hasIronmanRestriction(player, IronmanMode.ULTIMATE)
+                ),
                 Topic(FacialExpression.ASKING, "Would you like to trade?", 5),
                 Topic(FacialExpression.FRIENDLY, "Nothing, I just came to chat.", 7)
             )
