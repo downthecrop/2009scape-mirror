@@ -248,7 +248,7 @@ class RantzChompyBirdDialogue(val quest: Quest) : DialogueFile() {
   private fun handleQuestStartDialogue(player: Player?, buttonId: Int) {
     when(stage) {
       0 -> npcl(FacialExpression.OLD_NORMAL, "Hey you creature! Make some stabbers! I wanna hunt da chompy?").also { stage++ }
-	    1 -> options("What are 'stabbers'?", "What’s a 'chompy'?", "Ok, I’ll make you some 'stabbers’.", "Er, make your own 'stabbers’!").also { stage++ }
+	    1 -> options("What are 'stabbers'?", "What's a 'chompy'?", "Ok, I’ll make you some 'stabbers'.", "Er, make your own 'stabbers'!").also { stage++ }
 	    2 -> when(buttonId) {
 		    1 -> playerl("What are 'stabbers'?").also { stage = 3 }
 		    2 -> playerl("What's a 'chompy'?").also { stage = 7 }
@@ -258,10 +258,10 @@ class RantzChompyBirdDialogue(val quest: Quest) : DialogueFile() {
 	    3 -> npcl(FacialExpression.OLD_NORMAL, "For da stabbie chucker, I's wanna hunt da chompy! Creature knows what Rantz wants... ...flyin' to stabbie da chompy!").also { stage++ }
 	    4 -> npcl(FacialExpression.OLD_NORMAL, "The ogre shows you a huge but crude bow and then starts to nod energetically in an effort to help you understand.").also { stage++ }
 	    5 -> playerl("I think I understand. You want me to make some arrows for you?").also { stage++ }
-	    6 -> npcl(FacialExpression.OLD_NORMAL, "Yeah, is what Rantz sayed, make da stabbers for da stabby chucker!").also { stage = 2 }
+	    6 -> npcl(FacialExpression.OLD_NORMAL, "Yeah, is what Rantz sayed, make da stabbers for da stabby chucker!").also { stage = 1 }
 	    7 -> npcl(FacialExpression.OLD_NORMAL, "Da chompy is der bestest yummies for Rantz, Fycie and Bugs! We's looking for da yummies all da time. Da chompy is a big flapper, Rantz want's stabbers to sneaky, sneaky, stick da chompy.").also { stage++ }
 	    8 -> playerl("Ah, so 'da chompy' is some kind of bird?").also { stage++ }
-	    9 -> npcl(FacialExpression.OLD_NORMAL, "Yeah, is what Rantz sayed, Da chompy is da big flapper and is bestest yummies. But Rantz needs stabbers to stick da chompy... Will creatures make dem stabbers for us?").also {stage = 2 }
+	    9 -> npcl(FacialExpression.OLD_NORMAL, "Yeah, is what Rantz sayed, Da chompy is da big flapper and is bestest yummies. But Rantz needs stabbers to stick da chompy... Will creatures make dem stabbers for us?").also {stage = 1 }
 	    10 -> npcl(FacialExpression.OLD_NORMAL, "Good you creature, you need sticksies from achey tree and stabbies from dog bones.").also { stage = END_DIALOGUE; quest.start(player) }
     }
   }
@@ -330,12 +330,12 @@ class RantzChompyBirdDialogue(val quest: Quest) : DialogueFile() {
         5 -> playerl("Ok, thanks.").also { stage = END_DIALOGUE }
       }
       6 -> npcl(FacialExpression.OLD_NORMAL, "Chompys love da fatsy toadies. Toadies get big on der swamp gas and der chomys are licking der lips for em as me is licking lips for da chompy. Da chompys don't like da smaller toadies from nearby swampy.").also { stage++ }
-      7 -> npcl(FacialExpression.OLD_NORMAL, "Dey's fussie eaters like Rantz. Fycie an Bugs play with toadies and blower dey's all times making fatsy toadies.").also { stage = 5 }
-      8 -> npcl(FacialExpression.OLD_NORMAL, "Fatsy toadies are da chompy burds bestest yumms. But da toadies here are too small for da chompy. You've godda make da toadies big and round!").also { stage = 5 }
+      7 -> npcl(FacialExpression.OLD_NORMAL, "Dey's fussie eaters like Rantz. Fycie an Bugs play with toadies and blower dey's all times making fatsy toadies.").also { stage = 4 }
+      8 -> npcl(FacialExpression.OLD_NORMAL, "Fatsy toadies are da chompy burds bestest yumms. But da toadies here are too small for da chompy. You've godda make da toadies big and round!").also { stage = 4 }
       9 -> npcl(FacialExpression.OLD_NORMAL, "Over der!").also { stage++ }
       10 -> npcl(FacialExpression.OLD_NORMAL, "The ogre points to a small clearing to da south.").also { stage++ }
-      11 -> npcl(FacialExpression.OLD_NORMAL, "Ok creature? You got dat? Over here by der no tree's place.").also { stage = 5 }
-      12 -> npcl(FacialExpression.OLD_NORMAL, "Duh! You creature is a bit stoopid yes? Us needs to sneaky, sneaky.. and stick da chompy! Den we can eat da chompy!").also { stage = 5 }
+      11 -> npcl(FacialExpression.OLD_NORMAL, "Ok creature? You got dat? Over here by der no tree's place.").also { stage = 4 }
+      12 -> npcl(FacialExpression.OLD_NORMAL, "Duh! You creature is a bit stoopid yes? Us needs to sneaky, sneaky.. and stick da chompy! Den we can eat da chompy!").also { stage = 4 }
    
       100 -> sendItemDialogue(player!!, Items.BLOATED_TOAD_2875, "You show the bloated toad to Rantz. He nods with approval.").also { stage++ }
       101 -> npcl(FacialExpression.OLD_NORMAL, "Dat's a good fatsy toady, now we's need to put it for da chompy to come.").also { stage++ }
