@@ -13,6 +13,12 @@ import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.`object`.BankBoothListener
 
+/**
+ * Provides dialogue tree for all generic banker NPCs as well as
+ * handles all the common interactions like 'bank' and 'collect'.
+ *
+ * @author vddCore
+ */
 @Initializable
 class BankerNPC : AbstractNPC, InteractionListener {
     companion object {
@@ -21,6 +27,7 @@ class BankerNPC : AbstractNPC, InteractionListener {
         val SPECIAL_NPC_IDS = intArrayOf(
             NPCs.SIRSAL_BANKER_4519, NPCs.FADLI_958, NPCs.BANK_TUTOR_4907, NPCs.JADE_4296,
             NPCs.EMERALD_BENEDICT_2271, NPCs.OGRESS_BANKER_7049, NPCs.OGRESS_BANKER_7050,
+            NPCs.ARNOLD_LYDSPOR_3824,
 
             /* Maximillian Sackville - Near Wilderness bounty-hunter area. */
             NPCs.BANKER_6538
@@ -34,7 +41,6 @@ class BankerNPC : AbstractNPC, InteractionListener {
             NPCs.BANKER_5777, NPCs.BANKER_5912, NPCs.BANKER_5913, NPCs.BANKER_6200, NPCs.BANKER_6532, NPCs.BANKER_6533,
             NPCs.BANKER_6534, NPCs.BANKER_6535, NPCs.BANKER_7445, NPCs.BANKER_7446, NPCs.BANKER_7605,
             NPCs.GUNDAI_902,
-
 
             NPCs.GHOST_BANKER_1702, NPCs.GNOME_BANKER_166, NPCs.NARDAH_BANKER_3046, NPCs.MAGNUS_GRAM_5488
         )

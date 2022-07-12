@@ -83,5 +83,5 @@ class ArnoldLydsporDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun newInstance(player: Player?): DialoguePlugin = ArnoldLydsporDialogue(player)
-    override fun getIds(): IntArray = ArnoldLydsporListener.NPC_IDS
+    override fun getIds(): IntArray = intArrayOf(NPCs.ARNOLD_LYDSPOR_3824)
 }

@@ -12,6 +12,11 @@ import rs09.game.content.dialogue.Topic
 import rs09.tools.END_DIALOGUE
 import rs09.tools.START_DIALOGUE
 
+/**
+ * Provides a dialogue tree for Jade inside Warriors' Guild.
+ *
+ * @author vddCore
+ */
 @Initializable
 class JadeDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {

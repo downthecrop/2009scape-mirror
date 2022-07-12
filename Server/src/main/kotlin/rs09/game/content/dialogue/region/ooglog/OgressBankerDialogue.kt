@@ -9,6 +9,11 @@ import org.rs09.consts.NPCs
 import rs09.tools.END_DIALOGUE
 import rs09.tools.START_DIALOGUE
 
+/**
+ * Provides dialogue tree for the Ogress Bankers in the city of Oo'glog.
+ *
+ * @author vddCore
+ */
 @Initializable
 class OgressBankerDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun getIds(): IntArray = intArrayOf(
@@ -67,6 +72,7 @@ class OgressBankerDialogue(player: Player? = null) : DialoguePlugin(player) {
             ).also { stage = END_DIALOGUE }
         }
 
+        /* TODO: "As a First Resort..." quest dialogue file is required here. */
         return true
     }
 }
