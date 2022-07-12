@@ -34,7 +34,7 @@
              }
 
              //Who are you?
-             10 -> npc(FacialExpression.FRIENDLY, "I'm Miss Millicent Miller the Miller of Mill Lane Mill.", "Our family have been milling flour for generations.").also { stage = 10 }
+             10 -> npc(FacialExpression.FRIENDLY, "I'm Miss Millicent Miller the Miller of Mill Lane Mill.", "Our family have been milling flour for generations.").also { stage++ }
              11 -> player(FacialExpression.FRIENDLY, "It's a good business to be in. People will always need", "flour.").also { stage++ }
              12 -> player(FacialExpression.ASKING, "How do I mill flour?").also { stage = 30 }
 
