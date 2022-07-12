@@ -6,7 +6,6 @@ import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.IronmanMode
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.plugin.Initializable
@@ -21,7 +20,10 @@ class BankerNPC : AbstractNPC, InteractionListener {
 
         val SPECIAL_NPC_IDS = intArrayOf(
             NPCs.SIRSAL_BANKER_4519, NPCs.FADLI_958, NPCs.BANK_TUTOR_4907,
-            NPCs.EMERALD_BENEDICT_2271
+            NPCs.EMERALD_BENEDICT_2271,
+
+            /* Maximillian Sackville - Near Wilderness bounty-hunter area. */
+            NPCs.BANKER_6538
         )
 
         val NPC_IDS = intArrayOf(
@@ -30,7 +32,7 @@ class BankerNPC : AbstractNPC, InteractionListener {
             NPCs.BANKER_2354, NPCs.BANKER_2355, NPCs.BANKER_2568, NPCs.BANKER_2569, NPCs.BANKER_2570, NPCs.BANKER_3198,
             NPCs.BANKER_3199, NPCs.BANKER_5258, NPCs.BANKER_5259, NPCs.BANKER_5260, NPCs.BANKER_5261, NPCs.BANKER_5776,
             NPCs.BANKER_5777, NPCs.BANKER_5912, NPCs.BANKER_5913, NPCs.BANKER_6200, NPCs.BANKER_6532, NPCs.BANKER_6533,
-            NPCs.BANKER_6534, NPCs.BANKER_6535, NPCs.BANKER_6538, NPCs.BANKER_7445, NPCs.BANKER_7446, NPCs.BANKER_7605,
+            NPCs.BANKER_6534, NPCs.BANKER_6535, NPCs.BANKER_7445, NPCs.BANKER_7446, NPCs.BANKER_7605,
             NPCs.GUNDAI_902,
 
             NPCs.JADE_4296,
@@ -61,10 +63,6 @@ class BankerNPC : AbstractNPC, InteractionListener {
         fun attemptBank(player: Player, node: Node): Boolean {
             val npc = node as NPC
 
-            if (player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {
-                return true
-            }
-
             if (checkLunarIsleRestriction(player, node)) {
                 openDialogue(player, npc.id, npc)
                 return true
@@ -78,10 +76,6 @@ class BankerNPC : AbstractNPC, InteractionListener {
 
         fun attemptCollect(player: Player, node: Node): Boolean {
             val npc = node as NPC
-
-            if (player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {
-                return true
-            }
 
             if (checkLunarIsleRestriction(player, node)) {
                 openDialogue(player, npc.id, npc)
@@ -143,12 +137,12 @@ class BankerNPC : AbstractNPC, InteractionListener {
     }
 
     override fun defineListeners() {
-        on(NPC_IDS, NPC, "bank", handler = Companion::attemptBank)
-        on(NPC_IDS, NPC, "collect", handler = Companion::attemptCollect)
+        on(intArrayOf(*NPC_IDS, *SPECIAL_NPC_IDS), NPC, "bank", handler = Companion::attemptBank)
+        on(intArrayOf(*NPC_IDS, *SPECIAL_NPC_IDS), NPC, "collect", handler = Companion::attemptCollect)
     }
 
     override fun defineDestinationOverrides() {
-        setDest(NPC, NPC_IDS, "bank", "collect", "talk-to", handler = ::provideDestinationOverride)
+        setDest(NPC, intArrayOf(*NPC_IDS, *SPECIAL_NPC_IDS), "bank", "collect", "talk-to", handler = ::provideDestinationOverride)
     }
 
     override fun init() {
@@ -164,5 +158,5 @@ class BankerNPC : AbstractNPC, InteractionListener {
         }
     }
 
-    override fun getIds(): IntArray = NPC_IDS
+    override fun getIds(): IntArray = intArrayOf(*NPC_IDS, *SPECIAL_NPC_IDS)
 }

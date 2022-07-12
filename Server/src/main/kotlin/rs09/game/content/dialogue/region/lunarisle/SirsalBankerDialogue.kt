@@ -4,6 +4,7 @@ import api.*
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.IronmanMode
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.IfTopic
@@ -20,17 +21,28 @@ import rs09.tools.START_DIALOGUE
 class SirsalBankerDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            START_DIALOGUE -> if(hasSealOfPassage(player)) {
-                npcl(
-                    FacialExpression.NEUTRAL,
-                    "Good day, how may I help you?"
-                ).also {
-                    if (hasAwaitingGrandExchangeCollections(player)) {
-                        stage++
-                    } else { stage += 2 }
+            START_DIALOGUE -> if (hasSealOfPassage(player)) {
+                if (isIronman(player, IronmanMode.ULTIMATE)) {
+                    npcl(
+                        FacialExpression.NEUTRAL,
+                        "My apologies, dear ${if (player.isMale) "sir" else "madam"}, " +
+                        "our services are not available for Ultimate ${if (player.isMale) "Ironmen" else "Ironwomen"}"
+                    ).also { stage = END_DIALOGUE }
+                } else {
+
+                    npcl(
+                        FacialExpression.NEUTRAL,
+                        "Good day, how may I help you?"
+                    ).also {
+                        if (hasAwaitingGrandExchangeCollections(player)) {
+                            stage++
+                        } else {
+                            stage += 2
+                        }
+                    }
                 }
             } else {
-                playerl(FacialExpression.WORRIED, "Hi, I...")
+                playerl(FacialExpression.HALF_WORRIED, "Hi, I...")
                 stage = 30
             }
 
@@ -141,7 +153,7 @@ class SirsalBankerDialogue(player: Player? = null) : DialoguePlugin(player) {
                             FacialExpression.NEUTRAL,
                             "I must apologize, the transaction was not successful. Please check your " +
                             "primary bank account and your inventory - if there's money missing, please " +
-                            "screenshot your chat box contact the game developers."
+                            "screenshot your chat box and contact the game developers."
                         ).also { stage = END_DIALOGUE }
                     }
 
@@ -175,7 +187,7 @@ class SirsalBankerDialogue(player: Player? = null) : DialoguePlugin(player) {
                 "What are you doing here, Fremennik?!"
             ).also { stage++ }
 
-            31 -> npcl(
+            31 -> playerl(
                 FacialExpression.WORRIED,
                 "I have a Seal of Pass..."
             ).also { stage++ }

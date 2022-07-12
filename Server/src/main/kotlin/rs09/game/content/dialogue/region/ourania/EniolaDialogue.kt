@@ -1,12 +1,10 @@
 package rs09.game.content.dialogue.region.ourania
 
-import api.hasAwaitingGrandExchangeCollections
-import api.openBankPinSettings
-import api.openInterface
-import api.setAttribute
+import api.*
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.IronmanMode
 import core.plugin.Initializable
 import org.rs09.consts.Components
 import org.rs09.consts.NPCs
@@ -18,13 +16,24 @@ import rs09.tools.START_DIALOGUE
 class EniolaDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            START_DIALOGUE -> npcl(
-                FacialExpression.NEUTRAL,
-                "Good day, how may I help you?"
-            ).also {
-                if (hasAwaitingGrandExchangeCollections(player)) {
-                    stage++
-                } else { stage += 2 }
+            START_DIALOGUE -> if (isIronman(player, IronmanMode.ULTIMATE)) {
+                npcl(
+                    FacialExpression.NEUTRAL,
+                    "My apologies, dear ${if (player.isMale) "sir" else "madam"}, " +
+                    "our services are not available for Ultimate ${if (player.isMale) "Ironmen" else "Ironwomen"}."
+                ).also { stage = END_DIALOGUE }
+            }
+            else {
+                npcl(
+                    FacialExpression.NEUTRAL,
+                    "Good day, how may I help you?"
+                ).also {
+                    if (hasAwaitingGrandExchangeCollections(player)) {
+                        stage++
+                    } else {
+                        stage += 2
+                    }
+                }
             }
 
             1 -> npcl(

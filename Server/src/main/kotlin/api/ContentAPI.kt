@@ -18,6 +18,7 @@ import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.HintIconManager
+import core.game.node.entity.player.link.IronmanMode
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.emote.Emotes
@@ -1750,13 +1751,39 @@ fun hasSlayerTask(player: Player): Boolean {
 }
 
 /**
+ * Checks whether a player plays in a specific Ironman mode.
+ *
+ * @param player Player whose Ironman status to check.
+ * @return Whether the player is playing in a specific Ironman mode.
+ */
+fun isIronman(player: Player, mode: IronmanMode): Boolean {
+    return player.ironmanManager.isIronman
+        && player.ironmanManager.mode.ordinal >= mode.ordinal
+}
+
+/**
+ * Conditionally executes an action based on the player's Ironman status.
+ *
+ * @param player Player whose action to restrict.
+ * @param mode Ironman mode that will be used as the restriction criterion.
+ * @param action The action to be restricted.
+ */
+fun restrictForIronman(player: Player, mode: IronmanMode, action: () -> Unit) {
+    if (!player.ironmanManager.checkRestriction(mode)) {
+        action()
+    }
+}
+
+/**
  * Opens the given player's Grand Exchange interface.
  *
  * @author vddCore
  * @param player The player whose Grand Exchange interface to open.
  */
 fun openGrandExchange(player: Player) {
-    StockMarket.openFor(player)
+    restrictForIronman(player, IronmanMode.ULTIMATE) {
+        StockMarket.openFor(player)
+    }
 }
 
 /**
@@ -1782,42 +1809,58 @@ fun hasAwaitingGrandExchangeCollections(player: Player): Boolean {
 /**
  * Opens the given player's Grand Exchange collection box.
  *
+ * It will send a prohibition message to Ultimate Ironmen.
+ *
  * @author vddCore
  * @param player The player whose collection box to open.
  */
 fun openGrandExchangeCollectionBox(player: Player) {
-    GrandExchangeRecords.getInstance(player).openCollectionBox()
+    restrictForIronman(player, IronmanMode.ULTIMATE) {
+        GrandExchangeRecords.getInstance(player).openCollectionBox()
+    }
 }
 
 /**
  * Opens the given player's bank account. If the player has a PIN set,
  * the PIN interface will be shown first.
  *
+ * It will send a prohibition message to Ultimate Ironmen.
+ *
  * @author vddCore
  * @param player The player whose bank account to open.
  */
 fun openBankAccount(player: Player) {
-    player.bank.open()
+    restrictForIronman(player, IronmanMode.ULTIMATE) {
+        player.bank.open()
+    }
 }
 
 /**
  * Opens the given player's bank deposit box interface.
  *
+ * It will send a prohibition message to Ultimate Ironmen.
+ *
  * @author vddCore
  * @param player The player whose bank account to open.
  */
 fun openDepositBox(player: Player) {
-    player.bank.openDepositBox()
+    restrictForIronman(player, IronmanMode.ULTIMATE) {
+        player.bank.openDepositBox()
+    }
 }
 
 /**
  * Opens the given player's bank PIN settings interface.
  *
+ * It will send a prohibition message to Ultimate Ironmen.
+ *
  * @author vddCore
  * @param player The player whose PIN settings to open.
  */
 fun openBankPinSettings(player: Player) {
-    player.bankPinManager.openSettings()
+    restrictForIronman(player, IronmanMode.ULTIMATE) {
+        player.bankPinManager.openSettings()
+    }
 }
 
 enum class SecondaryBankAccountActivationResult {
@@ -1834,6 +1877,10 @@ enum class SecondaryBankAccountActivationResult {
  * @returns Whether the operation was successful or not.
  */
 fun activateSecondaryBankAccount(player: Player): SecondaryBankAccountActivationResult {
+    if (isIronman(player, IronmanMode.ULTIMATE)) {
+        return SecondaryBankAccountActivationResult.INTERNAL_FAILURE
+    }
+
     if (hasActivatedSecondaryBankAccount(player)) {
         return SecondaryBankAccountActivationResult.ALREADY_ACTIVE
     }
@@ -1851,7 +1898,7 @@ fun activateSecondaryBankAccount(player: Player): SecondaryBankAccountActivation
         val amountToTakeFromBank = cost - coinsInInventory
 
         removeItem(player, Item(Items.COINS_995, coinsInInventory), Container.INVENTORY)
-        && removeItem(player, Item(Items.COINS_995, amountToTakeFromBank), Container.BANK)
+                && removeItem(player, Item(Items.COINS_995, amountToTakeFromBank), Container.BANK)
     } else {
         removeItem(player, Item(Items.COINS_995, cost))
     }
@@ -1880,13 +1927,19 @@ fun hasActivatedSecondaryBankAccount(player: Player): Boolean {
  * Toggles between the player's primary and/or secondary bank account.
  * Has no effect if the secondary bank account hasn't been activated.
  *
+ * It will send a prohibition message to Ultimate Ironmen.
+ *
  * @author vddCore
  * @param player The player whose bank accounts to toggle.
  */
 fun toggleBankAccount(player: Player) {
-    if (!hasActivatedSecondaryBankAccount(player)) return
+    restrictForIronman(player, IronmanMode.ULTIMATE) {
+        if (!hasActivatedSecondaryBankAccount(player)) {
+            return@restrictForIronman
+        }
 
-    player.useSecondaryBank = !player.useSecondaryBank
+        player.useSecondaryBank = !player.useSecondaryBank
+    }
 }
 
 /**
@@ -1909,10 +1962,10 @@ fun isUsingSecondaryBankAccount(player: Player): Boolean {
  * @return Bank account name according to the given criteria.
  */
 fun getBankAccountName(player: Player, invert: Boolean = false): String {
-    return if (isUsingSecondaryBankAccount(player) && !invert) {
-        "secondary"
+    return if (isUsingSecondaryBankAccount(player)) {
+        if (invert) "primary" else "secondary"
     } else {
-        "primary"
+        if (invert) "secondary" else "primary"
     }
 }
 

@@ -4,6 +4,7 @@ import api.*
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.IronmanMode
 import core.plugin.Initializable
 import rs09.game.content.dialogue.IfTopic
 import rs09.game.content.dialogue.Topic
@@ -15,13 +16,27 @@ import rs09.tools.START_DIALOGUE
 class BankerDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            START_DIALOGUE -> npcl(
-                FacialExpression.NEUTRAL,
-                "Good day, how may I help you?"
-            ).also {
-                if (hasAwaitingGrandExchangeCollections(player)) {
-                    stage++
-                } else { stage += 2 }
+            START_DIALOGUE -> when {
+                isIronman(player, IronmanMode.ULTIMATE) -> {
+                    npcl(
+                        FacialExpression.NEUTRAL,
+                        "My apologies, dear ${if (player.isMale) "sir" else "madam"}, " +
+                        "our services are not available for Ultimate ${if (player.isMale) "Ironmen" else "Ironwomen"}"
+                    ).also { stage = END_DIALOGUE }
+                }
+
+                else -> {
+                    npcl(
+                        FacialExpression.NEUTRAL,
+                        "Good day, how may I help you?"
+                    ).also {
+                        if (hasAwaitingGrandExchangeCollections(player)) {
+                            stage++
+                        } else {
+                            stage += 2
+                        }
+                    }
+                }
             }
 
             1 -> npcl(
@@ -131,7 +146,7 @@ class BankerDialogue(player: Player? = null) : DialoguePlugin(player) {
                             FacialExpression.NEUTRAL,
                             "I must apologize, the transaction was not successful. Please check your " +
                             "primary bank account and your inventory - if there's money missing, please " +
-                            "screenshot your chat box contact the game developers."
+                            "screenshot your chat box and contact the game developers."
                         ).also { stage = END_DIALOGUE }
                     }
 
