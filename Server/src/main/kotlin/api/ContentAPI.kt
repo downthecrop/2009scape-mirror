@@ -1766,11 +1766,11 @@ fun hasIronmanRestriction(player: Player, restriction: IronmanMode): Boolean {
  * Conditionally executes an action based on the player's Ironman status.
  *
  * @param player Player whose action to restrict.
- * @param mode Ironman mode that will be used as the restriction criterion.
+ * @param restriction Ironman mode that will be used as the restriction criterion.
  * @param action The action to be restricted.
  */
-fun restrictForIronman(player: Player, mode: IronmanMode, action: () -> Unit) {
-    if (!player.ironmanManager.checkRestriction(mode)) {
+fun restrictForIronman(player: Player, restriction: IronmanMode, action: () -> Unit) {
+    if (!player.ironmanManager.checkRestriction(restriction)) {
         action()
     }
 }

@@ -41,6 +41,11 @@ class BankerNPC : AbstractNPC, InteractionListener {
             NPCs.OGRESS_BANKER_7049, NPCs.OGRESS_BANKER_7050,  NPCs.MAGNUS_GRAM_5488,
         )
 
+        private val ALL_BANKER_NPC_IDS = intArrayOf(
+            *SPECIAL_NPC_IDS,
+            *NPC_IDS
+        )
+
         /**
          * This is poorly named, but performs a few checks to see if the player
          * is trying to access the bank on the Lunar Isle and returns a boolean
