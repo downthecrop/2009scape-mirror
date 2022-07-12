@@ -91,7 +91,8 @@ There are many ways everyone can contribute! From the most seasoned programmers 
 
 ### Prerequisites
 
-These are mandatory. If you don't install ***both*** of these programs prior to 
+These are mandatory. If you don't install ***both*** of these programs prior to
+the project's setup, things won't work. At all.
 
 * [Eclipse Temurin JDK 11 (preferred)](https://adoptium.net) or the Java SE Development Kit Version 11
 * [Git LFS](https://git-lfs.github.com/)
