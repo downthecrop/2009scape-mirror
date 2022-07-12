@@ -341,6 +341,7 @@ class LunarListeners : SpellListener("lunar") {
         player.pulseManager.run(object : Pulse() {
             var counter = 0
             override fun pulse(): Boolean {
+                removeAttribute(player, "spell:runes")
                 requires(player, 80, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.EARTH_RUNE_557, 10), Item(Items.WATER_RUNE_555, 5)))
                 if(counter == 0) delay = animationDuration(STRING_JEWELLERY_ANIM) + 1
                 val item = playerJewellery[0]
