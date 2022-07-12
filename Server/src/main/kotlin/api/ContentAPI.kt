@@ -49,6 +49,7 @@ import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.dialogue.SkillDialogueHandler
 import rs09.game.content.global.GlobalKillCounter
+import rs09.game.content.global.shops.Shops
 import rs09.game.ge.GrandExchangeRecords
 import rs09.game.interaction.InteractionListeners
 import rs09.game.interaction.inter.ge.StockMarket
@@ -1967,6 +1968,24 @@ fun getBankAccountName(player: Player, invert: Boolean = false): String {
     } else {
         if (invert) "secondary" else "primary"
     }
+}
+
+/**
+ * Opens a shop for the given NPC in the provided player's context.
+ *
+ * @author vddCore
+ * @param player The player serving as the shop context.
+ * @param npc The NPC ID whose shop to open.
+ */
+fun openNpcShop(player: Player, npc: Int): Boolean {
+    val shop = Shops.shopsByNpc[npc]
+
+    if (shop != null) {
+        shop.openFor(player)
+        return true
+    }
+
+    return false
 }
 
 /**
