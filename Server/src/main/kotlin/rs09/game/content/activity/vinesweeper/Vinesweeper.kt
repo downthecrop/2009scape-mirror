@@ -149,10 +149,10 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
                 //npc.animate(9603)
                 npc.sendChat("Squeak!")
                 npc.lock(3)
-                player.skills.addExperience(Skills.HUNTER, 30.0)
                 GameWorld.Pulser.submit(object : Pulse(3) {
                     override fun pulse(): Boolean {
                         //npc.setInvisible(true)
+                        player.skills.addExperience(Skills.HUNTER, 30.0)
                         npc.respawnTick = GameWorld.ticks + 50
                         npc.location = npc.properties.spawnLocation
                         return true
