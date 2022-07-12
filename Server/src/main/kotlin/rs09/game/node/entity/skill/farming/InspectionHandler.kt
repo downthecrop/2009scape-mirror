@@ -29,7 +29,11 @@ class InspectionHandler : OptionHandler() {
                 else "This patch has something growing in it."
             }
             val status2 = if(patch.type == PatchType.ALLOTMENT || patch.type == PatchType.FLOWER || patch.type == PatchType.HOPS){
-                if(p.isWatered) "This patch has been watered." else "This patch could use some water."
+                if(p.isWatered) {
+                    "This patch has been watered."
+                } else if(p.getCurrentState() > 3 && !p.isGrown() && !p.isDead && !p.isDiseased) {
+                    "This patch could use some water."
+                } else ""
             } else ""
             val status3 = if(p.compost == CompostType.NONE) "This patch has not been treated." else "This patch has been treated with ${p.compost.name.toLowerCase()} compost."
             player.sendMessage("$status1 $status2")
