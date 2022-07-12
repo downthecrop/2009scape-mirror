@@ -1754,7 +1754,8 @@ fun hasSlayerTask(player: Player): Boolean {
  * Checks whether a player plays in a specific Ironman mode.
  *
  * @param player Player whose Ironman status to check.
- * @return Whether the player is playing in a specific Ironman mode.
+ * @param restriction The Ironman restriction level to check the player against.
+ * @return Whether the player is restricted to the provided Ironman mode.
  */
 fun hasIronmanRestriction(player: Player, restriction: IronmanMode): Boolean {
     return player.ironmanManager.isIronman
