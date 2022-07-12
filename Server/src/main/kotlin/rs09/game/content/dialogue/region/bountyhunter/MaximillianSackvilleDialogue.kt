@@ -25,7 +25,7 @@ class MaximillianSackvilleDialogue(player: Player? = null) : DialoguePlugin(play
             START_DIALOGUE -> when {
                 hasIronmanRestriction(player, IronmanMode.ULTIMATE) -> {
                     npcl(
-                        FacialExpression.HALF_WORRIED,
+                        FacialExpression.NEUTRAL,
                         "My apologies, dear ${if (player.isMale) "sir" else "madam"}, " +
                         "our services are not available for Ultimate ${if (player.isMale) "Ironmen" else "Ironwomen"}."
                     ).also { stage = END_DIALOGUE }
