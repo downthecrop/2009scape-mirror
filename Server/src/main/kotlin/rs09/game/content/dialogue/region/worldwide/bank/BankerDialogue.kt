@@ -34,15 +34,15 @@ class BankerDialogue(player: Player? = null) : DialoguePlugin(player) {
                 Topic(FacialExpression.NEUTRAL, "I'd like to access my bank account, please.", 10),
                 IfTopic(
                     FacialExpression.NEUTRAL,
-                    "I'd like to switch to my ${if(player.useSecondaryBank) "primary" else "secondary"} bank account.",
+                    "I'd like to switch to my ${getBankAccountName(player, true)} bank account.",
                     13,
-                    getAttribute(player, "UnlockedSecondaryBank", false)
+                    hasActivatedSecondaryBankAccount(player)
                 ),
                 IfTopic(
                     FacialExpression.NEUTRAL,
                     "I'd like to open a secondary bank account.",
                     20,
-                    !getAttribute(player, "UnlockedSecondaryBank", false)
+                    !hasActivatedSecondaryBankAccount(player)
                 ),
                 Topic(FacialExpression.NEUTRAL, "I'd like to check my PIN settings.", 11),
                 Topic(FacialExpression.NEUTRAL, "I'd like to collect items.", 12),
@@ -86,7 +86,7 @@ class BankerDialogue(player: Player? = null) : DialoguePlugin(player) {
                 npcl(
                     FacialExpression.NEUTRAL,
                     "Your active bank account has been switched. " +
-                    "You can now access your ${if (player.useSecondaryBank) "secondary" else "primary"} account."
+                    "You can now access your ${getBankAccountName(player)} account."
                 ).also { stage = END_DIALOGUE }
             }
 

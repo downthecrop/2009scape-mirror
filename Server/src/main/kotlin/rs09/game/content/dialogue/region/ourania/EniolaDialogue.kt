@@ -27,15 +27,11 @@ class EniolaDialogue(player: Player? = null) : DialoguePlugin(player) {
                 } else { stage += 2 }
             }
 
-            1 -> {
-                npcl(
-                    FacialExpression.NEUTRAL,
-                    "Before we go any further, I should inform you that you " +
-                    "have items ready for collection from the Grand Exchange."
-                )
-
-                stage++
-            }
+            1 -> npcl(
+                FacialExpression.NEUTRAL,
+                "Before we go any further, I should inform you that you " +
+                "have items ready for collection from the Grand Exchange."
+            ).also { stage++ }
 
             2 -> playerl(FacialExpression.ASKING, "Who are you?")
                 .also { stage++ }
