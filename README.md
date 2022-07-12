@@ -96,20 +96,23 @@ the project's setup, things won't work. At all.
 
 * [Eclipse Temurin JDK 11 (preferred)](https://adoptium.net) or the Java SE Development Kit Version 11
 * [Git LFS](https://git-lfs.github.com/)
+* [IntelliJ IDEA Community](https://www.jetbrains.com/idea/download/)
 
 ### Project Setup
 
-1. Click the "Project" tab on the left-hand side.
-2. In the top left where the "Project" drop down is, click Project Files
-3. Expand the Server folder
-4. Right click `pom.xml` and click "Add Maven Project"
-5. In IntelliJ, File -> Invalidate Caches -> Invalidate Caches and Restart
-6. After setting up Git LFS, you may need to run `git lfs pull` in the root of the cloned repo to download essential binaries
-7. You should now have ready-made run configurations in the top right (you can ignore MS, it's obsolete):
+1. Open IntelliJ IDEA
+2. Clone the project using the `Get from VCS` button.
+3. Click the "Project" tab on the left-hand side.
+4. In the top left where the "Project" drop down is, click Project Files
+5. Expand the Server folder
+6. Right click `pom.xml` and click "Add Maven Project"
+7. In IntelliJ, File -> Invalidate Caches -> Invalidate Caches and Restart
+8. After setting up Git LFS, you may need to run `git lfs pull` in the root of the cloned repo to download essential binaries
+9. You should now have ready-made run configurations in the top right (you can ignore MS, it's obsolete):
     * [Windows] Run Server
     * [Linux] Run Server
-8. Ensure your working directory (the root of the project) is set in the run configuration editor.
-9. Go ahead and use the `Run Server` configuration for your OS to make sure everything worked.
+10. Ensure your working directory (the root of the project) is set in the run configuration editor.
+11. Go ahead and use the `Run Server` configuration for your OS to make sure everything worked.
 
 ### Running the project
 
