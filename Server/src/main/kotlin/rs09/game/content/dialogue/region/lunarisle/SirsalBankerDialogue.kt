@@ -22,7 +22,7 @@ class SirsalBankerDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> if (hasSealOfPassage(player)) {
-                if (isIronman(player, IronmanMode.ULTIMATE)) {
+                if (hasIronmanRestriction(player, IronmanMode.ULTIMATE)) {
                     npcl(
                         FacialExpression.NEUTRAL,
                         "My apologies, dear ${if (player.isMale) "sir" else "madam"}, " +

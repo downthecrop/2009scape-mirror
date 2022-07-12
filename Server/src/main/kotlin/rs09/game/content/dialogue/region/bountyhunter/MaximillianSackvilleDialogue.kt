@@ -23,7 +23,7 @@ class MaximillianSackvilleDialogue(player: Player? = null) : DialoguePlugin(play
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> when {
-                isIronman(player, IronmanMode.ULTIMATE) -> {
+                hasIronmanRestriction(player, IronmanMode.ULTIMATE) -> {
                     npcl(
                         FacialExpression.HALF_WORRIED,
                         "My apologies, dear ${if (player.isMale) "sir" else "madam"}, " +

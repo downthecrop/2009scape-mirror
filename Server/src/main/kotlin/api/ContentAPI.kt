@@ -1756,9 +1756,9 @@ fun hasSlayerTask(player: Player): Boolean {
  * @param player Player whose Ironman status to check.
  * @return Whether the player is playing in a specific Ironman mode.
  */
-fun isIronman(player: Player, mode: IronmanMode): Boolean {
+fun hasIronmanRestriction(player: Player, restriction: IronmanMode): Boolean {
     return player.ironmanManager.isIronman
-        && player.ironmanManager.mode.ordinal >= mode.ordinal
+        && player.ironmanManager.mode.ordinal >= restriction.ordinal
 }
 
 /**
@@ -1799,8 +1799,7 @@ fun hasAwaitingGrandExchangeCollections(player: Player): Boolean {
         val offer = records.getOffer(record)
 
         return offer != null
-                && offer.withdraw[0] != null
-                && offer.withdraw[1] != null
+            && offer.withdraw[0] != null
     }
 
     return false
@@ -1877,7 +1876,7 @@ enum class SecondaryBankAccountActivationResult {
  * @returns Whether the operation was successful or not.
  */
 fun activateSecondaryBankAccount(player: Player): SecondaryBankAccountActivationResult {
-    if (isIronman(player, IronmanMode.ULTIMATE)) {
+    if (hasIronmanRestriction(player, IronmanMode.ULTIMATE)) {
         return SecondaryBankAccountActivationResult.INTERNAL_FAILURE
     }
 

@@ -16,7 +16,7 @@ import rs09.tools.START_DIALOGUE
 class EniolaDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            START_DIALOGUE -> if (isIronman(player, IronmanMode.ULTIMATE)) {
+            START_DIALOGUE -> if (hasIronmanRestriction(player, IronmanMode.ULTIMATE)) {
                 npcl(
                     FacialExpression.NEUTRAL,
                     "My apologies, dear ${if (player.isMale) "sir" else "madam"}, " +
