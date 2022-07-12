@@ -266,6 +266,7 @@ public class Fletching {
     }
     private enum Items{
         STANDARD(1511,FletchingItems.ARROW_SHAFT, FletchingItems.SHORT_BOW, FletchingItems.LONG_BOW, FletchingItems.WOODEN_STOCK),
+        ACHEY(2862, FletchingItems.OGRE_ARROW_SHAFT),
         OAK(1521, FletchingItems.OAK_SHORTBOW, FletchingItems.OAK_LONGBOW, FletchingItems.OAK_STOCK),
         WILLOW(1519, FletchingItems.WILLOW_SHORTBOW, FletchingItems.WILLOW_LONGBOW, FletchingItems.WILLOW_STOCK),
         MAPLE(1517, FletchingItems.MAPLE_SHORTOW, FletchingItems.MAPLE_LONGBOW, FletchingItems.MAPLE_STOCK),
@@ -300,6 +301,9 @@ public class Fletching {
         SHORT_BOW(50, 5, 5, 1),
         LONG_BOW(48, 10, 10, 1),
         WOODEN_STOCK(9440, 6, 9, 1),
+        
+        //Achey logs
+        OGRE_ARROW_SHAFT(2864, 6.4, 5, 4),
 
         //Oak logs
         OAK_SHORTBOW(54, 16.5, 20, 1),

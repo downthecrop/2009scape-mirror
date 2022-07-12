@@ -142,6 +142,17 @@ abstract class DialogueFile {
                 topic -> interpreter!!.activeTopics.add(topic)
                 validTopics.add(topic.text)
         }
-        options(*validTopics.toTypedArray())
+        if (validTopics.size == 1) {
+            val topic = topics[0]
+            if(topic.toStage is DialogueFile) {
+                val topicFile = topic.toStage as DialogueFile
+                interpreter!!.dialogue.loadFile(topicFile)
+            } else if(topic.toStage is Int) {
+                stage = topic.toStage as Int    
+            }
+            player(topic.text)
+            interpreter!!.activeTopics.clear()
+        }
+        else options(*validTopics.toTypedArray())
     }
 }

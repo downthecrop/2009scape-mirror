@@ -1,5 +1,6 @@
 package core.game.node.entity.skill.fletching;
 
+import core.tools.RandomFunction;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.node.entity.skill.SkillPulse;
@@ -55,6 +56,12 @@ public final class FletchingPulse extends SkillPulse<Item> {
 		if (amount > player.getInventory().getAmount(node)) {
 			amount = player.getInventory().getAmount(node);
 		}
+		if (fletch == Fletching.FletchingItems.OGRE_ARROW_SHAFT) {
+			if (player.getQuestRepository().getQuest("Big Chompy Bird Hunting").getStage(player) == 0) {
+				player.getPacketDispatch().sendMessage("You must have started Big Chompy Bird Hunting to make those.");
+				return false;
+			}
+		}
 		return true;
 	}
 
@@ -74,7 +81,10 @@ public final class FletchingPulse extends SkillPulse<Item> {
 		}
 		if (player.getInventory().remove(node)) {
 			final Item item = new Item(fletch.id,fletch.amount);
-		    player.getInventory().add(item);
+			if ( fletch == Fletching.FletchingItems.OGRE_ARROW_SHAFT ) {
+				item.setAmount(RandomFunction.random(3,6));
+			}
+		  player.getInventory().add(item);
 			player.getSkills().addExperience(Skills.FLETCHING, fletch.experience, true);
 			String message = getMessage();
 			player.getPacketDispatch().sendMessage(message);

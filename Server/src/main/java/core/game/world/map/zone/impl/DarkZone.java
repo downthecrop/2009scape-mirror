@@ -202,7 +202,7 @@ public final class DarkZone extends MapZone implements EventHook<UseWithEvent>{
 	public void process(@NotNull Entity entity, @NotNull UseWithEvent event) {
 		boolean isTinderbox = getItemName(event.getUsed()).equals("Tinderbox") || getItemName(event.getWith()).equals("Tinderbox");
 
-		if (isTinderbox && entity instanceof Player) runTask(entity, 2, () -> {
+		if (isTinderbox && entity instanceof Player) runTask(entity, 2, 1, () -> {
 			checkDarkArea(entity.asPlayer());
 			return Unit.INSTANCE;
 		});

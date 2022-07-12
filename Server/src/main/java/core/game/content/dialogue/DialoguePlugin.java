@@ -341,6 +341,21 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 			interpreter.activeTopics.add(topic);
 			validTopics.add(topic.getText());
 		}
+
+		if (validTopics.size() == 1) {
+			Topic topic = interpreter.activeTopics.get(0);
+
+			if(topic.getToStage() instanceof DialogueFile) {
+        DialogueFile topicFile = (DialogueFile) topic.getToStage();
+        interpreter.getDialogue().loadFile(topicFile);
+      } else if(topic.getToStage() instanceof Integer) {
+        stage = (Integer) topic.getToStage();
+      }
+
+			player(topic.getText());
+      interpreter.activeTopics.clear();
+		}
+
 		options(validTopics.toArray(new String[0]));
 	}
 }

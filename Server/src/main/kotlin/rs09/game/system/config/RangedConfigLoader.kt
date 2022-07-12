@@ -52,7 +52,7 @@ class RangedConfigLoader {
             if (effect != null) {
                 ammo.effect = effect
             }
-            Ammunition.getAmmunition().putIfAbsent(Integer.parseInt(e["itemId"].toString()),ammo)
+            Ammunition.getAmmunition().put(Integer.parseInt(e["itemId"].toString()),ammo)
             count++
         }
         SystemLogger.logWarn("Parsed $count ammo configs...")
