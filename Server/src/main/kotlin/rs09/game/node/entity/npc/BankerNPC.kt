@@ -19,7 +19,7 @@ class BankerNPC : AbstractNPC, InteractionListener {
         private const val LUNAR_ISLE_BANK_REGION = 8253
 
         val SPECIAL_NPC_IDS = intArrayOf(
-            NPCs.SIRSAL_BANKER_4519, NPCs.FADLI_958, NPCs.BANK_TUTOR_4907,
+            NPCs.SIRSAL_BANKER_4519, NPCs.FADLI_958, NPCs.BANK_TUTOR_4907, NPCs.JADE_4296,
             NPCs.EMERALD_BENEDICT_2271, NPCs.OGRESS_BANKER_7049, NPCs.OGRESS_BANKER_7050,
 
             /* Maximillian Sackville - Near Wilderness bounty-hunter area. */
@@ -35,7 +35,6 @@ class BankerNPC : AbstractNPC, InteractionListener {
             NPCs.BANKER_6534, NPCs.BANKER_6535, NPCs.BANKER_7445, NPCs.BANKER_7446, NPCs.BANKER_7605,
             NPCs.GUNDAI_902,
 
-            NPCs.JADE_4296,
 
             NPCs.GHOST_BANKER_1702, NPCs.GNOME_BANKER_166, NPCs.NARDAH_BANKER_3046, NPCs.MAGNUS_GRAM_5488
         )
