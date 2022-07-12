@@ -1834,7 +1834,7 @@ enum class SecondaryBankAccountActivationResult {
  * @returns Whether the operation was successful or not.
  */
 fun activateSecondaryBankAccount(player: Player): SecondaryBankAccountActivationResult {
-    if (getAttribute(player, "UnlockedSecondaryBank", false)) {
+    if (hasActivatedSecondaryBankAccount(player)) {
         return SecondaryBankAccountActivationResult.ALREADY_ACTIVE
     }
 
@@ -1851,7 +1851,7 @@ fun activateSecondaryBankAccount(player: Player): SecondaryBankAccountActivation
         val amountToTakeFromBank = cost - coinsInInventory
 
         removeItem(player, Item(Items.COINS_995, coinsInInventory), Container.INVENTORY)
-                && removeItem(player, Item(Items.COINS_995, amountToTakeFromBank), Container.BANK)
+        && removeItem(player, Item(Items.COINS_995, amountToTakeFromBank), Container.BANK)
     } else {
         removeItem(player, Item(Items.COINS_995, cost))
     }
@@ -1866,15 +1866,54 @@ fun activateSecondaryBankAccount(player: Player): SecondaryBankAccountActivation
 }
 
 /**
+ * Checks if the player has unlocked their secondary bank account.
+ *
+ * @author vddCore
+ * @param player The player whose secondary bank activation status to inspect.
+ * @return Secondary bank activation status.
+ */
+fun hasActivatedSecondaryBankAccount(player: Player): Boolean {
+    return getAttribute(player, "UnlockedSecondaryBank", false)
+}
+
+/**
  * Toggles between the player's primary and/or secondary bank account.
  * Has no effect if the secondary bank account hasn't been activated.
  *
+ * @author vddCore
  * @param player The player whose bank accounts to toggle.
  */
 fun toggleBankAccount(player: Player) {
-    if (!getAttribute(player, "UnlockedSecondaryBank", false)) return
+    if (!hasActivatedSecondaryBankAccount(player)) return
 
     player.useSecondaryBank = !player.useSecondaryBank
+}
+
+/**
+ * Checks if a player is currentl using their secondary bank account.
+ *
+ * @author vddCore
+ * @param player The player whose bank account toggle state to inspect.
+ */
+fun isUsingSecondaryBankAccount(player: Player): Boolean {
+    return player.useSecondaryBank
+}
+
+/**
+ * Returns 'primary' or 'secondary' strings based on which
+ * bank account is activated for the given user.
+ *
+ * @author vddCore
+ * @param player The player whose bank account name to retrieve.
+ * @param invert Whether to invert the return value.
+ * @return Bank account name according to the given criteria.
+ */
+fun getBankAccountName(player: Player, invert: Boolean = false): String {
+    return if (isUsingSecondaryBankAccount(player) && !invert) {
+        "secondary"
+    } else {
+        "primary"
+    }
 }
 
 /**
