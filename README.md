@@ -24,7 +24,8 @@
 * [History of this Codebase](#history-of-this-codebase)
 * [Our Core Values](#our-core-values) 
 * [Contributing](#contributing)
-* [Setup for Content Developers](#content-developers-setting-up-the-project)
+* [Setup for Content Developers](#code-contributors-setting-up-the-project)
+  * [Git](#git)
   * [GitLab Setup](#gitlab-setup)
   * [Prerequisites](#prerequisites)
   * [Project Setup](#project-setup)
@@ -79,7 +80,14 @@ There are many ways everyone can contribute! From the most seasoned programmers 
 
 * **Code Contributors**: As a remake, we have massive amounts of content that need to be implemented or corrected. If you know how to program or are willing to learn, this is where you could be extremely helpful! We need everything from quests, to dialogue, to mini-games, to skills that still need to be corrected or implemented. This is perhaps one of the most valuable ways someone could help out the project! If you are interested in developing content, reach out in the development channel of the Discord.
 
-## Content Developers: Setting Up the Project.
+## Code Contributors: Setting Up the Project.
+
+### Git
+Alright - so you're planning on contributing. First, you're going to need to understand Git and it's commands - we recommend you **do not** use a Git GUI unless you know exactly what you're doing.
+You can find a great tutorial on [w3schools](https://www.w3schools.com/git/git_intro.asp) that helped me (bushtail) when I started university. You can ignore anything relating to GitHub as it does not
+pertain to this project. Once you've gotten more accustomed to Git and it's commands, you can proceed
+to GitLab Setup.
+
 ### GitLab Setup
 **Note: This allows you to commit changes to the main repo (with approval)! Also, always stay up to date with the most recent updates by pulling into your copy when 2009Scape updates!**
 
@@ -133,7 +141,6 @@ We use the AGPL 3.0 license, which can be found [here](https://www.gnu.org/licen
 ### Contact
 
 **Reminder: There is no official support for setting up your own server. Do not ping/dm developers, or ask in support channels about setting up your server. Support for the live server and 2009Scape single-player is available in the Discord.**
-
 
 [license-shield]: https://img.shields.io/badge/license-AGPL--3.0-informational
 [license-url]: https://www.gnu.org/licenses/agpl-3.0.en.html
