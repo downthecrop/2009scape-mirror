@@ -1,21 +1,14 @@
 package rs09.game.interaction.`object`
 
 import api.openBankAccount
-import core.game.node.Node
-import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.IronmanMode
 import org.rs09.consts.Scenery
 import rs09.game.interaction.InteractionListener
 
 private val BANK_CHESTS = intArrayOf(
-    Scenery.BANK_CHEST_3194,
-    Scenery.BANK_CHEST_4483,
-    Scenery.BANK_CHEST_10562,
-    Scenery.BANK_CHEST_14382,
-    Scenery.BANK_CHEST_16695,
-    Scenery.BANK_CHEST_16696,
-    Scenery.BANK_CHEST_21301,
-    Scenery.BANK_CHEST_27662,
+    Scenery.BANK_CHEST_3194, Scenery.BANK_CHEST_4483,
+    Scenery.BANK_CHEST_10562, Scenery.BANK_CHEST_14382,
+    Scenery.BANK_CHEST_16695, Scenery.BANK_CHEST_16696,
+    Scenery.BANK_CHEST_21301, Scenery.BANK_CHEST_27662,
     Scenery.BANK_CHEST_27663
 )
 
@@ -25,16 +18,10 @@ private val BANK_CHESTS = intArrayOf(
  * @author vddCore
  */
 class BankChestListener : InteractionListener {
-    private fun useBankChest(player: Player, node: Node): Boolean {
-        if (player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {
-            return true
-        }
-
-        openBankAccount(player)
-        return true
-    }
-
     override fun defineListeners() {
-        on(BANK_CHESTS, SCENERY, "bank", "use", handler = ::useBankChest)
+        on(BANK_CHESTS, SCENERY, "bank", "use") { player, node ->
+            openBankAccount(player)
+            return@on true
+        }
     }
 }
