@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Items;
 
 /**
  * Represents the plugin used to handle the "read" option of a book.
@@ -22,6 +23,8 @@ public class BookreadOption extends OptionHandler {
         ItemDefinition.forId(292).getHandlers().put("option:read", this);
         ItemDefinition.forId(757).getHandlers().put("option:read", this);
         ItemDefinition.forId(1856).getHandlers().put("option:read", this);
+        ItemDefinition.forId(Items.BATTERED_BOOK_2886).getHandlers().put("option:read", this);
+        ItemDefinition.forId(Items.SLASHED_BOOK_9715).getHandlers().put("option:read", this);
         ItemDefinition.forId(9003).getHandlers().put("option:read", this);
         ItemDefinition.forId(9004).getHandlers().put("option:read", this);
         ItemDefinition.forId(11710).getHandlers().put("option:read", this);
@@ -52,6 +55,10 @@ public class BookreadOption extends OptionHandler {
                 return 49610758;
             case 9003:
                 return 49610759;
+            case Items.BATTERED_BOOK_2886:
+                return 49610760;
+            case Items.SLASHED_BOOK_9715:
+                return 49610761;
 	/*case 9004:
 	    return 423943;*/
             case 11710:
