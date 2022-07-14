@@ -1,12 +1,12 @@
-package rs09.game.content.dialogue
+package rs09.game.content.dialogue.region.worldwide.bank
 
-import api.*
-import core.game.content.dialogue.DialogueInterpreter
-import core.game.node.entity.npc.NPC
-import core.game.node.entity.player.Player
+import api.openInterface
+import api.sendDialogue
+import api.sendItemDialogue
 import core.game.node.item.Item
 import org.rs09.consts.Components
 import org.rs09.consts.Items
+import rs09.game.content.dialogue.DialogueFile
 import rs09.tools.START_DIALOGUE
 
 /**

@@ -18,6 +18,7 @@ import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.HintIconManager
+import core.game.node.entity.player.link.IronmanMode
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.emote.Emotes
@@ -48,7 +49,10 @@ import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.dialogue.SkillDialogueHandler
 import rs09.game.content.global.GlobalKillCounter
+import rs09.game.content.global.shops.Shops
+import rs09.game.ge.GrandExchangeRecords
 import rs09.game.interaction.InteractionListeners
+import rs09.game.interaction.inter.ge.StockMarket
 import rs09.game.node.entity.skill.slayer.SlayerManager
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.ItemConfigParser
@@ -469,7 +473,7 @@ fun itemDefinition(id: Int): ItemDefinition {
  * @author vddCore
  */
 fun hasOption(node: Node, option: String): Boolean {
-    return when(node) {
+    return when (node) {
         is NPC -> node.definition.hasAction(option)
         is Scenery -> node.definition.hasAction(option)
         is Item -> node.definition.hasAction(option)
@@ -509,7 +513,7 @@ fun produceGroundItem(player: Player, item: Int) {
  * @return the created ground item.
  */
 fun produceGroundItem(owner: Player?, id: Int, amount: Int, location: Location) : GroundItem {
-   return GroundItemManager.create(Item(id, amount), location, owner) 
+   return GroundItemManager.create(Item(id, amount), location, owner)
 }
 
 /**
@@ -1570,7 +1574,7 @@ fun dumpBeastOfBurden(player: Player) {
  *
  * @author bushtail
  */
-fun getFamiliarBoost(player : Player, skill : Int) : Int {
+fun getFamiliarBoost(player: Player, skill: Int): Int {
     return player.familiarManager.getBoost(skill)
 }
 
@@ -1662,7 +1666,7 @@ fun getPathableRandomLocalCoordinate(target: Entity, radius: Int, center: Locati
  * @param player the player whose task we are checking.
  * @return the slayer task.
  */
-fun getSlayerTask(player : Player) : Tasks? {
+fun getSlayerTask(player: Player): Tasks? {
     return SlayerManager.getInstance(player).task
 }
 
@@ -1672,7 +1676,7 @@ fun getSlayerTask(player : Player) : Tasks? {
  * @param player the player whose task we are checking.
  * @return the name of the slayer task.
  */
-fun getSlayerTaskName(player : Player) : String {
+fun getSlayerTaskName(player: Player): String {
     return SlayerManager.getInstance(player).taskName
 }
 
@@ -1682,7 +1686,7 @@ fun getSlayerTaskName(player : Player) : String {
  * @param player the player whose task we are checking.
  * @return the remaining kills of the slayer task.
  */
-fun getSlayerTaskKillsRemaining(player : Player) : Int {
+fun getSlayerTaskKillsRemaining(player: Player): Int {
     return SlayerManager.getInstance(player).amount
 }
 
@@ -1692,7 +1696,7 @@ fun getSlayerTaskKillsRemaining(player : Player) : Int {
  * @param player the player whose master we are checking.
  * @return the slayer master as NPC.
  */
-fun getSlayerMaster(player : Player) : NPC {
+fun getSlayerMaster(player: Player): NPC {
     return findNPC(SlayerManager.getInstance(player).master?.npc as Int) as NPC
 }
 
@@ -1702,12 +1706,12 @@ fun getSlayerMaster(player : Player) : NPC {
  * @param player the player whose master we are checking.
  * @return the slayer master location as String.
  */
-fun getSlayerMasterLocation(player : Player) : String {
-    return when(getSlayerMaster(player).id) {
+fun getSlayerMasterLocation(player: Player): String {
+    return when (getSlayerMaster(player).id) {
         NPCs.CHAELDAR_1598 -> "Zanaris"
         NPCs.DURADEL_8275 -> "Shilo Village"
         NPCs.MAZCHNA_8274 -> "Canifis"
-        NPCs.TURAEL_8273 -> "Taverly"
+        NPCs.TURAEL_8273 -> "Taverley"
         NPCs.VANNAKA_1597 -> "Edgeville Dungeon"
         else -> "The Backrooms"
     }
@@ -1719,8 +1723,8 @@ fun getSlayerMasterLocation(player : Player) : String {
  * @param player the player whose task tip we are checking.
  * @return the task tip as String.
  */
-fun getSlayerTip(player : Player) : Array<out String> {
-    return if(hasSlayerTask(player)) {
+fun getSlayerTip(player: Player): Array<out String> {
+    return if (hasSlayerTask(player)) {
         SlayerManager.getInstance(player).task?.tip!!
     } else {
         arrayOf("You need something new to hunt.")
@@ -1733,7 +1737,7 @@ fun getSlayerTip(player : Player) : Array<out String> {
  * @param player the player whose task flags we are checking.
  * @return the task flags as Int.
  */
-fun getSlayerTaskFlags(player : Player) : Int {
+fun getSlayerTaskFlags(player: Player): Int {
     return SlayerManager.getInstance(player).flags.taskFlags
 }
 
@@ -1743,20 +1747,257 @@ fun getSlayerTaskFlags(player : Player) : Int {
  * @param player the player whose task we are checking.
  * @return has task as Boolean.
  */
-fun hasSlayerTask(player : Player) : Boolean {
+fun hasSlayerTask(player: Player): Boolean {
     return SlayerManager.getInstance(player).hasTask()
 }
 
-/** 
+/**
+ * Checks whether a player plays in a specific Ironman mode.
+ *
+ * @param player Player whose Ironman status to check.
+ * @param restriction The Ironman restriction level to check the player against.
+ * @return Whether the player is restricted to the provided Ironman mode.
+ */
+fun hasIronmanRestriction(player: Player, restriction: IronmanMode): Boolean {
+    return player.ironmanManager.isIronman
+        && player.ironmanManager.mode.ordinal >= restriction.ordinal
+}
+
+/**
+ * Conditionally executes an action based on the player's Ironman status.
+ *
+ * @param player Player whose action to restrict.
+ * @param restriction Ironman mode that will be used as the restriction criterion.
+ * @param action The action to be restricted.
+ */
+fun restrictForIronman(player: Player, restriction: IronmanMode, action: () -> Unit) {
+    if (!player.ironmanManager.checkRestriction(restriction)) {
+        action()
+    }
+}
+
+/**
+ * Opens the given player's Grand Exchange interface.
+ *
+ * @author vddCore
+ * @param player The player whose Grand Exchange interface to open.
+ */
+fun openGrandExchange(player: Player) {
+    restrictForIronman(player, IronmanMode.ULTIMATE) {
+        StockMarket.openFor(player)
+    }
+}
+
+/**
+ * Checks if the player has any items to collect from the Grand Exchange
+ *
+ * @author vddCore
+ * @param player The player whose Grand Exchange collection box to inspect.
+ */
+fun hasAwaitingGrandExchangeCollections(player: Player): Boolean {
+    val records = GrandExchangeRecords.getInstance(player)
+
+    for (record in records.offerRecords) {
+        val offer = records.getOffer(record)
+
+        return offer != null
+            && offer.withdraw[0] != null
+    }
+
+    return false
+}
+
+/**
+ * Opens the given player's Grand Exchange collection box.
+ *
+ * It will send a prohibition message to Ultimate Ironmen.
+ *
+ * @author vddCore
+ * @param player The player whose collection box to open.
+ */
+fun openGrandExchangeCollectionBox(player: Player) {
+    restrictForIronman(player, IronmanMode.ULTIMATE) {
+        GrandExchangeRecords.getInstance(player).openCollectionBox()
+    }
+}
+
+/**
+ * Opens the given player's bank account. If the player has a PIN set,
+ * the PIN interface will be shown first.
+ *
+ * It will send a prohibition message to Ultimate Ironmen.
+ *
+ * @author vddCore
+ * @param player The player whose bank account to open.
+ */
+fun openBankAccount(player: Player) {
+    restrictForIronman(player, IronmanMode.ULTIMATE) {
+        player.bank.open()
+    }
+}
+
+/**
+ * Opens the given player's bank deposit box interface.
+ *
+ * It will send a prohibition message to Ultimate Ironmen.
+ *
+ * @author vddCore
+ * @param player The player whose bank account to open.
+ */
+fun openDepositBox(player: Player) {
+    restrictForIronman(player, IronmanMode.ULTIMATE) {
+        player.bank.openDepositBox()
+    }
+}
+
+/**
+ * Opens the given player's bank PIN settings interface.
+ *
+ * It will send a prohibition message to Ultimate Ironmen.
+ *
+ * @author vddCore
+ * @param player The player whose PIN settings to open.
+ */
+fun openBankPinSettings(player: Player) {
+    restrictForIronman(player, IronmanMode.ULTIMATE) {
+        player.bankPinManager.openSettings()
+    }
+}
+
+enum class SecondaryBankAccountActivationResult {
+    SUCCESS,
+    ALREADY_ACTIVE,
+    NOT_ENOUGH_MONEY,
+    INTERNAL_FAILURE
+}
+/**
+ * Activates the secondary bank account and handles all the fees required.
+ *
+ * @author vddCore
+ * @param player The player whose secondary bank account to activate.
+ * @returns Whether the operation was successful or not.
+ */
+fun activateSecondaryBankAccount(player: Player): SecondaryBankAccountActivationResult {
+    if (hasIronmanRestriction(player, IronmanMode.ULTIMATE)) {
+        return SecondaryBankAccountActivationResult.INTERNAL_FAILURE
+    }
+
+    if (hasActivatedSecondaryBankAccount(player)) {
+        return SecondaryBankAccountActivationResult.ALREADY_ACTIVE
+    }
+
+    val cost = 5000000
+    val coinsInInventory = amountInInventory(player, Items.COINS_995)
+    val coinsInBank = amountInBank(player, Items.COINS_995)
+    val coinsTotal = coinsInInventory + coinsInBank
+
+    if (cost > coinsTotal) {
+        return SecondaryBankAccountActivationResult.NOT_ENOUGH_MONEY
+    }
+
+    val operationResult = if (cost > coinsInInventory) {
+        val amountToTakeFromBank = cost - coinsInInventory
+
+        removeItem(player, Item(Items.COINS_995, coinsInInventory), Container.INVENTORY)
+                && removeItem(player, Item(Items.COINS_995, amountToTakeFromBank), Container.BANK)
+    } else {
+        removeItem(player, Item(Items.COINS_995, cost))
+    }
+
+    return if (operationResult) {
+        setAttribute(player, "/save:UnlockedSecondaryBank", true)
+        SecondaryBankAccountActivationResult.SUCCESS
+    } else {
+        sendMessage(player, "$cost;$coinsInInventory;$coinsInBank;$coinsTotal")
+        SecondaryBankAccountActivationResult.INTERNAL_FAILURE
+    }
+}
+
+/**
+ * Checks if the player has unlocked their secondary bank account.
+ *
+ * @author vddCore
+ * @param player The player whose secondary bank activation status to inspect.
+ * @return Secondary bank activation status.
+ */
+fun hasActivatedSecondaryBankAccount(player: Player): Boolean {
+    return getAttribute(player, "UnlockedSecondaryBank", false)
+}
+
+/**
+ * Toggles between the player's primary and/or secondary bank account.
+ * Has no effect if the secondary bank account hasn't been activated.
+ *
+ * It will send a prohibition message to Ultimate Ironmen.
+ *
+ * @author vddCore
+ * @param player The player whose bank accounts to toggle.
+ */
+fun toggleBankAccount(player: Player) {
+    restrictForIronman(player, IronmanMode.ULTIMATE) {
+        if (!hasActivatedSecondaryBankAccount(player)) {
+            return@restrictForIronman
+        }
+
+        player.useSecondaryBank = !player.useSecondaryBank
+    }
+}
+
+/**
+ * Checks if a player is currentl using their secondary bank account.
+ *
+ * @author vddCore
+ * @param player The player whose bank account toggle state to inspect.
+ */
+fun isUsingSecondaryBankAccount(player: Player): Boolean {
+    return player.useSecondaryBank
+}
+
+/**
+ * Returns 'primary' or 'secondary' strings based on which
+ * bank account is activated for the given user.
+ *
+ * @author vddCore
+ * @param player The player whose bank account name to retrieve.
+ * @param invert Whether to invert the return value.
+ * @return Bank account name according to the given criteria.
+ */
+fun getBankAccountName(player: Player, invert: Boolean = false): String {
+    return if (isUsingSecondaryBankAccount(player)) {
+        if (invert) "primary" else "secondary"
+    } else {
+        if (invert) "secondary" else "primary"
+    }
+}
+
+/**
+ * Opens a shop for the given NPC in the provided player's context.
+ *
+ * @author vddCore
+ * @param player The player serving as the shop context.
+ * @param npc The NPC ID whose shop to open.
+ */
+fun openNpcShop(player: Player, npc: Int): Boolean {
+    val shop = Shops.shopsByNpc[npc]
+
+    if (shop != null) {
+        shop.openFor(player)
+        return true
+    }
+
+    return false
+}
+
+/**
  * Skill Dialogue builder.
  * @param player the player to send the dialogue for.
  * Use like:
  * sendSkillDialogue(player) {
  *    withItems(Items.EXAMPLE_0, Items.EXAMPLE_1)
- *    create { id, amount -> 
- *       doSomethingWith(id, amount) 
+ *    create { id, amount ->
+ *       doSomethingWith(id, amount)
  *    }
- *    calculateMaxAmount { id -> 
+ *    calculateMaxAmount { id ->
  *       return someAmount
  *    }
  * }
@@ -1813,7 +2054,7 @@ class SkillDialogueBuilder {
     }
 }
 
-/** 
+/**
  * Registers a hint icon with the given height at the given location
  * @param player the player to register the hint icon for
  * @param height the height of the hint icon
@@ -1832,7 +2073,7 @@ fun registerHintIcon(player: Player, node: Node) {
     setAttribute(player, "hinticon", HintIconManager.registerHintIcon(player, node))
 }
 
-/** 
+/**
  * Clears the active ContentAPI-originated hint icon
  * @param player the player to clear the active hint icon for
  */

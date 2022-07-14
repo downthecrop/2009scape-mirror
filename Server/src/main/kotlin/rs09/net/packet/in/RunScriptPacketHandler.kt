@@ -1,4 +1,4 @@
-package core.net.packet.`in`
+package rs09.net.packet.`in`
 
 import api.sendDialogue
 import core.game.node.entity.player.Player

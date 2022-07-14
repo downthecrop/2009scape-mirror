@@ -25,7 +25,6 @@ import rs09.game.node.entity.player.info.login.PlayerSaver
 import rs09.game.system.SystemLogger
 import rs09.game.system.SystemLogger.logStartup
 import rs09.game.world.GameWorld
-import java.util.*
 import java.util.function.Consumer
 
 /**
@@ -126,30 +125,37 @@ object ClassScanner {
 
     @JvmStatic
     fun loadSideEffectfulPlugins() {
-        try {
-            loadedPlugins!!.clear()
-            loadPluginsFrom(scanResults)
-            logStartup("We still have $numPlugins legacy plugins being loaded.")
-        } catch (t: Throwable) {
-            SystemLogger.logErr("Error initializing Plugins -> " + t.localizedMessage + " for file -> " + lastLoaded)
-            t.printStackTrace()
-        } catch (e: Exception) {
-            SystemLogger.logErr("Error initializing Plugins -> " + e.localizedMessage + " for file -> " + lastLoaded)
-            e.printStackTrace()
-        }
+        loadedPlugins!!.clear()
+        loadPluginsFrom(scanResults)
+        logStartup("We still have $numPlugins legacy plugins being loaded.")
     }
 
     private fun loadPluginsFrom(scanResults: ScanResult) {
         scanResults.getClassesWithAnnotation("core.plugin.Initializable").forEach(Consumer { p: ClassInfo ->
-            val clazz = p.loadClass().newInstance()
-            if(clazz is Plugin<*>) definePlugin(clazz)
+            try {
+                val clazz = p.loadClass().getDeclaredConstructor().newInstance()
+                if (clazz is Plugin<*>) {
+                    definePlugin(clazz)
+                }
+            } catch (t: Throwable) {
+                SystemLogger.logErr("Failed to load plugin ${p.name}.");
+
+                if (t is NoSuchMethodException && p.superclass.simpleName == DialoguePlugin::class.simpleName) {
+                    SystemLogger.logErr(
+                        "Make sure the constructor signature matches " +
+                        "`${p.simpleName}(player: Player? = null) : DialoguePlugin(player)'."
+                    )
+                }
+
+                t.printStackTrace()
+            }
         })
+
         scanResults.getClassesWithAnnotation("rs09.game.ai.general.scriptrepository.PlayerCompatible").forEach { res ->
             val description = res.getAnnotationInfo("rs09.game.ai.general.scriptrepository.ScriptDescription").parameterValues[0].value as Array<String>
             val identifier = res.getAnnotationInfo("rs09.game.ai.general.scriptrepository.ScriptIdentifier").parameterValues[0].value.toString()
             val name = res.getAnnotationInfo("rs09.game.ai.general.scriptrepository.ScriptName").parameterValues[0].value.toString()
-            PlayerScripts.identifierMap[identifier] =
-                PlayerScripts.PlayerScript(identifier, description, name, res.loadClass())
+            PlayerScripts.identifierMap[identifier] = PlayerScripts.PlayerScript(identifier, description, name, res.loadClass())
         }
     }
 
