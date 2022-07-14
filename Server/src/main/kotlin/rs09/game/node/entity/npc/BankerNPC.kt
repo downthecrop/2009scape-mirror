@@ -1,26 +1,37 @@
 package rs09.game.node.entity.npc
 
-import api.getScenery
-import api.hasSealOfPassage
-import api.openDialogue
+import api.*
 import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.IronmanMode
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
-import rs09.game.ge.GrandExchangeRecords
 import rs09.game.interaction.InteractionListener
-import rs09.game.interaction.`object`.BankBoothHandler
+import rs09.game.interaction.`object`.BankBoothListener
 
+/**
+ * Provides dialogue tree for all generic banker NPCs as well as
+ * handles all the common interactions like 'bank' and 'collect'.
+ *
+ * @author vddCore
+ */
 @Initializable
 class BankerNPC : AbstractNPC, InteractionListener {
     companion object {
         private const val LUNAR_ISLE_BANK_REGION = 8253
+
+        val SPECIAL_NPC_IDS = intArrayOf(
+            NPCs.SIRSAL_BANKER_4519, NPCs.FADLI_958, NPCs.BANK_TUTOR_4907, NPCs.JADE_4296,
+            NPCs.EMERALD_BENEDICT_2271, NPCs.OGRESS_BANKER_7049, NPCs.OGRESS_BANKER_7050,
+            NPCs.ARNOLD_LYDSPOR_3824,
+
+            /* Maximillian Sackville - Near Wilderness bounty-hunter area. */
+            NPCs.BANKER_6538
+        )
 
         val NPC_IDS = intArrayOf(
             NPCs.BANKER_44, NPCs.BANKER_45, NPCs.BANKER_494, NPCs.BANKER_495, NPCs.BANKER_496, NPCs.BANKER_497,
@@ -28,14 +39,15 @@ class BankerNPC : AbstractNPC, InteractionListener {
             NPCs.BANKER_2354, NPCs.BANKER_2355, NPCs.BANKER_2568, NPCs.BANKER_2569, NPCs.BANKER_2570, NPCs.BANKER_3198,
             NPCs.BANKER_3199, NPCs.BANKER_5258, NPCs.BANKER_5259, NPCs.BANKER_5260, NPCs.BANKER_5261, NPCs.BANKER_5776,
             NPCs.BANKER_5777, NPCs.BANKER_5912, NPCs.BANKER_5913, NPCs.BANKER_6200, NPCs.BANKER_6532, NPCs.BANKER_6533,
-            NPCs.BANKER_6534, NPCs.BANKER_6535, NPCs.BANKER_6538, NPCs.BANKER_7445, NPCs.BANKER_7446, NPCs.BANKER_7605,
+            NPCs.BANKER_6534, NPCs.BANKER_6535, NPCs.BANKER_7445, NPCs.BANKER_7446, NPCs.BANKER_7605,
+            NPCs.GUNDAI_902,
 
-            NPCs.BANK_TUTOR_4907, NPCs.JADE_4296,
+            NPCs.GHOST_BANKER_1702, NPCs.GNOME_BANKER_166, NPCs.NARDAH_BANKER_3046, NPCs.MAGNUS_GRAM_5488
+        )
 
-            NPCs.GHOST_BANKER_1702, NPCs.GNOME_BANKER_166, NPCs.NARDAH_BANKER_3046,
-            NPCs.OGRESS_BANKER_7049, NPCs.OGRESS_BANKER_7050, NPCs.SIRSAL_BANKER_4519,
-
-            NPCs.FADLI_958, NPCs.MAGNUS_GRAM_5488
+        private val ALL_BANKER_NPC_IDS = intArrayOf(
+            *SPECIAL_NPC_IDS,
+            *NPC_IDS
         )
 
         /**
@@ -60,17 +72,13 @@ class BankerNPC : AbstractNPC, InteractionListener {
         fun attemptBank(player: Player, node: Node): Boolean {
             val npc = node as NPC
 
-            if (player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {
-                return true
-            }
-
             if (checkLunarIsleRestriction(player, node)) {
                 openDialogue(player, npc.id, npc)
                 return true
             }
 
             npc.faceLocation(null)
-            player.bank.open()
+            openBankAccount(player)
 
             return true
         }
@@ -78,17 +86,13 @@ class BankerNPC : AbstractNPC, InteractionListener {
         fun attemptCollect(player: Player, node: Node): Boolean {
             val npc = node as NPC
 
-            if (player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {
-                return true
-            }
-
             if (checkLunarIsleRestriction(player, node)) {
                 openDialogue(player, npc.id, npc)
                 return true
             }
 
             npc.faceLocation(null)
-            GrandExchangeRecords.getInstance(player).openCollectionBox()
+            openGrandExchangeCollectionBox(player)
 
             return true
         }
@@ -107,7 +111,7 @@ class BankerNPC : AbstractNPC, InteractionListener {
             val boothLocation = location.transform(side)
             val sceneryObject = getScenery(boothLocation)
 
-            if (sceneryObject != null && sceneryObject.id in BankBoothHandler.BANK_BOOTHS) {
+            if (sceneryObject != null && sceneryObject.id in BankBoothListener.BANK_BOOTHS) {
                 return Pair(side, boothLocation.transform(side, 1))
             }
         }
@@ -142,12 +146,12 @@ class BankerNPC : AbstractNPC, InteractionListener {
     }
 
     override fun defineListeners() {
-        on(NPC_IDS, NPC, "bank", handler = Companion::attemptBank)
-        on(NPC_IDS, NPC, "collect", handler = Companion::attemptCollect)
+        on(ALL_BANKER_NPC_IDS, NPC, "bank", handler = Companion::attemptBank)
+        on(ALL_BANKER_NPC_IDS, NPC, "collect", handler = Companion::attemptCollect)
     }
 
     override fun defineDestinationOverrides() {
-        setDest(NPC, NPC_IDS, "bank", "collect", "talk-to", handler = ::provideDestinationOverride)
+        setDest(NPC, ALL_BANKER_NPC_IDS, "bank", "collect", "talk-to", handler = ::provideDestinationOverride)
     }
 
     override fun init() {
@@ -163,5 +167,5 @@ class BankerNPC : AbstractNPC, InteractionListener {
         }
     }
 
-    override fun getIds(): IntArray = NPC_IDS
+    override fun getIds(): IntArray = ALL_BANKER_NPC_IDS
 }

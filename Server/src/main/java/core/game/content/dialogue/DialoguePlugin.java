@@ -10,7 +10,9 @@ import core.plugin.PluginType;
 import rs09.game.content.dialogue.DialogueFile;
 import rs09.game.content.dialogue.IfTopic;
 import rs09.game.content.dialogue.Topic;
+import rs09.game.system.SystemLogger;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import static api.DialUtilsKt.splitLines;
@@ -169,14 +171,44 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 	}
 
 	@Override
-	public abstract DialoguePlugin newInstance(Player player);
+	public DialoguePlugin newInstance(Player player) {
+		try {
+			Class<?> classReference = Class.forName(this.getClass().getCanonicalName());
+
+			return (DialoguePlugin)classReference
+					.getDeclaredConstructor(Player.class)
+					.newInstance(player);
+		} catch (ClassNotFoundException
+				 | IllegalAccessException
+				 | IllegalArgumentException
+				 | NoSuchMethodException
+				 | InvocationTargetException
+				 | InstantiationException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	/**
 	 * Opens the dialogue.
 	 * @param args The arguments.
 	 * @return {@code True} if the dialogue plugin succesfully opened.
 	 */
-	public abstract boolean open(Object... args);
+	public boolean open(Object... args) {
+		if (args.length > 0 && args[0] instanceof NPC) {
+			npc = (NPC)args[0];
+		}
+
+		if (npc == null) {
+			SystemLogger.logWarn(
+				args[0].getClass().getSimpleName() +
+				"Is not assigning an NPC. Whoever did that should fix it."
+			);
+		}
+
+		player.getDialogueInterpreter().handle(0, 0);
+		return true;
+	}
 
 	/**
 	 * Handles the progress of this dialogue..

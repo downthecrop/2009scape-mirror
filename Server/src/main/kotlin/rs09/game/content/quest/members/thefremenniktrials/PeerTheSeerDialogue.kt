@@ -1,9 +1,11 @@
 package rs09.game.content.quest.members.thefremenniktrials
 
-import api.*
+import api.addItem
+import api.dumpContainer
+import api.questStage
+import api.removeItem
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
-import core.game.interaction.`object`.BankingPlugin
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.plugin.Initializable

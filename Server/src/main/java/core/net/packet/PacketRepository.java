@@ -7,6 +7,7 @@ import rs09.game.system.SystemLogger;
 import rs09.net.packet.PacketWriteQueue;
 import rs09.net.packet.in.ItemOnGroundItemPacket;
 import rs09.net.packet.in.QuickChatPacketHandler;
+import rs09.net.packet.in.RunScriptPacketHandler;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package rs09.game.content.dialogue.region.lunarisle
+package rs09.game.content.dialogue.region.worldwide.bank
 
 import api.*
 import core.game.content.dialogue.DialoguePlugin
@@ -6,30 +6,26 @@ import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.IronmanMode
 import core.plugin.Initializable
-import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.IfTopic
 import rs09.game.content.dialogue.Topic
+import rs09.game.node.entity.npc.BankerNPC
 import rs09.tools.END_DIALOGUE
 import rs09.tools.START_DIALOGUE
 
-/**
- * Handles Sirsal banker dialogue tree.
- *
- * @author vddCore
- */
 @Initializable
-class SirsalBankerDialogue(player: Player? = null) : DialoguePlugin(player) {
+class BankerDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            START_DIALOGUE -> if (hasSealOfPassage(player)) {
-                if (hasIronmanRestriction(player, IronmanMode.ULTIMATE)) {
+            START_DIALOGUE -> when {
+                hasIronmanRestriction(player, IronmanMode.ULTIMATE) -> {
                     npcl(
                         FacialExpression.NEUTRAL,
                         "My apologies, dear ${if (player.isMale) "sir" else "madam"}, " +
                         "our services are not available for Ultimate ${if (player.isMale) "Ironmen" else "Ironwomen"}"
                     ).also { stage = END_DIALOGUE }
-                } else {
+                }
 
+                else -> {
                     npcl(
                         FacialExpression.NEUTRAL,
                         "Good day, how may I help you?"
@@ -41,9 +37,6 @@ class SirsalBankerDialogue(player: Player? = null) : DialoguePlugin(player) {
                         }
                     }
                 }
-            } else {
-                playerl(FacialExpression.HALF_WORRIED, "Hi, I...")
-                stage = 30
             }
 
             1 -> npcl(
@@ -181,29 +174,10 @@ class SirsalBankerDialogue(player: Player? = null) : DialoguePlugin(player) {
                 "Very well. Should you decide a secondary bank account is needed, do not hesitate to " +
                 "contact any of the Bank of Gielinor's stationary employees. We will be happy to help."
             ).also { stage = END_DIALOGUE }
-
-            30 -> npcl(
-                FacialExpression.ANNOYED,
-                "What are you doing here, Fremennik?!"
-            ).also { stage++ }
-
-            31 -> playerl(
-                FacialExpression.WORRIED,
-                "I have a Seal of Pass..."
-            ).also { stage++ }
-
-            32 -> npcl(
-                FacialExpression.ANGRY,
-                "No you don't! Begone!"
-            ).also { stage = END_DIALOGUE }
-
-            /* TODO: Is the above related to Lunar Diplomacy? */
         }
 
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SIRSAL_BANKER_4519)
-    }
+    override fun getIds(): IntArray = BankerNPC.NPC_IDS
 }
