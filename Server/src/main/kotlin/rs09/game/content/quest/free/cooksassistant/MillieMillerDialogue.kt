@@ -52,7 +52,7 @@
              35 -> player(FacialExpression.ASKING, "So where does the flour go then?").also { stage++ }
              36 -> npc(FacialExpression.SUSPICIOUS, "The flour appears in this room here, you'll need a pot", "to put the flour into. One pot will hold the flour made", "by one load of grain").also { stage++ }
              37 -> npc(FacialExpression.HAPPY, "And that's it! You now have some pots of finely ground", "flour of the highest quality. Ideal for making tasty cakes", "or delicous bread. I'm not a cook so you'll have to ask a", "cook to ind out how to bake things.").also { stage++ }
-             38 -> npc(FacialExpression.HAPPY, "Great! Thanks for your help.").also { stage = 1000 }
+             38 -> player(FacialExpression.HAPPY, "Great! Thanks for your help.").also { stage = 1000 }
 
              //Conversation Endpoint
              1000 -> end()
