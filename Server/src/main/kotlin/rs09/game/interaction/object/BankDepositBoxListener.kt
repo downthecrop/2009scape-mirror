@@ -1,5 +1,6 @@
 package rs09.game.interaction.`object`
 
+import api.restrictForIronman
 import core.game.component.CloseEvent
 import core.game.component.Component
 import core.game.container.access.InterfaceContainer
@@ -25,31 +26,29 @@ private val BANK_DEPOSIT_BOXES = intArrayOf(
  *
  * @author vddCore
  */
-class BankDepositBoxHandler : InteractionListener {
+class BankDepositBoxListener : InteractionListener {
 
     private fun openDepositBox(player: Player, node: Node) : Boolean {
-        if (player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {
-            return true
-        }
+        restrictForIronman(player, IronmanMode.ULTIMATE) {
+            player.interfaceManager.open(Component(Components.BANK_DEPOSIT_BOX_11)).closeEvent = CloseEvent { p, _ ->
+                p.interfaceManager.openDefaultTabs()
+                return@CloseEvent true
+            }
 
-        player.interfaceManager.open(Component(Components.BANK_DEPOSIT_BOX_11)).closeEvent = CloseEvent { p, _ ->
-            p.interfaceManager.openDefaultTabs()
-            return@CloseEvent true
+            player.interfaceManager.removeTabs(0, 1, 2, 3, 4, 5, 6)
+            InterfaceContainer.generateItems(
+                player,
+                player.inventory.toArray(),
+                arrayOf(
+                    "Examine",
+                    "Deposit-X",
+                    "Deposit-All",
+                    "Deposit-10",
+                    "Deposit-5",
+                    "Deposit-1"
+                ), 11, 15, 5, 7
+            )
         }
-
-        player.interfaceManager.removeTabs(0, 1, 2, 3, 4, 5, 6)
-        InterfaceContainer.generateItems(
-            player,
-            player.inventory.toArray(),
-            arrayOf(
-                "Examine",
-                "Deposit-X",
-                "Deposit-All",
-                "Deposit-10",
-                "Deposit-5",
-                "Deposit-1"
-            ), 11, 15, 5, 7
-        )
 
         return true
     }

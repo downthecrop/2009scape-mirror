@@ -1,9 +1,9 @@
-package rs09.game.content.dialogue
+package rs09.game.content.dialogue.region.worldwide.bank
 
-import api.*
-import core.game.content.dialogue.DialoguePlugin
-import core.game.node.entity.player.Player
-import core.plugin.Initializable
+import api.dumpBeastOfBurden
+import api.dumpContainer
+import api.sendMessage
+import rs09.game.content.dialogue.DialogueFile
 import rs09.tools.START_DIALOGUE
 
 /**
@@ -13,7 +13,6 @@ import rs09.tools.START_DIALOGUE
  * @author vddCore
  */
 class BankDepositDialogue : DialogueFile() {
-
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
             START_DIALOGUE -> options(
@@ -52,6 +51,5 @@ class BankDepositDialogue : DialogueFile() {
                 4 -> end()
             }
         }
-
     }
 }

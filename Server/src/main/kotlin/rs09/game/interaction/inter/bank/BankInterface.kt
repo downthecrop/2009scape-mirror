@@ -1,51 +1,14 @@
-package rs09.game.interaction.inter
+package rs09.game.interaction.inter.bank
 
 import api.*
 import core.game.component.Component
 import core.game.node.entity.player.Player
 import org.rs09.consts.Components
-import org.rs09.consts.Items
 import rs09.ServerConstants
-import rs09.game.content.dialogue.BankHelpDialogue
-import rs09.game.content.dialogue.BankDepositDialogue
+import rs09.game.content.dialogue.region.worldwide.bank.BankDepositDialogue
+import rs09.game.content.dialogue.region.worldwide.bank.BankHelpDialogue
 import rs09.game.interaction.InterfaceListener
 import rs09.game.interaction.util.BankUtils
-
-private const val MAIN_BUTTON_CLOSE = 10
-private const val MAIN_BUTTON_INSERT_MODE = 14
-private const val MAIN_BUTTON_NOTE_MODE = 16
-private const val MAIN_BUTTON_BOB_DEPOSIT = 18
-private const val MAIN_BUTTON_SEARCH_BANK = 20
-private const val MAIN_BUTTON_HELP = 23
-
-private const val MENU_ELEMENT = 73
-private const val OP_AMOUNT_ONE = 155
-private const val OP_AMOUNT_FIVE = 196
-private const val OP_AMOUNT_TEN = 124
-private const val OP_AMOUNT_LAST_X = 199
-private const val OP_AMOUNT_X = 234
-private const val OP_AMOUNT_ALL = 168
-private const val OP_AMOUNT_ALL_BUT_ONE = 166
-private const val OP_EXAMINE = 9
-
-private const val BANK_TAB_1 = 41
-private const val BANK_TAB_2 = 39
-private const val BANK_TAB_3 = 37
-private const val BANK_TAB_4 = 35
-private const val BANK_TAB_5 = 33
-private const val BANK_TAB_6 = 31
-private const val BANK_TAB_7 = 29
-private const val BANK_TAB_8 = 27
-private const val BANK_TAB_9 = 25
-
-private val BANK_TABS = intArrayOf(
-    BANK_TAB_1, BANK_TAB_2, BANK_TAB_3,
-    BANK_TAB_4, BANK_TAB_5, BANK_TAB_6,
-    BANK_TAB_7, BANK_TAB_8, BANK_TAB_9
-)
-
-private const val OP_SET_TAB = 155
-private const val OP_COLLAPSE_TAB = 196
 
 /**
  * Allows the user to interact with the Bank Interface.
@@ -53,6 +16,43 @@ private const val OP_COLLAPSE_TAB = 196
  * @author vddCore
  */
 class BankInterface : InterfaceListener {
+    companion object {
+        private const val MAIN_BUTTON_CLOSE = 10
+        private const val MAIN_BUTTON_INSERT_MODE = 14
+        private const val MAIN_BUTTON_NOTE_MODE = 16
+        private const val MAIN_BUTTON_BOB_DEPOSIT = 18
+        private const val MAIN_BUTTON_SEARCH_BANK = 20
+        private const val MAIN_BUTTON_HELP = 23
+
+        private const val MENU_ELEMENT = 73
+        private const val OP_AMOUNT_ONE = 155
+        private const val OP_AMOUNT_FIVE = 196
+        private const val OP_AMOUNT_TEN = 124
+        private const val OP_AMOUNT_LAST_X = 199
+        private const val OP_AMOUNT_X = 234
+        private const val OP_AMOUNT_ALL = 168
+        private const val OP_AMOUNT_ALL_BUT_ONE = 166
+        private const val OP_EXAMINE = 9
+
+        private const val BANK_TAB_1 = 41
+        private const val BANK_TAB_2 = 39
+        private const val BANK_TAB_3 = 37
+        private const val BANK_TAB_4 = 35
+        private const val BANK_TAB_5 = 33
+        private const val BANK_TAB_6 = 31
+        private const val BANK_TAB_7 = 29
+        private const val BANK_TAB_8 = 27
+        private const val BANK_TAB_9 = 25
+
+        private val BANK_TABS = intArrayOf(
+            BANK_TAB_1, BANK_TAB_2, BANK_TAB_3,
+            BANK_TAB_4, BANK_TAB_5, BANK_TAB_6,
+            BANK_TAB_7, BANK_TAB_8, BANK_TAB_9
+        )
+
+        private const val OP_SET_TAB = 155
+        private const val OP_COLLAPSE_TAB = 196
+    }
 
     private fun onBankInterfaceOpen(player: Player, component: Component): Boolean {
         player.bank.sendBankSpace();
@@ -104,10 +104,31 @@ class BankInterface : InterfaceListener {
             OP_AMOUNT_ONE -> runWorldTask { player.bank.takeItem(slot, 1) }
             OP_AMOUNT_FIVE -> runWorldTask { player.bank.takeItem(slot, 5) }
             OP_AMOUNT_TEN -> runWorldTask { player.bank.takeItem(slot, 10) }
-            OP_AMOUNT_LAST_X -> runWorldTask { player.bank.takeItem(slot, player.bank.lastAmountX) }
-            OP_AMOUNT_X -> runWorldTask { BankUtils.transferX(player, slot, true) }
-            OP_AMOUNT_ALL -> runWorldTask { player.bank.takeItem(slot, player.bank.getAmount(item)) }
-            OP_AMOUNT_ALL_BUT_ONE -> runWorldTask { player.bank.takeItem(slot, player.bank.getAmount(item) - 1) }
+            OP_AMOUNT_LAST_X -> runWorldTask {
+                player.bank.takeItem(
+                    slot,
+                    player.bank.lastAmountX
+                )
+            }
+            OP_AMOUNT_X -> runWorldTask {
+                BankUtils.transferX(
+                    player,
+                    slot,
+                    true
+                )
+            }
+            OP_AMOUNT_ALL -> runWorldTask {
+                player.bank.takeItem(
+                    slot,
+                    player.bank.getAmount(item)
+                )
+            }
+            OP_AMOUNT_ALL_BUT_ONE -> runWorldTask {
+                player.bank.takeItem(
+                    slot,
+                    player.bank.getAmount(item) - 1
+                )
+            }
             OP_EXAMINE -> sendMessage(player, item.definition.examine)
             else -> player.debug("Unknown bank menu opcode $opcode")
         }
@@ -152,7 +173,7 @@ class BankInterface : InterfaceListener {
 
         on(Components.BANK_V2_HELP_767) { player, component, opcode, buttonID, slot, itemID ->
             when (buttonID) {
-                MAIN_BUTTON_CLOSE -> player.bank.open()
+                MAIN_BUTTON_CLOSE -> openBankAccount(player)
             }
 
             return@on true

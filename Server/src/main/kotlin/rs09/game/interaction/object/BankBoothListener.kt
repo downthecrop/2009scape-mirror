@@ -12,7 +12,6 @@ import core.game.world.map.Location
 import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import rs09.ServerConstants
-import rs09.game.ge.GrandExchangeRecords
 import rs09.game.interaction.InteractionListener
 import rs09.game.node.entity.npc.BankerNPC
 import rs09.game.world.repository.Repository
@@ -22,7 +21,7 @@ import rs09.game.world.repository.Repository
  *
  * @author vddCore
  */
-class BankBoothHandler : InteractionListener {
+class BankBoothListener : InteractionListener {
 
     companion object {
         val INOPERABLE_BANK_BOOTHS = intArrayOf(
@@ -89,7 +88,7 @@ class BankBoothHandler : InteractionListener {
                 it.faceLocation(node.location)
                 openDialogue(player, it.id, NPC(it.id, it.location))
             } else {
-                player.dialogueInterpreter.open(NPCs.BANKER_494)
+                openDialogue(player, NPCs.BANKER_494)
             }
         }
     }
@@ -104,7 +103,7 @@ class BankBoothHandler : InteractionListener {
             return true
         }
 
-        player.bank.open()
+        openBankAccount(player)
         return true
     }
 
@@ -127,7 +126,7 @@ class BankBoothHandler : InteractionListener {
             return true
         }
 
-        GrandExchangeRecords.getInstance(player).openCollectionBox()
+        openGrandExchangeCollectionBox(player)
         return true
     }
 
