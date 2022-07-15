@@ -321,7 +321,7 @@ class LunarListeners : SpellListener("lunar") {
     }
 
     private fun stringJewellery(player: Player) {
-        val playerJewellery = ArrayList<Item>()
+        val playerJewellery = ArrayDeque<Item>()
 
         for(item in player.inventory.toArray()) {
             if(item == null) continue
@@ -329,26 +329,25 @@ class LunarListeners : SpellListener("lunar") {
             playerJewellery.add(item)
         }
 
-
-
         player.pulseManager.run(object : Pulse() {
             var counter = 0
             override fun pulse(): Boolean {
                 removeAttribute(player, "spell:runes")
-                if(playerJewellery.isEmpty()) return false
                 requires(player, 80, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.EARTH_RUNE_557, 10), Item(Items.WATER_RUNE_555, 5)))
                 if(counter == 0) delay = animationDuration(STRING_JEWELLERY_ANIM) + 1
                 val item = playerJewellery[0]
                 val strung = JewelleryString.forId(item.id)
                 setDelay(player,false)
                 if(removeItem(player, item) && addItem(player, strung)) {
+                    removeRunes(player, true)
                     visualizeSpell(player, STRING_JEWELLERY_ANIM, STRING_JEWELLERY_GFX, 2903)
                     rewardXP(player, Skills.CRAFTING, 4.0)
                     addXP(player, 83.0)
                     playerJewellery.remove(item)
                     if(playerJewellery.isNotEmpty()) removeRunes(player,false) else removeRunes(player,true)
                 }
-                return true
+                counter++
+                return playerJewellery.isEmpty()
             }
         })
     }
