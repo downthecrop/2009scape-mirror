@@ -2,9 +2,7 @@ package rs09.game.system.config
 
 import com.moandjiezana.toml.Toml
 import core.game.world.map.Location
-import core.tools.StringUtils
 import core.tools.mysql.Database
-import rs09.JSONUtils.Companion.parsePath
 import rs09.ServerConstants
 import rs09.game.system.SystemLogger
 import rs09.game.world.GameSettings
@@ -121,6 +119,7 @@ object ServerConfigParser {
         ServerConstants.BANK_BOOTH_NOTE_ENABLED = data.getBoolean("world.bank_booth_note_enabled", true)
         ServerConstants.BANK_BOOTH_NOTE_UIM = data.getBoolean("world.bank_booth_note_uim", true)
         ServerConstants.DISCORD_GE_WEBHOOK = data.getString("server.discord_webhook", "")
+        ServerConstants.WATCHDOG_ENABLED = data.getBoolean("server.watchdog_enabled", true)
     }
 
 
