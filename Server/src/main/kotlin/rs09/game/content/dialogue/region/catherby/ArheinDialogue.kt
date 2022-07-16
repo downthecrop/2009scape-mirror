@@ -43,7 +43,8 @@ class ArheinDialogue(player: Player? = null) : DialoguePlugin(player) {
         val price = 2
         val afford = player.getInventory().getAmount(Items.COINS_995) / price
         var realamount = minOf(requestedAmount, afford)
-        realamount = minOf(realamount,freeSlots(player))
+        val exactafford = (realamount == afford) && (afford == freeSlots(player) + 1)
+        realamount = minOf(realamount,if(exactafford) realamount else freeSlots(player))
         realamount = ServerStore.getNPCItemAmount(NPCs.ARHEIN_563, requestedItem, limits.getOrDefault(requestedItem,0), player, realamount, period)
         if (removeItem(player, Item(Items.COINS_995, realamount * price), Container.INVENTORY)) {
             if (addItem(player, requestedItem, realamount, Container.INVENTORY)) {
