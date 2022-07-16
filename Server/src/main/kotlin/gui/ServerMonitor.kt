@@ -1,12 +1,10 @@
 package gui
 
-import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
 import java.awt.BorderLayout
 import java.awt.Component
 import java.awt.Dimension
 import javax.swing.*
-import javax.swing.border.Border
 
 object ServerMonitor : JFrame("Server Monitor"){
 
@@ -134,7 +132,7 @@ object ServerMonitor : JFrame("Server Monitor"){
 
     fun open() {
         isVisible = true
-        Thread() {
+        Thread {
             while (true) {
                 SwingUtilities.invokeLater {
                     val removeList = ArrayList<GuiEvent>()
@@ -159,8 +157,12 @@ object ServerMonitor : JFrame("Server Monitor"){
                         removeList.add(event)
                     }
 
-                    pulseList.text = GameWorld.Pulser.TASKS.toArray().filterNotNull().map { it.javaClass.simpleName + "\n" }
-                        .filter { it.replace("\n", "").isNotEmpty() }.sorted().joinToString("")
+                    pulseList.text = GameWorld.Pulser.currentPulses
+                        .map { it.javaClass.simpleName + "\n" }
+                        .filter { it.replace("\n", "").isNotEmpty() }
+                        .sorted()
+                        .joinToString("")
+
                     eventQueue.removeAll(removeList)
                     repaint()
                 }

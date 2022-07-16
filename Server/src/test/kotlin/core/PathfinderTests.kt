@@ -1,9 +1,6 @@
 package core
 
 import TestUtils
-import api.replaceScenery
-import core.cache.def.impl.SceneryDefinition
-import core.game.interaction.MovementPulse
 import core.game.node.scenery.Scenery
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
@@ -12,8 +9,6 @@ import org.junit.jupiter.api.Test
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InteractionListeners
 import rs09.game.node.entity.skill.gather.GatheringSkillOptionListeners
-import rs09.game.system.SystemLogger
-import rs09.game.world.GameWorld
 
 class PathfinderTests {
     companion object {init {TestUtils.preTestSetup(); GatheringSkillOptionListeners().defineListeners() }}
@@ -47,7 +42,7 @@ class PathfinderTests {
         p.init()
 
         Assertions.assertEquals(true, InteractionListeners.run(1307, InteractionListener.SCENERY, "chop-down", p, dest!!))
-        TestUtils.advanceTicks(20)
+        TestUtils.advanceTicks(20, false)
         Assertions.assertEquals(Location.create(2722, 3475, 0), p.location)
     }
 }
