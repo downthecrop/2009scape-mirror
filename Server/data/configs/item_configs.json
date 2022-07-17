@@ -127777,7 +127777,7 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "requirements": "{1,70}",
+    "requirements": "{1,40}-{5,55}",
     "shop_price": "70000",
     "examine": "An ethereal shield.",
     "rare_item": "true",
