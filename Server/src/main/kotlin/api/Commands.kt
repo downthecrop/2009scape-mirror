@@ -41,7 +41,7 @@ interface Commands : ContentInterface {
      * @param name the name of the command. Example: ::example would be just "example"
      * @param privilege the rights level needed to execute the command. Options are [Privilege.STANDARD], [Privilege.MODERATOR], [Privilege.ADMIN]. Defaults to [Privilege.STANDARD]
      */
-    fun define(name: String, privilege: Privilege = Privilege.STANDARD, usage: String = "", description: String = "", handle: (Player, Array<String>) -> Unit){
+    fun define(name: String, privilege: Privilege = Privilege.ADMIN, usage: String = "", description: String = "", handle: (Player, Array<String>) -> Unit){
         CommandMapping.register(Command(name, privilege, usage, description, handle))
     }
 

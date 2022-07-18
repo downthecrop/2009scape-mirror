@@ -15,6 +15,7 @@ import rs09.ServerConstants
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InterfaceListener
 import rs09.game.system.SystemLogger
+import rs09.game.system.command.Privilege
 import rs09.tools.END_DIALOGUE
 import java.io.FileReader
 
@@ -256,7 +257,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
     }
 
     override fun defineCommands() {
-        define("openshop") { player, args ->
+        define("openshop", Privilege.ADMIN) { player, args ->
             if(args.size < 2) reject(player, "Usage: ::openshop shopId")
             val shopId = args[1].toInt()
             shopsById[shopId]?.openFor(player)
