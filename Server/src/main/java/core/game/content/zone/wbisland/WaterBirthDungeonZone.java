@@ -236,6 +236,16 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 			}
 			return this;
 		}
+		
+		private boolean pressurePadActivated(Location location, Player player) {
+			if (RegionManager.getLocalPlayers(location,0).size() > 0) {
+				return true;
+			}
+			if (RegionManager.getRegionPlane(location).getItem(3695,location,player) != null) {
+				return true;
+			}
+			return false;
+		}
 
 		@Override
 		public boolean handle(Player player, Node node, String option) {
@@ -245,7 +255,7 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 			case 8960:
 				boolean behind = player.getLocation().getX() >= 2492;
 				if (!behind) {
-					if (RegionManager.getLocalPlayers(node.getLocation().transform(-1, 0, 0), 0).size() == 0 || RegionManager.getLocalPlayers(node.getLocation().getLocation().transform(-1, 2, 0), 0).size() == 0) {
+					if (!pressurePadActivated(node.getLocation().transform(-1, 0, 0),player) || !pressurePadActivated(node.getLocation().transform(-1, 2, 0),player)) {
 						player.sendMessage("You cannot see a way to open this door...");
 						break;
 					}
