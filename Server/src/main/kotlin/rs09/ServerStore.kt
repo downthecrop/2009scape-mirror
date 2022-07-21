@@ -3,6 +3,9 @@ package rs09
 import api.PersistWorld
 import api.ShutdownListener
 import api.StartupListener
+import api.getItemName
+import core.game.node.entity.npc.NPC
+import core.game.node.entity.player.Player
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
@@ -131,5 +134,71 @@ class ServerStore : PersistWorld {
             }
             return jArray
         }
+
+        /** NPCItemMemory
+         * These next methods handle the NPCItemMemory database. these are server-stored JSON objects,
+         * which are based on an npc and an item.
+         * each NPC can have a JSON object for itself for any item.
+         * the NPC Item object can store integer values for individual players, using their names as keys.
+         * the first methods handle the serverstore filename and accessing the JSON object.
+         * these methods are wrapped by more convenient ones that allow access for a particular player, see below.
+         */
+        fun NPCItemFilename(npc: Int, item: Int, period: String = "daily"): String {
+            val itemName = getItemName(item).lowercase().replace(" ","-")
+            val npcName = NPC(npc).name.lowercase()
+            return "$period-$npcName-$itemName"
+        }
+        fun NPCItemMemory(npc: Int, item: Int, period: String = "daily"): JSONObject {
+            return getArchive(NPCItemFilename(npc,item,period))
+        }
+
+        /** NPCItemMemory Player Access
+         * These next functions handle individual player access to the NPC Item Memory database.
+         * each of the functions has at least 3 mandatory arguments: npc, item, player.
+         * These functions can be used to allow players to access a daily- or weekly-reset stock of a particular item overseen by a particular NPC.
+         *
+         * note that none of these functions perform tangible actions on the player.
+         * whoever calls these functions is responsible for handling tangible actions like putting items in an inventory.
+         * these functions simply return and update the NPCItemMemory database numbers in useful ways.
+         */
+
+        /** getNPCItemStock:
+         * gets the available stock of a particular item at a particular NPC for a particular player.
+         */
+        fun getNPCItemStock(npc: Int, item: Int, limit: Int, player: Player, period: String = "daily"): Int {
+            val itemMemory = NPCItemMemory(npc,item)
+            val key = player.name
+            var stock = limit-itemMemory.getInt(key)
+            stock = maxOf(stock,0)
+            return stock
+        }
+        /** getNPCItemAmount:
+         * gets the usable amount of a particular item from a particular npc for a particular player.
+         * this is essentially just a requested amount cut to conform to stock and nonnegative requirements.
+         * what this function does is it takes a requested amount, cuts it down to be equal to available stock if
+         * available stock is less than the requested amount, and then additionally sets a minimum of 0.
+         */
+        fun getNPCItemAmount(npc: Int, item: Int, limit: Int, player: Player, amount: Int, period: String = "daily"): Int {
+            val stock = getNPCItemStock(npc,item,limit,player,period)
+            var realamount = minOf(amount,stock)
+            realamount = maxOf(realamount,0)
+            return realamount
+        }
+        /** addNPCItemAmount:
+         * this function updates the NPC Item Memory database entry for a particular player.
+         * it is intended to be called after all the actions that use the number have been successfully completed.
+         * this function will *add* the amount argument to the current npc item memory entry for that player. this means that
+         * the amount argument is the amount to add, not the absolute final amount.
+         * this function will handle correctly setting the limit and any other required semantics.
+         */
+        fun addNPCItemAmount(npc: Int, item: Int, limit: Int, player: Player, amount: Int, period: String =  "daily") {
+            val itemMemory = NPCItemMemory(npc,item,period)
+            val key = player.name
+            var realamount = itemMemory.getInt(key) + amount
+            realamount = minOf(realamount,limit)
+            realamount = maxOf(realamount,0)
+            itemMemory[key] = realamount
+        }
     }
 }
+
