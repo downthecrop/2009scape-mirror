@@ -1,11 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 
-SCRIPT_DIR=$(cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P)
+SCRIPT_DIR=$(cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit; pwd -P)
 
 BUILD_MS=0
 BUILD_GS=0
-CLEAN_MS=0
-CLEAN_GS=0
 SKIPTEST=""
 
 GS_SRC=$SCRIPT_DIR/Server
@@ -16,97 +14,110 @@ _JAR_DIR="$SCRIPT_DIR/builddir"
 
 help()
 {
-    echo "Usage: $0 [-h] <-m | -g> [-c <m|g>] [-o <path>]";
-    echo "  -h: Display this message.";
-    echo "  -m: Build the management server.";
-    echo "  -g: Build the game server.";
-    echo "  -c: Clean: m: management, g: gameserver. "
-    echo "      Can specify both. Need at least one if present.";
-    echo "  -o: Specify jar-file directory."
-    echo "  -q: Quick build - will skip tests.";
+	echo "Usage: $0 [-h] <-m | -g> [-c <m|g>] [-o <path>]";
+	echo "  -h: Display this message.";
+	echo "  -m: Build the management server.";
+	echo "  -g: Build the game server.";
+	echo "  -c: Clean: m: management, g: gameserver. "
+	echo "      Can specify both. Need at least one if present.";
+	echo "  -o: Specify jar-file directory."
+	echo "  -q: Quick build - will skip tests.";
 }
 
 error()
 {
-    echo $1;
-    exit -1;
+	echo "$1";
+	exit 1;
 }
 
 clean_ms()
 {
-    cd $MS_SRC
-
-    if [[ "$CLEANOPT" == *"m"* ]]; then
-	echo "Cleaning the management server."
-        sh mvnw clean || error "Failed to clean the MS."
-    fi
+	cd "$MS_SRC" || exit
+	case "$CLEANOPT" in
+		*"m"*)
+			echo "Cleaning the management server."
+			sh mvnw clean || error "Failed to clean the MS."
+			;;
+	esac
 }
 
 clean_gs()
 {
-    cd $GS_SRC;
-    if [[ "$CLEANOPT" == *"g"* ]]; then
-	echo "Cleaning the game server."
-        sh mvnw clean || error "Failed to clean the game server. Giving up."
-    fi
+	cd "$GS_SRC" || exit
+	case "$CLEANOPT" in
+		*"g"*)
+			echo "Cleaning the game server."
+			sh mvnw clean || error "Failed to clean the game server. Giving up."
+		;;
+	esac
 }
 
 build_ms()
 {
-    cd $MS_SRC
+	cd "$MS_SRC" || exit
 
-    sh mvnw package $SKIPTEST || \
-	error "Failed to build the management server. Giving up";
+	if [ -z "$SKIPTEST" ]; then
+		sh mvnw package || \
+			error "Failed to build the management server. Giving up";
+	else
+		sh mvnw package "$SKIPTEST" || \
+			error "Failed to build the management server. Giving up";
+	fi
 }
 
 build_gs()
 {
-    cd $GS_SRC;
+	cd "$GS_SRC" || exit
 
-    sh mvnw package $SKIPTEST || \
-	error "Failed to build the game server. Giving up."
+	if [ -z "$SKIPTEST" ]; then
+		sh mvnw package || \
+			error "Failed to build the game server. Giving up."
+	else
+		sh mvnw package "$SKIPTEST" || \
+			error "Failed to build the game server. Giving up."
+	fi
 }
 
 while getopts "hqmgc:o:d" arg; do
-    case $arg in
-        h)
-            help
-            exit 0
-            ;;
-        m)
-            BUILD_MS=1
-            ;;
-        g)
-            BUILD_GS=1
-            ;;
-        c)
-            CLEANOPT=${OPTARG}
-            ;;
-        o)
-            _JAR_DIR=${OPTARG}
-            ;;
-        d)
-            echo "BUILD_MS=$BUILD_MS"
-            echo "BUILD_GS=$BUILD_GS"
-            echo "CLEANOPT=$CLEANOPT"
-            echo "_JAR_DIR=$_JAR_DIR"
-            ;;
-        q)
-            SKIPTEST="-DskipTests"
-            ;;
-    esac
+	case $arg in
+		m)
+			BUILD_MS=1
+			;;
+		g)
+			BUILD_GS=1
+			;;
+		c)
+			CLEANOPT=${OPTARG}
+			;;
+		o)
+			_JAR_DIR=${OPTARG}
+			;;
+		d)
+			echo "BUILD_MS=$BUILD_MS"
+			echo "BUILD_GS=$BUILD_GS"
+			echo "CLEANOPT=$CLEANOPT"
+			echo "_JAR_DIR=$_JAR_DIR"
+			;;
+		q)
+			SKIPTEST="-DskipTests"
+			;;
+		h|*)
+			help
+			exit 0
+			;;
+	esac
 done
 
-if [[ $CLEANOPT != "m" ]]       \
-    && [[ $CLEANOPT != "g" ]]   \
-    && [[ $CLEANOPT != "mg" ]]  \
-    && [[ $CLEANOPT != "" ]]; 
+if [ "$CLEANOPT" != "m" ]       \
+	&& [ "$CLEANOPT" != "g" ]   \
+	&& [ "$CLEANOPT" != "mg" ]  \
+	&& [ "$CLEANOPT" != "" ]; 
 then
-    error "Invalid cleaning option '$CLEANOPT'. Valid options are 'm', 'g', 'mg' or none."
+	error "Invalid cleaning option '$CLEANOPT'. Valid options are 'm', 'g', 'mg' or none."
 fi
 
-if [ $BUILD_MS -eq 0 ] && [ $BUILD_GS -eq 0 ] && [[ $CLEANOPT == "" ]]; then
-    error "Need to build or clean at least one of the modules. See -h for details."
+if [ $BUILD_MS -eq 0 ] && [ $BUILD_GS -eq 0 ] && [ -z "$CLEANOPT" ]; then
+	error "Need to build or clean at least one of the modules. See -h for details."
 fi
 
 # Conditionals inside the functions.
@@ -114,27 +125,27 @@ clean_gs
 clean_ms
 # -----------
 
-if [ -d $_JAR_DIR ]; then
-    rm -r $_JAR_DIR
+if [ -d "$_JAR_DIR" ]; then
+	rm -r "$_JAR_DIR"
 fi
 
 if [ $BUILD_MS -ne 1 ] && [ $BUILD_GS -ne 1 ]; then
-    echo "No build options specified. Stop."
-    exit 0
+	echo "No build options specified. Stop."
+	exit 0
 fi
 
-mkdir -p $_JAR_DIR || error "Failed to create build directory.";
+mkdir -p "$_JAR_DIR" || error "Failed to create build directory.";
 
 if [ $BUILD_MS -eq 1 ]; then
-    build_ms
+	build_ms
 
-    # Will never execute if build_ms fails because it quits upon failure.
-    mv -v $MS_SRC/target/*-with-dependencies.jar $_JAR_DIR/ms.jar
+	# Will never execute if build_ms fails because it quits upon failure.
+	mv -v "$MS_SRC"/target/*-with-dependencies.jar "$_JAR_DIR"/ms.jar
 fi
 
 if [ $BUILD_GS -eq 1 ]; then
-    build_gs
+	build_gs
 
-    # Will never execute if build_gs fails because it quits upon failure.
-    mv -v $GS_SRC/target/*-with-dependencies.jar $_JAR_DIR/server.jar
+	# Will never execute if build_gs fails because it quits upon failure.
+	mv -v "$GS_SRC"/target/*-with-dependencies.jar "$_JAR_DIR"/server.jar
 fi
