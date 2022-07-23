@@ -2,13 +2,11 @@ package rs09.game.node.entity.player.info.login
 
 import api.PersistPlayer
 import core.game.container.Container
-import core.game.interaction.item.brawling_gloves.BrawlingGloves
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.IronmanMode
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.summoning.familiar.BurdenBeast
 import core.game.node.entity.skill.summoning.pet.Pet
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
@@ -64,6 +62,10 @@ class PlayerSaver (val player: Player){
         if (!player.details.saveParsed) return@runBlocking
         val manager = ScriptEngineManager()
         val scriptEngine = manager.getEngineByName("JavaScript")
+        if (scriptEngine == null) {
+            SystemLogger.logErr("Cannot save: Failed to load ScriptEngineManager, this is a known issue on non Java-11 versions. Set your Java version to 11 to avoid further bugs!")
+            return@runBlocking
+        }
         scriptEngine.put("jsonString", populate().toJSONString())
         scriptEngine.eval("result = JSON.stringify(JSON.parse(jsonString), null, 2)")
         val prettyPrintedJson = scriptEngine["result"] as String
@@ -81,8 +83,8 @@ class PlayerSaver (val player: Player){
             e.printStackTrace()
         }
     }
-
     fun saveVarps(root: JSONObject){
+
         player.varpManager.save(root)
     }
 
