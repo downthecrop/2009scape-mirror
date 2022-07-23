@@ -415,12 +415,14 @@ class CombatBotAssembler {
             skillAmt++
         }
         when (tier){
-            Tier.PURE -> bot.skills.setStaticLevel(Skills.DEFENCE,10)
-            Tier.PURE -> bot.skills.setStaticLevel(Skills.STRENGTH,99)
-            Tier.PURE -> bot.skills.setStaticLevel(Skills.ATTACK,90)
-            Tier.PURE -> bot.skills.setStaticLevel(Skills.PRAYER,43)
-            Tier.PURE -> bot.skills.setStaticLevel(Skills.RANGE,1)
-            Tier.PURE -> bot.skills.setStaticLevel(Skills.MAGIC,1)
+            Tier.PURE -> {
+                bot.skills.setStaticLevel(Skills.DEFENCE,10)
+                bot.skills.setStaticLevel(Skills.STRENGTH,99)
+                bot.skills.setStaticLevel(Skills.ATTACK,90)
+                bot.skills.setStaticLevel(Skills.PRAYER,43)
+                bot.skills.setStaticLevel(Skills.RANGE,1)
+                bot.skills.setStaticLevel(Skills.MAGIC,1)
+            }
         }
 
         bot.skills.addExperience(Skills.HITPOINTS, (totalXPAdd / skillAmt) * 0.2)

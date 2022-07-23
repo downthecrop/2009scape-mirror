@@ -13,7 +13,7 @@ import java.util.*
 @Initializable
 class AnimationCommandSet : CommandSet(Privilege.ADMIN) {
 
-    protected var npcs: List<NPC> = ArrayList()
+    private var npcs: List<NPC> = ArrayList()
 
     override fun defineCommands() {
 
