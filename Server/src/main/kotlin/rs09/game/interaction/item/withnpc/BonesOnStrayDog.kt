@@ -76,8 +76,6 @@ class BonesOnStrayDog : InteractionListener {
                 }
 
                 sendChat(with, woof)
-
-                player.getAchievementDiaryManager().finishTask(player, DiaryType.VARROCK, 0, 8)
             }
 
             return@onUseWith true
