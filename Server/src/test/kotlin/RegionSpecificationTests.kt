@@ -77,7 +77,7 @@ class RegionSpecificationTests {
         Assertions.assertNull(RegionManager.getObject(region.baseLocation.transform(15, 9, 0)))
     }
 
-    @Test
+    /*@Test
     fun fillWithShouldAllowChunkDelegate() {
         val base = RegionManager.forId(12850)
         Region.load(base)
@@ -91,7 +91,7 @@ class RegionSpecificationTests {
             base.planes[0].chunks[1][1].objects[1][3]?.id,
             region.planes[0].chunks[1][1].objects[1][3]?.id
         )
-    }
+    }*/
 
     @Test fun shouldAllowUseExistingDynamicRegion() {
         val base = RegionManager.forId(12850)

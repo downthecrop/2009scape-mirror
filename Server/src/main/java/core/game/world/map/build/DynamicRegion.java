@@ -79,6 +79,7 @@ public final class DynamicRegion extends Region {
 		super(x, y);
 		this.regionId = regionId;
 		this.chunks = new RegionChunk[4][SIZE >> 3][SIZE >> 3];
+        RegionManager.resetFlags(getId());
 	}
 
 	public DynamicRegion(@NotNull ZoneBorders borders) {
