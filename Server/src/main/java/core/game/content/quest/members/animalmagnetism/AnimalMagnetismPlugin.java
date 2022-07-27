@@ -122,9 +122,9 @@ public final class AnimalMagnetismPlugin extends OptionHandler {
 	 * @param item the item.
 	 */
 	private void handleEctophial(final Player player, final Item item) {
+		if(player.getTeleporter().send(Location.create(3658, 3517, 0), TeleportType.ECTOPHIAL)){
 		player.getInventory().replace(new Item(4252), item.getSlot());
 		player.sendMessage("...and the world changes around you.", 4);
-		player.getTeleporter().send(Location.create(3658, 3517, 0), TeleportType.ECTOPHIAL);
 		player.getAudioManager().send(4580);
 		player.sendMessage("You empty the ectoplasm onto the ground around your feet...");
 		player.getPulseManager().run(new Pulse(9, player) {
@@ -141,6 +141,7 @@ public final class AnimalMagnetismPlugin extends OptionHandler {
 				return true;
 			}
 		});
+		}
 	}
 
 	/**
