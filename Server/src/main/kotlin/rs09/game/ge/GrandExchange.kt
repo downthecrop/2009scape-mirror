@@ -5,10 +5,12 @@ import core.game.ge.OfferState
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.PlayerDetails
 import core.game.node.entity.player.link.audio.Audio
+import core.game.system.task.Pulse
 import rs09.ServerConstants
 import rs09.game.system.SystemLogger
 import rs09.game.system.command.Privilege
 import rs09.game.system.config.ItemConfigParser
+import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
 import rs09.tools.stringtools.colorize
 import java.lang.Integer.max
@@ -20,9 +22,6 @@ import java.util.concurrent.LinkedBlockingDeque
  * @author Ceikry
  */
 class GrandExchange : StartupListener, Commands {
-    private val GET_SPECIFIC_OFFER_BY_UID = "SELECT * FROM player_offers WHERE uid = ?;"
-    private val GET_MATCHES_FROM_PLAYER_OFFERS = "SELECT * FROM player_offers WHERE item_id = ? AND is_sale = ? AND offer_state < 4 AND NOT offer_state = 2;"
-    private val GET_MATCH_FROM_BOT_OFFERS = "SELECT * FROM bot_offers WHERE item_id = ?;"
 
     /**
      * Fallback safety check to make sure we don't start the GE twice under any circumstance
@@ -56,18 +55,6 @@ class GrandExchange : StartupListener, Commands {
         isRunning = true
     }
 
-    private fun getOfferByUid(uid: Long): GrandExchangeOffer? {
-        var offer: GrandExchangeOffer? = null
-        GEDB.run { conn ->
-            val query = conn.prepareStatement(GET_SPECIFIC_OFFER_BY_UID)
-            query.setLong(1, uid)
-            val res = query.executeQuery()
-
-            if (res.next())
-                offer = GrandExchangeOffer.fromQuery(res)
-        }
-        return offer
-    }
 
     private fun tryExchangeWithBots(offer: GrandExchangeOffer) {
         GEDB.run { conn ->
@@ -125,6 +112,22 @@ class GrandExchange : StartupListener, Commands {
 
     companion object {
         val pendingOffers = LinkedBlockingDeque<GrandExchangeOffer>()
+        private val GET_SPECIFIC_OFFER_BY_UID = "SELECT * FROM player_offers WHERE uid = ?;"
+        private val GET_MATCHES_FROM_PLAYER_OFFERS = "SELECT * FROM player_offers WHERE item_id = ? AND is_sale = ? AND offer_state < 4 AND NOT offer_state = 2;"
+        private val GET_MATCH_FROM_BOT_OFFERS = "SELECT * FROM bot_offers WHERE item_id = ?;"
+
+        private fun getOfferByUid(uid: Long): GrandExchangeOffer? {
+            var offer: GrandExchangeOffer? = null
+            GEDB.run { conn ->
+                val query = conn.prepareStatement(GET_SPECIFIC_OFFER_BY_UID)
+                query.setLong(1, uid)
+                val res = query.executeQuery()
+
+                if (res.next())
+                    offer = GrandExchangeOffer.fromQuery(res)
+            }
+            return offer
+        }
 
         @JvmStatic
         fun getRecommendedPrice(itemID: Int, from_bot: Boolean = false): Int {
@@ -238,6 +241,23 @@ class GrandExchange : StartupListener, Commands {
             if (offer.sell && !player.isArtificial) {
                 val username = if (getAttribute(player, "ge-exclude", false)) "?????" else player.username
                 Repository.sendNews(username + " just offered " + offer.amount + " " + getItemName(offer.itemID) + " on the GE.")
+            }
+
+            if (ServerConstants.I_AM_A_CHEATER) {
+                val otherO = GrandExchangeOffer()
+                otherO.itemID = offer.itemID
+                otherO.amount = offer.amount
+                otherO.sell = !offer.sell
+                otherO.offeredValue = offer.offeredValue
+                offer.writeNew()
+                GameWorld.Pulser.submit(object : Pulse(5) {
+                    override fun pulse(): Boolean {
+                        val offer2 = getOfferByUid(offer.uid) ?: return false
+                        exchange(offer2, otherO)
+                        return true
+                    }
+                })
+                return true
             }
 
             pendingOffers.add(offer)
