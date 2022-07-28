@@ -137,6 +137,9 @@ class ServerConstants {
 		@JvmField
 		var WATCHDOG_ENABLED = true
 
+		@JvmField
+		var I_AM_A_CHEATER = false
+
 		//location names for the ::to command.
 		val TELEPORT_DESTINATIONS = arrayOf(
 			arrayOf(Location.create(2974, 4383, 2), "corp", "corporal", "corporeal"),
