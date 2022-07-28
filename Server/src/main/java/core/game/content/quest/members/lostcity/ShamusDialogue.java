@@ -3,6 +3,7 @@ package core.game.content.quest.members.lostcity;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
+import rs09.game.content.quest.members.lostcity.ShamusTreeListener;
 
 /**
  * Handles the shamus npc dialogue.
@@ -150,7 +151,7 @@ public final class ShamusDialogue extends DialoguePlugin {
 	 * Makes dhamus disappear.
 	 */
 	private void disappear() {
-		LostCityPlugin.SHAMUS.setInvisible(true);
+		ShamusTreeListener.Companion.disappearShamus();
 		interpreter.sendPlainMessage(false, "The leprechaun magically disappears.");
 		stage++;
 	}
