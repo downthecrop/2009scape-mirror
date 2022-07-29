@@ -23,7 +23,6 @@ import rs09.game.node.entity.skill.magic.spellconsts.Modern
 class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
     companion object {
         private val VARROCK_ROOF_AREA = ZoneBorders(3201, 3467, 3225, 3497, 3)
-        private val VARROCK_PROVINCE_AREA = ZoneBorders(3077, 3380, 3290, 2509)
         private val SOS_LEVEL_2_AREA = ZoneBorders(2040, 5241, 2046, 5246)
 
         private val STRAY_DOGS = arrayOf(
@@ -203,17 +202,13 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
     }
 
     override fun onUsedWith(player: Player, event: UseWithEvent) {
-        when {
-            inBorders(player, VARROCK_PROVINCE_AREA) -> {
-                when (event.used) {
-                    in Bones.array -> if (event.with in STRAY_DOGS) {
-                        finishTask(
-                            player,
-                            DiaryLevel.EASY,
-                            EasyTasks.GIVE_STRAY_DOG_A_BONE
-                        )
-                    }
-                }
+        when (event.used) {
+            in Bones.array -> if (event.with in STRAY_DOGS) {
+                finishTask(
+                    player,
+                    DiaryLevel.EASY,
+                    EasyTasks.GIVE_STRAY_DOG_A_BONE
+                )
             }
         }
     }
