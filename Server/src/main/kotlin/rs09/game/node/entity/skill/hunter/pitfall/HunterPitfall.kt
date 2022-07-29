@@ -69,6 +69,7 @@ data class Pit(val varpId: Int, val varpOffset: Int, val horizontal: Boolean)
 val pitVarps = hashMapOf(
     // Larupia pits (the duplicate 24 is likely authentic)
     Location.create(2565,2888) to Pit(917, 27, true),
+    Location.create(2573,2885) to Pit(918, 0, false),
     Location.create(2556,2893) to Pit(917, 18, false),
     Location.create(2552,2904) to Pit(917, 24, true),
     Location.create(2543,2908) to Pit(917, 21, false),
