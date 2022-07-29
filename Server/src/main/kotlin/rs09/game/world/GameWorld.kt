@@ -165,10 +165,7 @@ object GameWorld {
         logInfo("Prompting ${settings?.name} Game World...")
         Cache.init(ServerConstants.CACHE_PATH)
         //go overboard with checks to make sure dev mode authenticator never triggers on live
-        Auth.configureFor(
-            settings!!.isDevMode
-                    && ServerConstants.MS_SECRET_KEY == "2009scape_development"
-        )
+        Auth.configure()
         ConfigParser().prePlugin()
         ClassScanner.scanClasspath()
         ClassScanner.loadPureInterfaces()
