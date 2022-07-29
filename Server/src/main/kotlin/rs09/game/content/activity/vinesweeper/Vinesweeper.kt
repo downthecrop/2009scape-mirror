@@ -1,19 +1,12 @@
 package rs09.game.content.activity.vinesweeper
 
 import BlinkinDialogue
-import WinkinDialogue
 import FarmerDialogue.Companion.FARMER_FLAG_LINES
-import rs09.game.content.activity.vinesweeper.Vinesweeper.Companion.FARMERS
-import rs09.game.content.activity.vinesweeper.Vinesweeper.Companion.FARMER_CLEAR_RADIUS
-import rs09.game.content.activity.vinesweeper.Vinesweeper.Companion.HOLES
-import rs09.game.content.activity.vinesweeper.Vinesweeper.Companion.NUMBERS
-import rs09.game.content.activity.vinesweeper.Vinesweeper.Companion.RABBITS
-import rs09.game.content.activity.vinesweeper.Vinesweeper.Companion.SEED_LOCS
-import rs09.game.content.activity.vinesweeper.Vinesweeper.Companion.populateSeeds
-import rs09.game.content.activity.vinesweeper.Vinesweeper.Companion.scheduleNPCs
-import rs09.game.content.activity.vinesweeper.Vinesweeper.Companion.sendPoints
+import WinkinDialogue
 import api.*
 import core.game.component.Component
+import core.game.interaction.DestinationFlag
+import core.game.interaction.MovementPulse
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.DeathTask
 import core.game.node.entity.impl.Projectile
@@ -28,21 +21,32 @@ import core.game.node.scenery.SceneryBuilder
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
+import core.game.world.map.path.Pathfinder
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
+import core.game.world.update.flag.player.FaceLocationFlag
 import core.plugin.Initializable
 import core.tools.RandomFunction
 import org.rs09.consts.Animations
 import org.rs09.consts.Components
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
+import rs09.game.content.activity.vinesweeper.Vinesweeper.Companion.FARMERS
+import rs09.game.content.activity.vinesweeper.Vinesweeper.Companion.FARMER_CLEAR_RADIUS
+import rs09.game.content.activity.vinesweeper.Vinesweeper.Companion.HOLES
+import rs09.game.content.activity.vinesweeper.Vinesweeper.Companion.NUMBERS
+import rs09.game.content.activity.vinesweeper.Vinesweeper.Companion.RABBITS
+import rs09.game.content.activity.vinesweeper.Vinesweeper.Companion.SEED_LOCS
+import rs09.game.content.activity.vinesweeper.Vinesweeper.Companion.populateSeeds
+import rs09.game.content.activity.vinesweeper.Vinesweeper.Companion.scheduleNPCs
+import rs09.game.content.activity.vinesweeper.Vinesweeper.Companion.sendPoints
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InterfaceListener
 import rs09.game.world.GameWorld
 import rs09.game.world.GameWorld.ticks
-import org.rs09.consts.Scenery as Sceneries
 import org.rs09.consts.Graphics as Gfx
+import org.rs09.consts.Scenery as Sceneries
 
 class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
     override fun defineAreaBorders(): Array<ZoneBorders> {
@@ -107,7 +111,26 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
         }
         on(HOLES, SCENERY, "flag") { player, node ->
             val hole = node as Scenery
-            plantFlag(player,hole)
+            var count = 0
+            if(player.location != node.location) {
+                plantFlag(player,hole)
+                return@on true
+            }
+            GameWorld.Pulser.submit(object : MovementPulse(player, hole, hole.destinationFlag) {
+                override fun pulse(): Boolean {
+                    when(count++) {
+                        0 -> {
+                            player.faceLocation(hole.location)
+                            return false
+                        }
+                        1 -> {
+                            plantFlag(player,hole)
+                            return true
+                        }
+                    }
+                    return true
+                }
+            })
             return@on true
         }
         onUseWith(SCENERY,Items.FLAG_12625,*HOLES) { player, _, with ->
@@ -360,6 +383,9 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
             }
         }
 
+        fun faceHole(player: Player, hole: Scenery) {
+
+        }
         fun plantFlag(player: Player, hole: Scenery) {
             if(player.inventory.remove(Item(Items.FLAG_12625, 1))) {
                 player.lock()
@@ -392,6 +418,7 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
                 GameWorld.Pulser.submit(object : Pulse(3, player) {
                     override fun pulse(): Boolean {
                         rabbit.finalizeDeath(player)
+                        rabbit.properties.teleportLocation = rabbit.properties.spawnLocation
                         return true
                     }
                 })
