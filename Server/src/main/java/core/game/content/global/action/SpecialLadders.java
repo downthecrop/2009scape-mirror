@@ -51,9 +51,7 @@ public enum SpecialLadders implements LadderAchievementCheck {
             player.getAchievementDiaryManager().finishTask(player,DiaryType.SEERS_VILLAGE,1,3);
         }
     },
-    SEERS_VILLAGE_SPINNING_HOUSE_ROOFTOP_DOWN(new Location(2715,3472,3), new Location(2714,3472,1)),
-    ELEMENTAL_WORKSHOP_STAIRS_DOWN(Location.create(2710,3497, 0), Location.create(2713,9887, 0)),
-    ELEMENTAL_WORKSHOP_STAIRS_UP(Location.create(2714,9887, 0), Location.create(2709,3498, 0));
+    SEERS_VILLAGE_SPINNING_HOUSE_ROOFTOP_DOWN(new Location(2715,3472,3), new Location(2714,3472,1));
 
     private static HashMap<Location,Location> destinationMap = new HashMap<>();
     private static HashMap<Location,SpecialLadders> ladderMap = new HashMap<>();
