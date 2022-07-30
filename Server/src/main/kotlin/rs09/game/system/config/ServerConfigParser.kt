@@ -121,6 +121,8 @@ object ServerConfigParser {
         ServerConstants.DISCORD_GE_WEBHOOK = data.getString("server.discord_webhook", "")
         ServerConstants.WATCHDOG_ENABLED = data.getBoolean("server.watchdog_enabled", true)
         ServerConstants.I_AM_A_CHEATER = data.getBoolean("world.i_want_to_cheat", false)
+        ServerConstants.USE_AUTH = data.getBoolean("server.use_auth", true)
+        ServerConstants.PERSIST_ACCOUNTS = data.getBoolean("server.persist_accounts", true)
     }
 
 

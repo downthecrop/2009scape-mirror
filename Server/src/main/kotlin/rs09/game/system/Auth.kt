@@ -1,5 +1,6 @@
 package rs09.game.system
 
+import rs09.ServerConstants
 import rs09.auth.AuthProvider
 import rs09.auth.DevelopmentAuthenticator
 import rs09.auth.ProductionAuthenticator
@@ -11,17 +12,15 @@ object Auth {
     lateinit var authenticator: AuthProvider<*>
     lateinit var storageProvider: AccountStorageProvider
 
-    fun configureFor(devMode: Boolean) {
-        if (devMode) {
-            authenticator = DevelopmentAuthenticator()
-            storageProvider = InMemoryStorageProvider()
-            (authenticator as DevelopmentAuthenticator).configureFor(storageProvider as InMemoryStorageProvider)
-            SystemLogger.logInfo("[AUTH] Using Development Authenticator with In-Memory Storage")
-        } else {
-            authenticator = ProductionAuthenticator()
-            storageProvider = SQLStorageProvider()
-            (authenticator as ProductionAuthenticator).configureFor(storageProvider as SQLStorageProvider)
-            SystemLogger.logInfo("[AUTH] Using Production Authenticator with SQL Storage")
-        }
+    fun configure() {
+        storageProvider = if (ServerConstants.PERSIST_ACCOUNTS)
+            SQLStorageProvider()
+        else
+            InMemoryStorageProvider()
+
+        authenticator = if (ServerConstants.USE_AUTH)
+            ProductionAuthenticator().also { it.configureFor(storageProvider) }
+        else
+            DevelopmentAuthenticator().also { it.configureFor(storageProvider) }
     }
 }

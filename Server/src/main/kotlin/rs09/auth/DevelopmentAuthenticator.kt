@@ -1,10 +1,11 @@
 package rs09.auth
 
 import core.game.node.entity.player.Player
+import rs09.storage.AccountStorageProvider
 import rs09.storage.InMemoryStorageProvider
 
-class DevelopmentAuthenticator : AuthProvider<InMemoryStorageProvider>() {
-    override fun configureFor(provider: InMemoryStorageProvider) {
+class DevelopmentAuthenticator : AuthProvider<AccountStorageProvider>() {
+    override fun configureFor(provider: AccountStorageProvider) {
         storageProvider = provider
     }
 
