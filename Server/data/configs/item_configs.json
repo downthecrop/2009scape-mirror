@@ -51254,7 +51254,7 @@
   {
     "shop_price": "1",
     "ge_buy_limit": "100",
-    "examine": "A plant pot filled with soil.",
+    "examine": "An empty plant pot.",
     "grand_exchange_price": "20",
     "durability": null,
     "name": "Plant pot",
