@@ -33,7 +33,7 @@ object UseWithPatchHandler{
         for(p in Plantable.values()){
             allowedNodes.add(p.itemID)
         }
-        allowedNodes.addAll(arrayListOf(RAKE,SEED_DIBBER,SPADE,SECATEURS,TROWEL,Items.SUPERCOMPOST_6034,Items.COMPOST_6032,Items.PLANT_CURE_6036,Items.WATERING_CAN1_5333,Items.WATERING_CAN2_5334,Items.WATERING_CAN3_5335,Items.WATERING_CAN4_5336,Items.WATERING_CAN5_5337,Items.WATERING_CAN6_5338,Items.WATERING_CAN7_5339,Items.WATERING_CAN8_5340))
+        allowedNodes.addAll(arrayListOf(RAKE,SEED_DIBBER,SPADE,SECATEURS,TROWEL,Items.SUPERCOMPOST_6034,Items.COMPOST_6032,Items.PLANT_CURE_6036,Items.WATERING_CAN1_5333,Items.WATERING_CAN2_5334,Items.WATERING_CAN3_5335,Items.WATERING_CAN4_5336,Items.WATERING_CAN5_5337,Items.WATERING_CAN6_5338,Items.WATERING_CAN7_5339,Items.WATERING_CAN8_5340, Items.PLANT_POT_5350))
     }
 
     @JvmStatic
@@ -66,7 +66,11 @@ object UseWithPatchHandler{
                     }
                 }
             }
-            TROWEL -> {
+            TROWEL, Items.PLANT_POT_5350 -> {
+                if(!player.inventory.containsAtLeastOneItem(TROWEL)) {
+                    player.sendMessage("You need a trowel to fill plant pots with dirt.")
+                    return true
+                }
                 val p = patch.getPatchFor(player)
                 if(!p.isWeedy()){
                     player.sendMessage("This patch has something growing in it.")
@@ -76,7 +80,7 @@ object UseWithPatchHandler{
                     return true
                 }
 
-                val potAmount = player.inventory.getAmount(Items.PLANT_POT_5356)
+                val potAmount = player.inventory.getAmount(Items.PLANT_POT_5350)
 
                 if(potAmount == 0){
                     player.sendMessage("You have no plant pots to fill.")
@@ -87,7 +91,7 @@ object UseWithPatchHandler{
 
                 player.pulseManager.run(object : Pulse(anim.duration){
                     override fun pulse(): Boolean {
-                        if(player.inventory.remove(Item(Items.PLANT_POT_5356))){
+                        if(player.inventory.remove(Item(Items.PLANT_POT_5350))){
                             player.animator.animate(anim)
                             player.inventory.add(Item(Items.PLANT_POT_5354))
                         } else return true
@@ -221,7 +225,7 @@ object UseWithPatchHandler{
                             player.skills.addExperience(Skills.FARMING, plantable.plantingXP)
                             p.setNewHarvestAmount()
                             if(p.patch.type == PatchType.TREE || p.patch.type == PatchType.FRUIT_TREE){
-                                player.inventory.add(Item(Items.PLANT_POT_5356))
+                                player.inventory.add(Item(Items.PLANT_POT_5350))
                             }
                             player.unlock()
                             return true
