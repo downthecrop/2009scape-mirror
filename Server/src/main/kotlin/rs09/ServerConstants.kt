@@ -232,5 +232,11 @@ class ServerConstants {
 
 		@JvmField
 		var PRELOAD_MAP = false
+
+		@JvmField
+		var USE_AUTH = false
+
+		@JvmField
+		var PERSIST_ACCOUNTS = false
 	}
 }
