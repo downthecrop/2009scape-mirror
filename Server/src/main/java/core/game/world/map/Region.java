@@ -269,9 +269,13 @@ public class Region {
 	/**
 	 * Flags the region as inactive.
 	 */
-	protected void flagInactive() {
-		unload(this);
-		active = false;
+	protected boolean flagInactive() {
+		if(unload(this)) {
+            active = false;
+            return true;
+        } else {
+            return false;
+        }
 	}
 
 	/**
@@ -333,17 +337,17 @@ public class Region {
 	 * Unloads a region.
 	 * @param r The region.
 	 */
-	private static void unload(Region r) {
+	private static boolean unload(Region r) {
 		if (r.isViewed()) {
 			SystemLogger.logErr("Players viewing region!");
 			r.flagActive();
-			return;
+			return false;
 		}
 		for (RegionPlane p : r.planes) {
 			if (!p.getPlayers().isEmpty()) {
 				SystemLogger.logErr("Players still in region!");
 				r.flagActive();
-				return;
+				return false;
 			}
 		}
 		for (RegionPlane p : r.planes) {
@@ -354,6 +358,7 @@ public class Region {
 				}
 			}
 		}
+        return true;
 	}
 
 	/**

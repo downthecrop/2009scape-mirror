@@ -129,6 +129,12 @@ object RegionManager {
             CLIPPING_FLAGS.getOrPut (regionId) {Array(16384){-1}}
     }
 
+    @JvmStatic
+    fun resetFlags(regionId: Int) {
+        PROJECTILE_FLAGS.put (regionId, Array(16384){0})
+        CLIPPING_FLAGS.put (regionId, Array(16384){-1})
+    }
+
     /**
      * Gets the water variant of a tile's clipping flag
      * Essentially strips the landscape flag off a tile and keeps other flags, and makes normally walkable tiles unwalkable.
