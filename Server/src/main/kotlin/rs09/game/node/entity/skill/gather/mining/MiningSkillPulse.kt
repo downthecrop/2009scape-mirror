@@ -122,10 +122,6 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
         if (++ticks % (if (isMiningEssence) 3 else 4) != 0) {
             return false
         }
-        if (node.id == 10041) {
-            sendNPCDialogue(player, NPCs.BANK_GUARD_2574,if (RandomFunction.random(2) == 1) "You'll blow my cover! I'm meant to be hidden!" else "Will you stop that?", FacialExpression.FURIOUS)
-            return true
-        }
         if (!checkReward()) {
             return false
         }
@@ -148,15 +144,17 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
             if(reward == Items.CLAY_434){
                 val bracelet = getItemFromEquipment(player, EquipmentSlot.HANDS)
                 if(bracelet != null && bracelet.id == Items.BRACELET_OF_CLAY_11074){
-                    if(bracelet.charge > 28) bracelet.charge = 28
-                    bracelet.charge--
+                    var charges = player.getAttribute("jewellery-charges:bracelet-of-clay", 28);
+                    charges--
                     reward = Items.SOFT_CLAY_1761
                     sendMessage(player, "Your bracelet of clay softens the clay for you.")
-                    if(bracelet.charge <= 0){
-                        if(removeItem(player, bracelet)) {
+                    if(charges <= 0) {
+                        if(removeItem(player, bracelet, Container.EQUIPMENT)) {
                             sendMessage(player, "Your bracelet of clay crumbles to dust.")
+                            charges = 28
                         }
                     }
+                    player.setAttribute("/save:jewellery-charges:bracelet-of-clay", charges)
                 }
             }
             val rewardName = getItemName(reward).lowercase()

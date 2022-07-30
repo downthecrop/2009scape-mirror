@@ -153,11 +153,6 @@ public final class GlobalData {
 	private int ectoCharges;
 
 	/**
-	 * The bracelet of clay uses.
-	 */
-	private int braceletClayUses;
-
-	/**
 	 * The abbyss data.
 	 */
 	private boolean[] abyssData = new boolean[4];
@@ -344,7 +339,6 @@ public final class GlobalData {
 		}
 		forgingUses = Integer.parseInt( data.get("forgingUses").toString());
 		ectoCharges = Integer.parseInt( data.get("ectoCharges").toString());
-		braceletClayUses = Integer.parseInt( data.get("braceletClayUses").toString());
 		dropDelay = Long.parseLong(data.get("dropDelay").toString());
 		JSONArray ad = (JSONArray) data.get("abyssData");
 		for(int i = 0; i < ad.size(); i++){
@@ -905,21 +899,6 @@ public final class GlobalData {
 	}
 
 	/**
-	 * Gets the braceletClayUses.
-	 * @return The braceletClayUses.
-	 */
-	public int getBraceletClayUses() {
-		return braceletClayUses;
-	}
-
-	/**
-	 * Increments the bracelet of clay uses.
-	 */
-	public void incrementBraceletOfClay() {
-		this.braceletClayUses += 1;
-	}
-
-	/**
 	 * Resets the abyss data.
 	 */
 	public void resetAbyss() {
@@ -943,14 +922,6 @@ public final class GlobalData {
 	 */
 	public boolean hasAbyssCharge(int ordinal) {
 		return abyssData[ordinal];
-	}
-
-	/**
-	 * Sets the braceletClayUses.
-	 * @param braceletClayUses The braceletClayUses to set.
-	 */
-	public void setBraceletClayUses(int braceletClayUses) {
-		this.braceletClayUses = braceletClayUses;
 	}
 
 	/**

@@ -386,7 +386,6 @@ class PlayerSaver (val player: Player){
         globalData.put("readPlaques",readPlaques)
         globalData.put("forgingUses",player.savedData.globalData.forgingUses.toString())
         globalData.put("ectoCharges",player.savedData.globalData.ectoCharges.toString())
-        globalData.put("braceletClayUses",player.savedData.globalData.braceletClayUses.toString())
         globalData.put("dropDelay",player.savedData.globalData.dropDelay.toString())
         val abyssData = JSONArray()
         player.savedData.globalData.abyssData.map {
