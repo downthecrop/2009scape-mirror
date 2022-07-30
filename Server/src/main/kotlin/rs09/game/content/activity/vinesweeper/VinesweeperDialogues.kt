@@ -7,31 +7,40 @@ import org.rs09.consts.Items
 import rs09.game.content.dialogue.DialogueFile
 import rs09.tools.END_DIALOGUE
 
-val BLINKIN_FLAG_LINES = arrayOf(
-    "Let me check for ya.",
-    "Flags? It appears ya don't have enough room for 'em. Make some space and talk to me again.",
-    "Ah! First things first. One of the farm lads dropped off some flags for ya. Ya can have them back. Here ya go.",
-    "Righty-ho! Ya can have a total of 10 flags. To get yerself a full set of flags'll cost ya %d gold pieces. Would ya like to buy these flags?",
-    "Here ya go, then.",
-    "Flags? It appears ya don't have enough room for 'em. Make some space and talk to me again.",
-    "Ya don't have the coins fer these, I'm afraid! Come back when yer a little bit richer p'raps?",
-    "Right y'are then! See ya.",
-    "It looks like ya got all the flags ya need right now. Ya don't need to buy any more."
-    )
-
-val WINKIN_FLAG_LINES = arrayOf(
-    "Let me check for you.",
-    "I'm sorry dear, you don't appear to have enough room. Make some space and talk to me again.",
-    "Ah! First things first. One of the farmers dropped off some flags for you. You can have them back. Here you go.",
-    "Alright. You can have a total of 10 flags. To obtain a full set of flags will cost you %d coins. Would you like to buy these flags?",
-    "Here you are then, dear.",
-    "I'm sorry dear, you don't appear to have enough room. Make some space and talk to me again.",
-    "I'm afraid it looks like you don't have enough money, dear. Come back and see me again when you have a bit more.",
-    "Ok, dear. Goodbye.",
-    "It looks like you have all the flags you need. You don't need to buy any more."
-    )
-
 abstract class FarmerDialogue : DialogueFile() {
+
+    companion object {
+        val BLINKIN_FLAG_LINES = arrayOf(
+            "Let me check for ya.",
+            "Flags? It appears ya don't have enough room for 'em. Make some space and talk to me again.",
+            "Ah! First things first. One of the farm lads dropped off some flags for ya. Ya can have them back. Here ya go.",
+            "Righty-ho! Ya can have a total of 10 flags. To get yerself a full set of flags'll cost ya %d gold pieces. Would ya like to buy these flags?",
+            "Here ya go, then.",
+            "Flags? It appears ya don't have enough room for 'em. Make some space and talk to me again.",
+            "Ya don't have the coins fer these, I'm afraid! Come back when yer a little bit richer p'raps?",
+            "Right y'are then! See ya.",
+            "It looks like ya got all the flags ya need right now. Ya don't need to buy any more."
+        )
+        val WINKIN_FLAG_LINES = arrayOf(
+            "Let me check for you.",
+            "I'm sorry dear, you don't appear to have enough room. Make some space and talk to me again.",
+            "Ah! First things first. One of the farmers dropped off some flags for you. You can have them back. Here you go.",
+            "Alright. You can have a total of 10 flags. To obtain a full set of flags will cost you %d coins. Would you like to buy these flags?",
+            "Here you are then, dear.",
+            "I'm sorry dear, you don't appear to have enough room. Make some space and talk to me again.",
+            "I'm afraid it looks like you don't have enough money, dear. Come back and see me again when you have a bit more.",
+            "Ok, dear. Goodbye.",
+            "It looks like you have all the flags you need. You don't need to buy any more."
+        )
+        enum class FARMER_FLAG_LINES(val line: String) {
+            FIND_FLAG("Ah, another flag to clear. Let's see what's there."),
+            FIND_SEED("Ah! A seed. Points for everyone near me!"),
+            NO_SEED("Hmm, no seeds planted here, I'm afraid."),
+            KEEP_FLAG("I'll have to keep this 'ere flag. Sorry."),
+            FIND_PLANT("Hmm. Looks like there's a plant here."),
+            DEAD_PLANT("Gracious me! This one's dead")
+        }
+    }
     fun handleFlags(componentID: Int, buttonID: Int, lines: Array<String>) {
         when(stage) {
             20 -> npcl(lines[0]).also { stage++ }
