@@ -10,7 +10,6 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.TeleportManager.TeleportType;
 import core.game.node.entity.player.link.quest.Quest;
-import core.game.node.entity.skill.gather.GatheringSkillPulse;
 import core.game.node.entity.skill.gather.SkillingTool;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
@@ -44,7 +43,6 @@ public final class LostCityPlugin extends OptionHandler {
 		ItemDefinition.forId(5680).getHandlers().put("option:wield", this);
 		SceneryDefinition.forId(2409).getHandlers().put("option:chop", this);
 		SceneryDefinition.forId(2406).getHandlers().put("option:open", this);
-		SceneryDefinition.forId(1292).getHandlers().put("option:chop down", this);
 		return this;
 	}
 
@@ -54,29 +52,6 @@ public final class LostCityPlugin extends OptionHandler {
 		switch (node.getId()) {
 		case 2409:
 			handleShamusTree(player, quest);
-			break;
-		case 1292:
-			if (SkillingTool.getHatchet(player) == null) {
-				player.getPacketDispatch().sendMessage("You do not have an axe which you have the level to use.");
-				return true;
-			}
-			if (quest.getStage(player) < 20) {
-				return true;
-			}
-			if (quest.getStage(player) == 20) {
-				if (player.getAttribute("treeSpawned", false)) {
-					return true;
-				}
-				TreeSpiritNPC spirit = (TreeSpiritNPC) TreeSpiritNPC.create(655, Location.create(2862, 9734, 0));
-				spirit.setPlayer(player);
-				spirit.setRespawn(false);
-				spirit.init();
-				spirit.attack(player);
-				player.setAttribute("treeSpawned", true);
-				spirit.sendChat("You must defeat me before touching the tree!");
-				return true;
-			}
-			player.getPulseManager().run(new GatheringSkillPulse(player, (Scenery) node));
 			break;
 		case 2406:
 			final boolean dramenTeleport = player.getEquipment().containsItem(DRAMEN_STAFF) && quest.getStage(player) > 20 && player.getLocation().getX() <= 3201;
