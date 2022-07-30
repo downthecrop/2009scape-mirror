@@ -79,6 +79,7 @@ public final class DynamicRegion extends Region {
 		super(x, y);
 		this.regionId = regionId;
 		this.chunks = new RegionChunk[4][SIZE >> 3][SIZE >> 3];
+        RegionManager.resetFlags(getId());
 	}
 
 	public DynamicRegion(@NotNull ZoneBorders borders) {
@@ -370,20 +371,22 @@ public final class DynamicRegion extends Region {
 	}
 
 	@Override
-	public void flagInactive() {
+	public boolean flagInactive() {
 		if (!permanent) {
 			if (parentRegion != null && parentRegion.isActive()) {
 				parentRegion.checkInactive();
-				return;
+				return false;
 			}
 			if (linked != null) {
 				for (DynamicRegion r : linked) {
 					if (!r.isInactive(false)) {
-						return;
+						return false;
 					}
 				}
 			}
-			super.flagInactive();
+			if(!super.flagInactive()) {
+                return false;
+            }
 			for (RegionPlane plane : getPlanes()) {
 				for (int i = 0; i < plane.getNpcs().size(); i++) {
 					NPC npc = plane.getNpcs().get(0);
@@ -403,12 +406,16 @@ public final class DynamicRegion extends Region {
 			if (multicombat) {
 				toggleMulticombat();
 			}
+            boolean allLinkedInactive = true;
 			if (linked != null) {
 				for (DynamicRegion r : linked) {
-					r.flagInactive();
+					allLinkedInactive &= r.flagInactive();
 				}
 			}
-		}
+            return allLinkedInactive;
+		} else {
+            return true;
+        }
 	}
 
 	@Override

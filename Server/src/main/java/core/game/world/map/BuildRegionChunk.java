@@ -39,7 +39,13 @@ public class BuildRegionChunk extends RegionChunk {
 	public BuildRegionChunk(Location base, int rotation, RegionPlane plane) {
 		super(base, rotation, plane);
 		this.objects = new Scenery[ARRAY_SIZE][8][8];
-		this.objects[0] = super.objects;
+        for (int x = 0; x < SIZE; x++) {
+            for (int y = 0; y < SIZE; y++) {
+                if(super.objects[x][y] != null) {
+                    this.objects[0][x][y] = new Scenery(super.objects[x][y]);
+                }
+            }
+        }
 	}
 
 	@Override

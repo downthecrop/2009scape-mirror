@@ -162,6 +162,10 @@ public class Scenery extends Node {
 			childs = null;
 		}
 	}
+
+    public Scenery(Scenery other) {
+        this(other.getId(), other.getLocation(), other.getType(), other.getRotation());
+    }
 	
 	/**
 	 * Called when an object is removed.
