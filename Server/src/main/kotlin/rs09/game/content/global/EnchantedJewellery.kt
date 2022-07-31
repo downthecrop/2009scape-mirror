@@ -109,8 +109,8 @@ enum class EnchantedJewellery(
             arrayOf(
                     Location.create(2899, 3563, 0),
                     Location.create(2520, 3571, 0),
-                    Location.create(3179, 3685, 0),
                     Location.create(3266, 3686, 0),
+                    Location.create(3179, 3685, 0),
                     Location.create(2885, 4372, 2)
             ),
             true,
