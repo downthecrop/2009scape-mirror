@@ -1,6 +1,7 @@
 package core.game.node.entity.skill.runecrafting.abyss
 
 import api.*
+import core.game.node.Node
 import rs09.plugin.ClassScanner.definePlugin
 import rs09.tools.stringtools.colorize
 import rs09.game.system.SystemLogger.logInfo
@@ -13,24 +14,30 @@ import core.game.node.entity.skill.gather.SkillingTool
 import core.game.node.entity.skill.runecrafting.Altar
 import core.game.system.task.Pulse
 import core.game.world.map.Location
+import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
+import core.plugin.Initializable
 import core.tools.RandomFunction
+import org.rs09.consts.Items
 import org.rs09.consts.NPCs
+import org.rs09.consts.Vars
+import org.rs09.consts.Animations
+import org.rs09.consts.Graphics as Gfx
+import org.rs09.consts.Scenery as Sceneries
 import rs09.game.interaction.InteractionListener
 import rs09.game.world.GameWorld
+import kotlin.math.cos
+import kotlin.math.sin
+import kotlin.random.Random
 
 /**
  * A plugin used to handle the abyss.
+ * @author lila
  * @author cfunny
  */
+@Initializable
 class AbyssPlugin : InteractionListener {
-
-    val OBSTACLE = AbbysalObstacle.values().filter { it != AbbysalObstacle.MINE && it != AbbysalObstacle.SQUEEZE && it != AbbysalObstacle.PASSAGE && it != AbbysalObstacle.CHOP }.map { it.option }.toTypedArray()
-    val miningObstacle = 7158
-    val agilityObstacle = 7164
-    val passage = 7154
-    val chopObstacle = 7161
 
     override fun defineListeners() {
         definePlugin(AbyssalNPC())
@@ -49,422 +56,312 @@ class AbyssPlugin : InteractionListener {
             altar?.enterRift(player)
             return@on true
         }
-        on(SCENERY, *OBSTACLE){ player, node ->
-            val obstacle = AbbysalObstacle.forObject(node as Scenery)
-            obstacle!!.handle(player, node as Scenery)
+        on(Sceneries.PASSAGE_7154, SCENERY, "go-through",){ player, node ->
+            player.properties.teleportLocation = innerRing(node)
             return@on true
         }
-        on(miningObstacle, SCENERY, "mine"){ player, node ->
-            val obstacle = AbbysalObstacle.forObject(node as Scenery)
-            obstacle!!.handle(player, node as Scenery)
-            return@on true
+        on(Sceneries.ROCK_7158, SCENERY, "mine"){ player, node ->
+            val tool: SkillingTool? = getTool(player, true)
+            if (tool == null) {
+                sendMessage(player, "You need a pickaxe in order to do that.")
+                return@on true
+            }
+            return@on handleObstacle(
+                node,
+                player,
+                Skills.MINING,
+                MINE_PROGRESS,
+                tool.animation,
+                arrayOf(
+                    "You attempt to mine your way through...",
+                    "...and manage to break through the rock.",
+                    "...but fail to break-up the rock."
+                )
+            )
         }
-        on(agilityObstacle, SCENERY, "squeeze-through"){ player, node ->
-            val obstacle = AbbysalObstacle.forObject(node as Scenery)
-            obstacle!!.handle(player, node as Scenery)
-            return@on true
+        on(Sceneries.TENDRILS_7161, SCENERY, "chop"){ player, node ->
+            val tool: SkillingTool? = getTool(player, false)
+            if (tool == null) {
+                sendMessage(player, "You need an axe in order to do that.")
+                return@on true
+            }
+            return@on handleObstacle(
+                node,
+                player,
+                Skills.WOODCUTTING,
+                CHOP_PROGRESS,
+                tool.animation,
+                arrayOf(
+                    "You attempt to chop your way through...",
+                    "...and manage to chop down the tendrils.",
+                    "...but fail to cut through the tendrils."
+                )
+            )
         }
-        on(passage, SCENERY, "go-through",){ player, node ->
-            val obstacle = AbbysalObstacle.forObject(node as Scenery)
-            obstacle!!.handle(player, node as Scenery)
-            return@on true
+        on(Sceneries.BOIL_7165, SCENERY, "burn-down"){ player, node ->
+            if (!inInventory(player, Items.TINDERBOX_590)) {
+                sendMessage(player, "You don't have a tinderbox to burn it.")
+                return@on true
+            }
+            // TODO: i vaguely remember there being burn graphics for the boil. find if this is indeed true, and if so, find gfx id
+            return@on handleObstacle(
+                node,
+                player,
+                Skills.FIREMAKING,
+                BURN_PROGRESS,
+//                Animation(Animations.HUMAN_LIGHT_FIRE_WITH_TINDERBOX_733),
+                Animation(733),
+                arrayOf(
+                    "You attempt to burn your way through...",
+                    "...and manage to burn it down and get past.",
+                    "...but fail to set it on fire."
+                )
+            )
         }
-        on(chopObstacle, SCENERY, "chop"){ player, node ->
-            val obstacle = AbbysalObstacle.forObject(node as Scenery)
-            obstacle!!.handle(player, node as Scenery)
-            return@on true
+        on(Sceneries.EYES_7168, SCENERY, "distract"){ player, node ->
+            val distractEmote = Animation(distractEmotes[RandomFunction.random(0,distractEmotes.size)])
+            return@on handleObstacle(
+                node,
+                player,
+                Skills.THIEVING,
+                DISTRACT_PROGRESS,
+                distractEmote,
+                arrayOf(
+                    "You use your thieving skills to misdirect the eyes...",
+                    "...and sneak past while they're not looking.",
+                    "...but fail to distract the eyes."
+                )
+            )
         }
-
+        on(Sceneries.GAP_7164, SCENERY, "squeeze-through"){ player, node ->
+            return@on handleObstacle(
+                node,
+                player,
+                Skills.AGILITY,
+                null,
+//                Animation(Animations.HUMAN_SQUEEZE_INTO_GAP_1331),
+                Animation(1331),
+                arrayOf(
+                    "You attempt to squeeze through the narrow gap...",
+                    "...and you manage to crawl through.",
+                    "...but fail to crawl through."
+                )
+            )
+        }
     }
 
     /**
-     * Represents an obstacle in an abbsyal.
-     * @author cfunny
-     * @date 02/11/2013
+     * emotes used for the eyes obstacle
      */
-    enum class AbbysalObstacle(
-        /**
-         * Represents the option.
-         */
-        val option: String,
-        /**
-         * Represents the corssing location.
-         */
-        val locations: Array<Location>,
-        /**
-         * Represents the object id.
-         */
-        vararg val objects: Int
-    ) {
-        BOIL("burn-down", arrayOf(Location.create(3024, 4833, 0), Location.create(3053, 4830, 0)), 7165) {
-            override fun handle(player: Player, `object`: Scenery?) {
-                `object` ?: return
-                if (!inInventory(player, 590, 1)) {
-                    sendMessage(player, "You don't have a tinderbox to burn it.")
-                    return
-                }
-                player.animate(Animation(733))
-                player.lock()
-                GameWorld.Pulser.submit(object : Pulse(1, player) {
-                    var count = 0
-                    override fun pulse(): Boolean {
-                        when (count) {
-                            1 -> sendMessage(player, "You attempt to burn your way through..")
-                            4 -> return if (RandomFunction.random(100) < getStatLevel(
-                                    player,
-                                    Skills.FIREMAKING
-                                )
-                            ) {
-                                sendMessage(
-                                    player,
-                                    colorize("%G...and manage to burn it down and get past.")
-                                )
-                                player.properties.teleportLocation = locations[getIndex(`object`)]
-                                player.unlock()
-                                true
-                            } else {
-                                sendMessage(player, colorize("%RYou fail to set it on fire."))
-                                player.unlock()
-                                true
-                            }
-                        }
-                        count++
-                        return false
-                    }
-
-                    override fun stop() {
-                        super.stop()
-                        player.animate(Animation(-1, Animator.Priority.HIGH))
-                    }
-                })
-            }
-        },
-        MINE("mine", arrayOf(Location.create(3030, 4821, 0), Location.create(3048, 4822, 0)), 7158, 7153) {
-            override fun handle(player: Player, `object`: Scenery?) {
-                `object` ?: return
-                logInfo("handled abyss mine")
-                val tool: SkillingTool = getTool(player, true) ?: return
-                if (tool == null) {
-                    sendMessage(player, "You need a pickaxe in order to do that.")
-                    return
-                }
-                player.animate(tool.getAnimation())
-                player.lock()
-                GameWorld.Pulser.submit(object : Pulse(1, player) {
-                    var count = 0
-                    override fun pulse(): Boolean {
-                        when (count) {
-                            1 -> sendMessage(player, "You attempt to mine your way through..")
-                            4 -> return if (RandomFunction.random(100) < getStatLevel(
-                                    player,
-                                    Skills.MINING
-                                )
-                            ) {
-                                sendMessage(player, colorize("%G...and manage to break through the rock."))
-                                player.properties.teleportLocation = locations[getIndex(`object`)]
-                                player.unlock()
-                                true
-                            } else {
-                                sendMessage(player, colorize("%R...but fail to break-up the rock."))
-                                player.unlock()
-                                true
-                            }
-                        }
-                        count++
-                        return false
-                    }
-
-                    override fun stop() {
-                        super.stop()
-                        player.animate(Animation(-1, Animator.Priority.HIGH))
-                    }
-                })
-            }
-        },
-        CHOP("chop", arrayOf(Location.create(3050, 4824, 0), Location.create(3028, 4824, 0)), 7161, 7144) {
-            override fun handle(player: Player, `object`: Scenery?) {
-                `object` ?: return
-                val tool: SkillingTool? = setTool(false, player)
-                if (tool == null) {
-                    player.packetDispatch.sendMessage("You need an axe in order to do that.")
-                    return
-                }
-                player.animate(tool.getAnimation())
-                player.lock()
-                GameWorld.Pulser.submit(object : Pulse(1, player) {
-                    var count = 0
-                    override fun pulse(): Boolean {
-                        when (count) {
-                            1 -> sendMessage(player, "You attempt to chop your way through...")
-                            4 -> return if (RandomFunction.random(100) < getStatLevel(
-                                    player,
-                                    Skills.WOODCUTTING
-                                )
-                            ) {
-                                sendMessage(player, colorize("%G...and manage to chop down the tendrils."))
-                                player.properties.teleportLocation = locations[getIndex(`object`)]
-                                player.unlock()
-                                true
-                            } else {
-                                sendMessage(player, colorize("%RYou fail to cut through the tendrils."))
-                                player.unlock()
-                                true
-                            }
-                        }
-                        count++
-                        return false
-                    }
-
-                    override fun stop() {
-                        super.stop()
-                        player.animate(Animation(-1, Animator.Priority.HIGH))
-                    }
-                })
-            }
-        },
-        SQUEEZE(
-            "squeeze-through",
-            arrayOf(Location.create(3048, 4842, 0), Location.create(3031, 4842, 0)),
-            7164,
-            7147
-        ) {
-            override fun handle(player: Player, `object`: Scenery?) {
-                `object` ?: return
-                player.animate(Animation(1331))
-                player.lock()
-                GameWorld.Pulser.submit(object : Pulse(1, player) {
-                    var count = 0
-                    override fun pulse(): Boolean {
-                        when (count) {
-                            1 -> sendMessage(player, "You attempt to squeeze through the narrow gap...")
-                            4 -> return if (RandomFunction.random(100) < getStatLevel(
-                                    player,
-                                    Skills.AGILITY
-                                )
-                            ) {
-                                sendMessage(player, colorize("%G...and you manage to crawl through."))
-                                player.properties.teleportLocation = locations[getIndex(`object`)]
-                                player.unlock()
-                                true
-                            } else {
-                                sendMessage(player, colorize("%RYou fail to squeeze through the narrow gap"))
-                                player.unlock()
-                                true
-                            }
-                        }
-                        count++
-                        return false
-                    }
-
-                    override fun stop() {
-                        super.stop()
-                        player.animate(Animation(-1, Animator.Priority.HIGH))
-                    }
-                })
-            }
-        },
-        DISTRACT("distract", arrayOf(Location.create(3029, 4841, 0), Location.create(3051, 4838, 0)), 7168, 7150) {
-            override fun handle(player: Player, `object`: Scenery?) {
-                `object` ?: return
-                val emotes = intArrayOf(
-                    855,
-                    856,
-                    857,
-                    858,
-                    859,
-                    860,
-                    861,
-                    862,
-                    863,
-                    864,
-                    865,
-                    866,
-                    2113,
-                    2109,
-                    2111,
-                    2106,
-                    2107,
-                    2108,
-                    0x558,
-                    2105,
-                    2110,
-                    2112,
-                    0x84F,
-                    0x850,
-                    1131,
-                    1130,
-                    1129,
-                    1128,
-                    1745,
-                    3544,
-                    3543,
-                    2836
-                )
-                val index: Int = RandomFunction.random(emotes.size)
-                player.animate(Animation(emotes[index]))
-                player.lock()
-                GameWorld.Pulser.submit(object : Pulse(1, player) {
-                    var count = 0
-                    override fun pulse(): Boolean {
-                        when (count) {
-                            1 -> sendMessage(player, "You use your thieving skills to misdirect the eyes...")
-                            4 -> return if (RandomFunction.random(100) < getStatLevel(
-                                    player,
-                                    Skills.THIEVING
-                                )
-                            ) {
-                                sendMessage(
-                                    player,
-                                    colorize("%G...and sneak past while they're not looking.")
-                                )
-                                player.properties.teleportLocation = locations[getIndex(`object`)]
-                                player.unlock()
-                                true
-                            } else {
-                                sendMessage(player, colorize("%RYou fail to distract the eyes."))
-                                player.unlock()
-                                true
-                            }
-                        }
-                        count++
-                        return false
-                    }
-
-                    override fun stop() {
-                        super.stop()
-                        player.animate(Animation(-1, Animator.Priority.HIGH))
-                    }
-                })
-            }
-        },
-        PASSAGE("go-through", arrayOf(Location.create(3040, 4844, 0)), 7154) {
-            override fun handle(player: Player, `object`: Scenery?) {
-                player.properties.teleportLocation = locations[0]
-            }
-        };
-        /**
-         * Gets the option.
-         * @return The option.
-         */
-        /**
-         * Gets the locations.
-         * @return The locations.
-         */
-        /**
-         * Gets the objects.
-         * @return The objects.
-         */
-
-        /**
-         * Method used to get the index.
-         * @param object the object.
-         * @return the index.
-         */
-        fun getIndex(`object`: Scenery): Int {
-            for (i in objects.indices) {
-                if (objects[i] == `object`.getId()) {
-                    return i
-                }
-            }
-            return 0
-        }
-
-        /**
-         * Method used to handle the obstacle.
-         * @param player the player.
-         * @param object the object.
-         */
-        open fun handle(player: Player, `object`: Scenery?) {}
-
-        companion object {
-            /**
-             * Method used to get the abbysal obstacle.
-             * @param object the object.
-             * @return the `AbbysalObstacle` or `Null`.
-             */
-            fun forObject(`object`: Scenery): AbbysalObstacle? {
-                for (obstacle in values()) {
-                    for (i in obstacle.objects) {
-                        if (i == `object`.getId()) {
-                            return obstacle
-                        }
-                    }
-                }
-                return null
-            }
-
-            /**
-             * Sets the tool used.
-             */
-            private fun setTool(mining: Boolean, player: Player): SkillingTool? {
-                var tool: SkillingTool? = null
-                if (!mining) {
-                    if (checkTool(player, SkillingTool.DRAGON_AXE)) {
-                        tool = SkillingTool.DRAGON_AXE
-                    } else if (checkTool(player, SkillingTool.RUNE_AXE)) {
-                        tool = SkillingTool.RUNE_AXE
-                    } else if (checkTool(player, SkillingTool.ADAMANT_AXE)) {
-                        tool = SkillingTool.ADAMANT_AXE
-                    } else if (checkTool(player, SkillingTool.MITHRIL_AXE)) {
-                        tool = SkillingTool.MITHRIL_AXE
-                    } else if (checkTool(player, SkillingTool.BLACK_AXE)) {
-                        tool = SkillingTool.BLACK_AXE
-                    } else if (checkTool(player, SkillingTool.STEEL_AXE)) {
-                        tool = SkillingTool.STEEL_AXE
-                    } else if (checkTool(player, SkillingTool.IRON_AXE)) {
-                        tool = SkillingTool.IRON_AXE
-                    } else if (checkTool(player, SkillingTool.BRONZE_AXE)) {
-                        tool = SkillingTool.BRONZE_AXE
-                    }
-                } else {
-                    if (checkTool(player, SkillingTool.RUNE_PICKAXE)) {
-                        tool = SkillingTool.RUNE_PICKAXE
-                    } else if (checkTool(player, SkillingTool.ADAMANT_PICKAXE)) {
-                        tool = SkillingTool.ADAMANT_PICKAXE
-                    } else if (checkTool(player, SkillingTool.MITHRIL_PICKAXE)) {
-                        tool = SkillingTool.MITHRIL_PICKAXE
-                    } else if (checkTool(player, SkillingTool.STEEL_PICKAXE)) {
-                        tool = SkillingTool.STEEL_PICKAXE
-                    } else if (checkTool(player, SkillingTool.IRON_PICKAXE)) {
-                        tool = SkillingTool.IRON_PICKAXE
-                    } else if (checkTool(player, SkillingTool.BRONZE_PICKAXE)) {
-                        tool = SkillingTool.BRONZE_PICKAXE
-                    }
-                }
-                return tool
-            }
-
-            /**
-             * Checks if the player has a tool and if he can use it.
-             * @param tool The tool.
-             * @return `True` if the tool is usable.
-             */
-            private fun checkTool(player: Player, tool: SkillingTool): Boolean {
-                return if (player.equipment.contains(tool.getId(), 1)) {
-                    true
-                } else player.inventory.contains(tool.getId(), 1)
-            }
-        }
-    }
+    private val distractEmotes = intArrayOf(
+        855,
+        856,
+        857,
+        858,
+        859,
+        860,
+        861,
+        862,
+        863,
+        864,
+        865,
+        866,
+        2113,
+        2109,
+        2111,
+        2106,
+        2107,
+        2108,
+        0x558,
+        2105,
+        2110,
+        2112,
+        0x84F,
+        0x850,
+        1131,
+        1130,
+        1129,
+        1128,
+        1745,
+        3544,
+        3543,
+        2836
+    )
 
     companion object {
+
         /**
-         * Represents the teleporting to the abyss.
-         * @param player the player.
+         * varp bit offset for the abyss obstacles varbits
+         */
+        const val ABYSS_OBSTACLES = 18
+        // varp value, until the constant is defined in consntlib
+        const val VARP_SCENERY_ABYSS = 491
+
+        /**
+         * Represents teleporting to the abyss,
+         * including randomized location and rotating obstacles accordingly
          */
         fun teleport(player: Player, npc: NPC) {
+
+            var teleportLoc = AbyssLoc.randomLoc()
+            while(!teleportLoc.isValid()) {
+                teleportLoc = teleportLoc.attract()
+            }
+
             player.lock(3)
+//            npc.visualize(Animation(Animations.MAGE_OF_ZAMORAK_TELEOTHER_1979), Graphics(Gfx.TELEOTHER_PURPLE_BEAMS_4))
             npc.visualize(Animation(1979), Graphics(4))
             npc.sendChat("Veniens! Sallakar! Rinnesset!")
             player.skills.decrementPrayerPoints(100.0)
             player.skullManager.checkSkull(player)
             GameWorld.Pulser.submit(object : Pulse(2, player) {
                 override fun pulse(): Boolean {
-                    player.properties.teleportLocation = Location.create(3021, 4847, 0)
+                    rotateObstacles(player,teleportLoc)
+                    player.properties.teleportLocation = teleportLoc.toAbs()
                     npc.updateMasks.reset()
                     return true
                 }
             })
+        }
+
+        /**
+         * Represents getting the inner ring location corresponding to a node in the outer ring.
+         * Used to send a player to the inner ring when they pass an obstacle.
+         */
+        fun innerRing(node: Node): Location {
+            val obstacleLoc = AbyssLoc.fromAbs(node.location)
+            var loc = obstacleLoc.attract(5)
+            while (!loc.isValid()) {
+                loc = loc.attract()
+            }
+            return loc.toAbs()
+        }
+
+
+        /**
+         * Represents rotating the abyssal obstacles for the player.
+         * Used to make sure the player lands by the blocked obstacle.
+         */
+        fun rotateObstacles(player: Player, abyssLoc: AbyssLoc) {
+                setVarbit(player,VARP_SCENERY_ABYSS,ABYSS_OBSTACLES,abyssLoc.getSegment(),true)
+        }
+
+        /**
+         * Handles attempts at passing abyssal obstacles to get from outer ring to inner ring
+         */
+        const val MINE_PROGRESS = 12
+        const val CHOP_PROGRESS = 14
+        const val BURN_PROGRESS = 16
+        const val DISTRACT_PROGRESS = 18
+        fun handleObstacle(obstacle: Node, player: Player, skill: Int, varbitVal: Int?, animation: Animation, messages: Array<String>): Boolean {
+            logInfo("handled abyss ${obstacle.name}")
+            player.lock()
+            player.animate(animation)
+            GameWorld.Pulser.submit(object : Pulse(1, player) {
+                var count = 0
+                override fun pulse(): Boolean {
+                    when (count++) {
+                        1 -> sendMessage(player, messages[0])
+                        3 -> return if (RandomFunction.random(100) < getStatLevel(player,skill)
+                        ) {
+                            sendMessage(player, colorize("%G${messages[1]}"))
+                            if(varbitVal != null) { setVarbit(player,VARP_SCENERY_ABYSS,ABYSS_OBSTACLES,varbitVal) }
+                            false
+                        } else {
+                            sendMessage(player, colorize("%R${messages[2]}"))
+                            player.unlock()
+                            true
+                        }
+                        5 -> {
+                            if(varbitVal != null) { setVarbit(player,VARP_SCENERY_ABYSS,ABYSS_OBSTACLES,varbitVal or 1) }
+                        }
+                        7 -> {
+                            player.unlock()
+                            player.properties.teleportLocation = innerRing(obstacle)
+                            return true
+                        }
+                    }
+                    return false
+                }
+
+                override fun stop() {
+                    super.stop()
+                    player.animate(Animation(-1, Animator.Priority.HIGH))
+                }
+            })
+            return true
+        }
+    }
+}
+
+/**
+ * Polar coordinates class for abyss
+ * @author lila
+ */
+class AbyssLoc(val radius: Double, val angle: Double) {
+
+    /**
+     * Attract the location towards the center
+     */
+    fun attract(steps: Int = 1): AbyssLoc {
+        return AbyssLoc(radius-steps.toDouble(),angle)
+    }
+
+    /**
+     * Get the segment of an abyssloc - its angle as an integer modulo 12, with south = 0 and positive = clockwise
+     * this is used to determine which of the 12 evenly spaced obstacles around the outer ring the location is nearest to
+     */
+    fun getSegment() : Int {
+        val segments = 12
+        val angleToCircle = angle * segments / ( 2 * Math.PI )
+        val angleSegment = (angleToCircle + 0.5).toInt()
+        // now 'normalize' the segment, so that 0 is the southernmost obstacle and 1 is clockwise from it
+        val normalSegment = ( 9 - angleSegment ).mod(12)
+        return normalSegment
+    }
+
+    /**
+     * Transform back to absolute coordinates
+     */
+    fun toAbs() : Location {
+        val x = (radius * cos(angle)).toInt()
+        val y = (radius * sin(angle)).toInt()
+        return origin.transform(x,y,0)
+    }
+
+    /**
+     * Check if location is valid
+     */
+    fun isValid() : Boolean {
+        val abs = toAbs()
+        return (RegionManager.isTeleportPermitted(abs) && RegionManager.getObject(abs) == null)
+    }
+    companion object {
+
+        /**
+         * origin and outer radius values of the abyss itself
+         */
+        // origin: the exact center of the abyss, inside that spinny ball thing
+        val origin = Location(3039,4832,0)
+        // the outer ring is generally at radius 24-26; testing shows that a minimum of 25.1 guarantees that players don't end up on an obstacle or inner wall
+        const val outerRadius = 25.1
+
+        /**
+         * turn an absolute location into an abyss location
+         */
+        fun fromAbs(loc: Location) : AbyssLoc {
+            val local = Location.getDelta(origin,loc)
+            val radius = Math.sqrt((local.x * local.x + local.y * local.y).toDouble())
+            val angle = Math.atan2(local.y.toDouble(),local.x.toDouble())
+            return AbyssLoc(radius,angle)
+        }
+
+        /**
+         * get a random location around the abyss outer ring
+         */
+        fun randomLoc() : AbyssLoc {
+            val angle = Random.nextDouble() * 2 * Math.PI
+            return AbyssLoc(outerRadius,angle)
         }
     }
 }
