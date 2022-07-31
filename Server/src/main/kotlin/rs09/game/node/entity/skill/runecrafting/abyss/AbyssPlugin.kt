@@ -264,11 +264,11 @@ class AbyssPlugin : InteractionListener {
                         1 -> sendMessage(player, messages[0])
                         3 -> return if (RandomFunction.random(100) < getStatLevel(player,skill)
                         ) {
-                            sendMessage(player, colorize("%G${messages[1]}}"))
+                            sendMessage(player, colorize("%G${messages[1]}"))
                             if(varbitVal != null) { setVarbit(player,VARP_SCENERY_ABYSS,ABYSS_OBSTACLES,varbitVal) }
                             false
                         } else {
-                            sendMessage(player, colorize("%R${messages[2]}}"))
+                            sendMessage(player, colorize("%R${messages[2]}"))
                             player.unlock()
                             true
                         }
