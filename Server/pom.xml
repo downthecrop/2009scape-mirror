@@ -93,6 +93,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-install-plugin</artifactId>
+        <version>3.0.1</version>
         <executions>
           <execution>
             <id>install-consts</id>
@@ -132,7 +133,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
-        <version>3.1.1</version>
+        <version>3.4.2</version>
 
         <configuration>
           <descriptorRefs>
@@ -185,8 +186,9 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.5.1</version>
+        <version>3.10.1</version>
         <configuration>
+          <maxmem>1024m</maxmem>
           <useIncrementalCompilation>false</useIncrementalCompilation>
         </configuration>
         <executions>
