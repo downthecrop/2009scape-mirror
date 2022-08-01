@@ -31,6 +31,7 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.plugin.ClassScanner;
+import org.rs09.consts.Items;
 
 /**
  * Handles the waterbirth dungeon zone.
@@ -236,6 +237,22 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 			}
 			return this;
 		}
+		
+		/**
+		 * function to handle activation of pressure pads
+		 * allows both players and pet rocks to activate the pad
+		 * TODO: pet rocks dropped on a pressure pad should show up as a yellow dot on the minimap
+		 * TODO: should pet rocks dropped on a pressure pad be global to all players, or usable only by the dropping player?
+		 */
+		private boolean pressurePadActivated(Location location, Player player) {
+			if (RegionManager.getLocalPlayers(location,0).size() > 0) {
+				return true;
+			}
+			if (RegionManager.getRegionPlane(location).getItem(Items.PET_ROCK_3695,location,player) != null) {
+				return true;
+			}
+			return false;
+		}
 
 		@Override
 		public boolean handle(Player player, Node node, String option) {
@@ -245,7 +262,7 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 			case 8960:
 				boolean behind = player.getLocation().getX() >= 2492;
 				if (!behind) {
-					if (RegionManager.getLocalPlayers(node.getLocation().transform(-1, 0, 0), 0).size() == 0 || RegionManager.getLocalPlayers(node.getLocation().getLocation().transform(-1, 2, 0), 0).size() == 0) {
+					if (!pressurePadActivated(node.getLocation().transform(-1, 0, 0),player) || !pressurePadActivated(node.getLocation().transform(-1, 2, 0),player)) {
 						player.sendMessage("You cannot see a way to open this door...");
 						break;
 					}
