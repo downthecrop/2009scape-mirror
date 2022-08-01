@@ -5,6 +5,7 @@ import FarmerDialogue.Companion.FARMER_FLAG_LINES
 import WinkinDialogue
 import api.*
 import core.game.component.Component
+import core.game.content.dialogue.FacialExpression
 import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
 import core.game.node.entity.Entity
@@ -14,6 +15,7 @@ import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
+import core.game.node.entity.state.EntityState
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
@@ -499,6 +501,10 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
         object VinesweeperTeleport {
             @JvmStatic
             fun teleport(npc: NPC, player: Player) {
+                if (player.stateManager.hasState(EntityState.TELEBLOCK)) {
+                    sendNPCDialogue(player, npc.id, "I can't do that, you're teleblocked!", FacialExpression.OLD_ANGRY1)
+                    return
+                }
                 npc.animate(Animation(437))
                 npc.faceTemporary(player, 1)
                 npc.graphics(Graphics(108))
