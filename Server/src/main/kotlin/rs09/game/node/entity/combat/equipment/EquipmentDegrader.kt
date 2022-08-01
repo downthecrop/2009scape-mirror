@@ -56,7 +56,7 @@ class EquipmentDegrader{
             charge = 0
         }
         if(this.charge <= 0) {
-            val charges = itemCharges.getOrElse(this.id, { 1000 })
+            val charges = itemCharges.getOrElse(this.id) { 1000 }
             if (set?.size!! > 2) {
                 p?.equipment?.remove(this)
                 p?.sendMessage("Your $name has degraded.")
@@ -68,7 +68,7 @@ class EquipmentDegrader{
                     p?.equipment?.refresh()
                 }
             } else if (set.size == 2) {
-                if(set.isLast(set.indexOf(this.id))){
+                if(set.isLast(this.id)){
                     p?.equipment?.remove(this)
                     p?.sendMessage("Your $name degrades into dust.")
                 } else {
