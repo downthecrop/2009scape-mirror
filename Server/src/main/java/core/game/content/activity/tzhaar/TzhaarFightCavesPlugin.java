@@ -261,7 +261,8 @@ public final class TzhaarFightCavesPlugin extends ActivityPlugin {
 
 		/* Kludge to fix this plugin overriding the base NPC death finalization
 		 * resulting in not dispatching the proper NPC kill event. */
-		killer.dispatch(new NPCKillEvent(e.asNpc()));
+		if (e instanceof NPC)
+			killer.dispatch(new NPCKillEvent(e.asNpc()));
 		return true;
 	}
 

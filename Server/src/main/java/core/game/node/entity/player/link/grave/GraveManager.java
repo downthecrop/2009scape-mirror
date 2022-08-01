@@ -84,7 +84,7 @@ public class GraveManager {
 		if (player.getDetails().getRights() == Rights.ADMINISTRATOR && GameWorld.getSettings().isHosted()) {
 			return false;
 		}
-		if (player.getSkullManager().isWilderness()) {
+		if (player.getSkullManager().isSkulled()) {
 			return false;
 		}
 		if (player.getInventory().itemCount() + player.getEquipment().itemCount() <= (player.getPrayer().get(PrayerType.PROTECT_ITEMS) ? 4 : 3)) {

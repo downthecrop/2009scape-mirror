@@ -1,5 +1,6 @@
 package rs09.game.interaction.npc
 
+import api.sendMessage
 import core.game.content.quest.miniquest.barcrawl.BarcrawlManager
 import core.game.content.quest.miniquest.barcrawl.BarcrawlType
 import core.game.node.entity.npc.NPC
@@ -41,6 +42,16 @@ class NPCTalkListener : InteractionListener {
             if (!npc.getAttribute("facing_booth", false)) {
                 npc.faceLocation(player.location)
             }
+            // ---------------- THESE DIALOGUES ARE INAUTHENTIC BUT ARE COPING FOR A CORE ISSUE -----------------------
+            if (player.properties.combatPulse.getVictim() == npc) {
+                sendMessage(player, "I don't think they have any interest in talking to me right now!")
+                return@on true
+            }
+            if (npc.inCombat()) {
+                sendMessage(player, "They look a bit busy at the moment.")
+                return@on true
+            }
+            //---------------------------------------------------------------------------------------------------------
             //I'm sorry for this but it was honestly the best way to do this
             if (player.getAttribute(GC_BASE_ATTRIBUTE + ":" + GC_JOB_ORDINAL, -1) != -1) {
                 val job = GnomeCookingJob.values()[player.getAttribute(GC_BASE_ATTRIBUTE + ":" + GC_JOB_ORDINAL, -1)]
