@@ -201,7 +201,7 @@ public class WoodcuttingSkillPulse extends Pulse {
         //OSRS and RS3 Wikis both agree: All trees present in 2009 are a 1/8 fell chance, aside from normal trees/dead trees which are 100%
         //OSRS: https://oldschool.runescape.wiki/w/Woodcutting scroll down to the mechanics section
         //RS3 : https://runescape.wiki/w/Woodcutting scroll down to the mechanics section, and expand the tree felling chances table
-        if (resource.getRespawnRate() != 0) {
+        if (resource.getRespawnRate() > 0) {
             if (RandomFunction.roll(8) || resource.identifier == 1 || resource.identifier == 2 || resource.identifier == 6) {
                 if (resource.isFarming()) {
                     FarmingPatch fPatch = FarmingPatch.forObject(node.asScenery());
