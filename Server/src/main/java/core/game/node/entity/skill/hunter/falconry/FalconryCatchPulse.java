@@ -93,7 +93,8 @@ public final class FalconryCatchPulse extends SkillPulse<NPC> {
 				player.getEquipment().add(GLOVE, true, false);
 				sendProjectile();
 			}
-			player.lock(getDistance());
+			node.lock();
+			player.lock(getDistance()+1);
 		}
 		return true;
 	}
@@ -114,7 +115,6 @@ public final class FalconryCatchPulse extends SkillPulse<NPC> {
 			return false;
 		}
 		final boolean success = success();
-		player.lock();
 		player.getPacketDispatch().sendMessage(success ? "The falcon successfully swoops down and captures the kebbit." : "The falcon swoops down on the kebbit, but just misses catching it.");
 		if (success) {
 			node.finalizeDeath(player);
@@ -142,7 +142,7 @@ public final class FalconryCatchPulse extends SkillPulse<NPC> {
 				player.getEquipment().add(FALCON, true, false);
 			}
 		}
-		player.unlock();
+		node.unlock();
 		player.face(null);
 		return true;
 	}
