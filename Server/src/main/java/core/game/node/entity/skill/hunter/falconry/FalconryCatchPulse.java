@@ -93,7 +93,7 @@ public final class FalconryCatchPulse extends SkillPulse<NPC> {
 				player.getEquipment().add(GLOVE, true, false);
 				sendProjectile();
 			}
-			node.lock();
+			node.lock(getDistance()+1);
 			player.lock(getDistance()+1);
 		}
 		return true;
@@ -142,7 +142,6 @@ public final class FalconryCatchPulse extends SkillPulse<NPC> {
 				player.getEquipment().add(FALCON, true, false);
 			}
 		}
-		node.unlock();
 		player.face(null);
 		return true;
 	}
