@@ -115,6 +115,12 @@ class ItemQuestRequirementListener : InteractionListener {
             return@onEquip true
         }
 
-
+        onEquip(Items.ELEMENTAL_SHIELD_2890) { player, _ ->
+            if (!isQuestComplete(player, "Elemental Workshop I")) {
+                sendMessage(player, "You must have completed Elemental Workshop I to equip this.")
+                return@onEquip false
+            }
+            return@onEquip true
+        }
     }
 }

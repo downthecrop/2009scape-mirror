@@ -70,7 +70,7 @@ public final class LumbridgeGuideDialogue extends DialoguePlugin {
 			if (player.getRights() == Rights.PLAYER_MODERATOR && ModeratorZone.isOpen() || player.isAdmin()) {
 				options.add("I would like to access the P-Mod room.");
 			}
-			if (player.getIronmanManager().isIronman()) {
+			if (player.getIronmanManager().isIronman() && player.getIronmanManager().getMode() != IronmanMode.HARDCORE) {
 				options.add("Would you like to remove Ironman Mode?");
 			}
 			options(options.toArray(new String[] {}));
