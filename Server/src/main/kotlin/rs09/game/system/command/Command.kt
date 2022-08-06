@@ -1,6 +1,7 @@
 package rs09.game.system.command
 
 import core.game.node.entity.player.Player
+import rs09.ServerConstants
 import rs09.game.world.GameWorld
 import kotlin.collections.ArrayList
 
@@ -11,7 +12,7 @@ import kotlin.collections.ArrayList
 class Command(val name: String, val privilege: Privilege, val usage: String = "UNDOCUMENTED", val description: String = "UNDOCUMENTED", val handle: (Player, Array<String>) -> Unit) {
     fun attemptHandling(player: Player, args: Array<String>?){
         args ?: return
-        if(player.rights.ordinal >= privilege.ordinal || GameWorld.settings?.isDevMode == true){
+        if(player.rights.ordinal >= privilege.ordinal || GameWorld.settings?.isDevMode == true || ServerConstants.I_AM_A_CHEATER){
             handle(player,args)
         }
     }
