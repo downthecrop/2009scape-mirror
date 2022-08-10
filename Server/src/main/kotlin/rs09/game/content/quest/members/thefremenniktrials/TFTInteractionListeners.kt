@@ -61,7 +61,7 @@ class TFTInteractionListeners : InteractionListener{
         }
 
         onUseWith(SCENERY,FISH_ALTAR,*FISH){ player, _, fish ->
-            if(inInventory(player,Items.LYRE_3689)) {
+            if(inInventory(player,Items.LYRE_3689) || inInventory(player,Items.ENCHANTED_LYRE_3690)) {
                 Pulser.submit(SpiritPulse(player, fish.id))
             } else {
                 sendMessage(player,"I should probably have my lyre with me.")
@@ -331,7 +331,7 @@ class TFTInteractionListeners : InteractionListener{
                 2 -> npc.face(player).also { player.face(npc) }
                 3 -> player.dialogueInterpreter?.sendDialogues(npc,
                     FacialExpression.HAPPY,"I will kindly accept this offering, and","bestow upon you a gift in return.")
-                4 -> removeItem(player,Items.LYRE_3689)
+                4 -> if(!removeItem(player,Items.LYRE_3689)) { removeItem(player,Items.ENCHANTED_LYRE_3690) }
                 5 -> when(fish){
                     383 -> addItem(player,Items.ENCHANTED_LYRE2_6125)
                     389 -> addItem(player,Items.ENCHANTED_LYRE3_6126)
@@ -444,7 +444,7 @@ class TFTInteractionListeners : InteractionListener{
                     setAttribute(player,"/save:lyreConcertPlayed",true)
                     player.removeAttribute("LyreEnchanted")
                     if(removeItem(player,Lyre))
-                        addItem(player,3689)
+                        addItem(player,Items.ENCHANTED_LYRE_3690)
                     player.unlock()
                 }
             }
