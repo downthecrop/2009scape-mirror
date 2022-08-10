@@ -1064,9 +1064,12 @@ fun runWorldTask(task: () -> Unit): Pulse {
  * @param loc the Location object to move them to
  * @param type the teleport type to use (defaults to instant). An enum exists as TeleportManager.TeleportType.
  */
-fun teleport(entity: Entity, loc: Location, type: TeleportManager.TeleportType = TeleportManager.TeleportType.INSTANT) {
-    if (type == TeleportManager.TeleportType.INSTANT) entity.properties.teleportLocation = loc
-    else entity.teleporter.send(loc, type)
+fun teleport(entity: Entity, loc: Location, type: TeleportManager.TeleportType = TeleportManager.TeleportType.INSTANT) : Boolean {
+    if (type == TeleportManager.TeleportType.INSTANT) {
+        entity.properties.teleportLocation = loc
+        return true
+    }
+    else return entity.teleporter.send(loc, type)
 }
 
 /**
