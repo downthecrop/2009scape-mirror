@@ -17,9 +17,10 @@ object RulesAndInfo {
         "<col=ffffff>3. Do not discuss or advertise other servers.</col>",
         "   -Discussion of the live jagex games is fine.",
         "   -Discussion of open source projects is fine.",
-        "<col=ffffff>4. No use of any kind of automation tool.</col>",
+        "<col=ffffff>4. No unfair advantages.</col>",
         "   -This includes autoclickers, autohotkey, etc.",
-        "   -Exception: 1-to-1 inputs, such as mousekeys."
+        "   -Exception: 1-to-1 inputs, such as mousekeys.",
+        "   -Includes training methods that bypass AFK limits."
     )
     val SEPARATOR = "<str>                                             </str>"
     val INFO = arrayOf(
