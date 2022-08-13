@@ -12,6 +12,7 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.player.link.music.MusicEntry
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.gather.SkillingTool
+import core.game.node.entity.skill.gather.woodcutting.WoodcuttingSkillPulse
 import core.game.node.scenery.Scenery
 import core.game.system.task.Pulse
 import core.game.world.map.Location
@@ -93,6 +94,10 @@ class TFTInteractionListeners : InteractionListener{
         }
 
         onUseWith(ITEM,KNIFE,TREE_BRANCH){player,_,_ ->
+            if (!player.skills.hasLevel(Skills.CRAFTING,40)) {
+                sendDialogue(player, "You need 40 crafting to do this!")
+                return@onUseWith true
+            }
             if (inInventory(player,KNIFE))
                 Pulser.submit(BranchFletchingPulse(player))
             else
@@ -256,9 +261,8 @@ class TFTInteractionListeners : InteractionListener{
             return@on true
         }
 
-        on(SWAYING_TREE,SCENERY,"cut-branch"){ player, _ ->
-            SkillingTool.getHatchet(player)?.let { Pulser.submit(ChoppingPulse(player)).also { return@on true } }
-            sendMessage(player,"You need an axe which you have the woodcutting level to use to do this.")
+        on(SWAYING_TREE,SCENERY,"cut-branch"){ player, node ->
+            player.pulseManager.run(WoodcuttingSkillPulse(player, node as Scenery))
             return@on true
         }
 

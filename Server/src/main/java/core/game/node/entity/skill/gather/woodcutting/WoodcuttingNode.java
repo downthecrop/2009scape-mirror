@@ -109,6 +109,9 @@ public enum WoodcuttingNode {
     //Mahogany
     MAHOGANY(9034,9035, (byte) 12),
 
+    //Swaying Tree
+    SWAYING_TREE(4142,-1, (byte) 30),
+
     //Arctic pine
     ARCTIC_PINE(21273,21274, (byte) 13),
 
@@ -304,6 +307,14 @@ public enum WoodcuttingNode {
                 rate = 0.05;
                 experience = 25.0;
                 level = 1;
+                rewardAmount = Integer.MAX_VALUE;
+                break;
+            case 30:
+                reward = 3692;
+                respawnRate = -1;
+                rate = 0.05;
+                experience = 1;
+                level = 40;
                 rewardAmount = Integer.MAX_VALUE;
                 break;
         }
