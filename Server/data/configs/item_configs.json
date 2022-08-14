@@ -7479,6 +7479,7 @@
     "high_alchemy": "2",
     "weight": "3",
     "turn90ccw_anim": "822",
+    "attack_speed": "6",
     "weapon_interface": "17",
     "turn180_anim": "4227",
     "render_anim": "175",
@@ -7500,6 +7501,7 @@
     "name": "Phoenix crossbow",
     "tradeable": "true",
     "archery_ticket_price": "0",
+    "attack_speed": "",
     "id": "768"
   },
   {
@@ -46289,6 +46291,7 @@
     "name": "Karil's crossbow",
     "tradeable": "true",
     "archery_ticket_price": "0",
+    "attack_speed": "",
     "id": "4735"
   },
   {
@@ -83691,6 +83694,7 @@
     "walk_anim": "4226",
     "low_alchemy": "313",
     "turn90ccw_anim": "822",
+    "attack_speed": "6",
     "turn180_anim": "4227",
     "defence_anim": "424",
     "equipment_slot": "3",
@@ -101633,6 +101637,7 @@
     "high_alchemy": "2",
     "weight": "3",
     "turn90ccw_anim": "822",
+    "attack_speed": "6",
     "weapon_interface": "17",
     "turn180_anim": "4227",
     "render_anim": "175",
@@ -101663,6 +101668,7 @@
     "high_alchemy": "2",
     "weight": "3",
     "turn90ccw_anim": "822",
+    "attack_speed": "6",
     "weapon_interface": "17",
     "turn180_anim": "4227",
     "render_anim": "175",
