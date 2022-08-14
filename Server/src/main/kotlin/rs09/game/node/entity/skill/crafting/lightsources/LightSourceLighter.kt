@@ -73,8 +73,9 @@ class LightSourceLighter : UseWithHandler(590,36,38){
     }
 
     fun Container.replace(item: Item, with: Item){
-        remove(item)
-        add(with)
+        if(remove(item)) {
+            add(with)
+        }
     }
 
     fun light(player: Player, item: Item, lightSource: LightSources): Boolean{

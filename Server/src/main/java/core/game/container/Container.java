@@ -12,6 +12,9 @@ import java.nio.ByteBuffer;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.google.errorprone.annotations.CheckReturnValue;
+
+
 /**
  * Represents a container which contains items.
  *
@@ -277,6 +280,7 @@ public class Container {
      * @param items The set of items.
      * @return {@code True} if all items got successfully removed.
      */
+    @CheckReturnValue
     public boolean remove(Item... items) {
         boolean removedAll = true;
         for (Item item : items) {
@@ -294,6 +298,7 @@ public class Container {
      * @param item The item.
      * @return {@code True} if the item got removed, {@code false} if not.
      */
+    @CheckReturnValue
     public boolean remove(Item item) {
         return remove(item, true);
     }
@@ -305,6 +310,7 @@ public class Container {
      * @param fireListener If the fire listener should be "notified".
      * @return {@code True} if the item got removed, <br> {@code false} if not.
      */
+    @CheckReturnValue
     public boolean remove(Item item, boolean fireListener) {
         int slot = getSlot(item);
         if (slot != -1) {
@@ -322,6 +328,7 @@ public class Container {
      * @return {@code True} if the item got removed, <br> {@code false} if the
      * item on the slot was null or the ids didn't match.
      */
+    @CheckReturnValue
     public boolean remove(Item item, int slot, boolean fireListener) {
         Item oldItem = items[slot];
         if (oldItem == null || oldItem.getId() != item.getId()) {

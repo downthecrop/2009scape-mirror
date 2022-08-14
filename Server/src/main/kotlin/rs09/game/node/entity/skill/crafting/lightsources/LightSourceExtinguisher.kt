@@ -35,7 +35,8 @@ class LightSourceExtinguisher : OptionHandler(){
     }
 
     fun Container.replace(item: Item, with: Item){
-        remove(item)
-        add(with)
+		if(remove(item)) {
+			add(with)
+		}
     }
 }

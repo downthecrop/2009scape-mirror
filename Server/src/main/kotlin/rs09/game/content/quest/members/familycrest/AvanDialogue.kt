@@ -146,12 +146,12 @@ class AvanDialogue (player: Player? = null): DialoguePlugin(player) {
             304 -> npc("Well, the last I heard of my brother Johnathon," ,
                     " he was studying the magical arts, " ,
                     "and trying to hunt some demon or other out in The Wilderness.").also{stage++}
-            304 -> npc("Unsurprisingly, I do not believe he is doing a particularly good job of things, ",
+            305 -> npc("Unsurprisingly, I do not believe he is doing a particularly good job of things, ",
                     "and spends most of his time recovering from his injuries " ,
                     "in some tavern or other near the eastern edge of The Wilderness. " ,
                     "You'll probably find him still there.").also{stage++}
 
-            305 -> player("Thanks Avan.").also { stage = 1000 }
+            306 -> player("Thanks Avan.").also { stage = 1000 }
 
             400 -> player("I am still working on it.").also{stage++}
 
