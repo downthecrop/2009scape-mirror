@@ -3,7 +3,9 @@ package core.game.content.global.action;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.login.PlayerParser;
+import core.game.node.entity.player.link.IronmanMode;
 import core.game.node.entity.player.link.audio.Audio;
+import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import rs09.game.system.SystemLogger;
@@ -49,7 +51,10 @@ public final class DropItemHandler {
 			if (player.getInventory().replace(null, item.getSlot()) == item) {
 				item = item.getDropItem();
 				player.getAudioManager().send(new Audio(item.getId() == 995 ? 10 : 2739, 1, 0));//2739 ACTUAL DROP SOUND
-				GroundItemManager.create(item, player.getLocation(), player);
+				GroundItem i = GroundItemManager.create(item, player.getLocation(), player);
+				if (player.getIronmanManager().getMode() == IronmanMode.HARDCORE) {
+					i.setRemainPrivate(true);
+				}
 				PlayerParser.save(player);
 			}
 			player.setAttribute("droppedItem:" + item.getId(), GameWorld.getTicks() + 2);
