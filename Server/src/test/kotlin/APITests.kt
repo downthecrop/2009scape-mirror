@@ -1,18 +1,14 @@
 import api.IfaceSettingsBuilder
-import core.game.node.entity.player.Player
-import core.game.node.entity.player.info.PlayerDetails
+import api.splitLines
 import core.game.node.entity.skill.slayer.Master
 import core.game.node.entity.skill.slayer.Tasks
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
-import org.junit.Assert
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import rs09.game.node.entity.skill.slayer.SlayerFlags
 import rs09.game.node.entity.skill.slayer.SlayerManager
-import rs09.game.system.SystemLogger
 
-object APITests {
+class APITests {
     val testPlayer = TestUtils.getMockPlayer("test")
     val testPlayer2 = TestUtils.getMockPlayer("test2")
 
@@ -141,5 +137,30 @@ object APITests {
         Assertions.assertEquals(21, manager.flags.taskStreak)
         Assertions.assertNotEquals(0, manager.flags.getPoints())
         Assertions.assertEquals(true, manager.flags.isHelmUnlocked())
+    }
+
+    @Test fun lineSplitShouldSplitAtLimitAndPreserveAllWords() {
+        var testCase = "The monks are running a ship from Port Sarim to Entrana, I hear too. Now leave me alone yer elephant!"
+        var expectedLine1 = "The monks are running a ship from Port Sarim to"
+        var expectedLine2 = "Entrana, I hear too. Now leave me alone yer elephant!"
+        var lines = splitLines(testCase, 54)
+        Assertions.assertEquals(expectedLine1, lines.getOrNull(0) ?: "")
+        Assertions.assertEquals(expectedLine2, lines.getOrNull(1) ?: "")
+        Assertions.assertEquals(2, lines.size)
+
+        testCase = "Dramenwood staffs are crafted from branches of the Dramen tree, so they are. I hear there's a Dramen tree over on the island of Entrana in a cave."
+        expectedLine1 = "Dramenwood staffs are crafted from branches of the"
+        expectedLine2 = "Dramen tree, so they are. I hear there's a Dramen tree"
+        var expectedLine3 = "over on the island of Entrana in a cave."
+        lines = splitLines(testCase, 54)
+        Assertions.assertEquals(expectedLine1, lines.getOrNull(0) ?: "")
+        Assertions.assertEquals(expectedLine2, lines.getOrNull(1) ?: "")
+        Assertions.assertEquals(expectedLine3, lines.getOrNull(2) ?: "")
+        Assertions.assertEquals(3, lines.size)
+
+        testCase = "This should be one line."
+        lines = splitLines(testCase)
+        Assertions.assertEquals(testCase, lines[0])
+        Assertions.assertEquals(1, lines.size)
     }
 }
