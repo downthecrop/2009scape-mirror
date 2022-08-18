@@ -78,7 +78,7 @@ public abstract class ClueScrollPlugin extends MapZone implements Plugin<Object>
 	/**
 	 * Rewards the player with a casket.
 	 * @param player the player.
-	 * @param casket if we give a ckaset.
+	 * @param casket if we give a casket.
 	 */
 	public void reward(Player player, boolean casket) {
 		Item clue = player.getInventory().getItem(new Item(getClueId()));

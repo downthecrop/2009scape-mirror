@@ -61,8 +61,7 @@ public abstract class MapClueScroll extends ClueScrollPlugin {
 					p.sendMessage("Nothing interesting happens.");
 					return false;
 				}
-				reward(p, false);
-				level.open(p, null);
+				reward(p);
 				return true;
 			}
 		}
