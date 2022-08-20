@@ -547,8 +547,8 @@ public final class Skills {
 
 		double base = 0.25 * (staticLevels[DEFENCE] + staticLevels[HITPOINTS] + floor(0.5 * staticLevels[PRAYER]));
 		double meleeBase = 0.325 * (staticLevels[ATTACK] + staticLevels[STRENGTH]);
-		double rangeBase = 0.325 * (floor(staticLevels[RANGE] / 2.0) * 1.5);
-		double magicBase = 0.325 * (floor(staticLevels[MAGIC] / 2.0) * 1.5);
+		double rangeBase = 0.325 * (floor(staticLevels[RANGE] / 2.0) * 3.0);
+		double magicBase = 0.325 * (floor(staticLevels[MAGIC] / 2.0) * 3.0);
 
 		return (int) (base + max(meleeBase, max(rangeBase, magicBase)));
 	}
