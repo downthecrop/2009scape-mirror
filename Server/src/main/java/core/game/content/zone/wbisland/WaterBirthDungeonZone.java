@@ -31,6 +31,7 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.plugin.ClassScanner;
+import org.rs09.consts.Items;
 
 /**
  * Handles the waterbirth dungeon zone.
@@ -236,6 +237,20 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 			}
 			return this;
 		}
+		
+		/**
+		 * function to handle activation of pressure pads
+		 * allows both players and pet rocks to activate the pad
+		 */
+		private boolean pressurePadActivated(Player player, Location location) {
+			if (RegionManager.getLocalPlayers(location,0).size() > 0) {
+				return true;
+			}
+			if (RegionManager.getRegionPlane(location).getItem(Items.PET_ROCK_3695,location,player) != null) {
+				return true;
+			}
+			return false;
+		}
 
 		@Override
 		public boolean handle(Player player, Node node, String option) {
@@ -245,7 +260,7 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 			case 8960:
 				boolean behind = player.getLocation().getX() >= 2492;
 				if (!behind) {
-					if (RegionManager.getLocalPlayers(node.getLocation().transform(-1, 0, 0), 0).size() == 0 || RegionManager.getLocalPlayers(node.getLocation().getLocation().transform(-1, 2, 0), 0).size() == 0) {
+					if (!pressurePadActivated(player,node.getLocation().transform(-1, 0, 0)) || !pressurePadActivated(player,node.getLocation().transform(-1, 2, 0))) {
 						player.sendMessage("You cannot see a way to open this door...");
 						break;
 					}
