@@ -2085,3 +2085,14 @@ fun clearHintIcon(player: Player) {
     player.removeAttribute("hinticon")
     HintIconManager.removeHintIcon(player, slot)
 }
+
+/**
+ * Gets the equipment slot the item belongs to
+ * @param item the Id of the item to check
+ * @return the EquipmentSlot, or null if the item cannot be equipped, or has no slot defined.
+ */
+fun equipSlot(item: Int) : EquipmentSlot? {
+    return EquipmentSlot
+        .values()
+        .getOrNull(itemDefinition(item).getConfiguration(ItemConfigParser.EQUIP_SLOT, -1))
+}

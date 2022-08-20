@@ -4,6 +4,7 @@ import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.emote.Emotes;
+import core.game.node.item.Item;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.player.AppearanceFlag;
 import core.net.amsc.MSPacketRepository;
@@ -13,6 +14,7 @@ import core.net.packet.context.InterfaceContext;
 import core.net.packet.out.Interface;
 import core.plugin.Plugin;
 import rs09.ServerConstants;
+import rs09.game.interaction.InteractionListeners;
 import rs09.game.interaction.inter.RulesAndInfo;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
@@ -140,6 +142,13 @@ public final class LoginConfiguration {
             player.getEmoteManager().unlock(Emotes.SAFETY_FIRST);
         }
         player.varpManager.sendAllVarps();
+        for (Item item : player.getEquipment().toArray()) {
+            //Run equip hooks for all items equipped on login.
+            //We should have already been doing this.
+            //Frankly, I don't even want to imagine the number of bugs us *not* doing this has caused.
+            if (item == null) continue;
+            InteractionListeners.run(item.getId(), player, item, true);
+        }
         if(ServerConstants.RULES_AND_INFO_ENABLED)
             RulesAndInfo.openFor(player);
 		/*if (GameWorld.getSettings().isPvp()) {

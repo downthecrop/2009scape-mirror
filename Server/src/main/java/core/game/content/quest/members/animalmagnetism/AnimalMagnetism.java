@@ -113,7 +113,6 @@ public final class AnimalMagnetism extends Quest {
 		ClassScanner.definePlugin(new WitchDialogue());
 		ClassScanner.definePlugin(new ContainerHandler());
 		ClassScanner.definePlugin(new UndeadTreePlugin());
-		ClassScanner.definePlugin(new AvasDevicePlugin());
 		ClassScanner.definePlugin(new HammerMagnetPlugin());
 		ClassScanner.definePlugin(new ResearchNoteHandler());
 		ClassScanner.definePlugin(new AliceHusbandDialogue());

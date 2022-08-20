@@ -231,12 +231,7 @@ public final class GlobalData {
 	 * The double exp time.
 	 */
 	private long doubleExp;
-	
-	/**
-	 * If Ava's device should randomly collect loot.
-	 */
-	private boolean avasDevice;
-	
+
 	/**
 	 * The delay of the global teleporter system.
 	 */
@@ -373,7 +368,6 @@ public final class GlobalData {
 		lootShareDelay = Long.parseLong(data.get("lootShareDelay").toString());
 		lootSharePoints = Integer.parseInt( data.get("lootSharePoints").toString());
 		doubleExp = Long.parseLong(data.get("doubleExp").toString());
-		avasDevice = (boolean) data.get("avasDevice");
 		globalTeleporterDelay = Long.parseLong(data.get("globalTeleporterDelay").toString());
 		starSpriteDelay = Long.parseLong(data.get("starSpriteDelay").toString());
 		runReplenishDelay = Long.parseLong(data.get("runReplenishDelay").toString());
@@ -1142,22 +1136,6 @@ public final class GlobalData {
 	 */
 	public boolean hasDoubleExp() {
 		return doubleExp > System.currentTimeMillis();
-	}
-	
-	/**
-	 * Gets the avasDevice
-	 * @return the avasDevice
-	 */
-	public boolean isAvasDisabled() {
-		return avasDevice;
-	}
-
-	/**
-	 * Sets the avasDevice
-	 * @param avasDevice
-	 */
-	public void setAvasDisabled(boolean avasDevice) {
-		this.avasDevice = avasDevice;
 	}
 
 	/**

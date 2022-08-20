@@ -426,7 +426,6 @@ class PlayerSaver (val player: Player){
         globalData.put("lootSharePoints",player.savedData.globalData.lootSharePoints.toString())
         globalData.put("lootShareDelay",player.savedData.globalData.lootShareDelay.toString())
         globalData.put("doubleExp",player.savedData.globalData.doubleExp.toString())
-        globalData.put("avasDevice",player.savedData.globalData.isAvasDisabled)
         globalData.put("globalTeleporterDelay",player.savedData.globalData.globalTeleporterDelay.toString())
         globalData.put("starSpriteDelay",player.savedData.globalData.starSpriteDelay.toString())
         globalData.put("runReplenishDelay",player.savedData.globalData.runReplenishDelay.toString())
