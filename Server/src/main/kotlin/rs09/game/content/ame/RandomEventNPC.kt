@@ -37,7 +37,7 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
     open fun terminate() {
         finalized = true
         pulseManager.clear("amemovement")
-        RandomEventManager.getInstance(player)!!.event = null
+        RandomEventManager.getInstance(player)?.event = null
         if (initialized) {
             poofClear(this)
         }
