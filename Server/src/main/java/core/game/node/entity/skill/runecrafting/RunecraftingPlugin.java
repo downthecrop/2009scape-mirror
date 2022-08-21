@@ -58,7 +58,7 @@ public class RunecraftingPlugin extends OptionHandler {
 		}
 		switch (node.getId()) {
 		case 2492:
-			EssenceTeleport.home(player);
+			EssenceTeleport.home(player,node);
 			return true;
 		case 26844:
 		case 26845:

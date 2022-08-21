@@ -1,19 +1,22 @@
 package rs09.game.content.global.travel
 
 import api.events.TeleportEvent
+import api.lock
+import api.teleport
+import api.unlock
+import core.game.node.Node
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
-import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
 import core.game.system.task.Pulse
-import rs09.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
 import rs09.game.node.entity.skill.magic.TeleportMethod
+import rs09.game.world.GameWorld
 
 /**
  * Represents a utilitity class for rune essence teleporting.
@@ -34,9 +37,13 @@ object EssenceTeleport {
     )
 
     /**
-     * Represents the animation to use.
+     * Represents constants used for gfx/animation
      */
+    private const val CURSE_PROJECTILE = 109
     private val ANIMATION = Animation(437)
+    private val GLOWING_HANDS_GFX = Graphics(108)
+    private val TELEPORT_GFX = Graphics(110,150)
+
 
     /**
      * Method used to teleport a player.
@@ -47,16 +54,17 @@ object EssenceTeleport {
     fun teleport(npc: NPC, player: Player) {
         npc.animate(ANIMATION)
         npc.faceTemporary(player, 1)
-        npc.graphics(Graphics(108))
-        player.lock()
+        npc.graphics(GLOWING_HANDS_GFX)
+        lock(player,4)
         player.audioManager.send(125)
-        Projectile.create(npc, player, 109).send()
+        Projectile.create(npc, player, CURSE_PROJECTILE).send()
         npc.sendChat("Senventior Disthinte Molesko!")
         GameWorld.Pulser.submit(object : Pulse(1) {
             var counter = 0
             override fun pulse(): Boolean {
                 when (counter++) {
-                    2 -> {
+                    0 -> player.graphics(TELEPORT_GFX)
+                    1 -> {
                         if (getStage(player) == 2 && player.inventory.contains(5519, 1)) {
                             val item = player.inventory[player.inventory.getSlot(Item(5519))]
                             if (item != null) {
@@ -76,9 +84,10 @@ object EssenceTeleport {
                             }
                         }
                         player.savedData.globalData.essenceTeleporter = npc.id
+                        player.graphics(TELEPORT_GFX)
 
                         val loc = LOCATIONS[RandomFunction.random(0, LOCATIONS.size)]
-                        player.properties.teleportLocation = loc
+                        teleport(player,loc)
 
                         player.dispatch(
                             TeleportEvent(
@@ -90,9 +99,8 @@ object EssenceTeleport {
                         )
                     }
 
-                    3 -> {
-                        player.graphics(Graphics(110))
-                        player.unlock()
+                    2 -> {
+                        unlock(player)
                         return true
                     }
                 }
@@ -106,10 +114,27 @@ object EssenceTeleport {
      * @param player the prayer.
      */
     @JvmStatic
-    fun home(player: Player) {
+    fun home(player: Player, node: Node) {
         val wizard = Wizard.forNPC(player.savedData.globalData.essenceTeleporter)
-        Projectile.create(player, player, 345).send()
-        player.properties.teleportLocation = wizard.location
+        Projectile.create(node.location, player.location, CURSE_PROJECTILE, 15, 10, 0, 10, 0, 2).send()
+        GameWorld.Pulser.submit(object : Pulse(1) {
+            var counter = 0
+            override fun pulse(): Boolean {
+                when (counter++) {
+                    0 -> {
+                        lock(player,2)
+                        player.graphics(TELEPORT_GFX)
+                    }
+                    1 -> {
+                        teleport(player,wizard.location)
+                        player.graphics(TELEPORT_GFX)
+                        unlock(player)
+                        return true
+                    }
+                }
+                return false
+            }
+        })
     }
 
     /**
