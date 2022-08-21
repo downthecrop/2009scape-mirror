@@ -123,6 +123,7 @@ object ServerConfigParser {
         ServerConstants.I_AM_A_CHEATER = data.getBoolean("world.i_want_to_cheat", false)
         ServerConstants.USE_AUTH = data.getBoolean("server.use_auth", true)
         ServerConstants.PERSIST_ACCOUNTS = data.getBoolean("server.persist_accounts", true)
+        ServerConstants.DAILY_ACCOUNT_LIMIT = data.getLong("server.daily_accounts_per_ip", 3L).toInt()
     }
 
 

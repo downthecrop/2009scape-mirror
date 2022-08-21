@@ -13,6 +13,9 @@ import java.math.BigInteger
 class ServerConstants {
 	companion object {
 		@JvmField
+		var DAILY_ACCOUNT_LIMIT = 3
+
+        @JvmField
 		var REVENANT_POPULATION: Int = 30
 
         @JvmField

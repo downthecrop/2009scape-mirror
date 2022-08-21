@@ -9,6 +9,7 @@ import core.game.node.entity.player.Player
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
+import rs09.ServerStore.Companion.addToList
 import rs09.game.system.SystemLogger
 import rs09.game.system.SystemLogger.logShutdown
 import rs09.game.system.SystemLogger.logStartup
@@ -133,6 +134,18 @@ class ServerStore : PersistWorld {
                 jArray.add(i)
             }
             return jArray
+        }
+
+        inline fun <reified T> JSONObject.getList(key: String) : List<T> {
+            val array = this[key] as? JSONArray ?: JSONArray()
+            val list = ArrayList<T>()
+            for(element in array) list.add(element as T)
+            return list
+        }
+
+        fun JSONObject.addToList(key: String, value: Any) {
+            val array = this.getOrPut(key) {JSONArray()} as JSONArray
+            array.add(value)
         }
 
         /** NPCItemMemory

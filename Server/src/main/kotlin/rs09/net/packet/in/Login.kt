@@ -14,6 +14,9 @@ import proto.management.JoinClanRequest
 import proto.management.PlayerStatusUpdate
 import proto.management.RequestContactInfo
 import rs09.ServerConstants
+import rs09.ServerStore
+import rs09.ServerStore.Companion.addToList
+import rs09.ServerStore.Companion.getList
 import rs09.auth.AuthResponse
 import rs09.game.node.entity.player.info.login.LoginParser
 import rs09.game.system.SystemLogger
@@ -120,20 +123,37 @@ object Login {
             Repository.LOGGED_IN_PLAYERS.add(details.username)
         details.session = session
         details.info.translate(UIDInfo(details.ipAddress, "DEPRECATED", "DEPRECATED", "DEPRECATED"))
-        val player = Player(details)
-        if (Repository.getPlayerByName(player.name) == null) {
-            Repository.addPlayer(player)
+
+        if (checkAccountLimit(details.ipAddress, details.username)) {
+            val player = Player(details)
+            if (Repository.getPlayerByName(player.name) == null) {
+                Repository.addPlayer(player)
+            }
+            session.lastPing = System.currentTimeMillis()
+            try {
+                LoginParser(details, LoginType.fromType(opcode)).initialize(player, opcode == RECONNECT_LOGIN_OP)
+                sendMSEvents(details)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                session.disconnect()
+                Repository.removePlayer(player)
+                player.clear(true)
+            }
+        } else {
+            session.write(AuthResponse.LoginLimitExceeded)
         }
-        session.lastPing = System.currentTimeMillis()
-        try {
-            LoginParser(details, LoginType.fromType(opcode)).initialize(player, opcode == RECONNECT_LOGIN_OP)
-            sendMSEvents(details)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            session.disconnect()
-            Repository.removePlayer(player)
-            player.clear(true)
-        }
+    }
+
+    private fun checkAccountLimit(ipAddress: String, username: String): Boolean {
+        val archive = ServerStore.getArchive("daily-accounts")
+        val accounts = archive.getList<String>(ipAddress)
+        if (username in accounts) return true
+
+        if (accounts.size >= ServerConstants.DAILY_ACCOUNT_LIMIT)
+            return false
+
+        archive.addToList(ipAddress, username)
+        return true
     }
 
     private fun sendMSEvents(details: PlayerDetails) {
