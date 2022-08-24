@@ -171,7 +171,10 @@ object InteractionListeners {
         var flipped = false
 
         val method = if (with is Player) get(-1, used.id, 4) ?: return false
-                     else get(used.id,with.id,type) ?: get(with.id,used.id,type).also { flipped = true } ?: return false
+                     else get(used.id,with.id,type) ?:
+                     if (type == InteractionListener.ITEM)
+                         get(with.id,used.id,type).also { flipped = true } ?: return false
+                     else return false
 
         val destOverride = if(flipped) {
             getOverride(type, used.id, "use") ?: getOverride(type, with.id) ?: getOverride(type, "use")
