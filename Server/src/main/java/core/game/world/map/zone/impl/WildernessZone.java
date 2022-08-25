@@ -286,13 +286,6 @@ public final class WildernessZone extends MapZone {
 		if (e instanceof Player && !e.asPlayer().isArtificial()) {
 			Player p = (Player) e;
 			p.getSkullManager().setLevel(getWilderness(p));
-			Component overlay = p.getInterfaceManager().getOverlay();
-			if (overlay == null || overlay.getId() != 381) {
-				show(p);
-			}
-			if (!p.getSkullManager().isWildernessDisabled()) {
-				p.getPacketDispatch().sendString("Level: " + p.getSkullManager().getLevel(), 381, 1);
-			}
 		}
 	}
 
@@ -316,23 +309,12 @@ public final class WildernessZone extends MapZone {
 	 * @return the level.
 	 */
 	public static int getWilderness(Entity e) {
-		if (e.getLocation().getY() < 3524) {
-			return -1;
-		}
-		final int regionId = e.getViewport().getRegion().getId();
-		int offsetY = 3524;
-		if (regionId == 12443 || e.getViewport().getRegion().getId() == 12444) {
-			offsetY = 9923;
-		} else if (regionId == 12193) {
-			offsetY = 10000 - 80;
-		} else if (regionId == 11937) {
-			offsetY = 9920;
-		}
-		int level = (int) Math.ceil((double) (e.getLocation().getY() - offsetY) / 8d);
-		if (level < 0) {
-			return 1;
-		}
-		return level;
+        int y = e.getLocation().getY();
+        if(6400 < y) {
+            return ((y - 9920) / 8) + 1;
+        } else {
+            return ((y - 3520) / 8) + 1;
+        }
 	}
 
 	/**
