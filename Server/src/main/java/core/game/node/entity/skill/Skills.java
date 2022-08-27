@@ -265,9 +265,7 @@ public final class Skills {
 				lifepoints += amount;
 			}
 			staticLevels[slot] = newLevel;
-			if(newLevel == 99 && !player.isArtificial()){
-				Repository.sendNews(entity.asPlayer().getUsername() + " has just achieved level 99 " + SKILL_NAME[slot]);
-			}
+
 			if (entity instanceof Player) {
 				if (updateCombatLevel()) {
 					player.getUpdateMasks().register(new AppearanceFlag(player));
