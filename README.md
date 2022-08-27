@@ -118,12 +118,17 @@ the project's setup, things won't work. At all.
 7. In IntelliJ, File -> Invalidate Caches -> Invalidate Caches and Restart
 
 *Skip step 8 if you've installed Git LFS before cloning.*
+
 8. After setting up Git LFS, you may need to run `git lfs pull` in the root of the cloned repo to download essential binaries
+
 9. You should now have ready-made run configurations in the top right (you can ignore MS, it's obsolete):
+
     * [Windows] follow step 11.
     * [Linux] Run Server
 10. Ensure your working directory (the root of the project) is set in the run configuration editor.
+
 11. Configure IntelliJ to compile and run the server from [here](https://forum.2009scape.org/viewtopic.php?t=64-unknown-run-configuration-type-batchconfigurationtype-when-setting-up-server)
+
 12. Go ahead and use the `Run Server` configuration (if available for your OS) to make sure it's working, or the maven `server [exec:java]` added with step 11
 
 ### Running the project
