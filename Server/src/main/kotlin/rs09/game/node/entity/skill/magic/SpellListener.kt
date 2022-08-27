@@ -1,5 +1,6 @@
 package rs09.game.node.entity.skill.magic
 
+import api.setAttribute
 import core.cache.def.impl.ItemDefinition
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -79,8 +80,12 @@ abstract class SpellListener(val bookName: String) : Listener {
         }
     }
 
-    fun setDelay(player: Player,isTeleport: Boolean = false){
+    fun setDelay(player: Player, isTeleport: Boolean = false){
         if(!isTeleport) player.setAttribute("magic-delay",GameWorld.ticks + 3) else player.setAttribute("magic-delay",GameWorld.ticks + 5)
+    }
+
+    fun setDelay(player: Player, delay: Int) {
+        setAttribute(player, "magic-delay", GameWorld.ticks + delay)
     }
 
     fun interrupt(player: Player){

@@ -5,6 +5,7 @@ import api.events.TeleportEvent
 import api.getAttribute
 import core.game.content.activity.mta.impl.GraveyardZone
 import core.game.content.global.Bones
+import core.game.interaction.MovementPulse
 import core.game.node.entity.Entity
 import core.game.node.entity.impl.Animator.Priority
 import core.game.node.entity.impl.Projectile
@@ -226,7 +227,9 @@ class ModernListeners : SpellListener("modern"){
             return
         }
 
-        player.lock(3)
+        if (player.pulseManager.current !is MovementPulse) {
+            player.pulseManager.clear()
+        }
 
         if(player.inventory.remove(Item(item.id,1))) {
             removeRunes(player)
@@ -243,7 +246,7 @@ class ModernListeners : SpellListener("modern"){
 
             addXP(player,if(high) 65.0 else 31.0)
             showMagicTab(player)
-            setDelay(player,false)
+            setDelay(player,5)
         }
     }
 
