@@ -307,6 +307,7 @@ public final class PestControlSession {
 	 */
 	public NPC addNPC(NPC npc) {
 		npc.addExtension(PestControlSession.class, this);
+		npc.setAttribute("no-spawn-return", true);
 		npc.init();
 		return npc;
 	}

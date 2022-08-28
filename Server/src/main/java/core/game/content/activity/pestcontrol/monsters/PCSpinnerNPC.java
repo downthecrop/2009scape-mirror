@@ -111,10 +111,10 @@ public final class PCSpinnerNPC extends AbstractNPC {
 		});
 	}
 
-    @Override
-    public boolean shouldPreventStacking(Entity mover) {
-        return mover instanceof NPC;
-    }
+	@Override
+	public boolean shouldPreventStacking(Entity mover) {
+		return mover instanceof NPC;
+	}
 
 	@Override
 	public void onImpact(final Entity entity, BattleState state) {

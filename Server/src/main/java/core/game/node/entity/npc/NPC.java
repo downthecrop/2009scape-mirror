@@ -403,9 +403,7 @@ public class NPC extends Entity {
 	/**
 	 * Called when the NPC respawns.
 	 */
-	protected void onRespawn() {
-		
-	}
+	protected void onRespawn() {}
 
 	/**
 	 * Handles the automatic actions of the NPC.
@@ -417,6 +415,7 @@ public class NPC extends Entity {
 						!pathBoundMovement
 						&& walkRadius > 0
 						&& !getLocation().withinDistance(getProperties().getSpawnLocation(), (int)(walkRadius * 1.5))
+						&& !getAttribute("no-spawn-return", false)
 					)	
 				{
 					if(!isNeverWalks()){
