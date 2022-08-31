@@ -27,6 +27,7 @@ import rs09.game.node.entity.combat.CombatPulse;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
+import core.game.node.entity.skill.summoning.SummoningPouch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +88,8 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	 */
 	private final int specialCost;
 
+	private final SummoningPouch pouch;
+
 	/**
 	 * The combat reward.
 	 */
@@ -112,7 +115,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	 */
 	private final int attackStyle;
 
-    private boolean firstCall = true;
+  private boolean firstCall = true;
 
 	/**
 	 * Constructs a new {@code Familiar} {@code Object}.
@@ -129,6 +132,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		this.maximumTicks = ticks;
 		this.ticks = ticks;
 		this.pouchId = pouchId;
+		this.pouch = SummoningPouch.get(pouchId);
 		this.specialCost = specialCost;
 		this.combatFamiliar = NPCDefinition.forId(getOriginalId() + 1).getName().equals(getName());
 		this.attackStyle = attackStyle;
@@ -184,20 +188,20 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		}
 		sendTimeRemaining();
 		switch (ticks) {
-		case 100:
-			owner.getPacketDispatch().sendMessage("<col=ff0000>You have 1 minute before your familiar vanishes.");
-			break;
-		case 50:
-			owner.getPacketDispatch().sendMessage("<col=ff0000>You have 30 seconds before your familiar vanishes.");
-			break;
-		case 0:
-			if (isBurdenBeast() && !((BurdenBeast) this).getContainer().isEmpty()) {
-				owner.getPacketDispatch().sendMessage("<col=ff0000>Your familiar has dropped all the items it was holding.");
-			} else {
-				owner.getPacketDispatch().sendMessage("<col=ff0000>Your familiar has vanished.");
-			}
-			dismiss();
-			return;
+			case 100:
+				owner.getPacketDispatch().sendMessage("<col=ff0000>You have 1 minute before your familiar vanishes.");
+				break;
+			case 50:
+				owner.getPacketDispatch().sendMessage("<col=ff0000>You have 30 seconds before your familiar vanishes.");
+				break;
+			case 0:
+				if (isBurdenBeast() && !((BurdenBeast) this).getContainer().isEmpty()) {
+					owner.getPacketDispatch().sendMessage("<col=ff0000>Your familiar has dropped all the items it was holding.");
+				} else {
+					owner.getPacketDispatch().sendMessage("<col=ff0000>Your familiar has vanished.");
+				}
+				dismiss();
+				return;
 		}
 		CombatPulse combat = owner.getProperties().getCombatPulse();
 		if (!isInvisible() && !getProperties().getCombatPulse().isAttacking() && (combat.isAttacking() || owner.inCombat())) {
@@ -205,7 +209,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 			if (victim == null) {
 				victim = owner.getAttribute("combat-attacker");
 			}
-			if (combat.getVictim() != this && victim != null && !victim.isInvisible() && getProperties().isMultiZone() && owner.getProperties().isMultiZone() && isCombatFamiliar() && !isBurdenBeast()) {
+			if (combat.getVictim() != this && victim != null && !victim.isInvisible() && getProperties().isMultiZone() && owner.getProperties().isMultiZone() && isCombatFamiliar() && !isBurdenBeast() && !isPeacefulFamiliar()) {
 				getProperties().getCombatPulse().attack(victim);
 			}
 		}
@@ -222,9 +226,9 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	@Override
 	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 		if (entity == owner) {
-            if(message) {
-                owner.getPacketDispatch().sendMessage("You can't just betray your own familiar like that!");
-            }
+			if(message) {
+				owner.getPacketDispatch().sendMessage("You can't just betray your own familiar like that!");
+			}
 			return false;
 		}
 		if (entity instanceof Player) {
@@ -234,29 +238,29 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		}
 		if (!getProperties().isMultiZone()) {
 			if (entity instanceof Player && !((Player) entity).getProperties().isMultiZone()) {
-                if(message) {
-                    ((Player) entity).getPacketDispatch().sendMessage("You have to be in multicombat to attack a player's familiar.");
-                }
+				if(message) {
+					((Player) entity).getPacketDispatch().sendMessage("You have to be in multicombat to attack a player's familiar.");
+				}
 				return false;
 			}
 			if (entity instanceof Player) {
-                if(message) {
-                    ((Player) entity).getPacketDispatch().sendMessage("This familiar is not in the a multicombat zone.");
-                }
+				if(message) {
+					((Player) entity).getPacketDispatch().sendMessage("This familiar is not in the a multicombat zone.");
+				}
 			}
 			return false;
 		}
 		if (entity instanceof Player) {
 			if (!((Player) entity).getSkullManager().isWilderness()) {
-                if(message) {
-                    ((Player) entity).getPacketDispatch().sendMessage("You have to be in the wilderness to attack a player's familiar.");
-                }
+				if(message) {
+					((Player) entity).getPacketDispatch().sendMessage("You have to be in the wilderness to attack a player's familiar.");
+				}
 				return false;
 			}
 			if (!owner.getSkullManager().isWilderness()) {
-                if(message) {
-                    ((Player) entity).getPacketDispatch().sendMessage("This familiar's owner is not in the wilderness.");
-                }
+				if(message) {
+					((Player) entity).getPacketDispatch().sendMessage("This familiar's owner is not in the wilderness.");
+				}
 				return false;
 			}
 		}
@@ -321,20 +325,20 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		}
 	}
 
-    public void refreshTimer() {
-        ticks = maximumTicks;
-    }
+	public void refreshTimer() {
+		ticks = maximumTicks;
+	}
 
 	/**
 	 * Sends the time remaining.
 	 */
 	private void sendTimeRemaining() {
 		int minutes = ticks / 100;
-        int centiminutes = ticks % 100;
-        owner.varpManager.get(1176)
-            .setVarbit(7, minutes)
-            .setVarbit(6, centiminutes > 49 ? 1 : 0)
-            .send(owner);
+		int centiminutes = ticks % 100;
+		owner.varpManager.get(1176)
+			.setVarbit(7, minutes)
+			.setVarbit(6, centiminutes > 49 ? 1 : 0)
+			.send(owner);
 	}
 
 	/**
@@ -365,7 +369,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		if (specialMove(special)) {
 			setAttribute("special-delay", GameWorld.getTicks() + 3);
 			owner.getInventory().remove(new Item(scroll.getItemId()));
-            owner.getAudioManager().send(4161);
+			owner.getAudioManager().send(4161);
 			visualizeSpecialMove();
 			updateSpecialPoints(specialCost);
 			owner.getSkills().addExperience(Skills.SUMMONING, scroll.getExperience(), true);
@@ -689,6 +693,10 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	 */
 	public boolean isBurdenBeast() {
 		return false;
+	}
+
+	public boolean isPeacefulFamiliar() {
+		return pouch.getPeaceful();
 	}
 
 	/**

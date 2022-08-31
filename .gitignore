@@ -16,6 +16,7 @@ Server/data/eco/grandexchange.db
 Server/data/serverstore/
 Server/data/global_kill_stats.json
 Server/ge_test.db
+Server/latestdump.txt
 Management-Server/managementprops/
 Server/worldprops/
 
