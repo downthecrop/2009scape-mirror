@@ -117456,7 +117456,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,50}-{4,40}",
+    "requirements": "{1,40}-{4,50}",
     "shop_price": "200",
     "examine": "A coif made of blue dragonhide.",
     "durability": null,
@@ -117474,7 +117474,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,50}-{4,40}",
+    "requirements": "{1,40}-{4,50}",
     "shop_price": "200",
     "examine": "A coif made of blue dragonhide.",
     "durability": null,
@@ -117492,7 +117492,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,50}-{4,40}",
+    "requirements": "{1,40}-{4,50}",
     "shop_price": "200",
     "examine": "Fully charged: A coif made of blue dragonhide. Fully degraded: A worn out coif made of blue dragonhide.",
     "durability": null,
@@ -117510,7 +117510,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,50}-{4,40}",
+    "requirements": "{1,40}-{4,50}",
     "shop_price": "200",
     "examine": "A coif made of blue dragonhide.",
     "durability": null,
@@ -117528,7 +117528,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,50}-{4,40}",
+    "requirements": "{1,40}-{4,50}",
     "shop_price": "200",
     "examine": "A coif made of blue dragonhide.",
     "durability": null,
@@ -117546,7 +117546,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,50}-{4,40}",
+    "requirements": "{1,40}-{4,50}",
     "shop_price": "200",
     "ge_buy_limit": "100",
     "examine": "A worn out coif made of blue dragonhide.",
@@ -117575,7 +117575,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,60}-{4,40}",
+    "requirements": "{1,40}-{4,60}",
     "shop_price": "300",
     "examine": "A coif made of red dragonhide.",
     "durability": null,
@@ -117593,7 +117593,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,60}-{4,40}",
+    "requirements": "{1,40}-{4,60}",
     "shop_price": "300",
     "examine": "A coif made of red dragonhide.",
     "durability": null,
@@ -117611,7 +117611,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,60}-{4,40}",
+    "requirements": "{1,40}-{4,60}",
     "shop_price": "300",
     "examine": "Fully charged: A coif made of red dragonhide.Fully degraded: A worn out coif made of red dragonhide.",
     "durability": null,
@@ -117629,7 +117629,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,60}-{4,40}",
+    "requirements": "{1,40}-{4,60}",
     "shop_price": "300",
     "examine": "A coif made of red dragonhide.",
     "durability": null,
@@ -117647,7 +117647,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,60}-{4,40}",
+    "requirements": "{1,40}-{4,60}",
     "shop_price": "300",
     "examine": "A coif made of red dragonhide.",
     "durability": null,
@@ -117665,7 +117665,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,60}-{4,40}",
+    "requirements": "{1,40}-{4,60}",
     "shop_price": "300",
     "ge_buy_limit": "100",
     "examine": "A worn out coif made of red dragonhide.",
@@ -117694,7 +117694,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,70}-{4,40}",
+    "requirements": "{1,40}-{4,70}",
     "shop_price": "500",
     "examine": "A coif made of black dragonhide.",
     "durability": null,
@@ -117712,7 +117712,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,70}-{4,40}",
+    "requirements": "{1,40}-{4,70}",
     "shop_price": "500",
     "examine": "A coif made of black dragonhide.",
     "durability": null,
@@ -117730,7 +117730,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,70}-{4,40}",
+    "requirements": "{1,40}-{4,70}",
     "shop_price": "500",
     "examine": "A coif made of black dragonhide.",
     "durability": null,
@@ -117748,7 +117748,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,70}-{4,40}",
+    "requirements": "{1,40}-{4,70}",
     "shop_price": "500",
     "examine": "A coif made of black dragonhide.",
     "durability": null,
@@ -117766,7 +117766,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,70}-{4,40}",
+    "requirements": "{1,40}-{4,70}",
     "shop_price": "500",
     "examine": "Fully charged: A coif made of black dragonhide. Fully degraded: A worn out coif made of black dragonhide.",
     "durability": null,
@@ -117784,7 +117784,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,70}-{4,40}",
+    "requirements": "{1,40}-{4,70}",
     "shop_price": "500",
     "ge_buy_limit": "100",
     "examine": "A coif made of black dragonhide.",
