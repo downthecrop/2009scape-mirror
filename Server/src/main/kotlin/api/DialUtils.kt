@@ -7,7 +7,7 @@ import kotlin.math.ceil
  * Should this not work out for any reason, you should fallback to standard npc and player methods for dialogue.
  */
 fun splitLines(message: String, perLineLimit: Int = 54) : Array<String> {
-    val lines = Array(ceil(message.length / perLineLimit.toFloat()).toInt()) {""}
+    var lines = Array(ceil(message.length / perLineLimit.toFloat()).toInt()) {""}
 
     //short circuit when possible because it's cheaper.
     if (lines.size == 1) {
@@ -22,7 +22,12 @@ fun splitLines(message: String, perLineLimit: Int = 54) : Array<String> {
 
     fun pushLine() {
         if (line.isEmpty()) return
-        lines[index++] = line.toString()
+        //allow array to be resized - there are specific edgecases where it becomes necessary. (Check the unit test for example)
+        if (lines.size == index)
+            lines = lines.plus(line.toString())
+        else
+            lines[index] = line.toString()
+        index++
         line.clear()
         accumulator = 0
     }

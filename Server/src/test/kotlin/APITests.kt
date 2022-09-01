@@ -4,6 +4,7 @@ import core.game.node.entity.skill.slayer.Master
 import core.game.node.entity.skill.slayer.Tasks
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
+import org.junit.Assert
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import rs09.game.node.entity.skill.slayer.SlayerManager
@@ -162,5 +163,14 @@ class APITests {
         lines = splitLines(testCase)
         Assertions.assertEquals(testCase, lines[0])
         Assertions.assertEquals(1, lines.size)
+
+        testCase = "I just told you: from the Seer. You will need to persuade him to take the time to make a forecast somehow."
+        lines = splitLines(testCase)
+        expectedLine1 = "I just told you: from the Seer. You will need to"
+        expectedLine2 = "persuade him to take the time to make a forecast"
+        expectedLine3 = "somehow."
+        Assertions.assertEquals(expectedLine1, lines.getOrNull(0) ?: "")
+        Assertions.assertEquals(expectedLine2, lines.getOrNull(1) ?: "")
+        Assertions.assertEquals(expectedLine3, lines.getOrNull(2) ?: "")
     }
 }
