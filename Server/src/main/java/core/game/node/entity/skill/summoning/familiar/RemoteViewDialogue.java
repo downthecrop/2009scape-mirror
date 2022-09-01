@@ -43,7 +43,7 @@ public final class RemoteViewDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		familiar = (Familiar) args[0];
-		options("North", "East", "Sotuh", "West", "Straight up");
+		options("North", "East", "South", "West", "Straight up");
 		return true;
 	}
 
