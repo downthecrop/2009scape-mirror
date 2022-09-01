@@ -44,7 +44,7 @@ public final class GabootyTrade extends OptionHandler {
                         return true;
 
                     case "trade-drinks":
-                        Shops.openId(player, 227);
+                        Shops.openId(player, 254);
                         return true;
                 }
                 break;
