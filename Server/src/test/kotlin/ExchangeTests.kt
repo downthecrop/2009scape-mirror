@@ -25,7 +25,7 @@ import kotlin.random.Random
 
         fun generateOffer(itemId: Int, amount: Int, price: Int, sale: Boolean, username: String = "test ${System.currentTimeMillis()}") : GrandExchangeOffer {
             val offer = GrandExchangeOffer()
-            val uid = username.hashCode()
+            val uid = username.hashCode()  // normally this would be the account's uid but in the test we don't have an account
             offer.offerState = OfferState.REGISTERED
             offer.itemID = itemId
             offer.offeredValue = price

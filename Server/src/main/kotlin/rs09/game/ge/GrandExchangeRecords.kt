@@ -55,7 +55,7 @@ class GrandExchangeRecords(private val player: Player? = null) : PersistPlayer, 
 
         GEDB.run { conn ->
             val stmt = conn.createStatement()
-            val offer_records = stmt.executeQuery("SELECT * from player_offers where player_uid = ${player.details.usernameHashcode} AND offer_state < 6")
+            val offer_records = stmt.executeQuery("SELECT * from player_offers where player_uid = ${player.details.accountInfo.uid} AND offer_state < 6")
 
             while (offer_records.next()) {
                 val offer = GrandExchangeOffer.fromQuery(offer_records)
@@ -101,7 +101,6 @@ class GrandExchangeRecords(private val player: Player? = null) : PersistPlayer, 
                 historyEntry["totalCoinExchange"] = it.totalCoinExchange.toString()
                 historyEntry["completedAmount"] = it.completedAmount.toString()
                 history.add(historyEntry)
-                SystemLogger.logInfo("Adding history entry for ${it.itemID}")
             }
         }
         save["ge-history"] = history

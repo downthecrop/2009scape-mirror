@@ -534,7 +534,7 @@ class ScriptAPI(private val bot: Player) {
                             else -> Repository.sendNews(SERVER_GE_NAME + " just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE.")
                         }
                     }
-                    bot.bank.remove(item).also { SystemLogger.logAI("$item has been listed on the GE.") }
+                    bot.bank.remove(item)
                     bot.bank.refresh()
                 }
                 return true

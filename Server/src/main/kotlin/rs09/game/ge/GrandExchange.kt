@@ -231,9 +231,9 @@ class GrandExchange : StartupListener, Commands {
             }
 
             if ( player.isArtificial )
-                offer.playerUID = PlayerDetails.getDetails("2009scape").usernameHashcode.also { offer.isBot = true }
+                offer.playerUID = 0.also { offer.isBot = true }
             else
-                offer.playerUID = player.details.usernameHashcode
+                offer.playerUID = player.details.accountInfo.uid
 
             offer.offerState = OfferState.REGISTERED
             //GrandExchangeRecords.getInstance(player).update(offer)
@@ -315,10 +315,10 @@ class GrandExchange : StartupListener, Commands {
 */
 
             seller.update()
-            val sellerPlayer = Repository.uid_map[seller.playerUID]
+            val sellerPlayer = Repository.players.firstOrNull { it.details.accountInfo.uid == seller.playerUID }
             sellerPlayer?.let { GrandExchangeRecords.getInstance(sellerPlayer).visualizeRecords() }
             buyer.update()
-            val buyerPlayer = Repository.uid_map[buyer.playerUID]
+            val buyerPlayer = Repository.players.firstOrNull { it.details.accountInfo.uid == buyer.playerUID }
             buyerPlayer?.let { GrandExchangeRecords.getInstance(buyerPlayer).visualizeRecords() }
         }
 

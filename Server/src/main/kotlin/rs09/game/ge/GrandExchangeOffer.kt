@@ -211,9 +211,7 @@ class GrandExchangeOffer() {
             o.totalCoinExchange = result.getInt("total_coin_xc")
             o.playerUID = result.getInt("player_uid")
             o.index = result.getInt("slot_index")
-
-            if(Repository.uid_map[o.playerUID] != null)
-                o.player = Repository.uid_map[o.playerUID]
+            o.player = Repository.players.firstOrNull { it.details.accountInfo.uid == o.playerUID }
 
             return o
         }
