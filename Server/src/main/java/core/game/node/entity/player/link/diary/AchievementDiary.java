@@ -3,11 +3,15 @@ package core.game.node.entity.player.link.diary;
 import core.cache.def.impl.NPCDefinition;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
+import core.game.node.item.GroundItem;
+import core.game.node.item.GroundItemManager;
+import core.game.node.item.Item;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import rs09.game.node.entity.player.link.diary.DiaryLevel;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Represents an achievement diary.
@@ -414,4 +418,150 @@ public class AchievementDiary {
 		return levelRewarded;
 	}
 
+	/**
+	 * Removes the non-lamp reward item for the given level of the given type
+	 * @param player the player to remove the reward from
+	 * @param type the DiaryType: LUMBRIDGE, FALADOR, etc.
+	 * @param level the diary level. 0-indexed.
+	 * @return whether or not a reward was removed
+	 */
+	public static boolean removeRewardsFor(Player player, DiaryType type, int level) {
+		Item[] rewards = type.getRewards(level);
+		//lamps are always the 2nd reward for a level, don't remove lamps
+		boolean hasRemoved =
+				player.getInventory().remove(rewards[0])
+				||player.getBank().remove(rewards[0])
+				||player.getEquipment().remove(rewards[0]);
+
+		if (hasRemoved) {
+			player.debug("Removed previous reward");
+		}
+
+		return hasRemoved;
+	}
+
+	/**
+	 * Adds all rewards for the given level of the given type (including lamps)
+	 * Will return false if the player can't fit all the items in their inventory.
+	 * @param player the player to grant the items to
+	 * @param type the DiaryType: LUMBRIDGE, FALADOR, etc.
+	 * @param level the diary level. 0-indexed.
+	 * @return whether or not we successfully added the reward items to the player's inventory.
+	 */
+	public static boolean addRewardsFor(Player player, DiaryType type, int level) {
+		Item[] rewards = type.getRewards(level);
+
+		int freeSlots = player.getInventory().freeSlots();
+		if (freeSlots < rewards.length)
+			return false;
+
+		boolean allRewarded = true;
+		for (Item reward : rewards) {
+			allRewarded &= player.getInventory().add(reward);
+		}
+
+		if (!allRewarded) {
+			Arrays.stream(rewards).forEach((item) -> {
+				boolean _ignored = player.getInventory().remove(item);
+			});
+		}
+
+		return allRewarded;
+	}
+
+	/**
+	 * Convenience method. Flags a level as complete, removes previous level's reward item, then adds new reward items.
+	 * @param player the player to flag completion for
+	 * @param type the DiaryType: LUMBRIDGE, FALADOR, etc.
+	 * @param level the diary level. 0-indexed.
+	 */
+	public static boolean flagRewarded(Player player, DiaryType type, int level) {
+		if (level > 0) {
+			removeRewardsFor(player, type, level - 1);
+		}
+		if (addRewardsFor(player, type, level))
+			player.getAchievementDiaryManager().getDiary(type).setLevelRewarded(level);
+		else {
+			player.sendMessage("You do not have enough space in your inventory to claim these rewards.");
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Determines if a replacement reward can be given for the particular diary and level.
+	 * Checks to make sure the player has completed the level and claimed the rewards, and has not completed
+	 * the next diary level.
+	 * @param player the player to check
+	 * @param type the DiaryType: LUMBRIDGE, FALADOR, etc.
+	 * @param level the diary level. 0-indexed.
+	 * @return whether or not a replacement can be granted.
+	 */
+	public static boolean canReplaceReward(Player player, DiaryType type, int level) {
+		Item reward = type.getRewards(level)[0];
+		return hasCompletedLevel(player, type, level)
+				&& !hasCompletedLevel(player, type, level + 1)
+				&& hasClaimedLevelRewards(player, type, level)
+				&& !player.hasItem(reward);
+	}
+
+	/**
+	 * Grants the replacement for the given level provided the player is eligible.
+	 * Does not refund lamps.
+	 * @param player the player to grant the reward to
+	 * @param type the DiaryType: LUMBRIDGE, FALADOR, etc.
+	 * @param level the diary level, 0-indexed
+	 * @return whether or not the player was granted the replacement
+	 */
+	public static boolean grantReplacement(Player player, DiaryType type, int level) {
+		Item reward = type.getRewards(level)[0]; //Can only replace non-lamp reward
+		return canReplaceReward(player, type, level) && player.getInventory().add(reward);
+	}
+
+	/**
+	 * Checks if a player has completed the given level of the given diary.
+	 * @param player the player to check
+	 * @param type the DiaryType: LUMBRIDGE, FALADOR, etc.
+	 * @param level the level to check, 0-indexed
+	 * @return whether or not the player has completed the level.
+	 */
+	public static boolean hasCompletedLevel(Player player, DiaryType type, int level) {
+		if (level > type.getLevelNames().length - 1)
+			return false;
+		return player.getAchievementDiaryManager().getDiary(type).isComplete(level, true);
+	}
+
+	/**
+	 * Checks if a player has claimed the rewards for the given level of the given diary
+	 * @param player the player to check
+	 * @param type the DiaryType: LUMBRIDGE, FALADOR, etc.
+	 * @param level the level te check
+	 * @return whether or not the player has claimed the rewards
+	 */
+	public static boolean hasClaimedLevelRewards(Player player, DiaryType type, int level) {
+		return player.getAchievementDiaryManager().getDiary(type).isLevelRewarded(level);
+	}
+
+	/**
+	 * Checks if a player can claim the rewards for the given level of the given diary
+	 * Checks to make sure the player hasn't completed the next level.
+	 * @param player the player to check
+	 * @param type the DiaryType: LUMBRIDGE, FALADOR, etc.
+	 * @param level the level to check
+	 * @return whether or not the player can claim the rewards
+	 */
+	public static boolean canClaimLevelRewards(Player player, DiaryType type, int level) {
+		return !hasCompletedLevel(player, type, level + 1) && hasCompletedLevel(player, type, level) && !hasClaimedLevelRewards(player, type, level);
+	}
+
+	/**
+	 * Fetches the rewards for a given diary at the given level.
+	 * @param type the DiaryType: LUMBRIDGE, FALADOR, etc.
+	 * @param level the level, 0-indexed.
+	 * @return an array of the reward items for that level. Includes lamps. The non-lamp reward is always index 0.
+	 */
+	public static Item[] getRewards(DiaryType type, int level) {
+		return type.getRewards(level);
+	}
 }

@@ -36,7 +36,6 @@ public final class BobDialogue extends DialoguePlugin {
 	/**
 	 * The achievement diary.
 	 */
-	private AchievementDiary diary;
 	private final int level = 1;
 
 	/**
@@ -178,15 +177,12 @@ public final class BobDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 30:
-			if (diary == null) {
-				diary = player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE);
-			}
-			if (diary.isComplete(level, true) && !diary.isLevelRewarded(level)) {
+			if (AchievementDiary.canClaimLevelRewards(player, DiaryType.LUMBRIDGE, level)) {
 				player("I've done all the medium tasks in my Lumbridge", "Achievement Diary.");
 				stage = 150;
 				break;
 			}
-			if (diary.isLevelRewarded(1) && diary.isComplete(level, true) && !player.hasItem(diary.getType().getRewards(level)[0])) {
+			if (AchievementDiary.canReplaceReward(player, DiaryType.LUMBRIDGE, level)) {
 				player("I've seemed to have lost my explorer's ring...");
 				stage = 160;
 				break;
@@ -254,10 +250,7 @@ public final class BobDialogue extends DialoguePlugin {
 			stage++;
 			break;
 		case 152:
-			diary.setLevelRewarded(level);
-			for (Item i : diary.getType().getRewards(level)) {
-				player.getInventory().add(i, player);
-			}
+			AchievementDiary.flagRewarded(player, DiaryType.LUMBRIDGE, level);
 			npc("This ring is a representation of the adventures you", "went on to complete your tasks.");
 			stage ++;
 			break;
@@ -266,7 +259,7 @@ public final class BobDialogue extends DialoguePlugin {
 			stage = 30;
 			break;
 		case 160:
-			player.getInventory().add(diary.getType().getRewards(level)[0], player);
+			AchievementDiary.grantReplacement(player, DiaryType.LUMBRIDGE, level);
 			npc("You better be more careful this time.");
 			stage = -1;
 			break;

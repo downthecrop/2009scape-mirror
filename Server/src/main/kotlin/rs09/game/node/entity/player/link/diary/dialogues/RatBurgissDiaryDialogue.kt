@@ -4,6 +4,7 @@ import api.addItemOrDrop
 import api.getAttribute
 import api.setAttribute
 import core.game.content.dialogue.FacialExpression
+import core.game.node.entity.player.link.diary.AchievementDiary
 import core.game.node.entity.player.link.diary.DiaryType
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.dialogue.IfTopic
@@ -12,17 +13,16 @@ import rs09.tools.END_DIALOGUE
 
 class RatBurgissDiaryDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        val diary = player!!.achievementDiaryManager.getDiary(DiaryType.VARROCK)
-        val easyDiaryComplete = diary.isComplete(0)
+        val easyDiaryComplete = AchievementDiary.hasCompletedLevel(player, DiaryType.VARROCK, 0)
         val alternateTeleport = getAttribute(player!!, "diaries:varrock:alttele", false)
         when(stage) {
             0 -> {
-                if (easyDiaryComplete && !diary.isLevelRewarded(0)) {
+                if (AchievementDiary.canClaimLevelRewards(player, DiaryType.VARROCK, 0)) {
                     playerl(FacialExpression.FRIENDLY, "I think I've finished all of the tasks in my Varrock Achievement Diary.")
                     stage = 40
                     return
                 }
-                else if (diary.isLevelRewarded(0) && !player!!.hasItem(diary.type.getRewards(0)[0])) {
+                else if (AchievementDiary.canReplaceReward(player, DiaryType.VARROCK, 0)) {
                     playerl(FacialExpression.ANNOYED, "I seem to have lost my armor.")
                     stage = 50
                     return
@@ -50,8 +50,7 @@ class RatBurgissDiaryDialogue : DialogueFile() {
             41 -> playerl(FacialExpression.FRIENDLY, "Thank you. Uh... can I have the reward?").also { stage++ }
             42 -> npcl(FacialExpression.FRIENDLY, "Reward? Ah yes! Of course. Your reward, it's right here.").also { stage++ }
             43 -> {
-                diary.setLevelRewarded(0)
-                diary.type.getRewards(0).forEach { addItemOrDrop(player!!, it.id, it.amount) }
+                AchievementDiary.flagRewarded(player, DiaryType.VARROCK, 0)
                 npcl(FacialExpression.FRIENDLY, "Now, this body armour is magically enhanced to help you with your Smithing and Mining. There is a furnace, not far from here, in Edgeville. Use this armour there and, when smelting ores up to and")
                 stage++
             }
@@ -63,7 +62,7 @@ class RatBurgissDiaryDialogue : DialogueFile() {
             49 -> npcl(FacialExpression.FRIENDLY, "If you should lose this armour, come back and see me for another set.").also { stage = 0 }
 
             50 -> {
-                addItemOrDrop(player!!, diary.type.getRewards(0)[0].id, 1)
+                AchievementDiary.grantReplacement(player, DiaryType.VARROCK, 0)
                 npcl(FacialExpression.ANNOYED, "You better be more careful this time.").also { stage = END_DIALOGUE }
             }
 

@@ -29,11 +29,6 @@ public class ReldoDialogue extends DialoguePlugin {
     private Quest shieldArrav;
 
     /**
-     * The achievement diary.
-     */
-    private AchievementDiary diary;
-
-    /**
      * If w'ere chatting about our diary.
      */
     private boolean isDiary;
@@ -91,9 +86,6 @@ public class ReldoDialogue extends DialoguePlugin {
                     stage++;
                     break;
                 case 0:
-                    if (diary == null) {
-                        diary = player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK);
-                    }
                     switch (buttonId) {
                         case 1:
                             player("What is the Achievement Diary?");
@@ -126,10 +118,7 @@ public class ReldoDialogue extends DialoguePlugin {
                     stage = 444;
                     break;
                 case 444:
-					diary.setLevelRewarded(level);
-					for (Item i : diary.getType().getRewards(level)) {
-						player.getInventory().add(i, player);
-					}
+				    AchievementDiary.flagRewarded(player, DiaryType.VARROCK, level);
                     sendDialogue("Reldo takes the Varrock armour and attaches some more plate metal", "to it, filling it out to look like a proper suit of armour. He etches", "some words into the armour, which glows slightly before fading.");
                     stage++;
                     break;
@@ -167,7 +156,7 @@ public class ReldoDialogue extends DialoguePlugin {
                     break;
 
                 case 460:
-                    player.getInventory().add(diary.getType().getRewards(level)[0], player);
+                    AchievementDiary.grantReplacement(player, DiaryType.VARROCK, level);
                     npc("You better be more careful this time.");
                     stage = 999;
                     break;
@@ -588,15 +577,12 @@ public class ReldoDialogue extends DialoguePlugin {
      */
     private void sendDiaryDialogue() {
         isDiary = true;
-        if (diary == null) {
-            diary = player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK);
-        }
-        if (diary.isComplete(level) && !diary.isLevelRewarded(level)) {
+        if (AchievementDiary.canClaimLevelRewards(player, DiaryType.VARROCK, level)) {
             player("I've finished all the medium tasks in my Varrock", "Achievement Diary.");
             stage = 440;
             return;
         }
-        if (diary.isLevelRewarded(level) && diary.isComplete(level) && !player.hasItem(diary.getType().getRewards(level)[0])) {
+        if (AchievementDiary.canReplaceReward(player, DiaryType.VARROCK, level)) {
             player("I've seemed to have lost my armour...");
             stage = 460;
             return;

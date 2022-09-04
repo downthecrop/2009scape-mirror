@@ -1,19 +1,19 @@
 package rs09.game.node.entity.player.link.diary.dialogues
 
+import core.game.node.entity.player.link.diary.AchievementDiary
 import core.game.node.entity.player.link.diary.DiaryType
 import rs09.game.content.dialogue.DialogueFile
 
 class NedDiaryDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        val diary = player!!.achievementDiaryManager.getDiary(DiaryType.LUMBRIDGE)
         val level = 2
         when(stage) {
             0 -> {
-                if (diary.isComplete(level, true) && !diary.isLevelRewarded(level)) {
+                if (AchievementDiary.canClaimLevelRewards(player, DiaryType.LUMBRIDGE, level)) {
                     player("I've done all the medium tasks in my Lumbridge", "Achievement Diary.")
                     stage = 50
                 }
-                else if (diary.isLevelRewarded(level) && diary.isComplete(level, true) && !player!!.hasItem(diary.type.getRewards(level)[0])) {
+                else if (AchievementDiary.canReplaceReward(player, DiaryType.LUMBRIDGE, level)) {
                     player("I've seemed to have lost my explorer's ring...")
                     stage = 60
                 }
@@ -106,10 +106,7 @@ class NedDiaryDialogue : DialogueFile() {
                 stage++
             }
             52 -> {
-                diary.setLevelRewarded(level)
-                for (i in diary.type.getRewards(level)) {
-                    player!!.inventory.add(i, player)
-                }
+                AchievementDiary.grantReplacement(player, DiaryType.LUMBRIDGE, level)
                 npc("This ring is a representation of the adventures you", "went on to complete your tasks.")
                 stage++
             }
@@ -118,7 +115,7 @@ class NedDiaryDialogue : DialogueFile() {
                 stage = 0
             }
             60 -> {
-                player!!.inventory.add(diary.type.getRewards(level)[0], player)
+                AchievementDiary.grantReplacement(player, DiaryType.LUMBRIDGE, level);
                 npc("You better be more careful this time.")
                 stage = 0
             }

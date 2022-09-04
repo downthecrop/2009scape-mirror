@@ -12,12 +12,6 @@ import core.game.node.item.Item;
  */
 @Initializable
 public class KalebParamaya extends DialoguePlugin {
-
-	/**
-	 * The achievement diary.
-	 */
-	private AchievementDiary diary;
-
 	/**
 	 * Constructs a new {@code KalebParamaya} {@code Object}
 	 */
@@ -51,15 +45,12 @@ public class KalebParamaya extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 41:
-			if (diary == null) {
-				diary = player.getAchievementDiaryManager().getDiary(DiaryType.KARAMJA);
-			}
-			if (diary.isComplete(1) && !diary.isLevelRewarded(1)) {
+			if (AchievementDiary.canClaimLevelRewards(player, DiaryType.KARAMJA, 1)) {
 				player("I've done all the medium tasks in my Karamja", "Achievement Diary.");
 				stage = 440;
 				break;
 			}
-			if (diary.isLevelRewarded(1) && diary.isComplete(1) && !player.hasItem(diary.getType().getRewards(1)[0])) {
+			if (AchievementDiary.canReplaceReward(player, DiaryType.KARAMJA, 1)) {
 				player("I've seemed to have lost my gloves..");
 				stage = 450;
 				break;
@@ -68,9 +59,6 @@ public class KalebParamaya extends DialoguePlugin {
 			stage++;
 			break;
 		case 42:
-			if (diary == null) {
-				diary = player.getAchievementDiaryManager().getDiary(DiaryType.KARAMJA);
-			}
 			switch (buttonId) {
 			case 1:
 				player("What is the Achievement Diary?");
@@ -98,10 +86,7 @@ public class KalebParamaya extends DialoguePlugin {
 			stage++;
 			break;
 		case 442:
-			diary.setLevelRewarded(1);
-			for (Item i : diary.getType().getRewards(1)) {
-				player.getInventory().add(i, player);
-			}
+			AchievementDiary.flagRewarded(player, DiaryType.KARAMJA, 1);
 			npc("These Karamja gloves are a symbol of your explorin'", "on the island. All the merchants will recognise them", "and mabe give you a discount. I'll", "have a word with some of the seafarin' folk who sail to");
 			stage++;
 			break;
@@ -114,7 +99,7 @@ public class KalebParamaya extends DialoguePlugin {
 			stage = 41;
 			break;
 		case 450:
-			player.getInventory().add(diary.getType().getRewards(1)[0], player);
+			AchievementDiary.grantReplacement(player, DiaryType.KARAMJA, 1);
 			npc("You better be more careful this time.");
 			stage = 41;
 			break;

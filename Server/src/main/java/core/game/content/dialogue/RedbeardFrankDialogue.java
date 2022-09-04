@@ -9,6 +9,8 @@ import core.game.node.item.GroundItemManager;
 import core.plugin.Initializable;
 import core.game.node.item.Item;
 
+import static rs09.tools.DialogueConstKt.END_DIALOGUE;
+
 /**
  * Represents the dialogue to handle Rebeard Frank.
  *
@@ -17,7 +19,6 @@ import core.game.node.item.Item;
 @Initializable
 public class RedbeardFrankDialogue extends DialoguePlugin {
     private boolean replacementReward = false;
-    private AchievementDiary diary;
     private int level = 0;
 
     /**
@@ -59,10 +60,7 @@ public class RedbeardFrankDialogue extends DialoguePlugin {
         quest = player.getQuestRepository().getQuest("Pirate's Treasure");
         npc("Arr, Matey!");
         stage = 0;
-        diary = player.getAchievementDiaryManager().getDiary(DiaryType.FALADOR);
-        replacementReward = diary.isLevelRewarded(level)
-                && diary.isComplete(level, true)
-                && !player.hasItem(diary.getType().getRewards(level)[0]);
+        replacementReward = AchievementDiary.canReplaceReward(player, DiaryType.FALADOR, level);
         return true;
     }
 
@@ -323,7 +321,7 @@ public class RedbeardFrankDialogue extends DialoguePlugin {
                 stage = 105;
                 break;
             case 105:
-                if (!diary.isLevelRewarded(level)) {
+                if (!AchievementDiary.hasClaimedLevelRewards(player, DiaryType.FALADOR, level)) {
                     options("What is the Achievement Diary?", "What are the rewards?", "How do I claim the rewards?", "See you later.");
                     stage = 106;
                 } else {
@@ -434,10 +432,13 @@ public class RedbeardFrankDialogue extends DialoguePlugin {
                 break;
 
             case 200:
-                if (diary.isLevelRewarded(level)) {
+                if (AchievementDiary.canReplaceReward(player, DiaryType.FALADOR, level)) {
+                    playerl(FacialExpression.HALF_GUILTY, "I seem to have lost my shield...");
+                    stage = 250;
+                } else if (AchievementDiary.hasClaimedLevelRewards(player, DiaryType.FALADOR, level)) {
                     npc("But you've already gotten yours!");
                     stage = 105;
-                } else if (diary.isComplete(level, true)) {
+                } else if (AchievementDiary.hasCompletedLevel(player, DiaryType.FALADOR, level)) {
                     npc("So, you've finished. Well done! I believe congratulations", "are in order.");
                     stage = 201;
                 } else {
@@ -455,14 +456,7 @@ public class RedbeardFrankDialogue extends DialoguePlugin {
                 break;
             case 203:
                 npc("This is the first stage of the Falador shield: a buckler. It", "grants you access to a Prayer restore ability and an", "emote.");
-                if (!diary.isLevelRewarded(level)) {
-                    for (Item i : diary.getType().getRewards(level)) {
-                        if (!player.getInventory().add(i, player)) {
-                            GroundItemManager.create(i, player);
-                        };
-                    }
-                    diary.setLevelRewarded(level);
-                }
+                AchievementDiary.flagRewarded(player, DiaryType.FALADOR, level);
                 stage = 204;
                 break;
             case 204:
@@ -493,8 +487,15 @@ public class RedbeardFrankDialogue extends DialoguePlugin {
                 npc("Keep it up!");
                 stage = 105;
                 break;
-
-
+            case 250:
+                npcl(FacialExpression.LAUGH, "Alright, matey, I'll give ye a new one.");
+                stage++;
+                break;
+            case 251:
+                AchievementDiary.grantReplacement(player, DiaryType.FALADOR, level);
+                npcl(FacialExpression.FRIENDLY, "Be more careful this time, aye?");
+                stage = END_DIALOGUE;
+                break;
         }
         return true;
     }

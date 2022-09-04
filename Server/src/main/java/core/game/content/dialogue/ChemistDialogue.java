@@ -15,7 +15,6 @@ import core.game.node.item.Item;
 @Initializable
 public final class ChemistDialogue extends DialoguePlugin {
     private boolean replacementReward = false;
-    private AchievementDiary diary;
     private int level = 1;
 
     /**
@@ -45,10 +44,7 @@ public final class ChemistDialogue extends DialoguePlugin {
     public boolean open(Object... args) {
         interpreter.sendOptions("Do you want to talk about lamps?", "Yes.", "No.", "No, I'm more interested in impling jars.", "Falador Achievement Diary");
         stage = 0;
-        diary = player.getAchievementDiaryManager().getDiary(DiaryType.FALADOR);
-        replacementReward = diary.isLevelRewarded(level)
-                && diary.isComplete(level, true)
-                && !player.hasItem(diary.getType().getRewards(level)[0]);
+        replacementReward = AchievementDiary.canReplaceReward(player, DiaryType.FALADOR, level);
         return true;
     }
 
@@ -211,7 +207,7 @@ public final class ChemistDialogue extends DialoguePlugin {
                 }
                 break;
             case 80:
-                player.getInventory().add(diary.getType().getRewards(level)[0], player);
+                AchievementDiary.grantReplacement(player, DiaryType.FALADOR, level);
                 npc("Here's your replacement. Please be more careful.");
                 stage = 999;
                 break;
@@ -238,7 +234,7 @@ public final class ChemistDialogue extends DialoguePlugin {
                 break;
             // https://www.youtube.com/watch?v=ZW9k1922Ggk
             case 105:
-                if (!diary.isLevelRewarded(1)) {
+                if (!AchievementDiary.hasClaimedLevelRewards(player, DiaryType.FALADOR, level)) {
                     options("What is the Achievement Diary?", "What are the rewards?", "How do I claim the rewards?", "See you later.");
                     stage = 106;
                 } else {
@@ -349,10 +345,10 @@ public final class ChemistDialogue extends DialoguePlugin {
                 break;
 
             case 200:
-                if (diary.isLevelRewarded(level)) {
+                if (AchievementDiary.hasClaimedLevelRewards(player, DiaryType.FALADOR, level)) {
                     npc("But you've already gotten yours!");
                     stage = 105;
-                } else if (diary.isComplete(level, true)) {
+                } else if (AchievementDiary.hasCompletedLevel(player, DiaryType.FALADOR, level)) {
                     npc("So, you've finished. Well done! I believe congratulations", "are in order.");
                     stage = 201;
                 } else {
@@ -370,13 +366,8 @@ public final class ChemistDialogue extends DialoguePlugin {
                 break;
             case 203:
                 npc("This is the second stage of the Falador shield: a kite", "shield. It grants you all the benefits fo the buckler, but", "with increased Prayer restore, and Farming experience", "when using the patches near Falador.");
-                if (!diary.isLevelRewarded(level)) {
-                    for (Item i : diary.getType().getRewards(level)) {
-                        if (!player.getInventory().add(i, player)) {
-                            GroundItemManager.create(i, player);
-                        }
-                    }
-                    diary.setLevelRewarded(level);
+                if (!AchievementDiary.hasClaimedLevelRewards(player, DiaryType.FALADOR, level)) {
+                    AchievementDiary.flagRewarded(player, DiaryType.FALADOR, level);
                 }
                 stage = 204;
                 break;

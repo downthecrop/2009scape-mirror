@@ -1,5 +1,6 @@
 package core.game.content.dialogue;
 
+import core.game.component.CloseEvent;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.AchievementDiary;
 import core.game.node.entity.player.link.diary.DiaryType;
@@ -12,12 +13,6 @@ import core.game.node.item.Item;
  */
 @Initializable
 public class JungleForesterDialogue extends DialoguePlugin {
-
-	/**
-	 * The achievement diary.
-	 */
-	private AchievementDiary diary;
-
 	/**
 	 * Constructs a new {@code KalebParamaya} {@code Object}
 	 */
@@ -51,15 +46,12 @@ public class JungleForesterDialogue extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 41:
-			if (diary == null) {
-				diary = player.getAchievementDiaryManager().getDiary(DiaryType.KARAMJA);
-			}
-			if (diary.isComplete(2) && !diary.isLevelRewarded(2)) {
+			if (AchievementDiary.canClaimLevelRewards(player, DiaryType.KARAMJA, 2)) {
 				player("I've done all the hard tasks in my Karamja", "Achievement Diary.");
 				stage = 440;
 				break;
 			}
-			if (diary.isLevelRewarded(2) && diary.isComplete(2) && !player.hasItem(diary.getType().getRewards(2)[0])) {
+			if (AchievementDiary.canReplaceReward(player, DiaryType.KARAMJA, 2)) {
 				player("I've seemed to have lost my gloves..");
 				stage = 450;
 				break;
@@ -68,9 +60,6 @@ public class JungleForesterDialogue extends DialoguePlugin {
 			stage++;
 			break;
 		case 42:
-			if (diary == null) {
-				diary = player.getAchievementDiaryManager().getDiary(DiaryType.KARAMJA);
-			}
 			switch (buttonId) {
 			case 1:
 				player("What is the Achievement Diary?");
@@ -98,10 +87,7 @@ public class JungleForesterDialogue extends DialoguePlugin {
 			stage++;
 			break;
 		case 442:
-			diary.setLevelRewarded(2);
-			for (Item i : diary.getType().getRewards(2)) {
-				player.getInventory().add(i, player);
-			}
+			AchievementDiary.flagRewarded(player, DiaryType.KARAMJA, 2);
 			npc("These Karamja gloves are a symbol of your explorin'", "on the island. All the merchants will recognise them", "and mabe give you a discount. I'll", "have a word with some of the seafarin' folk who sail to");
 			stage += 2;
 		case 443:
@@ -113,7 +99,7 @@ public class JungleForesterDialogue extends DialoguePlugin {
 			stage = 41;
 			break;
 		case 450:
-			player.getInventory().add(diary.getType().getRewards(2)[0], player);
+			AchievementDiary.grantReplacement(player, DiaryType.KARAMJA, 2);
 			npc("You better be more careful this time.");
 			stage = 41;
 			break;

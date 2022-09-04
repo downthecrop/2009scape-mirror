@@ -18,7 +18,6 @@ public class ExplorerJackDialogue extends DialoguePlugin {
 	/**
 	 * The achievement diary.
 	 */
-	private AchievementDiary diary;
 	private final int level = 0;
 
 	/**
@@ -52,17 +51,14 @@ public class ExplorerJackDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
-		if (diary == null) {
-			diary = player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE);
-		}
 		switch (stage) {
 		case -1:
-			if (diary.isComplete(level, true) && !diary.isLevelRewarded(level)) {
+			if (AchievementDiary.canClaimLevelRewards(player, DiaryType.LUMBRIDGE, level)) {
 				player("I've done all the beginner tasks in my Lumbridge", "Achievement Diary.");
 				stage = 50;
 				break;
 			}
-			if (diary.isLevelRewarded(level) && diary.isComplete(level, true) && !player.hasItem(diary.getType().getRewards(level)[0])) {
+			if (AchievementDiary.canReplaceReward(player, DiaryType.LUMBRIDGE, level)) {
 				player("I've seemed to have lost my explorer's ring...");
 				stage = 60;
 				break;
@@ -146,10 +142,7 @@ public class ExplorerJackDialogue extends DialoguePlugin {
 			stage++;
 			break;
 		case 52:
-			diary.setLevelRewarded(level);
-			for (Item i : diary.getType().getRewards(level)) {
-				player.getInventory().add(i, player);
-			}
+			AchievementDiary.flagRewarded(player, DiaryType.LUMBRIDGE, level);
 			player.getEmoteManager().unlock(Emotes.EXPLORE);
 			npc("This ring is a representation of the adventures you", "went on to complete your tasks.");
 			stage ++;
@@ -159,7 +152,7 @@ public class ExplorerJackDialogue extends DialoguePlugin {
 			stage = -1;
 			break;
 		case 60:
-			player.getInventory().add(diary.getType().getRewards(level)[0], player);
+			AchievementDiary.grantReplacement(player, DiaryType.LUMBRIDGE, level);
 			npc("You better be more careful this time.");
 			stage = -1;
 			break;

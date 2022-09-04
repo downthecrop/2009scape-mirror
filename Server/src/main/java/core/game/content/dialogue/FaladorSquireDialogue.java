@@ -20,7 +20,6 @@ import rs09.game.world.GameWorld;
 public final class FaladorSquireDialogue extends DialoguePlugin {
     private boolean useDiaryDialogueTree = false;
     private boolean replacementReward = false;
-    private AchievementDiary diary;
     private int level = 2;
 
     /**
@@ -62,10 +61,7 @@ public final class FaladorSquireDialogue extends DialoguePlugin {
         quest = player.getQuestRepository().getQuest("The Knight's Sword");
         interpreter.sendOptions("What do you want to do?", "Chat", "Talk about the Falador Achievement Diary");
         stage = -1;
-        diary = player.getAchievementDiaryManager().getDiary(DiaryType.FALADOR);
-		replacementReward = diary.isLevelRewarded(level)
-				&& diary.isComplete(level, true)
-				&& !player.hasItem(diary.getType().getRewards(level)[0]);
+		replacementReward = AchievementDiary.canReplaceReward(player, DiaryType.FALADOR, level);
         return true;
     }
 
@@ -84,7 +80,7 @@ public final class FaladorSquireDialogue extends DialoguePlugin {
 					}
 					break;
 				case 80:
-					player.getInventory().add(diary.getType().getRewards(level)[0], player);
+				    AchievementDiary.grantReplacement(player, DiaryType.FALADOR, level);
 					npc("Here's your replacement. Please be more careful.");
 					stage = 999;
 					break;
@@ -109,7 +105,7 @@ public final class FaladorSquireDialogue extends DialoguePlugin {
 					}
 					break;
 				case 105:
-					if (!diary.isLevelRewarded(level)) {
+					if (!AchievementDiary.hasClaimedLevelRewards(player, DiaryType.FALADOR, level)) {
 						options("What is the Achievement Diary?", "What are the rewards?", "How do I claim the rewards?", "See you later.");
 						stage = 106;
 					} else {
@@ -228,10 +224,10 @@ public final class FaladorSquireDialogue extends DialoguePlugin {
 					break;
 
 				case 200:
-					if (diary.isLevelRewarded(level)) {
+					if (AchievementDiary.hasClaimedLevelRewards(player, DiaryType.FALADOR, level)) {
             			npc("But you've already gotten yours!");
             			stage = 105;
-            		} else if (diary.isComplete(level, true)) {
+            		} else if (AchievementDiary.hasCompletedLevel(player, DiaryType.FALADOR, level)) {
                         npc("So, you've finished. Well done! I believe congratulations", "are in order.");
                         stage = 201;
                     } else {
@@ -249,14 +245,7 @@ public final class FaladorSquireDialogue extends DialoguePlugin {
                     break;
                 case 203:
                     npc("This is the final stage of the Falador shield: a tower", "shield. It grants you all the benefits fo the buckler", "and kiteshield did, full Prayer restore, and access to", "some interesting new seeds that my friend Wyson has");
-                    if (!diary.isLevelRewarded(level)) {
-                        for (Item i : diary.getType().getRewards(level)) {
-                            if (!player.getInventory().add(i, player)) {
-                                GroundItemManager.create(i, player);
-                            }
-                        }
-                        diary.setLevelRewarded(level);
-                    }
+                    AchievementDiary.flagRewarded(player, DiaryType.FALADOR, level);
                     stage = 204;
                     break;
                 case 204:

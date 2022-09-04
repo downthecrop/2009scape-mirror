@@ -62,11 +62,6 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
     private Quest quest;
 
     /**
-     * The achievement diary.
-     */
-    private AchievementDiary diary;
-
-    /**
      * If we're chatting about our diary.
      */
     private boolean isDiary;
@@ -135,9 +130,6 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
                     stage++;
                     break;
                 case 0:
-                    if (diary == null) {
-                        diary = player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK);
-                    }
                     switch (buttonId) {
                         case 1:
                             player("What is the Achievement Diary?");
@@ -166,10 +158,7 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
                     stage++;
                     break;
                 case 442:
-                    diary.setLevelRewarded(level);
-                    for (Item i : diary.getType().getRewards(level)) {
-                        player.getInventory().add(i, player);
-                    }
+                    AchievementDiary.grantReplacement(player, DiaryType.VARROCK, level);
                     npc("I'm happy to say that you've done well, so I will reward", "you suitably for your work.");
                     stage++;
                     break;
@@ -182,7 +171,7 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
                     stage++;
                     break;
                 case 450:
-                    player.getInventory().add(diary.getType().getRewards(2)[0], player);
+                    AchievementDiary.grantReplacement(player, DiaryType.VARROCK, level);
                     npc("You better be more careful this time.");
                     stage = 41;
                     break;
@@ -690,15 +679,12 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
      */
     private void sendDiaryDialogue() {
         isDiary = true;
-        if (diary == null) {
-            diary = player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK);
-        }
-        if (diary.isComplete(level) && !diary.isLevelRewarded(level)) {
+        if (AchievementDiary.canClaimLevelRewards(player, DiaryType.VARROCK, level)) {
             player("I've completed all the hard tasks in my Varrock", "Achievement Diary and, let me tell you, it wasn't an", "easy job.");
             stage = 440;
             return;
         }
-        if (diary.isLevelRewarded(level) && diary.isComplete(level) && !player.hasItem(diary.getType().getRewards(level)[0])) {
+        if (AchievementDiary.canReplaceReward(player, DiaryType.VARROCK, level)) {
             player("I've seemed to have lost my armour...");
             stage = 460;
             return;

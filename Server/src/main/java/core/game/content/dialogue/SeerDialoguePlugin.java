@@ -44,7 +44,6 @@ public class SeerDialoguePlugin extends DialoguePlugin {
 
     @Override
     public boolean handle(int interfaceId, int buttonId) {
-        AchievementDiary diary = player.getAchievementDiaryManager().getDiary(DiaryType.SEERS_VILLAGE);
         int level = 0;
 
         switch (stage) {
@@ -58,22 +57,17 @@ public class SeerDialoguePlugin extends DialoguePlugin {
                         stage = 1;
                         break;
                     case 2:
-                        if (!diary.isStarted(level)) {
-                            player("Do you have an Achievement Diary for me?");
-                            stage = 100;
-                            break;
-                        }
-                        else if (diary.isLevelRewarded(level) && !player.hasItem(diary.getType().getRewards()[level][0])) {
+                        if (AchievementDiary.canReplaceReward(player, DiaryType.SEERS_VILLAGE, 0)) {
                             player("I seem to have lost my seers' headband...");
                             stage = 80;
                             break;
                         }
-                        else if (diary.isLevelRewarded(level)) {
+                        else if (AchievementDiary.hasClaimedLevelRewards(player, DiaryType.SEERS_VILLAGE, 0)) {
                             player("Can you remind me what my headband does?");
                             stage = 90;
                             break;
                         }
-                        else if (diary.isComplete(level, true)) {
+                        else if (AchievementDiary.canClaimLevelRewards(player, DiaryType.SEERS_VILLAGE, 0)) {
                             player("Hi. I've completed the Easy tasks in my Achievement", "Diary.");
                             stage = 200;
                             break;
@@ -86,7 +80,7 @@ public class SeerDialoguePlugin extends DialoguePlugin {
                 }
                 break;
             case 80:
-                player.getInventory().add(diary.getType().getRewards(level)[0], player);
+                AchievementDiary.grantReplacement(player, DiaryType.SEERS_VILLAGE, 0);
                 npc("Here's your replacement. Please be more careful.");
                 stage = 999;
                 break;
@@ -107,14 +101,11 @@ public class SeerDialoguePlugin extends DialoguePlugin {
                 stage++;
                 break;
             case 201:
-                if (!player.getInventory().hasSpaceFor(diary.getType().getRewards(level))) {
+                if (!AchievementDiary.flagRewarded(player, DiaryType.SEERS_VILLAGE, 0)) {
                     npc("Come back when you have two free inventory slots.");
                     stage = 999;
                 } else {
-                    diary.setLevelRewarded(level);
-                    player.getInventory().add(diary.getType().getRewards()[level][0]);
-                    player.getInventory().add(diary.getType().getRewards()[level][1]);
-                    interpreter.sendItemMessage(diary.getType().getRewards()[level][0], "The seer hands you a strange-looking headband and a", "rusty lamp.");
+                    interpreter.sendItemMessage(AchievementDiary.getRewards(DiaryType.SEERS_VILLAGE, 0)[0], "The seer hands you a strange-looking headband and a", "rusty lamp.");
                     stage++;
                 }
                 break;

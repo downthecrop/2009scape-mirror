@@ -15,12 +15,6 @@ import rs09.game.node.entity.player.link.diary.dialogues.RatBurgissDiaryDialogue
  * @author Vexia
  */
 public class RatBurgissDialogue extends DialoguePlugin {
-
-    /**
-     * The achievement diary.
-     */
-    private AchievementDiary diary;
-
     /**
      * The quest.
      */
@@ -452,15 +446,12 @@ public class RatBurgissDialogue extends DialoguePlugin {
      */
     private void sendDiaryDialogue() {
         isDiary = true;
-        if (diary == null) {
-            diary = player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK);
-        }
-        if (diary.isComplete(level) && !diary.isLevelRewarded(level)) {
+        if (AchievementDiary.canClaimLevelRewards(player, DiaryType.VARROCK, level)) {
             player("I think I've finished all of the tasks in my Varrock", "Achievement Diary.");
             stage = 440;
             return;
         }
-        if (diary.isLevelRewarded(0) && diary.isComplete(level) && !player.hasItem(diary.getType().getRewards(level)[0])) {
+        if (AchievementDiary.canReplaceReward(player, DiaryType.VARROCK, level)) {
             player("I've seemed to have lost my armour...");
             stage = 460;
             return;

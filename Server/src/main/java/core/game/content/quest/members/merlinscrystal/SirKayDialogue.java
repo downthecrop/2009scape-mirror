@@ -52,7 +52,6 @@ public final class SirKayDialogue extends DialoguePlugin {
 
     @Override
     public boolean handle(int interfaceId, int buttonId) {
-		AchievementDiary diary = player.getAchievementDiaryManager().getDiary(DiaryType.SEERS_VILLAGE);
 		int level = 2;
 
 		switch (stage) {
@@ -66,22 +65,17 @@ public final class SirKayDialogue extends DialoguePlugin {
 						stage = 1;
 						break;
 					case 2:
-						if (!diary.isStarted(level)) {
-							player("Do you have an Achievement Diary for me?");
-							stage = 100;
-							break;
-						}
-						else if (diary.isLevelRewarded(level) && !player.hasItem(diary.getType().getRewards()[level][0])) {
+						if (AchievementDiary.canReplaceReward(player, DiaryType.SEERS_VILLAGE, level)) {
 							player("I seem to have lost my seers' headband...");
 							stage = 80;
 							break;
 						}
-						else if (diary.isLevelRewarded(level)) {
+						else if (AchievementDiary.hasClaimedLevelRewards(player, DiaryType.SEERS_VILLAGE, level)) {
 							player("Can you remind me what my headband does?");
 							stage = 90;
 							break;
 						}
-						else if (diary.isComplete(level, true)) {
+						else if (AchievementDiary.canClaimLevelRewards(player, DiaryType.SEERS_VILLAGE, level)) {
 							player("Greetings, Sir Kay. I have completed all of the Hard", "tasks in my Achievement Diary. May I have a reward?");
 							stage = 200;
 							break;
@@ -154,7 +148,7 @@ public final class SirKayDialogue extends DialoguePlugin {
 				break;
 
 			case 80:
-				player.getInventory().add(diary.getType().getRewards(level)[0], player);
+				AchievementDiary.grantReplacement(player, DiaryType.SEERS_VILLAGE, level);
 				npc("Here's your replacement. Please be more careful.");
 				stage = 999;
 				break;
@@ -179,12 +173,11 @@ public final class SirKayDialogue extends DialoguePlugin {
 				stage++;
 				break;
 			case 201:
-				if (!player.hasItem(diary.getType().getRewards()[level][0])) {
+				if (!player.hasItem(AchievementDiary.getRewards(DiaryType.SEERS_VILLAGE, level)[0])) {
 					npc("I need your headband. Come back when", "you have it.");
 					stage = 999;
 				} else {
-					diary.setLevelRewarded(level);
-					player.getInventory().add(diary.getType().getRewards()[level][1]);
+					AchievementDiary.flagRewarded(player, DiaryType.SEERS_VILLAGE, level);
 					sendDialogue("You hand Sir Kay your headband and he concentrates for a", "moment. Some mysterious knightly energy passes through his hands", "and he gives the headband back to you, along with an old lamp.");
 					stage++;
 				}
