@@ -63866,5 +63866,33 @@
         "maxAmount": "42"
       }
     ]
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "526",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "0",
+        "maxAmount": "1"
+      }
+    ],
+    "ids": "4396,4415",
+    "description": "Rat (Stronghold)",
+    "main": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "0",
+        "maxAmount": "1"
+      }
+    ]
   }
 ]

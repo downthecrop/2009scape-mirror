@@ -54,9 +54,6 @@ public class RatNPC extends AbstractNPC {
 			if (p.getQuestRepository().getQuest("Witch's Potion").isStarted(p)) {
 				GroundItemManager.create(RAT_TAIL, getLocation(), p);
 			}
-			if (!getName().equals("Giant rat")) {
-				GroundItemManager.create(new Item(526), getLocation(), (Player) killer);
-			}
 		}
 	}
 
