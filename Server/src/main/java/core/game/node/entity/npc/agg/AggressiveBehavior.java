@@ -72,7 +72,7 @@ public class AggressiveBehavior {
 		}
 		if (entity instanceof NPC && target instanceof Player) {
 			NPC npc = (NPC) entity;
-			if (npc.getAggressiveHandler() != null && npc.getAggressiveHandler().isAllowTolerance() && WildernessZone.getWilderness(npc) == -1) {
+			if (npc.getAggressiveHandler() != null && npc.getAggressiveHandler().isAllowTolerance() && WildernessZone.isInZone(npc)) {
                 if (RegionManager.forId(regionId).isTolerated(target.asPlayer())) {
                     return false;
                 }
