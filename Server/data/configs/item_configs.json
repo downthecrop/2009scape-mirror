@@ -49745,7 +49745,7 @@
   },
   {
     "shop_price": "900",
-    "examine": "Unlit: A helmet with an unlit lamp on it.  Lit: A helmet with a lamp on it.",
+    "examine": "A helmet with a lamp on it.",
     "durability": null,
     "low_alchemy": "360",
     "high_alchemy": "540",
@@ -49762,7 +49762,7 @@
     "requirements": "{11,65}",
     "shop_price": "900",
     "ge_buy_limit": "100",
-    "examine": "Unlit: A helmet with an unlit lamp on it.  Lit: A helmet with a lamp on it.",
+    "examine": "A helmet with an unlit lamp on it.",
     "durability": null,
     "low_alchemy": "360",
     "high_alchemy": "540",

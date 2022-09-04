@@ -7,7 +7,7 @@ import rs09.game.world.repository.Repository;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+// 11553 11552
 /**
  * Mining nodes
  * @author ceik
@@ -58,12 +58,12 @@ public enum MiningNode{
         COPPER_ORE_41(37688,21298, (byte) 1),
         COPPER_ORE_42(37686,21296, (byte) 1),
         COPPER_ORE_43(37687,21297, (byte) 1),
-        COPPER_ORE_44(3042, 450,   (byte) 1),
+        COPPER_ORE_44(3042, 11552, (byte) 1),
 
         //Tin
         TIN_ORE_0( 2094, 450,   (byte) 2),
         TIN_ORE_1( 2095, 452,   (byte) 2),
-        TIN_ORE_2( 3043, 450,   (byte) 2),
+        TIN_ORE_2( 3043, 11552, (byte) 2),
         TIN_ORE_3( 4979, 4994,  (byte) 2),
         TIN_ORE_4( 4980, 4995,  (byte) 2),
         TIN_ORE_5( 4981, 4996,  (byte) 2),

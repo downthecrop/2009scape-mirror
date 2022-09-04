@@ -10,6 +10,7 @@ enum class LightSources(val emptyID: Int, val fullID: Int, val litID: Int, val l
     OIL_LANTERN(4535,4537,4539,26,false),
     BULLSEYE_LANTERN(4546,4548,4550,49,false),
     SAPPHIRE_LANTERN(0,4701,4702,49,false),
+    MINING_HELMET(0,5014,5013,65,false),
     EMERALD_LANTERN(0,9064,9065,49,false);
 
     companion object {
@@ -24,6 +25,7 @@ enum class LightSources(val emptyID: Int, val fullID: Int, val litID: Int, val l
                 4537, 4539 -> OIL_LANTERN
                 4548, 4550 -> BULLSEYE_LANTERN
                 4701, 4702 -> SAPPHIRE_LANTERN
+                5014, 5013 -> MINING_HELMET
                 9064, 9065 -> EMERALD_LANTERN
                 else -> null
             }
