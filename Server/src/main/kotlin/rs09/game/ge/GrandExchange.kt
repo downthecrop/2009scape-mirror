@@ -14,7 +14,6 @@ import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
 import rs09.tools.stringtools.colorize
 import java.lang.Integer.max
-import java.sql.ResultSet
 import java.util.concurrent.LinkedBlockingDeque
 
 /**
@@ -231,9 +230,9 @@ class GrandExchange : StartupListener, Commands {
             }
 
             if ( player.isArtificial )
-                offer.playerUID = 0.also { offer.isBot = true }
+                offer.playerUID = PlayerDetails.getDetails("2009scape").uid.also { offer.isBot = true }
             else
-                offer.playerUID = player.details.accountInfo.uid
+                offer.playerUID = player.details.uid
 
             offer.offerState = OfferState.REGISTERED
             //GrandExchangeRecords.getInstance(player).update(offer)
@@ -315,10 +314,10 @@ class GrandExchange : StartupListener, Commands {
 */
 
             seller.update()
-            val sellerPlayer = Repository.players.firstOrNull { it.details.accountInfo.uid == seller.playerUID }
+            val sellerPlayer = Repository.uid_map[seller.playerUID]
             sellerPlayer?.let { GrandExchangeRecords.getInstance(sellerPlayer).visualizeRecords() }
             buyer.update()
-            val buyerPlayer = Repository.players.firstOrNull { it.details.accountInfo.uid == buyer.playerUID }
+            val buyerPlayer = Repository.uid_map[buyer.playerUID]
             buyerPlayer?.let { GrandExchangeRecords.getInstance(buyerPlayer).visualizeRecords() }
         }
 

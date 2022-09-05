@@ -97,6 +97,7 @@ public final class GameReadEvent extends IoReadEvent {
 			IncomingPacket packet = PacketRepository.getIncoming(opcode);
 			session.setLastPing(System.currentTimeMillis());
 			if (packet == null) {
+				SystemLogger.logErr("Unhandled packet [opcode=" + opcode + ", previous=" + last + ", size=" + size + ", header=" + header + "]");
 				if (GameWorld.getSettings().isDevMode()) {
 					SystemLogger.logErr("Unhandled packet [opcode=" + opcode + ", previous=" + last + ", size=" + size + ", header=" + header + "]");
 				}

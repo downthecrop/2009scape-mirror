@@ -196,10 +196,10 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
 
         onClose(Components.SHOP_TEMPLATE_620) { player, _ ->
             val shop = getAttribute<Shop?>(player, "shop", null) ?: return@onClose true
-            val listener = Shop.listenerInstances[player.username.hashCode()] ?: return@onClose true
+            val listener = Shop.listenerInstances[player.details.uid] ?: return@onClose true
 
             if(getServerConfig().getBoolean(personalizedShops, false))
-                shop.stockInstances[player.username.hashCode()]?.listeners?.remove(listener)
+                shop.stockInstances[player.details.uid]?.listeners?.remove(listener)
             else
                 shop.stockInstances[ServerConstants.SERVER_NAME.hashCode()]!!.listeners.remove(listener)
 

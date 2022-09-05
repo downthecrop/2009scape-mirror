@@ -138,14 +138,14 @@ object Repository {
     @JvmStatic
     fun addPlayer(player: Player){
         players.add(player)
-        uid_map[player.details.usernameHashcode] = player
+        uid_map[player.details.uid] = player
         playerNames[player.name] = player
     }
 
     @JvmStatic
     fun removePlayer(player: Player){
         players.remove(player)
-        uid_map.remove(player.details.usernameHashcode)
+        uid_map.remove(player.details.uid)
         playerNames.remove(player.name)
         UpdateSequence.renderablePlayers.remove(player)
     }

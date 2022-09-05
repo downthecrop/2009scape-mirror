@@ -127,8 +127,8 @@ public class PlayerDetails {
 	 * Gets the uid.
 	 * @return the uid.
 	 */
-	public int getUsernameHashcode() {  //was getUid, but that was such an amazing and descriptive name for what this method actually does that I just had to change it!
-		return this.getUsername().hashCode(); //this SHOULD return accountInfo.uid BUT Arios is an amazing codebase, and they used username hashcodes when players already had a UID assigned by the DB. Genius!
+	public int getUid() {
+		return accountInfo.getUid();
 	}
 
 	/**

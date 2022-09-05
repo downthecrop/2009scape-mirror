@@ -63,7 +63,7 @@ public class GrandExchangeTab extends ConsoleTab {
                     if (p == null) {
                         continue;
                     }
-                    if (p.getDetails().getUsernameHashcode() == offer.getUid()) {
+                    if (p.getDetails().getUid() == offer.getUid()) {
                         player = p;
                         break;
                     }

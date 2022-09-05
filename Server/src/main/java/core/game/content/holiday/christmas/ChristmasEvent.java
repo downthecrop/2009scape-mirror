@@ -439,7 +439,7 @@ public class ChristmasEvent extends HolidayEvent {
 				snowman.faceTemporary(player, 2);
 				snowman.setRespawn(false);
 				snowman.setWalks(true);
-				snowman.setAttribute("owner", player.getDetails().getUsernameHashcode());
+				snowman.setAttribute("owner", player.getDetails().getUid());
 				if (!player.getEmoteManager().isUnlocked(Emotes.SNOWMAN_DANCE)) {
 					player.getEmoteManager().unlock(Emotes.SNOWMAN_DANCE);
 					player.sendMessage("<col=FF0000>You've unlocked the snowman dance emote!</col>");
@@ -492,7 +492,7 @@ public class ChristmasEvent extends HolidayEvent {
 			@Override
 			public boolean open(Object... args) {
 				npc = (NPC) args[0];
-				if (npc.getAttribute("owner", 0) != player.getDetails().getUsernameHashcode()) {
+				if (npc.getAttribute("owner", 0) != player.getDetails().getUid()) {
 					player.sendMessage("The snowman doesn't seem interested in talking to you.");
 					return true;
 				}

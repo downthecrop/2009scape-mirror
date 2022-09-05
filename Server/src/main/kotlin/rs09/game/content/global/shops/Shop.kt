@@ -67,13 +67,13 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
 
         if(!main)
         {
-            cont.listeners.remove(listenerInstances[player.username.hashCode()])
-            playerStock.listeners.add(listenerInstances[player.username.hashCode()])
+            cont.listeners.remove(listenerInstances[player.details.uid])
+            playerStock.listeners.add(listenerInstances[player.details.uid])
         }
         else
         {
-            playerStock.listeners.remove(listenerInstances[player.username.hashCode()])
-            cont.listeners.add(listenerInstances[player.username.hashCode()])
+            playerStock.listeners.remove(listenerInstances[player.details.uid])
+            cont.listeners.add(listenerInstances[player.details.uid])
         }
 
         val settings = IfaceSettingsBuilder()
@@ -98,11 +98,11 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
     public fun getContainer(player: Player) : Container
     {
         val container = if(getServerConfig().getBoolean(Shops.personalizedShops, false))
-            stockInstances[player.username.hashCode()] ?: generateStockContainer().also { stockInstances[player.username.hashCode()] = it }
+            stockInstances[player.details.uid] ?: generateStockContainer().also { stockInstances[player.details.uid] = it }
         else
             stockInstances[ServerConstants.SERVER_NAME.hashCode()]!!
 
-        val listener = listenerInstances[player.username.hashCode()]
+        val listener = listenerInstances[player.details.uid]
 
         if(listener != null && listener.player != player)
         {
@@ -111,7 +111,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
 
         if(listener == null || listener.player != player)
         {
-            listenerInstances[player.username.hashCode()] = ShopListener(player)
+            listenerInstances[player.details.uid] = ShopListener(player)
         }
 
         return container
@@ -310,7 +310,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
                 addItem(player, item.id, item.amount)
 
                 if(getServerConfig().getBoolean(Shops.personalizedShops, false)){
-                    needsUpdate[player.username.hashCode()] = true
+                    needsUpdate[player.details.uid] = true
                 } else {
                     needsUpdate[ServerConstants.SERVER_NAME.hashCode()] = true
                 }
@@ -385,7 +385,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
             container?.add(item)
             container?.refresh()
             if(getServerConfig().getBoolean(Shops.personalizedShops, false)){
-                needsUpdate[player.username.hashCode()] = true
+                needsUpdate[player.details.uid] = true
             } else {
                 needsUpdate[ServerConstants.SERVER_NAME.hashCode()] = true
             }
