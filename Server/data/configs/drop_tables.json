@@ -63205,13 +63205,6 @@
     ]
   },
   {
-    "default": [],
-    "charm": [],
-    "ids": "61,47",
-    "description": "",
-    "main": []
-  },
-  {
     "default": [
       {
         "minAmount": "1",
