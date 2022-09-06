@@ -23,6 +23,7 @@ class FarmerPayOptionDialogue(val patch: Patch): DialogueFile() {
                     Items.TOMATOES5_5968 -> if(item?.amount == 1) "basket of tomatoes" else "baskets of tomatoes"
                     Items.ORANGES5_5396 -> if(item?.amount == 1) "basket of oranges" else "baskets of oranges"
                     Items.COCONUT_5974 -> "coconuts"
+                    Items.CACTUS_SPINE_6016 -> "cactus spines"
                     Items.STRAWBERRIES5_5406 -> if(item?.amount == 1) "basket of strawberries" else "baskets of strawberries"
                     Items.BANANAS5_5416 -> if(item?.amount == 1) "basket of bananas" else "baskets of bananas"
                     else -> item?.name?.toLowerCase()
