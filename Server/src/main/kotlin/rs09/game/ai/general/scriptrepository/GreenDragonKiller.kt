@@ -277,7 +277,7 @@ class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Scr
         override fun canSwing(entity: Entity, victim: Entity): InteractionType? {
             if(victim is Player || victim.name.contains("revenant", ignoreCase = true)) {
                 script.state = State.RUNNING
-                script.bot.pulseManager.current.stop()
+                script.bot.pulseManager.clear()
             }
             return super.canSwing(entity, victim)
         }

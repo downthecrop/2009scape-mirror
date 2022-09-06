@@ -2,6 +2,7 @@ package core.game.content.quest.members.fishingcontest;
 
 import core.game.interaction.MovementPulse;
 import core.game.interaction.Option;
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
@@ -24,7 +25,7 @@ public class FishingSpotInteraction extends PluginInteraction {
                         player.getDialogueInterpreter().sendDialogues(3677, FacialExpression.NEUTRAL, "I think you will find that is","my spot.");
                         return true;
                     }
-                }, "movement");
+                }, PulseType.STANDARD);
                 return true;
             } else if (npc_loc.equals(2630, 3435, 0)){
                 player.getPulseManager().run(new MovementPulse(player, npc.getLocation().transform(1, 0, 0)) {
@@ -33,7 +34,7 @@ public class FishingSpotInteraction extends PluginInteraction {
                         player.getDialogueInterpreter().sendDialogues(225, FacialExpression.NEUTRAL, "Hey, you need to pay to enter the", "competition first! Only 5gp entrance fee!");
                         return true;
                     }
-                }, "movement");
+                }, PulseType.STANDARD);
                 return true;
             } else if (npc_loc.equals(Location.create(2632, 3427, 0))){
                 player.getPulseManager().run(new MovementPulse(player, npc.getLocation().transform(1, 0, 0)) {
@@ -42,7 +43,7 @@ public class FishingSpotInteraction extends PluginInteraction {
                         player.getDialogueInterpreter().sendDialogues(228, FacialExpression.NEUTRAL, "I think you will find that is my spot.");
                         return true;
                     }
-                }, "movement");
+                },PulseType.STANDARD);
                 return true;
             } else if(npc_loc.equals(Location.create(2627,3415,0))) {
                 player.getPulseManager().run(new MovementPulse(player, npc.getLocation().transform(1, 0, 0)) {
@@ -51,7 +52,7 @@ public class FishingSpotInteraction extends PluginInteraction {
                         player.getDialogueInterpreter().sendDialogues(228, FacialExpression.NEUTRAL, "I think you will find that is my spot.");
                         return true;
                     }
-                }, "movement");
+                }, PulseType.STANDARD);
                 return true;
             }
         }

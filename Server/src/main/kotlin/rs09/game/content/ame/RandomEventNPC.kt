@@ -2,6 +2,7 @@ package rs09.game.content.ame
 
 import api.poofClear
 import core.game.interaction.MovementPulse
+import core.game.node.entity.impl.PulseType
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
@@ -36,7 +37,7 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
 
     open fun terminate() {
         finalized = true
-        pulseManager.clear("amemovement")
+        pulseManager.clear(PulseType.STANDARD)
         RandomEventManager.getInstance(player)?.event = null
         if (initialized) {
             poofClear(this)
@@ -49,7 +50,7 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
                 face(player)
                 return false
             }
-        }), "amemovement")
+        }), PulseType.STANDARD)
     }
 
     override fun tick() {

@@ -58,7 +58,6 @@ public final class CanafisWereWolfPlugin extends OptionHandler {
 				}
 			});
 		} else {
-			player.getPulseManager().clear("interaction:attack:" + node.hashCode());
 			player.getProperties().getCombatPulse().attack(node);
 		}
 		return true;

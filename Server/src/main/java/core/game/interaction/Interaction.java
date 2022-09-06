@@ -3,6 +3,7 @@ package core.game.interaction;
 import api.events.InteractionEvent;
 import core.game.container.Container;
 import core.game.node.Node;
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
@@ -70,18 +71,17 @@ public class Interaction {
 			}
 			player.debug("Received interaction request " + option.getName());
 			boolean hasHandler = option.getHandler() != null;
-			String pulseType = "interaction:" + option.getName() + ":" + node.hashCode();
 			boolean walk = hasHandler && option.getHandler().isWalk();
 			if (!walk && hasHandler && option.getHandler().isWalk(player, node)) {
 				walk = true;
 			}
 			if (!hasHandler || walk) {
-				handleWalkOption(player, option, pulseType);
+				handleWalkOption(player, option, PulseType.STANDARD);
 			} else if (hasHandler) {
 				player.debug("Option handler being used=" + option.getHandler().getClass().getSimpleName());
-				handleDefaultOption(player, option, pulseType);
+				handleDefaultOption(player, option, PulseType.STANDARD);
 			} else {
-				player.getPulseManager().runUnhandledAction(player, pulseType);
+				player.getPulseManager().runUnhandledAction(player, PulseType.STANDARD);
 			}
 			player.dispatch(new InteractionEvent(node, option.getName().toLowerCase()));
 		} catch (Exception e){
@@ -100,7 +100,7 @@ public class Interaction {
 		if (player.getLocks().isInteractionLocked()) {
 			return;
 		}
-		player.getPulseManager().clear("interaction:" + option.getName() + ":" + node.hashCode());
+		player.getPulseManager().clear(PulseType.STANDARD);
 		GameWorld.getPulser().submit(new Pulse(1, player) {
 			@Override
 			public boolean pulse() {
@@ -154,9 +154,9 @@ public class Interaction {
 					}
 					return true;
 				}
-			}, "interaction:invalid:" + node.hashCode());
+			}, PulseType.STANDARD);
 		} else {
-			player.getPulseManager().runUnhandledAction(player, "interaction:invalid:" + node.hashCode());
+			player.getPulseManager().runUnhandledAction(player, PulseType.STANDARD);
 		}
 	}
 
@@ -166,7 +166,7 @@ public class Interaction {
 	 * @param option The option.
 	 * @param pulseType The pulse type.
 	 */
-	private void handleWalkOption(final Player player, final Option option, String pulseType) {
+	private void handleWalkOption(final Player player, final Option option, PulseType pulseType) {
 		if (node.getLocation() == null) {
 			player.getPulseManager().runUnhandledAction(player, pulseType);
 			return;
@@ -201,7 +201,7 @@ public class Interaction {
 	 * @param option The option.
 	 * @param pulseType The pulse type.
 	 */
-	private void handleDefaultOption(final Player player, final Option option, String pulseType) {
+	private void handleDefaultOption(final Player player, final Option option, PulseType pulseType) {
 		if (!option.getHandler().isDelayed(player)) {
 			if (player.getZoneMonitor().interact(node, option)) {
 				return;

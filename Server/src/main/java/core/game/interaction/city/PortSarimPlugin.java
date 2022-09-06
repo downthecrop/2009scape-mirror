@@ -75,7 +75,6 @@ public final class PortSarimPlugin extends OptionHandler {
 			if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) != 20) {
 				player.getPacketDispatch().sendMessage("The goblin is already in prison. You have no reason to attack him.");
 			} else {
-				player.getPulseManager().clear("interaction:attack:" + node.hashCode());
 				player.getProperties().getCombatPulse().attack(node);
 			}
 			break;

@@ -5,6 +5,7 @@ import java.util.List;
 
 import core.game.interaction.DestinationFlag;
 import core.game.interaction.MovementPulse;
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
@@ -71,7 +72,7 @@ public class StrayDogNPC extends AbstractNPC {
 			players = RegionManager.getLocalPlayers(this, 7);
 			if (players.size() != 0) {
 				target = players.get(RandomFunction.random(players.size()));
-				getPulseManager().run(getFollowPulse(target), "movement");
+				getPulseManager().run(getFollowPulse(target), PulseType.STANDARD);
 				delay = System.currentTimeMillis() + 150000;
 			}
 		}

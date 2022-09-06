@@ -58,7 +58,6 @@ public final class DemonSlayerPlugin extends OptionHandler {
 				return true;
 			}
 			player.face(((NPC) node));
-			player.getPulseManager().clear("interaction:attack:" + node.hashCode());
 			player.getProperties().getCombatPulse().attack(node);
 			return true;
 		case DRAIN_ID:

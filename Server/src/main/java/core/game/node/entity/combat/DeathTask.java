@@ -6,6 +6,7 @@ import core.game.container.ContainerType;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.impl.Animator;
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.IronmanMode;
@@ -152,13 +153,11 @@ public final class DeathTask extends NodeTask {
 	@SuppressWarnings("deprecation")
 	public static void startDeath(Entity entity, Entity killer) {
 		if (!isDead(entity)) {
-			entity.getPulseManager().clear();
 			if (killer == null) {
 				killer = entity;
 			}
 			Pulse pulse = SINGLETON.schedule(entity, killer);
-			pulse.start();
-			entity.getPulseManager().set(pulse);
+			entity.getPulseManager().run(pulse, PulseType.STRONG);
 		}
 	}
 

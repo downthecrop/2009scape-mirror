@@ -4,6 +4,7 @@ import core.game.interaction.MovementPulse;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
@@ -155,7 +156,7 @@ public class PCRavagerNPC extends AbstractNPC {
 			public boolean pulse() {
 				return true;
 			}
-		}, "movement");
+		}, PulseType.STANDARD);
 	}
 
 	/**

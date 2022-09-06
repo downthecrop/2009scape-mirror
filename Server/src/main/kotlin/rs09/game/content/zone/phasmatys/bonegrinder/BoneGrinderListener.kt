@@ -3,6 +3,7 @@ package rs09.game.content.zone.phasmatys.bonegrinder
 import api.Container
 import api.*
 import core.game.content.global.Bones
+import core.game.node.entity.impl.PulseType
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.system.task.Pulse
@@ -146,7 +147,7 @@ class BoneGrinderListener : InteractionListener {
                 }
             })
         } else {
-            Pulser.submit(fillPulse)
+           player.pulseManager.run(fillPulse, PulseType.CUSTOM_1)
         }
         return true
     }
@@ -162,7 +163,7 @@ class BoneGrinderListener : InteractionListener {
             return true
         }
 
-        Pulser.submit(object : Pulse(){
+        player.pulseManager.run(object : Pulse(){
             var stage = 0
             override fun pulse(): Boolean {
                 when(stage++){
@@ -181,7 +182,7 @@ class BoneGrinderListener : InteractionListener {
                 }
                 return false
             }
-        })
+        }, PulseType.CUSTOM_1)
         return true
     }
 
@@ -199,14 +200,18 @@ class BoneGrinderListener : InteractionListener {
         return true
     }
 
-    fun handleEmpty(player: Player): Boolean{
-        if(!getAttribute(player,BONE_BIN_KEY,false)){
-            sendMessage(player,"You have no bonemeal to collect.")
-            return true
-        }
+    fun handleEmpty(player: Player): Boolean {
+        val inHopper = getAttribute(player, BONE_HOPPER_KEY, false)
+        val boneType = getAttribute(player, LOADED_BONE_KEY, -1)
+        val hasMeal = getAttribute(player, BONE_BIN_KEY, false) && boneType != -1
 
-        if(getAttribute(player,BONE_HOPPER_KEY,false) && !getAttribute(player,BONE_BIN_KEY,false)){
-            sendMessage(player,"You need to wind the wheel to grind the bones.")
+        if(!hasMeal){
+            if (inHopper)
+                sendMessage(player,"You need to wind the wheel to grind the bones.")
+            else if (boneType == -1)
+                sendMessage(player, "You need to load some bones in the hopper first.")
+            else
+                sendMessage(player,"You have no bonemeal to collect.")
             return true
         }
 
@@ -215,31 +220,29 @@ class BoneGrinderListener : InteractionListener {
             return true
         }
 
-        val bone = Bones.values()[getAttribute(player,LOADED_BONE_KEY,-1)]
+        val bone = Bones.values()[boneType]
 
+        removeAttributes(player, BONE_HOPPER_KEY, BONE_BIN_KEY, LOADED_BONE_KEY)
+        lock(player, SCOOP_ANIM.duration + 1)
 
-        Pulser.submit(object : Pulse(){
+        player.pulseManager.run(object : Pulse(){
             var stage = 0
             override fun pulse(): Boolean {
                 when(stage++){
                     0 -> {
                         face(player,Location(3658, 3525, 1))
-                        lock(player, SCOOP_ANIM.duration)
                         animate(player,SCOOP_ANIM)
                     }
                     SCOOP_ANIM.duration -> {
                         if(removeItem(player,Item(Items.EMPTY_POT_1931),Container.INVENTORY)){
                             addItem(player,bone.boneMeal.id)
-                            setAttribute(player,BONE_BIN_KEY,false)
-                            setAttribute(player,BONE_HOPPER_KEY,false)
-                            setAttribute(player,LOADED_BONE_KEY,-1)
                         }
                         return true
                     }
                 }
                 return false
             }
-        })
+        }, PulseType.CUSTOM_1)
         return true
     }
 

@@ -8,6 +8,7 @@ import core.game.interaction.MovementPulse;
 import core.game.interaction.Option;
 import core.game.interaction.SpecialGroundItems;
 import core.game.node.Node;
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItem;
@@ -243,7 +244,7 @@ public final class InteractionPacket implements IncomingPacket {
 					player.getDialogueInterpreter().addAction((player1, buttonId) -> player1.teleport(new Location(3140, 4230, 2)));
 					return true;
 				}
-			}, "movement");				
+			}, PulseType.STANDARD);
 			return;
 		}
 		if (objectId == 6898) {

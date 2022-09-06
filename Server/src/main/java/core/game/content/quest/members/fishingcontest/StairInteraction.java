@@ -2,6 +2,7 @@ package core.game.content.quest.members.fishingcontest;
 
 import core.game.interaction.MovementPulse;
 import core.game.node.Node;
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
@@ -35,7 +36,7 @@ public class StairInteraction extends PluginInteraction {
                 player.getDialogueInterpreter().open(npc_id,new NPC(npc_id));
                 return true;
             }
-        }, "movement");
+        }, PulseType.STANDARD);
     }
 
     @Override

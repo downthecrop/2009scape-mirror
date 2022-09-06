@@ -1,6 +1,7 @@
 package core.game.node.entity.skill.agility.shortcuts;
 
 import core.game.content.activity.ActivityManager;
+import core.game.node.entity.impl.PulseType;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.agility.AgilityShortcut;
 import core.game.interaction.MovementPulse;
@@ -39,7 +40,7 @@ public class StileShortcut extends AgilityShortcut {
 				climb(player, object);
 				return true;
 			}
-		}, "movement");
+		}, PulseType.STANDARD);
 	}
 
 	/**

@@ -67,7 +67,6 @@ public class DuelArea extends MapZone {
 
 		@Override
 		public boolean handle(Player player, Node node, String option) {
-			player.getPulseManager().clear("interaction:attack:" + node.hashCode());
 			player.getProperties().getCombatPulse().attack(node);
 			return true;
 		}

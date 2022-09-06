@@ -7,6 +7,7 @@ import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.impl.Projectile;
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.SkillBonus;
@@ -517,7 +518,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 			public boolean pulse() {
 				return false;
 			}
-		}, "movement");
+		}, PulseType.STANDARD);
 		face(owner);
 	}
 

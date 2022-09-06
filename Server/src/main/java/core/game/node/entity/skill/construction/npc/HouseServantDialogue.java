@@ -3,6 +3,7 @@ package core.game.node.entity.skill.construction.npc;
 
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.dialogue.FacialExpression;
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.construction.HouseManager;
 import core.game.node.entity.skill.construction.Servant;
@@ -172,7 +173,7 @@ public class HouseServantDialogue extends DialoguePlugin {
 			case 3:
 				player("Stop following me.");
 				if (servant.getPulseManager().isMovingPulse()) {
-					servant.getPulseManager().clear("movement");
+					servant.getPulseManager().clear(PulseType.STANDARD);
 				}
 				stage = 100;
 				break;
@@ -562,6 +563,6 @@ public class HouseServantDialogue extends DialoguePlugin {
 			public boolean pulse() {
 				return false;
 			}
-		}, "movement");
+		}, PulseType.STANDARD);
 	}
 }

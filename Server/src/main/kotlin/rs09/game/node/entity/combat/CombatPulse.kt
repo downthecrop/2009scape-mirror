@@ -29,7 +29,7 @@ class CombatPulse(
         /**
          * The entity.
          */
-        private val entity: Entity?) : Pulse(1, entity, null) {
+        val entity: Entity?) : Pulse(1, entity, null) {
 
     /**
      * The victim.
@@ -108,6 +108,11 @@ class CombatPulse(
      * The last attack recieved.
      */
     var lastReceivedAttack = 0
+
+    init {
+        running = false
+    }
+
     override fun pulse(): Boolean {
         if (victim == null || DeathTask.isDead(entity) || DeathTask.isDead(victim)) {
             return true
@@ -179,7 +184,7 @@ class CombatPulse(
             }
         }
         if (!victim.pulseManager.isMovingPulse) {
-            victim.pulseManager.clear("combat")
+            victim.pulseManager.clear()
         }
         victim.setAttribute("combat-time", System.currentTimeMillis() + 10000)
         victim.setAttribute("combat-attacker", entity)
@@ -291,7 +296,9 @@ class CombatPulse(
         }
         setVictim(victim)
         entity.onAttack(victim as Entity?)
-        entity.pulseManager.run(this)
+
+        if (!isAttacking)
+            entity.pulseManager.run(this)
     }
 
     /**

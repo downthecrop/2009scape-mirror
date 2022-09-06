@@ -3,6 +3,7 @@ package core.game.content.quest.members.fishingcontest;
 import core.game.interaction.MovementPulse;
 import core.game.interaction.NodeUsageEvent;
 import core.game.node.Node;
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
@@ -39,7 +40,7 @@ public class GarlicPipeInteraction extends PluginInteraction {
                         player.setAttribute("fishing_contest:garlic",true);
                         return true;
                     }
-                }, "movement");
+                }, PulseType.STANDARD);
                 return true;
             }
         }
@@ -57,7 +58,7 @@ public class GarlicPipeInteraction extends PluginInteraction {
                         player.getDialogueInterpreter().sendDialogue("This is the pipe I stuffed that garlic into.");
                         return true;
                     }
-                }, "movement");
+                }, PulseType.STANDARD);
                 return true;
             }
         }

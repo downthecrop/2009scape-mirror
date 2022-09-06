@@ -2,6 +2,7 @@ package rs09.game.content.ame.events.certer
 
 import api.addItemOrDrop
 import core.game.component.Component
+import core.game.node.entity.impl.PulseType
 import core.game.node.entity.player.link.emote.Emotes
 import rs09.game.content.ame.RandomEventManager
 import rs09.game.content.dialogue.DialogueFile
@@ -47,7 +48,7 @@ class CerterDialogue(val initial: Boolean) : DialogueFile() {
         super.end()
         if (player!!.getAttribute("certer:reward", false)) {
             // Remove movement pulse to stop following player
-            npc!!.pulseManager.clear("amemovement")
+            npc!!.pulseManager.clear(PulseType.STANDARD)
             // Wave goodbye
             npc!!.animate(Emotes.WAVE.animation)
             // Terminate the event

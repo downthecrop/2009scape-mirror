@@ -2,6 +2,7 @@ package core.game.content.quest.members.fishingcontest;
 
 import core.game.interaction.MovementPulse;
 import core.game.node.entity.Entity;
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
@@ -140,7 +141,7 @@ public class FishingContestCutscene extends CutscenePlugin {
                             player.getWalkingQueue().setRunDisabled(true);
                             return true;
                         }
-                    }, "movement");
+                    }, PulseType.STANDARD);
                     break;
                 case 12:
                     stranger.sendChat("You're switching with me. Go.");
@@ -152,7 +153,7 @@ public class FishingContestCutscene extends CutscenePlugin {
                             player.getDialogueInterpreter().sendDialogue("Your spot is now by the pipes.");
                             return true;
                         }
-                    }, "movement");
+                    }, PulseType.STANDARD);
                     break;
                 case 22:
                     stranger.getPulseManager().run(new MovementPulse(stranger, base.getLocation().transform(7, 43, 0)) {
@@ -160,7 +161,7 @@ public class FishingContestCutscene extends CutscenePlugin {
                         public boolean pulse() {
                             return true;
                         }
-                    }, "movement");
+                    },PulseType.STANDARD);
                     GameWorld.getPulser().submit(new FishingPulse());
                     return true;
             }

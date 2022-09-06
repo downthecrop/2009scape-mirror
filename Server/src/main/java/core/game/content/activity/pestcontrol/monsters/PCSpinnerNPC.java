@@ -5,6 +5,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.impl.Animator.Priority;
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
@@ -72,7 +73,7 @@ public final class PCSpinnerNPC extends AbstractNPC {
 						public boolean pulse() {
 							return true;
 						}
-					}, "movement");
+					}, PulseType.STANDARD);
 				}
 			}
 		}

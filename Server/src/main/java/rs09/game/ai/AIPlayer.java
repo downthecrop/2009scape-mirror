@@ -1,5 +1,6 @@
 package rs09.game.ai;
 
+import core.game.node.entity.impl.PulseType;
 import rs09.ServerConstants;
 import core.game.container.impl.EquipmentContainer;
 import core.game.interaction.DestinationFlag;
@@ -287,7 +288,7 @@ public class AIPlayer extends Player {
                 face(e);
                 return false;
             }
-        }, "movement");
+        }, PulseType.STANDARD);
     }
 
     public void randomWalkAroundPoint(Location point, int radius) {

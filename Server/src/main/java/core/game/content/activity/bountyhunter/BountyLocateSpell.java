@@ -1,5 +1,6 @@
 package core.game.content.activity.bountyhunter;
 
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.skill.magic.MagicSpell;
 import core.game.node.entity.skill.magic.Runes;
 import core.game.interaction.MovementPulse;
@@ -74,7 +75,7 @@ public final class BountyLocateSpell extends MagicSpell {
 				public boolean pulse() {
 					return true;
 				}
-			}, "movement");
+			}, PulseType.STANDARD);
 			return true;
 		}
 		Location destination = RegionManager.getTeleportLocation(entry.getTarget().getLocation(), 5);

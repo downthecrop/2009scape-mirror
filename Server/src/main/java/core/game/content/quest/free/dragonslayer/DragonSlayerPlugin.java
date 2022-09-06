@@ -141,7 +141,6 @@ public final class DragonSlayerPlugin extends OptionHandler {
 				player.getPacketDispatch().sendMessage("You have already slain Elvarg the dragon.");
 				return true;
 			}
-			player.getPulseManager().clear("interaction:attack:" + node.hashCode());
 			player.getProperties().getCombatPulse().attack(node);
 			player.face((Entity) node);
 			break;
@@ -230,7 +229,6 @@ public final class DragonSlayerPlugin extends OptionHandler {
 			break;
 		case 745:
 			if (option.equals("attack")) {
-				player.getPulseManager().clear("interaction:attack:" + node.hashCode());
 				player.getProperties().getCombatPulse().attack(node);
 				return true;
 			}

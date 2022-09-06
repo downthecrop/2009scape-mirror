@@ -3,6 +3,7 @@ package core.game.content.quest.members.sheepherder;
 import core.game.interaction.DestinationFlag;
 import core.game.interaction.MovementPulse;
 import core.game.node.Node;
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.player.Player;
 import rs09.game.system.SystemLogger;
 import core.plugin.Initializable;
@@ -40,7 +41,7 @@ public class GateInteractionHandler extends PluginInteraction {
                     player.getDialogueInterpreter().sendDialogues(SheepHerder.FARMER_BRUMTY, FacialExpression.SUSPICIOUS, "You can't enter without your protective gear!", "Can't have you spreading the plague!");
                     return true;
                 }
-            }, "movement");
+            }, PulseType.STANDARD);
             return true;
         }
         return false;

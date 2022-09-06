@@ -1,5 +1,6 @@
 package core.net.packet.in;
 
+import core.game.node.entity.impl.PulseType;
 import rs09.ServerConstants;
 import core.game.node.entity.skill.magic.MagicSpell;
 import core.game.node.entity.skill.summoning.familiar.FamiliarSpecial;
@@ -81,7 +82,7 @@ public class InterfaceUseOnPacket implements IncomingPacket {
 						MagicSpell.castSpell(player, SpellBookManager.SpellBook.MODERN, spell, groundItem);
 						return true;
 					}
-				}, "movement");
+				}, PulseType.STANDARD);
 			}
 			break;
 		case 195: // Interface On Player

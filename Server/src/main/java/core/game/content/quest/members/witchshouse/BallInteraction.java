@@ -2,6 +2,7 @@ package core.game.content.quest.members.witchshouse;
 
 import core.game.interaction.MovementPulse;
 import core.game.interaction.Option;
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.world.map.Location;
@@ -35,7 +36,7 @@ public class BallInteraction extends PluginInteraction {
                 public boolean pulse() {
                     return true;
                 }
-            }, "movement");
+            }, PulseType.STANDARD);
             handleBall(player);
         }
         return handled;

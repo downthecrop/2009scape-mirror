@@ -788,7 +788,11 @@ fun <T> setAttribute(entity: Entity, attribute: String, value: T) {
 }
 
 fun removeAttribute(entity: Entity, attribute: String) {
-    entity.removeAttribute(attribute)
+    entity.removeAttribute(attribute.replace("/save:",""))
+}
+
+fun removeAttributes(entity: Entity, vararg attributes: String) {
+    for (attribute in attributes) removeAttribute(entity, attribute)
 }
 
 /**

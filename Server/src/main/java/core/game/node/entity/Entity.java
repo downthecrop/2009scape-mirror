@@ -358,7 +358,6 @@ public abstract class Entity extends Node {
 	 * @param node the node.
 	 */
 	public void attack(final Node node) {
-		getPulseManager().clear("interaction:attack:" + node.hashCode());
 		getProperties().getCombatPulse().attack(node);
 	}
 

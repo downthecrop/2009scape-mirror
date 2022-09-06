@@ -12,7 +12,7 @@ public abstract class Pulse implements Runnable {
 	/**
 	 * If the task is still running.
 	 */
-	private boolean running = true;
+	public boolean running = true;
 
 	/**
 	 * The amount of game-ticks to wait before execution.

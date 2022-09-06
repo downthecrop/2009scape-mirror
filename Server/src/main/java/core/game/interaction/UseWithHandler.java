@@ -3,6 +3,7 @@ package core.game.interaction;
 import api.events.UseWithEvent;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.node.Node;
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
@@ -126,7 +127,7 @@ public abstract class UseWithHandler implements Plugin<Object> {
             }
             if (handler == null) {
                 if (n instanceof Item && !(event.getUsed() instanceof Player)) {
-                    event.getPlayer().getPulseManager().runUnhandledAction(event.getPlayer());
+                    event.getPlayer().getPulseManager().runUnhandledAction(event.getPlayer(), PulseType.STANDARD);
                 } else {
                     event.getPlayer().getPulseManager().run(new MovementPulse(event.getPlayer(), event.getUsedWith()) {
                         @Override
@@ -135,7 +136,7 @@ public abstract class UseWithHandler implements Plugin<Object> {
                             event.getPlayer().getPacketDispatch().sendMessage("Nothing interesting happens.");
                             return true;
                         }
-                    }, "movement");
+                    }, PulseType.STANDARD);
                 }
                 return;
             }
@@ -164,7 +165,7 @@ public abstract class UseWithHandler implements Plugin<Object> {
                         }
                         return true;
                     }
-                });
+                }, PulseType.STANDARD);
                 return;
             }
             event.getPlayer().getPulseManager().run(new MovementPulse(event.getPlayer(), event.getUsedWith(), handler.get(0)) {
@@ -188,7 +189,7 @@ public abstract class UseWithHandler implements Plugin<Object> {
                     }
                     return true;
                 }
-            }, "movement");
+            }, PulseType.STANDARD);
         } catch (Exception e){
             e.printStackTrace();
         }

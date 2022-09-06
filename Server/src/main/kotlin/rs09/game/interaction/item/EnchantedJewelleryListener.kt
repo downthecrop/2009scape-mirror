@@ -3,6 +3,7 @@ package rs09.game.interaction.item
 import api.openDialogue
 import api.sendMessage
 import core.game.node.Node
+import core.game.node.entity.impl.PulseType
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import rs09.game.content.dialogue.DialogueFile
@@ -29,7 +30,7 @@ class EnchantedJewelleryListener : InteractionListener {
         }
     }
     private fun handle(player: Player, node: Node, isEquipped: Boolean) {
-        player.pulseManager.current.stop()
+        player.pulseManager.clear(PulseType.STANDARD)
         val item = node.asItem()
         val jewellery = EnchantedJewellery.idMap[item.id]
         if (jewellery != null) {

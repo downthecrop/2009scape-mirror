@@ -2,6 +2,7 @@ package core.game.content.quest.members.fishingcontest;
 
 import core.game.interaction.MovementPulse;
 import core.game.node.Node;
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
@@ -29,7 +30,7 @@ public class FenceInteraction extends PluginInteraction {
                 GameWorld.getPulser().submit(new SqueezePulse(player));
                 return true;
             }
-        }, "movement");
+        }, PulseType.STANDARD);
         return true;
     }
 

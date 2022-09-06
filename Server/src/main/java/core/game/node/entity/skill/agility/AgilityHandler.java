@@ -1,6 +1,8 @@
 package core.game.node.entity.skill.agility;
 
 import static api.ContentAPIKt.*;
+
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.player.link.TeleportManager;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.MovementPulse;
@@ -267,7 +269,7 @@ public final class AgilityHandler {
 					walk(player, courseIndex, start, end, animation, experience, message, infiniteRun);
 					return true;
 				}
-			}, "movement");
+			}, PulseType.STANDARD);
 			return;
 		}
 		player.getWalkingQueue().reset();

@@ -2,6 +2,7 @@ package core.net.packet.in;
 
 import core.game.interaction.MovementPulse;
 import core.game.node.entity.Entity;
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.player.Player;
 import rs09.game.ai.AIPlayer;
 import core.game.world.map.Location;
@@ -60,7 +61,7 @@ public final class WalkPacket implements IncomingPacket {
 				}
 				return true;
 			}
-		}, true, "movement");
+		}, PulseType.STANDARD);
 		if (opcode == 39) {
 			buffer.get(); // The x-coordinate of where we clicked on the
 			// minimap.

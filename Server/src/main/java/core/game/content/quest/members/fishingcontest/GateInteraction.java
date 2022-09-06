@@ -2,6 +2,7 @@ package core.game.content.quest.members.fishingcontest;
 
 import core.game.interaction.MovementPulse;
 import core.game.node.Node;
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
@@ -37,7 +38,7 @@ public class GateInteraction extends PluginInteraction {
                     }
                     return true;
                 }
-            }, "movement");
+            }, PulseType.STANDARD);
             return true;
         } else {
             if(!player.getInventory().containsItem(FishingContest.FISHING_ROD)){
@@ -55,7 +56,7 @@ public class GateInteraction extends PluginInteraction {
                     player.getDialogueInterpreter().sendDialogue("This gate is locked.");
                     return true;
                 }
-            }, "movement");
+            }, PulseType.STANDARD);
             return true;
         }
         return false;

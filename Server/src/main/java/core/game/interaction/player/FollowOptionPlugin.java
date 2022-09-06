@@ -5,6 +5,7 @@ import core.game.interaction.MovementPulse;
 import core.game.interaction.Option;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -38,7 +39,7 @@ public final class FollowOptionPlugin extends OptionHandler {
 				super.stop();
 				mover.face(null);
 			}
-		}, "movement");
+		}, PulseType.STANDARD);
 		return true;
 	}
 }

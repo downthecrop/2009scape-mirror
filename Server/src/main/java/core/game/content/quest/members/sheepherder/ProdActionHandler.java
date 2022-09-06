@@ -4,6 +4,7 @@ import core.game.interaction.DestinationFlag;
 import core.game.interaction.MovementPulse;
 import core.game.interaction.Option;
 import core.game.node.Node;
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import rs09.game.system.SystemLogger;
@@ -30,7 +31,7 @@ public class ProdActionHandler extends PluginInteraction {
                         handleProd(player,n);
                         return true;
                     }
-                }, "movement");
+                }, PulseType.STANDARD);
                 return true;
             }
         return false;

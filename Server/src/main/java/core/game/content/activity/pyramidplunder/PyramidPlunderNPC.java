@@ -3,6 +3,7 @@ package core.game.content.activity.pyramidplunder;
 import core.game.interaction.MovementPulse;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.CombatStyle;
+import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import rs09.game.world.GameWorld;
@@ -150,7 +151,7 @@ public abstract class PyramidPlunderNPC extends AbstractNPC {
             public boolean pulse() {
                 return false;
             }
-        }, "movement");
+        }, PulseType.STANDARD);
         face(player);
     }
 
