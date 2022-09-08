@@ -45,6 +45,7 @@ object Discord {
     }
 
     fun postPlayerAlert(player: String, type: String) {
+        if (ServerConstants.DISCORD_MOD_WEBHOOK.isEmpty()) return
         GlobalScope.launch {
             val alert = encodeUserAlert(type, player)
             try {
