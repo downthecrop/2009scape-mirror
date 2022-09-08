@@ -10,6 +10,7 @@ import core.game.node.entity.player.info.login.LoginType
 import core.net.Constants
 import core.net.IoSession
 import core.tools.StringUtils
+import discord.Discord
 import proto.management.JoinClanRequest
 import proto.management.PlayerStatusUpdate
 import proto.management.RequestContactInfo
@@ -123,6 +124,12 @@ object Login {
             Repository.LOGGED_IN_PLAYERS.add(details.username)
         details.session = session
         details.info.translate(UIDInfo(details.ipAddress, "DEPRECATED", "DEPRECATED", "DEPRECATED"))
+
+        val archive = ServerStore.getArchive("flagged-ips")
+        val flaggedIps = archive.getList<String>("ips")
+        if (flaggedIps.contains(details.ipAddress)) {
+            Discord.postPlayerAlert(details.username, "Login from flagged IP ${details.ipAddress}")
+        }
 
         if (checkAccountLimit(details.ipAddress, details.username)) {
             val player = Player(details)

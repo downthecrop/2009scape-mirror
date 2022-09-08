@@ -1,6 +1,7 @@
 package discord
 
 import api.getItemName
+import core.game.node.entity.player.Player
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.json.simple.JSONArray
@@ -24,7 +25,7 @@ object Discord {
         GlobalScope.launch {
             val offer = encodeOfferJson(isSale, itemId, value, qty, user)
             try {
-                sendJsonPost(offer)
+                sendJsonPost(ServerConstants.DISCORD_GE_WEBHOOK, offer)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -36,7 +37,18 @@ object Discord {
         GlobalScope.launch {
             val offer = encodeUpdateJson(isSale, itemId, value, amtLeft)
             try {
-                sendJsonPost(offer)
+                sendJsonPost(ServerConstants.DISCORD_GE_WEBHOOK, offer)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun postPlayerAlert(player: String, type: String) {
+        GlobalScope.launch {
+            val alert = encodeUserAlert(type, player)
+            try {
+                sendJsonPost(ServerConstants.DISCORD_MOD_WEBHOOK, alert)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -88,6 +100,23 @@ object Discord {
         return obj.toJSONString()
     }
 
+    private fun encodeUserAlert(type: String, player: String) : String {
+        val obj = JSONObject()
+        val embeds = JSONArray()
+        val embed = JSONObject()
+
+        val fields = arrayOf(
+            EmbedField("Player", player, false),
+            EmbedField("Type", type, false)
+        )
+
+        embed["title"] = "Player Alert"
+        embed["fields"] = getFields(fields)
+        embeds.add(embed)
+        obj["embeds"] = embeds
+        return obj.toJSONString()
+    }
+
     private fun getFields(fields: Array<EmbedField>): JSONArray {
         val arr = JSONArray()
 
@@ -110,8 +139,8 @@ object Discord {
         return obj
     }
 
-    private fun sendJsonPost(data: String) {
-        val conn = URL(ServerConstants.DISCORD_GE_WEBHOOK).openConnection() as HttpURLConnection
+    private fun sendJsonPost(url: String = ServerConstants.DISCORD_GE_WEBHOOK, data: String) {
+        val conn = URL(url).openConnection() as HttpURLConnection
         conn.doOutput = true
         conn.requestMethod = "POST"
         conn.setRequestProperty("Content-Type", "application/json")

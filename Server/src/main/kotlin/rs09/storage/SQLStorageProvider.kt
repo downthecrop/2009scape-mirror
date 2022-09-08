@@ -177,9 +177,24 @@ class SQLStorageProvider : AccountStorageProvider {
         return friends
     }
 
+    override fun getUsernamesWithIP(ip: String): List<String> {
+        val conn = getConnection()
+        val res = ArrayList<String>()
+        conn.use {
+            val query = it.prepareStatement(accountsByIPQuery)
+            query.setString(1, ip)
+            val r = query.executeQuery()
+            while (r.next()) {
+                res.add(r.getString(1))
+            }
+        }
+        return res
+    }
+
     companion object {
         private const val usernameQuery = "SELECT username FROM members WHERE username = ?;"
         private const val removeInfoQuery = "DELETE FROM members WHERE username = ?;"
+        private const val accountsByIPQuery = "SELECT username FROM members WHERE lastGameIp = ?;"
         private const val accountInfoQuery = "SELECT " +
                 "username," +
                 "password," +

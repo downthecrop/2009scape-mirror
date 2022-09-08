@@ -234,6 +234,9 @@ class ServerConstants {
 		var DISCORD_GE_WEBHOOK = ""
 
 		@JvmField
+		var DISCORD_MOD_WEBHOOK = ""
+
+		@JvmField
 		var PRELOAD_MAP = false
 
 		@JvmField

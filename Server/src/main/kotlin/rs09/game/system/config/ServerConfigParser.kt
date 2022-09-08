@@ -124,6 +124,7 @@ object ServerConfigParser {
         ServerConstants.USE_AUTH = data.getBoolean("server.use_auth", true)
         ServerConstants.PERSIST_ACCOUNTS = data.getBoolean("server.persist_accounts", true)
         ServerConstants.DAILY_ACCOUNT_LIMIT = data.getLong("server.daily_accounts_per_ip", 3L).toInt()
+        ServerConstants.DISCORD_MOD_WEBHOOK = data.getString("server.moderation_webhook", "")
     }
 
 

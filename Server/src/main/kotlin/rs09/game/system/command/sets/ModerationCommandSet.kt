@@ -7,6 +7,8 @@ import rs09.game.world.GameWorld
 import core.game.world.map.Location
 import rs09.game.world.repository.Repository
 import core.plugin.Initializable
+import rs09.ServerStore
+import rs09.ServerStore.Companion.addToList
 import rs09.game.system.command.Privilege
 import java.util.concurrent.TimeUnit
 
@@ -79,6 +81,59 @@ class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
             })
 
             notify(player, "Banned user $name for $intToken ${durationUnit.name.toLowerCase()}.")
+        }
+        /**
+         * =============================================================================================================
+         */
+
+        /**
+         * Ban all players on a given IP
+         * =============================================================================================================
+         */
+        define("ipban", Privilege.ADMIN, "::ipban <lt>IP<gt> <lt>TIME<gt>", "Bans all players on the given ip. Time format: <lt>INT<gt>d/s/m/h ex: 30d for 30 days."){ player, args ->
+            val ip = args[1]
+            val durationString = args[2]
+            val durationTokens = durationString.toCharArray()
+            var intToken = ""
+            var durationMillis = 0L
+            var durationUnit: TimeUnit = TimeUnit.NANOSECONDS
+            for(token in durationTokens){
+                if(token.toString().toIntOrNull() != null) intToken += token
+                else {
+                    val durationInt: Int = (intToken.toIntOrNull() ?: -1).also { if(it == -1) reject(player, "Invalid duration: $intToken") }
+                    durationUnit = when(token) {
+                        'd' -> TimeUnit.DAYS
+                        's' -> TimeUnit.SECONDS
+                        'm' -> TimeUnit.MINUTES
+                        'h' -> TimeUnit.HOURS
+                        else -> TimeUnit.SECONDS
+                    }
+                    durationMillis = durationUnit.toMillis(durationInt.toLong())
+                }
+            }
+
+            val playersToBan = GameWorld.accountStorage.getUsernamesWithIP(ip)
+            if (playersToBan.isEmpty()) {
+                reject(player, "No accounts found on IP $ip")
+            }
+
+            for (p in playersToBan) {
+                val playerToKick = Repository.getPlayerByName(p)
+                playerToKick?.details?.accountInfo?.banEndTime = System.currentTimeMillis() + durationMillis
+                playerToKick?.clear(true)
+                GameWorld.Pulser.submit(object : Pulse(2) {
+                    override fun pulse(): Boolean {
+                        val info = GameWorld.accountStorage.getAccountInfo(p)
+                        info.banEndTime = System.currentTimeMillis() + durationMillis
+                        GameWorld.accountStorage.update(info)
+                        return true
+                    }
+                })
+            }
+
+            ServerStore.getArchive("flagged-ips").addToList("ips", ip)
+
+            notify(player, "Banned all accounts on $ip for $intToken ${durationUnit.name.toLowerCase()}.")
         }
         /**
          * =============================================================================================================

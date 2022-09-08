@@ -28,4 +28,8 @@ class InMemoryStorageProvider : AccountStorageProvider {
     override fun getOnlineFriends(username: String): List<String> {
         return ArrayList()
     }
+
+    override fun getUsernamesWithIP(ip: String): List<String> {
+        return ArrayList()
+    }
 }
