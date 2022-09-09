@@ -11,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.player.link.music.MusicEntry
 import core.game.node.entity.skill.Skills
-import core.game.node.entity.skill.gather.SkillingTool
 import core.game.node.entity.skill.gather.woodcutting.WoodcuttingSkillPulse
 import core.game.node.scenery.Scenery
 import core.game.system.task.Pulse
@@ -53,7 +52,6 @@ class TFTInteractionListeners : InteractionListener{
     private val SHOPNPCS = intArrayOf(NPCs.YRSA_1301,NPCs.SKULGRIMEN_1303,NPCs.THORA_THE_BARKEEP_1300,NPCs.SIGMUND_THE_MERCHANT_1282,NPCs.FISH_MONGER_1315)
     private val SPINNING_WHEEL_IDS = intArrayOf(2644,4309,8748,20365,21304,25824,26143,34497,36970,37476)
     private val STEW_INGREDIENT_IDS = intArrayOf(Items.POTATO_1942,Items.ONION_1957,Items.CABBAGE_1965,Items.PET_ROCK_3695)
-    //private val FREMENNIK_HELMS = intArrayOf(Items.ARCHER_HELM_3749, Items.BERSERKER_HELM_3751, Items.WARRIOR_HELM_3753, Items.FARSEER_HELM_3755/*, Items.HELM_OF_NEITIZNOT_10828 Should this be included?*/)
 
     override fun defineListeners() {
         onUseWith(NPC,BEER,WORKER){ player, beer, _ ->
@@ -61,7 +59,7 @@ class TFTInteractionListeners : InteractionListener{
             return@onUseWith true
         }
 
-        onUseWith(SCENERY,FISH_ALTAR,*FISH){ player, _, fish ->
+        onUseWith(SCENERY, FISH, FISH_ALTAR){ player,fish,_ ->
             if(inInventory(player,Items.LYRE_3689) || inInventory(player,Items.ENCHANTED_LYRE_3690)) {
                 Pulser.submit(SpiritPulse(player, fish.id))
             } else {
@@ -105,7 +103,7 @@ class TFTInteractionListeners : InteractionListener{
             return@onUseWith true
         }
 
-        onUseWith(SCENERY,LALLIS_STEW,*STEW_INGREDIENT_IDS){player,_,stewIngredient ->
+        onUseWith(SCENERY, STEW_INGREDIENT_IDS, LALLIS_STEW){player,stewIngredient,_ ->
             when(stewIngredient.id){
                 Items.ONION_1957 -> {
                     sendDialogue(player,"You added an onion to the stew")
@@ -131,7 +129,7 @@ class TFTInteractionListeners : InteractionListener{
             return@onUseWith true
         }
 
-        onUseWith(SCENERY,SPINNING_WHEEL_IDS,GOLDEN_FLEECE){ player, _, _ ->
+        onUseWith(SCENERY,GOLDEN_FLEECE,*SPINNING_WHEEL_IDS){ player, _, _ ->
             if(removeItem(player,GOLDEN_FLEECE)){
                 addItem(player,GOLDEN_WOOL)
                 animate(player,896)
@@ -306,7 +304,7 @@ class TFTInteractionListeners : InteractionListener{
                 if (i == null) {
                     continue
                 }
-                if (i.name.toLowerCase().contains(" rune")) {
+                if (i.name.lowercase().contains(" rune")) {
                     return true
                 }
                 var slot: Int = i.definition.getConfiguration(ItemConfigParser.EQUIP_SLOT, -1)
@@ -350,21 +348,6 @@ class TFTInteractionListeners : InteractionListener{
         }
     }
 
-    class ChoppingPulse(val player: Player) : Pulse() {
-        var counter = 0
-        override fun pulse(): Boolean {
-            when(counter++){
-                0 -> player.animator.animate(SkillingTool.getHatchet(player).animation)
-                4 -> {
-                    player.animator.reset()
-                    addItem(player,Items.BRANCH_3692)
-                    return true
-                }
-            }
-            return false
-        }
-    }
-
     class LyreConcertPulse(val player: Player, val Lyre: Int) : Pulse(){
         val GENERIC_LYRICS = arrayOf(
             "${player.name?.capitalize()} is my name,",
@@ -390,7 +373,6 @@ class TFTInteractionListeners : InteractionListener{
             "I will simply tell you this:",
             "I've joined the Legends' Guild!"
         )
-        val SKILLS = mutableListOf(Skills.SKILL_NAME)
         var counter = 0
         val questPoints = getQP(player)
         val champGuild = player.achievementDiaryManager?.hasCompletedTask(DiaryType.VARROCK, 1, 1)?: false
@@ -444,7 +426,7 @@ class TFTInteractionListeners : InteractionListener{
                     player.musicPlayer.play(MusicEntry.forId(164))
                     sendChat(player,LYRICS[3])
                 }
-                12 ->{
+                14 ->{
                     setAttribute(player,"/save:lyreConcertPlayed",true)
                     player.removeAttribute("LyreEnchanted")
                     if(removeItem(player,Lyre))

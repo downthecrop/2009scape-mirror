@@ -1,7 +1,6 @@
 package rs09.game.content.quest.members.thefremenniktrials
 
-import api.addItem
-import api.removeItem
+import api.*
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.player.Player
@@ -103,8 +102,8 @@ class OlafTheBard(player: Player? = null) : DialoguePlugin(player){
             40 -> npcl(FacialExpression.HAPPY,"You have a truly poetic soul! Anyone who can compose such a beautiful epic, and then perform it so flawlessly can only bring good to our clan!").also { stage++ }
             41 -> playerl(FacialExpression.THINKING,"Erm... so that's a yes, then?").also { stage++ }
             42 -> npcl(FacialExpression.HAPPY,"Absolutely! We must collaborate together on a duet sometime, don't you think?").also {
-                player?.setAttribute("/save:fremtrials:olaf-vote",true)
-                player?.setAttribute("/save:fremtrials:votes",player.getAttribute("fremtrials:votes",0) + 1)
+                setAttribute(player, "/save:fremtrials:olaf-vote",true)
+                setAttribute(player, "/save:fremtrials:votes",getAttribute(player, "fremtrials:votes",0) + 1)
                 stage = 1000
             }
 

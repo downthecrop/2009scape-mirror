@@ -24,7 +24,7 @@ class YrsaDialogue(player: Player? = null) : DialoguePlugin(player) {
             return true
         }
         else if(player?.getAttribute("sigmundreturning",false) == true){
-            playerl(FacialExpression.ASKING,"I have this trade item but I can't remember who it's for")
+            playerl(FacialExpression.ASKING,"I have this trade item but I can't remember who it's for.")
             stage = 25
             return true
         }

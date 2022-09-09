@@ -1,5 +1,6 @@
 package rs09.game.content.quest.members.thefremenniktrials
 
+import api.*
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
@@ -17,32 +18,37 @@ class HunterTalismanListener : InteractionListener {
     override fun defineListeners() {
 
         on(TALISMAN,ITEM,"locate"){player,_ ->
-            var locationString = player.getAttribute("fremtrials:draugen-loc","none")
+            var locationString = getAttribute(player,"fremtrials:draugen-loc","none")
             if(locationString == "none"){
                 val newLoc = possibleLocations.random()
-                player.setAttribute("/save:fremtrials:draugen-loc","${newLoc.x},${newLoc.y}")
+                setAttribute(player, "/save:fremtrials:draugen-loc","${newLoc.x},${newLoc.y}")
                 locationString = "${newLoc.x},${newLoc.y}"
             }
             val locationComponents = locationString?.split(",")
             val draugenLoc = Location(Integer.parseInt(locationComponents?.get(0)),Integer.parseInt(locationComponents?.get(1)))
 
             if(player.location?.withinDistance(draugenLoc,5)!!){
-                player.dialogueInterpreter.sendDialogue("The Draugen is nearby, be careful!")
+                sendDialogue(player, "The Draugen is nearby, be careful!")
                 Pulser.submit(DraugenPulse(player))
             } else {
                 val neededDirection = draugenLoc.getDirection(player as Entity)
-                player.sendMessage("The talisman pulls you to the $neededDirection")
+                sendMessage(player, "The talisman pulls you to the $neededDirection")
             }
             return@on true
         }
 
     }
 
-    class DraugenPulse(val player: Player?) : Pulse(){
+    class DraugenPulse(val player: Player) : Pulse(){
         var count = 0
         override fun pulse(): Boolean {
             when(count++){
-                3 -> Draugen(player).init().also { return true }
+                3 -> {
+                    if(getAttribute(player, "fremtrials:draugen-spawned", false)) return true
+                    Draugen(player).init()
+                    setAttribute(player, "fremtrials:draugen-spawned", true)
+                    return true
+                }
             }
             return false
         }

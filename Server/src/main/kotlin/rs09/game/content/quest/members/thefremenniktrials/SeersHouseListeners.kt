@@ -309,7 +309,7 @@ class SeersHouseListeners : InteractionListener {
             return@on true
         }
 
-        onUseWith(SCENERY,TAP,*BUCKETS) { player, _, bucket ->
+        onUseWith(SCENERY, BUCKETS, TAP) { player, bucket, _ ->
             when(bucket.id){
                 3727 ->{
                     removeItem(player,EMPTYBUCKET)
@@ -345,8 +345,8 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY,TAP,*JUGS) { player, used, with ->
-            when(with.id){
+        onUseWith(SCENERY, JUGS, TAP) { player, used, with ->
+            when(used.id){
                 EMPTYJUG ->{
                     removeItem(player,EMPTYJUG)
                     addItem(player,FULLJUG)
@@ -369,8 +369,8 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY,DRAIN,*BUCKETS) { player, used, with ->
-            when(with.id){
+        onUseWith(SCENERY, BUCKETS, DRAIN) { player, used, with ->
+            when(used.id){
                 EMPTYBUCKET ->{
                     sendMessage(player,"The bucket is already empty!")
                 }
@@ -403,8 +403,8 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY,DRAIN,*JUGS) { player, used, with ->
-            when(with.id){
+        onUseWith(SCENERY, JUGS, DRAIN) { player, used, with ->
+            when(used.id){
                 EMPTYJUG ->{
                     sendMessage(player,"The jug is already empty!")
                 }
@@ -434,7 +434,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY,BALANCECHEST, FOURFIFTHBUCKET) { player, used, with ->
+        onUseWith(SCENERY, FOURFIFTHBUCKET, BALANCECHEST) { player, used, with ->
             removeItem(player,FOURFIFTHBUCKET)
             addItem(player,VASE)
             sendMessage(player,"You place the bucket on the scale.")
@@ -443,8 +443,8 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY,MURAL,*DISKS) { player, used, with ->
-            when(with.id){
+        onUseWith(SCENERY, DISKS, MURAL) { player, used, with ->
+            when(used.id){
                 REDDISK ->{
                     if(player.getAttribute("olddiskplaced",false)){
                         removeItem(player,REDDISK)
@@ -481,8 +481,8 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY,BALANCECHEST,*BUCKETS) { player, used, with ->
-            when(with.id){
+        onUseWith(SCENERY, BUCKETS, BALANCECHEST) { player, used, with ->
+            when(used.id){
                 EMPTYBUCKET ->{
                     player.animate(Animation(883,Animator.Priority.HIGH))
                     sendMessage(player,"You place the bucket on the scale")
@@ -519,8 +519,8 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY,BALANCECHEST,*JUGS) { player, used, with ->
-            when(with.id){
+        onUseWith(SCENERY, JUGS, BALANCECHEST) { player, used, with ->
+            when(used.id){
                 EMPTYJUG ->{
                     player.animate(Animation(883,Animator.Priority.HIGH))
                     sendMessage(player,"You place the jug on the scale")
@@ -545,8 +545,8 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY,FROZENTABLE,*BUCKETS) { player, used, with ->
-            when(with.id){
+        onUseWith(SCENERY, BUCKETS, FROZENTABLE) { player, used, with ->
+            when(used.id){
                 EMPTYBUCKET -> sendMessage(player,"Your empty bucket gets very cold on the icy table.")
                 FULLBUCKET -> {
                     player.animate(Animation(883,Animator.Priority.HIGH))
@@ -558,8 +558,8 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY,FROZENTABLE, *JUGS) { player, used, with ->
-            when(with.id){
+        onUseWith(SCENERY, JUGS, FROZENTABLE) { player, used, with ->
+            when(used.id){
                 EMPTYJUG -> sendMessage(player,"Your empty jug gets very cold on the icy table.")
                 FULLJUG -> {
                     player.animate(Animation(883,Animator.Priority.HIGH))
@@ -849,7 +849,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY,TAP,VASE) { player, used, with ->
+        onUseWith(SCENERY, VASE, TAP) { player, used, with ->
             removeItem(player,VASE)
             addItem(player,FULLVASE)
             sendMessage(player,"You fill the strange looking vase with water.")
@@ -902,7 +902,7 @@ class SeersHouseListeners : InteractionListener {
             return@on true
         }
 
-        onUseWith(SCENERY,FROZENTABLE, FULLVASE) { player, used, with ->
+        onUseWith(SCENERY, FULLVASE, FROZENTABLE) { player, used, with ->
             player.animate(Animation(883,Animator.Priority.HIGH))
             removeItem(player,VASE)
             addItem(player,FROZENVASE)
@@ -910,7 +910,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY,FROZENTABLE, SEALEDFULLVASE) { player, used, with ->
+        onUseWith(SCENERY, SEALEDFULLVASE, FROZENTABLE) { player, used, with ->
             player.animate(Animation(883,Animator.Priority.HIGH))
             removeItem(player,SEALEDFULLVASE)
             addItem(player,FROZENKEY)
@@ -919,7 +919,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY,COOKINGRANGE, FROZENBUCKET) { player, used, with ->
+        onUseWith(SCENERY, FROZENBUCKET, COOKINGRANGE) { player, used, with ->
             player.animate(Animation(883,Animator.Priority.HIGH))
             player.audioManager.send(Audio(2577, 1, 1))
             removeItem(player,FROZENBUCKET)
@@ -928,7 +928,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY,COOKINGRANGE, FROZENJUG) { player, used, with ->
+        onUseWith(SCENERY, FROZENJUG, COOKINGRANGE) { player, used, with ->
             player.animate(Animation(883,Animator.Priority.HIGH))
             player.audioManager.send(Audio(2577, 1, 1))
             removeItem(player,FROZENJUG)
@@ -937,7 +937,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY,COOKINGRANGE, FROZENVASE) { player, used, with ->
+        onUseWith(SCENERY, FROZENVASE, COOKINGRANGE) { player, used, with ->
             player.animate(Animation(883,Animator.Priority.HIGH))
             player.audioManager.send(Audio(2577, 1, 1))
             removeItem(player,FROZENVASE)
@@ -946,7 +946,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY,COOKINGRANGE, FROZENKEY) { player, used, with ->
+        onUseWith(SCENERY, FROZENKEY, COOKINGRANGE) { player, used, with ->
             player.animate(Animation(883,Animator.Priority.HIGH))
             player.audioManager.send(Audio(2577, 1, 1))
             removeItem(player,FROZENKEY)
