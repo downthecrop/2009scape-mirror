@@ -6,6 +6,7 @@ import core.game.node.entity.state.EntityState;
 import core.game.world.update.flag.context.Animation;
 import core.game.content.consumable.effects.*;
 import core.game.node.entity.skill.Skills;
+import rs09.game.content.consumable.effects.KegOfBeerEffect;
 
 import java.util.HashMap;
 
