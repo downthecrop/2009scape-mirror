@@ -75,28 +75,43 @@ class PharaohSceptre : InteractionListener {
                         }
                         4 -> return
                     }
-                    //This sucks but I'm too lazy to fix it.
-                    if (player!!.equipment.containsItem(Item(9044))) {
-                        player!!.equipment.replace(Item(9046), EquipmentSlot.WEAPON.ordinal)
+                    //Checks the equipment slot. 9044 = full, 9046 = 2 charges, 9048 = 1 charge, 9050 = 0 charges.
+                    if (player!!.equipment.containsItem(Item(Items.PHARAOHS_SCEPTRE_9044)))
+                    {
+                        player!!.equipment.replace(Item(Items.PHARAOHS_SCEPTRE_9046), EquipmentSlot.WEAPON.ordinal)
                         player!!.packetDispatch.sendMessage("<col=7f03ff>Your Pharoah's Sceptre has 2 charges remaining.")
-                    } else if (player!!.equipment.containsItem(Item(9046))) {
-                        player!!.equipment.replace(Item(9048), EquipmentSlot.WEAPON.ordinal)
+                    }
+                    else if (player!!.equipment.containsItem(Item(Items.PHARAOHS_SCEPTRE_9046)))
+                    {
+                        player!!.equipment.replace(Item(Items.PHARAOHS_SCEPTRE_9048), EquipmentSlot.WEAPON.ordinal)
                         player!!.packetDispatch.sendMessage("<col=7f03ff>Your Pharoah's Sceptre has 1 charge remaining.")
-                    } else if (player!!.equipment.containsItem(Item(9048))) {
-                        player!!.equipment.replace(Item(9050), EquipmentSlot.WEAPON.ordinal)
-                        player!!.sendMessage("<col=7f03ff>Your Pharoah's Sceptre has used its last charge.")
-                    } else if (player!!.inventory.containsItem(Item(9050))) {
-                        player!!.inventory.remove(Item(9050))
-                        player!!.inventory.add(Item(9048))
-                        player!!.packetDispatch.sendMessage("<col=7f03ff>Your Pharoah's Sceptre has 2 charges remaining.")
-                    } else if (player!!.inventory.containsItem(Item(9048))) {
-                        player!!.inventory.remove(Item(9048))
-                        player!!.inventory.add(Item(9046))
-                        player!!.packetDispatch.sendMessage("<col=7f03ff>Your Pharoah's Sceptre has 1 charge remaining.")
-                    } else if (player!!.inventory.containsItem(Item(9046))) {
-                        player!!.inventory.remove(Item(9046))
-                        player!!.inventory.add(Item(9044))
-                        player!!.sendMessage("<col=7f03ff>Your Pharoah's Sceptre has used its last charge.")
+                    }
+                    else if (player!!.equipment.containsItem(Item(Items.PHARAOHS_SCEPTRE_9048)))
+                    {
+                        player!!.equipment.replace(Item(Items.PHARAOHS_SCEPTRE_9050), EquipmentSlot.WEAPON.ordinal)
+                        player!!.packetDispatch.sendMessage("<col=7f03ff>Your Pharoah's Sceptre has no charges remaining.")
+                    }
+                    //Checks the inventory.  9044 = full, 9046 = 2 charges, 9048 = 1 charge, 9050 = 0 charges.
+                    else if (player!!.inventory.containsItem(Item(Items.PHARAOHS_SCEPTRE_9044)))
+                    {
+                        if (player!!.inventory.remove(Item(Items.PHARAOHS_SCEPTRE_9044))) {
+                            player!!.inventory.add(Item(Items.PHARAOHS_SCEPTRE_9046))
+                            player!!.packetDispatch.sendMessage("<col=7f03ff>Your Pharoah's Sceptre has 2 charges remaining.")
+                        }
+                    }
+                    else if (player!!.inventory.containsItem(Item(Items.PHARAOHS_SCEPTRE_9046)))
+                    {
+                        if (player!!.inventory.remove(Item(Items.PHARAOHS_SCEPTRE_9046))) {
+                            player!!.inventory.add(Item(Items.PHARAOHS_SCEPTRE_9048))
+                            player!!.packetDispatch.sendMessage("<col=7f03ff>Your Pharoah's Sceptre has 1 charge remaining.")
+                        }
+                    }
+                    else if (player!!.inventory.containsItem(Item(Items.PHARAOHS_SCEPTRE_9048)))
+                    {
+                        if (player!!.inventory.remove(Item(Items.PHARAOHS_SCEPTRE_9048))) {
+                            player!!.inventory.add(Item(Items.PHARAOHS_SCEPTRE_9050))
+                            player!!.packetDispatch.sendMessage("<col=7f03ff>Your Pharoah's Sceptre has no charges remaining.")
+                        }
                     }
                 }
             }

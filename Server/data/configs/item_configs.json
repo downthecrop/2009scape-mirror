@@ -82673,7 +82673,7 @@
   {
     "ge_buy_limit": "10",
     "turn90cw_anim": "1207",
-    "examine": "Fully charged: This sceptre is fully charged.",
+    "examine": "This sceptre is fully charged.",
     "walk_anim": "1205",
     "low_alchemy": "40",
     "turn90ccw_anim": "1208",
@@ -82709,7 +82709,7 @@
   },
   {
     "turn90cw_anim": "1207",
-    "examine": "Fully charged: This sceptre is fully charged.",
+    "examine": "This sceptre has two charges left.",
     "walk_anim": "1205",
     "low_alchemy": "40",
     "turn90ccw_anim": "1208",
@@ -82743,7 +82743,7 @@
   },
   {
     "turn90cw_anim": "1207",
-    "examine": "Fully charged: This sceptre is fully charged.",
+    "examine": "This sceptre has one charge left.",
     "walk_anim": "1205",
     "low_alchemy": "40",
     "turn90ccw_anim": "1208",
@@ -82778,7 +82778,7 @@
   {
     "ge_buy_limit": "10",
     "turn90cw_anim": "1207",
-    "examine": "Fully charged: This sceptre is fully charged.",
+    "examine": "This sceptre has no charges left.",
     "walk_anim": "1205",
     "low_alchemy": "40",
     "turn90ccw_anim": "1208",
