@@ -289,21 +289,19 @@ public final class WildernessZone extends MapZone {
 		}
 	}
 
+
 	/**
 	 * Checks if the entity is inside the wilderness.
 	 * @param e The entity.
 	 * @return {@code True} if so.
 	 */
 	public static boolean isInZone(Entity e) {
-		Location l = e.getLocation();
-		for (RegionZone zone : e.getViewport().getRegion().getRegionZones()) {
-			if (zone.getZone() == INSTANCE && zone.getBorders().insideBorder(l.getX(), l.getY())) {
+		for (ZoneBorders border : INSTANCE.borders) {
+			if (border.insideBorder(e))
 				return true;
-			}
 		}
 		return false;
 	}
-
 	/**
 	 * The wilderness level.
 	 * @return the level.
