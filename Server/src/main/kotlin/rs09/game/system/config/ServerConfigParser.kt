@@ -8,6 +8,7 @@ import rs09.game.system.SystemLogger
 import rs09.game.world.GameSettings
 import rs09.game.world.GameWorld
 import java.io.File
+import java.math.BigInteger
 import java.net.URL
 import kotlin.system.exitProcess
 
@@ -126,6 +127,8 @@ object ServerConfigParser {
         ServerConstants.DAILY_ACCOUNT_LIMIT = data.getLong("server.daily_accounts_per_ip", 3L).toInt()
         ServerConstants.DISCORD_MOD_WEBHOOK = data.getString("server.moderation_webhook", "")
         ServerConstants.NOAUTH_DEFAULT_ADMIN = data.getBoolean("server.noauth_default_admin", false)
+        ServerConstants.EXPONENT = BigInteger(data.getString("server.rsa_exponent", ""))
+        ServerConstants.MODULUS = BigInteger(data.getString("server.rsa_modulus", ""))
     }
 
 
