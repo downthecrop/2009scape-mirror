@@ -12,7 +12,9 @@ import java.math.BigInteger
  */
 class ServerConstants {
 	companion object {
-		@JvmField
+		var NOAUTH_DEFAULT_ADMIN: Boolean = true
+
+        @JvmField
 		var DAILY_ACCOUNT_LIMIT = 3
 
         @JvmField

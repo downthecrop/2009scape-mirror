@@ -1,6 +1,7 @@
 package rs09.auth
 
 import core.game.node.entity.player.Player
+import rs09.ServerConstants
 import rs09.storage.AccountStorageProvider
 import rs09.storage.InMemoryStorageProvider
 
@@ -23,7 +24,8 @@ class DevelopmentAuthenticator : AuthProvider<AccountStorageProvider>() {
 
     override fun createAccountWith(info: UserAccountInfo): Boolean {
         info.username = info.username.toLowerCase()
-        info.rights = 2
+        if (ServerConstants.NOAUTH_DEFAULT_ADMIN)
+            info.rights = 2
         storageProvider.store(info)
         return true
     }
