@@ -39824,7 +39824,7 @@
     "id": "4088"
   },
   {
-    "requirements": "{1,20}-{6,20}",
+    "requirements": "{1,20}-{6,40}",
     "shop_price": "15000",
     "ge_buy_limit": "100",
     "examine": "Blue: A magical hat. ",
@@ -39853,7 +39853,7 @@
     "id": "4090"
   },
   {
-    "requirements": "{1,20}-{6,20}",
+    "requirements": "{1,20}-{6,40}",
     "shop_price": "120000",
     "ge_buy_limit": "100",
     "examine": "The upper half of a magical robe.",
@@ -39882,7 +39882,7 @@
     "id": "4092"
   },
   {
-    "requirements": "{1,20}-{6,20}",
+    "requirements": "{1,20}-{6,40}",
     "shop_price": "80000",
     "ge_buy_limit": "100",
     "examine": "The lower half of a magical robe.",
@@ -39909,7 +39909,7 @@
     "id": "4094"
   },
   {
-    "requirements": "{1,20}-{6,20}",
+    "requirements": "{1,20}-{6,40}",
     "shop_price": "10000",
     "ge_buy_limit": "100",
     "examine": "Magical gloves.",
@@ -39936,7 +39936,7 @@
     "id": "4096"
   },
   {
-    "requirements": "{1,20}-{6,20}",
+    "requirements": "{1,20}-{6,40}",
     "shop_price": "10000",
     "ge_buy_limit": "100",
     "examine": "Magical boots.",
@@ -39963,7 +39963,7 @@
     "id": "4098"
   },
   {
-    "requirements": "{1,20}-{6,20}",
+    "requirements": "{1,20}-{6,40}",
     "shop_price": "15000",
     "ge_buy_limit": "100",
     "examine": "Black: A magical hat. ",
@@ -39992,7 +39992,7 @@
     "id": "4100"
   },
   {
-    "requirements": "{1,20}-{6,20}",
+    "requirements": "{1,20}-{6,40}",
     "shop_price": "120000",
     "ge_buy_limit": "100",
     "examine": "The upper half of a magical robe.",
@@ -40021,7 +40021,7 @@
     "id": "4102"
   },
   {
-    "requirements": "{1,20}-{6,20}",
+    "requirements": "{1,20}-{6,40}",
     "shop_price": "80000",
     "ge_buy_limit": "100",
     "examine": "The lower half of a magical robe.",
@@ -40048,7 +40048,7 @@
     "id": "4104"
   },
   {
-    "requirements": "{1,20}-{6,20}",
+    "requirements": "{1,20}-{6,40}",
     "shop_price": "10000",
     "ge_buy_limit": "100",
     "examine": "Dark magical gloves.",
@@ -40075,7 +40075,7 @@
     "id": "4106"
   },
   {
-    "requirements": "{1,20}-{6,20}",
+    "requirements": "{1,20}-{6,40}",
     "shop_price": "10000",
     "ge_buy_limit": "100",
     "examine": "Magical boots.",
@@ -40102,7 +40102,7 @@
     "id": "4108"
   },
   {
-    "requirements": "{1,20}-{6,20}",
+    "requirements": "{1,20}-{6,40}",
     "shop_price": "15000",
     "ge_buy_limit": "100",
     "examine": "White: A magical hat. ",
@@ -40131,7 +40131,7 @@
     "id": "4110"
   },
   {
-    "requirements": "{1,20}-{6,20}",
+    "requirements": "{1,20}-{6,40}",
     "shop_price": "120000",
     "ge_buy_limit": "100",
     "examine": "The upper half of a magical robe.",
@@ -40160,7 +40160,7 @@
     "id": "4112"
   },
   {
-    "requirements": "{1,20}-{6,20}",
+    "requirements": "{1,20}-{6,40}",
     "shop_price": "80000",
     "ge_buy_limit": "100",
     "examine": "The lower half of a magical robe.",
@@ -40187,7 +40187,7 @@
     "id": "4114"
   },
   {
-    "requirements": "{1,20}-{6,20}",
+    "requirements": "{1,20}-{6,40}",
     "shop_price": "10000",
     "ge_buy_limit": "100",
     "examine": "Bright magical gloves.",
@@ -40214,7 +40214,7 @@
     "id": "4116"
   },
   {
-    "requirements": "{1,20}-{6,20}",
+    "requirements": "{1,20}-{6,40}",
     "shop_price": "10000",
     "ge_buy_limit": "100",
     "examine": "Magical boots.",
