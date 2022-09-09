@@ -102772,7 +102772,7 @@
     "name": "Dragonfire shield",
     "archery_ticket_price": "0",
     "id": "11283",
-    "bonuses": "0,0,0,-10,-5,70,75,72,10,72,17,7,0,0,0"
+    "bonuses": "0,0,0,-10,-5,20,25,22,10,22,17,7,0,0,0"
   },
   {
     "requirements": "{1,75}",

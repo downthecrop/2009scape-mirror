@@ -342,6 +342,7 @@ public final class EquipmentContainer extends Container {
 			bonuses[6] += Math.ceil(bonuses[6] * 0.20);
 			bonuses[7] += Math.ceil(bonuses[7] * 0.20);
 			bonuses[9] += Math.ceil(bonuses[9] * 0.20);
+			bonuses[10] += Math.ceil(bonuses[10] * 0.20);
 		}
 		if (shield != null && shield.getId() == 11283) {
 			int increase = shield.getCharge() / 20;
@@ -349,6 +350,7 @@ public final class EquipmentContainer extends Container {
 			bonuses[6] += increase;
 			bonuses[7] += increase;
 			bonuses[9] += increase;
+			bonuses[10] += increase;
 		}
 		player.getProperties().setBonuses(bonuses);
 		update(player);
