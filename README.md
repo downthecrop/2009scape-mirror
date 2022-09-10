@@ -61,7 +61,8 @@ In the current climate of RuneScape Private Servers in general, we believe it's 
 ## Contributing
 
 **Note: All merge requests MUST be made using the defaut MR template. Merge requests that do not use this template will not be accepted.**
-**More information on Kotlin can be found [here](https://kotlinlang.org/).**
+
+**Note: All new contributions MUST be made in Kotlin unless you are updating or fixing a bug in legacy code. More information on Kotlin can be found [here](https://kotlinlang.org/).**
 
 There are many ways everyone can contribute! From the most seasoned programmers to those who do not have the most remote clue how code works! Below are some things that can always use some love from the community.
 
