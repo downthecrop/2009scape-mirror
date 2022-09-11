@@ -121264,7 +121264,7 @@
     "id": "13290",
     "stand_turn_anim": "823",
     "bonuses": "67,62,0,0,0,0,0,0,0,0,0,50,0,0,0",
-    "requirements": "{0,55}-{18,50}",
+    "requirements": "{0,50}-{18,55}",
     "shop_price": "68000",
     "durability": null,
     "high_alchemy": "40800",
