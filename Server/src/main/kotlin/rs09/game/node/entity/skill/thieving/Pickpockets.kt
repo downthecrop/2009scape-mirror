@@ -151,7 +151,7 @@ enum class Pickpockets(val ids: IntArray, val requiredLevel: Int, val low: Doubl
     KNIGHT_OF_ADROUGNE(intArrayOf(23, 26), 55, 50.0, 240.0, 84.3, 3,3,5, WeightBasedTable.create(
         WeightedItem(Items.COINS_995,50,50,1.0,true)
     )),
-    YANILLE_WATCHMAN(intArrayOf(34), 65, 137.5, 50.0, 240.0, 3,3,5, WeightBasedTable.create(
+    YANILLE_WATCHMAN(intArrayOf(34), 65, 50.0, 240.0, 137.5, 3,3,5, WeightBasedTable.create(
         WeightedItem(Items.COINS_995,60,60,1.0,true),
         WeightedItem(Items.BREAD_2309,1,1,1.0,true)
     )),
