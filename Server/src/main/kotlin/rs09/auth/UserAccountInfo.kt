@@ -23,6 +23,7 @@ class UserAccountInfo(
     var joinDate: Timestamp
 ) {
     companion object {
+        val default = createDefault()
         @JvmStatic fun createDefault() : UserAccountInfo {
             return UserAccountInfo("", "", 0, 0, 0,  "", "", 0L, 0L, "", "", "", "", "1,0,8,9", 0L, 0L, false, joinDate = Timestamp(System.currentTimeMillis())).also { it.setInitialReferenceValues() }
         }
@@ -101,5 +102,7 @@ class UserAccountInfo(
         return result
     }
 
-
+    fun isDefault() : Boolean {
+        return this == default
+    }
 }

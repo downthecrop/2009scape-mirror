@@ -1,16 +1,27 @@
 package rs09.game.system.command.sets
 
+import api.sendMessage
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
 import core.game.system.task.Pulse
-import rs09.game.world.GameWorld
 import core.game.world.map.Location
-import rs09.game.world.repository.Repository
 import core.plugin.Initializable
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import rs09.ServerConstants
 import rs09.ServerStore
 import rs09.ServerStore.Companion.addToList
+import rs09.auth.UserAccountInfo
+import rs09.game.system.command.CommandMapping
 import rs09.game.system.command.Privilege
+import rs09.game.world.GameWorld
+import rs09.game.world.repository.Repository
+import java.io.File
+import java.io.FileReader
 import java.util.concurrent.TimeUnit
+import kotlin.math.abs
 
 @Initializable
 /**
@@ -233,5 +244,70 @@ class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
         /**
          * =============================================================================================================
          */
+
+        define("modcr", Privilege.MODERATOR, "::modcr <lt>user_name<gt> <lt>amount<gt>", "Modifies user_name's credits by the given amount.") {player, args ->
+            val username = (args.getOrNull(1) ?: "").lowercase()
+            val amount = args.getOrNull(2)?.toIntOrNull() ?: Integer.MIN_VALUE
+
+            if (username.isEmpty()) {
+                reject(player, "Usage: ::modcr user_name amount")
+                return@define
+            }
+
+            if (amount == Integer.MIN_VALUE) {
+                reject(player, "Usage ::modcr user_name amount")
+                return@define
+            }
+
+            val p = Repository.getPlayerByName(username)
+            val info: UserAccountInfo = if (p == null)
+                GameWorld.accountStorage.getAccountInfo(username)
+            else
+                p.details.accountInfo
+
+            if (info.isDefault()) {
+                reject(player, "The user you specified ($username) does not exist.")
+                return@define
+            }
+
+            info.credits += amount
+            if (p == null)
+                GameWorld.accountStorage.update(info)
+            else
+                sendMessage(p, "You have been ${if (amount > 0) "granted" else "penalized"} ${abs(amount)} credits.")
+
+            notify(player, "Updated $username's credits to ${info.credits} by ${if (amount > 0) "adding" else "removing"} ${abs(amount)}.")
+        }
+
+        define("csvmodcr", Privilege.ADMIN, "::csvmodcr filename", "Awards credits based on a csv list from a file. Relative to data dir.") {player, args ->
+            val filename = args.getOrNull(1) ?: ""
+
+            if (filename.isEmpty()) {
+                reject(player, "Usage: ::csvmodcr filename")
+                return@define
+            }
+
+            GlobalScope.launch {
+                val f = File(ServerConstants.DATA_PATH + File.separator + filename)
+                if (!f.exists()) {
+                    notify(player, "Unable to locate file $filename.")
+                    notify(player, "Note: The file must be in ${ServerConstants.DATA_PATH}")
+                    return@launch
+                }
+                val lines: List<String>
+                withContext(Dispatchers.IO) {
+                    FileReader(f).use {
+                        lines = f.readLines()
+                    }
+                }
+                for (line in lines) {
+                    if (line.startsWith("#")) continue
+                    val tokens = line.split(",")
+                    val username = tokens[0].lowercase().trim().replace(" ", "_")
+                    val amount = tokens[1].trim()
+                    CommandMapping.get("modcr")?.handle?.invoke(player, arrayOf("", username, amount))
+                }
+            }
+        }
     }
 }

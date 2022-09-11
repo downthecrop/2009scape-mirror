@@ -2100,3 +2100,29 @@ fun equipSlot(item: Int) : EquipmentSlot? {
         .values()
         .getOrNull(itemDefinition(item).getConfiguration(ItemConfigParser.EQUIP_SLOT, -1))
 }
+
+/**
+ * Adjusts the user's credits by the given amount
+ * @param player the player whose credits to adjust
+ * @param amt the amount to adjust by - add with positive, remove with negative.
+ * @return true if successful. Success is defined as always true when adding, but can be false if we are trying to remove, and it would put the amount below 0.
+ */
+fun updateCredits(player: Player, amount: Int) : Boolean {
+    val creds = getCredits(player) + amount
+
+    if (creds < 0)
+        return false
+    else
+        player.details.accountInfo.credits = creds
+
+    return true
+}
+
+/**
+ * Gets the number of credits a user has.
+ * @param player the player to check
+ * @return the number of credits they have
+ */
+fun getCredits(player: Player) : Int {
+    return player.details.accountInfo.credits
+}

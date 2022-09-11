@@ -108,7 +108,7 @@ object Login {
         return try {
             val numBytes = buffer.get().toInt() and 0xFF
             val encryptedBytes = ByteArray(numBytes)
-            buffer[encryptedBytes]
+            buffer.get(encryptedBytes)
 
             val encryptedBigInt = BigInteger(encryptedBytes)
             ByteBuffer.wrap(encryptedBigInt.modPow(exponent, modulus).toByteArray())
@@ -117,7 +117,7 @@ object Login {
         }
     }
 
-    private fun noop(buffer: ByteBuffer, amount: Int = 1) {buffer[ByteArray(amount)]}
+    private fun noop(buffer: ByteBuffer, amount: Int = 1) {buffer.get(ByteArray(amount))}
 
     fun proceedWith(session: IoSession, details: PlayerDetails, opcode: Int) {
         if (!Repository.LOGGED_IN_PLAYERS.contains(details.username))
