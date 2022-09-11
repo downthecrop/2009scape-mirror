@@ -20,6 +20,9 @@ import core.game.world.update.flag.context.Graphics as Gfx
 import rs09.game.interaction.InteractionListener
 import rs09.game.content.dialogue.SkillDialogueHandler
 import rs09.game.content.dialogue.SkillDialogueHandler.SkillDialogue
+import rs09.game.system.config.ItemConfigParser
+import rs09.game.system.config.NPCConfigParser
+import rs09.game.world.GameWorld
 
 import kotlin.math.min
 import java.util.Random
@@ -228,7 +231,7 @@ class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 2, Vars.VARP_QUEST_C
       return@onUseWith true
     }
 
-    onUseWith(NPC, filledBellows, NPCs.SWAMP_TOAD_1013) {player, used, with -> 
+    onUseWith(NPC, filledBellows, NPCs.SWAMP_TOAD_1013) {player, used, with ->
       val hasTooManyToads = amountInInventory(player, Items.BLOATED_TOAD_2875) >= 3
       
       if (hasTooManyToads) {
@@ -248,7 +251,7 @@ class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 2, Vars.VARP_QUEST_C
             addItem(player, filledBellows.getNext(used.id))
           }
           addItem(player, Items.BLOATED_TOAD_2875)
-          runTask(player) { with.asNpc().clear() }
+          with.asNpc().respawnTick = GameWorld.ticks + with.asNpc().definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 34)
         }
       }
       return@onUseWith true

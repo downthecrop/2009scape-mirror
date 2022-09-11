@@ -10334,6 +10334,7 @@
     "examine": "A green skinned croaker",
     "melee_animation": "0",
     "range_animation": "0",
+    "respawn_delay": "34",
     "defence_animation": "0",
     "magic_animation": "0",
     "death_animation": "0",
