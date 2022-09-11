@@ -115,7 +115,7 @@ public class LumbridgeBasementPlugin extends OptionHandler {
 				break;
 			case 6658:
 				//Location.create(3226, 9542, 0)
-				player.teleport(Location.create(3353, 3950, 0));
+				player.teleport(Location.create(3226, 9542, 0));
 				break;
 			}
 			break;
