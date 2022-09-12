@@ -5,6 +5,7 @@ import core.cache.crypto.ISAACPair
 import core.cache.misc.buffer.ByteBufferUtils
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.PlayerDetails
+import core.game.node.entity.player.info.Rights
 import core.game.node.entity.player.info.UIDInfo
 import core.game.node.entity.player.info.login.LoginType
 import core.net.Constants
@@ -21,6 +22,7 @@ import rs09.ServerStore.Companion.getList
 import rs09.auth.AuthResponse
 import rs09.game.node.entity.player.info.login.LoginParser
 import rs09.game.system.SystemLogger
+import rs09.game.system.command.Privilege
 import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
 import rs09.worker.ManagementEvents
@@ -131,23 +133,35 @@ object Login {
             Discord.postPlayerAlert(details.username, "Login from flagged IP ${details.ipAddress}")
         }
 
-        if (checkAccountLimit(details.ipAddress, details.username)) {
-            val player = Player(details)
-            if (Repository.getPlayerByName(player.name) == null) {
-                Repository.addPlayer(player)
-            }
-            session.lastPing = System.currentTimeMillis()
-            try {
-                LoginParser(details, LoginType.fromType(opcode)).initialize(player, opcode == RECONNECT_LOGIN_OP)
-                sendMSEvents(details)
-            } catch (e: Exception) {
-                e.printStackTrace()
-                session.disconnect()
-                Repository.removePlayer(player)
-                player.clear(true)
-            }
+        val player = Player(details)
+        if (canBypassAccountLimitCheck(player)) {
+            proceedWithAcceptableLogin(session, player, opcode)
         } else {
-            session.write(AuthResponse.LoginLimitExceeded)
+            if (checkAccountLimit(details.ipAddress, details.username)) {
+                proceedWithAcceptableLogin(session, player, opcode)
+            } else {
+                session.write(AuthResponse.LoginLimitExceeded)
+            }
+        }
+    }
+
+    private fun canBypassAccountLimitCheck(player: Player): Boolean {
+        return player.rights == Rights.ADMINISTRATOR || player.rights == Rights.PLAYER_MODERATOR
+    }
+
+    private fun proceedWithAcceptableLogin(session: IoSession, player: Player, opcode: Int) {
+        if (Repository.getPlayerByName(player.name) == null) {
+            Repository.addPlayer(player)
+        }
+        session.lastPing = System.currentTimeMillis()
+        try {
+            LoginParser(player.details, LoginType.fromType(opcode)).initialize(player, opcode == RECONNECT_LOGIN_OP)
+            sendMSEvents(player.details)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            session.disconnect()
+            Repository.removePlayer(player)
+            player.clear(true)
         }
     }
 
