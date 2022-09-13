@@ -79,7 +79,7 @@ public abstract class NodeTask {
 	 * @return The pulse used for this task.
 	 */
 	public Pulse schedule(final Node node, final Node... n) {
-		GameWorld.getPulser().submit(pulse = new Pulse(ticks, node) {
+		pulse = new Pulse(ticks, node) {
 
 			@Override
 			public void start() {
@@ -102,7 +102,7 @@ public abstract class NodeTask {
 			public boolean removeFor(String s) {
 				return NodeTask.this.removeFor(s, node, n);
 			}
-		});
+		};
 		return pulse;
 	}
 
