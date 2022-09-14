@@ -1,5 +1,7 @@
 package rs09.game.content.quest.members.lostcity
 
+import api.sendMessage
+import api.sendNPCDialogue
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -35,21 +37,21 @@ class ShamusTreeListener : InteractionListener {
         }
     }
 
-    fun handleShamusTree(player: Player): Boolean {
+    private fun handleShamusTree(player: Player): Boolean {
         if (SkillingTool.getHatchet(player) == null) {
-            player.packetDispatch.sendMessage("You do not have an axe which you have the level to use.")
+            sendMessage(player,"You do not have an axe which you have the level to use.")
             return true
         }
         showShamus(player)
        return true
     }
 
-    fun showShamus(player: Player) {
+    private fun showShamus(player: Player) {
         if(SHAMUS.isInvisible) {
             SHAMUS.isInvisible = false
             SHAMUS.properties.teleportLocation = SHAMUS.properties.spawnLocation
         }
-        player.dialogueInterpreter.sendDialogues(SHAMUS, FacialExpression.FURIOUS, "Hey! Yer big elephant! Don't go choppin' down me", "house, now!")
+        sendNPCDialogue(player,NPCs.SHAMUS_654,"Hey! Yer big elephant! Don't go choppin' down me house, now!",FacialExpression.FURIOUS)
         GameWorld.Pulser.submit(object : Pulse(100) {
             override fun pulse(): Boolean {
                 if (SHAMUS.dialoguePlayer == null) {

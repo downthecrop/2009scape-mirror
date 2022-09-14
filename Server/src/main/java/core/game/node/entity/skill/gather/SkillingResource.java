@@ -83,7 +83,7 @@ public enum SkillingResource {
 	/**
 	 * Dramen tree (Woodcutting/Lost city quest).
 	 */
-	DRAMEN_TREE(1292, 1, 0.05, -1, 25.0, 771, Integer.MAX_VALUE, "dramen tree", null, -1, Skills.WOODCUTTING),
+	DRAMEN_TREE(1292, 36, 0.05, -1, 25.0, 771, Integer.MAX_VALUE, "dramen tree", null, -1, Skills.WOODCUTTING),
 
 	/**
 	 * Evergreen (Woodcutting).

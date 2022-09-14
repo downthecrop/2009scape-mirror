@@ -306,7 +306,7 @@ public enum WoodcuttingNode {
                 respawnRate = -1;
                 rate = 0.05;
                 experience = 25.0;
-                level = 1;
+                level = 36;
                 rewardAmount = Integer.MAX_VALUE;
                 break;
             case 30:

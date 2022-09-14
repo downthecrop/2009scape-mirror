@@ -36,6 +36,14 @@ class ItemQuestRequirementListener : InteractionListener {
 
     private val avasBackpacks = intArrayOf(Items.AVAS_ACCUMULATOR_10499, Items.AVAS_ATTRACTOR_10498)
 
+    private val lostCityWeapons = intArrayOf(
+        Items.DRAGON_DAGGER_1215,
+        Items.DRAGON_DAGGERP_1231,
+        Items.DRAGON_DAGGERP_PLUS_5680,
+        Items.DRAGON_DAGGERP_PLUS_PLUS_5698,
+        Items.DRAGON_LONGSWORD_1305
+    )
+
     private val questCapes = intArrayOf(9813,9814)
 
     override fun defineListeners() {
@@ -69,6 +77,14 @@ class ItemQuestRequirementListener : InteractionListener {
         onEquip(avasBackpacks){ player, _ ->
             if (!isQuestComplete(player, "Animal Magnetism")) {
                 sendMessage(player, "You must have completed Animal Magnetism to equip this.")
+                return@onEquip false
+            }
+            return@onEquip true
+        }
+
+        onEquip(lostCityWeapons){ player, _ ->
+            if (!isQuestComplete(player, "Lost City")) {
+                sendMessage(player, "You must have completed Lost City to equip this.")
                 return@onEquip false
             }
             return@onEquip true

@@ -4,7 +4,6 @@ import rs09.ServerConstants;
 import core.game.node.entity.Entity;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
@@ -448,15 +447,6 @@ public class TeleportManager {
                                 }
 								break;
 							case 4:
-								Quest quest = null;
-								if (entity instanceof Player) {
-									quest = ((Player) entity).getQuestRepository().getQuest("Lost City");
-								}
-								if (quest != null) {
-									if (quest.getStage(entity.asPlayer()) == 21) {
-										quest.finish(entity.asPlayer());
-									}
-								}
 								entity.animate(Animation.create(3266));
 								entity.getProperties().setTeleportLocation(location);
 								entity.unlock();
