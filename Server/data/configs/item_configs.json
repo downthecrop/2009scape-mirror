@@ -6209,7 +6209,7 @@
   },
   {
     "bankable": "false",
-    "examine": "100,000 or more: \"X x coins\" where X is the exact number of coins in the stack.",
+    "examine": "Lovely money!",
     "durability": null,
     "name": "Coins",
     "archery_ticket_price": "0",
@@ -9899,7 +9899,7 @@
     "id": "994"
   },
   {
-    "examine": "100,000 or more: \"X x coins\" where X is the exact number of coins in the stack.",
+    "examine": "Lovely money!",
     "durability": null,
     "name": "Coins",
     "tradeable": "true",
@@ -29153,7 +29153,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29161,7 +29161,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29169,7 +29169,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29177,7 +29177,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29185,7 +29185,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29193,7 +29193,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29201,7 +29201,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29209,7 +29209,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29217,7 +29217,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29225,7 +29225,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29233,7 +29233,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29241,7 +29241,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29249,7 +29249,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29257,7 +29257,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29265,7 +29265,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29273,7 +29273,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29281,7 +29281,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29289,7 +29289,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29297,7 +29297,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29305,7 +29305,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29313,7 +29313,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29321,7 +29321,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29329,7 +29329,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29337,7 +29337,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29345,7 +29345,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29353,7 +29353,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29361,7 +29361,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29369,7 +29369,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29377,7 +29377,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29385,7 +29385,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29393,7 +29393,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29401,7 +29401,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29409,7 +29409,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29417,7 +29417,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29425,7 +29425,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29433,7 +29433,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29441,7 +29441,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29473,7 +29473,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29505,7 +29505,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29537,7 +29537,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29545,7 +29545,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29565,7 +29565,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29585,7 +29585,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29605,7 +29605,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29625,7 +29625,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29645,7 +29645,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29665,7 +29665,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29685,7 +29685,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29705,7 +29705,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29725,7 +29725,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29745,7 +29745,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29765,7 +29765,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29785,7 +29785,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29805,7 +29805,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29813,7 +29813,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29833,7 +29833,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29853,7 +29853,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29873,7 +29873,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29893,7 +29893,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29901,7 +29901,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29921,7 +29921,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29929,7 +29929,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29949,7 +29949,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29969,7 +29969,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29989,7 +29989,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -29997,7 +29997,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30005,7 +30005,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30024,7 +30024,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30032,7 +30032,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30051,7 +30051,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30070,7 +30070,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30090,7 +30090,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30110,7 +30110,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30130,7 +30130,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30150,7 +30150,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30170,7 +30170,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30190,7 +30190,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30210,7 +30210,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30230,7 +30230,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30250,7 +30250,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30270,7 +30270,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30290,7 +30290,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30310,7 +30310,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30330,7 +30330,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30350,7 +30350,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30370,7 +30370,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30378,7 +30378,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30386,7 +30386,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30394,7 +30394,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30402,7 +30402,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30410,7 +30410,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30425,7 +30425,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30440,7 +30440,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30455,7 +30455,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30463,7 +30463,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30471,7 +30471,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30486,7 +30486,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30501,7 +30501,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30516,7 +30516,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30524,7 +30524,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30532,7 +30532,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -30540,7 +30540,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36213,7 +36213,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36221,7 +36221,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36229,7 +36229,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36237,7 +36237,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36245,7 +36245,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36253,7 +36253,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36261,7 +36261,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36269,7 +36269,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36277,7 +36277,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36285,7 +36285,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36293,7 +36293,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36301,7 +36301,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36309,7 +36309,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36317,7 +36317,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36325,7 +36325,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36333,7 +36333,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36341,7 +36341,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36349,7 +36349,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36357,7 +36357,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36365,7 +36365,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36373,7 +36373,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36393,7 +36393,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36401,7 +36401,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36409,7 +36409,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36417,7 +36417,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36425,7 +36425,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36445,7 +36445,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36465,7 +36465,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36485,7 +36485,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36505,7 +36505,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36513,7 +36513,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36521,7 +36521,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36541,7 +36541,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36561,7 +36561,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36581,7 +36581,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36601,7 +36601,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36621,7 +36621,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36641,7 +36641,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36661,7 +36661,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36681,7 +36681,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36701,7 +36701,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36721,7 +36721,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36741,7 +36741,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36761,7 +36761,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36781,7 +36781,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36801,7 +36801,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36821,7 +36821,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36841,7 +36841,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36861,7 +36861,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36881,7 +36881,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36901,7 +36901,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36920,7 +36920,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36939,7 +36939,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36958,7 +36958,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36977,7 +36977,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36985,7 +36985,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -36993,7 +36993,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37001,7 +37001,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37020,7 +37020,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37039,7 +37039,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37047,7 +37047,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37067,7 +37067,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37087,7 +37087,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37107,7 +37107,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37127,7 +37127,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37147,7 +37147,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37167,7 +37167,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37187,7 +37187,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37207,7 +37207,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37227,7 +37227,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37235,7 +37235,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37255,7 +37255,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37263,7 +37263,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37283,7 +37283,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37291,7 +37291,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37299,7 +37299,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37307,7 +37307,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37315,7 +37315,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37323,7 +37323,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37331,7 +37331,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37339,7 +37339,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37347,7 +37347,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37355,7 +37355,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37363,7 +37363,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37371,7 +37371,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -37379,7 +37379,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -67494,7 +67494,7 @@
   },
   {
     "bankable": "false",
-    "examine": "100,000 or more: \"X x coins\" where X is the exact number of coins in the stack.",
+    "examine": "Lovely money!",
     "durability": null,
     "name": "Coins",
     "archery_ticket_price": "0",
@@ -69642,7 +69642,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69662,7 +69662,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69670,7 +69670,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69690,7 +69690,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69710,7 +69710,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69730,7 +69730,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69750,7 +69750,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69758,7 +69758,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69766,7 +69766,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69774,7 +69774,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69782,7 +69782,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69790,7 +69790,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69798,7 +69798,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69806,7 +69806,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69814,7 +69814,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69822,7 +69822,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69842,7 +69842,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69862,7 +69862,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69882,7 +69882,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69902,7 +69902,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69922,7 +69922,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69942,7 +69942,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69957,7 +69957,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69972,7 +69972,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -69987,7 +69987,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70002,7 +70002,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70017,7 +70017,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70032,7 +70032,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70047,7 +70047,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70062,7 +70062,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70077,7 +70077,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70097,7 +70097,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70117,7 +70117,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70137,7 +70137,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70157,7 +70157,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70177,7 +70177,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70185,7 +70185,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70193,7 +70193,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70201,7 +70201,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70209,7 +70209,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70217,7 +70217,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70225,7 +70225,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70245,7 +70245,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70265,7 +70265,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70285,7 +70285,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70305,7 +70305,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70325,7 +70325,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -70345,7 +70345,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
@@ -81248,7 +81248,7 @@
   },
   {
     "bankable": "false",
-    "examine": "100,000 or more: \"X x coins\" where X is the exact number of coins in the stack.",
+    "examine": "Lovely money!",
     "durability": null,
     "name": "Coins",
     "archery_ticket_price": "0",
@@ -91458,7 +91458,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91479,7 +91479,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91500,7 +91500,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91521,7 +91521,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91542,7 +91542,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91563,7 +91563,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91584,7 +91584,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91605,7 +91605,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91626,7 +91626,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91647,7 +91647,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91668,7 +91668,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91689,7 +91689,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91710,7 +91710,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91731,7 +91731,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91752,7 +91752,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91773,7 +91773,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91794,7 +91794,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91815,7 +91815,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91836,7 +91836,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91857,7 +91857,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91878,7 +91878,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91899,7 +91899,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91920,7 +91920,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91941,7 +91941,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91962,7 +91962,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -91983,7 +91983,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92004,7 +92004,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92025,7 +92025,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92046,7 +92046,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92067,7 +92067,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92088,7 +92088,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92109,7 +92109,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92130,7 +92130,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92151,7 +92151,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92172,7 +92172,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92193,7 +92193,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92214,7 +92214,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92235,7 +92235,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92256,7 +92256,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92277,7 +92277,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92298,7 +92298,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92319,7 +92319,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92340,7 +92340,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92361,7 +92361,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92382,7 +92382,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92403,7 +92403,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92424,7 +92424,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92445,7 +92445,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92466,7 +92466,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -92487,7 +92487,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118467,7 +118467,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118487,7 +118487,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118507,7 +118507,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118527,7 +118527,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118547,7 +118547,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118567,7 +118567,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118587,7 +118587,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118607,7 +118607,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118627,7 +118627,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118647,7 +118647,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118667,7 +118667,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118687,7 +118687,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118707,7 +118707,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118727,7 +118727,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118748,7 +118748,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118769,7 +118769,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118778,7 +118778,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118787,7 +118787,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118808,7 +118808,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118829,7 +118829,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118850,7 +118850,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118859,7 +118859,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118868,7 +118868,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118877,7 +118877,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118898,7 +118898,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118919,7 +118919,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118928,7 +118928,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118949,7 +118949,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118970,7 +118970,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -118979,7 +118979,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -119000,7 +119000,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -119021,7 +119021,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -119042,7 +119042,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -119051,7 +119051,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -119060,7 +119060,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -119069,7 +119069,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -119078,7 +119078,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -119087,7 +119087,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -119096,7 +119096,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -119105,7 +119105,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -119114,7 +119114,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -119135,7 +119135,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -119144,7 +119144,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",
@@ -119153,7 +119153,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "Depends on the type of clue you have(\"A set of instructions to be followed\". \"A clue!\".\"It points to great treasure!\".   \" A place on the world map,but where?\", \"Perhaps someone at the observatory can teach me to navigate?\" \"Part of the world map, but whe",
+    "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "tradeable": "false",

@@ -43,7 +43,8 @@ public final class ExaminePacket implements IncomingPacket {
 			if (id < 0 || id > Cache.getItemDefinitionsSize()) {
 				break;
 			}
-			player.getPacketDispatch().sendMessage(getItemExamine(id));
+			ItemDefinition itemDef = ItemDefinition.forId(id);
+			player.getPacketDispatch().sendMessage(itemDef.getExamine());
 			break;
 		case 72: // NPC examine
 			id = buffer.getShort();
@@ -58,31 +59,5 @@ public final class ExaminePacket implements IncomingPacket {
 			player.getPacketDispatch().sendMessage(def.getExamine());
 			break;
 		}
-	}
-
-	/**
-	 * Gets the item examine.
-	 * @param id the item id.
-	 * @return the item examine.
-	 */
-	public static String getItemExamine(int id) {
-
-		// Coins examine override
-		if (id == Items.COINS_995) {
-			return "Lovely money!";
-		}
-
-		// Clue scroll examine override
-		if (ItemDefinition.forId(id).getExamine().length() == 255) {
-			return "A set of instructions to be followed.";
-		}
-
-		// Noted item examine override
-		if (!ItemDefinition.forId(id).isUnnoted()) {
-			return "Swap this note at any bank for the equivalent item.";
-		}
-
-		// Return the examine string for the given item ID
-		return ItemDefinition.forId(id).getExamine();
 	}
 }

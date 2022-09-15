@@ -2,8 +2,12 @@ package rs09.game.interaction.inter.bank
 
 import api.*
 import core.game.component.Component
+import core.game.container.Container
 import core.game.node.entity.player.Player
+import core.game.node.item.Item
+import core.tools.StringUtils
 import org.rs09.consts.Components
+import org.rs09.consts.Items
 import rs09.ServerConstants
 import rs09.game.content.dialogue.region.worldwide.bank.BankDepositDialogue
 import rs09.game.content.dialogue.region.worldwide.bank.BankHelpDialogue
@@ -52,6 +56,8 @@ class BankInterface : InterfaceListener {
 
         private const val OP_SET_TAB = 155
         private const val OP_COLLAPSE_TAB = 196
+
+        private const val THRESHOLD_TO_DISPLAY_EXACT_QUANTITY_ON_EXAMINE = 100000;
     }
 
     private fun onBankInterfaceOpen(player: Player, component: Component): Boolean {
@@ -129,7 +135,15 @@ class BankInterface : InterfaceListener {
                     player.bank.getAmount(item) - 1
                 )
             }
-            OP_EXAMINE -> sendMessage(player, item.definition.examine)
+            OP_EXAMINE -> {
+                var examineText = item.definition.examine
+                val id = item.definition.id
+                val bank = player.bank
+                if (isCoinOverrideNeeded(id, bank)) {
+                    examineText = "" + bank.getAmount(id) + " x " + item.definition.name + "."
+                }
+                sendMessage(player, examineText)
+            }
             else -> player.debug("Unknown bank menu opcode $opcode")
         }
 
@@ -147,7 +161,15 @@ class BankInterface : InterfaceListener {
             OP_AMOUNT_LAST_X -> player.bank.addItem(slot, player.bank.lastAmountX)
             OP_AMOUNT_X -> BankUtils.transferX(player, slot, false)
             OP_AMOUNT_ALL -> player.bank.addItem(slot, player.inventory.getAmount(item))
-            OP_EXAMINE -> sendMessage(player, item.definition.examine)
+            OP_EXAMINE -> {
+                var examineText = item.definition.examine
+                val id = item.definition.id
+                val inventory = player.inventory
+                if (isCoinOverrideNeeded(id, inventory)) {
+                    examineText = "" + inventory.getAmount(id) + " x " + item.definition.name + "."
+                }
+                sendMessage(player, examineText)
+            }
             else -> player.debug("Unknown inventory menu opcode $opcode")
         }
 
@@ -180,5 +202,16 @@ class BankInterface : InterfaceListener {
         }
 
         on(Components.BANK_V2_SIDE_763, ::handleInventoryMenu)
+    }
+
+    private fun isCoinOverrideNeeded(id: Int, container: Container): Boolean {
+        val amount = container.getAmount(id)
+
+        // Only COINS_995 are obtainable and bankable by player
+        if (id == Items.COINS_995 && amount >= THRESHOLD_TO_DISPLAY_EXACT_QUANTITY_ON_EXAMINE) {
+            return true
+        }
+
+        return false
     }
 }

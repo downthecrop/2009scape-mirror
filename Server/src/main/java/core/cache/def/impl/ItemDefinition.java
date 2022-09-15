@@ -1696,4 +1696,17 @@ public class ItemDefinition extends Definition<Item> {
 	public void setMaleWornModelId4(int maleWornModelId4) {
 		this.maleWornModelId4 = maleWornModelId4;
 	}
+
+	/**
+	 * Gets the examine.
+	 * @return The examine.
+	 */
+	@Override
+	public String getExamine() {
+		examine = super.getExamine();
+		if (!isUnnoted()) {
+			examine = "Swap this note at any bank for the equivalent item.";
+		}
+		return examine;
+	}
 }
