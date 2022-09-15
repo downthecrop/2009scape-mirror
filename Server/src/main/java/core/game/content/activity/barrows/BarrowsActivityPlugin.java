@@ -260,12 +260,10 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 			case 6714:
 			case 6733:
 				int index = -1;
-				for (int i = 0; i < player.getSavedData().getActivityData().getBarrowBrothers().length; i++) {
-					if (!player.getSavedData().getActivityData().getBarrowBrothers()[i] && RandomFunction.random(15) == 0 && !player.getAttribute("brother:" + i, false)) {
-						index = i;
-						break;
-					}
-				}
+                int brother = player.getSavedData().getActivityData().getBarrowTunnelIndex();
+                if (!player.getSavedData().getActivityData().getBarrowBrothers()[brother] && RandomFunction.random(15) == 0 && !player.getAttribute("brother:" + brother, false)) {
+                    index = brother;
+                }
 				if (index > -1) {
 					BarrowsCrypt.getCrypt(index).spawnBrother(player, RegionManager.getTeleportLocation(target.getLocation(), 1));
 				}
@@ -291,11 +289,10 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 				return true;
 			case 6774:
 				player.lock(1);
-				for (int i = 0; i < player.getSavedData().getActivityData().getBarrowBrothers().length; i++) {
-					if (!player.getSavedData().getActivityData().getBarrowBrothers()[i] && !player.getAttribute("brother:" + i, false)) {
-						BarrowsCrypt.getCrypt(i).spawnBrother(player, RegionManager.getTeleportLocation(target.getCenterLocation(), 4));
-					}
-				}
+                brother = player.getSavedData().getActivityData().getBarrowTunnelIndex();
+                if (!player.getSavedData().getActivityData().getBarrowBrothers()[brother] && !player.getAttribute("brother:" + brother, false)) {
+                    BarrowsCrypt.getCrypt(brother).spawnBrother(player, RegionManager.getTeleportLocation(target.getCenterLocation(), 4));
+                }
 				player.setAttribute("barrow:opened_chest", true);
 				sendConfiguration(player);
 				return true;
