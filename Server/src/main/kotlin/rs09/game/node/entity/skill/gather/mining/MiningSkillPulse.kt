@@ -189,9 +189,10 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
                 if (RandomFunction.roll(chance)) {
                     val gem = GEM_REWARDS.random()
                     sendMessage(player,"You find a ${gem.name}!")
-                    if (!addItem(player, gem.id)) {
+                    if (freeSlots(player) == 0) {
                         sendMessage(player,"You do not have enough space in your inventory, so you drop the gem on the floor.")
                     }
+                    addItemOrDrop(player, gem.id)
                 }
             }
 
