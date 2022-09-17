@@ -13,6 +13,7 @@ object Lunar {
     const val CATHERBY_TELEPORT = 21
     const val STRING_JEWELLERY = 22
     const val WATERBIRTH_TELEPORT = 24
+    const val SUPERGLASS_MAKE = 25
     const val ICE_PLATEAU_TELEPORT = 28
     const val OURANIA_TELEPORT = 31
     const val CURE_PLANT = 32

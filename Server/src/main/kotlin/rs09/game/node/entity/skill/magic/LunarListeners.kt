@@ -15,27 +15,14 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
+import core.tools.RandomFunction
 import org.rs09.consts.Components
 import org.rs09.consts.Items
 import rs09.game.node.entity.skill.farming.FarmingPatch
-import rs09.game.node.entity.skill.magic.LunarListeners.JewelleryString.Companion.productOfString
 import rs09.game.node.entity.skill.magic.spellconsts.Lunar
 import rs09.game.system.config.NPCConfigParser
-import java.util.Deque
 
 class LunarListeners : SpellListener("lunar") {
-    private val BAKE_PIE_ANIM = Animation(4413)
-    private val BAKE_PIE_GFX = Graphics(746,75)
-    private val STATSPY_ANIM = Animation(6293)
-    private val STATSPY_GFX = Graphics(1059)
-    private val CURE_PLANT_ANIM = Animation(4409)
-    private val CURE_PLANT_GFX = Graphics(742,100)
-    private val NPC_CONTACT_ANIM = Animation(4413)
-    private val NPC_CONTACT_GFX = Graphics(730,130)
-    private val PLANK_MAKE_ANIM = Animation(6298)
-    private val PLANK_MAKE_GFX = Graphics(1063, 120)
-    private val STRING_JEWELLERY_ANIM = Animation(4412)
-    private val STRING_JEWELLERY_GFX = Graphics(728, 100)
 
     override fun defineListeners() {
 
@@ -166,7 +153,13 @@ class LunarListeners : SpellListener("lunar") {
         }
 
         onCast(Lunar.STRING_JEWELLERY, NONE) { player, _ ->
+            requires(player, 80, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.EARTH_RUNE_557, 10), Item(Items.WATER_RUNE_555, 5)))
             stringJewellery(player)
+        }
+
+        onCast(Lunar.SUPERGLASS_MAKE, NONE) {player, _ ->
+            requires(player, 77, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.FIRE_RUNE_554, 6), Item(Items.AIR_RUNE_556, 10)))
+            superglassMake(player)
         }
     }
 
@@ -336,8 +329,6 @@ class LunarListeners : SpellListener("lunar") {
             playerJewellery.add(item)
         }
 
-
-
         player.pulseManager.run(object : Pulse() {
             var counter = 0
             override fun pulse(): Boolean {
@@ -353,6 +344,7 @@ class LunarListeners : SpellListener("lunar") {
                     rewardXP(player, Skills.CRAFTING, 4.0)
                     addXP(player, 83.0)
                     playerJewellery.remove(item)
+                    if(playerJewellery.isNotEmpty()) removeRunes(player,false) else removeRunes(player,true)
                 }
                 counter++
                 return playerJewellery.isEmpty()
@@ -360,27 +352,45 @@ class LunarListeners : SpellListener("lunar") {
         })
     }
 
-    private enum class JewelleryString(val unstrung : Int, val strung : Int) {
-        GOLD(Items.GOLD_AMULET_1673, Items.GOLD_AMULET_1692),
-        SAPPHIRE(Items.SAPPHIRE_AMULET_1675, Items.SAPPHIRE_AMULET_1694),
-        EMERALD(Items.EMERALD_AMULET_1677, Items.EMERALD_AMULET_1696),
-        RUBY(Items.RUBY_AMULET_1679, Items.RUBY_AMULET_1698),
-        DIAMOND(Items.DIAMOND_AMULET_1681, Items.DIAMOND_AMULET_1700),
-        DRAGONSTONE(Items.DRAGONSTONE_AMMY_1683, Items.DRAGONSTONE_AMMY_1702),
-        ONYX(Items.ONYX_AMULET_6579, Items.ONYX_AMULET_6581),
-        SALVE(Items.SALVE_SHARD_4082, Items.SALVE_AMULET_4081),
-        HOLY(Items.UNSTRUNG_SYMBOL_1714, Items.UNBLESSED_SYMBOL_1716),
-        UNHOLY(Items.UNSTRUNG_EMBLEM_1720, Items.UNPOWERED_SYMBOL_1722);
-        companion object {
-            val productOfString = values().associate { it.unstrung to it.strung }
-            fun forId(id : Int) : Int {
-                return productOfString[id]!!
-            }
+    private fun superglassMake(player: Player) {
+        val GLASSWEED = hashSetOf(Items.SODA_ASH_1781, Items.SEAWEED_401, Items.SWAMP_WEED_10978)
+        val inv = player.inventory.toArray()
+        var playerWeed: Int = amountInInventory(player, Items.SODA_ASH_1781) + amountInInventory(player, Items.SEAWEED_401) + amountInInventory(player, Items.SWAMP_WEED_10978)
+        var playerSand: Int = amountInInventory(player, Items.BUCKET_OF_SAND_1783)
+        var index: Int = 0
 
-            fun unstrungContains(id : Int) : Boolean {
-                return productOfString.contains(id)
+        fun addMolten(): Boolean {
+            if(RandomFunction.randomDouble(1.0) < 0.3) {
+                if(addItem(player, Items.MOLTEN_GLASS_1775, 2)) return true
+            } else {
+                if(addItem(player, Items.MOLTEN_GLASS_1775)) return true
             }
+            return false
+        }
 
+        val size = minOf(playerSand, playerWeed)
+
+        if(index != size && size != 0) {
+            for (item in inv) {
+                if (item == null) continue
+                if (index == size) break
+                if (GLASSWEED.contains(item.id)) {
+                    if (removeItem(player, item) && removeItem(player, Items.BUCKET_OF_SAND_1783) && addMolten()) {
+                        index++
+                    } else {
+                        break
+                    }
+                }
+            }
+        } else if (playerWeed == 0 || playerSand == 0 || size == 0) {
+            sendMessage(player, "You lack the required ingredients.")
+        }
+
+        if(index == size && size != 0) {
+            removeRunes(player, true)
+            visualizeSpell(player, SUPERGLASS_MAKE_ANIM, SUPERGLASS_MAKE_GFX, 2896)
+            rewardXP(player, Skills.CRAFTING, 10.0)
+            addXP(player, 78.0)
         }
     }
 }
