@@ -237,8 +237,6 @@ public final class FatherAereckDialogue extends DialoguePlugin {
             case 10:
                 end();
                 player.getInterfaceManager().open(new Component(652));
-                BitregisterAssembler.send(player, 652, 34, 0, 13, new BitregisterAssembler(0));
-                player.getConfigManager().set(1146, player.getGraveManager().getType().ordinal() | 262112);
                 player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 0, 15);
                 break;
             case 20:

@@ -17,7 +17,7 @@ class PulseRunner {
     fun updateAll() {
         val pulseCount = pulses.size
 
-        for (i in 0..pulseCount) {
+        for (i in 0 until pulseCount) {
             val pulse = pulses.take()
 
             val elapsedTime = measure {

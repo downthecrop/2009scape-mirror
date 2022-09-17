@@ -32,6 +32,10 @@ public final class GroundItemManager {
 		return create(new GroundItem(item, location, null));
 	}
 
+	public static GroundItem create (Item item, Location location, int playerUid, int ticks) {
+		return create(new GroundItem(item, location, playerUid, ticks));
+	}
+
 	/**
 	 * Creates a ground item.
 	 * @param item the item.

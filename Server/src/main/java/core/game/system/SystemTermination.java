@@ -5,6 +5,7 @@ import api.ShutdownListener;
 import core.game.node.entity.player.Player;
 import rs09.Server;
 import rs09.ServerConstants;
+import rs09.ServerStore;
 import rs09.game.ai.AIRepository;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
@@ -54,7 +55,16 @@ public final class SystemTermination {
 				}
 			}
 			GameWorld.getShutdownListeners().forEach(ShutdownListener::shutdown);
-			GameWorld.getWorldPersists().forEach(PersistWorld::save);
+			ServerStore s = null;
+			for (PersistWorld wld : GameWorld.getWorldPersists()) {
+				if (wld instanceof ServerStore)
+					s = (ServerStore) wld;
+				else
+					wld.save();
+			}
+			//ServerStore should ***always*** save last. Fudging a race condition here :)
+			if (s != null)
+				s.save();
 			if(ServerConstants.DATA_PATH != null)
 				save(ServerConstants.DATA_PATH);
 		} catch (Throwable e) {

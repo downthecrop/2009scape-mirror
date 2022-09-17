@@ -223,7 +223,6 @@ public final class LoginConfiguration {
         player.getPacketDispatch().sendString("Friends List - World " + GameWorld.getSettings().getWorldId(), 550, 3);
         player.getConfigManager().init();
         player.getQuestRepository().syncronizeTab(player);
-        player.getGraveManager().update();
         player.getInterfaceManager().close();
         player.getEmoteManager().refresh();
         player.getInterfaceManager().openInfoBars();

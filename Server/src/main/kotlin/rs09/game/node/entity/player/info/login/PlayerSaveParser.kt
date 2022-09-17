@@ -1,20 +1,18 @@
 package rs09.game.node.entity.player.info.login
 
 import api.PersistPlayer
-import core.game.interaction.item.brawling_gloves.BrawlingGloves
 import core.game.node.entity.combat.CombatSpell
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.IronmanMode
 import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.entity.player.link.emote.Emotes
-import core.game.node.entity.player.link.grave.GraveType
 import core.game.node.entity.player.link.music.MusicEntry
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import rs09.ServerConstants
+import rs09.game.node.entity.player.graves.GraveController
+import rs09.game.node.entity.player.graves.GraveType
 import rs09.game.node.entity.skill.farming.CompostBins
 import rs09.game.node.entity.skill.farming.FarmingPatch
 import rs09.game.system.SystemLogger
@@ -287,8 +285,9 @@ class PlayerSaveParser(val player: Player) {
 
     fun parseGrave() {
         saveFile ?: return
-        val graveData = (saveFile!!["grave_type"] as String).toInt()
-        player.graveManager.type = GraveType.values()[graveData]
+        val graveData = (saveFile!!["grave_type"] as? String)?.toInt() ?: return
+        val type = GraveType.values()[graveData]
+        GraveController.updateGraveType(player, type)
     }
 
     fun parseAppearance() {

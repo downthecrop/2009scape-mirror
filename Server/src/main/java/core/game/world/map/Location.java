@@ -442,6 +442,16 @@ public final class Location extends Node {
 		return "[" + x + ", " + y + ", " + z + "]";
 	}
 
+	public static Location fromString(String locString) {
+		String trimmed = locString.replace("[", "").replace("]", "");
+		String[] tokens = trimmed.split(",");
+		return Location.create(
+				Integer.parseInt(tokens[0].trim()),
+				Integer.parseInt(tokens[1].trim()),
+				Integer.parseInt(tokens[2].trim())
+		);
+	}
+
 	@Override
 	public int hashCode() {
 		return z << 30 | x << 15 | y;

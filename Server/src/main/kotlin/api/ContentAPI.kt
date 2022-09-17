@@ -2078,6 +2078,8 @@ fun registerHintIcon(player: Player, location: Location, height: Int) {
  * @param node the Node to register a hint icon for.
  */
 fun registerHintIcon(player: Player, node: Node) {
+    if (getAttribute(player, "hinticon", null) != null)
+        return
     setAttribute(player, "hinticon", HintIconManager.registerHintIcon(player, node))
 }
 

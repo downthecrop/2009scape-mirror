@@ -14,6 +14,7 @@ import core.game.world.map.RegionManager
 import core.plugin.CorePluginTypes.StartupPlugin
 import core.tools.RandomFunction
 import rs09.ServerConstants
+import rs09.ServerStore
 import rs09.auth.AuthProvider
 import rs09.game.system.Auth
 import rs09.game.system.SystemLogger
@@ -169,7 +170,9 @@ object GameWorld {
         ConfigParser().prePlugin()
         ClassScanner.scanClasspath()
         ClassScanner.loadPureInterfaces()
-        worldPersists.forEach { it.parse() }
+        val s = worldPersists.filterIsInstance<ServerStore>().first()
+        s.parse()
+        worldPersists.filter { it !is ServerStore }.forEach { it.parse() }
         ClassScanner.loadSideEffectfulPlugins()
         configParser.postPlugin()
         startupListeners.forEach { it.startup() }

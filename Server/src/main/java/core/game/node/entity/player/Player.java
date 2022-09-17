@@ -25,7 +25,6 @@ import core.game.node.entity.player.link.appearance.Appearance;
 import core.game.node.entity.player.link.audio.AudioManager;
 import core.game.node.entity.player.link.diary.AchievementDiaryManager;
 import core.game.node.entity.player.link.emote.EmoteManager;
-import core.game.node.entity.player.link.grave.GraveManager;
 import core.game.node.entity.player.link.music.MusicPlayer;
 import core.game.node.entity.player.link.prayer.Prayer;
 import core.game.node.entity.player.link.prayer.PrayerType;
@@ -35,7 +34,6 @@ import core.game.node.entity.player.link.skillertasks.SkillerTasks;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.construction.HouseManager;
 import core.game.node.entity.skill.summoning.familiar.FamiliarManager;
-import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.system.communication.CommunicationInfo;
@@ -65,13 +63,15 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import org.rs09.consts.Items;
 import proto.management.ClanLeaveNotification;
-import proto.management.LeaveClanRequest;
 import proto.management.PlayerStatusUpdate;
 import rs09.GlobalStats;
 import rs09.ServerConstants;
 import rs09.game.VarpManager;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.node.entity.combat.equipment.EquipmentDegrader;
+import rs09.game.node.entity.player.graves.Grave;
+import rs09.game.node.entity.player.graves.GraveType;
+import rs09.game.node.entity.player.graves.GraveController;
 import rs09.game.node.entity.player.info.login.PlayerSaver;
 import rs09.game.node.entity.skill.runecrafting.PouchManager;
 import rs09.game.node.entity.state.newsys.State;
@@ -229,11 +229,6 @@ public class Player extends Entity {
 	 * The skull manager.
 	 */
 	private final SkullManager skullManager = new SkullManager(this);
-
-	/**
-	 * The grave stone manager.
-	 */
-	private final GraveManager graveManager = new GraveManager(this);
 
 	/**
 	 * The familiar manager.
@@ -608,35 +603,28 @@ public class Player extends Entity {
 			}
 			GroundItemManager.create(new Item(526), getLocation(), k);
 			final Container[] c = DeathTask.getContainers(this);
-			boolean gravestone = graveManager.generateable() && getIronmanManager().getMode() != IronmanMode.ULTIMATE;
-			int seconds = graveManager.getType().getDecay() * 60;
-			int ticks = (1000 * seconds) / 600;
-			List<GroundItem> items = new ArrayList<>(20);
-			for (Item item : c[1].toArray()) {
-				if (item != null) {
-					GroundItem ground;
-					if (item.hasItemPlugin()) {
-						item = item.getPlugin().getDeathItem(item);
-					}
-					if (gravestone || !item.getDefinition().isTradeable()) {
-						ground = new GroundItem(item, getLocation(), gravestone ? ticks + 100 : 200, this);
-					} else {
-						ground = new GroundItem(item.getDropItem(), getLocation(), k);
-					}
-					items.add(ground);
-					ground.setDropper(this); //Checking for ironman mode in any circumstance for death items is inaccurate to how it works in both 2009scapes.
-					GroundItemManager.create(ground);
+
+			boolean canCreateGrave = GraveController.allowGenerate(this);
+			if (canCreateGrave) {
+				Grave g = GraveController.produceGrave(GraveController.getGraveType(this));
+				g.initialize(this, location, Arrays.stream(c[1].toArray()).filter(Objects::nonNull).toArray(Item[]::new)); //note: the amount of code required to filter nulls from an array in Java is atrocious.
+			} else {
+				for (Item item : c[1].toArray()) {
+					if (item == null) continue;
+					if (GraveController.shouldCrumble(item.getId()))
+						continue;
+					if (GraveController.shouldRelease(item.getId()))
+						continue;
+					item = GraveController.checkTransform(item);
+					GroundItemManager.create(item, location, killer instanceof Player ? (Player) killer : this);
 				}
+				sendMessage(colorize("%RDue to the circumstances of your death, you do not have a grave."));
 			}
+
 			equipment.clear();
 			inventory.clear();
 			inventory.addAll(c[0]);
-			if (gravestone) {
-				graveManager.create(ticks, items);
-				sendMessages("<col=990000>Because of your current gravestone, you have "+graveManager.getType().getDecay()+" minutes to get your items and", "<col=990000>equipment back after dying in combat.");
-			}
 			familiarManager.dismiss();
-
 		}
 		skullManager.setSkulled(false);
 		removeAttribute("combat-time");
@@ -1213,14 +1201,6 @@ public class Player extends Entity {
 	 */
 	public HouseManager getHouseManager() {
 		return houseManager;
-	}
-
-	/**
-	 * Gets the graveManager.
-	 * @return the graveManager
-	 */
-	public GraveManager getGraveManager() {
-		return graveManager;
 	}
 
 	/**

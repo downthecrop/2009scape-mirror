@@ -6,6 +6,8 @@ import core.game.node.entity.player.info.login.PlayerParser;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
+import rs09.game.node.entity.player.graves.Grave;
+import rs09.game.node.entity.player.graves.GraveController;
 import rs09.game.system.SystemLogger;
 import rs09.game.system.config.ItemConfigParser;
 import rs09.game.world.GameWorld;
@@ -41,6 +43,10 @@ public final class DropItemHandler {
 			if (option.equalsIgnoreCase("destroy") || option.equalsIgnoreCase("dissolve") || (boolean) item.getDefinition().getHandlers().getOrDefault(ItemConfigParser.DESTROY,false)) {
 				player.getDialogueInterpreter().open(9878, item);
 				return true;
+			}
+			if (GraveController.hasGraveAt(player.getLocation())) {
+				player.sendMessage("You cannot drop items on top of graves!");
+				return false;
 			}
 			if (player.getAttribute("equipLock:" + item.getId(), 0) > GameWorld.getTicks()) {
 				SystemLogger.logAlert(player + ", tried to do the drop & equip dupe.");

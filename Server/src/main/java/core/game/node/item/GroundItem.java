@@ -15,6 +15,8 @@ public class GroundItem extends Item {
 	 */
 	private Player dropper;
 
+	private int dropperUid;
+
 	/**
 	 * The amount of ticks.
 	 */
@@ -62,6 +64,12 @@ public class GroundItem extends Item {
 		this(item, location, 200, player);
 	}
 
+	public GroundItem(Item item, Location location, int playerUid, int ticks) {
+		this(item, location);
+		this.dropperUid = playerUid;
+		this.decayTime = ticks;
+	}
+
 	/**
 	 * Constructs a new {@code GroundItem} {@code Object}.
 	 * @param item The item.
@@ -74,6 +82,7 @@ public class GroundItem extends Item {
 		super.index = -1;
 		super.interaction.setDefault();
 		this.dropper = player;
+		this.dropperUid = player != null ? player.getDetails().getUid() : -1;
 		this.ticks = GameWorld.getTicks();
 		this.decayTime = ticks + decay;
 	}
@@ -104,7 +113,7 @@ public class GroundItem extends Item {
 	 * @return {@code True} if so.
 	 */
 	public boolean droppedBy(Player p) {
-		if (dropper != null && p.getDetails().getUid() == dropper.getDetails().getUid()) {
+		if (p.getDetails().getUid() == dropperUid) {
 			dropper = p;
 			return true;
 		}
@@ -191,6 +200,9 @@ public class GroundItem extends Item {
 		this.removed = removed;
 	}
 
+	public int getDropperUid() {
+		return dropperUid;
+	}
 	@Override
 	public String toString() {
 		return "GroundItem [dropper=" + (dropper != null ? dropper.getUsername() : dropper) + ", ticks=" + ticks + ", decayTime=" + decayTime + ", remainPrivate=" + remainPrivate + ", removed=" + removed + "]";

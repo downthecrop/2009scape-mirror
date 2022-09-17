@@ -39,7 +39,6 @@ class PlayerSaver (val player: Player){
         saveAppearance(saveFile)
         saveSpellbook(saveFile)
         saveVarps(saveFile)
-        saveGraveType(saveFile)
         saveSavedData(saveFile)
         saveAutocast(saveFile)
         saveConfigs(saveFile)
@@ -515,10 +514,6 @@ class PlayerSaver (val player: Player){
         activityData.put("hardcoreDeath",player.savedData.activityData.hardcoreDeath)
         activityData.put("topGrabbed",player.savedData.activityData.isTopGrabbed)
         root.put("activityData",activityData)
-    }
-
-    fun saveGraveType(root: JSONObject){
-        root.put("grave_type",player.graveManager.type.ordinal.toString())
     }
 
     fun saveSpellbook(root: JSONObject){

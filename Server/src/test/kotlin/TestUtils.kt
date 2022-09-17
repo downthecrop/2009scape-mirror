@@ -3,6 +3,7 @@ import core.cache.crypto.ISAACCipher
 import core.cache.crypto.ISAACPair
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.PlayerDetails
+import core.game.node.entity.player.info.Rights
 import core.game.node.entity.player.link.IronmanMode
 import core.game.node.item.Item
 import core.net.IoSession
@@ -20,12 +21,16 @@ import rs09.game.world.update.UpdateSequence
 import java.nio.ByteBuffer
 
 object TestUtils {
-    fun getMockPlayer(name: String, ironman: IronmanMode = IronmanMode.NONE): Player {
+    var uidCounter = 0
+
+    fun getMockPlayer(name: String, ironman: IronmanMode = IronmanMode.NONE, rights: Rights = Rights.ADMINISTRATOR): Player {
         val p = MockPlayer(name)
         p.ironmanManager.mode = ironman
+        p.details.accountInfo.uid = uidCounter++
         Repository.addPlayer(p)
         //Update sequence has a separate list of players for some reason...
         UpdateSequence.renderablePlayers.add(p)
+        p.details.rights = rights
         return p
     }
 
