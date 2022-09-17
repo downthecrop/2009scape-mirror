@@ -84,6 +84,7 @@ public final class QuestRepository {
                 }
                 config = quest.getConfig(player,getStage(quest));
                 player.varpManager.get(config[0]).setVarbit(0,config[1]).send(player);
+                quest.updateVarps(player);
             }
         }
     }

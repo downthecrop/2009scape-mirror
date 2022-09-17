@@ -312,7 +312,7 @@ public class SceneryDefinition extends Definition<Scenery> {
 	/**
 	 * The second integer.
 	 */
-	public int secondInt;
+	public int interactable;
 
 	/**
 	 * A unknown boolean.
@@ -493,7 +493,7 @@ public class SceneryDefinition extends Definition<Scenery> {
 		aByte3914 = (byte) 0;
 		anInt3915 = 0;
 		anInt3900 = 0;
-		secondInt = -1;
+		interactable = -1;
 		aBoolean3894 = false;
 		aByte3912 = (byte) 0;
 		anInt3921 = 0;
@@ -648,7 +648,7 @@ public class SceneryDefinition extends Definition<Scenery> {
 			} else if (opcode == 18) {
 				def.projectileClipped = false;
 			} else if (opcode == 19) {
-				def.secondInt = buffer.get() & 0xFF;
+				def.interactable = buffer.get() & 0xFF;
 			} else if (opcode == 21) {
 				def.aByte3912 = (byte) 1;
 			} else if (opcode == 22) {
@@ -818,14 +818,14 @@ public class SceneryDefinition extends Definition<Scenery> {
 	 * Configures the object definitions.
 	 */
 	final void configureObject() {
-		if (secondInt == -1) {
-			secondInt = 0;
+		if (interactable == -1) {
+			interactable = 0;
 			if (modelIds != null && (getModelConfiguration() == null || getModelConfiguration()[0] == 10)) {
-				secondInt = 1;
+				interactable = 1;
 			}
 			for (int i = 0; i < 5; i++) {
 				if (options[i] != null) {
-					secondInt = 1;
+					interactable = 1;
 					break;
 				}
 			}
@@ -853,6 +853,9 @@ public class SceneryDefinition extends Definition<Scenery> {
 	 * @return {@code True} if so.
 	 */
 	public boolean hasActions() {
+        if(interactable > 0) {
+            return true;
+        }
 		if (childrenIds == null) {
 			return hasOptions(false);
 		}
@@ -1360,11 +1363,11 @@ public class SceneryDefinition extends Definition<Scenery> {
 	}
 
 	/**
-	 * Get the secondInt.
-	 * @return the secondInt
+	 * Get the interactable.
+	 * @return the interactable
 	 */
-	public int getSecondInt() {
-		return secondInt;
+	public int getInteractable() {
+		return interactable;
 	}
 
 	/**

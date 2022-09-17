@@ -142,6 +142,9 @@ public abstract class Book extends DialoguePlugin {
 	 * @param set the set.
 	 */
 	public void display(Page[] set) {
+        // TODO: It seems like different subclasses instantiate this by 
+        // copy-paste, this should probably be made final, and should switch between a few 
+        // implementations by component id
 	}
 
 	/**

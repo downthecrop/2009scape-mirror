@@ -110,7 +110,7 @@ public final class LandscapeParser {
 		int type = object.getType();
 		if (type == 22) { //Tile
 			plane.getFlags().getLandscape()[localX][localY] = true;
-			if (def.secondInt != 0 || def.clipType == 1 || def.secondBool) {
+			if (def.interactable != 0 || def.clipType == 1 || def.secondBool) {
 				if (def.clipType == 1) {
 					plane.getFlags().flagTileObject(localX, localY);
 					if (def.isProjectileClipped()) {
@@ -190,7 +190,7 @@ public final class LandscapeParser {
 		}
 		int type = object.getType();
 		if (type == 22) { //Tile
-			if (def.secondInt != 0 || def.clipType == 1 || def.secondBool) {
+			if (def.interactable != 0 || def.clipType == 1 || def.secondBool) {
 				if (def.clipType == 1) {
 					plane.getFlags().unflagTileObject(localX, localY);
 					if (def.isProjectileClipped()) {

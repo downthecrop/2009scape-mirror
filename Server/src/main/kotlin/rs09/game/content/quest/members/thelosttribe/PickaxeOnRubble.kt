@@ -16,7 +16,9 @@ import core.plugin.Plugin
  */
 class PickaxeOnRubble : UseWithHandler(1265,1267,1269,1271,1273,1275){
     override fun newInstance(arg: Any?): Plugin<Any> {
-        addHandler(6898, OBJECT_TYPE,this)
+        for(id in arrayOf(6898, 6903, 6904, 6905)) {
+            addHandler(id, OBJECT_TYPE,this)
+        }
         return this
     }
 

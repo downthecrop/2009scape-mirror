@@ -25,6 +25,7 @@ public class BookreadOption extends OptionHandler {
         ItemDefinition.forId(1856).getHandlers().put("option:read", this);
         ItemDefinition.forId(Items.BATTERED_BOOK_2886).getHandlers().put("option:read", this);
         ItemDefinition.forId(Items.SLASHED_BOOK_9715).getHandlers().put("option:read", this);
+        ItemDefinition.forId(Items.VARMENS_NOTES_4616).getHandlers().put("option:read", this);
         ItemDefinition.forId(9003).getHandlers().put("option:read", this);
         ItemDefinition.forId(9004).getHandlers().put("option:read", this);
         ItemDefinition.forId(11710).getHandlers().put("option:read", this);
@@ -68,6 +69,6 @@ public class BookreadOption extends OptionHandler {
             case 1856:
                 return 387454;
         }
-        return -1;
+        return item;
     }
 }

@@ -206,6 +206,9 @@ public abstract class Quest implements Plugin<Object> {
 		}
 		return new int[] {configs[0], stage == 0 ? configs[1] : stage >= 100 ? configs[3] : configs[2]};
 	}
+
+    public void updateVarps(Player player) {
+    }
 	
 	/**
 	 * Checks if the quest is in progress.

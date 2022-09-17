@@ -49,6 +49,7 @@ public class ItemActionPacket implements IncomingPacket {
 		int childId2 = -1;
 		NodeUsageEvent event = null;
 		Item used = null;
+        player.debug(String.format("ItemActionPacket.decode(%d)", opcode));
 		switch (buffer.opcode()) {
 		case 115: // Item on NPC
 			int interfaceId = buffer.getIntA() >> 16;
@@ -169,25 +170,22 @@ public class ItemActionPacket implements IncomingPacket {
 			int objectId = buffer.getShortA();
 			int z = player.getLocation().getZ();
 			Scenery object = RegionManager.getObject(z, x, y);
-			if(objectId != 6898) {
-				if (object == null || object.getId() != objectId) {
-					PacketRepository.send(ClearMinimapFlag.class, new PlayerContext(player));
-					return;
-				}
-				object = object.getChild(player);
-				if (object == null) {
-					PacketRepository.send(ClearMinimapFlag.class, new PlayerContext(player));
-					break;
-				}
-			} else {
-				object = new Scenery(6898,x,y,z);
-			}
+            //player.debug(String.format("opcode 134: oid %d iid %d", objectId, id));
+            //player.debug(String.format("opcode 134: %d %d", object != null ? object.getId() : -1, object != null && object.getChild(player) != null ? object.getChild(player).getId() : -1));
+            Scenery child = object != null ? object.getChild(player) : null;
+            if(object == null || (object.getId() != objectId && (child == null || child.getId() != objectId))) {
+                PacketRepository.send(ClearMinimapFlag.class, new PlayerContext(player));
+                return;
+            }
 			used = player.getInventory().get(slot);
 			if (used == null || used.getId() != id) {
 				return;
 			}
 			if(used.getId() == Items.ROTTEN_POTATO_5733){
 				RottenPotatoUseWithHandler.handle(object,player);
+				return;
+			}
+			if(InteractionListeners.run(used,child,1,player)){
 				return;
 			}
 			if(InteractionListeners.run(used,object,1,player)){
