@@ -7,6 +7,12 @@ import core.game.content.dialogue.book.PageSet
 import core.game.node.entity.player.Player
 import org.rs09.consts.Vars
 
+/**
+ * Utils for the Elemental Workshop I quest
+ * Book/Varp/Method Utils
+ *
+ *  @author Woah, with love
+ */
 object EWUtils {
 
     // Helpers for the battered/slashed book

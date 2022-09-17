@@ -3,6 +3,7 @@ package rs09.game.content.quest.members.elementalworkshop
 import api.Commands
 import api.addItem
 import api.setAttribute
+import api.setVarbit
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
@@ -130,6 +131,18 @@ class ElementalWorkshopQuest : Quest("Elemental Workshop I", 52, 51, 1), Command
             addItem(player, Items.LEATHER_1741)
             addItem(player, Items.HAMMER_2347)
             addItem(player, Items.COAL_453, 4)
+        }
+        define("readyew", Privilege.ADMIN) { player, _ ->
+            val enabled = 1
+            setAttribute(player, "/save:ew1:got_needle", true)
+            setAttribute(player, "/save:ew1:got_leather", true)
+            setAttribute(player, "/save:ew1:bellows_fixed", true)
+            player.questRepository.setStageNonmonotonic(player.questRepository.forIndex(52), 95)
+            setVarbit(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, EWUtils.BELLOWS_STATE, enabled, true)
+            setVarbit(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, EWUtils.FURNACE_STATE, enabled, true)
+            setVarbit(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, EWUtils.WATER_WHEEL_STATE, enabled, true)
+            setVarbit(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, EWUtils.RIGHT_WATER_CONTROL_STATE, enabled, true)
+            setVarbit(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, EWUtils.LEFT_WATER_CONTROL_STATE, enabled, true)
         }
     }
 }

@@ -8,6 +8,11 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.Items
 
+/**
+ * Battered book handler for the Elemental Workshop I quest
+ *
+ *  @author Woah, with love
+ */
 @Initializable
 class BatteredBookHandler : Book {
 
@@ -20,8 +25,7 @@ class BatteredBookHandler : Book {
     }
 
     override fun finish() {
-        val stage = player.questRepository.getStage("Elemental Workshop I")
-        if (stage == 0) {
+        if (EWUtils.currentStage(player) == 0) {
             setQuestStage(player, "Elemental Workshop I", 1)
         }
     }

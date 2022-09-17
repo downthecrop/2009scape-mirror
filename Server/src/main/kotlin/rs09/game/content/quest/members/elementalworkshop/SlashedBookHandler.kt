@@ -7,6 +7,11 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.Items
 
+/**
+ * Slashed book handler for the Elemental Workshop I quest
+ *
+ *  @author Woah, with love
+ */
 @Initializable
 class SlashedBookHandler : Book {
     constructor(player: Player?) : super(player, "Book of the elemental shield", Items.SLASHED_BOOK_9715, *EWUtils.PAGES) {}

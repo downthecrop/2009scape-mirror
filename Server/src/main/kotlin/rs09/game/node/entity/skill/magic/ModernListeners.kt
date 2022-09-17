@@ -3,6 +3,7 @@ package rs09.game.node.entity.skill.magic
 import api.events.ItemAlchemizationEvent
 import api.events.TeleportEvent
 import api.getAttribute
+import api.sendMessage
 import core.game.content.activity.mta.impl.GraveyardZone
 import core.game.content.global.Bones
 import core.game.interaction.MovementPulse
@@ -10,8 +11,8 @@ import core.game.node.entity.Entity
 import core.game.node.entity.impl.Animator.Priority
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.TeleportManager
+import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.smithing.smelting.Bar
@@ -185,6 +186,12 @@ class ModernListeners : SpellListener("modern"){
     private fun superheat(player: Player,item: Item){
         if(!item.name.contains("ore") && !item.name.toLowerCase().equals("coal")){
             player.sendMessage("You can only cast this spell on ore.")
+            return
+        }
+
+        // Elemental Workshop I special interaction
+        if(item.id == Items.ELEMENTAL_ORE_2892) {
+            sendMessage(player, "Even this spell is not hot enough to heat this item.")
             return
         }
 

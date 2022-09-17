@@ -19,6 +19,11 @@ import rs09.game.content.quest.members.elementalworkshop.EWUtils.currentStage
 import rs09.game.interaction.InteractionListener
 import rs09.game.system.SystemLogger
 
+/**
+ * Listeners for the Elemental Workshop I quest
+ *
+ *  @author Woah, with love
+ */
 class EWListeners : InteractionListener {
 
     /* Items */
@@ -58,6 +63,7 @@ class EWListeners : InteractionListener {
     private val fillStoneBowlAnimation = Animation(Animations.HUMAN_FILL_STONE_BOWL_4862)
     private val fixBellowsAnimation = Animation(Animations.HUMAN_SEW_LARGE_SCENERY_4862)
     private val smeltElementalBar = Animation(Animations.HUMAN_FURNACE_SMELTING_3243)
+    private val smithElementalShield = Animation(Animations.HUMAN_COOKING_RANGE_896)
 
     /* Sound effects */
     private val fillStoneBowlSFX = Audio(Sounds.FILL_STONE_BOWL_1537, 1)
@@ -67,10 +73,14 @@ class EWListeners : InteractionListener {
     private val pullLeverEnabledSFX = Audio(Sounds.PULL_LEVER_ENABLED_1547)
     private val pullLeverDisabledSFX = Audio(Sounds.PULL_LEVER_DISABLED_1548)
     private val bellowLeverSFX = Audio(Sounds.PULL_LEVER_GENERAL_2400)
+    private val smithElementalShieldSFX = Audio(2721)
 
     /* In-game locations */
     private val leftWaterControlsLocation = Location.create(2713, 9907, 0)
     private val rightWaterControlsLocation = Location.create(2726, 9907, 0)
+
+    /* Special interactions */
+    private val furnaceIDS = intArrayOf(4304, 6189, 11010, 11666, 12100, 12809, 14921, 18497, 26814, 30021, 30510, 36956, 37651)
 
     private val DISABLED = 0
     private val ENABLED = 1
@@ -81,7 +91,7 @@ class EWListeners : InteractionListener {
          * * * * * * * * * * * * * * * * * */
         // Bookcase (quest start)
         on(Scenery.BOOKCASE_26113, SCENERY, "search") { player, _ ->
-            val stage = player.questRepository.getStage("Elemental Workshop I")
+            val stage = currentStage(player)
 
             if (stage < 3) {
                 // Player already has battered book in inventory
@@ -104,13 +114,17 @@ class EWListeners : InteractionListener {
                     "There is a book here titled 'The Elemental Shield'. " +
                             "It can stay here, as you have a copy in your backpack."
                 )
-                player.inventory.addIfDoesntHave(batteredKey)
+                if (player.inventory.addIfDoesntHave(batteredKey)) {
+                    sendItemDialogue(player, Item(Items.BATTERED_KEY_2887),"You also find a key.")
+                }
                 return@on true
             }
 
             sendItemDialogue(player, Item(Items.SLASHED_BOOK_9715), "You find a book titled 'The Elemental Shield'.")
             addItem(player, slashedBook.id)
-            player.inventory.addIfDoesntHave(batteredKey)
+            if (player.inventory.addIfDoesntHave(batteredKey)) {
+                sendItemDialogue(player, Item(Items.BATTERED_KEY_2887),"You also find a key.")
+            }
             return@on true
         }
 
@@ -149,6 +163,11 @@ class EWListeners : InteractionListener {
          * * * * * * * * * * * * * * * * * */
         // Odd looking wall handler
         on(intArrayOf(Scenery.ODD_LOOKING_WALL_26114, Scenery.ODD_LOOKING_WALL_26115), SCENERY, "open") { player, wall ->
+            // Nothing interesting happens if quest wasn't started.
+            if (currentStage(player) < 1) {
+                sendMessage(player, "Nothing interesting happens.")
+                return@on true
+            }
             // Player is allowed to exit without key
             if (player.location == Location.create(2710, 3496, 0) || player.location == Location.create(2709, 3496, 0)) {
                 DoorActionHandler.handleAutowalkDoor(player, wall.asScenery())
@@ -170,12 +189,19 @@ class EWListeners : InteractionListener {
         }
 
         on(Scenery.STAIRCASE_3415, SCENERY, "climb-down") { player, _ ->
+            val stage = currentStage(player)
+            // Prevent player from somehow skipping beginning quest stages
+            if (stage < 1) {
+                sendMessage(player, "Nothing interesting happens.")
+                return@on true
+            }
+            // Move player to downstairs location
             teleport(player, Location.create(2716, 9888, 0))
             // If it is the players first time in the workshop
-            if (currentStage(player) < 6) {
+            if (stage < 6) {
                 sendPlayerDialogue(player,
                     "Now to explore this area thoroughly, to find what " +
-                        "forgotten secrets it contains.", FacialExpression.NEUTRAL)
+                            "forgotten secrets it contains.", FacialExpression.NEUTRAL)
                 setQuestStage(player, "Elemental Workshop I", 7)
             }
             return@on true
@@ -233,7 +259,7 @@ class EWListeners : InteractionListener {
         }
 
         // Workbenches/Anvil
-        onUseWith(SCENERY, Items.ELEMENTAL_METAL_2893, Scenery.WORKBENCH_3402) { player, used, _ ->
+        onUseWith(SCENERY, Items.ELEMENTAL_METAL_2893, Scenery.WORKBENCH_3402) { player, used, workbench ->
             // Warn player their smithing level is too low to make the shield
             if (player.skills.getLevel(Skills.SMITHING) < 20) {
                 sendMessage(player, "You need a smithing level of 20 to create an elemental shield.")
@@ -241,12 +267,12 @@ class EWListeners : InteractionListener {
             }
             // Warn player they don't have the required book in their inventory
             if (!player.inventory.containsAtLeastOneItem(intArrayOf(Items.SLASHED_BOOK_9715, Items.BATTERED_BOOK_2886))) {
-                sendMessage(player, "You are unsure what to do with the bar. Perhaps there is a book to help guide you.")
+                sendDialogue(player, "This workbench is too complicated. You need instructions to follow.")
                 return@onUseWith true
             }
             // Warn player they don't have a hammer in their inventory
             if (!inInventory(player, Items.HAMMER_2347)) {
-                sendMessage(player, "You don't have a tool available to shape the metal.")
+                sendDialogue(player, "You don't have a tool available to shape the metal.")
                 return@onUseWith true
             }
             // Sanity error check (Should never get thrown)
@@ -255,9 +281,19 @@ class EWListeners : InteractionListener {
                 return@onUseWith false
             }
             // Successfully smith the elemental shield
-            replaceSlot(player, used.asItem().slot, elementalShield)
-            sendMessage(player, "Following the instructions in the book you make an elemental shield.")
-            player.questRepository.getQuest("Elemental Workshop I").finish(player)
+            lock(player, (animationDuration(smithElementalShield) + 2))
+            runTask(player) {
+                face(player, workbench)
+                animate(player, smithElementalShield)
+                playAudio(player, smithElementalShieldSFX)
+                replaceSlot(player, used.asItem().slot, elementalShield)
+                rewardXP(player, Skills.SMITHING, 20.0)
+                sendMessage(player, "Following the instructions in the book you make an elemental shield.")
+            }
+            // Check to see if the quest is completed, if not, complete the quest
+            if (!player.questRepository.getQuest("Elemental Workshop I").isCompleted(player)) {
+                player.questRepository.getQuest("Elemental Workshop I").finish(player)
+            }
             return@onUseWith true
         }
 
@@ -340,8 +376,8 @@ class EWListeners : InteractionListener {
                 return@onUseWith true
             }
 
-            val duration = animationDuration(smeltElementalBar)
-            lock(player, (duration + 1))
+            val barSmeltingDuration = animationDuration(smeltElementalBar)
+            lock(player, barSmeltingDuration + 2)
             // Run the "smelting" pulse
             submitIndividualPulse(player, object : Pulse() {
                 var count = 0
@@ -353,7 +389,7 @@ class EWListeners : InteractionListener {
                             animate(player, Animations.HUMAN_FURNACE_SMELTING_3243)
                             sendMessage(player, "You place the elemental ore and four heaps of coal into the furnace.")
                         }
-                        duration -> {
+                        barSmeltingDuration -> {
                             addItem(player, Items.ELEMENTAL_METAL_2893)
                             sendMessage(player, "You retrieve a bar of elemental metal.")
                             rewardXP(player, Skills.SMITHING, 7.0)
@@ -367,6 +403,20 @@ class EWListeners : InteractionListener {
             return@onUseWith true
         }
 
+        /* Special Interactions:
+         * onUseWith FURNACE scenery (this handler)
+         * onUseWith BLAST FURNACE BELT (this handler)
+         * onCast SUPERHEAT spell (ModernListeners.kt)
+         * SKIPPED DUE TO SPAGHETTI: on BLAST FURNACE BELT "put-ore-on" (BlastfurnaceListeners.kt)
+         */
+        onUseWith(SCENERY, Items.ELEMENTAL_ORE_2892, *furnaceIDS) { player, _, _ ->
+            sendMessage(player, "This furnace is not hot enough to smelt elemental ore.")
+            return@onUseWith true
+        }
+        onUseWith(SCENERY, Items.ELEMENTAL_ORE_2892, Scenery.CONVEYOR_BELT_9100) { player, _, _ ->
+            sendMessage(player, "There would be no point in smelting that.")
+            return@onUseWith true
+        }
 
         /* * * * * * * * * * * * * *
          *  Water room listeners  *
@@ -479,9 +529,17 @@ class EWListeners : InteractionListener {
                 return@on true
             }
             // Warn player they don't have the required items
-            if (!player.inventory.containsAll(*bellowFixReqItems)) {
-                sendMessage(player, "You don't have the required item(s) to fix the bellows.")
-                return@on true
+            bellowFixReqItems.forEach { reqItem ->
+                if (!player.inventory.contains(reqItem, 1)) {
+                    val missingItemMsg = when (reqItem) {
+                        Items.NEEDLE_1733 -> "a needle"
+                        Items.THREAD_1734 -> "some thread"
+                        Items.LEATHER_1741 -> "a piece of leather"
+                        else -> "NULL" // Should never be called; no sense in making an enum
+                    }
+                    sendMessage(player, "You need $missingItemMsg to fix the bellows.")
+                    return@on true
+                }
             }
             // If the player has all the requirements to fix the bellows
             lock(player, (animationDuration(fixBellowsAnimation) + 1))
@@ -529,8 +587,22 @@ class EWListeners : InteractionListener {
         setDest(SCENERY, intArrayOf(Scenery.FURNACE_18525, Scenery.FURNACE_18526), "use") { _, _ ->
             return@setDest Location.create(2724,9875)
         }
-        setDest(SCENERY, intArrayOf( Scenery.BELLOWS_18516), "fix") { _, _ ->
+        setDest(SCENERY, intArrayOf(Scenery.BELLOWS_18516), "fix") { _, _ ->
             return@setDest Location.create(2733, 9884, 0)
+        }
+        setDest(SCENERY, intArrayOf(Scenery.ODD_LOOKING_WALL_26115), "open") { player, _ ->
+            if (inBorders(player, 2709, 3496, 2711, 3498)) {
+                return@setDest Location.create(2709, 3496, 0)
+            } else {
+                return@setDest Location.create(2709, 3495, 0)
+            }
+        }
+        setDest(SCENERY, intArrayOf(Scenery.ODD_LOOKING_WALL_26114), "open") { player, _ ->
+            if (inBorders(player, 2709, 3496, 2711, 3498)) {
+                return@setDest Location.create(2710, 3496, 0)
+            } else {
+                return@setDest Location.create(2710, 3495, 0)
+            }
         }
     }
 }
