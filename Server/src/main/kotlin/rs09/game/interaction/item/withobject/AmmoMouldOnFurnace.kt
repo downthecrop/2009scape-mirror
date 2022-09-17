@@ -11,6 +11,7 @@ import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import rs09.game.content.dialogue.SkillDialogueHandler
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class AmmoMouldOnFurnace : InteractionListener{
     private val furnaces = intArrayOf(4304, 6189, 11010, 11666, 12100, 12809, 18497, 26814, 30021, 30510, 36956, 37651)  // abstract when smelting converted to kotlin
@@ -83,6 +84,6 @@ class AmmoMouldOnFurnace : InteractionListener{
     }
 
     override fun defineListeners() {
-        onUseWith(SCENERY, Items.STEEL_BAR_2353, *furnaces, handler = ::cannonBallOnUseWithHandler)
+        onUseWith(IntType.SCENERY, Items.STEEL_BAR_2353, *furnaces, handler = ::cannonBallOnUseWithHandler)
     }
 }

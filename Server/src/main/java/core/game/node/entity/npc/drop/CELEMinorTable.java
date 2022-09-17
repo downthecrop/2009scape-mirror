@@ -57,11 +57,11 @@ public final class CELEMinorTable implements StartupListener {
 	@Override
 	public void startup() {
 		if(ServerConstants.CELEDT_DATA_PATH != null && !new File(ServerConstants.CELEDT_DATA_PATH).exists()){
-			SystemLogger.logErr("Can't locate CELEDT file at " + ServerConstants.CELEDT_DATA_PATH);
+			SystemLogger.logErr(this.getClass(), "Can't locate CELEDT file at " + ServerConstants.CELEDT_DATA_PATH);
 			return;
 		}
 		parse(ServerConstants.CELEDT_DATA_PATH);
-		logInfo("Loaded up Chaos Elemental drop table from " + ServerConstants.CELEDT_DATA_PATH);
+		logInfo(this.getClass(), "Loaded up Chaos Elemental drop table from " + ServerConstants.CELEDT_DATA_PATH);
 	}
 
 	/**

@@ -55,9 +55,9 @@ class PacketWriteQueue : TickListener {
             }
 
             if (packetsToWrite.isNotEmpty()) {
-                SystemLogger.logWarn("Packet queue was NOT empty! Remaining packets: ${packetsToWrite.size}")
+                SystemLogger.logWarn(this::class.java, "Packet queue was NOT empty! Remaining packets: ${packetsToWrite.size}")
                 try {
-                    for (pkt: QueuedPacket<*>? in packetsToWrite) SystemLogger.logWarn("${pkt?.out?.javaClass?.simpleName ?: "NULL"} <- ${pkt?.context ?: "NULL"}")
+                    for (pkt: QueuedPacket<*>? in packetsToWrite) SystemLogger.logWarn(this::class.java, "${pkt?.out?.javaClass?.simpleName ?: "NULL"} <- ${pkt?.context ?: "NULL"}")
                 } catch (ignored: NullPointerException) {
                     //do nothing, we don't care, this can happen when everything is working as intended.
                 } catch (e: Exception) {
@@ -79,7 +79,7 @@ class PacketWriteQueue : TickListener {
             val pack = out as? OutgoingPacket<T>
             val ctx = context as? T
             if (pack == null || ctx == null) {
-                SystemLogger.logWarn("Failed packet casting")
+                SystemLogger.logWarn(this::class.java, "Failed packet casting")
                 return
             }
             pack.send(ctx)

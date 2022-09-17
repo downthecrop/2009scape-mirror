@@ -163,7 +163,7 @@ object GameWorld {
      */
     @Throws(Throwable::class)
     fun prompt(run: Boolean, directory: String?){
-        logInfo("Prompting ${settings?.name} Game World...")
+        logInfo(GameWorld::class.java, "Prompting ${settings?.name} Game World...")
         Cache.init(ServerConstants.CACHE_PATH)
         //go overboard with checks to make sure dev mode authenticator never triggers on live
         Auth.configure()

@@ -689,7 +689,7 @@ fun openDialogue(player: Player, dialogue: Any, vararg args: Any) {
         is Int -> player.dialogueInterpreter.open(dialogue, *args)
         is DialogueFile -> player.dialogueInterpreter.open(dialogue, *args)
         is SkillDialogueHandler -> dialogue.open()
-        else -> SystemLogger.logErr("Invalid object type passed to openDialogue() -> ${dialogue.javaClass.simpleName}")
+        else -> SystemLogger.logErr(ContentAPI::class.java, "Invalid object type passed to openDialogue() -> ${dialogue.javaClass.simpleName}")
     }
 }
 
@@ -975,7 +975,7 @@ fun adjustCharge(node: Node, amount: Int) {
     when (node) {
         is Item -> node.charge += amount
         is Scenery -> node.charge += amount
-        else -> SystemLogger.logErr("Attempt to adjust the charge of invalid type: ${node.javaClass.simpleName}")
+        else -> SystemLogger.logErr(ContentAPI::class.java, "Attempt to adjust the charge of invalid type: ${node.javaClass.simpleName}")
     }
 }
 
@@ -988,7 +988,7 @@ fun getCharge(node: Node): Int {
     when (node) {
         is Item -> return node.charge
         is Scenery -> return node.charge
-        else -> SystemLogger.logErr("Attempt to get charge of invalid type: ${node.javaClass.simpleName}")
+        else -> SystemLogger.logErr(ContentAPI::class.java, "Attempt to get charge of invalid type: ${node.javaClass.simpleName}")
             .also { return -1 }
     }
 }
@@ -1002,7 +1002,7 @@ fun setCharge(node: Node, charge: Int) {
     when (node) {
         is Item -> node.charge = charge
         is Scenery -> node.charge = charge
-        else -> SystemLogger.logErr("Attempt to set the charge of invalid type: ${node.javaClass.simpleName}")
+        else -> SystemLogger.logErr(ContentAPI::class.java, "Attempt to set the charge of invalid type: ${node.javaClass.simpleName}")
     }
 }
 
@@ -2129,3 +2129,5 @@ fun updateCredits(player: Player, amount: Int) : Boolean {
 fun getCredits(player: Player) : Int {
     return player.details.accountInfo.credits
 }
+
+private class ContentAPI

@@ -79,7 +79,7 @@ open class RangeSwingHandler
         }
         var hit = 0
         if (isAccurateImpact(entity, victim, CombatStyle.RANGE)) {
-            val max = calculateHit(entity, victim, 1.0).also { if(entity?.name?.toLowerCase() == "test10") SystemLogger.logInfo("Damage: $it") }
+            val max = calculateHit(entity, victim, 1.0).also { if(entity?.name?.toLowerCase() == "test10") SystemLogger.logInfo(this::class.java, "Damage: $it") }
             state.maximumHit = max
             hit = RandomFunction.random(max + 1)
         }
@@ -110,7 +110,7 @@ open class RangeSwingHandler
         if (entity is Player) {
             val rw = RangeWeapon.get(entity.equipment.getNew(3).id)
             if (rw == null) {
-                SystemLogger.logErr("Unhandled range weapon used - [item id=" + entity.equipment.getNew(3).id + "].")
+                SystemLogger.logErr(this::class.java, "Unhandled range weapon used - [item id=" + entity.equipment.getNew(3).id + "].")
                 return
             }
             w = Weapon(entity.equipment[3], rw.ammunitionSlot, entity.equipment.getNew(rw.ammunitionSlot))

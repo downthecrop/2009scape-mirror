@@ -10,6 +10,7 @@ import core.game.node.entity.player.link.IronmanMode
 import org.rs09.consts.Components
 import org.rs09.consts.Scenery
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 private val BANK_DEPOSIT_BOXES = intArrayOf(
     Scenery.BANK_DEPOSIT_BOX_9398,
@@ -54,6 +55,6 @@ class BankDepositBoxListener : InteractionListener {
     }
 
     override fun defineListeners() {
-        on(BANK_DEPOSIT_BOXES, SCENERY, "deposit", handler = ::openDepositBox)
+        on(BANK_DEPOSIT_BOXES, IntType.SCENERY, "deposit", handler = ::openDepositBox)
     }
 }

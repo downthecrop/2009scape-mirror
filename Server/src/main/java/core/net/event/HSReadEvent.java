@@ -65,7 +65,7 @@ public final class HSReadEvent extends IoReadEvent {
 			WorldList.sendUpdate(session, updateStamp);
 			break;
 		default:
-			SystemLogger.logInfo("PKT " + opcode);
+			SystemLogger.logInfo(this.getClass(), "PKT " + opcode);
 			session.disconnect();
 			break;
 		}

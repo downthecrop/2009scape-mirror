@@ -9,6 +9,7 @@ import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.world.GameWorld
 
 private val VALID_LOGS = intArrayOf(Items.LOGS_1511, Items.OAK_LOGS_1521,Items.WILLOW_LOGS_1519,Items.MAPLE_LOGS_1517,Items.YEW_LOGS_1515,Items.MAGIC_LOGS_1513)
@@ -22,7 +23,7 @@ private val LIGHT_ANIM = Animation(7307)
 class AFUBeaconListeners : InteractionListener{
 
     override fun defineListeners() {
-        on(SCENERY,"add-logs","light"){ player, node ->
+        on(IntType.SCENERY,"add-logs","light"){ player, node ->
             val beacon = AFUBeacon.forLocation(node.location)
             val questComplete = player.questRepository.isComplete("All Fired Up")
             val questStage = player.questRepository.getStage("All Fired Up")

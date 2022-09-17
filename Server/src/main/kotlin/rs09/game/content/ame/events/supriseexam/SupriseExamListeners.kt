@@ -7,6 +7,7 @@ import core.game.world.map.Location
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.interaction.inter.ExperienceInterface
 
 class SupriseExamListeners : InteractionListener {
@@ -14,14 +15,14 @@ class SupriseExamListeners : InteractionListener {
     val BOOK_OF_KNOWLEDGE = Items.BOOK_OF_KNOWLEDGE_11640
     override fun defineListeners() {
 
-        on(MORDAUT,NPC,"talk-to"){player, node ->
+        on(MORDAUT, IntType.NPC, "talk-to"){player, node ->
             player.faceLocation(Location.create(1886, 5024, 0))
             val examComplete = player.getAttribute(SurpriseExamUtils.SE_KEY_CORRECT,0) == 3
             player.dialogueInterpreter.open(MordautDialogue(examComplete),node.asNpc())
             return@on true
         }
 
-        on(SurpriseExamUtils.SE_DOORS,SCENERY,"open"){ player, node ->
+        on(SurpriseExamUtils.SE_DOORS, IntType.SCENERY, "open"){ player, node ->
             val correctDoor = player.getAttribute(SurpriseExamUtils.SE_DOOR_KEY,-1)
 
             if(correctDoor == -1){
@@ -38,7 +39,7 @@ class SupriseExamListeners : InteractionListener {
             return@on true
         }
 
-        on(BOOK_OF_KNOWLEDGE,ITEM,"read"){player, _ ->
+        on(BOOK_OF_KNOWLEDGE, IntType.ITEM, "read"){player, _ ->
             player.setAttribute("caller"){skill: Int,p: Player ->
                 if(p.inventory.remove(Item(BOOK_OF_KNOWLEDGE))) {
                     val level = p.skills.getStaticLevel(skill)
@@ -53,7 +54,7 @@ class SupriseExamListeners : InteractionListener {
     }
 
     override fun defineDestinationOverrides() {
-        setDest(NPC,MORDAUT){_,_ ->
+        setDest(IntType.NPC,MORDAUT){_,_ ->
             return@setDest Location.create(1886, 5025, 0)
         }
     }

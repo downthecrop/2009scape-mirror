@@ -7,6 +7,7 @@ import core.game.world.map.RegionManager
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.interaction.InteractionListeners
 import rs09.game.node.entity.skill.gather.GatheringSkillOptionListeners
 
@@ -41,7 +42,7 @@ class PathfinderTests {
         p.location = start
         p.init()
 
-        Assertions.assertEquals(true, InteractionListeners.run(1307, InteractionListener.SCENERY, "chop-down", p, dest!!))
+        Assertions.assertEquals(true, InteractionListeners.run(1307, IntType.SCENERY, "chop-down", p, dest!!))
         TestUtils.advanceTicks(20, false)
         Assertions.assertEquals(Location.create(2722, 3475, 0), p.location)
     }

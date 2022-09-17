@@ -16,6 +16,7 @@ import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.global.action.PickupHandler
 import rs09.game.content.global.shops.Shops
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.node.entity.npc.MortMyreGhastNPC
 import rs09.game.system.SystemLogger
 import rs09.tools.END_DIALOGUE
@@ -46,12 +47,12 @@ class NSListeners : InteractionListener {
     val items = intArrayOf(USED_SPELLCARD, FUNGUS)
 
     override fun defineListeners() {
-        on(GROTTO_TREE, SCENERY, "look-at"){player, _ ->
+        on(GROTTO_TREE, IntType.SCENERY, "look-at"){player, _ ->
             sendMessage(player, "It looks like a tree on a large rock with roots trailing down to the ground.")
             return@on true
         }
 
-        on(GROTTO_TREE, SCENERY, "search"){player, _ ->
+        on(GROTTO_TREE, IntType.SCENERY, "search"){player, _ ->
             if(!getAttribute(player, GROTTO_SEARCHED, false) || !(inInventory(player, JOURNAL) || inBank(player, JOURNAL))){
                 sendItemDialogue(player, JOURNAL, "You search the strange rock. You find a knot and inside of it you discover a small tome. The words on the front are a bit vague, but you can make out the words 'Tarlock' and 'journal'.")
                 addItemOrDrop(player, JOURNAL, 1)
@@ -61,7 +62,7 @@ class NSListeners : InteractionListener {
             return@on false
         }
 
-        on(GROTTO_ENTRANCE, SCENERY, "enter"){player, node ->
+        on(GROTTO_ENTRANCE, IntType.SCENERY, "enter"){player, node ->
             val questStage = player.questRepository.getQuest("Nature Spirit").getStage(player)
             if(questStage < 55) {
                 val npc = core.game.node.entity.npc.NPC.create(NPCs.FILLIMAN_TARLOCK_1050, Location.create(3440, 3336, 0))
@@ -74,7 +75,7 @@ class NSListeners : InteractionListener {
             return@on true
         }
 
-        on(GROTTO_ALTAR, SCENERY,"search"){player, node ->
+        on(GROTTO_ALTAR, IntType.SCENERY, "search"){player, node ->
             val stage = player.questRepository.getStage("Nature Spirit")
             if(stage == 55){
                 openDialogue(player, FillimanCompletionDialogue(), NPC(NPCs.FILLIMAN_TARLOCK_1050))
@@ -84,22 +85,22 @@ class NSListeners : InteractionListener {
             return@on false
         }
 
-        on(NATURE_STONE, SCENERY, "search"){player, _ ->
+        on(NATURE_STONE, IntType.SCENERY, "search"){player, _ ->
             sendDialogue(player, "You search the stone and find that it has some sort of nature symbol scratched into it.")
             return@on true
         }
 
-        on(FAITH_STONE, SCENERY, "search"){player, _ ->
+        on(FAITH_STONE, IntType.SCENERY, "search"){player, _ ->
             sendDialogue(player, "You search the stone and find that it has some sort of faith symbol scratched into it.")
             return@on true
         }
 
-        on(FREELY_GIVEN_STONE, SCENERY, "search"){player, _ ->
+        on(FREELY_GIVEN_STONE, IntType.SCENERY, "search"){player, _ ->
             sendDialogue(player, "You search the stone and find it has some sort of spirit symbol scratched into it.")
             return@on true
         }
 
-        on(WISHING_WELL, SCENERY, "make-wish"){player, node ->
+        on(WISHING_WELL, IntType.SCENERY, "make-wish"){player, node ->
             if(player.questRepository.isComplete("Nature Spirit") && player.questRepository.isComplete("Wolf Whistle"))
                 Shops.openId(player, 241)
             else
@@ -108,19 +109,19 @@ class NSListeners : InteractionListener {
             return@on true
         }
 
-        on(JOURNAL, ITEM, "read"){player, _ ->
+        on(JOURNAL, IntType.ITEM, "read"){player, _ ->
             player.dialogueInterpreter.open(NSJournalDialogue())
             return@on true
         }
 
-        on(WASHING_BOWL, GROUNDITEM, "take"){player, node ->
-            SystemLogger.logInfo("Running listener")
+        on(WASHING_BOWL, IntType.GROUNDITEM, "take"){player, node ->
+            SystemLogger.logInfo(this::class.java, "Running listener")
             GroundItemManager.create(Item(MIRROR), node.location, player)
             PickupHandler.take(player, node as GroundItem)
             return@on true
         }
 
-        on(MIRROR, GROUNDITEM, "take"){player, node ->
+        on(MIRROR, IntType.GROUNDITEM, "take"){player, node ->
             if(getAttribute(player, MIRROR_TAKEN, false) && (inInventory(player, MIRROR) || inBank(player, MIRROR))){
                 sendDialogue(player, "I don't need another one of these.")
                 return@on true
@@ -130,7 +131,7 @@ class NSListeners : InteractionListener {
             return@on true
         }
 
-        on(SPELLCARD, ITEM, "cast"){player, node ->
+        on(SPELLCARD, IntType.ITEM, "cast"){player, node ->
             if(NSUtils.castBloom(player)){
                 removeItem(player, node.asItem(), Container.INVENTORY)
                 addItem(player, Items.A_USED_SPELL_2969)
@@ -138,7 +139,7 @@ class NSListeners : InteractionListener {
             return@on true
         }
 
-        on(intArrayOf(DRUID_POUCH, DRUID_POUCH_EMPTY), ITEM, "fill"){player, node ->
+        on(intArrayOf(DRUID_POUCH, DRUID_POUCH_EMPTY), IntType.ITEM, "fill"){player, node ->
 
             if(player.questRepository.getStage("Nature Spirit") >= 75) {
                 if (amountInInventory(player, PEAR) >= 3) {
@@ -169,7 +170,7 @@ class NSListeners : InteractionListener {
             return@on true
         }
 
-        onUseWith(SCENERY, Items.SILVER_SICKLE_2961, NATURE_ALTAR){player, used, with ->
+        onUseWith(IntType.SCENERY, Items.SILVER_SICKLE_2961, NATURE_ALTAR){player, used, with ->
             sendItemDialogue(player, Items.SILVER_SICKLEB_2963, "You dump the sickle into the waters.")
             if(removeItem(player, Items.SILVER_SICKLE_2961, Container.INVENTORY)){
                 addItem(player, Items.SILVER_SICKLEB_2963, 1)
@@ -177,11 +178,11 @@ class NSListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(NPC, DRUID_POUCH, NPCs.GHAST_1052){player, used, with ->
+        onUseWith(IntType.NPC, DRUID_POUCH, NPCs.GHAST_1052){player, used, with ->
             NSUtils.activatePouch(player, with as MortMyreGhastNPC)
         }
 
-        onUseWith(SCENERY, items, *stones) { player, used, with ->
+        onUseWith(IntType.SCENERY, items, *stones) { player, used, with ->
             when (used.id) {
                 USED_SPELLCARD -> {
                     if (with.id == FREELY_GIVEN_STONE) {

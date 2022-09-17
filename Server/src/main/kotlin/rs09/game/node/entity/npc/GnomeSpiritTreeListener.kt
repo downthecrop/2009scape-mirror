@@ -15,6 +15,7 @@ import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.quest.members.tree.TreeGnomeVillage
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.world.GameWorld.Pulser
 import rs09.tools.END_DIALOGUE
 
@@ -22,11 +23,11 @@ class GnomeSpiritTreeListener: InteractionListener {
     val spiritTrees = intArrayOf(1317,1293,1294)
 
     override fun defineListeners() {
-        on(spiritTrees, SCENERY, "talk-to"){ player, _ ->
+        on(spiritTrees, IntType.SCENERY, "talk-to"){ player, _ ->
             openDialogue(player, GnomeSpiritTreeDialogue(), NPC(NPCs.SPIRIT_TREE_3636))
             return@on true
         }
-        on(spiritTrees, SCENERY, "teleport"){ player, _ ->
+        on(spiritTrees, IntType.SCENERY, "teleport"){ player, _ ->
             openDialogue(player, GnomeSpiritTreeTeleportDialogue(), NPC(NPCs.SPIRIT_TREE_3636))
             return@on true
         }

@@ -7,6 +7,7 @@ import org.rs09.consts.Components
 import org.rs09.consts.Items
 import org.rs09.consts.Scenery
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.interaction.InterfaceListener
 
 import core.game.node.scenery.Scenery as CoreScenery
@@ -87,7 +88,7 @@ class SilverCraftingListener : InterfaceListener, InteractionListener {
     }
 
     override fun defineListeners() {
-        onUseWith(SCENERY, Items.SILVER_BAR_2355, *FURNACES) { player, _, with ->
+        onUseWith(IntType.SCENERY, Items.SILVER_BAR_2355, *FURNACES) { player, _, with ->
             setAttribute(player, ATTRIBUTE_FURNACE_ID, with)
             openInterface(player, Components.CRAFTING_SILVER_CASTING_438)
             return@onUseWith true

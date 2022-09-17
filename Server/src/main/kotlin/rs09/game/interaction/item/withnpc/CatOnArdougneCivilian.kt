@@ -5,6 +5,7 @@ import api.*
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class CatOnArdougneCivilian: InteractionListener {
 
@@ -44,7 +45,7 @@ class CatOnArdougneCivilian: InteractionListener {
     )
 
     override fun defineListeners() {
-        onUseWith(NPC,cats,*civilians){player, used, _ ->
+        onUseWith(IntType.NPC,cats,*civilians){player, used, _ ->
             sendItemDialogue(player,Items.DEATH_RUNE_560,"You hand over the cat.<br>You are given 100 Death Runes.")
             player.familiarManager.removeDetails(used.id)
             removeItem(player,used,Container.INVENTORY)

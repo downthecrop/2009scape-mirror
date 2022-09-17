@@ -65,7 +65,7 @@ public final class BuildOptionPlugin extends OptionHandler {
 		Hotspot hotspot = player.getHouseManager().getHotspot(object);
 		if (hotspot == null || !isBuildable(player, object, hotspot)) {
 			System.out.println(hotspot == null);
-			SystemLogger.logErr("Construction (building):  " + hotspot +  " : " + object + " chunkX = " + object.getLocation().getChunkX() + ", chunkY = " + object.getLocation().getChunkY());
+			SystemLogger.logErr(this.getClass(), "Construction (building):  " + hotspot +  " : " + object + " chunkX = " + object.getLocation().getChunkX() + ", chunkY = " + object.getLocation().getChunkY());
 			return true;
 		}
 

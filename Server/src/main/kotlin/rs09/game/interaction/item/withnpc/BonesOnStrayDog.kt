@@ -10,6 +10,7 @@ import core.game.node.item.Item
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class BonesOnStrayDog : InteractionListener {
     override fun defineListeners() {
@@ -22,7 +23,7 @@ class BonesOnStrayDog : InteractionListener {
             NPCs.STRAY_DOG_5918
         )
 
-        onUseWith(NPC, bones, *dogs) { player, used, with ->
+        onUseWith(IntType.NPC, bones, *dogs) { player, used, with ->
             used as Item; with as NPC
 
             var woof = "Woof"

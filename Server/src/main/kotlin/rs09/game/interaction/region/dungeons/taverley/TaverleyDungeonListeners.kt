@@ -5,6 +5,7 @@ import core.game.content.global.action.DoorActionHandler
 import org.rs09.consts.Items
 import org.rs09.consts.Scenery
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class TaverleyDungeonListeners : InteractionListener {
 
@@ -13,7 +14,7 @@ class TaverleyDungeonListeners : InteractionListener {
 
     override fun defineListeners() {
 
-        on(BD_GATE, SCENERY, "open"){player, node ->
+        on(BD_GATE, IntType.SCENERY, "open"){player, node ->
             if(!inInventory(player, Items.DUSTY_KEY_1590)){
                 sendMessage(player, "This gate seems to be locked.")
             } else {
@@ -23,7 +24,7 @@ class TaverleyDungeonListeners : InteractionListener {
         }
 
 
-        on(JAIL_DOOR, SCENERY, "open"){player, node ->
+        on(JAIL_DOOR, IntType.SCENERY, "open"){player, node ->
             when(player.location.y){
                 9689 -> DoorActionHandler.handleAutowalkDoor(player, node.asScenery()) //inside the cell going out
                 9690 -> {                                                              //outside the cell going in

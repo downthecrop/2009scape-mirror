@@ -8,11 +8,12 @@ import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.dialogue.IfTopic
 import rs09.game.content.dialogue.Topic
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.tools.END_DIALOGUE
 
 class EnchantedGemListener : InteractionListener {
     override fun defineListeners() {
-        on(Items.ENCHANTED_GEM_4155, ITEM, "activate") { player, _ ->
+        on(Items.ENCHANTED_GEM_4155, IntType.ITEM, "activate") { player, _ ->
             openDialogue(player, EnchantedGemDialogue())
             return@on true
         }

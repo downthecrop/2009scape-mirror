@@ -3,15 +3,16 @@ package rs09.game.node.entity.skill.farming
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class FarmerPayOptionHandler : InteractionListener {
 
     override fun defineListeners() {
-        on(NPC,"pay","pay (north)","pay (north-west)"){player,node ->
+        on(IntType.NPC,"pay","pay (north)","pay (north-west)"){player,node ->
             return@on attemptPay(player,node,0)
         }
 
-        on(NPC,"pay (south)","pay (south-east)"){player,node ->
+        on(IntType.NPC,"pay (south)","pay (south-east)"){player,node ->
             return@on attemptPay(player,node,1)
         }
     }

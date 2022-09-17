@@ -615,7 +615,7 @@ public class SceneryDefinition extends Definition<Scenery> {
 //		SystemLogger.logErr("----------------------------------------------------\n\n\n");
 		while (true) {
 			if (!buffer.hasRemaining()) {
-				SystemLogger.logErr("[ObjectDefinition] Buffer empty for " + objectId);
+				SystemLogger.logErr(SceneryDefinition.class, "Buffer empty for " + objectId);
 				break;
 			}
 			int opcode = buffer.get() & 0xFF;
@@ -801,7 +801,7 @@ public class SceneryDefinition extends Definition<Scenery> {
 				}
 			} else {
 				if (opcode != 0) {
-					SystemLogger.logErr("Unhandled object definition opcode: " + opcode);
+					SystemLogger.logErr(SceneryDefinition.class, "Unhandled object definition opcode: " + opcode);
 				}
 				break;
 			}

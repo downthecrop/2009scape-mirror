@@ -10,6 +10,7 @@ import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.system.SystemLogger
 import rs09.tools.secondsToTicks
 
@@ -21,10 +22,10 @@ class ThievingListeners : InteractionListener {
 
     override fun defineListeners() {
 
-        on(NPC,"pickpocket","pick-pocket"){player, node ->
+        on(IntType.NPC,"pickpocket","pick-pocket"){player, node ->
             val pickpocketData = Pickpockets.forID(node.id) ?: return@on false
             var successMod = 0
-            SystemLogger.logInfo(pickpocketData.table.toString())
+            SystemLogger.logInfo(this::class.java, pickpocketData.table.toString())
 
             if(player.inCombat()){
                 player.sendMessage("You can't pickpocket while in combat.")

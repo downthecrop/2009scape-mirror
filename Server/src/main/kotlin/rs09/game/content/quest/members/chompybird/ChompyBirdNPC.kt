@@ -22,6 +22,7 @@ import core.game.world.map.Location
 import core.game.world.map.path.Pathfinder
 import core.game.interaction.MovementPulse
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import core.game.world.update.flag.context.Animation
 
 @Initializable
@@ -148,7 +149,7 @@ class ChompyBirdNPC : AbstractNPC, InteractionListener {
   }
   
   override fun defineListeners() {
-    on(NPCs.CHOMPY_BIRD_1016, NPC, "pluck") { player, node -> 
+    on(NPCs.CHOMPY_BIRD_1016, IntType.NPC, "pluck") { player, node -> 
       val bird = node.asNpc() 
 
       if (!bird.getAttribute("plucked", false)) {
@@ -163,7 +164,7 @@ class ChompyBirdNPC : AbstractNPC, InteractionListener {
       return@on true
     }
 
-    on(Items.OGRE_BOW_2883, ITEM, "check kills") { player, _ -> 
+    on(Items.OGRE_BOW_2883, IntType.ITEM, "check kills") { player, _ -> 
       val amount = player.getAttribute("chompy-kills", 0)
       sendDialogue(player, "You have killed $amount chompy birds.")
       return@on true

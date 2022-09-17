@@ -22,6 +22,7 @@ import core.net.packet.context.MinimapStateContext
 import core.net.packet.out.MinimapState
 import core.tools.RandomFunction
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.world.GameWorld
 import rs09.plugin.ClassScanner
 
@@ -39,7 +40,7 @@ class GardenObjectsPlugin : InteractionListener {
         SqirkMakingDialogue().init()
         ClassScanner.definePlugin(SorceressGardenObject())
 
-        on(SQIRK_TREES, SCENERY, "pick-fruit"){player, node ->
+        on(SQIRK_TREES, IntType.SCENERY, "pick-fruit"){player, node ->
             val def = SeasonDefinitions.forTreeId(node.id)
             if (def != null) {
                 player.lock()
@@ -73,7 +74,7 @@ class GardenObjectsPlugin : InteractionListener {
         }
 
 
-        on(FOUNTAIN, SCENERY, "drink-from"){player, _ ->
+        on(FOUNTAIN, IntType.SCENERY, "drink-from"){player, _ ->
             player.lock()
             GameWorld.Pulser.submit(object : Pulse(1, player) {
                 var counter = 0
@@ -101,7 +102,7 @@ class GardenObjectsPlugin : InteractionListener {
             return@on true
         }
 
-        on(SHELVES, SCENERY, "search"){player, node ->
+        on(SHELVES, IntType.SCENERY, "search"){player, node ->
             if (player.inventory.freeSlots() < 1) {
                 player.sendMessage("You don't have enough space in your inventory to take a beer glass.")
             } else {
@@ -112,7 +113,7 @@ class GardenObjectsPlugin : InteractionListener {
             return@on true
         }
 
-        on(HERBS, SCENERY, "pick"){player, node ->
+        on(HERBS, IntType.SCENERY, "pick"){player, node ->
             val herbDef = HerbDefinition.forId(node.getId())
             if (herbDef != null) {
                 handleElementalGarden(player, node.asScenery(), herbDef)

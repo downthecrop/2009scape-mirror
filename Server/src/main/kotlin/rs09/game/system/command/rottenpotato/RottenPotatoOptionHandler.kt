@@ -36,7 +36,7 @@ class RottenPotatoOptionHandler : OptionHandler() {
         if(player.rights != Rights.ADMINISTRATOR)
         {
             removeItem(player, Items.ROTTEN_POTATO_5733)
-            SystemLogger.logAlert("Player ${player.username} had a rotten potato. It has been removed.")
+            SystemLogger.logAlert(this::class.java, "Player ${player.username} had a rotten potato. It has been removed.")
             return false
         }
 

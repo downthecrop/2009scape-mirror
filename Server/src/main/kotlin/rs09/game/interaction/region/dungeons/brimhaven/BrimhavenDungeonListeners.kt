@@ -6,6 +6,7 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class BrimhavenDungeonListeners : InteractionListener {
 
@@ -17,32 +18,32 @@ class BrimhavenDungeonListeners : InteractionListener {
     val LOGS = intArrayOf(5088,5090)
 
     override fun defineListeners() {
-        on(EXIT,SCENERY,"leave"){ player, _ ->
+        on(EXIT, IntType.SCENERY, "leave"){ player, _ ->
             player.properties.teleportLocation = Location.create(2745, 3152, 0)
             return@on true
         }
 
-        on(STAIRS,SCENERY,"walk-up","walk-down"){ player, node ->
+        on(STAIRS, IntType.SCENERY, "walk-up","walk-down"){ player, node ->
             BrimhavenUtils.handleStairs(node.asScenery(),player)
             return@on true
         }
 
-        on(STEPPING_STONES,SCENERY,"jump-from"){ player, node ->
+        on(STEPPING_STONES, IntType.SCENERY, "jump-from"){ player, node ->
             BrimhavenUtils.handleSteppingStones(player,node.asScenery())
             return@on true
         }
 
-        on(VINES,SCENERY,"chop-down"){ player, node ->
+        on(VINES, IntType.SCENERY, "chop-down"){ player, node ->
             BrimhavenUtils.handleVines(player,node.asScenery())
             return@on true
         }
 
-        on(SANIBOCH,NPC,"pay"){player, node ->
+        on(SANIBOCH, IntType.NPC, "pay"){player, node ->
             player.dialogueInterpreter.open(SANIBOCH,node.asNpc(),10)
             return@on true
         }
 
-        on(LOGS,SCENERY,"walk-across"){ player, node ->
+        on(LOGS, IntType.SCENERY, "walk-across"){ player, node ->
 
             if (player.skills.getLevel(Skills.AGILITY) < 30) {
                 player.packetDispatch.sendMessage("You need an agility level of 30 to cross this.")

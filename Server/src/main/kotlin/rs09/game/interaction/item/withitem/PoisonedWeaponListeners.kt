@@ -4,6 +4,7 @@ import api.*
 import core.game.node.item.Item
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import kotlin.collections.toIntArray
 import kotlin.math.min
 
@@ -13,7 +14,7 @@ class PoisonedWeaponListeners : InteractionListener {
         val poisonableItems = PoisonSets.itemMap.keys.toIntArray()
         val poisonedItems = PoisonSets.itemMap.values.toIntArray()
 
-        onUseWith(ITEM, poisons, *poisonableItems){player, used, with ->
+        onUseWith(IntType.ITEM, poisons, *poisonableItems){player, used, with ->
             val index = poisons.indexOf(used.id)
             val product = PoisonSets.itemMap[with.id]!![index]
             val amt = min(5, with.asItem().amount)
@@ -27,7 +28,7 @@ class PoisonedWeaponListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(ITEM, Items.CLEANING_CLOTH_3188, *poisonedItems) {player, _, with ->
+        onUseWith(IntType.ITEM, Items.CLEANING_CLOTH_3188, *poisonedItems) {player, _, with ->
             val base = PoisonSets.getBase(with.id) ?: return@onUseWith false
             val amt = min(5, with.asItem().amount)
             removeItem(player, Item(with.id, amt))
@@ -42,7 +43,7 @@ class PoisonedWeaponListeners : InteractionListener {
         IRON_ARROW(884, 885, 5617, 5623),
         STEEL_ARROW(886, 887, 5618, 5624),
         MITHRIL_ARROW(888, 889, 5619, 5625),
-        ADAMANT_ARROW(890, 891, 5620, 5626),
+        ADAMANT_ARROW(890, 891, Items.ADAMANT_ARROWP_PLUS_5620, 5626),
         RUNE_ARROW(892, 893, 5621, 5627),
 
         IRON_KNIFE(863, 871, 5655, 5662),
@@ -61,12 +62,12 @@ class PoisonedWeaponListeners : InteractionListener {
         ADAMANT_DART(810, 816, 5633, 5640),
 
         RUNE_DART(811, 817, 5634, 5641),
-        IRON_JAVELIN(825, 831, 5641, 5648),
-        BRONZE_JAVELIN(826, 832, 5642, 5649),
-        STEEL_JAVELIN(827, 833, 5643, 5650),
-        MITHRIL_JAVELIN(828, 834, 5644, 5651),
-        ADAMANT_JAVELIN(829, 835, 5645, 5652),
-        RUNE_JAVELIN(830, 836, 5646, 5653),
+        IRON_JAVELIN(825, 831, Items.IRON_JAVELINP_PLUS_5643, 5648),
+        BRONZE_JAVELIN(826, 832, Items.BRONZE_JAVELINP_PLUS_5642, 5649),
+        STEEL_JAVELIN(827, 833,  Items.STEEL_JAVELINP_PLUS_5644, 5650),
+        MITHRIL_JAVELIN(828, 834, Items.MITHRIL_JAVELINP_PLUS_5645, 5651),
+        ADAMANT_JAVELIN(829, 835, Items.ADAMANT_JAVELINP_PLUS_5646, 5652),
+        RUNE_JAVELIN(830, 836, Items.RUNE_JAVELINP_PLUS_5647, 5653),
 
         IRON_DAGGER(1203, 1219, 5668, 5686),
         BRONZE_DAGGER(1205, 1221, 5670, 5688),
@@ -77,14 +78,14 @@ class PoisonedWeaponListeners : InteractionListener {
         DRAGON_DAGGER(1215, 1231, 5680, 5698),
         BLACK_DAGGER(1217, 1233, 5682, 5700),
 
-        BRONZE_SPEAR(1237, 1251, 5704, 5618),
-        IRON_SPEAR(1239, 1253, 5706, 5620),
-        STEEL_SPEAR(1241, 1255, 5708, 5622),
-        MITHRIL_SPEAR(1243, 1257, 5710, 5624),
-        ADAMANT_SPEAR(1245, 1259, 5712, 5626),
-        RUNE_SPEAR(1247, 1261, 5714, 5628),
+        BRONZE_SPEAR(1237, 1251, 5704, Items.BRONZE_SPEARP_PLUS_PLUS_5718),
+        IRON_SPEAR(1239, 1253, 5706, Items.IRON_SPEARP_PLUS_PLUS_5720),
+        STEEL_SPEAR(1241, 1255, 5708, 5722),
+        MITHRIL_SPEAR(1243, 1257, 5710, 5724),
+        ADAMANT_SPEAR(1245, 1259, 5712, 5726),
+        RUNE_SPEAR(1247, 1261, 5714, 5728),
         DRAGON_SPEAR(1249, 1263, 5716, 5730),
-        BLACK_SPEAR(4580, 4582, 5734, 5636);
+        BLACK_SPEAR(4580, 4582, 5734, 5736);
 
         companion object {
             val itemMap = values().map { it.base to intArrayOf(it.p,it.pp,it.ppp) }.toMap()

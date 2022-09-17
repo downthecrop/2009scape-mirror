@@ -10,13 +10,13 @@ import org.rs09.consts.Scenery as Sceneries
 import rs09.game.interaction.InteractionListener
 import api.questStage
 import api.sendMessage
+import rs09.game.interaction.IntType
 
-@Initializable
 class DramenTreeListener : InteractionListener {
 
     override fun defineListeners() {
 
-        on(Sceneries.DRAMEN_TREE_1292,SCENERY,"chop down"){ player, node ->
+        on(Sceneries.DRAMEN_TREE_1292, IntType.SCENERY, "chop down"){ player, node ->
             val questStage = questStage(player,"Lost City")
             if (SkillingTool.getHatchet(player) == null) {
                 sendMessage(player,"You do not have an axe which you have the level to use.")

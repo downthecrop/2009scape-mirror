@@ -106,7 +106,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
                 PatchType.FRUIT_TREE -> player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset,plantable!!.value + plantable!!.stages + 20)
                 PatchType.BUSH -> player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset,250 + (plantable!!.ordinal - Plantable.REDBERRY_SEED.ordinal))
                 PatchType.CACTUS -> player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset, 31)
-                else -> SystemLogger.logWarn("Invalid setting of isCheckHealth for patch type: " + patch.type.name)
+                else -> SystemLogger.logWarn(this::class.java, "Invalid setting of isCheckHealth for patch type: " + patch.type.name)
             }
         } else {
             when(patch.type){

@@ -3,6 +3,7 @@ package rs09.game.content.zone
 import api.*
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import core.game.content.global.action.ClimbActionHandler
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.agility.AgilityHandler
@@ -38,19 +39,19 @@ public class YanilleAgilityDungeonListeners : InteractionListener {
     override fun defineListeners() {
         ZoneBuilder.configure(YanilleAgilityDungeon());
 
-        on(1728, SCENERY, "climb-down") { player, _ -> 
+        on(1728, IntType.SCENERY, "climb-down") { player, _ -> 
 			player.teleport(Location(2620, 9565, 0))
             return@on true
         }
-        on(1729, SCENERY, "climb-up") { player, _ ->
+        on(1729, IntType.SCENERY, "climb-up") { player, _ ->
             player.teleport(Location(2620, 9496, 0))
             return@on true
         }
-        on(2316, SCENERY, "climb-up") { player, _ ->
+        on(2316, IntType.SCENERY, "climb-up") { player, _ ->
             player.teleport(Location.create(2569, 9525, 0))
             return@on true
         }
-        on(intArrayOf(2318, 2317), SCENERY, "climb-up", "climb-down") { player, target ->
+        on(intArrayOf(2318, 2317), IntType.SCENERY, "climb-up", "climb-down") { player, target ->
             if (player.skills.getLevel(Skills.AGILITY) < 67) {
                 player.dialogueInterpreter.sendDialogue("You need an Agility level of at least 67 in order to do this.")
                 return@on true
@@ -61,11 +62,11 @@ public class YanilleAgilityDungeonListeners : InteractionListener {
             player.skills.addExperience(Skills.AGILITY, 5.5, true)
             return@on true
         }
-        on(intArrayOf(35969, 2303), SCENERY, "walk-across") { player, target ->
+        on(intArrayOf(35969, 2303), IntType.SCENERY, "walk-across") { player, target ->
             handleBalancingLedge(player, target.asScenery())
             return@on true
         }
-        on(377, SCENERY, "open") { player, target ->
+        on(377, IntType.SCENERY, "open") { player, target ->
             if (!player.inventory.contains(Items.SINISTER_KEY_993, 1)) {
                 player.sendMessage("The chest is locked.")
             } else {
@@ -85,11 +86,11 @@ public class YanilleAgilityDungeonListeners : InteractionListener {
             }
             return@on true
         }
-        on(378, SCENERY, "search") { player, _ ->
+        on(378, IntType.SCENERY, "search") { player, _ ->
             player.sendMessage("The chest is empty.")
             return@on true
         }
-        on(378, SCENERY, "shut") { player, _ ->
+        on(378, IntType.SCENERY, "shut") { player, _ ->
             return@on true
         }
 

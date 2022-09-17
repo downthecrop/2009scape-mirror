@@ -12,6 +12,7 @@ import core.game.world.map.path.Pathfinder
 import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 
 class PlayerPeltables : InteractionListener {
@@ -28,7 +29,7 @@ class PlayerPeltables : InteractionListener {
         onEquip(PELTABLES, ::setPlayerOps)
         onUnequip(PELTABLES, ::removePlayerOps)
 
-        on("pelt", PLAYER, ::handlePeltInteraction)
+        on("pelt", IntType.PLAYER, ::handlePeltInteraction)
         onUseWithPlayer(*PELTABLES) {player, used, with -> handlePeltInteraction(player, with, used) }
         flagInstant()
     }

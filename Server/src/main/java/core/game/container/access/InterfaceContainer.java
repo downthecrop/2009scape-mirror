@@ -1,5 +1,6 @@
 package core.game.container.access;
 
+import api.IfaceSettingsBuilder;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.net.packet.PacketRepository;
@@ -37,14 +38,16 @@ public class InterfaceContainer {
 	private static int generate(Player player, Item[] itemArray, String[] options, int interfaceIndex, int childIndex, int x, int y, int key) {
 		Object[] clientScript = new Object[options.length + 7];
 		player.getPacketDispatch().sendRunScript(CLIENT_SCRIPT_INDEX, generateScriptArguments(options.length), populateScript(clientScript, options, interfaceIndex << 16 | childIndex, x, y, key));
-		BitregisterAssembler.send(player, interfaceIndex, childIndex, 0, itemArray.length, new BitregisterAssembler(options));
+		int settings = new IfaceSettingsBuilder().enableAllOptions().build();
+		player.getPacketDispatch().sendIfaceSettings(settings, childIndex, interfaceIndex, 0, itemArray.length);
 		PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, key, itemArray, itemArray.length, false));
 		return increment();
 	}
 
 	public static int generateOptions(Player player, String[] options, int interfaceIndex, int childIndex, int x, int y, int key){
 		player.getPacketDispatch().sendRunScript(CLIENT_SCRIPT_INDEX, generateScriptArguments(options.length), populateScript(new Object[options.length + 7],options,interfaceIndex << 16 | childIndex, x, y, key));
-		BitregisterAssembler.send(player,interfaceIndex,childIndex,0,28,new BitregisterAssembler(options));
+		int settings = new IfaceSettingsBuilder().enableAllOptions().build();
+		player.getPacketDispatch().sendIfaceSettings(settings, childIndex, interfaceIndex, 0, 28);
 		return increment();
 	}
 
@@ -76,7 +79,8 @@ public class InterfaceContainer {
 		int key = increment();
 		Object[] clientScript = new Object[options.length + 7];
 		player.getPacketDispatch().sendRunScript(CLIENT_SCRIPT_INDEX, generateScriptArguments(options.length), populateScript(clientScript, options, interfaceId << 16 | childId, x, y, key));
-		BitregisterAssembler.send(player, interfaceId, childId, 0, itemLength, new BitregisterAssembler(options));
+		int settings = new IfaceSettingsBuilder().enableAllOptions().build();
+		player.getPacketDispatch().sendIfaceSettings(settings, childId, interfaceId, 0, itemLength);
 		return key;
 	}
 
@@ -125,7 +129,6 @@ public class InterfaceContainer {
 	/**
 	 * Default method to generate and send an item array for the client.
 	 * @return The container key.
-	 * @see {@link InterfaceContainer.generate}
 	 */
 	public static int generateItems(Player player, Item[] itemArray, String[] options, int interfaceIndex, int childIndex) {
 		return generateItems(player, itemArray, options, interfaceIndex, childIndex, 7, 3, increment());
@@ -134,7 +137,6 @@ public class InterfaceContainer {
 	/**
 	 * Default method to generate and send an item array for the client.
 	 * @return The container key.
-	 * @see {@link InterfaceContainer.generate}
 	 */
 	public static int generateItems(Player player, Item[] itemArray, String[] options, int interfaceIndex, int childIndex, int key) {
 		return generateItems(player, itemArray, options, interfaceIndex, childIndex, 7, 3, key);

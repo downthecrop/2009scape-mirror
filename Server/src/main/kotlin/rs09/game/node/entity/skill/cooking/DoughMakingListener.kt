@@ -7,6 +7,7 @@ import core.game.node.item.Item
 import org.rs09.consts.Items
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class DoughMakingListener : InteractionListener {
     companion object {
@@ -19,7 +20,7 @@ class DoughMakingListener : InteractionListener {
 
     override fun defineListeners() {
         onUseWith(
-            ITEM,
+            IntType.ITEM,
             FULL_WATER_CONTAINERS_TO_EMPTY_CONTAINERS.keys.toIntArray(),
             Items.POT_OF_FLOUR_1933
         ) { player, waterContainer, flourContainer ->

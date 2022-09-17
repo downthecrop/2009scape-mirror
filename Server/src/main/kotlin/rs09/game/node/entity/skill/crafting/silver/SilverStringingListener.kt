@@ -6,6 +6,7 @@ import core.game.node.Node
 import core.game.node.entity.player.Player
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 /**
  * Handles ball of wool <-> stringable silver items interaction.
@@ -31,6 +32,6 @@ class SilverStringingListener : InteractionListener {
     }
 
     override fun defineListeners() {
-        onUseWith(ITEM, Items.BALL_OF_WOOL_1759, *STRINGABLE_PRODUCTS, handler = ::stringSilverProduct)
+        onUseWith(IntType.ITEM, Items.BALL_OF_WOOL_1759, *STRINGABLE_PRODUCTS, handler = ::stringSilverProduct)
     }
 }

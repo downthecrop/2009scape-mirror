@@ -8,12 +8,13 @@ import core.game.content.dialogue.FacialExpression
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.tools.END_DIALOGUE
 
 class NPCDepositListener : InteractionListener {
 
     override fun defineListeners() {
-        on(NPCs.PEER_THE_SEER_1288, NPC,"deposit") { player, _ ->
+        on(NPCs.PEER_THE_SEER_1288, IntType.NPC, "deposit") { player, _ ->
             if (isEquipped(player, Items.FREMENNIK_SEA_BOOTS_1_14571) ||
                 isEquipped(player, Items.FREMENNIK_SEA_BOOTS_2_14572) ||
                 isEquipped(player, Items.FREMENNIK_SEA_BOOTS_3_14573)) {

@@ -32,7 +32,7 @@ object ServerConfigParser {
 
     private fun parseFromFile(confFile: File?) {
         if(!confFile!!.canonicalFile.exists()){
-            SystemLogger.logErr("${confFile.canonicalFile} does not exist.")
+            SystemLogger.logErr(this::class.java, "${confFile.canonicalFile} does not exist.")
             exitProcess(0)
         } else {
             try {
@@ -40,9 +40,9 @@ object ServerConfigParser {
                 parseServerSettings()
                 parseGameSettings()
             } catch (e: java.lang.IllegalStateException) {
-                SystemLogger.logErr("Passed config file is not a TOML file. Path: ${confFile.canonicalPath}")
-                SystemLogger.logErr("Exception received: $e")
-                SystemLogger.logAlert("Shutting down...")
+                SystemLogger.logErr(this::class.java, "Passed config file is not a TOML file. Path: ${confFile.canonicalPath}")
+                SystemLogger.logErr(this::class.java, "Exception received: $e")
+                SystemLogger.logAlert(this::class.java, "Shutting down...")
                 exitProcess(0)
             }
         }
@@ -133,7 +133,7 @@ object ServerConfigParser {
         try {
             return parsePath(getString(key).replace("@data", ServerConstants.DATA_PATH!!))
         } catch (e: Exception){
-            SystemLogger.logErr("Error parsing key: $key")
+            SystemLogger.logErr(this::class.java, "Error parsing key: $key")
             exitProcess(0)
         }
     }

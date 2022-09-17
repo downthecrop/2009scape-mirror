@@ -5,11 +5,12 @@ import core.game.content.dialogue.FacialExpression
 import org.rs09.consts.Items
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.tools.END_DIALOGUE
 
 class PetRockPlugin : InteractionListener {
     override fun defineListeners() {
-      on(Items.PET_ROCK_3695, ITEM, "interact"){ player, _ ->
+      on(Items.PET_ROCK_3695, IntType.ITEM, "interact"){ player, _ ->
         openDialogue(player, PetRockDialogue())
         return@on true
       }

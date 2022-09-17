@@ -9,6 +9,7 @@ import org.rs09.consts.Animations
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class FeedFaladorSheepdog : InteractionListener {
     companion object {
@@ -24,7 +25,7 @@ class FeedFaladorSheepdog : InteractionListener {
     }
 
     override fun defineListeners() {
-        onUseAnyWith(NPC, SHEEP_DOG_NPC) { player, used, with ->
+        onUseAnyWith(IntType.NPC, SHEEP_DOG_NPC) { player, used, with ->
             if (CONSUMABLE_BONES.contains(used.id)) {
                 if (!removeItem(player, used.asItem())) {
                     return@onUseAnyWith true

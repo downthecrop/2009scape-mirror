@@ -2,10 +2,11 @@ package rs09.game.node.entity.skill
 
 import core.game.node.entity.combat.CombatStyle
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class AttackListener : InteractionListener {
     override fun defineListeners() {
-        on(NPC, "attack"){player, npc ->
+        on(IntType.NPC, "attack"){player, npc ->
             //Makes sure player uses correct attack styles for lumbridge dummies
             if (npc.id == 4474 && player.getSwingHandler(false).type != CombatStyle.MAGIC) {
                 player.sendMessage("You can only attack this with magic.")

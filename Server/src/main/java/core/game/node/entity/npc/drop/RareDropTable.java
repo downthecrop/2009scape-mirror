@@ -57,11 +57,11 @@ public final class RareDropTable implements StartupListener {
 	@Override
 	public void startup() {
 		if(ServerConstants.RDT_DATA_PATH != null && !new File(ServerConstants.RDT_DATA_PATH).exists()){
-			SystemLogger.logErr("Can't locate RDT file at " + ServerConstants.RDT_DATA_PATH);
+			SystemLogger.logErr(this.getClass(), "Can't locate RDT file at " + ServerConstants.RDT_DATA_PATH);
 			return;
 		}
 		parse(ServerConstants.RDT_DATA_PATH);
-		logInfo("Initialized Rare Drop Table from " + ServerConstants.RDT_DATA_PATH);
+		logInfo(this.getClass(), "Initialized Rare Drop Table from " + ServerConstants.RDT_DATA_PATH);
 	}
 
 	/**

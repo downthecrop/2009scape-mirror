@@ -200,7 +200,7 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 		}
 
 		if (npc == null) {
-			SystemLogger.logWarn(
+			SystemLogger.logWarn(this.getClass(),
 				args[0].getClass().getSimpleName() +
 				"Is not assigning an NPC. Whoever did that should fix it."
 			);

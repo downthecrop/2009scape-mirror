@@ -8,6 +8,7 @@ import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.world.GameWorld
 
 /**
@@ -22,7 +23,7 @@ class JungleBushHandler : InteractionListener{
 
     override fun defineListeners() {
 
-        on(ids,SCENERY,"chop-down"){ player, node ->
+        on(ids, IntType.SCENERY, "chop-down"){ player, node ->
             val toChop = node.asScenery()
             if(checkRequirement(player)){
                 GameWorld.Pulser.submit(object : Pulse(0){

@@ -38,6 +38,6 @@ class NPCSpawner {
                 count++
             }
         }
-        SystemLogger.logInfo("Spawned $count NPCs")
+        SystemLogger.logInfo(this::class.java, "Spawned $count NPCs")
     }
 }

@@ -7,6 +7,7 @@ import core.game.node.item.Item
 import core.game.node.entity.skill.smithing.smelting.Bar
 import core.game.system.task.Pulse
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import core.game.world.map.Location
 import org.rs09.consts.Items
 import rs09.game.node.entity.npc.BFOreVariant
@@ -59,7 +60,7 @@ class BlastFurnaceListeners : InteractionListener {
 
         /**FINALLY AFK STRENGTH TRAINING*/
 
-        on(pump, SCENERY, "operate") { player, node ->
+        on(pump, IntType.SCENERY, "operate") { player, node ->
             if(player.getSkills().getLevel(Skills.STRENGTH) >= 30) {
                 val pumpL = Location(1950, 4961, 0)
                 val pumpF = Location(1949, 4961, 0)
@@ -91,7 +92,7 @@ class BlastFurnaceListeners : InteractionListener {
         /**Logic for the pedals that run the conveyor, rewards Agility XP every tick that they're being
          * pedaled but will stop once the conveyor breaks.*/
 
-        on(pedals, SCENERY, "pedal") { player, node ->
+        on(pedals, IntType.SCENERY, "pedal") { player, node ->
             if(player.getSkills().getLevel(Skills.AGILITY) >= 30) {
                 val pedalL = Location(1947, 4966, 0)
                 val pedalF = Location(1946, 4966, 0)
@@ -117,7 +118,7 @@ class BlastFurnaceListeners : InteractionListener {
 
         /**Lets players use a spade to take coke from the pile of coke*/
 
-        on(coke, SCENERY, "collect") { player, node ->
+        on(coke, IntType.SCENERY, "collect") { player, node ->
             if (inInventory(player, Items.SPADE_952, 1)) {
                 animate(player, 2441)
                 removeItem(player, Items.SPADE_952, Container.INVENTORY)
@@ -133,7 +134,7 @@ class BlastFurnaceListeners : InteractionListener {
          * and rewards firemaking XP when shoving coke in there, it will not allow players to shovel more
          * coke in if it is already full.*/
 
-        on(stove, SCENERY,"refuel") { player, node ->
+        on(stove, IntType.SCENERY, "refuel") { player, node ->
             if (inInventory(player, Items.SPADEFUL_OF_COKE_6448, 1) && BlastFurnace.stoveCoke < 30 && player.getSkills().getLevel(Skills.FIREMAKING) >= 30)  {
                 animate(player, 2442)
                 lockInteractions(player,2)
@@ -164,7 +165,7 @@ class BlastFurnaceListeners : InteractionListener {
          * smelt your ores because it's waiting for a player attribute to be set by the ore NPCs that this spawns
          * Is it fucky? Yes
          * Does it work? Also yes*/
-        on(conveyorLoad, SCENERY, "put-ore-on") { player, node ->
+        on(conveyorLoad, IntType.SCENERY, "put-ore-on") { player, node ->
             val rocksInInven = playerOre.filter {inInventory(player, it)}
             var oreToActuallyAdd = 0
             var coalToActuallyAdd = 0
@@ -230,7 +231,7 @@ class BlastFurnaceListeners : InteractionListener {
         /**Added this because clicking on ore then the belt and getting "Nothing interesting happens" is annoying
          * it's essentially the same thing as above except without the dialogue because if you're clicking on ore
          * and trying to use it on the conveyor belt then you know what you're trying to do.*/
-        onUseWith(SCENERY,conveyorLoad,*playerOre){ player, _, oreType ->
+        onUseWith(IntType.SCENERY,conveyorLoad,*playerOre){ player, _, oreType ->
             val amountInInventory = player.inventory.getAmount(oreType.id)
             val spaceForCoal = player.blastCoal.freeSlots()
             val spaceForOre = player.blastOre.freeSlots()
@@ -282,14 +283,14 @@ class BlastFurnaceListeners : InteractionListener {
 
         /**This handles interacting with the temperature gauge on the furnace*/
 
-        on(tGauge, SCENERY, "read") { player, node ->
+        on(tGauge, IntType.SCENERY, "read") { player, node ->
             player.interfaceManager.openComponent(30)
             return@on true
         }
 
         /**This handles taking bars from the dispenser*/
 
-        on(dispenser,SCENERY,"search", "take"){ player, node ->
+        on(dispenser, IntType.SCENERY, "search", "take"){ player, node ->
             if(player.varpManager.get(543).getVarbitValue(8) == 0 || player.varpManager.get(543).getVarbitValue(8) == 3) {
                 player.interfaceManager.openComponent(28)
             }
@@ -298,7 +299,7 @@ class BlastFurnaceListeners : InteractionListener {
 
         /**Handles using a bucket of water on the bar dispenser*/
 
-        onUseWith(SCENERY,dispenser,Items.BUCKET_OF_WATER_1929){ player, used, with ->
+        onUseWith(IntType.SCENERY,dispenser,Items.BUCKET_OF_WATER_1929){ player, used, with ->
             when {
                 player.varpManager.get(543).getVarbitValue(8) == 2 -> {
                     removeItem(player,Items.BUCKET_OF_WATER_1929,Container.INVENTORY)
@@ -321,7 +322,7 @@ class BlastFurnaceListeners : InteractionListener {
 
         /**The sequel to Limp Bizkits hit single, "Fix shit"*/
 
-        on(brokenPotPipe,SCENERY,"repair"){ player, _ ->
+        on(brokenPotPipe, IntType.SCENERY, "repair"){ player, _ ->
             if(player.getSkills().getLevel(Skills.CRAFTING) >= 30){
                 if(inInventory(player,Items.HAMMER_2347,1)) {
                     rewardXP(player, Skills.CRAFTING, 50.0)
@@ -336,7 +337,7 @@ class BlastFurnaceListeners : InteractionListener {
             return@on true
         }
 
-        on(brokenPumpPipe,SCENERY, "repair"){ player, _ ->
+        on(brokenPumpPipe, IntType.SCENERY, "repair"){ player, _ ->
             if(player.getSkills().getLevel(Skills.CRAFTING) >= 30){
                 if(inInventory(player,Items.HAMMER_2347,1)) {
                     rewardXP(player, Skills.CRAFTING, 50.0)
@@ -351,7 +352,7 @@ class BlastFurnaceListeners : InteractionListener {
             return@on true
         }
 
-        on(brokenBelt,SCENERY,"repair"){ player, _ ->
+        on(brokenBelt, IntType.SCENERY, "repair"){ player, _ ->
             if(player.getSkills().getLevel(Skills.CRAFTING) >= 30){
                 if(inInventory(player,Items.HAMMER_2347,1)) {
                     rewardXP(player, Skills.CRAFTING, 50.0)
@@ -366,7 +367,7 @@ class BlastFurnaceListeners : InteractionListener {
             return@on true
         }
 
-        on(brokenCog,SCENERY,"repair"){ player, _ ->
+        on(brokenCog, IntType.SCENERY, "repair"){ player, _ ->
             if(player.getSkills().getLevel(Skills.CRAFTING) >= 30){
                 if(inInventory(player,Items.HAMMER_2347,1)) {
                     rewardXP(player, Skills.CRAFTING, 50.0)

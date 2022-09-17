@@ -259,7 +259,7 @@ abstract class Cutscene(val player: Player) {
                         try {
                             endActions?.invoke()
                         } catch (e: Exception) {
-                            SystemLogger.logErr("There's some bad nasty code in ${this::class.java.simpleName} end actions!")
+                            SystemLogger.logErr(this::class.java, "There's some bad nasty code in ${this::class.java.simpleName} end actions!")
                             e.printStackTrace()
                         }
                         return true
@@ -347,7 +347,7 @@ abstract class Cutscene(val player: Player) {
     fun logCutscene(message: String)
     {
         if(ServerConstants.LOG_CUTSCENE)
-            SystemLogger.logInfo("[CUTSCENE: ${this.javaClass.simpleName}] $message")
+            SystemLogger.logInfo(this::class.java, "$message")
     }
 
     fun clearNPCs() {

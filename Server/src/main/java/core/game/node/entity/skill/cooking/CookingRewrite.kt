@@ -11,6 +11,7 @@ import org.rs09.consts.Items.RAW_BEEF_2132
 import org.rs09.consts.Items.SEAWEED_401
 import org.rs09.consts.Items.UNCOOKED_CAKE_1889
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.node.entity.skill.cooking.CookingDialogue
 
 /**
@@ -32,7 +33,7 @@ class CookingRewrite : InteractionListener {
 
     override fun defineListeners() {
 
-        onUseWith(SCENERY,RAW_FOODS, *COOKING_OBJs){ player, used, with ->
+        onUseWith(IntType.SCENERY,RAW_FOODS, *COOKING_OBJs){ player, used, with ->
             val item = used.asItem()
             val obj = with.asScenery()
             val range = obj.name.toLowerCase().contains("range")

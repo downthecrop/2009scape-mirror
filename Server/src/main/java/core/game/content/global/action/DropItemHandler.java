@@ -49,7 +49,7 @@ public final class DropItemHandler {
 				return false;
 			}
 			if (player.getAttribute("equipLock:" + item.getId(), 0) > GameWorld.getTicks()) {
-				SystemLogger.logAlert(player + ", tried to do the drop & equip dupe.");
+				SystemLogger.logAlert(DropItemHandler.class, player + ", tried to do the drop & equip dupe.");
 				return true;
 			}
 			if (player.getInventory().replace(null, item.getSlot()) == item) {

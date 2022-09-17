@@ -4,6 +4,7 @@ import api.*
 import org.rs09.consts.Scenery
 import rs09.GlobalStats
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 /**
  * @author bushtail
@@ -14,7 +15,7 @@ class CowFieldSignListener : InteractionListener {
     val SIGN = Scenery.SIGNPOST_31297
 
     override fun defineListeners() {
-        on(SIGN, SCENERY, "read") { player, _ ->
+        on(SIGN, IntType.SCENERY, "read") { player, _ ->
             val COW_DEATHS = GlobalStats.getDailyCowDeaths()
             if(COW_DEATHS > 0) {
                 sendDialogue(player, "Local cowherders have reported that $COW_DEATHS cows have been slain in this field today by passing adventurers. Farmers throughout the land fear this may be an epidemic.")

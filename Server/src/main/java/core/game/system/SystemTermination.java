@@ -34,14 +34,14 @@ public final class SystemTermination {
 	 * Terminates the system safely.
 	 */
 	public void terminate() {
-		SystemLogger.logInfo("[SystemTerminator] Initializing termination sequence - do not shutdown!");
+		SystemLogger.logInfo(this.getClass(), "Initializing termination sequence - do not shutdown!");
 		try {
-			SystemLogger.logInfo("[SystemTerminator] Stopping all bots...");
+			SystemLogger.logInfo(this.getClass(), "Stopping all bots...");
 			AIRepository.clearAllBots();
-			SystemLogger.logInfo("[SystemTerminator] Shutting down networking...");
+			SystemLogger.logInfo(this.getClass(), "Shutting down networking...");
 			Server.setRunning(false);
 			Server.getReactor().terminate();
-			SystemLogger.logInfo("[SystemTerminator] Stopping all pulses...");
+			SystemLogger.logInfo(this.getClass(), "Stopping all pulses...");
 			GameWorld.getMajorUpdateWorker().stop();
 			for (Iterator<Player> it = Repository.getPlayers().iterator(); it.hasNext();) {
 				try {
@@ -70,7 +70,7 @@ public final class SystemTermination {
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-		SystemLogger.logInfo("[SystemTerminator] Server successfully terminated!");
+		SystemLogger.logInfo(this.getClass(), "Server successfully terminated!");
 	}
 
 	/**
@@ -79,7 +79,7 @@ public final class SystemTermination {
 	 */
 	public void save(String directory) {
 		File file = new File(directory);
-		SystemLogger.logInfo("[SystemTerminator] Saving data [dir=" + file.getAbsolutePath() + "]...");
+		SystemLogger.logInfo(this.getClass(), "Saving data [dir="+ file.getAbsolutePath() + "]...");
 		if (!file.isDirectory()) {
 			file.mkdirs();
 		}

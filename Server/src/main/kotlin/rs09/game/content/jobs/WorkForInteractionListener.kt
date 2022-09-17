@@ -16,6 +16,7 @@ import org.rs09.consts.NPCs
 import rs09.ServerStore.Companion.getInt
 import rs09.game.Event
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 /**
  * Handles the work-for actions for the NPCs
@@ -120,7 +121,7 @@ class WorkForInteractionListener : InteractionListener, LoginListener {
     }
 
     override fun defineListeners() {
-        on(EMPLOYER_IDS, NPC, "work-for") { player, node ->
+        on(EMPLOYER_IDS, IntType.NPC, "work-for") { player, node ->
             if (JobManager.getStoreFile().getInt(player.username.lowercase()) == 3) {
                 sendNPCDialogue(player, node.id, "You've hit your limit for the day. Come back tomorrow!")
                 return@on true

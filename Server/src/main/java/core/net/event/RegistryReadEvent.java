@@ -36,20 +36,20 @@ public final class RegistryReadEvent extends IoReadEvent {
 		switch (opcode) {
 		case 0:
 			WorldCommunicator.setState(ManagementServerState.NOT_AVAILABLE);
-			SystemLogger.logErr("Failed registering world to AMS - [id=" + GameWorld.getSettings().getWorldId() + ", cause=World id out of bounds]!");
+			SystemLogger.logErr(this.getClass(), "Failed registering world to AMS - [id=" + GameWorld.getSettings().getWorldId() + ", cause=World id out of bounds]!");
 			break;
 		case 1:
 			session.setProducer(PRODUCER);
 			WorldCommunicator.setState(ManagementServerState.AVAILABLE);
-			SystemLogger.logInfo("Successfully registered world to AMS - [id=" + GameWorld.getSettings().getWorldId() + "]!");
+			SystemLogger.logInfo(this.getClass(), "Successfully registered world to AMS - [id=" + GameWorld.getSettings().getWorldId() + "]!");
 			break;
 		case 2:
 			WorldCommunicator.setState(ManagementServerState.NOT_AVAILABLE);
-			SystemLogger.logErr("Failed registering world to AMS - [id=" + GameWorld.getSettings().getWorldId() + ", cause=World id already in use]!");
+			SystemLogger.logErr(this.getClass(), "Failed registering world to AMS - [id=" + GameWorld.getSettings().getWorldId() + ", cause=World id already in use]!");
 			break;
 		case 3:
 			WorldCommunicator.setState(ManagementServerState.NOT_AVAILABLE);
-			SystemLogger.logErr("Failed registering world to AMS - [id=" + GameWorld.getSettings().getWorldId() + ", cause=Exception in AMS]!");
+			SystemLogger.logErr(this.getClass(), "Failed registering world to AMS - [id=" + GameWorld.getSettings().getWorldId() + ", cause=Exception in AMS]!");
 			break;
 		default:
 			System.out.println("??" + opcode);

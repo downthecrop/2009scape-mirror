@@ -4,6 +4,7 @@ import api.*
 import core.game.world.map.Direction
 import org.rs09.consts.Scenery
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 /**
  * @author bushtail
@@ -14,15 +15,15 @@ class FredChestListener : InteractionListener {
     val OPEN = Scenery.OPEN_CHEST_37010
 
     override fun defineListeners() {
-        on(SHUT, SCENERY, "open") { _, node ->
+        on(SHUT, IntType.SCENERY, "open") { _, node ->
             replaceScenery(node.asScenery(), OPEN, -1, node.location)
             return@on true
         }
-        on(OPEN, SCENERY, "shut") { _, node ->
+        on(OPEN, IntType.SCENERY, "shut") { _, node ->
             replaceScenery(node.asScenery(), SHUT, -1, node.location)
             return@on true
         }
-        on(OPEN, SCENERY, "search") { player, _ ->
+        on(OPEN, IntType.SCENERY, "search") { player, _ ->
             sendMessage(player, "You search the chest but find nothing.")
             return@on true
         }

@@ -1,11 +1,12 @@
 package core.game.container.impl;
 
+import api.IfaceSettingsBuilder;
 import core.game.container.access.InterfaceContainer;
+import kotlin.ranges.IntRange;
 import org.rs09.consts.Vars;
 import rs09.ServerConstants;
 import core.game.component.Component;
 import core.game.container.*;
-import core.game.container.access.BitregisterAssembler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.IronmanMode;
 import core.game.node.item.Item;
@@ -128,10 +129,8 @@ public final class BankContainer extends Container {
 		player.getInventory().getListeners().add(listener);
 		player.getInventory().refresh();
 		player.varpManager.get(1249).setVarbit(0,lastAmountX).send(player);
-		BitregisterAssembler assembly = new BitregisterAssembler(0, 1, 2, 3, 4, 5);
-		assembly.enableExamineOption();
-		assembly.enableSlotSwitch();
-		player.getPacketDispatch().sendIfaceSettings(assembly.calculateRegister(), 0, 763, 0, 27);
+		int settings = new IfaceSettingsBuilder().enableOptions(new IntRange(0, 5)).enableExamine().enableSlotSwitch().build();
+		player.getPacketDispatch().sendIfaceSettings(settings, 0, 763, 0, 27);
 		player.getPacketDispatch().sendRunScript(1451, "");
 		open = true;
 		setTabConfigurations();
@@ -159,10 +158,8 @@ public final class BankContainer extends Container {
 		player.getInventory().refresh();
 		player.varpManager.get(1249).setVarbit(0,lastAmountX).send(player);
 		player.getPacketDispatch().sendIfaceSettings(1278, 73, 762, 0, SIZE);
-		BitregisterAssembler assembly = new BitregisterAssembler(0, 1, 2, 3, 4, 5);
-		assembly.enableExamineOption();
-		assembly.enableSlotSwitch();
-		player.getPacketDispatch().sendIfaceSettings(assembly.calculateRegister(), 0, 763, 0, 27);
+		int settings = new IfaceSettingsBuilder().enableOptions(new IntRange(0,5)).enableExamine().enableSlotSwitch().build();
+		player.getPacketDispatch().sendIfaceSettings(settings, 0, 763, 0, 27);
 		player.getPacketDispatch().sendRunScript(1451, "");
 		open = true;
 		this.player.getBank().setTabConfigurations(player);

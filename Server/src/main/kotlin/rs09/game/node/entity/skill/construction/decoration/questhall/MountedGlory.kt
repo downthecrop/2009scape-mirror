@@ -8,6 +8,7 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
@@ -23,22 +24,22 @@ class MountedGlory : InteractionListener {
     )
 
     override fun defineListeners() {
-        on(MOUNTED_GLORY, SCENERY,"Edgeville") { player, _ ->
+        on(MOUNTED_GLORY, IntType.SCENERY, "Edgeville") { player, _ ->
             mountedGloryTeleport(player,0)
             return@on true
         }
 
-        on(MOUNTED_GLORY, SCENERY,"Karamja") { player, _ ->
+        on(MOUNTED_GLORY, IntType.SCENERY, "Karamja") { player, _ ->
             mountedGloryTeleport(player,1)
             return@on true
         }
 
-        on(MOUNTED_GLORY, SCENERY,"Draynor Village") { player, _ ->
+        on(MOUNTED_GLORY, IntType.SCENERY, "Draynor Village") { player, _ ->
             mountedGloryTeleport(player,2)
             return@on true
         }
 
-        on(MOUNTED_GLORY, SCENERY,"Al Kharid") { player, _ ->
+        on(MOUNTED_GLORY, IntType.SCENERY, "Al Kharid") { player, _ ->
             mountedGloryTeleport(player,3)
             return@on true
         }

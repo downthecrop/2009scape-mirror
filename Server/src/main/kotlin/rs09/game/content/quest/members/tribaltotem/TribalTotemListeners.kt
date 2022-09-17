@@ -9,6 +9,7 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class TribalTotemListeners : InteractionListener{
 
@@ -22,7 +23,7 @@ class TribalTotemListeners : InteractionListener{
     val openChest = 2710
 
     override fun defineListeners() {
-        on(frontDoor, SCENERY,"Open"){ player, door ->
+        on(frontDoor, IntType.SCENERY, "Open"){ player, door ->
             if(player.questRepository.getStage("Tribal Totem") >= 35){
                 DoorActionHandler.handleAutowalkDoor(player,door.asScenery())
             }
@@ -30,7 +31,7 @@ class TribalTotemListeners : InteractionListener{
             return@on true
         }
 
-        on(realCrate, SCENERY,"Investigate"){ player, node ->
+        on(realCrate, IntType.SCENERY, "Investigate"){ player, node ->
             if(player.questRepository.getStage("Tribal Totem") in 1..19 && !player.inventory.containsAtLeastOneItem(Items.ADDRESS_LABEL_1858)){
                 sendDialogue(player,"There is a label on this crate. It says; To Lord Handelmort, Handelmort Mansion Ardogune.You carefully peel it off and take it.")
                 addItem(player,Items.ADDRESS_LABEL_1858,1)
@@ -41,19 +42,19 @@ class TribalTotemListeners : InteractionListener{
             return@on true
         }
 
-        on(wizCrate, SCENERY,"Investigate"){ player, node ->
+        on(wizCrate, IntType.SCENERY, "Investigate"){ player, node ->
             sendDialogue(player,"There is a label on this crate: Senior Patents Clerk, Chamber of Invention, The Wizards' Tower, Misthalin. The crate is securely fastened shut and ready for delivery.")
             return@on true
         }
 
-        onUseWith(SCENERY,label,wizCrate){ player, used, with ->
+        onUseWith(IntType.SCENERY,label,wizCrate){ player, used, with ->
             sendDialogue(player,"You carefully place the delivery address label over the existing label, covering it completely.")
             removeItem(player,label)
             player.questRepository.getQuest("Tribal Totem").setStage(player,20)
             return@onUseWith true
         }
 
-        on(lockedDoor, SCENERY,"Open"){ player, node ->
+        on(lockedDoor, IntType.SCENERY, "Open"){ player, node ->
             if(player.getAttribute("TT:DoorUnlocked",false) == true){
                 DoorActionHandler.handleAutowalkDoor(player,node.asScenery())
             }else{
@@ -62,7 +63,7 @@ class TribalTotemListeners : InteractionListener{
             return@on true
         }
 
-        on(stairs,SCENERY,"Climb-up"){ player, node ->
+        on(stairs, IntType.SCENERY, "Climb-up"){ player, node ->
             if(player.getAttribute("TT:StairsChecked",false)){
                 ClimbActionHandler.climb(player, Animation(828), Location.create(2629, 3324, 1))
             }
@@ -73,7 +74,7 @@ class TribalTotemListeners : InteractionListener{
             return@on true
         }
 
-        on(stairs, SCENERY,"Investigate"){ player, node ->
+        on(stairs, IntType.SCENERY, "Investigate"){ player, node ->
             if(player.getSkills().getStaticLevel(Skills.THIEVING) >= 21){
                 sendDialogue(player,"Your trained senses as a thief enable you to see that there is a trap in these stairs. You make a note of its location for future reference when using these stairs")
                 player.setAttribute("/save:TT:StairsChecked",true)
@@ -83,17 +84,17 @@ class TribalTotemListeners : InteractionListener{
             return@on true
         }
 
-        on(closedChest, SCENERY,"Open"){ player, node ->
+        on(closedChest, IntType.SCENERY, "Open"){ player, node ->
             SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(2710))
             return@on true
         }
 
-        on(openChest,SCENERY,"Close"){ player, node ->
+        on(openChest, IntType.SCENERY, "Close"){ player, node ->
             SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(2709))
             return@on true
         }
 
-        on(openChest, SCENERY,"Search"){ player, node ->
+        on(openChest, IntType.SCENERY, "Search"){ player, node ->
             if(!player.inventory.containsAtLeastOneItem(Items.TOTEM_1857)){
                 sendDialogue(player,"Inside the chest you find the tribal totem.")
                 addItem(player,Items.TOTEM_1857)

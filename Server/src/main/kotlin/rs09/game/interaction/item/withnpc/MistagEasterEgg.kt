@@ -7,6 +7,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.tools.END_DIALOGUE
 
 class MistagEasterEgg : InteractionListener {
@@ -15,7 +16,7 @@ class MistagEasterEgg : InteractionListener {
     val ZANIK_RING = 14649
 
     override fun defineListeners() {
-        onUseWith(NPC,DIAMOND,MISTAG){player, _, with ->
+        onUseWith(IntType.NPC,DIAMOND,MISTAG){player, _, with ->
             val alreadyHasRing = player.inventory.contains(ZANIK_RING,1) || player.bank.contains(ZANIK_RING,1) || player.equipment.contains(ZANIK_RING,1)
             player.dialogueInterpreter.open(MistagEasterEggDialogue(alreadyHasRing),with.asNpc())
             return@onUseWith true

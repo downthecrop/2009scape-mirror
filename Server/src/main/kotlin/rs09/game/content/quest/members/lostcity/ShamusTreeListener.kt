@@ -12,6 +12,7 @@ import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.world.GameWorld
 
 
@@ -64,7 +65,7 @@ class ShamusTreeListener : InteractionListener {
     }
 
     override fun defineListeners() {
-        on(Scenery.TREE_2409,SCENERY,"chop") { player, _ ->
+        on(Scenery.TREE_2409, IntType.SCENERY, "chop") { player, _ ->
             handleShamusTree(player)
             return@on true
         }

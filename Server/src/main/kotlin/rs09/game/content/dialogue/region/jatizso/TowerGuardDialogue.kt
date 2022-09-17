@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.interaction.InteractionListeners
 import rs09.tools.END_DIALOGUE
 
@@ -39,7 +40,7 @@ class TowerGuardDialogue(player: Player? = null) : DialoguePlugin(player) {
             }
             10 -> npcl(FacialExpression.NEUTRAL,  "IF YOU LIKE!").also {
                 stage = END_DIALOGUE
-                InteractionListeners.run(NPCs.GUARD_5489, InteractionListener.NPC, "watch-shouting", player, npc)
+                InteractionListeners.run(NPCs.GUARD_5489, IntType.NPC, "watch-shouting", player, npc)
             }
         }
         return true

@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import kotlin.random.Random
 
 /**
@@ -36,7 +37,7 @@ class MorytaniaListeners : InteractionListener {
 
     override fun defineListeners() {
 
-        on(SWAMP_GATES, SCENERY, "open"){player, node ->
+        on(SWAMP_GATES, IntType.SCENERY, "open"){player, node ->
             if(player.location.y == 3457){
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                 GlobalScope.launch {
@@ -56,12 +57,12 @@ class MorytaniaListeners : InteractionListener {
             return@on true
         }
 
-        on(GROTTO_EXIT,SCENERY,"exit"){ player, node ->
+        on(GROTTO_EXIT, IntType.SCENERY, "exit"){ player, node ->
             player.teleport(outside)
             return@on true
         }
 
-        on(GROTTO_BRIDGE,SCENERY,"jump"){ player, node ->
+        on(GROTTO_BRIDGE, IntType.SCENERY, "jump"){ player, node ->
             val start = node.location
             var failLand = Location(3438,3331)
             var failAnim = Animation(770)

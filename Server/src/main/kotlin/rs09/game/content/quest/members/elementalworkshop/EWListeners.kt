@@ -17,6 +17,7 @@ import rs09.game.content.quest.members.elementalworkshop.EWUtils.RIGHT_WATER_CON
 import rs09.game.content.quest.members.elementalworkshop.EWUtils.WATER_WHEEL_STATE
 import rs09.game.content.quest.members.elementalworkshop.EWUtils.currentStage
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.system.SystemLogger
 
 /**
@@ -90,7 +91,7 @@ class EWListeners : InteractionListener {
          *  Seers Village House listeners   *
          * * * * * * * * * * * * * * * * * */
         // Bookcase (quest start)
-        on(Scenery.BOOKCASE_26113, SCENERY, "search") { player, _ ->
+        on(Scenery.BOOKCASE_26113, IntType.SCENERY, "search") { player, _ ->
             val stage = currentStage(player)
 
             if (stage < 3) {
@@ -129,7 +130,7 @@ class EWListeners : InteractionListener {
         }
 
         // Knife on Battered book -> Slashed book + Battered key
-        onUseWith(ITEM, Items.KNIFE_946, Items.BATTERED_BOOK_2886) { player, _, with ->
+        onUseWith(IntType.ITEM, Items.KNIFE_946, Items.BATTERED_BOOK_2886) { player, _, with ->
             val stage = currentStage(player)
             if (stage >= 1) {
                 lock(player, 2)
@@ -162,7 +163,7 @@ class EWListeners : InteractionListener {
          *  Seers Village Smithy listeners  *
          * * * * * * * * * * * * * * * * * */
         // Odd looking wall handler
-        on(intArrayOf(Scenery.ODD_LOOKING_WALL_26114, Scenery.ODD_LOOKING_WALL_26115), SCENERY, "open") { player, wall ->
+        on(intArrayOf(Scenery.ODD_LOOKING_WALL_26114, Scenery.ODD_LOOKING_WALL_26115), IntType.SCENERY, "open") { player, wall ->
             // Nothing interesting happens if quest wasn't started.
             if (currentStage(player) < 1) {
                 sendMessage(player, "Nothing interesting happens.")
@@ -188,7 +189,7 @@ class EWListeners : InteractionListener {
             return@on true
         }
 
-        on(Scenery.STAIRCASE_3415, SCENERY, "climb-down") { player, _ ->
+        on(Scenery.STAIRCASE_3415, IntType.SCENERY, "climb-down") { player, _ ->
             val stage = currentStage(player)
             // Prevent player from somehow skipping beginning quest stages
             if (stage < 1) {
@@ -207,7 +208,7 @@ class EWListeners : InteractionListener {
             return@on true
         }
 
-        on(Scenery.STAIRCASE_3416, SCENERY, "climb-up") { player, _ ->
+        on(Scenery.STAIRCASE_3416, IntType.SCENERY, "climb-up") { player, _ ->
             teleport(player, Location.create(2709, 3498, 0))
             return@on true
         }
@@ -218,13 +219,13 @@ class EWListeners : InteractionListener {
          * * * * * * * * * * * * * * */
         // Center hatch, inaccessible
         // NOTE: REMOVE ME/ADD CORRECT CHECKS FOR ELEMENTAL WORKSHOP II
-        on(Scenery.HATCH_18595, SCENERY, "open") { player, _ ->
+        on(Scenery.HATCH_18595, IntType.SCENERY, "open") { player, _ ->
             sendDialogue(player, "You're unable to open the locked hatch.")
             return@on true
         }
 
         // Stone bowl box, player can get more at any time
-        on(Scenery.BOXES_3397, SCENERY, "search") { player, _ ->
+        on(Scenery.BOXES_3397, IntType.SCENERY, "search") { player, _ ->
             // If the player doesn't have a stone bowl in their inventory
             if (player.inventory.addIfDoesntHave(emptyStoneBowl)) {
                 sendMessage(player, "You find a stone bowl.")
@@ -235,7 +236,7 @@ class EWListeners : InteractionListener {
         }
 
         // Needle crate, player can only receive once
-        on(Scenery.CRATE_3400, SCENERY, "search") { player, _ ->
+        on(Scenery.CRATE_3400, IntType.SCENERY, "search") { player, _ ->
             if (!getAttribute(player, "/save:ew1:got_needle", false)) {
                 setAttribute(player, "/save:ew1:got_needle", true)
                 addItem(player, Items.NEEDLE_1733)
@@ -247,7 +248,7 @@ class EWListeners : InteractionListener {
         }
 
         // Leather crate, player can only receive once
-        on(Scenery.CRATE_3394, SCENERY, "search") { player, _ ->
+        on(Scenery.CRATE_3394, IntType.SCENERY, "search") { player, _ ->
             if (!getAttribute(player, "/save:ew1:got_leather", false)) {
                 setAttribute(player, "/save:ew1:got_leather", true)
                 addItem(player, Items.LEATHER_1741)
@@ -259,7 +260,7 @@ class EWListeners : InteractionListener {
         }
 
         // Workbenches/Anvil
-        onUseWith(SCENERY, Items.ELEMENTAL_METAL_2893, Scenery.WORKBENCH_3402) { player, used, workbench ->
+        onUseWith(IntType.SCENERY, Items.ELEMENTAL_METAL_2893, Scenery.WORKBENCH_3402) { player, used, workbench ->
             // Warn player their smithing level is too low to make the shield
             if (player.skills.getLevel(Skills.SMITHING) < 20) {
                 sendMessage(player, "You need a smithing level of 20 to create an elemental shield.")
@@ -277,7 +278,7 @@ class EWListeners : InteractionListener {
             }
             // Sanity error check (Should never get thrown)
             if (!player.inventory.containsAll(*elementalShieldReqItems)) {
-                SystemLogger.logErr("${player.username} tried to forge an elemental shield without all the required items.")
+                SystemLogger.logErr(this::class.java, "${player.username} tried to forge an elemental shield without all the required items.")
                 return@onUseWith false
             }
             // Successfully smith the elemental shield
@@ -302,7 +303,7 @@ class EWListeners : InteractionListener {
          *  Fire room listeners   *
          * * * * * * * * * * * * */
         // Lava trough stone bowl (empty)
-        onUseWith(SCENERY, Items.A_STONE_BOWL_2888, *lavaTrough) { player, used, trough ->
+        onUseWith(IntType.SCENERY, Items.A_STONE_BOWL_2888, *lavaTrough) { player, used, trough ->
             lock(player, (animationDuration(fillStoneBowlAnimation) + 1))
             runTask(player) {
                 face(player, trough)
@@ -315,13 +316,13 @@ class EWListeners : InteractionListener {
         }
 
         // Lava trough stone bowl (filled with lava)
-        onUseWith(SCENERY, fullStoneBowl.id, *lavaTrough) { player, _, _ ->
+        onUseWith(IntType.SCENERY, fullStoneBowl.id, *lavaTrough) { player, _, _ ->
             sendMessage(player, "The bowl is already full of lava.")
             return@onUseWith true
         }
 
         // Pour lava into unlit furnace
-        onUseWith(SCENERY, fullStoneBowl.id, Scenery.FURNACE_18525) { player, used, _ ->
+        onUseWith(IntType.SCENERY, fullStoneBowl.id, Scenery.FURNACE_18525) { player, used, _ ->
             player.faceLocation(Location.create(2726, 9875, 0))
             lock(player, 3)
             submitIndividualPulse(player, object : Pulse() {
@@ -347,7 +348,7 @@ class EWListeners : InteractionListener {
         }
 
         // Pour lava into lit furnace
-        onUseWith(SCENERY, fullStoneBowl.id, Scenery.FURNACE_18526) { player, used, _ ->
+        onUseWith(IntType.SCENERY, fullStoneBowl.id, Scenery.FURNACE_18526) { player, used, _ ->
             player.faceLocation(Location.create(2726, 9875, 0))
             runTask(player) {
                 playAudio(player, fillFurnaceWithLavaSFX)
@@ -358,7 +359,7 @@ class EWListeners : InteractionListener {
         }
 
         // Use elemental ore on lit furnace
-        onUseWith(SCENERY, Items.ELEMENTAL_ORE_2892, Scenery.FURNACE_18526) { player, _, _ ->
+        onUseWith(IntType.SCENERY, Items.ELEMENTAL_ORE_2892, Scenery.FURNACE_18526) { player, _, _ ->
             player.faceLocation(Location.create(2726, 9875, 0))
             // Warn player their smithing level is too low to smelt the ore
             if (player.skills.getLevel(Skills.SMITHING) < 20) {
@@ -409,11 +410,11 @@ class EWListeners : InteractionListener {
          * onCast SUPERHEAT spell (ModernListeners.kt)
          * SKIPPED DUE TO SPAGHETTI: on BLAST FURNACE BELT "put-ore-on" (BlastfurnaceListeners.kt)
          */
-        onUseWith(SCENERY, Items.ELEMENTAL_ORE_2892, *furnaceIDS) { player, _, _ ->
+        onUseWith(IntType.SCENERY, Items.ELEMENTAL_ORE_2892, *furnaceIDS) { player, _, _ ->
             sendMessage(player, "This furnace is not hot enough to smelt elemental ore.")
             return@onUseWith true
         }
-        onUseWith(SCENERY, Items.ELEMENTAL_ORE_2892, Scenery.CONVEYOR_BELT_9100) { player, _, _ ->
+        onUseWith(IntType.SCENERY, Items.ELEMENTAL_ORE_2892, Scenery.CONVEYOR_BELT_9100) { player, _, _ ->
             sendMessage(player, "There would be no point in smelting that.")
             return@onUseWith true
         }
@@ -422,7 +423,7 @@ class EWListeners : InteractionListener {
          *  Water room listeners  *
          * * * * * * * * * * * * */
         // Water controls
-        on(waterControls, SCENERY, "turn") { player, _ ->
+        on(waterControls, IntType.SCENERY, "turn") { player, _ ->
             // Notify player they can't change water control values while water wheel is running
             if (EWUtils.waterWheelEnabled(player)) {
                 sendMessage(player, "Now that the water wheel is running, the valve seems locked off.")
@@ -452,7 +453,7 @@ class EWListeners : InteractionListener {
                 else -> {
                     offset = -1
                     enabled = 0
-                    SystemLogger.logErr("Unhandled location when determining enabled water controls! ${player.location}")
+                    SystemLogger.logErr(this::class.java, "Unhandled location when determining enabled water controls! ${player.location}")
                     return@on false
                 }
             }
@@ -481,7 +482,7 @@ class EWListeners : InteractionListener {
         }
 
         // Water wheel lever handler
-        on(Scenery.LEVER_3406, SCENERY, "pull") { player, lever ->
+        on(Scenery.LEVER_3406, IntType.SCENERY, "pull") { player, lever ->
             // Default will happen no matter what
             lock(player, 2)
             sendMessage(player, "You pull the lever")
@@ -516,7 +517,7 @@ class EWListeners : InteractionListener {
         /* * * * * * * * * * * * * *
          *  Air room listeners    *
          * * * * * * * * * * * * */
-        on(Scenery.BELLOWS_18516, SCENERY, "fix") { player, bellows ->
+        on(Scenery.BELLOWS_18516, IntType.SCENERY, "fix") { player, bellows ->
             player.faceLocation(Location.create(2736, 9883, 0))
             // Warn player bellows are already fixed
             if (getAttribute(player, "/save:ew1:bellows_fixed", false)) {
@@ -553,7 +554,7 @@ class EWListeners : InteractionListener {
             return@on true
         }
 
-        on(Scenery.LEVER_3409, SCENERY, "pull") { player, lever ->
+        on(Scenery.LEVER_3409, IntType.SCENERY, "pull") { player, lever ->
             // Warn player they have to fix the bellows before pulling the lever
             if (!getAttribute(player, "/save:ew1:bellows_fixed", false)) {
                 sendPlayerDialogue(player, "I shouldn't risk damaging the bellows any further.")
@@ -584,20 +585,20 @@ class EWListeners : InteractionListener {
         }
     }
     override fun defineDestinationOverrides() {
-        setDest(SCENERY, intArrayOf(Scenery.FURNACE_18525, Scenery.FURNACE_18526), "use") { _, _ ->
+        setDest(IntType.SCENERY, intArrayOf(Scenery.FURNACE_18525, Scenery.FURNACE_18526), "use") { _, _ ->
             return@setDest Location.create(2724,9875)
         }
-        setDest(SCENERY, intArrayOf(Scenery.BELLOWS_18516), "fix") { _, _ ->
+        setDest(IntType.SCENERY, intArrayOf(Scenery.BELLOWS_18516), "fix") { _, _ ->
             return@setDest Location.create(2733, 9884, 0)
         }
-        setDest(SCENERY, intArrayOf(Scenery.ODD_LOOKING_WALL_26115), "open") { player, _ ->
+        setDest(IntType.SCENERY, intArrayOf(Scenery.ODD_LOOKING_WALL_26115), "open") { player, _ ->
             if (inBorders(player, 2709, 3496, 2711, 3498)) {
                 return@setDest Location.create(2709, 3496, 0)
             } else {
                 return@setDest Location.create(2709, 3495, 0)
             }
         }
-        setDest(SCENERY, intArrayOf(Scenery.ODD_LOOKING_WALL_26114), "open") { player, _ ->
+        setDest(IntType.SCENERY, intArrayOf(Scenery.ODD_LOOKING_WALL_26114), "open") { player, _ ->
             if (inBorders(player, 2709, 3496, 2711, 3498)) {
                 return@setDest Location.create(2710, 3496, 0)
             } else {

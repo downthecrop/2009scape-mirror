@@ -6,12 +6,13 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.tools.END_DIALOGUE
 
 class DecantListener : InteractionListener {
 
     override fun defineListeners() {
-        on(NPC,"decant"){player, node ->
+        on(IntType.NPC,"decant"){player, node ->
             decant(player)
             player.dialogueInterpreter.open(DecantingDialogue(),node.asNpc())
             return@on true

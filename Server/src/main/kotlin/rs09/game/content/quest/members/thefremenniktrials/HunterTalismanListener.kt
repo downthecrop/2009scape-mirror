@@ -7,6 +7,7 @@ import core.game.system.task.Pulse
 import core.game.world.map.Location
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.world.GameWorld.Pulser
 import kotlin.math.abs
 import kotlin.math.atan2
@@ -17,7 +18,7 @@ class HunterTalismanListener : InteractionListener {
 
     override fun defineListeners() {
 
-        on(TALISMAN,ITEM,"locate"){player,_ ->
+        on(TALISMAN, IntType.ITEM, "locate"){player,_ ->
             var locationString = getAttribute(player,"fremtrials:draugen-loc","none")
             if(locationString == "none"){
                 val newLoc = possibleLocations.random()

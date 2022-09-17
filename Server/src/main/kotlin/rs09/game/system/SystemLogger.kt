@@ -43,9 +43,9 @@ object SystemLogger {
     }
 
     @JvmStatic
-    fun logInfo(vararg messages: String){
+    fun logInfo(clazz: Class<*>, vararg messages: String){
         for(m in messages){
-            val msg = "${getTime()}: [INFO] $m"
+            val msg = "${getTime()}: [${clazz.simpleName}] $m"
             if(m.isNotBlank()) {
                 t.println(msg)
             }
@@ -53,32 +53,32 @@ object SystemLogger {
     }
 
     @JvmStatic
-    fun logErr(message: String){
-        val msg = "${getTime()}: [ ERR] $message"
+    fun logErr(clazz: Class<*>, message: String){
+        val msg = "${getTime()}: [${clazz.simpleName}] $message"
         if(message.isNotBlank()) {
             t.println(msg)
         }
     }
 
     @JvmStatic
-    fun logWarn(message: String){
-        val msg = "${getTime()}: [WARN] $message"
+    fun logWarn(clazz: Class<*>, message: String){
+        val msg = "${getTime()}: [${clazz.simpleName}] $message"
         if(message.isNotBlank()) {
             t.println(msg)
         }
     }
 
     @JvmStatic
-    fun logAlert(message: String){
-        val msg = "${getTime()}: [ALRT] $message"
+    fun logAlert(clazz: Class<*>, message: String){
+        val msg = "${getTime()}: [${clazz.simpleName}] $message"
         if(message.isNotBlank()) {
             t.println(msg)
         }
     }
 
     @JvmStatic
-    fun logAI(message: String){
-        val msg = "${getTime()}: [AIPL] $message"
+    fun logAI(clazz: Class<*>, message: String){
+        val msg = "${getTime()}: [${clazz.simpleName}] $message"
         if(message.isNotBlank()) {
             t.println(msg)
         }
@@ -98,7 +98,7 @@ object SystemLogger {
     fun logTrade(message: String){
         try {
             if (message.isNotBlank()) {
-                if (tradeLogWriter == null) logWarn("Trade Logger is null!")
+                if (tradeLogWriter == null) logWarn(this::class.java, "Trade Logger is null!")
                 tradeLogWriter?.write("${getTime()}: $message")
                 tradeLogWriter?.newLine()
             }
@@ -107,12 +107,12 @@ object SystemLogger {
 
     @JvmStatic fun logStartup(message: String)
     {
-        SystemLogger.logInfo("[STARTUP] $message")
+        logInfo(this::class.java, "[STARTUP] $message")
     }
 
     @JvmStatic fun logShutdown(message: String)
     {
-        SystemLogger.logInfo("[SHUTDOWN] $message")
+        logInfo(this::class.java,"[SHUTDOWN] $message")
     }
 
     fun logMS(s: String) {

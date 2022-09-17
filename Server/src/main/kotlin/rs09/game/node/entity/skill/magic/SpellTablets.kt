@@ -5,6 +5,7 @@ import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.node.entity.skill.magic.spellconsts.Modern
 
 class SpellTablets : InteractionListener {
@@ -12,14 +13,14 @@ class SpellTablets : InteractionListener {
     val B2B_TABLET = Items.BONES_TO_BANANAS_8014
     override fun defineListeners() {
 
-        on(B2B_TABLET,ITEM,"break"){player, node ->
+        on(B2B_TABLET, IntType.ITEM, "break"){player, node ->
             breakTablet(player)
             SpellListeners.run(Modern.BONES_TO_BANANAS,SpellListener.NONE,"modern",player)
             player.inventory.remove(Item(node.id))
             return@on true
         }
 
-        on(B2P_TABLET,ITEM,"break"){player, node ->
+        on(B2P_TABLET, IntType.ITEM, "break"){player, node ->
             breakTablet(player)
             SpellListeners.run(Modern.BONES_TO_PEACHES,SpellListener.NONE,"modern",player)
             player.inventory.remove(Item(node.id))

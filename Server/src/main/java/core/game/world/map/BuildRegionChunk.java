@@ -83,7 +83,7 @@ public class BuildRegionChunk extends RegionChunk {
 	@Override
 	public void rotate(Direction direction) {
 		if (rotation != 0) {
-			SystemLogger.logErr("Region chunk was already rotated!");
+			SystemLogger.logErr(this.getClass(), "Region chunk was already rotated!");
 			return;
 		}
 		Scenery[][][] copy = new Scenery[ARRAY_SIZE][SIZE][SIZE];
@@ -236,7 +236,7 @@ public class BuildRegionChunk extends RegionChunk {
 				System.err.print(", ");
 			}
 		}
-		SystemLogger.logErr("]!");
+		SystemLogger.logErr(this.getClass(), "]!");
 		throw new IllegalStateException("Insufficient array length for storing all objects! ");
 	}
 

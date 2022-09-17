@@ -2,6 +2,7 @@ package rs09.game.interaction.region
 
 import core.game.world.map.Location
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 /**
  * File to be used for anything Isafdar related.
@@ -17,12 +18,12 @@ class IsafdarListeners : InteractionListener {
     val inside = Location.create(2314, 9624, 0)
 
     override fun defineListeners() {
-        on(CAVE_ENTRANCE,SCENERY,"enter"){ player, node ->
+        on(CAVE_ENTRANCE, IntType.SCENERY, "enter"){ player, node ->
             player.teleport(inside)
             return@on true
         }
 
-        on(CAVE_EXIT,SCENERY,"exit"){ player, node ->
+        on(CAVE_EXIT, IntType.SCENERY, "exit"){ player, node ->
             player.teleport(outside)
             return@on true
         }

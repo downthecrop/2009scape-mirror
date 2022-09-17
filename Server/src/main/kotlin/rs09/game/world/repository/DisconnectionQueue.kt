@@ -50,14 +50,14 @@ class DisconnectionQueue {
             return false
         }
         if (entry.isClear) {
-            SystemLogger.logInfo("Clearing player...")
+            SystemLogger.logInfo(this::class.java, "Clearing player...")
             player.clear()
         }
         Repository.playerNames.remove(player.name)
         Repository.lobbyPlayers.remove(player)
         Repository.removePlayer(player)
         Repository.LOGGED_IN_PLAYERS.remove(player.details.username)
-        SystemLogger.logInfo("Player cleared. Removed ${player.details.username}")
+        SystemLogger.logInfo(this::class.java, "Player cleared. Removed ${player.details.username}")
         try {
             if(player.communication.clan != null)
                 player.communication.clan.leave(player, false)

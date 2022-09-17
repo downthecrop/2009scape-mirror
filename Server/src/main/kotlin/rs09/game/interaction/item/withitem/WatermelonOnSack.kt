@@ -5,13 +5,14 @@ import api.*
 import core.game.node.entity.skill.Skills
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class WatermelonOnSack : InteractionListener {
     val SACK = Items.HAY_SACK_6058
     val WATERMELON = Items.WATERMELON_5982
 
     override fun defineListeners() {
-        onUseWith(ITEM, SACK, WATERMELON){player, used, _ ->
+        onUseWith(IntType.ITEM, SACK, WATERMELON){player, used, _ ->
             if(getStatLevel(player, Skills.FARMING) >= 23){
                 removeItem(player,SACK, Container.INVENTORY)
                 removeItem(player,WATERMELON,Container.INVENTORY)

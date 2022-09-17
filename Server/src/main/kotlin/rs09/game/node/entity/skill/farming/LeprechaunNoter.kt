@@ -7,6 +7,7 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class LeprechaunNoter : InteractionListener {
 
@@ -14,7 +15,7 @@ class LeprechaunNoter : InteractionListener {
     val LEPRECHAUNS = intArrayOf(NPCs.TOOL_LEPRECHAUN_3021,NPCs.GOTH_LEPRECHAUN_8000,NPCs.TOOL_LEPRECHAUN_4965,NPCs.TECLYN_2861)
 
     override fun defineListeners() {
-        onUseWith(NPC,CROPS,*LEPRECHAUNS){player, used, with ->
+        onUseWith(IntType.NPC,CROPS,*LEPRECHAUNS){player, used, with ->
             val usedItem = used.asItem()
             val npc = with.asNpc()
             val expr = when(npc.id){

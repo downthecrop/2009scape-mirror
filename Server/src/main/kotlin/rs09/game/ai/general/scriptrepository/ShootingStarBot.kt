@@ -8,6 +8,7 @@ import org.rs09.consts.Items
 import rs09.game.ai.general.GeneralBotCreator
 import rs09.game.content.global.worldevents.shootingstar.ShootingStarPlugin
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.interaction.InteractionListeners
 
 class ShootingStarBot : Script() {
@@ -33,7 +34,7 @@ class ShootingStarBot : Script() {
             }
 
             State.MINING -> {
-                InteractionListeners.run(star.starObject.id, InteractionListener.SCENERY, "mine", bot, star.starObject)
+                InteractionListeners.run(star.starObject.id, IntType.SCENERY, "mine", bot, star.starObject)
             }
 
             State.TELEPORT_BACK -> {

@@ -17,9 +17,9 @@ class DeadlockDetector : Runnable {
                 if (threadInfo != null) {
                     for (thread in Thread.getAllStackTraces().keys) {
                         if (thread.id == threadInfo.threadId) {
-                            SystemLogger.logErr(threadInfo.toString().trim())
+                            SystemLogger.logErr(this::class.java, threadInfo.toString().trim())
                             for (ste in thread.stackTrace) {
-                                SystemLogger.logErr("\t" + ste.toString().trim { it <= ' ' })
+                                SystemLogger.logErr(this::class.java, "\t" + ste.toString().trim { it <= ' ' })
                             }
                         }
                     }

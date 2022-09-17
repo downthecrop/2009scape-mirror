@@ -24,6 +24,6 @@ class InterfaceConfigParser{
             ComponentDefinition.getDefinitions()[id] = ComponentDefinition().parse(e["interfaceType"].toString(),e["walkable"].toString(),e["tabIndex"].toString())
             count++
         }
-        SystemLogger.logInfo("Parsed $count interface configs.")
+        SystemLogger.logInfo(this::class.java, "Parsed $count interface configs.")
     }
 }

@@ -14,6 +14,7 @@ import org.rs09.consts.Items
 import rs09.game.ai.AIPlayer
 import rs09.game.ai.general.ScriptAPI
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.interaction.InteractionListeners
 import rs09.game.world.GameWorld
 import kotlin.random.Random
@@ -74,7 +75,7 @@ class LobsterCatcher : Script() {
                 if(spot == null){
                     state = State.IDLE
                 } else {
-                    InteractionListeners.run(spot.id,InteractionListener.NPC,"cage",bot,spot)
+                    InteractionListeners.run(spot.id,IntType.NPC,"cage",bot,spot)
                 }
                 if(bot.inventory.isFull){
                     state = State.FIND_BANK

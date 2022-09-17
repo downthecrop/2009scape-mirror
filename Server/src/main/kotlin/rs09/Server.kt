@@ -2,7 +2,6 @@ package rs09
 
 import core.game.system.SystemManager
 import core.game.system.SystemState
-import core.game.system.mysql.SQLManager
 import core.net.NioReactor
 import core.tools.TimeStamp
 import kotlinx.coroutines.*
@@ -52,28 +51,27 @@ object Server {
     @JvmStatic
     fun main(args: Array<String>) {
         if (args.isNotEmpty()) {
-            SystemLogger.logInfo("Using config file: ${args[0]}")
+            SystemLogger.logInfo(this::class.java, "Using config file: ${args[0]}")
             ServerConfigParser.parse(args[0])
         } else {
-            SystemLogger.logInfo("Using config file: ${"worldprops" + File.separator + "default.conf"}")
+            SystemLogger.logInfo(this::class.java, "Using config file: ${"worldprops" + File.separator + "default.conf"}")
             ServerConfigParser.parse("worldprops" + File.separator + "default.conf")
         }
         startTime = System.currentTimeMillis()
         val t = TimeStamp()
         GameWorld.prompt(true)
-        SQLManager.init()
         Runtime.getRuntime().addShutdownHook(ServerConstants.SHUTDOWN_HOOK)
-        SystemLogger.logInfo("Starting networking...")
+        SystemLogger.logInfo(this::class.java, "Starting networking...")
         try {
             reactor = NioReactor.configure(43594 + GameWorld.settings?.worldId!!)
             reactor!!.start()
         } catch (e: BindException) {
-            SystemLogger.logErr("Port " + (43594 + GameWorld.settings?.worldId!!) + " is already in use!")
+            SystemLogger.logErr(this::class.java, "Port " + (43594 + GameWorld.settings?.worldId!!) + " is already in use!")
             throw e
         }
         //WorldCommunicator.connect()
-        SystemLogger.logInfo(GameWorld.settings?.name + " flags " + GameWorld.settings?.toString())
-        SystemLogger.logInfo(GameWorld.settings?.name + " started in " + t.duration(false, "") + " milliseconds.")
+        SystemLogger.logInfo(this::class.java, GameWorld.settings?.name + " flags " + GameWorld.settings?.toString())
+        SystemLogger.logInfo(this::class.java, GameWorld.settings?.name + " started in " + t.duration(false, "") + " milliseconds.")
         val scanner = Scanner(System.`in`)
 
         running = true
@@ -96,8 +94,8 @@ object Server {
                 delay(20000)
                 while (running) {
                     if (System.currentTimeMillis() - lastHeartbeat > 7200 && running) {
-                        SystemLogger.logErr("Triggering reboot due to heartbeat timeout")
-                        SystemLogger.logErr("Creating thread dump...")
+                        SystemLogger.logErr(this::class.java, "Triggering reboot due to heartbeat timeout")
+                        SystemLogger.logErr(this::class.java, "Creating thread dump...")
                         val dump = threadDump(true, true)
 
                         withContext(Dispatchers.IO) {

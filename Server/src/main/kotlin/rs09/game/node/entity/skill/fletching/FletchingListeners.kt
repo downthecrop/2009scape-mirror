@@ -20,6 +20,7 @@ import org.rs09.consts.Items.STRIPY_FEATHER_10087
 import org.rs09.consts.Items.YELLOW_FEATHER_10090
 import rs09.game.content.dialogue.SkillDialogueHandler
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class FletchingListeners : InteractionListener {
 
@@ -39,7 +40,7 @@ class FletchingListeners : InteractionListener {
 
     override fun defineListeners() {
 
-        onUseWith(ITEM,STRINGS,*UNSTRUNG_BOWS){player,string,bow ->
+        onUseWith(IntType.ITEM,STRINGS,*UNSTRUNG_BOWS){player,string,bow ->
             val enum = Fletching.stringMap[bow.id] ?: return@onUseWith false
             if(enum.string != string.id){
                 player.sendMessage("That's not the right kind of string for this.")
@@ -60,7 +61,7 @@ class FletchingListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(ITEM,ARROW_SHAFT,*FEATHERS){player,shaft,feather ->
+        onUseWith(IntType.ITEM,ARROW_SHAFT,*FEATHERS){player,shaft,feather ->
             val handler: SkillDialogueHandler =
                 object : SkillDialogueHandler(player, SkillDialogue.ONE_OPTION, Item(FLETCHED_SHAFT)) {
                     override fun create(amount: Int, index: Int) {
@@ -76,7 +77,7 @@ class FletchingListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(ITEM,FLETCHED_SHAFT,*UNFINISHED_ARROWS){player,shaft,unfinished ->
+        onUseWith(IntType.ITEM,FLETCHED_SHAFT,*UNFINISHED_ARROWS){player,shaft,unfinished ->
             val head = Fletching.arrowHeadMap[unfinished.id] ?: return@onUseWith false
             val handler: SkillDialogueHandler =
                 object : SkillDialogueHandler(player, SkillDialogue.ONE_OPTION, head.getFinished()) {
@@ -93,7 +94,7 @@ class FletchingListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(ITEM,MITHRIL_BOLT,MITH_GRAPPLE_TIP){player,bolt,tip ->
+        onUseWith(IntType.ITEM,MITHRIL_BOLT,MITH_GRAPPLE_TIP){player,bolt,tip ->
             if(player.skills.getLevel(Skills.FLETCHING) < 59){
                 player.sendMessage("You need a fletching level of 59 to make this.")
                 return@onUseWith true
@@ -104,7 +105,7 @@ class FletchingListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(ITEM,ROPE,MITH_GRAPPLE){player,rope,grapple ->
+        onUseWith(IntType.ITEM,ROPE,MITH_GRAPPLE){player,rope,grapple ->
             if(player.skills.getLevel(Skills.FLETCHING) < 59){
                 player.sendMessage("You need a fletching level of 59 to make this.")
                 return@onUseWith true
@@ -115,7 +116,7 @@ class FletchingListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(ITEM,LIMBIDs,*STOCKIDs){player, limb, stock ->
+        onUseWith(IntType.ITEM,LIMBIDs,*STOCKIDs){player, limb, stock ->
             val limbEnum = Fletching.limbMap[stock.id] ?: return@onUseWith false
             if(limbEnum.limb != limb.id){
                 player.sendMessage("That's not the right limb to attach to that stock.")

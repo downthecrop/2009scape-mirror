@@ -73,7 +73,7 @@ class FarmingState(player: Player? = null) : State(player) {
                 val cBin = CompostBins.values()[binOrdinal]
                 val b = cBin.getBinForPlayer(player)
                 b.parse(bin["binData"] as JSONObject)
-                SystemLogger.logErr("bin size " + binMap.size)
+                SystemLogger.logErr(this::class.java, "bin size " + binMap.size)
             }
         }
         if(_data.containsKey("farming-patches")){
@@ -104,7 +104,7 @@ class FarmingState(player: Player? = null) : State(player) {
                 if((patch.currentGrowthStage < patch.plantable?.stages ?: 0) && !patch.isWeedy()){
                     val startTime = (patch.nextGrowth - TimeUnit.MINUTES.toMillis(patch.patch.type.stageGrowthTime * (patch.currentGrowthStage + 1).toLong()))
                     var expectedStage = Math.floor((System.currentTimeMillis() - startTime.toDouble()) / TimeUnit.MINUTES.toMillis(patch.patch.type.stageGrowthTime.toLong())).toInt()
-                    SystemLogger.logErr("$expectedStage $startTime ${System.currentTimeMillis()}")
+                    SystemLogger.logErr(this::class.java, "$expectedStage $startTime ${System.currentTimeMillis()}")
 
                     if(!patchDiseased && !patchDead) {
                         if (expectedStage > patch.plantable?.stages ?: 0) {

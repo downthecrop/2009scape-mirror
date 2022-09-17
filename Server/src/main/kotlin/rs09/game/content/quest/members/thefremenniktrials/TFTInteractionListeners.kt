@@ -21,6 +21,7 @@ import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.system.config.ItemConfigParser
 import rs09.game.world.GameWorld.Pulser
 
@@ -54,12 +55,12 @@ class TFTInteractionListeners : InteractionListener{
     private val STEW_INGREDIENT_IDS = intArrayOf(Items.POTATO_1942,Items.ONION_1957,Items.CABBAGE_1965,Items.PET_ROCK_3695)
 
     override fun defineListeners() {
-        onUseWith(NPC,BEER,WORKER){ player, beer, _ ->
+        onUseWith(IntType.NPC,BEER,WORKER){ player, beer, _ ->
             player.dialogueInterpreter.open(CouncilWorkerFTDialogue(0,true,beer.id), NPC(WORKER))
             return@onUseWith true
         }
 
-        onUseWith(SCENERY, FISH, FISH_ALTAR){ player,fish,_ ->
+        onUseWith(IntType.SCENERY, FISH, FISH_ALTAR){ player,fish,_ ->
             if(inInventory(player,Items.LYRE_3689) || inInventory(player,Items.ENCHANTED_LYRE_3690)) {
                 Pulser.submit(SpiritPulse(player, fish.id))
             } else {
@@ -68,7 +69,7 @@ class TFTInteractionListeners : InteractionListener{
             return@onUseWith true
         }
 
-        onUseWith(ITEM,LOW_ALC_KEG,KEG){player,_,_ ->
+        onUseWith(IntType.ITEM,LOW_ALC_KEG,KEG){player,_,_ ->
             if(!getAttribute(player,"fremtrials:keg-mixed",false)){
                 if(getAttribute(player,"fremtrials:cherrybomb",false)) {
                     removeItem(player,LOW_ALC_KEG)
@@ -83,7 +84,7 @@ class TFTInteractionListeners : InteractionListener{
             return@onUseWith true
         }
 
-        onUseWith(ITEM,TINDERBOX,CHERRY_BOMB){player,_,_ ->
+        onUseWith(IntType.ITEM,TINDERBOX,CHERRY_BOMB){player,_,_ ->
             if(removeItem(player,CHERRY_BOMB)){
                 addItem(player,LIT_BOMB)
                 sendMessage(player,"You light the strange object.")
@@ -91,7 +92,7 @@ class TFTInteractionListeners : InteractionListener{
             return@onUseWith true
         }
 
-        onUseWith(ITEM,KNIFE,TREE_BRANCH){player,_,_ ->
+        onUseWith(IntType.ITEM,KNIFE,TREE_BRANCH){player,_,_ ->
             if (!player.skills.hasLevel(Skills.CRAFTING,40)) {
                 sendDialogue(player, "You need 40 crafting to do this!")
                 return@onUseWith true
@@ -103,7 +104,7 @@ class TFTInteractionListeners : InteractionListener{
             return@onUseWith true
         }
 
-        onUseWith(SCENERY, STEW_INGREDIENT_IDS, LALLIS_STEW){player,stewIngredient,_ ->
+        onUseWith(IntType.SCENERY, STEW_INGREDIENT_IDS, LALLIS_STEW){player,stewIngredient,_ ->
             when(stewIngredient.id){
                 Items.ONION_1957 -> {
                     sendDialogue(player,"You added an onion to the stew")
@@ -129,7 +130,7 @@ class TFTInteractionListeners : InteractionListener{
             return@onUseWith true
         }
 
-        onUseWith(SCENERY,GOLDEN_FLEECE,*SPINNING_WHEEL_IDS){ player, _, _ ->
+        onUseWith(IntType.SCENERY,GOLDEN_FLEECE,*SPINNING_WHEEL_IDS){ player, _, _ ->
             if(removeItem(player,GOLDEN_FLEECE)){
                 addItem(player,GOLDEN_WOOL)
                 animate(player,896)
@@ -138,7 +139,7 @@ class TFTInteractionListeners : InteractionListener{
             return@onUseWith true
         }
 
-        onUseWith(ITEM,UNSTRUNG_LYRE,GOLDEN_WOOL){ player, _, _ ->
+        onUseWith(IntType.ITEM,UNSTRUNG_LYRE,GOLDEN_WOOL){ player, _, _ ->
             if(player.getSkills().getLevel(Skills.FLETCHING) >= 25){
                 if(removeItem(player,GOLDEN_WOOL) &&
                     removeItem(player,Items.UNSTRUNG_LYRE_3688)){
@@ -150,7 +151,7 @@ class TFTInteractionListeners : InteractionListener{
             return@onUseWith true
         }
 
-        on(LONGHALL_BACKDOOR, SCENERY,"open"){player,door ->
+        on(LONGHALL_BACKDOOR, IntType.SCENERY, "open"){player,door ->
             when {
                 getAttribute(player,"LyreEnchanted",false) -> {
                     sendNPCDialogue(player,1278,"Yeah you're good to go through. Olaf tells me you're some kind of outerlander bard here on tour. I doubt you're worse than Olaf is.")
@@ -166,7 +167,7 @@ class TFTInteractionListeners : InteractionListener{
             return@on true
         }
 
-        on(LYRE_IDs,ITEM,"play"){player,lyre ->
+        on(LYRE_IDs, IntType.ITEM, "play"){player,lyre ->
             if(getAttribute(player,"onStage",false) && !getAttribute(player,"lyreConcertPlayed",false)){
                 Pulser.submit(LyreConcertPulse(player,lyre.id))
             } else if(questStage(player, "Fremennik Trials") < 20 || !isQuestComplete(player, "Fremennik Trials")){
@@ -182,7 +183,7 @@ class TFTInteractionListeners : InteractionListener{
             return@on true
         }
 
-        on(PIPE,SCENERY,"put-inside"){ player, _ ->
+        on(PIPE, IntType.SCENERY, "put-inside"){ player, _ ->
             if(inInventory(player,LIT_BOMB)){
                 sendMessage(player,"You stuff the lit object into the pipe.")
                 setAttribute(player,"/save:fremtrials:cherrybomb",true)
@@ -193,7 +194,7 @@ class TFTInteractionListeners : InteractionListener{
             return@on true
         }
 
-        on(PORTALIDs,SCENERY,"use"){ player, portal ->
+        on(PORTALIDs, IntType.SCENERY, "use"){ player, portal ->
             player.properties?.teleportLocation = when(portal.id){
                 2273 -> DestRoom(2639, 10012, 2645, 10018).getCenter()
                 2274 -> DestRoom(2650, 10034, 2656, 10040).getCenter()
@@ -210,14 +211,14 @@ class TFTInteractionListeners : InteractionListener{
             return@on true
         }
 
-        on(SWENSEN_LADDER,SCENERY,"climb"){ player, _ ->
+        on(SWENSEN_LADDER, IntType.SCENERY, "climb"){ player, _ ->
             if(!getAttribute(player,"fremtrials:swensen-accepted",false)){
                 sendNPCDialogue(player,1283,"Where do you think you're going?",FacialExpression.ANGRY)
             }
             return@on true
         }
 
-        on(THORVALD_LADDER, SCENERY, "climb-down") { player, _ ->
+        on(THORVALD_LADDER, IntType.SCENERY, "climb-down") { player, _ ->
             if (isQuestComplete(player, "Fremennik Trials") || getAttribute(player, "fremtrials:thorvald-vote", false)) {
                 sendMessage(player,"You have no reason to go back down there.")
                 return@on true
@@ -251,7 +252,7 @@ class TFTInteractionListeners : InteractionListener{
             return@on true
         }
 
-        on(THORVALD_LADDER_LOWER, SCENERY, "climb-up") { player, _ ->
+        on(THORVALD_LADDER_LOWER, IntType.SCENERY, "climb-up") { player, _ ->
             if (player.getExtension<Any?>(KoscheiSession::class.java) != null) {
                 KoscheiSession.getSession(player).close()
             }
@@ -259,12 +260,12 @@ class TFTInteractionListeners : InteractionListener{
             return@on true
         }
 
-        on(SWAYING_TREE,SCENERY,"cut-branch"){ player, node ->
+        on(SWAYING_TREE, IntType.SCENERY, "cut-branch"){ player, node ->
             player.pulseManager.run(WoodcuttingSkillPulse(player, node as Scenery))
             return@on true
         }
 
-        on(SHOPNPCS,NPC,"Trade") { player, npc ->
+        on(SHOPNPCS, IntType.NPC, "Trade") { player, npc ->
             if(isQuestComplete(player, "Fremennik Trials")){
                 npc.asNpc().openShop(player)
             } else when(npc.id){

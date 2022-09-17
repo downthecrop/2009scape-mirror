@@ -12,6 +12,7 @@ import org.rs09.consts.Items
 import rs09.game.content.global.WeightBasedTable
 import rs09.game.content.global.WeightedItem
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class RoguesCastleListeners : InteractionListener {
 
@@ -20,13 +21,13 @@ class RoguesCastleListeners : InteractionListener {
     val FLOOR_2_CHESTS = intArrayOf(38834, 38835)
 
     override fun defineListeners() {
-        on(FLOOR_1_CHESTS, SCENERY, "open"){ player, node ->
+        on(FLOOR_1_CHESTS, IntType.SCENERY, "open"){ player, node ->
             val scenery = node.asScenery()
             openChest(player, scenery)
             return@on true
         }
 
-        on(FLOOR_1_CHESTS, SCENERY, "search"){player, node ->
+        on(FLOOR_1_CHESTS, IntType.SCENERY, "search"){player, node ->
             val scenery = node.asScenery()
             if(getCharge(scenery) == 0){
                 sendMessage(player, "This chest has already been looted.")
@@ -44,12 +45,12 @@ class RoguesCastleListeners : InteractionListener {
             return@on true
         }
 
-        on(FLOOR_2_CHESTS, SCENERY, "open"){player, node ->
+        on(FLOOR_2_CHESTS, IntType.SCENERY, "open"){player, node ->
             sendMessage(player, "This chest appears to be locked.")
             return@on true
         }
 
-        on(FLOOR_2_CHESTS, SCENERY, "pick-lock"){player, node ->
+        on(FLOOR_2_CHESTS, IntType.SCENERY, "pick-lock"){player, node ->
             val scenery = node.asScenery()
             if(!inInventory(player, Items.LOCKPICK_1523)){
                 sendMessage(player, "You need a lockpick in order to attempt this.")
@@ -84,7 +85,7 @@ class RoguesCastleListeners : InteractionListener {
             return@on true
         }
 
-        on(FLOOR_2_CHESTS, SCENERY, "search"){player, node ->
+        on(FLOOR_2_CHESTS, IntType.SCENERY, "search"){player, node ->
             val scenery = node.asScenery()
 
             if(getCharge(scenery) == 0){

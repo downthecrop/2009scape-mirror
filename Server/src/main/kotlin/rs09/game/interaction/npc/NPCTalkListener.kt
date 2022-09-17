@@ -8,6 +8,7 @@ import rs09.game.content.activity.gnomecooking.*
 import rs09.game.content.ame.RandomEventManager
 import rs09.game.content.ame.RandomEvents
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 /**
  * Handles the NPC talk-to option.
@@ -18,7 +19,7 @@ class NPCTalkListener : InteractionListener {
     val barCrawlNPCs = intArrayOf(733,848,735,739,737,738,731,568,3217,736,734)
 
     override fun defineListeners() {
-        on(barCrawlNPCs, NPC, "talk-to", "talk"){player, node ->
+        on(barCrawlNPCs, IntType.NPC, "talk-to", "talk"){player, node ->
             val type = BarcrawlType.forId(node.id)
             val instance = BarcrawlManager.getInstance(player)
             if (instance.isFinished || !instance.isStarted || instance.isCompleted(type!!.ordinal)) {
@@ -29,7 +30,7 @@ class NPCTalkListener : InteractionListener {
             return@on true
         }
 
-        on(NPC,"talk-to","talk","talk to"){player,node ->
+        on(IntType.NPC,"talk-to","talk","talk to"){player,node ->
             val npc = node.asNpc()
             if(RandomEvents.randomIDs.contains(node.id)){
                 if(RandomEventManager.getInstance(player)!!.event == null || RandomEventManager.getInstance(player)!!.event!!.id != node.id){

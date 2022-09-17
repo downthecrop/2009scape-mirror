@@ -53,11 +53,6 @@ public class AIPlayer extends Player {
     private static final Map<Integer, AIPlayer> botMapping = new HashMap<>();
 
     /**
-     * The aip control dialogue.
-     */
-    private static final AIPControlDialogue CONTROL_DIAL = new AIPControlDialogue();
-
-    /**
      * A line of data from namesandarmor.txt that will be used to generate the appearance
      * Data in format:
      * //name:cblevel:helmet:cape:neck:weapon:chest:shield:unknown:legs:unknown:gloves:boots:
@@ -252,27 +247,6 @@ public class AIPlayer extends Player {
         super.init();
         getSettings().setRunToggled(true);
         CharacterDesign.randomize(this, false);
-        getInteraction().set(new Option("Control", 7).setHandler(new OptionHandler() {
-            @Override
-            public Plugin<Object> newInstance(Object arg) throws Throwable {
-                return null;
-            }
-
-            @Override
-            public boolean handle(Player p, Node node, String option) {
-                DialoguePlugin dial = CONTROL_DIAL.newInstance(p);
-                if (dial != null && dial.open(AIPlayer.this)) {
-                    p.getDialogueInterpreter().setDialogue(dial);
-                }
-                return true;
-            }
-
-            @Override
-            public boolean isWalk() {
-                return false;
-            }
-
-        }));
         getPlayerFlags().setLastSceneGraph(location);
     }
 
@@ -559,7 +533,7 @@ public class AIPlayer extends Player {
             Repository.getPlayers().remove(player);
             return;
         }
-        //SystemLogger.logErr("Could not deregister AIP#" + uid + ": UID not added to the mapping!");
+        //SystemLogger.logErr(this.getClass(), "Could not deregister AIP#" + uid + ": UID not added to the mapping!");
     }
 
     @Override

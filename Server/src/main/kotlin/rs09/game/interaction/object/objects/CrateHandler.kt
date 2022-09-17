@@ -5,6 +5,7 @@ import api.sendMessage
 import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.interaction.`object`.dialogues.CrateDialogues
 
 /**
@@ -24,14 +25,14 @@ class CrateHandler : InteractionListener {
 
     override fun defineListeners() {
         //searching crates with monkey amulet moulds
-        on(monkeyAmuletMouldCrate, SCENERY, "search") { player, node ->
+        on(monkeyAmuletMouldCrate, IntType.SCENERY, "search") { player, node ->
             player.animator.animate(Animation(536))
             sendMessage(player, "You search the crate.")
             openDialogue(player!!, CrateDialogues(0))
             return@on true
         }
 
-        on(threadCrate, SCENERY, "search") { player, node ->
+        on(threadCrate, IntType.SCENERY, "search") { player, node ->
             sendMessage(player, "You search the crate.")
             player.pulseManager.run(object : Pulse() {
                 var counter = 0
@@ -45,7 +46,7 @@ class CrateHandler : InteractionListener {
             return@on true
         }
 
-        on(monkeyTalkingDentures, SCENERY, "search") { player, node ->
+        on(monkeyTalkingDentures, IntType.SCENERY, "search") { player, node ->
             sendMessage(player, "You search the crate.")
             player.pulseManager.run(object : Pulse() {
                 var counter = 0
@@ -59,7 +60,7 @@ class CrateHandler : InteractionListener {
             return@on true
         }
 
-        on(bananaCrate, SCENERY, "search") { player, node ->
+        on(bananaCrate, IntType.SCENERY, "search") { player, node ->
             sendMessage(player, "You search the crate.")
             player.pulseManager.run(object : Pulse() {
                 var counter = 0
@@ -73,13 +74,13 @@ class CrateHandler : InteractionListener {
             return@on true
         }
 
-        on(monkeyMadnessEntranceDown, SCENERY, "search") { player, node ->
+        on(monkeyMadnessEntranceDown, IntType.SCENERY, "search") { player, node ->
             sendMessage(player, "You search the crate.")
             openDialogue(player!!, CrateDialogues(4))
             return@on true
         }
 
-        on(tinderboxCrate, SCENERY, "search") { player, node ->
+        on(tinderboxCrate, IntType.SCENERY, "search") { player, node ->
             sendMessage(player, "You search the crate.")
             player.pulseManager.run(object : Pulse() {
                 var counter = 0
@@ -93,7 +94,7 @@ class CrateHandler : InteractionListener {
             return@on true
         }
 
-        on(slimyGnomeEyesCrate, SCENERY, "search") { player, node ->
+        on(slimyGnomeEyesCrate, IntType.SCENERY, "search") { player, node ->
             sendMessage(player, "You search the crate.")
             player.pulseManager.run(object : Pulse() {
                 var counter = 0
@@ -107,7 +108,7 @@ class CrateHandler : InteractionListener {
             return@on true
         }
 
-        on(hammersCrate, SCENERY, "search") { player, node ->
+        on(hammersCrate, IntType.SCENERY, "search") { player, node ->
             sendMessage(player, "You search the crate.")
             player.pulseManager.run(object : Pulse() {
                 var counter = 0

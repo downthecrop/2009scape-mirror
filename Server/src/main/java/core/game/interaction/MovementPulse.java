@@ -233,9 +233,9 @@ public abstract class MovementPulse extends Pulse {
             return;
         }
         if(destination.getLocation() == null){
-            SystemLogger.logAlert(destination.getId() + " < ID");
-            SystemLogger.logAlert(destination.getName() + " < NAME");
-            SystemLogger.logAlert("ASDAD");
+            SystemLogger.logAlert(this.getClass(), destination.getId() + " < ID");
+            SystemLogger.logAlert(this.getClass(), destination.getName() + " < NAME");
+            SystemLogger.logAlert(this.getClass(), "ASDAD");
             return;
         }
         boolean inside = isInsideEntity(mover.getLocation());

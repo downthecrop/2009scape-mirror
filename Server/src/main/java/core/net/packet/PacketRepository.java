@@ -191,7 +191,7 @@ public final class PacketRepository {
 		if(context.getPlayer().getSession() == null) return;
 		OutgoingPacket p = OUTGOING_PACKETS.get(clazz);
 		if (p == null) {
-			SystemLogger.logErr("Invalid outgoing packet [handler=" + clazz + ", context=" + context + "].");
+			SystemLogger.logErr(PacketRepository.class, "Invalid outgoing packet [handler=" + clazz + ", context=" + context + "].");
 			return;
 		}
 		if(!context.getPlayer().isArtificial()) {

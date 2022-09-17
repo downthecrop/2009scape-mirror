@@ -101,7 +101,7 @@ public enum Traps {
 			return;
 		}
 		if (instance.getWrapper(object) == null) {
-			SystemLogger.logErr("NO WRAPPER (HUNTER DISMANTLE)");
+			SystemLogger.logErr(this.getClass(), "NO WRAPPER (HUNTER DISMANTLE)");
 			return;
 		}
 		player.faceLocation(object.getLocation());

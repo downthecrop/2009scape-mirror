@@ -8,6 +8,7 @@ import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.Topic
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.tools.END_DIALOGUE
 
 /**
@@ -61,7 +62,7 @@ class FadliDialogue(player: Player? = null) : DialoguePlugin(player) {
 
 class FadliListener : InteractionListener {
     override fun defineListeners() {
-        on(NPCs.FADLI_958, NPC, "buy") { player, node ->
+        on(NPCs.FADLI_958, IntType.NPC, "buy") { player, node ->
             if(node.asNpc().openShop(player)) {
                 return@on true
             }

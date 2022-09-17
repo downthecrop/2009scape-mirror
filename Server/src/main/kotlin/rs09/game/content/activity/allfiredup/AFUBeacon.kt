@@ -29,7 +29,7 @@ enum class AFUBeacon(val title: String, val fmLevel: Int, val varpId: Int, val o
             for (beacon in values()) {
                 if (beacon.location.equals(location)) return beacon
             }
-            return RIVER_SALVE.also { SystemLogger.logWarn("Unhandled Beacon Location ${location.toString()}") }
+            return RIVER_SALVE.also { SystemLogger.logWarn(this::class.java, "Unhandled Beacon Location ${location.toString()}") }
         }
 
         fun resetAllBeacons(player: Player){

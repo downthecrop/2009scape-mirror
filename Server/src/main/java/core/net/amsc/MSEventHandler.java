@@ -38,7 +38,7 @@ public final class MSEventHandler extends IoEventHandler {
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}
-		SystemLogger.logErr("Failed connecting to Management Server!");
+		SystemLogger.logErr(this.getClass(), "Failed connecting to Management Server!");
 		WorldCommunicator.terminate();
 	}
 

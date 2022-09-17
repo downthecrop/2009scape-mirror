@@ -368,7 +368,7 @@ public final class GodwarsMapzone extends MapZone implements Plugin<Object> {
 		}
 
 		if (DoorActionHandler.handleAutowalkDoor(player, object)) {
-			SystemLogger.logInfo(player.getUsername() + " entered " + faction.name() + " gwd boss room");
+			SystemLogger.logInfo(this.getClass(), player.getUsername() + " entered " + faction.name() + " gwd boss room");
 			increaseKillcount(player, faction, -required);
 		}
 		return true;

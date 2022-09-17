@@ -19,6 +19,7 @@ import io.github.classgraph.ClassInfo
 import io.github.classgraph.ScanResult
 import rs09.game.ai.general.scriptrepository.PlayerScripts
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.interaction.InterfaceListener
 import rs09.game.node.entity.player.info.login.PlayerSaveParser
 import rs09.game.node.entity.player.info.login.PlayerSaver
@@ -67,10 +68,10 @@ object ClassScanner {
             loadContentInterfacesFrom(scanResults)
             logStartup("Loaded $amountLoaded content interfaces.")
         } catch (t: Throwable) {
-            SystemLogger.logErr("Error initializing Plugins -> " + t.localizedMessage + " for file -> " + lastLoaded)
+            SystemLogger.logErr(this::class.java, "Error initializing Plugins -> " + t.localizedMessage + " for file -> " + lastLoaded)
             t.printStackTrace()
         } catch (e: Exception) {
-            SystemLogger.logErr("Error initializing Plugins -> " + e.localizedMessage + " for file -> " + lastLoaded)
+            SystemLogger.logErr(this::class.java, "Error initializing Plugins -> " + e.localizedMessage + " for file -> " + lastLoaded)
             e.printStackTrace()
         }
     }
@@ -112,12 +113,12 @@ object ClassScanner {
                     }
                     for(border in clazz.defineAreaBorders()) zone.register(border)
                     ZoneBuilder.configure(zone)
-                    SystemLogger.logInfo("Configured zone: ${clazz.javaClass.simpleName + "MapArea"}")
+                    SystemLogger.logInfo(this::class.java, "Configured zone: ${clazz.javaClass.simpleName + "MapArea"}")
                     MapArea.zoneMaps[clazz.javaClass.simpleName + "MapArea"] = zone
                 }
                 amountLoaded++
             } catch (e: Exception) {
-                SystemLogger.logErr("Error loading content: ${it.simpleName}, ${e.localizedMessage}")
+                SystemLogger.logErr(this::class.java, "Error loading content: ${it.simpleName}, ${e.localizedMessage}")
                 e.printStackTrace()
             }
         }
@@ -138,10 +139,10 @@ object ClassScanner {
                     definePlugin(clazz)
                 }
             } catch (t: Throwable) {
-                SystemLogger.logErr("Failed to load plugin ${p.name}.");
+                SystemLogger.logErr(this::class.java, "Failed to load plugin ${p.name}.");
 
                 if (t is NoSuchMethodException && p.superclass.simpleName == DialoguePlugin::class.simpleName) {
-                    SystemLogger.logErr(
+                    SystemLogger.logErr(this::class.java,
                         "Make sure the constructor signature matches " +
                         "`${p.simpleName}(player: Player? = null) : DialoguePlugin(player)'."
                     )
@@ -198,7 +199,7 @@ object ClassScanner {
                         plugin.newInstance(null)
                         QuestRepository.register(plugin as Quest)
                     }
-                    else -> SystemLogger.logWarn("Unknown Manifest: " + manifest.type)
+                    else -> SystemLogger.logWarn(this::class.java, "Unknown Manifest: " + manifest.type)
                 }
             }
             numPlugins++

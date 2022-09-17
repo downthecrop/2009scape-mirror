@@ -10,6 +10,7 @@ import org.rs09.consts.Items
 import rs09.game.ai.AIPlayer
 import rs09.game.ai.general.ScriptAPI
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.interaction.InteractionListeners
 import kotlin.random.Random
 
@@ -117,7 +118,7 @@ class SharkCatcher : Script() {
                 if (Random.nextBoolean()) {
                     tick = 0
                     val spot = scriptAPI.getNearestNode(334, false)
-                    spot?.let { InteractionListeners.run(spot.id, InteractionListener.NPC,"harpoon",bot,spot) }
+                    spot?.let { InteractionListeners.run(spot.id, IntType.NPC,"harpoon",bot,spot) }
                     if(bot.inventory.isFull){
                         state = State.FIND_BANK
                     } else {

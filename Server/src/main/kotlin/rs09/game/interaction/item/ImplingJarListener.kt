@@ -7,6 +7,7 @@ import org.rs09.consts.Items
 import rs09.game.content.global.WeightBasedTable
 import rs09.game.content.global.WeightedItem
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.system.SystemLogger
 
 class ImplingJarListener : InteractionListener {
@@ -14,7 +15,7 @@ class ImplingJarListener : InteractionListener {
     val JARS = ImplingLoot.values().map { it.jarId }.toIntArray()
 
     override fun defineListeners() {
-        on(JARS, ITEM, "loot"){player, node ->
+        on(JARS, IntType.ITEM, "loot"){player, node ->
             val jar = node.asItem()
 
             val loot = ImplingLoot.forId(jar.id)?.roll()?.first() ?: return@on false

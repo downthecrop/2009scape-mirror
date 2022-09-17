@@ -1,6 +1,7 @@
 package core.game.content.global.action;
 
 import core.game.node.entity.player.Player;
+import core.game.system.communication.CommunicationInfo;
 import rs09.game.interaction.SpadeDigListener;
 import rs09.game.system.SystemLogger;
 import core.game.system.task.Pulse;
@@ -62,7 +63,7 @@ public final class DigSpadeHandler {
 	 */
 	public static boolean register(Location location, DigAction action) {
 		if (ACTIONS.containsKey(location)) {
-			SystemLogger.logErr("Already contained dig reward for location " + location + ".");
+			SystemLogger.logErr(CommunicationInfo.class, "Already contained dig reward for location " + location + ".");
 			return false;
 		}
 		ACTIONS.put(location, action);

@@ -7,10 +7,11 @@ import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Components
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class CanoeStationListener : InteractionListener {
 
-    private val STATION_IDs = intArrayOf(12140, 12141, 12142, 12143, 12144, 12145, 12146, 12147, 12148, 12151, 12152, 12153, 12154, 12155, 12156, 12157, 12158, 12144, 12146, 12149, 12150, 12157)
+    private val STATION_IDs = intArrayOf(12140, 12141, 12142, 12143, 12144, 12145, 12146, 12147, 12148, 12151, 12152, 12153, 12154, 12155, 12156, 12157, 12158, 12149, 12150)
     private val STAGE_TREE_NONINTERACTABLE = 9
     private val STAGE_LOG_CHOPPED = 10
     private val SHAPING_INTERFACE = Components.CANOE_52
@@ -19,16 +20,16 @@ class CanoeStationListener : InteractionListener {
     private val FLOAT = Animation(3304)
 
     override fun defineDestinationOverrides() {
-        setDest(SCENERY,STATION_IDs,"chop-down"){ _,node ->
+        setDest(IntType.SCENERY,STATION_IDs,"chop-down"){ _,node ->
             return@setDest CanoeUtils.getChopLocation(node.location)
         }
-        setDest(SCENERY,STATION_IDs,"shape-canoe","float canoe","float log","float waka"){ _,node ->
+        setDest(IntType.SCENERY,STATION_IDs,"shape-canoe","float canoe","float log","float waka"){ _,node ->
             return@setDest CanoeUtils.getCraftFloatLocation(node.location)
         }
     }
 
     override fun defineListeners() {
-        on(STATION_IDs,SCENERY,"chop-down"){ player, node ->
+        on(STATION_IDs, IntType.SCENERY, "chop-down"){ player, node ->
             val axe: SkillingTool? = SkillingTool.getHatchet(player)
             val varbit = node.asScenery().definition.configFile
             if(varbit.getValue(player) != 0){
@@ -60,7 +61,7 @@ class CanoeStationListener : InteractionListener {
             return@on true
         }
 
-        on(STATION_IDs,SCENERY,"shape-canoe"){ player, node ->
+        on(STATION_IDs, IntType.SCENERY, "shape-canoe"){ player, node ->
             val varbit = node.asScenery().definition.configFile
             if(varbit.getValue(player) != STAGE_LOG_CHOPPED){
                 player.varpManager.setVarbit(varbit,0)
@@ -72,7 +73,7 @@ class CanoeStationListener : InteractionListener {
             return@on true
         }
 
-        on(STATION_IDs,SCENERY,"float canoe","float log","float waka"){ player, node ->
+        on(STATION_IDs, IntType.SCENERY, "float canoe","float log","float waka"){ player, node ->
             val varbit = node.asScenery().definition.configFile
             val canoe = CanoeUtils.getCanoeFromVarbit(player,varbit)
             player.animator.animate(PUSH)
@@ -89,7 +90,7 @@ class CanoeStationListener : InteractionListener {
             return@on true
         }
 
-        on(STATION_IDs,SCENERY,"paddle log","paddle canoe"){ player, node ->
+        on(STATION_IDs, IntType.SCENERY, "paddle log","paddle canoe"){ player, node ->
             player.interfaceManager.open(Component(Components.CANOE_STATIONS_MAP_53))
             return@on true
         }

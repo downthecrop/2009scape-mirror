@@ -6,6 +6,7 @@ import api.stopWalk
 import org.rs09.consts.Animations
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 /**
  * Interaction listener for the Toy Horsey item
@@ -29,7 +30,7 @@ class ToyHorseListener : InteractionListener {
     )
 
     override fun defineListeners() {
-        on(HORSEY_MAP.keys.toIntArray(), ITEM, "play-with") { player, node ->
+        on(HORSEY_MAP.keys.toIntArray(), IntType.ITEM, "play-with") { player, node ->
             // "high-priority" interaction, so movement is stopped
             stopWalk(player)
             animate(player, HORSEY_MAP.get(node.id))

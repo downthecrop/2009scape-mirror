@@ -13,6 +13,7 @@ import core.game.world.update.flag.player.FaceLocationFlag;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.InteractionOptionContext;
 import core.net.packet.out.InteractionOption;
+import rs09.game.interaction.IntType;
 import rs09.game.interaction.InteractionListeners;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
@@ -86,7 +87,7 @@ public class Interaction {
 			player.dispatch(new InteractionEvent(node, option.getName().toLowerCase()));
 		} catch (Exception e){
 			e.printStackTrace();
-			SystemLogger.logErr(this.getClass().getName() + e.getMessage());
+			SystemLogger.logErr(this.getClass(), this.getClass().getName() + e.getMessage());
 		}
 	}
 
@@ -108,7 +109,7 @@ public class Interaction {
 					if (player.getLocks().isInteractionLocked() || player.getZoneMonitor().interact(node, option)) {
 						return true;
 					}
-					if(InteractionListeners.run(node.getId(),0,option.getName(),player,node)){
+					if(InteractionListeners.run(node.getId(), IntType.ITEM, option.getName(),player,node)){
 						return true;
 					}
 					if (option.getHandler() == null || !option.getHandler().handle(player, node, option.getName().toLowerCase())) {
@@ -119,7 +120,7 @@ public class Interaction {
 					}
 				} catch (Exception e){
 					e.printStackTrace();
-					SystemLogger.logErr(this.getClass().getName() + e.getMessage());
+					SystemLogger.logErr(this.getClass(), this.getClass().getName() + e.getMessage());
 				}
 				return true;
 			}
@@ -150,7 +151,7 @@ public class Interaction {
 						player.getPacketDispatch().sendMessage("Nothing interesting happens.");
 					} catch (Exception e){
 						e.printStackTrace();
-						SystemLogger.logErr(this.getClass().getName() + e.getMessage());
+						SystemLogger.logErr(this.getClass(), this.getClass().getName() + e.getMessage());
 					}
 					return true;
 				}
@@ -188,7 +189,7 @@ public class Interaction {
 					}
 				} catch (Exception e){
 					e.printStackTrace();
-					SystemLogger.logErr(this.getClass().getName() + e.getMessage());
+					SystemLogger.logErr(this.getClass(), this.getClass().getName() + e.getMessage());
 				}
 				return true;
 			}

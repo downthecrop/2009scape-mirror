@@ -11,6 +11,7 @@ import org.rs09.consts.Items
 import rs09.game.ai.general.ScriptAPI
 import rs09.game.ai.skillingbot.SkillingBotAssembler
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.interaction.InteractionListeners
 
 @PlayerCompatible
@@ -40,7 +41,7 @@ class SeersMagicTrees : Script(){
             State.CHOPPING -> {
                 val tree = scriptAPI.getNearestNode(1306,true)
                 bot.interfaceManager.close()
-                tree?.let { InteractionListeners.run(tree.id, InteractionListener.SCENERY,"Chop down",bot,tree) }
+                tree?.let { InteractionListeners.run(tree.id, IntType.SCENERY,"Chop down",bot,tree) }
                 if(bot.inventory.isFull){
                     state = State.FIND_BANK
                 }

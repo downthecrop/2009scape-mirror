@@ -11,6 +11,7 @@ import rs09.ServerStore
 import rs09.ServerStore.Companion.getBoolean
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.system.SystemLogger
 import rs09.game.system.command.Privilege
 import rs09.game.world.GameWorld
@@ -36,7 +37,7 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
     }
 
     override fun defineListeners() {
-        on(Scenery.SHOOTING_STAR_NOTICEBOARD_38669, SCENERY, "read") { player, _ ->
+        on(Scenery.SHOOTING_STAR_NOTICEBOARD_38669, IntType.SCENERY, "read") { player, _ ->
             var index = 0
             scoreboardEntries.forEach { entry ->
                 val timeElapsed = secondsToTicks(GameWorld.ticks - entry.time) / 60
@@ -48,17 +49,17 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
             return@on true
         }
 
-        on(SHOOTING_STARS,SCENERY,"mine"){ player, _ ->
+        on(SHOOTING_STARS, IntType.SCENERY, "mine"){ player, _ ->
             star.mine(player)
             return@on true
         }
 
-        on(SHOOTING_STARS,SCENERY,"prospect"){ player, _ ->
+        on(SHOOTING_STARS, IntType.SCENERY, "prospect"){ player, _ ->
             star.prospect(player)
             return@on true
         }
 
-        on(RING, ITEM, "rub", "operate"){player, node ->
+        on(RING, IntType.ITEM, "rub", "operate"){player, node ->
             if(getRingStoreFile().getBoolean(player.username.toLowerCase())){
                 sendDialogue(player, "The ring is still recharging.")
                 return@on true
@@ -111,7 +112,7 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
     }
 
     override fun startup() {
-        SystemLogger.logInfo("Shooting Stars initialized.")
+        SystemLogger.logInfo(this::class.java, "Shooting Stars initialized.")
     }
 
     private data class ScoreboardEntry(val player: String, val time: Int)

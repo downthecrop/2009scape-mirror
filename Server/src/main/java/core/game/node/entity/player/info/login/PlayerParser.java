@@ -60,7 +60,7 @@ public final class PlayerParser {
 				assert os != null;
 				os.close();
 			} catch (Exception f){
-				SystemLogger.logWarn("Unable to close file copiers in PlayerParser.java line 216.");
+				SystemLogger.logWarn(PlayerParser.class, "Unable to close file copiers in PlayerParser.java line 216.");
 				f.printStackTrace();
 			}
 		}

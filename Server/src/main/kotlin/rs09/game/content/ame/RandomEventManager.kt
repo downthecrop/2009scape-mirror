@@ -59,7 +59,7 @@ class RandomEventManager(val player: Player? = null) : LoginListener, EventHook<
         event = ame.npc.create(player,ame.loot,ame.type)
         if (event!!.spawnLocation == null) {
             nextSpawn = GameWorld.ticks + 3000
-            SystemLogger.logWarn("Tried to spawn random event for ${player.username} but spawn location was null!")
+            SystemLogger.logWarn(this::class.java, "Tried to spawn random event for ${player.username} but spawn location was null!")
             return
         }
         event!!.init()

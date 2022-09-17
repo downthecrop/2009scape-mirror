@@ -35,7 +35,7 @@ class ObjectConfigParser {
                 count++
             }
         }
-        SystemLogger.logInfo("Parsed $count object configs.")
+        SystemLogger.logInfo(this::class.java, "Parsed $count object configs.")
     }
 }
 

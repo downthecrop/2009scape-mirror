@@ -64,7 +64,7 @@ public final class PacketDispatch {
 			return;
 		}
 		if (message.length() > 255) {
-			SystemLogger.logErr("Message length out of bounds (" + message + ")!");
+			SystemLogger.logErr(this.getClass(), "Message length out of bounds (" + message + ")!");
 			message = message.substring(0, 255);
 		}
 		PacketRepository.send(GameMessage.class, new GameMessageContext(player, message));

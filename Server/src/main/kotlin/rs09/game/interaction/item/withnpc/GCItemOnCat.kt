@@ -8,6 +8,7 @@ import core.game.world.map.path.Pathfinder
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.world.GameWorld.Pulser
 
 class GCItemOnCat : InteractionListener {
@@ -15,7 +16,7 @@ class GCItemOnCat : InteractionListener {
         val GERTCAT = "Gertrude's Cat"
         val BEND_DOWN = 827
 
-        onUseWith(NPC, Items.BUCKET_OF_MILK_1927, NPCs.GERTRUDES_CAT_2997) {player, used, with ->
+        onUseWith(IntType.NPC, Items.BUCKET_OF_MILK_1927, NPCs.GERTRUDES_CAT_2997) {player, used, with ->
             if(questStage(player, GERTCAT) == 20 && removeItem(player, used.asItem())){
                 addItem(player, Items.BUCKET_1925)
                 animate(player, BEND_DOWN) //bend down
@@ -25,7 +26,7 @@ class GCItemOnCat : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(NPC, Items.DOOGLE_SARDINE_1552, NPCs.GERTRUDES_CAT_2997){player, used, with ->
+        onUseWith(IntType.NPC, Items.DOOGLE_SARDINE_1552, NPCs.GERTRUDES_CAT_2997){player, used, with ->
             if(questStage(player, GERTCAT) == 30 && removeItem(player, used.asItem())){
                 animate(player, BEND_DOWN)
                 sendChat(with.asNpc(), "Mew!")
@@ -34,12 +35,12 @@ class GCItemOnCat : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(NPC, Items.RAW_SARDINE_327, NPCs.GERTRUDES_CAT_2997){player, _, _ ->
+        onUseWith(IntType.NPC, Items.RAW_SARDINE_327, NPCs.GERTRUDES_CAT_2997){player, _, _ ->
             sendMessage(player, "The cat doesn't seem interested in that.")
             return@onUseWith true
         }
 
-        onUseWith(NPC, Items.THREE_LITTLE_KITTENS_13236, NPCs.GERTRUDES_CAT_2997){player, used, with ->
+        onUseWith(IntType.NPC, Items.THREE_LITTLE_KITTENS_13236, NPCs.GERTRUDES_CAT_2997){player, used, with ->
             if(removeItem(player, used.asItem())){
                 setQuestStage(player, GERTCAT, 60)
                 //below copied verbatim from original, I don't like it.

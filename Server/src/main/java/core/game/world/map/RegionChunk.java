@@ -182,7 +182,7 @@ public class RegionChunk {
 	 */
 	public void rotate(Direction direction) {
 		if (rotation != 0) {
-			SystemLogger.logErr("Region chunk was already rotated!");
+			SystemLogger.logErr(this.getClass(), "Region chunk was already rotated!");
 			return;
 		}
 		Scenery[][] copy = new Scenery[SIZE][SIZE];

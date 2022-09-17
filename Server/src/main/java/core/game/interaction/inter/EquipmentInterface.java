@@ -7,7 +7,6 @@ import core.game.component.ComponentPlugin;
 import core.game.container.Container;
 import core.game.container.ContainerEvent;
 import core.game.container.ContainerListener;
-import core.game.container.access.BitregisterAssembler;
 import core.game.container.access.InterfaceContainer;
 import core.game.container.impl.EquipmentContainer;
 import core.game.interaction.OptionHandler;
@@ -22,6 +21,7 @@ import core.net.packet.out.ContainerPacket;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.game.content.global.action.EquipHandler;
+import rs09.game.interaction.IntType;
 import rs09.game.interaction.InteractionListeners;
 import rs09.game.world.GameWorld;
 
@@ -82,7 +82,7 @@ public final class EquipmentInterface extends ComponentPlugin {
 					@Override
 					public boolean pulse() {
 						if (item == null) return true;
-						InteractionListeners.run(item.getId(),0,"equip",p, item);
+						InteractionListeners.run(item.getId(), IntType.ITEM,"equip",p, item);
 						return true;
 					}
 				});
@@ -164,10 +164,6 @@ public final class EquipmentInterface extends ComponentPlugin {
 				EquipmentContainer.update(p);
 				p.getInterfaceManager().openSingleTab(new Component(670));
 				InterfaceContainer.generateItems(p, p.getInventory().toArray(), new String[] { "Equip" }, 670, 0, 7, 4, 93);
-				BitregisterAssembler assembly = new BitregisterAssembler(new String[] { "Equip" });
-				assembly.enableExamineOption();
-				assembly.enableSlotSwitch();
-				p.getPacketDispatch().sendIfaceSettings(assembly.calculateRegister(), 0, 670, 0, 27);
 				p.getInventory().getListeners().add(listener);
 				p.getInventory().refresh();
 				ItemDefinition.statsUpdate(p);
@@ -192,7 +188,7 @@ public final class EquipmentInterface extends ComponentPlugin {
 		if (item == null) {
 			return;
 		}
-		if(InteractionListeners.run(item.getId(),0,"operate",player,item)){
+		if(InteractionListeners.run(item.getId(),IntType.ITEM,"operate",player,item)){
 			return;
 		}
 		OptionHandler handler = item.getOperateHandler();

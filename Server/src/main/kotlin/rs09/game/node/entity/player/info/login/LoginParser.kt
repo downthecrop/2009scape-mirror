@@ -4,37 +4,21 @@ import api.LoginListener
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.PlayerDetails
 import core.game.node.entity.player.info.login.LoginConfiguration
-import core.game.node.entity.player.info.login.LoginType
 import core.game.node.entity.player.info.login.PlayerParser
 import core.game.node.entity.player.info.login.Response
 import core.game.system.SystemManager
 import core.game.system.monitor.PlayerMonitor
 import core.game.system.task.Pulse
-import core.net.amsc.MSPacketRepository
-import core.net.amsc.ManagementServerState
-import core.net.amsc.WorldCommunicator
 import rs09.auth.AuthResponse
 import rs09.game.world.GameWorld
 import rs09.game.world.GameWorld.loginListeners
 import rs09.game.world.repository.Repository
-import java.util.concurrent.locks.Lock
-import java.util.concurrent.locks.ReentrantLock
 import java.util.function.Consumer
 
 /**
  * Parses the login of a player.
  */
-class LoginParser(val details: PlayerDetails, private val type: LoginType) {
-    companion object {
-        var monkeywrench  = true
-    }
-    /**
-     * The player in the game, used for reconnect login type.
-     */
-    private var gamePlayer: Player? = null
-
-    val timeStamp: Int = GameWorld.ticks
-
+class LoginParser(val details: PlayerDetails) {
     /**
      * Initializes the player.
      * @param player The player.
@@ -56,7 +40,6 @@ class LoginParser(val details: PlayerDetails, private val type: LoginType) {
             Repository.playerNames.remove(player.name)
             flag(AuthResponse.ErrorLoadingProfile)
         }
-        //Repository.getPlayerNames().put(player.getName(), player);
         GameWorld.Pulser.submit(object : Pulse(1) {
             override fun pulse(): Boolean {
                 try {

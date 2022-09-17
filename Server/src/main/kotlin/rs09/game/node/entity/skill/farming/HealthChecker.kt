@@ -39,7 +39,7 @@ class HealthChecker : OptionHandler(){
             PatchType.FRUIT_TREE -> patch.setCurrentState(patch.getCurrentState() - 14)
             PatchType.BUSH -> patch.setCurrentState(patch.plantable!!.value + patch.plantable!!.stages + 4)
             PatchType.CACTUS -> patch.setCurrentState(patch.plantable!!.value + patch.plantable!!.stages + 3)
-            else -> SystemLogger.logErr("Unreachable patch type from when(type) switch in HealthChecker.kt line 36")
+            else -> SystemLogger.logErr(this::class.java,"Unreachable patch type from when(type) switch in HealthChecker.kt line 36")
         }
 
         if(type == PatchType.FRUIT_TREE){

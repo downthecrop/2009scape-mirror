@@ -6,6 +6,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.music.MusicZone;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
+import core.game.system.communication.CommunicationInfo;
 import core.game.system.task.Pulse;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.build.LandscapeParser;
@@ -339,13 +340,13 @@ public class Region {
 	 */
 	private static boolean unload(Region r) {
 		if (r.isViewed()) {
-			SystemLogger.logErr("Players viewing region!");
+			SystemLogger.logErr(CommunicationInfo.class, "Players viewing region!");
 			r.flagActive();
 			return false;
 		}
 		for (RegionPlane p : r.planes) {
 			if (!p.getPlayers().isEmpty()) {
-				SystemLogger.logErr("Players still in region!");
+				SystemLogger.logErr(CommunicationInfo.class, "Players still in region!");
 				r.flagActive();
 				return false;
 			}
@@ -388,7 +389,7 @@ public class Region {
 	public int decrementViewAmount() {
 		synchronized (this) {
 			if (viewAmount < 1) {
-				//SystemLogger.logErr("View amount is " + (viewAmount - 1));
+				//SystemLogger.logErr(this.getClass(), "View amount is " + (viewAmount - 1));
 				viewAmount++;
 			}
 			return --viewAmount;

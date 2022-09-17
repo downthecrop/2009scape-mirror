@@ -128,7 +128,7 @@ public class GuardDialoguePlugin extends DialoguePlugin {
 			stage = -1;
 			break;
 		default:
-			SystemLogger.logErr("Unhandled dialogue stage=" + stage);
+			SystemLogger.logErr(this.getClass(), "Unhandled dialogue stage=" + stage);
 		}
 		return false;
 	}

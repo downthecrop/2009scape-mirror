@@ -30,6 +30,6 @@ class CustomVarbitParser {
             count++
         }
 
-        SystemLogger.logInfo("Parsed $count custom varbit definitions.")
+        SystemLogger.logInfo(this::class.java, "Parsed $count custom varbit definitions.")
     }
 }

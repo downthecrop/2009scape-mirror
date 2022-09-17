@@ -1,6 +1,7 @@
 package rs09.game.node.entity.skill.skillcapeperks
 
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class SkillcapeEquipmentPlugin : InteractionListener {
     override fun defineListeners() {

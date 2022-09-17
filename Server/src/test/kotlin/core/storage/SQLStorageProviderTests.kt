@@ -23,9 +23,9 @@ class SQLStorageProviderTests {
         }
 
         @AfterAll @JvmStatic fun cleanup() {
-            SystemLogger.logInfo("Cleaning up unit test accounts")
+            SystemLogger.logInfo(this::class.java, "Cleaning up unit test accounts")
             testAccountNames.forEach {name ->
-                SystemLogger.logInfo("Removing test account $name")
+                SystemLogger.logInfo(this::class.java, "Removing test account $name")
                 val info = UserAccountInfo.createDefault()
                 info.username = name
                 storage.remove(info)

@@ -5,6 +5,7 @@ import core.game.node.entity.npc.NPC
 import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.tools.END_DIALOGUE
 
 /**
@@ -36,7 +37,7 @@ class MonasteryMonkDialogue : DialogueFile() {
  */
 class MonasteryMonkListener : InteractionListener {
     override fun defineListeners() {
-        on(NPCs.MONK_281, NPC, "talk-to"){ player, _ ->
+        on(NPCs.MONK_281, IntType.NPC, "talk-to"){ player, _ ->
             player.dialogueInterpreter.open(MonasteryMonkDialogue(), NPC(NPCs.MONK_281))
             return@on true
         }

@@ -67,6 +67,6 @@ class MusicConfigLoader {
             }
             count++
         }
-        SystemLogger.logInfo("Parsed $count music configs.")
+        SystemLogger.logInfo(this::class.java, "Parsed $count music configs.")
     }
 }

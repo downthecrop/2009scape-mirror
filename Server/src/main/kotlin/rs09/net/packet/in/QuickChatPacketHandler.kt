@@ -31,7 +31,7 @@ class QuickChatPacketHandler : IncomingPacket {
                 3,4 -> QCPacketType.STANDARD
                 5 -> QCPacketType.SINGLE
                 7 -> QCPacketType.DOUBLE
-                else -> QCPacketType.UNHANDLED.also { SystemLogger.logWarn("UNHANDLED QC PACKET TYPE Size ${x.array().size}") }
+                else -> QCPacketType.UNHANDLED.also { SystemLogger.logWarn(this::class.java, "UNHANDLED QC PACKET TYPE Size ${x.array().size}") }
         }
 
         val forClan = (buffer.get() and 0xFF) == 1
@@ -50,19 +50,19 @@ class QuickChatPacketHandler : IncomingPacket {
                 buffer.get() //discard
                 selection_b_index = buffer.get()
             }
-            QCPacketType.UNHANDLED -> SystemLogger.logWarn("Unhandled packet type, skipping remaining buffer contents.")
+            QCPacketType.UNHANDLED -> SystemLogger.logWarn(this::class.java, "Unhandled packet type, skipping remaining buffer contents.")
         }
 
 
         //Prints the values of each byte in the buffer to server log
         //If the world is in dev mode
         if(GameWorld.settings?.isDevMode == true) {
-            SystemLogger.logInfo("Begin QuickChat Packet Buffer Dump---------")
-            SystemLogger.logInfo("Packet Type: ${packetType.name} Chat Type: ${if(forClan) "Clan" else "Public"}")
+            SystemLogger.logInfo(this::class.java, "Begin QuickChat Packet Buffer Dump---------")
+            SystemLogger.logInfo(this::class.java, "Packet Type: ${packetType.name} Chat Type: ${if(forClan) "Clan" else "Public"}")
             x?.array()?.forEach {
-                SystemLogger.logInfo("$it")
+                SystemLogger.logInfo(this::class.java, "$it")
             }
-            SystemLogger.logInfo("End QuickChat Packet Buffer Dump-----------")
+            SystemLogger.logInfo(this::class.java, "End QuickChat Packet Buffer Dump-----------")
         }
 
         QCRepository.sendQC(player,multiplier,offset,packetType,selection_a_index,selection_b_index,forClan)

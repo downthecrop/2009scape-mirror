@@ -341,7 +341,7 @@ public class Player extends Entity {
 	@Override
 	public void init() {
 		if(!artificial)
-			SystemLogger.logInfo(getUsername() + " initialising...");
+			SystemLogger.logInfo(this.getClass(), getUsername() + " initialising...");
 		if (!artificial) {
 			getProperties().setSpawnLocation(ServerConstants.HOME_LOCATION);
 			getDetails().getSession().setObject(this);

@@ -63,7 +63,7 @@ class EnchantJewelleryTabOption : OptionHandler(){
         }
 
         if(items == null){
-            SystemLogger.logWarn("UNHANDLED ENCHANT ITEM TABLET [ID: ${node?.id}")
+            SystemLogger.logWarn(this::class.java, "UNHANDLED ENCHANT ITEM TABLET [ID: ${node?.id}")
             return true
         }
 

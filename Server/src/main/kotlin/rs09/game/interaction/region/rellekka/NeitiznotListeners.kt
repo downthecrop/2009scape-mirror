@@ -11,13 +11,14 @@ import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class NeitiznotListeners : InteractionListener {
     val STUMP = 21305
 
     override fun defineListeners() {
 
-        on(STUMP, SCENERY, "cut-wood"){player, _ ->
+        on(STUMP, IntType.SCENERY, "cut-wood"){player, _ ->
             sendPlayerDialogue(player, "I should probably leave this alone.", FacialExpression.HALF_THINKING)
             return@on true
         }

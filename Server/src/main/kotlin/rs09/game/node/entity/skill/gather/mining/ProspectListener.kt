@@ -5,6 +5,7 @@ import core.game.node.entity.skill.gather.mining.MiningNode
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 /**
  * @author: bushtail
@@ -13,7 +14,7 @@ import rs09.game.interaction.InteractionListener
 class ProspectListener : InteractionListener {
 
     override fun defineListeners() {
-        on(SCENERY, "prospect") { player, node ->
+        on(IntType.SCENERY, "prospect") { player, node ->
             val rock = MiningNode.forId(node.asScenery().id)
 
             if(rock == null) {

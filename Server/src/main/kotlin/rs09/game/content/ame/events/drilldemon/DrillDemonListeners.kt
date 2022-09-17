@@ -4,12 +4,13 @@ import core.game.node.entity.npc.NPC
 import core.game.system.task.Pulse
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class DrillDemonListeners : InteractionListener {
     val MATS = intArrayOf(10076,10077,10078,10079)
     override fun defineListeners() {
 
-        on(MATS,SCENERY,"use"){ player, node ->
+        on(MATS, IntType.SCENERY, "use"){ player, node ->
             val correctTask = player.getAttribute(DrillDemonUtils.DD_KEY_TASK,-1)
             if(correctTask == -1){
                 player.sendMessage("You can't do that right now.")

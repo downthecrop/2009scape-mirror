@@ -44,7 +44,7 @@ public final class SceneryBuilder {
 		Scenery current = LandscapeParser.removeScenery(remove);
 		if (current == null) {
 			if (GameWorld.getSettings().isDevMode()) {
-				SystemLogger.logErr("Object could not be replaced - object to remove is invalid.");
+				SystemLogger.logErr(SceneryBuilder.class, "Object could not be replaced - object to remove is invalid.");
 			}
 			return false;
 		}
@@ -119,7 +119,7 @@ public final class SceneryBuilder {
 		Scenery current = LandscapeParser.removeScenery(remove);
 		if (current == null) {
 			if (GameWorld.getSettings().isDevMode()) {
-				SystemLogger.logErr("Object could not be replaced - object to remove is invalid.");
+				SystemLogger.logErr(SceneryBuilder.class, "Object could not be replaced - object to remove is invalid.");
 			}
 			return false;
 		}

@@ -13,6 +13,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.ServerConstants
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.interaction.InterfaceListener
 import rs09.game.system.SystemLogger
 import rs09.game.system.command.Privilege
@@ -41,7 +42,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
 
         fun logShop(msg: String)
         {
-            SystemLogger.logInfo("[SHOPS] $msg")
+            SystemLogger.logInfo(this::class.java, "[SHOPS] $msg")
         }
 
         fun parseStock(stock: String, id: Int): ArrayList<ShopItem>{
@@ -57,7 +58,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
                     amount = "-1"
                 val item = tokens[0].toInt()
                 if(idsInStock[item] != null) {
-                    SystemLogger.logWarn("[SHOPS] MALFORMED STOCK IN SHOP ID $id FOR ITEM $item")
+                    SystemLogger.logWarn(this::class.java, "[SHOPS] MALFORMED STOCK IN SHOP ID $id FOR ITEM $item")
                     items.forEach { if(it.itemId == item) {
                         it.amount += amount.toInt()
                         return@map
@@ -105,7 +106,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
     }
 
     override fun defineListeners() {
-        on(NPC, "trade", "shop"){player, node ->
+        on(IntType.NPC, "trade", "shop"){player, node ->
             val npc = node as NPC
             if (npc.id == 2824) {
                 TanningProduct.open(player, 2824)
@@ -119,7 +120,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
             return@on true
         }
 
-        on(NPCs.SIEGFRIED_ERKLE_933, NPC, "trade"){ player, node ->
+        on(NPCs.SIEGFRIED_ERKLE_933, IntType.NPC, "trade"){ player, node ->
             val points = getQP(player)
             if(points < 40){
                 sendNPCDialogue(player, NPCs.SIEGFRIED_ERKLE_933, "I'm sorry, adventurer, but you need 40 quest points to buy from me.")
@@ -129,18 +130,9 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
             return@on true
         }
 
-        on(NPCs.FUR_TRADER_1316, NPC,"trade") { player, node ->
+        on(NPCs.FUR_TRADER_1316, IntType.NPC, "trade") { player, node ->
             if (!isQuestComplete(player, "Fremennik Trials")) {
                 sendNPCDialogue(player, NPCs.FUR_TRADER_1316, "I don't sell to outerlanders.", FacialExpression.ANNOYED).also { END_DIALOGUE }
-            } else {
-                shopsByNpc[node.id]?.openFor(player)
-            }
-            return@on true
-        }
-
-        on(NPCs.FISH_MONGER_1315, NPC,"trade") { player, node ->
-            if (!isQuestComplete(player, "Fremennik Trials")) {
-                sendNPCDialogue(player, NPCs.FISH_MONGER_1315, "I don't sell to outerlanders.", FacialExpression.ANNOYED).also { END_DIALOGUE }
             } else {
                 shopsByNpc[node.id]?.openFor(player)
             }
@@ -245,7 +237,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
     }
 
     override fun defineDestinationOverrides() {
-        setDest(NPC,"trade","shop"){_,node ->
+        setDest(IntType.NPC,"trade","shop"){ _, node ->
             val npc = node as NPC
             if (npc.getAttribute("facing_booth", false)) {
                 val offsetX = npc.direction.stepX shl 1

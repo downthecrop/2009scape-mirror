@@ -7,6 +7,7 @@ import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.world.GameWorld
 
 /**
@@ -17,7 +18,7 @@ class PickpocketSigmund : InteractionListener{
     val SIGMUND = NPCs.SIGMUND_2082
 
     override fun defineListeners() {
-        on(SIGMUND,NPC,"pickpocket"){player, node ->
+        on(SIGMUND, IntType.NPC, "pickpocket"){player, node ->
             player.lock()
             GameWorld.Pulser.submit(object : Pulse(){
                 var counter = 0

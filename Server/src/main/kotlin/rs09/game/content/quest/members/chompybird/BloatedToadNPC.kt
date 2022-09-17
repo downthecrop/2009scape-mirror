@@ -7,6 +7,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.Graphics
 
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.system.command.Privilege
 import core.plugin.Initializable
 import core.game.node.entity.npc.AbstractNPC
@@ -120,7 +121,7 @@ class BloatedToadListeners : InteractionListener, StartupListener, Commands {
   } 
 
   override fun defineListeners() {
-    on(Items.BLOATED_TOAD_2875, ITEM, "drop") {player, used ->
+    on(Items.BLOATED_TOAD_2875, IntType.ITEM, "drop") {player, used ->
       val quest = player.questRepository.getQuest("Big Chompy Bird Hunting")
       val inExtraBorder = extraBorders.filter { it.insideBorder(player) }.count() > 0
 
@@ -151,13 +152,13 @@ class BloatedToadListeners : InteractionListener, StartupListener, Commands {
       return@on true
     }
 
-    on(Items.BLOATED_TOAD_2875, ITEM, "release") { player, used ->
+    on(Items.BLOATED_TOAD_2875, IntType.ITEM, "release") { player, used ->
       removeItem(player, used.asItem())
       sendPlayerDialogue(player, "Free the fat toadsies!")
       return@on true
     }
 
-    on(Items.BLOATED_TOAD_2875, ITEM, "release all") { player, used ->
+    on(Items.BLOATED_TOAD_2875, IntType.ITEM, "release all") { player, used ->
       removeAll(player, used.asItem())
       sendPlayerDialogue(player, "Free the fat toadsies!")
       return@on true

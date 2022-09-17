@@ -16,6 +16,7 @@ import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 
 /**
@@ -58,7 +59,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
         val ENTRANCES = intArrayOf(16484, 16487, 16490, 16493) //All Scenery.AN_ANONYMOUS_LOOKING_DOOR_16484/etc
         val SARCOPHAGUS = Scenery.SARCOPHAGUS_16495
 
-        on(Scenery.SPEARTRAP_16517, SCENERY, "pass"){player, node ->
+        on(Scenery.SPEARTRAP_16517, IntType.SCENERY, "pass"){player, node ->
             val anim = Animation(CHECK_ANIM)
             val duration = animationDuration(anim)
 
@@ -108,7 +109,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
             return@on true
         }
 
-        on(intArrayOf(*SEALED_URNS, *SNAKE_URNS), SCENERY, "search") { player, node ->
+        on(intArrayOf(*SEALED_URNS, *SNAKE_URNS), IntType.SCENERY, "search") { player, node ->
             animate(player, URN_CHECK)
             player.faceLocation(node.location)
             lock(player, 1)
@@ -131,7 +132,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
             return@on true
         }
 
-        on(SEALED_URNS, SCENERY, "check for snakes") { player, node ->
+        on(SEALED_URNS, IntType.SCENERY, "check for snakes") { player, node ->
             val urn = node.asScenery()
             animate(player, URN_CHECK)
             player.faceLocation(node.location)
@@ -144,7 +145,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
             return@on true
         }
 
-        on(SNAKE_URNS, SCENERY, "charm snake") { player, node ->
+        on(SNAKE_URNS, IntType.SCENERY, "charm snake") { player, node ->
             if(!inInventory(player, Items.SNAKE_CHARM_4605))
             {
                 sendMessage(player, "You need a snake charm to charm a snake.")
@@ -160,7 +161,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
             return@on true
         }
 
-        on(CHARMED_SNAKES, SCENERY, "search") { player, node ->
+        on(CHARMED_SNAKES, IntType.SCENERY, "search") { player, node ->
             animate(player, URN_CHECK)
             player.faceLocation(node.location)
             lock(player, 1)
@@ -183,12 +184,12 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
             return@on true
         }
 
-        on(OPEN_URNS, SCENERY, "search") { player, _ ->
+        on(OPEN_URNS, IntType.SCENERY, "search") { player, _ ->
             sendMessage(player, "You've already looted this urn.")
             return@on true
         }
 
-        on(SARCOPHAGUS, SCENERY, "open") { player, node ->
+        on(SARCOPHAGUS, IntType.SCENERY, "open") { player, node ->
             sendMessage(player, "You attempt to push open the massive lid.")
             val strength = getDynLevel(player, Skills.STRENGTH)
             animate(player, PUSH_LID_START)
@@ -220,7 +221,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
             return@on true
         }
 
-        on(Scenery.GRAND_GOLD_CHEST_16473, SCENERY, "search") { player, node ->
+        on(Scenery.GRAND_GOLD_CHEST_16473, IntType.SCENERY, "search") { player, node ->
             animate(player, OPEN_CHEST_ANIM)
             runTask(player){
                 if(RandomFunction.roll(25))
@@ -242,7 +243,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
             return@on true
         }
 
-        on(Scenery.TOMB_DOOR_16475, SCENERY, "pick-lock") { player, node ->
+        on(Scenery.TOMB_DOOR_16475, IntType.SCENERY, "pick-lock") { player, node ->
             val anim = Animation(CHECK_ANIM)
             val duration = animationDuration(anim)
 
@@ -286,7 +287,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
             return@on true
         }
 
-        on(Scenery.TOMB_DOOR_16458, SCENERY, "leave tomb") { player, _ ->
+        on(Scenery.TOMB_DOOR_16458, IntType.SCENERY, "leave tomb") { player, _ ->
             openDialogue(player, object : DialogueFile()
             {
                 override fun handle(componentID: Int, buttonID: Int) {
@@ -310,7 +311,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
             return@on true
         }
 
-        on(ENTRANCES, SCENERY, "search") { player, door ->
+        on(ENTRANCES, IntType.SCENERY, "search") { player, door ->
             if(!getAttribute(player, "tarik-spoken-to", false))
             {
                 sendDialogue(player, "I should probably try to find out more about this place before I try to break in.")
@@ -343,12 +344,12 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
             return@on true
         }
 
-        on(Scenery.TOMB_DOOR_16459, SCENERY, "leave tomb") { player, _ ->
+        on(Scenery.TOMB_DOOR_16459, IntType.SCENERY, "leave tomb") { player, _ ->
             teleport(player, getAttribute(player, "pyramid-entrance", Location.create(3288, 2802, 0)))
             return@on true
         }
 
-        on(NPCs.GUARDIAN_MUMMY_4476, NPC, "start-minigame") { player, _ ->
+        on(NPCs.GUARDIAN_MUMMY_4476, IntType.NPC, "start-minigame") { player, _ ->
             if(!getAttribute(player, "pp:mummy-spoken-to", false))
             {
                 openDialogue(player, NPCs.GUARDIAN_MUMMY_4476)

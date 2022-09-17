@@ -16,12 +16,13 @@ import rs09.ServerStore.Companion.getInt
 import rs09.ServerStore.Companion.getString
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.world.GameWorld
 import rs09.tools.END_DIALOGUE
 
 class TrickOrTreatHandler : InteractionListener {
     override fun defineListeners() {
-        on(NPC, "trick-or-treat"){player, node ->
+        on(IntType.NPC, "trick-or-treat"){player, node ->
             val hasDone5 = getDailyTrickOrTreats(player) == 5
             val hasDoneMe = getTrickOrTreatedNPCs(player).contains(node.name.toLowerCase())
 

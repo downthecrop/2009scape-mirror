@@ -4,6 +4,7 @@ import api.openBankAccount
 import api.openGrandExchangeCollectionBox
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 /**
  * Handles Emerald Benedict's only available interaction.
@@ -12,12 +13,12 @@ import rs09.game.interaction.InteractionListener
  */
 class EmeraldBenedictListener : InteractionListener {
     override fun defineListeners() {
-        on(NPCs.EMERALD_BENEDICT_2271, NPC, "bank") { player, _ ->
+        on(NPCs.EMERALD_BENEDICT_2271, IntType.NPC, "bank") { player, _ ->
             openBankAccount(player)
             return@on true
         }
 
-        on(NPCs.EMERALD_BENEDICT_2271, NPC, "collect") { player, _ ->
+        on(NPCs.EMERALD_BENEDICT_2271, IntType.NPC, "collect") { player, _ ->
             openGrandExchangeCollectionBox(player)
             return@on true
         }

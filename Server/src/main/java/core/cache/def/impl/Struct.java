@@ -30,7 +30,7 @@ public class Struct {
 
     public int getInt(int key){
         if(!dataStore.containsKey(key)){
-            SystemLogger.logErr("Invalid value passed for key: " + key + " struct: " + id);
+            SystemLogger.logErr(this.getClass(), "Invalid value passed for key: " + key + " struct: " + id);
             return -1;
         }
         return (int) dataStore.get(key);

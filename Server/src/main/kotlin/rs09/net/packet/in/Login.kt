@@ -7,7 +7,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.PlayerDetails
 import core.game.node.entity.player.info.Rights
 import core.game.node.entity.player.info.UIDInfo
-import core.game.node.entity.player.info.login.LoginType
 import core.net.Constants
 import core.net.IoSession
 import core.tools.StringUtils
@@ -22,10 +21,8 @@ import rs09.ServerStore.Companion.getList
 import rs09.auth.AuthResponse
 import rs09.game.node.entity.player.info.login.LoginParser
 import rs09.game.system.SystemLogger
-import rs09.game.system.command.Privilege
 import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
-import rs09.worker.ManagementEvents
 import rs09.worker.ManagementEvents.publish
 import java.math.BigInteger
 import java.nio.BufferUnderflowException
@@ -50,7 +47,7 @@ object Login {
                 return Pair(AuthResponse.Updated, null)
             }
             if (info.opcode != NORMAL_LOGIN_OP && info.opcode != RECONNECT_LOGIN_OP) {
-                SystemLogger.logInfo("Invalid Login Opcode: ${info.opcode}")
+                SystemLogger.logInfo(this::class.java, "Invalid Login Opcode: ${info.opcode}")
                 return Pair(AuthResponse.InvalidLoginServer, null)
             }
 
@@ -87,7 +84,7 @@ object Login {
 
             return Pair(AuthResponse.Success, info)
         } catch (e: Exception) {
-            SystemLogger.logErr("Exception encountered during login packet parsing! See stack trace below.")
+            SystemLogger.logErr(this::class.java, "Exception encountered during login packet parsing! See stack trace below.")
             e.printStackTrace()
             return Pair(AuthResponse.UnexpectedError, null)
         }
@@ -155,7 +152,7 @@ object Login {
         }
         session.lastPing = System.currentTimeMillis()
         try {
-            LoginParser(player.details, LoginType.fromType(opcode)).initialize(player, opcode == RECONNECT_LOGIN_OP)
+            LoginParser(player.details).initialize(player, opcode == RECONNECT_LOGIN_OP)
             sendMSEvents(player.details)
         } catch (e: Exception) {
             e.printStackTrace()

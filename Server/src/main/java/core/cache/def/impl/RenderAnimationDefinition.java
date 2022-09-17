@@ -72,7 +72,7 @@ public class RenderAnimationDefinition {
 		if (data != null) {
 			defs.parse(ByteBuffer.wrap(data));
 		} else {
-			SystemLogger.logErr("No definitions found for render animation " + animId + ", size=" + Cache.getIndexes()[2].getFilesSize(32) + "!");
+			SystemLogger.logErr(RenderAnimationDefinition.class, "No definitions found for render animation " + animId + ", size=" + Cache.getIndexes()[2].getFilesSize(32) + "!");
 		}
 		return defs;
 	}

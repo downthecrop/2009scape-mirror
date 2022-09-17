@@ -1,7 +1,6 @@
 package core.game.content.quest.free.therestlessghost;
 
 import core.game.component.Component;
-import core.game.container.access.BitregisterAssembler;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.plugin.Initializable;

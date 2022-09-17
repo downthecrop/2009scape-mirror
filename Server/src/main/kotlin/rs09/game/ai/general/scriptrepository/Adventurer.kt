@@ -24,6 +24,7 @@ import org.json.simple.JSONObject
 import rs09.ServerConstants
 import rs09.game.ai.AIRepository
 import rs09.game.ai.pvmbots.CombatBotAssembler
+import rs09.game.interaction.IntType
 import rs09.game.interaction.InteractionListeners
 import java.io.File
 import java.io.FileReader
@@ -126,8 +127,9 @@ class Adventurer(val style: CombatStyle): Script() {
                     "Teak","Mahogany")
                 val resource = scriptAPI.getNearestNodeFromList(resources,true)
                 if(resource != null){
-                    if(resource.name.contains("ocks")) InteractionListeners.run(resource.id,1,"mine",bot,resource)
-                    else InteractionListeners.run(resource.id,1,"chop down",bot,resource)
+                    if(resource.name.contains("ocks")) InteractionListeners.run(resource.id,
+                        IntType.SCENERY,"mine",bot,resource)
+                    else InteractionListeners.run(resource.id,IntType.SCENERY,"chop down",bot,resource)
                 }
             }
         }

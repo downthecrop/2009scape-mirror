@@ -100,7 +100,7 @@ public final class QuestRepository {
         if(oldStage < stage) {
             quests.put(quest.getIndex(), stage);
         } else {
-            SystemLogger.logWarn(String.format("Nonmonotonic QuestRepository.setStage call for player \"%s\", quest \"%s\", old stage %d, new stage %d", player.getName(), quest.getName(), oldStage, stage));
+            SystemLogger.logWarn(this.getClass(), String.format("Nonmonotonic QuestRepository.setStage call for player \"%s\", quest \"%s\", old stage %d, new stage %d", player.getName(), quest.getName(), oldStage, stage));
         }
     }
 
@@ -204,7 +204,7 @@ public final class QuestRepository {
     public boolean isComplete(String name) {
         Quest quest = getQuest(name);
         if (quest == null) {
-            SystemLogger.logErr("Error can't check if quest is complete for " + name);
+            SystemLogger.logErr(this.getClass(), "Error can't check if quest is complete for " + name);
             return false;
         }
         return quest.getStage(player) >= 100;
@@ -219,7 +219,7 @@ public final class QuestRepository {
     public boolean hasStarted(String name) {
         Quest quest = getQuest(name);
         if (quest == null) {
-            SystemLogger.logErr("Error can't check if quest is complete for " + name);
+            SystemLogger.logErr(this.getClass(), "Error can't check if quest is complete for " + name);
             return false;
         }
         return quest.getStage(player) > 0;

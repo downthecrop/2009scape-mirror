@@ -12,11 +12,12 @@ import core.plugin.Plugin
 import core.game.content.quest.PluginInteraction
 import core.game.content.quest.PluginInteractionManager
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class PenguinSpyingHandler : InteractionListener{
 
     override fun defineListeners() {
-        on(PENGUINS, NPC, "spy-on"){player, node ->
+        on(PENGUINS, IntType.NPC, "spy-on"){player, node ->
             val npc = node.asNpc()
             if(PenguinManager.hasTagged(player, npc.location)){
                 player.sendMessage("You've already tagged this penguin.")

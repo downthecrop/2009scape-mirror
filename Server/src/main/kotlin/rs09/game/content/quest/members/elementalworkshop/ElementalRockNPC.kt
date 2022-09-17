@@ -12,6 +12,7 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 /**
  * Npc(s):
@@ -46,7 +47,7 @@ class ElementalRockNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id
     // The NPC stays in their upright form when the player
     // stops attacking and can walk around
     override fun defineListeners() {
-        on(ids, NPC, "Mine") { player, node ->
+        on(ids, IntType.NPC, "Mine") { player, node ->
             val tool: SkillingTool? = getTool(player, true)
             // Check to see if the player can proc the NPC
             if (tool == null) {

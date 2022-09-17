@@ -8,6 +8,7 @@ import org.rs09.consts.Animations
 import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.tools.END_DIALOGUE
 
 /**
@@ -16,7 +17,7 @@ import rs09.tools.END_DIALOGUE
 
 class AlKharidHealListener : InteractionListener {
     override fun defineListeners() {
-        on(getIds(), NPC, "heal") { player, node ->
+        on(getIds(), IntType.NPC, "heal") { player, node ->
             openDialogue(player, AlKharidHealDialogue(false), node.asNpc())
             return@on true
         }

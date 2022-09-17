@@ -18,12 +18,12 @@ object SpellListeners {
     }
 
     fun get(spellID: Int, type: Int, book: String): ((Player,Node?) -> Unit)?{
-        SystemLogger.logInfo("Getting $book:$spellID:$type")
+        SystemLogger.logInfo(this::class.java, "Getting $book:$spellID:$type")
         return castMap["$book:$spellID:$type"]
     }
 
     fun get(spellID: Int, type: Int, id: Int, book: String): ((Player,Node?) -> Unit)?{
-        SystemLogger.logInfo("Getting $book:$spellID:$type:$id")
+        SystemLogger.logInfo(this::class.java, "Getting $book:$spellID:$type:$id")
         return castMap["$book:$spellID:$type:$id"]
     }
 

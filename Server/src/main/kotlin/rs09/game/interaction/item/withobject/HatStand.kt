@@ -4,6 +4,7 @@ import api.*
 import api.EquipmentSlot
 import core.cache.def.impl.ItemDefinition
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.system.SystemLogger
 
 class HatStand : InteractionListener {
@@ -12,7 +13,7 @@ class HatStand : InteractionListener {
     val hat_stand = 374
 
     override fun defineListeners() {
-        onUseWith(SCENERY, hats, hat_stand){player, used, with ->
+        onUseWith(IntType.SCENERY, hats, hat_stand){player, used, with ->
             sendDialogue(player, "It'd probably fall off if I tried to do that.")
             return@onUseWith true
         }

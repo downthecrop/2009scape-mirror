@@ -69,7 +69,7 @@ class SpawnCommandSet : CommandSet(Privilege.ADMIN){
             }
             val `object` = if (args.size > 3) Scenery(CommandPlugin.toInteger(args[1]!!), player!!.location, CommandPlugin.toInteger(args[2]!!), CommandPlugin.toInteger(args[3]!!)) else if (args.size == 3) Scenery(CommandPlugin.toInteger(args[1]!!), player!!.location, CommandPlugin.toInteger(args[2]!!)) else Scenery(CommandPlugin.toInteger(args[1]!!), player!!.location)
             SceneryBuilder.add(`object`)
-            SystemLogger.logInfo("object = $`object`")
+            SystemLogger.logInfo(this::class.java, "object = $`object`")
         }
 
         define("objectgrid") { player, args ->

@@ -43,7 +43,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
         define("resetpassword", Privilege.STANDARD, "", "WARNING: Case insensitive due to dialogue limitations.") { player, args ->
             sendInputDialogue(player, InputType.STRING_SHORT, "Enter Current Password:"){value ->
                 val pass = value.toString()
-                SystemLogger.logInfo(pass)
+                SystemLogger.logInfo(this::class.java, pass)
                 runTask(player) {
                     if (GameWorld.authenticator.checkPassword(player, pass)) {
                         sendInputDialogue(player, InputType.STRING_SHORT, "Enter New Password:") { value2 ->

@@ -6,6 +6,7 @@ import core.game.content.activity.wguild.catapult.CatapultRoom
 import core.game.node.item.Item
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class WGuildListeners : InteractionListener {
     override fun defineListeners() {

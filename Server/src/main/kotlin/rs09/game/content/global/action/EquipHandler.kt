@@ -11,6 +11,7 @@ import core.game.node.entity.player.link.audio.Audio
 import rs09.game.node.entity.skill.slayer.SlayerEquipmentFlags
 import core.plugin.Plugin
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.interaction.InteractionListeners
 import rs09.game.system.config.ItemConfigParser
 
@@ -22,7 +23,7 @@ import rs09.game.system.config.ItemConfigParser
 class EquipHandler : InteractionListener {
 
     override fun defineListeners() {
-        on(ITEM, "equip", "wield", "wear") { player, node ->
+        on(IntType.ITEM, "equip", "wield", "wear") { player, node ->
             handleEquip(player, node)
             return@on true
         }

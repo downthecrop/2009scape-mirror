@@ -44,6 +44,7 @@ import rs09.game.content.activity.vinesweeper.Vinesweeper.Companion.populateSeed
 import rs09.game.content.activity.vinesweeper.Vinesweeper.Companion.scheduleNPCs
 import rs09.game.content.activity.vinesweeper.Vinesweeper.Companion.sendPoints
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.interaction.InterfaceListener
 import rs09.game.world.GameWorld
 import rs09.game.world.GameWorld.ticks
@@ -86,17 +87,17 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
 
     override fun defineListeners() {
         populateSeeds()
-        on(Sceneries.PORTAL_29534, SCENERY, "enter") { player, _ ->
+        on(Sceneries.PORTAL_29534, IntType.SCENERY, "enter") { player, _ ->
             val x = player.getAttribute("vinesweeper:return-tele:x", 3052)
             val y = player.getAttribute("vinesweeper:return-tele:y", 3304)
             teleport(player, Location(x, y))
             return@on true
         }
-        on(SIGNS, SCENERY, "read") { player, node ->
+        on(SIGNS, IntType.SCENERY, "read") { player, node ->
             player.interfaceManager.open(Component(INSTRUCTION_SIGNS[node.id]!!))
             return@on true
         }
-        on(HOLES, SCENERY, "dig") { player, node ->
+        on(HOLES, IntType.SCENERY, "dig") { player, node ->
             if(!player.inventory.contains(Items.SPADE_952, 1)) {
                 // TODO (crash): authenticity
                 player.sendMessage("You need a spade to dig here.")
@@ -106,12 +107,12 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
             }
             return@on true
         }
-        onUseWith(SCENERY,Items.SPADE_952,*HOLES) { player, _, with ->
+        onUseWith(IntType.SCENERY,Items.SPADE_952,*HOLES) { player, _, with ->
             player.visualize(Animation(Animations.HUMAN_VINESWEEPER_DIG_8709), Graphics(Gfx.VINESWEEPER_DIRT_DIG_1543))
             dig(player, with.location)
             return@onUseWith true
         }
-        on(HOLES, SCENERY, "flag") { player, node ->
+        on(HOLES, IntType.SCENERY, "flag") { player, node ->
             val hole = node as Scenery
             var count = 0
             if(player.location != node.location) {
@@ -135,12 +136,12 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
             })
             return@on true
         }
-        onUseWith(SCENERY,Items.FLAG_12625,*HOLES) { player, _, with ->
+        onUseWith(IntType.SCENERY,Items.FLAG_12625,*HOLES) { player, _, with ->
             val hole = with as Scenery
             plantFlag(player,hole)
             return@onUseWith true
         }
-        on(HOLES, SCENERY, "inspect") { player, node ->
+        on(HOLES, IntType.SCENERY, "inspect") { player, node ->
             player.animate(Animation(Animations.HUMAN_INSPECT_HOLE_8710))
             player.lock(5)
             GameWorld.Pulser.submit(object : Pulse(5) {
@@ -162,42 +163,42 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
             })
             return@on true
         }
-        on(NPCs.MRS_WINKIN_7132, NPC, "talk-to") { player, npc ->
+        on(NPCs.MRS_WINKIN_7132, IntType.NPC, "talk-to") { player, npc ->
             openDialogue(player, WinkinDialogue(), npc)
             return@on true
         }
-        on(NPCs.MRS_WINKIN_7132, NPC, "trade") { player, _ ->
+        on(NPCs.MRS_WINKIN_7132, IntType.NPC, "trade") { player, _ ->
             player.interfaceManager.open(Component(686))
             return@on true
         }
-        on(NPCs.MRS_WINKIN_7132, NPC, "buy flags") { player, npc ->
+        on(NPCs.MRS_WINKIN_7132, IntType.NPC, "buy flags") { player, npc ->
             val dialogue = WinkinDialogue()
             dialogue.stage = 20
             openDialogue(player, dialogue, npc)
             return@on true
         }
-        on(RABBITS, NPC, "feed") { player, node ->
+        on(RABBITS, IntType.NPC, "feed") { player, node ->
             val rabbit = node as NPC
             feedRabbit(player,rabbit)
             return@on true
         }
-        onUseWith(NPC,Items.OGLEROOT_12624,*RABBITS) { player, _, with ->
+        onUseWith(IntType.NPC,Items.OGLEROOT_12624,*RABBITS) { player, _, with ->
             val rabbit = with as NPC
             feedRabbit(player,rabbit)
             return@onUseWith true
         }
-        on(NPCs.FARMER_BLINKIN_7131, NPC, "talk-to") { player, npc ->
+        on(NPCs.FARMER_BLINKIN_7131, IntType.NPC, "talk-to") { player, npc ->
             //player.interfaceManager.open(Component(TUTORIAL))
             openDialogue(player, BlinkinDialogue(), npc)
             return@on true
         }
-        on(NPCs.FARMER_BLINKIN_7131, NPC, "buy-flags") { player, npc ->
+        on(NPCs.FARMER_BLINKIN_7131, IntType.NPC, "buy-flags") { player, npc ->
             val dialogue = BlinkinDialogue()
             dialogue.stage = 21
             openDialogue(player, dialogue, npc)
             return@on true
         }
-        on(NPCs.FARMER_BLINKIN_7131, NPC, "buy-roots") { player, npc ->
+        on(NPCs.FARMER_BLINKIN_7131, IntType.NPC, "buy-roots") { player, npc ->
             val dialogue = BlinkinDialogue()
             dialogue.stage = 40
             openDialogue(player, dialogue, npc)

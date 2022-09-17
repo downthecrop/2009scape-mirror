@@ -62,7 +62,7 @@ class PlayerSaver (val player: Player){
         val manager = ScriptEngineManager()
         val scriptEngine = manager.getEngineByName("JavaScript")
         if (scriptEngine == null) {
-            SystemLogger.logErr("Cannot save: Failed to load ScriptEngineManager, this is a known issue on non Java-11 versions. Set your Java version to 11 to avoid further bugs!")
+            SystemLogger.logErr(this::class.java, "Cannot save: Failed to load ScriptEngineManager, this is a known issue on non Java-11 versions. Set your Java version to 11 to avoid further bugs!")
             return@runBlocking
         }
         scriptEngine.put("jsonString", populate().toJSONString())
@@ -106,7 +106,7 @@ class PlayerSaver (val player: Player){
                     is Short -> "short"
                     is String -> "str"
                     is Byte -> "byte"
-                    else -> "null".also { SystemLogger.logWarn("Invalid attribute type for key: $key in PlayerSaver.kt Line 115") }
+                    else -> "null".also { SystemLogger.logWarn(this::class.java, "Invalid attribute type for key: $key in PlayerSaver.kt Line 115") }
                 }
                 attr.put("type",type)
                 attr.put("key",key)

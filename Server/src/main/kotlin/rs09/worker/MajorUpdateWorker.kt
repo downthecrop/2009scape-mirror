@@ -75,7 +75,7 @@ class MajorUpdateWorker {
             Thread.sleep(max(600 - (end - start), 0))
         }
 
-        SystemLogger.logInfo("Update worker stopped.")
+        SystemLogger.logInfo(this::class.java, "Update worker stopped.")
     }
 
     fun handleTickActions(skipPulseUpdate: Boolean = false) {

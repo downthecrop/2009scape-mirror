@@ -21,6 +21,7 @@ import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.DialogueBuilder
 import rs09.game.content.dialogue.DialogueBuilderFile
 import rs09.game.content.dialogue.DialogueFile
+import rs09.game.interaction.IntType
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InterfaceListener
 import rs09.game.world.GameWorld
@@ -370,21 +371,21 @@ class TheGolemListeners : InteractionListener {
     override fun defineDestinationOverrides() {
         addClimbDest(Location.create(3492, 3089, 0), Location.create(2722, 4886, 0))
         addClimbDest(Location.create(2721, 4884, 0), Location.create(3491, 3090, 0))
-        setDest(SCENERY, intArrayOf(34978), "climb-down") { _, _ -> return@setDest Location.create(3491, 3090, 0) }
-        setDest(SCENERY, intArrayOf(6372), "climb-up") { _, _ -> return@setDest Location.create(2722, 4886, 0) }
+        setDest(IntType.SCENERY, intArrayOf(34978), "climb-down") { _, _ -> return@setDest Location.create(3491, 3090, 0) }
+        setDest(IntType.SCENERY, intArrayOf(6372), "climb-up") { _, _ -> return@setDest Location.create(2722, 4886, 0) }
     }
 
     override fun defineListeners() {
-        onUseWith(NPC, Items.SOFT_CLAY_1761, 1907) { player, used, with -> return@onUseWith repairGolem(player) }
-        on(34978, SCENERY, "climb-down") { player, node -> ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_DOWN, SpecialLadders.getDestination(node.location)); return@on true }
-        on(6372, SCENERY, "climb-up") { player, node -> ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, SpecialLadders.getDestination(node.location)); return@on true }
-        on(4615, ITEM, "read") { player, node ->
+        onUseWith(IntType.NPC, Items.SOFT_CLAY_1761, 1907) { player, used, with -> return@onUseWith repairGolem(player) }
+        on(34978, IntType.SCENERY, "climb-down") { player, node -> ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_DOWN, SpecialLadders.getDestination(node.location)); return@on true }
+        on(6372, IntType.SCENERY, "climb-up") { player, node -> ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, SpecialLadders.getDestination(node.location)); return@on true }
+        on(4615, IntType.ITEM, "read") { player, node ->
             player.setAttribute("ifaces:220:lines", LETTER_LINES)
             player.setAttribute("/save:the-golem:read-elissa-letter", true)
             openInterface(player, 220)
             return@on true
         }
-        on(35226, SCENERY, "search") { player, node ->
+        on(35226, IntType.SCENERY, "search") { player, node ->
             player.packetDispatch.sendMessage("You search the bookcase.")
             val readLetter = player.getAttribute("the-golem:read-elissa-letter", false)
             if(!player.inventory.containsAtLeastOneItem(4616) && !player.bank.containsAtLeastOneItem(4616) && readLetter) {
@@ -395,8 +396,8 @@ class TheGolemListeners : InteractionListener {
             }
             return@on true
         }
-        on(6363, SCENERY, "open") { player, node -> player.sendMessage("The door doesn't open."); return@on true }
-        on(6364, SCENERY, "enter") { player, node ->
+        on(6363, IntType.SCENERY, "open") { player, node -> player.sendMessage("The door doesn't open."); return@on true }
+        on(6364, IntType.SCENERY, "enter") { player, node ->
             player.sendMessage("You step into the portal.")
             if(!player.getAttribute("the-golem:seen-demon", false)) {
                 player.sendMessage("The room is dominated by a colossal horned skeleton!")
@@ -406,24 +407,24 @@ class TheGolemListeners : InteractionListener {
             teleport(player, Location.create(3552, 4948, 0))
             return@on true
         }
-        on(6282, SCENERY, "enter") { player, node ->
+        on(6282, IntType.SCENERY, "enter") { player, node ->
             player.sendMessage("You step into the portal.")
             teleport(player, Location.create(2722, 4911, 0))
             return@on true
         }
-        onUseWith(SCENERY, Items.HAMMER_2347, 6301) { player, _, _ -> takeThroneGems(player); return@onUseWith true }
-        onUseWith(SCENERY, Items.CHISEL_1755, 6301) { player, _, _ -> takeThroneGems(player); return@onUseWith true }
-        on(646, NPC, "pickpocket") { player, node -> return@on pickpocketCurator(player, node) }
-        on(intArrayOf(24627, 24550), SCENERY, "study") { player, node -> return@on displayCase(player, node as Scenery) }
-        on(24627, SCENERY, "open") { player, node -> return@on openDisplayCase(player, node) }
-        onUseWith(SCENERY, 4618, 6309) { player, used, with -> return@onUseWith placeStatuette(player) }
-        on(intArrayOf(6307, 6308), SCENERY, "turn") { player, node -> turnStatuette(player, node as Scenery) }
-        onUseWith(ITEM, 233, 4620) { player, used, with -> return@onUseWith mortarOnMushroom(player) }
-        onUseWith(ITEM, 4621, 4622) { player, used, with -> return@onUseWith featherOnInk(player) }
-        onUseWith(ITEM, 970, 4623) { player, used, with -> return@onUseWith penOnPapyrus(player) }
-        onUseWith(NPC, 4619, 1907) { player, used, with -> return@onUseWith implementOnGolem(player) }
-        onUseWith(NPC, 4624, 1907) { player, used, with -> return@onUseWith programOnGolem(player, used, with) }
-        on(1911, NPC, "grab-feather") { player, node ->
+        onUseWith(IntType.SCENERY, Items.HAMMER_2347, 6301) { player, _, _ -> takeThroneGems(player); return@onUseWith true }
+        onUseWith(IntType.SCENERY, Items.CHISEL_1755, 6301) { player, _, _ -> takeThroneGems(player); return@onUseWith true }
+        on(646, IntType.NPC, "pickpocket") { player, node -> return@on pickpocketCurator(player, node) }
+        on(intArrayOf(24627, 24550), IntType.SCENERY, "study") { player, node -> return@on displayCase(player, node as Scenery) }
+        on(24627, IntType.SCENERY, "open") { player, node -> return@on openDisplayCase(player, node) }
+        onUseWith(IntType.SCENERY, 4618, 6309) { player, used, with -> return@onUseWith placeStatuette(player) }
+        on(intArrayOf(6307, 6308), IntType.SCENERY, "turn") { player, node -> turnStatuette(player, node as Scenery) }
+        onUseWith(IntType.ITEM, 233, 4620) { player, used, with -> return@onUseWith mortarOnMushroom(player) }
+        onUseWith(IntType.ITEM, 4621, 4622) { player, used, with -> return@onUseWith featherOnInk(player) }
+        onUseWith(IntType.ITEM, 970, 4623) { player, used, with -> return@onUseWith penOnPapyrus(player) }
+        onUseWith(IntType.NPC, 4619, 1907) { player, used, with -> return@onUseWith implementOnGolem(player) }
+        onUseWith(IntType.NPC, 4624, 1907) { player, used, with -> return@onUseWith programOnGolem(player, used, with) }
+        on(1911, IntType.NPC, "grab-feather") { player, node ->
             if(player.getAttribute("the-golem:varmen-notes-read", false)) {
                 player.lock()
                 GameWorld.Pulser.submit(object : Pulse(){

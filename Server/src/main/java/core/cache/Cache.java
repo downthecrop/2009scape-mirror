@@ -48,7 +48,7 @@ public final class Cache {
 	 * @throws Throwable When an exception occurs.
 	 */
 	public static void init(String path) throws Throwable {
-		SystemLogger.logInfo("Initializing cache...");
+		SystemLogger.logInfo(Cache.class, "Initializing cache...");
 		byte[] cacheFileBuffer = new byte[520];
 		RandomAccessFile containersInformFile = new RandomAccessFile(path + File.separator + "main_file_cache.idx255", "r");
 		RandomAccessFile dataFile = new RandomAccessFile(path + File.separator + "main_file_cache.dat2", "r");
@@ -61,7 +61,7 @@ public final class Cache {
 				CacheFile cacheFile = new CacheFile(i, new RandomAccessFile(f, "r"), dataFile, 1000000, cacheFileBuffer);
 				cacheFileManagers[i] = new CacheFileManager(cacheFile, true);
 				if (cacheFileManagers[i].getInformation() == null) {
-					SystemLogger.logErr("Error loading cache index " + i + ": no information.");
+					SystemLogger.logErr(Cache.class, "Error loading cache index " + i + ": no information.");
 					cacheFileManagers[i] = null;
 				}
 			}
@@ -93,7 +93,7 @@ public final class Cache {
 	public static ByteBuffer getArchiveData(int index, int archive, boolean priority, int encryptionValue) {
 		byte[] data = index == 255 ? referenceFile.getContainerData(archive) : cacheFileManagers[index].getCacheFile().getContainerData(archive);
 		if (data == null || data.length < 1) {
-			SystemLogger.logErr("Invalid JS-5 request - " + index + ", " + archive + ", " + priority + ", " + encryptionValue + "!");
+			SystemLogger.logErr(Cache.class, "Invalid JS-5 request - " + index + ", " + archive + ", " + priority + ", " + encryptionValue + "!");
 			return null;
 		}
 		int compression = data[0] & 0xff;

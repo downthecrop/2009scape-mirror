@@ -6,6 +6,7 @@ import rs09.tools.stringtools.colorize
 import org.rs09.consts.Items
 
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import core.game.node.entity.player.Player
 
 import java.util.*

@@ -295,11 +295,11 @@ class FishingTrawlerSession(val activity: FishingTrawlerActivity? = null) : Logo
 
     override fun areaEnter(entity: Entity) {
         super.areaEnter(entity)
-        SystemLogger.logInfo("ENTERED FTZ")
+        SystemLogger.logInfo(this::class.java, "ENTERED FTZ")
     }
 
     override fun areaLeave(entity: Entity, logout: Boolean) {
         super.areaLeave(entity, logout)
-        SystemLogger.logInfo("EXITED FTZ")
+        SystemLogger.logInfo(this::class.java, "EXITED FTZ")
     }
 }

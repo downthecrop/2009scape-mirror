@@ -8,6 +8,7 @@ import core.game.node.entity.player.link.TeleportManager.TeleportType
 import core.game.world.map.Location
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 /**
  * Handles interactions with fairy rings
@@ -22,17 +23,17 @@ class FairyRingPlugin : InteractionListener {
 
     override fun defineListeners() {
 
-        on(RINGS,SCENERY,"use"){ player, _ ->
+        on(RINGS, IntType.SCENERY, "use"){ player, _ ->
             if (!fairyMagic(player)) return@on true
             player.teleporter.send(Location.create(2412, 4434, 0), TeleportType.FAIRY_RING)
             return@on true
         }
-        on(MAIN_RING,SCENERY,"use"){ player, _ ->
+        on(MAIN_RING, IntType.SCENERY, "use"){ player, _ ->
             if (!fairyMagic(player)) return@on true
             openFairyRing(player)
             return@on true
         }
-        on(ENTRY_RING,SCENERY,"use") { player, _ ->
+        on(ENTRY_RING, IntType.SCENERY, "use") { player, _ ->
             if (!fairyMagic(player)) return@on true
             player.teleporter.send(Location.create(3203, 3168, 0), TeleportType.FAIRY_RING)
             return@on true

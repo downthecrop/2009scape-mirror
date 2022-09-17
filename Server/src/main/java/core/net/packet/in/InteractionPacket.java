@@ -23,6 +23,7 @@ import core.net.packet.context.PlayerContext;
 import core.net.packet.out.ClearMinimapFlag;
 import rs09.ServerConstants;
 import rs09.game.ai.AIPlayer;
+import rs09.game.interaction.IntType;
 import rs09.game.interaction.InteractionListener;
 import rs09.game.interaction.InteractionListeners;
 import rs09.game.world.repository.Repository;
@@ -196,7 +197,7 @@ public final class InteractionPacket implements IncomingPacket {
 		player.debug("spawn=" + npc.getProperties().getSpawnLocation() + ".");
 		player.debug("Varp ID= " + npc.getDefinition().getConfigId() + " Offset=" + npc.getDefinition().getVarbitOffset() + " Size=" + npc.getDefinition().getVarbitSize());
 		handleAIPLegion(player, 0, optionIndex, index);
-		if(InteractionListeners.run(shown.getId(),2, option.getName(),player,npc)){
+		if(InteractionListeners.run(shown.getId(),IntType.NPC, option.getName(),player,npc)){
 			return;
 		}
 		if(PluginInteractionManager.handle(player,shown,option)){
@@ -288,7 +289,7 @@ public final class InteractionPacket implements IncomingPacket {
 		}
 		handleAIPLegion(player, 1, optionIndex, x, y, objectId);
 
-		if(InteractionListeners.run(object.getId(),1, option.getName(),player,object)){
+		if(InteractionListeners.run(object.getId(), IntType.SCENERY, option.getName(),player,object)){
 			return;
 		}
 		if(PluginInteractionManager.handle(player,object)){
@@ -320,7 +321,7 @@ public final class InteractionPacket implements IncomingPacket {
 			return;
 		}
 
-		if (!InteractionListeners.run(-1, InteractionListener.Companion.getPLAYER(), option.getName().toLowerCase(), player, target)) {
+		if (!InteractionListeners.run(-1, IntType.PLAYER, option.getName().toLowerCase(), player, target)) {
 			handleAIPLegion(player, 2, optionIndex, index);
 			target.getInteraction().handle(player, option);
 		}
@@ -357,10 +358,10 @@ public final class InteractionPacket implements IncomingPacket {
 			player.debug("Handled by quest interaction manager.");
 			return;
 		}
-		if(InteractionListeners.run(item.getId(), InteractionListener.Companion.getGROUNDITEM(), option.getName(), player, item)) {
+		if(InteractionListeners.run(item.getId(), IntType.GROUNDITEM, option.getName(), player, item)) {
 			return;
         }
-		if(InteractionListeners.run(item.getId(), InteractionListener.Companion.getITEM(), option.getName(), player, item)) {
+		if(InteractionListeners.run(item.getId(), IntType.ITEM, option.getName(), player, item)) {
 			return;
         }
 		item.getInteraction().handle(player, option);

@@ -7,6 +7,7 @@ import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 /**
  * Handles the muddy chest
@@ -18,7 +19,7 @@ class MuddyChestHandler : InteractionListener {
 
     override fun defineListeners() {
 
-        on(CHEST,SCENERY,"open"){ player, node ->
+        on(CHEST, IntType.SCENERY, "open"){ player, node ->
             val key = Item(Items.MUDDY_KEY_991)
             if(player.inventory.containsItem(key)){
                 player.inventory.remove(key)

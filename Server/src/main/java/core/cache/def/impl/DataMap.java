@@ -40,7 +40,7 @@ public class DataMap {
 
     public int getInt(int key){
         if(!dataStore.containsKey(key)){
-            SystemLogger.logErr("Invalid value passed for key: " + key + " map: " + id);
+            SystemLogger.logErr(this.getClass(), "Invalid value passed for key: " + key + " map: " + id);
             return -1;
         }
         return (int) dataStore.get(key);

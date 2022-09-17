@@ -8,6 +8,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.tools.END_DIALOGUE
 
 /**
@@ -16,7 +17,7 @@ import rs09.tools.END_DIALOGUE
 
 class AliTheLeafletDropperListener : InteractionListener {
     override fun defineListeners() {
-        on(NPCs.ALI_THE_LEAFLET_DROPPER_3680, NPC, "Take-flyer") { player, node ->
+        on(NPCs.ALI_THE_LEAFLET_DROPPER_3680, IntType.NPC, "Take-flyer") { player, node ->
             if(player.inventory.containItems(Items.AL_KHARID_FLYER_7922)) {
                 openDialogue(player, DropperDialogue(2), node as NPC)
             } else {

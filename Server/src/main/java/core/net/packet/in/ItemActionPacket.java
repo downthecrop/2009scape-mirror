@@ -16,6 +16,7 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.PlayerContext;
 import core.net.packet.out.ClearMinimapFlag;
 import org.rs09.consts.Items;
+import rs09.game.interaction.IntType;
 import rs09.game.interaction.InteractionListeners;
 import rs09.game.node.entity.skill.farming.CompostBins;
 import rs09.game.node.entity.skill.farming.FarmingPatch;
@@ -69,7 +70,7 @@ public class ItemActionPacket implements IncomingPacket {
 			if(PluginInteractionManager.handle(player,event)){
 				return;
 			}
-			if(InteractionListeners.run(item,npc,2,player)){
+			if(InteractionListeners.run(item,npc,IntType.NPC,player)){
 				return;
 			}
 			if(player.getZoneMonitor().useWith(used,npc)){
@@ -100,7 +101,7 @@ public class ItemActionPacket implements IncomingPacket {
 			if(PluginInteractionManager.handle(player,event)){
 				return;
 			}
-			if(InteractionListeners.run(item, target, 4, player)){
+			if(InteractionListeners.run(item, target, IntType.PLAYER, player)){
 				return;
 			}
 			if(player.getZoneMonitor().useWith(used,player)){
@@ -137,7 +138,7 @@ public class ItemActionPacket implements IncomingPacket {
 				RottenPotatoUseWithHandler.handle(used,player);
 				return;
 			}
-			if(InteractionListeners.run(used,with,0,player)){
+			if(InteractionListeners.run(used,with,IntType.ITEM,player)){
 				return;
 			}
 			if(player.getZoneMonitor().useWith(used,with)){
@@ -185,10 +186,10 @@ public class ItemActionPacket implements IncomingPacket {
 				RottenPotatoUseWithHandler.handle(object,player);
 				return;
 			}
-			if(InteractionListeners.run(used,child,1,player)){
+			if(InteractionListeners.run(used,child,IntType.SCENERY,player)){
 				return;
 			}
-			if(InteractionListeners.run(used,object,1,player)){
+			if(InteractionListeners.run(used,object,IntType.SCENERY,player)){
 				return;
 			}
 			if(player.getZoneMonitor().useWith(used,object)){
@@ -239,7 +240,7 @@ public class ItemActionPacket implements IncomingPacket {
 			}
 			return;
 		default:
-			SystemLogger.logErr("Error in Item Action Packet! Unhandled opcode = " + buffer.opcode());
+			SystemLogger.logErr(this.getClass(), "Error in Item Action Packet! Unhandled opcode = " + buffer.opcode());
 			return;
 		}
 	}

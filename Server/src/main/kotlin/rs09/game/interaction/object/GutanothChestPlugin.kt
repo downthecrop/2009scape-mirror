@@ -10,6 +10,7 @@ import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.world.GameWorld
 import java.util.concurrent.TimeUnit
 
@@ -18,7 +19,7 @@ class GutanothChestInteractionHandler : InteractionListener{
 
     override fun defineListeners() {
 
-        on(CHEST,SCENERY,"open"){ player, node ->
+        on(CHEST, IntType.SCENERY, "open"){ player, node ->
             val delay = player.getAttribute("gutanoth-chest-delay", 0L)
             GameWorld.Pulser.submit(ChestPulse(player,System.currentTimeMillis() > delay, node as Scenery))
             return@on true

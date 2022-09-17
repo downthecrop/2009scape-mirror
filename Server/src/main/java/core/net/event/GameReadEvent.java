@@ -97,9 +97,9 @@ public final class GameReadEvent extends IoReadEvent {
 			IncomingPacket packet = PacketRepository.getIncoming(opcode);
 			session.setLastPing(System.currentTimeMillis());
 			if (packet == null) {
-				SystemLogger.logErr("Unhandled packet [opcode=" + opcode + ", previous=" + last + ", size=" + size + ", header=" + header + "]");
+				SystemLogger.logErr(this.getClass(), "Unhandled packet [opcode=" + opcode + ", previous=" + last + ", size=" + size + ", header=" + header + "]");
 				if (GameWorld.getSettings().isDevMode()) {
-					SystemLogger.logErr("Unhandled packet [opcode=" + opcode + ", previous=" + last + ", size=" + size + ", header=" + header + "]");
+					SystemLogger.logErr(this.getClass(), "Unhandled packet [opcode=" + opcode + ", previous=" + last + ", size=" + size + ", header=" + header + "]");
 				}
 				continue;
 			}
@@ -139,7 +139,7 @@ public final class GameReadEvent extends IoReadEvent {
 		if(header == -3){
 			System.out.println(buffer.remaining());
 		}
-		SystemLogger.logErr("Invalid packet [opcode=" + opcode + ", last=" + last + ", queued=" + usedQueuedBuffer + "], header=" + header+"!");
+		SystemLogger.logErr(this.getClass(), "Invalid packet [opcode=" + opcode + ", last=" + last + ", queued=" + usedQueuedBuffer + "], header=" + header+"!");
 		return -1;
 	}
 

@@ -63,7 +63,7 @@ public abstract class AbstractNPC extends NPC implements Plugin<Object> {
 			if (mapping.containsKey(id)) {
 				String name = mapping.get(id).getClass().getSimpleName();
 				if (name != getClass().getSimpleName()) {
-					SystemLogger.logErr("[" + getClass().getSimpleName() + "] - Warning: Mapping already contained NPC id " + id + "! (" + name + ")");
+					SystemLogger.logErr(this.getClass(), "[" + getClass().getSimpleName() + "] - Warning: Mapping already contained NPC id " + id + "! (" + name + ")");
 					continue;
 				}
 			}

@@ -579,7 +579,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 			face(owner);
 		}
 		if (!isRenderable() && owner.isActive()) {
-			// SystemLogger.logErr("Familiar in inactive region!");
+			// SystemLogger.logErr(this.getClass(), "Familiar in inactive region!");
 			getWalkingQueue().update();
 			getUpdateMasks().prepare(this);
 		}
@@ -628,7 +628,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		for (int id : getIds()) {
 			if (FamiliarManager.getFamiliars().containsKey(id)) {
-				SystemLogger.logErr("Familiar " + id + " was already registered!");
+				SystemLogger.logErr(this.getClass(), "Familiar " + id + " was already registered!");
 				return null;
 			}
 			FamiliarManager.getFamiliars().put(id, this);

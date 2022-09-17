@@ -1,24 +1,19 @@
 package core.game.interaction.item
 
-import api.*
-import core.Util
-import core.cache.def.impl.ItemDefinition
-import core.plugin.Initializable
-import core.game.interaction.OptionHandler
-import core.plugin.Plugin
-import core.game.node.entity.skill.Skills
-import core.game.interaction.item.ExplorersRingPlugin
-import core.game.node.Node
+import api.hasLevelStat
+import api.sendMessage
+import api.teleport
+import api.visualize
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager.TeleportType
+import core.game.node.entity.skill.Skills
 import core.game.world.map.Location
-import core.game.world.update.flag.context.Animation
-import core.game.world.update.flag.context.Graphics
 import org.json.simple.JSONObject
 import org.rs09.consts.Items
 import rs09.ServerStore
 import rs09.ServerStore.Companion.getBoolean
 import rs09.ServerStore.Companion.getInt
+import rs09.game.interaction.IntType
 import rs09.game.interaction.InteractionListener
 
 /**
@@ -33,7 +28,7 @@ class ExplorersRingPlugin : InteractionListener {
 
 
     override fun defineListeners() {
-        on(RINGS, ITEM, "run-replenish"){player, node ->
+        on(RINGS, IntType.ITEM, "run-replenish"){player, node ->
             val charges = getStoreFile().getInt(player.username.toLowerCase() + ":run")
             if (charges >= getRingLevel(node.id)) {
                 sendMessage(player,"You have used all the charges you can for one day.")
@@ -49,7 +44,7 @@ class ExplorersRingPlugin : InteractionListener {
             return@on true
         }
 
-        on(RINGS, ITEM, "low-alchemy"){player, _ ->
+        on(RINGS, IntType.ITEM, "low-alchemy"){player, _ ->
             if (!hasLevelStat(player, Skills.MAGIC, 21)) {
                 sendMessage(player,"You need a Magic level of 21 in order to do that.")
                 return@on true
@@ -65,12 +60,12 @@ class ExplorersRingPlugin : InteractionListener {
             return@on true
         }
 
-        on(RINGS, ITEM, "cabbage-port"){player, node ->
+        on(RINGS, IntType.ITEM, "cabbage-port"){player, node ->
             teleport(player)
             return@on true
         }
 
-        on(RINGS, ITEM, "operate", "rub"){player, node ->
+        on(RINGS, IntType.ITEM, "operate", "rub"){player, node ->
             if(getRingLevel(node.id) < 3){
                 sendMessage(player, "This item can not be operated.")
                 return@on true

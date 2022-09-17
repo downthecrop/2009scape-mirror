@@ -16,6 +16,7 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.world.GameWorld
 import api.*
 
@@ -33,7 +34,7 @@ private const val LAUNCH_ANIMATION = 4547
 class GrandSeedPodHandler : InteractionListener {
 
     override fun defineListeners() {
-        on(Items.GRAND_SEED_POD_9469, ITEM, "squash", "launch"){player, _ ->
+        on(Items.GRAND_SEED_POD_9469, IntType.ITEM, "squash", "launch"){player, _ ->
             when(getUsedOption(player)){
                 "launch" -> submitWorldPulse(LaunchPulse(player))
                 "squash" -> submitWorldPulse(SquashPulse(player))

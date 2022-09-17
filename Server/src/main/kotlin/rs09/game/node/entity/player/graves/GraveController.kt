@@ -17,6 +17,7 @@ import org.json.simple.JSONObject
 import org.rs09.consts.Items
 import rs09.ServerStore
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.system.command.Privilege
 import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
@@ -28,10 +29,10 @@ import kotlin.math.min
 
 class GraveController : PersistWorld, TickListener, InteractionListener, Commands {
     override fun defineListeners() {
-        on(GraveType.ids, NPC, "read", handler = this::onGraveReadOption)
-        on(GraveType.ids, NPC, "bless", handler = this::onGraveBlessed)
-        on(GraveType.ids, NPC, "repair", handler = this::onGraveRepaired)
-        on(GraveType.ids, NPC, "demolish", handler = this::onGraveDemolished)
+        on(GraveType.ids, IntType.NPC, "read", handler = this::onGraveReadOption)
+        on(GraveType.ids, IntType.NPC, "bless", handler = this::onGraveBlessed)
+        on(GraveType.ids, IntType.NPC, "repair", handler = this::onGraveRepaired)
+        on(GraveType.ids, IntType.NPC, "demolish", handler = this::onGraveDemolished)
     }
 
     override fun defineCommands() {
@@ -84,8 +85,8 @@ class GraveController : PersistWorld, TickListener, InteractionListener, Command
         openInterface(player, 266)
         setInterfaceText(player, grave.retrieveFormattedText(), 266, 23)
 
+        sendMessage(player, "It looks like it'll survive another ${grave.getFormattedTimeRemaining()}.")
         if (player.details.uid == grave.ownerUid) {
-            sendMessage(player, "It looks like it'll survive another ${grave.getFormattedTimeRemaining()}.")
             sendMessage(player, "Isn't there something a bit odd about reading your own gravestone?")
         }
         return true

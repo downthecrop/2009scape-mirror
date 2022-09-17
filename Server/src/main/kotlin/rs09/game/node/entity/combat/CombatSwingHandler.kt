@@ -190,7 +190,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
         val block = floor(101 - ratio)
         val acc = Math.random() * accuracy
         val def = Math.random() * block
-        return (acc > def).also { if(entity?.username?.toLowerCase() == "test10") SystemLogger.logInfo("Should hit: $it") }
+        return (acc > def).also { if(entity?.username?.toLowerCase() == "test10") SystemLogger.logInfo(this::class.java, "Should hit: $it") }
     }
 
     /**
@@ -604,7 +604,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
             specialHandlers = HashMap()
         }
         if (specialHandlers!!.containsKey(itemId)) {
-            SystemLogger.logErr("Already contained special attack handler for item " + itemId + " - [old=" + specialHandlers!![itemId]!!::class.java.simpleName + ", new=" + handler.javaClass.simpleName + "].")
+            SystemLogger.logErr(this::class.java, "Already contained special attack handler for item " + itemId + " - [old=" + specialHandlers!![itemId]!!::class.java.simpleName + ", new=" + handler.javaClass.simpleName + "].")
             return false
         }
         return specialHandlers!!.put(itemId, handler) == null

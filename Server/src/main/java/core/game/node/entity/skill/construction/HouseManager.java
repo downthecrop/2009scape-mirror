@@ -323,7 +323,7 @@ public final class HouseManager {
 	 */
 	public Location getEnterLocation() {
 		if (houseRegion == null) {
-			SystemLogger.logErr("House wasn't constructed yet!");
+			SystemLogger.logErr(this.getClass(), "House wasn't constructed yet!");
 			return null;
 		}
 		for (int x = 0; x < 8; x++) {

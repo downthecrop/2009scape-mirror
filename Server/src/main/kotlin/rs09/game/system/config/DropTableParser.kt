@@ -30,7 +30,7 @@ class DropTableParser {
                 count++
             }
         }
-        SystemLogger.logInfo("Parsed $count drop tables.")
+        SystemLogger.logInfo(this::class.java, "Parsed $count drop tables.")
     }
 
     private fun parseTable(data: JSONArray, destTable: NPCDropTable, isAlways: Boolean, isCharms: Boolean = false) {

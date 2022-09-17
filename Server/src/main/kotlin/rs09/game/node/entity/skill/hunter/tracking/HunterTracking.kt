@@ -50,7 +50,7 @@ abstract class HunterTracking : OptionHandler(){
         val trail = player.getAttribute(attribute, ArrayList<TrailDefinition>())
         val initialTrail = getInitialTrail(startobj)
         if(initialTrail == null) {
-            SystemLogger.logWarn("UNHANDLED STARTING OBJECT FOR HUNTER TRACKING $startobj")
+            SystemLogger.logWarn(this::class.java, "UNHANDLED STARTING OBJECT FOR HUNTER TRACKING $startobj")
             return
         }
         trail.add(initialTrail)

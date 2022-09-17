@@ -7,6 +7,7 @@ import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.region.examcentre.ArchaeologistcalExpertUsedOnDialogueFile
 import rs09.game.content.dialogue.region.examcentre.ZooknockDialogueFile
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 open class ZooknockListener() : InteractionListener {
     val goldBar = Items.GOLD_BAR_2357
@@ -21,7 +22,7 @@ open class ZooknockListener() : InteractionListener {
     val lol = arrayOf(Items)
 
     override fun defineListeners() {
-        onUseWith(NPC, items, zooknock) {
+        onUseWith(IntType.NPC, items, zooknock) {
                 player, used, with -> openDialogue(player, ZooknockDialogueFile(used.id))
             return@onUseWith false
         }

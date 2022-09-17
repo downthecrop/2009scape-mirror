@@ -6,6 +6,7 @@ import core.game.node.item.GroundItemManager
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class EasterEventListeners : InteractionListener {
 
@@ -14,7 +15,7 @@ class EasterEventListeners : InteractionListener {
 
     override fun defineListeners() {
 
-        on(eggs,ITEM,"take"){player, node ->
+        on(eggs, IntType.ITEM, "take"){player, node ->
             player.pulseManager.run(object : MovementPulse(player,node, DestinationFlag.ITEM){
                 override fun pulse(): Boolean {
                     if(player.inventory.contains(Items.BASKET_OF_EGGS_4565,1) || player.equipment.contains(Items.BASKET_OF_EGGS_4565,1)){
@@ -31,13 +32,13 @@ class EasterEventListeners : InteractionListener {
             return@on true
         }
 
-        on(Items.BASKET_OF_EGGS_4565,ITEM,"operate"){player, node ->
+        on(Items.BASKET_OF_EGGS_4565, IntType.ITEM, "operate"){player, node ->
             val numEggs = player.getAttribute<Int>(EGG_ATTRIBUTE) ?: 0
             player.dialogueInterpreter.sendDialogue("You have $numEggs eggs in the basket.")
             return@on true
         }
 
-        on(NPCs.EASTER_BUNNY_7197,NPC,"talk-to"){player, node ->
+        on(NPCs.EASTER_BUNNY_7197, IntType.NPC, "talk-to"){player, node ->
             val npc = node.asNpc()
             npc.faceLocation(player.location)
             val NEED_BASKET = !(player!!.inventory.contains(Items.BASKET_OF_EGGS_4565,1) || player!!.equipment.contains(Items.BASKET_OF_EGGS_4565,1) || player!!.bank.contains(Items.BASKET_OF_EGGS_4565,1))

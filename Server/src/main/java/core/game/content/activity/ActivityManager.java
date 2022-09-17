@@ -50,7 +50,7 @@ public final class ActivityManager {
 		ActivityPlugin plugin = ACTIVITIES.get(name);
 		if (plugin == null) {
 			if (GameWorld.getSettings().isDevMode()) {
-				SystemLogger.logErr("Unhandled activity - " + name + "!");
+				SystemLogger.logErr(ActivityManager.class, "Unhandled activity - " + name + "!");
 			}
 			return false;
 		}

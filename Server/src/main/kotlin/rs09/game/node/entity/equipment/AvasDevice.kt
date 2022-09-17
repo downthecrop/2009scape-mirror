@@ -9,6 +9,7 @@ import core.game.node.entity.player.Player
 import org.rs09.consts.Items
 import rs09.game.Event
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.system.config.ItemConfigParser
 import rs09.tools.secondsToTicks
 import rs09.tools.stringtools.colorize
@@ -36,7 +37,7 @@ class AvasDevice : InteractionListener, EventHook<TickEvent> {
                 player.unhook(this)
             return@onUnequip true
         }
-        on(devices, ITEM, "operate") { player, _ ->
+        on(devices, IntType.ITEM, "operate") { player, _ ->
             val attract = !attractEnabled(player)
             setAttribute(player, ATTRACT_ENABLED, attract)
             sendMessage(

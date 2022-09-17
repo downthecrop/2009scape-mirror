@@ -120,7 +120,7 @@ class FamilyCrest: Quest("Family Crest", 59, 58, 1, 148, 0, 1, 11) {
         drawReward(player,"for the gauntlets",ln++)
 
         if (!addItem(player, Items.FAMILY_GAUNTLETS_778)) {
-            SystemLogger.logErr("Failed to give gauntlets to ${player.username} at end of quest, this should not occur due to crest item removal needed to finish quest.")
+            SystemLogger.logErr(this::class.java, "Failed to give gauntlets to ${player.username} at end of quest, this should not occur due to crest item removal needed to finish quest.")
         }
         setAttribute(player, "/save:family-crest:gauntlets", Items.FAMILY_GAUNTLETS_778)
     }

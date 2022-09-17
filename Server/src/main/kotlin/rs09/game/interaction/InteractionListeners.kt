@@ -23,8 +23,15 @@ object InteractionListeners {
     fun add(id: Int, type: Int, option: Array<out String>, method: (Player,Node) -> Boolean){
         for(opt in option) {
             val key = "$id:$type:${opt.toLowerCase()}"
+            if (!validate(key)) {
+                throw IllegalStateException("$opt for $id with type ${IntType.values()[type].name} already defined! Existing use: [${listeners[key]!!::class.toString()}]")
+            }
             listeners[key] = method
         }
+    }
+
+    private fun validate(key: String): Boolean {
+        return !listeners.containsKey(key) && !useWithListeners.containsKey(key)
     }
 
     @JvmStatic
@@ -37,6 +44,9 @@ object InteractionListeners {
     @JvmStatic
     fun add(option: String,type: Int, method: (Player,Node) -> Boolean){
         val key = "$type:${option.toLowerCase()}"
+        if (!validate(key)) {
+            throw IllegalStateException("Catchall listener for $option on type ${IntType.values()[type].name} already in use: ${listeners[key]!!::class}")
+        }
         listeners[key] = method
     }
 
@@ -49,13 +59,18 @@ object InteractionListeners {
 
     @JvmStatic
     fun add(used: Int, with: Int, type: Int, method: (Player,Node,Node) -> Boolean){
-        useWithListeners["$used:$with:$type"] = method
+        val key = "$used:$with:$type"
+        val altKey = "$with:$used:$type"
+        if (!validate(key) || !validate(altKey)) {
+            throw IllegalStateException("Usewith using $used with $with for type ${IntType.values()[type]} already in use: [${(useWithListeners[key] ?: useWithListeners[altKey])!!::class}")
+        }
+        useWithListeners[key] = method
     }
 
     @JvmStatic
     fun add(type: Int, used: Int, with: IntArray, method: (Player, Node, Node) -> Boolean){
         for(id in with){
-            useWithListeners["$used:$id:$type"] = method
+            add(used = used, with = id, type = type, method = method)
         }
     }
 
@@ -159,11 +174,10 @@ object InteractionListeners {
     }
 
     @JvmStatic
-    fun run(used: Node, with: Node, type: Int,player: Player): Boolean{
-        player.debug("InteractionListeners.run(${used.id}, ${with.id}, ${type}, _)")
+    fun run(used: Node, with: Node, type: IntType, player: Player): Boolean{
         val flag = when(type){
-            2, 4 -> DestinationFlag.ENTITY
-            1 -> DestinationFlag.OBJECT
+            IntType.NPC, IntType.PLAYER -> DestinationFlag.ENTITY
+            IntType.SCENERY -> DestinationFlag.OBJECT
             else -> DestinationFlag.OBJECT
         }
 
@@ -172,19 +186,19 @@ object InteractionListeners {
         var flipped = false
 
         val method = if (with is Player) get(-1, used.id, 4) ?: return false
-                     else get(used.id,with.id,type) ?:
-                     if (type == InteractionListener.ITEM)
-                         get(with.id,used.id,type).also { flipped = true } ?: return false
+                     else get(used.id,with.id,type.ordinal) ?:
+                     if (type == IntType.ITEM)
+                         get(with.id,used.id,type.ordinal).also { flipped = true } ?: return false
                      else return false
 
         val destOverride = if(flipped) {
-            getOverride(type, used.id, "use") ?: getOverride(type, with.id) ?: getOverride(type, "use")
+            getOverride(type.ordinal, used.id, "use") ?: getOverride(type.ordinal, with.id) ?: getOverride(type.ordinal, "use")
         } else {
-            getOverride(type, with.id, "use") ?: getOverride(type, used.id) ?: getOverride(type, "use")
+            getOverride(type.ordinal, with.id, "use") ?: getOverride(type.ordinal, used.id) ?: getOverride(type.ordinal, "use")
         }
 
 
-        if(type != 0 && !isUseWithInstant(method)) {
+        if(type != IntType.ITEM && !isUseWithInstant(method)) {
             if(player.locks.isMovementLocked) return false
             player.pulseManager.run(object : MovementPulse(player, with, flag, destOverride) {
                 override fun pulse(): Boolean {
@@ -209,19 +223,19 @@ object InteractionListeners {
     }
 
     @JvmStatic
-    fun run(id: Int, type: Int, option: String, player: Player, node: Node): Boolean{
+    fun run(id: Int, type: IntType, option: String, player: Player, node: Node): Boolean{
         val flag = when(type){
-            4 -> DestinationFlag.ENTITY
-            3 -> DestinationFlag.ITEM
-            2 -> DestinationFlag.ENTITY
-            1 -> null
+            IntType.PLAYER -> DestinationFlag.ENTITY
+            IntType.GROUNDITEM -> DestinationFlag.ITEM
+            IntType.NPC -> DestinationFlag.ENTITY
+            IntType.ITEM -> null
             else -> DestinationFlag.OBJECT
         }
 
         if(player.locks.isInteractionLocked) return false
 
-        val method = get(id,type,option) ?: get(option,type) ?: return false
-        val destOverride = getOverride(type, id, option) ?: getOverride(type,node.id) ?: getOverride(type,option.toLowerCase())
+        val method = get(id,type.ordinal,option) ?: get(option,type.ordinal) ?: return false
+        val destOverride = getOverride(type.ordinal, id, option) ?: getOverride(type.ordinal,node.id) ?: getOverride(type.ordinal,option.toLowerCase())
 
         player.setAttribute("interact:option", option)
 
@@ -232,7 +246,7 @@ object InteractionListeners {
             return true
         }
 
-        if(type != 0 && !isInstant(method)) {
+        if(type != IntType.ITEM && !isInstant(method)) {
             if(player.locks.isMovementLocked) return false
             player.pulseManager.run(object : MovementPulse(player, node, flag, destOverride) {
                 override fun pulse(): Boolean {

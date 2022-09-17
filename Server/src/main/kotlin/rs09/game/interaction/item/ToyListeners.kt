@@ -5,6 +5,7 @@ import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class ToyListeners : InteractionListener {
     companion object {
@@ -30,13 +31,13 @@ class ToyListeners : InteractionListener {
     }
 
     override fun defineListeners() {
-        on(Items.CHOCATRICE_CAPE_12634, ITEM, "operate"){player, _ ->
+        on(Items.CHOCATRICE_CAPE_12634, IntType.ITEM, "operate"){player, _ ->
             lockInteractions(player, 2)
             visualize(player, 8903, 1566)
             return@on true
         }
 
-        on(MARIONETTES, ITEM, "jump", "walk", "bow", "dance") {player, marionette ->
+        on(MARIONETTES, IntType.ITEM, "jump", "walk", "bow", "dance") {player, marionette ->
             val index = MARIONETTES.indexOf(marionette.id)
 
             lockInteractions(player, 2)
@@ -49,13 +50,13 @@ class ToyListeners : InteractionListener {
             return@on true
         }
 
-        on(Items.REINDEER_HAT_10507, ITEM, "operate"){player, _ ->
+        on(Items.REINDEER_HAT_10507, IntType.ITEM, "operate"){player, _ ->
             lockInteractions(player, 2)
             animate(player, 5059)
             return@on true
         }
 
-        on(Items.SNOW_GLOBE_11949, ITEM, "shake") {player, _ ->
+        on(Items.SNOW_GLOBE_11949, IntType.ITEM, "shake") {player, _ ->
             lockInteractions(player, 2)
             animate(player, SNOWGLOBE_SHAKE)
             runTask(player, 3) {
@@ -67,7 +68,7 @@ class ToyListeners : InteractionListener {
             return@on true
         }
 
-        on(Items.YO_YO_4079, ITEM, "play", "loop", "walk", "crazy"){player, _ ->
+        on(Items.YO_YO_4079, IntType.ITEM, "play", "loop", "walk", "crazy"){player, _ ->
             val option = getUsedOption(player)
 
             lockInteractions(player, 2)
@@ -80,7 +81,7 @@ class ToyListeners : InteractionListener {
             return@on true
         }
 
-        on(Items.ZOMBIE_HEAD_6722, ITEM, "talk-at", "display", "question"){player, _ ->
+        on(Items.ZOMBIE_HEAD_6722, IntType.ITEM, "talk-at", "display", "question"){player, _ ->
             val option = getUsedOption(player)
 
             lockInteractions(player, 2)

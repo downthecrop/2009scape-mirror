@@ -9,6 +9,7 @@ import core.game.node.item.Item
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.global.EnchantedJewellery
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.tools.START_DIALOGUE
 
 /**
@@ -20,11 +21,11 @@ class EnchantedJewelleryListener : InteractionListener {
     val ids = EnchantedJewellery.idMap.keys.toIntArray()
 
     override fun defineListeners() {
-        on(ids, ITEM, "operate") { player, node ->
+        on(ids, IntType.ITEM, "operate") { player, node ->
             handle(player, node, true)
             return@on true
         }
-        on(ids, ITEM, "rub") { player, node ->
+        on(ids, IntType.ITEM, "rub") { player, node ->
             handle(player, node, false)
             return@on true
         }

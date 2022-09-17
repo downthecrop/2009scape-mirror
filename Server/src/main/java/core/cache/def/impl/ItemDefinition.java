@@ -294,7 +294,7 @@ public class ItemDefinition extends Definition<Item> {
 			}
 			ItemDefinition def = ItemDefinition.parseDefinition(itemId, ByteBuffer.wrap(data));
 			if (def == null) {
-				SystemLogger.logErr("Could not load item definitions for id " + itemId + " - no definitions found!");
+				SystemLogger.logErr(ItemDefinition.class, "Could not load item definitions for id " + itemId + " - no definitions found!");
 				return ;
 			}
 			if(itemId == 14958)
@@ -1530,7 +1530,7 @@ public class ItemDefinition extends Definition<Item> {
 		ItemDefinition def = forId(nodeId);
 		if (def == null) {
 			if (nodeId == 22937)
-				SystemLogger.logErr("[ItemDefinition] No definition for item id " + nodeId + "!");
+				SystemLogger.logErr(ItemDefinition.class, "[ItemDefinition] No definition for item id " + nodeId + "!");
 			return null;
 		}
 		OptionHandler handler = def.getConfiguration("option:" + name);

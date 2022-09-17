@@ -31,6 +31,6 @@ class ShopParser{
 
             count++
         }
-        SystemLogger.logInfo("Parsed $count shops.")
+        SystemLogger.logInfo(this::class.java, "Parsed $count shops.")
     }
 }

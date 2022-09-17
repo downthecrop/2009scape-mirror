@@ -35,7 +35,7 @@ import rs09.ServerConstants.Companion.SERVER_GE_NAME
 import rs09.game.ai.AIRepository
 import rs09.game.ge.GrandExchange
 import rs09.game.ge.GrandExchangeOffer
-import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.interaction.InteractionListeners
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.ItemConfigParser
@@ -68,15 +68,15 @@ class ScriptAPI(private val bot: Player) {
         if(node == null) return
 
         val type = when(node){
-            is Scenery -> InteractionListener.SCENERY
-            is NPC -> InteractionListener.NPC
-            is Item -> InteractionListener.ITEM
-            else -> -1
-        }
+            is Scenery -> IntType.SCENERY
+            is NPC -> IntType.NPC
+            is Item -> IntType.ITEM
+            else -> null
+        } ?: return
         val opt: Option? = node.interaction.options.filter {it != null && it.name.equals(option, true) }.firstOrNull()
 
         if(opt == null){
-            SystemLogger.logWarn("Invalid option name provided: $option")
+            SystemLogger.logWarn(this::class.java, "Invalid option name provided: $option")
             return
         }
 
@@ -464,7 +464,7 @@ class ScriptAPI(private val bot: Player) {
                 }
                 val canSell = GrandExchange.addBotOffer(actualId, itemAmt)
                 if (canSell && saleIsBigNews(actualId, itemAmt)) {
-                    SystemLogger.logAI("Offered $itemAmt of $actualId on the GE.")
+                    SystemLogger.logAI(this::class.java, "Offered $itemAmt of $actualId on the GE.")
                     Repository.sendNews(SERVER_GE_NAME + " just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE.")
                 }
                 bot.bank.remove(Item(id, itemAmt))

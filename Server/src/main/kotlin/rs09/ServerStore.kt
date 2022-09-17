@@ -41,7 +41,7 @@ class ServerStore : PersistWorld {
                 fileMap[key] = data
                 counter++
             } catch (e: Exception){
-                SystemLogger.logErr("Failed parsing ${storeFile.name} - stack trace below.")
+                SystemLogger.logErr(this::class.java, "Failed parsing ${storeFile.name} - stack trace below.")
                 e.printStackTrace()
                 return@forEach
             }

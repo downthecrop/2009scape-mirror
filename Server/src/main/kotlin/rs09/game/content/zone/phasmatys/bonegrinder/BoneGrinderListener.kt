@@ -11,6 +11,7 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.world.GameWorld.Pulser
 
 private const val LOADER = 11162
@@ -34,35 +35,35 @@ class BoneGrinderListener : InteractionListener {
         /**
          * Handle the bone loader/hopper fill option
          */
-        on(LOADER,SCENERY,"fill"){ player, _ ->
+        on(LOADER, IntType.SCENERY, "fill"){ player, _ ->
             handleFill(player)
         }
 
         /**
          * Handle the wheel's wind option
          */
-        on(BONE_GRINDER,SCENERY,"wind"){ player, _ ->
+        on(BONE_GRINDER, IntType.SCENERY, "wind"){ player, _ ->
             handleWind(player)
         }
 
         /**
          * Handle the wheel's status option
          */
-        on(BONE_GRINDER,SCENERY,"status"){ player, _ ->
+        on(BONE_GRINDER, IntType.SCENERY, "status"){ player, _ ->
             handleStatus(player)
         }
 
         /**
          * Handle the bin's empty option
          */
-        on(BIN,SCENERY,"empty"){ player, _ ->
+        on(BIN, IntType.SCENERY, "empty"){ player, _ ->
             handleEmpty(player)
         }
 
         /**
          * Handle Bone -> Hopper
          */
-        onUseWith(SCENERY,LOADER,*boneIDs){ player, _, _ ->
+        onUseWith(IntType.SCENERY,LOADER,*boneIDs){ player, _, _ ->
             handleFill(player)
             return@onUseWith true
         }

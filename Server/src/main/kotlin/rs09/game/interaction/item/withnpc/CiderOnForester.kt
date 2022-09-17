@@ -7,12 +7,13 @@ import core.game.node.item.Item
 import org.rs09.consts.Items
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class CiderOnForester : InteractionListener {
     override fun defineListeners() {
         val ids = intArrayOf(1,2,3,4,5)
 
-        onUseWith(NPC, Items.CIDER_5763, *ids){player, used, with ->
+        onUseWith(IntType.NPC, Items.CIDER_5763, *ids){player, used, with ->
             if(inBorders(player, 2689, 3488, 2700, 3498)){
                 player.dialogueInterpreter.open(CiderOnForesterDialogue(),with)
                 return@onUseWith true

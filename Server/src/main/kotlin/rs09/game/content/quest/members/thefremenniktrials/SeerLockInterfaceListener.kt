@@ -1,7 +1,6 @@
 package rs09.game.content.quest.members.thefremenniktrials
 
 import api.sendMessage
-import core.game.container.access.BitregisterAssembler
 import rs09.game.interaction.InterfaceListener
 
 class SeerLockInterfaceListener : InterfaceListener {
@@ -25,7 +24,7 @@ class SeerLockInterfaceListener : InterfaceListener {
            player.packetDispatch.sendVarcUpdate(619, 0)
            player.packetDispatch.sendVarcUpdate(620, 0)
            player.packetDispatch.sendVarcUpdate(621, 0)
-           BitregisterAssembler.send(player,298,2,0,1, BitregisterAssembler(0))
+           player.packetDispatch.sendIfaceSettings(0, 2, 298, 0, 1)
            player.setAttribute("riddle-letter-one",0)
            player.setAttribute("riddle-letter-two",0)
            player.setAttribute("riddle-letter-three",0)

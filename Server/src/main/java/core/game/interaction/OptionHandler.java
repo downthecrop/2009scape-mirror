@@ -71,7 +71,7 @@ public abstract class OptionHandler implements Plugin<Object> {
 		final SceneryDefinition definition = SceneryDefinition.forId(wrapper);
 		final List<Integer> list = new ArrayList<>(20);
 		if (definition.getChildrenIds() == null) {
-			SystemLogger.logErr("Null child wrapper in option handler wrapperId=" + wrapper);
+			SystemLogger.logErr(this.getClass(), "Null child wrapper in option handler wrapperId=" + wrapper);
 			return new int[] { wrapper };
 		}
 		for (int child : definition.getChildrenIds()) {

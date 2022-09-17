@@ -289,7 +289,7 @@ public class DwarfCannonPlugin extends OptionHandler {
 			}
 			Part part = Part.forId(button);
 			if (part == null) {
-				SystemLogger.logErr("Unhandled part id - " + button + "!");
+				SystemLogger.logErr(this.getClass(), "Unhandled part id - " + button + "!");
 				return true;
 			}
 			if (this.tool.getPart() != part) {

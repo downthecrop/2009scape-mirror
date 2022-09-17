@@ -99,10 +99,10 @@ class RevenantController : TickListener, Commands {
 
         define("listrevs", Privilege.ADMIN) {player, strings ->
             for (rev in trackedRevenants) {
-                SystemLogger.logInfo("REV ${rev.id}-${rev.name} @ ${rev.location.toString()}")
+                SystemLogger.logInfo(this::class.java, "REV ${rev.id}-${rev.name} @ ${rev.location.toString()}")
             }
 
-            SystemLogger.logInfo("Total of ${trackedRevenants.size} revenants spawned.")
+            SystemLogger.logInfo(this::class.java, "Total of ${trackedRevenants.size} revenants spawned.")
         }
 
         define("clearrevs", Privilege.ADMIN) {_, _ ->

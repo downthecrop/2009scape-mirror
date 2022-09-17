@@ -259,12 +259,12 @@ NPCConfigParser {
                         "facing_booth",
                         "can_tolerate",
                         "water_npc"-> configs.put(it.key.toString(), it.value.toString().toBoolean())
-                        else -> SystemLogger.logWarn("Unhandled key for npc config: ${it.key.toString()}")
+                        else -> SystemLogger.logWarn(this::class.java, "Unhandled key for npc config: ${it.key.toString()}")
                     }
                 }
             }
             count++
         }
-        SystemLogger.logInfo("Parsed $count NPC configurations")
+        SystemLogger.logInfo(this::class.java, "Parsed $count NPC configurations")
     }
 }

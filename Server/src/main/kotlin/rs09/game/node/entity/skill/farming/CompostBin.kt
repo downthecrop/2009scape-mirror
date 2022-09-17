@@ -131,7 +131,7 @@ class CompostBin(val player: Player, val bin: CompostBins) {
             }
             if (isClosed) player.varpManager.get(bin.varpIndex).setVarbit(bin.varpOffest + 6, 1)
         }
-        SystemLogger.logAlert("Sending " + player.varpManager.get(bin.varpIndex).getValue())
+        SystemLogger.logAlert(this::class.java, "Sending " + player.varpManager.get(bin.varpIndex).getValue())
         player.varpManager.get(bin.varpIndex).send(player)
     }
 

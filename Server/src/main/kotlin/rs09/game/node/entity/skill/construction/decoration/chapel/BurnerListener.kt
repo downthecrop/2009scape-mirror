@@ -6,6 +6,7 @@ import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 /**
  * Handles the lighting of the torches of the Chapel.
@@ -16,7 +17,7 @@ class BurnerListener : InteractionListener {
     val IDs = intArrayOf(13202,13203,13204,13205,13206,13207,13208,13209,13210,13211,13212,13213)
 
     override fun defineListeners() {
-        on(IDs,SCENERY,"light"){ player, node ->
+        on(IDs, IntType.SCENERY, "light"){ player, node ->
             if (player.ironmanManager.checkRestriction() && !player.houseManager.isInHouse(player)) {
                 return@on true
             }

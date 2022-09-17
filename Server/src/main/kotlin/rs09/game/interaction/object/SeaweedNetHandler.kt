@@ -9,11 +9,12 @@ import core.game.system.task.Pulse
 import org.rs09.consts.Animations
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class SeaweedNetHandler : InteractionListener {
 
     override fun defineListeners() {
-        on(NET, SCENERY, "Take-from"){ player, node ->
+        on(NET, IntType.SCENERY, "Take-from"){ player, node ->
             if (!isQuestComplete(player, "Swan Song"))
             {
                 sendMessage(player, "You must complete Swan Song first.")

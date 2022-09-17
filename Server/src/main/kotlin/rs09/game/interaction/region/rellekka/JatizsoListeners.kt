@@ -12,6 +12,7 @@ import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.region.jatizso.LeftieRightieDialogue
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class JatizsoListeners : InteractionListener {
     val GATES_CLOSED = intArrayOf(21403,21405)
@@ -40,7 +41,7 @@ class JatizsoListeners : InteractionListener {
         )
     )
     override fun defineListeners() {
-        on(GATES_CLOSED, SCENERY, "open"){player, node ->
+        on(GATES_CLOSED, IntType.SCENERY, "open"){player, node ->
             if(NORTH_GATE_ZONE.insideBorder(player)){
                 if(node.id == GATES_CLOSED.first()){
                     val other = getScenery(node.location.transform(1, 0, 0)) ?: return@on true
@@ -76,7 +77,7 @@ class JatizsoListeners : InteractionListener {
             return@on true
         }
 
-        on(TOWER_GUARDS, NPC, "watch-shouting"){player, _ ->
+        on(TOWER_GUARDS, IntType.NPC, "watch-shouting"){player, _ ->
             val local = findLocalNPC(player, NPCs.GUARD_5489)
             lock(player, 200)
             face(local!!, Location.create(2371, 3801, 2))
@@ -121,23 +122,23 @@ class JatizsoListeners : InteractionListener {
             return@on true
         }
 
-        on(BELL, SCENERY, "ring-bell"){player, _ ->
+        on(BELL, IntType.SCENERY, "ring-bell"){player, _ ->
             playAudio(player, Audio(15))
             sendMessage(player, "You ring the warning bell, but everyone ignores it!")
             return@on true
         }
 
-        on(GUARDS, NPC, "talk-to"){player, node ->
+        on(GUARDS, IntType.NPC, "talk-to"){player, node ->
             player.dialogueInterpreter.open(LeftieRightieDialogue(), NPC(NPCs.GUARD_5491))
             return@on true
         }
 
-        on(KING_CHEST, SCENERY, "open"){player, node ->
+        on(KING_CHEST, IntType.SCENERY, "open"){player, node ->
             sendPlayerDialogue(player, "I probably shouldn't mess with that.", FacialExpression.HALF_THINKING)
             return@on true
         }
 
-        setDest(NPC, NPCs.MAGNUS_GRAM_5488){_,_ ->
+        setDest(IntType.NPC, NPCs.MAGNUS_GRAM_5488){_,_ ->
             return@setDest Location.create(2416, 3801, 0)
         }
 

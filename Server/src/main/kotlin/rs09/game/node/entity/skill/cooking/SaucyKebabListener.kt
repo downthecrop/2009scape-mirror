@@ -5,6 +5,7 @@ import api.*
 
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 
 /**
@@ -20,7 +21,7 @@ class SaucyKebabListener : InteractionListener {
     )
 
     override fun defineListeners() {
-        onUseWith(ITEM, kebabArr, sauce) { player, used, with ->
+        onUseWith(IntType.ITEM, kebabArr, sauce) { player, used, with ->
             if(removeItem(player, used.asItem()) && removeItem(player, with.asItem())) {
                 return@onUseWith addItem(player, Items.SUPER_KEBAB_4608)
             }

@@ -52,7 +52,7 @@ class FOGRewardsInterface : ComponentPlugin(){
             176 -> choice = Air_Gloves
             181 -> choice = Water_Gloves
             186 -> choice = Earth_Gloves
-            else -> SystemLogger.logWarn("Unhandled button ID for FOG interface: $button").also { return true }
+            else -> SystemLogger.logWarn(this::class.java, "Unhandled button ID for FOG interface: $button").also { return true }
         }
         handleOpcode(choice,opcode,player!!)
         return true

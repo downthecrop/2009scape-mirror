@@ -11,6 +11,7 @@ import core.game.world.map.Location
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.interaction.`object`.BankBoothListener
 
 /**
@@ -26,8 +27,7 @@ class BankerNPC : AbstractNPC, InteractionListener {
 
         val SPECIAL_NPC_IDS = intArrayOf(
             NPCs.SIRSAL_BANKER_4519, NPCs.FADLI_958, NPCs.BANK_TUTOR_4907, NPCs.JADE_4296,
-            NPCs.EMERALD_BENEDICT_2271, NPCs.OGRESS_BANKER_7049, NPCs.OGRESS_BANKER_7050,
-            NPCs.ARNOLD_LYDSPOR_3824,
+            NPCs.OGRESS_BANKER_7049, NPCs.OGRESS_BANKER_7050, NPCs.ARNOLD_LYDSPOR_3824,
 
             /* Maximillian Sackville - Near Wilderness bounty-hunter area. */
             NPCs.BANKER_6538
@@ -146,12 +146,12 @@ class BankerNPC : AbstractNPC, InteractionListener {
     }
 
     override fun defineListeners() {
-        on(ALL_BANKER_NPC_IDS, NPC, "bank", handler = Companion::attemptBank)
-        on(ALL_BANKER_NPC_IDS, NPC, "collect", handler = Companion::attemptCollect)
+        on(ALL_BANKER_NPC_IDS, IntType.NPC, "bank", handler = Companion::attemptBank)
+        on(ALL_BANKER_NPC_IDS, IntType.NPC, "collect", handler = Companion::attemptCollect)
     }
 
     override fun defineDestinationOverrides() {
-        setDest(NPC, ALL_BANKER_NPC_IDS, "bank", "collect", "talk-to", handler = ::provideDestinationOverride)
+        setDest(IntType.NPC, ALL_BANKER_NPC_IDS, "bank", "collect", "talk-to", handler = ::provideDestinationOverride)
     }
 
     override fun init() {

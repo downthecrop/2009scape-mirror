@@ -2,7 +2,6 @@ package rs09.game.interaction.inter.ge
 
 import api.*
 import core.game.component.Component
-import core.game.container.access.BitregisterAssembler
 import core.game.ge.OfferState
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.audio.Audio
@@ -125,7 +124,8 @@ class StockMarket : InterfaceListener {
                             149, "IviiiIsssss", "", "", "", "Examine", "Offer",
                             -1, 0, 7, 4, 93, 7012370
                     )
-                    BitregisterAssembler.send(player, 107, 18, 0, 27, BitregisterAssembler(0, 1))
+                    val settings = IfaceSettingsBuilder().enableOptions(0, 1).build()
+                    player.packetDispatch.sendIfaceSettings(settings, 18, 107, 0, 27)
                 }
                 157 -> updateOfferAmount(player, tempOffer, tempOffer.amount - 1)
                 159 -> updateOfferAmount(player, tempOffer, tempOffer.amount + 1)
@@ -199,7 +199,7 @@ class StockMarket : InterfaceListener {
     {
         if(offer == null)
         {
-            SystemLogger.logWarn("Opened offer was null and was attempted to be aborted!")
+            SystemLogger.logWarn(this::class.java, "Opened offer was null and was attempted to be aborted!")
             return
         }
         sendMessage(player, "Abort request acknowledged. Please be aware that your offer may")
@@ -207,7 +207,7 @@ class StockMarket : InterfaceListener {
 
         if(!offer.isActive)
         {
-            SystemLogger.logWarn("Offer ${offer.uid}[${offer.index}]: ${if(offer.sell) "s" else "b"} ${offer.itemID}x ${offer.amount} was NO LONGER active when abort attempted")
+            SystemLogger.logWarn(this::class.java, "Offer ${offer.uid}[${offer.index}]: ${if(offer.sell) "s" else "b"} ${offer.itemID}x ${offer.amount} was NO LONGER active when abort attempted")
             return
         }
         offer.offerState = OfferState.ABORTED
@@ -341,7 +341,7 @@ class StockMarket : InterfaceListener {
             val item = offer.withdraw[index]
             if(item == null)
             {
-                SystemLogger.logWarn("Offer withdraw[$index] is null!")
+                SystemLogger.logWarn(this::class.java, "Offer withdraw[$index] is null!")
                 return
             }
 

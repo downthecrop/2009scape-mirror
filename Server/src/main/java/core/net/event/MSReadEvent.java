@@ -86,7 +86,7 @@ public final class MSReadEvent extends IoReadEvent {
 			}
 			return buffer.getShort() & 0xFFFF;
 		}
-		SystemLogger.logErr("Invalid packet [opcode=" + opcode + ", last=" + last + ", queued=" + usedQueuedBuffer + "]!");
+		SystemLogger.logErr(this.getClass(), "Invalid packet [opcode=" + opcode + ", last=" + last + ", queued=" + usedQueuedBuffer + "]!");
 		return -1;
 	}
 

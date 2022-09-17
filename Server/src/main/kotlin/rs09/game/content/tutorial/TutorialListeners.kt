@@ -9,6 +9,7 @@ import core.game.system.task.Pulse
 import core.game.world.map.Location
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.world.repository.Repository
 
 /**
@@ -31,7 +32,7 @@ class TutorialListeners : InteractionListener {
     val RAT_GATES = intArrayOf(3022, 3023)
 
     override fun defineListeners() {
-        on(GUIDE_HOUSE_DOOR, SCENERY, "open"){player, door ->
+        on(GUIDE_HOUSE_DOOR, IntType.SCENERY, "open"){player, door ->
             if(getAttribute(player, "tutorial:stage", 0) != 3)
                 return@on true
 
@@ -42,7 +43,7 @@ class TutorialListeners : InteractionListener {
             return@on true
         }
 
-        on(FIRST_GATE, SCENERY, "open"){player, gate ->
+        on(FIRST_GATE, IntType.SCENERY, "open"){player, gate ->
             if(getAttribute(player, "tutorial:stage", 0) != 16)
                 return@on true
 
@@ -52,7 +53,7 @@ class TutorialListeners : InteractionListener {
             return@on true
         }
 
-        on(COOKS_DOOR, SCENERY, "open"){player, door ->
+        on(COOKS_DOOR, IntType.SCENERY, "open"){player, door ->
             if(getAttribute(player, "tutorial:stage", 0) != 17)
                 return@on true
 
@@ -62,7 +63,7 @@ class TutorialListeners : InteractionListener {
             return@on true
         }
 
-        on(COOKS_EXIT, SCENERY, "open"){player, door ->
+        on(COOKS_EXIT, IntType.SCENERY, "open"){player, door ->
             if(getAttribute(player, "tutorial:stage", 0) != 22)
                 return@on true
 
@@ -72,7 +73,7 @@ class TutorialListeners : InteractionListener {
             return@on true
         }
 
-        on(QUEST_ENTER, SCENERY, "open") {player, door ->
+        on(QUEST_ENTER, IntType.SCENERY, "open") {player, door ->
             if(getAttribute(player, "tutorial:stage", 0) != 26)
                 return@on true
 
@@ -82,7 +83,7 @@ class TutorialListeners : InteractionListener {
             return@on true
         }
 
-        on(QUEST_LADDER, SCENERY, "climb-down") {player, ladder ->
+        on(QUEST_LADDER, IntType.SCENERY, "climb-down") {player, ladder ->
             if(getAttribute(player, "tutorial:stage", 0) < 29)
                 return@on true
 
@@ -93,7 +94,7 @@ class TutorialListeners : InteractionListener {
             ClimbActionHandler.climbLadder(player, ladder.asScenery(), "climb-down")
         }
 
-        on(QUEST_EXIT_LADDER, SCENERY, "climb-up") { player, ladder ->
+        on(QUEST_EXIT_LADDER, IntType.SCENERY, "climb-up") { player, ladder ->
             ClimbActionHandler.climbLadder(player, ladder.asScenery(), "climb-up")
 
             submitWorldPulse(object : Pulse(2) {
@@ -107,7 +108,7 @@ class TutorialListeners : InteractionListener {
             return@on true
         }
 
-        on(COMBAT_GATES, SCENERY, "open"){player, gate ->
+        on(COMBAT_GATES, IntType.SCENERY, "open"){player, gate ->
             if(getAttribute(player, "tutorial:stage", 0) != 43)
                 return@on true
 
@@ -116,7 +117,7 @@ class TutorialListeners : InteractionListener {
             DoorActionHandler.handleAutowalkDoor(player, gate as Scenery)
         }
 
-        on(RAT_GATES, SCENERY, "open") {player, gate ->
+        on(RAT_GATES, IntType.SCENERY, "open") {player, gate ->
             val stage = getAttribute(player, "tutorial:stage", 0)
             if(stage !in 50..53){
                 player.dialogueInterpreter.sendDialogues(NPCs.COMBAT_INSTRUCTOR_944, FacialExpression.ANGRY, "Oi, get away from there!","Don't enter my rat pen unless I say so!")
@@ -131,7 +132,7 @@ class TutorialListeners : InteractionListener {
             return@on true
         }
 
-        on(COMBAT_EXIT, SCENERY, "climb-up") {player, ladder ->
+        on(COMBAT_EXIT, IntType.SCENERY, "climb-up") {player, ladder ->
             if(getAttribute(player, "tutorial:stage", 0) != 55)
                 return@on true
 
@@ -140,7 +141,7 @@ class TutorialListeners : InteractionListener {
             ClimbActionHandler.climbLadder(player, ladder.asScenery(), "climb-up")
         }
 
-        on(BANK_EXIT, SCENERY, "open") {player, door ->
+        on(BANK_EXIT, IntType.SCENERY, "open") {player, door ->
             if(getAttribute(player, "tutorial:stage", 0) != 57)
                 return@on true
 
@@ -149,7 +150,7 @@ class TutorialListeners : InteractionListener {
             DoorActionHandler.handleAutowalkDoor(player, door as Scenery)
         }
 
-        on(FINANCE_EXIT, SCENERY, "open") {player,door ->
+        on(FINANCE_EXIT, IntType.SCENERY, "open") {player,door ->
             if(getAttribute(player, "tutorial:stage", 0) != 59)
                 return@on true
 
@@ -158,7 +159,7 @@ class TutorialListeners : InteractionListener {
             DoorActionHandler.handleAutowalkDoor(player, door as Scenery)
         }
 
-        on(CHURCH_EXIT, SCENERY, "open") {player, door ->
+        on(CHURCH_EXIT, IntType.SCENERY, "open") {player, door ->
             if(getAttribute(player, "tutorial:stage", 0) != 66)
                 return@on true
 

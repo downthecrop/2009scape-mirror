@@ -8,16 +8,17 @@ import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.node.entity.skill.magic.SpellListener
 import rs09.game.node.entity.skill.magic.spellconsts.Modern
 
 class MTAListeners : InteractionListener {
     override fun defineListeners() {
-        on(NPCs.MAZE_GUARDIAN_3102,NPC,"talk-to"){player,node ->
+        on(NPCs.MAZE_GUARDIAN_3102, IntType.NPC, "talk-to"){player,node ->
             player.dialogueInterpreter.open(node.id, node)
             return@on true
         }
-        setDest(NPC, intArrayOf(NPCs.MAZE_GUARDIAN_3102), "talk-to") { player, node ->
+        setDest(IntType.NPC, intArrayOf(NPCs.MAZE_GUARDIAN_3102), "talk-to") { player, node ->
 			return@setDest node.location.transform(Direction.getDirection(player.location, node.location), -1);
         }
     }

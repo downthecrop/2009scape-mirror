@@ -12,6 +12,7 @@ import rs09.ServerStore.Companion.getInt
 import rs09.game.content.global.WeightBasedTable
 import rs09.game.content.global.WeightedItem
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.system.SystemLogger
 import rs09.plugin.CorePluginTypes.XPGainPlugin
 import rs09.tools.stringtools.colorize
@@ -55,11 +56,10 @@ class XMASMboxHandler : InteractionListener {
         //disable if it's not december.
         //Calendar.MONTH is 0-indexed, Month is 1-indexed. I know. It's dumb. Thanks oracle.
         if(Calendar.getInstance().get(Calendar.MONTH) + 1 != Month.DECEMBER.value){
-            SystemLogger.logInfo("${Calendar.getInstance().get(Calendar.MONTH)} - ${Month.DECEMBER.value}")
             return
         }
 
-        on(MBOX, ITEM, "open"){player, used ->
+        on(MBOX, IntType.ITEM, "open"){player, used ->
             val item = MBOX_LOOT.roll().first()
 
             if(removeItem(player, used, Container.INVENTORY)) {

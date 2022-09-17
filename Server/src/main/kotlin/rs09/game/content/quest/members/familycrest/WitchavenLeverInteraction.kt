@@ -13,6 +13,7 @@ import core.net.packet.out.ClearScenery
 import core.net.packet.out.ConstructScenery
 import core.net.packet.out.UpdateAreaPosition;
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 fun doDoor(player: Player, scenery: Scenery) {
     val d = if(scenery.rotation == 0 || scenery.rotation == 3) { -1 } else { 0 }
@@ -50,7 +51,7 @@ class WitchavenLeverInteraction : InteractionListener {
     val DOORS = intArrayOf(NORTH_DOOR, HELLHOUND_DOOR, SOUTHWEST_DOOR, SOUTHEAST_DOOR)
 
     override fun defineListeners() {
-        on(LEVERS, SCENERY, "pull") { player, node ->
+        on(LEVERS, IntType.SCENERY, "pull") { player, node ->
             val baseId = if(node.id % 2 == 0) { node.id - 1 } else { node.id }
             if(player.questRepository.getQuest("Family Crest").getStage(player) == 0) {
                 player.sendMessage("Nothing interesting happens.")
@@ -78,7 +79,7 @@ class WitchavenLeverInteraction : InteractionListener {
             player.session.write(buffer)
             return@on true
         }
-        on(DOORS, SCENERY, "open") { player, node ->
+        on(DOORS, IntType.SCENERY, "open") { player, node ->
             val northA = player.getAttribute("family-crest:witchaven-lever:${NORTH_LEVER_A}", false)
             val northB = player.getAttribute("family-crest:witchaven-lever:${NORTH_LEVER_B}", false)
             val south = player.getAttribute("family-crest:witchaven-lever:${SOUTH_LEVER}", false)

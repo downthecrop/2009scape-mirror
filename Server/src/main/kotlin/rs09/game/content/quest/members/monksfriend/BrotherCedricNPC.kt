@@ -10,6 +10,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.tools.END_DIALOGUE
 
 /**
@@ -114,7 +115,7 @@ class BrotherCedricDialogue : DialogueFile() {
  */
 class BrotherCedricListener : InteractionListener {
     override fun defineListeners() {
-        on(NPCs.BROTHER_CEDRIC_280, NPC, "talk-to"){ player, _ ->
+        on(NPCs.BROTHER_CEDRIC_280, IntType.NPC, "talk-to"){ player, _ ->
             player.dialogueInterpreter.open(BrotherCedricDialogue(), NPC(NPCs.BROTHER_CEDRIC_280))
             return@on true
         }

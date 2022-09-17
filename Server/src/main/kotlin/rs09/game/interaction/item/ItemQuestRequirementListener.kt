@@ -4,6 +4,7 @@ import api.*
 import core.game.node.entity.player.link.quest.QuestRepository
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class ItemQuestRequirementListener : InteractionListener {
 

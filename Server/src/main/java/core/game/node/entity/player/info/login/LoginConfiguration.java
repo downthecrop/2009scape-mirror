@@ -210,7 +210,7 @@ public final class LoginConfiguration {
      */
     public static final void config(final Player player) {
         if(!player.isArtificial())
-            SystemLogger.logInfo("configuring player " + player.getUsername());
+            SystemLogger.logInfo(LoginConfiguration.class, "configuring player " + player.getUsername());
         player.getInventory().refresh();
         player.getEquipment().refresh();
         player.getSkills().refresh();
@@ -227,7 +227,7 @@ public final class LoginConfiguration {
         player.getEmoteManager().refresh();
         player.getInterfaceManager().openInfoBars();
         if(!player.isArtificial())
-            SystemLogger.logInfo("finished configuring player " + player.getUsername());
+            SystemLogger.logInfo(LoginConfiguration.class, "finished configuring player " + player.getUsername());
     }
 
     /**

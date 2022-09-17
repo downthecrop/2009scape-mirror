@@ -7,6 +7,7 @@ import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
 import rs09.game.ai.skillingbot.SkillingBotAssembler
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.interaction.InteractionListeners
 
 @PlayerCompatible
@@ -50,7 +51,7 @@ class VarrockEssenceMiner : Script(){
 
             State.MINING -> {
                 val essence = scriptAPI.getNearestNode(2491,true)
-                essence?.let { InteractionListeners.run(essence.id, InteractionListener.SCENERY,"mine",bot,essence) }
+                essence?.let { InteractionListeners.run(essence.id, IntType.SCENERY,"mine",bot,essence) }
                 if(bot.inventory.isFull)
                     state = State.TO_BANK
             }

@@ -8,6 +8,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.Scenery
 import rs09.game.content.dialogue.region.craftingguild.TheDoorDialogues
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 /**
  * @author bushtail
@@ -19,7 +20,7 @@ class CraftingGuildListeners : InteractionListener {
     private val CAPE = Items.CRAFTING_CAPE_9780
 
     override fun defineListeners() {
-        on(GUILD_DOOR, SCENERY, "open") { player, door ->
+        on(GUILD_DOOR, IntType.SCENERY, "open") { player, door ->
             if (player.location == Location.create(2933, 3289, 0)) {
                 if (hasLevelStat(player, Skills.CRAFTING, 40)) {
                     if (inEquipment(player, APRON)) {

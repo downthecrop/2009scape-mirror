@@ -28,7 +28,7 @@ class LightSourceExtinguisher : OptionHandler(){
 
         val lightSource = LightSources.forId(node.id)
 
-        lightSource ?: return false.also { SystemLogger.logWarn("UNHANDLED EXTINGUISH OPTION: ID = ${node.id}") }
+        lightSource ?: return false.also { SystemLogger.logWarn(this::class.java, "UNHANDLED EXTINGUISH OPTION: ID = ${node.id}") }
 
         player.inventory.replace(node.asItem(), Item(lightSource.fullID))
         return true

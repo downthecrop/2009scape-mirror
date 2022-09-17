@@ -13,6 +13,7 @@ import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import rs09.ServerConstants
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.node.entity.npc.BankerNPC
 import rs09.game.world.repository.Repository
 
@@ -176,12 +177,12 @@ class BankBoothListener : InteractionListener {
     }
 
     override fun defineListeners() {
-        on(BANK_BOOTHS, SCENERY, "use-quickly", "bank", handler = ::quickBankBoothUse)
-        on(BANK_BOOTHS, SCENERY, "use", handler = ::regularBankBoothUse)
-        on(BANK_BOOTHS, SCENERY, "collect", handler = ::collectBankBoothUse)
+        on(BANK_BOOTHS, IntType.SCENERY, "use-quickly", "bank", handler = ::quickBankBoothUse)
+        on(BANK_BOOTHS, IntType.SCENERY, "use", handler = ::regularBankBoothUse)
+        on(BANK_BOOTHS, IntType.SCENERY, "collect", handler = ::collectBankBoothUse)
 
         if (ServerConstants.BANK_BOOTH_NOTE_ENABLED) {
-            onUseAnyWith(SCENERY, *BANK_BOOTHS, handler = ::attemptToConvertItems)
+            onUseAnyWith(IntType.SCENERY, *BANK_BOOTHS, handler = ::attemptToConvertItems)
         }
     }
 }

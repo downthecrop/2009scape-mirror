@@ -11,6 +11,7 @@ import core.plugin.Initializable
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 @Initializable
 class KhazardWarlordNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,location), InteractionListener {

@@ -5,6 +5,7 @@ import core.game.node.item.Item
 import core.tools.RandomFunction
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 /**
  * @author Woah, with love
@@ -23,7 +24,7 @@ class TarBarrelListener : InteractionListener {
 
     override fun defineListeners() {
 
-        on(FULL_TAR_BARREL_16860,SCENERY,"take-from") { player, node ->
+        on(FULL_TAR_BARREL_16860, IntType.SCENERY, "take-from") { player, node ->
             val incrementAmount = RandomFunction.random(83, 1000)
 
             if (player.inventory.isFull) {

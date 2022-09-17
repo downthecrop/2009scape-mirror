@@ -72,14 +72,14 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             val mapId = args[1].toIntOrNull() ?: return@define
 
             val def = Struct.get(mapId)
-            SystemLogger.logInfo(def.toString())
+            SystemLogger.logInfo(this::class.java, def.toString())
         }
 
         define("datamap") {player, args ->
             val mapId = args[1].toIntOrNull() ?: return@define
 
             val def = DataMap.get(mapId)
-            SystemLogger.logInfo(def.toString())
+            SystemLogger.logInfo(this::class.java, def.toString())
         }
 
         define("dumpstructs", Privilege.ADMIN, "", "Dumps all the cache structs to structs.txt") {player, _ ->

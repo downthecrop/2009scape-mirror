@@ -5,11 +5,12 @@ import core.game.world.map.RegionManager
 import org.rs09.consts.Items
 import rs09.game.content.global.action.PickupHandler
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class WineOfZamorakInteraction : InteractionListener {
 
     override fun defineListeners() {
-        on(Items.WINE_OF_ZAMORAK_245,GROUNDITEM,"take"){player, wine ->
+        on(Items.WINE_OF_ZAMORAK_245,IntType.GROUNDITEM,"take"){player, wine ->
             if(player.location.regionId != 11574){
                 PickupHandler.take(player, wine as GroundItem)
                 return@on true

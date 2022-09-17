@@ -31,7 +31,7 @@ class PenguinManager{
         private fun updateStoreFile(){
             val jsonTags = JSONArray()
             tagMapping.filter { it.value.isNotEmpty() }.forEach { (ordinal,taggers) ->
-                SystemLogger.logInfo("$ordinal - ${taggers.first()}")
+                SystemLogger.logInfo(this::class.java, "$ordinal - ${taggers.first()}")
                 val tag = JSONObject()
                 tag["ordinal"] = ordinal
                 tag["taggers"] = taggers
@@ -64,6 +64,6 @@ class PenguinManager{
     }
 
     fun log(message: String){
-        SystemLogger.logInfo("[Penguins] $message")
+        SystemLogger.logInfo(this::class.java, "[Penguins] $message")
     }
 }

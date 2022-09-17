@@ -32,7 +32,7 @@ class GlobalKillCounter : StartupListener, ShutdownListener {
             val tmp_rare_drops = data.get("rare_drops")
             populate(rare_drops, tmp_rare_drops)
         } catch (e: Exception){
-            SystemLogger.logErr("Failed parsing ${file.name} - stack trace below.")
+            SystemLogger.logErr(this::class.java, "Failed parsing ${file.name} - stack trace below.")
             e.printStackTrace()
         }
     }

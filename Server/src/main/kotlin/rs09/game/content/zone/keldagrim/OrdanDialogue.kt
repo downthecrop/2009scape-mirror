@@ -9,6 +9,7 @@ import core.game.node.item.Item
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.tools.END_DIALOGUE
 
 /**It's just some simple Ordan dialogue
@@ -74,7 +75,7 @@ class OrdanDialogue(player: Player? = null) : DialoguePlugin(player) {
             Items.RUNITE_ORE_452 to 1000
         )
         override fun defineListeners() {
-            onUseWith(NPC, NPCs.ORDAN_2564,*notedOre){ player, _, noteType ->
+            onUseWith(IntType.NPC, NPCs.ORDAN_2564,*notedOre){ player, _, noteType ->
                 val noteAmount = amountInInventory(player, noteType.id)
                 val noteName = noteType.name
                 var unNoteAmount = 0

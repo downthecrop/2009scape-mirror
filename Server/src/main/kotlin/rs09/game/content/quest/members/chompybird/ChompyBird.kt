@@ -18,6 +18,7 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.world.update.flag.context.Graphics as Gfx
 
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.content.dialogue.SkillDialogueHandler
 import rs09.game.content.dialogue.SkillDialogueHandler.SkillDialogue
 import rs09.game.system.config.ItemConfigParser
@@ -137,19 +138,19 @@ class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 2, Vars.VARP_QUEST_C
   override fun defineListeners() {
     val filledBellows = intArrayOf(Items.OGRE_BELLOWS_3_2872, Items.OGRE_BELLOWS_2_2873, Items.OGRE_BELLOWS_1_2874)
 
-    on(3379, SCENERY, "enter") {player, _ -> 
+    on(3379, IntType.SCENERY, "enter") {player, _ -> 
       teleport(player, CAVE_ENTRANCE)
       sendMessage(player, "You walk through the cave entrance into a dimly lit cave.")
       return@on true
     }
 
-    on(intArrayOf(32068, 32069), SCENERY, "pass-through") {player, _ -> 
+    on(intArrayOf(32068, 32069), IntType.SCENERY, "pass-through") {player, _ -> 
       teleport(player, CAVE_EXIT)
       sendMessage(player, "You walk back out of the darkness of the cave into daylight.")
       return@on true
     }
     
-    on(3377, SCENERY, "unlock") {player, node -> 
+    on(3377, IntType.SCENERY, "unlock") {player, node -> 
       if (freeSlots(player) == 0) {
         sendMessage(player, "You don't have enough space to do that.")
         return@on true
@@ -177,7 +178,7 @@ class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 2, Vars.VARP_QUEST_C
       return@on true
     }
 
-    onUseWith(SCENERY, Items.RAW_CHOMPY_2876, 3375) {player, used, _ -> 
+    onUseWith(IntType.SCENERY, Items.RAW_CHOMPY_2876, 3375) {player, used, _ -> 
       val rantzIngredient = getAttribute(player, ATTR_ING_RANTZ, -1)
       val bugsIngredient = getAttribute(player, ATTR_ING_BUGS, -1)
       val fycieIngredient = getAttribute(player, ATTR_ING_FYCIE, -1)
@@ -221,7 +222,7 @@ class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 2, Vars.VARP_QUEST_C
       return@onUseWith true
     }
 
-    onUseWith(SCENERY, Items.OGRE_BELLOWS_2871, 684) {player, used, _ -> 
+    onUseWith(IntType.SCENERY, Items.OGRE_BELLOWS_2871, 684) {player, used, _ -> 
       if (removeItem(player, used.asItem())) {
         lock(player, 2)
         visualize(player, Animations.HUMAN_USING_BELLOWS_1026, Gfx(Graphics.USING_BELLOWS, 80))
@@ -231,7 +232,7 @@ class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 2, Vars.VARP_QUEST_C
       return@onUseWith true
     }
 
-    onUseWith(NPC, filledBellows, NPCs.SWAMP_TOAD_1013) {player, used, with ->
+    onUseWith(IntType.NPC, filledBellows, NPCs.SWAMP_TOAD_1013) {player, used, with ->
       val hasTooManyToads = amountInInventory(player, Items.BLOATED_TOAD_2875) >= 3
       
       if (hasTooManyToads) {
@@ -257,7 +258,7 @@ class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 2, Vars.VARP_QUEST_C
       return@onUseWith true
     }
 
-    onUseWith(ITEM, Items.OGRE_ARROW_SHAFT_2864, Items.FEATHER_314) {player, used, with -> 
+    onUseWith(IntType.ITEM, Items.OGRE_ARROW_SHAFT_2864, Items.FEATHER_314) {player, used, with -> 
       val shaftAmount = amountInInventory(player, used.id)
       val featherAmount = amountInInventory(player, with.id)
       var maxAmount = min(shaftAmount, featherAmount)
@@ -278,7 +279,7 @@ class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 2, Vars.VARP_QUEST_C
       return@onUseWith true
     }
 
-    onUseWith(ITEM, Items.WOLF_BONES_2859, Items.CHISEL_1755) {player, used, with -> 
+    onUseWith(IntType.ITEM, Items.WOLF_BONES_2859, Items.CHISEL_1755) {player, used, with -> 
       val maxAmount = amountInInventory(player, used.id)
 
       if (getStage(player) == 0) {
@@ -314,7 +315,7 @@ class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 2, Vars.VARP_QUEST_C
       return@onUseWith true
     }
 
-    onUseWith(ITEM, Items.WOLFBONE_ARROWTIPS_2861, Items.FLIGHTED_OGRE_ARROW_2865) {player, used, with -> 
+    onUseWith(IntType.ITEM, Items.WOLFBONE_ARROWTIPS_2861, Items.FLIGHTED_OGRE_ARROW_2865) {player, used, with -> 
       fun getMaxAmount(_unused: Int = 0): Int {
           val tips = amountInInventory(player, Items.WOLFBONE_ARROWTIPS_2861)
           val shafts = amountInInventory(player, Items.FLIGHTED_OGRE_ARROW_2865)

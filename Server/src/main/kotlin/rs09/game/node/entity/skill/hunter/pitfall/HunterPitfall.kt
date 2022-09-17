@@ -26,6 +26,7 @@ import core.tools.RandomFunction
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.world.GameWorld
 
 /*@Initializable
@@ -152,7 +153,7 @@ val KYATT_PIT = 19233
 class PitfallListeners : InteractionListener {
 
     override fun defineListeners() {
-        setDest(SCENERY, intArrayOf(PIT, SPIKED_PIT, LARUPIA_PIT, GRAAHK_PIT, KYATT_PIT), "trap", "jump", "dismantle") { player, node ->
+        setDest(IntType.SCENERY, intArrayOf(PIT, SPIKED_PIT, LARUPIA_PIT, GRAAHK_PIT, KYATT_PIT), "trap", "jump", "dismantle") { player, node ->
             val pit = node as Scenery
             val src = player.getLocation()
             var dst = pit.getLocation()
@@ -170,7 +171,7 @@ class PitfallListeners : InteractionListener {
             }
             return@setDest dst
         }
-        on(PIT, SCENERY, "trap") { player, node ->
+        on(PIT, IntType.SCENERY, "trap") { player, node ->
             val pit = node as Scenery;
             // TODO: check hunter level, remove logs
             if(player.skills.getLevel(Skills.HUNTER) < 31) {
@@ -206,7 +207,7 @@ class PitfallListeners : InteractionListener {
             GameWorld.Pulser.submit(collapsePulse)
             return@on true
         }
-        on(SPIKED_PIT, SCENERY, "jump") { player, node ->
+        on(SPIKED_PIT, IntType.SCENERY, "jump") { player, node ->
             val pit = node as Scenery;
             val src = player.getLocation()
             val dir = pitJumpSpots(pit.getLocation())!![src]
@@ -245,26 +246,26 @@ class PitfallListeners : InteractionListener {
             }
             return@on true
         }
-        on(SPIKED_PIT, SCENERY, "dismantle") { player, node ->
+        on(SPIKED_PIT, IntType.SCENERY, "dismantle") { player, node ->
             val pit = node as Scenery;
             player.removeAttribute("pitfall:timestamp:${pit.location.x}:${pit.location.y}")
             player.incrementAttribute("pitfall:count", -1)
             setPitState(player, pit.location, 0)
             return@on true
         }
-        on(LARUPIA_PIT, SCENERY, "dismantle") { player, node ->
+        on(LARUPIA_PIT, IntType.SCENERY, "dismantle") { player, node ->
             lootCorpse(player, node as Scenery, 180.0, Items.LARUPIA_FUR_10095, Items.TATTY_LARUPIA_FUR_10093)
             return@on true
         }
-        on(GRAAHK_PIT, SCENERY, "dismantle") { player, node ->
+        on(GRAAHK_PIT, IntType.SCENERY, "dismantle") { player, node ->
             lootCorpse(player, node as Scenery, 240.0, Items.GRAAHK_FUR_10099, Items.TATTY_GRAAHK_FUR_10097)
             return@on true
         }
-        on(KYATT_PIT, SCENERY, "dismantle") { player, node ->
+        on(KYATT_PIT, IntType.SCENERY, "dismantle") { player, node ->
             lootCorpse(player, node as Scenery, 300.0, Items.KYATT_FUR_10103, Items.TATTY_KYATT_FUR_10101)
             return@on true
         }
-        on(BEAST_IDS, NPC, "tease") { player, node ->
+        on(BEAST_IDS, IntType.NPC, "tease") { player, node ->
             val entity = node as Entity
             val hunterReq = HUNTER_REQS[entity.name]!!
             if(player.skills.getLevel(Skills.HUNTER) < hunterReq) {

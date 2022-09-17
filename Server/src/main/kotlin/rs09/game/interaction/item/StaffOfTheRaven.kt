@@ -6,6 +6,7 @@ import core.game.node.item.Item
 import core.game.world.update.flag.context.Graphics
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.tools.END_DIALOGUE
 
 /**
@@ -14,7 +15,7 @@ import rs09.tools.END_DIALOGUE
 class StaffOfTheRaven : InteractionListener {
     val ids = intArrayOf(14654, 14655, 14656)
     override fun defineListeners() {
-        on(ids, ITEM, "recolor", "operate"){player, node ->
+        on(ids, IntType.ITEM, "recolor", "operate"){player, node ->
             val hasUnlocked = player.getAttribute("sotr:purchased",false)
             val hasRecolorA = player.getAttribute("sotr:recolor1", false)
             val hasRecolorB = player.getAttribute("sotr:recolor2", false)

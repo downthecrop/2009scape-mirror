@@ -10,6 +10,7 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import java.util.*
 
 /**
@@ -19,18 +20,18 @@ import java.util.*
 class AFURepairClimbHandler : InteractionListener {
 
     val repairIDs = intArrayOf(38480,38470,38494)
-    val climbIDs = intArrayOf(38469,38471,38486,38481,38469)
+    val climbIDs = intArrayOf(38469,38471,38486,38481)
 
     override fun defineListeners() {
 
-        on(repairIDs,SCENERY,"repair"){ player, _ ->
+        on(repairIDs, IntType.SCENERY, "repair"){ player, _ ->
             var rco: RepairClimbObject = RepairClimbObject.GWD
             for(ent in RepairClimbObject.values()) if(ent.destinationDown?.withinDistance(player.location,2) == true || ent.destinationUp?.withinDistance(player.location,2) == true) rco = ent
             repair(player,rco)
             return@on true
         }
 
-        on(climbIDs,SCENERY,"climb"){ player, node ->
+        on(climbIDs, IntType.SCENERY, "climb"){ player, node ->
             var rco: RepairClimbObject = RepairClimbObject.GWD
             for(ent in RepairClimbObject.values()) if(ent.destinationDown?.withinDistance(player.location,2) == true || ent.destinationUp?.withinDistance(player.location,2) == true) rco = ent
             climb(player,rco,node.location)

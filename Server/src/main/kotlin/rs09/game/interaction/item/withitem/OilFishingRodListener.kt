@@ -5,10 +5,11 @@ import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class OilFishingRodListener : InteractionListener {
     override fun defineListeners() {
-        onUseWith(ITEM, Items.BLAMISH_OIL_1582, Items.FISHING_ROD_307) {player, used, with ->
+        onUseWith(IntType.ITEM, Items.BLAMISH_OIL_1582, Items.FISHING_ROD_307) {player, used, with ->
             player.pulseManager.run(object : Pulse() {
                 var counter = 0
                 override fun pulse(): Boolean {
@@ -26,7 +27,7 @@ class OilFishingRodListener : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(ITEM, Items.THIN_SNAIL_3363, Items.PESTLE_AND_MORTAR_233) {player, used, with ->
+        onUseWith(IntType.ITEM, Items.THIN_SNAIL_3363, Items.PESTLE_AND_MORTAR_233) {player, used, with ->
             if (player.inventory.contains(Items.SAMPLE_BOTTLE_3377, 1)) {
                 player.pulseManager.run(object : Pulse() {
                     var counter = 0

@@ -13,6 +13,7 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.node.entity.player.info.stats.FISHING_TRAWLER_LEAKS_PATCHED
 import rs09.game.node.entity.player.info.stats.STATS_BASE
 import rs09.tools.stringtools.colorize
@@ -34,7 +35,7 @@ class FishingTrawlerInteractionHandler : InteractionListener {
 
     override fun defineListeners() {
 
-        on(ENTRANCE_PLANK,SCENERY,"cross"){ player, _ ->
+        on(ENTRANCE_PLANK, IntType.SCENERY, "cross"){ player, _ ->
             if(player.skills.getLevel(Skills.FISHING) < 15){
                 player.dialogueInterpreter.sendDialogue("You need to be at least level 15 fishing to play.")
                 return@on true
@@ -44,7 +45,7 @@ class FishingTrawlerInteractionHandler : InteractionListener {
             return@on true
         }
 
-        on(EXIT_PLANK,SCENERY,"cross"){ player, _ ->
+        on(EXIT_PLANK, IntType.SCENERY, "cross"){ player, _ ->
             player.properties.teleportLocation = Location.create(2676, 3170, 0)
             (ActivityManager.getActivity("fishing trawler") as FishingTrawlerActivity).removePlayer(player)
             val session: FishingTrawlerSession? = player.getAttribute("ft-session",null)
@@ -52,7 +53,7 @@ class FishingTrawlerInteractionHandler : InteractionListener {
             return@on true
         }
 
-        on(HOLE,SCENERY,"fill"){ player, node ->
+        on(HOLE, IntType.SCENERY, "fill"){ player, node ->
             val session: FishingTrawlerSession? = player.getAttribute("ft-session",null)
             session ?: return@on false
             player.lock()
@@ -70,12 +71,12 @@ class FishingTrawlerInteractionHandler : InteractionListener {
             return@on true
         }
 
-        on(NETIDs,SCENERY,"inspect"){ player, _ ->
+        on(NETIDs, IntType.SCENERY, "inspect"){ player, _ ->
             player.dialogueInterpreter.open(18237583)
             return@on true
         }
 
-        on(REWARD_NET,SCENERY,"inspect"){ player, _ ->
+        on(REWARD_NET, IntType.SCENERY, "inspect"){ player, _ ->
             val session: FishingTrawlerSession? = player.getAttribute("ft-session",null)
             if(session == null || session.boatSank){
                 player.dialogueInterpreter.sendDialogues(player, FacialExpression.GUILTY,"I'd better not go stealing other people's fish.")
@@ -85,7 +86,7 @@ class FishingTrawlerInteractionHandler : InteractionListener {
             return@on true
         }
 
-        on(BARREL_IDS,SCENERY,"climb-on"){ player, _ ->
+        on(BARREL_IDS, IntType.SCENERY, "climb-on"){ player, _ ->
             player.properties.teleportLocation = Location.create(2672, 3222, 0)
             player.dialogueInterpreter.sendDialogue("You climb onto the floating barrel and begin to kick your way to the","shore.","You make it to the shore tired and weary.")
             player.appearance.setDefaultAnimations()
@@ -93,7 +94,7 @@ class FishingTrawlerInteractionHandler : InteractionListener {
             return@on true
         }
 
-        on(FULL_BAIL_BUCKET,ITEM,"empty"){player,node ->
+        on(FULL_BAIL_BUCKET, IntType.ITEM, "empty"){player,node ->
             player.lock()
             player.pulseManager.run(
                 object : Pulse(){
@@ -115,7 +116,7 @@ class FishingTrawlerInteractionHandler : InteractionListener {
             return@on true
         }
 
-        on(BAILING_BUCKET,ITEM,"bail-with") { player, node ->
+        on(BAILING_BUCKET, IntType.ITEM, "bail-with") { player, node ->
             val session: FishingTrawlerSession? = player.getAttribute("ft-session",null)
             session ?: return@on false
             if(!session.isActive){

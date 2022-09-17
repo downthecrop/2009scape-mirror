@@ -4,13 +4,14 @@ import api.*
 import org.rs09.consts.Scenery
 import rs09.GlobalStats
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class ChurchSignListener : InteractionListener {
 
     val CHURCH_SIGN = Scenery.SIGNPOST_31299
 
     override fun defineListeners() {
-        on(CHURCH_SIGN, SCENERY, "read"){player, _ ->
+        on(CHURCH_SIGN, IntType.SCENERY, "read"){player, _ ->
             val deaths = GlobalStats.getDailyDeaths()
             if(deaths > 0) {
                 sendDialogue(player, "So far today $deaths unlucky adventurers have died on RuneScape and been sent to their respawn location. Be careful out there.")

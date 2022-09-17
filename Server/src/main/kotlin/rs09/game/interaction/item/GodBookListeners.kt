@@ -7,6 +7,7 @@ import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.tools.END_DIALOGUE
 
 class GodBookListeners : InteractionListener {
@@ -16,17 +17,17 @@ class GodBookListeners : InteractionListener {
     val GB_GUTHIX = Items.BOOK_OF_BALANCE_3844
 
     override fun defineListeners() {
-        on(GB_SARADOMIN, ITEM, "preach"){player, _ ->
+        on(GB_SARADOMIN, IntType.ITEM, "preach"){player, _ ->
             openDialogue(player, HOLY_DIALOGUE(BOOK.SARA))
             return@on true
         }
 
-        on(GB_ZAMORAK, ITEM, "preach"){ player, _ ->
+        on(GB_ZAMORAK, IntType.ITEM, "preach"){ player, _ ->
             openDialogue(player, HOLY_DIALOGUE(BOOK.ZAM))
             return@on true
         }
 
-        on(GB_GUTHIX, ITEM, "preach"){ player, _ ->
+        on(GB_GUTHIX, IntType.ITEM, "preach"){ player, _ ->
             openDialogue(player, HOLY_DIALOGUE(BOOK.GUTHIX))
             return@on true
         }

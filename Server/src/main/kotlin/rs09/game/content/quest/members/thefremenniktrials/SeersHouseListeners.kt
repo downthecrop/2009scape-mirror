@@ -14,6 +14,7 @@ import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class SeersHouseListeners : InteractionListener {
 
@@ -96,7 +97,7 @@ class SeersHouseListeners : InteractionListener {
 
     override fun defineListeners() {
 
-        on(WESTDOOR,SCENERY,"open"){player,node ->
+        on(WESTDOOR, IntType.SCENERY, "open"){player,node ->
             if(!player.getAttribute("PeerStarted",false)){
                 sendDialogue(player,"You should probably talk to the owner of this home.")
             }
@@ -120,12 +121,12 @@ class SeersHouseListeners : InteractionListener {
             return@on true
         }
 
-        on(WESTLADDER, SCENERY,"Climb-up") { player, node ->
+        on(WESTLADDER, IntType.SCENERY, "Climb-up") { player, node ->
             ClimbActionHandler.climb(player, Animation(828), Location.create(2631, 3664, 2))
             return@on true
         }
 
-        on(WESTTRAPDOOR.id, SCENERY,"Climb-down") { player, node ->
+        on(WESTTRAPDOOR.id, IntType.SCENERY, "Climb-down") { player, node ->
             if(player.location.x < 2634){
                 ClimbActionHandler.climb(player, Animation(828), Location.create(2631, 3664, 0))
             }
@@ -135,39 +136,39 @@ class SeersHouseListeners : InteractionListener {
             return@on true
         }
 
-        on(WESTTRAPDOOR.id, SCENERY,"Close") { player, node ->
+        on(WESTTRAPDOOR.id, IntType.SCENERY, "Close") { player, node ->
             SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(4174))
             return@on true
         }
 
-        on(WESTTRAPDOOR.id, SCENERY,"Open") { player, node ->
+        on(WESTTRAPDOOR.id, IntType.SCENERY, "Open") { player, node ->
             SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(4173))
             return@on true
         }
 
-        on(EASTTRAPDOOR.id, SCENERY,"Open") { player, node ->
+        on(EASTTRAPDOOR.id, IntType.SCENERY, "Open") { player, node ->
             SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(4173))
             return@on true
         }
 
-        on(EASTTRAPDOOR.id, SCENERY,"Close") { player, node ->
+        on(EASTTRAPDOOR.id, IntType.SCENERY, "Close") { player, node ->
             SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(4174))
             return@on true
         }
 
-        on(EASTTRAPDOOR.id, SCENERY,"Climb-down") { player, node ->
+        on(EASTTRAPDOOR.id, IntType.SCENERY, "Climb-down") { player, node ->
             if(player.location.x > 2634){
                 ClimbActionHandler.climb(player, Animation(828), Location.create(2636, 3664, 0))
             }
             return@on true
         }
 
-        on(EASTLADDER, SCENERY,"Climb-Up") { player, node ->
+        on(EASTLADDER, IntType.SCENERY, "Climb-Up") { player, node ->
             ClimbActionHandler.climb(player, Animation(828), Location.create(2636, 3664, 2))
             return@on true
         }
 
-        on(CUPBOARD,SCENERY,"Search") { player, node ->
+        on(CUPBOARD, IntType.SCENERY, "Search") { player, node ->
             sendMessage(player,"You search the cupboard...")
             if(player.inventory.contains(EMPTYBUCKET,1)){
                 sendMessage(player,"You find nothing of interest.")
@@ -179,12 +180,12 @@ class SeersHouseListeners : InteractionListener {
             return@on true
         }
 
-        on(BALANCECHEST, SCENERY,"Open") { player, node ->
+        on(BALANCECHEST, IntType.SCENERY, "Open") { player, node ->
             sendDialogue(player,"This chest is securely locked shut. There is some kind of balance attached to the lock, and a number four is painted just above it.")
             return@on true
         }
 
-        on(BOOKCASE, SCENERY,"Search") { player, node ->
+        on(BOOKCASE, IntType.SCENERY, "Search") { player, node ->
             sendMessage(player,"You search the bookcase...")
             if(player.inventory.contains(REDHERRING,1)){
                 sendMessage(player,"You find nothing of interest.")
@@ -196,7 +197,7 @@ class SeersHouseListeners : InteractionListener {
             return@on true
         }
 
-        on(SOUTHBOXES, SCENERY,"Search"){ player, node ->
+        on(SOUTHBOXES, IntType.SCENERY, "Search"){ player, node ->
             sendMessage(player,"You search the boxes...")
             if(player.inventory.contains(BLUETHREAD,1)){
                 sendMessage(player,"You find nothing of interest.")
@@ -208,17 +209,17 @@ class SeersHouseListeners : InteractionListener {
             return@on true
         }
 
-        on(CHEST, SCENERY,"Open"){ player, node ->
+        on(CHEST, IntType.SCENERY, "Open"){ player, node ->
             SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(4168))
             return@on true
         }
 
-        on(CHEST, SCENERY,"Close"){ player, node ->
+        on(CHEST, IntType.SCENERY, "Close"){ player, node ->
             SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(4167))
             return@on true
         }
 
-        on(CHEST, SCENERY,"Search"){ player, node ->
+        on(CHEST, IntType.SCENERY, "Search"){ player, node ->
             sendMessage(player,"You search the chest...")
             if(player.inventory.contains(EMPTYJUG,1)){
                 sendMessage(player,"You find nothing of interest.")
@@ -230,7 +231,7 @@ class SeersHouseListeners : InteractionListener {
             return@on true
         }
 
-        on(EASTCRATES, SCENERY,"Search") { player, node ->
+        on(EASTCRATES, IntType.SCENERY, "Search") { player, node ->
             sendMessage(player,"You search the crates...")
             if(player.inventory.contains(PICK,1)){
                 sendMessage(player,"You find nothing of interest.")
@@ -242,7 +243,7 @@ class SeersHouseListeners : InteractionListener {
             return@on true
         }
 
-        on(SOUTHCRATES, SCENERY,"Search") { player, node ->
+        on(SOUTHCRATES, IntType.SCENERY, "Search") { player, node ->
             sendMessage(player,"You search the crates...")
             if(player.inventory.contains(SHIPTOY,1)){
                 sendMessage(player,"You find nothing of interest.")
@@ -254,41 +255,17 @@ class SeersHouseListeners : InteractionListener {
             return@on true
         }
 
-        on(SOUTHBOXES, SCENERY,"Search") { player, node ->
-            sendMessage(player,"You search the boxes...")
-            if(player.inventory.contains(MAGNET,1)){
-                sendMessage(player,"You find nothing of interest.")
-            }
-            else{
-                addItem(player,MAGNET)
-                sendMessage(player,"You find a magnet hidden inside.")
-            }
-            return@on true
-        }
-
-        on(SOUTHBOXES, SCENERY,"Search") { player, node ->
-            sendMessage(player,"You search the boxes...")
-            if(player.inventory.contains(MAGNET,1)){
-                sendMessage(player,"You find nothing of interest.")
-            }
-            else{
-                addItem(player,MAGNET)
-                sendMessage(player,"You find a magnet hidden inside.")
-            }
-            return@on true
-        }
-
-        on(BULLSHEAD, SCENERY,"Study") { player, node ->
+        on(BULLSHEAD, IntType.SCENERY, "Study") { player, node ->
             player.dialogueInterpreter.open(BullHeadDialogue(player))
             return@on true
         }
 
-        on(UNICORNHEAD, SCENERY,"Study") { player, node ->
+        on(UNICORNHEAD, IntType.SCENERY, "Study") { player, node ->
             player.dialogueInterpreter.open(UnicornHeadDialogue(player))
             return@on true
         }
 
-        onUseWith(SCENERY,REDHERRING,COOKINGRANGE) { player, used, with ->
+        onUseWith(IntType.SCENERY,REDHERRING,COOKINGRANGE) { player, used, with ->
             player.animate(Animation(883,Animator.Priority.HIGH))
             player.audioManager.send(Audio(2577, 1, 1))
             removeItem(player,REDHERRING)
@@ -297,19 +274,20 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(ITEM,REDGOOP,WOODENDISK) { player, used, with ->
-            removeItem(player,WOODENDISK)
+        onUseWith(IntType.ITEM,REDGOOP,WOODENDISK) { player, used, with ->
+            removeItem(player, WOODENDISK)
+            removeItem(player, REDGOOP)
             addItem(player,REDDISK)
             sendMessage(player,"You coat the wooden coin with the sticky red goop.")
             return@onUseWith true
         }
 
-        on(MURAL, SCENERY,"Study") { player, node ->
+        on(MURAL, IntType.SCENERY, "Study") { player, node ->
             sendMessage(player,"The mural feels like something is missing.")
             return@on true
         }
 
-        onUseWith(SCENERY, BUCKETS, TAP) { player, bucket, _ ->
+        onUseWith(IntType.SCENERY, BUCKETS, TAP) { player, bucket, _ ->
             when(bucket.id){
                 3727 ->{
                     removeItem(player,EMPTYBUCKET)
@@ -345,7 +323,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY, JUGS, TAP) { player, used, with ->
+        onUseWith(IntType.SCENERY, JUGS, TAP) { player, used, with ->
             when(used.id){
                 EMPTYJUG ->{
                     removeItem(player,EMPTYJUG)
@@ -369,7 +347,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY, BUCKETS, DRAIN) { player, used, with ->
+        onUseWith(IntType.SCENERY, BUCKETS, DRAIN) { player, used, with ->
             when(used.id){
                 EMPTYBUCKET ->{
                     sendMessage(player,"The bucket is already empty!")
@@ -403,7 +381,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY, JUGS, DRAIN) { player, used, with ->
+        onUseWith(IntType.SCENERY, JUGS, DRAIN) { player, used, with ->
             when(used.id){
                 EMPTYJUG ->{
                     sendMessage(player,"The jug is already empty!")
@@ -427,14 +405,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(ITEM,REDGOOP,WOODENDISK) { player, _, _ ->
-            removeItem(player,REDGOOP)
-            removeItem(player,WOODENDISK)
-            addItem(player,REDDISK)
-            return@onUseWith true
-        }
-
-        onUseWith(SCENERY, FOURFIFTHBUCKET, BALANCECHEST) { player, used, with ->
+        onUseWith(IntType.SCENERY, FOURFIFTHBUCKET, BALANCECHEST) { player, used, with ->
             removeItem(player,FOURFIFTHBUCKET)
             addItem(player,VASE)
             sendMessage(player,"You place the bucket on the scale.")
@@ -443,7 +414,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY, DISKS, MURAL) { player, used, with ->
+        onUseWith(IntType.SCENERY, DISKS, MURAL) { player, used, with ->
             when(used.id){
                 REDDISK ->{
                     if(player.getAttribute("olddiskplaced",false)){
@@ -481,7 +452,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY, BUCKETS, BALANCECHEST) { player, used, with ->
+        onUseWith(IntType.SCENERY, BUCKETS, BALANCECHEST) { player, used, with ->
             when(used.id){
                 EMPTYBUCKET ->{
                     player.animate(Animation(883,Animator.Priority.HIGH))
@@ -519,7 +490,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY, JUGS, BALANCECHEST) { player, used, with ->
+        onUseWith(IntType.SCENERY, JUGS, BALANCECHEST) { player, used, with ->
             when(used.id){
                 EMPTYJUG ->{
                     player.animate(Animation(883,Animator.Priority.HIGH))
@@ -545,7 +516,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY, BUCKETS, FROZENTABLE) { player, used, with ->
+        onUseWith(IntType.SCENERY, BUCKETS, FROZENTABLE) { player, used, with ->
             when(used.id){
                 EMPTYBUCKET -> sendMessage(player,"Your empty bucket gets very cold on the icy table.")
                 FULLBUCKET -> {
@@ -558,7 +529,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY, JUGS, FROZENTABLE) { player, used, with ->
+        onUseWith(IntType.SCENERY, JUGS, FROZENTABLE) { player, used, with ->
             when(used.id){
                 EMPTYJUG -> sendMessage(player,"Your empty jug gets very cold on the icy table.")
                 FULLJUG -> {
@@ -571,7 +542,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(ITEM,BUCKETS,*JUGS) { player, used, with ->
+        onUseWith(IntType.ITEM,BUCKETS,*JUGS) { player, used, with ->
             when(used.id){
                 ONEFIFTHBUCKET -> {
                     when(with.id){
@@ -707,7 +678,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(ITEM,JUGS,*BUCKETS) { player, used, with ->
+        onUseWith(IntType.ITEM,JUGS,*BUCKETS) { player, used, with ->
             when(used.id){
                 ONETHIRDJUG->{
                     when(with.id){
@@ -833,30 +804,30 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        on(VASE,ITEM,"Shake") { player, node ->
+        on(VASE, IntType.ITEM, "Shake") { player, node ->
             sendDialogue(player,"You shake the strangely shaped Vase. From the sound of it there is something metallic inside, but the neck of th vase is too narrow for it to come out.")
             return@on true
         }
 
-        onUseWith(ITEM,PICK,VASE) { player, used, with ->
+        onUseWith(IntType.ITEM,PICK,VASE) { player, used, with ->
             sendMessage(player,"The pick wouldn't be strong enough to break the vase open.")
             return@onUseWith true
         }
 
-        onUseWith(ITEM,MAGNET,VASE) { player, used, with ->
+        onUseWith(IntType.ITEM,MAGNET,VASE) { player, used, with ->
             sendMessage(player,"You use the magnet on the vase. The metallic object inside moves.")
             sendMessage(player,"The neck of the vase is too thin for thee object to come out of the vase.")
             return@onUseWith true
         }
 
-        onUseWith(SCENERY, VASE, TAP) { player, used, with ->
+        onUseWith(IntType.SCENERY, VASE, TAP) { player, used, with ->
             removeItem(player,VASE)
             addItem(player,FULLVASE)
             sendMessage(player,"You fill the strange looking vase with water.")
             return@onUseWith true
         }
 
-        onUseWith(ITEM,FULLJUG,VASE) { player, used, with ->
+        onUseWith(IntType.ITEM,FULLJUG,VASE) { player, used, with ->
             removeItem(player,FULLJUG)
             removeItem(player,VASE)
             addItem(player,EMPTYJUG)
@@ -865,12 +836,12 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        on(FULLVASE,ITEM,"Shake") { player, node ->
+        on(FULLVASE, IntType.ITEM, "Shake") { player, node ->
             sendDialogue(player,"You shake the strangely shaped vase. The water inside it sloshes a little. Some spills out of the neck of the vase.")
             return@on true
         }
 
-        onUseWith(ITEM,VASE,VASELID) { player, used, with ->
+        onUseWith(IntType.ITEM,VASE,VASELID) { player, used, with ->
             removeItem(player,VASE)
             removeItem(player,VASELID)
             addItem(player,SEALEDEMPTYVASE)
@@ -878,7 +849,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(ITEM,FULLVASE,VASELID) { player, used, with ->
+        onUseWith(IntType.ITEM,FULLVASE,VASELID) { player, used, with ->
             removeItem(player,FULLVASE)
             removeItem(player,VASELID)
             addItem(player,SEALEDFULLVASE)
@@ -886,7 +857,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        on(SEALEDEMPTYVASE,ITEM,"Remove-lid") { player, node ->
+        on(SEALEDEMPTYVASE, IntType.ITEM, "Remove-lid") { player, node ->
             removeItem(player,SEALEDEMPTYVASE)
             addItem(player,VASE)
             addItem(player,VASELID)
@@ -894,7 +865,7 @@ class SeersHouseListeners : InteractionListener {
             return@on true
         }
 
-        on(SEALEDFULLVASE,ITEM,"Remove-lid") { player, node ->
+        on(SEALEDFULLVASE, IntType.ITEM, "Remove-lid") { player, node ->
             removeItem(player,SEALEDFULLVASE)
             addItem(player,VASE)
             addItem(player,VASELID)
@@ -902,7 +873,7 @@ class SeersHouseListeners : InteractionListener {
             return@on true
         }
 
-        onUseWith(SCENERY, FULLVASE, FROZENTABLE) { player, used, with ->
+        onUseWith(IntType.SCENERY, FULLVASE, FROZENTABLE) { player, used, with ->
             player.animate(Animation(883,Animator.Priority.HIGH))
             removeItem(player,VASE)
             addItem(player,FROZENVASE)
@@ -910,7 +881,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY, SEALEDFULLVASE, FROZENTABLE) { player, used, with ->
+        onUseWith(IntType.SCENERY, SEALEDFULLVASE, FROZENTABLE) { player, used, with ->
             player.animate(Animation(883,Animator.Priority.HIGH))
             removeItem(player,SEALEDFULLVASE)
             addItem(player,FROZENKEY)
@@ -919,7 +890,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY, FROZENBUCKET, COOKINGRANGE) { player, used, with ->
+        onUseWith(IntType.SCENERY, FROZENBUCKET, COOKINGRANGE) { player, used, with ->
             player.animate(Animation(883,Animator.Priority.HIGH))
             player.audioManager.send(Audio(2577, 1, 1))
             removeItem(player,FROZENBUCKET)
@@ -928,7 +899,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY, FROZENJUG, COOKINGRANGE) { player, used, with ->
+        onUseWith(IntType.SCENERY, FROZENJUG, COOKINGRANGE) { player, used, with ->
             player.animate(Animation(883,Animator.Priority.HIGH))
             player.audioManager.send(Audio(2577, 1, 1))
             removeItem(player,FROZENJUG)
@@ -937,7 +908,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY, FROZENVASE, COOKINGRANGE) { player, used, with ->
+        onUseWith(IntType.SCENERY, FROZENVASE, COOKINGRANGE) { player, used, with ->
             player.animate(Animation(883,Animator.Priority.HIGH))
             player.audioManager.send(Audio(2577, 1, 1))
             removeItem(player,FROZENVASE)
@@ -946,7 +917,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(SCENERY, FROZENKEY, COOKINGRANGE) { player, used, with ->
+        onUseWith(IntType.SCENERY, FROZENKEY, COOKINGRANGE) { player, used, with ->
             player.animate(Animation(883,Animator.Priority.HIGH))
             player.audioManager.send(Audio(2577, 1, 1))
             removeItem(player,FROZENKEY)
@@ -955,7 +926,7 @@ class SeersHouseListeners : InteractionListener {
             return@onUseWith true
         }
 
-        on(EASTDOOR, SCENERY,"Open") { player, node ->
+        on(EASTDOOR, IntType.SCENERY, "Open") { player, node ->
             if(player.inventory.contains(SEERSKEY,1)){
                 player.setAttribute("/save:housepuzzlesolved",true)
                 player.inventory.clear()

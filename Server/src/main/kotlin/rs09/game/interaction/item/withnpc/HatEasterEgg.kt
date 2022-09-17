@@ -7,6 +7,7 @@ import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 val graphics = 482
 class HatEasterEgg : InteractionListener {
@@ -16,7 +17,7 @@ class HatEasterEgg : InteractionListener {
     val NEW_HAT = 14650
 
     override fun defineListeners() {
-        onUseWith(SCENERY,WIZ_HAT,MACHINE){ player, used, with ->
+        onUseWith(IntType.SCENERY,WIZ_HAT,MACHINE){ player, used, with ->
             player.dialogueInterpreter.open(HatDialogue(), NPC(872))
             return@onUseWith true
         }

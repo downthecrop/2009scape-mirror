@@ -26,6 +26,7 @@ import org.rs09.consts.Animations
 import org.rs09.consts.Graphics as Gfx
 import org.rs09.consts.Scenery as Sceneries
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.world.GameWorld
 import kotlin.math.cos
 import kotlin.math.sin
@@ -43,24 +44,24 @@ class AbyssPlugin : InteractionListener {
         definePlugin(AbyssalNPC())
         definePlugin(DarkMageDialogue())
         definePlugin(ZamorakMageDialogue())
-        on(NPCs.MAGE_OF_ZAMORAK_2259, NPC, "teleport"){ player, node ->
+        on(NPCs.MAGE_OF_ZAMORAK_2259, IntType.NPC, "teleport"){ player, node ->
             teleport(player, node as NPC)
             return@on true
         }
-        on(NPCs.DARK_MAGE_2262, NPC, "repair-pouches"){ player, node ->
+        on(NPCs.DARK_MAGE_2262, IntType.NPC, "repair-pouches"){ player, node ->
             player.dialogueInterpreter.open(node.id, node, true)
             return@on true
         }
-        on(SCENERY, "exit-through"){ player, node ->
+        on(IntType.SCENERY, "exit-through"){ player, node ->
             val altar = Altar.forObject(node as Scenery)
             altar?.enterRift(player)
             return@on true
         }
-        on(Sceneries.PASSAGE_7154, SCENERY, "go-through",){ player, node ->
+        on(Sceneries.PASSAGE_7154, IntType.SCENERY, "go-through",){ player, node ->
             player.properties.teleportLocation = innerRing(node)
             return@on true
         }
-        on(Sceneries.ROCK_7158, SCENERY, "mine"){ player, node ->
+        on(Sceneries.ROCK_7158, IntType.SCENERY, "mine"){ player, node ->
             val tool: SkillingTool? = getTool(player, true)
             if (tool == null) {
                 sendMessage(player, "You need a pickaxe in order to do that.")
@@ -79,7 +80,7 @@ class AbyssPlugin : InteractionListener {
                 )
             )
         }
-        on(Sceneries.TENDRILS_7161, SCENERY, "chop"){ player, node ->
+        on(Sceneries.TENDRILS_7161, IntType.SCENERY, "chop"){ player, node ->
             val tool: SkillingTool? = getTool(player, false)
             if (tool == null) {
                 sendMessage(player, "You need an axe in order to do that.")
@@ -98,7 +99,7 @@ class AbyssPlugin : InteractionListener {
                 )
             )
         }
-        on(Sceneries.BOIL_7165, SCENERY, "burn-down"){ player, node ->
+        on(Sceneries.BOIL_7165, IntType.SCENERY, "burn-down"){ player, node ->
             if (!inInventory(player, Items.TINDERBOX_590)) {
                 sendMessage(player, "You don't have a tinderbox to burn it.")
                 return@on true
@@ -118,7 +119,7 @@ class AbyssPlugin : InteractionListener {
                 )
             )
         }
-        on(Sceneries.EYES_7168, SCENERY, "distract"){ player, node ->
+        on(Sceneries.EYES_7168, IntType.SCENERY, "distract"){ player, node ->
             val distractEmote = Animation(distractEmotes[RandomFunction.random(0,distractEmotes.size)])
             return@on handleObstacle(
                 node,
@@ -133,7 +134,7 @@ class AbyssPlugin : InteractionListener {
                 )
             )
         }
-        on(Sceneries.GAP_7164, SCENERY, "squeeze-through"){ player, node ->
+        on(Sceneries.GAP_7164, IntType.SCENERY, "squeeze-through"){ player, node ->
             return@on handleObstacle(
                 node,
                 player,
@@ -254,7 +255,7 @@ class AbyssPlugin : InteractionListener {
         const val BURN_PROGRESS = 16
         const val DISTRACT_PROGRESS = 18
         fun handleObstacle(obstacle: Node, player: Player, skill: Int, varbitVal: Int?, animation: Animation, messages: Array<String>): Boolean {
-            logInfo("handled abyss ${obstacle.name}")
+            logInfo(this::class.java, "handled abyss ${obstacle.name}")
             player.lock()
             player.animate(animation)
             GameWorld.Pulser.submit(object : Pulse(1, player) {

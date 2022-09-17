@@ -12,6 +12,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.world.GameWorld.Pulser
 import rs09.tools.END_DIALOGUE
 
@@ -207,7 +208,7 @@ class BrotherOmadDialogue : DialogueFile() {
  */
 class BrotherOmadListener : InteractionListener {
     override fun defineListeners() {
-        on(NPCs.BROTHER_OMAD_279, NPC, "talk-to"){ player, _ ->
+        on(NPCs.BROTHER_OMAD_279, IntType.NPC, "talk-to"){ player, _ ->
             player.dialogueInterpreter.open(BrotherOmadDialogue(), NPC(NPCs.BROTHER_OMAD_279))
             return@on true
         }

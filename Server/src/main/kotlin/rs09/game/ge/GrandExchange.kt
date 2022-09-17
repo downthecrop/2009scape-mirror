@@ -225,7 +225,7 @@ class GrandExchange : StartupListener, Commands {
 
             if ( offer.offerState != OfferState.PENDING || offer.uid != 0L )
             {
-                SystemLogger.logWarn("[GE] DISPATCH FAILURE: ${offer.offerState.name}, UID: ${offer.uid}")
+                SystemLogger.logWarn(this::class.java, "[GE] DISPATCH FAILURE: ${offer.offerState.name}, UID: ${offer.uid}")
                 return false
             }
 

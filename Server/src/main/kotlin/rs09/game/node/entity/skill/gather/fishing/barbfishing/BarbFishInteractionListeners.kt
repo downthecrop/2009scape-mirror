@@ -2,11 +2,12 @@ package rs09.game.node.entity.skill.gather.fishing.barbfishing
 
 import core.game.node.item.Item
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class BarbFishInteractionListeners : InteractionListener {
     override fun defineListeners() {
 
-        on(25268,SCENERY,"search"){ player, _ ->
+        on(25268, IntType.SCENERY, "search"){ player, _ ->
             if(player.getAttribute("barbtraining:fishing",false) == true){
                 if(!player.inventory.containsItem(Item(11323))){
                     player.inventory.add(Item(11323))
@@ -20,7 +21,7 @@ class BarbFishInteractionListeners : InteractionListener {
             return@on true
         }
 
-        on(1176,NPC,"fish"){player,_ ->
+        on(1176, IntType.NPC, "fish"){player,_ ->
             player.pulseManager.run(BarbFishingPulse(player))
             player.sendMessage("You attempt to catch a fish...")
             return@on true

@@ -63,11 +63,11 @@ public class AccountRegister {
 				response(session, RegistryResponse.SUCCESS);
 				break;
 			case 36://Register details
-				SystemLogger.logInfo("Made it to final stage");
+				SystemLogger.logInfo(AccountRegister.class, "Made it to final stage");
 				buffer.get(); //Useless size being written that is already written in the RSA block
 				buffer = Login.decryptRSABuffer(buffer, ServerConstants.EXPONENT, ServerConstants.MODULUS);
 				if(buffer.get() != 10){ //RSA header (aka did this decrypt properly)
-					SystemLogger.logInfo("Decryption failed during registration :(");
+					SystemLogger.logInfo(AccountRegister.class, "Decryption failed during registration :(");
 					response(session, RegistryResponse.CANNOT_CREATE);
 					break;
 				}
@@ -116,7 +116,7 @@ public class AccountRegister {
 				});
 				break;
 			default:
-				SystemLogger.logErr("Unhandled account registry opcode = " + opcode);
+				SystemLogger.logErr(AccountRegister.class, "Unhandled account registry opcode = " + opcode);
 				break;
 		}
 	}

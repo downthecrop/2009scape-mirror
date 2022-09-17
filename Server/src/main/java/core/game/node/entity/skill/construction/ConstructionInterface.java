@@ -39,12 +39,12 @@ public final class ConstructionInterface extends ComponentPlugin {
 						Hotspot hotspot = player.getAttribute("con:hotspot");
 						Scenery object = player.getAttribute("con:hsobject");
 						if (hotspot == null || object == null) {
-							SystemLogger.logErr("Failed building decoration " + hotspot + " : " + object);
+							SystemLogger.logErr(this.getClass(), "Failed building decoration " + hotspot + " : " + object);
 							break;
 						}
 						slot = ((slot % 2 != 0) ? 4 : 0) + (slot >> 1);
 						if (slot >= hotspot.getHotspot().getDecorations().length) {
-							SystemLogger.logErr("Failed building decoration " + slot + "/" + hotspot.getHotspot().getDecorations().length);
+							SystemLogger.logErr(this.getClass(), "Failed building decoration " + slot + "/" + hotspot.getHotspot().getDecorations().length);
 							break;
 						}
 						boolean debug = player.isStaff();
@@ -105,7 +105,7 @@ public final class ConstructionInterface extends ComponentPlugin {
 				break;
 			case 402:
 				int index = button - 160;
-				SystemLogger.logErr("BuildRoom Interface Index: " + index);
+				SystemLogger.logErr(this.getClass(), "BuildRoom Interface Index: " + index);
 				if (index > -1 && index < RoomProperties.values().length) {
 					player.getDialogueInterpreter().open("con:room", RoomProperties.values()[index]);
 					return true;

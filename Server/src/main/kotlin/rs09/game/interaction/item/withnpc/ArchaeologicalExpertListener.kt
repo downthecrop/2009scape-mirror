@@ -6,6 +6,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.region.examcentre.ArchaeologistcalExpertUsedOnDialogueFile
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 open class ArchaeologicalExpertListener() : InteractionListener {
     val staff = Items.ANCIENT_STAFF_4675
@@ -42,7 +43,7 @@ open class ArchaeologicalExpertListener() : InteractionListener {
     val lol = arrayOf(Items)
 
     override fun defineListeners() {
-        onUseWith(NPC, items, archy) {
+        onUseWith(IntType.NPC, items, archy) {
                 player, used, with -> openDialogue(player, ArchaeologistcalExpertUsedOnDialogueFile(used.id))
             return@onUseWith false
         }

@@ -5,12 +5,13 @@ import api.*
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class JohnathonAntiPosionInteraction: InteractionListener {
     override fun defineListeners() {
         val poisons = intArrayOf(Items.ANTIPOISON4_2446, Items.ANTIPOISON3_175, Items.ANTIPOISON2_177, Items.ANTIPOISON1_179)
 
-        onUseWith(NPC, poisons, NPCs.JOHNATHON_668){player, used, with ->
+        onUseWith(IntType.NPC, poisons, NPCs.JOHNATHON_668){player, used, with ->
             val npc = with.asNpc()
             val antip = used.asItem()
             val stage = questStage(player, "Family Crest")

@@ -289,7 +289,7 @@ public final class BuildingUtils {
 								}
 							}
 						} else {
-							SystemLogger.logErr("Couldn't find stairs! " + plane);
+							SystemLogger.logErr(BuildingUtils.class, "Couldn't find stairs! " + plane);
 						}
 					}
 				}
@@ -409,7 +409,7 @@ public final class BuildingUtils {
 								}
 							}
 						} else {
-							SystemLogger.logErr("Couldn't find stairs! " + plane);
+							SystemLogger.logErr(BuildingUtils.class, "Couldn't find stairs! " + plane);
 						}
 					}
 				}
@@ -632,8 +632,8 @@ public final class BuildingUtils {
 		Direction[] directions = new Direction[4];
 		boolean[] exit = Arrays.copyOf(exits, exits.length); //(0=east, 1=south, 2=west, 3=north)
 		int[] info = getExitRequirements(player, z, roomX, roomY);//(0=west, 1=north, 2=east, 3=south)
-		//		SystemLogger.logErr("Available exits - [east=" + exit[0] + ", south=" + exit[1] + ", west=" + exit[2] + ", north=" + exit[3] + "]!");
-		//		SystemLogger.logErr("Required exits - [east=" + info[0] + ", south=" + info[1] + ", west=" + info[2] + ", north=" + info[3] + "]!");
+		//		SystemLogger.logErr(BuildingUtils.class, "Available exits - [east=" + exit[0] + ", south=" + exit[1] + ", west=" + exit[2] + ", north=" + exit[3] + "]!");
+		//		SystemLogger.logErr(BuildingUtils.class, "Required exits - [east=" + info[0] + ", south=" + info[1] + ", west=" + info[2] + ", north=" + info[3] + "]!");
 		for (int i = 0; i < 4; i++) {
 			boolean success = true;
 			for (int j = 0; j < 4; j++) {

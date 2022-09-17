@@ -61,7 +61,7 @@ object TestUtils {
     }
 
     fun advanceTicks(amount: Int, skipPulseUpdates: Boolean = true) {
-        SystemLogger.logInfo("Advancing ticks by $amount.")
+        SystemLogger.logInfo(this::class.java, "Advancing ticks by $amount.")
         for(i in 0 until amount) {
             GameWorld.majorUpdateWorker.handleTickActions(skipPulseUpdates)
         }

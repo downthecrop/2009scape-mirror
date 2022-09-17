@@ -10,6 +10,7 @@ import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import rs09.game.interaction.IntType
 import org.rs09.consts.Scenery as Sceneries
 import rs09.game.interaction.InteractionListener
 import rs09.game.world.GameWorld
@@ -24,7 +25,7 @@ class LostCityListeners : InteractionListener {
     override fun defineListeners() {
 
         // the shed teleport, to allow players to access zanaris if they enter the shed while wielding the dramen staff
-        on(Sceneries.DOOR_2406,SCENERY,"open"){ player, node ->
+        on(Sceneries.DOOR_2406,IntType.SCENERY,"open"){ player, node ->
             DoorActionHandler.handleAutowalkDoor(player,node as Scenery)
             val quest = "Lost City"
             val isOutsideShed = player.location.x < node.location.x
@@ -52,7 +53,7 @@ class LostCityListeners : InteractionListener {
             return@on true
         }
         // creating the dramen staff via using knife on dramen branch
-        onUseWith(ITEM,Items.KNIFE_946,Items.DRAMEN_BRANCH_771){ player, _, _ ->
+        onUseWith(IntType.ITEM,Items.KNIFE_946,Items.DRAMEN_BRANCH_771){ player, _, _ ->
             if(!player.skills.hasLevel(Skills.CRAFTING,31)) {
                 sendDialogue(player,"You need a crafting level of 31 to do this.")
                 return@onUseWith false

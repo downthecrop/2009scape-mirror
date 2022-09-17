@@ -11,6 +11,7 @@ import org.rs09.consts.Items
 import rs09.game.ai.general.ScriptAPI
 import rs09.game.ai.skillingbot.SkillingBotAssembler
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.interaction.InteractionListeners
 import api.*
 
@@ -56,7 +57,7 @@ class CoalMiner : Script() {
                     scriptAPI.walkTo(mine.randomLoc)
                 } else {
                     val rock = scriptAPI.getNearestNode("rocks",true)
-                    rock?.let { InteractionListeners.run(rock.id, InteractionListener.SCENERY,"mine",bot,rock) }
+                    rock?.let { InteractionListeners.run(rock.id, IntType.SCENERY,"mine",bot,rock) }
                 }
                 overlay!!.setAmount(amountInInventory(bot, Items.COAL_453) + coalAmount)
             }

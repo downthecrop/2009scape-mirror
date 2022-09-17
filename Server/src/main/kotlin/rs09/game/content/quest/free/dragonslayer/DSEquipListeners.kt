@@ -3,6 +3,7 @@ package rs09.game.content.quest.free.dragonslayer
 import api.*
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 class DSEquipListeners : InteractionListener {
 

@@ -15,6 +15,7 @@ import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.tools.END_DIALOGUE
 
 /**
@@ -25,7 +26,7 @@ class PharaohSceptre : InteractionListener {
     override fun defineListeners() {
         val SCEPTRES = intArrayOf(Items.PHARAOHS_SCEPTRE_9044, Items.PHARAOHS_SCEPTRE_9046, Items.PHARAOHS_SCEPTRE_9048, Items.PHARAOHS_SCEPTRE_9050)
 
-        on(SCEPTRES, ITEM, "teleport", "operate"){player, node ->
+        on(SCEPTRES, IntType.ITEM, "teleport", "operate"){player, node ->
             val sceptre = node.asItem()
 
             if(sceptre.id == SCEPTRES.last())

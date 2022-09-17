@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test
 import org.rs09.consts.Items
 import rs09.game.content.global.action.EquipHandler
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 import rs09.game.interaction.InteractionListeners
 
 class EquipTests {
@@ -27,7 +28,7 @@ class EquipTests {
 
         val p = TestUtils.getMockPlayer("bill")
         p.inventory.add(Item(4151))
-        InteractionListeners.run(4151, InteractionListener.ITEM, "equip", p, p.inventory[0])
+        InteractionListeners.run(4151, IntType.ITEM, "equip", p, p.inventory[0])
 
         Assertions.assertEquals(true, didRun)
     }
@@ -61,7 +62,7 @@ class EquipTests {
         p.equipment.replace(Item(4151), EquipmentSlot.WEAPON.ordinal)
         p.inventory.add(Item(1333))
         p.skills.staticLevels[Skills.ATTACK] = 40
-        InteractionListeners.run(1333, InteractionListener.ITEM, "equip", p, p.inventory[0])
+        InteractionListeners.run(1333, IntType.ITEM, "equip", p, p.inventory[0])
 
         Assertions.assertEquals(true, didRun, p.equipment.toString())
     }
@@ -73,7 +74,7 @@ class EquipTests {
         p.inventory.add(Item(Items.BRONZE_DART_806, 1000))
         p.inventory.add(Item(Items.RUNE_SCIMITAR_1333))
 
-        InteractionListeners.run(Items.RUNE_SCIMITAR_1333, InteractionListener.ITEM, "equip", p, p.inventory[1])
+        InteractionListeners.run(Items.RUNE_SCIMITAR_1333, IntType.ITEM, "equip", p, p.inventory[1])
         Assertions.assertEquals(2000, p.inventory.getAmount(Items.BRONZE_DART_806), "\n" + p.inventory.toString() + "\n" + p.equipment.toString())
     }
 
@@ -87,7 +88,7 @@ class EquipTests {
 
         Assertions.assertEquals(1, p.inventory.freeSlots())
 
-        InteractionListeners.run(Items.BRONZE_2H_SWORD_1307, InteractionListener.ITEM, "equip", p, p.inventory[26])
+        InteractionListeners.run(Items.BRONZE_2H_SWORD_1307, IntType.ITEM, "equip", p, p.inventory[26])
         Assertions.assertEquals(0, p.inventory.freeSlots())
         Assertions.assertEquals(Items.BRONZE_SWORD_1277, p.inventory[26].id)
         Assertions.assertEquals(Items.WOODEN_SHIELD_1171, p.inventory[27].id)
@@ -98,10 +99,10 @@ class EquipTests {
         p.inventory.add(Item(Items.BRONZE_2H_SWORD_1307))
         p.inventory.add(Item(Items.WOODEN_SHIELD_1171))
 
-        InteractionListeners.run(Items.BRONZE_2H_SWORD_1307, InteractionListener.ITEM, "equip", p, p.inventory[0])
+        InteractionListeners.run(Items.BRONZE_2H_SWORD_1307, IntType.ITEM, "equip", p, p.inventory[0])
         Assertions.assertEquals(Items.BRONZE_2H_SWORD_1307, p.equipment.get(EquipmentSlot.WEAPON.ordinal).id)
 
-        InteractionListeners.run(Items.WOODEN_SHIELD_1171, InteractionListener.ITEM, "equip", p, p.inventory[1])
+        InteractionListeners.run(Items.WOODEN_SHIELD_1171, IntType.ITEM, "equip", p, p.inventory[1])
         Assertions.assertEquals(Items.BRONZE_2H_SWORD_1307, p.inventory[1]?.id ?: -1)
     }
 
@@ -110,10 +111,10 @@ class EquipTests {
         p.inventory.add(Item(Items.BRONZE_SWORD_1277))
         p.inventory.add(Item(Items.WOODEN_SHIELD_1171))
 
-        InteractionListeners.run(Items.BRONZE_SWORD_1277, InteractionListener.ITEM, "equip", p, p.inventory[0])
+        InteractionListeners.run(Items.BRONZE_SWORD_1277, IntType.ITEM, "equip", p, p.inventory[0])
         Assertions.assertEquals(Items.BRONZE_SWORD_1277, p.equipment[EquipmentSlot.WEAPON.ordinal].id)
 
-        InteractionListeners.run(Items.WOODEN_SHIELD_1171, InteractionListener.ITEM, "equip", p, p.inventory[1])
+        InteractionListeners.run(Items.WOODEN_SHIELD_1171, IntType.ITEM, "equip", p, p.inventory[1])
         Assertions.assertEquals(Items.BRONZE_SWORD_1277, p.equipment[EquipmentSlot.WEAPON.ordinal]?.id ?: -1)
     }
 
@@ -122,7 +123,7 @@ class EquipTests {
         p.equipment.replace(Item(Items.BRONZE_ARROW_882, 100), EquipmentSlot.AMMO.ordinal)
         p.inventory.add(Item(Items.BRONZE_ARROW_882, 200))
 
-        InteractionListeners.run(Items.BRONZE_ARROW_882, InteractionListener.ITEM, "equip", p, p.inventory[0])
+        InteractionListeners.run(Items.BRONZE_ARROW_882, IntType.ITEM, "equip", p, p.inventory[0])
         Assertions.assertEquals(300, p.equipment[EquipmentSlot.AMMO.ordinal].amount)
     }
 
@@ -135,7 +136,7 @@ class EquipTests {
         p.inventory.add(Item(Items.DRAGON_CLAWS_14484), true, 25)
         Assertions.assertEquals(p.inventory.getSlot(Item(Items.DRAGON_CLAWS_14484)), 25)
 
-        InteractionListeners.run(Items.DRAGON_CLAWS_14484, InteractionListener.ITEM, "equip", p, p.inventory[25])
+        InteractionListeners.run(Items.DRAGON_CLAWS_14484, IntType.ITEM, "equip", p, p.inventory[25])
         Assertions.assertEquals(Items.DRAGON_CLAWS_14484, p.equipment.get(EquipmentSlot.WEAPON.ordinal).id)
         Assertions.assertEquals(p.inventory.getSlot(Item(Items.ABYSSAL_WHIP_4151)), 25)
         Assertions.assertEquals(p.inventory.getSlot(Item(Items.RUNE_DEFENDER_8850)), 0)

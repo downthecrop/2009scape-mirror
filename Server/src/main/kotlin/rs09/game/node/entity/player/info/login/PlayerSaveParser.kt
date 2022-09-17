@@ -44,7 +44,7 @@ class PlayerSaveParser(val player: Player) {
         {
             reader = FileReader(JSON)
         }
-        reader ?: SystemLogger.logWarn("Couldn't find save file for ${player.name}, or save is corrupted.").also { read = false }
+        reader ?: SystemLogger.logWarn(this::class.java, "Couldn't find save file for ${player.name}, or save is corrupted.").also { read = false }
         if (read) {
             saveFile = parser.parse(reader) as JSONObject
         }
@@ -119,7 +119,7 @@ class PlayerSaveParser(val player: Player) {
                     "long" -> attr["value"].toString().toLong()
                     "bool" -> attr["value"] as Boolean
                     "byte" -> Base64.getDecoder().decode(attr["value"].toString())[0]
-                    else -> null.also { SystemLogger.logWarn("Invalid data type for key: $key in PlayerSaveParser.kt Line 115") }
+                    else -> null.also { SystemLogger.logWarn(this::class.java, "Invalid data type for key: $key in PlayerSaveParser.kt Line 115") }
                 })
             }
         } else {
@@ -178,7 +178,7 @@ class PlayerSaveParser(val player: Player) {
 
     fun parseStates() {
         player.states.clear()
-        SystemLogger.logErr("Parsing states")
+        SystemLogger.logErr(this::class.java, "Parsing states")
         if (saveFile!!.containsKey("states")) {
             val states: JSONArray = saveFile!!["states"] as JSONArray
             for (state in states) {

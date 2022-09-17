@@ -5,6 +5,7 @@ import core.game.node.item.Item
 import org.rs09.consts.Items
 import org.rs09.consts.Scenery
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.IntType
 
 /**
  * Handles coal truck interactions
@@ -17,7 +18,7 @@ class CoalTruckListener : InteractionListener {
     }
 
     override fun defineListeners() {
-        on(Scenery.COAL_TRUCK_2114, SCENERY, "remove-coal") { player, node ->
+        on(Scenery.COAL_TRUCK_2114, IntType.SCENERY, "remove-coal") { player, node ->
             var coalInTruck = getAttribute(player, ATTRIBUTE_COAL_TRUCK_INVENTORY, 0)
 
             if (coalInTruck == 0) {
@@ -39,7 +40,7 @@ class CoalTruckListener : InteractionListener {
             return@on true
         }
 
-        on(Scenery.COAL_TRUCK_2114, SCENERY, "investigate") { player, _ ->
+        on(Scenery.COAL_TRUCK_2114, IntType.SCENERY, "investigate") { player, _ ->
             val coalInTruck = getAttribute(player, ATTRIBUTE_COAL_TRUCK_INVENTORY, 0)
 
             sendDialogue(
@@ -50,7 +51,7 @@ class CoalTruckListener : InteractionListener {
             return@on true
         }
 
-        onUseWith(SCENERY, Items.COAL_453, Scenery.COAL_TRUCK_2114) { player, _, _ ->
+        onUseWith(IntType.SCENERY, Items.COAL_453, Scenery.COAL_TRUCK_2114) { player, _, _ ->
             var coalInTruck = getAttribute(player, ATTRIBUTE_COAL_TRUCK_INVENTORY, 0)
             var coalInInventory = amountInInventory(player, Items.COAL_453)
 

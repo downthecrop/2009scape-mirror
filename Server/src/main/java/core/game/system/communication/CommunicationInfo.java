@@ -354,7 +354,7 @@ public final class CommunicationInfo {
 		CommunicationInfo info = player.getDetails().getCommunication();
 		Contact c = info.contacts.get(contact);
 		if (c == null) {
-			SystemLogger.logErr("Could not find contact " + contact + " to update clan rank!");
+			SystemLogger.logErr(CommunicationInfo.class, "Could not find contact " + contact + " to update clan rank!");
 			return;
 		}
 		c.setRank(clanRank);
