@@ -150,5 +150,17 @@ class BloatedToadListeners : InteractionListener, StartupListener, Commands {
       }
       return@on true
     }
+
+    on(Items.BLOATED_TOAD_2875, ITEM, "release") { player, used ->
+      removeItem(player, used.asItem())
+      sendPlayerDialogue(player, "Free the fat toadsies!")
+      return@on true
+    }
+
+    on(Items.BLOATED_TOAD_2875, ITEM, "release all") { player, used ->
+      removeAll(player, used.asItem())
+      sendPlayerDialogue(player, "Free the fat toadsies!")
+      return@on true
+    }
   }
 }

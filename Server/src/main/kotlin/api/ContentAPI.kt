@@ -1122,14 +1122,15 @@ fun adjustLevel(entity: Entity, skill: Int, amount: Int) {
  * @param item the item to remove. Can be an Item object or an ID.
  * @param container the Container to remove the item from. An enum exists for this called Container. Ex: Container.BANK
  */
-fun <T> removeAll(player: Player, item: T, container: Container) {
+fun <T> removeAll(player: Player, item: T, container: Container = Container.INVENTORY): Boolean {
+    item ?: return false
     val it = when (item) {
         is Item -> item.id
         is Int -> item
         else -> throw IllegalStateException("Invalid value passed as item")
     }
 
-    when (container) {
+    return when (container) {
         Container.EQUIPMENT -> player.equipment.remove(Item(it, amountInEquipment(player, it)))
         Container.BANK -> {
             val amountInPrimary = amountInBank(player, it, false)

@@ -30667,6 +30667,7 @@
     "id": "2874"
   },
   {
+    "bankable": "false",
     "examine": "An inflated toad.",
     "durability": null,
     "name": "Bloated toad",
