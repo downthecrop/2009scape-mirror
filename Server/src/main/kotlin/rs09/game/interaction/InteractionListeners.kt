@@ -228,7 +228,7 @@ object InteractionListeners {
             IntType.PLAYER -> DestinationFlag.ENTITY
             IntType.GROUNDITEM -> DestinationFlag.ITEM
             IntType.NPC -> DestinationFlag.ENTITY
-            IntType.ITEM -> null
+            IntType.SCENERY -> null
             else -> DestinationFlag.OBJECT
         }
 
