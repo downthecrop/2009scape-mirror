@@ -149,7 +149,7 @@ public class WoodcuttingSkillPulse extends Pulse {
             Projectile.create(player, null, 1776, 35, 30, 20, 25).transform(player, new Location(player.getLocation().getX() + 2, player.getLocation().getY()), true, 25, 25).send();
             player.getSkills().addExperience(Skills.WOODCUTTING, resource.getExperience());
             player.getSkills().addExperience(Skills.FIREMAKING, resource.getExperience());
-            return false;
+            return rollDepletion();
         }
 
         //actual reward calculations
@@ -190,6 +190,11 @@ public class WoodcuttingSkillPulse extends Pulse {
             }
 
         }
+
+        return rollDepletion();
+    }
+
+    private boolean rollDepletion() {
         //transform to depleted version
         //OSRS and RS3 Wikis both agree: All trees present in 2009 are a 1/8 fell chance, aside from normal trees/dead trees which are 100%
         //OSRS: https://oldschool.runescape.wiki/w/Woodcutting scroll down to the mechanics section
