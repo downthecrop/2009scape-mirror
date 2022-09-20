@@ -46,6 +46,7 @@ object QCRepository {
             builder.sender = player!!.name
             builder.clanName = player.communication.clan.owner.lowercase(Locale.getDefault()).replace(" ", "_")
             builder.message = qcString
+            builder.rank =  player.details.rights.ordinal
             publish(builder.build())
         } else {
             val ctx = ChatMessage(player, qcString, 0, qcString.length)
