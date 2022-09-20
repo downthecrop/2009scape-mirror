@@ -4,10 +4,20 @@ import api.ContentInterface
 import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
+import core.game.node.item.Item
 import core.game.world.map.Location
 import rs09.game.system.SystemLogger
 
 interface InteractionListener : ContentInterface{
+    val ITEM
+        get() = IntType.ITEM
+    val GROUNDITEM
+        get() = IntType.GROUNDITEM
+    val NPC
+        get() = IntType.NPC
+    val SCENERY
+        get() = IntType.SCENERY
+
     fun on(id: Int, type: IntType, vararg option: String, handler: (player: Player, node: Node) -> Boolean){
         InteractionListeners.add(id,type.ordinal,option,handler)
     }
@@ -30,7 +40,7 @@ interface InteractionListener : ContentInterface{
         InteractionListeners.add(type.ordinal, with, handler)
     }
     fun onUseWithPlayer(vararg used: Int, handler: (player: Player, used: Node, with: Node) -> Boolean) {
-        InteractionListeners.add(PLAYER, used, handler)
+        InteractionListeners.add(IntType.PLAYER.ordinal, used, handler)
     }
     // Note: wildcard listeners incur overhead on every use-with interaction, only use them as a space-time tradeoff when something
     // is actually supposed to have a response to every item used with it (e.g. imp boxes, certain quest npcs)
@@ -74,13 +84,4 @@ interface InteractionListener : ContentInterface{
     }
 
     fun defineListeners()
-
-    companion object
-    {
-        val ITEM = 0
-        val SCENERY = 1
-        val NPC = 2
-        val GROUNDITEM = 3
-        val PLAYER = 4
-    }
 }
