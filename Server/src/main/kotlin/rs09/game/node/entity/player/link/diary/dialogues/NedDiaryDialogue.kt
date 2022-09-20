@@ -106,7 +106,7 @@ class NedDiaryDialogue : DialogueFile() {
                 stage++
             }
             52 -> {
-                AchievementDiary.grantReplacement(player, DiaryType.LUMBRIDGE, level)
+                AchievementDiary.flagRewarded(player, DiaryType.LUMBRIDGE, level)
                 npc("This ring is a representation of the adventures you", "went on to complete your tasks.")
                 stage++
             }
