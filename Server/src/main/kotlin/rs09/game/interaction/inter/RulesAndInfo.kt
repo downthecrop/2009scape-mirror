@@ -32,18 +32,27 @@ object RulesAndInfo {
     {
         if(getAttribute(player, "rules:confirmed", false) || !getAttribute(player, "tutorial:complete", false))
             return
-        var ln = 1
         val pin = getAttribute(player, "rules:pin", RandomFunction.random(1000,9999))
         setAttribute(player, "/save:rules:pin", pin)
-        for(line in INFO) setInterfaceText(player, INFO[ln - 1], 384, ln++)
-        setInterfaceText(player, SEPARATOR, 384, ln++)
-        val newIndex = ln
-        for(line in RULES) setInterfaceText(player, RULES[ln - newIndex], 384, ln++)
+
+        var ln = setBaseRulesAndInfo(player);
+
         setInterfaceText(player, "<col=ffffff>If you agree to the above, type ::confirmrules $pin", 384, ln++)
         setInterfaceText(player, "", 384, ln)
         player.packetDispatch.sendInterfaceConfig(384, 17, true)
         openInterface(player, 384)
         player.lock()
+    }
+
+    @JvmStatic
+    fun setBaseRulesAndInfo(player: Player): Int {
+        var ln = 1
+        for(line in INFO) setInterfaceText(player, INFO[ln - 1], 384, ln++)
+        setInterfaceText(player, SEPARATOR, 384, ln++)
+        val newIndex = ln
+        for(line in RULES) setInterfaceText(player, RULES[ln - newIndex], 384, ln++)
+        setInterfaceText(player, "", 384, ln)
+        return ln
     }
 }
 

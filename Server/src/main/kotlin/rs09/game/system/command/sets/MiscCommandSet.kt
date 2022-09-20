@@ -27,6 +27,7 @@ import rs09.game.content.ame.RandomEventManager
 import rs09.game.content.ame.RandomEvents
 import rs09.game.content.quest.members.anma.AnmaCutscene
 import rs09.game.ge.GrandExchange
+import rs09.game.interaction.inter.RulesAndInfo
 import rs09.game.node.entity.state.newsys.states.FarmingState
 import rs09.game.system.SystemLogger
 import rs09.game.system.command.CommandMapping
@@ -636,6 +637,12 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
                 else -> reject(player, usageStr)
 
             }
+        }
+
+        define("rules", Privilege.STANDARD, "", "Shows the rules."){ player, _ ->
+            RulesAndInfo.setBaseRulesAndInfo(player);
+            player.packetDispatch.sendInterfaceConfig(384, 17, true)
+            openInterface(player, 384)
         }
 
         define("confirmrules", Privilege.STANDARD) { player, args ->
