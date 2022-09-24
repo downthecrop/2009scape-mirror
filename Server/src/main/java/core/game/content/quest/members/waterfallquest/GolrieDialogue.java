@@ -6,6 +6,8 @@ import core.game.content.dialogue.FacialExpression;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 
+import static api.ContentAPIKt.*;
+
 /**
  * Handles Golrie's Dialogue for the Waterfall quest
  * @author Splinter
@@ -48,7 +50,11 @@ public class GolrieDialogue extends DialoguePlugin {
 		case 3:
 			//TODO: Possibly change this to chat message
 			interpreter.sendDialogue("You look amongst the junk on the floor.");
-			stage = 4;
+			if (hasAnItem(player, 294).getContainer() != null) {
+				stage = 50;
+			} else {
+				stage = 4;
+			}
 			break;
 		case 4:
 			//TODO: Possibly change this to chat message
@@ -77,6 +83,11 @@ public class GolrieDialogue extends DialoguePlugin {
 			break;
 		case 9:
 			interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "OK... Take care Golrie.");
+			stage = 100;
+			break;
+		case 50:
+			//TODO: Possibly change this to chat message
+			interpreter.sendDialogue("You find nothing of interest.");
 			stage = 100;
 			break;
 		}
