@@ -66,6 +66,7 @@ import proto.management.ClanLeaveNotification;
 import proto.management.PlayerStatusUpdate;
 import rs09.GlobalStats;
 import rs09.ServerConstants;
+import rs09.game.Varp;
 import rs09.game.VarpManager;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.node.entity.combat.equipment.EquipmentDegrader;
@@ -591,6 +592,7 @@ public class Player extends Entity {
 					setAttribute("/save:permadeath", true);
 					savedData = new SavedData(this);
 					questRepository = new QuestRepository(this);
+					varpManager = new VarpManager(this);
 					new PlayerSaver(this).save();
 					clear(true);
 					return;
