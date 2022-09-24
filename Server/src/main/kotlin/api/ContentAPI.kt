@@ -2130,4 +2130,19 @@ fun getCredits(player: Player) : Int {
     return player.details.accountInfo.credits
 }
 
+/**
+ * Asserts that a quest is required, and sends the player "You must have completed the $questName quest $message"
+ * @param player the player we are checking
+ * @param questName the name of the quest we are checking for
+ * @param message the text appended to "You must have completed the $questName quest ..." if the quest is not complete.
+ * @return whether or not the quest has been completed
+ */
+fun requireQuest(player: Player, questName: String, message: String) : Boolean {
+    if (!isQuestComplete(player, questName)) {
+        sendMessage(player, "You must have completed the $questName quest $message")
+        return false
+    }
+    return true
+}
+
 private class ContentAPI

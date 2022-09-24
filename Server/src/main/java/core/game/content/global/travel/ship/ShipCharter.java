@@ -5,7 +5,6 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import org.rs09.consts.Items;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import rs09.game.world.repository.Repository;
@@ -16,6 +15,8 @@ import core.tools.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static api.ContentAPIKt.requireQuest;
 
 /**
  * Represents a class used to charter ships.
@@ -65,6 +66,9 @@ public final class ShipCharter {
 	public static void handle(final Player player, final int button) {
 		final Destination destination = Destination.forButton(button);
 		if (destination == null) {
+			return;
+		}
+		if (!destination.checkTravel(player)) {
 			return;
 		}
 		final int cost = getCost(player, destination);
@@ -134,7 +138,12 @@ public final class ShipCharter {
 	 */
 	public enum Destination {
 		CATHERBY(Location.create(2792, 3417, 1), 25, new int[] { 480, 0, 480, 625, 1600, 3250, 1000, 1600, 3200, 3400 }, Location.create(2797, 3414, 0), 3, 14),
-		PORT_PHASMATYS(Location.create(3705, 3503, 1), 24, new int[] { 3650, 3250, 1850, 0, 0, 0, 2050, 1850, 3200, 1100 }, Location.create(3702, 3502, 0), 2, 13),
+		PORT_PHASMATYS(Location.create(3705, 3503, 1), 24, new int[] { 3650, 3250, 1850, 0, 0, 0, 2050, 1850, 3200, 1100 }, Location.create(3702, 3502, 0), 2, 13) {
+			@Override
+			public boolean checkTravel(Player player) {
+				return requireQuest(player, "Priest in Peril", "to go there");
+			}
+		},
 		CRANDOR(new Location(2792, 3417, 1), 32, new int[] { 0, 480, 480, 925, 400, 3650, 1600, 400, 3200, 3800 }, null, 10, 21),
 		BRIMHAVEN(Location.create(2763, 3238, 1), 28, new int[] { 0, 480, 480, 925, 400, 3650, 1600, 400, 3200, 3800 }, Location.create(2760, 3238, 0), 6, 17){
 			@Override
@@ -320,6 +329,10 @@ public final class ShipCharter {
 				}
 			}
 			return null;
+		}
+
+		public boolean checkTravel(Player player) {
+			return true;
 		}
 
 		/**
