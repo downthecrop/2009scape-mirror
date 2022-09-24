@@ -25,7 +25,7 @@ public final class RestlessGhostSkull extends UseWithHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		addHandler(2145, OBJECT_TYPE, this);
-		addHandler(15052, OBJECT_TYPE, this);
+		addHandler(15061, OBJECT_TYPE, this);
 		return this;
 	}
 

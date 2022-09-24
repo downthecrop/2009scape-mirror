@@ -108,6 +108,7 @@ public final class RestlessGhostPlugin extends OptionHandler {
 					player.getInventory().add(SKULL);
 					player.getPacketDispatch().sendMessage("You find another skull.");
 				}
+				player.getQuestRepository().getQuest(RestlessGhost.NAME).setStage(player, 40);
 				break;
 			case 2145:
 				toggleCoffin(player, object);
