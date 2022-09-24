@@ -29,7 +29,12 @@ public enum ZoneRestriction {
 	/**
 	 * No cannons allowed.
 	 */
-	CANNON, ;
+	CANNON,
+	/**
+	 * Do not spawn a grave if a player dies here
+	 */
+	GRAVES,
+	;
 
 	/**
 	 * Gets the restriction flag.

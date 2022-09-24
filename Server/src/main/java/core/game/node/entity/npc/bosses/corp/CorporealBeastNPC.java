@@ -42,7 +42,7 @@ public final class CorporealBeastNPC extends AbstractNPC {
 	/**
 	 * The dark energy core NPC.
 	 */
-	private NPC darkEnergyCore;
+	public NPC darkEnergyCore;
 	
 	/**
 	 * Constructs a new {@code CorporealBeastNPC} {@code Object}.
@@ -65,29 +65,7 @@ public final class CorporealBeastNPC extends AbstractNPC {
 		super.init();
 		configureBossData();
 	}
-	
-	@Override
-	public void handleTickActions() {
-		for(Player player : getViewport().getCurrentPlane().getPlayers()){
-			if(player.getFamiliarManager().hasFamiliar() && RandomFunction.random(100) < 10){
-				int heal = player.getFamiliarManager().getFamiliar().getSkills().getLifepoints() / 4;
-				super.getSkills().heal(heal);
-				player.sendMessage("<col=990000>Your familiar was devoured by the Corporeal Beast, healing it by "+heal+" HP.");
-				player.getFamiliarManager().dismiss();
-			}
-		}
-		if (getSkills().getLifepoints() < getSkills().getMaximumLifepoints()) {
-			if (getViewport().getCurrentPlane().getPlayers().isEmpty()) {
-				super.fullRestore();
-				if (darkEnergyCore != null) {
-					darkEnergyCore.clear();
-					darkEnergyCore = null;
-				}
-			}
-		}
-		super.handleTickActions();
-	}
-	
+
 	@Override
 	public CombatSwingHandler getSwingHandler(boolean swing) {
 		return combatHandler;

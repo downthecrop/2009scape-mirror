@@ -12,6 +12,7 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.map.Location
+import core.game.world.map.zone.ZoneRestriction
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.rs09.consts.Items
@@ -221,6 +222,8 @@ class GraveController : PersistWorld, TickListener, InteractionListener, Command
             if (player.skullManager.isWilderness)
                 return false
             if (player.ironmanManager.mode == IronmanMode.HARDCORE)
+                return false
+            if (player.zoneMonitor.isRestricted(ZoneRestriction.GRAVES))
                 return false
             return true
         }
