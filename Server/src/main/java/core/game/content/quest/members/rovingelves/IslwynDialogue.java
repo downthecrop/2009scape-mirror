@@ -322,8 +322,8 @@ public class IslwynDialogue extends DialoguePlugin {
 			}
 			if (player.getInventory().contains(995, price)) {
 				if (player.getInventory().remove(new Item(995, price))) {
-					if (!player.getInventory().add(new Item(4214, 1))) {
-						GroundItemManager.create(new Item(4214, 1), player);
+					if (!player.getInventory().add(new Item(4212, 1))) {
+						GroundItemManager.create(new Item(4212, 1), player);
 					}
 					end();
 				}
@@ -337,8 +337,8 @@ public class IslwynDialogue extends DialoguePlugin {
 			}
 			if (player.getInventory().contains(995, price)) {
 				if (player.getInventory().remove(new Item(995, price))) {
-					if (!player.getInventory().add(new Item(4225, 1))) {
-						GroundItemManager.create(new Item(4225, 1), player);
+					if (!player.getInventory().add(new Item(4224, 1))) {
+						GroundItemManager.create(new Item(4224, 1), player);
 					}
 					end();
 				}
