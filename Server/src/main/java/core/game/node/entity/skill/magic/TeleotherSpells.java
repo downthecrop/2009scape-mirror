@@ -88,6 +88,7 @@ public final class TeleotherSpells extends MagicSpell {
 			return false;
 		}
 		visualize(entity, target);
+		Graphics.send(new Graphics(342), o.getLocation());
 		p.faceLocation(o.getLocation());
 		o.setAttribute("t-o_location", location);
 		o.getPacketDispatch().sendString(p.getUsername(), 326,1);
