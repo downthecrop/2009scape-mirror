@@ -104,7 +104,7 @@ public final class HettyDialogue extends DialoguePlugin {
 			stage = 15;
 			break;
 		case 15:
-			interpreter.sendOptions("Select an Option", "Yes help me become one with my darker side.", "No I have my prinicples and honour.");
+			interpreter.sendOptions("Select an Option", "Yes help me become one with my darker side.", "No I have my principles and honour.");
 			stage = 16;
 			break;
 		case 16:
@@ -199,7 +199,7 @@ public final class HettyDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 101:
-			interpreter.sendDialogues(307, FacialExpression.HALF_GUILTY, "Well I can't make the potion without them! Remember...", "You need an eye of newt, a rat's tail, an onion, and a", "You need an eye of newt, a rat's tail, an onion, and a", "piece of burnt meat. Off you go dear!");
+			interpreter.sendDialogues(307, FacialExpression.HALF_GUILTY, "Well I can't make the potion without them! Remember...", "You need an eye of newt, a rat's tail, an onion, and a", "piece of burnt meat. Off you go dear!");
 			stage = 102;
 			break;
 		case 102:
