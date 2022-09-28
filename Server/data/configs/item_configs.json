@@ -48,7 +48,6 @@
     "requirements": "{13,35}",
     "shop_price": "5",
     "examine": "Used to make cannon ammunition.",
-    "durability": null,
     "name": "Ammo mould",
     "low_alchemy": "2",
     "high_alchemy": "3",
@@ -97,13 +96,13 @@
     "shop_price": "187500",
     "ge_buy_limit": "10",
     "examine": "The mounting for the multicannon.",
-    "grand_exchange_price": "185000",
     "durability": null,
-    "name": "Cannon stand",
-    "tradeable": "true",
     "low_alchemy": "75000",
     "high_alchemy": "112500",
     "weight": "7",
+    "grand_exchange_price": "185000",
+    "name": "Cannon stand",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "8"
   },
@@ -4157,10 +4156,12 @@
     "id": "408"
   },
   {
+    "shop_price": "5",
     "examine": "Aww, it's empty.",
     "durability": null,
     "name": "Empty oyster",
     "low_alchemy": "2",
+    "tradeable": "true",
     "high_alchemy": "3",
     "weight": "0.08",
     "archery_ticket_price": "0",
@@ -4300,15 +4301,20 @@
     "id": "425"
   },
   {
-    "remove_sleeves": "true",
     "ge_buy_limit": "100",
-    "grand_exchange_price": "55",
+    "shop_price": "5",
+    "examine": "Top half of a priest suit.",
     "durability": null,
+    "high_alchemy": "24",
+    "weight": "2",
+    "equipment_slot": "4",
+    "remove_sleeves": "true",
+    "grand_exchange_price": "55",
     "name": "Priest gown",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "426",
-    "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,3,0,0",
-    "equipment_slot": "4"
+    "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,3,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -4321,13 +4327,18 @@
   },
   {
     "ge_buy_limit": "100",
-    "grand_exchange_price": "14",
+    "shop_price": "5",
+    "examine": "Bottom half of a priest suit.",
     "durability": null,
+    "high_alchemy": "14",
+    "weight": "2",
+    "equipment_slot": "7",
+    "grand_exchange_price": "14",
     "name": "Priest gown",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "428",
-    "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,3,0,0",
-    "equipment_slot": "7"
+    "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,3,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -6270,13 +6281,19 @@
   },
   {
     "ge_buy_limit": "100",
-    "grand_exchange_price": "558",
+    "shop_price": "200",
+    "examine": "They're soft, silky and pink.",
     "durability": null,
+    "low_alchemy": "80",
+    "high_alchemy": "120",
+    "weight": "0.3",
+    "equipment_slot": "10",
+    "grand_exchange_price": "558",
     "name": "Boots",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "626",
-    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0",
-    "equipment_slot": "10"
+    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -6289,13 +6306,19 @@
   },
   {
     "ge_buy_limit": "100",
-    "grand_exchange_price": "397",
+    "shop_price": "200",
+    "examine": "They're soft, silky and green.",
     "durability": null,
+    "low_alchemy": "80",
+    "high_alchemy": "120",
+    "weight": "0.3",
+    "equipment_slot": "10",
+    "grand_exchange_price": "397",
     "name": "Boots",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "628",
-    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0",
-    "equipment_slot": "10"
+    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -6308,13 +6331,19 @@
   },
   {
     "ge_buy_limit": "100",
-    "grand_exchange_price": "612",
+    "shop_price": "200",
+    "examine": "They're soft, silky and blue.",
     "durability": null,
+    "low_alchemy": "80",
+    "high_alchemy": "120",
+    "weight": "0.3",
+    "equipment_slot": "10",
+    "grand_exchange_price": "612",
     "name": "Boots",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "630",
-    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0",
-    "equipment_slot": "10"
+    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -6327,13 +6356,19 @@
   },
   {
     "ge_buy_limit": "100",
-    "grand_exchange_price": "496",
+    "shop_price": "200",
+    "examine": "They're soft, silky and cream.",
     "durability": null,
+    "low_alchemy": "80",
+    "high_alchemy": "120",
+    "weight": "0.3",
+    "equipment_slot": "10",
+    "grand_exchange_price": "496",
     "name": "Boots",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "632",
-    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0",
-    "equipment_slot": "10"
+    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -6346,13 +6381,19 @@
   },
   {
     "ge_buy_limit": "100",
-    "grand_exchange_price": "226",
+    "shop_price": "200",
+    "examine": "They're soft, silky and turquoise.",
     "durability": null,
+    "low_alchemy": "80",
+    "high_alchemy": "120",
+    "weight": "0.3",
+    "equipment_slot": "10",
+    "grand_exchange_price": "226",
     "name": "Boots",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "634",
-    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0",
-    "equipment_slot": "10"
+    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -6366,7 +6407,7 @@
   {
     "shop_price": "180",
     "ge_buy_limit": "100",
-    "examine": "The ultimate in gnome design, now in [colour].",
+    "examine": "The ultimate in gnome design, now in pink.",
     "durability": null,
     "low_alchemy": "72",
     "high_alchemy": "108",
@@ -6392,7 +6433,7 @@
   {
     "shop_price": "180",
     "ge_buy_limit": "100",
-    "examine": "The ultimate in gnome design, now in [colour].",
+    "examine": "The ultimate in gnome design, now in green.",
     "durability": null,
     "low_alchemy": "72",
     "high_alchemy": "108",
@@ -6418,7 +6459,7 @@
   {
     "shop_price": "180",
     "ge_buy_limit": "100",
-    "examine": "The ultimate in gnome design, now in [colour].",
+    "examine": "The ultimate in gnome design, now in blue.",
     "durability": null,
     "low_alchemy": "72",
     "high_alchemy": "108",
@@ -6444,7 +6485,7 @@
   {
     "shop_price": "180",
     "ge_buy_limit": "100",
-    "examine": "The ultimate in gnome design, now in [colour].",
+    "examine": "The ultimate in gnome design, now in cream.",
     "durability": null,
     "low_alchemy": "72",
     "high_alchemy": "108",
@@ -6470,7 +6511,7 @@
   {
     "shop_price": "180",
     "ge_buy_limit": "100",
-    "examine": "The ultimate in gnome design, now in [colour].",
+    "examine": "The ultimate in gnome design, now in turquoise.",
     "durability": null,
     "low_alchemy": "72",
     "high_alchemy": "108",
@@ -6495,13 +6536,19 @@
   },
   {
     "ge_buy_limit": "100",
-    "grand_exchange_price": "249",
+    "shop_price": "180",
+    "examine": "Made by tree gnomes with a thing for pink.",
     "durability": null,
+    "low_alchemy": "72",
+    "high_alchemy": "108",
+    "weight": "1",
+    "equipment_slot": "7",
+    "grand_exchange_price": "249",
     "name": "Robe bottoms",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "646",
-    "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0",
-    "equipment_slot": "7"
+    "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -6514,13 +6561,19 @@
   },
   {
     "ge_buy_limit": "100",
-    "grand_exchange_price": "210",
+    "shop_price": "180",
+    "examine": "Made by tree gnomes with a thing for green.",
     "durability": null,
+    "low_alchemy": "72",
+    "high_alchemy": "108",
+    "weight": "1",
+    "equipment_slot": "7",
+    "grand_exchange_price": "210",
     "name": "Robe bottoms",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "648",
-    "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0",
-    "equipment_slot": "7"
+    "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -6533,13 +6586,19 @@
   },
   {
     "ge_buy_limit": "100",
-    "grand_exchange_price": "453",
+    "shop_price": "180",
+    "examine": "Made by tree gnomes with a thing for blue.",
     "durability": null,
+    "low_alchemy": "72",
+    "high_alchemy": "108",
+    "weight": "1",
+    "equipment_slot": "7",
+    "grand_exchange_price": "453",
     "name": "Robe bottoms",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "650",
-    "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0",
-    "equipment_slot": "7"
+    "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -6552,13 +6611,19 @@
   },
   {
     "ge_buy_limit": "100",
-    "grand_exchange_price": "348",
+    "shop_price": "180",
+    "examine": "Made by tree gnomes with a thing for cream.",
     "durability": null,
+    "low_alchemy": "72",
+    "high_alchemy": "108",
+    "weight": "1",
+    "equipment_slot": "7",
+    "grand_exchange_price": "348",
     "name": "Robe bottoms",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "652",
-    "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0",
-    "equipment_slot": "7"
+    "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -6571,13 +6636,19 @@
   },
   {
     "ge_buy_limit": "100",
-    "grand_exchange_price": "92",
+    "shop_price": "180",
+    "examine": "Made by tree gnomes with a thing for turquoise.",
     "durability": null,
+    "low_alchemy": "72",
+    "high_alchemy": "108",
+    "weight": "1",
+    "equipment_slot": "7",
+    "grand_exchange_price": "92",
     "name": "Robe bottoms",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "654",
-    "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0",
-    "equipment_slot": "7"
+    "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -6591,10 +6662,12 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "677",
-    "examine": "A silly pointed hat.",
+    "examine": "A silly, pink pointed hat.",
     "durability": null,
     "name": "Hat",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "weight": "0.4",
     "hat": "true",
     "id": "656",
     "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0",
@@ -6612,10 +6685,12 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "480",
-    "examine": "A silly pointed hat.",
+    "examine": "A silly, green pointed hat.",
     "durability": null,
     "name": "Hat",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "weight": "0.4",
     "hat": "true",
     "id": "658",
     "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0",
@@ -6633,10 +6708,12 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "421",
-    "examine": "A silly pointed hat.",
+    "examine": "A silly, blue pointed hat.",
     "durability": null,
     "name": "Hat",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "weight": "0.4",
     "hat": "true",
     "id": "660",
     "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0",
@@ -6654,10 +6731,12 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1102",
-    "examine": "A silly pointed hat.",
+    "examine": "A silly, cream pointed hat.",
     "durability": null,
     "name": "Hat",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "weight": "0.4",
     "hat": "true",
     "id": "662",
     "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0",
@@ -6675,9 +6754,12 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "295",
+    "examine": "A silly, turquoise pointed hat.",
     "durability": null,
     "name": "Hat",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "weight": "0.4",
     "hat": "true",
     "id": "664",
     "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0",
@@ -6685,7 +6767,6 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "A silly pointed hat.",
     "grand_exchange_price": "295",
     "durability": null,
     "name": "Hat",
@@ -7501,7 +7582,6 @@
     "name": "Phoenix crossbow",
     "tradeable": "true",
     "archery_ticket_price": "0",
-    "attack_speed": "",
     "id": "768"
   },
   {
@@ -9451,12 +9531,15 @@
     "equipment_slot": "13"
   },
   {
-    "examine": "Some meaty worms.",
+    "shop_price": "0",
+    "examine": "Ugh! It's wriggling!",
     "durability": null,
     "name": "Worm",
-    "tradeable": "false",
+    "tradeable": "true",
+    "low_alchemy": "1",
     "destroy": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "1",
     "id": "943"
   },
   {
@@ -18055,6 +18138,7 @@
   },
   {
     "ge_buy_limit": "1000",
+    "shop_price": "100",
     "examine": "A semi precious stone.",
     "grand_exchange_price": "44",
     "durability": null,
@@ -18076,10 +18160,15 @@
   },
   {
     "ge_buy_limit": "1000",
+    "shop_price": "150",
     "grand_exchange_price": "84",
+    "examine": "A semi precious stone.",
     "durability": null,
     "name": "Jade",
+    "low_alchemy": "60",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "90",
     "id": "1611"
   },
   {
@@ -18093,6 +18182,7 @@
   },
   {
     "ge_buy_limit": "1000",
+    "shop_price": "200",
     "examine": "A semi precious stone.",
     "grand_exchange_price": "120",
     "durability": null,
@@ -23732,6 +23822,7 @@
     "durability": null,
     "name": "Batta tin",
     "low_alchemy": "4",
+    "tradeable": "true",
     "high_alchemy": "6",
     "weight": "0.1",
     "archery_ticket_price": "0",
@@ -30823,14 +30914,18 @@
   {
     "shop_price": "650",
     "ge_buy_limit": "100",
-    "grand_exchange_price": "1570",
     "examine": "Very stylish!",
     "durability": null,
+    "low_alchemy": "260",
+    "high_alchemy": "390",
+    "weight": "0.3",
+    "equipment_slot": "10",
+    "grand_exchange_price": "1570",
     "name": "Boots",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2894",
-    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0",
-    "equipment_slot": "10"
+    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -30839,7 +30934,9 @@
     "durability": null,
     "name": "Boots",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2895"
   },
   {
@@ -30847,8 +30944,8 @@
     "ge_buy_limit": "100",
     "examine": "Some fine werewolf clothing.",
     "durability": null,
-    "low_alchemy": "72",
-    "high_alchemy": "108",
+    "low_alchemy": "260",
+    "high_alchemy": "390",
     "weight": "1",
     "equipment_slot": "4",
     "remove_sleeves": "true",
@@ -30866,21 +30963,26 @@
     "durability": null,
     "name": "Robe top",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2897"
   },
   {
     "shop_price": "650",
     "ge_buy_limit": "100",
-    "grand_exchange_price": "741",
     "examine": "Made by werewolves for werewolves.",
     "durability": null,
+    "low_alchemy": "260",
+    "high_alchemy": "390",
+    "weight": "1",
+    "equipment_slot": "7",
+    "grand_exchange_price": "741",
     "name": "Robe bottoms",
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2898",
-    "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0",
-    "equipment_slot": "7"
+    "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -30889,22 +30991,27 @@
     "durability": null,
     "name": "Robe bottoms",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2899"
   },
   {
     "shop_price": "650",
     "ge_buy_limit": "100",
-    "grand_exchange_price": "844",
     "examine": "A silly pointed hat.",
     "durability": null,
+    "low_alchemy": "260",
+    "high_alchemy": "390",
+    "weight": "0.4",
+    "equipment_slot": "0",
+    "grand_exchange_price": "844",
     "name": "Hat",
     "tradeable": "true",
     "archery_ticket_price": "0",
     "hat": "true",
     "id": "2900",
-    "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0",
-    "equipment_slot": "0"
+    "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -30913,21 +31020,26 @@
     "durability": null,
     "name": "Hat",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2901"
   },
   {
     "shop_price": "650",
     "ge_buy_limit": "10",
-    "grand_exchange_price": "1039",
     "examine": "These gloves from Canifis will keep my hands warm!",
     "durability": null,
+    "low_alchemy": "260",
+    "high_alchemy": "390",
+    "weight": "0.4",
+    "equipment_slot": "9",
+    "grand_exchange_price": "1039",
     "name": "Gloves",
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2902",
-    "bonuses": "0,0,0,0,0,0,1,2,0,0,0,0,0,0,0",
-    "equipment_slot": "9"
+    "bonuses": "0,0,0,0,0,0,1,2,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "10",
@@ -30936,21 +31048,26 @@
     "durability": null,
     "name": "Gloves",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2903"
   },
   {
     "shop_price": "650",
     "ge_buy_limit": "100",
-    "grand_exchange_price": "1359",
     "examine": "Very stylish!",
     "durability": null,
+    "low_alchemy": "260",
+    "high_alchemy": "390",
+    "weight": "0.3",
+    "equipment_slot": "10",
+    "grand_exchange_price": "1359",
     "name": "Boots",
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2904",
-    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0",
-    "equipment_slot": "10"
+    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -30959,7 +31076,9 @@
     "durability": null,
     "name": "Boots",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2905"
   },
   {
@@ -30967,8 +31086,8 @@
     "ge_buy_limit": "100",
     "examine": "Some fine werewolf clothing.",
     "durability": null,
-    "low_alchemy": "72",
-    "high_alchemy": "108",
+    "low_alchemy": "260",
+    "high_alchemy": "390",
     "weight": "1",
     "equipment_slot": "4",
     "remove_sleeves": "true",
@@ -30986,21 +31105,26 @@
     "durability": null,
     "name": "Robe top",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2907"
   },
   {
     "shop_price": "650",
     "ge_buy_limit": "100",
-    "grand_exchange_price": "474",
     "examine": "Made by werewolves for werewolves.",
     "durability": null,
+    "low_alchemy": "260",
+    "high_alchemy": "390",
+    "weight": "1",
+    "equipment_slot": "7",
+    "grand_exchange_price": "474",
     "name": "Robe bottoms",
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2908",
-    "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0",
-    "equipment_slot": "7"
+    "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -31009,21 +31133,27 @@
     "durability": null,
     "name": "Robe bottoms",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2909"
   },
   {
     "shop_price": "650",
     "ge_buy_limit": "100",
-    "grand_exchange_price": "1445",
     "examine": "A silly pointed hat.",
     "durability": null,
+    "low_alchemy": "260",
+    "high_alchemy": "390",
+    "weight": "0.4",
+    "equipment_slot": "0",
+    "grand_exchange_price": "1445",
     "tradeable": "true",
     "name": "Hat",
     "archery_ticket_price": "0",
+    "hat": "true",
     "id": "2910",
-    "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0",
-    "equipment_slot": "0"
+    "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -31032,21 +31162,26 @@
     "durability": null,
     "name": "Hat",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2911"
   },
   {
     "shop_price": "650",
     "ge_buy_limit": "10",
-    "grand_exchange_price": "1254",
     "examine": "These gloves from Canifis will keep my hands warm!",
     "durability": null,
+    "low_alchemy": "260",
+    "high_alchemy": "390",
+    "weight": "0.4",
+    "equipment_slot": "9",
+    "grand_exchange_price": "1254",
     "name": "Gloves",
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2912",
-    "bonuses": "0,0,0,0,0,0,1,2,0,0,0,0,0,0,0",
-    "equipment_slot": "9"
+    "bonuses": "0,0,0,0,0,0,1,2,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "10",
@@ -31055,21 +31190,26 @@
     "durability": null,
     "name": "Gloves",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2913"
   },
   {
     "shop_price": "650",
     "ge_buy_limit": "100",
-    "grand_exchange_price": "1054",
     "examine": "Very stylish!",
     "durability": null,
+    "low_alchemy": "260",
+    "high_alchemy": "390",
+    "weight": "0.3",
+    "equipment_slot": "10",
+    "grand_exchange_price": "1054",
     "name": "Boots",
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2914",
-    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0",
-    "equipment_slot": "10"
+    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -31078,7 +31218,9 @@
     "durability": null,
     "name": "Boots",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2915"
   },
   {
@@ -31086,8 +31228,8 @@
     "ge_buy_limit": "100",
     "examine": "Some fine werewolf clothing.",
     "durability": null,
-    "low_alchemy": "72",
-    "high_alchemy": "108",
+    "low_alchemy": "260",
+    "high_alchemy": "390",
     "weight": "1",
     "equipment_slot": "4",
     "remove_sleeves": "true",
@@ -31105,21 +31247,26 @@
     "durability": null,
     "name": "Robe top",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2917"
   },
   {
     "shop_price": "650",
     "ge_buy_limit": "100",
-    "grand_exchange_price": "603",
     "examine": "Made by werewolves for werewolves.",
     "durability": null,
+    "low_alchemy": "260",
+    "high_alchemy": "390",
+    "weight": "1",
+    "equipment_slot": "7",
+    "grand_exchange_price": "603",
     "name": "Robe bottoms",
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2918",
-    "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0",
-    "equipment_slot": "7"
+    "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -31128,21 +31275,27 @@
     "durability": null,
     "name": "Robe bottoms",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2919"
   },
   {
     "shop_price": "650",
     "ge_buy_limit": "100",
-    "grand_exchange_price": "997",
     "examine": "A silly pointed hat.",
     "durability": null,
+    "low_alchemy": "260",
+    "high_alchemy": "390",
+    "weight": "0.4",
+    "equipment_slot": "0",
+    "grand_exchange_price": "997",
     "name": "Hat",
     "tradeable": "true",
     "archery_ticket_price": "0",
+    "hat": "true",
     "id": "2920",
-    "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0",
-    "equipment_slot": "0"
+    "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -31151,21 +31304,26 @@
     "durability": null,
     "name": "Hat",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2921"
   },
   {
     "shop_price": "650",
     "ge_buy_limit": "10",
-    "grand_exchange_price": "1221",
     "examine": "These gloves from Canifis will keep my hands warm!",
     "durability": null,
+    "low_alchemy": "260",
+    "high_alchemy": "390",
+    "weight": "0.4",
+    "equipment_slot": "9",
+    "grand_exchange_price": "1221",
     "name": "Gloves",
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2922",
-    "bonuses": "0,0,0,0,0,0,1,2,0,0,0,0,0,0,0",
-    "equipment_slot": "9"
+    "bonuses": "0,0,0,0,0,0,1,2,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "10",
@@ -31174,21 +31332,26 @@
     "durability": null,
     "name": "Gloves",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2923"
   },
   {
     "shop_price": "650",
     "ge_buy_limit": "100",
-    "grand_exchange_price": "737",
     "examine": "Very stylish!",
     "durability": null,
+    "low_alchemy": "260",
+    "high_alchemy": "390",
+    "weight": "0.3",
+    "equipment_slot": "10",
+    "grand_exchange_price": "737",
     "name": "Boots",
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2924",
-    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0",
-    "equipment_slot": "10"
+    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -31197,7 +31360,9 @@
     "durability": null,
     "name": "Boots",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2925"
   },
   {
@@ -31205,8 +31370,8 @@
     "ge_buy_limit": "100",
     "examine": "Some fine werewolf clothing.",
     "durability": null,
-    "low_alchemy": "72",
-    "high_alchemy": "108",
+    "low_alchemy": "260",
+    "high_alchemy": "390",
     "weight": "1",
     "equipment_slot": "4",
     "remove_sleeves": "true",
@@ -31224,21 +31389,26 @@
     "durability": null,
     "name": "Robe top",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2927"
   },
   {
     "shop_price": "650",
     "ge_buy_limit": "100",
-    "grand_exchange_price": "637",
     "examine": "Made by werewolves for werewolves.",
     "durability": null,
+    "low_alchemy": "260",
+    "high_alchemy": "390",
+    "weight": "1",
+    "equipment_slot": "7",
+    "grand_exchange_price": "637",
     "name": "Robe bottoms",
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2928",
-    "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0",
-    "equipment_slot": "7"
+    "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -31247,21 +31417,27 @@
     "durability": null,
     "name": "Robe bottoms",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2929"
   },
   {
     "shop_price": "650",
     "ge_buy_limit": "100",
-    "grand_exchange_price": "925",
     "examine": "A silly pointed hat.",
     "durability": null,
+    "low_alchemy": "260",
+    "high_alchemy": "390",
+    "weight": "0.4",
+    "equipment_slot": "0",
+    "grand_exchange_price": "925",
     "name": "Hat",
     "tradeable": "true",
     "archery_ticket_price": "0",
+    "hat": "true",
     "id": "2930",
-    "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0",
-    "equipment_slot": "0"
+    "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -31270,21 +31446,26 @@
     "durability": null,
     "name": "Hat",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2931"
   },
   {
     "shop_price": "650",
     "ge_buy_limit": "10",
-    "grand_exchange_price": "1829",
     "examine": "These gloves from Canifis will keep my hands warm!",
     "durability": null,
+    "low_alchemy": "260",
+    "high_alchemy": "390",
+    "weight": "0.4",
+    "equipment_slot": "9",
+    "grand_exchange_price": "1829",
     "name": "Gloves",
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2932",
-    "bonuses": "0,0,0,0,0,0,1,2,0,0,0,0,0,0,0",
-    "equipment_slot": "9"
+    "bonuses": "0,0,0,0,0,0,1,2,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "10",
@@ -31293,21 +31474,26 @@
     "durability": null,
     "name": "Gloves",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2933"
   },
   {
     "shop_price": "650",
     "ge_buy_limit": "100",
-    "grand_exchange_price": "988",
     "examine": "Very stylish!",
     "durability": null,
+    "low_alchemy": "260",
+    "high_alchemy": "390",
+    "weight": "0.3",
+    "equipment_slot": "10",
+    "grand_exchange_price": "988",
     "name": "Boots",
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2934",
-    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0",
-    "equipment_slot": "10"
+    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -31316,7 +31502,9 @@
     "durability": null,
     "name": "Boots",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2935"
   },
   {
@@ -31324,8 +31512,8 @@
     "ge_buy_limit": "100",
     "examine": "Some fine werewolf clothing.",
     "durability": null,
-    "low_alchemy": "72",
-    "high_alchemy": "108",
+    "low_alchemy": "260",
+    "high_alchemy": "390",
     "weight": "1",
     "equipment_slot": "4",
     "remove_sleeves": "true",
@@ -31343,21 +31531,26 @@
     "durability": null,
     "name": "Robe top",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2937"
   },
   {
     "shop_price": "650",
     "ge_buy_limit": "100",
-    "grand_exchange_price": "927",
     "examine": "Made by werewolves for werewolves.",
     "durability": null,
+    "low_alchemy": "260",
+    "high_alchemy": "390",
+    "weight": "1",
+    "equipment_slot": "7",
+    "grand_exchange_price": "927",
     "name": "Robe bottoms",
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2938",
-    "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0",
-    "equipment_slot": "7"
+    "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -31366,21 +31559,27 @@
     "durability": null,
     "name": "Robe bottoms",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2939"
   },
   {
     "shop_price": "650",
     "ge_buy_limit": "100",
-    "grand_exchange_price": "1209",
     "examine": "A silly pointed hat.",
     "durability": null,
+    "low_alchemy": "260",
+    "high_alchemy": "390",
+    "weight": "0.4",
+    "equipment_slot": "0",
+    "grand_exchange_price": "1209",
     "name": "Hat",
     "tradeable": "true",
     "archery_ticket_price": "0",
+    "hat": "true",
     "id": "2940",
-    "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0",
-    "equipment_slot": "0"
+    "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -31389,21 +31588,26 @@
     "durability": null,
     "name": "Hat",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2941"
   },
   {
     "shop_price": "650",
     "ge_buy_limit": "10",
-    "grand_exchange_price": "634",
     "examine": "These gloves from Canifis will keep my hands warm!",
     "durability": null,
+    "low_alchemy": "260",
+    "high_alchemy": "390",
+    "weight": "0.4",
+    "equipment_slot": "9",
+    "grand_exchange_price": "634",
     "name": "Gloves",
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2942",
-    "bonuses": "0,0,0,0,0,0,1,2,0,0,0,0,0,0,0",
-    "equipment_slot": "9"
+    "bonuses": "0,0,0,0,0,0,1,2,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "10",
@@ -31412,29 +31616,35 @@
     "durability": null,
     "name": "Gloves",
     "tradeable": "true",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2943"
   },
   {
     "examine": "A key made from solid gold",
     "durability": null,
     "name": "Golden key",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2944"
   },
   {
     "examine": "A key made of solid iron.",
     "durability": null,
     "name": "Iron key",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2945"
   },
   {
     "examine": "A replica tinderbox made of solid gold.",
     "durability": null,
     "name": "Golden tinderbox",
-    "low_alchemy": "120",
-    "high_alchemy": "180",
+    "low_alchemy": "260",
+    "high_alchemy": "390",
     "archery_ticket_price": "0",
     "id": "2946"
   },
@@ -31442,9 +31652,9 @@
     "examine": "A replica candle made of solid gold.",
     "durability": null,
     "name": "Golden candle",
-    "low_alchemy": "120",
+    "low_alchemy": "260",
     "tradeable": "false",
-    "high_alchemy": "180",
+    "high_alchemy": "390",
     "destroy": "true",
     "archery_ticket_price": "0",
     "id": "2947"
@@ -31453,7 +31663,9 @@
     "examine": "A replica pot made of solid gold.",
     "durability": null,
     "name": "Golden pot",
+    "low_alchemy": "260",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "id": "2948"
   },
   {
@@ -31461,9 +31673,11 @@
     "durability": null,
     "name": "Golden hammer",
     "tradeable": "false",
+    "low_alchemy": "260",
     "destroy": "true",
     "weight": "0.9",
     "archery_ticket_price": "0",
+    "high_alchemy": "390",
     "attack_speed": "4",
     "id": "2949"
   },
@@ -31471,8 +31685,8 @@
     "examine": "A replica needle made of solid gold.",
     "durability": null,
     "name": "Golden needle",
-    "low_alchemy": "120",
-    "high_alchemy": "180",
+    "low_alchemy": "260",
+    "high_alchemy": "390",
     "archery_ticket_price": "0",
     "id": "2951"
   },
@@ -32855,6 +33069,7 @@
     "equipment_slot": "10",
     "grand_exchange_price": "51400",
     "name": "Climbing boots",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3105",
     "bonuses": "0,0,0,0,0,0,2,2,0,0,0,2,0,0,0"
@@ -35095,10 +35310,12 @@
     "grand_exchange_price": "274",
     "durability": null,
     "name": "Cooked slimy eel",
-    "tradeable": "false",
+    "tradeable": "true",
+    "low_alchemy": "1",
     "destroy": "false",
     "weight": "2",
     "archery_ticket_price": "0",
+    "high_alchemy": "1",
     "id": "3381"
   },
   {
@@ -37960,6 +38177,7 @@
     "examine": "Yup, it's sticky, it's red and it's goop.",
     "durability": null,
     "name": "Sticky red goop",
+    "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "3746"
   },
@@ -38625,13 +38843,19 @@
   },
   {
     "ge_buy_limit": "10",
-    "grand_exchange_price": "172",
+    "shop_price": "650",
+    "examine": "These will keep my hands warm!",
     "durability": null,
+    "low_alchemy": "260",
+    "high_alchemy": "390",
+    "weight": "0.4",
+    "equipment_slot": "9",
+    "grand_exchange_price": "172",
     "name": "Gloves",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3799",
-    "bonuses": "0,0,0,0,0,0,1,2,0,0,1,0,0,0,0",
-    "equipment_slot": "9"
+    "bonuses": "0,0,0,0,0,0,1,2,0,0,1,0,0,0,0"
   },
   {
     "ge_buy_limit": "10",
@@ -39455,6 +39679,7 @@
     "equipment_slot": "3",
     "stand_anim": "1421",
     "name": "Saradomin banner",
+    "tradeable": "false",
     "run_anim": "1427",
     "archery_ticket_price": "0",
     "id": "4037",
@@ -39463,7 +39688,7 @@
   {
     "durability": null,
     "name": "Saradomin banner",
-    "tradeable": "true",
+    "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "4038"
   },
@@ -39480,6 +39705,7 @@
     "equipment_slot": "3",
     "stand_anim": "1421",
     "name": "Zamorak banner",
+    "tradeable": "false",
     "run_anim": "1427",
     "archery_ticket_price": "0",
     "id": "4039",
@@ -39488,7 +39714,7 @@
   {
     "durability": null,
     "name": "Zamorak banner",
-    "tradeable": "true",
+    "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "4040"
   },
@@ -40570,7 +40796,6 @@
     "defence_anim": "1659",
     "equipment_slot": "3",
     "attack_anims": "1658,1658,1658,1658",
-    "destroy_message": "",
     "grand_exchange_price": "413500",
     "stand_anim": "808",
     "tradeable": "true",
@@ -41184,6 +41409,7 @@
     "grand_exchange_price": "905300",
     "attack_audios": "2700,0,0,0",
     "name": "New crystal bow",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "4212",
     "bonuses": "0,0,0,0,100,0,0,0,0,0,0,0,0,0,70"
@@ -41195,7 +41421,7 @@
     "name": "New crystal bow",
     "tradeable": "true",
     "archery_ticket_price": "0",
-    "id": "4213"
+    "id": "4213",
   },
   {
     "requirements": "{4,70}-{16,50}",
@@ -41408,6 +41634,7 @@
     "equipment_slot": "5",
     "grand_exchange_price": "756900",
     "name": "New crystal shield",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "4224",
     "bonuses": "0,0,0,-10,-10,51,54,53,0,80,70,0,0,0,0"
@@ -42172,6 +42399,7 @@
     "low_alchemy": "30",
     "high_alchemy": "45",
     "archery_ticket_price": "0",
+    "weight": "0.5",
     "id": "4306",
     "equipment_slot": "2"
   },
@@ -42186,13 +42414,18 @@
   },
   {
     "ge_buy_limit": "10",
-    "grand_exchange_price": "59",
+    "examine": "Gloves worn by the Humans Against Monsters group.",
     "durability": null,
+    "low_alchemy": "30",
+    "high_alchemy": "45",
+    "weight": "0.4",
+    "equipment_slot": "9",
+    "grand_exchange_price": "59",
     "name": "Gloves",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "4308",
-    "bonuses": "0,0,0,0,0,0,1,2,0,0,0,0,0,0,0",
-    "equipment_slot": "9"
+    "bonuses": "0,0,0,0,0,0,1,2,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "10",
@@ -42205,13 +42438,18 @@
   },
   {
     "ge_buy_limit": "100",
-    "grand_exchange_price": "323",
+    "examine": "Boots worn by the Humans Against Monsters group.",
     "durability": null,
+    "low_alchemy": "30",
+    "high_alchemy": "45",
+    "weight": "0.4",
+    "equipment_slot": "10",
+    "grand_exchange_price": "323",
     "name": "Boots",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "4310",
-    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0",
-    "equipment_slot": "10"
+    "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -46292,7 +46530,6 @@
     "name": "Karil's crossbow",
     "tradeable": "true",
     "archery_ticket_price": "0",
-    "attack_speed": "",
     "id": "4735"
   },
   {
@@ -49889,10 +50126,11 @@
   {
     "shop_price": "812",
     "ge_buy_limit": "100",
-    "examine": "Blue top, very tiny.",
+    "examine": "Far too small to wear.",
     "durability": null,
     "low_alchemy": "338",
     "high_alchemy": "507",
+    "weight": "0.1",
     "equipment_slot": "4",
     "remove_sleeves": "true",
     "grand_exchange_price": "710",
@@ -49913,10 +50151,11 @@
   {
     "shop_price": "812",
     "ge_buy_limit": "100",
-    "examine": "Blue top, very tiny.",
+    "examine": "Yellow top, too small for me.",
     "durability": null,
     "low_alchemy": "338",
     "high_alchemy": "507",
+    "weight": "0.1",
     "equipment_slot": "4",
     "remove_sleeves": "true",
     "grand_exchange_price": "908",
@@ -49941,6 +50180,7 @@
     "durability": null,
     "low_alchemy": "338",
     "high_alchemy": "507",
+    "weight": "0.1",
     "equipment_slot": "4",
     "remove_sleeves": "true",
     "grand_exchange_price": "1357",
@@ -49962,9 +50202,12 @@
     "remove_sleeves": "true",
     "ge_buy_limit": "100",
     "grand_exchange_price": "867",
+    "examine": "Tiny!",
     "durability": null,
     "name": "Shirt",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "weight": "0.1",
     "id": "5030",
     "equipment_slot": "4"
   },
@@ -49981,9 +50224,12 @@
     "remove_sleeves": "true",
     "ge_buy_limit": "100",
     "grand_exchange_price": "1023",
+    "examine": "Tiny!",
     "durability": null,
     "name": "Shirt",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "weight": "0.1",
     "id": "5032",
     "equipment_slot": "4"
   },
@@ -50000,9 +50246,12 @@
     "remove_sleeves": "true",
     "ge_buy_limit": "100",
     "grand_exchange_price": "1282",
+    "examine": "Tiny!",
     "durability": null,
     "name": "Shirt",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "weight": "0.1",
     "id": "5034",
     "equipment_slot": "4"
   },
@@ -50018,9 +50267,12 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "746",
+    "examine": "A pair of long dwarven trousers... long for dwarves, of course.",
     "durability": null,
     "name": "Trousers",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "weight": "0.1",
     "id": "5036",
     "equipment_slot": "7"
   },
@@ -50036,9 +50288,12 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "378",
+    "examine": "A pair of long dwarven trousers... long for dwarves, of course.",
     "durability": null,
     "name": "Trousers",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "weight": "0.1",
     "id": "5038",
     "equipment_slot": "7"
   },
@@ -50054,9 +50309,12 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "442",
+    "examine": "A pair of long dwarven trousers... long for dwarves, of course.",
     "durability": null,
     "name": "Trousers",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "weight": "0.1",
     "id": "5040",
     "equipment_slot": "7"
   },
@@ -50072,9 +50330,12 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1191",
+    "examine": "These look great, on dwarves!",
     "durability": null,
     "name": "Shorts",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "weight": "0.1",
     "id": "5042",
     "equipment_slot": "7"
   },
@@ -50090,9 +50351,12 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1229",
+    "examine": "Yellow shorts. Far too small for you.",
     "durability": null,
     "name": "Shorts",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "weight": "0.1",
     "id": "5044",
     "equipment_slot": "7"
   },
@@ -50108,9 +50372,12 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "2582",
+    "examine": "Blue shorts, these would look great on dwarves!",
     "durability": null,
     "name": "Shorts",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "weight": "0.1",
     "id": "5046",
     "equipment_slot": "7"
   },
@@ -50124,16 +50391,19 @@
     "id": "5047"
   },
   {
-    "ge_buy_limit": "2",
+    "ge_buy_limit": "100",
     "grand_exchange_price": "681",
+    "examine": "A brown skirt. Size small!",
     "durability": null,
     "name": "Skirt",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "weight": "0.1",
     "id": "5048",
     "equipment_slot": "7"
   },
   {
-    "ge_buy_limit": "2",
+    "ge_buy_limit": "100",
     "grand_exchange_price": "681",
     "durability": null,
     "name": "Skirt",
@@ -50142,16 +50412,19 @@
     "id": "5049"
   },
   {
-    "ge_buy_limit": "2",
+    "ge_buy_limit": "100",
     "grand_exchange_price": "1151",
+    "examine": "A blue skirt.",
     "durability": null,
     "name": "Skirt",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "weight": "0.1",
     "id": "5050",
     "equipment_slot": "7"
   },
   {
-    "ge_buy_limit": "2",
+    "ge_buy_limit": "100",
     "grand_exchange_price": "1151",
     "durability": null,
     "name": "Skirt",
@@ -50160,16 +50433,19 @@
     "id": "5051"
   },
   {
-    "ge_buy_limit": "2",
+    "ge_buy_limit": "100",
     "grand_exchange_price": "803",
+    "examine": "Lilac skirt.",
     "durability": null,
     "name": "Skirt",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "weight": "0.1",
     "id": "5052",
     "equipment_slot": "7"
   },
   {
-    "ge_buy_limit": "2",
+    "ge_buy_limit": "100",
     "grand_exchange_price": "803",
     "durability": null,
     "name": "Skirt",
@@ -50181,6 +50457,7 @@
     "examine": "A short angry guy.",
     "durability": null,
     "name": "Dwarf",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "5054"
   },
@@ -51065,13 +51342,15 @@
   {
     "shop_price": "8",
     "ge_buy_limit": "100",
-    "examine": "See article",
+    "examine": "This watering can is empty.",
     "grand_exchange_price": "298",
     "durability": null,
     "name": "Watering can",
     "low_alchemy": "3",
+    "tradeable": "true",
     "high_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "0.1",
     "id": "5331"
   },
   {
@@ -51085,90 +51364,98 @@
   },
   {
     "shop_price": "8",
-    "examine": "See article",
+    "examine": " This watering can is almost empty.",
     "grand_exchange_price": "206",
     "durability": null,
     "name": "Watering can(1)",
     "low_alchemy": "3",
     "high_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "0.2",
     "id": "5333"
   },
   {
     "shop_price": "8",
-    "examine": "See article",
+    "examine": "This watering can is three-quarters empty.",
     "grand_exchange_price": "206",
     "durability": null,
     "name": "Watering can(2)",
     "low_alchemy": "3",
     "high_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "0.3",
     "id": "5334"
   },
   {
     "shop_price": "8",
-    "examine": "See article",
+    "examine": "This watering can is just under half-full.",
     "grand_exchange_price": "206",
     "durability": null,
     "name": "Watering can(3)",
     "low_alchemy": "3",
     "high_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "0.4",
     "id": "5335"
   },
   {
     "shop_price": "8",
-    "examine": "See article",
+    "examine": " Some would say this watering can is half-full, others half-empty.",
     "grand_exchange_price": "206",
     "durability": null,
     "name": "Watering can(4)",
     "low_alchemy": "3",
     "high_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "0.5",
     "id": "5336"
   },
   {
     "shop_price": "8",
-    "examine": "See article",
+    "examine": "This watering can is just over half-full.",
     "grand_exchange_price": "206",
     "durability": null,
     "name": "Watering can(5)",
     "low_alchemy": "3",
     "high_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "0.6",
     "id": "5337"
   },
   {
     "shop_price": "8",
-    "examine": "See article",
+    "examine": " This watering can is three quarters full.",
     "grand_exchange_price": "206",
     "durability": null,
     "name": "Watering can(6)",
     "low_alchemy": "3",
     "high_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "0.7",
     "id": "5338"
   },
   {
     "shop_price": "8",
-    "examine": "See article",
+    "examine": " This watering can is almost completely full.",
     "grand_exchange_price": "206",
     "durability": null,
     "name": "Watering can(7)",
     "low_alchemy": "3",
     "high_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "0.8",
     "id": "5339"
   },
   {
     "shop_price": "8",
-    "examine": "See article",
+    "examine": " This watering can is completely full.",
     "grand_exchange_price": "206",
     "durability": null,
     "name": "Watering can(8)",
     "low_alchemy": "3",
     "high_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "0.9",
     "id": "5340"
   },
   {
@@ -52836,7 +53123,6 @@
     "id": "5528"
   },
   {
-    "requirements": "",
     "ge_buy_limit": "100",
     "examine": "A tiara infused with the properties of the mind.",
     "durability": null,
@@ -52860,7 +53146,6 @@
     "id": "5530"
   },
   {
-    "requirements": "",
     "ge_buy_limit": "100",
     "examine": "A tiara infused with the properties of water.",
     "durability": null,
@@ -52884,7 +53169,6 @@
     "id": "5532"
   },
   {
-    "requirements": "",
     "ge_buy_limit": "100",
     "examine": "A tiara infused with the properties of the body.",
     "durability": null,
@@ -52908,7 +53192,6 @@
     "id": "5534"
   },
   {
-    "requirements": "",
     "ge_buy_limit": "100",
     "examine": "A tiara infused with the properties of the earth.",
     "durability": null,
@@ -52932,7 +53215,6 @@
     "id": "5536"
   },
   {
-    "requirements": "",
     "ge_buy_limit": "100",
     "examine": "A tiara infused with the properties of fire.",
     "durability": null,
@@ -52956,7 +53238,6 @@
     "id": "5538"
   },
   {
-    "requirements": "",
     "ge_buy_limit": "100",
     "examine": "A tiara infused with the properties of the cosmos.",
     "durability": null,
@@ -52980,7 +53261,6 @@
     "id": "5540"
   },
   {
-    "requirements": "",
     "ge_buy_limit": "100",
     "examine": "A tiara infused with the properties of nature.",
     "durability": null,
@@ -53004,7 +53284,6 @@
     "id": "5542"
   },
   {
-    "requirements": "",
     "ge_buy_limit": "100",
     "examine": "A tiara infused with the properties of chaos.",
     "durability": null,
@@ -53028,7 +53307,6 @@
     "id": "5544"
   },
   {
-    "requirements": "",
     "ge_buy_limit": "100",
     "examine": "A tiara infused with the properties of law.",
     "durability": null,
@@ -53052,7 +53330,6 @@
     "id": "5546"
   },
   {
-    "requirements": "",
     "ge_buy_limit": "100",
     "examine": "A tiara infused with the properties of death.",
     "durability": null,
@@ -53076,7 +53353,6 @@
     "id": "5548"
   },
   {
-    "requirements": "",
     "ge_buy_limit": "100",
     "examine": "A tiara infused with the properties of Blood.",
     "durability": null,
@@ -53100,9 +53376,15 @@
     "id": "5550"
   },
   {
+    "ge_buy_limit": "100",
+    "examine": " A tiara infused with the properties of the soul.",
     "durability": null,
     "name": "Soul tiara",
+    "tradeable": "true",
+    "low_alchemy": "40",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "60",
     "id": "5551",
     "equipment_slot": "0"
   },
@@ -54167,18 +54449,23 @@
     "bonuses": "0,0,0,0,17,0,0,0,0,0,0,0,0,0,18"
   },
   {
-    "attack_anims": "806,806,806,806",
     "requirements": "{4,30}",
     "ge_buy_limit": "100",
-    "grand_exchange_price": "179",
+    "shop_price": "100",
+    "examine": "An adamant tipped javelin.",
     "durability": null,
+    "low_alchemy": "98",
+    "high_alchemy": "147",
+    "weapon_interface": "18",
+    "defence_anim": "424",
+    "equipment_slot": "3",
+    "attack_anims": "806,806,806,806",
+    "grand_exchange_price": "179",
     "name": "Adamant javelin(p+)",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "5646",
-    "weapon_interface": "18",
-    "bonuses": "0,0,0,0,24,0,0,0,0,0,0,0,0,0,28",
-    "defence_anim": "424",
-    "equipment_slot": "3"
+    "bonuses": "0,0,0,0,24,0,0,0,0,0,0,0,0,0,28"
   },
   {
     "shop_price": "624",
@@ -54278,18 +54565,23 @@
     "bonuses": "0,0,0,0,17,0,0,0,0,0,0,0,0,0,18"
   },
   {
-    "attack_anims": "806,806,806,806",
     "requirements": "{4,30}",
     "ge_buy_limit": "100",
-    "grand_exchange_price": "1514",
+    "shop_price": "100",
+    "examine": "An adamant tipped javelin.",
     "durability": null,
+    "low_alchemy": "98",
+    "high_alchemy": "147",
+    "weapon_interface": "18",
+    "defence_anim": "424",
+    "equipment_slot": "3",
+    "attack_anims": "806,806,806,806",
+    "grand_exchange_price": "1514",
     "name": "Adamant javelin(p++)",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "5652",
-    "weapon_interface": "18",
-    "bonuses": "0,0,0,0,24,0,0,0,0,0,0,0,0,0,28",
-    "defence_anim": "424",
-    "equipment_slot": "3"
+    "bonuses": "0,0,0,0,24,0,0,0,0,0,0,0,0,0,28"
   },
   {
     "requirements": "{4,40}",
@@ -54558,7 +54850,10 @@
   {
     "requirements": "{4,30}",
     "ge_buy_limit": "100",
+    "examine": "A finely balanced throwing knife.",
     "durability": null,
+    "low_alchemy": "26",
+    "high_alchemy": "40",
     "weapon_interface": "18",
     "defence_anim": "424",
     "equipment_slot": "3",
@@ -54566,6 +54861,7 @@
     "grand_exchange_price": "1505",
     "attack_audios": "2704,0,0,0",
     "name": "Adamant knife(p++)",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "5666",
     "bonuses": "0,0,0,0,15,0,0,0,0,0,0,0,0,0,14"
@@ -54711,16 +55007,17 @@
   {
     "requirements": "{0,30}",
     "ge_buy_limit": "100",
+    "durability": null,
+    "weapon_interface": "5",
+    "render_anim": "2584",
+    "equipment_slot": "3",
     "grand_exchange_price": "800",
     "attack_audios": "2517,2517,2500,2517",
-    "durability": null,
     "name": "Adamant dagger(p+)",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "5676",
-    "weapon_interface": "5",
-    "bonuses": "15,8,-4,1,0,0,0,0,1,0,0,14,0,0,0",
-    "render_anim": "2584",
-    "equipment_slot": "3"
+    "bonuses": "15,8,-4,1,0,0,0,0,1,0,0,14,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -54968,16 +55265,17 @@
   {
     "requirements": "{0,30}",
     "ge_buy_limit": "100",
+    "durability": null,
+    "weapon_interface": "5",
+    "render_anim": "2584",
+    "equipment_slot": "3",
     "grand_exchange_price": "4612",
     "attack_audios": "2517,2517,2500,2517",
-    "durability": null,
     "name": "Adamant dagger(p++)",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "5694",
-    "weapon_interface": "5",
-    "bonuses": "15,8,-4,1,0,0,0,0,1,0,0,14,0,0,0",
-    "render_anim": "2584",
-    "equipment_slot": "3"
+    "bonuses": "15,8,-4,1,0,0,0,0,1,0,0,14,0,0,0"
   },
   {
     "ge_buy_limit": "100",
@@ -55507,6 +55805,7 @@
     "requirements": "{0,30}",
     "ge_buy_limit": "100",
     "turn90cw_anim": "1207",
+    "examine": "An adamant tipped spear.",
     "walk_anim": "1205",
     "durability": null,
     "turn90ccw_anim": "1208",
@@ -55518,6 +55817,7 @@
     "grand_exchange_price": "7530",
     "stand_anim": "813",
     "name": "Adamant spear(p++)",
+    "tradeable": "true",
     "run_anim": "1210",
     "archery_ticket_price": "0",
     "id": "5726",
@@ -58365,7 +58665,9 @@
     "durability": null,
     "name": "Wildblood hops",
     "tradeable": "true",
+    "low_alchemy": "6",
     "archery_ticket_price": "0",
+    "high_alchemy": "9",
     "id": "6002"
   },
   {
@@ -58380,9 +58682,13 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "219",
+    "examine": "A Bittercap Mushroom",
     "durability": null,
     "name": "Mushroom",
+    "tradeable": "true",
+    "low_alchemy": "15",
     "archery_ticket_price": "0",
+    "high_alchemy": "23",
     "id": "6004"
   },
   {
@@ -58443,7 +58749,9 @@
     "durability": null,
     "name": "Marigolds",
     "tradeable": "true",
+    "low_alchemy": "1",
     "archery_ticket_price": "0",
+    "high_alchemy": "1",
     "id": "6010"
   },
   {
@@ -58483,6 +58791,7 @@
     "durability": null,
     "name": "Rosemary",
     "tradeable": "true",
+    "low_alchemy": "1",
     "high_alchemy": "1",
     "archery_ticket_price": "0",
     "id": "6014"
@@ -58503,7 +58812,9 @@
     "durability": null,
     "name": "Cactus spine",
     "tradeable": "true",
+    "low_alchemy": "1",
     "archery_ticket_price": "0",
+    "high_alchemy": "1",
     "id": "6016"
   },
   {
@@ -59465,16 +59776,20 @@
     "bonuses": "0,0,0,-6,-2,30,32,27,-1,30,6,0,0,0,0"
   },
   {
-    "remove_sleeves": "true",
     "requirements": "{1,40}",
     "ge_buy_limit": "100",
-    "grand_exchange_price": "40600",
     "durability": null,
+    "low_alchemy": "26000",
+    "high_alchemy": "39000",
+    "equipment_slot": "4",
+    "lendable": "true",
+    "remove_sleeves": "true",
+    "grand_exchange_price": "40600",
     "name": "Rock-shell plate",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "6129",
-    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,30,0,0,0,0",
-    "equipment_slot": "4"
+    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,30,0,0,0,0"
   },
   {
     "requirements": "{1,40}",
@@ -60038,10 +60353,12 @@
     "id": "6175"
   },
   {
+    "examine": "A sturdy body armour made from rock crab pieces.",
     "durability": null,
     "name": "Rock-shell plate",
     "tradeable": "true",
     "archery_ticket_price": "0",
+    "weight": "9",
     "id": "6176"
   },
   {
@@ -67221,7 +67538,7 @@
     "equipment_slot": "10",
     "grand_exchange_price": "1200000",
     "name": "Infinity boots",
-    "tradeable": "false",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "6920",
     "bonuses": "0,0,0,5,0,0,0,0,5,0,5,0,0,0,0"
@@ -67448,7 +67765,7 @@
     "equipment_slot": "1",
     "grand_exchange_price": "919",
     "name": "Cape",
-    "tradeable": "false",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "6959",
     "bonuses": "0,0,0,0,0,0,1,1,0,2,0,0,0,0,0"
@@ -69601,6 +69918,7 @@
     "durability": null,
     "name": "Skewered chompy",
     "low_alchemy": "59",
+    "tradeable": "true",
     "high_alchemy": "89",
     "destroy": "true",
     "archery_ticket_price": "0",
@@ -71007,13 +71325,18 @@
   {
     "requirements": "{1,40}-{4,40}",
     "ge_buy_limit": "5000",
-    "grand_exchange_price": "212400",
+    "examine": "Made from 100% real dragonhide. With colourful trim!",
     "durability": null,
+    "low_alchemy": "3120",
+    "weight": "6",
+    "high_alchemy": "4680",
+    "equipment_slot": "4",
+    "grand_exchange_price": "212400",
     "name": "D'hide body(g)",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "7370",
-    "bonuses": "0,0,0,-15,15,40,32,45,20,40,40,0,0,0,0",
-    "equipment_slot": "4"
+    "bonuses": "0,0,0,-15,15,40,32,45,20,40,40,0,0,0,0"
   },
   {
     "ge_buy_limit": "5000",
@@ -71027,13 +71350,18 @@
   {
     "requirements": "{1,40}-{4,40}",
     "ge_buy_limit": "2",
-    "grand_exchange_price": "38800",
+    "examine": "Made from 100% real dragonhide. With colourful trim!",
     "durability": null,
+    "low_alchemy": "3120",
+    "weight": "6",
+    "high_alchemy": "4680",
+    "equipment_slot": "4",
+    "grand_exchange_price": "38800",
     "name": "D'hide body (t)",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "7372",
-    "bonuses": "0,0,0,-15,15,40,32,45,20,40,40,0,0,0,0",
-    "equipment_slot": "4"
+    "bonuses": "0,0,0,-15,15,40,32,45,20,40,40,0,0,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -71047,13 +71375,18 @@
   {
     "requirements": "{1,50}-{4,40}",
     "ge_buy_limit": "2",
-    "grand_exchange_price": "6883",
+    "examine": "Made from 100% real dragonhide, with colourful trim!",
     "durability": null,
+    "low_alchemy": "3744",
+    "high_alchemy": "5616",
+    "weight": "6",
+    "equipment_slot": "4",
+    "grand_exchange_price": "6883",
     "name": "D'hide body (g)",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "7374",
-    "bonuses": "0,0,0,-15,20,45,37,50,30,45,45,0,0,0,0",
-    "equipment_slot": "4"
+    "bonuses": "0,0,0,-15,20,45,37,50,30,45,45,0,0,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -71067,13 +71400,18 @@
   {
     "requirements": "{1,50}-{4,40}",
     "ge_buy_limit": "2",
-    "grand_exchange_price": "5268",
+    "examine": "Made from 100% real dragonhide, with colourful trim!",
     "durability": null,
+    "low_alchemy": "3744",
+    "high_alchemy": "5616",
+    "weight": "6",
+    "equipment_slot": "4",
+    "grand_exchange_price": "5268",
     "name": "D'hide body (t)",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "7376",
-    "bonuses": "0,0,0,-15,20,45,37,50,30,45,45,0,0,0,0",
-    "equipment_slot": "4"
+    "bonuses": "0,0,0,-15,20,45,37,50,30,45,45,0,0,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -71087,13 +71425,18 @@
   {
     "requirements": "{4,40}",
     "ge_buy_limit": "2",
-    "grand_exchange_price": "1300000",
+    "examine": "Made from 100% real dragonhide, with colourful trim!",
     "durability": null,
+    "low_alchemy": "1560",
+    "high_alchemy": "2340",
+    "weight": "5",
+    "equipment_slot": "7",
+    "grand_exchange_price": "1300000",
     "name": "D'hide chaps (g)",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "7378",
-    "bonuses": "0,0,0,-10,8,22,16,24,8,22,15,0,0,0,0",
-    "equipment_slot": "7"
+    "bonuses": "0,0,0,-10,8,22,16,24,8,22,15,0,0,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -71107,13 +71450,18 @@
   {
     "requirements": "{4,40}",
     "ge_buy_limit": "2",
-    "grand_exchange_price": "304300",
+    "examine": "Made from 100% real dragonhide, with colourful trim!",
     "durability": null,
+    "low_alchemy": "1560",
+    "high_alchemy": "2340",
+    "weight": "5",
+    "equipment_slot": "7",
+    "grand_exchange_price": "304300",
     "name": "D'hide chaps (t)",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "7380",
-    "bonuses": "0,0,0,-10,8,22,16,24,8,22,15,0,0,0,0",
-    "equipment_slot": "7"
+    "bonuses": "0,0,0,-10,8,22,16,24,8,22,15,0,0,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -71127,13 +71475,18 @@
   {
     "requirements": "{4,50}",
     "ge_buy_limit": "2",
-    "grand_exchange_price": "21300",
+    "examine": "Made from 100% real dragonhide, with colourful trim!",
     "durability": null,
+    "low_alchemy": "1728",
+    "high_alchemy": "2592",
+    "weight": "5",
+    "equipment_slot": "7",
+    "grand_exchange_price": "21300",
     "name": "D'hide chaps (g)",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "7382",
-    "bonuses": "0,0,0,-10,11,25,19,27,14,25,20,0,0,0,0",
-    "equipment_slot": "7"
+    "bonuses": "0,0,0,-10,11,25,19,27,14,25,20,0,0,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -71147,13 +71500,18 @@
   {
     "requirements": "{4,50}",
     "ge_buy_limit": "2",
-    "grand_exchange_price": "2554",
+    "examine": "Made from 100% real dragonhide, with colourful trim!",
     "durability": null,
+    "low_alchemy": "1728",
+    "high_alchemy": "2592",
+    "weight": "5",
+    "equipment_slot": "7",
+    "grand_exchange_price": "2554",
     "name": "D'hide chaps (t)",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "7384",
-    "bonuses": "0,0,0,-10,11,25,19,27,14,25,20,0,0,0,0",
-    "equipment_slot": "7"
+    "bonuses": "0,0,0,-10,11,25,19,27,14,25,20,0,0,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -71196,6 +71554,7 @@
     "tradeable": "true",
     "high_alchemy": "1",
     "archery_ticket_price": "0",
+    "weight": "1",
     "id": "7388",
     "bonuses": "0,0,0,1,0,0,0,0,1,0,0,0,0,0,0",
     "equipment_slot": "7"
@@ -73774,9 +74133,13 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "96",
+    "examine": "An unfinished potion.",
     "durability": null,
     "name": "Guthix balance(unf)",
+    "tradeable": "true",
+    "low_alchemy": "44",
     "archery_ticket_price": "0",
+    "high_alchemy": "66",
     "id": "7652"
   },
   {
@@ -73791,9 +74154,13 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "77",
+    "examine": "An unfinished potion.",
     "durability": null,
     "name": "Guthix balance(unf)",
+    "tradeable": "true",
+    "low_alchemy": "44",
     "archery_ticket_price": "0",
+    "high_alchemy": "66",
     "id": "7654"
   },
   {
@@ -73808,9 +74175,13 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "58",
+    "examine": "An unfinished potion.",
     "durability": null,
     "name": "Guthix balance(unf)",
+    "tradeable": "true",
+    "low_alchemy": "44",
     "archery_ticket_price": "0",
+    "high_alchemy": "66",
     "id": "7656"
   },
   {
@@ -73825,9 +74196,13 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "30",
+    "examine": "An unfinished potion.",
     "durability": null,
     "name": "Guthix balance(unf)",
+    "tradeable": "true",
+    "low_alchemy": "44",
     "archery_ticket_price": "0",
+    "high_alchemy": "66",
     "id": "7658"
   },
   {
@@ -74141,6 +74516,7 @@
     "examine": "I'd really like a nice cup of tea.",
     "durability": null,
     "name": "Pot of tea (4)",
+    "tradeable": "true",
     "weight": "1.5",
     "archery_ticket_price": "0",
     "id": "7692"
@@ -74156,6 +74532,7 @@
     "examine": "I'd really like a nice cup of tea.",
     "durability": null,
     "name": "Pot of tea (3)",
+    "tradeable": "true",
     "weight": "1.5",
     "archery_ticket_price": "0",
     "id": "7694"
@@ -74171,6 +74548,7 @@
     "examine": "I'd really like a nice cup of tea.",
     "durability": null,
     "name": "Pot of tea (2)",
+    "tradeable": "true",
     "weight": "1.5",
     "archery_ticket_price": "0",
     "id": "7696"
@@ -74186,6 +74564,7 @@
     "examine": "I'd really like a nice cup of tea.",
     "durability": null,
     "name": "Pot of tea (1)",
+    "tradeable": "true",
     "weight": "1.5",
     "archery_ticket_price": "0",
     "id": "7698"
@@ -74201,6 +74580,7 @@
     "examine": "Add boiling water to make a tea.",
     "durability": null,
     "name": "Teapot with leaves",
+    "tradeable": "true",
     "weight": "1.5",
     "archery_ticket_price": "0",
     "id": "7700"
@@ -74216,6 +74596,7 @@
     "examine": "This teapot is empty.",
     "durability": null,
     "name": "Teapot",
+    "tradeable": "true",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "7702"
@@ -74231,6 +74612,7 @@
     "examine": "I'd really like a nice cup of tea.",
     "durability": null,
     "name": "Pot of tea (4)",
+    "tradeable": "true",
     "weight": "1.5",
     "archery_ticket_price": "0",
     "id": "7704"
@@ -74246,6 +74628,7 @@
     "examine": "I'd really like a nice cup of tea.",
     "durability": null,
     "name": "Pot of tea (3)",
+    "tradeable": "true",
     "weight": "1.5",
     "archery_ticket_price": "0",
     "id": "7706"
@@ -74261,6 +74644,7 @@
     "examine": "I'd really like a nice cup of tea.",
     "durability": null,
     "name": "Pot of tea (2)",
+    "tradeable": "true",
     "weight": "1.5",
     "archery_ticket_price": "0",
     "id": "7708"
@@ -74276,6 +74660,7 @@
     "examine": "I'd really like a nice cup of tea.",
     "durability": null,
     "name": "Pot of tea (1)",
+    "tradeable": "true",
     "weight": "1.5",
     "archery_ticket_price": "0",
     "id": "7710"
@@ -74291,6 +74676,7 @@
     "examine": "Add boiling water to make a tea.",
     "durability": null,
     "name": "Teapot with leaves",
+    "tradeable": "true",
     "weight": "1.5",
     "archery_ticket_price": "0",
     "id": "7712"
@@ -74306,6 +74692,7 @@
     "examine": "This teapot is empty.",
     "durability": null,
     "name": "Teapot",
+    "tradeable": "true",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "7714"
@@ -74321,6 +74708,7 @@
     "examine": "I'd really like a nice cup of tea.",
     "durability": null,
     "name": "Pot of tea (4)",
+    "tradeable": "true",
     "weight": "1.5",
     "archery_ticket_price": "0",
     "id": "7716"
@@ -74336,6 +74724,7 @@
     "examine": "I'd really like a nice cup of tea.",
     "durability": null,
     "name": "Pot of tea (3)",
+    "tradeable": "true",
     "weight": "1.5",
     "archery_ticket_price": "0",
     "id": "7718"
@@ -74351,6 +74740,7 @@
     "examine": "I'd really like a nice cup of tea.",
     "durability": null,
     "name": "Pot of tea (2)",
+    "tradeable": "true",
     "weight": "1.5",
     "archery_ticket_price": "0",
     "id": "7720"
@@ -74366,6 +74756,7 @@
     "examine": "I'd really like a nice cup of tea.",
     "durability": null,
     "name": "Pot of tea (1)",
+    "tradeable": "true",
     "weight": "1.5",
     "archery_ticket_price": "0",
     "id": "7722"
@@ -74381,6 +74772,7 @@
     "examine": "Add boiling water to make a tea.",
     "durability": null,
     "name": "Teapot with leaves",
+    "tradeable": "true",
     "weight": "1.5",
     "archery_ticket_price": "0",
     "id": "7724"
@@ -74396,6 +74788,7 @@
     "examine": "This teapot is empty.",
     "durability": null,
     "name": "Teapot",
+    "tradeable": "true",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "7726"
@@ -74682,6 +75075,7 @@
   {
     "durability": null,
     "name": "Paintbrush",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "7756",
     "equipment_slot": "3"
@@ -77816,8 +78210,10 @@
   },
   {
     "requirements": "{15,22}",
+    "examine": "You can plant this in your garden.",
     "durability": null,
     "name": "Bagged oak tree",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "8421"
   },
@@ -77936,6 +78332,7 @@
     "name": "Bagged plant 2",
     "tradeable": "true",
     "archery_ticket_price": "0",
+    "weight": "10",
     "id": "8433"
   },
   {
@@ -77953,6 +78350,7 @@
     "name": "Bagged plant 3",
     "tradeable": "true",
     "archery_ticket_price": "0",
+    "weight": "10",
     "id": "8435"
   },
   {
@@ -77972,6 +78370,7 @@
     "low_alchemy": "2000",
     "high_alchemy": "3000",
     "archery_ticket_price": "0",
+    "weight": "10",
     "id": "8437"
   },
   {
@@ -77991,6 +78390,7 @@
     "low_alchemy": "4000",
     "high_alchemy": "6000",
     "archery_ticket_price": "0",
+    "weight": "10",
     "id": "8439"
   },
   {
@@ -78010,6 +78410,7 @@
     "low_alchemy": "6000",
     "high_alchemy": "9000",
     "archery_ticket_price": "0",
+    "weight": "10",
     "id": "8441"
   },
   {
@@ -78046,6 +78447,7 @@
     "durability": null,
     "name": "Fancy hedge",
     "low_alchemy": "10000",
+    "tradeable": "true",
     "high_alchemy": "15000",
     "weight": "10",
     "archery_ticket_price": "0",
@@ -78065,8 +78467,10 @@
     "durability": null,
     "name": "Tall fancy hedge",
     "low_alchemy": "20000",
+    "tradeable": "true",
     "high_alchemy": "30000",
     "archery_ticket_price": "0",
+    "weight": "10",
     "id": "8447"
   },
   {
@@ -78078,9 +78482,15 @@
   },
   {
     "requirements": "{22,80}",
+    "shop_price": "100000",
+    "examine": "You can plant this in your garden.",
     "durability": null,
     "name": "Tall box hedge",
+    "tradeable": "true",
+    "low_alchemy": "40000",
     "archery_ticket_price": "0",
+    "high_alchemy": "60000",
+    "weight": "10",
     "id": "8449"
   },
   {
@@ -78092,9 +78502,15 @@
   },
   {
     "requirements": "{22,66}",
+    "shop_price": "5000",
+    "examine": "You can plant this in your garden.",
     "durability": null,
     "name": "Bagged rosemary",
+    "tradeable": "true",
+    "low_alchemy": "2000",
     "archery_ticket_price": "0",
+    "high_alchemy": "3000",
+    "weight": "10",
     "id": "8451"
   },
   {
@@ -78114,6 +78530,7 @@
     "low_alchemy": "4000",
     "high_alchemy": "6000",
     "archery_ticket_price": "0",
+    "weight": "10",
     "id": "8453"
   },
   {
@@ -78133,6 +78550,7 @@
     "low_alchemy": "6000",
     "high_alchemy": "9000",
     "archery_ticket_price": "0",
+    "weight": "10",
     "id": "8455"
   },
   {
@@ -78172,6 +78590,7 @@
     "low_alchemy": "4000",
     "high_alchemy": "6000",
     "archery_ticket_price": "0",
+    "weight": "10",
     "id": "8459"
   },
   {
@@ -78438,9 +78857,13 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1",
+    "examine": "A ready-to-assemble crude chair.",
     "durability": null,
     "name": "Crude wooden chair",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
     "id": "8496"
   },
   {
@@ -78455,9 +78878,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "53",
+    "examine": "A ready-to-assemble wooden chair.",
     "durability": null,
     "name": "Wooden chair",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8498"
   },
   {
@@ -78472,9 +78900,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1",
+    "examine": "A ready-to-assemble rocking chair.",
     "durability": null,
     "name": "Rocking chair",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8500"
   },
   {
@@ -78489,9 +78922,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "2",
+    "examine": "A ready-to-assemble oak chair.",
     "durability": null,
     "name": "Oak chair",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8502"
   },
   {
@@ -78506,9 +78944,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1",
+    "examine": "A ready-to-assemble oak armchair.",
     "durability": null,
     "name": "Oak armchair",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8504"
   },
   {
@@ -78523,9 +78966,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1",
+    "examine": "A ready-to-assemble teak armchair.",
     "durability": null,
     "name": "Teak armchair",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8506"
   },
   {
@@ -78540,9 +78988,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "8",
+    "examine": "A ready-to-assemble mahogany armchair.",
     "durability": null,
     "name": "Mahogany armchair",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8508"
   },
   {
@@ -78557,9 +79010,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1",
+    "examine": "A ready-to-assemble wooden bookcase.",
     "durability": null,
     "name": "Wooden bookcase",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8510"
   },
   {
@@ -78574,9 +79032,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1",
+    "examine": "A ready-to-assemble oak bookcase.",
     "durability": null,
     "name": "Oak bookcase",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8512"
   },
   {
@@ -78591,9 +79054,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "46",
+    "examine": "A ready-to-assemble mahogany bookcase.",
     "durability": null,
     "name": "Mahogany b'kcase",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8514"
   },
   {
@@ -78608,9 +79076,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1",
+    "examine": "A ready-to-assemble beer barrel.",
     "durability": null,
     "name": "Beer barrel",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8516"
   },
   {
@@ -78625,9 +79098,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "16900",
+    "examine": "A ready-to-assemble cider barrel.",
     "durability": null,
     "name": "Cider barrel",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8518"
   },
   {
@@ -78642,13 +79120,15 @@
   {
     "shop_price": "3",
     "ge_buy_limit": "100",
-    "examine": "Probably the finest readily-available ale in Asgarnia.",
+    "examine": "A ready-to-assemble barrel of Asgarnian Ale.",
     "grand_exchange_price": "4586",
     "durability": null,
     "name": "Asgarnian ale",
     "tradeable": "true",
-    "high_alchemy": "1",
+    "low_alchemy": "4",
+    "high_alchemy": "6",
     "archery_ticket_price": "0",
+    "weight": "1",
     "id": "8520"
   },
   {
@@ -78663,13 +79143,15 @@
   {
     "shop_price": "2",
     "ge_buy_limit": "100",
-    "examine": "A glass of frothy ale.",
+    "examine": "A ready-to-assemble barrel of Greenman's Ale.",
     "grand_exchange_price": "8875",
     "durability": null,
     "name": "Greenman's ale",
     "tradeable": "true",
-    "high_alchemy": "1",
+    "low_alchemy": "4",
+    "high_alchemy": "6",
     "archery_ticket_price": "0",
+    "weight": "1",
     "id": "8522"
   },
   {
@@ -78684,12 +79166,13 @@
   {
     "shop_price": "2",
     "ge_buy_limit": "100",
-    "examine": "A glass of bitter.",
+    "examine": "A ready-to-assemble barrel of Dragon Bitter.",
     "grand_exchange_price": "10300",
     "durability": null,
     "name": "Dragon bitter",
     "tradeable": "true",
-    "high_alchemy": "1",
+    "low_alchemy": "4",
+    "high_alchemy": "6",
     "weight": "1",
     "archery_ticket_price": "0",
     "id": "8524"
@@ -78705,13 +79188,15 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "A fruity, full-bodied ale.",
+    "examine": "A ready-to-assemble barrel of Chef's Delight.",
     "grand_exchange_price": "48800",
     "durability": null,
     "name": "Chef's delight",
     "tradeable": "true",
-    "high_alchemy": "1",
+    "low_alchemy": "4",
+    "high_alchemy": "6",
     "archery_ticket_price": "0",
+    "weight": "1",
     "id": "8526"
   },
   {
@@ -78726,9 +79211,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1",
+    "examine": "A ready-to-assemble wooden kitchen table.",
     "durability": null,
     "name": "Wood kitchen table",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8528"
   },
   {
@@ -78743,9 +79233,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1",
+    "examine": "A ready-to-assemble oak kitchen table.",
     "durability": null,
     "name": "Oak kitchen table",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8530"
   },
   {
@@ -78760,9 +79255,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1",
+    "examine": "A ready-to-assemble teak kitchen table.",
     "durability": null,
     "name": "Teak kitchen table",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8532"
   },
   {
@@ -78777,58 +79277,56 @@
   {
     "durability": null,
     "name": "Oak lectern",
-    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "8535"
   },
   {
     "durability": null,
     "name": "Eagle lectern",
-    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "8537"
   },
   {
     "durability": null,
     "name": "Demon lectern",
-    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "8539"
   },
   {
     "durability": null,
     "name": "Teak eagle lectern",
-    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "8541"
   },
   {
     "durability": null,
     "name": "Teak demon lectern",
-    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "8543"
   },
   {
     "durability": null,
     "name": "Mahogany eagle",
-    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "8545"
   },
   {
     "durability": null,
     "name": "Mahogany demon",
-    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "8547"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1",
+    "examine": "A ready-to-assemble wooden dining table.",
     "durability": null,
     "name": "Wood dining table",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8548"
   },
   {
@@ -78843,9 +79341,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1",
+    "examine": "A ready-to-assemble oak dining table.",
     "durability": null,
     "name": "Oak dining table",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8550"
   },
   {
@@ -78860,9 +79363,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1",
+    "examine": "A ready-to-assemble carved oak dining table.",
     "durability": null,
     "name": "Carved oak table",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8552"
   },
   {
@@ -78877,9 +79385,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "2",
+    "examine": "A ready-to-assemble teak dining table.",
     "durability": null,
     "name": "Teak table",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8554"
   },
   {
@@ -78894,9 +79407,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "245",
+    "examine": "A ready-to-assemble carved teak dining table.",
     "durability": null,
     "name": "Carved teak table",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8556"
   },
   {
@@ -78911,9 +79429,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "575",
+    "examine": "A ready-to-assemble mahogany dining table.",
     "durability": null,
     "name": "Mahogany table",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8558"
   },
   {
@@ -78928,9 +79451,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "379100",
+    "examine": "A ready-to-assemble opulent dining table.",
     "durability": null,
     "name": "Opulent table",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8560"
   },
   {
@@ -78945,9 +79473,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "15",
+    "examine": "A ready-to-assemble wooden dining bench.",
     "durability": null,
     "name": "Wooden bench",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8562"
   },
   {
@@ -78962,9 +79495,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "137",
+    "examine": "A ready-to-assemble oak dining bench.",
     "durability": null,
     "name": "Oak bench",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8564"
   },
   {
@@ -78979,9 +79517,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1",
+    "examine": "A ready-to-assemble carved oak dining bench.",
     "durability": null,
     "name": "Carved oak bench",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8566"
   },
   {
@@ -78996,9 +79539,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "18",
+    "examine": "A ready-to-assemble teak dining bench.",
     "durability": null,
     "name": "Teak dining bench",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8568"
   },
   {
@@ -79013,9 +79561,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "2",
+    "examine": "A ready-to-assemble carved teak dining bench.",
     "durability": null,
     "name": "Carved teak bench",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8570"
   },
   {
@@ -79030,9 +79583,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "126",
+    "examine": "A ready-to-assemble mahogany dining bench.",
     "durability": null,
     "name": "Mahogany bench",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8572"
   },
   {
@@ -79047,9 +79605,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "517600",
+    "examine": "A ready-to-assemble gilded mahogany dining bench.",
     "durability": null,
     "name": "Gilded bench",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8574"
   },
   {
@@ -79064,9 +79627,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1974",
+    "examine": "A ready-to-assemble wooden bed.",
     "durability": null,
     "name": "Wooden bed",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8576"
   },
   {
@@ -79081,9 +79649,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1775",
+    "examine": "A ready-to-assemble oak bed.",
     "durability": null,
     "name": "Oak bed",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8578"
   },
   {
@@ -79098,9 +79671,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1433",
+    "examine": "A ready-to-assemble large oak bed.",
     "durability": null,
     "name": "Large oak bed",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8580"
   },
   {
@@ -79115,9 +79693,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1442",
+    "examine": "A ready-to-assemble teak bed.",
     "durability": null,
     "name": "Teak bed",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8582"
   },
   {
@@ -79132,9 +79715,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "2030",
+    "examine": "A ready-to-assemble large teak bed.",
     "durability": null,
     "name": "Large teak bed",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8584"
   },
   {
@@ -79149,9 +79737,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1401",
+    "examine": "A ready-to-assemble four-poster bed.",
     "durability": null,
     "name": "4-poster",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8586"
   },
   {
@@ -79166,9 +79759,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "286700",
+    "examine": "A ready-to-assemble gilded four-poster bed.",
     "durability": null,
     "name": "Gilded 4-poster",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "8588"
   },
   {
@@ -79183,9 +79781,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "384",
+    "examine": "A ready-to-assemble oak clock.",
     "durability": null,
     "name": "Oak clock",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8590"
   },
   {
@@ -79200,9 +79803,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "595",
+    "examine": "A ready-to-assemble teak clock.",
     "durability": null,
     "name": "Teak clock",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8592"
   },
   {
@@ -79217,9 +79825,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "156100",
+    "examine": "A ready-to-assemble gilded mahogany clock.",
     "durability": null,
     "name": "Gilded clock",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8594"
   },
   {
@@ -79234,9 +79847,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "510",
+    "examine": "A ready-to-assemble shaving stand.",
     "durability": null,
     "name": "Shaving stand",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8596"
   },
   {
@@ -79251,9 +79869,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "455",
+    "examine": "A ready-to-assemble oak shaving stand.",
     "durability": null,
     "name": "Oak shaving stand",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8598"
   },
   {
@@ -79268,9 +79891,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "147",
+    "examine": "A ready-to-assemble oak dresser.",
     "durability": null,
     "name": "Oak dresser",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8600"
   },
   {
@@ -79285,9 +79913,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "478",
+    "examine": "A ready-to-assemble teak dresser.",
     "durability": null,
     "name": "Teak dresser",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8602"
   },
   {
@@ -79302,9 +79935,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "455",
+    "examine": "A ready-to-assemble fancy teak dresser.",
     "durability": null,
     "name": "Fancy teak dresser",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8604"
   },
   {
@@ -79319,9 +79957,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "399",
+    "examine": "A ready-to-assemble mahogany dresser.",
     "durability": null,
     "name": "Mahogany dresser",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8606"
   },
   {
@@ -79336,9 +79979,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "138800",
+    "examine": "A ready-to-assemble gilded dresser.",
     "durability": null,
     "name": "Gilded dresser",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8608"
   },
   {
@@ -79353,9 +80001,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "21",
+    "examine": "A ready-to-assemble shoe box.",
     "durability": null,
     "name": "Shoe box",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8610"
   },
   {
@@ -79370,9 +80023,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "47",
+    "examine": "A ready-to-assemble oak chest of drawers.",
     "durability": null,
     "name": "Oak drawers",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8612"
   },
   {
@@ -79387,9 +80045,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1",
+    "examine": "A ready-to-assemble oak bedroom wardrobe.",
     "durability": null,
     "name": "Oak wardrobe",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8614"
   },
   {
@@ -79404,9 +80067,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "132",
+    "examine": "A ready-to-assemble teak chest of drawers.",
     "durability": null,
     "name": "Teak drawers",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8616"
   },
   {
@@ -79421,9 +80089,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "13",
+    "examine": "A ready-to-assemble teak bedroom wardrobe.",
     "durability": null,
     "name": "Teak wardrobe",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8618"
   },
   {
@@ -79438,9 +80111,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "98",
+    "examine": "A ready-to-assemble mahogany bedroom wardrobe.",
     "durability": null,
     "name": "Mahogany 'drobe",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8620"
   },
   {
@@ -79455,9 +80133,14 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "137700",
+    "examine": "A ready-to-assemble gilded mahogany bedroom wardrobe.",
     "durability": null,
     "name": "Gilded wardrobe",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "8622"
   },
   {
@@ -83437,7 +84120,6 @@
     "bonuses": "0,0,0,2,0,0,0,0,2,0,0,0,0,0,0"
   },
   {
-    "requirements": "",
     "durability": null,
     "name": "Astral tiara",
     "archery_ticket_price": "0",
@@ -85517,6 +86199,7 @@
     "durability": null,
     "name": "Batta tin",
     "low_alchemy": "4",
+    "tradeable": "true",
     "high_alchemy": "6",
     "weight": "0.1",
     "archery_ticket_price": "0",
@@ -85535,6 +86218,7 @@
     "durability": null,
     "name": "Batta tin",
     "low_alchemy": "4",
+    "tradeable": "true",
     "high_alchemy": "6",
     "weight": "0.1",
     "archery_ticket_price": "0",
@@ -88324,177 +89008,287 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "3",
+    "examine": "A ready-to-assemble oak cape rack.",
     "durability": null,
     "name": "Oak cape rack",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9843"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "92",
+    "examine": "A ready-to-assemble teak cape rack..",
     "durability": null,
     "name": "Teak cape rack",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9844"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "111",
+    "examine": "A ready-to-assemble mahogany cape rack.",
     "durability": null,
     "name": "M'gany cape rack",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9845"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "130900",
+    "examine": "A ready-to-assemble gilded mahogany rack.",
     "durability": null,
     "name": "Gilded cape rack",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9846"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "329500",
+    "examine": "A ready-to-assemble marble cape rack.",
     "durability": null,
     "name": "Marble cape rack",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9847"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1000000",
+    "examine": "A ready-to-assemble magic cape rack.",
     "durability": null,
     "name": "Magical cape rack",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9848"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "25",
+    "examine": "A ready-to-assemble oak toy box.",
     "durability": null,
     "name": "Oak toy box",
+    "tradeable": "true",
+    "low_alchemy": "4",
     "archery_ticket_price": "0",
+    "weight": "1",
+    "high_alchemy": "6",
     "id": "9849"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "165",
+    "examine": "A ready-to-assemble teak toy box.",
     "durability": null,
     "name": "Teak toy box",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9850"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "20",
+    "examine": "A ready-to-assemble mahogany toy box.",
     "durability": null,
     "name": "Mahogany toy box",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9851"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "111",
+    "examine": "A ready-to-assemble oak magic wardrobe.",
     "durability": null,
     "name": "Oak magic wardrobe",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9852"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1",
+    "examine": "A ready-to-assemble oak magic wardrobe.",
     "durability": null,
     "name": "Carved oak magic wardrobe",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9853"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "133",
+    "examine": "A ready-to-assemble teak magic wardrobe.",
     "durability": null,
     "name": "Teak magic wardrobe",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9854"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "15",
+    "examine": "A ready-to-assemble carved teak magic wardrobe.",
     "durability": null,
     "name": "Carved teak magic wardrobe",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9855"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "129",
+    "examine": "A ready-to-assemble mahogany magic wardrobe.",
     "durability": null,
     "name": "Mahogany magic wardrobe",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9856"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "137700",
+    "examine": "A ready-to-assemble gilded mahogany magic wardrobe.",
     "durability": null,
     "name": "Gilded magic wardrobe",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9857"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "335800",
+    "examine": "A ready-to-assemble marble magic wardrobe.",
     "durability": null,
     "name": "Marble magic wardrobe",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9858"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "17",
+    "examine": "A ready-to-assemble oak armour case.",
     "durability": null,
     "name": "Oak armour case",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9859"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "29",
+    "examine": "A ready-to-assemble teak armour case.",
     "durability": null,
     "name": "Teak armour case",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9860"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "88",
+    "examine": "A ready-to-assemble mahogany armour case.",
     "durability": null,
     "name": "M'gany arm'r case",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9861"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "24",
+    "examine": "A ready-to-assemble oak treasure chest.",
     "durability": null,
     "name": "Oak treasure chest",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9862"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "164",
+    "examine": "A ready-to-assemble teak treasure chest.",
     "durability": null,
     "name": "Teak treas' chest",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9863"
   },
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "41",
+    "examine": "A ready-to-assemble mahogany treasure chest.",
     "durability": null,
     "name": "M'gany treas' chest",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9864"
   },
   {
@@ -88502,7 +89296,11 @@
     "grand_exchange_price": "62",
     "durability": null,
     "name": "Oak costume box",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9865"
   },
   {
@@ -88510,7 +89308,11 @@
     "grand_exchange_price": "135",
     "durability": null,
     "name": "Teak costume box",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9866"
   },
   {
@@ -88518,7 +89320,11 @@
     "grand_exchange_price": "60",
     "durability": null,
     "name": "Mahogany cos box",
+    "low_alchemy": "4",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "high_alchemy": "6",
+    "weight": "1",
     "id": "9867"
   },
   {
@@ -121117,7 +121923,6 @@
     "attack_speed": "4",
     "absorb": "0,0,0",
     "equipment_slot": "12",
-    "destroy_message": "",
     "name": "Ring of slaying(8)",
     "tradeable": "false",
     "archery_ticket_price": "0",
@@ -121134,7 +121939,6 @@
     "attack_speed": "4",
     "absorb": "0,0,0",
     "equipment_slot": "12",
-    "destroy_message": "",
     "name": "Ring of slaying(7)",
     "tradeable": "false",
     "archery_ticket_price": "0",
@@ -121151,7 +121955,6 @@
     "attack_speed": "4",
     "absorb": "0,0,0",
     "equipment_slot": "12",
-    "destroy_message": "",
     "name": "Ring of slaying(6)",
     "tradeable": "false",
     "archery_ticket_price": "0",
@@ -121168,7 +121971,6 @@
     "attack_speed": "4",
     "absorb": "0,0,0",
     "equipment_slot": "12",
-    "destroy_message": "",
     "name": "Ring of slaying(5)",
     "tradeable": "false",
     "archery_ticket_price": "0",
@@ -121185,7 +121987,6 @@
     "attack_speed": "4",
     "absorb": "0,0,0",
     "equipment_slot": "12",
-    "destroy_message": "",
     "name": "Ring of slaying(4)",
     "tradeable": "false",
     "archery_ticket_price": "0",
@@ -121202,7 +122003,6 @@
     "attack_speed": "4",
     "absorb": "0,0,0",
     "equipment_slot": "12",
-    "destroy_message": "",
     "name": "Ring of slaying(3)",
     "tradeable": "false",
     "archery_ticket_price": "0",
@@ -121219,7 +122019,6 @@
     "attack_speed": "4",
     "absorb": "0,0,0",
     "equipment_slot": "12",
-    "destroy_message": "",
     "name": "Ring of slaying(2)",
     "tradeable": "false",
     "archery_ticket_price": "0",
@@ -121236,7 +122035,6 @@
     "attack_speed": "4",
     "absorb": "0,0,0",
     "equipment_slot": "12",
-    "destroy_message": "",
     "name": "Ring of slaying(1)",
     "tradeable": "false",
     "archery_ticket_price": "0",
@@ -121256,7 +122054,6 @@
     "defence_anim": "397",
     "equipment_slot": "3",
     "attack_anims": "381,381,390,381",
-    "destroy_message": "",
     "grand_exchange_price": "43082",
     "stand_anim": "813",
     "tradeable": "true",
@@ -121282,7 +122079,6 @@
     "high_alchemy": "40800",
     "destroy": "false",
     "attack_speed": "4",
-    "destroy_message": "",
     "grand_exchange_price": "43082",
     "name": "Leaf-bladed sword",
     "tradeable": "true",
@@ -121663,7 +122459,6 @@
   },
   {
     "destroy_message": "If you drop this accordion, it will be destroyed and you will have to get another.",
-    "examine": "",
     "durability": null,
     "name": "Accordion",
     "tradeable": "false",
@@ -121676,7 +122471,6 @@
   },
   {
     "destroy_message": "If you drop this accordion, it will be destroyed and you will have to get another.",
-    "examine": "",
     "durability": null,
     "name": "Accordion",
     "tradeable": "false",
@@ -121689,7 +122483,6 @@
   },
   {
     "destroy_message": "If you drop this accordion, it will be destroyed and you will have to get another.",
-    "examine": "",
     "durability": null,
     "name": "Accordion",
     "tradeable": "false",
@@ -121832,7 +122625,6 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "examine": "",
     "durability": null,
     "name": "Ex-ex-parrot",
     "archery_ticket_price": "0",
@@ -121842,7 +122634,6 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "examine": "",
     "durability": null,
     "name": "Ex-ex-parrot",
     "archery_ticket_price": "0",
@@ -122223,7 +123014,6 @@
   },
   {
     "shop_price": "300",
-    "examine": "",
     "durability": null,
     "low_alchemy": "120",
     "high_alchemy": "180",
@@ -122242,7 +123032,6 @@
   {
     "destroy_message": "Drop",
     "shop_price": "300",
-    "examine": "",
     "durability": null,
     "name": "Stripy pirate shirt",
     "tradeable": "false",
@@ -122255,7 +123044,6 @@
   },
   {
     "shop_price": "300",
-    "examine": "",
     "durability": null,
     "low_alchemy": "120",
     "high_alchemy": "180",
@@ -122274,7 +123062,6 @@
   {
     "destroy_message": "Drop",
     "shop_price": "300",
-    "examine": "",
     "durability": null,
     "name": "Stripy pirate shirt",
     "tradeable": "false",
@@ -122287,7 +123074,6 @@
   },
   {
     "shop_price": "300",
-    "examine": "",
     "durability": null,
     "low_alchemy": "120",
     "high_alchemy": "180",
@@ -122306,7 +123092,6 @@
   {
     "destroy_message": "Drop",
     "shop_price": "300",
-    "examine": "",
     "durability": null,
     "name": "Stripy pirate shirt",
     "tradeable": "false",
@@ -122319,7 +123104,6 @@
   },
   {
     "shop_price": "350",
-    "examine": "",
     "durability": null,
     "low_alchemy": "140",
     "high_alchemy": "210",
@@ -122337,7 +123121,6 @@
   },
   {
     "shop_price": "350",
-    "examine": "",
     "durability": null,
     "low_alchemy": "140",
     "high_alchemy": "210",
@@ -122352,7 +123135,6 @@
   },
   {
     "shop_price": "350",
-    "examine": "",
     "durability": null,
     "low_alchemy": "140",
     "high_alchemy": "210",
@@ -122370,7 +123152,6 @@
   },
   {
     "shop_price": "350",
-    "examine": "",
     "durability": null,
     "low_alchemy": "140",
     "high_alchemy": "210",
@@ -122385,7 +123166,6 @@
   },
   {
     "shop_price": "350",
-    "examine": "",
     "durability": null,
     "low_alchemy": "140",
     "high_alchemy": "210",
@@ -122403,7 +123183,6 @@
   },
   {
     "shop_price": "350",
-    "examine": "",
     "durability": null,
     "low_alchemy": "140",
     "high_alchemy": "210",
@@ -122922,7 +123701,6 @@
     "bonuses": "0,0,0,0,95,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "examine": "",
     "durability": null,
     "low_alchemy": "40000",
     "high_alchemy": "60000",
@@ -123011,7 +123789,6 @@
     "destroy": "true",
     "attack_speed": "4",
     "absorb": "1,0,3",
-    "lendable": "true",
     "destroy_message": "Drop",
     "grand_exchange_price": "20378",
     "name": "Rock-shell helm",
@@ -123027,7 +123804,6 @@
     "destroy": "true",
     "attack_speed": "4",
     "absorb": "3,0,6",
-    "lendable": "true",
     "destroy_message": "Drop",
     "grand_exchange_price": "41788",
     "name": "Rock-shell plate",
@@ -123043,7 +123819,6 @@
     "destroy": "true",
     "attack_speed": "4",
     "absorb": "2,0,4",
-    "lendable": "true",
     "destroy_message": "Drop",
     "grand_exchange_price": "37139",
     "name": "Rock-shell legs",
@@ -123171,7 +123946,6 @@
     "destroy": "true",
     "attack_speed": "4",
     "absorb": "0,0,0",
-    "lendable": "true",
     "destroy_message": "Drop",
     "grand_exchange_price": "1358",
     "name": "Rock-shell boots",
@@ -123219,7 +123993,6 @@
     "destroy": "true",
     "attack_speed": "4",
     "absorb": "0,0,0",
-    "lendable": "true",
     "destroy_message": "Drop",
     "grand_exchange_price": "12839",
     "name": "Rock-shell gloves",
@@ -123447,7 +124220,6 @@
     "id": "13438"
   },
   {
-    "destroy_message": "",
     "examine": "I wonder what happens if I rub it.",
     "durability": null,
     "name": "Antique lamp",
@@ -123460,7 +124232,6 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "destroy_message": "",
     "examine": "This is a bag of runes for Sir Vant.",
     "durability": null,
     "name": "Bag of runes",
@@ -123544,7 +124315,6 @@
     "bonuses": "0,0,81,0,0,0,0,0,0,0,0,79,0,0,0"
   },
   {
-    "destroy_message": "",
     "examine": "I wonder what happens if I rub it.",
     "durability": null,
     "name": "Antique lamp",
@@ -123557,7 +124327,6 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "destroy_message": "",
     "examine": "I wonder what happens if I rub it.",
     "durability": null,
     "name": "Antique lamp",
@@ -123570,7 +124339,6 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "destroy_message": "",
     "examine": "I wonder what happens if I rub it.",
     "durability": null,
     "name": "Antique lamp",
@@ -123831,7 +124599,6 @@
     "bonuses": "0,0,0,-3,-1,16,17,18,0,0,15,4,0,0,0"
   },
   {
-    "destroy_message": "",
     "examine": "I wonder what happens if I rub it.",
     "durability": null,
     "name": "Antique lamp",
@@ -125818,7 +126585,6 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "destroy_message": "",
     "examine": "It seems to change temperature as I walk. (Making History)",
     "durability": null,
     "name": "Enchanted key",
@@ -126862,7 +127628,6 @@
     "equipment_slot": "3",
     "attack_anims": "395,395,401,395",
     "destroy_message": "To get another Inferno Adze, you need to keep all fourteen beacons alight simultaneously and then talk to King Roald.",
-    "attack_audios": "",
     "name": "Inferno adze",
     "archery_ticket_price": "0",
     "id": "13661",
@@ -129930,7 +130695,6 @@
     "id": "13869",
     "stand_turn_anim": "1209",
     "bonuses": "13,-1,65,18,0,5,7,4,18,0,0,72,0,0,10",
-    "requirements": "",
     "shop_price": "300000",
     "durability": null,
     "high_alchemy": "180000",
@@ -130629,7 +131393,6 @@
     "id": "13904",
     "stand_turn_anim": "823",
     "bonuses": "-4,-4,123,0,0,0,0,0,0,0,0,114,0,0,0",
-    "requirements": "",
     "shop_price": "300000",
     "durability": null,
     "high_alchemy": "180000",
@@ -132682,7 +133445,6 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "examine": "",
     "durability": null,
     "name": "Pet kitten",
     "archery_ticket_price": "0",
@@ -132692,7 +133454,6 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "examine": "",
     "durability": null,
     "name": "Pet cat",
     "archery_ticket_price": "0",
@@ -132702,7 +133463,6 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "examine": "",
     "durability": null,
     "name": "Lazy cat",
     "archery_ticket_price": "0",
@@ -132712,7 +133472,6 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "examine": "",
     "durability": null,
     "name": "Overgrown cat",
     "archery_ticket_price": "0",
@@ -132722,7 +133481,6 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "examine": "",
     "durability": null,
     "name": "Wily cat",
     "archery_ticket_price": "0",
@@ -138016,7 +138774,6 @@
     "attack_speed": "4",
     "absorb": "3,1,0",
     "equipment_slot": "4",
-    "destroy_message": "",
     "remove_sleeves": "true",
     "grand_exchange_price": "71098",
     "name": "Dagon'hai robe top",
@@ -138033,7 +138790,6 @@
     "high_alchemy": "72000",
     "destroy": "false",
     "attack_speed": "4",
-    "destroy_message": "",
     "grand_exchange_price": "71098",
     "name": "Dagon'hai robe top",
     "tradeable": "true",
@@ -138051,7 +138807,6 @@
     "attack_speed": "4",
     "absorb": "1,0,0",
     "equipment_slot": "0",
-    "destroy_message": "",
     "grand_exchange_price": "9580",
     "name": "Dagon'hai hat",
     "tradeable": "true",
@@ -138067,7 +138822,6 @@
     "high_alchemy": "9000",
     "destroy": "false",
     "attack_speed": "4",
-    "destroy_message": "",
     "grand_exchange_price": "9580",
     "name": "Dagon'hai hat",
     "tradeable": "true",
@@ -138085,7 +138839,6 @@
     "attack_speed": "4",
     "absorb": "2,1,0",
     "equipment_slot": "7",
-    "destroy_message": "",
     "grand_exchange_price": "45691",
     "name": "Dagon'hai robe bottom",
     "tradeable": "true",
@@ -138101,7 +138854,6 @@
     "high_alchemy": "48000",
     "destroy": "false",
     "attack_speed": "4",
-    "destroy_message": "",
     "grand_exchange_price": "45691",
     "name": "Dagon'hai robe bottom",
     "tradeable": "true",
@@ -138351,7 +139103,6 @@
     "destroy": "false",
     "attack_speed": "4",
     "absorb": "0,0,0",
-    "destroy_message": "",
     "grand_exchange_price": "193541",
     "name": "Dagon'hai robes set",
     "tradeable": "true",
@@ -138360,7 +139111,6 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "destroy_message": "",
     "shop_price": "20",
     "examine": "Grand Exchange set containing a hat, top and bottoms.",
     "grand_exchange_price": "193541",
@@ -138457,7 +139207,6 @@
     "id": "14532"
   },
   {
-    "examine": "",
     "durability": null,
     "name": "Broav",
     "archery_ticket_price": "0",
@@ -138492,7 +139241,6 @@
   },
   {
     "destroy_message": "You will lose all food stored in the Cornucopia. You can get another empty one from Diango in Draynor Village.",
-    "examine": "",
     "durability": null,
     "name": "Cornucopia",
     "destroy": "true",
@@ -138504,7 +139252,6 @@
   },
   {
     "destroy_message": "You will lose all food stored in the Cornucopia. You can get another empty one from Diango in Draynor Village.",
-    "examine": "",
     "durability": null,
     "name": "Cornucopia",
     "destroy": "true",
@@ -138516,7 +139263,6 @@
   },
   {
     "shop_price": "9",
-    "examine": "",
     "durability": null,
     "low_alchemy": "3",
     "high_alchemy": "5",
@@ -138596,7 +139342,6 @@
   },
   {
     "destroy_message": "You will lose all food stored in the Cornucopia. You can get another empty one from Diango in Draynor Village.",
-    "examine": "",
     "durability": null,
     "name": "Cornucopia",
     "destroy": "true",
@@ -138607,7 +139352,6 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "destroy_message": "",
     "examine": "Not-so-sturdy boots for northern winters.",
     "durability": null,
     "name": "Fremennik sea boots 1",
@@ -138633,7 +139377,6 @@
     "equipment_slot": "10"
   },
   {
-    "destroy_message": "",
     "examine": "Very sturdy boots for northern winters.",
     "durability": null,
     "name": "Fremennik sea boots 3",
@@ -138646,7 +139389,6 @@
     "equipment_slot": "10"
   },
   {
-    "destroy_message": "",
     "examine": "I wonder what happens if I rub it.",
     "durability": null,
     "name": "Antique lamp",
@@ -138659,7 +139401,6 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "destroy_message": "",
     "examine": "I wonder what happens if I rub it.",
     "durability": null,
     "name": "Antique lamp",
@@ -138672,7 +139413,6 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "destroy_message": "",
     "examine": "I wonder what happens if I rub it.",
     "durability": null,
     "name": "Antique lamp",
@@ -138733,7 +139473,6 @@
     "bonuses": "0,0,0,-8,-2,27,31,29,-1,29,30,0,7,0,0"
   },
   {
-    "destroy_message": "",
     "shop_price": "1000",
     "examine": "I wonder what happens if I rub it.",
     "durability": null,
@@ -138747,7 +139486,6 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "destroy_message": "",
     "shop_price": "5000",
     "examine": "I wonder what happens if I rub it.",
     "durability": null,
@@ -138761,7 +139499,6 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "destroy_message": "",
     "shop_price": "10000",
     "examine": "I wonder what happens if I rub it.",
     "durability": null,
@@ -138907,7 +139644,6 @@
     "equipment_slot": "4"
   },
   {
-    "destroy_message": "",
     "examine": "A spikey amulet made of ice crystals. It has been enchanted so it will not melt.",
     "durability": null,
     "name": "Ice amulet",
@@ -138922,7 +139658,6 @@
   {
     "destroy_message": "You can probably get more in the last room of the yeti cave, in the Land of Snow.",
     "shop_price": "1",
-    "examine": "",
     "durability": null,
     "name": "Stones",
     "destroy": "true",
@@ -138946,7 +139681,6 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "destroy_message": "",
     "examine": "A spikey amulet made of ice crystals. It has been enchanted so it will not melt.",
     "durability": null,
     "name": "Ice amulet",
@@ -139338,7 +140072,6 @@
     "name": "Enhanced excalibur"
   },
   {
-    "destroy_message": "",
     "examine": "I wonder what happens if I rub it.",
     "durability": null,
     "name": "Antique lamp",
@@ -139351,7 +140084,6 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "destroy_message": "",
     "examine": "I wonder what happens if I rub it.",
     "durability": null,
     "name": "Antique lamp",
@@ -139364,7 +140096,6 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "destroy_message": "",
     "examine": "I wonder what happens if I rub it.",
     "durability": null,
     "name": "Antique lamp",
@@ -139567,7 +140298,6 @@
     "weight": "0.1",
     "destroy": "true",
     "equipment_slot": "0",
-    "destroy_message": "",
     "grand_exchange_price": "0",
     "name": "Wizard hat",
     "tradeable": "false",
@@ -139578,7 +140308,6 @@
   },
   {
     "destroy_message": "<col=ef0000I> WARNING: </col> You will have to reobtain this item the hard way.",
-    "requirements": "",
     "examine": "Mysterious blueprints written in an alien language.",
     "durability": null,
     "name": "Ancient Blueprints",
