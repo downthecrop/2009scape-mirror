@@ -41421,7 +41421,7 @@
     "name": "New crystal bow",
     "tradeable": "true",
     "archery_ticket_price": "0",
-    "id": "4213",
+    "id": "4213"
   },
   {
     "requirements": "{4,70}-{16,50}",
