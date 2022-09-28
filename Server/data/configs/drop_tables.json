@@ -22628,7 +22628,7 @@
       }
     ],
     "charm": [],
-    "ids": "1227,1232",
+    "ids": "1227",
     "description": "",
     "main": []
   },
@@ -22648,7 +22648,7 @@
       }
     ],
     "charm": [],
-    "ids": "1228,1233",
+    "ids": "1228",
     "description": "",
     "main": []
   },
@@ -22668,7 +22668,7 @@
       }
     ],
     "charm": [],
-    "ids": "1229,1234",
+    "ids": "1229",
     "description": "",
     "main": []
   },
@@ -22688,7 +22688,7 @@
       }
     ],
     "charm": [],
-    "ids": "1230,1235",
+    "ids": "1230",
     "description": "",
     "main": []
   },
@@ -63934,5 +63934,85 @@
         "maxAmount": "1"
       }
     ]
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "3363",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "3355",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "1232",
+    "description": "Pointed",
+    "main": []
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "3367",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "3357",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "1233",
+    "description": "Pointed",
+    "main": []
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "3363",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "3359",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "1234",
+    "description": "Pointed",
+    "main": []
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "3367",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "3361",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "1235",
+    "description": "Pointed",
+    "main": []
   }
 ]
