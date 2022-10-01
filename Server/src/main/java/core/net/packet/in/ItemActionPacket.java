@@ -195,7 +195,7 @@ public class ItemActionPacket implements IncomingPacket {
 			if(player.getZoneMonitor().useWith(used,object)){
 				return;
 			}
-			event = new NodeUsageEvent(player, 0, used, object);
+			event = new NodeUsageEvent(player, 0, used, child != null ? child : object);
 
 			/**
 			 * Farming-specific handler for item -> patch
