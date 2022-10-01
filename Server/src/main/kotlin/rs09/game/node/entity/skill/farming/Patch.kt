@@ -96,6 +96,10 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
         updateBit()
     }
 
+    fun isFertilized(): Boolean {
+        return compost != CompostType.NONE
+    }
+
     fun isGrown(): Boolean{
         return currentGrowthStage == (plantable?.stages ?: 0)
     }

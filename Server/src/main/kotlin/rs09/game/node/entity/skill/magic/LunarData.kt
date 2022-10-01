@@ -4,21 +4,26 @@ import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 
+// Animations
 val BAKE_PIE_ANIM = Animation(4413)
-val BAKE_PIE_GFX = Graphics(746,75)
 val STATSPY_ANIM = Animation(6293)
-val STATSPY_GFX = Graphics(1059)
 val CURE_PLANT_ANIM = Animation(4409)
-val CURE_PLANT_GFX = Graphics(742,100)
 val NPC_CONTACT_ANIM = Animation(4413)
-val NPC_CONTACT_GFX = Graphics(730,130)
 val PLANK_MAKE_ANIM = Animation(6298)
-val PLANK_MAKE_GFX = Graphics(1063, 120)
 val STRING_JEWELLERY_ANIM = Animation(4412)
-val STRING_JEWELLERY_GFX = Graphics(728, 100)
 val SUPERGLASS_MAKE_ANIM = Animation(4413)
-val SUPERGLASS_MAKE_GFX = Graphics(729, 120)
+val FERTILE_SOIL_ANIM = Animation(724)
 
+
+// Graphics
+val BAKE_PIE_GFX = Graphics(746,75)
+val STATSPY_GFX = Graphics(1059)
+val CURE_PLANT_GFX = Graphics(742,100)
+val NPC_CONTACT_GFX = Graphics(730,130)
+val PLANK_MAKE_GFX = Graphics(1063, 120)
+val STRING_JEWELLERY_GFX = Graphics(728, 100)
+val SUPERGLASS_MAKE_GFX = Graphics(729, 120)
+val FERTILE_SOIL_GFX = Graphics(141, 96)
 
 enum class JewelleryString(val unstrung: Int, val strung: Int) {
     GOLD(Items.GOLD_AMULET_1673, Items.GOLD_AMULET_1692),

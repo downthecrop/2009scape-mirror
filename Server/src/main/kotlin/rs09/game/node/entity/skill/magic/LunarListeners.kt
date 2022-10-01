@@ -13,11 +13,11 @@ import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
-import core.game.world.update.flag.context.Animation
-import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
 import org.rs09.consts.Components
 import org.rs09.consts.Items
+import rs09.game.node.entity.skill.farming.CompostBins
+import rs09.game.node.entity.skill.farming.CompostType
 import rs09.game.node.entity.skill.farming.FarmingPatch
 import rs09.game.node.entity.skill.magic.spellconsts.Lunar
 import rs09.game.system.config.NPCConfigParser
@@ -26,24 +26,24 @@ class LunarListeners : SpellListener("lunar") {
 
     override fun defineListeners() {
 
-        onCast(Lunar.HOME_TELEPORT, NONE){player, _ ->
+        onCast(Lunar.HOME_TELEPORT, NONE) { player, _ ->
             requires(player)
             sendTeleport(player,0.0, Location.create(2100, 3914, 0))
         }
 
-        onCast(Lunar.MOONCLAN_TELEPORT, NONE){player, _ ->
+        onCast(Lunar.MOONCLAN_TELEPORT, NONE) { player, _ ->
             requires(player,69, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563,1), Item(Items.EARTH_RUNE_557,2)))
             player.getAudioManager().send(Audio(200), true)
             sendTeleport(player,66.0, Location.create(2111, 3916, 0))
         }
 
-        onCast(Lunar.MOONCLAN_GR_TELEPORT, NONE){player, _ ->
+        onCast(Lunar.MOONCLAN_GR_TELEPORT, NONE) { player, _ ->
             requires(player,70, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563,1), Item(Items.EARTH_RUNE_557,4)))
             player.getAudioManager().send(Audio(200), true)
             sendGroupTeleport(player,67.0,"Moonclan Island",Location.create(2111, 3916, 0))
         }
 
-        onCast(Lunar.OURANIA_TELEPORT, NONE){player,_ ->
+        onCast(Lunar.OURANIA_TELEPORT, NONE) { player, _ ->
             requires(player,71, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563,1), Item(Items.EARTH_RUNE_557,6)))
             player.getAudioManager().send(Audio(200), true)
             sendTeleport(player,69.0, Location.create(2469, 3247, 0))
@@ -55,88 +55,88 @@ class LunarListeners : SpellListener("lunar") {
             sendTeleport(player,71.0, Location.create(2527, 3739, 0))
         }
 
-        onCast(Lunar.WATERBIRTH_GR_TELEPORT, NONE){player,_ ->
+        onCast(Lunar.WATERBIRTH_GR_TELEPORT, NONE) { player, _ ->
             requires(player,73, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563), Item(Items.WATER_RUNE_555,5)))
             player.getAudioManager().send(Audio(200), true)
             sendGroupTeleport(player,72.0,"Waterbirth Island", Location.create(2527, 3739, 0))
         }
 
-        onCast(Lunar.BARBARIAN_TELEPORT, NONE){player,_ ->
+        onCast(Lunar.BARBARIAN_TELEPORT, NONE) { player, _ ->
             requires(player,75, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563,2), Item(Items.FIRE_RUNE_554,3)))
             player.getAudioManager().send(Audio(200), true)
             sendTeleport(player,76.0, Location.create(2544, 3572, 0))
         }
 
-        onCast(Lunar.BARBARIAN_GR_TELEPORT, NONE){player,_ ->
+        onCast(Lunar.BARBARIAN_GR_TELEPORT, NONE) { player, _ ->
             requires(player,77, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563,2), Item(Items.FIRE_RUNE_554,6)))
             player.getAudioManager().send(Audio(200), true)
             sendGroupTeleport(player,77.0,"Barbarian Outpost", Location.create(2544, 3572, 0))
         }
 
-        onCast(Lunar.KHAZARD_TELEPORT, NONE){player,_ ->
+        onCast(Lunar.KHAZARD_TELEPORT, NONE) { player, _ ->
             requires(player,78, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563,2), Item(Items.WATER_RUNE_555,4)))
             player.getAudioManager().send(Audio(200), true)
             sendTeleport(player,80.0, Location.create(2656, 3157, 0))
         }
 
-        onCast(Lunar.KHAZARD_GR_TELEPORT, NONE){player,_ ->
+        onCast(Lunar.KHAZARD_GR_TELEPORT, NONE) { player, _ ->
             requires(player,79, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563,2), Item(Items.WATER_RUNE_555,8)))
             player.getAudioManager().send(Audio(200), true)
             sendGroupTeleport(player,81.0, "Port Khazard", Location.create(2656, 3157, 0))
         }
 
-        onCast(Lunar.FISHING_GUILD_TELEPORT, NONE){player,_ ->
+        onCast(Lunar.FISHING_GUILD_TELEPORT, NONE) { player, _ ->
             requires(player,85, arrayOf(Item(Items.ASTRAL_RUNE_9075,3), Item(Items.LAW_RUNE_563,3), Item(Items.WATER_RUNE_555,10)))
             player.getAudioManager().send(Audio(200), true)
             sendTeleport(player,89.0, Location.create(2611, 3393, 0))
         }
 
-        onCast(Lunar.FISHING_GUILD_GR_TELEPORT, NONE){player,_ ->
+        onCast(Lunar.FISHING_GUILD_GR_TELEPORT, NONE) { player, _ ->
             requires(player,86, arrayOf(Item(Items.ASTRAL_RUNE_9075,3), Item(Items.LAW_RUNE_563,3), Item(Items.WATER_RUNE_555,14)))
             player.getAudioManager().send(Audio(200), true)
             sendGroupTeleport(player,90.0,"Fishing Guild", Location.create(2611, 3393, 0))
         }
 
-        onCast(Lunar.CATHERBY_TELEPORT, NONE){player,_ ->
+        onCast(Lunar.CATHERBY_TELEPORT, NONE) { player, _ ->
             requires(player,87, arrayOf(Item(Items.ASTRAL_RUNE_9075,3), Item(Items.LAW_RUNE_563,3), Item(Items.WATER_RUNE_555,10)))
             player.getAudioManager().send(Audio(200), true)
             sendTeleport(player,92.0, Location.create(2804, 3433, 0))
         }
 
-        onCast(Lunar.CATHERBY_GR_TELEPORT, NONE){player,_ ->
+        onCast(Lunar.CATHERBY_GR_TELEPORT, NONE) { player, _ ->
             requires(player,88, arrayOf(Item(Items.ASTRAL_RUNE_9075,3), Item(Items.LAW_RUNE_563,3), Item(Items.WATER_RUNE_555,15)))
             player.getAudioManager().send(Audio(200), true)
             sendGroupTeleport(player,93.0,"Catherby", Location.create(2804, 3433, 0))
         }
 
-        onCast(Lunar.ICE_PLATEAU_TELEPORT, NONE){player,_ ->
+        onCast(Lunar.ICE_PLATEAU_TELEPORT, NONE) { player, _ ->
             requires(player,89, arrayOf(Item(Items.ASTRAL_RUNE_9075,3), Item(Items.LAW_RUNE_563,3), Item(Items.WATER_RUNE_555,8)))
             player.getAudioManager().send(Audio(200), true)
             sendTeleport(player,96.0, Location.create(2972, 3873, 0))
         }
 
-        onCast(Lunar.ICE_PLATEAU_GR_TELEPORT, NONE){player,_ ->
+        onCast(Lunar.ICE_PLATEAU_GR_TELEPORT, NONE) { player, _ ->
             requires(player,90, arrayOf(Item(Items.ASTRAL_RUNE_9075,3), Item(Items.LAW_RUNE_563,3), Item(Items.WATER_RUNE_555,16)))
             player.getAudioManager().send(Audio(200), true)
             sendGroupTeleport(player,99.0, "Ice Plateau", Location.create(2972, 3873, 0))
         }
 
-        onCast(Lunar.BAKE_PIE, NONE){player,_ ->
+        onCast(Lunar.BAKE_PIE, NONE) { player, _ ->
             requires(player,65, arrayOf(Item(Items.ASTRAL_RUNE_9075), Item(Items.FIRE_RUNE_554,5), Item(Items.WATER_RUNE_555,4)))
             bakePie(player)
         }
 
-        onCast(Lunar.MONSTER_EXAMINE, NPC){player,node ->
+        onCast(Lunar.MONSTER_EXAMINE, NPC) { player, node ->
             requires(player,66, arrayOf(Item(Items.ASTRAL_RUNE_9075), Item(Items.MIND_RUNE_558), Item(Items.COSMIC_RUNE_564)))
             examineMonster(player,node!!.asNpc())
         }
 
-        onCast(Lunar.CURE_PLANT, OBJECT){player,node ->
+        onCast(Lunar.CURE_PLANT, OBJECT) { player, node ->
             requires(player,66, arrayOf(Item(Items.ASTRAL_RUNE_9075), Item(Items.EARTH_RUNE_557,8)))
             curePlant(player,node!!.asScenery())
         }
 
-        onCast(Lunar.NPC_CONTACT, NONE){ player, _ ->
+        onCast(Lunar.NPC_CONTACT, NONE) { player, _ ->
             requires(player,67, arrayOf(Item(Items.ASTRAL_RUNE_9075), Item(Items.COSMIC_RUNE_564), Item(Items.AIR_RUNE_556,2)))
             player.interfaceManager.open(Component(429))
             player.setAttribute("contact-caller"){
@@ -157,9 +157,13 @@ class LunarListeners : SpellListener("lunar") {
             stringJewellery(player)
         }
 
-        onCast(Lunar.SUPERGLASS_MAKE, NONE) {player, _ ->
+        onCast(Lunar.SUPERGLASS_MAKE, NONE) { player, _ ->
             requires(player, 77, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.FIRE_RUNE_554, 6), Item(Items.AIR_RUNE_556, 10)))
             superglassMake(player)
+        }
+
+        onCast(Lunar.FERTILE_SOIL, OBJECT) { player, node ->
+            fertileSoil(player, node!!.asScenery())
         }
     }
 
@@ -393,4 +397,37 @@ class LunarListeners : SpellListener("lunar") {
             addXP(player, 78.0)
         }
     }
+
+    private fun fertileSoil(player: Player, target: Scenery) {
+        if (CompostBins.forObjectID(target.id) != null) {
+            sendMessage(player, "No, that would be silly.")
+            return
+        }
+
+        val fPatch = FarmingPatch.forObject(target)
+        if(fPatch == null) {
+            sendMessage(player, "Um... I don't want to fertilize that!")
+            return
+        }
+
+        val patch = fPatch.getPatchFor(player)
+        if (patch.isGrown()) {
+            sendMessage(player, "Composting isn't going to make it get any bigger.")
+            return
+        }
+        if (patch.isFertilized()) {
+            sendMessage(player, "This patch has already been composted.")
+            return
+        }
+        requires(player, 83, arrayOf(Item(Items.ASTRAL_RUNE_9075, 3), Item(Items.NATURE_RUNE_561, 2), Item(Items.EARTH_RUNE_557, 15)))
+        removeRunes(player, true)
+        visualizeSpell(player, FERTILE_SOIL_ANIM, FERTILE_SOIL_GFX, 2891)
+        patch.compost = CompostType.SUPER
+        sendMessage(player, "You fertilize the soil.")
+        addXP(player, 87.0)
+    }
 }
+
+
+
+
