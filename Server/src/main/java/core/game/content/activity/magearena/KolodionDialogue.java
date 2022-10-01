@@ -129,7 +129,7 @@ public final class KolodionDialogue extends DialoguePlugin {
 			stage++;
 			break;
 		case 2:
-			player("Hah! A wizard of your level? Don't be absurd.");
+			npc("Hah! A wizard of your level? Don't be absurd.");
 			stage++;
 			break;
 		case 3:
