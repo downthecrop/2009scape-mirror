@@ -81,7 +81,7 @@ public class ItemDefinition extends Definition<Item> {
 	/**
 	 * The item value.
 	 */
-	private int value;
+	private int value = 1;
 
 	/**
 	 * If item is members only.
@@ -358,15 +358,10 @@ public class ItemDefinition extends Definition<Item> {
 			} else if (opcode == 11) {
 				def.stackable = true;
 			} else if (opcode == 12) {
-				def.value = buffer.getInt();
-				if (def.value == 0) {
-					def.value = 1;
-				}
+				def.value = ((buffer.get() & 0xFF) << 24) + ((buffer.get() & 0xFF) << 16) + ((buffer.get() & 0xFF) << 8) + (buffer.get() & 0xFF);
 			} else if (opcode == 16) {
 				def.membersOnly = true;
-			} else if (opcode == 18) {
-				buffer.getShort();
-			} else if (opcode == 23) {
+			}  else if (opcode == 23) {
 				def.maleWornModelId1 = buffer.getShort() & 0xFFFF;
 				// buffer.get();
 			} else if (opcode == 24) {
@@ -446,15 +441,6 @@ public class ItemDefinition extends Definition<Item> {
 				def.lendId = buffer.getShort() & 0xFFFF;
 			} else if (opcode == 122) {
 				def.lendTemplateId = buffer.getShort() & 0xFFFF;
-			} else if (opcode == 124) {
-				if (def.unknownArray3 == null) {
-					def.unknownArray3 = new int[11][];
-				}
-				int slot = buffer.get();
-				def.unknownArray3[slot] = new int[6];
-				for (int i = 0; i < 6; i++) {
-					def.unknownArray3[slot][i] = buffer.getShort();
-				}
 			} else if (opcode == 125) {
 				buffer.get();
 				buffer.get();
@@ -475,18 +461,6 @@ public class ItemDefinition extends Definition<Item> {
 			} else if (opcode == 130) {
 				buffer.get();
 				buffer.getShort();
-			} else if (opcode == 132) {
-				int length = buffer.get() & 0xFF;
-				def.unknownArray2 = new int[length];
-				for (int index = 0; index < length; index++) {
-					def.unknownArray2[index] = buffer.getShort() & 0xFFFF;
-				}
-			} else if (opcode == 134) {
-				buffer.get();
-			} else if (opcode == 139) {
-				def.recolourId = buffer.getShort() & 0xFFFF;
-			} else if (opcode == 140) {
-				def.recolourTemplateId = buffer.getShort() & 0xFFFF;
 			} else if (opcode == 249) {
 				int length = buffer.get() & 0xFF;
 				if (def.clientScriptData == null) {
@@ -923,9 +897,6 @@ public class ItemDefinition extends Definition<Item> {
 	 * @return The value.
 	 */
 	public int getValue() {
-		if (value == 0) {
-			return 1;
-		}
 		return value;
 	}
 

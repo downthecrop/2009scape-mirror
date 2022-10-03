@@ -18,6 +18,8 @@ import rs09.game.system.config.ServerConfigParser
 import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
 import rs09.game.world.update.UpdateSequence
+import java.io.File
+import java.net.URI
 import java.nio.ByteBuffer
 
 object TestUtils {
@@ -58,6 +60,10 @@ object TestUtils {
             ConfigParser().prePlugin()
             ConfigParser().postPlugin()
         }
+    }
+
+    fun loadFile(path: String) : URI? {
+        return this::class.java.getResource(path)?.toURI()
     }
 
     fun advanceTicks(amount: Int, skipPulseUpdates: Boolean = true) {

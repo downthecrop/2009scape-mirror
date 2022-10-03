@@ -233,7 +233,6 @@ class ItemConfigParser {
                     when (it.key.toString()) {
                         //Special cases
                         "defence_anim" -> configs.put(it.key.toString(), Animation(it.value.toString().toInt(), Animator.Priority.HIGH))
-                        "shop_price" -> {def.value = (it.value.toString().toInt()); configs.put(it.key.toString(),it.value.toString().toInt())}
                         "requirements" -> { configs.put(it.key.toString(),requirements)
                             it.value.toString()
                                     .split("-")
