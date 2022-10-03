@@ -188,8 +188,8 @@ public class AIPlayer extends Player {
     public static void loadNames(String fileName){
         try {
             Scanner sc = new Scanner(new File(ServerConstants.BOT_DATA_PATH + fileName));
-            while(sc.hasNextLine()){
-                botNames.add(sc.next());
+            while (sc.hasNextLine()) {
+                botNames.add(sc.nextLine());
             }
         } catch (Exception e){
             e.printStackTrace();
