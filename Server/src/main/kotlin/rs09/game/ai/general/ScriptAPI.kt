@@ -354,11 +354,38 @@ class ScriptAPI(private val bot: Player) {
     }
 
     /**
+     * Function to iteratively walk an array of Locations to get over complex obstacles.
+     * @param steps the array of locations to walk to.
+     * @author dginovker
+     */
+    fun walkArray(steps: Array<Location>){
+        bot.pulseManager.run(object : Pulse(){
+            var stepIndex = 0
+            override fun pulse(): Boolean {
+                // If the stepIndex is out of bounds, we're done
+                if(stepIndex >= steps.size) return true
+                // If we're near the last step, we're done
+                if (bot.location.withinDistance(steps[steps.size - 1], 2)) {
+                    return true
+                }
+                // If we're not near the next step, walk to it
+                if (!bot.location.withinDistance(steps[stepIndex], 5)) {
+                    walkTo(steps[stepIndex])
+                    return false
+                }
+                // If we're near the next step, increment the step index
+                stepIndex++
+
+                return false
+            }
+        })
+    }
+
+    /**
      * @param loc the location to walk to.
      * @param radius tiles around the location the bot could walk to.
      * @author Kermit
      */
-
     fun randomWalkTo(loc: Location, radius: Int) {
         if(!bot.walkingQueue.isMoving) {
             GlobalScope.launch {
@@ -383,8 +410,6 @@ class ScriptAPI(private val bot: Player) {
             diffY /= 2
         }
         GameWorld.Pulser.submit(object : MovementPulse(bot, bot.location.transform(diffX, diffY, 0), Pathfinder.SMART) {
-
-
             override fun pulse(): Boolean {
                 return true
             }

@@ -39,6 +39,11 @@ public abstract class Script {
         }
     }
 
+    @Override
+    public String toString() {
+        return bot.getName() + " is a " + this.getClass().getSimpleName() + " at location " + bot.getLocation().toString() + " Current pulse: " + bot.getPulseManager().getCurrent();
+    }
+
     public abstract void tick();
 
     public void setLevel(int skill, int level) {

@@ -21,6 +21,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.rs09.consts.Components
 import rs09.ServerConstants
+import rs09.game.ai.AIPlayer
+import rs09.game.ai.AIRepository
 import rs09.game.camerautils.PlayerCamera
 import rs09.game.content.activity.fishingtrawler.TrawlerLoot
 import rs09.game.content.ame.RandomEventManager
@@ -191,10 +193,23 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
                     player.packetDispatch.sendString(red + "<img=" + (Rights.getChatIcon(p) - 1) + ">" + p.username + if(rights > 0) " [ip=" + p.details.ipAddress + ", name=" + p.details.compName + "]" else "",275,lineStart++)
             }
         }
-        /**
-         * ===================================================================================
-         */
 
+        /**
+         * Lists information about a bot
+         */
+        define("botinfo", Privilege.MODERATOR, "::botinfo <lt>botname<gt>", "Prints debug information about a bot"){ player, args ->
+            val scriptInstances = AIRepository.PulseRepository
+
+            // Find the bot with the given name (non-case sensitive)
+            val bot = scriptInstances.find { it.botScript.bot.username.equals(args[1], true) }
+            if (bot == null) {
+                reject(player, "No bot with that name found.")
+                return@define
+            }
+            val botInfo = bot.botScript.toString()
+            // Print the bot's information, max 80chars per line
+            botInfo.chunked(80).forEach { notify(player, it) }
+        }
 
         /**
          * Opens the credit/voting shop

@@ -4,7 +4,6 @@ import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
 import core.game.node.scenery.Scenery
 import core.game.node.entity.combat.CombatStyle
-import rs09.game.node.entity.combat.CombatSwingHandler
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
@@ -12,12 +11,7 @@ import rs09.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.zone.ZoneBorders
-import rs09.game.world.repository.Repository.sendNews
 import core.game.world.update.flag.*
-import core.game.world.update.flag.context.Animation
-import core.game.world.update.flag.context.ChatMessage
-import core.game.world.update.flag.context.Graphics
-import core.game.world.update.flag.player.ChatFlag
 import core.tools.RandomFunction
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
@@ -76,6 +70,10 @@ class Adventurer(val style: CombatStyle): Script() {
         inventory.add(Item(1271))//Addy Pickaxe
         skills[Skills.MINING] = 90
         skills[Skills.SLAYER] = 90
+    }
+
+    override fun toString(): String {
+        return "${bot.name} is an Adventurer bot at ${bot.location}! State: $state - City: $city"
     }
 
     private var state = State.START
@@ -156,10 +154,10 @@ class Adventurer(val style: CombatStyle): Script() {
 
         // zoneborder checker
         if(ticks % 30 == 0){
-            for(border in common_stuck_locations){
-                if(border.insideBorder(bot)){
-                    refresh()
-                    ticks = 0
+            for((zone, resolution) in common_stuck_locations){
+                if(zone.insideBorder(bot)){
+                    resolution(this)
+                    return
                 }
             }
         }
@@ -551,9 +549,50 @@ class Adventurer(val style: CombatStyle): Script() {
             magics,gemrocks,chaosnpc,chaosnpc,
             chaosnpc2,taverly)
 
-        val common_stuck_locations = arrayListOf(
-            ZoneBorders(2861,3425,2869,3440),
-            ZoneBorders(2937,3356,2936,3353)
+        private val whiteWolfMountainTop = Location(2850, 3496, 0)
+        private val catherbyToTopOfWhiteWolf = arrayOf(Location(2856, 3442, 0), Location(2848, 3455, 0), Location(2848, 3471, 0), Location(2848, 3487, 0))
+        private val tavleryToTopOfWhiteWolf = arrayOf(Location(2872, 3425, 0), Location(2863, 3440, 0), Location(2863, 3459, 0), Location(2854, 3475, 0), Location(2859, 3488, 0))
+        val common_stuck_locations = mapOf(
+            // South of Tavlery dungeon
+            ZoneBorders(2878, 3386, 2884, 3395) to { it: Adventurer ->
+                it.scriptAPI.walkArray(tavleryToTopOfWhiteWolf + whiteWolfMountainTop + catherbyToTopOfWhiteWolf.reversedArray())
+            },
+            // West of Tavlery dungeon
+            ZoneBorders(2874, 3390, 2880, 3401) to { it: Adventurer ->
+                it.scriptAPI.walkArray(tavleryToTopOfWhiteWolf + whiteWolfMountainTop + catherbyToTopOfWhiteWolf.reversedArray())
+            },
+            // South of White Wolf Mountain in Tavlery
+            ZoneBorders(2865,3408,2874,3423) to { it: Adventurer ->
+                it.scriptAPI.walkArray(tavleryToTopOfWhiteWolf + whiteWolfMountainTop + catherbyToTopOfWhiteWolf.reversedArray())
+            },
+            // On beginning of White Wolf Mountain in Tavlery
+            ZoneBorders(2855, 3454, 2852, 3450) to { it: Adventurer ->
+                it.scriptAPI.walkArray(tavleryToTopOfWhiteWolf + whiteWolfMountainTop + catherbyToTopOfWhiteWolf.reversedArray())
+            },
+            // South of White Wolf Mountain in Catherby
+            ZoneBorders(2861,3425,2867, 3432) to { it: Adventurer ->
+                it.scriptAPI.walkArray(catherbyToTopOfWhiteWolf + whiteWolfMountainTop + tavleryToTopOfWhiteWolf.reversedArray())
+            },
+            // On beginning of White Wolf Mountain in Catherby
+            ZoneBorders(2863, 3441, 2859, 3438) to { it: Adventurer ->
+                it.scriptAPI.walkArray(catherbyToTopOfWhiteWolf + whiteWolfMountainTop + tavleryToTopOfWhiteWolf.reversedArray())
+            },
+            // At the Crumbling Wall in Falador
+            ZoneBorders(2937,3356,2936,3353) to { it: Adventurer ->
+                // Interact with the Crumbling Wall
+                val wall = it.scriptAPI.getNearestNode("Crumbling wall", true);
+                if (wall == null) {
+                    it.refresh()
+                    it.ticks = 0
+                    return@to
+                }
+                it.scriptAPI.interact(it.bot, wall, "Climb-over")
+            },
+            // Northwest corner of Draynor Bank
+            ZoneBorders(3092, 3246, 3091, 3247) to { it: Adventurer ->
+                // Walk into Draynor Bank
+                it.scriptAPI.walkTo(Location(3093, 3243, 0))
+            },
         )
 
         val dialogue: JSONObject
