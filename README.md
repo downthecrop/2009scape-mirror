@@ -86,7 +86,7 @@ There are many ways everyone can contribute! From the most seasoned programmers 
 
 1. Create a GitLab account if you haven't done so already.
 
-2. Click "Fork" in the top right-hand side of our GitLab page.
+2. Follow our Git Basics guide [over on the wiki.](https://gitlab.com/2009scape/2009scape/-/wikis/git-basics)
 
 **If at anytime you have an issue with GitLab please refer to the [GitLab help center](https://gitlab.com/help).**
 
@@ -97,9 +97,7 @@ the project's setup, things won't work. At all.
 
 *For Windows users* - Turn developer mode on first in Windows developer settings.
 
-* [Git](https://git-scm.com/) *Make sure to enable symbolic links during install*
 * [JDK 11](https://adoptium.net) or the Java SE Development Kit Version 11
-* [Git LFS](https://git-lfs.github.com/)
 * [IntelliJ IDEA Community](https://www.jetbrains.com/idea/download/)
 
 ### SSH setup
@@ -110,31 +108,14 @@ the project's setup, things won't work. At all.
 
 ### Project Setup
 
-1. Open IntelliJ IDEA
-2. Clone the project using the `Get from VCS` button, make sure you use the SSH URL from the blue clone button on the fork you created during the GitLab setup step.
-3. Click the "Project" tab on the left-hand side.
-4. In the top left where the "Project" drop down is, click Project Files
-5. Expand the Server folder
-6. Right click `pom.xml` and click "Add as Maven Project"
-7. In IntelliJ, File -> Invalidate Caches -> Invalidate Caches and Restart
-
-*Skip step 8 if you've installed Git LFS before cloning.*
-
-8. After setting up Git LFS, you may need to run `git lfs pull` in the root of the cloned repo to download essential binaries
-
-9. You should now have ready-made run configurations in the top right (you can ignore MS, it's obsolete):
-
-    * [Windows] follow step 11.
-    * [Linux] Run Server
-10. Ensure your working directory (the root of the project) is set in the run configuration editor.
-
-11. Configure IntelliJ to compile and run the server from [here](https://forum.2009scape.org/viewtopic.php?t=64-unknown-run-configuration-type-batchconfigurationtype-when-setting-up-server)
-
-12. Go ahead and use the `Run Server` configuration (if available for your OS) to make sure it's working, or the maven `server [exec:java]` added with step 11
+1. If you haven't already, make sure to follow our [Git Basics](https://gitlab.com/2009scape/2009scape/-/wikis/git-basics) guide.
+2. Run `git lfs pull` in the 2009scape folder you cloned as part of that guide. This only has to be done once, ever.
+3. Follow our [IntelliJ IDEA Setup Guide](https://gitlab.com/2009scape/2009scape/-/wikis/Setup-for-IntelliJ-IDEA-IDE)
 
 ### Running the project
 
-***Note: If you choose not to use the provided run scripts, you *must* run `mvn clean` before it will build correctly.***
+1. If you followed the IntelliJ setup guide, which you probably should have, just use the provided run configuration.
+***Note: If you choose not to use the provided run scripts or IntelliJ, you *must* run `mvn clean` before it will build correctly.***
 
 #### Linux / OSX
 
