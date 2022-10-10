@@ -1,8 +1,13 @@
 package core.game.node.entity.skill.hunter;
 
+import api.ContentAPIKt;
 import core.game.node.entity.Entity;
+import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.TeleportManager;
+import core.game.world.map.RegionManager;
+import org.rs09.consts.NPCs;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.tools.RandomFunction;
@@ -10,11 +15,17 @@ import core.tools.RandomFunction;
 import java.util.ArrayList;
 import java.util.List;
 
+import static api.ContentAPIKt.getPathableRandomLocalCoordinate;
+import static api.ContentAPIKt.sendGraphics;
+
 /**
  * Handles a hunter npc.
  * @author Vexia
  */
 public final class HunterNPC extends AbstractNPC {
+
+	private static final int IMP_TELEPORT_CHANCE_ON_HIT = 10; // 1/10
+	private static final int IMP_TELEPORT_CHANCE_ON_TICK = 1000; // 1/75
 
 	/**
 	 * The trap type.
@@ -99,6 +110,28 @@ public final class HunterNPC extends AbstractNPC {
 		return array;
 	}
 
+	@Override
+	public void checkImpact(BattleState state) {
+		super.checkImpact(state);
+
+		if (this.getId() == NPCs.IMP_708 || this.getId() == NPCs.IMP_709 || this.getId() == NPCs.IMP_1531) {
+			if (RandomFunction.roll(IMP_TELEPORT_CHANCE_ON_HIT)) {
+				getRandomLocAndTeleport();
+			}
+		}
+	}
+
+	@Override
+	public void tick() {
+		super.tick();
+
+		if (this.getId() == NPCs.IMP_708 || this.getId() == NPCs.IMP_709 || this.getId() == NPCs.IMP_1531) {
+			if (RandomFunction.roll(IMP_TELEPORT_CHANCE_ON_TICK)) {
+				getRandomLocAndTeleport();
+			}
+		}
+	}
+
 	/**
 	 * Gets the type.
 	 * @return The type.
@@ -115,4 +148,15 @@ public final class HunterNPC extends AbstractNPC {
 		return trap;
 	}
 
+	/**
+	 * Used to teleport imps
+	 */
+	private void getRandomLocAndTeleport() {
+		Location teleportLocation = getPathableRandomLocalCoordinate(this, walkRadius, getProperties().getSpawnLocation(), 3);
+
+		if (getLocation() != teleportLocation) {
+			sendGraphics(1119, getLocation());
+			ContentAPIKt.teleport(this, teleportLocation, TeleportManager.TeleportType.INSTANT);
+		}
+	}
 }

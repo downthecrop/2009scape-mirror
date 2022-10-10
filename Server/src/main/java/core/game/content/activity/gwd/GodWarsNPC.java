@@ -3,7 +3,9 @@ package core.game.content.activity.gwd;
 import java.util.ArrayList;
 import java.util.List;
 
+import api.ContentAPIKt;
 import core.game.node.entity.Entity;
+import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.combat.DeathTask;
 import core.game.node.entity.npc.AbstractNPC;
@@ -11,9 +13,15 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.npc.agg.AggressiveBehavior;
 import core.game.node.entity.npc.agg.AggressiveHandler;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.TeleportManager;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.game.world.map.RegionManager;
+import core.tools.RandomFunction;
+import org.rs09.consts.NPCs;
+
+import static api.ContentAPIKt.getPathableRandomLocalCoordinate;
+import static api.ContentAPIKt.sendGraphics;
 
 /**
  * Handles a god wars NPC.
@@ -21,6 +29,9 @@ import core.game.world.map.RegionManager;
  */
 @Initializable
 public final class GodWarsNPC extends AbstractNPC {
+
+	private static final int IMP_TELEPORT_CHANCE_ON_HIT = 10; // 1/10
+	private static final int IMP_TELEPORT_CHANCE_ON_TICK = 75; // 1/75
 
 	/**
 	 * The aggressive behavior.
@@ -122,4 +133,37 @@ public final class GodWarsNPC extends AbstractNPC {
 		return new int[] { 6210, 6211, 6212, 6213, 6214, 6215, 6216, 6217, 6218, 6219, 6220, 6221, 6229, 6230, 6231, 6232, 6233, 6234, 6235, 6236, 6237, 6238, 6239, 6240, 6241, 6242, 6243, 6244, 6245, 6246, 6254, 6255, 6256, 6257, 6258, 6259, 6267, 6268, 6269, 6270, 6271, 6272, 6273, 6274, 6275, 6276, 6277, 6278, 6279, 6280, 6281, 6282, 6283 };
 	}
 
+	@Override
+	public void checkImpact(BattleState state) {
+		super.checkImpact(state);
+
+		if (getId() == NPCs.IMP_6211) {
+			if (RandomFunction.roll(IMP_TELEPORT_CHANCE_ON_HIT)) {
+				getRandomLocAndTeleport();
+			}
+		}
+	}
+
+	@Override
+	public void tick() {
+		super.tick();
+
+		if (getId() == NPCs.IMP_6211) {
+			if (RandomFunction.roll(IMP_TELEPORT_CHANCE_ON_TICK)) {
+				getRandomLocAndTeleport();
+			}
+		}
+	}
+
+	/**
+	 * Used to teleport imps
+	 */
+	private void getRandomLocAndTeleport() {
+		Location teleportLocation = getPathableRandomLocalCoordinate(this, walkRadius, getProperties().getSpawnLocation(), 3);
+
+		if (getLocation() != teleportLocation) {
+			sendGraphics(1119, getLocation());
+			ContentAPIKt.teleport(this, teleportLocation, TeleportManager.TeleportType.INSTANT);
+		}
+	}
 }
