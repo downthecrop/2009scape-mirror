@@ -150,6 +150,18 @@ fun areEquipped(player: Player, vararg ids: Int): Boolean {
     }
 }
 
+/**
+ * Check that at least one item from a set of items is equipped by the given player
+ * @param player the player
+ * @param ids the set of item ids to check
+ * @return true if the player has at least one of the items equipped, false if none are equipped
+ */
+fun areAnyEquipped(player: Player, vararg ids: Int): Boolean {
+    return ids.any { id ->
+        amountInEquipment(player, id) > 0
+    }
+}
+
 data class ContainerisedItem(val container: core.game.container.Container?, val itemId: Int)
 
 /**
