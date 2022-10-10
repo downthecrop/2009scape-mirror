@@ -197,7 +197,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Lists information about a bot
          */
-        define("botinfo", Privilege.MODERATOR, "::botinfo <lt>botname<gt>", "Prints debug information about a bot"){ player, args ->
+        define("botinfo", Privilege.STANDARD, "::botinfo <lt>botname<gt>", "Prints debug information about a bot"){ player, args ->
             val scriptInstances = AIRepository.PulseRepository
 
             // Find the bot with the given name (non-case sensitive)

@@ -20,6 +20,8 @@ import core.tools.RandomFunction
 import org.rs09.consts.Items
 import rs09.game.ai.AIRepository
 import rs09.game.ai.pvmbots.CombatBotAssembler
+import rs09.game.interaction.IntType
+import rs09.game.interaction.InteractionListeners
 import rs09.game.node.entity.combat.CombatSwingHandler
 import rs09.game.node.entity.combat.handlers.MagicSwingHandler
 import rs09.game.node.entity.combat.handlers.MeleeSwingHandler
@@ -173,7 +175,7 @@ class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Scr
                     else {
                         val shortcut = scriptAPI.getNearestNode("Underwall Tunnel",true)
                         shortcut ?: return
-                        shortcut.interaction.handle(bot,shortcut.interaction[0])
+                        InteractionListeners.run(shortcut.id, IntType.SCENERY, "climb-into", bot, shortcut)
                     }
                 } else {
                     if (!edgevilleLine.insideBorder(bot) && bot.location.y < 3520) {
@@ -197,7 +199,7 @@ class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Scr
                     if(bot.location == Location.create(3136, 3517, 0)){
                         val shortcut = scriptAPI.getNearestNode("Underwall Tunnel",true)
                         shortcut ?: return
-                        shortcut.interaction.handle(bot,shortcut.interaction[0])
+                        InteractionListeners.run(shortcut.id, IntType.SCENERY, "climb-into", bot, shortcut)
                     } else {
                         scriptAPI.walkTo(Location.create(3136, 3517, 0))
                     }

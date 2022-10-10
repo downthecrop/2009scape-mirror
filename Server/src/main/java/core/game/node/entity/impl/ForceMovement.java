@@ -76,6 +76,11 @@ public class ForceMovement extends Pulse {
 	private int pathSpeed;
 
 	/**
+	 * Whether to unlock the entity after the ForceMovement completes
+	 */
+	private boolean unlockAfter;
+
+	/**
 	 * Constructs a new {@code ForceMovement} {@code Object}.
 	 * @param e The entity.
 	 * @param start The start location.
@@ -83,8 +88,12 @@ public class ForceMovement extends Pulse {
 	 * @param startAnim The start animation.
 	 * @param animation The animation
 	 * @param direction The direction.
+	 * @param commenceSpeed The commencing speed.
+	 * @param pathSpeed The path speed.
+	 * @param unlockAfter Whether to unlock the entity after the ForceMovement completes
+	 *
 	 */
-	public ForceMovement(Entity e, Location start, Location destination, Animation startAnim, Animation animation, Direction direction, int commenceSpeed, int pathSpeed) {
+	public ForceMovement(Entity e, Location start, Location destination, Animation startAnim, Animation animation, Direction direction, int commenceSpeed, int pathSpeed, boolean unlockAfter) {
 		super(1, e);
 		this.entity = e;
 		this.start = start;
@@ -94,6 +103,7 @@ public class ForceMovement extends Pulse {
 		this.direction = direction;
 		this.commenceSpeed = commenceSpeed;
 		this.pathSpeed = pathSpeed;
+		this.unlockAfter = unlockAfter;
 	}
 
 	/**
@@ -105,11 +115,11 @@ public class ForceMovement extends Pulse {
 	 * @param speed The path speed.
 	 */
 	public ForceMovement(Entity e, Location start, Location end, Animation animation, int speed) {
-		this(e, start, end, WALK_ANIMATION, animation, direction(start, end), WALKING_SPEED, speed);
+		this(e, start, end, WALK_ANIMATION, animation, direction(start, end), WALKING_SPEED, speed, false);
 	}
 
 	public ForceMovement(Entity e, Location destination, int startSpeed, int animSpeed){
-		this(e,e.getLocation(),destination,WALK_ANIMATION,WALK_ANIMATION,direction(e.getLocation(),destination),startSpeed,animSpeed);
+		this(e,e.getLocation(),destination,WALK_ANIMATION,WALK_ANIMATION,direction(e.getLocation(),destination),startSpeed,animSpeed, false);
 	}
 
 	/**
@@ -120,7 +130,7 @@ public class ForceMovement extends Pulse {
 	 * @param animation the animation.
 	 */
 	public ForceMovement(Entity e, Location start, Location destination, Animation animation) {
-		this(e, start, destination, WALK_ANIMATION, animation, direction(start, destination), WALKING_SPEED, WALKING_SPEED);
+		this(e, start, destination, WALK_ANIMATION, animation, direction(start, destination), WALKING_SPEED, WALKING_SPEED, false);
 	}
 
 	/**
@@ -130,7 +140,7 @@ public class ForceMovement extends Pulse {
 	 * @param animation the animation.
 	 */
 	public ForceMovement(Location start, Location destination, Animation animation) {
-		this(null, start, destination, WALK_ANIMATION, animation, direction(start, destination), WALKING_SPEED, WALKING_SPEED);
+		this(null, start, destination, WALK_ANIMATION, animation, direction(start, destination), WALKING_SPEED, WALKING_SPEED, false);
 	}
 
 	/**
@@ -140,7 +150,7 @@ public class ForceMovement extends Pulse {
 	 * @return The created ForceMovement object.
 	 */
 	public static ForceMovement run(Entity e, Location destination) {
-		return run(e, e.getLocation(), destination, WALK_ANIMATION, WALK_ANIMATION, direction(e.getLocation(), destination), WALKING_SPEED, WALKING_SPEED);
+		return run(e, e.getLocation(), destination, WALK_ANIMATION, WALK_ANIMATION, direction(e.getLocation(), destination), WALKING_SPEED, WALKING_SPEED, false);
 	}
 
 	/**
@@ -151,7 +161,7 @@ public class ForceMovement extends Pulse {
 	 * @return The created ForceMovement object.
 	 */
 	public static ForceMovement run(Entity e, Location start, Location destination) {
-		return run(e, start, destination, WALK_ANIMATION, WALK_ANIMATION, direction(e.getLocation(), destination), WALKING_SPEED, WALKING_SPEED);
+		return run(e, start, destination, WALK_ANIMATION, WALK_ANIMATION, direction(e.getLocation(), destination), WALKING_SPEED, WALKING_SPEED, false);
 	}
 
 	/**
@@ -163,7 +173,7 @@ public class ForceMovement extends Pulse {
 	 * @return The created ForceMovement object.
 	 */
 	public static ForceMovement run(Entity e, Location start, Location destination, Animation animation) {
-		return run(e, start, destination, WALK_ANIMATION, animation, direction(start, destination), WALKING_SPEED, WALKING_SPEED);
+		return run(e, start, destination, WALK_ANIMATION, animation, direction(start, destination), WALKING_SPEED, WALKING_SPEED, false);
 	}
 
 	/**
@@ -176,7 +186,7 @@ public class ForceMovement extends Pulse {
 	 * @return The created ForceMovement object.
 	 */
 	public static ForceMovement run(Entity e, Location start, Location destination, Animation animation, int speed) {
-		return run(e, start, destination, WALK_ANIMATION, animation, direction(start, destination), WALKING_SPEED, speed);
+		return run(e, start, destination, WALK_ANIMATION, animation, direction(start, destination), WALKING_SPEED, speed, false);
 	}
 
 	/**
@@ -188,7 +198,7 @@ public class ForceMovement extends Pulse {
 	 * @return The created ForceMovement object.
 	 */
 	public static ForceMovement run(Entity e, Location start, Location destination, Animation startAnim, Animation animation) {
-		return run(e, start, destination, startAnim, animation, direction(start, destination), WALKING_SPEED, WALKING_SPEED);
+		return run(e, start, destination, startAnim, animation, direction(start, destination), WALKING_SPEED, WALKING_SPEED, false);
 	}
 
 	/**
@@ -201,7 +211,7 @@ public class ForceMovement extends Pulse {
 	 * @return The created ForceMovement object.
 	 */
 	public static ForceMovement run(Entity e, Location start, Location destination, Animation startAnim, Animation animation, Direction direction) {
-		return run(e, start, destination, startAnim, animation, direction, WALKING_SPEED, WALKING_SPEED);
+		return run(e, start, destination, startAnim, animation, direction, WALKING_SPEED, WALKING_SPEED, false);
 	}
 
 	/**
@@ -215,7 +225,11 @@ public class ForceMovement extends Pulse {
 	 * @return The created ForceMovement object.
 	 */
 	public static ForceMovement run(Entity e, Location start, Location destination, Animation startAnim, Animation animation, Direction direction, int pathSpeed) {
-		return run(e, start, destination, startAnim, animation, direction, WALKING_SPEED, pathSpeed);
+		return run(e, start, destination, startAnim, animation, direction, WALKING_SPEED, pathSpeed, false);
+	}
+
+	public static ForceMovement run(Entity e, Location start, Location destination, Animation startAnim, Animation animation, Direction direction, int commenceSpeed, int pathSpeed) {
+		return run(e, start, destination, startAnim, animation, direction, commenceSpeed, pathSpeed, false);
 	}
 
 	/**
@@ -227,14 +241,14 @@ public class ForceMovement extends Pulse {
 	 * @param direction The direction.
 	 * @return The created ForceMovement object.
 	 */
-	public static ForceMovement run(Entity e, Location start, Location destination, Animation startAnim, Animation animation, Direction direction, int commenceSpeed, int pathSpeed) {
+	public static ForceMovement run(Entity e, Location start, Location destination, Animation startAnim, Animation animation, Direction direction, int commenceSpeed, int pathSpeed, boolean unlockAfter) {
 		if (startAnim != null) {
 			startAnim.setPriority(Animator.Priority.VERY_HIGH);
 		}
 		if (animation != null) {
 			animation.setPriority(Animator.Priority.VERY_HIGH);
 		}
-		ForceMovement fm = new ForceMovement(e, start, destination, startAnim, animation, direction, commenceSpeed, pathSpeed);
+		ForceMovement fm = new ForceMovement(e, start, destination, startAnim, animation, direction, commenceSpeed, pathSpeed, unlockAfter);
 		fm.start();
 		e.lock();
 		GameWorld.getPulser().submit(fm);
@@ -242,7 +256,7 @@ public class ForceMovement extends Pulse {
 	}
 
 	public static ForceMovement run(Entity e, Location destination, int commenceSpeed, int pathSpeed){
-		return run(e,e.getLocation(),destination,WALK_ANIMATION,WALK_ANIMATION,direction(e.getLocation(),destination),commenceSpeed,pathSpeed);
+		return run(e,e.getLocation(),destination,WALK_ANIMATION,WALK_ANIMATION,direction(e.getLocation(),destination),commenceSpeed,pathSpeed, false);
 	}
 
 	/**
@@ -333,7 +347,7 @@ public class ForceMovement extends Pulse {
 		if (endAnimation != null) {
 			entity.animate(endAnimation);
 		}
-		entity.unlock();
+		if (unlockAfter) entity.unlock();
 	}
 
 	/**
