@@ -13,6 +13,9 @@ val PLANK_MAKE_ANIM = Animation(6298)
 val STRING_JEWELLERY_ANIM = Animation(4412)
 val SUPERGLASS_MAKE_ANIM = Animation(4413)
 val FERTILE_SOIL_ANIM = Animation(724)
+val CURE_ME_ANIM = Animation(4411)
+val CURE_GROUP_ANIM = Animation(4409)
+val CURE_OTHER_ANIM = Animation(4411)
 
 
 // Graphics
@@ -24,6 +27,9 @@ val PLANK_MAKE_GFX = Graphics(1063, 120)
 val STRING_JEWELLERY_GFX = Graphics(728, 100)
 val SUPERGLASS_MAKE_GFX = Graphics(729, 120)
 val FERTILE_SOIL_GFX = Graphics(141, 96)
+val CURE_ME_GFX = Graphics(731, 90)
+val CURE_GROUP_GFX = Graphics(751, 130)
+val CURE_OTHER_GFX = Graphics(738, 130)
 
 enum class JewelleryString(val unstrung: Int, val strung: Int) {
     GOLD(Items.GOLD_AMULET_1673, Items.GOLD_AMULET_1692),

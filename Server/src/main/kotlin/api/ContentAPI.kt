@@ -27,6 +27,7 @@ import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.gather.SkillingTool
 import core.game.node.entity.skill.slayer.Tasks
 import core.game.node.entity.skill.summoning.familiar.BurdenBeast
+import core.game.node.entity.state.EntityState
 import core.game.node.item.GroundItem
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
@@ -1029,6 +1030,7 @@ fun getUsedOption(player: Player): String {
 
 /**
  * Used to play both an Animation and Graphics object simultaneously.
+ * Use -1 in place of anim or graphics if not needed.
  * @param entity the entity to perform this on
  * @param anim the Animation object to use, can also be an ID.
  * @param gfx the Graphics object to use, can also be an ID.
@@ -2155,6 +2157,47 @@ fun requireQuest(player: Player, questName: String, message: String) : Boolean {
         return false
     }
     return true
+}
+
+
+/**
+ * Determines whether or not a specified entity has a state
+ * @param entity the entity whose state we are checking
+ * @param state the state to check for
+ * @return whether or not the entity has the provided state
+ */
+fun hasState(entity: Entity, state: EntityState) : Boolean {
+    return entity.stateManager.hasState(state)
+}
+
+/**
+ * Adds a state to the entity
+ * @param entity the entity whose state we are adding
+ * @param state the state to add
+ * @param override whether or not it's to override another state
+ */
+fun addState(entity: Entity, state: EntityState, override: Boolean, vararg args: Any?) {
+    if(!entity.stateManager.hasState(state)) {
+        entity.stateManager.register(state, override, *args)
+    }
+}
+
+/**
+ * Removes a state from the entity
+ * @param entity the entity whose state we are removing
+ * @param state the state to remove
+ */
+fun removeState(entity: Entity, state: EntityState) {
+    entity.stateManager.remove(state)
+}
+
+/**
+ * Determines whether or not specified node is a player
+ * @param entity the node whom we are checking
+ * @return whether or not the entity is a player
+ */
+fun isPlayer(node: Node) : Boolean {
+    return (node is Player)
 }
 
 private class ContentAPI

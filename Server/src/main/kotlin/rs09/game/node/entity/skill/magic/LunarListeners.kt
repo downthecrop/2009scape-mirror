@@ -2,6 +2,8 @@ package rs09.game.node.entity.skill.magic
 
 import api.*
 import core.game.component.Component
+import core.game.node.Node
+import core.game.node.entity.Entity
 import core.game.node.scenery.Scenery
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -9,6 +11,7 @@ import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.cooking.CookableItems
+import core.game.node.entity.state.EntityState
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.map.Location
@@ -16,13 +19,16 @@ import core.game.world.map.RegionManager
 import core.tools.RandomFunction
 import org.rs09.consts.Components
 import org.rs09.consts.Items
+import rs09.game.interaction.item.withnpc.graphics
 import rs09.game.node.entity.skill.farming.CompostBins
 import rs09.game.node.entity.skill.farming.CompostType
 import rs09.game.node.entity.skill.farming.FarmingPatch
 import rs09.game.node.entity.skill.magic.spellconsts.Lunar
+import rs09.game.system.command.Privilege
 import rs09.game.system.config.NPCConfigParser
+import rs09.game.world.repository.Repository
 
-class LunarListeners : SpellListener("lunar") {
+class LunarListeners : SpellListener("lunar"), Commands {
 
     override fun defineListeners() {
 
@@ -163,10 +169,44 @@ class LunarListeners : SpellListener("lunar") {
         }
 
         onCast(Lunar.FERTILE_SOIL, OBJECT) { player, node ->
-            fertileSoil(player, node!!.asScenery())
+            node?.let { fertileSoil(player, node.asScenery()) }
+        }
+
+        onCast(Lunar.CURE_ME, NONE) { player, _ ->
+            cureMe(player)
+        }
+
+        onCast(Lunar.CURE_GROUP, NONE) { player, _ ->
+            cureGroup(player)
+        }
+
+        onCast(Lunar.CURE_OTHER, PLAYER) { player, node ->
+            node?.let { cureOther(player, node) }
         }
     }
 
+    // Lunar spellbook-related debug commands
+    override fun defineCommands() {
+        define("poison", privilege = Privilege.ADMIN) { player, strings ->
+            if(strings.size == 3) {
+                var dmg = strings[2].toIntOrNull()
+                val p = Repository.getPlayerByName(strings[1])
+                if(p == null) {
+                    sendMessage(player, "Player ${strings[1]} does not exist.")
+                    return@define
+                }
+                if(dmg != null) {
+                    p?.let { addState(it, EntityState.POISONED, false, (dmg * 10 + 8), player) }
+                } else {
+                    sendMessage(player, "Damage must be an integer. Format:")
+                    sendMessage(player, "::poison username damage")
+                }
+            } else {
+                sendMessage(player, "Invalid arguments provided. Format:")
+                sendMessage(player, "::poison username damage")
+            }
+        }
+    }
     private fun plankMake(player: Player, item: Item) {
 
         val plankType = PlankType.getForLog(item)
@@ -426,7 +466,71 @@ class LunarListeners : SpellListener("lunar") {
         sendMessage(player, "You fertilize the soil.")
         addXP(player, 87.0)
     }
+
+    private fun cureMe(player: Player) {
+        if(!hasState(player, EntityState.POISONED)) {
+            sendMessage(player, "You are not poisoned.")
+            return
+        }
+        requires(player, 71, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.LAW_RUNE_563, 1), Item(Items.COSMIC_RUNE_564, 2)))
+        removeRunes(player, true)
+        visualizeSpell(player, CURE_ME_ANIM, CURE_ME_GFX, 2880)
+        removeState(player, EntityState.POISONED)
+        addXP(player, 69.0)
+        playAudio(player, Audio(2900))
+        sendMessage(player, "You have been cured of poison.")
+    }
+
+    private fun cureGroup(player: Player) {
+        requires(player, 74, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.LAW_RUNE_563, 2), Item(Items.COSMIC_RUNE_564, 2)))
+        removeRunes(player, true)
+        visualizeSpell(player, CURE_GROUP_ANIM, CURE_GROUP_GFX, 2882)
+        removeState(player, EntityState.POISONED)
+        for(acct in RegionManager.getLocalPlayers(player, 1)) {
+            if(!acct.isActive || acct.locks.isInteractionLocked) {
+                continue
+            }
+            if(!acct.settings.isAcceptAid) {
+                continue
+            }
+            removeState(acct, EntityState.POISONED)
+            sendMessage(acct, "You have been cured of poison.")
+            playAudio(acct, Audio(2889), true)
+            visualize(acct, -1, CURE_GROUP_GFX)
+        }
+        addXP(player, 74.0)
+    }
+
+    private fun cureOther(player: Player, target: Node) {
+        if(!isPlayer(target)) {
+            sendMessage(player, "You can only cast this spell on other players.")
+            return
+        }
+        val p = target.asPlayer()
+        if(!p.isActive || p.locks.isInteractionLocked) {
+            sendMessage(player, "This player is busy.")
+            return
+        }
+        if(!p.settings.isAcceptAid) {
+            sendMessage(player, "This player is not accepting any aid.")
+            return
+        }
+        if(!hasState(p, EntityState.POISONED)) {
+            sendMessage(player, "This player is not poisoned.")
+            return
+        }
+        requires(player, 68, arrayOf(Item(Items.ASTRAL_RUNE_9075, 1), Item(Items.LAW_RUNE_563), Item(Items.EARTH_RUNE_557, 10)))
+        player.face(p)
+        visualizeSpell(player, CURE_OTHER_ANIM, CURE_OTHER_GFX, 2886)
+        visualize(p, -1, CURE_OTHER_GFX)
+        playAudio(p, Audio(2889), true)
+        removeRunes(player, true)
+        removeState(p, EntityState.POISONED)
+        sendMessage(p, "You have been cured of poison.")
+        addXP(player, 65.0)
+    }
 }
+
 
 
 
