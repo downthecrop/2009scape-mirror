@@ -99,7 +99,7 @@ class FletchingListeners : InteractionListener {
                 player.sendMessage("You need a fletching level of 59 to make this.")
                 return@onUseWith true
             }
-            if(player.inventory.remove(bolt.asItem(),tip.asItem())){
+            if(player.inventory.remove(Item(MITHRIL_BOLT,1),tip.asItem())){
                 player.inventory.add(Item(MITH_GRAPPLE))
             }
             return@onUseWith true
