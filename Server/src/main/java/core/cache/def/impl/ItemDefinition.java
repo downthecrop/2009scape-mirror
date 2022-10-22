@@ -611,13 +611,6 @@ public class ItemDefinition extends Definition<Item> {
 			return true;
 		}
 		for (int skill : requirements.keySet()) {
-			if (wield) {
-				if (skill > Skills.MAGIC && skill != Skills.SLAYER && skill != Skills.HUNTER) {
-					continue;
-				}
-			} else if (skill <= Skills.MAGIC && skill != Skills.SLAYER && skill != Skills.HUNTER) {
-				continue;
-			}
 			if (skill < 0 || skill >= Skills.SKILL_NAME.length) {
 				continue;
 			}
