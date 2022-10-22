@@ -593,6 +593,11 @@ class Adventurer(val style: CombatStyle): Script() {
                 // Walk into Draynor Bank
                 it.scriptAPI.walkTo(Location(3093, 3243, 0))
             },
+            // West of GE, stuck in the corner south of the outlaw place
+            ZoneBorders(3140, 3468, 3140, 3468) to { it: Adventurer ->
+                // Walk to Barbarian village
+                it.scriptAPI.walkArray(arrayOf(Location.create(3135, 3516, 0), Location.create(3103, 3489, 0), Location.create(3082, 3423, 0)))
+            },
         )
 
         val dialogue: JSONObject
