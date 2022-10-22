@@ -210,11 +210,26 @@ public final class BankContainer extends Container {
 		if (item == null) {
 			return;
 		}
+
+		if (!item.getDefinition().getConfiguration(ItemConfigParser.BANKABLE, true)) {
+			player.sendMessage("A magical force prevents you from banking this item");
+			return;
+		}
+
 		int maximum = player.getInventory().getAmount(item);
 		if (amount > maximum) {
 			amount = maximum;
 		}
-		int maxCount = super.getMaximumAdd(item);
+
+		item = new Item(item.getId(), amount, item.getCharge());
+		boolean unnote = !item.getDefinition().isUnnoted();
+
+		Item add = unnote ? new Item(item.getDefinition().getNoteId(), amount, item.getCharge()) : item;
+		if (unnote && !add.getDefinition().isUnnoted()) {
+			add = item;
+		}
+
+		int maxCount = super.getMaximumAdd(add);
 		if (amount > maxCount) {
 			amount = maxCount;
 			if (amount < 1) {
@@ -222,17 +237,8 @@ public final class BankContainer extends Container {
 				return;
 			}
 		}
-		if (!item.getDefinition().getConfiguration(ItemConfigParser.BANKABLE, true)) {
-			player.sendMessage("A magical force prevents you from banking this item");
-			return;
-		}
-		item = new Item(item.getId(), amount, item.getCharge());
-		boolean unnote = !item.getDefinition().isUnnoted();
+
 		if (player.getInventory().remove(item, slot, true)) {
-			Item add = unnote ? new Item(item.getDefinition().getNoteId(), amount, item.getCharge()) : item;
-			if (unnote && !add.getDefinition().isUnnoted()) {
-				add = item;
-			}
 			int preferredSlot = -1;
 			if (tabIndex != 0 && tabIndex != 10 && !super.contains(add.getId(), 1)) {
 				preferredSlot = tabStartSlot[tabIndex] + getItemsInTab(tabIndex);
