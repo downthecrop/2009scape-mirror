@@ -32,11 +32,6 @@ import core.plugin.Plugin;
 public final class KaramajaOptionPlugin extends OptionHandler {
 
     /**
-     * Represents the banana item.
-     */
-    private static final Item BANANA = new Item(1963);
-
-    /**
      * Represents the pineapple item.
      */
     private static final Item PINEAPPLE = new Item(2114);
@@ -73,8 +68,6 @@ public final class KaramajaOptionPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        SceneryDefinition.forId(2072).getHandlers().put("option:search", this);// banana crate.
-        SceneryDefinition.forId(2072).getHandlers().put("option:fill", this);// banana crate.
         SceneryDefinition.forId(2078).getHandlers().put("option:search", this);// random crate.
         SceneryDefinition.forId(492).getHandlers().put("option:climb-down", this);// musa point rock
         SceneryDefinition.forId(1764).getHandlers().put("option:climb", this);// musa dungeon rope
@@ -215,31 +208,6 @@ public final class KaramajaOptionPlugin extends OptionHandler {
                     case 2078:
                         player.getPacketDispatch().sendMessage("There are no bananas left on the tree.");
                         break;
-                    case 2072:
-                        int amt = player.getSavedData().getGlobalData().getKaramjaBananas();
-                        if (amt >= 10) {
-                            player.getPacketDispatch().sendMessage("The crate is full of bananas.");
-                            return true;
-                        }
-                        if (amt == 0) {
-                            player.getPacketDispatch().sendMessage("The crate is completely empty.");
-                        } else {
-                            player.getPacketDispatch().sendMessage("The crate has " + amt + " banana " + (amt > 1 ? "s" : "") + "inside.");
-                        }
-                        break;
-                }
-                break;
-            case "fill":
-                if (player.getSavedData().getGlobalData().isLuthasTask()) {
-                    int bananas = player.getInventory().getAmount(BANANA);
-                    if (bananas > 0) {
-                        player.getDialogueInterpreter().sendDialogue("You pack all your bananas into the crate.");
-                        if (player.getInventory().remove(new Item(BANANA.getId(), bananas))) {
-                            player.getSavedData().getGlobalData().setKaramjaBannanas(bananas + player.getSavedData().getGlobalData().getKaramjaBananas());
-                        }
-                    }
-                } else {
-                    player.getPacketDispatch().sendMessage("I don't know what goes in there.");
                 }
                 break;
             case "shake":
