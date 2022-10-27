@@ -13,7 +13,7 @@ private val DYES = Dyes.values().map { it -> it.item.id }.toIntArray()
 
 @Initializable
 //For the super constructor we have to use all but the very last cape because its ID is higher than the ID of all dyes
-class CapeDyer : UseWithHandler(*CAPES.copyOfRange(0,CAPES.size - 2).toIntArray()) {
+class CapeDyer : UseWithHandler(*CAPES.copyOfRange(0,CAPES.size - 1).toIntArray()) {
     override fun newInstance(arg: Any?): Plugin<Any> {
         for(dye in DYES){
             addHandler(dye, ITEM_TYPE,this)
