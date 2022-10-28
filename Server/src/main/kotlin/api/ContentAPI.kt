@@ -7,6 +7,7 @@ import core.cache.def.impl.SceneryDefinition
 import core.cache.def.impl.VarbitDefinition
 import core.game.component.Component
 import core.game.container.impl.EquipmentContainer
+import core.game.content.dialogue.DialogueAction
 import core.game.content.dialogue.FacialExpression
 import core.game.content.global.action.SpecialLadders
 import core.game.node.Node
@@ -658,6 +659,16 @@ fun sendDialogue(player: Player, message: String) {
  */
 fun sendDialogueLines(player: Player, vararg message: String) {
     player.dialogueInterpreter.sendDialogue(*message)
+}
+
+/**
+ * Sends options dialogue to the given player.
+ * @param player the player to send the options to.
+ * @param title the title of the dialogue options
+ * @param options the options to present to the player
+ */
+fun sendDialogueOptions(player: Player, title: String, vararg options: String) {
+    player.dialogueInterpreter.sendOptions(title, *options)
 }
 
 /**
@@ -2198,6 +2209,15 @@ fun removeState(entity: Entity, state: EntityState) {
  */
 fun isPlayer(node: Node) : Boolean {
     return (node is Player)
+}
+
+/**
+ * Adds a dialogue action to the player's dialogue interpreter
+ * @param player the player to add the dialogue action to
+ * @param action the dialogue action to add
+ */
+fun addDialogueAction(player: Player, action: DialogueAction) {
+    player.dialogueInterpreter.addAction(action)
 }
 
 private class ContentAPI
