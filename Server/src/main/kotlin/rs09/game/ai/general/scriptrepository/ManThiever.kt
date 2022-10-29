@@ -2,12 +2,16 @@ package rs09.game.ai.general.scriptrepository
 
 import core.game.node.item.Item
 import rs09.game.ai.skillingbot.SkillingBotAssembler
+import rs09.game.interaction.IntType
+import rs09.game.interaction.InteractionListeners
 import java.util.*
 
 class ManThiever : Script() {
     override fun tick() {
         val man = scriptAPI.getNearestNode("Man")
-        man?.interaction?.handle(bot, man.interaction[2])
+        bot.interfaceManager.close()
+        man?.let { InteractionListeners.run(man.id,
+            IntType.NPC,"Pickpocket",bot,man) }
     }
 
     override fun newInstance(): Script? {
