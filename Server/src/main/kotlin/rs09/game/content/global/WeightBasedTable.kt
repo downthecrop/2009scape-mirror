@@ -5,6 +5,9 @@ import core.game.content.ttrail.ClueLevel
 import core.game.content.ttrail.ClueScrollPlugin
 import core.game.node.entity.npc.drop.RareDropTable
 import core.game.node.entity.npc.drop.CELEMinorTable
+import core.game.node.entity.npc.drop.UncommonSeedDropTable
+import core.game.node.entity.npc.drop.HerbDropTable
+import core.game.node.entity.npc.drop.GemDropTable
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.tools.RandomFunction
@@ -53,6 +56,9 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
                 SLOT_CLUE_HARD -> ClueScrollPlugin.getClue(ClueLevel.HARD)
                 SLOT_RDT -> RareDropTable.retrieve()
                 SLOT_CELEDT -> CELEMinorTable.retrieve()
+                SLOT_SEEDDT -> UncommonSeedDropTable.retrieve()
+                SLOT_HERBDT -> HerbDropTable.retrieve()
+                SLOT_GDT -> GemDropTable.retrieve()
                 else -> e.getItem()
             }
             safeItems.add(safeItem)
@@ -88,7 +94,22 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
     fun insertCELEDTRoll(weight: Double): WeightBasedTable{
         this.add(WeightedItem(SLOT_CELEDT,1,1,weight,false))
         return this
-    }    
+    }
+
+    fun insertSEEDDTRoll(weight: Double): WeightBasedTable{
+        this.add(WeightedItem(SLOT_SEEDDT,1,1,weight,false))
+        return this
+    }
+
+    fun insertHERBDTRoll(weight: Double): WeightBasedTable{
+        this.add(WeightedItem(SLOT_HERBDT,1,1,weight,false))
+        return this
+    }
+
+    fun insertGDTRoll(weight: Double): WeightBasedTable{
+        this.add(WeightedItem(SLOT_GDT,1,1,weight,false))
+        return this
+    }
 
     companion object {
         @JvmStatic
@@ -106,6 +127,9 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
         val SLOT_CLUE_MEDIUM = Items.ROTTEN_POTATO_5733
         val SLOT_CLUE_HARD = Items.GRANITE_LOBSTER_POUCH_12070
         val SLOT_CELEDT = Items.NULL_799
+        val SLOT_SEEDDT = Items.SACRED_CLAY_POUCH_CLASS_1_14422
+        val SLOT_HERBDT = Items.SACRED_CLAY_POUCH_CLASS_2_14424
+        val SLOT_GDT = Items.SACRED_CLAY_POUCH_CLASS_3_14426
     }
 
     override fun toString(): String {

@@ -1,0 +1,12 @@
+<GDT>
+    <item id="0" minAmt="1" maxAmt="1" weight="64"/>
+    <item id="1623" minAmt="1" maxAmt="1" weight="32"/>
+    <item id="1621" minAmt="1" maxAmt="1" weight="16"/>
+    <item id="1619" minAmt="1" maxAmt="1" weight="8"/>
+    <item id="1617" minAmt="1" maxAmt="1" weight="2"/>
+    <item id="1452" minAmt="1" maxAmt="1" weight="1.5"/>
+    <item id="1462" minAmt="1" maxAmt="1" weight="1.5"/>
+    <item id="830" minAmt="5" maxAmt="5" weight="1"/>
+    <item id="985" minAmt="1" maxAmt="1" weight="1"/>
+    <item id="987" minAmt="1" maxAmt="1" weight="1"/>
+</GDT>

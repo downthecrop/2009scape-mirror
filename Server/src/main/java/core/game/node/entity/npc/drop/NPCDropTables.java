@@ -92,6 +92,15 @@ public final class NPCDropTables {
 		if (item.getId() == RareDropTable.SLOT_ITEM_ID){
 			item = RareDropTable.retrieve();
 		}
+		if (item.getId() == UncommonSeedDropTable.SLOT_ITEM_ID){
+			item = UncommonSeedDropTable.retrieve();
+		}
+		if (item.getId() == HerbDropTable.SLOT_ITEM_ID){
+			item = HerbDropTable.retrieve();
+		}
+		if (item.getId() == GemDropTable.SLOT_ITEM_ID){
+			item = GemDropTable.retrieve();
+		}
 		if (item.getId() == 995 && player.getBank().hasSpaceFor(item) && ( player.getGlobalData().isEnableCoinMachine() )) {
 			item = new Item(995, (int) (item.getAmount() + (item.getAmount() * 0.25)));
 			player.getBank().add(item);

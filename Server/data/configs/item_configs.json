@@ -130578,5 +130578,20 @@
     "archery_ticket_price": "0",
     "weight": "0.01",
     "id": "298"
+  },
+  {
+    "examine": "You should not have this.",
+    "name": "Uncommon Seed Drop Table",
+    "id": "14422"
+  },
+  {
+    "examine": "You should not have this.",
+    "name": "Herb Drop Table",
+    "id": "14424"
+  },
+  {
+    "examine": "You should not have this.",
+    "name": "Gem Drop Table",
+    "id": "14426"
   }
 ]
