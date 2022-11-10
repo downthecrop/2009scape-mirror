@@ -1,5 +1,4 @@
 package rs09.game.ai.general.scriptrepository
-
 import core.game.component.Component
 import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
@@ -7,7 +6,6 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
-import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.IntType
 import rs09.game.interaction.InteractionListeners
 import rs09.tools.stringtools.colorize
@@ -18,9 +16,7 @@ import rs09.tools.stringtools.colorize
 @ScriptIdentifier("draynor_trees")
 class DraynorWillows : Script(){
     val willowZone = ZoneBorders(3084, 3225,3091, 3239)
-
-
-    val bankZone = ZoneBorders(3092, 3240,3094, 3246)
+    val bankZone = ZoneBorders(3092, 3245,3092, 3242)
     var state = State.INIT
     var logCount = 0
 
