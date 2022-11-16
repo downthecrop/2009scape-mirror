@@ -75,13 +75,16 @@ class ServerConstants {
 		var CELEDT_DATA_PATH: String? = null
 
 		@JvmField
-		var SEEDDT_DATA_PATH: String? = null
+		var USDT_DATA_PATH: String? = null
 
 		@JvmField
-		var HERBDT_DATA_PATH: String? = null
+		var HDT_DATA_PATH: String? = null
 
 		@JvmField
 		var GDT_DATA_PATH: String? = null
+
+		@JvmField
+		var RSDT_DATA_PATH: String? = null
 
 		//the max number of players.
 		@JvmField

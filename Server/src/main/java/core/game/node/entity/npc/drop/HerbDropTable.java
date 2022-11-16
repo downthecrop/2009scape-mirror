@@ -56,12 +56,12 @@ public final class HerbDropTable implements StartupListener {
 
 	@Override
 	public void startup() {
-		if(ServerConstants.HERBDT_DATA_PATH != null && !new File(ServerConstants.HERBDT_DATA_PATH).exists()){
-			SystemLogger.logErr(this.getClass(), "Can't locate HERBDT file at " + ServerConstants.HERBDT_DATA_PATH);
+		if(ServerConstants.HDT_DATA_PATH != null && !new File(ServerConstants.HDT_DATA_PATH).exists()){
+			SystemLogger.logErr(this.getClass(), "Can't locate HDT file at " + ServerConstants.HDT_DATA_PATH);
 			return;
 		}
-		parse(ServerConstants.HERBDT_DATA_PATH);
-		logInfo(this.getClass(), "Initialized Herb Drop Table from " + ServerConstants.HERBDT_DATA_PATH);
+		parse(ServerConstants.HDT_DATA_PATH);
+		logInfo(this.getClass(), "Initialized Herb Drop Table from " + ServerConstants.HDT_DATA_PATH);
 	}
 
 	/**

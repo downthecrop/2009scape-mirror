@@ -1,4 +1,4 @@
-<HERBDT>
+<HDT>
     <item id="199" minAmt="1" maxAmt="1" weight="32"/>
     <item id="201" minAmt="1" maxAmt="1" weight="24"/>
     <item id="203" minAmt="1" maxAmt="1" weight="18"/>
@@ -10,4 +10,4 @@
     <item id="215" minAmt="1" maxAmt="1" weight="4"/>
     <item id="2485" minAmt="1" maxAmt="1" weight="3"/>
     <item id="217" minAmt="1" maxAmt="1" weight="3"/>
-</HERBDT>
+</HDT>

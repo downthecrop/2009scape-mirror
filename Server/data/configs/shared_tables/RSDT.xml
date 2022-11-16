@@ -1,0 +1,15 @@
+<RSDT>
+    <item id="5282" minAmt="1" maxAmt="1" weight="28"/>
+    <item id="5296" minAmt="1" maxAmt="1" weight="26"/>
+    <item id="5281" minAmt="1" maxAmt="1" weight="18"/>
+    <item id="5297" minAmt="1" maxAmt="1" weight="18"/>
+    <item id="5106" minAmt="1" maxAmt="1" weight="13"/>
+    <item id="5298" minAmt="1" maxAmt="1" weight="12"/>
+    <item id="5280" minAmt="1" maxAmt="1" weight="11"/>
+    <item id="5299" minAmt="1" maxAmt="1" weight="9"/>
+    <item id="5300" minAmt="1" maxAmt="1" weight="5"/>
+    <item id="5301" minAmt="1" maxAmt="1" weight="4"/>
+    <item id="5302" minAmt="1" maxAmt="1" weight="3"/>
+    <item id="5303" minAmt="1" maxAmt="1" weight="2"/>
+    <item id="5304" minAmt="1" maxAmt="1" weight="1"/>
+</RSDT>

@@ -130678,17 +130678,22 @@
   },
   {
     "examine": "You should not have this.",
-    "name": "Uncommon Seed Drop Table",
+    "name": "USDT Slot",
     "id": "14422"
   },
   {
     "examine": "You should not have this.",
-    "name": "Herb Drop Table",
+    "name": "HDT Slot",
     "id": "14424"
   },
   {
     "examine": "You should not have this.",
-    "name": "Gem Drop Table",
+    "name": "GDT Slot",
     "id": "14426"
+  },
+  {
+    "examine": "You should not have this.",
+    "name": "RSDT Slot",
+    "id": "14428"
   }
 ]

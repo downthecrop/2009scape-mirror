@@ -21,19 +21,19 @@ import java.util.List;
 import static rs09.game.system.SystemLogger.logInfo;
 
 /**
- * Handles the uncommon seed drop table.
+ * Handles the rare seed drop table.
  * @author Von Hresvelg
  */
-public final class UncommonSeedDropTable implements StartupListener {
+public final class RareSeedDropTable implements StartupListener {
 
 	/**
-	 * The item id of the item representing the uncommon seed drop table slot in a drop
+	 * The item id of the item representing the rare seed drop table slot in a drop
 	 * table.
 	 */
-	public static final int SLOT_ITEM_ID = 14422;
+	public static final int SLOT_ITEM_ID = 14428;
 
 	/**
-	 * The uncommon seed drop table.
+	 * The rare seed drop table.
 	 */
 	private static final List<WeightedChanceItem> TABLE = new ArrayList<>(20);
 
@@ -52,21 +52,21 @@ public final class UncommonSeedDropTable implements StartupListener {
 		}
 	}
 
-	public UncommonSeedDropTable() throws ParserConfigurationException {}
+	public RareSeedDropTable() throws ParserConfigurationException {}
 
 	@Override
 	public void startup() {
-		if(ServerConstants.USDT_DATA_PATH != null && !new File(ServerConstants.USDT_DATA_PATH).exists()){
-			SystemLogger.logErr(this.getClass(), "Can't locate USDT file at " + ServerConstants.USDT_DATA_PATH);
+		if(ServerConstants.RSDT_DATA_PATH != null && !new File(ServerConstants.RSDT_DATA_PATH).exists()){
+			SystemLogger.logErr(this.getClass(), "Can't locate RSDT file at " + ServerConstants.RSDT_DATA_PATH);
 			return;
 		}
-		parse(ServerConstants.USDT_DATA_PATH);
-		logInfo(this.getClass(), "Initialized Uncommon Seed Drop Table from " + ServerConstants.USDT_DATA_PATH);
+		parse(ServerConstants.RSDT_DATA_PATH);
+		logInfo(this.getClass(), "Initialized Rare Seed Drop Table from " + ServerConstants.RSDT_DATA_PATH);
 	}
 
 	/**
-	 * Parses the xml file for the uncommon seed drop table.
-	 * @param file the .xml file containing the uncommon seed drop table.
+	 * Parses the xml file for the rare seed drop table.
+	 * @param file the .xml file containing the rare seed drop table.
 	 */
 	public static void parse(String file){
 		try {
