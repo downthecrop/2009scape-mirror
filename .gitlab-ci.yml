@@ -9,6 +9,9 @@ variables:
 # This template uses jdk8 for verifying and deploying images
 image: maven:3-openjdk-11
 
+before_script:
+  - apt-get update -qq && apt-get install -qq -y --no-install-recommends jq
+
 # Cache downloaded dependencies and plugins between builds.
 # To keep cache across branches add 'key: "$CI_JOB_NAME"'
 cache:
@@ -20,6 +23,14 @@ verify:jdk11:
   script:
     - 'cd Server'
     - 'mvn $MAVEN_CLI_OPTS verify -DskipTests'
+  except:
+    variables:
+      - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+test:json:
+  stage: test
+  script:
+    - 'find . -name \*.json -type f -print0 | xargs -0 -n1 -P8 jq empty'
   except:
     variables:
       - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
