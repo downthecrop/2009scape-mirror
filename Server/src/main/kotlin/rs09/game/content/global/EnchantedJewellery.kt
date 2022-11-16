@@ -33,9 +33,9 @@ enum class EnchantedJewellery(
                     "Nowhere. Give me a slayer update."
             ),
             arrayOf(
-                    Location.create(3313, 2960, 0),
-                    Location.create(3429, 3533, 0),
-                    Location.create(2793, 3615, 0),
+                    Location.create(3361, 2994, 0),
+                    Location.create(3428, 3535, 0),
+                    Location.create(2792, 3615, 0),
             ),
             true,
             Items.RING_OF_SLAYING8_13281,
