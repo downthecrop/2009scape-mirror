@@ -196,23 +196,22 @@
         <configuration>
           <maxmem>1024m</maxmem>
           <useIncrementalCompilation>false</useIncrementalCompilation>
-          <compilerArgs>
-            <arg>-XDcompilePolicy=simple</arg>
-            <arg>-Xpkginfo:always</arg>
-            <!-- <arg>-Xplugin:ErrorProne</arg> uncomment when fixing java static analysis errors !-->
-          </compilerArgs>
-          <annotationProcessorPaths>
-            <path>
-              <groupId>com.google.errorprone</groupId>
-              <artifactId>error_prone_core</artifactId>
-              <version>2.9.0</version>
-            </path>
-            <!-- Other annotation processors go here.
+		  <compilerArgs>
+			<arg>-XDcompilePolicy=simple</arg>
+			<!-- <arg>-Xplugin:ErrorProne</arg> uncomment when fixing java static analysis errors !-->
+		  </compilerArgs>
+		  <annotationProcessorPaths>
+			<path>
+			  <groupId>com.google.errorprone</groupId>
+			  <artifactId>error_prone_core</artifactId>
+			  <version>2.9.0</version>
+			</path>
+			<!-- Other annotation processors go here.
 
-            If 'annotationProcessorPaths' is set, processors will no longer be
-            discovered on the regular -classpath; see also 'Using Error Prone
-            together with other annotation processors' below. -->
-          </annotationProcessorPaths>
+			If 'annotationProcessorPaths' is set, processors will no longer be
+			discovered on the regular -classpath; see also 'Using Error Prone
+			together with other annotation processors' below. -->
+		  </annotationProcessorPaths>
         </configuration>
         <executions>
           <!-- Replacing default-compile as it is treated specially by maven -->
@@ -258,59 +257,52 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
         <version>1.2.1</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-          </execution>
-        </executions>
         <configuration>
           <mainClass>rs09.Server</mainClass>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.8</version>
-        <executions>
-          <execution>
-            <!-- This can be run separately with mvn antrun:run@detekt -->
-            <id>detekt</id>
-            <phase>verify</phase>
-            <configuration>
-              <target name="detekt">
-                <java taskname="detekt" dir="${basedir}"
-                      fork="true"
-                      failonerror="true"
-                      classname="io.gitlab.arturbosch.detekt.cli.Main"
-                      classpathref="maven.plugin.classpath">
-                  <arg value="--input"/>
-                  <arg value="${basedir}/src/main/kotlin"/>
-                  <arg value="--excludes"/>
-                  <arg value="**/special/package/internal/**"/>
-                  <arg value="--report"/>
-                  <arg value="xml:${basedir}/reports/detekt.xml"/>
-                  <arg value="--config"/>
-                  <arg value="${basedir}/detekt.yml"/>
-                  <!--
-                  <arg value="-b" />
-                  <arg value="${basedir}/reports/baseline.xml"/>
-                  -->
-                </java>
-              </target>
-            </configuration>
-            <goals><goal>run</goal></goals>
-          </execution>
-        </executions>
-        <dependencies>
-          <dependency>
-            <groupId>io.gitlab.arturbosch.detekt</groupId>
-            <artifactId>detekt-cli</artifactId>
-            <version>1.21.0</version>
-          </dependency>
-        </dependencies>
-      </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.8</version>
+            <executions>
+                <execution>
+                    <!-- This can be run separately with mvn antrun:run@detekt -->
+                    <id>detekt</id>
+                    <phase>verify</phase>
+                    <configuration>
+                        <target name="detekt">
+                            <java taskname="detekt" dir="${basedir}"
+                                  fork="true" 
+                                  failonerror="true"
+                                  classname="io.gitlab.arturbosch.detekt.cli.Main"
+                                  classpathref="maven.plugin.classpath">
+                                <arg value="--input"/>
+                                <arg value="${basedir}/src/main/kotlin"/>
+                                <arg value="--excludes"/>
+                                <arg value="**/special/package/internal/**"/>
+                                <arg value="--report"/>
+                                <arg value="xml:${basedir}/reports/detekt.xml"/>
+								<arg value="--config"/>
+								<arg value="${basedir}/detekt.yml"/>
+                                <!--
+								<arg value="-b" />
+                                <arg value="${basedir}/reports/baseline.xml"/>
+								-->
+                            </java>
+                        </target>
+                    </configuration>
+                    <goals><goal>run</goal></goals>
+                </execution>
+            </executions>
+            <dependencies>
+                <dependency>
+                    <groupId>io.gitlab.arturbosch.detekt</groupId>
+                    <artifactId>detekt-cli</artifactId>
+                    <version>1.21.0</version>
+                </dependency>
+            </dependencies>
+        </plugin>
     </plugins>
   </build>
   <repositories>
