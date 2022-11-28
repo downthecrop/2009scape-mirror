@@ -4,8 +4,8 @@ import core.net.EventProducer;
 import core.net.IoReadEvent;
 import core.net.IoSession;
 import core.net.IoWriteEvent;
-import core.net.event.JS5ReadEvent;
-import core.net.event.JS5WriteEvent;
+import rs09.net.event.js5.JS5ReadEvent;
+import rs09.net.event.js5.JS5WriteEvent;
 
 import java.nio.ByteBuffer;
 

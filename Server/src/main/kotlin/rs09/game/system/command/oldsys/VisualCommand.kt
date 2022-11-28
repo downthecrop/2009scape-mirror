@@ -1,17 +1,17 @@
 package rs09.game.system.command.oldsys
 
-import api.*
-import core.cache.Cache
+import api.sendMessage
+import api.submitWorldPulse
 import core.game.container.access.InterfaceContainer
 import core.game.content.quest.tutorials.tutorialisland.CharacterDesign
-import core.game.node.scenery.Scenery
-import core.game.node.scenery.SceneryBuilder
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.item.Item
+import core.game.node.scenery.Scenery
+import core.game.node.scenery.SceneryBuilder
 import core.game.system.command.CommandSet
 import core.game.system.task.Pulse
 import core.game.world.map.Location
@@ -23,6 +23,8 @@ import core.net.packet.context.VarbitContext
 import core.net.packet.out.Varbit
 import core.plugin.Initializable
 import core.plugin.Plugin
+import rs09.cache.Cache
+import rs09.cache.CacheIndex
 import rs09.game.system.command.CommandPlugin
 import rs09.game.world.GameWorld
 import java.awt.Toolkit
@@ -205,8 +207,9 @@ class VisualCommand : CommandPlugin() {
                     return true
                 }
                 val componentId = toInteger(args[1]!!)
-                if (componentId < 0 || componentId > Cache.getInterfaceDefinitionsSize()) {
-                    player!!.debug("Invalid component id [id=" + componentId + ", max=" + Cache.getInterfaceDefinitionsSize() + "].")
+                val componentArchiveSize = Cache.getIndexCapacity(CacheIndex.COMPONENTS)
+                if (componentId < 0 || componentId > componentArchiveSize) {
+                    player!!.debug("Invalid component id [id=" + componentId + ", max=" + componentArchiveSize + "].")
                     return true
                 }
                 player!!.interfaceManager.openComponent(componentId)

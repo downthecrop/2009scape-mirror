@@ -1,14 +1,12 @@
 package core.cache.def.impl;
 
-import core.cache.Cache;
-import core.cache.CacheFileManager;
-import core.cache.misc.Container;
 import core.cache.misc.buffer.ByteBufferUtils;
 import core.tools.CP1252;
+import rs09.cache.Cache;
+import rs09.cache.CacheIndex;
 import rs09.game.system.SystemLogger;
 
 import java.nio.ByteBuffer;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,7 +66,7 @@ public class DataMap {
         if (def != null) {
             return def;
         }
-        byte[] data = Cache.getIndexes()[17].getFileData(id >>> 8, id & 0xFF);
+        byte[] data = Cache.getData(CacheIndex.ENUM_CONFIGURATION, id >>> 8, id & 0xFF);
         def = parse(id, data);
         definitions.put(id, def);
         return def;

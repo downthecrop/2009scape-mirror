@@ -4,8 +4,9 @@ import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
-import core.cache.Cache;
 import core.cache.misc.buffer.ByteBufferUtils;
+import rs09.cache.Cache;
+import rs09.cache.CacheIndex;
 
 /**
  * Represents an animation's definitions.
@@ -47,7 +48,7 @@ public final class AnimationDefinition {
 			if (defs != null) {
 				return defs;
 			}
-			byte[] data = Cache.getIndexes()[20].getFileData(emoteId >>> 7, emoteId & 0x7f);
+			byte[] data = Cache.getData(CacheIndex.SEQUENCE_CONFIGURATION, emoteId >>> 7, emoteId & 0x7f);
 			defs = new AnimationDefinition();
 			if (data != null) {
 				defs.readValueLoop(ByteBuffer.wrap(data));

@@ -1,7 +1,8 @@
 package core.cache.def.impl;
 
-import core.cache.Cache;
 import core.game.node.entity.player.Player;
+import rs09.cache.Cache;
+import rs09.cache.CacheIndex;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
@@ -94,7 +95,7 @@ public final class VarbitDefinition {
 		}
 
 		def = new VarbitDefinition(id);
-		byte[] bs = Cache.getIndexes()[22].getFileData(id >>> 10, id & 0x3ff);
+		byte[] bs = Cache.getData(CacheIndex.VARBIT_CONFIGURATION, id >>> 10, id & 0x3ff);
 		if (bs != null) {
 			ByteBuffer buffer = ByteBuffer.wrap(bs);
 			int opcode = 0;

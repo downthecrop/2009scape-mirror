@@ -90,6 +90,11 @@
       <version>2.9.0</version>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>com.displee</groupId>
+      <artifactId>rs-cache-library</artifactId>
+      <version>6.9-RC2</version>
+    </dependency>
   </dependencies>
 
   <build>

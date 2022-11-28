@@ -1,17 +1,16 @@
 package core.game.world.map;
 
-import core.cache.Cache;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.music.MusicZone;
-import core.game.node.scenery.Scenery;
-import core.game.node.scenery.SceneryBuilder;
 import core.game.system.communication.CommunicationInfo;
 import core.game.system.task.Pulse;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.build.LandscapeParser;
 import core.game.world.map.build.MapscapeParser;
 import core.game.world.map.zone.RegionZone;
+import rs09.cache.Cache;
+import rs09.cache.CacheIndex;
 import rs09.game.system.SystemLogger;
 import rs09.game.system.config.XteaParser;
 import rs09.game.world.GameWorld;
@@ -302,28 +301,34 @@ public class Region {
 			int regionId = dynamic ? ((DynamicRegion) r).getRegionId() : r.getId();
 			int regionX = regionId >> 8 & 0xFF;
 			int regionY = regionId & 0xFF;
-			int mapscapeId = Cache.getIndexes()[5].getArchiveId("m" + regionX + "_"+ regionY);
 			byte[][][] mapscapeData = new byte[4][SIZE][SIZE];
 			for (RegionPlane plane : r.planes) {
 				plane.getFlags().setLandscape(new boolean[SIZE][SIZE]);
 				//plane.getFlags().setClippingFlags(new int[SIZE][SIZE]);
 				//plane.getProjectileFlags().setClippingFlags(new int[SIZE][SIZE]);
 			}
-			if (mapscapeId > -1) {
-				ByteBuffer mapscape = ByteBuffer.wrap(Cache.getIndexes()[5].getCacheFile().getContainerUnpackedData(mapscapeId));
+			byte[] mData = Cache.getData(CacheIndex.MAPS, "m" + regionX + "_"+ regionY);
+			if (mData != null) {
+				ByteBuffer mapscape = ByteBuffer.wrap(mData);
 				MapscapeParser.parse(r, mapscapeData, mapscape);
 			}
 			r.hasFlags = dynamic;
 			r.setLoaded(true);
-			int landscapeId = Cache.getIndexes()[5].getArchiveId("l" + regionX + "_" + regionY);
-			if (landscapeId > -1) {
-				byte[] landscape = Cache.getIndexes()[5].getFileData(landscapeId, 0, XteaParser.Companion.getRegionXTEA(regionId));
-				if (landscape == null || landscape.length < 4) {
+
+			int[] keys = XteaParser.Companion.getRegionXTEA(regionId);
+			if (keys == null) {
+				keys = new int[]{0,0,0,0};
+			}
+			byte[] lData = Cache.getData(CacheIndex.MAPS, "l" + regionX + "_"+ regionY, keys);
+			if (lData == null) {
+				return;
+			} else {
+				if (lData.length < 4) {
 					return;
 				}
 				r.hasFlags = true;
 				try {
-					LandscapeParser.parse(r, mapscapeData, ByteBuffer.wrap(landscape), build);
+					LandscapeParser.parse(r, mapscapeData, ByteBuffer.wrap(lData), build);
 				} catch (Throwable t) {
 					new Throwable("Failed parsing region " + regionId + "!", t).printStackTrace();
 				}

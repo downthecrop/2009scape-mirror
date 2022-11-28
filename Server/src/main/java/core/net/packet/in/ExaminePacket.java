@@ -1,6 +1,5 @@
 package core.net.packet.in;
 
-import core.cache.Cache;
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
@@ -8,7 +7,8 @@ import core.cache.def.impl.VarbitDefinition;
 import core.game.node.entity.player.Player;
 import core.net.packet.IncomingPacket;
 import core.net.packet.IoBuffer;
-import org.rs09.consts.Items;
+import rs09.cache.Cache;
+import rs09.cache.CacheIndex;
 
 import java.util.Arrays;
 
@@ -24,7 +24,7 @@ public final class ExaminePacket implements IncomingPacket {
 		switch (buffer.opcode()) {
 		case 94: // Object examine
 			int id = buffer.getLEShortA();
-			if (id < 0 || id > Cache.getObjectDefinitionsSize()) {
+			if (id < 0 || id > Cache.getIndexCapacity(CacheIndex.SCENERY_CONFIGURATION)) {
 				break;
 			}
 			SceneryDefinition d = SceneryDefinition.forId(id);
@@ -40,7 +40,7 @@ public final class ExaminePacket implements IncomingPacket {
 		case 235:
 		case 92: // Item examine
 			id = buffer.getLEShortA();
-			if (id < 0 || id > Cache.getItemDefinitionsSize()) {
+			if (id < 0 || id > Cache.getIndexCapacity(CacheIndex.ITEM_CONFIGURATION)) {
 				break;
 			}
 			ItemDefinition itemDef = ItemDefinition.forId(id);
@@ -48,7 +48,7 @@ public final class ExaminePacket implements IncomingPacket {
 			break;
 		case 72: // NPC examine
 			id = buffer.getShort();
-			if (id < 0 || id > Cache.getNPCDefinitionsSize()) {
+			if (id < 0 || id > Cache.getIndexCapacity(CacheIndex.NPC_CONFIGURATION)) {
 				break;
 			}
 			player.debug("NPC id: " + id + ".");

@@ -1,9 +1,9 @@
 package core.cache.def.impl;
 
-import core.cache.Cache;
-import core.cache.CacheFileManager;
-import core.cache.misc.Container;
 import core.cache.misc.buffer.ByteBufferUtils;
+import rs09.cache.Cache;
+import rs09.cache.CacheArchive;
+import rs09.cache.CacheIndex;
 import rs09.game.system.SystemLogger;
 
 import java.nio.ByteBuffer;
@@ -53,7 +53,7 @@ public class Struct {
         if (def != null) {
             return def;
         }
-        byte[] data = Cache.getIndexes()[2].getFileData(26, id);
+        byte[] data = Cache.getData(CacheIndex.CONFIGURATION, CacheArchive.STRUCT_TYPE, id);
         def = parse(id, data);
 
         definitions.put(id, def);
@@ -87,10 +87,6 @@ public class Struct {
             }
         }
         return def;
-    }
-
-    public static int getCount() {
-        return Cache.getIndexes()[2].getFilesSize(26);
     }
 
     public int getId() {

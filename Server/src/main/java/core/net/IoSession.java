@@ -105,10 +105,10 @@ public class IoSession {
 	 */
 	private final String address;
 
-	/**
-	 * The JS-5 queue.
-	 */
-	private final JS5Queue js5Queue;
+//	/**
+//	 * The JS-5 queue.
+//	 */
+//	private final JS5Queue js5Queue;
 
 	/**
 	 * The client info.
@@ -126,7 +126,7 @@ public class IoSession {
 		this.key = key;
 		this.service = service;
 		this.address = getRemoteAddress().replaceAll("/", "").split(":")[0];
-		this.js5Queue = new JS5Queue(this);
+//		this.js5Queue = new JS5Queue(this);
 	}
 
 	/**
@@ -417,13 +417,13 @@ public class IoSession {
 		this.isaacPair = isaacPair;
 	}
 
-	/**
-	 * Gets the js5Queue.
-	 * @return the js5Queue
-	 */
-	public JS5Queue getJs5Queue() {
-		return js5Queue;
-	}
+//	/**
+//	 * Gets the js5Queue.
+//	 * @return the js5Queue
+//	 */
+//	public JS5Queue getJs5Queue() {
+//		return js5Queue;
+//	}
 
 	/**
 	 * Gets the clientInfo value.

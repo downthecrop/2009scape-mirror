@@ -1,11 +1,12 @@
 package core.cache.def.impl;
 
+import rs09.ServerConstants;
+import rs09.cache.Cache;
+import rs09.cache.CacheIndex;
+
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
-
-import rs09.ServerConstants;
-import core.cache.Cache;
 
 /**
  * Represents a Graphic's definition.
@@ -48,7 +49,7 @@ public class GraphicDefinition {
 		if (def != null) {
 			return def;
 		}
-		byte[] data = Cache.getIndexes()[21].getFileData(gfxId >>> 8, gfxId & 0xff);
+		byte[] data = Cache.getData(CacheIndex.SPOTANIM_CONFIGURATION, gfxId >>> 8, gfxId & 0xFF);
 		def = new GraphicDefinition();
 		def.graphicsId = gfxId;
 		if (data != null) {

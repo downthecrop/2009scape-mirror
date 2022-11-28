@@ -1,11 +1,12 @@
 package core.cache.def.impl;
 
-import core.cache.Cache;
 import core.cache.def.Definition;
 import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.interaction.OptionHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
+import rs09.cache.Cache;
+import rs09.cache.CacheIndex;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
 
@@ -569,8 +570,8 @@ public class SceneryDefinition extends Definition<Scenery> {
 	 * @throws Throwable the throwable.
 	 */
 	public static void parse() throws Throwable {
-		for (int objectId = 0; objectId < Cache.getObjectDefinitionsSize(); objectId++) {
-			byte[] data = Cache.getIndexes()[16].getFileData(getContainerId(objectId), objectId & 0xff);
+		for (int objectId = 0; objectId < Cache.getIndexCapacity(CacheIndex.SCENERY_CONFIGURATION); objectId++) {
+			byte[] data = Cache.getData(CacheIndex.SCENERY_CONFIGURATION, objectId >>> 8, objectId & 0xFF);
 			if (data == null) {
 				SceneryDefinition.getDefinitions().put(objectId, new SceneryDefinition());
 				//SystemLogger.logErr("Could not load object definitions for id " + objectId + " - no data!");
@@ -584,6 +585,7 @@ public class SceneryDefinition extends Definition<Scenery> {
 			SceneryDefinition.getDefinitions().put(objectId, def);
 			data = null;
 		}
+		SystemLogger.logCache("Loaded " + SceneryDefinition.getDefinitions().size() + " Scenery definitions.");
 	}
 
 	/**

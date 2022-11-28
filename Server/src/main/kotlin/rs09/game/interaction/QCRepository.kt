@@ -1,6 +1,5 @@
 package rs09.game.interaction
 
-import core.cache.Cache
 import core.cache.def.impl.DataMap
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
@@ -11,6 +10,8 @@ import core.game.system.task.Pulse
 import core.game.world.update.flag.context.ChatMessage
 import core.game.world.update.flag.player.ChatFlag
 import proto.management.ClanMessage
+import rs09.cache.Cache
+import rs09.cache.CacheIndex
 import rs09.game.node.entity.skill.slayer.SlayerManager
 import rs09.game.world.GameWorld.Pulser
 import rs09.net.packet.`in`.QCPacketType
@@ -24,7 +25,7 @@ import java.util.*
  * @author Ceikry
  */
 object QCRepository {
-    private val quickChatIndex = Cache.getIndexes()[24]
+    private val quickChatIndex = Cache.getIndex(CacheIndex.QUICKCHAT_MESSAGES)
 
     /**
      * The entry method that connects to the other more specific methods
@@ -314,7 +315,8 @@ object QCRepository {
         }
     }
 
-    private fun getQCString(index: Int): String{
-        return ByteBufferUtils.getString(ByteBuffer.wrap(quickChatIndex.getFileData(1, index)))
+    private fun getQCString(index: Int): String {
+        val data = Cache.getData(CacheIndex.QUICKCHAT_MESSAGES, 1, index)
+        return ByteBufferUtils.getString(ByteBuffer.wrap(data))
     }
 }

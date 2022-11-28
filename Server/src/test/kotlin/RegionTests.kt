@@ -1,14 +1,8 @@
-import core.cache.Cache
 import core.game.world.map.Region
-import core.game.world.map.RegionChunk
 import core.game.world.map.RegionManager
 import core.game.world.map.build.DynamicRegion
-import core.game.world.map.build.LandscapeParser
-import org.junit.Assert
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import rs09.game.system.config.ServerConfigParser
-import rs09.game.system.config.XteaParser
 
 class RegionTests {
     companion object {

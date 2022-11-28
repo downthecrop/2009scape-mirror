@@ -1,7 +1,6 @@
 package rs09.game.world
 
 import api.*
-import core.cache.Cache
 import core.cache.def.impl.SceneryDefinition
 import core.game.node.entity.player.Player
 import core.game.system.SystemManager
@@ -16,6 +15,7 @@ import core.tools.RandomFunction
 import rs09.ServerConstants
 import rs09.ServerStore
 import rs09.auth.AuthProvider
+import rs09.cache.Cache
 import rs09.game.system.Auth
 import rs09.game.system.SystemLogger
 import rs09.game.system.SystemLogger.logInfo
@@ -27,7 +27,6 @@ import rs09.worker.MajorUpdateWorker
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.function.Consumer
-import kotlin.collections.ArrayList
 
 /**
  * Represents the game world.

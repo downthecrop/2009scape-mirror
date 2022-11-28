@@ -1,16 +1,16 @@
 package core.cache.def.impl;
 
+import core.cache.misc.buffer.ByteBufferUtils;
+import rs09.cache.Cache;
+import rs09.cache.CacheIndex;
+import rs09.game.world.GameWorld;
+
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-
-import core.cache.Cache;
-import core.cache.misc.buffer.ByteBufferUtils;
-import rs09.game.world.GameWorld;
 
 /**
  * The CS2 mapping.
@@ -104,7 +104,7 @@ public final class CS2Mapping {
 			return mapping;
 		}
 		mapping = new CS2Mapping(scriptId);
-		byte[] bs = Cache.getIndexes()[17].getFileData(scriptId >>> 8, scriptId & 0xFF);
+		byte[] bs = Cache.getData(CacheIndex.CLIENT_SCRIPTS, scriptId >>> 8, scriptId & 0xFF);
 		if (bs != null) {
 			mapping.load(ByteBuffer.wrap(bs));
 		} else {

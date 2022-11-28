@@ -4,7 +4,9 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 
 import rs09.ServerConstants;
-import core.cache.Cache;
+import rs09.cache.Cache;
+import rs09.cache.CacheArchive;
+import rs09.cache.CacheIndex;
 
 /**
  * The definitions for player clothing/look.
@@ -59,7 +61,7 @@ public final class ClothDefinition {
 	 */
 	public static ClothDefinition forId(int clothId) {
 		ClothDefinition def = new ClothDefinition();
-		byte[] bs = Cache.getIndexes()[2].getFileData(3, clothId);
+		byte[] bs = Cache.getData(CacheIndex.CONFIGURATION, CacheArchive.PLAYER_KIT, clothId);
 		if (bs != null) {
 			def.load(ByteBuffer.wrap(bs));
 		}
@@ -76,7 +78,7 @@ public final class ClothDefinition {
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-		int length = Cache.getIndexes()[2].getFilesSize(3);
+		int length = Cache.getArchiveCapacity(CacheIndex.CONFIGURATION, CacheArchive.PLAYER_KIT);
 		System.out.println("Definition size: " + length + ".");
 		for (int i = 0; i < length; i++) {
 			ClothDefinition def = forId(i);

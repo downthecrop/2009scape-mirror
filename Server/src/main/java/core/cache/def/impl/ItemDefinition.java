@@ -1,6 +1,5 @@
 package core.cache.def.impl;
 
-import core.cache.Cache;
 import core.cache.def.Definition;
 import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.container.Container;
@@ -15,6 +14,8 @@ import core.net.packet.PacketRepository;
 import core.net.packet.out.WeightUpdate;
 import core.plugin.Plugin;
 import core.tools.StringUtils;
+import rs09.cache.Cache;
+import rs09.cache.CacheIndex;
 import rs09.game.system.SystemLogger;
 import rs09.game.system.config.ItemConfigParser;
 import org.rs09.consts.Items;
@@ -286,8 +287,8 @@ public class ItemDefinition extends Definition<Item> {
 	 * Parses the item definitions.
 	 */
 	public static void parse() {
-		for (int itemId = 0; itemId < Cache.getItemDefinitionsSize(); itemId++) {
-			byte[] data = Cache.getIndexes()[19].getFileData(itemId >>> 8, itemId & 0xFF);
+		for (int itemId = 0; itemId < Cache.getIndexCapacity(CacheIndex.ITEM_CONFIGURATION); itemId++) {
+			byte[] data = Cache.getData(CacheIndex.ITEM_CONFIGURATION, itemId >>> 8, itemId & 0xFF);
 			if (data == null) {
 				ItemDefinition.getDefinitions().put(itemId, new ItemDefinition());
 				continue;
@@ -303,6 +304,7 @@ public class ItemDefinition extends Definition<Item> {
 			ItemDefinition.getDefinitions().put(itemId, def);
 		}
 		ItemDefinition.defineTemplates();
+		SystemLogger.logCache("Loaded " + ItemDefinition.getDefinitions().size() + " Item definitions.");
 	}
 
 	/**
@@ -485,7 +487,7 @@ public class ItemDefinition extends Definition<Item> {
 	 */
 	public static void defineTemplates() {
 		int equipId = 0;
-		for (int i = 0; i < Cache.getItemDefinitionsSize(); i++) {
+		for (int i = 0; i < Cache.getIndexCapacity(CacheIndex.ITEM_CONFIGURATION); i++) {
 			ItemDefinition def = forId(i);
 			if (def.noteTemplateId != -1) {
 				def.transferNoteDefinition(forId(def.noteId), forId(def.noteTemplateId));

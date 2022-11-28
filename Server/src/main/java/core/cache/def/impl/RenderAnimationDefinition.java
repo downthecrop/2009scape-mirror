@@ -1,6 +1,8 @@
 package core.cache.def.impl;
 
-import core.cache.Cache;
+import rs09.cache.Cache;
+import rs09.cache.CacheArchive;
+import rs09.cache.CacheIndex;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
 
@@ -67,12 +69,12 @@ public class RenderAnimationDefinition {
 		if (animId == -1) {
 			return null;
 		}
-		byte[] data = Cache.getIndexes()[2].getFileData(32, animId);
+		byte[] data = Cache.getData(CacheIndex.CONFIGURATION, CacheArchive.BAS_TYPE, animId);
 		RenderAnimationDefinition defs = new RenderAnimationDefinition();
 		if (data != null) {
 			defs.parse(ByteBuffer.wrap(data));
 		} else {
-			SystemLogger.logErr(RenderAnimationDefinition.class, "No definitions found for render animation " + animId + ", size=" + Cache.getIndexes()[2].getFilesSize(32) + "!");
+			SystemLogger.logErr(RenderAnimationDefinition.class, "No definitions found for render animation " + animId + ", size=" + Cache.getArchiveCapacity(CacheIndex.CONFIGURATION, CacheArchive.BAS_TYPE) + "!");
 		}
 		return defs;
 	}

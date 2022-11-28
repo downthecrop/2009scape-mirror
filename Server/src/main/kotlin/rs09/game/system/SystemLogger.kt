@@ -1,7 +1,8 @@
 package rs09.game.system
 
+import com.displee.cache.ProgressListener
 import com.github.ajalt.mordant.rendering.TextColors
-import com.github.ajalt.mordant.terminal.*
+import com.github.ajalt.mordant.terminal.Terminal
 import rs09.ServerConstants
 import java.io.BufferedWriter
 import java.io.File
@@ -117,5 +118,29 @@ object SystemLogger {
 
     fun logMS(s: String) {
         if(s.isNotBlank()) t.println("${getTime()}: ${TextColors.gray("[  MS] $s")}")
+    }
+
+    @JvmStatic
+    fun logCache(message: String){
+        val msg = "${getTime()}: [CacheOps] $message"
+        if(message.isNotBlank()) {
+            t.println(msg)
+        }
+    }
+
+    @JvmStatic
+    fun logJS5(clazz: Class<*>, vararg messages: String){
+        for(m in messages){
+            val msg = "${getTime()}: [${clazz.simpleName}] $m"
+            if(m.isNotBlank()) {
+                t.println(msg)
+            }
+        }
+    }
+
+    class CreateProgressListener: ProgressListener {
+        override fun notify(progress: Double, message: String?) {
+            logCache(message.toString())
+        }
     }
 }

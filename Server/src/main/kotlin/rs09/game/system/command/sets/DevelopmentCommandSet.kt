@@ -1,11 +1,10 @@
 package rs09.game.system.command.sets
 
 import api.sendMessage
-import core.cache.Cache
 import core.cache.def.impl.DataMap
 import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.VarbitDefinition
 import core.cache.def.impl.Struct
+import core.cache.def.impl.VarbitDefinition
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.SpellBookManager
@@ -17,12 +16,15 @@ import core.plugin.Initializable
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.rs09.consts.Items
+import rs09.cache.Cache
+import rs09.cache.CacheArchive
+import rs09.cache.CacheIndex
 import rs09.game.system.SystemLogger
 import rs09.game.system.command.Privilege
+import rs09.net.packet.PacketWriteQueue
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
-import rs09.net.packet.PacketWriteQueue
 
 @Initializable
 class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
@@ -85,13 +87,11 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
         define("dumpstructs", Privilege.ADMIN, "", "Dumps all the cache structs to structs.txt") {player, _ ->
             val dump = File("structs.txt")
             val writer = BufferedWriter(FileWriter(dump))
-            val index = Cache.getIndexes()[2]
-            val containers = index.information.containers[26].filesIndexes
-            for(fID in containers)
-            {
-                val file = index.getFileData(26, fID)
-                if(file != null){
-                    val def = Struct.parse(fID, file)
+            val amount = Cache.getArchiveCapacity(CacheIndex.CONFIGURATION, CacheArchive.STRUCT_TYPE)
+            for (structId in 0 until amount) {
+                val data = Cache.getData(CacheIndex.CONFIGURATION, CacheArchive.STRUCT_TYPE, structId)
+                if (data != null) {
+                    val def = Struct.parse(structId, data)
                     if(def.dataStore.isEmpty()) continue //no data in struct.
                     writer.write(def.toString())
                     writer.newLine()
@@ -102,24 +102,19 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
         }
 
         define("dumpdatamaps", Privilege.ADMIN, "", "Dumps all the cache data maps to datamaps.txt") {player, _ ->
-            val index = Cache.getIndexes()[17]
-            val containers = index.information.containersIndexes
-
+            val amount = Cache.getIndexCapacity(CacheIndex.ENUM_CONFIGURATION)
             val dump = File("datamaps.txt")
             val writer = BufferedWriter(FileWriter(dump))
 
-            for(cID in containers)
-            {
-                val fileIndexes = index.information.containers[cID].filesIndexes
-                for(fID in fileIndexes)
-                {
-                    val file = index.getFileData(cID, fID)
-                    if(file != null){
-                        val def = DataMap.parse((cID shl 8) or fID, file)
-                        if(def.keyType == '?') continue //Empty definition - only a 0 present in the cachefile data.
-                        writer.write(def.toString())
-                        writer.newLine()
-                    }
+            for (enumId in 0 until amount) {
+                val archiveId = enumId shl 8
+                val fileId = enumId and 0xFF
+                val data = Cache.getData(CacheIndex.ENUM_CONFIGURATION, archiveId, fileId)
+                if (data != null){
+                    val def = DataMap.parse(enumId, data)
+                    if(def.keyType == '?') continue //Empty definition - only a 0 present in the cachefile data.
+                    writer.write(def.toString())
+                    writer.newLine()
                 }
             }
             writer.flush()

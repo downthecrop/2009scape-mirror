@@ -1,6 +1,5 @@
 package core.cache.def.impl;
 
-import core.cache.Cache;
 import core.cache.def.Definition;
 import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.interaction.OptionHandler;
@@ -10,6 +9,8 @@ import core.game.node.entity.player.Player;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.StringUtils;
+import rs09.cache.Cache;
+import rs09.cache.CacheIndex;
 import rs09.game.system.config.NPCConfigParser;
 import rs09.game.world.GameWorld;
 
@@ -199,7 +200,7 @@ public final class NPCDefinition extends Definition<NPC> {
 		NPCDefinition def = DEFINITIONS.get(id);
 		if (def == null) {
 			def = new NPCDefinition(id);
-			byte[] data = Cache.getIndexes()[18].getFileData(id >>> 7, id & 0x7f);
+			byte[] data = Cache.getData(CacheIndex.NPC_CONFIGURATION, id >>> 7, id & 0x7f);
 			if (data == null) {
 				if (id != -1) {
 					// System.out.println("Failed loading NPC " + id + ".");

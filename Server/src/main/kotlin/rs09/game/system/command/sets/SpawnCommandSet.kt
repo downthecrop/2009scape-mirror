@@ -1,14 +1,14 @@
 package rs09.game.system.command.sets
 
-import core.cache.Cache
-import core.game.node.scenery.Scenery
-import core.game.node.scenery.SceneryBuilder
 import core.game.node.entity.npc.NPC
 import core.game.node.item.Item
-import rs09.game.system.SystemLogger
-import rs09.game.system.command.Command
-import rs09.game.system.command.CommandPlugin
+import core.game.node.scenery.Scenery
+import core.game.node.scenery.SceneryBuilder
 import core.plugin.Initializable
+import rs09.cache.Cache
+import rs09.cache.CacheIndex
+import rs09.game.system.SystemLogger
+import rs09.game.system.command.CommandPlugin
 import rs09.game.system.command.Privilege
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
@@ -46,7 +46,7 @@ class SpawnCommandSet : CommandSet(Privilege.ADMIN){
             }
             val id = args[1].toIntOrNull() ?: return@define
             var amount = (args.getOrNull(2) ?: "1").toInt()
-            if (id > Cache.getItemDefinitionsSize()) {
+            if (id > Cache.getIndexCapacity(CacheIndex.ITEM_CONFIGURATION)) {
                 reject(player,"Item ID '$id' out of range.")
                 return@define
             }
