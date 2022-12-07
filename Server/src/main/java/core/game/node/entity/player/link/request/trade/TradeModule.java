@@ -8,9 +8,11 @@ import core.game.node.entity.player.link.request.RequestModule;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.system.monitor.PlayerMonitor;
+import rs09.game.system.SystemLogger;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -395,6 +397,8 @@ public final class TradeModule implements RequestModule {
 	private void giveContainers(final TradeModule module) {
 		final Container pContainer = module.getContainer();
 		final Container oContainer = TradeModule.getExtension(module.getTarget()).getContainer();
+		SystemLogger.logTrade(module.getPlayer().getUsername() + " -> " + module.getTarget().getUsername() + " " + Arrays.toString(pContainer.toArray()));
+		SystemLogger.logTrade(module.getTarget().getUsername() + " -> " + module.getPlayer().getUsername() + " " + Arrays.toString(oContainer.toArray()));
 		addContainer(module.getPlayer(), module.getTarget(), oContainer);
 		addContainer(module.getTarget(), module.getPlayer(), pContainer);
 		module.getTarget().getPacketDispatch().sendMessage("Accepted trade.");

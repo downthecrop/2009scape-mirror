@@ -10,6 +10,7 @@ import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
 import rs09.game.world.update.UpdateSequence
+import rs09.net.packet.PacketProcessor
 import rs09.tools.stringtools.colorize
 import java.lang.Long.max
 import java.text.SimpleDateFormat
@@ -79,6 +80,8 @@ class MajorUpdateWorker {
     }
 
     fun handleTickActions(skipPulseUpdate: Boolean = false) {
+        PacketProcessor.processQueue()
+
         if (!skipPulseUpdate) {
             GameWorld.Pulser.updateAll()
         }

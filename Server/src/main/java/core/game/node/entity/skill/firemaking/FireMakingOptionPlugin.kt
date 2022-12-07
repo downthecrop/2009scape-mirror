@@ -1,5 +1,6 @@
 package core.game.node.entity.skill.firemaking
 
+import core.game.node.item.GroundItem
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.IntType
@@ -11,6 +12,10 @@ class FiremakingListener : InteractionListener
     override fun defineListeners() {
         onUseWith(IntType.ITEM, Items.TINDERBOX_590, *logs) { player, _, with ->
             player.pulseManager.run(FireMakingPulse(player, with.asItem(), null))
+            return@onUseWith true
+        }
+        onUseWith(IntType.GROUNDITEM, Items.TINDERBOX_590, *logs) { player, _, with ->
+            player.pulseManager.run(FireMakingPulse(player, with.asItem(), with as GroundItem))
             return@onUseWith true
         }
     }

@@ -10,6 +10,7 @@ import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.NPCs
+import rs09.game.ai.AIPlayer
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.world.GameWorld
 
@@ -19,7 +20,7 @@ class MorytaniaArea : MapArea {
     }
 
     override fun areaEnter(entity: Entity) {
-        if (entity is Player && !isQuestComplete(entity, "Priest in Peril")) {
+        if (entity is Player && entity !is AIPlayer && !isQuestComplete(entity, "Priest in Peril")) {
             kickThemOut(entity)
         }
     }

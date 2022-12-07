@@ -1,13 +1,9 @@
 package core.net.packet;
 
-import core.net.packet.in.*;
 import core.net.packet.out.GrandExchangePacket;
 import core.net.packet.out.*;
 import rs09.game.system.SystemLogger;
 import rs09.net.packet.PacketWriteQueue;
-import rs09.net.packet.in.ItemOnGroundItemPacket;
-import rs09.net.packet.in.QuickChatPacketHandler;
-import rs09.net.packet.in.RunScriptPacketHandler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,11 +18,6 @@ public final class PacketRepository {
 	 * The outgoing packets mapping.
 	 */
 	public final static Map<Class<?>, OutgoingPacket<? extends Context>> OUTGOING_PACKETS = new HashMap<>();
-
-	/**
-	 * The incoming packets mapping.
-	 */
-	private final static Map<Integer, IncomingPacket> INCOMING_PACKETS = new HashMap<>();
 
 	/**
 	 * Populate the mappings.
@@ -80,105 +71,6 @@ public final class PacketRepository {
 		OUTGOING_PACKETS.put(CSConfigPacket.class, new CSConfigPacket());					//
 		OUTGOING_PACKETS.put(Varbit.class, new Varbit());
         OUTGOING_PACKETS.put(VarcUpdate.class, new VarcUpdate());
-		INCOMING_PACKETS.put(22, new ClientFocusPacket());
-		INCOMING_PACKETS.put(93, new PingPacketHandler());
-		INCOMING_PACKETS.put(44, new CommandPacket());
-		INCOMING_PACKETS.put(237, new ChatPacket());
-		INCOMING_PACKETS.put(21, new CameraMovementPacket());
-		INCOMING_PACKETS.put(75, new MouseClickPacket());
-		INCOMING_PACKETS.put(243, new DisplayUpdatePacket());
-		INCOMING_PACKETS.put(177, new UpdateInterfaceCounter());
-		INCOMING_PACKETS.put(4, new DummyPacket());
-		INCOMING_PACKETS.put(245, new IdlePacketHandler());
-		INCOMING_PACKETS.put(111, new core.net.packet.in.GrandExchangePacket());
-		IncomingPacket packet = new WalkPacket();
-		INCOMING_PACKETS.put(39, packet);
-		INCOMING_PACKETS.put(77, packet);
-		INCOMING_PACKETS.put(215, packet);
-		packet = new ItemActionPacket();
-		INCOMING_PACKETS.put(134, packet);//item on object
-		INCOMING_PACKETS.put(115, packet);//on npc
-		INCOMING_PACKETS.put(27, packet);//item on item
-		INCOMING_PACKETS.put(248, packet);//on player
-		INCOMING_PACKETS.put(101,new ItemOnGroundItemPacket()); //Item on Ground Item
-		INCOMING_PACKETS.put(3, packet = new InteractionPacket());
-		INCOMING_PACKETS.put(180, packet);//Player interact options v
-		INCOMING_PACKETS.put(68, packet);
-		INCOMING_PACKETS.put(71, packet);
-		INCOMING_PACKETS.put(114, packet);
-		INCOMING_PACKETS.put(175, packet);//Player interact options ^
-		INCOMING_PACKETS.put(30, packet);
-		INCOMING_PACKETS.put(78, packet);
-		INCOMING_PACKETS.put(148, packet);
-		INCOMING_PACKETS.put(218, packet);
-		INCOMING_PACKETS.put(84, packet);
-		INCOMING_PACKETS.put(170, packet);
-		INCOMING_PACKETS.put(254, packet);
-		INCOMING_PACKETS.put(194, packet);
-		INCOMING_PACKETS.put(66, packet);
-		INCOMING_PACKETS.put(33, packet);
-		INCOMING_PACKETS.put(247, packet);
-		INCOMING_PACKETS.put(156, packet = new ActionButtonPacket()); //Item V
-		INCOMING_PACKETS.put(55, packet);
-		INCOMING_PACKETS.put(153, packet);
-		INCOMING_PACKETS.put(161, packet);
-		INCOMING_PACKETS.put(135, packet); //^
-		INCOMING_PACKETS.put(81, packet);
-		INCOMING_PACKETS.put(184, packet);//close interface
-		INCOMING_PACKETS.put(155, packet); //Interface V
-		INCOMING_PACKETS.put(196, packet);
-		INCOMING_PACKETS.put(124, packet);
-		INCOMING_PACKETS.put(199, packet);
-		INCOMING_PACKETS.put(234, packet);
-		INCOMING_PACKETS.put(168, packet);
-		INCOMING_PACKETS.put(166, packet);
-		INCOMING_PACKETS.put(64, packet);
-		INCOMING_PACKETS.put(53, packet);
-		INCOMING_PACKETS.put(9, packet); //^
-		INCOMING_PACKETS.put(132, packet); //Dialogue
-		INCOMING_PACKETS.put(10, packet); //logout
-		INCOMING_PACKETS.put(206, packet);//operate
-		INCOMING_PACKETS.put(72, packet = new ExaminePacket());
-		INCOMING_PACKETS.put(92, packet);
-		INCOMING_PACKETS.put(94, packet);
-		/*INCOMING_PACKETS.put(57, packet);
-		INCOMING_PACKETS.put(34, packet);
-		INCOMING_PACKETS.put(213, packet);*/
-		//INCOMING_PACKETS.put(69, packet);
-		//packet 98 - 530 settings interface
-		INCOMING_PACKETS.put(104, packet = new ClanPacketHandler());
-		INCOMING_PACKETS.put(188, packet);
-		INCOMING_PACKETS.put(162, packet);
-		INCOMING_PACKETS.put(157, new ChatSettingsPacket());
-		INCOMING_PACKETS.put(244, packet = new RunScriptPacketHandler());
-		INCOMING_PACKETS.put(23, packet);
-		INCOMING_PACKETS.put(65, packet);
-		INCOMING_PACKETS.put(110, new RegionChangePacket());
-		INCOMING_PACKETS.put(195, packet = new InterfaceUseOnPacket());
-		INCOMING_PACKETS.put(239, packet);
-		INCOMING_PACKETS.put(73, packet);
-		INCOMING_PACKETS.put(253, packet);
-	    INCOMING_PACKETS.put(233, packet);
-		INCOMING_PACKETS.put(231, packet = new SlotSwitchPacket());
-		INCOMING_PACKETS.put(79, packet);
-		INCOMING_PACKETS.put(167, new QuickChatPacketHandler());
-		INCOMING_PACKETS.put(201, packet = new CommunicationPacket());
-		INCOMING_PACKETS.put(120, packet);
-		INCOMING_PACKETS.put(57, packet);
-		INCOMING_PACKETS.put(34, packet);
-		INCOMING_PACKETS.put(213, packet);
-		INCOMING_PACKETS.put(99, packet = new ReportAbusePacket());
-		INCOMING_PACKETS.put(98, packet = new MapClosedPacket()); // this packet is sent when the world map is closed by the client
-		INCOMING_PACKETS.put(137,packet = new MusicPacketHandler()); //this packet is received when the client stops playing a song
-		// INCOMING_PACKETS.put(77, packet);
-		// INCOMING_PACKETS.put(191, packet);
-		// INCOMING_PACKETS.put(139, packet);
-		// INCOMING_PACKETS.put(251, packet);
-		// INCOMING_PACKETS.put(55, packet);
-
-		//Packet 22 is sent on focus gain/loss
-		//packet 177 is sent when opening/closing interfaces
-
 	}
 
 	/**
@@ -199,12 +91,4 @@ public final class PacketRepository {
 		}
 	}
 
-	/**
-	 * Gets an incoming packet.
-	 * @param opcode The opcode.
-	 * @return The incoming packet.
-	 */
-	public static IncomingPacket getIncoming(int opcode) {
-		return INCOMING_PACKETS.get(opcode);
-	}
 }

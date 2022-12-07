@@ -21,7 +21,6 @@ import core.game.world.map.path.Pathfinder;
 import core.game.world.map.zone.impl.WildernessZone;
 import rs09.game.world.repository.Repository;
 import core.net.packet.context.MessageContext;
-import core.net.packet.in.InteractionPacket;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
@@ -578,6 +577,6 @@ public class AIPlayer extends Player {
 
 
     public void interact(Node n) {
-        InteractionPacket.handleObjectInteraction(this, 0, n.getLocation(), n.getId());
+       // InteractionPacket.handleObjectInteraction(this, 0, n.getLocation(), n.getId());
     }
 }

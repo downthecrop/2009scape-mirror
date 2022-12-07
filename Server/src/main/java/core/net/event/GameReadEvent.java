@@ -7,6 +7,9 @@ import core.net.IoSession;
 import core.net.packet.IncomingPacket;
 import core.net.packet.IoBuffer;
 import core.net.packet.PacketRepository;
+import rs09.net.packet.PacketProcessor;
+import rs09.net.packet.in.Decoders530;
+import rs09.net.packet.in.Packet;
 
 import java.nio.ByteBuffer;
 
@@ -94,21 +97,17 @@ public final class GameReadEvent extends IoReadEvent {
 			buffer.get(data);
 			IoBuffer buf = new IoBuffer(opcode, null, ByteBuffer.wrap(data));
 			//SystemLogger.log("Packet opcode " + opcode + "received.");
-			IncomingPacket packet = PacketRepository.getIncoming(opcode);
+			//IncomingPacket packet = PacketRepository.getIncoming(opcode);
 			session.setLastPing(System.currentTimeMillis());
-			if (packet == null) {
-				SystemLogger.logErr(this.getClass(), "Unhandled packet [opcode=" + opcode + ", previous=" + last + ", size=" + size + ", header=" + header + "]");
-				if (GameWorld.getSettings().isDevMode()) {
-					SystemLogger.logErr(this.getClass(), "Unhandled packet [opcode=" + opcode + ", previous=" + last + ", size=" + size + ", header=" + header + "]");
-				}
-				continue;
-			}
 			last = opcode;
-			try {
-				packet.decode(session.getPlayer(), opcode, buf);
-				//System.out.println("Handled packed " + opcode + "!");
-			} catch (Throwable t) {
-				t.printStackTrace();
+
+			Packet processed = Decoders530.process(session.getPlayer(), opcode, buf);
+			if (processed instanceof Packet.UnhandledOp) {
+				SystemLogger.logWarn(this.getClass(), "Unhandled opcode: " + opcode);
+			} else if (processed instanceof Packet.DecodingError) {
+				SystemLogger.logErr(this.getClass(), ((Packet.DecodingError) processed).getMessage());
+			} else if (!(processed instanceof Packet.NoProcess)) {
+				PacketProcessor.enqueue(processed);
 			}
 		}
 	}

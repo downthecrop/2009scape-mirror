@@ -178,6 +178,7 @@ object InteractionListeners {
         val flag = when(type){
             IntType.NPC, IntType.PLAYER -> DestinationFlag.ENTITY
             IntType.SCENERY -> DestinationFlag.OBJECT
+            IntType.GROUNDITEM -> DestinationFlag.ITEM
             else -> DestinationFlag.OBJECT
         }
 
