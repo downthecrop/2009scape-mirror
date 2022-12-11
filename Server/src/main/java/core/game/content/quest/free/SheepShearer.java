@@ -40,7 +40,6 @@ public class SheepShearer extends Quest {
 		} else {
 			player.getInventory().add(new Item(995, 60));
 		}
-		player.getPacketDispatch().sendMessage("Congratulations! Quest complete!");
 	}
 
 	@Override

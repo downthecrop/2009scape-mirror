@@ -108,7 +108,6 @@ public class RestlessGhost extends Quest {
 		player.getInterfaceManager().closeChatbox();
 		player.getPacketDispatch().sendString("You have completed The Restless Ghost Quest!", 277, 2 + 2);
 		player.getConfigManager().set(728, 31, true);
-		player.getPacketDispatch().sendMessage("Congratulations! Quest complete!");
 		player.getGameAttributes().removeAttribute("restless-ghost:urhney");
 	}
 
