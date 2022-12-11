@@ -81807,11 +81807,11 @@
     "id": "9746"
   },
   {
+    "requirements": "{0,99}",
     "shop_price": "99000",
     "examine": "The cape worn by masters of attack.",
     "durability": null,
     "name": "Attack cape",
-    "requirements": "{0,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -81831,11 +81831,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{0,99}",
     "shop_price": "99000",
     "examine": "Attack skillcape hood.",
     "durability": null,
     "name": "Attack hood",
-    "requirements": "{0,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -81867,11 +81867,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{2,99}",
     "shop_price": "99000",
     "examine": "Strength skillcape hood.",
     "durability": null,
     "name": "Strength hood",
-    "requirements": "{2,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -81892,8 +81892,8 @@
     "equipment_slot": "1"
   },
   {
-    "durability": null,
     "requirements": "{1,99}",
+    "durability": null,
     "name": "Defence cape(t)",
     "tradeable": "false",
     "archery_ticket_price": "0",
@@ -81903,11 +81903,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{1,99}",
     "shop_price": "99000",
     "examine": "Defence skillcape hood.",
     "durability": null,
     "name": "Defence hood",
-    "requirements": "{1,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -81915,11 +81915,11 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{4,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master archers.",
     "durability": null,
     "name": "Ranging cape",
-    "requirements": "{4,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -81928,9 +81928,9 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{4,99}",
     "durability": null,
     "name": "Ranging cape(t)",
-    "requirements": "{4,99}",
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "9757",
@@ -81939,11 +81939,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{4,99}",
     "shop_price": "99000",
     "examine": "Range skillcape hood.",
     "durability": null,
     "name": "Ranging hood",
-    "requirements": "{4,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -81951,11 +81951,11 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{5,99}",
     "shop_price": "99000",
     "examine": "The cape worn by the most pious of heroes.",
     "durability": null,
     "name": "Prayer cape",
-    "requirements": "{5,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -81964,9 +81964,9 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{5,99}",
     "durability": null,
     "name": "Prayer cape(t)",
-    "requirements": "{5,99}",
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "9760",
@@ -81975,11 +81975,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{5,99}",
     "shop_price": "99000",
     "examine": "Prayer skillcape hood.",
     "durability": null,
     "name": "Prayer hood",
-    "requirements": "{5,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -81987,11 +81987,11 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{6,99}",
     "shop_price": "99000",
     "examine": "The cape worn by the most powerful mages.",
     "durability": null,
     "name": "Magic cape",
-    "requirements": "{6,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82000,9 +82000,9 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{6,99}",
     "durability": null,
     "name": "Magic cape(t)",
-    "requirements": "{6,99}",
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "9763",
@@ -82011,11 +82011,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{6,99}",
     "shop_price": "99000",
     "examine": "Magic skillcape hood.",
     "durability": null,
     "name": "Magic hood",
-    "requirements": "{6,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82023,11 +82023,11 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{20,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master runecrafters.",
     "durability": null,
     "name": "Runecraft cape",
-    "requirements": "{20,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82036,9 +82036,9 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{20,99}",
     "durability": null,
     "name": "Runecraft cape(t)",
-    "requirements": "{20,99}",
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "9766",
@@ -82047,9 +82047,9 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{20,99}",
     "shop_price": "99000",
     "examine": "Runecrafting skillcape hood.",
-    "requirements": "{20,99}",
     "durability": null,
     "name": "Runecrafting hood",
     "tradeable": "false",
@@ -82059,11 +82059,11 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{3,99}",
     "shop_price": "99000",
     "examine": "The cape worn by well-constituted adventurers.",
     "durability": null,
     "name": "Hitpoints cape",
-    "requirements": "{3,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82072,9 +82072,9 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{3,99}",
     "durability": null,
     "name": "Hitpoints cape(t)",
-    "requirements": "{3,99}",
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "9769",
@@ -82083,11 +82083,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{3,99}",
     "shop_price": "99000",
     "examine": "Constitution skillcape hood.",
     "durability": null,
     "name": "Hitpoints hood",
-    "requirements": "{3,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82095,11 +82095,11 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{16,99}",
     "shop_price": "99000",
     "examine": "The cape worn by the most agile of heroes.",
     "durability": null,
     "name": "Agility cape",
-    "requirements": "{16,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82108,9 +82108,9 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{16,99}",
     "durability": null,
     "name": "Agility cape(t)",
-    "requirements": "{16,99}",
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "9772",
@@ -82119,11 +82119,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{16,99}",
     "shop_price": "99000",
     "examine": "Agility skillcape hood.",
     "durability": null,
     "name": "Agility hood",
-    "requirements": "{16,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82131,11 +82131,11 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{15,99}",
     "shop_price": "99000",
     "examine": "The cape worn by the most skilled at the art of herblore.",
     "durability": null,
     "name": "Herblore cape",
-    "requirements": "{15,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82144,9 +82144,9 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{15,99}",
     "durability": null,
     "name": "Herblore cape(t)",
-    "requirements": "{15,99}",
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "9775",
@@ -82155,11 +82155,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{15,99}",
     "shop_price": "99000",
     "examine": "Herblore skillcape hood.",
     "durability": null,
     "name": "Herblore hood",
-    "requirements": "{15,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82167,11 +82167,11 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{17,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master thieves.",
     "durability": null,
     "name": "Thieving cape",
-    "requirements": "{17,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82180,9 +82180,9 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{17,99}",
     "durability": null,
     "name": "Thieving cape(t)",
-    "requirements": "{17,99}",
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "9778",
@@ -82191,12 +82191,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{17,99}",
     "shop_price": "99000",
     "examine": "Thieving skillcape hood.",
-    "requirements": "{17,99}",
     "durability": null,
     "name": "Thieving hood",
-    "requirements": "{17,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82204,11 +82203,11 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{12,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master craftworkers.",
     "durability": null,
     "name": "Crafting cape",
-    "requirements": "{12,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82217,9 +82216,9 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{12,99}",
     "durability": null,
     "name": "Crafting cape(t)",
-    "requirements": "{12,99}",
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "9781",
@@ -82228,11 +82227,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{12,99}",
     "shop_price": "99000",
     "examine": "Crafting skillcape hood.",
     "durability": null,
     "name": "Crafting hood",
-    "requirements": "{12,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82240,11 +82239,11 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{9,99}",
     "shop_price": "99000",
     "examine": "The cape worn by the best of fletchers.",
     "durability": null,
     "name": "Fletching cape",
-    "requirements": "{9,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82253,9 +82252,9 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{9,99}",
     "durability": null,
     "name": "Fletching cape(t)",
-    "requirements": "{9,99}",
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "9784",
@@ -82264,11 +82263,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{9,99}",
     "shop_price": "99000",
     "examine": "Fletching skillcape hood.",
     "durability": null,
     "name": "Fletching hood",
-    "requirements": "{9,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82276,11 +82275,11 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{18,99}",
     "shop_price": "99000",
     "examine": "The cape worn by slayer masters.",
     "durability": null,
     "name": "Slayer cape",
-    "requirements": "{18,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82289,9 +82288,9 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{18,99}",
     "durability": null,
     "name": "Slayer cape(t)",
-    "requirements": "{18,99}",
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "9787",
@@ -82300,11 +82299,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{18,99}",
     "shop_price": "99000",
     "examine": "Slayer skillcape hood.",
     "durability": null,
     "name": "Slayer hood",
-    "requirements": "{18,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82312,11 +82311,11 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{22,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master builders.",
     "durability": null,
     "name": "Construct. cape",
-    "requirements": "{22,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82325,9 +82324,9 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{22,99}",
     "durability": null,
     "name": "Construct. cape(t)",
-    "requirements": "{22,99}",
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "9790",
@@ -82336,11 +82335,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{22,99}",
     "shop_price": "99000",
     "examine": "Construction skillcape hood.",
     "durability": null,
     "name": "Construct. hood",
-    "requirements": "{22,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82348,11 +82347,11 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{14,99}",
     "shop_price": "99000",
     "examine": "The cape worn by the most skilled miners.",
     "durability": null,
     "name": "Mining cape",
-    "requirements": "{14,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82361,9 +82360,9 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{14,99}",
     "durability": null,
     "name": "Mining cape(t)",
-    "requirements": "{14,99}",
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "9793",
@@ -82372,11 +82371,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{14,99}",
     "shop_price": "99000",
     "examine": "Mining skillcape hood.",
     "durability": null,
     "name": "Mining hood",
-    "requirements": "{14,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82384,11 +82383,11 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{13,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master smiths.",
     "durability": null,
     "name": "Smithing cape",
-    "requirements": "{13,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82397,9 +82396,9 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{13,99}",
     "durability": null,
     "name": "Smithing cape(t)",
-    "requirements": "{13,99}",
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "9796",
@@ -82408,11 +82407,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{13,99}",
     "shop_price": "99000",
     "examine": "Smithing skillcape hood.",
     "durability": null,
     "name": "Smithing hood",
-    "requirements": "{13,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82420,11 +82419,11 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{10,99}",
     "shop_price": "99000",
     "examine": "The cape worn by the best fishermen.",
     "durability": null,
     "name": "Fishing cape",
-    "requirements": "{10,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82433,9 +82432,9 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{10,99}",
     "durability": null,
     "name": "Fishing cape(t)",
-    "requirements": "{10,99}",
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "9799",
@@ -82444,11 +82443,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{10,99}",
     "shop_price": "99000",
     "examine": "Fishing skillcape hood.",
     "durability": null,
     "name": "Fishing hood",
-    "requirements": "{10,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82456,11 +82455,11 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{7,99}",
     "shop_price": "99000",
     "examine": "The cape worn by the world's best chefs.",
     "durability": null,
     "name": "Cooking cape",
-    "requirements": "{7,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82469,9 +82468,9 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{7,99}",
     "durability": null,
     "name": "Cooking cape(t)",
-    "requirements": "{7,99}",
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "9802",
@@ -82480,11 +82479,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{7,99}",
     "shop_price": "99000",
     "examine": "Cooking skillcape hood.",
     "durability": null,
     "name": "Cooking hood",
-    "requirements": "{7,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82492,11 +82491,11 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{11,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master firelighters.",
     "durability": null,
     "name": "Firemaking cape",
-    "requirements": "{11,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82505,9 +82504,9 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{11,99}",
     "durability": null,
     "name": "Firemaking cape(t)",
-    "requirements": "{11,99}",
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "9805",
@@ -82516,11 +82515,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{11,99}",
     "shop_price": "99000",
     "examine": "Firemaking skillcape hood.",
     "durability": null,
     "name": "Firemaking hood",
-    "requirements": "{11,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82528,11 +82527,11 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{8,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master woodcutters (Obtaining level 99 skill)",
     "durability": null,
     "name": "Woodcutting cape",
-    "requirements": "{8,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82541,9 +82540,9 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{8,99}",
     "durability": null,
     "name": "Woodcut. cape(t)",
-    "requirements": "{8,99}",
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "9808",
@@ -82552,11 +82551,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{8,99}",
     "shop_price": "99000",
     "examine": "Woodcutting skillcape hood.",
     "durability": null,
     "name": "Woodcutting hood",
-    "requirements": "{8,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82564,11 +82563,11 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{19,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master farmers.",
     "durability": null,
     "name": "Farming cape",
-    "requirements": "{19,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -82577,9 +82576,9 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{19,99}",
     "durability": null,
     "name": "Farming cape(t)",
-    "requirements": "{19,99}",
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "9811",
@@ -82588,11 +82587,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{19,99}",
     "shop_price": "99000",
     "examine": "Farming skillcape hood.",
     "durability": null,
     "name": "Farming hood",
-    "requirements": "{19,99}",
     "tradeable": "false",
     "weight": "0.4",
     "archery_ticket_price": "0",
@@ -83631,11 +83630,11 @@
     "id": "9947"
   },
   {
+    "requirements": "{21,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master hunters.",
     "durability": null,
     "name": "Hunter cape",
-    "requirements": "{21,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "9948",
@@ -83643,9 +83642,9 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{21,99}",
     "durability": null,
     "name": "Hunter cape(t)",
-    "requirements": "{21,99}",
     "archery_ticket_price": "0",
     "id": "9949",
     "bonuses": "0,0,0,0,0,9,9,9,9,9,9,0,4,0,0",
@@ -83653,11 +83652,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{21,99}",
     "shop_price": "99000",
     "examine": "Hunter skillcape hood.",
     "durability": null,
     "name": "Hunter hood",
-    "requirements": "{21,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "9950",
@@ -84075,7 +84074,7 @@
     "id": "10009"
   },
   {
-    "requirements": "{15,21}",
+    "requirements": "{21,15}",
     "shop_price": "24",
     "ge_buy_limit": "100",
     "turn90cw_anim": "1207",
@@ -84108,7 +84107,7 @@
     "id": "10011"
   },
   {
-    "requirements": "{15,21}",
+    "requirements": "{21,15}",
     "shop_price": "1",
     "ge_buy_limit": "100",
     "examine": "It's got little holes at the top.",
@@ -90686,11 +90685,11 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{1,99}",
     "shop_price": "99000",
     "examine": "The cape worn by masters of the art of Defence.",
     "durability": null,
     "name": "Defence cape",
-    "requirements": "{1,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "10641",
@@ -90698,11 +90697,11 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{4,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master archers.",
     "durability": null,
     "name": "Ranging cape",
-    "requirements": "{4,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "10642",
@@ -90710,11 +90709,11 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{5,99}",
     "shop_price": "99000",
     "examine": "The cape worn by the most pious of heroes.",
     "durability": null,
     "name": "Prayer cape",
-    "requirements": "{5,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "10643",
@@ -90722,11 +90721,11 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{6,99}",
     "shop_price": "99000",
     "examine": "The cape worn by the most powerful mages.",
     "durability": null,
     "name": "Magic cape",
-    "requirements": "{6,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "10644",
@@ -90734,11 +90733,11 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{20,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master runecrafters.",
     "durability": null,
     "name": "Runecraft cape",
-    "requirements": "{20,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "10645",
@@ -90746,11 +90745,11 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{21,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master hunters.",
     "durability": null,
     "name": "Hunter cape",
-    "requirements": "{21,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "10646",
@@ -90758,11 +90757,11 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{3,99}",
     "shop_price": "99000",
     "examine": "The cape worn by well-constituted adventurers.",
     "durability": null,
     "name": "Hitpoints cape",
-    "requirements": "{3,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "10647",
@@ -90770,11 +90769,11 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{16,99}",
     "shop_price": "99000",
     "examine": "The cape worn by the most agile of heroes.",
     "durability": null,
     "name": "Agility cape",
-    "requirements": "{16,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "10648",
@@ -90782,11 +90781,11 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{15,99}",
     "shop_price": "99000",
     "examine": "The cape worn by the most skilled at the art of herblore.",
     "durability": null,
     "name": "Herblore cape",
-    "requirements": "{15,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "10649",
@@ -90794,11 +90793,11 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{17,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master thieves.",
     "durability": null,
     "name": "Thieving cape",
-    "requirements": "{17,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "10650",
@@ -90806,11 +90805,11 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{12,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master craftworkers.",
     "durability": null,
     "name": "Crafting cape",
-    "requirements": "{12,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "10651",
@@ -90818,11 +90817,11 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{9,99}",
     "shop_price": "99000",
     "examine": "The cape worn by the best of fletchers.",
     "durability": null,
     "name": "Fletching cape",
-    "requirements": "{9,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "10652",
@@ -90830,11 +90829,11 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{18,99}",
     "shop_price": "99000",
     "examine": "The cape worn by slayer masters.",
     "durability": null,
     "name": "Slayer cape",
-    "requirements": "{18,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "10653",
@@ -90842,11 +90841,11 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{22,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master builders.",
     "durability": null,
     "name": "Construct. cape",
-    "requirements": "{22,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "10654",
@@ -90854,11 +90853,11 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{14,99}",
     "shop_price": "99000",
     "examine": "The cape worn by the most skilled miners.",
     "durability": null,
     "name": "Mining cape",
-    "requirements": "{14,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "10655",
@@ -90866,11 +90865,11 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{13,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master smiths.",
     "durability": null,
     "name": "Smithing cape",
-    "requirements": "{13,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "10656",
@@ -90878,11 +90877,11 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{10,99}",
     "shop_price": "99000",
     "examine": "The cape worn by the best fishermen.",
     "durability": null,
     "name": "Fishing cape",
-    "requirements": "{10,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "10657",
@@ -90890,11 +90889,11 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{7,99}",
     "shop_price": "99000",
     "examine": "The cape worn by the world's best chefs.",
     "durability": null,
     "name": "Cooking cape",
-    "requirements": "{7,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "10658",
@@ -90902,11 +90901,11 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{11,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master firelighters.",
     "durability": null,
     "name": "Firemaking cape",
-    "requirements": "{11,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "10659",
@@ -90914,11 +90913,11 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{8,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master woodcutters (Obtaining level 99 skill)",
     "durability": null,
     "name": "Woodcutting cape",
-    "requirements": "{8,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "10660",
@@ -90926,11 +90925,11 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{19,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master farmers.",
     "durability": null,
     "name": "Farming cape",
-    "requirements": "{19,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "10661",
@@ -103923,11 +103922,11 @@
     "id": "12168"
   },
   {
+    "requirements": "{23,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master summoners.",
     "durability": null,
     "name": "Summoning cape",
-    "requirements": "{23,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "12169",
@@ -103935,9 +103934,9 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{23,99}",
     "durability": null,
     "name": "Summoning cape(t)",
-    "requirements": "{23,99}",
     "archery_ticket_price": "0",
     "id": "12170",
     "bonuses": "0,0,0,0,0,9,9,9,9,9,9,0,4,0,0",
@@ -103945,11 +103944,11 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{23,99}",
     "shop_price": "99000",
     "examine": "Summoning skillcape hood.",
     "durability": null,
     "name": "Summoning hood",
-    "requirements": "{23,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "12171",
@@ -105739,11 +105738,11 @@
     "id": "12523"
   },
   {
+    "requirements": "{23,99}",
     "shop_price": "99000",
     "examine": "The cape worn by master summoners.",
     "durability": null,
     "name": "Summoning cape",
-    "requirements": "{23,99}",
     "weight": "0.4",
     "archery_ticket_price": "0",
     "id": "12524",
