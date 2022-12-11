@@ -61111,7 +61111,7 @@
     "id": "6738"
   },
   {
-    "requirements": "{0,60}-{8,61}",
+    "requirements": "{0,60}",
     "ge_buy_limit": "10",
     "examine": "A very powerful axe.",
     "has_special": "true",
