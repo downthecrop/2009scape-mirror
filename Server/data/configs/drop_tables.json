@@ -25756,39 +25756,14 @@
         "maxAmount": "1"
       }
     ],
-    "charm": [
-      {
-        "minAmount": "1",
-        "weight": "100.0",
-        "id": "12158",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "100.0",
-        "id": "12159",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "100.0",
-        "id": "12160",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "100.0",
-        "id": "12163",
-        "maxAmount": "1"
-      }
-    ],
+    "charm": [],
     "ids": "1631,1632",
     "description": "",
     "main": [
       {
         "minAmount": "1",
         "weight": "0.07",
-        "id": "4105",
+        "id": "4115",
         "maxAmount": "1"
       },
       {
