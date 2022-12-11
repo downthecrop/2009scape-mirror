@@ -87978,7 +87978,7 @@
     "id": "10375"
   },
   {
-    "requirements": "{1,70}-{4,40}",
+    "requirements": "{1,40}-{4,70}",
     "ge_buy_limit": "2",
     "examine": "Guthix blessed dragonhide vambraces.",
     "grand_exchange_price": "3181",
