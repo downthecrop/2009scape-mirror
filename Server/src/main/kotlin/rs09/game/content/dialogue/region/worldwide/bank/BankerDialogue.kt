@@ -19,7 +19,7 @@ class BankerDialogue(player: Player? = null) : DialoguePlugin(player) {
             START_DIALOGUE -> when {
                 hasIronmanRestriction(player, IronmanMode.ULTIMATE) -> {
                     npcl(
-                        FacialExpression.NEUTRAL,
+                        FacialExpression.ANNOYED,
                         "My apologies, dear ${if (player.isMale) "sir" else "madam"}, " +
                         "our services are not available for Ultimate ${if (player.isMale) "Ironmen" else "Ironwomen"}"
                     ).also { stage = END_DIALOGUE }
@@ -27,7 +27,7 @@ class BankerDialogue(player: Player? = null) : DialoguePlugin(player) {
 
                 else -> {
                     npcl(
-                        FacialExpression.NEUTRAL,
+                        FacialExpression.FRIENDLY,
                         "Good day, how may I help you?"
                     ).also {
                         if (hasAwaitingGrandExchangeCollections(player)) {
@@ -40,32 +40,32 @@ class BankerDialogue(player: Player? = null) : DialoguePlugin(player) {
             }
 
             1 -> npcl(
-                FacialExpression.NEUTRAL,
+                FacialExpression.FRIENDLY,
                 "Before we go any further, I should inform you that you " +
                 "have items ready for collection from the Grand Exchange."
             ).also { stage++ }
 
             2 -> showTopics(
-                Topic(FacialExpression.NEUTRAL, "I'd like to access my bank account, please.", 10),
+                Topic(FacialExpression.FRIENDLY, "I'd like to access my bank account, please.", 10),
                 IfTopic(
-                    FacialExpression.NEUTRAL,
+                    FacialExpression.FRIENDLY,
                     "I'd like to switch to my ${getBankAccountName(player, true)} bank account.",
                     13,
                     hasActivatedSecondaryBankAccount(player)
                 ),
                 IfTopic(
-                    FacialExpression.NEUTRAL,
+                    FacialExpression.FRIENDLY,
                     "I'd like to open a secondary bank account.",
                     20,
                     !hasActivatedSecondaryBankAccount(player)
                 ),
-                Topic(FacialExpression.NEUTRAL, "I'd like to check my PIN settings.", 11),
-                Topic(FacialExpression.NEUTRAL, "I'd like to collect items.", 12),
+                Topic(FacialExpression.FRIENDLY, "I'd like to check my PIN settings.", 11),
+                Topic(FacialExpression.FRIENDLY, "I'd like to collect items.", 12),
                 Topic(FacialExpression.ASKING, "What is this place?", 3),
             )
 
             3 -> npcl(
-                FacialExpression.NEUTRAL,
+                FacialExpression.FRIENDLY,
                 "This is a branch of the Bank of Gielinor. We have branches in many towns."
             ).also { stage++ }
 
@@ -75,7 +75,7 @@ class BankerDialogue(player: Player? = null) : DialoguePlugin(player) {
             ).also { stage++ }
 
             5 -> npcl(
-                FacialExpression.NEUTRAL,
+                FacialExpression.FRIENDLY,
                 "We will look after your items and money for you. " +
                 "Leave your valuables with us if you want to keep them safe."
             ).also { stage = END_DIALOGUE }
@@ -99,25 +99,25 @@ class BankerDialogue(player: Player? = null) : DialoguePlugin(player) {
                 toggleBankAccount(player)
 
                 npcl(
-                    FacialExpression.NEUTRAL,
+                    FacialExpression.FRIENDLY,
                     "Your active bank account has been switched. " +
                     "You can now access your ${getBankAccountName(player)} account."
-                ).also { stage = END_DIALOGUE }
+                ).also { stage = 2 }
             }
 
             20 -> npcl(
-                FacialExpression.NEUTRAL,
+                FacialExpression.FRIENDLY,
                 "Certainly. We offer secondary accounts to all our customers."
             ).also { stage++ }
 
             21 -> npcl(
-                FacialExpression.NEUTRAL,
+                FacialExpression.FRIENDLY,
                 "The secondary account comes with a standard fee of 5,000,000 coins. The fee is non-refundable " +
                 "and account activation is permanent."
             ).also { stage++ }
 
             22 -> npcl(
-                FacialExpression.NEUTRAL,
+                FacialExpression.FRIENDLY,
                 "If your inventory does not contain enough money to cover the costs, we will complement " +
                 "the amount with the money inside your primary bank account."
             ).also { stage++ }
@@ -128,22 +128,22 @@ class BankerDialogue(player: Player? = null) : DialoguePlugin(player) {
             ).also { stage++ }
 
             24 -> showTopics(
-                Topic(FacialExpression.NEUTRAL, "Yes, I am still interested.", 25),
-                Topic(FacialExpression.NEUTRAL, "Actually, I've changed my mind.", 26)
+                Topic(FacialExpression.HAPPY, "Yes, I am still interested.", 25),
+                Topic(FacialExpression.ANNOYED, "Actually, I've changed my mind.", 26)
             )
 
             25 -> {
                 when (activateSecondaryBankAccount(player)) {
                     SecondaryBankAccountActivationResult.ALREADY_ACTIVE -> {
                         npcl(
-                            FacialExpression.NEUTRAL,
+                            FacialExpression.FRIENDLY,
                             "Your bank account was already activated, there is no need to pay twice."
                         ).also { stage = END_DIALOGUE }
                     }
 
                     SecondaryBankAccountActivationResult.INTERNAL_FAILURE -> {
                         npcl(
-                            FacialExpression.NEUTRAL,
+                            FacialExpression.ANNOYED,
                             "I must apologize, the transaction was not successful. Please check your " +
                             "primary bank account and your inventory - if there's money missing, please " +
                             "screenshot your chat box and contact the game developers."
@@ -152,7 +152,7 @@ class BankerDialogue(player: Player? = null) : DialoguePlugin(player) {
 
                     SecondaryBankAccountActivationResult.NOT_ENOUGH_MONEY -> {
                         npcl(
-                            FacialExpression.NEUTRAL,
+                            FacialExpression.ANNOYED,
                             "It appears that you do not have the money necessary to cover the costs " +
                             "associated with opening a secondary bank account. I will be waiting here " +
                             "until you do."
@@ -161,7 +161,7 @@ class BankerDialogue(player: Player? = null) : DialoguePlugin(player) {
 
                     SecondaryBankAccountActivationResult.SUCCESS -> {
                         npcl(
-                            FacialExpression.NEUTRAL,
+                            FacialExpression.FRIENDLY,
                             "Your secondary bank account has been opened and can be accessed through any " +
                             "of the Bank of Gielinor's employees. Thank you for choosing our services."
                         ).also { stage = END_DIALOGUE }
@@ -170,7 +170,7 @@ class BankerDialogue(player: Player? = null) : DialoguePlugin(player) {
             }
 
             26 -> npcl(
-                FacialExpression.NEUTRAL,
+                FacialExpression.FRIENDLY,
                 "Very well. Should you decide a secondary bank account is needed, do not hesitate to " +
                 "contact any of the Bank of Gielinor's stationary employees. We will be happy to help."
             ).also { stage = END_DIALOGUE }
