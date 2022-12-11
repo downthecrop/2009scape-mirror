@@ -342,7 +342,7 @@ public final class Skills {
 	 * Gets the highest combat skill id.
 	 * @return The id of the highest combat skill.
 	 */
-	public int getHighestCombatSkill() {
+	public int getHighestCombatSkillId() {
 		int id = 0;
 		int last = 0;
 		for (int i = 0; i < 5; i++) {

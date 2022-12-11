@@ -309,5 +309,25 @@ class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
                 }
             }
         }
+
+        define("getattribute", Privilege.ADMIN, "::getattribute <lt>username<gt> <lt>attribute<gt>", "Gets the value of an attribute for a player.") {player, args ->
+            val username = args.getOrNull(1) ?: ""
+            val attribute = args.getOrNull(2) ?: ""
+            if (username.isEmpty() || attribute.isEmpty()) {
+                reject(player, "Usage: ::getattribute username attribute")
+                return@define
+            }
+            val p = Repository.getPlayerByName(username)
+            if (p == null) {
+                reject(player, "Unable to find player $username.")
+                return@define
+            }
+            val value = p.getAttribute<Any>(attribute)
+            if (value == null) {
+                reject(player, "Unable to find attribute $attribute for player $username.")
+                return@define
+            }
+            notify(player, "Attribute $attribute for player $username is $value.")
+        }
     }
 }

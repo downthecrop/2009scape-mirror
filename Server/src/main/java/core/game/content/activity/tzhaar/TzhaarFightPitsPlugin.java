@@ -392,7 +392,7 @@ public final class TzhaarFightPitsPlugin extends ActivityPlugin {
 				}
 			}
 		}
-		int skill = lastVictor.getSkills().getHighestCombatSkill();
+		int skill = lastVictor.getSkills().getHighestCombatSkillId();
 		switch (skill) {
 		case Skills.ATTACK:
 		case Skills.STRENGTH:

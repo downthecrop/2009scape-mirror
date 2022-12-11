@@ -53,5 +53,6 @@ public abstract class Script {
         bot.getAppearance().sync();
     }
 
+    // This does not get called and all implementations should be removed
     public abstract Script newInstance();
 }

@@ -30,6 +30,8 @@ import core.game.world.update.flag.player.ChatFlag
 import core.tools.RandomFunction
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.json.simple.JSONArray
+import org.json.simple.JSONObject
 import org.rs09.consts.Items
 import rs09.ServerConstants.Companion.SERVER_GE_NAME
 import rs09.game.ai.AIRepository
@@ -44,6 +46,8 @@ import rs09.game.world.repository.Repository
 import rs09.tools.stringtools.colorize
 import java.util.*
 import java.util.concurrent.CountDownLatch
+import kotlin.math.max
+import kotlin.math.min
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -732,6 +736,64 @@ class ScriptAPI(private val bot: Player) {
         }
         bot.bank.remove(item)
         bot.inventory.add(item)
+    }
+
+    /**
+     * Method to equip list of items and set stats
+     * Useful for starting a bot up
+     * @param items the list of items to equip
+     * @author dginovker
+     */
+    fun equipAndSetStats(items: List<Item>?){
+        if (items == null) return
+        for(item in items){
+            equipAndSetStats(item)
+        }
+    }
+
+    /**
+     * Method to equip a single item and set stats
+     * Useful for starting a bot up
+     * @param item the item to equip
+     * @author dginovker
+     */
+    fun equipAndSetStats(item: Item){
+        val configs = item.definition.handlers
+        val slot = configs["equipment_slot"] ?: return
+        bot.equipment.add(item, slot as Int,
+            false,false)
+        val reqs = configs["requirements"]
+        if(reqs != null)
+            for(req in configs["requirements"] as HashMap<Int,Int>)
+                bot.skills.setStaticLevel(req.key, req.value)
+        bot.skills.updateCombatLevel()
+    }
+
+    /**
+     * Method to load appearance and equipment from JSON
+     * Useful for starting a bot up
+     * @param json the JSON object to load from (dumped via ::dumpappearance)
+     * @author dginovker
+     */
+    fun loadAppearanceAndEquipment(json: JSONObject?) {
+        if (json == null) return
+        bot.equipment.clear()
+        bot.appearance.parse(json["appearance"] as JSONObject)
+        val equipment = json["equipment"] as JSONArray
+        bot.equipment.parse(equipment)
+        bot.appearance.sync()
+        for (i in 0 until bot.equipment.capacity()) {
+            val item = bot.equipment.get(i)
+            if (item != null) {
+                equipAndSetStats(item)
+            }
+        }
+        // Set all combat stats to a function of the highest combat stat(otherwise you end up with lopsided stats)
+        val highestCombatSkill = bot.skills.getStaticLevel(bot.skills.highestCombatSkillId)
+        for (i in 0 until 7) {
+            bot.skills.setStaticLevel(i, max((highestCombatSkill * 0.75).toInt(), bot.skills.getStaticLevel(i)))
+        }
+        bot.skills.updateCombatLevel()
     }
 
     fun getOverlay(): BottingOverlay{

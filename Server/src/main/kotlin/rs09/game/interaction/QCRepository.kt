@@ -49,11 +49,11 @@ object QCRepository {
             builder.rank =  player.details.rights.ordinal
             publish(builder.build())
         } else {
-            val ctx = ChatMessage(player, qcString, 0, qcString.length)
+            val ctx = ChatMessage(player!!, qcString, 0, qcString.length)
             ctx.isQuickChat = true
             Pulser.submit(object : Pulse(0, player) {
                 override fun pulse(): Boolean {
-                    player!!.updateMasks.register(ChatFlag(ctx))
+                    player.updateMasks.register(ChatFlag(ctx))
                     return true
                 }
             })

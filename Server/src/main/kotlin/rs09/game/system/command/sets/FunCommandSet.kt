@@ -1,6 +1,7 @@
 package rs09.game.system.command.sets
 
 import api.*
+import com.google.gson.JsonObject
 import core.game.content.quest.tutorials.tutorialisland.CharacterDesign
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -9,13 +10,18 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
+import org.json.simple.JSONObject
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListeners
 import rs09.game.interaction.SpadeDigListener
+import rs09.game.node.entity.player.info.login.PlayerSaver
 import rs09.game.system.command.Command
 import rs09.game.system.command.Privilege
 import rs09.game.world.GameWorld
 import rs09.tools.END_DIALOGUE
+import java.awt.HeadlessException
+import java.awt.Toolkit
+import java.awt.datatransfer.StringSelection
 import java.util.*
 
 @Initializable
@@ -123,6 +129,24 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
          */
         define("makeover", Privilege.MODERATOR){ player, _ ->
             CharacterDesign.open(player)
+        }
+
+        /**
+         * Copies your current appearance and equipment as JSON to the clipboard
+         */
+        define("dumpappearance", Privilege.MODERATOR){ player, _ ->
+            val json = JSONObject()
+            PlayerSaver(player).saveAppearance(json);
+            val equipJson = PlayerSaver(player).saveContainer(player.equipment)
+            json["equipment"] = equipJson
+            val jsonString = json.toJSONString()
+            try {
+                val clpbrd = Toolkit.getDefaultToolkit().systemClipboard
+                clpbrd.setContents(StringSelection(jsonString), null)
+                notify(player, "Appearance and equipment copied to clipboard.")
+            } catch (e: HeadlessException) {
+                reject(player, "NOTE: Paste will not be available due to remote server.")
+            }
         }
 
         /**

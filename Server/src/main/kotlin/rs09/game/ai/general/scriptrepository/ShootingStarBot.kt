@@ -7,7 +7,6 @@ import core.tools.RandomFunction
 import org.rs09.consts.Items
 import rs09.game.ai.general.GeneralBotCreator
 import rs09.game.content.global.worldevents.shootingstar.ShootingStarPlugin
-import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.IntType
 import rs09.game.interaction.InteractionListeners
 
@@ -88,7 +87,7 @@ class ShootingStarBot : Script() {
         val spawnLoc = Location.create(2230, 3339, 0)
         fun new() : ShootingStarBot {
             val script = ShootingStarBot()
-            GeneralBotCreator(spawnLoc, script)
+            GeneralBotCreator(script, spawnLoc)
             return script
         }
     }

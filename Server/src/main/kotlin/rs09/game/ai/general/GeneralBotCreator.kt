@@ -5,6 +5,7 @@ import core.game.system.task.Pulse
 import rs09.game.world.GameWorld
 import core.game.world.map.Location
 import core.tools.RandomFunction
+import rs09.Server
 import rs09.game.ai.AIPBuilder
 import rs09.game.ai.AIPlayer
 import rs09.game.ai.AIRepository
@@ -13,14 +14,14 @@ import rs09.game.ai.general.scriptrepository.Script
 
 class GeneralBotCreator {
     //org/crandor/net/packet/in/InteractionPacket.java <<< This is a very useful class for learning to code bots
-    constructor(loc: Location?, botScript: Script) {
+    constructor(botScript: Script, loc: Location?) {
         botScript.bot = AIPBuilder.create(loc)
         GameWorld.Pulser.submit(BotScriptPulse(botScript))
     }
 
     constructor(botScript: Script, bot: AIPlayer?) {
         botScript.bot = bot
-        GameWorld.Pulser.submit(BotScriptPulse(botScript).also { AIRepository.PulseRepository.add(it) })
+        GameWorld.Pulser.submit(BotScriptPulse(botScript).also { AIRepository.PulseRepository[it.botScript.bot.username.lowercase()] = it })
     }
 
     constructor(botScript: Script, player: Player, isPlayer: Boolean){
@@ -69,13 +70,14 @@ class GeneralBotCreator {
             ticks = Integer.MAX_VALUE - 20 //Sets the ticks as high as they can go (safely) and then runs pulse again
             pulse()                        //to trigger the transition pulse to be submitted.
             super.stop()
-            AIRepository.PulseRepository.remove(this)
+            if (Server.running) AIRepository.PulseRepository.remove(this.botScript.bot.username.lowercase())
         }
     }
 
     inner class TransitionPulse(val script: Script) : Pulse(RandomFunction.random(60,200)){
         override fun pulse(): Boolean {
-            GameWorld.Pulser.submit(BotScriptPulse(script.newInstance()).also { AIRepository.PulseRepository.add(it) })
+            // This does not get called and should be removed
+            GameWorld.Pulser.submit(BotScriptPulse(script.newInstance()).also { AIRepository.PulseRepository[it.botScript.bot.username.lowercase()] = it })
             return true
         }
     }

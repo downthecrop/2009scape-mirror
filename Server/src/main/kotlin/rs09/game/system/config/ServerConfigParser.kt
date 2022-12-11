@@ -75,6 +75,7 @@ object ServerConfigParser {
             increased_door_time = data.getBoolean("world.increased_door_time"),
             enabled_botting = data.getBoolean("world.enable_botting"),
             max_adv_bots = data.getLong("world.max_adv_bots").toInt(),
+            enable_doubling_money_scammers = data.getBoolean("world.enable_doubling_money_scammers", false),
             wild_pvp_enabled = data.getBoolean("world.wild_pvp_enabled"),
             jad_practice_enabled = data.getBoolean("world.jad_practice_enabled"),
             message_model = data.getString("world.motw_identifier").toInt(),

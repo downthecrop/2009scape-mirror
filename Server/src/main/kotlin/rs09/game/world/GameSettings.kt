@@ -79,6 +79,7 @@ class GameSettings
         var increased_door_time: Boolean,
         var enabled_botting : Boolean,
         var max_adv_bots: Int,
+        var enable_doubling_money_scammers: Boolean,
         var wild_pvp_enabled: Boolean,
         var jad_practice_enabled: Boolean,
 
@@ -132,6 +133,7 @@ class GameSettings
             val increased_door_time = if(data.containsKey("increased_door_time")) data["increased_door_time"] as Boolean else false
             val enable_botting = if(data.containsKey("botting_enabled")) data["botting_enabled"] as Boolean else false
             val max_adv_bots = if(data.containsKey("max_adv_bots")) data["max_adv_bots"].toString().toInt() else 100
+            val enable_doubling_money_scammers = if(data.containsKey("enable_doubling_money_scammers")) data["enable_doubling_money_scammers"] as Boolean else false
             val wild_pvp_enabled = if(data.containsKey("wild_pvp_enabled")) data["wild_pvp_enabled"] as Boolean else true
             val jad_practice_enabled = if(data.containsKey("jad_practice_enabled")) data["jad_practice_enabled"] as Boolean else true
             val allow_token_purchase = data["allow_token_purchase"] as Boolean
@@ -160,6 +162,7 @@ class GameSettings
                     increased_door_time,
                     enable_botting,
                     max_adv_bots,
+                    enable_doubling_money_scammers,
                     wild_pvp_enabled,
                     jad_practice_enabled,
                     message_of_the_week_identifier,

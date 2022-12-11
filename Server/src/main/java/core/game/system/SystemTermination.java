@@ -36,10 +36,10 @@ public final class SystemTermination {
 	public void terminate() {
 		SystemLogger.logInfo(this.getClass(), "Initializing termination sequence - do not shutdown!");
 		try {
-			SystemLogger.logInfo(this.getClass(), "Stopping all bots...");
-			AIRepository.clearAllBots();
 			SystemLogger.logInfo(this.getClass(), "Shutting down networking...");
 			Server.setRunning(false);
+			SystemLogger.logInfo(this.getClass(), "Stopping all bots...");
+			AIRepository.clearAllBots();
 			Server.getReactor().terminate();
 			SystemLogger.logInfo(this.getClass(), "Stopping all pulses...");
 			GameWorld.getMajorUpdateWorker().stop();

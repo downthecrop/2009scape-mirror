@@ -35,6 +35,7 @@ class ImmerseWorld : StartupListener {
                     immerseFishingGuild()
                     immerseAdventurer()
                     // immerseSlayer()
+                    immerseGE()
                 }
             }
         }
@@ -64,7 +65,7 @@ class ImmerseWorld : StartupListener {
         fun immerseFishingGuild() {
             val fishingGuild = Location.create(2604, 3421, 0)
             for (i in (0..4)) {
-                GeneralBotCreator(fishingGuild, SharkCatcher())
+                GeneralBotCreator(SharkCatcher(), fishingGuild)
             }
         }
 
@@ -85,7 +86,7 @@ class ImmerseWorld : StartupListener {
                 GlassBlowingBankstander(),
                 skillingBotAssembler.produce(SkillingBotAssembler.Wealth.AVERAGE, Location.create(2807, 3441, 0))
             )
-            GeneralBotCreator(Location.create(2805, 3435, 0), LobsterCatcher())
+            GeneralBotCreator(LobsterCatcher(), Location.create(2805, 3435, 0))
         }
 
         fun immerseLumbridgeDraynor() {
@@ -219,6 +220,21 @@ class ImmerseWorld : StartupListener {
                     Location.create(2673, 3635, 0)
                 )
             )
+        }
+
+        private fun immerseGE() {
+            spawnDoubleMoneyBot(false)
+        }
+
+        fun spawnDoubleMoneyBot(delay: Boolean) {
+            if (GameWorld.settings?.enable_doubling_money_scammers != true) return
+            val random: Long = (10_000..7_200_000).random().toLong()
+            Timer().schedule(if (delay) random else 0) {
+                GeneralBotCreator (
+                    DoublingMoney(),
+                    skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR, DoublingMoney.startingLocs.random())
+                )
+            }
         }
     }
 }

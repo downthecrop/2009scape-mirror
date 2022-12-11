@@ -15,7 +15,7 @@ class AIRepository {
         val GEOffers = HashMap<Player, GrandExchangeOffer>()
 
         @JvmStatic
-        val PulseRepository = ArrayList<GeneralBotCreator.BotScriptPulse>()
+        val PulseRepository = HashMap<String, GeneralBotCreator.BotScriptPulse>() // Lowercase username, pulse
 
         @JvmStatic
         fun addItem(item: GroundItem){
@@ -44,7 +44,11 @@ class AIRepository {
         }
 
         @JvmStatic fun clearAllBots() {
-            PulseRepository.toTypedArray().forEach { it.stop(); it.botScript.bot.clear(); AIPlayer.deregister((it.botScript.bot as AIPlayer).uid) }
+            PulseRepository.forEach { (_, it) ->
+                it.stop();
+                it.botScript.bot.clear();
+                AIPlayer.deregister((it.botScript.bot as AIPlayer).uid)
+            }
         }
     }
 }

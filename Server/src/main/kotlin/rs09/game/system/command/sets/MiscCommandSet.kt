@@ -200,8 +200,9 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         define("botinfo", Privilege.STANDARD, "::botinfo <lt>botname<gt>", "Prints debug information about a bot"){ player, args ->
             val scriptInstances = AIRepository.PulseRepository
 
-            // Find the bot with the given name (non-case sensitive)
-            val bot = scriptInstances.find { it.botScript.bot.username.equals(args[1], true) }
+            // Find the bot with the given name (non-case sensitive, concat args by space)
+            val botName = args.slice(1 until args.size).joinToString(" ").lowercase()
+            val bot = scriptInstances[botName]
             if (bot == null) {
                 reject(player, "No bot with that name found.")
                 return@define
