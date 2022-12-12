@@ -96056,6 +96056,7 @@
     "id": "11258"
   },
   {
+    "requirements": "{21,17}",
     "shop_price": "3",
     "turn90cw_anim": "6610",
     "examine": "For catching butterflies.",
@@ -96065,7 +96066,7 @@
     "weight": "0.2",
     "turn90ccw_anim": "6609",
     "attack_speed": "4",
-    "two_handed": "true",
+    "two_handed": "",
     "weapon_interface": "14",
     "turn180_anim": "6608",
     "render_anim": "1426",
