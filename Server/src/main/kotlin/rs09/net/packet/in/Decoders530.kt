@@ -407,6 +407,7 @@ enum class Decoders530(val opcode: Int) {
             val child = buffer.leShort
             val iface = buffer.leShort
             val itemSlot = buffer.leShortA
+            val unused = buffer.leInt //unused???
             val itemId = buffer.shortA
             buffer.shortA //more ignored data....
             return Packet.ComponentItemAction(player, iface, child, itemId, itemSlot)
