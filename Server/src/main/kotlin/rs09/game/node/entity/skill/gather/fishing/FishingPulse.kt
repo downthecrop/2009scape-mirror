@@ -173,16 +173,16 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
     }
 
     private fun isBareHanded(p: Player): Boolean {
-        if (option == FishingOption.HARPOON) {
+        if (option == FishingOption.HARPOON || option == FishingOption.N_HARPOON) {
             if (checkFish(p) > 0 && !(player.inventory.containsItem(
                     option.tool
-                ) || player.equipment.containsItem(option.tool))
+                ) || player.equipment.containsItem(option.tool) || hasBarbTail())
             ) {
                 return true
             }
             if (checkFish(p) > 2 && !(player.inventory.containsItem(
                     option.tool
-                ) || player.equipment.containsItem(option.tool))
+                ) || player.equipment.containsItem(option.tool) || hasBarbTail())
             ) {
                 return true
             }
@@ -228,7 +228,7 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
      * @return `True` if so.
      */
     private fun hasBarbTail(): Boolean {
-        if (option == FishingOption.HARPOON) {
+        if (option == FishingOption.HARPOON || option == FishingOption.N_HARPOON) {
             if (player.inventory.containsItem(FishingOption.BARB_HARPOON.tool) || player.equipment.containsItem(
                     FishingOption.BARB_HARPOON.tool
                 )
