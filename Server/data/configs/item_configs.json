@@ -75794,6 +75794,7 @@
     "weapon_interface": "1",
     "render_anim": "2553",
     "equipment_slot": "3",
+    "attack_anims": "401,401,401,401",
     "name": "Void knight mace",
     "tradeable": "false",
     "archery_ticket_price": "0",
