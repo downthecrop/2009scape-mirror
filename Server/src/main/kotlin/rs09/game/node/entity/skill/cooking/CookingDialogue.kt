@@ -61,7 +61,13 @@ class CookingDialogue(vararg val args: Any) : DialogueFile(){
                 end()
                 val amount = getAmount(buttonID)
                 when (amount) {
-                    -1 -> sendInputDialogue(player!!, true, "Enter the amount:") { value -> cook(player!!, `object`, initial, product, value as Int) }
+                    -1 -> sendInputDialogue(player!!, true, "Enter the amount:") { value ->
+                        if (value is String) {
+                            cook(player!!, `object`, initial, product, value.toInt())
+                        } else {
+                            cook(player!!, `object`, initial, product, value as Int)
+                        }
+                    }
 
                     else -> {
                         end()

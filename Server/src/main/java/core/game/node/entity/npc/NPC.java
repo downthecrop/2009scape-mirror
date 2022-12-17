@@ -311,6 +311,9 @@ public class NPC extends Entity {
 			}
 		}
 
+		if (Shops.getShopsByNpc().get(id) == null) {
+			return false;
+		}
 		Shops.getShopsByNpc().get(id).openFor(player);
 		
 		//Fix for issue #11 for shops keeping dialogue open.

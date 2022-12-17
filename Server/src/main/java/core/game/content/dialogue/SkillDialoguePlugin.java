@@ -3,6 +3,8 @@ package core.game.content.dialogue;
 import static api.ContentAPIKt.*;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.RunScript;
+import core.game.node.entity.skill.crafting.spinning.SpinningPulse;
+import core.game.node.item.Item;
 import core.plugin.Initializable;
 import kotlin.Unit;
 import rs09.game.content.dialogue.SkillDialogueHandler;
@@ -59,7 +61,11 @@ public class SkillDialoguePlugin extends DialoguePlugin {
 			handler.create(amount, index);
 		} else {
 			sendInputDialogue(player, true, "Enter the amount:", (value) -> {
-				handler.create((int) value, index);
+				if (value instanceof String) {
+					handler.create(Integer.parseInt((String) value), index);
+				} else {
+					handler.create((int) value, index);
+				}
 				return Unit.INSTANCE;
 			});
 			return true;

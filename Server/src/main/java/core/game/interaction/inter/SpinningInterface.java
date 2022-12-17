@@ -46,7 +46,11 @@ public class SpinningInterface extends ComponentPlugin {
 			break;
 		case 199:
 			sendInputDialogue(p, true, "Enter the amount:", (value) -> {
-				submitIndividualPulse(p, new SpinningPulse(p, new Item(spin.getNeed(), 1), (int) value, spin));
+				if (value instanceof String) {
+					submitIndividualPulse(p, new SpinningPulse(p, new Item(spin.getNeed(), 1), Integer.parseInt((String) value), spin));
+				} else {
+					submitIndividualPulse(p, new SpinningPulse(p, new Item(spin.getNeed(), 1), (int) value, spin));
+				}
 				return Unit.INSTANCE;
 			});
 			break;

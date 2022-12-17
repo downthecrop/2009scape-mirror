@@ -180,7 +180,10 @@ public class GrandExchangeInterface extends ComponentPlugin {
 				PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, player.getAttribute("container-key", 93), player.getInventory(), false));
 				break;
 			case 155:
-				player.getPacketDispatch().sendMessage((String) CS2Mapping.forId(1089).getMap().get(set.getItemId()));
+				CS2Mapping mapping = CS2Mapping.forId(1089);
+				if (mapping != null && set != null) {
+					player.getPacketDispatch().sendMessage((String) mapping.getMap().get(set.getItemId()));
+				}
 				break;
 		}
 	}

@@ -4,6 +4,7 @@ import api.TickListener
 import core.net.packet.OutgoingPacket
 import core.net.packet.out.*
 import rs09.game.system.SystemLogger
+import java.lang.IndexOutOfBoundsException
 import java.util.*
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.NoSuchElementException
@@ -59,6 +60,8 @@ class PacketWriteQueue : TickListener {
                 try {
                     for (pkt: QueuedPacket<*>? in packetsToWrite) SystemLogger.logWarn(this::class.java, "${pkt?.out?.javaClass?.simpleName ?: "NULL"} <- ${pkt?.context ?: "NULL"}")
                 } catch (ignored: NullPointerException) {
+                    //do nothing, we don't care, this can happen when everything is working as intended.
+                } catch (ignored: IndexOutOfBoundsException) {
                     //do nothing, we don't care, this can happen when everything is working as intended.
                 } catch (e: Exception) {
                     e.printStackTrace()

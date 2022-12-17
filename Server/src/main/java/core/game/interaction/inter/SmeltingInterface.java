@@ -33,7 +33,11 @@ public class SmeltingInterface extends ComponentPlugin {
 		if (barType.getAmount() == -1) {
 			player.getInterfaceManager().closeChatbox();
 			sendInputDialogue(player, true, "Enter the amount:", (value) -> {
-				submitIndividualPulse(player, new SmeltingPulse(player, null, barType.getBar(), (int) value));
+				if (value instanceof String) {
+					submitIndividualPulse(player, new SmeltingPulse(player, null, barType.getBar(), Integer.parseInt((String) value)));
+				} else {
+					submitIndividualPulse(player, new SmeltingPulse(player, null, barType.getBar(), (int) value));
+				}
 				return Unit.INSTANCE;
 			});
 		} else {

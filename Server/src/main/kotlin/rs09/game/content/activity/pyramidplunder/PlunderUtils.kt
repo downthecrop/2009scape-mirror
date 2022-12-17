@@ -296,6 +296,11 @@ object PlunderUtils {
     fun rollUrnSuccess(player: Player, charmed: Boolean = false): Boolean
     {
         val level = getDynLevel(player, Skills.THIEVING)
+
+        if (getRoom(player) == null) {
+            return false
+        }
+
         val room = getRoom(player)!!.room
         return RandomFunction.random(level) > (room * if(charmed) 2 else 4)
     }

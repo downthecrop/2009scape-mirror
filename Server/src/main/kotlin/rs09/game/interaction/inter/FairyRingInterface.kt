@@ -141,7 +141,11 @@ class FairyRingInterface : InterfaceListener{
         closeInterface(player)
 
         ring.let {
-            player.dispatch(FairyRingDialEvent(it!!))
+            if (it == null) {
+                return@let
+            }
+
+            player.dispatch(FairyRingDialEvent(it))
             teleport(player, tile!!, TeleportManager.TeleportType.FAIRY_RING)
         }
     }

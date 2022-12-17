@@ -28,17 +28,14 @@ abstract class DialogueFile {
     }
 
     open fun npc(vararg messages: String?): Component? {
-        return if (npc == null) {
-            interpreter!!.sendDialogues(
-                npc!!.id,
+        if (npc != null) {
+            return interpreter!!.sendDialogues(
+                npc,
                 if (npc!!.id > 8591) FacialExpression.OLD_NORMAL else FacialExpression.FRIENDLY,
                 *messages
             )
-        } else interpreter!!.sendDialogues(
-            npc,
-            if (npc!!.id > 8591) FacialExpression.OLD_NORMAL else FacialExpression.FRIENDLY,
-            *messages
-        )
+        }
+        return null
     }
 
     open fun npc(id: Int, vararg messages: String?): Component? {
