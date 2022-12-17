@@ -86,6 +86,9 @@ class ServerConstants {
 		@JvmField
 		var RSDT_DATA_PATH: String? = null
 
+		@JvmField
+		var ASDT_DATA_PATH: String? = null
+
 		//the max number of players.
 		@JvmField
 		var MAX_PLAYERS = 2000

@@ -1,0 +1,9 @@
+<ASDT>
+    <item id="5318" minAmt="1" maxAmt="4" weight="64"/>
+    <item id="5319" minAmt="1" maxAmt="3" weight="32"/>
+    <item id="5324" minAmt="1" maxAmt="3" weight="16"/>
+    <item id="5322" minAmt="1" maxAmt="2" weight="8"/>
+    <item id="5320" minAmt="1" maxAmt="2" weight="4"/>
+    <item id="5323" minAmt="1" maxAmt="1" weight="2"/>
+    <item id="5321" minAmt="1" maxAmt="1" weight="2"/>
+</ASDT>

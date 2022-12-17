@@ -130695,5 +130695,10 @@
     "examine": "You should not have this.",
     "name": "RSDT Slot",
     "id": "14428"
+  },
+  {
+    "examine": "You should not have this.",
+    "name": "ASDT Slot",
+    "id": "14430"
   }
 ]

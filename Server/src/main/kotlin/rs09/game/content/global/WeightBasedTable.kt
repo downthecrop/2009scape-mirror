@@ -9,6 +9,7 @@ import core.game.node.entity.npc.drop.UncommonSeedDropTable
 import core.game.node.entity.npc.drop.HerbDropTable
 import core.game.node.entity.npc.drop.GemDropTable
 import core.game.node.entity.npc.drop.RareSeedDropTable
+import core.game.node.entity.npc.drop.AllotmentSeedDropTable
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.tools.RandomFunction
@@ -61,6 +62,7 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
                 SLOT_HDT -> HerbDropTable.retrieve()
                 SLOT_GDT -> GemDropTable.retrieve()
                 SLOT_RSDT -> RareSeedDropTable.retrieve()
+                SLOT_ASDT -> AllotmentSeedDropTable.retrieve()
                 else -> e.getItem()
             }
             safeItems.add(safeItem)
@@ -118,6 +120,11 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
         return this
     }
 
+    fun insertASDTRoll(weight: Double): WeightBasedTable{
+        this.add(WeightedItem(SLOT_ASDT,1,1,weight,false))
+        return this
+    }
+
     companion object {
         @JvmStatic
         fun create(vararg items: WeightedItem): WeightBasedTable{
@@ -138,6 +145,7 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
         val SLOT_HDT = Items.SACRED_CLAY_POUCH_CLASS_2_14424
         val SLOT_GDT = Items.SACRED_CLAY_POUCH_CLASS_3_14426
         val SLOT_RSDT = Items.SACRED_CLAY_POUCH_CLASS_4_14428
+        val SLOT_ASDT = Items.SACRED_CLAY_POUCH_CLASS_5_14430
     }
 
     override fun toString(): String {

@@ -104,6 +104,9 @@ public final class NPCDropTables {
 		if (item.getId() == RareSeedDropTable.SLOT_ITEM_ID){
 			item = RareSeedDropTable.retrieve();
 		}
+		if (item.getId() == AllotmentSeedDropTable.SLOT_ITEM_ID){
+			item = AllotmentSeedDropTable.retrieve();
+		}
 		if (item.getId() == 995 && player.getBank().hasSpaceFor(item) && ( player.getGlobalData().isEnableCoinMachine() )) {
 			item = new Item(995, (int) (item.getAmount() + (item.getAmount() * 0.25)));
 			player.getBank().add(item);
