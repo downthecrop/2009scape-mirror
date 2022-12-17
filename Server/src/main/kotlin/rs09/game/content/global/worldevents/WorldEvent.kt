@@ -2,6 +2,8 @@ package rs09.game.content.global.worldevents
 
 import rs09.game.system.SystemLogger
 import core.plugin.Plugin
+import org.json.simple.JSONObject
+import rs09.ServerStore
 import rs09.plugin.ClassScanner
 import java.util.*
 
@@ -76,5 +78,9 @@ object WorldEvents {
 
     fun get(name: String): WorldEvent?{
         return events.get(name.toLowerCase())
+    }
+
+    fun getArchive() : JSONObject {
+        return ServerStore.getArchive("world-event-status")
     }
 }

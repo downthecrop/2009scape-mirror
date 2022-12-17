@@ -42,3 +42,4 @@ data class VarbitUpdateEvent(val offset: Int, val value: Int) : Event
 data class DynamicSkillLevelChangeEvent(val skillId: Int, val oldValue: Int, val newValue: Int): Event
 data class SummoningPointsRechargeEvent(val obelisk: Node) : Event
 data class PrayerPointsRechargeEvent(val altar: Node) : Event
+data class XPGainEvent(val skillId: Int, val amount: Double) : Event

@@ -144,7 +144,7 @@ object PacketProcessor {
             }
             is Packet.QuickChat -> QCRepository.sendQC(pkt.player, pkt.multiplier, pkt.offset, pkt.type, pkt.indexA, pkt.indexB, pkt.forClan)
             is Packet.InputPromptResponse -> {
-                val script: ((Any) -> Boolean) = pkt.player.getAttribute("runscript", null) ?: return
+                val script: ((Any) -> Boolean) = pkt.player.getAttribute<((Any) -> Boolean)?>("runscript", null) ?: return
                 if (pkt.player.locks.isInteractionLocked)
                     return
                 try {

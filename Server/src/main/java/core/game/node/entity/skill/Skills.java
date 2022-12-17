@@ -1,6 +1,7 @@
 package core.game.node.entity.skill;
 
 import api.events.DynamicSkillLevelChangeEvent;
+import api.events.XPGainEvent;
 import core.game.interaction.item.brawling_gloves.BrawlingGloves;
 import core.game.interaction.item.brawling_gloves.BrawlingGlovesManager;
 import core.game.node.entity.Entity;
@@ -275,6 +276,7 @@ public final class Skills {
 		}
 		if (entity instanceof Player) {
 			PacketRepository.send(SkillLevel.class, new SkillContext((Player) entity, slot));
+			entity.dispatch(new XPGainEvent(slot, experienceAdd));
 		}
 	}
 

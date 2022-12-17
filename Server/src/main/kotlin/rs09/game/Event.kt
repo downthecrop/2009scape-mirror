@@ -32,4 +32,5 @@ object Event {
     @JvmStatic val DynamicSkillLevelChanged = DynamicSkillLevelChangeEvent::class.java
     @JvmStatic val SummoningPointsRecharged = SummoningPointsRechargeEvent::class.java
     @JvmStatic val PrayerPointsRecharged = PrayerPointsRechargeEvent::class.java
+    @JvmStatic val XpGained = XPGainEvent::class.java
 }
