@@ -725,6 +725,26 @@ enum class Decoders530(val opcode: Int) {
     PLAYER_PREFS_UPDATE(98) {
         override fun decode(player: Player, buffer: IoBuffer): Packet {
             val prefs = buffer.int
+            val particleSetting =       prefs shr 23
+            val ambienceEnabled =       (prefs shr 22) and 1 == 1
+            val musicEnabled =          (prefs shr 21) and 1 == 1
+            val soundEnabled =          (prefs shr 20) and 1 == 1
+            val stereo =                (prefs shr 19) and 1 == 1
+            val fog =                   (prefs shr 16) and 1 == 1
+            val hdWater =               (prefs shr 15) and 1 == 1
+            val hdLighting =            (prefs shr 13) and 1 == 1
+            val shadowType =            (prefs shr 11) and 0x3
+            val charShadows =           (prefs shr 10) and 1 == 1
+            val manyGroundTextures =    (prefs shr 9) and 1 == 1
+            val flickeringEffects =     (prefs shr 8) and 1 == 1
+            val manyIdleAnims =         (prefs shr 7) and 1 == 1
+            val hdTextures =            (prefs shr 6) and 1 == 1
+            val showGroundDeco =        (prefs shr 5) and 1 == 1
+            val selectiveRoofs =        (prefs shr 4) and 1 == 1
+            val allLayersVisible =      (prefs shr 3) and 1 == 1
+            val brightness =            prefs and 0x7;
+            //added in the above so that we don't have to figure it out later, not doing more
+            //because we currently have genuinely no use for this information.
             return Packet.PlayerPrefsUpdate(player, prefs)
         }
     }
