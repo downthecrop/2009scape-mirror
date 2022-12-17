@@ -24,7 +24,7 @@ object RulesAndInfo {
     )
     val SEPARATOR = "<str>                                             </str>"
     val INFO = arrayOf(
-        "<col=6bcdfa>To join our Discord, type ::discord</col>"
+        "<col=6bcdfa>Join the forums! forum.2009scape.org </col>"
     )
 
     @JvmStatic

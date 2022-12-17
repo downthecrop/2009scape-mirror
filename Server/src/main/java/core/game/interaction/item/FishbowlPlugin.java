@@ -250,7 +250,7 @@ public class FishbowlPlugin extends OptionHandler {
 
                 Item fish = RandomFunction.rollWeightedChanceTable(fishChance);
                 player.getInventory().add(fish);
-                String msg = "[ REPORT BUG ON DISCORD ]";
+                String msg = "[ REPORT BUG ON GITLAB ]";
                 switch(fish.getId()) {
                     case FISHBOWL_BLUE:
                         msg = "Bluefish";
