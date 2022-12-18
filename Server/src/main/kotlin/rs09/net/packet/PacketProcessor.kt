@@ -284,9 +284,6 @@ object PacketProcessor {
             }
             is Packet.TrackingMouseClick -> {
                 //TODO see above todo
-                if (!pkt.player.monitor.isClientFocus) {
-                    Discord.postPlayerAlert(pkt.player.username, "Mouseclick without window focus!")
-                }
             }
         }
     }
