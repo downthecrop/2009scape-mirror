@@ -75762,18 +75762,20 @@
   },
   {
     "remove_sleeves": "true",
+    "requirements": "{0,42}-{1,42}-{2,42}-{3,42}-{4,42}-{5,22}-{6,42}",
     "shop_price": "250",
     "examine": "Torso armour from the order of the Void Knights.",
     "durability": null,
     "name": "Void knight top",
     "tradeable": "false",
-    "weight": "6.8",
+    "weight": "6.5",
     "archery_ticket_price": "0",
     "id": "8839",
     "bonuses": "0,0,0,0,0,45,45,45,45,45,45,0,0,0,0",
     "equipment_slot": "4"
   },
   {
+    "requirements": "{0,42}-{1,42}-{2,42}-{3,42}-{4,42}-{5,22}-{6,42}",
     "shop_price": "250",
     "examine": "Leg armour of the order of the Void Knights.",
     "durability": null,
@@ -75786,6 +75788,7 @@
     "equipment_slot": "7"
   },
   {
+    "requirements": "{0,42}-{1,42}-{2,42}-{3,42}-{4,42}-{5,22}-{6,42}",
     "shop_price": "250",
     "examine": "A mace used by the order of the Void Knights.",
     "durability": null,
@@ -75802,6 +75805,7 @@
     "bonuses": "22,0,41,8,0,2,2,2,2,2,0,38,6,0,0"
   },
   {
+    "requirements": "{0,42}-{1,42}-{2,42}-{3,42}-{4,42}-{5,22}-{6,42}",
     "shop_price": "150",
     "examine": "Gloves as used by the order of the Void Knights.",
     "durability": null,
@@ -90322,12 +90326,13 @@
   },
   {
     "remove_sleeves": "true",
+    "requirements": "{0,42}-{1,42}-{2,42}-{3,42}-{4,42}-{5,22}-{6,42}",
     "shop_price": "250",
     "examine": "Torso armour from the order of the Void Knights.",
     "durability": null,
     "name": "Void knight top",
     "tradeable": "false",
-    "weight": "6.8",
+    "weight": "6.5",
     "archery_ticket_price": "0",
     "id": "10611",
     "bonuses": "0,0,0,0,0,40,40,40,40,40,0,0,0,0,0",
@@ -98728,6 +98733,7 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{0,42}-{1,42}-{2,42}-{3,42}-{4,42}-{5,22}-{6,42}",
     "shop_price": "200",
     "examine": "A mage helm from the order of the Void Knights.",
     "durability": null,
@@ -98741,6 +98747,7 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{0,42}-{1,42}-{2,42}-{3,42}-{4,42}-{5,22}-{6,42}",
     "shop_price": "200",
     "examine": "A ranger helm from the order of the Void Knights",
     "durability": null,
@@ -98754,12 +98761,13 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{0,42}-{1,42}-{2,42}-{3,42}-{4,42}-{5,22}-{6,42}",
     "shop_price": "200",
     "examine": "A melee helm from the order of the Void Knights.",
     "durability": null,
     "name": "Void melee helm",
     "tradeable": "false",
-    "weight": "0.4",
+    "weight": "1",
     "archery_ticket_price": "0",
     "id": "11665",
     "bonuses": "0,0,0,0,0,6,6,6,6,6,6,0,0,0,0",
@@ -98839,6 +98847,7 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{0,42}-{1,42}-{2,42}-{3,42}-{4,42}-{5,22}-{6,42}",
     "shop_price": "200",
     "examine": "A mage helm from the order of the Void Knights.",
     "durability": null,
@@ -98852,6 +98861,7 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{0,42}-{1,42}-{2,42}-{3,42}-{4,42}-{5,22}-{6,42}",
     "shop_price": "200",
     "examine": "A ranger helm from the order of the Void Knights",
     "durability": null,
@@ -98865,12 +98875,13 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{0,42}-{1,42}-{2,42}-{3,42}-{4,42}-{5,22}-{6,42}",
     "shop_price": "200",
     "examine": "A melee helm from the order of the Void Knights.",
     "durability": null,
     "name": "Void melee helm",
     "tradeable": "false",
-    "weight": "0.4",
+    "weight": "1",
     "archery_ticket_price": "0",
     "id": "11676",
     "bonuses": "0,0,0,0,0,6,6,6,6,6,0,0,0,0,0",
