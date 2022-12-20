@@ -340,4 +340,26 @@ class ShopTests {
         Assertions.assertEquals(remainingGP, testPlayer.inventory.getAmount(995), "Coins were deducted for buying 0-stock item!")
         Assertions.assertNull(testPlayer.inventory.get(1), "Player received purchased item despite being 0-stock!")
     }
+
+    @Test fun buyingItemWithOtherwiseFullInventoryStillBuysTheItemAndTakesTheCoins() {
+        testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
+        testPlayer.setAttribute("shop-main", false)
+        testPlayer.inventory.clear()
+        testPlayer.inventory.add(Item(Items.ABYSSAL_WHIP_4151, 27)) //fill 27 slots
+        general.playerStock.add(Item(992, 1))
+        var slot = general.getStockSlot(992).second
+        var price = general.getBuyPrice(testPlayer, slot)
+
+        testPlayer.inventory.add(price)
+
+        //Buy out existing stock
+        var status: Shop.TransactionStatus = Shop.TransactionStatus.Success()
+
+        Assertions.assertDoesNotThrow {
+            status = general.buy(testPlayer, slot, 1)
+        }
+        Assertions.assertEquals(true, status is Shop.TransactionStatus.Success)
+        Assertions.assertEquals(0, testPlayer.inventory.getAmount(995))
+        Assertions.assertEquals(1, testPlayer.inventory.getAmount(992))
+    }
 }

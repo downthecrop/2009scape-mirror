@@ -290,6 +290,9 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         {
             if(removeItem(player, cost))
             {
+                if (item.amount == 0 && amountInInventory(player, cost.id) == 0) {
+                    item.amount = 1
+                }
                 if(!hasSpaceFor(player, item)) {
                     addItem(player, cost.id, cost.amount)
                     sendMessage(player, "You don't have enough inventory space to buy that many.")
