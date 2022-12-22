@@ -8,6 +8,7 @@ import core.game.world.map.Location;
 import core.game.world.map.Point;
 import core.game.world.map.RegionManager;
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
+import rs09.game.world.GameWorld;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -348,11 +349,7 @@ public final class WalkingQueue {
 	 * @return {@code True} if so.
 	 */
 	public boolean hasPath() {
-		if (!walkingQueue.isEmpty()) {
-			Point p = walkingQueue.peek();
-			return p.getDirection() != null;
-		}
-		return false;
+		return !walkingQueue.isEmpty();
 	}
 
 	/**

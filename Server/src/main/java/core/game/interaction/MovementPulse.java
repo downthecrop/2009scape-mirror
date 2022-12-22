@@ -18,6 +18,7 @@ import core.net.packet.out.ClearMinimapFlag;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import rs09.game.system.SystemLogger;
+import rs09.game.world.GameWorld;
 
 import java.util.Deque;
 
@@ -239,9 +240,12 @@ public abstract class MovementPulse extends Pulse {
             return;
         }
         boolean inside = isInsideEntity(mover.getLocation());
+/* This appears to have been a premature optimization that lead to a bug that would cause both entities
+   to completely stop moving mid-combat/mid-follow-dance/etc
         if (last != null && last.equals(destination.getLocation()) && !inside) {
             return;
         }
+*/
 
         Location loc = null;
 
@@ -293,7 +297,22 @@ public abstract class MovementPulse extends Pulse {
         Path path = Pathfinder.find(mover, loc != null ? loc : destination, true, pathfinder);
         near = !path.isSuccessful() || path.isMoveNear();
         interactLocation = mover.getLocation();
-        if (!path.getPoints().isEmpty()) {
+        boolean canMove = true;
+        if (destination instanceof NPC || destination instanceof Player) {
+            Entity e = (Entity) destination;
+            Location l = e.getLocation();
+            Deque<Point> npcPath = e.getWalkingQueue().getQueue();
+            if (e.getWalkingQueue().hasPath() && e.getProperties().getCombatPulse().isRunning() && e.getProperties().getCombatPulse().getVictim() == mover)
+                canMove = false;
+            if (!canMove) { //If we normally shouldn't move, but the NPC's pathfinding is not letting them move, then move.
+                if (npcPath.size() == 1) {
+                    Point pathElement = npcPath.peek();
+                    if (pathElement.getX() == l.getX() && pathElement.getY() == l.getY())
+                        canMove = true;
+                }
+            }
+        }
+        if (!path.getPoints().isEmpty() && canMove) {
             Point point = path.getPoints().getLast();
             interactLocation = Location.create(point.getX(), point.getY(), mover.getLocation().getZ());
             if (forceRun) {
