@@ -149,7 +149,9 @@ public final class DialogueInterpreter {
         DialogueFile file = dialogue.file;
         if (!activeTopics.isEmpty()) {
             Topic<?> topic = activeTopics.get(buttonId - 2);
-            sendDialogues(player, topic.getExpr(), topic.getText());
+
+            if (!topic.getSkipPlayer())
+                sendDialogues(player, topic.getExpr(), topic.getText());
 
             if(topic.getToStage() instanceof DialogueFile) {
                 DialogueFile topicFile = (DialogueFile) topic.getToStage();
@@ -160,6 +162,10 @@ public final class DialogueInterpreter {
                 else file.setStage(stage);
             }
             activeTopics.clear();
+
+            if (topic.getSkipPlayer())
+                handle(componentId, buttonId);
+
             return;
         }
 

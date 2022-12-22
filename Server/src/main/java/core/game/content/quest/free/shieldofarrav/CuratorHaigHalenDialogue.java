@@ -59,10 +59,10 @@ public final class CuratorHaigHalenDialogue extends DialoguePlugin {
             showTopics(
                 new IfTopic("I have the Shield of Arrav", new CuratorHaigHalenSOADialogue(),
                     player.getQuestRepository().getQuest("Shield of Arrav").getStage(player) == 70
-                ),
+                , false),
                 new IfTopic("I'm looking for a statuette recovered from the city of Uzer.", new CuratorHaigHalenGolemDialogue(),
                     player.getQuestRepository().getQuest("The Golem").getStage(player) >= 3
-                )
+                , false)
             );
             break;
 		}
