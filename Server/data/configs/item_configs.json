@@ -66230,6 +66230,7 @@
     "bonuses": "0,0,0,-8,-2,44,48,46,-1,46,40,0,0,0,0"
   },
   {
+    "requirements": "",
     "ge_buy_limit": "2",
     "grand_exchange_price": "32400",
     "durability": null,
@@ -91004,6 +91005,7 @@
     "equipment_slot": "5"
   },
   {
+    "requirements": "{1,40}",
     "examine": "A rune kiteshield with a heraldic design.",
     "grand_exchange_price": "35300",
     "durability": null,
@@ -91043,6 +91045,7 @@
     "equipment_slot": "5"
   },
   {
+    "requirements": "{1,40}",
     "examine": "A rune kiteshield with a heraldic design.",
     "grand_exchange_price": "31903",
     "durability": null,
@@ -91082,6 +91085,7 @@
     "equipment_slot": "5"
   },
   {
+    "requirements": "{1,40}",
     "examine": "A rune kiteshield with a heraldic design.",
     "grand_exchange_price": "32082",
     "durability": null,
@@ -91121,6 +91125,7 @@
     "equipment_slot": "5"
   },
   {
+    "requirements": "{1,40}",
     "examine": "A rune kiteshield with a heraldic design.",
     "grand_exchange_price": "32351",
     "durability": null,
@@ -91160,6 +91165,7 @@
     "equipment_slot": "5"
   },
   {
+    "requirements": "{1,40}",
     "examine": "A rune kiteshield with a heraldic design.",
     "grand_exchange_price": "35200",
     "durability": null,
