@@ -1,5 +1,6 @@
 package core.cache.def.impl;
 
+import api.EquipmentSlot;
 import core.cache.Cache;
 import core.cache.def.Definition;
 import core.cache.misc.buffer.ByteBufferUtils;
@@ -25,6 +26,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Arrays;
+
+import static api.ContentAPIKt.equipSlot;
 
 /**
  * Represents an item's definitions.
@@ -649,7 +652,7 @@ public class ItemDefinition extends Definition<Item> {
 	/**
 	 * The allowed ids.
 	 */
-	private static final HashSet<Integer> allowedItems = new HashSet(Arrays.asList(
+	private static final HashSet<Integer> entranaAllowedItems = new HashSet(Arrays.asList(
 			Items.PENANCE_GLOVES_10553,
 			Items.ICE_GLOVES_1580,
 			Items.BOOTS_OF_LIGHTNESS_88,
@@ -678,7 +681,7 @@ public class ItemDefinition extends Definition<Item> {
 			Items.WARLOCK_LEGS_14077,
 			Items.WARLOCK_TOP_14076
 	));
-	private static final HashSet<Integer> bannedItems = new HashSet(Arrays.asList(
+	private static final HashSet<Integer> entranaBannedItems = new HashSet(Arrays.asList(
 			/**Items.BUTTERFLY_NET_10010, easing the restriction until barehanded implementation**/
 			Items.DWARF_CANNON_SET_11967,
 			Items.CANNON_BARRELS_10,
@@ -702,11 +705,14 @@ public class ItemDefinition extends Definition<Item> {
 	 * @return {@code True} if so.
 	 */
 	public boolean isAllowedOnEntrana() {
-		if(allowedItems.contains(getId())) {
+		if (entranaAllowedItems.contains(getId())) {
 			return true;
 		}
-		if(bannedItems.contains(getId())) {
+		if (entranaBannedItems.contains(getId())) {
 			return false;
+		}
+		if (equipSlot(getId()) == EquipmentSlot.AMMO) {
+			return true;
 		}
 		if (getName().toLowerCase().startsWith("ring") || getName().toLowerCase().startsWith("amulet")) {
 			return true;
