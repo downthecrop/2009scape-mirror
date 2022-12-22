@@ -70,6 +70,22 @@ class ItemQuestRequirementListener : InteractionListener {
         Items.CRYSTAL_SHIELD_1_10_4234
     )
 
+    //As per the source (https://runescape.wiki/w/Dragon_Slayer?oldid=895396),
+    //dragon slayer should only restrict green d'hide bodies, not the higher tiers.
+    private val dragonSlayerEquipment = intArrayOf(
+        Items.RUNE_PLATEBODY_1127,
+        Items.RUNE_PLATEBODY_G_10798,
+        Items.RUNE_PLATEBODY_G_2615,
+        Items.RUNE_PLATEBODY_G_13800,
+        Items.RUNE_PLATEBODY_T_10800,
+        Items.RUNE_PLATEBODY_T_13805,
+        Items.RUNE_PLATEBODY_T_2623,
+        Items.ZAMORAK_PLATEBODY_2653,
+        Items.SARADOMIN_PLATEBODY_2661,
+        Items.GUTHIX_PLATEBODY_2669,
+        Items.GREEN_DHIDE_BODY_1135
+    )
+
     private val questCapes = intArrayOf(9813,9814)
 
     override fun defineListeners() {
@@ -93,35 +109,19 @@ class ItemQuestRequirementListener : InteractionListener {
          */
 
         onEquip(fremennikTrialsEquipment.plus(fremennikIslesEquipment)) { player, _ ->
-            if (!isQuestComplete(player, "Fremennik Trials")) {
-                sendMessage(player, "You must have completed The Fremennik Trials to equip this.")
-                return@onEquip false
-            }
-            return@onEquip true
+            return@onEquip requireQuest(player, "Fremennik Trials", "to equip this.")
         }
 
         onEquip(avasBackpacks){ player, _ ->
-            if (!isQuestComplete(player, "Animal Magnetism")) {
-                sendMessage(player, "You must have completed Animal Magnetism to equip this.")
-                return@onEquip false
-            }
-            return@onEquip true
+            return@onEquip requireQuest(player, "Animal Magnetism", "to equip this.")
         }
 
         onEquip(lostCityWeapons){ player, _ ->
-            if (!isQuestComplete(player, "Lost City")) {
-                sendMessage(player, "You must have completed Lost City to equip this.")
-                return@onEquip false
-            }
-            return@onEquip true
+            return@onEquip requireQuest(player, "Lost City", "to equip this.")
         }
 
         onEquip(Items.CAPE_OF_LEGENDS_1052) { player, _ ->
-            if(!isQuestComplete(player, "Legends' Quest")) {
-                player.packetDispatch.sendMessage("You must have completed Legends' Quest to equip this.")
-                return@onEquip false
-            }
-            return@onEquip true
+            return@onEquip requireQuest(player, "Legends' Quest", "to equip this.")
         }
 
         onEquip(questCapes) { player, _ ->
@@ -134,43 +134,27 @@ class ItemQuestRequirementListener : InteractionListener {
         }
 
         onEquip(Items.WOLFBANE_2952){ player, _ ->
-            if(!isQuestComplete(player, "Priest in Peril")) {
-                sendMessage(player, "You must have completed Priest in Peril to equip this.")
-                return@onEquip false
-            }
-            return@onEquip true
-        }
+            return@onEquip requireQuest(player, "Priest in Peril", "to equip this.")
+       }
 
         onEquip(Items.ANCIENT_MACE_11061){ player, _ ->
-            if(!isQuestComplete(player, "Another Slice of H.A.M.")) {
-                sendMessage(player, "You must have completed Another Slice of H.A.M. to equip this.")
-                return@onEquip false
-            }
-            return@onEquip true
+            return@onEquip requireQuest(player, "Another Slice of H.A.M.", "to equip this.")
         }
 
         onEquip(Items.ANCIENT_STAFF_4675){ player, _ ->
-            if(!isQuestComplete(player, "Desert Treasure")) {
-                sendMessage(player, "You must have completed Desert Treasure to equip this.")
-                return@onEquip false
-            }
-            return@onEquip true
+            return@onEquip requireQuest(player, "Desert Treasure", "to equip this.")
         }
 
         onEquip(Items.ELEMENTAL_SHIELD_2890) { player, _ ->
-            if (!isQuestComplete(player, "Elemental Workshop I")) {
-                sendMessage(player, "You must have completed Elemental Workshop I to equip this.")
-                return@onEquip false
-            }
-            return@onEquip true
+            return@onEquip requireQuest(player, "Elemental Workshop I", "to equip this.")
         }
 
         onEquip(crystalEquipment){ player, _ ->
-            if (!isQuestComplete(player, "Roving Elves")) {
-                sendMessage(player, "You must have completed Roving Elves to equip this.")
-                return@onEquip false
-            }
-            return@onEquip true
+            return@onEquip requireQuest(player, "Roving Elves", "to equip this.")
+        }
+
+        onEquip(dragonSlayerEquipment) {player, _ ->
+            return@onEquip requireQuest(player, "Dragon Slayer", "to equip this.")
         }
     }
 }
