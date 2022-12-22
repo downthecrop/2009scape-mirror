@@ -11896,208 +11896,117 @@
     ]
   },
   {
-    "default": [
-      {
-        "minAmount": "1",
-        "weight": "100.0",
-        "id": "526",
-        "maxAmount": "1"
-      }
-    ],
+    "default": [],
     "charm": [],
     "ids": "438,439,440,441,442,443,655,4470",
     "description": "Tree Spirit (Hostile Woodcutting Random Event/Enchanted Valley)",
     "main": [
       {
         "minAmount": "1",
-        "weight": "50.0",
+        "weight": "8.0",
+        "id": "1351",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "1349",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
         "id": "1353",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "50.0",
+        "weight": "8.0",
+        "id": "1361",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
         "id": "1355",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "25.0",
+        "weight": "8.0",
         "id": "1357",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "13.0",
+        "weight": "4.0",
         "id": "1359",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "2",
-        "weight": "50.0",
-        "id": "561",
-        "maxAmount": "22"
-      },
-      {
-        "minAmount": "1",
-        "weight": "50.0",
-        "id": "5296",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "25.0",
-        "id": "5106",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "25.0",
-        "id": "5297",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "25.0",
-        "id": "5280",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "5.0",
-        "id": "5281",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "5.0",
-        "id": "5299",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "5.0",
-        "id": "5300",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "5.0",
-        "id": "5298",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "1.0",
-        "id": "5304",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "1.0",
-        "id": "5303",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "1.0",
-        "id": "5302",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "1.0",
-        "id": "5301",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "25.0",
-        "id": "946",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "50.0",
-        "id": "3051",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "50.0",
-        "id": "3049",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "20.0",
-        "id": "199",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "20.0",
-        "id": "201",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "19.0",
-        "id": "203",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "18.0",
-        "id": "205",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
         "weight": "12.0",
-        "id": "207",
+        "id": "14424",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "3.0",
-        "id": "209",
+        "weight": "14.0",
+        "id": "14428",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "3.0",
-        "id": "211",
+        "weight": "1.0",
+        "id": "946",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "3.0",
-        "id": "213",
+        "weight": "8.0",
+        "id": "14426",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
+        "weight": "6.0",
+        "id": "3051",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "6.0",
+        "id": "3049",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "5",
+        "weight": "16.0",
+        "id": "561",
+        "maxAmount": "5"
+      },
+      {
+        "minAmount": "10",
+        "weight": "8.0",
+        "id": "561",
+        "maxAmount": "10"
+      },
+      {
+        "minAmount": "22",
         "weight": "2.0",
-        "id": "215",
-        "maxAmount": "1"
+        "id": "561",
+        "maxAmount": "22"
+      },
+      {
+        "minAmount": "28",
+        "weight": "2.0",
+        "id": "561",
+        "maxAmount": "28"
       },
       {
         "minAmount": "1",
-        "weight": "1.5",
-        "id": "2485",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "1.5",
-        "id": "217",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "3.0",
-        "id": "31",
+        "weight": "1.0",
+        "id": "1963",
         "maxAmount": "1"
       }
     ]
