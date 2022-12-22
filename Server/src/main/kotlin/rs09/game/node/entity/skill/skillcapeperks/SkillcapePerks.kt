@@ -103,7 +103,7 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
                 Skillcape.FISHING -> GREAT_AIM
                 Skillcape.COOKING -> HASTY_COOKING
                 Skillcape.FIREMAKING -> CONSTANT_GLOW
-                Skillcape.WOODCUTTING -> NONE
+                Skillcape.WOODCUTTING -> NEST_HUNTER
                 Skillcape.FARMING -> SEED_ATTRACTION
                 Skillcape.HUNTING -> NONE
                 Skillcape.SUMMONING -> NONE
