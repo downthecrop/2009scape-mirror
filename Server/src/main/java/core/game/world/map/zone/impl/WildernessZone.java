@@ -296,10 +296,9 @@ public final class WildernessZone extends MapZone {
 	 */
 	public static boolean isInZone(Entity e) {
 		Location l = e.getLocation();
-		for (RegionZone zone : e.getViewport().getRegion().getRegionZones()) {
-			if (zone.getZone() == INSTANCE && zone.getBorders().insideBorder(l.getX(), l.getY())) {
+		for (ZoneBorders z : INSTANCE.borders) {
+			if (z.insideBorder(e))
 				return true;
-			}
 		}
 		return false;
 	}
