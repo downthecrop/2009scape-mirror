@@ -349,12 +349,12 @@ enum class Decoders530(val opcode: Int) {
             return Packet.IfAction(player, opcode, -1, iface, button, -1, -1)
         }
     },
-    DIALOGUE_OPT(132) {
+    CONTINUE_OPT(132) {
         override fun decode(player: Player, buffer: IoBuffer): Packet {
             val ifHash = buffer.intA
             val slot = buffer.leShort
             val (iface, button) = deHash(ifHash)
-            return Packet.DialogueOption(player, iface, button)
+            return Packet.ContinueOption(player, iface, button, slot, 132)
         }
     },
     CLOSE_IFACE(184) {
@@ -364,8 +364,8 @@ enum class Decoders530(val opcode: Int) {
     },
     IF_GROUNDITEM_ACTION(73) {
         override fun decode(player: Player, buffer: IoBuffer): Packet {
-            val child = buffer.short
-            val iface = buffer.short
+            val ifHash = buffer.intA
+            val (iface, child) = deHash(ifHash)
             val y = buffer.short
             val itemId = buffer.leShortA
             val x = buffer.leShortA

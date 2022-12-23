@@ -3,6 +3,7 @@ package rs09.net.packet
 import api.events.ButtonClickEvent
 import api.getAttribute
 import api.sendMessage
+import api.tryPop
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.SceneryDefinition
@@ -17,7 +18,6 @@ import core.game.interaction.NodeUsageEvent
 import core.game.interaction.Option
 import core.game.interaction.UseWithHandler
 import core.game.node.Node
-import core.game.node.entity.impl.PulseType
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
 import core.game.node.entity.player.info.login.LoginConfiguration
@@ -43,8 +43,8 @@ import discord.Discord
 import org.rs09.consts.Components
 import proto.management.ClanMessage
 import proto.management.JoinClanRequest
+import proto.management.LeaveClanRequest
 import rs09.ServerConstants
-import rs09.game.ge.GrandExchange
 import rs09.game.ge.GrandExchange.Companion.getOfferStats
 import rs09.game.ge.GrandExchange.Companion.getRecommendedPrice
 import rs09.game.ge.GrandExchangeOffer
@@ -81,7 +81,7 @@ object PacketProcessor {
         val pw = PrintWriter(sw)
         var pkt: Packet
         while (countThisCycle-- > 0) {
-            pkt = queue.pop()
+            pkt = queue.tryPop(Packet.NoProcess())
             try {
                 process(pkt)
             } catch (e: Exception) {
@@ -127,8 +127,14 @@ object PacketProcessor {
             is Packet.PlayerPrefsUpdate -> {/*TODO implement something that cares about this */}
             is Packet.Ping -> pkt.player.session.lastPing = System.currentTimeMillis()
             is Packet.JoinClan -> {
-                if (pkt.clanName.isNotEmpty())
-                    sendMessage(pkt.player, "Attempting to join channel....:clan:")
+                if (pkt.clanName.isEmpty() && pkt.player.communication.currentClan.isNotEmpty()) {
+                    val builder = LeaveClanRequest.newBuilder()
+                    builder.clanName = pkt.player.communication.currentClan
+                    builder.username = pkt.player.name
+                    ManagementEvents.publish(builder.build())
+                    return
+                }
+                sendMessage(pkt.player, "Attempting to join channel....:clan:")
                 val builder = JoinClanRequest.newBuilder()
                 builder.clanName = pkt.clanName
                 builder.username = pkt.player.name
@@ -228,11 +234,19 @@ object PacketProcessor {
                 val final = pkt.count - pkt.player.interfaceManager.getPacketCount(0)
                 pkt.player.interfaceManager.getPacketCount(final)
             }
-            is Packet.DialogueOption -> {
+            is Packet.ContinueOption -> {
                 val player = pkt.player
+                player.debug("[CONTINUE OPT]----------")
+                player.debug("Iface: ${pkt.iface}")
+                player.debug("Child: ${pkt.child}")
+                player.debug("Slot: ${pkt.slot}")
+                player.debug("------------------------")
                 if (player.dialogueInterpreter.dialogue == null) {
                     player.interfaceManager.closeChatbox()
                     player.dialogueInterpreter.actions.removeFirstOrNull()?.handle(player, pkt.child)
+                    val component = player.interfaceManager.getComponent(pkt.iface) ?: return
+                    if (!InterfaceListeners.run(player, component, pkt.opcode, pkt.child, pkt.slot, -1))
+                        component.plugin?.handle(player, component, pkt.opcode, pkt.child, pkt.slot, -1)
                     return
                 }
                 player.dialogueInterpreter.handle(pkt.iface, pkt.child)
@@ -427,7 +441,14 @@ object PacketProcessor {
             //there's more data in this packet, we're just not using it
         }
 
-        if (player.locks.isMovementLocked || !player.interfaceManager.close() || !player.interfaceManager.closeSingleTab() || !player.dialogueInterpreter.close()) {
+        var canWalk = !player.locks.isMovementLocked
+
+        if (canWalk && player.interfaceManager.isOpened && !player.interfaceManager.opened.definition.isWalkable)
+            canWalk = canWalk && player.interfaceManager.close()
+        if (canWalk && player.interfaceManager.hasChatbox() && !player.interfaceManager.chatbox.definition.isWalkable)
+            player.interfaceManager.closeChatbox()
+
+        if (!canWalk || !player.dialogueInterpreter.close()) {
             player.debug("[WALK ACTION]-- NO HANDLE: PLAYER LOCKED OR INTERFACES SAY NO")
             return sendClearMinimap(player)
         }

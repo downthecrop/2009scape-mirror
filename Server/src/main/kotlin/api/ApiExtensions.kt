@@ -1,6 +1,8 @@
 package api
 
 import core.game.node.item.Item
+import java.util.*
+import kotlin.collections.ArrayList
 
 fun IntRange.toIntArray(): IntArray {
     if (last < first)
@@ -53,4 +55,9 @@ fun IntArray.getNext(element: Int) : Int {
 
 fun IntArray.isNextLast(element: Int) : Boolean {
     return this.isLast(this.getNext(element))
+}
+
+fun <T> LinkedList<T>.tryPop(default: T) : T {
+    this.peek() ?: return default
+    return this.pop()
 }

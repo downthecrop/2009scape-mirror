@@ -43,12 +43,14 @@ class PenguinManager{
     }
 
     fun rebuildVars() {
-        if(PenguinHNSEvent.getStoreFile().isEmpty()) {
+        if(!PenguinHNSEvent.getStoreFile().containsKey("spawned-penguins")) {
             penguins = spawner.spawnPenguins(10)
             PenguinHNSEvent.getStoreFile()["spawned-penguins"] = penguins.toJSONArray()
+            tagMapping.clear()
             for (p in penguins) {
                 tagMapping.put(p, JSONArray())
             }
+            updateStoreFile()
         } else {
             val spawnedOrdinals = (PenguinHNSEvent.getStoreFile()["spawned-penguins"] as JSONArray).map { it.toString().toInt() }
             spawner.spawnPenguins(spawnedOrdinals)

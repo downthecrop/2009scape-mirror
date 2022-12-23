@@ -232,7 +232,7 @@ class UseWithPatchHandler : InteractionListener {
         patches.addAll(8550..8557) //allotment wrappers
         patches.addAll(7847..7853) //flower patch wrappers
         patches.addAll(8150..8156) //herb patch wrappers
-        patches.addAll(8388..8390) // Tree patches
+        patches.addAll(8388..8391) // Tree patches
         patches.add(19147) //Tree patch
         patches.addAll(7962..7965) //fruit trees
         patches.addAll(8173..8176) //hops

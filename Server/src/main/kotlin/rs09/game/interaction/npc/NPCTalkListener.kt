@@ -33,7 +33,7 @@ class NPCTalkListener : InteractionListener {
         on(IntType.NPC,"talk-to","talk","talk to"){player,node ->
             val npc = node.asNpc()
             if(RandomEvents.randomIDs.contains(node.id)){
-                if(RandomEventManager.getInstance(player)!!.event == null || RandomEventManager.getInstance(player)!!.event!!.id != node.id){
+                if(RandomEventManager.getInstance(player)!!.event == null || RandomEventManager.getInstance(player)!!.event!! != node.asNpc()){
                     player.sendMessage("They aren't interested in talking to you.")
                 } else {
                     RandomEventManager.getInstance(player)!!.event!!.talkTo(node.asNpc())

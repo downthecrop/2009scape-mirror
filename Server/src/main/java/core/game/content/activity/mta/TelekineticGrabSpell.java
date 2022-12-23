@@ -79,7 +79,7 @@ public final class TelekineticGrabSpell extends MagicSpell {
 	/**
 	 * Represents the spell id.
 	 */
-	public static final int SPELL_ID = 65535;
+	public static final int SPELL_ID = 19;
 
 	/**
 	 * Constructs a new {@code TelekineticGrabSpell} {@code Object}.

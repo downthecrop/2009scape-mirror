@@ -17,7 +17,7 @@ sealed class Packet {
     data class UseWithScenery(val player: Player, val itemId: Int, val slot: Int, val sceneryId: Int, val x: Int, val y: Int) : Packet()
     data class UseWithGroundItem(val player: Player, val usedId: Int, val withId: Int, val iface: Int, val child: Int, val slot: Int, val x: Int, val y: Int) : Packet()
     data class IfAction(val player: Player, val opcode: Int, val optIndex: Int, val iface: Int, val child: Int, val slot: Int, val itemId: Int = -1) : Packet()
-    data class DialogueOption(val player: Player, val iface: Int, val child: Int) : Packet()
+    data class ContinueOption(val player: Player, val iface: Int, val child: Int, val slot: Int, val opcode: Int) : Packet()
     data class CloseIface(val player: Player) : Packet()
     data class JoinClan(val player: Player, val clanName: String) : Packet()
     data class SetClanRank(val player: Player, val username: String, val rank: Int) : Packet()

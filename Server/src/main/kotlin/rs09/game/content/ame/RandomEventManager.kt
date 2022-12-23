@@ -1,5 +1,6 @@
 package rs09.game.content.ame
 
+import api.Commands
 import api.LoginListener
 import api.events.EventHook
 import api.events.TickEvent
@@ -11,10 +12,12 @@ import core.game.world.map.zone.ZoneRestriction
 import core.tools.RandomFunction
 import rs09.game.Event
 import rs09.game.system.SystemLogger
+import rs09.game.system.command.Privilege
 import rs09.game.world.GameWorld
+import rs09.game.world.repository.Repository
 import kotlin.random.Random
 
-class RandomEventManager(val player: Player? = null) : LoginListener, EventHook<TickEvent> {
+class RandomEventManager(val player: Player? = null) : LoginListener, EventHook<TickEvent>, Commands {
     var event: RandomEventNPC? = null
     var enabled: Boolean = false
     var nextSpawn = 0
@@ -69,6 +72,18 @@ class RandomEventManager(val player: Player? = null) : LoginListener, EventHook<
 
     private fun rollNextSpawn() {
         nextSpawn = GameWorld.ticks + RandomFunction.random(MIN_DELAY_TICKS, MAX_DELAY_TICKS)
+    }
+
+    override fun defineCommands() {
+        define("targeted-ame", Privilege.ADMIN, "targeted-ame username", "Summons a random for the given user") {player, args ->
+            val username = args[1]
+            val target = Repository.getPlayerByName(username)
+
+            if (target == null)
+                reject(player, "Unable to find player $username!")
+
+            getInstance(target!!)?.fireEvent()
+        }
     }
 
     companion object {
