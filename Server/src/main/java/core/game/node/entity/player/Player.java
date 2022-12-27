@@ -37,7 +37,6 @@ import core.game.node.entity.skill.summoning.familiar.FamiliarManager;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.system.communication.CommunicationInfo;
-import core.game.system.monitor.PlayerMonitor;
 import core.game.system.task.Pulse;
 import core.game.world.map.*;
 import core.game.world.map.build.DynamicRegion;
@@ -73,6 +72,7 @@ import rs09.game.node.entity.combat.equipment.EquipmentDegrader;
 import rs09.game.node.entity.player.graves.Grave;
 import rs09.game.node.entity.player.graves.GraveType;
 import rs09.game.node.entity.player.graves.GraveController;
+import rs09.game.node.entity.player.info.PlayerMonitor;
 import rs09.game.node.entity.player.info.login.PlayerSaver;
 import rs09.game.node.entity.skill.runecrafting.PouchManager;
 import rs09.game.node.entity.state.newsys.State;
@@ -88,6 +88,7 @@ import rs09.tools.TickUtilsKt;
 import rs09.worker.ManagementEvents;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import static api.ContentAPIKt.*;
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_BASE;
@@ -256,11 +257,6 @@ public class Player extends Entity {
 	 */
 
 	/**
-	 * The monitor which monitors player actions.
-	 */
-	private final PlayerMonitor monitor = new PlayerMonitor();
-
-	/**
 	 * Represents the players warning messages.
 	 */
 	private final WarningMessages warningMessages = new WarningMessages();
@@ -383,6 +379,7 @@ public class Player extends Entity {
 		details.save();
 		sendLogoutEvents();
 		Repository.getDisconnectionQueue().add(this);
+		checkForWealthUpdate(true);
 	}
 
 	private void sendLogoutEvents() {
@@ -475,6 +472,39 @@ public class Player extends Entity {
 
 		//Decrements prayer points
 		getPrayer().tick();
+
+		//update wealth tracking
+		checkForWealthUpdate(false);
+	}
+
+	private void checkForWealthUpdate(boolean force) {
+		if (isArtificial()) return;
+		long previousWealth = getAttribute("last-wealth", -1L);
+		long lastWealthCheck = getAttribute("last-wealth-check", -1L);
+
+		long nowTime = System.currentTimeMillis();
+		if (force || nowTime - lastWealthCheck >= TimeUnit.MINUTES.toMillis(5)) {
+			long totalWealth = 0L;
+			for (Item i : inventory.toArray()) {
+				if (i == null) continue;
+				totalWealth += (long) i.getDefinition().getValue() * i.getAmount();
+			}
+			for (Item i : bank.toArray()) {
+				if (i == null) break;
+				totalWealth += (long) i.getDefinition().getValue() * i.getAmount();
+			}
+			for (Item i : bankSecondary.toArray()) {
+				if (i == null) break;
+				totalWealth += (long) i.getDefinition().getValue() * i.getAmount();
+			}
+
+			long diff = previousWealth == -1 ? 0L : totalWealth - previousWealth;
+			setAttribute("/save:last-wealth", totalWealth);
+			setAttribute("/save:last-wealth-check", nowTime);
+
+			if (diff != 0)
+				PlayerMonitor.logWealthChange(this, totalWealth, diff);
+		}
 	}
 
 	@Override
@@ -611,8 +641,11 @@ public class Player extends Entity {
 				Grave g = GraveController.produceGrave(GraveController.getGraveType(this));
 				g.initialize(this, location, Arrays.stream(c[1].toArray()).filter(Objects::nonNull).toArray(Item[]::new)); //note: the amount of code required to filter nulls from an array in Java is atrocious.
 			} else {
+				StringBuilder itemsLost = new StringBuilder();
 				for (Item item : c[1].toArray()) {
 					if (item == null) continue;
+					if (killer instanceof Player)
+						itemsLost.append(getItemName(item.getId())).append("(").append(item.getAmount()).append("), ");
 					if (GraveController.shouldCrumble(item.getId()))
 						continue;
 					if (GraveController.shouldRelease(item.getId()))
@@ -620,6 +653,8 @@ public class Player extends Entity {
 					item = GraveController.checkTransform(item);
 					GroundItemManager.create(item, location, killer instanceof Player ? (Player) killer : this);
 				}
+				if (killer instanceof Player)
+					PlayerMonitor.logMisc((Player) killer, "PK", "Killed " + name + ", who dropped: " + itemsLost);
 				sendMessage(colorize("%RDue to the circumstances of your death, you do not have a grave."));
 			}
 
@@ -1173,13 +1208,6 @@ public class Player extends Entity {
 	 * @return The farmingManager.
 	 */
 
-	/**
-	 * Gets the monitor.
-	 * @return The monitor.
-	 */
-	public PlayerMonitor getMonitor() {
-		return monitor;
-	}
 
 	/**
 	 * Gets the warningMessages.

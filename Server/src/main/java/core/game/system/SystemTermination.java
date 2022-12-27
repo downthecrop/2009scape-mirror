@@ -7,6 +7,7 @@ import rs09.Server;
 import rs09.ServerConstants;
 import rs09.ServerStore;
 import rs09.game.ai.AIRepository;
+import rs09.game.node.entity.player.info.PlayerMonitor;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
@@ -55,6 +56,7 @@ public final class SystemTermination {
 				}
 			}
 			GameWorld.getShutdownListeners().forEach(ShutdownListener::shutdown);
+			PlayerMonitor.flushRemainingEventsImmediately();
 			ServerStore s = null;
 			for (PersistWorld wld : GameWorld.getWorldPersists()) {
 				if (wld instanceof ServerStore)

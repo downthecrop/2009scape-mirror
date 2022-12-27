@@ -5,9 +5,9 @@ import core.game.content.activity.ActivityPlugin;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.PlayerDetails;
 import core.game.node.entity.player.info.Rights;
-import core.game.system.monitor.PlayerMonitor;
 import proto.management.ClanJoinNotification;
 import proto.management.ClanLeaveNotification;
+import rs09.game.node.entity.player.info.PlayerMonitor;
 import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
 import core.net.amsc.WorldCommunicator;
@@ -198,9 +198,7 @@ public final class ClanRepository {
 				return;
 			}
 		}
-		StringBuilder sb = new StringBuilder(message);
-		sb.append(" => ").append(name).append(" (owned by ").append(owner).append(")");
-		player.getMonitor().log(sb.toString(), PlayerMonitor.CLAN_CHAT_LOG);
+		PlayerMonitor.logChat(player, "clan", message);
 		for (Iterator<ClanEntry> it = players.iterator(); it.hasNext();) {
 			ClanEntry entry = it.next();
 			Player p = entry.getPlayer();

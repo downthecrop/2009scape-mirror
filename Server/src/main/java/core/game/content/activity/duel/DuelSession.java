@@ -13,11 +13,11 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.login.PlayerParser;
 import core.game.node.entity.state.EntityState;
 import core.game.node.item.Item;
-import core.game.system.monitor.PlayerMonitor;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
 import kotlin.Unit;
 import rs09.game.content.global.action.EquipHandler;
+import rs09.game.node.entity.player.info.PlayerMonitor;
 import rs09.game.system.config.ItemConfigParser;
 
 import java.text.DecimalFormat;
@@ -311,7 +311,7 @@ public final class DuelSession extends ComponentPlugin {
 				log = log.substring(0, log.length() - 1);
 			}
 			log += "}";
-			player.getMonitor().log(log, PlayerMonitor.DUEL_LOG);
+			PlayerMonitor.logMisc(player, "Duel", log);
 		} else {
 			player.removeExtension(DuelSession.class);
 		}

@@ -7,10 +7,9 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.request.RequestModule
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
-import core.game.system.monitor.PlayerMonitor
 import rs09.game.ai.AIRepository
 import rs09.game.ai.general.scriptrepository.DoublingMoney
-import rs09.game.system.SystemLogger
+import rs09.game.node.entity.player.info.PlayerMonitor
 import java.text.DecimalFormat
 import java.util.*
 
@@ -352,17 +351,16 @@ class TradeModule
      * @param module the module.
      */
     private fun giveContainers(module: TradeModule) {
-        val pContainer: Container? = module.container
-        val oContainer: Container? = getExtension(module.target)!!.container
+        val pContainer: Container = module.container ?: return
+        val oContainer: Container = getExtension(module.target)!!.container ?: return
 
-        SystemLogger.logTrade(module.player!!.username + " -> " + module.target!!.username + " " + Arrays.toString(pContainer!!.toArray()))
-        SystemLogger.logTrade(module.target!!.username + " -> " + module.player!!.username + " " + Arrays.toString(oContainer!!.toArray()))
+        PlayerMonitor.logTrade(module.player!!, module.target!!, pContainer, oContainer)
 
         (AIRepository.PulseRepository[module.player!!.username.lowercase()]?.botScript as DoublingMoney?)?.itemsReceived(module.target!!, oContainer)
         (AIRepository.PulseRepository[module.target!!.username.lowercase()]?.botScript as DoublingMoney?)?.itemsReceived(module.player!!, pContainer)
 
-        addContainer(module.player, module.target, oContainer)
-        addContainer(module.target, module.player, pContainer)
+        addContainer(module.player, oContainer)
+        addContainer(module.target, pContainer)
         module.target!!.packetDispatch.sendMessage("Accepted trade.")
         module.player!!.packetDispatch.sendMessage("Accepted trade.")
     }
@@ -373,10 +371,9 @@ class TradeModule
      * @param target the target who gains the items.
      * @param container the container.
      */
-    private fun addContainer(player: Player?, target: Player?, container: Container?) {
+    private fun addContainer(player: Player?, container: Container?) {
         val c = Container(container!!.itemCount(), ContainerType.ALWAYS_STACK)
         c.addAll(container)
-        var log = "traded => " + target!!.name + " received => {"
         for (i in container.toArray()) {
             if (i == null) {
                 continue
@@ -388,17 +385,6 @@ class TradeModule
                 GroundItemManager.create(i, player)
             }
         }
-        for (i in c.toArray()) {
-            if (i == null) {
-                continue
-            }
-            log += i.name + " x " + i.amount + ","
-        }
-        if (log[log.length - 1] == ',') {
-            log = log.substring(0, log.length - 1)
-        }
-        log += "}"
-        player!!.monitor.log(log, PlayerMonitor.TRADE_LOG)
     }
 
     /**

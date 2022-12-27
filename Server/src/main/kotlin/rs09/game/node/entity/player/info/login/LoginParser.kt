@@ -7,7 +7,6 @@ import core.game.node.entity.player.info.login.LoginConfiguration
 import core.game.node.entity.player.info.login.PlayerParser
 import core.game.node.entity.player.info.login.Response
 import core.game.system.SystemManager
-import core.game.system.monitor.PlayerMonitor
 import core.game.system.task.Pulse
 import rs09.auth.AuthResponse
 import rs09.game.world.GameWorld
@@ -53,9 +52,6 @@ class LoginParser(val details: PlayerDetails) {
                             flag(AuthResponse.Success)
                             player.init()
                         }
-                        player.monitor.log(player.details.ipAddress, PlayerMonitor.ADDRESS_LOG)
-                        player.monitor.log(player.details.serial, PlayerMonitor.ADDRESS_LOG)
-                        player.monitor.log(player.details.macAddress, PlayerMonitor.ADDRESS_LOG)
                     } else {
                         Repository.playerNames.remove(player.name)
                     }

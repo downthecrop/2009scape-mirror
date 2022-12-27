@@ -14,8 +14,10 @@ import core.game.world.update.flag.player.AppearanceFlag;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.SkillContext;
 import core.net.packet.out.SkillLevel;
+import kotlin.Pair;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import rs09.game.node.entity.player.info.PlayerMonitor;
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
 import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
@@ -23,6 +25,8 @@ import rs09.plugin.CorePluginTypes.XPGainPlugins;
 import org.rs09.consts.Items;
 
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static java.lang.Math.floor;
 import static java.lang.Math.max;
@@ -67,6 +71,10 @@ public final class Skills {
 	 * An array containing all the player's experience.
 	 */
 	private final double[] experience;
+
+	private double[] lastUpdateXp = null;
+
+	private int lastUpdate = GameWorld.getTicks();
 
 	/**
 	 * An array containing all the maximum levels.
@@ -212,6 +220,8 @@ public final class Skills {
 	 * @param experience The experience.
 	 */
 	public void addExperience(int slot, double experience, boolean playerMod) {
+		if (lastUpdateXp == null)
+			lastUpdateXp = this.experience.clone();
 		double mod = getExperienceMod(slot, experience, playerMod, true);
 		final Player player = entity instanceof Player ? ((Player) entity) : null;
 		final AssistSession assist = entity.getExtension(AssistSession.class);
@@ -277,6 +287,18 @@ public final class Skills {
 		if (entity instanceof Player) {
 			PacketRepository.send(SkillLevel.class, new SkillContext((Player) entity, slot));
 			entity.dispatch(new XPGainEvent(slot, experienceAdd));
+		}
+		if (GameWorld.getTicks() - lastUpdate >= 200) {
+			ArrayList<Pair<Integer,Double>> diffs = new ArrayList<>();
+			for (int i = 0; i < this.experience.length; i++) {
+				double diff = this.experience[i] - lastUpdateXp[i];
+				if (diff != 0.0) {
+					diffs.add(new Pair<>(i, diff));
+				}
+			}
+			PlayerMonitor.logXpGains(player, diffs);
+			lastUpdateXp = this.experience.clone();
+			lastUpdate = GameWorld.getTicks();
 		}
 	}
 

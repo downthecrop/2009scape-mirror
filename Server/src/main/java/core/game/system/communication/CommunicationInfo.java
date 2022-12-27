@@ -6,7 +6,6 @@ import org.jetbrains.annotations.NotNull;
 import proto.management.PrivateMessage;
 import rs09.auth.UserAccountInfo;
 import rs09.game.system.SystemLogger;
-import core.game.system.monitor.PlayerMonitor;
 import core.game.system.mysql.SQLTable;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;

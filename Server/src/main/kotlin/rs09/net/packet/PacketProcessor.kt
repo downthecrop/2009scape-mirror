@@ -29,7 +29,6 @@ import core.game.node.item.Item
 import core.game.node.scenery.Scenery
 import core.game.system.communication.ClanRank
 import core.game.system.communication.CommunicationInfo
-import core.game.system.monitor.PlayerMonitor
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
@@ -54,6 +53,7 @@ import rs09.game.interaction.InteractionListeners
 import rs09.game.interaction.InterfaceListeners
 import rs09.game.interaction.QCRepository
 import rs09.game.interaction.inter.ge.StockMarket
+import rs09.game.node.entity.player.info.PlayerMonitor
 import rs09.game.node.entity.skill.magic.SpellListener
 import rs09.game.node.entity.skill.magic.SpellListeners
 import rs09.game.node.entity.skill.magic.SpellUtils
@@ -199,8 +199,8 @@ object PacketProcessor {
                 pkt.player.interfaceManager.closeChatbox()
             }
             is Packet.Command -> {
-                if (CommandSystem.commandSystem.parse(pkt.player, pkt.commandLine))
-                    pkt.player.monitor.log(pkt.commandLine, PlayerMonitor.COMMAND_LOG)
+                PlayerMonitor.logMisc(pkt.player, "CommandUse", pkt.commandLine)
+                CommandSystem.commandSystem.parse(pkt.player, pkt.commandLine)
             }
             is Packet.ChatMessage -> {
                 if (pkt.player.details.isMuted)
@@ -215,7 +215,7 @@ object PacketProcessor {
                         ManagementEvents.publish(builder.build())
                         return
                     }
-                    pkt.player.monitor.log(pkt.message, PlayerMonitor.PUBLIC_CHAT_LOG)
+                    PlayerMonitor.logChat(pkt.player, "public", pkt.message)
                     val ctx = ChatMessage(pkt.player, pkt.message, pkt.effects, pkt.message.length)
                     pkt.player.updateMasks.register(ChatFlag(ctx))
                 }
@@ -229,6 +229,7 @@ object PacketProcessor {
                     pkt.player.sendMessage("You have been muted due to breaking a rule.")
                 else
                     CommunicationInfo.sendMessage(pkt.player, pkt.username, pkt.message)
+                PlayerMonitor.logPrivateChat(pkt.player, pkt.username, pkt.message)
             }
             is Packet.PacketCountUpdate -> {
                 val final = pkt.count - pkt.player.interfaceManager.getPacketCount(0)
@@ -282,7 +283,7 @@ object PacketProcessor {
 
     private fun processTrackingPacket(pkt: Packet) {
         when(pkt) {
-            is Packet.TrackingFocus -> pkt.player.monitor.isClientFocus = pkt.isFocused
+            is Packet.TrackingFocus -> {}
             is Packet.TrackingDisplayUpdate -> {
                 pkt.player.session.clientInfo.screenWidth = pkt.screenWidth
                 pkt.player.session.clientInfo.screenHeight = pkt.screenHeight
@@ -298,9 +299,7 @@ object PacketProcessor {
             }
             is Packet.TrackingMouseClick -> {
                 //TODO see above todo
-                if (!pkt.player.monitor.isClientFocus) {
-                    Discord.postPlayerAlert(pkt.player.username, "Mouseclick without window focus!")
-                }
+
             }
         }
     }

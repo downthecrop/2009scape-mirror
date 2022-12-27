@@ -1,6 +1,7 @@
 package rs09.game.content.global.action
 
 import api.events.PickUpEvent
+import api.getItemName
 import core.game.content.dialogue.FacialExpression
 import core.game.content.global.GodType
 import core.game.node.entity.player.Player
@@ -13,6 +14,7 @@ import core.game.node.item.Item
 import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
+import rs09.game.node.entity.player.info.PlayerMonitor
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.GroundSpawnLoader
 import rs09.game.world.GameWorld
@@ -55,6 +57,9 @@ object PickupHandler {
             return true
         }
         if (item.isActive && player.inventory.add(add)) {
+            if (item.dropper is Player && item.dropper.details.uid != player.details.uid){
+                PlayerMonitor.logMisc(item.dropper, "DropTrade", "${getItemName(item.id)} x${item.amount} picked up by ${player.name}.")
+            }
             if (!RegionManager.isTeleportPermitted(item.location)) {
                 player.animate(Animation.create(535))
             }

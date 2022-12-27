@@ -208,19 +208,6 @@ class PlayerSaveParser(val player: Player) {
     }
 
     fun parseMonitor() {
-        val monitorData = saveFile!!["playerMonitor"] as JSONObject
-        if (monitorData.containsKey("duplicationFlag")) {
-            val duplicationFlag: Int = (monitorData.get("duplicationFlag") as String).toInt()
-            player.monitor.duplicationLog.flag(duplicationFlag)
-        }
-        if (monitorData.containsKey("macroFlag")) {
-            val macroFlag: Int = (monitorData.get("macroFlag") as String).toInt()
-            player.monitor.macroFlag = macroFlag
-        }
-        if (monitorData.containsKey("lastIncreaseFlag")) {
-            val lastIncreaseFlag: Long = (monitorData.get("lastIncreaseFlag") as String).toLong()
-            player.monitor.duplicationLog.lastIncreaseFlag = lastIncreaseFlag
-        }
     }
 
     fun parseConfigs() {

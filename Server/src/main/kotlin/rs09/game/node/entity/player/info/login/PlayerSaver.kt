@@ -304,17 +304,7 @@ class PlayerSaver (val player: Player){
     }
 
     fun savePlayerMonitor(root: JSONObject){
-        val playerMonitor = JSONObject()
-        if(player.monitor.duplicationLog != null && player.monitor.duplicationLog.flag != 0){
-            playerMonitor.put("duplicationFlag",player.monitor.duplicationLog.flag.toString())
-        }
-        if(player.monitor.macroFlag != 0){
-            playerMonitor.put("macroFlag",player.monitor.macroFlag.toString())
-        }
-        if(player.monitor.duplicationLog != null && player.monitor.duplicationLog.isLoggingFlagged){
-            playerMonitor.put("lastIncreaseFlag",player.monitor.duplicationLog.lastIncreaseFlag.toString())
-        }
-        root.put("playerMonitor",playerMonitor)
+
     }
 
     fun saveConfigs(root: JSONObject){
