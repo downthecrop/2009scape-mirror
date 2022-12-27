@@ -48,12 +48,9 @@ public final class VarrockNodePlugin extends OptionHandler {
 		SceneryDefinition.forId(23636).getHandlers().put("option:read", this);
 		SceneryDefinition.forId(24389).getHandlers().put("option:knock-at", this);
 		SceneryDefinition.forId(9662).getHandlers().put("option:take", this);
-		SceneryDefinition.forId(17974).getHandlers().put("option:climb-up", this);
 		SceneryDefinition.forId(29534).getHandlers().put("option:enter", this);
 		SceneryDefinition.forId(17985).getHandlers().put("option:climb-down", this);
 		SceneryDefinition.forId(24366).getHandlers().put("option:climb-up", this);
-		SceneryBuilder.add(new Scenery(17974, new Location(3204, 9911), 10, 0));
-		new KnockatDoorDialogue().init();
 		return this;
 	}
 
@@ -69,9 +66,6 @@ public final class VarrockNodePlugin extends OptionHandler {
 				return true;
 			case 17985:
 				ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_DOWN, new Location(3204, 9910), "You enter the murky sewers.");
-				return true;
-			case 17974:
-				ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, new Location(3179, 3472), "You resurface.");
 				return true;
 			case 24389:
 				player.getDialogueInterpreter().open(KnockatDoorDialogue.ID, player.getLocation().getX() == 3182 ? 45 : 44);
