@@ -167,7 +167,7 @@ public final class RellekkaZone extends MapZone implements Plugin<Object> {
 			case "climb-over":
 				switch (node.getId()) {
 				case 5847:
-					AgilityHandler.forceWalk(player, -1, player.getLocation(), player.getLocation().transform(0, player.getLocation().getY() <= 3657 ? 3 : -3, 0), Animation.create(840), 20, 1, null, 0);
+					AgilityHandler.forceWalk(player, -1, player.getLocation(), player.getLocation().transform(0, player.getLocation().getY() <= 3657 ? 3 : -3, 0), Animation.create(839), 20, 1, null, 0);
 					break;
 				}
 				break;
