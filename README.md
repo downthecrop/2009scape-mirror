@@ -2,7 +2,7 @@
 
 <br />
 <p align="center">
-  <a href="https://gitlab.com/200scape/2009scape">
+  <a href="https://gitlab.com/2009scape/2009scape">
     <img src="https://i.imgur.com/RsfVfkB.png" alt="Logo" width="300" height="67">
   </a>
   <h3 align="center">An open source MMORPG emulation server</h3>
