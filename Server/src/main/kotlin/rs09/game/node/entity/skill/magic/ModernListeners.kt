@@ -2,19 +2,21 @@ package rs09.game.node.entity.skill.magic
 
 import api.events.ItemAlchemizationEvent
 import api.events.TeleportEvent
+import api.EquipmentSlot
+import api.getItemFromEquipment
 import api.getAttribute
 import api.sendMessage
 import core.game.content.activity.mta.impl.GraveyardZone
 import core.game.content.global.Bones
 import core.game.interaction.MovementPulse
 import core.game.node.entity.Entity
-import core.game.node.entity.impl.Animator.Priority
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
+import core.game.node.entity.skill.magic.MagicStaff
 import core.game.node.entity.skill.smithing.smelting.Bar
 import core.game.node.entity.skill.smithing.smelting.SmeltingPulse
 import core.game.node.item.Item
@@ -45,12 +47,6 @@ class ModernListeners : SpellListener("modern"){
     private val STUN_START = Graphics(173, 96)
     private val STUN_PROJECTILE = Projectile.create(null as Entity?, null, 174, 40, 36, 52, 75, 15, 11)
     private val STUN_END = Graphics(107, 96)
-    private val LOW_ANIMATION = Animation(716, Priority.HIGH)
-    private val HIGH_ANIMATION = Animation(729, Priority.HIGH)
-    private val LOW_ALCH_ANIM = Animation(712)
-    private val LOW_ALCH_GFX = Graphics(112,5)
-    private val HIGH_ALCH_ANIM = Animation(713)
-    private val HIGH_ALCH_GFX = Graphics(113,5)
     private val BONE_CONVERT_GFX = Graphics(141, 96)
     private val BONE_CONVERT_ANIM = Animation(722)
 
@@ -219,11 +215,11 @@ class ModernListeners : SpellListener("modern"){
         setDelay(player,false)
     }
 
-    private fun alchemize(player: Player,item: Item,high:Boolean){
-        if(item.name == "Coins") player.sendMessage("You can't alchemize something that's already gold!").also { return }
-        if(!item.definition.isTradeable) player.sendMessage("You can't cast this spell on something like that.").also { return }
+    private fun alchemize(player: Player,item: Item,high:Boolean) {
+        if (item.name == "Coins") player.sendMessage("You can't alchemize something that's already gold!").also { return }
+        if (!item.definition.isTradeable) player.sendMessage("You can't cast this spell on something like that.").also { return }
 
-        if(player.zoneMonitor.isInZone("Alchemists' Playground")){
+        if (player.zoneMonitor.isInZone("Alchemists' Playground")) {
             player.sendMessage("You can only alch items from the cupboards!")
             return
         }
@@ -238,23 +234,24 @@ class ModernListeners : SpellListener("modern"){
             player.pulseManager.clear()
         }
 
-        if(player.inventory.remove(Item(item.id,1))) {
-            removeRunes(player)
-            if (high) {
-                visualizeSpell(player,HIGH_ALCH_ANIM,HIGH_ALCH_GFX,97)
-            } else {
-                visualizeSpell(player,LOW_ALCH_ANIM,LOW_ALCH_GFX,98)
-            }
-
-            if(coins.amount > 0)
-                player.inventory.add(coins)
-
-            player.dispatch(ItemAlchemizationEvent(item.id, high))
-
-            addXP(player,if(high) 65.0 else 31.0)
-            showMagicTab(player)
-            setDelay(player,5)
+        val weapon = player.equipment.getItem(getItemFromEquipment(player, EquipmentSlot.WEAPON))
+        if (weapon != null && !weapon.equals(MagicStaff.FIRE_RUNE)) {
+            player.animate(Animation(if (high) 9633 else 9625))
+            player.graphics(Graphics(if (high) 1693 else 1692))
+        } else {
+            player.animate(Animation(if (high) 713 else 712))
+            player.graphics(Graphics(if (high) 113 else 112))
         }
+
+        if (coins.amount > 0)
+            player.inventory.add(coins)
+
+        player.dispatch(ItemAlchemizationEvent(item.id, high))
+        player.inventory.remove(Item(item.id, 1))
+        removeRunes(player)
+        addXP(player, if (high) 65.0 else 31.0)
+        showMagicTab(player)
+        setDelay(player, 5)
     }
 
     private fun sendTeleport(player: Player, xp: Double, location: Location){
