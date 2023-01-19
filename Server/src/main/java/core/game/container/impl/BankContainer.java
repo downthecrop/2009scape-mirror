@@ -231,8 +231,9 @@ public final class BankContainer extends Container {
 
 		int maxCount = super.getMaximumAdd(add);
 		if (amount > maxCount) {
-			amount = maxCount;
-			if (amount < 1) {
+			add.setAmount(maxCount);
+			item.setAmount(maxCount);
+			if (maxCount < 1) {
 				player.getPacketDispatch().sendMessage("There is not enough space left in your bank.");
 				return;
 			}
