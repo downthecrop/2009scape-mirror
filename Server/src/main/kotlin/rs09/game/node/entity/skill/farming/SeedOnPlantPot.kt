@@ -28,7 +28,7 @@ class SeedlingListener : InteractionListener {
 
         val seedling = getSeedling(seed.id)
         if (seedling == -1) return false
-        if (!removeItem(player, seed) || !removeItem(player, pot)) return true
+        if (!removeItem(player, seed.id) || !removeItem(player, pot)) return true
         addItem(player, seedling)
         return true
     }
