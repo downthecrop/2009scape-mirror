@@ -40,6 +40,7 @@ public final class VarrockNodePlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		SceneryDefinition.forId(24357).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(24359).getHandlers().put("option:climb-down", this);
 		SceneryDefinition.forId(5581).getHandlers().put("option:take-axe", this);
 		SceneryDefinition.forId(36974).getHandlers().put("option:take-axe", this);
 		SceneryDefinition.forId(24427).getHandlers().put("option:walk-up", this);
@@ -101,6 +102,14 @@ public final class VarrockNodePlugin extends OptionHandler {
 				}
 				if (((Scenery) node).getLocation().equals(new Location(3156, 3435, 0))) {
 					ClimbActionHandler.climb(player, new Animation(828), Location.create(3155, 3435, 1));
+					return true;
+				}
+				ClimbActionHandler.climbLadder(player, (Scenery) node, option);
+				return true;
+
+			case 24359:
+				if (player.getLocation().getDistance(Location.create(3231, 3382, 1)) < 3) {
+					ClimbActionHandler.climb(player, null, Location.create(3231, 3386, 0));
 					return true;
 				}
 				ClimbActionHandler.climbLadder(player, (Scenery) node, option);
