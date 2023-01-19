@@ -111,7 +111,7 @@ public enum ClueLevel {
 
 		Item newClue = ClueScrollPlugin.getClue(clueLevel);
 		
-		if (casket != null && player.getInventory().remove(casket)) {
+		if (casket != null && player.getInventory().remove(casket, casket.getSlot(), true)) {
 			player.getInventory().replace(newClue, casket.getSlot());
 		} else {
 			player.getInventory().add(newClue);
