@@ -100,7 +100,7 @@ class EnchantSpell : MagicSpell {
 
     override fun getExperience(player: Player): Double {
         return if (player.zoneMonitor.isInZone("Enchantment Chamber")) {
-            experience - experience * 0.75
+            experience - experience * 0.25
         } else experience
     }
 
