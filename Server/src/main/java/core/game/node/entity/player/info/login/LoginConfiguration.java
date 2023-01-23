@@ -119,6 +119,7 @@ public final class LoginConfiguration {
         player.getInterfaceManager().setOpened(LOBBY_INTERFACE);
         PacketRepository.send(Interface.class, new InterfaceContext(player, 549, 2, 378, true));
         PacketRepository.send(Interface.class, new InterfaceContext(player, 549, 3, messModel, true));//UPDATE `configs` SET `value`=FLOOR(RAND()*(25-10)+10) WHERE key_="messageInterface"
+        player.getDetails().setLastLogin(System.currentTimeMillis());
     }
 
     /**
