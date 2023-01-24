@@ -68,6 +68,7 @@ import rs09.ServerConstants;
 import rs09.game.VarpManager;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.node.entity.combat.equipment.EquipmentDegrader;
+import rs09.game.node.entity.combat.handlers.SalamanderSwingHandler;
 import rs09.game.node.entity.player.graves.Grave;
 import rs09.game.node.entity.player.graves.GraveController;
 import rs09.game.node.entity.player.info.LogType;
@@ -561,8 +562,8 @@ public class Player extends Entity {
 	@Override
 	public CombatSwingHandler getSwingHandler(boolean swing) {
 		CombatStyle style = getProperties().getCombatPulse().getStyle();
+		int weaponId = equipment.getNew(3).getId();
 		if (swing) {
-			int weaponId = equipment.getNew(3).getId();
 			if (getProperties().getSpell() != null || getProperties().getAutocastSpell() != null) {
 				return CombatStyle.MAGIC.getSwingHandler();
 			}
@@ -574,8 +575,11 @@ public class Player extends Entity {
 				packetDispatch.sendMessage("Unhandled special attack for item " + weaponId + "!");
 			}
 		}
-		if (style == CombatStyle.RANGE && equipment.getNew(3).getId() == 10033 || equipment.getNew(3).getId() == 10034) {
+		if (style == CombatStyle.RANGE && weaponId == 10033 || weaponId == 10034) {
 			return ChinchompaSwingHandler.getInstance();
+		}
+		if (weaponId >= 10146 && weaponId <= 10149) {
+			return SalamanderSwingHandler.Companion.getINSTANCE();
 		}
 		return style.getSwingHandler();
 	}

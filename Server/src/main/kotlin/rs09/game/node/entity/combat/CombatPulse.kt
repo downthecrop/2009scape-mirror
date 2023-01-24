@@ -20,6 +20,7 @@ import core.game.system.task.Pulse
 import rs09.game.world.GameWorld
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
+import rs09.game.node.entity.combat.handlers.SalamanderSwingHandler
 
 /**
  * The combat-handling pulse implementation.
@@ -144,9 +145,10 @@ class CombatPulse(
             }
             var speed = entity.properties.attackSpeed
             val magic = handler!!.type == CombatStyle.MAGIC
+            val salamander = handler!! is SalamanderSwingHandler
             if (entity is Player && magic) {
                 speed = 5
-            } else if (entity.properties.attackStyle.style == WeaponInterface.STYLE_RAPID) {
+            } else if (entity.properties.attackStyle.style == WeaponInterface.STYLE_RAPID || (salamander && entity.properties.attackStyle.style == WeaponInterface.STYLE_RANGE_ACCURATE)) {
                 speed--
             }
             if (!magic && entity.stateManager.hasState(EntityState.MIASMIC)) {
