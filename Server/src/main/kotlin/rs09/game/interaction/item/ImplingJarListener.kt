@@ -39,9 +39,9 @@ enum class ImplingLoot(val jarId: Int, val table: WeightBasedTable){
         WeightedItem(Items.KNIFE_946,1, 1, 10.0),
         WeightedItem(Items.CHEESE_1985, 1, 1, 10.0),
         WeightedItem(Items.HAMMER_2347, 1, 1, 10.0),
-        WeightedItem(0, 1, 1, 10.0),
         WeightedItem(Items.BALL_OF_WOOL_1759, 1, 1, 10.0),
         WeightedItem(Items.ANCHOVIES_319, 1, 1, 10.0),
+        WeightedItem(0, 1, 1, 10.0),
         WeightedItem(Items.SPICE_2007, 1, 1, 1.0),
         WeightedItem(Items.FLAX_1779, 1, 1, 1.0),
         WeightedItem(Items.MUD_PIE_7170, 1, 1, 1.0),
@@ -51,7 +51,6 @@ enum class ImplingLoot(val jarId: Int, val table: WeightBasedTable){
         WeightedItem(Items.SAPPHIRE_1607, 1, 1, 1.0),
         WeightedItem(Items.HARD_LEATHER_1743, 1, 1, 1.0),
         WeightedItem(Items.LOBSTER_379, 1, 1, 1.0),
-        WeightedItem(Items.SOFT_CLAY_1761, 1, 1, 1.0)
     ).insertEasyClue(1.0)),
 
     YOUNG_IMPLING(Items.YOUNG_IMPLING_JAR_11240, WeightBasedTable.create(

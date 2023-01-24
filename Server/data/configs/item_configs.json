@@ -66679,7 +66679,7 @@
     "bonuses": "0,0,0,15,0,0,0,0,15,0,15,0,0,0,0"
   },
   {
-    "requirements": "{1,40}-{6,20}",
+    "requirements": "{1,20}-{6,40}",
     "ge_buy_limit": "2",
     "examine": "Enchanted Wizards robes.",
     "durability": null,
@@ -91269,18 +91269,19 @@
     "equipment_slot": "4"
   },
   {
-    "remove_sleeves": "true",
+    "requirements": "{1,20}-{6,40}",
     "examine": "Enchanted Wizards robes.",
-    "grand_exchange_price": "72800",
     "durability": null,
+    "weight": "1",
+    "absorb": "3,1,0",
+    "equipment_slot": "4",
+    "remove_sleeves": "true",
+    "grand_exchange_price": "72800",
     "name": "Enchanted top",
     "tradeable": "true",
-    "weight": "1",
     "archery_ticket_price": "0",
     "id": "10688",
-    "absorb": "3,1,0",
-    "bonuses": "0,0,0,20,0,0,0,0,20,0,0,0,0,0,0",
-    "equipment_slot": "4"
+    "bonuses": "0,0,0,20,0,0,0,0,20,0,20,0,0,0,0"
   },
   {
     "lendable": "true",
