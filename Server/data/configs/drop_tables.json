@@ -59901,5 +59901,78 @@
     "ids": "1235",
     "description": "Pointed",
     "main": []
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "1019",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "527",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "180",
+    "description": "Old-Highwayman",
+    "main": []
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "526",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "837",
+    "description": "Shantay Guard",
+    "main": []
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "526",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "1019",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "2677",
+    "description": "New-Highwayman",
+    "main": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "617",
+        "maxAmount": "25"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "9141",
+        "maxAmount": "15"
+      },
+      {
+        "minAmount": "1",
+        "weight": "23.0",
+        "id": "0",
+        "maxAmount": "1"
+      }
+    ]
   }
 ]

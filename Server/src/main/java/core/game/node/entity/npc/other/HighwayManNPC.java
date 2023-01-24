@@ -4,8 +4,6 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
-import core.game.node.item.GroundItemManager;
-import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.game.world.map.Location;
 
@@ -16,11 +14,6 @@ import core.game.world.map.Location;
  */
 @Initializable
 public final class HighwayManNPC extends AbstractNPC {
-
-	/**
-	 * Represents the cape item.
-	 */
-	private static final Item CAPE = new Item(1019);
 
 	/**
 	 * Constructs a new {@code HighwayManNPC} {@code Object}.
@@ -42,13 +35,11 @@ public final class HighwayManNPC extends AbstractNPC {
 	public void finalizeDeath(Entity killer) {
 		super.finalizeDeath(killer);
 		if (getId() == 180) {
-			GroundItemManager.create(new Item(526), getLocation(), (Player) killer);
-			GroundItemManager.create(CAPE, getLocation(), (Player) killer);
-		}
-		if (killer instanceof Player) {
-			final Player player = killer.asPlayer();
-			if (!player.getAchievementDiaryManager().getDiary(DiaryType.FALADOR).isComplete(0, 10)) {
-				player.getAchievementDiaryManager().getDiary(DiaryType.FALADOR).updateTask(player, 0, 10, true);
+			if (killer instanceof Player) {
+				final Player player = killer.asPlayer();
+				if (!player.getAchievementDiaryManager().getDiary(DiaryType.FALADOR).isComplete(0, 10)) {
+					player.getAchievementDiaryManager().getDiary(DiaryType.FALADOR).updateTask(player, 0, 10, true);
+				}
 			}
 		}
 	}
