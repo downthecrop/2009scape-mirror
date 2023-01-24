@@ -138,6 +138,11 @@ public final class ImpactHandler {
 	 * @return The impact object created.
 	 */
 	public Impact handleImpact(Entity source, int hit, final CombatStyle style, final BattleState state, HitsplatType type, boolean secondary) {
+		if (DeathTask.isDead(this.entity)) {
+			this.entity.getProperties().getCombatPulse().setVictim(null);
+			this.entity.getProperties().getCombatPulse().stop();
+			return null;
+		}
 		boolean fam = source instanceof Familiar;
 		if (fam) {
 			source = ((Familiar) source).getOwner();

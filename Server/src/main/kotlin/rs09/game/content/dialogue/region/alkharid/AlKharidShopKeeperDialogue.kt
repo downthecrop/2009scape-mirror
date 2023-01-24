@@ -14,7 +14,7 @@ import rs09.tools.END_DIALOGUE
  */
 
 @Initializable
-class AlKharidShopKeeperDialogue(player: Player? = null) : DialoguePlugin() {
+class AlKharidShopKeeperDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun newInstance(player: Player?): DialoguePlugin {
         return AlKharidShopKeeperDialogue(player)
     }

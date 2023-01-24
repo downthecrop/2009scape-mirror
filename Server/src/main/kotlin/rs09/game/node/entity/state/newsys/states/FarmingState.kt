@@ -1,5 +1,6 @@
 package rs09.game.node.entity.state.newsys.states
 
+import core.Util.clamp
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
 import kotlinx.coroutines.GlobalScope
@@ -101,25 +102,30 @@ class FarmingState(player: Player? = null) : State(player) {
                 patch.compost = CompostType.values()[compostOrdinal]
                 patch.protectionPaid = protectionPaid
                 patch.setCurrentState(savedState)
-                if((patch.currentGrowthStage < patch.plantable?.stages ?: 0) && !patch.isWeedy()){
-                    val startTime = (patch.nextGrowth - TimeUnit.MINUTES.toMillis(patch.patch.type.stageGrowthTime * (patch.currentGrowthStage + 1).toLong()))
-                    var expectedStage = Math.floor((System.currentTimeMillis() - startTime.toDouble()) / TimeUnit.MINUTES.toMillis(patch.patch.type.stageGrowthTime.toLong())).toInt()
-                    SystemLogger.logErr(this::class.java, "$expectedStage $startTime ${System.currentTimeMillis()}")
-
-                    if(!patchDiseased && !patchDead) {
-                        if (expectedStage > patch.plantable?.stages ?: 0) {
-                            expectedStage = patch.plantable?.stages ?: 0
-                        }
-                        for(i in 0 until (expectedStage - patch.currentGrowthStage)){
-                            patch.update()
-                        }
-                    }
-                }
 
                 if((savedState - (patch?.plantable?.value ?: 0)) > patch.currentGrowthStage){
                     patch.setCurrentState(savedState)
                 } else {
                     patch.setCurrentState((patch.plantable?.value ?: 0) + patch.currentGrowthStage)
+                }
+
+                val type = patch.patch.type
+                val shouldPlayCatchup = !patch.isGrown() || (type == PatchType.BUSH && patch.getFruitOrBerryCount() < 4) || (type == PatchType.FRUIT_TREE && patch.getFruitOrBerryCount() < 6)
+                if(shouldPlayCatchup && patch.plantable != null && !patchDead){
+                    var stagesToSimulate = if (!patch.isGrown()) patch.plantable!!.stages - patch.currentGrowthStage else 0
+                    if (type == PatchType.BUSH)
+                        stagesToSimulate += Math.min(4, 4 - patch.getFruitOrBerryCount())
+                    if (type == PatchType.FRUIT_TREE)
+                        stagesToSimulate += Math.min(6, 6 - patch.getFruitOrBerryCount())
+
+                    val nowTime = System.currentTimeMillis()
+                    var simulatedTime = patch.nextGrowth
+
+                    while (simulatedTime < nowTime && stagesToSimulate-- > 0 && !patch.isDead) {
+                        val timeToIncrement = TimeUnit.MINUTES.toMillis(patch.getStageGrowthMinutes().toLong())
+                        patch.update()
+                        simulatedTime += timeToIncrement
+                    }
                 }
 
                 if(patchMap[fPatch] == null) {
@@ -148,13 +154,7 @@ class FarmingState(player: Player? = null) : State(player) {
 
                         if(patch.nextGrowth < System.currentTimeMillis() && !patch.isDead){
                             patch.update()
-                            var minutes = patch.patch.type.stageGrowthTime.toLong()
-                            if(patch.patch.type == PatchType.FRUIT_TREE && patch.isGrown()) {
-                                // Fruit trees take 160 minutes per stage to grow, but
-                                // restocking their fruit should take 40 minutes per fruit
-                                minutes = 40
-                            }
-                            patch.nextGrowth = System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(minutes)
+                            patch.nextGrowth = System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(patch.getStageGrowthMinutes().toLong())
                         }
 
                     }

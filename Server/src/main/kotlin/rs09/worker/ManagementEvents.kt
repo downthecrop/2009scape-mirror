@@ -223,6 +223,7 @@ object ManagementEvents {
                     sendMessage(p, "Error leaving clan. Please relog.")
                 } else {
                     clan.leave(p, true)
+                    p.details.communication.clan = null
                 }
             }
 

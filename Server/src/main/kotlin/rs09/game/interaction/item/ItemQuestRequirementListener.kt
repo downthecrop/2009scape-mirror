@@ -83,7 +83,9 @@ class ItemQuestRequirementListener : InteractionListener {
         Items.ZAMORAK_PLATEBODY_2653,
         Items.SARADOMIN_PLATEBODY_2661,
         Items.GUTHIX_PLATEBODY_2669,
-        Items.GREEN_DHIDE_BODY_1135
+        Items.GREEN_DHIDE_BODY_1135,
+        Items.DHIDE_BODYG_7370, //Green (g)
+        Items.DHIDE_BODY_T_7372 //Green (t)
     )
 
     private val questCapes = intArrayOf(9813,9814)

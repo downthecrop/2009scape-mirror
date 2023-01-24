@@ -65,13 +65,12 @@ import proto.management.ClanLeaveNotification;
 import proto.management.PlayerStatusUpdate;
 import rs09.GlobalStats;
 import rs09.ServerConstants;
-import rs09.game.Varp;
 import rs09.game.VarpManager;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.node.entity.combat.equipment.EquipmentDegrader;
 import rs09.game.node.entity.player.graves.Grave;
-import rs09.game.node.entity.player.graves.GraveType;
 import rs09.game.node.entity.player.graves.GraveController;
+import rs09.game.node.entity.player.info.LogType;
 import rs09.game.node.entity.player.info.PlayerMonitor;
 import rs09.game.node.entity.player.info.login.PlayerSaver;
 import rs09.game.node.entity.skill.runecrafting.PouchManager;
@@ -654,7 +653,7 @@ public class Player extends Entity {
 					GroundItemManager.create(item, location, killer instanceof Player ? (Player) killer : this);
 				}
 				if (killer instanceof Player)
-					PlayerMonitor.logMisc((Player) killer, "PK", "Killed " + name + ", who dropped: " + itemsLost);
+					PlayerMonitor.log((Player) killer, LogType.PK, "Killed " + name + ", who dropped: " + itemsLost);
 				sendMessage(colorize("%RDue to the circumstances of your death, you do not have a grave."));
 			}
 

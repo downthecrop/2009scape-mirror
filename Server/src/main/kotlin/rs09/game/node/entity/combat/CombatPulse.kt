@@ -437,7 +437,7 @@ class CombatPulse(
             GameWorld.Pulser.submit(object : Pulse(delay - 1, entity, victim) {
                 var impact = false
                 override fun pulse(): Boolean {
-                    if (DeathTask.isDead(victim)) {
+                    if (DeathTask.isDead(victim) || DeathTask.isDead(entity)) {
                         return true
                     }
                     if (impact || getDelay() == 0) {

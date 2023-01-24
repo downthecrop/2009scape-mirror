@@ -394,6 +394,8 @@ public class NPC extends Entity {
 			return;
 		}
 		if (respawnTick > GameWorld.getTicks()) {
+			if (respawnTick - GameWorld.getTicks() == 2)
+				teleport(getProperties().getSpawnLocation());
 			return;
 		}
 		if (respawnTick == GameWorld.getTicks()) {
@@ -522,9 +524,8 @@ public class NPC extends Entity {
             GlobalKillCounter.incrementKills(p, originalId);
 		}
 		handleDrops(p, killer);
-		if (!isRespawn()) {
+		if (!isRespawn())
 			clear();
-		}
 		killer.dispatch(new NPCKillEvent(this));
 	}
 

@@ -1,6 +1,7 @@
 package rs09.game.content.ame.events.supriseexam
 
 import api.*
+import core.game.node.entity.impl.PulseType
 import core.game.node.entity.player.Player
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
@@ -51,7 +52,7 @@ object SurpriseExamUtils {
                 }
                 return true
             }
-        })
+        }, PulseType.CUSTOM_1)
     }
 
     fun generateInterface(player: Player){

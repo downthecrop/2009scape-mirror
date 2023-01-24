@@ -1,5 +1,6 @@
 package core.game.content.activity.mta;
 
+import api.ContainerisedItem;
 import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.component.ComponentPlugin;
@@ -14,6 +15,8 @@ import rs09.game.world.GameWorld;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static api.ContentAPIKt.hasAnItem;
 
 /**
  * Represents the mage training arena shop.
@@ -147,9 +150,11 @@ public class MTAShop {
 			player.sendMessage("You already unlocked that spell.");
 			return;
 		}
+		ContainerisedItem itemToRemove = null;
 		if (slot >= 1 && slot <= 3) {
 			Item required = ITEMS[slot - 1];
-			if (!player.hasItem(new Item(required.getId(), 1)) && !player.hasItem(new Item(6914, 1))) {
+			itemToRemove = hasAnItem(player, required.getId());
+			if (!itemToRemove.exists() && !player.hasItem(new Item(6914, 1))) {
 				player.sendMessage("You don't have the required wand in order to buy this upgrade.");
 				return;
 			}
@@ -163,7 +168,8 @@ public class MTAShop {
 			player.getSavedData().getActivityData().setBonesToPeaches(true);
 			player.getDialogueInterpreter().sendDialogue("The guardian teaches you how to use the Bones to Peaches spell!");
 		} else {
-			player.getInventory().add(item);
+			if (itemToRemove == null || itemToRemove.remove())
+				player.getInventory().add(item);
 		}
 		for (int i = 0; i < prices.length; i++) {
 			decrementPoints(player, i, prices[i]);

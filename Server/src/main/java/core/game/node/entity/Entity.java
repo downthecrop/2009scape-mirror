@@ -338,6 +338,8 @@ public abstract class Entity extends Node {
 	 * @param state The battle state.
 	 */
 	public void onImpact(final Entity entity, BattleState state) {
+		if (DeathTask.isDead(this))
+			state.neutralizeHits();
 		if (properties.isRetaliating() && !properties.getCombatPulse().isAttacking() && !getLocks().isInteractionLocked() && properties.getCombatPulse().getNextAttack() < GameWorld.getTicks()) {
 			if (!getWalkingQueue().hasPath() && !getPulseManager().isMovingPulse() || (this instanceof NPC)) {
 				properties.getCombatPulse().attack(entity);

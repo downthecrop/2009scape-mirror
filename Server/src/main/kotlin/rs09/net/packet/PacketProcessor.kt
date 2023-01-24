@@ -38,7 +38,6 @@ import core.net.amsc.MSPacketRepository
 import core.net.packet.PacketRepository
 import core.net.packet.context.PlayerContext
 import core.net.packet.out.ClearMinimapFlag
-import discord.Discord
 import org.rs09.consts.Components
 import proto.management.ClanMessage
 import proto.management.JoinClanRequest
@@ -53,6 +52,7 @@ import rs09.game.interaction.InteractionListeners
 import rs09.game.interaction.InterfaceListeners
 import rs09.game.interaction.QCRepository
 import rs09.game.interaction.inter.ge.StockMarket
+import rs09.game.node.entity.player.info.LogType
 import rs09.game.node.entity.player.info.PlayerMonitor
 import rs09.game.node.entity.skill.magic.SpellListener
 import rs09.game.node.entity.skill.magic.SpellListeners
@@ -199,7 +199,7 @@ object PacketProcessor {
                 pkt.player.interfaceManager.closeChatbox()
             }
             is Packet.Command -> {
-                PlayerMonitor.logMisc(pkt.player, "CommandUse", pkt.commandLine)
+                PlayerMonitor.log(pkt.player, LogType.COMMAND, pkt.commandLine)
                 CommandSystem.commandSystem.parse(pkt.player, pkt.commandLine)
             }
             is Packet.ChatMessage -> {
@@ -404,7 +404,7 @@ object PacketProcessor {
         if (book != "none")
             SpellListeners.run(child, type, book, player, target)
         when (iface) {
-            430,192 -> MagicSpell.castSpell(player, SpellBookManager.SpellBook.forInterface(iface), child, target)
+            430,192,193 -> MagicSpell.castSpell(player, SpellBookManager.SpellBook.forInterface(iface), child, target)
             662 -> {
                 if (player.familiarManager.hasFamiliar())
                     player.familiarManager.familiar.executeSpecialMove(FamiliarSpecial(target, iface, child, target as? Item))
@@ -664,7 +664,7 @@ object PacketProcessor {
         player.debug("ID: ${wrapperChild.id}, Option: ${option.name}[${option.index}]")
         player.debug("Loc: ${scenery.location}, Dir: ${scenery.direction}")
         if (hasWrapper) {
-            player.debug("WrapperID: ${scenery.id}, Varbit: ${scenery.definition.configFile.id}")
+            player.debug("WrapperID: ${scenery.id}, ${scenery.definition.configFile?.let { "Varbit: ${it.id}"} ?: "Varp: ${scenery.definition.configId}"}")
         }
         player.debug("------------------------------------------------")
 

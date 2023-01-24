@@ -81,11 +81,11 @@ object PlayerMonitor {
         dispatch(event)
     }
 
-    @JvmStatic fun logMisc(player: Player, type: String, details: String) {
+    @JvmStatic fun log(player: Player, type: LogType, details: String) {
         val event = LogEvent.MiscLog(
             player.name,
             player.details.uid,
-            type,
+            type.token,
             details,
             System.currentTimeMillis()
         )
@@ -253,4 +253,13 @@ object PlayerMonitor {
     private const val MISC_LOG_INSERT = "INSERT INTO misc_logs(player,uid,type,details,timestamp) VALUES (?,?,?,?,?);"
     private const val WEALTH_LOG_INSERT = "INSERT INTO wealth_logs(player,uid,total,diff,timestamp) VALUES (?,?,?,?,?);"
 
+}
+
+enum class LogType(val token: String) {
+    DUPE_ALERT("dupe_warning"),
+    DUEL_INFO("Duel"),
+    PK("PK"),
+    DROP_TRADE("DropTrade"),
+    COMMAND("CommandUsed"),
+    IP_LOG("login_ip")
 }

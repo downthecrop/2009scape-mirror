@@ -17,6 +17,7 @@ import core.plugin.Plugin;
 import core.tools.RandomFunction;
 import kotlin.Unit;
 import rs09.game.content.global.action.EquipHandler;
+import rs09.game.node.entity.player.info.LogType;
 import rs09.game.node.entity.player.info.PlayerMonitor;
 import rs09.game.system.config.ItemConfigParser;
 
@@ -311,7 +312,7 @@ public final class DuelSession extends ComponentPlugin {
 				log = log.substring(0, log.length() - 1);
 			}
 			log += "}";
-			PlayerMonitor.logMisc(player, "Duel", log);
+			PlayerMonitor.log(player, LogType.DUEL_INFO, log);
 		} else {
 			player.removeExtension(DuelSession.class);
 		}

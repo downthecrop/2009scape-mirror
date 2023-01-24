@@ -603,8 +603,17 @@ object RegionManager {
         val it = npcs.iterator()
         while (it.hasNext()) {
             val p = it.next()
+            if(p.properties.teleportLocation != null && !p.properties.teleportLocation.withinMaxnormDistance(n.location, 1)) {
+                it.remove()
+                continue
+            }
+            if(p.getAttribute("state:death", false)) {
+                it.remove()
+                continue
+            }
             if(p.isInvisible()) {
                 it.remove()
+                continue
             }
             if(!p.location.withinMaxnormDistance(n.location, 1)) {
                 it.remove()

@@ -55,6 +55,8 @@ import rs09.game.content.global.shops.Shops
 import rs09.game.ge.GrandExchangeRecords
 import rs09.game.interaction.InteractionListeners
 import rs09.game.interaction.inter.ge.StockMarket
+import rs09.game.node.entity.player.info.LogType
+import rs09.game.node.entity.player.info.PlayerMonitor
 import rs09.game.node.entity.skill.slayer.SlayerManager
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.ItemConfigParser
@@ -164,7 +166,14 @@ fun areAnyEquipped(player: Player, vararg ids: Int): Boolean {
     }
 }
 
-data class ContainerisedItem(val container: core.game.container.Container?, val itemId: Int)
+class ContainerisedItem(val container: core.game.container.Container?, val itemId: Int) {
+    fun remove() : Boolean {
+        return this.container?.remove(this.itemId.asItem()) ?: false
+    }
+    fun exists() : Boolean {
+        return this.container != null && this.itemId > -1
+    }
+}
 
 /**
  * Check if player has any of the specified item IDs equipped, in inventory, or in banks
@@ -239,14 +248,27 @@ fun addItem(player: Player, id: Int, amount: Int = 1, container: Container = Con
  * @param container the Container to modify
  * @return the item that was previously in the slot, or null if none.
  */
-fun replaceSlot(player: Player, slot: Int, item: Item, container: Container = Container.INVENTORY): Item? {
+fun replaceSlot(player: Player, slot: Int, item: Item, currentItem: Item? = null, container: Container = Container.INVENTORY): Item? {
     val cont = when (container) {
         Container.INVENTORY -> player.inventory
         Container.EQUIPMENT -> player.equipment
         Container.BANK -> player.bank
     }
 
-    return cont.replace(item, slot)
+    if (currentItem == null) {
+        return cont.replace(item, slot)
+    }
+
+    if (cont.remove(currentItem))
+        return cont.replace(item, slot)
+    PlayerMonitor.log(player, LogType.DUPE_ALERT, "Potential slot-replacement-based dupe attempt, slot: $slot, item: $item")
+    val other = when (container) {
+        Container.INVENTORY -> Container.EQUIPMENT
+        else -> Container.INVENTORY
+    }
+    if (removeItem(player, currentItem, other))
+        return cont.replace(item, slot)
+    return null
 }
 
 /**

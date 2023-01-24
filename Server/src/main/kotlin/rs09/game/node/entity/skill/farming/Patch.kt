@@ -317,6 +317,16 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
         return getCurrentState() - plantable!!.value - plantable!!.stages
     }
 
+    fun getStageGrowthMinutes() : Int {
+        var minutes = patch.type.stageGrowthTime
+        if(patch.type == PatchType.FRUIT_TREE && isGrown()) {
+            // Fruit trees take 160 minutes per stage to grow, but
+            // restocking their fruit should take 40 minutes per fruit
+            minutes = 40
+        }
+        return minutes
+    }
+
     fun isFlowerProtected(): Boolean{
         if(patch.type != PatchType.ALLOTMENT) return false
 

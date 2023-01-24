@@ -249,7 +249,7 @@ enum class EnchantedJewellery(
 
     private fun replaceJewellery(player: Player, item: Item, nextJewellery: Item, isEquipped: Boolean) {
         if (isEquipped) {
-            replaceSlot(player, item.slot, nextJewellery, Container.EQUIPMENT)
+            replaceSlot(player, item.slot, nextJewellery, item, Container.EQUIPMENT)
         } else {
             replaceSlot(player, item.slot, nextJewellery)
         }

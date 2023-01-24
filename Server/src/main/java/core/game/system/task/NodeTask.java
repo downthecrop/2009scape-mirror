@@ -103,6 +103,7 @@ public abstract class NodeTask {
 				return NodeTask.this.removeFor(s, node, n);
 			}
 		};
+		pulse.start();
 		return pulse;
 	}
 

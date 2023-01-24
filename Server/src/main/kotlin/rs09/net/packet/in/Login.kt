@@ -19,6 +19,7 @@ import rs09.ServerStore
 import rs09.ServerStore.Companion.addToList
 import rs09.ServerStore.Companion.getList
 import rs09.auth.AuthResponse
+import rs09.game.node.entity.player.info.LogType
 import rs09.game.node.entity.player.info.PlayerMonitor
 import rs09.game.node.entity.player.info.login.LoginParser
 import rs09.game.system.SystemLogger
@@ -132,7 +133,7 @@ object Login {
         }
 
         val player = Player(details)
-        PlayerMonitor.logMisc(player, "login_ip", details.ipAddress)
+        PlayerMonitor.log(player, LogType.IP_LOG, details.ipAddress)
         if (canBypassAccountLimitCheck(player)) {
             proceedWithAcceptableLogin(session, player, opcode)
         } else {

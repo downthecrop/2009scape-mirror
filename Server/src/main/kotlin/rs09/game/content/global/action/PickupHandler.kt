@@ -6,14 +6,13 @@ import core.game.content.dialogue.FacialExpression
 import core.game.content.global.GodType
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.audio.Audio
-import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.runecrafting.RunePouch
 import core.game.node.item.GroundItem
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
-import org.rs09.consts.Items
+import rs09.game.node.entity.player.info.LogType
 import rs09.game.node.entity.player.info.PlayerMonitor
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.GroundSpawnLoader
@@ -58,7 +57,7 @@ object PickupHandler {
         }
         if (item.isActive && player.inventory.add(add)) {
             if (item.dropper is Player && item.dropper.details.uid != player.details.uid){
-                PlayerMonitor.logMisc(item.dropper, "DropTrade", "${getItemName(item.id)} x${item.amount} picked up by ${player.name}.")
+                PlayerMonitor.log(item.dropper, LogType.DROP_TRADE, "${getItemName(item.id)} x${item.amount} picked up by ${player.name}.")
             }
             if (!RegionManager.isTeleportPermitted(item.location)) {
                 player.animate(Animation.create(535))
