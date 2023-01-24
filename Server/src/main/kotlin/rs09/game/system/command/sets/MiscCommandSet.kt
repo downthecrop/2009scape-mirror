@@ -1,7 +1,6 @@
 package rs09.game.system.command.sets
 
 import api.*
-import api.InputType
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.SceneryDefinition
 import core.cache.def.impl.VarbitDefinition
@@ -21,7 +20,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.rs09.consts.Components
 import rs09.ServerConstants
-import rs09.game.ai.AIPlayer
 import rs09.game.ai.AIRepository
 import rs09.game.camerautils.PlayerCamera
 import rs09.game.content.activity.fishingtrawler.TrawlerLoot
@@ -39,7 +37,6 @@ import rs09.tools.stringtools.colorize
 import java.awt.HeadlessException
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
-import java.util.*
 
 @Initializable
 class MiscCommandSet : CommandSet(Privilege.ADMIN){
@@ -320,6 +317,14 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             } else {
                 reject(player, "<col=3498db>You have not recieved any recent messages to which you can reply.")
             }
+        }
+
+        /**
+         * Enables client to safety close the currently opened interface or dialogue (esc-to-close plugin)
+         */
+        define("xface", Privilege.STANDARD, "", "Closes the currently opened interface/dialogue."){player, _ ->
+            player.interfaceManager.close()
+            player.dialogueInterpreter.close()
         }
 
 
