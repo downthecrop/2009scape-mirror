@@ -82,7 +82,8 @@ abstract class FarmerDialogue : DialogueFile() {
                 if(player!!.inventory.containsItem(price) && player!!.inventory.remove(price)) {
                     if(player!!.inventory.add(Item(Items.FLAG_12625, 10 - flags))) {
                         npcl(lines[4])
-                        stage = 23
+                        stage = 22
+                        stage = END_DIALOGUE
                     } else {
                         npcl(lines[5])
                         // Refund the coins, can't fail because we just removed them
