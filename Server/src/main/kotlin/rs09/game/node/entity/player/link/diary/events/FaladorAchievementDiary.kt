@@ -26,6 +26,8 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
         private val PARK_POND_AREA = ZoneBorders(2987, 3381, 2994, 3386)
         private val WAYNES_CHAINS_AREA = ZoneBorders(2969, 3310, 2975, 3314)
         private val SARAHS_FARMING_SHOP_AREA = ZoneBorders(3021, 3285, 3040, 3296)
+        private val FALADOR_GENERAL_AREA = ZoneBorders(2934, 3399, 3399, 3307)
+
 
         private val PROSELYTE_FULL_ARMOR_MALE = intArrayOf(
             Items.PROSELYTE_SALLET_9672,
@@ -47,6 +49,13 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
 
         private val PARK_DUCKS = intArrayOf(
             NPCs.DUCK_46, NPCs.DUCK_2693
+        )
+
+        private val FALADOR_GUARD = intArrayOf(
+                NPCs.GUARD_9,    // Guard - City Gates
+                NPCs.GUARD_3230, // Guard - Greataxe
+                NPCs.GUARD_3228, // Guard - Fountain Longsword
+                NPCs.GUARD_3229  // Guard - Fountain Crossbow
         )
 
         private val SKELETAL_WYVERNS = intArrayOf(
@@ -137,8 +146,14 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
                 }
             }
         }
+        if (event.option == "pickpocket" && (event.target.id in FALADOR_GUARD && inBorders(player, FALADOR_GENERAL_AREA))) {
+            finishTask(
+                    player,
+                    DiaryLevel.MEDIUM,
+                    MediumTasks.PICKPOCKET_GUARD
+            )
+        }
     }
-
     override fun onDialogueOptionSelected(player: Player, event: DialogueOptionSelectionEvent) {
         when (event.dialogue) {
             is RisingSunInnBartenderDialogue -> {
