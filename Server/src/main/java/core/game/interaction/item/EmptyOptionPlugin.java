@@ -50,6 +50,7 @@ public final class EmptyOptionPlugin extends OptionHandler {
 	}
 	public enum EmptyItem{
 		POT_OF_FLOUR(1933, 1931, "You empty the contents of the pot onto the floor."),
+		POT_OF_CORNFLOUR(7468, 1931, "You empty the contents of the pot onto the floor."),
 		BONE_MEAL(4255, 1931, "You empty the pot of crushed bones."),
 		BUCKET_OF_SAND(1783, BUCKET, BUCKET_EMPTY_MSG),
 		BUCKET_OF_MILK(1927, BUCKET, BUCKET_EMPTY_MSG),
