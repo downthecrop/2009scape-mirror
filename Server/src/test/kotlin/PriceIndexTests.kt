@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import rs09.game.ge.GEDB
-import rs09.game.ge.PriceIndex
+import core.game.ge.GEDB
+import core.game.ge.PriceIndex
 
 class PriceIndexTests {
     companion object {init {TestUtils.preTestSetup(); GEDB.init("ge_test.db")}}

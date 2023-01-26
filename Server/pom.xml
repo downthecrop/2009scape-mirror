@@ -5,7 +5,7 @@
   <artifactId>server</artifactId>
   <version>1.0.0</version>
   <properties>
-    <project.mainClassName>rs09.Server</project.mainClassName>
+    <project.mainClassName>core.Server</project.mainClassName>
     <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
     <kotlin.version>1.6.21</kotlin.version>
     <kotlin.comipler.jvmTarget>1.6</kotlin.comipler.jvmTarget>
@@ -93,6 +93,8 @@
   </dependencies>
 
   <build>
+    <sourceDirectory>src/main</sourceDirectory>
+    <testSourceDirectory>src/test</testSourceDirectory>
     <plugins>
 
       <!-- Installs our local dependencies (const/extension libraries) to a local maven repo) -->
@@ -173,8 +175,7 @@
             </goals>
             <configuration>
               <sourceDirs>
-                <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
-                <sourceDir>${project.basedir}/src/main/java</sourceDir>
+                <sourceDir>${project.basedir}/src/main</sourceDir>
               </sourceDirs>
             </configuration>
           </execution>
@@ -258,7 +259,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>1.2.1</version>
         <configuration>
-          <mainClass>rs09.Server</mainClass>
+          <mainClass>core.Server</mainClass>
         </configuration>
       </plugin>
         <plugin>
@@ -278,7 +279,7 @@
                                   classname="io.gitlab.arturbosch.detekt.cli.Main"
                                   classpathref="maven.plugin.classpath">
                                 <arg value="--input"/>
-                                <arg value="${basedir}/src/main/kotlin"/>
+                                <arg value="${basedir}/src/main"/>
                                 <arg value="--excludes"/>
                                 <arg value="**/special/package/internal/**"/>
                                 <arg value="--report"/>

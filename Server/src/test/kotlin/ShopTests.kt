@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.rs09.consts.Items
-import rs09.game.content.global.shops.Shop
-import rs09.game.content.global.shops.Shops
+import core.game.shops.Shop
+import core.game.shops.Shops
 import kotlin.math.min
 import kotlin.math.roundToInt
 

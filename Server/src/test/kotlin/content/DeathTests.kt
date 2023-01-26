@@ -1,23 +1,17 @@
 package content
 
 import TestUtils
-import api.asItem
-import core.game.content.global.action.DropItemHandler
-import core.game.node.entity.combat.ImpactHandler
+import core.api.asItem
 import core.game.node.entity.player.info.Rights
 import core.game.node.entity.player.link.IronmanMode
 import core.game.world.map.Location
-import org.junit.Assert
-import org.junit.BeforeClass
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.parallel.Execution
-import org.junit.jupiter.api.parallel.ExecutionMode
 import org.rs09.consts.Items
-import rs09.game.node.entity.player.graves.GraveType
-import rs09.game.node.entity.player.graves.GraveController
-import rs09.game.world.GameWorld
-import rs09.tools.secondsToTicks
+import core.game.node.entity.combat.graves.GraveType
+import core.game.node.entity.combat.graves.GraveController
+import core.game.world.GameWorld
+import core.tools.secondsToTicks
 class DeathTests {
     init {
         //explicitly register the GraveController as a tick listener because tests don't run reflection
@@ -307,7 +301,7 @@ class DeathTests {
         Assertions.assertNotNull(g)
         Assertions.assertEquals(p.location, g?.location)
 
-        val canDrop = DropItemHandler.drop(p, p.inventory[0])
+        val canDrop = core.game.global.action.DropItemHandler.drop(p, p.inventory[0])
         Assertions.assertEquals(false, canDrop)
     }
 }

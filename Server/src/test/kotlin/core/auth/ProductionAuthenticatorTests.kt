@@ -4,10 +4,10 @@ import org.junit.Assert
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
-import rs09.auth.AuthResponse
-import rs09.auth.ProductionAuthenticator
-import rs09.auth.UserAccountInfo
-import rs09.storage.InMemoryStorageProvider
+import core.auth.AuthResponse
+import core.auth.ProductionAuthenticator
+import core.auth.UserAccountInfo
+import core.storage.InMemoryStorageProvider
 
 class ProductionAuthenticatorTests {
     companion object {

@@ -2,8 +2,8 @@ package core.net
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import rs09.auth.AuthResponse
-import rs09.net.packet.`in`.Login
+import core.auth.AuthResponse
+import core.net.packet.`in`.Login
 import java.nio.ByteBuffer
 
 class LoginTests {

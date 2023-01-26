@@ -1,16 +1,16 @@
 package content
 
 import TestUtils
-import api.EquipmentSlot
+import core.api.EquipmentSlot
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.rs09.consts.Items
-import rs09.game.content.global.action.EquipHandler
-import rs09.game.interaction.InteractionListener
-import rs09.game.interaction.IntType
-import rs09.game.interaction.InteractionListeners
+import core.game.global.action.EquipHandler
+import core.game.interaction.InteractionListener
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListeners
 
 class EquipTests {
     companion object {

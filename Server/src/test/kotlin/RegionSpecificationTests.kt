@@ -1,14 +1,12 @@
-import api.regionspec.*
-import api.regionspec.contracts.FillChunkContract
+import core.api.regionspec.*
+import core.api.regionspec.contracts.FillChunkContract
 import core.game.world.map.BuildRegionChunk
 import core.game.world.map.Region
 import core.game.world.map.RegionChunk
 import core.game.world.map.RegionManager
 import core.game.world.map.build.DynamicRegion
-import org.junit.BeforeClass
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import rs09.game.system.SystemLogger
 
 class RegionSpecificationTests {
     companion object {

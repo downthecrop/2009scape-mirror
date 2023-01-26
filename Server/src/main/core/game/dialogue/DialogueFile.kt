@@ -1,0 +1,152 @@
+package core.game.dialogue
+
+import core.api.splitLines
+import core.game.component.Component
+import core.game.node.entity.Entity
+import core.game.node.entity.npc.NPC
+import core.game.node.entity.player.Player
+import core.tools.START_DIALOGUE
+
+abstract class DialogueFile {
+    var player: Player? = null
+    var npc: NPC? = null
+    var interpreter: core.game.dialogue.DialogueInterpreter? = null
+    open var stage = START_DIALOGUE
+    var dialoguePlugin: core.game.dialogue.DialoguePlugin? = null
+
+    abstract fun handle(componentID: Int, buttonID: Int)
+
+    fun load(player: Player, npc: NPC?, interpreter: core.game.dialogue.DialogueInterpreter): DialogueFile {
+        this.player = player
+        this.npc = npc
+        this.interpreter = interpreter
+
+        return this
+    }
+
+    open fun npc(vararg messages: String?): Component? {
+        if (npc != null) {
+            return interpreter!!.sendDialogues(
+                npc,
+                if (npc!!.id > 8591) core.game.dialogue.FacialExpression.OLD_NORMAL else core.game.dialogue.FacialExpression.FRIENDLY,
+                *messages
+            )
+        }
+        return null
+    }
+
+    open fun npc(id: Int, vararg messages: String?): Component? {
+        return interpreter!!.sendDialogues(id, core.game.dialogue.FacialExpression.FRIENDLY, *messages)
+    }
+
+    open fun npc(expression: core.game.dialogue.FacialExpression?, vararg messages: String?): Component? {
+        return if (npc == null) {
+            interpreter!!.sendDialogues(0, expression, *messages)
+        } else interpreter!!.sendDialogues(npc, expression, *messages)
+    }
+
+    open fun player(vararg messages: String?): Component? {
+        return interpreter!!.sendDialogues(player, null, *messages)
+    }
+
+    open fun player(expression: core.game.dialogue.FacialExpression?, vararg messages: String?): Component? {
+        return interpreter!!.sendDialogues(player, expression, *messages)
+    }
+
+    /**
+     * Use the automatic linesplitting feature in DialUtils to produce npc dialogues
+     * @param expr the FacialExpression to use, located in the FacialExpression enum.
+     * @param msg the message for the NPC to say
+     */
+    open fun npcl(expr: core.game.dialogue.FacialExpression?, msg: String?): Component? {
+        return npc(expr, *splitLines(msg!!))
+    }
+
+    open fun npcl(msg: String?): Component? {
+        return npc(*splitLines(msg!!))
+    }
+
+    /**
+     * Use the automatic linesplitting feature in DialUtils to produce player dialogues
+     * @param expr the FacialExpression to use, located in the FacialExpression enum.
+     * @param msg the message for the player to say
+     */
+    open fun playerl(expr: core.game.dialogue.FacialExpression?, msg: String?): Component? {
+        return player(expr, *splitLines(msg!!))
+    }
+
+    open fun playerl(msg: String?): Component? {
+        return player(*splitLines(msg!!))
+    }
+
+    open fun end(){
+        if(interpreter != null) interpreter!!.close()
+    }
+
+    open fun sendNormalDialogue(entity: Entity?, expression: core.game.dialogue.FacialExpression?, vararg messages: String?) {
+        interpreter!!.sendDialogues(entity, expression, *messages)
+    }
+
+    open fun options(vararg options: String?) {
+        interpreter!!.sendOptions("Select an Option", *options)
+    }
+
+    /**
+     * Use in place of setting the stage to END_DIALOGUE when you want to return to the default dialogue plugin at START_DIALOGUE
+     */
+    fun endFile(){
+        interpreter!!.dialogue.file = null
+
+    }
+
+    /**
+     * Return to the default dialogue plugin at the given stage.
+     * Should be used in place of setting a new stage. I.E. instead of "stage = END_DIALOGUE" use "returnAtStage(whatever stage)"
+     * @param stage The stage to return to.
+     */
+    fun returnAtStage(toStage: Int){
+        dialoguePlugin!!.file = null
+        dialoguePlugin!!.stage = toStage
+    }
+
+    /**
+     * Use when you've entered a DialogueFile but current state does not match any possible conditionals.
+     * Sort-of a fail-safe in a sense.
+     */
+    fun abandonFile(){
+        interpreter!!.dialogue.file = null
+        player("Huh. Nevermind.")
+    }
+
+    open fun getCurrentStage(): Int{
+        return stage
+    }
+
+    fun Int.substage(stage: Int): Int{
+        return this + stage
+    }
+
+    fun dialogue(vararg messages: String){
+        player?.dialogueInterpreter?.sendDialogue(*messages)
+    }
+
+    fun showTopics(vararg topics: Topic<*>) {
+        val validTopics = ArrayList<String>()
+        topics.filter { if(it is IfTopic) it.showCondition else true }.forEach {
+                topic -> interpreter!!.activeTopics.add(topic)
+                validTopics.add(topic.text)
+        }
+        if (validTopics.size == 1) {
+            val topic = topics[0]
+            if(topic.toStage is DialogueFile) {
+                val topicFile = topic.toStage as DialogueFile
+                interpreter!!.dialogue.loadFile(topicFile)
+            } else if(topic.toStage is Int) {
+                stage = topic.toStage as Int    
+            }
+            player(topic.text)
+            interpreter!!.activeTopics.clear()
+        }
+        else options(*validTopics.toTypedArray())
+    }
+}

@@ -2,10 +2,10 @@ package core.auth
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import rs09.auth.DevelopmentAuthenticator
-import rs09.auth.AuthResponse
-import rs09.auth.UserAccountInfo
-import rs09.storage.InMemoryStorageProvider
+import core.auth.DevelopmentAuthenticator
+import core.auth.AuthResponse
+import core.auth.UserAccountInfo
+import core.storage.InMemoryStorageProvider
 
 class DevelopmentAuthenticatorTests {
     private val authProvider = DevelopmentAuthenticator()

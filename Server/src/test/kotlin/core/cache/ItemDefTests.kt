@@ -1,7 +1,7 @@
 package core.cache
 
 import TestUtils
-import api.itemDefinition
+import core.api.itemDefinition
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import java.io.File

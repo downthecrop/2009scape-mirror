@@ -1,8 +1,8 @@
 import core.game.node.entity.player.link.music.MusicEntry
-import core.game.node.entity.skill.construction.HouseLocation
-import core.game.node.entity.skill.construction.HouseManager
-import core.game.node.entity.skill.construction.Servant
-import core.game.node.entity.skill.construction.ServantType
+import content.global.skill.construction.HouseLocation
+import content.global.skill.construction.HouseManager
+import content.global.skill.construction.Servant
+import content.global.skill.construction.ServantType
 import core.game.world.map.RegionManager
 import core.game.world.map.path.Pathfinder
 import org.junit.jupiter.api.Assertions

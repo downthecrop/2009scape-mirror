@@ -1,14 +1,11 @@
 package core.storage
 
-import core.auth.ProductionAuthenticatorTests
-import org.junit.After
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import rs09.ServerConstants
-import rs09.auth.UserAccountInfo
-import rs09.game.system.SystemLogger
-import rs09.storage.SQLStorageProvider
+import core.ServerConstants
+import core.auth.UserAccountInfo
+import core.tools.SystemLogger
 import java.sql.SQLDataException
 
 class SQLStorageProviderTests {

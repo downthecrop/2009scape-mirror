@@ -1,0 +1,169 @@
+package content.region.misc.tutisland.handlers
+
+import core.api.*
+import core.game.node.scenery.Scenery
+import core.game.system.task.Pulse
+import core.game.world.map.Location
+import org.rs09.consts.NPCs
+import core.game.interaction.InteractionListener
+import core.game.interaction.IntType
+import core.game.world.repository.Repository
+
+/**
+ * Handles tutorial-specific node interactions
+ * @author Ceikry
+ */
+class TutorialListeners : InteractionListener {
+    val GUIDE_HOUSE_DOOR = 3014
+    val COOKS_DOOR = 3017
+    val COOKS_EXIT = 3018
+    val QUEST_ENTER = 3019
+    val QUEST_LADDER = 3029
+    val QUEST_EXIT_LADDER = 3028
+    val COMBAT_EXIT = 3030
+    val BANK_EXIT = 3024
+    val FINANCE_EXIT = 3025
+    val CHURCH_EXIT = 3026
+    val FIRST_GATE = intArrayOf(3015,3016)
+    val COMBAT_GATES = intArrayOf(3020,3021)
+    val RAT_GATES = intArrayOf(3022, 3023)
+
+    override fun defineListeners() {
+        on(GUIDE_HOUSE_DOOR, IntType.SCENERY, "open"){ player, door ->
+            if(getAttribute(player, "tutorial:stage", 0) != 3)
+                return@on true
+
+
+            setAttribute(player, "tutorial:stage", 4)
+            TutorialStage.load(player, 4)
+            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, door as Scenery, Location.create(3098, 3107, 0))
+            return@on true
+        }
+
+        on(FIRST_GATE, IntType.SCENERY, "open"){ player, gate ->
+            if(getAttribute(player, "tutorial:stage", 0) != 16)
+                return@on true
+
+            setAttribute(player, "tutorial:stage", 17)
+            TutorialStage.load(player, 17)
+            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, gate as Scenery)
+            return@on true
+        }
+
+        on(COOKS_DOOR, IntType.SCENERY, "open"){ player, door ->
+            if(getAttribute(player, "tutorial:stage", 0) != 17)
+                return@on true
+
+            setAttribute(player, "tutorial:stage", 18)
+            TutorialStage.load(player, 18)
+            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, door as Scenery)
+            return@on true
+        }
+
+        on(COOKS_EXIT, IntType.SCENERY, "open"){ player, door ->
+            if(getAttribute(player, "tutorial:stage", 0) != 22)
+                return@on true
+
+            setAttribute(player, "tutorial:stage", 23)
+            TutorialStage.load(player, 23)
+            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, door as Scenery)
+            return@on true
+        }
+
+        on(QUEST_ENTER, IntType.SCENERY, "open") { player, door ->
+            if(getAttribute(player, "tutorial:stage", 0) != 26)
+                return@on true
+
+            setAttribute(player, "tutorial:stage", 27)
+            TutorialStage.load(player, 27)
+            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, door as Scenery)
+            return@on true
+        }
+
+        on(QUEST_LADDER, IntType.SCENERY, "climb-down") { player, ladder ->
+            if(getAttribute(player, "tutorial:stage", 0) < 29)
+                return@on true
+
+            if (getAttribute(player, "tutorial:stage", 0) == 29) {
+                setAttribute(player, "tutorial:stage", 30)
+                TutorialStage.load(player, 30)
+            }
+            core.game.global.action.ClimbActionHandler.climbLadder(player, ladder.asScenery(), "climb-down")
+        }
+
+        on(QUEST_EXIT_LADDER, IntType.SCENERY, "climb-up") { player, ladder ->
+            core.game.global.action.ClimbActionHandler.climbLadder(player, ladder.asScenery(), "climb-up")
+
+            submitWorldPulse(object : Pulse(2) {
+                override fun pulse(): Boolean {
+                    val questTutor = Repository.findNPC(NPCs.QUEST_GUIDE_949) ?: return true
+                    sendChat(questTutor, "What are you doing, ${player.username}? Get back down the ladder.")
+                    return true
+                }
+            })
+
+            return@on true
+        }
+
+        on(COMBAT_GATES, IntType.SCENERY, "open"){ player, gate ->
+            if(getAttribute(player, "tutorial:stage", 0) != 43)
+                return@on true
+
+            setAttribute(player, "tutorial:stage", 44)
+            TutorialStage.load(player, 44)
+            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, gate as Scenery)
+        }
+
+        on(RAT_GATES, IntType.SCENERY, "open") { player, gate ->
+            val stage = getAttribute(player, "tutorial:stage", 0)
+            if(stage !in 50..53){
+                player.dialogueInterpreter.sendDialogues(NPCs.COMBAT_INSTRUCTOR_944, core.game.dialogue.FacialExpression.ANGRY, "Oi, get away from there!","Don't enter my rat pen unless I say so!")
+                return@on true
+            }
+
+            if(stage == 50) {
+                setAttribute(player, "tutorial:stage", 51)
+                TutorialStage.load(player, 51)
+            }
+            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, gate as Scenery)
+            return@on true
+        }
+
+        on(COMBAT_EXIT, IntType.SCENERY, "climb-up") { player, ladder ->
+            if(getAttribute(player, "tutorial:stage", 0) != 55)
+                return@on true
+
+            setAttribute(player, "tutorial:stage", 56)
+            TutorialStage.load(player, 56)
+            core.game.global.action.ClimbActionHandler.climbLadder(player, ladder.asScenery(), "climb-up")
+        }
+
+        on(BANK_EXIT, IntType.SCENERY, "open") { player, door ->
+            if(getAttribute(player, "tutorial:stage", 0) != 57)
+                return@on true
+
+            setAttribute(player, "tutorial:stage", 58)
+            TutorialStage.load(player, 58)
+            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, door as Scenery)
+        }
+
+        on(FINANCE_EXIT, IntType.SCENERY, "open") { player, door ->
+            if(getAttribute(player, "tutorial:stage", 0) != 59)
+                return@on true
+
+            setAttribute(player, "tutorial:stage", 60)
+            TutorialStage.load(player, 60)
+            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, door as Scenery)
+        }
+
+        on(CHURCH_EXIT, IntType.SCENERY, "open") { player, door ->
+            if(getAttribute(player, "tutorial:stage", 0) != 66)
+                return@on true
+
+            setAttribute(player, "tutorial:stage", 67)
+            TutorialStage.load(player, 67)
+            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, door as Scenery)
+        }
+
+    }
+}

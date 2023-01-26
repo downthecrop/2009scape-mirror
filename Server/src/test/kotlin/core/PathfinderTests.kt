@@ -1,15 +1,14 @@
 package core
 
 import TestUtils
+import content.global.skill.gather.GatheringSkillOptionListeners
 import core.game.node.scenery.Scenery
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import rs09.game.interaction.InteractionListener
-import rs09.game.interaction.IntType
-import rs09.game.interaction.InteractionListeners
-import rs09.game.node.entity.skill.gather.GatheringSkillOptionListeners
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListeners
 
 class PathfinderTests {
     companion object {init {TestUtils.preTestSetup(); GatheringSkillOptionListeners().defineListeners() }}

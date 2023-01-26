@@ -1,13 +1,12 @@
-import api.IfaceSettingsBuilder
-import api.splitLines
-import core.game.node.entity.skill.slayer.Master
-import core.game.node.entity.skill.slayer.Tasks
+import core.api.IfaceSettingsBuilder
+import core.api.splitLines
+import content.global.skill.slayer.Master
+import content.global.skill.slayer.SlayerManager
+import content.global.skill.slayer.Tasks
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
-import org.junit.Assert
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import rs09.game.node.entity.skill.slayer.SlayerManager
 
 class APITests {
     val testPlayer = TestUtils.getMockPlayer("test")

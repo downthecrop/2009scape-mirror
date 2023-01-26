@@ -7,13 +7,11 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.fail
-import rs09.game.ge.GEDB
-import rs09.game.ge.GrandExchange
-import rs09.game.ge.GrandExchangeOffer
-import rs09.game.ge.PriceIndex
-import rs09.game.system.SystemLogger
+import core.game.ge.GEDB
+import core.game.ge.GrandExchange
+import core.game.ge.GrandExchangeOffer
+import core.game.ge.PriceIndex
 import java.io.File
-import kotlin.random.Random
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS) class ExchangeTests {
     companion object {
@@ -107,8 +105,10 @@ import kotlin.random.Random
 
     @Test fun concurrentlySubmittedOffersShouldNotThrowExceptions(){
         runBlocking {
-            val a = GlobalScope.launch { for(i in 0 until 5) {PriceIndex.allowItem(i); GrandExchange.addBotOffer(i, 1)} }
-            val b = GlobalScope.launch { for(i in 0 until 5) {PriceIndex.allowItem(i); GrandExchange.addBotOffer(i, 1)} }
+            val a = GlobalScope.launch { for(i in 0 until 5) {
+                PriceIndex.allowItem(i); GrandExchange.addBotOffer(i, 1)} }
+            val b = GlobalScope.launch { for(i in 0 until 5) {
+                PriceIndex.allowItem(i); GrandExchange.addBotOffer(i, 1)} }
             a.join()
             b.join()
             Assertions.assertEquals(false, a.isCancelled)

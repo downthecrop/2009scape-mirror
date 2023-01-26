@@ -1,0 +1,66 @@
+package content.region.desert.alkharid.dialogue
+
+import core.api.animate
+import core.api.getStatLevel
+import core.game.dialogue.DialoguePlugin
+import core.game.dialogue.FacialExpression
+import core.game.node.entity.npc.NPC
+import core.game.node.entity.player.Player
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+import org.rs09.consts.Animations
+import org.rs09.consts.NPCs
+import core.game.dialogue.Topic
+import core.tools.END_DIALOGUE
+
+/**
+ * @author bushtail
+ */
+
+@Initializable
+class JaraahDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
+    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+        return JaraahDialogue(player)
+    }
+
+    override fun open(vararg args: Any?): Boolean {
+        npc = args[0] as NPC
+        player(core.game.dialogue.FacialExpression.FRIENDLY, "Hi!").also { stage = 0 }
+        return true
+    }
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+        when(stage) {
+            0 -> npcl(core.game.dialogue.FacialExpression.ANNOYED, "What? Can't you see I'm busy?!").also { stage++ }
+            1 -> showTopics(
+                Topic("Can you heal me?", 101),
+                Topic("You must see some gruesome things?", 201),
+                Topic("Why do they call you 'The Butcher'?", 301)
+            )
+
+            // Jaraah has to be special and have different dialogue for the heal listener so I am repeating it here.
+            101 -> {
+                animate(npc!!, Animations.HUMAN_PICKPOCKETING_881)
+                if(player!!.skills.lifepoints < getStatLevel(player!!, Skills.HITPOINTS)) {
+                    player!!.skills.heal(21)
+                    npcl(core.game.dialogue.FacialExpression.FRIENDLY, "There you go!")
+                } else {
+                    npcl(core.game.dialogue.FacialExpression.FRIENDLY, "Okay, this will hurt you more than it will me.")
+                }
+                stage = END_DIALOGUE
+            }
+
+            201 -> npcl(core.game.dialogue.FacialExpression.FRIENDLY, "It's a gruesome business and with the tools they give me it gets mroe gruesome before it gets better!").also { stage = END_DIALOGUE }
+
+            301 -> npcl(core.game.dialogue.FacialExpression.HALF_THINKING, "'The Butcher'?").also { stage++ }
+            302 -> npcl(core.game.dialogue.FacialExpression.LAUGH, "Ha!").also { stage++ }
+            303 -> npcl(core.game.dialogue.FacialExpression.HALF_ASKING, "Would you like me to demonstrate?").also { stage++ }
+            304 -> player(core.game.dialogue.FacialExpression.AFRAID, "Er...I'll give it a miss, thanks.").also { stage = END_DIALOGUE }
+        }
+        return true
+    }
+
+    override fun getIds(): IntArray {
+        return intArrayOf(NPCs.JARAAH_962)
+    }
+}

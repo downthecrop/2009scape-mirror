@@ -7,8 +7,8 @@ import core.game.world.map.build.LandscapeParser
 import org.junit.Assert
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import rs09.game.system.config.ServerConfigParser
-import rs09.game.system.config.XteaParser
+import core.game.system.config.ServerConfigParser
+import core.game.system.config.XteaParser
 
 class RegionTests {
     companion object {
