@@ -128,19 +128,19 @@ public enum ClueLevel {
 		for (; itemCount > 0; itemCount--) {
 			switch (level) {
 				case EASY:
-					loot.addAll(ClueRewardParser.getEasyTable().roll());
+					loot.addAll(ClueRewardParser.getEasyTable().roll(player));
 					break;
 				case MEDIUM:
-					loot.addAll(ClueRewardParser.getMedTable().roll());
+					loot.addAll(ClueRewardParser.getMedTable().roll(player));
 					break;
 				case HARD:
-					loot.addAll(ClueRewardParser.getHardTable().roll());
+					loot.addAll(ClueRewardParser.getHardTable().roll(player));
 					break;
 			}
 		}
 
 		if (level == ClueLevel.HARD && RandomFunction.random(100) == 50) {
-			loot.addAll(ClueRewardParser.getRareTable().roll());
+			loot.addAll(ClueRewardParser.getRareTable().roll(player));
 		}
 
 		return loot;

@@ -16,7 +16,7 @@ class ImplingJarListener : InteractionListener {
         on(JARS, IntType.ITEM, "loot"){ player, node ->
             val jar = node.asItem()
 
-            val loot = ImplingLoot.forId(jar.id)?.roll()?.first() ?: return@on false
+            val loot = ImplingLoot.forId(jar.id)?.roll()?.firstOrNull() ?: return@on false
 
             if(removeItem(player, jar, Container.INVENTORY)) {
                 addItemOrDrop(player, loot.id, loot.amount)

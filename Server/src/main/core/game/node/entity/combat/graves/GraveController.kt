@@ -20,6 +20,7 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.game.system.command.Privilege
 import core.game.world.GameWorld
+import core.game.world.map.zone.impl.WildernessZone
 import core.game.world.repository.Repository
 import core.tools.secondsToTicks
 import core.tools.colorize
@@ -218,6 +219,8 @@ class GraveController : PersistWorld, TickListener, InteractionListener, Command
             if (player.skullManager.isSkulled)
                 return false
             if (player.skullManager.isWilderness)
+                return false
+            if (WildernessZone.isInZone(player))
                 return false
             if (player.ironmanManager.mode == IronmanMode.HARDCORE)
                 return false

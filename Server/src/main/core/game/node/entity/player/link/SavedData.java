@@ -2,8 +2,6 @@ package core.game.node.entity.player.link;
 
 import core.game.node.entity.player.Player;
 
-import core.game.node.entity.player.link.spawn.SpawnData;
-
 import java.nio.ByteBuffer;
 
 /**
@@ -27,11 +25,6 @@ public class SavedData {
 	 * Represents the quest data to save.
 	 */
 	private final QuestData questData = new QuestData();
-	
-	/**
-	 * The spawn data to save.
-	 */
-	private final SpawnData spawnData = new SpawnData();
 
 	/**
 	 * The player.
@@ -134,13 +127,4 @@ public class SavedData {
 	public Player getPlayer() {
 		return player;
 	}
-	
-	/**
-	 * Gets the spawnData.
-	 * @return the spawnData
-	 */
-	public SpawnData getSpawnData() {
-		return spawnData;
-	}
-
 }

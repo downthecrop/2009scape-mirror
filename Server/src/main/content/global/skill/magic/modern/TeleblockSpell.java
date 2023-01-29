@@ -112,7 +112,7 @@ public final class TeleblockSpell extends CombatSpell {
 	
 	@Override
 	public void fireEffect(Entity entity, Entity victim, BattleState state) {
-		if(!victim.isTeleBlocked() && victim instanceof Player && state.getStyle().getSwingHandler().isAccurateImpact(entity, victim) && state.getEstimatedHit() > 0){
+		if(!victim.isTeleBlocked() && victim instanceof Player && state.getStyle().getSwingHandler().isAccurateImpact(entity, victim)){
 			int ticks = 500;
 			if(((Player) victim).getPrayer().get(PrayerType.PROTECT_FROM_MAGIC)){
 				ticks /= 2;

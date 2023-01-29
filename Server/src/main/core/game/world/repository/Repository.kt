@@ -136,6 +136,18 @@ object Repository {
 
     @JvmStatic
     fun addPlayer(player: Player){
+        if (players.isNotEmpty()) {
+            for (i in 1 until players.size) {
+                players[i] ?: continue
+                if (players[i].details.uid == player.details.uid) {
+                    val oldPl = players[i]
+                    players.remove(oldPl)
+                    oldPl.clear(true)
+                    oldPl.session.disconnect()
+                    break;
+                }
+            }
+        }
         players.add(player)
         uid_map[player.details.uid] = player
         playerNames[player.name] = player
@@ -147,6 +159,8 @@ object Repository {
         uid_map.remove(player.details.uid)
         playerNames.remove(player.name)
         UpdateSequence.renderablePlayers.remove(player)
+        player.session.disconnect()
+        player.clear(true)
     }
 
     /**

@@ -26,4 +26,5 @@
     <item id="1247" minAmt="1" maxAmt="1" weight="1"/>
     <item id="2366" minAmt="1" maxAmt="1" weight="1"/>
     <item id="1249" minAmt="1" maxAmt="1" weight="1"/>
+    <item id="0" minAmt="1" maxAmt="1" weight="171"/>
 </RDT>

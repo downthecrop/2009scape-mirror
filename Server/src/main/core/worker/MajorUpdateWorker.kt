@@ -41,7 +41,6 @@ class MajorUpdateWorker {
                     player?.details?.session?.disconnect()
                     player?.session?.lastPing = Long.MAX_VALUE
                     player?.clear(true)
-                    Repository.removePlayer(player)
                 }
             }
 

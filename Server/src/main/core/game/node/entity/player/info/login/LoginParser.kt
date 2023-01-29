@@ -31,9 +31,6 @@ class LoginParser(val details: PlayerDetails) {
         {
             e.printStackTrace()
             Repository.removePlayer(player)
-            Repository.LOGGED_IN_PLAYERS.remove(player.username)
-            Repository.lobbyPlayers.remove(player)
-            Repository.playerNames.remove(player.name)
             flag(AuthResponse.ErrorLoadingProfile)
         }
         GameWorld.Pulser.submit(object : Pulse(1) {
@@ -50,14 +47,11 @@ class LoginParser(val details: PlayerDetails) {
                             player.init()
                         }
                     } else {
-                        Repository.playerNames.remove(player.name)
+                        Repository.removePlayer(player)
                     }
                 } catch (t: Throwable) {
                     t.printStackTrace()
                     Repository.removePlayer(player)
-                    Repository.LOGGED_IN_PLAYERS.remove(player.username)
-                    Repository.lobbyPlayers.remove(player)
-                    Repository.playerNames.remove(player.name)
                     flag(AuthResponse.ErrorLoadingProfile)
                 }
                 return true
@@ -78,9 +72,6 @@ class LoginParser(val details: PlayerDetails) {
         player.updateSceneGraph(true)
         player.configManager.init()
         LoginConfiguration.configureGameWorld(player)
-        if (!Repository.players.contains(player)) {
-            Repository.addPlayer(player)
-        }
     }
 
     /**

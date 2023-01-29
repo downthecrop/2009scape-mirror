@@ -179,6 +179,9 @@ public class EnchantingZone extends MTAZone {
 				}
 
 				@Override
+				public boolean isRemainPrivate() {return true;}
+
+				@Override
 				public void respawn() {
 					GameWorld.getPulser().submit(getRespawnPulse(this));
 				}

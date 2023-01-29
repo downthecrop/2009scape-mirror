@@ -139,7 +139,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
 
             for(i in 0..amount)
             {
-                val drops = NPCDefinition.forId(npcId).dropTables.table.roll()
+                val drops = NPCDefinition.forId(npcId).dropTables.table.roll(player)
                 for(drop in drops) container.add(drop)
             }
 

@@ -30,6 +30,11 @@ import core.game.world.map.zone.ZoneRestriction;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 import core.tools.RandomFunction;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
+
+import static core.api.ContentAPIKt.clearLogoutListener;
+import static core.api.ContentAPIKt.registerLogoutListener;
 
 /**
  * The cyclopes room.
@@ -103,6 +108,7 @@ public final class CyclopesRoom extends MapZone implements Plugin<Object> {
 			if (logout) {
 				e.setLocation(Location.create(2846, 3540, 2));
 			}
+			clearLogoutListener((Player) e, "cyclopes");
 		}
 		return super.leave(e, logout);
 	}
@@ -199,6 +205,10 @@ public final class CyclopesRoom extends MapZone implements Plugin<Object> {
 			PULSE.start();
 			GameWorld.getPulser().submit(PULSE);
 		}
+		registerLogoutListener(player, "cyclopes", player1 -> {
+			player1.setLocation(Location.create(2844, 3540, 2));
+			return Unit.INSTANCE;
+		});
 	}
 
 	/**

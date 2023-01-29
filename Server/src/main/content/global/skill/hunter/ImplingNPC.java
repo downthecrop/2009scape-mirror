@@ -10,6 +10,7 @@ import core.game.system.task.Pulse;
 import core.game.world.map.Location;
 import core.game.world.map.path.Pathfinder;
 import core.game.world.update.flag.context.Graphics;
+import core.plugin.Initializable;
 import core.tools.RandomFunction;
 import core.game.system.config.NPCConfigParser;
 import core.game.world.GameWorld;
@@ -18,6 +19,7 @@ import core.game.world.GameWorld;
  * Handles an impling npc.
  * @author Vexia
  */
+@Initializable
 public final class ImplingNPC extends AbstractNPC {
 
 	/**
@@ -104,7 +106,7 @@ public final class ImplingNPC extends AbstractNPC {
 
 	@Override
 	public int[] getIds() {
-		return new int[] {};
+		return new int[] { 1028, 6055, 1029, 6056, 1030, 6057, 1031, 6058, 1032, 6059, 1033, 6060, 1034, 6061, 1035, 6062, 6053, 6063};
 	}
 
 	/**

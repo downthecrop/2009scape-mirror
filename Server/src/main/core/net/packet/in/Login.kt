@@ -117,8 +117,10 @@ object Login {
     private fun noop(buffer: ByteBuffer, amount: Int = 1) {buffer.get(ByteArray(amount))}
 
     fun proceedWith(session: IoSession, details: PlayerDetails, opcode: Int) {
-        if (!Repository.LOGGED_IN_PLAYERS.contains(details.username))
-            Repository.LOGGED_IN_PLAYERS.add(details.username)
+        if (Repository.uid_map.contains(details.uid)) {
+            session.write(AuthResponse.AlreadyOnline)
+            return;
+        }
         details.session = session
         details.info.translate(UIDInfo(details.ipAddress, "DEPRECATED", "DEPRECATED", "DEPRECATED"))
 
@@ -146,9 +148,7 @@ object Login {
     }
 
     private fun proceedWithAcceptableLogin(session: IoSession, player: Player, opcode: Int) {
-        if (Repository.getPlayerByName(player.name) == null) {
-            Repository.addPlayer(player)
-        }
+        Repository.addPlayer(player)
         session.lastPing = System.currentTimeMillis()
         try {
             LoginParser(player.details).initialize(player, opcode == RECONNECT_LOGIN_OP)

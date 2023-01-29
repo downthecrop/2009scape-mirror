@@ -301,6 +301,11 @@ public class Region {
 			int regionX = regionId >> 8 & 0xFF;
 			int regionY = regionId & 0xFF;
 			int mapscapeId = Cache.getIndexes()[5].getArchiveId("m" + regionX + "_"+ regionY);
+
+			if (mapscapeId < 0 && !dynamic) {
+				return;
+			}
+
 			byte[][][] mapscapeData = new byte[4][SIZE][SIZE];
 			for (RegionPlane plane : r.planes) {
 				plane.getFlags().setLandscape(new boolean[SIZE][SIZE]);

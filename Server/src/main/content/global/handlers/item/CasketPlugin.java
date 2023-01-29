@@ -48,7 +48,7 @@ public final class CasketPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final Item reward = table.roll().get(0);
+		final Item reward = table.roll(player).get(0);
 		player.getInventory().remove((Item) node);
 		player.getDialogueInterpreter().sendItemMessage(reward, "You open the casket. Inside you find " + (reward.getAmount() > 1 ? "some" : (StringUtils.isPlusN(reward.getName()) ? "an" : "a")) + " " + reward.getName().toLowerCase() + ".");
 		addItemOrDrop(player, reward.getId(), reward.getAmount());

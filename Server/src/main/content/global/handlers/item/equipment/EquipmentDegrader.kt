@@ -1,5 +1,6 @@
 package content.global.handlers.item.equipment
 
+import core.api.addItemOrDrop
 import core.api.getNext
 import core.api.isLast
 import core.api.isNextLast
@@ -51,6 +52,9 @@ class EquipmentDegrader{
 
     fun Item.degrade(slot: Int){ //extension function that degrades items
         val set = getDegradableSet(this.id)
+        val charges = itemCharges.getOrElse(this.id) {1000}
+        if (this.charge > charges)
+            charge = charges
         this.charge--
         if(set?.indexOf(this.id) == 0 && !this.name.contains("100")){
             charge = 0
@@ -60,8 +64,8 @@ class EquipmentDegrader{
             if (set?.size!! > 2) {
                 p?.equipment?.remove(this)
                 p?.sendMessage("Your $name has degraded.")
-                if (set.isNextLast(set.indexOf(this.id))) {
-                    p?.inventory?.add(Item(set.getNext(this.id)))
+                if (set.isNextLast(this.id)) {
+                    p?.let { addItemOrDrop(it, set.getNext(this.id)) }
                     p?.sendMessage("Your $name has broken.")
                 } else {
                     p?.equipment?.add(Item(set.getNext(this.id), 1, charges), slot, false, false)

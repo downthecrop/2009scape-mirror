@@ -665,12 +665,6 @@ public class Player extends Entity {
 		getPrayer().reset();
 		super.finalizeDeath(killer);
 		appearance.sync();
-		if (killer instanceof Player && !GameWorld.isEconomyWorld() && getSkullManager().isWilderness() && killer.asPlayer().getSkullManager().isWilderness()) {
-			killer.asPlayer().getSavedData().getSpawnData().onDeath(killer.asPlayer(), this);
-		}
-		if (GameWorld.isEconomyWorld() && !getSavedData().getGlobalData().isDeathScreenDisabled()) {
-			getInterfaceManager().open(new Component(153));
-		}
 		if (!getSavedData().getGlobalData().isDeathScreenDisabled()) {
 			getInterfaceManager().open(new Component(153));
 		}

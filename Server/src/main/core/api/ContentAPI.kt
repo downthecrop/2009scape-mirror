@@ -199,6 +199,16 @@ fun hasGodItem(player: Player, god: God): Boolean {
 }
 
 /**
+ * Check if the given player should have the "remove nothing" RoW effect active.
+ * @param player the player we are checking
+ * @return whether we should ignore nothings
+ */
+fun shouldRemoveNothings(player: Player) : Boolean {
+    val ring = getItemFromEquipment(player, EquipmentSlot.RING)
+    return ring != null && ring.id in Items.RING_OF_WEALTH_14638..Items.RING_OF_WEALTH4_14646
+}
+
+/**
  * Remove an item from a player's inventory
  * @param player the player whose inventory to remove the item from
  * @param item the ID or Item object to remove from the player's inventory
