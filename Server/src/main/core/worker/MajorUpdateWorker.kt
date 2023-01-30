@@ -11,6 +11,7 @@ import core.game.world.GameWorld
 import core.game.world.repository.Repository
 import core.game.world.update.UpdateSequence
 import core.net.packet.PacketProcessor
+import core.net.packet.PacketWriteQueue
 import core.tools.colorize
 import java.lang.Long.max
 import java.text.SimpleDateFormat
@@ -84,6 +85,7 @@ class MajorUpdateWorker {
         if (!skipPulseUpdate) {
             GameWorld.Pulser.updateAll()
         }
+        GameWorld.tickListeners.forEach { it.tick() }
 
         try {
             sequence.start()
@@ -96,9 +98,10 @@ class MajorUpdateWorker {
         GameWorld.pulse()
         //disconnect all players waiting to be disconnected
         Repository.disconnectionQueue.update()
-        GameWorld.tickListeners.forEach { it.tick() }
         //tick all manager plugins
         Managers.tick()
+
+        PacketWriteQueue.flush()
     }
 
     fun start() {

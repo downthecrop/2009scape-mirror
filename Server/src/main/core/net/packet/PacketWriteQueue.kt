@@ -1,21 +1,15 @@
 package core.net.packet
 
-import core.api.TickListener
+import core.api.tryPop
 import core.net.packet.out.*
 import core.tools.SystemLogger
-import java.lang.IndexOutOfBoundsException
+import java.io.PrintWriter
+import java.io.StringWriter
 import java.util.*
 import java.util.concurrent.locks.ReentrantLock
-import kotlin.NoSuchElementException
 
-class PacketWriteQueue : TickListener {
-    override fun tick() {
-        flush()
-    }
-
+class PacketWriteQueue {
     companion object {
-        private val queueLock = ReentrantLock()
-        private val packetsToQueue = LinkedList<QueuedPacket<*>?>()
         private val packetsToWrite = LinkedList<QueuedPacket<*>?>()
 
         @JvmStatic
@@ -33,45 +27,23 @@ class PacketWriteQueue : TickListener {
 
         @JvmStatic
         fun <T> push(packet: OutgoingPacket<T>, context: T) {
-            if (queueLock.isHeldByCurrentThread)
-                packetsToQueue.add(QueuedPacket(packet, context))
-            else
-                packetsToWrite.add(QueuedPacket(packet, context))
+            packetsToWrite.add(QueuedPacket(packet, context))
         }
 
         @JvmStatic
         fun flush() {
-            queueLock.lock()
-
-            var hasEnded = false
-            while (!hasEnded) {
+            var countThisCycle = packetsToWrite.size
+            val sw = StringWriter()
+            val pw = PrintWriter(sw)
+            while (countThisCycle-- > 0) {
+                val pkt = packetsToWrite.tryPop(null) ?: continue
                 try {
-                    val packet = packetsToWrite.pop()
-                    write(packet?.out ?: continue, packet.context ?: continue)
-                } catch (e: NoSuchElementException) {
-                    hasEnded = true
-                }
-            }
-
-            if (packetsToWrite.isNotEmpty()) {
-                SystemLogger.logWarn(this::class.java, "Packet queue was NOT empty! Remaining packets: ${packetsToWrite.size}")
-                try {
-                    for (pkt: QueuedPacket<*>? in packetsToWrite) SystemLogger.logWarn(this::class.java, "${pkt?.out?.javaClass?.simpleName ?: "NULL"} <- ${pkt?.context ?: "NULL"}")
-                } catch (ignored: NullPointerException) {
-                    //do nothing, we don't care, this can happen when everything is working as intended.
-                } catch (ignored: IndexOutOfBoundsException) {
-                    //do nothing, we don't care, this can happen when everything is working as intended.
+                    write(pkt.out, pkt.context)
                 } catch (e: Exception) {
-                    e.printStackTrace()
-                } finally {
-                    packetsToWrite.clear()
+                    e.printStackTrace(pw)
+                    SystemLogger.logErr(this::class.java, "Error flushing packet ${pkt.out::class.java}: $sw")
+                    continue
                 }
-            }
-
-            queueLock.unlock()
-
-            while (packetsToQueue.isNotEmpty()) {
-                packetsToWrite.add(packetsToQueue.pop())
             }
         }
 
@@ -80,8 +52,7 @@ class PacketWriteQueue : TickListener {
             val pack = out as? OutgoingPacket<T>
             val ctx = context as? T
             if (pack == null || ctx == null) {
-                SystemLogger.logWarn(this::class.java, "Failed packet casting")
-                return
+                throw IllegalStateException("Failed packet casting")
             }
             pack.send(ctx)
         }
