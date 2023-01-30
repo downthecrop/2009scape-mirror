@@ -351,6 +351,8 @@ public class Player extends Entity {
 	 * @param force If we should force removal, a player engaged in combat will otherwise remain active until out of combat.
 	 */
 	public void clear(boolean force) {
+		if (!isActive())
+			return;
 		if (force) {
 			Repository.getDisconnectionQueue().remove(getName());
 		}

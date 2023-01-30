@@ -160,7 +160,6 @@ object Repository {
         playerNames.remove(player.name)
         UpdateSequence.renderablePlayers.remove(player)
         player.session.disconnect()
-        player.clear(true)
     }
 
     /**
