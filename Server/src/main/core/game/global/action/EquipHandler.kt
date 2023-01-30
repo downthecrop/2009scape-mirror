@@ -66,11 +66,16 @@ class EquipHandler : InteractionListener {
 
             /* TODO: Send different equip sound based on what is being equip.*/
             player.audioManager.send(item.definition.getConfiguration(ItemConfigParser.EQUIP_AUDIO, 2244))
+
             if (player.properties.autocastSpell != null) {
-                player.properties.autocastSpell = null
-                val wif = player.getExtension<WeaponInterface>(WeaponInterface::class.java)
-                wif.selectAutoSpell(-1, true)
-                wif.openAutocastSelect()
+                val itemEquipmentSlot = item.definition.getConfiguration<Int>(ItemConfigParser.EQUIP_SLOT, -1)
+
+                if (itemEquipmentSlot == EquipmentContainer.SLOT_WEAPON) {
+                    player.properties.autocastSpell = null
+                    val wif = player.getExtension<WeaponInterface>(WeaponInterface::class.java)
+                    wif.selectAutoSpell(-1, true)
+                    wif.openAutocastSelect()
+                }
             }
 
             if (SlayerEquipmentFlags.isSlayerEq(item.id)) {
