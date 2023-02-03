@@ -76,6 +76,11 @@ public final class BoltPulse extends SkillPulse<Item> {
 		if (!player.getInventory().containsItem(bolt.getUnfinished())) {
 			return false;
 		}
+		if (!player.getInventory().hasSpaceFor(bolt.getFinished())) {
+			player.getDialogueInterpreter().sendDialogue("You do not have enough inventory space.");
+			return false;
+		}
+
 		return true;
 	}
 

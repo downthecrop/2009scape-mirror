@@ -48,6 +48,10 @@ public final class GemBoltPulse extends SkillPulse<Item> {
 		if (!player.getInventory().containsItem(new Item(bolt.base)) || !player.getInventory().containsItem(new Item(bolt.tip))) {
 			return false;
 		}
+		if (!player.getInventory().hasSpaceFor(new Item(bolt.product))){
+			player.getDialogueInterpreter().sendDialogue("You do not have enough inventory space.");
+			return false;
+		}
 		return true;
 	}
 

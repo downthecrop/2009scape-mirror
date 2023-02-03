@@ -67,7 +67,8 @@ public final class GemBoltPlugin extends UseWithHandler {
 		if(bolt == null){
 			bolt = Fletching.tipMap.get(event.getUsedWith().getId());
 		}
-		if(bolt != null){
+		if(bolt != null && (event.getUsedItem().getId() == bolt.tip && event.getUsedWith().getId() == bolt.base)
+				|| event.getUsedItem().getId() == bolt.base && event.getUsedWith().getId() == bolt.tip ) {
 			SkillDialogueHandler handler = new SkillDialogueHandler(player, SkillDialogue.ONE_OPTION, new Item(bolt.product)) {
 				@Override
 				public void create(final int amount, int index) {
