@@ -2,38 +2,20 @@ package content.global.activity.penguinhns
 
 import org.json.simple.JSONObject
 import core.ServerStore
+import core.api.StartupListener
 import core.game.worldevents.PluginSet
 import core.game.worldevents.WorldEvent
 import core.game.world.GameWorld
+import core.plugin.ClassScanner
+import core.tools.SystemLogger
 
-class PenguinHNSEvent : WorldEvent("penguin-hns"){
+class PenguinHNSEvent : StartupListener {
     val manager = PenguinManager()
-    var lastTrigger: Int = 0
-    var tickDelay = if(GameWorld.settings?.isDevMode == true) 100 else 100000
 
-    override fun checkActive(): Boolean {
-        return true //this event is always active.
-    }
-
-    override fun checkTrigger(): Boolean {
-        return PenguinManager.penguins.isEmpty()
-    }
-
-    override fun initialize() {
-        plugins = PluginSet(
-                LarryHandler(),
-                NotebookHandler(),
-        )
-        super.initialize()
-        fireEvent()
-        log("Penguin HNS initialized.")
-    }
-
-    override fun fireEvent() {
-        log("Loading penguins...")
+    override fun startup() {
         manager.rebuildVars()
-        lastTrigger = GameWorld.ticks
-        log("Penguins loaded.")
+        ClassScanner.definePlugins(LarryHandler(), NotebookHandler())
+        SystemLogger.logInfo(this::class.java, "Penguin HNS initialized.")
     }
 
     companion object {
