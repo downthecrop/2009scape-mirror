@@ -5,8 +5,6 @@ import content.global.skill.magic.TeleportMethod
 import content.global.skill.magic.spellconsts.Modern
 import core.game.event.ItemAlchemizationEvent
 import core.game.event.TeleportEvent
-import core.api.getAttribute
-import core.api.sendMessage
 import content.global.skill.prayer.Bones
 import core.game.interaction.MovementPulse
 import core.game.node.entity.Entity
@@ -24,8 +22,7 @@ import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 import core.ServerConstants
-import core.api.EquipmentSlot
-import core.api.getItemFromEquipment
+import core.api.*
 import core.game.node.entity.combat.spell.MagicStaff
 import core.game.node.entity.impl.Animator
 
@@ -250,6 +247,7 @@ class ModernListeners : SpellListener("modern"){
             player.animate(Animation(if (high) 713 else 712))
             player.graphics(Graphics(if (high) 113 else 112))
         }
+        playAudio(player, Audio(if (high) 97 else 98))
 
         if (coins.amount > 0)
             player.inventory.add(coins)
