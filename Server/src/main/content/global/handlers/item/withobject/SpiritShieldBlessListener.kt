@@ -58,6 +58,7 @@ class SpiritShieldBlessListener : InteractionListener {
             Scenery.ANVIL_6150,
             Scenery.ANVIL_22725,
             Scenery.LATHE_26817,
+            Scenery.ANVIL_26822,
             Scenery.ANVIL_37622
         )
     }

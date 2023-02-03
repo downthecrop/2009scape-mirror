@@ -44,6 +44,7 @@ public final class SmithingPlugin extends UseWithHandler {
 		addHandler(6150, OBJECT_TYPE, this);
 		addHandler(22725, OBJECT_TYPE, this);
 		addHandler(26817, OBJECT_TYPE, this);
+		addHandler(26822, OBJECT_TYPE, this);
 		addHandler(37622, OBJECT_TYPE, this);
 		addHandler(42027, OBJECT_TYPE, this);
 		ClassScanner.definePlugin(new OptionHandler() {
