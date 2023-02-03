@@ -59,9 +59,9 @@ public final class OrbViewingInterface extends ComponentPlugin {
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
 				SceneryDefinition.forId(9391).getHandlers().put("option:look-into", this);
 				SceneryDefinition.forId(28194).getHandlers().put("option:look-into", this);
-				SceneryDefinition.forId(28209).getHandlers().put("option:view", this);
-				SceneryDefinition.forId(28210).getHandlers().put("option:view", this);
-				SceneryDefinition.forId(28211).getHandlers().put("option:view", this);
+				//SceneryDefinition.forId(28209).getHandlers().put("option:view", this);
+				//SceneryDefinition.forId(28210).getHandlers().put("option:view", this);
+				//SceneryDefinition.forId(28211).getHandlers().put("option:view", this);
 				return this;
 			}
 
@@ -76,11 +76,11 @@ public final class OrbViewingInterface extends ComponentPlugin {
 				case 28194:
 					player.setAttribute("viewing_orb", CLAN_WARS);
 					break;
-				case 28209:
-				case 28210:
-				case 28211:
-					player.setAttribute("viewing_orb", BOUNTY_HUNTER[node.getId() - 28209]);
-					break;
+				//case 28209:
+				//case 28210:
+				//case 28211:
+				//	player.setAttribute("viewing_orb", BOUNTY_HUNTER[node.getId() - 28209]);
+				//	break;
 				}
 				viewOrb(player, interfaceId);
 				return true;
