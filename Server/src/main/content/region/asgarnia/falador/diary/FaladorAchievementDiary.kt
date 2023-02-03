@@ -10,6 +10,7 @@ import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import content.region.asgarnia.falador.dialogue.RisingSunInnBartenderDialogue
 import content.global.handlers.iface.FairyRing
+import content.global.skill.crafting.lightsources.LightSources
 import core.game.diary.AreaDiaryTask
 import core.game.diary.DiaryEventHookBase
 import core.game.diary.DiaryLevel
@@ -27,6 +28,7 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
         private val WAYNES_CHAINS_AREA = ZoneBorders(2969, 3310, 2975, 3314)
         private val SARAHS_FARMING_SHOP_AREA = ZoneBorders(3021, 3285, 3040, 3296)
         private val FALADOR_GENERAL_AREA = ZoneBorders(2934, 3399, 3399, 3307)
+        private val CHEMIST_AREA = ZoneBorders(2929, 3213, 2936, 3207)
 
 
         private val PROSELYTE_FULL_ARMOR_MALE = intArrayOf(
@@ -246,6 +248,18 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
                 DiaryLevel.HARD,
                     HardTasks.DIAL_FAIRY_RING_MUDSKIPPER_POINT
             )
+        }
+    }
+
+    override fun onLightSourceLit(player: Player, event: LitLightSourceEvent) {
+        when {
+            inBorders(player, CHEMIST_AREA) && (event.litLightSourceId == LightSources.BULLSEYE_LANTERN.litID) -> {
+                finishTask(
+                    player,
+                    DiaryLevel.MEDIUM,
+                    MediumTasks.CHEMISTS_LIGHT_BULLSEYE_LANTERN
+                )
+            }
         }
     }
 }

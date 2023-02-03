@@ -7,6 +7,7 @@ object Event {
     @JvmStatic val NPCKilled = NPCKillEvent::class.java
     @JvmStatic val Teleported = TeleportEvent::class.java
     @JvmStatic val FireLit = LitFireEvent::class.java
+    @JvmStatic val LightSourceLit = LitLightSourceEvent::class.java
     @JvmStatic val Interacted = InteractionEvent::class.java
     @JvmStatic val ButtonClicked = ButtonClickEvent::class.java
     @JvmStatic val DialogueOpened = DialogueOpenEvent::class.java

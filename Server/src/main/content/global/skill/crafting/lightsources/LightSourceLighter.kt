@@ -1,6 +1,7 @@
 package content.global.skill.crafting.lightsources
 
 import core.game.container.Container
+import core.game.event.LitLightSourceEvent
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler
 import core.game.node.entity.player.Player
@@ -85,6 +86,7 @@ class LightSourceLighter : UseWithHandler(590,36,38){
         if(playerLevel < requiredLevel) return false
 
         player.inventory.replace(item,Item(lightSource.litID))
+        player.dispatch(LitLightSourceEvent(lightSource.litID))
         return true
     }
 }

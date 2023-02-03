@@ -17,6 +17,7 @@ data class ResourceProducedEvent(val itemId: Int, val amount: Int, val source: N
 data class NPCKillEvent(val npc: NPC) : Event
 data class TeleportEvent(val type: TeleportType, val method: TeleportMethod, val source: Any, val location: Location) : Event
 data class LitFireEvent(val logId: Int) : Event
+data class LitLightSourceEvent(val litLightSourceId: Int) : Event
 data class InteractionEvent(val target: Node, val option: String) : Event
 data class ButtonClickEvent(val iface: Int, val buttonId: Int) : Event
 data class DialogueOpenEvent(val dialogue: DialoguePlugin) : Event

@@ -51,6 +51,7 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
         player.hook(Event.NPCKilled, EventHandler(this, ::onNpcKilled))
         player.hook(Event.Teleported, EventHandler(this, ::onTeleported))
         player.hook(Event.FireLit, EventHandler(this, ::onFireLit))
+        player.hook(Event.LightSourceLit, EventHandler(this, ::onLightSourceLit))
         player.hook(Event.Interacted, EventHandler(this, ::onInteracted))
         player.hook(Event.ButtonClicked, EventHandler(this, ::onButtonClicked))
         player.hook(Event.DialogueOpened, EventHandler(this, ::onDialogueOpened))
@@ -207,6 +208,7 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
     protected open fun onNpcKilled(player: Player, event: NPCKillEvent) {}
     protected open fun onTeleported(player: Player, event: TeleportEvent) {}
     protected open fun onFireLit(player: Player, event: LitFireEvent) {}
+    protected open fun onLightSourceLit(player: Player, event: LitLightSourceEvent) {}
     protected open fun onInteracted(player: Player, event: InteractionEvent) {}
     protected open fun onButtonClicked(player: Player, event: ButtonClickEvent) {}
     protected open fun onDialogueOpened(player: Player, event: DialogueOpenEvent) {}
