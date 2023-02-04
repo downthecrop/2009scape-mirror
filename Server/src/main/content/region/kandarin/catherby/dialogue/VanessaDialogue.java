@@ -31,10 +31,6 @@ public class VanessaDialogue extends DialoguePlugin {
 		switch (stage) {
 		case 0:
 			interpreter.sendOptions("Select an Option", "What are you selling?", "Can you give me any Farming advice?", "I'm okay, thank you.");
-			stage = 1;
-			break;
-		case 1:
-			interpreter.sendOptions("Select an Option", "What are you selling?", "Can you give me any Farming advice?", "I'm okay, thank you.");
 			stage = 10;
 			break;
 		case 10:
@@ -44,11 +40,11 @@ public class VanessaDialogue extends DialoguePlugin {
 				npc.openShop(player);
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Can you give me any Farming advice?");
+				interpreter.sendDialogues(player, FacialExpression.HALF_ASKING, "Can you give me any Farming advice?");
 				stage = 20;
 				break;
 			case 3:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "I'm okay, thank you.");
+				interpreter.sendDialogues(player, FacialExpression.FRIENDLY, "I'm okay, thank you.");
 				stage = 30;
 				break;
 
@@ -56,10 +52,7 @@ public class VanessaDialogue extends DialoguePlugin {
 			break;
 		case 20:
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Yes - ask a gardener.");
-			stage = 21;
-			break;
-		case 21:
-			end();
+			stage = 30;
 			break;
 		case 30:
 			end();
@@ -77,7 +70,7 @@ public class VanessaDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Hello. How can I help you?");
+		interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Hello. How can I help you?");
 		stage = 0;
 		return true;
 	}
