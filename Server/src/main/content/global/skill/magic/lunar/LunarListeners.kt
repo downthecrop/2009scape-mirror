@@ -30,10 +30,10 @@ import org.rs09.consts.Items
 class LunarListeners : SpellListener("lunar"), Commands {
 
     override fun defineListeners() {
-
         onCast(Lunar.HOME_TELEPORT, NONE) { player, _ ->
             requires(player)
-            sendTeleport(player,0.0, Location.create(2100, 3914, 0))
+            player.teleporter.send(Location.create(2100, 3914, 0),TeleportManager.TeleportType.HOME)
+            setDelay(player,true)
         }
 
         onCast(Lunar.MOONCLAN_TELEPORT, NONE) { player, _ ->

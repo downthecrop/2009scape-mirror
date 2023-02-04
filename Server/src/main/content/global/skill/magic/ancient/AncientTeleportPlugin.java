@@ -54,7 +54,7 @@ public final class AncientTeleportPlugin extends MagicSpell {
 		if (entity.getLocks().isTeleportLocked() || !super.meetsRequirements(entity, true, false)) {
 			return false;
 		}
-		if (entity.getTeleporter().send(location.transform(0, RandomFunction.random(3), 0), getSpellId() == 24 ? TeleportType.HOME : TeleportType.ANCIENT)) {
+		if (entity.getTeleporter().send(location.transform(0, RandomFunction.random(3), 0), getSpellId() == 28 ? TeleportType.HOME : TeleportType.ANCIENT)) {
 			if (!super.meetsRequirements(entity, true, true)) {
 				entity.getTeleporter().getCurrentTeleport().stop();
 				return false;
