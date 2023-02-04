@@ -702,29 +702,33 @@
   },
   {
     "remove_head": "true",
-    "destroy_message": "I can borrow another from the armoury near the Fight Arena.",
     "shop_price": "10",
     "examine": "A helmet, as worn by the minions of General Khazard.",
     "durability": null,
-    "name": "Khazard helmet",
     "weight": "2.7",
+    "destroy": "true",
+    "equipment_slot": "0",
+    "destroy_message": "I can borrow another from the armoury near the Fight Arena.",
+    "name": "Khazard helmet",
+    "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "74",
-    "bonuses": "0,0,0,0,0,4,5,3,0,0,0,0,0,0,0",
-    "equipment_slot": "0"
+    "bonuses": "0,0,0,0,0,4,5,3,0,0,0,0,0,0,0"
   },
   {
-    "destroy_message": "I can borrow another from the armoury near the Fight Arena.",
-    "remove_sleeves": "true",
     "shop_price": "12",
     "examine": "Armour, as worn by the minions of General Khazard.",
     "durability": null,
-    "name": "Khazard armour",
     "weight": "0.5",
+    "destroy": "true",
+    "equipment_slot": "4",
+    "destroy_message": "I can borrow another from the armoury near the Fight Arena.",
+    "remove_sleeves": "true",
+    "name": "Khazard armour",
+    "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "75",
-    "bonuses": "0,0,0,0,0,9,11,10,0,0,0,0,0,0,0",
-    "equipment_slot": "4"
+    "bonuses": "0,0,0,0,0,9,11,10,0,0,0,0,0,0,0"
   },
   {
     "destroy_message": "The lazy guard probably has a spare set...",
