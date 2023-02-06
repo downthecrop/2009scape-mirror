@@ -14,6 +14,7 @@ import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import content.region.misthalin.lumbridge.dialogue.DukeHoracioDialogue
 import content.region.misthalin.varrock.quest.dragonslayer.DukeHoracioDSDialogue
+import core.api.inInventory
 import core.game.diary.AreaDiaryTask
 import core.game.diary.DiaryEventHookBase
 import core.game.diary.DiaryLevel
@@ -309,6 +310,14 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
                         EasyTasks.WIZARDS_TOWER_TAUNT_DEMON
                 )
             }
+
+            12595 -> if (event.target.id == Scenery.FLOUR_BIN_36878 && event.option == "empty" && inInventory(player, Items.EMPTY_POT_1931)) {
+                finishTask(
+                    player,
+                    DiaryLevel.BEGINNER,
+                        BeginnerTasks.WINDMILL_MAKE_FLOUR
+                )
+            }
         }
     }
 
@@ -409,6 +418,18 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
                     player,
                     DiaryLevel.BEGINNER,
                         BeginnerTasks.SWAMP_FISHING_TUTOR_GET_A_JOB
+                )
+            }
+        }
+    }
+
+    override fun onUsedWith(player: Player, event: UseWithEvent) {
+        when (player.viewport.region.id) {
+            12595 -> if (event.used == Items.EMPTY_POT_1931 && event.with == Scenery.FLOUR_BIN_36878) {
+                finishTask(
+                    player,
+                    DiaryLevel.BEGINNER,
+                        BeginnerTasks.WINDMILL_MAKE_FLOUR
                 )
             }
         }
