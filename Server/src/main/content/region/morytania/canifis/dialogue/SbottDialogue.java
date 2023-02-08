@@ -32,7 +32,7 @@ public class SbottDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Hello stranger. Would you like to me to tan any hides for", "you?");
+		interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Hello stranger. Would you like to me to tan any hides for", "you?");
 		stage = 0;
 		return true;
 	}
@@ -43,7 +43,7 @@ public class SbottDialogue extends DialoguePlugin {
 		case 0:
 			// interpreter.sendDialogues(npc, FacialExpression.NORMAL,
 			// "Soft leather - 2 gp per hide","Hard leather - 5 gp per hide","Snakeskins - 25 gp per hide","Dragon leather - 45 gp per hide.");
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Soft leather - 1 gp per hide", "Hard leather - 3 gp per hide", "Snakeskins - 20 gp per hide", "Dragon leather - 20 gp per hide.");
+			interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Soft leather - 1 gp per hide", "Hard leather - 3 gp per hide", "Snakeskins - 20 gp per hide", "Dragon leather - 20 gp per hide.");
 			stage = 1;
 			break;
 		case 1:
@@ -54,7 +54,7 @@ public class SbottDialogue extends DialoguePlugin {
 					continue;
 				}
 				if (TanningProduct.forItemId(items[i].getId()) != null) {
-					interpreter.sendDialogues(npc, null, "I see you have brought me some hides.", "Would you like me to tan them for you?");
+					interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "I see you have brought me some hides.", "Would you like me to tan them for you?");
 					stage = 100;
 					return true;
 				}
@@ -72,11 +72,11 @@ public class SbottDialogue extends DialoguePlugin {
 		case 101:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, null, "Yes please.");
+				interpreter.sendDialogues(player, FacialExpression.HAPPY, "Yes please.");
 				stage = 210;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, null, "No thanks.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "No thanks.");
 				stage = 200;
 				break;
 			}
@@ -86,7 +86,7 @@ public class SbottDialogue extends DialoguePlugin {
 			TanningProduct.open(player, 2824);
 			break;
 		case 200:
-			interpreter.sendDialogues(npc, null, "Very well, sir, as you wish.");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "Very well, sir, as you wish.");
 			stage = 201;
 			break;
 		case 201:

@@ -31,13 +31,13 @@ public class SilkTradeDialogue extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 0:
-			interpreter.sendOptions("Select an Option", "How much are they?", "No, slik doesn't suit me.");
+			interpreter.sendOptions("Select an Option", "How much are they?", "No, silk doesn't suit me.");
 			stage = 1;
 			break;
 		case 1:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "How much are they?");
+				interpreter.sendDialogues(player, FacialExpression.HALF_ASKING, "How much are they?");
 				stage = 10;
 				break;
 			case 2:
@@ -49,7 +49,7 @@ public class SilkTradeDialogue extends DialoguePlugin {
 
 			break;
 		case 10:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "3gp.");
+			interpreter.sendDialogues(npc, FacialExpression.NEUTRAL, "3gp.");
 			stage = 11;
 			break;
 		case 11:
@@ -74,7 +74,7 @@ public class SilkTradeDialogue extends DialoguePlugin {
 			stage = 111;
 			break;
 		case 111:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "I'm not selling it for any less. You'll only go and sell it", "in Varrock for a profit.");
+			interpreter.sendDialogues(npc, FacialExpression.ANNOYED, "I'm not selling it for any less. You'll only go and sell it", "in Varrock for a profit.");
 			stage = 113;
 			break;
 		case 113:
@@ -84,7 +84,7 @@ public class SilkTradeDialogue extends DialoguePlugin {
 		case 114:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "2gp sounds good.");
+				interpreter.sendDialogues(player, FacialExpression.HAPPY, "2gp sounds good.");
 				stage = 1000;
 				break;
 			case 2:
@@ -140,7 +140,7 @@ public class SilkTradeDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Do you want to buy any fine silks?");
+		interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Do you want to buy any fine silks?");
 		stage = 0;
 		return true;
 	}

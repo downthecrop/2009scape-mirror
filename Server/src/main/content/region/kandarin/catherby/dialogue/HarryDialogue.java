@@ -61,7 +61,7 @@ public final class HarryDialogue extends DialoguePlugin {
     @Override
     public boolean open(Object... args) {
         npc = (NPC) args[0];
-        interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Welcome! You can buy Fishing equipment at my store.", "We'll also give you a good price for any fish that you", "catch.");
+        interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Welcome! You can buy Fishing equipment at my store.", "We'll also give you a good price for any fish that you", "catch.");
         if (needsFish() || needsSeaWeed()) {
             stage = 10;
         } else if (needsFood()) {

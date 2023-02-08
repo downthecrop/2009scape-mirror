@@ -7,7 +7,7 @@ import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
 
 /**
- * Represesents the dialogue plugin used for lowe.
+ * Represents the dialogue plugin used for lowe.
  * @author 'Vexia
  * @version 1.0
  */
@@ -39,7 +39,7 @@ public final class LoweDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Welcome to Lowe's Archery Emporium. Do you want", "to see my wares?");
+		interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Welcome to Lowe's Archery Emporium. Do you want", "to see my wares?");
 		stage = 0;
 		return true;
 	}
@@ -57,14 +57,14 @@ public final class LoweDialogue extends DialoguePlugin {
 				npc.openShop(player);
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "No, I prefer to bash things close up.");
+				interpreter.sendDialogues(player, FacialExpression.EVIL_LAUGH, "No, I prefer to bash things close up.");
 				stage = 3;
 				break;
 			}
 
 			break;
 		case 3:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Humph, philistine.");
+			interpreter.sendDialogues(npc, FacialExpression.ANNOYED, "Humph, philistine.");
 			stage = 4;
 			break;
 		case 4:

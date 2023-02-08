@@ -7,7 +7,7 @@ import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
 
 /**
- * Represents the dialouge plugin used for the dward shop.
+ * Represents the dialouge plugin used for the dwarf shop.
  * @author 'Vexia
  * @version 1.0
  */
@@ -39,7 +39,7 @@ public final class DwarfShopDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Can I help you at all?");
+		interpreter.sendDialogues(npc, FacialExpression.OLD_HAPPY, "Can I help you at all?");
 		stage = 0;
 		return true;
 	}

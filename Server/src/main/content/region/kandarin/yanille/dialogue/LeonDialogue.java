@@ -50,22 +50,22 @@ public final class LeonDialogue extends DialoguePlugin {
 		case 1:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "What is this place?");
+				interpreter.sendDialogues(player, FacialExpression.ASKING, "What is this place?");
 				stage = 10;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Can I have a go with your crossbow?");
+				interpreter.sendDialogues(player, FacialExpression.FRIENDLY, "Can I have a go with your crossbow?");
 				stage = 20;
 				break;
 			case 3:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "What are you holding there?");
+				interpreter.sendDialogues(player, FacialExpression.ASKING, "What are you holding there?");
 				stage = 30;
 				break;
 
 			}
 			break;
 		case 10:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "This is Aleck's Hunter Emporium. Basically, it's just a", "shop with fancy name; you can buy various weapons", "and traps here.");
+			interpreter.sendDialogues(npc, FacialExpression.HAPPY, "This is Aleck's Hunter Emporium. Basically, it's just a", "shop with fancy name; you can buy various weapons", "and traps here.");
 			stage = 11;
 			break;
 		case 11:
@@ -79,7 +79,7 @@ public final class LeonDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 30:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "This? This is a prototype for a new type of crossbow", "I've been designing.");
+			interpreter.sendDialogues(npc, FacialExpression.HAPPY, "This? This is a prototype for a new type of crossbow", "I've been designing.");
 			stage = 31;
 			break;
 		case 31:

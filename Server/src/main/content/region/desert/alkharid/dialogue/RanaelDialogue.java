@@ -62,7 +62,7 @@ public class RanaelDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Do you want to buy any armoured skirts? Designed", "especially for ladies who like to fight.");
+		interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Do you want to buy any armoured skirts? Designed", "especially for ladies who like to fight.");
 		stage = 0;
 		return true;
 	}

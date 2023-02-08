@@ -48,23 +48,22 @@ public final class HerquinDialogue extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 0:
-		case 1:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Do you wish to trade?");
+			interpreter.sendDialogues(player, FacialExpression.FRIENDLY, "Do you wish to trade?");
 			stage = 10;
 			break;
-		case 2:
+		case 1:
 			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Sorry, I don't want to talk to you, actually.");
+			stage = 2;
+			break;
+		case 2:
+			interpreter.sendDialogues(npc, FacialExpression.ROLLING_EYES, "Huh, charming.");
 			stage = 3;
 			break;
 		case 3:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Huh, charming.");
-			stage = 4;
-			break;
-		case 4:
 			end();
 			break;
 		case 10:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Why, yes, this is a jewel shop after all.");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "Why, yes, this is a jewel shop after all.");
 			stage = 11;
 			break;
 		case 11:

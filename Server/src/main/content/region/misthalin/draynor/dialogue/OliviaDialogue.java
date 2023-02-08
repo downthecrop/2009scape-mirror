@@ -40,11 +40,11 @@ public class OliviaDialogue extends DialoguePlugin {
 				npc.openShop(player);
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "No, thanks.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "No, thanks.");
 				stage = 20;
 				break;
 			case 3:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Where do I get rarer seeds from?");
+				interpreter.sendDialogues(player, FacialExpression.ASKING, "Where do I get rarer seeds from?");
 				stage = 40;
 				break;
 
@@ -54,7 +54,7 @@ public class OliviaDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 40:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "The Master Farmers usually carry a few rare seeds", "around with them, although I don't know if they'd want", "to part with them for any price to be honest.");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "The Master Farmers usually carry a few rare seeds", "around with them, although I don't know if they'd want", "to part with them for any price to be honest.");
 			stage = 41;
 			break;
 		case 41:
@@ -73,7 +73,7 @@ public class OliviaDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Would you like to trade in seeds?");
+		interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Would you like to trade in seeds?");
 		stage = 0;
 		return true;
 	}

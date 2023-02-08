@@ -39,7 +39,7 @@ public final class FlynnDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Hello. Do you want to buy or sell any maces?");
+		interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Hello. Do you want to buy or sell any maces?");
 		stage = 0;
 		return true;
 	}
@@ -54,7 +54,7 @@ public final class FlynnDialogue extends DialoguePlugin {
 		case 1:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "No, thanks.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "No, thanks.");
 				stage = 10;
 				break;
 			case 2:

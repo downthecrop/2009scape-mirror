@@ -1,4 +1,4 @@
-package content.region.asgarnia.falador.dialogue;
+package content.region.misthalin.varrock.dialogue;
 
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
@@ -7,33 +7,31 @@ import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
 
 /**
- * Represents the falador shop keeper dialogue plugin.
- * @author 'Vexia
- * @version 1.0
+ * Represents the Varrock shop keeper dialogue.
  */
 @Initializable
-public final class FaladorShopKeeperDialogue extends DialoguePlugin {
+public final class VarrockShopKeeperDialogue extends DialoguePlugin {
 
 	/**
-	 * Constructs a new {@code FaladorShopKeepDialogue} {@code Object}.
+	 * Constructs a new {@code VarrockShopKeeperDialogue} {@code Object}.
 	 */
-	public FaladorShopKeeperDialogue() {
+	public VarrockShopKeeperDialogue() {
 		/**
 		 * empty.
 		 */
 	}
 
 	/**
-	 * Constructs a new {@code FaladorShopKeepDialogue} {@code Object}.
+	 * Constructs a new {@code VarrockShopKeeperDialogue} {@code Object}.
 	 * @param player the player.
 	 */
-	public FaladorShopKeeperDialogue(Player player) {
+	public VarrockShopKeeperDialogue(Player player) {
 		super(player);
 	}
 
 	@Override
 	public DialoguePlugin newInstance(Player player) {
-		return new FaladorShopKeeperDialogue(player);
+		return new VarrockShopKeeperDialogue(player);
 	}
 
 	@Override
@@ -64,7 +62,6 @@ public final class FaladorShopKeeperDialogue extends DialoguePlugin {
 			case 3:
 				end();
 				break;
-
 			}
 			break;
 		case 20:
@@ -76,6 +73,6 @@ public final class FaladorShopKeeperDialogue extends DialoguePlugin {
 
 	@Override
 	public int[] getIds() {
-		return new int[] { 526, 527 };
+		return new int[] { 522, 523 };
 	}
 }

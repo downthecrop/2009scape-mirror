@@ -39,11 +39,11 @@ public class TostigDialogue extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 0:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Well sir, our speciality is Asgarnian Ale, we also serve", "Wizard's Mind Bomb and Dwarven Stout.");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "Well sir, our speciality is Asgarnian Ale, we also serve", "Wizard's Mind Bomb and Dwarven Stout.");
 			stage = 1;
 			break;
 		case 1:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Would you like to buy a drink?");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "Would you like to buy a drink?");
 			stage = 2;
 			break;
 		case 2:
@@ -53,21 +53,21 @@ public class TostigDialogue extends DialoguePlugin {
 		case 3:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Yes, please.");
+				interpreter.sendDialogues(player, FacialExpression.HAPPY, "Yes, please.");
 				stage = 100;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "No, thanks.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "No, thanks.");
 				stage = 4;
 				break;
 			}
 			break;
 		case 4:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Ah well... so um... does the grey squirrel sing in the", "grove?");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_ASKING, "Ah well... so um... does the grey squirrel sing in the", "grove?");
 			stage = 5;
 			break;
 		case 5:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Huh?");
+			interpreter.sendDialogues(player, FacialExpression.HALF_ASKING, "Huh?");
 			stage = 6;
 			break;
 		case 6:

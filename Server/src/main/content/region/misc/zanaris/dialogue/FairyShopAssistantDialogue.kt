@@ -16,7 +16,7 @@ class FairyShopAssistantDialogue(player: Player? = null) : core.game.dialogue.Di
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.OLD_NORMAL,"Can I help you at all?").also { stage = 0 }
+        npc(core.game.dialogue.FacialExpression.OLD_HAPPY,"Can I help you at all?").also { stage = 0 }
         return true
     }
 
@@ -39,6 +39,6 @@ class FairyShopAssistantDialogue(player: Player? = null) : core.game.dialogue.Di
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FAIRY_SHOP_ASSISTANT_535)
+        return intArrayOf(NPCs.FAIRY_SHOP_ASSISTANT_535, NPCs.FAIRY_SHOPKEEPER_534)
     }
 }

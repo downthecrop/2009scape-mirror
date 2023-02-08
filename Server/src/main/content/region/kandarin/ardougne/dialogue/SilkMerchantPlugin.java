@@ -45,13 +45,13 @@ public class SilkMerchantPlugin extends DialoguePlugin {
 		switch (stage) {
 		case 0:
 			if (player.getInventory().containsItem(SILK)) {
-				interpreter.sendDialogues(player, null, "Hello. I have some fine silk from Al-Kharid to sell to", "you.");
+				interpreter.sendDialogues(player, FacialExpression.FRIENDLY, "Hello. I have some fine silk from Al-Kharid to sell to", "you.");
 				stage = 1;
 			} else if (player.getInventory().containsItem(NOTED_SILK)) {
-				interpreter.sendDialogues(player, null, "I've got some silk here. Will you buy it?");
+				interpreter.sendDialogues(player, FacialExpression.ASKING, "I've got some silk here. Will you buy it?");
 				stage = 100;
 			} else {
-				interpreter.sendDialogues(player, null, "Sorry, I don't have any silk.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Sorry, I don't have any silk.");
 				stage = 200;
 			}
 			break;
@@ -62,7 +62,7 @@ public class SilkMerchantPlugin extends DialoguePlugin {
 			end();
 			break;
 		case 1:
-			interpreter.sendDialogues(npc, null, "Ah, I may be interested in that. What sort of price were", "you looking at per piece of silk?");
+			interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Ah, I may be interested in that. What sort of price were", "you looking at per piece of silk?");
 			stage = 2;
 			break;
 		case 2:
@@ -72,26 +72,26 @@ public class SilkMerchantPlugin extends DialoguePlugin {
 		case 3:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, null, "20 coins.");
+				interpreter.sendDialogues(player, FacialExpression.FRIENDLY, "20 coins.");
 				stage = 1000;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, null, "30 coins.");
+				interpreter.sendDialogues(player, FacialExpression.FRIENDLY, "30 coins.");
 				stage = 2000;
 				break;
 			case 3:
-				interpreter.sendDialogues(player, null, "120 coins.");
+				interpreter.sendDialogues(player, FacialExpression.FRIENDLY, "120 coins.");
 				stage = 300;
 				break;
 			case 4:
-				interpreter.sendDialogues(player, null, "200 coins.");
+				interpreter.sendDialogues(player, FacialExpression.FRIENDLY, "200 coins.");
 				stage = 400;
 				break;
 			}
 			break;
 		case 1000:
 		case 2000:
-			interpreter.sendDialogues(npc, null, "That price is fine by me! Hand over your silk.");
+			interpreter.sendDialogues(npc, FacialExpression.HAPPY, "That price is fine by me! Hand over your silk.");
 			stage = stage == 1000 ? 1010 : 1011;
 			break;
 		case 1010:
@@ -102,7 +102,7 @@ public class SilkMerchantPlugin extends DialoguePlugin {
 			break;
 		case 300:
 		case 400:
-			interpreter.sendDialogues(npc, null, "You'll never get that much for it. I'll be generous and", "give you 50 for it.");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "You'll never get that much for it. I'll be generous and", "give you 50 for it.");
 			stage = 500;
 			break;
 		case 500:// use this for selling.
@@ -112,15 +112,15 @@ public class SilkMerchantPlugin extends DialoguePlugin {
 		case 501:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, null, "Ok, I guess 50 will do.");
+				interpreter.sendDialogues(player, FacialExpression.FRIENDLY, "Ok, I guess 50 will do.");
 				stage = 510;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, null, "I'll give it to you for 60.");
+				interpreter.sendDialogues(player, FacialExpression.HAPPY, "I'll give it to you for 60.");
 				stage = 520;
 				break;
 			case 3:
-				interpreter.sendDialogues(player, null, "No, that is not enough.");
+				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "No, that is not enough.");
 				stage = 530;
 				break;
 			}
@@ -129,7 +129,7 @@ public class SilkMerchantPlugin extends DialoguePlugin {
 			buy(50);
 			break;
 		case 520:
-			interpreter.sendDialogues(npc, null, "You drive a hard bargain, but", "I guess that will have to do.");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "You drive a hard bargain, but", "I guess that will have to do.");
 			stage = 521;
 			break;
 		case 521:
@@ -139,7 +139,7 @@ public class SilkMerchantPlugin extends DialoguePlugin {
 			end();
 			break;
 		case 100:
-			interpreter.sendDialogues(npc, null, "Silk? Yo're not carrying any silk.");
+			interpreter.sendDialogues(npc, null, "Silk? You're not carrying any silk.");
 			stage = 101;
 			break;
 		case 101:
@@ -213,7 +213,7 @@ public class SilkMerchantPlugin extends DialoguePlugin {
 			});
 			return false;
 		}
-		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "I buy silk. If you ever want to", "sell any silk, bring it here.");
+		interpreter.sendDialogues(npc, FacialExpression.HAPPY, "I buy silk. If you ever want to", "sell any silk, bring it here.");
 		stage = 0;
 		return true;
 	}

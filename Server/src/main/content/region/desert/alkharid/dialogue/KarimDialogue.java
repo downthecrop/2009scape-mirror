@@ -50,7 +50,7 @@ public final class KarimDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Would you like to buy a nice kebab? Only one gold.");
+		interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Would you like to buy a nice kebab? Only one gold.");
 		stage = 0;
 		return true;
 	}
@@ -69,7 +69,7 @@ public final class KarimDialogue extends DialoguePlugin {
 				stage = 10;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Yes please.");
+				interpreter.sendDialogues(player, FacialExpression.HAPPY, "Yes please.");
 				stage = 20;
 				break;
 

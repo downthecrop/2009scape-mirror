@@ -39,7 +39,7 @@ ShopkeeperDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Can I help you at all?");
+		interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Can I help you at all?");
 		stage = 0;
 		return true;
 	}
@@ -76,6 +76,6 @@ ShopkeeperDialogue extends DialoguePlugin {
 
 	@Override
 	public int[] getIds() {
-		return new int[] { 523, 522, 520, 521, 1699,555 };
+		return new int[] { 555 };
 	}
 }

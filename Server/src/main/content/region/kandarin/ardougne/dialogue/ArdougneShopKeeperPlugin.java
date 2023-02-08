@@ -39,7 +39,7 @@ public final class ArdougneShopKeeperPlugin extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Hello, you look like a bold adventurer. You've come to the", "right place for adventurers' equipment.");
+		interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Hello, you look like a bold adventurer. You've come to the", "right place for adventurers' equipment.");
 		stage = 0;
 		return true;
 	}
@@ -58,7 +58,7 @@ public final class ArdougneShopKeeperPlugin extends DialoguePlugin {
 				npc.openShop(player);
 				break;
 			case 2:
-				interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "I'm glad you ask! You can buy as many of the items", "stocked as you wish. You can also sell most items to the", "shop.");
+				interpreter.sendDialogues(npc, FacialExpression.HAPPY, "I'm glad you ask! You can buy as many of the items", "stocked as you wish. You can also sell most items to the", "shop.");
 				stage = 20;
 				break;
 			case 3:
