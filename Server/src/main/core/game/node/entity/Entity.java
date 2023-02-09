@@ -162,7 +162,8 @@ public abstract class Entity extends Node {
 	{
 		if(this.hooks.containsKey(event.getClass()))
 		{
-			this.hooks.get(event.getClass()).forEach((hook) -> { hook.process(this, event); });
+			ArrayList<EventHook> processList = new ArrayList(this.hooks.get(event.getClass()));
+			processList.forEach((hook) -> { hook.process(this, event); });
 		}
 	}
 
