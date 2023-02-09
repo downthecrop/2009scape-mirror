@@ -282,7 +282,6 @@ open class RangeSwingHandler
             val type = state.weapon.type
             val amount = if (type == WeaponType.DOUBLE_SHOT) 2 else 1
             if (type == WeaponType.DEGRADING) {
-                degrade(e, state, amount)
                 return
             }
             val ammo = state.weapon.ammunition
@@ -341,36 +340,6 @@ open class RangeSwingHandler
                 }
             }
             return 1.0
-        }
-
-        /**
-         * Degrades the player's range weapon used.
-         * @param p The player.
-         * @param state The battle state.
-         * @param amount The amount of shots to degrade.
-         */
-        private fun degrade(p: Player, state: BattleState, amount: Int) {
-            if (state.weapon.item.id == 4212) { // New crystal bow.
-                p.packetDispatch.sendMessage("Your crystal bow has degraded!")
-                p.equipment.replace(Item(4214, 1, 996), 3)
-                return
-            }
-            val charge = state.weapon.item.charge - amount * 4
-            state.weapon.item.charge = charge
-            if (charge < 1) {
-                val id = state.weapon.id + 1
-                if (id < 4224) {
-                    p.packetDispatch.sendMessage("Your crystal bow has degraded!")
-                    p.equipment.replace(Item(id, 1, 999), 3)
-                } else {
-                    var replace: Item? = null
-                    if (!p.inventory.add(Item(4207))) {
-                        replace = Item(4207)
-                    }
-                    p.equipment.replace(replace, 3)
-                    p.packetDispatch.sendMessage("Your crystal bow has degraded to a small crystal seed.")
-                }
-            }
         }
     }
 }
