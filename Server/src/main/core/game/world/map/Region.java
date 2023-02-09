@@ -303,6 +303,7 @@ public class Region {
 			int mapscapeId = Cache.getIndexes()[5].getArchiveId("m" + regionX + "_"+ regionY);
 
 			if (mapscapeId < 0 && !dynamic) {
+				r.setLoaded(true);
 				return;
 			}
 
