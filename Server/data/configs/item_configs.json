@@ -81517,6 +81517,7 @@
     "defence_anim": "397",
     "equipment_slot": "3",
     "attack_anims": "381,390,390,390",
+    "attack_audios": "2500,2500,2517,2500",
     "name": "Training sword",
     "archery_ticket_price": "0",
     "id": "9703",
@@ -88729,28 +88730,31 @@
     "id": "10439"
   },
   {
-    "requirements": "{5,60}",
     "ge_buy_limit": "2",
     "turn90cw_anim": "1207",
     "examine": "A Saradomin crozier.",
     "walk_anim": "1205",
-    "durability": null,
-    "weight": "2",
     "turn90ccw_anim": "1208",
     "attack_speed": "5",
-    "weapon_interface": "1",
     "turn180_anim": "1206",
-    "render_anim": "28",
+    "defence_anim": "420",
     "equipment_slot": "3",
+    "attack_anims": "419,419,419,419",
     "grand_exchange_price": "8611",
     "stand_anim": "813",
-    "name": "Saradomin crozier",
     "tradeable": "true",
     "run_anim": "1210",
     "archery_ticket_price": "0",
     "id": "10440",
     "stand_turn_anim": "1209",
-    "bonuses": "7,-1,25,10,0,2,3,1,10,0,0,32,6,0,0"
+    "bonuses": "7,-1,25,10,0,2,3,1,10,0,0,32,6,0,0",
+    "requirements": "{5,60}",
+    "durability": null,
+    "weight": "2",
+    "weapon_interface": "1",
+    "render_anim": "28",
+    "attack_audios": "2555,0,0,0",
+    "name": "Saradomin crozier"
   },
   {
     "ge_buy_limit": "2",
@@ -88762,28 +88766,31 @@
     "id": "10441"
   },
   {
-    "requirements": "{5,60}",
     "ge_buy_limit": "2",
     "turn90cw_anim": "1207",
     "examine": "A Guthix crozier.",
     "walk_anim": "1205",
-    "durability": null,
-    "weight": "2",
     "turn90ccw_anim": "1208",
     "attack_speed": "5",
-    "weapon_interface": "1",
     "turn180_anim": "1206",
-    "render_anim": "28",
+    "defence_anim": "420",
     "equipment_slot": "3",
+    "attack_anims": "419,419,419,419",
     "grand_exchange_price": "2925",
     "stand_anim": "813",
-    "name": "Guthix crozier",
     "tradeable": "true",
     "run_anim": "1210",
     "archery_ticket_price": "0",
     "id": "10442",
     "stand_turn_anim": "1209",
-    "bonuses": "7,-1,25,10,0,2,3,1,10,0,0,32,6,0,0"
+    "bonuses": "7,-1,25,10,0,2,3,1,10,0,0,32,6,0,0",
+    "requirements": "{5,60}",
+    "durability": null,
+    "weight": "2",
+    "weapon_interface": "1",
+    "render_anim": "28",
+    "attack_audios": "2555,0,0,0",
+    "name": "Guthix crozier"
   },
   {
     "ge_buy_limit": "2",
@@ -88795,30 +88802,34 @@
     "id": "10443"
   },
   {
-    "requirements": "{5,60}",
     "ge_buy_limit": "2",
     "turn90cw_anim": "1207",
     "examine": "A Zamorak crozier.",
     "walk_anim": "1205",
-    "durability": null,
-    "weight": "2",
     "turn90ccw_anim": "1208",
     "attack_speed": "5",
-    "weapon_interface": "1",
     "turn180_anim": "1206",
-    "render_anim": "28",
+    "defence_anim": "420",
     "equipment_slot": "3",
+    "attack_anims": "419,419,419,419",
     "grand_exchange_price": "2794",
     "stand_anim": "813",
-    "name": "Zamorak crozier",
     "tradeable": "true",
     "run_anim": "1210",
     "archery_ticket_price": "0",
     "id": "10444",
     "stand_turn_anim": "1209",
-    "bonuses": "7,-1,25,10,0,2,3,1,10,0,0,32,6,0,0"
+    "bonuses": "7,-1,25,10,0,2,3,1,10,0,0,32,6,0,0",
+    "requirements": "{5,60}",
+    "durability": null,
+    "weight": "2",
+    "weapon_interface": "1",
+    "render_anim": "28",
+    "attack_audios": "2555,0,0,0",
+    "name": "Zamorak crozier"
   },
   {
+    "attack_anims": "",
     "ge_buy_limit": "2",
     "grand_exchange_price": "2794",
     "durability": null,
@@ -91009,6 +91020,7 @@
     "equipment_slot": "1"
   },
   {
+    "requirements": "{1,10}",
     "examine": "A black kitesheild with a heraldic design.",
     "grand_exchange_price": "15249",
     "durability": null,
@@ -91022,17 +91034,19 @@
     "equipment_slot": "5"
   },
   {
+    "requirements": "{1,30}",
+    "ge_buy_limit": "2",
     "examine": "A shield with a heraldic design.",
-    "grand_exchange_price": "16339",
     "durability": null,
+    "weight": "5",
+    "absorb": "3,0,6",
+    "equipment_slot": "5",
+    "grand_exchange_price": "16339",
     "name": "Adamant shield(h1)",
     "tradeable": "true",
-    "weight": "5",
     "archery_ticket_price": "0",
     "id": "10666",
-    "absorb": "3,0,6",
-    "bonuses": "0,0,0,-8,-2,27,31,29,-1,29,0,0,0,0,0",
-    "equipment_slot": "5"
+    "bonuses": "0,0,0,-8,-2,27,31,29,-1,29,0,0,0,0,0"
   },
   {
     "requirements": "{1,40}",
@@ -91049,6 +91063,7 @@
     "equipment_slot": "5"
   },
   {
+    "requirements": "{1,10}",
     "examine": "A black kiteshield with a heraldic design.",
     "grand_exchange_price": "9751",
     "durability": null,
@@ -91062,17 +91077,19 @@
     "equipment_slot": "5"
   },
   {
+    "requirements": "{1,30}",
+    "ge_buy_limit": "2",
     "examine": "A shield with a heraldic design.",
-    "grand_exchange_price": "3353",
     "durability": null,
+    "weight": "5",
+    "absorb": "3,0,6",
+    "equipment_slot": "5",
+    "grand_exchange_price": "3353",
     "name": "Adamant shield(h2)",
     "tradeable": "true",
-    "weight": "5",
     "archery_ticket_price": "0",
     "id": "10669",
-    "absorb": "3,0,6",
-    "bonuses": "0,0,0,-8,-2,27,31,29,-1,29,0,0,0,0,0",
-    "equipment_slot": "5"
+    "bonuses": "0,0,0,-8,-2,27,31,29,-1,29,0,0,0,0,0"
   },
   {
     "requirements": "{1,40}",
@@ -91089,6 +91106,7 @@
     "equipment_slot": "5"
   },
   {
+    "requirements": "{1,10}",
     "examine": "A black shield with a heraldic design.",
     "grand_exchange_price": "6791",
     "durability": null,
@@ -91102,17 +91120,19 @@
     "equipment_slot": "5"
   },
   {
+    "requirements": "{1,30}",
+    "ge_buy_limit": "2",
     "examine": "A shield with a heraldic design.",
-    "grand_exchange_price": "5566",
     "durability": null,
+    "weight": "5",
+    "absorb": "3,0,6",
+    "equipment_slot": "5",
+    "grand_exchange_price": "5566",
     "name": "Adamant shield(h3)",
     "tradeable": "true",
-    "weight": "5",
     "archery_ticket_price": "0",
     "id": "10672",
-    "absorb": "3,0,6",
-    "bonuses": "0,0,0,-8,-2,27,31,29,-1,29,0,0,0,0,0",
-    "equipment_slot": "5"
+    "bonuses": "0,0,0,-8,-2,27,31,29,-1,29,0,0,0,0,0"
   },
   {
     "requirements": "{1,40}",
@@ -91129,6 +91149,7 @@
     "equipment_slot": "5"
   },
   {
+    "requirements": "{1,10}",
     "examine": "A black shield with a heraldic design.",
     "grand_exchange_price": "5159",
     "durability": null,
@@ -91142,17 +91163,19 @@
     "equipment_slot": "5"
   },
   {
+    "requirements": "{1,30}",
+    "ge_buy_limit": "2",
     "examine": "A shield with a heraldic design.",
-    "grand_exchange_price": "3219",
     "durability": null,
+    "weight": "5",
+    "absorb": "3,0,6",
+    "equipment_slot": "5",
+    "grand_exchange_price": "3219",
     "name": "Adamant shield(h4)",
     "tradeable": "true",
-    "weight": "5",
     "archery_ticket_price": "0",
     "id": "10675",
-    "absorb": "3,0,6",
-    "bonuses": "0,0,0,-8,-2,27,31,29,-1,29,0,0,0,0,0",
-    "equipment_slot": "5"
+    "bonuses": "0,0,0,-8,-2,27,31,29,-1,29,0,0,0,0,0"
   },
   {
     "requirements": "{1,40}",
@@ -91169,6 +91192,7 @@
     "equipment_slot": "5"
   },
   {
+    "requirements": "{1,10}",
     "examine": "A black shield with a heraldic design.",
     "grand_exchange_price": "8451",
     "durability": null,
@@ -91182,17 +91206,19 @@
     "equipment_slot": "5"
   },
   {
+    "requirements": "{1,30}",
+    "ge_buy_limit": "2",
     "examine": "A shield with a heraldic design.",
-    "grand_exchange_price": "5905",
     "durability": null,
+    "weight": "5",
+    "absorb": "3,0,6",
+    "equipment_slot": "5",
+    "grand_exchange_price": "5905",
     "name": "Adamant shield(h5)",
     "tradeable": "true",
-    "weight": "5",
     "archery_ticket_price": "0",
     "id": "10678",
-    "absorb": "3,0,6",
-    "bonuses": "0,0,0,-8,-2,27,31,29,-1,29,0,0,0,0,0",
-    "equipment_slot": "5"
+    "bonuses": "0,0,0,-8,-2,27,31,29,-1,29,0,0,0,0,0"
   },
   {
     "requirements": "{1,40}",
@@ -91319,32 +91345,34 @@
     "equipment_slot": "10"
   },
   {
-    "remove_sleeves": "true",
+    "requirements": "{1,10}",
     "examine": "Black platebody with trim.",
-    "grand_exchange_price": "90744",
     "durability": null,
+    "weight": "9.07",
+    "absorb": "1,0,2",
+    "equipment_slot": "4",
+    "remove_sleeves": "true",
+    "grand_exchange_price": "90744",
     "name": "Black platebody (t)",
     "tradeable": "true",
-    "weight": "9.07",
     "archery_ticket_price": "0",
     "id": "10690",
-    "absorb": "1,0,2",
-    "bonuses": "0,0,0,-30,-10,41,40,30,-6,40,0,0,0,0,0",
-    "equipment_slot": "4"
+    "bonuses": "0,0,0,-30,-10,41,40,30,-6,40,0,0,0,0,0"
   },
   {
-    "remove_sleeves": "true",
+    "requirements": "{1,10}",
     "examine": "Black platebody with gold trim.",
-    "grand_exchange_price": "230800",
     "durability": null,
+    "weight": "9.07",
+    "absorb": "1,0,2",
+    "equipment_slot": "4",
+    "remove_sleeves": "true",
+    "grand_exchange_price": "230800",
     "name": "Black platebody (g)",
     "tradeable": "true",
-    "weight": "9.07",
     "archery_ticket_price": "0",
     "id": "10691",
-    "absorb": "1,0,2",
-    "bonuses": "0,0,0,-30,-10,41,40,30,-6,40,0,0,0,0,0",
-    "equipment_slot": "4"
+    "bonuses": "0,0,0,-30,-10,41,40,30,-6,40,0,0,0,0,0"
   },
   {
     "lendable": "true",
@@ -91407,35 +91435,40 @@
     "equipment_slot": "10"
   },
   {
-    "remove_sleeves": "true",
+    "requirements": "{1,30}",
+    "ge_buy_limit": "2",
     "examine": "Adamant platebody with trim.",
-    "grand_exchange_price": "79300",
     "durability": null,
+    "weight": "9.07",
+    "absorb": "2,0,4",
+    "equipment_slot": "4",
+    "remove_sleeves": "true",
+    "grand_exchange_price": "79300",
     "name": "Adam platebody (t)",
     "tradeable": "true",
-    "weight": "9.07",
     "archery_ticket_price": "0",
     "id": "10697",
-    "absorb": "2,0,4",
-    "bonuses": "0,0,0,-30,-10,65,63,55,-6,63,0,0,0,0,0",
-    "equipment_slot": "4"
+    "bonuses": "0,0,0,-30,-10,65,63,55,-6,63,0,0,0,0,0"
   },
   {
-    "remove_sleeves": "true",
+    "requirements": "{1,30}",
+    "ge_buy_limit": "2",
     "examine": "Adamant platebody with gold trim.",
-    "grand_exchange_price": "207912",
     "durability": null,
+    "weight": "9.07",
+    "absorb": "2,0,4",
+    "equipment_slot": "4",
+    "remove_sleeves": "true",
+    "grand_exchange_price": "207912",
     "name": "Adam platebody (g)",
     "tradeable": "true",
-    "weight": "9.07",
     "archery_ticket_price": "0",
     "id": "10698",
-    "absorb": "2,0,4",
-    "bonuses": "0,0,0,-30,-10,65,63,55,-6,63,0,0,0,0,0",
-    "equipment_slot": "4"
+    "bonuses": "0,0,0,-30,-10,65,63,55,-6,63,0,0,0,0,0"
   },
   {
     "remove_head": "true",
+    "requirements": "{1,10}",
     "examine": "A black helmet with a heraldic design.",
     "grand_exchange_price": "22022",
     "durability": null,
@@ -91449,6 +91482,7 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{1,10}",
     "examine": "A black helmet with a heraldic design.",
     "grand_exchange_price": "11700",
     "durability": null,
@@ -91462,6 +91496,7 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{1,10}",
     "examine": "A black helmet with a heraldic design.",
     "grand_exchange_price": "10424",
     "durability": null,
@@ -91475,6 +91510,7 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{1,10}",
     "examine": "A black helmet with a heraldic design.",
     "grand_exchange_price": "12717",
     "durability": null,
@@ -91488,6 +91524,7 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{1,10}",
     "examine": "A black helmet with a heraldic design.",
     "grand_exchange_price": "17852",
     "durability": null,
@@ -91570,73 +91607,83 @@
   },
   {
     "remove_head": "true",
+    "requirements": "{1,30}",
+    "ge_buy_limit": "2",
     "examine": "An adamant helmet with a heraldic design.",
-    "grand_exchange_price": "28407",
     "durability": null,
+    "weight": "3",
+    "absorb": "1,0,2",
+    "equipment_slot": "0",
+    "grand_exchange_price": "28407",
     "name": "Adamant helm (h1)",
     "tradeable": "true",
-    "weight": "3",
     "archery_ticket_price": "0",
     "id": "10709",
-    "absorb": "1,0,2",
-    "bonuses": "0,0,0,-6,-2,19,21,16,-1,19,0,0,0,0,0",
-    "equipment_slot": "0"
+    "bonuses": "0,0,0,-6,-2,19,21,16,-1,19,0,0,0,0,0"
   },
   {
     "remove_head": "true",
+    "requirements": "{1,30}",
+    "ge_buy_limit": "2",
     "examine": "An adamant helmet with a heraldic design.",
-    "grand_exchange_price": "9839",
     "durability": null,
+    "weight": "3",
+    "absorb": "1,0,2",
+    "equipment_slot": "0",
+    "grand_exchange_price": "9839",
     "name": "Adamant helm (h2)",
     "tradeable": "true",
-    "weight": "3",
     "archery_ticket_price": "0",
     "id": "10710",
-    "absorb": "1,0,2",
-    "bonuses": "0,0,0,-6,-2,19,21,16,-1,19,0,0,0,0,0",
-    "equipment_slot": "0"
+    "bonuses": "0,0,0,-6,-2,19,21,16,-1,19,0,0,0,0,0"
   },
   {
     "remove_head": "true",
+    "requirements": "{1,30}",
+    "ge_buy_limit": "2",
     "examine": "An adamant helmet with a heraldic design.",
-    "grand_exchange_price": "8485",
     "durability": null,
+    "weight": "3",
+    "absorb": "1,0,2",
+    "equipment_slot": "0",
+    "grand_exchange_price": "8485",
     "name": "Adamant helm (h3)",
     "tradeable": "true",
-    "weight": "3",
     "archery_ticket_price": "0",
     "id": "10711",
-    "absorb": "1,0,2",
-    "bonuses": "0,0,0,-6,-2,19,21,16,-1,19,0,0,0,0,0",
-    "equipment_slot": "0"
+    "bonuses": "0,0,0,-6,-2,19,21,16,-1,19,0,0,0,0,0"
   },
   {
     "remove_head": "true",
+    "requirements": "{1,30}",
+    "ge_buy_limit": "2",
     "examine": "An Adamant helmet with a heraldic design.",
-    "grand_exchange_price": "10774",
     "durability": null,
+    "weight": "3",
+    "absorb": "1,0,2",
+    "equipment_slot": "0",
+    "grand_exchange_price": "10774",
     "name": "Adamant helm (h4)",
     "tradeable": "true",
-    "weight": "3",
     "archery_ticket_price": "0",
     "id": "10712",
-    "absorb": "1,0,2",
-    "bonuses": "0,0,0,-6,-2,19,21,16,-1,19,0,0,0,0,0",
-    "equipment_slot": "0"
+    "bonuses": "0,0,0,-6,-2,19,21,16,-1,19,0,0,0,0,0"
   },
   {
     "remove_head": "true",
+    "requirements": "{1,30}",
+    "ge_buy_limit": "2",
     "examine": "An adamant helmet with a heraldic design.",
-    "grand_exchange_price": "17390",
     "durability": null,
+    "weight": "3",
+    "absorb": "1,0,2",
+    "equipment_slot": "0",
+    "grand_exchange_price": "17390",
     "name": "Adamant helm (h5)",
     "tradeable": "true",
-    "weight": "3",
     "archery_ticket_price": "0",
     "id": "10713",
-    "absorb": "1,0,2",
-    "bonuses": "0,0,0,-6,-2,19,21,16,-1,19,0,0,0,0,0",
-    "equipment_slot": "0"
+    "bonuses": "0,0,0,-6,-2,19,21,16,-1,19,0,0,0,0,0"
   },
   {
     "remove_sleeves": "true",
