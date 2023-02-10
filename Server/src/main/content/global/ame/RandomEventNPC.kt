@@ -92,6 +92,7 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
     }
 
     fun noteAndTeleport() {
+        player.pulseManager.clear()
         for (item in player.inventory.toArray()) {
             if (item == null) continue
             if (item.definition.isUnnoted) {
