@@ -1,21 +1,19 @@
 package content.minigame.blastfurnace
 
-import core.api.Container
+import content.global.skill.smithing.smelting.Bar
 import core.api.*
+import core.game.interaction.InteractionListener
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
-import content.global.skill.smithing.smelting.Bar
 import core.game.system.task.Pulse
-import core.game.interaction.InteractionListener
-import core.game.interaction.IntType
 import core.game.world.map.Location
 import org.rs09.consts.Items
 
-/**"Most" of the listeners for blast furnace live in this funny little file, handles
+/**"Most" of the listeners for blast furnace live in this file, handles
  * listeners for most things from interacting with the temp gauge to putting ore on the
  * conveyor belt. The only thing that's not in here as far as listeners goes is Ordan's unnoting.
  * That lives in OrdanDialogue.kt
- * @author phil lips*/
+ * @author phil, bushtail*/
 
 class BlastFurnaceListeners : InteractionListener {
 
@@ -56,9 +54,9 @@ class BlastFurnaceListeners : InteractionListener {
 
     override fun defineListeners() {
 
-        /**FINALLY AFK STRENGTH TRAINING*/
+        /**Handles operating the pump*/
 
-        on(pump, IntType.SCENERY, "operate") { player, node ->
+        on(pump, SCENERY, "operate") { player, node ->
             if(player.getSkills().getLevel(Skills.STRENGTH) >= 30) {
                 val pumpL = Location(1950, 4961, 0)
                 val pumpF = Location(1949, 4961, 0)
@@ -90,7 +88,7 @@ class BlastFurnaceListeners : InteractionListener {
         /**Logic for the pedals that run the conveyor, rewards Agility XP every tick that they're being
          * pedaled but will stop once the conveyor breaks.*/
 
-        on(pedals, IntType.SCENERY, "pedal") { player, node ->
+        on(pedals, SCENERY, "pedal") { player, node ->
             if(player.getSkills().getLevel(Skills.AGILITY) >= 30) {
                 val pedalL = Location(1947, 4966, 0)
                 val pedalF = Location(1946, 4966, 0)
@@ -116,12 +114,12 @@ class BlastFurnaceListeners : InteractionListener {
 
         /**Lets players use a spade to take coke from the pile of coke*/
 
-        on(coke, IntType.SCENERY, "collect") { player, node ->
+        on(coke, SCENERY, "collect") { player, _ ->
             if (inInventory(player, Items.SPADE_952, 1)) {
-                animate(player, 2441)
-                removeItem(player, Items.SPADE_952, Container.INVENTORY)
-                addItem(player, Items.SPADEFUL_OF_COKE_6448, 1)
-                lockInteractions(player,1)
+                if(removeItem(player, Items.SPADE_952, Container.INVENTORY) && addItem(player, Items.SPADEFUL_OF_COKE_6448, 1)) {
+                    lockInteractions(player,1)
+                    animate(player, 2441)
+                }
             } else {
                 sendMessage(player, "You need a spade to do this!")
             }
@@ -132,16 +130,18 @@ class BlastFurnaceListeners : InteractionListener {
          * and rewards firemaking XP when shoving coke in there, it will not allow players to shovel more
          * coke in if it is already full.*/
 
-        on(stove, IntType.SCENERY, "refuel") { player, node ->
+        on(stove, SCENERY,"refuel") { player, _ ->
             if (inInventory(player, Items.SPADEFUL_OF_COKE_6448, 1) && BlastFurnace.stoveCoke < 30 && player.getSkills().getLevel(Skills.FIREMAKING) >= 30)  {
                 animate(player, 2442)
                 lockInteractions(player,2)
                 submitIndividualPulse(player, object : Pulse() {
                     override fun pulse(): Boolean {
-                        removeItem(player, Items.SPADEFUL_OF_COKE_6448, Container.INVENTORY)
-                        addItem(player, Items.SPADE_952, 1)
-                        animate(player, 2443)
-                        return true
+                        return if(removeItem(player, Items.SPADEFUL_OF_COKE_6448, Container.INVENTORY) && addItem(player, Items.SPADE_952, 1)) {
+                            animate(player, 2443)
+                            true
+                        } else {
+                            false
+                        }
                     }
                 })
                 rewardXP(player, Skills.FIREMAKING, 5.0)
@@ -156,22 +156,21 @@ class BlastFurnaceListeners : InteractionListener {
         return@on true
         }
 
-        /**This beautiiful block of bullshit handles the logic for putting coal and ores
+        /**This block of code handles the logic for putting coal and ores
          * on the conveyor belt. It won't let you put anything on there if there's no room
          * in your blast ore or blast coal player containers, the way it works is that it
          * puts your coal and ore into the blast furnace containers however, the blast furnace will NOT
-         * smelt your ores because it's waiting for a player attribute to be set by the ore NPCs that this spawns
-         * Is it fucky? Yes
-         * Does it work? Also yes*/
-        on(conveyorLoad, IntType.SCENERY, "put-ore-on") { player, node ->
-            val rocksInInven = playerOre.filter {inInventory(player, it)}
+         * smelt your ores because it's waiting for a player attribute to be set by the ore NPCs that this spawns*/
+
+        on(conveyorLoad, SCENERY, "put-ore-on") { player, node ->
+            val rocksInInventory = playerOre.filter {inInventory(player, it)}
             var oreToActuallyAdd = 0
             var coalToActuallyAdd = 0
             if(player.blastCoal.freeSlots() > 0 || player.blastOre.freeSlots() > 0) {
                 player.dialogueInterpreter.sendOptions("Add all your ore to the furnace?", "Yes", "No")
                 player.dialogueInterpreter.addAction { player, button ->
-                    if (button == 2 && rocksInInven.isNotEmpty()) {
-                        rocksInInven.forEach { oreID ->
+                    if (button == 2 && rocksInInventory.isNotEmpty()) {
+                        rocksInInventory.forEach { oreID ->
                             val oreAmount = amountInInventory(player, oreID)
                             val copperInPot = player.blastOre.getAmount(436)
                             val tinInPot = player.blastOre.getAmount(438)
@@ -198,9 +197,9 @@ class BlastFurnaceListeners : InteractionListener {
                             val bar = Bar.forOre(oreID)
                             if(oreID == Items.COAL_453) {
                                 if (coalToActuallyAdd > 0 && getStatLevel(player, Skills.SMITHING) >= 30) {
-                                    player.blastCoal.add(Item(Items.COAL_453,coalToActuallyAdd))
-                                    removeItem(player, Item(oreID, coalToActuallyAdd), Container.INVENTORY)
-                                    BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreID)],coalToActuallyAdd).init()
+                                    if(removeItem(player, Item(oreID, coalToActuallyAdd), Container.INVENTORY) && player.blastCoal.add(Item(Items.COAL_453,coalToActuallyAdd))) {
+                                        BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreID)],coalToActuallyAdd).init()
+                                    }
                                 }
                                 else if(getStatLevel(player, Skills.SMITHING) < 30){
                                     sendDialogue(player, "My Smithing level is not high enough to use Coal!")
@@ -208,17 +207,21 @@ class BlastFurnaceListeners : InteractionListener {
                                 else sendDialogue(player, "It looks like the melting pot is already full of coal!")
                             } else if (bar != null) {
                                 if (oreToActuallyAdd > 0 && getStatLevel(player, Skills.SMITHING) >= bar.level) {
-                                    player.blastOre.add(Item(oreID,oreToActuallyAdd))
-                                    removeItem(player, Item(oreID, oreToActuallyAdd), Container.INVENTORY)
-                                    BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreID)],oreToActuallyAdd).init()
+                                    if(removeItem(player, Item(oreID, oreToActuallyAdd), Container.INVENTORY) && player.blastOre.add(Item(oreID,oreToActuallyAdd))) {
+                                        BlastFurnaceOre(
+                                            player,
+                                            BFOreVariant.values()[playerOre.indexOf(oreID)],
+                                            oreToActuallyAdd
+                                        ).init()
+                                    }
                                 }
                                 else if(getStatLevel(player, Skills.SMITHING) < bar.level){
-                                    sendDialogue(player, "My Smithing level is not high enough to smelt ${bar.name.toLowerCase()}!")
+                                    sendDialogue(player, "My Smithing level is not high enough to smelt ${bar.name.lowercase()}!")
                                 }
                                 else sendDialogue(player, "It looks like the melting pot is already full of ore!")
                             }
                         }
-                    }else if (button == 2 && rocksInInven.isEmpty()){
+                    } else if (button == 2 && rocksInInventory.isEmpty()){
                         sendDialogue(player,"I should make sure that I have some ore before doing this.")
                     }
                 }
@@ -229,7 +232,7 @@ class BlastFurnaceListeners : InteractionListener {
         /**Added this because clicking on ore then the belt and getting "Nothing interesting happens" is annoying
          * it's essentially the same thing as above except without the dialogue because if you're clicking on ore
          * and trying to use it on the conveyor belt then you know what you're trying to do.*/
-        onUseWith(IntType.SCENERY,conveyorLoad,*playerOre){ player, _, oreType ->
+        onUseWith(SCENERY,playerOre,conveyorLoad){ player, oreType, _ ->
             val amountInInventory = player.inventory.getAmount(oreType.id)
             val spaceForCoal = player.blastCoal.freeSlots()
             val spaceForOre = player.blastOre.freeSlots()
@@ -259,9 +262,13 @@ class BlastFurnaceListeners : InteractionListener {
             val bar = Bar.forOre(oreType.id)
             if(oreType.id == Items.COAL_453) {
                 if (amountToAdd > 0 && getStatLevel(player, Skills.SMITHING) >= 30) {
-                    player.blastCoal.add(Item(oreType.id,amountToAdd))
-                    removeItem(player, Item(oreType.id, amountToAdd), Container.INVENTORY)
-                    BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreType.id)],amountToAdd).init()
+                    if(removeItem(player, Item(oreType.id, amountToAdd), Container.INVENTORY) && player.blastCoal.add(Item(oreType.id,amountToAdd))) {
+                        BlastFurnaceOre(
+                            player,
+                            BFOreVariant.values()[playerOre.indexOf(oreType.id)],
+                            amountToAdd
+                        ).init()
+                    }
                 }else if(getStatLevel(player,Skills.SMITHING) < 30){
                     sendDialogue(player,"My Smithing level is not high enough to use Coal!")
                 }
@@ -281,14 +288,14 @@ class BlastFurnaceListeners : InteractionListener {
 
         /**This handles interacting with the temperature gauge on the furnace*/
 
-        on(tGauge, IntType.SCENERY, "read") { player, node ->
+        on(tGauge, SCENERY, "read") { player, _ ->
             player.interfaceManager.openComponent(30)
             return@on true
         }
 
         /**This handles taking bars from the dispenser*/
 
-        on(dispenser, IntType.SCENERY, "search", "take"){ player, node ->
+        on(dispenser,SCENERY,"search", "take"){ player, _ ->
             if(player.varpManager.get(543).getVarbitValue(8) == 0 || player.varpManager.get(543).getVarbitValue(8) == 3) {
                 player.interfaceManager.openComponent(28)
             }
@@ -297,7 +304,7 @@ class BlastFurnaceListeners : InteractionListener {
 
         /**Handles using a bucket of water on the bar dispenser*/
 
-        onUseWith(IntType.SCENERY,dispenser,Items.BUCKET_OF_WATER_1929){ player, used, with ->
+        onUseWith(SCENERY,Items.BUCKET_OF_WATER_1929,*dispenser){ player, _, _ ->
             when {
                 player.varpManager.get(543).getVarbitValue(8) == 2 -> {
                     removeItem(player,Items.BUCKET_OF_WATER_1929,Container.INVENTORY)
@@ -318,9 +325,9 @@ class BlastFurnaceListeners : InteractionListener {
             return@onUseWith true
         }
 
-        /**The sequel to Limp Bizkits hit single, "Fix shit"*/
+        /**Handles pipe repairing*/
 
-        on(brokenPotPipe, IntType.SCENERY, "repair"){ player, _ ->
+        on(brokenPotPipe,SCENERY,"repair"){ player, _ ->
             if(player.getSkills().getLevel(Skills.CRAFTING) >= 30){
                 if(inInventory(player,Items.HAMMER_2347,1)) {
                     rewardXP(player, Skills.CRAFTING, 50.0)
@@ -330,12 +337,12 @@ class BlastFurnaceListeners : InteractionListener {
                     sendMessage(player, "I need a hammer to do this!")
                 }
             }else{
-                sendDialogue(player,"I need 30 Craft in order to do this")
+                sendDialogue(player,"I need 30 Crafting in order to do this")
             }
             return@on true
         }
 
-        on(brokenPumpPipe, IntType.SCENERY, "repair"){ player, _ ->
+        on(brokenPumpPipe,SCENERY, "repair"){ player, _ ->
             if(player.getSkills().getLevel(Skills.CRAFTING) >= 30){
                 if(inInventory(player,Items.HAMMER_2347,1)) {
                     rewardXP(player, Skills.CRAFTING, 50.0)
@@ -345,12 +352,12 @@ class BlastFurnaceListeners : InteractionListener {
                     sendMessage(player, "I need a hammer to do this!")
                 }
             }else{
-                sendDialogue(player,"I need 30 Craft in order to do this")
+                sendDialogue(player,"I need 30 Crafting in order to do this")
             }
             return@on true
         }
 
-        on(brokenBelt, IntType.SCENERY, "repair"){ player, _ ->
+        on(brokenBelt,SCENERY,"repair"){ player, _ ->
             if(player.getSkills().getLevel(Skills.CRAFTING) >= 30){
                 if(inInventory(player,Items.HAMMER_2347,1)) {
                     rewardXP(player, Skills.CRAFTING, 50.0)
@@ -360,12 +367,12 @@ class BlastFurnaceListeners : InteractionListener {
                     sendMessage(player, "I need a hammer to do this!")
                 }
             }else{
-                sendDialogue(player,"I need 30 Craft in order to do this")
+                sendDialogue(player,"I need 30 Crafting in order to do this")
             }
             return@on true
         }
 
-        on(brokenCog, IntType.SCENERY, "repair"){ player, _ ->
+        on(brokenCog,SCENERY,"repair"){ player, _ ->
             if(player.getSkills().getLevel(Skills.CRAFTING) >= 30){
                 if(inInventory(player,Items.HAMMER_2347,1)) {
                     rewardXP(player, Skills.CRAFTING, 50.0)

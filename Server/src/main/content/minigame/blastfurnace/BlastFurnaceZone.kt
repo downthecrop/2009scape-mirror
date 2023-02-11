@@ -2,11 +2,9 @@ package content.minigame.blastfurnace
 
 import core.api.*
 import core.game.node.entity.Entity
-import core.game.node.entity.player.Player
 import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneBuilder
-import core.game.world.map.zone.ZoneMonitor
 import core.plugin.Initializable
 import core.plugin.Plugin
 
@@ -16,7 +14,7 @@ import core.plugin.Plugin
 
 
 //Remove this once the funny dupe gets fixed
-//@Initializable
+@Initializable
 class BlastFurnaceZone : MapZone("Blast Furnace Zone",true), Plugin<Any> {
 
     var pulseStarted = false

@@ -1,11 +1,11 @@
 package content.minigame.blastfurnace
 
+import content.global.skill.smithing.smelting.Bar
 import core.api.*
 import core.game.container.impl.EquipmentContainer
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
-import content.global.skill.smithing.smelting.Bar
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.tools.RandomFunction
@@ -77,7 +77,7 @@ object BlastFurnace {
                     giveSmithXp--
                 }
             }
-            interfaceManager()
+            //interfaceManager()
             runConveyor()
             stoveCokeTemperature()
             furnaceTemperature()
@@ -310,7 +310,7 @@ object BlastFurnace {
     /**Hi kids!
      * Do you like Varbits?
      * Wanna see me stick Nine Binary Bytes, through each one of my eyelids?
-     * Wanna look at how many bars you have left inside the furnace???*/
+     * Wanna look at how many bars you have left inside the furnace???
 
     fun interfaceManager() {
         var playerBars = listOf<Item>()
@@ -357,4 +357,5 @@ object BlastFurnace {
             }
         }
     }
+     */
 }
