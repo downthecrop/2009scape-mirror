@@ -90,7 +90,8 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
             val npcs = if(shopData["npcs"].toString().isNotBlank()) shopData["npcs"].toString().split(",").map { it.toInt() }.toIntArray() else intArrayOf()
             val currency = shopData["currency"].toString().toInt()
             val highAlch = shopData["high_alch"].toString() == "1"
-            shop = Shop(title, stock, general, currency, highAlch)
+            val forceShared = shopData.getOrDefault("force_shared", "false").toString().toBoolean()
+            shop = Shop(title, stock, general, currency, highAlch, forceShared)
 
             npcs.map { shopsByNpc[it] = shop }
             shopsById[id] = shop

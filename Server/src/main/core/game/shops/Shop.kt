@@ -37,7 +37,7 @@ class ShopListener(val player: Player) : ContainerListener
     }
 }
 
-class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean = false, val currency: Int = Items.COINS_995, val highAlch: Boolean = false)
+class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean = false, val currency: Int = Items.COINS_995, val highAlch: Boolean = false, val forceShared: Boolean = false)
 {
     val stockInstances = HashMap<Int, Container>()
     val playerStock = if (general) generalPlayerStock else Container(40, ContainerType.SHOP)
@@ -45,7 +45,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
     val restockRates = HashMap<Int,Int>()
 
     init {
-        if(!getServerConfig().getBoolean(Shops.personalizedShops, false))
+        if(!getServerConfig().getBoolean(Shops.personalizedShops, false) || forceShared)
             stockInstances[ServerConstants.SERVER_NAME.hashCode()] = generateStockContainer()
     }
 
@@ -97,10 +97,10 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
 
     public fun getContainer(player: Player) : Container
     {
-        val container = if(getServerConfig().getBoolean(Shops.personalizedShops, false))
+        val container = if(getServerConfig().getBoolean(Shops.personalizedShops, false) && !forceShared)
             stockInstances[player.details.uid] ?: generateStockContainer().also { stockInstances[player.details.uid] = it }
         else
-            stockInstances[ServerConstants.SERVER_NAME.hashCode()]!!
+            stockInstances[ServerConstants.SERVER_NAME.hashCode()] ?: generateStockContainer().also { stockInstances[ServerConstants.SERVER_NAME.hashCode()] = it }
 
         val listener = listenerInstances[player.details.uid]
 
@@ -135,6 +135,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
             {
                 if(cont[i] == null) continue
                 if(stock.size < i + 1) break
+                if(stock[i].restockRate == 0) continue
                 if(GameWorld.ticks % stock[i].restockRate != 0) continue
 
                 if(cont[i].amount < stock[i].amount){
