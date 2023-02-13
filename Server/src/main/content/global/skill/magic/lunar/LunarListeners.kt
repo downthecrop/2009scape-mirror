@@ -9,6 +9,7 @@ import content.global.skill.magic.spellconsts.Lunar
 import core.api.*
 import core.game.component.Component
 import core.game.node.Node
+import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
@@ -26,6 +27,7 @@ import core.game.world.repository.Repository
 import core.tools.RandomFunction
 import org.rs09.consts.Components
 import org.rs09.consts.Items
+import kotlin.math.floor
 
 class LunarListeners : SpellListener("lunar"), Commands {
 
@@ -181,6 +183,10 @@ class LunarListeners : SpellListener("lunar"), Commands {
 
         onCast(Lunar.CURE_OTHER, PLAYER) { player, node ->
             node?.let { cureOther(player, node) }
+        }
+
+        onCast(Lunar.ENERGY_TRANSFER, PLAYER) { player, node ->
+            node?.let { energyTransfer(player, node) }
         }
     }
 
@@ -527,6 +533,53 @@ class LunarListeners : SpellListener("lunar"), Commands {
         removeState(p, EntityState.POISONED)
         sendMessage(p, "You have been cured of poison.")
         addXP(player, 65.0)
+    }
+
+    private fun energyTransfer(player: Player, target: Node) {
+        if(!isPlayer(target)) {
+            sendMessage(player, "You can only cast this spell on other players.")
+            return
+        }
+        val p = target.asPlayer()
+        if(!p.isActive || p.locks.isInteractionLocked) {
+            sendMessage(player, "This player is busy.")
+            return
+        }
+        if(!p.settings.isAcceptAid) {
+            sendMessage(player, "This player is not accepting any aid.")
+            return
+        }
+        if(10 >= player.skills.lifepoints) {
+            sendMessage(player, "You need more hitpoints to cast this spell.")
+            return
+        }
+        requires(player, 91, arrayOf(Item(Items.ASTRAL_RUNE_9075, 3), Item(Items.LAW_RUNE_563, 2), Item(Items.NATURE_RUNE_561, 1)))
+        player.face(p)
+        visualizeSpell(player, ENERGY_TRANSFER_ANIM, ENERGY_TRANSFER_GFX, 2885)
+        visualize(p, -1, CURE_OTHER_GFX)
+        val hp = floor(player.skills.lifepoints * 0.10)
+        var r = hp
+        if(r > (100 - p.settings.runEnergy)) {
+            r = (100 - p.settings.runEnergy)
+        }
+        if(r < 0) {
+            r = 0.0
+        }
+        p.settings.runEnergy += r
+        player.settings.runEnergy -= r
+        impact(player, hp.toInt(), ImpactHandler.HitsplatType.NORMAL)
+        var e = 100
+        e -= p.settings.specialEnergy
+        if(e < 0) {
+            e = 0
+        }
+        if(e > player.settings.specialEnergy) {
+            e = player.settings.specialEnergy
+        }
+        p.settings.specialEnergy += e
+        player.settings.specialEnergy -= e
+        removeRunes(player, true)
+        addXP(player, 100.0)
     }
 }
 

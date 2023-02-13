@@ -16,6 +16,7 @@ val FERTILE_SOIL_ANIM = Animation(724)
 val CURE_ME_ANIM = Animation(4411)
 val CURE_GROUP_ANIM = Animation(4409)
 val CURE_OTHER_ANIM = Animation(4411)
+val ENERGY_TRANSFER_ANIM = Animation(4411)
 
 
 // Graphics
@@ -30,6 +31,7 @@ val FERTILE_SOIL_GFX = Graphics(141, 96)
 val CURE_ME_GFX = Graphics(731, 90)
 val CURE_GROUP_GFX = Graphics(751, 130)
 val CURE_OTHER_GFX = Graphics(738, 130)
+val ENERGY_TRANSFER_GFX = Graphics(738, 90)
 
 enum class JewelleryString(val unstrung: Int, val strung: Int) {
     GOLD(Items.GOLD_AMULET_1673, Items.GOLD_AMULET_1692),
