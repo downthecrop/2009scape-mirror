@@ -5,6 +5,7 @@ import core.game.event.*
 object Event {
     @JvmStatic val ResourceProduced = ResourceProducedEvent::class.java
     @JvmStatic val NPCKilled = NPCKillEvent::class.java
+    @JvmStatic val BoneBuried = BoneBuryEvent::class.java
     @JvmStatic val Teleported = TeleportEvent::class.java
     @JvmStatic val FireLit = LitFireEvent::class.java
     @JvmStatic val LightSourceLit = LitLightSourceEvent::class.java

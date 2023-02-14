@@ -15,6 +15,7 @@ import content.global.skill.magic.TeleportMethod
 
 data class ResourceProducedEvent(val itemId: Int, val amount: Int, val source: Node, val original: Int = -1) : Event
 data class NPCKillEvent(val npc: NPC) : Event
+data class BoneBuryEvent(val boneId: Int) : Event
 data class TeleportEvent(val type: TeleportType, val method: TeleportMethod, val source: Any, val location: Location) : Event
 data class LitFireEvent(val logId: Int) : Event
 data class LitLightSourceEvent(val litLightSourceId: Int) : Event

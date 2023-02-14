@@ -1,6 +1,7 @@
 package content.global.skill.prayer;
 
 import core.cache.def.impl.ItemDefinition;
+import core.game.event.BoneBuryEvent;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
@@ -62,7 +63,8 @@ public final class BoneBuryingOptionPlugin extends OptionHandler {
 			@Override
 			public boolean pulse() {
 				player.getPacketDispatch().sendMessage("You bury the bones.");
-				player.getSkills().addExperience(Skills.PRAYER, bonee.equals(Bones.LAVA_DRAGON_BONES) && player.getLocation().getY() >= 3794 && player.getLocation().getY() <= 3859 ? bonee.getExperience() * 3 : bonee.getExperience(), true);	
+				player.getSkills().addExperience(Skills.PRAYER, bonee.equals(Bones.LAVA_DRAGON_BONES) && player.getLocation().getY() >= 3794 && player.getLocation().getY() <= 3859 ? bonee.getExperience() * 3 : bonee.getExperience(), true);
+				player.dispatch(new BoneBuryEvent(bonee.getItemId()));
 				return true;
 			}
 		});

@@ -1,5 +1,7 @@
 package core.game.system.command.sets
 
+import content.global.activity.jobs.JobManager
+import core.api.removeAttribute
 import core.api.sendMessage
 import core.cache.Cache
 import core.cache.def.impl.DataMap
@@ -49,6 +51,15 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
                 }
             }
             sendMessage(player, "All achievement diaries cleared successfully.")
+        }
+
+        define("clearjob", Privilege.ADMIN) { player, _ ->
+            val playerJobManager = JobManager.getInstance(player)
+            playerJobManager.job = null
+            playerJobManager.jobAmount = -1
+            playerJobManager.jobOriginalAmount = -1
+
+            sendMessage(player, "Job cleared successfully.")
         }
 
         define("region", Privilege.STANDARD, "", "Prints your current Region ID.") {player, args ->

@@ -115906,8 +115906,8 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
-    "destroy_message": "You can get another of these from Doric.",
-    "examine": "Doric's instructions for the task he gave you.",
+    "destroy_message": "You can get another by talking about jobs with citizens and tutors around Lumbridge.",
+    "examine": "This reminds me of my current job and who set me to the task.",
     "durability": null,
     "name": "Task list",
     "tradeable": "false",
