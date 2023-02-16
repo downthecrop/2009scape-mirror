@@ -225,7 +225,7 @@ public final class HouseManager {
 			public boolean pulse() {
 				spawnServant();
 				if (servant.isGreet()){
-					player.getDialogueInterpreter().sendDialogues(servant.getType().getId(), servant.getType().getId() == 4243 ? FacialExpression.HALF_GUILTY : null, "Welcome.");
+					player.getDialogueInterpreter().sendDialogues(servant.getType().getId(), servant.getType().getId() == 4243 ? FacialExpression.HAPPY : null, "Welcome.");
 				}
 				return true;
 			}
@@ -252,7 +252,7 @@ public final class HouseManager {
 		}
 		if (house.isInHouse(player)) {
 			player.animate(Animation.RESET);
-			player.setLocation(house.location.getExitLocation());
+			player.getProperties().setTeleportLocation(house.location.getExitLocation());
 		}
 	}
 
@@ -743,8 +743,11 @@ public final class HouseManager {
 	 * Checks if the house region was constructed and active.
 	 * @return {@code True} if an active region for the house exists.
 	 */
+	//public boolean isLoaded() {
+	//	return (houseRegion != null) || (dungeonRegion != null);
+	//}
 	public boolean isLoaded() {
-		return (houseRegion != null) || (dungeonRegion != null);
+		return (houseRegion != null && houseRegion.isActive()) || (dungeonRegion != null && dungeonRegion.isActive());
 	}
 
 	/**
