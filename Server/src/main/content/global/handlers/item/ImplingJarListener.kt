@@ -184,7 +184,7 @@ enum class ImplingLoot(val jarId: Int, val table: WeightBasedTable){
 
     MAGPIE_IMPLING(Items.MAGPIE_IMPLING_JAR_11252, WeightBasedTable.create(
         WeightedItem(Items.BLACK_DRAGONHIDE_1748, 6, 6, 10.0),
-        WeightedItem(Items.DIAMOND_AMULET_1682, 3, 3, 5.0),
+        WeightedItem(Items.DIAMOND_AMULET_1701, 3, 3, 5.0),
         WeightedItem(Items.AMULET_OF_POWER_1732, 3, 3, 5.0),
         WeightedItem(Items.RING_OF_FORGING_2569, 3, 3, 5.0),
         WeightedItem(Items.SPLITBARK_GAUNTLETS_3391, 1, 1, 5.0),
@@ -231,7 +231,7 @@ enum class ImplingLoot(val jarId: Int, val table: WeightBasedTable){
         WeightedItem(Items.DRAGON_BOLT_TIPS_9193, 36, 36, 2.0),
         WeightedItem(Items.MYSTIC_ROBE_BOTTOM_4093, 1, 1, 2.0),
         WeightedItem(Items.AMULET_OF_GLORY_1705, 3, 3, 2.0),
-        WeightedItem(Items.DRAGONSTONE_AMMY_1684, 2, 2, 2.0),
+        WeightedItem(Items.DRAGONSTONE_AMMY_1703, 2, 2, 2.0),
         WeightedItem(Items.DRAGON_ARROW_11212, 100, 250, 2.0),
         WeightedItem(Items.DRAGON_BOLTS_9341, 10, 40, 2.0),
         WeightedItem(Items.DRAGON_LONGSWORD_1305, 1, 1, 2.0),
@@ -240,8 +240,8 @@ enum class ImplingLoot(val jarId: Int, val table: WeightBasedTable){
         WeightedItem(Items.DRAGONSTONE_1616, 3, 3, 2.0),
         WeightedItem(Items.DRAGON_DART_TIP_11232, 100, 350, 2.0),
         WeightedItem(Items.DRAGON_ARROWTIPS_11237, 100, 350, 2.0),
-        WeightedItem(Items.BABYDRAGON_BONES_535, 1, 25, 2.0),
-        WeightedItem(Items.DRAGON_BONES_537, 1, 25, 2.0),
+        WeightedItem(Items.BABYDRAGON_BONES_535, 100, 300, 2.0),
+        WeightedItem(Items.DRAGON_BONES_537, 50, 100, 2.0),
         WeightedItem(Items.MAGIC_SEED_5316, 1, 1, 2.0),
         WeightedItem(Items.SNAPDRAGON_SEED_5300, 6, 6, 2.0),
         WeightedItem(Items.SUMMER_PIE_7219, 15, 15, 2.0)
