@@ -15,6 +15,8 @@ import content.global.handlers.item.SpadeDigListener
 import core.game.node.entity.player.info.login.PlayerSaver
 import core.game.system.command.Privilege
 import core.game.world.GameWorld
+import core.game.world.repository.Repository
+import core.game.world.repository.Repository.getPlayerByName
 import core.tools.END_DIALOGUE
 import java.awt.HeadlessException
 import java.awt.Toolkit
@@ -103,18 +105,29 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Go on Mr Bones' Wild Ride
          */
-        define("mrboneswildride"){ player, _ ->
-            val boneMode = !player.getAttribute("boneMode",false)
-            player.setAttribute("boneMode", boneMode)
-            notify(player,"Bone Mode ${if (boneMode) "<col=00ff00>ENGAGED</col>." else "<col=ff0000>POWERING DOWN</col>."}")
-            player.appearance.rideCart(boneMode)
-            if (player.appearance.isRidingMinecart) {
+        define("mrboneswildride"){ player, args ->
+            val p : Player = if(args.size > 2){
+                reject(player, "Usage: ::mrboneswildride <username>")
+                return@define
+            } else if(args.size == 1) {
+                player
+            } else if(getPlayerByName(args[1]) == null) {
+                reject(player, "ERROR: Username not found. Usage: ::mrboneswildride <username>")
+                return@define
+            } else {
+                getPlayerByName(args[1]) ?: return@define
+            }
+            val boneMode = !p.getAttribute("boneMode",false)
+            p.setAttribute("boneMode", boneMode)
+            notify(p,"Bone Mode ${if (boneMode) "<col=00ff00>ENGAGED</col>." else "<col=ff0000>POWERING DOWN</col>."}")
+            p.appearance.rideCart(boneMode)
+            if (p.appearance.isRidingMinecart) {
                 var i = 0
                 GameWorld.Pulser.submit(object : Pulse(1, player) {
                     override fun pulse(): Boolean {
-                        if (i++ % 12 == 0) player.sendChat("I want to get off Mr. Bones Wild Ride.")
-                        player.moveStep()
-                        return !player.appearance.isRidingMinecart
+                        if (i++ % 12 == 0) p.sendChat("I want to get off Mr. Bones Wild Ride.")
+                        p.moveStep()
+                        return !p.appearance.isRidingMinecart
                     }
                 })
             }
