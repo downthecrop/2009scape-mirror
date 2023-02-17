@@ -111,7 +111,7 @@ public final class DrezelDialogue extends DialoguePlugin {
 			}
 			break;
 		case 8:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Ah, Saradomin has granted you wisdom I see. Well, the", "story of the river Salve and of how it protects Mithsalin", "is the story of this temple,");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Ah, Saradomin has granted you wisdom I see. Well, the", "story of the river Salve and of how it protects Misthalin", "is the story of this temple,");
 			stage = 9;
 			break;
 		case 9:
@@ -143,7 +143,7 @@ public final class DrezelDialogue extends DialoguePlugin {
 			stage = 16;
 			break;
 		case 16:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "For then days and nights they fought, never sleeping,", "never eating, fuelled by their desire to make the world a", "better place for humans to live.");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "For ten days and nights they fought, never sleeping,", "never eating, fuelled by their desire to make the world a", "better place for humans to live.");
 			stage = 17;
 			break;
 		case 17:

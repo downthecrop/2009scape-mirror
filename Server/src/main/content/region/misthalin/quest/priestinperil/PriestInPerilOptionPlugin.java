@@ -121,7 +121,7 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 				} else {
 					item = 1931;
 				}
-				message = "Saradomin is the vessle that keeps our lives from harm.";
+				message = "Saradomin is the vessel that keeps our lives from harm.";
 			}
 			if (id == 3497) {
 				if (!player.getGameAttributes().getAttribute("priest_in_peril:feather", false)) {
@@ -240,7 +240,7 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 		case 7711:
 			/** the dog. */
 			if (quest.getStage(player) == 10) {
-				player.getPacketDispatch().sendMessage("You have no reason to attack a helpess dog!");
+				player.getPacketDispatch().sendMessage("You have no reason to attack a helpless dog!");
 				return true;
 			}
 			if (quest.getStage(player) > 10) {

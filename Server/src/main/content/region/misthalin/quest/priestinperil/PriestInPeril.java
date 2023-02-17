@@ -139,7 +139,7 @@ public class PriestInPeril extends Quest {
 			player.getPacketDispatch().sendString("<str>used Holy Water to trap the vampire in his coffin.", 275, 15+ 7);
 			player.getPacketDispatch().sendString("<str>I followed Drezel downstairs only to find that the Salve", 275, 16+ 7);
 			player.getPacketDispatch().sendString("<str>had been contaminated and now needed purifying", 275, 17+ 7);
-			int amt = player.getGameAttributes().getAttribute("priest-in-peril:rune", 50+ 7);
+			int amt = player.getGameAttributes().getAttribute("priest-in-peril:rune", 50);
 			player.getPacketDispatch().sendString("<col=08088A>I need to bring <col=8A0808>" + amt + " <col=08088A>rune essence to undo the damage", 275, 19+ 7);
 			player.getPacketDispatch().sendString("<col=08088A>done by the Zamorakians and <col=8A0808>purify the salve", 275, 20+ 7);
 			break;

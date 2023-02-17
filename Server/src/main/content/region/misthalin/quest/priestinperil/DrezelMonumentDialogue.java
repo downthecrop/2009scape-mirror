@@ -114,7 +114,7 @@ public final class DrezelMonumentDialogue extends DialoguePlugin {
 			stage = 404;
 			break;
 		case 404:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "and it is a holy relic that pevents the werewolf people from", "chaning form, I suggest if you battle with them", "that you keep it always equipped, for their");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "and it is a holy relic that prevents the werewolf people from", "changing form, I suggest if you battle with them", "that you keep it always equipped, for their");
 			stage = 405;
 			break;
 		case 405:
@@ -190,7 +190,7 @@ public final class DrezelMonumentDialogue extends DialoguePlugin {
 			}
 			player.getGameAttributes().setAttribute("/save:priest-in-peril:rune", amt);
 			if (player.getGameAttributes().getAttribute("priest-in-peril:rune", 50) <= 0) {
-				interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Excellent! That should do it! I will bless these stones", "and place them within the well, and Misthalin should be", "protected once more!");
+				interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Excellent! That should do it! I will bless these stones", "and place them within the well, and Misthalin should be", "protected once more!");
 				stage = 152;
 			} else {
 				end();
