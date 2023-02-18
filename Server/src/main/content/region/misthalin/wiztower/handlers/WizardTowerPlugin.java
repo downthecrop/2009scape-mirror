@@ -176,12 +176,6 @@ public final class WizardTowerPlugin extends OptionHandler {
         }
 
         @Override
-        public void finalizeDeath(Entity killer) {
-            super.finalizeDeath(killer);
-            GroundItemManager.create(new Item(526), getLocation(), (Player) killer);
-        }
-
-        @Override
         public int[] getIds() {
             return ID;
         }
