@@ -74,9 +74,9 @@ class BlastFurnaceInterfaceListener : InterfaceListener {
 
 
             while(amtToWithdraw > 0){
-                if(addItem(player, barItemId, amtToWithdraw) && player.blastBars.remove(Item(barItemId))) {
+                if(addItem(player, barItemId, 1) && player.blastBars.remove(Item(barItemId))) {
                     amtToWithdraw--
-                }
+                } else break
             }
             if(player.blastBars.isEmpty) player.varpManager.get(543).clear().send(player)
             return@on true
