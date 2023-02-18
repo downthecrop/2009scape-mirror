@@ -24,7 +24,7 @@ class DecantListener : InteractionListener {
         val potcounts = HashMap<Potion, Int>()
         val results: List<Item>
         for (i in 0..27) {
-            val pot = (Consumables.getConsumableById(p.inventory.getId(i)) ?: continue) as Potion
+            val pot = (Consumables.getConsumableById(p.inventory.getId(i)) ?: continue) as? Potion ?: continue
             if (pot != null) {
                 val dosage = p.inventory[i].name.replace("[^\\d.]".toRegex(), "").toInt()
                 if (potcounts[pot] != null) {

@@ -194,6 +194,8 @@ public abstract class MovementPulse extends Pulse {
         Location ml = mover.getLocation();
         // Allow being within 1 square of moving entities to interact with them.
         int radius = destination instanceof Entity && ((Entity)destination).getWalkingQueue().hasPath() ? 1 : 0;
+        if (interactLocation == null)
+            return false;
         if (Math.max(Math.abs(ml.getX() - interactLocation.getX()), Math.abs(ml.getY() - interactLocation.getY())) <= radius) {
             try {
                 if (near || pulse()) {

@@ -240,7 +240,7 @@ object PlunderUtils {
 
     fun getDoorXp(player: Player, lockpick: Boolean) : Double
     {
-        val room = getRoom(player)!!.room
+        val room = getRoom(player)?.room ?: return 0.0
         var reward = when(room)
         {
             1 -> 60.0

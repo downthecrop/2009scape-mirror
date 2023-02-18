@@ -68,7 +68,7 @@ public class IoEventHandler {
 				return;
 			}
 		} catch (IOException e) {
-			if (e.getMessage().contains("reset by peer")) {
+			if (e.getMessage().contains("reset by peer") && session != null) {
 				session.disconnect();
 				if (session.getPlayer() != null)
 					session.getPlayer().clear(true);

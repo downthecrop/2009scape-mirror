@@ -294,9 +294,8 @@ public final class PCPortalNPC extends AbstractNPC {
 				}
 			}
 			session.sendString("<col=FF0000>0", 13 + getPortalIndex());
-			updateLifepoints = false;
 			session.getSquire().getSkills().heal(50);
-			session.getSquire().onImpact(this, null);
+			((PCSquireNPC) session.getSquire()).FlagInterfaceUpdate();
 		}
 	}
 

@@ -8,6 +8,7 @@ import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.Point;
 import core.game.world.map.RegionManager;
+import core.tools.SystemLogger;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -374,7 +375,7 @@ public final class WalkingQueue {
 		Location loc = entity.getLocation();
 
 		if (loc == null) {
-			throw new IllegalStateException(
+			SystemLogger.logErr(this.getClass(),
 				"The entity location provided was null."
 				+ "Are you sure anything down the stack trace isn't providing an NPC with a null location?"
 			);

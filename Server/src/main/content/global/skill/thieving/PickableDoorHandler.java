@@ -19,6 +19,8 @@ import core.tools.RandomFunction;
 import java.util.ArrayList;
 import java.util.List;
 
+import static core.api.ContentAPIKt.sendMessage;
+
 /**
  * Represents a pickable door.
  * @author Vexia
@@ -66,6 +68,10 @@ public class PickableDoorHandler extends OptionHandler {
             return true;
         }
         if (option.equals("pick-lock")) {
+            if (door == null) {
+                sendMessage(player, "This door cannot be unlocked.");
+                return true;
+            }
             door.pickLock(player, (Scenery) node);
             return true;
         }

@@ -1,7 +1,7 @@
 package core.game.system.command.sets
 
 import content.global.activity.jobs.JobManager
-import core.api.removeAttribute
+import content.global.skill.slayer.Master
 import core.api.sendMessage
 import core.cache.Cache
 import core.cache.def.impl.DataMap
@@ -178,6 +178,24 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
 
         define("testpacket") { player, _ ->
             PacketWriteQueue.write(ResetInterface(), PlayerContext(player))
+        }
+
+        define("npcsearch", Privilege.STANDARD, "npcsearch name", "Searches for NPCs that match the name either in main or children.") {player, strings ->
+            val name = strings.slice(1 until strings.size).joinToString(" ").lowercase()
+            for (id in 0 until 9000) {
+                val def = NPCDefinition.forId(id)
+                if (def.name.isNotBlank() && (def.name.lowercase().contains(name) || name.contains(def.name.lowercase()))) {
+                    notify(player, "$id - ${def.name}")
+                }
+                else {
+                    for ((childId,index) in def.childNPCIds?.withIndex() ?: continue) {
+                        val childDef = NPCDefinition.forId(childId)
+                        if (childDef.name.lowercase().contains(name) || name.contains(childDef.name.lowercase())) {
+                            notify(player, "$childId child($id) index $index - ${childDef.name}")
+                        }
+                    }
+                }
+            }
         }
     }
 }

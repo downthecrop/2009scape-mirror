@@ -408,7 +408,7 @@ public final class DBRCutscenePlugin extends CutscenePlugin {
 		getWiseOldMan().graphics(TELEKENTIC_GRAPHIC);
 		getWiseOldMan().getSkills().setStaticLevel(Skills.MAGIC, 99);
 		getWiseOldMan().getSkills().setLevel(Skills.MAGIC, 99);
-		SpellBookManager.SpellBook.MODERN.getSpell(65535).cast(getWiseOldMan(), GroundItemManager.get(PARTY_HAT.getId(), base.transform(20, 44, 0), player));
+		SpellBookManager.SpellBook.MODERN.getSpell(19).cast(getWiseOldMan(), GroundItemManager.get(PARTY_HAT.getId(), base.transform(20, 44, 0), player));
 	}
 
 	/**

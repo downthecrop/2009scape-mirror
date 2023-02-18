@@ -84,8 +84,12 @@ public final class PCSquireNPC extends AbstractNPC {
 
 	@Override
 	public void onImpact(final Entity entity, BattleState state) {
-		updateLifepoints = true;
+		FlagInterfaceUpdate();
 		super.onImpact(entity, state);
+	}
+
+	public void FlagInterfaceUpdate() {
+		updateLifepoints = true;
 	}
 
 	@Override
