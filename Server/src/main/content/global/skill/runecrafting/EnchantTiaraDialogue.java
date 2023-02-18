@@ -65,26 +65,28 @@ public final class EnchantTiaraDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
-		end();
 		int amt = 0;
+		// ButtonId 5=1x, 4=5x, 3=MakeX, 2=All
 		switch (buttonId) {
-		case 6:
+		case 5:
 			amt = 1;
 			break;
-		case 5:
+		case 4:
 			amt = 5;
 			break;
-		case 4:
-			sendInputDialogue(player, true, "Enter the amount:", (value) -> {
-				player.getPulseManager().run(new EnchantTiaraPulse(player, event.getUsedItem(), Talisman.forItem(event.getUsedItem()).getTiara(), (int) value));
+		case 3:
+			end()
+;			sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+				player.getPulseManager().run(new EnchantTiaraPulse(player, event.getUsedItem(), altar ,Talisman.forItem(event.getUsedItem()).getTiara(), (int) value));
 				return Unit.INSTANCE;
 			});
 			return true;
-		case 3:
+		case 2:
 			amt = player.getInventory().getAmount(event.getUsedItem());
 			break;
 		}
-		player.getPulseManager().run(new EnchantTiaraPulse(player, event.getUsedItem(), altar.getTiara(), amt));
+		player.getPulseManager().run(new EnchantTiaraPulse(player, event.getUsedItem(), altar ,altar.getTiara(), amt));
+		end();
 		return true;
 	}
 

@@ -2,6 +2,7 @@ package content.global.skill.runecrafting;
 
 import core.game.node.entity.impl.Animator;
 import core.game.node.entity.player.link.diary.DiaryType;
+import core.game.node.scenery.Scenery;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.game.node.entity.skill.SkillPulse;
@@ -9,12 +10,20 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 
+import java.util.Objects;
+
+import static java.lang.Math.min;
+
 /**
  * Represents the enchanting of a tiara pulse.
  * @author 'Vexia
- * @date 02/11/2013
  */
 public class EnchantTiaraPulse extends SkillPulse<Item> {
+
+	/**
+	 * Represents the Altar.
+	 */
+	private final Altar altar;
 
 	/**
 	 * Represents the tiara.
@@ -39,22 +48,25 @@ public class EnchantTiaraPulse extends SkillPulse<Item> {
 	 * @param player the player.
 	 * @param node the node.
 	 */
-	public EnchantTiaraPulse(Player player, Item node, final Tiara tiara, final int amount) {
+	public EnchantTiaraPulse(Player player, Item node, final Altar altar, final Tiara tiara, final int amount) {
 		super(player, node);
 		this.tiara = tiara;
 		this.amount = amount;
+		this.altar = altar;
 	}
 
 	@Override
 	public void start() {
 		super.start();
-		int tiaraAmt = player.getInventory().getAmount(TIARA);
-		int talsminAmt = player.getInventory().getAmount(node);
-		if (tiaraAmt > talsminAmt) {
-			amount = talsminAmt;
-		} else {
-			amount = tiaraAmt;
+		int tiaraAmt = player.getInventory().getAmount(TIARA); // Plain Silver Tiara
+		int talismanAmt = player.getInventory().getAmount(tiara.getTalisman().getTalisman()); // specific talisman being fused, "node" is all various talismans in inventory
+		String talismanType = tiara.getTalisman().getTalisman().getName().toLowerCase();
+		String altarType = altar.getRuin().name().toLowerCase();
+		// Check that the talisman type and the alter type match
+		if ( talismanType.contains(altarType) ){
+			amount = min(talismanAmt, min(tiaraAmt, amount));
 		}
+
 	}
 
 	@Override
