@@ -1,5 +1,7 @@
 package content.region.karamja.handlers
 
+import core.api.inEquipmentOrInventory
+import core.api.inInventory
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
 import core.game.node.entity.player.Player
@@ -47,11 +49,11 @@ class JungleBushHandler : InteractionListener {
 
     }
 
-    fun checkRequirement(player: Player): Boolean{
+    private fun checkRequirement(player: Player): Boolean{
         val machete = Item(Items.MACHETE_975)
         val jade_machete = Item(Items.JADE_MACHETE_6315)
         val opal_machete = Item(Items.OPAL_MACHETE_6313)
         val red_topaz_machete = Item(Items.RED_TOPAZ_MACHETE_6317)
-        return player.inventory.containsItem(machete) || player.inventory.containsItem(jade_machete) || player.inventory.containsItem(opal_machete) || player.inventory.containsItem(red_topaz_machete)
+        return inEquipmentOrInventory(player, machete.id) || inEquipmentOrInventory(player, jade_machete.id) || inEquipmentOrInventory(player, opal_machete.id) || inEquipmentOrInventory(player, red_topaz_machete.id)
     }
 }

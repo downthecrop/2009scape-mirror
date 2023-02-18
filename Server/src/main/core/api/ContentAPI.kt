@@ -331,6 +331,17 @@ fun inEquipment(player: Player, item: Int, amount: Int = 1): Boolean {
 }
 
 /**
+ * Check if an item exists in a player's equipment or inventory
+ * @param player the player whose equipment to check
+ * @param item the ID of the item to check for
+ * @param amount the amount to check for, defaults to 1
+ * @return true if the item exists in the given amount in the player's equipment or inventory
+ */
+fun inEquipmentOrInventory(player: Player, item: Int, amount: Int = 1): Boolean {
+    return inInventory(player, item, amount) || inEquipment(player, item, amount)
+}
+
+/**
  * Get number of free slots in a player's inventory
  * @param player the player to check
  * @return the number of free slots in the player's inventory
