@@ -42,7 +42,7 @@ public final class GhostShopKeeperDialogue extends DialoguePlugin {
 			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "Can I help you at all?");
 			stage = 0;
 		} else {
-			interpreter.sendDialogues(npc, FacialExpression.NEUTRAL, "Woooo wooo wooooo woooo");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "Woooo wooo wooooo woooo");
 			stage = 10;
 		}
 		return true;
@@ -63,7 +63,7 @@ public final class GhostShopKeeperDialogue extends DialoguePlugin {
 				break;
 			case 2:
 				interpreter.sendDialogues(npc, FacialExpression.HAPPY, "I'm glad you ask! You can buy as many of the items", "stocked as you wish. You can also sell most items to the", "shop.");
-				stage = 11;
+				stage = 3;
 				break;
 			case 3:
 				end();

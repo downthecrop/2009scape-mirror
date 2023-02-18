@@ -5,12 +5,14 @@ import core.game.dialogue.FacialExpression;
 import content.region.morytania.phas.handlers.PhasmatysZone;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import core.plugin.Initializable;
 
 /**
  * Represents the ghost sailor dialogue plugin.
  * @author 'Vexia
  * @version 1.0
  */
+@Initializable
 public final class GhostSailorDialogue extends DialoguePlugin {
 
 	/**
@@ -40,10 +42,10 @@ public final class GhostSailorDialogue extends DialoguePlugin {
 		npc = (NPC) args[0];
 		if (PhasmatysZone.hasAmulet(player)) {
 			player("Hi there. Why do you still bother having ships here? I", "mean - you're dead, what use are they to you?");
-			stage = 10;
+			stage = 1;
 		} else {
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Woooo wooo wooooo woooo");
-			stage = 0;
+			stage = 10;
 		}
 		return true;
 	}
@@ -51,26 +53,26 @@ public final class GhostSailorDialogue extends DialoguePlugin {
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
-		case 0:
-			interpreter.sendDialogue("You cannot understand the ghost.");
-			stage = 1;
-			break;
 		case 1:
-			end();
-			break;
-		case 10:
 			npc("We keep ships because we still need trade in", "Phasmatys. Every trader that comes to Phastmatys is", "made to worship the Ectofuntus, so that the Ectopower", "doesn't run out.");
 			stage++;
 			break;
-		case 11:
+		case 2:
 			player("So, without traders to worship in the Temple you're", "history right?");
 			stage++;
 			break;
-		case 12:
+		case 3:
 			npc("Aye, matey.");
 			stage++;
 			break;
-		case 13:
+		case 4:
+			end();
+			break;
+		case 10:
+			interpreter.sendDialogue("You cannot understand the ghost.");
+			stage = 11;
+			break;
+		case 11:
 			end();
 			break;
 		}

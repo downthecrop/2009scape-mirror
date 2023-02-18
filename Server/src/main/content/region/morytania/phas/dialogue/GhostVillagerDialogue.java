@@ -3,12 +3,15 @@ package content.region.morytania.phas.dialogue;
 import core.game.dialogue.DialoguePlugin;
 import content.region.morytania.phas.handlers.PhasmatysZone;
 import core.game.node.entity.player.Player;
+import core.plugin.Initializable;
 import core.tools.RandomFunction;
 
 /**
  * Handles the ghost villager dialogue.
  * @author Vexia
  */
+
+@Initializable
 public final class GhostVillagerDialogue extends DialoguePlugin {
 
 	/**
@@ -46,6 +49,7 @@ public final class GhostVillagerDialogue extends DialoguePlugin {
 			npc("Woooo wooo wooooo woooo");
 			stage = 10;
 		}
+
 		return true;
 	}
 

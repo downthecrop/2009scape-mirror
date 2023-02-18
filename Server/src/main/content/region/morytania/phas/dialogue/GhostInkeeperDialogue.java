@@ -3,11 +3,13 @@ package content.region.morytania.phas.dialogue;
 import core.game.dialogue.DialoguePlugin;
 import content.region.morytania.phas.handlers.PhasmatysZone;
 import core.game.node.entity.player.Player;
+import core.plugin.Initializable;
 
 /**
  * Handles the ghost inkeeper dialogue.
  * @author Vexia
  */
+@Initializable
 public class GhostInkeeperDialogue extends DialoguePlugin {
 
 	/**
@@ -105,9 +107,7 @@ public class GhostInkeeperDialogue extends DialoguePlugin {
 			stage++;
 			break;
 		case 31:
-			player("Nope, you are right. I am very busy!");// .. I dont want
-			// to do this
-			// dialogue.
+			player("Nope, you are right. I am very busy!");// .. Might need future revision
 			stage++;
 			break;
 		case 32:

@@ -4,11 +4,13 @@ import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
+import core.plugin.Initializable;
 
 /**
  * Handles the dialogue used for a ghost disciple.
  * @author Vexia
  */
+@Initializable
 public final class GhostDiscipleDialogue extends DialoguePlugin {
 
 	/**

@@ -28,7 +28,7 @@ import org.rs09.consts.NPCs;
 import core.plugin.ClassScanner;
 
 /**
- * Handles the phasmatyz zone area.
+ * Handles the phasmatys zone area.
  *
  * @author Vexia
  */
@@ -53,11 +53,7 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
         ZoneBuilder.configure(this);
         ClassScanner.definePlugin(new GravingasNPC());
         ClassScanner.definePlugin(new NecrovarusDialogue());
-        ClassScanner.definePlugin(new GhostSailorDialogue());
         ClassScanner.definePlugin(new EctoplasmFillPlugin());
-        ClassScanner.definePlugin(new GhostDiscipleDialogue());
-        ClassScanner.definePlugin(new GhostVillagerDialogue());
-        ClassScanner.definePlugin(new GhostInkeeperDialogue());
         return this;
     }
 
@@ -76,7 +72,8 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
                 }
 
                 if ((npc.getName().toLowerCase().contains("ghost") || npc.getName().equalsIgnoreCase("velorina") || npc.getName().contains("husband")) && !hasAmulet(player)) {
-                    player.getDialogueInterpreter().open("ghosty dialogue", target);
+                    //player.getDialogueInterpreter().open("ghosty dialogue", target); // Commented for ghost npcs to work from their individual plugin files
+                    player.getDialogueInterpreter().open(target.getId() , target);
                     return true;
                 }
             }
