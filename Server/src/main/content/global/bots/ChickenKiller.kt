@@ -23,6 +23,7 @@ class ChickenKiller : Script(){
 
     override fun tick() {
         when(state){
+            State.CONFIG -> {}
             State.INIT -> {
                 overlay = scriptAPI.getOverlay()
                 overlay!!.init()
@@ -103,8 +104,6 @@ class ChickenKiller : Script(){
         IDLE,
         INIT,
         KILLING,
-        LOOTING,
-        RETURN,
         CONFIG,
         LOOTFEATHER,
         LOOTBONES,

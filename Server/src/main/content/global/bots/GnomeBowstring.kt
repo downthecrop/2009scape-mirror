@@ -155,6 +155,8 @@ class GnomeBowstring : Script() {
                     state = State.PICKING
                 }
             }
+
+            else -> {}
         }
     }
     override fun newInstance(): Script {

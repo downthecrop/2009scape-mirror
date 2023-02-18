@@ -74,6 +74,8 @@ class AFUBeaconListeners : InteractionListener {
                 }
             }
 
+            else -> {}
+
         }
 
         if(player.skills.getLevel(Skills.FIREMAKING) < beacon.fmLevel){

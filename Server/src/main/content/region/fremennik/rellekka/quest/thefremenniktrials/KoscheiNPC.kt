@@ -78,7 +78,7 @@ class KoscheiNPC constructor(id: Int = 0, location: Location? = null, session: K
             } else {
                 session?.player?.sendMessage("Congratulations! You have completed the warriors trial!")
                 session?.player?.setAttribute("/save:fremtrials:thorvald-vote",true)
-                session?.player?.setAttribute("/save:fremtrials:votes", session?.player?.getAttribute("fremtrials:votes", 0) + 1)
+                session?.player?.setAttribute("/save:fremtrials:votes", session.player.getAttribute("fremtrials:votes", 0) + 1)
                 session?.player?.removeAttribute("fremtrials:warrior-accepted")
                 addItemOrDrop(session?.player!!, Items.FREMENNIK_BLADE_3757, 1)
                 session.close()

@@ -65,8 +65,8 @@ class SeersFlax : Script(){
             State.FIND_BANK -> {
                 when(bot.location){
                     Location.create(2711, 3471, 1) -> {
-                        val ladder = scriptAPI.getNearestNode(25939,true)
-                        ladder?.interaction?.handle(bot,ladder?.interaction[0])
+                        val ladder = scriptAPI.getNearestNode(25939,true) ?: return
+                        ladder.interaction?.handle(bot,ladder.interaction[0])
                     }
                     Location.create(2714, 3470, 0) -> Pathfinder.find(bot,Location.create(2715, 3472, 0)).walk(bot)
                     Location.create(2715, 3472, 0) -> {

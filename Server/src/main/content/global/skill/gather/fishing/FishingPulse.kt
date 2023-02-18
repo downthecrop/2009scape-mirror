@@ -169,6 +169,7 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
                 player.skillTasks.decreaseTask(player, SkillTasks.FTUNA1)
                 player.skillTasks.decreaseTask(player, SkillTasks.FTUNA2)
             }
+            else -> {}
         }
     }
 

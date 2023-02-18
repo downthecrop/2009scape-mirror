@@ -75,6 +75,7 @@ class GraveController : PersistWorld, TickListener, InteractionListener, Command
 
         when (grave.type) {
             in GraveType.SMALL_GS..GraveType.ANGEL_DEATH -> isGraniteBackground = true
+            else -> {}
         }
 
         if (isGraniteBackground)

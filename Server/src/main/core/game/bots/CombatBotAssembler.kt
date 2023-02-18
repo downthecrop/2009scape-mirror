@@ -422,6 +422,7 @@ class CombatBotAssembler {
                 bot.skills.setStaticLevel(Skills.RANGE,1)
                 bot.skills.setStaticLevel(Skills.MAGIC,1)
             }
+            else -> {}
         }
 
         bot.skills.addExperience(Skills.HITPOINTS, (totalXPAdd / skillAmt) * 0.2)

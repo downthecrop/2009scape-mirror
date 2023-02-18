@@ -51,6 +51,7 @@ class QuickChatPacketHandler : IncomingPacket {
                 selection_b_index = buffer.get()
             }
             QCPacketType.UNHANDLED -> SystemLogger.logWarn(this::class.java, "Unhandled packet type, skipping remaining buffer contents.")
+            else -> {}
         }
 
 

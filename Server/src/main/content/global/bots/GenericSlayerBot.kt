@@ -64,7 +64,7 @@ class GenericSlayerBot : Script() {
                             }
                         }
                     }
-
+                    else -> {}
                 }
             }
 
@@ -220,7 +220,6 @@ class GenericSlayerBot : Script() {
         GETTING_TASK,
         GOING_TO_HUB,
         KILLING_ENEMY,
-        LOOTING,
         GOING_TO_BANK,
         BANKING,
         GOING_TO_GE,

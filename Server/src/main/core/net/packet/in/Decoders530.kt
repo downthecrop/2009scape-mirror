@@ -709,6 +709,7 @@ enum class Decoders530(val opcode: Int) {
                     selection_b_index = buffer.get()
                 }
                 QCPacketType.UNHANDLED -> SystemLogger.logWarn(this::class.java, "Unhandled packet type, skipping remaining buffer contents.")
+                else -> {}
             }
             return Packet.QuickChat(player, selection_a_index, selection_b_index, forClan, multiplier, offset, packetType)
         }
