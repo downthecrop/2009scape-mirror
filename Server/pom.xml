@@ -195,7 +195,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.10.1</version>
         <configuration>
-          <maxmem>1024m</maxmem>
+          <maxmem>2048m</maxmem>
           <useIncrementalCompilation>false</useIncrementalCompilation>
 		  <compilerArgs>
 			<arg>-XDcompilePolicy=simple</arg>
