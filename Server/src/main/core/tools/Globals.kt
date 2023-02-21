@@ -7,14 +7,18 @@ const val GREEN = "<col=66ff33>"
 const val BLUE = "<col=3366ff>"
 const val PURPLE = "<col=cc00ff>"
 
-fun colorize(line: String): String{
-    val new = line.replace("%R", RED)
-            .replace("%O", ORANGE)
-            .replace("%Y", YELLOW)
-            .replace("%G", GREEN)
-            .replace("%B", BLUE)
-            .replace("%P", PURPLE).append("</col>") + " "
-    return new
+private val pattern = Regex("%[0-9a-fA-F]{6}")
+private val testData = arrayOf("This is a string with no colors.", "This %R is a string with one color.", "This %R %G %B is a string with multiple colors.", "This %ffffff is an arbitrary hex string.")
+
+fun colorize(line: String): String {
+    return line.replace("%R", RED)
+        .replace("%O", ORANGE)
+        .replace("%Y", YELLOW)
+        .replace("%G", GREEN)
+        .replace("%B", BLUE)
+        .replace("%P", PURPLE)
+        .replace(pattern) { matchResult -> "<col=${matchResult.value.substring(1)}>" }
+        .append("</col>") + " "
 }
 
 fun colorize(line: String, hexColor: String): String{

@@ -55,6 +55,7 @@ import core.game.node.entity.player.info.LogType
 import core.game.node.entity.player.info.PlayerMonitor
 import core.tools.SystemLogger
 import core.game.system.command.CommandSystem
+import core.game.system.communication.GlobalChat
 import core.game.world.GameWorld
 import core.game.world.repository.Repository
 import core.net.packet.`in`.Packet
@@ -202,7 +203,11 @@ object PacketProcessor {
                 if (pkt.player.details.isMuted)
                     pkt.player.sendMessage("You have been muted due to breaking a rule.")
                 else {
-                    if (pkt.message.startsWith("/") && pkt.player.communication.clan != null) {
+                    if (ServerConstants.ENABLE_GLOBALCHAT && pkt.message.startsWith("//")) {
+                        GlobalChat.process(pkt.player.username, pkt.message.substring(2))
+                        return
+                    }
+                    else if (pkt.message.startsWith("/") && pkt.player.communication.clan != null) {
                         val builder = ClanMessage.newBuilder()
                         builder.sender = pkt.player.name
                         builder.clanName = pkt.player.communication.clan.owner.lowercase().replace(" ", "_")
