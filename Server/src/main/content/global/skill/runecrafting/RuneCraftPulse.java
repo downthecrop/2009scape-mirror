@@ -149,12 +149,6 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
     }
 
     @Override
-    public void stop() {
-        super.stop();
-        player.animate(ANIMATION);
-    }
-
-    @Override
     public void message(int type) {
         switch (type) {
             case 1:
