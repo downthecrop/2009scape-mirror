@@ -22,13 +22,11 @@ public class Potion extends Drink {
         final int nextItemId = getNextItemId(item.getId());
         if (nextItemId != -1) {
             player.getInventory().replace(new Item(nextItemId), item.getSlot());
-        } else {
-            if (BarcrawlManager.getInstance(player).isFinished()) {
-                player.getInventory().remove(item);
-            } else {
-                player.getInventory().replace(new Item(VIAL), item.getSlot());
-            }
         }
+        else {
+            player.getInventory().replace(new Item(VIAL), item.getSlot());
+        }
+
         final int initialLifePoints = player.getSkills().getLifepoints();
         Consumables.getConsumableById(item.getId()).effect.activate(player);
         if (messages.length == 0) {
