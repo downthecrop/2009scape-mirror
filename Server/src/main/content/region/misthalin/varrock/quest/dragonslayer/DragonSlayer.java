@@ -171,7 +171,7 @@ public final class DragonSlayer extends Quest {
 				line(player, "<str>Maze.", 15+ 7);
 			}
 			if (!player.getInventory().containsItem(MAGIC_PIECE) && !player.getBank().containsItem(MAGIC_PIECE)) {
-				line(player, BLUE + "One)2third of the map is hidden and only the " + RED + "Oracle " + BLUE + "on " + RED + "Ice", 16+ 7);
+				line(player, BLUE + "One-third of the map is hidden and only the " + RED + "Oracle " + BLUE + "on " + RED + "Ice", 16+ 7);
 				line(player, RED + "Mountain" + BLUE + " will know where it is.", 17+ 7);
 			} else {
 				line(player, "<str>I found the piece of the map that was hidden beneath Ice", 16+ 7);

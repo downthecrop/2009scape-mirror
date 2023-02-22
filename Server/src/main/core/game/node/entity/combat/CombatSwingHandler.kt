@@ -323,18 +323,15 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
             if (protection and 0x2 != 0) {
                 return "Your potion and shield fully protects you from the dragon's $fireName."
             }
-            return if (protection and 0x8 != 0) {
-                "Your prayer and shield absorbs most of the dragon's $fireName."
-            } else "Your shield absorbs most of the dragon's $fireName."
+            return "Your shield absorbs most of the dragon's $fireName."
         }
         if (protection and 0x2 != 0) {
-            return if (protection and 0x8 != 0) {
-                "Your prayer and potion absorbs most of the dragon's $fireName."
-            } else "Your antifire potion helps you defend the against the dragon's $fireName."
+            return "Your antifire potion helps you defend the against the dragon's $fireName."
         }
-        return if (protection and 0x8 != 0) {
-            "Your magic prayer absorbs some of the dragon's $fireName."
-        } else "You are horribly burnt by the dragon's $fireName."
+        if (protection and 0x8 != 0) {
+            return "Your magic prayer absorbs some of the dragon's $fireName."
+        }
+        return "You are horribly burnt by the dragon's $fireName."
     }
 
     /**

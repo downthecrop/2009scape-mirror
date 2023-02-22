@@ -21,13 +21,17 @@ import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
+import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import content.global.handlers.item.equipment.special.DragonfireSwingHandler;
+
 
 /**
- * Represents the elvarg npc.
+ * Represents the Elvarg npc.
  * @author 'Vexia
  * @version 1.0
  */
+@Initializable
 public final class ElvargNPC extends AbstractNPC {
 
 	/**
@@ -46,14 +50,14 @@ public final class ElvargNPC extends AbstractNPC {
 	private final CombatSwingHandler combatHandler = new ElvargCombatSwingHandler();
 
 	/**
-	 * Constructs a new {@code MeldarMadNPC} {@code Object}.
+	 * Constructs a new {@code ElvargNPC} {@code Object}.
 	 */
 	public ElvargNPC() {
 		super(0, null);
 	}
 
 	/**
-	 * Constructs a new {@code MeldarMadNPC} {@code Object}.
+	 * Constructs a new {@code ElvargNPC} {@code Object}.
 	 * @param id The NPC id.
 	 * @param location The location.
 	 */
@@ -170,7 +174,7 @@ public final class ElvargNPC extends AbstractNPC {
 	}
 
 	/**
-	 * Handles the elvarg combat swing handler.
+	 * Handles the Elvarg combat swing handler.
 	 * @author Emperor
 	 */
 	static class ElvargCombatSwingHandler extends CombatSwingHandler {
@@ -191,8 +195,12 @@ public final class ElvargNPC extends AbstractNPC {
 		private final FireType fireType = FireType.FIERY_BREATH;
 
 		/**
-		 * Constructs a new {@code KBDCombatSwingHandler} {@Code Object}.
-		 *  The combat style.
+		* The DragonFire Attack */
+		private static final DragonfireSwingHandler DRAGONFIRE = new DragonfireSwingHandler(false, 60, null, true);
+
+		/**
+		 * Constructs a new {@Code ElvargCombatSwingHandler} {@Code CombatStyle}.
+		 *  The Combat style.
 		 */
 		public ElvargCombatSwingHandler() {
 			super(CombatStyle.RANGE);
@@ -202,10 +210,9 @@ public final class ElvargNPC extends AbstractNPC {
 		public void adjustBattleState(Entity entity, Entity victim, BattleState state) {
 			if (style == CombatStyle.RANGE) {
 				fireType.getTask().exec(victim, entity);
-				if (victim.hasProtectionPrayer(CombatStyle.MAGIC)) {
-					state.setEstimatedHit((int) (state.getEstimatedHit() * 0.6));
-				}
-				state.setEstimatedHit(formatHit(victim, state.getEstimatedHit()));
+				state.setStyle(null);
+				DRAGONFIRE.adjustBattleState(entity, victim, state);
+				state.setStyle(CombatStyle.RANGE);
 				return;
 			}
 			style.getSwingHandler().adjustBattleState(entity, victim, state);
@@ -213,15 +220,22 @@ public final class ElvargNPC extends AbstractNPC {
 
 		@Override
 		public int calculateAccuracy(Entity entity) {
+			// If in melee combat, calculate attackers accuracy level.
 			if (style == CombatStyle.MELEE) {
 				return style.getSwingHandler().calculateAccuracy(entity);
 			}
-			return 600;
+			// Else calculate attackers accuracy based on their magic level.
+			return CombatStyle.MAGIC.getSwingHandler().calculateAccuracy(entity);
 		}
 
 		@Override
 		public int calculateDefence(Entity victim, Entity attacker) {
-			return style.getSwingHandler().calculateDefence(victim, attacker);
+			// If in melee combat, calculate players defense level.
+			if (style == CombatStyle.MELEE) {
+				return style.getSwingHandler().calculateDefence(victim, attacker);
+			}
+			// Else calculate players defense against attack based on their magic level.
+			return CombatStyle.MAGIC.getSwingHandler().calculateDefence(victim, attacker);
 		}
 
 		@Override
@@ -229,27 +243,24 @@ public final class ElvargNPC extends AbstractNPC {
 			if (style == CombatStyle.MELEE) {
 				return style.getSwingHandler().calculateHit(entity, victim, modifier);
 			}
-			int max = 56;
-			int damage = max;
+			int maxDamage = 60; // Max Possible hit without shield protection
+			int finalDamage = maxDamage;
+
 			if (victim instanceof Player) {
-				int val = victim.getDragonfireProtection(true);
-				if ((val & 0x2) != 0) {
-					damage *= 0.5;
+				int val = victim.getDragonfireProtection(true); // DragonFireShield Protection
+
+				if ((val & 0x2) != 0) { // 0x2 - Anti Fire potion used?
+					finalDamage -= 0.22 * maxDamage; // = 20% protection
 				}
-				if ((val & 0x4) != 0) {
-					damage -= (int) (damage * 0.85);
+				if ((val & 0x4) != 0) { // 0x4 - Anti Dragon Fire Shield equipped?
+					finalDamage -= 0.78 * maxDamage; // Should always equal 13 as that is the max hit possible with the shield equipped, 80% protection
 				}
-				if ((val & 0x6) != 0) {
-					damage *= 0.6;
-				}
-				if (damage < 3) {
-					damage = 3;
+				if ( (val & 0x2) == 0 && (val & 0x4) == 0 && (val & 0x8) != 0) { // 0x8 - Magic Prayer Protection, should not stack with the others
+					finalDamage -= 0.6 * maxDamage; // = 36
 				}
 			}
-			if (fireType != FireType.FIERY_BREATH) {
-				damage += 11;
-			}
-			return damage;
+
+			return finalDamage;
 		}
 
 		@Override
@@ -284,12 +295,17 @@ public final class ElvargNPC extends AbstractNPC {
 			style = CombatStyle.RANGE;
 			int hit = 0;
 			int ticks = 1;
-			if (victim.getCenterLocation().withinDistance(entity.getCenterLocation(), getCombatDistance(entity, victim, 1)) && RandomFunction.random(10) < 7) {
-				style = CombatStyle.MELEE;
+
+			if (victim.getCenterLocation().withinDistance(entity.getCenterLocation(), getCombatDistance(entity, victim, 1)) ) {
+				if ( RandomFunction.random(10) < 7 ){
+					style = CombatStyle.MELEE;
+				}
 			} else {
 				ticks += (int) Math.ceil(entity.getLocation().getDistance(victim.getLocation()) * 0.3);
 			}
+
 			state.setStyle(style);
+
 			if (isAccurateImpact(entity, victim)) {
 				int max = calculateHit(entity, victim, 1.0);
 				state.setMaximumHit(max);
@@ -316,11 +332,10 @@ public final class ElvargNPC extends AbstractNPC {
 
 		@Override
 		public void visualizeImpact(Entity entity, Entity victim, BattleState state) {
-			style.getSwingHandler().visualizeImpact(entity, victim, state);
-			if (style != CombatStyle.MELEE && victim instanceof Player) {
-				Player p = (Player) victim;
-				p.getPacketDispatch().sendMessage(getDragonfireMessage(victim.getAttribute("fire_resistance", 0), fireType.name().toLowerCase().replaceAll("_", " ")));
-				p.graphics(new Graphics(346, 100, 1));
+			if (style != CombatStyle.MELEE) {
+				DRAGONFIRE.visualizeImpact(entity, victim, state);
+			} else {
+				style.getSwingHandler().visualizeImpact(entity, victim, state);
 			}
 		}
 
