@@ -19,7 +19,7 @@ public class IntentionalBurnPulse extends StandardCookingPulse {
 
     @Override
     public boolean checkRequirements() {
-        return true;
+        return object.isActive();
     }
 
     @Override
