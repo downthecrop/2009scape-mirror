@@ -29,6 +29,7 @@ class BlastFurnaceListeners : InteractionListener {
     val brokenBelt = 9103
     val brokenCog = 9105
     val tGauge = 9089
+    val sink = 9143
     val playerOre = intArrayOf(
         Items.IRON_ORE_440,
         Items.COPPER_ORE_436,
@@ -384,6 +385,23 @@ class BlastFurnaceListeners : InteractionListener {
             }else{
                 sendDialogue(player,"I need 30 Craft in order to do this")
             }
+            return@on true
+        }
+
+        /**Handles filling buckets from the sink*/
+
+        on(sink, SCENERY,"fill-bucket"){ player, _ ->
+            player.pulseManager.run(object : Pulse(1){
+                override fun pulse(): Boolean {
+                    if(removeItem(player, Items.BUCKET_1925))
+                    {
+                        animate(player, 832)
+                        sendMessage(player, "You fill the bucket from the sink.")
+                        addItemOrDrop(player, Items.BUCKET_OF_WATER_1929)
+                    }
+                    return true
+                }
+            })
             return@on true
         }
     }
