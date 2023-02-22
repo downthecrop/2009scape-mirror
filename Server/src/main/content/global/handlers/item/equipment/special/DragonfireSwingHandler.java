@@ -137,11 +137,12 @@ public class DragonfireSwingHandler extends CombatSwingHandler {
 					shield.setCharge(shield.getCharge() + 20);
 					EquipmentContainer.updateBonuses(p);
 					p.getPacketDispatch().sendMessage("Your dragonfire shield glows more brightly.");
+
+					p.faceLocation(entity.getCenterLocation());
+					victim.visualize(Animation.create(6695), Graphics.create(1163));
 				} else {
 					p.getPacketDispatch().sendMessage("Your dragonfire shield is already fully charged.");
 				}
-				p.faceLocation(entity.getCenterLocation());
-				victim.visualize(Animation.create(6695), Graphics.create(1163));
 				return;
 			}
 		}
