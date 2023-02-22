@@ -61,6 +61,7 @@ import core.game.system.config.ServerConfigParser
 import core.game.world.GameWorld
 import core.game.world.GameWorld.Pulser
 import core.game.world.repository.Repository
+import kotlin.math.absoluteValue
 
 /**
  * Gets a skilling tool which the player has the level to use and is in their inventory.
@@ -2258,6 +2259,17 @@ fun isPlayer(node: Node) : Boolean {
  */
 fun addDialogueAction(player: Player, action: core.game.dialogue.DialogueAction) {
     player.dialogueInterpreter.addAction(action)
+}
+
+/**
+ * Modifies prayer points by value
+ * @param player the player to modify prayer points
+ * @param amount the amount of points to modify by (positive for increment, negative for decrement)
+ */
+fun modPrayerPoints(player: Player, amount: Double) {
+    if(amount > 0) player.skills.incrementPrayerPoints(amount)
+    else if(amount < 0) player.skills.decrementPrayerPoints(amount.absoluteValue)
+    else return
 }
 
 private class ContentAPI
