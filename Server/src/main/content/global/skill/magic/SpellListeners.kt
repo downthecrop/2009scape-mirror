@@ -1,7 +1,9 @@
 package content.global.skill.magic
 
+import core.game.event.SpellCastEvent
 import core.game.node.Node
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.SpellBookManager
 import core.tools.SystemLogger
 
 object SpellListeners {
@@ -32,6 +34,7 @@ object SpellListeners {
         val method = get(button,type,node?.id ?: 0,book) ?: get(button,type,book) ?: return
         try {
             method.invoke(player, node)
+            player.dispatch(SpellCastEvent(SpellBookManager.SpellBook.valueOf(book.uppercase()), button, node))
         } catch (e: IllegalStateException){
             player.removeAttribute("spell:runes")
             return

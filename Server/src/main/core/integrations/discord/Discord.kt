@@ -55,6 +55,18 @@ object Discord {
         }
     }
 
+    @JvmStatic fun sendToOpenRSC(player: String, type: String) {
+        if (ServerConstants.DISCORD_OPENRSC_HOOK.isEmpty()) return
+        GlobalScope.launch {
+            val alert = encodeUserAlert(type, player)
+            try {
+                sendJsonPost(ServerConstants.DISCORD_OPENRSC_HOOK, alert)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
     private fun encodeUpdateJson(sale: Boolean, itemId: Int, value: Int, amtLeft: Int): String {
         val obj = JSONObject()
         val embeds = JSONArray()

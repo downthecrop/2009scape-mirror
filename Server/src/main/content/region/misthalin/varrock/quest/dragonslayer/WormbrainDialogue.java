@@ -6,6 +6,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
+import core.integrations.discord.Discord;
 
 /**
  * Represents the dialogue used to handle the wormbrain npc related to the
@@ -110,6 +111,7 @@ public final class WormbrainDialogue extends DialoguePlugin {
 						GroundItemManager.create(DragonSlayer.WORMBRAIN_PIECE, player);
 					}
 					interpreter.sendItemMessage(DragonSlayer.WORMBRAIN_PIECE.getId(), "You buy the map piece from Wormbrain.");
+					Discord.sendToOpenRSC(player.getName(), "Player obtained Wormbrain piece! (Dialogue)");
 					stage = 507;
 				} else {
 					end();

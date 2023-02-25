@@ -134,6 +134,7 @@ object ServerConfigParser {
         ServerConstants.NOAUTH_DEFAULT_ADMIN = data.getBoolean("server.noauth_default_admin", false)
         ServerConstants.DRAGON_AXE_USE_OSRS_SPEC = data.getBoolean("world.dragon_axe_use_osrs_spec", false)
         ServerConstants.ENABLE_GLOBALCHAT = data.getBoolean("world.enable_globalchat", true)
+        ServerConstants.DISCORD_OPENRSC_HOOK = data.getString("server.openrsc_integration_webhook", "")
     }
 
 

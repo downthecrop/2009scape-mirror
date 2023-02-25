@@ -1,6 +1,7 @@
 package core.game.node.entity.combat.spell;
 
 import core.game.component.Component;
+import core.game.event.SpellCastEvent;
 import core.game.node.entity.skill.Skills;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
@@ -131,6 +132,7 @@ public abstract class MagicSpell implements Plugin<SpellType> {
 			if (p.getAttribute("magic-delay", 0) <= GameWorld.getTicks()) {
 				p.setAttribute("magic-delay", GameWorld.getTicks() + spell.getDelay());
 			}
+			p.dispatch(new SpellCastEvent(book, spellId, target));
 			return true;
 		}
 		return false;
