@@ -2,6 +2,7 @@ package core
 
 import TestUtils
 import content.global.skill.gather.GatheringSkillOptionListeners
+import content.global.skill.gather.woodcutting.WoodcuttingListener
 import core.game.node.scenery.Scenery
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
@@ -11,7 +12,7 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListeners
 
 class PathfinderTests {
-    companion object {init {TestUtils.preTestSetup(); GatheringSkillOptionListeners().defineListeners() }}
+    companion object {init {TestUtils.preTestSetup(); GatheringSkillOptionListeners().defineListeners(); WoodcuttingListener().defineListeners() }}
 
     @Test fun getOccupiedTilesShouldReturnCorrectSetOfTilesThatAnObjectOccupiesAtAllRotations() {
         //clay fireplace - 13609 - sizex: 1, sizey: 2

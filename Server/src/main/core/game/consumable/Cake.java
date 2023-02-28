@@ -23,7 +23,7 @@ public class Cake extends Food {
             player.getInventory().remove(item);
         }
         final int initialLifePoints = player.getSkills().getLifepoints();
-        Consumables.getConsumableById(item.getId()).effect.activate(player);
+        Consumables.getConsumableById(item.getId()).getConsumable().effect.activate(player);
         sendMessages(player, initialLifePoints, item, messages);
     }
 

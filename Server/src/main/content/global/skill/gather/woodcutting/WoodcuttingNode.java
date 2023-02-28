@@ -141,10 +141,10 @@ public enum WoodcuttingNode {
     double experience,rate;
     public byte identifier;
     boolean farming;
-    double baseLow = 64;
-    double baseHigh = 200;
-    double tierModLow = 32;
-    double tierModHigh = 100;
+    public double baseLow = 64;
+    public double baseHigh = 200;
+    public double tierModLow = 32;
+    public double tierModHigh = 100;
     WoodcuttingNode(int full, int empty,byte identifier){
         this.full = full;
         this.empty = empty;

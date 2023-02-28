@@ -12,7 +12,6 @@ import core.plugin.Plugin;
  * Handles the searching of a bird nest item.
  * @author Vexia
  */
-@Initializable
 public final class BirdNestPlugin extends OptionHandler {
 
 	@Override

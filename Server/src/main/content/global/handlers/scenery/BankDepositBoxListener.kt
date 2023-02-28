@@ -29,7 +29,7 @@ private val BANK_DEPOSIT_BOXES = intArrayOf(
  */
 class BankDepositBoxListener : InteractionListener {
 
-    private fun openDepositBox(player: Player, node: Node) : Boolean {
+    private fun openDepositBox(player: Player, node: Node, state: Int) : Boolean {
         restrictForIronman(player, IronmanMode.ULTIMATE) {
             player.interfaceManager.open(Component(Components.BANK_DEPOSIT_BOX_11)).closeEvent = CloseEvent { p, _ ->
                 p.interfaceManager.openDefaultTabs()
@@ -55,6 +55,6 @@ class BankDepositBoxListener : InteractionListener {
     }
 
     override fun defineListeners() {
-        on(BANK_DEPOSIT_BOXES, IntType.SCENERY, "deposit", handler = ::openDepositBox)
+        defineInteraction(IntType.SCENERY, BANK_DEPOSIT_BOXES,  "deposit", handler = ::openDepositBox)
     }
 }

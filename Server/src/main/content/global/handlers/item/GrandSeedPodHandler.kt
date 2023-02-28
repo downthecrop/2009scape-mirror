@@ -2,14 +2,18 @@ package content.global.handlers.item
 
 import content.global.travel.glider.GliderPulse
 import content.global.travel.glider.Gliders
+import core.api.*
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.system.task.Pulse
 import core.game.world.map.Location
+import core.net.packet.PacketRepository
+import core.net.packet.context.MinimapStateContext
+import core.net.packet.out.MinimapState
 import org.rs09.consts.Items
-import core.game.interaction.InteractionListener
-import core.game.interaction.IntType
-import core.api.*
 
 private const val SQUASH_GRAPHICS_BEGIN = 767
 private const val SQUASH_GRAPHICS_END = 769
@@ -25,41 +29,68 @@ private const val LAUNCH_ANIMATION = 4547
 class GrandSeedPodHandler : InteractionListener {
 
     override fun defineListeners() {
-        on(Items.GRAND_SEED_POD_9469, IntType.ITEM, "squash", "launch"){ player, _ ->
-            when(getUsedOption(player)){
-                "launch" -> submitWorldPulse(LaunchPulse(player))
-                "squash" -> submitWorldPulse(SquashPulse(player))
+        on(intArrayOf(Items.GRAND_SEED_POD_9469), IntType.ITEM, "squash", "launch") { player, _ ->
+            val opt = getUsedOption(player)
+            if (!removeItem(player, Items.GRAND_SEED_POD_9469)) return@on false
+            if (opt == "launch") {
+                visualize(player, LAUNCH_ANIMATION, LAUNCH_GRAPHICS)
+                delayEntity(player, 7)
+                queueScript(player, 3, QueueStrength.SOFT) {stage: Int ->
+                    if (stage == 0) {
+                        rewardXP(player, Skills.FARMING, 100.0)
+                        openOverlay(player, 115)
+                        return@queueScript keepRunning(player)
+                    }
+
+                    if (stage == 1) {
+                        PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 2))
+                        return@queueScript delayScript(player, 3)
+                    }
+
+                    if (stage == 2) {
+                        teleport(player, Gliders.TA_QUIR_PRIW.location)
+                        return@queueScript delayScript(player, 2)
+                    }
+
+                    if (stage == 3) {
+                        closeOverlay(player)
+                        PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 0))
+                    }
+
+                    return@queueScript stopExecuting(player)
+                }
             }
-            removeItem(player, Items.GRAND_SEED_POD_9469, Container.INVENTORY)
-            lock(player, 50)
+
+            if (opt == "squash") {
+                visualize(player, SQUASH_ANIM_BEGIN, SQUASH_GRAPHICS_BEGIN)
+                delayEntity(player, 12)
+                queueScript(player, 3, QueueStrength.SOFT) {stage: Int ->
+                    if (stage == 0) {
+                        animate(player, 1241, true)
+                        return@queueScript keepRunning(player)
+                    }
+
+                    if (stage == 1) {
+                        teleport(player, Location.create(2464, 3494, 0))
+                        return@queueScript keepRunning(player)
+                    }
+
+                    if (stage == 2) {
+                        visualize(player, 1241, SQUASH_GRAPHICS_END)
+                        return@queueScript delayScript(player, 2)
+                    }
+
+                    if (stage == 3) {
+                        animate(player, SQUASH_ANIM_END, true)
+                        adjustLevel(player, Skills.FARMING, -5)
+                        return@queueScript keepRunning(player)
+                    }
+
+                    return@queueScript stopExecuting(player)
+                }
+            }
+
             return@on true
-        }
-    }
-
-    class LaunchPulse(val player: Player): Pulse(){
-        var counter = 0
-        override fun pulse(): Boolean {
-            when(counter++){
-                1 -> visualize(player, LAUNCH_ANIMATION, LAUNCH_GRAPHICS)
-                3 -> rewardXP(player, Skills.FARMING, 100.0)
-                4 -> submitWorldPulse(GliderPulse(2, player, Gliders.TA_QUIR_PRIW)).also { return true }
-            }
-            return false
-        }
-    }
-
-    class SquashPulse(val player: Player) : Pulse(){
-        var counter = 0
-        override fun pulse(): Boolean {
-            when(counter++){
-                1 -> visualize(player, SQUASH_ANIM_BEGIN, SQUASH_GRAPHICS_BEGIN)
-                4 -> animate(player, 1241, true)
-                5 -> teleport(player, Location.create(2464, 3494, 0))
-                6 -> visualize(player, anim = 1241, gfx = SQUASH_GRAPHICS_END)
-                8 -> animate(player, SQUASH_ANIM_END, true).also { adjustLevel(player, Skills.FARMING, -5) }
-                9 -> unlock(player).also { return true }
-            }
-            return false
         }
     }
 }

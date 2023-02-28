@@ -31,6 +31,10 @@ public final class PlayerParser {
 	 * @param player The player.
 	 */
 	public static void save(Player player) {
+		player.setAttribute("flagged-for-save", true);
+	}
+
+	public static void saveImmediately(Player player) {
 		new PlayerSaver(player).save();
 	}
 

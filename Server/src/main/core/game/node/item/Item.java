@@ -2,7 +2,7 @@ package core.game.node.item;
 
 import core.cache.def.impl.ItemDefinition;
 import core.game.interaction.DestinationFlag;
-import core.game.interaction.Interaction;
+import core.game.interaction.InteractPlugin;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.combat.equipment.DegradableEquipment;
@@ -34,7 +34,7 @@ public class Item extends Node{
 	 */
 	public Item() {
 		super("null", null);
-		super.interaction = new Interaction(this);
+		super.interactPlugin = new InteractPlugin(this);
 		this.idHash = -1 << 16 | 1000;
 	}
 
@@ -65,7 +65,7 @@ public class Item extends Node{
 		super(ItemDefinition.forId(id).getName(), null);
 		super.destinationFlag = DestinationFlag.ITEM;
 		super.index = -1; // Item slot.
-		super.interaction = new Interaction(this);
+		super.interactPlugin = new InteractPlugin(this);
 		this.idHash = id << 16 | charge;
 		this.amount = amount;
 		this.definition = ItemDefinition.forId(id);

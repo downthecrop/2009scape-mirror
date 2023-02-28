@@ -13,6 +13,8 @@ import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 
+import static core.api.ContentAPIKt.isStunned;
+
 /**
  * Handles the Dark Energy Core NPC.
  * @author Emperor
@@ -70,7 +72,7 @@ public final class DarkEnergyCoreNPC extends AbstractNPC {
 	public void handleTickActions() {
 		ticks++;
 		boolean poisoned = getStateManager().hasState(EntityState.POISONED);
-		if (getStateManager().hasState(EntityState.STUNNED) || isInvisible()) {
+		if (isStunned(this) || isInvisible()) {
 			return;
 		}
 		if (fails == 0 && poisoned && (ticks % 100) != 0) {

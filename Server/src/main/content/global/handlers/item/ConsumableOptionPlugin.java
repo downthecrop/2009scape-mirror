@@ -17,7 +17,6 @@ import core.plugin.Plugin;
  * @author Emperor
  * @version 1.0
  */
-@Initializable
 public final class ConsumableOptionPlugin extends OptionHandler {
 
 	@Override
@@ -35,7 +34,7 @@ public final class ConsumableOptionPlugin extends OptionHandler {
 	
 	@Override
 	public boolean handle(final Player player, final Node node, final String option) {
-		if (player.getLocks().isLocked(option)) {
+/*		if (player.getLocks().isLocked(option)) {
 			return true;
 		}
 		boolean food = option.equals("eat");
@@ -61,7 +60,7 @@ public final class ConsumableOptionPlugin extends OptionHandler {
 		if (food) {
 			player.getProperties().getCombatPulse().delayNextAttack(3);
 		}
-		lastEaten = node.asItem().getId();
+		lastEaten = node.asItem().getId();*/
 		return true;
 	}
 }

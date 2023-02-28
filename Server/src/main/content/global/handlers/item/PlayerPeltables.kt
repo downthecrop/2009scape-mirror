@@ -1,8 +1,7 @@
 package content.global.handlers.item
 
 import core.api.*
-import core.game.interaction.Interaction
-import core.game.interaction.Option
+import core.game.interaction.*
 import core.game.node.Node
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.player.Player
@@ -11,8 +10,6 @@ import core.game.system.task.Pulse
 import core.game.world.map.path.Pathfinder
 import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
-import core.game.interaction.InteractionListener
-import core.game.interaction.IntType
 
 
 class PlayerPeltables : InteractionListener {
@@ -40,7 +37,7 @@ class PlayerPeltables : InteractionListener {
     }
 
     private fun removePlayerOps(player: Player, _node: Node) : Boolean {
-        Interaction.sendOption(player, 0, "null")
+        InteractPlugin.sendOption(player, 0, "null")
         return true
     }
 

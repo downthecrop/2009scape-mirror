@@ -80,7 +80,7 @@ public class GroundItem extends Item {
 		super(item.getId(), item.getAmount(), item.getCharge());
 		super.location = location;
 		super.index = -1;
-		super.interaction.setDefault();
+		super.interactPlugin.setDefault();
 		this.dropper = player;
 		this.dropperUid = player != null ? player.getDetails().getUid() : -1;
 		this.ticks = GameWorld.getTicks();

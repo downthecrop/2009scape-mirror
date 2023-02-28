@@ -133,10 +133,10 @@ public class PvMBots extends AIPlayer {
             //this.animate(new Animation(829));
             Item food = this.getInventory().getItem(foodItem);
 
-            Consumable consumable = Consumables.getConsumableById(food.getId());
+            Consumable consumable = Consumables.getConsumableById(food.getId()).getConsumable();
 
             if (consumable == null) {
-                consumable = new Food(new int[] {food.getId()}, new HealingEffect(1));
+                return;
             }
 
             consumable.consume(food, this);

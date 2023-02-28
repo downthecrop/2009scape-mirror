@@ -67,7 +67,7 @@ class MortMyreGhastNPC : AbstractNPC {
             for(i in player.inventory.toArray()){
                 if(i == null) continue
                 val consumable = Consumables.getConsumableById(i.id)
-                if(consumable != null && consumable is Food) {
+                if(consumable != null && consumable.consumable is Food) {
                     hasFood = true
                     removeItem(player, i, Container.INVENTORY)
                     addItem(player, Items.ROTTEN_FOOD_2959)

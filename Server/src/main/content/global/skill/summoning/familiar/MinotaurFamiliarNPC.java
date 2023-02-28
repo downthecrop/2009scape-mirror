@@ -15,6 +15,8 @@ import core.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 
+import static core.api.ContentAPIKt.stun;
+
 /**
  * The plugin used to load the minotaur familiar npcs.
  * @author Vexia
@@ -58,7 +60,7 @@ public final class MinotaurFamiliarNPC implements Plugin<Object> {
 			GameWorld.getPulser().submit(new Pulse(ticks) {
 				@Override
 				public boolean pulse() {
-					target.getStateManager().set(EntityState.STUNNED, 4);
+					stun(target, 4);
 					return true;
 				}
 			});

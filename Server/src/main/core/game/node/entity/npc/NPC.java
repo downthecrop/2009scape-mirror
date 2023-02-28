@@ -3,7 +3,7 @@ package core.game.node.entity.npc;
 import core.game.event.NPCKillEvent;
 import core.cache.def.impl.NPCDefinition;
 import core.game.dialogue.DialoguePlugin;
-import core.game.interaction.Interaction;
+import core.game.interaction.InteractPlugin;
 import core.game.interaction.MovementPulse;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
@@ -162,7 +162,7 @@ public class NPC extends Entity {
 		this.definition = NPCDefinition.forId(id);
 		super.size = definition.size;
 		super.direction = direction;
-		super.interaction = new Interaction(this);
+		super.interactPlugin = new InteractPlugin(this);
 	}
 
 	/**
@@ -213,14 +213,14 @@ public class NPC extends Entity {
 		if (getViewport().getRegion().isActive()) {
 			Repository.addRenderableNPC(this);
 		}
-		interaction.setDefault();
+		interactPlugin.setDefault();
 		configure();
 		setDefaultBehavior();
 		if (definition.childNPCIds != null) {
 			children = new NPC[definition.childNPCIds.length];
 			for (int i = 0; i < children.length; i++) {
 				NPC npc = children[i] = new NPC(definition.childNPCIds[i]);
-				npc.interaction.setDefault();
+				npc.interactPlugin.setDefault();
 				npc.index = index;
 				npc.size = size;
 			}
@@ -671,10 +671,10 @@ public class NPC extends Entity {
 		this.definition = NPCDefinition.forId(id);
 		super.name = definition.getName();
 		super.size = definition.size;
-		super.interaction = new Interaction(this);
+		super.interactPlugin = new InteractPlugin(this);
 		initConfig();
 		configure();
-		interaction.setDefault();
+		interactPlugin.setDefault();
 		if (id == originalId) {
 			getUpdateMasks().unregisterSynced(NPCSwitchId.getOrdinal());
 		}

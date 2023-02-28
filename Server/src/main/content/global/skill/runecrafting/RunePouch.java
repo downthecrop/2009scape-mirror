@@ -1,6 +1,6 @@
 package content.global.skill.runecrafting;
 
-import core.game.global.action.DropItemHandler;
+import core.game.global.action.DropListener;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
@@ -195,7 +195,7 @@ public enum RunePouch {
 	 */
 	private void drop(Player player, Item item) {
 		onDrop(player, item);
-		DropItemHandler.drop(player, item);
+		DropListener.drop(player, item);
 	}
 
 	/**

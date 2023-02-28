@@ -20,7 +20,7 @@ import core.game.world.GameWorld;
  * Handles interaction between nodes.
  * @author Emperor
  */
-public class Interaction {
+public class InteractPlugin {
 
 	/**
 	 * The current options.
@@ -41,7 +41,7 @@ public class Interaction {
 	 * Constructs a new {@code Interaction} {@code Object}.
 	 * @param node The node reference.
 	 */
-	public Interaction(Node node) {
+	public InteractPlugin(Node node) {
 		this.node = node;
 	}
 

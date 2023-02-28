@@ -93,7 +93,7 @@ class BankBoothListener : InteractionListener {
         }
     }
 
-    private fun quickBankBoothUse(player: Player, node: Node): Boolean {
+    private fun quickBankBoothUse(player: Player, node: Node, state: Int): Boolean {
         if (player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {
             return true
         }
@@ -107,20 +107,20 @@ class BankBoothListener : InteractionListener {
         return true
     }
 
-    private fun regularBankBoothUse(player: Player, node: Node): Boolean {
+    private fun regularBankBoothUse(player: Player, node: Node, state: Int): Boolean {
         if (player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {
             return true
         }
 
         if (ServerConstants.BANK_BOOTH_QUICK_OPEN) {
-            return quickBankBoothUse(player, node)
+            return quickBankBoothUse(player, node, state)
         }
 
         tryInvokeBankerDialogue(player, node)
         return true
     }
 
-    private fun collectBankBoothUse(player: Player, node: Node): Boolean {
+    private fun collectBankBoothUse(player: Player, node: Node, state: Int): Boolean {
         if (BankerNPC.checkLunarIsleRestriction(player, node)) {
             tryInvokeBankerDialogue(player, node)
             return true
@@ -176,9 +176,9 @@ class BankBoothListener : InteractionListener {
     }
 
     override fun defineListeners() {
-        on(BANK_BOOTHS, IntType.SCENERY, "use-quickly", "bank", handler = ::quickBankBoothUse)
-        on(BANK_BOOTHS, IntType.SCENERY, "use", handler = ::regularBankBoothUse)
-        on(BANK_BOOTHS, IntType.SCENERY, "collect", handler = ::collectBankBoothUse)
+        defineInteraction(IntType.SCENERY, BANK_BOOTHS, "use-quickly", "bank", handler = ::quickBankBoothUse)
+        defineInteraction(IntType.SCENERY, BANK_BOOTHS,  "use", handler = ::regularBankBoothUse)
+        defineInteraction(IntType.SCENERY, BANK_BOOTHS, "collect", handler = ::collectBankBoothUse)
 
         if (ServerConstants.BANK_BOOTH_NOTE_ENABLED) {
             onUseAnyWith(IntType.SCENERY, *BANK_BOOTHS, handler = ::attemptToConvertItems)

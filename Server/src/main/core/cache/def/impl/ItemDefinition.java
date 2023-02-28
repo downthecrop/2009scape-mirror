@@ -5,16 +5,13 @@ import core.cache.Cache;
 import core.cache.def.Definition;
 import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.container.Container;
-import core.game.global.action.DropItemHandler;
 import core.game.interaction.OptionHandler;
-import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.game.node.item.ItemPlugin;
 import core.net.packet.PacketRepository;
 import core.net.packet.out.WeightUpdate;
-import core.plugin.Plugin;
 import core.tools.StringUtils;
 import core.tools.SystemLogger;
 import core.game.system.config.ItemConfigParser;
@@ -259,32 +256,6 @@ public class ItemDefinition extends Definition<Item> {
 		options = new String[] { null, null, null, null, "drop" };
 	}
 
-	/**
-	 * Initialize the default option handlers.
-	 */
-	static {
-		// TODO: Move this crap in a plugin.
-		OptionHandler handler = new OptionHandler() {
-			@Override
-			public Plugin<Object> newInstance(Object arg) throws Throwable {
-				return this;
-			}
-
-			@Override
-			public boolean handle(final Player player, Node node, String option) {
-				return DropItemHandler.handle(player, node, option);
-			}
-
-			@Override
-			public boolean isWalk() {
-				return false;
-			}
-		};
-		setOptionHandler("destroy", handler);
-		setOptionHandler("dissolve", handler);
-		setOptionHandler("drop", handler);
-	}
-	
 	/**
 	 * Parses the item definitions.
 	 */

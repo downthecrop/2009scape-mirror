@@ -43,7 +43,7 @@ class CombatBot(location: Location) : AIPlayer(location) {
             this.lock(3)
             //this.animate(new Animation(829));
             val food = inventory.getItem(foodItem)
-            var consumable: Consumable? = Consumables.getConsumableById(food.id)
+            var consumable: Consumable? = Consumables.getConsumableById(food.id)?.consumable
             if (consumable == null) {
                 consumable = Food(IntArray(food.id), HealingEffect(1))
             }

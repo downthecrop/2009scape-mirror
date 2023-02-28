@@ -1,5 +1,6 @@
 package content.global.skill.thieving
 
+import core.api.stun
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.player.Player
@@ -59,8 +60,7 @@ class ThievingListeners : InteractionListener {
                 val hitSoundId = 518 + RandomFunction.random(4) // choose 1 of 4 possible hit noises
                 player.audioManager.send(hitSoundId, 1, 20) // OSRS defines a delay of 20
 
-                player.stateManager.set(EntityState.STUNNED, secondsToTicks(pickpocketData.stunTime))
-                player.lock(secondsToTicks(pickpocketData.stunTime))
+                stun(player, pickpocketData.stunTime)
 
                 player.impactHandler.manualHit(node.asNpc(),RandomFunction.random(pickpocketData.stunDamageMin,pickpocketData.stunDamageMax),ImpactHandler.HitsplatType.NORMAL)
 

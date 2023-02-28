@@ -9,12 +9,6 @@ import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.SceneryDefinition
 import core.game.container.Container
 import core.game.container.impl.BankContainer
-import core.game.interaction.PluginInteractionManager
-import core.game.interaction.Interaction
-import core.game.interaction.MovementPulse
-import core.game.interaction.NodeUsageEvent
-import core.game.interaction.Option
-import core.game.interaction.UseWithHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
@@ -44,13 +38,11 @@ import core.game.ge.GrandExchange.Companion.getOfferStats
 import core.game.ge.GrandExchange.Companion.getRecommendedPrice
 import core.game.ge.GrandExchangeOffer
 import core.game.ge.PriceIndex
-import core.game.interaction.IntType
-import core.game.interaction.InteractionListeners
-import core.game.interaction.InterfaceListeners
 import content.global.handlers.iface.ge.StockMarket
 import content.global.skill.magic.SpellListener
 import content.global.skill.magic.SpellListeners
 import content.global.skill.magic.SpellUtils
+import core.game.interaction.*
 import core.game.node.entity.player.info.LogType
 import core.game.node.entity.player.info.PlayerMonitor
 import core.tools.SystemLogger
@@ -78,6 +70,10 @@ object PacketProcessor {
         var pkt: Packet
         while (countThisCycle-- > 0) {
             pkt = queue.tryPop(Packet.NoProcess())
+            if (pkt is Packet.NoProcess) {
+                queue.clear()
+                return
+            }
             try {
                 process(pkt)
             } catch (e: Exception) {
@@ -457,6 +453,7 @@ object PacketProcessor {
 
         player.face(null)
         player.faceLocation(null)
+        player.scripts.reset()
 
         player.pulseManager.run(object : MovementPulse(player, Location.create(x,y,player.location.z), isRunning) {
             override fun pulse(): Boolean {
@@ -569,6 +566,7 @@ object PacketProcessor {
         if (node.id != nodeId)
             return sendClearMinimap(player)
 
+        player.scripts.reset()
         if (player.zoneMonitor.useWith(item, node))
             return
         if (InteractionListeners.run(item, node, type, player))
@@ -590,13 +588,14 @@ object PacketProcessor {
     private fun processGroundItemAction(pkt: Packet.GroundItemAction) {
         val item = GroundItemManager.get(pkt.id, Location.create(pkt.x, pkt.y, pkt.player.location.z), pkt.player)
         val player = pkt.player
+        player.scripts.reset()
 
         if (item == null) {
             return sendClearMinimap(player)
         }
         val option = item.interaction[pkt.optIndex]
         if (option == null) {
-            Interaction.handleInvalidInteraction(player, item, Option.NULL)
+            InteractPlugin.handleInvalidInteraction(player, item, Option.NULL)
             return sendClearMinimap(player)
         }
         if (PluginInteractionManager.handle(player, item, option))
@@ -613,6 +612,7 @@ object PacketProcessor {
         if (pkt.otherIndex !in 1 until ServerConstants.MAX_PLAYERS) {
             return sendClearMinimap(player)
         }
+        player.scripts.reset()
         val other = Repository.players[pkt.otherIndex]
         if (other == null || !other.isActive)
             return sendClearMinimap(player)
@@ -642,7 +642,7 @@ object PacketProcessor {
 
         if (scenery == null || scenery.id != objId || !scenery.isActive) {
             player.debug("[SCENERY INTERACT] NULL OR MISMATCH OR INACTIVE")
-            Interaction.handleInvalidInteraction(player, scenery, Option.NULL)
+            InteractPlugin.handleInvalidInteraction(player, scenery, Option.NULL)
             return sendClearMinimap(player)
         }
 
@@ -651,7 +651,7 @@ object PacketProcessor {
 
         if (option == null) {
             player.debug("[SCENERY INTERACT] NULL OPTION")
-            Interaction.handleInvalidInteraction(player, scenery, Option.NULL)
+            InteractPlugin.handleInvalidInteraction(player, scenery, Option.NULL)
             return sendClearMinimap(player)
         }
 
@@ -665,6 +665,7 @@ object PacketProcessor {
         }
         player.debug("------------------------------------------------")
 
+        player.scripts.reset()
         if (InteractionListeners.run(wrapperChild.id, IntType.SCENERY, option.name, player, wrapperChild))
             return
         if (PluginInteractionManager.handle(player, wrapperChild))
@@ -681,7 +682,7 @@ object PacketProcessor {
         val option = wrapperChild.interaction[pkt.optIndex]
 
         if (option == null) {
-            Interaction.handleInvalidInteraction(pkt.player, npc, Option.NULL)
+            InteractPlugin.handleInvalidInteraction(pkt.player, npc, Option.NULL)
             return sendClearMinimap(pkt.player)
         }
 
@@ -696,6 +697,7 @@ object PacketProcessor {
         }
         pkt.player.debug("---------------------------------")
 
+        pkt.player.scripts.reset()
         if (InteractionListeners.run(wrapperChild.id, IntType.NPC,option.name,pkt.player,npc))
             return
         if (PluginInteractionManager.handle(pkt.player, wrapperChild, option))
@@ -714,6 +716,7 @@ object PacketProcessor {
         if (pkt.player.locks.isInteractionLocked)
             return
         item.interaction.handleItemOption(pkt.player, option, container)
+        pkt.player.scripts.reset()
         pkt.player.debug("[ITEM INTERACT] ID: ${item.id}, Slot: ${pkt.slot}, Opt: ${option.name}")
     }
 

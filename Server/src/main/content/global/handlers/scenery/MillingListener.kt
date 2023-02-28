@@ -1,6 +1,7 @@
 package content.global.handlers.scenery
 
 import core.api.*
+import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.audio.Audio
@@ -27,13 +28,13 @@ private val SOUND = Audio(3189)
  */
 class MillingListener : InteractionListener {
     override fun defineListeners() {
-        on(HOPPER_CONTROLS, SCENERY, "operate", "pull") { player, _ ->
+        defineInteraction(IntType.SCENERY, HOPPER_CONTROLS, "operate", "pull") { player, _, _ ->
             useHopperControl(player)
-            return@on true
+            return@defineInteraction true
         }
-        on(FLOUR_BINS, SCENERY, "empty") { player, _ ->
+        defineInteraction(IntType.SCENERY, FLOUR_BINS, "empty") {player, _, _ ->
             fillPot(player)
-            return@on true
+            return@defineInteraction true
         }
         onUseWith(SCENERY, intArrayOf(GRAIN, SWEETCORN), *HOPPERS) { player, used, _ ->
             fillHopper(player, used.asItem())

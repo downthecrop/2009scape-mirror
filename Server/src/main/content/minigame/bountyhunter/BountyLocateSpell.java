@@ -17,6 +17,8 @@ import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.isStunned;
+
 /**
  * Handles the bounty target locate spell.
  * @author Emperor
@@ -43,8 +45,8 @@ public final class BountyLocateSpell extends MagicSpell {
 			player.getPacketDispatch().sendMessage("You don't have a target to teleport to.");
 			return true;
 		}
-		if (player.getStateManager().hasState(EntityState.FROZEN) || player.getStateManager().hasState(EntityState.STUNNED)) {
-			player.getPacketDispatch().sendMessage("You can't use this when " + (player.getStateManager().hasState(EntityState.STUNNED) ? "stunned." : "frozen."));
+		if (player.getStateManager().hasState(EntityState.FROZEN) || isStunned(player)) {
+			player.getPacketDispatch().sendMessage("You can't use this when " + (isStunned(player) ? "stunned." : "frozen."));
 			return true;
 		}
 		boolean combat = player.inCombat();

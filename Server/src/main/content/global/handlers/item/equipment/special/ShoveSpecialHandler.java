@@ -16,6 +16,8 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.stun;
+
 /**
  * Handles the dragon spear special attack.
  * @author Emperor
@@ -95,8 +97,7 @@ public final class ShoveSpecialHandler extends MeleeSwingHandler implements Plug
 		}
 		victim.getWalkingQueue().reset();
 		victim.getPulseManager().clear();
-		victim.animate(STUN_ANIM);
-		victim.getStateManager().set(EntityState.STUNNED, 5);
+		stun(victim, 5);
 		if (dir != null) {
 			Point p = Direction.getWalkPoint(dir);
 			Location dest = victim.getLocation().transform(p.getX(), p.getY(), 0);

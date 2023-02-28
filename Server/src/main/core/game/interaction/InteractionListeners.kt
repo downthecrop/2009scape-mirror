@@ -1,5 +1,7 @@
 package core.game.interaction
 
+import core.api.forceWalk
+import core.api.queueScript
 import core.game.event.InteractionEvent
 import core.game.event.UseWithEvent
 import core.game.node.Node
@@ -14,6 +16,8 @@ object InteractionListeners {
     private val useWithWildcardListeners = HashMap<Int, ArrayList<Pair<(Int, Int) -> Boolean, (Player, Node, Node) -> Boolean>>>(10)
     private val destinationOverrides = HashMap<String,(Entity, Node) -> Location>(100)
     private val equipListeners = HashMap<String,(Player,Node) -> Boolean>(10)
+    private val interactions = HashMap<String, InteractionListener.InteractionMetadata>()
+    private val useWithInteractions = HashMap<String, InteractionListener.UseWithMetadata>()
     val instantClasses = HashSet<String>()
 
     @JvmStatic
@@ -232,10 +236,25 @@ object InteractionListeners {
 
         if(player.locks.isInteractionLocked) return false
 
-        val method = get(id,type.ordinal,option) ?: get(option,type.ordinal) ?: return false
+        val method = get(id,type.ordinal,option) ?: get(option,type.ordinal)
+
+        player.setAttribute("interact:option", option.lowercase())
+        player.dispatch(InteractionEvent(node, option.toLowerCase()))
+
+        if (method == null) {
+            val inter = interactions["${type.ordinal}:$id:${option.lowercase()}"] ?: interactions["${type.ordinal}:${option.lowercase()}"] ?: return false
+            val script = Interaction(inter.handler, inter.distance, inter.persist)
+            player.scripts.setInteractionScript(node, script)
+            player.pulseManager.run(object : MovementPulse(player, node, flag) {
+                override fun pulse(): Boolean {
+                    return true
+                }
+            })
+            return true
+        }
+
         val destOverride = getOverride(type.ordinal, id, option) ?: getOverride(type.ordinal,node.id) ?: getOverride(type.ordinal,option.toLowerCase())
 
-        player.setAttribute("interact:option", option)
 
         if(option.toLowerCase() == "attack") //Attack needs special handling >.>
         {
@@ -250,14 +269,12 @@ object InteractionListeners {
                 override fun pulse(): Boolean {
                     if(player.zoneMonitor.interact(node, Option(option, 0))) return true
                     player.faceLocation(node.location)
-                    player.dispatch(InteractionEvent(node, option.toLowerCase()))
                     method.invoke(player,node)
                     return true
                 }
             })
         } else {
             method.invoke(player,node)
-            player.dispatch(InteractionEvent(node, option.toLowerCase()))
         }
         return true
     }
@@ -284,5 +301,30 @@ object InteractionListeners {
     fun isUseWithInstant(handler: (player: Player, used: Node, with: Node) -> Boolean): Boolean {
         val className = handler.javaClass.name.substringBefore("$")
         return instantClasses.contains(className)
+    }
+
+    fun addMetadata (ids: IntArray, type: IntType, options: Array<out String>, metadata: InteractionListener.InteractionMetadata) {
+        for (id in ids)
+            for (opt in options)
+                interactions["${type.ordinal}:$id:${opt.lowercase()}"] = metadata
+    }
+
+    fun addMetadata (id: Int, type: IntType, options: Array<out String>, metadata: InteractionListener.InteractionMetadata) {
+        for (opt in options)
+            interactions["${type.ordinal}:$id:${opt.lowercase()}"] = metadata
+    }
+
+    fun addGenericMetadata (options: Array<out String>, type: IntType, metadata: InteractionListener.InteractionMetadata) {
+        for (opt in options)
+            interactions["${type.ordinal}:$opt"] = metadata
+    }
+
+    fun addMetadata (used: Int, with: IntArray, type: IntType, metadata: InteractionListener.UseWithMetadata) {
+        for (id in with)
+            useWithInteractions["${type.ordinal}:$used:$with"] = metadata
+    }
+
+    fun addMetadata (used: Int, with: Int, type: IntType, metadata: InteractionListener.UseWithMetadata) {
+        useWithInteractions["${type.ordinal}:$used:$with"] = metadata
     }
 }

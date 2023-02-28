@@ -191,8 +191,7 @@ class DisconnectionQueue {
      */
     fun save(player: Player, sql: Boolean): Boolean {
         try {
-            PlayerParser.save(player)
-            return true
+            PlayerParser.saveImmediately(player)
         } catch (t: Throwable) {
             t.printStackTrace()
         }

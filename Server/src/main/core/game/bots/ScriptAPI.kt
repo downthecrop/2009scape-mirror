@@ -653,7 +653,7 @@ class ScriptAPI(private val bot: Player) {
             bot.lock(3)
             //this.animate(new Animation(829));
             val food = bot.inventory.getItem(foodItem)
-            var consumable: Consumable? = Consumables.getConsumableById(foodId)
+            var consumable: Consumable? = Consumables.getConsumableById(foodId)?.consumable
             if (consumable == null) {
                 consumable = Food(intArrayOf(food.id), HealingEffect(1))
             }
@@ -673,7 +673,7 @@ class ScriptAPI(private val bot: Player) {
             bot.lock(3)
             //this.animate(new Animation(829));
             val food = bot.inventory.getItem(foodItem)
-            var consumable: Consumable? = Consumables.getConsumableById(foodId)
+            var consumable: Consumable? = Consumables.getConsumableById(foodId)?.consumable
             if (consumable == null) {
                 consumable = Food(intArrayOf(foodId), HealingEffect(1))
             }

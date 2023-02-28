@@ -9,7 +9,7 @@ import core.game.container.impl.BankContainer;
 import core.game.container.impl.EquipmentContainer;
 import core.game.container.impl.InventoryListener;
 import core.game.dialogue.DialogueInterpreter;
-import core.game.interaction.Interaction;
+import core.game.interaction.InteractPlugin;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
@@ -19,6 +19,7 @@ import content.global.handlers.item.equipment.special.ChinchompaSwingHandler;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.info.*;
 import core.game.node.entity.player.info.login.LoginConfiguration;
+import core.game.node.entity.player.info.login.PlayerParser;
 import core.game.node.entity.player.link.*;
 import core.game.node.entity.player.link.appearance.Appearance;
 import core.game.node.entity.player.link.audio.AudioManager;
@@ -324,7 +325,7 @@ public class Player extends Entity {
 	public Player(PlayerDetails details) {
 		super(details.getUsername(), ServerConstants.START_LOCATION);
 		super.active = false;
-		super.interaction = new Interaction(this);
+		super.interactPlugin = new InteractPlugin(this);
 		this.details = details;
 		this.direction = Direction.SOUTH;
 	}
@@ -522,6 +523,10 @@ public class Player extends Entity {
 		if (getSkills().isLifepointsUpdate()) {
 			PacketRepository.send(SkillLevel.class, new SkillContext(this, Skills.HITPOINTS));
 			getSkills().setLifepointsUpdate(false);
+		}
+		if (getAttribute("flagged-for-save", false)) {
+			PlayerParser.saveImmediately(this);
+			removeAttribute("flagged-for-save");
 		}
 	}
 

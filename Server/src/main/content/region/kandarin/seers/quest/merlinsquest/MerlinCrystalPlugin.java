@@ -9,7 +9,7 @@ import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
 import core.game.global.action.ClimbActionHandler;
 import core.game.global.action.DoorActionHandler;
-import core.game.global.action.DropItemHandler;
+import core.game.global.action.DropListener;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
@@ -143,7 +143,7 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 				}
 				return true;
 			} else {
-				DropItemHandler.drop(player, node.asItem());
+				DropListener.drop(player, node.asItem());
 			}
 			return true;
 		case 40026:

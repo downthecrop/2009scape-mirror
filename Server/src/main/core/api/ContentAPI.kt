@@ -53,6 +53,9 @@ import core.game.interaction.InteractionListeners
 import content.global.handlers.iface.ge.StockMarket
 import content.global.skill.slayer.SlayerManager
 import core.game.activity.Cutscene
+import core.game.interaction.Clocks
+import core.game.interaction.QueueStrength
+import core.game.interaction.QueuedScript
 import core.game.node.entity.player.info.LogType
 import core.game.node.entity.player.info.PlayerMonitor
 import core.tools.SystemLogger
@@ -60,7 +63,9 @@ import core.game.system.config.ItemConfigParser
 import core.game.system.config.ServerConfigParser
 import core.game.world.GameWorld
 import core.game.world.GameWorld.Pulser
+import core.game.world.map.path.ProjectilePathfinder
 import core.game.world.repository.Repository
+import core.tools.tick
 import kotlin.math.absoluteValue
 
 /**
@@ -2259,6 +2264,97 @@ fun isPlayer(node: Node) : Boolean {
  */
 fun addDialogueAction(player: Player, action: core.game.dialogue.DialogueAction) {
     player.dialogueInterpreter.addAction(action)
+}
+
+/**
+ * Used by content handlers to check if the entity is done moving yet
+ */
+fun finishedMoving(entity: Entity) : Boolean {
+    return entity.clocks[Clocks.MOVEMENT] < GameWorld.ticks
+}
+
+
+/**
+ * Delay the execution of the currently running script
+ */
+fun delayScript(entity: Entity, ticks: Int): Boolean {
+    entity.scripts.getActiveScript()?.let { it.nextExecution = GameWorld.ticks + ticks }
+    return false
+}
+
+/**
+ * Set the global delay for the entity, pausing execution of all queues/scripts until passed.
+ */
+fun delayEntity(entity: Entity, ticks: Int) {
+    entity.scripts.delay = GameWorld.ticks + ticks
+    lock(entity, 5) //TODO: REMOVE WHEN EVERYTHING IMPORTANT USES PROPER QUEUES - THIS IS INCORRECT BEHAVIOR
+}
+
+fun apRange(entity: Entity, apRange: Int) {
+    entity.scripts.apRange = apRange
+    entity.scripts.apRangeCalled = true
+}
+
+fun hasLineOfSight(entity: Entity, target: Node) : Boolean {
+    return ProjectilePathfinder.find(entity, target).isSuccessful
+}
+
+fun animationFinished(entity: Entity) : Boolean {
+    return entity.clocks[Clocks.ANIMATION_END] < GameWorld.ticks
+}
+
+fun clearScripts(entity: Entity) : Boolean {
+    entity.scripts.reset()
+    return true
+}
+
+fun restartScript(entity: Entity) : Boolean {
+    if (entity.scripts.getActiveScript()?.persist != true) {
+        SystemLogger.logErr(entity.scripts.getActiveScript()!!::class.java, "Tried to call restartScript on a non-persistent script! Either use stopExecuting() or make the script persistent.")
+        return clearScripts(entity)
+    }
+    return true
+}
+
+fun keepRunning(entity: Entity) : Boolean {
+    entity.scripts.getActiveScript()?.nextExecution = getWorldTicks() + 1
+    return false
+}
+
+fun stopExecuting(entity: Entity) : Boolean {
+    if (entity.scripts.getActiveScript()?.persist == true) {
+        SystemLogger.logErr(entity.scripts.getActiveScript()!!::class.java, "Tried to call stopExecuting() on a persistent script! To halt execution of a persistent script, you MUST call clearScripts()!")
+        return clearScripts(entity)
+    }
+    return true
+}
+
+fun queueScript(entity: Entity, delay: Int = 1, strength: QueueStrength = QueueStrength.WEAK, persist: Boolean = false, script: (stage: Int) -> Boolean) {
+    val s = QueuedScript(script, strength, persist)
+    s.nextExecution = getWorldTicks() + delay
+    entity.scripts.addToQueue(s, strength)
+}
+
+fun delayAttack(entity: Entity, ticks: Int) {
+    entity.properties.combatPulse.delayNextAttack(3)
+    entity.clocks[Clocks.NEXT_ATTACK] = getWorldTicks() + ticks
+}
+
+fun stun(entity: Entity, ticks: Int) {
+    entity.walkingQueue.reset()
+    entity.pulseManager.clear()
+    entity.locks.lockMovement(ticks)
+    entity.clocks[Clocks.STUN] = getWorldTicks() + ticks
+    entity.graphics(Graphics(80, 96))
+    if (entity is Player) {
+        entity.audioManager.send(Audio(2727, 1, 0))
+        entity.animate(Animation(424, Animator.Priority.VERY_HIGH))
+        sendMessage(entity, "You have been stunned!")
+    }
+}
+
+fun isStunned(entity: Entity) : Boolean {
+    return entity.clocks[Clocks.STUN] >= getWorldTicks()
 }
 
 /**

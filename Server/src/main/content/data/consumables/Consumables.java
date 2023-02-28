@@ -42,7 +42,7 @@ public enum Consumables {
 	SALMON(new Food(new int[] {329}, new HealingEffect(9))),
 	SLIMY_EEL(new Food(new int[] {3381}, new HealingEffect(6))),
 	TUNA(new Food(new int[] {361}, new HealingEffect(10))),
-	COOKED_KARAMBWAN(new Food(new int[] {3144}, new HealingEffect(18))),
+	COOKED_KARAMBWAN(new Food(new int[] {3144}, new HealingEffect(18)), true),
 	COOKED_CHOMPY(new Food(new int[] {2878}, new HealingEffect(10))),
 	RAINBOW_FISH(new Food(new int[] {10136}, new HealingEffect(11))),
 	CAVE_EEL(new Food(new int[] {5003}, new HealingEffect(7))),
@@ -364,24 +364,26 @@ public enum Consumables {
 	SC_MAGIC(new Potion(new int[] {14267, 14269, 14271, 14273, 14275}, new SkillEffect(Skills.MAGIC, 3, 0.1))),
 	SC_SUMMONING(new Potion(new int[] {14277, 14279, 14281, 14283, 14285}, new SummoningEffect(7, 0.25)));
 
-	public static HashMap<Integer,Consumable> consumables = new HashMap<>();
+	public static HashMap<Integer,Consumables> consumables = new HashMap<>();
 
 	private final Consumable consumable;
+	public boolean isIgnoreMainClock = false;
 
 	Consumables(Consumable consumable) {
 		this.consumable = consumable;
 	}
+	Consumables(Consumable consumable, boolean isIgnoreMainClock) {this.consumable = consumable; this.isIgnoreMainClock = isIgnoreMainClock;}
 
 	public Consumable getConsumable() {
 		return consumable;
 	}
 
-	public static Consumable getConsumableById(final int itemId) {
+	public static Consumables getConsumableById(final int itemId) {
 		return consumables.get(itemId);
 	}
 
-	public static void add(final Consumable consumable) {
-		for (int id : consumable.getIds()) {
+	public static void add(final Consumables consumable) {
+		for (int id : consumable.consumable.getIds()) {
 			consumables.putIfAbsent(id, consumable);
 		}
 	}
@@ -391,7 +393,7 @@ public enum Consumables {
 	 */
 	static {
 		for (Consumables consumable : Consumables.values()) {
-			add(consumable.consumable);
+			add(consumable);
 		}
 	}
 }

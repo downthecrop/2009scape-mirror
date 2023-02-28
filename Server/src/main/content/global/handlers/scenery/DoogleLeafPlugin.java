@@ -13,7 +13,6 @@ import core.plugin.Plugin;
  * @author 'Vexia
  * @version 1.0
  */
-@Initializable
 public class DoogleLeafPlugin extends OptionHandler {
 
 	/**

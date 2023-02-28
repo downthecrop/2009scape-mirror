@@ -1,7 +1,7 @@
 package core.game.node.entity;
 
 import core.game.event.*;
-import core.game.interaction.DestinationFlag;
+import core.game.interaction.*;
 import core.game.node.Node;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
@@ -9,6 +9,7 @@ import core.game.node.entity.combat.DeathTask;
 import core.game.node.entity.combat.ImpactHandler;
 import core.game.node.entity.combat.equipment.ArmourSet;
 import core.game.node.entity.impl.*;
+import core.game.node.entity.impl.Properties;
 import core.game.node.entity.lock.ActionLocks;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
@@ -29,10 +30,9 @@ import core.game.world.update.flag.context.Graphics;
 import core.game.node.entity.combat.CombatSwingHandler;
 import core.game.world.update.UpdateMasks;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import static core.api.ContentAPIKt.isStunned;
 
 /**
  * An entity is a movable node, such as players and NPCs.
@@ -109,6 +109,8 @@ public abstract class Entity extends Node {
 	 * The reward locks.
 	 */
 	private final ActionLocks locks = new ActionLocks();
+	public final ScriptProcessor scripts = new ScriptProcessor(this);
+	public final int[] clocks = new int[10];
 
 
 	/**
@@ -121,6 +123,8 @@ public abstract class Entity extends Node {
 	 * If the entity is invisible.
 	 */
 	private boolean invisible;
+
+
 
 	/**
 	 * Constructs a new {@code Entity} {@code Object}.
@@ -209,9 +213,12 @@ public abstract class Entity extends Node {
 	 * This methods gets called before the {@link #update()} method.
 	 */
 	public void tick() {
+		scripts.preMovement();
 		dispatch(new TickEvent(GameWorld.getTicks()));
 		skills.pulse();
+		Location old = location != null ? location.transform(0, 0, 0) : Location.create(0,0,0);
 		walkingQueue.update();
+		scripts.postMovement(!Objects.equals(location, old));
 		updateMasks.prepare(this);
 	}
 
@@ -952,5 +959,9 @@ public abstract class Entity extends Node {
 			}
 		}
 		return occupied;
+	}
+
+	public boolean delayed() {
+		return scripts.getDelay() > GameWorld.getTicks();
 	}
 }

@@ -3,7 +3,7 @@ package core.game.node.scenery;
 import core.cache.def.impl.VarbitDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.DestinationFlag;
-import core.game.interaction.Interaction;
+import core.game.interaction.InteractPlugin;
 import core.game.node.Node;
 import core.game.node.entity.impl.GameAttributes;
 import core.game.node.entity.player.Player;
@@ -145,7 +145,7 @@ public class Scenery extends Node {
 		}
 		super.destinationFlag = DestinationFlag.OBJECT;
 		super.direction = Direction.get(rotation);
-		super.interaction = new Interaction(this);
+		super.interactPlugin = new InteractPlugin(this);
 		this.rotation = rotation;
 		this.id = id;
 		this.location = location;

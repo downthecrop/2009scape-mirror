@@ -1,7 +1,7 @@
 package core.game.node;
 
 import core.game.interaction.DestinationFlag;
-import core.game.interaction.Interaction;
+import core.game.interaction.InteractPlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
@@ -49,7 +49,7 @@ public abstract class Node {
 	/**
 	 * The interaction instance.
 	 */
-	protected Interaction interaction;
+	protected InteractPlugin interactPlugin;
 
 	/**
 	 * The destination flag.
@@ -220,19 +220,19 @@ public abstract class Node {
 	 * Gets the interaction.
 	 * @return The interaction.
 	 */
-	public Interaction getInteraction() {
-		if (interaction != null && !interaction.isInitialized()) {
-			interaction.setDefault();
+	public InteractPlugin getInteraction() {
+		if (interactPlugin != null && !interactPlugin.isInitialized()) {
+			interactPlugin.setDefault();
 		}
-		return interaction;
+		return interactPlugin;
 	}
 
 	/**
 	 * Sets the interaction.
-	 * @param interaction The interaction to set.
+	 * @param interactPlugin The interaction to set.
 	 */
-	public void setInteraction(Interaction interaction) {
-		this.interaction = interaction;
+	public void setInteraction(InteractPlugin interactPlugin) {
+		this.interactPlugin = interactPlugin;
 	}
 
 	/**

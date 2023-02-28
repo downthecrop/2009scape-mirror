@@ -2,6 +2,8 @@ package content
 
 import TestUtils
 import core.api.asItem
+import core.api.setAttribute
+import core.game.global.action.DropListener
 import core.game.node.entity.player.info.Rights
 import core.game.node.entity.player.link.IronmanMode
 import core.game.world.map.Location
@@ -301,7 +303,8 @@ class DeathTests {
         Assertions.assertNotNull(g)
         Assertions.assertEquals(p.location, g?.location)
 
-        val canDrop = core.game.global.action.DropItemHandler.drop(p, p.inventory[0])
+        setAttribute(p, "interact:option", "drop")
+        val canDrop = DropListener.drop(p, p.inventory[0])
         Assertions.assertEquals(false, canDrop)
     }
 }

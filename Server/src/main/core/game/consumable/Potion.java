@@ -28,7 +28,7 @@ public class Potion extends Drink {
         }
 
         final int initialLifePoints = player.getSkills().getLifepoints();
-        Consumables.getConsumableById(item.getId()).effect.activate(player);
+        Consumables.getConsumableById(item.getId()).getConsumable().effect.activate(player);
         if (messages.length == 0) {
             sendDefaultMessages(player, item);
         } else {

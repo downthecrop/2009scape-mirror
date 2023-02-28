@@ -289,6 +289,16 @@ public final class Location extends Node {
 		return locs;
 	}
 
+	public ArrayList<Location> getCardinalTiles() {
+		ArrayList<Location> locs = new ArrayList<>();
+
+		locs.add(transform(0, 1, 0));
+		locs.add(transform(0, -1, 0));
+		locs.add(transform(-1, 0, 0));
+		locs.add(transform(1, 0, 0));
+		return locs;
+	}
+
 	/**
 	 * Gets a square of 3 x 3 tiles as an ArrayList<Location>
 	 */

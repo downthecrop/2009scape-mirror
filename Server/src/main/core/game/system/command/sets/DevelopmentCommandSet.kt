@@ -2,6 +2,8 @@ package core.game.system.command.sets
 
 import content.global.activity.jobs.JobManager
 import content.global.skill.slayer.Master
+import core.api.removeAttribute
+import core.api.getItemName
 import core.api.sendMessage
 import core.cache.Cache
 import core.cache.def.impl.DataMap
@@ -195,6 +197,15 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
                         }
                     }
                 }
+            }
+        }
+
+        define("itemsearch") {player, args ->
+            val itemName = args.copyOfRange(1, args.size).joinToString(" ").lowercase()
+            for (i in 0 until 15000) {
+                val name = getItemName(i).lowercase()
+                if (name.contains(itemName) || itemName.contains(name))
+                    notify(player, "$i: $name")
             }
         }
     }

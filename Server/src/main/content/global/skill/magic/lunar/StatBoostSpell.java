@@ -40,7 +40,7 @@ public final class StatBoostSpell extends MagicSpell {
 	public boolean cast(Entity entity, Node target) {
 		final Player player = ((Player) entity);
 		Item item = ((Item) target);
-		final Potion potion = (Potion) Consumables.getConsumableById(item.getId());
+		final Potion potion = (Potion) Consumables.getConsumableById(item.getId()).getConsumable();
 		player.getInterfaceManager().setViewedTab(6);
 		if (potion == null) {
 			player.getPacketDispatch().sendMessage("You can only cast this spell on a potion.");

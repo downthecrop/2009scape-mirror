@@ -23,7 +23,7 @@ interface InteractionListener : ContentInterface{
     fun on(ids: IntArray, type: IntType, vararg option: String, handler: (player: Player, node: Node) -> Boolean){
         InteractionListeners.add(ids, type.ordinal, option, handler)
     }
-    fun on(option: String, type: IntType, handler: (player: Player, node: Node) -> Boolean){
+    @Deprecated("Don't use") fun on(option: String, type: IntType, handler: (player: Player, node: Node) -> Boolean){
         InteractionListeners.add(option, type.ordinal, handler)
     }
     fun on(type: IntType, vararg option: String, handler: (player: Player, node: Node) -> Boolean){
@@ -81,6 +81,17 @@ interface InteractionListener : ContentInterface{
         val name = this::class.java.name
         InteractionListeners.instantClasses.add(name)
     }
+
+    fun defineInteraction(type: IntType, ids: IntArray, vararg options: String, persistent: Boolean = false, allowedDistance: Int = 1, handler: (player: Player, node: Node, state: Int) -> Boolean) {
+        InteractionListeners.addMetadata(ids, type, options, InteractionMetadata(handler, allowedDistance, persistent))
+    }
+
+    fun defineInteraction(type: IntType, vararg options: String, persist: Boolean = false, allowedDistance: Int = 1, handler: (player: Player, node: Node, state: Int) -> Boolean) {
+        InteractionListeners.addGenericMetadata(options, type, InteractionMetadata(handler, allowedDistance, persist))
+    }
+
+    data class InteractionMetadata(val handler: (player: Player, node: Node, state: Int) -> Boolean, val distance: Int, val persist: Boolean)
+    data class UseWithMetadata(val handler: (player: Player, used: Node, with: Node, state: Int) -> Boolean, val distance: Int, val persist: Boolean)
 
     fun defineListeners()
 }

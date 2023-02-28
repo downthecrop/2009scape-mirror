@@ -1,5 +1,6 @@
 package core.game.node.entity.impl;
 
+import core.game.interaction.Clocks;
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.world.GameWorld;
@@ -121,7 +122,12 @@ public final class Animator {
 				animation.setId(-1);
 			}
 			this.animation = animation;
-			ticks = GameWorld.getTicks() + animation.getDuration();
+			if (animation.getId() != -1) {
+				ticks = GameWorld.getTicks() + animation.getDuration();
+			} else {
+				ticks = 0;
+			}
+			entity.clocks[Clocks.getANIMATION_END()] = ticks;
 			entity.getUpdateMasks().register(entity instanceof NPC ? new NPCAnimation(animation) : new AnimationFlag(animation));
 			priority = animation.getPriority();
 		}
@@ -151,6 +157,8 @@ public final class Animator {
 	 */
 	public void reset() {
 		animate(RESET_A);
+		entity.clocks[Clocks.getANIMATION_END()] = 0;
+		ticks = 0;
 	}
 
 	/**
@@ -158,7 +166,7 @@ public final class Animator {
 	 * @return {@code True} if so.
 	 */
 	public boolean isAnimating() {
-		return animation != null && ticks > GameWorld.getTicks();
+		return animation != null && animation.getId() != -1 && ticks > GameWorld.getTicks();
 	}
 
 	/**

@@ -20,9 +20,9 @@ private val BANK_CHESTS = intArrayOf(
  */
 class BankChestListener : InteractionListener {
     override fun defineListeners() {
-        on(BANK_CHESTS, IntType.SCENERY, "bank", "use") { player, node ->
+        defineInteraction(IntType.SCENERY, BANK_CHESTS,  "bank", "use") {player, node, state ->
             openBankAccount(player)
-            return@on true
+            return@defineInteraction true
         }
     }
 }

@@ -11,7 +11,7 @@ import core.plugin.Plugin;
 /**
  * Represents any item that has a consumption option such as 'Eat' or 'Drink'.
  */
-public abstract class Consumable implements Plugin<Object> {
+public abstract class Consumable {
 
 	/**
 	 * Represents the item IDs of all the variants of a consumable where the last one is often the empty container, if it has any.
@@ -58,7 +58,7 @@ public abstract class Consumable implements Plugin<Object> {
 			addItem(player, nextItemId, 1, Container.INVENTORY);
 		}
 		final int initialLifePoints = player.getSkills().getLifepoints();
-		Consumables.getConsumableById(item.getId()).effect.activate(player);
+		Consumables.getConsumableById(item.getId()).getConsumable().effect.activate(player);
 		sendMessages(player, initialLifePoints, item, messages);
 	}
 
@@ -98,17 +98,6 @@ public abstract class Consumable implements Plugin<Object> {
 
 	public String getFormattedName(Item item) {
 		return item.getName().replace("(4)", "").replace("(3)", "").replace("(2)", "").replace("(1)", "").trim().toLowerCase();
-	}
-
-	@Override
-	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		Consumables.add(this);
-		return this;
-	}
-
-	@Override
-	public Object fireEvent(String identifier, Object... args) {
-		return null;
 	}
 
 	public int getHealthEffectValue(Player player) {
