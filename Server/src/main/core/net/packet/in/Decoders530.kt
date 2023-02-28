@@ -1,5 +1,6 @@
 package core.net.packet.`in`
 
+import core.Util.clamp
 import core.game.node.entity.player.Player
 import core.net.packet.IoBuffer
 import core.tools.StringUtils
@@ -650,9 +651,11 @@ enum class Decoders530(val opcode: Int) {
     },
     CHAT_MESSAGE(237) {
         override fun decode(player: Player, buffer: IoBuffer): Packet {
-            val effects = buffer.short
+            val effectPrefix = clamp(buffer.get(), 0, 11)
+            val effectSuffix = clamp(buffer.get(), 0, 5)
             val numChars = buffer.smart
             val message = StringUtils.decryptPlayerChat(buffer, numChars)
+            val effects = (effectPrefix shl 8) or effectSuffix
             return Packet.ChatMessage(player, effects, message)
         }
     },

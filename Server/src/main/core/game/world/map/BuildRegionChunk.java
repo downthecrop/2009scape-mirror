@@ -13,6 +13,8 @@ import core.net.packet.out.ClearScenery;
 import core.net.packet.out.ConstructGroundItem;
 import core.net.packet.out.ConstructScenery;
 
+import java.util.Arrays;
+
 /**
  * A region chunk, used for easily modifying objects.
  * @author Emperor
@@ -23,7 +25,7 @@ public class BuildRegionChunk extends RegionChunk {
 	/**
 	 * The maximum amount of objects to be stored on one tile in the chunk.
 	 */
-	public static final int ARRAY_SIZE = 5;
+	public static final int ARRAY_SIZE = 10;
 
 	/**
 	 * The list of changes made.
@@ -39,13 +41,17 @@ public class BuildRegionChunk extends RegionChunk {
 	public BuildRegionChunk(Location base, int rotation, RegionPlane plane) {
 		super(base, rotation, plane);
 		this.objects = new Scenery[ARRAY_SIZE][8][8];
-        for (int x = 0; x < SIZE; x++) {
-            for (int y = 0; y < SIZE; y++) {
-                if(super.objects[x][y] != null) {
-                    this.objects[0][x][y] = new Scenery(super.objects[x][y]);
-                }
-            }
-        }
+	}
+
+	public BuildRegionChunk(Location base, int rotation, RegionPlane plane, Scenery[][] objects) {
+		this(base, rotation, plane);
+		for (int x = 0; x < SIZE; x++) {
+			for (int y = 0; y < SIZE; y++) {
+				if(objects[x][y] != null) {
+					this.objects[0][x][y] = new Scenery(objects[x][y]);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -139,6 +145,22 @@ public class BuildRegionChunk extends RegionChunk {
 			}
 		}
 		return chunk;
+	}
+
+	@Override public void rebuildFlags(RegionPlane from) {
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+				Location loc = currentBase.transform(x,y,0);
+				Location fromLoc = base.transform(x,y,0);
+				plane.getFlags().getLandscape()[loc.getLocalX()][loc.getLocalY()] = from.getFlags().getLandscape()[fromLoc.getLocalX()][fromLoc.getLocalY()];
+				plane.getFlags().clearFlag(x, y);
+				for (int i = 0; i < ARRAY_SIZE; i++) {
+					Scenery obj = objects[i][x][y];
+					if (obj != null)
+						LandscapeParser.applyClippingFlagsFor(plane, loc.getLocalX(), loc.getLocalY(), obj);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -283,5 +305,20 @@ public class BuildRegionChunk extends RegionChunk {
 	 */
 	public Scenery[][] getObjects(int index) {
 		return objects[index];
+	}
+
+	@Override
+	public void setCurrentBase(Location currentBase) {
+		for (int i = 0; i < objects.length; i++) {
+			for (int x = 0; x < objects[i].length; x++) {
+				for (int y = 0; y < objects[i][x].length; y++) {
+					if (objects[i][x][y] != null) {
+						Location newLoc = currentBase.transform(x, y, 0);
+						objects[i][x][y].setLocation(newLoc);
+					}
+				}
+			}
+		}
+		super.setCurrentBase(currentBase);
 	}
 }

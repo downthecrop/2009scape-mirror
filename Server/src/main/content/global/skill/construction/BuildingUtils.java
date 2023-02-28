@@ -201,7 +201,6 @@ public final class BuildingUtils {
 					for (int i = 7; i >= 0; i--) {
 						Item can = player.getInventory().getItem(new Item(WATERING_CAN - i, 1));
 						if (can != null && can.getSlot() > -1) {
-							System.out.println("Can index " + (i == 7 ? i + 2 : i + 1) + ".");
 							player.getInventory().replace(new Item(WATERING_CAN - (i == 7 ? i + 2 : i + 1), 1), can.getSlot());
 							break;
 						}

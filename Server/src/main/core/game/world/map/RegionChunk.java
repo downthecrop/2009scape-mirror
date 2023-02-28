@@ -83,7 +83,7 @@ public class RegionChunk {
 	 * @return The region chunk.
 	 */
 	public BuildRegionChunk copy(RegionPlane plane) {
-		return new BuildRegionChunk(base, rotation, plane);
+		return new BuildRegionChunk(base, rotation, plane, this.objects);
 	}
 
 	/**
@@ -363,6 +363,20 @@ public class RegionChunk {
 	 */
 	public void setCurrentBase(Location currentBase) {
 		this.currentBase = currentBase;
+	}
+
+	public void rebuildFlags(RegionPlane from) {
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+				Location loc = currentBase.transform(x,y,0);
+				Location fromLoc = base.transform(x,y,0);
+				plane.getFlags().getLandscape()[loc.getLocalX()][loc.getLocalY()] = from.getFlags().getLandscape()[fromLoc.getLocalX()][fromLoc.getLocalY()];
+				plane.getFlags().clearFlag(x, y);
+				Scenery obj = objects[x][y];
+				if (obj != null)
+					LandscapeParser.flagScenery(plane, loc.getLocalX(), loc.getLocalY(), obj, false, true);
+			}
+		}
 	}
 
 }

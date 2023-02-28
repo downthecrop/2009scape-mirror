@@ -396,10 +396,12 @@ public final class HouseManager {
 		houseRegion = getPreparedRegion();
 		configureRoofs();
 		prepareHouseChunks(style, houseRegion, buildingMode, rooms);
+		houseRegion.flagActive();
 
 		if (hasDungeon()) {
 			dungeonRegion = getPreparedRegion();
 			prepareDungeonChunks(style, dungeonRegion, houseRegion, buildingMode, rooms[3]);
+			dungeonRegion.flagActive();
 		}
 
 		ZoneBuilder.configure(zone);
@@ -411,6 +413,7 @@ public final class HouseManager {
 		DynamicRegion region = new DynamicRegion(-1, borders.getSouthWestX() >> 6, borders.getSouthWestY() >> 6);
 		region.setBorders(borders);
 		region.setUpdateAllPlanes(true);
+		region.setBuild(true);
 		RegionManager.addRegion(region.getId(), region);
 		return region;
 	}
@@ -428,8 +431,7 @@ public final class HouseManager {
 
 		@Override
 		public BuildRegionChunk getChunk(int x, int y, int plane, @NotNull DynamicRegion dyn) {
-			BuildRegionChunk chunk = rooms[plane][x][y].getChunk().copy(dyn.getPlanes()[plane]);
-			return chunk;
+			return rooms[plane][x][y].getChunk().copy(dyn.getPlanes()[plane]);
 		}
 
 		@Override

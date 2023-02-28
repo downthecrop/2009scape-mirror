@@ -34,6 +34,9 @@ public class Util {
 	public static double clamp(double input, double min, double max) {
 		return Math.max(Math.min(input, max), min);
 	}
+	public static int clamp(int input, int min, int max) {
+		return Math.max(Math.min(input, max), min);
+	}
 
 	public static long nextMidnight(long currentTime) {
 		Date date = new Date();

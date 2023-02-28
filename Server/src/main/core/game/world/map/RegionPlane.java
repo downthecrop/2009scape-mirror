@@ -139,6 +139,10 @@ public final class RegionPlane {
 		}
 		return chunks[chunkX][chunkY] = new RegionChunk(region.getBaseLocation().transform(chunkX << 3, chunkY << 3, plane), 0, this);
 	}
+
+	public void setRegionChunk(int chunkX, int chunkY, RegionChunk chunk) {
+		chunks[chunkX][chunkY] = chunk;
+	}
 	
 	/**
 	 * Removes a scenery.

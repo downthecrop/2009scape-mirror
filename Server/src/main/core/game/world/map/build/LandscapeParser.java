@@ -89,6 +89,22 @@ public final class LandscapeParser {
 	public static void flagScenery(RegionPlane plane, int localX, int localY, Scenery object, boolean landscape, boolean storeObjects) {
 		Region.load(plane.getRegion());
 		SceneryDefinition def = object.getDefinition();
+		object.setActive(true);
+		boolean add = storeObjects || !landscape || def.getChildObject(null).hasActions();
+		if (add) {
+			addPlaneObject(plane, object, localX, localY, landscape, storeObjects);
+		}
+
+		if (!applyClippingFlagsFor(plane, localX, localY, object))
+			return;
+
+		if (!storeObjects && !add && (!def.getChildObject(null).getName().equals("null"))) {
+			addPlaneObject(plane, object, localX, localY, landscape, false);
+		}
+	}
+
+	public static boolean applyClippingFlagsFor(RegionPlane plane, int localX, int localY, Scenery object) {
+		SceneryDefinition def = object.getDefinition();
 		int sizeX;
 		int sizeY;
 		if (object.getRotation() % 2 == 0) {
@@ -98,15 +114,6 @@ public final class LandscapeParser {
 			sizeX = def.sizeY;
 			sizeY = def.sizeX;
 		}
-		
-		object.setActive(true);
-		boolean add = storeObjects || !landscape || def.getChildObject(null).hasActions();
-		if (add) {
-			addPlaneObject(plane, object, localX, localY, landscape, storeObjects);
-		}
-		//		if (localX == 34 && localY == 32 && plane.getRegion().getId() == 14746) {
-		//			System.out.println(object + ", " + Arrays.toString(object.getDefinition().getOptions()) + ", " + object.getDefinition().projectileClipped);
-		//		}
 		int type = object.getType();
 		if (type == 22) { //Tile
 			plane.getFlags().getLandscape()[localX][localY] = true;
@@ -133,11 +140,9 @@ public final class LandscapeParser {
 				}
 			}
 		} else {
-			return;
+			return false;
 		}
-		if (!storeObjects && !add && (!def.getChildObject(null).getName().equals("null"))) {
-			addPlaneObject(plane, object, localX, localY, landscape, false);
-		}
+		return true;
 	}
 
 	/**

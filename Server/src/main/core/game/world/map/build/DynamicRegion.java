@@ -215,14 +215,18 @@ public final class DynamicRegion extends Region {
 		int regionX = ((regionId >> 8) & 0xFF) << 6;
 		int regionY = (regionId & 0xFF) << 6;
 		DynamicRegion region = new DynamicRegion(regionId, to.getRegionX() >> 3, to.getRegionY() >> 3);
+		Region base = RegionManager.forId(regionId);
+		Region.load(base);
 		for (int offsetX = 0; offsetX < 8; offsetX++) {
 			for (int offsetY = 0; offsetY < 8; offsetY++) {
 				int x = regionX + (offsetX << 3);
 				int y = regionY + (offsetY << 3);
 				for (int plane = 0; plane < 4; plane++) {
-					RegionChunk c = region.chunks[plane][offsetX][offsetY];
+					RegionChunk c = base.getPlanes()[plane].getRegionChunk(offsetX, offsetY);
 					if (c == null) {
 						region.chunks[plane][offsetX][offsetY] = c = new RegionChunk(Location.create(0, 0, 0), 0, region.getPlanes()[plane]);
+					} else {
+						region.replaceChunk(plane, offsetX, offsetY, (c = c.copy(region.getPlanes()[plane])), base);
 					}
 					c.setRotation(0);
 					c.setBase(Location.create(x, y, plane));
@@ -330,41 +334,11 @@ public final class DynamicRegion extends Region {
 				}
 			}
 		} else {
-			chunk.clear();
 			Region.load(fromRegion);
 			Location l = chunk.getBase();
-			chunk.setCurrentBase(getBaseLocation().transform(x << 3, y << 3, 0));
-			Location regionBase = fromRegion.getBaseLocation();
 			RegionPlane rp = fromRegion.getPlanes()[l.getZ()];
-			for (int i = 0; i < 8; i++) {
-				for (int j = 0; j < 8; j++) {
-					int toX = (x << 3) + i;
-					int toY = (y << 3) + j;
-					int fromX = (l.getX() - regionBase.getX()) + i;
-					int fromY = (l.getY() - regionBase.getY()) + j;
-					p.getFlags().getLandscape()[toX][toY] = rp.getFlags().getLandscape()[fromX][fromY];
-					p.getFlags().flag(fromX, fromY, rp.getFlags().getFlag(fromX, fromY));
-					p.getProjectileFlags().flag(fromX, fromY, rp.getFlags().getFlag(fromX, fromY));
-					Scenery[] objects = { rp.getChunkObject(fromX, fromY) };
-					RegionChunk ch = rp.getChunks()[fromX >> 3][fromY >> 3];
-					if (ch instanceof BuildRegionChunk) {
-						BuildRegionChunk bc = (BuildRegionChunk) ch;
-						objects = new Scenery[BuildRegionChunk.ARRAY_SIZE];
-						for (int k = 0; k < objects.length; k++) {
-							objects[k] = bc.get(i, j, k);
-						}
-					}
-					for (Scenery object : objects) {
-						if (object != null) {
-							object = object.transform(object.getId(), object.getRotation(), getBaseLocation().transform(toX, toY, 0));
-							LandscapeParser.flagScenery(p, toX, toY, object, false, true);//chunk instanceof BuildRegionChunk);//.addGameObject(object, true);
-						} else {
-							p.add(null, toX, toY, true);
-						}
-					}
-				}
-			}
-
+			chunk.setCurrentBase(getBaseLocation().transform(x << 3, y << 3, z));
+			chunk.rebuildFlags(rp);
 		}
 	}
 
