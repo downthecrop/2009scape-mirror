@@ -650,7 +650,16 @@ public class ItemDefinition extends Definition<Item> {
             Items.REGEN_BRACELET_11133,
 			Items.WARLOCK_CLOAK_14081,
 			Items.WARLOCK_LEGS_14077,
-			Items.WARLOCK_TOP_14076
+			Items.WARLOCK_TOP_14076,
+			Items.MONKS_ROBE_542,
+			Items.MONKS_ROBE_544,
+			Items.HAM_SHIRT_4298,
+			Items.HAM_ROBE_4300,
+			Items.HAM_HOOD_4302,
+			Items.HAM_CLOAK_4304,
+			Items.HAM_LOGO_4306,
+			Items.GLOVES_4308,
+			Items.BOOTS_4310
 	));
 	private static final HashSet<Integer> entranaBannedItems = new HashSet(Arrays.asList(
 			/**Items.BUTTERFLY_NET_10010, easing the restriction until barehanded implementation**/
