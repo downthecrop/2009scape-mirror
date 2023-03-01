@@ -96,7 +96,7 @@ public class FletchingPlugin extends UseWithHandler {
 		}
 
 		//handle logs
-		if(Fletching.isLog(event.getUsedItem().getId())) {
+		if(Fletching.isLog(event.getUsedItem().getId()) && event.getUsedWith().getId() == 946) {
 			final Item log = event.getUsedItem();
 			Item[] items = Fletching.getItems(log.getId());
 			SkillDialogue dialLength = SkillDialogue.ONE_OPTION;
