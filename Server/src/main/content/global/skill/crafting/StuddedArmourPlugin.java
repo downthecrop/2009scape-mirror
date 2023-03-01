@@ -71,7 +71,7 @@ public final class StuddedArmourPlugin extends UseWithHandler {
 	 * @version 1.0
 	 */
 	public enum StuddedArmour {
-		CHAPS(new Item(1095), new Item(1097), 18, 27), BODY(new Item(1129), new Item(1133), 14, 25);
+		CHAPS(new Item(1095), new Item(1097), 18, 27), BODY(new Item(1129), new Item(1133), 41, 40);
 
 		/**
 		 * Represents the unstudded item.
