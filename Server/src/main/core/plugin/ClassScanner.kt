@@ -16,6 +16,7 @@ import io.github.classgraph.ScanResult
 import core.game.bots.PlayerScripts
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
+import core.game.node.entity.npc.NPCBehavior
 import core.game.node.entity.player.info.login.PlayerSaveParser
 import core.game.node.entity.player.info.login.PlayerSaver
 import core.tools.SystemLogger
@@ -84,6 +85,7 @@ object ClassScanner {
                 if(clazz is InteractionListener) clazz.defineListeners().also { clazz.defineDestinationOverrides() }
                 if(clazz is InterfaceListener) clazz.defineInterfaceListeners()
                 if(clazz is Commands) clazz.defineCommands()
+                if(clazz is NPCBehavior) NPCBehavior.register(clazz.ids, clazz)
                 if(clazz is PersistPlayer) {
                     PlayerSaver.contentHooks.add(clazz)
                     PlayerSaveParser.contentHooks.add(clazz)

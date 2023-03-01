@@ -142,6 +142,8 @@ public class NPC extends Entity {
 	 */
 	private String forceTalk;
 
+	public final NPCBehavior behavior;
+
 	/**
 	 * Constructs a new {@code NPC} {@code Object}.
 	 * @param id The NPC id.
@@ -163,6 +165,7 @@ public class NPC extends Entity {
 		super.size = definition.size;
 		super.direction = direction;
 		super.interactPlugin = new InteractPlugin(this);
+		this.behavior = NPCBehavior.forId(id);
 	}
 
 	/**
@@ -225,6 +228,7 @@ public class NPC extends Entity {
 				npc.size = size;
 			}
 		}
+		behavior.onCreation(this);
 	}
 
 	@Override
@@ -233,6 +237,7 @@ public class NPC extends Entity {
 		Repository.removeRenderableNPC(this);
 		Repository.getNpcs().remove(this);
 		getViewport().setCurrentPlane(null);
+		behavior.onRemoval(this);
 		// getViewport().setRegion(null);
 	}
 
@@ -360,6 +365,7 @@ public class NPC extends Entity {
 	public void checkImpact(BattleState state) {
 		super.checkImpact(state);
 		Entity entity = state.getAttacker();
+		behavior.beforeDamageReceived(this, entity, state);
 		if (task != null && entity instanceof Player && task.levelReq > entity.getSkills().getStaticLevel(Skills.SLAYER)) {
 			state.neutralizeHits();
 		}
@@ -375,6 +381,8 @@ public class NPC extends Entity {
                 ((Player) entity).getPacketDispatch().sendMessage("You need a higher slayer level to know how to wound this monster.");
             }
 		}
+		if (!behavior.canBeAttackedBy(this, entity, style, message))
+			return false;
 		return super.isAttackable(entity, style, message);
 	}
 
@@ -395,6 +403,7 @@ public class NPC extends Entity {
 			return;
 		}
 		if (respawnTick == GameWorld.getTicks()) {
+			behavior.onRespawn(this);
 			onRespawn();
 		}
 		handleTickActions();
@@ -410,6 +419,8 @@ public class NPC extends Entity {
 	 * Handles the automatic actions of the NPC.
 	 */
 	public void handleTickActions() {
+		if (!behavior.tick(this))
+			return;
 		if (!getLocks().isInteractionLocked()) {
 			if (!getLocks().isMovementLocked()) {
 				if (
@@ -523,6 +534,12 @@ public class NPC extends Entity {
 		if (!isRespawn())
 			clear();
 		killer.dispatch(new NPCKillEvent(this));
+		behavior.onDeathFinished(this, killer);
+	}
+
+	@Override
+	public void commenceDeath(Entity killer) {
+		behavior.onDeathStarted(this, killer);
 	}
 
 	/**
@@ -580,7 +597,8 @@ public class NPC extends Entity {
 
 	@Override
 	public CombatSwingHandler getSwingHandler(boolean swing) {
-		return getProperties().getCombatPulse().getStyle().getSwingHandler();
+		CombatSwingHandler original = getProperties().getCombatPulse().getStyle().getSwingHandler();
+		return behavior.getSwingHandlerOverride(this, original);
 	}
 
 	/**

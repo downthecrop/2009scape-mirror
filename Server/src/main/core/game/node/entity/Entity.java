@@ -301,6 +301,9 @@ public abstract class Entity extends Node {
 	 * combat zone.
 	 */
 	public boolean isIgnoreMultiBoundaries(Entity victim) {
+		if (this instanceof NPC) {
+			return ((NPC) this).behavior.shouldIgnoreMultiRestrictions((NPC) this, victim);
+		}
 		return false;
 	}
 
@@ -337,6 +340,9 @@ public abstract class Entity extends Node {
 	public void onImpact(final Entity entity, BattleState state) {
 		if (DeathTask.isDead(this))
 			state.neutralizeHits();
+		if (this instanceof NPC) {
+			((NPC) this).behavior.afterDamageReceived((NPC) this, entity, state);
+		}
 		if (properties.isRetaliating() && !properties.getCombatPulse().isAttacking() && !getLocks().isInteractionLocked() && properties.getCombatPulse().getNextAttack() < GameWorld.getTicks()) {
 			if (!getWalkingQueue().hasPath() && !getPulseManager().isMovingPulse() || (this instanceof NPC)) {
 				properties.getCombatPulse().attack(entity);

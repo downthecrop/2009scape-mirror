@@ -92,6 +92,7 @@ public final class MultiwayCombatZone extends MapZone {
 		registerRegion(14939);//Kalphite Stronghold Cave
 		registerRegion(9532); //Isle north of Jatizso
 		registerRegion(10810); //Eastern rock crabs
+		registerRegion(12590); //desert bandits
 	}
 
 	@Override

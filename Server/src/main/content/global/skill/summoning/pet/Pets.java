@@ -229,7 +229,7 @@ public enum Pets {
 //	BABY_GOLD_CHINCHOMPA(14826, -1, -1, 8658, -1, -1, 0.0, 1),
 //	HERON(14827, -1, -1, 8647, -1, -1, 0.0, 1),
 //	TZREK_JAD(14828, -1, -1, 8650, -1, -1, 0.0, 1);
-	
+
 
 	/**
 	 * The baby pets mapping.
@@ -451,12 +451,12 @@ public enum Pets {
 	 */
 	public int getNpcId(int stage) {
 		switch (stage) {
-		case 0:
-			return babyNpcId;
-		case 1:
-			return grownNpcId;
-		case 2:
-			return overgrownNpcId;
+			case 0:
+				return babyNpcId;
+			case 1:
+				return grownNpcId;
+			case 2:
+				return overgrownNpcId;
 		}
 		return 0;
 	}
@@ -468,12 +468,12 @@ public enum Pets {
 	 */
 	public int getItemId(int stage) {
 		switch (stage) {
-		case 0:
-			return babyItemId;
-		case 1:
-			return grownItemId;
-		case 2:
-			return overgrownItemId;
+			case 0:
+				return babyItemId;
+			case 1:
+				return grownItemId;
+			case 2:
+				return overgrownItemId;
 		}
 		return 0;
 	}
