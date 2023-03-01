@@ -29,6 +29,9 @@ public final class RollingBlock implements MovementHook {
 		final boolean fail = backwards || AgilityHandler.hasFailed(player, 2, 0.3);
 		player.lock(5);
 		AgilityPyramidCourse.addConfig(player, stone, 1, false);
+		player.getAudioManager().send(1396);
+		player.getAudioManager().send(2469, 10 , 40);
+
 		if(e.isPlayer())
 		{
 			((Player) e).logoutListeners.put("rolling-block", p -> {
