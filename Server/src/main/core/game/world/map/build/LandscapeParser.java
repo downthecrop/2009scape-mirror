@@ -47,7 +47,7 @@ public final class LandscapeParser {
 				int z = location >> 12;
 				r.setObjectCount(r.getObjectCount() + 1);
 				if (x < 0 || y < 0 || x >= 64 || y >= 64) {
-					System.out.println("Object out of bounds: " + objectId + " - " + x + ", " + y + ", " + z);
+
 				} else {
 					if ((mapscape[1][x][y] & 0x2) == 2) {
 						z--;

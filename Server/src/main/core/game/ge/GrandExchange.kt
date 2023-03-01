@@ -11,6 +11,7 @@ import core.game.system.command.Privilege
 import core.game.system.config.ItemConfigParser
 import core.game.world.GameWorld
 import core.game.world.repository.Repository
+import core.tools.Log
 import core.tools.colorize
 import java.lang.Integer.max
 import java.util.concurrent.LinkedBlockingDeque
@@ -218,7 +219,7 @@ class GrandExchange : StartupListener, Commands {
 
             if ( offer.offerState != OfferState.PENDING || offer.uid != 0L )
             {
-                SystemLogger.logWarn(this::class.java, "[GE] DISPATCH FAILURE: ${offer.offerState.name}, UID: ${offer.uid}")
+                log(this::class.java, Log.WARN,  "[GE] DISPATCH FAILURE: ${offer.offerState.name}, UID: ${offer.uid}")
                 return false
             }
 

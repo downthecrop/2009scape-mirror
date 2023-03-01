@@ -1,7 +1,9 @@
 package core.game.system.config
 
 import core.ServerConstants
+import core.api.log
 import core.game.component.ComponentDefinition
+import core.tools.Log
 import core.tools.SystemLogger
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
@@ -24,6 +26,6 @@ class InterfaceConfigParser{
             ComponentDefinition.getDefinitions()[id] = ComponentDefinition().parse(e["interfaceType"].toString(),e["walkable"].toString(),e["tabIndex"].toString())
             count++
         }
-        SystemLogger.logInfo(this::class.java, "Parsed $count interface configs.")
+        log(this::class.java, Log.FINE,  "Parsed $count interface configs.")
     }
 }

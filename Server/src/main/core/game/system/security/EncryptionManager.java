@@ -19,15 +19,15 @@ public class EncryptionManager {
 		
 		  String pass = "lugi";
 		  String salt = BCrypt.gensalt(workload);
-		  System.out.println("pw=" + SystemManager.getEncryption().hashPassword(pass,  salt)); System.out.println("Salt=" + salt);
+
 		 
-		// System.out.println(BCrypt.checkpw("yes",
+
 		// "$2a$12$N3jCPMPEZTisbMf7PG9O7ePgTQEJjhNXGHOJ9zvovT8ibY3Uk.Xlm"));
 		String hash = "$2a$12$N3jCPMPEZTisbMf7PG9O7ePgTQEJjhNXGHOJ9zvovT8ibY3Uk.Xlm";
 	 salt = hash.substring(0, 29);
-		System.out.println("salt=" + salt);
+
 		String hsh = hash.substring(29, hash.length());
-		System.out.println("hash=" + hsh);
+
 	}
 
 	/**
@@ -105,8 +105,8 @@ public class EncryptionManager {
 	 * </code> <p> To check whether a plaintext password matches one that has
 	 * been hashed previously, use the checkpw method: <p> <code> if
 	 * (BCrypt.checkpw(candidate_password, stored_hash))<br />
-	 * &nbsp;&nbsp;&nbsp;&nbsp;System.out.println("It matches");<br /> else<br
-	 * /> &nbsp;&nbsp;&nbsp;&nbsp;System.out.println("It does not match");<br />
+
+
 	 * </code> <p> The gensalt() method takes an optional parameter (log_rounds)
 	 * that determines the computational complexity of the hashing: <p> <code>
 	 * String strong_salt = BCrypt.gensalt(10)<br /> String stronger_salt =

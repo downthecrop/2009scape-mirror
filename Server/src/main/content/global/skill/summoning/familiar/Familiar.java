@@ -23,6 +23,7 @@ import core.game.world.map.zone.ZoneRestriction;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
+import core.tools.Log;
 import core.tools.RandomFunction;
 import core.game.node.entity.combat.CombatPulse;
 import core.game.node.entity.combat.CombatSwingHandler;
@@ -32,6 +33,8 @@ import content.global.skill.summoning.SummoningPouch;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Represents a familiar.
@@ -579,7 +582,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 			face(owner);
 		}
 		if (!isRenderable() && owner.isActive()) {
-			// SystemLogger.logErr(this.getClass(), "Familiar in inactive region!");
+			// log(this.getClass(), Log.ERR,  "Familiar in inactive region!");
 			getWalkingQueue().update();
 			getUpdateMasks().prepare(this);
 		}
@@ -628,7 +631,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		for (int id : getIds()) {
 			if (FamiliarManager.getFamiliars().containsKey(id)) {
-				SystemLogger.logErr(this.getClass(), "Familiar " + id + " was already registered!");
+				log(this.getClass(), Log.ERR,  "Familiar " + id + " was already registered!");
 				return null;
 			}
 			FamiliarManager.getFamiliars().put(id, this);

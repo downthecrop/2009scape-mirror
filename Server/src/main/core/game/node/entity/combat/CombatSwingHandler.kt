@@ -11,6 +11,7 @@ import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.prayer.PrayerType
 import core.game.node.entity.skill.Skills
 import content.global.skill.summoning.familiar.Familiar
+import core.api.log
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
@@ -21,6 +22,7 @@ import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import core.tools.SystemLogger
 import core.game.system.config.ItemConfigParser
+import core.tools.Log
 import java.util.*
 import kotlin.math.floor
 
@@ -187,7 +189,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
         val block = floor(101 - ratio)
         val acc = Math.random() * accuracy
         val def = Math.random() * block
-        return (acc > def).also { if(entity?.username?.toLowerCase() == "test10") SystemLogger.logInfo(this::class.java, "Should hit: $it") }
+        return (acc > def).also { if(entity?.username?.toLowerCase() == "test10") log(this::class.java, Log.FINE,  "Should hit: $it") }
     }
 
     /**
@@ -597,7 +599,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
             specialHandlers = HashMap()
         }
         if (specialHandlers!!.containsKey(itemId)) {
-            SystemLogger.logErr(this::class.java, "Already contained special attack handler for item " + itemId + " - [old=" + specialHandlers!![itemId]!!::class.java.simpleName + ", new=" + handler.javaClass.simpleName + "].")
+            log(this::class.java, Log.ERR,  "Already contained special attack handler for item " + itemId + " - [old=" + specialHandlers!![itemId]!!::class.java.simpleName + ", new=" + handler.javaClass.simpleName + "].")
             return false
         }
         return specialHandlers!!.put(itemId, handler) == null

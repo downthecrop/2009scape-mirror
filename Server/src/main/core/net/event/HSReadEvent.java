@@ -4,12 +4,15 @@ import core.net.IoReadEvent;
 import core.net.IoSession;
 import core.net.lobby.WorldList;
 import core.net.registry.AccountRegister;
+import core.tools.Log;
 import core.tools.RandomFunction;
 import core.tools.SystemLogger;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Handles handshake read events.
@@ -47,7 +50,7 @@ public final class HSReadEvent extends IoReadEvent {
 			int revision = buffer.getInt();
 			//int sub_revision = buffer.getInt();
 			buffer.flip();
-			System.out.println(buffer.limit());
+
 			if (revision != 530 ){//|| sub_revision != Constants.CLIENT_BUILD) {
 				session.disconnect();
 				break;
@@ -64,7 +67,7 @@ public final class HSReadEvent extends IoReadEvent {
 			WorldList.sendUpdate(session, updateStamp);
 			break;
 		default:
-			SystemLogger.logInfo(this.getClass(), "PKT " + opcode);
+			log(this.getClass(), Log.FINE, "PKT " + opcode);
 			session.disconnect();
 			break;
 		}

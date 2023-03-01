@@ -1,7 +1,9 @@
 package core.net.packet
 
+import core.api.log
 import core.api.tryPop
 import core.net.packet.out.*
+import core.tools.Log
 import core.tools.SystemLogger
 import java.io.PrintWriter
 import java.io.StringWriter
@@ -10,7 +12,7 @@ import java.util.concurrent.locks.ReentrantLock
 
 class PacketWriteQueue {
     companion object {
-        private val packetsToWrite = LinkedList<QueuedPacket<*>?>()
+        private val packetsToWrite = LinkedList<QueuedPacket<*>>()
 
         @JvmStatic
         fun <T> handle(packet: OutgoingPacket<T>, context: T) {
@@ -27,6 +29,10 @@ class PacketWriteQueue {
 
         @JvmStatic
         fun <T> push(packet: OutgoingPacket<T>, context: T) {
+            if (context == null) {
+                log(this::class.java, Log.ERR,  "${packet::class.java.simpleName} tried to queue with a null context!")
+                return
+            }
             packetsToWrite.add(QueuedPacket(packet, context))
         }
 
@@ -41,7 +47,7 @@ class PacketWriteQueue {
                     write(pkt.out, pkt.context)
                 } catch (e: Exception) {
                     e.printStackTrace(pw)
-                    SystemLogger.logErr(this::class.java, "Error flushing packet ${pkt.out::class.java}: $sw")
+                    log(this::class.java, Log.ERR,  "Error flushing packet ${pkt.out::class.java}: $sw")
                     continue
                 }
             }

@@ -150,7 +150,7 @@ public final class AnimationDefinition {
 								} else if (opcode == 14) {
 									aBoolean2141 = true;
 								} else {
-									System.out.println("Unhandled animation opcode " + opcode);
+
 								}
 							} else
 								anInt2162 = buffer.get() & 0xFF;

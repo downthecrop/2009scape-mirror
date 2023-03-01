@@ -1,5 +1,6 @@
 package core.net.event;
 
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.net.IoReadEvent;
 import core.net.IoSession;
@@ -9,6 +10,8 @@ import core.net.packet.in.Decoders530;
 import core.net.packet.in.Packet;
 
 import java.nio.ByteBuffer;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Handles game packet reading.
@@ -65,9 +68,6 @@ public final class GameReadEvent extends IoReadEvent {
 			if (session == null || session.getPlayer() == null) {
 				continue;
 			}
-			if (opcode >= PACKET_SIZES.length) {
-				break;
-			}
 			int header = PACKET_SIZES[opcode];
 			int size = header;
 			if (header < 0) {
@@ -93,16 +93,20 @@ public final class GameReadEvent extends IoReadEvent {
 			byte[] data = new byte[size];
 			buffer.get(data);
 			IoBuffer buf = new IoBuffer(opcode, null, ByteBuffer.wrap(data));
-			//SystemLogger.log("Packet opcode " + opcode + "received.");
-			//IncomingPacket packet = PacketRepository.getIncoming(opcode);
 			session.setLastPing(System.currentTimeMillis());
 			last = opcode;
 
+			//Authentic per-player per-tick limit on inbound packets
+			if (session.getPlayer().opCounts[opcode]++ >= 10) {
+				log(this.getClass(), Log.FINE, "Skipping packet " + opcode + " because already received more than 10!");
+				return;
+			}
+
 			Packet processed = Decoders530.process(session.getPlayer(), opcode, buf);
 			if (processed instanceof Packet.UnhandledOp) {
-				SystemLogger.logWarn(this.getClass(), "Unhandled opcode: " + opcode);
+				log(this.getClass(), Log.WARN,  "Unhandled opcode: " + opcode);
 			} else if (processed instanceof Packet.DecodingError) {
-				SystemLogger.logErr(this.getClass(), ((Packet.DecodingError) processed).getMessage());
+				log(this.getClass(), Log.ERR,  ((Packet.DecodingError) processed).getMessage());
 			} else if (!(processed instanceof Packet.NoProcess)) {
 				PacketProcessor.enqueue(processed);
 			}
@@ -133,9 +137,9 @@ public final class GameReadEvent extends IoReadEvent {
 			return buffer.getShort() & 0xFFFF;
 		}
 		if(header == -3){
-			System.out.println(buffer.remaining());
+
 		}
-		SystemLogger.logErr(this.getClass(), "Invalid packet [opcode=" + opcode + ", last=" + last + ", queued=" + usedQueuedBuffer + "], header=" + header+"!");
+		log(this.getClass(), Log.ERR,  "Invalid packet [opcode=" + opcode + ", last=" + last + ", queued=" + usedQueuedBuffer + "], header=" + header+"!");
 		return -1;
 	}
 

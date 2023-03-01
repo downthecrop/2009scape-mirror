@@ -1,6 +1,8 @@
 package core.game.system.config
 
 import core.ServerConstants
+import core.api.log
+import core.tools.Log
 import core.tools.SystemLogger
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
@@ -31,7 +33,7 @@ class DoorConfigLoader {
             DOORS[door.id] = door
             count++
         }
-        SystemLogger.logInfo(this::class.java, "Parsed $count door configs.")
+        log(this::class.java, Log.FINE,  "Parsed $count door configs.")
     }
 
 

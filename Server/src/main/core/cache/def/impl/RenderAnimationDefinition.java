@@ -1,6 +1,7 @@
 package core.cache.def.impl;
 
 import core.cache.Cache;
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.world.GameWorld;
 
@@ -8,6 +9,8 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.nio.ByteBuffer;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Holds definitions for render animations.
@@ -72,7 +75,7 @@ public class RenderAnimationDefinition {
 		if (data != null) {
 			defs.parse(ByteBuffer.wrap(data));
 		} else {
-			SystemLogger.logErr(RenderAnimationDefinition.class, "No definitions found for render animation " + animId + ", size=" + Cache.getIndexes()[2].getFilesSize(32) + "!");
+			log(RenderAnimationDefinition.class, Log.ERR, "No definitions found for render animation " + animId + ", size=" + Cache.getIndexes()[2].getFilesSize(32) + "!");
 		}
 		return defs;
 	}
@@ -291,7 +294,7 @@ public class RenderAnimationDefinition {
 	public static void main(String...args) throws Throwable {
 		GameWorld.prompt(false);
 		RenderAnimationDefinition def = RenderAnimationDefinition.forId(1426);
-		System.out.println("size: " + def.getClass().getDeclaredFields().length);
+
 		for (Field f : def.getClass().getDeclaredFields()) {
 			if (!Modifier.isStatic(f.getModifiers())) {
 				if (f.getType().isArray()) {
@@ -305,7 +308,7 @@ public class RenderAnimationDefinition {
 						continue;
 					}
 				}
-				System.out.println(f.getName() + ", " + f.get(def));
+
 			}
 		}
 		for (Field f : def.getClass().getSuperclass().getDeclaredFields()) {
@@ -321,7 +324,7 @@ public class RenderAnimationDefinition {
 						continue;
 					}
 				}
-				System.out.println(f.getName() + ", " + f.get(def));
+
 			}
 		}
 	}

@@ -1,6 +1,8 @@
 package core.game.system.config
 
 import core.ServerConstants
+import core.api.log
+import core.tools.Log
 import core.tools.SystemLogger
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
@@ -13,9 +15,9 @@ class XteaParser {
         val REGION_XTEA = HashMap<Int,IntArray>()
         val DEFAULT_REGION_KEYS = intArrayOf(14881828, -6662814, 58238456, 146761213)
         fun getRegionXTEA(regionId: Int): IntArray? { //Uses the xtea's from the sql to unlock regions
-            //		System.out.println("USING SQL REGION KEYS");//Confirms we have unlocked those regions
+
             return  REGION_XTEA[regionId]
-                    ?: //			System.out.println("USING DEFAULT REGION KEYS FOR REGION " + regionId);//Used to check for missing regions
+
                     return DEFAULT_REGION_KEYS //This one grabs the keys from the SQL
             //		return DEFAULT_REGION_KEYS;//This one only uses the default keys at the top,{ 14881828, -6662814, 58238456, 146761213 }. Unsure why they chose these numbers.
         }
@@ -36,6 +38,6 @@ class XteaParser {
             REGION_XTEA[id] = intArrayOf(keys[0],keys[1],keys[2],keys[3])
             count++
         }
-        SystemLogger.logInfo(this::class.java, "Parsed $count region keys.")
+        log(this::class.java, Log.FINE,  "Parsed $count region keys.")
     }
 }

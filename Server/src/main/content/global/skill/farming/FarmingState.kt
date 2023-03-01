@@ -73,7 +73,6 @@ class FarmingState(player: Player? = null) : State(player) {
                 val cBin = CompostBins.values()[binOrdinal]
                 val b = cBin.getBinForPlayer(player)
                 b.parse(bin["binData"] as JSONObject)
-                SystemLogger.logErr(this::class.java, "bin size " + binMap.size)
             }
         }
         if(_data.containsKey("farming-patches")){

@@ -25,7 +25,7 @@ public final class JS5ReadEvent extends IoReadEvent {
 	public void read(IoSession session, ByteBuffer buffer) {
 		while (buffer.hasRemaining()) {
 			int opcode = buffer.get() & 0xFF;
-			//System.out.println("JS5 initiated! Opcode: " + opcode);
+
 			if (buffer.remaining() < 3) {
 				queueBuffer(opcode);
 				return;
@@ -34,11 +34,11 @@ public final class JS5ReadEvent extends IoReadEvent {
 			case 0:
 			case 1:
 				int request = ByteBufferUtils.getMedium(buffer);
-				//System.out.println("Requested file " + request);
+
 				int container = request >> 16 & 0xFF;
-				//System.out.println("In container " + container);
+
 				int archive = request & 0xFFFF;
-				//System.out.println("In archive " + archive);
+
 				session.getJs5Queue().queue(container, archive, opcode == 1);
 				break;
 			case 2: // music
@@ -71,7 +71,7 @@ public final class JS5ReadEvent extends IoReadEvent {
 				session.disconnect();
 				return;
 			default:
-				System.out.println("Unhandled JS5 opcode " + opcode + "!");
+
 				buffer.get();
 				buffer.getShort();
 				break;

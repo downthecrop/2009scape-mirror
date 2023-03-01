@@ -13,8 +13,11 @@ import core.game.world.update.flag.player.FaceLocationFlag;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.InteractionOptionContext;
 import core.net.packet.out.InteractionOption;
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.world.GameWorld;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Handles interaction between nodes.
@@ -85,7 +88,7 @@ public class InteractPlugin {
 			player.dispatch(new InteractionEvent(node, option.getName().toLowerCase()));
 		} catch (Exception e){
 			e.printStackTrace();
-			SystemLogger.logErr(this.getClass(), this.getClass().getName() + e.getMessage());
+			log(this.getClass(), Log.ERR,  this.getClass().getName() + e.getMessage());
 		}
 	}
 
@@ -118,7 +121,7 @@ public class InteractPlugin {
 					}
 				} catch (Exception e){
 					e.printStackTrace();
-					SystemLogger.logErr(this.getClass(), this.getClass().getName() + e.getMessage());
+					log(this.getClass(), Log.ERR,  this.getClass().getName() + e.getMessage());
 				}
 				return true;
 			}
@@ -149,7 +152,7 @@ public class InteractPlugin {
 						player.getPacketDispatch().sendMessage("Nothing interesting happens.");
 					} catch (Exception e){
 						e.printStackTrace();
-						SystemLogger.logErr(this.getClass(), this.getClass().getName() + e.getMessage());
+						log(this.getClass(), Log.ERR,  this.getClass().getName() + e.getMessage());
 					}
 					return true;
 				}
@@ -187,7 +190,7 @@ public class InteractPlugin {
 					}
 				} catch (Exception e){
 					e.printStackTrace();
-					SystemLogger.logErr(this.getClass(), this.getClass().getName() + e.getMessage());
+					log(this.getClass(), Log.ERR,  this.getClass().getName() + e.getMessage());
 				}
 				return true;
 			}

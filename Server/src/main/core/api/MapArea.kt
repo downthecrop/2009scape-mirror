@@ -14,10 +14,10 @@ import core.game.world.map.zone.ZoneRestriction
 interface MapArea : ContentInterface {
     var zone: MapZone
         get(){
-            return zoneMaps[this.javaClass.simpleName + "MapArea"]!!
+            return zoneMaps[this::class.java.simpleName + "MapArea"]!!
         }
         set(value) {
-            zoneMaps[this.javaClass.simpleName + "MapArea"] = value
+            zoneMaps[this::class.java.simpleName + "MapArea"] = value
         }
 
     fun defineAreaBorders() : Array<ZoneBorders>

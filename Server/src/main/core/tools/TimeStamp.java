@@ -51,7 +51,7 @@ public final class TimeStamp {
 		long current = System.currentTimeMillis();
 		long difference = current - interval;
 		if (debug || difference > 100) {
-			System.out.println("Interval " + info + " - time elapsed=" + difference + "ms.");
+
 		}
 		interval = current;
 		return difference;
@@ -65,7 +65,7 @@ public final class TimeStamp {
 		long current = System.currentTimeMillis();
 		long difference = current - start;
 		if (debug) {
-			System.out.println("Interval " + info + " - time elapsed=" + difference + "ms.");
+
 		}
 		return difference;
 	}

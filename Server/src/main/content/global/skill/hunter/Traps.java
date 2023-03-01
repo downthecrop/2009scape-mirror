@@ -5,12 +5,15 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Represents a trap type.
@@ -101,7 +104,7 @@ public enum Traps {
 			return;
 		}
 		if (instance.getWrapper(object) == null) {
-			SystemLogger.logErr(this.getClass(), "NO WRAPPER (HUNTER DISMANTLE)");
+			log(this.getClass(), Log.ERR,  "NO WRAPPER (HUNTER DISMANTLE)");
 			return;
 		}
 		player.faceLocation(object.getLocation());

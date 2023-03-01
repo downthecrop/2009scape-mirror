@@ -1,5 +1,6 @@
 package core.game.system.command.sets
 
+import core.api.log
 import core.cache.Cache
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
@@ -9,6 +10,7 @@ import core.tools.SystemLogger
 import core.game.system.command.CommandPlugin
 import core.plugin.Initializable
 import core.game.system.command.Privilege
+import core.tools.Log
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 
@@ -68,7 +70,7 @@ class SpawnCommandSet : CommandSet(Privilege.ADMIN){
             }
             val `object` = if (args.size > 3) Scenery(CommandPlugin.toInteger(args[1]!!), player!!.location, CommandPlugin.toInteger(args[2]!!), CommandPlugin.toInteger(args[3]!!)) else if (args.size == 3) Scenery(CommandPlugin.toInteger(args[1]!!), player!!.location, CommandPlugin.toInteger(args[2]!!)) else Scenery(CommandPlugin.toInteger(args[1]!!), player!!.location)
             SceneryBuilder.add(`object`)
-            SystemLogger.logInfo(this::class.java, "object = $`object`")
+            log(this::class.java, Log.FINE,  "object = $`object`")
         }
 
         define("objectgrid") { player, args ->

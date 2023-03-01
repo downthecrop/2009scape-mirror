@@ -1,7 +1,9 @@
 package core.game.world
 
+import core.api.log
 import core.game.system.task.Pulse
 import core.game.bots.GeneralBotCreator
+import core.tools.Log
 import core.tools.SystemLogger
 import java.util.concurrent.LinkedBlockingQueue
 
@@ -26,7 +28,7 @@ class PulseRunner {
                         pulses.add(pulse)
                     }
                 } catch (e: Exception) {
-                    SystemLogger.logErr(this::class.java, "Pulse execution error. Stack trace below.")
+                    log(this::class.java, Log.ERR,  "Pulse execution error. Stack trace below.")
                     e.printStackTrace()
                 }
             }
@@ -46,15 +48,15 @@ class PulseRunner {
     private fun notifyIfTooLong(pulse: Pulse, elapsedTime: Long) {
         if (elapsedTime >= 100) {
             if (pulse is GeneralBotCreator.BotScriptPulse) {
-                SystemLogger.logWarn(this::class.java, "CRITICALLY long bot-script tick - ${pulse.botScript.javaClass.name} took $elapsedTime ms")
+                log(this::class.java, Log.WARN,  "CRITICALLY long bot-script tick - ${pulse.botScript.javaClass.name} took $elapsedTime ms")
             } else {
-                SystemLogger.logWarn(this::class.java, "CRITICALLY long running pulse - ${pulse.javaClass.name} took $elapsedTime ms")
+                log(this::class.java, Log.WARN,  "CRITICALLY long running pulse - ${pulse.javaClass.name} took $elapsedTime ms")
             }
         } else if (elapsedTime >= 30) {
             if (pulse is GeneralBotCreator.BotScriptPulse) {
-                SystemLogger.logWarn(this::class.java, "Long bot-script tick - ${pulse.botScript.javaClass.name} took $elapsedTime ms")
+                log(this::class.java, Log.WARN,  "Long bot-script tick - ${pulse.botScript.javaClass.name} took $elapsedTime ms")
             } else {
-                SystemLogger.logWarn(this::class.java, "Long running pulse - ${pulse.javaClass.name} took $elapsedTime ms")
+                log(this::class.java, Log.WARN,  "Long running pulse - ${pulse.javaClass.name} took $elapsedTime ms")
             }
         }
     }

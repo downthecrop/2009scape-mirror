@@ -1,5 +1,6 @@
 package content.global.skill.hunter.tracking
 
+import core.api.log
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.scenery.Scenery
@@ -14,6 +15,7 @@ import core.tools.RandomFunction
 import org.rs09.consts.Items
 import core.tools.SystemLogger
 import core.game.world.GameWorld
+import core.tools.Log
 import java.util.*
 
 /**
@@ -50,7 +52,7 @@ abstract class HunterTracking : OptionHandler(){
         val trail = player.getAttribute(attribute, ArrayList<TrailDefinition>())
         val initialTrail = getInitialTrail(startobj)
         if(initialTrail == null) {
-            SystemLogger.logWarn(this::class.java, "UNHANDLED STARTING OBJECT FOR HUNTER TRACKING $startobj")
+            log(this::class.java, Log.WARN,  "UNHANDLED STARTING OBJECT FOR HUNTER TRACKING $startobj")
             return
         }
         trail.add(initialTrail)

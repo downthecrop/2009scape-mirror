@@ -1,17 +1,20 @@
 package core.game.node.entity.player.info.login
 
+import content.global.skill.summoning.familiar.BurdenBeast
+import content.global.skill.summoning.pet.Pet
+import core.ServerConstants
 import core.api.PersistPlayer
+import core.api.log
 import core.game.container.Container
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.IronmanMode
 import core.game.node.entity.skill.Skills
-import content.global.skill.summoning.familiar.BurdenBeast
-import content.global.skill.summoning.pet.Pet
+import core.tools.Log
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
-import core.ServerConstants
-import core.tools.SystemLogger
 import java.io.File
 import java.io.FileWriter
 import java.io.IOException
@@ -59,24 +62,31 @@ class PlayerSaver (val player: Player){
     }
     fun save() = runBlocking {
         if (!player.details.saveParsed) return@runBlocking
-        val manager = ScriptEngineManager()
-        val scriptEngine = manager.getEngineByName("JavaScript")
-        if (scriptEngine == null) {
-            SystemLogger.logErr(this::class.java, "Cannot save: Failed to load ScriptEngineManager, this is a known issue on non Java-11 versions. Set your Java version to 11 to avoid further bugs!")
-            return@runBlocking
-        }
-        scriptEngine.put("jsonString", populate().toJSONString())
-        scriptEngine.eval("result = JSON.stringify(JSON.parse(jsonString), null, 2)")
-        val prettyPrintedJson = scriptEngine["result"] as String
+        val json: String
+        if (ServerConstants.JAVA_VERSION < 11) {
+            val manager = ScriptEngineManager()
+            val scriptEngine = manager.getEngineByName("JavaScript")
+            if (scriptEngine == null) {
+                log(this::class.java, Log.ERR, "Cannot save: Failed to load ScriptEngineManager, this is a known issue on non Java-11 versions. Set your Java version to 11 to avoid further bugs!")
+                return@runBlocking
+            }
+            scriptEngine.put("jsonString", populate().toJSONString())
+            scriptEngine.eval("result = JSON.stringify(JSON.parse(jsonString), null, 2)")
+            json = scriptEngine["result"] as String
+        } else json = populate().toJSONString()
 
         try {
             if(!File("${ServerConstants.PLAYER_SAVE_PATH}${player.name}.json").exists()){
                 File("${ServerConstants.PLAYER_SAVE_PATH}").mkdirs()
-                File("${ServerConstants.PLAYER_SAVE_PATH}${player.name}.json").createNewFile()
+                withContext(Dispatchers.IO) {
+                    File("${ServerConstants.PLAYER_SAVE_PATH}${player.name}.json").createNewFile()
+                }
             }
-            FileWriter("${ServerConstants.PLAYER_SAVE_PATH}${player.name}.json").use { file ->
-                file.write(prettyPrintedJson)
-                file.flush()
+            withContext(Dispatchers.IO) {
+                FileWriter("${ServerConstants.PLAYER_SAVE_PATH}${player.name}.json").use { file ->
+                    file.write(json)
+                    file.flush()
+                }
             }
         } catch (e: IOException) {
             e.printStackTrace()
@@ -106,7 +116,7 @@ class PlayerSaver (val player: Player){
                     is Short -> "short"
                     is String -> "str"
                     is Byte -> "byte"
-                    else -> "null".also { SystemLogger.logWarn(this::class.java, "Invalid attribute type for key: $key in PlayerSaver.kt Line 115") }
+                    else -> "null".also { log(this::class.java, Log.WARN,  "Invalid attribute type for key: $key in PlayerSaver.kt Line 115") }
                 }
                 attr.put("type",type)
                 attr.put("key",key)

@@ -131,7 +131,7 @@ public final class MusicPlayer {
 			int listIndex = entry.getIndex();
 			int index = (listIndex + 1) / 32;
 			if (index >= CONFIG_IDS.length) {
-				System.out.println("Index out of range [index=" + index + ", list=" + listIndex + ", id=" + entry.getId() + ", name=" + entry.getName() + "].");
+
 				continue;
 			}
 			values[index] |= 1 << (listIndex - (index * 32));
@@ -188,7 +188,7 @@ public final class MusicPlayer {
 	public void unlock(int id, boolean play) {
 		MusicEntry entry = MusicEntry.forId(id);
 		if (entry == null) {
-//			System.out.println("Could not find music entry for id " + id + "!");
+
 			return;
 		}
 		if (!unlocked.containsKey(entry.getIndex())) {

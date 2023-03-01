@@ -5,6 +5,8 @@ import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import core.ServerConstants
+import core.api.log
+import core.tools.Log
 import core.tools.SystemLogger
 import java.io.FileReader
 
@@ -30,6 +32,6 @@ class CustomVarbitParser {
             count++
         }
 
-        SystemLogger.logInfo(this::class.java, "Parsed $count custom varbit definitions.")
+        log(this::class.java, Log.FINE,  "Parsed $count custom varbit definitions.")
     }
 }

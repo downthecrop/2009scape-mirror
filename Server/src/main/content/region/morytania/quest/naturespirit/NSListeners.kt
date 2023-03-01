@@ -19,6 +19,7 @@ import core.game.interaction.IntType
 import content.region.morytania.handlers.MortMyreGhastNPC
 import core.tools.SystemLogger
 import core.tools.END_DIALOGUE
+import core.tools.Log
 
 class NSListeners : InteractionListener {
 
@@ -114,7 +115,7 @@ class NSListeners : InteractionListener {
         }
 
         on(WASHING_BOWL, IntType.GROUNDITEM, "take"){ player, node ->
-            SystemLogger.logInfo(this::class.java, "Running listener")
+            log(this::class.java, Log.FINE,  "Running listener")
             GroundItemManager.create(Item(MIRROR), node.location, player)
             PickupHandler.take(player, node as GroundItem)
             return@on true

@@ -1,6 +1,7 @@
 package core.game.system.config
 
 import core.ServerConstants
+import core.api.log
 import core.cache.def.impl.ItemDefinition
 import core.game.node.entity.combat.equipment.Ammunition
 import core.game.node.entity.combat.equipment.BoltEffect
@@ -11,6 +12,7 @@ import core.tools.SystemLogger
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
+import core.tools.Log
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
@@ -55,7 +57,7 @@ class RangedConfigLoader {
             Ammunition.getAmmunition().put(Integer.parseInt(e["itemId"].toString()),ammo)
             count++
         }
-        SystemLogger.logWarn(this::class.java, "Parsed $count ammo configs...")
+        log(this::class.java, Log.FINE,  "Parsed $count ammo configs...")
 
         count = 0
         reader = FileReader(ServerConstants.CONFIG_PATH + "ranged_weapon_configs.json")
@@ -75,6 +77,6 @@ class RangedConfigLoader {
             RangeWeapon.getRangeWeapons().putIfAbsent(weapon.itemId,weapon)
             count++
         }
-        SystemLogger.logInfo(this::class.java, "Parsed $count ranged weapon configs...")
+        log(this::class.java, Log.FINE,  "Parsed $count ranged weapon configs...")
     }
 }

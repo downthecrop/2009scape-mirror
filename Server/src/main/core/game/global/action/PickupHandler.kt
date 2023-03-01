@@ -39,7 +39,6 @@ object PickupHandler {
             return true
         }
         if (player.getAttribute("droppedItem:" + item.id, 0) > GameWorld.ticks) { //Splinter
-            SystemLogger.logAlert(this::class.java, "$player tried to do the drop & quick pick-up Ground Item dupe.")
             return true
         }
         if (item !is GroundSpawnLoader.GroundSpawn && item.isRemainPrivate && !item.droppedBy(player)) {

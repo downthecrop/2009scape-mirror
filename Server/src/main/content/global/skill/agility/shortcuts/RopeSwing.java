@@ -14,7 +14,7 @@ import content.global.skill.agility.AgilityHandler;
 public class RopeSwing extends UseWithHandler {
     @Override
     public boolean handle(NodeUsageEvent event) {
-        System.out.println("Trying to handle.");
+
         if(event.getUsedWith() instanceof Scenery){
             Scenery object = event.getUsedWith().asScenery();
             int objId = object.getId();

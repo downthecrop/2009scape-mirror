@@ -4,7 +4,6 @@ import core.api.*
 import core.game.node.Node
 import core.plugin.ClassScanner.definePlugin
 import core.tools.colorize
-import core.tools.SystemLogger.logInfo
 import core.game.node.scenery.Scenery
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.npc.NPC
@@ -28,6 +27,7 @@ import org.rs09.consts.Scenery as Sceneries
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.game.world.GameWorld
+import core.tools.Log
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random
@@ -255,7 +255,7 @@ class AbyssPlugin : InteractionListener {
         const val BURN_PROGRESS = 16
         const val DISTRACT_PROGRESS = 18
         fun handleObstacle(obstacle: Node, player: Player, skill: Int, varbitVal: Int?, animation: Animation, messages: Array<String>): Boolean {
-            logInfo(this::class.java, "handled abyss ${obstacle.name}")
+            log(this::class.java, Log.FINE, "handled abyss ${obstacle.name}")
             player.lock()
             player.animate(animation)
             GameWorld.Pulser.submit(object : Pulse(1, player) {

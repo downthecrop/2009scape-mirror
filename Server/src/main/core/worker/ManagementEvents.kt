@@ -276,7 +276,6 @@ object ManagementEvents {
                                 info.username = ServerConstants.SERVER_NAME
                                 info.password = ServerConstants.MS_SECRET_KEY
                                 info.rights = 2
-                                SystemLogger.logAlert(this::class.java, "Creating default server account: ${info.username}, password is your MS_SECRET_KEY!")
                                 GameWorld.authenticator.createAccountWith(info)
                                 info = GameWorld.accountStorage.getAccountInfo(event.clanOwner)
                             }

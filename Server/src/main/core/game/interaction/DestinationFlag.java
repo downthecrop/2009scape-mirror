@@ -115,7 +115,7 @@ public class DestinationFlag {
 			if (dir != null) {
 				return getDestination(mover, object, sizeX, sizeY, dir, 3);
 			}
-			// System.out.println(dir);
+
 			return getDestination(mover, object, sizeX, sizeY, Direction.getLogicalDirection(object.getLocation(), mover.getLocation()), 0);
 		}
 

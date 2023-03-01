@@ -16,6 +16,7 @@ import content.region.kandarin.seers.quest.elementalworkshop.EWUtils.WATER_WHEEL
 import content.region.kandarin.seers.quest.elementalworkshop.EWUtils.currentStage
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import core.tools.Log
 import core.tools.SystemLogger
 
 /**
@@ -276,7 +277,7 @@ class EWListeners : InteractionListener {
             }
             // Sanity error check (Should never get thrown)
             if (!player.inventory.containsAll(*elementalShieldReqItems)) {
-                SystemLogger.logErr(this::class.java, "${player.username} tried to forge an elemental shield without all the required items.")
+                log(this::class.java, Log.ERR,  "${player.username} tried to forge an elemental shield without all the required items.")
                 return@onUseWith false
             }
             // Successfully smith the elemental shield
@@ -451,7 +452,7 @@ class EWListeners : InteractionListener {
                 else -> {
                     offset = -1
                     enabled = 0
-                    SystemLogger.logErr(this::class.java, "Unhandled location when determining enabled water controls! ${player.location}")
+                    log(this::class.java, Log.ERR,  "Unhandled location when determining enabled water controls! ${player.location}")
                     return@on false
                 }
             }

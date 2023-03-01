@@ -2,11 +2,11 @@ package core.tools
 
 import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.terminal.*
+import com.google.protobuf.ByteString.Output
 import core.ServerConstants
-import java.io.BufferedWriter
-import java.io.File
-import java.io.FileWriter
-import java.io.Writer
+import core.api.log
+import java.io.OutputStream
+import java.io.PrintStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -17,105 +17,76 @@ import java.util.*
  */
 object SystemLogger {
     val t = Terminal()
+    val errT = t.forStdErr()
     val formatter = SimpleDateFormat("HH:mm:ss")
-    var tradeLog: Writer? = null
-    var tradeLogWriter: BufferedWriter? = null
 
-    @JvmStatic
-    fun initTradeLogger(){
-        if(!File(ServerConstants.LOGS_PATH + "trade" + File.separator + "test").exists()){
-            File(ServerConstants.LOGS_PATH + "trade" + File.separator + "test").mkdirs()
-        }
-        tradeLog = FileWriter(ServerConstants.LOGS_PATH + "trade" + File.separator + SimpleDateFormat("dd-MM-yyyy").format(System.currentTimeMillis()) + ".log")
-        tradeLogWriter = BufferedWriter(tradeLog!!)
-    }
-
-    @JvmStatic()
-    fun flushLogs() {
-        try {
-            tradeLogWriter?.flush()
-            tradeLogWriter?.close()
-        } catch(ignored: Exception) {}
-    }
-
-    fun getTime(): String{
+    private fun getTime(): String{
         return "[" + formatter.format(Date(System.currentTimeMillis())) +"]"
     }
 
     @JvmStatic
-    fun logInfo(clazz: Class<*>, vararg messages: String){
-        for(m in messages){
-            val msg = "${getTime()}: [${clazz.simpleName}] $m"
-            if(m.isNotBlank()) {
+    fun processLogEntry(clazz: Class<*>, log: Log, message: String) {
+        when (log) {
+            Log.FINE -> {
+                if (ServerConstants.LOG_LEVEL < LogLevel.VERBOSE)
+                    return
+                val msg = TextColors.gray("${getTime()}: [${clazz.simpleName}] $message")
                 t.println(msg)
             }
-        }
-    }
 
-    @JvmStatic
-    fun logErr(clazz: Class<*>, message: String){
-        val msg = "${getTime()}: [${clazz.simpleName}] $message"
-        if(message.isNotBlank()) {
-            t.println(msg)
-        }
-    }
+            Log.INFO -> {
+                if (ServerConstants.LOG_LEVEL < LogLevel.DETAILED)
+                    return
 
-    @JvmStatic
-    fun logWarn(clazz: Class<*>, message: String){
-        val msg = "${getTime()}: [${clazz.simpleName}] $message"
-        if(message.isNotBlank()) {
-            t.println(msg)
-        }
-    }
+                val msg = "${getTime()}: [${clazz.simpleName}] $message"
+                t.println(msg)
+            }
 
-    @JvmStatic
-    fun logAlert(clazz: Class<*>, message: String){
-        val msg = "${getTime()}: [${clazz.simpleName}] $message"
-        if(message.isNotBlank()) {
-            t.println(msg)
-        }
-    }
+            Log.WARN -> {
+                if (ServerConstants.LOG_LEVEL < LogLevel.CAUTIOUS)
+                    return
 
-    @JvmStatic
-    fun logAI(clazz: Class<*>, message: String){
-        val msg = "${getTime()}: [${clazz.simpleName}] $message"
-        if(message.isNotBlank()) {
-            t.println(msg)
-        }
-    }
+                val msg = TextColors.yellow("${getTime()}: [${clazz.simpleName}] $message")
+                t.println(msg)
+            }
 
-    @JvmStatic
-    fun logRE(message: String){
-        if(message.isNotBlank()) t.println("${getTime()}: ${TextColors.gray("[RAND] $message")}")
+            Log.ERR -> {
+                val msg = "${getTime()}: [${clazz.simpleName}] $message"
+                errT.println(msg)
+            }
+        }
     }
 
     @JvmStatic
     fun logGE(message: String){
-        if(message.isNotBlank()) t.println("${getTime()}: ${TextColors.gray("[  GE] $message")}")
-    }
-
-    @JvmStatic
-    fun logTrade(message: String){
-        try {
-            if (message.isNotBlank()) {
-                if (tradeLogWriter == null) logWarn(this::class.java, "Trade Logger is null!")
-                tradeLogWriter?.write("${getTime()}: $message")
-                tradeLogWriter?.newLine()
-            }
-        } catch(ignored: Exception){}
+        log(this::class.java, Log.FINE, "[  GE] $message")
     }
 
     @JvmStatic fun logStartup(message: String)
     {
-        logInfo(this::class.java, "[STARTUP] $message")
+        log(this::class.java, Log.FINE, "[STARTUP] $message")
     }
 
     @JvmStatic fun logShutdown(message: String)
     {
-        logInfo(this::class.java,"[SHUTDOWN] $message")
+        log(this::class.java, Log.FINE, "[SHUTDOWN] $message")
     }
 
     fun logMS(s: String) {
-        if(s.isNotBlank()) t.println("${getTime()}: ${TextColors.gray("[  MS] $s")}")
+        log(this::class.java, Log.FINE, "[  MS] $s")
     }
+}
+
+enum class LogLevel {
+    SILENT,
+    CAUTIOUS,
+    DETAILED,
+    VERBOSE
+}
+
+enum class Log {
+    FINE,
+    INFO,
+    WARN,
+    ERR
 }

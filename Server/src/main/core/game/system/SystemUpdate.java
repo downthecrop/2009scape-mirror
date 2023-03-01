@@ -57,7 +57,7 @@ public final class SystemUpdate extends Pulse {
 	 */
 	public void notifyPlayers() {
 		try {
-			System.out.println("BEGINNING UPDATE SEQUENCE - TIME TIL UPDATE " + getDelay() + " TICKS");
+
 			int time = getDelay() + (createBackup ? BACKUP_TICK : 0);
 			for (Iterator<Player> it = Repository.getPlayers().iterator(); it.hasNext();) {
 				Player p = it.next();

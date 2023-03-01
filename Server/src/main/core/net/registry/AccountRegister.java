@@ -6,6 +6,7 @@ import core.net.Constants;
 import core.net.IoSession;
 import core.ServerConstants;
 import core.auth.UserAccountInfo;
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.world.GameWorld;
 import core.net.packet.in.Login;
@@ -13,6 +14,8 @@ import core.net.packet.in.Login;
 import java.nio.ByteBuffer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Handles the registry of new accounts.
@@ -50,11 +53,11 @@ public class AccountRegister {
 					break;
 				}
 				if (invalidUsername(username)) {
-					System.out.println("AHAHHA " + username);
+
 					response(session,RegistryResponse.INVALID_USERNAME);
 					break;
 				}
-				System.out.println(username);
+
 				if (!GameWorld.getAuthenticator().canCreateAccountWith(info)) {
 					response(session, RegistryResponse.NOT_AVAILBLE_USER);
 					return;
@@ -62,11 +65,10 @@ public class AccountRegister {
 				response(session, RegistryResponse.SUCCESS);
 				break;
 			case 36://Register details
-				SystemLogger.logInfo(AccountRegister.class, "Made it to final stage");
 				buffer.get(); //Useless size being written that is already written in the RSA block
 				buffer = Login.decryptRSABuffer(buffer, ServerConstants.EXPONENT, ServerConstants.MODULUS);
 				if(buffer.get() != 10){ //RSA header (aka did this decrypt properly)
-					SystemLogger.logInfo(AccountRegister.class, "Decryption failed during registration :(");
+					log(AccountRegister.class, Log.ERR, "Decryption failed during registration :(");
 					response(session, RegistryResponse.CANNOT_CREATE);
 					break;
 				}
@@ -115,7 +117,7 @@ public class AccountRegister {
 				});
 				break;
 			default:
-				SystemLogger.logErr(AccountRegister.class, "Unhandled account registry opcode = " + opcode);
+				log(AccountRegister.class, Log.ERR, "Unhandled account registry opcode = " + opcode);
 				break;
 		}
 	}

@@ -1,10 +1,13 @@
 package core.net.event;
 
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.net.IoReadEvent;
 import core.net.IoSession;
 
 import java.nio.ByteBuffer;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Handles reading Management server packets.
@@ -85,7 +88,7 @@ public final class MSReadEvent extends IoReadEvent {
 			}
 			return buffer.getShort() & 0xFFFF;
 		}
-		SystemLogger.logErr(this.getClass(), "Invalid packet [opcode=" + opcode + ", last=" + last + ", queued=" + usedQueuedBuffer + "]!");
+		log(this.getClass(), Log.ERR,  "Invalid packet [opcode=" + opcode + ", last=" + last + ", queued=" + usedQueuedBuffer + "]!");
 		return -1;
 	}
 

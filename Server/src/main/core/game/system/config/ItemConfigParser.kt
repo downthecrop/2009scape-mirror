@@ -8,6 +8,8 @@ import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import core.ServerConstants
+import core.api.log
+import core.tools.Log
 import core.tools.SystemLogger
 import java.io.FileReader
 
@@ -295,6 +297,6 @@ class ItemConfigParser {
             }
             count++
         }
-        SystemLogger.logInfo(this::class.java, "Parsed $count item configs.")
+        log(this::class.java, Log.FINE,  "Parsed $count item configs.")
     }
 }

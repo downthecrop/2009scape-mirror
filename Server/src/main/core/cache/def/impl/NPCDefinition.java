@@ -202,7 +202,7 @@ public final class NPCDefinition extends Definition<NPC> {
 			byte[] data = Cache.getIndexes()[18].getFileData(id >>> 7, id & 0x7f);
 			if (data == null) {
 				if (id != -1) {
-					// System.out.println("Failed loading NPC " + id + ".");
+
 				}
 			} else {
 				def.parse(ByteBuffer.wrap(data));
@@ -214,12 +214,12 @@ public final class NPCDefinition extends Definition<NPC> {
 
 	public static void main(String... args) throws Throwable {
 		GameWorld.prompt(false);
-		System.out.println("Roar: " + NPCDefinition.forId(2329).standAnimation);
+
 		// for (int i = 0; i < 11000; i++) {
 		// ItemDefinition def = ItemDefinition.forId(i);
 		// if (def.getMaleWornModelId1() >= 1250 && def.getMaleWornModelId1() <=
 		// 1550) {
-		// System.out.println(def.getName() + " " + i + ": " +
+
 		// def.getMaleWornModelId1());
 		// }
 		// }

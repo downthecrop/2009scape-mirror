@@ -1,11 +1,13 @@
 package core.net.packet.`in`
 
+import core.api.log
 import core.game.node.entity.player.Player
 import core.net.packet.IncomingPacket
 import core.net.packet.IoBuffer
 import core.net.packet.QCRepository
 import core.tools.SystemLogger
 import core.game.world.GameWorld
+import core.tools.Log
 
 /**
  * Decodes the quick chat packet
@@ -31,7 +33,7 @@ class QuickChatPacketHandler : IncomingPacket {
                 3,4 -> QCPacketType.STANDARD
                 5 -> QCPacketType.SINGLE
                 7 -> QCPacketType.DOUBLE
-                else -> QCPacketType.UNHANDLED.also { SystemLogger.logWarn(this::class.java, "UNHANDLED QC PACKET TYPE Size ${x.array().size}") }
+                else -> QCPacketType.UNHANDLED.also { log(this::class.java, Log.WARN,  "UNHANDLED QC PACKET TYPE Size ${x.array().size}") }
         }
 
         val forClan = (buffer.get() and 0xFF) == 1
@@ -50,7 +52,7 @@ class QuickChatPacketHandler : IncomingPacket {
                 buffer.get() //discard
                 selection_b_index = buffer.get()
             }
-            QCPacketType.UNHANDLED -> SystemLogger.logWarn(this::class.java, "Unhandled packet type, skipping remaining buffer contents.")
+            QCPacketType.UNHANDLED -> log(this::class.java, Log.WARN,  "Unhandled packet type, skipping remaining buffer contents.")
             else -> {}
         }
 
@@ -58,12 +60,12 @@ class QuickChatPacketHandler : IncomingPacket {
         //Prints the values of each byte in the buffer to server log
         //If the world is in dev mode
         if(GameWorld.settings?.isDevMode == true) {
-            SystemLogger.logInfo(this::class.java, "Begin QuickChat Packet Buffer Dump---------")
-            SystemLogger.logInfo(this::class.java, "Packet Type: ${packetType.name} Chat Type: ${if(forClan) "Clan" else "Public"}")
+            log(this::class.java, Log.FINE,  "Begin QuickChat Packet Buffer Dump---------")
+            log(this::class.java, Log.FINE,  "Packet Type: ${packetType.name} Chat Type: ${if(forClan) "Clan" else "Public"}")
             x?.array()?.forEach {
-                SystemLogger.logInfo(this::class.java, "$it")
+                log(this::class.java, Log.FINE,  "$it")
             }
-            SystemLogger.logInfo(this::class.java, "End QuickChat Packet Buffer Dump-----------")
+            log(this::class.java, Log.FINE,  "End QuickChat Packet Buffer Dump-----------")
         }
 
         QCRepository.sendQC(player,multiplier,offset,packetType,selection_a_index,selection_b_index,forClan)

@@ -17,6 +17,7 @@ import core.game.ge.GrandExchangeOffer
 import core.game.ge.GrandExchangeRecords
 import core.game.ge.PriceIndex
 import core.game.interaction.InterfaceListener
+import core.tools.Log
 import core.tools.SystemLogger
 
 /**
@@ -199,7 +200,7 @@ class StockMarket : InterfaceListener {
     {
         if(offer == null)
         {
-            SystemLogger.logWarn(this::class.java, "Opened offer was null and was attempted to be aborted!")
+            log(this::class.java, Log.WARN,  "Opened offer was null and was attempted to be aborted!")
             return
         }
         sendMessage(player, "Abort request acknowledged. Please be aware that your offer may")
@@ -207,7 +208,7 @@ class StockMarket : InterfaceListener {
 
         if(!offer.isActive)
         {
-            SystemLogger.logWarn(this::class.java, "Offer ${offer.uid}[${offer.index}]: ${if(offer.sell) "s" else "b"} ${offer.itemID}x ${offer.amount} was NO LONGER active when abort attempted")
+            log(this::class.java, Log.WARN,  "Offer ${offer.uid}[${offer.index}]: ${if(offer.sell) "s" else "b"} ${offer.itemID}x ${offer.amount} was NO LONGER active when abort attempted")
             return
         }
         offer.offerState = OfferState.ABORTED
@@ -341,7 +342,7 @@ class StockMarket : InterfaceListener {
             val item = offer.withdraw[index]
             if(item == null)
             {
-                SystemLogger.logWarn(this::class.java, "Offer withdraw[$index] is null!")
+                log(this::class.java, Log.WARN,  "Offer withdraw[$index] is null!")
                 return
             }
 

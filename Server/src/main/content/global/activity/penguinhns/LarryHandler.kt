@@ -74,7 +74,7 @@ class LarryHandler(player: Player? = null) : core.game.dialogue.DialoguePlugin(p
         }
 
         val level = getStatLevel(player, skill)
-        System.out.println("Level: $level")
+
         val expGained = points?.toDouble()?.times((level * 25))
         System.out.print("exp: $expGained")
         player.skills.addExperience(skill,expGained!!)

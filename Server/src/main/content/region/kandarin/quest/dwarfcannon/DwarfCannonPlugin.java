@@ -16,6 +16,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
@@ -23,6 +24,8 @@ import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Handles the dwarf cannon quest interactions.
@@ -289,7 +292,7 @@ public class DwarfCannonPlugin extends OptionHandler {
 			}
 			Part part = Part.forId(button);
 			if (part == null) {
-				SystemLogger.logErr(this.getClass(), "Unhandled part id - " + button + "!");
+				log(this.getClass(), Log.ERR,  "Unhandled part id - " + button + "!");
 				return true;
 			}
 			if (this.tool.getPart() != part) {

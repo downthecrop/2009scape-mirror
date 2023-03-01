@@ -9,6 +9,7 @@ import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import core.plugin.Plugin
+import core.tools.Log
 import core.tools.SystemLogger
 
 /**
@@ -70,7 +71,7 @@ class ExperienceInterface() : ComponentPlugin() {
                 46 -> Skills.WOODCUTTING
                 40 -> Skills.FLETCHING
                 51 -> Skills.CONSTRUCTION
-                else -> Skills.SLAYER.also { SystemLogger.logWarn(this::class.java, "EXP_INTERFACE: Invalid SKILL CHOICE BUTTON: $button") }
+                else -> Skills.SLAYER.also { log(this::class.java, Log.WARN,  "EXP_INTERFACE: Invalid SKILL CHOICE BUTTON: $button") }
             }
             player.setAttribute("exp_interface:skill",skill)
         }

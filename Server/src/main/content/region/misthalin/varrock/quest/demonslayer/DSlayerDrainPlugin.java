@@ -54,19 +54,19 @@ public final class DSlayerDrainPlugin extends UseWithHandler {
 			player.animate(ANIMATION);
 			player.getPacketDispatch().sendMessage("You pour the liquid down the drain.");
 			if (quest.getStage(player) != 20) {
-				System.out.println("1");
+
 				return true;
 			}
 			if (player.getAttribute("demon-slayer:just-poured", false)) {
-				System.out.println("2");
+
 				return true;
 			}
 			if (!player.hasItem(DemonSlayer.FIRST_KEY)) {
-				System.out.println("3");
+
 				player.getSavedData().getQuestData().getDemonSlayer()[0] = false;
 			}
 			if (quest.getStage(player) == 20 && !player.hasItem(DemonSlayer.FIRST_KEY) && !player.getSavedData().getQuestData().getDemonSlayer()[0]) {
-				System.out.println("4");
+
 				player.getDialogueInterpreter().sendDialogues(player, null, "OK, I think I've washed the key down into the sewer.", "I'd better go down and get it!");
 				player.getSavedData().getQuestData().getDemonSlayer()[0] = true;// poured
 				player.getConfigManager().set(222, 2660610, true);

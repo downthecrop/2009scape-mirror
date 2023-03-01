@@ -2,11 +2,14 @@ package core.cache.def.impl;
 
 import core.cache.Cache;
 import core.cache.misc.buffer.ByteBufferUtils;
+import core.tools.Log;
 import core.tools.SystemLogger;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
+
+import static core.api.ContentAPIKt.log;
 
 public class Struct {
 
@@ -28,7 +31,7 @@ public class Struct {
 
     public int getInt(int key){
         if(!dataStore.containsKey(key)){
-            SystemLogger.logErr(this.getClass(), "Invalid value passed for key: " + key + " struct: " + id);
+            log(this.getClass(), Log.ERR,  "Invalid value passed for key: " + key + " struct: " + id);
             return -1;
         }
         return (int) dataStore.get(key);

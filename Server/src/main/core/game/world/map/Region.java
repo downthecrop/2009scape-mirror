@@ -10,6 +10,7 @@ import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.build.LandscapeParser;
 import core.game.world.map.build.MapscapeParser;
 import core.game.world.map.zone.RegionZone;
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.system.config.XteaParser;
 import core.game.world.GameWorld;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Represents a region.
@@ -344,13 +347,13 @@ public class Region {
 	 */
 	private static boolean unload(Region r) {
 		if (r.isViewed()) {
-			SystemLogger.logErr(CommunicationInfo.class, "Players viewing region!");
+			log(CommunicationInfo.class, Log.ERR, "Players viewing region!");
 			r.flagActive();
 			return false;
 		}
 		for (RegionPlane p : r.planes) {
 			if (!p.getPlayers().isEmpty()) {
-				SystemLogger.logErr(CommunicationInfo.class, "Players still in region!");
+				log(CommunicationInfo.class, Log.ERR, "Players still in region!");
 				r.flagActive();
 				return false;
 			}
@@ -393,7 +396,7 @@ public class Region {
 	public int decrementViewAmount() {
 		synchronized (this) {
 			if (viewAmount < 1) {
-				//SystemLogger.logErr(this.getClass(), "View amount is " + (viewAmount - 1));
+				//log(this.getClass(), Log.ERR,  "View amount is " + (viewAmount - 1));
 				viewAmount++;
 			}
 			return --viewAmount;

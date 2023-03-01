@@ -65,6 +65,7 @@ import core.game.world.GameWorld
 import core.game.world.GameWorld.Pulser
 import core.game.world.map.path.ProjectilePathfinder
 import core.game.world.repository.Repository
+import core.tools.Log
 import core.tools.tick
 import kotlin.math.absoluteValue
 
@@ -759,7 +760,7 @@ fun openDialogue(player: Player, dialogue: Any, vararg args: Any) {
         is Int -> player.dialogueInterpreter.open(dialogue, *args)
         is DialogueFile -> player.dialogueInterpreter.open(dialogue, *args)
         is SkillDialogueHandler -> dialogue.open()
-        else -> SystemLogger.logErr(ContentAPI::class.java, "Invalid object type passed to openDialogue() -> ${dialogue.javaClass.simpleName}")
+        else -> log(ContentAPI::class.java, Log.ERR, "Invalid object type passed to openDialogue() -> ${dialogue.javaClass.simpleName}")
     }
 }
 
@@ -1045,7 +1046,7 @@ fun adjustCharge(node: Node, amount: Int) {
     when (node) {
         is Item -> node.charge += amount
         is Scenery -> node.charge += amount
-        else -> SystemLogger.logErr(ContentAPI::class.java, "Attempt to adjust the charge of invalid type: ${node.javaClass.simpleName}")
+        else -> log(ContentAPI::class.java, Log.ERR, "Attempt to adjust the charge of invalid type: ${node.javaClass.simpleName}")
     }
 }
 
@@ -1058,7 +1059,7 @@ fun getCharge(node: Node): Int {
     when (node) {
         is Item -> return node.charge
         is Scenery -> return node.charge
-        else -> SystemLogger.logErr(ContentAPI::class.java, "Attempt to get charge of invalid type: ${node.javaClass.simpleName}")
+        else -> log(ContentAPI::class.java, Log.ERR, "Attempt to get charge of invalid type: ${node.javaClass.simpleName}")
             .also { return -1 }
     }
 }
@@ -1072,7 +1073,7 @@ fun setCharge(node: Node, charge: Int) {
     when (node) {
         is Item -> node.charge = charge
         is Scenery -> node.charge = charge
-        else -> SystemLogger.logErr(ContentAPI::class.java, "Attempt to set the charge of invalid type: ${node.javaClass.simpleName}")
+        else -> log(ContentAPI::class.java, Log.ERR, "Attempt to set the charge of invalid type: ${node.javaClass.simpleName}")
     }
 }
 
@@ -2267,6 +2268,16 @@ fun addDialogueAction(player: Player, action: core.game.dialogue.DialogueAction)
 }
 
 /**
+ * Logs a message to the server console
+ * @param origin simply put (Kotlin) this::class.java or (Java) this.getClass()
+ * @param type the type of log: Log.FINE (default, visible on VERBOSE), Log.INFO (visible on DETAILED), Log.WARN (visible on CAUTIOUS), Log.ERR (always visible)
+ * @param message the actual message to log.
+ */
+fun log(origin: Class<*>, type: Log, message: String) {
+    SystemLogger.processLogEntry(origin, type, message)
+}
+
+/**
  * Used by content handlers to check if the entity is done moving yet
  */
 fun finishedMoving(entity: Entity) : Boolean {
@@ -2310,7 +2321,7 @@ fun clearScripts(entity: Entity) : Boolean {
 
 fun restartScript(entity: Entity) : Boolean {
     if (entity.scripts.getActiveScript()?.persist != true) {
-        SystemLogger.logErr(entity.scripts.getActiveScript()!!::class.java, "Tried to call restartScript on a non-persistent script! Either use stopExecuting() or make the script persistent.")
+        log(entity.scripts.getActiveScript()!!::class.java, Log.ERR, "Tried to call restartScript on a non-persistent script! Either use stopExecuting() or make the script persistent.")
         return clearScripts(entity)
     }
     return true
@@ -2323,7 +2334,7 @@ fun keepRunning(entity: Entity) : Boolean {
 
 fun stopExecuting(entity: Entity) : Boolean {
     if (entity.scripts.getActiveScript()?.persist == true) {
-        SystemLogger.logErr(entity.scripts.getActiveScript()!!::class.java, "Tried to call stopExecuting() on a persistent script! To halt execution of a persistent script, you MUST call clearScripts()!")
+        log(entity.scripts.getActiveScript()!!::class.java, Log.ERR, "Tried to call stopExecuting() on a persistent script! To halt execution of a persistent script, you MUST call clearScripts()!")
         return clearScripts(entity)
     }
     return true

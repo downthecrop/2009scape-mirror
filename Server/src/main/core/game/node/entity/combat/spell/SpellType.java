@@ -107,10 +107,10 @@ public enum SpellType {
 	BARRAGE(1.4) {
 		@Override
 		public int getImpactAmount(Entity e, Entity victim, int base) {
-			System.out.println("Attacker - >" + e.getName());
-			System.out.println("Victim - >" + victim.getName());
-			System.out.println("Accuracy Mod -> " + getAccuracyMod());
-			System.out.println("Base Mod -> " + base);
+
+
+
+
 			return 26 + base;
 		}
 	},

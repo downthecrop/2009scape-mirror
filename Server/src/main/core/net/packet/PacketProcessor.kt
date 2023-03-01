@@ -42,6 +42,7 @@ import content.global.handlers.iface.ge.StockMarket
 import content.global.skill.magic.SpellListener
 import content.global.skill.magic.SpellListeners
 import content.global.skill.magic.SpellUtils
+import core.api.log
 import core.game.interaction.*
 import core.game.node.entity.player.info.LogType
 import core.game.node.entity.player.info.PlayerMonitor
@@ -52,6 +53,7 @@ import core.game.world.GameWorld
 import core.game.world.repository.Repository
 import core.net.packet.`in`.Packet
 import core.net.packet.`in`.RunScript
+import core.tools.Log
 import core.worker.ManagementEvents
 import java.io.PrintWriter
 import java.io.StringWriter
@@ -71,7 +73,7 @@ object PacketProcessor {
         val pw = PrintWriter(sw)
         var pkt: Packet
         while (countThisCycle-- > 0) {
-            pkt = queue.tryPop(Packet.NoProcess())
+            pkt = queue.tryPop(Packet.NoProcess()) ?: return
             if (pkt is Packet.NoProcess) {
                 queue.clear()
                 return
@@ -80,7 +82,7 @@ object PacketProcessor {
                 process(pkt)
             } catch (e: Exception) {
                 e.printStackTrace(pw)
-                SystemLogger.logErr(this::class.java, "Error Processing ${pkt::class.java.simpleName}: $sw")
+                log(this::class.java, Log.ERR,  "Error Processing ${pkt::class.java.simpleName}: $sw")
             }
         }
     }
@@ -286,7 +288,7 @@ object PacketProcessor {
             }
 
 
-            else -> SystemLogger.logWarn(this::class.java, "Unprocessed Packet: ${pkt::class.java.simpleName}")
+            else -> log(this::class.java, Log.WARN,  "Unprocessed Packet: ${pkt::class.java.simpleName}")
         }
     }
 

@@ -3,6 +3,7 @@ package core.game.global.action;
 import core.game.node.entity.player.Player;
 import core.game.system.communication.CommunicationInfo;
 import content.global.handlers.item.SpadeDigListener;
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
@@ -11,6 +12,8 @@ import core.game.world.update.flag.context.Animation;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Handles digging with a spade.
@@ -63,7 +66,7 @@ public final class DigSpadeHandler {
 	 */
 	public static boolean register(Location location, DigAction action) {
 		if (ACTIONS.containsKey(location)) {
-			SystemLogger.logErr(CommunicationInfo.class, "Already contained dig reward for location " + location + ".");
+			log(CommunicationInfo.class, Log.ERR, "Already contained dig reward for location " + location + ".");
 			return false;
 		}
 		ACTIONS.put(location, action);

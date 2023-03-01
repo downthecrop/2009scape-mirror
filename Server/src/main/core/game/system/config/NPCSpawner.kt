@@ -1,10 +1,12 @@
 package core.game.system.config
 
 import core.ServerConstants
+import core.api.log
 import core.game.node.entity.npc.NPC
 import core.tools.SystemLogger
 import core.game.world.map.Direction
 import core.game.world.map.Location
+import core.tools.Log
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
@@ -38,6 +40,6 @@ class NPCSpawner {
                 count++
             }
         }
-        SystemLogger.logInfo(this::class.java, "Spawned $count NPCs")
+        log(this::class.java, Log.FINE,  "Spawned $count NPCs")
     }
 }

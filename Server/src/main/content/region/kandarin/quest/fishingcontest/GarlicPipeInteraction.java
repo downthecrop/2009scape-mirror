@@ -26,7 +26,7 @@ public class GarlicPipeInteraction extends PluginInteraction {
 
     @Override
     public boolean handle(Player player, NodeUsageEvent event) {
-        System.out.println("Trying to handle it");
+
         if(event.getUsed() instanceof Item && event.getUsedWith() instanceof Scenery){
             Scenery usedWith = event.getUsedWith().asScenery();
             Item used = event.getUsedItem();

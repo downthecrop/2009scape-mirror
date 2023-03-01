@@ -16,6 +16,7 @@ import core.game.node.entity.player.info.Rights;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -33,6 +34,8 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.StringUtils;
 import core.game.node.entity.skill.Skills;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Handles the god wars map zone.
@@ -368,7 +371,7 @@ public final class GodwarsMapzone extends MapZone implements Plugin<Object> {
 		}
 
 		if (DoorActionHandler.handleAutowalkDoor(player, object)) {
-			SystemLogger.logInfo(this.getClass(), player.getUsername() + " entered " + faction.name() + " gwd boss room");
+			log(this.getClass(), Log.FINE, player.getUsername() + " entered " + faction.name() + " gwd boss room");
 			increaseKillcount(player, faction, -required);
 		}
 		return true;

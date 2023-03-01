@@ -51,7 +51,7 @@ public final class ShoppingPlugin extends ComponentPlugin {
 			return true;
 		}
 		if (viewer == null) {
-			System.out.println("shop is null");
+
 			return true;
 		}
 		final Container container = button == 0 ? player.getInventory() : viewer.getShop().getContainer(viewer.getTabIndex());

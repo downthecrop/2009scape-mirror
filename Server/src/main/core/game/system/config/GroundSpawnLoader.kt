@@ -9,9 +9,11 @@ import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import core.ServerConstants
+import core.api.log
 import core.tools.SystemLogger
 import core.game.world.GameWorld
 import core.game.world.repository.Repository
+import core.tools.Log
 import java.io.FileReader
 import java.nio.ByteBuffer
 
@@ -34,7 +36,7 @@ class GroundSpawnLoader {
                 count++
             }
         }
-        SystemLogger.logInfo(this::class.java, "Initialized $count ground items.")
+        log(this::class.java, Log.FINE,  "Initialized $count ground items.")
     }
     class GroundSpawn
     /**

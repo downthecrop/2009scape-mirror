@@ -1,9 +1,5 @@
 package content.region.wilderness.handlers.revenants
 
-import core.api.Commands
-import core.api.TickListener
-import core.api.poofClear
-import core.api.teleport
 import core.game.interaction.MovementPulse
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.link.TeleportManager
@@ -12,10 +8,12 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
 import core.ServerConstants
+import core.api.*
 import core.tools.SystemLogger
 import core.game.system.command.Privilege
 import core.game.world.GameWorld
 import core.game.world.repository.Repository
+import core.tools.Log
 import java.lang.Integer.min
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -94,10 +92,10 @@ class RevenantController : TickListener, Commands {
 
         define("listrevs", Privilege.ADMIN) {player, strings ->
             for (rev in trackedRevenants) {
-                SystemLogger.logInfo(this::class.java, "REV ${rev.id}-${rev.name} @ ${rev.location.toString()}")
+                log(this::class.java, Log.FINE,  "REV ${rev.id}-${rev.name} @ ${rev.location.toString()}")
             }
 
-            SystemLogger.logInfo(this::class.java, "Total of ${trackedRevenants.size} revenants spawned.")
+            log(this::class.java, Log.FINE,  "Total of ${trackedRevenants.size} revenants spawned.")
         }
 
         define("clearrevs", Privilege.ADMIN) {_, _ ->

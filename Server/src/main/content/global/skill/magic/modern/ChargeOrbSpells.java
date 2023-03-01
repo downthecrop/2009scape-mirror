@@ -105,7 +105,7 @@ public final class ChargeOrbSpells extends MagicSpell {
                 && objectId == 2151
                 && p.getInventory().containsItems(Runes.COSMIC_RUNE.getItem(15), Runes.WATER_RUNE.getItem(150), new Item(UNPOWERED_ORB.getId(), 5))) {
             p.setAttribute("/save:diary:seers:water-orb-can-earn", true);
-            System.out.println("can_earn_true");
+
             p.setAttribute("/save:diary:seers:water-orb", 1);
         }
         if (!meetsRequirements(entity, true, true)) {

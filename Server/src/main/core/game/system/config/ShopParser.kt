@@ -4,6 +4,8 @@ import core.game.node.entity.player.Player
 import org.json.simple.JSONArray
 import org.json.simple.parser.JSONParser
 import core.ServerConstants
+import core.api.log
+import core.tools.Log
 import core.tools.SystemLogger
 import java.io.FileReader
 
@@ -29,6 +31,6 @@ class ShopParser{
 
             count++
         }
-        SystemLogger.logInfo(this::class.java, "Parsed $count shops.")
+        log(this::class.java, Log.FINE,  "Parsed $count shops.")
     }
 }

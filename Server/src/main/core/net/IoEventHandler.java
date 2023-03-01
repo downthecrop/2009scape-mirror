@@ -72,7 +72,10 @@ public class IoEventHandler {
 				session.disconnect();
 				if (session.getPlayer() != null)
 					session.getPlayer().clear(true);
-			} else e.printStackTrace();
+			} else {
+				key.cancel();
+				return;
+			}
 		}
 		buffer.flip();
 		if (session == null) {

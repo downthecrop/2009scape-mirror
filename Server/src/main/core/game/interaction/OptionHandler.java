@@ -3,12 +3,15 @@ package core.game.interaction;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Handles an interaction option.
@@ -71,7 +74,7 @@ public abstract class OptionHandler implements Plugin<Object> {
 		final SceneryDefinition definition = SceneryDefinition.forId(wrapper);
 		final List<Integer> list = new ArrayList<>(20);
 		if (definition.getChildrenIds() == null) {
-			SystemLogger.logErr(this.getClass(), "Null child wrapper in option handler wrapperId=" + wrapper);
+			log(this.getClass(), Log.ERR,  "Null child wrapper in option handler wrapperId=" + wrapper);
 			return new int[] { wrapper };
 		}
 		for (int child : definition.getChildrenIds()) {

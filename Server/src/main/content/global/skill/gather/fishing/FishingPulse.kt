@@ -54,7 +54,7 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
         }
         player.debug(player.inventory.containsItem(option.tool).toString())
         if (!player.inventory.containsItem(option.tool) && !hasBarbTail()) {
-            //System.out.println(isBareHanded(player));
+
             player.dialogueInterpreter.sendDialogue("You need a " + option.tool.name.toLowerCase() + " to catch these fish.")
             stop()
             return false

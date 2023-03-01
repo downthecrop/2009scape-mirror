@@ -23,8 +23,11 @@ public final class UpdateSceneGraph implements OutgoingPacket<SceneGraphContext>
 		for (int regionX = (player.getLocation().getRegionX() - 6) / 8; regionX <= ((player.getLocation().getRegionX() + 6) / 8); regionX++) {
 			for (int regionY = (player.getLocation().getRegionY() - 6) / 8; regionY <= ((player.getLocation().getRegionY() + 6) / 8); regionY++) {
 				int[] keys = XteaParser.Companion.getRegionXTEA(regionX << 8 | regionY);
-				for (int i = 0; i < keys.length; i++) {
-					buffer.putIntB(keys[i]);
+				for (int i = 0; i < 4; i++) {
+					if (keys != null)
+						buffer.putIntB(keys[i]);
+					else
+						buffer.putIntB(0);
 				}
 			}
 		}

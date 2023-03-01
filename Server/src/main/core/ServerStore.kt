@@ -2,8 +2,10 @@ package core
 
 import core.api.PersistWorld
 import core.api.getItemName
+import core.api.log
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.tools.Log
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
@@ -38,7 +40,7 @@ class ServerStore : PersistWorld {
                 fileMap[key] = data
                 counter++
             } catch (e: Exception){
-                SystemLogger.logErr(this::class.java, "Failed parsing ${storeFile.name} - stack trace below.")
+                log(this::class.java, Log.ERR,  "Failed parsing ${storeFile.name} - stack trace below.")
                 e.printStackTrace()
                 return@forEach
             }

@@ -1,11 +1,14 @@
 package core.game.node.entity.npc;
 
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Used as superclass for "special NPC" plugins.
@@ -63,7 +66,7 @@ public abstract class AbstractNPC extends NPC implements Plugin<Object> {
 			if (mapping.containsKey(id)) {
 				String name = mapping.get(id).getClass().getSimpleName();
 				if (name != getClass().getSimpleName()) {
-					SystemLogger.logErr(this.getClass(), "[" + getClass().getSimpleName() + "] - Warning: Mapping already contained NPC id " + id + "! (" + name + ")");
+					log(this.getClass(), Log.ERR,  "[" + getClass().getSimpleName() + "] - Warning: Mapping already contained NPC id " + id + "! (" + name + ")");
 					continue;
 				}
 			}

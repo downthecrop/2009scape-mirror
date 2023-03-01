@@ -2,6 +2,7 @@ package core.game.system.command.sets
 
 import content.global.activity.jobs.JobManager
 import content.global.skill.slayer.Master
+import core.api.log
 import core.api.removeAttribute
 import core.api.getItemName
 import core.api.sendMessage
@@ -27,6 +28,7 @@ import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
 import core.net.packet.PacketWriteQueue
+import core.tools.Log
 
 @Initializable
 class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
@@ -85,14 +87,14 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             val mapId = args[1].toIntOrNull() ?: return@define
 
             val def = Struct.get(mapId)
-            SystemLogger.logInfo(this::class.java, def.toString())
+            log(this::class.java, Log.FINE,  def.toString())
         }
 
         define("datamap") {player, args ->
             val mapId = args[1].toIntOrNull() ?: return@define
 
             val def = DataMap.get(mapId)
-            SystemLogger.logInfo(this::class.java, def.toString())
+            log(this::class.java, Log.FINE,  def.toString())
         }
 
         define("dumpstructs", Privilege.ADMIN, "", "Dumps all the cache structs to structs.txt") {player, _ ->

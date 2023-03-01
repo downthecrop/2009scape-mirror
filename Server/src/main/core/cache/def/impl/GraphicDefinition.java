@@ -70,14 +70,14 @@ public class GraphicDefinition {
 		}
 		// 5046 - 5050 are related anims & 2148
 		GraphicDefinition d = GraphicDefinition.forId(803);
-		System.out.println("Graphic " + d.graphicsId + " anim id = " + d.animationId + ", " + d.defaultModel + ".");
+
 		for (int i = 0; i < 5000; i++) {
 			GraphicDefinition def = GraphicDefinition.forId(i);
 			if (def == null) {
 				continue;
 			}
 			if ((def.animationId > 2000 && def.animationId < 2200) || (def.defaultModel >= 1300 && def.defaultModel < 1500)) {
-				System.out.println("Possible match [id=" + i + ", anim=" + def.animationId + "].");
+
 			}
 		}
 	}

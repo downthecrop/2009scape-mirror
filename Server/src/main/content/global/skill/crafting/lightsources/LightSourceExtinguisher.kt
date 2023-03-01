@@ -1,5 +1,6 @@
 package content.global.skill.crafting.lightsources
 
+import core.api.log
 import core.cache.def.impl.ItemDefinition
 import core.game.container.Container
 import core.game.interaction.OptionHandler
@@ -9,6 +10,7 @@ import core.game.node.item.Item
 import core.tools.SystemLogger
 import core.plugin.Initializable
 import core.plugin.Plugin
+import core.tools.Log
 
 
 /**
@@ -28,7 +30,7 @@ class LightSourceExtinguisher : OptionHandler(){
 
         val lightSource = LightSources.forId(node.id)
 
-        lightSource ?: return false.also { SystemLogger.logWarn(this::class.java, "UNHANDLED EXTINGUISH OPTION: ID = ${node.id}") }
+        lightSource ?: return false.also { log(this::class.java, Log.WARN,  "UNHANDLED EXTINGUISH OPTION: ID = ${node.id}") }
 
         player.inventory.replace(node.asItem(), Item(lightSource.fullID))
         return true

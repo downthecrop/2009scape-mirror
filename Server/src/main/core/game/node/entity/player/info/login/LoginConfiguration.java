@@ -14,6 +14,7 @@ import core.plugin.Plugin;
 import core.ServerConstants;
 import core.game.interaction.InteractionListeners;
 import content.global.handlers.iface.RulesAndInfo;
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.world.GameWorld;
 import core.game.world.repository.Repository;
@@ -25,6 +26,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
+
+import static core.api.ContentAPIKt.log;
 
 
 /**
@@ -209,7 +212,7 @@ public final class LoginConfiguration {
      */
     public static final void config(final Player player) {
         if(!player.isArtificial())
-            SystemLogger.logInfo(LoginConfiguration.class, "configuring player " + player.getUsername());
+            log(LoginConfiguration.class, Log.INFO, "configuring player " + player.getUsername());
         player.getInventory().refresh();
         player.getEquipment().refresh();
         player.getSkills().refresh();
@@ -226,7 +229,7 @@ public final class LoginConfiguration {
         player.getEmoteManager().refresh();
         player.getInterfaceManager().openInfoBars();
         if(!player.isArtificial())
-            SystemLogger.logInfo(LoginConfiguration.class, "finished configuring player " + player.getUsername());
+            log(LoginConfiguration.class, Log.INFO, "finished configuring player " + player.getUsername());
     }
 
     /**

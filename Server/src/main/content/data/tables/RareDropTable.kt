@@ -2,15 +2,15 @@ package content.data.tables
 
 import core.ServerConstants
 import core.api.StartupListener
+import core.api.log
 import core.api.shouldRemoveNothings
 import core.api.utils.WeightBasedTable
 import core.api.utils.WeightedItem
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
+import core.tools.Log
 import core.tools.RandomFunction
-import core.tools.SystemLogger.logErr
-import core.tools.SystemLogger.logInfo
 import org.rs09.consts.Items
 import org.w3c.dom.Element
 import org.w3c.dom.Node
@@ -26,11 +26,11 @@ import javax.xml.parsers.ParserConfigurationException
 class RareDropTable : StartupListener {
     override fun startup() {
         if (ServerConstants.RDT_DATA_PATH != null && !File(ServerConstants.RDT_DATA_PATH).exists()) {
-            logErr(this.javaClass, "Can't locate RDT file at " + ServerConstants.RDT_DATA_PATH)
+            log(this::class.java, Log.ERR, "Can't locate RDT file at " + ServerConstants.RDT_DATA_PATH)
             return
         }
         parse(ServerConstants.RDT_DATA_PATH)
-        logInfo(this.javaClass, "Initialized Rare Drop Table from " + ServerConstants.RDT_DATA_PATH)
+        log(this::class.java, Log.FINE, "Initialized Rare Drop Table from " + ServerConstants.RDT_DATA_PATH)
     }
 
     companion object {

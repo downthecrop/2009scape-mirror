@@ -22,6 +22,7 @@ import core.game.node.entity.player.info.login.PlayerSaver
 import core.tools.SystemLogger
 import core.tools.SystemLogger.logStartup
 import core.game.world.GameWorld
+import core.tools.Log
 import java.util.function.Consumer
 
 /**
@@ -64,10 +65,10 @@ object ClassScanner {
             loadContentInterfacesFrom(scanResults)
             logStartup("Loaded $amountLoaded content interfaces.")
         } catch (t: Throwable) {
-            SystemLogger.logErr(this::class.java, "Error initializing Plugins -> " + t.localizedMessage + " for file -> " + lastLoaded)
+            log(this::class.java, Log.ERR,  "Error initializing Plugins -> " + t.localizedMessage + " for file -> " + lastLoaded)
             t.printStackTrace()
         } catch (e: Exception) {
-            SystemLogger.logErr(this::class.java, "Error initializing Plugins -> " + e.localizedMessage + " for file -> " + lastLoaded)
+            log(this::class.java, Log.ERR,  "Error initializing Plugins -> " + e.localizedMessage + " for file -> " + lastLoaded)
             e.printStackTrace()
         }
     }
@@ -110,12 +111,12 @@ object ClassScanner {
                     }
                     for(border in clazz.defineAreaBorders()) zone.register(border)
                     ZoneBuilder.configure(zone)
-                    SystemLogger.logInfo(this::class.java, "Configured zone: ${clazz.javaClass.simpleName + "MapArea"}")
+                    log(this::class.java, Log.FINE,  "Configured zone: ${clazz.javaClass.simpleName + "MapArea"}")
                     MapArea.zoneMaps[clazz.javaClass.simpleName + "MapArea"] = zone
                 }
                 amountLoaded++
             } catch (e: Exception) {
-                SystemLogger.logErr(this::class.java, "Error loading content: ${it.simpleName}, ${e.localizedMessage}")
+                log(this::class.java, Log.ERR,  "Error loading content: ${it.simpleName}, ${e.localizedMessage}")
                 e.printStackTrace()
             }
         }
@@ -136,10 +137,10 @@ object ClassScanner {
                     definePlugin(clazz)
                 }
             } catch (t: Throwable) {
-                SystemLogger.logErr(this::class.java, "Failed to load plugin ${p.name}.");
+                log(this::class.java, Log.ERR,  "Failed to load plugin ${p.name}.");
 
                 if (t is NoSuchMethodException && p.superclass.simpleName == core.game.dialogue.DialoguePlugin::class.simpleName) {
-                    SystemLogger.logErr(this::class.java,
+                    log(this::class.java, Log.ERR, 
                         "Make sure the constructor signature matches " +
                         "`${p.simpleName}(player: Player? = null) : DialoguePlugin(player)'."
                     )
@@ -196,7 +197,7 @@ object ClassScanner {
                         plugin.newInstance(null)
                         QuestRepository.register(plugin as Quest)
                     }
-                    else -> SystemLogger.logWarn(this::class.java, "Unknown Manifest: " + manifest.type)
+                    else -> log(this::class.java, Log.WARN,  "Unknown Manifest: " + manifest.type)
                 }
             }
             numPlugins++

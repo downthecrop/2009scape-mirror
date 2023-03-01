@@ -5,6 +5,7 @@ import core.plugin.Plugin
 import org.json.simple.JSONObject
 import core.ServerStore
 import core.plugin.ClassScanner
+import core.tools.Log
 import java.util.*
 
 /**
@@ -42,7 +43,7 @@ open class WorldEvent(var name: String) {
      * Used to log world event messages in a standard and organized way.
      */
     fun log(message: String){
-        SystemLogger.logInfo(this::class.java, "[World Events($name)] $message")
+        core.api.log(this::class.java, Log.FINE,  "[World Events($name)] $message")
     }
 
     /**

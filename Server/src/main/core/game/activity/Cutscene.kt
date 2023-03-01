@@ -25,6 +25,7 @@ import core.api.Event
 import core.api.utils.PlayerCamera
 import core.tools.SystemLogger
 import core.game.world.GameWorld
+import core.tools.Log
 
 /**
  * A utility class for making cutscenes.
@@ -259,7 +260,7 @@ abstract class Cutscene(val player: Player) {
                         try {
                             endActions?.invoke()
                         } catch (e: Exception) {
-                            SystemLogger.logErr(this::class.java, "There's some bad nasty code in ${this::class.java.simpleName} end actions!")
+                            log(this::class.java, Log.ERR,  "There's some bad nasty code in ${this::class.java.simpleName} end actions!")
                             e.printStackTrace()
                         }
                         return true
@@ -347,7 +348,7 @@ abstract class Cutscene(val player: Player) {
     fun logCutscene(message: String)
     {
         if(ServerConstants.LOG_CUTSCENE)
-            SystemLogger.logInfo(this::class.java, "$message")
+            log(this::class.java, Log.FINE,  "$message")
     }
 
     fun clearNPCs() {

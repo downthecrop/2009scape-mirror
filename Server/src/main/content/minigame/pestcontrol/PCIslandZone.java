@@ -21,7 +21,7 @@ public final class PCIslandZone extends MapZone {
 	@Override
 	public boolean death(Entity e, Entity killer) {
 		if (e instanceof Player) { // Ensure players can't die on the island.
-			// System.out.println("[PCIslandZone] Saved player from death!");
+
 			e.getProperties().setTeleportLocation(e.getLocation());
 			return true;
 		}

@@ -203,7 +203,7 @@ public class TormentedDemonNPC extends AbstractNPC {
 	 * @param protectionStyle The protection style to switch to.
 	 */
 	public void transformDemon(CombatStyle attackStyle, CombatStyle protectionStyle) {
-		//System.out.println("Transforming demon, selected combat style = " + style + ", the selected protection style = " + protection);
+
 
         // If either attackStyle or protectionStyle are null, use the current form's values
         if(attackStyle == null) {
@@ -216,7 +216,7 @@ public class TormentedDemonNPC extends AbstractNPC {
 		int oldHp = getSkills().getLifepoints();
 		transform(id);
 		getSkills().setLifepoints(oldHp);
-		//System.out.println("The outcome demon, id = " + id + " combat style = " + getProperties().getCombatPulse().getStyle() + ", the protection style = " + getProperties().getProtectStyle());
+
 		TD_SWING_HANDLER.style = getProperties().getCombatPulse().getStyle();
 	}
 	

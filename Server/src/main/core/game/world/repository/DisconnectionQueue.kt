@@ -1,10 +1,12 @@
 package core.game.world.repository
 
+import core.api.log
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.login.PlayerParser
 import core.game.system.task.TaskExecutor
 import core.tools.SystemLogger
 import core.game.world.GameWorld
+import core.tools.Log
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
@@ -50,11 +52,11 @@ class DisconnectionQueue {
             return false
         }
         if (entry.isClear) {
-            SystemLogger.logInfo(this::class.java, "Clearing player...")
+            log(this::class.java, Log.FINE,  "Clearing player...")
             player.clear()
         }
         Repository.removePlayer(player)
-        SystemLogger.logInfo(this::class.java, "Player cleared. Removed ${player.details.username}")
+        log(this::class.java, Log.INFO, "Player cleared. Removed ${player.details.username}")
         try {
             if(player.communication.clan != null)
                 player.communication.clan.leave(player, false)

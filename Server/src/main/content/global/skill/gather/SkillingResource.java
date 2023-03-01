@@ -645,7 +645,6 @@ public enum SkillingResource {
 	static {
 		for (SkillingResource resource : SkillingResource.values()) {
 			if (RESOURCES.containsKey(resource.id)) {
-				SystemLogger.logErr(SkillingResource.class, "Already contained resource " + resource.getId() + " - " + resource.name());
 			}
 			RESOURCES.put(resource.id, resource);
 		}

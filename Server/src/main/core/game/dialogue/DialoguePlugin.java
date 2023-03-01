@@ -7,11 +7,13 @@ import core.game.node.entity.player.Player;
 import core.plugin.Plugin;
 import core.plugin.PluginManifest;
 import core.plugin.PluginType;
+import core.tools.Log;
 import core.tools.SystemLogger;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
+import static core.api.ContentAPIKt.log;
 import static core.api.DialUtilsKt.splitLines;
 import static core.tools.DialogueConstKt.DIALOGUE_INITIAL_OPTIONS_HANDLE;
 import static core.tools.DialogueConstKt.START_DIALOGUE;
@@ -197,7 +199,7 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 		}
 
 		if (npc == null) {
-			SystemLogger.logWarn(this.getClass(),
+			log(this.getClass(), Log.WARN,
 				args[0].getClass().getSimpleName() +
 				"Is not assigning an NPC. Whoever did that should fix it."
 			);

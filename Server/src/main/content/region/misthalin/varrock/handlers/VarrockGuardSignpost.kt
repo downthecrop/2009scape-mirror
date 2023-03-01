@@ -9,6 +9,7 @@ import core.game.world.map.zone.ZoneBorders
 import core.GlobalStats
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import core.tools.Log
 import core.tools.SystemLogger
 
 class VarrockGuardSignpost : InteractionListener {
@@ -29,7 +30,7 @@ class VarrockGuardSignpost : InteractionListener {
 
         on(31298, IntType.SCENERY, "read"){ player, _ ->
             val pickpocketCount = GlobalStats.getDailyGuardPickpockets()
-            SystemLogger.logInfo(this::class.java, "Is equal? ${pickpocketCount == 0}")
+            log(this::class.java, Log.FINE,  "Is equal? ${pickpocketCount == 0}")
             when(pickpocketCount){
                 0 -> sendDialogue(player,  "The Varrock Palace guards are pleased to announce that crime is at an all-time low, without a single guard in the palace or at the city gates being pickpocketed today.")
                 1 -> sendDialogue(player, "One of the Varrock Palace guards was pickpocketed today. He was close to tears at having lost his last few gold pieces." )

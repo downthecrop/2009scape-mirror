@@ -1,5 +1,6 @@
 package content.global.skill.farming
 
+import core.api.log
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -8,6 +9,7 @@ import core.game.node.entity.skill.Skills
 import core.tools.SystemLogger
 import core.plugin.Initializable
 import core.plugin.Plugin
+import core.tools.Log
 import java.util.concurrent.TimeUnit
 
 @Initializable
@@ -39,7 +41,7 @@ class HealthChecker : OptionHandler(){
             PatchType.FRUIT_TREE -> patch.setCurrentState(patch.getCurrentState() - 14)
             PatchType.BUSH -> patch.setCurrentState(patch.plantable!!.value + patch.plantable!!.stages + 4)
             PatchType.CACTUS -> patch.setCurrentState(patch.plantable!!.value + patch.plantable!!.stages + 3)
-            else -> SystemLogger.logErr(this::class.java,"Unreachable patch type from when(type) switch in HealthChecker.kt line 36")
+            else -> log(this::class.java, Log.ERR, "Unreachable patch type from when(type) switch in HealthChecker.kt line 36")
         }
 
         if(type == PatchType.FRUIT_TREE){

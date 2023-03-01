@@ -12,10 +12,12 @@ import core.net.packet.context.WindowsPaneContext;
 import core.net.packet.out.CloseInterface;
 import core.net.packet.out.Interface;
 import core.net.packet.out.WindowsPane;
+import core.tools.Log;
 import org.rs09.consts.Components;
 import content.region.misc.tutisland.handlers.TutorialStage;
 import core.tools.SystemLogger;
 
+import static core.api.ContentAPIKt.log;
 
 
 /**
@@ -124,7 +126,7 @@ public final class InterfaceManager {
 	public Component openWindowsPane(Component windowsPane, boolean overlap) {
 		this.windowsPane = windowsPane;
 		if (windowsPane.getDefinition().getType() != InterfaceType.WINDOW_PANE) {
-			SystemLogger.logErr(this.getClass(), "Set interface type to WINDOW_PANE for component " + windowsPane.getId() + ", definition requires updating!");
+			log(this.getClass(), Log.WARN,  "Set interface type to WINDOW_PANE for component " + windowsPane.getId() + ", definition requires updating!");
 			windowsPane.getDefinition().setType(InterfaceType.WINDOW_PANE);
 		}
 
@@ -140,7 +142,7 @@ public final class InterfaceManager {
 	public void openWindowsPane(Component windowsPane, int type) {
 		this.windowsPane = windowsPane;
 		if (windowsPane.getDefinition().getType() != InterfaceType.WINDOW_PANE) {
-			SystemLogger.logErr(this.getClass(), "Set interface type to WINDOW_PANE for component " + windowsPane.getId() + ", definition requires updating!");
+			log(this.getClass(), Log.WARN,  "Set interface type to WINDOW_PANE for component " + windowsPane.getId() + ", definition requires updating!");
 			windowsPane.getDefinition().setType(InterfaceType.SINGLE_TAB);
 		}
 
@@ -268,7 +270,7 @@ public final class InterfaceManager {
 	 */
 	public Component openSingleTab(Component component) {
 		if (component.getDefinition().getType() != InterfaceType.SINGLE_TAB) {
-			SystemLogger.logErr(this.getClass(), "Set interface type to SINGLE_TAB for component " + component.getId() + ", definition requires updating!");
+			log(this.getClass(), Log.WARN,  "Set interface type to SINGLE_TAB for component " + component.getId() + ", definition requires updating!");
 			component.getDefinition().setType(InterfaceType.SINGLE_TAB);
 		}
 		component.open(player);
@@ -453,11 +455,11 @@ public final class InterfaceManager {
 			throw new IllegalStateException("Attack tab can only be instanced as " + WeaponInterface.class.getCanonicalName() + "!");
 		}
 		if (component.getDefinition().getTabIndex() != slot) {
-			SystemLogger.logErr(this.getClass(), "Set tab index to " + slot + " for component " + component.getId() + ", definition requires updating!");
+			log(this.getClass(), Log.WARN,  "Set tab index to " + slot + " for component " + component.getId() + ", definition requires updating!");
 			component.getDefinition().setTabIndex(slot);
 		}
 		if (component.getDefinition().getType() != InterfaceType.TAB) {
-			SystemLogger.logErr(this.getClass(), "Set interface type to TAB for component " + component.getId() + ", definition requires updating!");
+			log(this.getClass(), Log.WARN,  "Set interface type to TAB for component " + component.getId() + ", definition requires updating!");
 			component.getDefinition().setType(InterfaceType.TAB);
 		}
 		component.open(player);
@@ -470,7 +472,7 @@ public final class InterfaceManager {
 	 */
 	public void openTab(Component component) {
 		if (component.getDefinition().getTabIndex() < 0) {
-			SystemLogger.logErr(this.getClass(), "No component definitions found for tab " + component.getId() + "!");
+			log(this.getClass(), Log.WARN,  "No component definitions found for tab " + component.getId() + "!");
 			return;
 		}
 		openTab(component.getDefinition().getTabIndex(), component);
@@ -500,7 +502,7 @@ public final class InterfaceManager {
 		} else {
 			chatbox = component;
 			if (chatbox.getDefinition().getType() != InterfaceType.DIALOGUE && chatbox.getDefinition().getType() != InterfaceType.CHATBOX && chatbox.getDefinition().getType() != InterfaceType.CS_CHATBOX) {
-				SystemLogger.logErr(this.getClass(), "Set interface type to CHATBOX for component " + component.getId() + ", definition requires updating!");
+				log(this.getClass(), Log.WARN,  "Set interface type to CHATBOX for component " + component.getId() + ", definition requires updating!");
 				chatbox.getDefinition().setType(InterfaceType.DIALOGUE);
 			}
 			chatbox.open(player);
@@ -606,7 +608,7 @@ public final class InterfaceManager {
 		}
 		overlay = component;
 		if (overlay.getDefinition().getType() != InterfaceType.OVERLAY) {
-			SystemLogger.logErr(this.getClass(), "Set interface type to OVERLAY for component " + component.getId() + ", definition requires updating!");
+			log(this.getClass(), Log.WARN,  "Set interface type to OVERLAY for component " + component.getId() + ", definition requires updating!");
 			overlay.getDefinition().setType(InterfaceType.OVERLAY);
 			overlay.getDefinition().setWalkable(true);
 		}
@@ -623,7 +625,7 @@ public final class InterfaceManager {
 		}
 		wildyOverlay = component;
 		if (wildyOverlay.getDefinition().getType() != InterfaceType.WILDERNESS_OVERLAY) {
-			SystemLogger.logErr(this.getClass(), "Set interface type to WILDERNESS_OVERLAY for component " + component.getId() + ", definition requires updating!");
+			log(this.getClass(), Log.WARN,  "Set interface type to WILDERNESS_OVERLAY for component " + component.getId() + ", definition requires updating!");
 			wildyOverlay.getDefinition().setType(InterfaceType.WILDERNESS_OVERLAY);
 			wildyOverlay.getDefinition().setWalkable(true);
 		}

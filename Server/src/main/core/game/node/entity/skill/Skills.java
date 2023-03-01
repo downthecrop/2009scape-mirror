@@ -650,7 +650,7 @@ public final class Skills {
 					Player assister = assist.getPlayer();
 					int index = assist.getSkillIndex(slot);
 					if (index != -1 && !assist.isRestricted()) {
-						// System.out.println(index + ", " +
+
 						// assist.getSkills()[index] + ", " + SKILL_NAME[slot]);
 						if (assist.getSkills()[index]) {
 							int assistLevel = assister.getSkills().getLevel(slot);

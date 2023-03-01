@@ -17,6 +17,7 @@ import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
 import core.game.world.update.flag.context.Animation;
+import core.tools.Log;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.json.simple.JSONArray;
@@ -27,6 +28,7 @@ import core.game.world.GameWorld;
 import java.awt.*;
 import java.nio.ByteBuffer;
 
+import static core.api.ContentAPIKt.log;
 import static core.api.regionspec.RegionSpecificationKt.fillWith;
 import static core.api.regionspec.RegionSpecificationKt.using;
 
@@ -323,7 +325,7 @@ public final class HouseManager {
 	 */
 	public Location getEnterLocation() {
 		if (houseRegion == null) {
-			SystemLogger.logErr(this.getClass(), "House wasn't constructed yet!");
+			log(this.getClass(), Log.ERR,  "House wasn't constructed yet!");
 			return null;
 		}
 		for (int x = 0; x < 8; x++) {

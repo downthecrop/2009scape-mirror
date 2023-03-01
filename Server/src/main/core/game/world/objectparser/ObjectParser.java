@@ -19,7 +19,7 @@ public class ObjectParser implements StartupListener {
         if(ServerConstants.OBJECT_PARSER_PATH == null) return;
         File f = new File(ServerConstants.OBJECT_PARSER_PATH);
         if(!f.exists()){
-            System.out.println("[ObjectParser]: Can't find file " + ServerConstants.OBJECT_PARSER_PATH);
+
             return;
         }
 
@@ -30,7 +30,7 @@ public class ObjectParser implements StartupListener {
 
             NodeList parseList = doc.getElementsByTagName("ObjectAction");
 
-            System.out.println("Parsing " + parseList.getLength() + " object modifications.");
+
 
             for(int i = 0; i < parseList.getLength(); i++){
                 Node parseNode = parseList.item(i);

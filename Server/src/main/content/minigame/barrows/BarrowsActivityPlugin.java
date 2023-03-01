@@ -97,7 +97,7 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 					}
 				}
 				int drain = 8;
-				System.out.println(getWorldTicks() % 30);
+
 				//if (p.getLocks().isLocked("barrow:drain") || RandomFunction.random(100) % 2 == 0) {
 				//	continue;
 				//}

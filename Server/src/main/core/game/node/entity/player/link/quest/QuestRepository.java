@@ -2,6 +2,7 @@ package core.game.node.entity.player.link.quest;
 
 import core.game.node.entity.player.Player;
 
+import core.tools.Log;
 import core.tools.SystemLogger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -9,6 +10,8 @@ import org.json.simple.JSONObject;
 import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.Map;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Manages the systems/players quest repository.
@@ -73,7 +76,7 @@ public final class QuestRepository {
                 player.varpManager.get(config[0]).setVarbit(0,config[1]).send(player);
                 player.varpManager.flagSave(config[0], false);
                 player.setAttribute("/save:quest-varps-converted",true);
-//            System.out.println(quest.getName() + " - > stage =  " + getStage(quest) + " - configs = { " + config[0] + " " + config[1] + " }");
+
             }
         } else {
             for(Quest quest : QUESTS.values()){
@@ -98,7 +101,7 @@ public final class QuestRepository {
         if(oldStage < stage) {
             quests.put(quest.getIndex(), stage);
         } else {
-            SystemLogger.logWarn(this.getClass(), String.format("Nonmonotonic QuestRepository.setStage call for player \"%s\", quest \"%s\", old stage %d, new stage %d", player.getName(), quest.getName(), oldStage, stage));
+            log(this.getClass(), Log.WARN,  String.format("Nonmonotonic QuestRepository.setStage call for player \"%s\", quest \"%s\", old stage %d, new stage %d", player.getName(), quest.getName(), oldStage, stage));
         }
     }
 
@@ -202,7 +205,7 @@ public final class QuestRepository {
     public boolean isComplete(String name) {
         Quest quest = getQuest(name);
         if (quest == null) {
-            SystemLogger.logErr(this.getClass(), "Error can't check if quest is complete for " + name);
+            log(this.getClass(), Log.ERR,  "Error can't check if quest is complete for " + name);
             return false;
         }
         return quest.getStage(player) >= 100;
@@ -217,7 +220,7 @@ public final class QuestRepository {
     public boolean hasStarted(String name) {
         Quest quest = getQuest(name);
         if (quest == null) {
-            SystemLogger.logErr(this.getClass(), "Error can't check if quest is complete for " + name);
+            log(this.getClass(), Log.ERR,  "Error can't check if quest is complete for " + name);
             return false;
         }
         return quest.getStage(player) > 0;

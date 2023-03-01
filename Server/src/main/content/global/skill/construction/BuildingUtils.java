@@ -16,11 +16,14 @@ import core.game.world.update.flag.context.Animation;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
+import core.tools.Log;
 import org.jetbrains.annotations.NotNull;
 import core.tools.SystemLogger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Utility class for building.
@@ -135,7 +138,7 @@ public final class BuildingUtils {
 			player.getPacketDispatch().sendString("Level " + decoration.getLevel(), 396, 140 + menuIndex);
 			//player.getPacketDispatch().sendItemZoomOnInterface(items[i].protocol(), 50000, 396, 49 + i);
 		}
-		System.out.println(c261Value);
+
 		player.getConfigManager().set(261, c261Value);
 		PacketRepository.send(ContainerPacket.class, new ContainerContext(player, 396, 132, 8, items, false));
 	}
@@ -287,7 +290,7 @@ public final class BuildingUtils {
 								}
 							}
 						} else {
-							SystemLogger.logErr(BuildingUtils.class, "Couldn't find stairs! " + plane);
+							log(BuildingUtils.class, Log.ERR, "Couldn't find stairs! " + plane);
 						}
 					}
 				}
@@ -407,7 +410,7 @@ public final class BuildingUtils {
 								}
 							}
 						} else {
-							SystemLogger.logErr(BuildingUtils.class, "Couldn't find stairs! " + plane);
+							log(BuildingUtils.class, Log.ERR, "Couldn't find stairs! " + plane);
 						}
 					}
 				}
@@ -549,7 +552,7 @@ public final class BuildingUtils {
 				}
 			}
 			//(0=east, 1=south, 2=west, 3=north).
-			//			System.out.println("Roof information: index=" + index + ", exit count=" + count + "; array=" + Arrays.toString(exits));
+
 			if (count == 4) {
 				room = Room.create(player, RoomProperties.ROOF_4_EXIT);
 			}

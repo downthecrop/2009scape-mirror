@@ -3,6 +3,7 @@ package content.global.activity.ttrail;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Represents a clue scroll plugin.
@@ -138,7 +141,7 @@ public abstract class ClueScrollPlugin extends MapZone implements Plugin<Object>
 		if(clue.getClueId() == 2681)
 			return;
 		if (CLUE_SCROLLS.containsKey(clue.getClueId())) {
-			SystemLogger.logErr(this.getClass(), "Error! Plugin already registered with clue id - " + clue.getClueId() + ", trying to register " + clue.getClass().getCanonicalName() + " the real plugin using the id is " + CLUE_SCROLLS.get(clue.getClueId()).getClass().getCanonicalName() + "!");
+			log(this.getClass(), Log.ERR,  "Error! Plugin already registered with clue id - " + clue.getClueId() + ", trying to register " + clue.getClass().getCanonicalName() + " the real plugin using the id is " + CLUE_SCROLLS.get(clue.getClueId()).getClass().getCanonicalName() + "!");
 			return;
 		}
 		List<ClueScrollPlugin> organized = (List<ClueScrollPlugin>) ORGANIZED.get(clue.getLevel());
@@ -169,7 +172,7 @@ public abstract class ClueScrollPlugin extends MapZone implements Plugin<Object>
 	public static Item getClue(ClueLevel clueLevel) {
 		List<ClueScrollPlugin> clues = ORGANIZED.get(clueLevel);
 		if (clues == null) {
-			SystemLogger.logErr(ClueScrollPlugin.class, "Error! There are no clues for level " + clueLevel + "!");
+			log(ClueScrollPlugin.class, Log.ERR, "Error! There are no clues for level " + clueLevel + "!");
 			return null;
 		}
 		ClueScrollPlugin clue = clues.get(RandomFunction.random(clues.size()));

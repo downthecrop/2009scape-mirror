@@ -3,13 +3,13 @@ package content.data.tables;
 import core.api.StartupListener;
 import core.game.node.item.Item;
 import core.game.node.item.WeightedChanceItem;
+import core.tools.Log;
 import core.tools.RandomFunction;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import core.ServerConstants;
-import core.tools.SystemLogger;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,7 +18,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static core.tools.SystemLogger.logInfo;
+import static core.api.ContentAPIKt.log;
 
 /**
  * Handles the herb drop table.
@@ -57,11 +57,11 @@ public final class HerbDropTable implements StartupListener {
 	@Override
 	public void startup() {
 		if(ServerConstants.HDT_DATA_PATH != null && !new File(ServerConstants.HDT_DATA_PATH).exists()){
-			SystemLogger.logErr(this.getClass(), "Can't locate HDT file at " + ServerConstants.HDT_DATA_PATH);
+			log(this.getClass(), Log.ERR, "Can't locate HDT file at " + ServerConstants.HDT_DATA_PATH);
 			return;
 		}
 		parse(ServerConstants.HDT_DATA_PATH);
-		logInfo(this.getClass(), "Initialized Herb Drop Table from " + ServerConstants.HDT_DATA_PATH);
+		log(this.getClass(), Log.FINE, "Initialized Herb Drop Table from " + ServerConstants.HDT_DATA_PATH);
 	}
 
 	/**

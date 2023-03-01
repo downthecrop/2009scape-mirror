@@ -3,6 +3,7 @@ package core.game.node.entity.player.link;
 import core.game.node.entity.player.Varp;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
@@ -17,6 +18,8 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.*;
 import core.net.packet.context.DisplayModelContext.ModelType;
 import core.net.packet.out.*;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Represents the class used to dispatching packets.
@@ -64,7 +67,7 @@ public final class PacketDispatch {
 			return;
 		}
 		if (message.length() > 255) {
-			SystemLogger.logErr(this.getClass(), "Message length out of bounds (" + message + ")!");
+			log(this.getClass(), Log.ERR,  "Message length out of bounds (" + message + ")!");
 			message = message.substring(0, 255);
 		}
 		PacketRepository.send(GameMessage.class, new GameMessageContext(player, message));

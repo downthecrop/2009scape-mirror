@@ -1,11 +1,14 @@
 package core.game.activity;
 
 import core.game.node.entity.player.Player;
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.world.GameWorld;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Manages the activities.
@@ -50,7 +53,7 @@ public final class ActivityManager {
 		ActivityPlugin plugin = ACTIVITIES.get(name);
 		if (plugin == null) {
 			if (GameWorld.getSettings().isDevMode()) {
-				SystemLogger.logErr(ActivityManager.class, "Unhandled activity - " + name + "!");
+				log(ActivityManager.class, Log.ERR, "Unhandled activity - " + name + "!");
 			}
 			return false;
 		}

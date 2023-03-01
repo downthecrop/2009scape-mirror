@@ -1,5 +1,6 @@
 package content.global.handlers.item
 
+import core.api.log
 import core.cache.def.impl.ItemDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -8,6 +9,7 @@ import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
+import core.tools.Log
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.rs09.consts.Items
@@ -63,7 +65,7 @@ class EnchantJewelleryTabOption : OptionHandler(){
         }
 
         if(items == null){
-            SystemLogger.logWarn(this::class.java, "UNHANDLED ENCHANT ITEM TABLET [ID: ${node?.id}")
+            log(this::class.java, Log.WARN,  "UNHANDLED ENCHANT ITEM TABLET [ID: ${node?.id}")
             return true
         }
 

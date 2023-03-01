@@ -2,6 +2,7 @@ package core
 
 import core.game.system.SystemShutdownHook
 import core.game.world.map.Location
+import core.tools.LogLevel
 import core.tools.mysql.Database
 import core.tools.secondsToTicks
 import java.math.BigInteger
@@ -159,6 +160,12 @@ class ServerConstants {
 
 		@JvmField
 		var I_AM_A_CHEATER = false
+
+		@JvmField
+		var LOG_LEVEL = LogLevel.VERBOSE
+
+		@JvmField
+		var JAVA_VERSION = 8
 
 		//location names for the ::to command.
 		val TELEPORT_DESTINATIONS = arrayOf(

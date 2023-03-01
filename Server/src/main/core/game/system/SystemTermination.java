@@ -8,12 +8,15 @@ import core.ServerConstants;
 import core.ServerStore;
 import core.game.bots.AIRepository;
 import core.game.node.entity.player.info.PlayerMonitor;
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.world.GameWorld;
 import core.game.world.repository.Repository;
 
 import java.io.File;
 import java.util.Iterator;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Handles the terminating of the system.
@@ -35,14 +38,14 @@ public final class SystemTermination {
 	 * Terminates the system safely.
 	 */
 	public void terminate() {
-		SystemLogger.logInfo(this.getClass(), "Initializing termination sequence - do not shutdown!");
+		log(this.getClass(), Log.INFO, "Initializing termination sequence - do not shutdown!");
 		try {
-			SystemLogger.logInfo(this.getClass(), "Shutting down networking...");
+			log(this.getClass(), Log.INFO, "Shutting down networking...");
 			Server.setRunning(false);
-			SystemLogger.logInfo(this.getClass(), "Stopping all bots...");
+			log(this.getClass(), Log.INFO, "Stopping all bots...");
 			AIRepository.clearAllBots();
 			Server.getReactor().terminate();
-			SystemLogger.logInfo(this.getClass(), "Stopping all pulses...");
+			log(this.getClass(), Log.INFO, "Stopping all pulses...");
 			GameWorld.getMajorUpdateWorker().stop();
 			for (Iterator<Player> it = Repository.getPlayers().iterator(); it.hasNext();) {
 				try {
@@ -72,7 +75,7 @@ public final class SystemTermination {
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-		SystemLogger.logInfo(this.getClass(), "Server successfully terminated!");
+		log(this.getClass(), Log.INFO, "Server successfully terminated!");
 	}
 
 	/**
@@ -81,7 +84,7 @@ public final class SystemTermination {
 	 */
 	public void save(String directory) {
 		File file = new File(directory);
-		SystemLogger.logInfo(this.getClass(), "Saving data [dir="+ file.getAbsolutePath() + "]...");
+		log(this.getClass(), Log.INFO, "Saving data [dir="+ file.getAbsolutePath() + "]...");
 		if (!file.isDirectory()) {
 			file.mkdirs();
 		}
@@ -94,7 +97,6 @@ public final class SystemTermination {
 			} catch (Exception ignored) {}
 		}
 		Repository.getDisconnectionQueue().update();
-		SystemLogger.flushLogs();
 		Repository.getDisconnectionQueue().clear();
 	}
 }

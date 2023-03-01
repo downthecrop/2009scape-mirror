@@ -1,7 +1,9 @@
 package core.game.system.config
 
 import core.ServerConstants
+import core.api.log
 import core.cache.def.impl.SceneryDefinition
+import core.tools.Log
 import core.tools.SystemLogger
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
@@ -35,7 +37,7 @@ class ObjectConfigParser {
                 count++
             }
         }
-        SystemLogger.logInfo(this::class.java, "Parsed $count object configs.")
+        log(this::class.java, Log.FINE,  "Parsed $count object configs.")
     }
 }
 

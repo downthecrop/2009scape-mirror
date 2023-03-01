@@ -17,12 +17,11 @@ import core.ServerConstants
 import core.ServerStore
 import core.auth.AuthProvider
 import core.auth.Auth
-import core.tools.SystemLogger
-import core.tools.SystemLogger.logInfo
 import core.game.system.config.ConfigParser
 import core.game.world.repository.Repository
 import core.plugin.ClassScanner
 import core.storage.AccountStorageProvider
+import core.tools.Log
 import core.worker.MajorUpdateWorker
 import java.text.SimpleDateFormat
 import java.util.*
@@ -163,7 +162,7 @@ object GameWorld {
      */
     @Throws(Throwable::class)
     fun prompt(run: Boolean, directory: String?){
-        logInfo(GameWorld::class.java, "Prompting ${settings?.name} Game World...")
+        log(GameWorld::class.java, Log.FINE, "Prompting ${settings?.name} Game World...")
         Cache.init(ServerConstants.CACHE_PATH)
         //go overboard with checks to make sure dev mode authenticator never triggers on live
         Auth.configure()
@@ -187,7 +186,6 @@ object GameWorld {
         }
 
         System.gc()
-        SystemLogger.initTradeLogger()
     }
 
     /**

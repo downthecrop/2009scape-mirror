@@ -8,6 +8,7 @@ import core.integrations.discord.Discord
 import kotlinx.coroutines.*
 import org.sqlite.SQLiteDataSource
 import core.ServerConstants
+import core.tools.Log
 import core.tools.SystemLogger
 import java.io.File
 import java.sql.Connection
@@ -138,7 +139,7 @@ object PlayerMonitor {
     }
 
     @JvmStatic fun flushRemainingEventsImmediately() {
-        SystemLogger.logInfo(this::class.java, "Flushing player log events...")
+        core.api.log(this::class.java, Log.FINE,  "Flushing player log events...")
         val path = ServerConstants.LOGS_PATH + "playerlogs.db"
         if (!File(path).exists()) {
             createSqliteDatabase(path)

@@ -1,5 +1,6 @@
 package core.net.amsc;
 
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.net.IoEventHandler;
 import core.net.IoSession;
@@ -9,6 +10,8 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.concurrent.Executors;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Handles the management server events.
@@ -38,7 +41,7 @@ public final class MSEventHandler extends IoEventHandler {
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}
-		SystemLogger.logErr(this.getClass(), "Failed connecting to Management Server!");
+		log(this.getClass(), Log.ERR,  "Failed connecting to Management Server!");
 		WorldCommunicator.terminate();
 	}
 

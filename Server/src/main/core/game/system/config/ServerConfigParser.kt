@@ -4,9 +4,13 @@ import com.moandjiezana.toml.Toml
 import core.game.world.map.Location
 import core.tools.mysql.Database
 import core.ServerConstants
+import core.api.log
+import core.api.parseEnumEntry
 import core.tools.SystemLogger
 import core.game.world.GameSettings
 import core.game.world.GameWorld
+import core.tools.Log
+import core.tools.LogLevel
 import java.io.File
 import java.net.URL
 import kotlin.system.exitProcess
@@ -32,17 +36,25 @@ object ServerConfigParser {
 
     private fun parseFromFile(confFile: File?) {
         if(!confFile!!.canonicalFile.exists()){
-            SystemLogger.logErr(this::class.java, "${confFile.canonicalFile} does not exist.")
+            log(this::class.java, Log.ERR,  "${confFile.canonicalFile} does not exist.")
             exitProcess(0)
         } else {
             try {
                 tomlData = Toml().read(confFile)
                 parseServerSettings()
                 parseGameSettings()
+                val jvmString = System.getProperty("java.version")
+                if (jvmString.startsWith("1.")) {
+                    ServerConstants.JAVA_VERSION = jvmString.substring(2,3).toInt()
+                } else if (!jvmString.startsWith("1.")) {
+                    ServerConstants.JAVA_VERSION = jvmString.substring(0,2).toInt()
+                } else if (!jvmString.contains(".")) {
+                    ServerConstants.JAVA_VERSION = jvmString.toInt()
+                }
+                log(this::class.java, Log.FINE, "It seems we are in a Java ${ServerConstants.JAVA_VERSION} environment.")
             } catch (e: java.lang.IllegalStateException) {
-                SystemLogger.logErr(this::class.java, "Passed config file is not a TOML file. Path: ${confFile.canonicalPath}")
-                SystemLogger.logErr(this::class.java, "Exception received: $e")
-                SystemLogger.logAlert(this::class.java, "Shutting down...")
+                log(this::class.java, Log.ERR,  "Passed config file is not a TOML file. Path: ${confFile.canonicalPath}")
+                log(this::class.java, Log.ERR,  "Exception received: $e")
                 exitProcess(0)
             }
         }
@@ -134,6 +146,9 @@ object ServerConfigParser {
         ServerConstants.NOAUTH_DEFAULT_ADMIN = data.getBoolean("server.noauth_default_admin", false)
         ServerConstants.DRAGON_AXE_USE_OSRS_SPEC = data.getBoolean("world.dragon_axe_use_osrs_spec", false)
         ServerConstants.ENABLE_GLOBALCHAT = data.getBoolean("world.enable_globalchat", true)
+
+        val logLevel = data.getString("server.log_level", "VERBOSE").uppercase()
+        ServerConstants.LOG_LEVEL = parseEnumEntry<LogLevel>(logLevel) ?: LogLevel.VERBOSE
     }
 
 
@@ -141,7 +156,7 @@ object ServerConfigParser {
         try {
             return parsePath(getString(key).replace("@data", ServerConstants.DATA_PATH!!))
         } catch (e: Exception){
-            SystemLogger.logErr(this::class.java, "Error parsing key: $key")
+            log(this::class.java, Log.ERR,  "Error parsing key: $key")
             exitProcess(0)
         }
     }

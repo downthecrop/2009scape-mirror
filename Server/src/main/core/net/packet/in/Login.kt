@@ -15,12 +15,14 @@ import core.ServerConstants
 import core.ServerStore
 import core.ServerStore.Companion.addToList
 import core.ServerStore.Companion.getList
+import core.api.log
 import core.auth.AuthResponse
 import core.game.node.entity.player.info.*
 import core.game.node.entity.player.info.login.LoginParser
 import core.tools.SystemLogger
 import core.game.world.GameWorld
 import core.game.world.repository.Repository
+import core.tools.Log
 import core.worker.ManagementEvents.publish
 import java.math.BigInteger
 import java.nio.BufferUnderflowException
@@ -45,7 +47,7 @@ object Login {
                 return Pair(AuthResponse.Updated, null)
             }
             if (info.opcode != NORMAL_LOGIN_OP && info.opcode != RECONNECT_LOGIN_OP) {
-                SystemLogger.logInfo(this::class.java, "Invalid Login Opcode: ${info.opcode}")
+                log(this::class.java, Log.WARN, "Invalid Login Opcode: ${info.opcode}")
                 return Pair(AuthResponse.InvalidLoginServer, null)
             }
 
@@ -82,7 +84,7 @@ object Login {
 
             return Pair(AuthResponse.Success, info)
         } catch (e: Exception) {
-            SystemLogger.logErr(this::class.java, "Exception encountered during login packet parsing! See stack trace below.")
+            log(this::class.java, Log.ERR,  "Exception encountered during login packet parsing! See stack trace below.")
             e.printStackTrace()
             return Pair(AuthResponse.UnexpectedError, null)
         }

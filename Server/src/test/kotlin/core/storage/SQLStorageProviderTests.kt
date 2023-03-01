@@ -4,7 +4,9 @@ import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import core.ServerConstants
+import core.api.log
 import core.auth.UserAccountInfo
+import core.tools.Log
 import core.tools.SystemLogger
 import java.sql.SQLDataException
 
@@ -20,9 +22,9 @@ class SQLStorageProviderTests {
         }
 
         @AfterAll @JvmStatic fun cleanup() {
-            SystemLogger.logInfo(this::class.java, "Cleaning up unit test accounts")
+            log(this::class.java, Log.FINE,  "Cleaning up unit test accounts")
             testAccountNames.forEach {name ->
-                SystemLogger.logInfo(this::class.java, "Removing test account $name")
+                log(this::class.java, Log.FINE,  "Removing test account $name")
                 val info = UserAccountInfo.createDefault()
                 info.username = name
                 storage.remove(info)

@@ -6,12 +6,14 @@ import core.plugin.CorePluginTypes.Managers
 import core.Server
 import core.ServerConstants
 import core.ServerStore
+import core.api.log
 import core.tools.SystemLogger
 import core.game.world.GameWorld
 import core.game.world.repository.Repository
 import core.game.world.update.UpdateSequence
 import core.net.packet.PacketProcessor
 import core.net.packet.PacketWriteQueue
+import core.tools.Log
 import core.tools.colorize
 import java.lang.Long.max
 import java.text.SimpleDateFormat
@@ -76,7 +78,7 @@ class MajorUpdateWorker {
             Thread.sleep(max(600 - (end - start), 0))
         }
 
-        SystemLogger.logInfo(this::class.java, "Update worker stopped.")
+        log(this::class.java, Log.FINE,  "Update worker stopped.")
     }
 
     fun handleTickActions(skipPulseUpdate: Boolean = false) {

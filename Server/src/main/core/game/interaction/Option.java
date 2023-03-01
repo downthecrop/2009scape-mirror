@@ -88,7 +88,7 @@ public final class Option {
 		if (node instanceof Item) {
 			return ItemDefinition.getOptionHandler(nodeId, name);
 		}
-		System.out.println("Unhandled node type " + node + "!");
+
 		return null;
 	}
 

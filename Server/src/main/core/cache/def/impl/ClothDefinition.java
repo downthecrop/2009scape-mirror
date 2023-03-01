@@ -77,11 +77,9 @@ public final class ClothDefinition {
 			e.printStackTrace();
 		}
 		int length = Cache.getIndexes()[2].getFilesSize(3);
-		System.out.println("Definition size: " + length + ".");
+
 		for (int i = 0; i < length; i++) {
 			ClothDefinition def = forId(i);
-			if (def.unknownBool)
-				System.out.println("Clothing " + i + ": " + def.equipmentSlot + ", " + def.unknownBool + ", " + Arrays.toString(def.modelIds) + ", " + Arrays.toString(def.models));
 		}
 	}
 

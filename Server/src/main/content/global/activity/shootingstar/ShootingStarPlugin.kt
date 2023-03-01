@@ -15,6 +15,7 @@ import core.game.interaction.IntType
 import core.tools.SystemLogger
 import core.game.system.command.Privilege
 import core.game.world.GameWorld
+import core.tools.Log
 import core.tools.secondsToTicks
 
 class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Commands, StartupListener {
@@ -112,7 +113,7 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
     }
 
     override fun startup() {
-        SystemLogger.logInfo(this::class.java, "Shooting Stars initialized.")
+        log(this::class.java, Log.FINE, "Shooting Stars initialized.")
     }
 
     private data class ScoreboardEntry(val player: String, val time: Int)

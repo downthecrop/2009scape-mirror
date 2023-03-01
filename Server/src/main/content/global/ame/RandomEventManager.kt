@@ -1,20 +1,17 @@
 package content.global.ame
 
-import core.api.Commands
-import core.api.LoginListener
+import core.api.*
 import core.game.event.EventHook
 import core.game.event.TickEvent
-import core.api.getAttribute
-import core.api.setAttribute
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.world.map.zone.ZoneRestriction
 import core.tools.RandomFunction
-import core.api.Event
 import core.tools.SystemLogger
 import core.game.system.command.Privilege
 import core.game.world.GameWorld
 import core.game.world.repository.Repository
+import core.tools.Log
 import kotlin.random.Random
 
 class RandomEventManager(val player: Player? = null) : LoginListener, EventHook<TickEvent>, Commands {
@@ -30,7 +27,6 @@ class RandomEventManager(val player: Player? = null) : LoginListener, EventHook<
         setAttribute(player, "random-manager", instance)
         instance.rollNextSpawn()
         instance.enabled = true
-        SystemLogger.logRE("Initialized REManager for ${player.username}.")
     }
 
     override fun process(entity: Entity, event: TickEvent) {
@@ -62,12 +58,12 @@ class RandomEventManager(val player: Player? = null) : LoginListener, EventHook<
         event = ame.npc.create(player,ame.loot,ame.type)
         if (event!!.spawnLocation == null) {
             nextSpawn = GameWorld.ticks + 3000
-            SystemLogger.logWarn(this::class.java, "Tried to spawn random event for ${player.username} but spawn location was null!")
+            log(this::class.java, Log.WARN,  "Tried to spawn random event for ${player.username} but spawn location was null!")
             return
         }
         event!!.init()
         rollNextSpawn()
-        SystemLogger.logRE("Fired ${event!!.name} for ${player.username}")
+        log(this::class.java, Log.FINE, "Fired ${event!!.name} for ${player.username}")
     }
 
     private fun rollNextSpawn() {

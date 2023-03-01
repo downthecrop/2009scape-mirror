@@ -217,7 +217,7 @@ public class AIPlayer extends Player {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Missing " + fileName);
+
             e.printStackTrace();
         }
     }
@@ -349,7 +349,7 @@ public class AIPlayer extends Player {
         int meX = this.getLocation().getX();
         int meY = this.getLocation().getY();
         //int meX2 = this.getLocation().getX();
-        //System.out.println("local " + meX + " real x? " + meX2 );
+
         ArrayList<Node> nodes = new ArrayList<Node>();
         for (NPC npc : RegionManager.getLocalNpcs(this, range)) {
             if (entrys.contains(npc.getId()))
@@ -381,7 +381,7 @@ public class AIPlayer extends Player {
     public Node getClosestNodeWithEntryAndDirection(int range, int entry, Direction direction) {
         ArrayList<Node> nodeList = getNodeInRange(range, entry);
         if (nodeList.isEmpty()) {
-            //System.out.println("nodelist empty");
+
             return null;
         }
         Node node = getClosestNodeinNodeListWithDirection(nodeList, direction);
@@ -391,7 +391,7 @@ public class AIPlayer extends Player {
     public Node getClosestNodeWithEntry(int range, int entry) {
         ArrayList<Node> nodeList = getNodeInRange(range, entry);
         if (nodeList.isEmpty()) {
-            //System.out.println("nodelist empty");
+
             return null;
         }
         Node node = getClosestNodeinNodeList(nodeList);
@@ -401,7 +401,7 @@ public class AIPlayer extends Player {
     public Node getClosestNodeWithEntry(int range, List<Integer> entrys) {
         ArrayList<Node> nodeList = getNodeInRange(range, entrys);
         if (nodeList.isEmpty()) {
-            //System.out.println("nodelist empty");
+
             return null;
         }
         Node node = getClosestNodeinNodeList(nodeList);
@@ -453,7 +453,7 @@ public class AIPlayer extends Player {
 
     private Node getClosestNodeinNodeListWithDirection(ArrayList<Node> nodes, Direction direction) {
         if (nodes.isEmpty()) {
-            //System.out.println("nodelist empty");
+
             return null;
         }
 
@@ -471,7 +471,7 @@ public class AIPlayer extends Player {
 
     private Node getClosestNodeinNodeList(ArrayList<Node> nodes) {
         if (nodes.isEmpty()) {
-            //System.out.println("nodelist empty");
+
             return null;
         }
 
@@ -528,7 +528,7 @@ public class AIPlayer extends Player {
             Repository.getPlayers().remove(player);
             return;
         }
-        //SystemLogger.logErr(this.getClass(), "Could not deregister AIP#" + uid + ": UID not added to the mapping!");
+        //log(this.getClass(), Log.ERR,  "Could not deregister AIP#" + uid + ": UID not added to the mapping!");
     }
 
     @Override

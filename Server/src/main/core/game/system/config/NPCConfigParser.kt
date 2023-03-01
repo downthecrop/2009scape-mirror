@@ -3,10 +3,12 @@ package core.game.system.config
 import core.ServerConstants
 import core.cache.def.impl.NPCDefinition
 import content.global.activity.ttrail.ClueLevel
+import core.api.log
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.impl.Animator
 import core.tools.SystemLogger
 import core.game.world.update.flag.context.Animation
+import core.tools.Log
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
@@ -259,12 +261,12 @@ NPCConfigParser {
                         "facing_booth",
                         "can_tolerate",
                         "water_npc"-> configs.put(it.key.toString(), it.value.toString().toBoolean())
-                        else -> SystemLogger.logWarn(this::class.java, "Unhandled key for npc config: ${it.key.toString()}")
+                        else -> log(this::class.java, Log.WARN,  "Unhandled key for npc config: ${it.key.toString()}")
                     }
                 }
             }
             count++
         }
-        SystemLogger.logInfo(this::class.java, "Parsed $count NPC configurations")
+        log(this::class.java, Log.FINE,  "Parsed $count NPC configurations")
     }
 }

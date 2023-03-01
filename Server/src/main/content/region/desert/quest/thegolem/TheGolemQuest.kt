@@ -266,7 +266,7 @@ class TheGolemListeners : InteractionListener {
     }
 
     fun placeStatuette(player: Player): Boolean {
-        System.out.println("Hello from placeStatuette")
+
         if(player.inventory.remove(Item(4618))) {
             player.sendMessage("You insert the statuette into the alcove.")
             player.setAttribute("/save:the-golem:placed-statuette", true)

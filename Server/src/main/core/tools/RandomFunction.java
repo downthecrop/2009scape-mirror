@@ -269,7 +269,7 @@ public class RandomFunction {
 			rand -= item.weight;
 		}
 		//We should get here if and only if the weighted chance table is empty.
-		//System.out.println("ERROR ROLLING WEIGHTED CHANCE: WEIGHT SUM AND INDIVIDUAL WEIGHTS DO NOT MATCH!!");
+
 		return null;
 	}
 

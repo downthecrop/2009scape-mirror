@@ -11,8 +11,11 @@ import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.plugin.ClassScanner;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * The build option handling plugin.
@@ -63,8 +66,8 @@ public final class BuildOptionPlugin extends OptionHandler {
 		}
 		Hotspot hotspot = player.getHouseManager().getHotspot(object);
 		if (hotspot == null || !isBuildable(player, object, hotspot)) {
-			System.out.println(hotspot == null);
-			SystemLogger.logErr(this.getClass(), "Construction (building):  " + hotspot +  " : " + object + " chunkX = " + object.getLocation().getChunkX() + ", chunkY = " + object.getLocation().getChunkY());
+
+			log(this.getClass(), Log.ERR,  "Construction (building):  " + hotspot +  " : " + object + " chunkX = " + object.getLocation().getChunkX() + ", chunkY = " + object.getLocation().getChunkY());
 			return true;
 		}
 

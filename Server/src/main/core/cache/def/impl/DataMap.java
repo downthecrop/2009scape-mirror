@@ -3,11 +3,14 @@ package core.cache.def.impl;
 import core.cache.Cache;
 import core.cache.misc.buffer.ByteBufferUtils;
 import core.tools.CP1252;
+import core.tools.Log;
 import core.tools.SystemLogger;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
+
+import static core.api.ContentAPIKt.log;
 
 public class DataMap {
 
@@ -37,7 +40,7 @@ public class DataMap {
 
     public int getInt(int key){
         if(!dataStore.containsKey(key)){
-            SystemLogger.logErr(this.getClass(), "Invalid value passed for key: " + key + " map: " + id);
+            log(this.getClass(), Log.ERR,  "Invalid value passed for key: " + key + " map: " + id);
             return -1;
         }
         return (int) dataStore.get(key);

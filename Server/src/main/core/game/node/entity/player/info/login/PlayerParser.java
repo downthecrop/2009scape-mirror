@@ -2,9 +2,12 @@ package core.game.node.entity.player.info.login;
 
 import core.game.node.entity.player.Player;
 import core.ServerConstants;
+import core.tools.Log;
 import core.tools.SystemLogger;
 
 import java.io.*;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Class used to abstract the process of loading a player save.
@@ -61,7 +64,7 @@ public final class PlayerParser {
 				assert os != null;
 				os.close();
 			} catch (Exception f){
-				SystemLogger.logWarn(PlayerParser.class, "Unable to close file copiers in PlayerParser.java line 216.");
+				log(PlayerParser.class, Log.ERR, "Unable to close file copiers in PlayerParser.java line 216.");
 				f.printStackTrace();
 			}
 		}

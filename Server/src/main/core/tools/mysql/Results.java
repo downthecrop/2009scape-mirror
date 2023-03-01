@@ -22,7 +22,7 @@ public class Results {
 			return result;
 
 		} catch (Exception e) {
-			System.out.println("Column '" + column + "' not found.");
+
 		}
 
 		return null;
@@ -38,7 +38,7 @@ public class Results {
 			return result;
 
 		} catch (Exception e) {
-			System.out.println("Column '" + column + "' not found.");
+
 		}
 
 		return -1;
@@ -60,7 +60,7 @@ public class Results {
 			return columns;
 
 		} catch (Exception e) {
-			System.out.println("Unable to gather columns.");
+
 		}
 
 		return null;
@@ -72,7 +72,7 @@ public class Results {
 		try {
 			return !set().next();
 		} catch (Exception e) {
-			System.out.println("Error occurred, while checking for results.");
+
 		}
 
 		return true;

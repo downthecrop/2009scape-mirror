@@ -4,6 +4,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItem;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.build.LandscapeParser;
@@ -16,6 +17,8 @@ import core.net.packet.out.UpdateAreaPosition;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Represents a region chunk.
@@ -182,7 +185,7 @@ public class RegionChunk {
 	 */
 	public void rotate(Direction direction) {
 		if (rotation != 0) {
-			SystemLogger.logErr(this.getClass(), "Region chunk was already rotated!");
+			log(this.getClass(), Log.ERR,  "Region chunk was already rotated!");
 			return;
 		}
 		Scenery[][] copy = new Scenery[SIZE][SIZE];

@@ -42,6 +42,7 @@ import core.tools.SystemLogger
 import core.game.system.config.ItemConfigParser
 import core.game.world.GameWorld
 import core.game.world.repository.Repository
+import core.tools.Log
 import core.tools.colorize
 import java.util.*
 import java.util.concurrent.CountDownLatch
@@ -78,7 +79,7 @@ class ScriptAPI(private val bot: Player) {
         val opt: Option? = node.interaction.options.filter {it != null && it.name.equals(option, true) }.firstOrNull()
 
         if(opt == null){
-            SystemLogger.logWarn(this::class.java, "Invalid option name provided: $option")
+            log(this::class.java, Log.WARN,  "Invalid option name provided: $option")
             return
         }
 
@@ -491,7 +492,6 @@ class ScriptAPI(private val bot: Player) {
                 }
                 val canSell = GrandExchange.addBotOffer(actualId, itemAmt)
                 if (canSell && saleIsBigNews(actualId, itemAmt)) {
-                    SystemLogger.logAI(this::class.java, "Offered $itemAmt of $actualId on the GE.")
                     Repository.sendNews(SERVER_GE_NAME + " just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE.")
                 }
                 bot.bank.remove(Item(id, itemAmt))

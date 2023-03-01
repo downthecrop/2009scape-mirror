@@ -5,8 +5,10 @@ import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import core.ServerConstants
+import core.api.log
 import core.api.utils.NPCDropTable
 import core.api.utils.WeightedItem
+import core.tools.Log
 import core.tools.SystemLogger
 import java.io.FileReader
 
@@ -29,7 +31,7 @@ class DropTableParser {
                 count++
             }
         }
-        SystemLogger.logInfo(this::class.java, "Parsed $count drop tables.")
+        log(this::class.java, Log.FINE,  "Parsed $count drop tables.")
     }
 
     private fun parseTable(data: JSONArray, destTable: NPCDropTable, isAlways: Boolean, isCharms: Boolean = false) {

@@ -7,6 +7,8 @@ import core.game.world.map.Location
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import core.ServerStore.Companion.toJSONArray
+import core.api.log
+import core.tools.Log
 import java.util.*
 
 class PenguinManager{
@@ -31,7 +33,7 @@ class PenguinManager{
         private fun updateStoreFile(){
             val jsonTags = JSONArray()
             tagMapping.filter { it.value.isNotEmpty() }.forEach { (ordinal,taggers) ->
-                SystemLogger.logInfo(this::class.java, "$ordinal - ${taggers.first()}")
+                log(this::class.java, Log.FINE, "$ordinal - ${taggers.first()}")
                 val tag = JSONObject()
                 tag["ordinal"] = ordinal
                 tag["taggers"] = taggers
@@ -63,9 +65,5 @@ class PenguinManager{
             tagMapping = storedTags
             penguins = spawnedOrdinals.toMutableList()
         }
-    }
-
-    fun log(message: String){
-        SystemLogger.logInfo(this::class.java, "[Penguins] $message")
     }
 }

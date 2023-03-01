@@ -59,7 +59,7 @@ public enum FishingSpot {
 		for(FishingOption o : this.options){
 			if(o.getName().equals(name)){return o;}
 		}
-		System.out.println("Unhandled fishing spot option, spot id: " + this.ids[0] + " desired fishing option: " + name);
+
 		return FishingOption.SMALL_NET; //safe, default return.
 	}
 

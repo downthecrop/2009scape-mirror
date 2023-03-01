@@ -2,6 +2,7 @@ package core.game.system.communication;
 
 import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.node.entity.player.Player;
+import core.tools.Log;
 import org.jetbrains.annotations.NotNull;
 import proto.management.PrivateMessage;
 import core.auth.UserAccountInfo;
@@ -21,6 +22,8 @@ import core.worker.ManagementEvents;
 import java.nio.ByteBuffer;
 import java.util.*;
 import java.util.Map.Entry;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Holds communication information.
@@ -351,7 +354,7 @@ public final class CommunicationInfo {
 		CommunicationInfo info = player.getDetails().getCommunication();
 		Contact c = info.contacts.get(contact);
 		if (c == null) {
-			SystemLogger.logErr(CommunicationInfo.class, "Could not find contact " + contact + " to update clan rank!");
+			log(CommunicationInfo.class, Log.ERR, "Could not find contact " + contact + " to update clan rank!");
 			return;
 		}
 		c.setRank(clanRank);

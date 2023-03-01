@@ -1,7 +1,9 @@
 package content.global.skill.magic
 
+import core.api.log
 import core.game.node.Node
 import core.game.node.entity.player.Player
+import core.tools.Log
 import core.tools.SystemLogger
 
 object SpellListeners {
@@ -18,12 +20,12 @@ object SpellListeners {
     }
 
     fun get(spellID: Int, type: Int, book: String): ((Player,Node?) -> Unit)?{
-        SystemLogger.logInfo(this::class.java, "Getting $book:$spellID:$type")
+        log(this::class.java, Log.FINE, "Getting $book:$spellID:$type")
         return castMap["$book:$spellID:$type"]
     }
 
     fun get(spellID: Int, type: Int, id: Int, book: String): ((Player,Node?) -> Unit)?{
-        SystemLogger.logInfo(this::class.java, "Getting $book:$spellID:$type:$id")
+        log(this::class.java, Log.FINE, "Getting $book:$spellID:$type:$id")
         return castMap["$book:$spellID:$type:$id"]
     }
 

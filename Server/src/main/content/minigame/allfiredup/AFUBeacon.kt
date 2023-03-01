@@ -1,8 +1,10 @@
 package content.minigame.allfiredup
 
+import core.api.log
 import core.game.node.entity.player.Player
 import core.tools.SystemLogger
 import core.game.world.map.Location
+import core.tools.Log
 
 /**
  * Various data for beacons, such as varp and offset, required FM level, etc
@@ -29,7 +31,7 @@ enum class AFUBeacon(val title: String, val fmLevel: Int, val varpId: Int, val o
             for (beacon in values()) {
                 if (beacon.location.equals(location)) return beacon
             }
-            return content.minigame.allfiredup.AFUBeacon.RIVER_SALVE.also { SystemLogger.logWarn(this::class.java, "Unhandled Beacon Location ${location.toString()}") }
+            return content.minigame.allfiredup.AFUBeacon.RIVER_SALVE.also { log(this::class.java, Log.WARN,  "Unhandled Beacon Location ${location.toString()}") }
         }
 
         fun resetAllBeacons(player: Player){

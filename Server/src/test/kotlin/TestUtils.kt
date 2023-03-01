@@ -10,6 +10,7 @@ import core.net.IoSession
 import core.net.packet.IoBuffer
 import org.rs09.consts.Items
 import core.ServerConstants
+import core.api.log
 import core.game.shops.Shop
 import core.game.shops.ShopItem
 import core.tools.SystemLogger
@@ -18,6 +19,7 @@ import core.game.system.config.ServerConfigParser
 import core.game.world.GameWorld
 import core.game.world.repository.Repository
 import core.game.world.update.UpdateSequence
+import core.tools.Log
 import java.net.URI
 import java.nio.ByteBuffer
 
@@ -66,7 +68,7 @@ object TestUtils {
     }
 
     fun advanceTicks(amount: Int, skipPulseUpdates: Boolean = true) {
-        SystemLogger.logInfo(this::class.java, "Advancing ticks by $amount.")
+        log(this::class.java, Log.FINE,  "Advancing ticks by $amount.")
         for(i in 0 until amount) {
             GameWorld.majorUpdateWorker.handleTickActions(skipPulseUpdates)
         }

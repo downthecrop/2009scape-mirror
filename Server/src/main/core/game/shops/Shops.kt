@@ -17,6 +17,7 @@ import core.game.interaction.InterfaceListener
 import core.tools.SystemLogger
 import core.game.system.command.Privilege
 import core.tools.END_DIALOGUE
+import core.tools.Log
 import java.io.FileReader
 
 /**
@@ -41,7 +42,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
 
         fun logShop(msg: String)
         {
-            SystemLogger.logInfo(this::class.java, "[SHOPS] $msg")
+            log(this::class.java, Log.FINE,  "[SHOPS] $msg")
         }
 
         fun parseStock(stock: String, id: Int): ArrayList<ShopItem>{
@@ -57,7 +58,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
                     amount = "-1"
                 val item = tokens[0].toInt()
                 if(idsInStock[item] != null) {
-                    SystemLogger.logWarn(this::class.java, "[SHOPS] MALFORMED STOCK IN SHOP ID $id FOR ITEM $item")
+                    log(this::class.java, Log.WARN,  "[SHOPS] MALFORMED STOCK IN SHOP ID $id FOR ITEM $item")
                     items.forEach { if(it.itemId == item) {
                         it.amount += amount.toInt()
                         return@map

@@ -1,8 +1,10 @@
 package core.net.packet.`in`
 
+import core.api.log
 import core.Util.clamp
 import core.game.node.entity.player.Player
 import core.net.packet.IoBuffer
+import core.tools.Log
 import core.tools.StringUtils
 import core.tools.SystemLogger
 import java.io.PrintWriter
@@ -692,7 +694,7 @@ enum class Decoders530(val opcode: Int) {
                 3,4 -> QCPacketType.STANDARD
                 5 -> QCPacketType.SINGLE
                 7 -> QCPacketType.DOUBLE
-                else -> QCPacketType.UNHANDLED.also { SystemLogger.logWarn(this::class.java, "UNHANDLED QC PACKET TYPE Size ${x.array().size}") }
+                else -> QCPacketType.UNHANDLED.also { log(this::class.java, Log.WARN,  "UNHANDLED QC PACKET TYPE Size ${x.array().size}") }
             }
 
             val forClan = (buffer.get() and 0xFF) == 1
@@ -711,7 +713,7 @@ enum class Decoders530(val opcode: Int) {
                     buffer.get() //discard
                     selection_b_index = buffer.get()
                 }
-                QCPacketType.UNHANDLED -> SystemLogger.logWarn(this::class.java, "Unhandled packet type, skipping remaining buffer contents.")
+                QCPacketType.UNHANDLED -> log(this::class.java, Log.WARN,  "Unhandled packet type, skipping remaining buffer contents.")
                 else -> {}
             }
             return Packet.QuickChat(player, selection_a_index, selection_b_index, forClan, multiplier, offset, packetType)

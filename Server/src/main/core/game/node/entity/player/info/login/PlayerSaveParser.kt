@@ -14,10 +14,12 @@ import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import core.ServerConstants
+import core.api.log
 import core.game.node.entity.combat.graves.GraveController
 import core.game.node.entity.combat.graves.GraveType
 import core.tools.SystemLogger
 import core.game.world.GameWorld
+import core.tools.Log
 import java.io.File
 import java.io.FileReader
 import java.util.*
@@ -45,7 +47,7 @@ class PlayerSaveParser(val player: Player) {
         {
             reader = FileReader(JSON)
         }
-        reader ?: SystemLogger.logWarn(this::class.java, "Couldn't find save file for ${player.name}, or save is corrupted.").also { read = false }
+        reader ?: log(this::class.java, Log.WARN,  "Couldn't find save file for ${player.name}, or save is corrupted.").also { read = false }
         if (read) {
             saveFile = parser.parse(reader) as JSONObject
         }
@@ -120,7 +122,7 @@ class PlayerSaveParser(val player: Player) {
                     "long" -> attr["value"].toString().toLong()
                     "bool" -> attr["value"] as Boolean
                     "byte" -> Base64.getDecoder().decode(attr["value"].toString())[0]
-                    else -> null.also { SystemLogger.logWarn(this::class.java, "Invalid data type for key: $key in PlayerSaveParser.kt Line 115") }
+                    else -> null.also { log(this::class.java, Log.WARN,  "Invalid data type for key: $key in PlayerSaveParser.kt Line 115") }
                 })
             }
         } else {
@@ -179,7 +181,6 @@ class PlayerSaveParser(val player: Player) {
 
     fun parseStates() {
         player.states.clear()
-        SystemLogger.logErr(this::class.java, "Parsing states")
         if (saveFile!!.containsKey("states")) {
             val states: JSONArray = saveFile!!["states"] as JSONArray
             for (state in states) {

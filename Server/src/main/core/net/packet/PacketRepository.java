@@ -2,10 +2,15 @@ package core.net.packet;
 
 import core.net.packet.out.GrandExchangePacket;
 import core.net.packet.out.*;
+import core.tools.Log;
 import core.tools.SystemLogger;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * The packet repository.
@@ -82,11 +87,18 @@ public final class PacketRepository {
 		if(context.getPlayer().getSession() == null) return;
 		OutgoingPacket p = OUTGOING_PACKETS.get(clazz);
 		if (p == null) {
-			SystemLogger.logErr(PacketRepository.class, "Invalid outgoing packet [handler=" + clazz + ", context=" + context + "].");
+			log(PacketRepository.class, Log.ERR, "Invalid outgoing packet [handler=" + clazz + ", context=" + context + "].");
 			return;
 		}
 		if(!context.getPlayer().isArtificial()) {
-			PacketWriteQueue.handle(p, context);
+			try {
+				PacketWriteQueue.handle(p, context);
+			} catch (Exception e) {
+				StringWriter sw = new StringWriter();
+				PrintWriter pw = new PrintWriter(sw);
+				e.printStackTrace(pw);
+				log(PacketRepository.class, Log.ERR, "Error writing packet out: " + sw);
+			}
 		}
 	}
 

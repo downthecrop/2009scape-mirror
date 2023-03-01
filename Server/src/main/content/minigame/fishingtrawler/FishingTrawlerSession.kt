@@ -3,6 +3,7 @@ package content.minigame.fishingtrawler
 import core.api.LogoutListener
 import core.api.MapArea
 import core.api.getRegionBorders
+import core.api.log
 import core.game.component.Component
 import core.game.node.entity.Entity
 import core.game.node.scenery.Scenery
@@ -294,11 +295,11 @@ class FishingTrawlerSession(val activity: FishingTrawlerActivity? = null) : Logo
 
     override fun areaEnter(entity: Entity) {
         super.areaEnter(entity)
-        SystemLogger.logInfo(this::class.java, "ENTERED FTZ")
+        log(this::class.java, Log.FINE, "ENTERED FTZ")
     }
 
     override fun areaLeave(entity: Entity, logout: Boolean) {
         super.areaLeave(entity, logout)
-        SystemLogger.logInfo(this::class.java, "EXITED FTZ")
+        log(this::class.java, Log.FINE, "EXITED FTZ")
     }
 }

@@ -75,7 +75,7 @@ public class PickableDoorHandler extends OptionHandler {
             door.pickLock(player, (Scenery) node);
             return true;
         }
-        System.out.println("Unhandled door: " + node.getId());
+
         return false;
     }
 

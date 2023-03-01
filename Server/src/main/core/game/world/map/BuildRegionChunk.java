@@ -6,12 +6,15 @@ import core.game.node.item.GroundItem;
 import core.game.node.item.Item;
 import core.game.node.scenery.Constructed;
 import core.game.node.scenery.Scenery;
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.world.map.build.LandscapeParser;
 import core.net.packet.IoBuffer;
 import core.net.packet.out.ClearScenery;
 import core.net.packet.out.ConstructGroundItem;
 import core.net.packet.out.ConstructScenery;
+
+import static core.api.ContentAPIKt.log;
 
 import java.util.Arrays;
 
@@ -89,7 +92,7 @@ public class BuildRegionChunk extends RegionChunk {
 	@Override
 	public void rotate(Direction direction) {
 		if (rotation != 0) {
-			SystemLogger.logErr(this.getClass(), "Region chunk was already rotated!");
+			log(this.getClass(), Log.ERR,  "Region chunk was already rotated!");
 			return;
 		}
 		Scenery[][][] copy = new Scenery[ARRAY_SIZE][SIZE][SIZE];
@@ -258,7 +261,7 @@ public class BuildRegionChunk extends RegionChunk {
 				System.err.print(", ");
 			}
 		}
-		SystemLogger.logErr(this.getClass(), "]!");
+		log(this.getClass(), Log.ERR,  "]!");
 		throw new IllegalStateException("Insufficient array length for storing all objects! ");
 	}
 

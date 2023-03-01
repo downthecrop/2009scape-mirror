@@ -10,6 +10,7 @@ import core.game.node.scenery.Scenery
 import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.map.path.Pathfinder
+import core.tools.Log
 import core.tools.SystemLogger
 import java.lang.Integer.max
 
@@ -150,7 +151,7 @@ class ScriptProcessor(val entity: Entity) {
                         continue
                     if (entity !is Player) {
                         toRemove.add(script)
-                        SystemLogger.logErr(this::class.java, "Tried to queue an item UseWith interaction for a non-player!")
+                        log(this::class.java, Log.ERR, "Tried to queue an item UseWith interaction for a non-player!")
                         continue
                     }
                     if (script.nextExecution > GameWorld.ticks)
@@ -273,7 +274,7 @@ class ScriptProcessor(val entity: Entity) {
 
     fun addToQueue(script: Script<*>, strength: QueueStrength) {
         if (script !is QueuedScript && script !is QueuedUseWith) {
-            SystemLogger.logErr(this::class.java, "Tried to queue ${script::class.java.simpleName} as a queueable script but it's not!")
+            log(this::class.java, Log.ERR, "Tried to queue ${script::class.java.simpleName} as a queueable script but it's not!")
             return
         }
         if (strength == QueueStrength.STRONG && entity is Player) {

@@ -56,9 +56,7 @@ import core.net.packet.context.SkillContext;
 import core.net.packet.out.BuildDynamicScene;
 import core.net.packet.out.SkillLevel;
 import core.net.packet.out.UpdateSceneGraph;
-import core.tools.RandomFunction;
-import core.tools.StringUtils;
-import core.tools.TickUtilsKt;
+import core.tools.*;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import org.rs09.consts.Items;
@@ -73,7 +71,6 @@ import core.game.node.entity.combat.graves.GraveController;
 import core.game.node.entity.player.info.login.PlayerSaver;
 import core.game.node.entity.state.State;
 import core.game.node.entity.state.StateRepository;
-import core.tools.SystemLogger;
 import core.game.world.GameWorld;
 import core.game.world.repository.Repository;
 import core.game.world.update.MapChunkRenderer;
@@ -318,6 +315,8 @@ public class Player extends Entity {
 
 	private int archeryTotal = 0;
 
+	public byte[] opCounts = new byte[255];
+
 	/**
 	 * Constructs a new {@code Player} {@code Object}.
 	 * @param details The player's details.
@@ -333,7 +332,7 @@ public class Player extends Entity {
 	@Override
 	public void init() {
 		if(!artificial)
-			SystemLogger.logInfo(this.getClass(), getUsername() + " initialising...");
+			log(this.getClass(), Log.INFO, getUsername() + " initialising...");
 		if (!artificial) {
 			getProperties().setSpawnLocation(ServerConstants.HOME_LOCATION);
 			getDetails().getSession().setObject(this);
@@ -528,6 +527,7 @@ public class Player extends Entity {
 			PlayerParser.saveImmediately(this);
 			removeAttribute("flagged-for-save");
 		}
+		Arrays.fill(opCounts, (byte) 0);
 	}
 
 	@Override

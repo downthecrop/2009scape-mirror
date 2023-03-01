@@ -95,7 +95,7 @@ public final class RangeWeapon {
 			return false;
 		}
 		NodeList nodeList = doc.getDocumentElement().getChildNodes();
-		System.out.println("Loading range weapon info...");
+
 		for (short i = 1; i < nodeList.getLength(); i += 2) {
 			Node n = nodeList.item(i);
 			if (n != null) {
@@ -131,7 +131,7 @@ public final class RangeWeapon {
 				}
 			}
 		}
-		System.out.println("Loaded " + RANGE_WEAPONS.size() + " range weapon definitions.");
+
 		return true;
 	}
 

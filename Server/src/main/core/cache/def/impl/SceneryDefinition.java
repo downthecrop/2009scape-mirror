@@ -6,12 +6,15 @@ import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.interaction.OptionHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.world.GameWorld;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Represents an object's definition.
@@ -520,14 +523,14 @@ public class SceneryDefinition extends Definition<Scenery> {
 		// for (int id = 0; id <= 27325; id++) {
 		// ObjectDefinition def = ObjectDefinition.forId(id);
 		// if (def.mapIcon > 69) {
-		// System.out.println(id + " - " + def.getName() + " has map icon " +
+
 		// def.mapIcon);
 		// }
 		// }
 		// return; 2105
 		// }
 		/*ObjectDefinition def = ObjectDefinition.forId(2105);
-		System.out.println("size: " + def.getClass().getDeclaredFields().length);
+
 		for (Field f : def.getClass().getDeclaredFields()) {
 			if (!Modifier.isStatic(f.getModifiers())) {
 				if (f.getType().isArray()) {
@@ -538,11 +541,11 @@ public class SceneryDefinition extends Definition<Scenery> {
 						for (int i = 0; i < length; i++) {
 							System.out.print(Array.get(object, i) + (i < (length - 1) ? ", " : "]"));
 						}
-						System.out.println();
+
 						continue;
 					}
 				}
-				System.out.println(f.getName() + ", " + f.get(def));
+
 			}
 		}
 		for (Field f : def.getClass().getSuperclass().getDeclaredFields()) {
@@ -555,11 +558,11 @@ public class SceneryDefinition extends Definition<Scenery> {
 						for (int i = 0; i < length; i++) {
 							System.out.print(Array.get(object, i) + (i < (length - 1) ? ", " : "]"));
 						}
-						System.out.println();
+
 						continue;
 					}
 				}
-				System.out.println(f.getName() + ", " + f.get(def));
+
 			}
 		}*/
 	}
@@ -615,7 +618,7 @@ public class SceneryDefinition extends Definition<Scenery> {
 //		SystemLogger.logErr("----------------------------------------------------\n\n\n");
 		while (true) {
 			if (!buffer.hasRemaining()) {
-				SystemLogger.logErr(SceneryDefinition.class, "Buffer empty for " + objectId);
+				log(SceneryDefinition.class, Log.ERR, "Buffer empty for " + objectId);
 				break;
 			}
 			int opcode = buffer.get() & 0xFF;
@@ -801,7 +804,7 @@ public class SceneryDefinition extends Definition<Scenery> {
 				}
 			} else {
 				if (opcode != 0) {
-					SystemLogger.logErr(SceneryDefinition.class, "Unhandled object definition opcode: " + opcode);
+					log(SceneryDefinition.class, Log.ERR, "Unhandled object definition opcode: " + opcode);
 				}
 				break;
 			}

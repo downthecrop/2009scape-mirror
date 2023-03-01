@@ -12,6 +12,8 @@ import core.game.node.item.Item;
 import core.game.node.item.ItemPlugin;
 import core.net.packet.PacketRepository;
 import core.net.packet.out.WeightUpdate;
+import core.plugin.Plugin;
+import core.tools.Log;
 import core.tools.StringUtils;
 import core.tools.SystemLogger;
 import core.game.system.config.ItemConfigParser;
@@ -25,6 +27,7 @@ import java.util.Map;
 import java.util.Arrays;
 
 import static core.api.ContentAPIKt.equipSlot;
+import static core.api.ContentAPIKt.log;
 
 /**
  * Represents an item's definitions.
@@ -268,7 +271,7 @@ public class ItemDefinition extends Definition<Item> {
 			}
 			ItemDefinition def = ItemDefinition.parseDefinition(itemId, ByteBuffer.wrap(data));
 			if (def == null) {
-				SystemLogger.logErr(ItemDefinition.class, "Could not load item definitions for id " + itemId + " - no definitions found!");
+				log(ItemDefinition.class, Log.ERR, "Could not load item definitions for id " + itemId + " - no definitions found!");
 				return ;
 			}
 			if(itemId == 14958)
@@ -447,7 +450,7 @@ public class ItemDefinition extends Definition<Item> {
 					def.clientScriptData.put(key, value);
 				}
 			} else {
-				System.out.println("Unhandled item definition opcode - opcode: " + opcode);
+
 				break;
 			}
 		}
@@ -1480,7 +1483,7 @@ public class ItemDefinition extends Definition<Item> {
 		ItemDefinition def = forId(nodeId);
 		if (def == null) {
 			if (nodeId == 22937)
-				SystemLogger.logErr(ItemDefinition.class, "[ItemDefinition] No definition for item id " + nodeId + "!");
+				log(ItemDefinition.class, Log.ERR, "[ItemDefinition] No definition for item id " + nodeId + "!");
 			return null;
 		}
 		OptionHandler handler = def.getConfiguration("option:" + name);

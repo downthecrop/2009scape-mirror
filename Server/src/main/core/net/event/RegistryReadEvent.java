@@ -1,5 +1,6 @@
 package core.net.event;
 
+import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.world.GameWorld;
 import core.net.IoReadEvent;
@@ -9,6 +10,8 @@ import core.net.amsc.WorldCommunicator;
 import core.net.producer.MSEventProducer;
 
 import java.nio.ByteBuffer;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Handles world registry read events.
@@ -36,23 +39,18 @@ public final class RegistryReadEvent extends IoReadEvent {
 		switch (opcode) {
 		case 0:
 			WorldCommunicator.setState(ManagementServerState.NOT_AVAILABLE);
-			SystemLogger.logErr(this.getClass(), "Failed registering world to AMS - [id=" + GameWorld.getSettings().getWorldId() + ", cause=World id out of bounds]!");
+			log(this.getClass(), Log.ERR,  "Failed registering world to AMS - [id=" + GameWorld.getSettings().getWorldId() + ", cause=World id out of bounds]!");
 			break;
 		case 1:
 			session.setProducer(PRODUCER);
 			WorldCommunicator.setState(ManagementServerState.AVAILABLE);
-			SystemLogger.logInfo(this.getClass(), "Successfully registered world to AMS - [id=" + GameWorld.getSettings().getWorldId() + "]!");
 			break;
 		case 2:
-			WorldCommunicator.setState(ManagementServerState.NOT_AVAILABLE);
-			SystemLogger.logErr(this.getClass(), "Failed registering world to AMS - [id=" + GameWorld.getSettings().getWorldId() + ", cause=World id already in use]!");
+			case 3:
+				WorldCommunicator.setState(ManagementServerState.NOT_AVAILABLE);
 			break;
-		case 3:
-			WorldCommunicator.setState(ManagementServerState.NOT_AVAILABLE);
-			SystemLogger.logErr(this.getClass(), "Failed registering world to AMS - [id=" + GameWorld.getSettings().getWorldId() + ", cause=Exception in AMS]!");
-			break;
-		default:
-			System.out.println("??" + opcode);
+			default:
+
 			break;
 		}
 	}

@@ -211,7 +211,7 @@ open class MeleeSwingHandler
 
     override fun getSetMultiplier(e: Entity?, skillId: Int): Double {
         if (e!!.properties.armourSet === ArmourSet.DHAROK && skillId == Skills.STRENGTH) {
-//			System.out.println("Fiist number -> " + 1.0 + ((e.getSkills().getMaximumLifepoints() - e.getSkills().getLifepoints()) * 0.01));
+
             return 1.0 + (e!!.skills.maximumLifepoints - e.skills.lifepoints) * 0.01
         }
         if(e is Player && e.isWearingVoid(CombatStyle.MELEE) && (skillId == Skills.ATTACK || skillId == Skills.STRENGTH)) {

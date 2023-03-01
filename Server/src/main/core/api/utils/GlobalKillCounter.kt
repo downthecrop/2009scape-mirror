@@ -10,7 +10,9 @@ import java.io.FileWriter
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import core.ServerConstants
+import core.api.log
 import core.game.node.item.Item
+import core.tools.Log
 import core.tools.SystemLogger.logShutdown
 import core.tools.SystemLogger.logStartup
 
@@ -31,7 +33,7 @@ class GlobalKillCounter : StartupListener, ShutdownListener {
             val tmp_rare_drops = data.get("rare_drops")
             populate(rare_drops, tmp_rare_drops)
         } catch (e: Exception){
-            SystemLogger.logErr(this::class.java, "Failed parsing ${file.name} - stack trace below.")
+            log(this::class.java, Log.ERR,  "Failed parsing ${file.name} - stack trace below.")
             e.printStackTrace()
         }
     }

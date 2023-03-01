@@ -1,11 +1,13 @@
 package core.game.world.map
 
+import core.api.log
 import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.scenery.Scenery
 import core.game.world.map.zone.ZoneBorders
+import core.tools.Log
 import core.tools.RandomFunction
 import core.tools.SystemLogger
 import java.util.*
@@ -43,7 +45,7 @@ object RegionManager {
             LOCK.unlock()
             return REGION_CACHE[regionId]!!
         }
-        SystemLogger.logErr(this::class.java, "UNABLE TO OBTAIN LOCK WHEN GETTING REGION BY ID. RETURNING BLANK REGION.")
+        log(this::class.java, Log.ERR,  "UNABLE TO OBTAIN LOCK WHEN GETTING REGION BY ID. RETURNING BLANK REGION.")
         return Region(0,0)
     }
 

@@ -1,5 +1,6 @@
 package content.minigame.fog
 
+import core.api.log
 import core.cache.def.impl.ItemDefinition
 import core.game.component.Component
 import core.game.component.ComponentDefinition
@@ -8,6 +9,7 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.plugin.Plugin
+import core.tools.Log
 import core.tools.SystemLogger
 
 @Initializable
@@ -52,7 +54,7 @@ class FOGRewardsInterface : ComponentPlugin(){
             176 -> choice = Air_Gloves
             181 -> choice = Water_Gloves
             186 -> choice = Earth_Gloves
-            else -> SystemLogger.logWarn(this::class.java, "Unhandled button ID for FOG interface: $button").also { return true }
+            else -> log(this::class.java, Log.WARN,  "Unhandled button ID for FOG interface: $button").also { return true }
         }
         handleOpcode(choice,opcode,player!!)
         return true

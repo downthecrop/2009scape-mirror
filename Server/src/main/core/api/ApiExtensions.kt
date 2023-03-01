@@ -57,7 +57,15 @@ fun IntArray.isNextLast(element: Int) : Boolean {
     return this.isLast(this.getNext(element))
 }
 
-fun <T> LinkedList<T>.tryPop(default: T) : T {
+fun <T> LinkedList<T>.tryPop(default: T?) : T? {
     this.peek() ?: return default
     return this.pop()
+}
+
+inline fun <reified E: Enum<E>> parseEnumEntry(name: String) : E? {
+    return try {
+        enumValueOf<E>(name)
+    } catch (e: Exception) {
+        null
+    }
 }
