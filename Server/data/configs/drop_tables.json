@@ -60008,5 +60008,52 @@
     "ids": "48",
     "description": "",
     "main": []
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "526",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "1993",
+    "description": "",
+    "main": []
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "532",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "6779",
+    "description": "",
+    "main": [
+      {
+        "minAmount": "1",
+        "weight": "0.25",
+        "id": "10976",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "0.02",
+        "id": "10977",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "99.73",
+        "id": "0",
+        "maxAmount": "1"
+      }
+    ]
   }
 ]
