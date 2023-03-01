@@ -314,8 +314,9 @@ public abstract class MagicSpell implements Plugin<SpellType> {
 		}
 		entity.getSkills().addExperience(Skills.HITPOINTS, hit * 1.33, true);
 		if (entity.getProperties().getAttackStyle().getStyle() == WeaponInterface.STYLE_DEFENSIVE_CAST) {
-			entity.getSkills().addExperience(Skills.DEFENCE, hit, true);
-			entity.getSkills().addExperience(Skills.MAGIC, 1.33 * hit, true);
+			double baseXpReward = hit / 2.0;
+			entity.getSkills().addExperience(Skills.DEFENCE, baseXpReward, true);
+			entity.getSkills().addExperience(Skills.MAGIC, baseXpReward * 1.33, true);
 			return;
 		}
 		entity.getSkills().addExperience(Skills.MAGIC, hit * (CombatSwingHandler.EXPERIENCE_MOD / 2), true);
