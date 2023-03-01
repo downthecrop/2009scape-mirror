@@ -39,16 +39,16 @@ class RisingSunInnBartenderDialogue(player: Player? = null) : core.game.dialogue
         when (stage) {
             START_DIALOGUE -> if (hasAnyBeerGlasses()) {
                 showTopics(
-                    Topic(core.game.dialogue.FacialExpression.HALF_ASKING, "What ales are you serving?", 10),
-                    Topic(core.game.dialogue.FacialExpression.HALF_GUILTY, "I've got some beer glasses...", 20)
+                    Topic(core.game.dialogue.FacialExpression.ASKING, "What ales are you serving?", 10),
+                    Topic(core.game.dialogue.FacialExpression.HAPPY, "I've got some beer glasses...", 20)
                 )
             } else {
-                playerl(core.game.dialogue.FacialExpression.HALF_ASKING, "What ales are you serving?")
+                playerl(core.game.dialogue.FacialExpression.ASKING, "What ales are you serving?")
                 .also { stage = 10 }
             }
 
             10 -> npcl(
-                core.game.dialogue.FacialExpression.HALF_GUILTY,
+                core.game.dialogue.FacialExpression.FRIENDLY,
                 "Well, we've got Asgarnian Ale, Wizard's Mind Bomb and Dwarven Stout. "
                 + "Each for only 3 coins."
             ).also { stage++ }
@@ -56,7 +56,7 @@ class RisingSunInnBartenderDialogue(player: Player? = null) : core.game.dialogue
             11 -> showTopics(
                 Topic(core.game.dialogue.FacialExpression.HAPPY, "One Asgarnian Ale, please.", 12),
                 Topic(core.game.dialogue.FacialExpression.HAPPY, "I'll try the Mind Bomb.", 13),
-                Topic(core.game.dialogue.FacialExpression.HALF_ASKING, "Can I have a Dwarven Stout?", 14),
+                Topic(core.game.dialogue.FacialExpression.ASKING, "Can I have a Dwarven Stout?", 14),
                 Topic(core.game.dialogue.FacialExpression.NEUTRAL, "I don't feel like any of those.", END_DIALOGUE)
             )
 

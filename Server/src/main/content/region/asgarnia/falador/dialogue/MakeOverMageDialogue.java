@@ -34,11 +34,11 @@ public class MakeOverMageDialogue extends DialoguePlugin {
 		npc = (NPC) args[0];
 		if (args.length == 2) {
 
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Hmm... you didn't feel any unexpected growths", "aywhere around your head just then did you?");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_ASKING, "Hmm... you didn't feel any unexpected growths", "anywhere around your head just then did you?");
 			stage = 600;
 			return true;
 		}
-		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Hello there! I am known as the make-over mage! I", "have spent many years researching magics that can", "change your physical appearance!");
+		interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Hello there! I am known as the make-over mage! I", "have spent many years researching magics that can", "change your physical appearance!");
 		stage = 0;
 		return true;
 	}
@@ -47,7 +47,7 @@ public class MakeOverMageDialogue extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 0:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "I can alter your physical form for a small fee of", "only 3000 gold coins! Would you like me to perform my", "magics upon you?");
+			interpreter.sendDialogues(npc, FacialExpression.HAPPY, "I can alter your physical form for a small fee of", "only 3000 gold coins! Would you like me to perform my", "magics upon you?");
 			stage = 1;
 			break;
 		case 1:
@@ -61,29 +61,29 @@ public class MakeOverMageDialogue extends DialoguePlugin {
 		case 2:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Tell me more about this 'make-over'.");
+				interpreter.sendDialogues(player, FacialExpression.HAPPY, "Tell me more about this 'make-over'.");
 				stage = 10;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Sure. Do it.");
+				interpreter.sendDialogues(player, FacialExpression.HAPPY, "Sure. Do it.");
 				stage = 20;
 				break;
 			case 3:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "No thanks. I'm happy as Saradomin made me.");
+				interpreter.sendDialogues(player, FacialExpression.HAPPY, "No thanks. I'm happy as Saradomin made me.");
 				stage = 19;
 				break;
 			case 4:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Cool amulet! Can I have one?");
+				interpreter.sendDialogues(player, FacialExpression.HAPPY, "Cool amulet! Can I have one?");
 				stage = 40;
 				break;
 			}
 			break;
 		case 20:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "You of course agree that if by some accident you", "are turned into a frog you have no rights for", "compensation or refund.");
+			interpreter.sendDialogues(npc, FacialExpression.HAPPY, "You of course agree that if by some accident you", "are turned into a frog you have no rights for", "compensation or refund.");
 			stage = 25;
 			break;
 		case 21:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Well, go get it then. No freebies here!");
+			interpreter.sendDialogues(npc, FacialExpression.ANGRY, "Well, go get it then. No freebies here!");
 			stage = 22;
 			break;
 		case 22:
@@ -99,19 +99,19 @@ public class MakeOverMageDialogue extends DialoguePlugin {
 			}
 			break;
 		case 10:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Why, of course! Basically, and I will try and explain", "this so that you will understant it correctly,");
+			interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Why, of course! Basically, and I will try and explain", "this so that you will understand it correctly,");
 			stage = 11;
 			break;
 		case 11:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "I use my secret magical technique to melt your body", "down into a puddle of its elememnts.");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "I use my secret magical technique to melt your body", "down into a puddle of its elements.");
 			stage = 12;
 			break;
 		case 12:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "When I have broken down all trace of your body, I", "then rebuild it into the form I am thinking of.");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "When I have broken down all trace of your body, I", "then rebuild it into the form I am thinking of.");
 			stage = 13;
 			break;
 		case 13:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Or, you know, somewhere vaguely close enough", "anyway.");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "Or, you know, somewhere vaguely close enough", "anyway.");
 			stage = 14;
 			break;
 		case 14:
@@ -119,11 +119,11 @@ public class MakeOverMageDialogue extends DialoguePlugin {
 			stage = 15;
 			break;
 		case 15:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "It's as safe as houses! Why, I have only had thrity-six", "major accidents this month!");
+			interpreter.sendDialogues(npc, FacialExpression.LAUGH, "It's as safe as houses! Why, I have only had thirty-six", "major accidents this month!");
 			stage = 16;
 			break;
 		case 16:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "So what do you say? Feel like a change?");
+			interpreter.sendDialogues(npc, FacialExpression.ASKING, "So what do you say? Feel like a change?");
 			stage = 17;
 			break;
 		case 17:
@@ -133,11 +133,11 @@ public class MakeOverMageDialogue extends DialoguePlugin {
 		case 18:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Sure. Do it.");
+				interpreter.sendDialogues(player, FacialExpression.HAPPY, "Sure. Do it.");
 				stage = 20;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "No thanks. I'm happy as Saradomin made me.");
+				interpreter.sendDialogues(player, FacialExpression.HAPPY, "No thanks. I'm happy as Saradomin made me.");
 				stage = 19;
 				break;
 			}
@@ -150,7 +150,7 @@ public class MakeOverMageDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 40:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "No problem, but please remember that the amulet I will", "sell you is only a copy of my own. It contains no", "magical powers; and as such will only cost you 100", "coins.");
+			interpreter.sendDialogues(npc, FacialExpression.HAPPY, "No problem, but please remember that the amulet I will", "sell you is only a copy of my own. It contains no", "magical powers; and as such will only cost you 100", "coins.");
 			stage = 41;
 			break;
 		case 41:
@@ -160,11 +160,11 @@ public class MakeOverMageDialogue extends DialoguePlugin {
 		case 42:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Sure, here you go.");
+				interpreter.sendDialogues(player, FacialExpression.HAPPY, "Sure, here you go.");
 				stage = 100;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "No way! That's too expensive.");
+				interpreter.sendDialogues(player, FacialExpression.AMAZED, "No way! That's too expensive.");
 				stage = 400;
 				break;
 
@@ -178,15 +178,15 @@ public class MakeOverMageDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 600:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Uh... No...?");
+			interpreter.sendDialogues(player, FacialExpression.EXTREMELY_SHOCKED, "Uh... No...?");
 			stage = 601;
 			break;
 		case 601:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Good, good, I was worried for a second there!");
+			interpreter.sendDialogues(npc, FacialExpression.WORRIED, "Good, good, I was worried for a second there!");
 			stage = 602;
 			break;
 		case 602:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Uh... Thanks, I guess.");
+			interpreter.sendDialogues(player, FacialExpression.SUSPICIOUS, "Uh... Thanks, I guess.");
 			stage = 603;
 			break;
 		case 603:

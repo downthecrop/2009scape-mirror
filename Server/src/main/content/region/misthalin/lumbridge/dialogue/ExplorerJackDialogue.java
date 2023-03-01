@@ -103,7 +103,7 @@ public class ExplorerJackDialogue extends DialoguePlugin {
 			stage = -1;
 			break;
 		case 10:
-			npc("Ah, well it's a diary that helps you keep track of", "particular achievements you've made in the world of", "Keldagrim. In Lumbridge and Draynor i can help you", "discover some very useful things indeed.");
+			npc("Ah, well it's a diary that helps you keep track of", "particular achievements you've made in the world of", "Keldagrim. In Lumbridge and Draynor I can help you", "discover some very useful things indeed.");
 			stage++;
 			break;
 		case 11:
@@ -123,7 +123,7 @@ public class ExplorerJackDialogue extends DialoguePlugin {
 			stage = -1;
 			break;
 		case 30:
-			npc("You need to complete the taks so that they're all ticked", "off then you can claim your reward. Most of them are", "straightforward although you might find some required", "quests to be started, if not finished.");
+			npc("You need to complete the tasks so that they're all ticked", "off then you can claim your reward. Most of them are", "straightforward although you might find some required", "quests to be started, if not finished.");
 			stage++;
 			break;
 		case 31:

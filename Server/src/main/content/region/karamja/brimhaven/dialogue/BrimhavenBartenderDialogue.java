@@ -60,7 +60,7 @@ public final class BrimhavenBartenderDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Yohoho me hearty what would you like to drink?");
+		interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Yohoho me hearty what would you like to drink?");
 		stage = 99;
 		return true;
 	}
@@ -75,15 +75,15 @@ public final class BrimhavenBartenderDialogue extends DialoguePlugin {
 		case 0:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Nothing, thank you.");
+				interpreter.sendDialogues(player, FacialExpression.FRIENDLY, "Nothing, thank you.");
 				stage = 10;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "A pint of Grog please..");
+				interpreter.sendDialogues(player, FacialExpression.HAPPY, "A pint of Grog please..");
 				stage = 20;
 				break;
 			case 3:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "A bottle of rum please.");
+				interpreter.sendDialogues(player, FacialExpression.HAPPY, "A bottle of rum please.");
 				stage = 30;
 				break;
 			}
@@ -92,7 +92,7 @@ public final class BrimhavenBartenderDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 20:
-			interpreter.sendDialogues(npc, null, "One grog coming right up, that'll be three coins.");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "One grog coming right up, that'll be three coins.");
 			stage = 21;
 			break;
 		case 21:
@@ -115,7 +115,7 @@ public final class BrimhavenBartenderDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 30:
-			interpreter.sendDialogues(npc, null, "That'll be 27 coins.");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "That'll be 27 coins.");
 			stage = 31;
 			break;
 		case 31:

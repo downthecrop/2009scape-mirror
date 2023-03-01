@@ -32,7 +32,7 @@ public class PortSarimBartenderDialogue extends DialoguePlugin {
 
 		switch (stage) {
 		case 0:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Hello there!");
+			interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Hello there!");
 			stage = 1;
 			break;
 		case 1:
@@ -42,21 +42,21 @@ public class PortSarimBartenderDialogue extends DialoguePlugin {
 		case 2:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Could I buy a beer, please?");
+				interpreter.sendDialogues(player, FacialExpression.HAPPY, "Could I buy a beer, please?");
 				stage = 10;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Bye, then.");
+				interpreter.sendDialogues(player, FacialExpression.FRIENDLY, "Bye, then.");
 				stage = 20;
 				break;
 			}
 			break;
 		case 10:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Sure, that will be two gold coins, please.");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "Sure, that will be two gold coins, please.");
 			stage = 11;
 			break;
 		case 11:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Okay, here you go.");
+			interpreter.sendDialogues(player, FacialExpression.FRIENDLY, "Okay, here you go.");
 			stage = 12;
 			break;
 		case 12:
@@ -74,7 +74,7 @@ public class PortSarimBartenderDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 20:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Come back soon!");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "Come back soon!");
 			stage = 21;
 			break;
 		case 21:
@@ -94,7 +94,7 @@ public class PortSarimBartenderDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Good day to you!");
+		interpreter.sendDialogues(player, FacialExpression.FRIENDLY, "Good day to you!");
 		stage = 0;
 		return true;
 	}

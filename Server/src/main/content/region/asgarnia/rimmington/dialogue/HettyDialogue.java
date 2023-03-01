@@ -41,16 +41,16 @@ public final class HettyDialogue extends DialoguePlugin {
 	public boolean open(Object... args) {
 		Quest quest = player.getQuestRepository().getQuest("Witch's Potion");
 		if (quest.isCompleted(player)) {
-			interpreter.sendDialogues(307, FacialExpression.HALF_GUILTY, "How's your magic coming along?");
+			interpreter.sendDialogues(307, FacialExpression.ASKING, "How's your magic coming along?");
 			stage = 0;
 		}
 		switch (quest.getStage(player)) {
 		case 0:
-			interpreter.sendDialogues(307, FacialExpression.HALF_GUILTY, "What could you want with an old woman like me?");
+			interpreter.sendDialogues(307, FacialExpression.NEUTRAL, "What could you want with an old woman like me?");
 			stage = 11;
 			break;
 		case 20:
-			interpreter.sendDialogues(307, FacialExpression.HALF_GUILTY, "So have you found the things for the potion?");
+			interpreter.sendDialogues(307, FacialExpression.HAPPY, "So have you found the things for the potion?");
 			stage = 100;
 			break;
 		case 40:
@@ -88,21 +88,21 @@ public final class HettyDialogue extends DialoguePlugin {
 		case 12:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "I am in search of a quest.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "I am in search of a quest.");
 				stage = 13;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "I've heard that you are a witch.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "I've heard that you are a witch.");
 				stage = 20;
 				break;
 			}
 			break;
 		case 13:
-			interpreter.sendDialogues(307, FacialExpression.HALF_GUILTY, "Hmmm... Maybe I can think of something for you.");
+			interpreter.sendDialogues(307, FacialExpression.HAPPY, "Hmmm... Maybe I can think of something for you.");
 			stage = 14;
 			break;
 		case 14:
-			interpreter.sendDialogues(307, FacialExpression.HALF_GUILTY, "Would you like to become more proficient in the dark", "arts?");
+			interpreter.sendDialogues(307, FacialExpression.HAPPY, "Would you like to become more proficient in the dark", "arts?");
 			stage = 15;
 			break;
 		case 15:
@@ -112,11 +112,11 @@ public final class HettyDialogue extends DialoguePlugin {
 		case 16:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Yes help me become one with my darker side.");
+				interpreter.sendDialogues(player, FacialExpression.HAPPY, "Yes help me become one with my darker side.");
 				stage = 30;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "No I have m principles and honour.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "No I have my principles and honour.");
 				stage = 17;
 				break;
 			}
@@ -140,23 +140,23 @@ public final class HettyDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 30:
-			interpreter.sendDialogues(307, FacialExpression.HALF_GUILTY, "Ok I'm going to make a potion to help bring out your", "darker self.");
+			interpreter.sendDialogues(307, FacialExpression.NEUTRAL, "Ok I'm going to make a potion to help bring out your", "darker self.");
 			stage = 31;
 			break;
 		case 31:
-			interpreter.sendDialogues(307, FacialExpression.HALF_GUILTY, "You will need certain ingredients.");
+			interpreter.sendDialogues(307, FacialExpression.NEUTRAL, "You will need certain ingredients.");
 			stage = 32;
 			break;
 		case 32:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "What do I need?");
+			interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "What do I need?");
 			stage = 33;
 			break;
 		case 33:
-			interpreter.sendDialogues(307, FacialExpression.HALF_GUILTY, "You need an eye of newt, a rat's tail, and onion... Oh", "and a piece of burnt meat.");
+			interpreter.sendDialogues(307, FacialExpression.NEUTRAL, "You need an eye of newt, a rat's tail, and onion... Oh", "and a piece of burnt meat.");
 			stage = 34;
 			break;
 		case 34:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Great, I'll go get them.");
+			interpreter.sendDialogues(player, FacialExpression.HAPPY, "Great, I'll go get them.");
 			stage = 35;
 			break;
 		case 35:
@@ -174,12 +174,12 @@ public final class HettyDialogue extends DialoguePlugin {
 				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "I'm afraid I don't have all of them yet.");
 				stage = 101;
 			} else {
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Yes I have everything!");
+				interpreter.sendDialogues(player, FacialExpression.HAPPY, "Yes I have everything!");
 				stage = 110;
 			}
 			break;
 		case 110:
-			interpreter.sendDialogues(307, FacialExpression.HALF_GUILTY, "Excellent, can I have them then?");
+			interpreter.sendDialogues(307, FacialExpression.HAPPY, "Excellent, can I have them then?");
 			stage = 111;
 			break;
 		case 111:
@@ -187,13 +187,13 @@ public final class HettyDialogue extends DialoguePlugin {
 			stage = 112;
 			break;
 		case 112:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Well, is it ready?");
+			interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Well, is it ready?");
 			stage = 113;
 			break;
 		case 113:
 			if (player.getInventory().remove(new Item(1957), new Item(300), new Item(2146), new Item(221))) {
 				quest.setStage(player, 40);
-				interpreter.sendDialogues(307, FacialExpression.HALF_GUILTY, "Ok, now drink from the cauldron.");
+				interpreter.sendDialogues(307, FacialExpression.HAPPY, "Ok, now drink from the cauldron.");
 				stage = 114;
 			}
 			break;
@@ -201,7 +201,7 @@ public final class HettyDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 101:
-			interpreter.sendDialogues(307, FacialExpression.HALF_GUILTY, "Well I can't make the potion without them! Remember...", "You need an eye of newt, a rat's tail, an onion, and a", "piece of burnt meat. Off you go dear!");
+			interpreter.sendDialogues(307, FacialExpression.NEUTRAL, "Well I can't make the potion without them! Remember...", "You need an eye of newt, a rat's tail, an onion, and a", "piece of burnt meat. Off you go dear!");
 			stage = 102;
 			break;
 		case 102:

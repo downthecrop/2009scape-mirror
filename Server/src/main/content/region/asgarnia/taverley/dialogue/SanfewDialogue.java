@@ -41,7 +41,7 @@ public class SanfewDialogue extends DialoguePlugin {
 		switch (stage) {
 		case 0:
 			if (player.getQuestRepository().getQuest("Druidic Ritual").getStage(player) == 20) {
-				interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Did you bring me the required ingredients for the", "potion?");
+				interpreter.sendDialogues(npc, FacialExpression.HALF_ASKING, "Did you bring me the required ingredients for the", "potion?");
 				stage = 100;
 				break;
 			}
@@ -63,13 +63,13 @@ public class SanfewDialogue extends DialoguePlugin {
 				stage = 5;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Actually, I don't need to speak to you.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Actually, I don't need to speak to you.");
 				stage = 3;
 				break;
 			}
 			break;
 		case 3:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Well, we all make mistakes sometimes.");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "Well, we all make mistakes sometimes.");
 			stage = 4;
 			break;
 		case 4:
@@ -84,7 +84,7 @@ public class SanfewDialogue extends DialoguePlugin {
 			stage = 7;
 			break;
 		case 7:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Where can I find this cauldron?");
+			interpreter.sendDialogues(player, FacialExpression.ASKING, "Where can I find this cauldron?");
 			stage = 8;
 			break;
 		case 8:

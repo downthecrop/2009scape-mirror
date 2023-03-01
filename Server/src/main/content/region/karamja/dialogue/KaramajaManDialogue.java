@@ -39,7 +39,7 @@ public final class KaramajaManDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Hello, how's it going?");
+		interpreter.sendDialogues(player, FacialExpression.HAPPY, "Hello, how's it going?");
 		stage = 0;
 		return true;
 	}
@@ -52,7 +52,7 @@ public final class KaramajaManDialogue extends DialoguePlugin {
 			stage = 1;
 			break;
 		case 1:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Don't worry, I'll kill them.");
+			interpreter.sendDialogues(player, FacialExpression.HAPPY, "Don't worry, I'll kill them.");
 			stage = 2;
 			break;
 		case 2:

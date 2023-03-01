@@ -54,7 +54,7 @@ class ThessaliaDialogue(player: Player? = null): core.game.dialogue.DialoguePlug
                 }
             }
             10 -> {
-                interpreter.sendDialogues(npc, core.game.dialogue.FacialExpression.HALF_GUILTY, "I have a number of fine pieces of clothing on sale or,", "if you prefer, I can offer you an exclusive", "total clothing makeover?")
+                interpreter.sendDialogues(npc, core.game.dialogue.FacialExpression.HAPPY, "I have a number of fine pieces of clothing on sale or,", "if you prefer, I can offer you an exclusive", "total clothing makeover?")
                 stage++
             }
             11 -> {
@@ -80,11 +80,11 @@ class ThessaliaDialogue(player: Player? = null): core.game.dialogue.DialoguePlug
                 stage++
             }
             22 -> {
-                interpreter.sendDialogues(npc, core.game.dialogue.FacialExpression.FRIENDLY, "A fee of only 500 gold coins! Tired of always wearing", "the same old outfit, day in, day out? This is the service", "for you!")
+                interpreter.sendDialogues(npc, core.game.dialogue.FacialExpression.AMAZED, "A fee of only 500 gold coins! Tired of always wearing", "the same old outfit, day in, day out? This is the service", "for you!")
                 stage++
             }
             23 -> {
-                interpreter.sendDialogues(npc, core.game.dialogue.FacialExpression.ASKING, "So what do you say? Interested? We can change either", "your top, or your legwear for only 500 gold a item!")
+                interpreter.sendDialogues(npc, core.game.dialogue.FacialExpression.ASKING, "So what do you say? Interested? We can change either", "your top, or your legwear for only 500 gold an item!")
                 stage++
             }
             24 -> {
@@ -97,7 +97,7 @@ class ThessaliaDialogue(player: Player? = null): core.game.dialogue.DialoguePlug
                     stage = 30
                 }
                 2 -> {
-                    interpreter.sendDialogues(player, core.game.dialogue.FacialExpression.NEUTRAL, "I'd just like to buy some clothes.")
+                    interpreter.sendDialogues(player, core.game.dialogue.FacialExpression.HAPPY, "I'd just like to buy some clothes.")
                     stage = 50
                 }
             }

@@ -46,7 +46,7 @@ public final class KaqemeexDialogue extends DialoguePlugin {
 			stage = 1000;
 			return true;
 		}
-		interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Hello there.");
+		interpreter.sendDialogues(player, FacialExpression.FRIENDLY, "Hello there.");
 		stage = 0;
 		return true;
 	}
@@ -61,16 +61,16 @@ public final class KaqemeexDialogue extends DialoguePlugin {
 				break;
 			}
 			if (player.getQuestRepository().getQuest("Druidic Ritual").getStage(player) == 10) {
-				interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Hello again.");
+				interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "Hello again.");
 				stage = 40;
 				break;
 			}
 			if (player.getQuestRepository().getQuest("Druidic Ritual").getStage(player) == 99) {
-				interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "I have word from Sanfew that you have been very", "helpful in assisting him with his preparations for the", "purification ritual. As promised I will now teach you the", "ancient arts of Herblore.");
+				interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "I have word from Sanfew that you have been very", "helpful in assisting him with his preparations for the", "purification ritual. As promised I will now teach you the", "ancient arts of Herblore.");
 				stage = 200;
 				break;
 			}
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "What brings you to our holy monument?");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "What brings you to our holy monument?");
 			stage = 1;
 			break;
 		case 1:
@@ -91,48 +91,48 @@ public final class KaqemeexDialogue extends DialoguePlugin {
 		case 2:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Who are you?");
+				interpreter.sendDialogues(player, FacialExpression.ASKING, "Who are you?");
 				stage = 10;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "I'm in search of a quest.");
+				interpreter.sendDialogues(player, FacialExpression.FRIENDLY, "I'm in search of a quest.");
 				stage = 20;
 				break;
 			case 3:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Did you build this?");
+				interpreter.sendDialogues(player, FacialExpression.ASKING, "Did you build this?");
 				stage = 30;
 				break;
 			}
 			break;
 		case 10:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "We are the druids of Guthix. We worship our god at", "our famous stone circles. You will find them located", "throghout these lands.");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "We are the druids of Guthix. We worship our god at", "our famous stone circles. You will find them located", "throughout these lands.");
 			stage = 11;
 			break;
 		case 11:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Well, I'll be on my way now.");
+			interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Well, I'll be on my way now.");
 			stage = 12;
 			break;
 		case 12:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Goodbye adventurer. I feel we shall meet again.");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "Goodbye adventurer. I feel we shall meet again.");
 			stage = 13;
 			break;
 		case 13:
 			end();
 			break;
 		case 30:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "What, personally? No, ofcoure I didn't. However, our", "four fathers did. The first Druids of Guthix built many", "stone circles across these lands over eight hundred", "years ago.");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "What, personally? No, ofcourse I didn't. However, our", "four fathers did. The first Druids of Guthix built many", "stone circles across these lands over eight hundred", "years ago.");
 			stage = 31;
 			break;
 		case 31:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Unfortunately we only know of two remaining and of", "those only one is usuable by us anymore.");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Unfortunately we only know of two remaining and of", "those only one is usable by us anymore.");
 			stage = 32;
 			break;
 		case 32:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Well, I'll be on my way now.");
+			interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Well, I'll be on my way now.");
 			stage = 12;
 			break;
 		case 20:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Hmm. I think I may have a worthwhile quest for you", "actually. I don't know if you are familiar with the stone", "circle south of Varrock or not, but...");
+			interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Hmm. I think I may have a worthwhile quest for you", "actually. I don't know if you are familiar with the stone", "circle south of Varrock or not, but...");
 			stage = 21;
 			break;
 		case 21:
@@ -140,7 +140,7 @@ public final class KaqemeexDialogue extends DialoguePlugin {
 			stage = 22;
 			break;
 		case 22:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "When they cursed the rocks for their rituals they made", "them useless to us and our magics. We require a brave", "adevnturer to go on a quest for us to help purify the", "circle of Varrock.");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "When they cursed the rocks for their rituals, they made", "them useless to us and our magics. We require a brave", "adventurer to go on a quest for us to help purify the", "circle of Varrock.");
 			stage = 23;
 			break;
 		case 23:
@@ -165,11 +165,11 @@ public final class KaqemeexDialogue extends DialoguePlugin {
 			break;
 		case 26:
 			player.getQuestRepository().getQuest("Druidic Ritual").start(player);
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Excellent. Go to the village south of this place and speak", "to my fellow Sanfew who is working on the purification", "ritual. He knows better than I what is required to", "complete it.");
+			interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Excellent. Go to the village south of this place and speak", "to my fellow Sanfew who is working on the purification", "ritual. He knows better than I what is required to", "complete it.");
 			stage = 27;
 			break;
 		case 27:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Will do.");
+			interpreter.sendDialogues(player, FacialExpression.HAPPY, "Will do.");
 			stage = 28;
 			break;
 		case 28:
@@ -189,11 +189,11 @@ public final class KaqemeexDialogue extends DialoguePlugin {
 		case 500:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Who are you?");
+				interpreter.sendDialogues(player, FacialExpression.HALF_ASKING, "Who are you?");
 				stage = 10;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Did you build this?");
+				interpreter.sendDialogues(player, FacialExpression.HALF_ASKING, "Did you build this?");
 				stage = 30;
 				break;
 			}
@@ -201,15 +201,15 @@ public final class KaqemeexDialogue extends DialoguePlugin {
 		case 501:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Can I buy a Skillcape of Herblore?");
+				interpreter.sendDialogues(player, FacialExpression.HAPPY, "Can I buy a Skillcape of Herblore?");
 				stage = 800;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Who are you?");
+				interpreter.sendDialogues(player, FacialExpression.ASKING, "Who are you?");
 				stage = 10;
 				break;
 			case 3:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Did you build this?");
+				interpreter.sendDialogues(player, FacialExpression.HALF_ASKING, "Did you build this?");
 				stage = 30;
 				break;
 			}

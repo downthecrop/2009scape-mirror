@@ -31,7 +31,7 @@ public class TakiDwarfDialogue extends DialoguePlugin {
 
 		switch (stage) {
 		case 0:
-			interpreter.sendDialogues(player, FacialExpression.OLD_NORMAL, "Hi little fellow.");
+			interpreter.sendDialogues(player, FacialExpression.HAPPY, "Hi little fellow.");
 			stage = 1;
 			break;
 		case 1:
@@ -39,7 +39,7 @@ public class TakiDwarfDialogue extends DialoguePlugin {
 			stage = 2;
 			break;
 		case 2:
-			interpreter.sendDialogues(player, FacialExpression.OLD_NORMAL, "Arrr! nothing, nothing at all..");
+			interpreter.sendDialogues(player, FacialExpression.GUILTY, "Arrr! nothing, nothing at all..");
 			stage = 3;
 			break;
 		case 3:

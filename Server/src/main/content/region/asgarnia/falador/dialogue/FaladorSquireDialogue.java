@@ -195,7 +195,7 @@ public final class FaladorSquireDialogue extends DialoguePlugin {
 					stage = 132;
 					break;
 				case 132:
-					npc("To claim your Falador Achievement Diary rewards,", "speak to Redbeard the Pirate in Port Sarim, Sir Vyvin's", "squire in the White Knight's Castle, or myself.");
+					npc("To claim your Falador Achievement Diary rewards,", "speak to Redbeard the Pirate in Port Sarim, The Chemist", "in Rimmington, or myself.");
 					stage = 105;
 					break;
 

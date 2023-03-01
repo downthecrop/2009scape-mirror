@@ -58,7 +58,7 @@ public final class DavonDialogue extends DialoguePlugin {
 				stage = 10;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_ASKING, "What do you mean pssst?");
+				interpreter.sendDialogues(player, FacialExpression.SUSPICIOUS, "What do you mean pssst?");
 				stage = 20;
 				break;
 			case 3:
