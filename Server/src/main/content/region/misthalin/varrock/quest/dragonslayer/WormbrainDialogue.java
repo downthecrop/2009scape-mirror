@@ -96,7 +96,7 @@ public final class WormbrainDialogue extends DialoguePlugin {
 					stage = 505;
 					break;
 				case 2:
-					player("Alrigt, then, 10,000 it is.");
+					player("Alright, then, 10,000 it is.");
 					stage = 506;
 					break;
 				}
@@ -154,7 +154,7 @@ public final class WormbrainDialogue extends DialoguePlugin {
 				break;
 			case 2:
 				player("Sorry, thought this was a zoo.");
-				stage = 20;
+				stage = 15;
 				break;
 			}
 			break;
@@ -179,9 +179,6 @@ public final class WormbrainDialogue extends DialoguePlugin {
 			stage = 15;
 			break;
 		case 15:
-			end();
-			break;
-		case 20:
 			end();
 			break;
 		}
