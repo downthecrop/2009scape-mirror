@@ -138,13 +138,13 @@ public final class LeelaDialogue extends DialoguePlugin {
 					end();
 					return true;
 				}
-				if (player.getInventory().remove(remove)) {
+				if (!player.getInventory().containsItem(BRONZE_KEY) && player.getInventory().remove(remove)) {
 					if (!player.getInventory().add(BRONZE_KEY)) {
 						GroundItemManager.create(BRONZE_KEY, player);
 					}
-					end();
 					player.getPacketDispatch().sendMessage("Leela gives you another key.");
 				}
+				end();
 				stage = 99;
 				break;
 			case 99:
@@ -182,7 +182,7 @@ public final class LeelaDialogue extends DialoguePlugin {
 				end();
 				break;
 			case 120:
-				interpreter.sendDialogues(npc, null, "I don't thik you should. If you do the rest of the", "gang and Keli would attack you. The door guard", "should be removed first, to make it easy.");
+				interpreter.sendDialogues(npc, null, "I don't think you should. If you do the rest of the", "gang and Keli would attack you. The door guard", "should be removed first, to make it easy.");
 				stage = 121;
 				break;
 			case 121:
@@ -215,7 +215,7 @@ public final class LeelaDialogue extends DialoguePlugin {
 					GroundItemManager.create(BRONZE_KEY, player);
 				}
 				quest.setStage(player, 40);
-				interpreter.sendDialogues(npc, null, "Good, you have all the basic equipment. Next to deal", "with the guard on the door. he is talkative, try to find", "a weakness in him.");
+				interpreter.sendDialogues(npc, null, "Good, you have all the basic equipment. Next to deal", "with the guard on the door. He is talkative, try to find", "a weakness in him.");
 				stage = 2;
 				break;
 			case 2:
