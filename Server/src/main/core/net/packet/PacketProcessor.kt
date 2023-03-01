@@ -47,6 +47,7 @@ import core.game.node.entity.player.info.LogType
 import core.game.node.entity.player.info.PlayerMonitor
 import core.tools.SystemLogger
 import core.game.system.command.CommandSystem
+import core.game.system.communication.GlobalChat
 import core.game.world.GameWorld
 import core.game.world.repository.Repository
 import core.net.packet.`in`.Packet
@@ -54,6 +55,7 @@ import core.net.packet.`in`.RunScript
 import core.worker.ManagementEvents
 import java.io.PrintWriter
 import java.io.StringWriter
+import java.lang.Math.min
 import java.util.*
 
 object PacketProcessor {
@@ -198,13 +200,28 @@ object PacketProcessor {
                 if (pkt.player.details.isMuted)
                     pkt.player.sendMessage("You have been muted due to breaking a rule.")
                 else {
-                    if (pkt.message.startsWith("/") && pkt.player.communication.clan != null) {
-                        val builder = ClanMessage.newBuilder()
-                        builder.sender = pkt.player.name
-                        builder.clanName = pkt.player.communication.clan.owner.lowercase().replace(" ", "_")
-                        builder.message = pkt.message.substring(1)
-                        builder.rank = pkt.player.rights.ordinal
-                        ManagementEvents.publish(builder.build())
+                    if (ServerConstants.ENABLE_GLOBALCHAT && pkt.message.startsWith("//")) {
+                        if (getAttribute(pkt.player, GlobalChat.ATTR_GLOBAL_MUTE, false))
+                            return
+
+                        val messages = splitChatMessage(pkt.message.substring(2), pkt.player.name.length + 3, false)
+                        for (message in messages) {
+                            if (message.isNotBlank())
+                                GlobalChat.process(pkt.player.username, message)
+                        }
+                        return
+                    }
+                    else if (pkt.message.startsWith("/") && pkt.player.communication.clan != null) {
+                        val messages = splitChatMessage(pkt.message.substring(1), pkt.player.communication.clan.name.length + pkt.player.name.length, pkt.player.details.rights.ordinal != 0)
+                        for (message in messages) {
+                            if (message.isBlank()) continue
+                            val builder = ClanMessage.newBuilder()
+                            builder.sender = pkt.player.name
+                            builder.clanName = pkt.player.communication.clan.owner.lowercase().replace(" ", "_")
+                            builder.message = message
+                            builder.rank = pkt.player.rights.ordinal
+                            ManagementEvents.publish(builder.build())
+                        }
                         return
                     }
                     PlayerMonitor.logChat(pkt.player, "public", pkt.message)
@@ -759,5 +776,24 @@ object PacketProcessor {
             container.insert(slot, secondSlot, false)
         }
         container.refresh()
-    } 
+    }
+
+    fun splitChatMessage(message: String, clanLength: Int, rankPresent: Boolean) : ArrayList<String> {
+        val messages = ArrayList<String>()
+
+        val effectiveCutoff = BASE_CHAT_CUTOFF - (clanLength + if (rankPresent) 9 else 0)
+        var counter = 0
+        for (token in message.split(" ")) {
+            if (counter + token.length > effectiveCutoff)
+                break
+            counter += token.length + 1
+        }
+        messages.add(message.substring(0, min(counter, message.length)))
+        if (counter < message.length)
+            messages.add(message.substring(counter, message.length))
+
+        return messages
+    }
+
+    const val BASE_CHAT_CUTOFF = 81
 }
