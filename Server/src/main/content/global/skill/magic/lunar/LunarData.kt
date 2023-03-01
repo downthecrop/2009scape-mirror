@@ -1,5 +1,9 @@
 package content.global.skill.magic.lunar
 
+import core.api.*
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListener
+import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
@@ -17,7 +21,7 @@ val CURE_ME_ANIM = Animation(4411)
 val CURE_GROUP_ANIM = Animation(4409)
 val CURE_OTHER_ANIM = Animation(4411)
 val ENERGY_TRANSFER_ANIM = Animation(4411)
-
+val HUNTER_KIT_ANIM = Animation(6303)
 
 // Graphics
 val BAKE_PIE_GFX = Graphics(746,75)
@@ -32,6 +36,31 @@ val CURE_ME_GFX = Graphics(731, 90)
 val CURE_GROUP_GFX = Graphics(751, 130)
 val CURE_OTHER_GFX = Graphics(738, 130)
 val ENERGY_TRANSFER_GFX = Graphics(738, 90)
+val HUNTER_KIT_GFX = Graphics(1024)
+
+private val HunterKitContents = intArrayOf(
+    Items.NOOSE_WAND_10150,
+    Items.BUTTERFLY_NET_10010,
+    Items.BIRD_SNARE_10006,
+    Items.RABBIT_SNARE_10031,
+    Items.TEASING_STICK_10029,
+    Items.UNLIT_TORCH_596,
+    Items.BOX_TRAP_10008
+)
+
+class HunterKitInteraction : InteractionListener {
+    override fun defineListeners() {
+        on(Items.HUNTER_KIT_11159, IntType.ITEM, "open") { player, _ ->
+            if(freeSlots(player) < 6) sendMessage(player, "You don't have enough inventory space.").also { return@on false }
+            if(removeItem(player, Items.HUNTER_KIT_11159)) {
+                for(item in HunterKitContents) {
+                    addItemOrDrop(player, item)
+                }
+            }
+            return@on true
+        }
+    }
+}
 
 enum class JewelleryString(val unstrung: Int, val strung: Int) {
     GOLD(Items.GOLD_AMULET_1673, Items.GOLD_AMULET_1692),
@@ -55,3 +84,4 @@ enum class JewelleryString(val unstrung: Int, val strung: Int) {
         }
     }
 }
+

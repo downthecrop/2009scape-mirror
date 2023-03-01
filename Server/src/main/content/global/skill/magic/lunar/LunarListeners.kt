@@ -188,6 +188,11 @@ class LunarListeners : SpellListener("lunar"), Commands {
         onCast(Lunar.ENERGY_TRANSFER, PLAYER) { player, node ->
             node?.let { energyTransfer(player, node) }
         }
+
+        onCast(Lunar.HUNTER_KIT, NONE) { player, _ ->
+            if(freeSlots(player) == 0) sendMessage(player, "Not enough inventory space!").also { return@onCast }
+            hunterKit(player)
+        }
     }
 
     // Lunar spellbook-related debug commands
@@ -580,6 +585,16 @@ class LunarListeners : SpellListener("lunar"), Commands {
         player.settings.specialEnergy -= e
         removeRunes(player, true)
         addXP(player, 100.0)
+    }
+
+    private fun hunterKit(player: Player) {
+        requires(player, 71, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.EARTH_RUNE_557, 2)))
+        removeRunes(player, true)
+        if(addItem(player, Items.HUNTER_KIT_11159)) {
+            visualizeSpell(player, HUNTER_KIT_ANIM, HUNTER_KIT_GFX, 3615)
+            addXP(player, 70.0)
+            setDelay(player, 2)
+        }
     }
 }
 
