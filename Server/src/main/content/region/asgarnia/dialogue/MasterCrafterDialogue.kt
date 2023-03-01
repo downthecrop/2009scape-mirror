@@ -26,12 +26,6 @@ class MasterCrafterDialogue(player: Player? = null) : core.game.dialogue.Dialogu
         return MasterCrafterDialogue(player)
     }
 
-    override fun open(vararg args: Any?) : Boolean {
-        npc = args[0] as NPC
-        stage = 0
-        return true
-    }
-
     override fun handle(interfaceId: Int, buttonId: Int) : Boolean {
         when(stage) {
             0 -> if(hasLevelStat(player, Skills.CRAFTING, 99)) {
