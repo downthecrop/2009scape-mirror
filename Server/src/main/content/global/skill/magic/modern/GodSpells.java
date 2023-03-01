@@ -2,21 +2,22 @@ package content.global.skill.magic.modern;
 
 import core.cache.def.impl.ItemDefinition;
 import core.game.container.impl.EquipmentContainer;
-import core.plugin.Initializable;
-import core.game.node.entity.combat.spell.Runes;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.spell.CombatSpell;
+import core.game.node.entity.combat.spell.Runes;
 import core.game.node.entity.combat.spell.SpellType;
-import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.impl.Animator.Priority;
+import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
+import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
+import core.plugin.Initializable;
 import core.plugin.Plugin;
 import org.rs09.consts.Items;
 
@@ -32,6 +33,7 @@ public final class GodSpells extends CombatSpell {
 	 * The spell names.
 	 */
 	private static final String[] NAMES = new String[] { "Saradomin strike", "Guthix claws", "Flames of Zamorak" };
+    private static final int[] GOD_STAVES = new int[] { Items.SARADOMIN_STAFF_2415, Items.GUTHIX_STAFF_2416, Items.ZAMORAK_STAFF_2417 };
 
 	/**
 	 * The start graphic for Air strike.
@@ -105,6 +107,22 @@ public final class GodSpells extends CombatSpell {
 		super(type, SpellBook.MODERN, 60, 35.0, -1, -1, ANIMATION, start, projectile, end, runes);
 	}
 
+    private int getSpellIndex() {
+        int index = -1;
+        switch (runes[1].getAmount()) {
+            case 2: // Saradomin strike
+                index = 0;
+                break;
+            case 1: // Guthix claws
+                index = 1;
+                break;
+            case 4: // Flames of Zamorak
+                index = 2;
+                break;
+        }
+        return index;
+    }
+
 	@Override
 	public boolean meetsRequirements(Entity caster, boolean message, boolean remove) {
 		if (caster instanceof NPC) {
@@ -112,21 +130,11 @@ public final class GodSpells extends CombatSpell {
 		}
 		if (caster instanceof Player) {
 			int staffId = ((Player) caster).getEquipment().getNew(EquipmentContainer.SLOT_WEAPON).getId();
-			int required = -1;
-			int index = 0;
-			switch (runes[1].getAmount()) {
-			case 2: // Saradomin strike
-				required = 2415;
-				break;
-			case 1: // Guthix claws
-				required = 2416;
-				index = 1;
-				break;
-			case 4: // Flames of Zamorak
-				required = 2417;
-				index = 2;
-				break;
-			}
+			int index = getSpellIndex();
+            if(index < 0) {
+                return false;
+            }
+            int required = GOD_STAVES[index];
 			Player p = (Player) caster;
 			if (p.getSavedData().getActivityData().getGodCasts()[index] < 100 && !p.getZoneMonitor().isInZone("mage arena")) {
 				p.sendMessage("You need to cast " + NAMES[index] + " " + (100 - p.getSavedData().getActivityData().getGodCasts()[index]) + " more times inside the Mage Arena.");
@@ -143,6 +151,21 @@ public final class GodSpells extends CombatSpell {
 		return super.meetsRequirements(caster, message, remove);
 	}
 
+    @Override
+	public void fireEffect(Entity entity, Entity victim, BattleState state) {
+        switch(getSpellIndex()) {
+            case 0:
+               victim.getSkills().decrementPrayerPoints(1);
+               break;
+            case 1:
+                victim.getSkills().drainLevel(Skills.DEFENCE, 0.05, 0.05);
+                break;
+            case 2:
+                victim.getSkills().drainLevel(Skills.MAGIC, 0.05, 0.05);
+                break;
+        }
+    }
+
 	@Override
 	public void visualize(Entity entity, Node target) {
 		super.visualize(entity, target);
@@ -157,15 +180,7 @@ public final class GodSpells extends CombatSpell {
 	@Override
 	public void visualizeImpact(Entity entity, Entity target, BattleState state) {
 		if (entity instanceof Player) {
-			int index = 0; // Saradomin strike
-			switch (runes[1].getAmount()) {
-			case 1: // Guthix claws
-				index = 1;
-				break;
-			case 4: // Flames of Zamorak
-				index = 2;
-				break;
-			}
+			int index = getSpellIndex();
 			Player p = (Player) entity;
 			if (p.getSavedData().getActivityData().getGodCasts()[index] < 100) {
 				p.getSavedData().getActivityData().getGodCasts()[index]++;

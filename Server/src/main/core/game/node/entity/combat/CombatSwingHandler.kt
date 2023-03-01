@@ -226,7 +226,6 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
                 entity.attack(victim)
                 entity.removeAttribute("autocast_component")
             }
-            weapEx?.setAttackStyle(1)
             weapEx?.updateInterface()
             entity.debug("Adjusting attack style")
         }

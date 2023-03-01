@@ -47,6 +47,8 @@ public final class ChargeSpell extends MagicSpell {
 		}
 		p.getLocks().lock("charge_cast", 100);
 		visualize(entity, target);
+        // Remove the previous copy of the state in order to refresh the duration if recast before 7 minutes
+        p.clearState("godcharge");
 		p.registerState("godcharge").init();
 		p.getPacketDispatch().sendMessage("You feel charged with magic power.");
 		return true;
