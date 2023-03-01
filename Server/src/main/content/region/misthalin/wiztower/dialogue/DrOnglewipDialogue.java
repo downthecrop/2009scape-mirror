@@ -39,7 +39,7 @@ public final class DrOnglewipDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		interpreter.sendDialogues(player, FacialExpression.OLD_NORMAL, "Do you live here too?");
+		interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Do you live here too?");
 		stage = 0;
 		return true;
 	}
@@ -52,7 +52,7 @@ public final class DrOnglewipDialogue extends DialoguePlugin {
 			stage = 1;
 			break;
 		case 1:
-			interpreter.sendDialogues(player, FacialExpression.OLD_NORMAL, "So where's this Gnome Stronghold?");
+			interpreter.sendDialogues(player, FacialExpression.ASKING, "So where's this Gnome Stronghold?");
 			stage = 2;
 			break;
 		case 2:
@@ -60,7 +60,7 @@ public final class DrOnglewipDialogue extends DialoguePlugin {
 			stage = 3;
 			break;
 		case 3:
-			interpreter.sendDialogues(player, FacialExpression.OLD_NORMAL, "I'll try and make time for it. Sounds like a nice place.");
+			interpreter.sendDialogues(player, FacialExpression.FRIENDLY, "I'll try and make time for it. Sounds like a nice place.");
 			stage = 4;
 			break;
 		case 4:

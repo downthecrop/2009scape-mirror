@@ -241,6 +241,8 @@ public class ReldoDialogue extends DialoguePlugin {
                     stage++;
                     break;
                 case 2006:
+                    end();
+                    break;
 
             }
             return true;

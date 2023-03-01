@@ -91,7 +91,7 @@ public final class ZekeDialogue extends DialoguePlugin {
 			stage = 32;
 			break;
 		case 32:
-			interpreter.sendDialogues(npc, FacialExpression.ANGRY, "The banana-brained nitwits who make them would never", "dream of selling any to to me.");
+			interpreter.sendDialogues(npc, FacialExpression.ANGRY, "The banana-brained nitwits who make them would never", "dream of selling any to me.");
 			stage = 33;
 			break;
 		case 33:

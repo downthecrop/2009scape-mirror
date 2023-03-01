@@ -109,7 +109,7 @@ public final class MinecartDriverDialogue extends DialoguePlugin {
 				stage++;
 				break;
 			case 7:
-				player("One good turn deserves another�.");
+				player("One good turn deserves another.");
 				stage++;
 				break;
 			case 8:

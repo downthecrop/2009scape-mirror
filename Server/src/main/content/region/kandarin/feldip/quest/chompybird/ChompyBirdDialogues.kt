@@ -248,7 +248,7 @@ class RantzChompyBirdDialogue(val quest: Quest) : DialogueFile() {
   private fun handleQuestStartDialogue(player: Player?, buttonId: Int) {
     when(stage) {
       0 -> npcl(core.game.dialogue.FacialExpression.OLD_NORMAL, "Hey you creature! Make some stabbers! I wanna hunt da chompy?").also { stage++ }
-	    1 -> options("What are 'stabbers'?", "What's a 'chompy'?", "Ok, I’ll make you some 'stabbers'.", "Er, make your own 'stabbers'!").also { stage++ }
+	    1 -> options("What are 'stabbers'?", "What's a 'chompy'?", "Ok, I'll make you some 'stabbers'.", "Er, make your own 'stabbers'!").also { stage++ }
 	    2 -> when(buttonId) {
 		    1 -> playerl("What are 'stabbers'?").also { stage = 3 }
 		    2 -> playerl("What's a 'chompy'?").also { stage = 7 }

@@ -81,7 +81,7 @@ public class PrinceAliDialogue extends DialoguePlugin {
 			stage = 1;
 			break;
 		case 1:
-			interpreter.sendDialogues(player, null, "With a disguise. I have removed the Lady Keli. she is", "tied up, but will not stay tied up for long.");
+			interpreter.sendDialogues(player, null, "With a disguise. I have removed the Lady Keli. She is", "tied up, but will not stay tied up for long.");
 			stage = 2;
 			break;
 		case 2:
