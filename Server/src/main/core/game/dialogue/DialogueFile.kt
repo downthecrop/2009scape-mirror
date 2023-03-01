@@ -130,13 +130,16 @@ abstract class DialogueFile {
         player?.dialogueInterpreter?.sendDialogue(*messages)
     }
 
-    fun showTopics(vararg topics: Topic<*>) {
+    fun showTopics(vararg topics: Topic<*>): Boolean {
         val validTopics = ArrayList<String>()
         topics.filter { if(it is IfTopic) it.showCondition else true }.forEach {
                 topic -> interpreter!!.activeTopics.add(topic)
                 validTopics.add(topic.text)
         }
-        if (validTopics.size == 1) {
+        if(validTopics.size == 0) {
+            return true
+        }
+        else if (validTopics.size == 1) {
             val topic = topics[0]
             if(topic.toStage is DialogueFile) {
                 val topicFile = topic.toStage as DialogueFile
@@ -146,7 +149,10 @@ abstract class DialogueFile {
             }
             player(topic.text)
             interpreter!!.activeTopics.clear()
+            return false
         }
-        else options(*validTopics.toTypedArray())
+        else { options(*validTopics.toTypedArray())
+            return false
+        }
     }
 }

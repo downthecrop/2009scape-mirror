@@ -362,7 +362,7 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 		return player(expr, splitLines(msg, 54));
 	}
 
-	public void showTopics(Topic<?>... topics) {
+	public boolean showTopics(Topic<?>... topics) {
 		ArrayList<String> validTopics = new ArrayList<>();
 		for(Topic<?> topic : topics)
 		{
@@ -370,21 +370,25 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 			interpreter.activeTopics.add(topic);
 			validTopics.add(topic.getText());
 		}
-
-		if (validTopics.size() == 1) {
-			Topic topic = interpreter.activeTopics.get(0);
-
-			if(topic.getToStage() instanceof DialogueFile) {
-        DialogueFile topicFile = (DialogueFile) topic.getToStage();
-        interpreter.getDialogue().loadFile(topicFile);
-      } else if(topic.getToStage() instanceof Integer) {
-        stage = (Integer) topic.getToStage();
-      }
-
-			player(topic.getText());
-      interpreter.activeTopics.clear();
+		if(validTopics.size() == 0) {
+			return true;
 		}
-
-		options(validTopics.toArray(new String[0]));
+		else if (validTopics.size() == 1) {
+			Topic topic = interpreter.activeTopics.get(0);
+			if(topic.getToStage() instanceof DialogueFile) {
+        		DialogueFile topicFile = (DialogueFile) topic.getToStage();
+        		interpreter.getDialogue().loadFile(topicFile);
+      		}
+			else if(topic.getToStage() instanceof Integer) {
+        	stage = (Integer) topic.getToStage();
+      		}
+			player(topic.getText());
+      		interpreter.activeTopics.clear();
+			  return false;
+		}
+		else {
+			options(validTopics.toArray(new String[0]));
+			return false;
+		}
 	}
 }

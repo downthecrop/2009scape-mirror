@@ -10,8 +10,6 @@ import content.region.desert.quest.thegolem.CuratorHaigHalenGolemDialogue;
 
 /**
  * Represents the curator haig halen dialogue.
- * @author 'Vexia
- * @version 1.0
  */
 public final class CuratorHaigHalenDialogue extends DialoguePlugin {
 
@@ -40,29 +38,31 @@ public final class CuratorHaigHalenDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Welcome to the museum of Varrock.");
-
-		if (player.getQuestRepository().getPoints() >= 50) {
+		interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Welcome to the museum of Varrock.");
+		if (player.getQuestRepository().getPoints() >= 50 && !player.getAchievementDiaryManager().hasCompletedTask(DiaryType.VARROCK, 0 ,12)) {
 			player.getAchievementDiaryManager().finishTask(player, DiaryType.VARROCK, 0, 12);
 		}
-
 		stage = 0;
 		return true;
 	}
 
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
-        switch(stage) {
-            case 0:
-            showTopics(
-                new IfTopic("I have the Shield of Arrav", new CuratorHaigHalenSOADialogue(),
-                    player.getQuestRepository().getQuest("Shield of Arrav").getStage(player) == 70
-                , false),
-                new IfTopic("I'm looking for a statuette recovered from the city of Uzer.", new CuratorHaigHalenGolemDialogue(),
-                    player.getQuestRepository().getQuest("The Golem").getStage(player) >= 3
-                , false)
-            );
-            break;
+		switch(stage) {
+			case 0:
+				boolean fallthrough = showTopics(
+						new IfTopic("I have the Shield of Arrav", new CuratorHaigHalenSOADialogue(),
+								player.getQuestRepository().getQuest("Shield of Arrav").getStage(player) == 70
+								, false),
+						new IfTopic("I'm looking for a statuette recovered from the city of Uzer.", new CuratorHaigHalenGolemDialogue(),
+								player.getQuestRepository().getQuest("The Golem").getStage(player) == 3
+								, false)
+				);
+				if(fallthrough) { stage = 1; handle(interfaceId, buttonId); }
+				break;
+			case 1:
+				end();
+				break;
 		}
 		return true;
 	}
