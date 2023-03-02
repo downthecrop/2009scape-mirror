@@ -6,8 +6,7 @@ variables:
   # when running from the command line.
   MAVEN_CLI_OPTS: "--batch-mode --errors --fail-fast --show-version"
 
-# This template uses jdk8 for verifying and deploying images
-image: maven:3-openjdk-11
+image: maven:3-openjdk-11-slim
 
 before_script:
   - free -mh
