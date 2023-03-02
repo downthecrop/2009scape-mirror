@@ -50,20 +50,20 @@ public class FortressGuardDialogue extends DialoguePlugin {
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
 		if (args.length == 2) {
-			interpreter.sendDialogues(npc, null, "Hey! You can't come in here! This is a high security", "military installation!");
+			interpreter.sendDialogues(npc, FacialExpression.ANGRY, "Hey! You can't come in here! This is a high security", "military installation!");
 			stage = 40;
 			return true;
 		}
 		if (args.length == 3) {
-			interpreter.sendDialogues(npc, null, "I wouldn't go in there if I were you. Those Black", "Knights are in an important meeting. They said they'd", "kill anyone who went in there!");
+			interpreter.sendDialogues(npc, FacialExpression.NEUTRAL, "I wouldn't go in there if I were you. Those Black", "Knights are in an important meeting. They said they'd", "kill anyone who went in there!");
 			stage = 50;
 			return true;
 		}
 		if (!inUniform(player)) {
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Get lost. This is private property.");
+			interpreter.sendDialogues(npc, FacialExpression.ANGRY, "Get lost. This is private property.");
 			stage = 0;
 		} else {
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Hey! Get back on duty!");
+			interpreter.sendDialogues(npc, FacialExpression.FURIOUS, "Hey! Get back on duty!");
 			stage = 30;
 		}
 		return true;
@@ -77,15 +77,15 @@ public class FortressGuardDialogue extends DialoguePlugin {
 			stage = 1;
 			break;
 		case 1:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Well, this is the guards' entrance. I might be new here", "but I can tell you're not a guard.");
+			interpreter.sendDialogues(npc, FacialExpression.NEUTRAL, "Well, this is the guards' entrance. I might be new here", "but I can tell you're not a guard.");
 			stage = 2;
 			break;
 		case 2:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "How can you tell?");
+			interpreter.sendDialogues(player, FacialExpression.ASKING, "How can you tell?");
 			stage = 3;
 			break;
 		case 3:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "You're not even wearing proper guards uniform!");
+			interpreter.sendDialogues(npc, FacialExpression.ANGRY, "You're not even wearing proper guards uniform!");
 			stage = 4;
 			break;
 		case 4:
@@ -99,39 +99,39 @@ public class FortressGuardDialogue extends DialoguePlugin {
 				stage = 10;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "So what is this uniform?");
+				interpreter.sendDialogues(player, FacialExpression.ASKING, "So what is this uniform?");
 				stage = 20;
 				break;
 			}
 			break;
 		case 10:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Go away. You're getting annoying.");
+			interpreter.sendDialogues(npc, FacialExpression.ANNOYED, "Go away. You're getting annoying.");
 			stage = 11;
 			break;
 		case 11:
 			end();
 			break;
 		case 20:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Well you can see me wearing it. It's an iron chainbody", "and a medium bronze helm.");
+			interpreter.sendDialogues(npc, FacialExpression.NEUTRAL, "Well you can see me wearing it. It's an iron chainbody", "and a medium bronze helm.");
 			stage = 21;
 			break;
 		case 21:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Hmmm... I wonder if I can make that or get some in", "the local towns...");
+			interpreter.sendDialogues(player, FacialExpression.HALF_ASKING, "Hmmm... I wonder if I can make that or get some in", "the local towns...");
 			stage = 22;
 			break;
 		case 22:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "What was that you muttered?");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_ASKING, "What was that you muttered?");
 			stage = 23;
 			break;
 		case 23:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Oh, nothing important!");
+			interpreter.sendDialogues(player, FacialExpression.SUSPICIOUS, "Oh, nothing important!");
 			stage = 24;
 			break;
 		case 24:
 			end();
 			break;
 		case 30:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Uh...");
+			interpreter.sendDialogues(player, FacialExpression.SUSPICIOUS, "Uh...");
 			stage = 31;
 			break;
 		case 31:
@@ -152,24 +152,24 @@ public class FortressGuardDialogue extends DialoguePlugin {
 				stage = 42;
 				break;
 			case 3:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "So who does it belong to?");
+				interpreter.sendDialogues(player, FacialExpression.ASKING, "So who does it belong to?");
 				stage = 44;
 				break;
 			}
 			break;
 		case 42:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Don't let it happen again.");
+			interpreter.sendDialogues(npc, FacialExpression.NEUTRAL, "Don't let it happen again.");
 			stage = 43;
 			break;
 		case 43:
 			end();
 			break;
 		case 44:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "This fortress belongs to the order of Black Knights", "known as the Kinshra.");
+			interpreter.sendDialogues(npc, FacialExpression.NEUTRAL, "This fortress belongs to the order of Black Knights", "known as the Kinshra.");
 			stage = 45;
 			break;
 		case 45:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Oh. Okay, thanks.");
+			interpreter.sendDialogues(player, FacialExpression.FRIENDLY, "Oh. Okay, thanks.");
 			stage = 46;
 			break;
 		case 46:
@@ -182,17 +182,17 @@ public class FortressGuardDialogue extends DialoguePlugin {
 		case 51:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, null, "Okay, I won't.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Okay, I won't.");
 				stage = 52;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, null, "I don't care. I'm going in anyway.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "I don't care. I'm going in anyway.");
 				stage = 54;
 				break;
 			}
 			break;
 		case 52:
-			interpreter.sendDialogues(npc, null, "Wise move.");
+			interpreter.sendDialogues(npc, FacialExpression.NEUTRAL, "Wise move.");
 			stage = 53;
 			break;
 		case 53:
@@ -220,7 +220,7 @@ public class FortressGuardDialogue extends DialoguePlugin {
 	}
 
 	/**
-	 * Method used to cehck if the player is in the inventory.
+	 * Method used to check if the player is in the inventory.
 	 * @param player the player.
 	 * @return <code>True</code> if so.
 	 */
