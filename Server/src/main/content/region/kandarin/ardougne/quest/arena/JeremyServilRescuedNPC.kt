@@ -1,7 +1,6 @@
-package content.region.kandarin.ardougne.quest.fightarena.npcs
+package content.region.kandarin.ardougne.quest.arena
 
 
-import content.region.kandarin.ardougne.quest.fightarena.FightArena
 import core.api.lockInteractions
 import core.api.questStage
 import core.api.sendPlayerDialogue
@@ -18,12 +17,10 @@ class JeremyServilRescuedDialogue : DialogueFile() {
 
         val questName = "Fight Arena"
         val questStage = questStage(player!!, questName)
-
         npc = NPC(NPCs.JEREMY_SERVIL_266)
 
         when (questStage) {
 
-            // Talking with Jeremy after first fight.
             75 -> {
                 when (stage) {
                     0 -> playerl(FacialExpression.FRIENDLY, "Come on Jeremy, we have to get out of here.").also { stage = 1 }
@@ -31,7 +28,6 @@ class JeremyServilRescuedDialogue : DialogueFile() {
                 }
             }
 
-            // Talking with Jeremy after second fight.
             85 -> {
                 when (stage) {
                     0 -> playerl(FacialExpression.FRIENDLY, "Don't worry, I'll get us out of here.").also { stage = 1 }
@@ -39,7 +35,6 @@ class JeremyServilRescuedDialogue : DialogueFile() {
                 }
             }
 
-            // Talking with Jeremy after killing bouncer.
             97 -> {
                 when (stage) {
                     0 -> lockInteractions(player!!,1).also{ playerl(FacialExpression.FRIENDLY, "You and you father can return to Lady Servil.")}.also { stage = 1 }
@@ -51,7 +46,6 @@ class JeremyServilRescuedDialogue : DialogueFile() {
                 }
             }
 
-            // Talking with Jeremy after killing general. (Optional fight)
             98 -> {
                 when (stage) {
                     0 -> sendPlayerDialogue(player!!, "Khazard is dead, you and you father can return to Lady Servil.").also { stage = 1 }

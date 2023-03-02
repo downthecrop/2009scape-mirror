@@ -1,6 +1,6 @@
-package content.region.kandarin.ardougne.quest.fightarena.npcs
+package content.region.kandarin.ardougne.quest.arena
 
-import content.region.kandarin.ardougne.quest.fightarena.FightArena.Companion.FightArenaQuest
+import content.region.kandarin.ardougne.quest.arena.FightArena.Companion.FightArenaQuest
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
@@ -12,17 +12,13 @@ import org.rs09.consts.Items.KHAZARD_CELL_KEYS_76
 import org.rs09.consts.NPCs
 
 class KhazardGuardDialogue : DialogueFile() {
-
     override fun handle(componentID: Int, buttonID: Int) {
-
         val questName = "Fight Arena"
         val questStage = questStage(player!!, questName)
-
         npc = NPC(NPCs.A_LAZY_KHAZARD_GUARD_8498)
 
         when {
 
-            // Talking to Lazy Khazard Guard.
             (questStage == 40) -> {
                 when (stage) {
                     0 -> player!!.faceLocation(location(2617, 3144, 0)).also { playerl(FacialExpression.NEUTRAL, "Long live General Khazard!") }.also { stage++ }
@@ -32,7 +28,6 @@ class KhazardGuardDialogue : DialogueFile() {
                 }
             }
 
-            // When we try talk to guard again.
             (questStage == 50) -> {
                 when (stage) {
                     0 -> player!!.faceLocation(location(2617, 3144, 0)).also { playerl(FacialExpression.NEUTRAL, "Hello, how's the job?") }.also { stage++ }
@@ -40,7 +35,6 @@ class KhazardGuardDialogue : DialogueFile() {
                 }
             }
 
-            // Talking to Lazy Khazard Guard having khali beer in inventory.
             (questStage == 60) -> {
                 when (stage) {
                     0 -> player!!.faceLocation(location(2617, 3144, 0)).also { playerl(FacialExpression.FRIENDLY, "Hello again.") }.also { stage++ }
@@ -71,13 +65,11 @@ class KhazardGuardDialogue : DialogueFile() {
                 }
             }
 
-
-            // Talking to Lazy Khazard Guard ~
             (questStage in 68..100) -> {
-                when (stage) { // after we got the keys.
+                when (stage) {
                     0 -> if (player!!.inventory.containItems(KHAZARD_CELL_KEYS_76)) {
                         player!!.faceLocation(location(2617, 3144, 0)).also { sendPlayerDialogue(player!!, "Hello, how's the job?", FacialExpression.NEUTRAL) }.also { stage = 1 }
-                    } else { // after we got lost the keys.
+                    } else {
                         player!!.faceLocation(location(2617, 3144, 0)).also { sendPlayerDialogue(player!!, "Hi, er.. I lost the keys.", FacialExpression.NEUTRAL) }.also { stage = 2 }
                     }
                     1 -> npcl(FacialExpression.DRUNK, "Please, leave me alone. I'm sure the walls never used to sway that much.").also { stage = END_DIALOGUE }

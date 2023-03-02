@@ -1,8 +1,6 @@
-package content.region.kandarin.ardougne.quest.fightarena.npcs.enemies
+package content.region.kandarin.ardougne.quest.arena
 
 
-import content.region.kandarin.ardougne.quest.fightarena.FightArena
-import content.region.kandarin.ardougne.quest.fightarena.npcs.GeneralKhazardDialogue
 import core.api.*
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC

@@ -1,4 +1,4 @@
-package content.region.kandarin.ardougne.quest.fightarena.dialogues.prisoners
+package content.region.kandarin.ardougne.quest.arena
 
 import core.api.isEquipped
 import core.api.sendNPCDialogue
@@ -14,8 +14,6 @@ import org.rs09.consts.NPCs
 @Initializable
 class JoeDialogue(player: Player? = null) : DialoguePlugin(player) {
 
-    // Joe - NPC inside prison cell.
-    // Source: https://runescape.wiki/w/Joe_(Fight_Arena)?oldid=2632949
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (isEquipped(player!!, Items.KHAZARD_HELMET_74) && isEquipped(player!!, Items.KHAZARD_ARMOUR_75)) {

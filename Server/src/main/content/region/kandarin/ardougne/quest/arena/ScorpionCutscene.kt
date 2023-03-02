@@ -1,6 +1,6 @@
-package content.region.kandarin.ardougne.quest.fightarena.cutscenes
+package content.region.kandarin.ardougne.quest.arena
 
-import content.region.kandarin.ardougne.quest.fightarena.npcs.enemies.KhazardScorpionNPC.Companion.spawnScorpion
+import content.region.kandarin.ardougne.quest.arena.KhazardScorpionNPC.Companion.spawnScorpion
 import core.api.*
 import core.game.activity.Cutscene
 import core.game.global.action.DoorActionHandler
@@ -23,8 +23,6 @@ class ScorpionCutscene(player: Player) : Cutscene(player) {
 
     override fun runStage(stage: Int) {
         when (stage) {
-
-            // ----------------  Leaving cell  ----------------
 
             0 -> {
                 PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 1))
@@ -80,8 +78,6 @@ class ScorpionCutscene(player: Player) : Cutscene(player) {
                 timedUpdate(8)
             }
 
-            // ----------------  Enter arena  ----------------
-
             10 -> {
                 sendChat(getNPC(GUARD)!!, "Get out! there.")
                 DoorActionHandler.handleAutowalkDoor(player, getScenery(2606, 3152, 0))
@@ -103,8 +99,6 @@ class ScorpionCutscene(player: Player) : Cutscene(player) {
                 sendDialogue(player, "From above you hear a voice..... 'Ladies and gentlemen! Let today's first fight between the outsider and everyone's favourite scorpion commence.'")
                 timedUpdate(3)
             }
-
-            // ----------------  Scorpion zoom  ----------------
 
             14 -> {
                 loadRegion(10289)
@@ -133,8 +127,6 @@ class ScorpionCutscene(player: Player) : Cutscene(player) {
                 rotateCamera(43, 23, 300, 1)
                 timedUpdate(1)
             }
-
-            // ----------------  End & Spawn scorpion  ----------------
 
             18 -> {
                 end {

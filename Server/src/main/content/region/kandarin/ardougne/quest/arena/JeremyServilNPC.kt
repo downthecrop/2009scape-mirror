@@ -1,8 +1,7 @@
-package content.region.kandarin.ardougne.quest.fightarena.npcs
+package content.region.kandarin.ardougne.quest.arena
 
-import content.region.kandarin.ardougne.quest.fightarena.FightArena.Companion.FightArenaQuest
-import content.region.kandarin.ardougne.quest.fightarena.FightArenaListeners.Companion.Jeremy
-import content.region.kandarin.ardougne.quest.fightarena.cutscenes.RescueCutscene
+import content.region.kandarin.ardougne.quest.arena.FightArena.Companion.FightArenaQuest
+import content.region.kandarin.ardougne.quest.arena.FightArenaListeners.Companion.Jeremy
 import core.api.questStage
 import core.api.setAttribute
 import core.api.setQuestStage
@@ -21,7 +20,6 @@ class JeremyServilDialogue : DialogueFile() {
 
         when {
 
-            // Talking to Jeremy before we get the keys.
             (questStage == 20) -> {
                 when (stage) {
                     0 -> playerl(FacialExpression.FRIENDLY, "Hello").also { npc!!.faceLocation(player!!.location) }.also { player!!.faceLocation(npc!!.location) }.also { stage++ }
@@ -33,8 +31,7 @@ class JeremyServilDialogue : DialogueFile() {
                 }
             }
 
-            // Talking to Jeremy after we get the keys.
-            (questStage in 88 downTo 68) -> {
+            (questStage in 89 downTo 68) -> {
                 when (stage) {
                     0 -> playerl(FacialExpression.NEUTRAL, "Jeremy look, I have the keys.").also { npc!!.faceLocation(player!!.location) }.also { player!!.faceLocation(npc!!.location) }.also { stage++ }
                     1 -> npcl(FacialExpression.NEUTRAL, "Wow! Please set me free, then we can find my dad. I overheard a guard talking. I think they're taken him to the arena.").also { stage++ }
@@ -47,7 +44,6 @@ class JeremyServilDialogue : DialogueFile() {
                 }
             }
 
-            // Talk with Jeremy after complete the quest. Source: https://runescapeclassic.fandom.com/wiki/Jeremy_Servil
             (questStage == 100) -> {
                 when (stage) {
                     0 -> playerl(FacialExpression.NEUTRAL, "You need to kill the creatures in the arena").also { npc!!.faceLocation(player!!.location) }.also { player!!.faceLocation(npc!!.location) }.also { stage = END_DIALOGUE }

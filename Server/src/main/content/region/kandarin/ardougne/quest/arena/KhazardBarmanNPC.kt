@@ -1,6 +1,5 @@
-package content.region.kandarin.ardougne.quest.fightarena.npcs
+package content.region.kandarin.ardougne.quest.arena
 
-import content.region.kandarin.ardougne.quest.fightarena.FightArena
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
@@ -12,19 +11,14 @@ import org.rs09.consts.Items.COINS_995
 import org.rs09.consts.NPCs
 
 class KhazardBarmanDialogue : DialogueFile() {
-
-    // Khazard barman
-    // source: https://runescape.wiki/w/Angor?oldid=1079592
     override fun handle(componentID: Int, buttonID: Int) {
 
         val questName = "Fight Arena"
         val questStage = questStage(player!!, questName)
-
         npc = NPC(NPCs.KHAZARD_BARMAN_259)
 
         when {
 
-            // Talking to Khazard barman
             (questStage in 49 downTo 0) -> {
                 when (stage) {
                     0 -> playerl(FacialExpression.HAPPY, "Hello. I'll have a beer please.").also { stage = 1 }
@@ -38,7 +32,6 @@ class KhazardBarmanDialogue : DialogueFile() {
                 }
             }
 
-        // Talking to Khazard barman
         (questStage in 100 downTo 50) -> {
             when (stage) {
                     0 -> playerl(FacialExpression.HAPPY, "Hello.").also { stage++ }
@@ -53,14 +46,12 @@ class KhazardBarmanDialogue : DialogueFile() {
                     5 -> npcl(FacialExpression.NEUTRAL, "If you want to see the action around here you should visit the famous Khazard fight arena. I've seen some grand battles in my time. Ogres, goblins, even dragons have fought there.").also { stage = 6 }
                     6 -> npcl(FacialExpression.WORRIED, "Although you have to feel sorry for some of the slaves sent in there.").also { stage = END_DIALOGUE }
                     7 -> npcl(FacialExpression.FRIENDLY, "There you go, that's five gold coins. I suggest lying down before you drink it. That way you have less distance to collapse.").also { stage = 9 }
-
                     8 -> if (inInventory(player!!, COINS_995, 2)) {
                         end()
                         removeItem(player!!, Item(COINS_995, 2)) && addItem(player!!, Items.BEER_1917, 1).also { stage = END_DIALOGUE }
                     } else {
                         playerl(FacialExpression.STRUGGLE, "Oh, I don't have enough money with me.").also { stage = END_DIALOGUE }
                     }
-
                     9 -> if (inInventory(player!!, COINS_995, 5)) {
                         end()
                         removeItem(player!!, Item(COINS_995, 5)) && addItem(player!!, Items.KHALI_BREW_77, 1).also { setQuestStage(player!!, FightArena.FightArenaQuest, 60) }.also { stage = END_DIALOGUE }

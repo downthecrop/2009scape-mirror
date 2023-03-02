@@ -1,4 +1,4 @@
-package content.region.kandarin.ardougne.quest.fightarena.dialogues.guards
+package content.region.kandarin.ardougne.quest.arena
 
 import core.api.isEquipped
 import core.game.dialogue.DialoguePlugin
@@ -11,35 +11,33 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 
 @Initializable
-class KhazardGuard253Dialogue(player: Player? = null) : DialoguePlugin(player) {
-
-    // Khazard Guards - Around Arena.
+class FightslaveDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (isEquipped(player!!, Items.KHAZARD_HELMET_74) && isEquipped(player!!, Items.KHAZARD_ARMOUR_75)) {
-            playerl(FacialExpression.FRIENDLY, "Hello.").also { stage = 0 }
+            playerl(FacialExpression.FRIENDLY, "Do you know of a Justin or Jeremy in this arena?").also { stage = 0 }
         } else {
-            playerl(FacialExpression.FRIENDLY, "Hi.").also { stage = 2 }
+            playerl(FacialExpression.FRIENDLY, "Do you know of a Justin or Jeremy in this arena?").also { stage = 1 }
         }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> npcl(FacialExpression.ASKING, "Can I help you stranger?").also { stage = 1 }
-            1 -> npcl(FacialExpression.FRIENDLY, "Oh, you're a guard as well. That's ok then. We don't like strangers around here").also { stage = END_DIALOGUE }
+            0 -> npcl(FacialExpression.FRIENDLY, "Please leave me alone.").also { stage = END_DIALOGUE }
         }
+
         when (stage) {
-            2 -> npcl(FacialExpression.ANNOYED, "I don't know you stranger. Get off our land.").also { stage = END_DIALOGUE }
+            1 -> npcl(FacialExpression.AFRAID, "I've not met anybody in here by that name.").also { stage = END_DIALOGUE }
         }
         return true
     }
 
     override fun newInstance(player: Player?): DialoguePlugin {
-        return KhazardGuard253Dialogue(player)
+        return FightslaveDialogue(player)
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KHAZARD_GUARD_253)
+        return intArrayOf(NPCs.FIGHTSLAVE_262)
     }
 }

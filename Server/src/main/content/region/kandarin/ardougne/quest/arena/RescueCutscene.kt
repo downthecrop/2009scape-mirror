@@ -1,7 +1,7 @@
-package content.region.kandarin.ardougne.quest.fightarena.cutscenes
+package content.region.kandarin.ardougne.quest.arena
 
-import content.region.kandarin.ardougne.quest.fightarena.FightArenaListeners.Companion.Jeremy
-import content.region.kandarin.ardougne.quest.fightarena.npcs.enemies.KhazardOgreNPC.Companion.spawnOgre
+import content.region.kandarin.ardougne.quest.arena.FightArenaListeners.Companion.Jeremy
+import content.region.kandarin.ardougne.quest.arena.KhazardOgreNPC.Companion.spawnOgre
 import core.api.*
 import core.game.activity.Cutscene
 import core.game.dialogue.FacialExpression
@@ -14,9 +14,6 @@ import core.net.packet.context.MinimapStateContext
 import core.net.packet.out.MinimapState
 
 class RescueCutscene(player: Player) : Cutscene(player) {
-
-    // Jeremy rescue & first fight with Ogre.
-    // Source: https://youtu.be/-wV5dIyM0YM?t=182
     override fun setup() {
         setExit(location(2603, 3155, 0))
         if (player.settings.isRunToggled) {
@@ -26,8 +23,6 @@ class RescueCutscene(player: Player) : Cutscene(player) {
 
     override fun runStage(stage: Int) {
         when (stage) {
-
-            // ----------------   Prologue   ----------------
 
             0 -> {
                 PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 1))
@@ -63,15 +58,13 @@ class RescueCutscene(player: Player) : Cutscene(player) {
                 timedUpdate(5)
             }
 
-            // ----------------   Cutscene   ----------------
-
             6 -> {
                 loadRegion(10289)
                 addNPC(JEREMYRESCUE, 41, 17, Direction.NORTH)
                 addNPC(GENERAL, 45, 19, Direction.NORTH)
                 addNPC(OGRE, 48, 30, Direction.NORTH)
                 addNPC(JUSTIN, 41, 32, Direction.EAST)
-                timedUpdate(1)
+                timedUpdate(-1)
             }
 
             7 -> {
@@ -104,12 +97,10 @@ class RescueCutscene(player: Player) : Cutscene(player) {
                 timedUpdate(3)
             }
 
-            // ---------------- Baldur's Gate ----------------
-
             12 -> {
                 player.faceLocation(getNPC(JEREMYRESCUE)!!.location)
                 sendPlayerDialogue(player, "Jeremy, where's your father?", FacialExpression.NEUTRAL)
-                timedUpdate(2)
+                timedUpdate(1)
             }
 
             13 -> {
@@ -137,8 +128,6 @@ class RescueCutscene(player: Player) : Cutscene(player) {
                 animate(getNPC(JUSTIN)!!, 404, true)
                 timedUpdate(2)
             }
-
-            // ----------------  End & Spawn Ogre  ----------------
 
             17 -> {
                 end {

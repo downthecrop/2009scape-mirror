@@ -1,7 +1,5 @@
-package content.region.kandarin.ardougne.quest.fightarena
+package content.region.kandarin.ardougne.quest.arena
 
-import content.region.kandarin.ardougne.quest.fightarena.npcs.*
-import content.region.kandarin.ardougne.quest.fightarena.npcs.enemies.GeneralNPC
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
@@ -33,18 +31,11 @@ class FightArenaListeners : InteractionListener {
         const val MAINDOORS = Scenery.DOOR_81
         const val CENTERDOOR = Scenery.DOOR_82
         const val LAZYGUARD = Scenery.A_LAZY_KHAZARD_GUARD_41494
-
-        const val ARMOR_ONLY_ARMOR_STAND = Scenery.A_SUIT_OF_ARMOUR_41506
-        const val HELM_ONLY_ARMOR_STAND = Scenery.A_SUIT_OF_ARMOUR_41507
-        const val EMPTY_ARMOR_STAND = Scenery.A_SUIT_OF_ARMOUR_41508
         const val FULL_ARMOR_STAND = Scenery.A_SUIT_OF_ARMOUR_41490
-
 
         private const val HELMET = Items.KHAZARD_HELMET_74
         private const val ARMOUR = Items.KHAZARD_ARMOUR_75
         private const val CELLKEY = Items.KHAZARD_CELL_KEYS_76
-
-    //-----------------------------------------------------------------------------------------------------
 
         val Jeremy = NPC(NPCs.JEREMY_SERVIL_265, Location.create(2616,3167,0))
         val General = GeneralNPC(NPCs.GENERAL_KHAZARD_258, Location.create(2605,3156,0))
@@ -60,8 +51,6 @@ class FightArenaListeners : InteractionListener {
 
     override fun defineListeners() {
 
-        //-------------------------  Npcs  -------------------------
-
         on(GENERAL, IntType.NPC, "talk-to") { player, npc ->
             openDialogue(player, GeneralKhazardDialogue(), npc)
             return@on true
@@ -73,7 +62,7 @@ class FightArenaListeners : InteractionListener {
         }
 
         on(HENGARD, IntType.NPC, "talk-to") { player, npc ->
-                openDialogue(player, HengradDialogue(), npc)
+            openDialogue(player, HengradDialogue(), npc)
             return@on true
         }
 
@@ -102,10 +91,6 @@ class FightArenaListeners : InteractionListener {
             return@on true
         }
 
-        //-------------------------  Objects  -------------------------
-
-
-        // Steal Khazard set from suit of Armour.
         on(FULL_ARMOR_STAND, IntType.SCENERY, "borrow") { player, _ ->
             if (player.questRepository.getStage("Fight Arena") == 10 && player.inventory.containItems(HELMET) && player.inventory.containItems(ARMOUR)) {
                 sendMessage(player, "Nothing interesting happens.")
@@ -126,9 +111,6 @@ class FightArenaListeners : InteractionListener {
             }
         }
 
-
-        // Doors leading to the prison.
-        // Source: https://youtu.be/-wV5dIyM0YM?t=60
         on(MAINDOORS, IntType.SCENERY, "open") { player, maingate ->
             when (player.location.y) {
                 3171 -> DoorActionHandler.handleAutowalkDoor(player, maingate.asScenery())
@@ -155,9 +137,8 @@ class FightArenaListeners : InteractionListener {
             return@on true
         }
 
-        // Using key on cell door to freeing Jeremy.
         onUseWith(IntType.SCENERY, CELLKEY, JEREMYPRISONDOOR) { player, _, _ ->
-            if (player.inventory.containsAtLeastOneItem(CELLKEY) && player.questRepository.getStage("Fight Arena") == 68 || player.questRepository.getStage("Fight Arena") == 88) {
+            if (player.inventory.containsAtLeastOneItem(CELLKEY) && player.questRepository.getStage("Fight Arena") in 68..89) {
                 openDialogue(player, JeremyServilDialogue())
             } else {
                 sendMessage(player, "The cell gate is securely locked.")
@@ -166,8 +147,6 @@ class FightArenaListeners : InteractionListener {
             return@onUseWith true
         }
 
-
-        // Using key on other cell doors.
         onUseWith(IntType.SCENERY, CELLKEY, OTHERPRISONDOORS) { player, _, _ ->
             if (player.inventory.containsAtLeastOneItem(CELLKEY) && player.questRepository.getStage("Fight Arena") in 68..72) {
                 sendPlayerDialogue(player, "I don't want to attract too much attention by freeing all the prisoners. I need to find Jeremy and he's not in this cell.")
@@ -177,21 +156,16 @@ class FightArenaListeners : InteractionListener {
             return@onUseWith false
         }
 
-
-        // Doors to rest of the cell.
         on(OTHERPRISONDOORS, IntType.SCENERY, "open") { player, _ ->
             sendMessage(player, "the cell gate is securely locked.")
             return@on false
         }
 
-        // Block Jeremy doors.
         on(JEREMYPRISONDOOR, IntType.SCENERY, "open") { player, _ ->
             sendMessage(player, "the cell gate is securely locked.")
             return@on false
         }
 
-
-        // Exit arena.
         on(CENTERDOOR, IntType.SCENERY, "open") { player, centerdoor ->
             if (player.questRepository.getStage("Fight Arena") >= 91) {
                 DoorActionHandler.handleAutowalkDoor(player, centerdoor.asScenery())
@@ -208,39 +182,32 @@ class FightArenaListeners : InteractionListener {
 
     override fun defineDestinationOverrides() {
 
-        //----------------------  Improvements  ----------------------
-
-        // Access to talk with Jeremy through the prison bars.
         setDest(IntType.NPC, intArrayOf(JEREMY), "talk-to") { _, _ ->
             return@setDest Location.create(2617, 3167, 0)
         }
 
-        // Access to talk Khazard barman through counter at the bar.
         setDest(IntType.NPC, intArrayOf(BARMAN), "talk-to") { _, _ ->
             return@setDest Location.create(2566, 3142, 0)
         }
 
-        // Access to talk Fightslave through the prison bars.
         setDest(IntType.NPC, intArrayOf(FIGHTSLAVE), "talk-to") { _, _ ->
             return@setDest Location.create(2617, 3162, 0).transform(0, 1, 0)
         }
 
-        // Access to talk Kelvin through the prison bars.
         setDest(IntType.NPC, intArrayOf(KELVIN), "talk-to") { _, _ ->
             return@setDest Location.create(2589, 3141, 0)
         }
 
-        // Access to talk Joe through the prison bars.
         setDest(IntType.NPC, intArrayOf(JOE), "talk-to") { _, _ ->
             return@setDest Location.create(2589, 3141, 0)
         }
 
+        setDest(IntType.NPC, intArrayOf(HENGARD), "talk-to") { _, _ ->
+            return@setDest Location.create(2600, 3142, 0)
+        }
+
     }
 
-    //-------------------------  Dialogue support  -------------------------
-
-    // Support for prison doors.
-    // Source: https://youtu.be/dCJhnLk1vMk?t=145
     class EastDoorSupportDialogue : DialogueFile() {
         override fun handle(componentID: Int, buttonID: Int) {
             npc = NPC(NPCs.KHAZARD_GUARD_257)

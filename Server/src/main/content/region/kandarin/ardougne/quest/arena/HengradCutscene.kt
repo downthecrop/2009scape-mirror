@@ -1,8 +1,9 @@
-package content.region.kandarin.ardougne.quest.fightarena.cutscenes
+package content.region.kandarin.ardougne.quest.arena
 
 import core.api.animate
 import core.api.getScenery
 import core.api.location
+import core.api.openDialogue
 import core.game.activity.Cutscene
 import core.game.component.Component
 import core.game.dialogue.FacialExpression
@@ -15,9 +16,6 @@ import core.net.packet.out.MinimapState
 import org.rs09.consts.Components
 
 class HengradCutscene(player: Player) : Cutscene(player) {
-
-    // Source: https://youtu.be/-wV5dIyM0YM?t=182
-    // Guard 257 https://youtu.be/V9qqeatAkIA?t=193
     override fun setup() {
         setExit(location(2600, 3142, 0))
         if (player.settings.isRunToggled) {
@@ -28,8 +26,6 @@ class HengradCutscene(player: Player) : Cutscene(player) {
     override fun runStage(stage: Int) {
         when (stage) {
 
-            // ----------   There is no roof to this world   ----------
-
             0 -> {
                 PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 1))
                 addNPC(KHAZARD_GUARD, 48, 5, Direction.WEST)
@@ -38,7 +34,7 @@ class HengradCutscene(player: Player) : Cutscene(player) {
             }
 
             1 -> {
-                moveCamera(45, 4, 400)
+                moveCamera(43, 4)
                 rotateCamera(41, 5)
                 timedUpdate(1)
             }
@@ -73,23 +69,18 @@ class HengradCutscene(player: Player) : Cutscene(player) {
             7 -> {
                 dialogueUpdate(257, FacialExpression.FRIENDLY, "The General seems to have taken a liking to you. He'd normally kill imposters like you without a second thought.").also { getNPC(KHAZARD_GUARD)!!.faceLocation(player.location) }
                 player.faceLocation(getNPC(KHAZARD_GUARD)!!.location)
-                timedUpdate(4)
+                timedUpdate(3)
             }
 
             8 -> {
-                player.interfaceManager.openOverlay(Component(Components.FADE_TO_BLACK_120))
-                PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 2))
-                timedUpdate(-1)
-            }
-
-            // ----------------  End & Hengrad talk  ----------------
-
-            9 -> {
-                // Fix camera stuck after cutscene.
                 loadRegion(10289)
                 teleport(player, 40, 6)
-                timedUpdate(-1)
+                timedUpdate(6)
+            }
+
+            9 -> {
                 end {
+                    openDialogue(player, HengradDialogue())
                 }
             }
         }

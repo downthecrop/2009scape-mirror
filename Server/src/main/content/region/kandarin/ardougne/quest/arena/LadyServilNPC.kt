@@ -1,6 +1,6 @@
-package content.region.kandarin.ardougne.quest.fightarena.npcs
+package content.region.kandarin.ardougne.quest.arena
 
-import content.region.kandarin.ardougne.quest.fightarena.FightArena.Companion.FightArenaQuest
+import content.region.kandarin.ardougne.quest.arena.FightArena.Companion.FightArenaQuest
 import core.api.questStage
 import core.api.setQuestStage
 import core.game.dialogue.DialogueFile
@@ -10,17 +10,13 @@ import core.tools.END_DIALOGUE
 import org.rs09.consts.NPCs
 
 class LadyServilDialogue : DialogueFile() {
-
     override fun handle(componentID: Int, buttonID: Int) {
-
         val questName = "Fight Arena"
         val questStage = questStage(player!!, questName)
-
         npc = NPC(NPCs.LADY_SERVIL_264)
 
         when {
 
-            // Start the quest.
             (questStage == 0) -> {
                 when (stage) {
                     0 -> playerl(FacialExpression.FRIENDLY, "Hi there, looks like you're in some trouble.").also { stage++ }
@@ -40,7 +36,6 @@ class LadyServilDialogue : DialogueFile() {
                 }
             }
 
-            // Talking to Lady Servil after starting the quest.
             (questStage == 10) -> {
                 when (stage) {
                     0 -> playerl(FacialExpression.FRIENDLY, "Hello Lady Servil.").also { stage++ }
@@ -48,7 +43,6 @@ class LadyServilDialogue : DialogueFile() {
                 }
             }
 
-            // Talking to Lady Servil after getting armour.
             (questStage == 20) -> {
                 when (stage) {
                     0 -> playerl(FacialExpression.FRIENDLY, "Hello Lady Servil.").also { stage++ }
@@ -58,7 +52,6 @@ class LadyServilDialogue : DialogueFile() {
                 }
             }
 
-            // Talking to Lady Servil after entering the arena.
             (questStage == 30) -> {
                 when (stage) {
                     0 -> playerl(FacialExpression.FRIENDLY, "Lady Servil, I have managed to infiltrate General Khazard's arena.").also { stage++ }
@@ -68,7 +61,6 @@ class LadyServilDialogue : DialogueFile() {
                 }
             }
 
-            // Talking to Lady Servil after freeing Jeremy from the jail.
             (questStage == 70) -> {
                 when (stage) {
                     0 -> playerl(FacialExpression.FRIENDLY, "Lady Servil. I freed your son, however he has returned to the arena to help your husband.").also { stage++ }
@@ -76,7 +68,6 @@ class LadyServilDialogue : DialogueFile() {
                 }
             }
 
-            // Talking to Lady Servil to complete the quest and get reward.
             (questStage == 99) -> {
                 when (stage) {
                     0 -> playerl(FacialExpression.FRIENDLY, "Lady Servil.").also { stage++ }
@@ -88,7 +79,6 @@ class LadyServilDialogue : DialogueFile() {
                 }
             }
 
-            // Talking to Lady Servil after the complete the quest.
             (questStage == 100) -> {
                 when (stage) {
                     0 -> playerl(FacialExpression.FRIENDLY, "Hello Servil.").also { stage++ }

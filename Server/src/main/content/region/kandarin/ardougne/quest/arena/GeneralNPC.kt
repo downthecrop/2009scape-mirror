@@ -1,9 +1,7 @@
-package content.region.kandarin.ardougne.quest.fightarena.npcs.enemies
+package content.region.kandarin.ardougne.quest.arena
 
 
-import content.region.kandarin.ardougne.quest.fightarena.FightArena
-import content.region.kandarin.ardougne.quest.fightarena.FightArenaListeners.Companion.General
-import content.region.kandarin.ardougne.quest.fightarena.npcs.JeremyServilRescuedDialogue
+import content.region.kandarin.ardougne.quest.arena.FightArenaListeners.Companion.General
 import core.api.openDialogue
 import core.api.questStage
 import core.api.setQuestStage

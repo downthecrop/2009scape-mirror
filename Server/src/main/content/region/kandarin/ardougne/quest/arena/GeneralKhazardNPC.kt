@@ -1,9 +1,6 @@
-package content.region.kandarin.ardougne.quest.fightarena.npcs
+package content.region.kandarin.ardougne.quest.arena
 
-import content.region.kandarin.ardougne.quest.fightarena.FightArena
-import content.region.kandarin.ardougne.quest.fightarena.FightArenaListeners.Companion.General
-import content.region.kandarin.ardougne.quest.fightarena.cutscenes.BouncerCutscene
-import content.region.kandarin.ardougne.quest.fightarena.cutscenes.HengradCutscene
+import content.region.kandarin.ardougne.quest.arena.FightArenaListeners.Companion.General
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
@@ -13,17 +10,14 @@ import core.tools.END_DIALOGUE
 import org.rs09.consts.NPCs.GENERAL_KHAZARD_258
 
 class GeneralKhazardDialogue : DialogueFile() {
-
     override fun handle(componentID: Int, buttonID: Int) {
 
         val questName = "Fight Arena"
         val questStage = questStage(player!!, questName)
-
         npc = NPC(GENERAL_KHAZARD_258)
 
         when {
 
-            // Talking to General Khazard during first fight.
             (questStage == 71) -> {
                 when (stage) {
                     0 -> if (!isEquipped(player!!, 74) && !isEquipped(player!!, 75)) {
@@ -40,7 +34,6 @@ class GeneralKhazardDialogue : DialogueFile() {
                 }
             }
 
-            // Talking to General Khazard after first fight.
             (questStage == 72) -> {
                 when (stage) {
                     0 -> lockInteractions(player!!, 2).also { sendNPCDialogue(player!!, 267,"You saved my life and my son's, I am eternally in your debt brave traveller.") }.also{ player!!.faceLocation(location(2601,3168,0)) }.also{ stage = 1 }
@@ -58,7 +51,6 @@ class GeneralKhazardDialogue : DialogueFile() {
                 }
             }
 
-            // Talking to General Khazard during the scorpion fight.
             (questStage <= 87) -> {
                 when (stage) {
                     0 -> npcl(FacialExpression.ANGRY, "How dare you speak to me, you are a slave of this arena now.").also { stage = END_DIALOGUE }
@@ -75,7 +67,6 @@ class GeneralKhazardDialogue : DialogueFile() {
                 }
             }
 
-            // Talking to General Khazard after the scorpion fight.
             (questStage == 89) -> {
                 when (stage) {
                     0 -> lockInteractions(player!!, 2).also{ npcl(FacialExpression.ANNOYED, "Not bad, not bad at all. I think you need a tougher challenge. Time for my puppy. Guards! Guards! Bring on Bouncer!") }.also { player!!.faceLocation(npc!!.location) }.also { stage = 1 }
@@ -88,7 +79,6 @@ class GeneralKhazardDialogue : DialogueFile() {
                 }
             }
 
-            // Talking to General Khazard after killing bouncer.
             (questStage == 91) -> {
                 when (stage) {
                     0 -> lockInteractions(player!!,4).also { npcl(FacialExpression.SAD, "Nooooo! Bouncer! How dare you? You've taken the life of my old friend. Now you'll suffer traveller, prepare to meet your maker.") }.also { player!!.faceLocation(npc!!.location) }.also { stage = 1 }

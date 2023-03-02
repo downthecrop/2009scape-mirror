@@ -1,4 +1,4 @@
-package content.region.kandarin.ardougne.quest.fightarena.dialogues
+package content.region.kandarin.ardougne.quest.arena
 
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
@@ -10,9 +10,6 @@ import org.rs09.consts.NPCs
 
 @Initializable
 class LocalDialogue(player: Player? = null) : DialoguePlugin(player) {
-
-    // Local - NPC outside of fight arena.
-    // Source: https://runescape.wiki/w/Local?oldid=572441
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (player.questRepository.getStage("Fight Arena") >= 10) {

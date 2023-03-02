@@ -1,6 +1,6 @@
-package content.region.kandarin.ardougne.quest.fightarena.cutscenes
+package content.region.kandarin.ardougne.quest.arena
 
-import content.region.kandarin.ardougne.quest.fightarena.npcs.enemies.BouncerNPC.Companion.spawnBouncer
+import content.region.kandarin.ardougne.quest.arena.BouncerNPC.Companion.spawnBouncer
 import core.api.getScenery
 import core.api.location
 import core.api.replaceScenery
@@ -27,8 +27,6 @@ class BouncerCutscene(player: Player) : Cutscene(player) {
     override fun runStage(stage: Int) {
         when (stage) {
 
-            // ------------------  Settings  ------------------
-
             0 -> {
                 PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 1))
                 loadRegion(10289)
@@ -37,43 +35,43 @@ class BouncerCutscene(player: Player) : Cutscene(player) {
                 timedUpdate(1)
             }
 
-            // ----------------  Bouncer zoom  ----------------
-
             1 -> {
                 moveCamera(43, 27)
                 moveCamera(42, 27)
                 rotateCamera(46, 27)
-                replaceScenery(Scenery(77, location(174, 26, 0)), PRISON_DOOR_79, 4)
-                replaceScenery(Scenery(78, location(174, 27, 0)), PRISON_DOOR_80, 4)
-                timedUpdate(1)
+                timedUpdate(2)
             }
 
             2 -> {
-                DoorActionHandler.handleAutowalkDoor(getNPC(BOUNCER)!!, getScenery(174, 27, 0))
-                DoorActionHandler.handleAutowalkDoor(getNPC(BOUNCER)!!, getScenery(174, 26, 0))
+                replaceScenery(Scenery(77, location(302, 26, 0)), PRISON_DOOR_79, 8)
+                replaceScenery(Scenery(78, location(302, 27, 0)), PRISON_DOOR_80, 8)
                 timedUpdate(1)
             }
 
             3 -> {
+                DoorActionHandler.handleAutowalkDoor(getNPC(BOUNCER)!!, getScenery(302, 27, 0))
+                DoorActionHandler.handleAutowalkDoor(getNPC(BOUNCER)!!, getScenery(302, 26, 0))
+                timedUpdate(2)
+            }
+
+            4 -> {
                 move(getNPC(BOUNCER)!!, 45, 26)
                 moveCamera(39, 27, 300, 1)
                 rotateCamera(44, 27, 300, 1)
                 timedUpdate(1)
             }
 
-            4 -> {
+            5 -> {
                 move(getNPC(BOUNCER)!!, 44, 26)
                 timedUpdate(1)
             }
 
-            5 -> {
+            6 -> {
                 move(getNPC(BOUNCER)!!, 42, 26)
                 timedUpdate(-1)
             }
 
-            // ---------------  End & Spawn bouncer  ---------------
-
-            6 -> {
+            7 -> {
                 end {
                     spawnBouncer(player)
                 }

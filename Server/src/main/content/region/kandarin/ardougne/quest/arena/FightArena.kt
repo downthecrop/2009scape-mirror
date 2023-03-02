@@ -1,4 +1,4 @@
-package content.region.kandarin.ardougne.quest.fightarena
+package content.region.kandarin.ardougne.quest.arena
 
 import core.api.addItemOrDrop
 import core.api.rewardXP
@@ -10,11 +10,6 @@ import org.rs09.consts.Items.COINS_995
 
 @Initializable
 class FightArena : Quest("Fight Arena", 61, 60, 2, 17, 0, 1, 14) {
-
-    //------------------------------------------------------------
-    // Version: 1.0.3
-    // Source: https://runescape.wiki/w/Fight_Arena?oldid=1360259
-    // ------------------------------------------------------------
     override fun newInstance(`object`: Any?): Quest { return this }
     companion object { const val FightArenaQuest = "Fight Arena" }
     override fun drawJournal(player: Player?, stage: Int) {
