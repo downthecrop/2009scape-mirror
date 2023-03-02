@@ -87,7 +87,7 @@ public final class InformationclerkMuseumDialogue extends DialoguePlugin {
                 stage = 171;
                 break;
             case 171:
-                npc("I know you've helped out a bit in the Timeline exhibit", "upstairs, but I'm sure you can help more. When you're out", "on your travels being a vrave adventurer, remember that", "you can come back to the Museum after some quests to");
+                npc("I know you've helped out a bit in the Timeline exhibit", "upstairs, but I'm sure you can help more. When you're out", "on your travels being a brave adventurer, remember that", "you can come back to the Museum after some quests to");
                 stage = 172;
                 break;
             case 172:
@@ -155,7 +155,7 @@ public final class InformationclerkMuseumDialogue extends DialoguePlugin {
                 stage = 233;
                 break;
             case 233:
-                npc("canal and barge. So, we're using Kudos as a measure of", "who is willing and able to help us here at the Museum, so", "they can then be invited on our dig son the new island.");
+                npc("canal and barge. So, we're using Kudos as a measure of", "who is willing and able to help us here at the Museum, so", "they can then be invited on our digs on the new island.");
                 stage = 234;
                 break;
             case 234:

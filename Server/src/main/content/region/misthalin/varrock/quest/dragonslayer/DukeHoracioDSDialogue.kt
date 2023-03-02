@@ -23,7 +23,7 @@ class DukeHoracioDSDialogue(val questStage: Int) : DialogueFile() {
                 7 -> npc(
                     "Back in my father's day, Crandor was an important",
                     "city-state. Politically, it was important as Falador or",
-                    "Varrock and its shipes traded with every port."
+                    "Varrock and its ships traded with every port."
                 ).also { stage++ }
 
                 8 -> npc(

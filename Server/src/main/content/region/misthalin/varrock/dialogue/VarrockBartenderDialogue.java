@@ -41,7 +41,7 @@ public final class VarrockBartenderDialogue extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 0:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Good day to you, brave adventurer. Can I get you a", "refreshing beer?");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_ASKING, "Good day to you, brave adventurer. Can I get you a", "refreshing beer?");
 			stage = 1;
 			break;
 		case 1:
@@ -51,31 +51,31 @@ public final class VarrockBartenderDialogue extends DialoguePlugin {
 		case 2:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Yes please!");
+				interpreter.sendDialogues(player, FacialExpression.HAPPY, "Yes please!");
 				stage = 10;
 				break;
 
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "No thanks.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "No thanks.");
 				stage = 20;
 				break;
 
 			case 3:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "How much?");
+				interpreter.sendDialogues(player, FacialExpression.HALF_ASKING, "How much?");
 				stage = 30;
 				break;
 			}
 
 			break;
 		case 10:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Ok then, that's two gold coins please.");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "Ok then, that's two gold coins please.");
 			stage = 11;
 			break;
 		case 11:
 			if (player.getInventory().contains(995, 2)) {
 				player.getInventory().remove(new Item(995, 2));
 				player.getInventory().add(new Item(1917, 1));
-				interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Cheers!");
+				interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Cheers!");
 				stage = 12;
 			} else {
 				end();
@@ -83,21 +83,21 @@ public final class VarrockBartenderDialogue extends DialoguePlugin {
 			}
 			break;
 		case 12:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Cheers!");
+			interpreter.sendDialogues(player, FacialExpression.HAPPY, "Cheers!");
 			stage = 13;
 			break;
 		case 13:
 			end();
 			break;
 		case 20:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Let me know if you change your mind.");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "Let me know if you change your mind.");
 			stage = 21;
 			break;
 		case 21:
 			end();
 			break;
 		case 30:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Two gold pieces a pint. So, what do you say?");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "Two gold pieces a pint. So, what do you say?");
 			stage = 31;
 			break;
 		case 31:
@@ -108,11 +108,11 @@ public final class VarrockBartenderDialogue extends DialoguePlugin {
 
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Yes please!");
+				interpreter.sendDialogues(player, FacialExpression.HAPPY, "Yes please!");
 				stage = 10;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "No thanks.");
+				interpreter.sendDialogues(player, FacialExpression.FRIENDLY, "No thanks.");
 				stage = 20;
 				break;
 			}

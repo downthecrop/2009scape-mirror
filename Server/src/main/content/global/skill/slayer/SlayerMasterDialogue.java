@@ -335,7 +335,7 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
             case 502:
                 if (!master.hasRequirements(player)) {
                     interpreter.sendDialogues(master.getNpc(), getExpression(master), "Sorry, but you're not strong enough to be taught by", "me.");
-                    stage = 99;
+                    stage = 999;
                     break;
                 }
                 interpreter.sendDialogues(master.getNpc(), getExpression(master), "Oh, okay then; you twisted my arm. You'll have to", "train against specific groups of creatures.");
@@ -477,7 +477,7 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
             case 701:
                 if (!master.hasRequirements(player)) {
                     interpreter.sendDialogues(master.getNpc(), getExpression(master), "Sorry, but you're not strong enough to be taught by", "me.");
-                    stage = 99;
+                    stage = 999;
                     break;
                 }
                 if (!SlayerManager.getInstance(player).hasTask()) {

@@ -425,7 +425,7 @@ public final class ZamorakMageDialogue extends DialoguePlugin {
 					stage = 8;
 					break;
 				case 20:
-					npc("Well, the creates there ARE particularly offensive...");
+					npc("Well, the creatures there ARE particularly offensive...");
 					stage = 8;
 					break;
 				case 30:

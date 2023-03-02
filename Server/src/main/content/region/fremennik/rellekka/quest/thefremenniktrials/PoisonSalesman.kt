@@ -41,7 +41,7 @@ class PoisonSalesman(player: Player? = null) : core.game.dialogue.DialoguePlugin
                 }
             }
             11 -> { player("Didn't you used to sell poison?"); stage++ }
-            12 -> { npc("That I did indeed! Peter Potter's Patented","Multipurpose poison! A miracle of modern apothecarys!","My exclusive concoction has been test on..."); stage++ }
+            12 -> { npc("That I did indeed! Peter Potter's Patented","Multipurpose poison! A miracle of modern apothecarys!","My exclusive concoction has been tested on..."); stage++ }
             13 -> { player("Uh, yeah. I've already heard the sales pitch."); stage++ }
             14 -> { npc("Sorry stranger, old habits die hard I guess."); stage++ }
             15 -> { player("So you don't sell poison anymore?"); stage++ }

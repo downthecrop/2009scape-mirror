@@ -1130,7 +1130,7 @@ public final class WizardTowerPlugin extends OptionHandler {
                     stage = 907;
                     break;
                 case 907:
-                    npc("When this Tower was burnt down the secret of", "creating runes was lost ot us for all time... except it", "wasn't. Some months ago, while searching these ruins", "for information from the old days,");
+                    npc("When this Tower was burnt down the secret of", "creating runes was lost to us for all time... except it", "wasn't. Some months ago, while searching these ruins", "for information from the old days,");
                     stage = 908;
                     break;
                 case 908:
@@ -1358,7 +1358,7 @@ public final class WizardTowerPlugin extends OptionHandler {
                     stage = 56;
                     break;
                 case 56:
-                    npc("and if my suspicions are correct, I will let you into the", "knowledge of one of the greatest secrets this world has", "ever known! A secret so powerful that is destroyed the");
+                    npc("and if my suspicions are correct, I will let you into the", "knowledge of one of the greatest secrets this world has", "ever known! A secret so powerful that it destroyed the");
                     stage = 57;
                     break;
                 case 57:

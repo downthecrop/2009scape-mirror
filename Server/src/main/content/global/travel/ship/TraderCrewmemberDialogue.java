@@ -2,6 +2,7 @@ package content.global.travel.ship;
 
 import content.global.travel.ship.ShipCharter.Destination;
 import core.game.dialogue.DialoguePlugin;
+import core.game.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
@@ -54,41 +55,41 @@ public class TraderCrewmemberDialogue extends DialoguePlugin {
 		case 1:
 			switch (buttonId) {
 			case 1:
-				player("Yes, who are you?");
+				interpreter.sendDialogues(player, FacialExpression.ASKING,"Yes, who are you?");
 				stage = 100;
 				break;
 			case 2:
-				player("Yes, I would like to charter a ship.");
+				interpreter.sendDialogues(player, FacialExpression.FRIENDLY,"Yes, I would like to charter a ship.");
 				stage = 2000;
 				break;
 			}
 			break;
 		case 100:
-			npc("I'm one of the Trader Stan's crew; we are all part of the", "largest fleet of trading and sailing vessels to ever sail the", "seven seas.");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY,"I'm one of the Trader Stan's crew; we are all part of the", "largest fleet of trading and sailing vessels to ever sail the", "seven seas.");
 			stage = 101;
 			break;
 		case 101:
-			npc("If you want to get to a port in a hurry then you can", "charter one of our ships to take you there - if the price", "is right...");
+			interpreter.sendDialogues(npc, FacialExpression.FRIENDLY,"If you want to get to a port in a hurry then you can", "charter one of our ships to take you there - if the price", "is right...");
 			stage = 102;
 			break;
 		case 102:
-			player("So, where exactly can I go with your ships?");
+			interpreter.sendDialogues(player, FacialExpression.HALF_ASKING,"So, where exactly can I go with your ships?");
 			stage = 103;
 			break;
 		case 103:
-			npc("We run ships from Port Phasmatys over to Port Tyras,", "stopping at Port Sarim, Catherby, Jaramja,", "the Shipyard and Port Khazard.");
+			interpreter.sendDialogues(npc, FacialExpression.NEUTRAL,"We run ships from Port Phasmatys over to Port Tyras,", "stopping at Port Sarim, Catherby, Karamja,", "the Shipyard and Port Khazard.");
 			stage = 104;
 			break;
 		case 104:
-			player("Wow, that's a lot of ports. I take it you have some exotic", "stuff to trade?");
+			interpreter.sendDialogues(player, FacialExpression.FRIENDLY,"Wow, that's a lot of ports. I take it you have some exotic", "stuff to trade?");
 			stage = 105;
 			break;
 		case 105:
-			npc("We certainly do! We have access to items", "bought and sold from around the world.");
+			interpreter.sendDialogues(npc, FacialExpression.HAPPY,"We certainly do! We have access to items", "bought and sold from around the world.");
 			stage = 106;
 			break;
 		case 106:
-			npc("Would you like to take a look?");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_ASKING,"Would you like to take a look?");
 			stage = 107;
 			break;
 		case 107:
@@ -98,7 +99,7 @@ public class TraderCrewmemberDialogue extends DialoguePlugin {
 		case 108:
 			switch (buttonId) {
 			case 1:
-				player("Yes.");
+				interpreter.sendDialogues(player, FacialExpression.FRIENDLY,"Yes.");
 				stage = 1000;
 				break;
 			case 2:
@@ -112,7 +113,7 @@ public class TraderCrewmemberDialogue extends DialoguePlugin {
 			npc.openShop(player);
 			break;
 		case 2000:
-			npc("Certainly sir, where would you like to go?");
+			interpreter.sendDialogues(npc, FacialExpression.HAPPY,"Certainly sir, where would you like to go?");
 			stage = 2001;
 			break;
 		case 2001:
@@ -136,7 +137,7 @@ public class TraderCrewmemberDialogue extends DialoguePlugin {
 					return true;
 				}
 				if (!player.getInventory().remove(new Item(995, cost))) {
-					interpreter.sendDialogues(player, null, "I don't have the money for that.");
+					interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "I don't have the money for that.");
 					stage = 30002;
 					return true;
 				}

@@ -373,7 +373,7 @@ public final class FaladorSquireDialogue extends DialoguePlugin {
                             stage = 1;
                             break;
                         case 1:
-                            npc("A picture eh? Hmmm.... The only one I can think of is", "in a small portrait of Sir Vyvin's father... Sir Vyvin", "keeps it in a cupboard in is room I think.");
+                            npc("A picture eh? Hmmm.... The only one I can think of is", "in a small portrait of Sir Vyvin's father... Sir Vyvin", "keeps it in a cupboard in his room I think.");
                             stage = 2;
                             break;
                         case 2:
