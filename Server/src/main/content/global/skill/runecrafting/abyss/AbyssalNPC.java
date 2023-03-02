@@ -67,20 +67,19 @@ public final class AbyssalNPC extends AbstractNPC {
 	 * @return the pouch.
 	 */
 	private Item getPouch(Player player) {
-		Item pouch = RunePouch.SMALL.getPouch();
-		if (player.hasItem(pouch)) {
-			pouch = RunePouch.MEDIUM.getPouch();
+		if (!player.hasItem(RunePouch.SMALL.getPouch())) {
+			return RunePouch.SMALL.getPouch();
 		}
-		if (player.hasItem(RunePouch.MEDIUM.getPouch()) || player.hasItem(RunePouch.MEDIUM.getDecayedPouch())) {
-			pouch = RunePouch.LARGE.getPouch();
+		if (!player.hasItem(RunePouch.MEDIUM.getPouch()) && !player.hasItem(RunePouch.MEDIUM.getDecayedPouch())) {
+			return RunePouch.MEDIUM.getPouch();
 		}
-		if (player.hasItem(RunePouch.LARGE.getPouch()) || player.hasItem(RunePouch.LARGE.getDecayedPouch())) {
-			pouch = RunePouch.GIANT.getPouch();
+		if (!player.hasItem(RunePouch.LARGE.getPouch()) && !player.hasItem(RunePouch.LARGE.getDecayedPouch())) {
+			return RunePouch.LARGE.getPouch();
 		}
-		if (player.hasItem(RunePouch.GIANT.getPouch()) || player.hasItem(RunePouch.GIANT.getDecayedPouch())) {
-			pouch = null;
+		if (!player.hasItem(RunePouch.GIANT.getPouch()) && !player.hasItem(RunePouch.GIANT.getDecayedPouch())) {
+			return RunePouch.GIANT.getPouch();
 		}
-		return pouch;
+		return null;
 	}
 
 	@Override
