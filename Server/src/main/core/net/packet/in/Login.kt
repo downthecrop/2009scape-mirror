@@ -1,5 +1,6 @@
 package core.net.packet.`in`
 
+import com.moandjiezana.toml.Toml
 import core.cache.crypto.ISAACCipher
 import core.cache.crypto.ISAACPair
 import core.cache.misc.buffer.ByteBufferUtils
@@ -24,6 +25,7 @@ import core.game.world.GameWorld
 import core.game.world.repository.Repository
 import core.tools.Log
 import core.worker.ManagementEvents.publish
+import java.io.File
 import java.math.BigInteger
 import java.nio.BufferUnderflowException
 import java.nio.ByteBuffer
@@ -33,6 +35,9 @@ object Login {
     private const val NORMAL_LOGIN_OP = 16
     private const val RECONNECT_LOGIN_OP = 18
     const val CACHE_INDEX_COUNT = 29
+
+    private var exceptionData: Toml? = null
+    private var lastModifiedData = 0L
 
     fun decodeFromBuffer(buffer: ByteBuffer) : Pair<AuthResponse, LoginInfo?> {
         try {
@@ -164,11 +169,29 @@ object Login {
     }
 
     private fun checkAccountLimit(ipAddress: String, username: String): Boolean {
+        var accountLimit = ServerConstants.DAILY_ACCOUNT_LIMIT
+
+        if (File(ServerConstants.CONFIG_PATH + "account_limit_exceptions.conf").exists()) {
+            try {
+                val f = File(ServerConstants.CONFIG_PATH + "account_limit_exceptions.conf")
+                if (f.lastModified() != lastModifiedData) {
+                    exceptionData = Toml().read(f)
+                    lastModifiedData = f.lastModified()
+                }
+
+                if (exceptionData?.contains("exceptions.\"${ipAddress}\"") == true) {
+                    accountLimit = exceptionData?.getLong("exceptions.\"${ipAddress}\"", 0L)?.toInt() ?: accountLimit
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
         val archive = ServerStore.getArchive("daily-accounts")
         val accounts = archive.getList<String>(ipAddress)
         if (username in accounts) return true
 
-        if (accounts.size >= ServerConstants.DAILY_ACCOUNT_LIMIT)
+        if (accounts.size >= accountLimit)
             return false
 
         archive.addToList(ipAddress, username)
