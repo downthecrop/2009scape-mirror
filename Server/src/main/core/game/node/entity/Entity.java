@@ -198,7 +198,8 @@ public abstract class Entity extends Node {
 		{
 			hookList = new ArrayList<EventHook>();
 		}
-		hookList.add(hook);
+		if (!hookList.contains(hook))
+			hookList.add(hook);
 		hooks.put(event, hookList);
 	}
 

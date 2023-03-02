@@ -44,7 +44,6 @@ public final class MagicBookInterface extends ComponentPlugin {
 
 		SpellListeners.run(button, SpellListener.NONE, SpellUtils.getBookFromInterface(component.getId()),player,null);
 		boolean result = MagicSpell.castSpell(player, spellBook, button, player);
-		player.dispatch(new SpellCastEvent(spellBook, button));
 
 		return result;
 	}

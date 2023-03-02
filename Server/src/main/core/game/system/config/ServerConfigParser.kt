@@ -145,6 +145,7 @@ object ServerConfigParser {
         ServerConstants.DISCORD_MOD_WEBHOOK = data.getString("server.moderation_webhook", "")
         ServerConstants.NOAUTH_DEFAULT_ADMIN = data.getBoolean("server.noauth_default_admin", false)
         ServerConstants.DRAGON_AXE_USE_OSRS_SPEC = data.getBoolean("world.dragon_axe_use_osrs_spec", false)
+        ServerConstants.DISCORD_OPENRSC_HOOK = data.getString("server.openrsc_integration_webhook", "")
         ServerConstants.ENABLE_GLOBALCHAT = data.getBoolean("world.enable_globalchat", true)
 
         val logLevel = data.getString("server.log_level", "VERBOSE").uppercase()

@@ -32,7 +32,7 @@ data class InterfaceOpenEvent(val component: Component) : Event
 data class InterfaceCloseEvent(val component: Component) : Event
 data class AttributeSetEvent(val entity: Entity, val attribute: String, val value: Any) : Event
 data class AttributeRemoveEvent(val entity: Entity, val attribute: String) : Event
-data class SpellCastEvent(val spellBook: SpellBook, val spellId: Int) : Event
+data class SpellCastEvent(val spellBook: SpellBook, val spellId: Int, val target: Node? = null) : Event
 data class ItemAlchemizationEvent(val itemId: Int, val isHigh: Boolean) : Event
 data class ItemEquipEvent(val itemId: Int, val slotId: Int) : Event
 data class ItemUnequipEvent(val itemId: Int, val slotId: Int) : Event
