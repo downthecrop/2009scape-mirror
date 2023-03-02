@@ -10,7 +10,6 @@ variables:
 image: maven:3-openjdk-11
 
 before_script:
-  - apt-get update -qq && apt-get install -qq -y --no-install-recommends jq
   - free -mh
 
 # Cache downloaded dependencies and plugins between builds.
@@ -31,6 +30,7 @@ verify:jdk11:
 test:json:
   stage: test
   script:
+    - apt-get update -qq && apt-get install -qq -y --no-install-recommends jq
     - 'find . -name \*.json -type f -print0 | xargs -0 -n1 -P8 jq empty'
   except:
     variables:
