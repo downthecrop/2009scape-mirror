@@ -353,8 +353,11 @@ public class Player extends Entity {
 	public void clear(boolean force) {
 		if (!isActive())
 			return;
-		if (force) {
+		if (!force) {
 			Repository.getDisconnectionQueue().remove(getName());
+			Repository.getDisconnectionQueue().add(this, true);
+			details.save();
+			return;
 		}
 		if (!isArtificial())
 			GameWorld.getLogoutListeners().forEach((it) -> it.logout(this));
@@ -372,9 +375,7 @@ public class Player extends Entity {
 		getZoneMonitor().clear();
 		HouseManager.leave(this);
 		UpdateSequence.getRenderablePlayers().remove(this);
-		details.save();
 		sendLogoutEvents();
-		Repository.getDisconnectionQueue().add(this);
 		checkForWealthUpdate(true);
 	}
 
@@ -913,7 +914,7 @@ public class Player extends Entity {
 	 * @return {@code True} if so.
 	 */
 	public boolean allowRemoval() {
-		return inCombat() || getSkills().getLifepoints() < 1 || DeathTask.isDead(this);
+		return !(inCombat() || getSkills().getLifepoints() < 1 || DeathTask.isDead(this));
 	}
 
 	/**

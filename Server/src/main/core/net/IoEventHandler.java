@@ -62,7 +62,7 @@ public class IoEventHandler {
 		try {
 			if (channel.read(buffer) == -1) {
 				if (session != null && session.getPlayer() != null) {
-					Repository.getDisconnectionQueue().add(session.getPlayer());
+					Repository.getDisconnectionQueue().add(session.getPlayer(), false);
 				}
 				key.cancel();
 				return;
@@ -71,7 +71,7 @@ public class IoEventHandler {
 			if (e.getMessage().contains("reset by peer") && session != null) {
 				session.disconnect();
 				if (session.getPlayer() != null)
-					session.getPlayer().clear(true);
+					Repository.getDisconnectionQueue().add(session.getPlayer(), false);
 			} else {
 				key.cancel();
 				return;

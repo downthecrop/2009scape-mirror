@@ -48,12 +48,12 @@ class DisconnectionQueue {
      */
     private fun finish(entry: DisconnectionEntry?, force: Boolean): Boolean {
         val player = entry!!.player
-        if (!force && player.allowRemoval()) {
+        if (!force && !player.allowRemoval()) {
             return false
         }
         if (entry.isClear) {
             log(this::class.java, Log.FINE,  "Clearing player...")
-            player.clear()
+            player.clear(true)
         }
         Repository.removePlayer(player)
         log(this::class.java, Log.INFO, "Player cleared. Removed ${player.details.username}")

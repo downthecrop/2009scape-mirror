@@ -84,6 +84,9 @@ class MajorUpdateWorker {
     fun handleTickActions(skipPulseUpdate: Boolean = false) {
         PacketProcessor.processQueue()
 
+        //disconnect all players waiting to be disconnected
+        Repository.disconnectionQueue.update()
+
         if (!skipPulseUpdate) {
             GameWorld.Pulser.updateAll()
         }
@@ -98,8 +101,6 @@ class MajorUpdateWorker {
         }
         //increment global ticks variable
         GameWorld.pulse()
-        //disconnect all players waiting to be disconnected
-        Repository.disconnectionQueue.update()
         //tick all manager plugins
         Managers.tick()
 
