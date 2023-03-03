@@ -77,6 +77,9 @@ import core.game.world.update.MapChunkRenderer;
 import core.game.world.update.NPCRenderer;
 import core.game.world.update.PlayerRenderer;
 import core.game.world.update.UpdateSequence;
+import core.game.ge.GrandExchangeRecords;
+import core.game.ge.GrandExchangeOffer;
+import core.cache.def.impl.ItemDefinition;
 import core.worker.ManagementEvents;
 
 import java.util.*;
@@ -494,6 +497,21 @@ public class Player extends Entity {
 				if (i == null) break;
 				totalWealth += (long) i.getDefinition().getValue() * i.getAmount();
 			}
+            GrandExchangeRecords ge = GrandExchangeRecords.getInstance(this);
+            for (int i=0; i<6; i++) {
+                GrandExchangeOffer offer = ge.getOffer(i);
+                if (offer != null) {
+                    totalWealth += offer.cacheValue();
+                }
+            }
+
+            // This can lead to a false positive of up to 3 * 187.5k, but only for 3 ticks while a cannon is being constructed
+            if (this.getAttribute("dmc", null) != null) {
+                totalWealth += ItemDefinition.forId(Items.CANNON_BASE_6).getValue();
+                totalWealth += ItemDefinition.forId(Items.CANNON_STAND_8).getValue();
+                totalWealth += ItemDefinition.forId(Items.CANNON_BARRELS_10).getValue();
+                totalWealth += ItemDefinition.forId(Items.CANNON_FURNACE_12).getValue();
+            }
 
 			long diff = previousWealth == -1 ? 0L : totalWealth - previousWealth;
 			setAttribute("/save:last-wealth", totalWealth);

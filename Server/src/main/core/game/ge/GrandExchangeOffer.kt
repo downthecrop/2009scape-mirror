@@ -237,4 +237,22 @@ class GrandExchangeOffer() {
             return o
         }
     }
+
+    fun cacheValue(): Int {
+        var value = 0
+        if(sell) {
+            // count the cache value of the unsold items
+            value += ItemDefinition.forId(itemID).getValue() * amountLeft
+        } else {
+            // count the number of coins that haven't yet been spent
+            value += offeredValue * amountLeft
+        }
+        // for both the buyer and seller, the already completed portion is present in withdraw
+        for(item in withdraw) {
+            if(item != null) {
+                value += item.definition.value * item.amount
+            }
+        }
+        return value
+    }
 }
