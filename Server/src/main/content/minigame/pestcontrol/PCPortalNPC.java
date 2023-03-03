@@ -88,7 +88,7 @@ public final class PCPortalNPC extends AbstractNPC {
 	/**
 	 * If the lifepoints should be updated.
 	 */
-	private boolean updateLifepoints = true;
+	public boolean updateLifepoints = true;
 
 	/**
 	 * The pest control session.

@@ -1,5 +1,6 @@
 package content.minigame.pestcontrol.monsters;
 
+import content.minigame.pestcontrol.PCPortalNPC;
 import content.minigame.pestcontrol.PestControlSession;
 import core.game.interaction.MovementPulse;
 import core.game.node.entity.Entity;
@@ -90,7 +91,7 @@ public final class PCSpinnerNPC extends AbstractNPC {
 		faceTemporary(portal, 1);
 		visualize(new Animation(3911, Priority.HIGH), Graphics.create(658));
 		portal.getSkills().heal(portal.getSkills().getMaximumLifepoints() / 10);
-		portal.onImpact(this, null);
+		((PCPortalNPC) portal).updateLifepoints = true;
 	}
 
 	/**
