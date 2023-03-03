@@ -2,10 +2,7 @@ package core.game.system.command.sets
 
 import content.global.activity.jobs.JobManager
 import content.global.skill.slayer.Master
-import core.api.log
-import core.api.removeAttribute
-import core.api.getItemName
-import core.api.sendMessage
+import core.api.*
 import core.cache.Cache
 import core.cache.def.impl.DataMap
 import core.cache.def.impl.NPCDefinition
@@ -33,7 +30,7 @@ import core.tools.Log
 @Initializable
 class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
     val farmKitItems = arrayListOf(Items.RAKE_5341, Items.SPADE_952, Items.SEED_DIBBER_5343, Items.WATERING_CAN8_5340, Items.SECATEURS_5329, Items.GARDENING_TROWEL_5325)
-
+    val runeKitItems = arrayListOf(Items.AIR_RUNE_556, Items.EARTH_RUNE_557, Items.FIRE_RUNE_554, Items.WATER_RUNE_555, Items.MIND_RUNE_558, Items.BODY_RUNE_559, Items.DEATH_RUNE_560, Items.NATURE_RUNE_561, Items.CHAOS_RUNE_562, Items.LAW_RUNE_563, Items.COSMIC_RUNE_564, Items.BLOOD_RUNE_565, Items.SOUL_RUNE_566, Items.ASTRAL_RUNE_9075)
     override fun defineCommands() {
 
         /**
@@ -208,6 +205,12 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
                 val name = getItemName(i).lowercase()
                 if (name.contains(itemName) || itemName.contains(name))
                     notify(player, "$i: $name")
+            }
+        }
+
+        define("runekit", Privilege.ADMIN, "", "Gives 1k of each Rune type" ) { player, args ->
+                    for(item in runeKitItems) {
+                    addItem(player, item, 1000)
             }
         }
     }
