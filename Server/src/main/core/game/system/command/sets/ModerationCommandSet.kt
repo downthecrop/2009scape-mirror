@@ -40,7 +40,7 @@ class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
         define("kick", Privilege.MODERATOR){ player, args ->
             val playerToKick: Player? = Repository.getPlayerByName(args[1])
             if (playerToKick != null) {
-                playerToKick.clear(true)
+                playerToKick.clear()
                 notify(player, "Player ${playerToKick.username} was kicked.")
             } else {
                 reject(player, "ERROR REMOVING PLAYER.")
@@ -81,7 +81,7 @@ class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
             }
 
             playerToKick?.details?.accountInfo?.banEndTime = System.currentTimeMillis() + durationMillis
-            playerToKick?.clear(true)
+            playerToKick?.clear()
             GameWorld.Pulser.submit(object : Pulse(2) {
                 override fun pulse(): Boolean {
                     val info = GameWorld.accountStorage.getAccountInfo(name)
@@ -131,7 +131,7 @@ class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
             for (p in playersToBan) {
                 val playerToKick = Repository.getPlayerByName(p)
                 playerToKick?.details?.accountInfo?.banEndTime = System.currentTimeMillis() + durationMillis
-                playerToKick?.clear(true)
+                playerToKick?.clear()
                 GameWorld.Pulser.submit(object : Pulse(2) {
                     override fun pulse(): Boolean {
                         val info = GameWorld.accountStorage.getAccountInfo(p)

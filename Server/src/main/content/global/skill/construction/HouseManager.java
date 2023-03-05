@@ -18,6 +18,7 @@ import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
 import core.game.world.update.flag.context.Animation;
 import core.tools.Log;
+import kotlin.Unit;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.json.simple.JSONArray;
@@ -28,7 +29,7 @@ import core.game.world.GameWorld;
 import java.awt.*;
 import java.nio.ByteBuffer;
 
-import static core.api.ContentAPIKt.log;
+import static core.api.ContentAPIKt.*;
 import static core.api.regionspec.RegionSpecificationKt.fillWith;
 import static core.api.regionspec.RegionSpecificationKt.using;
 
@@ -197,6 +198,10 @@ public final class HouseManager {
 		player.lock(1);
 		player.sendMessage("House location: " + houseRegion.getBaseLocation() + ", entry: " + getEnterLocation());
 		player.getProperties().setTeleportLocation(getEnterLocation());
+		registerLogoutListener(player, "houselogout", (p) -> {
+			p.setLocation(location.getExitLocation());
+			return Unit.INSTANCE;
+		});
 		openLoadInterface(player);
 		checkForAndSpawnServant(player);
 		updateVarbits(player, buildingMode);
@@ -249,6 +254,7 @@ public final class HouseManager {
 	 */
 	public static void leave(Player player) {
 		HouseManager house = player.getAttribute("poh_entry", player.getHouseManager());
+		clearLogoutListener(player, "houselogout");
 		if (house.getHouseRegion() == null){
 			return;
 		}

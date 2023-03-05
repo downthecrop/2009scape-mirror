@@ -26,6 +26,7 @@ import core.game.world.repository.Repository
 import core.tools.Log
 import core.worker.ManagementEvents.publish
 import java.io.File
+import java.io.IOException
 import java.math.BigInteger
 import java.nio.BufferUnderflowException
 import java.nio.ByteBuffer
@@ -163,8 +164,6 @@ object Login {
         } catch (e: Exception) {
             e.printStackTrace()
             session.disconnect()
-            Repository.removePlayer(player)
-            player.clear(true)
         }
     }
 

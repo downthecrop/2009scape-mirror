@@ -18,13 +18,14 @@ class DisconnectionQueue {
     /**A
      * The pending disconnections queue.
      */
-    private val queue: MutableMap<String, DisconnectionEntry?>
+    private val queue = HashMap<String, DisconnectionEntry?>()
+    private val queueTimers = HashMap<String, Int>()
 
     /**
      * Updates all entries.
      */
     fun update() {
-        if (queue.isEmpty() || GameWorld.ticks % 3 != 0 && GameWorld.settings?.isDevMode != true) {
+        if (queue.isEmpty() || GameWorld.ticks % 3 != 0) {
             return
         }
         //make a copy of current entries as to avoid concurrency exceptions
@@ -33,6 +34,18 @@ class DisconnectionQueue {
         //loop through entries and disconnect each
         entries.forEach {
             if(finish(it.value,false)) queue.remove(it.key)
+            else {
+                //Make sure there's no room for the disconnection queue to stroke out and leave someone logged in for 10 years.
+                queueTimers[it.key] = (queueTimers[it.key] ?: 0) + 3
+                if ((queueTimers[it.key] ?: Int.MAX_VALUE) >= 1500) {
+                    it.value?.player?.let { player ->
+                        player.finishClear()
+                        Repository.removePlayer(player)
+                        remove(it.key)
+                        log(this::class.java, Log.WARN, "Force-clearing ${it.key} after 15 minutes of being in the disconnection queue!")
+                    }
+                }
+            }
         }
     }
 
@@ -51,12 +64,8 @@ class DisconnectionQueue {
         if (!force && !player.allowRemoval()) {
             return false
         }
-        if (entry.isClear) {
-            log(this::class.java, Log.FINE,  "Clearing player...")
-            player.clear(true)
-        }
+        player.finishClear()
         Repository.removePlayer(player)
-        log(this::class.java, Log.INFO, "Player cleared. Removed ${player.details.username}")
         try {
             if(player.communication.clan != null)
                 player.communication.clan.leave(player, false)
@@ -71,9 +80,11 @@ class DisconnectionQueue {
                 Thread.currentThread().name = "PlayerSave SQL"
                 save(player, true)
             }
+            log(this::class.java, Log.INFO, "Player cleared. Removed ${player.details.username}.")
             return true
         }
         save(player, false)
+        log(this::class.java, Log.INFO, "Player cleared. Removed ${player.details.username}.")
         return true
     }
 
@@ -97,94 +108,23 @@ class DisconnectionQueue {
         queue.clear()
     }
 
-    fun safeClear(){
-        for(entry in queue.values){
-            finish(entry,false)
-        }
-        queue.clear()
-    }
-    /**
-     * Adds a player to the disconnection queue.
-     * @param player The player.
-     * @param clear If the player should be cleared.
-     */
-    /**
-     * Adds a player to the disconnection queue.
-     * @param player The player.
-     */
     @JvmOverloads
     fun add(player: Player, clear: Boolean = false) {
         if(queue[player.name] != null) return
         queue[player.name] = DisconnectionEntry(player, clear)
+        log(this::class.java, Log.INFO, "Queueing ${player.name} for disconnection.");
     }
 
-    /**
-     * Checks if the queue contains the player name.
-     * @param name The name.
-     * @return `True` if so.
-     */
     operator fun contains(name: String?): Boolean {
         return queue.containsKey(name)
     }
 
-    /**
-     * Removes a queued player.
-     * @param name The name.
-     */
     fun remove(name: String?) {
         queue.remove(name)
+        queueTimers.remove(name)
     }
 
-    /**
-     * Represents an entry in the disconnection queue, holding the disconnected
-     * player and time stamp of disconnection.
-     * @author Emperor
-     */
-    internal inner class DisconnectionEntry(
-            /**
-             * The player.
-             */
-            val player: Player,
-            /**
-             * If the `Player#clear()` method should be called.
-             */
-            var isClear: Boolean) {
-        /**
-         * Gets the timeStamp.
-         * @return The timeStamp.
-         */
-        /**
-         * Sets the timeStamp.
-         * @param timeStamp The timeStamp to set.
-         */
-        /**
-         * The time of disconnection.
-         */
-        var timeStamp: Int
-
-        /**
-         * Gets the player.
-         * @return The player.
-         */
-
-        /**
-         * Gets the clear.
-         * @return The clear.
-         */
-        /**
-         * Sets the clear.
-         * @param isClear The clear to set.
-         */
-
-        /**
-         * Constructs a new `DisconnectionQueue` `Object`.
-         * @param player The disconnecting player.
-         * @param clear If the player should be cleared.
-         */
-        init {
-            timeStamp = GameWorld.ticks
-        }
-    }
+    internal data class DisconnectionEntry(val player: Player, var isClear: Boolean) {}
 
     /**
      * Saves the player.
@@ -198,11 +138,5 @@ class DisconnectionQueue {
             t.printStackTrace()
         }
         return false
-    }
-    /**
-     * Constructs a new `DisconnectionQueue` `Object`.
-     */
-    init {
-        queue = ConcurrentHashMap()
     }
 }

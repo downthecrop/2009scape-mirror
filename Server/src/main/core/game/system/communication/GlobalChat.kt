@@ -32,7 +32,7 @@ class GlobalChat : Commands {
         }
 
         private fun prepare(sender: String, message: String, isResizable: Boolean): String {
-            val baseColor = if (isResizable) "%G" else "%7512ff"
+            val baseColor = if (isResizable) "%f1b04c" else "%7512ff"
             val bracketColor = if (isResizable) "%ffffff" else "%000000"
             return colorize("$bracketColor[${baseColor}G$bracketColor] $sender: ${baseColor}$message")
         }

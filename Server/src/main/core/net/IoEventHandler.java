@@ -61,8 +61,8 @@ public class IoEventHandler {
 		IoSession session = (IoSession) key.attachment();
 		try {
 			if (channel.read(buffer) == -1) {
-				if (session != null && session.getPlayer() != null) {
-					Repository.getDisconnectionQueue().add(session.getPlayer(), false);
+				if (session != null) {
+					session.disconnect();
 				}
 				key.cancel();
 				return;
@@ -70,8 +70,6 @@ public class IoEventHandler {
 		} catch (IOException e) {
 			if (e.getMessage().contains("reset by peer") && session != null) {
 				session.disconnect();
-				if (session.getPlayer() != null)
-					Repository.getDisconnectionQueue().add(session.getPlayer(), false);
 			} else {
 				key.cancel();
 				return;

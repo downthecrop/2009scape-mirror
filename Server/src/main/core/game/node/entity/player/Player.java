@@ -342,26 +342,26 @@ public class Player extends Entity {
 		}
 		super.init();
 		LoginConfiguration.configureLobby(this);
+		setAttribute("logged-in-fully", true);
 	}
 
 	@Override
 	public void clear() {
-		clear(false);
+		if (isArtificial()) {
+			finishClear();
+			return;
+		}
+		Repository.getDisconnectionQueue().remove(getName());
+		Repository.getDisconnectionQueue().add(this, true);
+		details.save();
 	}
 
 	/**
 	 * Clears the player from the game.
-	 * @param force If we should force removal, a player engaged in combat will otherwise remain active until out of combat.
+	 * You should NEVER call this manually. This can only be called by the DisconnectionQueue doing its job.
+	 * If you think you need to call this manually, you're wrong. Stop. Turn around. Go back. Here be monsters.
 	 */
-	public void clear(boolean force) {
-		if (!isActive())
-			return;
-		if (!force) {
-			Repository.getDisconnectionQueue().remove(getName());
-			Repository.getDisconnectionQueue().add(this, true);
-			details.save();
-			return;
-		}
+	public void finishClear() {
 		if (!isArtificial())
 			GameWorld.getLogoutListeners().forEach((it) -> it.logout(this));
 		setPlaying(false);
@@ -647,7 +647,7 @@ public class Player extends Entity {
 					questRepository = new QuestRepository(this);
 					varpManager = new VarpManager(this);
 					new PlayerSaver(this).save();
-					clear(true);
+					clear();
 					return;
 				} else {
 					Repository.sendNews("Hardcore Iron " + gender + " " + this.getUsername() + " has fallen. Total Level: " + this.getSkills().getTotalLevel()); // Not enough room for XP

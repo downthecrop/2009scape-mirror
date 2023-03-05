@@ -490,7 +490,7 @@ public class AIPlayer extends Player {
     @Override
     public void clear() {
         botMapping.remove(uid);
-        super.clear(true);
+        super.clear();
     }
 
     @Override

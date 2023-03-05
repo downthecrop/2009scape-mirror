@@ -216,17 +216,12 @@ public class IoSession {
 			key.cancel();
 			SocketChannel channel = (SocketChannel) key.channel();
 			channel.socket().close();
-			if (object instanceof Player) {
-				final Player p = getPlayer();
-				GameWorld.getPulser().submit(new Pulse(0) {
-					@Override
-					public boolean pulse() {
-						if (p.isActive() && !p.getSession().active) {
-							p.clear();
-						}
-						return true;
-					}
-				});
+			if (getPlayer() != null) {
+				try {
+					getPlayer().clear();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 			object = null;
 		} catch (IOException e) {

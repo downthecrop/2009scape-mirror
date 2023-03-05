@@ -259,7 +259,12 @@ class ScriptProcessor(val entity: Entity) {
             targetDestination = when (interactTarget) {
                 is NPC -> DestinationFlag.ENTITY.getDestination(entity, interactTarget)
                 is Scenery -> {
-                    val path = Pathfinder.find(entity, interactTarget).points.lastOrNull()
+                    val basicPath = Pathfinder.find(entity, interactTarget)
+                    val path = basicPath.points.lastOrNull()
+                    if (basicPath.isMoveNear) {
+                        target.location
+                        return
+                    }
                     if (path == null) {
                         clearScripts(entity)
                         return

@@ -142,8 +142,7 @@ object Repository {
                 if (players[i].details.uid == player.details.uid) {
                     val oldPl = players[i]
                     players.remove(oldPl)
-                    oldPl.clear(true)
-                    oldPl.session.disconnect()
+                    oldPl.clear()
                     break;
                 }
             }

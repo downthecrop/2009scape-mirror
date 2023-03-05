@@ -36,14 +36,18 @@ class MajorUpdateWorker {
         while (running) {
             val start = System.currentTimeMillis()
             Server.heartbeat()
-
             handleTickActions()
 
             for (player in Repository.players.filter { !it.isArtificial }) {
                 if (System.currentTimeMillis() - player.session.lastPing > 20000L) {
-                    player?.details?.session?.disconnect()
                     player?.session?.lastPing = Long.MAX_VALUE
-                    player?.clear(true)
+                    player?.session?.disconnect()
+                }
+                if (!player.isActive && !Repository.disconnectionQueue.contains(player.name) && player.getAttribute("logged-in-fully", false)) {
+                    //if player has somehow been set as inactive without being queued for disconnection, do that now. This is a failsafe, and should not be relied on.
+                    //if you made a change, and now this is suddenly getting triggered a lot, your change is probably bad.
+                    player?.session?.disconnect()
+                    log(MajorUpdateWorker::class.java, Log.WARN, "Manually disconnecting ${player.name} because they were set as inactive without being disconnected. This is bad.")
                 }
             }
 
@@ -82,29 +86,34 @@ class MajorUpdateWorker {
     }
 
     fun handleTickActions(skipPulseUpdate: Boolean = false) {
-        PacketProcessor.processQueue()
-
-        //disconnect all players waiting to be disconnected
-        Repository.disconnectionQueue.update()
-
-        if (!skipPulseUpdate) {
-            GameWorld.Pulser.updateAll()
-        }
-        GameWorld.tickListeners.forEach { it.tick() }
-
         try {
+            PacketProcessor.processQueue()
+
+            //disconnect all players waiting to be disconnected
+            Repository.disconnectionQueue.update()
+
+            if (!skipPulseUpdate) {
+                GameWorld.Pulser.updateAll()
+            }
+            GameWorld.tickListeners.forEach { it.tick() }
+
             sequence.start()
             sequence.run()
             sequence.end()
+
+            //increment global ticks variable
+            GameWorld.pulse()
+            //tick all manager plugins
+            Managers.tick()
         } catch (e: Exception) {
             e.printStackTrace()
+        } finally {
+            try {
+                PacketWriteQueue.flush()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
-        //increment global ticks variable
-        GameWorld.pulse()
-        //tick all manager plugins
-        Managers.tick()
-
-        PacketWriteQueue.flush()
     }
 
     fun start() {
