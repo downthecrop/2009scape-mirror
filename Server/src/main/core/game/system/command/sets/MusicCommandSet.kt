@@ -1,12 +1,11 @@
 package core.game.system.command.sets
 
 import core.game.node.entity.player.link.music.MusicEntry
+import core.game.system.command.Privilege
 import core.net.packet.PacketRepository
 import core.net.packet.context.MusicContext
 import core.net.packet.out.MusicPacket
 import core.plugin.Initializable
-import core.game.system.command.Command
-import core.game.system.command.Privilege
 
 @Initializable
 class MusicCommandSet : CommandSet(Privilege.STANDARD){
@@ -25,6 +24,20 @@ class MusicCommandSet : CommandSet(Privilege.STANDARD){
             }
             player.musicPlayer.play(MusicEntry.forId(id!!))
             notify(player,"Now playing song $id")
+        }
+        /**
+         * Command that lets you play a specific jingle
+         */
+        define("playjingle"){player,args ->
+            if(args.size < 2){
+                reject(player,"Usage: ::playjingle jingleID")
+            }
+            val id = args[1].toIntOrNull()
+            if(id == null){
+                reject(player,"Please use a valid integer for the jingle id.")
+            }
+            PacketRepository.send(MusicPacket::class.java, MusicContext(player, id!!, true))
+            notify(player,"Now playing jingle $id")
         }
 
         /**

@@ -13,6 +13,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.music.MusicPlayer;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
@@ -22,10 +23,14 @@ import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
 import core.game.world.update.flag.context.Animation;
+import core.net.packet.PacketRepository;
+import core.net.packet.context.MusicContext;
+import core.net.packet.out.MusicPacket;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
 
 /**
  * Handles the strong hold of security.
@@ -122,22 +127,38 @@ public final class StrongHoldSecurityPlugin extends MapZone implements Plugin<Ob
 			case 16149:// fourth ladder going down.
 				openComponent(player, Location.create(2042, 5245, 0));
 				return true;
-			case 16135:// claim gift of piece.
-			case 16118:// claim box of health.
-				if (player.getSavedData().getGlobalData().hasStrongholdReward(target.getId() == 16135 ? 1 : 3)) {
+			case 16135:// Gift of Peace 1st level
+				if (player.getSavedData().getGlobalData().hasStrongholdReward(1)) {
 					player.getDialogueInterpreter().open(70099, "You have already claimed your reward from this level.");
 				} else {
-					player.getDialogueInterpreter().open(target.getId() == 16118 ? 96878 : 54678);
+					player.getAudioManager().send(Sounds.DOOR_CREAK_61);
+					PacketRepository.send(MusicPacket.class, new MusicContext(player, 157, true));
+					player.getDialogueInterpreter().open(54678);
 				}
 				return true;
-			case 16077:// grain of plenty
+			case 16118:// Box of health 3rd level
+				if (player.getSavedData().getGlobalData().hasStrongholdReward(3)) {
+					player.getDialogueInterpreter().open(70099, "You have already claimed your reward from this level.");
+				} else {
+					player.getAudioManager().send(Sounds.DOOR_CREAK_61);
+					PacketRepository.send(MusicPacket.class, new MusicContext(player, 177, true));
+					player.getDialogueInterpreter().open(96878);
+				}
+				return true;
+			case 16077:// Grain of Plenty 2nd level
 				if (player.getSavedData().getGlobalData().hasStrongholdReward(2)) {
 					player.getDialogueInterpreter().open(70099, "You have already claimed your reward from this level.");
 				} else {
+					player.getAudioManager().send(Sounds.DOOR_CREAK_61);
+					PacketRepository.send(MusicPacket.class, new MusicContext(player, 179, true));
 					player.getDialogueInterpreter().open(56875);
 				}
 				return true;
-			case 16047:// cradle
+			case 16047:// Cradle of Life 4th level
+				if (!player.getSavedData().getGlobalData().hasStrongholdReward(4)) {
+					PacketRepository.send(MusicPacket.class, new MusicContext(player, 158, true));
+				}
+				player.getAudioManager().send(Sounds.SOS_CHOIR_1246);
 				player.getDialogueInterpreter().open(96873);
 				return true;
 			case 16152:// skeleton
@@ -216,6 +237,7 @@ public final class StrongHoldSecurityPlugin extends MapZone implements Plugin<Ob
 	private static void openDoor(final Player player, final Scenery object) {
 		player.lock(3);
 		player.animate(Animation.create(4282));
+		player.getAudioManager().send(Sounds.SOS_THROUGH_DOOR_2858);
 		GameWorld.getPulser().submit(new Pulse(1, player) {
 			int counter;
 
