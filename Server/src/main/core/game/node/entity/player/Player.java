@@ -1129,6 +1129,28 @@ public class Player extends Entity {
 		return interfaceManager;
 	}
 
+	public boolean hasModalOpen() {
+		int[] excludedIds = new int[] {372, 421, InterfaceManager.DEFAULT_CHATBOX}; //excludes plain message, plain message with scrollbar, and normal chatbox
+		Component openedIface = interfaceManager.getOpened();
+		Component openChatbox = interfaceManager.getChatbox();
+
+		boolean hasModal = false;
+
+		if (openedIface != null) {
+			for (int i = 0; i < excludedIds.length; i++)
+				if (excludedIds[i] == openedIface.getId()) break;
+				else if (i == excludedIds.length - 1) hasModal = true;
+		}
+
+		if (openChatbox != null) {
+			for (int i = 0; i < excludedIds.length; i++)
+				if (excludedIds[i] == openChatbox.getId()) break;
+				else if (i == excludedIds.length - 1) hasModal = true;
+		}
+
+		return hasModal;
+	}
+
 	/**
 	 * Gets the dialogue interpreter.
 	 * @return The dialogue interpreter.

@@ -67,6 +67,11 @@ class NechryaelBehavior : NPCBehavior(*Tasks.NECHRYAELS.npcs) {
         list.remove(spawn)
         setAttribute(self, ATTR_SPAWNS, list)
     }
+
+    override fun shouldIgnoreMultiRestrictions(self: NPC, victim: Entity): Boolean {
+        val list = getSpawns(self)
+        return victim == self.properties.combatPulse.getVictim() || list.contains(victim.properties.combatPulse.getVictim())
+    }
 }
 
 class DeathspawnBehavior : NPCBehavior(NPCs.DEATH_SPAWN_1614) {

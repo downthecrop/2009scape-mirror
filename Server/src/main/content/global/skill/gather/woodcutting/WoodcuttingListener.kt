@@ -6,9 +6,7 @@ import content.data.tables.BirdNest
 import content.global.skill.farming.FarmingPatch.Companion.forObject
 import content.global.skill.skillcapeperks.SkillcapePerks
 import content.global.skill.skillcapeperks.SkillcapePerks.Companion.isActive
-import core.api.delayScript
-import core.api.finishedMoving
-import core.api.sendMessage
+import core.api.*
 import core.cache.def.impl.ItemDefinition
 import core.game.container.impl.EquipmentContainer
 import core.game.event.ResourceProducedEvent
@@ -61,13 +59,14 @@ class WoodcuttingListener : InteractionListener {
             return true
 
         if (state == 0) {
+            sendMessage(player, "You swing your axe at the tree...")
+        }
+
+        if (state == 1) {
             if (!checkWoodcuttingRequirements(player, resource, node)) {
                 player.scripts.reset()
                 return true
             }
-            animateWoodcutting(player)
-            sendMessage(player, "You swing your axe at the tree...")
-            return delayScript(player, 3)
         }
 
         animateWoodcutting(player)
@@ -129,7 +128,8 @@ class WoodcuttingListener : InteractionListener {
 
         delayScript(player, 3)
         rollDepletion(player, node.asScenery(), resource)
-        return true
+        setCurrentScriptState(player, 1)
+        return keepRunning(player)
     }
 
     private fun rollDepletion(player: Player, node: Scenery, resource: WoodcuttingNode): Boolean {

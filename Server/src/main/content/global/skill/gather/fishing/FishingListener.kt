@@ -47,14 +47,16 @@ class FishingListener : InteractionListener{
             return restartScript(player)
 
         if (state == 0) {
+            sendMessage(player, "You attempt to catch some fish...")
+        }
+
+        if (state == 1) {
             if (!checkRequirements(player, op, node))
                 return clearScripts(player)
             forager?.let {
                 val dest = player.location.transform(player.direction)
                 Pathfinder.find(it, dest).walk(it)
             }
-            anim(player, op)
-            return delayScript(player, 5)
         }
 
         anim(player, op)
@@ -74,7 +76,8 @@ class FishingListener : InteractionListener{
         player.incrementAttribute("$STATS_BASE:$STATS_FISH")
         rewardXP(player, Skills.FISHING, fish.experience)
 
-        return restartScript(player)
+        setCurrentScriptState(player, 1)
+        return keepRunning(player)
     }
 
     private fun anim(player: Player, option: FishingOption) {

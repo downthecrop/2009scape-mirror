@@ -37,7 +37,7 @@ import java.io.File
             return offer
         }
 
-        @AfterAll fun cleanup() {
+        @AfterAll @JvmStatic fun cleanup() {
             File(TEST_DB_PATH).delete()
         }
     }

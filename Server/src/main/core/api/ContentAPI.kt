@@ -2368,6 +2368,16 @@ fun isStunned(entity: Entity) : Boolean {
     return entity.clocks[Clocks.STUN] >= getWorldTicks()
 }
 
+fun setCurrentScriptState(entity: Entity, state: Int) {
+    val script = entity.scripts.getActiveScript()
+    if (script == null) {
+        log(ContentAPI::class.java, Log.WARN, "Tried to set a script state when no script was being ran!")
+        if (GameWorld.settings?.isDevMode != true) return
+        throw IllegalStateException("Script execution mistake - check stack trace and above warning log!")
+    }
+    script.state = state - 1 //set it to 1 below the state so that on next execution the state is at the expected value.
+}
+
 /**
  * Modifies prayer points by value
  * @param player the player to modify prayer points

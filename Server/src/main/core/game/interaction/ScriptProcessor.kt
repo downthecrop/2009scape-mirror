@@ -39,7 +39,7 @@ class ScriptProcessor(val entity: Entity) {
 
         var canProcess = !entity.delayed()
         if (entity is Player)
-            canProcess = canProcess && !entity.interfaceManager.isOpened && !entity.interfaceManager.hasChatbox()
+            canProcess = canProcess && !entity.hasModalOpen()
 
         if (entity !is Player) return
         if (!entity.delayed() && canProcess && interactTarget != null) {
