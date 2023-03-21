@@ -1,5 +1,6 @@
 package content.region.misthalin.dorgeshuun.quest.thelosttribe
 
+import core.api.addItemOrDrop
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.item.Item
@@ -214,7 +215,7 @@ class DukeHoracioTLTDialogue(val questStage: Int) : DialogueFile() {
                         "the cave goblins and tell them I would like to meet with",
                         "their leader to sign it."
                     )
-                    player!!.inventory.add(Item(Items.PEACE_TREATY_5012))
+                    addItemOrDrop(player!!, Items.PEACE_TREATY_5012)
                     player!!.questRepository.getQuest("Lost Tribe").setStage(player, 50)
                     player!!.varpManager.get(465).setVarbit(0, 9).send(player!!)
                     stage = END_DIALOGUE

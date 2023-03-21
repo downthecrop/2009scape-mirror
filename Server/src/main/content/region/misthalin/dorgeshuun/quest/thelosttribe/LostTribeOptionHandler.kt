@@ -1,10 +1,10 @@
 package content.region.misthalin.dorgeshuun.quest.thelosttribe
 
+import core.api.addItemOrDrop
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.SceneryDefinition
 import core.game.component.Component
-import core.game.dialogue.FacialExpression
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -49,7 +49,7 @@ class LostTribeOptionHandler : OptionHandler(){
             6911 -> {
                 if(!player.inventory.containsItem(Item(Items.SILVERWARE_5011)) && player.questRepository.getQuest("Lost Tribe").getStage(player) == 48){
                     player.dialogueInterpreter.sendItemMessage(Items.SILVERWARE_5011,"You find the missing silverware!")
-                    player.inventory.add(Item(Items.SILVERWARE_5011))
+                    addItemOrDrop(player, Items.SILVERWARE_5011)
                     player.questRepository.getQuest("Lost Tribe").setStage(player,49)
                 } else {
                     player.sendMessage("You find nothing.")
