@@ -8,4 +8,5 @@ object Clocks {
     @JvmStatic val NEXT_DRINK = 4
     @JvmStatic val NEXT_ATTACK = 5
     @JvmStatic val STUN = 6
+    @JvmStatic val SKILLING = 7
 }

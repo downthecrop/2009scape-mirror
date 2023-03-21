@@ -19,33 +19,33 @@ class ConsumableListener : InteractionListener {
     }
 
     private fun handleConsumable(player: Player, node: Node) : Boolean {
-        val consumable = Consumables.getConsumableById(node.id) ?: return stopExecuting(player)
+        val consumable = Consumables.getConsumableById(node.id) ?: return true
 
         val food = getUsedOption(player) == "eat"
         val isIgnoreMainClock = consumable.isIgnoreMainClock
 
         if (food) {
             if (isIgnoreMainClock && player.clocks[Clocks.NEXT_CONSUME] < GameWorld.ticks) {
-                consumable.consumable.consume(node as? Item ?: return stopExecuting(player), player)
+                consumable.consumable.consume(node as? Item ?: return true, player)
                 player.clocks[Clocks.NEXT_CONSUME] = getWorldTicks() + 2
                 player.clocks[Clocks.NEXT_EAT] = getWorldTicks() + 2
                 delayAttack(player, 3)
             } else if (player.clocks[Clocks.NEXT_CONSUME] < getWorldTicks() && player.clocks[Clocks.NEXT_EAT] < getWorldTicks()) {
-                consumable.consumable.consume(node as? Item ?: return stopExecuting(player), player)
+                consumable.consumable.consume(node as? Item ?: return true, player)
                 player.clocks[Clocks.NEXT_EAT] = getWorldTicks() + 2
                 delayAttack(player, 3)
             }
         } else {
             if (isIgnoreMainClock && player.clocks[Clocks.NEXT_CONSUME] < getWorldTicks()) {
-                consumable.consumable.consume(node as? Item ?: return stopExecuting(player), player)
+                consumable.consumable.consume(node as? Item ?: return true, player)
                 player.clocks[Clocks.NEXT_CONSUME] = getWorldTicks() + 3
                 player.clocks[Clocks.NEXT_DRINK] = getWorldTicks() + 3
             } else if (player.clocks[Clocks.NEXT_CONSUME] < getWorldTicks() && player.clocks[Clocks.NEXT_DRINK] < getWorldTicks()) {
-                consumable.consumable.consume(node as? Item ?: return stopExecuting(player), player)
+                consumable.consumable.consume(node as? Item ?: return true, player)
                 player.clocks[Clocks.NEXT_DRINK] = getWorldTicks() + 3
             }
         }
 
-        return stopExecuting(player)
+        return true
     }
 }

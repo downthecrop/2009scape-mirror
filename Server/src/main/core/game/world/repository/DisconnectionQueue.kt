@@ -102,7 +102,7 @@ class DisconnectionQueue {
      * Clears the queue.
      */
     fun clear() {
-        for (entry in queue.values) {
+        for (entry in queue.values.toTypedArray()) {
             finish(entry, true)
         }
         queue.clear()

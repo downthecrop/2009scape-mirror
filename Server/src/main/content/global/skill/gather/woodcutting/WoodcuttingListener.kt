@@ -12,6 +12,7 @@ import core.game.container.impl.EquipmentContainer
 import core.game.event.ResourceProducedEvent
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.Clocks
 import core.game.node.Node
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.player.Player
@@ -56,79 +57,79 @@ class WoodcuttingListener : InteractionListener {
         val tool = SkillingTool.getHatchet(player)
 
         if (!finishedMoving(player))
-            return true
+            return restartScript(player) 
 
         if (state == 0) {
+            if (!checkWoodcuttingRequirements(player, resource, node)) {
+                return clearScripts(player)
+            }
             sendMessage(player, "You swing your axe at the tree...")
         }
 
-        if (state == 1) {
-            if (!checkWoodcuttingRequirements(player, resource, node)) {
-                player.scripts.reset()
-                return true
-            }
-        }
+        if (clockReady(player, Clocks.SKILLING)) {
+            animateWoodcutting(player)
+            if (!checkReward(player, resource, tool))
+                return delayClock(player, Clocks.SKILLING, 3)
 
-        animateWoodcutting(player)
-        if (!checkReward(player, resource, tool))
-            return delayScript(player, 3)
-
-        if (tool.id == Items.INFERNO_ADZE_13661 && RandomFunction.roll(4)) {
-            sendMessage(player, "You chop some logs. The heat of the inferno adze incinerates them.")
-            Projectile.create(
-                    player, null,
-                    1776,
-                    35, 30,
-                    20, 25
-            ).transform(
-                    player,
-                    player.location.transform(2, 0, 0),
-                    true,
-                    25, 25
-            ).send()
-            delayScript(player, 3)
-            return rollDepletion(player, node.asScenery(), resource)
-        }
-
-        val reward = resource.getReward()
-        val rewardAmount: Int
-        if (reward > 0) {
-            rewardAmount = calculateRewardAmount(player, reward) // calculate amount
-            SkillingPets.checkPetDrop(player, SkillingPets.BEAVER) // roll for pet
-
-            //add experience
-            val experience: Double = calculateExperience(player, resource, rewardAmount)
-            player.getSkills().addExperience(Skills.WOODCUTTING, experience, true)
-
-            //send the message for the resource reward
-            if (resource == WoodcuttingNode.DRAMEN_TREE) {
-                player.packetDispatch.sendMessage("You cut a branch from the Dramen tree.")
-            } else {
-                player.packetDispatch.sendMessage("You get some " + ItemDefinition.forId(reward).name.lowercase(Locale.getDefault()) + ".")
+            if (tool.id == Items.INFERNO_ADZE_13661 && RandomFunction.roll(4)) {
+                sendMessage(player, "You chop some logs. The heat of the inferno adze incinerates them.")
+                Projectile.create(
+                        player, null,
+                        1776,
+                        35, 30,
+                        20, 25
+                ).transform(
+                        player,
+                        player.location.transform(2, 0, 0),
+                        true,
+                        25, 25
+                ).send()
+                delayClock(player, Clocks.SKILLING, 3)
+                return rollDepletion(player, node.asScenery(), resource)
             }
 
-            //give the reward
-            player.inventory.add(Item(reward, rewardAmount))
-            player.dispatch(ResourceProducedEvent(reward, rewardAmount, node, -1))
-            var cutLogs = player.getAttribute("$STATS_BASE:$STATS_LOGS", 0)
-            player.setAttribute("/save:$STATS_BASE:$STATS_LOGS", ++cutLogs)
+            val reward = resource.getReward()
+            val rewardAmount: Int
+            if (reward > 0) {
+                rewardAmount = calculateRewardAmount(player, reward) // calculate amount
+                SkillingPets.checkPetDrop(player, SkillingPets.BEAVER) // roll for pet
 
-            //calculate bonus bird nest for mining
-            val chance = 282
-            if (RandomFunction.random(chance) == chance / 2) {
-                if (isActive(SkillcapePerks.NEST_HUNTER, player)) {
-                    if (!player.inventory.add(BirdNest.getRandomNest(false).nest)) {
+                //add experience
+                val experience: Double = calculateExperience(player, resource, rewardAmount)
+                player.getSkills().addExperience(Skills.WOODCUTTING, experience, true)
+
+                //send the message for the resource reward
+                if (resource == WoodcuttingNode.DRAMEN_TREE) {
+                    player.packetDispatch.sendMessage("You cut a branch from the Dramen tree.")
+                } else {
+                    player.packetDispatch.sendMessage("You get some " + ItemDefinition.forId(reward).name.lowercase(Locale.getDefault()) + ".")
+                }
+
+                //give the reward
+                player.inventory.add(Item(reward, rewardAmount))
+                player.dispatch(ResourceProducedEvent(reward, rewardAmount, node, -1))
+                var cutLogs = player.getAttribute("$STATS_BASE:$STATS_LOGS", 0)
+                player.setAttribute("/save:$STATS_BASE:$STATS_LOGS", ++cutLogs)
+
+                //calculate bonus bird nest for mining
+                val chance = 282
+                if (RandomFunction.random(chance) == chance / 2) {
+                    if (isActive(SkillcapePerks.NEST_HUNTER, player)) {
+                        if (!player.inventory.add(BirdNest.getRandomNest(false).nest)) {
+                            BirdNest.drop(player)
+                        }
+                    } else {
                         BirdNest.drop(player)
                     }
-                } else {
-                    BirdNest.drop(player)
                 }
             }
-        }
 
-        delayScript(player, 3)
-        rollDepletion(player, node.asScenery(), resource)
-        setCurrentScriptState(player, 1)
+            delayClock(player, Clocks.SKILLING, 3)
+            rollDepletion(player, node.asScenery(), resource)
+            if (!checkWoodcuttingRequirements(player, resource, node)) {
+                return clearScripts(player)
+            }
+        }
         return keepRunning(player)
     }
 

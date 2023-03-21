@@ -10,6 +10,7 @@ import core.api.*
 import core.game.event.ResourceProducedEvent
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.Clocks
 import core.game.node.Node
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -47,36 +48,40 @@ class FishingListener : InteractionListener{
             return restartScript(player)
 
         if (state == 0) {
-            sendMessage(player, "You attempt to catch some fish...")
-        }
-
-        if (state == 1) {
             if (!checkRequirements(player, op, node))
                 return clearScripts(player)
             forager?.let {
                 val dest = player.location.transform(player.direction)
                 Pathfinder.find(it, dest).walk(it)
             }
+            sendMessage(player, "You attempt to catch some fish...")
         }
 
-        anim(player, op)
-        forager?.handlePassiveAction()
+        if (clockReady(player, Clocks.SKILLING)) {
+            anim(player, op)
+            forager?.handlePassiveAction()
 
-        val fish = op.rollFish(player) ?: return delayScript(player, 5)
-        if (!hasSpaceFor(player, fish.item)) return restartScript(player)
-        if (!op.removeBait(player.inventory)) return restartScript(player)
-        player.dispatch(ResourceProducedEvent(fish.item.id, fish.item.amount, node))
+            val fish = op.rollFish(player) ?: return delayClock(player, Clocks.SKILLING, 5)
+            
+            if (!hasSpaceFor(player, fish.item) || !op.removeBait(player.inventory)) {
+                return restartScript(player)
+            }
 
-        val item = fish.item
-        if (isActive(SkillcapePerks.GREAT_AIM, player) && RandomFunction.roll(20)) {
-            addItem(player, item.id, item.amount)
-            sendMessage(player, colorize("%RYour expert aim catches you a second fish."))
+            player.dispatch(ResourceProducedEvent(fish.item.id, fish.item.amount, node))
+
+            val item = fish.item
+            if (isActive(SkillcapePerks.GREAT_AIM, player) && RandomFunction.roll(20)) {
+                addItemOrDrop(player, item.id, item.amount)
+                sendMessage(player, colorize("%RYour expert aim catches you a second fish."))
+            }
+            addItemOrDrop(player, item.id, item.amount)
+            player.incrementAttribute("$STATS_BASE:$STATS_FISH")
+            rewardXP(player, Skills.FISHING, fish.experience)
+            delayClock(player, Clocks.SKILLING, 5)
+
+            if (!checkRequirements(player, op, node))
+                return clearScripts(player)
         }
-        addItemOrDrop(player, item.id, item.amount)
-        player.incrementAttribute("$STATS_BASE:$STATS_FISH")
-        rewardXP(player, Skills.FISHING, fish.experience)
-
-        setCurrentScriptState(player, 1)
         return keepRunning(player)
     }
 

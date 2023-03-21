@@ -2346,6 +2346,28 @@ fun queueScript(entity: Entity, delay: Int = 1, strength: QueueStrength = QueueS
     entity.scripts.addToQueue(s, strength)
 }
 
+/**
+ * Sets the clock to the value of WORLD_TICSK + ticks.
+ * @param entity the entity whose clock we are updating
+ * @param clock the clock we are updating. Please use [core.game.interaction.Clocks] for this argument. 
+ * @param ticks the number of ticks to delay by
+ * @return always returns false so this can be used as a script return value.
+**/
+fun delayClock(entity: Entity, clock: Int, ticks: Int) : Boolean {
+    entity.clocks[clock] = getWorldTicks() + ticks
+    return false
+}
+
+/**
+ * Checks if a clock is ready (have we elapsed any delay put into it)
+ * @param entity the entity whose clock we are checking
+ * @param clock the clock we are checking. Please use [core.game.interaction.Clocks] for this argument.
+ * @return true if we have elapsed the clock's wait
+**/
+fun clockReady(entity: Entity, clock: Int) : Boolean {
+    return entity.clocks[clock] <= getWorldTicks()
+}
+
 fun delayAttack(entity: Entity, ticks: Int) {
     entity.properties.combatPulse.delayNextAttack(3)
     entity.clocks[Clocks.NEXT_ATTACK] = getWorldTicks() + ticks

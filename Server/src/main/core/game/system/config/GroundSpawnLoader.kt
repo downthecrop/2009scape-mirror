@@ -14,7 +14,7 @@ import core.tools.SystemLogger
 import core.game.world.GameWorld
 import core.game.world.repository.Repository
 import core.tools.Log
-import java.io.FileReader
+import java.io.*
 import java.nio.ByteBuffer
 
 class GroundSpawnLoader {
@@ -26,14 +26,22 @@ class GroundSpawnLoader {
         reader = FileReader(ServerConstants.CONFIG_PATH + "ground_spawns.json")
         var configs = parser.parse(reader) as JSONArray
         for(config in configs){
-            val e = config as JSONObject
-            val datas = e["loc_data"].toString().split("-")
-            val id = e["item_id"].toString().toInt()
-            for(d in datas){
-                val tokens = d.replace("{", "").replace("}", "").split(",".toRegex()).toTypedArray()
-                val spawn = GroundSpawn(tokens[4].toInt(), Item(id, tokens[0].toInt()), Location(Integer.valueOf(tokens[1]), Integer.valueOf(tokens[2]), Integer.valueOf(tokens[3])))
-                spawn.init()
-                count++
+            try {
+                val e = config as JSONObject
+                val datas = e["loc_data"].toString().split("-")
+                val id = e["item_id"].toString().toInt()
+                for(d in datas){
+                    if (d.isNullOrEmpty()) continue
+                    val tokens = d.replace("{", "").replace("}", "").split(",".toRegex()).toTypedArray()
+                    val spawn = GroundSpawn(tokens[4].toInt(), Item(id, tokens[0].toInt()), Location(Integer.valueOf(tokens[1]), Integer.valueOf(tokens[2]), Integer.valueOf(tokens[3])))
+                    spawn.init()
+                    count++
+                }
+            } catch (e: Exception) {
+                val sw = StringWriter()
+                val pw = PrintWriter(sw)
+                e.printStackTrace(pw)
+                log(this::class.java, Log.ERR, "Error parsing config entry ${config.toString()}: $sw")
             }
         }
         log(this::class.java, Log.FINE,  "Initialized $count ground items.")

@@ -13,6 +13,7 @@ import core.game.world.map.path.Pathfinder
 import core.tools.Log
 import core.tools.SystemLogger
 import java.lang.Integer.max
+import java.io.*
 
 class ScriptProcessor(val entity: Entity) {
     private var apScript: Script<*>? = null
@@ -182,6 +183,10 @@ class ScriptProcessor(val entity: Entity) {
     }
 
     fun processInteractScript(script: Script<*>) {
+        if (interactTarget == null || !interactTarget!!.isActive) {
+            log(this::class.java, Log.FINE, "Interact target $interactTarget no longer active, cancelling interaction.")
+            reset()
+        }
         if (script.nextExecution < GameWorld.ticks) {
             val finished = executeScript(script)
             script.state++
@@ -193,11 +198,19 @@ class ScriptProcessor(val entity: Entity) {
 
     fun executeScript(script: Script<*>) : Boolean {
         currentScript = script
-        when (script) {
-            is Interaction -> return script.execution.invoke(entity as? Player ?: return true, interactTarget ?: return true, script.state)
-            is UseWithInteraction -> return script.execution.invoke(entity as? Player ?: return true, script.used, script.with, script.state)
-            is QueuedScript -> return script.execution.invoke(script.state)
-            is QueuedUseWith -> return script.execution.invoke(entity as? Player ?: return true, script.used, script.with, script.state)
+        try {
+            when (script) {
+                is Interaction -> return script.execution.invoke(entity as? Player ?: return true, interactTarget ?: return true, script.state)
+                is UseWithInteraction -> return script.execution.invoke(entity as? Player ?: return true, script.used, script.with, script.state)
+                is QueuedScript -> return script.execution.invoke(script.state)
+                is QueuedUseWith -> return script.execution.invoke(entity as? Player ?: return true, script.used, script.with, script.state)
+            }
+        } catch (e: Exception) {
+            val sw = StringWriter()
+            val pw = PrintWriter(sw)
+            e.printStackTrace(pw)
+            log(this::class.java, Log.ERR, "Error processing ${script::class.java.simpleName} - stopping the script. Exception follows: $sw")
+            reset()
         }
         currentScript = null
         return true
@@ -243,6 +256,8 @@ class ScriptProcessor(val entity: Entity) {
     }
 
     fun setInteractionScript(target: Node, script: Script<*>?) {
+        if (apScript != null && script != null && script.execution == apScript!!.execution) return
+        if (opScript != null && script != null && script.execution == opScript!!.execution) return
         reset()
         interactTarget = target
         if (script != null) {
