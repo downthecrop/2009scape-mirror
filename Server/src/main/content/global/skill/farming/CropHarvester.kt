@@ -52,7 +52,7 @@ class CropHarvester : OptionHandler() {
                         return true
                     }
                     var requiredItem = when(fPatch.type){
-                        PatchType.HERB -> Items.SECATEURS_5329
+                        PatchType.HERB, PatchType.TREE -> Items.SECATEURS_5329
                         else -> Items.SPADE_952
                     }
                     if(requiredItem == Items.SECATEURS_5329){
