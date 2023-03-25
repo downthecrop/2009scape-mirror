@@ -430,7 +430,7 @@ class ZaffPlugin : OptionHandler() {
                     2 -> 64
                     1 -> 32
                     0 -> 16
-                    else -> 0
+                    else -> 8
                 }
             }
 
