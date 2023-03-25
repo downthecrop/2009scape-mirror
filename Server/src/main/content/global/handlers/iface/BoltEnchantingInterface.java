@@ -13,6 +13,7 @@ import core.game.system.task.Pulse;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
 /**
  * Represents the component plugin used to handle the bolt enchanting interface.
@@ -87,6 +88,7 @@ public final class BoltEnchantingInterface extends ComponentPlugin {
 					}
 					player.getSkills().addExperience(Skills.MAGIC, bolts.getExp(), true);
 					player.getPacketDispatch().sendMessage("The magic of the runes coaxes out the true nature of the gem tips.");
+					player.getAudioManager().send(Sounds.ENCHANTED_TIPPING_2921);
 					return true;
 				}
 			});

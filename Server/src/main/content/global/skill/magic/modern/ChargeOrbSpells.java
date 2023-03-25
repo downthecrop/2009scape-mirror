@@ -16,6 +16,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
 /**
  * Represents the the charging orb magic spell.
@@ -79,10 +80,10 @@ public final class ChargeOrbSpells extends MagicSpell {
 
     @Override
     public Plugin<SpellType> newInstance(SpellType arg) throws Throwable {
-        SpellBook.MODERN.register(35, new ChargeOrbSpells(56, 2151, 571, 35, new Graphics(149, 96), new Audio(118), Runes.WATER_RUNE.getItem(30), Runes.COSMIC_RUNE.getItem(3), UNPOWERED_ORB));
-        SpellBook.MODERN.register(39, new ChargeOrbSpells(60, 29415, 575, 39, new Graphics(151, 96), new Audio(115), Runes.EARTH_RUNE.getItem(30), Runes.COSMIC_RUNE.getItem(3), UNPOWERED_ORB));
-        SpellBook.MODERN.register(46, new ChargeOrbSpells(63, 2153, 569, 46, new Graphics(152, 96), new Audio(117), Runes.FIRE_RUNE.getItem(30), Runes.COSMIC_RUNE.getItem(3), UNPOWERED_ORB));
-        SpellBook.MODERN.register(49, new ChargeOrbSpells(66, 2152, 573, 49, new Graphics(150, 96), new Audio(116), Runes.AIR_RUNE.getItem(30), Runes.COSMIC_RUNE.getItem(3), UNPOWERED_ORB));
+        SpellBook.MODERN.register(35, new ChargeOrbSpells(56, 2151, 571, 35, new Graphics(149, 96), new Audio(Sounds.CHARGE_WATER_ORB_118), Runes.WATER_RUNE.getItem(30), Runes.COSMIC_RUNE.getItem(3), UNPOWERED_ORB));
+        SpellBook.MODERN.register(39, new ChargeOrbSpells(60, 29415, 575, 39, new Graphics(151, 96), new Audio(Sounds.CHARGE_EARTH_ORB_115), Runes.EARTH_RUNE.getItem(30), Runes.COSMIC_RUNE.getItem(3), UNPOWERED_ORB));
+        SpellBook.MODERN.register(46, new ChargeOrbSpells(63, 2153, 569, 46, new Graphics(152, 96), new Audio(Sounds.CHARGE_FIRE_ORB_117), Runes.FIRE_RUNE.getItem(30), Runes.COSMIC_RUNE.getItem(3), UNPOWERED_ORB));
+        SpellBook.MODERN.register(49, new ChargeOrbSpells(66, 2152, 573, 49, new Graphics(150, 96), new Audio(Sounds.CHARGE_AIR_ORB_116), Runes.AIR_RUNE.getItem(30), Runes.COSMIC_RUNE.getItem(3), UNPOWERED_ORB));
         return this;
     }
 

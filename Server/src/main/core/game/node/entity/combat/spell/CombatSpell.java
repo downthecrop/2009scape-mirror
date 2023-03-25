@@ -15,6 +15,7 @@ import core.game.node.item.Item;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
+import org.rs09.consts.Sounds;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,18 +133,13 @@ public abstract class CombatSpell extends MagicSpell {
 	 * @param state The battle state.
 	 */
 	public void visualizeImpact(Entity entity, Entity target, BattleState state) {
-		boolean combatVictim = target == entity.getProperties().getCombatPulse().getVictim();
 		if (state.getEstimatedHit() == -1) {
-			if (combatVictim) {
-				sendAudio(target, new Audio(227, 1, 20));
-			}
+			sendAudio(target, new Audio(Sounds.SPELLFAIL_227, 1, 20));
 			target.graphics(SPLASH_GRAPHIC);
 			return;
 		}
 		target.graphics(endGraphic);
-		if (combatVictim) {
-			sendAudio(target, new Audio(impactAudio, 1, 20));
-		}
+		sendAudio(target, new Audio(impactAudio, 1, 20));
 	}
 
 	@Override

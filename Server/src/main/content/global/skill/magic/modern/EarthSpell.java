@@ -13,6 +13,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
 /**
  * Represents the earth combat spells.
@@ -117,10 +118,10 @@ public final class EarthSpell extends CombatSpell {
 
 	@Override
 	public Plugin<SpellType> newInstance(SpellType type) throws Throwable {
-		SpellBook.MODERN.register(6, new EarthSpell(SpellType.STRIKE, 9, 9.5, 132, STRIKE_START, STRIKE_PROJECTILE, STRIKE_END, Runes.MIND_RUNE.getItem(1), Runes.EARTH_RUNE.getItem(2), Runes.AIR_RUNE.getItem(1)));
-		SpellBook.MODERN.register(17, new EarthSpell(SpellType.BOLT, 29, 19.5, 130, BOLT_START, BOLT_PROJECTILE, BOLT_END, Runes.CHAOS_RUNE.getItem(1), Runes.EARTH_RUNE.getItem(3), Runes.AIR_RUNE.getItem(2)));
-		SpellBook.MODERN.register(33, new EarthSpell(SpellType.BLAST, 53, 31.5, 128, BLAST_START, BLAST_PROJECTILE, BLAST_END, Runes.DEATH_RUNE.getItem(1), Runes.EARTH_RUNE.getItem(4), Runes.AIR_RUNE.getItem(3)));
-		SpellBook.MODERN.register(52, new EarthSpell(SpellType.WAVE, 70, 40.0, 134, WAVE_START, WAVE_PROJECTILE, WAVE_END, Runes.BLOOD_RUNE.getItem(1), Runes.EARTH_RUNE.getItem(7), Runes.AIR_RUNE.getItem(5)));
+		SpellBook.MODERN.register(6, new EarthSpell(SpellType.STRIKE, 9, 9.5, Sounds.EARTHSTRIKE_CAST_AND_FIRE_132, STRIKE_START, STRIKE_PROJECTILE, STRIKE_END, Runes.MIND_RUNE.getItem(1), Runes.EARTH_RUNE.getItem(2), Runes.AIR_RUNE.getItem(1)));
+		SpellBook.MODERN.register(17, new EarthSpell(SpellType.BOLT, 29, 19.5, Sounds.EARTHBOLT_CAST_AND_FIRE_130, BOLT_START, BOLT_PROJECTILE, BOLT_END, Runes.CHAOS_RUNE.getItem(1), Runes.EARTH_RUNE.getItem(3), Runes.AIR_RUNE.getItem(2)));
+		SpellBook.MODERN.register(33, new EarthSpell(SpellType.BLAST, 53, 31.5, Sounds.EARTHBLAST_CAST_AND_FIRE_128, BLAST_START, BLAST_PROJECTILE, BLAST_END, Runes.DEATH_RUNE.getItem(1), Runes.EARTH_RUNE.getItem(4), Runes.AIR_RUNE.getItem(3)));
+		SpellBook.MODERN.register(52, new EarthSpell(SpellType.WAVE, 70, 40.0, Sounds.EARTHWAVE_CAST_AND_FIRE_134, WAVE_START, WAVE_PROJECTILE, WAVE_END, Runes.BLOOD_RUNE.getItem(1), Runes.EARTH_RUNE.getItem(7), Runes.AIR_RUNE.getItem(5)));
 		return this;
 	}
 

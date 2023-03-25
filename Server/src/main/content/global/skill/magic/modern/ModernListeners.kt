@@ -25,6 +25,7 @@ import core.ServerConstants
 import core.api.*
 import core.game.node.entity.combat.spell.MagicStaff
 import core.game.node.entity.impl.Animator
+import org.rs09.consts.Sounds
 
 class ModernListeners : SpellListener("modern"){
 
@@ -214,7 +215,7 @@ class ModernListeners : SpellListener("modern"){
         player.lock(3)
         removeRunes(player)
         addXP(player,53.0)
-        player.audioManager.send(117)
+        player.audioManager.send(Sounds.SUPERHEAT_ALL_190)
         showMagicTab(player)
         player.pulseManager.run(SmeltingPulse(player, item, bar, 1, true))
         setDelay(player,false)

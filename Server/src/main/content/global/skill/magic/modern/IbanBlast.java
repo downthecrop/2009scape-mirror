@@ -15,6 +15,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
 /**
  * Represents the iban blast spell.
@@ -28,7 +29,7 @@ public final class IbanBlast extends CombatSpell {
 	 * Constructs a new {@code IbanBlast} {@code Object}.
 	 */
 	public IbanBlast() {
-		super(SpellType.IBANS_BLAST, SpellBook.MODERN, 50, 60.5, -1, -1, new Animation(708, Priority.HIGH), new Graphics(87, 96), Projectile.create((Entity) null, null, 88, 40, 36, 52, 75, 15, 11), new Graphics(89, 96), Runes.FIRE_RUNE.getItem(5), Runes.DEATH_RUNE.getItem(1));
+		super(SpellType.IBANS_BLAST, SpellBook.MODERN, 50, 60.5, Sounds.FIREWAVE_CAST_AND_FIRE_162, Sounds.FIREWAVE_HIT_163, new Animation(708, Priority.HIGH), new Graphics(87, 96), Projectile.create((Entity) null, null, 88, 40, 36, 52, 75, 15, 11), new Graphics(89, 96), Runes.FIRE_RUNE.getItem(5), Runes.DEATH_RUNE.getItem(1));
 	}
 
 	@Override

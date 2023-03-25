@@ -13,6 +13,7 @@ import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
 /**
  * Represents the water spells.
@@ -117,10 +118,10 @@ public final class WaterSpell extends CombatSpell {
 
 	@Override
 	public Plugin<SpellType> newInstance(SpellType type) throws Throwable {
-		SpellBook.MODERN.register(4, new WaterSpell(SpellType.STRIKE, 5, 7.5, 211, STRIKE_START, STRIKE_PROJECTILE, STRIKE_END, Runes.MIND_RUNE.getItem(1), Runes.WATER_RUNE.getItem(1), Runes.AIR_RUNE.getItem(1)));
-		SpellBook.MODERN.register(14, new WaterSpell(SpellType.BOLT, 23, 16.5, 209, BOLT_START, BOLT_PROJECTILE, BOLT_END, Runes.CHAOS_RUNE.getItem(1), Runes.WATER_RUNE.getItem(2), Runes.AIR_RUNE.getItem(2)));
-		SpellBook.MODERN.register(27, new WaterSpell(SpellType.BLAST, 47, 28.5, 207, BLAST_START, BLAST_PROJECTILE, BLAST_END, Runes.DEATH_RUNE.getItem(1), Runes.WATER_RUNE.getItem(3), Runes.AIR_RUNE.getItem(3)));
-		SpellBook.MODERN.register(48, new WaterSpell(SpellType.WAVE, 65, 37.5, 213, WAVE_START, WAVE_PROJECTILE, WAVE_END, Runes.BLOOD_RUNE.getItem(1), Runes.WATER_RUNE.getItem(7), Runes.AIR_RUNE.getItem(5)));
+		SpellBook.MODERN.register(4, new WaterSpell(SpellType.STRIKE, 5, 7.5, Sounds.WATERSTRIKE_CAST_AND_FIRE_211, STRIKE_START, STRIKE_PROJECTILE, STRIKE_END, Runes.MIND_RUNE.getItem(1), Runes.WATER_RUNE.getItem(1), Runes.AIR_RUNE.getItem(1)));
+		SpellBook.MODERN.register(14, new WaterSpell(SpellType.BOLT, 23, 16.5, Sounds.WATERBOLT_CAST_AND_FIRE_209, BOLT_START, BOLT_PROJECTILE, BOLT_END, Runes.CHAOS_RUNE.getItem(1), Runes.WATER_RUNE.getItem(2), Runes.AIR_RUNE.getItem(2)));
+		SpellBook.MODERN.register(27, new WaterSpell(SpellType.BLAST, 47, 28.5, Sounds.WATERBLAST_CAST_AND_FIRE_207, BLAST_START, BLAST_PROJECTILE, BLAST_END, Runes.DEATH_RUNE.getItem(1), Runes.WATER_RUNE.getItem(3), Runes.AIR_RUNE.getItem(3)));
+		SpellBook.MODERN.register(48, new WaterSpell(SpellType.WAVE, 65, 37.5, Sounds.WATERWAVE_CAST_AND_FIRE_213, WAVE_START, WAVE_PROJECTILE, WAVE_END, Runes.BLOOD_RUNE.getItem(1), Runes.WATER_RUNE.getItem(7), Runes.AIR_RUNE.getItem(5)));
 		return this;
 	}
 

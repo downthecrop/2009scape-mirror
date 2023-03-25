@@ -13,6 +13,7 @@ import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
 /**
  * Represents the combat spell plugin used to handle air spells.
@@ -117,10 +118,10 @@ public final class AirSpell extends CombatSpell {
 
 	@Override
 	public Plugin<SpellType> newInstance(SpellType type) throws Throwable {
-		SpellBook.MODERN.register(1, new AirSpell(SpellType.STRIKE, 1, 5.5, 220, STRIKE_START, STRIKE_PROJECTILE, STRIKE_END, Runes.MIND_RUNE.getItem(1), Runes.AIR_RUNE.getItem(1)));
-		SpellBook.MODERN.register(10, new AirSpell(SpellType.BOLT, 17, 13.5, 218, BOLT_START, BOLT_PROJECTILE, BOLT_END, Runes.CHAOS_RUNE.getItem(1), Runes.AIR_RUNE.getItem(2)));
-		SpellBook.MODERN.register(24, new AirSpell(SpellType.BLAST, 41, 25.5, 216, BLAST_START, BLAST_PROJECTILE, BLAST_END, Runes.DEATH_RUNE.getItem(1), Runes.AIR_RUNE.getItem(3)));
-		SpellBook.MODERN.register(45, new AirSpell(SpellType.WAVE, 62, 36.0, 222, WAVE_START, WAVE_PROJECTILE, WAVE_END, Runes.BLOOD_RUNE.getItem(1), Runes.AIR_RUNE.getItem(5)));
+		SpellBook.MODERN.register(1, new AirSpell(SpellType.STRIKE, 1, 5.5, Sounds.WINDSTRIKE_CAST_AND_FIRE_220, STRIKE_START, STRIKE_PROJECTILE, STRIKE_END, Runes.MIND_RUNE.getItem(1), Runes.AIR_RUNE.getItem(1)));
+		SpellBook.MODERN.register(10, new AirSpell(SpellType.BOLT, 17, 13.5, Sounds.WINDBOLT_CAST_AND_FIRE_218, BOLT_START, BOLT_PROJECTILE, BOLT_END, Runes.CHAOS_RUNE.getItem(1), Runes.AIR_RUNE.getItem(2)));
+		SpellBook.MODERN.register(24, new AirSpell(SpellType.BLAST, 41, 25.5, Sounds.WINDBLAST_CAST_AND_FIRE_216, BLAST_START, BLAST_PROJECTILE, BLAST_END, Runes.DEATH_RUNE.getItem(1), Runes.AIR_RUNE.getItem(3)));
+		SpellBook.MODERN.register(45, new AirSpell(SpellType.WAVE, 62, 36.0, Sounds.WINDWAVE_CAST_AND_FIRE_222, WAVE_START, WAVE_PROJECTILE, WAVE_END, Runes.BLOOD_RUNE.getItem(1), Runes.AIR_RUNE.getItem(5)));
 		return this;
 	}
 }

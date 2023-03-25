@@ -13,6 +13,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
 /**
  * Handles the fire spells.
@@ -118,10 +119,10 @@ public final class FireSpell extends CombatSpell {
 
 	@Override
 	public Plugin<SpellType> newInstance(SpellType type) throws Throwable {
-		SpellBook.MODERN.register(8, new FireSpell(SpellType.STRIKE, 13, 11.5, 160, STRIKE_START, STRIKE_PROJECTILE, STRIKE_END, Runes.MIND_RUNE.getItem(1), Runes.FIRE_RUNE.getItem(3), Runes.AIR_RUNE.getItem(2)));
-		SpellBook.MODERN.register(20, new FireSpell(SpellType.BOLT, 35, 22.5, 157, BOLT_START, BOLT_PROJECTILE, BOLT_END, Runes.CHAOS_RUNE.getItem(1), Runes.FIRE_RUNE.getItem(4), Runes.AIR_RUNE.getItem(3)));
-		SpellBook.MODERN.register(38, new FireSpell(SpellType.BLAST, 59, 34.5, 155, BLAST_START, BLAST_PROJECTILE, BLAST_END, Runes.DEATH_RUNE.getItem(1), Runes.FIRE_RUNE.getItem(5), Runes.AIR_RUNE.getItem(4)));
-		SpellBook.MODERN.register(55, new FireSpell(SpellType.WAVE, 75, 42.5, 162, WAVE_START, WAVE_PROJECTILE, WAVE_END, Runes.BLOOD_RUNE.getItem(1), Runes.FIRE_RUNE.getItem(7), Runes.AIR_RUNE.getItem(5)));
+		SpellBook.MODERN.register(8, new FireSpell(SpellType.STRIKE, 13, 11.5, Sounds.FIRESTRIKE_CAST_AND_FIRE_160, STRIKE_START, STRIKE_PROJECTILE, STRIKE_END, Runes.MIND_RUNE.getItem(1), Runes.FIRE_RUNE.getItem(3), Runes.AIR_RUNE.getItem(2)));
+		SpellBook.MODERN.register(20, new FireSpell(SpellType.BOLT, 35, 22.5, Sounds.FIREBOLT_CAST_AND_FIRE_157, BOLT_START, BOLT_PROJECTILE, BOLT_END, Runes.CHAOS_RUNE.getItem(1), Runes.FIRE_RUNE.getItem(4), Runes.AIR_RUNE.getItem(3)));
+		SpellBook.MODERN.register(38, new FireSpell(SpellType.BLAST, 59, 34.5, Sounds.FIREBLAST_CAST_AND_FIRE_155, BLAST_START, BLAST_PROJECTILE, BLAST_END, Runes.DEATH_RUNE.getItem(1), Runes.FIRE_RUNE.getItem(5), Runes.AIR_RUNE.getItem(4)));
+		SpellBook.MODERN.register(55, new FireSpell(SpellType.WAVE, 75, 42.5, Sounds.FIREWAVE_CAST_AND_FIRE_162, WAVE_START, WAVE_PROJECTILE, WAVE_END, Runes.BLOOD_RUNE.getItem(1), Runes.FIRE_RUNE.getItem(7), Runes.AIR_RUNE.getItem(5)));
 		return this;
 	}
 

@@ -15,6 +15,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
 /**
  * Handles the crumble undead spell.
@@ -28,7 +29,7 @@ public final class CrumbleUndead extends CombatSpell {
 	 * Constructs a new {@code CrumbleUndead} {@code Object}.
 	 */
 	public CrumbleUndead() {
-		super(SpellType.CRUMBLE_UNDEAD, SpellBook.MODERN, 39, 24.5, 122, 123, new Animation(724, Priority.HIGH), new Graphics(145, 96), Projectile.create((Entity) null, null, 146, 40, 36, 52, 75, 15, 11), new Graphics(147, 96), Runes.EARTH_RUNE.getItem(2), Runes.AIR_RUNE.getItem(2), Runes.CHAOS_RUNE.getItem(1));
+		super(SpellType.CRUMBLE_UNDEAD, SpellBook.MODERN, 39, 24.5, Sounds.CRUMBLE_CAST_AND_FIRE_122, Sounds.CRUMBLE_HIT_124, new Animation(724, Priority.HIGH), new Graphics(145, 96), Projectile.create((Entity) null, null, 146, 40, 36, 52, 75, 15, 11), new Graphics(147, 96), Runes.EARTH_RUNE.getItem(2), Runes.AIR_RUNE.getItem(2), Runes.CHAOS_RUNE.getItem(1));
 	}
 
 	@Override

@@ -13,6 +13,7 @@ import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
+import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
@@ -20,6 +21,7 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import org.rs09.consts.Items;
+import org.rs09.consts.Sounds;
 
 /**
  * Handles the god spells.
@@ -103,8 +105,8 @@ public final class GodSpells extends CombatSpell {
 	 * @param end the end.
 	 * @param runes the runes.
 	 */
-	private GodSpells(SpellType type, int sound, Graphics start, Projectile projectile, Graphics end, Item... runes) {
-		super(type, SpellBook.MODERN, 60, 35.0, -1, -1, ANIMATION, start, projectile, end, runes);
+	private GodSpells(SpellType type, int sound, int impactAudio, Graphics start, Projectile projectile, Graphics end, Item... runes) {
+		super(type, SpellBook.MODERN, 60, 35.0, sound, impactAudio, ANIMATION, start, projectile, end, runes);
 	}
 
     private int getSpellIndex() {
@@ -176,7 +178,6 @@ public final class GodSpells extends CombatSpell {
 			}
 		}
 	}
-
 	@Override
 	public void visualizeImpact(Entity entity, Entity target, BattleState state) {
 		if (entity instanceof Player) {
@@ -188,8 +189,22 @@ public final class GodSpells extends CombatSpell {
 					p.sendMessage("You can now cast " + NAMES[index] + " outside the Arena.");
 				}
 			}
+			if (state.getEstimatedHit() == -1) {
+				target.graphics(SPLASH_GRAPHIC);
+				if (projectile == SARA_PROJECTILE) {
+					sendAudio(target, new Audio(Sounds.SARADOMIN_STRIKE_FAIL_1656, 1, 20));
+				}
+				if (projectile == GUTHIX_PROJECTILE) {
+					sendAudio(target, new Audio(Sounds.CLAWS_OF_GUTHIX_FAIL_1652, 1, 20));
+				}
+				if (projectile == ZAM_PROJECTILE) {
+					sendAudio(target, new Audio(Sounds.FLAMES_OF_ZAMORAK_FAIL_1654, 1, 20));
+				}
+				return;
+			}
 		}
-		super.visualizeImpact(entity, target, state);
+		target.graphics(endGraphic);
+		sendAudio(entity, new Audio(impactAudio, 1));
 	}
 
 	@Override
@@ -199,9 +214,9 @@ public final class GodSpells extends CombatSpell {
 
 	@Override
 	public Plugin<SpellType> newInstance(SpellType type) throws Throwable {
-		SpellBook.MODERN.register(41, new GodSpells(SpellType.GOD_STRIKE, -1, SARA_START, SARA_PROJECTILE, SARA_END, Runes.BLOOD_RUNE.getItem(2), Runes.FIRE_RUNE.getItem(2), Runes.AIR_RUNE.getItem(4)));
-		SpellBook.MODERN.register(42, new GodSpells(SpellType.GOD_STRIKE, -1, GUTHIX_START, GUTHIX_PROJECTILE, GUTHIX_END, Runes.BLOOD_RUNE.getItem(2), Runes.FIRE_RUNE.getItem(1), Runes.AIR_RUNE.getItem(4)));
-		SpellBook.MODERN.register(43, new GodSpells(SpellType.GOD_STRIKE, -1, ZAM_START, ZAM_PROJECTILE, ZAM_END, Runes.BLOOD_RUNE.getItem(2), Runes.FIRE_RUNE.getItem(4), Runes.AIR_RUNE.getItem(1)));
+		SpellBook.MODERN.register(41, new GodSpells(SpellType.GOD_STRIKE, -1, Sounds.SARADOMIN_STRIKE_1659, SARA_START, SARA_PROJECTILE, SARA_END, Runes.BLOOD_RUNE.getItem(2), Runes.FIRE_RUNE.getItem(2), Runes.AIR_RUNE.getItem(4)));
+		SpellBook.MODERN.register(42, new GodSpells(SpellType.GOD_STRIKE, -1, Sounds.CLAWS_OF_GUTHIX_1653, GUTHIX_START, GUTHIX_PROJECTILE, GUTHIX_END, Runes.BLOOD_RUNE.getItem(2), Runes.FIRE_RUNE.getItem(1), Runes.AIR_RUNE.getItem(4)));
+		SpellBook.MODERN.register(43, new GodSpells(SpellType.GOD_STRIKE, -1, Sounds.FLAMES_OF_ZAMORAK_1655, ZAM_START, ZAM_PROJECTILE, ZAM_END, Runes.BLOOD_RUNE.getItem(2), Runes.FIRE_RUNE.getItem(4), Runes.AIR_RUNE.getItem(1)));
 		return this;
 	}
 

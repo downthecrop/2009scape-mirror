@@ -15,6 +15,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
 /**
  * Handles the teleport other spells.
@@ -50,7 +51,7 @@ public final class TeleotherSpells extends MagicSpell {
 	 * @param runes The runes required.
 	 */
 	public TeleotherSpells(int level, double experience, String destination, Location location, Item... runes) {
-		super(SpellBook.MODERN, level, experience, Animation.create(1818), Graphics.create(343), new Audio(199, 0, 0), runes);
+		super(SpellBook.MODERN, level, experience, Animation.create(1818), Graphics.create(343), new Audio(Sounds.TELE_OTHER_CAST_199, 1, 0), runes);
 		this.destination = destination;
 		this.location = location;
 	}

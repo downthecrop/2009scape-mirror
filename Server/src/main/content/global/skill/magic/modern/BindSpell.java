@@ -16,6 +16,7 @@ import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
 /**
  * Represents the binding combat spell.
@@ -95,8 +96,8 @@ public final class BindSpell extends CombatSpell {
 	 * @param end the end.
 	 * @param runes the runes.
 	 */
-	private BindSpell(SpellType type, int level, double baseExperience, int sound, Graphics start, Projectile projectile, Graphics end, Item... runes) {
-		super(type, SpellBook.MODERN, level, baseExperience, sound, -1, ANIMATION, start, projectile, end, runes);
+	private BindSpell(SpellType type, int level, double baseExperience, int sound, int impactAudio, Graphics start, Projectile projectile, Graphics end, Item... runes) {
+		super(type, SpellBook.MODERN, level, baseExperience, sound, impactAudio, ANIMATION, start, projectile, end, runes);
 	}
 
 	@Override
@@ -137,9 +138,9 @@ public final class BindSpell extends CombatSpell {
         // TODO: bind/snare/entangle have separate casting and onhit components 
         // to their sound effects, in order for splashes to sound distinct, currently 
         // these just sound like the spells should on success, even if they splash
-		SpellBook.MODERN.register(12, new BindSpell(SpellType.BIND, 20, 30.0, 101, BIND_START, BIND_PROJECTILE, BIND_END, Runes.NATURE_RUNE.getItem(2), Runes.EARTH_RUNE.getItem(3), Runes.WATER_RUNE.getItem(3)));
-		SpellBook.MODERN.register(30, new BindSpell(SpellType.SNARE, 50, 60.0, 186, SNARE_START, SNARE_PROJECTILE, SNARE_END, Runes.NATURE_RUNE.getItem(3), Runes.EARTH_RUNE.getItem(4), Runes.WATER_RUNE.getItem(4)));
-		SpellBook.MODERN.register(56, new BindSpell(SpellType.ENTANGLE, 79, 89.0, 152, ENTANGLE_START, ENTANGLE_PROJECTILE, ENTANGLE_END, Runes.NATURE_RUNE.getItem(4), Runes.EARTH_RUNE.getItem(5), Runes.WATER_RUNE.getItem(5)));
+		SpellBook.MODERN.register(12, new BindSpell(SpellType.BIND, 20, 30.0, Sounds.BIND_CAST_101, Sounds.BIND_IMPACT_99, BIND_START, BIND_PROJECTILE, BIND_END, Runes.NATURE_RUNE.getItem(2), Runes.EARTH_RUNE.getItem(3), Runes.WATER_RUNE.getItem(3)));
+		SpellBook.MODERN.register(30, new BindSpell(SpellType.SNARE, 50, 60.0, Sounds.SNARE_CAST_AND_FIRE_3003, Sounds.SNARE_IMPACT_3002, SNARE_START, SNARE_PROJECTILE, SNARE_END, Runes.NATURE_RUNE.getItem(3), Runes.EARTH_RUNE.getItem(4), Runes.WATER_RUNE.getItem(4)));
+		SpellBook.MODERN.register(56, new BindSpell(SpellType.ENTANGLE, 79, 89.0, Sounds.ENTANGLE_CAST_AND_FIRE_151, Sounds.ENTANGLE_HIT_153, ENTANGLE_START, ENTANGLE_PROJECTILE, ENTANGLE_END, Runes.NATURE_RUNE.getItem(4), Runes.EARTH_RUNE.getItem(5), Runes.WATER_RUNE.getItem(5)));
 		return this;
 	}
 
