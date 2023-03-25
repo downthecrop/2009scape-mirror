@@ -12,6 +12,7 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
 
 /**
  * Represents the plugin used to shear a sheep.
@@ -37,6 +38,7 @@ public final class SheepShearPlugin extends OptionHandler {
 		final NPC sheep = (NPC) node;
 		if (sheep.getId() == 3579) {
 			player.animate(ANIMATION);
+			player.getAudioManager().send(Sounds.PENGUINSHEEP_ESCAPE_686);
 			player.getPacketDispatch().sendMessage("The... whatever it is... manages to get away from you!");
 			sheep.animate(Animation.create(3570));
 			sheep.moveStep();
@@ -61,6 +63,7 @@ public final class SheepShearPlugin extends OptionHandler {
 		if (random != 4) {
 			sheep.getLocks().lockMovement(2);
 			sheep.transform(5153);
+			player.getAudioManager().send(Sounds.SHEAR_SHEEP_761);
 			player.getPacketDispatch().sendMessage("You get some wool.");
 			player.getInventory().add(new Item(1737, 1));// 5160
 			GameWorld.getPulser().submit(new Pulse(80, sheep) {

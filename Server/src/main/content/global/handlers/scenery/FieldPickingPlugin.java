@@ -16,6 +16,7 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
 
 /**
  * Handles the pick option of interactive scenery (non-farming cabbages,
@@ -64,6 +65,7 @@ public final class FieldPickingPlugin extends OptionHandler {
 		player.lock(1);
 		player.setAttribute("delay:picking", GameWorld.getTicks() + (plant == PickingPlant.FLAX ? 2 : 3));
 		player.animate(ANIMATION);
+		player.getAudioManager().send(Sounds.PICK_2581,10, 30);
 		if (plant.name().startsWith("NETTLES") && (player.getEquipment().get(EquipmentContainer.SLOT_HANDS) == null || player.getEquipment().get(EquipmentContainer.SLOT_HANDS) != null && !player.getEquipment().get(EquipmentContainer.SLOT_HANDS).getName().contains("glove"))) {
 			player.getPacketDispatch().sendMessage("You have been stung by the nettles!");
 			player.getImpactHandler().manualHit(player, 2, HitsplatType.POISON);

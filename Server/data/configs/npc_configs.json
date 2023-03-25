@@ -3106,6 +3106,7 @@
     "examine": "He jumps out and attacks people.",
     "melee_animation": "422",
     "range_animation": "0",
+    "combat_audio": "511,513,512",
     "respawn_delay": "60",
     "defence_animation": "0",
     "weakness": "9",
@@ -33379,6 +33380,7 @@
     "examine": "White and shaggy.",
     "melee_animation": "5338",
     "range_animation": "0",
+    "combat_audio": "757,759,758",
     "attack_speed": "5",
     "respawn_delay": "60",
     "defence_animation": "0",
@@ -44252,6 +44254,7 @@
   {
     "examine": "White and shaggy.",
     "melee_animation": "5338",
+    "combat_audio": "757,759,758",
     "attack_speed": "5",
     "respawn_delay": "60",
     "defence_animation": "5337",
