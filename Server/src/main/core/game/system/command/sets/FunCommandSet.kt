@@ -181,6 +181,11 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
             })
 
         }
+
+        define("appearance", Privilege.ADMIN, "", "Allows you to change your appearance."){ player, _ ->
+            CharacterDesign.reopen(player)
+        }
+
     }
 
     fun bury(player: Player){

@@ -150,6 +150,23 @@ public final class CharacterDesign {
 		player.getConfigManager().set(1262, player.getAppearance().isMale());
 	}
 
+	public static void reopen(final Player player) {
+		player.removeAttribute("char-design:accepted");
+		player.getPacketDispatch().sendPlayerOnInterface(771, 79);
+		player.getPacketDispatch().sendAnimationInterface(9806, 771, 79);
+		Component c = player.getInterfaceManager().openComponent(771);
+		if (c != null) {
+			c.setCloseEvent((player1, c1) -> { // Unclosable!
+				return player1.getAttribute("char-design:accepted", false);
+			});
+		}
+		player.getPacketDispatch().sendInterfaceConfig(771, 22, false);
+		player.getPacketDispatch().sendInterfaceConfig(771, 92, false);
+		player.getPacketDispatch().sendInterfaceConfig(771, 97, false);
+		player.getConfigManager().set(1262, player.getAppearance().isMale());
+	}
+
+
 	/**
 	 * Handles the buttons.
 	 */
