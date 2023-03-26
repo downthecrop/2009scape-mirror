@@ -15,7 +15,9 @@ import kotlin.concurrent.schedule
 class ImmerseWorld : StartupListener {
 
     override fun startup() {
-        spawnBots()
+        if(GameWorld.settings?.max_adv_bots!! > 0) {
+            spawnBots()
+        }
     }
 
     companion object {

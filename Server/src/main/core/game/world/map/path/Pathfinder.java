@@ -4,6 +4,7 @@ import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.item.GroundItem;
 import core.game.node.scenery.Scenery;
+import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 
@@ -72,6 +73,20 @@ public abstract class Pathfinder {
 	 * The north-east direction flag.
 	 */
 	public static final int NORTH_EAST_FLAG = NORTH_FLAG | EAST_FLAG;
+
+    public static int flagForDirection(Direction d) {
+        switch(d) {
+            case NORTH_WEST: return NORTH_WEST_FLAG;
+            case NORTH: return NORTH_FLAG;
+            case NORTH_EAST: return NORTH_EAST_FLAG;
+            case WEST: return WEST_FLAG;
+            case EAST: return EAST_FLAG;
+            case SOUTH_WEST: return SOUTH_WEST_FLAG;
+            case SOUTH: return SOUTH_FLAG;
+            case SOUTH_EAST: return SOUTH_EAST_FLAG;
+            default: return 0;
+        }
+    }
 
 	/**
 	 * Finds a path from the location to the end location.

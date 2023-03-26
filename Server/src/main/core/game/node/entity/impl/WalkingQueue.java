@@ -12,7 +12,7 @@ import core.tools.Log;
 import core.tools.SystemLogger;
 
 import java.util.Deque;
-import java.util.LinkedList;
+import java.util.ArrayDeque;
 
 import static core.api.ContentAPIKt.log;
 
@@ -25,7 +25,7 @@ public final class WalkingQueue {
 	/**
 	 * The walking queue.
 	 */
-	private final Deque<Point> walkingQueue = new LinkedList<Point>();
+	private final Deque<Point> walkingQueue = new ArrayDeque<Point>();
 
 	/**
 	 * The entity.

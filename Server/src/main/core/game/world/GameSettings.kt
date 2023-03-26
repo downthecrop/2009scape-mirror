@@ -82,6 +82,7 @@ class GameSettings
         var enable_doubling_money_scammers: Boolean,
         var wild_pvp_enabled: Boolean,
         var jad_practice_enabled: Boolean,
+        var smartpathfinder_bfs: Boolean,
 
         /**"Lobby" interface
          * The message of the week models to display
@@ -136,6 +137,7 @@ class GameSettings
             val enable_doubling_money_scammers = if(data.containsKey("enable_doubling_money_scammers")) data["enable_doubling_money_scammers"] as Boolean else false
             val wild_pvp_enabled = if(data.containsKey("wild_pvp_enabled")) data["wild_pvp_enabled"] as Boolean else true
             val jad_practice_enabled = if(data.containsKey("jad_practice_enabled")) data["jad_practice_enabled"] as Boolean else true
+            val smartpathfinder_bfs = if(data.containsKey("smartpathfinder_bfs")) data["smartpathfinder_bfs"] as Boolean else false
             val allow_token_purchase = data["allow_token_purchase"] as Boolean
             val message_of_the_week_identifier = data["message_of_the_week_identifier"].toString().toInt()
             val message_of_the_week_text = data["message_of_the_week_text"].toString()
@@ -165,6 +167,7 @@ class GameSettings
                     enable_doubling_money_scammers,
                     wild_pvp_enabled,
                     jad_practice_enabled,
+                    smartpathfinder_bfs,
                     message_of_the_week_identifier,
                     message_of_the_week_text
             )

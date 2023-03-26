@@ -1,5 +1,7 @@
 package core.game.world.map;
 
+import core.game.world.map.path.ClipMaskSupplier;
+
 /**
  * Represents a direction.
  * @author Emperor
@@ -252,6 +254,29 @@ public enum Direction {
 			}
 		}
 		return true;
+	}
+
+	public boolean canMoveFrom(int z, int x, int y, ClipMaskSupplier clipMaskSupplier) {
+        int dx, dy;
+        boolean ret = true;
+		for (int f : traversal) {
+            switch(f) {
+                case 0x12c0120: dx = 0; dy = 1; break; // north
+                case 0x12c0180: dx = 1; dy = 0; break; // east
+                case 0x12c01e0: dx = 1; dy = 1; break; // northeast
+                case 0x12c0102: dx = 0; dy = -1; break; // south
+                case 0x12c0183: dx = 1; dy = -1; break; // southeast
+                case 0x12c0108: dx = -1; dy = 0; break; // west
+                case 0x12c010e: dx = -1; dy = -1; break; // southwest
+                case 0x12c0138: dx = -1; dy = 1; break; // northwest
+                default: return false;
+            }
+            int flag = clipMaskSupplier.getClippingFlag(z, x+dx, y+dy);
+			if ((flag & f) != 0) {
+				ret = false;
+			}
+		}
+		return ret;
 	}
 
 	/**
