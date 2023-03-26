@@ -172,14 +172,9 @@ class NetLootDialogue(player: Player? = null): core.game.dialogue.DialoguePlugin
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val level = player.skills.getLevel(Skills.FISHING)
         when(buttonId){
-            1 -> TrawlerLoot.getLoot(level, rolls, true).forEach {
-                if(!player.bank.add(it)) GroundItemManager.create(it,player)
-            }
-            2 -> TrawlerLoot.getLoot(level, rolls, false).forEach {
-                if(!player.bank.add(it)) GroundItemManager.create(it,player)
-            }
+            1 -> TrawlerLoot.addLootAndMessage(player, level, rolls, true)
+            2 -> TrawlerLoot.addLootAndMessage(player, level, rolls, false)
         }
-        player.sendMessage(colorize("%RYour reward has been sent to your bank."))
         player.skills.addExperience(Skills.FISHING,(((0.015 * player.skills.getLevel(Skills.FISHING))) * player.skills.getLevel(Skills.FISHING)) * rolls)
         player.removeAttribute("ft-session")
         end()

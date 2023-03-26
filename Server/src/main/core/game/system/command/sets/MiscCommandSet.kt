@@ -422,7 +422,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             } else {
                 args[1].toString().toInt()
             }
-            player.bank.add(*TrawlerLoot.getLoot(player.skills.getLevel(Skills.FISHING), rolls, false).toTypedArray())
+            TrawlerLoot.addLootAndMessage(player, player.skills.getLevel(Skills.FISHING), rolls, false)
         }
 
         define("fillbank", Privilege.ADMIN, "", "Right as it says on the tin."){player,_ ->
