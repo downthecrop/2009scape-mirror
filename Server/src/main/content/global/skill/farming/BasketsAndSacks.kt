@@ -23,8 +23,7 @@ enum class BasketsAndSacks(val produceID: Int, val baseContainer: Int, val capac
         init {
             values().map { it.produceID to it }.toMap(map)
             for(b in values()){
-                b.containers.add(b.baseContainer)
-                for(i in 1 until b.capacity){
+                for(i in 0 until b.capacity){
                     map[b.baseContainer + (i * 2)] = b
                     b.containers.add(b.baseContainer + (i * 2))
                 }
