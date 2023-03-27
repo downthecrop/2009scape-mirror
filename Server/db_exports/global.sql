@@ -1,3 +1,7 @@
+CREATE DATABASE global;
+
+USE global;
+
 -- phpMyAdmin SQL Dump
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
