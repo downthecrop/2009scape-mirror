@@ -8,7 +8,7 @@ import core.game.node.item.Item;
  * Handles the box trap node.
  * @author Vexia
  */
-public final class BoxTrapNode extends TrapNode {
+public class BoxTrapNode extends TrapNode {
 
 	/**
 	 * The summoning level required.

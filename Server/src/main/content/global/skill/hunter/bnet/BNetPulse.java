@@ -73,18 +73,16 @@ public final class BNetPulse extends SkillPulse<NPC> {
 			player.sendMessage("You need a Hunter level of at least " + type.getLevel() + " in order to do that.");
 			return false;
 		}
-		if (!type.isBareHand(player)) {
-			if (type.hasWeapon(player)) {
-				player.getPacketDispatch().sendMessage("Your hands need to be free.");
-				return false;
-			} else if (!type.hasNet(player)) {
-				player.sendMessage("You need to be wielding a butterfly net to catch " + (type instanceof ImplingNode ? "implings" : "butterflies") + ".");
-				return false;
-			} else if (!type.hasJar(player)) {
-				player.getPacketDispatch().sendMessage("You need to have a" + (StringUtils.isPlusN(type.getJar().getName()) ? "n" : "") + " " + type.getJar().getName().toLowerCase() + ".");
-				return false;
-			}
-		}
+                if (type.hasWeapon(player)) {
+                        player.getPacketDispatch().sendMessage("Your hands need to be free.");
+                        return false;
+                } else if (!type.hasNet(player)) {
+                        player.sendMessage("You need to be wielding a butterfly net to catch " + (type instanceof ImplingNode ? "implings" : "butterflies") + ".");
+                        return false;
+                } else if (!type.hasJar(player)) {
+                        player.getPacketDispatch().sendMessage("You need to have a" + (StringUtils.isPlusN(type.getJar().getName()) ? "n" : "") + " " + type.getJar().getName().toLowerCase() + ".");
+                        return false;
+                }
 		if (node.isInvisible() || DeathTask.isDead(node)) {
 			return false;
 		}

@@ -263,7 +263,8 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 					player.getDialogueInterpreter().sendDialogue("Something prevents you from entering. You think the portal is offended by", "your imp boxes. They are not popular on imp and impling planes.");
 					break;
 				}
-				player.getTeleporter().send(Location.create(2591, 4320, 0), TeleportType.PURO_PURO);
+                                player.sendMessage("Puro Puro is disabled until its rewrite/bugfix update is complete.");
+				//player.getTeleporter().send(Location.create(2591, 4320, 0), TeleportType.PURO_PURO);
 				return true;
 			case 11273:
 				if (!player.getZoneMonitor().isInZone("puro puro")) {

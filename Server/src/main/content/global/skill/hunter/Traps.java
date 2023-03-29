@@ -42,7 +42,14 @@ public enum Traps {
 			new BoxTrapNode(new int[] { 5080 }, 63, 265, new Item[] { new Item(10034, 1) }, 1),
 			new BoxTrapNode(new int[] { 7012, 7014 }, 66, 400, new Item[] { new Item(12535) }, 1),
 			new BoxTrapNode(new int[] { 8654 }, 73, 315, new Item[] { new Item(14861) }, 1),
-			new BoxTrapNode(new int[] { 7010, 7011 }, 77, 726, new Item[] { new Item(12539, 1) }, 1)),
+			new BoxTrapNode(new int[] { 7010, 7011 }, 77, 0, new Item[] { new Item(12539, 1) }, 1) {
+                            @Override
+                            public boolean canCatch(TrapWrapper wrapper, final NPC npc) {
+                                //old xp: 726
+                                wrapper.getPlayer().sendMessage("Note: Giving 0 xp for grenwalls until this area and its requirements are implemented.");
+                                return super.canCatch(wrapper, npc);
+                            }
+                        }),
 	RABBIT_SNARE(new TrapSetting(10031, new int[] { 19333 }, new int[] {}, "lay", -1, Animation.create(5208), Animation.create(9726), 27)), 
 	IMP_BOX(new MagicBoxSetting(),
 			new TrapNode(new int[] { 708, 709, 1531 }, 71, 450, new int[] { -1, 19226 }, new Item[] { new Item(10027) })),

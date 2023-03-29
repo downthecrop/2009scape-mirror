@@ -27896,7 +27896,7 @@
         "maxAmount": "1"
       }
     ],
-    "ids": "1832,5750",
+    "ids": "5750",
     "description": "",
     "main": [
       {
@@ -60096,6 +60096,110 @@
         "minAmount": "1",
         "weight": "99.73",
         "id": "0",
+        "maxAmount": "1"
+      }
+    ]
+  },
+  {
+    "default": [],
+    "charm": [],
+    "ids": "1832",
+    "description": "Cave Bug (Level 6)",
+    "main": [
+      {
+        "minAmount": "8",
+        "weight": "5.0",
+        "id": "555",
+        "maxAmount": "8"
+      },
+      {
+        "minAmount": "1",
+        "weight": "5.0",
+        "id": "561",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "6",
+        "weight": "2.0",
+        "id": "557",
+        "maxAmount": "6"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "561",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "23.0",
+        "id": "14424",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "2.0",
+        "id": "235",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "2.0",
+        "id": "221",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "2.0",
+        "id": "223",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "225",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "231",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "3",
+        "weight": "8.0",
+        "id": "995",
+        "maxAmount": "3"
+      },
+      {
+        "minAmount": "1",
+        "weight": "64.0",
+        "id": "0",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "8",
+        "weight": "3.0",
+        "id": "995",
+        "maxAmount": "8"
+      },
+      {
+        "minAmount": "1",
+        "weight": "5.0",
+        "id": "36",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "3.0",
+        "id": "590",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "4527",
         "maxAmount": "1"
       }
     ]
