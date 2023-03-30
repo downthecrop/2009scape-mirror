@@ -6,6 +6,7 @@ import content.data.tables.BirdNest
 import content.global.skill.farming.FarmingPatch.Companion.forObject
 import content.global.skill.skillcapeperks.SkillcapePerks
 import content.global.skill.skillcapeperks.SkillcapePerks.Companion.isActive
+import content.region.misc.miscellania.dialogue.KjallakOnChopDialogue
 import core.api.*
 import core.cache.def.impl.ItemDefinition
 import core.game.container.impl.EquipmentContainer
@@ -14,6 +15,7 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.Clocks
 import core.game.node.Node
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.audio.Audio
@@ -27,6 +29,7 @@ import core.game.system.command.sets.STATS_LOGS
 import core.game.world.map.RegionManager
 import core.tools.RandomFunction
 import org.rs09.consts.Items
+import org.rs09.consts.NPCs
 import org.rs09.consts.Sounds
 import org.rs09.consts.Sounds.TREE_FALLING_2734
 import java.util.*
@@ -190,6 +193,12 @@ class WoodcuttingListener : InteractionListener {
     }
 
     fun checkWoodcuttingRequirements(player: Player, resource: WoodcuttingNode, node: Node): Boolean {
+        var regionId = player.location.regionId
+        if (regionId == 10300 || regionId == 10044) { //miscellania then etceteria, respectively.
+            var npc = if (regionId == 10300) NPCs.CARPENTER_KJALLAK_3916 else NPCs.LUMBERJACK_LEIF_1395
+            openDialogue(player, KjallakOnChopDialogue(), NPC(npc, player.location))
+            return false
+        }
         if (player.getSkills().getLevel(Skills.WOODCUTTING) < resource.getLevel()) {
             player.getPacketDispatch().sendMessage("You need a woodcutting level of " + resource.getLevel() + " to chop this tree.")
             return false
