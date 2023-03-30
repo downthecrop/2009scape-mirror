@@ -67,7 +67,6 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 		SceneryDefinition.forId(71).getHandlers().put("option:open", this);
 		SceneryDefinition.forId(71).getHandlers().put("option:knock-at", this);
 		SceneryDefinition.forId(72).getHandlers().put("option:knock-at", this);
-		ItemDefinition.forId(530).getHandlers().put("option:drop", this);
 		SceneryDefinition.forId(62).getHandlers().put("option:smash", this);
 		return this;
 	}
@@ -126,24 +125,6 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 				}
 			} else {
 				DoorActionHandler.handleAutowalkDoor(player, node.asScenery());
-			}
-			return true;
-		case 530:
-			if (player.getLocation().equals(new Location(2780, 3515, 0)) && quest.getStage(player) == 80) {
-				if (player.getInventory().contains(32, 1) && player.getAttribute("thrantax_npc") == null) {
-					ForceMovement.run(player, player.getLocation().transform(-2, 0, 0)).setDirection(Direction.EAST);
-					NPC npc = new ThrantaxNPC(player, Location.create(2780, 3515, 0));
-					npc.init();
-					npc.setRespawn(false);
-					player.setAttribute("thrantax_npc", npc);
-					npc.setAttribute("thrantax_owner", player.getUsername());
-					player.getDialogueInterpreter().open("thrantax_dialogue", 34, 248);
-				} else {
-					player.getDialogueInterpreter().sendDialogue("You'll need to light the black candle before the spirit", "will appear.");
-				}
-				return true;
-			} else {
-				DropListener.drop(player, node.asItem());
 			}
 			return true;
 		case 40026:
@@ -484,68 +465,6 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 		@Override
 		public void init() {
 			super.init();
-		}
-
-		@Override
-		public void clear() {
-			super.clear();
-			player.getHintIconManager().clear();
-		}
-	}
-
-	/**
-	 * Handles the thrantax npc.
-	 * @author Vexia
-	 */
-	public final class ThrantaxNPC extends NPC {
-
-		/**
-		 * The player.
-		 */
-		private final Player player;
-
-		/**
-		 * Constructs a new {@code AnimatedArmour} {@code Object}.
-		 * @param player The player.
-		 * @param location The location to spawn.
-		 */
-		protected ThrantaxNPC(Player player, Location location) {
-			super(238, location);
-			this.player = player;
-		}
-
-		@Override
-		public boolean isHidden(final Player player) {
-			if (player.getQuestRepository().getQuest("Merlin's Crystal").getStage(player) == 80 && this.getAttribute("thrantax_owner", "").equals(player.getUsername())) {
-				return false;
-			}
-			return true;
-		}
-
-		@Override
-		public void init() {
-			super.init();
-		}
-
-		@Override
-		public void handleTickActions() {
-			if (player != null && !player.isActive() || player != null && !player.getLocation().withinDistance(getLocation(), 20)) {
-				clear();
-			}
-			super.handleTickActions();
-		}
-
-		@Override
-		public void finalizeDeath(Entity entity) {
-			if (entity instanceof Player) {
-				Player p = entity.asPlayer();
-				super.finalizeDeath(p);
-			}
-		}
-
-		@Override
-		public boolean canAttack(Entity entity) {
-			return getAttribute("thrantax_owner", entity) == entity;
 		}
 
 		@Override
