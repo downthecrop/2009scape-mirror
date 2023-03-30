@@ -22,7 +22,8 @@ public final class KittenInteractDialogue extends DialoguePlugin {
 	/**
 	 * Represents the animation to use.
 	 */
-	private static final Animation ANIMATION = new Animation(827);
+	private static final Animation PLAYER_STROKE_ANIMATION = new Animation(9224);
+	private static final Animation KITTEN_STROKE_ANIMATION = new Animation(9173);
 
 	/**
 	 * Constructs a new {@code KittenInterfactDialogue} {@code Object}.
@@ -59,7 +60,9 @@ public final class KittenInteractDialogue extends DialoguePlugin {
 		case 0:
 			switch (buttonId) {
 			case 1:// stroke
-				player.animate(ANIMATION);
+				player.getFamiliarManager().getFamiliar().face(player);
+				player.animate(PLAYER_STROKE_ANIMATION);
+				player.getFamiliarManager().getFamiliar().animate(KITTEN_STROKE_ANIMATION);
 				player.getFamiliarManager().getFamiliar().sendChat("Purr...purr...");
 				interpreter.sendDialogues(player, null, "That cat sure loves to be stroked.");
 				stage = 99;
