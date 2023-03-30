@@ -268,16 +268,20 @@ public class Region {
 		}
 	}
 
+        public boolean flagInactive(boolean force) {
+            if (unload(this, force)) {
+                active = false;
+                return true;
+            } else {
+                return false;
+            }
+        }
+
 	/**
 	 * Flags the region as inactive.
 	 */
-	protected boolean flagInactive() {
-		if(unload(this)) {
-            active = false;
-            return true;
-        } else {
-            return false;
-        }
+	public boolean flagInactive() {
+            return flagInactive(false);
 	}
 
 	/**
@@ -341,18 +345,22 @@ public class Region {
 		}
 	}
 
+        public static boolean unload(Region r) {
+            return unload(r, false);
+        }
+
 	/**
 	 * Unloads a region.
 	 * @param r The region.
 	 */
-	private static boolean unload(Region r) {
-		if (r.isViewed()) {
+	public static boolean unload(Region r, boolean force) {
+		if (!force && r.isViewed()) {
 			log(CommunicationInfo.class, Log.ERR, "Players viewing region!");
 			r.flagActive();
 			return false;
 		}
 		for (RegionPlane p : r.planes) {
-			if (!p.getPlayers().isEmpty()) {
+			if (!force && !p.getPlayers().isEmpty()) {
 				log(CommunicationInfo.class, Log.ERR, "Players still in region!");
 				r.flagActive();
 				return false;
@@ -366,6 +374,7 @@ public class Region {
 				}
 			}
 		}
+                r.activityPulse.stop();
         return true;
 	}
 

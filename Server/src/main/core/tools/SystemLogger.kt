@@ -4,7 +4,8 @@ import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.terminal.*
 import com.google.protobuf.ByteString.Output
 import core.ServerConstants
-import core.api.log
+import core.game.world.GameWorld
+import core.api.*
 import java.io.OutputStream
 import java.io.PrintStream
 import java.text.SimpleDateFormat
@@ -27,6 +28,13 @@ object SystemLogger {
     @JvmStatic
     fun processLogEntry(clazz: Class<*>, log: Log, message: String) {
         when (log) {
+            Log.DEBUG -> {
+                if (GameWorld.settings?.isDevMode != true)
+                    return
+                val msg = TextColors.cyan("${getTime()}: [${clazz.simpleName}] $message")
+                t.println(msg)
+            }
+
             Log.FINE -> {
                 if (ServerConstants.LOG_LEVEL < LogLevel.VERBOSE)
                     return
@@ -88,5 +96,6 @@ enum class Log {
     FINE,
     INFO,
     WARN,
-    ERR
+    ERR,
+    DEBUG
 }

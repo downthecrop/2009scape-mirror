@@ -64,7 +64,7 @@ public final class HouseManager {
 	/**
 	 * The house zone.
 	 */
-	private final HouseZone zone = new HouseZone(this);
+	private HouseZone zone = new HouseZone(this);
 
 	/**
 	 * The player's house rooms.
@@ -198,10 +198,6 @@ public final class HouseManager {
 		player.lock(1);
 		player.sendMessage("House location: " + houseRegion.getBaseLocation() + ", entry: " + getEnterLocation());
 		player.getProperties().setTeleportLocation(getEnterLocation());
-		registerLogoutListener(player, "houselogout", (p) -> {
-			p.setLocation(location.getExitLocation());
-			return Unit.INSTANCE;
-		});
 		openLoadInterface(player);
 		checkForAndSpawnServant(player);
 		updateVarbits(player, buildingMode);
@@ -254,7 +250,6 @@ public final class HouseManager {
 	 */
 	public static void leave(Player player) {
 		HouseManager house = player.getAttribute("poh_entry", player.getHouseManager());
-		clearLogoutListener(player, "houselogout");
 		if (house.getHouseRegion() == null){
 			return;
 		}
@@ -278,8 +273,7 @@ public final class HouseManager {
 			if (enable) {
 				expelGuests(player);
 			}
-			buildingMode = enable;
-			reload(player, enable);
+			enter(player, enable);
 			player.getPacketDispatch().sendMessage("Building mode is now " + (buildingMode ? "on." : "off."));
 		}
 	}
@@ -288,6 +282,7 @@ public final class HouseManager {
 	 * Reloads the house.
 	 * @param player The player.
 	 * @param buildingMode If building mode should be enabled.
+         * NOTE: I think we should avoid this method, it might be causing some issues. It's actually really suspicious...
 	 */
 	public void reload(Player player, boolean buildingMode) {
 		int diffX = player.getLocation().getLocalX();

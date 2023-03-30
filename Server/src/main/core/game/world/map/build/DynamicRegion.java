@@ -343,7 +343,7 @@ public final class DynamicRegion extends Region {
 	}
 
 	@Override
-	public boolean flagInactive() {
+	public boolean flagInactive(boolean force) {
 		if (!permanent) {
 			if (parentRegion != null && parentRegion.isActive()) {
 				parentRegion.checkInactive();
@@ -356,7 +356,7 @@ public final class DynamicRegion extends Region {
 					}
 				}
 			}
-			if(!super.flagInactive()) {
+			if(!super.flagInactive(force)) {
                 return false;
             }
 			for (RegionPlane plane : getPlanes()) {
@@ -381,7 +381,7 @@ public final class DynamicRegion extends Region {
             boolean allLinkedInactive = true;
 			if (linked != null) {
 				for (DynamicRegion r : linked) {
-					allLinkedInactive &= r.flagInactive();
+					allLinkedInactive &= r.flagInactive(force);
 				}
 			}
             return allLinkedInactive;

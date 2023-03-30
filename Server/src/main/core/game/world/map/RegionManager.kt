@@ -855,6 +855,15 @@ object RegionManager {
         }
     }
 
+    @JvmStatic
+    fun removeRegion(id: Int) {
+        if (lock.tryLock() || LOCK.tryLock(10000, TimeUnit.MILLISECONDS)) {
+            val r = REGION_CACHE.remove(id)
+            r?.flagInactive(true)
+            LOCK.unlock()
+        }
+    }
+
     /**
      * Gets the regionCache.
      * @return The regionCache.
