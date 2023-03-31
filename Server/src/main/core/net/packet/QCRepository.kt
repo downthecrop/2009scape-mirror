@@ -1,6 +1,7 @@
 package core.net.packet
 
 import content.global.skill.slayer.SlayerManager
+import core.api.*
 import core.cache.Cache
 import core.cache.def.impl.DataMap
 import core.cache.def.impl.ItemDefinition
@@ -89,7 +90,7 @@ object QCRepository {
         //My current slayer assignment is
         else if(qcString.contains("My current Slayer assignment is")){
             val amount = SlayerManager.getInstance(player!!).amount
-            val taskName = NPCDefinition.forId(SlayerManager.getInstance(player!!).task?.ids?.get(0) ?: 0).name.toLowerCase()
+            val taskName = getSlayerTask(player)?.name?.toLowerCase() ?: "None"
             if(amount ?: 0 > 0){
                 qcString = qcString.replace("complete", "$amount $taskName")
             }

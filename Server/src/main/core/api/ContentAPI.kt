@@ -1747,7 +1747,7 @@ fun getPathableRandomLocalCoordinate(target: Entity, radius: Int, center: Locati
  * @return the slayer task.
  */
 fun getSlayerTask(player: Player): Tasks? {
-    return SlayerManager.getInstance(player).task
+    return SlayerManager.getInstance(player).activeTask
 }
 
 /**
@@ -1805,7 +1805,7 @@ fun getSlayerMasterLocation(player: Player): String {
  */
 fun getSlayerTip(player: Player): Array<out String> {
     return if (hasSlayerTask(player)) {
-        SlayerManager.getInstance(player).task?.tip!!
+        getSlayerTask(player)?.tip!!
     } else {
         arrayOf("You need something new to hunt.")
     }

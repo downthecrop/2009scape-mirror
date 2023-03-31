@@ -170,6 +170,13 @@ class SlayerManager(val player: Player? = null) : LoginListener, PersistPlayer, 
             flags.setTask(task!!)
         }
 
+    var activeTask: Tasks? = null
+        get() {
+            if (hasTask()) 
+                return flags.getTask() 
+            return null
+        }
+
     var master: Master?
         get() = flags.getMaster()
         set(master) {
