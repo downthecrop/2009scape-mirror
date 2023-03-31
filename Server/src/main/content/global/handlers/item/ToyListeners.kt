@@ -22,6 +22,9 @@ class ToyListeners : InteractionListener {
         private val SNOWGLOBE_DOWNSLOW = Animation(7538) //Used when the player hit 'continue' on the interface
         private val SNOWGLOBE_STOMP = Animation(7528) //When player hits continue this animation plays
         private val SNOWGLOBE_SNOW = Graphics(1284) //When Animation STOMP is playing this gfx also plays
+        private val SPINNING_PLATE_SPIN = Animation(1902)
+        private val SPINNING_PLATE_PUT_DOWN = Animation(1904)
+        private val TOY_KITE_FLY = Animation(8990)
         val YOYO_PLAY = Animation(1457)
         val YOYO_LOOP = Animation(1458)
         val YOYO_WALK = Animation(1459)
@@ -65,6 +68,21 @@ class ToyListeners : InteractionListener {
                     openInterface(player, SNOWGLOBE_INTERFACE)
                 }
             }
+            return@on true
+        }
+
+        on(Items.SPINNING_PLATE_4613, IntType.ITEM, "spin") { player, _ ->
+            lockInteractions(player, 2)
+            animate(player, SPINNING_PLATE_SPIN)
+            runTask(player, 2) {
+                animate(player, SPINNING_PLATE_PUT_DOWN)
+            }
+            return@on true
+        }
+
+        on(Items.TOY_KITE_12844, IntType.ITEM, "fly"){ player, _ ->
+            lockInteractions(player, 2)
+            animate(player, TOY_KITE_FLY)
             return@on true
         }
 
