@@ -52,6 +52,7 @@ import core.game.ge.GrandExchangeRecords
 import core.game.interaction.InteractionListeners
 import content.global.handlers.iface.ge.StockMarket
 import content.global.skill.slayer.SlayerManager
+import content.data.consumables.*
 import core.game.activity.Cutscene
 import core.game.interaction.Clocks
 import core.game.interaction.QueueStrength
@@ -65,8 +66,10 @@ import core.game.world.GameWorld
 import core.game.world.GameWorld.Pulser
 import core.game.world.map.path.ProjectilePathfinder
 import core.game.world.repository.Repository
+import core.game.consumable.*
 import core.tools.Log
 import core.tools.tick
+import java.util.regex.*
 import kotlin.math.absoluteValue
 
 /**
@@ -2409,6 +2412,43 @@ fun modPrayerPoints(player: Player, amount: Double) {
     if(amount > 0) player.skills.incrementPrayerPoints(amount)
     else if(amount < 0) player.skills.decrementPrayerPoints(amount.absoluteValue)
     else return
+}
+
+/**
+ * Iterates a container and "decants" every potion type in the container. (Decanting is the process of condensing multiple variable-dose potions into the minimum number of max-dose potions)
+ * @param container the container to iterate
+ * @return a pair where the first element is the list of items to be removed, and the second element is the list of items to add.
+*/
+fun decantContainer (container: core.game.container.Container) : Pair<List<Item>, List<Item>> {
+    val doseCount = HashMap<Consumable,Int>()
+    val toRemove = ArrayList<Item>()
+    val toAdd = ArrayList<Item>()
+    val doseRegex = Pattern.compile("(\\([0-9]\\))") //Matches "(2)" in "Defense potion (2)"
+
+    for (item in container.toArray()) {
+        if (item == null) continue
+        val potionType = Consumables.getConsumableById(item.id)?.consumable as? Potion ?: continue
+        val matcher = doseRegex.matcher(item.name)
+        if (!matcher.find()) continue
+        val dosage = matcher.group(1).replace("(","").replace(")","").toIntOrNull() ?: continue
+        doseCount[potionType] = (doseCount[potionType] ?: 0) + dosage
+        toRemove.add(item)
+    }
+
+    for ((consumable, count) in doseCount) {
+        val maxDose = consumable.ids.size
+        val totalMaxDosePotions = count / maxDose
+        val remainderDose = count % maxDose
+        if (totalMaxDosePotions > 0)
+            toAdd.add(Item(consumable.ids[0], totalMaxDosePotions))
+        if (remainderDose > 0)
+            toAdd.add(Item(consumable.ids[consumable.ids.size - remainderDose]))
+    }
+
+    val emptyVials = toRemove.size - toAdd.sumBy { it.amount }
+    if (emptyVials > 0)
+        toAdd.add(Item(229, emptyVials))
+    return Pair<List<Item>,List<Item>>(toRemove, toAdd)
 }
 
 private class ContentAPI

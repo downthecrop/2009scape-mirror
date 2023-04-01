@@ -1,5 +1,6 @@
 package content.global.handlers.npc
 
+import core.api.*
 import content.data.consumables.Consumables
 import core.game.consumable.Potion
 import core.game.node.entity.player.Player
@@ -8,39 +9,19 @@ import core.game.dialogue.DialogueFile
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.tools.END_DIALOGUE
+import org.rs09.consts.NPCs
 
 class DecantListener : InteractionListener {
 
     override fun defineListeners() {
         on(IntType.NPC,"decant"){ player, node ->
-            decant(player)
+            val (toRemove, toAdd) = decantContainer(player.inventory)
+            for (item in toRemove)
+                removeItem(player, item)
+            for (item in toAdd)
+                addItem(player, item.id, item.amount)
             player.dialogueInterpreter.open(DecantingDialogue(),node.asNpc())
             return@on true
-        }
-    }
-
-
-    fun decant(p: Player) {
-        val potcounts = HashMap<Potion, Int>()
-        val results: List<Item>
-        for (i in 0..27) {
-            val pot = (Consumables.getConsumableById(p.inventory.getId(i)) ?: continue) as? Potion ?: continue
-            if (pot != null) {
-                val dosage = p.inventory[i].name.replace("[^\\d.]".toRegex(), "").toInt()
-                if (potcounts[pot] != null) {
-                    potcounts.replace(pot, potcounts[pot]!! + dosage)
-                } else {
-                    potcounts.putIfAbsent(pot, dosage)
-                }
-                p.inventory.remove(Item(p.inventory.getId(i)))
-            }
-        }
-        potcounts.keys.forEach{ pot: Potion ->
-            val full_count = potcounts[pot]!! / pot.ids.size
-            val partial_dose_amt = potcounts[pot]!! % pot.ids.size
-            p.inventory.add(Item(pot.ids[0], full_count))
-            if (partial_dose_amt > 0) p.inventory
-                .add(Item(pot.ids[pot.ids.size - partial_dose_amt]))
         }
     }
 
