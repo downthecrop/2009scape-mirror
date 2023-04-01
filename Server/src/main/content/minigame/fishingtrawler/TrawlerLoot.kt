@@ -31,7 +31,7 @@ object TrawlerLoot {
                 //val chance = RandomFunction.getSkillSuccessChance(lo, hi, fishLevel)
                 val chance = (fishLevel.toDouble() - 15.0)*((hi - lo) / (99.0 - 15.0)) + lo
                 if(RandomFunction.random(0.0, 1.0) < chance) {
-                    return f.item
+                    return Item(f.id)
                 }
             }
         }

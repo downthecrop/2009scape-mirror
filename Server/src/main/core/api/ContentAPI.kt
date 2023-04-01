@@ -815,6 +815,17 @@ fun findLocalNPC(entity: Entity, id: Int): NPC? {
 }
 
 /**
+ * Gets an NPC with the given ID in the same general area  as the given Entity
+ * @param location The location to search around.
+ * @param distance The maximum distance to the entity.
+ * @returns an NPC matching the given ID or null if none is found
+ */
+fun findLocalNPCs(location: Location, distance: Int): MutableList<NPC> {
+    return RegionManager.getLocalNpcs(location, distance)
+}
+
+
+/**
  * Gets a list of nearby NPCs that match the given IDs.
  * @param entity the entity to check around
  * @param ids the IDs of the NPCs to look for

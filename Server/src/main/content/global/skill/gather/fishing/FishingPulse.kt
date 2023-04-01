@@ -12,6 +12,10 @@ import content.global.skill.fishing.FishingOption
 import content.global.skill.skillcapeperks.SkillcapePerks
 import content.global.skill.skillcapeperks.SkillcapePerks.Companion.isActive
 import content.global.skill.summoning.familiar.Forager
+import core.api.addItem
+import core.api.getItemName
+import core.api.inEquipment
+import core.api.inInventory
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.map.Location
@@ -52,21 +56,21 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
         if (option == null) {
             return false
         }
-        player.debug(player.inventory.containsItem(option.tool).toString())
-        if (!player.inventory.containsItem(option.tool) && !hasBarbTail()) {
+        player.debug(inInventory(player, option.tool).toString())
+        if (!inInventory(player, option.tool) && !hasBarbTail()) {
 
-            player.dialogueInterpreter.sendDialogue("You need a " + option.tool.name.toLowerCase() + " to catch these fish.")
+            player.dialogueInterpreter.sendDialogue("You need a " + getItemName(option.tool).lowercase() + " to catch these fish.")
             stop()
             return false
         }
-        if (!option.hasBait(player.inventory)) {
-            player.dialogueInterpreter.sendDialogue("You don't have any " + option.getBaitName().toLowerCase() + "s left.")
+        if (!option.hasBait(player)) {
+            player.dialogueInterpreter.sendDialogue("You don't have any " + option.getBaitName().lowercase() + "s left.")
             stop()
             return false
         }
         if (player.skills.getLevel(Skills.FISHING) < option!!.level) {
             val f = option!!.fish[option!!.fish.size - 1]
-            player.dialogueInterpreter.sendDialogue("You need a fishing level of " + f.level + " to catch " + (if (f == Fish.SHRIMP || f == Fish.ANCHOVIE) "" else "a") + " " + f.item.name.toLowerCase() + ".".trim { it <= ' ' })
+            player.dialogueInterpreter.sendDialogue("You need a fishing level of " + f.level + " to catch " + (if (f == Fish.SHRIMP || f == Fish.ANCHOVIE) "" else "a") + " " + getItemName(f.id).lowercase() + ".".trim { it <= ' ' })
             stop()
             return false
         }
@@ -109,18 +113,18 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
             forager.handlePassiveAction()
         }
         if (success()) {
-            if (player.inventory.hasSpaceFor(fish!!.item) && option!!.removeBait(player.inventory)) {
+            if (player.inventory.hasSpaceFor(Item(fish!!.id)) && option!!.removeBait(player)) {
                 if (player.skillTasks.hasTask()) {
                     updateSkillTask()
                 }
-                player.dispatch(ResourceProducedEvent(fish!!.item.id, fish!!.item.amount, node!!))
+                player.dispatch(ResourceProducedEvent(fish!!.id, 1, node!!))
                 SkillingPets.checkPetDrop(player, SkillingPets.HERON)
-                val item = fish!!.item
+                val item = fish!!
                 if (isActive(SkillcapePerks.GREAT_AIM, player) && RandomFunction.random(100) <= 5) {
-                    player.inventory.add(item)
+                    addItem(player, item.id)
                     player.sendMessage(colorize("%RYour expert aim catches you a second fish."))
                 }
-                player.inventory.add(item)
+                addItem(player, item.id)
                 var fishCaught = player.getAttribute(STATS_BASE + ":" + STATS_FISH, 0)
                 player.setAttribute("/save:$STATS_BASE:$STATS_FISH", ++fishCaught)
                 player.skills.addExperience(Skills.FISHING, fish!!.experience, true)
@@ -174,16 +178,12 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
     }
 
     private fun isBareHanded(p: Player): Boolean {
-        if (option == FishingOption.HARPOON || option == FishingOption.N_HARPOON) {
-            if (checkFish(p) > 0 && !(player.inventory.containsItem(
-                    option.tool
-                ) || player.equipment.containsItem(option.tool) || hasBarbTail())
+        if (option == FishingOption.HARPOON || option == FishingOption.SHARK_HARPOON) {
+            if (checkFish(p) > 0 && !(inInventory(player, option.tool) || inEquipment(player, option.tool) || hasBarbTail())
             ) {
                 return true
             }
-            if (checkFish(p) > 2 && !(player.inventory.containsItem(
-                    option.tool
-                ) || player.equipment.containsItem(option.tool) || hasBarbTail())
+            if (checkFish(p) > 2 && !(inInventory(player, option.tool) || inEquipment(player, option.tool) || hasBarbTail())
             ) {
                 return true
             }
@@ -229,11 +229,9 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
      * @return `True` if so.
      */
     private fun hasBarbTail(): Boolean {
-        if (option == FishingOption.HARPOON || option == FishingOption.N_HARPOON) {
-            if (player.inventory.containsItem(FishingOption.BARB_HARPOON.tool) || player.equipment.containsItem(
-                    FishingOption.BARB_HARPOON.tool
-                )
-            ) {
+        val bh = FishingOption.BARB_HARPOON.tool
+        if (option == FishingOption.HARPOON || option == FishingOption.SHARK_HARPOON) {
+            if (inInventory(player, bh) || inEquipment(player, bh)) {
                 return true
             }
         }
@@ -242,12 +240,12 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
 
     override fun message(type: Int) {
         when (type) {
-            0 -> player.packetDispatch.sendMessage(option!!.startMessage)
+            0 -> player.packetDispatch.sendMessage(option!!.getStartMessage())
             2 -> {
                 player.packetDispatch.sendMessage(
-                    if (fish == Fish.ANCHOVIE || fish == Fish.SHRIMP) "You catch some " + fish!!.item.name.toLowerCase()
+                    if (fish == Fish.ANCHOVIE || fish == Fish.SHRIMP) "You catch some " + getItemName(fish!!.id).lowercase()
                         .replace("raw", "")
-                        .trim { it <= ' ' } + "." else "You catch a " + fish!!.item.name.toLowerCase()
+                        .trim { it <= ' ' } + "." else "You catch a " + getItemName(fish!!.id).lowercase()
                         .replace("raw", "").trim { it <= ' ' } + ".")
                 if (player.inventory.freeSlots() == 0) {
                     player.dialogueInterpreter.sendDialogue("You don't have enough space in your inventory.")
