@@ -15,11 +15,13 @@ class UseWithPatchHandler : InteractionListener {
     val SEED_DIBBER = Items.SEED_DIBBER_5343
     val SPADE = Items.SPADE_952
     val SECATEURS = Items.SECATEURS_5329
+    val MAGIC_SECATEURS = Items.MAGIC_SECATEURS_7409
     val TROWEL = Items.GARDENING_TROWEL_5325
     val pourBucketAnim = Animation(2283)
     val wateringCanAnim = Animation(2293)
     val plantCureAnim = Animation(2288)
-    val secateursAnim = Animation(7227)
+    val secateursTreeAnim = Animation(2277)
+    val magicSecateursTreeAnim = Animation(3340)
 
     @JvmField
     val allowedNodes = ArrayList<Int>()
@@ -36,13 +38,13 @@ class UseWithPatchHandler : InteractionListener {
                 RAKE -> PatchRaker.rake(player,patch)
                 SEED_DIBBER -> player.sendMessage("I should plant a seed, not the seed dibber.")
                 SPADE -> player.dialogueInterpreter.open(67984003,patch.getPatchFor(player)) //DigUpPatchDialogue.kt
-                SECATEURS -> {
+                SECATEURS, MAGIC_SECATEURS -> {
                     val p = patch.getPatchFor(player)
                     if(patch.type == PatchType.TREE) {
                         if(p.isDiseased && !p.isDead) {
                             player.pulseManager.run(object: Pulse(){
                                 override fun pulse(): Boolean {
-                                    player.animator.animate(secateursAnim)
+                                    if (usedItem.id == SECATEURS ) player.animator.animate(secateursTreeAnim) else player.animator.animate(magicSecateursTreeAnim)
                                     p.cureDisease()
                                     return true
                                 }
@@ -246,7 +248,7 @@ class UseWithPatchHandler : InteractionListener {
         for(p in Plantable.values()){
             allowedNodes.add(p.itemID)
         }
-        allowedNodes.addAll(arrayListOf(RAKE,SEED_DIBBER,SPADE,SECATEURS,TROWEL,Items.SUPERCOMPOST_6034,Items.COMPOST_6032,Items.PLANT_CURE_6036,Items.WATERING_CAN1_5333,Items.WATERING_CAN2_5334,Items.WATERING_CAN3_5335,Items.WATERING_CAN4_5336,Items.WATERING_CAN5_5337,Items.WATERING_CAN6_5338,Items.WATERING_CAN7_5339,Items.WATERING_CAN8_5340, Items.PLANT_POT_5350))
+        allowedNodes.addAll(arrayListOf(RAKE,SEED_DIBBER,SPADE,SECATEURS,MAGIC_SECATEURS,TROWEL,Items.SUPERCOMPOST_6034,Items.COMPOST_6032,Items.PLANT_CURE_6036,Items.WATERING_CAN1_5333,Items.WATERING_CAN2_5334,Items.WATERING_CAN3_5335,Items.WATERING_CAN4_5336,Items.WATERING_CAN5_5337,Items.WATERING_CAN6_5338,Items.WATERING_CAN7_5339,Items.WATERING_CAN8_5340, Items.PLANT_POT_5350))
     }
 
     private fun Int.getNext(): Int {

@@ -17,8 +17,6 @@ import org.rs09.consts.Items
 
 val livesBased = arrayOf(PatchType.HERB, PatchType.CACTUS, PatchType.BELLADONNA, PatchType.HOPS, PatchType.ALLOTMENT,PatchType.EVIL_TURNIP)
 
-val spadeAnim = Animation(830)
-
 @Initializable
 class CropHarvester : OptionHandler() {
 
@@ -41,7 +39,7 @@ class CropHarvester : OptionHandler() {
 
             return object : Pulse(0) {
                 override fun pulse(): Boolean {
-                    var reward = Item(crop, 1)
+                    var reward = Item(crop)
 
                     val familiar = player.familiarManager.familiar
                     if(familiar != null && familiar is GiantEntNPC) {
@@ -56,14 +54,14 @@ class CropHarvester : OptionHandler() {
                         else -> Items.SPADE_952
                     }
                     if(requiredItem == Items.SECATEURS_5329){
-                        if(player.inventory.contains(Items.MAGIC_SECATEURS_7409,1)){
+                        if(player.inventory.containsAtLeastOneItem(Items.MAGIC_SECATEURS_7409)){
                             requiredItem = Items.MAGIC_SECATEURS_7409
                         }
                     }
                     val anim = when(requiredItem){
                         Items.SPADE_952 -> Animation(830)
-                        Items.SECATEURS_5329 -> Animation(7227)
-                        Items.MAGIC_SECATEURS_7409 -> Animation(7228)
+                        Items.SECATEURS_5329 -> if (fPatch.type == PatchType.TREE) Animation(2277) else Animation(7227)
+                        Items.MAGIC_SECATEURS_7409 -> if (fPatch.type == PatchType.TREE) Animation(3340) else Animation(7228)
                         else -> Animation(0)
                     }
                     val sound = when(requiredItem){
