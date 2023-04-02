@@ -578,7 +578,8 @@ class ScriptAPI(private val bot: Player) {
      * @author Gexja
      */
     fun saleIsBigNews(itemID: Int, amount: Int): Boolean {
-        return ItemDefinition.forId(itemID).getAlchemyValue(true) * amount >= 500
+        return ItemDefinition.forId(itemID).getAlchemyValue(true) * amount >= (GameWorld.settings?.ge_announcement_limit
+            ?: 500)
     }
 
     /**

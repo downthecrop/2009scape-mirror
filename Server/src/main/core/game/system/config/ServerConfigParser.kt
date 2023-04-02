@@ -90,6 +90,7 @@ object ServerConfigParser {
             enable_doubling_money_scammers = data.getBoolean("world.enable_doubling_money_scammers", false),
             wild_pvp_enabled = data.getBoolean("world.wild_pvp_enabled"),
             jad_practice_enabled = data.getBoolean("world.jad_practice_enabled"),
+            ge_announcement_limit = data.getLong("world.ge_announcement_limit", 500L).toInt(),
             smartpathfinder_bfs = data.getBoolean("world.smartpathfinder_bfs", false),
             message_model = data.getString("world.motw_identifier").toInt(),
             message_string = data.getString("world.motw_text").replace("@name", ServerConstants.SERVER_NAME)
