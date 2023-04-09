@@ -60,7 +60,7 @@ public final class LeatherCraftDialogue extends DialoguePlugin {
 		if (type.equals("hard")) {
 			player.getInterfaceManager().openChatbox(309);
 			player.getPacketDispatch().sendItemZoomOnInterface(1131, 150, 309, 2);
-			player.getPacketDispatch().sendString("<br><br><br><br>" + "Heardleather body", 309, 6);
+			player.getPacketDispatch().sendString("<br><br><br><br>Hardleather body", 309, 6);
 		} else {
 			/** dragon */
 			leather = (int) args[1];
