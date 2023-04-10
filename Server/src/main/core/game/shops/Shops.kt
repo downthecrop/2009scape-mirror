@@ -52,20 +52,25 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
                 return items
             }
             stock.split('-').map {
-                val tokens = it.replace("{", "").replace("}", "").split(",".toRegex()).toTypedArray()
-                var amount = tokens[1].trim()
-                if(amount == "inf")
-                    amount = "-1"
-                val item = tokens[0].toInt()
-                if(idsInStock[item] != null) {
-                    log(this::class.java, Log.WARN,  "[SHOPS] MALFORMED STOCK IN SHOP ID $id FOR ITEM $item")
-                    items.forEach { if(it.itemId == item) {
-                        it.amount += amount.toInt()
-                        return@map
-                    }}
-                } else {
-                    items.add(ShopItem(item, amount.toInt(), tokens.getOrNull(2)?.toIntOrNull() ?: 100))
-                    idsInStock[item] = true
+                try {
+                    val tokens = it.replace("{", "").replace("}", "").split(",".toRegex()).toTypedArray()
+                    var amount = tokens[1].trim()
+                    if(amount == "inf")
+                        amount = "-1"
+                    val item = tokens[0].toInt()
+                    if(idsInStock[item] != null) {
+                        log(this::class.java, Log.WARN, "[SHOPS] MALFORMED STOCK IN SHOP ID $id FOR ITEM $item")
+                        items.forEach { if(it.itemId == item) {
+                            it.amount += amount.toInt()
+                            return@map
+                        }}
+                    } else {
+                        items.add(ShopItem(item, amount.toInt(), tokens.getOrNull(2)?.toIntOrNull() ?: 100))
+                        idsInStock[item] = true
+                    }
+                } catch (e: Exception) {
+                    log(this::class.java, Log.WARN, "[SHOPS] MALFORMED STOCK IN SHOP ID $id FOR ITEM $it")
+                    throw e
                 }
             }
             return items
@@ -215,9 +220,9 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
 
             val valueMsg = when {
                 (price.amount == -1)
-                || !def.isTradeable
-                || def.id in intArrayOf(Items.COINS_995, Items.TOKKUL_6529, Items.ARCHERY_TICKET_1464)
-                || def.hasDestroyAction()  -> "This shop will not buy that item."
+                || !def.hasShopCurrencyValue(price.id)
+                || def.id in intArrayOf(Items.COINS_995, Items.TOKKUL_6529, Items.ARCHERY_TICKET_1464, Items.CASTLE_WARS_TICKET_4067)
+                    -> "This shop will not buy that item."
                 else -> "${player.inventory[slot].name}: This shop will buy this item for ${price.amount} ${price.name.lowercase()}."
             }
 

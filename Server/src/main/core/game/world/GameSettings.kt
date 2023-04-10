@@ -84,6 +84,7 @@ class GameSettings
         var jad_practice_enabled: Boolean,
         var ge_announcement_limit: Int,
         var smartpathfinder_bfs: Boolean,
+        var enable_castle_wars: Boolean,
 
         /**"Lobby" interface
          * The message of the week models to display
@@ -140,6 +141,7 @@ class GameSettings
             val jad_practice_enabled = if(data.containsKey("jad_practice_enabled")) data["jad_practice_enabled"] as Boolean else true
             val ge_announcement_limit = data["ge_announcement_limit"].toString().toInt()
             val smartpathfinder_bfs = if(data.containsKey("smartpathfinder_bfs")) data["smartpathfinder_bfs"] as Boolean else false
+            val enable_castle_wars = if(data.containsKey("enable_castle_wars")) data["enable_castle_wars"] as Boolean else false
             val allow_token_purchase = data["allow_token_purchase"] as Boolean
             val message_of_the_week_identifier = data["message_of_the_week_identifier"].toString().toInt()
             val message_of_the_week_text = data["message_of_the_week_text"].toString()
@@ -171,6 +173,7 @@ class GameSettings
                     jad_practice_enabled,
                     ge_announcement_limit,
                     smartpathfinder_bfs,
+                    enable_castle_wars,
                     message_of_the_week_identifier,
                     message_of_the_week_text
             )

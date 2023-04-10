@@ -47,5 +47,12 @@ fun splitLines(message: String, perLineLimit: Int = 54) : Array<String> {
     }
 
     pushLine()
+
+    // If there's 5 lines, merge lines 4 and 5 into line 4.
+    if (lines.size > 4){
+        lines[3] = lines[3] + "<br>" + lines[4]
+        lines = lines.sliceArray(0..3)
+    }
+
     return lines
 }

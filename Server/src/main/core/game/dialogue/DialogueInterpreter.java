@@ -463,6 +463,7 @@ public final class DialogueInterpreter {
      */
     public Component sendDialogues(int npcId, int expression, String... messages) {
         if (messages.length < 1 || messages.length > 4) {
+            System.err.println("Invalid amount of messages: " + messages.length);
             return null;
         }
         boolean npc = npcId > -1;

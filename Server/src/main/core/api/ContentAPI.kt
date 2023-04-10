@@ -408,33 +408,33 @@ fun rewardXP(player: Player, skill: Int, amount: Double) {
 
 /**
  * Replace an object with the given revert timer
- * @param toReplace the GameObject instance we are replacing
- * @param with the ID of the GameObject we wish to replace toReplace with
- * @param for_ticks the number of ticks the object should be replaced for. Use -1 for permanent.
+ * @param toReplace the Scenery instance we are replacing
+ * @param with the ID of the Scenery we wish to replace toReplace with
+ * @param forTicks the number of ticks the object should be replaced for. Use -1 for permanent.
  * @param loc the location to move the new object to if necessary. Defaults to null.
  */
-fun replaceScenery(toReplace: Scenery, with: Int, for_ticks: Int, loc: Location? = null) {
+fun replaceScenery(toReplace: Scenery, with: Int, forTicks: Int, loc: Location? = null) {
     val newLoc = when (loc) {
         null -> toReplace.location
         else -> loc
     }
-    if (for_ticks == -1) {
+    if (forTicks == -1) {
         SceneryBuilder.replace(toReplace, toReplace.transform(with, toReplace.rotation, newLoc))
     } else {
-        SceneryBuilder.replace(toReplace, toReplace.transform(with, toReplace.rotation, newLoc), for_ticks)
+        SceneryBuilder.replace(toReplace, toReplace.transform(with, toReplace.rotation, newLoc), forTicks)
     }
     toReplace.isActive = false
 }
 
 /**
  * Replace an object with the given revert timer with the given rotation
- * @param toReplace the GameObject instance we are replacing
- * @param with the ID of the GameObject we wish to replace toReplace with
- * @param for_ticks the number of ticks the object should be replaced for. Use -1 for permanent.
+ * @param toReplace the Scenery instance we are replacing
+ * @param with the ID of the Scenery we wish to replace toReplace with
+ * @param forTicks the number of ticks the object should be replaced for. Use -1 for permanent.
  * @Param rotation the Direction of the rotation it should use. Direction.NORTH, Direction.SOUTH, etc
  * @param loc the location to move the new object to if necessary. Defaults to null.
  */
-fun replaceScenery(toReplace: Scenery, with: Int, for_ticks: Int, rotation: Direction, loc: Location? = null) {
+fun replaceScenery(toReplace: Scenery, with: Int, forTicks: Int, rotation: Direction, loc: Location? = null) {
     val newLoc = when (loc) {
         null -> toReplace.location
         else -> loc
@@ -449,10 +449,10 @@ fun replaceScenery(toReplace: Scenery, with: Int, for_ticks: Int, rotation: Dire
         Direction.SOUTH_WEST -> 5
         Direction.WEST -> 3
     }
-    if (for_ticks == -1) {
+    if (forTicks == -1) {
         SceneryBuilder.replace(toReplace, toReplace.transform(with, rot, newLoc))
     } else {
-        SceneryBuilder.replace(toReplace, toReplace.transform(with, rot, newLoc), for_ticks)
+        SceneryBuilder.replace(toReplace, toReplace.transform(with, rot, newLoc), forTicks)
     }
     toReplace.isActive = false
 }

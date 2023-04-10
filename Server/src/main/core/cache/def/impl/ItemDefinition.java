@@ -883,6 +883,35 @@ public class ItemDefinition extends Definition<Item> {
 	}
 
 	/**
+	 * Gets whether the Item has a value in a custom currency
+	 * @param currency the configuration string of the currency in the item definition
+	 * @return {@code True} if so.
+	 */
+	public boolean hasShopCurrencyValue(String currency) {
+		return getHandlers().getOrDefault(currency, "0") != "0";
+	}
+
+	/**
+	 * Gets whether shops value the Item (even if the value is 0) in a currency
+	 * @param currency the ID of the currency
+	 * @return {@code True} if so.
+	 */
+	public boolean hasShopCurrencyValue(int currency) {
+		switch (currency) {
+			case Items.COINS_995:
+				return isTradeable();
+			case Items.TOKKUL_6529:
+				return hasShopCurrencyValue(ItemConfigParser.TOKKUL_PRICE);
+			case Items.ARCHERY_TICKET_1464:
+				return hasShopCurrencyValue(ItemConfigParser.ARCHERY_TICKET_PRICE);
+			case Items.CASTLE_WARS_TICKET_4067:
+				return hasShopCurrencyValue(ItemConfigParser.CASTLE_WARS_TICKET_PRICE);
+			default:
+				return false;
+		}
+	}
+
+	/**
 	 * @return The value.
 	 */
 	public int getMaxValue() {

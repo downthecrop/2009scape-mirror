@@ -7,8 +7,10 @@ import core.plugin.Initializable
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import core.ServerConstants
+import core.api.log
 import core.game.system.command.Privilege
 import core.game.world.repository.Repository
+import core.tools.Log
 
 @Initializable
 class TeleportCommandSet : CommandSet(Privilege.ADMIN){

@@ -17,6 +17,7 @@ import org.rs09.consts.Components
 import org.rs09.consts.Items
 import core.ServerConstants
 import core.game.shops.Shops.Companion.logShop
+import core.game.system.config.ItemConfigParser
 import core.game.world.GameWorld
 import java.lang.Integer.max
 import java.lang.Integer.min
@@ -159,8 +160,9 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         val item = cont[slot]
         val price = when(currency)
         {
-            Items.TOKKUL_6529 -> item.definition.getConfiguration("tokkul_price", 1)
-            Items.ARCHERY_TICKET_1464 -> item.definition.getConfiguration("archery_ticket_price", 1)
+            Items.TOKKUL_6529 -> item.definition.getConfiguration(ItemConfigParser.TOKKUL_PRICE, 1)
+            Items.ARCHERY_TICKET_1464 -> item.definition.getConfiguration(ItemConfigParser.ARCHERY_TICKET_PRICE, 1)
+            Items.CASTLE_WARS_TICKET_4067 -> item.definition.getConfiguration(ItemConfigParser.CASTLE_WARS_TICKET_PRICE, 1)
             else -> getGPCost(Item(item.id, 1), if (isMainStock) stock[item.slot].amount else playerStock[slot].amount, if (isMainStock) item.amount else playerStock[slot].amount)
         }
 
@@ -199,8 +201,9 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
 
         val price = when(currency)
         {
-            Items.TOKKUL_6529 -> (item.definition.getConfiguration("tokkul_price", 1) / 10.0).toInt()  // selling items authentically return 10x less tokkul (floored/truncated) than the item's shop price
-            Items.ARCHERY_TICKET_1464 -> item.definition.getConfiguration("archery_ticket_price", 1)
+            Items.TOKKUL_6529 -> (item.definition.getConfiguration(ItemConfigParser.TOKKUL_PRICE, 1) / 10.0).toInt()  // selling items authentically return 10x less tokkul (floored/truncated) than the item's shop price
+            Items.ARCHERY_TICKET_1464 -> item.definition.getConfiguration(ItemConfigParser.ARCHERY_TICKET_PRICE, 1)
+            Items.CASTLE_WARS_TICKET_4067 -> item.definition.getConfiguration(ItemConfigParser.CASTLE_WARS_TICKET_PRICE, 1)
             else -> getGPSell(Item(shopItemId, 1), stockAmt, currentAmt)
         }
 

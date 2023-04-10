@@ -217,6 +217,11 @@ class ItemConfigParser {
          */
         const val ARCHERY_TICKET_PRICE = "archery_ticket_price"
 
+        /**
+         * The Castle Wars Ticket price of items (in Lanthas' shop).
+         */
+        const val CASTLE_WARS_TICKET_PRICE = "castle_wars_ticket_price"
+
     }
 
     val parser = JSONParser()
@@ -270,8 +275,9 @@ class ItemConfigParser {
                         //ints
                         "equip_audio",
                         "point_price",
-                        "tokkul_price",
-                        "archery_ticket_price",
+                        TOKKUL_PRICE,
+                        ARCHERY_TICKET_PRICE,
+                        CASTLE_WARS_TICKET_PRICE,
                         "ge_buy_limit",
                         "weapon_interface",
                         "attack_speed",

@@ -36897,7 +36897,8 @@
     "archery_ticket_price": "0",
     "id": "4068",
     "stand_turn_anim": "823",
-    "bonuses": "13,18,-2,0,0,0,3,2,0,0,0,16,0,0,0"
+    "bonuses": "13,18,-2,0,0,0,3,2,0,0,0,16,0,0,0",
+    "castle_wars_ticket_price": "5"
   },
   {
     "remove_sleeves": "true",
@@ -36907,7 +36908,8 @@
     "archery_ticket_price": "0",
     "id": "4069",
     "bonuses": "0,0,0,-30,-10,32,31,24,-6,31,5,0,0,0,0",
-    "equipment_slot": "4"
+    "equipment_slot": "4",
+    "castle_wars_ticket_price": "8"
   },
   {
     "requirements": "{1,5}",
@@ -36916,7 +36918,8 @@
     "archery_ticket_price": "0",
     "id": "4070",
     "bonuses": "0,0,0,-21,-7,17,16,15,-4,16,2,0,0,0,0",
-    "equipment_slot": "7"
+    "equipment_slot": "7",
+    "castle_wars_ticket_price": "6"
   },
   {
     "remove_head": "true",
@@ -36929,7 +36932,8 @@
     "archery_ticket_price": "0",
     "id": "4071",
     "bonuses": "0,0,0,-3,-1,7,8,6,-1,7,3,0,0,0,0",
-    "equipment_slot": "0"
+    "equipment_slot": "0",
+    "castle_wars_ticket_price": "4"
   },
   {
     "requirements": "{1,5}",
@@ -36940,7 +36944,8 @@
     "archery_ticket_price": "0",
     "id": "4072",
     "bonuses": "0,0,0,-8,-2,13,15,14,-1,14,5,0,0,0,0",
-    "equipment_slot": "5"
+    "equipment_slot": "5",
+    "castle_wars_ticket_price": "6"
   },
   {
     "examine": "Not so useful for lighting a fire.",
@@ -41189,7 +41194,8 @@
     "archery_ticket_price": "0",
     "id": "4503",
     "stand_turn_anim": "823",
-    "bonuses": "15,20,-2,0,0,0,3,2,0,0,0,22,0,0,0"
+    "bonuses": "15,20,-2,0,0,0,3,2,0,0,0,22,0,0,0",
+    "castle_wars_ticket_price": "50"
   },
   {
     "remove_sleeves": "true",
@@ -41199,7 +41205,8 @@
     "archery_ticket_price": "0",
     "id": "4504",
     "bonuses": "0,0,0,-30,-10,46,44,38,-6,44,20,0,0,0,0",
-    "equipment_slot": "4"
+    "equipment_slot": "4",
+    "castle_wars_ticket_price": "80"
   },
   {
     "requirements": "{1,20}",
@@ -41208,7 +41215,8 @@
     "archery_ticket_price": "0",
     "id": "4505",
     "bonuses": "0,0,0,-21,-7,24,22,20,-4,22,5,0,0,0,0",
-    "equipment_slot": "7"
+    "equipment_slot": "7",
+    "castle_wars_ticket_price": "60"
   },
   {
     "remove_head": "true",
@@ -41221,7 +41229,8 @@
     "archery_ticket_price": "0",
     "id": "4506",
     "bonuses": "0,0,0,-3,-1,10,11,9,-1,10,5,0,0,0,0",
-    "equipment_slot": "0"
+    "equipment_slot": "0",
+    "castle_wars_ticket_price": "40"
   },
   {
     "requirements": "{1,20}",
@@ -41232,7 +41241,8 @@
     "archery_ticket_price": "0",
     "id": "4507",
     "bonuses": "0,0,0,-8,-2,18,22,20,-1,20,20,0,0,0,0",
-    "equipment_slot": "5"
+    "equipment_slot": "5",
+    "castle_wars_ticket_price": "60"
   },
   {
     "requirements": "{0,30}",
@@ -41255,7 +41265,8 @@
     "archery_ticket_price": "0",
     "id": "4508",
     "stand_turn_anim": "823",
-    "bonuses": "20,29,-2,0,0,0,3,2,0,0,0,31,0,0,0"
+    "bonuses": "20,29,-2,0,0,0,3,2,0,0,0,31,0,0,0",
+    "castle_wars_ticket_price": "500"
   },
   {
     "remove_sleeves": "true",
@@ -41265,7 +41276,8 @@
     "archery_ticket_price": "0",
     "id": "4509",
     "bonuses": "0,0,0,-30,-10,65,63,55,-6,63,30,0,0,0,0",
-    "equipment_slot": "4"
+    "equipment_slot": "4",
+    "castle_wars_ticket_price": "800"
   },
   {
     "requirements": "{1,30}",
@@ -41274,7 +41286,8 @@
     "archery_ticket_price": "0",
     "id": "4510",
     "bonuses": "0,0,0,-21,-7,33,31,29,-4,31,10,0,0,0,0",
-    "equipment_slot": "7"
+    "equipment_slot": "7",
+    "castle_wars_ticket_price": "600"
   },
   {
     "remove_head": "true",
@@ -41287,7 +41300,8 @@
     "archery_ticket_price": "0",
     "id": "4511",
     "bonuses": "0,0,0,-3,-1,14,15,13,-1,14,6,0,0,0,0",
-    "equipment_slot": "0"
+    "equipment_slot": "0",
+    "castle_wars_ticket_price": "400"
   },
   {
     "requirements": "{1,30}",
@@ -41298,7 +41312,8 @@
     "archery_ticket_price": "0",
     "id": "4512",
     "bonuses": "0,0,0,-8,-2,27,31,29,-1,29,30,0,0,0,0",
-    "equipment_slot": "5"
+    "equipment_slot": "5",
+    "castle_wars_ticket_price": "600"
   },
   {
     "remove_head": "true",
@@ -41307,7 +41322,8 @@
     "archery_ticket_price": "0",
     "id": "4513",
     "bonuses": "0,0,0,0,0,0,1,2,0,1,0,0,0,0,0",
-    "equipment_slot": "0"
+    "equipment_slot": "0",
+    "castle_wars_ticket_price": "10"
   },
   {
     "durability": null,
@@ -41315,7 +41331,8 @@
     "archery_ticket_price": "0",
     "id": "4514",
     "bonuses": "0,0,0,0,0,0,1,1,0,2,0,0,0,0,0",
-    "equipment_slot": "1"
+    "equipment_slot": "1",
+    "castle_wars_ticket_price": "10"
   },
   {
     "remove_head": "true",
@@ -41324,7 +41341,8 @@
     "archery_ticket_price": "0",
     "id": "4515",
     "bonuses": "0,0,0,0,0,0,1,2,0,1,0,0,0,0,0",
-    "equipment_slot": "0"
+    "equipment_slot": "0",
+    "castle_wars_ticket_price": "10"
   },
   {
     "durability": null,
@@ -41332,7 +41350,8 @@
     "archery_ticket_price": "0",
     "id": "4516",
     "bonuses": "0,0,0,0,0,0,1,1,0,2,0,0,0,0,0",
-    "equipment_slot": "1"
+    "equipment_slot": "1",
+    "castle_wars_ticket_price": "10"
   },
   {
     "ge_buy_limit": "1000",

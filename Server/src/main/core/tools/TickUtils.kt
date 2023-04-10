@@ -12,3 +12,16 @@ fun ticksToSeconds(ticks: Int): Int {
     val ticksMs = ticks * tick
     return ticksMs / 1000
 }
+
+fun minutesToTicks(minutes: Int): Int {
+    val minutesMs = minutes * 60 * 1000
+    return minutesMs / tick
+}
+
+fun ticksToMinutes(ticks: Int): Int {
+    val ticksMs = ticks * tick
+    return ticksMs / 1000 / 60
+}
+
+const val ticksPerSecond = second / tick
+const val ticksPerMinute = 60 * ticksPerSecond

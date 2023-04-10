@@ -145,7 +145,7 @@
   },
   {
     "examine": "Used for storage.",
-    "ids": "63,64"
+    "ids": "63,64,36351,36352"
   },
   {
     "examine": "Surprisingly sturdy looking.",
@@ -2601,7 +2601,7 @@
   },
   {
     "examine": "I can climb this.",
-    "ids": "1729"
+    "ids": "1729,36347,36363,36644"
   },
   {
     "examine": "Dare I go up?",
@@ -3641,7 +3641,7 @@
   },
   {
     "examine": "I can climb down this.",
-    "ids": "2408"
+    "ids": "2408,36693,36694"
   },
   {
     "examine": "A commonly found tree.",
@@ -6777,7 +6777,7 @@
   },
   {
     "examine": "A solid stone staircase.",
-    "ids": "4415,4416,4417,4418,4419,4420"
+    "ids": "4415,4416,4417,4418,4419,4420,36480,36481,36484,36495,36521,36523,36532,36540"
   },
   {
     "examine": "A spiky barricade.",
@@ -7609,7 +7609,7 @@
   },
   {
     "examine": "I can climb down this.",
-    "ids": "4911,4912"
+    "ids": "4911,4912,36349,36365"
   },
   {
     "examine": "It looks cramped and dark.",
@@ -20602,5 +20602,33 @@
   {
     "examine": "Keeps the puppies out of trouble.",
     "ids": "28341"
+  },
+  {
+    "examine": "There are some toolboxes on this table.",
+    "ids": "36573,36580"
+  },
+  {
+    "examine": "There's some rock I can use with the catapult here.",
+    "ids": "36574,36581"
+  },
+  {
+    "examine": "There are some barricades here.",
+    "ids": "36575,36582"
+  },
+  {
+    "examine": "There is some rope here.",
+    "ids": "36576,36583"
+  },
+  {
+    "examine": "There are some explosive potions here.",
+    "ids": "36577,36584"
+  },
+  {
+    "examine": "There are some pickaxes on this table.",
+    "ids": "36578,36585"
+  },
+  {
+    "examine": "There are some bandages on this table.",
+    "ids": "36579,36586"
   }
 ]

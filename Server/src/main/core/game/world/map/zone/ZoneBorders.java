@@ -2,6 +2,7 @@ package core.game.world.map.zone;
 
 import core.game.node.Node;
 import core.game.world.map.Location;
+import core.game.world.map.RegionManager;
 import core.tools.RandomFunction;
 
 import java.util.ArrayList;
@@ -95,6 +96,10 @@ public final class ZoneBorders {
 	public ZoneBorders(int x1, int y1, int x2, int y2, int plane, boolean zeroPlaneCheck) {
 		this(x1, y1, x2, y2, plane);
 		this.zeroPlaneCheck = zeroPlaneCheck;
+	}
+
+	public ZoneBorders(Location l1, Location l2) {
+		this(l1.getX(), l1.getY(), l2.getX(), l2.getY(), l1.getZ());
 	}
 
 	/**
@@ -232,6 +237,16 @@ public final class ZoneBorders {
 	    int x = northEastX - southWestX == 0 ? southWestX : new Random().nextInt(northEastX - southWestX + 1) + southWestX;
 	    int y = northEastY - southWestY == 0 ? southWestY : new Random().nextInt(northEastY - southWestY + 1) + southWestY;
 		return new Location(x, y, plane);
+	}
+
+	public Location getRandomWalkableLoc() {
+		Location loc = getRandomLoc();
+		int tries = 0; // prevent bad code from DOSing server
+		while (!RegionManager.isTeleportPermitted(loc) && tries < 20) {
+			loc = getRandomLoc();
+			tries += 1;
+		}
+		return loc;
 	}
 
 	/**

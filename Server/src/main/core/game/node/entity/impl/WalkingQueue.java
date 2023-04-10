@@ -341,6 +341,7 @@ public final class WalkingQueue {
 	 * {@code false} if not.
 	 */
 	public boolean isRunningBoth() {
+		if (isRunDisabled()) return false;
 		if (entity instanceof Player && ((Player) entity).getSettings().isRunToggled()) {
 			return true;
 		}

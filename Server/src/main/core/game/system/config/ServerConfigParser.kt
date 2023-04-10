@@ -92,6 +92,7 @@ object ServerConfigParser {
             jad_practice_enabled = data.getBoolean("world.jad_practice_enabled"),
             ge_announcement_limit = data.getLong("world.ge_announcement_limit", 500L).toInt(),
             smartpathfinder_bfs = data.getBoolean("world.smartpathfinder_bfs", false),
+            enable_castle_wars = data.getBoolean("world.enable_castle_wars", false),
             message_model = data.getString("world.motw_identifier").toInt(),
             message_string = data.getString("world.motw_text").replace("@name", ServerConstants.SERVER_NAME)
         )

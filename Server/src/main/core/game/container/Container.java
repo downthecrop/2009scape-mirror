@@ -373,6 +373,50 @@ public class Container {
     }
 
     /**
+     * Removes all items from the container that have the passed in IDs
+     *
+     * @param ids           Array of IDs to remove
+     * @return {@code True} if all the items got removed, <br> {@code false} if some of the
+     * found items were null
+     */
+    public boolean removeAll(int[] ids) {
+        boolean removedAll = true;
+        for (int id : ids) {
+            if (!removeAll(id)) {
+                removedAll = false;
+            }
+        }
+        update();
+        return removedAll;
+    }
+
+    /**
+     * Removes all items from the container that have the passed in ID
+     *
+     * @param id            Item ID to remove all instances of
+     * @return {@code True} if all the items got removed, <br> {@code false} if some of the
+     * found items were null
+     */
+    public boolean removeAll(int id) {
+        ArrayList<Item> matchingIdItems = new ArrayList<>();
+        for (Item item : this.items) {
+            // If the item is not null and the item ID matches the ID we're looking for
+            if (item != null && item.getId() == id) {
+                // Add the item to the list
+                matchingIdItems.add(item);
+            }
+        }
+        boolean res = true;
+        // Remove all the items from the container
+        for (Item item : matchingIdItems) {
+            if (!remove(item, false)) {
+                res = false;
+            }
+        }
+        return res;
+    }
+
+    /**
      * Replaces the item on the given slot with the argued item.
      *
      * @param item The item.

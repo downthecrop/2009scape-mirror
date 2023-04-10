@@ -5,6 +5,7 @@ import core.game.world.map.Location
 import core.tools.LogLevel
 import core.tools.mysql.Database
 import core.tools.secondsToTicks
+import rs09.game.content.activity.castlewars.CastleWars
 import java.math.BigInteger
 
 /**
@@ -224,9 +225,9 @@ class ServerConstants {
 			arrayOf(Location.create(2328, 3677, 0), "piscatoris"),
 			arrayOf(Location.create(2660, 3158, 0), "fishing trawler", "trawler"),
 			arrayOf(Location.create(2800, 3667, 0), "mountain camp"),
-			arrayOf(Location.create(2575, 3250, 0), "clocktower")
+			arrayOf(Location.create(2575, 3250, 0), "clocktower"),
+			arrayOf(CastleWars.lobbyBankArea.randomLoc, "cwars", "castle wars", "castle war", "castlewars", "castlewar", "castle")
 		)
-		//arrayOf(Location.create(0, 0, 0), ""),
 
 		@JvmField
 		var DATABASE: Database? = null
