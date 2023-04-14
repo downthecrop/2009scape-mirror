@@ -1,13 +1,15 @@
 package content.global.travel.glider;
 
+import content.region.kandarin.quest.grandtree.TheGrandTree;
+import core.api.ContentAPIKt;
 import core.cache.def.impl.NPCDefinition;
 import core.game.component.Component;
-import content.global.travel.glider.Gliders;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import static core.api.ContentAPIKt.isQuestComplete;
 
 /**
  * Represents the plugin used for gliders.
@@ -29,8 +31,12 @@ public final class GliderPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		player.getInterfaceManager().open(new Component(138));
-		Gliders.sendConfig(node.asNpc(), player);
+		if(isQuestComplete(player, TheGrandTree.questName)){
+			player.getInterfaceManager().open(new Component(138));
+			Gliders.sendConfig(node.asNpc(), player);
+		} else {
+			ContentAPIKt.sendMessage(player,"You must complete The Grand Tree Quest to access the gnome glider.");
+		}
 		return true;
 	}
 

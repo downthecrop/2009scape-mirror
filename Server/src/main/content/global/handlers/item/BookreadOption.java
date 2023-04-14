@@ -60,6 +60,10 @@ public class BookreadOption extends OptionHandler {
                 return 49610760;
             case Items.SLASHED_BOOK_9715:
                 return 49610761;
+            case Items.GLOUGHS_JOURNAL_785:
+                return 49610762;
+            case Items.TRANSLATION_BOOK_784:
+                return 49610763;
 	/*case 9004:
 	    return 423943;*/
             case 11710:

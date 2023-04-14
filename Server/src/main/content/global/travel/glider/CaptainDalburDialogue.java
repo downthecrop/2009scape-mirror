@@ -1,11 +1,16 @@
 package content.global.travel.glider;
 
+import content.region.kandarin.quest.grandtree.TheGrandTree;
 import core.game.component.Component;
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC;
 import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
+
+import static core.api.ContentAPIKt.isQuestComplete;
+import static core.api.ContentAPIKt.questStage;
+import static core.tools.DialogueConstKt.END_DIALOGUE;
 
 /**
  * Represents the dialogue plugin used for the captain dalbur npc.
@@ -54,12 +59,14 @@ public final class CaptainDalburDialogue extends DialoguePlugin {
 			stage = 1;
 			break;
 		case 1:
-			npc("If you wish.");
-			stage++;
-			/*
-			 * interpreter.sendDialogues(npc, FacialExpression.NORMAL,
-			 * "I only fly friends of the gnomes!"); stage = 2;
-			 */
+			if(!isQuestComplete(player, TheGrandTree.questName)){
+				interpreter.sendDialogues(npc, FacialExpression.ANNOYED, "I only fly friends of the gnomes!");
+				stage = END_DIALOGUE;
+			}
+			else {
+				npc("If you wish.");
+				stage++;
+			}
 			break;
 		case 2:
 			end();
