@@ -22,15 +22,14 @@ class BouncerCutscene(player: Player) : Cutscene(player) {
         if (player.settings.isRunToggled) {
             player.settings.toggleRun()
         }
+        loadRegion(10289)
+        addNPC(BOUNCER, 47, 26, Direction.WEST)
     }
 
     override fun runStage(stage: Int) {
         when (stage) {
 
             0 -> {
-                PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 1))
-                loadRegion(10289)
-                addNPC(BOUNCER, 47, 26, Direction.WEST)
                 teleport(player, 43, 19)
                 timedUpdate(1)
             }
@@ -43,35 +42,28 @@ class BouncerCutscene(player: Player) : Cutscene(player) {
             }
 
             2 -> {
-                replaceScenery(Scenery(77, location(302, 26, 0)), PRISON_DOOR_79, 8)
-                replaceScenery(Scenery(78, location(302, 27, 0)), PRISON_DOOR_80, 8)
-                timedUpdate(1)
-            }
-
-            3 -> {
-                DoorActionHandler.handleAutowalkDoor(getNPC(BOUNCER)!!, getScenery(302, 27, 0))
-                DoorActionHandler.handleAutowalkDoor(getNPC(BOUNCER)!!, getScenery(302, 26, 0))
+                DoorActionHandler.handleAutowalkDoor(getNPC(BOUNCER)!!, getObject(46, 26))
                 timedUpdate(2)
             }
 
-            4 -> {
+            3 -> {
                 move(getNPC(BOUNCER)!!, 45, 26)
                 moveCamera(39, 27, 300, 1)
                 rotateCamera(44, 27, 300, 1)
                 timedUpdate(1)
             }
 
-            5 -> {
+            4 -> {
                 move(getNPC(BOUNCER)!!, 44, 26)
                 timedUpdate(1)
             }
 
-            6 -> {
+            5 -> {
                 move(getNPC(BOUNCER)!!, 42, 26)
                 timedUpdate(-1)
             }
 
-            7 -> {
+            6 -> {
                 end {
                     spawnBouncer(player)
                 }
