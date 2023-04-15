@@ -38,11 +38,11 @@ class ConsumableListener : InteractionListener {
         } else {
             if (isIgnoreMainClock && player.clocks[Clocks.NEXT_CONSUME] < getWorldTicks()) {
                 consumable.consumable.consume(node as? Item ?: return true, player)
-                player.clocks[Clocks.NEXT_CONSUME] = getWorldTicks() + 3
-                player.clocks[Clocks.NEXT_DRINK] = getWorldTicks() + 3
+                player.clocks[Clocks.NEXT_CONSUME] = getWorldTicks() + 1
+                player.clocks[Clocks.NEXT_DRINK] = getWorldTicks() + 1
             } else if (player.clocks[Clocks.NEXT_CONSUME] < getWorldTicks() && player.clocks[Clocks.NEXT_DRINK] < getWorldTicks()) {
                 consumable.consumable.consume(node as? Item ?: return true, player)
-                player.clocks[Clocks.NEXT_DRINK] = getWorldTicks() + 3
+                player.clocks[Clocks.NEXT_DRINK] = getWorldTicks() + 1
             }
         }
 
