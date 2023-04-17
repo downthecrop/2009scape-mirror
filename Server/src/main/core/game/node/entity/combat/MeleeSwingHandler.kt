@@ -16,6 +16,7 @@ import core.game.node.entity.skill.Skills
 import core.game.node.entity.state.EntityState
 import core.game.world.map.path.Pathfinder
 import core.tools.RandomFunction
+import org.rs09.consts.Items
 import kotlin.math.ceil
 import kotlin.math.floor
 
@@ -140,17 +141,18 @@ open class MeleeSwingHandler
         effectiveAttackLevel = floor(effectiveAttackLevel)
         effectiveAttackLevel *= (entity.properties.bonuses[entity.properties.attackStyle.bonusType] + 64)
 
-        val amuletName = (if(entity is Player) getItemFromEquipment(entity, EquipmentSlot.AMULET)?.name ?: "null" else "null").toLowerCase()
         val victimName = entity.properties.combatPulse.getVictim()?.name ?: "none"
 
-        if(entity is Player && getSlayerTask(entity)?.ids?.contains((entity.properties.combatPulse?.getVictim()?.id ?: 0)) == true)
-            effectiveAttackLevel *= SlayerEquipmentFlags.getDamAccBonus(entity) //Slayer Helm/ Black Mask/ Slayer cape
-
-        else if (entity is Player //Salve amulet
-            && (amuletName.contains("salve"))
-            && checkUndead(victimName)
-        ) {
-            effectiveAttackLevel *= 1.2
+        // attack bonus for specialized equipments (salve amulets, slayer equips)
+        if (entity is Player) {
+            val amuletId = getItemFromEquipment(entity, EquipmentSlot.AMULET)?.id ?: 0
+            if ((amuletId == Items.SALVE_AMULET_4081 || amuletId == Items.SALVE_AMULETE_10588) && checkUndead(victimName)) {
+                effectiveAttackLevel *= if (amuletId == Items.SALVE_AMULET_4081) 1.15 else 1.2
+            } else if (getSlayerTask(entity)?.ids?.contains((entity.properties.combatPulse?.getVictim()?.id ?: 0)) == true) {
+                effectiveAttackLevel *= SlayerEquipmentFlags.getDamAccBonus(entity) //Slayer Helm/ Black Mask/ Slayer cape
+                if (getSlayerTask(entity)?.dragon == true && inEquipment(entity, Items.DRAGON_SLAYER_GLOVES_12862))
+                    effectiveAttackLevel *= 1.1
+            }
         }
 
         return floor(effectiveAttackLevel).toInt()

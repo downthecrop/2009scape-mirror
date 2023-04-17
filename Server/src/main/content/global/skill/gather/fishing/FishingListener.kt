@@ -1,5 +1,6 @@
 package content.global.skill.gather.fishing
 
+import content.global.handlers.item.equipment.fistofguthixgloves.FOGGlovesManager
 import content.global.skill.fishing.Fish
 import content.global.skill.fishing.FishingOption
 import content.global.skill.fishing.FishingSpot
@@ -21,6 +22,7 @@ import core.game.system.command.sets.STATS_FISH
 import core.game.world.map.path.Pathfinder
 import core.tools.RandomFunction
 import core.tools.colorize
+import org.rs09.consts.Items
 
 class FishingListener : InteractionListener{
     override fun defineListeners() {
@@ -74,7 +76,13 @@ class FishingListener : InteractionListener{
 
             addItemOrDrop(player, item.id, item.amount)
             player.incrementAttribute("$STATS_BASE:$STATS_FISH")
-            rewardXP(player, Skills.FISHING, fish.experience)
+            var xp = fish.experience
+            if ((item.id == Items.RAW_SWORDFISH_371 && inEquipment(player, Items.SWORDFISH_GLOVES_12860))
+                || (item.id == Items.RAW_SHARK_383 && inEquipment(player, Items.SHARK_GLOVES_12861))) {
+                xp += 100
+                FOGGlovesManager.updateCharges(player)
+            }
+            rewardXP(player, Skills.FISHING, xp)
             delayClock(player, Clocks.SKILLING, 5)
             if (!checkRequirements(player, op, node)) return clearScripts(player)
         }

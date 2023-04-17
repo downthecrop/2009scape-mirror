@@ -1,5 +1,6 @@
 package content.global.skill.runecrafting;
 
+import content.global.handlers.item.equipment.fistofguthixgloves.FOGGlovesManager;
 import core.game.container.impl.EquipmentContainer;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
@@ -10,9 +11,12 @@ import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
+
+import static core.api.ContentAPIKt.inEquipment;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_BASE;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_RC;
 import core.game.world.GameWorld;
+import org.rs09.consts.Items;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -164,7 +168,7 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
     /**
      * Method used to craft runes.
      */
-    private final void craft() {
+    private void craft() {
         final Item item = new Item(getEssence().getId(), getEssenceAmount());
         int amount = player.getInventory().getAmount(item);
         if (!altar.isOurania()) {
@@ -178,7 +182,15 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
             if (player.getInventory().remove(item) && player.getInventory().hasSpaceFor(i)) {
                 player.getInventory().add(i);
                 player.incrementAttribute("/save:" + STATS_BASE + ":" + STATS_RC, amount);
-                player.getSkills().addExperience(Skills.RUNECRAFTING, rune.getExperience() * amount, true);
+                
+                // Fist of guthix gloves
+                double xp = rune.getExperience() * amount;
+                if ((altar == Altar.AIR && inEquipment(player, Items.AIR_RUNECRAFTING_GLOVES_12863, 1))
+                        || (altar == Altar.WATER && inEquipment(player, Items.WATER_RUNECRAFTING_GLOVES_12864, 1))
+                        || (altar == Altar.EARTH && inEquipment(player, Items.EARTH_RUNECRAFTING_GLOVES_12865, 1))) {
+                    xp += xp * FOGGlovesManager.updateCharges(player, amount) / amount;
+                }
+                player.getSkills().addExperience(Skills.RUNECRAFTING, xp, true);
 
                 // Achievement Diary handling
                 // Craft some nature runes
@@ -216,8 +228,6 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
                 }
             }
         }
-
-
     }
 
     /**

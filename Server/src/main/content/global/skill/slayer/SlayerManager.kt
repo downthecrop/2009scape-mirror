@@ -1,19 +1,17 @@
 package content.global.skill.slayer
 
-import core.api.LoginListener
-import core.api.PersistPlayer
+import content.global.handlers.item.equipment.fistofguthixgloves.FOGGlovesManager
+import core.api.*
 import core.game.event.EventHook
 import core.game.event.NPCKillEvent
-import core.api.getAttribute
-import core.api.rewardXP
 import core.cache.def.impl.NPCDefinition
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
-import core.api.Event
 import java.util.*
+import org.rs09.consts.Items
 
 /**
  * Manages the players slayer data.
@@ -105,7 +103,12 @@ class SlayerManager(val player: Player? = null) : LoginListener, PersistPlayer, 
         val flags = slayer.flags
 
         if (slayer.hasTask() && npc.id in slayer.task!!.npcs) {
-            rewardXP(player, Skills.SLAYER, npc.skills.maximumLifepoints.toDouble())
+            var xp = npc.skills.maximumLifepoints.toDouble()
+            if (slayer.task!!.dragon && inEquipment(player, Items.DRAGON_SLAYER_GLOVES_12862)) {
+                xp *= 1.15
+                FOGGlovesManager.updateCharges(player)
+            }
+            rewardXP(player, Skills.SLAYER, xp)
             slayer.decrementAmount(1)
             if(slayer.hasTask()) return
             flags.taskStreak = flags.taskStreak + 1

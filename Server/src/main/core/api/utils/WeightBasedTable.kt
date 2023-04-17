@@ -10,6 +10,8 @@ import content.data.tables.HerbDropTable
 import content.data.tables.GemDropTable
 import content.data.tables.RareSeedDropTable
 import content.data.tables.AllotmentSeedDropTable
+import content.global.handlers.item.equipment.fistofguthixgloves.FOGGlovesManager
+import core.api.inEquipment
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
@@ -60,7 +62,26 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
                 SLOT_RDT -> RareDropTable.retrieve(receiver)
                 SLOT_CELEDT -> CELEMinorTable.retrieve()
                 SLOT_USDT -> UncommonSeedDropTable.retrieve()
-                SLOT_HDT -> HerbDropTable.retrieve()
+                SLOT_HDT -> {
+                    if (RandomFunction.nextBool() && receiver is Player) {
+                        if (inEquipment(receiver, Items.IRIT_GLOVES_12856)) {
+                            FOGGlovesManager.updateCharges(receiver)
+                            Item(Items.GRIMY_IRIT_209)
+                        } else if (inEquipment(receiver, Items.AVANTOE_GLOVES_12857)) {
+                            FOGGlovesManager.updateCharges(receiver)
+                            Item(Items.GRIMY_AVANTOE_211)
+                        } else if (inEquipment(receiver, Items.KWUARM_GLOVES_12858)) {
+                            FOGGlovesManager.updateCharges(receiver)
+                            Item(Items.GRIMY_KWUARM_213)
+                        } else if (inEquipment(receiver, Items.CADANTINE_GLOVES_12859)) {
+                            FOGGlovesManager.updateCharges(receiver)
+                            Item(Items.GRIMY_CADANTINE_215)
+                        } else
+                            HerbDropTable.retrieve()
+                    } else {
+                        HerbDropTable.retrieve()
+                    }
+                }
                 SLOT_GDT -> GemDropTable.retrieve()
                 SLOT_RSDT -> RareSeedDropTable.retrieve()
                 SLOT_ASDT -> AllotmentSeedDropTable.retrieve()
