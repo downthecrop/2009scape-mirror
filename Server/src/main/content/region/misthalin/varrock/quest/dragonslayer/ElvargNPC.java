@@ -25,6 +25,8 @@ import core.plugin.Initializable;
 import core.tools.RandomFunction;
 import content.global.handlers.item.equipment.special.DragonfireSwingHandler;
 
+import static core.api.ContentAPIKt.calculateDragonfireMaxHit;
+
 
 /**
  * Represents the Elvarg npc.
@@ -34,311 +36,295 @@ import content.global.handlers.item.equipment.special.DragonfireSwingHandler;
 @Initializable
 public final class ElvargNPC extends AbstractNPC {
 
-	/**
-	 * The NPC ids of NPCs using this plugin.
-	 */
-	private static final int[] ID = { 742 };
+    /**
+     * The NPC ids of NPCs using this plugin.
+     */
+    private static final int[] ID = { 742 };
 
-	/**
-	 * Represents the animations to use.
-	 */
-	private static final Animation[] ANIMATIONS = new Animation[] { new Animation(6654), new Animation(6655) };
+    /**
+     * Represents the animations to use.
+     */
+    private static final Animation[] ANIMATIONS = new Animation[] { new Animation(6654), new Animation(6655) };
 
-	/**
-	 * Represents the combat swing handler.
-	 */
-	private final CombatSwingHandler combatHandler = new ElvargCombatSwingHandler();
+    /**
+     * Represents the combat swing handler.
+     */
+    private final CombatSwingHandler combatHandler = new ElvargCombatSwingHandler();
 
-	/**
-	 * Constructs a new {@code ElvargNPC} {@code Object}.
-	 */
-	public ElvargNPC() {
-		super(0, null);
-	}
+    /**
+     * Constructs a new {@code ElvargNPC} {@code Object}.
+     */
+    public ElvargNPC() {
+        super(0, null);
+    }
 
-	/**
-	 * Constructs a new {@code ElvargNPC} {@code Object}.
-	 * @param id The NPC id.
-	 * @param location The location.
-	 */
-	private ElvargNPC(int id, Location location) {
-		super(id, location);
-	}
+    /**
+     * Constructs a new {@code ElvargNPC} {@code Object}.
+     * @param id The NPC id.
+     * @param location The location.
+     */
+    private ElvargNPC(int id, Location location) {
+        super(id, location);
+    }
 
-	@Override
-	public AbstractNPC construct(int id, Location location, Object... objects) {
-		return new ElvargNPC(id, location);
-	}
+    @Override
+    public AbstractNPC construct(int id, Location location, Object... objects) {
+        return new ElvargNPC(id, location);
+    }
 
-	@Override
-	public void commenceDeath(Entity killer) {
-		final Direction direction = Direction.getLogicalDirection(getLocation(), killer.getLocation());
-		GameWorld.getPulser().submit(new Pulse(1, this) {
-			@Override
-			public boolean pulse() {
-				faceLocation(getCenterLocation().transform(direction.getStepX() * 3, direction.getStepY() * 3, 0));
-				return true;
-			}
-		});
-		setDirection(direction);
-	}
+    @Override
+    public void commenceDeath(Entity killer) {
+        final Direction direction = Direction.getLogicalDirection(getLocation(), killer.getLocation());
+        GameWorld.getPulser().submit(new Pulse(1, this) {
+            @Override
+            public boolean pulse() {
+                faceLocation(getCenterLocation().transform(direction.getStepX() * 3, direction.getStepY() * 3, 0));
+                return true;
+            }
+        });
+        setDirection(direction);
+    }
 
-	@Override
-	public void finalizeDeath(final Entity killer) {
-		super.finalizeDeath(killer);
-		final Scenery object = new Scenery(25202, getLocation(), getRotation());
-		SceneryBuilder.add(object);
-		killer.faceLocation(object.getCenterLocation());
-		killer.lock();
-		GameWorld.getPulser().submit(new Pulse(1) {
-			int counter = 0;
+    @Override
+    public void finalizeDeath(final Entity killer) {
+        super.finalizeDeath(killer);
+        final Scenery object = new Scenery(25202, getLocation(), getRotation());
+        SceneryBuilder.add(object);
+        killer.faceLocation(object.getCenterLocation());
+        killer.lock();
+        GameWorld.getPulser().submit(new Pulse(1) {
+            int counter = 0;
 
-			@Override
-			public boolean pulse() {
-				counter++;
-				if (counter == 1) {
-					killer.animate(ANIMATIONS[0]);
-				} else if (counter == 4) {
-					final Player player = ((Player) killer);
-					SceneryBuilder.replace(object, object.transform(25203));
-					if (!player.getInventory().add(DragonSlayer.ELVARG_HEAD)) {
-						GroundItemManager.create(DragonSlayer.ELVARG_HEAD, player);
-					}
-					killer.animate(ANIMATIONS[1]);
-					killer.unlock();
-				} else if (counter == 12) {
-					SceneryBuilder.remove(RegionManager.getObject(object.getLocation()));
-					return true;
-				}
-				return false;
-			}
+            @Override
+            public boolean pulse() {
+                counter++;
+                if (counter == 1) {
+                    killer.animate(ANIMATIONS[0]);
+                } else if (counter == 4) {
+                    final Player player = ((Player) killer);
+                    SceneryBuilder.replace(object, object.transform(25203));
+                    if (!player.getInventory().add(DragonSlayer.ELVARG_HEAD)) {
+                        GroundItemManager.create(DragonSlayer.ELVARG_HEAD, player);
+                    }
+                    killer.animate(ANIMATIONS[1]);
+                    killer.unlock();
+                } else if (counter == 12) {
+                    SceneryBuilder.remove(RegionManager.getObject(object.getLocation()));
+                    return true;
+                }
+                return false;
+            }
 
-		});
-	}
+        });
+    }
 
-	@Override
-	public CombatSwingHandler getSwingHandler(boolean swing) {
-		return combatHandler;
-	}
+    @Override
+    public CombatSwingHandler getSwingHandler(boolean swing) {
+        return combatHandler;
+    }
 
-	@Override
-	public int[] getIds() {
-		return ID;
-	}
+    @Override
+    public int[] getIds() {
+        return ID;
+    }
 
-	/**
-	 * Method used to get the rotation.
-	 * @return the rotation.
-	 */
-	public int getRotation() {
-		switch (getDirection()) {
-		case EAST:
-			return 3;
-		case NORTH:
-			return 2;
-		case WEST:
-			return 1;
-		case SOUTH:
-			return 0;
-		default:
-			break;
-		}
-		return 0;
-	}
+    /**
+     * Method used to get the rotation.
+     * @return the rotation.
+     */
+    public int getRotation() {
+        switch (getDirection()) {
+        case EAST:
+            return 3;
+        case NORTH:
+            return 2;
+        case WEST:
+            return 1;
+        case SOUTH:
+            return 0;
+        default:
+            break;
+        }
+        return 0;
+    }
 
-	@Override
-	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
-		if (!(entity instanceof Player)) {
-			return super.isAttackable(entity, style, message);
-		}
-		final Player player = (Player) entity;
-		if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) == 40 && (player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD))) {
+    @Override
+    public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
+        if (!(entity instanceof Player)) {
+            return super.isAttackable(entity, style, message);
+        }
+        final Player player = (Player) entity;
+        if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) == 40 && (player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD))) {
             if(message) {
                 player.getPacketDispatch().sendMessage("You have already slain the dragon. Now you just need to return to Oziach for");
                 player.getPacketDispatch().sendMessage("your reward!");
             }
-			return false;
-		}
-		if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) > 40) {
+            return false;
+        }
+        if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) > 40) {
             if(message) {
                 player.getPacketDispatch().sendMessage("You have already slain Elvarg.");
             }
-			return false;
-		}
-		return super.isAttackable(entity, style, message);
-	}
+            return false;
+        }
+        return super.isAttackable(entity, style, message);
+    }
 
-	@Override
-	public int getDragonfireProtection(boolean fire) {
-		return 0x2 | 0x4 | 0x8;
-	}
+    @Override
+    public int getDragonfireProtection(boolean fire) {
+        return 0x2 | 0x4 | 0x8;
+    }
 
-	/**
-	 * Handles the Elvarg combat swing handler.
-	 * @author Emperor
-	 */
-	static class ElvargCombatSwingHandler extends CombatSwingHandler {
+    /**
+     * Handles the Elvarg combat swing handler.
+     * @author Emperor
+     */
+    static class ElvargCombatSwingHandler extends CombatSwingHandler {
 
-		/**
-		 * The style.
-		 */
-		private CombatStyle style = CombatStyle.RANGE;
+        /**
+         * The style.
+         */
+        private CombatStyle style = CombatStyle.RANGE;
 
-		/**
-		 * The melee attack animation.
-		 */
-		private static final Animation MELEE_ATTACK = new Animation(80, Priority.HIGH);
+        /**
+         * The melee attack animation.
+         */
+        private static final Animation MELEE_ATTACK = new Animation(80, Priority.HIGH);
 
-		/**
-		 * The fire type.
-		 */
-		private final FireType fireType = FireType.FIERY_BREATH;
+        /**
+         * The fire type.
+         */
+        private final FireType fireType = FireType.FIERY_BREATH;
 
-		/**
-		* The DragonFire Attack */
-		private static final DragonfireSwingHandler DRAGONFIRE = new DragonfireSwingHandler(false, 60, null, true);
+        /**
+        * The DragonFire Attack */
+        private static final DragonfireSwingHandler DRAGONFIRE = new DragonfireSwingHandler(false, 60, null, true);
 
-		/**
-		 * Constructs a new {@Code ElvargCombatSwingHandler} {@Code CombatStyle}.
-		 *  The Combat style.
-		 */
-		public ElvargCombatSwingHandler() {
-			super(CombatStyle.RANGE);
-		}
+        /**
+         * Constructs a new {@Code ElvargCombatSwingHandler} {@Code CombatStyle}.
+         *  The Combat style.
+         */
+        public ElvargCombatSwingHandler() {
+            super(CombatStyle.RANGE);
+        }
 
-		@Override
-		public void adjustBattleState(Entity entity, Entity victim, BattleState state) {
-			if (style == CombatStyle.RANGE) {
-				fireType.getTask().exec(victim, entity);
-				state.setStyle(null);
-				DRAGONFIRE.adjustBattleState(entity, victim, state);
-				state.setStyle(CombatStyle.RANGE);
-				return;
-			}
-			style.getSwingHandler().adjustBattleState(entity, victim, state);
-		}
+        @Override
+        public void adjustBattleState(Entity entity, Entity victim, BattleState state) {
+            if (style == CombatStyle.RANGE) {
+                fireType.getTask().exec(victim, entity);
+                state.setStyle(null);
+                DRAGONFIRE.adjustBattleState(entity, victim, state);
+                state.setStyle(CombatStyle.RANGE);
+                return;
+            }
+            style.getSwingHandler().adjustBattleState(entity, victim, state);
+        }
 
-		@Override
-		public int calculateAccuracy(Entity entity) {
-			// If in melee combat, calculate attackers accuracy level.
-			if (style == CombatStyle.MELEE) {
-				return style.getSwingHandler().calculateAccuracy(entity);
-			}
-			// Else calculate attackers accuracy based on their magic level.
-			return CombatStyle.MAGIC.getSwingHandler().calculateAccuracy(entity);
-		}
+        @Override
+        public int calculateAccuracy(Entity entity) {
+            // If in melee combat, calculate attackers accuracy level.
+            if (style == CombatStyle.MELEE) {
+                return style.getSwingHandler().calculateAccuracy(entity);
+            }
+            // Else calculate attackers accuracy based on their magic level.
+            return CombatStyle.MAGIC.getSwingHandler().calculateAccuracy(entity);
+        }
 
-		@Override
-		public int calculateDefence(Entity victim, Entity attacker) {
-			// If in melee combat, calculate players defense level.
-			if (style == CombatStyle.MELEE) {
-				return style.getSwingHandler().calculateDefence(victim, attacker);
-			}
-			// Else calculate players defense against attack based on their magic level.
-			return CombatStyle.MAGIC.getSwingHandler().calculateDefence(victim, attacker);
-		}
+        @Override
+        public int calculateDefence(Entity victim, Entity attacker) {
+            // If in melee combat, calculate players defense level.
+            if (style == CombatStyle.MELEE) {
+                return style.getSwingHandler().calculateDefence(victim, attacker);
+            }
+            // Else calculate players defense against attack based on their magic level.
+            return CombatStyle.MAGIC.getSwingHandler().calculateDefence(victim, attacker);
+        }
 
-		@Override
-		public int calculateHit(Entity entity, Entity victim, double modifier) {
-			if (style == CombatStyle.MELEE) {
-				return style.getSwingHandler().calculateHit(entity, victim, modifier);
-			}
-			int maxDamage = 60; // Max Possible hit without shield protection
-			int finalDamage = maxDamage;
+        @Override
+        public int calculateHit(Entity entity, Entity victim, double modifier) {
+            if (style == CombatStyle.MELEE) {
+                return style.getSwingHandler().calculateHit(entity, victim, modifier);
+            }
 
-			if (victim instanceof Player) {
-				int val = victim.getDragonfireProtection(true); // DragonFireShield Protection
+            return calculateDragonfireMaxHit(victim, 60, false, 3, true);
+        }
 
-				if ((val & 0x2) != 0) { // 0x2 - Anti Fire potion used?
-					finalDamage -= 0.22 * maxDamage; // = 20% protection
-				}
-				if ((val & 0x4) != 0) { // 0x4 - Anti Dragon Fire Shield equipped?
-					finalDamage -= 0.78 * maxDamage; // Should always equal 13 as that is the max hit possible with the shield equipped, 80% protection
-				}
-				if ( (val & 0x2) == 0 && (val & 0x4) == 0 && (val & 0x8) != 0) { // 0x8 - Magic Prayer Protection, should not stack with the others
-					finalDamage -= 0.6 * maxDamage; // = 36
-				}
-			}
+        @Override
+        public InteractionType canSwing(Entity entity, Entity victim) {
+            if (!isProjectileClipped(entity, victim, false)) {
+                return InteractionType.NO_INTERACT;
+            }
+            if (victim.getCenterLocation().withinDistance(entity.getCenterLocation(), getCombatDistance(entity, victim, 9)) && super.canSwing(entity, victim) != InteractionType.NO_INTERACT) {
+                entity.getWalkingQueue().reset();
+                return InteractionType.STILL_INTERACT;
+            }
+            return InteractionType.NO_INTERACT;
+        }
 
-			return finalDamage;
-		}
+        @Override
+        public ArmourSet getArmourSet(Entity e) {
+            return style.getSwingHandler().getArmourSet(e);
+        }
 
-		@Override
-		public InteractionType canSwing(Entity entity, Entity victim) {
-			if (!isProjectileClipped(entity, victim, false)) {
-				return InteractionType.NO_INTERACT;
-			}
-			if (victim.getCenterLocation().withinDistance(entity.getCenterLocation(), getCombatDistance(entity, victim, 9)) && super.canSwing(entity, victim) != InteractionType.NO_INTERACT) {
-				entity.getWalkingQueue().reset();
-				return InteractionType.STILL_INTERACT;
-			}
-			return InteractionType.NO_INTERACT;
-		}
+        @Override
+        public double getSetMultiplier(Entity e, int skillId) {
+            return style.getSwingHandler().getSetMultiplier(e, skillId);
+        }
 
-		@Override
-		public ArmourSet getArmourSet(Entity e) {
-			return style.getSwingHandler().getArmourSet(e);
-		}
+        @Override
+        public void impact(Entity entity, Entity victim, BattleState state) {
+            style.getSwingHandler().impact(entity, victim, state);
+        }
 
-		@Override
-		public double getSetMultiplier(Entity e, int skillId) {
-			return style.getSwingHandler().getSetMultiplier(e, skillId);
-		}
+        @Override
+        public int swing(Entity entity, Entity victim, BattleState state) {
+            style = CombatStyle.RANGE;
+            int hit = 0;
+            int ticks = 1;
 
-		@Override
-		public void impact(Entity entity, Entity victim, BattleState state) {
-			style.getSwingHandler().impact(entity, victim, state);
-		}
+            if (victim.getCenterLocation().withinDistance(entity.getCenterLocation(), getCombatDistance(entity, victim, 1)) ) {
+                if ( RandomFunction.random(10) < 7 ){
+                    style = CombatStyle.MELEE;
+                }
+            } else {
+                ticks += (int) Math.ceil(entity.getLocation().getDistance(victim.getLocation()) * 0.3);
+            }
 
-		@Override
-		public int swing(Entity entity, Entity victim, BattleState state) {
-			style = CombatStyle.RANGE;
-			int hit = 0;
-			int ticks = 1;
+            state.setStyle(style);
 
-			if (victim.getCenterLocation().withinDistance(entity.getCenterLocation(), getCombatDistance(entity, victim, 1)) ) {
-				if ( RandomFunction.random(10) < 7 ){
-					style = CombatStyle.MELEE;
-				}
-			} else {
-				ticks += (int) Math.ceil(entity.getLocation().getDistance(victim.getLocation()) * 0.3);
-			}
+            if (isAccurateImpact(entity, victim)) {
+                int max = calculateHit(entity, victim, 1.0);
+                state.setMaximumHit(max);
+                hit = RandomFunction.random(max + 1);
+            }
+            state.setEstimatedHit(hit);
+            return ticks;
+        }
 
-			state.setStyle(style);
+        @Override
+        public void visualize(Entity entity, Entity victim, BattleState state) {
+            switch (style) {
+            case MELEE:
+                entity.animate(MELEE_ATTACK);
+                break;
+            case RANGE:
+                Projectile.ranged(entity, victim, 450, 20, 36, 50, 15).send();
+                entity.animate(fireType.getAnimation());
+                break;
+            default:
+                break;
+            }
+        }
 
-			if (isAccurateImpact(entity, victim)) {
-				int max = calculateHit(entity, victim, 1.0);
-				state.setMaximumHit(max);
-				hit = RandomFunction.random(max);
-			}
-			state.setEstimatedHit(hit);
-			return ticks;
-		}
+        @Override
+        public void visualizeImpact(Entity entity, Entity victim, BattleState state) {
+            if (style != CombatStyle.MELEE) {
+                DRAGONFIRE.visualizeImpact(entity, victim, state);
+            } else {
+                style.getSwingHandler().visualizeImpact(entity, victim, state);
+            }
+        }
 
-		@Override
-		public void visualize(Entity entity, Entity victim, BattleState state) {
-			switch (style) {
-			case MELEE:
-				entity.animate(MELEE_ATTACK);
-				break;
-			case RANGE:
-				Projectile.ranged(entity, victim, 450, 20, 36, 50, 15).send();
-				entity.animate(fireType.getAnimation());
-				break;
-			default:
-				break;
-			}
-		}
-
-		@Override
-		public void visualizeImpact(Entity entity, Entity victim, BattleState state) {
-			if (style != CombatStyle.MELEE) {
-				DRAGONFIRE.visualizeImpact(entity, victim, state);
-			} else {
-				style.getSwingHandler().visualizeImpact(entity, victim, state);
-			}
-		}
-
-	}
+    }
 
 }

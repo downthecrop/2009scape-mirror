@@ -20,6 +20,7 @@ import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.emote.Emotes
 import core.game.node.entity.player.link.quest.QuestRepository
+import core.game.node.entity.player.link.prayer.PrayerType;
 import core.game.node.entity.skill.Skills
 import content.data.skill.SkillingTool
 import content.global.skill.slayer.Tasks
@@ -2460,6 +2461,75 @@ fun decantContainer (container: core.game.container.Container) : Pair<List<Item>
     if (emptyVials > 0)
         toAdd.add(Item(229, emptyVials))
     return Pair<List<Item>,List<Item>>(toRemove, toAdd)
+}
+
+/** 
+ * Checks whether the user has a valid anti-dragonfire shield equipped.
+ * @param player the player whose shield we are checking.
+ * @param wyvern an optional parameter (default false) whether or not we are checking against wyvern fire, which ignores normal anti-dragon-shields, but accepts elemental/mind shields, etc.
+ * @return whether or not the player is protected by their shield. 
+ * @see <a href=https://runescape.wiki/w/Dragonfire?oldid=2068032>Source</a> 
+**/
+fun hasDragonfireShieldProtection(player: Player, wyvern: Boolean = false): Boolean {
+    val shield = getItemFromEquipment(player, EquipmentSlot.SHIELD) ?: return false
+    return when (shield.id) {
+        Items.ELEMENTAL_SHIELD_2890, Items.MIND_SHIELD_9731 -> wyvern
+        Items.ANTI_DRAGON_SHIELD_1540 -> !wyvern
+        Items.DRAGONFIRE_SHIELD_11283, Items.DRAGONFIRE_SHIELD_11284 -> true
+        else -> false
+    }
+}
+
+/**
+ * Calculates the expected max hit of dragonfire after checking/applying valid protections.
+ * @param entity the entity whose protection we are checking.
+ * @param maxDamage the max damage the dragonfire can do without protection.
+ * @param wyvern an optional parameter (default false) that defines whether or not this is wyvern fire. Wyvern fire ignores anti-fire potions and regular anti-dragon shield.
+ * @param unprotectableDamage an optional parameter (default 0) that defines how much damage cannot be protected against. Think of it as a minimum-max-hit.
+ * @param sendMessage an optional parameter (default false) whether or not to send a message notifying the player of the damage being blocked.
+ * @return the maximum amount of damage that can be done to the player.
+ * @see <a href=https://runescape.wiki/w/Dragonfire?oldid=2068032>Source</a> 
+**/
+fun calculateDragonfireMaxHit(entity: Entity, maxDamage: Int, wyvern: Boolean = false, unprotectableDamage: Int = 0, sendMessage: Boolean = false): Int {
+    val hasShield: Boolean
+    val hasPotion: Boolean
+    val hasPrayer: Boolean
+
+    if (entity is Player) {
+        hasShield = hasDragonfireShieldProtection(entity, wyvern)
+        hasPotion = !wyvern && getAttribute(entity, "fire:immune", 0) >= getWorldTicks()
+        hasPrayer = entity.prayer.get(PrayerType.PROTECT_FROM_MAGIC)
+
+        if (sendMessage) {
+            var message = "You are horribly burnt by the ${if (wyvern) "icy" else "fiery"} breath."
+            if (hasShield && hasPotion)
+                message = "Your potion and shield fully absorb the ${if (wyvern) "icy" else "fiery"} breath."
+            else if (hasShield)
+                message = "Your shield absorbs most of the ${if (wyvern) "icy" else "fiery"} breath."
+            else if (hasPotion)
+                message = "Your potion absorbs some of the fiery breath."
+            else if (hasPrayer)
+                message = "Your prayer absorbs some of the ${if (wyvern) "icy" else "fiery"} breath."
+            sendMessage(entity, message)
+        }
+    } else {
+        val dragonfireTokens = entity.getDragonfireProtection(!wyvern)
+        hasShield = dragonfireTokens and 0x2 != 0
+        hasPotion = dragonfireTokens and 0x4 != 0
+        hasPrayer = dragonfireTokens and 0x8 != 0
+    }
+
+    var effectiveDamage = maxDamage.toDouble()
+    if (hasPrayer && !hasShield && !hasPotion)
+        effectiveDamage -= 0.6 * maxDamage
+    else {
+        if (hasShield)
+            effectiveDamage -= 0.8 * maxDamage
+        if (hasPotion)
+            effectiveDamage -= 0.2 * maxDamage
+    }
+
+    return Math.max(unprotectableDamage, effectiveDamage.toInt())
 }
 
 private class ContentAPI

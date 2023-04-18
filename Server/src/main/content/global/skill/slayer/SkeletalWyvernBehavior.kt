@@ -31,19 +31,6 @@ class SkeletalWyvernBehavior : NPCBehavior(*Tasks.SKELETAL_WYVERN.ids) {
 
     private val SHIELDS = intArrayOf(Items.DRAGONFIRE_SHIELD_11283, Items.DRAGONFIRE_SHIELD_11285, Items.ELEMENTAL_SHIELD_2890, Items.MIND_SHIELD_9731)
 
-    override fun beforeAttackFinalized(self: NPC, victim: Entity, state: BattleState) {
-        if (victim !is Player) return
-        if (state.style != CombatStyle.MAGIC) return
-
-        val shield = getItemFromEquipment(victim, EquipmentSlot.SHIELD)
-        val hasShieldProtection = shield != null && shield.id in SHIELDS
-        if (!hasShieldProtection) return
-
-        state.estimatedHit = RandomFunction.random(11)
-        if (victim.location.getDistance(self.location) >= 5 && victim.prayer.get(PrayerType.PROTECT_FROM_MAGIC))
-            state.estimatedHit = 0
-    }
-
     override fun getSwingHandlerOverride(self: NPC, original: CombatSwingHandler): CombatSwingHandler {
         val victim = self.properties.combatPulse.getVictim() ?: return original
         if (victim !is Player) return original
