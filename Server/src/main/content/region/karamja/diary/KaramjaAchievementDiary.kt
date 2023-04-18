@@ -62,8 +62,9 @@ class KaramjaAchievementDiary : DiaryEventHookBase(DiaryType.KARAMJA) {
             const val TRAP_HORNED_GRAAHK = 13
             const val BRIMHAVEN_DUNGEON_CHOP_VINES = 14
             const val BRIMHAVEN_DUNGEON_CROSS_LAVA_STEPPING_STONES = 15
-            const val CHARTER_SHIP_EAST = 16
-            const val MINE_RED_TOPAZ = 17
+            const val BRIMHAVEN_DUNGEON_CLIMB_STAIRS = 16
+            const val CHARTER_SHIP_EAST = 17
+            const val MINE_RED_TOPAZ = 18
         }
 
         object HardTasks {
