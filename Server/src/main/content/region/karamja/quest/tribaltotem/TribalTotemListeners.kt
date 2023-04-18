@@ -56,7 +56,7 @@ class TribalTotemListeners : InteractionListener {
             if(player.getAttribute("TT:DoorUnlocked",false) == true){
                 core.game.global.action.DoorActionHandler.handleAutowalkDoor(player,node.asScenery())
             }else{
-                openInterface(player,285)
+                openInterface(player,369)
             }
             return@on true
         }

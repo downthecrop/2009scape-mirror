@@ -9,44 +9,18 @@ import core.game.interaction.InterfaceListener
 class TTDoorCodeInterfaceListener : InterfaceListener {
 
     override fun defineInterfaceListeners() {
-        val LETTERONEBACK = 10
-        val LETTERONEFORWARD = 11
-        val LETTERTWOBACK = 12
-        val LETTERTWOFORWARD = 13
-        val LETTERTHREEBACK = 14
-        val LETTERTHREEFORWARD = 15
-        val LETTERFOURBACK = 16
-        val LETTERFOURFORWARD = 17
-        val ENTER = 18
-        val DOORLOCKINTERFACE = 285
-        val LETTERS = arrayOf(
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H",
-            "I",
-            "J",
-            "K",
-            "L",
-            "M",
-            "N",
-            "O",
-            "P",
-            "Q",
-            "R",
-            "S",
-            "T",
-            "U",
-            "V",
-            "W",
-            "X",
-            "Y",
-            "Z"
-        )
+        val LETTERONEBACK = 17
+        val LETTERONEFORWARD = 18
+        val LETTERTWOBACK = 19
+        val LETTERTWOFORWARD = 20
+        val LETTERTHREEBACK = 21
+        val LETTERTHREEFORWARD = 22
+        val LETTERFOURBACK = 23
+        val LETTERFOURFORWARD = 24
+        val ENTER = 27
+        val EXIT = 28
+        val DOORLOCKINTERFACE = 369
+        val LETTERS = arrayOf("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z")
 
         onOpen(DOORLOCKINTERFACE) { player, component ->
             player.setAttribute("tt-letter-one", 0)
@@ -55,6 +29,7 @@ class TTDoorCodeInterfaceListener : InterfaceListener {
             player.setAttribute("tt-letter-four", 0)
             return@onOpen true
         }
+
         onClose(DOORLOCKINTERFACE) { player, component ->
             player.removeAttribute("tt-letter-one")
             player.removeAttribute("tt-letter-two")
@@ -62,125 +37,89 @@ class TTDoorCodeInterfaceListener : InterfaceListener {
             player.removeAttribute("tt-letter-four")
             return@onClose true
         }
+
         on(DOORLOCKINTERFACE) { player, component, opcode, buttonID, slot, itemID ->
             when (buttonID) {
                 LETTERONEBACK -> {
                     if (player.getAttribute("tt-letter-one", 0) == 0) {
                         player.setAttribute("tt-letter-one", 25)
-                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-one", 0)], DOORLOCKINTERFACE, 6)
+                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-one", 0)], DOORLOCKINTERFACE, 13)
                     } else {
                         (player.incrementAttribute("tt-letter-one", -1))
-                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-one", 0)], DOORLOCKINTERFACE, 6)
+                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-one", 0)], DOORLOCKINTERFACE, 13)
                     }
                 }
+
                 LETTERONEFORWARD -> {
                     if (player.getAttribute("tt-letter-one", 0) == 25) {
                         player.setAttribute("tt-letter-one", 0)
-                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-one", 0)], DOORLOCKINTERFACE, 6)
+                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-one", 0)], DOORLOCKINTERFACE, 13)
                     } else {
                         (player.incrementAttribute("tt-letter-one", 1))
-                        setInterfaceText(
-                            player,
-                            LETTERS[player.getAttribute("tt-letter-one", 0)],
-                            DOORLOCKINTERFACE,
-                            6
-                        )
+                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-one", 0)], DOORLOCKINTERFACE, 13)
                     }
                 }
+
                 LETTERTWOBACK -> {
                     if (player.getAttribute("tt-letter-two", 0) == 0) {
                         player.setAttribute("tt-letter-two", 25)
-                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-two", 0)], DOORLOCKINTERFACE, 7)
+                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-two", 0)], DOORLOCKINTERFACE, 14)
                     } else {
                         (player.incrementAttribute("tt-letter-two", -1))
-                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-two", 0)], DOORLOCKINTERFACE, 7)
+                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-two", 0)], DOORLOCKINTERFACE, 14)
                     }
                 }
+
                 LETTERTWOFORWARD -> {
                     if (player.getAttribute("tt-letter-two", 0) == 25) {
                         player.setAttribute("tt-letter-two", 0)
-                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-two", 0)], DOORLOCKINTERFACE, 7)
+                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-two", 0)], DOORLOCKINTERFACE, 14)
                     } else {
                         (player.incrementAttribute("tt-letter-two", 1))
-                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-two", 0)], DOORLOCKINTERFACE, 7)
+                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-two", 0)], DOORLOCKINTERFACE, 14)
                     }
                 }
+
                 LETTERTHREEBACK -> {
                     if (player.getAttribute("tt-letter-three", 0) == 0) {
                         player.setAttribute("tt-letter-three", 25)
-                        setInterfaceText(
-                            player,
-                            LETTERS[player.getAttribute("tt-letter-three", 0)],
-                            DOORLOCKINTERFACE,
-                            8
-                        )
+                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-three", 0)], DOORLOCKINTERFACE, 15)
                     } else {
                         (player.incrementAttribute("tt-letter-three", -1))
-                        setInterfaceText(
-                            player,
-                            LETTERS[player.getAttribute("tt-letter-three", 0)],
-                            DOORLOCKINTERFACE,
-                            8
-                        )
+                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-three", 0)], DOORLOCKINTERFACE, 15)
                     }
                 }
+
                 LETTERTHREEFORWARD -> {
                     if (player.getAttribute("tt-letter-three", 0) == 25) {
                         player.setAttribute("tt-letter-three", 0)
-                        setInterfaceText(
-                            player,
-                            LETTERS[player.getAttribute("tt-letter-three", 0)],
-                            DOORLOCKINTERFACE,
-                            8
-                        )
+                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-three", 0)], DOORLOCKINTERFACE, 15)
                     } else {
                         (player.incrementAttribute("tt-letter-three", 1))
-                        setInterfaceText(
-                            player,
-                            LETTERS[player.getAttribute("tt-letter-three", 0)],
-                            DOORLOCKINTERFACE,
-                            8
-                        )
+                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-three", 0)], DOORLOCKINTERFACE, 15)
                     }
                 }
+
                 LETTERFOURBACK -> {
                     if (player.getAttribute("tt-letter-four", 0) == 0) {
                         player.setAttribute("tt-letter-four", 25)
-                        setInterfaceText(
-                            player,
-                            LETTERS[player.getAttribute("tt-letter-four", 0)],
-                            DOORLOCKINTERFACE,
-                            9
-                        )
+                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-four", 0)], DOORLOCKINTERFACE, 16)
                     } else {
                         (player.incrementAttribute("tt-letter-four", -1))
-                        setInterfaceText(
-                            player,
-                            LETTERS[player.getAttribute("tt-letter-four", 0)],
-                            DOORLOCKINTERFACE,
-                            9
-                        )
+                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-four", 0)], DOORLOCKINTERFACE, 16)
                     }
                 }
+
                 LETTERFOURFORWARD -> {
                     if (player.getAttribute("tt-letter-four", 0) == 25) {
                         player.setAttribute("tt-letter-four", 0)
-                        setInterfaceText(
-                            player,
-                            LETTERS[player.getAttribute("tt-letter-four", 0)],
-                            DOORLOCKINTERFACE,
-                            9
-                        )
+                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-four", 0)], DOORLOCKINTERFACE, 16)
                     } else {
                         (player.incrementAttribute("tt-letter-four", 1))
-                        setInterfaceText(
-                            player,
-                            LETTERS[player.getAttribute("tt-letter-four", 0)],
-                            DOORLOCKINTERFACE,
-                            9
-                        )
+                        setInterfaceText(player, LETTERS[player.getAttribute("tt-letter-four", 0)], DOORLOCKINTERFACE, 16)
                     }
                 }
+
                 ENTER -> {
                     val letterOne = LETTERS[player.getAttribute("tt-letter-one", 0)]
                     val letterTwo = LETTERS[player.getAttribute("tt-letter-two", 0)]
