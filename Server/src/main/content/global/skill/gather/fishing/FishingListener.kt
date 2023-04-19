@@ -51,7 +51,7 @@ class FishingListener : InteractionListener{
             return restartScript(player)
         }
 
-        if (state == 1) {
+        if (state == 0) {
             if (!checkRequirements(player, op, node)) return clearScripts(player)
             forager?.let {
                 val dest = player.location.transform(player.direction)
@@ -68,7 +68,7 @@ class FishingListener : InteractionListener{
             if (!hasSpaceFor(player, Item(fish.id)) || !op.removeBait(player)) return restartScript(player)
             player.dispatch(ResourceProducedEvent(fish.id, fish.getItem().amount, node))
             val item = fish.getItem()
-
+            sendMessage(player, "You successfully catch some ${item.name.lowercase().replace("raw ", "")}.")
             if (isActive(SkillcapePerks.GREAT_AIM, player) && RandomFunction.roll(20)) {
                 addItemOrDrop(player, item.id, item.amount)
                 sendMessage(player, colorize("%RYour expert aim catches you a second fish."))
