@@ -27,8 +27,10 @@ class BlackDemonNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,lo
 
     override fun finalizeDeath(killer: Entity?) {
         // In the event that this npcID is used somewhere else...
-        if(killer!!.asPlayer().location.regionId == 9882)
+        if(killer!!.asPlayer().location.regionId == 9882) {
             setQuestStage(killer!!.asPlayer(), questName, 98)
+            this.isRespawn = false
+        }
         super.finalizeDeath(killer)
     }
 }
