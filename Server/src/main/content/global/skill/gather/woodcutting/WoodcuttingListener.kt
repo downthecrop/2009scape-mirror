@@ -4,6 +4,7 @@ import content.data.skill.SkillingPets
 import content.data.skill.SkillingTool
 import content.data.tables.BirdNest
 import content.global.skill.farming.FarmingPatch.Companion.forObject
+import content.global.skill.firemaking.Log
 import content.global.skill.skillcapeperks.SkillcapePerks
 import content.global.skill.skillcapeperks.SkillcapePerks.Companion.isActive
 import content.region.misc.miscellania.dialogue.KjallakOnChopDialogue
@@ -74,6 +75,9 @@ class WoodcuttingListener : InteractionListener {
             if (!checkReward(player, resource, tool))
                 return delayClock(player, Clocks.SKILLING, 3)
 
+            val reward = resource.getReward()
+            val rewardAmount: Int
+
             if (tool.id == Items.INFERNO_ADZE_13661 && RandomFunction.roll(4)) {
                 sendMessage(player, "You chop some logs. The heat of the inferno adze incinerates them.")
                 Projectile.create(
@@ -87,12 +91,20 @@ class WoodcuttingListener : InteractionListener {
                         true,
                         25, 25
                 ).send()
+
+                //add woodcutting experience
+                player.getSkills().addExperience(Skills.WOODCUTTING, resource.getExperience())
+
+                //nullcheck the fire, and only if it exists award the firemaking XP
+                val fire = Log.forId(reward)
+                if (fire != null) {
+                    player.getSkills().addExperience(Skills.FIREMAKING, fire.getXp())
+                }
+
                 delayClock(player, Clocks.SKILLING, 3)
                 return rollDepletion(player, node.asScenery(), resource)
             }
 
-            val reward = resource.getReward()
-            val rewardAmount: Int
             if (reward > 0) {
                 rewardAmount = calculateRewardAmount(player, reward) // calculate amount
                 SkillingPets.checkPetDrop(player, SkillingPets.BEAVER) // roll for pet
