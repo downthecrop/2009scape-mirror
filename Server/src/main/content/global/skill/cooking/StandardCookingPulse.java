@@ -23,6 +23,8 @@ public class StandardCookingPulse extends Pulse {
 
     //Cooking sound
     public static final Audio SOUND = new Audio(2577, 1, 1);
+    
+    private static final int LUMBRIDGE_RANGE = 114;
 
     private final int initial;
     private final int product;
@@ -46,7 +48,7 @@ public class StandardCookingPulse extends Pulse {
         properties = CookableItems.forId(initial);
         if (checkRequirements()) {
             super.start();
-            cook(player, object, CookableItems.cookingMap.get(initial) != null && isBurned(player, object, initial), initial, product);
+            cook(player, object, properties != null && burned, initial, product);
             amount--;
         }
     }
@@ -67,7 +69,7 @@ public class StandardCookingPulse extends Pulse {
         this.experience = 0;
         if (properties != null) {
             // Handle Cook's Assistant range
-            if (object.getId() == 114 && !player.getQuestRepository().isComplete("Cook's Assistant")) {
+            if (object.getId() == LUMBRIDGE_RANGE && !player.getQuestRepository().isComplete("Cook's Assistant")) {
                 player.getPacketDispatch().sendMessage("You need to have completed the Cook's Assistant quest in order to use that range.");
                 return false;
             }
@@ -90,7 +92,7 @@ public class StandardCookingPulse extends Pulse {
 
     public boolean reward() {
         if (getDelay() == 1) {
-            int delay = object.getName().toLowerCase().equals("range") ? 5 : 4;
+            int delay = object.getName().toLowerCase().contains("range") ? 5 : 4;
             if(SkillcapePerks.isActive(SkillcapePerks.HASTY_COOKING, player)) {
                 delay -= 1;
             }
@@ -105,28 +107,30 @@ public class StandardCookingPulse extends Pulse {
         }
         return amount < 1;
     }
-
+    
     public boolean isBurned(final Player player, final Scenery object, int food) {
         boolean hasGauntlets = player.getEquipment().containsItem(new Item(Items.COOKING_GAUNTLETS_775));
-        double burn_stop = (double) CookableItems.getBurnLevel(food);
         int effectiveCookingLevel = player.getSkills().getLevel(Skills.COOKING);
-        if(SkillcapePerks.isActive(SkillcapePerks.HASTY_COOKING, player)) {
+        if (SkillcapePerks.isActive(SkillcapePerks.HASTY_COOKING, player)) {
             effectiveCookingLevel -= 5;
         }
-        int gauntlets_boost = 0;
         CookableItems item = CookableItems.forId(food);
-        if (hasGauntlets && (food == Items.RAW_SWORDFISH_371 || food == Items.RAW_LOBSTER_377 || food == Items.RAW_MONKFISH_7944 || food == Items.RAW_SHARK_383)) {
-            burn_stop -= 6;
-            gauntlets_boost += 6;
+        int low, high;
+        if (hasGauntlets && CookableItems.gauntletValues.containsKey(food)) {
+            int[] successValues = CookableItems.gauntletValues.get(food);
+            low = successValues[0];
+            high = successValues[1];
+        } else if (object.getId() == LUMBRIDGE_RANGE) {
+            int[] successValues = CookableItems.lumbridgeRangeValues.getOrDefault(food, new int[]{item.lowRange, item.highRange});
+            low = successValues[0];
+            high = successValues[1];
+        } else {
+            boolean isFire = object.getName().toLowerCase().contains("fire");
+            low = isFire ? item.low : item.lowRange;
+            high = isFire ? item.high : item.highRange;
         }
-        if (effectiveCookingLevel >= burn_stop) {
-            return false;
-        }
-        int cook_level = effectiveCookingLevel + gauntlets_boost;
         double host_ratio = RandomFunction.randomDouble(100.0);
-        double low = item.low + (object.getName().contains("fire") ? 0 : (0.1 * item.low));
-        double high = item.high + (object.getName().contains("fire") ? 0 : (0.1 * item.high));
-        double client_ratio = RandomFunction.getSkillSuccessChance(low,high,cook_level);
+        double client_ratio = RandomFunction.getSkillSuccessChance(low, high, effectiveCookingLevel);
         return host_ratio > client_ratio;
     }
 
