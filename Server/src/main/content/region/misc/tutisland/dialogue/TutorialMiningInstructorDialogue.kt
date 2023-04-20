@@ -26,7 +26,7 @@ class TutorialMiningInstructorDialogue(player: Player? = null) : core.game.dialo
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when(getAttribute(player, "tutorial:stage", 0)) {
-            30 -> npcl(core.game.dialogue.FacialExpression.FRIENDLY, "Hi there. You must be new around here. So what do I call you? 'Newcomer' seems so impersonal, and if we're going to be working together, I'd rather call you by name.")
+            30 -> npcl(core.game.dialogue.FacialExpression.FRIENDLY, "Hi there. You must be new around here. So what do I call you? 'Newcomer' seems so impersonal, and if we're going to be working together, I'd rather tell you by name.")
             34 -> playerl(core.game.dialogue.FacialExpression.FRIENDLY, "I prospected both types of rock! One set contains tin and the other has copper ore inside.")
             35 -> {
                 if(!inInventory(player, Items.BRONZE_PICKAXE_1265)) {
@@ -60,7 +60,7 @@ class TutorialMiningInstructorDialogue(player: Player? = null) : core.game.dialo
         when(getAttribute(player, "tutorial:stage", 0)) {
             30 -> when(stage) {
                 0 -> playerl(core.game.dialogue.FacialExpression.FRIENDLY, "You can call me ${player.username}.").also { stage++ }
-                1 -> npcl(core.game.dialogue.FacialExpression.FRIENDLY, "Ok then, ${player.username}. My name is Dezzick and I'm a miner by Trade. Let's prospect some of these rocks.").also { stage++ }
+                1 -> npcl(core.game.dialogue.FacialExpression.FRIENDLY, "Ok then, ${player.username}. My name is Dezzick and I'm a miner by trade. Let's prospect some of these rocks.").also { stage++ }
                 2 -> {
                     end()
                     setAttribute(player, "tutorial:stage", 31)

@@ -24,6 +24,10 @@ class TutorialRSGuideDialogue(player: Player? = null) : core.game.dialogue.Dialo
         npc = args[0] as NPC
         val tutStage = player?.getAttribute("tutorial:stage", 0) ?: 0
         if(tutStage < 2) {
+            end()
+            player.dialogueInterpreter.sendDialogues(npc,FacialExpression.HALF_GUILTY,"Greetings! Please follow the onscreen, instructions!")
+            return false
+        } else {
             Component.setUnclosable(
                 player,
                 interpreter.sendDialogues(
@@ -33,11 +37,11 @@ class TutorialRSGuideDialogue(player: Player? = null) : core.game.dialogue.Dialo
                     "instructions!"
                 )
             )
-            return false
         }
 
         if(tutStage == 2)
         {
+            player.lock()
             Component.setUnclosable(
                 player,
                 interpreter.sendDialogues(
@@ -122,6 +126,7 @@ class TutorialRSGuideDialogue(player: Player? = null) : core.game.dialogue.Dialo
 
             5 -> {
                 end()
+                player.unlock()
                 setAttribute(player, "tutorial:stage", 3)
                 TutorialStage.load(player, 3)
             }

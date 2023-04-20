@@ -14,6 +14,7 @@ import core.api.Event
 import core.game.world.GameWorld.Pulser
 import core.game.world.GameWorld.settings
 import core.game.world.repository.Repository
+import org.rs09.consts.Items
 
 /**
  * Loads stage-relevant tutorial data
@@ -47,7 +48,31 @@ object TutorialStage {
                 teleport(player, Location.create(3094, 3107, 0))
                 hideTabs(player, login)
                 CharacterDesign.open(player)
+                Component.setUnclosable(
+                    player,
+                    player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+                        "",
+                        "",
+                        "Getting started",
+                        "Please take a moment to design your character.",
+                        ""
+                    )
+                ).also {
+                    runTask(player, 10) {
+                        Component.setUnclosable(
+                            player,
+                            player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+                                "Getting started",
+                                "To start the tutorial use your left mouse button to click on the",
+                                "" + settings!!.name + " Guide in this room. He is indicated by a flashing",
+                                "yellow arrow above his head. If you can't see him, use your",
+                                "keyboard's arrow keys to rotate the view."
+                            )
+                        )
+                    }
+                }
             }
+
 
             1 -> {
                 hideTabs(player, login)
@@ -58,10 +83,10 @@ object TutorialStage {
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "",
-                        "Player controls",
+                        "",
+                        "Game options",
                         "Please click on the flashing spanner icon found at the bottom",
-                        "right of your screen. This will display your player controls.",
-                        ""
+                        "right of your screen. This will display your game options."
                     )
                 )
             }
@@ -73,13 +98,12 @@ object TutorialStage {
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
-                        "Player controls",
-                        "On the side panel you can now see a variety of options from",
-                        "adjusting graphics settings, to adjusting the volume of ",
-                        "music, to selecting whether your player should accept help",
-                        "from other players. Don't worry about these too much for now,",
-                        "they will become clearer as you explore the game. Talk to the",
-                        settings!!.name + " Guide to continue."
+                        "Game Options",
+                        "In the interface, you can now see a variety of options such as",
+                        "screen brightness, sound and music volume and whether you",
+                        "want to accept aid from other player's or not. Don't worry",
+                        "about these too much for now; they will become easier as you",
+                        "explore the game. Talk to the " + settings!!.name + " Guide to continue."
                     )
                 )
             }
@@ -87,7 +111,7 @@ object TutorialStage {
             3 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Location.create(3098,3107,0), 125)
+                registerHintIcon(player, Location.create(3098, 3107, 0), 125)
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
@@ -110,9 +134,9 @@ object TutorialStage {
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Moving around",
                         "Follow the path to find the next instructor. Clicking on the",
-                        "ground will walk you to that point. Talk to the Survival Expert by",
-                        "the pond to continue the tutorial. Remember you can rotate",
-                        "the view by pressing the arrow keys."
+                        "ground will walk you to that point. You can also navigate by",
+                        "clicking on the minimap in the top-right corner of your screen.",
+                        "Talk to Survival Expert by the pond to continue the tutorial."
                     )
                 )
             }
@@ -126,7 +150,7 @@ object TutorialStage {
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Viewing the items that you were given.",
-                        "Click on the flashing backpack icon to the right hand side of",
+                        "Click on the flashing backpack icon to the right-hand side of",
                         "the main window to view your inventory. Your inventory is a list",
                         "of everything you have in your backpack.",
                         ""
@@ -185,7 +209,7 @@ object TutorialStage {
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Please wait.",
                         "",
-                        "Your character is now attempting to light a fire.",
+                        "Your character is now attempting to light the fire.",
                         "This should only take a few seconds.",
                         ""
                     )
@@ -201,9 +225,9 @@ object TutorialStage {
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "You gained some experience.",
                         "",
-                        "",
-                        "Click on the flashing bar graph icon near the inventory button to see",
-                        "your skill state."
+                        "Click on the flashing bar graph icon near the inventory button",
+                        "to see your skill state.",
+                        ""
                     )
                 )
             }
@@ -215,27 +239,27 @@ object TutorialStage {
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
-                        "Your skill stats.",
-                        "Here you will see how good your skills are. As you move your mouse",
-                        "over any of the icons in this tab, the small yellow popup box will show",
-                        "you the exact amount of experience you have and how much is",
-                        "needed to get to the next level. Speak to the survival guide."
+                        "Your skill stats",
+                        "Here you will see how good your skills are. As you move your",
+                        "mouse over any of the icons in this tab, the small yellow popup",
+                        "box will show you the exact amount of experience you have",
+                        "and how much is needed to get to the next level. Speak to the survival guide."
                     )
                 )
             }
 
             12 -> {
                 hideTabs(player, login)
-                setVarbit(player,406, 0, 2)
+                setVarbit(player, 406, 0, 2)
                 removeHintIcon(player)
                 registerHintIcon(player, Repository.findNPC(952)!!)
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Catch some shrimp",
-                        "Click on the bubbling fishing spot indicated by the flashing arrow.",
-                        "Remember, you can check your inventory by clicking the backpack",
-                        "icon.",
+                        "Click on the bubbling fishing spot, indicated by the flashing",
+                        "arrow. Remember, you can check your inventory by clicking the",
+                        "backpack icon.",
                         ""
                     )
                 )
@@ -250,8 +274,8 @@ object TutorialStage {
                         "Please wait.",
                         "",
                         "This should only take a few seconds.",
-                        "As you gain Fishing experience you'll find that there are many types",
-                        "of fish and many ways to catch them."
+                        "As you gain Fishing experience you'll find that there are many",
+                        "types of fish and many ways to catch them."
                     )
                 )
             }
@@ -262,11 +286,24 @@ object TutorialStage {
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Cooking your shrimp",
-                        "Now you have caught some shrimp, let's cook it. First light a fire: chop",
-                        "down a tree and then use the tinderbox on the logs. If you've lost",
-                        "your axe or tinderbox Brynna will give you another.",
-                        "Once you have a fire, \"use\" your shrimp on the fire."
-                    )
+                        "Now you have caught some shrimp, let's cook it. First light a",
+                        "fire: chop down a tree and then use the tinderbox on the logs.",
+                        "If you've lost your axe or tinderbox Brynna will give you",
+                        "another."
+                    ).also {
+                        if (!inInventory(player, Items.RAW_SHRIMPS_317, 1)) {
+                            Component.setUnclosable(
+                                player,
+                                player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+                                    "Cooking your shrimp",
+                                    "Now right click on the shrimp and select the use option. Next,",
+                                    "left click on the fire you just lit. If while doing this you look in",
+                                    "the top left of the screen, you will see the instruction that",
+                                    "you're giving your character."
+                                )
+                            )
+                        }
+                    }
                 )
             }
 
@@ -276,10 +313,10 @@ object TutorialStage {
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Burning your shrimp",
-                        "You have just burnt your first shrimp. This is normal. As you get",
-                        "more experience in Cooking you will burn stuff less often. Let's try",
-                        "cooking without burning it this time.",
-                        ""
+                        "You have just burnt your first shrimp. This is normal. As you",
+                        "get more experience in Cooking you will burn stuff less often.",
+                        "Let's try cooking without burning it this time. First catch some",
+                        "more shrimp, then use them on a fire."
                     )
                 )
             }
@@ -291,8 +328,8 @@ object TutorialStage {
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Well done, you've just cooked your first " + settings!!.name + " meal.",
-                        "",
-                        "You can now move on to the next",
+                        "If you'd like a recap on anything you've learnt so far, speak to",
+                        "the Survival Expert. You can now move on to the next",
                         "instructor. Click on the gate shown and follow the path.",
                         "Remember, you can move the camera with the arrow keys."
                     )
@@ -306,11 +343,11 @@ object TutorialStage {
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
-                        "Find your next instructor.",
+                        "Find your next instructor",
                         "Follow the path until you get to the door with the yellow arrow",
-                        "above it. Click on the door to open it. Notice the mini-map in",
-                        "the top right, this shows a top down view of the area around",
-                        "you. This can also be used for navigation."
+                        "above it. Click on the door to open it. Notice the mini map in the",
+                        "top right; this shows a top down view of the area around you.",
+                        "This can also be used for navigation."
                     )
                 )
             }
@@ -325,7 +362,7 @@ object TutorialStage {
                         "Find your next instructor",
                         "Talk to the chef indicated. He will teach you the more advanced",
                         "aspects of Cooking such as combining ingredients. He will also",
-                        "teach you about your music player menu as well.",
+                        "teach you about your Music Player.",
                         ""
                     )
                 )
@@ -338,9 +375,9 @@ object TutorialStage {
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Making dough",
-                        "This is the base for many of the meals. To make dough we must mix",
-                        "flour and water. First right click the bucket of water and select use.",
-                        "then left click on the pot of flour.",
+                        "This is the base for many of the meals. To make dough we must",
+                        "mix flour and water. First, right click the bucket of water and",
+                        "select use, then left click on the pot of flour.",
                         ""
                     )
                 )
@@ -353,9 +390,9 @@ object TutorialStage {
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Cooking dough",
-                        "Now you have made dough you can cook it. To cook the dough use",
-                        "it with the range shown by the arrow. If you lose your dough talk to",
-                        "Lev he will give you more ingredients.",
+                        "Now you have made dough, you can cook it. To cook the dough,",
+                        "use it with the range shown by the arrow. If you lose your",
+                        "dough, talk to Lev - he will give you more ingredients.",
                         ""
                     )
                 )
@@ -368,11 +405,12 @@ object TutorialStage {
                 setVarbit(player, 1021, 0, 14)
                 Component.setUnclosable(
                     player,
-                    player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+                    player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
                         "Cooking dough",
                         "Well done! Your first loaf of bread. As you gain experience in",
-                        "Cooking, you will be able to make other things like pies, cakes and even ",
-                        "kebabs. Now you've got the hang of cooking, lets move on. Click on",
+                        "Cooking, you will be able to make other things like pies, cakes",
+                        "and even kebabs. Now you've got the hang of cooking, let's",
+                        "move on. Click on the flashing icon in the bottom right to see",
                         "the flashing icon in the bottom right to see the Music Player."
                     )
                 )
@@ -384,12 +422,13 @@ object TutorialStage {
                 registerHintIcon(player, Location.create(3072, 3090, 0), 125)
                 Component.setUnclosable(
                     player,
-                    player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+                    player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
                         "The Music Player",
-                        "From this interface you can control the music that is played. As you",
-                        "explore the world and complete quests, more of the tunes will become",
-                        "unlocked. Once you've examined this menu use the next door to",
-                        "continue."
+                        "From this interface you can control the music that is played.",
+                        "As you explore the world and complete quests, more of the",
+                        "tunes will become unlocked. Once you've examined this menu,",
+                        "use the next door to continue. If you need a recap on anything",
+                        "you've learnt so far, speak to the Master Chef."
                     )
                 )
             }
@@ -406,9 +445,9 @@ object TutorialStage {
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Emotes",
                         "",
-                        "Now how about showing some feelings? You will see a flashing icon in",
-                        "the shape of a person. Click on that to access your emotes.",
-                        ""
+                        "Now how about showing some feelings? You will see a flashing",
+                        "icon in the shape of a person. Click on that to access your",
+                        "emotes."
                     )
                 )
             }
@@ -421,7 +460,7 @@ object TutorialStage {
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Emotes",
-                        "For those situtations where words don't quite describe how you feel try",
+                        "For those situations where words don't quite describe how you feel try",
                         "an emote. Go ahead try one out! You might notice that some of the",
                         "emotes are grey and cannot be used now. Don't worry! As you",
                         "progress further into the game you'll gain access to all sorts of things."
@@ -437,8 +476,8 @@ object TutorialStage {
                         "Running",
                         "",
                         "It's only a short distance to the next guide.",
-                        "Why not try running there? To do this click on the run icon in",
-                        "your settings tab."
+                        "Why not try running there? To do this, click on the run icon",
+                        "next to the minimap."
                     )
                 )
             }
@@ -482,10 +521,10 @@ object TutorialStage {
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
-                        "Your quest Journal",
+                        "Your Quest Journal",
                         "",
-                        "This is your quest Journal, a list of all the quests in the game. Talk",
-                        "to the Quest Guide again for an explanation.",
+                        "This is your Quest Journal, a list of all the quests in the game.",
+                        "Talk to the Quest Guide again for an explanation.",
                         ""
                     )
                 )
@@ -499,10 +538,10 @@ object TutorialStage {
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
-                        "Moving on.",
                         "",
-                        "It's time to enter some caves. Click on the ladder to go down to the",
-                        "next area.",
+                        "Moving on",
+                        "It's time to enter some caves. Click on the ladder to go down to",
+                        "the next area.",
                         ""
                     )
                 )
@@ -518,9 +557,9 @@ object TutorialStage {
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Mining and Smithing",
                         "",
-                        "Next let's get you a weapon, or more to the point, you can make",
-                        "your first weapon yourself. Don't panic, the Mining Instructor will",
-                        "help you. Talk to him and he'll tell you all about it."
+                        "Next let's get you a weapon, or more to the point, you can",
+                        "make your first weapon yourself. Don't panic, the Mining",
+                        "Instructor will help you. Talk to him and he'll tell you all about it."
                     )
                 )
             }
@@ -533,9 +572,9 @@ object TutorialStage {
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Prospecting",
-                        "To prospect a mineable rock, just right click it and select the prospect",
-                        "rock option. This will tell you the type of ore you can mine from it.",
-                        "Try it now on one of the rocks indicated.",
+                        "To prospect a mineable rock, just right click it and select the",
+                        "'prospect rock' option. This will tell you the type of ore you can",
+                        " mine from it. Try it now on one of the rocks indicated.",
                         ""
                     )
                 )
@@ -549,8 +588,8 @@ object TutorialStage {
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Please wait.",
                         "",
-                        "Your character is now attempting to prospect the rock. This should",
-                        "Only take a few seconds.",
+                        "Your character is now attempting to prospect the rock. This",
+                        "should only take a few seconds.",
                         ""
                     )
                 )
@@ -585,12 +624,12 @@ object TutorialStage {
                 registerHintIcon(player, Repository.findNPC(948)!!)
                 Component.setUnclosable(
                     player,
-                    player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
+                    player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "It's copper.",
+                        "",
                         "Talk to the Mining Instructor to find out about these types of",
                         "ore and how you can mine them.",
                         "He'll even give you the required tools.",
-                        ""
                     )
                 )
             }
@@ -603,10 +642,10 @@ object TutorialStage {
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Mining",
-                        "It's quite simple really. All you need to do is right click on the rock",
-                        "and select 'mine'. You can only mine when you have a pickaxe. So",
-                        "give it a try: first mine one tin ore.",
-                        ""
+                        "",
+                        "It's quite simple really. All you need to do is right click on the",
+                        "rock and select 'mine' You can only mine when you have a",
+                        "pickaxe. So give it a try: first mine one tin ore.",
                     )
                 )
             }
@@ -633,10 +672,10 @@ object TutorialStage {
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Mining",
-                        "Now you have some tin ore you just need some copper ore, then",
-                        "you'll have all you need to create a bronze bar. As you did before",
-                        "right click on the copper rock and select 'mine'.",
-                        ""
+                        "",
+                        "Now you have some tin ore you just need some copper ore,",
+                        "then you'll have all you need to create a bronze bar. As you",
+                        "did before right click on the copper rock and select 'mine'."
                     )
                 )
             }
@@ -649,15 +688,15 @@ object TutorialStage {
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Smelting",
-                        "You should now have both some copper and tin ore. So let's smelt",
-                        "them to make a bronze bar. To do this right click on either tin or",
-                        "copper ore and select use then left click on the furnance. Try it now.",
-                        ""
+                        "You should now have both some copper and tin ore. So let's",
+                        "smelt them to make a bronze bar. To do this, right click on",
+                        "either tin or copper ore and select use then left click on the",
+                        "furnace. Try it now."
                     )
                 )
             }
 
-            //Yes I know I skipped one. Blegh.
+          //39 -> {}
 
             40 -> {
                 hideTabs(player, login)
@@ -699,8 +738,8 @@ object TutorialStage {
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Smithing a dagger.",
                         "Now you have the Smithing menu open, you will see a list of all",
-                        "the things you can make. Only the dagger can be made at this time; ",
-                        "this is shown by the white text under it. You'll need",
+                        "the things you can make. Only the dagger can be made at your",
+                        "skill level; this is shown by the white text under it. You'll need",
                         "to select the dagger to continue."
                     )
                 )
@@ -708,15 +747,15 @@ object TutorialStage {
 
             43 -> {
                 hideTabs(player, login)
-                registerHintIcon(player, Location.create(3094, 9502), 75)
+                registerHintIcon(player, Location.create(3095, 9502), 75)
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "You've finished in this area.",
+                        "",
                         "So let's move on. Go through the gates shown by the arrow.",
                         "Remember, you may need to move the camera to see your",
-                        "surroundings.",
-                        ""
+                        "surroundings. Speak to the guide for a recap at any time.",
                     )
                 )
             }
@@ -728,10 +767,10 @@ object TutorialStage {
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
-                        "Combat.",
-                        "In this area you will find out about combat, both melee and",
-                        "ranged. Speak to the guide and he'll tell you about it.",
+                        "Combat",
                         "",
+                        "In this area you will find out about combat with swords and",
+                        "bows. Speak to the guide and he will tell you all about it.",
                         ""
                     )
                 )
@@ -740,18 +779,33 @@ object TutorialStage {
             45 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                player.interfaceManager.openTab(Component(Components.WORNITEMS_387))
-                setVarbit(player, 1021, 0, 5)
-                Component.setUnclosable(
-                    player,
-                    player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
-                        "Wielding weapons.",
-                        "",
-                        "You now have access to a new interface. Click on the flashing",
-                        "icon of a man, the one to the right of your backpack icon.",
-                        ""
+                runTask(player, 10) {
+                    Component.setUnclosable(
+                        player,
+                        player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+                            "Wielding weapons",
+                            "",
+                            "You now have access to a new interface. Click on the flashing",
+                            "icon of a man, the one to the right of your backpack icon.",
+                            ""
+                        )
                     )
-                )
+                }.also {
+                    hideTabs(player, login)
+                    removeHintIcon(player)
+                    player.interfaceManager.openTab(Component(Components.WORNITEMS_387))
+                    setVarbit(player, 1021, 0, 5)
+                    Component.setUnclosable(
+                        player,
+                        player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+                            "Worn interface",
+                            "You can see what items you are wearing in the worn equipment",
+                            "to the left of the screen, with their combined statistics on the",
+                            "right. Let's add something. Left click your dagger to 'wield' it.",
+                            ""
+                        )
+                    )
+                }
             }
 
             46 -> {
@@ -760,10 +814,10 @@ object TutorialStage {
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
-                        "This is your worn inventory.",
-                        "From here you can see what items you have equipped. Let's",
-                        "get one of those slots filled, go back to your inventory and",
-                        "right click your dagger, select wield from the menu.",
+                        "This is your worn equipment.",
+                        "From here you can see what items you have equipped. You will",
+                        "notice the button 'Show Equipment Stats'. Click on this now to",
+                        "display the details of what you have equipped.",
                         ""
                     )
                 )
@@ -776,10 +830,11 @@ object TutorialStage {
                     player,
                     player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
                         "You're now holding your dagger.",
-                        "Clothes, armor, weapons and many other items are equipped",
+                        "Clothes, armour, weapons and many other items are equipped",
                         "like this. You can unequip items by clicking on the item in the",
-                        "worn inventory.",
-                        "Speak to the Combat Instructor to continue."
+                        "worn equipment. You can close this window by clicking on the",
+                        "small 'x' in the top-right hand corner. Speak to the Combat",
+                        "Instructor."
                     )
                 )
             }
@@ -860,7 +915,7 @@ object TutorialStage {
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
-                        "Sit back and watch",
+                        "Sit back and watch.",
                         "While you are fighting you will see a bar over your head. The",
                         "bar shows how much health you have left. Your opponent will",
                         "have one too. You will continue to attack the rat until it's dead",
@@ -876,9 +931,9 @@ object TutorialStage {
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Well done, you've made your first kill!",
+                        "",
                         "Pass through the gate and talk to the Combat Instructor; he",
                         "will give you your next task.",
-                        "",
                         ""
                     )
                 )
@@ -889,10 +944,10 @@ object TutorialStage {
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
-                        "Rat ranging.",
+                        "Rat ranging",
                         "Now you have a bow and some arrows. Before you can use",
                         "them you'll need to equip them. Once equipped with the",
-                        "ranging gear try killing another rat. Remember, to attack: right",
+                        "ranging gear try killing another rat. Remember: to attack, right",
                         "click on the monster and select attack."
                     )
                 )
@@ -906,10 +961,10 @@ object TutorialStage {
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Moving on.",
-                        "You have completed the tasks here, to move on click on the",
-                        "ladder shown.",
-                        "",
-                        ""
+                        "You have completed the tasks here. To move on, click on the",
+                        "ladder shown. If you need to go over any of what you learnt",
+                        "here, just talk to the Combat Instructor and he'll tell you what",
+                        "he can."
                     )
                 )
             }
@@ -925,7 +980,7 @@ object TutorialStage {
                         "Follow the path and you will come to the front of a building.",
                         "This is the 'Bank of " + settings!!.name + "' where you can store all your",
                         "most valued items. To open your bank box just right click on an",
-                        "open booth indicated and select use."
+                        "open booth indicated and select 'use'."
                     )
                 )
             }
@@ -940,7 +995,7 @@ object TutorialStage {
                         "This is your bank box.",
                         "You can store stuff here for safekeeping. If you die, anything",
                         "in your bank will be saved. To deposit something, right click it",
-                        "and select 'store'. One you've had a good look, close the",
+                        "and select 'Deposit-1'. Once you've had a good look, close the",
                         "window and move on through the door indicated."
                     )
                 )
@@ -953,10 +1008,10 @@ object TutorialStage {
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
-                        "Financial advice.",
-                        "The guide here will tell you about making cash. Just click on",
-                        "him to hear what he's got to say.",
+                        "Financial advice",
                         "",
+                        "The guide here will tell you all about making cash. Just click on",
+                        "him to hear what he's got to say.",
                         ""
                     )
                 )
@@ -970,8 +1025,8 @@ object TutorialStage {
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "",
-                        "Continue through the next door.",
                         "",
+                        "Continue through the next door.",
                         "",
                         ""
                     )
@@ -987,7 +1042,7 @@ object TutorialStage {
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Prayer",
                         "Follow the path to the chapel and enter it.",
-                        "Once inside talk to the monk. He'll tell you all about the prayer",
+                        "Once inside talk to the monk. He'll tell you all about the Prayer",
                         "skill.",
                         ""
                     )
@@ -1002,9 +1057,9 @@ object TutorialStage {
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
-                        "Your Prayer menu",
-                        "Click on the flashing icon to open the Prayer menu.",
+                        "Your Prayer List",
                         "",
+                        "Click on the flashing icon to open the Prayer List.",
                         "",
                         ""
                     )
@@ -1018,9 +1073,9 @@ object TutorialStage {
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "",
-                        "Your Prayer menu.",
-                        "Talk with Brother Brace and he'll tell you all about prayer.",
+                        "Your Prayer List",
                         "",
+                        "Talk with Brother Brace and he'll tell you all about prayers.",
                         ""
                     )
                 )
@@ -1035,9 +1090,9 @@ object TutorialStage {
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "",
-                        "Friends list.",
+                        "Friends list",
                         "You should now see another new icon. Click on the flashing",
-                        "smiling face to open your friend list.",
+                        "smiling face to open your Friend List.",
                         ""
                     )
                 )
@@ -1051,10 +1106,10 @@ object TutorialStage {
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
-                        "This is your friends list.",
-                        "This will be explained by Brother Brace shortly, but first click",
-                        "the other flashing icon next to the friends list one.",
+                        "This is your Friends List.",
                         "",
+                        "This will be explained by Brother Brace shortly, but first click",
+                        "on the other flashing face in the interface.",
                         ""
                     )
                 )
@@ -1067,8 +1122,8 @@ object TutorialStage {
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
-                        "This is your ignore list.",
-                        "The two lists, friends and ignore, can be very helpful for",
+                        "This is your Ignore List.",
+                        "The two lists, Friends and Ignore - can be very helpful for",
                         "keeping track of when your friends are online or for blocking",
                         "messages from people you simply don't like. Speak with",
                         "Brother Brace and he will tell you more."
@@ -1083,10 +1138,10 @@ object TutorialStage {
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+                        "",
                         "Your final instructor!",
                         "You're almost finished on tutorial island. Pass through the",
-                        "door to find the path leading to your last instructor.",
-                        "",
+                        "door to find the path leading to your final instructor.",
                         ""
                     )
                 )
@@ -1100,7 +1155,7 @@ object TutorialStage {
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "Your final instructor!",
-                        "Just follow the path to the wizards house, where you will be",
+                        "Just follow the path to the Wizard's house, where you will be",
                         "shown how to cast spells. Just talk with the mage indicated to",
                         "find out more.",
                         ""
@@ -1116,10 +1171,10 @@ object TutorialStage {
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
-                        "Open up your final menu.",
-                        "Open up the Magic Spellbook tab by clicking on the flashing spellbook",
-                        "icon next to the Prayer List tab you just learned about.",
+                        "Open up your final tab.",
                         "",
+                        "Open up the Magic Spellbook tab by clicking on the flashing",
+                        "icon next to the Prayer List tab you just learned about.",
                         ""
                     )
                 )
@@ -1146,11 +1201,11 @@ object TutorialStage {
                     player,
                     player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
                         "Cast Wind Strike at a chicken.",
-                        "Now you have the runes you should see the Wind Strike icon",
-                        "at the top-left of your spellbook, second from the left. Walk over to",
-                        "the caged chickens, click the Wind Strike icon and then  ",
-                        "select one of the chickens to cast it on. It may take",
-                        "several tries."
+                        "Now you have the runes you should see the Wind Strike icon at the",
+                        "top-left of your spellbook, second in from the left. Walk over",
+                        "to the caged chickens, click the Wind Strike icon and then",
+                        "select one of the chickens to cast it on. It may take several",
+                        "tries."
                     )
                 )
             }
@@ -1163,9 +1218,9 @@ object TutorialStage {
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                         "You have almost completed the tutorial!",
-                        "All you need to do now is teleport to the mainland. Just speak with",
-                        "Terrova and he'll tell you how to do that.",
-                        "You have almost completed the tutorial!",
+                        "",
+                        "All you need to do now is teleport to the mainland. Just speak",
+                        "with Terrova and he'll tell you how to do that.",
                         ""
                     )
                 )

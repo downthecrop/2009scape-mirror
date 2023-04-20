@@ -30,7 +30,7 @@ class TutorialMasterChefDialogue(player: Player? = null) : core.game.dialogue.Di
                 interpreter.sendDialogues(
                     npc,
                     core.game.dialogue.FacialExpression.FRIENDLY,
-                    "Ahh! Welcome, newcomer. I am the Master Chef, Lev. It",
+                    "Ah! Welcome, newcomer. I am the Master Chef, Lev. It",
                     "is here I will teach you how to cook food truly fit for a",
                     "king."
                 )

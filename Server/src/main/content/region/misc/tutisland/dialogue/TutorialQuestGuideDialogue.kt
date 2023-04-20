@@ -32,8 +32,8 @@ class TutorialQuestGuideDialogue(player: Player? = null) : core.game.dialogue.Di
                 interpreter.sendDialogues(
                     npc,
                     core.game.dialogue.FacialExpression.FRIENDLY,
-                    "Ah. Welcome adventurer. I'm here to tell you all about",
-                    "quests. Lets start by opening the Quest list."
+                    "Ah. Welcome, adventurer. I'm here to tell you all about",
+                    "quests. Lets start by opening the Quest List."
                 )
             )
 
@@ -43,7 +43,7 @@ class TutorialQuestGuideDialogue(player: Player? = null) : core.game.dialogue.Di
                     npc,
                     core.game.dialogue.FacialExpression.FRIENDLY,
                     "Now you have the journal open. I'll tell you a bit about",
-                    "it At the moment all the quests are shown in red. Which",
+                    "it At the moment all the quests are shown in red, which",
                     "means you have not started them yet."
                 )
             )
@@ -100,7 +100,7 @@ class TutorialQuestGuideDialogue(player: Player? = null) : core.game.dialogue.Di
                         core.game.dialogue.FacialExpression.FRIENDLY,
                         "There's not a lot more I can tell you about questing.",
                         "You have to experience the thrill of it yourself to fully",
-                        "understand. You may find some adevnture in the caves",
+                        "understand. You may find some adventure in the caves",
                         "under my house."
                     )
                 ).also { stage++ }

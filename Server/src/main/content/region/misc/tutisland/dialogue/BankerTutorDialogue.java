@@ -38,7 +38,7 @@ public final class BankerTutorDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = args[0] instanceof NPC ? (NPC) args[0] : null;
-		npc("Good day, how may I help you?");
+		npc("Good day, would you like to access your bank account?");
 		stage = 0;
 		return true;
 	}

@@ -34,8 +34,8 @@ class SurvivalExpertDialogue(player: Player? = null) : core.game.dialogue.Dialog
                     npc,
                     core.game.dialogue.FacialExpression.FRIENDLY,
                     "Hello there, newcomer. My name is Brynna. My job is",
-                    "to teach you a few suvival tips and tricks. First off",
-                    "we're going to start with the most basic skill of",
+                    "to teach you a few survival tips and tricks. First off",
+                    "we're going to start with the most basic survival skill of",
                     "all: making a fire."
                 )
             )
@@ -46,8 +46,8 @@ class SurvivalExpertDialogue(player: Player? = null) : core.game.dialogue.Dialog
                     npc,
                     core.game.dialogue.FacialExpression.FRIENDLY,
                     "Well done! Next we need to get some food in our",
-                    "bellies. We'd need something to cook. There are shrimp",
-                    "in the pond there. So let's catch and cook some."
+                    "bellies. We'll need something to cook. There are shrimp",
+                    "in the pond there, so let's catch and cook some."
                 )
             )
 
@@ -79,7 +79,7 @@ class SurvivalExpertDialogue(player: Player? = null) : core.game.dialogue.Dialog
                         interpreter.sendDoubleItemMessage(
                             Items.TINDERBOX_590,
                             Items.BRONZE_AXE_1351,
-                            "The Surivival Guide gives you a <col=08088A>tinderbox</col> and a <col=08088A>bronze axe</col>!"
+                            "The Survival Guide gives you a <col=08088A>tinderbox</col> and a <col=08088A>bronze axe</col>!"
                         )
                     )
                     addItem(player, Items.TINDERBOX_590)
