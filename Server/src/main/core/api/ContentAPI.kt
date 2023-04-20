@@ -427,6 +427,28 @@ fun replaceScenery(toReplace: Scenery, with: Int, forTicks: Int, loc: Location? 
     toReplace.isActive = false
 }
 
+/** 
+ * Add a scenery to the world
+ * @param sceneryId the ID of the scenery to add
+ * @param location the location to place it at
+ * @param rotation the rotation of the scenery (default 0)
+ * @param type the type of the scenery (default 22)
+ * @return the created scenery
+*/
+fun addScenery (sceneryId: Int, location: Location, rotation: Int = 0, type: Int = 22) : Scenery {
+    val scenery = Scenery(sceneryId, location, type, rotation)
+    SceneryBuilder.add(scenery)
+    return scenery
+}
+
+/**
+ * Remove a scenery from the world
+ * @param scenery the Scenery object to remove.
+*/
+fun removeScenery (scenery: Scenery) {
+    SceneryBuilder.remove(scenery)
+}
+
 /**
  * Replace an object with the given revert timer with the given rotation
  * @param toReplace the Scenery instance we are replacing
@@ -640,6 +662,15 @@ fun face(entity: Entity, toFace: Node, duration: Int = -1) {
             else -> entity.faceTemporary(toFace as Entity, duration)
         }
     }
+}
+
+/**
+ * Causes the given entity to reset its face direction.
+ * @param entity the entity to reset.
+*/
+fun resetFace (entity: Entity) {
+    entity.face(null)
+    entity.faceLocation(entity.location)
 }
 
 /**

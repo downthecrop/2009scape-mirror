@@ -32,6 +32,7 @@ import core.game.world.update.flag.npc.NPCForceChat;
 import core.game.world.update.flag.npc.NPCSwitchId;
 import core.tools.RandomFunction;
 import core.api.utils.GlobalKillCounter;
+import core.api.utils.Vector;
 import core.game.shops.Shops;
 import core.game.node.entity.combat.CombatSwingHandler;
 import core.game.system.config.NPCConfigParser;
@@ -142,7 +143,7 @@ public class NPC extends Entity {
 	 */
 	private String forceTalk;
 
-	public final NPCBehavior behavior;
+	public NPCBehavior behavior;
 
 	/**
 	 * Constructs a new {@code NPC} {@code Object}.
@@ -373,7 +374,7 @@ public class NPC extends Entity {
 
 	@Override
 	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
-		if ((entity instanceof Player && !definition.hasAction("attack")) || isInvisible()) {
+		if (isInvisible()) {
 			return false;
 		}
 		if (task != null && entity instanceof Player && task.levelReq > entity.getSkills().getStaticLevel(Skills.SLAYER)) {
@@ -719,15 +720,10 @@ public class NPC extends Entity {
 			Location returnToSpawnLocation = getProperties().getSpawnLocation().transform(-5 + RandomFunction.random(getWalkRadius()), -5 + RandomFunction.random(getWalkRadius()), 0);
 			int dist = (int) Location.getDistance(location, returnToSpawnLocation);
 			int pathLimit = 15;
-			if(dist > pathLimit || dist < -pathLimit)
-			{
-				int diffX = returnToSpawnLocation.getX() - location.getX();
-				int diffY = returnToSpawnLocation.getY() - location.getY();
-				returnToSpawnLocation = location.transform(
-						Math.min(Math.max(-pathLimit, diffX), pathLimit), //Try to path no more than pathLimit and no less than -pathLimit tiles away in the X and Y directions
-						Math.min(Math.max(-pathLimit, diffY), pathLimit),
-						0);
-			}
+                        if (dist > pathLimit) {
+                            Vector normalizedDir = Vector.betweenLocs(this.location, returnToSpawnLocation).normalized();
+                            returnToSpawnLocation = this.location.transform (normalizedDir.times(pathLimit));
+                        }
 			return returnToSpawnLocation;
 		}
 		Location l = movementPath[movementIndex++];

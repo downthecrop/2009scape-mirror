@@ -71544,5 +71544,65 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "name": "Puro Spawn (Low)",
+    "id": "6065",
+    "respawn_delay": "1"
+  },
+  {
+    "name": "Puro Spawn (Mid)",
+    "id": "6066",
+    "respawn_delay": "1"
+  },
+  {
+    "name": "Puro Spawn (High)",
+    "id": "6067",
+    "respawn_delay": "1"
+  },
+  {
+    "name": "Baby Impling Puro",
+    "id": "6055",
+    "respawn_delay": "7"
+  },
+  {
+    "name": "Young Impling Puro",
+    "id": "6056",
+    "respawn_delay": "7"
+  },
+  {
+    "name": "Gourmet Impling Puro",
+    "id": "6057",
+    "respawn_delay": "7"
+  },
+  {
+    "name": "Earth Impling Puro",
+    "id": "6058",
+    "respawn_delay": "50"
+  },
+  {
+    "name": "Essence Impling Puro",
+    "id": "6059",
+    "respawn_delay": "50"
+  },
+  {
+    "name": "Eclectic Impling Puro",
+    "id": "6060",
+    "respawn_delay": "7"
+  },
+  {
+    "name": "Ninja Impling Puro",
+    "id": "6063",
+    "respawn_delay": "9999"
+  },
+  {
+    "name": "Nature Impling Puro",
+    "id": "6061",
+    "respawn_delay": "9999"
+  },
+  {
+    "name": "Magpie Impling Puro",
+    "id": "6062",
+    "respawn_delay": "9999"
   }
 ]

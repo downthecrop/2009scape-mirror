@@ -10,6 +10,7 @@ import core.game.node.entity.player.link.IronmanMode
 import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.entity.player.link.emote.Emotes
 import core.game.node.entity.player.link.music.MusicEntry
+import core.game.world.map.Location
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
@@ -122,6 +123,7 @@ class PlayerSaveParser(val player: Player) {
                     "long" -> attr["value"].toString().toLong()
                     "bool" -> attr["value"] as Boolean
                     "byte" -> Base64.getDecoder().decode(attr["value"].toString())[0]
+                    "location" -> Location.fromString(attr["value"].toString())
                     else -> null.also { log(this::class.java, Log.WARN,  "Invalid data type for key: $key in PlayerSaveParser.kt Line 115") }
                 })
             }

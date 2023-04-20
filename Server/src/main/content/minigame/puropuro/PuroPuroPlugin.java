@@ -35,6 +35,10 @@ import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
+import static core.api.ContentAPIKt.animateScenery;
+import static core.api.ContentAPIKt.submitWorldPulse;
+import static core.api.ContentAPIKt.animationDuration;
+
 /**
  * Handles the puro puro activity.
  * @author Vexia
@@ -78,7 +82,6 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 		ClassScanner.definePlugin(new WanderingImplingDialogue());
 		ClassScanner.definePlugin(new ElnockInquisitorDialogue());
 		ClassScanner.definePlugin(new PuroOptionHandler());
-		ClassScanner.definePlugin(new ImpDefenderNPC());
 		return this;
 	}
 
@@ -128,10 +131,7 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 			case 25021:
 				pushThrough(p, (Scenery) target);
 				return true;
-			case 25014:
-				p.getTeleporter().send(Location.create(2427, 4446, 0), TeleportType.PURO_PURO);
-				return true;
-			}
+                        }
 		}
 		return super.interact(e, target, option);
 	}
@@ -213,10 +213,6 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 		WHEAT.add(new WheatSet(1, Location.create(2601, 4293, 0), Location.create(2600, 4293, 0)));
 		WHEAT.add(new WheatSet(0, Location.create(2565, 4310, 0), Location.create(2565, 4311, 0)));
 		WHEAT.add(new WheatSet(1, Location.create(2582, 4346, 0), Location.create(2583, 4346, 0)));
-		WHEAT.add(new WheatSet(0, Location.create(2621, 4328, 0), Location.create(2621, 4329, 0)));
-		WHEAT.add(new WheatSet(1, Location.create(2602, 4349, 0), Location.create(2603, 4349, 0)));
-		WHEAT.add(new WheatSet(0, Location.create(2562, 4334, 0), Location.create(2562, 4333, 0)));
-		WHEAT.add(new WheatSet(1, Location.create(2582, 4290, 0), Location.create(2581, 4290, 0)));
 		WHEAT.add(new WheatSet(0, Location.create(2568, 4348, 0), Location.create(2568, 4347, 0)));
 		WHEAT.add(new WheatSet(0, Location.create(2615, 4347, 0), Location.create(2615, 4348, 0)));
 		WHEAT.add(new WheatSet(0, Location.create(2612, 4345, 0), Location.create(2612, 4344, 0)));
@@ -241,7 +237,6 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
 			NPCDefinition.forId(6070).getHandlers().put("option:trade", this);
-			SceneryDefinition.forId(24991).getHandlers().put("option:enter", this);
 			ItemDefinition.forId(11273).getHandlers().put("option:toggle-view", this);
 			ItemDefinition.forId(11258).getHandlers().put("option:butterfly-jar", this);
 			ItemDefinition.forId(11258).getHandlers().put("option:impling-jar", this);
@@ -258,14 +253,6 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 			case 6070:
 				ElnockInquisitorDialogue.openShop(player);
 				break;
-			case 24991:
-				if (hasImplingBox(player)) {
-					player.getDialogueInterpreter().sendDialogue("Something prevents you from entering. You think the portal is offended by", "your imp boxes. They are not popular on imp and impling planes.");
-					break;
-				}
-                                player.sendMessage("Puro Puro is disabled until its rewrite/bugfix update is complete.");
-				//player.getTeleporter().send(Location.create(2591, 4320, 0), TeleportType.PURO_PURO);
-				return true;
 			case 11273:
 				if (!player.getZoneMonitor().isInZone("puro puro")) {
 					player.sendMessage("You can only use this in the Puro Puro Maze.");
@@ -367,7 +354,6 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 
 	/**
 	 * A wheat set.
-	 * @author Vexia
 	 */
 	public static class WheatSet {
 
@@ -434,10 +420,36 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 					continue;
 				}
 				if (removed) {
+                                        submitWorldPulse(new Pulse() {
+                                            int counter = 0;
+
+                                            @Override
+                                            public boolean pulse() {
+                                                if (counter++ == 0) {
+                                                    animateScenery (object, 6596);
+                                                    setDelay(animationDuration(new Animation(6596)));
+                                                    return false;
+                                                }
+                                                return true;
+                                            }
+                                        });
 					SceneryBuilder.add(object);
 					continue;
 				}
-				SceneryBuilder.remove(object);
+                                submitWorldPulse(new Pulse() {
+                                    int counter = 0;
+
+                                    @Override
+                                    public boolean pulse() {
+                                        if (counter++ == 0) {
+                                            animateScenery (object, 6599);
+                                            setDelay(animationDuration(new Animation(6599)));
+                                            return false;
+                                        }
+				        SceneryBuilder.remove(object);
+                                        return true;
+                                    }
+                                });
 			}
 			removed = !removed;
 			setNextWhilt();

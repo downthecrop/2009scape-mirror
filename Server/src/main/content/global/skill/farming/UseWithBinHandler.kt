@@ -1,6 +1,6 @@
 package content.global.skill.farming
 
-import core.api.toIntArray
+import core.api.*
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
@@ -65,7 +65,7 @@ class UseWithBinHandler : InteractionListener {
                     if(bin.isFull()){
                         player.sendMessage("This compost bin is already full.")
                         return@onUseWith true
-                    } else {
+                    } else if (!bin.isFinished) {
                         player.pulseManager.run(object : Pulse(fillAnim.duration){
                             override fun pulse(): Boolean {
                                 player.animator.animate(fillAnim)
@@ -75,6 +75,8 @@ class UseWithBinHandler : InteractionListener {
                                 return bin.isFull() || player.inventory.getAmount(usedNode.asItem()) == 0
                             }
                         })
+                    } else {
+                        sendMessage (player, "You should empty the remaining compost first.")
                     }
             }
             return@onUseWith true

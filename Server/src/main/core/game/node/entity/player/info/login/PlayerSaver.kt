@@ -9,6 +9,7 @@ import core.game.container.Container
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.IronmanMode
 import core.game.node.entity.skill.Skills
+import core.game.world.map.Location
 import core.tools.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -116,6 +117,7 @@ class PlayerSaver (val player: Player){
                     is Short -> "short"
                     is String -> "str"
                     is Byte -> "byte"
+                    is Location -> "location"
                     else -> "null".also { log(this::class.java, Log.WARN,  "Invalid attribute type for key: $key in PlayerSaver.kt Line 115") }
                 }
                 attr.put("type",type)

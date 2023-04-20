@@ -2,6 +2,7 @@ package core.game.world.map.path;
 
 import core.game.node.Node;
 import core.game.node.entity.Entity;
+import core.game.node.entity.npc.NPC;
 import core.game.node.item.GroundItem;
 import core.game.node.scenery.Scenery;
 import core.game.world.map.Direction;
@@ -124,7 +125,13 @@ public abstract class Pathfinder {
 	 * @return The path.
 	 */
 	public static Path find(Entity mover, Node destination, boolean near, Pathfinder finder) {
-		return find(mover.getLocation(), mover.size(), destination, near, finder, RegionManager::getClippingFlag);
+                ClipMaskSupplier cms = null;
+                if (mover instanceof NPC) {
+                    cms = ((NPC) mover).behavior.getClippingSupplier(((NPC) mover));
+                }
+                if (cms == null)
+                    cms = RegionManager::getClippingFlag;
+		return find(mover.getLocation(), mover.size(), destination, near, finder, cms);
 	}
 
 	public static Path findWater(Entity mover, Node destination, boolean near, Pathfinder finder){

@@ -6,9 +6,11 @@ import core.game.world.map.path.Path;
 import core.game.world.map.path.Pathfinder;
 import core.tools.RandomFunction;
 import org.jetbrains.annotations.NotNull;
+import core.api.utils.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.Math;
 
 /**
  * Represents a location on the world map.
@@ -277,14 +279,14 @@ public final class Location extends Node {
 	public ArrayList<Location> getSurroundingTiles() {
 		ArrayList<Location> locs = new ArrayList<>();
 
-		locs.add(transform(0,1,0)); //N
-		locs.add(transform(1,1,0)); //NE
-		locs.add(transform(1,0,0)); //E
-		locs.add(transform(1,-1,0)); //SE
-		locs.add(transform(0,-1,0)); //S
 		locs.add(transform(-1,-1,0));//SW
-		locs.add(transform(-1,0,0));//W
+		locs.add(transform(0,-1,0)); //S
+		locs.add(transform(1,-1,0)); //SE
+		locs.add(transform(1,0,0)); //E
+		locs.add(transform(1,1,0)); //NE
+		locs.add(transform(0,1,0)); //N
 		locs.add(transform(-1,1,0));//NW
+		locs.add(transform(-1,0,0));//W
 
 		return locs;
 	}
@@ -554,4 +556,8 @@ public final class Location extends Node {
 		if (sb.length() == 0) return null;
 		return Direction.valueOf(sb.toString());
 	}
+
+        public Location transform (Vector vector) {
+            return Location.create(this.x + (int) Math.floor(vector.getX()), this.y + (int) Math.floor(vector.getY()));
+        }
 }

@@ -1,11 +1,14 @@
 package core.game.node.entity.npc
 
+import core.game.node.item.Item
 import core.api.ContentInterface
 import core.game.node.entity.Entity
+import core.game.world.map.RegionManager
+import core.game.node.entity.player.Player
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.combat.CombatSwingHandler
-import core.game.node.item.Item
+import core.game.world.map.path.ClipMaskSupplier
 
 open class NPCBehavior(vararg val ids: Int = intArrayOf()) : ContentInterface {
     companion object {
@@ -17,6 +20,12 @@ open class NPCBehavior(vararg val ids: Int = intArrayOf()) : ContentInterface {
         }
         fun register(ids: IntArray, behavior: NPCBehavior){
             ids.forEach { idMap[it] = behavior }
+        }
+    }
+    
+    object StandardClipMaskSupplier : ClipMaskSupplier {
+        override fun getClippingFlag (z: Int, x: Int, y: Int) : Int {
+            return RegionManager.getClippingFlag(z,x,y)
         }
     }
 
@@ -102,7 +111,11 @@ open class NPCBehavior(vararg val ids: Int = intArrayOf()) : ContentInterface {
      * @param shouldSendMessage whether the core combat code believes you should send a message e.g. "You can't attack this NPC with that weapon"
      * @return whether the attacker should be able to attack this NPC.
      */
-    open fun canBeAttackedBy(self: NPC, attacker: Entity, style: CombatStyle, shouldSendMessage: Boolean) : Boolean {return true}
+    open fun canBeAttackedBy(self: NPC, attacker: Entity, style: CombatStyle, shouldSendMessage: Boolean) : Boolean {
+        if (attacker is Player && !self.definition.hasAction("attack"))
+            return false
+        return true
+    }
 
     /**
      * Called by combat-related code to check if this NPC should ignore multi-combat rules when attempting to attack the given victim.
@@ -119,4 +132,11 @@ open class NPCBehavior(vararg val ids: Int = intArrayOf()) : ContentInterface {
      * @return the SwingHandler instance to be used for this cycle of combat
      */
     open fun getSwingHandlerOverride(self: NPC, original: CombatSwingHandler) : CombatSwingHandler {return original}
+
+    /**
+     * Called by pathfinding code to determine the clipping mask supplier this NPC should use. You can use this to ignore water, etc.
+    */
+    open fun getClippingSupplier(self: NPC) : ClipMaskSupplier? {
+        return StandardClipMaskSupplier
+    }
 }

@@ -83,8 +83,7 @@ class DeathspawnBehavior : NPCBehavior(NPCs.DEATH_SPAWN_1614) {
 
     override fun onRemoval(self: NPC) {
         val parent = getAttribute<NPC?>(self, "parent", null) ?: return
-        if (parent.behavior !is NechryaelBehavior) return
-        parent.behavior.removeSpawn(parent, self)
+        (parent.behavior as? NechryaelBehavior)?.let { it.removeSpawn (parent, self) }
     }
 
     override fun tick(self: NPC): Boolean {
