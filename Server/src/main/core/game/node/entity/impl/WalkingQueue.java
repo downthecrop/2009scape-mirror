@@ -4,15 +4,19 @@ import content.global.skill.skillcapeperks.SkillcapePerks;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.Skills;
+import core.game.node.item.Item;
+import core.game.node.item.GroundItem;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.Point;
 import core.game.world.map.RegionManager;
+import core.game.world.update.flag.chunk.ItemUpdateFlag;
 import core.tools.Log;
 import core.tools.SystemLogger;
 
 import java.util.Deque;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 
 import static core.api.ContentAPIKt.log;
 
@@ -58,6 +62,8 @@ public final class WalkingQueue {
 	 */
 	private Location footPrint;
 
+        public ArrayList<GroundItem> routeItems = new ArrayList<GroundItem>();
+
 	/**
 	 * Constructs a new {@code WalkingQueue} {@code Object}.
 	 * @param entity The entity.
@@ -84,8 +90,17 @@ public final class WalkingQueue {
 			return;
 		}
 		Point point = walkingQueue.poll();
+                boolean drawPath = entity.getAttribute("routedraw", false);
 		if (point == null) {
 			updateRunEnergy(false);
+                        if (isPlayer && drawPath) {
+                            for (GroundItem item : routeItems) {
+                                if (item != null) {
+                                    RegionManager.getRegionPlane(item.getLocation()).remove(item);    
+                                }
+                            }
+                            routeItems.clear();
+                        }
 			return;
 		}
 		if (isPlayer && ((Player) entity).getSettings().getRunEnergy() < 1.0) {
@@ -300,6 +315,13 @@ public final class WalkingQueue {
 		if (point == null) {
 			return;
 		}
+                boolean drawRoute = entity.getAttribute("routedraw", false);
+                if (drawRoute && entity instanceof Player) {
+                    Player p = (Player) entity;
+                    GroundItem item = new GroundItem(new Item(13444), Location.create(x, y, p.getLocation().getZ()), p);
+                    routeItems.add (item);
+                    RegionManager.getRegionPlane(item.getLocation()).add(item);
+                }
 		int diffX = x - point.getX(), diffY = y - point.getY();
 		int max = Math.max(Math.abs(diffX), Math.abs(diffY));
 		for (int i = 0; i < max; i++) {

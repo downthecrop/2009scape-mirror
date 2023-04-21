@@ -60,7 +60,7 @@ class ScriptProcessor(val entity: Entity) {
 
     fun postMovement(didMove: Boolean) {
         if (didMove)
-            entity.clocks[Clocks.MOVEMENT] = GameWorld.ticks + 1
+            entity.clocks[Clocks.MOVEMENT] = GameWorld.ticks + if (entity.walkingQueue.isRunning) 0 else 1
         var canProcess = !entity.delayed()
         if (entity is Player)
             canProcess = canProcess && !entity.interfaceManager.isOpened && !entity.interfaceManager.hasChatbox()
@@ -80,7 +80,7 @@ class ScriptProcessor(val entity: Entity) {
             }
         }
         if (canProcess && (apScript != null || opScript != null)) {
-            if (!interacted && !didMove) {
+            if (!interacted && !didMove && finishedMoving(entity)) {
                 sendMessage(entity, "I can't reach that!")
                 reset()
             }

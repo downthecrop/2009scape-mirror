@@ -212,5 +212,17 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
                     addItem(player, item, 1000)
             }
         }
+
+        define("drawchunks", Privilege.ADMIN, "", "Draws the border of the chunk you're standing in") {player, _ -> 
+            setAttribute (player, "chunkdraw", !getAttribute(player, "chunkdraw", false))
+        }
+
+        define("drawregions", Privilege.ADMIN, "", "DRaws the border of the region you're standing in") {player, _ -> 
+            setAttribute (player, "regiondraw", !getAttribute(player, "regiondraw", false))
+        }
+
+        define("drawroute", Privilege.ADMIN, "", "Visualizes the path your player is taking") {player, _ -> 
+            setAttribute (player, "routedraw", !getAttribute(player, "routedraw", false))
+        }
     }
 }

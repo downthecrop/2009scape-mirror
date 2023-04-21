@@ -149,8 +149,52 @@ public class RegionChunk {
 				}
 			}
 		}
-		if (items != null) {
-			for (Item item : items) {
+                ArrayList<GroundItem> totalItems = items != null ? new ArrayList(items) : new ArrayList();
+
+                boolean drawChunks = player.getAttribute("chunkdraw", false);
+                boolean drawRegions = player.getAttribute("regiondraw", false);
+
+                if (drawChunks) {
+                    Location l = currentBase;
+                    for (int x = 0; x < SIZE; x++) {
+                        for (int y = 0; y < SIZE; y++) {
+                            boolean add = false;
+                            if (y == 0 || y == SIZE - 1)
+                                add = true;
+                            else if (x == 0 || x == SIZE - 1)
+                                add = true;
+                            if (add)
+                                totalItems.add(new GroundItem(new Item(13444), l.transform(x, y, 0), player));
+                        }
+                    }
+                }
+
+                if (drawRegions) {
+                    Location l = currentBase;
+                    int localX = l.getLocalX();
+                    int localY = l.getLocalY();
+                    
+                    for (int x = 0; x < SIZE; x++)
+                        for (int y = 0; y < SIZE; y++) {
+                            boolean add = false;
+                            if (localY == 0 || localY == 56)
+                                if (localY == 0 && y == 0)
+                                    add = true;
+                                else if (localY == 56 && y == SIZE - 1)
+                                    add = true;
+                            if (localX == 0 || localX == 56)
+                                if (localX == 0 && x == 0)
+                                    add = true;
+                                else if (localX == 56 && x == SIZE - 1)
+                                    add = true;
+
+                            if (add)
+                                totalItems.add(new GroundItem(new Item(13444), l.transform(x,y,0), player));
+                    }
+                }
+
+		if (totalItems != null) {
+			for (Item item : totalItems) {
 				if (item != null && item.isActive() && item.getLocation() != null) {
 					GroundItem g = (GroundItem) item;
 					if (!g.isPrivate() || g.droppedBy(player)) {

@@ -269,62 +269,65 @@ public abstract class MovementPulse extends Pulse {
             return;
         }
 
-        Location ml = mover.getLocation();
-        Location dl = destination.getLocation();
-        // Lead the target if they're walking/running, unless they're already within interaction range
-        if(loc != null && destination instanceof Entity && Math.max(Math.abs(ml.getX() - dl.getX()), Math.abs(ml.getY() - dl.getY())) > 1) {
-            WalkingQueue wq = ((Entity)destination).getWalkingQueue();
-            if(wq.hasPath()) {
-                Point[] points = wq.getQueue().toArray(new Point[0]);
-                if(points.length > 0) {
-                    Point p = points[0];
-                    for(int i=0; i<points.length; i++) {
-                        // Target the farthest point along target's planned movement that's within 1 tick's running,
-                        // this ensures the player will run to catch up to the target if able.
-                        if(Math.max(Math.abs(ml.getX() - points[i].getX()), Math.abs(ml.getY() - points[i].getY())) <= 2) {
-                            p = points[i];
+        if (destination instanceof Entity || interactLocation == null) {
+            Location ml = mover.getLocation();
+            Location dl = destination.getLocation();
+            // Lead the target if they're walking/running, unless they're already within interaction range
+            if(loc != null && destination instanceof Entity && Math.max(Math.abs(ml.getX() - dl.getX()), Math.abs(ml.getY() - dl.getY())) > 1) {
+                WalkingQueue wq = ((Entity)destination).getWalkingQueue();
+                if(wq.hasPath()) {
+                    Point[] points = wq.getQueue().toArray(new Point[0]);
+                    if(points.length > 0) {
+                        Point p = points[0];
+                        for(int i=0; i<points.length; i++) {
+                            // Target the farthest point along target's planned movement that's within 1 tick's running,
+                            // this ensures the player will run to catch up to the target if able.
+                            if(Math.max(Math.abs(ml.getX() - points[i].getX()), Math.abs(ml.getY() - points[i].getY())) <= 2) {
+                                p = points[i];
+                            }
                         }
+                        loc.setX(p.getX());
+                        loc.setY(p.getY());
                     }
-                    loc.setX(p.getX());
-                    loc.setY(p.getY());
                 }
             }
-        }
-        Path path = Pathfinder.find(mover, loc != null ? loc : destination, true, pathfinder);
-        near = !path.isSuccessful() || path.isMoveNear();
-        interactLocation = mover.getLocation();
-        boolean canMove = true;
-        if (destination instanceof NPC || destination instanceof Player) {
-            Entity e = (Entity) destination;
-            Location l = e.getLocation();
-            Deque<Point> npcPath = e.getWalkingQueue().getQueue();
-            if (e.getWalkingQueue().hasPath() && e.getProperties().getCombatPulse().isRunning() && e.getProperties().getCombatPulse().getVictim() == mover)
-                canMove = false;
-            if (!canMove) { //If we normally shouldn't move, but the NPC's pathfinding is not letting them move, then move.
-                if (npcPath.size() == 1) {
-                    Point pathElement = npcPath.peek();
-                    if (pathElement.getX() == l.getX() && pathElement.getY() == l.getY())
-                        canMove = true;
+
+            Path path = Pathfinder.find(mover, loc != null ? loc : destination, true, pathfinder);
+            near = !path.isSuccessful() || path.isMoveNear();
+            interactLocation = mover.getLocation();
+            boolean canMove = true;
+            if (destination instanceof Entity) {
+                Entity e = (Entity) destination;
+                Location l = e.getLocation();
+                Deque<Point> npcPath = e.getWalkingQueue().getQueue();
+                if (e.getWalkingQueue().hasPath() && e.getProperties().getCombatPulse().isRunning() && e.getProperties().getCombatPulse().getVictim() == mover)
+                    canMove = false;
+                if (!canMove) { //If we normally shouldn't move, but the NPC's pathfinding is not letting them move, then move.
+                    if (npcPath.size() == 1) {
+                        Point pathElement = npcPath.peek();
+                        if (pathElement.getX() == l.getX() && pathElement.getY() == l.getY())
+                            canMove = true;
+                    }
                 }
             }
-        }
-        if (!path.getPoints().isEmpty() && canMove) {
-            Point point = path.getPoints().getLast();
-            interactLocation = Location.create(point.getX(), point.getY(), mover.getLocation().getZ());
-            if (forceRun) {
-                mover.getWalkingQueue().reset(forceRun);
-            } else {
-                mover.getWalkingQueue().reset();
-            }
-            int size = path.getPoints().toArray().length;
-            Deque points = path.getPoints();
-            for (int i = 0; i < size; i++) {
-                point = path.getPoints().pop();
-                mover.getWalkingQueue().addPath(point.getX(), point.getY());
-                if (destination instanceof Entity) {
-                    mover.face((Entity) destination);
+            if (!path.getPoints().isEmpty() && canMove) {
+                Point point = path.getPoints().getLast();
+                interactLocation = Location.create(point.getX(), point.getY(), mover.getLocation().getZ());
+                if (forceRun) {
+                    mover.getWalkingQueue().reset(forceRun);
                 } else {
-                    mover.face(null);
+                    mover.getWalkingQueue().reset();
+                }
+                int size = path.getPoints().toArray().length;
+                Deque points = path.getPoints();
+                for (int i = 0; i < size; i++) {
+                    point = path.getPoints().pop();
+                    mover.getWalkingQueue().addPath(point.getX(), point.getY());
+                    if (destination instanceof Entity) {
+                        mover.face((Entity) destination);
+                    } else {
+                        mover.face(null);
+                    }
                 }
             }
         }

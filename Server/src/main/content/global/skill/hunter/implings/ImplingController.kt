@@ -16,7 +16,7 @@ class ImplingController : TickListener, Commands {
         if (--nextCycle > getTicksBeforeNextCycleToDespawn()) 
             return
         if (activeImplings.size > 0) {
-            clearSomeImplings(implingsClearedPerTick)
+            clearSomeImplings(min(activeImplings.size, implingsClearedPerTick))
             return
         }
         generateSpawners()
