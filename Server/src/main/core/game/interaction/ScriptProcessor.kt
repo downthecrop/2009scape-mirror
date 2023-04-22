@@ -45,11 +45,11 @@ class ScriptProcessor(val entity: Entity) {
         if (entity !is Player) return
         if (!entity.delayed() && canProcess && interactTarget != null) {
             if (opScript != null && inOperableDistance()) {
-                face(entity, interactTarget?.centerLocation ?: return)
+                face(entity, interactTarget?.getFaceLocation(entity.location) ?: return)
                 processInteractScript(opScript ?: return)
             }
             else if (apScript != null && inApproachDistance(apScript ?: return)) {
-                face(entity, interactTarget?.centerLocation ?: return)
+                face(entity, interactTarget?.getFaceLocation(entity.location) ?: return)
                 processInteractScript(apScript ?: return)
             }
             else if (apScript == null && opScript == null && inOperableDistance()) {

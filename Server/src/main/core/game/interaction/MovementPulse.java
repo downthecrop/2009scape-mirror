@@ -265,10 +265,7 @@ public abstract class MovementPulse extends Pulse {
             else if (inside) {
                 loc = findBorderLocation();
             }
-        }
-
-        if (loc == previousLoc)
-            return;
+        } else if (loc == previousLoc) return;
 
         if (destination == null) {
             return;
@@ -298,6 +295,7 @@ public abstract class MovementPulse extends Pulse {
             }
 
             Path path = Pathfinder.find(mover, loc != null ? loc : destination, true, pathfinder);
+            loc = destination.getLocation();
             near = !path.isSuccessful() || path.isMoveNear();
             interactLocation = mover.getLocation();
             boolean canMove = true;

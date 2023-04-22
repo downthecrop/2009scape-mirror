@@ -25,6 +25,22 @@ class Vector (val x: Double, val y: Double) {
         return Vector(this.x * other, this.y * other)
     }
 
+    operator fun plus (other: Vector) : Vector {
+        return Vector(this.x + other.x, this.y + other.y)
+    }
+
+    operator fun minus (other: Vector) : Vector {
+        return Vector(this.x - other.x, this.y - other.y)
+    }
+
+    override fun toString() : String {
+        return "{$x,$y}"
+    }
+    
+    fun invert() : Vector {
+        return -this
+    }
+
     companion object {
         @JvmStatic fun betweenLocs (from: Location, to: Location) : Vector {
             val xDiff = to.x - from.x
