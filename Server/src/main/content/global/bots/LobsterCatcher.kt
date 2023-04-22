@@ -97,9 +97,9 @@ class LobsterCatcher : Script() {
                     state = State.FISHING
                 } else {
                     if (bot.location.x < 2837) {
-                        Pathfinder.find(bot, Location.create(2837, 3435, 0)).walk(bot)
+                        scriptAPI.walkTo(Location.create(2837, 3435, 0))
                     } else {
-                        Pathfinder.find(bot, Location.create(2854, 3427, 0)).walk(bot)
+                        scriptAPI.walkTo(Location.create(2854, 3427, 0))
                     }
                 }
             }

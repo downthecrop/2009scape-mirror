@@ -40,7 +40,7 @@ class GeneralBotCreator {
                 randomDelay -= 1
                 return false
             }
-            if (!botScript.bot.pulseManager.hasPulseRunning()) {
+            if (!botScript.bot.pulseManager.hasPulseRunning() && botScript.bot.scripts.getActiveScript() == null) {
 
                 /*if (ticks++ >= RandomFunction.random(90000,120000)) {
                     AIPlayer.deregister(botScript.bot.uid)

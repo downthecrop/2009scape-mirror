@@ -49,6 +49,8 @@ import java.util.concurrent.CountDownLatch
 import kotlin.math.max
 import kotlin.math.pow
 import kotlin.math.sqrt
+import core.ServerConstants
+import core.api.utils.Vector
 
 class ScriptAPI(private val bot: Player) {
     val GRAPHICSUP = Graphics(1576)
@@ -86,24 +88,6 @@ class ScriptAPI(private val bot: Player) {
         if(!InteractionListeners.run(node.id, type, option, bot, node)) node.interaction.handle(bot, opt)
     }
 
-    /**
-     * Gets the nearest node with name entityName
-     * @param entityName the name of the node to look for
-     * @return the nearest node with a matching name or null
-     * @author Ceikry
-     */
-    fun getNearestNode(entityName: String): Node? {
-        var entity: Node? = null
-        var minDistance = Double.MAX_VALUE
-        for (node in RegionManager.forId(bot.location.regionId).planes[bot.location.z].entities) {
-            if (node != null && node.name == entityName && distance(bot, node) < minDistance && !Pathfinder.find(bot, node).isMoveNear) {
-                entity = node
-                minDistance = distance(bot, node)
-            }
-        }
-        return entity
-    }
-
     fun sendChat(message: String) {
         bot.sendChat(message)
         bot.updateMasks.register(ChatFlag(ChatMessage(bot, message, 0, 0)))
@@ -115,33 +99,11 @@ class ScriptAPI(private val bot: Player) {
      * @return the nearest node with a matching name or null
      * @author Ceikry
      */
-
     fun getNearestNodeFromList(acceptedNames: List<String>, isObject: Boolean): Node? {
-        if (isObject) {
-            var entity: Node? = null
-            var minDistance = Double.MAX_VALUE
-            for (objects in RegionManager.forId(bot.location.regionId).planes[bot.location.z].objects) {
-                for(e in objects) {
-                    val name = e?.name
-                    if (e != null && acceptedNames.contains(name) && distance(bot, e) < minDistance && !Pathfinder.find(bot, e).isMoveNear && e.isActive) {
-                        entity = e
-                        minDistance = distance(bot, e)
-                    }
-                }
-            }
-            return if(entity == null) null else entity as Scenery
-        } else {
-            var entity: Node? = null
-            var minDistance = Double.MAX_VALUE
-            for (e in RegionManager.forId(bot.location.regionId).planes[bot.location.z].entities) {
-                val name = e?.name
-                if (e != null && acceptedNames.contains(name) && distance(bot, e) < minDistance && !Pathfinder.find(bot, e).isMoveNear) {
-                    entity = e
-                    minDistance = distance(bot, e)
-                }
-            }
-            return entity
-        }
+        if (isObject)
+            return processEvaluationList(RegionManager.forId(bot.location.regionId).planes[bot.location.z].objectList, acceptedName = acceptedNames)
+        else
+            return processEvaluationList(RegionManager.forId(bot.location.regionId).planes[bot.location.z].entities, acceptedName = acceptedNames)
     }
 
     /**
@@ -151,30 +113,21 @@ class ScriptAPI(private val bot: Player) {
      * @return the closest node with matching id or null.
      * @author Ceikry
      */
-    fun getNearestNode(id: Int, `object`: Boolean): Node? {
-        if (`object`) {
-            var entity: Node? = null
-            var minDistance = Double.MAX_VALUE
-            for (objects in RegionManager.forId(bot.location.regionId).planes[bot.location.z].objects) {
-                for(e in objects) {
-                    if (e != null && e.id == id && distance(bot, e) < minDistance && !Pathfinder.find(bot, e).isMoveNear && e.isActive) {
-                        entity = e
-                        minDistance = distance(bot, e)
-                    }
-                }
-            }
-            return if(entity == null) null else entity as Scenery
-        } else {
-            var entity: Node? = null
-            var minDistance = Double.MAX_VALUE
-            for (e in RegionManager.forId(bot.location.regionId).planes[bot.location.z].entities) {
-                if (e != null && e.id == id && distance(bot, e) < minDistance && !Pathfinder.find(bot, e).isMoveNear) {
-                    entity = e
-                    minDistance = distance(bot, e)
-                }
-            }
-            return entity
-        }
+    fun getNearestNode(id: Int, isObject: Boolean): Node? {
+        if (isObject)
+            return processEvaluationList(RegionManager.forId(bot.location.regionId).planes[bot.location.z].objectList, acceptedId = id)
+        else
+            return processEvaluationList(RegionManager.forId(bot.location.regionId).planes[bot.location.z].entities, acceptedId = id)
+    }
+
+    /**
+     * Gets the nearest node with name entityName
+     * @param entityName the name of the node to look for
+     * @return the nearest node with a matching name or null
+     * @author Ceikry
+     */
+    fun getNearestNode(entityName: String): Node? {
+        return processEvaluationList(RegionManager.forId(bot.location.regionId).planes[bot.location.z].entities, acceptedName = listOf(entityName))
     }
 
     /**
@@ -184,30 +137,38 @@ class ScriptAPI(private val bot: Player) {
      * @return the nearest matching node or null.
      * @author Ceikry
      */
-    fun getNearestNode(name: String, `object`: Boolean): Node? {
-        if (`object`) {
-            var entity: Node? = null
-            var minDistance = Double.MAX_VALUE
-            for (objects in RegionManager.forId(bot.location.regionId).planes[bot.location.z].objects) {
-                for(e in objects) {
-                    if (e != null && e.name.toLowerCase() == name.toLowerCase() && distance(bot, e) < minDistance && !Pathfinder.find(bot, e).isMoveNear && e.isActive) {
-                        entity = e
-                        minDistance = distance(bot, e)
-                    }
-                }
+    fun getNearestNode(name: String, isObject: Boolean): Node? {
+        if (isObject)
+            return processEvaluationList(RegionManager.forId(bot.location.regionId).planes[bot.location.z].objectList, acceptedName = listOf(name))
+        else
+            return processEvaluationList(RegionManager.forId(bot.location.regionId).planes[bot.location.z].entities, acceptedName = listOf(name))
+    }
+
+    fun evaluateViability (e: Node?, minDistance: Double, maxDistance: Double, acceptedNames: List<String>? = null, acceptedId: Int = -1): Boolean {
+        if (e == null || !e.isActive) 
+            return false
+        if (acceptedId != -1 && e.id != acceptedId)
+            return false
+
+        val dist = distance(bot, e)
+        if (dist > maxDistance || dist > minDistance)
+            return false
+
+        val name = e?.name
+        return (acceptedNames?.contains(name) ?: true && !Pathfinder.find(bot, e).isMoveNear)
+    }
+
+    fun processEvaluationList (list: List<Node>, acceptedName: List<String>? = null, acceptedId: Int = -1): Node? {
+        var entity: Node? = null
+        var minDistance = Double.MAX_VALUE
+        val maxDistance = ServerConstants.MAX_PATHFIND_DISTANCE.toDouble()
+        for (e in list) {
+            if (evaluateViability(e, minDistance, maxDistance, acceptedName, acceptedId)) {
+                entity = e
+                minDistance = distance(bot, e)
             }
-            return if(entity == null) null else entity as Scenery
-        } else {
-            var entity: Node? = null
-            var minDistance = Double.MAX_VALUE
-            for (e in RegionManager.forId(bot.location.regionId).planes[bot.location.z].entities) {
-                if (e != null && e.name.toLowerCase() == name.toLowerCase() && distance(bot, e) < minDistance && !Pathfinder.find(bot, e).isMoveNear) {
-                    entity = e
-                    minDistance = distance(bot, e)
-                }
-            }
-            return entity
         }
+        return entity
     }
 
     /**
@@ -350,9 +311,7 @@ class ScriptAPI(private val bot: Player) {
      */
     fun walkTo(loc: Location){
         if(!bot.walkingQueue.isMoving) {
-            GlobalScope.launch {
-                walkToIterator(loc)
-            }
+            walkToIterator(loc)
         }
     }
 
@@ -391,11 +350,8 @@ class ScriptAPI(private val bot: Player) {
      */
     fun randomWalkTo(loc: Location, radius: Int) {
         if(!bot.walkingQueue.isMoving) {
-            GlobalScope.launch {
-                var newloc = loc.transform(RandomFunction.random(radius,-radius),
-                        RandomFunction.random(radius,-radius), 0)
-                walkToIterator(newloc)
-            }
+            var newloc = loc.transform(RandomFunction.random(radius,-radius),RandomFunction.random(radius,-radius), 0)
+            walkToIterator(newloc)
         }
     }
 
@@ -408,15 +364,12 @@ class ScriptAPI(private val bot: Player) {
     private fun walkToIterator(loc: Location){
         var diffX = loc.x - bot.location.x
         var diffY = loc.y - bot.location.y
-        while(!bot.location.transform(diffX, diffY, 0).withinDistance(bot.location)) {
-            diffX /= 2
-            diffY /= 2
-        }
-        GameWorld.Pulser.submit(object : MovementPulse(bot, bot.location.transform(diffX, diffY, 0), Pathfinder.SMART) {
-            override fun pulse(): Boolean {
-                return true
-            }
-        })
+        
+        val vec = Vector.betweenLocs(bot.location, loc)
+        val norm = vec.normalized()
+        val tiles = kotlin.math.min(kotlin.math.floor(vec.magnitude()).toInt(), ServerConstants.MAX_PATHFIND_DISTANCE - 1)
+        val loc = bot.location.transform(norm * tiles)
+        Pathfinder.find(bot, loc).walk(bot)
     }
 
     /**
@@ -469,6 +422,7 @@ class ScriptAPI(private val bot: Player) {
             override fun pulse(): Boolean {
                 bot.unlock()
                 bot.properties.teleportLocation = location
+                bot.pulseManager.clear()
                 bot.animator.reset()
                 return true
             }
@@ -599,6 +553,7 @@ class ScriptAPI(private val bot: Player) {
             override fun pulse(): Boolean {
                 bot.unlock()
                 bot.properties.teleportLocation = location
+                bot.pulseManager.clear()
                 bot.animator.reset()
                 return true
             }

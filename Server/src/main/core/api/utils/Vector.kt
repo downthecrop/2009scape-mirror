@@ -31,5 +31,9 @@ class Vector (val x: Double, val y: Double) {
             val yDiff = to.y - from.y
             return Vector (xDiff.toDouble(), yDiff.toDouble())
         }
+        @JvmStatic fun deriveWithEqualComponents (magnitude: Double) : Vector {
+            var sideLength = sqrt(magnitude.pow(2.0) / 2)
+            return Vector(sideLength, sideLength)
+        }
     }
 }

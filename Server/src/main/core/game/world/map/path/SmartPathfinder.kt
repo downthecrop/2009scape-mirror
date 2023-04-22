@@ -4,6 +4,8 @@ import core.game.world.GameWorld
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.Point
+import core.api.utils.Vector
+import core.ServerConstants
 
 import java.util.Comparator
 import java.util.PriorityQueue
@@ -98,6 +100,15 @@ internal constructor() : Pathfinder() {
     override fun find(start: Location?, moverSize: Int, end: Location?, sizeX: Int, sizeY: Int, rotation: Int, type: Int, walkingFlag: Int, near: Boolean, clipMaskSupplier: ClipMaskSupplier?): Path {
         reset()
         assert(start != null && end != null)
+        var vec = Vector.betweenLocs(end!!, start!!)
+        var mag = kotlin.math.floor(vec.magnitude())
+        if (mag > ServerConstants.MAX_PATHFIND_DISTANCE) {
+            try {
+                throw Exception("Pathfinding distance exceeds server max! -> " + mag.toString() + " {" + start + "->" + end + "}")
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
         val path = Path()
         foundPath = false
         for (x in 0..103) {

@@ -452,7 +452,8 @@ object PacketProcessor {
             //there's more data in this packet, we're just not using it
         }
 
-        var canWalk = !player.locks.isMovementLocked
+        val loc = Location.create(x,y,player.location.z)
+        var canWalk = !player.locks.isMovementLocked && player.location.withinDistance(loc, ServerConstants.MAX_PATHFIND_DISTANCE)
 
         if (canWalk && player.interfaceManager.isOpened && !player.interfaceManager.opened.definition.isWalkable)
             canWalk = canWalk && player.interfaceManager.close()
@@ -460,7 +461,7 @@ object PacketProcessor {
             player.interfaceManager.closeChatbox()
 
         if (!canWalk || !player.dialogueInterpreter.close()) {
-            player.debug("[WALK ACTION]-- NO HANDLE: PLAYER LOCKED OR INTERFACES SAY NO")
+            player.debug("[WALK ACTION]-- Action canceled. Either player is locked, interfaces can't close, or distance is beyond server pathfinding limit.")
             return sendClearMinimap(player)
         }
 
@@ -474,7 +475,7 @@ object PacketProcessor {
         player.faceLocation(null)
         player.scripts.reset()
 
-        player.pulseManager.run(object : MovementPulse(player, Location.create(x,y,player.location.z), isRunning) {
+        player.pulseManager.run(object : MovementPulse(player, loc, isRunning) {
             override fun pulse(): Boolean {
                 if (isRunning)
                     player.walkingQueue.isRunning = false

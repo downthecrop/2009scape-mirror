@@ -70,8 +70,10 @@ import core.game.world.repository.Repository
 import core.game.consumable.*
 import core.tools.Log
 import core.tools.tick
+import core.ServerConstants
+import core.api.utils.Vector
 import java.util.regex.*
-import kotlin.math.absoluteValue
+import kotlin.math.*
 
 /**
  * Gets a skilling tool which the player has the level to use and is in their inventory.
@@ -1770,15 +1772,17 @@ fun getServerConfig(): Toml {
 }
 
 fun getPathableRandomLocalCoordinate(target: Entity, radius: Int, center: Location, maxAttempts: Int = 3): Location {
-    val swCorner = center.transform(-radius, -radius, center.z)
-    val neCorner = center.transform(radius, radius, center.z)
+    var maxRadius = Vector.deriveWithEqualComponents(ServerConstants.MAX_PATHFIND_DISTANCE.toDouble()).x - 1
+    var effectiveRadius = min(radius, maxRadius.toInt())
+    val swCorner = center.transform(-effectiveRadius, -effectiveRadius, center.z)
+    val neCorner = center.transform(effectiveRadius, effectiveRadius, center.z)
     val borders = ZoneBorders(swCorner.x, swCorner.y, neCorner.x, neCorner.y, center.z)
 
     var attempts = maxAttempts
     var success: Boolean
     while (attempts-- > 0) {
         val dest = borders.randomLoc
-        val path = Pathfinder.find(target, dest)
+        val path = Pathfinder.find(center, dest, target.size())
         success = path.isSuccessful && !path.isMoveNear
         if (success) return dest
     }
