@@ -125,6 +125,8 @@ public final class Skills {
 	 */
 	private int skillMilestone;
 
+        public int lastTrainedSkill = -1;
+
 	/**
 	 * Constructs a new {@code Skills} {@code Object}.
 	 * @param entity The entity.
@@ -299,6 +301,7 @@ public final class Skills {
 			lastUpdateXp = this.experience.clone();
 			lastUpdate = GameWorld.getTicks();
 		}
+                lastTrainedSkill = slot;
 	}
 
 	/**

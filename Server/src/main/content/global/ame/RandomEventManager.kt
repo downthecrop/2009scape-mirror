@@ -13,6 +13,7 @@ import core.game.world.GameWorld
 import core.game.world.repository.Repository
 import core.tools.Log
 import kotlin.random.Random
+import content.global.ame.RandomEvents
 
 class RandomEventManager(val player: Player? = null) : LoginListener, EventHook<TickEvent>, Commands {
     var event: content.global.ame.RandomEventNPC? = null
@@ -39,22 +40,20 @@ class RandomEventManager(val player: Player? = null) : LoginListener, EventHook<
             return
         }
         if (player!!.zoneMonitor.isRestricted(ZoneRestriction.RANDOM_EVENTS)) {
-            nextSpawn = GameWorld.ticks + 3000
+            rollNextSpawn()
             return
         }
         if (getAttribute<content.global.ame.RandomEventNPC?>(player, "re-npc", null) != null) return
         val currentAction = player.pulseManager.current?.toString() ?: "None"
-        val ame: content.global.ame.RandomEvents = if(currentAction.contains("WoodcuttingSkillPulse") && Random.nextBoolean()){
-            content.global.ame.RandomEvents.TREE_SPIRIT
-        } else if(currentAction.contains("FishingPulse") && Random.nextBoolean()){
-            content.global.ame.RandomEvents.RIVER_TROLL
-        } else if(currentAction.contains("MiningSkillPulse") && Random.nextBoolean()){
-            content.global.ame.RandomEvents.ROCK_GOLEM
-        } else if(currentAction.contains("BoneBuryingOptionPlugin") && Random.nextBoolean()){
-            content.global.ame.RandomEvents.SHADE
-        } else {
-            content.global.ame.RandomEvents.values().filter { it.type != "skill" }.random()
-        }
+        
+        //Give us a decent pool of events to pick from randomly, with the skill-based random event mixed in if applicable.
+        //This is just to provide a bit more randomization (you don't want to get the skill-based randoms EVERY TIME when training woodcutting, for example.)
+        val ame = listOf (
+            RandomEvents.getSkillBasedRandomEvent (player.skills.lastTrainedSkill),
+            RandomEvents.getNonSkillRandom(),
+            RandomEvents.getNonSkillRandom()
+        ).filter{ it != null }.random() ?: RandomEvents.getNonSkillRandom() //Absolute cosmic bit-flip tier safety fallback
+
         event = ame.npc.create(player,ame.loot,ame.type)
         if (event!!.spawnLocation == null) {
             nextSpawn = GameWorld.ticks + 3000

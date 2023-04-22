@@ -15,11 +15,12 @@ import content.global.ame.events.zombie.ZombieRENPC
 
 import core.api.utils.WeightBasedTable
 import core.api.utils.WeightedItem
+import core.game.node.entity.skill.Skills
 
-enum class RandomEvents(val npc: RandomEventNPC, val loot: WeightBasedTable? = null) {
-    SANDWICH_LADY(SandwichLadyRENPC()),
-	GENIE(GenieNPC()),
-    CERTER(CerterNPC(), WeightBasedTable.create(
+enum class RandomEvents(val npc: RandomEventNPC, val loot: WeightBasedTable? = null, val skillId: Int = -1, val type: String = "") {
+    SANDWICH_LADY(npc = SandwichLadyRENPC()),
+    GENIE(npc = GenieNPC()),
+    CERTER(npc = CerterNPC(), loot = WeightBasedTable.create(
         WeightedItem(Items.UNCUT_SAPPHIRE_1623,1,1,3.4),
         WeightedItem(Items.KEBAB_1971,1,1,1.7),
         WeightedItem(Items.UNCUT_EMERALD_1621,1,1,1.7),
@@ -36,25 +37,40 @@ enum class RandomEvents(val npc: RandomEventNPC, val loot: WeightBasedTable? = n
         WeightedItem(Items.TOOTH_HALF_OF_A_KEY_985,1,1,0.1),
         WeightedItem(Items.LOOP_HALF_OF_A_KEY_987,1,1,0.1)
     )),
-    DRILL_DEMON(SeargentDamienNPC()),
-    EVIL_CHICKEN(EvilChickenNPC()),
-    SURPRISE_EXAM(MysteriousOldManNPC(),"sexam"),
-    TREE_SPIRIT(TreeSpiritRENPC(),"skill"),
-    RIVER_TROLL(RiverTrollRENPC(),"skill"),
-    ROCK_GOLEM(RockGolemRENPC(),"skill"),
-    SHADE(ShadeRENPC(),"skill"),
-    ZOMBIE(ZombieRENPC(),"skill");
-
-    var type: String = ""
-    private set
-
-    constructor(npc: RandomEventNPC, type: String) : this(npc,null){
-        this.type = type
-    }
+    DRILL_DEMON(npc = SeargentDamienNPC()),
+    EVIL_CHICKEN(npc = EvilChickenNPC()),
+    SURPRISE_EXAM(npc = MysteriousOldManNPC(), type = "sexam"),
+    TREE_SPIRIT(npc = TreeSpiritRENPC(), skillId = Skills.WOODCUTTING),
+    RIVER_TROLL(RiverTrollRENPC(), skillId = Skills.FISHING),
+    ROCK_GOLEM(RockGolemRENPC(), skillId = Skills.MINING),
+    SHADE(ShadeRENPC(), skillId = Skills.PRAYER),
+    ZOMBIE(ZombieRENPC(), skillId = Skills.PRAYER);
 
     companion object {
         @JvmField
         val randomIDs = values().map { it.npc.id }.toList()
+        val skillMap = HashMap<Int, ArrayList<RandomEvents>>()
+        val nonSkillList = ArrayList<RandomEvents>()
+
+        init { populateMappings() }
+
+        fun getSkillBasedRandomEvent (skill: Int) : RandomEvents? {
+            return skillMap[skill]?.random()
+        }
+
+        fun getNonSkillRandom() : RandomEvents {
+            return nonSkillList.random()
+        }
+
+        private fun populateMappings() {
+            for (event in values()) {
+                if (event.skillId != -1) {
+                    val list = skillMap[event.skillId] ?: ArrayList<RandomEvents>().also { skillMap[event.skillId] = it }
+                    list.add (event)
+                }
+                else nonSkillList.add (event)
+            }
+        }
     }
 
 }
