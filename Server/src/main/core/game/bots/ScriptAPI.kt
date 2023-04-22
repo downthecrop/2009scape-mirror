@@ -369,7 +369,7 @@ class ScriptAPI(private val bot: Player) {
         val norm = vec.normalized()
         val tiles = kotlin.math.min(kotlin.math.floor(vec.magnitude()).toInt(), ServerConstants.MAX_PATHFIND_DISTANCE - 1)
         val loc = bot.location.transform(norm * tiles)
-        Pathfinder.find(bot, loc).walk(bot)
+        bot.pulseManager.run(object : MovementPulse(bot, loc) { override fun pulse() : Boolean { return true } })
     }
 
     /**

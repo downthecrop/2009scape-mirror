@@ -78,6 +78,8 @@ public abstract class MovementPulse extends Pulse {
 
     private Function2<Entity,Node,Location> overrideMethod;
 
+    private Location previousLoc;
+
     /**
      * Constructs a new {@code MovementPulse} {@code Object}.
      *
@@ -265,6 +267,9 @@ public abstract class MovementPulse extends Pulse {
             }
         }
 
+        if (loc == previousLoc)
+            return;
+
         if (destination == null) {
             return;
         }
@@ -330,6 +335,7 @@ public abstract class MovementPulse extends Pulse {
                     }
                 }
             }
+            previousLoc = loc;
         }
         last = destination.getLocation();
     }
