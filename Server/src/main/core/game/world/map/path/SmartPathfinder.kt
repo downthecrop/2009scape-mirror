@@ -241,6 +241,8 @@ internal constructor() : Pathfinder() {
             path.points.add(Point(absX, absY))
         }
         path.setSuccesful(true)
+        if (end != dest)
+            path.isMoveNear = true
         return path
     }
 
