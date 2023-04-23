@@ -359,9 +359,15 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         if(amount > player.inventory.getAmount(item.id))
             item.amount = player.inventory.getAmount(item.id)
 
+        val id = if(!item.definition.isUnnoted) item.noteChange else item.id
+        val (isPlayerStock, shopSlot) = getStockSlot(id)
+
+        if(isPlayerStock && shopSlot == -1 && generalPlayerStock.freeSlots() == 0) {
+            sendMessage(player, "The shop is too full to buy any more items")
+            return TransactionStatus.Failure("Attempt to sell to full shop.")
+        }
+
         if(currency == Items.COINS_995 && item.amount > 1){
-            val id = if(!item.definition.isUnnoted) item.noteChange else item.id
-            val (isPlayerStock, shopSlot) = getStockSlot(id)
             var amt = item.amount
             var inStockAmt = container!![shopSlot]?.amount ?: playerStock.getAmount(id)
             while(amt-- > 1)
