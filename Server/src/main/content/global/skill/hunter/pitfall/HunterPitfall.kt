@@ -249,14 +249,17 @@ class PitfallListeners : InteractionListener {
         }
         on(LARUPIA_PIT, IntType.SCENERY, "dismantle") { player, node ->
             lootCorpse(player, node as Scenery, 180.0, Items.LARUPIA_FUR_10095, Items.TATTY_LARUPIA_FUR_10093)
+            sendMessage(player, "You've caught a spined larupia!")
             return@on true
         }
         on(GRAAHK_PIT, IntType.SCENERY, "dismantle") { player, node ->
             lootCorpse(player, node as Scenery, 240.0, Items.GRAAHK_FUR_10099, Items.TATTY_GRAAHK_FUR_10097)
+            sendMessage(player, "You've caught a horned graahk!")
             return@on true
         }
         on(KYATT_PIT, IntType.SCENERY, "dismantle") { player, node ->
             lootCorpse(player, node as Scenery, 300.0, Items.KYATT_FUR_10103, Items.TATTY_KYATT_FUR_10101)
+            sendMessage(player, "You've caught a sabretoothed kyatt!")
             return@on true
         }
         on(BEAST_IDS, IntType.NPC, "tease") { player, node ->

@@ -320,6 +320,8 @@ class TFTInteractionListeners : InteractionListener {
     class SpiritPulse(val player: Player, val fish: Int) : Pulse(){
         var counter = 0
         val npc = NPC(1273, player.location)
+        val sea_boots = intArrayOf(Items.FREMENNIK_SEA_BOOTS_1_14571,Items.FREMENNIK_SEA_BOOTS_2_14572,Items.FREMENNIK_SEA_BOOTS_3_14573)
+        val hasboots = player.equipment.containsAtLeastOneItem(sea_boots)
         override fun pulse(): Boolean {
             when(counter++){
                 0 -> {
@@ -332,10 +334,14 @@ class TFTInteractionListeners : InteractionListener {
                 3 -> player.dialogueInterpreter?.sendDialogues(npc,
                     core.game.dialogue.FacialExpression.HAPPY,"I will kindly accept this offering, and","bestow upon you a gift in return.")
                 4 -> if(!removeItem(player,Items.LYRE_3689)) { removeItem(player,Items.ENCHANTED_LYRE_3690) }
-                5 -> when(fish){
-                    383 -> addItem(player,Items.ENCHANTED_LYRE2_6125)
-                    389 -> addItem(player,Items.ENCHANTED_LYRE3_6126)
-                    395 -> addItem(player,Items.ENCHANTED_LYRE4_6127)
+                5 -> if(hasboots) when(fish){
+                    383 -> addItem(player, Items.ENCHANTED_LYRE3_6126)
+                    389 -> addItem(player, Items.ENCHANTED_LYRE5_14590)
+                    395 -> addItem(player, Items.ENCHANTED_LYRE6_14591)
+                } else when(fish){
+                    383 -> addItem(player, Items.ENCHANTED_LYRE2_6125)
+                    389 -> addItem(player, Items.ENCHANTED_LYRE3_6126)
+                    395 -> addItem(player, Items.ENCHANTED_LYRE4_6127)
                 }
                 6 -> player.unlock()
                 10 -> npc.clear().also {

@@ -34907,7 +34907,7 @@
     "equipment_slot": "3"
   },
   {
-    "examine": "This will teleport me to Rellekka when I play it.  A musical intrument that I can magically play.",
+    "examine": "A musical intrument that I can magically play.",
     "durability": null,
     "name": "Lyre",
     "weight": "1.8",
@@ -34916,7 +34916,7 @@
     "equipment_slot": "3"
   },
   {
-    "examine": "This will teleport me to Rellekka when I play it.  A musical intrument that I can magically play.",
+    "examine": "This will teleport me to Rellekka when I play it.",
     "durability": null,
     "name": "Enchanted lyre",
     "weight": "1.8",
@@ -34925,7 +34925,7 @@
     "equipment_slot": "3"
   },
   {
-    "examine": "This will teleport me to Rellekka when I play it.  A musical intrument that I can magically play.",
+    "examine": "This will teleport me to Rellekka when I play it.",
     "durability": null,
     "name": "Enchanted lyre(1)",
     "weight": "1.8",
@@ -55500,7 +55500,7 @@
     "id": "6124"
   },
   {
-    "examine": "This will teleport me to Rellekka when I play it.  A musical intrument that I can magically play.",
+    "examine": "This will teleport me to Rellekka when I play it.",
     "durability": null,
     "name": "Enchanted lyre(2)",
     "weight": "1.8",
@@ -55509,7 +55509,7 @@
     "equipment_slot": "3"
   },
   {
-    "examine": "This will teleport me to Rellekka when I play it.  A musical intrument that I can magically play.",
+    "examine": "This will teleport me to Rellekka when I play it.",
     "durability": null,
     "name": "Enchanted lyre(3)",
     "weight": "1.8",
@@ -55518,7 +55518,7 @@
     "equipment_slot": "3"
   },
   {
-    "examine": "This will teleport me to Rellekka when I play it.  A musical intrument that I can magically play.",
+    "examine": "This will teleport me to Rellekka when I play it.",
     "durability": null,
     "name": "Enchanted lyre(4)",
     "weight": "1.8",
@@ -129985,7 +129985,7 @@
   {
     "destroy_message": "Drop",
     "shop_price": "1000",
-    "examine": "This will teleport me to Rellekka when I play it. ",
+    "examine": "This will teleport me to Rellekka when I play it.",
     "durability": null,
     "name": "Enchanted lyre(5)",
     "destroy": "true",
@@ -129999,7 +129999,7 @@
   {
     "destroy_message": "Drop",
     "shop_price": "1000",
-    "examine": "This will teleport me to Rellekka when I play it. ",
+    "examine": "This will teleport me to Rellekka when I play it.",
     "durability": null,
     "name": "Enchanted lyre(6)",
     "destroy": "true",

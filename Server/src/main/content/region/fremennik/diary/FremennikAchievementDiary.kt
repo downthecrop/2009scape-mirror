@@ -9,10 +9,18 @@ import org.rs09.consts.Scenery
 import content.minigame.barbassault.CaptainCainDialogue
 import content.region.fremennik.rellekka.dialogue.HuntingExpertRellekkaDialogue
 import content.global.handlers.iface.FairyRing
+import content.global.skill.cooking.dairy.DairyChurnDialogue
+import content.region.fremennik.jatizso.dialogue.TowerGuardDialogue
+import content.region.fremennik.rellekka.quest.thefremenniktrials.ChieftanBrundt
+import core.api.inBorders
+import core.api.inEquipment
 import core.game.diary.AreaDiaryTask
 import core.game.diary.DiaryEventHookBase
 import core.game.diary.DiaryLevel
 import core.game.event.*
+import core.game.node.entity.player.link.SpellBookManager
+import core.game.node.entity.skill.Skills
+import org.rs09.consts.Components
 
 class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
     companion object {
@@ -20,8 +28,13 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
         private const val ATTRIBUTE_ROCK_CRAB_KILLCOUNT = "diary:fremennik:rock-crabs-killed"
         private const val ATTRIBUTE_BARBARIAN_FISHING_TRAINING = "barbtraining:fishing"
         private const val ATTRIBUTE_BARBARIAN_HUNTING_TRAINING = "barbtraining:hunting"
+        private const val ATTRIBUTE_DAGANNOTHS_KILLCOUNT = "diary:fremennik:dagannoths-killed"
 
         private val WINDSWEPT_TREE_AREA = ZoneBorders(2743, 3718, 2750, 3737)
+        private val YRSA_SHOP_BORDERS = ZoneBorders(2622, 3672, 2626, 3676)
+        private val RELLEKKA_HUNTING_AREA = ZoneBorders(2723, 3776, 2743, 3796)
+        private val ECTERNIA_TREE_AREA = ZoneBorders(2592, 3887,2620, 3899)
+        private val RELLEKKA_BLACKSMITH_AREA = ZoneBorders(2616, 3658, 2621, 3668)
 
         private val FISHING_SPOTS = arrayOf(
             NPCs.FISHING_SPOT_309, NPCs.FISHING_SPOT_334,
@@ -35,6 +48,17 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
         private val CAVE_CRAWLERS = arrayOf(
             NPCs.CAVE_CRAWLER_1600, NPCs.CAVE_CRAWLER_1601,
             NPCs.CAVE_CRAWLER_1602, NPCs.CAVE_CRAWLER_1603
+        )
+
+        private val DAGANNOTHS = arrayOf(
+            NPCs.DAGANNOTH_2455, NPCs.DAGANNOTH_2456,
+            NPCs.DAGANNOTH_PRIME_2882, NPCs.DAGANNOTH_REX_2883, NPCs.DAGANNOTH_SUPREME_2881
+        )
+
+        private val ICE_TROLLS = arrayOf(
+            NPCs.ICE_TROLL_RUNT_5521, NPCs.ICE_TROLL_MALE_5522, NPCs.ICE_TROLL_FEMALE_5523, NPCs.ICE_TROLL_GRUNT_5524,
+            NPCs.ICE_TROLL_RUNT_5525, NPCs.ICE_TROLL_MALE_5526, NPCs.ICE_TROLL_FEMALE_5527, NPCs.ICE_TROLL_GRUNT_5528,
+            NPCs.ICE_TROLL_RUNT_5473, NPCs.ICE_TROLL_MALE_5474, NPCs.ICE_TROLL_FEMALE_5475, NPCs.ICE_TROLL_GRUNT_5476
         )
 
         object EasyTasks {
@@ -121,6 +145,40 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
         }
     }
 
+    override fun onDialogueOptionSelected(player: Player, event: DialogueOptionSelectionEvent) {
+        when (event.dialogue) {
+            is TowerGuardDialogue -> {
+                if (event.currentStage == 10) {
+                    finishTask(
+                        player,
+                        DiaryLevel.MEDIUM,
+                        MediumTasks.TOWER_GUARDS_WATCH_SHOUTING_MATCH
+                    )
+                }
+            }
+
+            is ChieftanBrundt -> {
+                if (event.currentStage == 615){
+                    finishTask(
+                        player,
+                        DiaryLevel.MEDIUM,
+                        MediumTasks.LEARN_HISTORY_FROM_CHIEFTAIN_BRUNDT
+                    )
+                }
+            }
+
+            is DairyChurnDialogue -> {
+                if (event.optionId == 12) {
+                    finishTask(
+                        player,
+                        DiaryLevel.MEDIUM,
+                        MediumTasks.MAKE_CHEESE_WITH_CHURN
+                    )
+                }
+            }
+        }
+    }
+
     override fun onResourceProduced(player: Player, event: ResourceProducedEvent) {
         when (player.viewport.region.id) {
             10553 -> if (event.source.id in FISHING_SPOTS) {
@@ -130,6 +188,19 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
                         EasyTasks.PIER_CATCH_FISH
                 )
             }
+
+            /* After Royal trouble quest
+            10300 -> when (event.itemId) {
+                Items.MAHOGANY_LOGS_6332 -> {
+                    if (inBorders(player, ECTERNIA_TREE_AREA)) {
+                        finishTask(
+                            player,
+                            DiaryLevel.HARD,
+                            HardTasks.GET_MAHOGANY_FROM_ETCETERIA
+                        )
+                    }
+                }
+            }*/
         }
     }
 
@@ -158,6 +229,32 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
                     player,
                     DiaryLevel.EASY,
                         EasyTasks.KILL_ADULT_BLACK_UNICORN
+                )
+            }
+
+            9886, 10142, 11589 -> if (event.npc.id in DAGANNOTHS) {
+                progressIncrementalTask(
+                    player,
+                    DiaryLevel.HARD,
+                    HardTasks.KILL_3_DAGANNOTHS,
+                    ATTRIBUTE_DAGANNOTHS_KILLCOUNT,
+                    3
+                )
+            }
+
+            6995 -> if (event.npc.id == NPCs.MITHRIL_DRAGON_5363) {
+                finishTask(
+                    player,
+                    DiaryLevel.HARD,
+                    HardTasks.KILL_MITHRIL_DRAGON
+                )
+            }
+
+            9276, 9532 -> if (event.npc.id in ICE_TROLLS && inEquipment(player, Items.YAK_HIDE_ARMOUR_10822,1)) {
+                finishTask(
+                    player,
+                    DiaryLevel.MEDIUM,
+                    MediumTasks.KILL_ICE_TROLL_WHILE_WEARING_YAK_ARMOR
                 )
             }
         }
@@ -195,6 +292,75 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
                     DiaryLevel.EASY,
                         EasyTasks.GATE_OBELISK_RECHARGE_POINTS
                 )
+            }
+        }
+    }
+
+    override fun onInteracted(player: Player, event: InteractionEvent) {
+        when (player.viewport.region.id) {
+            10553 -> if (event.target.id == Scenery.FISH_STALL_4277 && event.option == "steal-from" && player.questRepository.isComplete("Fremennik Trials")) {
+                finishTask(
+                    player,
+                    DiaryLevel.MEDIUM,
+                    MediumTasks.STEAL_FISH_FROM_STALL
+                )
+            }
+
+            10811 -> if (event.target.id == Scenery.COLLAPSED_TRAP_19233 && inBorders(player, RELLEKKA_HUNTING_AREA) && event.option == "dismantle") {
+                finishTask(
+                    player,
+                    DiaryLevel.MEDIUM,
+                    MediumTasks.HUNT_SABRE_TOOTHED_KYATT
+                )
+            }
+        }
+
+        if (event.option == "watch-shouting") {
+            finishTask(
+                player,
+                DiaryLevel.MEDIUM,
+                MediumTasks.TOWER_GUARDS_WATCH_SHOUTING_MATCH
+            )
+        }
+
+        if (event.target.id == Items.PET_ROCK_3695 && event.option == "interact") {
+            finishTask(
+                player,
+                DiaryLevel.MEDIUM,
+                MediumTasks.INTERACT_WITH_PET_ROCK
+            )
+        }
+
+        // You can alternatively browse her regular clothing store to complete the task, no purchase necessary.
+        if (event.target.id == NPCs.YRSA_1301 && event.option == "trade" && player.questRepository.isComplete("Fremennik Trials") && inBorders(player, YRSA_SHOP_BORDERS)) {
+            finishTask(
+                player,
+                DiaryLevel.MEDIUM,
+                MediumTasks.BROWSE_BOOT_COLORS_YRSA
+            )
+        }
+    }
+
+    override fun onSpellCast(player: Player, event: SpellCastEvent) {
+        if (event.spellBook == SpellBookManager.SpellBook.LUNAR && event.spellId == 15) {
+            finishTask(
+                player,
+                DiaryLevel.HARD,
+                HardTasks.BAKE_PIE_WITH_MAGIC
+            )
+        }
+    }
+
+    override fun onButtonClicked(player: Player, event: ButtonClickEvent) {
+        when {
+            inBorders(player, RELLEKKA_BLACKSMITH_AREA) -> {
+                if (event.iface == Components.CRAFTING_GLASS_542 && event.buttonId == 38 && player.skills.getLevel(Skills.CRAFTING) >= 33) {
+                    finishTask(
+                        player,
+                        DiaryLevel.MEDIUM,
+                        MediumTasks.MAKE_3_VIALS
+                    )
+                }
             }
         }
     }
