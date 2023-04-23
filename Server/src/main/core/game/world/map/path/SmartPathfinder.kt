@@ -97,14 +97,18 @@ internal constructor() : Pathfinder() {
         }
     }
 
-    override fun find(start: Location?, moverSize: Int, end: Location?, sizeX: Int, sizeY: Int, rotation: Int, type: Int, walkingFlag: Int, near: Boolean, clipMaskSupplier: ClipMaskSupplier?): Path {
+    override fun find(start: Location?, moverSize: Int, dest: Location?, sizeX: Int, sizeY: Int, rotation: Int, type: Int, walkingFlag: Int, near: Boolean, clipMaskSupplier: ClipMaskSupplier?): Path {
         reset()
-        assert(start != null && end != null)
-        var vec = Vector.betweenLocs(end!!, start!!)
+        assert(start != null && dest != null)
+        var vec = Vector.betweenLocs(start!!, dest!!)
         var mag = kotlin.math.floor(vec.magnitude())
+        var end = dest!!
         if (mag > ServerConstants.MAX_PATHFIND_DISTANCE) {
             try {
-                throw Exception("Pathfinding distance exceeds server max! -> " + mag.toString() + " {" + start + "->" + end + "}")
+                if (mag < 50.0) { //truncate the path if it's realistically long
+                    vec = vec.normalized() * (ServerConstants.MAX_PATHFIND_DISTANCE - 1)
+                    end = start!!.transform(vec)
+                } else throw Exception("Pathfinding distance exceeds server max! -> " + mag.toString() + " {" + start + "->" + end + "}")
             } catch (e: Exception) {
                 e.printStackTrace()
             }

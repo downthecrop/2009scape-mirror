@@ -55,6 +55,7 @@ import core.net.packet.`in`.Packet
 import core.net.packet.`in`.RunScript
 import core.tools.Log
 import core.worker.ManagementEvents
+import core.api.utils.Vector
 import java.io.PrintWriter
 import java.io.StringWriter
 import java.lang.Math.min
@@ -452,8 +453,14 @@ object PacketProcessor {
             //there's more data in this packet, we're just not using it
         }
 
-        val loc = Location.create(x,y,player.location.z)
-        var canWalk = !player.locks.isMovementLocked && player.location.withinDistance(loc, ServerConstants.MAX_PATHFIND_DISTANCE)
+        var loc = Location.create(x,y,player.location.z)
+        var canWalk = !player.locks.isMovementLocked
+
+        val vec = Vector.betweenLocs(player.location, loc)
+        if (vec.magnitude() > ServerConstants.MAX_PATHFIND_DISTANCE) {
+            val newVec = vec.normalized() * (ServerConstants.MAX_PATHFIND_DISTANCE - 1)
+            loc = player.location.transform(newVec)
+        }
 
         if (canWalk && player.interfaceManager.isOpened && !player.interfaceManager.opened.definition.isWalkable)
             canWalk = canWalk && player.interfaceManager.close()
