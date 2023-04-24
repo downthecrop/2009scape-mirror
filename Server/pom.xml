@@ -7,7 +7,7 @@
   <properties>
     <project.mainClassName>core.Server</project.mainClassName>
     <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
-    <kotlin.version>1.8.20-Beta</kotlin.version>
+    <kotlin.version>1.8.20</kotlin.version>
     <kotlin.compiler.jvmTarget>11</kotlin.compiler.jvmTarget>
     <junit.version>5.7.0</junit.version>
     <maven.compiler.source>11</maven.compiler.source>
