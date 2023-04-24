@@ -61,8 +61,11 @@ public final class GertrudeDialogue extends DialoguePlugin {
 			stage = 230;
 			break;
 		case 30:
+			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Hello again.");
+			stage = 236;
+			break;
 		case 50:
-			interpreter.sendDialogues(npc, null, "Please bring me my cat back!");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_WORRIED, "Please bring me my cat back!");
 			stage = 235;
 			break;
 		case 40:
@@ -74,7 +77,7 @@ public final class GertrudeDialogue extends DialoguePlugin {
 			stage = 320;
 			break;
 		case 100:
-			interpreter.sendDialogues(player, null, "Hello again.");
+			interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Hello again.");
 			stage = 500;
 			break;
 		}
@@ -154,7 +157,7 @@ public final class GertrudeDialogue extends DialoguePlugin {
 			stage = 212;
 			break;
 		case 212:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "What about Shilop?");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_ASKING, "What about Shilop?");
 			stage = 213;
 			break;
 		case 213:
@@ -169,34 +172,62 @@ public final class GertrudeDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 230:
-			interpreter.sendDialogues(npc, null, "Hello again, did you manage to find Shilop? I can't keep", "an eye on him for the life of me.");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Hello again, did you manage to find Shilop? I can't keep", "an eye on him for the life of me.");
 			stage = 231;
 			break;
 		case 231:
-			interpreter.sendDialogues(player, null, "He does seem quite a handful.");
+			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "He does seem quite a handful.");
 			stage = 232;
 			break;
 		case 232:
-			interpreter.sendDialogues(npc, null, "You have no idea! Did he help at all?");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "You have no idea! Did he help at all?");
 			stage = 233;
 			break;
 		case 233:
-			interpreter.sendDialogues(player, null, "I think so, I'm just going to look now.");
+			interpreter.sendDialogues(player, FacialExpression.OLD_NORMAL, "I think so, I'm just going to look now.");
 			stage = 234;
 			break;
 		case 234:
-			interpreter.sendDialogues(npc, null, "Thanks again adventurer!");
+			interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Thanks again adventurer!");
 			stage = 235;
 			break;
 		case 235:
 			end();
 			break;
+		case 236:
+			interpreter.sendDialogues(npc, FacialExpression.HALF_ASKING, "Hello. How's it going? Any luck?");
+			stage = 237;
+			break;
+		case 237:
+			interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Yes, I've found Fluffs!");
+			stage = 238;
+			break;
+		case 238:
+			interpreter.sendDialogues(npc, FacialExpression.HALF_ASKING, "Well well, you are clever!", "Did you bring her back?");
+			stage = 239;
+			break;
+		case 239:
+			interpreter.sendDialogues(player, FacialExpression.HALF_WORRIED, "Well, that's the thing, she refuses to leave.");
+			stage = 240;
+			break;
+		case 240:
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Oh dear, oh dear! Maybe she's just hungry.", "She loves doogle sardines but I'm all out.");
+			stage = 241;
+			break;
+		case 241:
+			interpreter.sendDialogues(player, FacialExpression.HALF_ASKING, "Doogle sardines?");
+			stage = 242;
+			break;
+		case 242:
+			interpreter.sendDialogues(npc, FacialExpression.HALF_ASKING, "Yes, raw sardines seasoned with doogle leaves.", "Unfortunately I've used all my doogle leaves,", "but you may find some in the woods out back.");
+			stage = 304;
+			break;
 		case 300:
-			interpreter.sendDialogues(npc, null, "Hi! Did you find fluffs?");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Hi! Did you find fluffs?");
 			stage = 301;
 			break;
 		case 301:
-			interpreter.sendDialogues(player, null, "Yes! But she won't follow me.");
+			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Yes! But she won't follow me.");
 			stage = 302;
 			break;
 		case 302:
@@ -211,7 +242,7 @@ public final class GertrudeDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 320:
-			interpreter.sendDialogues(npc, null, "You're back! Thank you! Thank you! Fluffs just came", "back! I think she was just upset as she couldn't find her", "kitten.");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "You're back! Thank you! Thank you! Fluffs just came", "back! I think she was just upset as she couldn't find her", "kitten.");
 			stage = 321;
 			break;
 		case 321:
@@ -266,14 +297,14 @@ public final class GertrudeDialogue extends DialoguePlugin {
 		case 331:
 			break;
 		case 1000:
-			interpreter.sendDialogues(npc, null, "Good good, See you again.");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Good good, See you again.");
 			stage = 1001;
 			break;
 		case 1001:
 			end();
 			break;
 		case 500:
-			interpreter.sendDialogues(npc, null, "Hello my dear. How's things?");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_ASKING, "Hello my dear. How's things?");
 			stage = 501;
 			break;
 		case 501:
@@ -283,11 +314,11 @@ public final class GertrudeDialogue extends DialoguePlugin {
 		case 502:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, null, "I'm fine, thanks.");
+				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "I'm fine, thanks.");
 				stage = 1000;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, null, "Do you have any more kittens?");
+				interpreter.sendDialogues(player, FacialExpression.HALF_ASKING, "Do you have any more kittens?");
 				stage = 503;
 				break;
 			}
