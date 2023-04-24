@@ -4,13 +4,15 @@ import core.game.world.GameWorld
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.Point
+import core.tools.*
+import core.api.*
 import core.api.utils.Vector
 import core.ServerConstants
 
 import java.util.Comparator
 import java.util.PriorityQueue
 
-import java.io.File
+import java.io.*
 import javax.imageio.ImageIO
 import java.awt.image.BufferedImage
 
@@ -110,7 +112,13 @@ internal constructor() : Pathfinder() {
                     end = start!!.transform(vec)
                 } else throw Exception("Pathfinding distance exceeds server max! -> " + mag.toString() + " {" + start + "->" + end + "}")
             } catch (e: Exception) {
-                e.printStackTrace()
+                val sw = StringWriter()
+                val pw = PrintWriter(sw)
+                e.printStackTrace(pw)
+                log(this::class.java, Log.FINE, sw.toString())
+                val p = Path()
+                p.isMoveNear = true
+                return p
             }
         }
         val path = Path()
