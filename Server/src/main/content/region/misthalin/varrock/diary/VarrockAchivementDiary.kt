@@ -13,16 +13,21 @@ import org.rs09.consts.Scenery
 import content.region.misthalin.varrock.dialogue.ElsieDialogue
 import content.global.handlers.iface.FairyRing
 import content.global.skill.magic.TeleportMethod
-import content.global.skill.magic.spellconsts.Modern
+import core.api.inBorders
 import core.game.diary.AreaDiaryTask
 import core.game.diary.DiaryEventHookBase
 import core.game.diary.DiaryLevel
 import core.game.event.*
+import core.game.node.entity.player.link.SpellBookManager
+import core.game.node.entity.skill.Skills
 
 class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
     companion object {
         private val VARROCK_ROOF_AREA = ZoneBorders(3201, 3467, 3225, 3497, 3)
         private val SOS_LEVEL_2_AREA = ZoneBorders(2040, 5241, 2046, 5246)
+        private val VARROCK_PALACE = ZoneBorders(3201, 3456, 3227, 3468)
+        private val CHAMPIONS_GUILD = ZoneBorders(3188, 3361, 3194, 3362)
+        private val OZIACH_SHOP = ZoneBorders(3066, 3514,3070, 3518)
 
         private val STRAY_DOGS = arrayOf(
             NPCs.STRAY_DOG_4766, NPCs.STRAY_DOG_4767,
@@ -103,6 +108,12 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
             SOS_LEVEL_2_AREA,
             DiaryLevel.EASY,
                 EasyTasks.VISIT_SOS_LEVEL2
+        ),
+
+        AreaDiaryTask(
+            CHAMPIONS_GUILD,
+            DiaryLevel.MEDIUM,
+            MediumTasks.CHAMPIONS_GUILD_VISIT
         )
     )
 
@@ -167,6 +178,31 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
                         EasyTasks.EDGEVILLE_ENTER_DUNGEON_SOUTH
                 )
             }
+            12598 -> if (event.target.id == 9312 && player.skills.getLevel(Skills.AGILITY, true) >= 21) {
+                finishTask(
+                    player,
+                    DiaryLevel.MEDIUM,
+                        MediumTasks.USE_GE_UNDER_WALL_SHORTCUT
+                )
+            }
+        }
+
+        if (event.option == "pickpocket" && (event.target.id == NPCs.GUARD_5920 && inBorders(player, VARROCK_PALACE))) {
+            finishTask(
+                player,
+                DiaryLevel.MEDIUM,
+                    MediumTasks.PALACE_PICKPOCKET_GUARD
+            )
+        }
+
+        if (player.questRepository.isComplete("Dragon Slayer")) {
+            if (event.target.id == NPCs.OZIACH_747 && event.option == "trade" && inBorders(player, OZIACH_SHOP)) {
+                finishTask(
+                    player,
+                    DiaryLevel.MEDIUM,
+                        MediumTasks.OZIACH_BROWSE_STORE
+                )
+            }
         }
     }
 
@@ -226,14 +262,12 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
     }
 
     override fun onSpellCast(player: Player, event: SpellCastEvent) {
-        when (event.spellId) {
-            Modern.VARROCK_TELEPORT -> {
-                finishTask(
-                    player,
-                    DiaryLevel.MEDIUM,
-                        MediumTasks.CAST_VARROCK_TELEPORT_SPELL
-                )
-            }
+        if (event.spellBook == SpellBookManager.SpellBook.MODERN && event.spellId == 15) {
+            finishTask(
+                player,
+                DiaryLevel.MEDIUM,
+                MediumTasks.CAST_VARROCK_TELEPORT_SPELL
+            )
         }
     }
 

@@ -4,7 +4,6 @@ import core.api.*
 import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.impl.ForceMovement.direction
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.game.node.scenery.Scenery
 import core.game.system.task.Pulse
@@ -93,8 +92,6 @@ class GrandExchangeShortcut : InteractionListener {
                             path[2],
                             CLIMB_UP
                         )
-                        // Use the shortcut under the wall, north-west of the Grand<br><br>Exchange
-                        player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 1, 8)
                         unlock(player)
                         return true
                     }

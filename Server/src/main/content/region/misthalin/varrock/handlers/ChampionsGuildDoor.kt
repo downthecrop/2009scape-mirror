@@ -1,6 +1,5 @@
 package content.region.misthalin.varrock.handlers
 
-import core.game.node.entity.player.link.diary.DiaryType
 import core.plugin.Initializable
 import org.rs09.consts.Scenery
 import core.game.interaction.IntType
@@ -22,14 +21,8 @@ class ChampionsGuildDoor : InteractionListener {
                 player.packetDispatch.sendMessage("The door won't open - you need at least 32 Quest Points.")
             } else {
                 if (player.location.x == 3191 && player.location.y == 3363) {
-                    player.dialogueInterpreter.sendDialogues(
-                        198,
-                        null,
-                        "Greetings bold adventurer. Welcome to the guild of",
-                        "Champions."
-                    )
+                    player.dialogueInterpreter.sendDialogues(198, null, "Greetings bold adventurer. Welcome to the guild of", "Champions.")
                 }
-                player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 1, 1)
                 core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, node as core.game.node.scenery.Scenery)
             }
             return@on true
