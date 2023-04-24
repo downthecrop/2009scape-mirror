@@ -78,6 +78,8 @@ public abstract class MovementPulse extends Pulse {
 
     private Function2<Entity,Node,Location> overrideMethod;
 
+    private Location previousLoc;
+
     /**
      * Constructs a new {@code MovementPulse} {@code Object}.
      *
@@ -263,7 +265,7 @@ public abstract class MovementPulse extends Pulse {
             else if (inside) {
                 loc = findBorderLocation();
             }
-        }
+        } else if (loc == previousLoc) return;
 
         if (destination == null) {
             return;
@@ -293,6 +295,7 @@ public abstract class MovementPulse extends Pulse {
             }
 
             Path path = Pathfinder.find(mover, loc != null ? loc : destination, true, pathfinder);
+            loc = destination.getLocation();
             near = !path.isSuccessful() || path.isMoveNear();
             interactLocation = mover.getLocation();
             boolean canMove = true;
@@ -330,6 +333,7 @@ public abstract class MovementPulse extends Pulse {
                     }
                 }
             }
+            previousLoc = loc;
         }
         last = destination.getLocation();
     }

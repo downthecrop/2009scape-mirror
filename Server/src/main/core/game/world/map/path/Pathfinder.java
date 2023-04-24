@@ -151,6 +151,10 @@ public abstract class Pathfinder {
 		return find(start, destination, true, SMART);
 	}
 
+        public static Path find(Location start, Node destination, int moverSize) {
+                return find(start, moverSize, destination, true, SMART, RegionManager::getClippingFlag);
+        }
+
 	/**
 	 * Finds a path from the start location to the end location.
 	 * @param destination The destination node.

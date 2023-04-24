@@ -55,6 +55,7 @@ import core.net.packet.`in`.Packet
 import core.net.packet.`in`.RunScript
 import core.tools.Log
 import core.worker.ManagementEvents
+import core.api.utils.Vector
 import java.io.PrintWriter
 import java.io.StringWriter
 import java.lang.Math.min
@@ -452,7 +453,14 @@ object PacketProcessor {
             //there's more data in this packet, we're just not using it
         }
 
+        var loc = Location.create(x,y,player.location.z)
         var canWalk = !player.locks.isMovementLocked
+
+        val vec = Vector.betweenLocs(player.location, loc)
+        if (vec.magnitude() > ServerConstants.MAX_PATHFIND_DISTANCE) {
+            val newVec = vec.normalized() * (ServerConstants.MAX_PATHFIND_DISTANCE - 1)
+            loc = player.location.transform(newVec)
+        }
 
         if (canWalk && player.interfaceManager.isOpened && !player.interfaceManager.opened.definition.isWalkable)
             canWalk = canWalk && player.interfaceManager.close()
@@ -460,7 +468,7 @@ object PacketProcessor {
             player.interfaceManager.closeChatbox()
 
         if (!canWalk || !player.dialogueInterpreter.close()) {
-            player.debug("[WALK ACTION]-- NO HANDLE: PLAYER LOCKED OR INTERFACES SAY NO")
+            player.debug("[WALK ACTION]-- Action canceled. Either player is locked, interfaces can't close, or distance is beyond server pathfinding limit.")
             return sendClearMinimap(player)
         }
 
@@ -474,7 +482,7 @@ object PacketProcessor {
         player.faceLocation(null)
         player.scripts.reset()
 
-        player.pulseManager.run(object : MovementPulse(player, Location.create(x,y,player.location.z), isRunning) {
+        player.pulseManager.run(object : MovementPulse(player, loc, isRunning) {
             override fun pulse(): Boolean {
                 if (isRunning)
                     player.walkingQueue.isRunning = false

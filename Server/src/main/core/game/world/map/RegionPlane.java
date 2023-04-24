@@ -201,6 +201,17 @@ public final class RegionPlane {
 	public Scenery[][] getObjects() {
 		return objects;
 	}
+
+        public List<Scenery> getObjectList() {
+            ArrayList<Scenery> list = new ArrayList();
+            for (int x = 0; x < REGION_SIZE; x++) {
+                for (int y = 0; y < REGION_SIZE; y++) {
+                    if (objects[x][y] != null)
+                        list.add(objects[x][y]);
+                }
+            }
+            return list;
+        }
 	
 	/**
 	 * Clears this region plane.

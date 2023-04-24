@@ -4,6 +4,8 @@ import core.game.world.GameWorld
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.Point
+import core.api.utils.Vector
+import core.ServerConstants
 
 import java.util.Comparator
 import java.util.PriorityQueue
@@ -95,9 +97,22 @@ internal constructor() : Pathfinder() {
         }
     }
 
-    override fun find(start: Location?, moverSize: Int, end: Location?, sizeX: Int, sizeY: Int, rotation: Int, type: Int, walkingFlag: Int, near: Boolean, clipMaskSupplier: ClipMaskSupplier?): Path {
+    override fun find(start: Location?, moverSize: Int, dest: Location?, sizeX: Int, sizeY: Int, rotation: Int, type: Int, walkingFlag: Int, near: Boolean, clipMaskSupplier: ClipMaskSupplier?): Path {
         reset()
-        assert(start != null && end != null)
+        assert(start != null && dest != null)
+        var vec = Vector.betweenLocs(start!!, dest!!)
+        var mag = kotlin.math.floor(vec.magnitude())
+        var end = dest!!
+        if (mag > ServerConstants.MAX_PATHFIND_DISTANCE) {
+            try {
+                if (mag < 50.0) { //truncate the path if it's realistically long
+                    vec = vec.normalized() * (ServerConstants.MAX_PATHFIND_DISTANCE - 1)
+                    end = start!!.transform(vec)
+                } else throw Exception("Pathfinding distance exceeds server max! -> " + mag.toString() + " {" + start + "->" + end + "}")
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
         val path = Path()
         foundPath = false
         for (x in 0..103) {
@@ -226,6 +241,8 @@ internal constructor() : Pathfinder() {
             path.points.add(Point(absX, absY))
         }
         path.setSuccesful(true)
+        if (end != dest)
+            path.isMoveNear = true
         return path
     }
 

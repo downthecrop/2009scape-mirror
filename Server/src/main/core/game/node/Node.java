@@ -9,6 +9,7 @@ import core.game.node.scenery.Scenery;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.tools.StringUtils;
+import core.api.utils.Vector;
 
 /**
  * Represents a node which is anything that is interactable in Keldagrim.
@@ -119,6 +120,21 @@ public abstract class Node {
 		int offset = size >> 1;
 		return location.transform(offset, offset, 0);
 	}
+
+        public Vector getMathematicalCenter() {
+            Location topRight = location.transform(size - 1, size - 1, 0);
+            double x = ((double) location.getX() + (double) topRight.getX()) / 2.0;
+            double y = ((double) location.getY() + (double) topRight.getY()) / 2.0;
+            return new Vector(x, y);
+        }
+
+        public Location getFaceLocation (Location fromLoc) {
+            Vector center = getMathematicalCenter();
+            Vector fromVec = new Vector((double) fromLoc.getX(), (double) fromLoc.getY());
+            Vector difference = fromVec.minus(center);
+            Vector end = center.plus(difference.invert());
+            return Location.create((int)end.getX(), (int)end.getY(), fromLoc.getZ());
+        }
 
 	/**
 	 * Gets the name of this node.

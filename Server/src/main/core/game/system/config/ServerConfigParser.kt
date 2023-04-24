@@ -150,6 +150,7 @@ object ServerConfigParser {
         ServerConstants.DRAGON_AXE_USE_OSRS_SPEC = data.getBoolean("world.dragon_axe_use_osrs_spec", false)
         ServerConstants.DISCORD_OPENRSC_HOOK = data.getString("server.openrsc_integration_webhook", "")
         ServerConstants.ENABLE_GLOBALCHAT = data.getBoolean("world.enable_globalchat", true)
+        ServerConstants.MAX_PATHFIND_DISTANCE = data.getLong("server.max_pathfind_dist", 25L).toInt()
 
         val logLevel = data.getString("server.log_level", "VERBOSE").uppercase()
         ServerConstants.LOG_LEVEL = parseEnumEntry<LogLevel>(logLevel) ?: LogLevel.VERBOSE
