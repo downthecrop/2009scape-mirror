@@ -1,9 +1,11 @@
 package content.region.desert.alkharid.dialogue
 
-import core.game.dialogue.DialoguePlugin
+import core.game.dialogue.DialoguePlugin;
+import core.game.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
+import org.rs09.consts.NPCs
 
 /**
  * Represents the gem trader Dialogue plugin
@@ -12,8 +14,8 @@ import core.plugin.Initializable
  */
 
 @Initializable
-class GemTraderDialogue (player: Player? = null): core.game.dialogue.DialoguePlugin(player){
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+class GemTraderDialogue (player: Player? = null): DialoguePlugin(player){
+    override fun newInstance(player: Player?): DialoguePlugin {
         return  GemTraderDialogue(player)
     }
 
@@ -45,7 +47,7 @@ class GemTraderDialogue (player: Player? = null): core.game.dialogue.DialoguePlu
 
             10 -> when(buttonId){
                 1 -> npc.openShop(player).also { stage = 1000 };
-                2 -> player("No Thank you").also{stage = 1000}
+                2 -> player("No, thank you.").also{stage = 1000}
                 3 -> npc("Fitzharmon, eh? Hmmm... If I'm not mistaken, ",
                         "that's the family name of a member ",
                         "of the Varrockian nobility.").also{stage = 100}
@@ -53,7 +55,7 @@ class GemTraderDialogue (player: Player? = null): core.game.dialogue.DialoguePlu
 
             20 -> when(buttonId){
                 1 -> npc.openShop(player).also { stage = 1000 };
-                2 -> player("No Thank you").also{stage = 1000}
+                2 -> player("No, thank you.").also{stage = 1000}
             }
 
             100 -> npc("You know, I HAVE seen someone of that" ,
@@ -81,7 +83,7 @@ class GemTraderDialogue (player: Player? = null): core.game.dialogue.DialoguePlu
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(540)
+        return intArrayOf(NPCs.GEM_TRADER_540)
     }
 
 
