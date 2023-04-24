@@ -59,7 +59,7 @@ public class ShieldofArrav extends Quest {
 
 	@Override
 	public Quest newInstance(Object object) {
-		ClassScanner.definePlugins(new CertificatePlugin(), new CuratorHaigHalenDialogue(), new JohnnyBeardNPC(), new JonnytheBeardPlugin(), new KatrineDialogue(), new KingRoaldDialogue(), new ReldoDialogue(), new ShieldArravPlugin(), new ShieldofArravBook(), new StravenDialogue(), new WeaponsMasterDialogue());
+		ClassScanner.definePlugins(new CertificatePlugin(), new CuratorHaigHalenDialogue(), new JohnnyBeardNPC(), new JonnytheBeardPlugin(), new KatrineDialogue(), new KingRoaldDialogue(), new ReldoDialogue(), new ShieldArravPlugin(), new StravenDialogue(), new WeaponsMasterDialogue());
 		return this;
 	}
 	

@@ -1,10 +1,10 @@
 package content.region.kandarin.seers.quest.elementalworkshop
 
-import core.game.dialogue.DialoguePlugin
-import core.game.dialogue.book.Book
-import core.game.dialogue.book.Page
+import content.global.handlers.iface.BookInterface
+import core.api.setAttribute
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
-import core.plugin.Initializable
 import org.rs09.consts.Items
 
 /**
@@ -12,47 +12,23 @@ import org.rs09.consts.Items
  *
  *  @author Woah, with love
  */
-@Initializable
-class SlashedBookHandler : core.game.dialogue.book.Book {
-    constructor(player: Player?) : super(player, "Book of the elemental shield", Items.SLASHED_BOOK_9715, *EWUtils.PAGES) {}
+class SlashedBookHandler : InteractionListener {
+    companion object {
+        private val TITLE = "Book of the elemental shield"
+        private val CONTENTS = EWUtils.PAGES;
 
-    constructor() {
-        /**
-         * empty.
-         */
+        private fun display(player:Player, pageNum: Int, buttonID: Int) : Boolean {
+            BookInterface.pageSetup(player, BookInterface.FANCY_BOOK_3_49, TITLE, CONTENTS)
+            return true
+        }
     }
 
-    override fun finish() {}
-
-    override fun display(set: Array<core.game.dialogue.book.Page>) {
-        player.lock()
-        player.interfaceManager.open(getInterface())
-
-        for (i in 55..76) {
-            player.packetDispatch.sendString("", getInterface().id, i)
+    override fun defineListeners() {
+        on(Items.SLASHED_BOOK_9715, IntType.ITEM, "read") { player, _ ->
+            setAttribute(player, "bookInterfaceCallback", ::display)
+            setAttribute(player, "bookInterfaceCurrentPage", 0)
+            display(player, 0, 0)
+            return@on true
         }
-        player.packetDispatch.sendString("", getInterface().id, 77)
-        player.packetDispatch.sendString("", getInterface().id, 78)
-        player.packetDispatch.sendString(getName(), getInterface().id, 6)
-        for (page in set) {
-            for (line in page.lines) {
-                player.packetDispatch.sendString(line.message, getInterface().id, line.child)
-            }
-        }
-        player.packetDispatch.sendInterfaceConfig(getInterface().id, 51, index < 1)
-        val lastPage = index == sets.size - 1
-        player.packetDispatch.sendInterfaceConfig(getInterface().id, 53, lastPage)
-        if (lastPage) {
-            finish()
-        }
-        player.unlock()
-    }
-
-    override fun newInstance(player: Player): core.game.dialogue.DialoguePlugin {
-        return BatteredBookHandler(player)
-    }
-
-    override fun getIds(): IntArray {
-        return intArrayOf(EWUtils.SLASHED_BOOK_ID)
     }
 }

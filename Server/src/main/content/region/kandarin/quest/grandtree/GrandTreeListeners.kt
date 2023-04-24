@@ -1,6 +1,5 @@
 package content.region.kandarin.quest.grandtree
 
-import content.global.handlers.item.BookreadOption
 import content.region.kandarin.quest.grandtree.TheGrandTree.Companion.questName
 import core.api.*
 import core.game.interaction.IntType
@@ -156,16 +155,6 @@ class GrandTreeListeners: InteractionListener {
                 sendItemDialogue(player, Items.GLOUGHS_JOURNAL_785,"You've found Glough's Journal!")
                 addItemOrDrop(player, Items.GLOUGHS_JOURNAL_785)
             }
-            return@on true;
-        }
-
-        on(Items.GLOUGHS_JOURNAL_785, IntType.ITEM, "read"){ player, _ ->
-            openDialogue(player, BookreadOption().getDialId(Items.GLOUGHS_JOURNAL_785))
-            return@on true;
-        }
-
-        on(Items.TRANSLATION_BOOK_784, IntType.ITEM, "read"){ player, _ ->
-            openDialogue(player, BookreadOption().getDialId(Items.TRANSLATION_BOOK_784))
             return@on true;
         }
 

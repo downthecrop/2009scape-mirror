@@ -1,5 +1,6 @@
 package content.global.dialogue;
 
+import content.global.handlers.item.book.GeneralRuleBook;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
@@ -122,7 +123,7 @@ public final class TownCrierDialogue extends DialoguePlugin {
 			GameWorld.getPulser().submit(new Pulse(4) {
 				@Override
 				public boolean pulse() {
-					//player.getDialogueInterpreter().open(496107759); // TODO rulebook broken
+					GeneralRuleBook.Companion.openBook(player);
 					return true;
 				}
 			});

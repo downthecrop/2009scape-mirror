@@ -1,9 +1,9 @@
 package content.region.kandarin.seers.quest.elementalworkshop
 
+import content.global.handlers.iface.BookLine
+import content.global.handlers.iface.Page
+import content.global.handlers.iface.PageSet
 import core.api.getVarbitValue
-import core.game.dialogue.book.BookLine
-import core.game.dialogue.book.Page
-import core.game.dialogue.book.PageSet
 import core.game.node.entity.player.Player
 import org.rs09.consts.Vars
 
@@ -14,66 +14,58 @@ import org.rs09.consts.Vars
  *  @author Woah, with love
  */
 object EWUtils {
-
-    // Helpers for the battered/slashed book
     /**
-     * Represents the book id
-     */
-    const val BATTERED_BOOK_ID = 49610760
-    const val SLASHED_BOOK_ID = 49610761
-
-    /**
-     * Represents the array of pages for this book.
+     * Represents the array of pages for both the BATTERED_BOOK and SLASHED_BOOK.
      */
     val PAGES = arrayOf(
-            core.game.dialogue.book.PageSet(
-                    core.game.dialogue.book.Page(
-                            core.game.dialogue.book.BookLine("Within the pages of this", 55),
-                            core.game.dialogue.book.BookLine("book you will find the", 56),
-                            core.game.dialogue.book.BookLine("secret to working the", 57),
-                            core.game.dialogue.book.BookLine("very elements themselves.", 58),
-                            core.game.dialogue.book.BookLine("Early in the fifth age, a", 59),
-                            core.game.dialogue.book.BookLine("new ore was discovered.", 60),
-                            core.game.dialogue.book.BookLine("This ore has a unique", 61),
-                            core.game.dialogue.book.BookLine("property of absorbing,", 62),
-                            core.game.dialogue.book.BookLine("transforming or focusing", 63),
-                            core.game.dialogue.book.BookLine("elemental energy. A", 64),
-                            core.game.dialogue.book.BookLine("workshop was erected", 65),
+            PageSet(
+                    Page(
+                            BookLine("Within the pages of this", 55),
+                            BookLine("book you will find the", 56),
+                            BookLine("secret to working the", 57),
+                            BookLine("very elements themselves.", 58),
+                            BookLine("Early in the fifth age, a", 59),
+                            BookLine("new ore was discovered.", 60),
+                            BookLine("This ore has a unique", 61),
+                            BookLine("property of absorbing,", 62),
+                            BookLine("transforming or focusing", 63),
+                            BookLine("elemental energy. A", 64),
+                            BookLine("workshop was erected", 65),
                     ),
-                    core.game.dialogue.book.Page(
-                            core.game.dialogue.book.BookLine("close by to work this new", 66),
-                            core.game.dialogue.book.BookLine("material. The workshop", 67),
-                            core.game.dialogue.book.BookLine("was set up for artisans", 68),
-                            core.game.dialogue.book.BookLine("and inventors to be able", 69),
-                            core.game.dialogue.book.BookLine("to come and create", 70),
-                            core.game.dialogue.book.BookLine("devices made from the", 71),
-                            core.game.dialogue.book.BookLine("unique ore, found only in", 72),
-                            core.game.dialogue.book.BookLine("the village of the Seers.", 73)
+                    Page(
+                            BookLine("close by to work this new", 66),
+                            BookLine("material. The workshop", 67),
+                            BookLine("was set up for artisans", 68),
+                            BookLine("and inventors to be able", 69),
+                            BookLine("to come and create", 70),
+                            BookLine("devices made from the", 71),
+                            BookLine("unique ore, found only in", 72),
+                            BookLine("the village of the Seers.", 73)
                     )
             ),
-            core.game.dialogue.book.PageSet(
-                    core.game.dialogue.book.Page(
-                            core.game.dialogue.book.BookLine("After some time of", 55),
-                            core.game.dialogue.book.BookLine("successful industry the", 56),
-                            core.game.dialogue.book.BookLine("true power of this ore", 57),
-                            core.game.dialogue.book.BookLine("became apparent, as", 58),
-                            core.game.dialogue.book.BookLine("greater and more", 59),
-                            core.game.dialogue.book.BookLine("powerful weapons were", 60),
-                            core.game.dialogue.book.BookLine("created. Realising the", 61),
-                            core.game.dialogue.book.BookLine("threat this posed, the magi", 62),
-                            core.game.dialogue.book.BookLine("of the time closed down", 63),
-                            core.game.dialogue.book.BookLine("the workshop and bound", 64),
-                            core.game.dialogue.book.BookLine("it under lock and key,", 65)
+            PageSet(
+                    Page(
+                            BookLine("After some time of", 55),
+                            BookLine("successful industry the", 56),
+                            BookLine("true power of this ore", 57),
+                            BookLine("became apparent, as", 58),
+                            BookLine("greater and more", 59),
+                            BookLine("powerful weapons were", 60),
+                            BookLine("created. Realising the", 61),
+                            BookLine("threat this posed, the magi", 62),
+                            BookLine("of the time closed down", 63),
+                            BookLine("the workshop and bound", 64),
+                            BookLine("it under lock and key,", 65)
                     ),
-                    core.game.dialogue.book.Page(
-                            core.game.dialogue.book.BookLine("also trying to destroy all", 66),
-                            core.game.dialogue.book.BookLine("knowledge of ", 67),
-                            core.game.dialogue.book.BookLine("manufacturing processes.", 68),
-                            core.game.dialogue.book.BookLine("Yet this book remains and", 69),
-                            core.game.dialogue.book.BookLine("you may still find a way", 70),
-                            core.game.dialogue.book.BookLine("to enter the workshop", 71),
-                            core.game.dialogue.book.BookLine("within this leather bound", 72),
-                            core.game.dialogue.book.BookLine("volume.", 73),
+                    Page(
+                            BookLine("also trying to destroy all", 66),
+                            BookLine("knowledge of ", 67),
+                            BookLine("manufacturing processes.", 68),
+                            BookLine("Yet this book remains and", 69),
+                            BookLine("you may still find a way", 70),
+                            BookLine("to enter the workshop", 71),
+                            BookLine("within this leather bound", 72),
+                            BookLine("volume.", 73),
                     )
             )
     )
