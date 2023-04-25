@@ -1,6 +1,5 @@
 package content.region.kandarin.seers.diary
 
-import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
@@ -10,6 +9,8 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import content.global.handlers.iface.FairyRing
 import content.global.handlers.item.withnpc.PoisonChaliceOnKingArthurDialogue
+import core.api.inBorders
+import core.api.inEquipment
 import core.game.diary.DiaryEventHookBase
 import core.game.diary.DiaryLevel
 import core.game.event.*
@@ -142,7 +143,7 @@ class SeersVillageAchivementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) 
                 }
 
                 Items.SHARK_385 -> {
-                    if (isEquipped(player, Items.COOKING_GAUNTLETS_775)) {
+                    if (inEquipment(player, Items.COOKING_GAUNTLETS_775)) {
                         progressIncrementalTask(
                             player,
                             DiaryLevel.HARD,

@@ -7,6 +7,7 @@ import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.world.map.RegionManager
 import core.tools.END_DIALOGUE
+import org.rs09.consts.Items
 import org.rs09.consts.NPCs.GENERAL_KHAZARD_258
 
 class GeneralKhazardDialogue : DialogueFile() {
@@ -20,7 +21,7 @@ class GeneralKhazardDialogue : DialogueFile() {
 
             (questStage == 71) -> {
                 when (stage) {
-                    0 -> if (!isEquipped(player!!, 74) && !isEquipped(player!!, 75)) {
+                    0 -> if (!anyInEquipment(player!!, Items.KHAZARD_HELMET_74, Items.KHAZARD_ARMOUR_75)) {
                         sendPlayerDialogue(player!!, "General Khazard?").also { stage = 2 }
                     } else {
                         sendNPCDialogue(player!!, 258, "Who dares enter my home? You? A feeble traveller?").also { stage = 6 }

@@ -1,6 +1,6 @@
 package content.region.kandarin.ardougne.quest.arena
 
-import core.api.isEquipped
+import core.api.allInEquipment
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
@@ -16,7 +16,7 @@ class GuardsDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (isEquipped(player!!, Items.KHAZARD_HELMET_74) && isEquipped(player!!, Items.KHAZARD_ARMOUR_75)) {
+        if (allInEquipment(player, Items.KHAZARD_HELMET_74, Items.KHAZARD_ARMOUR_75)) {
             playerl(FacialExpression.FRIENDLY, "Hello.").also { stage = 0 }
         } else {
             playerl(FacialExpression.FRIENDLY, "Hi.").also { stage = 2 }
@@ -49,7 +49,7 @@ class GuardsDialogue(player: Player? = null) : DialoguePlugin(player) {
 class KhazardGuard254Dialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (isEquipped(player!!, Items.KHAZARD_HELMET_74) && isEquipped(player!!, Items.KHAZARD_ARMOUR_75)) {
+        if (allInEquipment(player, Items.KHAZARD_HELMET_74, Items.KHAZARD_ARMOUR_75)) {
             playerl(FacialExpression.FRIENDLY, "Hello.").also { stage = 0 }
         } else {
             playerl(FacialExpression.FRIENDLY, "Hi.").also { stage = 7 }
@@ -90,7 +90,7 @@ class KhazardGuard254Dialogue(player: Player? = null) : DialoguePlugin(player) {
 class KhazardGuard255Dialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (isEquipped(player!!, Items.KHAZARD_HELMET_74) && isEquipped(player!!, Items.KHAZARD_ARMOUR_75)) {
+        if (allInEquipment(player, Items.KHAZARD_HELMET_74, Items.KHAZARD_ARMOUR_75)) {
             playerl(FacialExpression.FRIENDLY, "Hello.").also { stage = 0 }
         } else {
             playerl(FacialExpression.FRIENDLY, "Hi.").also { stage = 2 }
@@ -123,7 +123,7 @@ class KhazardGuard255Dialogue(player: Player? = null) : DialoguePlugin(player) {
 class KhazardGuard256Dialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (isEquipped(player!!, Items.KHAZARD_HELMET_74) && isEquipped(player!!, Items.KHAZARD_ARMOUR_75)) {
+        if (allInEquipment(player, Items.KHAZARD_HELMET_74, Items.KHAZARD_ARMOUR_75)) {
             playerl(FacialExpression.FRIENDLY, "Hello.").also { stage = 0 }
         } else {
             playerl(FacialExpression.FRIENDLY, "Hi.").also { stage = 3 }

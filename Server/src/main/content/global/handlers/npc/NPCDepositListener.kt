@@ -1,6 +1,6 @@
 package content.global.handlers.npc
 
-import core.api.isEquipped
+import core.api.anyInEquipment
 import core.api.openDepositBox
 import core.api.sendNPCDialogue
 import core.api.setInterfaceText
@@ -14,9 +14,7 @@ class NPCDepositListener : InteractionListener {
 
     override fun defineListeners() {
         on(NPCs.PEER_THE_SEER_1288, IntType.NPC, "deposit") { player, _ ->
-            if (isEquipped(player, Items.FREMENNIK_SEA_BOOTS_1_14571) ||
-                isEquipped(player, Items.FREMENNIK_SEA_BOOTS_2_14572) ||
-                isEquipped(player, Items.FREMENNIK_SEA_BOOTS_3_14573)) {
+            if (anyInEquipment(player, Items.FREMENNIK_SEA_BOOTS_1_14571, Items.FREMENNIK_SEA_BOOTS_2_14572, Items.FREMENNIK_SEA_BOOTS_3_14573)) {
                 openDepositBox(player)
                 setInterfaceText(player, "Peer the Seer's Deposits", 11, 12)
             } else {

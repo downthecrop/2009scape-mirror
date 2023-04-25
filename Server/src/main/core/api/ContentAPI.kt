@@ -108,17 +108,6 @@ fun hasLevelStat(player: Player, skill: Int, level: Int): Boolean {
 }
 
 /**
- * Check if an item exists in a player's inventory
- * @param player the player whose inventory to check
- * @param item the ID of the item to check for
- * @param amount the amount to check for
- * @return true if the player has >= the given item in the given amount, false otherwise.
- */
-fun inInventory(player: Player, item: Int, amount: Int = 1): Boolean {
-    return player.inventory.contains(item, amount)
-}
-
-/**
  * Check the amount of a given item in the player's inventory
  * @param player the player whose inventory to check
  * @param id the ID of the item to check for the amount of
@@ -132,10 +121,25 @@ fun amountInInventory(player: Player, id: Int): Int {
  * Check the amount of a given item in the player's bank
  * @param player the player to check
  * @param id the ID of the item to check for
+ * @param includeSecondary if the secondary bank should be included in the search
  * @return the amount of the ID in the player's bank.
  */
 fun amountInBank(player: Player, id: Int, includeSecondary: Boolean = true): Int {
-    return player.bank.getAmount(id) + if (includeSecondary) player.bankSecondary.getAmount(id) else 0
+    return getAmountInBank(player, id) + if (includeSecondary) getAmountInBank(player, id, true) else 0
+}
+
+/**
+ * More performant way to check the amount of a given item in the player's bank
+ * Uses the alwaysStack property of banks to short circuit the search.
+ * @param player the player to check
+ * @param id the ID of the item to check for
+ * @param secondary if the secondary bank should be searched instead
+ * @return the amount of the ID in the player's bank.
+ */
+private fun getAmountInBank(player: Player, id: Int, secondary: Boolean = false): Int {
+    val bank = if (secondary) player.bankSecondary.toArray() else player.bankPrimary.toArray()
+    bank.forEach { if (it?.id == id) return it.amount }
+    return 0
 }
 
 /**
@@ -145,22 +149,63 @@ fun amountInBank(player: Player, id: Int, includeSecondary: Boolean = true): Int
  * @return the amount of the ID in the player's equipment.
  */
 fun amountInEquipment(player: Player, id: Int): Int {
-    return player.equipment.getAmount(id)
+    val slot = itemDefinition(id).getConfiguration(ItemConfigParser.EQUIP_SLOT, -1)
+    val equipped = player.equipment[slot] ?: return 0
+    return if (equipped.id == id) equipped.amount else 0
 }
 
 /**
- * Check that an item is equipped by the given player
+ * Check if an item exists in a player's inventory
+ * @param player the player whose inventory to check
+ * @param id the ID of the item to check for
+ * @param amount the amount to check for
+ * @return true if the player has >= the given item in the given amount, false otherwise.
  */
-fun isEquipped(player: Player, id: Int): Boolean {
-    return amountInEquipment(player, id) > 0
+fun inInventory(player: Player, id: Int, amount: Int = 1): Boolean {
+    return player.inventory.contains(id, amount)
+}
+
+/**
+ * Check if an item exists in a player's bank
+ * @param player the player whose bank to check
+ * @param id the ID of the item to check for
+ * @param amount the amount to check for, defaults to 1
+ * @return true if the item exists in the given amount in the player's bank
+ */
+fun inBank(player: Player, id: Int, amount: Int = 1): Boolean {
+    return amountInBank(player, id) >= amount
+}
+
+/**
+ * Check if an item exists in a player's equipment
+ * @param player the player whose equipment to check
+ * @param id the ID of the item to check for
+ * @param amount the amount to check for, defaults to 1
+ * @return true if the item exists in the given amount in the player's equipment
+ */
+fun inEquipment(player: Player, id: Int, amount: Int = 1): Boolean {
+    return amountInEquipment(player, id) >= amount
+}
+
+/**
+ * Check if an item exists in a player's equipment or inventory
+ * @param player the player whose equipment to check
+ * @param id the ID of the item to check for
+ * @param amount the amount to check for, defaults to 1
+ * @return true if the item exists in the given amount in the player's equipment or inventory
+ */
+fun inEquipmentOrInventory(player: Player, id: Int, amount: Int = 1): Boolean {
+    // Proper, but slower implementation. Use faster unless need to check amounts split between equip/inv
+    //return amountInEquipment(player, id) + amountInInventory(player, id) >= amount
+    return inEquipment(player, id, amount) || inInventory(player, id, amount)
 }
 
 /**
  * Check that a set of items is equipped by the given player
  */
-fun areEquipped(player: Player, vararg ids: Int): Boolean {
+fun allInEquipment(player: Player, vararg ids: Int): Boolean {
     return ids.all { id ->
-        amountInEquipment(player, id) > 0
+        inEquipment(player, id)
     }
 }
 
@@ -170,10 +215,20 @@ fun areEquipped(player: Player, vararg ids: Int): Boolean {
  * @param ids the set of item ids to check
  * @return true if the player has at least one of the items equipped, false if none are equipped
  */
-fun areAnyEquipped(player: Player, vararg ids: Int): Boolean {
+fun anyInEquipment(player: Player, vararg ids: Int): Boolean {
     return ids.any { id ->
-        amountInEquipment(player, id) > 0
+        inEquipment(player, id)
     }
+}
+
+/**
+ * Gets the item in the given equipment slot for the given player
+ * @param player the player whose equipment to pull from
+ * @param slot the Equipment slot to use, EquipmentSlot enum contains the options.
+ * @return the Item in the given slot, or null if none.
+ */
+fun getItemFromEquipment(player: Player, slot: EquipmentSlot): Item? {
+    return player.equipment.get(slot.ordinal)
 }
 
 class ContainerisedItem(val container: core.game.container.Container?, val itemId: Int) {
@@ -207,7 +262,7 @@ fun hasAnItem(player: Player, vararg ids: Int): ContainerisedItem {
  * @return true if the player has an item corresponding to the given god, false otherwise
  */
 fun hasGodItem(player: Player, god: God): Boolean {
-    god.validItems.forEach { if (amountInEquipment(player, it) > 0) return true }
+    god.validItems.forEach { if (inEquipment(player, it)) return true }
     return false
 }
 
@@ -319,39 +374,6 @@ fun poofClear(npc: NPC) {
             return false
         }
     })
-}
-
-/**
- * Check if an item exists in a player's bank
- * @param player the player whose bank to check
- * @param item the ID of the item to check for
- * @param amount the amount to check for, defaults to 1
- * @return true if the item exists in the given amount in the player's bank
- */
-fun inBank(player: Player, item: Int, amount: Int = 1): Boolean {
-    return player.bank.contains(item, amount) || player.bankSecondary.contains(item, amount)
-}
-
-/**
- * Check if an item exists in a player's equipment
- * @param player the player whose equipment to check
- * @param item the ID of the item to check for
- * @param amount the amount to check for, defaults to 1
- * @return true if the item exists in the given amount in the player's equipment
- */
-fun inEquipment(player: Player, item: Int, amount: Int = 1): Boolean {
-    return player.equipment.contains(item, amount)
-}
-
-/**
- * Check if an item exists in a player's equipment or inventory
- * @param player the player whose equipment to check
- * @param item the ID of the item to check for
- * @param amount the amount to check for, defaults to 1
- * @return true if the item exists in the given amount in the player's equipment or inventory
- */
-fun inEquipmentOrInventory(player: Player, item: Int, amount: Int = 1): Boolean {
-    return inInventory(player, item, amount) || inEquipment(player, item, amount)
 }
 
 /**
@@ -1069,16 +1091,6 @@ fun stopWalk(entity: Entity) {
 }
 
 /**
- * Gets the item in the given equipment slot for the given player
- * @param player the player whose equipment to pull from
- * @param slot the Equipment slot to use, EquipmentSlot enum contains the options.
- * @return the Item in the given slot, or null if none.
- */
-fun getItemFromEquipment(player: Player, slot: EquipmentSlot): Item? {
-    return player.equipment.get(slot.ordinal)
-}
-
-/**
  * Returns a list of all valid children IDs for a given scenery ID
  */
 fun getChildren(scenery: Int): IntArray {
@@ -1746,8 +1758,7 @@ fun unnote(item: Item): Item {
  * @return True if Seal of Passage present, false otherwise.
  */
 fun hasSealOfPassage(player: Player): Boolean {
-    return isEquipped(player, Items.SEAL_OF_PASSAGE_9083)
-            || inInventory(player, Items.SEAL_OF_PASSAGE_9083)
+    return inEquipmentOrInventory(player, Items.SEAL_OF_PASSAGE_9083)
 }
 
 /**

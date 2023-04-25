@@ -115,7 +115,7 @@ class FightArenaListeners : InteractionListener {
             when (player.location.y) {
                 3171 -> DoorActionHandler.handleAutowalkDoor(player, maingate.asScenery())
                 3172 -> {
-                    if (isEquipped(player, HELMET) && isEquipped(player, ARMOUR)) {
+                    if (allInEquipment(player, HELMET, ARMOUR)) {
                         openDialogue(player, EastDoorSupportDialogue())
                     } else {
                         sendPlayerDialogue(player, "This door appears to be locked.")
@@ -126,7 +126,7 @@ class FightArenaListeners : InteractionListener {
             when (player.location.x) {
                 2585 -> DoorActionHandler.handleAutowalkDoor(player, maingate.asScenery())
                 2584 -> {
-                    if (isEquipped(player, HELMET) && isEquipped(player, ARMOUR)) {
+                    if (allInEquipment(player, HELMET, ARMOUR)) {
                         openDialogue(player, WestDoorSupportDialogue())
                     } else {
                         sendPlayerDialogue(player, "This door appears to be locked.")

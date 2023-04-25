@@ -1,6 +1,6 @@
 package content.region.misc.zanaris.handlers
 
-import core.api.isEquipped
+import core.api.anyInEquipment
 import core.api.isQuestComplete
 import core.game.component.Component
 import core.game.node.entity.player.Player
@@ -42,11 +42,11 @@ class FairyRingPlugin : InteractionListener {
     }
 
     private fun fairyMagic(player: Player) : Boolean {
-        if(!isQuestComplete(player,"Lost City")) { // should be converted to a FTP2 stage requirement once FTP2 is implemented
+        if (!isQuestComplete(player,"Lost City")) { // should be converted to a FTP2 stage requirement once FTP2 is implemented
             player.sendMessage("The fairy ring is inert.")
             return false
         }
-        if(!isEquipped(player, Items.DRAMEN_STAFF_772) && !isEquipped(player,Items.LUNAR_STAFF_9084)) {
+        if (!anyInEquipment(player, Items.DRAMEN_STAFF_772, Items.LUNAR_STAFF_9084)) {
             player.sendMessage("The fairy ring only works for those who wield fairy magic.")
             return false
         }

@@ -42,7 +42,7 @@ class CatherbyGrappleShortcut : InteractionListener {
 
         on(Scenery.ROCKS_17042, IntType.SCENERY, "grapple") { player, _ ->
             if (isPlayerInRangeToGrapple(player)) {
-                forceWalk(player, content.global.skill.agility.shortcuts.CatherbyGrappleShortcut.Companion.START_LOCATION, "smart")
+                forceWalk(player, START_LOCATION, "smart")
             } else {
                 sendMessage(player, "Nothing interesting happens.")
                 return@on true
@@ -56,10 +56,10 @@ class CatherbyGrappleShortcut : InteractionListener {
             if (!doesPlayerHaveRequiredLevels(player)) {
                 sendDialogueLines(player,
                     "You need at least " +
-                        content.global.skill.agility.shortcuts.CatherbyGrappleShortcut.Companion.REQUIREMENTS[Skills.AGILITY] + " " + Skills.SKILL_NAME[Skills.AGILITY] + ", " +
-                        content.global.skill.agility.shortcuts.CatherbyGrappleShortcut.Companion.REQUIREMENTS[Skills.RANGE] + " " + Skills.SKILL_NAME[Skills.RANGE] + ", ",
+                        REQUIREMENTS[Skills.AGILITY] + " " + Skills.SKILL_NAME[Skills.AGILITY] + ", " +
+                        REQUIREMENTS[Skills.RANGE] + " " + Skills.SKILL_NAME[Skills.RANGE] + ", ",
                     "and " +
-                        content.global.skill.agility.shortcuts.CatherbyGrappleShortcut.Companion.REQUIREMENTS[Skills.STRENGTH] + " " + Skills.SKILL_NAME[Skills.STRENGTH] + " to use this shortcut."
+                        REQUIREMENTS[Skills.STRENGTH] + " " + Skills.SKILL_NAME[Skills.STRENGTH] + " to use this shortcut."
                 )
                 return@on true
             }
@@ -70,7 +70,7 @@ class CatherbyGrappleShortcut : InteractionListener {
                 override fun pulse() : Boolean {
                     when (counter++) {
                         1 -> {
-                            face(player, content.global.skill.agility.shortcuts.CatherbyGrappleShortcut.Companion.END_LOCATION)
+                            face(player, END_LOCATION)
                             // Audit: shows player climbing (probably a wall), need a cliff climb animation
                             animate(player, Animation(4455))
                         }
@@ -79,7 +79,7 @@ class CatherbyGrappleShortcut : InteractionListener {
                             replaceScenery(rocks!!, rocks!!.id + 1, 10)
                         }
                         8 -> {
-                            teleport(player, content.global.skill.agility.shortcuts.CatherbyGrappleShortcut.Companion.END_LOCATION)
+                            teleport(player, END_LOCATION)
                         }
                         9 -> {
                             sendMessage(player, "You successfully grapple the rock and climb the cliffside.")
@@ -96,11 +96,11 @@ class CatherbyGrappleShortcut : InteractionListener {
     }
 
     private fun doesPlayerHaveRequiredItemsEquipped(player: Player): Boolean {
-        return isEquipped(player, Items.MITH_GRAPPLE_9419) && areAnyEquipped(player, *content.global.skill.agility.shortcuts.CatherbyGrappleShortcut.Companion.VALID_CROSSBOWS)
+        return inEquipment(player, Items.MITH_GRAPPLE_9419) && anyInEquipment(player, *VALID_CROSSBOWS)
     }
 
     private fun doesPlayerHaveRequiredLevels(player: Player): Boolean {
-        for ((skill, requiredLevel) in content.global.skill.agility.shortcuts.CatherbyGrappleShortcut.Companion.REQUIREMENTS) {
+        for ((skill, requiredLevel) in REQUIREMENTS) {
             if (!hasLevelDyn(player, skill, requiredLevel)) {
                 return false
             }
@@ -109,6 +109,6 @@ class CatherbyGrappleShortcut : InteractionListener {
     }
 
     private fun isPlayerInRangeToGrapple(player: Player): Boolean {
-        return inBorders(player, content.global.skill.agility.shortcuts.CatherbyGrappleShortcut.Companion.START_LOCATION.x - 2, content.global.skill.agility.shortcuts.CatherbyGrappleShortcut.Companion.START_LOCATION.y - 2, content.global.skill.agility.shortcuts.CatherbyGrappleShortcut.Companion.START_LOCATION.x, content.global.skill.agility.shortcuts.CatherbyGrappleShortcut.Companion.START_LOCATION.y)
+        return inBorders(player, START_LOCATION.x - 2, START_LOCATION.y - 2, START_LOCATION.x, START_LOCATION.y)
     }
 }

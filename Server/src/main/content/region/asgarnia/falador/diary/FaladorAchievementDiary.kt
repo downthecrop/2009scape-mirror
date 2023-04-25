@@ -1,6 +1,6 @@
 package content.region.asgarnia.falador.diary
 
-import core.api.areEquipped
+import core.api.allInEquipment
 import core.api.inBorders
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
@@ -131,8 +131,8 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
                 DiaryLevel.HARD,
                     HardTasks.DARK_WIZARDS_TOWER_ASCEND_IN_FULL_PROSELYTE_ARMOR,
             ) { player ->
-                areEquipped(player, *PROSELYTE_FULL_ARMOR_MALE)
-                || areEquipped(player, *PROSELYTE_FULL_ARMOR_FEMALE)
+                allInEquipment(player, *PROSELYTE_FULL_ARMOR_MALE)
+                || allInEquipment(player, *PROSELYTE_FULL_ARMOR_FEMALE)
             }
         )
 

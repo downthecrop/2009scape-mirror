@@ -1,6 +1,6 @@
 package content.region.kandarin.ardougne.quest.arena
 
-import core.api.isEquipped
+import core.api.allInEquipment
 import core.api.sendNPCDialogue
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
@@ -16,7 +16,7 @@ class JoeDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (isEquipped(player!!, Items.KHAZARD_HELMET_74) && isEquipped(player!!, Items.KHAZARD_ARMOUR_75)) {
+        if (allInEquipment(player, Items.KHAZARD_HELMET_74, Items.KHAZARD_ARMOUR_75)) {
             playerl(FacialExpression.FRIENDLY, "Do you know of a Justin or Jeremy in this arena?").also { stage = 0 }
         } else {
             playerl(FacialExpression.FRIENDLY, "Do you know of a Justin or Jeremy in this arena?").also { stage = 3 }

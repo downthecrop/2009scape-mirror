@@ -18,7 +18,7 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
 import org.rs09.consts.Items;
 
-import static core.api.ContentAPIKt.isEquipped;
+import static core.api.ContentAPIKt.allInEquipment;
 
 /**
  * Represents the black knights fortress node option plugin.
@@ -140,7 +140,7 @@ public final class BKFortressPlugin extends OptionHandler {
 			case 2337: // Guard Door - only check for uniform from outside
 				switch (player.getLocation().getY()) {
 					case 3514: // Outside constant Y location, block the player for checks
-						if(isEquipped(player, Items.BRONZE_MED_HELM_1139) && isEquipped(player, Items.IRON_CHAINBODY_1101)){
+						if(allInEquipment(player, Items.BRONZE_MED_HELM_1139, Items.IRON_CHAINBODY_1101)){
 							DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 						}
 						else player.getDialogueInterpreter().open(4605, Repository.findNPC(4604), true);
