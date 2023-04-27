@@ -2910,7 +2910,7 @@
     "requirements": "{20,10}",
     "shop_price": "5",
     "ge_buy_limit": "100",
-    "examine": "Useful for catching salmon or trout.In Daemonhiem: Just add feathers.",
+    "examine": "Useful for catching salmon or trout.",
     "grand_exchange_price": "123",
     "durability": null,
     "name": "Fly fishing rod",
@@ -3423,7 +3423,7 @@
   },
   {
     "ge_buy_limit": "20000",
-    "examine": "Wow, this is a big fish.",
+    "examine": "I should try cooking this.",
     "grand_exchange_price": "490",
     "durability": null,
     "name": "Raw bass",
@@ -3585,6 +3585,7 @@
   {
     "ge_buy_limit": "20000",
     "grand_exchange_price": "1615",
+    "examine": "",
     "durability": null,
     "name": "Raw shark",
     "tradeable": "true",
@@ -3620,7 +3621,7 @@
   },
   {
     "ge_buy_limit": "20000",
-    "examine": "Tastier when cooked.",
+    "examine": "A rare catch.",
     "grand_exchange_price": "2114",
     "durability": null,
     "name": "Raw manta ray",
@@ -3667,7 +3668,7 @@
   },
   {
     "ge_buy_limit": "20000",
-    "examine": "Looks wrinkly.",
+    "examine": "A rare catch.",
     "grand_exchange_price": "2397",
     "durability": null,
     "name": "Raw sea turtle",
@@ -19224,7 +19225,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "I need to cook this first / Freshly cooked ugthanki meat.",
+    "examine": "I need to cook this first.",
     "grand_exchange_price": "486",
     "durability": null,
     "name": "Raw ugthanki meat",
@@ -71475,7 +71476,7 @@
   },
   {
     "ge_buy_limit": "20000",
-    "examine": "I should try cooking this./Freshly caught. Needs cooking. (Fresh Monkfish)",
+    "examine": "I should try cooking this.",
     "grand_exchange_price": "618",
     "durability": null,
     "name": "Raw monkfish",
