@@ -121,6 +121,9 @@ class WitchesDiaryBook : InteractionListener {
         )
         private fun display(player:Player, pageNum: Int, buttonID: Int) : Boolean {
             BookInterface.pageSetup(player, BookInterface.FANCY_BOOK_3_49, TITLE, CONTENTS)
+            if (BookInterface.isLastPage(pageNum, CONTENTS.size)) {
+                setAttribute(player, "/save:readWitchsBook", true);
+            }
             return true
         }
     }

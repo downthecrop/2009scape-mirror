@@ -159,10 +159,6 @@ public class WitchsHousePlugin extends OptionHandler {
             case 24673:
                 player.teleport(Location.create(2906, 3468, 0));
                 break;
-            case 2408:
-                player.getDialogueInterpreter().open(4501993, node);
-                player.setAttribute("/save:readWitchsBook", true);
-                break;
         }
         return true;
     }
