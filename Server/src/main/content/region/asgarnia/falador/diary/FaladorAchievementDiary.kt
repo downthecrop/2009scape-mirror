@@ -4,6 +4,7 @@ import core.api.allInEquipment
 import core.api.inBorders
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
+import core.game.node.entity.skill.Skills.FARMING
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
@@ -11,6 +12,7 @@ import org.rs09.consts.Scenery
 import content.region.asgarnia.falador.dialogue.RisingSunInnBartenderDialogue
 import content.global.handlers.iface.FairyRing
 import content.global.skill.crafting.lightsources.LightSources
+import content.global.skill.farming.FarmingPatch
 import core.game.diary.AreaDiaryTask
 import core.game.diary.DiaryEventHookBase
 import core.game.diary.DiaryLevel
@@ -29,6 +31,7 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
         private val SARAHS_FARMING_SHOP_AREA = ZoneBorders(3021, 3285, 3040, 3296)
         private val FALADOR_GENERAL_AREA = ZoneBorders(2934, 3399, 3399, 3307)
         private val CHEMIST_AREA = ZoneBorders(2929, 3213, 2936, 3207)
+        private val PORT_SARIM_FLOWER_PATCH = ZoneBorders(3053, 3306, 3056, 3309)
 
 
         private val PROSELYTE_FULL_ARMOR_MALE = intArrayOf(
@@ -148,6 +151,7 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
                 }
             }
         }
+
         if (event.option == "pickpocket" && (event.target.id in FALADOR_GUARD && inBorders(player, FALADOR_GENERAL_AREA))) {
             finishTask(
                     player,
@@ -156,6 +160,7 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
             )
         }
     }
+
     override fun onDialogueOptionSelected(player: Player, event: DialogueOptionSelectionEvent) {
         when (event.dialogue) {
             is RisingSunInnBartenderDialogue -> {
@@ -259,6 +264,20 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
                     DiaryLevel.MEDIUM,
                     MediumTasks.CHEMISTS_LIGHT_BULLSEYE_LANTERN
                 )
+            }
+        }
+    }
+
+    override fun onUsedWith(player: Player, event: UseWithEvent) {
+        when {
+            inBorders(player, PORT_SARIM_FLOWER_PATCH) -> {
+                if (event.used == Items.SCARECROW_6059 && event.with == 7847 && player.getSkills().hasLevel(FARMING, 23) && FarmingPatch.forObjectID(7840)?.getPatchFor(player)?.plantable == null) {
+                    finishTask(
+                        player,
+                        DiaryLevel.MEDIUM,
+                        MediumTasks.PORT_SARIM_NORTHERN_PATCH_PLACE_SCARECROW
+                    )
+                }
             }
         }
     }
