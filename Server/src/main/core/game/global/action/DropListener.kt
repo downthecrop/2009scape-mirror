@@ -12,13 +12,21 @@ import core.game.node.entity.player.link.audio.Audio
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.system.config.ItemConfigParser
+import org.rs09.consts.Items
 
+/**
+ * Represents the item drop/destroy/dissolve handler.
+ * @author Ceikry, ovenbreado
+ */
 class DropListener : InteractionListener {
     override fun defineListeners() {
         on(IntType.ITEM, "drop", "destroy", "dissolve", handler = ::handleDropAction)
     }
 
     companion object {
+        private val DROP_COINS_SOUND = Audio(10, 1, 0)
+        private val DROP_ITEM_SOUND = Audio(2739, 1, 0)
+        private val DESTROY_ITEM_SOUND = Audio(4500, 1, 0)
         @JvmStatic fun drop(player: Player, item: Item) : Boolean {
             return handleDropAction(player, item)
         }
@@ -35,15 +43,22 @@ class DropListener : InteractionListener {
 
                 queueScript (player, strength = QueueStrength.SOFT) {
                     if (player.inventory.replace(null, item.slot) != item) return@queueScript stopExecuting(player)
-                    item = item.dropItem
-                    player.audioManager.send(Audio(if (item.id == 995) 10 else 2739, 1, 0))
-                    GroundItemManager.create(item, player.location, player)
-                    setAttribute(player, "droppedItem:${item.id}", getWorldTicks() + 2)
+                    val droppedItem = item.dropItem
+                    if (droppedItem.id == Items.COINS_995) playAudio(player, DROP_COINS_SOUND) else playAudio(player, DROP_ITEM_SOUND)
+                    GroundItemManager.create(droppedItem, player.location, player)
+                    setAttribute(player, "droppedItem:${droppedItem.id}", getWorldTicks() + 2)
                     PlayerParser.save(player)
                     return@queueScript stopExecuting(player)
                 }
             } else if (option == "destroy" || option == "dissolve" || item.definition.handlers.getOrDefault(ItemConfigParser.DESTROY, false) as Boolean) {
-                player.dialogueInterpreter.open(9878, item)
+                player.dialogueInterpreter.sendDestroyItem(item.id, item.name)
+                addDialogueAction(player) { player, button ->
+                    if (button == 3) {
+                        if (removeItem(player, item)) {
+                            playAudio(player, DESTROY_ITEM_SOUND)
+                        }
+                    }
+                }
             }
             return true
         }
