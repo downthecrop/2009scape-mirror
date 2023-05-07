@@ -39,7 +39,7 @@ public final class DrOnglewipDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Do you live here too?");
+		interpreter.sendDialogues(player, FacialExpression.ASKING, "Do you live here too?");
 		stage = 0;
 		return true;
 	}

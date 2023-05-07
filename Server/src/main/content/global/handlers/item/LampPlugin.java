@@ -43,7 +43,7 @@ public final class LampPlugin extends OptionHandler {
 	public void handleSelectionCallback(int skill, Player player){
 		Lamps lamp = Lamps.forItem(player.getAttribute("lamp",new Item(2528)));
 		if(player.getSkills().getStaticLevel(skill) < lamp.getLevelRequirement()){
-			player.sendMessage("Your need at least" + lamp.getLevelRequirement()  + " " + Skills.SKILL_NAME[skill]  + " to do this.");
+			player.sendMessage("You need at least " + lamp.getLevelRequirement()  + " " + Skills.SKILL_NAME[skill]  + " to do this.");
 			return;
 		} else {
 			if(player.getInventory().remove((Item) player.getAttribute("lamp"))) {
