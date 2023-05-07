@@ -90,6 +90,10 @@ class TheGrandTree: Quest("The Grand Tree", 71, 70, 5, 150, 0, 1, 160) {
         if(stage >= 70){
             line(player, "Find a use for the strange twigs from King Narnode Shareen.", line++, stage > 70)
         }
+        if(stage == 100){
+            line++
+            line(player,"<col=FF0000>QUEST COMPLETE!</col>", line)
+        }
     }
 
     companion object {

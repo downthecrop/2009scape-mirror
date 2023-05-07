@@ -25,6 +25,14 @@ class GrandTreeListeners: InteractionListener {
         Location(2473,9897,0),
     )
 
+    val hazelmerescroll = Items.HAZELMERES_SCROLL_786
+
+    val hazelmerescrollText = arrayOf(
+    "<col=FFF900>Es lemanto meso pro eis prit ta Cinqo mond.</col>",
+    "<col=FFF900>Mi lovos ta lemanto Daconia arpos</col>",
+    "<col=FFF900>et Daconia arpos eto meriz ta priw!</col>",
+    )
+
     fun unlockTUZODoor(player: Player) {
         if (getAttribute(player, "/save:grandtree:twig1", false) &&
             getAttribute(player, "/save:grandtree:twig2", false) &&
@@ -75,6 +83,11 @@ class GrandTreeListeners: InteractionListener {
             openDialogue(player, AnitaDialogue(), npc)
             return@on true
         }
+        on(hazelmerescroll, IntType.ITEM, "read") { player, node ->
+            hazelmereScroll(player, node.asItem())
+            return@on true
+        }
+
         on(2444, IntType.SCENERY, "open"){ player, node ->
             if(node.location == Location(2487,3464,2) && !isQuestComplete(player, questName)){
                 if(getAttribute(player, "/save:grandtree:twig1", false) &&
@@ -176,6 +189,15 @@ class GrandTreeListeners: InteractionListener {
         on(2438, IntType.SCENERY, "open"){ player, _ ->
             openDialogue(player, ShipyardWorkerDialogue(), NPC(NPCs.SHIPYARD_WORKER_675))
             return@on true;
+        }
+    }
+
+    private fun hazelmereScroll(player: Player, item: Item) {
+        val id = item.id
+        openInterface(player, 222).also {
+            when (id) {
+                hazelmerescroll -> setInterfaceText(player, hazelmerescrollText.joinToString("<br>"), 222, 6)
+            }
         }
     }
 }
