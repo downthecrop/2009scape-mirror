@@ -111,7 +111,7 @@ class UseWithPatchHandler : InteractionListener {
                 Items.WATERING_CAN1_5333,Items.WATERING_CAN2_5334,Items.WATERING_CAN3_5335,Items.WATERING_CAN4_5336,Items.WATERING_CAN5_5337,Items.WATERING_CAN6_5338,Items.WATERING_CAN7_5339,Items.WATERING_CAN8_5340 -> {
                     val p = patch.getPatchFor(player)
                     val t = p.patch.type
-                    if(!p.isWatered && (t == PatchType.ALLOTMENT || t == PatchType.FLOWER || t == PatchType.HOPS) && !p.isGrown()){
+                    if(!p.isWatered && p.plantable != Plantable.SCARECROW && (t == PatchType.ALLOTMENT || t == PatchType.FLOWER || t == PatchType.HOPS) && !p.isGrown()){
                         player.pulseManager.run(object : Pulse(){
                             override fun pulse(): Boolean {
                                 if(p.isWeedy()){
