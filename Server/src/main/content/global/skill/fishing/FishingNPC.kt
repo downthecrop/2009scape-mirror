@@ -36,7 +36,9 @@ class FishingNPC : NPCBehavior(*fishingSpots) {
             }
             else -> {
                 val randLoc = spot.locations[RandomFunction.random(spot.locations.size)]
-                if(findLocalNPCs(randLoc, 0).isEmpty()) self.location = randLoc
+                if(findLocalNPCs(randLoc, 0).isEmpty()) {
+                    teleport(self, randLoc)
+                }
                 setAttribute(self, "fishing:switchdelay", getWorldTicks() + getRandomDelay())
             }
         }
