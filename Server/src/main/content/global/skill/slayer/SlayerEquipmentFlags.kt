@@ -24,10 +24,10 @@ object SlayerEquipmentFlags {
         else if(hasItem(player, Items.NOSE_PEG_4168)) flags = 1
         else if(hasItem(player, Items.EARMUFFS_4166)) flags = flags or (1 shl 1)
         else if(hasItem(player, Items.FACE_MASK_4164)) flags = flags or (1 shl 2)
-        else if((getItemFromEquipment(player, EquipmentSlot.HAT)?.id ?: 0) in blackMasks) flags = flags or (1 shl 3)
+        else if((getItemFromEquipment(player, EquipmentSlot.HEAD)?.id ?: 0) in blackMasks) flags = flags or (1 shl 3)
         else if(hasItem(player, Items.SPINY_HELMET_4551)) flags = flags or (1 shl 4)
 
-        if((getItemFromEquipment(player, EquipmentSlot.AMULET)?.id ?: 0) == Items.WITCHWOOD_ICON_8923) flags = flags or (1 shl 7)
+        if((getItemFromEquipment(player, EquipmentSlot.NECK)?.id ?: 0) == Items.WITCHWOOD_ICON_8923) flags = flags or (1 shl 7)
         if((getItemFromEquipment(player, EquipmentSlot.SHIELD)?.id ?: 0) == Items.MIRROR_SHIELD_4156) flags = flags or (1 shl 8)
         SlayerManager.getInstance(player).flags.equipmentFlags = flags
     }
@@ -78,7 +78,7 @@ object SlayerEquipmentFlags {
     }
 
     private fun hasItem(player: Player, id: Int): Boolean{
-        return (getItemFromEquipment(player, EquipmentSlot.HAT)?.id ?: 0) == id
+        return (getItemFromEquipment(player, EquipmentSlot.HEAD)?.id ?: 0) == id
     }
 
     fun isSlayerEq(item: Int): Boolean{

@@ -29,7 +29,6 @@ import core.game.ge.GrandExchange
 import content.global.handlers.iface.RulesAndInfo
 import content.global.skill.farming.FarmingState
 import content.minigame.fishingtrawler.TrawlerLoot
-import core.tools.SystemLogger
 import core.game.system.command.CommandMapping
 import core.game.system.command.Privilege
 import core.game.world.repository.Repository
@@ -362,7 +361,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
          * Set a specific skill to a specific level
          */
         define("setlevel", Privilege.ADMIN, "::setlevel <lt>SKILL NAME<gt> <lt>LEVEL<gt>", "Sets SKILL NAME to LEVEL."){player,args ->
-            if(args.size < 2) reject(player,"Usage: ::setlevel skillname level")
+            if(args.size != 3) reject(player,"Usage: ::setlevel skillname level")
             val skillname = args[1]
             val desiredLevel: Int? = args[2].toIntOrNull()
             if(desiredLevel == null){
@@ -376,6 +375,21 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             player.skills.setStaticLevel(skill,desiredLevel)
             player.skills.setLevel(skill,desiredLevel)
             player.skills.updateCombatLevel()
+        }
+
+        /**
+         * Add xp to skill
+         */
+        define("addxp", Privilege.ADMIN, "::addxp <lt>skill name | id<gt> <lt>xp<gt>", "Add xp to skill") { player, args ->
+            if (args.size != 3) reject(player, "Usage: ::addxp <lt>skill name | id<gt> <lt>xp<gt>")
+
+            val skill = args[1].toIntOrNull() ?: Skills.getSkillByName(args[1])
+            if (skill < 0 || skill >= Skills.NUM_SKILLS) reject(player, "Must use valid skill name or id.")
+
+            val xp = args[2].toDoubleOrNull()
+            if (xp == null || xp <= 0) reject(player, "Xp must be a positive number.")
+
+            player.skills.addExperience(skill, xp!!)
         }
 
         define("completediaries", Privilege.ADMIN, "", "Completes all diaries."){player,_ ->

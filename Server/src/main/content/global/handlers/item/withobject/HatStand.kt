@@ -8,7 +8,7 @@ import core.game.interaction.IntType
 
 class HatStand : InteractionListener {
 
-    val hats = ItemDefinition.getDefinitions().values.filter { it.getConfiguration("equipment_slot",0) == EquipmentSlot.HAT.ordinal }.map { it.id }.toIntArray()
+    val hats = ItemDefinition.getDefinitions().values.filter { it.getConfiguration("equipment_slot",0) == EquipmentSlot.HEAD.ordinal }.map { it.id }.toIntArray()
     val hat_stand = 374
 
     override fun defineListeners() {

@@ -158,7 +158,7 @@ class CastleWarsListeners : InteractionListener {
 
     private fun capeOrHelmetError(player: Player): String? {
         val wornCape = getItemFromEquipment(player, EquipmentSlot.CAPE)?.id ?: -1
-        val wornHelmet = getItemFromEquipment(player, EquipmentSlot.HAT)?.id ?: -1
+        val wornHelmet = getItemFromEquipment(player, EquipmentSlot.HEAD)?.id ?: -1
 
         if (wornCape != -1 || wornHelmet != -1) return "You can't wear hats, capes, or helms in the arena."
         return null

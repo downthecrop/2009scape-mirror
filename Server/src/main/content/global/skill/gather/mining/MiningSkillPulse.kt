@@ -178,7 +178,7 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
                     chance = (chance / 1.5).toInt()
                     altered = true
                 }
-                val necklace = getItemFromEquipment(player, EquipmentSlot.AMULET)
+                val necklace = getItemFromEquipment(player, EquipmentSlot.NECK)
                 if (necklace != null && necklace.id in 1705..1713) {
                     chance = (chance / 1.5).toInt()
                     altered = true

@@ -145,7 +145,7 @@ open class MeleeSwingHandler
 
         // attack bonus for specialized equipments (salve amulets, slayer equips)
         if (entity is Player) {
-            val amuletId = getItemFromEquipment(entity, EquipmentSlot.AMULET)?.id ?: 0
+            val amuletId = getItemFromEquipment(entity, EquipmentSlot.NECK)?.id ?: 0
             if ((amuletId == Items.SALVE_AMULET_4081 || amuletId == Items.SALVE_AMULETE_10588) && checkUndead(victimName)) {
                 effectiveAttackLevel *= if (amuletId == Items.SALVE_AMULET_4081) 1.15 else 1.2
             } else if (getSlayerTask(entity)?.ids?.contains((entity.properties.combatPulse?.getVictim()?.id ?: 0)) == true) {

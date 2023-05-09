@@ -1,19 +1,17 @@
 package core.game.system.command.sets
 
-import core.api.InputType
-import core.api.runTask
-import core.api.sendDialogue
-import core.api.sendInputDialogue
+import content.data.ChargedItem
+import core.api.*
 import core.cache.def.impl.ItemDefinition
+import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.system.SystemManager
 import core.game.system.SystemState
-import core.plugin.Initializable
-import org.rs09.consts.Items
-import core.tools.SystemLogger
 import core.game.system.command.Privilege
 import core.game.world.GameWorld
 import core.game.world.repository.Repository
+import core.plugin.Initializable
+import org.rs09.consts.Items
 import kotlin.system.exitProcess
 
 @Initializable
@@ -236,5 +234,75 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
             exitProcess(0)
         }
 
+        /**
+         * Command to get and set the charge of an item.
+         * Can handle both the internal charge used for things like degradation, and distinct (#) charge that's different items.
+         * The default behavior without any flags is to get the internal charge of an item.
+         * param equipment slot name | item id - selects the item, either by using the equipment slot name, or item id.
+         * param sd - optional flags, where s = set charge, d = distinct charge.
+         * param charge - the charge to set on the item. Only necessary when the set flag is toggled.
+         * @author RiL
+         */
+        define("charge", Privilege.ADMIN, "::charge <lt>equipment slot name | item id<gt> [sd] [<lt>charge<gt>]", "Get/set the charge of an item. Flags: s = set, d = distinct(#).") { player, args ->
+            if (args.size < 2) reject(
+                player,
+                "Usage: ::charge <lt>equipment slot name | item id<gt> [sd] [<lt>charge<gt>]",
+                "Get internal: ::charge 4718",
+                "Get distinct: ::charge ring d",
+                "Set internal: ::charge head s 500",
+                "Set distinct: ::charge 1704 sd 4"
+            )
+
+            @Suppress("UNCHECKED_CAST")
+            val itemInfo = (args[1].toIntOrNull()?.let {
+                getItemAndContainer(player, it) ?: reject(player, "Item not found: $it.")
+            } ?: EquipmentSlot.slotByName(args[1])?.ordinal?.let {
+                Pair(player.equipment.get(it) ?: reject(player, "No item equipped at slot: ${args[1]}."), player.equipment)
+            } ?: reject(player, "No slot: ${args[1]}.")) as Pair<Item, core.game.container.Container>
+
+            val item = itemInfo.first
+
+            when (val flags = args.getOrElse(2) { "" }) {
+                "" -> { // get internal charge
+                    notify(player, "${item.name}: ${item.charge} charge.")
+                }
+
+                "d" -> { // get distinct charge
+                    ChargedItem.forId(item.id)?.run {
+                        notify(player, "${item.name}: (${ChargedItem.getCharge(item.id)}) charge.")
+                    } ?: reject(player, "${item.name} is not a distinct(#) item.")
+                }
+
+                "s", "sd", "ds" -> {
+                    if (args.size < 4) reject(player, "Must enter a charge value.")
+                    val charge = (args[3].toIntOrNull() ?: reject(player, "Charge must be an integer.")) as Int
+                    if (flags == "s") { // set internal charge
+                        if (charge < 1) reject(player, "Charge must be a positive integer.")
+                        item.charge = charge
+                        notify(player, "Set internal charge of ${item.name} to $charge.")
+                    } else { // set distinct charge
+                        ChargedItem.forId(item.id)?.forCharge(charge)?.let {
+                            itemInfo.second.replace(Item(it), item.slot)
+                            notify(player, "Set distinct charge of ${item.name} to (${ChargedItem.getCharge(it)}).")
+                        } ?: reject(player, "${item.name} is not a distinct(#) item.")
+                    }
+                }
+
+                else -> {
+                    reject(player, "Please enter valid flags: no flag/empty, s, d, sd.", "Use ::charge for examples.")
+                }
+            }
+        }
+    }
+
+    /**
+     * Search for item in player and return item and container if found. Return null if not found
+     */
+    private fun getItemAndContainer(player: Player, id: Int): Pair<Item, core.game.container.Container>? {
+        if (id !in 0 until ItemDefinition.getDefinitions().size) return null
+        arrayOf(player.inventory, player.equipment, player.bankPrimary, player.bankSecondary).forEach { container ->
+            container.toArray().firstOrNull { it?.id == id }?.let { return Pair(it, container) }
+        }
+        return null
     }
 }
