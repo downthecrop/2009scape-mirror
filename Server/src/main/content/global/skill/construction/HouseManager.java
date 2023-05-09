@@ -454,15 +454,10 @@ public final class HouseManager {
 				using(target),
 				fillWith(defaultChunk)
 						.from(from)
-						.onPlanes(0)
-						.onCondition((destX, destY, plane) -> rooms[plane][destX][destY] == null),
-				fillWith((RegionChunk) null)
-						.from(from)
-						.onPlanes(1,2)
-						.onCondition((destX, destY, plane) -> rooms[plane][destX][destY] == null),
+						.onPlanes(0),
 				fillWith(defaultSkyChunk)
 						.from(from)
-						.onPlanes(3),
+						.onPlanes(1,2,3),
 				loadRooms
 						.from(from)
 						.onPlanes(0,1,2)

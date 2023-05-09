@@ -374,6 +374,8 @@ public class Region {
 				}
 			}
 		}
+                if (r.isBuild())
+                    r.setLoaded(false);
                 r.activityPulse.stop();
         return true;
 	}
