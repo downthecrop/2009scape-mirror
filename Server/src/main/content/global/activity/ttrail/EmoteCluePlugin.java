@@ -99,7 +99,7 @@ public final class EmoteCluePlugin extends EmoteClueScroll {
 		//Fixed JFJ and Laugh Clues
 		//When Vexia emote is removed below.
 		//emote = Emotes.JUMP_FOR_JOY;
-		register(new EmoteCluePlugin("beehive-jump", 2703, ClueLevel.EASY, Emotes.JUMP_FOR_JOY, new int[][] { { 1833 }, { 648 }, { 1353 } }, "Jump for joy at the beehives.<br>Equip a desert shirt, green<br>gnome robe bottoms and a<br>steel axe.", new ZoneBorders(2762, 3439, 2764, 3441)));
+		register(new EmoteCluePlugin("beehive-jump", 2703, ClueLevel.EASY, Emotes.JUMP_FOR_JOY, new int[][] { { 1833 }, { 648 }, { 1353 } }, "Jump for joy at the beehives.<br>Equip a desert shirt, green<br>gnome robe bottoms and a<br>steel axe.", new ZoneBorders(2752, 3437,2766, 3450)));
 		// And emote, is replaced with what it is shortcutting Emotes.JUMP_FOR_JOY
 		// the clues work perfect. It seems to only be a problem with multiple emote clues.
 		// If you look around EmoteCluePlugin you will see there are multiple emote, shortcuts
