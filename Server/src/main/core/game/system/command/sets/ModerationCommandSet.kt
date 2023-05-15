@@ -274,7 +274,7 @@ class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
             if (p == null)
                 GameWorld.accountStorage.update(info)
             else
-                sendMessage(p, "You have been ${if (amount > 0) "granted" else "penalized"} ${abs(amount)} credits.")
+                sendMessage(p, "You have been ${if (amount > 0) "granted" else "penalized"} ${abs(amount)} credit(s).")
 
             notify(player, "Updated $username's credits to ${info.credits} by ${if (amount > 0) "adding" else "removing"} ${abs(amount)}.")
         }
