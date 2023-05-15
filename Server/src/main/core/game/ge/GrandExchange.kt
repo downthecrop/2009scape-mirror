@@ -1,17 +1,18 @@
 package core.game.ge
 
+import core.ServerConstants
 import core.api.*
+import core.cache.def.impl.ItemDefinition
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.PlayerDetails
 import core.game.node.entity.player.link.audio.Audio
-import core.game.system.task.Pulse
-import core.ServerConstants
-import core.tools.SystemLogger
 import core.game.system.command.Privilege
 import core.game.system.config.ItemConfigParser
+import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.repository.Repository
 import core.tools.Log
+import core.tools.SystemLogger
 import core.tools.colorize
 import java.lang.Integer.max
 import java.util.concurrent.LinkedBlockingDeque
@@ -203,7 +204,9 @@ class GrandExchange : StartupListener, Commands {
             if (!PriceIndex.canTrade(itemID))
                 return false
 
-            val offer = GrandExchangeOffer.createBotOffer(itemID, amount)
+            // noted offers can not be bought.
+            val itemDef = ItemDefinition.forId(itemID)
+            val offer = GrandExchangeOffer.createBotOffer(if (itemDef.isUnnoted) itemID else itemDef.noteId, amount)
             pendingOffers.addLast(offer)
 
             return true

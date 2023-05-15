@@ -187,7 +187,7 @@ public class ItemDefinition extends Definition<Item> {
 	private int colourEquip2;
 
 	/**
-	 * The note item.
+	 * The note item id if un-noted. The un-noted item id if noted. -1 if no noted counterpart.
 	 */
 	private int noteId = -1;
 
