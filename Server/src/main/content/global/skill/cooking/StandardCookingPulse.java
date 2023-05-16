@@ -141,11 +141,10 @@ public class StandardCookingPulse extends Pulse {
 
         //handle special cooking results (spits, cake, etc) that don't justify separate plugin
         switch (initial) {
-            case Items.RAW_BEAST_MEAT_9986:
-            case Items.RAW_CHOMPY_2876:
-            case Items.RAW_JUBBLY_7566:
+            case Items.SKEWERED_CHOMPY_7230:
+            case Items.SKEWERED_RABBIT_7224:
             case Items.SKEWERED_BIRD_MEAT_9984:
-            case Items.RAW_RABBIT_3226: // Iron spits
+            case Items.SKEWERED_BEAST_9992:
             case Items.IRON_SPIT_7225:
                 if (RandomFunction.random(15) == 5) {
                     player.getPacketDispatch().sendMessage("Your iron spit seems to have broken in the process.");

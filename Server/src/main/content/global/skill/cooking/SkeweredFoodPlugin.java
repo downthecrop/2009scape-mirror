@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Items;
 
 /**
  * Represents the plugin used to make skwered items.
@@ -56,7 +57,10 @@ public class SkeweredFoodPlugin extends UseWithHandler {
 	 * @date 22/12/2013
 	 */
 	public enum SkeweredSet {
-		RABBIT(new Item(3226), new Item(7224)), CHOMPY(new Item(2876), new Item(7230)), BIRD(new Item(9978), new Item(9984)), BEAST(new Item(9986), new Item(9992));
+		CHOMPY(new Item(Items.RAW_CHOMPY_2876), new Item(Items.SKEWERED_CHOMPY_7230)),
+		RABBIT(new Item(Items.RAW_RABBIT_3226), new Item(Items.SKEWERED_RABBIT_7224)),
+		BIRD(new Item(Items.RAW_BIRD_MEAT_9978), new Item(Items.SKEWERED_BIRD_MEAT_9984)),
+		BEAST(new Item(Items.RAW_BEAST_MEAT_9986), new Item(Items.SKEWERED_BEAST_9992));
 
 		/**
 		 * Represents the raw item.
