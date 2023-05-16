@@ -145,6 +145,8 @@ public class NPC extends Entity {
 
 	public NPCBehavior behavior;
 
+        public boolean isRespawning = false;
+
 	/**
 	 * Constructs a new {@code NPC} {@code Object}.
 	 * @param id The NPC id.
@@ -403,9 +405,10 @@ public class NPC extends Entity {
 				teleport(getProperties().getSpawnLocation());
 			return;
 		}
-		if (respawnTick == GameWorld.getTicks()) {
-			behavior.onRespawn(this);
+		if (isRespawning && respawnTick <= GameWorld.getTicks()) {
+                        behavior.onRespawn(this);
 			onRespawn();
+                        isRespawning = false;
 		}
 		handleTickActions();
 		super.tick();
@@ -525,7 +528,6 @@ public class NPC extends Entity {
 		if (getZoneMonitor().handleDeath(killer)) {
 			return;
 		}
-		setRespawnTick(GameWorld.getTicks() + definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 17));
 		Player p = !(killer instanceof Player) ? null : (Player) killer;
 		if (p != null) {
 			p.incrementAttribute("/save:" + STATS_BASE + ":" + STATS_ENEMIES_KILLED);
@@ -534,9 +536,15 @@ public class NPC extends Entity {
 		handleDrops(p, killer);
 		if (!isRespawn())
 			clear();
-		killer.dispatch(new NPCKillEvent(this));
+                isRespawning = true;
 		behavior.onDeathFinished(this, killer);
+		killer.dispatch(new NPCKillEvent(this));
+		setRespawnTick(GameWorld.getTicks() + definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 17));
 	}
+
+        public void setRespawnTicks (int ticks) {
+            definition.getHandlers().put(NPCConfigParser.RESPAWN_DELAY, ticks);
+        }
 
 	@Override
 	public void commenceDeath(Entity killer) {

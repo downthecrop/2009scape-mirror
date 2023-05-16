@@ -13,6 +13,7 @@ class ImplingSpawnerBehavior : NPCBehavior (*ImplingSpawner.getIds()) {
         val isPuro = isPuroSpawner(self)
         val delay = if (isPuro) 120 else 180
         setAttribute(self, "transformTime", getWorldTicks() + secondsToTicks(delay))
+        self.setRespawnTicks(3)
         self.isRespawn = isPuro
         self.walkRadius = if (isPuro) 20 else 100
         self.isWalks = true
