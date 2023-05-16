@@ -101,14 +101,14 @@ class ServerStore : PersistWorld {
         }
 
         @JvmStatic
-        fun JSONObject.getInt(key: String): Int {
+        fun JSONObject.getInt(key: String, default: Int = 0): Int {
             return when(val value = this[key]){
                 is Long -> value.toInt()
                 is Double -> value.toInt()
                 is Float -> value.toInt()
                 is Int -> value
-                is Nothing -> 0
-                else -> 0
+                is Nothing -> default
+                else -> default
             }
         }
 

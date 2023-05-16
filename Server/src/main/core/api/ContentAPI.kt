@@ -1585,6 +1585,50 @@ fun <G> sendGraphics(gfx: G, location: Location) {
     }
 }
 
+/**
+ * Instructs the given player's client to execute a given CS2 script with the given arguments
+ * @param player the Player
+ * @param scriptId the ID of the CS2 script to execute
+ * @param arguments the various arguments passed to the script. 
+**/
+fun runcs2 (player: Player, scriptId: Int, vararg arguments: Any) {
+    var typeString = StringBuilder()
+    var finalArgs = Array<Any?> (arguments.size) { null }
+    try {
+        for (i in 0 until arguments.size) {
+            val arg = arguments[i]
+            if (arg is Int)
+                typeString.append("i")
+            else if (arg is String)
+                typeString.append("s")
+            else
+                throw IllegalArgumentException("Argument at index $i ($arg) is not an acceptable type! Only string and int are accepted.")
+            finalArgs[arguments.size - i - 1] = arg
+        }
+        player.packetDispatch.sendRunScript(scriptId, typeString.toString(), *finalArgs)
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
+
+/**
+ * Opens a generic item selection prompt with a glowing background, with your own callback to handle the selection.
+ * @param player the player we are openinig the prompt for
+ * @param options the right-click options the items should have
+ * @param callback a callback to handle the selection. The parameters passed to the callback are the slot in the inventory of the selected item, and the 0-9 index of the option clicked. 
+**/
+fun sendItemSelect (player: Player, vararg options: String, callback: (slot: Int, optionIndex: Int) -> Unit) {
+    player.interfaceManager.openSingleTab(Component(12))
+    val scriptArgs = arrayOf ((12 shl 16) + 18, 93, 4, 7, 0, -1, "", "", "", "", "", "", "", "", "")
+    for (i in 0 until kotlin.math.min(9, options.size))
+        scriptArgs[6 + i] = options[i]
+    runcs2(player, 150, *scriptArgs)
+    val settings = IfaceSettingsBuilder()
+        .enableOptions(0 until 9)
+        .build()
+    player.packetDispatch.sendIfaceSettings(settings, 18, 12, 0, 28)
+    setAttribute(player, "itemselect-callback", callback)
+}
 
 fun announceIfRare(player: Player, item: Item) {
     if (item.definition.getConfiguration(ItemConfigParser.RARE_ITEM, false)) {

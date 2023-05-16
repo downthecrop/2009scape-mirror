@@ -118,7 +118,7 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
 
     @Override
     public boolean handle(int interfaceId, int buttonId) {
-        rerolls = ServerStore.getInt(getStoreFile(), player.getUsername().toLowerCase());
+        rerolls = ServerStore.getInt(getStoreFile(), player.getUsername().toLowerCase(), 0);
         if (isDiary) {
             switch (stage) {
                 case 999:

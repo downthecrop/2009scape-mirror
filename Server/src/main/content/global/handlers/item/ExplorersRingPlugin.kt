@@ -1,9 +1,6 @@
 package content.global.handlers.item
 
-import core.api.hasLevelStat
-import core.api.sendMessage
-import core.api.teleport
-import core.api.visualize
+import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager.TeleportType
 import core.game.node.entity.skill.Skills
@@ -15,12 +12,8 @@ import core.ServerStore.Companion.getBoolean
 import core.ServerStore.Companion.getInt
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import content.global.skill.magic.modern.ModernListeners
 
-/**
- * Handles the explorers ring.
- *
- * @author Vexia
- */
 class ExplorersRingPlugin : InteractionListener {
 
     val RINGS = intArrayOf(Items.EXPLORERS_RING_1_13560, Items.EXPLORERS_RING_2_13561, Items.EXPLORERS_RING_3_13562)
@@ -44,19 +37,30 @@ class ExplorersRingPlugin : InteractionListener {
             return@on true
         }
 
+        //Sources Used
+        // - https://www.youtube.com/watch?v=PEA0fkRK0-A&t=64s&pp=ygUcMjAwOSBydW5lc2NhcGUgZXhwbG9yZXIgcmluZw%3D%3D 
+        // - https://runescape.wiki/w/Explorer%27s_ring?oldid=899927  
         on(RINGS, IntType.ITEM, "low-alchemy"){ player, _ ->
             if (!hasLevelStat(player, Skills.MAGIC, 21)) {
                 sendMessage(player,"You need a Magic level of 21 in order to do that.")
                 return@on true
             }
-            if(getStoreFile().getBoolean(player.username.toLowerCase() + ":alchs")){
-                sendMessage(player, "You have claimed all the charges you can for one day.")
+            val remaining = getStoreFile().getInt(player.username.lowercase() + ":alchs", 30)
+            if (remaining <= 0) {
+                sendMessage(player, "You have used up all of your charges for the day.")
                 return@on true
             }
-            sendMessage(player,"You grant yourself with 30 free low alchemy charges.") // todo this implementation is not correct, see https://www.youtube.com/watch?v=UbUIF2Kw_Dw
-
-            getStoreFile()[player.username.toLowerCase() + ":alchs"] = true
-
+            sendDialogue(player, "Choose the item you wish to convert to coins.")
+            addDialogueAction (player) {_,_ -> 
+                sendItemSelect (player, "Choose") { slot, optionIndex ->
+                    val item = player.inventory[slot]
+                    if (item == null)
+                        return@sendItemSelect
+                    if (!ModernListeners().alchemize(player, item, false))
+                        return@sendItemSelect
+                    getStoreFile()[player.username.lowercase() + ":alchs"] = remaining - 1
+                }
+            }
             return@on true
         }
 

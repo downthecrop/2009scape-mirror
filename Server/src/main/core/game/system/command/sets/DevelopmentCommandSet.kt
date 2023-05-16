@@ -24,6 +24,7 @@ import core.game.system.command.Privilege
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
+import java.util.Arrays
 import core.net.packet.PacketWriteQueue
 import core.tools.Log
 
@@ -38,6 +39,20 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
         define("farmkit", Privilege.ADMIN, "", "Provides a kit of various farming equipment."){player,_ ->
             for(item in farmKitItems){
                 player.inventory.add(Item(item))
+            }
+        }
+
+        define("cs2", Privilege.ADMIN, "::cs2 id args", "Allows you to call arbitrary cs2 scripts during runtime") {player, args -> 
+            var scriptArgs = ArrayList<Any>()
+            if (args.size == 2) {
+                runcs2(player, args[1].toIntOrNull() ?: return@define)
+                return@define
+            }
+            else if (args.size > 2) {
+                for (i in 2 until args.size) {
+                    scriptArgs.add(args[i].toIntOrNull() ?: args[i])
+                }
+                runcs2(player, args[1].toIntOrNull() ?: return@define, *(scriptArgs.toTypedArray().also { player.debug (Arrays.toString(it)) }))
             }
         }
 

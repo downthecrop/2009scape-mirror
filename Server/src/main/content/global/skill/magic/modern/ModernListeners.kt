@@ -221,19 +221,19 @@ class ModernListeners : SpellListener("modern"){
         setDelay(player,false)
     }
 
-    private fun alchemize(player: Player,item: Item,high:Boolean){
-        if(item.name == "Coins") player.sendMessage("You can't alchemize something that's already gold!").also { return }
-        if(!item.definition.isTradeable) player.sendMessage("You can't cast this spell on something like that.").also { return }
+    public fun alchemize(player: Player, item: Item, high: Boolean) : Boolean {
+        if(item.name == "Coins") player.sendMessage("You can't alchemize something that's already gold!").also { return false }
+        if(!item.definition.isTradeable) player.sendMessage("You can't cast this spell on something like that.").also { return false }
 
         if(player.zoneMonitor.isInZone("Alchemists' Playground")){
             player.sendMessage("You can only alch items from the cupboards!")
-            return
+            return false
         }
 
         val coins = Item(995, item.definition.getAlchemyValue(high))
         if (coins.amount > 0 && !player.inventory.hasSpaceFor(coins)) {
             player.sendMessage("Not enough space in your inventory!")
-            return
+            return false
         }
 
         if (player.pulseManager.current !is MovementPulse) {
@@ -259,6 +259,7 @@ class ModernListeners : SpellListener("modern"){
         addXP(player, if (high) 65.0 else 31.0)
         showMagicTab(player)
         setDelay(player, 5)
+        return true
     }
 
     private fun sendTeleport(player: Player, xp: Double, location: Location){
