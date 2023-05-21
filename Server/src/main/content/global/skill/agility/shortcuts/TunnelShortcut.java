@@ -66,7 +66,7 @@ public class TunnelShortcut extends AgilityShortcut {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		configure(new TunnelShortcut(new int[] { 9309, 9310 }, 26, 0.0, 0, "climb-into"));
 		configure(new TunnelShortcut(new int[] { 9302, 9301 }, 16, 0.0, 1, "climb-into", "climb-under"));
-		configure(new TunnelShortcut(new int[] { 14922 }, 1, 0.0, 1, "enter"));
+		//PISCATORIS SHORTCUT configure(new TunnelShortcut(new int[] { 14922 }, 1, 0.0, 1, "enter"));
 		return this;
 	}
 

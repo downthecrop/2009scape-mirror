@@ -86,6 +86,8 @@ import static core.api.ContentAPIKt.*;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_BASE;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_DEATHS;
 import static core.tools.GlobalsKt.colorize;
+import static core.game.world.map.zone.impl.WildernessZone.WILDERNESS_PROT_ATTR;
+import static core.game.world.map.zone.impl.WildernessZone.WILDERNESS_HIGHER_NEXTFEE;
 
 /**
  * Represents a player entity.
@@ -549,6 +551,23 @@ public class Player extends Entity {
 		return this.getIndex() | 0x8000;
 	}
 
+        @Override
+        public void onAttack (Entity e) {
+            if (e instanceof Player) {
+                Player p = (Player) e;
+                if (skullManager.isWildernessDisabled()) {
+                    return;
+                }
+                if (skullManager.hasWildernessProtection()) {
+                    if (p.getSkullManager().isSkulled()) return;
+                    setAttribute (WILDERNESS_PROT_ATTR, false);
+                    setAttribute (WILDERNESS_HIGHER_NEXTFEE, true);
+                    sendMessage (colorize("%RYou feel the protection of Saradomin vanish as your will corrupts."));
+                    appearance.sync();
+                }
+            }
+        }
+
 	@Override
 	public CombatSwingHandler getSwingHandler(boolean swing) {
 		CombatStyle style = getProperties().getCombatPulse().getStyle();
@@ -716,6 +735,15 @@ public class Player extends Entity {
 		if (entity instanceof NPC && !((NPC) entity).getDefinition().hasAction("attack") && !((NPC) entity).isIgnoreAttackRestrictions(this)) {
 			return false;
 		}
+                if (entity instanceof Player) {
+                    Player p = (Player) entity;
+                    if (p.getSkullManager().isWilderness() && skullManager.isWilderness()) {
+                        if (!GameWorld.getSettings().getWild_pvp_enabled())
+                            return false;
+                        if (p.getSkullManager().hasWildernessProtection())
+                            return p.getProperties().getCombatPulse().getVictim().equals(this);
+                    } else return false;
+                }
 		return super.isAttackable(entity, style, message);
 	}
 

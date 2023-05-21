@@ -39,6 +39,9 @@ public final class WildernessZone extends MapZone {
 	 */
 	private static final WildernessZone INSTANCE = new WildernessZone(new ZoneBorders(2944, 3525, 3400, 3975), new ZoneBorders(3070, 9924, 3135, 10002), ZoneBorders.forRegion(12193), ZoneBorders.forRegion(11937));
 
+        public static final String WILDERNESS_PROT_ATTR = "/save:wilderness-protection-active";
+        public static final String WILDERNESS_HIGHER_NEXTFEE = "/save:wilderness-higher-next-fee";
+
 	/**
 	 * The zone borders.
 	 */
@@ -88,7 +91,7 @@ public final class WildernessZone extends MapZone {
 
 	private void rollWildernessExclusiveLoot(Entity e, Entity killer) {
 		//Roll for PVP gear and Brawling Gloves from revenants
-		if (e instanceof NPC && killer instanceof Player && (e.asNpc().getName().contains("Revenant") || e.getId() == NPCs.CHAOS_ELEMENTAL_3200)) {
+		if (e instanceof NPC && killer instanceof Player && (e.asNpc().getName().contains("Revenant") || e.getId() == NPCs.CHAOS_ELEMENTAL_3200 || ((Player)killer).getSkullManager().isDeepWilderness())) {
 
 			boolean gloveDrop = e.getId() == NPCs.CHAOS_ELEMENTAL_3200 ? RandomFunction.roll(75) : RandomFunction.roll(100);
 			if (gloveDrop) {

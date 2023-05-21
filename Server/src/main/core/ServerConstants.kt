@@ -163,6 +163,12 @@ class ServerConstants {
         var I_AM_A_CHEATER = false
 
         @JvmField
+        var WILDY_PVP_OPTOUT = true
+
+        @JvmField
+        var ENHANCED_WILDERNESS = true
+
+        @JvmField
         var LOG_LEVEL = LogLevel.VERBOSE
 
         @JvmField
