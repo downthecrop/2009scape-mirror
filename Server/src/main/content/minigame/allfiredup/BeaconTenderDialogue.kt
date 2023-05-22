@@ -47,9 +47,7 @@ class BeaconTenderDialogue(player: Player? = null) : core.game.dialogue.Dialogue
             1 -> if(beacon.getState(player) == content.minigame.allfiredup.BeaconState.LIT && session?.isWatched(index) == false){
                     options("Can you watch this beacon for me?","Nevermind.").also { stage = 10 }
                  } else {
-                    if (beacon == AFUBeacon.MONASTERY && ServerConstants.WILDY_PVP_OPTOUT)
-                        showTopics (Topic (FacialExpression.FRIENDLY, "I come seeking protection.", BrotherFintanWildyDialogue()), Topic (FacialExpression.NEUTRAL, "Nevermind.", 1000))
-                    else npc("Carry on, adventurer.").also { stage = 1000 }
+                    npc("Carry on, adventurer.").also { stage = 1000 }
                  }
             10 -> when(buttonId){
                     1 -> player("Can you watch this beacon for me?").also { stage++ }

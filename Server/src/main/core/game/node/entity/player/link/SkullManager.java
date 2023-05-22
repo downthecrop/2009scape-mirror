@@ -185,10 +185,7 @@ public final class SkullManager {
 	}
 
         public boolean hasWildernessProtection() {
-                boolean hasProtection = player.getAttribute(WILDERNESS_PROT_ATTR, false);
-                hasProtection &= level < 48;
-                hasProtection &= !skulled;
-                return hasProtection;
+                return level < 45;
         }
 
 	/**
