@@ -39,7 +39,7 @@ public enum Tasks {
     DAGANNOTHS(75, new int[] { 1338, 1339, 1340, 1341, 1342, 1343, 1344, 1345, 1346, 1347, 2454, 2455, 2456, 2881, 2882, 2883, 2887, 2888, 3591, }, new String[] { "There are many types of Dagannoth, the most powerful being the three Dagannoth Kings." }, 1, false, false),
     DARK_BEASTS(90, new int[] { 2783 }, new String[] { "A dark beast can attack using magic or melee." }, 90, false, false),
     DESERT_LIZARDS(15, new int[] { 2803, 2804, 2805, 2806, 2807 }, new String[] { "Desert lizards are big Slayer monsters found in the Kharidian Desert." }, 22, false, false),
-    DOG(15, new int[] { 98, 99, 3582, 6374, 1994, 1593, 1594, 3582, 6374 }, new String[] { "Dogs are much like Wolves, they are", "pack creatures which will hunt in groups." }, 1, false, false),
+    DOG(15, new int[] { 99, 3582, 6374, 1994, 1593, 1594, 3582 }, new String[] { "Dogs are much like Wolves, they are", "pack creatures which will hunt in groups." }, 1, false, false),
     DUST_DEVILS(70, new int[] { 1624 }, new String[] { "Dust Devils use clouds of dust, sand, ash and whatever", "else they can inhale to blind and disorientate", "their victims." }, 65, false, false),
     DWARF(6, new int[] { 118, 120, 121, 382, 3219, 3220, 3221, 3268, 3269, 3270, 3271, 3272, 3273, 3274, 3275, 3294, 3295, 4316, 5880, 5881, 5882, 5883, 5884, 5885, 2130, 2131, 2132, 2133, 3276, 3277, 3278, 3279, 119, 2423 }, new String[] { "They are slightly resistant to Magic attacks, and", "are not recommended for low levels." }, 1, false, false),
     EARTH_WARRIORS(35, new int[] { 124 }, new String[] { "An Earth warrior is a monster made of earth which fights using melee." }, 1, false, false),
