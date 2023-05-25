@@ -3,7 +3,6 @@ package core.game.node.entity.player.link;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.state.EntityState;
-import core.game.world.update.flag.player.AppearanceFlag;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +85,7 @@ public final class SkullManager {
 	 */
 	public void setSkullIcon(int skullIcon) {
 		player.getAppearance().setSkullIcon(skullIcon);
-		player.getUpdateMasks().register(new AppearanceFlag(player));
+		player.updateAppearance();
 	}
 
 	/**

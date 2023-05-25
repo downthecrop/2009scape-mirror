@@ -41,8 +41,6 @@ import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneBuilder
 import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag
-import core.game.world.update.flag.context.Animation
-import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import core.game.dialogue.DialogueFile
@@ -55,9 +53,7 @@ import content.global.handlers.iface.ge.StockMarket
 import content.global.skill.slayer.SlayerManager
 import content.data.consumables.*
 import core.game.activity.Cutscene
-import core.game.interaction.Clocks
-import core.game.interaction.QueueStrength
-import core.game.interaction.QueuedScript
+import core.game.interaction.*
 import core.game.node.entity.player.info.LogType
 import core.game.node.entity.player.info.PlayerMonitor
 import core.tools.SystemLogger
@@ -68,11 +64,13 @@ import core.game.world.GameWorld.Pulser
 import core.game.world.map.path.ProjectilePathfinder
 import core.game.world.repository.Repository
 import core.game.consumable.*
-import core.tools.Log
-import core.tools.tick
 import core.ServerConstants
 import core.api.utils.Vector
+import core.tools.*
+import core.game.world.update.flag.*
+import core.game.world.update.flag.context.*
 import java.util.regex.*
+import java.io.*
 import kotlin.math.*
 
 /**
@@ -1080,6 +1078,68 @@ fun forceWalk(entity: Entity, dest: Location, type: String) {
     }
     val path = Pathfinder.find(entity, dest, true, pathfinder)
     path.walk(entity)
+}
+
+/**
+ * Force a player to move from the start location to the dest location
+ * @param player the player we are moving
+ * @param start the start location
+ * @param dest the end location
+ * @param startArrive the number of client cycles to take moving the player to the start location
+ * @param destArrive the number of client cycles to take moving the player to the end location from the start location
+ * @param direction (optional) the direction to face the player during the movement
+ * @param anim (optional) the animation to use throughout the movement
+ * @param callback (optional) a callback called when the forced  movement completes
+ * @see NOTE: There are 30 client cycles per second.
+*/
+fun forceMove (player: Player, start: Location, dest: Location, startArrive: Int, destArrive: Int, dir: Direction? = null, anim: Int = -1, callback: (()->Unit)? = null) {
+    var direction: Direction
+
+    if (dir == null) {
+        var delta = Location.getDelta(start, dest)
+        var x = abs(delta.x)
+        var y = abs(delta.y)
+
+        if (x > y) 
+            direction = Direction.getDirection(delta.x, 0) 
+        else 
+            direction = Direction.getDirection(0, delta.y)
+    } else direction = dir
+
+    val startLoc = Location.create(start)
+    val destLoc = Location.create(dest)
+    var startArriveTick = getWorldTicks() + cyclesToTicks (startArrive) + 1
+    var destArriveTick = startArriveTick + cyclesToTicks (destArrive)
+    var maskSet = false
+
+    delayEntity(player, (destArriveTick - getWorldTicks()) + 1)
+    queueScript (player, 0, QueueStrength.SOFT) { stage: Int ->
+        if (!finishedMoving(player))
+            return@queueScript keepRunning(player)
+        if (!maskSet) {
+            var ctx = ForceMoveCtx (startLoc, destLoc, startArrive, destArrive, direction)
+            player.updateMasks.register(EntityFlag.ForceMove, ctx)
+            maskSet = true
+        }
+
+        var tick = getWorldTicks()
+        if (tick < startArriveTick) {
+            return@queueScript keepRunning(player)
+        } else if (tick < destArriveTick) {
+            if (animationFinished(player))
+                animate (player, anim)
+            return@queueScript keepRunning(player)
+        } else if (tick >= destArriveTick) {
+            try {
+                callback?.invoke()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            player.properties.teleportLocation = dest
+            return@queueScript stopExecuting(player)
+        }
+        return@queueScript stopExecuting(player)
+    }
 }
 
 /**
@@ -2383,6 +2443,24 @@ fun log(origin: Class<*>, type: Log, message: String) {
 }
 
 /**
+ * Logs a message to the server console along with a stack trace leading up to it.
+ * @param origin simply put (Kotlin) this::class.java or (Java) this.getClass()
+ * @param type the type of log: Log.FINE (default, visible on VERBOSE), Log.INFO (visible on DETAILED), Log.WARN (visible on CAUTIOUS), Log.ERR (always visible)
+ * @param message the actual message to log.
+*/
+fun logWithStack(origin: Class<*>, type: Log, message: String) {
+    try {
+        throw Exception(message)
+    } catch (e: Exception) {
+        val sw = StringWriter()
+        val pw = PrintWriter(sw)
+        e.printStackTrace(pw)
+
+        log(origin, type, "$sw")
+    }
+}
+
+/**
  * Used by content handlers to check if the entity is done moving yet
  */
 fun finishedMoving(entity: Entity) : Boolean {
@@ -2403,7 +2481,7 @@ fun delayScript(entity: Entity, ticks: Int): Boolean {
  */
 fun delayEntity(entity: Entity, ticks: Int) {
     entity.scripts.delay = GameWorld.ticks + ticks
-    lock(entity, 5) //TODO: REMOVE WHEN EVERYTHING IMPORTANT USES PROPER QUEUES - THIS IS INCORRECT BEHAVIOR
+    lock(entity, ticks) //TODO: REMOVE WHEN EVERYTHING IMPORTANT USES PROPER QUEUES - THIS IS INCORRECT BEHAVIOR
 }
 
 fun apRange(entity: Entity, apRange: Int) {

@@ -12,7 +12,6 @@ import core.game.node.scenery.SceneryBuilder;
 import core.game.world.GameWorld;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
-import core.game.world.update.flag.player.FaceLocationFlag;
 import core.tools.RandomFunction;
 
 /**
@@ -129,7 +128,7 @@ public final class FireMakingPulse extends SkillPulse<Item> {
 		SceneryBuilder.add(object, fire.getLife(), getAsh(player, fire, object));
 		GroundItemManager.destroy(groundItem);
 		player.moveStep();
-		player.faceLocation(FaceLocationFlag.getFaceLocation(player, object));
+		player.faceLocation(object.getFaceLocation(player.getLocation()));
 		player.getSkills().addExperience(Skills.FIREMAKING,fire.getXp());
 
 		int playerRegion = player.getViewport().getRegion().getId();

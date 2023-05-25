@@ -27,6 +27,8 @@ public class HitMark {
 	 */
 	private final Entity entity;
 
+        public boolean showHealthBar = true;
+
 	/**
 	 * Constructs a new {@code HitMark} {@code Object}.
 	 * @param damage The amount of damage.
@@ -38,6 +40,13 @@ public class HitMark {
 		this.type = type;
 		this.entity = entity;
 	}
+
+        public HitMark(int damage, int type, Entity entity, boolean showHealthBar) {
+            this.damage = damage;
+            this.type = type;
+            this.entity = entity;
+            this.showHealthBar = showHealthBar;
+        }
 
 	/**
 	 * Gets the damage.

@@ -6,10 +6,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
-import core.game.world.update.flag.npc.NPCAnimation;
-import core.game.world.update.flag.npc.NPCGraphic;
-import core.game.world.update.flag.player.AnimationFlag;
-import core.game.world.update.flag.player.GraphicFlag;
+import core.game.world.update.flag.EntityFlag;
 
 /**
  * Handles the animating of an Entity.
@@ -128,12 +125,12 @@ public final class Animator {
 				ticks = 0;
 			}
 			entity.clocks[Clocks.getANIMATION_END()] = ticks;
-			entity.getUpdateMasks().register(entity instanceof NPC ? new NPCAnimation(animation) : new AnimationFlag(animation));
+                        entity.getUpdateMasks().register(EntityFlag.Animate, animation);
 			priority = animation.getPriority();
 		}
 		if (graphic != null) {
 			this.graphics = graphic;
-			entity.getUpdateMasks().register(entity instanceof NPC ? new NPCGraphic(graphic) : new GraphicFlag(graphic));
+                        entity.getUpdateMasks().register(EntityFlag.SpotAnim, graphic);
 		}
 		return true;
 	}

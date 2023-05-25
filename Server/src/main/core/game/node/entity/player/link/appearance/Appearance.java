@@ -8,7 +8,6 @@ import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
-import core.game.world.update.flag.player.AppearanceFlag;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import core.game.system.config.ItemConfigParser;
@@ -190,7 +189,7 @@ public final class Appearance {
 	 * Method used to sync this appearance with the client.
 	 */
 	public void sync() {
-		player.getUpdateMasks().register(new AppearanceFlag(player));
+            player.updateAppearance();
 	}
 
 	/**

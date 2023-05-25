@@ -12,7 +12,6 @@ import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.system.task.Pulse;
 import core.game.world.map.Location;
-import core.game.world.update.flag.player.FaceLocationFlag;
 import core.plugin.Plugin;
 
 import java.util.ArrayList;
@@ -175,7 +174,7 @@ public abstract class UseWithHandler implements Plugin<Object> {
                 @Override
                 public boolean pulse() {
                     event.getPlayer().dispatch(new UseWithEvent(event.getUsed().getId(), event.getUsedWith().getId()));
-                    event.getPlayer().faceLocation(FaceLocationFlag.getFaceLocation(event.getPlayer(), event.getUsedWith()));
+                    event.getPlayer().faceLocation(event.getUsedWith().getFaceLocation(event.getPlayer().getLocation()));
                     boolean handled = false;
                     Item used = (Item) event.getUsed();
                     for (UseWithHandler h : handlers) {

@@ -25,7 +25,7 @@ import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.ChatMessage
-import core.game.world.update.flag.player.ChatFlag
+import core.game.world.update.flag.*
 import core.net.amsc.MSPacketRepository
 import core.net.packet.context.PlayerContext
 import core.net.packet.out.ClearMinimapFlag
@@ -229,7 +229,7 @@ object PacketProcessor {
                     }
                     PlayerMonitor.logChat(pkt.player, "public", pkt.message)
                     val ctx = ChatMessage(pkt.player, pkt.message, pkt.effects, pkt.message.length)
-                    pkt.player.updateMasks.register(ChatFlag(ctx))
+                    pkt.player.updateMasks.register(EntityFlag.Chat, ctx)
                 }
             }
             is Packet.ChatSetting -> {

@@ -11,7 +11,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.system.task.Pulse
 import core.game.world.update.flag.context.ChatMessage
-import core.game.world.update.flag.player.ChatFlag
+import core.game.world.update.flag.*
 import proto.management.ClanMessage
 import core.game.world.GameWorld.Pulser
 import core.net.packet.`in`.QCPacketType
@@ -54,7 +54,7 @@ object QCRepository {
             ctx.isQuickChat = true
             Pulser.submit(object : Pulse(0, player) {
                 override fun pulse(): Boolean {
-                    player.updateMasks.register(ChatFlag(ctx))
+                    player.updateMasks.register(EntityFlag.Chat, ctx)
                     return true
                 }
             })

@@ -8,7 +8,6 @@ import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
-import core.game.world.update.flag.player.AppearanceFlag;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
@@ -306,7 +305,7 @@ public final class EquipmentContainer extends Container {
 				}
 			}
 			player.getAppearance().setAnimations();
-			player.getUpdateMasks().register(new AppearanceFlag(player));
+                        player.updateAppearance(); 
 			player.getSettings().updateWeight();
 			updateBonuses(player);
 		}

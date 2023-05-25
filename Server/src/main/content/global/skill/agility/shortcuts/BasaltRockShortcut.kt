@@ -9,7 +9,6 @@ import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
-import core.game.world.update.flag.player.FaceLocationFlag
 import core.plugin.Initializable
 import core.plugin.Plugin
 
@@ -136,7 +135,7 @@ class BasaltRockShortcut : AgilityShortcut {
                             player.sendMessage(noJump)
                         } else {
                             player.lock(3)
-                            player.faceLocation(FaceLocationFlag.getFaceLocation(player, Location.create(2518, 3611, 0)))
+                            player.faceLocation(Location.create(2518, 3611, 0))
                             AgilityHandler.forceWalk(player, -1, Location.create(2516, 3611, 0), Location.create(2518, 3611, 0), Animation.create(769), 20, 0.0, null, 1)
                         }
                         return true
@@ -147,7 +146,7 @@ class BasaltRockShortcut : AgilityShortcut {
                             player.sendMessage(noJump)
                         } else {
                             player.lock(3)
-                            player.faceLocation(FaceLocationFlag.getFaceLocation(player, Location.create(2516, 3611, 0)))
+                            player.faceLocation(Location.create(2516, 3611, 0))
                             AgilityHandler.forceWalk(player, -1, Location.create(2518, 3611, 0), Location.create(2516, 3611, 0), Animation.create(769), 20, 0.0, null, 1)
                         }
                         return true

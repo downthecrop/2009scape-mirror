@@ -9,7 +9,6 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import core.game.world.update.flag.player.FaceLocationFlag;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.InteractionOptionContext;
 import core.net.packet.out.InteractionOption;
@@ -145,7 +144,7 @@ public class InteractPlugin {
 				@Override
 				public boolean pulse() {
 					try {
-						player.faceLocation(FaceLocationFlag.getFaceLocation(player, node));
+						player.faceLocation(node.getFaceLocation(player.getLocation()));
 						if (player.getLocks().isInteractionLocked() || player.getZoneMonitor().interact(node, option)) {
 							return true;
 						}
@@ -181,7 +180,7 @@ public class InteractPlugin {
 			@Override
 			public boolean pulse() {
 				try {
-					player.faceLocation(FaceLocationFlag.getFaceLocation(player, node));
+					player.faceLocation(node.getFaceLocation(player.getLocation()));
 					if (player.getLocks().isInteractionLocked() || player.getZoneMonitor().interact(node, option)) {
 						return true;
 					}

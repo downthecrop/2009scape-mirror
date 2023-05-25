@@ -43,11 +43,7 @@ import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.path.Pathfinder;
 import core.game.world.map.zone.ZoneType;
 import core.game.world.update.flag.PlayerFlags;
-import core.game.world.update.flag.context.Animation;
-import core.game.world.update.flag.context.Graphics;
-import core.game.world.update.flag.player.FaceEntityFlag;
-import core.game.world.update.flag.player.FaceLocationFlag;
-import core.game.world.update.flag.player.ForceChatFlag;
+import core.game.world.update.flag.*;
 import core.net.IoSession;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.DynamicSceneContext;
@@ -81,6 +77,7 @@ import core.game.ge.GrandExchangeRecords;
 import core.game.ge.GrandExchangeOffer;
 import core.cache.def.impl.ItemDefinition;
 import core.worker.ManagementEvents;
+import core.game.world.update.flag.context.*;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -547,31 +544,6 @@ public class Player extends Entity {
 			removeAttribute("flagged-for-save");
 		}
 		Arrays.fill(opCounts, (byte) 0);
-	}
-
-	@Override
-	public boolean face(Entity entity) {
-		if (entity == null) {
-			if (getUpdateMasks().unregisterSynced(FaceEntityFlag.getOrdinal())) {
-				return getUpdateMasks().register(new FaceEntityFlag(entity));
-			}
-			return true;
-		}
-		return getUpdateMasks().register(new FaceEntityFlag(entity), true);
-	}
-
-	@Override
-	public boolean faceLocation(Location location) {
-		if (location == null) {
-			getUpdateMasks().unregisterSynced(FaceLocationFlag.getOrdinal());
-			return true;
-		}
-		return getUpdateMasks().register(new FaceLocationFlag(location), true);
-	}
-
-	@Override
-	public boolean sendChat(String string) {
-		return getUpdateMasks().register(new ForceChatFlag(string));
 	}
 
 	@Override
@@ -1393,4 +1365,8 @@ public class Player extends Entity {
 		}
 		states.remove(key);
 	}
+
+        public void updateAppearance() {
+            getUpdateMasks().register(EntityFlag.Appearance, this);
+        }
 }

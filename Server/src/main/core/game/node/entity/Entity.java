@@ -27,6 +27,7 @@ import core.game.world.map.path.Pathfinder;
 import core.game.world.map.zone.ZoneMonitor;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
+import core.game.world.update.flag.*;
 import core.game.node.entity.combat.CombatSwingHandler;
 import core.game.world.update.UpdateMasks;
 
@@ -48,7 +49,7 @@ public abstract class Entity extends Node {
 	/**
 	 * The entity's update masks.
 	 */
-	private final UpdateMasks updateMasks = new UpdateMasks();
+	private final UpdateMasks updateMasks = new UpdateMasks(this);
 
 	/**
 	 * The walking queue.
@@ -631,21 +632,39 @@ public abstract class Entity extends Node {
 	 * @param entity The entity to face.
 	 * @return {@code True} if succesful.
 	 */
-	public abstract boolean face(Entity entity);
+	public boolean face(Entity entity) {
+            if (entity == null) {
+                int ordinal = EntityFlags.getOrdinal(EFlagType.of(this), EntityFlag.FaceEntity); 
+                if (getUpdateMasks().unregisterSynced(ordinal)) {
+                    return getUpdateMasks().register(EntityFlag.FaceEntity, null);
+                }
+                return true;
+            }
+            return getUpdateMasks().register(EntityFlag.FaceEntity, entity, true);
+        }
 
 	/**
 	 * Registers a new face location update flag to the update masks.
 	 * @param location The location to face.
 	 * @return {@code True} if succesful.
 	 */
-	public abstract boolean faceLocation(Location location);
+	public boolean faceLocation(Location location) {
+            if (location == null) {
+                int ordinal = EntityFlags.getOrdinal(EFlagType.of(this), EntityFlag.FaceLocation);
+                getUpdateMasks().unregisterSynced(ordinal);
+                return true;
+            }
+            return getUpdateMasks().register(EntityFlag.FaceLocation, location, true);
+        }
 
 	/**
 	 * Registers a new force chat update flag to the update masks.
 	 * @param string The string.
 	 * @return {@code True} if succesful.
 	 */
-	public abstract boolean sendChat(String string);
+	public boolean sendChat(String string) {
+            return getUpdateMasks().register(EntityFlag.ForceChat, string);
+        }
 
 	/**
 	 * Gets the current combat swing handler.

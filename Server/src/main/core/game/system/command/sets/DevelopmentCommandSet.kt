@@ -27,6 +27,10 @@ import java.io.FileWriter
 import java.util.Arrays
 import core.net.packet.PacketWriteQueue
 import core.tools.Log
+import core.game.world.update.flag.*
+import core.game.world.update.flag.context.*
+import core.game.node.entity.impl.*
+import core.game.world.map.Location
 
 @Initializable
 class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
@@ -238,6 +242,35 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
 
         define("drawroute", Privilege.ADMIN, "", "Visualizes the path your player is taking") {player, _ -> 
             setAttribute (player, "routedraw", !getAttribute(player, "routedraw", false))
+        }
+
+        define ("fmstart", Privilege.ADMIN, "", "") {player, _ -> 
+            setAttribute(player, "fmstart", Location.create(player.location))
+        }
+
+        define ("fmend", Privilege.ADMIN, "", "") {player, _ ->
+            setAttribute(player, "fmend", Location.create(player.location))
+        }
+
+        define ("fmspeed", Privilege.ADMIN, "", "") {player, args ->
+            setAttribute(player, "fmspeed", args[1].toIntOrNull() ?: 10)
+        }
+
+        define ("fmspeedend", Privilege.ADMIN, "", "") {player, args ->
+            setAttribute(player, "fmspeedend", args[1].toIntOrNull() ?: 10)
+        }
+
+        define("testfm", Privilege.ADMIN, "", "") { player, _ -> 
+            val start = getAttribute(player, "fmstart", Location.create(player.location))
+            val end = getAttribute(player, "fmend", Location.create(player.location))
+            val speed = getAttribute(player, "fmspeed", 10)
+            val speedEnd = getAttribute(player, "fmspeedend", 10)
+            val ani = getAttribute(player, "fmanim", -1)
+            forceMove(player, start, end, speed, speedEnd, anim = ani)    
+        }
+
+        define("fmanim", Privilege.ADMIN, "", "") {player, args ->
+            setAttribute(player, "fmanim", args[1].toIntOrNull() ?: -1)
         }
     }
 }

@@ -26,10 +26,7 @@ import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.path.Pathfinder;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
-import core.game.world.update.flag.npc.NPCFaceEntity;
-import core.game.world.update.flag.npc.NPCFaceLocation;
-import core.game.world.update.flag.npc.NPCForceChat;
-import core.game.world.update.flag.npc.NPCSwitchId;
+import core.game.world.update.flag.*;
 import core.tools.RandomFunction;
 import core.api.utils.GlobalKillCounter;
 import core.api.utils.Vector;
@@ -580,31 +577,6 @@ public class NPC extends Entity {
 	}
 
 	@Override
-	public boolean face(Entity entity) {
-		if (entity == null) {
-			if (getUpdateMasks().unregisterSynced(NPCFaceEntity.getOrdinal())) {
-				return getUpdateMasks().register(new NPCFaceEntity(null));
-			}
-			return true;
-		}
-		return getUpdateMasks().register(new NPCFaceEntity(entity), true);
-	}
-
-	@Override
-	public boolean faceLocation(Location location) {
-		if (location == null) {
-			getUpdateMasks().unregisterSynced(NPCFaceLocation.getOrdinal());
-			return true;
-		}
-		return getUpdateMasks().register(new NPCFaceLocation(location), true);
-	}
-
-	@Override
-	public boolean sendChat(String string) {
-		return getUpdateMasks().register(new NPCForceChat(string));
-	}
-
-	@Override
 	public CombatSwingHandler getSwingHandler(boolean swing) {
 		CombatSwingHandler original = getProperties().getCombatPulse().getStyle().getSwingHandler();
 		return behavior.getSwingHandlerOverride(this, original);
@@ -703,9 +675,10 @@ public class NPC extends Entity {
 		configure();
 		interactPlugin.setDefault();
 		if (id == originalId) {
-			getUpdateMasks().unregisterSynced(NPCSwitchId.getOrdinal());
+                    int ordinal = EntityFlags.getOrdinal (EFlagType.NPC, EntityFlag.TypeSwap);
+                    getUpdateMasks().unregisterSynced(ordinal);
 		}
-		getUpdateMasks().register(new NPCSwitchId(id), id != originalId);
+                getUpdateMasks().register(EntityFlag.TypeSwap, id, id != originalId);
 		return this;
 	}
 

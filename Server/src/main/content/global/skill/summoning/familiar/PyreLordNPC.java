@@ -21,7 +21,6 @@ import core.game.world.GameWorld;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
-import core.game.world.update.flag.player.FaceLocationFlag;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 
@@ -132,7 +131,7 @@ public class PyreLordNPC extends Familiar {
 						familiar.moveStep();
 						GroundItemManager.destroy(ground);
 						player.getSkills().addExperience(Skills.FIREMAKING, log.getXp() + 10);
-						familiar.faceLocation(FaceLocationFlag.getFaceLocation(familiar, object));
+						familiar.faceLocation(object.getFaceLocation(familiar.getLocation()));
 						SceneryBuilder.add(object, log.getLife(), FireMakingPulse.getAsh(player, log, object));
 						if (player.getViewport().getRegion().getId() == 10806) {
 							player.getAchievementDiaryManager().finishTask(player, DiaryType.SEERS_VILLAGE, 1, 9);

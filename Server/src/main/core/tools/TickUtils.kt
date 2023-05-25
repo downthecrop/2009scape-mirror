@@ -2,6 +2,7 @@ package core.tools
 
 const val tick = 600 //ms
 const val second = 1000 //ms
+const val cycle = 20 //ms
 
 fun secondsToTicks(seconds: Int): Int {
     val seconds = seconds * second //seconds -> ms
@@ -11,6 +12,11 @@ fun secondsToTicks(seconds: Int): Int {
 fun ticksToSeconds(ticks: Int): Int {
     val ticksMs = ticks * tick
     return ticksMs / 1000
+}
+
+fun cyclesToTicks (cycles: Int) : Int {
+    val cyclesPerTick = tick / cycle
+    return kotlin.math.ceil (cycles / cyclesPerTick.toDouble()).toInt()
 }
 
 fun minutesToTicks(minutes: Int): Int {

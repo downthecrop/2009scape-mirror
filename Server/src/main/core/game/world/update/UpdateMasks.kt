@@ -5,82 +5,42 @@ import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.player.Player
 import core.game.world.update.flag.UpdateFlag
 import core.game.world.update.flag.context.HitMark
-import core.game.world.update.flag.npc.NPCHitFlag
-import core.game.world.update.flag.npc.NPCHitFlag1
-import core.game.world.update.flag.player.AppearanceFlag
-import core.game.world.update.flag.player.HitUpdateFlag
-import core.game.world.update.flag.player.HitUpdateFlag1
+import core.game.world.update.flag.*
 import core.net.packet.IoBuffer
+import core.api.*
+import core.tools.*
 import java.util.concurrent.atomic.AtomicBoolean
 
-/**
- * Holds an entity's update masks.
- * @author Emperor
- */
-class UpdateMasks {
-    /**
-     * The mask data.
-     */
-    private var maskData = 0
-
-    /**
-     * The update masks array.
-     */
-    private val masks = arrayOfNulls<UpdateFlag<*>?>(SIZE)
-
-    /**
-     * Gets the appearanceStamp.
-     * @return The appearanceStamp.
-     */
-    /**
-     * Sets the appearanceStamp.
-     * @param appearanceStamp The appearanceStamp to set.
-     */
-    /**
-     * The appearance time stamp.
-     */
+class UpdateMasks (val owner: Entity) {
     var appearanceStamp: Long = 0
-
-    /**
-     * The synced mask data.
-     */
-    private var syncedMask = 0
-
-    /**
-     * The update masks array.
-     */
-    private val syncedMasks = arrayOfNulls<UpdateFlag<*>?>(SIZE)
-
-    /**
-     * If the update masks are being updated.
-     */
+    private val type = EFlagType.of (owner)
     private val updating = AtomicBoolean()
-    /**
-     * Registers an update flag.
-     * @param flag The update flag.
-     * @return `True` if successful.
-     */
-    /**
-     * Registers an update flag.
-     * @param flag The update flag.
-     * @return `True` if successful.
-     */
+    private var presenceFlags = 0
+    private var syncedPresenceFlags = 0
+    private val elements = arrayOfNulls<MaskElement?>(SIZE)
+    private val syncedElements = arrayOfNulls<MaskElement?>(SIZE)
+    private data class MaskElement (val encoder: EFlagProvider, val context: Any?)
+
     @JvmOverloads
-    fun register(flag: UpdateFlag<*>, synced: Boolean = false): Boolean {
-        var synced = synced
-        if (updating.get()) {
+    fun register(flag: EntityFlag, context: Any?, sync: Boolean = false) : Boolean {
+        var synced = sync
+        var provider = EntityFlags.getFlagFor (type, flag)
+        if (provider == null) {
+            logWithStack(this::class.java, Log.ERR, "Tried to use flag ${flag.name} which is not available for ${type.name} in this revision.")
             return false
         }
-        if (flag is AppearanceFlag) {
+        if (updating.get())
+            return false
+        if (flag == EntityFlag.Appearance) {
             appearanceStamp = System.currentTimeMillis()
             synced = true
         }
         if (synced) {
-            syncedMasks[flag.ordinal()] = flag
-            syncedMask = syncedMask or flag.data()
+            syncedElements[provider.ordinal] = MaskElement (provider, context)
+            syncedPresenceFlags = syncedPresenceFlags or provider.presenceFlag
         }
-        maskData = maskData or flag.data()
-        masks[flag.ordinal()] = flag
+        elements[provider.ordinal] = MaskElement (provider, context)
+        presenceFlags = presenceFlags or provider.presenceFlag
         return true
     }
 
@@ -90,9 +50,9 @@ class UpdateMasks {
      * @return `True` if the mask got removed.
      */
     fun unregisterSynced(ordinal: Int): Boolean {
-        if (syncedMasks[ordinal] != null) {
-            syncedMask = syncedMask and syncedMasks[ordinal]!!.data().inv()
-            syncedMasks[ordinal] = null
+        if (syncedElements[ordinal] != null) {
+            syncedPresenceFlags = syncedPresenceFlags and syncedElements[ordinal]!!.encoder.presenceFlag.inv()
+            syncedElements[ordinal] = null
             return true
         }
         return false
@@ -105,16 +65,16 @@ class UpdateMasks {
      * @param buffer The buffer to write on.
      */
     fun write(p: Player?, e: Entity?, buffer: IoBuffer) {
-        var maskData = maskData
+        var maskData = presenceFlags
         if (maskData >= 0x100) {
             maskData = maskData or if (e is Player) 0x10 else 0x8
             buffer.put(maskData).put(maskData shr 8)
         } else {
             buffer.put(maskData)
         }
-        for (i in masks.indices) {
-            val flag = masks[i]
-            flag?.writeDynamic(buffer, p)
+        for (i in elements.indices) {
+            val element = elements[i]
+            element?.encoder?.writeToDynamic(buffer, element.context, p!!)
         }
     }
 
@@ -126,10 +86,11 @@ class UpdateMasks {
      * @param appearance If the appearance mask should be written.
      */
     fun writeSynced(p: Player?, e: Entity?, buffer: IoBuffer, appearance: Boolean) {
-        var maskData = maskData
-        var synced = syncedMask
-        if (!appearance && synced and AppearanceFlag.getData() != 0) {
-            synced = synced and AppearanceFlag.getData().inv()
+        var maskData = presenceFlags
+        var synced = syncedPresenceFlags
+        var appearanceFlag = EntityFlags.getPresenceFlag(type, EntityFlag.Appearance)
+        if (!appearance && synced and appearanceFlag != 0) {
+            synced = synced and appearanceFlag.inv()
         }
         maskData = maskData or synced
         if (maskData >= 0x100) {
@@ -138,15 +99,15 @@ class UpdateMasks {
         } else {
             buffer.put(maskData)
         }
-        for (i in masks.indices) {
-            var flag = masks[i]
-            if (flag == null) {
-                flag = syncedMasks[i]
-                if (!appearance && flag is AppearanceFlag) {
+        for (i in elements.indices) {
+            var element = elements[i]
+            if (element == null) {
+                element = syncedElements[i]
+                if (!appearance && element != null && element.encoder.flag == EntityFlag.Appearance) {
                     continue
                 }
             }
-            flag?.writeDynamic(buffer, p)
+            element?.encoder?.writeToDynamic(buffer, element.context, p!!)
         }
     }
 
@@ -173,13 +134,8 @@ class UpdateMasks {
      * @param secondary If the hit update is secondary.
      */
     private fun registerHitUpdate(e: Entity, impact: ImpactHandler.Impact, secondary: Boolean): HitMark {
-        val player = e is Player
         val mark = HitMark(impact.amount, impact.type.ordinal, e)
-        if (player) {
-            register(if (secondary) HitUpdateFlag1(mark) else HitUpdateFlag(mark))
-        } else {
-            register(if (secondary) NPCHitFlag1(mark) else NPCHitFlag(mark))
-        }
+        register(if (secondary) EntityFlag.SecondaryHit else EntityFlag.PrimaryHit, mark)
         return mark
     }
 
@@ -187,10 +143,10 @@ class UpdateMasks {
      * Resets the update masks.
      */
     fun reset() {
-        for (i in masks.indices) {
-            masks[i] = null
+        for (i in elements.indices) {
+            elements[i] = null
         }
-        maskData = 0
+        presenceFlags = 0
         updating.set(false)
     }
 
@@ -203,14 +159,14 @@ class UpdateMasks {
      * @return `True` if so.
      */
     val isUpdateRequired: Boolean
-        get() = maskData != 0
+        get() = presenceFlags != 0
 
     /**
      * Checks if synced update masks have been registered.
      * @return `True` if so.
      */
     fun hasSynced(): Boolean {
-        return syncedMask != 0
+        return syncedPresenceFlags != 0
     }
 
     companion object {

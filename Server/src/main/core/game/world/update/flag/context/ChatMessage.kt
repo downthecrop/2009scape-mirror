@@ -1,6 +1,7 @@
 package core.game.world.update.flag.context
 
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.info.Rights
 
 /**
  * Represents a chat message.
@@ -34,6 +35,8 @@ class ChatMessage
      */
     var numChars = numChars
         private set
+
+    var chatIcon = Rights.getChatIcon(player)
 
     @JvmField
 	var isQuickChat = false

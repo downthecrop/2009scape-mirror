@@ -29,7 +29,6 @@ import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneRestriction;
-import core.game.world.update.flag.player.AppearanceFlag;
 import core.tools.RandomFunction;
 
 /**
@@ -140,7 +139,7 @@ public final class TzhaarFightPitsPlugin extends ActivityPlugin {
 						lastVictor.getAchievementDiaryManager().finishTask(lastVictor, DiaryType.KARAMJA, 2, 0);
 						addTokkul(lastVictor);
 						lastVictor.getAppearance().setSkullIcon(SKULL_ID);
-						lastVictor.getUpdateMasks().register(new AppearanceFlag(lastVictor));
+						lastVictor.updateAppearance();
 						lastVictor.getPacketDispatch().sendString("Current Champion: " + getChampionName(), INTERFACE_ID, 0);
 						resetDamagePulse(lastVictor);
 					}
@@ -158,7 +157,7 @@ public final class TzhaarFightPitsPlugin extends ActivityPlugin {
 			player.getInteraction().remove(Option._P_ATTACK);
 			if (player.getAppearance().getSkullIcon() == SKULL_ID) {
 				player.getAppearance().setSkullIcon(-1);
-				player.getUpdateMasks().register(new AppearanceFlag(player));
+				player.updateAppearance();
 			}
 		}
 	}
@@ -190,7 +189,7 @@ public final class TzhaarFightPitsPlugin extends ActivityPlugin {
 		}
 		if (lastVictor.getAppearance().getSkullIcon() == SKULL_ID) {
 			player.getAppearance().setSkullIcon(-1);
-			player.getUpdateMasks().register(new AppearanceFlag(player));
+			player.updateAppearance();
 		}
 	}
 
@@ -238,7 +237,7 @@ public final class TzhaarFightPitsPlugin extends ActivityPlugin {
 		}
 		if (e instanceof Player && (player = (Player) e).getAppearance().getSkullIcon() == SKULL_ID) {
 			player.getAppearance().setSkullIcon(-1);
-			player.getUpdateMasks().register(new AppearanceFlag(player));
+			player.updateAppearance();
 		}
 		return super.leave(e, logout);
 	}

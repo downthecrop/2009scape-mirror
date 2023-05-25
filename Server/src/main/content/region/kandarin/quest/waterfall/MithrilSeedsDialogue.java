@@ -9,7 +9,6 @@ import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
-import core.game.world.update.flag.player.FaceLocationFlag;
 
 /**
  * Represents the dialogue plugin used for mithril seeds.
@@ -64,7 +63,7 @@ public final class MithrilSeedsDialogue extends DialoguePlugin {
 			switch (buttonId) {
 			case 1: // First option
 				player.lock(2);
-				player.faceLocation(FaceLocationFlag.getFaceLocation(player, flower));
+				player.faceLocation(flower.getFaceLocation(player.getLocation()));
 				player.animate(ANIMATION);
 				GameWorld.getPulser().submit(new Pulse(2, player, flower) {
 					@Override

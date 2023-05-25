@@ -6,7 +6,6 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.emote.Emotes;
 import core.game.node.item.Item;
 import core.game.world.map.RegionManager;
-import core.game.world.update.flag.player.AppearanceFlag;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.InterfaceContext;
 import core.net.packet.out.Interface;
@@ -136,7 +135,7 @@ public final class LoginConfiguration {
         UpdateSequence.getRenderablePlayers().add(player);
         RegionManager.move(player);
         player.getMusicPlayer().init();
-        player.getUpdateMasks().register(new AppearanceFlag(player));
+        player.updateAppearance();
         player.getPlayerFlags().setUpdateSceneGraph(true);
         player.getStateManager().init();
         player.getPacketDispatch().sendInterfaceConfig(226, 1, true);

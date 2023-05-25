@@ -11,7 +11,6 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.request.assist.AssistSession;
 import core.game.node.item.Item;
-import core.game.world.update.flag.player.AppearanceFlag;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.SkillContext;
 import core.net.packet.out.SkillLevel;
@@ -279,10 +278,8 @@ public final class Skills {
 			staticLevels[slot] = newLevel;
 
 			if (entity instanceof Player) {
-				if (updateCombatLevel()) {
-					player.getUpdateMasks().register(new AppearanceFlag(player));
-				}
-				LevelUp.levelup(player, slot, amount);
+                            player.updateAppearance();
+			    LevelUp.levelup(player, slot, amount);
 			}
 		}
 		if (entity instanceof Player) {

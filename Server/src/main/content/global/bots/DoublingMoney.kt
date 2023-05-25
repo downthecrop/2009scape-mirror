@@ -9,7 +9,7 @@ import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.ChatMessage
-import core.game.world.update.flag.player.ChatFlag
+import core.game.world.update.flag.*
 import core.integrations.discord.Discord
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
@@ -132,14 +132,14 @@ class DoublingMoney : Script() {
                     val message = arrayOf("Doubling Money", "Doubling Money", "Doubling Money!", "Doubling moneyy").random()
                     val messageEffect = arrayOf(0, 256).random()
                     val ctx = ChatMessage(bot, message, messageEffect, message.length)
-                    bot.updateMasks.register(ChatFlag(ctx))
+                    bot.updateMasks.register(EntityFlag.Chat, ctx)
                     sleepTime = 8
                 }
                 Effort.VERY_HIGH -> {
                     val message = arrayOf("Doubling money!", "Doubling money").random()
                     val messageEffect = arrayOf(771, 2818, 2562, 768, 512, 2304, 2560, 769, 1792).random()
                     val ctx = ChatMessage(bot, message, messageEffect, message.length)
-                    bot.updateMasks.register(ChatFlag(ctx))
+                    bot.updateMasks.register(EntityFlag.Chat, ctx)
                     sleepTime = 9
                 }
             }
@@ -198,7 +198,7 @@ class DoublingMoney : Script() {
             if (botTradeModule.getInterface() == TradeModule.ACCEPT_INTERFACE && coinsFromBot > 0 && effort == Effort.VERY_HIGH) {
                 val message = "Payed ${(if (coinsFromBot < 1000) "${coinsFromBot}gp" else "${coinsFromBot / 1000}k")}"
                 val ctx = ChatMessage(bot, message, 512, message.length)
-                bot.updateMasks.register(ChatFlag(ctx))
+                bot.updateMasks.register(EntityFlag.Chat, ctx)
 
                 sleepTime = 7
             }
@@ -325,7 +325,7 @@ class DoublingMoney : Script() {
         if (effort == Effort.VERY_HIGH) {
             val message = "Received ${(if (coins.amount < 1000) "${coins.amount}gp" else "${coins.amount / 1000}k")}"
             val ctx = ChatMessage(bot, message, 256, message.length)
-            bot.updateMasks.register(ChatFlag(ctx))
+            bot.updateMasks.register(EntityFlag.Chat, ctx)
         }
     }
 

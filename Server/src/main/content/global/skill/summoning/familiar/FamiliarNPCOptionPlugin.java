@@ -4,7 +4,6 @@ import core.cache.def.impl.NPCDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.world.update.flag.player.FaceLocationFlag;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
@@ -39,7 +38,7 @@ public final class FamiliarNPCOptionPlugin extends OptionHandler {
 		}
 		switch (option) {
 		case "pick-up":
-			player.faceLocation(FaceLocationFlag.getFaceLocation(player, familiar));
+			player.faceLocation(familiar.getFaceLocation(player.getLocation()));
 			player.getFamiliarManager().pickup();
 			break;
 		case "interact-with":

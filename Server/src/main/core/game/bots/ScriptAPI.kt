@@ -26,7 +26,7 @@ import core.game.world.map.path.Pathfinder
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.ChatMessage
 import core.game.world.update.flag.context.Graphics
-import core.game.world.update.flag.player.ChatFlag
+import core.game.world.update.flag.*
 import core.tools.RandomFunction
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -90,7 +90,7 @@ class ScriptAPI(private val bot: Player) {
 
     fun sendChat(message: String) {
         bot.sendChat(message)
-        bot.updateMasks.register(ChatFlag(ChatMessage(bot, message, 0, 0)))
+        bot.updateMasks.register(EntityFlag.Chat, ChatMessage(bot, message, 0, 0))
     }
 
     /**

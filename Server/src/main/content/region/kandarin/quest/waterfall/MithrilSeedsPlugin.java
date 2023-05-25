@@ -11,7 +11,6 @@ import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
-import core.game.world.update.flag.player.FaceLocationFlag;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
@@ -67,7 +66,7 @@ public final class MithrilSeedsPlugin extends OptionHandler {
 		player.getPulseManager().run(new Pulse(1, player) {
 			@Override
 			public boolean pulse() {
-				player.faceLocation(FaceLocationFlag.getFaceLocation(player, object));
+				player.faceLocation(object.getFaceLocation(player.getLocation()));
 				player.getDialogueInterpreter().open(1 << 16 | 1, object);
 				return true;
 			}

@@ -38,6 +38,7 @@ import core.tools.RandomFunction;
 import static core.api.ContentAPIKt.animateScenery;
 import static core.api.ContentAPIKt.submitWorldPulse;
 import static core.api.ContentAPIKt.animationDuration;
+import static core.api.ContentAPIKt.forceMove;
 
 /**
  * Handles the puro puro activity.
@@ -161,13 +162,7 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 			player.sendMessage("You use your strength to push through the wheat. It's hard work though.");
 		}
 		player.setAttribute("cantMove", true);
-		GameWorld.getPulser().submit(new Pulse(1) {
-			@Override
-			public boolean pulse() {
-				ForceMovement.run(player, player.getLocation(), dest, Animation.create(6594), Animation.create(6594), Direction.getLogicalDirection(player.getLocation(), object.getLocation()), 3, 3);
-				return true;
-			}
-		});
+                forceMove(player, player.getLocation(), dest, 0, 265, null, 6595, null);
 	}
 
 	/**

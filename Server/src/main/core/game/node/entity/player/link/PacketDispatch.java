@@ -12,8 +12,7 @@ import core.game.world.map.RegionManager;
 import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
-import core.game.world.update.flag.player.AnimationFlag;
-import core.game.world.update.flag.player.GraphicFlag;
+import core.game.world.update.flag.EntityFlag;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.*;
 import core.net.packet.context.DisplayModelContext.ModelType;
@@ -300,7 +299,7 @@ public final class PacketDispatch {
 	 * @param id The animation id.
 	 */
 	public void sendAnimation(int id) {
-		player.getUpdateMasks().register(new AnimationFlag(new Animation(id)));
+                player.getUpdateMasks().register(EntityFlag.Animate, new Animation(id));
 	}
 
 	/**
@@ -309,7 +308,7 @@ public final class PacketDispatch {
 	 * @param delay The animation delay.
 	 */
 	public void sendAnimation(int id, int delay) {
-		player.getUpdateMasks().register(new AnimationFlag(new Animation(id, delay)));
+                player.getUpdateMasks().register(EntityFlag.Animate, new Animation(id, delay));
 	}
 
 	/**
@@ -317,7 +316,7 @@ public final class PacketDispatch {
 	 * @param id The graphic id.
 	 */
 	public void sendGraphic(int id) {
-		player.getUpdateMasks().register(new GraphicFlag(new Graphics(id)));
+                player.getUpdateMasks().register(EntityFlag.SpotAnim, new Graphics(id));
 	}
 
 	/**
@@ -383,7 +382,7 @@ public final class PacketDispatch {
 	 * @param height The graphic height.
 	 */
 	public void sendGraphic(int id, int height) {
-		player.getUpdateMasks().register(new GraphicFlag(new Graphics(id, height)));
+                player.getUpdateMasks().register(EntityFlag.SpotAnim, new Graphics(id, height));
 	}
 	public void sendVarClient(int id, int value, boolean cs2) {
 		PacketRepository.send(Config.class, new ConfigContext(player, id, value, cs2));

@@ -85,22 +85,7 @@ class TreeGnomeVillageListeners : InteractionListener {
             return@on true
         }
         on(looseRailing, IntType.SCENERY, "squeeze-through"){ player, _ ->
-            if(player.location != location(2516,3161,0)) {
-                squeezeThrough(player)
-            } else {
-                player.pulseManager.run(object : Pulse(0) {
-                    var count = 0
-                    override fun pulse(): Boolean {
-                        when (count) {
-                            0 -> ForceMovement.run(player,player.location,player.location.transform(Direction.WEST,1))
-                            2 -> squeezeThrough(player)
-                            3 -> return true
-                        }
-                        count++
-                        return false
-                    }
-                })
-            }
+            squeezeThrough(player)
             return@on true
         }
         on(crumbledWall, IntType.SCENERY, "climb-over"){ player, _ ->
@@ -132,69 +117,53 @@ class TreeGnomeVillageListeners : InteractionListener {
             return@on true
         }
     }
-}
 
-fun squeezeThrough(player: Player){
-    val squeezeAnim = Animation.create(3844)
-    if(player.location.y >= 3161) {
-        AgilityHandler.forceWalk(
-            player,
-            -1,
-            player.location,
-            player.location.transform(Direction.SOUTH, 1),
-            squeezeAnim,
-            5,
-            0.0,
-            null
-        )
-    } else {
-        AgilityHandler.forceWalk(
-            player,
-            -1,
-            player.location,
-            player.location.transform(Direction.NORTH, 1),
-            squeezeAnim,
-            5,
-            0.0,
-            null
-        )
+    fun squeezeThrough(player: Player){
+        val squeezeAnim = Animation.create(3844)
+
+        var dest = if (player.location.y >= 3161) 
+            player.location.transform(Direction.SOUTH, 1)
+        else 
+            player.location.transform(Direction.NORTH, 1)
+
+        forceMove(player, player.location, dest, 0, 80, anim = 3844)
     }
-}
 
-private class ClimbWall : DialogueFile() {
-    val climbAnimation = Animation(839)
-    val wallLoc = Location(2509,3253,0)
-    override fun handle(componentID: Int, buttonID: Int) {
-        if(questStage(player!!, TreeGnomeVillage.questName) > 30){
-            val northSouth = if (player!!.location.y <= wallLoc.y) Direction.NORTH else Direction.SOUTH
-            when(stage){
-                0 -> sendDialogue(player!!,"The wall has been reduced to rubble. It should be possible to climb over the remains").also{ stage++ }
-                1 -> AgilityHandler.forceWalk(player!!, -1, player!!.location, player!!.location.transform(northSouth, 2), climbAnimation, 20, 0.0, null).also {
-                    end()
-                    if(northSouth == Direction.SOUTH) return
-                    val lowerGuard: NPC = RegionManager.getNpc(player!!.location, NPCs.KHAZARD_COMMANDER_478, 6) ?: return
-                    GameWorld.Pulser.submit(object : Pulse(0) {
-                        var count = 0
-                        override fun pulse(): Boolean {
-                            when (count) {
-                                0 -> {
-                                    player!!.lock(4)
-                                    lowerGuard.sendChat("What? How did you manage to get in here.")
+    private class ClimbWall : DialogueFile() {
+        val climbAnimation = Animation(839)
+        val wallLoc = Location(2509,3253,0)
+        override fun handle(componentID: Int, buttonID: Int) {
+            if(questStage(player!!, TreeGnomeVillage.questName) > 30){
+                val northSouth = if (player!!.location.y <= wallLoc.y) Direction.NORTH else Direction.SOUTH
+                when(stage){
+                    0 -> sendDialogue(player!!,"The wall has been reduced to rubble. It should be possible to climb over the remains").also{ stage++ }
+                    1 -> AgilityHandler.forceWalk(player!!, -1, player!!.location, player!!.location.transform(northSouth, 2), climbAnimation, 20, 0.0, null).also {
+                        end()
+                        if(northSouth == Direction.SOUTH) return
+                        val lowerGuard: NPC = RegionManager.getNpc(player!!.location, NPCs.KHAZARD_COMMANDER_478, 6) ?: return
+                        GameWorld.Pulser.submit(object : Pulse(0) {
+                            var count = 0
+                            override fun pulse(): Boolean {
+                                when (count) {
+                                    0 -> {
+                                        player!!.lock(4)
+                                        lowerGuard.sendChat("What? How did you manage to get in here.")
+                                    }
+                                    2 -> {
+                                        player!!.sendChat("I've come for the orb.")
+                                    }
+                                    3 -> {
+                                        lowerGuard.sendChat("I'll never let you take it.")
+                                        lowerGuard.attack(player)
+                                        player!!.unlock()
+                                        return true
+                                    }
                                 }
-                                2 -> {
-                                    player!!.sendChat("I've come for the orb.")
-                                }
-                                3 -> {
-                                    lowerGuard.sendChat("I'll never let you take it.")
-                                    lowerGuard.attack(player)
-                                    player!!.unlock()
-                                    return true
-                                }
+                                count++
+                                return false
                             }
-                            count++
-                            return false
-                        }
-                    })
+                        })
+                    }
                 }
             }
         }

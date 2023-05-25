@@ -92,6 +92,219 @@ public class IoBuffer {
 		return this;
 	}
 
+        /**
+         * What follows are put/get methods using authentic naming.
+         * The older methods are kept for the sake of backwards compatibility within the codebase.
+         */
+        public IoBuffer p1 (int value) {
+            buf.put((byte) value);
+            return this;
+        }
+
+        public IoBuffer p1add (int value) {
+            buf.put((byte) (value + 128));
+            return this;
+        }
+
+        public IoBuffer p1sub (int value) {
+            buf.put((byte) (128 - value));
+            return this;
+        }
+
+        public IoBuffer p1neg (int value) {
+            buf.put ((byte) -value);
+            return this;
+        }
+
+        public IoBuffer p2 (int value) {
+            buf.put((byte) (value >> 8));
+            buf.put((byte) value);
+            return this;
+        }
+
+        public IoBuffer p2add (int value) {
+            buf.put((byte) (value >> 8));
+            buf.put((byte) (value + 128));
+            return this;
+        }
+
+        public IoBuffer ip2 (int value) {
+            buf.put((byte) value);
+            buf.put((byte) (value >> 8));
+            return this;
+        }
+
+        public IoBuffer ip2add (int value) {
+            buf.put((byte) (value + 128));
+            buf.put((byte) (value >> 8));
+            return this;
+        }
+
+        public IoBuffer p3 (int value) {
+            buf.put((byte) (value >> 16));
+            buf.put((byte) (value >> 8));
+            buf.put((byte) value);
+            return this;
+        }
+
+        public IoBuffer ip3 (int value) {
+            buf.put((byte) value);
+            buf.put((byte) (value >> 8));
+            buf.put((byte) (value >> 16));
+            return this;
+        }
+
+        public IoBuffer p4 (int value) {
+            buf.put((byte) (value >> 24));
+            buf.put((byte) (value >> 16));
+            buf.put((byte) (value >> 8));
+            buf.put((byte) value);
+            return this;
+        }
+
+        public IoBuffer ip4 (int value) {
+            buf.put((byte) value);
+            buf.put((byte) (value >> 8));
+            buf.put((byte) (value >> 16));
+            buf.put((byte) (value >> 24));
+            return this;
+        }
+
+        public IoBuffer mp4 (int value) {
+            buf.put((byte) (value >> 16));
+            buf.put((byte) (value >> 24));
+            buf.put((byte) value);
+            buf.put((byte) (value >> 8));
+            return this;
+        }
+
+        public IoBuffer imp4 (int value) {
+            buf.put((byte) (value >> 8));
+            buf.put((byte) value);
+            buf.put((byte) (value >> 24));
+            buf.put((byte) (value >> 16));
+            return this;
+        }
+
+        public IoBuffer p8 (long value) {
+            buf.put((byte) (value >> 56));
+            buf.put((byte) (value >> 48));
+            buf.put((byte) (value >> 40));
+            buf.put((byte) (value >> 32));
+            buf.put((byte) (value >> 24));
+            buf.put((byte) (value >> 16));
+            buf.put((byte) (value >> 8));
+            buf.put((byte) value);
+            return this;
+        }
+
+        public IoBuffer pVarInt (int value) {
+            if ((value & 0xffffff80) != 0) {
+                    if ((value & 0xffffc000) != 0) {
+                            if ((value & 0xFFE00000) != 0) {
+                                    if ((value & 0xF0000000) != 0) {
+                                            this.p1(value >>> 28 | 0x80);
+                                    }
+                                    this.p1(value >>> 21 | 0x80);
+                            }
+                            this.p1(value >>> 14 | 0x80);
+                    }
+                    this.p1(value >>> 7 | 0x80);
+            }
+            return this.p1(value & 0x7F);
+        }
+
+        public IoBuffer pVarLong (int size, long value) {
+            int bytes = size - 1;
+            if (bytes < 0 || bytes > 7)
+                throw new IllegalArgumentException();
+            for (int shift = bytes * 8; shift >= 0; shift -= 8)
+                this.p1 ((byte) (value >> shift));
+            return this;
+        }
+
+        public IoBuffer psmarts (int value) {
+            if (value >= 0 && value < 128)
+                this.p1(value);
+            else if (value >= 0 && value < 0x8000)
+                this.p2(value + 0x8000);
+            else
+                throw new IllegalArgumentException("smart out of range: $value");
+            return this;
+        }
+
+        public IoBuffer psize (int length) {
+            buf.put (buf.position() - length - 1, (byte) length);
+            return this;
+        }
+
+        public IoBuffer psizeadd (int length) {
+            buf.put (buf.position() - length - 1, (byte) (length + 128));
+            return this;
+        }
+
+        public int g1() {
+            return buf.get() & 0xFF;
+        }
+
+        public int g1add() {
+            return (buf.get() - 128) & 0xFF;
+        }
+
+        public int g1neg() {
+            return -(buf.get() & 0xFF);
+        }
+
+        public int g1sub() {
+            return (128 - buf.get()) & 0xFF;
+        }
+
+        public int g2() {
+            return ((buf.get() & 0xFF) << 8) + (buf.get() & 0xFF);
+        }
+
+        public int g2add() {
+            return ((buf.get() & 0xff) << 8) + ((buf.get() - 128) & 0xFF);
+        }
+
+        public int ig2() {
+            return (buf.get() & 0xFF) + ((buf.get() & 0xFF) << 8);
+        }
+
+        public int ig2add() {
+            return ((buf.get() - 128) & 0xFF) + ((buf.get() & 0xFF) << 8);
+        }
+
+        public int g3() {
+            return ((buf.get() & 0xFF) << 16) + ((buf.get() & 0xFF) << 8) + (buf.get() & 0xFF);
+        }
+
+        public int ig3() {
+            return (buf.get() & 0xFF) + ((buf.get() & 0xFF) << 8) + ((buf.get() & 0xFF) << 16);
+        }
+
+        public int g4() {
+            return ((buf.get() & 0xFF) << 24) + ((buf.get() & 0xFF) << 16) + ((buf.get() & 0xFF) << 8) + (buf.get() & 0xFF);
+        }
+
+        public int ig4() {
+            return (buf.get() & 0xFF) + ((buf.get() & 0xFF) << 8) + ((buf.get() & 0xFF) << 16) + ((buf.get() & 0xFF) << 24);
+        }
+
+        public int m4() {
+            return ((buf.get() & 0xFF) << 16) + ((buf.get() & 0xFF) << 24) + (buf.get() & 0xFF) + ((buf.get() & 0xFF) << 8);
+        }
+
+        public int im4() {
+            return ((buf.get() & 0xFF) << 8) + (buf.get() & 0xFF) + ((buf.get() & 0xFF) << 24) + ((buf.get() & 0xFF) << 16);
+        }
+
+        public long g8() {
+            long low = (long) this.g4() & 0xFFFFFFFFL;
+            long high = (long) this.g4() & 0xFFFFFFFFL;
+            return high + (low << 32);
+        }
+
 	/**
 	 * @param val
 	 * @return
