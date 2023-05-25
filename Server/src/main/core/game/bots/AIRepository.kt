@@ -3,6 +3,7 @@ package core.game.bots
 import core.game.node.entity.player.Player
 import core.game.node.item.GroundItem
 import core.game.ge.GrandExchangeOffer
+import content.global.bots.*
 
 /**
  * A repository for bots to make use of that can contain any info that might be useful to them.
@@ -48,6 +49,21 @@ class AIRepository {
                 it.botScript.bot.clear();
                 AIPlayer.deregister((it.botScript.bot as AIPlayer).uid)
             }
+        }
+
+        @JvmStatic fun sendBotInfo (player: Player, bot: AIPlayer) {
+            val pulse = PulseRepository[bot.username.lowercase()] ?: return
+            bot.setAttribute("tracked", true) 
+            player.debug("[Bot: ${bot.username}][${pulse.botScript::class.simpleName}]=================")
+            player.debug("PM Pulse Running? ${if(bot.pulseManager.hasPulseRunning()) bot.pulseManager.getCurrent()::class.java.name else "No"}")
+            player.debug("Interaction Running? ${bot.scripts.getActiveScript() != null} ${bot.scripts.getActiveScript()?.let { " : " + it.execution!!::class.java.name } ?: ""}")
+            player.debug("Botscript Running? ${pulse.botScript.running}")
+            player.debug("Random Delay? ${pulse.randomDelay}")
+            player.debug("Delayed? ${bot.scripts.delay}")
+            if (pulse.botScript is Adventurer) {
+                player.debug("State: ${pulse.botScript.state.name}")
+            }
+            player.debug("==========================================")
         }
     }
 }

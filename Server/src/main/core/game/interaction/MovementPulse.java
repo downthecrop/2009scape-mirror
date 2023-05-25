@@ -17,6 +17,10 @@ import core.net.packet.out.ClearMinimapFlag;
 import kotlin.jvm.functions.Function2;
 import core.tools.SystemLogger;
 
+import static core.api.ContentAPIKt.getWorldTicks;
+import static core.api.ContentAPIKt.log;
+import core.tools.Log;
+
 import java.util.Deque;
 
 /**
@@ -79,6 +83,9 @@ public abstract class MovementPulse extends Pulse {
     private Function2<Entity,Node,Location> overrideMethod;
 
     private Location previousLoc;
+
+    private Location previousMoverLoc;
+    private int previousMoveTime;
 
     /**
      * Constructs a new {@code MovementPulse} {@code Object}.
@@ -182,7 +189,8 @@ public abstract class MovementPulse extends Pulse {
     public boolean update() {
         mover.face(null);
         if (mover == null || destination == null || mover.getViewport().getRegion() == null) {
-            return false;
+            stop();
+            return true;
         }
 
         if (hasInactiveNode() || !mover.getViewport().getRegion().isActive()) {
@@ -194,6 +202,23 @@ public abstract class MovementPulse extends Pulse {
         }
         findPath();
         Location ml = mover.getLocation();
+
+        if (previousMoverLoc == null || !previousMoverLoc.equals(ml)) {
+            previousMoverLoc = Location.create(ml);
+            previousMoveTime = getWorldTicks();
+        }
+        else if (getWorldTicks() - previousMoveTime >= 25) {
+            if (mover instanceof Player) {
+                ((Player) mover).getPacketDispatch().sendMessage("I can't reach that.");
+                PacketRepository.send(ClearMinimapFlag.class, new PlayerContext((Player) mover));
+            }
+            log(this.getClass(), Log.FINE, mover.getName() + " was trying to move to " + interactLocation + " from " + ml + " but hasn't changed location in 25 ticks. More info follows:");
+            log(this.getClass(), Log.FINE, "    -> Locked? " + mover.getLocks().isMovementLocked());
+            log(this.getClass(), Log.FINE, "    -> Has path? " + mover.getWalkingQueue().hasPath());
+            stop();
+            return true;
+        }
+
         // Allow being within 1 square of moving entities to interact with them.
         int radius = destination instanceof Entity && ((Entity)destination).getWalkingQueue().hasPath() ? 1 : 0;
         if (interactLocation == null)
@@ -265,7 +290,7 @@ public abstract class MovementPulse extends Pulse {
             else if (inside) {
                 loc = findBorderLocation();
             }
-        } else if (loc == previousLoc) return;
+        } else if (loc == previousLoc && interactLocation != null && mover.getWalkingQueue().hasPath()) return;
 
         if (destination == null) {
             return;
@@ -332,8 +357,8 @@ public abstract class MovementPulse extends Pulse {
                         mover.face(null);
                     }
                 }
+                previousLoc = loc;
             }
-            previousLoc = loc;
         }
         last = destination.getLocation();
     }

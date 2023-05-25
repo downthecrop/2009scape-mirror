@@ -10,6 +10,7 @@ import core.game.node.scenery.Scenery
 import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.map.path.Pathfinder
+import core.game.bots.AIPlayer
 import core.tools.Log
 import core.tools.SystemLogger
 import java.lang.Integer.max
@@ -39,18 +40,18 @@ class ScriptProcessor(val entity: Entity) {
         if (entity.delayed()) return
 
         var canProcess = !entity.delayed()
-        if (entity is Player)
+        if (entity is Player && entity !is AIPlayer)
             canProcess = canProcess && !entity.hasModalOpen()
 
         if (entity !is Player) return
         if (!entity.delayed() && canProcess && interactTarget != null) {
             if (opScript != null && inOperableDistance()) {
-                face(entity, interactTarget?.getFaceLocation(entity.location) ?: return)
-                processInteractScript(opScript ?: return)
+                face(entity, interactTarget?.getFaceLocation(entity.location) ?: return reset())
+                processInteractScript(opScript ?: return reset())
             }
-            else if (apScript != null && inApproachDistance(apScript ?: return)) {
-                face(entity, interactTarget?.getFaceLocation(entity.location) ?: return)
-                processInteractScript(apScript ?: return)
+            else if (apScript != null && inApproachDistance(apScript ?: return reset())) {
+                face(entity, interactTarget?.getFaceLocation(entity.location) ?: return reset())
+                processInteractScript(apScript ?: return reset())
             }
             else if (apScript == null && opScript == null && inOperableDistance()) {
                 sendMessage(entity, "Nothing interesting happens.")
@@ -62,18 +63,18 @@ class ScriptProcessor(val entity: Entity) {
         if (didMove)
             entity.clocks[Clocks.MOVEMENT] = GameWorld.ticks + if (entity.walkingQueue.isRunning) 0 else 1
         var canProcess = !entity.delayed()
-        if (entity is Player)
+        if (entity is Player && entity !is AIPlayer)
             canProcess = canProcess && !entity.interfaceManager.isOpened && !entity.interfaceManager.hasChatbox()
 
         if (entity !is Player) return
         if (!entity.delayed() && canProcess && interactTarget != null && !interacted) {
             if (opScript != null && inOperableDistance()) {
-                face(entity, interactTarget?.centerLocation ?: return)
-                processInteractScript(opScript ?: return)
+                face(entity, interactTarget?.centerLocation ?: return reset())
+                processInteractScript(opScript ?: return reset())
             }
-            else if (apScript != null && inApproachDistance(apScript ?: return)) {
-                face(entity, interactTarget?.centerLocation ?: return)
-                processInteractScript(apScript ?: return)
+            else if (apScript != null && inApproachDistance(apScript ?: return reset())) {
+                face(entity, interactTarget?.centerLocation ?: return reset())
+                processInteractScript(apScript ?: return reset())
             }
             else if (apScript == null && opScript == null && inOperableDistance()) {
                 sendMessage(entity, "Nothing interesting happens.")
@@ -246,6 +247,7 @@ class ScriptProcessor(val entity: Entity) {
     fun reset() {
         apScript = null
         opScript = null
+        currentScript = null
         apRangeCalled = false
         interacted = false
         apRange = 10

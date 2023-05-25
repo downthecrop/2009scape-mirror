@@ -77,7 +77,7 @@ class Adventurer(val style: CombatStyle): Script() {
         return "${bot.name} is an Adventurer bot at ${bot.location}! State: $state - City: $city"
     }
 
-    private var state = State.START
+    var state = State.START
 
     fun getRandomCity(): Location{
         return cities.random()
