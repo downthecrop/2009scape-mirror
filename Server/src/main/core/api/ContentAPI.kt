@@ -2614,9 +2614,9 @@ fun calculateDragonfireMaxHit(entity: Entity, maxDamage: Int, wyvern: Boolean = 
         effectiveDamage -= 0.6 * maxDamage
     else {
         if (hasShield)
-            effectiveDamage -= 0.8 * maxDamage
+            effectiveDamage -= 0.9 * maxDamage
         if (hasPotion)
-            effectiveDamage -= 0.2 * maxDamage
+            effectiveDamage -= 0.1 * maxDamage
     }
 
     return Math.max(unprotectableDamage, effectiveDamage.toInt())
