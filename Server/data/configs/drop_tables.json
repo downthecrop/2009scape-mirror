@@ -20945,6 +20945,12 @@
       },
       {
         "minAmount": "1",
+        "weight": "32.0",
+        "id": "6155",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
         "weight": "56.0",
         "id": "407",
         "maxAmount": "1"
@@ -20952,7 +20958,7 @@
       {
         "minAmount": "12",
         "weight": "56.0",
-        "id": "413",
+        "id": "411",
         "maxAmount": "12"
       },
       {
