@@ -221,9 +221,9 @@ class ModernListeners : SpellListener("modern"){
         setDelay(player,false)
     }
 
-    public fun alchemize(player: Player, item: Item, high: Boolean) : Boolean {
+        public fun alchemize(player: Player, item: Item, high: Boolean) : Boolean {
         if(item.name == "Coins") player.sendMessage("You can't alchemize something that's already gold!").also { return false }
-        if(!item.definition.isTradeable) player.sendMessage("You can't cast this spell on something like that.").also { return false }
+        if((!item.definition.isTradeable) && (!item.definition.isAlchemizable)) player.sendMessage("You can't cast this spell on something like that.").also { return false }
 
         if(player.zoneMonitor.isInZone("Alchemists' Playground")){
             player.sendMessage("You can only alch items from the cupboards!")

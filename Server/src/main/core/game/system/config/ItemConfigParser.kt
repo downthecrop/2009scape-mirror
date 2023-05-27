@@ -41,6 +41,11 @@ class ItemConfigParser {
         const val TWO_HANDED = "two_handed"
 
         /**
+         * The alchemisable configuration key.
+         */
+        const val ALCHEMIZABLE = "alchemizable"
+
+        /**
          * The high-alchemy price item configuration key.
          */
         const val HIGH_ALCHEMY = "high_alchemy"
@@ -268,6 +273,7 @@ class ItemConfigParser {
                         "destroy",
                         "lendable",
                         "tradeable" -> configs.put(it.key.toString(),it.value.toString().toBoolean())
+                        "alchemizable", -> configs.put(it.key.toString(),it.value.toString().toBoolean())
 
                         //doubles
                         "weight" -> configs.put(it.key.toString(),it.value.toString().toDouble())

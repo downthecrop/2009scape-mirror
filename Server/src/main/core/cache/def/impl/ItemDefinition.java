@@ -276,7 +276,7 @@ public class ItemDefinition extends Definition<Item> {
 			}
 			if(itemId == 14958)
 				def.setStackable(true);
-			
+
 			ItemDefinition.getDefinitions().put(itemId, def);
 		}
 		ItemDefinition.defineTemplates();
@@ -717,7 +717,7 @@ public class ItemDefinition extends Definition<Item> {
 		Integer level = requirements.get(skillId);
 		return level == null ? 0 : level;
 	}
-	
+
 	/**
 	 * Gets the wielding animation id (render animation id).
 	 * @return The wield animation id.
@@ -1387,6 +1387,17 @@ public class ItemDefinition extends Definition<Item> {
 	}
 
 	/**
+	 * Checks if the item is alchemizable.
+	 * @return {@code True} if so.
+	 */
+	public boolean isAlchemizable() {
+		if (!getConfiguration(ItemConfigParser.ALCHEMIZABLE, false)) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * Checks if the item is tradeable.
 	 * @return {@code True} if so.
 	 */
@@ -1547,7 +1558,7 @@ public class ItemDefinition extends Definition<Item> {
 			player.getPacketDispatch().sendString(BONUS_NAMES[index++] + bonusValue, 667, i);
 		}
 		player.getPacketDispatch().sendString("Attack bonus", 667, 34);
-		DecimalFormat dec = new DecimalFormat("#.#"); 
+		DecimalFormat dec = new DecimalFormat("#.#");
 		player.getPacketDispatch().sendString(dec.format(player.getSettings().getWeight())+" kg", 667, 32);
 	}
 
@@ -1621,7 +1632,7 @@ public class ItemDefinition extends Definition<Item> {
 	public void setItemType(int itemType) {
 		this.itemType = itemType;
 	}
-	
+
 	/**
 	 * Gets the femaleWornModelId3 value.
 	 * @return The femaleWornModelId3.

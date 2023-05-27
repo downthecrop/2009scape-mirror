@@ -35379,6 +35379,7 @@
     "durability": null,
     "name": "Sticky red goop",
     "tradeable": "true",
+    "alchemizable": "true",
     "archery_ticket_price": "0",
     "id": "3747"
   },
@@ -35388,6 +35389,7 @@
     "durability": null,
     "name": "Fremennik helm",
     "weight": "2.7",
+    "alchemizable": "true",
     "archery_ticket_price": "0",
     "id": "3748",
     "absorb": "1,0,2",
@@ -35512,6 +35514,7 @@
     "durability": null,
     "name": "Fremennik blade",
     "weight": "1.8",
+    "alchemizable": "true",
     "archery_ticket_price": "0",
     "attack_speed": "4",
     "weapon_interface": "6",
@@ -35526,6 +35529,7 @@
     "name": "Fremennik shield",
     "destroy": "true",
     "weight": "2.2",
+    "alchemizable": "true",
     "archery_ticket_price": "0",
     "id": "3758",
     "bonuses": "0,0,0,-8,-2,27,31,29,-1,29,30,0,0,0,0",
@@ -38237,6 +38241,7 @@
     "durability": null,
     "name": "Arms",
     "weight": "2",
+    "alchemizable": "true",
     "archery_ticket_price": "0",
     "id": "4195"
   },
@@ -38244,6 +38249,7 @@
     "examine": "A pair of lifeless, rotting legs.",
     "durability": null,
     "name": "Legs",
+    "alchemizable": "true",
     "archery_ticket_price": "0",
     "id": "4196"
   },
@@ -38252,6 +38258,7 @@
     "durability": null,
     "name": "Decapitated head",
     "weight": "3",
+    "alchemizable": "true",
     "archery_ticket_price": "0",
     "id": "4197"
   },
@@ -38260,6 +38267,7 @@
     "durability": null,
     "name": "Decapitated head",
     "weight": "3",
+    "alchemizable": "true",
     "archery_ticket_price": "0",
     "id": "4198"
   },
@@ -38268,6 +38276,7 @@
     "examine": "A pickled brain, submerged inside a jar of vinegar.",
     "durability": null,
     "name": "Pickled brain",
+    "alchemizable": "true",
     "archery_ticket_price": "0",
     "id": "4199"
   },
@@ -92708,6 +92717,7 @@
   {
     "durability": null,
     "name": "A jester stick",
+    "alchemizable": "true",
     "archery_ticket_price": "0",
     "id": "10840",
     "bonuses": "0,0,0,0,0,0,0,0,5,-5,0,0,0,0,0",
