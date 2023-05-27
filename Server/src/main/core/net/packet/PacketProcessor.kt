@@ -210,7 +210,7 @@ object PacketProcessor {
                         val messages = splitChatMessage(pkt.message.substring(2), pkt.player.name.length + 3, false)
                         for (message in messages) {
                             if (message.isNotBlank())
-                                GlobalChat.process(pkt.player.username, message)
+                                GlobalChat.process(pkt.player.username, message, Rights.getChatIcon(pkt.player))
                         }
                         return
                     }
@@ -222,7 +222,7 @@ object PacketProcessor {
                             builder.sender = pkt.player.name
                             builder.clanName = pkt.player.communication.clan.owner.lowercase().replace(" ", "_")
                             builder.message = message
-                            builder.rank = pkt.player.rights.ordinal
+                            builder.rank = Rights.getChatIcon(pkt.player)
                             ManagementEvents.publish(builder.build())
                         }
                         return

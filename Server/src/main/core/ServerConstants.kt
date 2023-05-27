@@ -281,5 +281,8 @@ class ServerConstants {
 
         @JvmField
         var MAX_PATHFIND_DISTANCE = 25
+
+        @JvmField
+        var IRONMAN_ICONS = false
     }
 }

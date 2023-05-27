@@ -1,6 +1,7 @@
 package core.game.node.entity.player.info;
 
 import core.game.node.entity.player.Player;
+import core.ServerConstants;
 
 /**
  * Represent the rights of a player.
@@ -24,9 +25,11 @@ public enum Rights {
 		if (c != Rights.REGULAR_PLAYER && c != null) {
 			return c.toInteger();
 		}
-		if (player.getIronmanManager().isIronman()) {
-			return player.getIronmanManager().getMode().getIcon();
-		}
+                if (ServerConstants.IRONMAN_ICONS) {
+                    if (player.getIronmanManager().isIronman()) {
+                            return player.getIronmanManager().getMode().getIcon();
+                    }
+                }
 		return 0;
 	}
 
