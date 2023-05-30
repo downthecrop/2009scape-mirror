@@ -14,6 +14,8 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.hasRequirement;
+
 /**
  * Handles a tunnel shortcut.
  * @author Vexia
@@ -70,6 +72,10 @@ public class TunnelShortcut extends AgilityShortcut {
 
 	@Override
 	public void run(final Player player, Scenery object, String option, boolean failed) {
+                if (object.getId() == 14922) {
+                    if (!hasRequirement(player, "Swan Song"))
+                        return;
+                }
 		player.lock(6);
 		final Scenery o = object;
 		final Location start = player.getLocation();

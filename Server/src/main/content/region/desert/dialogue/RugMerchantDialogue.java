@@ -156,7 +156,14 @@ public final class RugMerchantDialogue extends DialoguePlugin {
 				stage = 20;
 				return;
 			}
+			end();
 			destination = options.length == 1 ? options[0] : options[buttonId - 1];
+                        if (destination == RugDestination.UZER && !hasRequirement(player, "The Golem"))
+                            break;
+                        else if (destination == RugDestination.BEDABIN_CAMP && !hasRequirement(player, "The Tourist Trap"))
+                            break;
+                        else if (destination == RugDestination.SOPHANEM && !hasRequirement(player, "Icthlarin's Little Helper"))
+                            break;
 			if(player.getEquipment().get(EquipmentContainer.SLOT_WEAPON) != null){
 				player.sendMessage(colorize("%RYou must unequip all your weapons before you can fly on a carpet."));
 			} else {
@@ -164,7 +171,6 @@ public final class RugMerchantDialogue extends DialoguePlugin {
 					destination.travel(current, player);
 				}
 			}
-			end();
 			break;
 		case 20:
 			end();

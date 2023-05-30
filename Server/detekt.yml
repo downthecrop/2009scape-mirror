@@ -609,7 +609,7 @@ style:
   ObjectLiteralToLambda:
     active: true
   OptionalAbstractKeyword:
-    active: true
+    active: false
   OptionalUnit:
     active: false
   OptionalWhenBraces:

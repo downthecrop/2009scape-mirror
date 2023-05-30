@@ -5,6 +5,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
 
+import static core.api.ContentAPIKt.hasRequirement;
+
 /**
  * Represents a mysterious ruin.
  * @author 'Vexia
@@ -70,6 +72,14 @@ public enum MysteriousRuin {
 	 * @param player the player.
 	 */
 	public void enter(Player player) {
+                if (this == DEATH) {
+                    if (!hasRequirement(player, "Mourning's End Part II"))
+                        return;
+                }
+                if (this == BLOOD) {
+                    if (!hasRequirement(player, "Legacy of Seergaze"))
+                        return;
+                }
 		if (player.getEquipment().get(EquipmentContainer.SLOT_HAT) == null) {
 			return;
 		}

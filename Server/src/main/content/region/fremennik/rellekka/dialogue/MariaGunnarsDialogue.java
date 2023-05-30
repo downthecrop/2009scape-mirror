@@ -6,6 +6,8 @@ import core.game.node.entity.player.Player;
 import content.region.fremennik.rellekka.handlers.RellekkaDestination;
 import content.region.fremennik.rellekka.handlers.RellekkaUtils;
 
+import static core.api.ContentAPIKt.hasRequirement;
+
 /**
  * Handles the maria gunnars dialogue.
  * @author Vexia
@@ -62,12 +64,14 @@ public class MariaGunnarsDialogue extends DialoguePlugin {
 			stage++;
 			break;
 		case 3:
+			end();
+                        if (!hasRequirement(player, "Fremennik Trials"))
+                            break;
 			if (npc.getId() == 5508) {
 				RellekkaUtils.sail(player, RellekkaDestination.RELLEKKA_TO_NEITIZNOT);
 			} else {
 				RellekkaUtils.sail(player, RellekkaDestination.NEITIZNOT_TO_RELLEKKA);
 			}
-			end();
 			break;
 		case 4:
 			npc("Thanks!");

@@ -3,6 +3,8 @@ package content.data;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 
+import static core.api.ContentAPIKt.hasRequirement;
+
 /**
  * A god book.
  * @author Vexia
@@ -98,6 +100,8 @@ public enum GodBook {
 	 * @param page the page.
 	 */
 	public void insertPage(Player player, Item book, Item page) {
+                if (!hasRequirement(player, "Horror from the Deep"))
+                        return;
 		if (hasPage(player, book, page)) {
 			player.sendMessage("The book already has that page.");
 			return;

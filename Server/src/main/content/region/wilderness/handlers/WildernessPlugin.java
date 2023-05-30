@@ -13,6 +13,8 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.hasRequirement;
+
 /**
  * Represents a plugin used to handle wilderness nodes.
  * 
@@ -45,6 +47,8 @@ public final class WildernessPlugin extends OptionHandler {
 			ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, Location.create(3239, 3606, 0), "You climb up the ladder to the surface.");
 			break;
 		case 39188:
+                        if (!hasRequirement(player, "Defender of Varrock"))
+                            break;
 			ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_DOWN, Location.create(3241, 9991, 0), "You descend into the cavern below.");
 			break;
 		case 37928:

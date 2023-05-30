@@ -15,6 +15,7 @@ import core.tools.RandomFunction;
 import static core.api.ContentAPIKt.inEquipment;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_BASE;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_RC;
+import static core.api.ContentAPIKt.hasRequirement;
 import core.game.world.GameWorld;
 import org.rs09.consts.Items;
 
@@ -96,6 +97,18 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
 
     @Override
     public boolean checkRequirements() {
+        if (altar == Altar.ASTRAL) {
+            if (!hasRequirement(player, "Lunar Diplomacy"))
+                return false;
+        }
+        if (altar == Altar.DEATH) {
+            if (!hasRequirement(player, "Mourning's End Part II"))
+                return false;
+        }
+        if (altar == Altar.BLOOD) {
+            if (!hasRequirement(player, "Legacy of Seergaze"))
+                return false;
+        }
         if (!altar.isOurania() && player.getSkills().getLevel(Skills.RUNECRAFTING) < rune.getLevel()) {
             player.getPacketDispatch().sendMessage("You need a Runecrafting level of at least " + rune.getLevel() + " to craft this rune.");
             return false;

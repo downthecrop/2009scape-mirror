@@ -16,6 +16,8 @@ import kotlin.Unit;
 import core.game.system.config.DoorConfigLoader;
 import core.game.world.GameWorld;
 
+import static core.api.ContentAPIKt.hasRequirement;
+
 import java.awt.*;
 
 /**
@@ -65,7 +67,11 @@ public final class DoorActionHandler {
             return;
         }
         DoorConfigLoader.Door d = DoorConfigLoader.Companion.forId(object.getId());
-        if (d == null) {
+        if (d != null && !d.getQuestRequirement().equals("")) {
+            if (!hasRequirement(player, d.getQuestRequirement()))
+                return;
+        }
+        if (d == null || d.isAutoWalk()) {
             handleAutowalkDoor(player, object);
             return;
         }

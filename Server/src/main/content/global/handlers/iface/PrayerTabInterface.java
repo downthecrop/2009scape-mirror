@@ -8,6 +8,8 @@ import core.game.node.entity.player.link.prayer.PrayerType;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.hasRequirement;
+
 /**
  * Represents the prayer interface.
  * @author 'Vexia
@@ -24,6 +26,9 @@ public final class PrayerTabInterface extends ComponentPlugin {
 	@Override
 	public boolean handle(Player player, Component component, int opcode, int button, int slot, int itemId) {
 		final PrayerType type = PrayerType.get(button);
+                if (type == PrayerType.CHIVALRY || type == PrayerType.PIETY)
+                    if (!hasRequirement(player, "King's Ransom"))
+                        return true;
 		if (type == null) {
 			return true;
 		}

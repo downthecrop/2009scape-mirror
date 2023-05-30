@@ -23,6 +23,8 @@ import content.global.travel.EssenceTeleport;
 import core.game.world.GameWorld;
 import core.plugin.ClassScanner;
 
+import static core.api.ContentAPIKt.hasRequirement;
+
 /**
  * Handles runecraftign related options.
  * @author Vexia
@@ -94,7 +96,12 @@ public class RunecraftingPlugin extends OptionHandler {
 				player.sendMessage("You can only craft Astral runes on Lunar Isle.");
 				return true;
 			}
-			player.getPulseManager().run(new RuneCraftPulse(player, null, Altar.forObject(((Scenery) node)), false, null));
+                        Altar a = Altar.forObject(((Scenery) node));
+                        if (a == Altar.ASTRAL) {
+                            if (!hasRequirement(player, "Lunar Diplomacy"))
+                                return true;
+                        }
+			player.getPulseManager().run(new RuneCraftPulse(player, null, a, false, null));
 			break;
 		case "locate":
 			final Talisman talisman = Talisman.forItem(((Item) node));

@@ -5,6 +5,9 @@ import core.cache.def.impl.NPCDefinition;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import core.game.node.entity.player.Player;
+
+import static core.api.ContentAPIKt.hasRequirement;
 
 /**
  * A non-garbage way of representing tasks
@@ -29,7 +32,7 @@ public enum Tasks {
     CATABLEPONS(35, new int[] { 4397, 4398, 4399, }, new String[] { "They use the magic spell Weaken to drain up to 15% of their", "opponent's maximum Strength level." }, 1, false, false),
     CAVE_BUG(1, new int[] { 1832, 5750, }, new String[] { "It regenerates life points quickly and seems to be a good", "herblore monster." }, 7, false, false),
     CAVE_CRAWLERS(10, new int[] { 1600, 1601, 1602, 1603, }, new String[] { "The poisonous parts of them are presumably removed." }, 10, false, false),
-    CAVE_HORRORS(85, new int[] { 4353, 4354, 4355, 4356, 4357, }, new String[] { "A Cave horror wears a creepy mask, it is", "prefered to wear a witchwood icon." }, 58, false, false),
+    CAVE_HORRORS(85, new int[] { 4353, 4354, 4355, 4356, 4357, }, new String[] { "A Cave horror wears a creepy mask, it is", "prefered to wear a witchwood icon." }, 58, "Cabin Fever"),
     CAVE_SLIMES(15, new int[] { 1831 }, new String[] { "These are lesser versions of jellies, watch out they can poison you." }, 17, false, false),
     COCKATRICES(25, new int[] { 1620, 1621, 4227, }, new String[] { "A Mirror shield is necessary when fighting these monsters." }, 25, false, false),
     COWS(5, new int[] { 1766, 1768, 2310, 81, 397, 955, 1767, 3309 }, new String[] { "Cow's may seem stupid, however they know more then", "you think. Don't under estimate them." }, 1, false, false),
@@ -88,6 +91,7 @@ public enum Tasks {
     TROLLS(60, new int[] { 72, 3584, 1098, 1096, 1097, 1095, 1101, 1105, 1102, 1103, 1104, 1130, 1131, 1132, 1133, 1134, 1106, 1107, 1108, 1109, 1110, 1111, 1112, 1138, 1560, 1561, 1562, 1563, 1564, 1565, 1566, 1935, 1936, 1937, 1938, 1939, 1940, 1941, 1942, 3840, 3841, 3842, 3843, 3845, 1933, 1934, }, new String[] { "Trolls have a crushing attack, it's bets to wear a high crushing defence." }, 1, false, false),
     TUROTHS(60, new int[] { 1626, 1627, 1628, 1629, 1630 }, new String[] { "Turoths are Slayer monsters that require a Slayer level of 55 to kill" }, 55, false, false),
     TZHAAR(45, new int[] { 2591, 2592, 2593, 2745, 2594, 2595, 2596, 2597, 2604, 2605, 2606, 2607, 2608, 2609, 7755, 7753, 2598, 2599, 2600, 2601, 2610, 2611, 2612, 2613, 2614, 2615, 2616, 2624, 2617, 2618, 2625, 2602, 2603, 7754, 7767, 2610, 2611, 2612, 2613, 2614, 2615, 2616, 2624, 2625, 2627, 2628, 2629, 2630, 2631, 2632, 7746, 7747, 7748, 7749, 7750, 7751, 7752, 7753, 7754, 7755, 7756, 7757, 7758, 7759, 7760, 7761, 7762, 7763, 7764, 7765, 7766, 7767, 7768, 7769, 7770, 7771, 7747, 7747, 7748, 7749, 7750, 7751, 7752, 7753, 7757, 7765, 7769, 7768 }, new String[] { "Young Tzhaar's of the century are furious with your kind." }, 1, false, false),
+    SUQAHS (65, new int[] { 4527, 4528, 4529, 4530, 4531, 4532, 4533 }, new String[] { "Suquah are big, angry folk that inhabit Lunar Isle." }, 1, "Lunar Diplomacy"),
     VAMPIRES(35, new int[] { 1023, 1220, 1223, 1225, 6214 }, new String[] { "Vampies arr equiped with large fangs", "they can do serious damage." }, 1, false, false),
     WATERFIENDS(75, new int[] { 5361 }, new String[] { "A waterfiend takes no damage from fire!" }, 1, false, false),
     WEREWOLFS(60, new int[] { 1665, 6006, 6007, 6008, 6009, 6010, 6011, 6012, 6013, 6014, 6015, 6016, 6017, 6018, 6019, 6020, 6021, 6022, 6023, 6024, 6025, 6212, 6213, 6607, 6609, 6614, 6617, 6625, 6632, 6644, 6663, 6675, 6686, 6701, 6712, 6724, 6728, }, new String[] { "There temper is alot more nasty then a regular wolf!" }, 1, false, false),
@@ -111,9 +115,10 @@ public enum Tasks {
     public final int combatCheck;
     public final String[] info;
     public final int[] ids;
-    public final boolean undead;
-    public final boolean dragon;
+    public boolean undead = false;
+    public boolean dragon = false;
     public int amtHash;
+    public String questReq = "";
     Tasks(int combatCheck, int[] ids, String[] info, int levelReq, boolean undead, boolean dragon){
         this.levelReq = levelReq;
         this.ids = ids;
@@ -133,12 +138,24 @@ public enum Tasks {
         this.combatCheck = combatCheck;
     }
 
+    Tasks (int combatCheck, int[] ids, String[] info, int levelReq, String questReq) {
+        this.combatCheck = combatCheck;
+        this.ids = ids;
+        this.info = info;
+        this.levelReq = levelReq;
+        this.questReq = questReq;
+    }
+
     public int[] getNpcs(){
         return ids;
     }
 
     public String[] getTip(){
         return info;
+    }
+
+    public boolean hasQuestRequirements (Player player) {
+        return questReq.equals("") || hasRequirement(player, questReq, false);
     }
 
     public static Tasks forId(int id){

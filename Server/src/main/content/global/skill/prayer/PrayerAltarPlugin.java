@@ -16,6 +16,8 @@ import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.hasRequirement;
+
 /**
  * Handles the praying at an alter.
  * @author Vexia
@@ -104,6 +106,8 @@ public class PrayerAltarPlugin extends OptionHandler {
 		ANCIENT(6552, SpellBook.ANCIENT.getInterfaceId(), "You feel a strange wisdom fill your mind...", "You feel a strange drain upon your memory...") {
 			@Override
 			public void pray(Player player) {
+                                if (!hasRequirement(player, "Desert Treasure"))
+                                    return;
 				if (player.getSkills().getStaticLevel(Skills.MAGIC) < 50) {
 					player.sendMessage("You need a Magic level of at least 50 in order to do this.");
 					return;
@@ -121,6 +125,8 @@ public class PrayerAltarPlugin extends OptionHandler {
 		LUNAR(17010, SpellBook.LUNAR.getInterfaceId(), "Lunar spells activated!", "Modern spells activated!") {
 			@Override
 			public void pray(Player player) {
+                                if (!hasRequirement(player, "Lunar Diplomacy"))
+                                    return;
 				if (player.getSkills().getStaticLevel(Skills.MAGIC) < 65) {
 					player.sendMessage("You need a Magic level of at least 65 in order to do this.");
 					return;

@@ -11,6 +11,8 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.hasRequirement;
+
 
 /**
  * Temporarily fix to allow people into shilo village by foot until the Shilo Village quest is added
@@ -39,6 +41,8 @@ public class BrokenCartBypass extends OptionHandler {
         });
     }
     public final boolean handle(Player player, Node node, String options){
+        if (!hasRequirement(player, "Shilo Village"))
+            return true;
         Location location = new Location(0,0);
         Location playerloc = new Location(player.getLocation().getX(),player.getLocation().getY());
         if(options.equals("look-at")) {

@@ -33,6 +33,11 @@ class UseWithPatchHandler : InteractionListener {
             val patch = FarmingPatch.forObject(with.asScenery()) ?: return@onUseWith true
             val usedItem = used.asItem()
 
+            if (patch == FarmingPatch.TROLL_STRONGHOLD_HERB) {
+                if (!hasRequirement(player, "My Arm's Big Adventure"))
+                    return@onUseWith true
+            }
+
             player.faceLocation(with.location)
             when(usedItem.id){
                 RAKE -> PatchRaker.rake(player,patch)

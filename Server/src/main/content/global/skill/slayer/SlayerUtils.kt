@@ -31,7 +31,7 @@ object SlayerUtils {
 
     fun canBeAssigned(player: Player, task: Tasks): Boolean
     {
-        return player.getSkills().getLevel(Skills.SLAYER) >= task.levelReq && !SlayerManager.getInstance(player).flags.removed.contains(task)
+        return player.getSkills().getLevel(Skills.SLAYER) >= task.levelReq && !SlayerManager.getInstance(player).flags.removed.contains(task) && task.hasQuestRequirements(player)
     }
 
     fun assign(player: Player, task: Tasks, master: Master)

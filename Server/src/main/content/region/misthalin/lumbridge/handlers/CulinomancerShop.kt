@@ -92,6 +92,7 @@ class CulinomancerShop : LoginListener {
                 stock[i].amount = 30
                 stock[i + 10].amount = 5
             }
+            stock[9].amount = 1
             return stock
         }
 

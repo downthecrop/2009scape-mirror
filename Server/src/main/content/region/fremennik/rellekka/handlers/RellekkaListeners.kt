@@ -1,5 +1,6 @@
 package content.region.fremennik.rellekka.handlers
 
+import core.api.*
 import core.game.world.map.Location
 import org.rs09.consts.NPCs
 import core.game.interaction.InteractionListener
@@ -47,6 +48,8 @@ class RellekkaListeners : InteractionListener {
         }
 
         on(NPCs.MARIA_GUNNARS_5508, IntType.NPC, "ferry-neitiznot"){ player, _ ->
+            if (!hasRequirement(player, "Fremennik Trials"))
+                return@on true
             RellekkaUtils.sail(player, RellekkaDestination.RELLEKKA_TO_NEITIZNOT)
             return@on true
         }
@@ -57,6 +60,8 @@ class RellekkaListeners : InteractionListener {
         }
 
         on(NPCs.MORD_GUNNARS_5481, IntType.NPC, "ferry-jatizso"){ player, node ->
+            if (!hasRequirement(player, "Fremennik Trials"))
+                return@on true
             RellekkaUtils.sail(player, RellekkaDestination.RELLEKKA_TO_JATIZSO)
             return@on true
         }

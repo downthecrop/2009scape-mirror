@@ -16,6 +16,8 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 
+import static core.api.ContentAPIKt.hasRequirement;
+
 /**
  * Handles the slayer reward interface plugin.
  * @author Vexia
@@ -307,6 +309,8 @@ public class SlayerRewardPlugin extends ComponentPlugin {
 
 		@Override
 		public boolean handle(Player player, Node node, String option) {
+                        if (!hasRequirement(player, "Smoking Kills"))
+                            return true;
 			openTab(player, BUY);
 			return true;
 		}

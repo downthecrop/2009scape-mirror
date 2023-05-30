@@ -89,6 +89,19 @@ class ItemQuestRequirementListener : InteractionListener {
 
     private val questCapes = intArrayOf(9813,9814)
 
+    private val godBooks = intArrayOf (
+        Items.HOLY_BOOK_3840,
+        Items.UNHOLY_BOOK_3842
+    )
+
+    private val pharaohScepters = (9044..9051).toIntArray()
+
+    private val initiateArmour = (5574..5576).toIntArray()
+    
+    private val proselyteArmour = (9672..9678).toIntArray()
+
+    private val spiritShields = (13734..13745).toIntArray()
+
     override fun defineListeners() {
 
         /*
@@ -109,20 +122,24 @@ class ItemQuestRequirementListener : InteractionListener {
         }
          */
 
-        onEquip(fremennikTrialsEquipment.plus(fremennikIslesEquipment)) { player, _ ->
-            return@onEquip requireQuest(player, "Fremennik Trials", "to equip this.")
+        onEquip(fremennikTrialsEquipment) { player, _ ->
+            return@onEquip hasRequirement(player, "Fremennik Trials")
+        }
+
+        onEquip(fremennikIslesEquipment) {player, _ -> 
+            return@onEquip hasRequirement(player, "The Fremennik Isles")
         }
 
         onEquip(avasBackpacks){ player, _ ->
-            return@onEquip requireQuest(player, "Animal Magnetism", "to equip this.")
+            return@onEquip hasRequirement(player, "Animal Magnetism")
         }
 
         onEquip(lostCityWeapons){ player, _ ->
-            return@onEquip requireQuest(player, "Lost City", "to equip this.")
+            return@onEquip hasRequirement(player, "Lost City")
         }
 
         onEquip(Items.CAPE_OF_LEGENDS_1052) { player, _ ->
-            return@onEquip requireQuest(player, "Legends' Quest", "to equip this.")
+            return@onEquip hasRequirement(player, "Legend's Quest")
         }
 
         onEquip(questCapes) { player, _ ->
@@ -135,27 +152,84 @@ class ItemQuestRequirementListener : InteractionListener {
         }
 
         onEquip(Items.WOLFBANE_2952){ player, _ ->
-            return@onEquip requireQuest(player, "Priest in Peril", "to equip this.")
+            return@onEquip hasRequirement(player, "Priest in Peril")
        }
 
         onEquip(Items.ANCIENT_MACE_11061){ player, _ ->
-            return@onEquip requireQuest(player, "Another Slice of H.A.M.", "to equip this.")
+            return@onEquip hasRequirement(player, "Another Slice of H.A.M")
         }
 
         onEquip(Items.ANCIENT_STAFF_4675){ player, _ ->
-            return@onEquip requireQuest(player, "Desert Treasure", "to equip this.")
+            return@onEquip hasRequirement(player, "Desert Treasure")
         }
 
         onEquip(Items.ELEMENTAL_SHIELD_2890) { player, _ ->
-            return@onEquip requireQuest(player, "Elemental Workshop I", "to equip this.")
+            return@onEquip hasRequirement(player, "Elemental Workshop I")
         }
 
         onEquip(crystalEquipment){ player, _ ->
-            return@onEquip requireQuest(player, "Roving Elves", "to equip this.")
+            return@onEquip hasRequirement(player, "Roving Elves")
         }
 
         onEquip(dragonSlayerEquipment) {player, _ ->
-            return@onEquip requireQuest(player, "Dragon Slayer", "to equip this.")
+            return@onEquip hasRequirement(player, "Dragon Slayer")
+        }
+
+        onEquip(Items.DRAGON_SCIMITAR_4587) {player, _ ->
+            return@onEquip hasRequirement(player, "Monkey Madness")
+        }
+
+        onEquip(Items.GLOVES_7462) {player, _ -> 
+            return@onEquip hasRequirement(player, "Recipe for Disaster")
+        }
+
+        onEquip(Items.SLAYER_HELMET_13263) {player, _ ->
+            return@onEquip hasRequirement(player, "Smoking Kills")
+        }
+
+        onEquip (Items.DRAGON_HALBERD_3204) {player, _ ->
+            return@onEquip hasRequirement(player, "Regicide")
+        }
+
+        onEquip (Items.CLIMBING_BOOTS_3105) {player, _ ->
+            return@onEquip hasRequirement(player, "Death Plateau")
+        }
+
+        onEquip (godBooks) {player, _ ->
+            return@onEquip hasRequirement(player, "Horror from the Deep")
+        }
+
+        onEquip (pharaohScepters) {player, _ ->
+            return@onEquip hasRequirement(player, "Icthlarin's Little Helper")
+        }
+
+        onEquip (Items.DRAGON_SQ_SHIELD_1187) {player, _ ->
+            //because I know people won't believe it: https://runescape.wiki/w/Dragon_sq_shield?oldid=899636 
+            return@onEquip hasRequirement(player, "Legend's Quest")
+        }
+
+        onEquip (initiateArmour) {player, _ ->
+            return@onEquip hasRequirement(player, "Recruitment Drive")
+        }
+
+        onEquip (proselyteArmour) {player, _ ->
+            return@onEquip hasRequirement(player, "The Slug Menace")
+        }
+
+        onEquip (spiritShields) {player, _ -> 
+            return@onEquip hasRequirement(player, "Summer's End")
+        }
+
+        onEquip (Items.DRAGON_MACE_1434) {player, _ -> 
+            return@onEquip hasRequirement(player, "Heroes' Quest")
+        }
+
+        onEquip (Items.DRAGON_BATTLEAXE_1377) {player, _ ->
+            return@onEquip hasRequirement(player, "Heroes' Quest")
+        }
+
+        onEquip (Items.DARKLIGHT_6746) {player, _ ->
+            return@onEquip hasRequirement(player, "Shadow of the Storm")
         }
     }
 }

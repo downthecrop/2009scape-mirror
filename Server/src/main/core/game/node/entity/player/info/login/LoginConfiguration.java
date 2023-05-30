@@ -18,6 +18,8 @@ import core.tools.SystemLogger;
 import core.game.world.GameWorld;
 import core.game.world.repository.Repository;
 import core.game.world.update.UpdateSequence;
+import core.game.node.entity.player.link.SpellBookManager;
+import core.game.node.item.GroundItemManager;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,6 +29,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 import static core.api.ContentAPIKt.log;
+import static core.api.ContentAPIKt.hasRequirement;
+import static core.tools.GlobalsKt.colorize;
 
 
 /**
@@ -148,8 +152,31 @@ public final class LoginConfiguration {
             //We should have already been doing this.
             //Frankly, I don't even want to imagine the number of bugs us *not* doing this has caused.
             if (item == null) continue;
-            InteractionListeners.run(item.getId(), player, item, true);
+            player.getEquipment().remove(item);
+            if (!InteractionListeners.run(item.getId(), player, item, true) || !player.getEquipment().add(item, true, false)) {
+                if (player.getInventory().add(item))
+                    player.sendMessage (colorize("%RAs you can no longer wear " + item.getName() + ", it has been unequipped."));
+                else if (player.getBankPrimary().add(item))
+                    player.sendMessage (colorize("%RAs you can no longer wear " + item.getName() + ", it has been sent to your bank."));
+                else if (player.getBankSecondary().add(item))
+                    player.sendMessage (colorize("%RAs you can no longer wear " + item.getName() + ", it has been sent to your secondary bank."));
+                else {
+                    player.sendMessage (colorize("%RAs you can no longer wear " + item.getName() + ", and your inventory and both banks are full,"));
+                    player.sendMessage (colorize("%RIt has been placed on the ground under your feet. Don't forget to grab it."));
+                    player.sendMessage ("(Also, consider cleaning out your banks maybe? I mean jesus.)");
+                    GroundItemManager.create (item, player);
+                }
+            }
         }
+        SpellBookManager.SpellBook currentSpellBook = SpellBookManager.SpellBook.forInterface(player.getSpellBookManager().getSpellBook());
+        if (currentSpellBook == SpellBookManager.SpellBook.ANCIENT && !hasRequirement(player, "Desert Treasure")) {
+            player.sendMessage(colorize("%RAs you can no longer use Ancient Magic, you have been set back to Modern."));
+            player.getSpellBookManager().setSpellBook(SpellBookManager.SpellBook.MODERN);
+        } else if (currentSpellBook == SpellBookManager.SpellBook.LUNAR && !hasRequirement(player, "Lunar Diplomacy")) {
+            player.sendMessage(colorize("%RAs you can no longer use Lunar Magic, you have been set back to Modern."));
+            player.getSpellBookManager().setSpellBook(SpellBookManager.SpellBook.MODERN);
+        }
+        player.getSpellBookManager().update(player);
         if(ServerConstants.RULES_AND_INFO_ENABLED)
             RulesAndInfo.openFor(player);
 		/*if (GameWorld.getSettings().isPvp()) {

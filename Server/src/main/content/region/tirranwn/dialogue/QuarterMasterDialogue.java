@@ -5,6 +5,8 @@ import core.game.node.entity.npc.NPC;
 import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
 
+import static core.api.ContentAPIKt.hasRequirement;
+
 /**
  * Handles the quarter master dialogue.
  * @author Vexia
@@ -40,6 +42,10 @@ public final class QuarterMasterDialogue extends DialoguePlugin {
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
 		npc("Hi, would you like to see my wares?");
+                if (!hasRequirement(player, "Regicide")) {
+                    end();
+                    return true;
+                }
 		return true;
 	}
 

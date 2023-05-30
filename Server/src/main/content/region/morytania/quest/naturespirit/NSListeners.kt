@@ -182,6 +182,20 @@ class NSListeners : InteractionListener {
             NSUtils.activatePouch(player, with as MortMyreGhastNPC)
         }
 
+        onUseWith(IntType.NPC, Items.SECATEURS_5329, NPCs.NATURE_SPIRIT_1051) {player, used, with -> 
+            if (!hasRequirement(player, "Fairytale I - Growing Pains"))
+                return@onUseWith true
+            if (amountInInventory(player, Items.COINS_995) < 40000) {
+                sendDialogue(player, "You need 40,000 coins to do this.")
+                return@onUseWith true
+            }
+            if (removeItem(player, used) && removeItem(player, Item(Items.COINS_995, 40000))) {
+                sendItemDialogue(player, Items.MAGIC_SECATEURS_7409, "Your secateurs are enchanted into magic secateurs")
+                addItem(player, Items.MAGIC_SECATEURS_7409)
+            }
+            return@onUseWith true
+        }
+
         onUseWith(IntType.SCENERY, items, *stones) { player, used, with ->
             when (used.id) {
                 USED_SPELLCARD -> {

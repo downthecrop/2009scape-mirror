@@ -5,12 +5,14 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.entity.player.link.TeleportManager
 import content.global.skill.runecrafting.Altar
+import core.game.world.map.Location
 import core.game.world.map.zone.impl.DarkZone
 import core.plugin.Initializable
 import core.game.world.GameWorld
 import content.global.skill.farming.*
 import core.api.getAttribute
 import core.api.sendDialogue
+import core.api.hasRequirement
 
 enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)? = null) {
     BAREFISTED_SMITHING("cape_perks:barefisted-smithing"),
@@ -184,12 +186,20 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
                 else -> null
             }
 
+            end()
             if(spellbook != null){
+                if (spellbook == SpellBookManager.SpellBook.ANCIENT) {
+                    if (!hasRequirement(player, "Desert Treasure"))
+                        return true
+                }
+                else if (spellbook == SpellBookManager.SpellBook.LUNAR) {
+                    if (!hasRequirement(player, "Lunar Diplomacy"))
+                        return true
+                }
                 player.spellBookManager.setSpellBook(spellbook)
                 player.interfaceManager.openTab(Component(spellbook.interfaceId))
                 player.incrementAttribute("/save:cape_perks:librarian-magus-charges",-1)
             }
-            end()
             return true
         }
 
@@ -244,7 +254,16 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
 
         fun sendAltar(player: Player,altar: Altar){
             end()
-            player.teleporter.send(altar.ruin.end,TeleportManager.TeleportType.TELE_OTHER)
+            if (altar == Altar.DEATH && !hasRequirement(player, "Mourning's End Part II"))
+                return
+            else if (altar == Altar.ASTRAL && !hasRequirement(player, "Lunar Diplomacy"))
+                return
+            else if (altar == Altar.BLOOD && !hasRequirement(player, "Legacy of Seergaze"))
+                return
+
+            var endLoc = if (altar == Altar.ASTRAL) Location.create(2151, 3864, 0) else altar.ruin.end
+
+            player.teleporter.send(endLoc, TeleportManager.TeleportType.TELE_OTHER)
             player.incrementAttribute("/save:cape_perks:abyssal_warp",-1)
         }
 

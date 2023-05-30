@@ -4,6 +4,8 @@ import core.cache.def.impl.ItemDefinition;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 
+import static core.api.ContentAPIKt.hasRequirement;
+
 /**
  * Represents an altar an it's relative information(corresponding ruin, etc)
  * @author 'Vexia
@@ -69,6 +71,18 @@ public enum Altar {
 	 * @param player the player.
 	 */
 	public void enterRift(Player player) {
+                if (this == ASTRAL) {
+                    if (!hasRequirement(player, "Lunar Diplomacy"))
+                        return;
+                }
+                if (this == DEATH) {
+                    if (!hasRequirement(player, "Mourning's End Part II"))
+                        return;
+                }
+                if (this == BLOOD) {
+                    if (!hasRequirement(player, "Legacy of Seergaze"))
+                        return;
+                }
 		if (this == LAW) {
 			if (!ItemDefinition.canEnterEntrana(player)) {
 				player.sendMessage("You can't take weapons and armour into the law rift.");

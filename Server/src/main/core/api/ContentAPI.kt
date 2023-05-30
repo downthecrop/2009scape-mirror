@@ -69,6 +69,7 @@ import core.api.utils.Vector
 import core.tools.*
 import core.game.world.update.flag.*
 import core.game.world.update.flag.context.*
+import core.game.requirement.*
 import java.util.regex.*
 import java.io.*
 import kotlin.math.*
@@ -1695,6 +1696,46 @@ fun announceIfRare(player: Player, item: Item) {
         sendNews("${player.username} has just received: ${item.amount} x ${item.name}.");
         GlobalKillCounter.incrementRareDrop(player, item);
     }
+}
+
+fun hasRequirement (player: Player, req: QuestReq, message: Boolean = true) : Boolean {
+    var (isMet, unmetReqs) = req.evaluate(player)
+    val messageList = ArrayList<String>()
+
+    var totalSoftQp = 0
+    var totalHardQp = 0
+
+    for (req in unmetReqs) {
+        when (req) {
+            is QPCumulative -> totalSoftQp += req.amount
+            is QPReq -> if (req.amount > totalHardQp) totalHardQp = req.amount
+        }
+    }
+
+    var neededQp = min(max(totalSoftQp, totalHardQp), player.questRepository.getAvailablePoints())
+
+    isMet = isMet && neededQp < player.questRepository.getPoints()
+
+    if (isMet) return true
+    
+    if (unmetReqs.size == 2 && unmetReqs[0] is QuestReq) {
+        messageList.add ("This requires completion of ${(unmetReqs[0] as QuestReq).questReq.questName} to access.")
+    } else {
+        messageList.add ("You need the pre-reqs for ${req.questReq.questName} to access this.")
+        messageList.add ("Please check the page in your quest journal for more info.")
+    }
+
+    if (message)
+        for (message in messageList) 
+            sendMessage(player, message)
+
+    return false
+}
+
+@JvmOverloads
+fun hasRequirement (player: Player, quest: String, message: Boolean = true) : Boolean {
+    val questReq = QuestRequirements.values().filter { it.questName.equals(quest, true) }.firstOrNull() ?: return false
+    return hasRequirement(player, QuestReq(questReq), message)
 }
 
 /**

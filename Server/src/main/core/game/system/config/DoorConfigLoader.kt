@@ -30,6 +30,8 @@ class DoorConfigLoader {
             door.replaceId = e["replaceId"].toString().toInt()
             door.isFence = e["fence"].toString().toBoolean()
             door.isMetal = e["metal"].toString().toBoolean()
+            door.isAutoWalk = e["autowalk"]?.toString()?.toBoolean() ?: false
+            door.questRequirement = e["questRequirement"]?.toString() ?: ""
             DOORS[door.id] = door
             count++
         }
@@ -93,6 +95,8 @@ class DoorConfigLoader {
          * Is the door metal?
          */
         var isMetal = false
+
+        var questRequirement = ""
 
     }
 }

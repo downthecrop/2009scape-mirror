@@ -1,8 +1,6 @@
 package content.minigame.pyramidplunder
 
-import core.api.EquipmentSlot
-import core.api.openDialogue
-import core.api.sendMessage
+import core.api.*
 import core.game.world.GameWorld.Pulser
 import content.minigame.pyramidplunder.PyramidPlunderMinigame.Companion.GUARDIAN_ROOM
 import core.game.node.entity.player.Player
@@ -25,6 +23,9 @@ class PharaohSceptre : InteractionListener {
         val SCEPTRES = intArrayOf(Items.PHARAOHS_SCEPTRE_9044, Items.PHARAOHS_SCEPTRE_9046, Items.PHARAOHS_SCEPTRE_9048, Items.PHARAOHS_SCEPTRE_9050)
 
         on(SCEPTRES, IntType.ITEM, "teleport", "operate"){ player, node ->
+            if (!hasRequirement(player, "Icthlarin's Little Helper"))
+                return@on true
+
             val sceptre = node.asItem()
 
             if(sceptre.id == SCEPTRES.last())

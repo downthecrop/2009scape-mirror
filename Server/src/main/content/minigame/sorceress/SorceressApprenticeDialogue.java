@@ -10,6 +10,8 @@ import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Graphics;
 
+import static core.api.ContentAPIKt.hasRequirement;
+
 /**
  * Dialogue for Sorceress Apprentice
  * @author SonicForce41
@@ -236,6 +238,8 @@ public class SorceressApprenticeDialogue extends DialoguePlugin {
 	}
 
 	public static void teleport(final NPC npc, final Player player) {
+                if (!hasRequirement(player, "Prince Ali Rescue"))
+                    return;
 		npc.faceTemporary(player, 4);
 		npc.graphics(new Graphics(108));
 		player.lock();

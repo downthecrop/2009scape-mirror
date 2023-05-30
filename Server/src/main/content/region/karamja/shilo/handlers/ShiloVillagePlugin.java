@@ -15,6 +15,8 @@ import core.game.world.map.RegionManager;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 
+import static core.api.ContentAPIKt.hasRequirement;
+
 /**
  * Handles shilo village interactions.
  * @author Vexia
@@ -40,6 +42,8 @@ public final class ShiloVillagePlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
+                if (!hasRequirement(player, "Shilo Village"))
+                    return true;
 		switch (node.getId()) {
 		case 511:
 		case 510:
@@ -91,6 +95,10 @@ public final class ShiloVillagePlugin extends OptionHandler {
 			npc = (NPC) args[0];
 			shilo = npc.getId() == 510;
 			npc("Hello Bwana!");
+                        if (!hasRequirement(player, "Shilo Village")) {
+                            end();
+                            return true;
+                        }
 			return true;
 		}
 

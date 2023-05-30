@@ -14,6 +14,8 @@ import core.plugin.Plugin;
 import java.util.Arrays;
 import java.util.List;
 
+import static core.api.ContentAPIKt.hasRequirement;
+
 /**
  * Handles all the agility obstacles for Roving Elves.
  * @authors Splinter & downthecrop
@@ -94,6 +96,8 @@ public final class RovingElvesObstacles extends OptionHandler {
 
 		switch (node.getId()) {
 			case 8742:
+                                if (!hasRequirement(player, "Mourning's End Part I"))
+                                    return true;
 				player.teleport(player.getLocation().transform(EAST_WEST, 2));
 				break;
 			case 3999:

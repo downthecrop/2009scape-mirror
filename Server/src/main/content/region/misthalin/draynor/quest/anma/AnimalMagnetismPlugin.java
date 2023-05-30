@@ -35,6 +35,7 @@ import core.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
 import static core.api.ContentAPIKt.teleport;
+import static core.api.ContentAPIKt.hasRequirement;
 
 /**
  * Handles the animal magnetism plugin.
@@ -61,6 +62,8 @@ public final class AnimalMagnetismPlugin extends OptionHandler {
 	public boolean handle(Player player, Node node, String option) {
 		switch (node.getId()) {
 		case 5167:
+                        if (!hasRequirement(player, "Creature of Fenkenstrain"))
+                            break;
 			player.teleport(new Location(3577, 9927));
 			break;
 		case 5198:
@@ -76,6 +79,8 @@ public final class AnimalMagnetismPlugin extends OptionHandler {
 			break;
 		case 4251:
 		case 4252:
+                        if (!hasRequirement(player, "Ghosts Ahoy"))
+                            return true;
 			if (option.equalsIgnoreCase("empty")) {
 				handleEctophial(player, (Item) node);
 			} else {

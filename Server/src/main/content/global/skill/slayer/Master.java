@@ -242,7 +242,7 @@ public enum Master {
 			new Task(Tasks.SPIRTUAL_RANGERS,2),
 			new Task(Tasks.SPIRTUAL_WARRIORS,2),
 			new Task(Tasks.STEEL_DRAGONS,7),
-			//new Task(Tasks.SUQAHS,8),
+			new Task(Tasks.SUQAHS,8),
 			new Task(Tasks.TROLLS,6),
 			new Task(Tasks.TZHAAR, 10),
 			new Task(Tasks.VAMPIRES,8),

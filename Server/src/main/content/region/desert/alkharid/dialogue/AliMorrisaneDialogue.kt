@@ -7,6 +7,8 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
 
+import core.api.*
+
 /**
  * Represents the ali morrisane dialogue.
  * @author 'Vexia
@@ -34,6 +36,8 @@ class AliMorrisaneDialogue(player: Player? = null) : DialoguePlugin(player) {
                 1 -> playerl(FacialExpression.ASKING, "If you are, then why are you still selling goods from a stall?").also { stage = 10 }
                 2 -> {
                     end()
+                    if (!hasRequirement(player, "The Feud"))
+                        return true
                     npc.openShop(player)
                 }
             }
@@ -55,6 +59,8 @@ class AliMorrisaneDialogue(player: Player? = null) : DialoguePlugin(player) {
                 }
                 2 -> {
                     end()
+                    if (!hasRequirement(player, "The Feud"))
+                        return true
                     npc.openShop(player)
                 }
             }

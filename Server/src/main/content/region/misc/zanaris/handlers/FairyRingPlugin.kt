@@ -1,7 +1,6 @@
 package content.region.misc.zanaris.handlers
 
-import core.api.anyInEquipment
-import core.api.isQuestComplete
+import core.api.*
 import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager.TeleportType
@@ -42,7 +41,7 @@ class FairyRingPlugin : InteractionListener {
     }
 
     private fun fairyMagic(player: Player) : Boolean {
-        if (!isQuestComplete(player,"Lost City")) { // should be converted to a FTP2 stage requirement once FTP2 is implemented
+        if (!hasRequirement(player, "Fairytale I - Growing Pains")) { // should be converted to a FTP2 stage requirement once FTP2 is implemented
             player.sendMessage("The fairy ring is inert.")
             return false
         }

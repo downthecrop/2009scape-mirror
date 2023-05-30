@@ -12,6 +12,8 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.hasRequirement;
+
 /**
  * The plugin for handling stuff in Sophanem.
  * @author jamix77
@@ -32,6 +34,8 @@ public class SophanemPlugin extends OptionHandler {
 		final int id = node instanceof Scenery ? ((Scenery) node).getId() : ((Item) node).getId();
 		switch (id) {
 		case 20275:
+                        if (!hasRequirement(player, "Contact!"))
+                            break;
 			ClimbActionHandler.climb(player, new Animation(827), Location.create(2799, 5160, 0));
 			break;
 		case 20277:

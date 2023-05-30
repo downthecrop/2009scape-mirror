@@ -17,6 +17,8 @@ import core.plugin.Plugin;
 import core.plugin.Initializable;
 import core.plugin.ClassScanner;
 
+import static core.api.ContentAPIKt.hasRequirement;
+
 /**
  * Represents the hero guild.
  * @author Vexia
@@ -40,7 +42,8 @@ public final class HeroGuildPlugin extends OptionHandler {
 			switch (id) {
 			case 2624:
 			case 2625:
-				// player.getPacketDispatch().sendMessage("You need to complete the Heroes' Quest.");
+                                if (!hasRequirement(player, "Heroes' Quest"))
+                                    return true;
 				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				break;
 			}
@@ -79,9 +82,16 @@ public final class HeroGuildPlugin extends OptionHandler {
 		@Override
 		public boolean handle(NodeUsageEvent event) {
 			final Player player = event.getPlayer();
+                        if (!hasRequirement(player, "Heroes' Quest"))
+                            return true;
 			final EnchantedJewellery jewellery;
 			assert event.getUsedItem() != null;
 			jewellery = EnchantedJewellery.Companion.getIdMap().get(event.getUsedItem().getId());
+                        if (!hasRequirement(player, "Heroes' Quest"))
+                            return true;
+                        if (jewellery == EnchantedJewellery.COMBAT_BRACELET || jewellery == EnchantedJewellery.SKILLS_NECKLACE)
+                            if (!hasRequirement(player, "Legend's Quest"))
+                                return true;
 			if (jewellery == null && event.getUsedItem().getId() != 2572) {
 				return true;
 			}

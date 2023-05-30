@@ -1983,7 +1983,9 @@
     "id": "20391",
     "replaceId": "28518",
     "fence": "false",
-    "metal": "true"
+    "metal": "true",
+    "autowalk": "true",
+    "questRequirement": "Icthlarin's Little Helper"
   },
   {
     "id": "21065",

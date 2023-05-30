@@ -21,6 +21,8 @@ import core.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 
+import static core.api.ContentAPIKt.hasRequirement;
+
 /**
  * Handles the lumbridge basement.
  * @author Vexia
@@ -191,6 +193,8 @@ public class LumbridgeBasementPlugin extends OptionHandler {
 		@Override
 		public boolean handle(NodeUsageEvent event) {
 			final Player player = event.getPlayer();
+                        if (!hasRequirement(player, "While Guthix Sleeps"))
+                            return true;
 			player.lock(2);
 			player.teleport(Location.create(2538, 5881, 0));
 			return true;

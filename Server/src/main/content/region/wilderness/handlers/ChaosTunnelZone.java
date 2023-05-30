@@ -27,6 +27,8 @@ import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
+import static core.api.ContentAPIKt.hasRequirement;
+
 /**
  * Handles the chaos tunnels.
  * @author Vexia
@@ -230,8 +232,9 @@ public final class ChaosTunnelZone extends MapZone implements Plugin<Object> {
 	 * @param player the player.
 	 */
 	private void teleport(Player player, Scenery object) {
-		if (object.getLocation().getX() == 3142 || object.getLocation().getY() == 5545) {
-			commenceBorkBattle(player);
+		if (object.getLocation().getX() == 3142 && object.getLocation().getY() == 5545) {
+                        if (hasRequirement(player, "What Lies Below"))
+			    commenceBorkBattle(player);
 			return;
 		}
 		Location loc = getLocation(object.getLocation());

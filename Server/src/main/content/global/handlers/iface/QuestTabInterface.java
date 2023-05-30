@@ -47,7 +47,7 @@ public class QuestTabInterface extends ComponentPlugin {
 								p.getInterfaceManager().open(new Component(275));
 								quest.drawJournal(p, quest.getStage(p));
 								return true;
-							}
+							} else QuestTabUtils.showRequirementsInterface(p, button);
 //						}
 						return false;
 				}

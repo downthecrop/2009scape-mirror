@@ -11,6 +11,7 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.MinimapStateContext;
 import core.plugin.Initializable;
 import core.net.packet.out.MinimapState;
+import static core.api.ContentAPIKt.hasRequirement;
 
 /**
  * Handles the lokar searunner dialogue.
@@ -109,6 +110,8 @@ public class LokarSearunnerDialogue extends DialoguePlugin {
 	 * @param location the location.
 	 */
 	private void travel(final Player player, final Location location) {
+                if (!hasRequirement(player, "Lunar Diplomacy"))
+                    return;
 		player.lock();
 		GameWorld.getPulser().submit(new Pulse(1, player) {
 			int counter;

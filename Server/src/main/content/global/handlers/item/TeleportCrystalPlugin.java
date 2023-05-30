@@ -13,6 +13,8 @@ import core.game.world.map.Location;
 import core.game.world.map.zone.impl.WildernessZone;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.hasRequirement;
+
 /**
  * Represents the rotten potato plugin.
  * @author 'Vexia
@@ -32,6 +34,8 @@ public final class TeleportCrystalPlugin extends OptionHandler {
 
 	 @Override
 	    public boolean handle(Player player, Node node, String option) {
+                if (!hasRequirement(player, "Mourning's End Part I"))
+                    return true;
 	        if (!WildernessZone.checkTeleport(player, 20)) {
 	            player.getPacketDispatch().sendMessage("The crystal is unresponsive.");
 	            return true;
