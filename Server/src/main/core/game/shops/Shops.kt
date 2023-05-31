@@ -16,9 +16,9 @@ import core.game.interaction.IntType
 import core.game.interaction.InterfaceListener
 import core.tools.SystemLogger
 import core.game.system.command.Privilege
-import core.tools.END_DIALOGUE
-import core.tools.Log
 import java.io.FileReader
+import core.tools.*
+import core.game.ge.*
 
 /**
  * The "controller" class for shops. Handles opening shops from various NPC interactions and updating stock, etc.
@@ -34,6 +34,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
         @JvmStatic val personalizedShops = "world.personalized_shops"
         @JvmStatic val shopsById = HashMap<Int, Shop>()
         @JvmStatic val shopsByNpc = HashMap<Int, Shop>()
+        private var lastPlayerStockClear = 0
 
         @JvmStatic fun openId(player: Player, id: Int)
         {
@@ -109,6 +110,16 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
 
     override fun tick() {
         shopsById.values.forEach(Shop::restock)
+
+        val playerStockClearInterval = secondsToTicks(ServerConstants.PLAYER_STOCK_CLEAR_INTERVAL * 60)
+        if (getWorldTicks() % playerStockClearInterval == 0) {
+            val clearToGe = ServerConstants.PLAYER_STOCK_RECIRCULATE
+            if (clearToGe) {
+                for (item in Shop.generalPlayerStock.toArray().filter{it != null})
+                    GrandExchange.addBotOffer(item.id, item.amount)
+            }
+            Shop.generalPlayerStock.clear()
+        }
     }
 
     override fun defineListeners() {

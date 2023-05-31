@@ -284,5 +284,11 @@ class ServerConstants {
 
         @JvmField
         var IRONMAN_ICONS = false
+
+        @JvmField
+        var PLAYER_STOCK_CLEAR_INTERVAL = 1
+
+        @JvmField
+        var PLAYER_STOCK_RECIRCULATE = true
     }
 }
