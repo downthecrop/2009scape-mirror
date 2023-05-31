@@ -99712,7 +99712,7 @@
   },
   {
     "destroy_message": "You can reclaim this item from the place you found it.",
-    "examine": "A scroll for Sir Tiffy. The wax seal is broken. / Before reading the scroll: A scroll for Sir Tiffy. It is sealed with a wax insignia.",
+    "examine": "A scroll for Sir Tiffy. It is sealed with a wax insignia.",
     "durability": null,
     "name": "Knight's notes",
     "tradeable": "false",
@@ -99722,7 +99722,7 @@
   },
   {
     "destroy_message": "You can reclaim this item from the place you found it.",
-    "examine": "A scroll for Sir Tiffy. The wax seal is broken. / Before reading the scroll: A scroll for Sir Tiffy. It is sealed with a wax insignia.",
+    "examine": "A scroll for Sir Tiffy. The wax seal is broken.",
     "durability": null,
     "name": "Knight's notes",
     "tradeable": "false",

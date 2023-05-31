@@ -14,9 +14,18 @@ import core.game.node.entity.player.Player
  * This will handle component(26), component(27) and component(49) globally.
  * DO NOT extend this class or override on(26), on(27), on(49) for defineInterfaceListeners.
  *
- * Instead, simply call BookInterface.pageSetup(...) and pass two attributes.
+ * Instead, simply call BookInterface.pageSetup(...) and pass two attributes to open a book.
  * bookInterfaceCallback - function to callback (player: Player, pageNum: Int, buttonID: Int) : Boolean
  * bookInterfaceCurrentPage - 0 for first page.
+ * Recommend creating a display() function both to be called when opening an item and passing it to the callback.
+ *
+ * You may at any time after pageSetup,
+ * - call any functions below
+ * - call player.packetDispatch.sendInterfaceConfig
+ * - call player.packetDispatch.sendString
+ *
+ * @see content.region.desert.quest.thegolem.VarmensNotes for a quest-like example.
+ * @see content.global.handlers.item.book.GeneralRuleBook for an interactive page-jumping book.
  *
  * @author ovenbreado
  */
@@ -41,7 +50,7 @@ class BookInterface : InterfaceListener {
         /** Sets up standard pagination and page numbering. Call this for default setup of book components. */
         fun pageSetup(player: Player, bookComponent: Int, title: String, contents: Array<PageSet>) {
             val currentPage = getAttribute(player, "bookInterfaceCurrentPage", 0)
-            closeInterface(player) // Important: Close previous book interfaces.
+            closeInterface(player) // Important: Close previous interfaces.
             if (bookComponent == FANCY_BOOK_26) {
                 openInterface(player, FANCY_BOOK_26) // Important: Opens the current interface.
                 clearBookLines(player, FANCY_BOOK_26, FANCY_BOOK_26_LINE_IDS);
@@ -115,14 +124,15 @@ class BookInterface : InterfaceListener {
             }
         }
 
-        /** Check book is read. Trigger off  */
+        /** Function to check if player read to the last page. For quest triggers.  */
         fun isLastPage(pageNum: Int, totalPages: Int): Boolean {
             return pageNum == totalPages - 1;
         }
 
         /** PRIVATE: Increments the current page and invokes the callback function. */
         private fun changePageAndCallback(player: Player, increment: Int, buttonId: Int) {
-            val callback :((player: Player, pageNum: Int, buttonId: Int) -> Boolean)? = getAttribute(player, "bookInterfaceCallback", null)
+            val callback: ((player: Player, pageNum: Int, buttonId: Int) -> Boolean)? =
+                getAttribute(player, "bookInterfaceCallback", null)
             val currentPage = getAttribute(player, "bookInterfaceCurrentPage", 0)
             setAttribute(player, "bookInterfaceCurrentPage", currentPage + increment)
 
@@ -166,6 +176,7 @@ class PageSet(vararg pages: Page) {
         this.pages = pages as Array<Page>
     }
 }
+
 /** Constructs a new Page object. */
 class Page(vararg lines: BookLine) {
     val lines: Array<BookLine>
@@ -174,8 +185,9 @@ class Page(vararg lines: BookLine) {
         this.lines = lines as Array<BookLine>
     }
 }
-/** Constructs a new Page object. */
-class BookLine (
+
+/** Constructs a new BookLine object. */
+class BookLine(
     val message: String,
     val child: Int
 )
