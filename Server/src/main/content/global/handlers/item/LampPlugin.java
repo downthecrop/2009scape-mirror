@@ -48,7 +48,7 @@ public final class LampPlugin extends OptionHandler {
 		} else {
 			if(player.getInventory().remove((Item) player.getAttribute("lamp"))) {
 				if (lamp == Lamps.GENIE_LAMP) {
-					player.getSkills().addExperience(skill, player.getSkills().getLevel(skill) * 10);
+					player.getSkills().addExperience(skill, player.getSkills().getStaticLevel(skill) * 10);
 				} else {
 					player.getSkills().addExperience(skill, lamp.getExp());
 				}

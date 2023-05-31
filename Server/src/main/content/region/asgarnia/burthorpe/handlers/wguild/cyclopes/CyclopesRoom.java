@@ -102,13 +102,13 @@ public final class CyclopesRoom extends MapZone implements Plugin<Object> {
 
 	@Override
 	public boolean leave(Entity e, boolean logout) {
-		if (e instanceof Player && PLAYERS.contains(e)) {
+		if (e instanceof Player) {
 			leave((Player) e);
 			PLAYERS.remove(e);
 			if (logout) {
 				e.setLocation(Location.create(2846, 3540, 2));
 			}
-			clearLogoutListener((Player) e, "cyclopes");
+		        clearLogoutListener((Player) e, "cyclopes");
 		}
 		return super.leave(e, logout);
 	}
