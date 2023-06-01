@@ -34,33 +34,37 @@ class FarmingPatchZone : MapArea, TickListener {
 
     override fun tick() {
         playersInZone.toList().forEach { (player, ticks) ->
-            if(ticks == 500){
-                val npc = NPC(NPCs.GITHAN_7122)
-                npc.location = player.location
-                npc.init()
-                npc.moveStep()
-                npc.face(player)
-                openDialogue(player, SpiritDialogue(true), npc)
-            } else if (ticks == 1000){
-                val npc = NPC(NPCs.GITHAN_7122)
-                npc.location = player.location
-                npc.init()
-                npc.moveStep()
-                npc.face(player)
-                openDialogue(player, SpiritDialogue(false), npc)
-                playersInZone.remove(player)
+            if(!player.isArtificial) {
+                if (ticks == 500) {
+                    spawnGithan(player, true)
+                } else if (ticks == 1000) {
+                    spawnGithan(player, false)
+                }
+                playersInZone[player] = ticks + 1
             }
-
-            playersInZone[player] = ticks + 1
         }
     }
 
-    internal class SpiritDialogue(val is5: Boolean) : DialogueFile(){
+    /**
+     * Spawns a Githan at a player if they've been standing in a farming patch zone for long enough.
+     * @param player The player to spawn the Githan at.
+     * @param firstDialogue Whether the Githan should play the first dialogue or not (and playing the second dialogue instead).
+     */
+    private fun spawnGithan(player: Player, firstDialogue: Boolean) {
+        val npc = NPC(NPCs.GITHAN_7122)
+        npc.location = player.location
+        npc.init()
+        npc.moveStep()
+        npc.face(player)
+        openDialogue(player, SpiritDialogue(firstDialogue), npc)
+    }
+
+    internal class SpiritDialogue(private val firstDialogue: Boolean) : DialogueFile(){
         override fun handle(componentID: Int, buttonID: Int) {
             when(stage){
                 0 -> {
-                    if(is5) npcl(core.game.dialogue.FacialExpression.NEUTRAL, "In case you didn't know, you don't have to stand by your Farming patch. Your crops will grow even if you're not around.").also { stage++ }
-                    else npcl(core.game.dialogue.FacialExpression.NEUTRAL, " Did you know that if your Farming patch has fully grown, it will never catch disease or die? It will be perfectly safe until you choose to harvest it.").also { stage++ }
+                    if(firstDialogue) npcl(FacialExpression.NEUTRAL, "In case you didn't know, you don't have to stand by your Farming patch. Your crops will grow even if you're not around.").also { stage++ }
+                    else npcl(FacialExpression.NEUTRAL, "Did you know that if your Farming patch has fully grown, it will never catch disease or die? It will be perfectly safe until you choose to harvest it.").also { stage++ }
                 }
                 1 -> end()
             }
