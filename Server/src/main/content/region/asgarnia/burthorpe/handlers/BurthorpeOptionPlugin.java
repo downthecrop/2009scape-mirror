@@ -34,28 +34,12 @@ public final class BurthorpeOptionPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		NPCDefinition.forId(1063).getHandlers().put("option:talk-to", this);// soldier
-		NPCDefinition.forId(1061).getHandlers().put("option:talk-to", this);// sergant
-		NPCDefinition.forId(1066).getHandlers().put("option:talk-to", this);// seated
-		// soldier
-		NPCDefinition.forId(1067).getHandlers().put("option:talk-to", this);// seated
-		// soldier
-		NPCDefinition.forId(1068).getHandlers().put("option:talk-to", this);// seated
-		// soldier
-		NPCDefinition.forId(1064).getHandlers().put("option:talk-to", this);// other
-		// soldiers
-		NPCDefinition.forId(1062).getHandlers().put("option:talk-to", this);// other
-		// sergant
 		SceneryDefinition.forId(7257).getHandlers().put("option:enter", this);// thieving
 		// guide
 		// trapdoor.
 		SceneryDefinition.forId(7258).getHandlers().put("option:enter", this);// thieving
 		// guide
 		// passegeway.
-		NPCDefinition.forId(1073).getHandlers().put("option:talk-to", this);
-		NPCDefinition.forId(1074).getHandlers().put("option:talk-to", this);
-		NPCDefinition.forId(1076).getHandlers().put("option:talk-to", this);
-		NPCDefinition.forId(1077).getHandlers().put("option:talk-to", this);
 		SceneryDefinition.forId(4624).getHandlers().put("option:climb-down", this);
 		SceneryDefinition.forId(4627).getHandlers().put("option:climb-down", this);
 		return this;
@@ -86,31 +70,6 @@ public final class BurthorpeOptionPlugin extends OptionHandler {
 				break;
 			case 7258:
 				player.getProperties().setTeleportLocation(BAR_LOCATION);
-				break;
-			}
-			break;
-		case "talk-to":
-			switch (id) {
-			case 1064:
-			case 1063:// training soldier.
-				player.getPacketDispatch().sendMessage("The soldier is busy training.");
-				break;
-			case 1062:
-			case 1061:// sergeant
-				player.getPacketDispatch().sendMessage("The Sergeant is busy training the soldiers.");
-				break;
-			case 1066:// eating soldier.
-			case 1067:// eating soldier.
-			case 1068:// eating soldier.
-				player.getPacketDispatch().sendMessage("The soldier is busy eating.");
-				break;
-			case 1073:
-			case 1074:
-				player.getPacketDispatch().sendMessage("The archer won't talk whilst on duty.");
-				break;
-			case 1076:
-			case 1077:
-				player.getPacketDispatch().sendMessage("The soldier won't talk whilst on duty.");
 				break;
 			}
 			break;
