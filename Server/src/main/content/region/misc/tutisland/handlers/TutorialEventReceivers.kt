@@ -65,7 +65,7 @@ object TutorialButtonReceiver : EventHook<ButtonClickEvent>
             }
 
             //click run button
-            25 -> if(event.iface == 261 && event.buttonId == 3){
+            25 -> if(event.iface == 261 && event.buttonId == 3 || event.iface == 750 && event.buttonId == 1){
                 setAttribute(entity, "tutorial:stage", 26)
                 TutorialStage.load(entity, 26)
             }
