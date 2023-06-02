@@ -31,3 +31,4 @@ gradle
 **/*.swo
 build/kotlin/sessions/
 **/*.iml
+Server/hasRan.txt

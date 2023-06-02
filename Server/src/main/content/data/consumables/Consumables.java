@@ -345,6 +345,7 @@ public enum Consumables {
 	RELIC_MIX(new BarbarianMix(new int[] {11437, 11439}, new MultiEffect(new RemoveStateEffect("disease"), new SetAttributeEffect("disease:immunity", 300), new HealingEffect(3)))),
 	STR_MIX(new BarbarianMix(new int[] {11443, 11441}, new MultiEffect(new SkillEffect(Skills.STRENGTH, 3, 0.1), new HealingEffect(3)))),
 	RESTO_MIX(new BarbarianMix(new int[] {11449, 11451}, new MultiEffect(new RestoreEffect(10, 0.3), new HealingEffect(3)))),
+	SUPER_RESTO_MIX(new BarbarianMix(new int [] {11493, 11495}, new MultiEffect(new RestoreEffect(8,0.25), new PrayerEffect(8, 0.25), new SummoningEffect(8, 0.25), new HealingEffect(6)))),
 	ENERGY_MIX(new BarbarianMix(new int[] {11453, 11455}, new MultiEffect(new EnergyEffect(10), new HealingEffect(6)))),
 	DEF_MIX(new BarbarianMix(new int[] {11457, 11459}, new MultiEffect(new SkillEffect(Skills.DEFENCE, 3, 0.1), new HealingEffect(6)))),
 	AGIL_MIX(new BarbarianMix(new int[] {11461, 11463}, new MultiEffect(new SkillEffect(Skills.AGILITY, 3, 0), new HealingEffect(6)))),
