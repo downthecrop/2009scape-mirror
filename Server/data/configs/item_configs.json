@@ -16073,6 +16073,13 @@
     "id": "1508"
   },
   {
+    "examine": "Turnip growing for beginners.",
+    "durability": null,
+    "name": "Book",
+    "archery_ticket_price": "0",
+    "id": "1509"
+  },
+  {
     "examine": "A picture of a lady called Elena.",
     "durability": null,
     "name": "Picture",
@@ -107012,7 +107019,7 @@
     "id": "12650"
   },
   {
-    "examine": "Common bucket: It's a bucket of water.2008 Easter event: It's a bucket of water from the Easter Bunny's warren. Regular bucket filled from Braindeath Island: It's a bucket of... water?",
+    "examine": "It's a bucket of water.",
     "grand_exchange_price": "74",
     "durability": null,
     "name": "Bucket of water",
