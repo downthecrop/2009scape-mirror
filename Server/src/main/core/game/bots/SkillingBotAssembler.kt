@@ -21,8 +21,9 @@ class SkillingBotAssembler {
             val item = Item(i)
             val configs = item.definition.handlers
             val slot = configs["equipment_slot"] ?: continue
-            bot.equipment.add(item, slot as Int,
-                    false,false)
+			if(bot.inventory.get(slot as Int) == null) {
+				bot.equipment.add(item, slot as Int,false,false)
+			}
             val reqs = configs["requirements"]
             if(reqs != null)
                 for(req in configs["requirements"] as HashMap<Int,Int>)

@@ -1,6 +1,9 @@
 package core.game.bots
 
 import core.api.*
+import core.game.interaction.NodeUsageEvent
+import core.game.interaction.PluginInteractionManager
+import core.game.interaction.UseWithHandler
 import core.cache.def.impl.ItemDefinition
 import core.game.component.Component
 import core.game.consumable.Consumable
@@ -88,6 +91,36 @@ class ScriptAPI(private val bot: Player) {
         if(!InteractionListeners.run(node.id, type, option, bot, node)) node.interaction.handle(bot, opt)
     }
 
+    fun useWith(bot: Player, itemId: Int, node: Node?) {
+        if(node == null) return
+
+		val type = when(node){
+			is Scenery -> IntType.SCENERY
+			is NPC -> IntType.NPC
+			is Item -> IntType.ITEM
+			else -> null
+		} ?: return
+
+		val item = bot.inventory.getItem(Item(itemId))
+
+		val childNode = node.asScenery()?.getChild(bot)
+
+        if (InteractionListeners.run(item, node, type, bot))
+            return
+        if (childNode != null && childNode.id != node.id) {
+            if (InteractionListeners.run(item, childNode, type, bot))
+                return
+        }
+        val flipped = type == IntType.ITEM && item.id < node.id
+        val event = if (flipped)
+            NodeUsageEvent(bot, 0, node, item)
+        else
+            NodeUsageEvent(bot, 0, item, childNode ?: node)
+        if (PluginInteractionManager.handle(bot, event))
+            return
+        UseWithHandler.run(event)
+    }
+
     fun sendChat(message: String) {
         bot.sendChat(message)
         bot.updateMasks.register(EntityFlag.Chat, ChatMessage(bot, message, 0, 0))
@@ -144,7 +177,11 @@ class ScriptAPI(private val bot: Player) {
             return processEvaluationList(RegionManager.forId(bot.location.regionId).planes[bot.location.z].entities, acceptedName = listOf(name))
     }
 
-    fun evaluateViability (e: Node?, minDistance: Double, maxDistance: Double, acceptedNames: List<String>? = null, acceptedId: Int = -1): Boolean {
+    fun getNearestObjectByPredicate(predicate: (Node?) -> Boolean): Node? {
+        return processEvaluationList(RegionManager.forId(bot.location.regionId).planes[bot.location.z].objectList, acceptedPredicate = predicate)
+    }
+
+    fun evaluateViability (e: Node?, minDistance: Double, maxDistance: Double, acceptedNames: List<String>? = null, acceptedId: Int = -1, acceptedPredicate: ((Node?) -> Boolean)? = null): Boolean {
         if (e == null || !e.isActive) 
             return false
         if (acceptedId != -1 && e.id != acceptedId)
@@ -154,16 +191,20 @@ class ScriptAPI(private val bot: Player) {
         if (dist > maxDistance || dist > minDistance)
             return false
 
-        val name = e?.name
-        return (acceptedNames?.contains(name) ?: true && !Pathfinder.find(bot, e).isMoveNear)
+        if (acceptedPredicate != null) {
+            return acceptedPredicate(e) && !Pathfinder.find(bot, e).isMoveNear;
+        } else {
+            val name = e?.name
+            return (acceptedNames?.stream()?.anyMatch({ s -> s.equals(name, true) }) ?: true && !Pathfinder.find(bot, e).isMoveNear)
+        }
     }
 
-    fun processEvaluationList (list: List<Node>, acceptedName: List<String>? = null, acceptedId: Int = -1): Node? {
+    fun processEvaluationList (list: List<Node>, acceptedName: List<String>? = null, acceptedId: Int = -1, acceptedPredicate: ((Node?) -> Boolean)? = null): Node? {
         var entity: Node? = null
         var minDistance = Double.MAX_VALUE
         val maxDistance = ServerConstants.MAX_PATHFIND_DISTANCE.toDouble()
         for (e in list) {
-            if (evaluateViability(e, minDistance, maxDistance, acceptedName, acceptedId)) {
+            if (evaluateViability(e, minDistance, maxDistance, acceptedName, acceptedId, acceptedPredicate)) {
                 entity = e
                 minDistance = distance(bot, e)
             }
@@ -583,15 +624,21 @@ class ScriptAPI(private val bot: Player) {
      * @param none
      * @author cfunnyman joe
      */
-    fun bankAll(){
+    fun bankAll(onComplete: (() -> Unit)? = null){
         class BankingPulse() : Pulse(20){
             override fun pulse(): Boolean {
                 for(item in bot.inventory.toArray()){
-                    var itemAmount = bot.inventory.getAmount(item)
+					if(item != null) {
+						var itemAmount = bot.inventory.getAmount(item)
 
-                    bot.inventory.remove(item)
-                    bot.bank.add(item)
+						if(bot.inventory.remove(item)) {
+							bot.bank.add(item)
+						}
+					}
                 }
+				if(onComplete != null) {
+					onComplete?.invoke()
+				}
                 return true
             }
         }

@@ -36,6 +36,7 @@ class ImmerseWorld : StartupListener {
                     immerseWilderness()
                     immerseFishingGuild()
                     immerseAdventurer()
+					immerseFalador()
                     // immerseSlayer()
                     immerseGE()
                 }
@@ -211,6 +212,10 @@ class ImmerseWorld : StartupListener {
                 CoalMiner(),
                 skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR, Location.create(3037, 9737, 0))
             )
+			GeneralBotCreator(
+				CannonballSmelter(),
+				skillingBotAssembler.produce(SkillingBotAssembler.Wealth.AVERAGE, Location.create(3013, 3356, 0))
+			)
         }
 
         fun immerseSlayer() {

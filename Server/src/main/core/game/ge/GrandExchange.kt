@@ -359,6 +359,20 @@ class GrandExchange : StartupListener, Commands {
             return offers
         }
 
+        fun getBotstockForId(itemId: Int): Int {
+            var total = 0
+            GEDB.run { conn ->
+                val stmt = conn.prepareStatement("SELECT sum(amount) FROM bot_offers WHERE amount > 0 AND item_id = ?")
+                stmt.setInt(1, itemId)
+
+                val results = stmt.executeQuery()
+                while (results.next()) {
+                    total += results.getInt(1)
+                }
+            }
+            return total
+        }
+
     }
 
     override fun startup(){

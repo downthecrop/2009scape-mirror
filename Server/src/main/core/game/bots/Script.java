@@ -13,6 +13,7 @@ public abstract class Script {
     public ArrayList<Item> inventory = new ArrayList<>(20);
     public ArrayList<Item> equipment = new ArrayList<>(20);
     public Map<Integer, Integer> skills = new HashMap<>();
+    public ArrayList<String> quests = new ArrayList<>(20);
 
 
     public Player bot;
@@ -25,15 +26,19 @@ public abstract class Script {
         scriptAPI = new ScriptAPI(bot);
 
         if(!isPlayer) {
+            // Skills and quests need to be set before equipment in case equipment has level or quest requirements
+            for (Map.Entry<Integer, Integer> skill : skills.entrySet()) {
+                setLevel(skill.getKey(), skill.getValue());
+            }
+            for (String quest : quests) {
+                bot.getQuestRepository().setStage(bot.getQuestRepository().getQuest(quest), 100);
+            }
             for (Item i : equipment) {
                 bot.getEquipment().add(i, true, false);
             }
             bot.getInventory().clear();
             for (Item i : inventory) {
                 bot.getInventory().add(i);
-            }
-            for (Map.Entry<Integer, Integer> skill : skills.entrySet()) {
-                setLevel(skill.getKey(), skill.getValue());
             }
         }
     }
