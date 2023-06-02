@@ -2,6 +2,7 @@ package content.region.wilderness.handlers
 
 import core.api.*
 import core.game.node.entity.Entity
+import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player
 import content.global.skill.summoning.familiar.Familiar
 import core.game.world.map.zone.ZoneBorders
@@ -11,7 +12,7 @@ import core.tools.secondsToTicks
 class CorpAreaController : MapArea, TickListener {
     companion object {
         var activePlayers = ArrayList<Player>()
-        var corpBeast: CorporealBeastNPC? = null
+        var corpBeast: NPC? = null
         var borders = ZoneBorders(2974, 4369, 3007, 4400)
     }
 
@@ -26,11 +27,14 @@ class CorpAreaController : MapArea, TickListener {
     override fun areaEnter(entity: Entity) {
         if (entity is Player) {
             activePlayers.add(entity)
+            if(entity.familiarManager.hasFamiliar()) {
+                entity.familiarManager.familiar.call()
+            }
         }
         else if (entity is Familiar) {
             entity.setAttribute("corp-time-remaining", secondsToTicks(10)) //Familiars last about 10 seconds, based on https://www.youtube.com/watch?v=kOd6q5Q5ZKI
         }
-        else if (entity is CorporealBeastNPC) {
+        else if (entity is NPC && entity.behavior is CorporealBeastNPC) {
             corpBeast = entity
         }
     }
@@ -45,9 +49,10 @@ class CorpAreaController : MapArea, TickListener {
         if (activePlayers.size == 0) {
             corpBeast?.let {
                 it.skills.lifepoints = it.skills.maximumLifepoints
-                if (it.darkEnergyCore != null) {
-                    it.darkEnergyCore.clear()
-                    it.darkEnergyCore = null
+                val behavior = it.behavior as CorporealBeastNPC
+                if (behavior.darkEnergyCore != null) {
+                    behavior.darkEnergyCore.clear()
+                    behavior.darkEnergyCore = null
                 }
             }
         }

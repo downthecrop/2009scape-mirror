@@ -4,14 +4,19 @@ import content.data.BossKillCounter;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
+import core.game.node.entity.combat.CombatSwingHandler;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
+import core.game.node.entity.combat.MultiSwingHandler;
 import core.game.node.entity.combat.equipment.SwitchAttack;
+import core.game.node.entity.combat.equipment.Weapon;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
+import core.game.node.entity.npc.NPCBehavior;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.Skills;
 import core.game.system.task.Pulse;
+import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
@@ -19,9 +24,7 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
-import core.game.node.entity.combat.CombatSwingHandler;
-import core.game.node.entity.combat.MultiSwingHandler;
-import core.game.world.GameWorld;
+import org.rs09.consts.NPCs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +35,7 @@ import java.util.List;
  *
  */
 @Initializable
-public final class CorporealBeastNPC extends AbstractNPC {
+public final class CorporealBeastNPC extends NPCBehavior {
 
 	/**
 	 * The combat handler.
@@ -48,63 +51,50 @@ public final class CorporealBeastNPC extends AbstractNPC {
 	 * Constructs a new {@code CorporealBeastNPC} {@code Object}.
 	 */
 	public CorporealBeastNPC() {
-		this(8133, Location.create(2993, 4380, 2));
-	}
-	
-	/**
-	 * Constructs a new {@code CorporealBeastNPC} {@code Object}.
-	 * @param id The NPC id.
-	 * @param location The location.
-	 */
-	public CorporealBeastNPC(int id, Location location) {
-		super(id, location);
+        super(new int[]{NPCs.CORPOREAL_BEAST_8133});
 	}
 	
 	@Override
-	public void init() {
-		super.init();
-		configureBossData();
+	public void onCreation(NPC self) {
+		self.configureBossData();
 	}
 
 	@Override
-	public CombatSwingHandler getSwingHandler(boolean swing) {
+	public CombatSwingHandler getSwingHandlerOverride(NPC self, CombatSwingHandler original) {
 		return combatHandler;
 	}
 
-	@Override
-	public AbstractNPC construct(int id, Location location, Object... objects) {
-		return new CorporealBeastNPC(id, location);
-	}
-	
-	@Override
-	public double getFormattedHit(BattleState state, int hit) {
-		if (hit > 100) {
-			hit = 100;
-		}
-		return super.getFormattedHit(state, hit);
-	}
+    @Override
+    public void beforeDamageReceived(NPC self, Entity attacker, BattleState state) {
+        if(state.getStyle() == CombatStyle.MELEE || state.getStyle() == CombatStyle.RANGE) {
+            Weapon w = state.getWeapon();
+            String name = w != null ? w.getName() : "";
+            if(w == null || name.toLowerCase().indexOf("spear") == -1) {
+                if(state.getEstimatedHit() > 0) {
+                    state.setEstimatedHit(state.getEstimatedHit()/2);
+                }
+                if(state.getSecondaryHit() > 0) {
+                    state.setSecondaryHit(state.getSecondaryHit()/2);
+                }
+            }
+        }
+        if(state.getEstimatedHit() > 100) {
+            state.setEstimatedHit(100);
+        }
+        if(state.getSecondaryHit() > 100) {
+            state.setSecondaryHit(100);
+        }
+    }
 
 	@Override
-	public int[] getIds() {
-		return new int[] { 8133 };
-	}	
-	
-	@Override
-	public void finalizeDeath(Entity killer) {
-		super.finalizeDeath(killer);
-		BossKillCounter.addtoKillcount((Player) killer, this.getId());
+	public void onDeathFinished(NPC self, Entity killer) {
+		BossKillCounter.addtoKillcount((Player) killer, NPCs.CORPOREAL_BEAST_8133);
 		if (darkEnergyCore != null) {
 			darkEnergyCore.clear();
 			darkEnergyCore = null;
 		}
 	}
 	
-	@Override
-	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		init();
-		return super.newInstance(arg);
-	}
-
 	/**
 	 * Handles the Corporeal beast's combat.
 	 * @author Emperor
@@ -133,7 +123,7 @@ public final class CorporealBeastNPC extends AbstractNPC {
 
 		@Override
 		public int swing(Entity entity, Entity victim, BattleState state) {
-			spawnDarkCore((CorporealBeastNPC) entity, victim);
+			spawnDarkCore(entity, (CorporealBeastNPC)((NPC) entity).behavior, victim);
 			if (doStompAttack(entity)) {
 				entity.getProperties().getCombatPulse().setNextAttack(entity.getProperties().getAttackSpeed());
 				return -1;
@@ -158,19 +148,19 @@ public final class CorporealBeastNPC extends AbstractNPC {
 		 * @param npc The corporeal beast NPC.
 		 * @param victim The victim.
 		 */
-		private void spawnDarkCore(final CorporealBeastNPC npc, Entity victim) {
+		private void spawnDarkCore(Entity corp, final CorporealBeastNPC npc, Entity victim) {
 			if (npc.darkEnergyCore != null && npc.darkEnergyCore.isActive()) {
 				return;
 			}
-			double max = npc.getSkills().getMaximumLifepoints() * (0.3 + (npc.getViewport().getCurrentPlane().getPlayers().size() * 0.05));
-			if (npc.getSkills().getLifepoints() > max) {
+			double max = corp.getSkills().getMaximumLifepoints() * (0.3 + (corp.getViewport().getCurrentPlane().getPlayers().size() * 0.05));
+			if (corp.getSkills().getLifepoints() > max) {
 				return;
 			}
 			Location l = RegionManager.getTeleportLocation(victim.getLocation(), 3);
-			npc.darkEnergyCore = NPC.create(8127, l, npc);
+			npc.darkEnergyCore = NPC.create(8127, l, corp);
 			npc.darkEnergyCore.setActive(true);
-			Projectile.create(npc.getLocation().transform(2, 2, 0), l, 1828, 60, 0, 0, 60, 20, 0).send();
-			GameWorld.getPulser().submit(new Pulse(2, npc) {
+			Projectile.create(corp.getLocation().transform(2, 2, 0), l, 1828, 60, 0, 0, 60, 20, 0).send();
+			GameWorld.getPulser().submit(new Pulse(2, corp) {
 				@Override
 				public boolean pulse() {
 					npc.darkEnergyCore.init();

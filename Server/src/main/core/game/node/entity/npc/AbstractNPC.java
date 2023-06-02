@@ -41,25 +41,6 @@ public abstract class AbstractNPC extends NPC implements Plugin<Object> {
 		super.setWalks(autowalk);
 	}
 
-	/**
-	 * Configures default boss data.
-	 */
-	public void configureBossData() {
-		getProperties().setNPCWalkable(true);
-		getProperties().setCombatTimeOut(2);
-		if (!isAggressive()) {
-			setAggressive(true);
-			setDefaultBehavior();
-		}
-		if (getAggressiveHandler() != null) {
-			getAggressiveHandler().setChanceRatio(6);
-			getAggressiveHandler().setAllowTolerance(false);
-			getAggressiveHandler().setTargetSwitching(true);
-			getAggressiveHandler().setRadius(64);
-		}
-		walkRadius = 64;
-	}
-
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		for (int id : getIds()) {
