@@ -177,6 +177,7 @@ public class TeleportManager {
 		return currentTeleport;
 	}
 
+
 	/**
 	 * Represents a NodeType for Teleporter
 	 * @author SonicForce41
@@ -189,7 +190,7 @@ public class TeleportManager {
 		NORMAL(new TeleportSettings(8939, 8941, 1576, 1577)) {
 			@Override
 			public Pulse getPulse(final Entity entity, final Location location) {
-				return new Pulse(1) {
+				return new TeleportPulse(entity) {
 					int delay = 0;
 
 					@Override
@@ -227,7 +228,7 @@ public class TeleportManager {
 		ANCIENT(new TeleportSettings(1979, -1, 392, -1)) {
 			@Override
 			public Pulse getPulse(final Entity entity, final Location location) {
-				return new Pulse(1) {
+				return new TeleportPulse(entity) {
 					int delay = 0;
 
 					@Override
@@ -260,7 +261,7 @@ public class TeleportManager {
 		LUNAR(new TeleportSettings(1816, -1, 747, -1)) {
 			@Override
 			public Pulse getPulse(final Entity entity, final Location location) {
-				return new Pulse(1) {
+				return new TeleportPulse(entity) {
 					int delay = 0;
 
 					@Override
@@ -293,7 +294,7 @@ public class TeleportManager {
 		TELETABS(new TeleportSettings(4731, -1, 678, -1)) {
 			@Override
 			public Pulse getPulse(final Entity entity, final Location location) {
-				return new Pulse(1) {
+				return new TeleportPulse(entity) {
 					int delay = 0;
 
 					@Override
@@ -331,7 +332,7 @@ public class TeleportManager {
 		HOME(new TeleportSettings(4847, 4857, 800, 804)) {
 			@Override
 			public Pulse getPulse(final Entity entity, final Location location) {
-				return new Pulse(1) {
+				return new TeleportPulse(entity) {
 					int count;
 					Player player;
 
@@ -382,7 +383,7 @@ public class TeleportManager {
 		OBELISK(new TeleportSettings(8939, 8941, 661, -1)) {
 			@Override
 			public Pulse getPulse(final Entity entity, final Location location) {
-				return new Pulse(1) {
+				return new TeleportPulse(entity) {
 					int delay = 0;
 
 					@Override
@@ -406,7 +407,7 @@ public class TeleportManager {
 		TELE_OTHER(new TeleportSettings(1816, -1, 342, -1)) {
 			@Override
 			public Pulse getPulse(final Entity entity, final Location location) {
-				return new Pulse(1) {
+				return new TeleportPulse(entity) {
 					int delay = 0;
 
 					@Override
@@ -434,7 +435,7 @@ public class TeleportManager {
 			@Override
 			public Pulse getPulse(final Entity entity, final Location location) {
 				entity.graphics(Graphics.create(569));
-				return new Pulse(1, entity) {
+				return new TeleportPulse(entity) {
 					int delay;
 
 					@Override
@@ -462,7 +463,7 @@ public class TeleportManager {
 		PURO_PURO(new TeleportSettings(6601, 1118, -1, -1)) {
 			@Override
 			public Pulse getPulse(final Entity entity, final Location location) {
-				return new Pulse(1) {
+				return new TeleportPulse(entity) {
 					int delay = 0;
 
 					@Override
@@ -485,7 +486,7 @@ public class TeleportManager {
 		ECTOPHIAL(new TeleportSettings(8939, 8941, 1587, 1588)) {
 			@Override
 			public Pulse getPulse(final Entity entity, final Location location) {
-				return new Pulse(1) {
+				return new TeleportPulse(entity) {
 					int delay = 0;
 
 					@Override
@@ -523,7 +524,7 @@ public class TeleportManager {
 		CHRISTMAS(new TeleportSettings(7534, -1, 1292, -1)) {
 			@Override
 			public Pulse getPulse(final Entity entity, final Location location) {
-				return new Pulse(1) {
+				return new TeleportPulse(entity) {
 					int delay = 0;
 
 					@Override
@@ -561,7 +562,7 @@ public class TeleportManager {
 		CABBAGE(new TeleportSettings(9984, 9986, 1731, 1732)) {
 			@Override
 			public Pulse getPulse(final Entity entity, final Location location) {
-				return new Pulse(1) {
+				return new TeleportPulse(entity) {
 					int delay = 0;
 
 					@Override
@@ -598,7 +599,7 @@ public class TeleportManager {
 		ENTRANA_MAGIC_DOOR(new TeleportSettings(10100, 9013, 1745, 1747)) { //
 			@Override
 			public Pulse getPulse(final Entity entity, final Location location) {
-				return new Pulse(1) {
+				return new TeleportPulse(entity) {
 					int delay = 0;
 
 					@Override
@@ -636,7 +637,7 @@ public class TeleportManager {
 		MINIGAME(new TeleportSettings(6601, 1118, -1, -1)) {
 			@Override
 			public Pulse getPulse(final Entity entity, final Location location) {
-				return new Pulse(1) {
+				return new TeleportPulse(entity) {
 					int delay = 0;
 					Player player;
 
@@ -673,7 +674,7 @@ public class TeleportManager {
 		INSTANT(new TeleportSettings(-1, -1, -1, -1)) {
 			@Override
 			public Pulse getPulse(final Entity entity, final Location location) {
-				return new Pulse(1) {
+				return new TeleportPulse(entity) {
 					int delay = 0;
 
 					@Override

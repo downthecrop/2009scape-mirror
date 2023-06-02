@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player;
 import core.game.world.GameWorld;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import core.game.world.repository.Repository;
 
 /**
  * Represents the interface used to logout of the game.
@@ -31,10 +32,11 @@ public final class LogoutInterface extends ComponentPlugin {
 			player.getPacketDispatch().sendMessage("You can't log out until 10 seconds after the end of combat.");
 			return true;
 		}
-		if (player.getAttribute("logoutDelay", 0) < GameWorld.getTicks()) {
-			player.getPacketDispatch().sendLogout();
-			player.setAttribute("logoutDelay", GameWorld.getTicks() + 3);
-		}
+                if (player.isTeleporting()) {
+                        player.sendMessage("Please finish your teleport before logging out.");
+                        return true;
+                }
+                Repository.getDisconnectionQueue().add(player);
 		return true;
 	}
 }

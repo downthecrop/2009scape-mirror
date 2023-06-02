@@ -64,6 +64,7 @@ class DisconnectionQueue {
         if (!force && !player.allowRemoval()) {
             return false
         }
+        player.packetDispatch.sendLogout()
         player.finishClear()
         Repository.removePlayer(player)
         try {

@@ -990,4 +990,8 @@ public abstract class Entity extends Node {
 	public boolean delayed() {
 		return scripts.getDelay() > GameWorld.getTicks();
 	}
+
+        public boolean isTeleporting() {
+            return getAttribute("tele-pulse", null) != null || properties.getTeleportLocation() != null;
+        }
 }

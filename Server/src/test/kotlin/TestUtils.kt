@@ -30,6 +30,7 @@ object TestUtils {
         val p = MockPlayer(name)
         p.ironmanManager.mode = ironman
         p.details.accountInfo.uid = uidCounter++
+        p.setPlaying(true);
         Repository.addPlayer(p)
         //Update sequence has a separate list of players for some reason...
         UpdateSequence.renderablePlayers.add(p)

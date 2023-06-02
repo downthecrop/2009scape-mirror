@@ -21,6 +21,7 @@ class PacketWriteQueue {
                 is UpdateSceneGraph,
                 is BuildDynamicScene,
                 is InstancedLocationUpdate,
+                is Logout,
                 is ClearRegionChunk -> packet.send(context)
                 //Rest get queued up and sent at the end of the tick (authentic)
                 else -> push(packet, context)

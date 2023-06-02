@@ -578,6 +578,7 @@ public class Player extends Entity {
 
 	@Override
 	public void commenceDeath(Entity killer) {
+                if (!isPlaying()) return;
 		super.commenceDeath(killer);
 		if (prayer.get(PrayerType.RETRIBUTION)) {
 			prayer.startRetribution(killer);
@@ -586,6 +587,7 @@ public class Player extends Entity {
 
 	@Override
 	public void finalizeDeath(Entity killer) {
+                if (!isPlaying()) return; //if the player has already been full cleared, it has already disconnected. This code is probably getting called because something is maintaining a stale reference.
 		GlobalStats.incrementDeathCount();
 		settings.setSpecialEnergy(100);
 		settings.updateRunEnergy(settings.getRunEnergy() - 100);
@@ -904,7 +906,7 @@ public class Player extends Entity {
 	 * @return {@code True} if so.
 	 */
 	public boolean allowRemoval() {
-		return !(inCombat() || getSkills().getLifepoints() < 1 || DeathTask.isDead(this));
+		return !(inCombat() || getSkills().getLifepoints() < 1 || DeathTask.isDead(this) || isTeleporting());
 	}
 
 	/**
