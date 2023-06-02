@@ -17,9 +17,10 @@ class DemonTauntHandler : InteractionListener {
     override fun defineListeners() {
         on(Scenery.RAILING_37668, IntType.SCENERY, "taunt-through") { player, _ ->
             val demon = findLocalNPC(player, NPCs.LESSER_DEMON_82) ?: return@on true
-
+            forceWalk(demon, player.location, "smart")
+            face(player, demon, 3)
             sendMessage(player, "You taunt the demon, making it growl.")
-            sendChat(demon, "Graaagh!")
+            sendChat(demon, "Graaaagh!")
             face(demon, player, 3)
             emote(player, Emotes.RASPBERRY)
             return@on true
