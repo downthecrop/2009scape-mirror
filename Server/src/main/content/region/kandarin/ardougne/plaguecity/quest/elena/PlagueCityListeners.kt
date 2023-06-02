@@ -326,11 +326,10 @@ class PlagueCityListeners : InteractionListener {
                         npcl(FacialExpression.FRIENDLY, "Go away. We don't want any.").also { stage = END_DIALOGUE }
                     }
                     1 -> npcl(FacialExpression.FRIENDLY, "Oh... why didn't you say, come in then.").also { stage++ }
-                    2 -> DoorActionHandler.handleAutowalkDoor(player, getScenery(2531, 3328, 0)).also { stage++ }
-                    3 -> sendItemDialogue(player!!, BOOK, "You hand the book to Ted as you enter.").also { stage++ }
+                    2 -> sendItemDialogue(player!!, BOOK, "You hand the book to Ted as you enter.").also { stage++ }
+                    3 -> npcl(FacialExpression.NEUTRAL, "Thanks, I've been missing that.").also { stage++ }
                     4 -> {
                         end()
-                        npcl(FacialExpression.NEUTRAL, "Thanks, I've been missing that.")
                         DoorActionHandler.handleAutowalkDoor(player, getScenery(2531, 3328, 0))
                         setQuestStage(player!!, "Plague City", 9)
                     }
