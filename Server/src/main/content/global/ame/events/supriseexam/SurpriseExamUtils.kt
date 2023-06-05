@@ -9,6 +9,7 @@ import core.game.system.task.Pulse
 import core.game.world.map.Location
 import org.rs09.consts.Components
 import org.rs09.consts.Items
+import core.ServerConstants
 
 object SurpriseExamUtils {
 
@@ -32,7 +33,7 @@ object SurpriseExamUtils {
         player.setAttribute(SE_KEY_LOC,player.location)
 
         registerLogoutListener(player, SE_LOGOUT_KEY){p ->
-            teleport(p, p.getAttribute(SE_KEY_LOC, p.location))
+            p.location = getAttribute(p, SE_KEY_LOC, ServerConstants.HOME_LOCATION)
         }
 
         player.properties.teleportLocation = Location.create(1886, 5025, 0)
