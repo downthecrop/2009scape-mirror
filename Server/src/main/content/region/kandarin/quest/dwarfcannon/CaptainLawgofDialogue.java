@@ -392,7 +392,7 @@ public class CaptainLawgofDialogue extends DialoguePlugin {
 				break;
 			case 13:
 				player.getInventory().remove(DwarfCannon.TOOL_KIT);
-				player.sendMessage("You giv the toolkit back to Captain Lawgof.");
+				player.sendMessage("You give the toolkit back to Captain Lawgof.");
 				player.getConfigManager().set(0, 9, true);
 				quest.setStage(player, 70);
 				end();
