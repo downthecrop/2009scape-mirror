@@ -668,8 +668,8 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
                 reject(player, usageStr)
             }
             when(args[1]) {
-                "true" -> player.setAttribute("allow_admin_aggression", true)
-                "false" -> player.removeAttribute("allow_admin_aggression")
+                "true" -> player.setAttribute("/save:allow_admin_aggression", true)
+                "false" -> player.setAttribute("/save:allow_admin_aggression", false)
                 else -> reject(player, usageStr)
 
             }
