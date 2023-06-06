@@ -154,6 +154,7 @@ object ServerConfigParser {
         ServerConstants.IRONMAN_ICONS = data.getBoolean("world.ironman_icons", false)
         ServerConstants.PLAYER_STOCK_CLEAR_INTERVAL = data.getLong("world.playerstock_clear_mins", 180L).toInt()
         ServerConstants.PLAYER_STOCK_RECIRCULATE = data.getBoolean("world.playerstock_bot_offers", true)
+        ServerConstants.BOTSTOCK_LIMIT = data.getLong("world.botstock_limit", 5000L).toInt()
 
         val logLevel = data.getString("server.log_level", "VERBOSE").uppercase()
         ServerConstants.LOG_LEVEL = parseEnumEntry<LogLevel>(logLevel) ?: LogLevel.VERBOSE

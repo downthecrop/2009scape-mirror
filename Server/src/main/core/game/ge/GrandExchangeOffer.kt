@@ -11,7 +11,9 @@ import core.net.packet.out.ContainerPacket
 import core.net.packet.out.GrandExchangePacket
 import core.integrations.discord.Discord
 import core.game.world.repository.Repository
+import kotlin.math.min
 import java.sql.ResultSet
+import core.ServerConstants
 
 
 /**
@@ -22,7 +24,6 @@ import java.sql.ResultSet
 
 class GrandExchangeOffer() {
     var itemID = 0
-    var amount = 0
     var completedAmount = 0
     var offeredValue = 0
     var index = 0
@@ -37,6 +38,8 @@ class GrandExchangeOffer() {
     var isLimitation = false
     var isBot = false
 
+    var amount: Int = 0
+        get() = if (isBot) min(field, ServerConstants.BOTSTOCK_LIMIT) else field 
     /**
      * Gets the total amount of money entered.
      * @return The total value.
@@ -49,7 +52,7 @@ class GrandExchangeOffer() {
      * @return The amount.
      */
     val amountLeft: Int
-        get() = amount - completedAmount
+        get() = if (isBot) min(ServerConstants.BOTSTOCK_LIMIT, amount - completedAmount) else amount - completedAmount
 
     /**
      * Checks if this offer is still active for dispatching.

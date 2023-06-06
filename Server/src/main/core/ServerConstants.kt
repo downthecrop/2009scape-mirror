@@ -290,5 +290,8 @@ class ServerConstants {
 
         @JvmField
         var PLAYER_STOCK_RECIRCULATE = true
+
+        @JvmField
+        var BOTSTOCK_LIMIT = 5000
     }
 }
