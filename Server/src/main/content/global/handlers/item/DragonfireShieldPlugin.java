@@ -23,6 +23,8 @@ import core.plugin.ClassScanner;
 
 import java.util.concurrent.TimeUnit;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles the dragonfire shield options.
  * @author Emperor
@@ -49,7 +51,7 @@ public final class DragonfireShieldPlugin extends OptionHandler {
 			boolean usingAttack = !player.getAttribute("dfs_spec", false);
 			if (!usingAttack) {
 				if (!player.getSettings().isSpecialToggled()) {
-					player.getConfigManager().set(301, 0);
+                                        setVarp(player, 301, 0);
 				}
 				player.removeAttribute("dfs_spec");
 				player.getProperties().getCombatPulse().setTemporaryHandler(null);
@@ -70,7 +72,7 @@ public final class DragonfireShieldPlugin extends OptionHandler {
 				player.getPacketDispatch().sendMessage("Your dragonfire shield is recharging.");
 				return true;
 			}
-			player.getConfigManager().set(301, 1);
+                        setVarp(player, 301, 1);
 			player.setAttribute("dfs_spec", true);
 			SwitchAttack attack = new SwitchAttack(null, Animation.create(6696), Graphics.create(1165), new Graphics(1167, 96), Projectile.create(player, null, 1166, 36, 36, 80, 70, 0, 11));
 			DragonfireSwingHandler handler = new DragonfireSwingHandler(false, 26, attack, true) {
@@ -79,7 +81,7 @@ public final class DragonfireShieldPlugin extends OptionHandler {
 					if (entity instanceof Player) {
 						Player player = (Player) entity;
 						if (!player.getSettings().isSpecialToggled()) {
-							player.getConfigManager().set(301, 0);
+                                                        setVarp(player, 301, 0);
 						}
 						player.removeAttribute("dfs_spec");
 						Item shield = player.getEquipment().get(EquipmentContainer.SLOT_SHIELD);

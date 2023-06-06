@@ -4,6 +4,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.plugin.Plugin;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the challenge option for dueling.
@@ -32,7 +33,7 @@ public class ChallengeOptionPlugin extends OptionHandler {
 		player.getInterfaceManager().open(DuelArenaActivity.DUEL_TYPE_SELECT);
 		player.setAttribute("duel:staked", false);
 		player.setAttribute("duel:partner", other);
-		player.getConfigManager().set(283, 1 << 26);
+                setVarp(player, 283, 1 << 26);
 		return true;
 	}
 

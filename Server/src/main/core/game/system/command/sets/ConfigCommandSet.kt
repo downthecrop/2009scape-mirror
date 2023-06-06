@@ -3,6 +3,7 @@ package core.game.system.command.sets
 import core.plugin.Initializable
 import core.game.system.command.Command
 import core.game.system.command.Privilege
+import core.api.*
 
 @Initializable
 class ConfigCommandSet : CommandSet(Privilege.ADMIN){
@@ -18,7 +19,7 @@ class ConfigCommandSet : CommandSet(Privilege.ADMIN){
             val idlo = args[1].toIntOrNull() ?: reject(player, "INCORRECT ID LOW")
             val idhi = args[2].toIntOrNull() ?: reject(player, "INCORRECT ID HIGH")
             for (idsend in (idlo as Int) until (idhi as Int)) {
-                player.configManager.set(idsend, Integer.MAX_VALUE)
+                setVarp(player, idsend, Integer.MAX_VALUE)
                 notify(player,"Config: $idsend value: " + Integer.MAX_VALUE)
             }
         }
@@ -33,7 +34,7 @@ class ConfigCommandSet : CommandSet(Privilege.ADMIN){
             val idlo = args[1].toIntOrNull() ?: reject(player, "INCORRECT ID LOW")
             val idhi = args[2].toIntOrNull() ?: reject(player, "INCORRECT ID HIGH")
             for (idsend in (idlo as Int) until (idhi as Int)) {
-                player.configManager.set(idsend, 0)
+                setVarp(player, idsend, 0)
                 notify(player,"Config: $idsend value: 0")
             }
         }

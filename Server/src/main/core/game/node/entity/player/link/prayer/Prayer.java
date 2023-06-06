@@ -19,6 +19,9 @@ import core.game.world.GameWorld;
 import java.util.ArrayList;
 import java.util.List;
 
+import static core.api.ContentAPIKt.setVarp;
+import static core.api.ContentAPIKt.setVarbit;
+
 /**
  * Represents a managing class of a players prayers.
  * @author Vexia
@@ -43,10 +46,6 @@ public final class Prayer {
 	 */
 	public Prayer(Player player) {
 		this.player = player;
-
-        // 1050 is checked client-side for making piety/chivalry disallowed sfx, likely due to the minigame requirement.
-        // Set it here unconditionally until the minigame is implemented.
-        player.varpManager.get(1050).setVarbit(1, 8);
 	}
 
 	/**
@@ -65,7 +64,7 @@ public final class Prayer {
 	 */
 	public void reset() {
 		for (PrayerType type : getActive()) {
-			player.getConfigManager().set(type.getConfig(), 0);
+                        setVarp(player, type.getConfig(), 0, false);
 		}
 		getActive().clear();
         // Clear the overhead prayer icon a tick later

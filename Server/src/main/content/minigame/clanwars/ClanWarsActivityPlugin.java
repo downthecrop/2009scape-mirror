@@ -15,7 +15,6 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.impl.PulseManager;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.ConfigurationManager.Configuration;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.communication.ClanEntry;
@@ -33,6 +32,8 @@ import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the clan wars activity.
@@ -239,7 +240,7 @@ public final class ClanWarsActivityPlugin extends ActivityPlugin {
 		if (pulse.getTicksPassed() < 200) {
 			value |= (200 - pulse.getTicksPassed()) << 23;
 		}
-		p.getConfigManager().set(Configuration.CLAN_WAR_DATA, value);
+                setVarp(p, 1147, value);
 		p.getPacketDispatch().sendString(name, 265, 2);
 	}
 

@@ -290,7 +290,7 @@ public final class RugMerchantDialogue extends DialoguePlugin {
 		 */
 		public void travel(final RugDestination current, final Player player) {
 			player.lock();
-			player.getConfigManager().set(499, 0);
+                        setVarp(player, 499, 0);
 			player.getImpactHandler().setDisabledTicks(GameWorld.getTicks() + 200);
 			player.getInterfaceManager().removeTabs(0,1,2,3,4,5,6,7,8,9,10,11,12,13);
 			player.getEquipment().replace(new Item(Items.MAGIC_CARPET_5614),EquipmentContainer.SLOT_WEAPON);
@@ -328,7 +328,7 @@ public final class RugMerchantDialogue extends DialoguePlugin {
 						player.faceLocation(getLocation());
 						break;
 					case 4:
-						player.getConfigManager().set(499, 1);
+                                                setVarp(player, 499, 1);
 						break;
 					case 200:
 						break;
@@ -339,7 +339,7 @@ public final class RugMerchantDialogue extends DialoguePlugin {
 						player.getImpactHandler().setDisabledTicks(0);
 						player.unlock();
 						player.animate(new Animation(-1));
-						player.getConfigManager().set(499, 0);
+                                                setVarp(player, 499, 0);
 
 						clearLogoutListener(player, "magic-carpet");
 

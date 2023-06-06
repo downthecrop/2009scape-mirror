@@ -6,6 +6,8 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 
+import static core.api.ContentAPIKt.*;
+
 
 /**
  * Handles the zamorak mages dialogue.
@@ -460,7 +462,7 @@ public final class ZamorakMageDialogue extends DialoguePlugin {
 	 * @param stage the stage.
 	 */
 	public void setStage(int stage) {
-		player.getConfigManager().set(492, stage, true);
+                setVarp(player, 492, stage, true);
 	}
 
 	/**
@@ -468,6 +470,6 @@ public final class ZamorakMageDialogue extends DialoguePlugin {
 	 * @return the stage.
 	 */
 	public int getStage() {
-		return player.getConfigManager().get(492);
+		return getVarp(player, 492);
 	}
 }

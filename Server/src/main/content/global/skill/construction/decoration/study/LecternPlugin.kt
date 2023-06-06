@@ -162,8 +162,8 @@ class LecternPlugin : OptionHandler() {
                 val id = player.getAttribute("ttb:objectid", 0)
                 val deco = Decoration.forObjectId(id)
                 val values = decorationVarps[deco] ?: Pair(0, 0)
-                player.varpManager.get(261).setVarbit(0, values.first).send(player)
-                player.varpManager.get(262).setVarbit(0, values.second).send(player)
+                setVarp(player, 261, values.first)
+                setVarp(player, 262, values.second)
                 return@onOpen true
             }
             on(400) { player, _, _, buttonID, _, _ ->

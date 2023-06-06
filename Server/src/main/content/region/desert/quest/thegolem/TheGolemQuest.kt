@@ -222,16 +222,14 @@ class TheGolemListeners : InteractionListener {
             if(player.questRepository.getStage("The Golem") >= 100) {
                 clientStage = Math.max(clientStage, 10)
             }
-            player.varpManager.get(437)
-                .setVarbit(0, clientStage)
-                .setVarbit(7, clayUsed)
-                .setVarbit(16, gemsTaken)
-                .setVarbit(17, statuetteTaken)
-                .setVarbit(10, rotation1)
-                .setVarbit(11, rotation2)
-                .setVarbit(12, rotation3)
-                .setVarbit(13, statuettePlaced * (rotation4 + 1))
-                .send(player)
+            setVarbit(player, 346, clientStage)
+            setVarbit(player, 348, clayUsed)
+            setVarbit(player, 354, gemsTaken)
+            setVarbit(player, 355, statuetteTaken)
+            setVarbit(player, 349, rotation1)
+            setVarbit(player, 350, rotation2)
+            setVarbit(player, 351, rotation3)
+            setVarbit(player, 352, statuettePlaced * (rotation4 + 1))
         }
     }
 

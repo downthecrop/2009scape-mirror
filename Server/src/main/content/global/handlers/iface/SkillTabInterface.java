@@ -10,6 +10,8 @@ import core.game.world.GameWorld;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the plugin used to handle the skilling tab.
  * @author Vexia
@@ -35,12 +37,12 @@ public final class SkillTabInterface extends ComponentPlugin {
 			if (p.getAttribute("levelup:" + config.getSkillId(), false)) {
 				p.removeAttribute("levelup:" + config.getSkillId());
 				LevelUp.sendFlashingIcons(p, -1);
-				p.getConfigManager().set(1230, ADVANCE_CONFIGS[config.getSkillId()]);
+                                setVarp(p, 1230, ADVANCE_CONFIGS[config.getSkillId()]);
 				p.getInterfaceManager().open(new Component(741));
 			} else {
 				p.getPulseManager().clear();
 				p.getInterfaceManager().open(new Component(499));
-				p.getConfigManager().set(965, config.getConfig());
+                                setVarp(p, 965, config.getConfig());
 				p.getAttributes().put("skillMenu", config.getConfig());
 			}
 		} else {

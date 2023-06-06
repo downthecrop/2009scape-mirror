@@ -19,6 +19,8 @@ import core.game.system.config.ItemConfigParser;
 
 import java.util.ArrayList;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the equipment container.
  * @author Emperor
@@ -301,7 +303,7 @@ public final class EquipmentContainer extends Container {
 				player.removeAttribute("dfs_spec");
 				player.getProperties().getCombatPulse().setHandler(null);
 				if (!player.getSettings().isSpecialToggled()) {
-					player.getConfigManager().set(301, 0);
+                                        setVarp(player, 301, 0);
 				}
 			}
 			player.getAppearance().setAnimations();

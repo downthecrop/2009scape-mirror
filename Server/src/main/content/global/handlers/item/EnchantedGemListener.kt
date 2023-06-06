@@ -43,7 +43,7 @@ class EnchantedGemDialogue() : DialogueFile() {
                     } else {
                         npcl(core.game.dialogue.FacialExpression.FRIENDLY, "You're currently assigned to kill ${getSlayerTaskName(player!!)}s; only ${getSlayerTaskKillsRemaining(player!!)} more to go.")
                     }
-                    setVarbit(player!!, 2502, 0, getSlayerTaskFlags(player!!) shr 4)
+                    setVarp(player!!, 2502, getSlayerTaskFlags(player!!) shr 4)
                     stage = 1
                 }
             }

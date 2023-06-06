@@ -62,7 +62,6 @@ public class WaterFall extends Quest {
 	public void finish(Player player) {
 		super.finish(player);
 		player.getQuestRepository().syncronizeTab(player);
-		player.getConfigManager().set(101, player.getQuestRepository().getPoints());
 
 		player.getPacketDispatch().sendString("1 Quest Point", 277, 8+ 2);
 		player.getPacketDispatch().sendString("13,750 Strength XP", 277, 9+ 2);

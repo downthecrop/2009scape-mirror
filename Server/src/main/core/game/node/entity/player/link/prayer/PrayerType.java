@@ -11,6 +11,9 @@ import core.tools.StringUtils;
 
 import java.util.List;
 
+import static core.api.ContentAPIKt.*;
+
+
 /**
  * Represents a prayer type.
  * @author Vexia
@@ -231,7 +234,7 @@ public enum PrayerType {
 	 * @return <code>True</code> if toggled.
 	 */
 	public boolean toggle(final Player player, final boolean on) {
-		player.getConfigManager().set(getConfig(), on ? 1 : 0);
+		setVarp(player, getConfig(), on ? 1 : 0);
 		if (on) {
 			flag(player, this);
 			player.getPrayer().getActive().add(this);

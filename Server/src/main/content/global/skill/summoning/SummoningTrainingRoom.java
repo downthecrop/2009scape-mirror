@@ -33,6 +33,8 @@ import core.net.packet.out.MinimapState;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles the summoning training room.
  * @author Emperor
@@ -83,7 +85,7 @@ public final class SummoningTrainingRoom extends OptionHandler {
 		int questVal = quest.getStage(player) == 0 ? 0 : quest.getStage(player) > 0 && quest.getStage(player) < 100 ? 5 : 28893;
 		switch (option) {
 		case "close":
-			player.getConfigManager().set(1178, questVal == 28893 ? 32989 : (1 << 11) + questVal);
+                        setVarp(player, 1178, questVal == 28893 ? 32989 : (1 << 11) + questVal);
 			return true;
 		case "open":
 			if (quest.getStage(player) < 40) {
@@ -92,13 +94,13 @@ public final class SummoningTrainingRoom extends OptionHandler {
 			} else if (quest.getStage(player) == 40) {
 				if (player.getAttribute("has-key", false) || player.getInventory().remove(TRAPDOOR_KEY)) {
 					player.setAttribute("has-key", true);
-					player.getConfigManager().set(1178, (2 << 11) + questVal, true);
+                                        setVarp(player, 1178, (2 << 11) + questVal, true);
 				} else {
 					player.getPacketDispatch().sendMessage("The trapdoor is locked.");
 					return true;
 				}
 			}
-			player.getConfigManager().set(1178, questVal == 28893 ? 28893 : (2 << 11) + questVal);
+                        setVarp(player, 1178, questVal == 28893 ? 28893 : (2 << 11) + questVal);
 			return true;
 		case "climb-down":
 			if (object.getId() == 28653) {

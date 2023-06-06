@@ -7,6 +7,8 @@ import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles config definition reading.
  * @author Emperor
@@ -126,12 +128,7 @@ public final class VarbitDefinition {
 	 * @return The config value.
 	 */
 	public int getValue(Player player) {
-		int size = BITS[endBit - startBit];
-		int bitValue = player.varpManager.get(getVarpId()).getBitRangeValue(getStartBit(), getStartBit() + (endBit - startBit));
-		if(bitValue != 0){
-			return size & (bitValue >>> startBit);
-		}
-		return size & (player.getConfigManager().get(varpId) >>> startBit);
+            return getVarbit(player, id);
 	}
 
 	/**
@@ -161,6 +158,13 @@ public final class VarbitDefinition {
 	public int getEndBit() {
 		return endBit;
 	}
+
+        public int getMask() {
+                int mask = 0;
+                for (int i = startBit; i <= endBit; i++)
+                    mask |= (1 << i);
+                return mask;
+        }
 
 	@Override
 	public String toString() {

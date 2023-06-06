@@ -56,7 +56,7 @@ class FairyRingPlugin : InteractionListener {
         player.removeAttribute("fairy-delay")
         player.removeAttribute("fairy_location_combo")
         for (i in 0..2) {
-            player.configManager[816 + i] = 0
+            setVarp(player, 816 + i, 0)
         }
     }
 

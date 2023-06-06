@@ -209,7 +209,7 @@ class SlayerManager(val player: Player? = null) : LoginListener, PersistPlayer, 
 
     fun decrementAmount(amount: Int) {
         flags.decrementTaskAmount(amount)
-        player!!.varpManager.get(2502).setVarbit(0, flags.taskFlags shr 4).send(player)
+        setVarp(player!!, 2502, flags.taskFlags shr 4)
     }
 
     /**

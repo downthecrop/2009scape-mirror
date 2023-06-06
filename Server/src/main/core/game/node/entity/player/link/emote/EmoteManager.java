@@ -7,6 +7,8 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import static core.api.ContentAPIKt.setVarp;
+
 /**
  * Manages the players unlocked/locked emotes.
  * @author Vexia
@@ -52,7 +54,7 @@ public class EmoteManager {
 		if (isUnlocked(Emotes.SLAP_HEAD)) {
 			value1 += 2;
 		}
-		player.getConfigManager().set(802, value1); // stronghold of // security
+                setVarp(player, 802, value1, false);
 		int value2 = 0;
 		if (isUnlocked(Emotes.GLASS_BOX)) {
 			value2 += 2;
@@ -103,12 +105,12 @@ public class EmoteManager {
 		if (isUnlocked(Emotes.GIVE_THANKS)) {
 			value2 += 16384;
 		}
-		player.getConfigManager().set(313, value2); // events emotes
+                setVarp(player, 313, value2, false);
 		int value3 = 0;
 		if (isUnlocked(Emotes.ZOMBIE_HAND)) {
 			value3 = 12;
 		}
-		player.getConfigManager().set(1085, value3);//zombie hand.
+                setVarp(player, 1085, value3, false);
 	}
 
 	/**

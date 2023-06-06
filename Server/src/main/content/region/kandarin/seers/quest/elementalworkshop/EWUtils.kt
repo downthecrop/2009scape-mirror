@@ -3,9 +3,9 @@ package content.region.kandarin.seers.quest.elementalworkshop
 import content.global.handlers.iface.BookLine
 import content.global.handlers.iface.Page
 import content.global.handlers.iface.PageSet
-import core.api.getVarbitValue
 import core.game.node.entity.player.Player
 import org.rs09.consts.Vars
+import core.api.*
 
 /**
  * Utils for the Elemental Workshop I quest
@@ -71,34 +71,34 @@ object EWUtils {
     )
 
     /* OFFSETS */
-    const val LEFT_WATER_CONTROL_STATE = 3
-    const val RIGHT_WATER_CONTROL_STATE = 4
-    const val WATER_WHEEL_STATE = 5
-    const val FURNACE_STATE = 7
-    const val BELLOWS_STATE = 9
+    const val LEFT_WATER_CONTROL_STATE = 2058
+    const val RIGHT_WATER_CONTROL_STATE = 2059
+    const val WATER_WHEEL_STATE = 2060
+    const val FURNACE_STATE = 2062
+    const val BELLOWS_STATE = 2063
 
     fun leftWaterControlBit(player: Player): Int {
-        return getVarbitValue(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, LEFT_WATER_CONTROL_STATE)
+        return getVarbit(player, LEFT_WATER_CONTROL_STATE)
     }
 
     fun rightWaterControlBit(player: Player): Int {
-        return getVarbitValue(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, RIGHT_WATER_CONTROL_STATE)
+        return getVarbit(player, RIGHT_WATER_CONTROL_STATE)
     }
 
     fun leftWaterControlEnabled(player: Player): Boolean {
-        return getVarbitValue(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, LEFT_WATER_CONTROL_STATE) == 1
+        return getVarbit(player, LEFT_WATER_CONTROL_STATE) == 1
     }
 
     fun rightWaterControlEnabled(player: Player): Boolean {
-        return getVarbitValue(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, RIGHT_WATER_CONTROL_STATE) == 1
+        return getVarbit(player, RIGHT_WATER_CONTROL_STATE) == 1
     }
 
     fun waterWheelEnabled(player: Player): Boolean {
-        return getVarbitValue(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, WATER_WHEEL_STATE) == 1
+        return getVarbit(player, WATER_WHEEL_STATE) == 1
     }
 
     fun bellowsEnabled(player: Player): Boolean {
-        return getVarbitValue(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, BELLOWS_STATE) == 1
+        return getVarbit(player, BELLOWS_STATE) == 1
     }
 
     fun currentStage(player: Player): Int {

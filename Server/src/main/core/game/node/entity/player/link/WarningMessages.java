@@ -8,6 +8,9 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import static core.api.ContentAPIKt.*;
+
+
 /**
  * Handles the warning messages of a player.
  * @author Vexia
@@ -38,7 +41,7 @@ public final class WarningMessages {
 	 * @param player the player.
 	 */
 	private void refresh(final Player player) {
-		player.getConfigManager().set(CONFIG, getConfigValue(), true);
+		setVarp(player, CONFIG, getConfigValue(), true);
 	}
 
 	/**

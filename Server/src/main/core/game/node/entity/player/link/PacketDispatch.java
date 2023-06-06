@@ -1,6 +1,5 @@
 package core.game.node.entity.player.link;
 
-import core.game.node.entity.player.Varp;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.tools.Log;
@@ -19,6 +18,8 @@ import core.net.packet.context.DisplayModelContext.ModelType;
 import core.net.packet.out.*;
 
 import static core.api.ContentAPIKt.log;
+import static core.api.ContentAPIKt.*;
+
 
 /**
  * Represents the class used to dispatching packets.
@@ -46,8 +47,8 @@ public final class PacketDispatch {
 		this.context = new PlayerContext(player);
 	}
 
-	public void sendVarp(Varp varp){
-		PacketRepository.send(Config.class, new ConfigContext(player, varp.getIndex(), varp.getValue()));
+	public void sendVarp (int index, int value) {
+		PacketRepository.send(Config.class, new ConfigContext(player, index, value));
 	}
 
     public void sendVarcUpdate(short index, int value) {
@@ -389,11 +390,11 @@ public final class PacketDispatch {
 	}
 
 	public void sendLeftShiftedVarbit(int varpIndex, int offset, int value){
-		player.getConfigManager().set(varpIndex, (value << offset));
+		setVarp(player, varpIndex, (value << offset));
 	}
 
 	public void sendRightShiftedVarbit(int varpIndex, int offset, int value){
-		player.getConfigManager().set(varpIndex, (value >> offset));
+		setVarp(player, varpIndex, (value >> offset));
 	}
 
 

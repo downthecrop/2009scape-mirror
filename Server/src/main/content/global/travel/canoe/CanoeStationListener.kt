@@ -9,6 +9,8 @@ import org.rs09.consts.Components
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 
+import core.api.*
+
 class CanoeStationListener : InteractionListener {
 
     private val STATION_IDs = intArrayOf(12140, 12141, 12142, 12143, 12144, 12145, 12146, 12147, 12148, 12151, 12152, 12153, 12154, 12155, 12156, 12157, 12158, 12149, 12150)
@@ -33,7 +35,7 @@ class CanoeStationListener : InteractionListener {
             val axe: SkillingTool? = SkillingTool.getHatchet(player)
             val varbit = node.asScenery().definition.configFile
             if(varbit.getValue(player) != 0){
-                player.varpManager.setVarbit(varbit,0)
+                setVarbit(player,varbit,0)
             }
 
             if (axe == null) {
@@ -45,14 +47,14 @@ class CanoeStationListener : InteractionListener {
                 return@on true
             }
             player.lock()
-            player.varpManager.get(varbit.varpId).clearBitRange(0,31)
+            setVarp(player, varbit.varpId, 0)
             player.faceLocation(CanoeUtils.getFaceLocation(player.location))
             player.animate(axe.animation)
-            player.varpManager.setVarbit(varbit,STAGE_TREE_NONINTERACTABLE)
+            setVarbit(player,varbit,STAGE_TREE_NONINTERACTABLE)
             player.pulseManager.run(object : Pulse(4){
                 override fun pulse(): Boolean {
                     player.animator.stop()
-                    player.varpManager.setVarbit(varbit,STAGE_LOG_CHOPPED)
+                    setVarbit(player,varbit,STAGE_LOG_CHOPPED)
                     player.packetDispatch.sendSceneryAnimation(node.asScenery().getChild(player), FALL, false)
                     player.unlock()
                     return true
@@ -64,7 +66,7 @@ class CanoeStationListener : InteractionListener {
         on(STATION_IDs, IntType.SCENERY, "shape-canoe"){ player, node ->
             val varbit = node.asScenery().definition.configFile
             if(varbit.getValue(player) != STAGE_LOG_CHOPPED){
-                player.varpManager.setVarbit(varbit,0)
+                setVarbit(player,varbit,0)
                 return@on true
             }
             player.faceLocation(CanoeUtils.getFaceLocation(player.location))
@@ -81,7 +83,7 @@ class CanoeStationListener : InteractionListener {
             player.faceLocation(CanoeUtils.getFaceLocation(player.location))
             player.pulseManager.run(object : Pulse(){
                 override fun pulse(): Boolean {
-                    player.varpManager.setVarbit(varbit, CanoeUtils.getCraftValue(canoe, true))
+                    setVarbit(player,varbit, CanoeUtils.getCraftValue(canoe, true))
                     player.packetDispatch.sendSceneryAnimation(node.asScenery(), FLOAT, false)
                     player.unlock()
                     return true

@@ -8,6 +8,7 @@ import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.plugin.Initializable
 import core.plugin.Plugin
+import core.api.*
 
 @Initializable
 /**
@@ -57,7 +58,7 @@ class PickaxeOnRubble : UseWithHandler(1265,1267,1269,1271,1273,1275){
                     2 -> {
                         player.dialogueInterpreter.sendItemMessage(tool.id,"You dig a narrow tunnel through the rocks.")
                         player.setAttribute("/save:tlt-hole-cleared",true)
-                        player.varpManager.get(465).setVarbit(0,4).send(player)
+                        setVarbit(player, 532, 4, true)
                         player.unlock()
                         return true
                     }

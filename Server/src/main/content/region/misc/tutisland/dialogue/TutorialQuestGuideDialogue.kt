@@ -67,7 +67,7 @@ class TutorialQuestGuideDialogue(player: Player? = null) : core.game.dialogue.Di
                         ""
                     )
                 )
-                setVarbit(player, 1021, 0, 3)
+                setVarbit(player, 3756, 3)
                 player.interfaceManager.openTab(Component(Components.QUESTJOURNAL_V2_274))
             }
             28 -> when(stage)

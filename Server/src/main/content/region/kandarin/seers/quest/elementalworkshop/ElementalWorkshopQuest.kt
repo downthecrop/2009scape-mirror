@@ -1,9 +1,6 @@
 package content.region.kandarin.seers.quest.elementalworkshop
 
-import core.api.Commands
-import core.api.addItem
-import core.api.setAttribute
-import core.api.setVarbit
+import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
@@ -120,8 +117,7 @@ class ElementalWorkshopQuest : Quest("Elemental Workshop I", 52, 51, 1), Command
             setAttribute(player, "/save:ew1:got_leather", false)
             setAttribute(player, "/save:ew1:bellows_fixed", false)
             player.questRepository.setStageNonmonotonic(player.questRepository.forIndex(52), 0)
-            player.varpManager.get(Vars.VARP_QUEST_ELEMENTAL_WORKSHOP).clearBitRange(0, 31)
-            player.varpManager.get(Vars.VARP_QUEST_ELEMENTAL_WORKSHOP).send(player)
+            setVarp(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, 0)
             player.teleport(Location.create(2715, 3481, 0))
             player.inventory.clear()
             addItem(player, Items.KNIFE_946)
@@ -138,11 +134,11 @@ class ElementalWorkshopQuest : Quest("Elemental Workshop I", 52, 51, 1), Command
             setAttribute(player, "/save:ew1:got_leather", true)
             setAttribute(player, "/save:ew1:bellows_fixed", true)
             player.questRepository.setStageNonmonotonic(player.questRepository.forIndex(52), 95)
-            setVarbit(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, EWUtils.BELLOWS_STATE, enabled, true)
-            setVarbit(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, EWUtils.FURNACE_STATE, enabled, true)
-            setVarbit(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, EWUtils.WATER_WHEEL_STATE, enabled, true)
-            setVarbit(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, EWUtils.RIGHT_WATER_CONTROL_STATE, enabled, true)
-            setVarbit(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, EWUtils.LEFT_WATER_CONTROL_STATE, enabled, true)
+            setVarbit(player, EWUtils.BELLOWS_STATE, enabled, true)
+            setVarbit(player, EWUtils.FURNACE_STATE, enabled, true)
+            setVarbit(player, EWUtils.WATER_WHEEL_STATE, enabled, true)
+            setVarbit(player, EWUtils.RIGHT_WATER_CONTROL_STATE, enabled, true)
+            setVarbit(player, EWUtils.LEFT_WATER_CONTROL_STATE, enabled, true)
         }
     }
 }

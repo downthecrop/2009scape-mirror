@@ -28,8 +28,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
-import static core.api.ContentAPIKt.log;
-import static core.api.ContentAPIKt.hasRequirement;
+import static core.api.ContentAPIKt.*;
 import static core.tools.GlobalsKt.colorize;
 
 
@@ -132,7 +131,6 @@ public final class LoginConfiguration {
      * @param player The player.
      */
     public static void configureGameWorld(final Player player) {
-        player.getConfigManager().reset();
         sendGameConfiguration(player);
         Repository.getLobbyPlayers().remove(player);
         player.setPlaying(true);
@@ -146,7 +144,6 @@ public final class LoginConfiguration {
         if(player.getGlobalData().getTestStage() == 3 && !player.getEmoteManager().isUnlocked(Emotes.SAFETY_FIRST)){
             player.getEmoteManager().unlock(Emotes.SAFETY_FIRST);
         }
-        player.varpManager.sendAllVarps();
         for (Item item : player.getEquipment().toArray()) {
             //Run equip hooks for all items equipped on login.
             //We should have already been doing this.
@@ -177,6 +174,9 @@ public final class LoginConfiguration {
             player.getSpellBookManager().setSpellBook(SpellBookManager.SpellBook.MODERN);
         }
         player.getSpellBookManager().update(player);
+        // 1050 is checked client-side for making piety/chivalry disallowed sfx, likely due to the minigame requirement.
+        // Set it here unconditionally until the minigame is implemented.
+        setVarbit(player, 3909, 8, false);
         if(ServerConstants.RULES_AND_INFO_ENABLED)
             RulesAndInfo.openFor(player);
 		/*if (GameWorld.getSettings().isPvp()) {
@@ -249,7 +249,6 @@ public final class LoginConfiguration {
         player.getFamiliarManager().login();
         player.getInterfaceManager().openDefaultTabs();
         player.getPacketDispatch().sendString("Friends List - World " + GameWorld.getSettings().getWorldId(), 550, 3);
-        player.getConfigManager().init();
         player.getQuestRepository().syncronizeTab(player);
         player.getInterfaceManager().close();
         player.getEmoteManager().refresh();

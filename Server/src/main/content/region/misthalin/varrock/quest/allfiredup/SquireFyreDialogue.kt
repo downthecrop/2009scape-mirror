@@ -5,6 +5,7 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import content.minigame.allfiredup.BeaconState
+import core.api.*
 
 @Initializable
 class SquireFyreDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
@@ -26,8 +27,7 @@ class SquireFyreDialogue(player: Player? = null) : core.game.dialogue.DialoguePl
         when(stage){
             100 -> npc("Of course I can see it. I haven't spent my entire life","practising my seeing skills for nothing! I'm happy to","report that the fire near Blaze is burning brightly.").also { stage++ }
             101 -> player("Terrific! Blaze has asked me to light this fire as well, so","he can see how things look from his vantage point.").also { stage++ }
-            102 -> npc("Be my guest!").also { stage++; player.questRepository.getQuest("All Fired Up").setStage(player,50); player.varpManager.get(1283).setVarbit(0,
-                content.minigame.allfiredup.BeaconState.DYING.ordinal).send(player) }
+            102 -> npc("Be my guest!").also { stage++; player.questRepository.getQuest("All Fired Up").setStage(player,50); setVarbit(player, 5146, BeaconState.DYING.ordinal) }
             103 -> options("How do I light the beacon?","I suppose you don't have any logs I could have?","Okay, thanks.").also { stage++ }
             104 -> when(buttonId){
                 1 -> player("How do I light the beacon?").also { stage = 110 }

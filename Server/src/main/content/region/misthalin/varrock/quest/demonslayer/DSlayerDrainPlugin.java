@@ -10,6 +10,9 @@ import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.*;
+
+
 /**
  * Represents the demon slayer plugin used to handle washing the key down the drain.
  * @author 'Vexia
@@ -69,7 +72,7 @@ public final class DSlayerDrainPlugin extends UseWithHandler {
 
 				player.getDialogueInterpreter().sendDialogues(player, null, "OK, I think I've washed the key down into the sewer.", "I'd better go down and get it!");
 				player.getSavedData().getQuestData().getDemonSlayer()[0] = true;// poured
-				player.getConfigManager().set(222, 2660610, true);
+                                setVarp(player, 222, 2660610, true);
 				player.setAttribute("demon-slayer:just-poured", true);
 				return true;
 			}

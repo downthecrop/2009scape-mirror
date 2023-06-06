@@ -13,6 +13,8 @@ import core.game.world.map.zone.ZoneBorders;
 import core.plugin.Initializable;
 import core.plugin.ClassScanner;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * The main type for the tourist trap quest.
  * @author Aero
@@ -253,7 +255,7 @@ public final class TouristTrap extends Quest {
 	 * @param player the player.
      */
 	public static void addConfig(final Player player, final int value) {
-		player.getConfigManager().set(CONFIG_ID, value, true);
+                setVarp(player, CONFIG_ID, value, true);
 	}
 
 	/**

@@ -34,7 +34,7 @@ import content.global.skill.summoning.SummoningPouch;
 import java.util.ArrayList;
 import java.util.List;
 
-import static core.api.ContentAPIKt.log;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Represents a familiar.
@@ -339,10 +339,8 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	private void sendTimeRemaining() {
 		int minutes = ticks / 100;
 		int centiminutes = ticks % 100;
-		owner.varpManager.get(1176)
-			.setVarbit(7, minutes)
-			.setVarbit(6, centiminutes > 49 ? 1 : 0)
-			.send(owner);
+                setVarbit(owner, 4534, minutes);
+                setVarbit(owner, 4290, centiminutes > 49 ? 1 : 0);
 	}
 
 	/**
@@ -542,9 +540,9 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	 * Sends the familiar packets.
 	 */
 	public void sendConfiguration() {
-		owner.getConfigManager().set(448, getPouchId());
-		owner.getConfigManager().set(1174, getOriginalId());
-		owner.getConfigManager().set(1175, specialCost << 23);
+                setVarp(owner, 448, getPouchId());
+                setVarp(owner, 1174, getOriginalId());
+                setVarp(owner, 1175, specialCost << 23);
 		sendTimeRemaining();
 		updateSpecialPoints(0);
 	}
@@ -605,10 +603,10 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		getPulseManager().clear();
 		owner.getInterfaceManager().removeTabs(7);
 		owner.getFamiliarManager().setFamiliar(null);
-		owner.getConfigManager().set(448, -1);
-		owner.getConfigManager().set(1176, 0);
-		owner.getConfigManager().set(1175, 182986);
-		owner.getConfigManager().set(1174, -1);
+                setVarp(owner, 448, -1);
+                setVarp(owner, 1176, 0);
+                setVarp(owner, 1175, 182986);
+                setVarp(owner, 1174, -1);
 		if (owner.getSkullManager().isWilderness()) {
 			owner.getAppearance().sync();
 		}
@@ -624,7 +622,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		if (specialPoints > 60) {
 			specialPoints = 60;
 		}
-		owner.getConfigManager().set(1177, specialPoints);
+                setVarp(owner, 1177, specialPoints);
 	}
 
 	@Override

@@ -14,6 +14,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import static core.api.ContentAPIKt.*;
+
+
 /**
  * Handles a music playing for a player.
  * @author Emperor
@@ -74,7 +77,7 @@ public final class MusicPlayer {
 	 */
 	public void init() {
 		refreshList();
-		player.getConfigManager().set(19, looping ? 1 : 0);
+		setVarp(player, 19, looping ? 1 : 0);
 		int value = 0;
 		for (int i = 0; i < CONFIG_IDS.length; i++) {
 			value |= 2 << i;
@@ -137,7 +140,7 @@ public final class MusicPlayer {
 			values[index] |= 1 << (listIndex - (index * 32));
 		}
 		for (int i = 0; i < CONFIG_IDS.length; i++) {
-			player.getConfigManager().set(CONFIG_IDS[i], values[i]);
+			setVarp(player, CONFIG_IDS[i], values[i]);
 		}
 	}
 
@@ -224,7 +227,7 @@ public final class MusicPlayer {
 	 */
 	public void toggleLooping() {
 		looping = !looping;
-		player.getConfigManager().set(19, looping ? 1 : 0);
+		setVarp(player, 19, looping ? 1 : 0);
 	}
 
 	/**
@@ -289,6 +292,6 @@ public final class MusicPlayer {
 	 */
 	public void setLooping(boolean looping) {
 		this.looping = looping;
-		player.getConfigManager().set(19, looping ? 1 : 0);
+		setVarp(player, 19, looping ? 1 : 0);
 	}
 }

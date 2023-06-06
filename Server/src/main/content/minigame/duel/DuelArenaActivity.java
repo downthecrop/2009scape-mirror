@@ -19,6 +19,8 @@ import core.plugin.Initializable;
 import core.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles the Duel Arena activity.
  * @author Emperor
@@ -76,7 +78,7 @@ public final class DuelArenaActivity extends ActivityPlugin {
 			Player player = (Player) e;
 			player.getInterfaceManager().openOverlay(OVERLAY);
 			player.getInteraction().set(CHALLENGE_OPTION);
-			player.getConfigManager().set(286, 0);
+                        setVarp(player, 286, 0);
 		}
 		return super.enter(e);
 	}

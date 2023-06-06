@@ -18,6 +18,7 @@ import content.region.misc.tutisland.handlers.TutorialStage;
 import core.tools.SystemLogger;
 
 import static core.api.ContentAPIKt.log;
+import static core.api.ContentAPIKt.*;
 
 
 /**
@@ -498,7 +499,7 @@ public final class InterfaceManager {
 				PacketRepository.send(Interface.class, new InterfaceContext(player, InterfaceType.CHATBOX.getFixedPaneId(), InterfaceType.CHATBOX.getFixedChildId(), Components.CHATDEFAULT_137, true));
 			}
 			chatbox = component;
-			player.getConfigManager().set(334, 1);
+			setVarp(player, 334, 1);
 		} else {
 			chatbox = component;
 			if (chatbox.getDefinition().getType() != InterfaceType.DIALOGUE && chatbox.getDefinition().getType() != InterfaceType.CHATBOX && chatbox.getDefinition().getType() != InterfaceType.CS_CHATBOX) {

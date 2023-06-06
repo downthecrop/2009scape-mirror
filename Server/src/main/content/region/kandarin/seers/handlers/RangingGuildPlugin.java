@@ -34,6 +34,8 @@ import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the plugin used for the ranging guild.
  *
@@ -1115,9 +1117,9 @@ public final class RangingGuildPlugin extends OptionHandler {
 
         private void showInterface(int points, int arrowsLeft, int target, String msg) {
             player.getInterfaceManager().openComponent(325);
-            player.getConfigManager().set(156, 11 - arrowsLeft);
-            player.getConfigManager().set(157, points);
-            player.getConfigManager().set(158, target);
+            setVarp(player, 156, 11 - arrowsLeft);
+            setVarp(player, 157, points);
+            setVarp(player, 158, target);
             player.getPacketDispatch().sendString(msg, 325, 32);
         }
 

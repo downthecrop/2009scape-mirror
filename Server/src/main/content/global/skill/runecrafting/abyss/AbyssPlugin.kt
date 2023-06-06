@@ -244,7 +244,7 @@ class AbyssPlugin : InteractionListener {
          * Used to make sure the player lands by the blocked obstacle.
          */
         fun rotateObstacles(player: Player, abyssLoc: AbyssLoc) {
-                setVarbit(player,VARP_SCENERY_ABYSS,ABYSS_OBSTACLES,abyssLoc.getSegment(),true)
+            setVarbit(player, 625, abyssLoc.getSegment(), true)
         }
 
         /**
@@ -266,7 +266,7 @@ class AbyssPlugin : InteractionListener {
                         3 -> return if (RandomFunction.random(100) < getStatLevel(player,skill)
                         ) {
                             sendMessage(player, colorize("%G${messages[1]}"))
-                            if(varbitVal != null) { setVarbit(player,VARP_SCENERY_ABYSS,ABYSS_OBSTACLES,varbitVal) }
+                            if(varbitVal != null) { setVarbit(player, 625, varbitVal) }
                             false
                         } else {
                             sendMessage(player, colorize("%R${messages[2]}"))
@@ -274,7 +274,7 @@ class AbyssPlugin : InteractionListener {
                             true
                         }
                         5 -> {
-                            if(varbitVal != null) { setVarbit(player,VARP_SCENERY_ABYSS,ABYSS_OBSTACLES,varbitVal or 1) }
+                            if(varbitVal != null) { setVarbit(player, 625, varbitVal or 1) }
                         }
                         7 -> {
                             player.unlock()

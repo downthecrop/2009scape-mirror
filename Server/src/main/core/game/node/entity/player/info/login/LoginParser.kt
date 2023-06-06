@@ -1,6 +1,6 @@
 package core.game.node.entity.player.info.login
 
-import core.api.LoginListener
+import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.PlayerDetails
 import core.game.system.SystemManager
@@ -45,6 +45,7 @@ class LoginParser(val details: PlayerDetails) {
                         } else {
                             flag(AuthResponse.Success)
                             player.init()
+                            reinitVarps(player)
                         }
                     } else {
                         Repository.removePlayer(player)
@@ -70,7 +71,7 @@ class LoginParser(val details: PlayerDetails) {
         player.isActive = true
         flag(AuthResponse.Success)
         player.updateSceneGraph(true)
-        player.configManager.init()
+        reinitVarps(player)
         LoginConfiguration.configureGameWorld(player)
     }
 

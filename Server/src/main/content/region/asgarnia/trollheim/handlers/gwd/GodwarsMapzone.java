@@ -35,6 +35,7 @@ import core.plugin.Plugin;
 import core.tools.StringUtils;
 import core.game.node.entity.skill.Skills;
 
+import static core.api.ContentAPIKt.*;
 import static core.api.ContentAPIKt.log;
 
 /**
@@ -89,7 +90,7 @@ public final class GodwarsMapzone extends MapZone implements Plugin<Object> {
 	 * @param setting The setting.
 	 */
 	public void setRopeSetting(Player player, int setting) {
-		player.varpManager.get(1048).setVarbit(setting,1).send(player);
+                setVarbit(player, setting == 1 ? 3933 : 3934, 1, true);
 	}
 
 	/**

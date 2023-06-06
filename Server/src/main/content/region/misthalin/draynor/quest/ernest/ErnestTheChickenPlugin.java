@@ -21,6 +21,8 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the ernest the chicken plugin to handle node interactions.
  * @author 'Vexia
@@ -183,8 +185,8 @@ public final class ErnestTheChickenPlugin extends OptionHandler {
 		 * Method used to update the players config states.
 		 */
 		public final void updateConfigs() {
-			player.getConfigManager().set(LEVER_CONFIG, calculateLeverConfig());
-			player.getConfigManager().set(DOOR_CONFIG, calculateDoorConfig());
+                        setVarp(player, LEVER_CONFIG, calculateLeverConfig());
+                        setVarp(player, DOOR_CONFIG, calculateDoorConfig());
 			save();
 		}
 

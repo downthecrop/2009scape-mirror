@@ -17,6 +17,8 @@ import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Debug NPC Opcodes Line 483, Uncomment
  */
@@ -239,7 +241,7 @@ public final class NPCDefinition extends Definition<NPC> {
 			if (configFileId != -1) {
 				configValue = VarbitDefinition.forNPCID(configFileId).getValue(player);
 			} else if (configId != -1) {
-				configValue = player.getConfigManager().get(configId);
+				configValue = getVarp(player, configId);
 			}
 		} else {
 			configValue = 0;

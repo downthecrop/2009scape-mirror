@@ -13,6 +13,9 @@ import core.game.world.update.flag.context.Graphics;
 import java.util.Calendar;
 import java.util.Date;
 
+import static core.api.ContentAPIKt.*;
+
+
 /**
  * Represents the class used to handle the assist requesting of a {@link Player}
  * .
@@ -243,8 +246,8 @@ public final class AssistSession extends Pulse implements RequestModule {
 			message = "You've earned the maximum XP from the Assist System within a 24-hour period. You can assist again in " + getTimeLeft() + ".";
 		}
 		player.getPacketDispatch().sendString(message, 301, 10);
-		player.getConfigManager().set(1087, value);
-		player.getConfigManager().set(1088, (int) totalXp * 10);
+		setVarp(player, 1087, value);
+		setVarp(player, 1088, (int) totalXp * 10);
 	}
 
 	/**

@@ -118,19 +118,20 @@ class CompostBin(val player: Player, val bin: CompostBins) {
     }
 
     fun updateBit(){
-        player.varpManager.get(bin.varpIndex).clearBitRange(bin.varpOffest,bin.varpOffest + 7)
         if(items.isNotEmpty()) {
-            if (isFinished) {
-                player.varpManager.get(bin.varpIndex).setVarbit(bin.varpOffest + 1, if(items.size == 15) 15 else 14)
-                if (isTomatoes) player.varpManager.get(bin.varpIndex).setVarbit(bin.varpOffest + 7, 1)
-                else if (isSuperCompost) player.varpManager.get(bin.varpIndex).setVarbit(bin.varpOffest + 5, 1)
+            if (isClosed) {
+                setVarbit(player, bin.varbit, 0x40)
+            } else if (isFinished) {
+                var finalValue = if (items.size == 15) 15 else 14
+                if (isTomatoes) finalValue += 0x80
+                else if (isSuperCompost) finalValue += 0x20
+                setVarbit(player, bin.varbit, finalValue)
             } else {
-                player.varpManager.get(bin.varpIndex).setVarbit(bin.varpOffest, items.size)
-                if (isTomatoes) player.varpManager.get(bin.varpIndex).setVarbit(bin.varpOffest + 7, 1)
+                var finalValue = items.size
+                if (isTomatoes) finalValue += 0x80
+                setVarbit(player, bin.varbit, finalValue)
             }
-            if (isClosed) player.varpManager.get(bin.varpIndex).setVarbit(bin.varpOffest + 6, 1)
-        }
-        player.varpManager.get(bin.varpIndex).send(player)
+        } else setVarbit(player, bin.varbit, 0)
     }
 
     fun save(root: JSONObject){

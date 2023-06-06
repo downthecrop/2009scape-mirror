@@ -1,7 +1,6 @@
 package content.minigame.blastfurnace
 
-import core.api.addItem
-import core.api.freeSlots
+import core.api.*
 import core.game.interaction.InterfaceListener
 import core.game.node.item.Item
 import org.rs09.consts.Components
@@ -28,19 +27,32 @@ class BlastFurnaceInterfaceListener : InterfaceListener {
             var silverBit = 1
             var goldBit = 1
             var barTotal = 0
+            val barCounts = HashMap<Int, Int>()
             if (playerBars.isEmpty()) {
                 return@onOpen true
             } else {
                 playerBars.forEach { barItem ->
                     when (barItem.id) {
-                        Items.BRONZE_BAR_2349 -> player.varpManager.get(545).setVarbit(0, bronzeBit++).send(player)
-                        Items.IRON_BAR_2351 -> player.varpManager.get(545).setVarbit(8, ironBit++).send(player)
-                        Items.STEEL_BAR_2353 -> player.varpManager.get(545).setVarbit(16, steelBit++).send(player)
-                        Items.MITHRIL_BAR_2359 -> player.varpManager.get(545).setVarbit(24, mithrilBit++).send(player)
-                        Items.ADAMANTITE_BAR_2361 -> player.varpManager.get(546).setVarbit(0, adamantiteBit++).send(player)
-                        Items.RUNITE_BAR_2363 -> player.varpManager.get(546).setVarbit(8, runiteBit++).send(player)
-                        Items.SILVER_BAR_2355 -> player.varpManager.get(546).setVarbit(24, silverBit++).send(player)
-                        Items.GOLD_BAR_2357 -> player.varpManager.get(546).setVarbit(16, goldBit++).send(player)
+                        Items.BRONZE_BAR_2349 -> barCounts[barItem.id] = bronzeBit++ 
+                        Items.IRON_BAR_2351 -> barCounts[barItem.id] = ironBit++ 
+                        Items.STEEL_BAR_2353 -> barCounts[barItem.id] = steelBit++ 
+                        Items.MITHRIL_BAR_2359 -> barCounts[barItem.id] = mithrilBit++ 
+                        Items.ADAMANTITE_BAR_2361 -> barCounts[barItem.id] = adamantiteBit++ 
+                        Items.RUNITE_BAR_2363 -> barCounts[barItem.id] = runiteBit++ 
+                        Items.SILVER_BAR_2355 -> barCounts[barItem.id] = silverBit++ 
+                        Items.GOLD_BAR_2357 -> barCounts[barItem.id] = goldBit++ 
+                    }
+                }
+                for ((id, amount) in barCounts) {
+                    when (id) {
+                        Items.BRONZE_BAR_2349 -> setVarbit(player, 941, amount)
+                        Items.IRON_BAR_2351 -> setVarbit(player, 942, amount)
+                        Items.STEEL_BAR_2353 -> setVarbit(player, 943, amount)
+                        Items.MITHRIL_BAR_2359 -> setVarbit(player, 944, amount)
+                        Items.ADAMANTITE_BAR_2361 -> setVarbit(player, 945, amount)
+                        Items.RUNITE_BAR_2363 -> setVarbit(player, 946, amount)
+                        Items.SILVER_BAR_2355 -> setVarbit(player, 948, amount)
+                        Items.GOLD_BAR_2357 -> setVarbit(player, 947, amount)
                     }
                 }
                 return@onOpen true
@@ -50,7 +62,7 @@ class BlastFurnaceInterfaceListener : InterfaceListener {
         on(Components.BLAST_FURNACE_BAR_STOCK_28){ player, _, _, buttonID, _, _ ->
             val bar = BFBars.forId(buttonID) ?: return@on false
             val isAll = buttonID == bar.allButtonId
-            val playerAmt = player.varpManager.get(bar.varpIndex).getVarbitValue(bar.offset) ?: 0
+            val playerAmt = getVarbit(player, bar.varbit)
             if(playerAmt == 0) return@on true
 
             var amtToWithdraw = if(isAll) playerAmt else 1
@@ -70,28 +82,28 @@ class BlastFurnaceInterfaceListener : InterfaceListener {
                 BFBars.GOLD -> Items.GOLD_BAR_2357
             }
 
-            player.varpManager.get(bar.varpIndex).setVarbit(bar.offset, playerAmt - amtToWithdraw).send(player)
-
+            setVarbit(player, bar.varbit, playerAmt - amtToWithdraw)
 
             while(amtToWithdraw > 0){
                 if(addItem(player, barItemId, 1) && player.blastBars.remove(Item(barItemId))) {
                     amtToWithdraw--
                 } else break
             }
-            if(player.blastBars.isEmpty) player.varpManager.get(543).clear().send(player)
+            if(player.blastBars.isEmpty) 
+                setVarp(player, 543, 0)
             return@on true
         }
     }
 
-    internal enum class BFBars(val buttonId: Int, val varpIndex: Int, val offset: Int, val allButtonId: Int = buttonId + 2){
-        BRONZE(43, 545, 0, 44),
-        IRON(40, 545, 8, 41),
-        STEEL(36, 545, 16),
-        MITHRIL(33, 545, 24),
-        ADAMANT(30, 546, 0),
-        RUNITE(27, 546, 8),
-        SILVER(24, 546, 24),
-        GOLD(21, 546, 16);
+    internal enum class BFBars(val buttonId: Int, val varbit: Int, val allButtonId: Int = buttonId + 2){
+        BRONZE(43, 941, 44),
+        IRON(40, 942, 41),
+        STEEL(36, 943),
+        MITHRIL(33, 944),
+        ADAMANT(30, 945),
+        RUNITE(27, 946),
+        SILVER(24, 948),
+        GOLD(21, 947);
 
         companion object {
             private val idMap = values().associateBy { it.buttonId }

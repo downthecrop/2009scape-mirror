@@ -3,6 +3,8 @@ package content.region.asgarnia.goblinvillage.quest.goblindiplomacy;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents a grub foot.
  * @author Vexia
@@ -43,7 +45,7 @@ public enum GrubFoot {
 	 * @return the grub foot.
 	 */
 	public static GrubFoot forConfig(final Player player) {
-		int config = player.getConfigManager().get(62);
+                int config = getVarp(player, 62);
 		for (GrubFoot foot : values()) {
 			if (foot.getValue() == config) {
 				if (foot.ordinal() + 1 >= values().length) {
@@ -60,7 +62,7 @@ public enum GrubFoot {
 	 * @param player the player.
 	 */
 	public void setConfig(Player player) {
-		player.getConfigManager().set(62, value);
+                setVarp(player, 62, value);
 	}
 
 	/**

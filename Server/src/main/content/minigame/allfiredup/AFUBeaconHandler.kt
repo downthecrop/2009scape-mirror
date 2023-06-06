@@ -106,7 +106,6 @@ class AFUBeaconListeners : InteractionListener {
                             if(questComplete){
                                 session?.setLogs(beacon.ordinal,logs)
                             }
-                            player.varpManager.flagSave(beacon.varpId);
                         }
                         2 -> player.unlock().also {player.animator.animate(Animation.RESET); return true }
                     }

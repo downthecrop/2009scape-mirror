@@ -179,7 +179,7 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
                 player.getLocks().lockInteractions(2);
                 player.debug("Using bone " + bone.getItemId() + " on grinder.. bone info:" + b);
                 player.animate(Animation.create(1649));
-                player.getConfigManager().set(408, bone.getConfigValue(true), true);
+                setVarp(player, 408, bone.getConfigValue(true), true);
                 player.sendMessage("You put some bones in the grinder's hopper.", 1);
                 player.getWalkingQueue().reset();
                 player.getWalkingQueue().addPath(3659, 3524, true);
@@ -234,10 +234,10 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
             player.sendMessage("You need an empty pot to put the crushed bones into.");
             return;
         }
-        final Bones bone = Bones.forConfigValue(player.getConfigManager().get(408), false);
+        final Bones bone = Bones.forConfigValue(getVarp(player, 408), false);
         player.getLocks().lockInteractions(2);
         player.animate(Animation.create(1650));
-        player.getConfigManager().set(408, 0, true);
+        setVarp(player, 408, 0, true);
         player.sendMessage("You fill a pot with crushed bones.");
         player.getInventory().replace(bone.getBoneMeal(), player.getInventory().getSlot(new Item(1931)));
     }
@@ -249,12 +249,12 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
      * @param object the object.
      */
     private void wind(Player player, Scenery object) {
-        final Bones bone = Bones.forConfigValue(player.getConfigManager().get(408), true);
+        final Bones bone = Bones.forConfigValue(getVarp(player, 408), true);
         player.getLocks().lockInteractions(3);
         player.animate(Animation.create(1648));
         player.sendMessage("You wind the grinder handle.");
         if (hasBones(player, object, true)) {
-            player.getConfigManager().set(408, bone.getConfigValue(false), true);
+            setVarp(player, 408, bone.getConfigValue(false), true);
             player.sendMessage("Some crushed bones pour into the bin.", 3);
         }
     }
@@ -268,7 +268,7 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
      * @return {@code True} if so.
      */
     public static boolean hasBones(Player player, Scenery object, boolean inHopper) {
-        int value = player.getConfigManager().get(408);
+        int value = getVarp(player, 408);
         for (Bones bone : Bones.values()) {
             if (bone.getConfigValue(inHopper) == value) {
                 return true;

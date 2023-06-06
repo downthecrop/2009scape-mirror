@@ -5,73 +5,73 @@ import core.cache.def.impl.VarbitDefinition
 import core.game.node.scenery.Scenery
 import core.game.node.entity.player.Player
 
-enum class FarmingPatch(val varpIndex: Int, val varpOffset: Int, val type: PatchType) {
+enum class FarmingPatch(val varbit: Int, val type: PatchType) {
     //Allotments
-    S_FALADOR_ALLOTMENT_NW(504,0,PatchType.ALLOTMENT),
-    S_FALADOR_ALLOTMENT_SE(504,8,PatchType.ALLOTMENT),
-    CATHERBY_ALLOTMENT_N(504,16,PatchType.ALLOTMENT),
-    CATHERBY_ALLOTMENT_S(504,24,PatchType.ALLOTMENT),
-    ARDOUGNE_ALLOTMENT_S(505,8,PatchType.ALLOTMENT),
-    ARDOUGNE_ALLOTMENT_N(505,0,PatchType.ALLOTMENT),
-    PORT_PHAS_ALLOTMENT_NW(505,16,PatchType.ALLOTMENT),
-    PORT_PHAS_ALLOTMENT_SE(505,24,PatchType.ALLOTMENT),
-    HARMONY_ISLAND_ALLOTMENT(982,8,PatchType.ALLOTMENT),
+    S_FALADOR_ALLOTMENT_NW(708,PatchType.ALLOTMENT),
+    S_FALADOR_ALLOTMENT_SE(709,PatchType.ALLOTMENT),
+    CATHERBY_ALLOTMENT_N(710,PatchType.ALLOTMENT),
+    CATHERBY_ALLOTMENT_S(711,PatchType.ALLOTMENT),
+    ARDOUGNE_ALLOTMENT_S(713,PatchType.ALLOTMENT),
+    ARDOUGNE_ALLOTMENT_N(712,PatchType.ALLOTMENT),
+    PORT_PHAS_ALLOTMENT_NW(714,PatchType.ALLOTMENT),
+    PORT_PHAS_ALLOTMENT_SE(715,PatchType.ALLOTMENT),
+    HARMONY_ISLAND_ALLOTMENT(3402,PatchType.ALLOTMENT),
 
     //Herb
-    CATHERBY_HERB_CE(515,8,PatchType.HERB),
-    S_FALADOR_HERB_NE(515,0,PatchType.HERB),
-    ARDOUGNE_HERB_CE(515,16,PatchType.HERB),
-    PORT_PHAS_HERB_NE(515,24,PatchType.HERB),
-    TROLL_STRONGHOLD_HERB(830,0,PatchType.HERB),
+    CATHERBY_HERB_CE(781,PatchType.HERB),
+    S_FALADOR_HERB_NE(780,PatchType.HERB),
+    ARDOUGNE_HERB_CE(782,PatchType.HERB),
+    PORT_PHAS_HERB_NE(783,PatchType.HERB),
+    TROLL_STRONGHOLD_HERB(2788,PatchType.HERB),
 
     //Flower
-    S_FALADOR_FLOWER_C(508,0,PatchType.FLOWER),
-    CATHERBY_FLOWER_C(508,8,PatchType.FLOWER),
-    ARDOUGNE_FLOWER_C(508,16,PatchType.FLOWER),
-    PORT_PHAS_FLOWER_C(508,24,PatchType.FLOWER),
-    WILDERNESS_FLOWER(1183,12,PatchType.FLOWER),
+    S_FALADOR_FLOWER_C(728,PatchType.FLOWER),
+    CATHERBY_FLOWER_C(729,PatchType.FLOWER),
+    ARDOUGNE_FLOWER_C(730,PatchType.FLOWER),
+    PORT_PHAS_FLOWER_C(731,PatchType.FLOWER),
+    WILDERNESS_FLOWER(5067,PatchType.FLOWER),
 
     //Tree
-    N_FALADOR_TREE(502,8,PatchType.TREE),
-    TAVERLY_TREE(502,0,PatchType.TREE),
-    GNOME_STRONGHOLD_TREE(830,11,PatchType.TREE),
-    LUMBRIDGE_TREE(502,24,PatchType.TREE),
-    VARROCK_TREE(502,16,PatchType.TREE),
+    N_FALADOR_TREE(701,PatchType.TREE),
+    TAVERLY_TREE(700,PatchType.TREE),
+    GNOME_STRONGHOLD_TREE(2953,PatchType.TREE),
+    LUMBRIDGE_TREE(703,PatchType.TREE),
+    VARROCK_TREE(702,PatchType.TREE),
 
     //Fruit Tree
-    GNOME_STRONGHOLD_FRUIT_TREE(503,0,PatchType.FRUIT_TREE),
-    CATHERBY_FRUIT_TREE(503,24,PatchType.FRUIT_TREE),
-    TREE_GNOME_VILLAGE_FRUIT_TREE(503,8,PatchType.FRUIT_TREE),
-    BRIMHAVEN_FRUIT_TREE(503,16,PatchType.FRUIT_TREE),
-    LLETYA_FRUIT_TREE(830,23,PatchType.FRUIT_TREE),
+    GNOME_STRONGHOLD_FRUIT_TREE(704,PatchType.FRUIT_TREE),
+    CATHERBY_FRUIT_TREE(707,PatchType.FRUIT_TREE),
+    TREE_GNOME_VILLAGE_FRUIT_TREE(705,PatchType.FRUIT_TREE),
+    BRIMHAVEN_FRUIT_TREE(706,PatchType.FRUIT_TREE),
+    LLETYA_FRUIT_TREE(4317,PatchType.FRUIT_TREE),
 
     //Hops
-    ENTRANA_HOPS(506,8,PatchType.HOPS),
-    LUMBRIDGE_HOPS(506,16,PatchType.HOPS),
-    MCGRUBOR_HOPS(506,24,PatchType.HOPS),
-    YANILLE_HOPS(506,0,PatchType.HOPS),
+    ENTRANA_HOPS(717,PatchType.HOPS),
+    LUMBRIDGE_HOPS(718,PatchType.HOPS),
+    MCGRUBOR_HOPS(719,PatchType.HOPS),
+    YANILLE_HOPS(716,PatchType.HOPS),
 
     //Bushes
-    CHAMPIONS_GUILD_BUSH(509,0,PatchType.BUSH),
-    RIMMINGTON_BUSH(509,8,PatchType.BUSH),
-    ARDOUGNE_BUSH(509,24,PatchType.BUSH),
-    ETCETERIA_BUSH(509,16,PatchType.BUSH),
+    CHAMPIONS_GUILD_BUSH(732,PatchType.BUSH),
+    RIMMINGTON_BUSH(733,PatchType.BUSH),
+    ARDOUGNE_BUSH(735,PatchType.BUSH),
+    ETCETERIA_BUSH(734,PatchType.BUSH),
 
     //Spirit Tree
-    ETCETERIA_SPIRIT_TREE(507,8,PatchType.SPIRIT_TREE),
-    PORT_SARIM_SPIRIT_TREE(507,0,PatchType.SPIRIT_TREE),
-    KARAMJA_SPIRIT_TREE(507,16,PatchType.SPIRIT_TREE),
+    ETCETERIA_SPIRIT_TREE(722,PatchType.SPIRIT_TREE),
+    PORT_SARIM_SPIRIT_TREE(720,PatchType.SPIRIT_TREE),
+    KARAMJA_SPIRIT_TREE(724,PatchType.SPIRIT_TREE),
 
     //Other
-    DRAYNOR_BELLADONNA(512, 16, PatchType.BELLADONNA),
-    CANIFIS_MUSHROOM(512, 8, PatchType.MUSHROOM),
-    ALKHARID_CACTUS(512, 0, PatchType.CACTUS),
-    EVIL_TURNIP(1171, 7, PatchType.EVIL_TURNIP);
+    DRAYNOR_BELLADONNA(748, PatchType.BELLADONNA),
+    CANIFIS_MUSHROOM(746, PatchType.MUSHROOM),
+    ALKHARID_CACTUS(744, PatchType.CACTUS),
+    EVIL_TURNIP(4291, PatchType.EVIL_TURNIP);
 
 
     companion object {
         @JvmField
-        val patches = FarmingPatch.values().map { (it.varpIndex shl it.varpOffset) to it }.toMap()
+        val patches = FarmingPatch.values().map { it.varbit to it }.toMap()
 
         @JvmStatic
         fun forObject(obj: Scenery): FarmingPatch?{
@@ -81,8 +81,7 @@ enum class FarmingPatch(val varpIndex: Int, val varpOffset: Int, val type: Patch
         @JvmStatic
         fun forObjectID(id: Int): FarmingPatch?{
             val objDef = SceneryDefinition.forId(id)
-            val def = VarbitDefinition.forObjectID(objDef.varbitID)
-            return patches[def.varpId shl def.startBit]
+            return patches[objDef.varbitID]
         }
     }
 

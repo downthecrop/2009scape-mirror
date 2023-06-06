@@ -11,6 +11,7 @@ import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import core.api.*
 import java.util.*
 
 /**
@@ -93,19 +94,18 @@ class AFURepairClimbHandler : InteractionListener {
             }
         }
 
-        player.varpManager.get(rco.varp).setVarbit(rco.offset,1).send(player)
-        player.varpManager.flagSave(rco.varp)
+        setVarbit(player, rco.varbit, 1, true)
     }
 
     private fun climb(player: Player, rco: RepairClimbObject, location: Location){
         ForceMovement.run(player,location,rco.getOtherLocation(player),rco.getAnimation(player),rco.getAnimation(player),rco.getDirection(player),20).endAnimation = Animation(-1)
     }
 
-    private enum class RepairClimbObject(val varp: Int, val offset: Int, val destinationUp: Location?, val destinationDown: Location?, val levelRequirement: Pair<Int,Int>?){
-        DEATH_PLATEAU(1282,15,Location.create(2949, 3623, 0),Location.create(2954, 3623, 0), Pair(Skills.CONSTRUCTION,42)),
-        BURTHORPE(1282,14,Location.create(2941, 3563, 0),Location.create(2934, 3563, 0),Pair(Skills.SMITHING,56)),
-        GWD(1283,27,null,null,Pair(Skills.CRAFTING,60)),
-        TEMPLE(1287,29,Location.create(2949, 3835, 0),Location.create(2956, 3835, 0),Pair(Skills.SMITHING,64));
+    private enum class RepairClimbObject(val varbit: Int, val destinationUp: Location?, val destinationDown: Location?, val levelRequirement: Pair<Int,Int>?){
+        DEATH_PLATEAU(5161,Location.create(2949, 3623, 0),Location.create(2954, 3623, 0), Pair(Skills.CONSTRUCTION,42)),
+        BURTHORPE(5160,Location.create(2941, 3563, 0),Location.create(2934, 3563, 0),Pair(Skills.SMITHING,56)),
+        GWD(5163,null,null,Pair(Skills.CRAFTING,60)),
+        TEMPLE(5164,Location.create(2949, 3835, 0),Location.create(2956, 3835, 0),Pair(Skills.SMITHING,64));
 
         fun getOtherLocation(player: Player): Location?{
             if(player.location == destinationDown) return destinationUp
@@ -124,7 +124,7 @@ class AFURepairClimbHandler : InteractionListener {
         }
 
         fun isRepaired(player: Player): Boolean{
-            return player.varpManager.get(varp).getVarbit(offset) == 1
+            return getVarbit(player, varbit) == 1
         }
     }
 

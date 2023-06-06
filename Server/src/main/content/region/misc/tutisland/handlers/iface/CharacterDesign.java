@@ -7,6 +7,8 @@ import core.game.node.entity.player.link.appearance.Gender;
 import core.game.node.item.Item;
 import core.tools.RandomFunction;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the class used to handle the character design.
  * @author Emperor
@@ -147,7 +149,7 @@ public final class CharacterDesign {
 		player.getPacketDispatch().sendInterfaceConfig(771, 22, false);
 		player.getPacketDispatch().sendInterfaceConfig(771, 92, false);
 		player.getPacketDispatch().sendInterfaceConfig(771, 97, false);
-		player.getConfigManager().set(1262, player.getAppearance().isMale());
+                setVarp(player, 1262, player.getAppearance().isMale() ? 1 : 0);
 	}
 
 	public static void reopen(final Player player) {
@@ -163,7 +165,7 @@ public final class CharacterDesign {
 		player.getPacketDispatch().sendInterfaceConfig(771, 22, false);
 		player.getPacketDispatch().sendInterfaceConfig(771, 92, false);
 		player.getPacketDispatch().sendInterfaceConfig(771, 97, false);
-		player.getConfigManager().set(1262, player.getAppearance().isMale());
+                setVarp(player, 1262, player.getAppearance().isMale() ? 1 : 0);
 	}
 
 
@@ -243,7 +245,7 @@ public final class CharacterDesign {
 	 */
 	private static void changeGender(Player player, boolean male) {
 		player.setAttribute("male", male);
-		player.getConfigManager().set(1262, male ? 1 : -1);
+                setVarp(player, 1262, male ? 1 : 0);
 		reset(player);
 	}
 

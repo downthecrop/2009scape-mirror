@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
+import core.game.bots.AIPlayer;
 
 import static core.api.ContentAPIKt.log;
 
@@ -85,6 +86,7 @@ public final class PacketRepository {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void send(Class<? extends OutgoingPacket> clazz, Context context) {
+                if(context.getPlayer() instanceof AIPlayer) return;
 		if(context.getPlayer().getSession() == null) return;
 		OutgoingPacket p = OUTGOING_PACKETS.get(clazz);
 		if (p == null) {

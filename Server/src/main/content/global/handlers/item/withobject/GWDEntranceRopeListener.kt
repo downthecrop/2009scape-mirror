@@ -20,7 +20,7 @@ class GWDEntranceRopeListener : InteractionListener {
                 return@onUseWith false
             }
 
-            setVarbit(player,1048,0,1,true)
+            setVarbit(player, 3932, 1, true)
 
             return@onUseWith true
         }

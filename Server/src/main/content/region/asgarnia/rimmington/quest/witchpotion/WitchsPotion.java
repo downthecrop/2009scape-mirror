@@ -75,7 +75,6 @@ public class WitchsPotion extends Quest {
 	@Override
 	public void finish(Player player) {
 		super.finish(player);
-		player.getConfigManager().set(101, player.getQuestRepository().getPoints());
 		player.getPacketDispatch().sendString("1 Quest Point", 277, 8 + 2);
 		player.getPacketDispatch().sendString("325 Magic XP", 277, 9 + 2);
 		player.getSkills().addExperience(Skills.MAGIC, 325);

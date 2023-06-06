@@ -56,9 +56,9 @@ public final class EdgevilleNodePlugin extends OptionHandler {
                 break;
 			case 12266:
 				if (option.equalsIgnoreCase("open")) {
-					player.getConfigManager().set(680, 1<<22);
+                                        setVarp(player, 680, 1 << 22);
 				} else if (option.equalsIgnoreCase("close")) {
-					player.getConfigManager().set(680, 0);
+                                        setVarp(player, 680, 0);
 				}
 				break;
             case 26933: // Edgeville Dungeon trapdoor (when closed)

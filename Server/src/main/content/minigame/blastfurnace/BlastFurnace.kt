@@ -145,7 +145,7 @@ object BlastFurnace {
             var oreAmount = player.blastOre.itemCount()
             var totalAmount = barsAmount + oreAmount
             if (barsHot) {
-                player.varpManager.get(543).setVarbit(8, 2).send(player)
+                setVarbit(player, 936, 2)
             }else if (makeBars && playerOre.isNotEmpty() && barsAmountFree > 0 && totalAmount < 56 && player.getAttribute("OreInPot",false) == true) {
                 playerOre.forEach { oreID ->
                     playerCoal = player.blastCoal.getAmount(Items.COAL_453)
@@ -178,7 +178,7 @@ object BlastFurnace {
                                 }
                             }
                             if(removed) {
-                                player.varpManager.get(543).setVarbit(8, 1).send(player)
+                                setVarbit(player, 936, 1)
                                 barsHot = true
                                 player.blastBars.add(bar.product)
                                 var experience = bar.experience
@@ -207,11 +207,11 @@ object BlastFurnace {
                     }
                 }
                 if (coalToAdd < 0){
-                    player.varpManager.get(543).setVarbit(12, 0).send(player)
-                } else player.varpManager.get(543).setVarbit(12, coalToAdd).send(player)
+                    setVarbit(player, 940, 0)
+                } else setVarbit(player, 940, coalToAdd)
             }
             else if(playerOre.isEmpty()) {
-                player.varpManager.get(543).setVarbit(12,0).send(player)
+                setVarbit(player, 940, 0)
             }
             if(playerOre.isEmpty() && player.getAttribute("OreInPot",false)){
                 player.removeAttribute("OreInPot")
@@ -306,56 +306,4 @@ object BlastFurnace {
             replaceScenery(cogs2!!, 9104, -1)
         }
     }
-
-    /**Hi kids!
-     * Do you like Varbits?
-     * Wanna see me stick Nine Binary Bytes, through each one of my eyelids?
-     * Wanna look at how many bars you have left inside the furnace???
-
-    fun interfaceManager() {
-        var playerBars = listOf<Item>()
-        var bronzeBit = 1
-        var ironBit = 1
-        var steelBit = 1
-        var mithrilBit = 1
-        var adamantiteBit = 1
-        var runiteBit = 1
-        var silverBit = 1
-        var goldBit = 1
-        var barTotal = 0
-        blastFurnacePlayerList.forEach { player ->
-            playerBars = player.blastBars.toArray().filterNotNull()
-            var barAmount = player.blastBars.toArray().filterNotNull().count()
-            var updateInterface = true
-            if (playerBars.isNotEmpty() && updateInterface) {
-                playerBars.forEach { barItem ->
-                    when (barItem.id) {
-                        Items.BRONZE_BAR_2349 -> player.varpManager.get(545).setVarbit(0, bronzeBit++).send(player)
-                        Items.IRON_BAR_2351 -> player.varpManager.get(545).setVarbit(8, ironBit++).send(player)
-                        Items.STEEL_BAR_2353 -> player.varpManager.get(545).setVarbit(16, steelBit++).send(player)
-                        Items.MITHRIL_BAR_2359 -> player.varpManager.get(545).setVarbit(24, mithrilBit++).send(player)
-                        Items.ADAMANTITE_BAR_2361 -> player.varpManager.get(546).setVarbit(0, adamantiteBit++).send(player)
-                        Items.RUNITE_BAR_2363 -> player.varpManager.get(546).setVarbit(8, runiteBit++).send(player)
-                        Items.SILVER_BAR_2355 -> player.varpManager.get(546).setVarbit(24, silverBit++).send(player)
-                        Items.GOLD_BAR_2357 -> player.varpManager.get(546).setVarbit(16, goldBit++).send(player)
-                    }
-                }
-            }
-            if (barTotal > barAmount) {
-                playerBars.forEach { barItem ->
-                    when (barItem.id) {
-                        Items.BRONZE_BAR_2349 -> player.varpManager.get(545).setVarbit(0, bronzeBit--).send(player)
-                        Items.IRON_BAR_2351 -> player.varpManager.get(545).setVarbit(8, ironBit--).send(player)
-                        Items.STEEL_BAR_2353 -> player.varpManager.get(545).setVarbit(16, steelBit--).send(player)
-                        Items.MITHRIL_BAR_2359 -> player.varpManager.get(545).setVarbit(24, mithrilBit--).send(player)
-                        Items.ADAMANTITE_BAR_2361 -> player.varpManager.get(546).setVarbit(0, adamantiteBit--).send(player)
-                        Items.RUNITE_BAR_2363 -> player.varpManager.get(546).setVarbit(8, runiteBit--).send(player)
-                        Items.SILVER_BAR_2355 -> player.varpManager.get(546).setVarbit(24, silverBit--).send(player)
-                        Items.GOLD_BAR_2357 -> player.varpManager.get(546).setVarbit(16, goldBit--).send(player)
-                    }
-                }
-            }
-        }
-    }
-     */
 }

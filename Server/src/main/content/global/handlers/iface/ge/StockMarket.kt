@@ -30,7 +30,7 @@ class StockMarket : InterfaceListener {
             player.packetDispatch.sendInterfaceConfig(105, 193, true)
             player.packetDispatch.sendIfaceSettings(6, 211, 105, -1, -1)
             player.packetDispatch.sendIfaceSettings(6, 209, 105, -1, -1)
-            player.varpManager.get(1112).setVarbit(0, -1).send(player)
+            setVarp(player, 1112, -1)
             return@onOpen true
         }
 
@@ -187,13 +187,13 @@ class StockMarket : InterfaceListener {
     fun updateOfferValue(player: Player, offer: GrandExchangeOffer, newAmt: Int)
     {
         offer.offeredValue = newAmt
-        player.varpManager.get(1111).setVarbit(0, newAmt).send(player)
+        setVarp(player, 1111, newAmt)
     }
 
     fun updateOfferAmount(player: Player, offer: GrandExchangeOffer, newAmt: Int)
     {
         offer.amount = newAmt
-        player.varpManager.get(1110).setVarbit(0, newAmt).send(player)
+        setVarp(player, 1110, newAmt)
     }
 
     fun abortOffer(player: Player, offer: GrandExchangeOffer?)
@@ -320,14 +320,14 @@ class StockMarket : InterfaceListener {
                 lowPrice = (recommendedPrice * 0.95).toInt()
                 highPrice = (recommendedPrice * 1.05).toInt()
             }
-            player.varpManager.get(1109).setVarbit(0, offer?.itemID ?: -1).send(player)
-            player.varpManager.get(1110).setVarbit(0, offer?.amount ?: 0).send(player)
-            player.varpManager.get(1111).setVarbit(0, offer?.offeredValue ?: 0).send(player)
-            player.varpManager.get(1112).setVarbit(0, index).send(player)
-            player.varpManager.get(1113).setVarbit(0, if (isSale) 1 else 0).send(player)
-            player.varpManager.get(1114).setVarbit(0, recommendedPrice).send(player)
-            player.varpManager.get(1115).setVarbit(0, lowPrice).send(player)
-            player.varpManager.get(1116).setVarbit(0, highPrice).send(player)
+            setVarp(player, 1109, offer?.itemID ?: -1)
+            setVarp(player, 1110, offer?.amount ?: 0)
+            setVarp(player, 1111, offer?.offeredValue ?: 0)
+            setVarp(player, 1112, index)
+            setVarp(player, 1113, if (isSale) 1 else 0)
+            setVarp(player, 1114, recommendedPrice)
+            setVarp(player, 1115, lowPrice)
+            setVarp(player, 1116, highPrice)
             if (offer != null) {
                 PacketRepository.send(
                         ContainerPacket::class.java,

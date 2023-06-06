@@ -19,6 +19,8 @@ import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.ClassScanner;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles the agility pryamid course.
  * @author Vexia
@@ -147,7 +149,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 		case 10855:
 		case 10856:
 			addConfig(player, 10869, 0, true);
-			if (player.getConfigManager().get(640) == 505 || player.getConfigManager().get(640) == 515) {
+			if (getVarp(player, 640) == 505 || getVarp(player, 640) == 515) {
 				player.getSkills().addExperience(Skills.AGILITY, 300, true);
 			}
 			player.getDialogueInterpreter().sendDialogue("You climb down the steep passage. It leads to the base of the", "pyramid.");
@@ -387,7 +389,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 				@Override
 				public boolean pulse() {
 					player.getSkills().addExperience(Skills.AGILITY, 1000);
-					if (player.getConfigManager().get(640) == 505 || player.getConfigManager().get(640) == 515) {
+					if (getVarp(player, 640) == 505 || getVarp(player, 640) == 515) {
 						player.getPacketDispatch().sendMessage("You find nothing on top of the pyramid.");
 						return true;
 					}
@@ -510,7 +512,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 		final VarbitDefinition definition = VarbitDefinition.forObjectID(SceneryDefinition.forId(objectId).getVarbitID());
 		final int oldVal = (definition.getValue(player) << definition.getStartBit());
 		final int newVal = (value << definition.getStartBit());
-		player.getConfigManager().set(CONFIG_ID, (player.getConfigManager().get(CONFIG_ID) - oldVal) + newVal, save);
+                setVarp(player, CONFIG_ID, (getVarp(player, CONFIG_ID) - oldVal) + newVal, save);
 	}
 
 	/**

@@ -34,6 +34,8 @@ import core.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 
+import static core.api.ContentAPIKt.setVarp;
+
 /**
  * The catapult room.
  * @author Emperor
@@ -207,7 +209,7 @@ public final class CatapultRoom extends MapZone implements Plugin<Object> {
 				if (button >= 9 && button <= 12) {
 					CatapultAttack attack = CatapultAttack.values()[button - 9];
 					player.setAttribute("catapult_def", attack);
-					player.getConfigManager().set(788, (button - 8) % 4);
+                                        setVarp(player, 788, (button - 8) % 4);
 					return true;
 				}
 				return false;

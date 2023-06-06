@@ -232,7 +232,7 @@ class VisualCommand : CommandPlugin() {
                         var shift = 0
                         override fun pulse(): Boolean {
                             for(i in 0..1999){
-                                player?.configManager?.forceSet(i, pos shl shift, false)
+                                setVarp(player!!, i, pos shl shift)
                             }
                             player?.sendMessage("$pos shl $shift")
                             if(pos++ >= 63){
@@ -246,32 +246,11 @@ class VisualCommand : CommandPlugin() {
                     submitWorldPulse(object : Pulse(3, player) {
                         var pos = 0
                         override fun pulse(): Boolean {
-                            player?.configManager?.forceSet(cfg_index, value shl pos, false)
+                            setVarp(player!!, cfg_index, value shl pos)
                             player?.sendMessage("$pos")
                             return pos++ >= 32
                         }
                     })
-                }
-            }
-            "setbit" -> {
-                if (args!!.size < 2) {
-                    player!!.debug("syntax error: bit value")
-                    return true
-                }
-                var bit = toInteger(args[0]!!)
-                var value = toInteger(args[1]!!)
-                var val2 = toInteger(args[2]!!)
-                player!!.debug("$value $val2")
-                PacketRepository.send(Varbit::class.java, VarbitContext(player, value, val2))
-                return true
-            }
-            "setbits" -> {
-                args ?: return false
-                val start = toInteger(args[1]!!)
-                val end = toInteger(args[2]!!)
-                val value = toInteger(args[3]!!)
-                for(i in start until end){
-                    player?.varpManager?.setVarbit(i, value)
                 }
             }
             "loop_anim_on_i" -> {
@@ -342,7 +321,7 @@ class VisualCommand : CommandPlugin() {
                 val value = toInteger(args[3]!!)
                 var i = toInteger(args[1]!!)
                 while (i < toInteger(args[2]!!)) {
-                    player!!.configManager[i] = value
+                    setVarp(player!!, i, value)
                     i++
                 }
                 return true

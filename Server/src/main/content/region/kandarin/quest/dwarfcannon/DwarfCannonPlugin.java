@@ -24,8 +24,9 @@ import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import core.game.node.scenery.Scenery;
 
-import static core.api.ContentAPIKt.log;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the dwarf cannon quest interactions.
@@ -65,8 +66,8 @@ public class DwarfCannonPlugin extends OptionHandler {
 					player.getDialogueInterpreter().sendDialogues(player, null, "This should work nicely now that I've fixed it.");
 					return true;
 				}
-				player.getConfigManager().set(1, 2041, true);
-				player.getConfigManager().set(0, 8, true);
+				//setVarp(player, 1, 2041, true);
+                                setVarp(player, 0, 8, true);
 				player.getQuestRepository().getQuest(DwarfCannon.NAME).setStage(player, 60);
 				player.sendMessage("Well done! You've fixed the cannon! Better go and tell Captain Lawgof.");
 				/*
@@ -123,6 +124,7 @@ public class DwarfCannonPlugin extends OptionHandler {
 		case 18:
 		case 19:
 		case 20:
+                        int index = 15 - node.getId();
 			final int shift = 10 - (20 - node.getId());
 			player.faceLocation(node.getLocation());
 			player.getDialogueInterpreter().sendDialogue("The railing is broken and needs to be replaced.");
@@ -167,8 +169,8 @@ public class DwarfCannonPlugin extends OptionHandler {
 								}
 								player.getInventory().remove(new Item(14));
 								player.sendMessage("The railing is now fixed.");
-								player.getConfigManager().set(1, player.getConfigManager().get(1) + (1 << shift), true);
-								if (player.getConfigManager().get(1) == 2016) {
+                                                                setVarbit(player, ((Scenery) node).getDefinition().getVarbitID(), 1, true);
+								if (DwarfCannon.allRailsFixed(player)) {
 									player.getDialogueInterpreter().sendDialogues(player, null, "I've fixed all these railings now.");
 								}
 								return true;
@@ -193,7 +195,7 @@ public class DwarfCannonPlugin extends OptionHandler {
 					if (!player.getInventory().hasSpaceFor(DwarfCannon.DWARF_REMAINS)) {
 						return;
 					}
-					player.getConfigManager().set(0, 4);
+                                        setVarp(player, 0, 4, true);
 					player.getInventory().add(DwarfCannon.DWARF_REMAINS);
 				}
 
@@ -205,12 +207,13 @@ public class DwarfCannonPlugin extends OptionHandler {
 				return true;
 			}
 			quest.setStage(player, 40);
-			player.getConfigManager().set(0, 6, true);
+                        setVarp(player, 0, 6, true);
 			spawnLollk(player);
 			break;
 		}
 		return true;
 	}
+
 
 	/**
 	 * Spawns the lollk npc.
@@ -303,8 +306,9 @@ public class DwarfCannonPlugin extends OptionHandler {
 			part.interact(player, this.tool, toggled[part.ordinal()]);
 			if (toggled[0] && toggled[1] && toggled[2]) {
 				player.lock(5);
-				player.getConfigManager().set(1, 2041, true);
-				player.getConfigManager().set(0, 8, true);
+
+				//setVarp(player, 1, 2041, true);
+				//setVarp(player, 0, 8, true);
 				player.getQuestRepository().getQuest(DwarfCannon.NAME).setStage(player, 60);
 				player.sendMessage("Well done! You've fixed the cannon! Better go and tell Captain Lawgof.");
 				GameWorld.getPulser().submit(new Pulse(5, player) {
@@ -315,7 +319,7 @@ public class DwarfCannonPlugin extends OptionHandler {
 					}
 				});
 			}
-			player.sendMessage("Interacting with a part. Toggled=" + toggled[part.ordinal()] + ", configVal=" + player.getConfigManager().get(1) + ".");
+			//player.sendMessage("Interacting with a part. Toggled=" + toggled[part.ordinal()] + ", configVal=" + player.getConfigManager().get(1) + ".");
 			return true;
 		}
 
@@ -358,7 +362,7 @@ public class DwarfCannonPlugin extends OptionHandler {
 			 * @param player the player.
 			 */
 			public Tool select(Player player) {
-				player.getConfigManager().set(1, configValue);
+				//setVarp(player, 1, configValue);
 				return this;
 			}
 
@@ -436,7 +440,7 @@ public class DwarfCannonPlugin extends OptionHandler {
 			 * @param toggled if toggled on.
 			 */
 			public void interact(Player player, Tool tool, boolean toggled) {
-				player.getConfigManager().set(1, toggled ? getConfigValue() : tool.getConfigValue());
+				//setVarp(player, 1, toggled ? getConfigValue() : tool.getConfigValue());
 			}
 
 			/**

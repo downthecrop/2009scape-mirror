@@ -7,6 +7,8 @@ import core.plugin.Initializable;
 import core.plugin.ClassScanner;
 import core.game.node.entity.skill.Skills;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the dwarf cannon quest.
  * @author Vexia
@@ -38,6 +40,7 @@ public class DwarfCannon extends Quest {
 	 * The mould item.
 	 */
 	public static final Item MOULD = new Item(4);
+        public static int[] railVarbits = new int[] { 2240, 2241, 2242, 2243, 2244, 2245 };
 
 	/**
 	 * Constructs a new {@Code DwarfCannon} {@Code Object}
@@ -64,7 +67,7 @@ public class DwarfCannon extends Quest {
 			line(player, "<blue>I can start this quest by speaking to <red>Lawgof the Dwarven<n><red>Captain of the Black Watch <blue>, he is defending an area<n><red>North-west of the Fishing Guild <blue>against <red>goblin <blue>attack.", 11);
 			break;
 		case 10:
-			line(player, "<str>I have spoken to Captain Lawgof, he recruited me into the<n><str>Black Guard and asked me to help the dwarves.<n><n>" + (player.getConfigManager().get(1) == 2016 ? "<str>I have repaired all the broken railings,<n><blue>I should report back to <red>Captain Lawgof." : "<blue>My first task is to <red>fix the broken railings<n><blue>in the dwarves defensive perimeter."), 11);
+			line(player, "<str>I have spoken to Captain Lawgof, he recruited me into the<n><str>Black Guard and asked me to help the dwarves.<n><n>" + (allRailsFixed(player) ? "<str>I have repaired all the broken railings,<n><blue>I should report back to <red>Captain Lawgof." : "<blue>My first task is to <red>fix the broken railings<n><blue>in the dwarves defensive perimeter."), 11);
 			break;
 		case 20:
 			line(player, "<str>I have spoken to Captain Lawgof, he recruited me into the<n><str>Black Guard and asked me to help the dwarves.<n><n>" + (player.hasItem(DWARF_REMAINS) ? "<str>I went to the watchtower where I found the remains of<n><str>Gilob.<n><blue>I should take them back to <red>Captain Lawgof." : "<str>I have repaired all the broken railings,<n><blue>Captain Lawgof has asked me to check up on his guards at<n><red>the watchtower <blue>to the South of this camp."), 11);
@@ -96,7 +99,7 @@ public class DwarfCannon extends Quest {
 	@Override
 	public void start(Player player) {
 		super.start(player);
-		player.getConfigManager().set(0, 1);
+                setVarp(player, 0, 1);
 	}
 
 	@Override
@@ -117,9 +120,16 @@ public class DwarfCannon extends Quest {
 		if (stage >= 100) {
 			val = 11;
 		} else if (stage > 0 && stage < 100) {
-			val =  player.getConfigManager().get(0);
+                        val = getVarp(player, 0);
 		}
 		return new int[] { 0, val };
 	}
 	
+        public static boolean allRailsFixed (Player player) {
+            for (int i = 0; i < 6; i++) {
+                if (getVarbit(player, railVarbits[i]) != 1)
+                    return false;
+            }
+            return true;
+        }
 }

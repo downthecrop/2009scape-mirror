@@ -1,5 +1,7 @@
 package content.global.handlers.iface;
 
+import static core.api.ContentAPIKt.*;
+
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -78,7 +80,7 @@ public class SettingTabInterface extends ComponentPlugin {
 			break;
 		case 8:// house
 			p.getInterfaceManager().close();
-			p.getConfigManager().set(261, p.getConfigManager().get(261) & 0x1);
+                        setVarp(p, 261, getVarp(p, 261) & 0x1);
 			p.getInterfaceManager().openSingleTab(new Component(398));
 			break;
 		}

@@ -5,6 +5,7 @@ import core.game.node.entity.state.PlayerState
 import core.game.node.entity.state.State
 import core.game.system.task.Pulse
 import org.json.simple.JSONObject
+import core.api.*
 
 @PlayerState("incubator")
 class IncubatorState(player: Player? = null) : State(player) {
@@ -35,7 +36,7 @@ class IncubatorState(player: Player? = null) : State(player) {
     override fun createPulse() {
         player ?: return
         egg ?: return
-        player.varpManager.get(1160).setVarbit(4,1).send(player)
+        setVarbit(player, 4277, 1)
         pulse = object : Pulse(){
             override fun pulse(): Boolean {
                 if(ticksLeft-- <= 0){

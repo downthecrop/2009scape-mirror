@@ -115,6 +115,9 @@ public class Player extends Entity {
 
 	public VarpManager varpManager = new VarpManager(this);
 
+        public HashMap<Integer, Integer> varpMap = new HashMap<>();
+        public HashMap<Integer, Boolean> saveVarp = new HashMap<>();
+
 	public HashMap<String,State> states = new HashMap<>();
 
 	public HashMap<String,Function1<Player, Unit>> logoutListeners = new HashMap<>();
@@ -228,11 +231,6 @@ public class Player extends Entity {
 	 * The familiar manager.
 	 */
 	private final FamiliarManager familiarManager = new FamiliarManager(this);
-
-	/**
-	 * The config manager.
-	 */
-	private final ConfigurationManager configManager = new ConfigurationManager(this);
 
 	/**
 	 * The saved data.
@@ -620,6 +618,8 @@ public class Player extends Entity {
 					savedData = new SavedData(this);
 					questRepository = new QuestRepository(this);
 					varpManager = new VarpManager(this);
+                                        varpMap.clear();
+                                        saveVarp.clear();
 					new PlayerSaver(this).save();
 					clear();
 					return;
@@ -761,7 +761,6 @@ public class Player extends Entity {
 		getPulseManager().clear();
 		getZoneMonitor().getZones().clear();
 		getViewport().setCurrentPlane(RegionManager.forId(66666).getPlanes()[3]);
-		configManager.reset();
 		playerFlags.setLastSceneGraph(null);
 		playerFlags.setUpdateSceneGraph(false);
 		playerFlags.setLastViewport(new RegionChunk[Viewport.CHUNK_SIZE][Viewport.CHUNK_SIZE]);
@@ -1174,14 +1173,6 @@ public class Player extends Entity {
 	 */
 	public FamiliarManager getFamiliarManager() {
 		return familiarManager;
-	}
-
-	/**
-	 * Gets the configManager.
-	 * @return The configManager.
-	 */
-	public ConfigurationManager getConfigManager() {
-		return configManager;
 	}
 
 	/**

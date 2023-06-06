@@ -19,6 +19,8 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the restless ghost plugin.
  * @author 'Vexia
@@ -167,7 +169,7 @@ public final class RestlessGhostPlugin extends OptionHandler {
 			if (!player.getInventory().add(SKULL)) {
 				GroundItemManager.create(SKULL, player);
 			}
-			player.getConfigManager().set(728, 5, true);
+                        setVarp(player, 728, 5, true);
 			player.getQuestRepository().getQuest(RestlessGhost.NAME).setStage(player, 40);
 			player.getPacketDispatch().sendMessage("The skeleton in the corner suddenly comes to life!");
 			sendSkeleton(player);

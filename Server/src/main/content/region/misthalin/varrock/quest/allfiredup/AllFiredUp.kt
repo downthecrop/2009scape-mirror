@@ -7,6 +7,7 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.Items
 import content.minigame.allfiredup.AFUBeacon
+import core.api.*
 
 /**
  * Represents the "All Fired Up" quest.
@@ -81,9 +82,8 @@ class AllFiredUp : Quest("All Fired Up", 157, 156, 1){
         player.packetDispatch.sendItemZoomOnInterface(Items.TINDERBOX_590, 235, 277, 3 + 2)
         player.skills.addExperience(Skills.FIREMAKING, 5500.0)
         player.inventory.add(Item(995,20000))
-        player.varpManager.unflagSave(1283)
         content.minigame.allfiredup.AFUBeacon.resetAllBeacons(player)
-        player.varpManager.get(1283).setVarbit(0,0).send(player)
+        setVarbit(player, 1283, 0)
         player.questRepository.syncronizeTab(player)
     }
 

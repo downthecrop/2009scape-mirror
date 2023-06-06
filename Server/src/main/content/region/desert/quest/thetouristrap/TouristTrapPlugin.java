@@ -38,6 +38,8 @@ import core.tools.RandomFunction;
 import content.region.desert.quest.thetouristrap.TouristTrapPlugin.AnnaCartHandler.AnnaCartCutscene;
 import content.region.desert.quest.thetouristrap.TouristTrapPlugin.BedabinAnvilHandler.AnnaWinchHandler;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the plugin used to handle interactions for tourist trap.
  *
@@ -429,7 +431,7 @@ public final class TouristTrapPlugin extends OptionHandler {
                     @Override
                     public boolean pulse() {
                         player.getPacketDispatch().sendMessage("You bend the bars back.");
-                        player.getConfigManager().set(907, player.getConfigManager().get(907) + 1);
+                        setVarp(player, 907, getVarp(player, 907) + 1);
                         return true;
                     }
                 });

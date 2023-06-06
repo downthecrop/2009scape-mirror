@@ -8,6 +8,9 @@ import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.ClassScanner;
 
+import static core.api.ContentAPIKt.*;
+
+
 /**
  * Represents the restless ghost quest.
  * @author Vexia
@@ -107,7 +110,7 @@ public class RestlessGhost extends Quest {
 		player.getSkills().addExperience(Skills.PRAYER, 1125);
 		player.getInterfaceManager().closeChatbox();
 		player.getPacketDispatch().sendString("You have completed The Restless Ghost Quest!", 277, 2 + 2);
-		player.getConfigManager().set(728, 31, true);
+                setVarp(player, 728, 31, true);
 		player.getGameAttributes().removeAttribute("restless-ghost:urhney");
 	}
 

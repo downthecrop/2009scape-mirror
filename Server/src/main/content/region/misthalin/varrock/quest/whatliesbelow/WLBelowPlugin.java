@@ -20,6 +20,8 @@ import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
+import static core.api.ContentAPIKt.*;
+
 
 /**
  * Handles the what lies below options.
@@ -111,7 +113,7 @@ public class WLBelowPlugin extends OptionHandler {
 						} else if (count == duration * 2) {
 							quest.setStage(player, 40);
 							player.getAnimator().reset();
-							player.getConfigManager().set(992, 1 << 8, true);
+                                                        setVarp(player, 992, 1 << 8, true);
 							player.getDialogueInterpreter().open(5837, true, true, true);
 							player.unlock();
 							return true;

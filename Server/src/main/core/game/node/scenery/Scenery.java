@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Represents a scenery.
@@ -232,10 +233,10 @@ public class Scenery extends Node {
 		if (def.getVarbitID() > -1) {
 			VarbitDefinition config = def.getConfigFile();
 			if (config != null) {
-				player.varpManager.get(config.getVarpId()).setVarbit(config.getStartBit(),index).send(player);
+                                setVarbit(player, def.getVarbitID(), index);
 			}
 		} else if (def.getConfigId() > -1) {
-			player.varpManager.get(def.getConfigId()).setVarbit(0,index);
+                        setVarp(player, def.getConfigId(), index);
 		}
 	}
 

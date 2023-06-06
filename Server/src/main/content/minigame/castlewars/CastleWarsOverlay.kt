@@ -1,4 +1,4 @@
-import core.api.setVarbit
+import core.api.*
 import core.game.node.entity.player.Player
 
 /**
@@ -8,7 +8,7 @@ import core.game.node.entity.player.Player
 object CastleWarsOverlay {
     @JvmStatic
     fun sendLobbyUpdate(player: Player, bothTeamsHavePlayers: Boolean, gameStartMinutes: Int) {
-        player.varpManager.get(380).setVarbit(0, if (bothTeamsHavePlayers) gameStartMinutes else 0).send(player)
+        setVarp(player, 380, if (bothTeamsHavePlayers) gameStartMinutes else 0)
     }
 
     @JvmStatic

@@ -12,6 +12,8 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.game.world.GameWorld;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles the ava npc dialogue.
  * @author Vexia
@@ -339,7 +341,7 @@ public final class AvaDialogue extends DialoguePlugin {
 				break;
 			case 14:
 				if (player.getInventory().remove(AnimalMagnetism.BAR_MAGNET)) {
-					player.getConfigManager().set(939, 150, true);
+                                        setVarp(player, 939, 150, true);
 					quest.setStage(player, 28);
 					end();
 				}

@@ -10,6 +10,7 @@ import core.game.node.item.Item
 import core.game.bots.AIRepository
 import content.global.bots.DoublingMoney
 import core.game.node.entity.player.info.PlayerMonitor
+import core.api.*
 import java.text.DecimalFormat
 import java.util.*
 
@@ -166,10 +167,10 @@ class TradeModule
         if (stage == 0) {
             // Main interface
             if (otherModified) {
-                 player!!.configManager[1043] = 1
+                 setVarp(player!!, 1043, 1)
             }
             if (isModified) {
-                player!!.configManager[1042] = 1
+                setVarp(player!!, 1042, 1)
             }
         } else {
             // Accept interface

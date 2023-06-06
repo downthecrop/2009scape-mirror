@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static core.api.ContentAPIKt.log;
+import static core.api.ContentAPIKt.getVarp;
 
 /**
  * Represents an object's definition.
@@ -890,7 +891,7 @@ public class SceneryDefinition extends Definition<Scenery> {
 					configValue = def.getValue(player);
 				}
 			} else if (configId != -1) {
-				configValue = player.getConfigManager().get(configId);
+                                configValue = getVarp(player, configId);
 			}
 		} else {
 			configValue = 0;

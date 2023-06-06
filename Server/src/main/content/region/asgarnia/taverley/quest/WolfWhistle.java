@@ -6,6 +6,9 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 
+import static core.api.ContentAPIKt.*;
+
+
 /**
  * Represents the demon slayer quest.
  * @author 'Vexia
@@ -75,7 +78,7 @@ public class WolfWhistle extends Quest {
 
 	@Override
 	public int[] getConfig(Player player, int stage) {
-		int val = player.getConfigManager().get(1178);
+		int val = getVarp(player, 1178);
 		boolean open = val >= 4096;
 		boolean closed = val == 2048;
 		if (stage == 100) {

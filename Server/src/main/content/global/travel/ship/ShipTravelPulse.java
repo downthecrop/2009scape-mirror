@@ -8,6 +8,8 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.MinimapStateContext;
 import core.net.packet.out.MinimapState;
 
+import static core.api.ContentAPIKt.setVarp;
+
 /**
  * Represents a pulse used to travel a player to a location.
  * @author Vexia
@@ -65,7 +67,7 @@ public final class ShipTravelPulse extends Pulse {
 	 */
 	private void arrive() {
 		player.unlock();
-		player.getConfigManager().set(75, -1);
+                setVarp(player, 75, 0);
 		player.getInterfaceManager().close();
 		PacketRepository.send(MinimapState.class, new MinimapStateContext(player, 0));
 		if (!ship.getName().equals("Crandor")) {
@@ -96,6 +98,6 @@ public final class ShipTravelPulse extends Pulse {
 		player.lock(ship.getDelay() + 1);
 		player.getInterfaceManager().open(new Component(299));
 		PacketRepository.send(MinimapState.class, new MinimapStateContext(player, 2));
-		player.getConfigManager().set(75, ship.getConfig());
+                setVarp(player, 75, ship.getConfig());
 	}
 }

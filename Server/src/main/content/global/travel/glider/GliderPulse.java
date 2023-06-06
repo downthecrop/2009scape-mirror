@@ -11,6 +11,9 @@ import core.net.packet.context.MinimapStateContext;
 import core.net.packet.out.CameraViewPacket;
 import core.net.packet.out.MinimapState;
 
+import static core.api.ContentAPIKt.*;
+
+
 /**
  * Represents the pulse used for a glider.
  *
@@ -49,7 +52,7 @@ public final class GliderPulse extends Pulse {
     public boolean pulse() {
         final boolean crash = glider == Gliders.LEMANTO_ADRA;
         if (count == 1) {
-            player.varpManager.get(153).setVarbit(0,glider.getConfig()).send(player);
+            setVarp(player, 153, glider.getConfig());
             PacketRepository.send(MinimapState.class, new MinimapStateContext(player, 2));
         } else if (count == 2 && crash) {
             PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.SHAKE, 4, 4, 1200, 4, 4));
@@ -68,7 +71,7 @@ public final class GliderPulse extends Pulse {
             player.getInterfaceManager().closeOverlay();
             player.getInterfaceManager().close();
             PacketRepository.send(MinimapState.class, new MinimapStateContext(player, 0));
-            player.varpManager.get(153).setVarbit(0,0).send(player);
+            setVarp(player, 153, 0);
             // Use the gnome glider to travel to Karamja
             if (!crash && glider == Gliders.GANDIUS) {
                 player.getAchievementDiaryManager().finishTask(player, DiaryType.KARAMJA, 1, 11);

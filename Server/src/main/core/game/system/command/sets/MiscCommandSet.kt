@@ -456,7 +456,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             }
             val configID = args[1].toString().toInt()
             val configValue = args[2].toString().toInt()
-            player.configManager.forceSet(configID,configValue,false)
+            setVarp(player, configID, configValue)
         }
 
         define("getobjectvarp"){player,args ->
@@ -474,77 +474,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             val varbitID = args[1].toInt()
             notify(player, "${varbitID}: ${VarbitDefinition.forId(varbitID)}")
         }
-        define("togglexp", Privilege.STANDARD){ player, args ->
-            val enabled = player.varpManager.get(2501).getVarbit(0) == 1
-            player.varpManager.get(2501).setVarbit(0,if(enabled) 0 else 1).send(player)
-            notify(player, "XP drops are now " + colorize("%R" + if(!enabled) "ON." else "OFF."))
-            player.varpManager.flagSave(2501)
-        }
 
-        define("xpconfig", Privilege.STANDARD){ player, args ->
-            if(args.size < 3){
-                reject(player,"Usage: ::xpconfig track|mode type",
-                    "Track types: total|recent",
-                    "Mode types: instant|increment",
-                    "Defaults: track - total, mode - increment")
-            }
-
-            when(args[1]){
-                "track" -> when(args[2]){
-                    "total" -> {
-                        player.varpManager.get(2501).setVarbit(2,0).send(player)
-                        notify(player,"You are now tracking " + colorize("%RTOTAL") + " experience.")
-                    }
-                    "recent" -> {
-                        player.varpManager.get(2501).setVarbit(2,1).send(player)
-                        notify(player,"You are now tracking the " + colorize("%RMOST RECENT") + " skill's experience.")
-                    }
-                    else -> {
-                        reject(player,"Usage: ::xpconfig track|mode type")
-                        reject(player,"Track types: total|recent")
-                        reject(player, "Mode types: instant|increment")
-                        reject(player,"Defaults: track - total, mode - increment")
-                    }
-                }
-
-                "mode" -> {
-                    when(args[2]){
-                        "instant" -> {
-                            player.varpManager.get(2501).setVarbit(1,1).send(player)
-                            notify(player,"Your xp tracker now updates " + colorize("%RINSTANTLY") + ".")
-                        }
-                        "increment" -> {
-                            player.varpManager.get(2501).setVarbit(1,0).send(player)
-                            notify(player,"Your xp tracker now updates " + colorize("%RINCREMENTALLY") + ".")
-                        }
-                        else -> {
-                            reject(player,"Usage: ::xpconfig track|mode type")
-                            reject(player,"Track types: total|recent")
-                            reject(player, "Mode types: instant|increment")
-                            reject(player,"Defaults: track - total, mode - increment")
-                        }
-                    }
-                }
-                else -> {
-                    reject(player,"Usage: ::xpconfig track|mode type")
-                    reject(player,"Track types: total|recent")
-                    reject(player, "Mode types: instant|increment")
-                    reject(player,"Defaults: track - total, mode - increment")
-                }
-            }
-            player.varpManager.flagSave(2501)
-        }
-
-        define("toggleslayer", Privilege.STANDARD){ player, _ ->
-            val disabled = player.varpManager.get(2502).getVarbit(0) == 1
-            player.varpManager.get(2502).setVarbit(0,if(disabled) 0 else 1).send(player)
-            if(!disabled){
-                player.varpManager.flagSave(2502)
-            } else {
-                player.varpManager.get(2502).save = false
-            }
-            notify(player,"Slayer task tracker is now " + (if(disabled) colorize("%RON") else colorize("%ROFF")) + ".")
-        }
 
         define("setvarbit", Privilege.ADMIN, "::setvarbit <lt>VARBIT ID<gt> <lt>VALUE<gt>", ""){
             player,args ->
@@ -558,7 +488,15 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
                 reject(player,"Usage ::setvarbit index offset value")
             }
 
-            player.varpManager.setVarbit(index!!, value!!)
+            setVarbit(player, index!!, value!!)
+        }
+
+        define("getvarbit", Privilege.ADMIN, "::getvarbit <lt>VARBIT ID<gt>", "") {
+            player, args ->
+            if (args.size != 2)
+                reject(player, "Usage: ::getvarbit id")
+            val index = args[1].toIntOrNull() ?: return@define
+            notify(player, "Varbit $index: Currently ${getVarbit(player, index)}")
         }
 
         define("setvarp", Privilege.ADMIN, "::setvarp <lt>VARP ID<gt> <lt>BIT OFFSET<gt> <lt>VALUE<gt>", "Sets the value starting at the BIT OFFSET of the varp."){
@@ -574,7 +512,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
                 reject(player,"Usage ::setvarp index offset value")
             }
 
-            player.varpManager.get(index!!).setVarbit(offset!!, value!!).send(player)
+            setVarp(player, index!!, value!! shl offset!!)
         }
 
         define("setvarc", Privilege.ADMIN, "::setvarc <lt>VARC ID<gt> <lt>VALUE<gt>") { player, args ->
@@ -619,15 +557,6 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
 
         define("addcredits", Privilege.ADMIN){ player, _ ->
             player.details.credits += 100
-        }
-
-        define("resetgwdropes", Privilege.STANDARD, "", "OLD: Was used for fixing broken data."){ player, _ ->
-            player.varpManager.get(1048).clearBitRange(0,31)
-            player.varpManager.get(1048).send(player)
-        }
-
-        define("resetmistag", Privilege.STANDARD, "", "OLD: Was used for fixing broken data."){ player, _ ->
-            player.removeAttribute("mistag-greeted")
         }
 
         define("getnpcparent"){player,args ->

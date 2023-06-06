@@ -7,6 +7,8 @@ import core.game.node.entity.player.Player;
 import core.game.world.GameWorld;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles the duel arena components.
  * @author Vexia
@@ -60,7 +62,7 @@ public class DuelComponentPlugin extends ComponentPlugin {
 				return false;
 			}
 			player.setAttribute("duel:staked", staked);
-			player.getConfigManager().set(283, (staked ? 2 : 1) << 26);
+                        setVarp(player, 283, (staked ? 2 : 1) << 26);
 			break;
 		}
 		return true;

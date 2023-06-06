@@ -1,5 +1,7 @@
 package content.global.skill.runecrafting;
 
+import static core.api.ContentAPIKt.*;
+
 import core.cache.def.impl.VarbitDefinition;
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.SceneryDefinition;
@@ -38,27 +40,27 @@ public final class TiaraPlugin implements Plugin<Object> {
 		switch (identifier) {
 		case "equip":
 			if (item.getName().contains("cape")) {
-				player.getConfigManager().set(CONFIG, 6143);
+                                setVarp(player, CONFIG, 6143);
 				break;
 			}
 			MysteriousRuin ruin = MysteriousRuin.forTalisman(Tiara.forItem(item).getTalisman());
-			player.getConfigManager().set(CONFIG, 1 << VarbitDefinition.forObjectID(SceneryDefinition.forId(ruin.getObject()[0]).getVarbitID()).getStartBit(), true);
+                        setVarbit(player, SceneryDefinition.forId(ruin.getObject()[0]).getVarbitID(), 1, true);
 			break;
 		case "unequip":
 			final Item other = args.length == 2 ? null : (Item) args[2];
 			if (other != null) {
 				if (other.getName().toLowerCase().contains("cape")) {
-					player.getConfigManager().set(CONFIG, 6143);
+                                        setVarp(player, CONFIG, 6143);
 					break;
 				}
 				Tiara tiara = Tiara.forItem(other);
 				if (tiara != null) {
 					MysteriousRuin r = MysteriousRuin.forTalisman(tiara.getTalisman());
-					player.getConfigManager().set(CONFIG, 1 << VarbitDefinition.forObjectID(SceneryDefinition.forId(r.getObject()[0]).getVarbitID()).getStartBit(), true);
+                                        setVarbit(player, SceneryDefinition.forId(r.getObject()[0]).getVarbitID(), 1, true);
 					break;
 				}
 			}
-			player.getConfigManager().set(CONFIG, 0);
+                        setVarp(player, CONFIG, 0);
 			break;
 		}
 		return true;

@@ -27,6 +27,8 @@ import core.tools.RandomFunction;
 import java.util.HashMap;
 import java.util.Map;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles the Brimhaven agility arena zone.
  *
@@ -77,7 +79,7 @@ public final class BrimhavenArena extends MapZone implements Plugin<Object> {
             player.setAttribute("brim-tagcount", 0);
         }
         player.setAttribute("brim-tagged", false);
-        player.getConfigManager().set(309, 0);
+        setVarp(player, 309, 0);
         int index = RandomFunction.randomize(DISPENSERS.length);
         if (index == player.getAttribute("brim-tag", -1)) {
             index = (index + 1) % DISPENSERS.length;
@@ -137,7 +139,7 @@ public final class BrimhavenArena extends MapZone implements Plugin<Object> {
                 player.setAttribute("brim-tagged", true);
                 int tags = player.getAttribute("brim-tagcount", 0) + 1;
                 player.setAttribute("brim-tagcount", tags);
-                player.getConfigManager().set(309, 4);
+                setVarp(player, 309, 4);
                 if (tags > 1) {
                     int amount = 1;
                     if (!player.getInventory().add(new Item(TICKET.getId(), amount))) {

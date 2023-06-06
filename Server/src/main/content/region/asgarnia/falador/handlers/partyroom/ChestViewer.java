@@ -13,6 +13,9 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
 
+import static core.api.ContentAPIKt.*;
+
+
 /**
  * A chest viewer.
  * @author Vexia
@@ -69,7 +72,7 @@ public final class ChestViewer {
 		player.getPacketDispatch().sendRunScript(150, "IviiiIsssssssss", INV_OPTIONS);
 		player.getInterfaceManager().openSingleTab(new Component(648));
 		player.getInterfaceManager().open(new Component(647).setCloseEvent(new ChestCloseEvent()));
-		player.getConfigManager().set(1135, 0);
+                setVarp(player, 1135, 0);
 		update(0, null);
 		update(1, null);
 		return this;

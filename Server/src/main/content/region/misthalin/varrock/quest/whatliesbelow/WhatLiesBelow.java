@@ -8,6 +8,8 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.plugin.ClassScanner;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * The what lies below quest.
  * @author Vexa
@@ -196,7 +198,7 @@ public class WhatLiesBelow extends Quest {
 		} else if (stage > 0 && stage < 100) {
 			return new int[] { id, 1 };
 		}
-		player.getConfigManager().set(1181, (1 << 8) + (1 << 9), true);
+                setVarp(player, 1181, (1 << 8) + (1 << 9), true);
 		return new int[] { id, 502 };
 	}
 	

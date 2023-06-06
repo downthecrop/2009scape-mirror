@@ -27,6 +27,9 @@ import core.tools.RandomFunction;
 import core.tools.StringUtils;
 import core.game.dialogue.FacialExpression;
 
+import static core.api.ContentAPIKt.*;
+
+
 /**
  * Represents the goblin diplomacy cutscene plugin.
  * @author 'Vexia
@@ -364,7 +367,7 @@ public final class GDiplomacyCutscene extends CutscenePlugin {
 						player.setAttribute("/save:tlt-goblin-emotes",true);
 						player.getEmoteManager().unlock(Emotes.GOBLIN_BOW);
 						player.getEmoteManager().unlock(Emotes.GOBLIN_SALUTE);
-						player.varpManager.get(465).setVarbit(0,7).send(player);
+                                                setVarbit(player, 532, 7, true);
 						player.getQuestRepository().getQuest("Lost Tribe").setStage(player,44);
 						stage++;
 						break;

@@ -9,6 +9,8 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.plugin.Initializable;
 import core.game.node.item.Item;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles the PikkupstixDialogue dialogue.
  * @author Vexia
@@ -125,7 +127,7 @@ public final class PikkupstixDialogue extends DialoguePlugin {
 						continue;
 					}
 					if (!player.getInventory().containsItem(i) && !player.getBank().containsItem(i) && player.getAttribute("taken-summoning-supplies") == null) {
-						if (i.getId() == 12528 && player.getConfigManager().get(1178) == (2 << 11)) {
+						if (i.getId() == 12528 && getVarp(player, 1178) == (2 << 11)) {
 							continue;
 						}
 						player.setAttribute("taken-summoning-supplies", true);

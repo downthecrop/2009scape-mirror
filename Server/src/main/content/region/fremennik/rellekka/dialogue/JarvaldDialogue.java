@@ -10,6 +10,8 @@ import kotlin.Unit;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles the jarvald dialogue.
  * @author Vexia
@@ -131,7 +133,7 @@ public final class JarvaldDialogue extends DialoguePlugin {
 			stage++;
 			break;
 		case 31:
-			player.getConfigManager().set(520, 1 << 13, true);
+                        setVarp(player, 520, 1 << 13, true);
 			end();
 			break;
 		case 32:
@@ -232,7 +234,7 @@ public final class JarvaldDialogue extends DialoguePlugin {
 			stage = 36;
 			return;
 		}
-		if (player.getConfigManager().get(520) == 0) {
+		if (getVarp(player, 520) == 0) {
 			npc("This should not concern you, outerlander.", "I am awaiting other Fremenniks to join me on an", "expedition to Waterbirth Island.");
 			stage = 21;
 		} else {

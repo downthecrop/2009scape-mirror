@@ -8,6 +8,8 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * @author Tyler Telis
  */
@@ -182,10 +184,9 @@ public class ProfessorHenryDialogue extends DialoguePlugin {
 	 * @param player the player.
 	 */
 	private void showReward(Player player) {
-		player.getConfigManager().set(1203, 1 << 29, true);
+                setVarp(player, 1203, 1 << 29, true);
 		player.getSavedData().getGlobalData().setTestStage(3);
 		player.getQuestRepository().syncronizeTab(player);
-		player.getConfigManager().set(101, player.getQuestRepository().getPoints());
 		player.getInterfaceManager().open(new Component(277));
 		for (int i = 9; i < 18; i++) {
 			player.getPacketDispatch().sendString("", 277, i);

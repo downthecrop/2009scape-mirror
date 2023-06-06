@@ -13,6 +13,8 @@ import core.plugin.ClassScanner;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * The main type or the jungle potion quest.
  * @author Vexia
@@ -77,8 +79,11 @@ public final class JunglePotion extends Quest {
 		player.getPacketDispatch().sendItemZoomOnInterface(Herbs.VOLENCIA_MOSS.getProduct().getId(), 235, 277, 3 + 2);
 		player.getSkills().addExperience(Skills.HERBLORE, 775);
 		player.getQuestRepository().syncronizeTab(player);
-		player.varpManager.get(534).setVarbit(15,2).setVarbit(18,2).setVarbit(21,2).setVarbit(24,2).setVarbit(12,2).send(player);
-		player.varpManager.flagSave(534, false);
+                setVarbit(player, 897, 2);
+                setVarbit(player, 898, 2);
+                setVarbit(player, 899, 2);
+                setVarbit(player, 900, 2);
+                setVarbit(player, 896, 2, true);
 	}
 
 	@Override

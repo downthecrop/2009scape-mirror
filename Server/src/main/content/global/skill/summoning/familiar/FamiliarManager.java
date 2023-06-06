@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles a player's familiar.
  * @author Emperor
@@ -412,9 +414,9 @@ public final class FamiliarManager {
 	 * @param value the value.
 	 */
 	public void setConfig(int value) {
-		int current = player.getConfigManager().get(1160);
+                int current = getVarp(player, 1160);
 		int newVal = current + value;
-		player.getConfigManager().set(1160, newVal);
+                setVarp(player, 1160, newVal);
 	}
 
 	/**

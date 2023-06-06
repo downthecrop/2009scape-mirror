@@ -2,6 +2,7 @@ package content.global.travel
 
 import content.global.skill.magic.TeleportMethod
 import core.game.event.TeleportEvent
+import core.api.*
 import core.api.lock
 import core.api.teleport
 import core.api.unlock
@@ -142,7 +143,7 @@ object EssenceTeleport {
      * @return the stage.
      */
     fun getStage(player: Player): Int {
-        return player.varpManager.get(492).getValue()
+        return getVarp(player, 492)
     }
 
     /**

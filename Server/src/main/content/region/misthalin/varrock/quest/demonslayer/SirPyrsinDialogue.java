@@ -9,6 +9,8 @@ import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the dialogue which handles the Sir Prysin NPC.
  * @author Vexia
@@ -196,7 +198,7 @@ public class SirPyrsinDialogue extends DialoguePlugin {
 							npc.animate(new Animation(4597));
 							break;
 						case 9:
-							player.getConfigManager().set(222, 5653570, true);
+                                                        setVarp(player, 222, 5653570, true);
 							player.setAttribute("/save:demon-slayer:received", true);
 							npc.animate(new Animation(4607));
 							break;

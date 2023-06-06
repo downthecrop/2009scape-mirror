@@ -7,6 +7,7 @@ import content.global.skill.slayer.Tasks
 import core.game.node.entity.npc.NPC
 import core.game.system.command.Privilege
 import core.plugin.Initializable
+import core.api.*
 
 @Initializable
 class SlayerCommandSet : CommandSet(Privilege.ADMIN){
@@ -50,7 +51,7 @@ class SlayerCommandSet : CommandSet(Privilege.ADMIN){
             val slayer = SlayerManager.getInstance(player)
             if (slayer.hasTask()) slayer.task = task else SlayerUtils.assign(player, task, Master.values().random())
             if (amount != null) slayer.amount = amount
-            player.varpManager.get(2502).setVarbit(0, slayer.flags.taskFlags shr 4).send(player)
+            setVarp(player, 2502, slayer.flags.taskFlags shr 4)
         }
     }
 }

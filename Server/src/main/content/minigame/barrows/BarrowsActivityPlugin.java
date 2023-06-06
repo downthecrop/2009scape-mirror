@@ -33,7 +33,7 @@ import core.tools.RandomFunction;
 import core.game.world.GameWorld;
 import core.plugin.ClassScanner;
 
-import static core.api.ContentAPIKt.getWorldTicks;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the barrows activity plugin.
@@ -137,8 +137,8 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 				}
 			}
 			Player player = (Player) e;
-			if ((player.getConfigManager().get(1270) == 1) != tunnel) {
-				player.getConfigManager().set(1270, tunnel ? 3 : 0, true);//@emp: proper value seems to be 3, val of 1 makes corridors black
+			if ((getVarp(player, 1270) == 1) != tunnel) {
+                                setVarp(player, 1270, tunnel ? 3 : 0, true);
 			}
 		}
 	}
@@ -149,8 +149,8 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 			Player player = (Player) e;
 			PacketRepository.send(MinimapState.class, new MinimapStateContext(player, 2));
 			player.getInterfaceManager().openOverlay(OVERLAY);
-			player.getConfigManager().set(0, 1);
-			if (player.getConfigManager().get(452) == 0) {
+			setVarp(player, 0, 1);
+			if (getVarp(player, 452) == 0) {
 				shuffleCatacombs(player);
 			}
 			sendConfiguration(player);
@@ -212,7 +212,7 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 	public static void shuffleCatacombs(Player player) {
 		int value = TUNNEL_CONFIGS[RandomFunction.random(TUNNEL_CONFIGS.length)];
 		value |= 1 << (6 + RandomFunction.random(4));
-		player.getConfigManager().set(452, value);
+                setVarp(player, 452, value);
 	}
 
 	@Override
@@ -330,7 +330,7 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 		if (player.getAttribute("barrow:opened_chest", false)) {
 			config |= 1 << 16;
 		}
-		player.getConfigManager().set(453, config);
+                setVarp(player, 453, config);
 	}
 
 	@Override

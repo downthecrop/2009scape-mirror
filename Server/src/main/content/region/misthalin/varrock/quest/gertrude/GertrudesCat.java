@@ -74,7 +74,6 @@ public class GertrudesCat extends Quest {
 	public void finish(Player player) {
 		super.finish(player);
 		final Item kitten = getKitten();
-		player.getConfigManager().set(101, player.getQuestRepository().getPoints());
 		player.getPacketDispatch().sendString("1 Quest Point", 277, 8 + 2);
 		player.getPacketDispatch().sendString("A kitten!", 277, 9 + 2);
 		player.getPacketDispatch().sendString("1525 Cooking XP", 277, 10 + 2);

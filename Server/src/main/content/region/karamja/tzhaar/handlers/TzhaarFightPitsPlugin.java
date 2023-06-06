@@ -31,6 +31,8 @@ import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneRestriction;
 import core.tools.RandomFunction;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles the Tzhaar Fight pits.
  * @author Emperor
@@ -353,7 +355,7 @@ public final class TzhaarFightPitsPlugin extends ActivityPlugin {
 		}
 		int size = (LOBBY_PLAYERS.size() + WAR_PLAYERS.size()) - 1;
 		if (!WAR_PLAYERS.isEmpty()) {
-			WAR_PLAYERS.get(0).getConfigManager().set(560, size);
+                        setVarp(WAR_PLAYERS.get(0), 560, size);
 		}
 		for (Iterator<Player> it = LOBBY_PLAYERS.iterator(); it.hasNext();) {
 			Player p = it.next();
@@ -365,7 +367,7 @@ public final class TzhaarFightPitsPlugin extends ActivityPlugin {
 				}
 				p.getSkullManager().setSkullCheckDisabled(true);
 				p.getSkullManager().setWilderness(true);
-				p.getConfigManager().set(560, size);
+                                setVarp(p, 560, size);
 				p.getProperties().setTeleportLocation(getZoneDestination());
 				p.getInteraction().set(Option._P_ATTACK);
 				tokkulAmount += p.getProperties().getCurrentCombatLevel();
@@ -447,7 +449,7 @@ public final class TzhaarFightPitsPlugin extends ActivityPlugin {
 	 */
 	public static void sendPlayersRemaining(int value) {
 		for (Player p : WAR_PLAYERS) {
-			p.getConfigManager().set(560, value);
+                        setVarp(p, 560, value);
 		}
 	}
 

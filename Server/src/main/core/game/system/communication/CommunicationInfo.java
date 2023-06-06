@@ -24,6 +24,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import static core.api.ContentAPIKt.log;
+import static core.api.ContentAPIKt.setVarp;
 
 /**
  * Holds communication information.
@@ -194,19 +195,19 @@ public final class CommunicationInfo {
 	public void toggleLootshare(final Player player) {
 		if (lootShare) {
 			lootShare = false;
-			player.getConfigManager().set(1083, 0);
+                        setVarp(player, 1083, 0);
 		} else if (lootSharePulse != null) {
 			lootSharePulse.stop();
 			lootSharePulse = null;
-			player.getConfigManager().set(1083, 0);
+                        setVarp(player, 1083, 0);
 		} else if (!lootShare) {
-			player.getConfigManager().set(1083, 2);
+                        setVarp(player, 1083, 2);
 			lootSharePulse = new Pulse(GameWorld.getSettings().isDevMode() ? 5 : 200, player) {
 				@Override
 				public boolean pulse() {
 					lootShare = true;
 					lootSharePulse = null;
-					player.getConfigManager().set(1083, 1);
+                                        setVarp(player, 1083, 1);
 					return true;
 				}
 			};

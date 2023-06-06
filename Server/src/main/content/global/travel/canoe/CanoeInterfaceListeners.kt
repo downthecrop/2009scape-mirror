@@ -49,7 +49,7 @@ class CanoeInterfaceListeners : InterfaceListener {
             player.pulseManager.run(object : Pulse(3) {
                 override fun pulse(): Boolean {
                     if (RandomFunction.random(if (canoe == Canoe.WAKA) 8 else 6) == 1) {
-                        player.varpManager.setVarbit(varbit, CanoeUtils.getCraftValue(canoe, false))
+                        setVarbit(player,varbit, CanoeUtils.getCraftValue(canoe, false))
                         player.skills.addExperience(Skills.WOODCUTTING, canoe.experience)
                         player.unlock()
                         return true
@@ -128,7 +128,7 @@ class CanoeInterfaceListeners : InterfaceListener {
                             if(destIndex == 4){
                                 player.sendMessage("There are no trees nearby to make a new canoe. Guess you're walking.")
                             }
-                            player.varpManager.setVarbit(varbit,0)
+                            setVarbit(player,varbit,0)
                             return true
                         }
                     }

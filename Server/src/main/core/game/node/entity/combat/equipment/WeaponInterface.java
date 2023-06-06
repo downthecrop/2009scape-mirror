@@ -20,6 +20,9 @@ import core.net.packet.out.StringPacket;
 import org.rs09.consts.Components;
 import core.game.system.config.ItemConfigParser;
 
+import static core.api.ContentAPIKt.*;
+
+
 
 /**
  * Represents the weapon interface component.
@@ -318,9 +321,9 @@ public final class WeaponInterface extends Component {
 			return;
 		}
 		boolean defensive = slot == 3;
-		player.getConfigManager().set(439, defensive ? -5 : 0);
+		setVarp(player, 439, defensive ? -5 : 0);
 		if (slot > 2) {
-			player.getConfigManager().set(43, defensive ? -1 : 3);
+			setVarp(player, 43, defensive ? -1 : 3);
 		}
 	};
 

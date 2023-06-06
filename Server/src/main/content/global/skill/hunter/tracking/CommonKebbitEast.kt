@@ -14,22 +14,22 @@ class CommonKebbitEast : HunterTracking() {
     init {
         initialMap = hashMapOf(
                 19439 to arrayListOf(
-                        TrailDefinition(0,TrailType.LINKING, false,Location.create(2354, 3595, 0),Location.create(2360, 3602, 0)),
-                        TrailDefinition(3,TrailType.LINKING,false,Location.create(2354, 3595, 0),Location.create(2355, 3601, 0)),
-                        TrailDefinition(6,TrailType.LINKING,false,Location.create(2354, 3594, 0),Location.create(2349, 3604, 0))
+                        TrailDefinition(2974,TrailType.LINKING, false,Location.create(2354, 3595, 0),Location.create(2360, 3602, 0)),
+                        TrailDefinition(2975,TrailType.LINKING,false,Location.create(2354, 3595, 0),Location.create(2355, 3601, 0)),
+                        TrailDefinition(2976,TrailType.LINKING,false,Location.create(2354, 3594, 0),Location.create(2349, 3604, 0))
                 ),
                 19440 to arrayListOf(
-                        TrailDefinition(18,TrailType.LINKING,true,Location.create(2361, 3611, 0),Location.create(2360, 3602, 0)),
-                        TrailDefinition(21,TrailType.LINKING,true,Location.create(2360, 3612, 0),Location.create(2357, 3607, 0))
+                        TrailDefinition(2980,TrailType.LINKING,true,Location.create(2361, 3611, 0),Location.create(2360, 3602, 0)),
+                        TrailDefinition(2981,TrailType.LINKING,true,Location.create(2360, 3612, 0),Location.create(2357, 3607, 0))
                 )
         )
 
         linkingTrails = arrayListOf(
-                TrailDefinition(24,TrailType.LINKING,false,Location.create(2357, 3607, 0),Location.create(2354, 3609, 0),Location.create(2355, 3608, 0)),
-                TrailDefinition(27,TrailType.LINKING,false,Location.create(2354, 3609, 0),Location.create(2349, 3604, 0),Location.create(2351, 3608, 0)),
-                TrailDefinition(9,TrailType.LINKING,false ,Location.create(2360, 3602, 0),Location.create(2355, 3601, 0),Location.create(2358, 3599, 0)),
-                TrailDefinition(12,TrailType.LINKING,false,Location.create(2355, 3601, 0),Location.create(2349, 3604, 0),Location.create(2352, 3603, 0)),
-                TrailDefinition(15,TrailType.LINKING,false,Location.create(2360, 3602, 0),Location.create(2357, 3607, 0),Location.create(2358, 3603, 0))
+                TrailDefinition(2982,TrailType.LINKING,false,Location.create(2357, 3607, 0),Location.create(2354, 3609, 0),Location.create(2355, 3608, 0)),
+                TrailDefinition(2983,TrailType.LINKING,false,Location.create(2354, 3609, 0),Location.create(2349, 3604, 0),Location.create(2351, 3608, 0)),
+                TrailDefinition(2977,TrailType.LINKING,false ,Location.create(2360, 3602, 0),Location.create(2355, 3601, 0),Location.create(2358, 3599, 0)),
+                TrailDefinition(2978,TrailType.LINKING,false,Location.create(2355, 3601, 0),Location.create(2349, 3604, 0),Location.create(2352, 3603, 0)),
+                TrailDefinition(2979,TrailType.LINKING,false,Location.create(2360, 3602, 0),Location.create(2357, 3607, 0),Location.create(2358, 3603, 0))
         )
         experience = 36.0
         varp = 919

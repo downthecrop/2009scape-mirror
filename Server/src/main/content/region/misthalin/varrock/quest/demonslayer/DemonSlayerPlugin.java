@@ -15,6 +15,9 @@ import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.*;
+
+
 /**
  * Represents the demon slayer plugin used to handle relative node interactions.
  * @author 'Vexia
@@ -87,7 +90,7 @@ public final class DemonSlayerPlugin extends OptionHandler {
 			break;
 		case 17429:
 			if (quest.getStage(player) == 20 && player.getInventory().add(DemonSlayer.FIRST_KEY)) {
-				player.getConfigManager().set(222, 4757762, true);
+                                setVarp(player, 222, 4757762, true);
 				player.removeAttribute("demon-slayer:poured");
 				player.removeAttribute("demon-slayer:just-poured");
 				player.getDialogueInterpreter().sendItemMessage(DemonSlayer.FIRST_KEY.getId(), "You pick up an old rusty key.");

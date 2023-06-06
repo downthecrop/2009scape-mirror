@@ -15,6 +15,8 @@ import core.tools.StringUtils;
 import content.global.skill.summoning.pet.IncubatorState;
 import core.plugin.ClassScanner;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles the incubator.
  * @author Vexia
@@ -46,7 +48,7 @@ public class IncubatorPlugin extends OptionHandler {
 			}
 		{
 			String name = egg.getProduct().getName().toLowerCase();
-			player.varpManager.get(1160).setVarbit(4,0).send(player);
+                        setVarbit(player, 4277, 0);
 			player.sendMessage("You take your " + name + " out of the incubator.");
 			if(!player.getInventory().add(egg.getProduct())){
 				GroundItemManager.create(egg.getProduct(),player);
@@ -58,7 +60,7 @@ public class IncubatorPlugin extends OptionHandler {
 			if (player.states.get("incubator") != null || inc != -1) {
 				IncubatorState p = (IncubatorState) player.states.get("incubator");
 				if(p != null && p.getPulse() == null){
-					player.varpManager.get(1160).setVarbit(4,0).send(player);
+                                        setVarbit(player, 4277, 0);
 					return true;
 				}
 				String name = p == null ? IncubatorEgg.values()[inc].getProduct().getName().toLowerCase() : p.getEgg().getProduct().getName().toLowerCase();

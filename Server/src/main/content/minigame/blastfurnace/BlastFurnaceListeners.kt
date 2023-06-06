@@ -297,7 +297,7 @@ class BlastFurnaceListeners : InteractionListener {
         /**This handles taking bars from the dispenser*/
 
         on(dispenser,SCENERY,"search", "take"){ player, _ ->
-            if(player.varpManager.get(543).getVarbitValue(8) == 0 || player.varpManager.get(543).getVarbitValue(8) == 3) {
+            if (getVarbit(player, 936) == 0 || getVarbit(player, 936) == 3) {
                 player.interfaceManager.openComponent(28)
             }
             return@on true
@@ -306,20 +306,20 @@ class BlastFurnaceListeners : InteractionListener {
         /**Handles using a bucket of water on the bar dispenser*/
 
         onUseWith(SCENERY,Items.BUCKET_OF_WATER_1929,*dispenser){ player, _, _ ->
-            when {
-                player.varpManager.get(543).getVarbitValue(8) == 2 -> {
+            when (getVarbit(player, 936)) {
+                2 -> {
                     removeItem(player,Items.BUCKET_OF_WATER_1929,Container.INVENTORY)
                     addItem(player,Items.BUCKET_1925)
                     BlastFurnace.barsHot = false
-                    player.varpManager.get(543).setVarbit(8,3).send(player)
+                    setVarbit(player, 936, 3)
                 }
-                player.varpManager.get(543).getVarbitValue(8) == 0 -> {
+                0 -> {
                     sendDialogue(player,"There's nothing to cool off!")
                 }
-                player.varpManager.get(543).getVarbitValue(8) == 1 -> {
+                1 -> {
                     sendDialogue(player,"I should wait until the machine is finished")
                 }
-                player.varpManager.get(543).getVarbitValue(8) == 3 -> {
+                3 -> {
                     sendDialogue(player,"These bars have already cooled off!")
                 }
             }

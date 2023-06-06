@@ -7,6 +7,7 @@ import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneBuilder
 import core.plugin.Initializable
 import core.plugin.Plugin
+import core.api.*
 
 /**
  * Handles the stone circle zone south of Ardougne.
@@ -33,14 +34,14 @@ class StoneCircleZone : MapZone("stone circle", true), Plugin<Any> {
 
     override fun enter(e: Entity): Boolean {
         if (e is Player) {
-            e.varpManager.get(1184).setVarbit(28, 1).send(e)
+            setVarbit(e, 4833, 1)
         }
         return super.enter(e)
     }
 
     override fun leave(e: Entity, logout: Boolean): Boolean {
         if (!logout && e is Player) {
-            e.varpManager.get(1184).setVarbit(28, 0).send(e)
+            setVarbit(e, 4833, 0)
         }
         return super.leave(e, logout)
     }

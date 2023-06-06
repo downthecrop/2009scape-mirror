@@ -7,6 +7,8 @@ import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the plugin used for the skilling interface.
  * @author 'Vexia
@@ -23,9 +25,8 @@ public final class SkillInterface extends ComponentPlugin {
 
 	@Override
 	public boolean handle(Player player, Component component, int opcode, int button, int slot, int itemId) {
-		player.varpManager.get(965)
-				.setVarbit(0,player.getAttribute("skillMenu",-1))
-				.setVarbit(10, button - 10).send(player);
+                setVarbit(player, 3288, player.getAttribute("skillMenu", -1));
+                setVarbit(player, 3289, button - 10);
 		return true;
 	}
 }

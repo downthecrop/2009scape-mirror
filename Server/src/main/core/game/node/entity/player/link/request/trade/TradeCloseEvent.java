@@ -8,6 +8,9 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
 
+import static core.api.ContentAPIKt.*;
+
+
 /**
  * Represents the close event invoked at the closing of a trade interface.
  * @author Vexia
@@ -59,8 +62,8 @@ public final class TradeCloseEvent implements CloseEvent {
 	 * @param player the player.
 	 */
 	private void end(final Player player) {
-		player.getConfigManager().set(1043, 0);
-		player.getConfigManager().set(1042, 0);
+		setVarp(player, 1043, 0);
+		setVarp(player, 1042, 0);
 	}
 
 	/**

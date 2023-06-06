@@ -5,15 +5,15 @@ import core.cache.def.impl.VarbitDefinition
 import core.game.node.scenery.Scenery
 import core.game.node.entity.player.Player
 
-enum class CompostBins(val varpIndex: Int, val varpOffest: Int) {
-    FALADOR_COMPOST(511,0),
-    CATHERBY_COMPOST(511,8),
-    PORT_PHAS_COMPOST(511,16),
-    ARDOUGNE_COMPOST(511,24);
+enum class CompostBins(val varbit: Int) {
+    FALADOR_COMPOST(740),
+    CATHERBY_COMPOST(741),
+    PORT_PHAS_COMPOST(742),
+    ARDOUGNE_COMPOST(743);
 
     companion object {
         @JvmField
-        val bins = values().map { (it.varpIndex shl it.varpOffest) to it }.toMap()
+        val bins = values().map { it.varbit to it }.toMap()
 
         @JvmStatic
         fun forObject(obj: Scenery): CompostBins?{
@@ -23,8 +23,7 @@ enum class CompostBins(val varpIndex: Int, val varpOffest: Int) {
         @JvmStatic
         fun forObjectID(id: Int): CompostBins?{
             val objDef = SceneryDefinition.forId(id)
-            val def = VarbitDefinition.forObjectID(objDef.varbitID)
-            return bins[def.varpId shl def.startBit]
+            return bins[objDef.varbitID]
         }
     }
 

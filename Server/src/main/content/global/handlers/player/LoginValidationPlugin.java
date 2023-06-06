@@ -10,6 +10,8 @@ import core.plugin.PluginManifest;
 import core.plugin.PluginType;
 import core.game.world.GameWorld;
 
+import static core.api.ContentAPIKt.setVarp;
+
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -60,7 +62,7 @@ public final class LoginValidationPlugin implements Plugin<Player> {
 			ActivityManager.start(player, "falconry", true);
 		}
 		if (player.getSavedData().getQuestData().getDragonSlayerAttribute("repaired")) {
-			player.getConfigManager().set(177, 1967876);
+                        setVarp(player, 177, 1967876); //lol?
 		}
 		if (player.getSavedData().getGlobalData().getLootShareDelay() < System.currentTimeMillis() && player.getSavedData().getGlobalData().getLootShareDelay() != 0L) {
 			player.getGlobalData().setLootSharePoints((int) (player.getGlobalData().getLootSharePoints() - player.getGlobalData().getLootSharePoints() * 0.10));

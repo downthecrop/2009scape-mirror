@@ -21,6 +21,9 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
 
+import static core.api.ContentAPIKt.*;
+
+
 /**
  * Manages the droped party balloons.
  * @author Vexia
@@ -83,7 +86,7 @@ public final class BalloonManager extends OptionHandler {
 			public boolean pulse() {
 				int realCount = --countdown - GameWorld.getTicks();
 				for (ChestViewer viewer : PartyRoomPlugin.getViewers().values()) {
-					viewer.getPlayer().getConfigManager().set(1135, realCount);
+                                        setVarp(viewer.getPlayer(), 1135, realCount);
 				}
 				if (--realCount - GameWorld.getTicks() <= 0) {
 					drop();

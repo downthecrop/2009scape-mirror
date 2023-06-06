@@ -65,7 +65,7 @@ class MillingListener : InteractionListener {
             }
         }
         playAudio(player, SOUND)
-        setVarbit(player, VARP, 0, 1, true)
+        setVarp(player, VARP, 1, true)
     }
 
     private fun fillHopper(player: Player, used: Item) {
@@ -94,7 +94,7 @@ class MillingListener : InteractionListener {
                 sendMessage(player, if (player.getAttribute("milling:grain", 0) > 0) "You fill a pot with flour from the bin." else "You fill a pot with the last of the flour in the bin.")
             }
             if (getAttribute(player, "milling:sweetcorn", 0) + getAttribute(player, "milling:grain", 0) <= 0) {
-                setVarbit(player, VARP, 0, 0, true)
+                setVarp(player, VARP, 0, true)
             }
         }
     }

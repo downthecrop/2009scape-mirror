@@ -144,13 +144,9 @@ object PlunderUtils {
 
     fun resetObjectVarbits(player: Player)
     {
-        var varp = player.varpManager.get(821)
-        varp.clear()
-        varp.send(player)
-        varp = player.varpManager.get(820)
-        varp.clear()
-        varp.send(player)
-        PlunderData.doorVarbits.forEach { player.varpManager.setVarbit(it, 0) }
+        setVarp(player, 821, 0)
+        setVarp(player, 820, 0)
+        PlunderData.doorVarbits.forEach { setVarbit(player, it, 0) }
     }
 
     fun openOverlay(player: Player)
@@ -161,14 +157,14 @@ object PlunderUtils {
 
     fun updateOverlay(player: Player)
     {
-        player.varpManager.setVarbit(2375, 500 - (PlunderData.timeLeft[player] ?: 0))
-        player.varpManager.setVarbit(2376, 11 + (getRoom(player)!!.room * 10))
-        player.varpManager.setVarbit(2377, getRoom(player)!!.room)
+        setVarbit(player, 2375, 500 - (PlunderData.timeLeft[player] ?: 0))
+        setVarbit(player, 2376, 11 + (getRoom(player)!!.room * 10))
+        setVarbit(player, 2377, getRoom(player)!!.room)
     }
 
     fun resetOverlay(player: Player)
     {
-        player.varpManager.setVarbit(2375, 0)
+        setVarbit(player, 2375, 0)
         player.packetDispatch.resetInterface(Components.NTK_OVERLAY_428)
         player.interfaceManager.closeOverlay()
     }

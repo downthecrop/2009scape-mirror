@@ -29,6 +29,8 @@ import core.net.packet.context.CameraContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
 import core.net.packet.out.MinimapState;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the cutscene during the combat of fighting delrith the demon.
  * @author Vexia
@@ -419,7 +421,7 @@ public final class DemonSlayerCutscene extends CutscenePlugin {
 						player.unlock();
 						cutscene.end();
 						cutscene.delrith.clear();
-						player.getConfigManager().set(222, 5653570, true);
+                                                setVarp(player, 222, 5653570, true);
 						player.getQuestRepository().getQuest("Demon Slayer").finish(player);
 						end();
 						return true;
@@ -517,7 +519,7 @@ public final class DemonSlayerCutscene extends CutscenePlugin {
 							player.setLocation(cutscene.getBase().transform(26, 48, 0));
 							PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.POSITION, player.getLocation().getX() - 1, player.getLocation().getY() - 3, 390, 1, 100));
 							PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.ROTATION, player.getLocation().getX() + 30, player.getLocation().getY() - 55, 390, 1, 100));
-							player.getConfigManager().set(222, 14194946, true);
+                                                        setVarp(player, 222, 14194946, true);
 							SceneryBuilder.replace(cutscene.stoneTable, cutscene.stoneTable.transform(17438));
 							npc("Ha ha ha! At last you are free, my demonic brother!", "Rest now, and then have your revenge on this pitiful", "city!");
 							stage = 2;

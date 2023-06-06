@@ -1,5 +1,6 @@
 package content.minigame.bountyhunter;
 
+import core.api.*;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -32,6 +33,8 @@ import core.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
 import java.util.*;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the Bounty hunter activity.
@@ -317,7 +320,7 @@ public final class BountyHunterActivity extends ActivityPlugin {
 		} else if (interfaceId == 271 && buttonId == 25) {
 			if (player.getAttribute("exit_penalty", 0) > GameWorld.getTicks()) {
 				player.getPacketDispatch().sendMessage("You can't use the protect item prayer until your penalty has passed.");
-				player.getConfigManager().send(PrayerType.PROTECT_ITEMS.getConfig(), 0);
+                                setVarp(player, PrayerType.PROTECT_ITEMS.getConfig(), 0);
 				return true;
 			}
 		}

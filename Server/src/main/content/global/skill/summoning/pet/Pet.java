@@ -4,6 +4,8 @@ import content.global.skill.summoning.familiar.Familiar;
 import content.global.skill.summoning.familiar.FamiliarSpecial;
 import core.game.node.entity.player.Player;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents a pet.
  * @author Emperor
@@ -48,9 +50,9 @@ public final class Pet extends Familiar {
 
 	@Override
 	public void sendConfiguration() {
-		owner.getConfigManager().set(1175, ((int) details.getGrowth() << 1) | ((int) details.getHunger() << 9));
-		owner.getConfigManager().set(1174, getId());
-		owner.getConfigManager().set(448, itemId);
+                setVarp(owner, 1175, ((int) details.getGrowth() << 1) | ((int) details.getHunger() << 9));
+                setVarp(owner, 1174, getId());
+                setVarp(owner, 448, itemId);
 	}
 
 	@Override
@@ -69,7 +71,7 @@ public final class Pet extends Familiar {
 		if (hunger >= 100.0 && growthRate != 0 && pet.getFood().length != 0) {
 			owner.getFamiliarManager().dismiss(false);
 			owner.getFamiliarManager().setFamiliar(null);
-			owner.getConfigManager().set(1175, 0);
+                        setVarp(owner, 1175, 0);
 			owner.sendMessage("<col=ff0000>Your pet has run away.</col>");
 			return;
 		}
@@ -87,7 +89,7 @@ public final class Pet extends Familiar {
 		} else if (!getPulseManager().hasPulseRunning()) {
 			startFollowing();
 		}
-		owner.getConfigManager().set(1175, ((int) details.getGrowth() << 1) | ((int) details.getHunger() << 9));
+                setVarp(owner, 1175, ((int) details.getGrowth() << 1) | ((int) details.getHunger() << 9));
 	}
 
 	/**

@@ -26,6 +26,9 @@ import core.net.packet.context.CameraContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
 import core.net.packet.out.MinimapState;
 
+
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the dragon slayer cutscene.
  * @author Vexia
@@ -102,8 +105,8 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
 		player.getDialogueInterpreter().sendDialogue("You are knocked unconscious and later awake on an ash-strewn", "beach.");
 		player.getQuestRepository().getQuest("Dragon Slayer").setStage(player, 40);
 		player.getSavedData().getQuestData().setDragonSlayerAttribute("repaired", false);
-		player.getConfigManager().set(177, 8257540);
-		player.getConfigManager().set(176, 8);
+                setVarp(player, 177, 8257540);
+                setVarp(player, 176, 8);
 		player.getSavedData().getQuestData().setDragonSlayerPlanks(0);
 		PacketRepository.send(MinimapState.class, new MinimapStateContext(player, 0));
 		PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.RESET, player.getLocation().getX() + 13, player.getLocation().getY() - 3, 250, 1, 100));

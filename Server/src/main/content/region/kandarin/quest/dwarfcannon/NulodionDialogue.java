@@ -6,6 +6,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles captains lawgof dialogue.
  * @author Vexia
@@ -93,7 +95,7 @@ public class NulodionDialogue extends DialoguePlugin {
 				stage++;
 				break;
 			case 7:
-				player.getConfigManager().set(0, 10);
+                                setVarp(player, 0, 10);
 				quest.setStage(player, 80);
 				player.sendMessage("The Cannon Engineer gives you some notes and a mould.");
 				player.getInventory().add(DwarfCannon.NULODION_NOTES, player);

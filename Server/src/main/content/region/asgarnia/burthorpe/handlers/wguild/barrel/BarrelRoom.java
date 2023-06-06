@@ -26,6 +26,8 @@ import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles the Barrel room.
  * @author Emperor
@@ -172,7 +174,7 @@ public final class BarrelRoom extends MapZone implements Plugin<Object> {
 		player.getEquipment().replace(null, EquipmentContainer.SLOT_HAT);
 		player.getAppearance().setAnimations();
 		player.getAppearance().sync();
-		player.getConfigManager().set(793, 0);
+                setVarp(player, 793, 0);
 	}
 
 }

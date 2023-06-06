@@ -10,6 +10,7 @@ import content.global.skill.slayer.Tasks
 import core.tools.RandomFunction
 import org.rs09.consts.Items
 import java.util.ArrayList
+import core.api.*
 
 object SlayerUtils {
     fun generate(player: Player, master: Master): Tasks?
@@ -44,7 +45,7 @@ object SlayerUtils {
         } else if (master == Master.VANNAKA) {
             player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 1, 14)
         }
-        player.varpManager.get(2502).setVarbit(0, SlayerManager.getInstance(player).flags.taskFlags shr 4).send(player)
+        setVarp(player, 2502, SlayerManager.getInstance(player).flags.taskFlags shr 4)
     }
 
     @JvmStatic

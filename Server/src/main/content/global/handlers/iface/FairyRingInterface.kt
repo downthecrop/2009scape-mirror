@@ -41,8 +41,7 @@ class FairyRingInterface : InterfaceListener {
             player.removeAttribute("fr:ring1")
             player.removeAttribute("fr:ring2")
             player.removeAttribute("fr:ring3")
-            clearVarp(player, 816)
-            setVarbit(player, 816, 0, 0)
+            setVarp(player, 816, 0)
             closeTabInterface(player)
             return@onClose true
         }
@@ -76,7 +75,7 @@ class FairyRingInterface : InterfaceListener {
         toSet = !toSet
         player.setAttribute("fr:sortorder",toSet)
         if(toSet) {
-            setVarbit(player, 816, 0, ring1index)
+            setVarp(player, 816, ring1index)
             player.setAttribute("fr:ring2",0)
             player.setAttribute("fr:ring3",0)
         }

@@ -6,7 +6,6 @@ import core.game.component.Component;
 import core.game.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.ConfigurationManager.Configuration;
 import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
 import core.game.world.map.Point;
@@ -15,6 +14,7 @@ import core.game.world.map.build.DynamicRegion;
 import core.tools.RandomFunction;
 
 import static content.minigame.pestcontrol.PestControlActivityPlugin.MAX_TEAM_SIZE;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Represents a pest control session.
@@ -166,7 +166,7 @@ public final class PestControlSession {
 	public void sendConfig(int value) {
 		for (Player p : region.getPlanes()[0].getPlayers()) {
 			if (p.isActive()) {
-				p.getConfigManager().set(Configuration.PC_PORTALS, value);
+                                setVarp(p, 719, value);
 			}
 		}
 	}
@@ -264,7 +264,7 @@ public final class PestControlSession {
 		Random r = RandomFunction.RANDOM;
 		Location l = region.getBaseLocation();
 		p.getProperties().setTeleportLocation(l.transform(32 + r.nextInt(4), 49 + r.nextInt(6), 0));
-		p.getConfigManager().set(Configuration.PC_PORTALS, 0);
+                setVarp(p, 1147, 0);
 		p.getDialogueInterpreter().sendDialogues(3781, FacialExpression.FURIOUS, "You must defend the Void Knight while the portals are", "unsummoned. The ritual takes twenty minutes though,", "so you can help out by destroying them yourselves!", "Now GO GO GO!");
 	}
 

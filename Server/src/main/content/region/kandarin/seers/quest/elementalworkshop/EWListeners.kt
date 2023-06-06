@@ -334,7 +334,7 @@ class EWListeners : InteractionListener {
                             sendMessage(player, "You empty the lava into the furnace.")
                         }
                         2 -> {
-                            setVarbit(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, FURNACE_STATE, ENABLED, true)
+                            setVarbit(player, FURNACE_STATE, ENABLED, true)
                             sendMessage(player, "The furnace bursts to life.")
                             return true
                         }
@@ -469,7 +469,7 @@ class EWListeners : InteractionListener {
                             sendMessage(player, "You turn the handle.")
                         }
                         3 -> {
-                            setVarbit(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, offset, enabled, true)
+                            setVarbit(player, offset, enabled, true)
                             return true
                         }
                     }
@@ -491,8 +491,8 @@ class EWListeners : InteractionListener {
             if (EWUtils.waterWheelEnabled(player)) {
                 playAudio(player, pullLeverDisabledSFX)
                 sendMessage(player, "You hear the sound of a water wheel coming to a standstill.")
-                setVarbit(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, WATER_WHEEL_STATE, DISABLED, true)
-                setVarbit(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, BELLOWS_STATE, DISABLED, true)
+                setVarbit(player, WATER_WHEEL_STATE, DISABLED, true)
+                setVarbit(player, BELLOWS_STATE, DISABLED, true)
                 return@on true
             }
 
@@ -500,15 +500,15 @@ class EWListeners : InteractionListener {
             if (!EWUtils.leftWaterControlEnabled(player) || !EWUtils.rightWaterControlEnabled(player)) {
                 playAudio(player, pullLeverResetGatesSFX)
                 sendMessage(player, "You hear the sound of the flow gates resetting.")
-                setVarbit(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, LEFT_WATER_CONTROL_STATE, DISABLED, true)
-                setVarbit(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, RIGHT_WATER_CONTROL_STATE, DISABLED, true)
+                setVarbit(player, LEFT_WATER_CONTROL_STATE, DISABLED, true)
+                setVarbit(player, RIGHT_WATER_CONTROL_STATE, DISABLED, true)
                 return@on true
             }
 
             // If both of the above are false, the water wheel can start running
             playAudio(player, pullLeverEnabledSFX)
             sendMessage(player, "You hear the sound of a water wheel starting up.")
-            setVarbit(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, WATER_WHEEL_STATE, ENABLED, true)
+            setVarbit(player, WATER_WHEEL_STATE, ENABLED, true)
             return@on true
         }
 
@@ -573,13 +573,13 @@ class EWListeners : InteractionListener {
             // Bellows lever "OFF" state
             if (EWUtils.bellowsEnabled(player)) {
                 sendMessage(player, "The bellows stop pumping air.")
-                setVarbit(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, BELLOWS_STATE, DISABLED, true)
+                setVarbit(player, BELLOWS_STATE, DISABLED, true)
                 return@on true
             }
 
             // Bellows lever "ON" state
             sendMessage(player, "The bellows pump air down the pipe.")
-            setVarbit(player, Vars.VARP_QUEST_ELEMENTAL_WORKSHOP, BELLOWS_STATE, ENABLED, true)
+            setVarbit(player, BELLOWS_STATE, ENABLED, true)
             return@on true
         }
     }

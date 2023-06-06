@@ -8,16 +8,13 @@ import org.rs09.consts.Components
 import org.rs09.consts.Items
 import core.game.interaction.InterfaceListener
 
-private const val varp = 615
 class ToolLeprechaunInterface : InterfaceListener {
-
     private val FARMING_TOOLS = Components.FARMING_TOOLS_125
     private val TOOLS_SIDE = Components.FARMING_TOOLS_SIDE_126
 
     override fun defineInterfaceListeners() {
 
         onOpen(FARMING_TOOLS){player, component ->
-            player.varpManager?.flagSave(varp)
             player.interfaceManager.openSingleTab(Component(TOOLS_SIDE))
             return@onOpen true
         }
@@ -48,7 +45,6 @@ class ToolLeprechaunInterface : InterfaceListener {
                 40 -> doStackedWithdrawal(player,Items.COMPOST_6032,getAmount(opcode),::updateCompost,::getNumCompost)
                 41 -> doStackedWithdrawal(player,Items.SUPERCOMPOST_6034,getAmount(opcode),::updateSuperCompost,::getNumSuperCompost)
             }
-            player.varpManager.get(varp).send(player)
             return@on true
         }
 
@@ -90,7 +86,6 @@ class ToolLeprechaunInterface : InterfaceListener {
                 25 -> doStackedDeposit(player,Items.COMPOST_6032,getAmount(opcode),::updateCompost,::getNumCompost)
                 26 -> doStackedDeposit(player,Items.SUPERCOMPOST_6034,getAmount(opcode),::updateSuperCompost,::getNumSuperCompost)
             }
-            player.varpManager.get(varp).send(player)
             return@on true
         }
 
@@ -149,7 +144,6 @@ class ToolLeprechaunInterface : InterfaceListener {
                 }
                 player.inventory.remove(Item(item,amt))
                 updateQuantityMethod.invoke(player,amt)
-                player.varpManager.get(varp).send(player)
             }
             return
         }
@@ -200,7 +194,6 @@ class ToolLeprechaunInterface : InterfaceListener {
                     } else {
                         player.inventory.add(Item(item, amt))
                         updateQuantityMethod.invoke(player, -amt)
-                        player.varpManager.get(varp).send(player)
                     }
                 }
                 return
@@ -231,43 +224,43 @@ class ToolLeprechaunInterface : InterfaceListener {
     }
 
     private fun hasRake(player: Player?): Boolean{
-        return checkBit(player,0)
+        return getVarbit(player!!, 1435) == 1
     }
 
     private fun setHasRake(player: Player?,hasRake: Boolean){
-        player?.varpManager?.get(varp)?.setVarbit(0,if(hasRake) 1 else 0)
+        setVarbit(player!!, 1435, if (hasRake) 1 else 0, true)
     }
 
     private fun hasDibber(player: Player?): Boolean{
-        return checkBit(player,1)
+        return getVarbit(player!!, 1436) == 1
     }
 
     private fun setHasDibber(player: Player?,hasDibber: Boolean){
-        player?.varpManager?.get(varp)?.setVarbit(1,if(hasDibber) 1 else 0)
+        setVarbit(player!!, 1436, if (hasDibber) 1 else 0, true)
     }
 
     private fun hasSpade(player: Player?): Boolean{
-        return checkBit(player,2)
+        return getVarbit(player!!, 1437) == 1
     }
 
     private fun setHasSpade(player: Player?,hasSpade: Boolean){
-        player?.varpManager?.get(varp)?.setVarbit(2,if(hasSpade) 1 else 0)
+        setVarbit(player!!, 1437, if (hasSpade) 1 else 0, true)
     }
 
     private fun hasSecateurs(player: Player?): Boolean{
-        return checkBit(player,3)
+        return getVarbit(player!!, 1438) == 1
     }
 
     private fun setHasSecateurs(player: Player?,hasSecateurs: Boolean){
-        player?.varpManager?.get(varp)?.setVarbit(3,if(hasSecateurs) 1 else 0)
+        setVarbit(player!!, 1438, if (hasSecateurs) 1 else 0, true)
     }
 
     private fun hasWateringCan(player: Player?): Boolean{
-        return checkBitRange(player,4,7) > 0
+        return getVarbit(player!!, 1439) > 0
     }
 
     private fun getWateringCan(player: Player?): Int{
-        var can = checkBitRange(player,4,7) //Watering cans are stored in the Varp as a number between 1 and 9. Watering Can(0) is 1 and Watering Can(8) is 9
+        var can = getVarbit(player!!, 1439) //Watering cans are stored in the Varp as a number between 1 and 9. Watering Can(0) is 1 and Watering Can(8) is 9
         if(can == 1) can = 0
         return Items.WATERING_CAN_5331 + can
     }
@@ -285,61 +278,53 @@ class ToolLeprechaunInterface : InterfaceListener {
             Items.WATERING_CAN8_5340 -> 9
             else -> 0
         }
-        player?.varpManager?.get(varp)?.setVarbit(4,can)
+        setVarbit(player!!, 1439, can, true)
     }
 
     private fun setNoWateringCan(player: Player?){
-        player?.varpManager?.get(varp)?.setVarbit(4,0)
+        setVarbit(player!!, 1439, 0, true)
     }
 
     private fun hasGardeningTrowel(player: Player?): Boolean {
-        return checkBit(player,8)
+        return getVarbit(player!!, 1440) == 1
     }
 
     private fun setHasGardeningTrowel(player: Player?,hasTrowel: Boolean){
-        player?.varpManager?.get(varp)?.setVarbit(8,if(hasTrowel) 1 else 0)
+        setVarbit(player!!, 1440, if (hasTrowel) 1 else 0, true)
     }
 
     private fun getNumBuckets(player: Player?): Int {
-        return checkBitRange(player,9,13)
+        return getVarbit(player!!, 1441)
     }
 
     private fun updateBuckets(player: Player?,amount: Int){
-        player?.varpManager?.get(varp)?.setVarbit(9,getNumBuckets(player) + amount)
+        setVarbit(player!!, 1441, getNumBuckets(player) + amount, true)
     }
 
     private fun getNumCompost(player: Player?): Int {
-        return checkBitRange(player,14,21)
+        return getVarbit(player!!, 1442)
     }
 
     private fun updateCompost(player: Player?,amount: Int){
-        player?.varpManager?.get(varp)?.setVarbit(14,getNumCompost(player) + amount)
+        setVarbit(player!!, 1442, getNumCompost(player) + amount, true)
     }
 
     private fun getNumSuperCompost(player: Player?): Int {
-        return checkBitRange(player,22,29)
+        return getVarbit(player!!, 1443)
     }
 
     private fun updateSuperCompost(player: Player?,amount: Int){
-        player?.varpManager?.get(varp)?.setVarbit(22,getNumSuperCompost(player) + amount)
+        setVarbit(player!!, 1443, getNumSuperCompost(player) + amount, true)
     }
 
     private fun hasMagicSecateurs(player: Player?): Boolean {
-        return checkBit(player,30)
+        return getVarbit(player!!, 1848) == 1
     }
 
     private fun setHasMagicSecateurs(player: Player?,hasMagic: Boolean){
-        player?.varpManager?.get(varp)?.setVarbit(30,if(hasMagic) 1 else 0)
+        setVarbit(player!!, 1848, if (hasMagic) 1 else 0, true)
     }
 
-    private fun checkBitRange(player: Player?,start: Int, end: Int): Int{
-        return (player?.varpManager?.get(varp)?.getBitRangeValue(start,end) ?: 0) ushr start
-    }
-
-    private fun checkBit(player: Player?,offset: Int): Boolean{
-        return player?.varpManager?.get(varp)?.getVarbitValue(offset) == 1
-    }
-    
     private fun getHighestCan(player: Player?): Item?{
         player ?: return null
         var highestCan = Item(0)

@@ -281,7 +281,7 @@ enum class EnchantedJewellery(
                 "assigned to kill ${getSlayerTaskName(player).lowercase(Locale.getDefault())}'s; " +
                 "only ${getSlayerTaskKillsRemaining(player)} more to go.", core.game.dialogue.FacialExpression.FRIENDLY)
         // Slayer tracker UI
-        setVarbit(player, 2502, 0, slayerManager.flags.taskFlags shr 4)
+        setVarp(player, 2502, slayerManager.flags.taskFlags shr 4)
     }
 
     private fun canTeleport(player: Player, item: Item): Boolean {

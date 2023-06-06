@@ -124,7 +124,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
                     sendMessage(player, "You successfully loot the urn.")
                     rewardXP(player, Skills.THIEVING, PlunderUtils.getUrnXp(player, false))
                     addItemOrDrop(player, PlunderUtils.rollArtifact(player, 1))
-                    player.varpManager.setVarbit(node.asScenery().definition.varbitID, 1)
+                    setVarbit(player, node.asScenery().definition.varbitID, 1)
                 }
             }
             return@on true
@@ -137,7 +137,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
             lock(player, 1)
             runTask(player, 1){
                 animate(player, URN_BIT)
-                player.varpManager.setVarbit(urn.definition.varbitID, 2)
+                setVarbit(player, urn.definition.varbitID, 2)
                 animateScenery(urn, SNAKE_URN_ANIM)
             }
             return@on true
@@ -153,7 +153,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
             animate(player, CHARM_ANIM)
             runTask(player, 1)
             {
-                player.varpManager.setVarbit(node.asScenery().definition.varbitID, 3)
+                setVarbit(player, node.asScenery().definition.varbitID, 3)
                 sendMessage(player, "You charm the snake with your music.")
             }
             return@on true
@@ -176,7 +176,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
                     sendMessage(player, "You successfully loot the urn.")
                     addItemOrDrop(player, PlunderUtils.rollArtifact(player, 1))
                     rewardXP(player, Skills.THIEVING, PlunderUtils.getUrnXp(player, false) * 0.66)
-                    player.varpManager.setVarbit(node.asScenery().definition.varbitID, 1)
+                    setVarbit(player, node.asScenery().definition.varbitID, 1)
                 }
             }
             return@on true
@@ -199,7 +199,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
                         return false
                     animate(player, PUSH_LID_FINISH)
                     runTask(player, 3){
-                        player.varpManager.setVarbit(node.asScenery().definition.varbitID, 1)
+                        setVarbit(player, node.asScenery().definition.varbitID, 1)
                         rewardXP(player, Skills.STRENGTH, PlunderUtils.getSarcophagusXp(player))
                         if(RandomFunction.roll(25))
                         {
@@ -236,7 +236,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
                     if(!PlunderUtils.rollSceptre(player))
                         addItemOrDrop(player, PlunderUtils.rollArtifact(player, 3))
                 }
-                player.varpManager.setVarbit(node.asScenery().definition.varbitID, 1)
+                setVarbit(player, node.asScenery().definition.varbitID, 1)
             }
             return@on true
         }
@@ -274,7 +274,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
                         PlunderUtils.resetObjectVarbits(player)
                     } else {
                         sendMessage(player, "The door leads to a dead end.")
-                        player.varpManager.setVarbit(varbitId, 1)
+                        setVarbit(player, varbitId, 1)
                     }
                 }
                 else

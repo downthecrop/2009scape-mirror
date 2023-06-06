@@ -10,6 +10,9 @@ import core.net.packet.IoBuffer;
 
 import java.nio.ByteBuffer;
 
+import static core.api.ContentAPIKt.*;
+
+
 /**
  * Holds a player's settings.
  * @author Emperor
@@ -128,20 +131,20 @@ public final class Settings {
 	 * Updates the settings.
 	 */
 	public void update() {
-		player.getConfigManager().set(ConfigurationManager.Configuration.BRIGHTNESS, brightness + 1);
-		player.getConfigManager().set(ConfigurationManager.Configuration.MUSIC_VOLUME, musicVolume);
-		player.getConfigManager().set(ConfigurationManager.Configuration.EFFECT_VOLUME, soundEffectVolume);
-		player.getConfigManager().set(ConfigurationManager.Configuration.SURROUNDING_VOLUME, areaSoundVolume);
-		player.getConfigManager().set(ConfigurationManager.Configuration.MOUSE_BUTTON, singleMouseButton);
-		player.getConfigManager().set(ConfigurationManager.Configuration.CHAT_EFFECT, disableChatEffects);
-		player.getConfigManager().set(ConfigurationManager.Configuration.SPLIT_PRIVATE, splitPrivateChat);
-		player.getConfigManager().set(ConfigurationManager.Configuration.ACCEPT_AID, acceptAid);
-		player.getConfigManager().set(ConfigurationManager.Configuration.RETALIATE, !player.getProperties().isRetaliating());
-		player.getConfigManager().set(ConfigurationManager.Configuration.RUNNING, runToggled);
-		player.getConfigManager().set(1054, clanChatSetting);
-		player.getConfigManager().set(1055, assistSetting);
-		player.getConfigManager().set(300, specialEnergy * 10);
-		player.getConfigManager().set(43, attackStyleIndex);
+		setVarp(player, 166, brightness + 1);
+		setVarp(player, 168, musicVolume);
+		setVarp(player, 169, soundEffectVolume);
+		setVarp(player, 872, areaSoundVolume);
+		setVarp(player, 170, singleMouseButton ? 1 : 0);
+		setVarp(player, 171, disableChatEffects ? 1 : 0);
+		setVarp(player, 287, splitPrivateChat ? 1 : 0);
+		setVarp(player, 427, acceptAid ? 1 : 0);
+		setVarp(player, 172, !player.getProperties().isRetaliating() ? 1 : 0);
+		setVarp(player, 173, runToggled ? 1 : 0);
+		setVarp(player, 1054, clanChatSetting);
+		setVarp(player, 1055, assistSetting);
+		setVarp(player, 300, specialEnergy * 10);
+		setVarp(player, 43, attackStyleIndex);
 		player.getPacketDispatch().sendRunEnergy();
 		updateChatSettings();
 		Pulse pulse = player.getAttribute("energy-restore", null);
@@ -168,7 +171,7 @@ public final class Settings {
 	 */
 	public void toggleAttackStyleIndex(int index) {
 		this.attackStyleIndex = index;
-		player.getConfigManager().set(43, attackStyleIndex);
+		setVarp(player, 43, attackStyleIndex);
 	}
 
 	/**
@@ -301,7 +304,7 @@ public final class Settings {
 	 */
 	public void setSpecialToggled(boolean enable) {
 		specialToggled = !specialToggled;
-		player.getConfigManager().set(301, specialToggled ? 1 : 0);
+		setVarp(player, 301, specialToggled ? 1 : 0);
 	}
 
 	/**
@@ -337,7 +340,7 @@ public final class Settings {
 	 */
 	public void setSpecialEnergy(int value) {
 		specialEnergy = value;
-		player.getConfigManager().set(300, specialEnergy * 10);
+		setVarp(player, 300, specialEnergy * 10);
 	}
 
 	/**
@@ -353,7 +356,7 @@ public final class Settings {
 	 */
 	public void toggleRetaliating() {
 		player.getProperties().setRetaliating(!player.getProperties().isRetaliating());
-		player.getConfigManager().set(172, !player.getProperties().isRetaliating() ? 1 : 0);
+		setVarp(player, 172, !player.getProperties().isRetaliating() ? 1 : 0);
 	}
 
 	/**
@@ -361,7 +364,7 @@ public final class Settings {
 	 */
 	public void toggleMouseButton() {
 		singleMouseButton = !singleMouseButton;
-		player.getConfigManager().set(170, singleMouseButton ? 1 : 0);
+		setVarp(player, 170, singleMouseButton ? 1 : 0);
 	}
 
 	/**
@@ -369,7 +372,7 @@ public final class Settings {
 	 */
 	public void toggleChatEffects() {
 		disableChatEffects = !disableChatEffects;
-		player.getConfigManager().set(171, disableChatEffects ? 1 : 0);
+		setVarp(player, 171, disableChatEffects ? 1 : 0);
 	}
 
 	/**
@@ -377,7 +380,7 @@ public final class Settings {
 	 */
 	public void toggleSplitPrivateChat() {
 		splitPrivateChat = !splitPrivateChat;
-		player.getConfigManager().set(287, splitPrivateChat ? 1 : 0);
+		setVarp(player, 287, splitPrivateChat ? 1 : 0);
 	}
 
 	/**
@@ -385,7 +388,7 @@ public final class Settings {
 	 */
 	public void toggleAcceptAid() {
 		acceptAid = !acceptAid;
-		player.getConfigManager().set(427, acceptAid ? 1 : 0);
+		setVarp(player, 427, acceptAid ? 1 : 0);
 	}
 
 	/**
@@ -401,7 +404,7 @@ public final class Settings {
 	 */
 	public void setRunToggled(boolean enabled) {
 		runToggled = enabled;
-		player.getConfigManager().set(173, runToggled ? 1 : 0);
+		setVarp(player, 173, runToggled ? 1 : 0);
 	}
 
 	/**
@@ -465,7 +468,7 @@ public final class Settings {
 	 */
 	public void setBrightness(int brightness) {
 		this.brightness = brightness;
-		player.getConfigManager().set(166, brightness + 1);
+		setVarp(player, 166, brightness + 1);
 	}
 
 	/**
@@ -482,7 +485,7 @@ public final class Settings {
 	 */
 	public void setMusicVolume(int musicVolume) {
 		this.musicVolume = musicVolume;
-		player.getConfigManager().set(168, musicVolume);
+		setVarp(player, 168, musicVolume);
 	}
 
 	/**
@@ -499,7 +502,7 @@ public final class Settings {
 	 */
 	public void setSoundEffectVolume(int soundEffectVolume) {
 		this.soundEffectVolume = soundEffectVolume;
-		player.getConfigManager().set(169, soundEffectVolume);
+		setVarp(player, 169, soundEffectVolume);
 	}
 
 	/**
@@ -516,7 +519,7 @@ public final class Settings {
 	 */
 	public void setAreaSoundVolume(int areaSoundVolume) {
 		this.areaSoundVolume = areaSoundVolume;
-		player.getConfigManager().set(872, areaSoundVolume);
+		setVarp(player, 872, areaSoundVolume);
 	}
 
 	/**
@@ -610,7 +613,7 @@ public final class Settings {
 	 */
 	public void setClanChatSetting(int clanChatSetting) {
 		this.clanChatSetting = clanChatSetting;
-		player.getConfigManager().set(1054, clanChatSetting);
+		setVarp(player, 1054, clanChatSetting);
 	}
 
 	/**
@@ -644,7 +647,7 @@ public final class Settings {
 	 */
 	public void setAssistSetting(int assistSetting) {
 		this.assistSetting = assistSetting;
-		player.getConfigManager().set(1055, assistSetting);
+                setVarp(player, 1055, assistSetting);
 	}
 
 	/**

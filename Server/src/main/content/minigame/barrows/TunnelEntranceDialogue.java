@@ -7,6 +7,8 @@ import core.game.world.map.Location;
 import core.plugin.PluginManifest;
 import core.plugin.PluginType;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * The tunnel entrance dialogue handling plugin.
  * @author Emperor
@@ -57,7 +59,7 @@ public final class TunnelEntranceDialogue extends DialoguePlugin {
 		case 1:
 			int offsetX = 0;
 			int offsetY = 0;
-			int configValue = player.getConfigManager().get(452);
+			int configValue = getVarp(player, 452);
 			if ((configValue & (1 << 7)) != 0) {
 				offsetX = 34;
 				offsetY = 34;

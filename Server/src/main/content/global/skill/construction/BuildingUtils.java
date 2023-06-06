@@ -23,7 +23,7 @@ import core.tools.SystemLogger;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static core.api.ContentAPIKt.log;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Utility class for building.
@@ -134,12 +134,12 @@ public final class BuildingUtils {
 			if (hasRequirements) {
 				c261Value += (1 << (menuIndex + 1));
 			}
-			player.getConfigManager().set(1485 + menuIndex, hasRequirements || player.isStaff() ? 1 : 0);
+                        setVarp(player, 1485 + menuIndex, hasRequirements || player.isStaff() ? 1 : 0);
 			player.getPacketDispatch().sendString("Level " + decoration.getLevel(), 396, 140 + menuIndex);
 			//player.getPacketDispatch().sendItemZoomOnInterface(items[i].protocol(), 50000, 396, 49 + i);
 		}
 
-		player.getConfigManager().set(261, c261Value);
+                setVarp(player, 261, c261Value);
 		PacketRepository.send(ContainerPacket.class, new ContainerContext(player, 396, 132, 8, items, false));
 	}
 

@@ -362,7 +362,7 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
 
         fun sendUpdatedPoints(player: Player) {
             val points = player.getAttribute("vinesweeper:points", 0);
-            player.varpManager.get(1195).setVarbit(6, points).send(player)
+            setVarbit(player, 4449, points)
         }
 
         var SEED_LOCS: HashSet<Location> = HashSet()

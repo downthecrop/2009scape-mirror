@@ -21,6 +21,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static core.api.ContentAPIKt.*;
+
+
 /**
  * Manages the players bank pin.
  * @author Vexia
@@ -436,8 +439,8 @@ public class BankPinManager {
 		if (stage >= 4) {
 			stage = stage - 4;
 		}
-		player.getConfigManager().set(562, bitValue);
-		player.getConfigManager().set(563, digits.get(8) | digits.get(9) << 4 | stage << 26);
+                setVarp(player, 562, bitValue);
+                setVarp(player, 563, digits.get(8) | digits.get(9) << 4 | stage << 26);
 		for (int i = 0; i < 9; i++) {
 			int child = (i > 2 ? i + 1 : i) + 11;
 			int positionX = 37 + ((i % 3) * 95) + RandomFunction.random(2, 45);

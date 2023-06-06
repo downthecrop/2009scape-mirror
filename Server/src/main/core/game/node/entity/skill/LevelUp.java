@@ -9,6 +9,9 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.MusicContext;
 import core.net.packet.out.MusicPacket;
 
+import static core.api.ContentAPIKt.*;
+
+
 /**
  * Represents a leveling up reward.
  * @author Emperor
@@ -165,7 +168,7 @@ public final class LevelUp {
 		}
 		value |= player.getSkills().getCombatMilestone() << 23; //Combat level milestone index.
 		value |= player.getSkills().getSkillMilestone() << 27; //Total level milestone index
-		player.getConfigManager().set(1230, value);
+		setVarp(player, 1230, value);
 	}
 	
 	/**
@@ -184,7 +187,7 @@ public final class LevelUp {
 			value |= SKILL_ICON[slot];
 			player.getInterfaceManager().openChatbox(new Component(740));
 		}
-		player.getConfigManager().set(1179, value);
+		setVarp(player, 1179, value);
 	}
 
 	/**

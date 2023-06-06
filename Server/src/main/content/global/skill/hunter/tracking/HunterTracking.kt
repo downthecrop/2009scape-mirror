@@ -1,6 +1,6 @@
 package content.global.skill.hunter.tracking
 
-import core.api.log
+import core.api.*
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.scenery.Scenery
@@ -70,7 +70,7 @@ abstract class HunterTracking : OptionHandler(){
             nextTrail ?: continue
             var offsetUsed = false
             for(i in trail){
-                if(i.offset == nextTrail.offset){ offsetUsed = true; break }
+                if(i.varbit == nextTrail.varbit){ offsetUsed = true; break }
             }
             if(offsetUsed) continue
             if(nextTrail.type == TrailType.TUNNEL){
@@ -94,7 +94,7 @@ abstract class HunterTracking : OptionHandler(){
             val possibleTrails = ArrayList<TrailDefinition>()
             for(trail in linkingTrails){
                 val invTrail = getTrailInverse(trail,false)
-                if(invTrail.type == TrailType.TUNNEL && previousTrail.endLocation.withinDistance(invTrail.startLocation,5) && !previousTrail.endLocation.equals(invTrail.startLocation) && previousTrail.offset != trail.offset){
+                if(invTrail.type == TrailType.TUNNEL && previousTrail.endLocation.withinDistance(invTrail.startLocation,5) && !previousTrail.endLocation.equals(invTrail.startLocation) && previousTrail.varbit != trail.varbit){
                     possibleTrails.add(trail)
                 }
             }
@@ -102,7 +102,7 @@ abstract class HunterTracking : OptionHandler(){
         }
         val possibleTrails = ArrayList<TrailDefinition>()
         for(trail in linkingTrails){
-            if(trail.startLocation.equals(previousTrail.endLocation) && previousTrail.offset != trail.offset){
+            if(trail.startLocation.equals(previousTrail.endLocation) && previousTrail.varbit != trail.varbit){
                 possibleTrails.add(trail)
             }
         }
@@ -116,8 +116,8 @@ abstract class HunterTracking : OptionHandler(){
      */
     fun getTrailInverse(trail: TrailDefinition, swapLocations: Boolean): TrailDefinition{
         if(swapLocations)
-            return TrailDefinition(trail.offset,if(tunnelEntrances.contains(trail.startLocation)) TrailType.TUNNEL else TrailType.LINKING,!trail.inverted,trail.endLocation,trail.startLocation, trail.triggerObjectLocation)
-        return TrailDefinition(trail.offset, if(tunnelEntrances.contains(trail.startLocation)) TrailType.TUNNEL else TrailType.LINKING, !trail.inverted, trail.startLocation, trail.endLocation)
+            return TrailDefinition(trail.varbit,if(tunnelEntrances.contains(trail.startLocation)) TrailType.TUNNEL else TrailType.LINKING,!trail.inverted,trail.endLocation,trail.startLocation, trail.triggerObjectLocation)
+        return TrailDefinition(trail.varbit, if(tunnelEntrances.contains(trail.startLocation)) TrailType.TUNNEL else TrailType.LINKING, !trail.inverted, trail.startLocation, trail.endLocation)
     }
 
     /**
@@ -145,8 +145,7 @@ abstract class HunterTracking : OptionHandler(){
     fun clearTrail(player: Player){
         player.removeAttribute(attribute)
         player.removeAttribute(indexAttribute)
-        player.varpManager.get(varp).clear()
-        player.varpManager.get(varp).send(player)
+        setVarp(player, varp, 0)
     }
 
     /**
@@ -191,10 +190,9 @@ abstract class HunterTracking : OptionHandler(){
         val trailIndex = player.getAttribute(indexAttribute,0)
         for(index in 0..trailIndex){
             val trl = trail[index]
-            player.varpManager.get(varp).setVarbit(trl.offset + 2,1)
-            player.varpManager.get(varp).setVarbit(trl.offset,if(trl.inverted) 1 else 0)
+            var current = getVarp(player, varp)
+            setVarbit(player, trl.varbit, (if (trl.inverted) 1 else 0) or (1 shl 2))
         }
-        player.varpManager.get(varp).send(player)
     }
 
     /**
@@ -217,7 +215,7 @@ abstract class HunterTracking : OptionHandler(){
                 trail.get(currentIndex)
             }
         } else {
-            TrailDefinition(0,TrailType.LINKING,false,Location(0,0,0),Location(0,0,0),Location(0,0,0))
+            return false
         }
         when(option){
 

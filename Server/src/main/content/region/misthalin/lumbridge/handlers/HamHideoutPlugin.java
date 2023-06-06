@@ -14,6 +14,9 @@ import core.plugin.Plugin;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 
+import static core.api.ContentAPIKt.*;
+
+
 /**
  * Represents the ham hide out node interaction plugin.
  * @author 'Vexia
@@ -52,22 +55,22 @@ public final class HamHideoutPlugin extends OptionHandler {
 		case 5491:
 			switch (option) {
 			case "open":
-				if (player.getConfigManager().get(174) == 0) {
+				if (getVarp(player, 174) == 0) {
 					player.getPacketDispatch().sendMessage("This trapdoor seems totally locked.");
 				} else {
-					player.getConfigManager().set(346, 272731282);
+                                        setVarp(player, 346, 272731282);
 					ClimbActionHandler.climb(player, new Animation(827), new Location(3149, 9652, 0));
 					GameWorld.getPulser().submit(new Pulse(2, player) {
 						@Override
 						public boolean pulse() {
-							player.getConfigManager().set(174, 0);
+                                                        setVarp(player, 174, 0);
 							return true;
 						}
 					});
 				}
 				break;
 			case "close":
-				player.getConfigManager().set(174, 0);
+                                setVarp(player, 174, 0);
 				break;
 			case "climb-down":
 				switch (id) {
@@ -89,11 +92,11 @@ public final class HamHideoutPlugin extends OptionHandler {
 						player.getPacketDispatch().sendMessage(success ? ("You pick the lock on the trap door.") : "You fail to pick the lock - your fingers get numb from fumbling with the lock.");
 						player.unlock();
 						if (success) {
-							player.getConfigManager().set(174, 1 << 14);
+                                                        setVarp(player, 174, 1 << 14);
 							GameWorld.getPulser().submit(new Pulse(40, player) {
 								@Override
 								public boolean pulse() {
-									player.getConfigManager().set(174, 0);
+                                                                        setVarp(player, 174, 0);
 									return true;
 								}
 							});

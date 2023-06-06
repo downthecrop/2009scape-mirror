@@ -1,6 +1,6 @@
 package content.region.misthalin.dorgeshuun.quest.thelosttribe
 
-import core.api.addItemOrDrop
+import core.api.*
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.item.Item
@@ -217,7 +217,7 @@ class DukeHoracioTLTDialogue(val questStage: Int) : DialogueFile() {
                     )
                     addItemOrDrop(player!!, Items.PEACE_TREATY_5012)
                     player!!.questRepository.getQuest("Lost Tribe").setStage(player, 50)
-                    player!!.varpManager.get(465).setVarbit(0, 9).send(player!!)
+                    setVarbit(player!!, 532, 9, true)
                     stage = END_DIALOGUE
                 }
             }

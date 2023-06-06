@@ -11,6 +11,8 @@ import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles the dying knight dialogue.
  * @author Emperor
@@ -64,7 +66,7 @@ public final class GWDKnightDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		if ((player.getConfigManager().get(1048) & 16) != 0) {
+		if ((getVarp(player, 1048) & 16) != 0) {
 			player.getPacketDispatch().sendMessage("The knight has already died.");
 			return false;
 		}
@@ -91,7 +93,7 @@ public final class GWDKnightDialogue extends DialoguePlugin {
 		case 3:
 			if (player.getInventory().add(SCROLL)) {
 				interpreter.sendItemMessage(11734, "The knight hands you a scroll.");
-				player.varpManager.get(1048).setVarbit(4,1).send(player);
+                                setVarbit(player, 3936, 1, true);
 				stage = 5;
 			} else {
 				stage = 4;

@@ -37,9 +37,9 @@ object DrillDemonUtils {
     }
 
     fun changeSignsAndAssignTask(player: Player){
-        player.varpManager.get(DD_SIGN_VARP).clearBitRange(0,31)
+        setVarp(player, DD_SIGN_VARP, 0)
         val tempList = arrayListOf(DD_SIGN_JOG, DD_SIGN_JUMP, DD_SIGN_PUSHUP, DD_SIGN_SITUP).shuffled().toMutableList()
-        val tempOffsetList = arrayListOf(0,2,4,6).shuffled().toMutableList()
+        val tempOffsetList = arrayListOf(1335, 1336, 1337, 1338).shuffled().toMutableList()
         val task = tempList.random()
         val taskOffset = tempOffsetList.random()
 
@@ -48,9 +48,9 @@ object DrillDemonUtils {
 
         tempList.remove(task)
         tempOffsetList.remove(taskOffset)
-        player.varpManager.get(DD_SIGN_VARP).setVarbit(taskOffset,task).send(player)
+        setVarbit(player, taskOffset, task)
         for(i in 0 until tempList.size){
-            player.varpManager.get(DD_SIGN_VARP).setVarbit(tempOffsetList[i],tempList[i]).send(player)
+            setVarbit(player, tempOffsetList[i], tempList[i])
         }
 
         player.dialogueInterpreter.sendDialogues(NPCs.SERGEANT_DAMIEN_2790, core.game.dialogue.FacialExpression.OLD_NORMAL,when(task){
@@ -63,18 +63,18 @@ object DrillDemonUtils {
         player.unlock()
     }
 
-    fun getOffsetForID(id: Int): Int{
+    fun getVarbitForId(id: Int): Int{
         return when(id){
-            10076 -> 0
-            10077 -> 2
-            10078 -> 4
-            10079 -> 6
+            10076 -> 1335
+            10077 -> 1336
+            10078 -> 1337
+            10079 -> 1338
             else -> 0
         }
     }
 
     fun getMatTask(id: Int, player: Player): Int{
-        return player.varpManager.get(DD_SIGN_VARP).getVarbitValue(getOffsetForID(id)) ?: 0
+        return getVarbit(player, getVarbitForId(id))
     }
 
     fun cleanup(player: Player){

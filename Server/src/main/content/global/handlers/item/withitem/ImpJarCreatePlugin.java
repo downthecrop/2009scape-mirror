@@ -8,6 +8,8 @@ import core.game.node.scenery.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles the creating of an imp jar.
  * @author Vexia
@@ -62,12 +64,12 @@ public final class ImpJarCreatePlugin extends UseWithHandler {
 	 * @param player the player.
 	 */
 	private void fillOilStill(Player player, Item used) {
-		int configValue = player.getConfigManager().get(425);
+		int configValue = getVarp(player, 425);
 		if (used.getId() == 11262 || used.getId() == 10012) {
 			if (configValue == 0 && used.getId() == 11262) {
 				player.getInventory().replace(new Item(229), used.getSlot());
 				player.sendMessage("You refine some imp repellent.");
-				player.getConfigManager().set(425, 64, true);
+                                setVarp(player, 425, 64, true);
 				return;
 			} else if (configValue == 32) {
 				player.sendMessage("There is already lamp oil in the still.");
@@ -77,7 +79,7 @@ public final class ImpJarCreatePlugin extends UseWithHandler {
 					player.sendMessage("There is already imp repellent in the still.");
 				} else {
 					player.getInventory().replace(new Item(11260), used.getSlot());
-					player.getConfigManager().set(425, 0, true);
+                                        setVarp(player, 425, 0, true);
 					player.sendMessage("You turn the butterfly jar into an impling jar.");
 				}
 				return;
@@ -95,7 +97,7 @@ public final class ImpJarCreatePlugin extends UseWithHandler {
 		}
 		if (used.getId() == 1939) {
 			if (player.getInventory().remove(new Item(1939))) {
-				player.getConfigManager().set(425, 32, true);
+                                setVarp(player, 425, 32, true);
 				player.sendMessage("You refine some swamp tar into lamp oil.");
 			}
 		} else {
@@ -105,7 +107,7 @@ public final class ImpJarCreatePlugin extends UseWithHandler {
 				if (player.getInventory().contains(4525, 1) || player.getInventory().contains(4535, 1) || player.getInventory().contains(4546, 1) || player.getInventory().contains(4700, 1)) {
 					Item replace = new Item(used.getId() == 4525 ? 4522 : used.getId() == 4535 ? 4537 : used.getId() == 4546 ? 4548 : 4701);
 					player.getInventory().replace(replace, used.getSlot());
-					player.getConfigManager().set(425, 0, true);
+                                        setVarp(player, 425, 0, true);
 					player.sendMessage("You fill the item with oil.");
 				}
 			}

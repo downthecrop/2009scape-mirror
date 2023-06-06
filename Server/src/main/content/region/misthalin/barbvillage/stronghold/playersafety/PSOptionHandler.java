@@ -27,6 +27,9 @@ import core.plugin.Plugin;
 
 import content.region.misthalin.barbvillage.stronghold.playersafety.StrongHoldOfPlayerSafetyPlugin.JailPlaques;
 
+import static core.api.ContentAPIKt.*;
+
+
 /**
  * @author Tyler Telis
  */
@@ -57,7 +60,7 @@ public class PSOptionHandler extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		int config = player.getConfigManager().get(1203);
+		int config = getVarp(player, 1203);
 		boolean locked = config == (1 << 29) || config == (0 << 26);
 		switch (node.getId()) {
 		case 29577:// chest
@@ -93,7 +96,7 @@ public class PSOptionHandler extends OptionHandler {
 				player.sendMessage("You hear the cogs and gears moving and a distant unlocking sound.");
 				config += (1 << 26);
 			}
-			player.getConfigManager().set(1203, config, true);
+                        setVarp(player, 1203, config, true);
 			return true;
 		case 29624:
 			if (locked) {

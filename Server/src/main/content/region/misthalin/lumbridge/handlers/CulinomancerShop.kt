@@ -1,8 +1,6 @@
 package content.region.misthalin.lumbridge.handlers
 
-import core.api.LoginListener
-import core.api.getAttribute
-import core.api.setAttribute
+import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.system.task.Pulse
@@ -17,7 +15,7 @@ class CulinomancerShop : LoginListener {
     //Enable the chest if the player has 18 quest points or more
     override fun login(player: Player) {
         if(player.questRepository.points >= 18){
-            player.varpManager.get(678).setVarbit(0, 5).send(player)
+            setVarbit(player, 1850, 5)
             setAttribute(player, "culino-tier", player.questRepository.points / 18) //Set this, so we can check if the player has gained a tier during server runtime
 
             //Restock pulse for this player (yes, this means the chest will only restock if the player has logged in. Shop system needs work in order to do otherwise.)

@@ -4,6 +4,8 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
 
+import static core.api.ContentAPIKt.setVarp;
+
 /**
  * Represents an enum of glider locations.
  * @author 'Vexia
@@ -60,7 +62,7 @@ public enum Gliders {
 		if (g == null) {
 			return;
 		}
-		player.getConfigManager().set(153, g.getConfig());
+                setVarp(player, 153, g.getConfig());
 	}
 
 	/**

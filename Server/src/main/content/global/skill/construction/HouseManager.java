@@ -236,8 +236,8 @@ public final class HouseManager {
 	}
 
 	private void updateVarbits(Player player, boolean build) {
-		player.varpManager.get(261).setVarbit(0, build ? 1 : 0);
-		player.varpManager.get(262).setVarbit(0, getRoomAmount());
+                setVarp(player, 261, build ? 1 : 0);
+                setVarp(player, 262, getRoomAmount());
 	}
 
 	private void unlockMusicTrack(Player player) {

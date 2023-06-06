@@ -42,10 +42,8 @@ class PlayerSaver (val player: Player){
         saveQuests(saveFile)
         saveAppearance(saveFile)
         saveSpellbook(saveFile)
-        saveVarps(saveFile)
         saveSavedData(saveFile)
         saveAutocast(saveFile)
-        saveConfigs(saveFile)
         savePlayerMonitor(saveFile)
         saveMusicPlayer(saveFile)
         saveFamiliarManager(saveFile)
@@ -92,10 +90,6 @@ class PlayerSaver (val player: Player){
         } catch (e: IOException) {
             e.printStackTrace()
         }
-    }
-    fun saveVarps(root: JSONObject){
-
-        player.varpManager.save(root)
     }
 
     fun savePouches(root: JSONObject){
@@ -317,21 +311,6 @@ class PlayerSaver (val player: Player){
 
     fun savePlayerMonitor(root: JSONObject){
 
-    }
-
-    fun saveConfigs(root: JSONObject){
-        val configs = JSONArray()
-        var idx = 0
-        player.configManager.savedConfigurations.map {
-            if(it != 0){
-                val config = JSONObject()
-                config.put("index",idx.toString())
-                config.put("value",it.toString())
-                configs.add(config)
-            }
-            idx++
-        }
-        root.put("configs",configs)
     }
 
     fun saveAutocast(root: JSONObject){
@@ -661,6 +640,15 @@ class PlayerSaver (val player: Player){
         val loctemp = player.location
         val locStr = "${loctemp.x},${loctemp.y},${loctemp.z}"
         coreData.put("location",locStr)
+
+        val varpData = JSONArray()
+        for ((index, value) in player.varpMap) {
+            val varpObj = JSONObject()
+            varpObj["index"] = index.toString()
+            varpObj["value"] = value.toString()
+            varpData.add(varpObj)
+        }
+        coreData.put("varp", varpData)
 
         root.put("core_data",coreData)
     }

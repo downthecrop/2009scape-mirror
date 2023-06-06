@@ -1005,61 +1005,52 @@ fun heal(entity: Entity, amount: Int) {
     entity.skills.heal(amount)
 }
 
-/**
- * Sets the given varbit for the given player
- * @param player the player to set the varbit for
- * @param varpIndex the index of the VARP that contains the desired varbit.
- * @param offset the offset of the desired varbit inside the varp.
- * @param value the value to set the varbit to
- */
-fun setVarbit(player: Player, varpIndex: Int, offset: Int, value: Int, save: Boolean = false) {
-    player.varpManager.get(varpIndex).setVarbit(offset, value).send(player)
-    if (save) player.varpManager.flagSave(varpIndex)
+fun getVarp (player: Player, varpIndex: Int) : Int {
+    return player.varpMap[varpIndex] ?: 0
 }
 
-/**
- * Sets the given varbit for the given player.
- * @param player the player to set the varbit for.
- * @param varbitId the ID of the varbit to set.
- * @param value the value to set the varbit to.
- * @param save whether or not we should save this setting (default false)
- */
-fun setVarbit(player: Player, varbitId: Int, value: Int, save: Boolean = false) {
-    player.varpManager.setVarbit(varbitId, value)
-    if (save) {
-        val def = VarbitDefinition.forId(varbitId)
-        player.varpManager.flagSave(def.varpId)
+fun getVarbit (player: Player, def: VarbitDefinition) : Int {
+    val mask = def.mask
+    val current = getVarp (player, def.varpId)
+    return (current and mask) shr def.startBit
+}
+
+fun getVarbit (player: Player, varbitId: Int) : Int {
+    val def = VarbitDefinition.forId(varbitId)
+    return getVarbit (player, def)
+}
+
+@JvmOverloads
+fun setVarp (player: Player, varpIndex: Int, value: Int, save: Boolean = false) {
+    player.varpMap[varpIndex] = value
+    player.saveVarp[varpIndex] = save    
+    player.packetDispatch.sendVarp(varpIndex, value)
+}
+
+@JvmOverloads
+fun setVarbit (player: Player, def: VarbitDefinition, value: Int, save: Boolean = false) {
+    val mask = def.mask
+    val current = getVarp (player, def.varpId) and mask.inv()
+    val newValue = (value shl def.startBit) and mask
+    setVarp (player, def.varpId, current or newValue, save)
+}
+
+@JvmOverloads
+fun setVarbit (player: Player, varbitId: Int, value: Int, save: Boolean = false) {
+    val def = VarbitDefinition.forId(varbitId)
+
+    if (def == null) {
+        logWithStack (ContentAPI::class.java, Log.ERR, "Trying to setVarbit $varbitId, which doesn't seem to exist.")
+        return
     }
+    
+    setVarbit (player, def, value, save)
 }
 
-/**
- * Clears all bits for a given varp index
- * @param player the player to clear for
- * @param varpIndex the index of the varp to clear
- */
-fun clearVarp(player: Player, varpIndex: Int) {
-    player.varpManager.get(varpIndex).clear()
-}
-
-/**
- * Gets the value of all bits collected together from a given varp
- * @param player the player to get the varp for
- * @param varpIndex the index of the varp to calculate the value of
- * @return the value of the varp
- */
-fun getVarpValue(player: Player, varpIndex: Int): Int {
-    return player.varpManager.get(varpIndex).getValue()
-}
-
-/**
- * Gets the value of a specific varbit
- * @param player the player to get the value for
- * @param varpIndex the index of th varp containinig the desired varbit
- * @param offset the offset of the varbit inside the varp
- * @return the value of the given varbit
- */
-fun getVarbitValue(player: Player, varpIndex: Int, offset: Int): Int {
-    return player.varpManager.get(varpIndex).getVarbitValue(offset) ?: 0
+fun reinitVarps (player: Player) {
+    for ((index, value) in player.varpMap) {
+        setVarp(player, index, value, player.saveVarp[index] ?: false)
+    }
 }
 
 /**

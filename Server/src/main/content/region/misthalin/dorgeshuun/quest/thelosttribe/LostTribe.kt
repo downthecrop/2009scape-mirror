@@ -7,6 +7,7 @@ import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import core.api.*
 
 @Initializable
 /**
@@ -102,7 +103,7 @@ class LostTribe : Quest("Lost Tribe",84,83,1) {
         if(!player.inventory.add(Item(Items.RING_OF_LIFE_2570))){
             GroundItemManager.create(Item(Items.RING_OF_LIFE_2570),player)
         }
-        player.varpManager.get(465).setVarbit(0,11).send(player)
+        setVarp(player, 465, 11)
     }
 
     override fun getConfig(player: Player?, stage: Int): IntArray {

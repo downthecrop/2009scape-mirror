@@ -38,7 +38,6 @@ class InspectionHandler : OptionHandler() {
             val status3 = if(p.compost == CompostType.NONE) "This patch has not been treated." else "This patch has been treated with ${p.compost.name.toLowerCase()} compost."
             player.sendMessage("$status1 $status2")
             player.sendMessage(status3)
-            val varpValue = player.varpManager.get(patch.varpIndex).getBitRangeValue(patch.varpOffset,patch.varpOffset + 7)
         }
         return true
     }

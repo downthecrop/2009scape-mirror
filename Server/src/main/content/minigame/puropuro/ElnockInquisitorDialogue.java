@@ -13,6 +13,8 @@ import core.plugin.ClassScanner;
 
 import content.minigame.puropuro.ElnockInquisitorDialogue.ElnockExchangeInterfaceHandler.ElnockExchange;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles the elnock inquisitor dialogue.
  * @author Vexia
@@ -225,7 +227,7 @@ public final class ElnockInquisitorDialogue extends DialoguePlugin {
 		public boolean handle(Player player, Component component, int opcode, int button, int slot, int itemId) {
 			ElnockExchange exchange = player.getAttribute("exchange", null);
 			if (button == 34) {
-				player.getConfigManager().set(1018, 0);
+                                setVarp(player, 1018, 0);
 				if (exchange == null) {
 					player.sendMessage("Making a selection before confirming.");
 					return true;
@@ -254,7 +256,7 @@ public final class ElnockInquisitorDialogue extends DialoguePlugin {
 			exchange = ElnockExchange.forButton(button);
 			if (exchange != null) {
 				player.setAttribute("exchange", exchange);
-				player.getConfigManager().set(1018, exchange.getConfigValue());
+                                setVarp(player, 1018, exchange.getConfigValue());
 			}
 			return true;
 		}

@@ -12,6 +12,8 @@ import java.util.TreeMap;
 import java.util.Map;
 
 import static core.api.ContentAPIKt.log;
+import static core.api.ContentAPIKt.*;
+
 
 /**
  * Manages the systems/players quest repository.
@@ -68,25 +70,13 @@ public final class QuestRepository {
      * @param player The player.
      */
     public void syncronizeTab(Player player) {
-        player.getConfigManager().set(101, points);
+        setVarp(player, 101, points);
         int[] config = null;
-        if(!player.getAttribute("quest-varps-converted",false)) {
-            for (Quest quest : QUESTS.values()) {
-                config = quest.getConfig(player, getStage(quest));
-                player.varpManager.get(config[0]).setVarbit(0,config[1]).send(player);
-                player.varpManager.flagSave(config[0], false);
-                player.setAttribute("/save:quest-varps-converted",true);
-
-            }
-        } else {
-            for(Quest quest : QUESTS.values()){
-                if(quest.getIndex() == 81 && quest.isCompleted(player)){
-                    player.varpManager.get(534).setVarbit(15,2).setVarbit(18,2).setVarbit(21,2).setVarbit(24,2).setVarbit(12,2).send(player);
-                }
-                config = quest.getConfig(player,getStage(quest));
-                player.varpManager.get(config[0]).setVarbit(0,config[1]).send(player);
-                quest.updateVarps(player);
-            }
+        for(Quest quest : QUESTS.values()){
+            config = quest.getConfig(player,getStage(quest));
+            
+            setVarp(player, config[0], config[1]);
+            quest.updateVarps(player);
         }
     }
 

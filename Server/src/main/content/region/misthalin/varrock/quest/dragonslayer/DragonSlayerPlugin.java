@@ -24,6 +24,9 @@ import core.plugin.Plugin;
 
 import java.util.List;
 
+import static core.api.ContentAPIKt.*;
+
+
 /**
  * Represents the plugin used to handle node interactions related to dragon slayer.
  *
@@ -219,7 +222,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 					player.getDialogueInterpreter().sendDialogue("You nail a plank over the hole, but you still need more planks to", "close the hole completely.");
 				} else {
 					player.getSavedData().getQuestData().setDragonSlayerAttribute("repaired", true);
-					player.getConfigManager().set(177, 1967876);
+                                        setVarp(player, 177, 1967876);
 					player.getDialogueInterpreter().sendDialogue("You nail a final plank over the hole. You have successfully patched", "the hole in the ship.");
 				}
 			}

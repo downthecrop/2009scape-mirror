@@ -230,7 +230,7 @@ public final class DuelSession extends ComponentPlugin {
 	 * @param player The player.
 	 */
 	private void openRules(Player player, Player opponent) {
-		player.getConfigManager().set(286, 0);
+                setVarp(player, 286, 0);
 		if (staked) {
 			StakeContainer container = new StakeContainer(player, this);
 			if (player == this.player) {
@@ -249,7 +249,7 @@ public final class DuelSession extends ComponentPlugin {
 			player.getPacketDispatch().sendString(Integer.toString(opponent.getProperties().getCurrentCombatLevel()), 637, 18);
 			player.getPacketDispatch().sendString("", 637, 45);
 		}
-		player.getConfigManager().set(286, 0);
+                setVarp(player, 286, 0);
 	}
 
 	/**
@@ -495,8 +495,8 @@ public final class DuelSession extends ComponentPlugin {
 				value |= 1 << rules[i].getConfigIndex();
 			}
 		}
-		player.getConfigManager().set(286, value);
-		other.getConfigManager().set(286, value);
+                setVarp(player, 286, value);
+                setVarp(other, 286, value);
 	}
 
 	/**

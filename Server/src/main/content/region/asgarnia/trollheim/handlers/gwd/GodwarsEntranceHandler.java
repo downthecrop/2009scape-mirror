@@ -17,7 +17,7 @@ import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 
-import static core.api.ContentAPIKt.hasRequirement;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the entrance hole to the godwars dungeon.
@@ -44,15 +44,14 @@ public final class GodwarsEntranceHandler extends OptionHandler {
 				player.getPacketDispatch().sendMessage("You don't have a rope to tie around the pillar.");
 				return true;
 			}
-			player.varpManager.get(1048).setVarbit(0,1).send(player);
-			player.varpManager.flagSave(1048, false);
+                        setVarbit(player, 3932, 1, true);
 			return true;
 		case 26341:
 			if (player.getSkills().getStaticLevel(Skills.AGILITY) < 15) {
 				player.getPacketDispatch().sendMessage("You need an Agility level of 15 to enter this.");
 				return true;
 			}
-			if (player.varpManager.get(1048).getVarbit(4) == 0) {
+			if (getVarbit(player, 3936) == 0) {
 				player.getDialogueInterpreter().sendDialogues(6201, FacialExpression.HALF_GUILTY, "Cough... Hey, over here.");
 				return true;
 			}

@@ -39,9 +39,6 @@ class PlayerSaveParser(val player: Player) {
     var saveFile: JSONObject? = null
     var read = true
 
-    val patch_varps = FarmingPatch.values().map { it.varpIndex }.toIntArray()
-    val bin_varps = CompostBins.values().map { it.varpIndex }.toIntArray()
-
     init {
         val JSON = File(ServerConstants.PLAYER_SAVE_PATH + player.name + ".json")
         if(JSON.exists())
@@ -215,15 +212,13 @@ class PlayerSaveParser(val player: Player) {
     }
 
     fun parseConfigs() {
-        val configs = saveFile!!["configs"] as JSONArray
+        val configs = saveFile!!["configs"] as? JSONArray ?: return
         for (config in configs) {
             val c = config as JSONObject
             val index = (c.get("index") as String).toInt()
             if(index == 1048) continue
-            if(patch_varps.contains(index)) continue
-            if(bin_varps.contains(index)) continue
             val value = (c.get("value") as String).toInt()
-            player.configManager.savedConfigurations[index] = value
+            player.varpMap[index] = value
         }
     }
 
@@ -303,6 +298,7 @@ class PlayerSaveParser(val player: Player) {
         val bBars = coreData["blastBars"] as? JSONArray
         val bOre = coreData["blastOre"] as? JSONArray
         val bCoal = coreData["blastCoal"] as? JSONArray
+        val varpData = coreData["varp"] as? JSONArray
         val location = coreData["location"] as String
         val bankTabData = coreData["bankTabs"]
         if (bankTabData != null) {
@@ -335,6 +331,17 @@ class PlayerSaveParser(val player: Player) {
         bOre?.let{player.blastOre.parse(bOre)}
         bCoal?.let{player.blastCoal.parse(bCoal)}
         player.location = JSONUtils.parseLocation(location)
+
+        if (varpData != null) {
+            for (e in varpData) {
+                e ?: continue
+                val varp = e as JSONObject
+                val index = varp["index"]?.toString()?.toInt() ?: continue
+                val value = varp["value"]?.toString()?.toInt() ?: continue
+                player.varpMap[index] = value
+                player.saveVarp[index] = true
+            }
+        }
     }
 
     fun parseSkills() {

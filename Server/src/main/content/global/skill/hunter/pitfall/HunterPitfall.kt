@@ -60,28 +60,28 @@ val HUNTER_REQS = hashMapOf(
     "Sabre-toothed kyatt" to 55,
     )
 //val pitVarpOffsets = hashMapOf( 19264 to 3, 19265 to 6, 19266 to 9, 19267 to 12, 19268 to 15,)
-data class Pit(val varpId: Int, val varpOffset: Int, val horizontal: Boolean)
+data class Pit(val varbitId: Int, val horizontal: Boolean)
 val pitVarps = hashMapOf(
     // Larupia pits (the duplicate 24 is likely authentic)
-    Location.create(2565,2888) to Pit(917, 27, true),
-    Location.create(2573,2885) to Pit(918, 0, false),
-    Location.create(2556,2893) to Pit(917, 18, false),
-    Location.create(2552,2904) to Pit(917, 24, true),
-    Location.create(2543,2908) to Pit(917, 21, false),
-    Location.create(2538,2899) to Pit(917, 24, true),
+    Location.create(2565,2888) to Pit(2967, true),
+    Location.create(2573,2885) to Pit(2968, false),
+    Location.create(2556,2893) to Pit(2964, false),
+    Location.create(2552,2904) to Pit(2966, true),
+    Location.create(2543,2908) to Pit(2965, false),
+    Location.create(2538,2899) to Pit(2966, true),
     // Kyatt pits
-    Location.create(2700,3795) to Pit(917, 0, true),
-    Location.create(2700,3785) to Pit(917, 3, false),
-    Location.create(2706,3789) to Pit(917, 6, false),
-    Location.create(2730,3791) to Pit(917, 9, true),
-    Location.create(2737,3784) to Pit(917, 12, true),
-    Location.create(2730,3780) to Pit(917, 15, false),
+    Location.create(2700,3795) to Pit(2958, true),
+    Location.create(2700,3785) to Pit(2959, false),
+    Location.create(2706,3789) to Pit(2960, false),
+    Location.create(2730,3791) to Pit(2961, true),
+    Location.create(2737,3784) to Pit(2962, true),
+    Location.create(2730,3780) to Pit(2963, false),
     // Graahk pits
-    Location.create(2766,3010) to Pit(918, 3, false),
-    Location.create(2762,3005) to Pit(918, 6, false),
-    Location.create(2771,3004) to Pit(918, 9, true),
-    Location.create(2777,3001) to Pit(918, 12, false),
-    Location.create(2784,3001) to Pit(918, 15, true),
+    Location.create(2766,3010) to Pit(2969, false),
+    Location.create(2762,3005) to Pit(2970, false),
+    Location.create(2771,3004) to Pit(2971, true),
+    Location.create(2777,3001) to Pit(2972, false),
+    Location.create(2784,3001) to Pit(2973, true),
     )
 /*val pitJumpSpots = hashMapOf(
     Location.create(2766,3010) to hashMapOf(
@@ -298,7 +298,7 @@ class PitfallListeners : InteractionListener {
 
     fun setPitState(player: Player, loc: Location, state: Int) {
         val pit = pitVarps[loc]!!
-        player.varpManager.get(pit.varpId).setVarbit(pit.varpOffset, state).send(player)
+        setVarbit(player, pit.varbitId, state)
     }
 }
 

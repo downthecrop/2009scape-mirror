@@ -5,6 +5,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles captains lawgof dialogue.
  * @author Vexia
@@ -95,7 +97,7 @@ public class CaptainLawgofDialogue extends DialoguePlugin {
 		case 10:
 			switch (stage) {
 			case 0:
-				if (player.getConfigManager().get(1) == 2016) {
+				if (DwarfCannon.allRailsFixed(player)) {
 					npc("Well done, trooper! The goblins seems to have stopped", "getting in. I think you've done the job!");
 					stage = 105;
 					break;
@@ -182,7 +184,7 @@ public class CaptainLawgofDialogue extends DialoguePlugin {
 				stage++;
 				break;
 			case 112:
-				player.getConfigManager().set(0, 3, true);
+                                setVarp(player, 0, 3, true);
 				quest.setStage(player, 20);
 				end();
 				break;
@@ -236,7 +238,7 @@ public class CaptainLawgofDialogue extends DialoguePlugin {
 				break;
 			case 10:
 				end();
-				player.getConfigManager().set(0, 5, true);
+                                setVarp(player, 0, 5, true);
 				player.getInventory().remove(DwarfCannon.DWARF_REMAINS);
 				quest.setStage(player, 30);
 				break;
@@ -293,7 +295,7 @@ public class CaptainLawgofDialogue extends DialoguePlugin {
 				break;
 			case 8:
 				player.getInventory().add(DwarfCannon.TOOL_KIT, player);
-				player.getConfigManager().set(0, 7);
+                                setVarp(player, 0, 7);
 				quest.setStage(player, 50);
 				end();
 				break;
@@ -393,7 +395,7 @@ public class CaptainLawgofDialogue extends DialoguePlugin {
 			case 13:
 				player.getInventory().remove(DwarfCannon.TOOL_KIT);
 				player.sendMessage("You give the toolkit back to Captain Lawgof.");
-				player.getConfigManager().set(0, 9, true);
+                                setVarp(player, 0, 9, true);
 				quest.setStage(player, 70);
 				end();
 				break;

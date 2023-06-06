@@ -18,6 +18,9 @@ import core.net.packet.out.ContainerPacket;
 
 import java.nio.ByteBuffer;
 
+import static core.api.ContentAPIKt.*;
+
+
 /**
  * Represents the bank container.
  * @author Emperor
@@ -128,7 +131,7 @@ public final class BankContainer extends Container {
 		super.refresh();
 		player.getInventory().getListeners().add(listener);
 		player.getInventory().refresh();
-		player.varpManager.get(1249).setVarbit(0,lastAmountX).send(player);
+                setVarp(player, 1249, lastAmountX);
 		int settings = new IfaceSettingsBuilder().enableOptions(new IntRange(0, 5)).enableExamine().enableSlotSwitch().build();
 		player.getPacketDispatch().sendIfaceSettings(settings, 0, 763, 0, 27);
 		player.getPacketDispatch().sendRunScript(1451, "");
@@ -156,7 +159,7 @@ public final class BankContainer extends Container {
 		player.getInterfaceManager().openSingleTab(new Component(763));
 		player.getInventory().getListeners().add(player.getBank().listener);
 		player.getInventory().refresh();
-		player.varpManager.get(1249).setVarbit(0,lastAmountX).send(player);
+                setVarp(player, 1249, lastAmountX);
 		player.getPacketDispatch().sendIfaceSettings(1278, 73, 762, 0, SIZE);
 		int settings = new IfaceSettingsBuilder().enableOptions(new IntRange(0,5)).enableExamine().enableSlotSwitch().build();
 		player.getPacketDispatch().sendIfaceSettings(settings, 0, 763, 0, 27);
@@ -316,7 +319,7 @@ public final class BankContainer extends Container {
 	 */
 	public void updateLastAmountX(int amount) {
 		this.lastAmountX = amount;
-		player.varpManager.get(1249).setVarbit(0,amount).send(player);
+                setVarp(player, 1249, amount);
 	}
 	
 	/**
@@ -418,16 +421,16 @@ public final class BankContainer extends Container {
 		int value = getItemsInTab(1);
 		value += getItemsInTab(2) << 10;
 		value += getItemsInTab(3) << 20;
-		player.getConfigManager().set(1246, value);
+                setVarp(player, 1246, value);
 		value = getItemsInTab(4);
 		value += getItemsInTab(5) << 10;
 		value += getItemsInTab(6) << 20;
-		player.getConfigManager().set(1247, value);
+                setVarp(player, 1247, value);
 		value = -2013265920;
 		value += (134217728 * (tabIndex == 10 ? 0 : tabIndex));
 		value += getItemsInTab(7);
 		value += getItemsInTab(8) << 10;
-		player.getConfigManager().set(1248, value);
+                setVarp(player, 1248, value);
 	}
 	
 	/**
@@ -437,16 +440,16 @@ public final class BankContainer extends Container {
 		int value = getItemsInTab(1);
 		value += getItemsInTab(2) << 10;
 		value += getItemsInTab(3) << 20;
-		player.getConfigManager().set(1246, value);
+                setVarp(player, 1246, value);
 		value = getItemsInTab(4);
 		value += getItemsInTab(5) << 10;
 		value += getItemsInTab(6) << 20;
-		player.getConfigManager().set(1247, value);
+                setVarp(player, 1247, value);
 		value = -2013265920;
 		value += (134217728 * (tabIndex == 10 ? 0 : tabIndex));
 		value += getItemsInTab(7);
 		value += getItemsInTab(8) << 10;
-		player.getConfigManager().set(1248, value);
+                setVarp(player, 1248, value);
 	}
 	
 	/**
@@ -480,7 +483,7 @@ public final class BankContainer extends Container {
 	 * @return If items have to be noted {@code true}.
 	 */
 	public boolean isNoteItems() {
-		return player.varpManager.getVarbit(Vars.VARBIT_IFACE_BANK_NOTE_MODE) == 1;
+                return getVarbit(player, Vars.VARBIT_IFACE_BANK_NOTE_MODE) == 1;
 	}
 
 	/**
@@ -488,8 +491,7 @@ public final class BankContainer extends Container {
 	 * @param noteItems If items have to be noted {@code true}.
 	 */
 	public void setNoteItems(boolean noteItems) {
-		player.varpManager.flagSave(Vars.VARBIT_IFACE_BANK_NOTE_MODE, true);
-		player.varpManager.setVarbit(Vars.VARBIT_IFACE_BANK_NOTE_MODE, noteItems ? 1 : 0);
+                setVarbit(player, Vars.VARBIT_IFACE_BANK_NOTE_MODE, noteItems ? 1 : 0, true);
 	}
 
 	/**
@@ -528,8 +530,7 @@ public final class BankContainer extends Container {
 	 * @param insertItems The insert items value.
 	 */
 	public void setInsertItems(boolean insertItems) {
-		player.varpManager.setVarbit(Vars.VARBIT_IFACE_BANK_INSERT_MODE, insertItems ? 1 : 0);
-		player.varpManager.flagSave(Vars.VARBIT_IFACE_BANK_INSERT_MODE, true);
+                setVarbit(player, Vars.VARBIT_IFACE_BANK_INSERT_MODE, insertItems ? 1 : 0, true);
 	}
 	
 	/**
@@ -537,7 +538,7 @@ public final class BankContainer extends Container {
 	 * @return {@code True} if inserting items mode is enabled.
 	 */
 	public boolean isInsertItems() {
-		return player.varpManager.getVarbit(Vars.VARBIT_IFACE_BANK_INSERT_MODE) == 1;
+                return getVarbit(player, Vars.VARBIT_IFACE_BANK_INSERT_MODE) == 1;
 	}
 	
 	/**
