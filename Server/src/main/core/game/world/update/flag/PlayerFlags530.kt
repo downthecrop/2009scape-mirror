@@ -12,6 +12,7 @@ import core.api.*
 
 import java.nio.charset.StandardCharsets
 import kotlin.reflect.*
+import kotlin.math.max
 
 sealed class PlayerFlags530 (p: Int, o: Int, f: EntityFlag) : EFlagProvider (530, EFlagType.Player, p, o, f) {
     class Chat : PlayerFlags530 (0x80, 0, EntityFlag.Chat) {
@@ -145,8 +146,8 @@ sealed class PlayerFlags530 (p: Int, o: Int, f: EntityFlag) : EFlagProvider (530
             buffer.p1add (context.dest.getSceneX(l))
             buffer.p1 (context.dest.getSceneY(l))
             //arrival times (in client cycles)
-            buffer.ip2 (context.startArrive) //# of client cycles to start location
-            buffer.ip2 (context.startArrive + context.destArrive) //# of client cycles to end location
+            buffer.ip2 (max(1, context.startArrive)) //# of client cycles to start location
+            buffer.ip2 (max(2, context.startArrive + context.destArrive)) //# of client cycles to end location
             buffer.p1neg (context.direction.toInteger()) //direction of movement
         }
     }
