@@ -413,7 +413,7 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
                 player.skills.addExperience(Skills.HUNTER, 30.0)
                 rabbit.sendChat("Squeak!")
                 rabbit.animate(Animation(Animations.RABBIT_EAT_OGLEROOT_8734))
-                rabbit.lock(3)
+                rabbit.lock(4)
                 GameWorld.Pulser.submit(object : Pulse(3, player) {
                     override fun pulse(): Boolean {
                         rabbit.finalizeDeath(player)
@@ -551,6 +551,8 @@ class VinesweeperNPC : AbstractNPC {
     }
     override fun handleTickActions() {
         val dest = seedDestinations.find { sd -> sd.loc == location }
+        if (locks.isMovementLocked() || locks.isInteractionLocked())
+            return
         if(dest != null) {
             for(npc in RegionManager.getRegionPlane(location).npcs) {
                 if(npc is VinesweeperNPC) {
