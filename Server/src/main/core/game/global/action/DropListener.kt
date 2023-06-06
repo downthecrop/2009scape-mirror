@@ -12,6 +12,7 @@ import core.game.node.entity.player.link.audio.Audio
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.system.config.ItemConfigParser
+import content.global.skill.summoning.pet.Pets
 import org.rs09.consts.Items
 
 /**
@@ -34,6 +35,10 @@ class DropListener : InteractionListener {
             val option = getUsedOption(player)
             var item = node as? Item ?: return false
             if (option == "drop") {
+                if (Pets.forId(item.id) != null) {
+                    player.familiarManager.summon(item, true, true)
+                    return true
+                }
                 if (GraveController.hasGraveAt(player.location)) {
                     sendMessage(player, "You cannot drop items on top of graves!")
                     return false
