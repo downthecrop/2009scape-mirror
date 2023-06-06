@@ -19,7 +19,6 @@ class ImplingBehavior : NPCBehavior (*Impling.getIds()) {
     override fun onCreation (self: NPC) {
         self.isWalks = true
         self.isNeverWalks = false
-        self.properties.spawnLocation = self.location
     }
 
     override fun tick(self: NPC) : Boolean {

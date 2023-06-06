@@ -19,7 +19,6 @@ class ImplingSpawnerBehavior : NPCBehavior (*ImplingSpawner.getIds()) {
         self.isWalks = true
         self.isNeverWalks = false
         self.setInvisible(true)
-        self.properties.spawnLocation = self.location
     }
 
     override fun onRespawn (self: NPC) {
