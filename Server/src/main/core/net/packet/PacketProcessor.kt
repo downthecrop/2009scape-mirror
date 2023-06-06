@@ -593,6 +593,9 @@ object PacketProcessor {
         if (node.id != nodeId)
             return sendClearMinimap(player)
 
+        if (player.locks.isInteractionLocked() || player.locks.isMovementLocked())
+            return sendClearMinimap(player)
+
         player.scripts.reset()
         if (player.zoneMonitor.useWith(item, node))
             return
