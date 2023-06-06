@@ -53,22 +53,16 @@ public final class StatBoostSpell extends MagicSpell {
 		List<Player> pl = RegionManager.getLocalPlayers(player, 1);
 		int plSize = pl.size() - 1;
 		int doses = potion.getDose(item);
-		if (plSize > doses) {
-			player.getPacketDispatch().sendMessage("You don't have enough doses.");
-			return false;
-		}
-		if (doses > plSize) {
-			doses = plSize;
-		}
 		if (pl.size() == 0) {
 			return false;
 		}
 		if (!super.meetsRequirements(player, true, false)) {
 			return false;
 		}
-		int size = 1;
+		int size = 0;
 		for (Player players : pl) {
 			Player o = (Player) players;
+                        if (size >= doses) break;
 			if (!o.isActive() || o.getLocks().isInteractionLocked() || o == player) {
 				continue;
 			}
@@ -80,7 +74,7 @@ public final class StatBoostSpell extends MagicSpell {
 			potion.getEffect().activate(o);
 			size++;
 		}
-		if (size == 1) {
+		if (size == 0) {
 			player.getPacketDispatch().sendMessage("There is nobody around that has accept aid on to share the potion with you.");
 			return false;
 		}
@@ -90,7 +84,12 @@ public final class StatBoostSpell extends MagicSpell {
 		player.animate(ANIMATION);
 		player.graphics(GRAPHICS);
 		player.getInventory().remove(item);
-		player.getInventory().add(new Item(potion.getIds()[size - 1]));
+                int newIndex = (potion.getIds().length - doses) + size;
+                if (newIndex > potion.getIds().length - 1) {
+                    player.getInventory().add(new Item(229));
+                    return true;
+                }
+		player.getInventory().add(new Item(potion.getIds()[newIndex]));
 		return true;
 	}
 }

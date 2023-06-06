@@ -62,7 +62,9 @@ public class Potion extends Drink {
         }
     }
 
-    public static int getDose(Item potion){
+    public int getDose(Item potion){
+        for (int i = 0; i < ids.length; i++)
+            if (ids[i] == potion.getId()) return ids.length - i;
         return Integer.parseInt(potion.getName().replaceAll("[^\\d.]",""));
     }
 

@@ -224,7 +224,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
             sendMessage(player, "You need to use this spell on logs.")
             return
         }
-        if (!removeItem(player, Item(Items.COINS_995, plankType.price))) {
+        if (amountInInventory(player, Items.COINS_995) < plankType.price || !removeItem(player, Item(Items.COINS_995, plankType.price))) {
             sendMessage(player, "You need ${plankType.price} coins to convert that log into a plank.")
             return
         }
