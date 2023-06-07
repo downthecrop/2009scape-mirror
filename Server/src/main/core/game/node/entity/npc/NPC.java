@@ -719,7 +719,7 @@ public class NPC extends Entity {
 		if (!pathBoundMovement || movementPath == null || movementPath.length < 1) {
 			Location returnToSpawnLocation = getProperties().getSpawnLocation().transform(-5 + RandomFunction.random(getWalkRadius()), -5 + RandomFunction.random(getWalkRadius()), 0);
 			int dist = (int) Location.getDistance(location, returnToSpawnLocation);
-			int pathLimit = 15;
+			int pathLimit = 14;
                         if (dist > pathLimit) {
                             Vector normalizedDir = Vector.betweenLocs(this.location, returnToSpawnLocation).normalized();
                             returnToSpawnLocation = this.location.transform (normalizedDir.times(pathLimit));
