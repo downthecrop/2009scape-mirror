@@ -207,7 +207,7 @@ public abstract class MovementPulse extends Pulse {
             previousMoverLoc = Location.create(ml);
             previousMoveTime = getWorldTicks();
         }
-        else if (getWorldTicks() - previousMoveTime >= 25) {
+        else if (getWorldTicks() - previousMoveTime >= 25 && !(destination instanceof Player)) {
             if (mover instanceof Player) {
                 ((Player) mover).getPacketDispatch().sendMessage("I can't reach that.");
                 PacketRepository.send(ClearMinimapFlag.class, new PlayerContext((Player) mover));
