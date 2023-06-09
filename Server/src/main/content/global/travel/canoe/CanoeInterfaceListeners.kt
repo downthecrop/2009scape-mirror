@@ -44,7 +44,7 @@ class CanoeInterfaceListeners : InterfaceListener {
                 return@on true
             }
 
-            player.lock()
+            lock(player, 4)
             animate(player, CanoeUtils.getShapeAnimation(axe))
             player.pulseManager.run(object : Pulse(3) {
                 override fun pulse(): Boolean {
@@ -98,7 +98,7 @@ class CanoeInterfaceListeners : InterfaceListener {
                 travelAnimDur = Animation(interfaceAnimationId).duration
             }
 
-            player.lock()
+            lock(player, travelAnimDur + 4)
             player.interfaceManager.close()
             player.pulseManager.run(object : Pulse(){
                 var counter = 0

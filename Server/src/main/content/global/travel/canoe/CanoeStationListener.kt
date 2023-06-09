@@ -46,7 +46,7 @@ class CanoeStationListener : InteractionListener {
                 player.packetDispatch.sendMessage("You need a woodcutting level of at least 12 to chop down this tree.")
                 return@on true
             }
-            player.lock()
+            lock(player, 5)
             setVarp(player, varbit.varpId, 0)
             player.faceLocation(CanoeUtils.getFaceLocation(player.location))
             player.animate(axe.animation)
@@ -79,7 +79,7 @@ class CanoeStationListener : InteractionListener {
             val varbit = node.asScenery().definition.configFile
             val canoe = CanoeUtils.getCanoeFromVarbit(player, varbit)
             player.animator.animate(PUSH)
-            player.lock()
+            lock(player, 2)
             player.faceLocation(CanoeUtils.getFaceLocation(player.location))
             player.pulseManager.run(object : Pulse(){
                 override fun pulse(): Boolean {
