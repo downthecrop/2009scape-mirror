@@ -20630,5 +20630,9 @@
   {
     "examine": "There are some bandages on this table.",
     "ids": "36579,36586"
+  },
+  {
+    "examine": "Rough but adequate.",
+    "ids": "14918"
   }
 ]
