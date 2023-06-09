@@ -215,7 +215,7 @@ class CombatPulse(
         if (entity == null || victim == null || entity.locks.isMovementLocked) {
             return false
         }
-        movement.findPath()
+        movement.updatePath()
         return type == InteractionType.MOVE_INTERACT
     }
 

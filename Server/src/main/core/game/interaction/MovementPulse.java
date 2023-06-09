@@ -15,11 +15,12 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.PlayerContext;
 import core.net.packet.out.ClearMinimapFlag;
 import kotlin.jvm.functions.Function2;
+import kotlin.Pair;
 import core.tools.SystemLogger;
 
-import static core.api.ContentAPIKt.getWorldTicks;
-import static core.api.ContentAPIKt.log;
-import core.tools.Log;
+import content.region.wilderness.handlers.revenants.RevenantNPC;
+
+import static core.api.ContentAPIKt.truncateLoc;
 
 import java.util.Deque;
 
@@ -83,9 +84,6 @@ public abstract class MovementPulse extends Pulse {
     private Function2<Entity,Node,Location> overrideMethod;
 
     private Location previousLoc;
-
-    private Location previousMoverLoc;
-    private int previousMoveTime;
 
     /**
      * Constructs a new {@code MovementPulse} {@code Object}.
@@ -186,39 +184,35 @@ public abstract class MovementPulse extends Pulse {
     }
 
     @Override
+    public void start() {
+        super.start();
+        if (mover != null)
+            mover.getWalkingQueue().reset();
+    }
+
+    @Override
     public boolean update() {
+        if (!validate()) {
+            stop();
+            return true;
+        }
+
+        if (!mover.getViewport().getRegion().isActive())
+            return false;
+
+        if (tryInteract()) {
+            stop();
+            return true;
+        }
+
         mover.face(null);
-        if (mover == null || destination == null || mover.getViewport().getRegion() == null) {
-            stop();
-            return true;
-        }
+        updatePath();
 
-        if (hasInactiveNode() || !mover.getViewport().getRegion().isActive()) {
-            stop();
-            return true;
-        }
-        if (!isRunning()) {
-            return true;
-        }
-        findPath();
+        return false;
+    }
+
+    private boolean tryInteract() {
         Location ml = mover.getLocation();
-
-        if (previousMoverLoc == null || !previousMoverLoc.equals(ml)) {
-            previousMoverLoc = Location.create(ml);
-            previousMoveTime = getWorldTicks();
-        }
-        else if (getWorldTicks() - previousMoveTime >= 25) {
-            if (mover instanceof Player) {
-                ((Player) mover).getPacketDispatch().sendMessage("I can't reach that.");
-                PacketRepository.send(ClearMinimapFlag.class, new PlayerContext((Player) mover));
-            }
-            log(this.getClass(), Log.FINE, mover.getName() + " was trying to move to " + interactLocation + " from " + ml + " but hasn't changed location in 25 ticks. More info follows:");
-            log(this.getClass(), Log.FINE, "    -> Locked? " + mover.getLocks().isMovementLocked());
-            log(this.getClass(), Log.FINE, "    -> Has path? " + mover.getWalkingQueue().hasPath());
-            stop();
-            return true;
-        }
-
         // Allow being within 1 square of moving entities to interact with them.
         int radius = destination instanceof Entity && ((Entity)destination).getWalkingQueue().hasPath() ? 1 : 0;
         if (interactLocation == null)
@@ -243,6 +237,13 @@ public abstract class MovementPulse extends Pulse {
         return false;
     }
 
+    private boolean validate() {
+        if (mover == null || destination == null || mover.getViewport().getRegion() == null || hasInactiveNode()) {
+            return false;
+        }
+        return isRunning();
+    }
+
     @Override
     public void stop() {
         super.stop();
@@ -255,20 +256,14 @@ public abstract class MovementPulse extends Pulse {
     /**
      * Finds a path to the destination, if necessary.
      */
-    public void findPath() {
+    private boolean usingTruncatedPath = false;
+    public void updatePath() {
         if (mover instanceof NPC && mover.asNpc().isNeverWalks()) {
             return;
         }
-        if(destination.getLocation() == null){
+        if(destination == null || destination.getLocation() == null){
             return;
         }
-        boolean inside = isInsideEntity(mover.getLocation());
-/* This appears to have been a premature optimization that lead to a bug that would cause both entities
-   to completely stop moving mid-combat/mid-follow-dance/etc
-        if (last != null && last.equals(destination.getLocation()) && !inside) {
-            return;
-        }
-*/
 
         Location loc = null;
 
@@ -287,60 +282,35 @@ public abstract class MovementPulse extends Pulse {
             else if (useHandler != null) {
                 loc = useHandler.getDestination((Player) mover, destination);
             }
-            else if (inside) {
+            else if (isInsideEntity(mover.getLocation())) {
                 loc = findBorderLocation();
             }
-        } else if (loc == previousLoc && interactLocation != null && mover.getWalkingQueue().hasPath()) return;
-
-        if (destination == null) {
-            return;
         }
 
-        if (destination instanceof Entity || interactLocation == null) {
-            Location ml = mover.getLocation();
-            Location dl = destination.getLocation();
-            // Lead the target if they're walking/running, unless they're already within interaction range
-            if(loc != null && destination instanceof Entity && Math.max(Math.abs(ml.getX() - dl.getX()), Math.abs(ml.getY() - dl.getY())) > 1) {
-                WalkingQueue wq = ((Entity)destination).getWalkingQueue();
-                if(wq.hasPath()) {
-                    Point[] points = wq.getQueue().toArray(new Point[0]);
-                    if(points.length > 0) {
-                        Point p = points[0];
-                        for(int i=0; i<points.length; i++) {
-                            // Target the farthest point along target's planned movement that's within 1 tick's running,
-                            // this ensures the player will run to catch up to the target if able.
-                            if(Math.max(Math.abs(ml.getX() - points[i].getX()), Math.abs(ml.getY() - points[i].getY())) <= 2) {
-                                p = points[i];
-                            }
-                        }
-                        loc.setX(p.getX());
-                        loc.setY(p.getY());
-                    }
-                }
-            }
+        if (destination instanceof NPC)
+            loc = checkForEntityPathInterrupt(loc != null ? loc : destination.getLocation());
 
-            Path path = Pathfinder.find(mover, loc != null ? loc : destination, true, pathfinder);
-            loc = destination.getLocation();
-            near = !path.isSuccessful() || path.isMoveNear();
-            interactLocation = mover.getLocation();
-            boolean canMove = true;
-            if (destination instanceof Entity) {
-                Entity e = (Entity) destination;
-                Location l = e.getLocation();
-                Deque<Point> npcPath = e.getWalkingQueue().getQueue();
-                if (e.getWalkingQueue().hasPath() && e.getProperties().getCombatPulse().isRunning() && e.getProperties().getCombatPulse().getVictim() == mover)
-                    canMove = false;
-                if (!canMove) { //If we normally shouldn't move, but the NPC's pathfinding is not letting them move, then move.
-                    if (npcPath.size() == 1) {
-                        Point pathElement = npcPath.peek();
-                        if (pathElement.getX() == l.getX() && pathElement.getY() == l.getY())
-                            canMove = true;
-                    }
-                }
+        if (interactLocation == null)
+            interactLocation = loc;
+
+        if (destination instanceof Entity || !mover.getWalkingQueue().hasPath() || mover.getWalkingQueue().getQueue().size() <= 3 || (usingTruncatedPath && destination.getLocation().getDistance(mover.getLocation()) < 14)) {
+            if (!checkAllowMovement())
+                return;
+
+            Path path;
+            Pair<Boolean, Location> truncation = truncateLoc(mover, loc != null ? loc : destination.getLocation());
+            if (truncation.getFirst()) {
+                path = Pathfinder.find(mover, truncation.getSecond(), true, pathfinder);
+                usingTruncatedPath = true;
+            } else {
+                path = Pathfinder.find(mover, loc != null ? loc : destination, true, pathfinder);
+                interactLocation = null; //reset interactLocation so the below code can set it to the properly-pathfound last bit of path.
+                usingTruncatedPath = false;
             }
-            if (!path.getPoints().isEmpty() && canMove) {
+            near = !path.isSuccessful() || path.isMoveNear();
+
+            if (!path.getPoints().isEmpty()) {
                 Point point = path.getPoints().getLast();
-                interactLocation = Location.create(point.getX(), point.getY(), mover.getLocation().getZ());
                 if (forceRun) {
                     mover.getWalkingQueue().reset(forceRun);
                 } else {
@@ -356,11 +326,64 @@ public abstract class MovementPulse extends Pulse {
                     } else {
                         mover.face(null);
                     }
+
+                    if (i == size - 1 && interactLocation == null)
+                        interactLocation = Location.create(point.getX(), point.getY(), mover.getLocation().getZ());
                 }
-                previousLoc = loc;
             }
+            previousLoc = loc;
         }
         last = destination.getLocation();
+    }
+
+    private boolean checkAllowMovement() {
+        boolean canMove = true;
+        if (destination instanceof Entity) {
+            Entity e = (Entity) destination;
+            Location l = e.getLocation();
+            Deque<Point> npcPath = e.getWalkingQueue().getQueue();
+            if (e.getWalkingQueue().hasPath() && e.getProperties().getCombatPulse().isRunning() && e.getProperties().getCombatPulse().getVictim() == mover)
+                canMove = false;
+            if (!canMove) { //If we normally shouldn't move, but the NPC's pathfinding is not letting them move, then move.
+                if (npcPath.size() == 1) {
+                    Point pathElement = npcPath.peek();
+                    if (pathElement.getX() == l.getX() && pathElement.getY() == l.getY())
+                        canMove = true;
+                }
+            }
+        }
+        return canMove;
+    }
+
+    private Location checkForEntityPathInterrupt(Location loc) {
+        Location ml = mover.getLocation();
+        Location dl = destination.getLocation();
+        // Lead the target if they're walking/running, unless they're already within interaction range
+        if(loc != null && destination instanceof Entity && Math.max(Math.abs(ml.getX() - dl.getX()), Math.abs(ml.getY() - dl.getY())) > 1) {
+            WalkingQueue wq = ((Entity)destination).getWalkingQueue();
+            if(wq.hasPath()) {
+                Point[] points = wq.getQueue().toArray(new Point[0]);
+                if(points.length > 0) {
+                    Point p = points[0];
+                    for(int i=0; i<points.length; i++) {
+                        // Target the farthest point along target's planned movement that's within 1 tick's running,
+                        // this ensures the player will run to catch up to the target if able.
+                        if(Math.max(Math.abs(ml.getX() - points[i].getX()), Math.abs(ml.getY() - points[i].getY())) <= 2) {
+                            p = points[i];
+                            break;
+                        }
+                    }
+                    Location endLoc = findBorderLocation(Location.create (p.getX(), p.getY(), loc.getZ()));
+                    return endLoc;
+                }
+            }
+        }
+        return loc;
+    }
+
+
+    private Location findBorderLocation() {
+        return findBorderLocation(destination.getLocation());
     }
 
     /**
@@ -368,12 +391,12 @@ public abstract class MovementPulse extends Pulse {
      *
      * @return The location to walk to.
      */
-    private Location findBorderLocation() {
+    private Location findBorderLocation(Location centerDestLoc) {
         int size = destination.size();
-        Location centerDest = destination.getLocation().transform(size >> 1, size >> 1, 0);
+        Location centerDest = centerDestLoc.transform(size >> 1, size >> 1, 0);
         Location center = mover.getLocation().transform(mover.size() >> 1, mover.size() >> 1, 0);
         Direction direction = Direction.getLogicalDirection(centerDest, center);
-        Location delta = Location.getDelta(destination.getLocation(), mover.getLocation());
+        Location delta = Location.getDelta(centerDestLoc, mover.getLocation());
         main:
         for (int i = 0; i < 4; i++) {
             int amount = 0;
