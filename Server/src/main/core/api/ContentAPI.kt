@@ -1012,7 +1012,7 @@ fun getVarp (player: Player, varpIndex: Int) : Int {
 fun getVarbit (player: Player, def: VarbitDefinition) : Int {
     val mask = def.mask
     val current = getVarp (player, def.varpId)
-    return (current and mask) shr def.startBit
+    return (current shr def.startBit) and mask
 }
 
 fun getVarbit (player: Player, varbitId: Int) : Int {
@@ -1030,8 +1030,8 @@ fun setVarp (player: Player, varpIndex: Int, value: Int, save: Boolean = false) 
 @JvmOverloads
 fun setVarbit (player: Player, def: VarbitDefinition, value: Int, save: Boolean = false) {
     val mask = def.mask
-    val current = getVarp (player, def.varpId) and mask.inv()
-    val newValue = (value shl def.startBit) and mask
+    val current = getVarp (player, def.varpId) and (mask shl def.startBit).inv()
+    val newValue = (value and mask) shl def.startBit
     setVarp (player, def.varpId, current or newValue, save)
 }
 

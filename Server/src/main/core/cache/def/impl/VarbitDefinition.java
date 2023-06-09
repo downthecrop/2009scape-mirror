@@ -162,7 +162,7 @@ public final class VarbitDefinition {
         public int getMask() {
                 int mask = 0;
                 for (int i = startBit; i <= endBit; i++)
-                    mask |= (1 << i);
+                    mask |= (1 << (i - startBit));
                 return mask;
         }
 
