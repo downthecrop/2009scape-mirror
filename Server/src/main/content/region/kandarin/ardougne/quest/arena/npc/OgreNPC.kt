@@ -1,5 +1,7 @@
-package content.region.kandarin.ardougne.quest.arena
+package content.region.kandarin.ardougne.quest.arena.npc
 
+import content.region.kandarin.ardougne.quest.arena.FightArena
+import content.region.kandarin.ardougne.quest.arena.dialogue.GeneralKhazardDialogue
 import core.api.*
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
@@ -11,25 +13,24 @@ import core.plugin.Initializable
 import org.rs09.consts.NPCs
 
 @Initializable
-class KhazardOgreNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
+class OgreNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
     var clearTime = 0
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC {
-        return KhazardOgreNPC(id, location)
+        return OgreNPC(id, location)
     }
 
     override fun getIds(): IntArray {
         return intArrayOf(NPCs.KHAZARD_OGRE_270)
-
     }
 
     override fun handleTickActions() {
         super.handleTickActions()
-        if (clearTime++ > 144) poofClear(this)
+        if (clearTime++ > 300) poofClear(this)
     }
 
     companion object {
         fun spawnOgre(player: Player) {
-            val ogre = KhazardOgreNPC(NPCs.KHAZARD_OGRE_270)
+            val ogre = OgreNPC(NPCs.KHAZARD_OGRE_270)
             ogre.location = location(2603, 3166, 0)
             ogre.isWalks = true
             ogre.isAggressive = true

@@ -1,21 +1,12 @@
-package content.region.kandarin.ardougne.quest.arena
+package content.region.kandarin.ardougne.quest.arena.cutscenes
 
-import content.region.kandarin.ardougne.quest.arena.BouncerNPC.Companion.spawnBouncer
-import core.api.getScenery
-import core.api.location
-import core.api.replaceScenery
+import content.region.kandarin.ardougne.quest.arena.npc.BouncerNPC.Companion.spawnBouncer
 import core.game.activity.Cutscene
 import core.game.global.action.DoorActionHandler
 import core.game.node.entity.player.Player
-import core.game.node.scenery.Scenery
 import core.game.world.map.Direction
-import core.net.packet.PacketRepository
-import core.net.packet.context.MinimapStateContext
-import core.net.packet.out.MinimapState
-import org.rs09.consts.Scenery.PRISON_DOOR_79
-import org.rs09.consts.Scenery.PRISON_DOOR_80
 
-class BouncerCutscene(player: Player) : Cutscene(player) {
+class ThirdFightCutscene(player: Player) : Cutscene(player) {
 
     override fun setup() {
         setExit(player.location.transform(0, 0, 0))
@@ -35,9 +26,9 @@ class BouncerCutscene(player: Player) : Cutscene(player) {
             }
 
             1 -> {
-                moveCamera(43, 27)
-                moveCamera(42, 27)
-                rotateCamera(46, 27)
+                moveCamera(43, 27, 300, 100)
+                moveCamera(42, 27, 300, 100)
+                rotateCamera(46, 27, 300, 100)
                 timedUpdate(2)
             }
 
@@ -48,9 +39,9 @@ class BouncerCutscene(player: Player) : Cutscene(player) {
 
             3 -> {
                 move(getNPC(BOUNCER)!!, 45, 26)
-                moveCamera(39, 27, 300, 1)
-                rotateCamera(44, 27, 300, 1)
-                timedUpdate(1)
+                moveCamera(37, 27, 300, 5)
+                rotateCamera(44, 27, 300, 5)
+                timedUpdate(2)
             }
 
             4 -> {
@@ -60,7 +51,7 @@ class BouncerCutscene(player: Player) : Cutscene(player) {
 
             5 -> {
                 move(getNPC(BOUNCER)!!, 42, 26)
-                timedUpdate(-1)
+                timedUpdate(3)
             }
 
             6 -> {

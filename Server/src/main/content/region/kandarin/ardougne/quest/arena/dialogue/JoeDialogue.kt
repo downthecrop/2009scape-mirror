@@ -1,4 +1,4 @@
-package content.region.kandarin.ardougne.quest.arena
+package content.region.kandarin.ardougne.quest.arena.dialogue
 
 import core.api.allInEquipment
 import core.api.sendNPCDialogue
@@ -26,13 +26,11 @@ class JoeDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> sendNPCDialogue(player, NPCs.JOE_261, "If we did, why would we tell you guard?", FacialExpression.ANNOYED).also { stage = 1 }
-            1 -> sendNPCDialogue(player, NPCs.KELVIN_260, "Until our last breath, our every action will be against Khazard. Never will we help you.", FacialExpression.ANNOYED).also { stage = 2 }
+            0 -> sendNPCDialogue(player, NPCs.JOE_261, "If we did, why would we tell you guard?", FacialExpression.ANNOYED).also { stage++ }
+            1 -> sendNPCDialogue(player, NPCs.KELVIN_260, "Until our last breath, our every action will be against Khazard. Never will we help you.", FacialExpression.ANNOYED).also { stage++ }
             2 -> sendNPCDialogue(player, NPCs.JOE_261, "I spit on Khazard's grave, and all who do his bidding.", FacialExpression.ANNOYED).also { stage = END_DIALOGUE }
-        }
-        when (stage) {
-            3 -> sendNPCDialogue(player, NPCs.KELVIN_260, "I have heard of those of whom you speak. But I fear it may be too late.", FacialExpression.HALF_GUILTY).also { stage = 4 }
-            4 -> sendNPCDialogue(player, NPCs.JOE_261, "It is said that Khazard has a personal vendetta against those two, their time is therefore short.", FacialExpression.FRIENDLY).also { stage = 5 }
+            3 -> sendNPCDialogue(player, NPCs.KELVIN_260, "I have heard of those of whom you speak. But I fear it may be too late.", FacialExpression.HALF_GUILTY).also { stage++ }
+            4 -> sendNPCDialogue(player, NPCs.JOE_261, "It is said that Khazard has a personal vendetta against those two, their time is therefore short.", FacialExpression.FRIENDLY).also { stage++ }
             5 -> sendNPCDialogue(player, NPCs.KELVIN_260, "You're a brave " + (if (player!!.isMale) "Sir" else "Madam") + ". If the guards get you, you'll be in here next.", FacialExpression.HALF_WORRIED).also { stage = END_DIALOGUE }
         }
         return true
@@ -43,6 +41,6 @@ class JoeDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JOE_261)
+        return intArrayOf(NPCs.KELVIN_260, NPCs.JOE_261)
     }
 }

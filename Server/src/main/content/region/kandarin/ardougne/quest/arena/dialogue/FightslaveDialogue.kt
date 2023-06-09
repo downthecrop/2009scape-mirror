@@ -1,7 +1,6 @@
-package content.region.kandarin.ardougne.quest.arena
+package content.region.kandarin.ardougne.quest.arena.dialogue
 
 import core.api.allInEquipment
-import core.api.sendNPCDialogue
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
@@ -12,26 +11,30 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 
 @Initializable
-class KelvinDialogue(player: Player? = null) : DialoguePlugin(player) {
+class FightslaveDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (allInEquipment(player, Items.KHAZARD_HELMET_74, Items.KHAZARD_ARMOUR_75)) {
-            sendNPCDialogue(player, NPCs.KELVIN_260, "Get away, get away. One day I'll have my revenge, and I'll have all your heads.", FacialExpression.ANNOYED).also { stage = END_DIALOGUE }
+            playerl(FacialExpression.FRIENDLY, "Do you know of a Justin or Jeremy in this arena?").also { stage = 0 }
         } else {
-            sendNPCDialogue(player, NPCs.KELVIN_260, "You're not safe here traveller. Leave while you still can", FacialExpression.FRIENDLY).also { stage = END_DIALOGUE }
+            playerl(FacialExpression.FRIENDLY, "Do you know of a Justin or Jeremy in this arena?").also { stage = 1 }
         }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+        when (stage) {
+            0 -> npcl(FacialExpression.FRIENDLY, "Please leave me alone.").also { stage = END_DIALOGUE }
+            1 -> npcl(FacialExpression.AFRAID, "I've not met anybody in here by that name.").also { stage = END_DIALOGUE }
+        }
         return true
     }
 
     override fun newInstance(player: Player?): DialoguePlugin {
-        return KelvinDialogue(player)
+        return FightslaveDialogue(player)
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KELVIN_260)
+        return intArrayOf(NPCs.FIGHTSLAVE_262)
     }
 }

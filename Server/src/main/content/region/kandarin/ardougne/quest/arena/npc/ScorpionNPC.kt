@@ -1,6 +1,7 @@
-package content.region.kandarin.ardougne.quest.arena
+package content.region.kandarin.ardougne.quest.arena.npc
 
-
+import content.region.kandarin.ardougne.quest.arena.FightArena
+import content.region.kandarin.ardougne.quest.arena.dialogue.GeneralKhazardDialogue
 import core.api.*
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
@@ -12,11 +13,10 @@ import core.plugin.Initializable
 import org.rs09.consts.NPCs
 
 @Initializable
-class KhazardScorpionNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
+class ScorpionNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
     var clearTime = 0
-
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC {
-        return KhazardScorpionNPC(id, location)
+        return ScorpionNPC(id, location)
     }
 
     override fun getIds(): IntArray {
@@ -25,12 +25,12 @@ class KhazardScorpionNPC(id: Int = 0, location: Location? = null) : AbstractNPC(
 
     override fun handleTickActions() {
         super.handleTickActions()
-        if (clearTime++ > 144) poofClear(this)
+        if (clearTime++ > 300) poofClear(this)
     }
 
     companion object {
         fun spawnScorpion(player: Player) {
-            val scorpion = KhazardScorpionNPC(NPCs.KHAZARD_SCORPION_271)
+            val scorpion = ScorpionNPC(NPCs.KHAZARD_SCORPION_271)
             scorpion.location = location(2604, 3159, 0)
             scorpion.isWalks = true
             scorpion.isAggressive = true

@@ -1,7 +1,8 @@
-package content.region.kandarin.ardougne.quest.arena
+package content.region.kandarin.ardougne.quest.arena.npc
 
-
+import content.region.kandarin.ardougne.quest.arena.FightArena
 import content.region.kandarin.ardougne.quest.arena.FightArenaListeners.Companion.General
+import content.region.kandarin.ardougne.quest.arena.dialogue.JeremyServilBDialogue
 import core.api.openDialogue
 import core.api.questStage
 import core.api.setQuestStage
@@ -26,7 +27,6 @@ class GeneralNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, loca
         super.handleTickActions()
         General.asNpc().isRespawn = true
         General.respawnTick = 10
-
     }
 
     override fun finalizeDeath(killer: Entity?) {
@@ -35,7 +35,7 @@ class GeneralNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, loca
             if (questStage(killer, quest) == 97) {
                 setQuestStage(killer, FightArena.FightArenaQuest, 98)
             }
-            openDialogue(killer, JeremyServilRescuedDialogue())
+            openDialogue(killer, JeremyServilBDialogue())
         }
         super.finalizeDeath(killer)
     }

@@ -1,7 +1,7 @@
-package content.region.kandarin.ardougne.quest.arena
+package content.region.kandarin.ardougne.quest.arena.cutscenes
 
 import content.region.kandarin.ardougne.quest.arena.FightArenaListeners.Companion.Jeremy
-import content.region.kandarin.ardougne.quest.arena.KhazardOgreNPC.Companion.spawnOgre
+import content.region.kandarin.ardougne.quest.arena.npc.OgreNPC.Companion.spawnOgre
 import core.api.*
 import core.game.activity.Cutscene
 import core.game.dialogue.FacialExpression
@@ -9,11 +9,8 @@ import core.game.global.action.DoorActionHandler
 import core.game.node.entity.player.Player
 import core.game.world.map.Direction
 import core.game.world.map.Location
-import core.net.packet.PacketRepository
-import core.net.packet.context.MinimapStateContext
-import core.net.packet.out.MinimapState
 
-class RescueCutscene(player: Player) : Cutscene(player) {
+class EscapeCutscene(player: Player) : Cutscene(player) {
     override fun setup() {
         setExit(location(2603, 3155, 0))
         if (player.settings.isRunToggled) {
@@ -25,15 +22,14 @@ class RescueCutscene(player: Player) : Cutscene(player) {
         when (stage) {
 
             0 -> {
-                PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 1))
                 move(Jeremy, 56, 31)
-                timedUpdate(2)
+                timedUpdate(3)
             }
 
             1 -> {
                 player.faceLocation(location(2616, 3167, 0))
                 animate(player, 2098)
-                timedUpdate(1)
+                timedUpdate(4)
             }
 
             2 -> {
@@ -44,7 +40,7 @@ class RescueCutscene(player: Player) : Cutscene(player) {
             3 -> {
                 DoorActionHandler.handleAutowalkDoor(Jeremy, getScenery(2617, 3167, 0))
                 player.faceLocation(location(2617, 3164, 0))
-                timedUpdate(2)
+                timedUpdate(3)
             }
 
             4 -> {
@@ -76,7 +72,7 @@ class RescueCutscene(player: Player) : Cutscene(player) {
             }
 
             8 -> {
-                DoorActionHandler.handleAutowalkDoor(player, getScenery(174, 16, 0))
+                DoorActionHandler.handleAutowalkDoor(player, getObject(46, 16))
                 moveCamera(41, 26, 300, 4)
                 rotateCamera(45, 15, 300, 4)
                 timedUpdate(-1)
@@ -89,7 +85,7 @@ class RescueCutscene(player: Player) : Cutscene(player) {
 
             10 -> {
                 move(player, 43, 18)
-                timedUpdate(2)
+                timedUpdate(1)
             }
 
             11 -> {
@@ -99,16 +95,16 @@ class RescueCutscene(player: Player) : Cutscene(player) {
 
             12 -> {
                 player.faceLocation(getNPC(JEREMYRESCUE)!!.location)
-                sendPlayerDialogue(player, "Jeremy, where's your father?", FacialExpression.NEUTRAL)
-                timedUpdate(1)
+                sendPlayerDialogue(player, "Jeremy, where's your father?",FacialExpression.HALF_ASKING)
+                timedUpdate(2)
             }
 
             13 -> {
                 getNPC(JEREMYRESCUE)!!.faceLocation(player.location)
+                move(getNPC(JUSTIN)!!, 42, 32)
                 sendNPCDialogue(player, JEREMYRESCUE, "Quick help him! That beast will kill him. He's too old to fight.")
                 teleport(getNPC(OGRE)!!, 45, 30)
-                move(getNPC(JUSTIN)!!, 42, 32)
-                timedUpdate(1)
+                timedUpdate(2)
             }
 
             14 -> {

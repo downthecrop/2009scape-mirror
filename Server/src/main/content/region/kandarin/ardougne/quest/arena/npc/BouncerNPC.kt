@@ -1,5 +1,7 @@
-package content.region.kandarin.ardougne.quest.arena
+package content.region.kandarin.ardougne.quest.arena.npc
 
+import content.region.kandarin.ardougne.quest.arena.FightArena
+import content.region.kandarin.ardougne.quest.arena.dialogue.GeneralKhazardDialogue
 import core.api.*
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
@@ -23,7 +25,7 @@ class BouncerNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, loca
 
     override fun handleTickActions() {
         super.handleTickActions()
-        if (clearTime++ > 144) poofClear(this)
+        if (clearTime++ > 300) poofClear(this)
     }
 
     companion object {
