@@ -272,5 +272,9 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
         define("fmanim", Privilege.ADMIN, "", "") {player, args ->
             setAttribute(player, "fmanim", args[1].toIntOrNull() ?: -1)
         }
+
+        define("drawintersect", Privilege.ADMIN, "", "Visualizes the predicted intersection point with an NPC") {player, _ ->
+            setAttribute(player, "draw-intersect", !getAttribute(player, "draw-intersect", false))
+        }
     }
 }

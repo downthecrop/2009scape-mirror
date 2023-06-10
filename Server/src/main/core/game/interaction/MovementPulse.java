@@ -17,10 +17,11 @@ import core.net.packet.out.ClearMinimapFlag;
 import kotlin.jvm.functions.Function2;
 import kotlin.Pair;
 import core.tools.SystemLogger;
+import core.api.utils.Vector;
 
 import content.region.wilderness.handlers.revenants.RevenantNPC;
 
-import static core.api.ContentAPIKt.truncateLoc;
+import static core.api.ContentAPIKt.*;
 
 import java.util.Deque;
 
@@ -359,26 +360,49 @@ public abstract class MovementPulse extends Pulse {
         Location ml = mover.getLocation();
         Location dl = destination.getLocation();
         // Lead the target if they're walking/running, unless they're already within interaction range
-        if(loc != null && destination instanceof Entity && Math.max(Math.abs(ml.getX() - dl.getX()), Math.abs(ml.getY() - dl.getY())) > 1) {
+        if(loc != null && destination instanceof Entity) {
             WalkingQueue wq = ((Entity)destination).getWalkingQueue();
             if(wq.hasPath()) {
                 Point[] points = wq.getQueue().toArray(new Point[0]);
                 if(points.length > 0) {
                     Point p = points[0];
+                    Point predictiveIntersection = null;
                     for(int i=0; i<points.length; i++) {
-                        // Target the farthest point along target's planned movement that's within 1 tick's running,
-                        // this ensures the player will run to catch up to the target if able.
-                        if(Math.max(Math.abs(ml.getX() - points[i].getX()), Math.abs(ml.getY() - points[i].getY())) <= 2) {
-                            p = points[i];
+                        Location closestBorder = getClosestBorderToPoint (points[i], loc.getZ());
+
+                        int moverDist = Math.max(Math.abs(ml.getX() - closestBorder.getX()), Math.abs(ml.getY() - closestBorder.getY()));
+                        if (predictiveIntersection == null && moverDist == i / (mover.getWalkingQueue().isRunning() ? 2 : 1)) { //try to predict an intersection point on the path if possible
+                            predictiveIntersection = points[i];
                             break;
                         }
+
+                        // Otherwise, we target the farthest point along target's planned movement that's within 1 tick's running,
+                        // this ensures the player will run to catch up to the target if able.
+                        if(moverDist <= 2) {
+                            p = points[i];
+                        }
                     }
-                    Location endLoc = findBorderLocation(Location.create (p.getX(), p.getY(), loc.getZ()));
+
+                    if (predictiveIntersection != null)
+                        p = predictiveIntersection;
+                    
+                    Location endLoc = getClosestBorderToPoint(p, loc.getZ());
+                    if (mover instanceof Player && mover.getAttribute("draw-intersect", false)) {
+                        clearHintIcon((Player) mover);
+                        registerHintIcon((Player) mover, endLoc, 5);
+                    }
                     return endLoc;
                 }
             }
         }
         return loc;
+    }
+
+    private Location getClosestBorderToPoint (Point p, int plane) {
+        Vector pathDiff = Vector.betweenLocs (destination.getLocation(), Location.create(p.getX(), p.getY(), plane));
+        Location predictedCenterPos = (destination.getMathematicalCenter().plus(pathDiff)).toLocation(plane);
+        Vector toPlayerNormalized = Vector.betweenLocs(predictedCenterPos, mover.getCenterLocation()).normalized();
+        return predictedCenterPos.transform(toPlayerNormalized.times(destination.size()));
     }
 
 
