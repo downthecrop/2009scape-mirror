@@ -545,6 +545,8 @@ public final class Appearance {
 	 * @return The render animation id.
 	 */
 	public int getRenderAnimation() {
+                if (player.getAttribute("render-anim-override") != null)
+                    return player.getAttribute("render-anim-override", renderAnimationId);
 		return renderAnimationId;
 	}
 
