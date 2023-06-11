@@ -1,5 +1,7 @@
 package content.region.asgarnia.burthorpe.dialogue;
 
+import core.api.Container;
+import core.api.ContentAPIKt;
 import core.cache.def.impl.NPCDefinition;
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
@@ -12,6 +14,7 @@ import core.game.node.item.Item;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
 import core.plugin.ClassScanner;
+import org.rs09.consts.Items;
 
 /**
  * Represents the dialogue used for martin thwait.
@@ -141,17 +144,18 @@ public final class MartinThwaitDialogue extends DialoguePlugin {
 				stage = 34;
 				return true;
 			}
-			if (!player.getInventory().containsItem(COINS)) {
-				end();
-				return true;
-			}
-			if (!player.getInventory().remove(COINS)) {
-				player("Sorry, I don't seem to have enoug coins", "with me at this time.");
+			if (!ContentAPIKt.inInventory(player, COINS.getId(), COINS.getAmount())) {
+				player("Sorry, I don't seem to have enough coins", "with me at this time.");
 				stage = 34;
 				return true;
 			}
-			player.getInventory().add(ITEMS[player.getSkills().getMasteredSkills() > 1 ? 1 : 0], ITEMS[2]);
-			npc("There you go! Enjoy.");
+			if (ContentAPIKt.removeItem(player, COINS, Container.INVENTORY)) {
+				ContentAPIKt.addItemOrDrop(player, ITEMS[player.getSkills().getMasteredSkills() > 1 ? 1 : 0].getId(),1);
+				ContentAPIKt.addItemOrDrop(player, ITEMS[2].getId(),1);
+				npc("There you go! Enjoy.");
+			} else {
+				player("Sorry, I don't seem to have enough coins", "with me at this time.");
+			}
 			stage = 34;
 			break;
 		case 34:

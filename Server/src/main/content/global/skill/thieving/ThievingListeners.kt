@@ -1,5 +1,6 @@
 package content.global.skill.thieving
 
+import content.global.skill.skillcapeperks.SkillcapePerks
 import core.api.stun
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.impl.Animator
@@ -24,7 +25,7 @@ class ThievingListeners : InteractionListener {
 
         on(IntType.NPC,"pickpocket","pick-pocket"){ player, node ->
             val pickpocketData = Pickpockets.forID(node.id) ?: return@on false
-            var successMod = 0
+            var successMod = 0.0
 
             if(player.inCombat()){
                 player.sendMessage("You can't pickpocket while in combat.")
@@ -41,11 +42,10 @@ class ThievingListeners : InteractionListener {
                 return@on true
             }
 
-            if(pickpocketData == Pickpockets.FEMALE_HAM_MEMBER || pickpocketData == Pickpockets.MALE_HAM_MEMBER){
-                successMod += getHAMItemCount(player)
+            if(SkillcapePerks.isActive(SkillcapePerks.SMOOTH_HANDS, player)) {
+                successMod += 25
             }
-
-            if(player.equipment.contains(Items.GLOVES_OF_SILENCE_10075,1)){
+            if (player.equipment.contains(Items.GLOVES_OF_SILENCE_10075,1)){
                 successMod += 3
             }
 
@@ -74,24 +74,5 @@ class ThievingListeners : InteractionListener {
 
             return@on true
         }
-
     }
-
-    fun getHAMItemCount(player: Player): Int{
-        var counter = 0
-        for(item in player.equipment.toArray()){
-            item ?: continue
-            counter += when(item.id){
-                Items.HAM_LOGO_4306 -> 1
-                Items.HAM_ROBE_4300 -> 1
-                Items.HAM_HOOD_4302 -> 1
-                Items.HAM_CLOAK_4304 -> 1
-                Items.BOOTS_4310 -> 1
-                Items.GLOVES_4308 -> 1
-                else -> 0
-            }
-        }
-        return counter
-    }
-
 }
