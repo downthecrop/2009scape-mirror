@@ -21,7 +21,7 @@ public final class EmptyOptionPlugin extends OptionHandler {
 	public static final String BUCKET_EMPTY_MSG = "You empty the contents of the bucket onto the floor.";
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-	    if (node.getName().contains("potion") || node.getName().toLowerCase().contains("antipoison")) {
+	    if (node.getName().contains("brew") || node.getName().contains("potion") || node.getName().toLowerCase().contains("poison") || node.getName().contains("serum")) {
             player.getInventory().remove(node.asItem());
             player.getInventory().add(EmptyItem.getEmpty(91));
             return true;
@@ -72,6 +72,8 @@ public final class EmptyOptionPlugin extends OptionHandler {
 		BURNT_EGG(7090, 1923, "You empty the contents of the bowl onto the floor."),
 		BURNT_ONION(7092, 1923, "You empty the contents of the bowl onto the floor."),
 		BURNT_MUSHROOM(7094, 1923, "You empty the contents of the bowl onto the floor.");
+
+
 
 		int fullId, emptyId;
 		String emptyMessage;
