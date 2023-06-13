@@ -1,0 +1,337 @@
+package content.global.activity.cchallange
+
+import core.api.sendMessage
+import core.api.sendNews
+import core.game.event.NPCKillEvent
+import core.game.node.entity.npc.NPC
+import core.game.node.entity.player.Player
+import core.game.node.item.GroundItemManager
+import core.game.node.item.Item
+import core.tools.colorize
+import org.rs09.consts.Items
+import org.rs09.consts.NPCs
+
+/**
+ * Handles the drop for champion challenge.
+ * @authors Phil, Skelsoft
+ */
+
+class ChampionScrollsDropHandler : ChampionScrollsEventHookBase() {
+    companion object {
+
+        private val IMPS = intArrayOf(
+            NPCs.IMP_708, NPCs.IMP_709, NPCs.IMP_1531, NPCs.IMP_6211
+        )
+
+        private val GOBLINS = intArrayOf(
+            NPCs.GOBLIN_100, NPCs.GOBLIN_101, NPCs.GOBLIN_102, NPCs.GOBLIN_444, NPCs.GOBLIN_445,
+
+            NPCs.GOBLIN_1769, NPCs.GOBLIN_1770, NPCs.GOBLIN_1771, NPCs.GOBLIN_1772, NPCs.GOBLIN_1773,
+            NPCs.GOBLIN_1774, NPCs.GOBLIN_1775, NPCs.GOBLIN_1776, NPCs.GOBLIN_2274, NPCs.GOBLIN_2275,
+            NPCs.GOBLIN_2276, NPCs.GOBLIN_2277, NPCs.GOBLIN_2278, NPCs.GOBLIN_2279, NPCs.GOBLIN_2280,
+            NPCs.GOBLIN_2281, NPCs.GOBLIN_2678, NPCs.GOBLIN_2679, NPCs.GOBLIN_2680, NPCs.GOBLIN_2681,
+            NPCs.GOBLIN_3264, NPCs.GOBLIN_3265, NPCs.GOBLIN_3266, NPCs.GOBLIN_3267, NPCs.GOBLIN_3726,
+            NPCs.GOBLIN_4261, NPCs.GOBLIN_4262, NPCs.GOBLIN_4263, NPCs.GOBLIN_4264, NPCs.GOBLIN_4265,
+            NPCs.GOBLIN_4266, NPCs.GOBLIN_4267, NPCs.GOBLIN_4268, NPCs.GOBLIN_4269, NPCs.GOBLIN_4270,
+            NPCs.GOBLIN_4271, NPCs.GOBLIN_4272, NPCs.GOBLIN_4273, NPCs.GOBLIN_4274, NPCs.GOBLIN_4275,
+            NPCs.GOBLIN_4276, NPCs.GOBLIN_4407, NPCs.GOBLIN_4408, NPCs.GOBLIN_4409, NPCs.GOBLIN_4410,
+            NPCs.GOBLIN_4411, NPCs.GOBLIN_4412, NPCs.GOBLIN_4479, NPCs.GOBLIN_4480, NPCs.GOBLIN_4481,
+            NPCs.GOBLIN_4482, NPCs.GOBLIN_4483, NPCs.GOBLIN_4484, NPCs.GOBLIN_4485, NPCs.GOBLIN_4486,
+            NPCs.GOBLIN_4487, NPCs.GOBLIN_4488, NPCs.GOBLIN_4489, NPCs.GOBLIN_4490, NPCs.GOBLIN_4491,
+            NPCs.GOBLIN_4492, NPCs.GOBLIN_4499, NPCs.GOBLIN_4633, NPCs.GOBLIN_4634, NPCs.GOBLIN_4635,
+            NPCs.GOBLIN_4636, NPCs.GOBLIN_4637, NPCs.GOBLIN_5855, NPCs.GOBLIN_5856, NPCs.GOBLIN_6125,
+            NPCs.GOBLIN_6126, NPCs.GOBLIN_6132, NPCs.GOBLIN_6133, NPCs.GOBLIN_6279, NPCs.GOBLIN_6280,
+            NPCs.GOBLIN_6281, NPCs.GOBLIN_6282, NPCs.GOBLIN_6283, NPCs.GOBLIN_6284, NPCs.GOBLIN_6402,
+            NPCs.GOBLIN_6403, NPCs.GOBLIN_6404, NPCs.GOBLIN_6405, NPCs.GOBLIN_6406, NPCs.GOBLIN_6407,
+            NPCs.GOBLIN_6408, NPCs.GOBLIN_6409, NPCs.GOBLIN_6410, NPCs.GOBLIN_6411, NPCs.GOBLIN_6412,
+            NPCs.GOBLIN_6413, NPCs.GOBLIN_6414, NPCs.GOBLIN_6415, NPCs.GOBLIN_6416, NPCs.GOBLIN_6417,
+            NPCs.GOBLIN_6418, NPCs.GOBLIN_6419, NPCs.GOBLIN_6420, NPCs.GOBLIN_6421, NPCs.GOBLIN_6422,
+            NPCs.GOBLIN_6423, NPCs.GOBLIN_6424, NPCs.GOBLIN_6425, NPCs.GOBLIN_6426, NPCs.GOBLIN_6427,
+            NPCs.GOBLIN_6428, NPCs.GOBLIN_6429, NPCs.GOBLIN_6430, NPCs.GOBLIN_6431, NPCs.GOBLIN_6432,
+            NPCs.GOBLIN_6433, NPCs.GOBLIN_6434, NPCs.GOBLIN_6435, NPCs.GOBLIN_6436, NPCs.GOBLIN_6437,
+            NPCs.GOBLIN_6438, NPCs.GOBLIN_6439, NPCs.GOBLIN_6440, NPCs.GOBLIN_6441, NPCs.GOBLIN_6442,
+            NPCs.GOBLIN_6443, NPCs.GOBLIN_6444, NPCs.GOBLIN_6445, NPCs.GOBLIN_6446, NPCs.GOBLIN_6447,
+            NPCs.GOBLIN_6448, NPCs.GOBLIN_6449, NPCs.GOBLIN_6450, NPCs.GOBLIN_6451, NPCs.GOBLIN_6452,
+            NPCs.GOBLIN_6453, NPCs.GOBLIN_6454, NPCs.GOBLIN_6455, NPCs.GOBLIN_6456, NPCs.GOBLIN_6457,
+            NPCs.GOBLIN_6458, NPCs.GOBLIN_6459, NPCs.GOBLIN_6460, NPCs.GOBLIN_6461, NPCs.GOBLIN_6462,
+            NPCs.GOBLIN_6463, NPCs.GOBLIN_6464, NPCs.GOBLIN_6465, NPCs.GOBLIN_6466, NPCs.GOBLIN_6467,
+            NPCs.GOBLIN_6490, NPCs.GOBLIN_6491, NPCs.GOBLIN_6492, NPCs.GOBLIN_6493, NPCs.GOBLIN_6494,
+            NPCs.GOBLIN_6495, NPCs.GOBLIN_7964, NPCs.GOBLIN_7965,
+
+            NPCs.CAVE_GOBLIN_1822, NPCs.CAVE_GOBLIN_1823, NPCs.CAVE_GOBLIN_1824, NPCs.CAVE_GOBLIN_1825,
+            NPCs.CAVE_GOBLIN_5752, NPCs.CAVE_GOBLIN_5753, NPCs.CAVE_GOBLIN_5754, NPCs.CAVE_GOBLIN_5755,
+            NPCs.CAVE_GOBLIN_5756, NPCs.CAVE_GOBLIN_5757, NPCs.CAVE_GOBLIN_5758, NPCs.CAVE_GOBLIN_5759,
+            NPCs.CAVE_GOBLIN_5760, NPCs.CAVE_GOBLIN_5761, NPCs.CAVE_GOBLIN_5762, NPCs.CAVE_GOBLIN_5763,
+            NPCs.CAVE_GOBLIN_5764, NPCs.CAVE_GOBLIN_5765, NPCs.CAVE_GOBLIN_5766, NPCs.CAVE_GOBLIN_5767,
+            NPCs.CAVE_GOBLIN_5768, NPCs.CAVE_GOBLIN_5769, NPCs.CAVE_GOBLIN_5783, NPCs.CAVE_GOBLIN_5785,
+            NPCs.CAVE_GOBLIN_5873, NPCs.CAVE_GOBLIN_5874, NPCs.CAVE_GOBLIN_5875, NPCs.CAVE_GOBLIN_5876,
+            NPCs.CAVE_GOBLIN_5877, NPCs.CAVE_GOBLIN_5878, NPCs.CAVE_GOBLIN_8451,
+
+            NPCs.CAVE_GOBLIN_GUARD_2073, NPCs.CAVE_GOBLIN_GUARD_2074,
+
+            NPCs.GOBLIN_GUARD_489, NPCs.GOBLIN_GUARD_6496, NPCs.GOBLIN_GUARD_6497,
+        )
+
+        private val UNIQUE_GOBLINS = intArrayOf(
+            NPCs.SERGEANT_GRIMSPIKE_6265,
+            NPCs.SERGEANT_STEELWILL_6263,
+            NPCs.SERGEANT_STRONGSTACK_6261
+        )
+
+        private val SKELETONS = intArrayOf(
+            NPCs.SKELETON_90, NPCs.SKELETON_91, NPCs.SKELETON_92, NPCs.SKELETON_93,
+
+            NPCs.SKELETON_459,
+
+            NPCs.SKELETON_1471, NPCs.SKELETON_2036, NPCs.SKELETON_2037, NPCs.SKELETON_2715,
+            NPCs.SKELETON_3151, NPCs.SKELETON_3152, NPCs.SKELETON_3291, NPCs.SKELETON_3581,
+            NPCs.SKELETON_4384, NPCs.SKELETON_4385, NPCs.SKELETON_4386, NPCs.SKELETON_5332,
+            NPCs.SKELETON_5333, NPCs.SKELETON_5334, NPCs.SKELETON_5335, NPCs.SKELETON_5336,
+            NPCs.SKELETON_5337, NPCs.SKELETON_5338, NPCs.SKELETON_5339, NPCs.SKELETON_5340,
+            NPCs.SKELETON_5341, NPCs.SKELETON_5365, NPCs.SKELETON_5366, NPCs.SKELETON_5367,
+            NPCs.SKELETON_5368, NPCs.SKELETON_5381, NPCs.SKELETON_5385, NPCs.SKELETON_5386,
+            NPCs.SKELETON_5387, NPCs.SKELETON_5388, NPCs.SKELETON_5389, NPCs.SKELETON_5390,
+            NPCs.SKELETON_5391, NPCs.SKELETON_5392, NPCs.SKELETON_5411, NPCs.SKELETON_5412,
+            NPCs.SKELETON_5422, NPCs.SKELETON_5423, NPCs.SKELETON_6091, NPCs.SKELETON_6092,
+            NPCs.SKELETON_6093, NPCs.SKELETON_6764, NPCs.SKELETON_6765, NPCs.SKELETON_6766,
+            NPCs.SKELETON_6767, NPCs.SKELETON_6768, NPCs.SKELETON_7774, NPCs.SKELETON_7775,
+            NPCs.SKELETON_7776, NPCs.SKELETON_7777, NPCs.SKELETON_7778, NPCs.SKELETON_7779,
+            NPCs.SKELETON_7788, NPCs.SKELETON_7815, NPCs.GIANT_SKELETON_1973,
+
+            NPCs.GIANT_SKELETON_5359, NPCs.GIANT_SKELETON_5384, NPCs.SKELETON_HELLHOUND_1575,
+
+            NPCs.SKELETON_MAGE_94, NPCs.SKELETON_MAGE_2717, NPCs.SKELETON_MAGE_3844,
+
+            NPCs.SKELETON_MAGE_3850, NPCs.SKELETON_MAGE_3851,
+
+            NPCs.SKELETON_HERO_6103, NPCs.SKELETON_BRUTE_6104, NPCs.SKELETON_WARLORD_6105,
+
+            NPCs.SKELETON_HEAVY_6106, NPCs.SKELETON_THUG_6107,
+        )
+
+        private val UNIQUE_SKELETONS = intArrayOf(
+            NPCs.NAZASTAROOL_508,
+
+            NPCs.UNDEAD_ONE_5353, NPCs.UNDEAD_ONE_5354, NPCs.UNDEAD_ONE_5355,
+            NPCs.UNDEAD_ONE_5356, NPCs.UNDEAD_ONE_5357, NPCs.UNDEAD_ONE_5358,
+        )
+
+        private val ZOMBIES = intArrayOf(
+            NPCs.ZOMBIE_73, NPCs.ZOMBIE_74, NPCs.ZOMBIE_75, NPCs.ZOMBIE_76, NPCs.ZOMBIE_419,
+            NPCs.ZOMBIE_420, NPCs.ZOMBIE_421, NPCs.ZOMBIE_422, NPCs.ZOMBIE_423, NPCs.ZOMBIE_424,
+
+            NPCs.ZOMBIE_1826, NPCs.ZOMBIE_2714, NPCs.ZOMBIE_2863, NPCs.ZOMBIE_2866, NPCs.ZOMBIE_2869,
+            NPCs.ZOMBIE_2878, NPCs.ZOMBIE_3622, NPCs.ZOMBIE_3623, NPCs.ZOMBIE_4392, NPCs.ZOMBIE_4393,
+            NPCs.ZOMBIE_4394, NPCs.ZOMBIE_5293, NPCs.ZOMBIE_5294, NPCs.ZOMBIE_5295, NPCs.ZOMBIE_5296,
+            NPCs.ZOMBIE_5297, NPCs.ZOMBIE_5298, NPCs.ZOMBIE_5299, NPCs.ZOMBIE_5300, NPCs.ZOMBIE_5301,
+            NPCs.ZOMBIE_5302, NPCs.ZOMBIE_5303, NPCs.ZOMBIE_5304, NPCs.ZOMBIE_5305, NPCs.ZOMBIE_5306,
+            NPCs.ZOMBIE_5307, NPCs.ZOMBIE_5308, NPCs.ZOMBIE_5309, NPCs.ZOMBIE_5310, NPCs.ZOMBIE_5311,
+            NPCs.ZOMBIE_5312, NPCs.ZOMBIE_5313, NPCs.ZOMBIE_5314, NPCs.ZOMBIE_5315, NPCs.ZOMBIE_5316,
+            NPCs.ZOMBIE_5317, NPCs.ZOMBIE_5318, NPCs.ZOMBIE_5319, NPCs.ZOMBIE_5320, NPCs.ZOMBIE_5321,
+            NPCs.ZOMBIE_5322, NPCs.ZOMBIE_5323, NPCs.ZOMBIE_5324, NPCs.ZOMBIE_5325, NPCs.ZOMBIE_5326,
+            NPCs.ZOMBIE_5327, NPCs.ZOMBIE_5328, NPCs.ZOMBIE_5329, NPCs.ZOMBIE_5330, NPCs.ZOMBIE_5331,
+            NPCs.ZOMBIE_5375, NPCs.ZOMBIE_5376, NPCs.ZOMBIE_5377, NPCs.ZOMBIE_5378, NPCs.ZOMBIE_5379,
+            NPCs.ZOMBIE_5380, NPCs.ZOMBIE_5393, NPCs.ZOMBIE_5394, NPCs.ZOMBIE_5395, NPCs.ZOMBIE_5396,
+            NPCs.ZOMBIE_5397, NPCs.ZOMBIE_5398, NPCs.ZOMBIE_5399, NPCs.ZOMBIE_5400, NPCs.ZOMBIE_5401,
+            NPCs.ZOMBIE_5402, NPCs.ZOMBIE_5403, NPCs.ZOMBIE_5404, NPCs.ZOMBIE_5405, NPCs.ZOMBIE_5406,
+            NPCs.ZOMBIE_5407, NPCs.ZOMBIE_5408, NPCs.ZOMBIE_5409, NPCs.ZOMBIE_5410, NPCs.ZOMBIE_6099,
+            NPCs.ZOMBIE_6100, NPCs.ZOMBIE_6131, NPCs.ZOMBIE_7789, NPCs.ZOMBIE_7790, NPCs.ZOMBIE_7791,
+            NPCs.ZOMBIE_7792, NPCs.ZOMBIE_7817, NPCs.ZOMBIE_7818, NPCs.ZOMBIE_7819, NPCs.ZOMBIE_7820,
+            NPCs.ZOMBIE_8142, NPCs.ZOMBIE_8143, NPCs.ZOMBIE_8144, NPCs.ZOMBIE_8145,
+
+            NPCs.ZOMBIE_PIRATE_2837, NPCs.ZOMBIE_PIRATE_2838, NPCs.ZOMBIE_PIRATE_2839,
+            NPCs.ZOMBIE_PIRATE_2840, NPCs.ZOMBIE_PIRATE_2841, NPCs.ZOMBIE_PIRATE_2842,
+            NPCs.ZOMBIE_PIRATE_5629, NPCs.ZOMBIE_PIRATE_5630, NPCs.ZOMBIE_PIRATE_5631,
+            NPCs.ZOMBIE_PIRATE_5632, NPCs.ZOMBIE_PIRATE_5633, NPCs.ZOMBIE_PIRATE_5634,
+            NPCs.ZOMBIE_PIRATE_5635, NPCs.ZOMBIE_PIRATE_5636, NPCs.ZOMBIE_PIRATE_5637,
+            NPCs.ZOMBIE_PIRATE_5638, NPCs.ZOMBIE_PIRATE_5639, NPCs.ZOMBIE_PIRATE_5640,
+            NPCs.ZOMBIE_PIRATE_5641, NPCs.ZOMBIE_PIRATE_5642, NPCs.ZOMBIE_PIRATE_5643,
+            NPCs.ZOMBIE_PIRATE_5644, NPCs.ZOMBIE_PIRATE_5645, NPCs.ZOMBIE_PIRATE_5646,
+            NPCs.ZOMBIE_PIRATE_5647, NPCs.ZOMBIE_PIRATE_5648, NPCs.ZOMBIE_PIRATE_5649,
+            NPCs.ZOMBIE_PIRATE_5650, NPCs.ZOMBIE_PIRATE_5651, NPCs.ZOMBIE_PIRATE_5652,
+            NPCs.ZOMBIE_PIRATE_5653, NPCs.ZOMBIE_PIRATE_5654, NPCs.ZOMBIE_PIRATE_5655,
+            NPCs.ZOMBIE_PIRATE_5656, NPCs.ZOMBIE_PIRATE_5657, NPCs.ZOMBIE_PIRATE_5658,
+            NPCs.ZOMBIE_PIRATE_5659, NPCs.ZOMBIE_PIRATE_5660, NPCs.ZOMBIE_PIRATE_5661,
+            NPCs.ZOMBIE_PIRATE_5662, NPCs.ZOMBIE_PIRATE_5663, NPCs.ZOMBIE_PIRATE_5664,
+            NPCs.ZOMBIE_PIRATE_5665,
+
+            NPCs.ZOMBIE_SWAB_2843, NPCs.ZOMBIE_SWAB_2845,
+            NPCs.ZOMBIE_SWAB_2846, NPCs.ZOMBIE_SWAB_2847,
+            NPCs.ZOMBIE_SWAB_2848,
+        )
+
+        private val UNIQUE_ZOMBIES = intArrayOf(
+            NPCs.NAZASTAROOL_507,
+
+            NPCs.SLASH_BASH_2060, NPCs.SOREBONES_5627, NPCs.SOREBONES_5628,
+
+            NPCs.UNDEAD_LUMBERJACK_1524,
+
+            NPCs.UNDEAD_ONE_502, NPCs.UNDEAD_ONE_503, NPCs.UNDEAD_ONE_504, NPCs.UNDEAD_ONE_505,
+
+            NPCs.ZOGRE_2044, NPCs.ZOGRE_2045, NPCs.ZOGRE_2046, NPCs.ZOGRE_2047, NPCs.ZOGRE_2048,
+            NPCs.ZOGRE_2049, NPCs.ZOGRE_2051, NPCs.ZOGRE_2052, NPCs.ZOGRE_2053, NPCs.ZOGRE_2054,
+            NPCs.ZOGRE_2055,
+        )
+
+        private val UNDEAD_LUMBERJACKS = intArrayOf(
+            NPCs.UNDEAD_LUMBERJACK_1524, NPCs.UNDEAD_LUMBERJACK_1525, NPCs.UNDEAD_LUMBERJACK_5678,
+            NPCs.UNDEAD_LUMBERJACK_5679, NPCs.UNDEAD_LUMBERJACK_5680, NPCs.UNDEAD_LUMBERJACK_5681,
+            NPCs.UNDEAD_LUMBERJACK_5682, NPCs.UNDEAD_LUMBERJACK_5683, NPCs.UNDEAD_LUMBERJACK_5684,
+            NPCs.UNDEAD_LUMBERJACK_5685, NPCs.UNDEAD_LUMBERJACK_5686, NPCs.UNDEAD_LUMBERJACK_5687,
+            NPCs.UNDEAD_LUMBERJACK_5688, NPCs.UNDEAD_LUMBERJACK_5689, NPCs.UNDEAD_LUMBERJACK_5690,
+            NPCs.UNDEAD_LUMBERJACK_5691, NPCs.UNDEAD_LUMBERJACK_5692, NPCs.UNDEAD_LUMBERJACK_5693,
+            NPCs.UNDEAD_LUMBERJACK_5694, NPCs.UNDEAD_LUMBERJACK_5695, NPCs.UNDEAD_LUMBERJACK_5696,
+            NPCs.UNDEAD_LUMBERJACK_5697, NPCs.UNDEAD_LUMBERJACK_5698, NPCs.UNDEAD_LUMBERJACK_5699,
+            NPCs.UNDEAD_LUMBERJACK_5700, NPCs.UNDEAD_LUMBERJACK_5701, NPCs.UNDEAD_LUMBERJACK_5702,
+            NPCs.UNDEAD_LUMBERJACK_5703, NPCs.UNDEAD_LUMBERJACK_5704, NPCs.UNDEAD_LUMBERJACK_5705,
+            NPCs.UNDEAD_LUMBERJACK_5706, NPCs.UNDEAD_LUMBERJACK_5707, NPCs.UNDEAD_LUMBERJACK_5708,
+            NPCs.UNDEAD_LUMBERJACK_5709, NPCs.UNDEAD_LUMBERJACK_5710, NPCs.UNDEAD_LUMBERJACK_5711,
+            NPCs.UNDEAD_LUMBERJACK_5712, NPCs.UNDEAD_LUMBERJACK_5713, NPCs.UNDEAD_LUMBERJACK_5714,
+            NPCs.UNDEAD_LUMBERJACK_5715, NPCs.UNDEAD_LUMBERJACK_5716, NPCs.UNDEAD_LUMBERJACK_5717,
+            NPCs.UNDEAD_LUMBERJACK_5718, NPCs.UNDEAD_LUMBERJACK_5719, NPCs.UNDEAD_LUMBERJACK_5720,
+            NPCs.UNDEAD_LUMBERJACK_5721, NPCs.UNDEAD_LUMBERJACK_5722, NPCs.UNDEAD_LUMBERJACK_5723,
+            NPCs.UNDEAD_LUMBERJACK_5724, NPCs.UNDEAD_LUMBERJACK_5725, NPCs.UNDEAD_LUMBERJACK_5726,
+            NPCs.UNDEAD_LUMBERJACK_5727, NPCs.UNDEAD_LUMBERJACK_5728, NPCs.UNDEAD_LUMBERJACK_5729,
+            NPCs.UNDEAD_LUMBERJACK_5730, NPCs.UNDEAD_LUMBERJACK_5731, NPCs.UNDEAD_LUMBERJACK_5732,
+            NPCs.UNDEAD_LUMBERJACK_5733, NPCs.UNDEAD_LUMBERJACK_5734, NPCs.UNDEAD_LUMBERJACK_5735,
+            NPCs.UNDEAD_LUMBERJACK_5736, NPCs.UNDEAD_LUMBERJACK_5737, NPCs.UNDEAD_LUMBERJACK_5738,
+            NPCs.UNDEAD_LUMBERJACK_5739, NPCs.UNDEAD_LUMBERJACK_5740, NPCs.UNDEAD_LUMBERJACK_5741,
+            NPCs.UNDEAD_LUMBERJACK_5742, NPCs.UNDEAD_LUMBERJACK_5743, NPCs.UNDEAD_LUMBERJACK_5744,
+            NPCs.UNDEAD_LUMBERJACK_5745, NPCs.UNDEAD_LUMBERJACK_5746, NPCs.UNDEAD_LUMBERJACK_5747,
+        )
+
+        private val GIANTS = intArrayOf(
+            NPCs.HILL_GIANT_117, NPCs.HILL_GIANT_4689, NPCs.HILL_GIANT_4690, NPCs.HILL_GIANT_4691,
+            NPCs.HILL_GIANT_4692, NPCs.HILL_GIANT_4693,
+
+            NPCs.FIRE_GIANT_110, NPCs.FIRE_GIANT_1582, NPCs.FIRE_GIANT_1583, NPCs.FIRE_GIANT_1584,
+            NPCs.FIRE_GIANT_1585, NPCs.FIRE_GIANT_1586, NPCs.FIRE_GIANT_7003, NPCs.FIRE_GIANT_7004,
+
+            NPCs.MOSS_GIANT_112, NPCs.MOSS_GIANT_1587, NPCs.MOSS_GIANT_1588, NPCs.MOSS_GIANT_1681,
+            NPCs.MOSS_GIANT_4534, NPCs.MOSS_GIANT_4688, NPCs.MOSS_GIANT_4706,
+
+            NPCs.ICE_GIANT_111, NPCs.ICE_GIANT_3072, NPCs.ICE_GIANT_4685, NPCs.ICE_GIANT_4686,
+            NPCs.ICE_GIANT_4687,
+        )
+
+        private val UNIQUE_GIANTS = intArrayOf(
+            NPCs.BLACK_KNIGHT_TITAN_221,
+
+            NPCs.CYCLOPS_116, NPCs.CYCLOPS_4291, NPCs.CYCLOPS_4292, NPCs.CYCLOPS_6078,
+            NPCs.CYCLOPS_6079, NPCs.CYCLOPS_6080, NPCs.CYCLOPS_6081, NPCs.CYCLOPS_6082,
+            NPCs.CYCLOPS_6083, NPCs.CYCLOPS_6269, NPCs.CYCLOPS_6270,
+        )
+
+        private val HOBGOBLINS = intArrayOf(
+            NPCs.HOBGOBLIN_122, NPCs.HOBGOBLIN_123, NPCs.HOBGOBLIN_2685, NPCs.HOBGOBLIN_2686,
+            NPCs.HOBGOBLIN_2687, NPCs.HOBGOBLIN_2688, NPCs.HOBGOBLIN_3583, NPCs.HOBGOBLIN_4898,
+            NPCs.HOBGOBLIN_6275,
+        )
+
+        private val GHOUL = NPCs.GHOUL_1218
+        private val EARTH_WARRIOR = NPCs.EARTH_WARRIOR_124
+
+        private val JOGRES = intArrayOf(NPCs.JOGRE_113, NPCs.JOGRE_6268)
+
+        private val LESSER_DEMONS = intArrayOf(
+            NPCs.LESSER_DEMON_82, NPCs.LESSER_DEMON_4694, NPCs.LESSER_DEMON_4695,
+            NPCs.LESSER_DEMON_4696, NPCs.LESSER_DEMON_4697, NPCs.LESSER_DEMON_6101,
+        )
+
+        private val ZAKLN = NPCs.ZAKLN_GRITCH_6206
+
+        val SCROLLS = intArrayOf(
+            Items.CHAMPION_SCROLL_6803, Items.CHAMPION_SCROLL_6801, Items.CHAMPION_SCROLL_6806,
+            Items.CHAMPION_SCROLL_6807, Items.CHAMPION_SCROLL_6800, Items.CHAMPION_SCROLL_6802,
+            Items.CHAMPION_SCROLL_6799, Items.CHAMPION_SCROLL_6798, Items.CHAMPION_SCROLL_6804,
+            Items.CHAMPION_SCROLL_6805
+        )
+    }
+
+    override fun onNpcKilled(player: Player, event: NPCKillEvent) {
+        if (player.questRepository.points >= 32) {
+            val npc = event.npc
+            val npcName = npc.name
+            with(npcName) {
+                when {
+                    contains("imp", true) -> {
+                        if (IMPS.contains(npc.id)) {
+                            rollForScroll(player, 0, npc)
+                        }
+                    }
+
+                    !contains("hob", true) && contains("goblin", true) || UNIQUE_GOBLINS.contains(npc.id) -> {
+                        if (GOBLINS.contains(npc.id) || UNIQUE_GOBLINS.contains(npc.id)) {
+                            rollForScroll(player, 1, npc)
+                        }
+                    }
+
+                    contains("skeleton", true) || UNIQUE_SKELETONS.contains(npc.id) -> {
+                        println("Monster killed contains the name Skeleton")
+                        if (SKELETONS.contains(npc.id) || UNIQUE_SKELETONS.contains(npc.id)) {
+                            rollForScroll(player, 2, npc)
+                        }
+                    }
+
+                    contains("zombie", true) || contains("lumberjack") || UNIQUE_ZOMBIES.contains(npc.id) -> {
+                        if (ZOMBIES.contains(npc.id) || UNDEAD_LUMBERJACKS.contains(npc.id) || UNIQUE_ZOMBIES.contains(npc.id)) {
+                            rollForScroll(player, 3, npc)
+                        }
+                    }
+
+                    contains("giant", true) || UNIQUE_GIANTS.contains(npc.id) -> {
+                        if (GIANTS.contains(npc.id) || UNIQUE_GIANTS.contains(npc.id)) {
+                            rollForScroll(player, 4, npc)
+                        }
+                    }
+
+                    contains("hobgoblin", true) -> {
+                        if (HOBGOBLINS.contains(npc.id)) {
+                            rollForScroll(player, 5, npc)
+                        }
+                    }
+
+                    contains("ghoul", true) -> {
+                        if (npc.id == GHOUL) {
+                            rollForScroll(player, 6, npc)
+                        }
+                    }
+
+                    contains("earth warrior", true) -> {
+                        if (npc.id == EARTH_WARRIOR) {
+                            rollForScroll(player, 7, npc)
+                        }
+                    }
+
+                    contains("jogre", true) -> {
+                        if (JOGRES.contains(npc.id)) {
+                            rollForScroll(player, 8, npc)
+                        }
+                    }
+
+                    contains("lesser demon", true) || npc.id == ZAKLN -> {
+                        if (LESSER_DEMONS.contains(npc.id) || npc.id == ZAKLN) {
+                            rollForScroll(player, 9, npc)
+                        }
+                    }
+
+                    contains("champion", true) -> {
+                        return
+                    }
+                }
+            }
+        }
+    }
+
+    private fun rollForScroll(player: Player, scroll: Int, npc: NPC) {
+        val scrollID = SCROLLS[scroll]
+        val roll = (1..5000).random()
+        if (roll <= 1) {
+            GroundItemManager.create(Item(scrollID), npc.location, player)
+            sendMessage(player, colorize("%RA Champion's scroll falls to the ground as you slay your opponent."))
+            sendNews("${player.username} has received a Champion's scroll as a drop!")
+        }
+    }
+
+}

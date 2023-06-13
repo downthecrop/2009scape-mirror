@@ -12183,12 +12183,6 @@
       {
         "minAmount": "1",
         "weight": "5.0",
-        "id": "6808",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "5.0",
         "id": "31",
         "maxAmount": "1"
       },
@@ -28627,12 +28621,6 @@
         "minAmount": "1",
         "weight": "5.0",
         "id": "5733",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "5.0",
-        "id": "6808",
         "maxAmount": "1"
       },
       {
@@ -60209,5 +60197,19 @@
         "maxAmount": "1"
       }
     ]
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "526",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "3057,3059,3058,3060,3061,3062,3063,3064,3065,3066",
+    "description": "champion's challenge bosses",
+    "main": []
   }
 ]
