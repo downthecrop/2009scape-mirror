@@ -7,13 +7,14 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
-import core.tools.colorize
+import core.tools.*
+import core.game.world.GameWorld
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 
 /**
  * Handles the drop for champion challenge.
- * @authors Phil, Skelsoft
+ * @authors Phil, Skelsoft, Ceikry
  */
 
 class ChampionScrollsDropHandler : ChampionScrollsEventHookBase() {
@@ -70,9 +71,6 @@ class ChampionScrollsDropHandler : ChampionScrollsEventHookBase() {
             NPCs.CAVE_GOBLIN_GUARD_2073, NPCs.CAVE_GOBLIN_GUARD_2074,
 
             NPCs.GOBLIN_GUARD_489, NPCs.GOBLIN_GUARD_6496, NPCs.GOBLIN_GUARD_6497,
-        )
-
-        private val UNIQUE_GOBLINS = intArrayOf(
             NPCs.SERGEANT_GRIMSPIKE_6265,
             NPCs.SERGEANT_STEELWILL_6263,
             NPCs.SERGEANT_STRONGSTACK_6261
@@ -107,9 +105,6 @@ class ChampionScrollsDropHandler : ChampionScrollsEventHookBase() {
             NPCs.SKELETON_HERO_6103, NPCs.SKELETON_BRUTE_6104, NPCs.SKELETON_WARLORD_6105,
 
             NPCs.SKELETON_HEAVY_6106, NPCs.SKELETON_THUG_6107,
-        )
-
-        private val UNIQUE_SKELETONS = intArrayOf(
             NPCs.NAZASTAROOL_508,
 
             NPCs.UNDEAD_ONE_5353, NPCs.UNDEAD_ONE_5354, NPCs.UNDEAD_ONE_5355,
@@ -158,9 +153,6 @@ class ChampionScrollsDropHandler : ChampionScrollsEventHookBase() {
             NPCs.ZOMBIE_SWAB_2843, NPCs.ZOMBIE_SWAB_2845,
             NPCs.ZOMBIE_SWAB_2846, NPCs.ZOMBIE_SWAB_2847,
             NPCs.ZOMBIE_SWAB_2848,
-        )
-
-        private val UNIQUE_ZOMBIES = intArrayOf(
             NPCs.NAZASTAROOL_507,
 
             NPCs.SLASH_BASH_2060, NPCs.SOREBONES_5627, NPCs.SOREBONES_5628,
@@ -172,9 +164,6 @@ class ChampionScrollsDropHandler : ChampionScrollsEventHookBase() {
             NPCs.ZOGRE_2044, NPCs.ZOGRE_2045, NPCs.ZOGRE_2046, NPCs.ZOGRE_2047, NPCs.ZOGRE_2048,
             NPCs.ZOGRE_2049, NPCs.ZOGRE_2051, NPCs.ZOGRE_2052, NPCs.ZOGRE_2053, NPCs.ZOGRE_2054,
             NPCs.ZOGRE_2055,
-        )
-
-        private val UNDEAD_LUMBERJACKS = intArrayOf(
             NPCs.UNDEAD_LUMBERJACK_1524, NPCs.UNDEAD_LUMBERJACK_1525, NPCs.UNDEAD_LUMBERJACK_5678,
             NPCs.UNDEAD_LUMBERJACK_5679, NPCs.UNDEAD_LUMBERJACK_5680, NPCs.UNDEAD_LUMBERJACK_5681,
             NPCs.UNDEAD_LUMBERJACK_5682, NPCs.UNDEAD_LUMBERJACK_5683, NPCs.UNDEAD_LUMBERJACK_5684,
@@ -213,9 +202,6 @@ class ChampionScrollsDropHandler : ChampionScrollsEventHookBase() {
 
             NPCs.ICE_GIANT_111, NPCs.ICE_GIANT_3072, NPCs.ICE_GIANT_4685, NPCs.ICE_GIANT_4686,
             NPCs.ICE_GIANT_4687,
-        )
-
-        private val UNIQUE_GIANTS = intArrayOf(
             NPCs.BLACK_KNIGHT_TITAN_221,
 
             NPCs.CYCLOPS_116, NPCs.CYCLOPS_4291, NPCs.CYCLOPS_4292, NPCs.CYCLOPS_6078,
@@ -247,90 +233,46 @@ class ChampionScrollsDropHandler : ChampionScrollsEventHookBase() {
             Items.CHAMPION_SCROLL_6799, Items.CHAMPION_SCROLL_6798, Items.CHAMPION_SCROLL_6804,
             Items.CHAMPION_SCROLL_6805
         )
+
+        val idMap = HashMap<Int, Int>()
+
+        init {
+            for (id in IMPS)
+                idMap[id] = 0
+            for (id in GOBLINS)
+                idMap[id] = 1
+            for (id in SKELETONS)
+                idMap[id] = 2
+            for (id in ZOMBIES)
+                idMap[id] = 3
+            for (id in GIANTS)
+                idMap[id] = 4
+            for (id in HOBGOBLINS)
+                idMap[id] = 5
+            for (id in JOGRES)
+                idMap[id] = 8
+            for (id in LESSER_DEMONS)
+                idMap[id] = 9
+
+            idMap[GHOUL] = 6
+            idMap[EARTH_WARRIOR] = 7
+        }
     }
 
     override fun onNpcKilled(player: Player, event: NPCKillEvent) {
+        if (player.isArtificial) return
         if (player.questRepository.points >= 32) {
-            val npc = event.npc
-            val npcName = npc.name
-            with(npcName) {
-                when {
-                    contains("imp", true) -> {
-                        if (IMPS.contains(npc.id)) {
-                            rollForScroll(player, 0, npc)
-                        }
-                    }
-
-                    !contains("hob", true) && contains("goblin", true) || UNIQUE_GOBLINS.contains(npc.id) -> {
-                        if (GOBLINS.contains(npc.id) || UNIQUE_GOBLINS.contains(npc.id)) {
-                            rollForScroll(player, 1, npc)
-                        }
-                    }
-
-                    contains("skeleton", true) || UNIQUE_SKELETONS.contains(npc.id) -> {
-                        println("Monster killed contains the name Skeleton")
-                        if (SKELETONS.contains(npc.id) || UNIQUE_SKELETONS.contains(npc.id)) {
-                            rollForScroll(player, 2, npc)
-                        }
-                    }
-
-                    contains("zombie", true) || contains("lumberjack") || UNIQUE_ZOMBIES.contains(npc.id) -> {
-                        if (ZOMBIES.contains(npc.id) || UNDEAD_LUMBERJACKS.contains(npc.id) || UNIQUE_ZOMBIES.contains(npc.id)) {
-                            rollForScroll(player, 3, npc)
-                        }
-                    }
-
-                    contains("giant", true) || UNIQUE_GIANTS.contains(npc.id) -> {
-                        if (GIANTS.contains(npc.id) || UNIQUE_GIANTS.contains(npc.id)) {
-                            rollForScroll(player, 4, npc)
-                        }
-                    }
-
-                    contains("hobgoblin", true) -> {
-                        if (HOBGOBLINS.contains(npc.id)) {
-                            rollForScroll(player, 5, npc)
-                        }
-                    }
-
-                    contains("ghoul", true) -> {
-                        if (npc.id == GHOUL) {
-                            rollForScroll(player, 6, npc)
-                        }
-                    }
-
-                    contains("earth warrior", true) -> {
-                        if (npc.id == EARTH_WARRIOR) {
-                            rollForScroll(player, 7, npc)
-                        }
-                    }
-
-                    contains("jogre", true) -> {
-                        if (JOGRES.contains(npc.id)) {
-                            rollForScroll(player, 8, npc)
-                        }
-                    }
-
-                    contains("lesser demon", true) || npc.id == ZAKLN -> {
-                        if (LESSER_DEMONS.contains(npc.id) || npc.id == ZAKLN) {
-                            rollForScroll(player, 9, npc)
-                        }
-                    }
-
-                    contains("champion", true) -> {
-                        return
-                    }
-                }
-            }
+            val scrollType = idMap[event.npc.id] ?: return
+            rollForScroll (player, scrollType, event.npc)
         }
     }
 
     private fun rollForScroll(player: Player, scroll: Int, npc: NPC) {
         val scrollID = SCROLLS[scroll]
-        val roll = (1..5000).random()
-        if (roll <= 1) {
+        val roll = RandomFunction.roll(if (GameWorld.settings!!.isDevMode) 5 else 5000)
+        if (roll) {
             GroundItemManager.create(Item(scrollID), npc.location, player)
             sendMessage(player, colorize("%RA Champion's scroll falls to the ground as you slay your opponent."))
-            sendNews("${player.username} has received a Champion's scroll as a drop!")
         }
     }
 
