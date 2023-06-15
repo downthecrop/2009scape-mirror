@@ -209,11 +209,9 @@ internal constructor() : Pathfinder() {
             if (++attempts > queueX.size) {
                 return path
             }
-            if (directionFlag != previousDirection) {
-                previousDirection = directionFlag
-                queueX[readPosition] = curX
-                queueY[readPosition++] = curY
-            }
+            previousDirection = directionFlag
+            queueX[readPosition] = curX
+            queueY[readPosition++] = curY
             if (directionFlag and WEST_FLAG != 0) {
                 curX++
             } else if (directionFlag and EAST_FLAG != 0) {

@@ -185,29 +185,22 @@ public abstract class MovementPulse extends Pulse {
     }
 
     @Override
-    public void start() {
-        super.start();
-        if (mover != null)
-            mover.getWalkingQueue().reset();
-    }
-
-    @Override
     public boolean update() {
-        if (!validate()) {
-            stop();
-            return true;
-        }
-
         if (!mover.getViewport().getRegion().isActive())
             return false;
 
-        if (tryInteract()) {
+        if (!validate()) {
             stop();
             return true;
         }
 
         mover.face(null);
         updatePath();
+
+        if (tryInteract()) {
+            stop();
+            return true;
+        }
 
         return false;
     }
@@ -258,6 +251,7 @@ public abstract class MovementPulse extends Pulse {
      * Finds a path to the destination, if necessary.
      */
     private boolean usingTruncatedPath = false;
+    private boolean isMoveNearSet = false;
     public void updatePath() {
         if (mover instanceof NPC && mover.asNpc().isNeverWalks()) {
             return;
@@ -294,7 +288,7 @@ public abstract class MovementPulse extends Pulse {
         if (interactLocation == null)
             interactLocation = loc;
 
-        if (destination instanceof Entity || !mover.getWalkingQueue().hasPath() || mover.getWalkingQueue().getQueue().size() <= 3 || (usingTruncatedPath && destination.getLocation().getDistance(mover.getLocation()) < 14)) {
+        if (destination instanceof Entity || interactLocation == null || (!mover.getWalkingQueue().hasPath() && interactLocation.getDistance(mover.getLocation()) > 2) || (usingTruncatedPath && destination.getLocation().getDistance(mover.getLocation()) < 14)) {
             if (!checkAllowMovement())
                 return;
 
@@ -335,6 +329,10 @@ public abstract class MovementPulse extends Pulse {
             previousLoc = loc;
         }
         last = destination.getLocation();
+                            if (mover instanceof Player && mover.getAttribute("draw-intersect", false)) {
+                                clearHintIcon((Player) mover);
+                                registerHintIcon((Player) mover, interactLocation, 5);
+                            }
     }
 
     private boolean checkAllowMovement() {
@@ -371,7 +369,8 @@ public abstract class MovementPulse extends Pulse {
                         Location closestBorder = getClosestBorderToPoint (points[i], loc.getZ());
 
                         int moverDist = Math.max(Math.abs(ml.getX() - closestBorder.getX()), Math.abs(ml.getY() - closestBorder.getY()));
-                        if (predictiveIntersection == null && moverDist == i / (mover.getWalkingQueue().isRunning() ? 2 : 1)) { //try to predict an intersection point on the path if possible
+                        float movementRatio = moverDist / (float) ((i + 1) / (mover.getWalkingQueue().isRunning() ? 2 : 1));
+                        if (predictiveIntersection == null && movementRatio <= 1.0) { //try to predict an intersection point on the path if possible
                             predictiveIntersection = points[i];
                             break;
                         }
@@ -387,10 +386,6 @@ public abstract class MovementPulse extends Pulse {
                         p = predictiveIntersection;
                     
                     Location endLoc = getClosestBorderToPoint(p, loc.getZ());
-                    if (mover instanceof Player && mover.getAttribute("draw-intersect", false)) {
-                        clearHintIcon((Player) mover);
-                        registerHintIcon((Player) mover, endLoc, 5);
-                    }
                     return endLoc;
                 }
             }

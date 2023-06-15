@@ -24,7 +24,7 @@ class PulseRunner {
 
             val elapsedTime = measure {
                 try {
-                    if (!pulse.update()) {
+                    if (!pulse.update() && pulse.isRunning) {
                         pulses.add(pulse)
                     }
                 } catch (e: Exception) {
