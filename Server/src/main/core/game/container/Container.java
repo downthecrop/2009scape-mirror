@@ -330,6 +330,8 @@ public class Container {
      */
     @CheckReturnValue
     public boolean remove(Item item, int slot, boolean fireListener) {
+        if (!contains(item.getId(), item.getAmount()))
+            return false;
         Item oldItem = items[slot];
         if (oldItem == null || oldItem.getId() != item.getId()) {
             return false;

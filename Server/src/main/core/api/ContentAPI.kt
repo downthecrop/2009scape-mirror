@@ -292,9 +292,6 @@ fun <T> removeItem(player: Player, item: T, container: Container = Container.INV
         else -> throw IllegalStateException("Invalid value passed for item")
     }
 
-    if (amountInInventory(player, it.id) < it.amount)
-        return false
-
     return when (container) {
         Container.INVENTORY -> player.inventory.remove(it)
         Container.BANK -> player.bank.remove(it) || player.bankSecondary.remove(it)
