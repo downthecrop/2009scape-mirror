@@ -280,6 +280,7 @@ public final class Skills {
 			if (entity instanceof Player) {
                             player.updateAppearance();
 			    LevelUp.levelup(player, slot, amount);
+                            updateCombatLevel();
 			}
 		}
 		if (entity instanceof Player) {
