@@ -334,27 +334,27 @@ public enum SummoningPouch {
 	/**
 	 * Represents a hydra pouch.
 	 */
-	HYDRA_POUCH(60, 12025, 80, 140.8, 6811, 1.6, 9, false, new Item(12159), new Item(571), new Item(12183, 128)),
+	HYDRA_POUCH(60, 12025, 80, 140.8, 6811, 1.6, 9, false, new Item(12159), new Item(571), new Item(12155), new Item(12183, 128)),
 
 	/**
 	 * Represents a spirit dagannoth pouch.
 	 */
-	SPIRIT_DAGANNOTH_POUCH(61, 12017, 83, 364.8, 6804, 4.1, 9, false, new Item(12160), new Item(6155), new Item(12183, 1)),
+	SPIRIT_DAGANNOTH_POUCH(61, 12017, 83, 364.8, 6804, 4.1, 9, false, new Item(12160), new Item(6155), new Item(12155), new Item(12183, 1)),
 
 	/**
 	 * Represents a unicorn stallion pouch.
 	 */
-	UNICORN_STALLION_POUCH(70, 12039, 88, 154.4, 6822, 1.8, 9, true, new Item(12159), new Item(237), new Item(12183, 203)),
+	UNICORN_STALLION_POUCH(70, 12039, 88, 154.4, 6822, 1.8, 9, true, new Item(12159), new Item(237), new Item(12155), new Item(12183, 140)),
 
 	/**
 	 * Represents a wolpertinger pouch.
 	 */
-	WOLPERTINGER_POUCH(72, 12089, 92, 404.8, 6869, 4.5, 10, false, new Item(12160), new Item(2859), new Item(3226), new Item(12183, 203)),
+	WOLPERTINGER_POUCH(72, 12089, 92, 404.8, 6869, 4.5, 10, false, new Item(12160), new Item(2859), new Item(3226), new Item(12155), new Item(12183, 203)),
 
 	/**
 	 * Represents a pack yak pouch.
 	 */
-	PACK_YAK_POUCH(75, 12093, 96, 422.4, 6873, 4.8, 10, true, new Item(12160), new Item(10818), new Item(12183, 211)),
+	PACK_YAK_POUCH(75, 12093, 96, 422.4, 6873, 4.8, 10, true, new Item(12160), new Item(10818), new Item(12155), new Item(12183, 211)),
 
 	/**
 	 * Represents a fire titan pouch.
