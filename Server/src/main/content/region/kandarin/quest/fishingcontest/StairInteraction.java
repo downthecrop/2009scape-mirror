@@ -10,6 +10,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.game.interaction.PluginInteraction;
 import core.game.interaction.PluginInteractionManager;
+import core.game.world.repository.Repository;
 
 @Initializable
 public class StairInteraction extends PluginInteraction {
@@ -33,7 +34,12 @@ public class StairInteraction extends PluginInteraction {
         player.getPulseManager().run(new MovementPulse(player,object.getLocation().transform(0,2,0)) {
             @Override
             public boolean pulse() {
-                player.getDialogueInterpreter().open(npc_id,new NPC(npc_id));
+                NPC n = Repository.findNPC(npc_id);
+                if (n == null) {
+                    player.sendMessage("Are you in a world without NPCs? What did you do?");
+                    return true;
+                }
+                player.getDialogueInterpreter().open(npc_id, n);
                 return true;
             }
         }, PulseType.STANDARD);

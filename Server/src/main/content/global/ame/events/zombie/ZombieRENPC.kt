@@ -4,16 +4,15 @@ import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import content.global.ame.RandomEventNPC
 import core.api.utils.WeightBasedTable
-
-
-val ids = 419..424
+import kotlin.math.*
 
 class ZombieRENPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(419){
+    val ids = (419..424).toList()
     override fun talkTo(npc: NPC) {}
     override fun init() {
         super.init()
-        val index = (player.properties.combatLevel / 20) - 1
-        val id = ids.toList()[index]
+        val index = max(0, min(ids.size, (player.properties.combatLevel / 20) - 1))
+        val id = ids[index]
         this.transform(id)
         this.attack(player)
         sendChat("Brainsssss!")

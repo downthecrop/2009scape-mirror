@@ -6,22 +6,27 @@ import core.game.node.entity.state.State
 import core.game.system.task.Pulse
 import org.json.simple.JSONObject
 import core.api.*
+import core.tools.*
 
 @PlayerState("incubator")
 class IncubatorState(player: Player? = null) : State(player) {
     var egg: IncubatorEgg? = null
-    var ticksLeft = 0
+    var completionTimeMs = 0L
+
+    fun setTicksLeft (ticks: Int) {
+        completionTimeMs = System.currentTimeMillis() + (ticksToSeconds(ticks) * 1000)
+    }
 
     override fun newInstance(player: Player?): State {
         return IncubatorState(player)
     }
 
     override fun save(root: JSONObject) {
-        if(ticksLeft <= 0) return
+        if(pulse == null) return
 
         val data = JSONObject()
         data.put("eggOrdinal",(egg?.ordinal ?: 0).toString())
-        data.put("ticksLeft",ticksLeft.toString())
+        data.put("endTime", completionTimeMs.toString())
         root.put("eggdata",data)
     }
 
@@ -29,7 +34,11 @@ class IncubatorState(player: Player? = null) : State(player) {
         if(_data.containsKey("eggdata")){
             val data = _data["eggdata"] as JSONObject
             egg = IncubatorEgg.values()[data["eggOrdinal"].toString().toInt()]
-            ticksLeft = data["ticksLeft"].toString().toInt()
+            
+            if (data.containsKey("ticksLeft"))
+                completionTimeMs = System.currentTimeMillis() + ticksToSeconds(data["ticksLeft"].toString().toInt() * 1000)
+            else
+                completionTimeMs = data["endTime"].toString().toLong()
         }
     }
 
@@ -39,8 +48,8 @@ class IncubatorState(player: Player? = null) : State(player) {
         setVarbit(player, 4277, 1)
         pulse = object : Pulse(){
             override fun pulse(): Boolean {
-                if(ticksLeft-- <= 0){
-                    player.setAttribute("/save:inc", egg!!.ordinal)
+                if(System.currentTimeMillis() >= completionTimeMs){
+                    player.setAttribute(ATTR_INCUBATOR_PRODUCT, egg!!.ordinal)
                     player.sendMessage("Your " + egg!!.product.name.toLowerCase() + " has finished hatching.")
                     pulse = null
                     return true
@@ -49,5 +58,8 @@ class IncubatorState(player: Player? = null) : State(player) {
             }
         }
     }
-
+    
+    companion object {
+        const val ATTR_INCUBATOR_PRODUCT = "/save:incubator:egg-product"
+    }
 }

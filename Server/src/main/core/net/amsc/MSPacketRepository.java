@@ -92,6 +92,9 @@ public final class MSPacketRepository {
 		buffer.put(publicSetting);
 		buffer.put(privateSetting);
 		buffer.put(tradeSetting);
-		WorldCommunicator.getSession().write(buffer);
+                if (WorldCommunicator.getSession() != null)
+	            WorldCommunicator.getSession().write(buffer);
+                else
+                    player.sendMessage("Privacy settings unavailable at the moment. Please try again later.");
 	}
 }

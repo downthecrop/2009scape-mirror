@@ -1,6 +1,7 @@
 package content.global.skill.crafting;
 
 import static core.api.ContentAPIKt.*;
+import core.api.InputType;
 import core.cache.def.impl.ItemDefinition;
 import core.game.component.Component;
 import core.game.dialogue.DialoguePlugin;
@@ -204,7 +205,7 @@ public final class LeatherCraftDialogue extends DialoguePlugin {
 				if (hidee == null) {
 					return false;
 				}
-				sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+				sendInputDialogue(player, InputType.AMOUNT, "Enter the amount:", (value) -> {
 					player.getPulseManager().run(new DragonCraftPulse(player, null, hidee, (int) value));
 					return Unit.INSTANCE;
 				});

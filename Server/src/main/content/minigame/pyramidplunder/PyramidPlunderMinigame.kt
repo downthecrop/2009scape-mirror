@@ -188,6 +188,10 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
         }
 
         on(SARCOPHAGUS, IntType.SCENERY, "open") { player, node ->
+            if (PlunderUtils.getRoom(player) == null) {
+                PlunderUtils.expel(player, false)
+                return@on true
+            }
             sendMessage(player, "You attempt to push open the massive lid.")
             val strength = getDynLevel(player, Skills.STRENGTH)
             animate(player, PUSH_LID_START)
@@ -198,6 +202,10 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
                     if(RandomFunction.random(125) > strength)
                         return false
                     animate(player, PUSH_LID_FINISH)
+                    if (PlunderUtils.getRoom(player) == null) {
+                        PlunderUtils.expel(player, false)
+                        return true
+                    }
                     runTask(player, 3){
                         setVarbit(player, node.asScenery().definition.varbitID, 1)
                         rewardXP(player, Skills.STRENGTH, PlunderUtils.getSarcophagusXp(player))
@@ -220,6 +228,10 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
         }
 
         on(Scenery.GRAND_GOLD_CHEST_16473, IntType.SCENERY, "search") { player, node ->
+            if (PlunderUtils.getRoom(player) == null) {
+                PlunderUtils.expel(player, false)
+                return@on true
+            }
             animate(player, OPEN_CHEST_ANIM)
             runTask(player){
                 if(RandomFunction.roll(25))
@@ -268,8 +280,14 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
                 if(RandomFunction.roll(rate))
                 {
                     val varbitId = node.asScenery().definition.varbitID
-                    rewardXP(player, Skills.THIEVING, PlunderUtils.getDoorXp(player, rate == 3))
-                    if(PlunderUtils.getDoor(player) == varbitId) {
+                    val door = PlunderUtils.getDoor(player)
+
+                    if (door == -1)
+                        PlunderUtils.expel(player, false)
+                    else
+                        rewardXP(player, Skills.THIEVING, PlunderUtils.getDoorXp(player, rate == 3))
+
+                    if (door == varbitId) {
                         PlunderUtils.loadNextRoom(player)
                         PlunderUtils.resetObjectVarbits(player)
                     } else {

@@ -258,6 +258,10 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
                 reject(player, "Usage: ::commands <lt>page<gt>")
             }
 
+            if (page > pages.size) {
+                reject(player, "That page number is too high, you don't have access to that many.")
+            }
+
             for (i in 0..310) {
                 player.packetDispatch.sendString("", Components.QUESTJOURNAL_SCROLL_275, i)
             }

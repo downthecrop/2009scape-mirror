@@ -20,6 +20,7 @@ abstract class DialogueFile {
         this.player = player
         this.npc = npc
         this.interpreter = interpreter
+        interpreter.activeTopics.clear()
 
         return this
     }

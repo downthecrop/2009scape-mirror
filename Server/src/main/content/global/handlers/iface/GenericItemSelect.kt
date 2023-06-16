@@ -30,6 +30,7 @@ class GenericItemSelect : InterfaceListener {
 
         onClose(GENERIC_ITEM_SELECT_IFACE) {player, _ ->
             removeAttribute(player, "itemselect-callback")
+            removeAttribute(player, "itemselect-keepalive")
             return@onClose true
         }
     }
@@ -56,7 +57,11 @@ class GenericItemSelect : InterfaceListener {
         }
 
         callback.invoke(slot, optionIndex)
-        removeAttribute (player, "itemselect-callback")
-        player.interfaceManager.closeSingleTab()
+
+        if (!getAttribute(player, "itemselect-keepalive", false)) {
+            removeAttribute (player, "itemselect-callback")
+            removeAttribute (player, "itemselect-keepalive")
+            player.interfaceManager.closeSingleTab()
+        }
     }
 }

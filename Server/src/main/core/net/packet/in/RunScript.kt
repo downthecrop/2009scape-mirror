@@ -30,6 +30,8 @@ object RunScript {
             script(input)
         } catch (_: NumberFormatException) {
             sendDialogue(player, "That number's a bit large, don't you think?")
+        } catch (_: ClassCastException) {
+            sendDialogue(player, "Something went wrong here. Try again.")
         }
     }
 }

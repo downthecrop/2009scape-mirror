@@ -197,6 +197,8 @@ public abstract class Node {
 	 * @param direction The direction to set.
 	 */
 	public void setDirection(Direction direction) {
+                if (direction == null)
+                    return;
 		this.direction = direction;
 	}
 

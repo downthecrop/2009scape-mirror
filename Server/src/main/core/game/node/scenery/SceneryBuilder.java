@@ -46,7 +46,6 @@ public final class SceneryBuilder {
 		remove = remove.getWrapper();
 		Scenery current = LandscapeParser.removeScenery(remove);
 		if (current == null) {
-			log(SceneryBuilder.class, Log.ERR, "Object could not be replaced with " + construct + " - object to remove is invalid.");
 			return false;
 		}
 		if (current.getRestorePulse() != null) {
@@ -119,7 +118,6 @@ public final class SceneryBuilder {
 		remove = remove.getWrapper();
 		Scenery current = LandscapeParser.removeScenery(remove);
 		if (current == null) {
-			log(SceneryBuilder.class, Log.ERR, "Object could not be replaced with " + construct + " - object to remove is invalid.");
 			return false;
 		}
 		if (current.getRestorePulse() != null) {

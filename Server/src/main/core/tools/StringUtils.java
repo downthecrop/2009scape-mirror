@@ -409,6 +409,7 @@ public final class StringUtils {
 	 * @return The string.
 	 */
 	public static String longToString(long l) {
+            try {
 		int i = 0;
 		char ac[] = new char[32];
 		while (l != 0L) {
@@ -417,6 +418,9 @@ public final class StringUtils {
 			ac[11 - i++] = VALID_CHARS[(int) (l1 - l * 37L)];
 		}
 		return new String(ac, 12 - i, i);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                return "";
+            }
 	}
 
 	/**

@@ -96,6 +96,8 @@ public final class TelekineticGrabSpell extends MagicSpell {
 
 	@Override
 	public boolean cast(final Entity entity, final Node target) {
+                if (!(target instanceof GroundItem))
+                    return false;
 		final GroundItem ground = (GroundItem) target;
 		if (!canCast(entity, ground)) {
 			return false;

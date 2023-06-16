@@ -43,14 +43,10 @@ public class DiangoReclaimInterface extends ComponentPlugin {
         if(curOpen != null){
             curOpen.close(player);
         }
+        Item[] reclaimables = getEligibleItems(player);
+        player.setAttribute("diango-reclaimables", reclaimables);
 
         //filter out items the player already has in their bank, inventory, or equipped
-        Item[] reclaimables = ITEMS.stream().filter(Objects::nonNull)
-                .filter(item -> !player.getEquipment().containsItem(item) && !player.getInventory().containsItem(item) && !player.getBank().containsItem(item)
-                        && (item.getId() != 14654
-                        || (!(inInventory(player, 14655, 1) || inEquipment(player, 14656, 1)) && player.getAttribute("sotr:purchased",false))
-                        ))
-                .toArray(Item[]::new);
 
         //only send items if there are some to send
         if(reclaimables.length > 0) {
@@ -68,18 +64,36 @@ public class DiangoReclaimInterface extends ComponentPlugin {
 
     @Override
     public boolean handle(Player player, Component component, int opcode, int button, int slot, int itemId) {
-        Item[] reclaimables = ITEMS.stream().filter(Objects::nonNull).filter(item -> !player.getEquipment().containsItem(item) && !player.getInventory().containsItem(item) && !player.getBank().containsItem(item)).toArray(Item[]::new);
+        Item[] reclaimables = player.getAttribute("diango-reclaimables", null);
+        if (reclaimables == null)
+            reclaimables = getEligibleItems(player);
+
+        Item reclaimItem = reclaimables[slot];
+        if (reclaimItem == null) {
+            player.sendMessage("Something went wrong there. Please try again.");
+            return true;
+        }
+
         switch(opcode){
             case 155: //interface item option 1 == take
                 //add the clicked item to the player's inventory and refresh the interface
-                player.getInventory().add(reclaimables[slot]);
+                player.getInventory().add(reclaimItem);
                 refresh(player);
                 break;
             case 196: //interface item option 2 == examine
                 //send the examine text for the item to the player
-                player.getPacketDispatch().sendMessage(reclaimables[slot].getDefinition().getExamine());
+                player.getPacketDispatch().sendMessage(reclaimItem.getDefinition().getExamine());
                 break;
         }
         return false;
+    }
+
+    public static Item[] getEligibleItems (Player player) {
+        return ITEMS.stream().filter(Objects::nonNull)
+            .filter(item -> !player.getEquipment().containsItem(item) && !player.getInventory().containsItem(item) && !player.getBank().containsItem(item)
+                    && (item.getId() != 14654
+                    || (!(inInventory(player, 14655, 1) || inEquipment(player, 14656, 1)) && player.getAttribute("sotr:purchased",false))
+                    ))
+            .toArray(Item[]::new);
     }
 }

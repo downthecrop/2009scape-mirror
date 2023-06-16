@@ -74,6 +74,7 @@ public final class GameReadEvent extends IoReadEvent {
 				size = getPacketSize(buffer, opcode, header, last);
 			}
 			if (size == -1) {
+                                session.getPlayer().incrementInvalidPacketCount();
 				break;
 			}
 			if (buffer.remaining() < size) {
@@ -136,10 +137,6 @@ public final class GameReadEvent extends IoReadEvent {
 			}
 			return buffer.getShort() & 0xFFFF;
 		}
-		if(header == -3){
-
-		}
-		log(this.getClass(), Log.ERR,  "Invalid packet [opcode=" + opcode + ", last=" + last + ", queued=" + usedQueuedBuffer + "], header=" + header+"!");
 		return -1;
 	}
 

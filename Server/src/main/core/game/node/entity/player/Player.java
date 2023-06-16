@@ -317,6 +317,8 @@ public class Player extends Entity {
 
 	public byte[] opCounts = new byte[255];
 
+        public int invalidPacketCount = 0;
+
 	/**
 	 * Constructs a new {@code Player} {@code Object}.
 	 * @param details The player's details.
@@ -1385,5 +1387,13 @@ public class Player extends Entity {
 
         public void updateAppearance() {
             getUpdateMasks().register(EntityFlag.Appearance, this);
+        }
+
+        public void incrementInvalidPacketCount() {
+            invalidPacketCount++;
+            if (invalidPacketCount >= 5) {
+                clear();
+                log(this.getClass(), Log.ERR, "Disconnecting " + getName() + " for having a high rate of invalid packets. Potential packet bot misbehaving, or simply really bad connection.");
+            }
         }
 }

@@ -267,7 +267,8 @@ public abstract class MovementPulse extends Pulse {
         }
         else if(overrideMethod != null){
             loc = overrideMethod.invoke(mover,destination);
-            if(loc == destination.getLocation()) loc = destinationFlag.getDestination(mover,destination);
+            if(loc == destination.getLocation() && destinationFlag != null) loc = destinationFlag.getDestination(mover,destination);
+            else if (loc == destination.getLocation()) loc = null;
         }
 
         if (loc == null) {

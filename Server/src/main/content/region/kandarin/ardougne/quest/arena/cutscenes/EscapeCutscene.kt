@@ -27,7 +27,7 @@ class EscapeCutscene(player: Player) : Cutscene(player) {
             }
 
             1 -> {
-                player.faceLocation(location(2616, 3167, 0))
+                player.faceLocation(location(56, 31, 0))
                 animate(player, 2098)
                 timedUpdate(4)
             }
@@ -38,8 +38,8 @@ class EscapeCutscene(player: Player) : Cutscene(player) {
             }
 
             3 -> {
-                DoorActionHandler.handleAutowalkDoor(Jeremy, getScenery(2617, 3167, 0))
-                player.faceLocation(location(2617, 3164, 0))
+                DoorActionHandler.handleAutowalkDoor(Jeremy, getObject(57, 31, 0))
+                player.faceLocation(location(57, 28, 0))
                 timedUpdate(3)
             }
 
@@ -67,7 +67,7 @@ class EscapeCutscene(player: Player) : Cutscene(player) {
                 moveCamera(47, 20)
                 rotateCamera(45, 15)
                 teleport(player, 47, 15)
-                Jeremy.teleport(Location.create(2616, 3167, 0))
+                Jeremy.teleport(location(56, 31, 0))
                 timedUpdate(2)
             }
 

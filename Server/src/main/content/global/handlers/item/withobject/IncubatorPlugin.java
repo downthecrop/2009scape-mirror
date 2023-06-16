@@ -34,7 +34,9 @@ public class IncubatorPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		int inc = player.getAttribute("inc", -1);
+		int inc = player.getAttribute(IncubatorState.ATTR_INCUBATOR_PRODUCT, -1);
+                if (inc == -1)
+                    inc = player.getAttribute("inc", -1); //deprecated, only here to avoid data loss
 		switch (option) {
 		case "take-egg":
 			if (inc == -1) {
@@ -54,6 +56,8 @@ public class IncubatorPlugin extends OptionHandler {
 				GroundItemManager.create(egg.getProduct(),player);
 			}
 			player.removeAttribute("inc");
+                        player.removeAttribute(IncubatorState.ATTR_INCUBATOR_PRODUCT);
+                        player.clearState("incubator");
 		}
 			return true;
 		case "inspect":

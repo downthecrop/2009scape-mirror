@@ -257,6 +257,10 @@ public final class CommunicationInfo {
 	 */
 	public static void add(Player player, String contact) {
 		CommunicationInfo info = player.getDetails().getCommunication();
+                if (contact.isEmpty()) {
+                    player.sendMessage("Unable to find a player by that name. Please try again.");
+                    return;
+                }
 		if (WorldCommunicator.isEnabled()) {
 			MSPacketRepository.sendContactUpdate(player.getName(), contact, false, false, null);
 			return;
@@ -291,6 +295,10 @@ public final class CommunicationInfo {
 	 * @param block If the contact should be removed from the block list.
 	 */
 	public static void remove(Player player, String contact, boolean block) {
+                if (contact.isEmpty()) {
+                    player.sendMessage("Unable to find a player by that name. Please try again.");
+                    return;
+                }
 		if (WorldCommunicator.isEnabled()) {
 			MSPacketRepository.sendContactUpdate(player.getName(), contact, true, block, null);
 			return;
@@ -326,6 +334,10 @@ public final class CommunicationInfo {
 	 * @param contact The contact to block.
 	 */
 	public static void block(Player player, String contact) {
+                if (contact.isEmpty()) {
+                    player.sendMessage("Unable to find a player by that name. Please try again.");
+                    return;
+                }
 		if (WorldCommunicator.isEnabled()) {
 			MSPacketRepository.sendContactUpdate(player.getName(), contact, false, true, null);
 			return;
@@ -352,6 +364,10 @@ public final class CommunicationInfo {
 	 * @param clanRank The clan rank to set.
 	 */
 	public static void updateClanRank(Player player, String contact, ClanRank clanRank) {
+                if (contact.isEmpty()) {
+                    player.sendMessage("Unable to find a player by that name. Please try again.");
+                    return;
+                }
 		CommunicationInfo info = player.getDetails().getCommunication();
 		Contact c = info.contacts.get(contact);
 		if (c == null) {

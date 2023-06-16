@@ -46,6 +46,8 @@ class MusicCommandSet : CommandSet(Privilege.STANDARD){
          * music player yet.
          */
         define("playid"){player,arg ->
+            if (arg.size < 2)
+                reject(player, "Needs more args.")
             val id = arg[1].toIntOrNull()
             if(id != null){
                 PacketRepository.send(MusicPacket::class.java, MusicContext(player, id))
