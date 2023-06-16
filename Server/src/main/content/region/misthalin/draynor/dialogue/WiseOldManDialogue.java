@@ -1,6 +1,7 @@
 package content.region.misthalin.draynor.dialogue;
 
 import core.game.dialogue.DialoguePlugin;
+import core.game.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
@@ -25,6 +26,13 @@ public final class WiseOldManDialogue extends DialoguePlugin {
      * Represents the coins item.
      */
     private static final Item COINS = new Item(995, 99000);
+
+    /**
+     * Represents the unique books item.
+     */
+
+    private static final Item[] UNIQUE_BOOKS = new Item[]{ new Item(5507), new Item(5508), new Item(7464)};
+
 
     /**
      * Constructs a new {@code WiseOldManDialogue} {@code Object}.
@@ -166,16 +174,26 @@ public final class WiseOldManDialogue extends DialoguePlugin {
                 }
                 break;
             case 100:
-                npc("You seem to have no junk in your bank, sorry.");
-                stage = 101;
+                if (player.getBank().containsAtLeastOneItem(UNIQUE_BOOKS) && player.getBank().remove(UNIQUE_BOOKS)){
+                    npc(FacialExpression.DISGUSTED, "That's my book! What's it doing in your bank?");
+                    stage = 101;
+                } else {
+                    npc("You seem to have no junk in your bank, sorry.");
+                    stage = 101;
+                }
                 break;
             case 101:
                 player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 1, 16);
             	end();
                 break;
             case 102:
-                npc("You seem to have no junk in your inventory, sorry.");
-                stage = 101;
+                if (player.getInventory().containsAtLeastOneItem(UNIQUE_BOOKS) && player.getInventory().remove(UNIQUE_BOOKS)){
+                    npc(FacialExpression.DISGUSTED, "That's my book! What's it doing in your inventory?");
+                    stage = 101;
+                } else {
+                    npc("You seem to have no junk in your inventory, sorry.");
+                    stage = 101;
+                }
                 break;
             case 30:
                 npc("Jolly good. Give it to me, and I'll tell you anything I know", "about it.");
