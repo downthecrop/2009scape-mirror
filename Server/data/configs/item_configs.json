@@ -109072,7 +109072,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,60}-{6,50}",
+    "requirements": "{1,50}-{6,60}",
     "shop_price": "250",
     "examine": "Its arcane power is waning.",
     "durability": null,
@@ -109087,7 +109087,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,60}-{6,50}",
+    "requirements": "{1,50}-{6,60}",
     "shop_price": "250",
     "examine": "Its arcane power is waning.",
     "durability": null,
@@ -109102,7 +109102,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,60}-{6,50}",
+    "requirements": "{1,50}-{6,60}",
     "shop_price": "250",
     "examine": "Its arcane power is waning.",
     "durability": null,
@@ -109117,7 +109117,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,60}-{6,50}",
+    "requirements": "{1,50}-{6,60}",
     "shop_price": "250",
     "examine": "Its arcane power is waning.",
     "durability": null,
@@ -109132,7 +109132,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,60}-{6,50}",
+    "requirements": "{1,50}-{6,60}",
     "shop_price": "250",
     "examine": "Its arcane power is waning.",
     "durability": null,
@@ -109147,7 +109147,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,60}-{6,50}",
+    "requirements": "{1,50}-{6,60}",
     "shop_price": "250",
     "ge_buy_limit": "10",
     "examine": "Its arcane power is waning.",
@@ -109380,7 +109380,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "100",
     "examine": "A worn-out hood, formerly worn by the followers of Guthix.",
     "durability": null,
@@ -109395,7 +109395,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "100",
     "examine": "A worn-out hood, formerly worn by the followers of Guthix.",
     "durability": null,
@@ -109410,7 +109410,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "100",
     "examine": "A worn-out hood, formerly worn by the followers of Guthix.",
     "durability": null,
@@ -109425,7 +109425,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "100",
     "examine": "A worn-out hood, formerly worn by the followers of Guthix.",
     "durability": null,
@@ -109440,7 +109440,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "100",
     "examine": "A worn-out hood, formerly worn by the followers of Guthix.",
     "durability": null,
@@ -109455,7 +109455,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "100",
     "ge_buy_limit": "10",
     "examine": "A worn-out hood, formerly worn by the followers of Guthix.",
@@ -109479,7 +109479,7 @@
     "id": "12893"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "300",
     "examine": "A magical robe top worn by followers of Guthix.",
     "durability": null,
@@ -109495,7 +109495,7 @@
     "bonuses": "0,0,0,7,0,0,0,0,7,0,7,0,0,0,0"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "300",
     "examine": "A magical robe top worn by followers of Guthix.",
     "durability": null,
@@ -109511,7 +109511,7 @@
     "bonuses": "0,0,0,7,0,0,0,0,7,0,7,0,0,0,0"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "300",
     "examine": "A magical robe top worn by followers of Guthix.",
     "durability": null,
@@ -109527,7 +109527,7 @@
     "bonuses": "0,0,0,7,0,0,0,0,7,0,7,0,0,0,0"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "300",
     "examine": "A magical robe top worn by followers of Guthix.",
     "durability": null,
@@ -109543,7 +109543,7 @@
     "bonuses": "0,0,0,7,0,0,0,0,7,0,7,0,0,0,0"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "300",
     "examine": "A magical robe top worn by followers of Guthix.",
     "durability": null,
@@ -109559,7 +109559,7 @@
     "bonuses": "0,0,0,7,0,0,0,0,7,0,7,0,0,0,0"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "300",
     "ge_buy_limit": "10",
     "examine": "A magical robe top worn by followers of Guthix.",
@@ -109585,7 +109585,7 @@
     "id": "12900"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "200",
     "examine": "A magical robe bottom worn by a person who follows Guthix.",
     "durability": null,
@@ -109600,7 +109600,7 @@
     "bonuses": "0,0,0,6,0,0,0,0,6,0,6,0,0,0,0"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "200",
     "examine": "A magical robe bottom worn by a person who follows Guthix.",
     "durability": null,
@@ -109615,7 +109615,7 @@
     "bonuses": "0,0,0,6,0,0,0,0,6,0,6,0,0,0,0"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "200",
     "examine": "A magical robe bottom worn by a person who follows Guthix.",
     "durability": null,
@@ -109630,7 +109630,7 @@
     "bonuses": "0,0,0,6,0,0,0,0,6,0,6,0,0,0,0"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "200",
     "examine": "A magical robe bottom worn by a person who follows Guthix.",
     "durability": null,
@@ -109645,7 +109645,7 @@
     "bonuses": "0,0,0,6,0,0,0,0,6,0,6,0,0,0,0"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "200",
     "examine": "A magical robe bottom worn by a person who follows Guthix.",
     "durability": null,
@@ -109660,7 +109660,7 @@
     "bonuses": "0,0,0,6,0,0,0,0,6,0,6,0,0,0,0"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "200",
     "ge_buy_limit": "10",
     "examine": "A magical robe bottom worn by a person who follows Guthix.",
@@ -110520,7 +110520,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "50",
     "examine": "A magical hood, especially created for combat spells.",
     "durability": null,
@@ -110535,7 +110535,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "50",
     "examine": "A magical hood, especially created for combat spells.",
     "durability": null,
@@ -110550,7 +110550,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "50",
     "examine": "A magical hood, especially created for combat spells.",
     "durability": null,
@@ -110565,7 +110565,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "50",
     "examine": "A magical hood, especially created for combat spells.",
     "durability": null,
@@ -110580,7 +110580,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "50",
     "examine": "A magical hood, especially created for combat spells.",
     "durability": null,
@@ -110595,7 +110595,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "50",
     "ge_buy_limit": "10",
     "examine": "A magical hood, especially created for combat spells.",
@@ -110619,7 +110619,7 @@
     "id": "12970"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "150",
     "examine": "A magical robe top, especially made for combat spells.",
     "durability": null,
@@ -110635,7 +110635,7 @@
     "bonuses": "0,0,0,7,0,1,1,1,7,0,8,0,0,0,0"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "150",
     "examine": "A magical robe top, especially made for combat spells.",
     "durability": null,
@@ -110651,7 +110651,7 @@
     "bonuses": "0,0,0,7,0,1,1,1,7,0,8,0,0,0,0"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "150",
     "examine": "A magical robe top, especially made for combat spells.",
     "durability": null,
@@ -110667,7 +110667,7 @@
     "bonuses": "0,0,0,7,0,1,1,1,7,0,8,0,0,0,0"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "150",
     "examine": "A magical robe top, especially made for combat spells.",
     "durability": null,
@@ -110683,7 +110683,7 @@
     "bonuses": "0,0,0,7,0,1,1,1,7,0,8,0,0,0,0"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "150",
     "examine": "A magical robe top, especially made for combat spells.",
     "durability": null,
@@ -110699,7 +110699,7 @@
     "bonuses": "0,0,0,7,0,1,1,1,7,0,8,0,0,0,0"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "150",
     "ge_buy_limit": "10",
     "examine": "A magical robe top, especially made for combat spells.",
@@ -110725,7 +110725,7 @@
     "id": "12977"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "100",
     "examine": "A magical robe bottom, especially created for combat spells.",
     "durability": null,
@@ -110740,7 +110740,7 @@
     "bonuses": "0,0,0,6,0,1,1,1,6,0,7,0,0,0,0"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "100",
     "examine": "A magical robe bottom, especially created for combat spells.",
     "durability": null,
@@ -110755,7 +110755,7 @@
     "bonuses": "0,0,0,6,0,1,1,1,6,0,7,0,0,0,0"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "100",
     "examine": "A magical robe bottom, especially created for combat spells.",
     "durability": null,
@@ -110770,7 +110770,7 @@
     "bonuses": "0,0,0,6,0,1,1,1,6,0,7,0,0,0,0"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "100",
     "examine": "A magical robe bottom, especially created for combat spells.",
     "durability": null,
@@ -110785,7 +110785,7 @@
     "bonuses": "0,0,0,6,0,1,1,1,6,0,7,0,0,0,0"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "100",
     "examine": "A magical robe bottom, especially created for combat spells.",
     "durability": null,
@@ -110800,7 +110800,7 @@
     "bonuses": "0,0,0,6,0,1,1,1,6,0,7,0,0,0,0"
   },
   {
-    "requirements": "{1,20}-{6,10}",
+    "requirements": "{1,10}-{6,20}",
     "shop_price": "100",
     "ge_buy_limit": "10",
     "examine": "A magical robe bottom, especially created for combat spells.",
