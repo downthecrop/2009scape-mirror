@@ -5,6 +5,9 @@ import core.game.node.entity.skill.SkillPulse;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the dismantling of a trap.
@@ -39,6 +42,27 @@ public final class TrapDismantlePulse extends SkillPulse<Scenery> {
 		this.trap = wrapper.getType();
 		this.wrapper = wrapper;
 		this.instance = HunterManager.getInstance(player);
+		if (checkRequirements()){
+		switch(trap) {
+			case BIRD_SNARE:
+				lock(player,5);
+				player.getAudioManager().send(Sounds.HUNTING_DISMANTLE_2632, 10, 50);
+				break;
+			case BOX_TRAP:
+				lock(player,4);
+				player.getAudioManager().send(Sounds.HUNTING_DISMANTLE_2632, 10, 50);
+				break;
+			case NET_TRAP:
+				lock(player, 5);
+				player.getAudioManager().send(Sounds.HUNTING_DISMANTLE_2632, 10, 20);
+				break;
+			case RABBIT_SNARE:
+			case DEAD_FALL:
+				lock(player, 4);
+				player.getAudioManager().send(Sounds.HUNTING_DISMANTLE_2632, 10, 80);
+				break;
+			}
+		}
 	}
 
 	@Override

@@ -11,6 +11,9 @@ import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the trap creating pulse.
@@ -51,6 +54,26 @@ public final class TrapCreatePulse extends SkillPulse<Node> {
 		this.trap = trap;
 		this.startLocation = node instanceof GroundItem ? node.getLocation() : player.getLocation();
 		this.instance = HunterManager.getInstance(player);
+		if (checkRequirements()){
+		switch(trap) {
+			case BIRD_SNARE:
+				player.getAudioManager().send(Sounds.HUNTING_SETNOOSE_2646, 10, 40);
+				break;
+			case BOX_TRAP:
+				player.getAudioManager().send(Sounds.HUNTING_LAYBOXTRAP_2636, 10, 20);
+				break;
+			case NET_TRAP:
+				lock(player, 3);
+				player.getAudioManager().send(Sounds.HUNTING_SET_TWITCHNET_2644);
+				break;
+			case RABBIT_SNARE:
+				player.getAudioManager().send(Sounds.HUNTING_SETSNARE_2647);
+				break;
+			case DEAD_FALL:
+				lock(player, 6);
+				player.getAudioManager().send(Sounds.HUNTING_SETDEADFALL_2645, 10, 130);
+			}
+		}
 	}
 
 	@Override

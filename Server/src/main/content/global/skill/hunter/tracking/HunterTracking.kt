@@ -16,6 +16,7 @@ import org.rs09.consts.Items
 import core.tools.SystemLogger
 import core.game.world.GameWorld
 import core.tools.Log
+import org.rs09.consts.Sounds
 import java.util.*
 
 /**
@@ -164,6 +165,7 @@ abstract class HunterTracking : OptionHandler(){
     fun reward(player: Player, success: Boolean) {
         player.lock()
         player.animator.animate(if(success) KEBBIT_ANIM else MISS_ANIM)
+        playAudio(player, getAudio(Sounds.HUNTING_NOOSE_2637))
         GameWorld.Pulser.submit(object : Pulse(KEBBIT_ANIM.duration){
             override fun pulse(): Boolean {
                 if(hasTrail(player) && success){

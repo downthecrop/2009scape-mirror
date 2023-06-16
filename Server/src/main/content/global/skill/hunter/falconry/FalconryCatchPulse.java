@@ -13,6 +13,7 @@ import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.repository.Repository;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
 
 /**
  * Represents the skill pulse used to catch a kebbit.
@@ -123,6 +124,7 @@ public final class FalconryCatchPulse extends SkillPulse<NPC> {
 			falcon.setAttribute("falcon:catch", falconCatch);
 			falcon.init();
 			HintIconManager.registerHintIcon(player, falcon);
+			player.getAudioManager().send(Sounds.HUNTING_FALCON_SWOOP_2634, 10, 0, 12, node.getLocation());
 			GameWorld.getPulser().submit(new Pulse(100, falcon) {
 				@Override
 				public boolean pulse() {
@@ -155,6 +157,7 @@ public final class FalconryCatchPulse extends SkillPulse<NPC> {
 		projectile.setStartHeight(26);
 		projectile.setEndHeight(1);
 		projectile.send();
+		player.getAudioManager().send(Sounds.HUNTING_FALCON_FLY_2633);
 	}
 
 	/**

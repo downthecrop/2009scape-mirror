@@ -11,6 +11,7 @@ import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
+import org.rs09.consts.Sounds;
 
 import java.util.Random;
 
@@ -93,6 +94,7 @@ public final class BNetPulse extends SkillPulse<NPC> {
 	public void animate() {
 		if (ticks < 1) {
 			player.animate(ANIMATION);
+			player.getAudioManager().send(Sounds.HUNTING_BUTTERFLYNET_2623);
 		}
 	}
 

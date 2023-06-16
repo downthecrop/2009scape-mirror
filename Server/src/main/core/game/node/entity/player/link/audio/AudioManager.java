@@ -67,6 +67,18 @@ public class AudioManager {
 
 	/**
 	 * Sends an audio packet.
+	 * @param audioId the audio id.
+	 * @param volume the volume.
+	 * @param delay the delay.
+	 * @param radius the distance the sound can be heard.
+	 * @param loc the location.
+	 */
+	public void send(int audioId, int volume, int delay, int radius, Location loc) {
+		send(new Audio(audioId, volume, delay, radius), false, loc);
+	}
+
+	/**
+	 * Sends an audio packet.
 	 * @param audio the audio.
 	 */
 	public void send(Audio audio) {

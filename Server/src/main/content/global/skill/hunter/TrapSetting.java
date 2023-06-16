@@ -16,6 +16,7 @@ import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
 
 /**
  * A setting for a trap type.
@@ -306,6 +307,22 @@ public class TrapSetting {
 						wrapper.setTicks(GameWorld.getTicks() + 100);
 						wrapper.setReward(node);
 						wrapper.setObject(getFinalId(wrapper, node));
+						switch(wrapper.getType()) {
+							case BIRD_SNARE:
+								player.getAudioManager().send(Sounds.HUNTING_NOOSE_2637, 10, 0, 10, wrapper.getObject().getLocation());
+								player.getAudioManager().send(Sounds.HUNTING_BIRDCAUGHT_2625, 10, 20, 10, wrapper.getObject().getLocation());
+								break;
+							case BOX_TRAP:
+								player.getAudioManager().send(Sounds.HUNTING_BOXTRAP_2627, 10, 0, 10, wrapper.getObject().getLocation());
+								break;
+							case NET_TRAP:
+								player.getAudioManager().send(Sounds.HUNTING_TWITCHNET_2652, 10, 0, 10, wrapper.getObject().getLocation());
+								player.getAudioManager().send(Sounds.SALAMANDER_HIT_739, 10, 20, 10, wrapper.getObject().getLocation());
+								break;
+							case DEAD_FALL:
+								player.getAudioManager().send(Sounds.HUNTING_DEADFALL_2631, 10, 0, 10, wrapper.getObject().getLocation());
+								break;
+						}
 						return true;
 					}
 					npc.moveStep();
