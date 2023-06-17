@@ -42,7 +42,7 @@ public final class NPCDropTables {
 	 */
 	public static final int[] MESSAGE_NPCS = { 50, 7133, 7134, 2881, 2882, 2883, 3200, 3340, 6247, 6203, 6260, 6222, 2745, 1160, 8133, 8610, 8611, 8612, 8613, 8614, 6204, 6206, 6208, 6261, 6263, 6265, 6223, 6225, 6227 };
 
-	public final NPCDropTable table = new NPCDropTable();
+	public NPCDropTable table = new NPCDropTable();
 
 	/**
 	 * The NPC definitions.

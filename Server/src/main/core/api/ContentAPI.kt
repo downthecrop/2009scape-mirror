@@ -2549,12 +2549,20 @@ fun logWithStack(origin: Class<*>, type: Log, message: String) {
     try {
         throw Exception(message)
     } catch (e: Exception) {
-        val sw = StringWriter()
-        val pw = PrintWriter(sw)
-        e.printStackTrace(pw)
-
-        log(origin, type, "$sw")
+        log(origin, type, "${exceptionToString(e)}")
     }
+}
+
+/**
+ * Takes an exception as an argument, and sends back the complete exception with stack trace as a standard string. Useful for various things.
+ * @param e The exception you wish to convert.
+ * @return a string with the full stack trace of the exception
+**/
+fun exceptionToString (e: Exception) : String {
+    val sw = StringWriter()
+    val pw = PrintWriter(sw)
+    e.printStackTrace(pw)
+    return sw.toString()
 }
 
 /**
