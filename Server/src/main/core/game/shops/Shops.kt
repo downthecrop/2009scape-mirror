@@ -249,7 +249,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
                 OP_SELL_1 -> shop.sell(player, slot, 1)
                 OP_SELL_5 -> shop.sell(player, slot, 5)
                 OP_SELL_10 -> shop.sell(player, slot, 10)
-                OP_SELL_X -> sendInputDialogue(player, true, "Enter the amount to sell:"){value ->
+                OP_SELL_X -> sendInputDialogue(player, InputType.AMOUNT, "Enter the amount to sell:"){value ->
                     val amt = value as Int
                     shop.sell(player, slot, amt)
                 }

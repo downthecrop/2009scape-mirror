@@ -1543,6 +1543,7 @@ fun sendInputDialogue(player: Player, type: InputType, prompt: String, handler: 
     }
 
     player.setAttribute("runscript", handler)
+    player.setAttribute("input-type", type)
 }
 
 /**

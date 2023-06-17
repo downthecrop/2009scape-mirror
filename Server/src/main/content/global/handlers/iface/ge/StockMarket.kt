@@ -159,15 +159,11 @@ class StockMarket : InterfaceListener {
                 183 -> updateOfferValue(player, tempOffer, (GrandExchange.getRecommendedPrice(tempOffer.itemID) * 1.05).toInt())
                 171 -> updateOfferValue(player, tempOffer, tempOffer.offeredValue - 1)
                 173 -> updateOfferValue(player, tempOffer, tempOffer.offeredValue + 1)
-                185 -> sendInputDialogue(player, false, "Enter the amount:"){value ->
+                185 -> sendInputDialogue(player, InputType.AMOUNT, "Enter the amount:"){value ->
                     if (player.interfaceManager.chatbox.id == 389) {
                         player.interfaceManager.openChatbox(Components.OBJDIALOG_389)
                     }
                     var s = value.toString()
-                    s = s.replace("k", "000")
-                    s = s.replace("K", "000")
-                    s = s.replace("m", "000000")
-                    s = s.replace("M", "000000")
                     updateOfferValue(player, tempOffer, s.toInt())
                     setAttribute(player, "ge-temp", tempOffer)
                 }
