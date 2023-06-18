@@ -558,13 +558,6 @@ public class Player extends Entity {
                 if (skullManager.isWildernessDisabled()) {
                     return;
                 }
-                if (skullManager.hasWildernessProtection()) {
-                    if (p.getSkullManager().isSkulled()) return;
-                    setAttribute (WILDERNESS_PROT_ATTR, false);
-                    setAttribute (WILDERNESS_HIGHER_NEXTFEE, true);
-                    sendMessage (colorize("%RYou feel the protection of Saradomin vanish as your will corrupts."));
-                    appearance.sync();
-                }
             }
         }
 
@@ -741,7 +734,10 @@ public class Player extends Entity {
                         if (!GameWorld.getSettings().getWild_pvp_enabled())
                             return false;
                         if (p.getSkullManager().hasWildernessProtection())
-                            return p.getProperties().getCombatPulse().getVictim().equals(this);
+                            return false;
+                        if (skullManager.hasWildernessProtection())
+                            return false;
+                        return true;
                     } else return false;
                 }
 		return super.isAttackable(entity, style, message);

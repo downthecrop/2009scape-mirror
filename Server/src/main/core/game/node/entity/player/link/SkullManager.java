@@ -3,7 +3,6 @@ package core.game.node.entity.player.link;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.state.EntityState;
-import core.game.world.update.flag.player.AppearanceFlag;
 import core.ServerConstants;
 
 import java.util.ArrayList;
@@ -126,21 +125,10 @@ public final class SkullManager {
 	 * @param level the level to set.
 	 */
 	public void setLevel(int level) {
-                if (this.level < 45 && level >= 45) {
-                    if (player.getAttribute(WILDERNESS_PROT_ATTR, false)) {
-                        player.sendMessage (colorize("%RYou feel the Will of Saradomin slip."));
-                    }
-                    setSkullCheckDisabled(true);
-                    setSkullIcon(1);
-                    deepWilderness = true;
-                } else if (this.level >= 45 && level < 45) {
-                    if (player.getAttribute(WILDERNESS_PROT_ATTR, false)) {
-                        player.sendMessage (colorize("%RYou feel the Will of Saradomin return."));
-                    }
-                    setSkullCheckDisabled(false);
-                    setSkullIcon(skulled ? 0 : -1);
-                    deepWilderness = false;
-                }
+                if (!deepWilderness && level >= 49)
+                    setDeepWilderness(true);
+                else if (deepWilderness && level < 48)
+                    setDeepWilderness(false);
 		this.level = level;
 	}
 
@@ -185,7 +173,7 @@ public final class SkullManager {
 	}
 
         public boolean hasWildernessProtection() {
-                return level < 45;
+                return level < 49;
         }
 
 	/**
@@ -205,7 +193,13 @@ public final class SkullManager {
 	}
 
         public boolean isDeepWilderness() {
-                return deepWilderness && ServerConstants.ENHANCED_WILDERNESS;
+                return deepWilderness;
+        }
+
+        public void setDeepWilderness (boolean deepWildy) {
+                setSkullIcon(deepWildy ? 1 : skulled ? 0 : -1);
+                setSkullCheckDisabled(deepWildy);
+                deepWilderness = deepWildy;
         }
 
 	/**
@@ -213,8 +207,6 @@ public final class SkullManager {
 	 * @param skulled The skulled to set.
 	 */
 	public void setSkulled(boolean skulled) {
-                if (player.getAttribute(WILDERNESS_PROT_ATTR, false) && skulled)
-                    player.sendMessage (colorize("%RYou feel the will of Saradomin slip as your will is corrupted."));
 		this.skulled = skulled;
 	}
 }
