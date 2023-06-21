@@ -169,10 +169,12 @@ public final class MusicPlayer {
 	 * @param entry The song.
 	 */
 	public void play(MusicEntry entry) {
-		PacketRepository.send(MusicPacket.class, new MusicContext(player, entry.getId()));
-		PacketRepository.send(StringPacket.class, new StringContext(player, entry.getName() + (player.isDebug() ? (" (" + entry.getId() + ")") : ""), 187, 14));
-		currentMusicId = entry.getId();
-		playing = true;
+		if (!looping || currentMusicId == entry.getId()) {
+			PacketRepository.send(MusicPacket.class, new MusicContext(player, entry.getId()));
+			PacketRepository.send(StringPacket.class, new StringContext(player, entry.getName() + (player.isDebug() ? (" (" + entry.getId() + ")") : ""), 187, 14));
+			currentMusicId = entry.getId();
+			playing = true;
+		}
 	}
 
 	/**
@@ -216,7 +218,7 @@ public final class MusicPlayer {
 		if(GameWorld.getTicks() % 20 == 0){
 			if(!isPlaying()){
 				try {
-					play((MusicEntry) unlocked.values().toArray()[new Random().nextInt(unlocked.values().size())]);
+					PacketRepository.send(MusicPacket.class, new MusicContext(player, currentMusicId));
 				} catch (Exception e){}
 			}
 		}

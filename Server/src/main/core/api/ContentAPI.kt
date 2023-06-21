@@ -70,6 +70,9 @@ import core.tools.*
 import core.game.world.update.flag.*
 import core.game.world.update.flag.context.*
 import core.game.requirement.*
+import core.net.packet.PacketRepository
+import core.net.packet.context.MusicContext
+import core.net.packet.out.MusicPacket
 import java.util.regex.*
 import java.io.*
 import kotlin.math.*
@@ -551,6 +554,15 @@ fun getWorldTicks(): Int {
  */
 fun getAudio(id: Int, volume: Int = 10, delay: Int = 1): Audio {
     return Audio(id, volume, delay)
+}
+
+/**
+ * Plays a jingle by id
+ * @param player the player to play the jingle for
+ * @param jingleId the jingle to play
+ */
+fun playJingle(player: Player, jingleId: Int) {
+    PacketRepository.send(MusicPacket::class.java, MusicContext(player, jingleId, true))
 }
 
 /**

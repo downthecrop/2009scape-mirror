@@ -8,6 +8,8 @@ import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.game.node.item.Item;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the captain barnaby dialogue plugin.
  * @author 'Vexia
@@ -82,6 +84,7 @@ public final class CaptainBarnabyDialogue extends DialoguePlugin {
 			if (player.getInventory().remove(COINS)) {
 				end();
 				player.getPacketDispatch().sendMessage("You pay 30 coins and board the ship.");
+				playJingle(player, 171);
 				Ships.ARDOUGNE_TO_BRIMHAVEN.sail(player);
 			}
 			break;

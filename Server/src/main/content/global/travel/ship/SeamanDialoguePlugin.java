@@ -10,6 +10,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the dialogue used to handle the sailing from and to karamja.
  *
@@ -148,6 +150,7 @@ public class SeamanDialoguePlugin extends DialoguePlugin {
     public void travel() {
         end();
         Ships.PORT_SARIM_TO_KARAMAJA.sail(player);
+        playJingle(player, 172);
     }
 
     @Override

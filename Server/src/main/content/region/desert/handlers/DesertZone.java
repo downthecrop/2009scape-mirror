@@ -17,6 +17,7 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
 
 /**
  * The desert zone map.
@@ -104,6 +105,7 @@ public final class DesertZone extends MapZone implements Plugin<Object> {
                 p.getInventory().add(new Item(i.getId() + 2));
                 p.animate(ANIMATION);
                 p.getPacketDispatch().sendMessage("You take a drink of water.");
+                p.getAudioManager().send(Sounds.LIQUID_2401, 1);
                 return true;
             }
         }

@@ -8,6 +8,8 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles a pest control squire's options.
  * @author Emperor
@@ -38,6 +40,7 @@ public final class PestControlSquire extends OptionHandler {
 		case "leave":
 			if (session == null) {
 				Ships.PEST_TO_PORT_SARIM.sail(player);
+				playJingle(player, 172);
 				return true;
 			}
 			player.getProperties().setTeleportLocation(session.getActivity().getLeaveLocation());

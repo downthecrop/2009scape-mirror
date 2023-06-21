@@ -33,6 +33,13 @@ class DoorConfigLoader {
             door.isAutoWalk = e["autowalk"]?.toString()?.toBoolean() ?: false
             door.questRequirement = e["questRequirement"]?.toString() ?: ""
             DOORS[door.id] = door
+            val replacedDoor = Door(door.replaceId)
+            replacedDoor.replaceId = door.id
+            replacedDoor.isFence = door.isFence
+            replacedDoor.isMetal = door.isMetal
+            replacedDoor.isAutoWalk = door.isAutoWalk
+            replacedDoor.questRequirement = door.questRequirement
+            DOORS[door.replaceId] = replacedDoor
             count++
         }
         log(this::class.java, Log.FINE,  "Parsed $count door configs.")

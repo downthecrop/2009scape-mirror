@@ -15,6 +15,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
+import org.rs09.consts.Sounds;
 
 /**
  * Represents the pulse used to smelt.
@@ -110,6 +111,7 @@ public class SmeltingPulse extends SkillPulse<Item> {
                 player.visualize(Animation.create(725), new Graphics(148, 96));
             } else {
                 player.animate(Animation.create(3243)); // Used to be 899 but that looked wonky and broken
+                player.getAudioManager().send(Sounds.FURNACE_2725, 1);
             }
         }
     }

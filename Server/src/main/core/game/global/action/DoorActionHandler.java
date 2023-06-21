@@ -15,6 +15,7 @@ import core.game.world.map.path.Pathfinder;
 import kotlin.Unit;
 import core.game.system.config.DoorConfigLoader;
 import core.game.world.GameWorld;
+import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.hasRequirement;
 
@@ -42,7 +43,14 @@ public final class DoorActionHandler {
         final Scenery second = (object.getId() == 1530 || object.getId() == 1531) ? null : getSecondDoor(object, player);
         Scenery o = null;
         if (object instanceof Constructed && (o = ((Constructed) object).getReplaced()) != null) {
-            player.getAudioManager().send(new Audio(43));
+            DoorConfigLoader.Door d = DoorConfigLoader.Companion.forId(object.getId());
+            if (d != null && d.isMetal()) {
+                player.getAudioManager().send(Sounds.IRON_DOOR_CLOSE_70);
+            } else if (d != null && d.isFence()){
+                player.getAudioManager().send(Sounds.GATE_CLOSE_66);
+            } else {
+                player.getAudioManager().send(60);
+            }
             SceneryBuilder.replace(object, o);
             if (second instanceof Constructed && (o = ((Constructed) second).getReplaced()) != null) {
                 SceneryBuilder.replace(second, o);
@@ -53,11 +61,20 @@ public final class DoorActionHandler {
         if (object.getDefinition().hasAction("close")) {
             if (second != null) {
                 player.getPacketDispatch().sendMessage("The doors appear to be stuck.");
+                player.getAudioManager().send(Sounds.DOOR_CREAK_61);
                 return;
             }
             DoorConfigLoader.Door d = DoorConfigLoader.Companion.forId(object.getId());
+            if (d != null && d.isMetal()) {
+                player.getAudioManager().send(Sounds.IRON_DOOR_OPEN_71);
+            } else if (d != null && d.isFence()){
+                player.getAudioManager().send(Sounds.GATE_OPEN_67);
+            } else {
+                player.getAudioManager().send(Sounds.DOOR_OPEN_62);
+            }
             if (d == null) {
                 player.getPacketDispatch().sendMessage("The door appears to be stuck.");
+                player.getAudioManager().send(Sounds.DOOR_CREAK_61);
                 return;
             }
             int firstDir = (object.getRotation() + 3) % 4;
@@ -76,9 +93,11 @@ public final class DoorActionHandler {
             return;
         }
         if (d.isMetal()) {
-            player.getAudioManager().send(new Audio(71));
+            player.getAudioManager().send(Sounds.IRON_DOOR_OPEN_71);
+        } else if (d.isFence()){
+            player.getAudioManager().send(Sounds.GATE_OPEN_67);
         } else {
-            player.getAudioManager().send(new Audio(81));
+            player.getAudioManager().send(Sounds.DOOR_OPEN_62);
         }
         if (second != null) {
             DoorConfigLoader.Door s = DoorConfigLoader.Companion.forId(second.getId());
@@ -103,7 +122,17 @@ public final class DoorActionHandler {
         entity.lock(4);
         final Location loc = entity.getLocation();
         if (entity instanceof Player) {
-            ((Player) entity).getAudioManager().send(new Audio(3419));
+            DoorConfigLoader.Door d = DoorConfigLoader.Companion.forId(object.getId());
+            if (d != null && d.isMetal()) {
+                ((Player) entity).getAudioManager().send(Sounds.IRON_DOOR_OPEN_71, 10);
+                ((Player) entity).getAudioManager().send(Sounds.IRON_DOOR_CLOSE_70, 10, 60);
+            } else if (d != null && d.isFence()){
+                ((Player) entity).getAudioManager().send(Sounds.GATE_OPEN_67, 10);
+                ((Player) entity).getAudioManager().send(Sounds.GATE_CLOSE_66, 10, 60);
+            } else {
+                ((Player) entity).getAudioManager().send(Sounds.DOOR_OPEN_62,10);
+                ((Player) entity).getAudioManager().send(60,10,60);
+            }
             entity.asPlayer().logoutListeners.put("autowalk", player -> {
                 player.setLocation(loc);
                 return Unit.INSTANCE;

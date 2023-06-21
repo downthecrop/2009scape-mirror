@@ -9,6 +9,8 @@ import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.game.world.map.Location;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the dialogue plugin used to handle the customs officer.
  * @author Vexia
@@ -184,6 +186,11 @@ public final class CustomsOfficerDialogue extends DialoguePlugin {
 			}
 			player.getPacketDispatch().sendMessage("You pay " + getPrice() + " coins and board the ship.");
 			ship.sail(player);
+			if(ship == Ships.BRIMHAVEN_TO_ARDOUGNE) {
+				playJingle(player, 171);
+			} else {
+				playJingle(player, 172);
+			}
 			break;
 		case 220:
 			end();

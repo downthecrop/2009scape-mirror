@@ -7,6 +7,7 @@ import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import org.rs09.consts.Sounds
 
 /**
  * Handles filling most water sources.
@@ -44,6 +45,13 @@ class WaterSourceListener : InteractionListener {
                         animate(player, animation)
                         sendMessage(player, formatMsgText(used.name, vessel.fillMsg))
                         addItemOrDrop(player, vessel.output)
+                            if(with.name.contains("well", ignoreCase = true)) {
+                                playAudio(player, getAudio(Sounds.WELL_FILL_2615, 1))
+                            }
+                            else {
+                                playAudio(player, getAudio(Sounds.TAP_FILL_2609, 1))
+                            }
+
                     }
                     return !vessel.autofill || amountInInventory(player, used.id) == 0
                 }

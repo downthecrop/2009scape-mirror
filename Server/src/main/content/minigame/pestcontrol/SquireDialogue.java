@@ -7,6 +7,8 @@ import core.game.node.entity.npc.NPC;
 import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles the SquireDialogue dialogue.
  * @author 'Vexia
@@ -94,6 +96,7 @@ public class SquireDialogue extends DialoguePlugin {
 		case 503:
 			end();
 			Ships.PEST_TO_PORT_SARIM.sail(player);
+			playJingle(player, 172);
 			break;
 		case 1:
 			switch (buttonId) {
@@ -157,6 +160,7 @@ public class SquireDialogue extends DialoguePlugin {
 		case 24:
 			end();
 			Ships.PORT_SARIM_TO_PEST_CONTROL.sail(player);
+			playJingle(player, 172);
 			break;
 		case 200:
 			end();

@@ -13,6 +13,7 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import kotlin.Unit;
+import org.rs09.consts.Sounds;
 
 /**
  * Represents the glass making interface plugin.
@@ -105,6 +106,7 @@ public final class GlassInterface extends ComponentPlugin {
 					return true;
 				}
 				player.animate(ANIMATION);
+				player.getAudioManager().send(Sounds.GLASSBLOWING_2724);
 				player.getInventory().remove(MOLTEN_GLASS);
 				player.getInventory().add(new Item(glass.getProduct(), 1));
 				player.getSkills().addExperience(Skills.CRAFTING, glass.getExperience(), true);

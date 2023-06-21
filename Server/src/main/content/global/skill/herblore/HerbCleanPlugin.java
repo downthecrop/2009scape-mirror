@@ -19,7 +19,6 @@ import core.tools.RandomFunction;
  */
 @Initializable
 public final class HerbCleanPlugin extends OptionHandler {
-    private static final int[] SFX_IDS = new int[] { 5153, 5155, 5157 };
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
@@ -42,7 +41,7 @@ public final class HerbCleanPlugin extends OptionHandler {
 		if (removeItem(player, node.asItem(), Container.INVENTORY)){
 			player.getSkills().addExperience(Skills.HERBLORE, exp, true);
 			addItem(player, herb.getProduct().getId(), 1, Container.INVENTORY);
-            player.getAudioManager().send(SFX_IDS[RandomFunction.random(SFX_IDS.length)], 1);
+            player.getAudioManager().send(5153, 1);
 			player.getPacketDispatch().sendMessage("You clean the dirt from the " + herb.getProduct().getName().toLowerCase().replace("clean", "").trim() + " leaf.");
 		}
 		player.lock(1);

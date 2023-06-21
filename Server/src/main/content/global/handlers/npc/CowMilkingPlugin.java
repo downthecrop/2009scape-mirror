@@ -13,6 +13,7 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
 import core.plugin.ClassScanner;
+import org.rs09.consts.Sounds;
 
 /**
  * Represents the plugin used to milk a cow.
@@ -55,6 +56,7 @@ public final class CowMilkingPlugin extends OptionHandler {
 		}
 
 		player.animate(ANIMATION);
+		player.getAudioManager().send(Sounds.MILK_COW_372);
 		player.getPulseManager().run(new Pulse(8, player) {
 			@Override
 			public boolean pulse() {

@@ -193,7 +193,7 @@
   },
   {
     "id": "1553",
-    "replaceId": "1552",
+    "replaceId": "1556",
     "fence": "true",
     "metal": "false"
   },
@@ -332,13 +332,13 @@
   {
     "id": "2050",
     "replaceId": "15511",
-    "fence": "false",
+    "fence": "true",
     "metal": "false"
   },
   {
     "id": "2051",
     "replaceId": "15513",
-    "fence": "false",
+    "fence": "true",
     "metal": "false"
   },
   {
@@ -1238,12 +1238,12 @@
   {
     "id": "7049",
     "replaceId": "7051",
-    "fence": "false",
+    "fence": "true",
     "metal": "false"
   },
   {
     "id": "7050",
-    "replaceId": "23919",
+    "replaceId": "7052",
     "fence": "true",
     "metal": "false"
   },
@@ -1340,7 +1340,7 @@
   {
     "id": "8810",
     "replaceId": "8812",
-    "fence": "false",
+    "fence": "true",
     "metal": "false"
   },
   {
@@ -2368,10 +2368,24 @@
     "metal": "true"
   },
   {
+    "id": "26081",
+    "replaceId": "26083",
+    "fence": "false",
+    "metal": "true",
+    "autowalk": "true"
+  },
+  {
+    "id": "26082",
+    "replaceId": "26084",
+    "fence": "false",
+    "metal": "true",
+    "autowalk": "true"
+  },
+  {
     "id": "26130",
     "replaceId": "26132",
     "fence": "false",
-    "metal": "false"
+    "metal": "true"
   },
   {
     "id": "26131",
@@ -2802,7 +2816,7 @@
   {
     "id": "34780",
     "replaceId": "34778",
-    "fence": "false",
+    "fence": "true",
     "metal": "false"
   },
   {

@@ -16,7 +16,7 @@ import core.tools.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import static core.api.ContentAPIKt.requireQuest;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Represents a class used to charter ships.
@@ -341,6 +341,7 @@ public final class ShipCharter {
 		 */
 		public void sail(final Player player) {
 			player.lock(7);
+			playJingle(player, 171);
 			Location start = player.getLocation();
 			GameWorld.getPulser().submit(new Pulse(1) {
 				int count = 0;

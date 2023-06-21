@@ -1,10 +1,10 @@
 package content.region.fremennik.rellekka.handlers
 
 import core.api.*
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListener
 import core.game.world.map.Location
 import org.rs09.consts.NPCs
-import core.game.interaction.InteractionListener
-import core.game.interaction.IntType
 
 /**
  * File to be used for anything Rellekka related.
@@ -51,11 +51,13 @@ class RellekkaListeners : InteractionListener {
             if (!hasRequirement(player, "Fremennik Trials"))
                 return@on true
             RellekkaUtils.sail(player, RellekkaDestination.RELLEKKA_TO_NEITIZNOT)
+            playJingle(player, 171)
             return@on true
         }
 
         on(NPCs.MARIA_GUNNARS_5507, IntType.NPC, "ferry-rellekka"){ player, node ->
             RellekkaUtils.sail(player, RellekkaDestination.NEITIZNOT_TO_RELLEKKA)
+            playJingle(player, 171)
             return@on true
         }
 
@@ -63,11 +65,13 @@ class RellekkaListeners : InteractionListener {
             if (!hasRequirement(player, "Fremennik Trials"))
                 return@on true
             RellekkaUtils.sail(player, RellekkaDestination.RELLEKKA_TO_JATIZSO)
+            playJingle(player, 171)
             return@on true
         }
 
         on(NPCs.MORD_GUNNARS_5482, IntType.NPC, "ferry-rellekka"){ player, node ->
             RellekkaUtils.sail(player, RellekkaDestination.JATIZSO_TO_RELLEKKA)
+            playJingle(player, 171)
             return@on true
         }
     }

@@ -9,6 +9,8 @@ import core.game.node.entity.player.link.diary.DiaryType;
 import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the dialogue plugin used for the monk of entrana dialogue.
  * @author 'Vexia
@@ -105,6 +107,7 @@ public final class MonkOfEntranaDialogue extends DialoguePlugin {
 		case 25:
 			end();
 			Ships.PORT_SARIM_TO_ENTRANA.sail(player);
+			playJingle(player, 172);
 			if (!player.getAchievementDiaryManager().getDiary(DiaryType.FALADOR).isComplete(0, 14)) {
 				player.getAchievementDiaryManager().getDiary(DiaryType.FALADOR).updateTask(player, 0, 14, true);
 			}
@@ -132,6 +135,7 @@ public final class MonkOfEntranaDialogue extends DialoguePlugin {
 		case 511:
 			end();
 			Ships.ENTRANA_TO_PORT_SARIM.sail(player);
+			playJingle(player, 172);
 			break;
 		case 520:
 			end();

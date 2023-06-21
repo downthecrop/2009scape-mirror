@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
 import java.util.HashMap;
 
@@ -28,6 +29,7 @@ public final class EmptyOptionPlugin extends OptionHandler {
         }
 		if(EmptyItem.emptyItemMap.get(node.getId()) != null){
 			player.getInventory().remove(node.asItem());
+			player.getAudioManager().send(Sounds.LIQUID_2401, 1);
 			player.getInventory().add(EmptyItem.getEmpty(node.getId()));
 			player.getPacketDispatch().sendMessage(EmptyItem.getEmptyMessage(node.getId()));
 		} else {

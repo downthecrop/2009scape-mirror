@@ -10,6 +10,7 @@ import org.rs09.consts.Items
 import core.game.dialogue.SkillDialogueHandler
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import org.rs09.consts.Sounds
 
 class AmmoMouldOnFurnace : InteractionListener {
     private val furnaces = intArrayOf(4304, 6189, 11010, 11666, 12100, 12809, 18497, 26814, 30021, 30510, 36956, 37651)  // abstract when smelting converted to kotlin
@@ -39,6 +40,7 @@ class AmmoMouldOnFurnace : InteractionListener {
                     0 -> {
                         sendMessage(player,"You heat the steel bar into a liquid state.")
                         animate(player, 3243) // 899 would be preferable but the arms spaz out
+                        player.audioManager.send(Sounds.FURNACE_2725, 1)
                     }
                     3 -> {
                         sendMessage(player,"You pour the molten metal into your cannonball mould.")
