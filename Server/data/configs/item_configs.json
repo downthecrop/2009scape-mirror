@@ -66721,7 +66721,7 @@
     "id": "7397"
   },
   {
-    "requirements": "{1,40}-{6,20}",
+    "requirements": "{1,20}-{6,40}",
     "ge_buy_limit": "2",
     "examine": "Enchanted Wizards robes.",
     "durability": null,
@@ -66753,7 +66753,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,40}-{6,20}",
+    "requirements": "{1,20}-{6,40}",
     "ge_buy_limit": "2",
     "examine": "A three pointed hat of magic.",
     "grand_exchange_price": "8845",
@@ -90437,6 +90437,7 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{1,40}",
     "remove_head": "true",
     "examine": "Protective headwear made from crabs. Better than it sounds.",
     "durability": null,
@@ -90452,6 +90453,7 @@
     "bonuses": "0,0,0,-6,-2,30,32,27,-1,30,0,0,0,0,0"
   },
   {
+    "requirements": "{1,40}-{4,40}",
     "remove_head": "true",
     "examine": "A helm fit for any Fremennik ranger.",
     "durability": null,
@@ -91581,6 +91583,7 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{1,40}",
     "remove_head": "true",
     "examine": "A rune helmet with a heraldic design.",
     "grand_exchange_price": "30298",
@@ -91594,6 +91597,7 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{1,40}",
     "remove_head": "true",
     "examine": "A rune helmet with a heraldic design.",
     "grand_exchange_price": "26127",
@@ -91608,6 +91612,7 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{1,40}",
     "remove_head": "true",
     "examine": "A rune helmet with a heraldic design.",
     "grand_exchange_price": "37333",
@@ -91622,6 +91627,7 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{1,40}",
     "remove_head": "true",
     "examine": "A rune helmet with a heraldic design.",
     "grand_exchange_price": "29600",
@@ -91636,6 +91642,7 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{1,40}",
     "remove_head": "true",
     "examine": "A rune helmet with a heraldic design.",
     "grand_exchange_price": "41325",
@@ -92199,6 +92206,7 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{1,40}",
     "examine": "Rune platebody in the colours of Zamorak.",
     "durability": null,
     "weight": "9",
@@ -92214,6 +92222,7 @@
     "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,0,0,0,0,0"
   },
   {
+    "requirements": "{1,40}",
     "examine": "Rune platebody in the colours of Saradomin.",
     "durability": null,
     "weight": "9.07",
@@ -92229,6 +92238,7 @@
     "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,0,0,0,0,0"
   },
   {
+    "requirements": "{1,40}",
     "examine": "Rune platebody in the colours of Guthix.",
     "durability": null,
     "weight": "9.07",
@@ -92244,6 +92254,7 @@
     "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,0,0,0,0,0"
   },
   {
+    "requirements": "{1,40}",
     "examine": "Rune platebody with complete gold trim &amp; plating.",
     "durability": null,
     "weight": "10",
@@ -92259,6 +92270,7 @@
     "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,0,0,0,0,0"
   },
   {
+    "requirements": "{5,20}",
     "remove_sleeves": "true",
     "examine": "Blessed vestments of Saradomin.",
     "grand_exchange_price": "106389",
@@ -92271,6 +92283,7 @@
     "equipment_slot": "4"
   },
   {
+    "requirements": "{5,20}",
     "remove_sleeves": "true",
     "examine": "Zamorak Vestments.",
     "grand_exchange_price": "151000",
@@ -92284,6 +92297,7 @@
     "equipment_slot": "4"
   },
   {
+    "requirements": "{5,20}",
     "remove_sleeves": "true",
     "examine": "Blessed vestments of Guthix.",
     "grand_exchange_price": "80181",
@@ -92297,6 +92311,7 @@
     "equipment_slot": "4"
   },
   {
+    "requirements": "{1,40}-{4,70}",
     "remove_sleeves": "true",
     "examine": "Zamorak blessed dragonhide body armour.",
     "grand_exchange_price": "84966",
@@ -92311,6 +92326,7 @@
     "equipment_slot": "4"
   },
   {
+    "requirements": "{1,40}-{4,70}",
     "shop_price": "13000",
     "examine": "Saradomin blessed dragonhide body armour.",
     "durability": null,
@@ -92327,6 +92343,7 @@
     "bonuses": "0,0,0,-15,30,55,47,60,50,55,0,0,0,0,0"
   },
   {
+    "requirements": "{1,40}-{4,70}",
     "shop_price": "13",
     "examine": "Guthix blessed dragonhide body armour.",
     "durability": null,
@@ -92342,6 +92359,7 @@
     "bonuses": "0,0,0,-15,30,55,47,60,50,55,0,0,0,0,0"
   },
   {
+    "requirements": "{4,40}",
     "lendable": "true",
     "examine": "Endorsed by Robin Hood.",
     "grand_exchange_price": "3070557",
@@ -92355,6 +92373,7 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{1,40}",
     "examine": "Rune platebody with gold trim.",
     "durability": null,
     "weight": "9.07",
@@ -92370,6 +92389,7 @@
     "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,0,0,0,0,0"
   },
   {
+    "requirements": "{1,40}",
     "examine": "Rune platebody with trim.",
     "durability": null,
     "weight": "9.07",
@@ -121436,7 +121456,7 @@
     "id": "13867",
     "stand_turn_anim": "1209",
     "bonuses": "13,-1,65,18,0,5,7,4,18,0,0,72,0,0,10",
-    "requirements": "{6,78}",
+    "requirements": "{0,78}-{6,78}",
     "shop_price": "300000",
     "durability": null,
     "destroy": "false",
@@ -121447,7 +121467,7 @@
   },
   {
     "destroy_message": "Drop",
-    "requirements": "{6,78}",
+    "requirements": "{0,78}-{6,78}",
     "shop_price": "300000",
     "examine": "This item degrades in combat, and will turn to dust.",
     "grand_exchange_price": "2116989",
@@ -121460,6 +121480,7 @@
     "id": "13868"
   },
   {
+    "requirements": "{0,78}-{6,78}",
     "turn90cw_anim": "1207",
     "examine": "This item degrades in combat, and will turn to dust.",
     "walk_anim": "1205",
