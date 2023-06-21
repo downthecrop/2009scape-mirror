@@ -819,6 +819,21 @@ fun playAudio(player: Player, audio: Audio, global: Boolean = false) {
 }
 
 /**
+ * Plays the given Audio for the given Entity
+ * @param player the player to play the audio for
+ * @param audio the audio to play
+ * @param volume the volume
+ * @param delay the delay
+ * @param global if other nearby entities should be able to hear it
+ * @param location the location where the audio will play
+ * @param radius the distance the audio can be heard from the given location
+ */
+@JvmOverloads
+fun playAudio(player: Player, audio: Int, volume: Int = 10, delay: Int = 0, global: Boolean = false, location: Location? = null, radius: Int = 15) {
+    player.audioManager.send(audio, volume, delay, global, location, radius)
+}
+
+/**
  * Opens a dialogue with the given dialogue key or dialogue file, depending which is passed.
  * @param player the player to open the dialogue for
  * @param dialogue either the dialogue key or an instance of a DialogueFile

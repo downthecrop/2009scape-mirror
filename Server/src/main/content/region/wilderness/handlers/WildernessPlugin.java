@@ -12,8 +12,9 @@ import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
-import static core.api.ContentAPIKt.hasRequirement;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Represents a plugin used to handle wilderness nodes.
@@ -120,6 +121,8 @@ public final class WildernessPlugin extends OptionHandler {
 				switch (id) {
 				case 1816:// kbd lever.
 					if (player.getLocation().withinDistance(LOCATIONS[5])) {
+						animate(player, 2140, false);
+						playAudio(player, Sounds.LEVER_2400);
 						player.getPacketDispatch().sendMessage("You pull the lever...");
 						player.getTeleporter().send(LOCATIONS[4], TeleportType.NORMAL);
 						player.getPacketDispatch().sendMessage("... and teleport into the lair of the King Black Dragon!", 5);
@@ -127,6 +130,8 @@ public final class WildernessPlugin extends OptionHandler {
 					break;
 				case 1817:
 					if (player.getLocation().withinDistance(LOCATIONS[4])) {
+						animate(player, 2140, false);
+						playAudio(player, Sounds.LEVER_2400);
 						player.getPacketDispatch().sendMessage("You pull the lever...");
 						player.getTeleporter().send(LOCATIONS[5], TeleportType.NORMAL);
 						player.getPacketDispatch().sendMessage("... and teleport out of the lair of the King Black Dragon!", 5);

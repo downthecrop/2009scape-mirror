@@ -117,6 +117,19 @@ public class AudioManager {
 	}
 
 	/**
+	 * Plays the given Audio for the given Entity.
+	 * @param audioId the audio to play.
+	 * @param volume the volume.
+	 * @param delay the delay.
+	 * @param global if other nearby entities should be able to hear it.
+	 * @param location the location where the audio will play.
+	 * @param radius the distance the audio can be heard from the given location.
+	 */
+	public void send(int audioId, int volume, int delay, boolean global, Location location, int radius) {
+		send(new Audio(audioId, volume, delay, radius), global, location);
+	}
+
+	/**
 	 * Gets the player.
 	 * @return the player
 	 */
