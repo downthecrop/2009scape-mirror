@@ -205,8 +205,8 @@ public final class DuelSession extends ComponentPlugin {
 	 */
 	public void heal(Player p) {
 		p.fullRestore();
-		if (p.getStateManager().hasState(EntityState.POISONED)) {
-			p.getStateManager().remove(EntityState.POISONED);
+		if (isPoisoned(p)) {
+                    curePoison(p);
 		}
 		p.getSkills().restore();
 	}

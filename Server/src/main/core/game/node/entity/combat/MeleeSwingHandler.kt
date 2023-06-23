@@ -119,7 +119,7 @@ open class MeleeSwingHandler
                     damage = 48
                 }
                 if (damage > -1 && RandomFunction.random(10) < 4) {
-                    victim.stateManager.register(EntityState.POISONED, false, damage, entity)
+                    applyPoison (victim, entity, damage)
                 }
             }
         }

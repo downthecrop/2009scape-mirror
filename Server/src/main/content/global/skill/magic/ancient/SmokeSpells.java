@@ -18,6 +18,8 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles the Smoke spells from the Ancient spellbook.
  * @author Emperor
@@ -111,7 +113,7 @@ public final class SmokeSpells extends CombatSpell {
 	@Override
 	public void fireEffect(Entity entity, Entity victim, BattleState state) {
 		if (state.getEstimatedHit() > -1) {
-			victim.getStateManager().register(EntityState.POISONED, false, type.ordinal() >= SpellType.BLITZ.ordinal() ? 48 : 28, entity);
+                    applyPoison(victim, entity, type.ordinal() >= SpellType.BLITZ.ordinal() ? 4 : 2);
 		}
 	}
 

@@ -74,6 +74,8 @@ import core.game.requirement.*
 import core.net.packet.PacketRepository
 import core.net.packet.context.MusicContext
 import core.net.packet.out.MusicPacket
+import core.game.system.timer.*
+import core.game.system.timer.impl.*
 import java.util.regex.*
 import java.io.*
 import kotlin.math.*
@@ -961,6 +963,34 @@ fun removeAttribute(entity: Entity, attribute: String) {
 
 fun removeAttributes(entity: Entity, vararg attributes: String) {
     for (attribute in attributes) removeAttribute(entity, attribute)
+}
+
+fun registerTimer (entity: Entity, timer: RSTimer) {
+    entity.timers.registerTimer (timer)
+}
+
+inline fun <reified T> hasTimerActive (entity: Entity) : Boolean {
+    return getTimer<T>(entity) != null
+}
+
+inline fun <reified T> getTimer (entity: Entity) : T? {
+    return entity.timers.getTimer<T>()
+}
+
+inline fun <reified T> removeTimer (entity: Entity) {
+    entity.timers.removeTimer<T>()
+}
+
+fun hasTimerActive (entity: Entity, identifier: String) : Boolean {
+    return getTimer (entity, identifier) != null
+}
+
+fun getTimer (entity: Entity, identifier: String) : RSTimer? {
+    return entity.timers.getTimer(identifier)
+}
+
+fun removeTimer (entity: Entity, identifier: String) {
+    entity.timers.removeTimer(identifier)
 }
 
 /**
@@ -2688,6 +2718,36 @@ fun stun(entity: Entity, ticks: Int) {
 
 fun isStunned(entity: Entity) : Boolean {
     return entity.clocks[Clocks.STUN] >= getWorldTicks()
+}
+
+/**
+ * Applies poison to the target. (In other words, creates and starts a poison timer.)
+ * @param entity the entity who will be receiving the poison damage.
+ * @param source the entity to whom credit for the damage should be awarded (the attacker.) You should award credit to the victim if the poison is sourceless (e.g. from a trap or plant or something)
+ * @param severity the severity of the poison damage. Severity is not a 1:1 representation of damage, rather the formula `floor((severity + 4) / 5)` is used. Severity is decreased by 1 with each application of the poison, and ends when it reaches 0.
+ * @see To those whe ask "why severity instead of plain damage?" to which the answer is: severity is how it works authentically, and allows for scenarios where, e.g. a poison should hit 6 once, and then drop to 5 immediately.
+**/
+fun applyPoison (entity: Entity, source: Entity, severity: Int) {
+    val existingTimer = getTimer<Poison>(entity)
+    
+    if (existingTimer != null) {
+        existingTimer.severity = severity
+        existingTimer.damageSource = source
+    } else {
+        registerTimer(entity, Poison.getTimer(source, severity))
+    }
+}
+
+fun isPoisoned (entity: Entity) : Boolean {
+    return getTimer<Poison>(entity) != null
+}
+
+fun curePoison (entity: Entity) {
+    if (!hasTimerActive<Poison>(entity))
+        return
+    removeTimer<Poison>(entity)
+    if (entity is Player)
+        sendMessage(entity, "Your poison has been cured.")
 }
 
 fun setCurrentScriptState(entity: Entity, state: Int) {

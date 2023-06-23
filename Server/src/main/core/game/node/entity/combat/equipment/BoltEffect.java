@@ -13,6 +13,8 @@ import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
 import org.rs09.consts.NPCs;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents a bolt effect.
  * @author Vexia
@@ -107,7 +109,7 @@ public enum BoltEffect {
 	EMERALD(9241, new Graphics(752), new Audio(2919)) {
 		@Override
 		public void impact(BattleState state) {
-			state.getVictim().getStateManager().register(EntityState.POISONED, false, 68, state.getAttacker());
+                        applyPoison(state.getVictim(), state.getAttacker(), 40);
 			super.impact(state);
 		}
 	},

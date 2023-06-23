@@ -117,7 +117,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
                     animate(player, URN_BIT)
                     sendMessage(player, "You've been bitten by something moving around in the urn.")
                     impact(player, RandomFunction.random(1,5))
-                    player.stateManager.register(EntityState.POISONED, true, 20, player)
+                    applyPoison(player, player, 2)
                 }
                 else {
                     animate(player, URN_SUCCESS)
@@ -169,7 +169,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
                     animate(player, URN_BIT)
                     sendMessage(player, "You've been bitten by something moving around in the urn.")
                     impact(player, RandomFunction.random(1,5))
-                    player.stateManager.register(EntityState.POISONED, true, 20, player)
+                    applyPoison(player, player, 2)
                 }
                 else {
                     animate(player, URN_SUCCESS)

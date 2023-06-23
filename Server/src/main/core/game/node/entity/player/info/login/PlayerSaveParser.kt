@@ -299,6 +299,7 @@ class PlayerSaveParser(val player: Player) {
         val bOre = coreData["blastOre"] as? JSONArray
         val bCoal = coreData["blastCoal"] as? JSONArray
         val varpData = coreData["varp"] as? JSONArray
+        val timerData = coreData["timers"] as? JSONObject
         val location = coreData["location"] as String
         val bankTabData = coreData["bankTabs"]
         if (bankTabData != null) {
@@ -342,6 +343,9 @@ class PlayerSaveParser(val player: Player) {
                 player.saveVarp[index] = true
             }
         }
+
+        if (timerData != null)
+            player.timers.parseTimers(timerData)
     }
 
     fun parseSkills() {

@@ -21,7 +21,6 @@ import static core.api.ContentAPIKt.*;
  * Handles the incubator.
  * @author Vexia
  */
-@Initializable
 public class IncubatorPlugin extends OptionHandler {
 
 	@Override

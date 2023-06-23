@@ -9,6 +9,8 @@ import core.game.system.task.NodeTask;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * The fire types.
  * @author Emperor
@@ -47,7 +49,7 @@ public enum FireType {
 	TOXIC_BREATH(new Animation(82, Priority.HIGH), 394, new NodeTask(0) {
 		@Override
 		public boolean exec(Node node, Node... n) {
-			((Entity) node).getStateManager().register(EntityState.POISONED, false, 80, (Entity) n[0]);
+                        applyPoison ((Entity) node, (Entity) n[0], 40);
 			return true;
 		}
 	}),

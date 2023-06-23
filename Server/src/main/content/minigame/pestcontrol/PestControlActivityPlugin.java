@@ -30,6 +30,8 @@ import core.plugin.ClassScanner;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
 
+import static core.api.ContentAPIKt.*;
+
 
 /**
  * Handles the Pest Control activity.
@@ -147,8 +149,8 @@ public final class PestControlActivityPlugin extends ActivityPlugin {
 			p.removeAttribute("pc_zeal");
 			p.removeExtension(PestControlSession.class);
 			p.fullRestore();
-			if (p.getStateManager().hasState(EntityState.POISONED)) {
-				p.getStateManager().remove(EntityState.POISONED);
+			if (isPoisoned(p)) {
+                            curePoison(p);
 			}
 			PulseManager.cancelDeathTask(p);
 			GameWorld.getPulser().submit(new Pulse(1, p) {

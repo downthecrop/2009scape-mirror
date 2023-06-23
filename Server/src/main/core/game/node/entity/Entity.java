@@ -30,6 +30,7 @@ import core.game.world.update.flag.context.Graphics;
 import core.game.world.update.flag.*;
 import core.game.node.entity.combat.CombatSwingHandler;
 import core.game.world.update.UpdateMasks;
+import core.game.system.timer.TimerManager;
 
 import java.util.*;
 
@@ -118,7 +119,7 @@ public abstract class Entity extends Node {
 	 * The mapping of event types to event hooks
 	 */
 	private HashMap<Class<?>, ArrayList<EventHook>> hooks = new HashMap<>();
-
+        public TimerManager timers = new TimerManager(this);
 
 	/**
 	 * If the entity is invisible.
@@ -221,6 +222,7 @@ public abstract class Entity extends Node {
 		Location old = location != null ? location.transform(0, 0, 0) : Location.create(0,0,0);
 		walkingQueue.update();
 		scripts.postMovement(!Objects.equals(location, old));
+                timers.processTimers();
 		updateMasks.prepare(this);
 	}
 
@@ -261,6 +263,8 @@ public abstract class Entity extends Node {
 	 */
 	public void fullRestore() {
 		skills.restore();
+                timers.removeTimer("poison");
+                timers.removeTimer("poison:immunity");
 	}
 
 	/**

@@ -13,6 +13,8 @@ import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the Spirit Scorpion familiar.
  * @author Vexia
@@ -49,7 +51,7 @@ public class SpiritScorpionNPC extends Familiar {
 			if (isCharged() && new Item(weapon.getId() + 6).getName().startsWith(weapon.getName())) {
 				final Entity victim = state.getVictim();
 				setCharged(false);
-				victim.getStateManager().register(EntityState.POISONED, false, 10, owner);
+                                applyPoison(victim, owner, 1);
 			}
 		}
 	}

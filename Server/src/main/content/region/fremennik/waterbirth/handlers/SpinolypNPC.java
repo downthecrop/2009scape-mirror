@@ -14,6 +14,8 @@ import core.tools.RandomFunction;
 import core.game.node.entity.combat.CombatSwingHandler;
 import core.game.node.entity.combat.MultiSwingHandler;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents a spinolyp npc.
  * @author Vexia
@@ -147,7 +149,7 @@ public final class SpinolypNPC extends AbstractNPC {
 				victim.getSkills().decrementPrayerPoints(1);
 			} else {
 				if (RandomFunction.random(20) == 5) {
-					victim.getStateManager().register(EntityState.POISONED, false, 68, entity);
+                                        applyPoison(victim, entity, 30);
 				}
 			}
 		}

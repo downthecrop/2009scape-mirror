@@ -1,7 +1,7 @@
 package core.game.node.entity.combat
 
 import content.global.skill.skillcapeperks.SkillcapePerks
-import core.api.log
+import core.api.*
 import core.game.container.impl.EquipmentContainer
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.equipment.*
@@ -125,7 +125,7 @@ open class RangeSwingHandler
         if (state.ammunition != null && entity is Player) {
             val damage = state.ammunition.poisonDamage
             if (state.estimatedHit > 0 && damage > 8 && RandomFunction.random(10) < 4) {
-                victim.stateManager.register(EntityState.POISONED, false, damage, entity)
+                applyPoison (victim, entity, damage)
             }
         }
         super.adjustBattleState(entity, victim, state)

@@ -191,6 +191,11 @@ object Repository {
         } else playerNames[name.toLowerCase().replace(" ".toRegex(), "_")]
     }
 
+    @JvmStatic
+    fun getPlayerByUid(uid: Int) : Player? {
+        return uid_map[uid]
+    }
+
     /**
      * Gets the renderableNpcs.
      * @return The renderableNpcs.

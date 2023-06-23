@@ -10,6 +10,8 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the Stranger Plant familiar.
  * @author Aero
@@ -45,7 +47,7 @@ public class StrangerPlantNPC extends Forager {
 		}
 		Entity target = special.getTarget();
 		if (RandomFunction.random(2) == 1) {
-			target.getStateManager().register(EntityState.POISONED, false, 40, target);
+                    applyPoison(target, owner, 20);
 		}
 		animate(Animation.create(8211));
 		Projectile.ranged(this, target, 1508, 50, 40, 1, 45).send();

@@ -28,7 +28,7 @@ class StateRepository : StartupListener{
         fun forKey(key: String, player: Player): State?{
             val state = states[key]
             if(player.hasActiveState(key)){
-                return null
+                return states[key]
             }
             if(state != null){
                 val clazz = state.newInstance(player)

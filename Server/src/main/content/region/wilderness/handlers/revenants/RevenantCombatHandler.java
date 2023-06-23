@@ -14,6 +14,8 @@ import core.game.world.update.flag.context.Graphics;
 import core.game.node.entity.combat.MultiSwingHandler;
 import core.game.world.GameWorld;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles the multi swing combat handler for revenants.
  * @author Vexia
@@ -71,8 +73,8 @@ public class RevenantCombatHandler extends MultiSwingHandler {
 				}
 			}
 		}
-		if (!victim.getStateManager().hasState(EntityState.POISONED) && (WildernessZone.getWilderness(entity) >= 50 || entity.getId() == 6998)) {
-			victim.getStateManager().register(EntityState.POISONED, false, 68, entity);
+		if (!isPoisoned(victim) && (WildernessZone.getWilderness(entity) >= 50 || entity.getId() == 6998)) {
+                        applyPoison(victim, entity, 6);
 		}
 		super.impact(entity, victim, state);
 	}

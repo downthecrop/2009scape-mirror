@@ -679,6 +679,8 @@ public class Player extends Entity {
 		getPrayer().reset();
 		super.finalizeDeath(killer);
 		appearance.sync();
+                timers.removeTimer("poison");
+                timers.removeTimer("poison:immunity");
 		if (!getSavedData().getGlobalData().isDeathScreenDisabled()) {
 			getInterfaceManager().open(new Component(153));
 		}
@@ -747,7 +749,7 @@ public class Player extends Entity {
 
 	@Override
 	public boolean isPoisonImmune() {
-		return getAttribute("poison:immunity", -1) > GameWorld.getTicks();
+		return timers.getTimer("poison:immunity") != null;
 	}
 
 	@Override

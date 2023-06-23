@@ -72,7 +72,7 @@ public class YanilleAgilityDungeonListeners : InteractionListener {
                 player.lock(1)
                 if(player.inventory.remove(Item(Items.SINISTER_KEY_993, 1))) {
                     player.sendMessages("You unlock the chest with your key...", "A foul gas seeps from the chest");
-                    player.getStateManager().register(EntityState.POISONED, true, 28, player);
+                    applyPoison (player, player, 2)
                     for(item in SINISTER_CHEST_HERBS) {
                         addItemOrDrop(player, item.id, item.amount)
                     }

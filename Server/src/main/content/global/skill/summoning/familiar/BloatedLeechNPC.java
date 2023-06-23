@@ -8,6 +8,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.state.EntityState;
 import core.tools.RandomFunction;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the Bloated Leech familiar.
  * @author Aero
@@ -38,7 +40,7 @@ public class BloatedLeechNPC extends Familiar {
 
 	@Override
 	protected boolean specialMove(FamiliarSpecial special) {
-		owner.getStateManager().remove(EntityState.POISONED);
+                curePoison(owner);
 		for (int i = 0; i < Skills.SKILL_NAME.length; i++) {
 			if (owner.getSkills().getLevel(i) < owner.getSkills().getStaticLevel(i)) {
 				owner.getSkills().setLevel(i, owner.getSkills().getStaticLevel(i));

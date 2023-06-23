@@ -14,6 +14,8 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles K'ril Tsutsaroth's combat.
  * @author Emperor
@@ -72,7 +74,7 @@ public final class GWDTsutsarothSwingHandler extends CombatSwingHandler {
 			hit = RandomFunction.random(max);
 			state.setMaximumHit(max);
 			if (style == CombatStyle.MELEE) {
-				victim.getStateManager().register(EntityState.POISONED, false, 168, entity);
+                                applyPoison(victim, entity, 16);
 			}
 			if (special) {
 				((Player) victim).getSkills().decrementPrayerPoints((double) hit / 2);
