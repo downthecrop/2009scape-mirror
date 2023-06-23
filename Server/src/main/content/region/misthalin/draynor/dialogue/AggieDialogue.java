@@ -152,7 +152,7 @@ public final class AggieDialogue extends DialoguePlugin {
 				stage = 30;
 				break;
 			case 5:
-				interpreter.sendDialogues(player, FacialExpression.FURIOUS, "Can you make dyes for me please?");
+				interpreter.sendDialogues(player, FacialExpression.ASKING, "Can you make dyes for me please?");
 				stage = 40;
 				break;
 			}
@@ -247,13 +247,13 @@ public final class AggieDialogue extends DialoguePlugin {
 				stage = 30;
 				break;
 			case 4:
-				interpreter.sendDialogues(player, FacialExpression.FURIOUS, "Can you make dyes for me please?");
+				interpreter.sendDialogues(player, FacialExpression.ASKING, "Can you make dyes for me please?");
 				stage = 40;
 				break;
 			}
 			break;
 		case 40:
-			interpreter.sendDialogues(npc, FacialExpression.FURIOUS, "What sort of dye would you like? Red, yellow or blue?");
+			interpreter.sendDialogues(npc, FacialExpression.ASKING, "What sort of dye would you like? Red, yellow or blue?");
 			stage = 41;
 			break;
 		case 41:
@@ -263,15 +263,15 @@ public final class AggieDialogue extends DialoguePlugin {
 		case 42:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.FURIOUS, "What do you need to make red dye?");
+				interpreter.sendDialogues(player, FacialExpression.ASKING, "What do you need to make red dye?");
 				stage = 410;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.FURIOUS, "What do you need to make yellow dye?");
+				interpreter.sendDialogues(player, FacialExpression.ASKING, "What do you need to make yellow dye?");
 				stage = 420;
 				break;
 			case 3:
-				interpreter.sendDialogues(player, FacialExpression.FURIOUS, "What do you need to make blue dye?");
+				interpreter.sendDialogues(player, FacialExpression.ASKING, "What do you need to make blue dye?");
 				stage = 430;
 				break;
 			}
@@ -281,7 +281,7 @@ public final class AggieDialogue extends DialoguePlugin {
 			stage = 431;
 			break;
 		case 431:
-			interpreter.sendDialogues(player, FacialExpression.FURIOUS, "Okay, make me some blue dye please.");
+			interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Okay, make me some blue dye please.");
 			stage = 432;
 			break;
 		case 432:
@@ -304,7 +304,7 @@ public final class AggieDialogue extends DialoguePlugin {
 			stage = 421;
 			break;
 		case 421:
-			interpreter.sendDialogues(player, FacialExpression.FURIOUS, "Okay, make me some yellow dye please.");
+			interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Okay, make me some yellow dye please.");
 			stage = 422;
 			break;
 		case 422:
@@ -327,7 +327,7 @@ public final class AggieDialogue extends DialoguePlugin {
 			stage = 411;
 			break;
 		case 411:
-			interpreter.sendDialogues(player, FacialExpression.FURIOUS, "Okay, make me some red dye please.");
+			interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Okay, make me some red dye please.");
 			stage = 412;
 			break;
 		case 412:
