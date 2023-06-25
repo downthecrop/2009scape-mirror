@@ -4,7 +4,6 @@ import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.state.EntityState;
 import core.game.system.task.NodeTask;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
@@ -60,7 +59,7 @@ public enum FireType {
 	ICY_BREATH(new Animation(83, Priority.HIGH), 395, new NodeTask(0) {
 		@Override
 		public boolean exec(Node node, Node... n) {
-			((Entity) node).getStateManager().set(EntityState.FROZEN, 7);
+                        registerTimer((Entity) node, spawnTimer ("frozen", 7, true));
 			return true;
 		}
 	});

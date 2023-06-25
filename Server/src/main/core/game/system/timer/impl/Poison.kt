@@ -64,16 +64,16 @@ class Poison : PersistTimer (30, "poison") {
         return severity > 0
     }
 
-    private fun getDamageFromSeverity (severity: Int) : Int {
-        return (severity + 4) / 5
+    override fun getTimer (vararg args: Any) : RSTimer {
+        val timer = Poison()
+        for (arg in args) 
+            println(arg)
+        timer.damageSource = args[0] as? Entity ?: return timer
+        timer.severity = args[1] as? Int ?: return timer
+        return timer
     }
 
-    companion object {
-        @JvmStatic fun getTimer (source: Entity, severity: Int) : Poison {
-            val timer = Poison()
-            timer.damageSource = source
-            timer.severity = severity
-            return timer
-        }
+    private fun getDamageFromSeverity (severity: Int) : Int {
+        return (severity + 4) / 5
     }
 }

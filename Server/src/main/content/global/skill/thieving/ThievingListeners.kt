@@ -7,7 +7,6 @@ import core.game.node.entity.impl.Animator
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.skill.Skills
-import core.game.node.entity.state.EntityState
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import org.rs09.consts.Items

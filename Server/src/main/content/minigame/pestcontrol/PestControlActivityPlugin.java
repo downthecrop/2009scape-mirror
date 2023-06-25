@@ -15,7 +15,6 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.impl.PulseManager;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.Rights;
-import core.game.node.entity.state.EntityState;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;

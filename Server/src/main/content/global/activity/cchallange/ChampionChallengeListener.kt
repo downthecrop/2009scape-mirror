@@ -15,7 +15,6 @@ import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
-import core.game.node.entity.state.EntityState
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.map.Location
@@ -174,7 +173,6 @@ class ChampionChallengeListener : InteractionListener, MapArea {
                     override fun pulse(): Boolean {
                         when (counter++) {
                             1 -> {
-                                player.stateManager.get(EntityState.TELEBLOCK)
                                 player.familiarManager.dismiss()
                             }
                             2 -> DoorActionHandler.handleDoor(player, node.asScenery())

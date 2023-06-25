@@ -7,7 +7,6 @@ import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
-import core.game.node.entity.state.EntityState;
 import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;

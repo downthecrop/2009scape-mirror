@@ -31,4 +31,11 @@ abstract class RSTimer (var runInterval: Int, val identifier: String = "generict
     open fun retrieveInstance() : RSTimer {
         return this::class.createInstance()
     }
+
+    /**
+     * This is called only when getTimer is called by further up code with arguments, otherwise retrieveInstance() is called if no arguments are passed.
+    **/
+    open fun getTimer (vararg args: Any) : RSTimer {
+        return retrieveInstance()
+    }
 }

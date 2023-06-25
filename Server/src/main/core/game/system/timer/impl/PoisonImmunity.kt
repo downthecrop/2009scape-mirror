@@ -45,11 +45,9 @@ class PoisonImmunity : PersistTimer (1, "poison:immunity", isSoft = true) {
         return ticksRemaining > 0
     }
 
-    companion object {
-        fun getTimer (numTicks: Int) : PoisonImmunity {
-            val t = PoisonImmunity()
-            t.ticksRemaining = numTicks
-            return t
-        }
+    override fun getTimer (vararg args: Any) : RSTimer {
+        val t =  PoisonImmunity()
+        t.ticksRemaining = args.getOrNull(0) as? Int ?: 100
+        return t
     }
 }

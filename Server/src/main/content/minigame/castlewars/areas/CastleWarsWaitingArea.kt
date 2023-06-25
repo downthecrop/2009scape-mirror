@@ -1,14 +1,10 @@
 package rs09.game.content.activity.castlewars.areas
 
 import CastleWarsOverlay
-import core.api.God
-import core.api.TickListener
-import core.api.hasGodItem
-import core.api.sendDialogue
+import core.api.*
 import core.game.component.Component
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
-import core.game.node.entity.state.EntityState
 import core.game.node.item.Item
 import core.game.world.map.zone.ZoneBorders
 import core.tools.ticksPerMinute
@@ -37,8 +33,7 @@ class CastleWarsWaitingArea : CastleWarsArea(), TickListener {
     override fun areaEnter(entity: Entity) {
         val player = entity as? Player ?: return
         super.areaEnter(player)
-        // Block player teleport (for at least the max wait time)
-        player.stateManager.set(EntityState.TELEBLOCK, (CastleWars.gameCooldownMinutes + CastleWars.gameTimeMinutes)*60*2)
+        registerTimer(player, spawnTimer("teleblock", (CastleWars.gameCooldownMinutes + CastleWars.gameTimeMinutes)*60*2))
 
         // Set team attribute and equip the hooded cloak on the entity based on which waiting room they're in
         if (zamorakWaitingRoom.insideBorder(player.location)) {

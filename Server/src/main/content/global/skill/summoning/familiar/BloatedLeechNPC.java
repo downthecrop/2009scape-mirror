@@ -5,7 +5,6 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.state.EntityState;
 import core.tools.RandomFunction;
 
 import static core.api.ContentAPIKt.*;

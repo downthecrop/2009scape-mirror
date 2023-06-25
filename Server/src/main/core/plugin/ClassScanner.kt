@@ -75,9 +75,9 @@ object ClassScanner {
     }
 
     fun loadTimers () {
-        scanResults.getSubclasses ("core.game.system.timer.PersistTimer").filter { !it.isAbstract }.forEach {
+        scanResults.getSubclasses ("core.game.system.timer.RSTimer").filter { !it.isAbstract }.forEach {
             try {
-                val clazz = it.loadClass().newInstance() as PersistTimer
+                val clazz = it.loadClass().newInstance() as RSTimer
                 TimerRegistry.registerTimer (clazz)
             } catch (e: Exception) {
                 log(this::class.java, Log.ERR, "Error registering timer instance: ${it.simpleName} -> ${exceptionToString(e)}")

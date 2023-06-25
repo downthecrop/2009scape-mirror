@@ -11,12 +11,13 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.skill.Skills
-import core.game.node.entity.state.EntityState
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
+import core.api.*
+import core.game.system.timer.impl.*
 
 /**
  * The combat-handling pulse implementation.
@@ -147,7 +148,7 @@ class CombatPulse(
             } else if (entity.properties.attackStyle.style == WeaponInterface.STYLE_RAPID || (salamander && entity.properties.attackStyle.style == WeaponInterface.STYLE_RANGE_ACCURATE)) {
                 speed--
             }
-            if (!magic && entity.stateManager.hasState(EntityState.MIASMIC)) {
+            if (!magic && hasTimerActive<Miasmic>(entity)) {
                 speed = (speed * 1.5).toInt()
             }
             setNextAttack(speed)

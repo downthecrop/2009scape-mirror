@@ -1,15 +1,10 @@
 package rs09.game.content.activity.castlewars.areas
 
 import content.global.skill.summoning.familiar.BurdenBeast
-import core.api.LogoutListener
-import core.api.MapArea
-import core.api.log
-import core.api.sendMessage
+import core.api.*
 import core.game.interaction.InteractionListener
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
-import core.game.node.entity.state.EntityState
-import core.tools.Log
 import rs09.game.content.activity.castlewars.CastleWars
 
 abstract class CastleWarsArea : MapArea, LogoutListener, InteractionListener {
@@ -51,7 +46,7 @@ abstract class CastleWarsArea : MapArea, LogoutListener, InteractionListener {
         player.interfaceManager.closeOverlay()
 
         // Remove teleblock
-        player.stateManager.remove(EntityState.TELEBLOCK)
+        removeTimer(player, "teleblock")
 
         // Remove any Castle Wars items
         // Todo Remove any tinderboxes or other castle wars items - See Jan 2018 update: https://oldschool.runescape.wiki/w/Castle_Wars

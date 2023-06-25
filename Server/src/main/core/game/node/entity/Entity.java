@@ -15,8 +15,6 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.TeleportManager;
 import core.game.node.entity.skill.Skills;
-import core.game.node.entity.state.EntityState;
-import core.game.node.entity.state.StateManager;
 import core.game.system.task.Pulse;
 import org.jetbrains.annotations.NotNull;
 import core.game.world.GameWorld;
@@ -101,11 +99,6 @@ public abstract class Entity extends Node {
 	 * The zone monitor.
 	 */
 	private final ZoneMonitor zoneMonitor = new ZoneMonitor(this);
-
-	/**
-	 * The state manager.
-	 */
-	private final StateManager stateManager = new StateManager(this);
 
 	/**
 	 * The reward locks.
@@ -283,7 +276,6 @@ public abstract class Entity extends Node {
 		skills.rechargePrayerPoints();
 		impactHandler.getImpactQueue().clear();
 		impactHandler.setDisabledTicks(10);
-		stateManager.reset();
 		removeAttribute("combat-time");
 		face(null);
 		//Check if it's a Loar shade and transform back into the shadow version.
@@ -921,14 +913,6 @@ public abstract class Entity extends Node {
 	}
 
 	/**
-	 * Gets the stateManager.
-	 * @return The stateManager.
-	 */
-	public StateManager getStateManager() {
-		return stateManager;
-	}
-
-	/**
 	 * Checks if we have fire resistance.
 	 * @return {@code True} if so.
 	 */
@@ -941,7 +925,7 @@ public abstract class Entity extends Node {
 	 * @return {@code True} if so.
 	 */
 	public boolean isTeleBlocked() {
-		return stateManager.hasState(EntityState.TELEBLOCK);
+                return timers.getTimer("teleblock") != null;
 	}
 
 	/**

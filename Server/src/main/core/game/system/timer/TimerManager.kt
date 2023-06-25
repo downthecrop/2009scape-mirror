@@ -13,8 +13,8 @@ class TimerManager (val entity: Entity) {
     val toRemoveTimers = ArrayList<RSTimer>()
 
     fun registerTimer (timer: RSTimer) {
-        newTimers.add (timer)
         timer.onRegister(entity)
+        newTimers.add (timer)
     }
 
     fun processTimers () {
@@ -61,10 +61,10 @@ class TimerManager (val entity: Entity) {
     fun parseTimers (root: JSONObject) {
         for ((identifier, dataObj) in root) {
             val data = dataObj as JSONObject
-            val timer = TimerRegistry.getTimerInstance (identifier.toString())
+            val timer = TimerRegistry.getTimerInstance (identifier.toString()) as? PersistTimer
 
             if (timer == null) {
-                log (this::class.java, Log.ERR, "Tried to load data for timer identified by $identifier, but no such timer seems to exist.")
+                log (this::class.java, Log.ERR, "Tried to load data for persistent timer identified by $identifier, but no such timer seems to exist.")
                 continue
             }
 
@@ -73,7 +73,7 @@ class TimerManager (val entity: Entity) {
         }
     }
 
-    inline fun <reified T> removeTimer () {
+    inline fun <reified T: RSTimer> removeTimer () {
         for (timer in activeTimers)
             if (timer is T)
                 toRemoveTimers.add(timer)
@@ -82,24 +82,31 @@ class TimerManager (val entity: Entity) {
                 toRemoveTimers.add(timer)
     }
 
-    inline fun <reified T> getTimer () : T? {
+    inline fun <reified T: RSTimer> getTimer () : T? {
+        var t: T? = null
         for (timer in activeTimers)
             if (timer is T)
-                return timer
+                t = timer
         for (timer in newTimers)
             if (timer is T)
-                return timer
-        return null
+                t = timer
+        if (t == null) return null
+        if (toRemoveTimers.contains(t))
+            return null
+        return t
     }
 
     fun getTimer (identifier: String): RSTimer? {
+        var t: RSTimer? = null
         for (timer in activeTimers)
             if (timer.identifier == identifier)
-                return timer
+                t = timer
         for (timer in newTimers)
             if (timer.identifier == identifier)
-                return timer
-        return null
+                t = timer
+        if (t == null) return null
+        if (toRemoveTimers.contains(t)) return null
+        return t
     }
 
     fun removeTimer (identifier: String) {
@@ -109,5 +116,9 @@ class TimerManager (val entity: Entity) {
         for (timer in newTimers)
             if (timer.identifier == identifier)
                 toRemoveTimers.add(timer)
+    }
+
+    fun removeTimer (timer: RSTimer) {
+        toRemoveTimers.add(timer)
     }
 }

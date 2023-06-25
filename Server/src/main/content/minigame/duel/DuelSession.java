@@ -12,7 +12,6 @@ import core.game.container.impl.EquipmentContainer;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.LogType;
 import core.game.node.entity.player.info.login.PlayerParser;
-import core.game.node.entity.state.EntityState;
 import core.game.node.item.Item;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;

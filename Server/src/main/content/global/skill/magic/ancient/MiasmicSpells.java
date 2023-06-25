@@ -14,12 +14,13 @@ import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
-import core.game.node.entity.state.EntityState;
 import core.game.node.item.Item;
 import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the Miasmic spells that are a part of the Ancient spellbook.
@@ -119,8 +120,8 @@ public final class MiasmicSpells extends CombatSpell {
 
 	@Override
 	public void fireEffect(Entity entity, Entity victim, BattleState state) {
-		if (victim.getAttribute("miasmic_immunity", -1) < GameWorld.getTicks()) {
-			victim.getStateManager().register(EntityState.MIASMIC, true, (getSpellId() - 15) * 20);
+		if (!hasTimerActive(victim, "miasmic:immunity")) {
+                    registerTimer(victim, spawnTimer("miasmic", (getSpellId() - 15) * 20));
 		}
 	}
 	

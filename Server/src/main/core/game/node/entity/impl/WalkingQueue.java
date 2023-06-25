@@ -18,7 +18,7 @@ import java.util.Deque;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
-import static core.api.ContentAPIKt.log;
+import static core.api.ContentAPIKt.*;
 
 /**
  * The walking queue.
@@ -89,6 +89,8 @@ public final class WalkingQueue {
 		if (isPlayer && updateRegion(entity.getLocation(), true)) {
 			return;
 		}
+                if (hasTimerActive(entity, "frozen"))
+                    return;
 		Point point = walkingQueue.poll();
                 boolean drawPath = entity.getAttribute("routedraw", false);
 		if (point == null) {

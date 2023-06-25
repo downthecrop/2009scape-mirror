@@ -11,7 +11,6 @@ import core.game.node.entity.combat.spell.SpellType;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
-import core.game.node.entity.state.EntityState;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;

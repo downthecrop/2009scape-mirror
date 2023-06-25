@@ -3,7 +3,6 @@ package content.minigame.pyramidplunder
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
-import core.game.node.entity.state.EntityState
 import core.game.system.task.Pulse
 import core.game.world.map.Direction
 import core.game.world.map.Location

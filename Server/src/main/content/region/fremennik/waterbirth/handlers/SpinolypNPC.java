@@ -8,7 +8,6 @@ import core.game.node.entity.combat.InteractionType;
 import core.game.node.entity.combat.equipment.SwitchAttack;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
-import core.game.node.entity.state.EntityState;
 import core.game.world.map.Location;
 import core.tools.RandomFunction;
 import core.game.node.entity.combat.CombatSwingHandler;

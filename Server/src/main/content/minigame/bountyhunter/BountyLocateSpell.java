@@ -10,14 +10,13 @@ import core.game.node.entity.combat.spell.SpellType;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.entity.player.link.TeleportManager.TeleportType;
-import core.game.node.entity.state.EntityState;
 import core.game.node.item.Item;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.plugin.Plugin;
 
-import static core.api.ContentAPIKt.isStunned;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the bounty target locate spell.
@@ -45,7 +44,7 @@ public final class BountyLocateSpell extends MagicSpell {
 			player.getPacketDispatch().sendMessage("You don't have a target to teleport to.");
 			return true;
 		}
-		if (player.getStateManager().hasState(EntityState.FROZEN) || isStunned(player)) {
+		if (hasTimerActive(player, "frozen") || isStunned(player)) {
 			player.getPacketDispatch().sendMessage("You can't use this when " + (isStunned(player) ? "stunned." : "frozen."));
 			return true;
 		}

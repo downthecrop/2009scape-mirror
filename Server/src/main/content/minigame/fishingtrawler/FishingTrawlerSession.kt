@@ -3,14 +3,13 @@ package content.minigame.fishingtrawler
 import core.api.LogoutListener
 import core.api.MapArea
 import core.api.getRegionBorders
-import core.api.log
+import core.api.*
 import core.game.component.Component
 import core.game.node.entity.Entity
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.state.EntityState
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
@@ -81,7 +80,7 @@ class FishingTrawlerSession(val activity: FishingTrawlerActivity? = null) : Logo
             updateOverlay(player)
             player.properties.teleportLocation = base.transform(36,24,0)
             player.setAttribute("ft-session",this)
-            player.stateManager.set(EntityState.TELEBLOCK,timeLeft)
+            registerTimer (player, spawnTimer("teleblock", timeLeft))
         }
         zone.register(getRegionBorders(region.id))
     }
@@ -105,7 +104,7 @@ class FishingTrawlerSession(val activity: FishingTrawlerActivity? = null) : Logo
                 player.appearance.setAnimations(Animation(188))
                 player.properties.teleportLocation = session.base.transform(36,24,0)
                 player.incrementAttribute("/save:$STATS_BASE:$FISHING_TRAWLER_SHIPS_SANK")
-                player.stateManager.remove(EntityState.TELEBLOCK)
+                removeTimer(player, "teleblock")
             }
             return true
         }

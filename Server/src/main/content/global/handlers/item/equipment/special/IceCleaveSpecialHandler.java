@@ -6,12 +6,13 @@ import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.combat.MeleeSwingHandler;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.state.EntityState;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the Ice cleave special attack.
@@ -67,7 +68,7 @@ public final class IceCleaveSpecialHandler extends MeleeSwingHandler implements 
 	public void adjustBattleState(Entity entity, Entity victim, BattleState state) {
 		super.adjustBattleState(entity, victim, state);
 		if (state.getEstimatedHit() > 0) {
-			victim.getStateManager().set(EntityState.FROZEN, 33);
+                        registerTimer(victim, spawnTimer("frozen", 33, true));
 			victim.graphics(Graphics.create(369));
 		}
 	}
