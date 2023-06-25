@@ -11,8 +11,10 @@ import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import core.game.dialogue.DialogueFile
+import core.game.global.action.DoorActionHandler
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import org.rs09.consts.NPCs
 
 class SeersHouseListeners : InteractionListener {
 
@@ -107,14 +109,16 @@ class SeersHouseListeners : InteractionListener {
             else if(player.getAttribute("PeerRiddle",5) < 5){
                 player.dialogueInterpreter.open(DoorRiddleDialogue(player), Scenery(WESTDOOR,node.location))
             }
-            else if(player.getAttribute("riddlesolved",false)){
-                if(player.location.x == 2631){
+            else if(player.getAttribute("riddlesolved",false)) {
+                val insideHouse = (player.location == Location.create(2631, 3666, 0))
+                if(insideHouse) {
+                    DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                     player.inventory.clear()
-                    core.game.global.action.DoorActionHandler.handleAutowalkDoor(player,node.asScenery())
-                }else{
-                    core.game.global.action.DoorActionHandler.handleAutowalkDoor(player,node.asScenery())
+                } else if(player.inventory.isEmpty && player.equipment.isEmpty) {
+                    DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                } else {
+                    openDialogue(player, NPCs.PEER_THE_SEER_1288, findNPC(NPCs.PEER_THE_SEER_1288)!!)
                 }
-                core.game.global.action.DoorActionHandler.handleAutowalkDoor(player,node.asScenery())
             }
             return@on true
         }
@@ -873,7 +877,7 @@ class SeersHouseListeners : InteractionListener {
 
         onUseWith(IntType.SCENERY, FULLVASE, FROZENTABLE) { player, used, with ->
             player.animate(Animation(883,Animator.Priority.HIGH))
-            removeItem(player,VASE)
+            removeItem(player,FULLVASE)
             addItem(player,FROZENVASE)
             sendMessage(player,"The icy table immediately freezes the water in your vase.")
             return@onUseWith true
@@ -928,7 +932,7 @@ class SeersHouseListeners : InteractionListener {
             if(player.inventory.contains(SEERSKEY,1)){
                 player.setAttribute("/save:housepuzzlesolved",true)
                 player.inventory.clear()
-                core.game.global.action.DoorActionHandler.handleAutowalkDoor(player,node.asScenery())
+                DoorActionHandler.handleAutowalkDoor(player,node.asScenery())
                 player.setAttribute("/save:fremtrials:peer-vote",true)
                 player.setAttribute("/save:fremtrials:votes",player.getAttribute("fremtrials:votes",0) + 1)
                 sendNPCDialogue(player,1288,"Incredible! To have solved my puzzle so quickly! I have no choice but to vote in your favour!")
