@@ -113,7 +113,7 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
         AreaDiaryTask(
             CHAMPIONS_GUILD,
             DiaryLevel.MEDIUM,
-            MediumTasks.CHAMPIONS_GUILD_VISIT
+                MediumTasks.CHAMPIONS_GUILD_VISIT
         )
     )
 
@@ -183,6 +183,13 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
                     player,
                     DiaryLevel.MEDIUM,
                         MediumTasks.USE_GE_UNDER_WALL_SHORTCUT
+                )
+            }
+            12698 -> if (event.target.id == 29370 && player.skills.getLevel(Skills.AGILITY, true) >= 51) {
+                finishTask(
+                    player,
+                    DiaryLevel.HARD,
+                        HardTasks.USE_MOSS_GIANT_PIPE_SHORTCUT
                 )
             }
         }
@@ -266,7 +273,7 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
             finishTask(
                 player,
                 DiaryLevel.MEDIUM,
-                MediumTasks.CAST_VARROCK_TELEPORT_SPELL
+                    MediumTasks.CAST_VARROCK_TELEPORT_SPELL
             )
         }
     }
