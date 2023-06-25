@@ -974,6 +974,34 @@ fun registerTimer (entity: Entity, timer: RSTimer?) {
     entity.timers.registerTimer (timer)
 }
 
+/** 
+ * Used to fetch the existing, active, non-abstract and non-anonymous timer with the given identifier, or start a new timer if none exists and return that.
+ * @param entity the entity whose timers we're retrieving
+ * @param identifier the identifier of the timer, refer to the individual timer class for this token.
+ * @param args various args to pass to the initialization of the timer, if applicable.
+ * @return Either the existing active timer, or a new timer initialized with the passed args if none exists yet.
+**/
+fun getOrStartTimer (entity: Entity, identifier: String, vararg args: Any) : RSTimer? {
+    val existing = getTimer (entity, identifier)
+    if (existing != null)
+        return existing
+    return spawnTimer (identifier, *args).also { registerTimer (entity, it) }
+}
+
+/**
+ * Used to fetch the existing, active, non-abstract and non-anonymous timer with the given type, or start a new timer if none exists and return that.
+ * @param entity the entity whose timer we're retrieving
+ * @param T the type of timer we are fetching
+ * @param args the various args to pass to the initialization of the timer, if applicable.
+ * @return Either the existing, active timer or a new timer initialized with the passed args if none exists yet.
+**/
+inline fun <reified T: RSTimer> getOrStartTimer (entity: Entity, vararg args: Any) : T {
+    val existing = getTimer <T> (entity)
+    if (existing != null)
+        return existing
+    return spawnTimer <T> (*args).also { registerTimer (entity, it) }
+}
+
 /**
  * Used to fetch a new instance of a registered (see: non-anonymous, non-abstract) timer with the given configuration args
  * @param identifier the string identifier for the timer. e.g. poison's is "poison"
@@ -990,8 +1018,8 @@ fun spawnTimer (identifier: String, vararg args: Any) : RSTimer? {
  * @param args various arbitrary arguments to be passed to the timer's constructor. Refer to the timer in question for what the args are expected to be.
  * @return a timer instance configured with your given args, or null if the timer is not listed in the registry (if this happens, your timer is either abstract or anonymous.)
 **/
-inline fun <reified T: RSTimer> spawnTimer (vararg args: Any) : T? {
-    return TimerRegistry.getTimerInstance <T> (*args)
+inline fun <reified T: RSTimer> spawnTimer (vararg args: Any) : T {
+    return TimerRegistry.getTimerInstance <T> (*args)!!
 }
 
 /**

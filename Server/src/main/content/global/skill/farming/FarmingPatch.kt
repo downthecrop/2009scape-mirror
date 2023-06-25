@@ -1,9 +1,11 @@
 package content.global.skill.farming
 
+import core.api.*
 import core.cache.def.impl.SceneryDefinition
 import core.cache.def.impl.VarbitDefinition
 import core.game.node.scenery.Scenery
 import core.game.node.entity.player.Player
+import content.global.skill.farming.timers.CropGrowth
 
 enum class FarmingPatch(val varbit: Int, val type: PatchType) {
     //Allotments
@@ -86,11 +88,7 @@ enum class FarmingPatch(val varbit: Int, val type: PatchType) {
     }
 
     fun getPatchFor(player: Player): Patch{
-        var state: FarmingState? = player.states.get("farming") as FarmingState?
-        return if(state == null){
-            state = player.registerState("farming") as FarmingState
-            state.getPatch(this).also { state.init() }
-        } else
-            state.getPatch(this)
+        var crops = getOrStartTimer <CropGrowth> (player)!!
+        return crops.getPatch(this)
     }
 }

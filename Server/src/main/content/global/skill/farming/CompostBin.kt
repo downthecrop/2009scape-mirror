@@ -54,6 +54,10 @@ class CompostBin(val player: Player, val bin: CompostBins) {
         return Item(item)
     }
 
+    fun isDefaultState() : Boolean {
+        return (isFinished == false && finishedTime == 0L && items.size == 0)
+    }
+
     fun isReady(): Boolean {
         return System.currentTimeMillis() > finishedTime && finishedTime != 0L
     }
