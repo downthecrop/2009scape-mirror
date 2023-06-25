@@ -1,9 +1,11 @@
 package content.global.handlers.iface
 
-import core.api.*
+import core.api.closeInterface
+import core.api.getAttribute
+import core.api.openInterface
+import core.api.setAttribute
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
-import core.game.component.Component
 
 /**
  * Interface listener for Books
@@ -136,11 +138,6 @@ class BookInterface : InterfaceListener {
 
             callback?.invoke(player, currentPage + increment, buttonId)
         }
-
-        fun cleanupAttribute(player: Player, _comp: Component) : Boolean {
-            removeAttribute(player, "bookInterfaceCurrentPage")
-            return true
-        }
     }
 
     override fun defineInterfaceListeners() {
@@ -168,9 +165,6 @@ class BookInterface : InterfaceListener {
             }
             return@on true
         }
-        onClose (FANCY_BOOK_26,   ::cleanupAttribute)
-        onClose (FANCY_BOOK_2_27, ::cleanupAttribute)
-        onClose (FANCY_BOOK_3_49, ::cleanupAttribute)
     }
 }
 
