@@ -7,6 +7,8 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the spell types.
  * @author Emperor
@@ -151,7 +153,7 @@ public enum SpellType {
 		@Override
 		public int getImpactAmount(Entity e, Entity victim, int base) {
 			if(!(e instanceof Player)) return 20;
-			if (e.asPlayer().hasActiveState("godcharge")) {
+			if (hasTimerActive(e, "magic:spellcharge")) {
 				Item cape = ((Player) e).getEquipment().getNew(EquipmentContainer.SLOT_CAPE);
 				if (cape.getId() == 2412 || cape.getId() == 2413 || cape.getId() == 2414) {
 					return 30;

@@ -198,7 +198,8 @@ class StarSpriteDialogue(player: Player? = null) : core.game.dialogue.DialoguePl
 
                     getStoreFile()[player.username.toLowerCase()] = true //flag daily as completed
 
-                    player.registerState("shooting-star")?.init()
+                    val timer = getOrStartTimer <StarBonus> (player)
+                    timer.ticksLeft = 1500
 
                     if(wearingRing){
                         val item = intArrayOf(Items.COSMIC_RUNE_564, Items.ASTRAL_RUNE_9075, Items.GOLD_ORE_445, Items.COINS_995).random()
@@ -263,8 +264,8 @@ class StarSpriteDialogue(player: Player? = null) : core.game.dialogue.DialoguePl
 
     fun rollForRingBonus(player: Player, bonusId: Int, bonusBaseAmt: Int){
         if(RandomFunction.roll(3)){
-            val state = player.states["shooting-star"] as? ShootingStarState ?: return
-            state.ticksLeft += secondsToTicks(TimeUnit.MINUTES.toSeconds(5).toInt())
+            var bonus = getOrStartTimer <StarBonus> (player)
+            bonus.ticksLeft += 500
             sendMessage(player, colorize("%RYour ring shines dimly as if imbued with energy."))
         } else if(RandomFunction.roll(5)){
             addItem(player, bonusId, bonusBaseAmt)
