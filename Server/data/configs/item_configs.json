@@ -24334,6 +24334,13 @@
     "bonuses": "-1,-1,6,6,0,2,3,1,6,0,0,2,0,0,0"
   },
   {
+  "examine":"A heavy key made of bronze. (Prince Ali Rescue).",
+  "durability": null,
+  "name":"Bronze key",
+  "archery_ticket_price":"0",
+  "id":"2418"
+  },
+  {
     "examine": "A grey woollen wig.",
     "durability": null,
     "name": "Wig",
