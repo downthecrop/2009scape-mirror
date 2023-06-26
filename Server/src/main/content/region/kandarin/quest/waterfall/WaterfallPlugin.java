@@ -28,6 +28,8 @@ import core.plugin.Plugin;
 import kotlin.Unit;
 import core.plugin.ClassScanner;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Master plugin file for the Waterfall quest.
  *
@@ -177,11 +179,11 @@ public final class WaterfallPlugin extends OptionHandler {
 			}
 			break;
 		case 1999:// Second key (in the actual waterfall dungeon)
-			if (player.getInventory().contains(298, 1) || quest.getStage(player) < 30) {
-				player.getPacketDispatch().sendMessage("You search the crate and find nothing.");
-			} else if (quest.getStage(player) >= 30 && !player.getInventory().contains(298, 1)) {
-				player.getPacketDispatch().sendMessage("You find a large key.");
-				player.getInventory().add(new Item(298, 1));
+			if (inInventory(player, 298,1) || quest.getStage(player) < 30) {
+				sendMessage(player, "You search the crate and find nothing.");
+			} else if (quest.getStage(player) >= 30 && !inInventory(player,298, 1)) {
+				sendMessage(player, "You find a large key.");
+				addItemOrDrop(player, 298, 1);
 			}
 			break;
 		case 2002://
@@ -247,11 +249,11 @@ public final class WaterfallPlugin extends OptionHandler {
 			player.getDialogueInterpreter().open(305, ((NPC) node));
 			break;
 		case 1990:
-			if (player.getInventory().contains(293, 1) || quest.getStage(player) < 30) {
-				player.getPacketDispatch().sendMessage("You search the crate and find nothing.");
-			} else if (quest.getStage(player) >= 30 && !player.getInventory().contains(293, 1)) {
-				player.getPacketDispatch().sendMessage("You find a large key.");
-				player.getInventory().add(new Item(293, 1));
+			if (inInventory(player,293, 1) || quest.getStage(player) < 30) {
+				sendMessage(player,"You search the crate and find nothing.");
+			} else if (quest.getStage(player) >= 30 && !inInventory(player,293, 1)) {
+				sendMessage(player, "You find a large key.");
+				addItemOrDrop(player,293, 1);
 			}
 			break;
 		case 1991:
