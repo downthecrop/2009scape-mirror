@@ -80,7 +80,8 @@ object ClassScanner {
                 val clazz = it.loadClass().newInstance() as RSTimer
                 TimerRegistry.registerTimer (clazz)
             } catch (e: Exception) {
-                log(this::class.java, Log.ERR, "Error registering timer instance: ${it.simpleName} -> ${exceptionToString(e)}")
+                log(this::class.java, Log.ERR, "Error registering timer instance: ${it.simpleName}")
+                e.printStackTrace()
             }
         }
     }
