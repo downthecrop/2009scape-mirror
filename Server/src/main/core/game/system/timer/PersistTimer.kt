@@ -5,7 +5,10 @@ import org.json.simple.*
 import core.game.node.entity.Entity
 import kotlin.reflect.full.createInstance
 
-abstract class PersistTimer (runInterval: Int, identifier: String, isSoft: Boolean = false) : RSTimer (runInterval, identifier, isSoft) {
+/**
+ * A timer implementation with support for saving and loading arbitrary data. See `RSTimer` for more info on timers themselves.
+**/
+abstract class PersistTimer (runInterval: Int, identifier: String, isSoft: Boolean = false, isAuto: Boolean = false) : RSTimer (runInterval, identifier, isSoft, isAuto) {
     open fun save (root: JSONObject, entity: Entity) {
         root["ticksLeft"] = (nextExecution - getWorldTicks()).toString()
     }

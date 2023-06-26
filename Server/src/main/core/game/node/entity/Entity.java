@@ -29,6 +29,7 @@ import core.game.world.update.flag.*;
 import core.game.node.entity.combat.CombatSwingHandler;
 import core.game.world.update.UpdateMasks;
 import core.game.system.timer.TimerManager;
+import core.game.system.timer.TimerRegistry;
 
 import java.util.*;
 
@@ -203,6 +204,7 @@ public abstract class Entity extends Node {
 	 */
 	public void init() {
 		active = true;
+                TimerRegistry.addAutoTimers (this);
 	}
 
 	/**

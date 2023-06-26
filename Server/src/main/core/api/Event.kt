@@ -35,4 +35,6 @@ object Event {
     @JvmStatic val SummoningPointsRecharged = SummoningPointsRechargeEvent::class.java
     @JvmStatic val PrayerPointsRecharged = PrayerPointsRechargeEvent::class.java
     @JvmStatic val XpGained = XPGainEvent::class.java
+    @JvmStatic val PrayerActivated = PrayerActivatedEvent::class.java
+    @JvmStatic val PrayerDeactivated = PrayerDeactivatedEvent::class.java
 }

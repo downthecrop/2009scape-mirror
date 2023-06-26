@@ -105,11 +105,6 @@ public final class Skills {
 	private double experienceGained = 0;
 
 	/**
-	 * The restoration pulses.
-	 */
-	private final SkillRestoration[] restoration;
-
-	/**
 	 * If a lifepoints update should occur.
 	 */
 	private boolean lifepointsUpdate;
@@ -135,7 +130,6 @@ public final class Skills {
 		this.experience = new double[24];
 		this.staticLevels = new int[24];
 		this.dynamicLevels = new int[24];
-		this.restoration = new SkillRestoration[24];
 		for (int i = 0; i < 24; i++) {
 			this.staticLevels[i] = 1;
 			this.dynamicLevels[i] = 1;
@@ -165,15 +159,6 @@ public final class Skills {
 	 */
 	public void configure() {
 		updateCombatLevel();
-		int max = 24;
-		if (entity instanceof NPC) {
-			max = 7;
-		}
-		for (int i = 0; i < max; i++) {
-			if (i != PRAYER && i != SUMMONING && restoration[i] == null) {
-				configureRestorationPulse(i);
-			}
-		}
 	}
 
 	/**
@@ -183,19 +168,6 @@ public final class Skills {
 		if (lifepoints < 1) {
 			return;
 		}
-		for (int i = 0; i < restoration.length; i++) {
-			if (restoration[i] != null) {
-				restoration[i].restore(entity);
-			}
-		}
-	}
-
-	/**
-	 * Configures a restoration pulse for the given skill id.
-	 * @param skillId The skill id.
-	 */
-	private void configureRestorationPulse(final int skillId) {
-		restoration[skillId] = new SkillRestoration(skillId);
 	}
 
 	/**
@@ -881,14 +853,6 @@ public final class Skills {
 		if (entity instanceof Player) {
 			PacketRepository.send(SkillLevel.class, new SkillContext((Player) entity, skill));
 		}
-	}
-
-	/**
-	 * Gets the restoration pulses.
-	 * @return The restoration pulse array.
-	 */
-	public SkillRestoration[] getRestoration() {
-		return restoration;
 	}
 
 	/**
