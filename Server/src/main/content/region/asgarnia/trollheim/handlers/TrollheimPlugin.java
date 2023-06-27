@@ -156,11 +156,9 @@ public final class TrollheimPlugin extends OptionHandler {
 																						// ladder
 		SceneryDefinition.forId(18833).getHandlers().put("option:climb-down", this);// stronghold
 																							// ladder
-		ClassScanner.definePlugin(new SabaDialogue());
 		ClassScanner.definePlugin(new WoundedSoldier());
 		ClassScanner.definePlugin(new WarningZone());
 		ActivityManager.register(new WarningCutscene());
-		ClassScanner.definePlugin(new TenzingDialogue());
 		ClassScanner.definePlugin(new TrollNPC());
 		return this;
 	}
@@ -433,62 +431,6 @@ public final class TrollheimPlugin extends OptionHandler {
 	}
 
 	/**
-	 * Represents the saba dialogue plugin.
-	 * @author 'Vexia
-	 * @version 1.0
-	 */
-	public final class SabaDialogue extends DialoguePlugin {
-
-		/**
-		 * Constructs a new {@code TrolleimPlugin} {@code Object}.
-		 */
-		public SabaDialogue() {
-			/**
-			 * empty.
-			 */
-		}
-
-		/**
-		 * Constructs a new {@code TrolleimPlugin} {@code Object}.
-		 * @param player the player.
-		 */
-		public SabaDialogue(final Player player) {
-			super(player);
-		}
-
-		@Override
-		public DialoguePlugin newInstance(Player player) {
-			return new SabaDialogue(player);
-		}
-
-		@Override
-		public boolean open(Object... args) {
-			player("Hello!");
-			return true;
-		}
-
-		@Override
-		public boolean handle(int interfaceId, int buttonId) {
-			switch (stage) {
-			case 0:
-				npc("Why won't people leave me alone?!");
-				stage = 1;
-				break;
-			case 1:
-				end();
-				break;
-			}
-			return true;
-		}
-
-		@Override
-		public int[] getIds() {
-			return new int[] { 1070 };
-		}
-
-	}
-
-	/**
 	 * Represents the wounded soldiers dialogue plugin.
 	 * @author 'Vexia
 	 * @version 1.0
@@ -695,156 +637,6 @@ public final class TrollheimPlugin extends OptionHandler {
 			ActivityManager.register(this);
 		}
 
-	}
-
-	/**
-	 * Represents the dialogue plugin used for the tenzing npc.
-	 * @author 'Vexia
-	 * @version 1.0
-	 */
-	public static final class TenzingDialogue extends DialoguePlugin {
-
-		/**
-		 * Represents the coins items.
-		 */
-		private static final Item COINS = new Item(995, 12);
-
-		/**
-		 * Constructs a new {@code TenzingDialogue} {@code Object}.
-		 */
-		public TenzingDialogue() {
-			/**
-			 * empty.
-			 */
-		}
-
-		/**
-		 * Constructs a new {@code TenzingDialogue} {@code Object}.
-		 * @param player the player.
-		 */
-		public TenzingDialogue(final Player player) {
-			super(player);
-		}
-
-		@Override
-		public DialoguePlugin newInstance(Player player) {
-			return new TenzingDialogue(player);
-		}
-
-		@Override
-		public boolean open(Object... args) {
-			player("Hello Tenzing!");
-			return true;
-		}
-
-		@Override
-		public boolean handle(int interfaceId, int buttonId) {
-			switch (stage) {
-			case 0:
-				npc("Hello traveler. What can I do for you?");
-				stage = 1;
-				break;
-			case 1:
-				options("Can I buy some Climbing boots?", "What does a Sherpa do?", "How did you find out about the secret way?", "Nice place you have here.", "Nothing, thanks!");
-				stage = 2;
-				break;
-			case 2:
-				switch (buttonId) {
-				case 1:
-					player("Can I buy some Climbing boots?");
-					stage = 10;
-					break;
-				case 2:
-					player("What does a Sherpa do?");
-					stage = 20;
-					break;
-				case 3:
-					player("How did you find out about the secret way?");
-					stage = 30;
-					break;
-				case 4:
-					player("Nice place you have here.");
-					stage = 40;
-					break;
-				case 5:
-					player("Nothing, thanks!");
-					stage = 50;
-					break;
-				}
-				break;
-			case 10:
-				npc("Sure, I'll sell you some in your size for 12 gold.");
-				stage = 11;
-				break;
-			case 11:
-				options("OK, sounds good.", "No, thanks.");
-				stage = 12;
-				break;
-			case 12:
-				switch (buttonId) {
-				case 1:
-					player("OK, sounds good.");
-					stage = 13;
-					break;
-				case 2:
-					player("No, thanks.");
-					stage = 50;
-					break;
-				}
-				break;
-			case 13:
-				if (!player.getInventory().hasSpaceFor(CLIMBING_BOOTS)) {
-					player("I don't have enough space in my backpack right", "this second.");
-					stage = 50;
-					return true;
-				}
-				if (!player.getInventory().containsItem(COINS)) {
-					end();
-					return true;
-				}
-				if (!player.getInventory().remove(COINS)) {
-					player("I don't have enough coins right now.");
-					stage = 50;
-					return true;
-				}
-				if (player.getInventory().add(CLIMBING_BOOTS)) {
-					interpreter.sendItemMessage(CLIMBING_BOOTS, "Tenzing has given you some Climbing boots.");
-					player.getPacketDispatch().sendMessage("Tenzing has given you some Climbing boots.");
-				}
-				stage = 50;
-				break;
-			case 20:
-				npc("We are expert guides that take adventurers such as", "yourself, on mountaineering expeditions.");
-				stage = 21;
-				break;
-			case 21:
-				end();
-				break;
-			case 30:
-				npc("I used to take adventurers up Death Plateau and", "further north before the trolls came. I know these", "mountains well.");
-				stage = 31;
-				break;
-			case 31:
-				end();
-				break;
-			case 40:
-				npc("Thanks, I built it myself! I'm usually self sufficient but", "I can't earn any money with the trolls camped on", "Death Plateau,");
-				stage = 41;
-				break;
-			case 41:
-				end();
-				break;
-			case 50:
-				end();
-				break;
-			}
-			return true;
-		}
-
-		@Override
-		public int[] getIds() {
-			return new int[] { 1071 };
-		}
 	}
 
 	/**

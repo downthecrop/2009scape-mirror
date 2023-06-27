@@ -896,12 +896,12 @@
   {
     "id": "3725",
     "replaceId": "3727",
-    "fence": "false",
+    "fence": "true",
     "metal": "false"
   },
   {
     "id": "3726",
-    "replaceId": "3727",
+    "replaceId": "3728",
     "fence": "true",
     "metal": "false"
   },

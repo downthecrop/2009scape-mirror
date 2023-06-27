@@ -1364,6 +1364,17 @@ fun setInterfaceText(player: Player, string: String, iface: Int, child: Int) {
 }
 
 /**
+ * Allows you to hide or show specific children in an interface
+ * @param player the player to send the packet to
+ * @param iface the ID of the interface to use
+ * @param child the index of the child to hide or show
+ * @param hide if the child should be hidden or not
+ */
+fun setComponentVisibility(player: Player, iface: Int, child: Int, hide: Boolean) {
+    player.packetDispatch.sendInterfaceConfig(iface, child, hide)
+}
+
+/**
  * Closes any open (non-chat) interfaces for the player
  * @param player the player to close the interface for
  */
@@ -1577,6 +1588,13 @@ fun questStage(player: Player, quest: String): Int {
 fun setQuestStage(player: Player, quest: String, stage: Int) {
     player.questRepository.setStage(QuestRepository.getQuests()[quest]!!, stage)
     player.questRepository.syncronizeTab(player)
+}
+
+/**
+ * Check if a quest is in progress
+ */
+fun isQuestInProgress(player: Player, quest: String, startStage: Int, endStage: Int): Boolean {
+    return player.questRepository.getStage(quest) in startStage..endStage
 }
 
 /**

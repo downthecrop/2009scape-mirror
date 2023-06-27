@@ -11081,6 +11081,27 @@
     "attack_level": "33"
   },
   {
+    "examine": "An off-duty Burthorpe Castle guard.",
+    "melee_animation": "0",
+    "range_animation": "0",
+    "defence_animation": "0",
+    "magic_animation": "0",
+    "death_animation": "0",
+    "name": "Harold",
+    "defence_level": "1",
+    "safespot": null,
+    "lifepoints": "10",
+    "strength_level": "1",
+    "id": "1078",
+    "range_level": "1",
+    "attack_level": "1"
+  },
+  {
+    "examine": "Head servant for Prince Anlaf.",
+    "name": "Eohric",
+    "id": "1080"
+  },
+  {
     "examine": "A servant for Prince Anlaf.",
     "melee_animation": "0",
     "range_animation": "0",
