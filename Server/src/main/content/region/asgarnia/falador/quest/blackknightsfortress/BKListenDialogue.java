@@ -113,7 +113,7 @@ public final class BKListenDialogue extends DialoguePlugin {
 			stage = 7;
 			break;
 		case 7:
-			interpreter.sendDialogues(greldo, null, "Yeth, Mithreth.");
+			interpreter.sendDialogues(greldo, FacialExpression.OLD_NORMAL, "Yeth, Mithreth.");
 			stage = 8;
 			break;
 		case 8:
