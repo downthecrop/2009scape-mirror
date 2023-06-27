@@ -5871,7 +5871,7 @@
   },
   {
     "examine": "I wonder who he's guarding?",
-    "melee_animation": "0",
+    "melee_animation": "401",
     "range_animation": "0",
     "combat_audio": "511,513,512",
     "attack_speed": "5",
@@ -5911,7 +5911,7 @@
   },
   {
     "examine": "I wonder who he's guarding?",
-    "melee_animation": "0",
+    "melee_animation": "401",
     "range_animation": "0",
     "combat_audio": "511,513,512",
     "attack_speed": "5",
@@ -9683,7 +9683,7 @@
   },
   {
     "examine": "I wonder who he's guarding?",
-    "melee_animation": "0",
+    "melee_animation": "401",
     "range_animation": "0",
     "combat_audio": "511,513,512",
     "attack_speed": "5",
