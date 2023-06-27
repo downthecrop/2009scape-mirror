@@ -11,7 +11,7 @@ import core.game.event.*
 
 import org.rs09.consts.Items;
 
-class SkillRestore : RSTimer (1, "skillrestore", isAuto = true) {
+class SkillRestore : RSTimer (1, "skillrestore", isAuto = true, isSoft = true) {
     val ticksSinceLastRestore = IntArray (24)
     val restoreTicks = IntArray (24) { 100 }
 
