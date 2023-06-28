@@ -77,6 +77,7 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
     }),
     HASTY_COOKING("cape_perks:hasty-cooking"),
     SMOOTH_HANDS("cape_perks:smooth-hands"),
+    PET_MASTERY("cape_perks.pet-mastery"),
     NONE("cape_perks:none")
     ;
 
@@ -111,7 +112,7 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
                 Skillcape.WOODCUTTING -> NEST_HUNTER
                 Skillcape.FARMING -> SEED_ATTRACTION
                 Skillcape.HUNTING -> NONE
-                Skillcape.SUMMONING -> NONE
+                Skillcape.SUMMONING -> PET_MASTERY
                 else -> NONE
             }
         }

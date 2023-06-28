@@ -1,5 +1,6 @@
 package content.global.skill.summoning.pet;
 
+import content.global.skill.skillcapeperks.SkillcapePerks;
 import content.global.skill.summoning.familiar.Familiar;
 import content.global.skill.summoning.familiar.FamiliarSpecial;
 import core.game.node.entity.player.Player;
@@ -59,7 +60,11 @@ public final class Pet extends Familiar {
 	public void handleTickActions() {
 		final PetDetails petDetails = details;
 		if (getPet().getFood().length > 0) {
-			petDetails.updateHunger(petDetails.getStage() == 0 ? 0.025 : 0.018);
+			if(SkillcapePerks.isActive(SkillcapePerks.PET_MASTERY, owner)) {
+				petDetails.updateHunger(0);
+			} else {
+				petDetails.updateHunger(petDetails.getStage() == 0 ? 0.025 : 0.018);
+			}
 		}
 		double hunger = petDetails.getHunger();
 		if (hunger >= 75.0 && hunger <= 90.0 && hunger % 5 == 0) {
