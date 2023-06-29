@@ -3,9 +3,13 @@ package core.game.node.entity.player.link;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.state.EntityState;
+import core.ServerConstants;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static core.tools.GlobalsKt.colorize;
+import static core.game.world.map.zone.impl.WildernessZone.WILDERNESS_PROT_ATTR;
 
 /**
  * Represents a managing class of the active player skulls.
@@ -48,6 +52,8 @@ public final class SkullManager {
 	 * If the skull check is disabled.
 	 */
 	private boolean skullCheckDisabled;
+
+        private boolean deepWilderness;
 
 	/**
 	 * Constructs a new {@code SkullManager} {@code Object}.
@@ -95,6 +101,7 @@ public final class SkullManager {
 		skullCauses.clear();
 		setSkullIcon(-1);
 		setSkulled(false);
+                player.getAppearance().sync();
 	}
 
 	/**
@@ -118,6 +125,10 @@ public final class SkullManager {
 	 * @param level the level to set.
 	 */
 	public void setLevel(int level) {
+                if (!deepWilderness && level >= 49)
+                    setDeepWilderness(true);
+                else if (deepWilderness && level < 48)
+                    setDeepWilderness(false);
 		this.level = level;
 	}
 
@@ -161,6 +172,10 @@ public final class SkullManager {
 		return wildernessDisabled;
 	}
 
+        public boolean hasWildernessProtection() {
+                return level < 49;
+        }
+
 	/**
 	 * Sets the wildernessDisabled.
 	 * @param wildernessDisabled The wildernessDisabled to set.
@@ -174,8 +189,18 @@ public final class SkullManager {
 	 * @return The skulled.
 	 */
 	public boolean isSkulled() {
-		return skulled;
+		return skulled || deepWilderness;
 	}
+
+        public boolean isDeepWilderness() {
+                return deepWilderness;
+        }
+
+        public void setDeepWilderness (boolean deepWildy) {
+                setSkullIcon(deepWildy ? 1 : skulled ? 0 : -1);
+                setSkullCheckDisabled(deepWildy);
+                deepWilderness = deepWildy;
+        }
 
 	/**
 	 * Sets the skulled.

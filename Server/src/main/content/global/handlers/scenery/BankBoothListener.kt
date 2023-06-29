@@ -38,6 +38,34 @@ class BankBoothListener : InteractionListener {
             Scenery.BANK_BOOTH_29085, Scenery.BANK_BOOTH_30015, Scenery.BANK_BOOTH_30016, Scenery.BANK_BOOTH_34205,
             Scenery.BANK_BOOTH_34752, Scenery.BANK_BOOTH_35647, Scenery.BANK_BOOTH_36786, Scenery.BANK_BOOTH_37474
         )
+
+        public fun convertToNotes (used: Node, player: Player) {
+            val item = used as Item
+
+            if (item.noteChange != item.id) {
+                if (item.definition.isUnnoted) {
+                    val amount = amountInInventory(player, item.id)
+                    if (removeItem(player, Item(item.id, amount))) {
+                        addItem(player, item.noteChange, amount)
+                    }
+                } else {
+                    var amount = item.amount
+                    val freeSlotCount = freeSlots(player)
+
+                    if (amount > freeSlotCount) {
+                        amount = freeSlotCount
+                    }
+
+                    if (removeItem(player, Item(item.id, amount))) {
+                        addItem(player, item.noteChange, amount)
+                    }
+                }
+
+                return
+            }
+
+            sendMessage(player, "This item can't be noted.")
+        }
     }
 
     /**
@@ -146,32 +174,8 @@ class BankBoothListener : InteractionListener {
             tryInvokeBankerDialogue(player, with)
             return true
         }
-
-        val item = used as Item
-
-        if (item.noteChange != item.id) {
-            if (item.definition.isUnnoted) {
-                val amount = amountInInventory(player, item.id)
-                if (removeItem(player, Item(item.id, amount))) {
-                    addItem(player, item.noteChange, amount)
-                }
-            } else {
-                var amount = item.amount
-                val freeSlotCount = freeSlots(player)
-
-                if (amount > freeSlotCount) {
-                    amount = freeSlotCount
-                }
-
-                if (removeItem(player, Item(item.id, amount))) {
-                    addItem(player, item.noteChange, amount)
-                }
-            }
-
-            return true
-        }
-
-        sendMessage(player, "This item can't be noted.")
+        
+        convertToNotes (used, player)
         return true
     }
 

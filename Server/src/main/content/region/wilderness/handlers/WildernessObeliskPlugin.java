@@ -43,6 +43,12 @@ public final class WildernessObeliskPlugin extends OptionHandler {
 		if (stationObelisk == null) {
 			return false;
 		}
+                if (player.getSkullManager().isDeepWilderness()) {
+                    if (player.getProperties().getCombatPulse().isInCombat()) {
+                        player.sendMessage("You can't use this while in combat.");
+                        return false;
+                    }
+                }
 		for (int i = 0; i < 4; i++) {
 			int x = stationObelisk.getLocation().getX();
 			int y = stationObelisk.getLocation().getY();

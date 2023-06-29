@@ -1,11 +1,13 @@
 package content.minigame.allfiredup
 
-import core.game.dialogue.DialoguePlugin
+import core.ServerConstants
+import core.game.dialogue.*
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.plugin.Initializable
+import content.region.wilderness.dialogue.*
 import org.rs09.consts.Items
 
 private val VALID_LOGS = arrayOf(Items.LOGS_1511, Items.OAK_LOGS_1521, Items.WILLOW_LOGS_1519, Items.MAPLE_LOGS_1517, Items.YEW_LOGS_1515, Items.MAGIC_LOGS_1513)
@@ -20,6 +22,7 @@ class BeaconTenderDialogue(player: Player? = null) : core.game.dialogue.Dialogue
     }
 
     override fun open(vararg args: Any?): Boolean {
+        npc = (args[0] as NPC).getShownNPC(player)
         index = getIndexOf((args[0] as NPC).originalId)
         if(index == content.minigame.allfiredup.AFUBeacon.GWD.ordinal && player.skills.getLevel(Skills.SUMMONING) < 81){
             npc("Awwf uurrrhur","(You need 81 Summoning to communicate with Nanuq.)")
@@ -27,11 +30,10 @@ class BeaconTenderDialogue(player: Player? = null) : core.game.dialogue.Dialogue
             return true
         }
         if(index == content.minigame.allfiredup.AFUBeacon.MONASTERY.ordinal && player.skills.getLevel(Skills.PRAYER) < 53){
-            npc("I will aid you when your devotion is","strong enough.","(You need 53 Prayer for him to watch the beacon.)")
+            npc("I will aid you when your devotion is","strong enough.","(You need 53 Prayer for him to assist you.)")
             stage = 1000
             return true
         }
-        npc = (args[0] as NPC).getShownNPC(player)
         npc("Hello, adventurer.")
         return true
     }

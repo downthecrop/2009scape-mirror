@@ -39,6 +39,9 @@ public final class WildernessZone extends MapZone {
 	 */
 	private static final WildernessZone INSTANCE = new WildernessZone(new ZoneBorders(2944, 3525, 3400, 3975), new ZoneBorders(3070, 9924, 3135, 10002), ZoneBorders.forRegion(12193), ZoneBorders.forRegion(11937));
 
+        public static final String WILDERNESS_PROT_ATTR = "/save:wilderness-protection-active";
+        public static final String WILDERNESS_HIGHER_NEXTFEE = "/save:wilderness-higher-next-fee";
+
 	/**
 	 * The zone borders.
 	 */
@@ -69,7 +72,7 @@ public final class WildernessZone extends MapZone {
 		double x = combatLevel;
 		double A = 44044.5491;
 		double B = -7360.19548;
-		return (int) (A + (B * Math.log(x))) / 2;
+		return (int) (A + (B * Math.log(x)));
 	}
 
 	/**
@@ -87,33 +90,40 @@ public final class WildernessZone extends MapZone {
 	}
 
 	private void rollWildernessExclusiveLoot(Entity e, Entity killer) {
-		//Roll for PVP gear and Brawling Gloves from revenants
-		if (e instanceof NPC && killer instanceof Player && (e.asNpc().getName().contains("Revenant") || e.getId() == NPCs.CHAOS_ELEMENTAL_3200)) {
+                if (!(killer instanceof Player)) return;
+                
+                boolean isDeepWildy = ((Player) killer).getSkullManager().isDeepWilderness();
+                boolean isValidTarget = e instanceof NPC && (isDeepWildy || e.asNpc().getName().contains("Revenant") || e.getId() == NPCs.CHAOS_ELEMENTAL_3200);
+                
+                if (!isValidTarget) return;
 
-			boolean gloveDrop = e.getId() == NPCs.CHAOS_ELEMENTAL_3200 ? RandomFunction.roll(75) : RandomFunction.roll(100);
-			if (gloveDrop) {
-				byte glove = (byte) RandomFunction.random(1, 13);
-				Item reward = new Item(BrawlingGloves.forIndicator(glove).getId());
-				GroundItemManager.create(reward, e.asNpc().getDropLocation(), killer.asPlayer());
-				Repository.sendNews(killer.getUsername() + " has received " + reward.getName().toLowerCase() + " from a " + e.asNpc().getName() + "!");
-			}
+                int cEleGloveRate = isDeepWildy ? 50 : 150;
+                int normalGloveRate = isDeepWildy ? 75 : 150;
 
-			int combatLevel = e.asNpc().getDefinition().getCombatLevel();
-			int dropRate = getNewDropRate(combatLevel);
-			for (int j : PVP_GEAR) {
-				boolean chance = RandomFunction.roll(dropRate);
-				if (chance) {
-					Item reward;
-					if (j == 13879 || j == 13883) { // checks if it's a javelin or throwing axe
-						reward = new Item(j, RandomFunction.random(15, 50));
-					} else {
-						reward = new Item(j);
-					}
-					Repository.sendNews(killer.asPlayer().getUsername() + " has received a " + reward.getName() + " from a " + e.asNpc().getName() + "!");
-					GroundItemManager.create(reward, ((NPC) e).getDropLocation(), killer.asPlayer());
-				}
-			}
-		}
+                int pvpGearRate = getNewDropRate(e.asNpc().getDefinition().getCombatLevel());
+                if (isDeepWildy)
+                    pvpGearRate /= 2;
+
+                if (RandomFunction.roll(e.getId() == NPCs.CHAOS_ELEMENTAL_3200 ? cEleGloveRate : normalGloveRate)) {
+                        byte glove = (byte) RandomFunction.random(1, 13);
+                        Item reward = new Item(BrawlingGloves.forIndicator(glove).getId());
+                        GroundItemManager.create(reward, e.asNpc().getDropLocation(), killer.asPlayer());
+                        Repository.sendNews(killer.getUsername() + " has received " + reward.getName().toLowerCase() + " from a " + e.asNpc().getName() + "!");
+                }
+
+                for (int j : PVP_GEAR) {
+                        boolean chance = RandomFunction.roll(pvpGearRate);
+                        if (chance) {
+                                Item reward;
+                                if (j == 13879 || j == 13883) { // checks if it's a javelin or throwing axe
+                                        reward = new Item(j, RandomFunction.random(15, 50));
+                                } else {
+                                        reward = new Item(j);
+                                }
+                                Repository.sendNews(killer.asPlayer().getUsername() + " has received a " + reward.getName() + " from a " + e.asNpc().getName() + "!");
+                                GroundItemManager.create(reward, ((NPC) e).getDropLocation(), killer.asPlayer());
+                        }
+                }
 	}
 
 	/**
