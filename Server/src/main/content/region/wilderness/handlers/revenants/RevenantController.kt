@@ -12,6 +12,7 @@ import core.api.*
 import core.tools.SystemLogger
 import core.game.system.command.Privilege
 import core.game.world.GameWorld
+import core.game.world.map.path.Pathfinder
 import core.game.world.repository.Repository
 import core.tools.Log
 import java.lang.Integer.min
@@ -108,24 +109,14 @@ class RevenantController : TickListener, Commands {
         NONE {
             override fun execute(revenantNPC: RevenantNPC) {}
         },
-        INTENTIONAL_IDLE {
-            private val MAX_IDLE_TIME: Int = 50
-
-            override fun execute(revenantNPC: RevenantNPC) {
-                if (taskTimeRemaining[revenantNPC] == 0) currentTask[revenantNPC] = NONE
-            }
-
-            override fun assign(revenantNPC: RevenantNPC) {
-                taskTimeRemaining[revenantNPC] = RandomFunction.random(MAX_IDLE_TIME)
-            }
-        },
         RANDOM_ROAM {
             private val MAX_ROAM_TICKS: Int = 250
 
             override fun execute(revenantNPC: RevenantNPC) {
                 if (!canMove(revenantNPC)) return
 
-                revenantNPC.pulseManager.run(object : MovementPulse(revenantNPC, getNextLocation(revenantNPC)) {
+                val nextLoc = getNextLocation(revenantNPC)
+                revenantNPC.pulseManager.run(object : MovementPulse(revenantNPC, nextLoc, Pathfinder.SMART) {
                     override fun pulse(): Boolean {
                         if (taskTimeRemaining[revenantNPC]!! <= 0) currentTask[revenantNPC] = NONE
                         return true
@@ -139,6 +130,7 @@ class RevenantController : TickListener, Commands {
 
             fun canMove(revenantNPC: RevenantNPC) : Boolean {
                 return  !revenantNPC.walkingQueue.isMoving
+                        && !revenantNPC.pulseManager.hasPulseRunning()
                         && !revenantNPC.properties.combatPulse.isAttacking
                         && !revenantNPC.properties.combatPulse.isInCombat
             }
@@ -212,7 +204,7 @@ class RevenantController : TickListener, Commands {
                         RandomFunction.random(-pathVariance, pathVariance),
                         0
                     )
-                    revenantNPC.pulseManager.run(object : MovementPulse(revenantNPC, nextLoc) {
+                    revenantNPC.pulseManager.run(object : MovementPulse(revenantNPC, nextLoc, Pathfinder.SMART) {
                         override fun pulse(): Boolean {
                             return true
                         }

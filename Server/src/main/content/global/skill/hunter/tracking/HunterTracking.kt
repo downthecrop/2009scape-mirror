@@ -217,7 +217,7 @@ abstract class HunterTracking : OptionHandler(){
                 trail.get(currentIndex)
             }
         } else {
-            return false
+            TrailDefinition(0,TrailType.LINKING,false,Location(0,0,0),Location(0,0,0),Location(0,0,0))
         }
         when(option){
 

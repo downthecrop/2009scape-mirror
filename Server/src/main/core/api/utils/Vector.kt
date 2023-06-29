@@ -41,6 +41,10 @@ class Vector (val x: Double, val y: Double) {
         return -this
     }
 
+    fun toLocation (plane: Int = 0) : Location {
+        return Location.create(floor(x).toInt(), floor(y).toInt(), plane)
+    }
+
     companion object {
         @JvmStatic fun betweenLocs (from: Location, to: Location) : Vector {
             val xDiff = to.x - from.x

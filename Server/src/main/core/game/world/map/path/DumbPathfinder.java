@@ -83,9 +83,7 @@ public final class DumbPathfinder extends Pathfinder {
 			Direction last = null;
 			for (int i = 0; i < points.size() - 1; i++) {
 				Point p = points.get(i);
-				if (p.getDirection() != last) {
-					path.getPoints().add(p);
-				}
+				path.getPoints().add(p);
 			}
 			path.getPoints().add(points.get(points.size() - 1));
 		}

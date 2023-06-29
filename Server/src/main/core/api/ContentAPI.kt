@@ -1100,6 +1100,22 @@ fun forceWalk(entity: Entity, dest: Location, type: String) {
 }
 
 /**
+ * Returns a location truncated to the appropriate pathfinding limit
+**/
+fun truncateLoc (mover: Entity, destination: Location) : Pair<Boolean,Location> {
+    val vector = Vector.betweenLocs(mover.location, destination)
+    val normVec = vector.normalized()
+    val mag = vector.magnitude()
+
+    var multiplier = if (mover is NPC) 14.0 else ServerConstants.MAX_PATHFIND_DISTANCE.toDouble()
+    var clampedMultiplier = min(multiplier, mag)
+
+    var truncated = multiplier == clampedMultiplier
+
+    return Pair(truncated, mover.location.transform(normVec * clampedMultiplier))
+}
+
+/**
  * Force a player to move from the start location to the dest location
  * @param player the player we are moving
  * @param start the start location

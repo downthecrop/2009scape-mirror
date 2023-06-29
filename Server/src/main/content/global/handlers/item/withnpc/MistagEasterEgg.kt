@@ -7,12 +7,15 @@ import org.rs09.consts.NPCs
 import core.game.dialogue.DialogueFile
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import core.game.world.update.flag.context.Animation
 import core.tools.END_DIALOGUE
+import core.api.*
 
 class MistagEasterEgg : InteractionListener {
     val DIAMOND = Items.DIAMOND_1601
     val MISTAG = NPCs.MISTAG_2084
     val ZANIK_RING = 14649
+    val DRUNK_RENDER = 982
 
     override fun defineListeners() {
         onUseWith(IntType.NPC,DIAMOND,MISTAG){ player, _, with ->
@@ -28,6 +31,18 @@ class MistagEasterEgg : InteractionListener {
 
         onUnequip(ZANIK_RING){player, _ ->
             player.appearance.transformNPC(-1)
+            return@onUnequip true
+        }
+
+        onEquip(Items.BEER_1917){player, _ ->
+            setAttribute(player, "render-anim-override", DRUNK_RENDER)
+            return@onEquip true
+        }
+
+        onUnequip(Items.BEER_1917){player, _ ->
+            removeAttribute(player, "render-anim-override")
+            player.appearance.setDefaultAnimations()
+            player.appearance.sync()
             return@onUnequip true
         }
     }
