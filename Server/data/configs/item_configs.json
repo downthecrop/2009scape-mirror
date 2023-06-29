@@ -41702,7 +41702,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,5}-{18,35}",
+    "requirements": "{1,5}",
     "shop_price": "650",
     "ge_buy_limit": "100",
     "examine": "You don't want to wear it inside-out.",
