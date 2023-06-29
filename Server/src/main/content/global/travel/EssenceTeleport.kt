@@ -59,7 +59,7 @@ object EssenceTeleport {
         lock(player,4)
         player.audioManager.send(125)
         Projectile.create(npc, player, CURSE_PROJECTILE).send()
-        npc.sendChat("Senventior Disthinte Molesko!")
+        npc.sendChat("Senventior Disthine Molenko!")
         GameWorld.Pulser.submit(object : Pulse(1) {
             var counter = 0
             override fun pulse(): Boolean {

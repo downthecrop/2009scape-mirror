@@ -88,7 +88,7 @@ public final class EllisDialogue extends DialoguePlugin {
 			stage = 3001;
 			break;
 		case 3001:
-			npc("Alernatively you could try hard leather. It's not so easy", "to craft, but I only charge 3 gp per cowhide to prepare it,", "and it makes much sturdier armour.");
+			npc("Alternatively you could try hard leather. It's not so easy", "to craft, but I only charge 3 gp per cowhide to prepare it,", "and it makes much sturdier armour.");
 			stage = 3002;
 			break;
 		case 3002:

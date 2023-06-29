@@ -134,7 +134,7 @@ class DragonSlayer : Quest("Dragon Slayer", 18, 17, 2, 176, 0, 1, 10), LoginList
                 )
                 line(player, RED + "protection " + BLUE + "against the dragon's breath.", 13 + 7)
                 if (!player.inventory.containsItem(MAZE_PIECE) && !player.bank.containsItem(MAZE_PIECE)) {
-                    line(player, BLUE + "One)2third of the map is in " + RED + "Melzar's Maze" + BLUE + ", near", 14 + 7)
+                    line(player, BLUE + "One-third of the map is in " + RED + "Melzar's Maze" + BLUE + ", near", 14 + 7)
                     line(player, RED + "Rimmington" + ".", 15 + 7)
                 } else {
                     line(player, "<str>I found the piece of the map that was hidden in Melzar's", 14 + 7)
@@ -143,7 +143,7 @@ class DragonSlayer : Quest("Dragon Slayer", 18, 17, 2, 176, 0, 1, 10), LoginList
                 if (!player.inventory.containsItem(MAGIC_PIECE) && !player.bank.containsItem(MAGIC_PIECE)) {
                     line(
                         player,
-                        BLUE + "One)2third of the map is hidden and only the " + RED + "Oracle " + BLUE + "on " + RED + "Ice",
+                        BLUE + "One-third of the map is hidden and only the " + RED + "Oracle " + BLUE + "on " + RED + "Ice",
                         16 + 7
                     )
                     line(player, RED + "Mountain" + BLUE + " will know where it is.", 17 + 7)
@@ -154,7 +154,7 @@ class DragonSlayer : Quest("Dragon Slayer", 18, 17, 2, 176, 0, 1, 10), LoginList
                 if (!player.inventory.containsItem(WORMBRAIN_PIECE) && !player.bank.containsItem(WORMBRAIN_PIECE)) {
                     line(
                         player,
-                        BLUE + "One)2third of the map was stolen by a " + RED + "goblin " + BLUE + "from the",
+                        BLUE + "One-third of the map was stolen by a " + RED + "goblin " + BLUE + "from the",
                         18 + 7
                     )
                     line(player, RED + "Goblin Village.", 19 + 7)
