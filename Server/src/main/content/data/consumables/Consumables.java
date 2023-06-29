@@ -244,19 +244,26 @@ public enum Consumables {
 
 	/** Cocktails */
 	FRUIT_BLAST(new Drink(new int[] {2084, 2026}, new HealingEffect(9))),
-	PREMADE_FR_BLAST(new Food(new int[] {2034, 2026}, new HealingEffect(9))),
+	PREMADE_FR_BLAST(new Drink(new int[] {2034, 2026}, new HealingEffect(9))),
+	CRAFTED_FR_BLAST(new Drink(new int[] {9514, 2026}, new HealingEffect(9))),
 	PINEAPPLE_PUNCH(new Drink(new int[] {2048, 2026}, new HealingEffect(9), "You drink the cocktail. It tastes great.")),
 	PREMADE_P_PUNCH(new Drink(new int[] {2036, 2026}, new HealingEffect(9), "You drink the cocktail. It tastes great.")),
+	CRAFTED_P_PUNCH(new Drink(new int[] {9512, 2026}, new HealingEffect(9))),
 	WIZARD_BLIZZARD(new Drink(new int[] {2054, 2026}, new MultiEffect(new HealingEffect(5), new SkillEffect(Skills.STRENGTH, 6, 0), new SkillEffect(Skills.ATTACK, -4, 0)))),
 	PREMADE_WIZ_BLZD(new Drink(new int[] {2040, 2026}, new MultiEffect(new HealingEffect(5), new SkillEffect(Skills.STRENGTH, 6, 0), new SkillEffect(Skills.ATTACK, -4, 0)))),
+	CRAFTED_WIZ_BLZD(new Drink(new int[]{9508, 2026}, new MultiEffect(new HealingEffect(5), new SkillEffect(Skills.STRENGTH, 6, 0),new SkillEffect(Skills.ATTACK, -4, 0 )))),
 	SHORT_GREEN_GUY(new Drink(new int[] {2080, 2026}, new MultiEffect(new HealingEffect(5), new SkillEffect(Skills.STRENGTH, 4, 0), new SkillEffect(Skills.ATTACK, -3, 0)))),
 	PREMADE_SGG(new Drink(new int[] {2038, 2026}, new MultiEffect(new HealingEffect(5), new SkillEffect(Skills.STRENGTH, 4, 0), new SkillEffect(Skills.ATTACK, -3, 0)))),
+	CRAFTED_SGG(new Drink(new int[]{9510, 2026}, new MultiEffect(new HealingEffect(5), new SkillEffect(Skills.STRENGTH, 4, 0), new SkillEffect(Skills.ATTACK, -3,0)))),
 	DRUNK_DRAGON(new Drink(new int[] {2092, 2026}, new MultiEffect(new HealingEffect(5), new SkillEffect(Skills.STRENGTH, 7, 0), new SkillEffect(Skills.ATTACK, -4, 0)))),
 	PREMADE_DR_DRAGON(new Drink(new int[] {2032, 2026}, new MultiEffect(new HealingEffect(5), new SkillEffect(Skills.STRENGTH, 7, 0), new SkillEffect(Skills.ATTACK, -4, 0)))),
+	CRAFTED_DR_DRAGON(new Drink(new int[] {9516, 2026}, new MultiEffect(new HealingEffect(5), new SkillEffect(Skills.STRENGTH, 7, 0), new SkillEffect(Skills.ATTACK, -4,0)))),
 	CHOC_SATURDAY(new Drink(new int[] {2074, 2026}, new MultiEffect(new HealingEffect(5), new SkillEffect(Skills.STRENGTH, 7, 0), new SkillEffect(Skills.ATTACK, -4, 0)))),
 	PREMADE_CHOC_SDY(new Drink(new int[] {2030, 2026}, new MultiEffect(new HealingEffect(5), new SkillEffect(Skills.STRENGTH, 7, 0), new SkillEffect(Skills.ATTACK, -4, 0)))),
+	CRAFTED_CHOC_SDY(new Drink(new  int[] {9518, 2026}, new MultiEffect(new HealingEffect(5), new SkillEffect(Skills.STRENGTH, 7,0), new SkillEffect(Skills.ATTACK, -4,0)))),
 	BLURBERRY_SPECIAL(new Drink(new int[] {2064, 2026}, new MultiEffect(new HealingEffect(6), new SkillEffect(Skills.STRENGTH, 6, 0), new SkillEffect(Skills.ATTACK, -4, 0)))),
 	PREMADE_BLURB_SP(new Drink(new int[] {2028, 2026}, new MultiEffect(new HealingEffect(6), new SkillEffect(Skills.STRENGTH, 6, 0), new SkillEffect(Skills.ATTACK, -4, 0)))),
+	CRAFTED_BLURB_SP(new Drink(new int[] {9520, 2026}, new MultiEffect(new HealingEffect(6), new SkillEffect(Skills.STRENGTH,6,0), new SkillEffect(Skills.ATTACK, -4,0)))),
 
 	/** Bottled Drinks */
 	KARAMJAN_RUM(new Drink(new int[] {431}, new MultiEffect(new HealingEffect(5), new SkillEffect(Skills.STRENGTH, 5, 0), new SkillEffect(Skills.ATTACK, -4, 0)))),
