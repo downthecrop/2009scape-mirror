@@ -33,6 +33,8 @@ import core.tools.RandomFunction;
 import core.game.world.GameWorld;
 import core.plugin.ClassScanner;
 
+import java.util.stream.IntStream;
+
 import static core.api.ContentAPIKt.*;
 
 /**
@@ -258,15 +260,19 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 			switch (object.getId()) {
 			case 6714:
 			case 6733:
-				int index = -1;
-                int brother = player.getSavedData().getActivityData().getBarrowTunnelIndex();
-                if (!player.getSavedData().getActivityData().getBarrowBrothers()[brother] && RandomFunction.random(15) == 0 && !player.getAttribute("brother:" + brother, false)) {
-                    index = brother;
-                }
-				if (index > -1) {
-					BarrowsCrypt.getCrypt(index).spawnBrother(player, RegionManager.getTeleportLocation(target.getLocation(), 1));
-				}
 				DoorActionHandler.handleAutowalkDoor(e, (Scenery) target);
+				if (RandomFunction.random(15) == 0) {
+					// spawn a brother, if any haven't yet been killed
+					boolean[] brothers = player.getSavedData().getActivityData().getBarrowBrothers();
+					int[] alive = IntStream.range(0, 6).filter(i -> !brothers[i]).toArray();
+					if (alive.length > 0) {
+						int index = 0;
+						if (alive.length > 1) {
+							index = RandomFunction.random(0, alive.length);
+						}
+						BarrowsCrypt.getCrypt(alive[index]).spawnBrother(player, RegionManager.getTeleportLocation(target.getLocation(), 1));
+					}
+				}
 				return true;
 			case 6821:
 				BarrowsCrypt.getCrypt(BarrowsCrypt.AHRIM).openSarcophagus((Player) e, object);
@@ -288,7 +294,7 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 				return true;
 			case 6774:
 				player.lock(1);
-                brother = player.getSavedData().getActivityData().getBarrowTunnelIndex();
+                int brother = player.getSavedData().getActivityData().getBarrowTunnelIndex();
                 if (!player.getSavedData().getActivityData().getBarrowBrothers()[brother] && !player.getAttribute("brother:" + brother, false)) {
                     BarrowsCrypt.getCrypt(brother).spawnBrother(player, RegionManager.getTeleportLocation(target.getCenterLocation(), 4));
                 }
