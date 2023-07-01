@@ -77,7 +77,8 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
     }),
     HASTY_COOKING("cape_perks:hasty-cooking"),
     SMOOTH_HANDS("cape_perks:smooth-hands"),
-    PET_MASTERY("cape_perks.pet-mastery"),
+    PET_MASTERY("cape_perks:pet-mastery"),
+    BREWMASTER("cape_perks:brewmaster"),
     NONE("cape_perks:none")
     ;
 
@@ -98,7 +99,7 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
                 Skillcape.RUNECRAFTING -> ABYSS_WARPING
                 Skillcape.HITPOINTS -> DAMAGE_SPONG
                 Skillcape.AGILITY -> MARATHON_RUNNER
-                Skillcape.HERBLORE -> NONE
+                Skillcape.HERBLORE -> BREWMASTER
                 Skillcape.THIEVING -> SMOOTH_HANDS
                 Skillcape.CRAFTING -> NONE
                 Skillcape.FLETCHING -> NONE
