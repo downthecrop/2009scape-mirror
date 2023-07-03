@@ -12,7 +12,7 @@ import core.game.event.*
 import org.rs09.consts.Items;
 
 class SkillRestore : RSTimer (1, "skillrestore", isAuto = true, isSoft = true) {
-    val ticksSinceLastRestore = IntArray (24)
+    val ticksSinceLastRestore = IntArray (25)
     val restoreTicks = IntArray (24) { 100 }
 
     override fun run (entity: Entity) : Boolean {
@@ -32,6 +32,11 @@ class SkillRestore : RSTimer (1, "skillrestore", isAuto = true, isSoft = true) {
                 }
                 ticksSinceLastRestore[i] = 0
             }
+        }
+
+        if (entity is Player && ticksSinceLastRestore[25]++ >= 50) {
+            entity.settings.setSpecialEnergy (kotlin.math.min (100, player.settings.specialEnergy + 10))
+            ticksSinceLastRestore[25] = 0
         }
 
         return true
