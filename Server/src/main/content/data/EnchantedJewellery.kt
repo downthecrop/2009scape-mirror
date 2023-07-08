@@ -70,10 +70,10 @@ enum class EnchantedJewellery(
     ),
     AMULET_OF_GLORY(
             arrayOf(
-                    "Edgeville",
-                    "Karamja",
-                    "Draynor Village",
-                    "Al-Kharid",
+                    "Edgeville.",
+                    "Karamja.",
+                    "Draynor Village.",
+                    "Al-Kharid.",
                     "Nowhere."
             ),
             arrayOf(
@@ -103,7 +103,7 @@ enum class EnchantedJewellery(
                     "Barbarian Outpost.",
                     "Clan Wars.",
                     "Wilderness Volcano.",
-                    "Corporeal Beast"
+                    "Corporeal Beast."
             ),
             arrayOf(
                     Location.create(2899, 3563, 0),
@@ -135,10 +135,10 @@ enum class EnchantedJewellery(
     ),
     COMBAT_BRACELET(
             arrayOf(
-                    "Champions' Guild",
-                    "Monastery",
-                    "Ranging Guild",
-                    "Warriors' Guild",
+                    "Champions' Guild.",
+                    "Monastery.",
+                    "Ranging Guild.",
+                    "Warriors' Guild.",
                     "Nowhere."
             ),
             arrayOf(
@@ -155,10 +155,10 @@ enum class EnchantedJewellery(
     ),
     SKILLS_NECKLACE(
             arrayOf(
-                    "Fishing Guild",
-                    "Mining Guild",
-                    "Crafting Guild",
-                    "Cooking Guild",
+                    "Fishing Guild.",
+                    "Mining Guild.",
+                    "Crafting Guild.",
+                    "Cooking Guild.",
                     "Nowhere."
             ),
             arrayOf(
@@ -175,7 +175,7 @@ enum class EnchantedJewellery(
     ),
     RING_OF_WEALTH(
             arrayOf(
-                    "Grand Exchange",
+                    "Grand Exchange.",
                     "Nowhere."
             ),
             arrayOf(
