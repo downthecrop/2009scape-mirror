@@ -35,7 +35,7 @@ class SkillRestore : RSTimer (1, "skillrestore", isAuto = true, isSoft = true) {
         }
 
         if (entity is Player && ticksSinceLastRestore[25]++ >= 50) {
-            entity.settings.setSpecialEnergy (kotlin.math.min (100, player.settings.specialEnergy + 10))
+            entity.settings.setSpecialEnergy (kotlin.math.min (100, entity.settings.specialEnergy + 10))
             ticksSinceLastRestore[25] = 0
         }
 
