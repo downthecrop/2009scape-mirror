@@ -927,7 +927,7 @@ public abstract class Entity extends Node {
 	 * @return {@code True} if so.
 	 */
 	public boolean isTeleBlocked() {
-                return timers.getTimer("teleblock") != null || entity.getLocks().isTeleportLocked();
+                return timers.getTimer("teleblock") != null || getLocks().isTeleportLocked();
 	}
 
 	/**
