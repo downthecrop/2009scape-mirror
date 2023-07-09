@@ -51,8 +51,6 @@ class ConstructionGuideBook : InteractionListener {
     }
 
     override fun defineListeners() {
-        println(intArrayOf(DialogueInterpreter.getDialogueKey("book:conguide")))
-
         // There is supposedly a book here.
         on(Items.CONSTRUCTION_GUIDE_8463, IntType.ITEM, "read") { player, _ ->
             if (settings!!.isDevMode && settings!!.isBeta) {
