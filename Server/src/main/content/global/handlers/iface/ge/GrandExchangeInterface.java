@@ -144,7 +144,7 @@ public class GrandExchangeInterface extends ComponentPlugin {
                     item = new Item(set.getItemId());
                 }
 
-		if (opcode != 127 && inventory) {
+		if (opcode != 127 && inventory && set == null) {
 			player.getPacketDispatch().sendMessage("This isn't a set item.");
 			return;
 		}
