@@ -9,6 +9,7 @@ import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.player.Player
 import core.tools.*
 import core.api.*
+import core.game.world.GameWorld
 
 import java.nio.charset.StandardCharsets
 import kotlin.reflect.*
@@ -74,7 +75,7 @@ sealed class PlayerFlags530 (p: Int, o: Int, f: EntityFlag) : EFlagProvider (530
             val appearance = context.appearance
             appearance.prepareBodyData(context)
             var settings = appearance.gender.toByte().toInt()
-            val nonPvp = context.skullManager.isWilderness && context.skullManager.isWildernessDisabled
+            val nonPvp = context.skullManager.isWilderness && context.skullManager.isWildernessDisabled //nonPvp is always false
             if (context.size() > 1)
                 settings += (context.size() - 1) shl 3
             if (nonPvp)
@@ -107,9 +108,26 @@ sealed class PlayerFlags530 (p: Int, o: Int, f: EntityFlag) : EFlagProvider (530
                 buffer.p1 (context.properties.currentCombatLevel) //with summoning
                 buffer.p2 (context.skills.getTotalLevel())
             } else {
-                buffer.p1 (context.properties.currentCombatLevel) //without summoning
-                buffer.p1 (context.properties.combatLevel) //with summoning
-                buffer.p1 (context.skullManager.level) //combat range
+                //client-side code determines how the combat level will be displayed, based on
+                //the combat level values that are sent
+                if ((GameWorld.settings!!.isPvp || (GameWorld.settings!!.wild_pvp_enabled && context.skullManager.isWilderness))
+                    && !context.familiarManager.isUsingSummoning) {
+                    //client will display separate base and summoning combat levels (e.g. "50+5")
+                    //TODO: Split combat levels should also be used for Bounty Hunter
+                    buffer.p1 (context.properties.combatLevel) //without summoning
+                    buffer.p1 (context.properties.combatLevel + context.familiarManager.summoningCombatLevel) //with summoning
+                } else {
+                    //client will display a combined combat level (e.g. "55")
+                    buffer.p1 (context.properties.currentCombatLevel) //with summoning
+                    buffer.p1 (context.properties.currentCombatLevel) //with summoning
+                }
+                if (GameWorld.settings!!.isPvp) {
+                    //displays a player's combat level in white if the player is not within combat range
+                    buffer.p1 (context.skullManager.level) //combat range
+                } else {
+                    //disables the client code that makes combat levels white
+                    buffer.p1 (-1) //combat range
+                }
             }
             buffer.p1 (0) //this is the sound radius, and if set, 4 shorts need to be set as well which include the sound IDs
                           //to play to everyone in that radius when the player is rendered onscreen for the first time.

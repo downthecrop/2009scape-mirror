@@ -178,9 +178,7 @@ public final class FamiliarManager {
         } else {
             familiar.refreshTimer();
         }
-		if (player.getSkullManager().isWilderness()) {
-			player.getAppearance().sync();
-		}
+		player.getAppearance().sync();
 	}
 
 	/**

@@ -607,9 +607,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
                 setVarp(owner, 1176, 0);
                 setVarp(owner, 1175, 182986);
                 setVarp(owner, 1174, -1);
-		if (owner.getSkullManager().isWilderness()) {
-			owner.getAppearance().sync();
-		}
+		owner.getAppearance().sync();
 		owner.getInterfaceManager().setViewedTab(3);
 	}
 

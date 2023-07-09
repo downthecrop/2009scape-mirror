@@ -45,7 +45,7 @@ public final class InventoryListener implements ContainerListener {
 			}
 		}
 		player.getFamiliarManager().setHasPouch(pouch);
-		if (hadPouch != pouch && player.getSkullManager().isWilderness()) {
+		if (hadPouch != pouch) {
 			player.getAppearance().sync();
 		}
 	}

@@ -10,7 +10,9 @@ import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
+import core.game.world.GameWorld;
 import core.game.world.map.Location;
+import core.game.world.update.flag.EntityFlag;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.game.node.entity.combat.CombatPulse;
@@ -231,8 +233,12 @@ public final class Properties {
 	public int getCurrentCombatLevel() {
 		if (entity instanceof Player) {
 			Player player = (Player) entity;
-			if (player.getFamiliarManager().isUsingSummoning() || !player.getSkullManager().isWilderness()) {
-				return player.getFamiliarManager().getSummoningCombatLevel() + combatLevel;
+			if ((GameWorld.getSettings().isPvp() || (GameWorld.getSettings().getWild_pvp_enabled() && player.getSkullManager().isWilderness()))
+					&& !player.getFamiliarManager().isUsingSummoning()) {
+				//TODO: Split combat levels should also be used for Bounty Hunter
+				return combatLevel;
+			} else {
+				return combatLevel + player.getFamiliarManager().getSummoningCombatLevel();
 			}
 		}
 		return combatLevel;
