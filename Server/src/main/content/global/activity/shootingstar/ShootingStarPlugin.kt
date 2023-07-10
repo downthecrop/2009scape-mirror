@@ -132,8 +132,9 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
         }
 
         fun teleport(player: Player, star: ShootingStar){
-            teleport(player, star.crash_locations[star.location]!!.transform(0, -1, 0), TeleportManager.TeleportType.MINIGAME)
-            getRingStoreFile()[player.username.toLowerCase()] = true
+            if (teleport(player, star.crash_locations[star.location]!!.transform(0, -1, 0), TeleportManager.TeleportType.MINIGAME)) {
+                getRingStoreFile()[player.username.toLowerCase()] = true
+            }
         }
     }
 
