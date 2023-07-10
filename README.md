@@ -131,7 +131,7 @@ We use the AGPL 3.0 license, which can be found [here](https://www.gnu.org/licen
 
 ### Contact
 
-**Reminder: There is no official support for setting up your own server. Do not ping/dm developers, or ask in support channels about setting up your server. Support for the live server and 2009Scape single-player is available in the Discord.**
+**Reminder: There is no official support for setting up your own server. Do not ping/dm developers, or ask in support channels about setting up your server. Support for the live server and 2009Scape single-player is available on the [2009Scape forums](https://forum.2009scape.org/).**
 
 
 [license-shield]: https://img.shields.io/badge/license-AGPL--3.0-informational
