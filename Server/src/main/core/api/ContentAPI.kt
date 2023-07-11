@@ -75,6 +75,7 @@ import core.net.packet.context.MusicContext
 import core.net.packet.out.MusicPacket
 import core.game.system.timer.*
 import core.game.system.timer.impl.*
+import core.game.node.entity.combat.CombatSwingHandler
 import java.util.regex.*
 import java.io.*
 import kotlin.math.*
@@ -974,7 +975,7 @@ fun registerTimer (entity: Entity, timer: RSTimer?) {
     entity.timers.registerTimer (timer)
 }
 
-/** 
+/**
  * Used to fetch the existing, active, non-abstract and non-anonymous timer with the given identifier, or start a new timer if none exists and return that.
  * @param entity the entity whose timers we're retrieving
  * @param identifier the identifier of the timer, refer to the individual timer class for this token.
@@ -1014,7 +1015,7 @@ fun spawnTimer (identifier: String, vararg args: Any) : RSTimer? {
 
 /**
  * Used to fetch a new instance of a registered (see: non-anonymous, non-abstract) timer with the given configuration args
- * @param T the type of the timer you're trying to retrieve. The timer registry will be searched for a timer of this type. 
+ * @param T the type of the timer you're trying to retrieve. The timer registry will be searched for a timer of this type.
  * @param args various arbitrary arguments to be passed to the timer's constructor. Refer to the timer in question for what the args are expected to be.
  * @return a timer instance configured with your given args, or null if the timer is not listed in the registry (if this happens, your timer is either abstract or anonymous.)
 **/
@@ -2713,7 +2714,7 @@ fun apRange(entity: Entity, apRange: Int) {
 }
 
 fun hasLineOfSight(entity: Entity, target: Node) : Boolean {
-    return ProjectilePathfinder.find(entity, target).isSuccessful
+    return CombatSwingHandler.isProjectileClipped (entity, target, false)
 }
 
 fun animationFinished(entity: Entity) : Boolean {
@@ -2805,7 +2806,7 @@ fun isStunned(entity: Entity) : Boolean {
 **/
 fun applyPoison (entity: Entity, source: Entity, severity: Int) {
     val existingTimer = getTimer<Poison>(entity)
-    
+
     if (existingTimer != null) {
         existingTimer.severity = severity
         existingTimer.damageSource = source

@@ -26,12 +26,12 @@ abstract class SpellListener(val bookName: String) : Listener {
         @JvmField
         val GROUND_ITEM = -6
     }
-    fun onCast(spellID: Int,type: Int,method: (player: Player, node: Node?) -> Unit){
-        SpellListeners.add(spellID,type,bookName,method)
+    fun onCast(spellID: Int, type: Int, range: Int = 10, method: (player: Player, node: Node?) -> Unit){
+        SpellListeners.add(spellID, type, bookName, range, method)
     }
 
-    fun onCast(spellID: Int, type: Int, vararg ids: Int, method: (player: Player, node: Node?) -> Unit){
-        SpellListeners.add(spellID,type,ids,bookName,method)
+    fun onCast(spellID: Int, type: Int, vararg ids: Int, range: Int = 10, method: (player: Player, node: Node?) -> Unit){
+        SpellListeners.add(spellID, type, ids, bookName, range, method)
     }
 
     fun requires(player: Player, magicLevel: Int = 0, runes: Array<Item> = arrayOf<Item>(), specialEquipment: IntArray = intArrayOf()) {
