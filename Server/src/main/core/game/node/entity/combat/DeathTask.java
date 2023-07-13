@@ -156,7 +156,7 @@ public final class DeathTask extends NodeTask {
 			if (killer == null) {
 				killer = entity;
 			}
-			Pulse pulse = SINGLETON.schedule(entity, killer);
+			Pulse pulse = new DeathTask().schedule(entity, killer);
 			entity.getPulseManager().run(pulse, PulseType.STRONG);
 		}
 	}
