@@ -6,6 +6,10 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
 import core.tools.StringUtils;
+import content.global.skill.skillcapeperks.*;
+import content.data.consumables.Consumables;
+import core.tools.RandomFunction;
+
 
 /**
  * Represents the skill pulse used to handle the creating of potions.
@@ -130,7 +134,15 @@ public final class HerblorePulse extends SkillPulse<Item> {
 	 */
 	public void handleFinished() {
 		if ((player.getInventory().containsItem(potion.getBase()) && player.getInventory().containsItem(potion.getIngredient())) && player.getInventory().remove(potion.getBase(), potion.getIngredient())) {
-			final Item item = potion.getProduct();
+			Item item = potion.getProduct();
+                        if (SkillcapePerks.isActive (SkillcapePerks.BREWMASTER, player)) {
+                            if (RandomFunction.random(100) < 15) {
+                                Consumables consum = Consumables.getConsumableById (item.getId());
+                                if (consum != null)
+                                    item = new Item (consum.getConsumable().getIds()[0], item.getAmount());
+                                player.sendMessage ("Due to your expertise, you manage to make an extra dose.");
+                            }
+                        }
 		    player.getInventory().add(item);
 			player.getSkills().addExperience(Skills.HERBLORE, potion.getExperience(), true);
 			player.getPacketDispatch().sendMessage("You mix the " + potion.getIngredient().getName().toLowerCase() + " into your potion.");
