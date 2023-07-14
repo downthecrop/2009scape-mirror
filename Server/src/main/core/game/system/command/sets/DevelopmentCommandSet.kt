@@ -8,6 +8,7 @@ import core.cache.def.impl.DataMap
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.VarbitDefinition
 import core.cache.def.impl.Struct
+import core.game.dialogue.DialogueFile
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.SpellBookManager
@@ -275,6 +276,13 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
 
         define("drawintersect", Privilege.ADMIN, "", "Visualizes the predicted intersection point with an NPC") {player, _ ->
             setAttribute(player, "draw-intersect", !getAttribute(player, "draw-intersect", false))
+        }
+
+        define("expression", Privilege.ADMIN, "::expression id", "Visualizes chathead animations from ID.") { player, args ->
+            if(args.size != 2)
+                reject(player, "Usage: ::expression id")
+            val id = args[1].toIntOrNull() ?: 9804
+            player.dialogueInterpreter.sendDialogues(player, id, "Expression ID: $id")
         }
     }
 }
