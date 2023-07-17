@@ -1,10 +1,12 @@
 package content.region.desert.handlers;
 
+import core.api.Container;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
+import core.game.dialogue.FacialExpression;
 import core.game.global.action.DoorActionHandler;
 import content.global.skill.agility.AgilityHandler;
 import core.game.interaction.OptionHandler;
@@ -16,6 +18,10 @@ import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Items;
+
+import static core.api.ContentAPIKt.*;
+import static core.tools.TickUtilsKt.ticksToCycles;
 
 /**
  * Represents the plugin to handle the shantay pass.
@@ -84,11 +90,15 @@ public class ShantayPassPlugin extends OptionHandler {
 			player.getInterfaceManager().open(new Component(565));
 			break;
 		case "quick-pass":
-			if (player.getLocation().getY() < 3117) {
-				AgilityHandler.walk(player, 0, player.getLocation(), player.getLocation().transform(0, player.getLocation().getY() > 3116 ? -2 : 2, 0), null, 0, null);
-				return true;
+			if (player.getLocation().getY() > 3116) {
+				if (!inInventory(player, Items.SHANTAY_PASS_1854, 1)) {
+					sendNPCDialogue(player, 838, "You need a Shantay pass to get through this gate. See Shantay, he will sell you one for a very reasonable price.", FacialExpression.NEUTRAL);
+					return true;
+				}
+				if (!removeItem(player, Items.SHANTAY_PASS_1854, Container.INVENTORY)) return true;
+				sendMessage(player, "You hand your Shantay pass to the guard and pass through the gate.");
 			}
-			player.getDialogueInterpreter().open(838, 838, true);
+			forceMove(player, player.getLocation(), player.getLocation().transform(0, player.getLocation().getY() > 3116 ? -2 : 2, 0), 0, ticksToCycles(2), null, 819, null);
 			break;
 		}
 		return true;

@@ -19,6 +19,10 @@ fun cyclesToTicks (cycles: Int) : Int {
     return kotlin.math.ceil (cycles / cyclesPerTick.toDouble()).toInt()
 }
 
+fun ticksToCycles (ticks: Int) : Int {
+    return ticks * (tick / cycle)
+}
+
 fun minutesToTicks(minutes: Int): Int {
     val minutesMs = minutes * 60 * 1000
     return minutesMs / tick
