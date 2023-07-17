@@ -46,13 +46,13 @@ class GrandTreeListeners: InteractionListener {
 
     override fun defineDestinationOverrides() {
         setDest(IntType.NPC, intArrayOf(NPCs.CHARLIE_673),"talk-to"){ player, _ ->
-            return@setDest player.location;
+            return@setDest player.location
         }
     }
 
     override fun defineListeners() {
         on(NPCs.KING_NARNODE_SHAREEN_670, IntType.NPC, "talk-to"){ player, npc ->
-            val aboveground = 9782;
+            val aboveground = 9782
             if(player.location.regionId == aboveground)
                 openDialogue(player, KingNarnodeDialogue(), npc)
             else
@@ -98,7 +98,7 @@ class GrandTreeListeners: InteractionListener {
                     BlackDemonCutscene(player).start()
                 }
             }
-            return@on true;
+            return@on true
         }
 
         on(2446, IntType.SCENERY, "open"){ player, node ->
@@ -107,7 +107,7 @@ class GrandTreeListeners: InteractionListener {
                 // Go to tunnels
                 teleport(player, Location(2464, 9897, 0))
             }
-            return@on true;
+            return@on true
         }
 
         onUseWith(IntType.SCENERY, 788, 2436){ player, used, with ->
@@ -116,59 +116,59 @@ class GrandTreeListeners: InteractionListener {
             addItemOrDrop(player, Items.INVASION_PLANS_794)
             if(questStage(player!!, questName) < 60)
                 setQuestStage(player!!, questName, 60)
-            return@onUseWith true;
+            return@onUseWith true
         }
         onUseWith(IntType.SCENERY, Items.TWIGS_789, 2440){ player, used, with ->
             setAttribute(player, "/save:grandtree:twig1", true)
-            removeItem(player, used.asItem());
+            removeItem(player, used.asItem())
             GroundItemManager.create(used.asItem(), with.location, player)
             unlockTUZODoor(player)
-            return@onUseWith true;
+            return@onUseWith true
         }
         onUseWith(IntType.SCENERY, Items.TWIGS_790, 2441){ player, used, with ->
             setAttribute(player, "/save:grandtree:twig2", true)
-            removeItem(player, used.asItem());
+            removeItem(player, used.asItem())
             GroundItemManager.create(used.asItem(), with.location, player)
             unlockTUZODoor(player)
-            return@onUseWith true;
+            return@onUseWith true
         }
         onUseWith(IntType.SCENERY, Items.TWIGS_791, 2442){ player, used, with ->
             setAttribute(player, "/save:grandtree:twig3", true)
-            removeItem(player, used.asItem());
+            removeItem(player, used.asItem())
             GroundItemManager.create(used.asItem(), with.location, player)
             unlockTUZODoor(player)
-            return@onUseWith true;
+            return@onUseWith true
         }
         onUseWith(IntType.SCENERY, Items.TWIGS_792, 2443){ player, used, with ->
             setAttribute(player, "/save:grandtree:twig4", true)
-            removeItem(player, used.asItem());
+            removeItem(player, used.asItem())
             GroundItemManager.create(used.asItem(), with.location, player)
             unlockTUZODoor(player)
-            return@onUseWith true;
+            return@onUseWith true
         }
         // Removing twigs
         on(Items.TWIGS_789, IntType.GROUNDITEM, "take"){ player, node ->
             setAttribute(player, "/save:grandtree:twig1", false)
-            return@on true;
+            return@on true
         }
         on(Items.TWIGS_790, IntType.GROUNDITEM, "take"){ player, node ->
             setAttribute(player, "/save:grandtree:twig2", false)
-            return@on true;
+            return@on true
         }
         on(Items.TWIGS_791, IntType.GROUNDITEM, "take"){ player, node ->
             setAttribute(player, "/save:grandtree:twig3", false)
-            return@on true;
+            return@on true
         }
         on(Items.TWIGS_792, IntType.GROUNDITEM, "take"){ player, node ->
             setAttribute(player, "/save:grandtree:twig4", false)
-            return@on true;
+            return@on true
         }
         on(2435, IntType.SCENERY, "search"){ player, _ ->
             if(questStage(player, questName) == 47){
                 sendItemDialogue(player, Items.GLOUGHS_JOURNAL_785,"You've found Glough's Journal!")
                 addItemOrDrop(player, Items.GLOUGHS_JOURNAL_785)
             }
-            return@on true;
+            return@on true
         }
 
         // Roots for Daconia rock
@@ -179,16 +179,29 @@ class GrandTreeListeners: InteractionListener {
                 sendItemDialogue(player, Item(Items.DACONIA_ROCK_793), "You've found a Daconia rock!")
                 addItemOrDrop(player,Items.DACONIA_ROCK_793)
             }
-            return@on true;
+            return@on true
         }
         // Gate Karamja
         on(2439, IntType.SCENERY, "open"){ player, _ ->
             openDialogue(player, ShipyardWorkerDialogue(), NPC(NPCs.SHIPYARD_WORKER_675))
-            return@on true;
+            return@on true
         }
         on(2438, IntType.SCENERY, "open"){ player, _ ->
             openDialogue(player, ShipyardWorkerDialogue(), NPC(NPCs.SHIPYARD_WORKER_675))
-            return@on true;
+            return@on true
+        }
+        on(2451, IntType.SCENERY, "push"){ player, roots ->
+            if (hasRequirement(player, "The Grand Tree")) {
+                val outsideMine = player.location == Location.create(2467, 9903, 0) || player.location == Location.create(2468, 9903, 0)
+                if(outsideMine) {
+                    forceMove(player, player.location, player.location.transform(0, 2, 0), 25, 60, null, 819)
+                } else {
+                    forceMove(player, player.location, player.location.transform(0, -2, 0), 25, 60, null, 819)
+                }
+                animate(player, 2572, false)
+                // animateScenery(roots.asScenery(), 1)
+            }
+            return@on true
         }
     }
 
