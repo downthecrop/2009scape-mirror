@@ -181,7 +181,7 @@ class ToolLeprechaunInterface : InterfaceListener {
             player.dialogueInterpreter.sendDialogue("You don't have any of those stored.")
         } else {
             if(amount == -2){
-                sendInputDialogue(player, true, "Enter the amount:"){value ->
+                sendInputDialogue(player, InputType.AMOUNT, "Enter the amount:"){value ->
                     var amt = value as Int
                     if(amt > hasAmount){
                         amt = hasAmount

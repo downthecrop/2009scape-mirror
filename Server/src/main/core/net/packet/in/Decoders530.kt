@@ -9,6 +9,7 @@ import core.tools.StringUtils
 import core.tools.SystemLogger
 import java.io.PrintWriter
 import java.io.StringWriter
+import java.nio.BufferUnderflowException
 
 enum class Decoders530(val opcode: Int) {
     /******************************************
@@ -635,8 +636,13 @@ enum class Decoders530(val opcode: Int) {
     COMMAND(44) {
         override fun decode(player: Player, buffer: IoBuffer): Packet {
             if (buffer.toByteBuffer().remaining() > 1) {
-                val message = buffer.string.lowercase()
-                return Packet.Command(player, message)
+                try {
+                    val message = buffer.string.lowercase()
+                    return Packet.Command(player, message)
+                } catch (e: BufferUnderflowException) {
+                    player.sendMessage("Something went wrong there! Please try again.")
+                    return Packet.NoProcess()
+                }
             }
             return Packet.NoProcess()
         }

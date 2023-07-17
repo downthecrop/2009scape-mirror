@@ -158,6 +158,10 @@ object PacketProcessor {
                 }
             }
             is Packet.ReportAbuse -> {
+                if (pkt.target.isNullOrEmpty()) {
+                    sendMessage(pkt.player, "Invalid player name.")
+                    return
+                }
                 if (!GameWorld.accountStorage.checkUsernameTaken(pkt.target.lowercase())) {
                     sendMessage(pkt.player, "Invalid player name.")
                     return
@@ -571,9 +575,9 @@ object PacketProcessor {
             player = pkt.player
         } else if (pkt is Packet.UseWithGroundItem) {
             val container = getLikelyContainerForIface(pkt.player, pkt.iface) ?: return
-            item = container[pkt.slot]
+            item = container[pkt.slot] ?: return
             itemId = pkt.usedId
-            node = GroundItemManager.get(pkt.withId, Location.create(pkt.x, pkt.y, pkt.player.location.z), pkt.player)
+            node = GroundItemManager.get(pkt.withId, Location.create(pkt.x, pkt.y, pkt.player.location.z), pkt.player) ?: return
             nodeId = pkt.withId
             type = IntType.GROUNDITEM
             player = pkt.player

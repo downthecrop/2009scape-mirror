@@ -18,7 +18,6 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.game.ge.GrandExchangeOffer;
 import core.game.ge.GrandExchangeRecords;
-import content.region.kandarin.feldip.gutanoth.handlers.BogrogPouchSwapper;
 import core.game.world.GameWorld;
 
 /**
@@ -132,12 +131,20 @@ public class GrandExchangeInterface extends ComponentPlugin {
 		if (slot < 0 || slot >= (inventory ? 28 : GEItemSet.values().length)) {
 			return;
 		}
-		GEItemSet set = GEItemSet.values()[slot];
-		Item item = inventory ? player.getInventory().get(slot) : new Item(set.getItemId());
-		if (item == null) {
-			return;
-		}
-		if (opcode != 127 && inventory && ((set = GEItemSet.forId(item.getId())) == null) && !BogrogPouchSwapper.handle(player,opcode,slot,itemId)) {
+
+		Item item;
+		GEItemSet set;
+                if (inventory) {
+                    item = player.getInventory().get(slot);
+                    if (item == null) return;
+                    set = GEItemSet.forId(item.getId());
+                    if (set == null) return;
+                } else {
+                    set = GEItemSet.values()[slot];
+                    item = new Item(set.getItemId());
+                }
+
+		if (opcode != 127 && inventory && set == null) {
 			player.getPacketDispatch().sendMessage("This isn't a set item.");
 			return;
 		}

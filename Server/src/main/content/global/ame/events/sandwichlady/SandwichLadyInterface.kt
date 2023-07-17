@@ -3,6 +3,7 @@ package content.global.ame.events.sandwichlady
 import core.game.node.item.Item
 import org.rs09.consts.Items
 import core.game.interaction.InterfaceListener
+import content.global.ame.RandomEventManager
 
 class SandwichLadyInterface  : InterfaceListener {
 
@@ -17,6 +18,11 @@ class SandwichLadyInterface  : InterfaceListener {
 
     override fun defineInterfaceListeners() {
         on(SANDWICH_INTERFACE){player, _, _, buttonID, _, _ ->
+            val event = RandomEventManager.getInstance(player)!!.event
+            if (event == null) {
+                player.interfaceManager.close()
+                return@on true
+            }
             val item =
             when(buttonID) {
                 7 -> {Item(baguette)}
@@ -31,7 +37,7 @@ class SandwichLadyInterface  : InterfaceListener {
 
             player.setAttribute("sandwich-lady:choice",item.id)
             player.interfaceManager.close()
-            player.dialogueInterpreter.open(SandwichLadyDialogue(true), content.global.ame.RandomEventManager.getInstance(player)!!.event)
+            player.dialogueInterpreter.open(SandwichLadyDialogue(true), event)
             return@on true
         }
     }

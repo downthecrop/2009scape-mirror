@@ -12,6 +12,9 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
+import kotlin.Unit;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the bogrog npc.
@@ -46,8 +49,10 @@ public final class BogrogPlugin extends OptionHandler {
 			player.sendMessage("You need a Summoning level of at least 21 in order to do that.");
 			return;
 		} else {
-			InterfaceContainer.generateItems(player,player.getInventory().toArray(),new String[] {"Swap X","Swap 10","Swap 5","Swap 1","Value"}, 644,0,7,4,200);
-			player.getInterfaceManager().openSingleTab(new Component(644));
+                    sendItemSelect(player, new String[] { "Value", "Swap 1", "Swap 5", "Swap 10", "Swap X" }, true, (slot, index) -> {
+                        BogrogPouchSwapper.handle(player, index, slot);
+                        return Unit.INSTANCE;
+                    });
 		}
 	}
 

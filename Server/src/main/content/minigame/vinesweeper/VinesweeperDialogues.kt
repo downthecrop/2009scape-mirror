@@ -4,6 +4,7 @@ import core.game.node.item.Item
 import org.rs09.consts.Items
 import core.game.dialogue.DialogueFile
 import core.tools.END_DIALOGUE
+import core.api.*
 
 abstract class FarmerDialogue : DialogueFile() {
 
@@ -129,10 +130,11 @@ class BlinkinDialogue : FarmerDialogue() {
             40 -> playerl("Do you have any Ogleroots to feed the rabbits?").also { stage++ }
             41 -> npcl("I sure do. They'll cost ya 10 gold each. Any ya leave with will be returned to us, but ya'll get yer money back for 'em. How many do ya want?").also { stage++ }
             42 -> {
-				player!!.setAttribute("runscript") { amount: Int ->
+                    sendInputDialogue(player!!, InputType.AMOUNT, "Enter an amount:") { value ->
+                    val amount = value as Int
                     val price = Item(Items.COINS_995, 10 * amount)
                     if(price.amount <= 0){
-                        return@setAttribute
+                        return@sendInputDialogue
                     }
                     if(player!!.inventory.containsItem(price) && player!!.inventory.remove(price)) {
                         if(player!!.inventory.add(Item(Items.OGLEROOT_12624, amount))) {

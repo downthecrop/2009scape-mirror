@@ -387,7 +387,7 @@ class ZaffPlugin : OptionHandler() {
                     )
                     stage = 1
                 }
-                1 -> end().also { sendInputDialogue(player, InputType.NUMERIC, "Enter an amount:"){ value ->
+                1 -> end().also { sendInputDialogue(player, InputType.AMOUNT, "Enter an amount:"){ value ->
                     ammount = getStoreFile().getInt(player.username.toLowerCase())
                     var amt = value as Int
                     if(amt > maxStaffs - ammount) amt = maxStaffs - ammount

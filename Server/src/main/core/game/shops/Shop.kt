@@ -158,6 +158,12 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         val isMainStock = getAttribute(player, "shop-main", true)
         val cont = if (isMainStock) getAttribute<Container?>(player, "shop-cont", null) ?: return Item(-1,-1) else playerStock
         val item = cont[slot]
+
+        if (item == null) {
+            player.sendMessage("That item doesn't appear to be there anymore. Please try again.")
+            return Item(-1, -1)
+        }
+
         val price = when(currency)
         {
             Items.TOKKUL_6529 -> item.definition.getConfiguration(ItemConfigParser.TOKKUL_PRICE, 1)
@@ -173,6 +179,13 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
     {
         val shopCont = getAttribute<Container?>(player, "shop-cont", null) ?: return Pair(null, Item(-1,-1))
         val item = player.inventory[slot]
+
+        if (item == null) {
+            player.debug("Inventory slot $slot does not contain an item!")
+            player.sendMessage("That item doesn't seem to be there anymore. Please try again.")
+            return Pair(null, Item(-1,-1))
+        }
+
         val shopItemId = if (item.definition.isUnnoted) {
             item.id
         }

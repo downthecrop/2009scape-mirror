@@ -643,6 +643,8 @@ class PlayerSaver (val player: Player){
 
         val varpData = JSONArray()
         for ((index, value) in player.varpMap) {
+            if (!(player.saveVarp[index] ?: false)) continue
+
             val varpObj = JSONObject()
             varpObj["index"] = index.toString()
             varpObj["value"] = value.toString()

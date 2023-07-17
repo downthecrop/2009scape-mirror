@@ -66,8 +66,8 @@ public final class BuildOptionPlugin extends OptionHandler {
 		}
 		Hotspot hotspot = player.getHouseManager().getHotspot(object);
 		if (hotspot == null || !isBuildable(player, object, hotspot)) {
-
-			log(this.getClass(), Log.ERR,  "Construction (building):  " + hotspot +  " : " + object + " chunkX = " + object.getLocation().getChunkX() + ", chunkY = " + object.getLocation().getChunkY());
+                        //log demoted from ERR to WARN June 16, 2023 -> It's the effect of an already-known issue. Reduced visibility to clean up server logs while still making the issue apparent in dev environs
+			log(this.getClass(), Log.WARN,  "Construction (building):  " + hotspot +  " : " + object + " chunkX = " + object.getLocation().getChunkX() + ", chunkY = " + object.getLocation().getChunkY());
 			return true;
 		}
 

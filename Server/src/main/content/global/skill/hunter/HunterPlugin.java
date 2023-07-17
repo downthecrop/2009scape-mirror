@@ -303,7 +303,13 @@ public final class HunterPlugin extends OptionHandler {
 
 		@Override
 		public boolean handle(Player player, Node node, String option) {
-			BNetTypes.forNpc((NPC) node).handle(player, (NPC) node);
+                        BNetTypes type = BNetTypes.forNpc((NPC) node);
+                        if (type == null) {
+                            player.sendMessage("There seems to be something wrong with this catch option.");
+                            player.sendMessage("Please submit a detailed bug report on gitlab.");
+                            return true;
+                        }
+			type.handle(player, (NPC) node);
 			return true;
 		}
 

@@ -194,6 +194,7 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 	 * @return {@code True} if the dialogue plugin succesfully opened.
 	 */
 	public boolean open(Object... args) {
+                player.getDialogueInterpreter().activeTopics.clear();
 		if (args.length > 0 && args[0] instanceof NPC) {
 			npc = (NPC)args[0];
 		}

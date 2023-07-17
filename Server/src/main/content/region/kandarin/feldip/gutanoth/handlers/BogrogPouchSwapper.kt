@@ -17,11 +17,11 @@ import kotlin.math.floor
  */
 object BogrogPouchSwapper {
     //Opcodes for item options
-    private const val OP_VALUE = 155
-    private const val OP_SWAP_1 = 196
-    private const val OP_SWAP_5 = 124
-    private const val OP_SWAP_10 = 199
-    private const val OP_SWAP_X = 234
+    private const val OP_VALUE = 0
+    private const val OP_SWAP_1 = 1
+    private const val OP_SWAP_5 = 2
+    private const val OP_SWAP_10 = 3
+    private const val OP_SWAP_X = 4
 
     private const val SPIRIT_SHARD = 12183
 
@@ -29,16 +29,16 @@ object BogrogPouchSwapper {
     private val GEBorders = ZoneBorders(3151,3501,3175,3477)
 
     @JvmStatic
-    fun handle(player: Player, opcode: Int, slot: Int, itemID: Int): Boolean{
-        if(GEBorders.insideBorder(player)) return false
-        return when(opcode){
-            OP_VALUE   -> sendValue(player.inventory.get(slot).id,player)
-            OP_SWAP_1  -> swap(player, 1, player.inventory.get(slot).id)
-            OP_SWAP_5  -> swap(player, 5, player.inventory.get(slot).id)
-            OP_SWAP_10 -> swap(player,10,player.inventory.get(slot).id)
+    fun handle(player: Player, optionIndex: Int, slot: Int): Boolean{
+        val item = player.inventory.get(slot) ?: return false
+        return when(optionIndex){
+            OP_VALUE   -> sendValue(item.id,player)
+            OP_SWAP_1  -> swap(player,  1, item.id)
+            OP_SWAP_5  -> swap(player,  5, item.id)
+            OP_SWAP_10 -> swap(player, 10, item.id)
             OP_SWAP_X  -> true.also{
-                sendInputDialogue(player, true, "Enter the amount:"){value ->
-                    swap(player, value as Int, player.inventory.get(slot).id)
+                sendInputDialogue(player, InputType.AMOUNT, "Enter the amount:"){value ->
+                    swap(player, value as Int, item.id)
                 }
             }
             else -> false
@@ -56,7 +56,6 @@ object BogrogPouchSwapper {
             amt = inInventory
         player.inventory.remove(Item(itemID,amt))
         player.inventory.add(Item(SPIRIT_SHARD, floor(value * amt).toInt()))
-        player.interfaceManager.close(Component(644))
         return true
     }
 
@@ -66,7 +65,7 @@ object BogrogPouchSwapper {
             return false
         }
 
-        player.sendMessage("Bogrog will give you $value shards for that.")
+        player.sendMessage("Bogrog will give you ${floor(value).toInt()} shards for that.")
         return true
     }
 

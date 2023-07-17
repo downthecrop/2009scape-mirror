@@ -171,6 +171,8 @@ object PlunderUtils {
 
     fun getDoor(player: Player) : Int
     {
+        if (getRoom(player) == null)
+            return -1;
         val room = getRoom(player)!!.room
         return PlunderData.doors[room - 1]
     }
@@ -219,6 +221,10 @@ object PlunderUtils {
 
     fun getChestXp(player: Player): Double
     {
+        if (getRoom(player) == null) {
+            expel(player, false)
+            return 0.0
+        }
         val room = getRoom(player)!!.room
         return when(room)
         {

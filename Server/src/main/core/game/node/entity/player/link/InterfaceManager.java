@@ -570,7 +570,7 @@ public final class InterfaceManager {
 	 */
 	public void setViewedTab(int tabIndex) {
 		if (tabs[tabIndex] == null) {
-			throw new IllegalStateException("Tab at index " + tabIndex + " is null!");
+                    return;
 		}
 		currentTabIndex = tabIndex;
 		switch (tabIndex) {

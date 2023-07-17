@@ -94,7 +94,8 @@ public final class BedabinNomadDialogue extends DialoguePlugin {
 				case 2:
 					end();
 					final Scenery door = RegionManager.getObject(new Location(3169, 3046, 0));
-					SceneryBuilder.replace(door, door.transform(2701), 2);
+                                        if (door.getId() != 2701)
+					    SceneryBuilder.replace(door, door.transform(2701), 2);
 					player.getWalkingQueue().reset();
 					player.getWalkingQueue().addPath(3169, 3046);
 					player.getPacketDispatch().sendMessage("You walk into the tent.");

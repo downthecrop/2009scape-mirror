@@ -41,10 +41,17 @@ public class StatRestoreSpell extends MagicSpell {
 	public boolean cast(Entity entity, Node target) {
 		final Player player = ((Player) entity);
 		Item item = ((Item) target);
-		final Potion potion = (Potion) Consumables.getConsumableById(item.getId()).getConsumable();
 		player.getInterfaceManager().setViewedTab(6);
+
+                if (Consumables.getConsumableById(item.getId()) == null) {
+		    player.getPacketDispatch().sendMessage("You can only cast this spell on a potion.");
+                    return false;
+                }
+
+		final Potion potion = (Potion) Consumables.getConsumableById(item.getId()).getConsumable();
+
 		if (potion == null) {
-			player.getPacketDispatch().sendMessage("You can only cast this spell on a potion.");
+		        player.getPacketDispatch().sendMessage("You can only cast this spell on a potion.");
 			return false;
 		}
 		if (!item.getDefinition().isTradeable() || !isRestore(potion)) {

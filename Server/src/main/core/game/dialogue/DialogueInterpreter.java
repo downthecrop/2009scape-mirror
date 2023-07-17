@@ -142,8 +142,9 @@ public final class DialogueInterpreter {
             close();
             return;
         }
+
         DialogueFile file = dialogue.file;
-        if (!activeTopics.isEmpty()) {
+        if (!activeTopics.isEmpty() && buttonId >= 2) {
             Topic<?> topic = activeTopics.get(buttonId - 2);
 
             if (!topic.getSkipPlayer())

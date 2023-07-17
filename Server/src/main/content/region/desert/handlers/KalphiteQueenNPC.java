@@ -315,7 +315,7 @@ public final class KalphiteQueenNPC extends AbstractNPC {
 				return;
 			}
 			if (style == CombatStyle.MAGIC) {
-				BattleState[] states = new BattleState[entity.getViewport().getCurrentPlane().getPlayers().size()];
+				BattleState[] states = new BattleState[entity.getViewport().getCurrentPlane().getPlayers().size() + 1];
 				int index = 1;
 				if (states.length == 0) {
 					return;

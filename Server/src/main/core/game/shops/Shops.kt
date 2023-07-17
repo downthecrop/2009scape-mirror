@@ -184,7 +184,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
                 OP_BUY_1 -> shop.buy(player, slot, 1)
                 OP_BUY_5 -> shop.buy(player, slot, 5)
                 OP_BUY_10 -> shop.buy(player, slot, 10)
-                OP_BUY_X -> sendInputDialogue(player, true, "Enter the amount to buy:"){value ->
+                OP_BUY_X -> sendInputDialogue(player, InputType.AMOUNT, "Enter the amount to buy:"){value ->
                     val amt = value as Int
                     shop.buy(player, slot, amt)
                 }
@@ -226,6 +226,12 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
 
             val shop = getAttribute<Shop?>(player, "shop", null) ?: return@on false
 
+            val itemInSlot = player.inventory[slot]
+            if (itemInSlot == null) {
+                player.sendMessage("That item doesn't appear to be there anymore. Please try again.")
+                return@on true
+            }
+
             val (_,price) = shop.getSellPrice(player, slot)
             val def = itemDefinition(player.inventory[slot].id)
 
@@ -243,7 +249,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
                 OP_SELL_1 -> shop.sell(player, slot, 1)
                 OP_SELL_5 -> shop.sell(player, slot, 5)
                 OP_SELL_10 -> shop.sell(player, slot, 10)
-                OP_SELL_X -> sendInputDialogue(player, true, "Enter the amount to sell:"){value ->
+                OP_SELL_X -> sendInputDialogue(player, InputType.AMOUNT, "Enter the amount to sell:"){value ->
                     val amt = value as Int
                     shop.sell(player, slot, amt)
                 }

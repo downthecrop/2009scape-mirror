@@ -89,6 +89,9 @@ object Login {
             }
 
             return Pair(AuthResponse.Success, info)
+        } catch (buf: BufferUnderflowException) {
+            //some issue in either the data they sent us or how we read it, either way out of scope of this class's handling.
+            return Pair(AuthResponse.UnexpectedError, null)
         } catch (e: Exception) {
             log(this::class.java, Log.ERR,  "Exception encountered during login packet parsing! See stack trace below.")
             e.printStackTrace()

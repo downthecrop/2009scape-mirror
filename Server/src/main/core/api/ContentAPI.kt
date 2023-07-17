@@ -1543,6 +1543,7 @@ fun sendInputDialogue(player: Player, type: InputType, prompt: String, handler: 
     }
 
     player.setAttribute("runscript", handler)
+    player.setAttribute("input-type", type)
 }
 
 /**
@@ -1728,9 +1729,11 @@ fun runcs2 (player: Player, scriptId: Int, vararg arguments: Any) {
  * Opens a generic item selection prompt with a glowing background, with your own callback to handle the selection.
  * @param player the player we are openinig the prompt for
  * @param options the right-click options the items should have
+ * @param keepAlive whether or not the selection prompt should remain open for multiple interactions
  * @param callback a callback to handle the selection. The parameters passed to the callback are the slot in the inventory of the selected item, and the 0-9 index of the option clicked. 
 **/
-fun sendItemSelect (player: Player, vararg options: String, callback: (slot: Int, optionIndex: Int) -> Unit) {
+@JvmOverloads
+fun sendItemSelect (player: Player, vararg options: String, keepAlive: Boolean = false, callback: (slot: Int, optionIndex: Int) -> Unit) {
     player.interfaceManager.openSingleTab(Component(12))
     val scriptArgs = arrayOf ((12 shl 16) + 18, 93, 4, 7, 0, -1, "", "", "", "", "", "", "", "", "")
     for (i in 0 until kotlin.math.min(9, options.size))
@@ -1741,6 +1744,7 @@ fun sendItemSelect (player: Player, vararg options: String, callback: (slot: Int
         .build()
     player.packetDispatch.sendIfaceSettings(settings, 18, 12, 0, 28)
     setAttribute(player, "itemselect-callback", callback)
+    setAttribute(player, "itemselect-keepalive", keepAlive)
 }
 
 fun announceIfRare(player: Player, item: Item) {
@@ -2545,12 +2549,20 @@ fun logWithStack(origin: Class<*>, type: Log, message: String) {
     try {
         throw Exception(message)
     } catch (e: Exception) {
-        val sw = StringWriter()
-        val pw = PrintWriter(sw)
-        e.printStackTrace(pw)
-
-        log(origin, type, "$sw")
+        log(origin, type, "${exceptionToString(e)}")
     }
+}
+
+/**
+ * Takes an exception as an argument, and sends back the complete exception with stack trace as a standard string. Useful for various things.
+ * @param e The exception you wish to convert.
+ * @return a string with the full stack trace of the exception
+**/
+fun exceptionToString (e: Exception) : String {
+    val sw = StringWriter()
+    val pw = PrintWriter(sw)
+    e.printStackTrace(pw)
+    return sw.toString()
 }
 
 /**

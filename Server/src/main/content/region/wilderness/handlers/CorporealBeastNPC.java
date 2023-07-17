@@ -163,6 +163,8 @@ public final class CorporealBeastNPC extends NPCBehavior {
 			GameWorld.getPulser().submit(new Pulse(2, corp) {
 				@Override
 				public boolean pulse() {
+                                        if (npc.darkEnergyCore == null)
+                                            return true;
 					npc.darkEnergyCore.init();
 					return true;
 				}

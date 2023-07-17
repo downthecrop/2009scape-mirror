@@ -27,7 +27,7 @@ class StateRepository : StartupListener{
         @JvmStatic
         fun forKey(key: String, player: Player): State?{
             val state = states[key]
-            if(player.states[key] != null){
+            if(player.hasActiveState(key)){
                 return null
             }
             if(state != null){
