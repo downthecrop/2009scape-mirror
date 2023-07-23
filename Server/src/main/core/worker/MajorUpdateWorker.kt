@@ -19,6 +19,7 @@ import java.lang.Long.max
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.system.exitProcess
+import core.integrations.grafana.*
 
 /**
  * Handles the running of pulses and writing of masks, etc
@@ -34,6 +35,7 @@ class MajorUpdateWorker {
         started = true
         Thread.sleep(600L)
         while (running) {
+            Grafana.startTick()
             val start = System.currentTimeMillis()
             Server.heartbeat()
             handleTickActions()
@@ -77,6 +79,8 @@ class MajorUpdateWorker {
             }
 
             val end = System.currentTimeMillis()
+            Grafana.totalTickTime = (end - start).toInt()
+            Grafana.endTick()
 /*            ServerMonitor.eventQueue.add(GuiEvent.UpdateTickTime(end - start))
             ServerMonitor.eventQueue.add(GuiEvent.UpdatePulseCount(GameWorld.Pulser.TASKS.size))*/
             Thread.sleep(max(600 - (end - start), 0))
@@ -87,7 +91,9 @@ class MajorUpdateWorker {
 
     fun handleTickActions(skipPulseUpdate: Boolean = false) {
         try {
+            var packetStart = System.currentTimeMillis()
             PacketProcessor.processQueue()
+            Grafana.packetProcessTime = (System.currentTimeMillis() - packetStart).toInt()
 
             //disconnect all players waiting to be disconnected
             Repository.disconnectionQueue.update()

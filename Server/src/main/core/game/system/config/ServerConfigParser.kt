@@ -156,6 +156,7 @@ object ServerConfigParser {
         ServerConstants.PLAYER_STOCK_RECIRCULATE = data.getBoolean("world.playerstock_bot_offers", true)
         ServerConstants.BOTSTOCK_LIMIT = data.getLong("world.botstock_limit", 5000L).toInt()
         ServerConstants.BETTER_AGILITY_PYRAMID_GP = data.getBoolean("world.better_agility_pyramid_gp", true)
+        ServerConstants.GRAFANA_PATH = data.getPath("paths.grafana_logs")
 
         val logLevel = data.getString("server.log_level", "VERBOSE").uppercase()
         ServerConstants.LOG_LEVEL = parseEnumEntry<LogLevel>(logLevel) ?: LogLevel.VERBOSE
@@ -164,7 +165,7 @@ object ServerConfigParser {
 
     private fun Toml.getPath(key: String): String{
         try {
-            return parsePath(getString(key).replace("@data", ServerConstants.DATA_PATH!!))
+            return parsePath(getString(key, "@data/").replace("@data", ServerConstants.DATA_PATH!!))
         } catch (e: Exception){
             log(this::class.java, Log.ERR,  "Error parsing key: $key")
             exitProcess(0)

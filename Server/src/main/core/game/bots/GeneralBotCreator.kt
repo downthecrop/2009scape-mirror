@@ -1,12 +1,19 @@
 package core.game.bots
 
-import content.global.bots.Idler
-import core.Server
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.tools.RandomFunction
+import core.Server
+import content.global.bots.Idler
+import core.api.*
+
+class GBCTick : TickListener {
+    override fun tick() {
+        GeneralBotCreator.botPulsesTriggeredThisTick = 0
+    }
+}
 
 class GeneralBotCreator {
     //org/crandor/net/packet/in/InteractionPacket.java <<< This is a very useful class for learning to code bots
@@ -28,13 +35,16 @@ class GeneralBotCreator {
         player.setAttribute("botting:script",pulse)
     }
 
-    inner class BotScriptPulse(public val botScript: Script, val isPlayer: Boolean = false) : Pulse(1){
+    companion object {
+        var botPulsesTriggeredThisTick = 0
+    }
+
+    inner class BotScriptPulse(public val botScript: Script, val isPlayer: Boolean = false) : Pulse(1) {
         var ticks = 0
         init {
             botScript.init(isPlayer)
         }
         var randomDelay = 0
-
         override fun pulse(): Boolean {
             if(randomDelay > 0){
                 randomDelay -= 1
@@ -73,10 +83,12 @@ class GeneralBotCreator {
                 }*/
                 if(!botScript.running) return true //has to be separated this way or it double-submits the respawn pulse.
 
+                if (botPulsesTriggeredThisTick++ >= 50)
+                    return false
 
-                val idleRoll = RandomFunction.random(50)
+                val idleRoll = RandomFunction.random(10)
                 if(idleRoll == 2 && botScript !is Idler){
-                    randomDelay += RandomFunction.random(2,20)
+                    randomDelay += RandomFunction.random(20,50)
                     return false
                 }
                 botScript.tick()
