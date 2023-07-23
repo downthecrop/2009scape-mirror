@@ -10889,6 +10889,22 @@
     "attack_level": "1"
   },
   {
+    "examine": "A sergeant of the Imperial Guard.",
+    "melee_animation": "0",
+    "range_animation": "0",
+    "defence_animation": "0",
+    "magic_animation": "0",
+    "death_animation": "0",
+    "name": "Sergeant",
+    "defence_level": "1",
+    "safespot": null,
+    "lifepoints": "10",
+    "strength_level": "1",
+    "id": "1062",
+    "range_level": "1",
+    "attack_level": "1"
+  },
+  {
     "examine": "A soldier of the Imperial Guard.",
     "melee_animation": "0",
     "range_animation": "0",
@@ -10999,6 +11015,22 @@
     "attack_level": "1"
   },
   {
+    "examine": "The Burthorpe Castle cook.",
+    "melee_animation": "422",
+    "magic_level": "1",
+    "respawn_delay": "60",
+    "defence_animation": "425",
+    "death_animation": "836",
+    "name": "Eadburg",
+    "defence_level": "3",
+    "safespot": null,
+    "lifepoints": "10",
+    "strength_level": "2",
+    "id": "1072",
+    "range_level": "1",
+    "attack_level": "3"
+  },
+  {
     "examine": "A Burthorpe Castle Archer.",
     "start_gfx": "19",
     "combat_style": "1",
@@ -11044,13 +11076,11 @@
   },
   {
     "examine": "A Burthorpe Castle guard.",
-    "melee_animation": "0",
-    "range_animation": "0",
+    "melee_animation": "401",
     "combat_audio": "511,513,512",
     "magic_level": "1",
-    "defence_animation": "0",
-    "magic_animation": "0",
-    "death_animation": "0",
+    "defence_animation": "404",
+    "death_animation": "836",
     "name": "Guard",
     "defence_level": "33",
     "safespot": null,
@@ -11063,13 +11093,11 @@
   },
   {
     "examine": "A Burthorpe Castle guard.",
-    "melee_animation": "0",
-    "range_animation": "0",
+    "melee_animation": "401",
     "combat_audio": "511,513,512",
     "magic_level": "1",
-    "defence_animation": "0",
-    "magic_animation": "0",
-    "death_animation": "0",
+    "defence_animation": "404",
+    "death_animation": "836",
     "name": "Guard",
     "defence_level": "33",
     "safespot": null,
@@ -11082,19 +11110,13 @@
   },
   {
     "examine": "An off-duty Burthorpe Castle guard.",
-    "melee_animation": "0",
-    "range_animation": "0",
-    "defence_animation": "0",
-    "magic_animation": "0",
-    "death_animation": "0",
     "name": "Harold",
-    "defence_level": "1",
-    "safespot": null,
-    "lifepoints": "10",
-    "strength_level": "1",
-    "id": "1078",
-    "range_level": "1",
-    "attack_level": "1"
+    "id": "1078"
+  },
+  {
+    "examine": "Barman of the Toad and Chicken.",
+    "name": "Tostig",
+    "id": "1079"
   },
   {
     "examine": "Head servant for Prince Anlaf.",
@@ -11103,19 +11125,29 @@
   },
   {
     "examine": "A servant for Prince Anlaf.",
-    "melee_animation": "0",
-    "range_animation": "0",
-    "defence_animation": "0",
-    "magic_animation": "0",
-    "death_animation": "0",
+    "melee_animation": "422",
+    "magic_level": "1",
+    "respawn_delay": "60",
+    "defence_animation": "425",
+    "death_animation": "836",
     "name": "Servant",
-    "defence_level": "1",
+    "defence_level": "3",
     "safespot": null,
     "lifepoints": "10",
-    "strength_level": "1",
+    "strength_level": "3",
     "id": "1081",
     "range_level": "1",
-    "attack_level": "1"
+    "attack_level": "3"
+  },
+  {
+    "examine": "Smithy for Burthorpe.",
+    "name": "Dunstan",
+    "id": "1082"
+  },
+  {
+    "examine": "Shopkeeper for Burthorpe.",
+    "name": "Wistan",
+    "id": "1083"
   },
   {
     "examine": "A citizen of Burthorpe.",
@@ -11208,6 +11240,11 @@
     "id": "1089",
     "range_level": "1",
     "attack_level": "3"
+  },
+  {
+    "examine": "A pretty young woman with an air of mystery around her.",
+    "name": "Hild",
+    "id": "1090"
   },
   {
     "examine": "The knight seems to be watching something.",
@@ -14591,6 +14628,16 @@
     "aggressive": "true",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "Pretty barmaid.",
+    "name": "Sam",
+    "id": "1357"
+  },
+  {
+    "examine": "Pretty barmaid.",
+    "name": "Rachael",
+    "id": "1358"
   },
   {
     "examine": "He seems happy to see you.",
@@ -25232,6 +25279,11 @@
     "id": "2641",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "Nice but dim.",
+    "name": "Unferth",
+    "id": "2655"
   },
   {
     "examine": "Known for his light-fingered qualities.",
@@ -36289,6 +36341,36 @@
     "attack_level": "120"
   },
   {
+    "examine": "The big door man.",
+    "name": "Ghommal",
+    "id": "4285"
+  },
+  {
+    "examine": "Guild Master.",
+    "name": "Harrallak Menarous",
+    "id": "4286"
+  },
+  {
+    "examine": "The guild engineer.",
+    "name": "Gamfred",
+    "id": "4287"
+  },
+  {
+    "examine": "Used to be a black knight.",
+    "name": "Ajjat",
+    "id": "4288"
+  },
+  {
+    "examine": "Blademistress, skillful female warrior.",
+    "name": "Kamfreena",
+    "id": "4289"
+  },
+  {
+    "examine": "A warrior mage from the east.",
+    "name": "Shanomi",
+    "id": "4290"
+  },
+  {
     "examine": "A one-eyed man eater.",
     "slayer_task": "44",
     "melee_animation": "4652",
@@ -36337,6 +36419,41 @@
     "clue_level": "2",
     "range_level": "1",
     "attack_level": "65"
+  },
+  {
+    "examine": "Food shopkeeper.",
+    "name": "Lidio",
+    "id": "4293"
+  },
+  {
+    "examine": "Potion shopkeeper.",
+    "name": "Lilly",
+    "id": "4294"
+  },
+  {
+    "examine": "Armour shopkeeper.",
+    "name": "Anton",
+    "id": "4295"
+  },
+  {
+    "examine": "Bank staff.",
+    "name": "Jade",
+    "id": "4296"
+  },
+  {
+    "examine": "He looks like a strong warrior.",
+    "name": "Sloane",
+    "id": "4297"
+  },
+  {
+    "examine": "He looks a bit drunk.",
+    "name": "Jimmy",
+    "id": "4298"
+  },
+  {
+    "examine": "He looks fair and reliable.",
+    "name": "Ref",
+    "id": "4299"
   },
   {
     "examine": "He looks fair and reliable.",
@@ -71717,5 +71834,10 @@
     "name": "Magpie Impling Puro",
     "id": "6062",
     "respawn_delay": "9999"
+  },
+  {
+    "examine": "He looks dangerous!",
+    "name": "Turael",
+    "id": "8273"
   }
 ]

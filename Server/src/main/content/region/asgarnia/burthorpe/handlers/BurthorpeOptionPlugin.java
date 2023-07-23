@@ -14,7 +14,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 
 /**
- * Represents the optione plugin to handle interactions with 'nodes' in
+ * Represents the option plugin to handle interactions with 'nodes' in
  * burthorpe.
  * @author 'Vexia
  * @version 1.0
@@ -41,7 +41,7 @@ public final class BurthorpeOptionPlugin extends OptionHandler {
 		// guide
 		// passegeway.
 		SceneryDefinition.forId(4624).getHandlers().put("option:climb-down", this);
-		SceneryDefinition.forId(4627).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(4627).getHandlers().put("option:climb-up", this);
 		return this;
 	}
 
@@ -52,14 +52,14 @@ public final class BurthorpeOptionPlugin extends OptionHandler {
 		case "climb-down":
 			switch (id) {
 			case 4624:
-				ClimbActionHandler.climb(player, Animation.create(828), Location.create(2205, 4934, 1));
+				ClimbActionHandler.climb(player, null, Location.create(2205, 4934, 1));
 				break;
 			}
 			break;
 		case "climb-up":
 			switch (id) {
 			case 4627:
-				ClimbActionHandler.climb(player, Animation.create(828), Location.create(2899, 3565, 0));
+				ClimbActionHandler.climb(player, null, Location.create(2899, 3565, 0));
 				break;
 			}
 			break;

@@ -10,14 +10,13 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import org.rs09.consts.NPCs
 
-
 /**
- * Ocga Dialogue
+ * Hild Dialogue
  * @author 'Vexia
  * @author ovenbread
  */
 @Initializable
-class OcgaDialogue(player: Player? = null) : DialoguePlugin(player) {
+class HildDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int) : Boolean {
         if(isQuestComplete(player!!, "Death Plateau")) {
             when (stage) {
@@ -39,10 +38,10 @@ class OcgaDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun newInstance(player: Player?): DialoguePlugin {
-        return OcgaDialogue(player)
+        return CeolburgDialogue(player)
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.OCGA_1085)
+        return intArrayOf(NPCs.HILD_1090)
     }
 }
