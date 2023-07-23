@@ -11,6 +11,9 @@ import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * The moving block npc.
@@ -58,8 +61,9 @@ public final class MovingBlockNPC extends AbstractNPC {
 			Location loc = getLocation().transform(dir, 2);
 			getWalkingQueue().reset();
 			getWalkingQueue().addPath(loc.getX(), loc.getY());
-			for (Player p : RegionManager.getLocalPlayers(getTileLocations()[0], 2)) {
+			for (Player p : RegionManager.getLocalPlayers(getTileLocations()[0], 4)) {
 				checkBlock(p);
+				playAudio(p, Sounds.PYRAMID_BLOCK_1395, 10, 30);
 			}
 			moving = true;
 			GameWorld.getPulser().submit(new Pulse(1, this) {
@@ -133,8 +137,7 @@ public final class MovingBlockNPC extends AbstractNPC {
 							}
 						}
 						player.lock(4);
-						player.getAudioManager().send(1395);
-						player.getAudioManager().send(2469, 10 , 40);
+						playAudio(player, Sounds.LAND_FLAT_2469, 10 , 50);
 						player.setAttribute("block-move", GameWorld.getTicks() + 4);
 						if(dest != null) {
 							AgilityHandler.failWalk(player, close ? 1 : 3, player.getLocation(), dest, AgilityPyramidCourse.transformLevel(dest), Animation.create(3066), 10, 8, null, getId() == 3124 ? Direction.WEST : Direction.SOUTH);

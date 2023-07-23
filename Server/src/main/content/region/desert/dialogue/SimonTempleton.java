@@ -1,10 +1,15 @@
 package content.region.desert.dialogue;
 
+import core.ServerConstants;
+import core.api.Container;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.game.node.item.Item;
+import org.rs09.consts.Items;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the dialog for Simon Templeton
@@ -39,7 +44,7 @@ public final class SimonTempleton extends DialoguePlugin {
                 return true;
             }
         }
-        npc("G'day, mate!. Got any new", "pyramid artefacts for me?");
+        npc("G'day, mate. Got any new", "pyramid artefacts for me?");
         return true;
     }
 
@@ -47,6 +52,8 @@ public final class SimonTempleton extends DialoguePlugin {
     public boolean handle(int interfaceId, int buttonId){
         boolean hasArtefacts = false;
         boolean hasPyramidTopper = false;
+        int goldReward = 1000;
+        if (ServerConstants.BETTER_AGILITY_PYRAMID_GP) goldReward =(int)(1000 + ((getStatLevel(player, 16) / 99.0) * 9000));
         switch(stage){
             case 0:
                 for(int i = 0; i < ARTIFACTS.length; i++){
@@ -92,7 +99,7 @@ public final class SimonTempleton extends DialoguePlugin {
                 stage = 999;
                 break;
             case 6:
-                npc("Hmmm, very nice. I'll buy them for 10k each.");
+                npc("Hmmm, very nice. I'll buy them for " + goldReward + " each.");
                 stage = 7;
                 break;
             case 7:
@@ -102,13 +109,9 @@ public final class SimonTempleton extends DialoguePlugin {
             case 8:
                 switch(buttonId){
                     case 1:
-                        for(int j = 0; j < 28; j++){
-                            switch(player.getInventory().getId(j)){
-                                case 6970:
-                                    player.getInventory().remove(new Item(6970),j,true);
-                                    player.getInventory().add(new Item(995, 10000));
-                                    break;
-                            }
+                        int pyramidTopsInInv = amountInInventory(player, Items.PYRAMID_TOP_6970);
+                        if (removeItem(player, new Item(Items.PYRAMID_TOP_6970, pyramidTopsInInv), Container.INVENTORY)) {
+                            addItem(player, Items.COINS_995, goldReward * pyramidTopsInInv, Container.INVENTORY);
                         }
                         end();
                         break;

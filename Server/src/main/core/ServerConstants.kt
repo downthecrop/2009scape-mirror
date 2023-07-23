@@ -293,5 +293,8 @@ class ServerConstants {
 
         @JvmField
         var BOTSTOCK_LIMIT = 5000
+
+        @JvmField
+        var BETTER_AGILITY_PYRAMID_GP = true
     }
 }
