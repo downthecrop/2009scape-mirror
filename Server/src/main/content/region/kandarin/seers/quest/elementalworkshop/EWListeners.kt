@@ -17,7 +17,6 @@ import content.region.kandarin.seers.quest.elementalworkshop.EWUtils.currentStag
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.tools.Log
-import core.tools.SystemLogger
 
 /**
  * Listeners for the Elemental Workshop I quest
@@ -179,7 +178,7 @@ class EWListeners : InteractionListener {
                 return@on true
             }
             // Increment quest stage
-            if (questStage(player, "Elemental Workshop I") < 5) {
+            if (getQuestStage(player, "Elemental Workshop I") < 5) {
                 setQuestStage(player, "Elemental Workshop I", 5)
             }
             // Allow player through the wall

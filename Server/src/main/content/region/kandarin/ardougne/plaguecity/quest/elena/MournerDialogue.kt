@@ -14,7 +14,7 @@ import org.rs09.consts.NPCs
 class MournerDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.MOURNER_3216)
-        when (questStage(player!!, PlagueCity.PlagueCityQuest)) {
+        when (getQuestStage(player!!, PlagueCity.PlagueCityQuest)) {
 
             in 0..6 -> when (stage) {
                 0 -> playerl(FacialExpression.FRIENDLY, "Hello.").also { stage++ }

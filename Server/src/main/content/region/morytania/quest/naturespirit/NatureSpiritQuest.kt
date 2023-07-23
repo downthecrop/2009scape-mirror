@@ -100,7 +100,7 @@ class NatureSpiritQuest : Quest("Nature Spirit", 95, 94, 2, 307, 0, 1, 110 ) {
             }
 
             if(stage >= 100){
-                line(player,"!!QUEST COMPLETE!??",line++)
+                line(player,"%%QUEST COMPLETE!&&",line++)
             }
         }
     }

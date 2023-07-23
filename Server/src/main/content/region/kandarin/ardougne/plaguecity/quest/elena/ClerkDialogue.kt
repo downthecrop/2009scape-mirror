@@ -1,6 +1,6 @@
 package content.region.kandarin.ardougne.plaguecity.quest.elena
 
-import core.api.questStage
+import core.api.getQuestStage
 import core.api.sendNPCDialogue
 import core.api.setQuestStage
 import core.game.dialogue.DialoguePlugin
@@ -21,7 +21,7 @@ class ClerkDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (questStage(player!!, PlagueCity.PlagueCityQuest)) {
+        when (getQuestStage(player!!, PlagueCity.PlagueCityQuest)) {
 
             11 -> when (stage) {
                 0 -> options("Who is through that door?", "I'm just looking thanks.").also { stage++ }

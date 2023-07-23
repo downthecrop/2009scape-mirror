@@ -32,7 +32,7 @@ class CouncilWorkerFTDialogue(val questStage: Int, var isBeerInteraction: Boolea
         else if(questStage in 1..99){
             when(stage){
                 START_DIALOGUE ->
-                    if(questStage(player!!, "Fremennik Trials") > 0) {
+                    if(getQuestStage(player!!, "Fremennik Trials") > 0) {
                         player("I know this is an odd question, but are you","a member of the elder council?"); stage = 1
                     } else {
                         end()

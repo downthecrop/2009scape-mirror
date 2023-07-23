@@ -4,7 +4,7 @@ import content.region.kandarin.ardougne.quest.arena.FightArena
 import content.region.kandarin.ardougne.quest.arena.FightArenaListeners.Companion.General
 import content.region.kandarin.ardougne.quest.arena.dialogue.JeremyServilBDialogue
 import core.api.openDialogue
-import core.api.questStage
+import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
@@ -32,7 +32,7 @@ class GeneralNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, loca
     override fun finalizeDeath(killer: Entity?) {
         if (killer is Player) {
             val quest = "Fight Arena"
-            if (questStage(killer, quest) == 97) {
+            if (getQuestStage(killer, quest) == 97) {
                 setQuestStage(killer, FightArena.FightArenaQuest, 98)
             }
             openDialogue(killer, JeremyServilBDialogue())

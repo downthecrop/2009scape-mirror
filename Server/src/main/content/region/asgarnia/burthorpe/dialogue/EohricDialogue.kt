@@ -2,8 +2,8 @@ package content.region.asgarnia.burthorpe.dialogue
 
 import content.region.asgarnia.burthorpe.quest.deathplateau.DeathPlateau
 import content.region.asgarnia.burthorpe.quest.deathplateau.EohricDialogueFile
+import core.api.getQuestStage
 import core.api.openDialogue
-import core.api.questStage
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.player.Player
@@ -19,7 +19,7 @@ import org.rs09.consts.NPCs
 @Initializable
 class EohricDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        if (questStage(player!!, DeathPlateau.questName) >= 5) {
+        if (getQuestStage(player!!, DeathPlateau.questName) >= 5) {
             // Call the dialogue file for Eohric from the deathplateau quest folder.
             openDialogue(player!!, EohricDialogueFile(), npc)
             return true

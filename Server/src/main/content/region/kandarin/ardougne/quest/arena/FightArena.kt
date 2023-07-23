@@ -81,7 +81,7 @@ class FightArena : Quest("Fight Arena", 61, 60, 2, 17, 0, 1, 14) {
         }
         if (stage == 100) {
             line++
-            line(player, "!!QUEST COMPLETE??", line)
+            line(player, "%%QUEST COMPLETE!&&", line)
         }
     }
 

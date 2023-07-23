@@ -53,7 +53,7 @@ class BouncerNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, loca
     override fun finalizeDeath(killer: Entity?) {
         if (killer is Player) {
             val quest = "Fight Arena"
-            if (questStage(killer, quest) >= 89) {
+            if (getQuestStage(killer, quest) >= 89) {
                 setQuestStage(killer, FightArena.FightArenaQuest, 91)
             }
             removeAttribute(killer, "spawn-bouncer")

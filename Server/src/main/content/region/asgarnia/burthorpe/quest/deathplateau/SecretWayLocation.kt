@@ -11,7 +11,7 @@ class SecretWayLocation : MapArea {
     }
 
     override fun areaEnter(entity: Entity) {
-        if (entity is Player && questStage(entity, DeathPlateau.questName) == 25) {
+        if (entity is Player && getQuestStage(entity, DeathPlateau.questName) == 25) {
             sendPlayerDialogue(entity, "I think this is far enough, I can see Death Plateau and it looks like the trolls haven't found the path. I'd better go and tell Denulth.")
             setQuestStage(entity, DeathPlateau.questName, 26)
         }

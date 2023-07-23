@@ -12,7 +12,7 @@ class JeremyServilBDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.JEREMY_SERVIL_266)
-        when (questStage(player!!, FightArena.FightArenaQuest)) {
+        when (getQuestStage(player!!, FightArena.FightArenaQuest)) {
 
             in 1..84 -> when (stage) {
                 0 -> {

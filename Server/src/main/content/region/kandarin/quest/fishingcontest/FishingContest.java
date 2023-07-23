@@ -37,7 +37,7 @@ public class FishingContest extends Quest {
             line(player,"I should return to !!Austri?? or !!Vestri??.",line++);
 
             if(stage >= 100){
-                line(player,"!!QUEST COMPLETE",line++);
+                line(player,"%%QUEST COMPLETE!&&",line++);
             }
         }
     }

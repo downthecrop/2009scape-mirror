@@ -86,7 +86,7 @@ class ElementalWorkshopQuest : Quest("Elemental Workshop I", 52, 51, 1), Command
                 line(player, "---After fixing up the old workshop machinery, collecting ore", line++)
                 line(player, "---and smelting it I was able to create an Elemental Shield./--", line++)
                 line++
-                line(player, "!!QUEST COMPLETE!??", line++)
+                line(player, "%%QUEST COMPLETE!&&", line++)
             }
         }
     }

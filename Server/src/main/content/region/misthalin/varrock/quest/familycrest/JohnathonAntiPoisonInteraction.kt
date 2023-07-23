@@ -14,7 +14,7 @@ class JohnathonAntiPosionInteraction: InteractionListener {
         onUseWith(IntType.NPC, poisons, NPCs.JOHNATHON_668){ player, used, with ->
             val npc = with.asNpc()
             val antip = used.asItem()
-            val stage = questStage(player, "Family Crest")
+            val stage = getQuestStage(player, "Family Crest")
 
             val index = poisons.indexOf(used.id)
             val returnItem = if(index + 1 == poisons.size) Items.VIAL_229 else poisons[index + 1]

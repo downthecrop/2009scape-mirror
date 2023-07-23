@@ -12,14 +12,9 @@ import core.plugin.Initializable
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import core.game.interaction.InteractionListener
-import core.game.interaction.MovementPulse
-import core.game.node.entity.impl.PulseType
-import core.game.node.entity.npc.NPC
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
-import core.game.world.map.Direction
 import core.game.world.map.RegionManager
-import core.game.world.map.path.Pathfinder
 import core.tools.END_DIALOGUE
 import org.rs09.consts.Components
 
@@ -42,7 +37,7 @@ class ForemanNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,locat
     }
 
     override fun finalizeDeath(killer: Entity?) {
-        if(questStage(killer as Player, TheGrandTree.questName) == 55) {
+        if(getQuestStage(killer as Player, TheGrandTree.questName) == 55) {
             sendMessage(killer,"The foreman drops a piece of paper as he dies.")
             produceGroundItem(killer, Items.LUMBER_ORDER_787, 1, this.location)
         }

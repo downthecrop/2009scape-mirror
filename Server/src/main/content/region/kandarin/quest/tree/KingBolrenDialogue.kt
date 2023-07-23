@@ -15,7 +15,7 @@ import core.tools.END_DIALOGUE
 
 class KingBolrenDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = questStage(player!!, questName)
+        val questStage = getQuestStage(player!!, questName)
         when {
             questStage < 10 -> {
                 when (stage) {

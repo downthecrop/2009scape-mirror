@@ -9,7 +9,7 @@ import core.tools.END_DIALOGUE
 class SabaDialogueFile : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        when (questStage(player!!, DeathPlateau.questName)) {
+        when (getQuestStage(player!!, DeathPlateau.questName)) {
             19 -> {
                 when (stage) {
                     0 -> player(FacialExpression.FRIENDLY, "Hello!").also { stage++ }

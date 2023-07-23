@@ -1,7 +1,7 @@
 package content.region.asgarnia.burthorpe.quest.deathplateau
 
+import core.api.getQuestStage
 import core.api.getScenery
-import core.api.questStage
 import core.api.sendDialogue
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
@@ -26,7 +26,7 @@ class DeathPlateauDoorDialogueFile(val door: Int) : DialogueFile() {
         if(door == 2) {
             npc = NPC(NPCs.TENZING_1071)
 
-            when (questStage(player!!, DeathPlateau.questName)) {
+            when (getQuestStage(player!!, DeathPlateau.questName)) {
                 in 0 .. 19 -> {
                     when (stage) {
                         0 -> sendDialogue(player!!, "You knock on the door.").also { stage++ }
@@ -53,7 +53,7 @@ class DeathPlateauDoorDialogueFile(val door: Int) : DialogueFile() {
         }
         if(door == 3) {
             npc = NPC(NPCs.TENZING_1071)
-            when (questStage(player!!, DeathPlateau.questName)) {
+            when (getQuestStage(player!!, DeathPlateau.questName)) {
                 in 0..24 -> {
                     when (stage) {
                         0 -> npcl(FacialExpression.FRIENDLY, "Where do you think you're going? This is private property!").also { stage = END_DIALOGUE }

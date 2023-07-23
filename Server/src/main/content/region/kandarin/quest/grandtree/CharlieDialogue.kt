@@ -1,28 +1,23 @@
 package content.region.kandarin.quest.grandtree
 
 import content.region.kandarin.quest.grandtree.TheGrandTree.Companion.questName
-import content.region.misthalin.varrock.quest.familycrest.doDoor
 import core.api.*
 import core.game.dialogue.DialogueFile
-import core.game.dialogue.FacialExpression
 import core.game.global.action.DoorActionHandler
 import core.game.node.entity.npc.NPC
 import core.game.node.item.Item
-import core.game.node.scenery.SceneryBuilder
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.map.Direction
 import core.game.world.map.Location
-import core.game.world.update.flag.context.Animation
 import core.tools.END_DIALOGUE
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
-import org.rs09.consts.Scenery
 
 class CharlieDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        when (questStage(player!!, questName)) {
+        when (getQuestStage(player!!, questName)) {
             46 -> {
                 when (stage) {
                     0 -> playerl("Tell me. Why would you want to kill the Grand Tree?").also { stage++ }

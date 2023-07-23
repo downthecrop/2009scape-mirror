@@ -38,7 +38,7 @@ class HaroldDialogueFile : DialogueFile() {
             setAttribute(player!!, ATTRIBUTE_JUMPSTAGE, 0)
         }
         println(getAttribute(player!!, ATTRIBUTE_HAROLD_MONEY, -1))
-        when (questStage(player!!, DeathPlateau.questName)) {
+        when (getQuestStage(player!!, DeathPlateau.questName)) {
             10 -> { // First time meeting.
                 when (stage) {
                     START_DIALOGUE -> player(FacialExpression.FRIENDLY, "Hello there.").also { stage++ }

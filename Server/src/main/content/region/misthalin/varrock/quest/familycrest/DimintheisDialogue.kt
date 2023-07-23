@@ -2,7 +2,6 @@ package content.region.misthalin.varrock.quest.familycrest
 
 
 import core.api.*
-import core.game.dialogue.DialoguePlugin
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
@@ -23,7 +22,7 @@ class DimintheisDialogue(player: Player? = null): core.game.dialogue.DialoguePlu
 
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
-        val questStage = questStage(player, questName)
+        val questStage = getQuestStage(player, questName)
         val questComplete = isQuestComplete(player, questName)
 
         if (questStage == 20 && inInventory(player, Items.FAMILY_CREST_782)) {

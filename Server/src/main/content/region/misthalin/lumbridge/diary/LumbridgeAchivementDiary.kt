@@ -3,7 +3,7 @@ package content.region.misthalin.lumbridge.diary
 import content.global.skill.magic.TeleportMethod
 import content.global.skill.magic.spellconsts.Modern
 import core.api.inBorders
-import core.api.questStage
+import core.api.getQuestStage
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
@@ -346,7 +346,7 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
     override fun onDialogueOptionSelected(player: Player, event: DialogueOptionSelectionEvent) {
         when (event.dialogue) {
             is DukeHoracioDSDialogue -> {
-                val dragonSlayerStage = questStage(player, "Dragon Slayer")
+                val dragonSlayerStage = getQuestStage(player, "Dragon Slayer")
 
                 if ((dragonSlayerStage == 100 && event.currentStage == 4)
                     || event.currentStage == 12) {

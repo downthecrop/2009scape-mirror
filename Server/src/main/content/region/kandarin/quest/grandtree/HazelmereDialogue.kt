@@ -3,26 +3,14 @@ package content.region.kandarin.quest.grandtree
 import content.region.kandarin.quest.grandtree.TheGrandTree.Companion.questName
 import core.api.*
 import core.game.dialogue.DialogueFile
-import core.game.interaction.MovementPulse
-import core.game.node.entity.impl.PulseType
 import core.game.node.item.Item
-import core.game.node.scenery.Scenery
-import core.game.node.scenery.SceneryBuilder
-import core.game.system.task.Pulse
-import core.game.world.GameWorld
-import core.game.world.map.Direction
-import core.game.world.map.Location
-import core.game.world.map.RegionManager
-import core.game.world.map.path.Pathfinder
-import core.game.world.update.flag.context.Animation
 import core.tools.END_DIALOGUE
 import org.rs09.consts.Items
-import org.rs09.consts.NPCs
 
 class HazelmereDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        when (questStage(player!!, questName)) {
+        when (getQuestStage(player!!, questName)) {
             10 -> {
                 if(player!!.hasItem(Item(Items.BARK_SAMPLE_783))){
                     when (stage) {

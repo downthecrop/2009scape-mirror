@@ -12,7 +12,7 @@ import org.rs09.consts.Items
 class TenzingDialogueFile : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        when (questStage(player!!, DeathPlateau.questName)) {
+        when (getQuestStage(player!!, DeathPlateau.questName)) {
             20 -> {
                 when (stage) {
                     START_DIALOGUE -> playerl(FacialExpression.FRIENDLY, "Hello!").also { stage++ }

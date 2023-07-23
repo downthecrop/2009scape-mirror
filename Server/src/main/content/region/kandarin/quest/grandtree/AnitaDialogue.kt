@@ -1,7 +1,7 @@
 package content.region.kandarin.quest.grandtree
 
 import core.api.addItemOrDrop
-import core.api.questStage
+import core.api.getQuestStage
 import core.api.sendDialogue
 import core.game.dialogue.DialogueFile
 import core.game.node.item.Item
@@ -10,7 +10,7 @@ import org.rs09.consts.Items
 
 class AnitaDialogue : DialogueFile(){
     override fun handle(componentID: Int, buttonID: Int) {
-        when(questStage(player!!, TheGrandTree.questName)){
+        when(getQuestStage(player!!, TheGrandTree.questName)){
             60 -> {
                 if(player!!.hasItem(Item(Items.GLOUGHS_KEY_788)) && stage < 12){
                     when(stage){

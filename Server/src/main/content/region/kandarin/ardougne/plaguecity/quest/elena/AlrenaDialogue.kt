@@ -24,7 +24,7 @@ class AlrenaDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (questStage(player!!, PlagueCity.PlagueCityQuest)) {
+        when (getQuestStage(player!!, PlagueCity.PlagueCityQuest)) {
 
             0 -> when (stage) {
                 1 -> npcl(FacialExpression.NEUTRAL, "Oh, hello there.").also { stage++ }

@@ -7,7 +7,7 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
-import core.api.questStage
+import core.api.getQuestStage
 import core.api.sendDialogue
 import core.api.setQuestStage
 
@@ -48,7 +48,7 @@ class TreeSpiritNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, l
         super.finalizeDeath(killer)
         if (killer is Player) {
             val quest = "Lost City"
-            if (questStage(killer,quest) == 20) {
+            if (getQuestStage(killer,quest) == 20) {
                 setQuestStage(killer,quest,21)
                 sendDialogue(killer, "With the Tree Spirit defeated you can now chop the tree.")
             }

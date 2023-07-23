@@ -1,13 +1,11 @@
 package content.region.misthalin.lumbridge.quest.lostcity
 
-import core.game.dialogue.DialoguePlugin
-import core.game.dialogue.FacialExpression
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import core.game.dialogue.Topic
 import core.tools.END_DIALOGUE
-import core.api.questStage
+import core.api.getQuestStage
 import core.api.startQuest
 
 /**
@@ -19,7 +17,7 @@ import core.api.startQuest
 class WarriorDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        when(questStage(player,"Lost City")) {
+        when(getQuestStage(player,"Lost City")) {
             10 -> playerl(core.game.dialogue.FacialExpression.THINKING,"So let me get this straight: I need to search the trees around here for a leprechaun; and then when I find him, he will tell me where this 'Zanaris' is?").also { stage = 1000 }
             20, 21 -> playerl(core.game.dialogue.FacialExpression.HAPPY,"Have you found anything yet?").also { stage = 2000 }
             100 -> playerl(core.game.dialogue.FacialExpression.HAPPY,"Hey, thanks for all the information. It REALLY helped me out in finding the lost city of Zanaris and all.").also { stage = 3000 }

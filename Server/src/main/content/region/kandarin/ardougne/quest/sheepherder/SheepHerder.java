@@ -66,7 +66,7 @@ public class SheepHerder extends Quest {
                 case 100:
                     line(player,"I helped Councillor Halgrive by putting down",line++,true);
                     line(player,"plague-bearing sheep.",line++,true);
-                    line(player,"!!QUEST COMPLETE",line++);
+                    line(player,"%%QUEST COMPLETE!&&",line++);
                     break;
             }
         }

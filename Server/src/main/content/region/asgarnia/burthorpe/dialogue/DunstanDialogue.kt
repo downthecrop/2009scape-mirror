@@ -4,7 +4,6 @@ import content.region.asgarnia.burthorpe.quest.deathplateau.DeathPlateau
 import content.region.asgarnia.burthorpe.quest.deathplateau.DunstanDialogueFile
 import core.api.isQuestInProgress
 import core.api.openDialogue
-import core.api.questStage
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import core.game.dialogue.Topic

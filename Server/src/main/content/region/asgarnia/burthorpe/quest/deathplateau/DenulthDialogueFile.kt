@@ -20,7 +20,7 @@ import org.rs09.consts.NPCs
 
 class DenulthDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        when (questStage(player!!, DeathPlateau.questName)) {
+        when (getQuestStage(player!!, DeathPlateau.questName)) {
             in 0..4 -> {
                 when (stage) {
                     0 -> playerl(FacialExpression.FRIENDLY, "Hello!").also { stage++ }

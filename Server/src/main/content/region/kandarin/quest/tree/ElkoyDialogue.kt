@@ -38,7 +38,7 @@ class ElkoyDialogue : DialogueFile(){
         })
     }
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = questStage(player!!, questName)
+        val questStage = getQuestStage(player!!, questName)
         val locY = player!!.location.y
         val followLocation = if(locY > 3161) "village" else "exit"
         when {

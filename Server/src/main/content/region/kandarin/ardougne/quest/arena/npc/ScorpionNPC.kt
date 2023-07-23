@@ -53,7 +53,7 @@ class ScorpionNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, loc
     override fun finalizeDeath(killer: Entity?) {
         if (killer is Player) {
             val quest = "Fight Arena"
-            if (questStage(killer, quest) == 88) {
+            if (getQuestStage(killer, quest) == 88) {
                 setQuestStage(killer, FightArena.FightArenaQuest, 89)
             }
             removeAttribute(killer, "spawn-scorpion")

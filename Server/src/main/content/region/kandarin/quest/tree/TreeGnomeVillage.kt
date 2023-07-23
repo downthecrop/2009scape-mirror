@@ -85,7 +85,7 @@ class TreeGnomeVillage: Quest("Tree Gnome Village", 125, 124, 2,  111, 0, 1, 9) 
             line++
         }
         if (stage == 100) {
-            line(player,"QUEST COMPLETE", line, stage > 99)
+            line(player,"%%QUEST COMPLETE!&&", line, stage > 99)
         }
     }
     companion object {

@@ -1,6 +1,6 @@
 package content.region.kandarin.ardougne.plaguecity.quest.elena
 
-import core.api.questStage
+import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
@@ -24,7 +24,7 @@ class MilliRehnisonDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (questStage(player!!, PlagueCity.PlagueCityQuest)) {
+        when (getQuestStage(player!!, PlagueCity.PlagueCityQuest)) {
 
             9 -> when(stage) {
                 1 -> npcl(FacialExpression.NEUTRAL, "*sniff* Yes I was near the south east corner when I saw Elena walking by. I was about to run to greet her when some men jumped out. They shoved a sack over her head and dragged her into a building.").also { stage++ }

@@ -9,7 +9,6 @@ import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
 
 import static core.api.ContentAPIKt.isQuestComplete;
-import static core.api.ContentAPIKt.questStage;
 import static core.tools.DialogueConstKt.END_DIALOGUE;
 
 /**

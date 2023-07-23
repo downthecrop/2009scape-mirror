@@ -13,7 +13,7 @@ import org.rs09.consts.NPCs
 class DunstanDialogueFile : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        when (questStage(player!!, DeathPlateau.questName)) {
+        when (getQuestStage(player!!, DeathPlateau.questName)) {
             21 -> {
                 when (stage) {
                     START_DIALOGUE -> playerl(FacialExpression.FRIENDLY, "Hi!").also { stage++ }

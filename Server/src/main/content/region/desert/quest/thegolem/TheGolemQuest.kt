@@ -72,7 +72,7 @@ class TheGolemQuest : Quest("The Golem", 70, 69, 1, 437, 0, 1, 10) {
             line(player, "The demon doesn't think its task is complete.", ln++, stage > 7)
         }
         if(stage >= 100) {
-            line(player, "QUEST COMPLETE", ln++, false)
+            line(player, "%%QUEST COMPLETE!&&", ln++, false)
         }
     }
 

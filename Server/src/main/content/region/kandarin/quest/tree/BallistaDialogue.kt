@@ -6,7 +6,7 @@ import core.tools.END_DIALOGUE
 
 class BallistaDialogue : DialogueFile(){
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = questStage(player!!, TreeGnomeVillage.questName)
+        val questStage = getQuestStage(player!!, TreeGnomeVillage.questName)
         if (questStage > 30) {
             when (stage) {
                 0 -> sendDialogue(player!!, "The Khazard stronghold has already been breached.").also { stage = END_DIALOGUE }

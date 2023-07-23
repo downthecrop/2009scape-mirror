@@ -17,7 +17,7 @@ class GCItemOnCat : InteractionListener {
         val BEND_DOWN = 827
 
         onUseWith(IntType.NPC, Items.BUCKET_OF_MILK_1927, NPCs.GERTRUDES_CAT_2997) { player, used, with ->
-            if(questStage(player, GERTCAT) == 20 && removeItem(player, used.asItem())){
+            if(getQuestStage(player, GERTCAT) == 20 && removeItem(player, used.asItem())){
                 addItem(player, Items.BUCKET_1925)
                 animate(player, BEND_DOWN) //bend down
                 sendChat(with.asNpc(), "Mew!")
@@ -27,7 +27,7 @@ class GCItemOnCat : InteractionListener {
         }
 
         onUseWith(IntType.NPC, Items.DOOGLE_SARDINE_1552, NPCs.GERTRUDES_CAT_2997){ player, used, with ->
-            if(questStage(player, GERTCAT) == 30 && removeItem(player, used.asItem())){
+            if(getQuestStage(player, GERTCAT) == 30 && removeItem(player, used.asItem())){
                 animate(player, BEND_DOWN)
                 sendChat(with.asNpc(), "Mew!")
                 setQuestStage(player, GERTCAT, 40)

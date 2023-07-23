@@ -114,7 +114,7 @@ class GrandTreeListeners: InteractionListener {
             SceneryBuilder.replace(Scenery(2436, Location(2482,3462,1)),Scenery(2437, Location(2482,3462,1)),2)
             sendDialogue(player,"You found a scroll!")
             addItemOrDrop(player, Items.INVASION_PLANS_794)
-            if(questStage(player!!, questName) < 60)
+            if(getQuestStage(player!!, questName) < 60)
                 setQuestStage(player!!, questName, 60)
             return@onUseWith true
         }
@@ -164,7 +164,7 @@ class GrandTreeListeners: InteractionListener {
             return@on true
         }
         on(2435, IntType.SCENERY, "search"){ player, _ ->
-            if(questStage(player, questName) == 47){
+            if(getQuestStage(player, questName) == 47){
                 sendItemDialogue(player, Items.GLOUGHS_JOURNAL_785,"You've found Glough's Journal!")
                 addItemOrDrop(player, Items.GLOUGHS_JOURNAL_785)
             }
@@ -173,7 +173,7 @@ class GrandTreeListeners: InteractionListener {
 
         // Roots for Daconia rock
         on(32319, IntType.SCENERY, "search"){ player, node ->
-            if(questStage(player, questName) < 99 || player.hasItem(Item(Items.DACONIA_ROCK_793))){ return@on true; }
+            if(getQuestStage(player, questName) < 99 || player.hasItem(Item(Items.DACONIA_ROCK_793))){ return@on true; }
             // RNG for which root the rock is under
             if(node.location == roots[getAttribute(player,"grandtree:rock",1)]){
                 sendItemDialogue(player, Item(Items.DACONIA_ROCK_793), "You've found a Daconia rock!")

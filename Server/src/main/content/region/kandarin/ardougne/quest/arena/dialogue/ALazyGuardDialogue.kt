@@ -15,7 +15,7 @@ import org.rs09.consts.NPCs
 class ALazyGuardDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.A_LAZY_KHAZARD_GUARD_8498)
-        when (questStage(player!!, FightArena.FightArenaQuest)) {
+        when (getQuestStage(player!!, FightArena.FightArenaQuest)) {
 
             in 40..49 -> when (stage) {
                 0 -> {

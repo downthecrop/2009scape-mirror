@@ -7,7 +7,7 @@ import core.tools.END_DIALOGUE
 
 class CommanderMontaiDialogue : DialogueFile(){
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = questStage(player!!, TreeGnomeVillage.questName)
+        val questStage = getQuestStage(player!!, TreeGnomeVillage.questName)
         if (questStage == 10) {
             when(stage) {
                 0 -> playerl("Hello.").also { stage++ }

@@ -1,11 +1,9 @@
 package content.region.misthalin.lumbridge.quest.lostcity
 
-import core.game.dialogue.DialoguePlugin
-import core.game.dialogue.FacialExpression
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
-import core.api.questStage
+import core.api.getQuestStage
 import core.api.setQuestStage
 
 /**
@@ -25,7 +23,7 @@ class ShamusDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when(questStage(player,quest)) {
+        when(getQuestStage(player,quest)) {
             0 -> when(stage++) {
                 0 -> playerl(core.game.dialogue.FacialExpression.THINKING, "I'm not sure.")
                 1 -> npcl(core.game.dialogue.FacialExpression.ANNOYED,"Well you'll have to be catchin' me again when yer are, elephant!")

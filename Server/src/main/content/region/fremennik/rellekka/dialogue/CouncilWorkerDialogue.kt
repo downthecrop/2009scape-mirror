@@ -1,7 +1,7 @@
 package content.region.fremennik.rellekka.dialogue
 
 import content.region.fremennik.rellekka.quest.thefremenniktrials.CouncilWorkerFTDialogue
-import core.api.questStage
+import core.api.getQuestStage
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -12,7 +12,7 @@ import core.plugin.Initializable
 class CouncilWorkerDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if(questStage(player, "Fremennik Trials") in 1..99){
+        if(getQuestStage(player, "Fremennik Trials") in 1..99){
             player.dialogueInterpreter.open((CouncilWorkerFTDialogue(1)))
         }
         else if(player.achievementDiaryManager.getDiary(DiaryType.FREMENNIK).isComplete(0, true)){

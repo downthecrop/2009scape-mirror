@@ -2,10 +2,8 @@ package content.region.fremennik.rellekka.quest.thefremenniktrials
 
 import core.api.addItem
 import core.api.dumpContainer
-import core.api.questStage
+import core.api.getQuestStage
 import core.api.removeItem
-import core.game.dialogue.DialoguePlugin
-import core.game.dialogue.FacialExpression
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.plugin.Initializable
@@ -81,7 +79,7 @@ class PeerTheSeerDialogue(player: Player? = null) : core.game.dialogue.DialogueP
             stage = 50
             return true
         }
-        if (questStage(player, "Fremennik Trials") == 0) {
+        if (getQuestStage(player, "Fremennik Trials") == 0) {
             npc(core.game.dialogue.FacialExpression.SAD,"Uuuh... What was that dark presence I felt?").also { stage = 300 }
         }
         return true

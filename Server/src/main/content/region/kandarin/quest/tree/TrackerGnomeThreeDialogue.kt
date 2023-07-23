@@ -13,7 +13,7 @@ class TrackerGnomeThreeDialogue : DialogueFile(){
             4 to  "My legs and your legs.")
 
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = questStage(player!!, TreeGnomeVillage.questName)
+        val questStage = getQuestStage(player!!, TreeGnomeVillage.questName)
         when {
             questStage == 30 -> {
                 when(stage) {

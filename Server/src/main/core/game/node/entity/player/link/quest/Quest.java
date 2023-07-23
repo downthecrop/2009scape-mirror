@@ -22,6 +22,11 @@ public abstract class Quest implements Plugin<Object> {
 	public static final String RED = "<col=8A0808>";
 
 	/**
+	 * Represents the bright red string.
+	 */
+	public static final String BRIGHT_RED = "<col=FF0000>";
+
+	/**
 	 * Represents the blue string.
 	 */
 	public static final String BLUE = "<col=08088A>";
@@ -151,7 +156,7 @@ public abstract class Quest implements Plugin<Object> {
 				line++;
 			}
 		} else {
-			send = send.replace("!!",RED).replace("??",BLUE).replace("---",BLACK + "<str>").replace("/--", BLUE);
+			send = send.replace("!!", RED).replace("??", BLUE).replace("---", BLACK + "<str>").replace("/--", BLUE).replace("%%", BRIGHT_RED).replace("&&", BLUE);
 			line(player, send, line, false);
 		}
 	}
@@ -164,12 +169,13 @@ public abstract class Quest implements Plugin<Object> {
 	 * @param crossed True if the message should be crossed out.
 	 */
 	public void line(Player player, String message, int line, final boolean crossed) {
-		String send = message;
+		String send;
 		if(!crossed){
 			send = BLUE + "" + message.replace("<n>", "<br><br>").replace("<blue>", BLUE).replace("<red>", RED);
-			send = send.replace("!!",RED).replace("??",BLUE);
+			send = send.replace("!!", RED).replace("??", BLUE).replace("%%", BRIGHT_RED).replace("&&", BLUE);
 		} else {
-			send = BLUE + "" + message.replace("??","").replace("!!","");
+			send = BLACK + "" + message.replace("<n>", "<br><br>").replace("<blue>", "").replace("<red>", "RED");
+			send = send.replace("!!", "").replace("??", "").replace("%%", "").replace("&&", "");
 		}
 		player.getPacketDispatch().sendString(crossed ? "<str>" + send + "</str>" : send, JOURNAL_COMPONENT, line);
 	}

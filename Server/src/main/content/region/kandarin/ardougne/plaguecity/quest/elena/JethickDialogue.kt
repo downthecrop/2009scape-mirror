@@ -24,7 +24,7 @@ class JethickDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (questStage(player!!, PlagueCity.PlagueCityQuest)) {
+        when (getQuestStage(player!!, PlagueCity.PlagueCityQuest)) {
 
             in 0..1 -> when (stage) {
                 1 -> npcl(FacialExpression.FRIENDLY, "Well King Tyras has wandered off into the west kingdom. He doesn't care about the mess he's left here. The city warder Bravek is in charge at the moment... He's not much better.").also { stage = END_DIALOGUE }

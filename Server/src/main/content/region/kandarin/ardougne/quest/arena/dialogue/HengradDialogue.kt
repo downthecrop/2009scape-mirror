@@ -11,7 +11,7 @@ import org.rs09.consts.NPCs
 class HengradDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.HENGRAD_263)
-        when (questStage(player!!, FightArena.FightArenaQuest)) {
+        when (getQuestStage(player!!, FightArena.FightArenaQuest)) {
 
             in 72..87 -> when (stage) {
                 0 -> {

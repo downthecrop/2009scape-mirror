@@ -14,7 +14,6 @@ import core.ServerConstants
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.game.interaction.InterfaceListener
-import core.tools.SystemLogger
 import core.game.system.command.Privilege
 import java.io.FileReader
 import core.tools.*
@@ -138,7 +137,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
         }
 
         on(NPCs.SIEGFRIED_ERKLE_933, IntType.NPC, "trade"){ player, node ->
-            val points = getQP(player)
+            val points = getQuestPoints(player)
             if(points < 40){
                 sendNPCDialogue(player, NPCs.SIEGFRIED_ERKLE_933, "I'm sorry, adventurer, but you need 40 quest points to buy from me.")
                 return@on true

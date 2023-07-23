@@ -16,7 +16,7 @@ import org.rs09.consts.NPCs
 class GeneralKhazardDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.GENERAL_KHAZARD_258)
-        when (questStage(player!!, FightArena.FightArenaQuest)) {
+        when (getQuestStage(player!!, FightArena.FightArenaQuest)) {
 
             in 68..70 -> when(stage){
                 0 -> npcl(FacialExpression.FRIENDLY, "Out of the way, guard! I don't tolerate disruption when I'm watching slaves being slaughtered.").also { stage = END_DIALOGUE }

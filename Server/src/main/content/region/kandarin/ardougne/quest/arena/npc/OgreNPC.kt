@@ -54,7 +54,7 @@ class OgreNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, locatio
     override fun finalizeDeath(killer: Entity?) {
         if (killer is Player) {
             val quest = "Fight Arena"
-            if (questStage(killer, quest) == 68 || questStage(killer, quest) == 88) {
+            if (getQuestStage(killer, quest) == 68 || getQuestStage(killer, quest) == 88) {
                 setQuestStage(killer, FightArena.FightArenaQuest, 72)
             }
             clearHintIcon(killer)

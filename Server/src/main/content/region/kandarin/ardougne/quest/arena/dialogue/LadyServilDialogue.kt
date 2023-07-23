@@ -1,7 +1,7 @@
 package content.region.kandarin.ardougne.quest.arena.dialogue
 
 import content.region.kandarin.ardougne.quest.arena.FightArena.Companion.FightArenaQuest
-import core.api.questStage
+import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
@@ -29,7 +29,7 @@ class LadyServilDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (questStage(player!!, FightArenaQuest)) {
+        when (getQuestStage(player!!, FightArenaQuest)) {
 
             0 -> when (stage) {
                 0 -> npcl(FacialExpression.SAD, "Oh I wish this broken cart was my only problem. *sob* I've got to find my family.. **sob**").also { stage++ }

@@ -28,7 +28,7 @@ class LostCityListeners : InteractionListener {
             core.game.global.action.DoorActionHandler.handleAutowalkDoor(player,node as Scenery)
             val quest = "Lost City"
             val isOutsideShed = player.location.x < node.location.x
-            val canDramenTeleport = inEquipment(player,Items.DRAMEN_STAFF_772) && ( questStage(player,quest) > 20 ) && isOutsideShed
+            val canDramenTeleport = inEquipment(player,Items.DRAMEN_STAFF_772) && ( getQuestStage(player,quest) > 20 ) && isOutsideShed
             if(canDramenTeleport) {
                 var count = 0
                 // pulser to handle the teleport. after 2 ticks it checks if the player hasnt completed lost city; if so, then it finishes the quest after the teleport

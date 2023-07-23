@@ -1,4 +1,4 @@
-package content.region.desert.nardah.handlers;
+package content.region.desert.nardah.dialogue;
 
 import core.game.node.item.Item;
 import core.cache.def.impl.NPCDefinition;

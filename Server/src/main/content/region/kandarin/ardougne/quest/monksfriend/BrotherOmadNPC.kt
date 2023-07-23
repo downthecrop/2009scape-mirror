@@ -23,7 +23,7 @@ import core.tools.END_DIALOGUE
 class BrotherOmadDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         val questName = "Monk's Friend"
-        val questStage = questStage(player!!, questName)
+        val questStage = getQuestStage(player!!, questName)
         when (questStage) {
             0 -> {
                 when(stage) {

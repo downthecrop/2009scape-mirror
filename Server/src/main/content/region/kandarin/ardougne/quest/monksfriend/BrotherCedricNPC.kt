@@ -1,6 +1,6 @@
 package content.region.kandarin.ardougne.quest.monksfriend
 
-import core.api.questStage
+import core.api.getQuestStage
 import core.api.sendItemDialogue
 import core.api.setQuestStage
 import core.game.node.entity.npc.NPC
@@ -19,7 +19,7 @@ import core.tools.END_DIALOGUE
 class BrotherCedricDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         val questName = "Monk's Friend"
-        val questStage = questStage(player!!, questName)
+        val questStage = getQuestStage(player!!, questName)
         when {
             questStage < 30 -> {
                 when(stage) {

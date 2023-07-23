@@ -66,6 +66,7 @@ import core.game.world.repository.Repository
 import core.game.consumable.*
 import core.ServerConstants
 import core.api.utils.Vector
+import core.game.node.entity.player.link.quest.Quest
 import core.tools.*
 import core.game.world.update.flag.*
 import core.game.world.update.flag.context.*
@@ -1479,6 +1480,18 @@ fun sendItemOnInterface(player: Player, iface: Int, child: Int, item: Int, amoun
 }
 
 /**
+ * Sends a zoomed item to a specific child on an interface
+ * @param player the player to send the packet to
+ * @param iface the ID of the interface to send the item onto
+ * @Param child the index of the child on the interface to send the item onto
+ * @param item the ID of the item to send
+ * @param zoom the amount of zoom to apply to the item - defaults to 230
+ */
+fun sendItemZoomOnInterface(player: Player, iface: Int, child: Int, item: Int, zoom: Int = 230) {
+    player.packetDispatch.sendItemZoomOnInterface(item, zoom, iface, child)
+}
+
+/**
  * Sends a dialogue box with a single item and some text
  * @param player the player to send it to
  * @param item the ID of the item to show
@@ -1588,14 +1601,14 @@ fun runTask(entity: Entity, delay: Int = 0, repeatTimes: Int = 1, task: () -> Un
  * @param player the player to get the QP for
  * @return the number of QP the player has
  */
-fun getQP(player: Player): Int {
+fun getQuestPoints(player: Player): Int {
     return player.questRepository.points
 }
 
 /**
  * Gets the stage for the given quest for the given player
  */
-fun questStage(player: Player, quest: String): Int {
+fun getQuestStage(player: Player, quest: String): Int {
     return player.questRepository.getStage(quest)
 }
 
@@ -1620,7 +1633,6 @@ fun isQuestInProgress(player: Player, quest: String, startStage: Int, endStage: 
 fun isQuestComplete(player: Player, quest: String): Boolean {
     return player.questRepository.getStage(quest) == 100
 }
-
 
 /**
  * Check if a player meets the requirements to start a quest, and then starts it if they do. Returns success bool

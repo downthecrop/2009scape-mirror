@@ -48,6 +48,8 @@ class MonksFriend: Quest("Monk's Friend", 89, 88, 1, 30, 0, 1, 80) {
         }
         if(stage == 100){
             line(player, "I had a party with the Monks. There were party balloons and we danced the night away!", line++, true)
+            line++
+            line(player, "%%QUEST COMPLETE!&&", line++)
         }
     }
 

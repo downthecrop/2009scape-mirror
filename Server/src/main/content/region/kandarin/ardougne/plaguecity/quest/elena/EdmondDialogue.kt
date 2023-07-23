@@ -26,7 +26,7 @@ class EdmondDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (questStage(player!!, PlagueCity.PlagueCityQuest)) {
+        when (getQuestStage(player!!, PlagueCity.PlagueCityQuest)) {
 
             0 -> when (stage) {
                 1 -> npcl(FacialExpression.NEUTRAL, "Sorry, I can't stop to talk...").also { stage++ }

@@ -4,7 +4,7 @@ import content.global.skill.agility.AgilityHandler
 import content.region.misthalin.lumbridge.dialogue.DukeHoracioDialogue
 import core.api.Event
 import core.api.LoginListener
-import core.api.questStage
+import core.api.getQuestStage
 import core.game.component.Component
 import core.game.event.EventHook
 import core.game.event.PickUpEvent
@@ -323,7 +323,7 @@ class DragonSlayer : Quest("Dragon Slayer", 18, 17, 2, 176, 0, 1, 10), LoginList
     }
 
     override fun login(player: Player) {
-        if (questStage(player, this.name) == 20) {
+        if (getQuestStage(player, this.name) == 20) {
             player.hook(Event.SpellCast, SpellCastHook)
             player.hook(Event.PickedUp, PickedUpHook)
         }

@@ -1,9 +1,6 @@
 package content.region.asgarnia.burthorpe.quest.deathplateau
 
-import core.api.getAttribute
-import core.api.questStage
-import core.api.setAttribute
-import core.api.setQuestStage
+import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
 import core.game.dialogue.Topic
@@ -20,7 +17,7 @@ import org.rs09.consts.NPCs
  */
 class EohricDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        when (questStage(player!!, DeathPlateau.questName)) {
+        when (getQuestStage(player!!, DeathPlateau.questName)) {
             in 5..9 -> {
                 when (stage) {
                     START_DIALOGUE -> player(FacialExpression.FRIENDLY, "Hi!").also { stage++ }

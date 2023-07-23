@@ -67,7 +67,7 @@ class KingNarnodeDialogue : DialogueFile() {
         })
     }
     override fun handle(componentID: Int, buttonID: Int) {
-        when (questStage(player!!, questName)) {
+        when (getQuestStage(player!!, questName)) {
             0 -> {
                 when (stage) {
                     0 -> npcl("Welcome Traveller. I am King Narnode. It's nice to see an outsider.").also { stage++ }
@@ -383,7 +383,7 @@ class KingNarnodeUnderGroundDialogue : DialogueFile() {
         })
     }
     override fun handle(componentID: Int, buttonID: Int) {
-        when(questStage(player!!, questName)) {
+        when(getQuestStage(player!!, questName)) {
             98 -> when (stage) {
                 0 -> npcl("Traveller, you're wounded! What happened?").also { stage++ }
                 1 -> playerl("It's Glough! He set a demon on me!").also { stage++ }

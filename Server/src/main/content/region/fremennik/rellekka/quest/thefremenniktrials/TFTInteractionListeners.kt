@@ -167,7 +167,7 @@ class TFTInteractionListeners : InteractionListener {
         on(LYRE_IDs, IntType.ITEM, "play"){ player, lyre ->
             if(getAttribute(player,"onStage",false) && !getAttribute(player,"lyreConcertPlayed",false)){
                 Pulser.submit(LyreConcertPulse(player,lyre.id))
-            } else if(questStage(player, "Fremennik Trials") < 20 || !isQuestComplete(player, "Fremennik Trials")){
+            } else if(getQuestStage(player, "Fremennik Trials") < 20 || !isQuestComplete(player, "Fremennik Trials")){
                 sendMessage(player,"You lack the knowledge to play this.")
             } else if(LYRE_IDs.isLast(lyre.id)){
                 sendMessage(player,"Your lyre is out of charges!")
@@ -378,7 +378,7 @@ class TFTInteractionListeners : InteractionListener {
             "I've joined the Legends' Guild!"
         )
         var counter = 0
-        val questPoints = getQP(player)
+        val questPoints = getQuestPoints(player)
         val champGuild = player.achievementDiaryManager?.hasCompletedTask(DiaryType.VARROCK, 1, 1)?: false
         val legGuild = questPoints >= 111
         val heroGuild = questPoints >= 5

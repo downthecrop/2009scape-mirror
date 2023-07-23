@@ -7,7 +7,7 @@ import core.tools.END_DIALOGUE
 
 class TrackerGnomeTwoDialogue : DialogueFile(){
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = questStage(player!!, TreeGnomeVillage.questName)
+        val questStage = getQuestStage(player!!, TreeGnomeVillage.questName)
         when {
             questStage == 30 -> {
                 when (stage) {

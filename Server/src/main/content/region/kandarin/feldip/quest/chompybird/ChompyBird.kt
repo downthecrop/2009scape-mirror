@@ -103,7 +103,7 @@ class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 2, Vars.VARP_QUEST_C
         line(player, "- ${if(getAttribute(player, ATTR_FYCIE_ASKED, false)) "Fycie wants: !!${getItemName(getAttribute(player, ATTR_ING_FYCIE, -1))}??" else "I still need to ask !!Fycie??."}", ln++, false)
       } else if (stage > 70) {
         line(player, "I seasoned and cooked the chompy bird for Rantz and his kids.", ln++, true)
-        line(player, "!!QUEST COMPLETE!??", ln++, false)
+        line(player, "%%QUEST COMPLETE!&&", ln++, false)
       }
     }
   }

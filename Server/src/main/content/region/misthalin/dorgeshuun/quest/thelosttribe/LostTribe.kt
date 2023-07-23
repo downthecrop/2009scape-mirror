@@ -83,7 +83,7 @@ class LostTribe : Quest("Lost Tribe",84,83,1) {
                 line(player,"the cave goblins. I should do so at once!",line++,stage >= 51)
             }
             if(stage >= 100){
-                line(player,"!!QUEST COMPLETE!??",line++)
+                line(player,"%%QUEST COMPLETE!&&",line++)
             }
         }
 

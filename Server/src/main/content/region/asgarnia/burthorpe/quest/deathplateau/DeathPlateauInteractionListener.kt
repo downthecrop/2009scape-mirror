@@ -77,7 +77,7 @@ class DeathPlateauInteractionListener : InteractionListener {
                 GroundItemManager.get(Items.STONE_BALL_3111, location(2895, 3562, 0), player) != null &&
                 GroundItemManager.get(Items.STONE_BALL_3112, location(2895, 3563, 0), player) != null &&
                 GroundItemManager.get(Items.STONE_BALL_3113, location(2895, 3564, 0), player) != null) {
-                if (questStage(player, DeathPlateau.questName) == 16) {
+                if (getQuestStage(player, DeathPlateau.questName) == 16) {
                     sendMessage(player, "The equipment room door has unlocked.")
                     setQuestStage(player, DeathPlateau.questName, 19)
                 }
@@ -86,7 +86,7 @@ class DeathPlateauInteractionListener : InteractionListener {
         }
 
         on(Scenery.LARGE_DOOR_3743, SCENERY, "open") { player, node ->
-            if (questStage(player, DeathPlateau.questName) > 16) {
+            if (getQuestStage(player, DeathPlateau.questName) > 16) {
                 DoorActionHandler.handleAutowalkDoor(player, node as core.game.node.scenery.Scenery)
             } else {
                 sendMessage(player, "The door is locked.")

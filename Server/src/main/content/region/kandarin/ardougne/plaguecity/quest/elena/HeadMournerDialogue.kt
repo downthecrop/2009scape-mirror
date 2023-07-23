@@ -1,6 +1,6 @@
 package content.region.kandarin.ardougne.plaguecity.quest.elena
 
-import core.api.questStage
+import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
@@ -13,7 +13,7 @@ import org.rs09.consts.NPCs
 class HeadMournerDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.HEAD_MOURNER_716)
-        when (questStage(player!!, PlagueCity.PlagueCityQuest)) {
+        when (getQuestStage(player!!, PlagueCity.PlagueCityQuest)) {
 
             in 8..10 -> when (stage) {
                 0 -> npcl(FacialExpression.FRIENDLY, "Hmmm, how did you get over here? You're not one of this rabble. Ah well, you'll have to stay. Can't risk you going back now.").also { stage++ }

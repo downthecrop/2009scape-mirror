@@ -9,7 +9,7 @@ import org.rs09.consts.Items
 class IOUNoteDialogueFile : DialogueFile() {
     var a = 0
     override fun handle(componentID: Int, buttonID: Int) {
-        when (questStage(player!!, DeathPlateau.questName)) {
+        when (getQuestStage(player!!, DeathPlateau.questName)) {
             in 15..16 -> {
                 when (stage) {
                     0 -> player(FacialExpression.NEUTRAL, "The IOU says that Harold owes me some money.").also { stage++ }

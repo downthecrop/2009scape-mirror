@@ -88,7 +88,7 @@ class FamilyCrest: Quest("Family Crest", 59, 58, 1, 148, 0, 1, 11) {
             line(player, "and would always return to !!Dimintheis??", line++)
             line(player, "for me to reclaim if I ever lost them.", line++)
             line++
-            line(player, "!!QUEST COMPLETE!??.", line++)
+            line(player, "%%QUEST COMPLETE!&&.", line++)
         }
 
 

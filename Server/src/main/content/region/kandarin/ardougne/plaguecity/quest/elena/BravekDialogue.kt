@@ -30,7 +30,7 @@ class BravekDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (questStage(player!!, PlagueCity.PlagueCityQuest)) {
+        when (getQuestStage(player!!, PlagueCity.PlagueCityQuest)) {
 
             13 -> when (stage) {
                 1 -> playerl(FacialExpression.FRIENDLY, "This is really important though!").also { stage = 2 }
