@@ -67,12 +67,14 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
             }
 
             val condition: (Player) -> Boolean = when(star.location.toLowerCase()){
-                "canifis bank" -> { p -> p.questRepository.isComplete("Priest in Peril")}
+                "canifis bank" -> { p -> hasRequirement(p, "Priest in Peril") }
                 //"Burgh de Rott bank" -> { p -> p.questRepository.isComplete("Priest in Peril")} // for now, require this as it is in Morytania. remove when appropriate quests added - Crash
                 "crafting guild" -> {p -> hasLevelStat(p, Skills.CRAFTING, 40) }
-                "lletya bank" -> {p -> p.questRepository.isComplete("Roving Elves")}
-                "jatizso mine" -> {p -> p.questRepository.isComplete("Fremennik Trials")}
-                "south crandor mining site" -> {p -> p.questRepository.isComplete("Dragon Slayer")}
+                "lletya bank" -> {p -> hasRequirement(p, "Mourning's End Part I") }
+                "jatizso mine" -> {p -> hasRequirement(player, "Fremennik Trials") }
+                "south crandor mining site" -> {p -> hasRequirement(p, "Dragon Slayer") }
+                "shilo village mining site" -> {p -> hasRequirement(p, "Shilo Village") }
+                "mos le'harmless bank" -> {p -> hasRequirement(p, "Cabin Fever") }
                 else -> {_ -> true}
             }
 
