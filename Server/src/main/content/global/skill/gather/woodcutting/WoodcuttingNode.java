@@ -141,10 +141,10 @@ public enum WoodcuttingNode {
     double experience,rate;
     public byte identifier;
     boolean farming;
-    public double baseLow = 64;
-    public double baseHigh = 200;
-    public double tierModLow = 32;
-    public double tierModHigh = 100;
+    public double baseLow = 2;
+    public double baseHigh = 6;
+    public double tierModLow = 1;
+    public double tierModHigh = 3;
     WoodcuttingNode(int full, int empty,byte identifier){
         this.full = full;
         this.empty = empty;
@@ -161,6 +161,10 @@ public enum WoodcuttingNode {
                 rate = 0.05;
                 experience = 25.0;
                 level = 1;
+                baseLow = 64;
+                baseHigh = 200;
+                tierModLow = 32;
+                tierModHigh = 100;
                 break;
             case 5:
                 reward = 1511;
@@ -169,6 +173,10 @@ public enum WoodcuttingNode {
                 experience = 100;
                 level = 1;
                 this.rewardAmount = 2;
+                baseLow = 64;
+                baseHigh = 200;
+                tierModLow = 32;
+                tierModHigh = 100;
                 break;
             case 6:
                 reward = 2862;
@@ -176,6 +184,10 @@ public enum WoodcuttingNode {
                 rate = 0.05;
                 experience = 25.0;
                 level = 1;
+                baseLow = 64;
+                baseHigh = 200;
+                tierModLow = 32;
+                tierModHigh = 100;
                 break;
             case 7:
                 reward = 1521;
