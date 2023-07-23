@@ -32,12 +32,12 @@ class SQLiteProvider (private val path: String, private val expectedTables: Hash
         }
     }
 
-    fun pruneOldData (daysToKeep: Int) {
+    fun pruneOldData (daysToKeep: Int, timestampFieldName: String = "ts") {
         if (expectedTables?.isEmpty() != false) return
         run {
             with (it.createStatement()) {
                 for ((table, _) in expectedTables) {
-                    execute("DELETE FROM $table WHERE ts <= date('now', '-$daysToKeep day');")
+                    execute("DELETE FROM $table WHERE $timestampFieldName <= date('now', '-$daysToKeep day');")
                 }
             }
         }
