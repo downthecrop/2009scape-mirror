@@ -37,14 +37,16 @@ class PulseRunner {
                 }
             }
 
-            if (pulse is GeneralBotCreator.BotScriptPulse) {
+            var pulseName = pulse::class.java.name
+
+            if (pulse is GeneralBotCreator.BotScriptPulse || pulseName.contains("ScriptAPI")) {
                 totalTimeBotPulses += elapsedTime.toInt()
             } else {
                 totalTimeOtherPulses += elapsedTime.toInt()
             }
 
-            Grafana.addPulseLength (pulse::class.java.name, elapsedTime.toInt())
-            Grafana.countPulse (pulse::class.java.name)
+            Grafana.addPulseLength (pulseName, elapsedTime.toInt())
+            Grafana.countPulse (pulseName)
 
             notifyIfTooLong(pulse, elapsedTime)
         }

@@ -8,6 +8,8 @@ import core.tools.RandomFunction
 import core.Server
 import content.global.bots.Idler
 import core.api.*
+import core.game.interaction.MovementPulse
+import core.tools.Log
 
 class GBCTick : TickListener {
     override fun tick() {
@@ -45,10 +47,23 @@ class GeneralBotCreator {
             botScript.init(isPlayer)
         }
         var randomDelay = 0
+        var lastBotLocation: Location = botScript.bot.location.transform(0,0,0)
+        var lastBotMoveTicks = getWorldTicks()
         override fun pulse(): Boolean {
             if(randomDelay > 0){
                 randomDelay -= 1
                 return false
+            }
+            if (botScript.bot.pulseManager.hasPulseRunning()) {
+                if (botScript.bot.pulseManager.current is MovementPulse) {
+                    if (botScript.bot.location != lastBotLocation) {
+                        lastBotLocation = botScript.bot.location.transform(0,0,0)
+                        lastBotMoveTicks = getWorldTicks()
+                    }
+                    if (lastBotLocation == botScript.bot.location && getWorldTicks() - lastBotMoveTicks > 5) {
+                        botScript.bot.pulseManager.current.stop()
+                    }
+                }
             }
 
             /*
