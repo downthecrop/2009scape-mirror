@@ -156,7 +156,7 @@ object ServerConfigParser {
         ServerConstants.PLAYER_STOCK_RECIRCULATE = data.getBoolean("world.playerstock_bot_offers", true)
         ServerConstants.BOTSTOCK_LIMIT = data.getLong("world.botstock_limit", 5000L).toInt()
         ServerConstants.BETTER_AGILITY_PYRAMID_GP = data.getBoolean("world.better_agility_pyramid_gp", true)
-        ServerConstants.GRAFANA_PATH = data.getPath("paths.grafana_logs")
+        ServerConstants.GRAFANA_PATH = data.getPath("integrations.grafana_log_path")
         ServerConstants.GRAFANA_LOGGING = data.getBoolean("integrations.grafana_logging")
         ServerConstants.GRAFANA_TTL_DAYS = data.getLong("integrations.grafana_log_ttl_days").toInt()
 
