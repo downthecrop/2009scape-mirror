@@ -1,16 +1,15 @@
 package core.game.node.entity.player.info
 
+import core.ServerConstants
 import core.api.getItemName
 import core.game.container.Container
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.integrations.discord.Discord
-import kotlinx.coroutines.*
-import org.sqlite.SQLiteDataSource
-import core.ServerConstants
+import core.integrations.sqlite.SQLiteProvider
 import core.tools.Log
-import core.tools.SystemLogger
-import java.io.File
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import java.sql.Connection
 import java.util.concurrent.LinkedBlockingQueue
 import kotlin.math.abs
@@ -18,6 +17,25 @@ import kotlin.math.abs
 object PlayerMonitor {
     private val eventQueue = LinkedBlockingQueue<LogEvent>()
     private var activeTask: Job? = null
+    private lateinit var db: SQLiteProvider
+
+    var expectedTables = hashMapOf(
+        "chat_logs" to """
+            CREATE TABLE "chat_logs" ( "player" TEXT, "uid" INTEGER, "type" TEXT, "message" TEXT, "timestamp" NUMERIC );
+            """,
+        "misc_logs" to """
+            CREATE TABLE "misc_logs" ( "player" TEXT, "uid" INTEGER, "type" TEXT, "details" TEXT , "timestamp" NUMERIC); 
+            """,
+        "trade_logs" to """
+            CREATE TABLE "trade_logs" ( "player_a" TEXT, "player_b" TEXT, "uid_a" INTEGER, "uid_b" INTEGER, "items_a" TEXT, "items_b" TEXT, "timestamp" NUMERIC ); 
+            """,
+        "xp_gains" to """
+            CREATE TABLE "xp_gains" ( "player" TEXT, "uid" INTEGER, "attack" INTEGER, "defence" INTEGER, "strength" INTEGER, "hitpoints" INTEGER, "ranged" INTEGER, "prayer" INTEGER, "magic" INTEGER, "cooking" INTEGER, "woodcutting" INTEGER, "fletching" INTEGER, "fishing" INTEGER, "firemaking" INTEGER, "crafting" INTEGER, "smithing" INTEGER, "mining" INTEGER, "herblore" INTEGER, "agility" INTEGER, "thieving" INTEGER, "slayer" INTEGER, "farming" INTEGER, "runecrafting" INTEGER, "hunter" INTEGER, "construction" INTEGER, "summoning" INTEGER , "timestamp" NUMERIC) 
+            """,
+        "wealth_logs" to """
+            CREATE TABLE "wealth_logs" ( "player" TEXT, "uid" INTEGER, "total" NUMERIC, "diff" NUMERIC, "timestamp" NUMERIC ) 
+            """
+    )
 
     @JvmStatic fun logWealthChange(player: Player, totalWealth: Long, diff: Long) {
         val event = LogEvent.WealthLog(
@@ -120,72 +138,34 @@ object PlayerMonitor {
         }
     }
 
-    fun processQueuedEvents() {
-        val path = ServerConstants.LOGS_PATH + "playerlogs.db"
-        if (activeTask?.isActive == true)
-            return
-        if (!File(path).exists()) {
-            createSqliteDatabase(path)
-        }
-        activeTask = GlobalScope.launch {
-            val conn = connect(path)
-            conn.use {
-                while (eventQueue.isNotEmpty()) {
-                    val event = withContext(Dispatchers.IO) { eventQueue.take() }
-                    process(event, it)
-                }
-            }
+    fun init () {
+        if (!this::db.isInitialized) {
+            var path = ServerConstants.LOGS_PATH + "playerlogs.db"
+            db = SQLiteProvider(path, expectedTables)
+            db.initTables()
         }
     }
 
-    @JvmStatic fun flushRemainingEventsImmediately() {
-        core.api.log(this::class.java, Log.FINE,  "Flushing player log events...")
-        val path = ServerConstants.LOGS_PATH + "playerlogs.db"
-        if (!File(path).exists()) {
-            createSqliteDatabase(path)
-        }
-        if (activeTask != null)
-            activeTask?.cancel("Interrupted by shutdown. This is probably fine.")
-        val conn = connect(path)
-        conn.use {
+    fun processQueuedEvents() {
+        init()
+        if (activeTask?.isActive == true)
+            return
+
+        activeTask = db.runAsync {
             while (eventQueue.isNotEmpty())
                 process(eventQueue.take(), it)
         }
     }
 
-    private fun connect(path: String) : Connection {
-        val source = SQLiteDataSource()
-        source.url = "jdbc:sqlite:$path"
-        return source.connection
-    }
-
-    private fun createSqliteDatabase(path: String) {
-        if (!File(ServerConstants.LOGS_PATH).exists())
-            File(ServerConstants.LOGS_PATH).mkdirs()
-        val connection = connect(path)
-        val stmt = connection.createStatement()
-        stmt.execute(
-            """
-            CREATE TABLE "chat_logs" ( "player" TEXT, "uid" INTEGER, "type" TEXT, "message" TEXT, "timestamp" NUMERIC );
-            """)
-        stmt.execute(
-            """
-            CREATE TABLE "misc_logs" ( "player" TEXT, "uid" INTEGER, "type" TEXT, "details" TEXT , "timestamp" NUMERIC); 
-            """)
-        stmt.execute(
-            """
-            CREATE TABLE "trade_logs" ( "player_a" TEXT, "player_b" TEXT, "uid_a" INTEGER, "uid_b" INTEGER, "items_a" TEXT, "items_b" TEXT, "timestamp" NUMERIC ); 
-            """)
-        stmt.execute(
-            """
-            CREATE TABLE "xp_gains" ( "player" TEXT, "uid" INTEGER, "attack" INTEGER, "defence" INTEGER, "strength" INTEGER, "hitpoints" INTEGER, "ranged" INTEGER, "prayer" INTEGER, "magic" INTEGER, "cooking" INTEGER, "woodcutting" INTEGER, "fletching" INTEGER, "fishing" INTEGER, "firemaking" INTEGER, "crafting" INTEGER, "smithing" INTEGER, "mining" INTEGER, "herblore" INTEGER, "agility" INTEGER, "thieving" INTEGER, "slayer" INTEGER, "farming" INTEGER, "runecrafting" INTEGER, "hunter" INTEGER, "construction" INTEGER, "summoning" INTEGER , "timestamp" NUMERIC) 
-            """)
-        stmt.execute(
-            """
-            CREATE TABLE "wealth_logs" ( "player" TEXT, "uid" INTEGER, "total" NUMERIC, "diff" NUMERIC, "timestamp" NUMERIC ) 
-            """)
-        stmt.close()
-        connection.close()
+    @JvmStatic fun flushRemainingEventsImmediately() {
+        core.api.log(this::class.java, Log.FINE,  "Flushing player log events...")
+        init()
+        if (activeTask != null)
+            activeTask?.cancel("Interrupted by shutdown. This is probably fine.")
+        db.run {
+            while (eventQueue.isNotEmpty())
+                process(eventQueue.take(), it)
+        }
     }
 
     private fun process(event: LogEvent, conn: Connection) {

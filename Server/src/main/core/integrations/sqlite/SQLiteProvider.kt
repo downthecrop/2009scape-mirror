@@ -2,6 +2,7 @@ package core.integrations.sqlite
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.sqlite.SQLiteDataSource
 import java.io.File
@@ -17,8 +18,10 @@ class SQLiteProvider (private val path: String, private val expectedTables: Hash
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
     private lateinit var sqlitePath: String
 
-    fun initTables() {
+    fun initTables(tableCreatedCallback: ((String) -> Unit)? = null) {
         sqlitePath = File(path).absolutePath
+        if (!File(sqlitePath).exists())
+            File(sqlitePath).mkdirs()
         if (expectedTables?.isEmpty() != false) return
         run {
             with(it.prepareStatement(TABLE_CHECK)) {
@@ -26,7 +29,7 @@ class SQLiteProvider (private val path: String, private val expectedTables: Hash
                     setString(1, table)
                     val res = executeQuery()
                     if (!res.next())
-                        with(it.createStatement()) { execute(create) }
+                        with(it.createStatement()) { execute(create); tableCreatedCallback?.invoke(table) }
                 }
             }
         }
@@ -43,8 +46,8 @@ class SQLiteProvider (private val path: String, private val expectedTables: Hash
         }
     }
 
-    fun runAsync (closure: (conn: Connection) -> Unit) {
-        coroutineScope.launch { run (closure) }
+    fun runAsync (closure: (conn: Connection) -> Unit) : Job {
+        return coroutineScope.launch { run (closure) }
     }
 
     fun run (closure: (conn: Connection) -> Unit) {
