@@ -15,7 +15,11 @@ object GEDB {
     lateinit var db: SQLiteProvider
 
     fun init() {
-        db = SQLiteProvider(ServerConstants.GRAND_EXCHANGE_DATA_PATH + "grandexchange.db", expectedTables)
+        init (ServerConstants.GRAND_EXCHANGE_DATA_PATH + "grandexchange.db")
+    }
+
+    fun init (path: String) {
+        db = SQLiteProvider(path, expectedTables)
         db.initTables { createdTable: String ->
             if (createdTable == "price_index")
                 populateInitialPriceIndex()
