@@ -174,6 +174,9 @@ class ServerConstants {
         @JvmField
         var GRAFANA_LOGGING = true
 
+        @JvmField
+        var GRAFANA_TTL_DAYS = 7
+
         //location names for the ::to command.
         val TELEPORT_DESTINATIONS = arrayOf(
             arrayOf(Location.create(2974, 4383, 2), "corp", "corporal", "corporeal"),

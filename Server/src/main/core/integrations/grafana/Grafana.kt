@@ -11,7 +11,7 @@ class Grafana : StartupListener {
         if (!ServerConstants.GRAFANA_LOGGING) return
         db = SQLiteProvider (ServerConstants.GRAFANA_PATH + "grafana.db", expectedTables)
         db.initTables()
-        db.pruneOldData(7)
+        db.pruneOldData(ServerConstants.GRAFANA_TTL_DAYS)
     }
 
     data class GrafanaData (
