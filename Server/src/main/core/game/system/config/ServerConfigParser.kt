@@ -157,8 +157,8 @@ object ServerConfigParser {
         ServerConstants.BOTSTOCK_LIMIT = data.getLong("world.botstock_limit", 5000L).toInt()
         ServerConstants.BETTER_AGILITY_PYRAMID_GP = data.getBoolean("world.better_agility_pyramid_gp", true)
         ServerConstants.GRAFANA_PATH = data.getPath("integrations.grafana_log_path")
-        ServerConstants.GRAFANA_LOGGING = data.getBoolean("integrations.grafana_logging")
-        ServerConstants.GRAFANA_TTL_DAYS = data.getLong("integrations.grafana_log_ttl_days").toInt()
+        ServerConstants.GRAFANA_LOGGING = data.getBoolean("integrations.grafana_logging", false)
+        ServerConstants.GRAFANA_TTL_DAYS = data.getLong("integrations.grafana_log_ttl_days", 7L).toInt()
 
         val logLevel = data.getString("server.log_level", "VERBOSE").uppercase()
         ServerConstants.LOG_LEVEL = parseEnumEntry<LogLevel>(logLevel) ?: LogLevel.VERBOSE
