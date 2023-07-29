@@ -2,12 +2,12 @@ package content.global.bots
 
 import core.game.bots.*
 import core.game.interaction.DestinationFlag
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListeners
 import core.game.interaction.MovementPulse
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
-import core.game.interaction.IntType
-import core.game.interaction.InteractionListeners
 
 @PlayerCompatible
 @ScriptDescription("Start in varrock bank with rune mysteries complete and a pickaxe equipped/in inventory")
@@ -18,6 +18,7 @@ class VarrockEssenceMiner : Script(){
     var state = State.TO_ESSENCE
     val auburyZone = ZoneBorders(3252, 3398, 3254, 3402)
     val bankZone = ZoneBorders(3251, 3420,3254, 3422)
+    // Used for automatic failure prevention eg from levelup
     override fun tick() {
 
         when(state){
@@ -49,10 +50,13 @@ class VarrockEssenceMiner : Script(){
             }
 
             State.MINING -> {
-                val essence = scriptAPI.getNearestNode(2491,true)
-                essence?.let { InteractionListeners.run(essence.id, IntType.SCENERY,"mine",bot,essence) }
-                if(bot.inventory.isFull)
+                if(bot.inventory.isFull) {
                     state = State.TO_BANK
+                }
+                else {
+                    val essence = scriptAPI.getNearestNode(2491,true)
+                    essence?.let { InteractionListeners.run(essence.id, IntType.SCENERY,"mine",bot,essence) }
+                }
             }
 
             State.TO_BANK -> {

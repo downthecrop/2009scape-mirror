@@ -19,6 +19,7 @@ public abstract class Script {
     public Player bot;
 
     public boolean running = true;
+    public boolean endDialogue = true;
 
     public void init(boolean isPlayer)
     {

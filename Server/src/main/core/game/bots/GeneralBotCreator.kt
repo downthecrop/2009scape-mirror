@@ -1,12 +1,12 @@
 package core.game.bots
 
+import content.global.bots.Idler
+import core.Server
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.tools.RandomFunction
-import core.Server
-import content.global.bots.Idler
 
 class GeneralBotCreator {
     //org/crandor/net/packet/in/InteractionPacket.java <<< This is a very useful class for learning to code bots
@@ -40,6 +40,28 @@ class GeneralBotCreator {
                 randomDelay -= 1
                 return false
             }
+
+            /*
+             * Chatboxes and interfaces will cause the authentic interaction subsystem
+             * to pause any currently running authentically-implemented interactions.
+             *
+             * When this happens, if the interfaces are not handled by the script and closed,
+             * execution will remain paused as the game believes the bot is still doing something
+             * (because they still have an authentic interaction in the queue, that is not advancing
+             * because it is paused) and so the script does not execute, but the pulse is waiting on botscript input.
+             *
+             * This deadlock can be worked around by just closing these.
+             *
+             * Set endDialogue to FALSE if you want
+             * to avoid automatic dialogue termination (useful for, for example, boat travel)
+             */
+            if (botScript.bot.scripts.getActiveScript() != null && botScript.bot.hasModalOpen() && botScript.endDialogue) {
+                botScript.bot.interfaceManager.closeChatbox()
+                botScript.bot.interfaceManager.openChatbox(137)
+                botScript.bot.interfaceManager.close()
+                botScript.bot.dialogueInterpreter.close()
+            }
+
             if (!botScript.bot.pulseManager.hasPulseRunning() && botScript.bot.scripts.getActiveScript() == null) {
 
                 /*if (ticks++ >= RandomFunction.random(90000,120000)) {
