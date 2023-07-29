@@ -5,6 +5,9 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Represents the pulse used to craft jewllery.
@@ -55,6 +58,7 @@ public final class JewelleryPulse extends SkillPulse<Item> {
 	public void animate() {
 		if (ticks % 5 == 0) {
 			player.animate(ANIMATION);
+			playAudio(player, Sounds.FURNACE_2725, 1);
 		}
 	}
 

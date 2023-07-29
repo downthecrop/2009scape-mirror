@@ -20,6 +20,9 @@ import core.tools.RandomFunction;
 import core.game.dialogue.DialogueInterpreter;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.skill.Skills;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.*;
 
 // Sources:
 // https://www.youtube.com/watch?v=xu7Err9YUgw
@@ -71,6 +74,7 @@ public class FishbowlPlugin extends OptionHandler {
                     if (player.getInventory().remove(item)) {
                         player.lock(2);
                         player.getInventory().add(new Item(FISHBOWL_EMPTY));
+                        playAudio(player, Sounds.LIQUID_2401, 1);
                         player.getPacketDispatch().sendMessage("You empty the contents of the fishbowl onto the ground.");
                     }
                     break;

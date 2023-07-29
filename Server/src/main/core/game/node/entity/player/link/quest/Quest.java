@@ -7,6 +7,9 @@ import core.plugin.PluginManifest;
 import core.plugin.PluginType;
 
 import java.util.Arrays;
+import java.util.Random;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * A skeleton plugin for a quest.
@@ -138,7 +141,8 @@ public abstract class Quest implements Plugin<Object> {
 		player.getPacketDispatch().sendString("" + player.getQuestRepository().getPoints() + "", 277, 7);
 		player.getPacketDispatch().sendString("You have completed the " + getName() + " Quest!", 277, 4);
 		player.getPacketDispatch().sendMessage("Congratulations! Quest complete!");
-		player.getPacketDispatch().sendTempMusic(152);
+		int questJingles[] = {152, 153, 154};
+		playJingle(player, questJingles[new Random().nextInt(3)]);
 	}
 
 	/**

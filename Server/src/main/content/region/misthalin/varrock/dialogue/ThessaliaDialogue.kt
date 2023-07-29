@@ -1,5 +1,6 @@
 package content.region.misthalin.varrock.dialogue
 
+import core.api.playJingle
 import core.game.component.Component
 import core.plugin.Initializable
 import core.game.dialogue.DialoguePlugin
@@ -22,6 +23,7 @@ class ThessaliaDialogue(player: Player? = null): core.game.dialogue.DialoguePlug
                     end()
                     player.interfaceManager.open(Component(Components.THESSALIA_CLOTHES_FEMALE_594))
                 }
+                playJingle(player, 273)
             } else { //Has some armour equipped
                 interpreter.sendDialogues(548, core.game.dialogue.FacialExpression.WORRIED, "You can't try them on while wearing armour. Take", "it off and speak to me again.")
                 stage = 52

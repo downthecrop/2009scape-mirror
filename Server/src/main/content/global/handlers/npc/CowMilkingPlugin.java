@@ -15,6 +15,8 @@ import core.plugin.Initializable;
 import core.plugin.ClassScanner;
 import org.rs09.consts.Sounds;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the plugin used to milk a cow.
  * @author 'Vexia
@@ -56,7 +58,7 @@ public final class CowMilkingPlugin extends OptionHandler {
 		}
 
 		player.animate(ANIMATION);
-		player.getAudioManager().send(Sounds.MILK_COW_372);
+		playAudio(player, Sounds.MILK_COW_372);
 		player.getPulseManager().run(new Pulse(8, player) {
 			@Override
 			public boolean pulse() {
@@ -66,6 +68,7 @@ public final class CowMilkingPlugin extends OptionHandler {
 				}
 				if (player.getInventory().contains(1925, 1) || player.getInventory().contains(3727, 1)) {
 					player.animate(ANIMATION);
+					playAudio(player, Sounds.MILK_COW_372);
 					return false;
 				}
 				return true;

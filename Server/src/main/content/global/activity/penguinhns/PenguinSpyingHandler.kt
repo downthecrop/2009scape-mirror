@@ -1,5 +1,6 @@
 package content.global.activity.penguinhns
 
+import core.api.*
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
@@ -17,6 +18,7 @@ class PenguinSpyingHandler : InteractionListener {
                 player.sendMessage("You've already tagged this penguin.")
             } else {
                 GameWorld.submit(SpyPulse(player, npc))
+                playJingle(player, 345)
             }
             return@on true
         }

@@ -10,6 +10,7 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 
 import core.api.*
+import org.rs09.consts.Sounds
 
 class CanoeStationListener : InteractionListener {
 
@@ -80,6 +81,7 @@ class CanoeStationListener : InteractionListener {
             val canoe = CanoeUtils.getCanoeFromVarbit(player, varbit)
             player.animator.animate(PUSH)
             lock(player, 2)
+            playAudio(player, Sounds.CANOE_ROLL_2731)
             player.faceLocation(CanoeUtils.getFaceLocation(player.location))
             player.pulseManager.run(object : Pulse(){
                 override fun pulse(): Boolean {

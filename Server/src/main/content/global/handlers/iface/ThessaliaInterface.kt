@@ -1,5 +1,6 @@
 package content.global.handlers.iface
 
+import core.api.playJingle
 import core.game.component.Component
 import core.game.component.ComponentDefinition
 import core.game.component.ComponentPlugin
@@ -154,6 +155,7 @@ class ThessaliaInterface : ComponentPlugin(){
         component.setCloseEvent{pl,_ ->
             pl?.toggleWardrobe(false)
             pl.attributes.remove("thes-type")
+            playJingle(pl, 266)
             if(!pl.getAttribute("thes-paid",false)){
                 pl.appearance.torso.changeLook(pl.getAttribute("orig-torso",0))
                 pl.appearance.torso.changeColor(pl.getAttribute("orig-torso-color",0))

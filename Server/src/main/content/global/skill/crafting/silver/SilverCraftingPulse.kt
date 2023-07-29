@@ -8,6 +8,7 @@ import core.game.node.scenery.Scenery
 import core.game.system.task.Pulse
 import org.rs09.consts.Animations
 import org.rs09.consts.Items
+import org.rs09.consts.Sounds
 
 /**
  * Handles tick-based silver crafting logic.
@@ -28,6 +29,7 @@ class SilverCraftingPulse(
         }
 
         animate(player, Animations.HUMAN_FURNACE_SMELTING_3243)
+        playAudio(player, Sounds.FURNACE_2725, 1)
 
         if (removeItem(player, Items.SILVER_BAR_2355, Container.INVENTORY)) {
             addItem(player, product.producedItemId, product.amountProduced)

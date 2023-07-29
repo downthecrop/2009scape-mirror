@@ -213,6 +213,7 @@ class GrandExchangeRecords(private val player: Player? = null) : PersistPlayer, 
         }
         if (updated) {
             sendMessage(player!!, "You have items from the Grand Exchange waiting in your collection box.")
+            playJingle(player, 284)
         }
     }
 

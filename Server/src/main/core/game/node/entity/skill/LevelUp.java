@@ -10,6 +10,7 @@ import core.net.packet.context.MusicContext;
 import core.net.packet.out.MusicPacket;
 
 import static core.api.ContentAPIKt.*;
+import static core.game.node.entity.skill.LevelUpJinglesKt.getSkillJingle;
 
 
 /**
@@ -17,12 +18,7 @@ import static core.api.ContentAPIKt.*;
  * @author Emperor
  */
 public final class LevelUp {
-	
-	/**
-	 * Level up sound ids.
-	 */
-	private static final int[] SOUND_EFFECTS = { 29, 37, 65, 48, 57, 55, 52, 33, 69, 44, 41, 39, 35, 43, 53, 45, 28, 34, 62, 11, 60, 49, 31, 300 };
-	
+
 	/**
 	 * The skillcapes data.
 	 */
@@ -118,10 +114,7 @@ public final class LevelUp {
 		if (!player.getAttribute("tutorial:complete", false)) {
 			return;
 		}
-		int soundId = SOUND_EFFECTS[slot];
-		if (soundId > -1) {
-			PacketRepository.send(MusicPacket.class, new MusicContext(player, soundId, true));
-		}
+		playJingle(player, getSkillJingle(player, slot));
 		handleMilestones(player, slot, amount);
 		player.getPacketDispatch().sendGraphic(199);
 		player.getPacketDispatch().sendString("<col=00008B>Congratulations, you've just advanced a " + Skills.SKILL_NAME[slot] + " level!", 740, 0);
