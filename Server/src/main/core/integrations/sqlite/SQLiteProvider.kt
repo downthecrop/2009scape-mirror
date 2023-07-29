@@ -19,9 +19,12 @@ class SQLiteProvider (private val path: String, private val expectedTables: Hash
     private lateinit var sqlitePath: String
 
     fun initTables(tableCreatedCallback: ((String) -> Unit)? = null) {
+        val pathTokens = path.split(File.separator)
+        val parentDir = pathTokens.dropLast(1).joinToString(File.separator)
+
+        if (!File(parentDir).exists())
+            File(parentDir).mkdirs()
         sqlitePath = File(path).absolutePath
-        if (!File(sqlitePath).exists())
-            File(sqlitePath).mkdirs()
         if (expectedTables?.isEmpty() != false) return
         run {
             with(it.prepareStatement(TABLE_CHECK)) {
