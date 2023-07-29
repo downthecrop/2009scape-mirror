@@ -15,8 +15,6 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.TeleportManager;
 import core.game.node.entity.skill.Skills;
-import core.game.node.entity.state.EntityState;
-import core.game.node.entity.state.StateManager;
 import core.game.system.task.Pulse;
 import org.jetbrains.annotations.NotNull;
 import core.game.world.GameWorld;
@@ -30,6 +28,8 @@ import core.game.world.update.flag.context.Graphics;
 import core.game.world.update.flag.*;
 import core.game.node.entity.combat.CombatSwingHandler;
 import core.game.world.update.UpdateMasks;
+import core.game.system.timer.TimerManager;
+import core.game.system.timer.TimerRegistry;
 
 import java.util.*;
 
@@ -102,11 +102,6 @@ public abstract class Entity extends Node {
 	private final ZoneMonitor zoneMonitor = new ZoneMonitor(this);
 
 	/**
-	 * The state manager.
-	 */
-	private final StateManager stateManager = new StateManager(this);
-
-	/**
 	 * The reward locks.
 	 */
 	private final ActionLocks locks = new ActionLocks();
@@ -118,7 +113,7 @@ public abstract class Entity extends Node {
 	 * The mapping of event types to event hooks
 	 */
 	private HashMap<Class<?>, ArrayList<EventHook>> hooks = new HashMap<>();
-
+        public TimerManager timers = new TimerManager(this);
 
 	/**
 	 * If the entity is invisible.
@@ -209,6 +204,7 @@ public abstract class Entity extends Node {
 	 */
 	public void init() {
 		active = true;
+                TimerRegistry.addAutoTimers (this);
 	}
 
 	/**
@@ -221,6 +217,7 @@ public abstract class Entity extends Node {
 		Location old = location != null ? location.transform(0, 0, 0) : Location.create(0,0,0);
 		walkingQueue.update();
 		scripts.postMovement(!Objects.equals(location, old));
+                timers.processTimers();
 		updateMasks.prepare(this);
 	}
 
@@ -261,6 +258,8 @@ public abstract class Entity extends Node {
 	 */
 	public void fullRestore() {
 		skills.restore();
+                timers.removeTimer("poison");
+                timers.removeTimer("poison:immunity");
 	}
 
 	/**
@@ -279,7 +278,6 @@ public abstract class Entity extends Node {
 		skills.rechargePrayerPoints();
 		impactHandler.getImpactQueue().clear();
 		impactHandler.setDisabledTicks(10);
-		stateManager.reset();
 		removeAttribute("combat-time");
 		face(null);
 		//Check if it's a Loar shade and transform back into the shadow version.
@@ -917,14 +915,6 @@ public abstract class Entity extends Node {
 	}
 
 	/**
-	 * Gets the stateManager.
-	 * @return The stateManager.
-	 */
-	public StateManager getStateManager() {
-		return stateManager;
-	}
-
-	/**
 	 * Checks if we have fire resistance.
 	 * @return {@code True} if so.
 	 */
@@ -937,7 +927,7 @@ public abstract class Entity extends Node {
 	 * @return {@code True} if so.
 	 */
 	public boolean isTeleBlocked() {
-		return stateManager.hasState(EntityState.TELEBLOCK);
+                return timers.getTimer("teleblock") != null;
 	}
 
 	/**

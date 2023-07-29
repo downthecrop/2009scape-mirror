@@ -8,11 +8,12 @@ import core.game.node.entity.combat.InteractionType;
 import core.game.node.entity.combat.equipment.SwitchAttack;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
-import core.game.node.entity.state.EntityState;
 import core.game.world.map.Location;
 import core.tools.RandomFunction;
 import core.game.node.entity.combat.CombatSwingHandler;
 import core.game.node.entity.combat.MultiSwingHandler;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Represents a spinolyp npc.
@@ -147,7 +148,7 @@ public final class SpinolypNPC extends AbstractNPC {
 				victim.getSkills().decrementPrayerPoints(1);
 			} else {
 				if (RandomFunction.random(20) == 5) {
-					victim.getStateManager().register(EntityState.POISONED, false, 68, entity);
+                                        applyPoison(victim, entity, 30);
 				}
 			}
 		}

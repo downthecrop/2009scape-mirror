@@ -4,7 +4,6 @@ import content.data.consumables.effects.*;
 import core.game.consumable.*;
 import org.rs09.consts.Items;
 import core.game.node.entity.player.link.diary.DiaryType;
-import core.game.node.entity.state.EntityState;
 import core.game.world.update.flag.context.Animation;
 import core.game.node.entity.skill.Skills;
 import content.data.consumables.effects.KegOfBeerEffect;
@@ -164,7 +163,7 @@ public enum Consumables {
 	LIME_SLICES(new Food(new int[] {2124}, new HealingEffect(2))),
 	PEACH(new Food(new int[] {6883}, new HealingEffect(8))),
 	WHITE_TREE_FRUIT(new Food(new int[] {6469}, new MultiEffect(new RandomEnergyEffect(5, 10), new HealingEffect(3)))),
-	STRANGE_FRUIT(new Food(new int[] {464}, new MultiEffect(new RemoveStateEffect(EntityState.POISONED.ordinal()), new EnergyEffect(30)))),
+	STRANGE_FRUIT(new Food(new int[] {464}, new MultiEffect(new RemoveTimerEffect("poison"), new EnergyEffect(30)))),
 
 	/** Gnome Cooking */
 	TOAD_CRUNCHIES(new Food(new int[] {2217}, new HealingEffect(12))),
@@ -321,11 +320,11 @@ public enum Consumables {
 	SUPER_STRENGTH(new Potion(new int[] {2440, 157, 159, 161}, new SkillEffect(Skills.STRENGTH, 3, 0.2))),
 	SUPER_ATTACK(new Potion(new int[] {2436, 145, 147, 149}, new SkillEffect(Skills.ATTACK, 3, 0.2))),
 	SUPER_DEFENCE(new Potion(new int[] {2442, 163, 165, 167}, new SkillEffect(Skills.DEFENCE, 3, 0.2))),
-	ANTIPOISON(new Potion(new int[] {2446, 175, 177, 179}, new MultiEffect(new SetAttributeEffect("poison:immunity", 143), new RemoveStateEffect(EntityState.POISONED.ordinal())))),
-	ANTIPOISON_(new Potion(new int[] {5943, 5945, 5947, 5949}, new MultiEffect(new SetAttributeEffect("poison:immunity", 863), new RemoveStateEffect(EntityState.POISONED.ordinal())))),
-	ANTIPOISON__(new Potion(new int[] {5952, 5954, 5956, 5958}, new MultiEffect(new SetAttributeEffect("poison:immunity", 2000), new RemoveStateEffect(EntityState.POISONED.ordinal())))),
-	SUPER_ANTIP(new Potion(new int[] {2448, 181, 183, 185}, new MultiEffect(new SetAttributeEffect("poison:immunity", 1000), new RemoveStateEffect(EntityState.POISONED.ordinal())))),
-	RELICYM(new Potion(new int[] {4842, 4844, 4846, 4848}, new MultiEffect(new SetAttributeEffect("disease:immunity", 300), new RemoveStateEffect("disease")))),
+	ANTIPOISON(new Potion(new int[] {2446, 175, 177, 179}, new AddTimerEffect("poison:immunity", 143))),
+	ANTIPOISON_(new Potion(new int[] {5943, 5945, 5947, 5949}, new AddTimerEffect("poison:immunity", 863))),
+	ANTIPOISON__(new Potion(new int[] {5952, 5954, 5956, 5958}, new AddTimerEffect("poison:immunity", 2000))),
+	SUPER_ANTIP(new Potion(new int[] {2448, 181, 183, 185}, new AddTimerEffect("poison:immunity", 1000))),
+	RELICYM(new Potion(new int[] {4842, 4844, 4846, 4848}, new MultiEffect(new SetAttributeEffect("disease:immunity", 300), new RemoveTimerEffect("disease")))),
 	AGILITY(new Potion(new int[] {3032, 3034, 3036, 3038}, new SkillEffect(Skills.AGILITY, 3, 0))),
 	HUNTER(new Potion(new int[] {9998, 10000, 10002, 10004}, new SkillEffect(Skills.HUNTER, 3, 0))),
 	RESTORE(new Potion(new int[] {2430, 127, 129, 131}, new RestoreEffect(10, 0.3))),
@@ -338,9 +337,9 @@ public enum Consumables {
 	SUPER_RESTO(new Potion(new int[] {3024, 3026, 3028, 3030}, new MultiEffect(new RestoreEffect(8, 0.25), new PrayerEffect(8, 0.25), new SummoningEffect(8, 0.25)))),
 	ZAMMY_BREW(new Potion(new int[] {2450, 189, 191, 193}, new MultiEffect(new DamageEffect(10, true), new SkillEffect(Skills.ATTACK, 0, 0.15), new SkillEffect(Skills.STRENGTH, 0, 0.25), new SkillEffect(Skills.DEFENCE, 0, -0.1), new RandomPrayerEffect(0, 10)))),
 	ANTIFIRE(new Potion(new int[] {2452, 2454, 2456, 2458}, new SetAttributeEffect("fire:immune", 600, true))),
-	GUTH_REST(new Potion(new int[] {4417, 4419, 4421, 4423}, new MultiEffect(new RemoveStateEffect(EntityState.POISONED.ordinal()), new EnergyEffect(5), new HealingEffect(5)))),
+	GUTH_REST(new Potion(new int[] {4417, 4419, 4421, 4423}, new MultiEffect(new RemoveTimerEffect("poison"), new EnergyEffect(5), new HealingEffect(5)))),
 	MAGIC_ESS(new Potion(new int[] {11491, 11489}, new SkillEffect(Skills.MAGIC,3,0))),
-	SANFEW(new Potion(new int[] {10925, 10927, 10929, 10931}, new MultiEffect(new RestoreEffect(8,0.25), new PrayerEffect(8,0.25), new RemoveStateEffect(EntityState.POISONED.ordinal()), new RemoveStateEffect("disease")))),
+	SANFEW(new Potion(new int[] {10925, 10927, 10929, 10931}, new MultiEffect(new RestoreEffect(8,0.25), new PrayerEffect(8,0.25), new RemoveTimerEffect("poison"), new RemoveTimerEffect("disease")))),
 	SUPER_ENERGY(new Potion(new int[] {3016, 3018, 3020, 3022}, new EnergyEffect(20))),
 	BLAMISH_OIL(new FakeConsumable(1582, new String[] {"You know... I'd really rather not."})),
 
@@ -348,8 +347,8 @@ public enum Consumables {
 	PRAYERMIX(new BarbarianMix(new int[] {11465, 11467}, new MultiEffect(new PrayerEffect(7, 0.25), new HealingEffect(6)))),
 	ZAMMY_MIX(new BarbarianMix(new int[] {11521, 11523}, new MultiEffect(new DamageEffect(10, true), new SkillEffect(Skills.ATTACK, 0, 0.15), new SkillEffect(Skills.STRENGTH, 0, 0.25), new SkillEffect(Skills.DEFENCE, 0, -0.1), new RandomPrayerEffect(0, 10)))),
 	ATT_MIX(new BarbarianMix(new int[] {11429, 11431}, new MultiEffect(new SkillEffect(Skills.ATTACK, 3, 0.1), new HealingEffect(3)))),
-	ANTIP_MIX(new BarbarianMix(new int[] {11433, 11435}, new MultiEffect(new RemoveStateEffect(EntityState.POISONED.ordinal()), new SetAttributeEffect("poison:immunity", 143), new HealingEffect(3)))),
-	RELIC_MIX(new BarbarianMix(new int[] {11437, 11439}, new MultiEffect(new RemoveStateEffect("disease"), new SetAttributeEffect("disease:immunity", 300), new HealingEffect(3)))),
+	ANTIP_MIX(new BarbarianMix(new int[] {11433, 11435}, new MultiEffect(new AddTimerEffect("poison:immunity", 143), new HealingEffect(3)))),
+	RELIC_MIX(new BarbarianMix(new int[] {11437, 11439}, new MultiEffect(new RemoveTimerEffect("disease"), new SetAttributeEffect("disease:immunity", 300), new HealingEffect(3)))),
 	STR_MIX(new BarbarianMix(new int[] {11443, 11441}, new MultiEffect(new SkillEffect(Skills.STRENGTH, 3, 0.1), new HealingEffect(3)))),
 	RESTO_MIX(new BarbarianMix(new int[] {11449, 11451}, new MultiEffect(new RestoreEffect(10, 0.3), new HealingEffect(3)))),
 	SUPER_RESTO_MIX(new BarbarianMix(new int [] {11493, 11495}, new MultiEffect(new RestoreEffect(8,0.25), new PrayerEffect(8, 0.25), new SummoningEffect(8, 0.25), new HealingEffect(6)))),

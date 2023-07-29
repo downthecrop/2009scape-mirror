@@ -11,12 +11,13 @@ import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.entity.player.link.prayer.PrayerType;
-import core.game.node.entity.state.EntityState;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the teleportation block spell in the modern spellbook.
@@ -117,7 +118,7 @@ public final class TeleblockSpell extends CombatSpell {
 			if(((Player) victim).getPrayer().get(PrayerType.PROTECT_FROM_MAGIC)){
 				ticks /= 2;
 			}
-			victim.getStateManager().set(EntityState.TELEBLOCK, ticks);
+                        registerTimer(victim, spawnTimer("teleblock", ticks));
 		} else if(victim.isTeleBlocked()){
 			entity.asPlayer().sendMessage("Your target is already blocked from teleporting.");
 		}

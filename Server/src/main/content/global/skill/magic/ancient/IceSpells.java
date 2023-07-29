@@ -12,13 +12,14 @@ import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.entity.player.link.audio.Audio;
-import core.game.node.entity.state.EntityState;
 import core.game.node.item.Item;
 import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the Ice spells from the Ancient spellbook.
@@ -133,8 +134,8 @@ public final class IceSpells extends CombatSpell {
 		}
 		int ticks = (1 + (type.ordinal() - SpellType.RUSH.ordinal())) * 8;
 		if (state.getEstimatedHit() > -1) {
-			if (victim.getAttribute("freeze_immunity", -1) < GameWorld.getTicks()) {
-				victim.getStateManager().set(EntityState.FROZEN, ticks);
+			if (!hasTimerActive(victim, "frozen:immunity")) {
+                                registerTimer(victim, spawnTimer("frozen", ticks, true));
 			} else if (type == SpellType.BARRAGE) {
 				state.setFrozen(true);
 			}

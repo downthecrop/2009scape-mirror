@@ -4,7 +4,6 @@ import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.node.entity.player.link.prayer.PrayerType;
 import core.plugin.Initializable;
-import core.game.node.entity.skill.SkillRestoration;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;

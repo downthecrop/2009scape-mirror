@@ -27,7 +27,6 @@ import content.global.ame.RandomEvents
 import content.region.misthalin.draynor.quest.anma.AnmaCutscene
 import core.game.ge.GrandExchange
 import content.global.handlers.iface.RulesAndInfo
-import content.global.skill.farming.FarmingState
 import content.minigame.fishingtrawler.TrawlerLoot
 import core.game.system.command.CommandMapping
 import core.game.system.command.Privilege
@@ -37,6 +36,7 @@ import core.tools.colorize
 import java.awt.HeadlessException
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
+import content.global.skill.farming.timers.*
 
 @Initializable
 class MiscCommandSet : CommandSet(Privilege.ADMIN){
@@ -534,19 +534,16 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         }
 
         define("grow", Privilege.ADMIN, "", "Grows all planted crops by 1 stage."){ player, _ ->
-            val state: FarmingState = player.states.get("farming") as FarmingState? ?: return@define
+            val state = getOrStartTimer <CropGrowth> (player)!!
 
             for(patch in state.getPatches()){
-                patch.nextGrowth = System.currentTimeMillis()
+                patch.nextGrowth = System.currentTimeMillis() - 1
             }
+
+            state.run (player)
         }
 
         define("finishbins", Privilege.ADMIN, "", "Finishes any in-progress compost bins."){ player, _ ->
-            val state: FarmingState = player.states.get("farming") as FarmingState? ?: return@define
-
-            for(bin in state.getBins()){
-                bin.finishedTime = System.currentTimeMillis()
-            }
         }
 
         define("testlady", Privilege.ADMIN){ player, _ ->

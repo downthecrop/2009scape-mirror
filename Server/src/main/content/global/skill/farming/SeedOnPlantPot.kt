@@ -1,13 +1,11 @@
 package content.global.skill.farming
 
-import core.api.addItem
-import core.api.inInventory
-import core.api.removeItem
-import core.api.sendDialogue
+import core.api.*
 import core.game.node.Node
-import core.game.node.entity.player.Player
 import org.rs09.consts.Items
 import core.game.interaction.IntType
+import core.game.node.entity.player.Player
+import content.global.skill.farming.timers.*
 import core.game.interaction.InteractionListener
 
 class SeedlingListener : InteractionListener {
@@ -43,17 +41,8 @@ class SeedlingListener : InteractionListener {
         addItem(player, wateredSeedling)
         addItem(player, nextCan)
 
-        var state = player.states["seedling"] as SeedlingState?
-
-        if (state != null) {
-            state.addSeedling(wateredSeedling)
-            return true
-        }
-
-        state = player.registerState("seedling") as SeedlingState?
-        state?.addSeedling(wateredSeedling)
-        state?.init()
-
+        var seedlings = getOrStartTimer <SeedlingGrowth> (player)
+        seedlings.addSeedling(wateredSeedling)
         return true
     }
 

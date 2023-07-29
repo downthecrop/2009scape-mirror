@@ -15,6 +15,8 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import org.rs09.consts.Sounds;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the charge spell magic spell.
  * @author Emperor
@@ -49,8 +51,8 @@ public final class ChargeSpell extends MagicSpell {
 		p.getLocks().lock("charge_cast", 100);
 		visualize(entity, target);
         // Remove the previous copy of the state in order to refresh the duration if recast before 7 minutes
-        p.clearState("godcharge");
-		p.registerState("godcharge").init();
+                removeTimer (p, "magic:spellcharge");
+                registerTimer (p, spawnTimer("magic:spellcharge"));
 		p.getPacketDispatch().sendMessage("You feel charged with magic power.");
 		return true;
 	}

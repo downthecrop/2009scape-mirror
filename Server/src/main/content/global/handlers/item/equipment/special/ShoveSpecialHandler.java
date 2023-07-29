@@ -6,7 +6,6 @@ import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.combat.MeleeSwingHandler;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.state.EntityState;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.Point;

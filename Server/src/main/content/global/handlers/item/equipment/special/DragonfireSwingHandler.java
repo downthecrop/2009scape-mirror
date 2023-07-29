@@ -10,14 +10,13 @@ import core.game.node.entity.combat.equipment.SwitchAttack;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.state.EntityState;
 import core.game.node.item.Item;
 import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
 
-import static core.api.ContentAPIKt.calculateDragonfireMaxHit;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles dragonfire combat.
@@ -147,8 +146,8 @@ public class DragonfireSwingHandler extends CombatSwingHandler {
                 return;
             }
         }
-        if (!fire && victim.getAttribute("freeze_immunity", -1) < GameWorld.getTicks() && RandomFunction.random(4) == 2) {
-            victim.getStateManager().set(EntityState.FROZEN, 16);
+        if (!fire && !hasTimerActive(victim, "frozen:immunity") && RandomFunction.random(4) == 2) {
+            registerTimer(victim, spawnTimer("frozen", 16, true));
             victim.graphics(Graphics.create(502));
         }
         Graphics graphic = attack != null ? attack.getEndGraphic() : null;

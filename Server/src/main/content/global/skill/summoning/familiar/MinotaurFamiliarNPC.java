@@ -5,7 +5,6 @@ import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.state.EntityState;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;

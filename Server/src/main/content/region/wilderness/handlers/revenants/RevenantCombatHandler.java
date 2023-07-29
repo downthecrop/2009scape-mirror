@@ -7,12 +7,13 @@ import core.game.node.entity.combat.equipment.SwitchAttack;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.prayer.PrayerType;
-import core.game.node.entity.state.EntityState;
 import core.game.world.map.zone.impl.WildernessZone;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.game.node.entity.combat.MultiSwingHandler;
 import core.game.world.GameWorld;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the multi swing combat handler for revenants.
@@ -55,24 +56,25 @@ public class RevenantCombatHandler extends MultiSwingHandler {
 		if (victim instanceof Player) {
 			SwitchAttack attack = getCurrent();
 			if (attack != null) {
-				if (attack.getStyle() == CombatStyle.RANGE && victim.getAttribute("freeze_immunity", -1) < GameWorld.getTicks()) {
-					victim.getStateManager().set(EntityState.FROZEN, 16, "The icy darts freeze your muscles!");
+				if (attack.getStyle() == CombatStyle.RANGE && !hasTimerActive(victim, "frozen") && !hasTimerActive(victim, "frozen:immunity")) {
+                                        registerTimer(victim, spawnTimer("frozen", 16, true));
+					sendMessage((Player) victim, "The icy darts freeze your muscles!");
 					victim.asPlayer().getAudioManager().send(4059, true);
 				} else if (attack.getStyle() == CombatStyle.MAGIC) {
 					int ticks = 500;
 					if (victim.asPlayer().getPrayer().get(PrayerType.PROTECT_FROM_MAGIC)) {
 						ticks /= 2;
 					}
-					if (victim.getStateManager().hasState(EntityState.TELEBLOCK)) {
+					if (hasTimerActive(victim, "teleblock")) {
 						victim.asPlayer().getAudioManager().send(4064, true);
 					} else {
-						victim.getStateManager().set(EntityState.TELEBLOCK, ticks);
+                                                registerTimer (victim, spawnTimer("teleblock", ticks));
 					}
 				}
 			}
 		}
-		if (!victim.getStateManager().hasState(EntityState.POISONED) && (WildernessZone.getWilderness(entity) >= 50 || entity.getId() == 6998)) {
-			victim.getStateManager().register(EntityState.POISONED, false, 68, entity);
+		if (!isPoisoned(victim) && (WildernessZone.getWilderness(entity) >= 50 || entity.getId() == 6998)) {
+                        applyPoison(victim, entity, 6);
 		}
 		super.impact(entity, victim, state);
 	}

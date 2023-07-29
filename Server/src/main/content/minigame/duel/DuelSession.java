@@ -12,7 +12,6 @@ import core.game.container.impl.EquipmentContainer;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.LogType;
 import core.game.node.entity.player.info.login.PlayerParser;
-import core.game.node.entity.state.EntityState;
 import core.game.node.item.Item;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
@@ -205,8 +204,8 @@ public final class DuelSession extends ComponentPlugin {
 	 */
 	public void heal(Player p) {
 		p.fullRestore();
-		if (p.getStateManager().hasState(EntityState.POISONED)) {
-			p.getStateManager().remove(EntityState.POISONED);
+		if (isPoisoned(p)) {
+                    curePoison(p);
 		}
 		p.getSkills().restore();
 	}

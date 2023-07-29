@@ -424,6 +424,7 @@ public class NPC extends Entity {
 		if (isRespawning && respawnTick <= GameWorld.getTicks()) {
                         behavior.onRespawn(this);
 			onRespawn();
+                        fullRestore();
                         isRespawning = false;
 		}
 		handleTickActions();

@@ -1,11 +1,9 @@
 package rs09.game.content.activity.castlewars.areas
 
-import core.api.TickListener
-import core.api.log
+import core.api.*
 import core.game.component.Component
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
-import core.game.node.entity.state.EntityState
 import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
@@ -72,8 +70,7 @@ class CastleWarsGameArea : CastleWarsArea(), TickListener {
     override fun areaEnter(entity: Entity) {
         val player = entity as? Player ?: return
         super.areaEnter(player)
-        // Block player teleport (for the remaining duration of the game)
-        player.stateManager.set(EntityState.TELEBLOCK, (CastleWars.gameTimeMinutes)*60*2)
+        registerTimer (player, spawnTimer("teleblock", (CastleWars.gameTimeMinutes)*60*2))
 
         if (saradominPlayers.contains(player)) {
             player.interfaceManager.openOverlay(Component(Components.CASTLEWARS_STATUS_OVERLAY_SARADOMIN_58))

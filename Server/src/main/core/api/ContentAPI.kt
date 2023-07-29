@@ -25,7 +25,6 @@ import core.game.node.entity.skill.Skills
 import content.data.skill.SkillingTool
 import content.global.skill.slayer.Tasks
 import content.global.skill.summoning.familiar.BurdenBeast
-import core.game.node.entity.state.EntityState
 import core.game.node.item.GroundItem
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
@@ -74,6 +73,8 @@ import core.game.requirement.*
 import core.net.packet.PacketRepository
 import core.net.packet.context.MusicContext
 import core.net.packet.out.MusicPacket
+import core.game.system.timer.*
+import core.game.system.timer.impl.*
 import java.util.regex.*
 import java.io.*
 import kotlin.math.*
@@ -961,6 +962,131 @@ fun removeAttribute(entity: Entity, attribute: String) {
 
 fun removeAttributes(entity: Entity, vararg attributes: String) {
     for (attribute in attributes) removeAttribute(entity, attribute)
+}
+
+/**
+ * Adds the given timer to the entity's active timers.
+ * @param entity the entity whose timers are being added to
+ * @param timer the timer being added
+**/
+fun registerTimer (entity: Entity, timer: RSTimer?) {
+    if (timer == null) return
+    entity.timers.registerTimer (timer)
+}
+
+/** 
+ * Used to fetch the existing, active, non-abstract and non-anonymous timer with the given identifier, or start a new timer if none exists and return that.
+ * @param entity the entity whose timers we're retrieving
+ * @param identifier the identifier of the timer, refer to the individual timer class for this token.
+ * @param args various args to pass to the initialization of the timer, if applicable.
+ * @return Either the existing active timer, or a new timer initialized with the passed args if none exists yet.
+**/
+fun getOrStartTimer (entity: Entity, identifier: String, vararg args: Any) : RSTimer? {
+    val existing = getTimer (entity, identifier)
+    if (existing != null)
+        return existing
+    return spawnTimer (identifier, *args).also { registerTimer (entity, it) }
+}
+
+/**
+ * Used to fetch the existing, active, non-abstract and non-anonymous timer with the given type, or start a new timer if none exists and return that.
+ * @param entity the entity whose timer we're retrieving
+ * @param T the type of timer we are fetching
+ * @param args the various args to pass to the initialization of the timer, if applicable.
+ * @return Either the existing, active timer or a new timer initialized with the passed args if none exists yet.
+**/
+inline fun <reified T: RSTimer> getOrStartTimer (entity: Entity, vararg args: Any) : T {
+    val existing = getTimer <T> (entity)
+    if (existing != null)
+        return existing
+    return spawnTimer <T> (*args).also { registerTimer (entity, it) }
+}
+
+/**
+ * Used to fetch a new instance of a registered (see: non-anonymous, non-abstract) timer with the given configuration args
+ * @param identifier the string identifier for the timer. e.g. poison's is "poison"
+ * @param args various arbitrary arguments to be passed to the timer's constructor. Refer to the timer in question for what the args are expected to be.
+ * @return a timer instance configured with your given args, or null if no timer with the given key exists in the registry.
+**/
+fun spawnTimer (identifier: String, vararg args: Any) : RSTimer? {
+    return TimerRegistry.getTimerInstance (identifier, *args)
+}
+
+/**
+ * Used to fetch a new instance of a registered (see: non-anonymous, non-abstract) timer with the given configuration args
+ * @param T the type of the timer you're trying to retrieve. The timer registry will be searched for a timer of this type. 
+ * @param args various arbitrary arguments to be passed to the timer's constructor. Refer to the timer in question for what the args are expected to be.
+ * @return a timer instance configured with your given args, or null if the timer is not listed in the registry (if this happens, your timer is either abstract or anonymous.)
+**/
+inline fun <reified T: RSTimer> spawnTimer (vararg args: Any) : T {
+    return TimerRegistry.getTimerInstance <T> (*args)!!
+}
+
+/**
+ * Used to check if a timer of the given type is registered and active in the entity's timers.
+ * @param T the type of timer
+ * @param entity the entity whose timers are being checked
+ * @return true if there is a timer registered and active with the given type.
+**/
+inline fun <reified T: RSTimer> hasTimerActive (entity: Entity) : Boolean {
+    return getTimer<T>(entity) != null
+}
+
+/**
+ * Used to get the active instance of a timer with the given type from the entity's timers.
+ * @param T the type of timer
+ * @param entity the entity whose timers we are checking
+ * @return the active instance of the given type in the entity's timers, or null.
+*/
+inline fun <reified T: RSTimer> getTimer (entity: Entity) : T? {
+    return entity.timers.getTimer<T>()
+}
+
+/**
+ * Removes any active timers of the given type from the entity's active timers. This will remove ALL matching instances.
+ * @param T the type of timer
+ * @param entity the entity whose timers are being checked
+**/
+inline fun <reified T: RSTimer> removeTimer (entity: Entity) {
+    entity.timers.removeTimer<T>()
+}
+
+/**
+ * Used to check if a timer with the given identifier string is registered and active in the entity's timers.
+ * @param identifier the identifier token assigned to the timer. You'll have to refer to the actual timer class for this string.
+ * @param entity the entity whose timers are being checked
+ * @return true if there's a timer with the given identifier active in the entity's timers
+**/
+fun hasTimerActive (entity: Entity, identifier: String) : Boolean {
+    return getTimer (entity, identifier) != null
+}
+
+/**
+ * Used to get the active instance of a timer with the given identifier from the entity's timers.
+ * @param identifier the string identifier of the timer we are looking for. You'll have to refer to the actual timer class for this string.
+ * @param entity the entity whose timers are being checked
+ * @return the instance of the active timer if found, null otherwise.
+**/
+fun getTimer (entity: Entity, identifier: String) : RSTimer? {
+    return entity.timers.getTimer(identifier)
+}
+
+/**
+ * Removes any active timers with the given identifier from the entity's active timers. This will remove ALL matching instances.
+ * @param identifier the identifier token assigned to the timer. You'll have to refer to the actual timer class for this string.
+ * @param entity the entity whose timers are being checked
+**/
+fun removeTimer (entity: Entity, identifier: String) {
+    entity.timers.removeTimer(identifier)
+}
+
+/**
+ * Removes the given timer from the entity's active timers. Note this variant will only work with a reference to the same exact timer you want to remove.
+ * @param entity the entity whose timers we are modifying
+ * @param timer the timer to remove
+**/
+fun removeTimer (entity: Entity, timer: RSTimer) {
+    entity.timers.removeTimer(timer)
 }
 
 /**
@@ -2493,37 +2619,6 @@ fun requireQuest(player: Player, questName: String, message: String) : Boolean {
 
 
 /**
- * Determines whether or not a specified entity has a state
- * @param entity the entity whose state we are checking
- * @param state the state to check for
- * @return whether or not the entity has the provided state
- */
-fun hasState(entity: Entity, state: EntityState) : Boolean {
-    return entity.stateManager.hasState(state)
-}
-
-/**
- * Adds a state to the entity
- * @param entity the entity whose state we are adding
- * @param state the state to add
- * @param override whether or not it's to override another state
- */
-fun addState(entity: Entity, state: EntityState, override: Boolean, vararg args: Any?) {
-    if(!entity.stateManager.hasState(state)) {
-        entity.stateManager.register(state, override, *args)
-    }
-}
-
-/**
- * Removes a state from the entity
- * @param entity the entity whose state we are removing
- * @param state the state to remove
- */
-fun removeState(entity: Entity, state: EntityState) {
-    entity.stateManager.remove(state)
-}
-
-/**
  * Determines whether or not specified node is a player
  * @param entity the node whom we are checking
  * @return whether or not the entity is a player
@@ -2688,6 +2783,36 @@ fun stun(entity: Entity, ticks: Int) {
 
 fun isStunned(entity: Entity) : Boolean {
     return entity.clocks[Clocks.STUN] >= getWorldTicks()
+}
+
+/**
+ * Applies poison to the target. (In other words, creates and starts a poison timer.)
+ * @param entity the entity who will be receiving the poison damage.
+ * @param source the entity to whom credit for the damage should be awarded (the attacker.) You should award credit to the victim if the poison is sourceless (e.g. from a trap or plant or something)
+ * @param severity the severity of the poison damage. Severity is not a 1:1 representation of damage, rather the formula `floor((severity + 4) / 5)` is used. Severity is decreased by 1 with each application of the poison, and ends when it reaches 0.
+ * @see To those whe ask "why severity instead of plain damage?" to which the answer is: severity is how it works authentically, and allows for scenarios where, e.g. a poison should hit 6 once, and then drop to 5 immediately.
+**/
+fun applyPoison (entity: Entity, source: Entity, severity: Int) {
+    val existingTimer = getTimer<Poison>(entity)
+    
+    if (existingTimer != null) {
+        existingTimer.severity = severity
+        existingTimer.damageSource = source
+    } else {
+        registerTimer(entity, spawnTimer<Poison>(source, severity))
+    }
+}
+
+fun isPoisoned (entity: Entity) : Boolean {
+    return getTimer<Poison>(entity) != null
+}
+
+fun curePoison (entity: Entity) {
+    if (!hasTimerActive<Poison>(entity))
+        return
+    removeTimer<Poison>(entity)
+    if (entity is Player)
+        sendMessage(entity, "Your poison has been cured.")
 }
 
 fun setCurrentScriptState(entity: Entity, state: Int) {

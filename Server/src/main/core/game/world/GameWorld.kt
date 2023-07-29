@@ -169,6 +169,7 @@ object GameWorld {
         ConfigParser().prePlugin()
         ClassScanner.scanClasspath()
         ClassScanner.loadPureInterfaces()
+        ClassScanner.loadTimers()
         val s = worldPersists.filterIsInstance<ServerStore>().first()
         s.parse()
         worldPersists.filter { it !is ServerStore }.forEach { it.parse() }

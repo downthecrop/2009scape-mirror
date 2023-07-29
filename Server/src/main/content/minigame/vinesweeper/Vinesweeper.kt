@@ -13,7 +13,6 @@ import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
-import core.game.node.entity.state.EntityState
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
@@ -498,7 +497,7 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
         object VinesweeperTeleport {
             @JvmStatic
             fun teleport(npc: NPC, player: Player) {
-                if (player.stateManager.hasState(EntityState.TELEBLOCK)) {
+                if (hasTimerActive(player, "teleblock")) {
                     sendNPCDialogue(player, npc.id, "I can't do that, you're teleblocked!", core.game.dialogue.FacialExpression.OLD_ANGRY1)
                     return
                 }

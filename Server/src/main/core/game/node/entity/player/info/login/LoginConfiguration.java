@@ -139,7 +139,6 @@ public final class LoginConfiguration {
         player.getMusicPlayer().init();
         player.updateAppearance();
         player.getPlayerFlags().setUpdateSceneGraph(true);
-        player.getStateManager().init();
         player.getPacketDispatch().sendInterfaceConfig(226, 1, true);
         if(player.getGlobalData().getTestStage() == 3 && !player.getEmoteManager().isUnlocked(Emotes.SAFETY_FIRST)){
             player.getEmoteManager().unlock(Emotes.SAFETY_FIRST);

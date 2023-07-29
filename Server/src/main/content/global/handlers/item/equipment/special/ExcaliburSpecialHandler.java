@@ -5,7 +5,6 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
-import core.game.node.entity.state.EntityState;
 import core.game.node.entity.combat.MeleeSwingHandler;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
@@ -13,6 +12,8 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the excalibur special attack.
@@ -67,7 +68,7 @@ public final class ExcaliburSpecialHandler extends MeleeSwingHandler implements 
                 p.getSkills().updateLevel(Skills.DEFENCE, 8, p.getSkills().getStaticLevel(Skills.DEFENCE) + 8);
                 break;
             case 14632: // enhanced excalibur
-                p.getStateManager().set(EntityState.HEALOVERTIME,p,(int)15,(int)20,(int)5);
+                registerTimer(p, spawnTimer("healovertime", 3, 20, 4));
                 p.getSkills().updateLevel(Skills.DEFENCE,
                         (int)(p.getSkills().getStaticLevel(Skills.DEFENCE)*0.15),
                         (int)(p.getSkills().getStaticLevel(Skills.DEFENCE)*1.15));

@@ -22,6 +22,8 @@ import org.jetbrains.annotations.NotNull;
 import core.game.node.entity.combat.CombatSwingHandler;
 import core.game.world.GameWorld;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles a player's Dwarf Multi-cannon.
  * @author Emperor
@@ -44,22 +46,14 @@ public final class DMCHandler implements LogoutListener {
 	private int cannonballs;
 
 	/**
-	 * The firing pulse.
-	 */
-	private Pulse firingPulse;
-
-	/**
 	 * The current direction.
 	 */
 	private DMCRevolution direction = DMCRevolution.NORTH;
 
-	/**
-	 * The decaying pulse.
-	 */
-	private Pulse decayPulse;
+        private CannonTimer timer;
 
 	public DMCHandler() {
-		this.player = null;
+	    this.player = null;
 	}
 
 	/**
@@ -68,44 +62,16 @@ public final class DMCHandler implements LogoutListener {
 	 */
 	public DMCHandler(final Player player) {
 		this.player = player;
-		this.firingPulse = new Pulse(1, player) {
-			@Override
-			public boolean pulse() {
-				if (!cannon.isActive()) {
-					return true;
-				}
-				return rotate();
-			}
-
-		};
-		firingPulse.stop();
-		this.decayPulse = new Pulse(2000, player) {
-			@Override
-			public boolean pulse() {
-				if (!cannon.isActive()) {
-					return true;
-				}
-				if (getDelay() == 2000) {
-					setDelay(500);
-					player.sendMessage("Your cannon is about to decay!");
-					return false;
-				}
-				explode(true);
-				return true;
-			}
-
-		};
-		decayPulse.stop();
 	}
 
 	/**
 	 * Rotates the cannon.
 	 * @return {@code True} if the cannon should stop rotating.
 	 */
-	private boolean rotate() {
+	public boolean rotate() {
 		if (cannonballs < 1) {
 			player.getPacketDispatch().sendMessage("Your cannon has run out of ammo!");
-			return true;
+			return false;
 		}
 		player.getPacketDispatch().sendSceneryAnimation(cannon, Animation.create(direction.getAnimationId()));
 		Location l = cannon.getLocation().transform(1, 1, 0);
@@ -127,7 +93,7 @@ public final class DMCHandler implements LogoutListener {
 				break;
 			}
 		}
-		return false;
+		return true;
 	}
 
 	/**
@@ -138,9 +104,9 @@ public final class DMCHandler implements LogoutListener {
 			player.getPacketDispatch().sendMessage("You don't have a cannon active.");
 			return;
 		}
-		if (firingPulse.isRunning()) {
-			firingPulse.stop();
-			return;
+		if (timer.isFiring()) {
+		    timer.setFiring(false);
+		    return;
 		}
 		if (cannonballs < 1) {
 			int amount = player.getInventory().getAmount(new Item(2));
@@ -160,9 +126,7 @@ public final class DMCHandler implements LogoutListener {
 				player.sendMessage("Your cannon is already fully loaded.");
 			}
 		}
-		firingPulse.restart();
-		firingPulse.start();
-		GameWorld.getPulser().submit(firingPulse);
+                timer.setFiring(true);
 	}
 
 	/**
@@ -193,10 +157,6 @@ public final class DMCHandler implements LogoutListener {
 			return;
 		}
 		final DMCHandler handler = new DMCHandler(player);
-		if (handler.decayPulse.isRunning()) {
-			handler.decayPulse.stop();
-			return;
-		}
 		player.setAttribute("dmc", handler);
 		player.getPulseManager().clear();
 		player.getWalkingQueue().reset();
@@ -233,6 +193,8 @@ public final class DMCHandler implements LogoutListener {
 					player.getPacketDispatch().sendMessage("You add the furnace.");
 					SceneryBuilder.remove(object);
 					handler.configure(SceneryBuilder.add(object = object.transform(6)));
+                                        handler.timer = (CannonTimer) spawnTimer ("dmc:timer", handler);
+                                        registerTimer (player, handler.timer);
 					return true;
 				}
                 player.getAudioManager().send(new Audio(2876), true);
@@ -267,9 +229,6 @@ public final class DMCHandler implements LogoutListener {
 	 * @param pickup If the cannon is getting picked up.
 	 */
 	public void clear(boolean pickup) {
-		if (decayPulse.isRunning()) {
-			decayPulse.stop();
-		}
 		SceneryBuilder.remove(cannon);
 		player.removeAttribute("dmc");
 		if (!pickup) {

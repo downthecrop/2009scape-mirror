@@ -20,8 +20,8 @@ import java.io.File
 import java.io.FileWriter
 import java.io.IOException
 import java.lang.Math.ceil
-import java.util.*
 import javax.script.ScriptEngineManager
+import java.util.*
 
 
 /**
@@ -644,6 +644,7 @@ class PlayerSaver (val player: Player){
         val varpData = JSONArray()
         for ((index, value) in player.varpMap) {
             if (!(player.saveVarp[index] ?: false)) continue
+            if (value == 0) continue
 
             val varpObj = JSONObject()
             varpObj["index"] = index.toString()
@@ -651,6 +652,10 @@ class PlayerSaver (val player: Player){
             varpData.add(varpObj)
         }
         coreData.put("varp", varpData)
+
+        val timerData = JSONObject()
+        player.timers.saveTimers(timerData)
+        coreData.put("timers", timerData)
 
         root.put("core_data",coreData)
     }

@@ -15,7 +15,6 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.impl.PulseManager;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.Rights;
-import core.game.node.entity.state.EntityState;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
@@ -29,6 +28,8 @@ import core.plugin.Initializable;
 import core.plugin.ClassScanner;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
+
+import static core.api.ContentAPIKt.*;
 
 
 /**
@@ -147,8 +148,8 @@ public final class PestControlActivityPlugin extends ActivityPlugin {
 			p.removeAttribute("pc_zeal");
 			p.removeExtension(PestControlSession.class);
 			p.fullRestore();
-			if (p.getStateManager().hasState(EntityState.POISONED)) {
-				p.getStateManager().remove(EntityState.POISONED);
+			if (isPoisoned(p)) {
+                            curePoison(p);
 			}
 			PulseManager.cancelDeathTask(p);
 			GameWorld.getPulser().submit(new Pulse(1, p) {

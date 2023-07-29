@@ -8,10 +8,11 @@ import core.game.node.entity.combat.equipment.Weapon;
 import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.state.EntityState;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Represents the Spirit Scorpion familiar.
@@ -49,7 +50,7 @@ public class SpiritScorpionNPC extends Familiar {
 			if (isCharged() && new Item(weapon.getId() + 6).getName().startsWith(weapon.getName())) {
 				final Entity victim = state.getVictim();
 				setCharged(false);
-				victim.getStateManager().register(EntityState.POISONED, false, 10, owner);
+                                applyPoison(victim, owner, 1);
 			}
 		}
 	}

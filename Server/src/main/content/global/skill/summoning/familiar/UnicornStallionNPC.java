@@ -7,11 +7,12 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.state.EntityState;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Represents the Unicorn Stallion familiar.
@@ -72,13 +73,13 @@ public class UnicornStallionNPC extends Familiar {
 					player.sendMessage("You don't have enough summoning points left");
 					return true;
 				}
-				if (!owner.getStateManager().hasState(EntityState.POISONED)) {
+				if (!isPoisoned(owner)) {
 					player.sendMessage("You are not poisoned.");
 					return true;
 				}
 				player.getAudioManager().send(4372);
 				familiar.visualize(Animation.create(8267), Graphics.create(1356));
-				player.getStateManager().remove(EntityState.POISONED);
+                                curePoison(player);
 				player.getSkills().updateLevel(Skills.SUMMONING, -2, 0);
 				return true;
 			}

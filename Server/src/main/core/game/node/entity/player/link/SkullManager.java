@@ -2,8 +2,8 @@ package core.game.node.entity.player.link;
 
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.state.EntityState;
 import core.ServerConstants;
+import static core.api.ContentAPIKt.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,8 +81,8 @@ public final class SkullManager {
 			return;
 		}
 		skullCauses.add(o);
-		player.clearState("skull");
-		player.registerState("skull").init();
+                removeTimer (player, "skulled");
+                registerTimer (player, spawnTimer("skulled", 2000));
 	}
 
 	/**

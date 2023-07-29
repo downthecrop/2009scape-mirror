@@ -13,6 +13,7 @@ import core.game.world.map.zone.ZoneBuilder
 import io.github.classgraph.ClassGraph
 import io.github.classgraph.ClassInfo
 import io.github.classgraph.ScanResult
+import core.game.system.timer.*
 import core.game.bots.PlayerScripts
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
@@ -70,6 +71,18 @@ object ClassScanner {
         } catch (e: Exception) {
             log(this::class.java, Log.ERR,  "Error initializing Plugins -> " + e.localizedMessage + " for file -> " + lastLoaded)
             e.printStackTrace()
+        }
+    }
+
+    fun loadTimers () {
+        scanResults.getSubclasses ("core.game.system.timer.RSTimer").filter { !it.isAbstract }.forEach {
+            try {
+                val clazz = it.loadClass().newInstance() as RSTimer
+                TimerRegistry.registerTimer (clazz)
+            } catch (e: Exception) {
+                log(this::class.java, Log.ERR, "Error registering timer instance: ${it.simpleName}")
+                e.printStackTrace()
+            }
         }
     }
 

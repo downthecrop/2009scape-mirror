@@ -147,22 +147,6 @@ public final class Settings {
 		setVarp(player, 43, attackStyleIndex);
 		player.getPacketDispatch().sendRunEnergy();
 		updateChatSettings();
-		Pulse pulse = player.getAttribute("energy-restore", null);
-		if (pulse == null || !pulse.isRunning()) {
-			pulse = new Pulse(50, player) {
-				@Override
-				public boolean pulse() {
-					if (specialEnergy < 100) {
-						int heal = 100 - specialEnergy;
-						setSpecialEnergy(specialEnergy + (heal > 10 ? 10 : heal));
-					}
-					return false;
-				}
-			};
-			pulse.setTicksPassed(1);
-			GameWorld.getPulser().submit(pulse);
-			player.setAttribute("energy-restore", pulse);
-		}
 	}
 
 	/**

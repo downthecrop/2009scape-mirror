@@ -13,7 +13,6 @@ import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
-import core.game.node.entity.state.EntityState
 import core.game.world.map.path.Pathfinder
 import core.tools.RandomFunction
 import org.rs09.consts.Items
@@ -119,7 +118,7 @@ open class MeleeSwingHandler
                     damage = 48
                 }
                 if (damage > -1 && RandomFunction.random(10) < 4) {
-                    victim.stateManager.register(EntityState.POISONED, false, damage, entity)
+                    applyPoison (victim, entity, damage)
                 }
             }
         }

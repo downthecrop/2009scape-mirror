@@ -3,6 +3,7 @@ package content.global.skill.gather.mining
 import content.data.skill.SkillingPets
 import content.data.skill.SkillingTool
 import content.global.skill.skillcapeperks.SkillcapePerks
+import content.global.activity.shootingstar.StarBonus
 import core.api.*
 import core.cache.def.impl.ItemDefinition
 import core.game.event.ResourceProducedEvent
@@ -159,7 +160,7 @@ class MiningListener : InteractionListener {
         }
 
         // If player has mining boost from Shooting Star, roll chance at extra ore
-        if (player.hasActiveState("shooting-star")) {
+        if (hasTimerActive<StarBonus>(player)) {
             if (RandomFunction.getRandom(5) == 3) {
                 sendMessage(player, "...you manage to mine a second ore thanks to the Star Sprite.")
                 amount += 1

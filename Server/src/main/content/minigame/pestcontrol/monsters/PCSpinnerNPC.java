@@ -11,7 +11,6 @@ import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.state.EntityState;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -19,6 +18,8 @@ import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles a pest control spinner NPC.
@@ -101,8 +102,7 @@ public final class PCSpinnerNPC extends AbstractNPC {
 		animate(getProperties().getDeathAnimation());
 		for (Player p : RegionManager.getLocalPlayers(this, 1)) {
 			p.getImpactHandler().manualHit(this, 5, HitsplatType.POISON);
-			p.setAttribute("/save:poison_damage", 18);
-			p.getStateManager().register(EntityState.POISONED, false, 18, this);
+                        applyPoison(p, this, 1);
 		}
 		GameWorld.getPulser().submit(new Pulse(1, this) {
 			@Override

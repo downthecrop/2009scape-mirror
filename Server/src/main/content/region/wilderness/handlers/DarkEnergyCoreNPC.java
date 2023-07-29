@@ -6,14 +6,13 @@ import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.state.EntityState;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 
-import static core.api.ContentAPIKt.isStunned;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the Dark Energy Core NPC.
@@ -71,7 +70,7 @@ public final class DarkEnergyCoreNPC extends AbstractNPC {
 	@Override
 	public void handleTickActions() {
 		ticks++;
-		boolean poisoned = getStateManager().hasState(EntityState.POISONED);
+		boolean poisoned = isPoisoned(this);
 		if (isStunned(this) || isInvisible()) {
 			return;
 		}

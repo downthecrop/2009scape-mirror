@@ -15,7 +15,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.skill.Skills
-import core.game.node.entity.state.EntityState
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
 import core.game.system.command.Privilege
@@ -206,7 +205,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
                     return@define
                 }
                 if(dmg != null) {
-                    p?.let { addState(it, EntityState.POISONED, false, (dmg * 10 + 8), player) }
+                    p?.let { applyPoison(it, it, dmg) }
                 } else {
                     sendMessage(player, "Damage must be an integer. Format:")
                     sendMessage(player, "::poison username damage")
@@ -480,14 +479,14 @@ class LunarListeners : SpellListener("lunar"), Commands {
     }
 
     private fun cureMe(player: Player) {
-        if(!hasState(player, EntityState.POISONED)) {
+        if(!isPoisoned(player)) {
             sendMessage(player, "You are not poisoned.")
             return
         }
         requires(player, 71, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.LAW_RUNE_563, 1), Item(Items.COSMIC_RUNE_564, 2)))
         removeRunes(player, true)
         visualizeSpell(player, CURE_ME_ANIM, CURE_ME_GFX, 2880)
-        removeState(player, EntityState.POISONED)
+        curePoison(player)
         addXP(player, 69.0)
         playAudio(player, Audio(2900))
         sendMessage(player, "You have been cured of poison.")
@@ -497,7 +496,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
         requires(player, 74, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.LAW_RUNE_563, 2), Item(Items.COSMIC_RUNE_564, 2)))
         removeRunes(player, true)
         visualizeSpell(player, CURE_GROUP_ANIM, CURE_GROUP_GFX, 2882)
-        removeState(player, EntityState.POISONED)
+        curePoison(player)
         for(acct in RegionManager.getLocalPlayers(player, 1)) {
             if(!acct.isActive || acct.locks.isInteractionLocked) {
                 continue
@@ -505,7 +504,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
             if(!acct.settings.isAcceptAid) {
                 continue
             }
-            removeState(acct, EntityState.POISONED)
+            curePoison(acct)
             sendMessage(acct, "You have been cured of poison.")
             playAudio(acct, Audio(2889), true)
             visualize(acct, -1, CURE_GROUP_GFX)
@@ -527,7 +526,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
             sendMessage(player, "This player is not accepting any aid.")
             return
         }
-        if(!hasState(p, EntityState.POISONED)) {
+        if(!isPoisoned(p)) {
             sendMessage(player, "This player is not poisoned.")
             return
         }
@@ -537,7 +536,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
         visualize(p, -1, CURE_OTHER_GFX)
         playAudio(p, Audio(2889), true)
         removeRunes(player, true)
-        removeState(p, EntityState.POISONED)
+        curePoison(p)
         sendMessage(p, "You have been cured of poison.")
         addXP(player, 65.0)
     }

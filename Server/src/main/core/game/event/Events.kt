@@ -7,6 +7,7 @@ import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.link.SpellBookManager.SpellBook
 import core.game.node.entity.player.link.TeleportManager.TeleportType
+import core.game.node.entity.player.link.prayer.PrayerType
 import core.game.node.item.Item
 import core.game.world.map.Location
 import content.global.activity.jobs.JobType
@@ -45,3 +46,5 @@ data class DynamicSkillLevelChangeEvent(val skillId: Int, val oldValue: Int, val
 data class SummoningPointsRechargeEvent(val obelisk: Node) : Event
 data class PrayerPointsRechargeEvent(val altar: Node) : Event
 data class XPGainEvent(val skillId: Int, val amount: Double) : Event
+data class PrayerActivatedEvent (val type: PrayerType) : Event
+data class PrayerDeactivatedEvent (val type: PrayerType) : Event
