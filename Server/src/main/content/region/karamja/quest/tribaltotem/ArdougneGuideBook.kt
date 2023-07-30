@@ -117,9 +117,7 @@ class ArdougneGuideBook : InteractionListener {
 
     override fun defineListeners() {
         on(Items.GUIDE_BOOK_1856, IntType.ITEM, "read") { player, _ ->
-            setAttribute(player, "bookInterfaceCallback", ::display)
-            setAttribute(player, "bookInterfaceCurrentPage", 0)
-            display(player, 0, 0)
+            BookInterface.openBook(player, BookInterface.FANCY_BOOK_3_49, ::display)
             return@on true
         }
     }

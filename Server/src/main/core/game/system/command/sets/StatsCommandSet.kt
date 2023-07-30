@@ -188,10 +188,8 @@ class StatsCommandSet : CommandSet(Privilege.STANDARD) {
                 return@define
             }
 
-            setAttribute(player, "bookInterfaceCallback", ::display)
-            setAttribute(player, "bookInterfaceCurrentPage", 0)
             setAttribute(player, "stats-command-query-player", queryPlayer)
-            display(player, 0, 0)
+            BookInterface.openBook(player, BookInterface.FANCY_BOOK_26, ::display)
             return@define
         }
     }

@@ -4,8 +4,7 @@ import content.global.handlers.iface.BookInterface
 import content.global.handlers.iface.BookLine
 import content.global.handlers.iface.Page
 import content.global.handlers.iface.PageSet
-import core.api.getAttribute
-import core.api.setAttribute
+import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
@@ -204,9 +203,7 @@ class GeneralRuleBook {
 
         /** Since the Town Crier shows you the book, there is no item here. */
         fun openBook(player: Player) {
-            setAttribute(player, "bookInterfaceCallback", ::display)
-            setAttribute(player, "bookInterfaceCurrentPage", 0)
-            display(player, 0, 0)
+            BookInterface.openBook(player, BookInterface.FANCY_BOOK_2_27, ::display)
         }
     }
 }

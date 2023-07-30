@@ -132,9 +132,7 @@ class GrimDiary : InteractionListener {
 
     override fun defineListeners() {
         on(Items.THE_GRIM_REAPERS_DIARY_11780, IntType.ITEM, "read") { player, _ ->
-            setAttribute(player, "bookInterfaceCallback", ::display)
-            setAttribute(player, "bookInterfaceCurrentPage", 0)
-            display(player, 0, 0)
+            BookInterface.openBook(player, BookInterface.FANCY_BOOK_26, ::display)
             return@on true
         }
     }

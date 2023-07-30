@@ -129,9 +129,7 @@ class StrongholdNotes : InteractionListener {
 
     override fun defineListeners() {
         on(Items.STRONGHOLD_NOTES_9004, IntType.ITEM, "read") { player, _ ->
-            setAttribute(player, "bookInterfaceCallback", ::display)
-            setAttribute(player, "bookInterfaceCurrentPage", 0)
-            display(player, 0, 0)
+            BookInterface.openBook(player, BookInterface.FANCY_BOOK_2_27, ::display)
             return@on true
         }
     }
