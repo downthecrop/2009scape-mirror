@@ -1761,6 +1761,17 @@ fun isQuestComplete(player: Player, quest: String): Boolean {
 }
 
 /**
+ * Get the quest for a player.
+ * @param player The player to get the quest for.
+ * @param quest The quest name string
+ * @return the quest object
+ */
+fun getQuest(player: Player, quest: String): Quest {
+    return player.questRepository.getQuest(quest)
+}
+
+
+/**
  * Check if a player meets the requirements to start a quest, and then starts it if they do. Returns success bool
  */
 fun startQuest(player: Player, quest: String): Boolean {
@@ -1868,7 +1879,7 @@ fun runcs2 (player: Player, scriptId: Int, vararg arguments: Any) {
  * @param player the player we are openinig the prompt for
  * @param options the right-click options the items should have
  * @param keepAlive whether or not the selection prompt should remain open for multiple interactions
- * @param callback a callback to handle the selection. The parameters passed to the callback are the slot in the inventory of the selected item, and the 0-9 index of the option clicked. 
+ * @param callback a callback to handle the selection. The parameters passed to the callback are the slot in the inventory of the selected item, and the 0-9 index of the option clicked.
 **/
 @JvmOverloads
 fun sendItemSelect (player: Player, vararg options: String, keepAlive: Boolean = false, callback: (slot: Int, optionIndex: Int) -> Unit) {

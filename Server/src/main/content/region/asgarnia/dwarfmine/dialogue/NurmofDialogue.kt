@@ -1,5 +1,7 @@
 package content.region.asgarnia.dwarfmine.dialogue
 
+import core.api.getAttribute
+import core.api.setAttribute
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
@@ -30,9 +32,19 @@ class NurmofDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
                 3 -> player(core.game.dialogue.FacialExpression.HALF_ASKING, "Are your pickaxes better than other pickaxes, then?").also { stage = 10 }
             }
 
-            10 -> npcl(core.game.dialogue.FacialExpression.OLD_NORMAL,"Of course they are! My pickaxes are made of higher grade metal than your ordinary bronze pickaxes, allowing you to mine ore just that little bit faster.").also { stage = 99 }
-
-            99 -> end()
+            10 -> npcl(core.game.dialogue.FacialExpression.OLD_NORMAL,"Of course they are! My pickaxes are made of higher grade metal than your ordinary bronze pickaxes, allowing you to mine ore just that little bit faster.").also {
+                if(!getAttribute(player, "pre-dq:said-hi", true)) {
+                    stage++
+                } else {
+                    stage = 99
+                }
+            }
+            11 -> playerl(core.game.dialogue.FacialExpression.FRIENDLY, "By the way, Doric says hello!").also { stage++ }
+            12 -> npcl(core.game.dialogue.FacialExpression.OLD_HAPPY, "Oh! Thank you for telling me, adventurer!").also { stage = 99 }
+            99 -> {
+                setAttribute(player, "pre-dq:said-hi", true)
+                end()
+            }
         }
         return true
     }
