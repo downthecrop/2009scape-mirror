@@ -11,26 +11,35 @@ import core.net.packet.IoBuffer
 import org.rs09.consts.Items
 import core.ServerConstants
 import core.api.log
+import core.game.node.Node
+import core.game.node.entity.npc.NPC
+import core.game.node.item.GroundItem
 import core.game.shops.Shop
 import core.game.shops.ShopItem
 import core.tools.SystemLogger
 import core.game.system.config.ConfigParser
 import core.game.system.config.ServerConfigParser
 import core.game.world.GameWorld
+import core.game.world.map.Location
+import core.game.world.map.RegionManager
 import core.game.world.repository.Repository
 import core.game.world.update.UpdateSequence
+import core.net.packet.PacketProcessor
 import core.tools.Log
+import org.rs09.consts.Scenery
+import java.io.Closeable
 import java.net.URI
 import java.nio.ByteBuffer
 
 object TestUtils {
     var uidCounter = 0
 
-    fun getMockPlayer(name: String, ironman: IronmanMode = IronmanMode.NONE, rights: Rights = Rights.ADMINISTRATOR): Player {
+    fun getMockPlayer(name: String, ironman: IronmanMode = IronmanMode.NONE, rights: Rights = Rights.ADMINISTRATOR): MockPlayer {
         val p = MockPlayer(name)
         p.ironmanManager.mode = ironman
         p.details.accountInfo.uid = uidCounter++
         p.setPlaying(true);
+        p.playerFlags.lastSceneGraph = p.location ?: ServerConstants.HOME_LOCATION
         Repository.addPlayer(p)
         //Update sequence has a separate list of players for some reason...
         UpdateSequence.renderablePlayers.add(p)
@@ -74,15 +83,45 @@ object TestUtils {
             GameWorld.majorUpdateWorker.handleTickActions(skipPulseUpdates)
         }
     }
+
+    fun simulateInteraction (player: Player, target: Node, optionIndex: Int, iface: Int = -1, child: Int = -1) {
+        when (target) {
+            is GroundItem -> PacketProcessor.enqueue(core.net.packet.`in`.Packet.GroundItemAction(player, optionIndex, target.id, target.location.x, target.location.y))
+            is Item -> PacketProcessor.enqueue(core.net.packet.`in`.Packet.ItemAction(player, optionIndex, target.id, target.slot, iface, child))
+            is NPC -> PacketProcessor.enqueue(core.net.packet.`in`.Packet.NpcAction(player, optionIndex, target.clientIndex))
+            is core.game.node.scenery.Scenery -> PacketProcessor.enqueue(core.net.packet.`in`.Packet.SceneryAction(player, optionIndex, target.id, target.location.x, target.location.y))
+        }
+        advanceTicks(1, true)
+    }
 }
 
-class MockPlayer(name: String) : Player(PlayerDetails(name)) {
+class MockPlayer(name: String) : Player(PlayerDetails(name)), AutoCloseable {
+    var hasInit = false
     init {
         this.details.session = MockSession()
+        init()
     }
 
     override fun update() {
         //do nothing. This is for rendering stuff. We don't render a mock player. Not until the spaghetti is less spaghetti.
+    }
+
+    override fun init() {
+        if (hasInit) return
+        hasInit = true
+        super.init()
+    }
+
+    override fun close() {
+        Repository.removePlayer(this)
+        UpdateSequence.renderablePlayers.remove(this)
+        finishClear()
+    }
+
+    override fun setLocation(location: Location?) {
+        super.setLocation(location)
+        RegionManager.move(this)
+        this.playerFlags.lastSceneGraph = location
     }
 }
 
