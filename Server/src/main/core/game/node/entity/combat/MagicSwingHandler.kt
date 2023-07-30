@@ -15,8 +15,8 @@ import kotlin.math.floor
  * @author Emperor
  * @author Ceikry, Kotlin conversion + cleanup
  */
-open class MagicSwingHandler
-    : CombatSwingHandler(CombatStyle.MAGIC) {
+open class MagicSwingHandler (vararg flags: SwingHandlerFlag)
+    : CombatSwingHandler(CombatStyle.MAGIC, *flags) {
 
     override fun canSwing(entity: Entity, victim: Entity): InteractionType? {
         if (!isProjectileClipped(entity, victim, false)) {
@@ -151,12 +151,15 @@ open class MagicSwingHandler
         }
         val level = entity.skills.getLevel(Skills.MAGIC, true)
         var prayer = 1.0
-        if (entity is Player) {
+        if (entity is Player && !flags.contains(SwingHandlerFlag.IGNORE_PRAYER_BOOSTS_ACCURACY)) {
             prayer += entity.prayer.getSkillBonus(Skills.MAGIC)
         }
         val additional = getSetMultiplier(entity, Skills.MAGIC);
         val effective = floor(level * prayer * additional + spellBonus)
-        val bonus = entity.properties.bonuses[WeaponInterface.BONUS_MAGIC]
+        val bonus =
+            if (!flags.contains(SwingHandlerFlag.IGNORE_STAT_BOOSTS_ACCURACY))
+                entity.properties.bonuses[WeaponInterface.BONUS_MAGIC]
+            else 0
         return floor((effective + 8) * (bonus + 64) / 10).toInt()
     }
 

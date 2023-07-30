@@ -31,7 +31,7 @@ import kotlin.math.floor
  * @author Emperor
  * @author Ceikry - Kotlin refactoring, general cleanup
  */
-abstract class CombatSwingHandler(var type: CombatStyle?) {
+abstract class CombatSwingHandler(var type: CombatStyle?, vararg val flags: SwingHandlerFlag) {
     /**
      * The mapping of the special attack handlers.
      */
@@ -659,4 +659,11 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
         }
     }
 
+}
+
+enum class SwingHandlerFlag {
+    IGNORE_STAT_BOOSTS_DAMAGE,
+    IGNORE_STAT_BOOSTS_ACCURACY,
+    IGNORE_PRAYER_BOOSTS_DAMAGE,
+    IGNORE_PRAYER_BOOSTS_ACCURACY
 }

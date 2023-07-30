@@ -1,9 +1,7 @@
 package content.global.handlers.item.equipment.special;
 
 import core.game.node.entity.Entity;
-import core.game.node.entity.combat.BattleState;
-import core.game.node.entity.combat.CombatStyle;
-import core.game.node.entity.combat.InteractionType;
+import core.game.node.entity.combat.*;
 import core.game.node.entity.combat.equipment.Ammunition;
 import core.game.node.entity.combat.equipment.RangeWeapon;
 import core.game.node.entity.combat.equipment.Weapon;
@@ -14,7 +12,6 @@ import core.game.node.entity.skill.Skills;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
-import core.game.node.entity.combat.RangeSwingHandler;
 
 import java.util.List;
 
@@ -37,8 +34,8 @@ public final class ChinchompaSwingHandler extends RangeSwingHandler {
 	/**
 	 * Constructs a new {@code ChinchompaSwingHandler} {@code Object}.
 	 */
-	private ChinchompaSwingHandler() {
-		super();
+	public ChinchompaSwingHandler() {
+		super(SwingHandlerFlag.IGNORE_STAT_BOOSTS_DAMAGE);
 	}
 
 	@Override
