@@ -83,7 +83,6 @@ class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: Shootin
         if (GameWorld.settings?.isDevMode == true) {
             star.dustLeft = 1
         }
-        star.decDust()
 
         val bonusXp = player.getAttribute("shooting-star:bonus-xp", 0).toDouble()
         var xp = star.level.exp.toDouble()
@@ -103,6 +102,8 @@ class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: Shootin
         if(!inInventory(player, Items.ANCIENT_BLUEPRINT_14651) && !inBank(player, Items.ANCIENT_BLUEPRINT_14651)){
             rollBlueprint(player)
         }
+
+        star.decDust()
         return false
     }
 
