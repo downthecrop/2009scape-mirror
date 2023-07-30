@@ -182,6 +182,9 @@ public abstract class MovementPulse extends Pulse {
             this.pathfinder = pathfinder;
         }
         this.forceRun = forceRun;
+
+        if (destination instanceof NPC || destination instanceof Player)
+            destinationFlag = DestinationFlag.ENTITY;
     }
 
     @Override

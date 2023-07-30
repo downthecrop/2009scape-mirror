@@ -25,11 +25,6 @@ cache:
 verify:jdk11:
   stage: build
   script:
-    - 'apt-get install -q -y --no-install-recommends mariadb-server'
-    - 'mysqld_safe &'
-    - 'sleep 3'
-    - 'mysql -u root < Server/db_exports/global.sql'
-    - 'mysql -u root < Server/db_exports/testuser.sql'
     - 'cd Server'
     - 'mvn $MAVEN_CLI_OPTS verify'
   except:
