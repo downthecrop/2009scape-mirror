@@ -131,7 +131,7 @@ public final class SkullManager {
                     setDeepWilderness(false);
 
                 if (level > 20)
-                    player.getLocks().lockTeleport (Integer.MAX_VALUE);
+                    player.getLocks().lockTeleport (1_000_000);
                 else
                     player.getLocks().lockTeleport (0);
 
