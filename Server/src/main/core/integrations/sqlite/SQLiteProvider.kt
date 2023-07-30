@@ -1,5 +1,7 @@
 package core.integrations.sqlite
 
+import core.api.log
+import core.tools.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -19,12 +21,13 @@ class SQLiteProvider (private val path: String, private val expectedTables: Hash
     private lateinit var sqlitePath: String
 
     fun initTables(tableCreatedCallback: ((String) -> Unit)? = null) {
-        val pathTokens = path.split(File.separator)
+        val pathTokens = File(path).absolutePath.split(File.separator)
+        val file = pathTokens.last()
         val parentDir = pathTokens.dropLast(1).joinToString(File.separator)
 
         if (!File(parentDir).exists())
             File(parentDir).mkdirs()
-        sqlitePath = File(path).absolutePath
+        sqlitePath = parentDir + File.separator + file
         if (expectedTables?.isEmpty() != false) return
         run {
             with(it.prepareStatement(TABLE_CHECK)) {
