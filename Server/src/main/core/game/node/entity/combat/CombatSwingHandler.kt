@@ -483,10 +483,13 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
             is Player -> {player = entity; attStyle = entity.properties.attackStyle.style}
             else -> return
         }
+        if (victim is NPC) EXPERIENCE_MOD *= victim.behavior.getXpMultiplier(victim, player)
         if (state != null) {
             val hit = state.totalDamage
             if (entity is Player) {
-                player.skills.addExperience(Skills.HITPOINTS, hit * 1.33, true)
+                var experience = hit * 1.33
+                if (victim is NPC) experience *= victim.behavior.getXpMultiplier(victim, player)
+                player.skills.addExperience(Skills.HITPOINTS, experience, true)
             }
 
             var skill = -1
@@ -513,8 +516,10 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
 
                 WeaponInterface.STYLE_CAST -> skill = Skills.MAGIC
                 WeaponInterface.STYLE_DEFENSIVE_CAST -> {
-                    player.skills.addExperience(Skills.MAGIC, hit * 1.33, true)
-                    player.skills.addExperience(Skills.DEFENCE, hit.toDouble(), true)
+                    var experience = hit.toDouble()
+                    if (victim is NPC) experience *= victim.behavior.getXpMultiplier(victim, player)
+                    player.skills.addExperience(Skills.MAGIC, experience * 1.33, true)
+                    player.skills.addExperience(Skills.DEFENCE, experience, true)
                     return
                 }
             }

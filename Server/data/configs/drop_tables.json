@@ -60209,7 +60209,21 @@
     ],
     "charm": [],
     "ids": "3057,3059,3058,3060,3061,3062,3063,3064,3065,3066",
-    "description": "champion's challenge bosses",
+    "description": "Champion's Challenge NPC - activity",
     "main": []
+  },
+  {
+    "default": [],
+    "charm": [],
+    "ids": "2459,2460,2461,2462",
+    "description": "Pheasant NPC (level 4) - Freaky Forester - Random event",
+    "main": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "6178",
+        "maxAmount": "1"
+      }
+    ]
   }
 ]

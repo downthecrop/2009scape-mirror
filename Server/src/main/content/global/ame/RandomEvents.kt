@@ -5,6 +5,7 @@ import content.global.ame.events.MysteriousOldManNPC
 import content.global.ame.events.certer.CerterNPC
 import content.global.ame.events.drilldemon.SeargentDamienNPC
 import content.global.ame.events.evilchicken.EvilChickenNPC
+import content.global.ame.events.freakyforester.FreakyForesterNPC
 import content.global.ame.events.genie.GenieNPC
 import content.global.ame.events.rivertroll.RiverTrollRENPC
 import content.global.ame.events.rockgolem.RockGolemRENPC
@@ -40,6 +41,7 @@ enum class RandomEvents(val npc: RandomEventNPC, val loot: WeightBasedTable? = n
     DRILL_DEMON(npc = SeargentDamienNPC()),
     EVIL_CHICKEN(npc = EvilChickenNPC()),
     SURPRISE_EXAM(npc = MysteriousOldManNPC(), type = "sexam"),
+    FREAKY_FORESTER(npc = FreakyForesterNPC(), skillId = Skills.WOODCUTTING),
     TREE_SPIRIT(npc = TreeSpiritRENPC(), skillId = Skills.WOODCUTTING),
     RIVER_TROLL(RiverTrollRENPC(), skillId = Skills.FISHING),
     ROCK_GOLEM(RockGolemRENPC(), skillId = Skills.MINING),

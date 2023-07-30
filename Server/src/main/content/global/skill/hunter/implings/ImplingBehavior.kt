@@ -69,7 +69,7 @@ class ImplingBehavior : NPCBehavior (*Impling.getIds()) {
     }
 
     //manually clear any rolled drops so any drops set by JSON are properly ignored.
-    override fun onDropTableRolled (self: NPC, drops: ArrayList<Item>) {
+    override fun onDropTableRolled (self: NPC, killer: Entity, drops: ArrayList<Item>) {
         drops.clear()
     }
 

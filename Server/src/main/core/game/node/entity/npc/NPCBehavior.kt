@@ -99,9 +99,10 @@ open class NPCBehavior(vararg val ids: Int = intArrayOf()) : ContentInterface {
     /**
      * Called after this NPC's drop table is rolled, but before the items are actually dropped, so the list can be manipulated.
      * @param self the NPC instance this behavior belongs to
+     * @param killer the killer of the npc
      * @param drops the generated list of drops for this roll of the table
      */
-    open fun onDropTableRolled(self: NPC, drops: ArrayList<Item>) {}
+    open fun onDropTableRolled(self: NPC, killer: Entity, drops: ArrayList<Item>) {}
 
     /**
      * Called by combat-related code to check if this NPC can be attacked by the `attacker` entity.
@@ -138,5 +139,15 @@ open class NPCBehavior(vararg val ids: Int = intArrayOf()) : ContentInterface {
     */
     open fun getClippingSupplier(self: NPC) : ClipMaskSupplier? {
         return StandardClipMaskSupplier
+    }
+
+    /**
+     * Modifies the combat experience gained from killing an entity
+     * @param self the NPC instance this behavior belongs to
+     * @param attacker entity attacking the npc
+     * @return multiplier for final xp gain
+     */
+    open fun getXpMultiplier(self: NPC, attacker: Entity) : Double {
+        return 1.0
     }
 }

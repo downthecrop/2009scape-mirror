@@ -75,7 +75,7 @@ public final class NPCDropTables {
 	public void drop(NPC npc, Entity looter) {
 		Player p = looter instanceof Player ? (Player) looter : null;
 		ArrayList<Item> drops = table.roll(looter);
-		npc.behavior.onDropTableRolled(npc, drops);
+		npc.behavior.onDropTableRolled(npc, looter, drops);
 		drops.forEach(item -> createDrop(item,p,npc,npc.getDropLocation()));
 	}
 
