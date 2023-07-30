@@ -30,11 +30,11 @@ import kotlin.math.floor
  * @author Emperor
  * @author Ceikry, conversion to Kotlin + cleanup
  */
-open class RangeSwingHandler
+open class RangeSwingHandler (vararg flags: SwingHandlerFlag)
 /**
  * Constructs a new `RangeSwingHandler` {@Code Object}.
  */
-    : CombatSwingHandler(CombatStyle.RANGE) {
+    : CombatSwingHandler(CombatStyle.RANGE, *flags) {
     override fun canSwing(entity: Entity, victim: Entity): InteractionType? {
         if (!isProjectileClipped(entity, victim, false)) {
             return InteractionType.NO_INTERACT
@@ -184,14 +184,17 @@ open class RangeSwingHandler
     override fun calculateAccuracy(entity: Entity?): Int {
         entity ?: return 0
         var effectiveRangedLevel = entity.skills.getLevel(Skills.RANGE).toDouble()
-        if(entity is Player) effectiveRangedLevel = floor(effectiveRangedLevel + (entity.prayer.getSkillBonus(Skills.RANGE) * effectiveRangedLevel))
+        if(entity is Player && !flags.contains(SwingHandlerFlag.IGNORE_PRAYER_BOOSTS_ACCURACY))
+            effectiveRangedLevel = floor(effectiveRangedLevel + (entity.prayer.getSkillBonus(Skills.RANGE) * effectiveRangedLevel))
         if(entity.properties.attackStyle.style == WeaponInterface.STYLE_RANGE_ACCURATE) effectiveRangedLevel += 3
         effectiveRangedLevel += 8
         effectiveRangedLevel *= getSetMultiplier(entity, Skills.RANGE)
         if(entity is Player && SkillcapePerks.isActive(SkillcapePerks.ACCURATE_MARKSMAN,entity)) effectiveRangedLevel *= 1.1
 
         effectiveRangedLevel = floor(effectiveRangedLevel)
-        effectiveRangedLevel *= (entity.properties.bonuses[entity.properties.attackStyle.bonusType] + 64)
+        if (!flags.contains(SwingHandlerFlag.IGNORE_STAT_BOOSTS_ACCURACY))
+            effectiveRangedLevel *= (entity.properties.bonuses[entity.properties.attackStyle.bonusType] + 64)
+        else effectiveRangedLevel *= 64
 
         return floor(effectiveRangedLevel).toInt()
     }
@@ -200,7 +203,7 @@ open class RangeSwingHandler
         val level = entity!!.skills.getLevel(Skills.RANGE)
         val bonus = entity.properties.bonuses[14]
         var prayer = 1.0
-        if (entity is Player) {
+        if (entity is Player && !flags.contains(SwingHandlerFlag.IGNORE_PRAYER_BOOSTS_DAMAGE)) {
             prayer += entity.prayer.getSkillBonus(Skills.RANGE)
         }
         var cumulativeStr = floor(level * prayer)
@@ -208,7 +211,11 @@ open class RangeSwingHandler
             cumulativeStr += 3.0
         }
         cumulativeStr *= getSetMultiplier(entity, Skills.RANGE)
-        cumulativeStr *= (bonus + 64)
+
+        if (!flags.contains(SwingHandlerFlag.IGNORE_STAT_BOOSTS_DAMAGE))
+            cumulativeStr *= (bonus + 64)
+        else cumulativeStr *= 64
+
         return floor((1.5 + (ceil(cumulativeStr) / 640.0)) * modifier).toInt()
         //return ((14 + cumulativeStr + bonus / 8 + cumulativeStr * bonus * 0.016865) * modifier).toInt() / 10 + 1
     }

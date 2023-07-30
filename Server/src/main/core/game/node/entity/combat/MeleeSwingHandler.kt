@@ -24,11 +24,11 @@ import kotlin.math.floor
  * @author Emperor
  * @author Ceikry, Kotlin conversion + cleanup
  */
-open class MeleeSwingHandler
+open class MeleeSwingHandler (vararg flags: SwingHandlerFlag)
 /**
  * Constructs a new `MeleeSwingHandler` {@Code Object}.
  */
-    : CombatSwingHandler(CombatStyle.MELEE) {
+    : CombatSwingHandler(CombatStyle.MELEE, *flags) {
     override fun canSwing(entity: Entity, victim: Entity): InteractionType? {
         //Credits wolfenzi, https://www.rune-server.ee/2009scape-development/rs2-server/snippets/608720-arios-hybridding-improve.html
         var distance = if (usingHalberd(entity)) 2 else 1
@@ -129,7 +129,8 @@ open class MeleeSwingHandler
         //formula taken from wiki: https://oldschool.runescape.wiki/w/Damage_per_second/Melee#Step_six:_Calculate_the_hit_chance Yes I know it's old school. It's the best resource we have for potentially authentic formulae.
         entity ?: return 0
         var effectiveAttackLevel = entity.skills.getLevel(Skills.ATTACK).toDouble()
-        if(entity is Player) effectiveAttackLevel = floor(effectiveAttackLevel + (entity.prayer.getSkillBonus(Skills.ATTACK) * effectiveAttackLevel))
+        if(entity is Player && !flags.contains(SwingHandlerFlag.IGNORE_PRAYER_BOOSTS_ACCURACY))
+            effectiveAttackLevel = floor(effectiveAttackLevel + (entity.prayer.getSkillBonus(Skills.ATTACK) * effectiveAttackLevel))
         if(entity.properties.attackStyle.style == WeaponInterface.STYLE_ACCURATE) effectiveAttackLevel += 3
         else if(entity.properties.attackStyle.style == WeaponInterface.STYLE_CONTROLLED) effectiveAttackLevel += 1
         effectiveAttackLevel += 8
@@ -138,7 +139,10 @@ open class MeleeSwingHandler
         }
         effectiveAttackLevel *= getSetMultiplier(entity, Skills.ATTACK);
         effectiveAttackLevel = floor(effectiveAttackLevel)
-        effectiveAttackLevel *= (entity.properties.bonuses[entity.properties.attackStyle.bonusType] + 64)
+
+        if (!flags.contains(SwingHandlerFlag.IGNORE_STAT_BOOSTS_ACCURACY))
+            effectiveAttackLevel *= (entity.properties.bonuses[entity.properties.attackStyle.bonusType] + 64)
+        else effectiveAttackLevel *= 64
 
         val victimName = entity.properties.combatPulse.getVictim()?.name ?: "none"
 
@@ -161,7 +165,7 @@ open class MeleeSwingHandler
         val level = entity!!.skills.getLevel(Skills.STRENGTH)
         var bonus = entity.properties.bonuses[11]
         var prayer = 1.0
-        if (entity is Player) {
+        if (entity is Player && !flags.contains(SwingHandlerFlag.IGNORE_PRAYER_BOOSTS_DAMAGE)) {
             prayer += entity.prayer.getSkillBonus(Skills.STRENGTH)
         }
         var cumulativeStr = floor(level * prayer)
@@ -174,6 +178,9 @@ open class MeleeSwingHandler
         //Strength skillcape perk
         if(entity is Player && SkillcapePerks.isActive(SkillcapePerks.FINE_ATTUNEMENT, entity) && getItemFromEquipment(entity, EquipmentSlot.WEAPON)?.definition?.getRequirement(Skills.STRENGTH) != 0)
             bonus = ceil(bonus * 1.20).toInt()
+
+        if (flags.contains(SwingHandlerFlag.IGNORE_STAT_BOOSTS_DAMAGE))
+            bonus = 0
 
         cumulativeStr *= getSetMultiplier(entity, Skills.STRENGTH)
 
