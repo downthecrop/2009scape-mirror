@@ -25,11 +25,10 @@ class UseWithPatchHandler : InteractionListener {
 
     @JvmField
     val allowedNodes = ArrayList<Int>()
-    val patches = ArrayList<Int>()
 
     override fun defineListeners() {
         loadNodes()
-        onUseWith(IntType.SCENERY, allowedNodes.toIntArray(), *patches.toIntArray()) { player, used, with ->
+        onUseWith(IntType.SCENERY, allowedNodes.toIntArray(), *FarmingPatch.patchNodes.toIntArray()) { player, used, with ->
             val patch = FarmingPatch.forObject(with.asScenery()) ?: return@onUseWith true
             val usedItem = used.asItem()
 
@@ -233,23 +232,6 @@ class UseWithPatchHandler : InteractionListener {
     }
 
     fun loadNodes(){
-        patches.addAll(8550..8557) //allotment wrappers
-        patches.addAll(7847..7853) //flower patch wrappers
-        patches.addAll(8150..8156) //herb patch wrappers
-        patches.addAll(8388..8391) // Tree patches
-        patches.add(19147) //Tree patch
-        patches.addAll(7962..7965) //fruit trees
-        patches.addAll(8173..8176) //hops
-        patches.addAll(7577..7580) //bush
-        patches.add(23760) //evil turnip
-        patches.add(7572) //belladonna
-        patches.add(8337) //mushroom
-        patches.add(27197) //jade vine
-        patches.add(7771) //cactus
-        patches.add(7807) //calquat
-        patches.addAll(8382..8383)//spirit trees
-        patches.add(8338) //spirit tree
-        patches.add(18816) //death plateau wrapper
         for(p in Plantable.values()){
             allowedNodes.add(p.itemID)
         }

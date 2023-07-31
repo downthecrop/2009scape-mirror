@@ -98,6 +98,35 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
         updateBit()
     }
 
+    fun setVisualState (state: Int) {
+        val finalState = ensureStateSanity(state)
+        setVarbit(player, patch.varbit, finalState)
+    }
+
+    fun ensureStateSanity (state: Int) : Int {
+        val patchDef = FarmingPatch.getSceneryDefByVarbit(patch.varbit) ?: return state
+        val currentStateDef = patchDef.getChildObjectAtIndex(state)
+        if (currentStateDef.name == patchDef.getChildObjectAtIndex(3).name) { //if we're weedy
+            if (state and 0x40 != 0) { //if this invalid state was caused by water/death
+                //remove water/death
+                isDead = false
+                isWatered = false
+                log(this::class.java, Log.DEBUG, "Patch for ${player.username} at varbit ${patch.varbit} with plantable ${plantable?.name ?: "none"} was set to watered/dead at stage $currentGrowthStage, which isn't valid.")
+                return (state and (0x40.inv()))
+            }
+            else if (state and 0x80 != 0) { //if this invalid state was caused by disease
+                //remove disease
+                isDiseased = false
+                log(this::class.java, Log.DEBUG, "Patch for ${player.username} at varbit ${patch.varbit} with plantable ${plantable?.name ?: "none"} was set to diseased at stage $currentGrowthStage, which isn't valid.")
+                return (state and (0x80.inv()))
+            }
+            else {
+                log (this::class.java, Log.ERR, "Patch for ${player.username} at varbit ${patch.varbit} with plantable ${plantable?.name ?: "none"} was set to state $state at growth stage $currentGrowthStage, which isn't valid. We're not sure why this is happening.")
+            }
+        }
+        return state
+    }
+
     fun isFertilized(): Boolean {
         return compost != CompostType.NONE
     }
@@ -106,7 +135,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
         return currentGrowthStage == (plantable?.stages ?: 0)
     }
 
-    private fun updateBit(){
+    fun updateBit(){
         if(isCheckHealth){
             when(patch.type){
                 PatchType.FRUIT_TREE -> setVarbit(player, patch.varbit, plantable!!.value + plantable!!.stages + 20)
@@ -122,11 +151,11 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
                     if (isDiseased) state = state or 0x80
 
                     if (state != getVarbit(player, patch.varbit))
-                        setVarbit(player, patch.varbit, state)
+                        setVisualState(state)
                 }
                 PatchType.BUSH -> {
-                    if(isDead) setVarbit(player, patch.varbit, getBushDeathValue())
-                    else if(isDiseased && !isDead) setVarbit(player, patch.varbit, getBushDiseaseValue())
+                    if(isDead) setVisualState(getBushDeathValue())
+                    else if(isDiseased && !isDead) setVisualState(getBushDiseaseValue())
                 }
                 PatchType.TREE -> {
                     var state = getVarbit(player, patch.varbit)
@@ -135,25 +164,25 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
                     else if (isDiseased) state = state or 0x40
 
                     if (state != getVarbit(player, patch.varbit))
-                        setVarbit(player, patch.varbit, state)
+                        setVisualState(state)
                 }
                 PatchType.FRUIT_TREE -> {
-                    if(isDead) setVarbit(player, patch.varbit, getFruitTreeDeathValue())
-                    else if(isDiseased && !isDead) setVarbit(player, patch.varbit, getFruitTreeDiseaseValue())
+                    if(isDead) setVisualState(getFruitTreeDeathValue())
+                    else if(isDiseased && !isDead) setVisualState(getFruitTreeDiseaseValue())
                 }
                 PatchType.BELLADONNA -> {
-                    if(isDead) setVarbit(player, patch.varbit, getBelladonnaDeathValue()) 
-                    else if(isDiseased && !isDead) setVarbit(player, patch.varbit, getBelladonnaDiseaseValue()) 
-                    else setVarbit(player, patch.varbit, (plantable?.value ?: 0) + currentGrowthStage)
+                    if(isDead) setVisualState(getBelladonnaDeathValue())
+                    else if(isDiseased && !isDead) setVisualState(getBelladonnaDiseaseValue())
+                    else setVisualState((plantable?.value ?: 0) + currentGrowthStage)
                 }
                 PatchType.CACTUS -> {
-                    if(isDead) setVarbit(player, patch.varbit, getCactusDeathValue()) 
-                    else if(isDiseased && !isDead) setVarbit(player, patch.varbit, getCactusDiseaseValue()) 
+                    if(isDead) setVisualState(getCactusDeathValue())
+                    else if(isDiseased && !isDead) setVisualState(getCactusDiseaseValue())
                 }
                 PatchType.HERB -> {
-                    if(isDead) setVarbit(player, patch.varbit, getHerbDeathValue()) 
-                    else if(isDiseased && !isDead) setVarbit(player, patch.varbit, getHerbDiseaseValue()) 
-                    else setVarbit(player, patch.varbit, (plantable?.value ?: 0) + currentGrowthStage)
+                    if(isDead) setVisualState(getHerbDeathValue())
+                    else if(isDiseased && !isDead) setVisualState(getHerbDiseaseValue())
+                    else setVisualState((plantable?.value ?: 0) + currentGrowthStage)
                 }
                 else -> {}
             }
