@@ -192,6 +192,8 @@ public abstract class MovementPulse extends Pulse {
         if (!mover.getViewport().getRegion().isActive())
             return false;
 
+        if (!isRunning()) return true;
+
         if (!validate()) {
             stop();
             return true;
@@ -294,6 +296,8 @@ public abstract class MovementPulse extends Pulse {
 
         if (destination instanceof Entity || interactLocation == null || (!mover.getWalkingQueue().hasPath() && interactLocation.getDistance(mover.getLocation()) > 0) || (usingTruncatedPath && destination.getLocation().getDistance(mover.getLocation()) < 14)) {
             if (!checkAllowMovement())
+                return;
+            if (destination instanceof Entity && previousLoc != null && previousLoc.equals(loc) && mover.getWalkingQueue().hasPath())
                 return;
 
             Path path;
@@ -401,7 +405,7 @@ public abstract class MovementPulse extends Pulse {
         Vector pathDiff = Vector.betweenLocs (destination.getLocation(), Location.create(p.getX(), p.getY(), plane));
         Location predictedCenterPos = (destination.getMathematicalCenter().plus(pathDiff)).toLocation(plane);
         Vector toPlayerNormalized = Vector.betweenLocs(predictedCenterPos, mover.getCenterLocation()).normalized();
-        return predictedCenterPos.transform(toPlayerNormalized.times(destination.size()));
+        return predictedCenterPos.transform(toPlayerNormalized.times(destination.size() + 1));
     }
 
 

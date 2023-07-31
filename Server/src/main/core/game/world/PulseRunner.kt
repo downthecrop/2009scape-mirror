@@ -5,7 +5,9 @@ import core.game.system.task.Pulse
 import core.game.bots.GeneralBotCreator
 import core.tools.Log
 import core.tools.SystemLogger
+import core.ServerConstants
 import java.util.concurrent.LinkedBlockingQueue
+import core.integrations.grafana.*
 
 class PulseRunner {
     private val pulses = LinkedBlockingQueue<Pulse>()
@@ -19,6 +21,8 @@ class PulseRunner {
     fun updateAll() {
         val pulseCount = pulses.size
 
+        var totalTimeBotPulses = 0
+        var totalTimeOtherPulses = 0
         for (i in 0 until pulseCount) {
             val pulse = pulses.take()
 
@@ -33,7 +37,23 @@ class PulseRunner {
                 }
             }
 
+            var pulseName = pulse::class.java.name
+
+            if (pulse is GeneralBotCreator.BotScriptPulse || pulseName.contains("ScriptAPI")) {
+                totalTimeBotPulses += elapsedTime.toInt()
+            } else {
+                totalTimeOtherPulses += elapsedTime.toInt()
+            }
+
+            Grafana.addPulseLength (pulseName, elapsedTime.toInt())
+            Grafana.countPulse (pulseName)
+
             notifyIfTooLong(pulse, elapsedTime)
+        }
+
+        if (ServerConstants.GRAFANA_LOGGING) {
+            Grafana.botPulseTime = totalTimeBotPulses
+            Grafana.otherPulseTime = totalTimeOtherPulses
         }
     }
 

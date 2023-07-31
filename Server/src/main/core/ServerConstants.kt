@@ -91,6 +91,9 @@ class ServerConstants {
         @JvmField
         var ASDT_DATA_PATH: String? = null
 
+        @JvmField
+        var GRAFANA_PATH: String? = null
+
         //the max number of players.
         @JvmField
         var MAX_PLAYERS = 2000
@@ -167,6 +170,12 @@ class ServerConstants {
 
         @JvmField
         var JAVA_VERSION = 8
+
+        @JvmField
+        var GRAFANA_LOGGING = true
+
+        @JvmField
+        var GRAFANA_TTL_DAYS = 7
 
         //location names for the ::to command.
         val TELEPORT_DESTINATIONS = arrayOf(

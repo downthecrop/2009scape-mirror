@@ -9,6 +9,7 @@ import core.net.packet.PacketRepository
 import core.net.packet.context.PlayerContext
 import core.net.packet.out.ClearMinimapFlag
 import core.game.world.repository.Repository
+import core.integrations.grafana.*
 
 /**
  * The entity update sequence.
@@ -32,15 +33,23 @@ class UpdateSequence
         playersList = renderablePlayers
         npcList = Repository.renderableNpcs
         lobbyList!!.map{ PacketRepository.send(ClearMinimapFlag::class.java, PlayerContext(it)) }
+        
+        var playerTickStart = System.currentTimeMillis()
         renderablePlayers.forEach(Player::tick)
+        Grafana.playerTickTime = (System.currentTimeMillis() - playerTickStart).toInt()
+
+        var npcTickStart = System.currentTimeMillis()
         npcList!!.forEach(NPC::tick)
+        Grafana.npcTickTime = (System.currentTimeMillis() - npcTickStart).toInt()
     }
 
     /**
      * Runs the updating part of the sequence.
      */
     fun run() {
+        var playerRenderStart = System.currentTimeMillis()
         renderablePlayers.forEach(Player::update)
+        Grafana.playerRenderTime = (System.currentTimeMillis() - playerRenderStart).toInt()
     }
 
     /**
