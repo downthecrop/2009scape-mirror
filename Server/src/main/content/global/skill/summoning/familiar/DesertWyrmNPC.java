@@ -3,11 +3,11 @@ package content.global.skill.summoning.familiar;
 import java.util.ArrayList;
 import java.util.List;
 
+import content.global.skill.gather.mining.MiningNode;
 import core.cache.def.impl.NPCDefinition;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.SkillBonus;
 import core.game.node.entity.skill.Skills;
-import content.global.skill.gather.SkillingResource;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
@@ -95,7 +95,7 @@ public final class DesertWyrmNPC extends Forager {
 					player.getPacketDispatch().sendMessage("There are no rocks around here for the desert wyrm to mine from!");
 					return true;
 				}
-				final SkillingResource resource = SkillingResource.forId(rock.getId());
+				final MiningNode resource = MiningNode.forId(rock.getId());
 				if (resource == null) {
 					player.getPacketDispatch().sendMessage("There are no rocks around here for the desert wyrm to mine from!");
 					return true;
@@ -143,8 +143,8 @@ public final class DesertWyrmNPC extends Forager {
 				int ordinal = 0;
 				Scenery o = null;
 				for (Scenery r : rocks) {
-					SkillingResource resource = SkillingResource.forId(r.getId());
-					if (resource != null && resource.ordinal() > ordinal) {
+					MiningNode resource = MiningNode.forId(r.getId());
+					if (resource != null && MiningNode.SILVER_ORE_0.ordinal() > resource.ordinal() && resource.ordinal() > ordinal) {
 						ordinal = resource.ordinal();
 						o = r;
 					}
