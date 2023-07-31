@@ -19,6 +19,9 @@ import core.game.shops.ShopItem
 import core.tools.SystemLogger
 import core.game.system.config.ConfigParser
 import core.game.system.config.ServerConfigParser
+import core.game.system.timer.TimerRegistry
+import core.game.system.timer.impl.Disease
+import core.game.system.timer.impl.Poison
 import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
@@ -70,7 +73,13 @@ object TestUtils {
             Cache.init(this::class.java.getResource("cache").path.toString())
             ConfigParser().prePlugin()
             ConfigParser().postPlugin()
+            registerTimers()
         }
+    }
+
+    fun registerTimers() { //allow timers to be registered for use by tests
+        TimerRegistry.registerTimer(Poison())
+        TimerRegistry.registerTimer(Disease())
     }
 
     fun loadFile(path: String) : URI? {

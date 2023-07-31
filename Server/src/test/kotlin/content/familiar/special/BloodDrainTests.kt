@@ -4,8 +4,11 @@ import TestUtils
 import content.global.skill.summoning.familiar.BloatedLeechNPC
 import content.global.skill.summoning.familiar.FamiliarSpecial
 import core.ServerConstants
-import core.api.addItem
+import core.api.*
 import core.game.node.entity.skill.Skills
+import core.game.system.timer.TimerRegistry
+import core.game.system.timer.impl.Disease
+import core.game.system.timer.impl.Poison
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.rs09.consts.Items
@@ -93,6 +96,22 @@ class BloodDrainTests {
             Assertions.assertEquals(true,npc.executeSpecialMove(FamiliarSpecial(p)))
             Assertions.assertEquals(99, p.skills.getLevel(Skills.STRENGTH))
             Assertions.assertEquals(99, p.skills.getLevel(Skills.FARMING))
+        }
+    }
+
+    @Test fun bloodDrainCuresPoisonAndDisease() {
+        TestUtils.getMockPlayer("bloodDrainAilments").use { p ->
+            addItem(p, Items.BLOOD_DRAIN_SCROLL_12444)
+            val npc = BloatedLeechNPC(p, NPCs.BLOATED_LEECH_6843)
+            npc.location = ServerConstants.HOME_LOCATION
+
+            applyPoison(p, p, 40)
+            Assertions.assertNotNull(getOrStartTimer<Disease>(p, 40))
+            Assertions.assertEquals(true, hasTimerActive<Poison>(p))
+            Assertions.assertEquals(true, hasTimerActive<Disease>(p))
+            Assertions.assertEquals(true, npc.executeSpecialMove(FamiliarSpecial(p)))
+            Assertions.assertEquals(false, hasTimerActive<Poison>(p))
+            Assertions.assertEquals(false, hasTimerActive<Disease>(p))
         }
     }
 }
