@@ -99,6 +99,8 @@ class MockPlayer(name: String) : Player(PlayerDetails(name)), AutoCloseable {
     var hasInit = false
     init {
         this.details.session = MockSession()
+        this.location = ServerConstants.HOME_LOCATION
+        this.setAttribute("tutorial:complete", true)
         init()
     }
 
