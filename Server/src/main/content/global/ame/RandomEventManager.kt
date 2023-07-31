@@ -23,7 +23,7 @@ class RandomEventManager(val player: Player? = null) : LoginListener, EventHook<
 
     override fun login(player: Player) {
         if(player.isArtificial) return
-        val instance = content.global.ame.RandomEventManager(player)
+        val instance = RandomEventManager(player)
         player.hook(Event.Tick, instance)
         setAttribute(player, "random-manager", instance)
         instance.rollNextSpawn()
@@ -66,7 +66,7 @@ class RandomEventManager(val player: Player? = null) : LoginListener, EventHook<
     }
 
     private fun rollNextSpawn() {
-        nextSpawn = GameWorld.ticks + RandomFunction.random(content.global.ame.RandomEventManager.Companion.MIN_DELAY_TICKS, content.global.ame.RandomEventManager.Companion.MAX_DELAY_TICKS)
+        nextSpawn = GameWorld.ticks + RandomFunction.random(MIN_DELAY_TICKS, MAX_DELAY_TICKS)
     }
 
     override fun defineCommands() {
@@ -77,16 +77,16 @@ class RandomEventManager(val player: Player? = null) : LoginListener, EventHook<
             if (target == null)
                 reject(player, "Unable to find player $username!")
 
-            content.global.ame.RandomEventManager.Companion.getInstance(target!!)?.fireEvent()
+            getInstance(target!!)?.fireEvent()
         }
     }
 
     companion object {
-        const val AVG_DELAY_TICKS = 6000 // 60 minutes
-        const val MIN_DELAY_TICKS = content.global.ame.RandomEventManager.Companion.AVG_DELAY_TICKS / 2
-        const val MAX_DELAY_TICKS = content.global.ame.RandomEventManager.Companion.MIN_DELAY_TICKS + content.global.ame.RandomEventManager.Companion.AVG_DELAY_TICKS // window of 60 min centered on 60 min (30 to 90 min)
+        var AVG_DELAY_TICKS = 6000 // 60 minutes
+        var MIN_DELAY_TICKS = AVG_DELAY_TICKS / 2
+        var MAX_DELAY_TICKS = MIN_DELAY_TICKS + AVG_DELAY_TICKS // window of 60 min centered on 60 min (30 to 90 min)
 
-        @JvmStatic fun getInstance(player: Player): content.global.ame.RandomEventManager?
+        @JvmStatic fun getInstance(player: Player): RandomEventManager?
         {
             return getAttribute(player, "random-manager", null)
         }

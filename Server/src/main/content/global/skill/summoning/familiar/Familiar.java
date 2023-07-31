@@ -347,26 +347,26 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	 * Checks if the familiar can execute its special move and does so if able.
 	 * @param special The familiar special object.
 	 */
-	public void executeSpecialMove(FamiliarSpecial special) {
+	public boolean executeSpecialMove(FamiliarSpecial special) {
 		if (special.getNode() == this) {
-			return;
+			return false;
 		}
 		if (specialCost > specialPoints) {
 			owner.getPacketDispatch().sendMessage("Your familiar does not have enough special move points left.");
-			return;
+			return false;
 		}
 		SummoningScroll scroll = SummoningScroll.forPouch(pouchId);
 		if (scroll == null) {
 			owner.getPacketDispatch().sendMessage("Invalid scroll for pouch " + pouchId + " - report!");
-			return;
+			return false;
 		}
 		if (!owner.getInventory().contains(scroll.getItemId(), 1)) {
 			owner.getPacketDispatch().sendMessage("You do not have enough scrolls left to do this special move.");
-			return;
+			return false;
 		}
 		if (owner.getLocation().getDistance(getLocation()) > 15) {
 			owner.getPacketDispatch().sendMessage("Your familiar is too far away to use that scroll, or it cannot see you.");
-			return;
+			return false;
 		}
 		if (specialMove(special)) {
 			setAttribute("special-delay", GameWorld.getTicks() + 3);
@@ -376,6 +376,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 			updateSpecialPoints(specialCost);
 			owner.getSkills().addExperience(Skills.SUMMONING, scroll.getExperience(), true);
 		}
+		return true;
 	}
 
 	/**

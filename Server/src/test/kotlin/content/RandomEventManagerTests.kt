@@ -1,6 +1,7 @@
 package content
 
 import TestUtils
+import content.global.ame.RandomEventManager
 import core.game.node.item.Item
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -9,13 +10,13 @@ import content.global.ame.RandomEventNPC
 import core.game.world.GameWorld
 
 class RandomEventManagerTests {
-    companion object {init {
+    init {
         TestUtils.preTestSetup()
-    }}
+    }
 
     @Test fun loginShouldEnableManager() {
         val p = TestUtils.getMockPlayer("Bill")
-        content.global.ame.RandomEventManager().login(p)
+        RandomEventManager().login(p)
         val manager = content.global.ame.RandomEventManager.getInstance(p)
         Assertions.assertNotNull(manager)
         Assertions.assertEquals(true, manager!!.enabled)
@@ -23,7 +24,7 @@ class RandomEventManagerTests {
 
     @Test fun loginShouldSetNextSpawn() {
         val p = TestUtils.getMockPlayer("Bill")
-        content.global.ame.RandomEventManager().login(p)
+        RandomEventManager().login(p)
         val manager = content.global.ame.RandomEventManager.getInstance(p)
         Assertions.assertNotNull(manager)
         Assertions.assertEquals(true, manager!!.nextSpawn > GameWorld.ticks)
@@ -32,15 +33,19 @@ class RandomEventManagerTests {
     @Test fun shouldSpawnRandomEventWithinMAXTICKSGivenNoRestrictions() {
         val p = TestUtils.getMockPlayer("Bill")
         p.setAttribute("tutorial:complete", true) //tutorial has to be complete to spawn randoms
-        content.global.ame.RandomEventManager().login(p)
-        TestUtils.advanceTicks(content.global.ame.RandomEventManager.MAX_DELAY_TICKS + 5)
+        RandomEventManager.MIN_DELAY_TICKS = 10
+        RandomEventManager.MAX_DELAY_TICKS = 20
+        RandomEventManager().login(p)
+        TestUtils.advanceTicks(RandomEventManager.MAX_DELAY_TICKS + 5)
+        RandomEventManager.MIN_DELAY_TICKS = 3000
+        RandomEventManager.MAX_DELAY_TICKS = 9000
         Assertions.assertNotNull(p.getAttribute("re-npc", null))
     }
 
     @Test fun teleportAndNotePunishmentShouldNotAffectAlreadyNotedItems() {
         val p = TestUtils.getMockPlayer("Shitforbrains")
         p.setAttribute("tutorial:complete", true)
-        content.global.ame.RandomEventManager().login(p)
+        RandomEventManager().login(p)
 
         p.inventory.add(Item(Items.RAW_SHARK_384, 1000))
         content.global.ame.RandomEventManager.getInstance(p)?.fireEvent()
@@ -52,7 +57,7 @@ class RandomEventManagerTests {
     @Test fun teleportAndNotePunishmentShouldNoteNotableUnnotedItems() {
         val p = TestUtils.getMockPlayer("shitforbrains2")
         p.setAttribute("tutorial:complete", true)
-        content.global.ame.RandomEventManager().login(p)
+        RandomEventManager().login(p)
 
         p.inventory.add(Item(4151, 5))
         content.global.ame.RandomEventManager.getInstance(p)?.fireEvent()
@@ -65,7 +70,7 @@ class RandomEventManagerTests {
     @Test fun teleportAndNotePunishmentShouldNotAffectUnnotableItems() {
         val p = TestUtils.getMockPlayer("shitforbrains3")
         p.setAttribute("tutorial:complete", true)
-        content.global.ame.RandomEventManager().login(p)
+        RandomEventManager().login(p)
 
         p.inventory.add(Item(Items.AIR_RUNE_556, 30))
         content.global.ame.RandomEventManager.getInstance(p)?.fireEvent()

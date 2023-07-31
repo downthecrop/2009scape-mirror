@@ -1,3 +1,4 @@
+import content.global.ame.RandomEventManager
 import core.cache.Cache
 import core.cache.crypto.ISAACCipher
 import core.cache.crypto.ISAACPair
@@ -12,13 +13,18 @@ import org.rs09.consts.Items
 import core.ServerConstants
 import core.api.log
 import core.game.node.Node
+import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.npc.NPC
+import core.game.node.entity.skill.SkillBonus
 import core.game.node.item.GroundItem
 import core.game.shops.Shop
 import core.game.shops.ShopItem
 import core.tools.SystemLogger
 import core.game.system.config.ConfigParser
 import core.game.system.config.ServerConfigParser
+import core.game.system.timer.TimerRegistry
+import core.game.system.timer.impl.Disease
+import core.game.system.timer.impl.Poison
 import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
@@ -70,7 +76,13 @@ object TestUtils {
             Cache.init(this::class.java.getResource("cache").path.toString())
             ConfigParser().prePlugin()
             ConfigParser().postPlugin()
+            registerTimers()
         }
+    }
+
+    fun registerTimers() { //allow timers to be registered for use by tests
+        TimerRegistry.registerTimer(Poison())
+        TimerRegistry.registerTimer(Disease())
     }
 
     fun loadFile(path: String) : URI? {
@@ -99,7 +111,10 @@ class MockPlayer(name: String) : Player(PlayerDetails(name)), AutoCloseable {
     var hasInit = false
     init {
         this.details.session = MockSession()
+        this.location = ServerConstants.HOME_LOCATION
+        this.properties.attackStyle = WeaponInterface.AttackStyle(0, WeaponInterface.BONUS_CRUSH)
         init()
+        this.setAttribute("tutorial:complete", true)
     }
 
     override fun update() {

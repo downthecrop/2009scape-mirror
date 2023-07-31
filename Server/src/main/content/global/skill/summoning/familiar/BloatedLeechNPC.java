@@ -39,14 +39,18 @@ public class BloatedLeechNPC extends Familiar {
 
 	@Override
 	protected boolean specialMove(FamiliarSpecial special) {
-                curePoison(owner);
+		curePoison(owner);
+		removeTimer(owner, "disease");
 		for (int i = 0; i < Skills.SKILL_NAME.length; i++) {
 			if (owner.getSkills().getLevel(i) < owner.getSkills().getStaticLevel(i)) {
-				owner.getSkills().setLevel(i, owner.getSkills().getStaticLevel(i));
+				owner.getSkills().updateLevel(
+						i,
+						(int) Math.ceil(owner.getSkills().getStaticLevel(i) * 0.2),
+						owner.getSkills().getStaticLevel(i)
+				);
 			}
 		}
-		owner.getSkills().rechargePrayerPoints();
-		getImpactHandler().manualHit(owner, RandomFunction.random(2), HitsplatType.NORMAL);
+		owner.getImpactHandler().manualHit(owner, RandomFunction.random(1, 5), HitsplatType.NORMAL);
 		return true;
 	}
 
