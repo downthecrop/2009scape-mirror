@@ -38,29 +38,26 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
         }
     }
 
-    fun roll(receiver: Entity? = null, rollCount: Int) : ArrayList<Item> {
-        val items = ArrayList<Item>()
-        
-        for (i in 0 until rollCount)
-            items.addAll(roll(receiver))
-
-        return items
+    open fun roll(receiver: Entity? = null) : ArrayList<Item> {
+        return roll(receiver, 1)
     }
 
-    open fun roll(receiver: Entity? = null): ArrayList<Item>{
-        val items = ArrayList<WeightedItem>()
-        items.addAll(guaranteedItems)
+    open fun roll(receiver: Entity? = null, times: Int = 1): ArrayList<Item>{
+        val items = ArrayList<WeightedItem>((guaranteedItems.size + 1) * times)
 
-        if (size == 1) {
-            items.add(get(0))
-        }
-        else if (isNotEmpty()) {
-            var rngWeight = RandomFunction.randomDouble(totalWeight)
-            for (item in this) {
-                rngWeight -= item.weight
-                if (rngWeight <= 0) {
-                    items.add(item)
-                    break
+        for (i in 0 until times) {
+            items.addAll(guaranteedItems)
+
+            if (size == 1) {
+                items.add(get(0))
+            } else if (isNotEmpty()) {
+                var rngWeight = RandomFunction.randomDouble(totalWeight)
+                for (item in this) {
+                    rngWeight -= item.weight
+                    if (rngWeight <= 0) {
+                        items.add(item)
+                        break
+                    }
                 }
             }
         }

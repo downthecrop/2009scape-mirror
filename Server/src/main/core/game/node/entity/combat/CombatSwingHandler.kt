@@ -31,7 +31,9 @@ import kotlin.math.floor
  * @author Emperor
  * @author Ceikry - Kotlin refactoring, general cleanup
  */
-abstract class CombatSwingHandler(var type: CombatStyle?, vararg val flags: SwingHandlerFlag) {
+abstract class CombatSwingHandler(var type: CombatStyle?) {
+    var flags: Array<out SwingHandlerFlag> = emptyArray()
+    constructor(type: CombatStyle?, vararg flags: SwingHandlerFlag) : this(type) { this.flags = flags }
     /**
      * The mapping of the special attack handlers.
      */
