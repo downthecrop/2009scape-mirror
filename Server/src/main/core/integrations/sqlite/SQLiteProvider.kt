@@ -43,10 +43,12 @@ class SQLiteProvider (private val path: String, private val expectedTables: Hash
 
     fun pruneOldData (daysToKeep: Int, timestampFieldName: String = "ts") {
         if (expectedTables?.isEmpty() != false) return
+        val timeDiff = daysToKeep * 24 * 60 * 60
+        val nowTime = System.currentTimeMillis() / 1000
         run {
             with (it.createStatement()) {
                 for ((table, _) in expectedTables) {
-                    execute("DELETE FROM $table WHERE $timestampFieldName <= date('now', '-$daysToKeep day');")
+                    execute("DELETE FROM $table WHERE $timestampFieldName <= ${nowTime - timeDiff};")
                 }
             }
         }
