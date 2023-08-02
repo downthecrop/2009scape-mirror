@@ -185,11 +185,11 @@ public final class HouseManager {
 	}
 
 	/**
-	 * Enter's the player's house.
+	 * Prepares for entering the player's house.
 	 * @param player
 	 * @param buildingMode
 	 */
-	public void enter(final Player player, boolean buildingMode) {
+	public void preEnter(final Player player, boolean buildingMode) {
 		if (this.buildingMode != buildingMode || !isLoaded()) {
 			this.buildingMode = buildingMode;
 			construct();
@@ -197,8 +197,26 @@ public final class HouseManager {
 		player.setAttribute("poh_entry", HouseManager.this);
 		player.lock(1);
 		player.sendMessage("House location: " + houseRegion.getBaseLocation() + ", entry: " + getEnterLocation());
+	}
+
+	/**
+	 * Enters the player's house and plays the ding sound.
+	 * @param player
+	 * @param buildingMode
+	 */
+	public void enter(final Player player, boolean buildingMode) {
+		preEnter(player, buildingMode);
 		player.getProperties().setTeleportLocation(getEnterLocation());
 		openLoadInterface(player);
+		postEnter(player, buildingMode);
+	}
+
+	/**
+	 * Performs post-house-enter administration.
+	 * @param player
+	 * @param buildingMode
+	 */
+	public void postEnter(final Player player, boolean buildingMode) {
 		checkForAndSpawnServant(player);
 		updateVarbits(player, buildingMode);
 		unlockMusicTrack(player);

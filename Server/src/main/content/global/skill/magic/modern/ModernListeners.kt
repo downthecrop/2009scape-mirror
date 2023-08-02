@@ -294,15 +294,17 @@ class ModernListeners : SpellListener("modern"){
             player.sendMessage("A magical force prevents you from teleporting.")
             return
         }
-        val loc = player.houseManager.location.exitLocation
-        if(loc == null){
-            player.sendMessage("You do not have a house whose portal you can teleport to.")
+        val hasHouse = player.houseManager.location.exitLocation != null
+        if(!hasHouse){
+            player.sendMessage("You do not have a house you can teleport to.")
             return
         }
 
+        player.houseManager.preEnter(player, false)
         val teleType = TeleportManager.TeleportType.NORMAL
-
+        val loc = player.houseManager.getEnterLocation()
         player.teleporter.send(loc, teleType)
+        player.houseManager.postEnter(player, false) //this actually runs when the teleport is SUBMITTED rather than EXECUTED, but this is fine
         removeRunes(player)
         addXP(player,30.0)
         setDelay(player,true)
