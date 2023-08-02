@@ -24736,6 +24736,16 @@
     "attack_level": "1"
   },
   {
+    "examine": "He smells of rock dust.",
+    "name": "Ordan",
+    "id": "2564"
+  },
+  {
+    "examine": "He buys stuff.",
+    "name": "Jorzik",
+    "id": "2565"
+  },
+  {
     "death_animation": "836",
     "name": "Market Guard",
     "defence_level": "1",

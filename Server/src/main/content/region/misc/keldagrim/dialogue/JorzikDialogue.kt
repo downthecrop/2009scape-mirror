@@ -1,52 +1,46 @@
 package content.region.misc.keldagrim.dialogue
 
 import core.game.dialogue.DialoguePlugin
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
-import core.api.*
+import core.game.dialogue.FacialExpression
+import core.game.dialogue.Topic
 import core.tools.END_DIALOGUE
+import core.tools.START_DIALOGUE
+import org.rs09.consts.NPCs
 
-const val JORZIK = 2565
-
-/**Just some silly little dialogue for Jorzik hehe
- * @author phil lips*/
+/**
+ * Jorzik dialogue.
+ * @author phil lips
+ */
 
 @Initializable
-class JorzikDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
-
-    override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        npc("Do you want to trade?")
-        stage = 0
-        return true
-    }
+class JorzikDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            0 -> options("What are you selling?","No, thanks").also { stage = 10 }
-            10 -> when(buttonId){
-                1 -> sendPlayerDialogue(player,"What are you selling?").also { stage = 15 }
-                2 -> sendPlayerDialogue(player,"No, thanks.").also {stage = 50}
-            }
-            15 -> sendNPCDialogue(player, JORZIK,"The finest smiths from all over Gielinor come here to work, and I buy the fruit of their craft. Armour made from the strongest metals!").also { stage = 20 }
-            20 -> options("Lets have a look, then.","No, thanks").also { stage = 30 }
-            30 -> when(buttonId){
-                1 -> sendPlayerDialogue(player,"Let's have a look, then.").also { stage = 40 }
-                2 -> sendPlayerDialogue(player,"No, thanks.").also {stage = 50}
-            }
-            40 -> end().also { npc.openShop(player) }
-            50 ->sendNPCDialogue(player, JORZIK,"You just don't appreciate the beauty of fine metalwork.").also { stage = END_DIALOGUE }
+            START_DIALOGUE -> npc(FacialExpression.OLD_DEFAULT,"Do you want to trade?").also { stage++ }
+            1 -> showTopics(
+                Topic(FacialExpression.FRIENDLY,"What are you selling?",2),
+                Topic(FacialExpression.FRIENDLY,"No, thanks.", 5)
+            )
+            2 -> npcl(FacialExpression.OLD_DEFAULT,"The finest smiths from all over Gielinor come here to work, and I buy the fruit of their craft. Armour made from the strongest metals!").also { stage++ }
+            3 -> showTopics(
+                    Topic(FacialExpression.FRIENDLY,"Let's have a look, then.",4),
+                    Topic(FacialExpression.FRIENDLY,"No, thanks.", 5)
+            )
+            4 -> end().also { npc.openShop(player) }
+            5 -> npcl(FacialExpression.OLD_DEFAULT,"You just don't appreciate the beauty of fine metalwork.").also { stage = END_DIALOGUE }
         }
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return JorzikDialogue(player)
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(JORZIK)
+        return intArrayOf(NPCs.JORZIK_2565)
     }
 
 }

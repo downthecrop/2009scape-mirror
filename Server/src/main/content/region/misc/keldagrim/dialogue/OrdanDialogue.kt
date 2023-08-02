@@ -1,37 +1,29 @@
 package content.region.misc.keldagrim.dialogue
 
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.api.*
+import core.game.dialogue.FacialExpression
 import core.game.node.item.Item
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.tools.END_DIALOGUE
+import core.tools.START_DIALOGUE
 
-/**It's just some simple Ordan dialogue
- * don't look at the unnoting code if you care
- * about your braincells
- * @author phil lips*/
-
-const val ORDAN = 2564
-
+/**
+ * Ordan dialogue and unnoting.
+ * @author phil lips
+ */
 @Initializable
 class OrdanDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
 
-    override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        sendPlayerDialogue(player,"Can you un-note any of my items?")
-        stage = 0
-        return true
-    }
-
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            0 -> sendNPCDialogue(player, ORDAN,"I can un-note Tin, Copper, Iron, Coal, and Mithril.").also { stage++ }
-            1 -> sendNPCDialogue(player, ORDAN,"I can even un-note Adamantite and Runite, but you're gonna need deep pocktes for that.").also { stage = END_DIALOGUE }
+            START_DIALOGUE-> playerl(FacialExpression.FRIENDLY, "Can you un-note any of my items?").also { stage++ }
+            1 -> npcl(FacialExpression.OLD_DEFAULT,"I can un-note Tin, Copper, Iron, Coal, and Mithril.").also { stage++ }
+            2 -> npcl(FacialExpression.OLD_DEFAULT,"I can even un-note Adamantite and Runite, but you're gonna need deep pocktes for that.").also { stage = END_DIALOGUE }
         }
         return true
     }
@@ -41,7 +33,7 @@ class OrdanDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(ORDAN)
+        return intArrayOf(NPCs.ORDAN_2564)
     }
 
     /**This is for unnoting ores from Ordan, yeah I know being able to unnote Addy and Rune isn't authentic
@@ -74,7 +66,7 @@ class OrdanDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(
             Items.RUNITE_ORE_452 to 1000
         )
         override fun defineListeners() {
-            onUseWith(IntType.NPC, NPCs.ORDAN_2564,*notedOre){ player, _, noteType ->
+            onUseWith(IntType.NPC, notedOre, NPCs.ORDAN_2564){ player, noteType, _  ->
                 val noteAmount = amountInInventory(player, noteType.id)
                 val noteName = noteType.name
                 var unNoteAmount = 0
