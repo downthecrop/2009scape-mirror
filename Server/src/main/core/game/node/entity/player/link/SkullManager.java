@@ -133,7 +133,7 @@ public final class SkullManager {
                 if (level > 20)
                     player.getLocks().lockTeleport (1_000_000);
                 else
-                    player.getLocks().lockTeleport (0);
+                    player.getLocks().unlockTeleport();
 
 		this.level = level;
 	}
