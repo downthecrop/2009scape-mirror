@@ -1,5 +1,6 @@
 package content.region.misthalin.barbvillage.stronghold.playersafety;
 
+import core.api.Container;
 import core.game.component.Component;
 import core.game.node.entity.player.link.emote.Emotes;
 import core.game.dialogue.DialoguePlugin;
@@ -7,6 +8,7 @@ import core.game.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
+import org.rs09.consts.Items;
 
 import static core.api.ContentAPIKt.*;
 
@@ -87,7 +89,7 @@ public class ProfessorHenryDialogue extends DialoguePlugin {
 			stage++;
 			break;
 		case 907:
-			if (player.getInventory().remove(new Item(12626, 1000))) {
+			if (removeItem(player, Items.TEST_PAPER_12626, Container.INVENTORY)) {
 				showReward(player);
 				end();
 			}
