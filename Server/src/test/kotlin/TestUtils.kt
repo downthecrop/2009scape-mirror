@@ -1,4 +1,5 @@
 import content.global.ame.RandomEventManager
+import content.global.skill.farming.timers.CropGrowth
 import core.cache.Cache
 import core.cache.crypto.ISAACCipher
 import core.cache.crypto.ISAACPair
@@ -83,6 +84,7 @@ object TestUtils {
     fun registerTimers() { //allow timers to be registered for use by tests
         TimerRegistry.registerTimer(Poison())
         TimerRegistry.registerTimer(Disease())
+        TimerRegistry.registerTimer(CropGrowth())
     }
 
     fun loadFile(path: String) : URI? {

@@ -74,6 +74,33 @@ enum class FarmingPatch(val varbit: Int, val type: PatchType) {
     companion object {
         @JvmField
         val patches = FarmingPatch.values().map { it.varbit to it }.toMap()
+        val patchNodes = ArrayList<Int>()
+        val nodeMap = HashMap<Int, SceneryDefinition>()
+
+        init {
+            patchNodes.addAll(8550..8557) //allotment wrappers
+            patchNodes.addAll(7847..7853) //flower patch wrappers
+            patchNodes.addAll(8150..8156) //herb patch wrappers
+            patchNodes.addAll(8388..8391) // Tree patches
+            patchNodes.add(19147) //Tree patch
+            patchNodes.addAll(7962..7965) //fruit trees
+            patchNodes.addAll(8173..8176) //hops
+            patchNodes.addAll(7577..7580) //bush
+            patchNodes.add(23760) //evil turnip
+            patchNodes.add(7572) //belladonna
+            patchNodes.add(8337) //mushroom
+            patchNodes.add(27197) //jade vine
+            patchNodes.add(7771) //cactus
+            patchNodes.add(7807) //calquat
+            patchNodes.addAll(8382..8383)//spirit trees
+            patchNodes.add(8338) //spirit tree
+            patchNodes.add(18816) //death plateau wrapper
+
+            for (patch in patchNodes) {
+                val def = SceneryDefinition.forId(patch)
+                nodeMap[def.varbitID] = def
+            }
+        }
 
         @JvmStatic
         fun forObject(obj: Scenery): FarmingPatch?{
@@ -84,6 +111,10 @@ enum class FarmingPatch(val varbit: Int, val type: PatchType) {
         fun forObjectID(id: Int): FarmingPatch?{
             val objDef = SceneryDefinition.forId(id)
             return patches[objDef.varbitID]
+        }
+
+        fun getSceneryDefByVarbit (id: Int) : SceneryDefinition? {
+            return nodeMap[id]
         }
     }
 

@@ -896,15 +896,23 @@ public class SceneryDefinition extends Definition<Scenery> {
 		} else {
 			configValue = 0;
 		}
-		if (configValue < 0 || configValue >= childrenIds.length - 1 || childrenIds[configValue] == -1) {
+		SceneryDefinition childDef = getChildObjectAtIndex(configValue);
+		if (childDef != null) childDef.configFileId = this.configFileId;
+		return childDef;
+	}
+
+	public SceneryDefinition getChildObjectAtIndex (int index) {
+		if (childrenIds == null || childrenIds.length < 1) {
+			return this;
+		}
+		if (index < 0 || index >= childrenIds.length - 1 || childrenIds[index] == -1) {
 			int objectId = childrenIds[childrenIds.length - 1];
 			if (objectId != -1) {
 				return forId(objectId);
 			}
 			return this;
 		}
-		forId(childrenIds[configValue]).configFileId = this.configFileId;
-		return forId(childrenIds[configValue]);
+		return forId(childrenIds[index]);
 	}
 
 	/**
