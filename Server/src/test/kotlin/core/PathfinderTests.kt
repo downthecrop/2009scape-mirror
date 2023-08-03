@@ -241,7 +241,7 @@ class PathfinderTests {
 
     @Test fun npcShouldReliablyReturnToSpawnEvenIfRegionUnloaded() {
         //spawn a player into the area just to make sure it ticks...
-        TestUtils.getMockPlayer("areatest").use { p ->
+        TestUtils.getMockPlayer("areaunloadtest").use { p ->
             val npc = NPC(1, Location.create(3240, 3226, 0))
             npc.isWalks = true
             npc.isNeverWalks = false

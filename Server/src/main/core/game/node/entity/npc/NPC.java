@@ -462,7 +462,8 @@ public class NPC extends Entity {
 					getLocks().lockMovement(100);
 					getImpactHandler().setDisabledTicks(100);
 					setAttribute("return-to-spawn", true);
-					GameWorld.getPulser().submit(new MovementPulse(this, getProperties().getSpawnLocation(), Pathfinder.SMART) {
+
+					MovementPulse returnPulse = new MovementPulse(this, getProperties().getSpawnLocation(), Pathfinder.SMART) {
 						@Override
 						public boolean pulse() {
 							getProperties().getCombatPulse().stop();
@@ -470,9 +471,13 @@ public class NPC extends Entity {
 							fullRestore();
 							getImpactHandler().setDisabledTicks(0);
 							removeAttribute("return-to-spawn");
+							removeAttribute("return-to-spawn-pulse");
 							return true;
 						}
-					});
+					};
+
+					setAttribute("return-to-spawn-pulse", returnPulse);
+					GameWorld.getPulser().submit(returnPulse);
 					return;
 				}
 				if (dialoguePlayer == null || !dialoguePlayer.isActive() || !dialoguePlayer.getInterfaceManager().hasChatbox()) {
@@ -530,7 +535,11 @@ public class NPC extends Entity {
 		getUpdateMasks().reset();
 		if (getAttribute("return-to-spawn", false)) {
 			this.location = getProperties().getSpawnLocation();
-			removeAttribute("return-to-spawn");
+			MovementPulse returnPulse = getAttribute("return-to-spawn-pulse");
+			if (returnPulse != null) {
+				returnPulse.pulse();
+				returnPulse.stop();
+			}
 		}
 		Repository.removeRenderableNPC(this);
 		if (getViewport().getRegion() instanceof DynamicRegion) {
