@@ -16,6 +16,7 @@ import core.game.node.entity.impl.PulseType
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.GameWorld
+import core.game.world.map.Region
 import core.net.packet.PacketProcessor
 import core.plugin.ClassScanner
 import core.plugin.Plugin
@@ -219,6 +220,41 @@ class PathfinderTests {
             Assertions.assertNotEquals(ServerConstants.HOME_LOCATION, p.location)
             Assertions.assertNotEquals(p.location, npc.location)
             Assertions.assertEquals(1.0, p.location.getDistance(npc.location))
+        }
+    }
+
+    @Test fun npcShouldReliablyReturnToSpawnLocationIfTooFar() {
+        //spawn a player into the area just to make sure it ticks...
+        TestUtils.getMockPlayer("areatest").use { p ->
+            val npc = NPC(1, Location.create(3240, 3226, 0))
+            npc.isWalks = true
+            npc.isNeverWalks = false
+            npc.walkRadius = 5
+            npc.init()
+            npc.properties.spawnLocation = ServerConstants.HOME_LOCATION
+            TestUtils.advanceTicks(5, false)
+            Assertions.assertEquals(true, npc.getAttribute("return-to-spawn", false))
+            TestUtils.advanceTicks(50, false)
+            Assertions.assertEquals(true, npc.location.getDistance(ServerConstants.HOME_LOCATION) <= 9)
+        }
+    }
+
+    @Test fun npcShouldReliablyReturnToSpawnEvenIfRegionUnloaded() {
+        //spawn a player into the area just to make sure it ticks...
+        TestUtils.getMockPlayer("areatest").use { p ->
+            val npc = NPC(1, Location.create(3240, 3226, 0))
+            npc.isWalks = true
+            npc.isNeverWalks = false
+            npc.walkRadius = 5
+            npc.init()
+            npc.properties.spawnLocation = ServerConstants.HOME_LOCATION
+            TestUtils.advanceTicks(3, false)
+            Assertions.assertEquals(true, npc.getAttribute("return-to-spawn", false))
+            p.clear()
+            RegionManager.forId(npc.location.regionId).flagInactive(true)
+            TestUtils.advanceTicks(50, false)
+            Assertions.assertEquals(false, npc.getAttribute("return-to-spawn", false))
+            Assertions.assertEquals(true, npc.location.getDistance(ServerConstants.HOME_LOCATION) <= 5)
         }
     }
 }

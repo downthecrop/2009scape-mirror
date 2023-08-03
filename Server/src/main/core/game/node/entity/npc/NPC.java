@@ -528,6 +528,10 @@ public class NPC extends Entity {
 		getWalkingQueue().reset();
 		getPulseManager().clear();
 		getUpdateMasks().reset();
+		if (getAttribute("return-to-spawn", false)) {
+			this.location = getProperties().getSpawnLocation();
+			removeAttribute("return-to-spawn");
+		}
 		Repository.removeRenderableNPC(this);
 		if (getViewport().getRegion() instanceof DynamicRegion) {
 			clear();
