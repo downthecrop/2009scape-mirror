@@ -347,10 +347,6 @@ class LunarListeners : SpellListener("lunar"), Commands {
     }
 
     private fun sendTeleport(player: Player, xp: Double, loc: Location){
-        if(player.locks.isTeleportLocked){
-            player.sendMessage("A magical force prevents you from teleporting.")
-            return
-        }
         if(player.teleporter.send(loc,TeleportManager.TeleportType.LUNAR)) {
             addXP(player, xp)
             removeRunes(player)
@@ -361,7 +357,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
     private fun sendGroupTeleport(player: Player, xp: Double, destName: String, loc: Location){
         RegionManager.getLocalPlayers(player,1).forEach {
             if(it == player) return@forEach
-            if(it.locks.isTeleportLocked) return@forEach
+            if(it.isTeleBlocked()) return@forEach
             if(!it.isActive) return@forEach
             if(!it.settings.isAcceptAid) return@forEach
             if(it.ironmanManager.isIronman) return@forEach
