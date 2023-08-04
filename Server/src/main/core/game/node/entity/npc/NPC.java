@@ -447,10 +447,14 @@ public class NPC extends Entity {
 				if (
 						!pathBoundMovement
 						&& walkRadius > 0
+						&& walkRadius <= 20
 						&& !getLocation().withinDistance(getProperties().getSpawnLocation(), (int)(walkRadius * 1.5))
 						&& !getAttribute("no-spawn-return", false)
 					)	
 				{
+					MovementPulse current = getAttribute("return-to-spawn-pulse");
+					if (current != null && current.isRunning()) return;
+
 					if(!isNeverWalks()){
 						if(walkRadius == 0)
 							walkRadius = 3;
