@@ -171,12 +171,12 @@ class TFTInteractionListeners : InteractionListener {
                 sendMessage(player,"You lack the knowledge to play this.")
             } else if(LYRE_IDs.isLast(lyre.id)){
                 sendMessage(player,"Your lyre is out of charges!")
-            } else {
-                if(removeItem(player,lyre.asItem())){
+            } else if (player.isTeleBlocked) {
+                    sendMessage(player, "A magical force has stopped you from teleporting.")
+            } else if(removeItem(player,lyre.asItem())){
                     addItem(player,LYRE_IDs.getNext(lyre.id))
                     Pulser.submit(TelePulse(player))
                 }
-            }
             return@on true
         }
 
