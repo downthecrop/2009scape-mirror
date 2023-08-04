@@ -219,8 +219,8 @@ class WoodcuttingListener : InteractionListener {
             player.packetDispatch.sendMessage("You do not have an axe to use.")
             return false
         }
-        if (player.inventory.freeSlots() < 1) {
-            player.dialogueInterpreter.sendDialogue("Your inventory is too full to hold any more " + ItemDefinition.forId(resource.getReward()).name.lowercase(Locale.getDefault()) + ".")
+        if (player.inventory.freeSlots() < 1 && node.isActive) {
+            player.sendMessage("Your inventory is too full to hold any more " + ItemDefinition.forId(resource.getReward()).name.lowercase(Locale.getDefault()) + ".")
             return false
         }
         return node.isActive
