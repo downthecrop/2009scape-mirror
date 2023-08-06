@@ -78,11 +78,6 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
                 else -> {_ -> true}
             }
 
-            if(!condition.invoke(player) || player.skullManager.isWilderness){
-                sendDialogue(player, "Magical forces prevent your teleportation.")
-                return@on true
-            }
-
             val shouldWarn = when(star.location){
                 "North Edgeville mining site",
                 "Southern wilderness mine",
