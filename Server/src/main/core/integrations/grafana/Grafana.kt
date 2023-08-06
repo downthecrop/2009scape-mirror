@@ -4,7 +4,11 @@ import core.ServerConstants
 import core.api.StartupListener
 import core.game.bots.AIRepository
 import core.integrations.sqlite.SQLiteProvider
+import core.tools.cycle
+import kotlinx.coroutines.Job
 import org.json.simple.JSONObject
+import java.util.LinkedList
+import java.util.concurrent.LinkedBlockingDeque
 
 class Grafana : StartupListener {
     override fun startup() {
@@ -23,7 +27,9 @@ class Grafana : StartupListener {
         val botPulseTime: Int,
         val otherPulseTime: Int,
         val pulseTimes: Array<Map.Entry<String, Int>>,
-        val pulseCounts: Array<Map.Entry<String, Int>>
+        val pulseCounts: Array<Map.Entry<String, Int>>,
+        val botCount: Int,
+        val timeSecs: Int
     )
 
     companion object {
@@ -35,6 +41,8 @@ class Grafana : StartupListener {
         var botPulseTime = 0
         var otherPulseTime = 0
         lateinit var db: SQLiteProvider
+        var cycleData = LinkedList<GrafanaData>()
+        var currentTask: Job? = null
 
         var pulseTimes = HashMap<String, Int>()
         var pulseCounts = HashMap<String, Int>()
@@ -64,7 +72,7 @@ class Grafana : StartupListener {
 
         fun endTick() {
             if (!this::db.isInitialized) return
-            val cycleData = GrafanaData (
+            val thisCycle = GrafanaData (
                 playerTickTime,
                 npcTickTime,
                 playerRenderTime,
@@ -73,52 +81,69 @@ class Grafana : StartupListener {
                 botPulseTime,
                 otherPulseTime,
                 pulseTimes.entries.toTypedArray(),
-                pulseCounts.entries.toTypedArray()
+                pulseCounts.entries.toTypedArray(),
+                AIRepository.PulseRepository.size,
+                getNowTime()
             )
-            db.runAsync { it ->
+            cycleData.add(thisCycle)
+
+            if (cycleData.size < 50) return
+            if (currentTask?.isActive == true) return
+
+            currentTask = db.runAsync {
                 with (it.prepareStatement(INSERT_TOP_PULSES)) {
-                    val topSorted = cycleData.pulseTimes.sortedByDescending { entry -> entry.value }
-                    val rootObj = JSONObject()
-                    val contentObj = JSONObject()
-                    for (i in 0 until 5) {
-                        contentObj [topSorted[i].key] = topSorted[i].value
+                    for (i in 0 until 50) {
+                        val topSorted = cycleData[i].pulseTimes.sortedByDescending { entry -> entry.value }
+                        val rootObj = JSONObject()
+                        val contentObj = JSONObject()
+                        for (j in 0 until 5) {
+                            contentObj[topSorted[j].key] = topSorted[j].value
+                        }
+                        rootObj["pulses"] = contentObj
+                        setString(1, rootObj.toJSONString())
+                        setInt(2, cycleData[i].timeSecs)
+                        execute()
                     }
-                    rootObj["pulses"] = contentObj
-                    setString(1, rootObj.toJSONString())
-                    setInt(2, getNowTime())
-                    execute()
                 }
 
                 with (it.prepareStatement(INSERT_PULSE_COUNT)) {
-                    val topSorted = cycleData.pulseCounts.sortedByDescending { entry -> entry.value }
-                    val rootObj = JSONObject()
-                    val contentObj = JSONObject()
-                    for (i in 0 until 5) {
-                        contentObj [topSorted[i].key] = topSorted[i].value
+                    for (i in 0 until 50) {
+                        val topSorted = cycleData[i].pulseCounts.sortedByDescending { entry -> entry.value }
+                        val rootObj = JSONObject()
+                        val contentObj = JSONObject()
+                        for (j in 0 until 5) {
+                            contentObj[topSorted[j].key] = topSorted[j].value
+                        }
+                        rootObj["pulses"] = contentObj
+                        setString(1, rootObj.toJSONString())
+                        setInt(2, cycleData[i].timeSecs)
+                        execute()
                     }
-                    rootObj["pulses"] = contentObj
-                    setString(1, rootObj.toJSONString())
-                    setInt(2, getNowTime())
-                    execute()
                 }
 
                 with (it.prepareStatement(INSERT_BOT_COUNT)) {
-                    setInt(1, AIRepository.PulseRepository.size)
-                    setInt(2, getNowTime())
-                    execute()
+                    for (i in 0 until 50) {
+                        setInt(1, cycleData[i].botCount)
+                        setInt(2, cycleData[i].timeSecs)
+                        execute()
+                    }
                 }
 
                 with (it.prepareStatement(INSERT_TICK_MEAS)) {
-                    setInt(1, cycleData.botPulseTime)
-                    setInt(2, cycleData.otherPulseTime)
-                    setInt(3, cycleData.npcTickTime)
-                    setInt(4, cycleData.playerTickTime)
-                    setInt(5, cycleData.playerRenderTime)
-                    setInt(6, cycleData.packetProcessTime)
-                    setInt(7, cycleData.totalTickTime - (cycleData.botPulseTime + cycleData.otherPulseTime + cycleData.npcTickTime + cycleData.playerTickTime + cycleData.playerRenderTime + cycleData.packetProcessTime))
-                    setInt(8, getNowTime())
-                    execute()
+                    for (i in 0 until 50) {
+                        setInt(1, cycleData[i].botPulseTime)
+                        setInt(2, cycleData[i].otherPulseTime)
+                        setInt(3, cycleData[i].npcTickTime)
+                        setInt(4, cycleData[i].playerTickTime)
+                        setInt(5, cycleData[i].playerRenderTime)
+                        setInt(6, cycleData[i].packetProcessTime)
+                        setInt(7, cycleData[i].totalTickTime - (cycleData[i].botPulseTime + cycleData[i].otherPulseTime + cycleData[i].npcTickTime + cycleData[i].playerTickTime + cycleData[i].playerRenderTime + cycleData[i].packetProcessTime))
+                        setInt(8, cycleData[i].timeSecs)
+                        execute()
+                    }
                 }
+
+                cycleData.removeAll(cycleData.subList(0, 49).toSet())
             }
         }
 
