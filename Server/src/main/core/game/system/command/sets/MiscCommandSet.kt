@@ -556,6 +556,11 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             content.global.ame.RandomEventManager.getInstance(player)!!.event!!.init()
         }
 
+        define("bob", Privilege.ADMIN){ player, _ ->
+            content.global.ame.RandomEventManager.getInstance(player)!!.event = RandomEvents.EVIL_BOB.npc.create(player)
+            content.global.ame.RandomEventManager.getInstance(player)!!.event!!.init()
+        }
+
         define("revent", Privilege.ADMIN){ player, _ ->
             println(player.pulseManager.current)
             content.global.ame.RandomEventManager.getInstance(player)!!.fireEvent()

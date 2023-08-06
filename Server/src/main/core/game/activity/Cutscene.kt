@@ -257,12 +257,6 @@ abstract class Cutscene(val player: Player) {
                     8 -> player.properties.teleportLocation = exitLocation
                     9 -> fadeFromBlack()
                     16 -> {
-                        try {
-                            endActions?.invoke()
-                        } catch (e: Exception) {
-                            log(this::class.java, Log.ERR,  "There's some bad nasty code in ${this::class.java.simpleName} end actions!")
-                            e.printStackTrace()
-                        }
                         return true
                     }
                 }
@@ -283,6 +277,12 @@ abstract class Cutscene(val player: Player) {
                 player.logoutListeners.remove("cutscene")
                 content.global.ame.RandomEventManager.getInstance(player)?.enabled = true
                 PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 0))
+                try {
+                    endActions?.invoke()
+                } catch (e: Exception) {
+                    log(this::class.java, Log.ERR,  "There's some bad nasty code in ${this::class.java.simpleName} end actions!")
+                    e.printStackTrace()
+                }
             }
         })
     }
