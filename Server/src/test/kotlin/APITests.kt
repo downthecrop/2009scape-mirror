@@ -9,8 +9,14 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 class APITests {
-    val testPlayer = TestUtils.getMockPlayer("test")
-    val testPlayer2 = TestUtils.getMockPlayer("test2")
+    var testPlayer: MockPlayer
+    var testPlayer2: MockPlayer
+
+    init {
+        TestUtils.preTestSetup()
+        testPlayer = TestUtils.getMockPlayer("test")
+        testPlayer2 = TestUtils.getMockPlayer("test2")
+    }
 
     @Test fun testIfaceSettings(){
         var builder = IfaceSettingsBuilder()
