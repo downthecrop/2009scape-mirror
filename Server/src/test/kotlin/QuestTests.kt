@@ -4,7 +4,12 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 class QuestTests {
-    val testPlayer = TestUtils.getMockPlayer("test")
+    lateinit var testPlayer: MockPlayer
+    init {
+        TestUtils.preTestSetup()
+        testPlayer = TestUtils.getMockPlayer("test")
+    }
+
     class TestQuest : Quest("Test Quest", 0, 0, 1, 1, 0, 1, 2) {
         override fun newInstance(`object`: Any?): Quest {
             return this
