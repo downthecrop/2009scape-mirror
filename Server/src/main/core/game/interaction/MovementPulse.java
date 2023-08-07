@@ -267,25 +267,23 @@ public abstract class MovementPulse extends Pulse {
 
         Location loc = null;
 
-        if (destinationFlag != null && overrideMethod == null) {
+        if (optionHandler != null) {
+            loc = optionHandler.getDestination(mover, destination);
+        }
+        else if (useHandler != null) {
+            loc = useHandler.getDestination((Player) mover, destination);
+        }
+        else if (isInsideEntity(mover.getLocation())) {
+            loc = findBorderLocation();
+        }
+
+        if (loc == null && destinationFlag != null && overrideMethod == null) {
             loc = destinationFlag.getDestination(mover, destination);
         }
-        else if(overrideMethod != null){
+        else if(loc == null && overrideMethod != null){
             loc = overrideMethod.invoke(mover,destination);
             if(loc == destination.getLocation() && destinationFlag != null) loc = destinationFlag.getDestination(mover,destination);
             else if (loc == destination.getLocation()) loc = null;
-        }
-
-        if (loc == null) {
-            if (optionHandler != null) {
-                loc = optionHandler.getDestination(mover, destination);
-            }
-            else if (useHandler != null) {
-                loc = useHandler.getDestination((Player) mover, destination);
-            }
-            else if (isInsideEntity(mover.getLocation())) {
-                loc = findBorderLocation();
-            }
         }
 
         if (destination instanceof NPC)
