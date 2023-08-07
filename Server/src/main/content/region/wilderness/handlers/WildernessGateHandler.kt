@@ -17,18 +17,20 @@ class WildernessGateHandler : InteractionListener {
     }
 
     private fun handleGate (player: Player, node: Node) : Boolean {
-        val isEntering = !player.skullManager.isDeepWilderness()
-        
-        if (isEntering) 
-            openDialogue (player, GateDialogue(node.asScenery()))
-        else {
-            if (player.properties.combatPulse.isInCombat)
-                sendMessage (player, "You cannot leave while you are under attack.")
+        if (player.location.y > 3890) {
+            val isEntering = !player.skullManager.isDeepWilderness()
+
+            if (isEntering)
+                openDialogue(player, GateDialogue(node.asScenery()))
             else {
-                DoorActionHandler.handleAutowalkDoor (player, node.asScenery())
-                player.skullManager.isDeepWilderness = false 
+                if (player.properties.combatPulse.isInCombat)
+                    sendMessage(player, "You cannot leave while you are under attack.")
+                else {
+                    DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                    player.skullManager.isDeepWilderness = false
+                }
             }
-        }
+        } else DoorActionHandler.handleAutowalkDoor (player, node.asScenery())
 
         return true
     }

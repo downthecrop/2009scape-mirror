@@ -64,7 +64,6 @@ public final class ActionLocks {
 	 */
 	public void lock(int ticks) {
 		lockMovement(ticks);
-		lockTeleport(ticks);
 		lockInteractions(ticks);
 	}
 
@@ -73,7 +72,6 @@ public final class ActionLocks {
 	 */
 	public void unlock() {
 		unlockMovement();
-		unlockTeleport();
 		unlockInteraction();
 	}
 

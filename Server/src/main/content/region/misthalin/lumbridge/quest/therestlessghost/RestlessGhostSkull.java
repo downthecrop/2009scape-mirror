@@ -1,11 +1,14 @@
 package content.region.misthalin.lumbridge.quest.therestlessghost;
 
+import core.api.Container;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
-import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Items;
+
+import static core.api.ContentAPIKt.removeItem;
 
 /**
  * Represents the plugin used to add the skull to the cofin.
@@ -37,7 +40,7 @@ public final class RestlessGhostSkull extends UseWithHandler {
 			event.getPlayer().getDialogueInterpreter().sendDialogue("Maybe I should open it first.");
 			return true;
 		}
-		if (event.getPlayer().getInventory().remove(new Item(964, 24))) {
+		if (removeItem(event.getPlayer(), Items.SKULL_964, Container.INVENTORY)) {
 			event.getPlayer().getPacketDispatch().sendMessage("You put the skull in the coffin.");
 			event.getPlayer().getQuestRepository().getQuest(RestlessGhost.NAME).finish(event.getPlayer());
 		}
