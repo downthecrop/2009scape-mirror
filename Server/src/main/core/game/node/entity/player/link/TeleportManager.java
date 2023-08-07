@@ -1,5 +1,6 @@
 package core.game.node.entity.player.link;
 
+import content.region.wilderness.handlers.WildernessObeliskPlugin;
 import core.ServerConstants;
 import core.game.node.entity.Entity;
 import core.game.node.entity.impl.Animator.Priority;
@@ -10,6 +11,8 @@ import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
+
+import static core.api.ContentAPIKt.hasTimerActive;
 
 /**
  * Handles the entity teleport.
@@ -90,14 +93,17 @@ public class TeleportManager {
 	 * @return {@code True} if the player successfully started teleporting.
 	 */
 	public boolean send(Location location, TeleportType type, int teleportType) {
-		if (teleportType != -1 && entity.isTeleBlocked()) {
-			if (entity.isPlayer()) {
-				entity.asPlayer().sendMessage("A magical force has stopped you from teleporting.");
+		if (teleportType == WILDY_TELEPORT || type == TeleportType.OBELISK) {
+			if (hasTimerActive(entity, "teleblock")) return false;
+		} else {
+			if (!entity.getZoneMonitor().teleport(teleportType, null)) {
+				return false;
 			}
-			return false;
-		}
-		if ((teleportType != WILDY_TELEPORT && type != TeleportType.OBELISK) && !entity.getZoneMonitor().teleport(teleportType, null)) {
-			return false;
+			if (teleportType != -1 && entity.isTeleBlocked()) {
+				if (entity.isPlayer())
+					entity.asPlayer().sendMessage("A magical force has stopped you from teleporting.");
+				return false;
+			}
 		}
 		if (teleportType != -1) {
 			if (entity instanceof Player) {
