@@ -1,15 +1,21 @@
 package content.region.misthalin.varrock.quest.demonslayer;
 
+import content.region.misthalin.draynor.handlers.DraynorNodePlugin;
+import core.api.Container;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
+import core.game.node.item.Item;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
+import org.rs09.consts.Items;
 
 import static core.api.ContentAPIKt.*;
+import static core.tools.DialogueConstKt.END_DIALOGUE;
+import static core.tools.GlobalsKt.colorize;
 
 /**
  * Represents the dialogue which handles the Sir Prysin NPC.
@@ -475,7 +481,10 @@ public class SirPyrsinDialogue extends DialoguePlugin {
 	private final void handleDefault(int buttonId) {
 		switch (stage) {
 		case 0:
-			options("I am a mighty adventurer. Who are you?", "I'm not sure, I was hoping you could tell me.");
+			if(getQuestStage(player, "Demon Slayer") == 100)
+				options("I am a mighty adventurer. Who are you?", "I'm not sure, I was hoping you could tell me.", "Hey can you give me another Silverlight");
+			else
+				options("I am a mighty adventurer. Who are you?", "I'm not sure, I was hoping you could tell me.");
 			stage = 1;
 			break;
 		case 1:
@@ -488,6 +497,9 @@ public class SirPyrsinDialogue extends DialoguePlugin {
 				player("I'm not sure, I was hoping you could tell me.");
 				stage = 20;
 				break;
+			case 3:
+				npc("I can sell you another one for 500GP");
+				stage = 30;
 			}
 			break;
 		case 10:
@@ -503,6 +515,18 @@ public class SirPyrsinDialogue extends DialoguePlugin {
 			break;
 		case 21:
 			end();
+			break;
+		case 30:
+			if(inInventory(player, Items.COINS_995, 500)) {
+				if(removeItem(player, new Item(Items.COINS_995, 500), Container.INVENTORY)) {
+					addItem(player, Items.SILVERLIGHT_2402, 1, Container.INVENTORY);
+					sendItemDialogue(player, Items.SILVERLIGHT_2402, "Sir Prysin gives you another Silverlight");
+					stage = END_DIALOGUE;
+				}
+			} else {
+				npc(id, "Come back when you have 500GP to buy another one.");
+				stage = END_DIALOGUE;
+			}
 			break;
 		}
 	}
