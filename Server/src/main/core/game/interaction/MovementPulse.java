@@ -276,16 +276,14 @@ public abstract class MovementPulse extends Pulse {
             else if (loc == destination.getLocation()) loc = null;
         }
 
-        if (loc == null) {
-            if (optionHandler != null) {
-                loc = optionHandler.getDestination(mover, destination);
-            }
-            else if (useHandler != null) {
-                loc = useHandler.getDestination((Player) mover, destination);
-            }
-            else if (isInsideEntity(mover.getLocation())) {
-                loc = findBorderLocation();
-            }
+        if (optionHandler != null) {
+            loc = optionHandler.getDestination(mover, destination);
+        }
+        else if (useHandler != null) {
+            loc = useHandler.getDestination((Player) mover, destination);
+        }
+        else if (isInsideEntity(mover.getLocation())) {
+            loc = findBorderLocation();
         }
 
         if (destination instanceof NPC)
