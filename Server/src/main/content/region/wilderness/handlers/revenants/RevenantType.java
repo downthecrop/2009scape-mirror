@@ -69,7 +69,7 @@ public enum RevenantType {
 			NPCDefinition def = NPCDefinition.forId(t.ids[0]);
 			if (def.getCombatLevel() >= combatLevel) return t;
 		}
-		return null;
+		return RevenantType.DRAGON;
 	}
 
 	public static List<Integer> getAllIds() {
