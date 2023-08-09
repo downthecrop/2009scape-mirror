@@ -1,5 +1,6 @@
 package core.game.world.map.zone.impl;
 
+import content.region.wilderness.handlers.DeepWildyThreat;
 import core.game.component.Component;
 import core.game.interaction.Option;
 import content.global.handlers.item.equipment.brawling_gloves.BrawlingGloves;
@@ -91,10 +92,14 @@ public final class WildernessZone extends MapZone {
 
 	private void rollWildernessExclusiveLoot(Entity e, Entity killer) {
                 if (!(killer instanceof Player)) return;
-                
+
                 boolean isDeepWildy = ((Player) killer).getSkullManager().isDeepWilderness();
                 boolean isValidTarget = e instanceof NPC && (isDeepWildy || e.asNpc().getName().contains("Revenant") || e.getId() == NPCs.CHAOS_ELEMENTAL_3200);
-                
+
+				if (isDeepWildy) {
+					DeepWildyThreat.adjustThreat((Player) killer, 250);
+				}
+
                 if (!isValidTarget) return;
 
                 int cEleGloveRate = isDeepWildy ? 50 : 150;
@@ -109,6 +114,7 @@ public final class WildernessZone extends MapZone {
                         Item reward = new Item(BrawlingGloves.forIndicator(glove).getId());
                         GroundItemManager.create(reward, e.asNpc().getDropLocation(), killer.asPlayer());
                         Repository.sendNews(killer.getUsername() + " has received " + reward.getName().toLowerCase() + " from a " + e.asNpc().getName() + "!");
+						DeepWildyThreat.adjustThreat((Player) killer, 200);
                 }
 
                 for (int j : PVP_GEAR) {
@@ -122,6 +128,7 @@ public final class WildernessZone extends MapZone {
                                 }
                                 Repository.sendNews(killer.asPlayer().getUsername() + " has received a " + reward.getName() + " from a " + e.asNpc().getName() + "!");
                                 GroundItemManager.create(reward, ((NPC) e).getDropLocation(), killer.asPlayer());
+								DeepWildyThreat.adjustThreat((Player) killer, 1000);
                         }
                 }
 	}

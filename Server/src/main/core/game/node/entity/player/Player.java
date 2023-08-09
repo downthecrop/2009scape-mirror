@@ -2,6 +2,7 @@ package core.game.node.entity.player;
 
 import content.global.handlers.item.equipment.special.SalamanderSwingHandler;
 import content.global.skill.runecrafting.PouchManager;
+import core.api.EquipmentSlot;
 import core.game.component.Component;
 import core.game.container.Container;
 import core.game.container.ContainerType;
@@ -34,6 +35,7 @@ import core.game.node.entity.player.link.skillertasks.SkillerTasks;
 import core.game.node.entity.skill.Skills;
 import content.global.skill.construction.HouseManager;
 import content.global.skill.summoning.familiar.FamiliarManager;
+import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.system.communication.CommunicationInfo;
@@ -613,6 +615,11 @@ public class Player extends Entity {
 		if (this.isArtificial() && killer instanceof NPC) {
 			return;
 		}
+		if (killer instanceof Player && getWorldTicks() - killer.getAttribute("/save:last-murder-news", 0) >= 500) {
+			Item wep = getItemFromEquipment((Player) killer, EquipmentSlot.WEAPON);
+			sendNews(killer.getName() + " has murdered " + getName() + " with " + (wep == null ? "their fists." : (StringUtils.isPlusN(wep.getName()) ? "an " : "a ") + wep.getName()));
+			killer.setAttribute("/save:last-murder-news", getWorldTicks());
+		}
 		getPacketDispatch().sendMessage("Oh dear, you are dead!");
 		incrementAttribute("/save:"+STATS_BASE+":"+STATS_DEATHS);
 
@@ -653,7 +660,9 @@ public class Player extends Entity {
 				g.initialize(this, location, Arrays.stream(c[1].toArray()).filter(Objects::nonNull).toArray(Item[]::new)); //note: the amount of code required to filter nulls from an array in Java is atrocious.
 			} else {
 				StringBuilder itemsLost = new StringBuilder();
+				int coins = 0;
 				for (Item item : c[1].toArray()) {
+					boolean stayPrivate = false;
 					if (item == null) continue;
 					if (killer instanceof Player)
 						itemsLost.append(getItemName(item.getId())).append("(").append(item.getAmount()).append("), ");
@@ -661,8 +670,20 @@ public class Player extends Entity {
 						continue;
 					if (GraveController.shouldRelease(item.getId()))
 						continue;
+					if (!item.getDefinition().isTradeable()) {
+						if (killer instanceof Player) {
+							int value = item.getDefinition().getAlchemyValue(true);
+							if (getStatLevel(killer, Skills.MAGIC) < 55) value /= 2;
+							coins += Math.max(0, value - 250);
+							continue;
+						} else stayPrivate = true;
+					}
 					item = GraveController.checkTransform(item);
-					GroundItemManager.create(item, location, killer instanceof Player ? (Player) killer : this);
+					GroundItem gi = GroundItemManager.create(item, location, killer instanceof Player ? (Player) killer : this);
+					gi.setRemainPrivate(stayPrivate);
+				}
+				if (coins > 0) {
+					GroundItemManager.create(new Item(Items.COINS_995, coins), location, (Player) killer);
 				}
 				if (killer instanceof Player)
 					PlayerMonitor.log((Player) killer, LogType.PK, "Killed " + name + ", who dropped: " + itemsLost);
