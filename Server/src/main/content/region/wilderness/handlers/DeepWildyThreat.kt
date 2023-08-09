@@ -53,7 +53,7 @@ class DWThreatTimer : PersistTimer(1, "dw-threat") {
             else if (ticksLeft >= 1500) 400
             else if (ticksLeft >= 1000) 800
             else if (ticksLeft >= 500)  1500
-            else 0
+            else 2_000_000
 
        if ((currentRev == null || DeathTask.isDead(currentRev)) && RandomFunction.roll(rollchance)) {
            val type = RevenantType.getClosestHigherOrEqual(entity.properties.currentCombatLevel)
