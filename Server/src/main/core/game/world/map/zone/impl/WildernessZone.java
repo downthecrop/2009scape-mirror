@@ -97,7 +97,7 @@ public final class WildernessZone extends MapZone {
                 boolean isValidTarget = e instanceof NPC && (isDeepWildy || e.asNpc().getName().contains("Revenant") || e.getId() == NPCs.CHAOS_ELEMENTAL_3200);
 
 				if (isDeepWildy) {
-					DeepWildyThreat.adjustThreat((Player) killer, 250);
+					DeepWildyThreat.adjustThreat((Player) killer, 150);
 				}
 
                 if (!isValidTarget) return;
@@ -115,7 +115,7 @@ public final class WildernessZone extends MapZone {
                         GroundItemManager.create(reward, e.asNpc().getDropLocation(), killer.asPlayer());
                         Repository.sendNews(killer.getUsername() + " has received " + reward.getName().toLowerCase() + " from a " + e.asNpc().getName() + "!");
 						if (isDeepWildy)
-							DeepWildyThreat.adjustThreat((Player) killer, 200);
+							DeepWildyThreat.adjustThreat((Player) killer, 750);
                 }
 
                 for (int j : PVP_GEAR) {
@@ -130,7 +130,7 @@ public final class WildernessZone extends MapZone {
                                 Repository.sendNews(killer.asPlayer().getUsername() + " has received a " + reward.getName() + " from a " + e.asNpc().getName() + "!");
                                 GroundItemManager.create(reward, ((NPC) e).getDropLocation(), killer.asPlayer());
 								if (isDeepWildy)
-									DeepWildyThreat.adjustThreat((Player) killer, 1000);
+									DeepWildyThreat.adjustThreat((Player) killer, 3000);
                         }
                 }
 	}
