@@ -1,5 +1,7 @@
 package content.region.wilderness.handlers.revenants;
 
+import core.cache.def.impl.NPCDefinition;
+
 /**
  * A revenant type.
  * @author Vexia
@@ -57,5 +59,13 @@ public enum RevenantType {
 	 */
 	public int getMaxHit() {
 		return maxHit;
+	}
+
+	public static RevenantType getClosestHigherOrEqual (int combatLevel) {
+		for (RevenantType t : values()) {
+			NPCDefinition def = NPCDefinition.forId(t.ids[0]);
+			if (def.getCombatLevel() >= combatLevel) return t;
+		}
+		return null;
 	}
 }
