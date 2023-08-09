@@ -21,16 +21,15 @@ object DeepWildyThreat {
     @JvmStatic fun adjustThreat (player: Player, amount: Int) {
         val timer = getOrStartTimer<DWThreatTimer>(player)
         timer.ticksLeft += amount
-
-        if (timer.ticksLeft >= 500 && timer.lastMessage < 500) {
-            sendMessage(player, colorize("%RYou sense a dark presence."))
-            timer.lastMessage = 500
+        if (timer.ticksLeft >= 2500 && timer.lastMessage < 2000) {
+            sendMessage(player, colorize("%RYou sense a great wrath upon you."))
+            timer.lastMessage = 2000
         } else if (timer.ticksLeft >= 1000 && timer.lastMessage < 1000) {
             sendMessage(player, colorize("%RYou sense watchful eyes upon you."))
             timer.lastMessage = 1000
-        } else if (timer.ticksLeft >= 2000 && timer.lastMessage < 2000) {
-            sendMessage(player, colorize("%RYou sense a great wrath upon you."))
-            timer.lastMessage = 2000
+        } else if (timer.ticksLeft >= 500 && timer.lastMessage < 500) {
+            sendMessage(player, colorize("%RYou sense a dark presence."))
+            timer.lastMessage = 500
         }
     }
 }
