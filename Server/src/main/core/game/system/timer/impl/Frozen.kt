@@ -40,7 +40,6 @@ class Frozen : PersistTimer (1, "frozen") {
 
     override fun getTimer (vararg args: Any) : RSTimer {
         val inst = Frozen()
-        println(args)
         inst.runInterval = args.getOrNull(0) as? Int ?: 10
         inst.shouldApplyImmunity = args.getOrNull(1) as? Boolean ?: false
         return inst

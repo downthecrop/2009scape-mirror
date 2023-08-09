@@ -35,11 +35,12 @@ class RevenantController : TickListener, Commands {
             Repository.RENDERABLE_NPCS.add(revenantNPC)
         }
 
-        @JvmStatic fun unregisterRevenant(revenantNPC: RevenantNPC) {
+        @JvmStatic fun unregisterRevenant(revenantNPC: RevenantNPC, removeRender: Boolean = true) {
             trackedRevenants.remove(revenantNPC)
             taskTimeRemaining.remove(revenantNPC)
             currentTask.remove(revenantNPC)
-            Repository.RENDERABLE_NPCS.remove(revenantNPC)
+            if (removeRender)
+                Repository.RENDERABLE_NPCS.remove(revenantNPC)
         }
 
         val routes = listOf(

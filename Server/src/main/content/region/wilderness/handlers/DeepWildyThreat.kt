@@ -1,13 +1,19 @@
 package content.region.wilderness.handlers
 
+import content.region.wilderness.handlers.revenants.RevenantController
+import content.region.wilderness.handlers.revenants.RevenantNPC
 import content.region.wilderness.handlers.revenants.RevenantType
 import core.api.*
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.DeathTask
 import core.game.node.entity.npc.NPC
+import core.game.node.entity.npc.NPCBehavior
 import core.game.node.entity.player.Player
+import core.game.node.item.Item
 import core.game.system.command.Privilege
 import core.game.system.timer.PersistTimer
+import core.game.system.timer.impl.Disease
+import core.game.world.map.zone.impl.WildernessZone
 import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
 import core.tools.colorize
@@ -38,7 +44,6 @@ class DWThreatTimer : PersistTimer(1, "dw-threat"), Commands {
     var ticksLeft = 0
     var lastMessage = 0
     var currentRev: NPC? = null
-    var chats = arrayOf("Leave this place!", "Suffer!", "Death to you!", "Flee, coward!", "Leave my resting place!", "Let me rest in peace!", "You belong to me!")
 
     override fun run(entity: Entity): Boolean {
         if (ticksLeft-- <= 0) return false
@@ -59,13 +64,12 @@ class DWThreatTimer : PersistTimer(1, "dw-threat"), Commands {
             val type = RevenantType.getClosestHigherOrEqual(entity.properties.currentCombatLevel)
             val npc = NPC.create(type.ids.random(), entity.location)
             npc.isRespawn = false
+            npc.behavior = RevGuardianBehavior()
             npc.init()
-            npc.attack(entity)
-            Graphics.send(Graphics(86), npc.location)
-            ticksLeft -= 500
-            sendChat(npc, chats.random())
+            npc.setAttribute("dw-threat-target", entity)
+            RevenantController.unregisterRevenant(npc as RevenantNPC, false)
             currentRev = npc
-        } else if (currentRev != null && !currentRev!!.location.withinDistance(entity.location, 25)) {
+        } else if (currentRev != null && !currentRev!!.location.withinDistance(entity.location, 25) && currentRev!!.properties.teleportLocation == null) {
             poofClear(currentRev!!)
             currentRev = null
         }
@@ -86,5 +90,43 @@ class DWThreatTimer : PersistTimer(1, "dw-threat"), Commands {
             val timer = getOrStartTimer<DWThreatTimer>(player)
             notify(player, "Current Threat: ${timer.ticksLeft}")
         }
+    }
+}
+
+class RevGuardianBehavior : NPCBehavior() {
+    val deathMessages = arrayOf("Curses upon thee!", "Rot in blight!", "Suffer my wrath!", "Nevermore!", "May ye be undone!")
+    var chats = arrayOf("Leave this place!", "Suffer!", "Death to thee!", "Flee, coward!", "Leave my resting place!", "Let me rest in peace!", "Thou belongeth to me!")
+
+    override fun tick(self: NPC): Boolean {
+        val target = getAttribute<Player?>(self, "dw-threat-target", null) ?: return true
+        if (!target.isActive) {
+            self.clear()
+            return true
+        }
+        if (target.properties.teleportLocation != null && self.properties.teleportLocation == null) {
+            if (WildernessZone.isInZone(target.properties.teleportLocation))
+                self.properties.teleportLocation = target.properties.teleportLocation
+        }
+        sendChat(self, "ticking")
+        self.attack(target)
+        return true
+    }
+
+    override fun onCreation(self: NPC) {
+        Graphics.send(Graphics(86), self.location)
+        sendChat(self, chats.random())
+    }
+
+    override fun onDeathStarted(self: NPC, killer: Entity) {
+        val target = getAttribute<Player?>(self, "dw-threat-target", null) ?: return
+        sendChat(self, deathMessages.random())
+        val disease = getOrStartTimer<Disease>(target, 25)
+        disease.hitsLeft = 25
+    }
+
+    override fun onDropTableRolled(self: NPC, killer: Entity, drops: ArrayList<Item>) {
+        val target = getAttribute<Player?>(self, "dw-threat-target", null) ?: return
+        val timer = getOrStartTimer<DWThreatTimer>(target)
+        timer.ticksLeft = 0
     }
 }
