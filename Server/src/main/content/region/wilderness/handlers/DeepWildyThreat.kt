@@ -55,13 +55,14 @@ class DWThreatTimer : PersistTimer(1, "dw-threat"), Commands {
             else if (ticksLeft >= 500)  1500
             else 2_000_000
 
-        if ((currentRev == null || DeathTask.isDead(currentRev)) && RandomFunction.roll(rollchance)) {
+        if ((currentRev == null || DeathTask.isDead(currentRev) || !currentRev!!.isActive) && RandomFunction.roll(rollchance)) {
             val type = RevenantType.getClosestHigherOrEqual(entity.properties.currentCombatLevel)
             val npc = NPC.create(type.ids.random(), entity.location)
             npc.isRespawn = false
             npc.init()
             npc.attack(entity)
             Graphics.send(Graphics(86), npc.location)
+            ticksLeft -= 500
             sendChat(npc, chats.random())
             currentRev = npc
         } else if (currentRev != null && !currentRev!!.location.withinDistance(entity.location, 25)) {
