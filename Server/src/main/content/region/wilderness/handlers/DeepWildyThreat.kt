@@ -6,6 +6,7 @@ import core.game.node.entity.Entity
 import core.game.node.entity.combat.DeathTask
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.system.command.Privilege
 import core.game.system.timer.PersistTimer
 import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
@@ -34,7 +35,7 @@ object DeepWildyThreat {
     }
 }
 
-class DWThreatTimer : PersistTimer(1, "dw-threat") {
+class DWThreatTimer : PersistTimer(1, "dw-threat"), Commands {
     var ticksLeft = 0
     var lastMessage = 0
     var currentRev: NPC? = null
@@ -55,19 +56,19 @@ class DWThreatTimer : PersistTimer(1, "dw-threat") {
             else if (ticksLeft >= 500)  1500
             else 2_000_000
 
-       if ((currentRev == null || DeathTask.isDead(currentRev)) && RandomFunction.roll(rollchance)) {
-           val type = RevenantType.getClosestHigherOrEqual(entity.properties.currentCombatLevel)
-           val npc = NPC.create(type.ids.random(), entity.location)
-           npc.isRespawn = false
-           npc.init()
-           npc.attack(entity)
-           Graphics.send(Graphics(86), npc.location)
-           sendChat(npc, chats.random())
-           currentRev = npc
-       } else if (currentRev != null && !currentRev!!.location.withinDistance(entity.location, 25)) {
-           poofClear(currentRev!!)
-           currentRev = null
-       }
+        if ((currentRev == null || DeathTask.isDead(currentRev)) && RandomFunction.roll(rollchance)) {
+            val type = RevenantType.getClosestHigherOrEqual(entity.properties.currentCombatLevel)
+            val npc = NPC.create(type.ids.random(), entity.location)
+            npc.isRespawn = false
+            npc.init()
+            npc.attack(entity)
+            Graphics.send(Graphics(86), npc.location)
+            sendChat(npc, chats.random())
+            currentRev = npc
+        } else if (currentRev != null && !currentRev!!.location.withinDistance(entity.location, 25)) {
+            poofClear(currentRev!!)
+            currentRev = null
+        }
 
         return true
     }
@@ -78,5 +79,12 @@ class DWThreatTimer : PersistTimer(1, "dw-threat") {
 
     override fun parse(root: JSONObject, entity: Entity) {
         ticksLeft = root.getOrDefault("threat-time-remaining", 3000) as? Int ?: 3000
+    }
+
+    override fun defineCommands() {
+        define("dwthreat", Privilege.ADMIN, "", "") {player, _ ->
+            val timer = getOrStartTimer<DWThreatTimer>(player)
+            notify(player, "Current Threat: ${timer.ticksLeft}")
+        }
     }
 }
