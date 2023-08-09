@@ -97,7 +97,7 @@ public final class WildernessZone extends MapZone {
                 boolean isValidTarget = e instanceof NPC && (isDeepWildy || e.asNpc().getName().contains("Revenant") || e.getId() == NPCs.CHAOS_ELEMENTAL_3200);
 
 				if (isDeepWildy) {
-					DeepWildyThreat.adjustThreat((Player) killer, 150);
+					DeepWildyThreat.adjustThreat((Player) killer, 50);
 				}
 
                 if (!isValidTarget) return;
