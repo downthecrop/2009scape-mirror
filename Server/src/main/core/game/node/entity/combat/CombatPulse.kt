@@ -17,6 +17,7 @@ import core.game.world.GameWorld
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import core.api.*
+import core.game.interaction.DestinationFlag
 import core.game.system.timer.impl.*
 
 /**
@@ -466,7 +467,7 @@ class CombatPulse(
     }
 
     init {
-        movement = object : MovementPulse(entity, null) {
+        movement = object : MovementPulse(entity, null, DestinationFlag.ENTITY) {
             override fun pulse(): Boolean {
                 return false
             }

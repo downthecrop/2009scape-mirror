@@ -6,6 +6,7 @@ import core.game.interaction.IntType
 
 class AttackListener : InteractionListener {
     override fun defineListeners() {
+        flagInstant()
         on(IntType.NPC, "attack"){ player, npc ->
             //Makes sure player uses correct attack styles for lumbridge dummies
             if (npc.id == 4474 && player.getSwingHandler(false).type != CombatStyle.MAGIC) {

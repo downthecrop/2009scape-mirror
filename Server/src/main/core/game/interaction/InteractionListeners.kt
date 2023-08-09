@@ -255,14 +255,6 @@ object InteractionListeners {
 
         val destOverride = getOverride(type.ordinal, id, option) ?: getOverride(type.ordinal,node.id) ?: getOverride(type.ordinal,option.toLowerCase())
 
-
-        if(option.toLowerCase() == "attack") //Attack needs special handling >.>
-        {
-            player.dispatch(InteractionEvent(node, option.toLowerCase()))
-            method.invoke(player, node)
-            return true
-        }
-
         if(type != IntType.ITEM && !isInstant(method)) {
             if(player.locks.isMovementLocked) return false
             player.pulseManager.run(object : MovementPulse(player, node, flag, destOverride) {
