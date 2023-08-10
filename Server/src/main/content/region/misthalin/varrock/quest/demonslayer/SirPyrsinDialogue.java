@@ -498,10 +498,15 @@ public class SirPyrsinDialogue extends DialoguePlugin {
 				stage = 20;
 				break;
 			case 3:
-				npc("I can sell you another one for 500GP");
-				stage = 30;
+				if(hasAnItem(player, Items.SILVERLIGHT_2402).getContainer() != null) {
+					npc(id, "You already have Silverlight");
+					stage = END_DIALOGUE;
+				} else {
+					npc("I can sell you another one for 500GP");
+					stage = 30;
+				} break;
 			}
-			break;
+				break;
 		case 10:
 			npc(id, "I am Sir Prysin. A bold and famous knight of the", "realm.");
 			stage = 11;
