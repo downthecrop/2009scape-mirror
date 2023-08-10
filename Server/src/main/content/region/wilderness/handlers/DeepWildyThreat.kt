@@ -78,11 +78,11 @@ class DWThreatTimer : PersistTimer(1, "dw-threat"), Commands {
     }
 
     override fun save(root: JSONObject, entity: Entity) {
-        root["threat-time-remaining"] = ticksLeft
+        root["threat-time-remaining"] = ticksLeft.toString()
     }
 
     override fun parse(root: JSONObject, entity: Entity) {
-        ticksLeft = root.getOrDefault("threat-time-remaining", 3000) as? Int ?: 3000
+        ticksLeft = root["threat-time-remaining"]?.toString()?.toIntOrNull() ?: 0
     }
 
     override fun defineCommands() {
