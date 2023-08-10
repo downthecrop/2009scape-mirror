@@ -103,7 +103,7 @@ public final class WildernessZone extends MapZone {
                 if (!isValidTarget) return;
 
                 int cEleGloveRate = isDeepWildy ? 50 : 150;
-                int normalGloveRate = isDeepWildy ? 75 : 150;
+                int normalGloveRate = isDeepWildy ? 100 : 150;
 
                 int pvpGearRate = getNewDropRate(e.asNpc().getDefinition().getCombatLevel());
                 if (isDeepWildy)
