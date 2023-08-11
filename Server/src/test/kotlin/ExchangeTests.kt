@@ -1,3 +1,4 @@
+import content.global.handlers.iface.ge.StockMarket
 import core.game.ge.OfferState
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -11,6 +12,8 @@ import core.game.ge.GEDB
 import core.game.ge.GrandExchange
 import core.game.ge.GrandExchangeOffer
 import core.game.ge.PriceIndex
+import core.game.node.item.Item
+import org.rs09.consts.Items
 import java.io.File
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS) class ExchangeTests {
@@ -21,10 +24,10 @@ import java.io.File
             GEDB.init(TEST_DB_PATH)
         }
 
-        fun generateOffer(itemId: Int, amount: Int, price: Int, sale: Boolean, username: String = "test ${System.currentTimeMillis()}") : GrandExchangeOffer {
+        fun generateOffer(itemId: Int, amount: Int, price: Int, sale: Boolean, username: String = "test ${System.currentTimeMillis()}", offerState: OfferState = OfferState.REGISTERED) : GrandExchangeOffer {
             val offer = GrandExchangeOffer()
             val uid = username.hashCode()  // normally this would be the account's uid but in the test we don't have an account
-            offer.offerState = OfferState.REGISTERED
+            offer.offerState = offerState
             offer.itemID = itemId
             offer.offeredValue = price
             offer.amount = amount
@@ -34,6 +37,22 @@ import java.io.File
             offer.playerUID = uid
             offer.sell = sale
             offer.writeNew()
+            return offer
+        }
+
+        fun generateUnsentOffer (itemId: Int, amount: Int, price: Int, sale: Boolean, username: String, offerState: OfferState = OfferState.PENDING) : GrandExchangeOffer {
+            val offer = GrandExchangeOffer()
+            val uid = username.hashCode()  // normally this would be the account's uid but in the test we don't have an account
+            offer.offerState = offerState
+            offer.itemID = itemId
+            offer.offeredValue = price
+            offer.amount = amount
+            offer.timeStamp = System.currentTimeMillis()
+            offer.index = 0
+            offer.isBot = false
+            offer.playerUID = uid
+            offer.sell = sale
+            offer.uid = 0L
             return offer
         }
 
@@ -113,6 +132,64 @@ import java.io.File
             b.join()
             Assertions.assertEquals(false, a.isCancelled)
             Assertions.assertEquals(false, b.isCancelled)
+        }
+    }
+
+    @Test fun offerWithCombinedNotedAndUnnotedAmountShouldSuceed() {
+        TestUtils.getMockPlayer("combinedNotendAndUnnotedExcTest").use { p ->
+            val offer = generateUnsentOffer(4151, 1000, 1500, true, p.name, OfferState.PENDING)
+            val mkt = StockMarket()
+            p.inventory.add(Item(Items.ABYSSAL_WHIP_4151, 10))
+            p.inventory.add(Item(Items.ABYSSAL_WHIP_4152, 990))
+            Assertions.assertEquals(StockMarket.OfferConfirmResult.Success, mkt.confirmOffer(p, offer, 0))
+            Assertions.assertEquals(0, p.inventory.getAmount(4151))
+            Assertions.assertEquals(0, p.inventory.getAmount(4152))
+        }
+    }
+
+    @Test fun offerWithOnlyNotedAmountShouldSucceed() {
+        TestUtils.getMockPlayer("onlyNotedOfferSucceed").use { p ->
+            val offer = generateUnsentOffer(4151, 1000, 1500, true, p.name, OfferState.PENDING)
+            val mkt = StockMarket()
+            p.inventory.add(Item(Items.ABYSSAL_WHIP_4152, 1000))
+            Assertions.assertEquals(StockMarket.OfferConfirmResult.Success, mkt.confirmOffer(p, offer, 0))
+            Assertions.assertEquals(0, p.inventory.getAmount(4151))
+            Assertions.assertEquals(0, p.inventory.getAmount(4152))
+        }
+    }
+
+    @Test fun offerWithOnlyUnnotedAmountShouldSucceed() {
+        TestUtils.getMockPlayer("onlyUnnotedOfferSucceed").use { p ->
+            val offer = generateUnsentOffer(4151, 10, 1500, true, p.name, OfferState.PENDING)
+            val mkt = StockMarket()
+            p.inventory.add(Item(Items.ABYSSAL_WHIP_4151, 10))
+            Assertions.assertEquals(StockMarket.OfferConfirmResult.Success, mkt.confirmOffer(p, offer, 0))
+            Assertions.assertEquals(0, p.inventory.getAmount(4151))
+            Assertions.assertEquals(0, p.inventory.getAmount(4152))
+        }
+    }
+
+    @Test fun offerWithNotEnoughNotedItemsShouldFail() {
+        TestUtils.getMockPlayer("combinedNotedAndUnnotedFailure").use { p ->
+            val offer = generateUnsentOffer(4151, 1000, 1500, true, p.name, OfferState.PENDING)
+            val mkt = StockMarket()
+            p.inventory.add(Item(Items.ABYSSAL_WHIP_4151, 10))
+            p.inventory.add(Item(Items.ABYSSAL_WHIP_4152, 15))
+            Assertions.assertEquals(StockMarket.OfferConfirmResult.NotEnoughItemsOrCoins, mkt.confirmOffer(p, offer, 0))
+            Assertions.assertEquals(10, p.inventory.getAmount(4151))
+            Assertions.assertEquals(15, p.inventory.getAmount(4152))
+        }
+    }
+
+    @Test fun offerWithNotEnoughUnnotedItemsShouldFail() {
+        TestUtils.getMockPlayer("combinedNotedAndUnnotedFailure2").use { p ->
+            val offer = generateUnsentOffer(4151, 1000, 1500, true, p.name, OfferState.PENDING)
+            val mkt = StockMarket()
+            p.inventory.add(Item(Items.ABYSSAL_WHIP_4151, 10))
+            p.inventory.add(Item(Items.ABYSSAL_WHIP_4152, 900))
+            Assertions.assertEquals(StockMarket.OfferConfirmResult.NotEnoughItemsOrCoins, mkt.confirmOffer(p, offer, 0))
+            Assertions.assertEquals(10, p.inventory.getAmount(4151))
+            Assertions.assertEquals(900, p.inventory.getAmount(4152))
         }
     }
 }
