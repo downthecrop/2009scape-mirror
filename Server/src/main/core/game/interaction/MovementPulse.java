@@ -286,7 +286,7 @@ public abstract class MovementPulse extends Pulse {
             else if (loc == destination.getLocation()) loc = null;
         }
 
-        if (destination instanceof NPC)
+        if (destination instanceof NPC && mover.getProperties().getCombatPulse().getVictim() != destination)
             loc = checkForEntityPathInterrupt(loc != null ? loc : destination.getLocation());
 
         if (interactLocation == null)
@@ -335,10 +335,10 @@ public abstract class MovementPulse extends Pulse {
             previousLoc = loc;
         }
         last = destination.getLocation();
-                            if (mover instanceof Player && mover.getAttribute("draw-intersect", false)) {
-                                clearHintIcon((Player) mover);
-                                registerHintIcon((Player) mover, interactLocation, 5);
-                            }
+        if (mover instanceof Player && mover.getAttribute("draw-intersect", false)) {
+            clearHintIcon((Player) mover);
+            registerHintIcon((Player) mover, interactLocation, 5);
+        }
     }
 
     private boolean checkAllowMovement() {
