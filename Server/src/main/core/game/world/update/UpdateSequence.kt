@@ -33,14 +33,14 @@ class UpdateSequence
         playersList = renderablePlayers
         npcList = Repository.renderableNpcs
         lobbyList!!.map{ PacketRepository.send(ClearMinimapFlag::class.java, PlayerContext(it)) }
-        
-        var playerTickStart = System.currentTimeMillis()
-        renderablePlayers.forEach(Player::tick)
-        Grafana.playerTickTime = (System.currentTimeMillis() - playerTickStart).toInt()
 
         var npcTickStart = System.currentTimeMillis()
         npcList!!.forEach(NPC::tick)
         Grafana.npcTickTime = (System.currentTimeMillis() - npcTickStart).toInt()
+
+        var playerTickStart = System.currentTimeMillis()
+        renderablePlayers.forEach(Player::tick)
+        Grafana.playerTickTime = (System.currentTimeMillis() - playerTickStart).toInt()
     }
 
     /**

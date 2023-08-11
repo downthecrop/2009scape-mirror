@@ -99,7 +99,7 @@ public class RevenantNPC extends AbstractNPC {
 	@Override
 	public void clear() {
 		super.clear();
-		RevenantController.unregisterRevenant(this);
+		RevenantController.unregisterRevenant(this, true);
 	}
 
 	@Override
@@ -125,6 +125,7 @@ public class RevenantNPC extends AbstractNPC {
 			}
 			setAttribute("eat-delay", GameWorld.getTicks() + 6);
 		}
+		behavior.tick(this);
 		if (aggressiveHandler != null && aggressiveHandler.selectTarget()) {
 			return;
 		}

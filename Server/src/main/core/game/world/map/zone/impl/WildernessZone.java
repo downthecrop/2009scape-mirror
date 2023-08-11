@@ -97,13 +97,13 @@ public final class WildernessZone extends MapZone {
                 boolean isValidTarget = e instanceof NPC && (isDeepWildy || e.asNpc().getName().contains("Revenant") || e.getId() == NPCs.CHAOS_ELEMENTAL_3200);
 
 				if (isDeepWildy) {
-					DeepWildyThreat.adjustThreat((Player) killer, 250);
+					DeepWildyThreat.adjustThreat((Player) killer, 50);
 				}
 
                 if (!isValidTarget) return;
 
                 int cEleGloveRate = isDeepWildy ? 50 : 150;
-                int normalGloveRate = isDeepWildy ? 75 : 150;
+                int normalGloveRate = isDeepWildy ? 100 : 150;
 
                 int pvpGearRate = getNewDropRate(e.asNpc().getDefinition().getCombatLevel());
                 if (isDeepWildy)
@@ -114,7 +114,8 @@ public final class WildernessZone extends MapZone {
                         Item reward = new Item(BrawlingGloves.forIndicator(glove).getId());
                         GroundItemManager.create(reward, e.asNpc().getDropLocation(), killer.asPlayer());
                         Repository.sendNews(killer.getUsername() + " has received " + reward.getName().toLowerCase() + " from a " + e.asNpc().getName() + "!");
-						DeepWildyThreat.adjustThreat((Player) killer, 200);
+						if (isDeepWildy)
+							DeepWildyThreat.adjustThreat((Player) killer, 750);
                 }
 
                 for (int j : PVP_GEAR) {
@@ -128,7 +129,8 @@ public final class WildernessZone extends MapZone {
                                 }
                                 Repository.sendNews(killer.asPlayer().getUsername() + " has received a " + reward.getName() + " from a " + e.asNpc().getName() + "!");
                                 GroundItemManager.create(reward, ((NPC) e).getDropLocation(), killer.asPlayer());
-								DeepWildyThreat.adjustThreat((Player) killer, 1000);
+								if (isDeepWildy)
+									DeepWildyThreat.adjustThreat((Player) killer, 3000);
                         }
                 }
 	}
@@ -303,6 +305,13 @@ public final class WildernessZone extends MapZone {
 		for (ZoneBorders z : INSTANCE.borders) {
 			if (z.insideBorder(e))
 				return true;
+		}
+		return false;
+	}
+
+	public static boolean isInZone (Location l) {
+		for (ZoneBorders z : INSTANCE.borders) {
+			if (z.insideBorder(l)) return true;
 		}
 		return false;
 	}

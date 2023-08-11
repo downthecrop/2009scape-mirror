@@ -2,6 +2,9 @@ package content.region.wilderness.handlers.revenants;
 
 import core.cache.def.impl.NPCDefinition;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A revenant type.
  * @author Vexia
@@ -66,6 +69,14 @@ public enum RevenantType {
 			NPCDefinition def = NPCDefinition.forId(t.ids[0]);
 			if (def.getCombatLevel() >= combatLevel) return t;
 		}
-		return null;
+		return RevenantType.DRAGON;
+	}
+
+	public static List<Integer> getAllIds() {
+		ArrayList<Integer> ids = new ArrayList<>();
+		for (RevenantType t : values()) {
+			for (int id : t.ids) ids.add(id);
+		}
+		return ids;
 	}
 }
