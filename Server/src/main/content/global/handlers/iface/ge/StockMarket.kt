@@ -242,17 +242,11 @@ class StockMarket : InterfaceListener {
                 return
             }
             var item: Item
-            val amountLeft: Int = offer.amount - amountInInventory(player, offer.itemID)
-            val remove = removeItem(player, Item(offer.itemID, offer.amount).also { item = it })
-            var note: Int
-            if (amountLeft > 0) {
-                if (item.noteChange.also { note = it } > 0) {
-                    removeItem(player, Item(note, amountLeft))
-                } else if (remove) {
-                    addItem(player, offer.itemID, offer.amount - amountLeft)
-                    return
-                }
-            }
+            val amountUnnoted = amountInInventory(player, offer.itemID)
+            val amountLeft = offer.amount - amountUnnoted
+            val removedUnnoted = removeItem(player, Item(offer.itemID, amountUnnoted).also { item = it })
+            val removeNoted = if (amountLeft > 0) removeItem(player, Item(itemDefinition(offer.itemID).noteId, amountLeft)) else true
+            if (!removedUnnoted || !removeNoted) return
             if(GrandExchange.dispatch(player, offer))
             {
                 player.removeAttribute("ge-temp")
