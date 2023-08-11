@@ -9,6 +9,7 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListeners
 
 class ListenerTests : InteractionListener {
+    init {TestUtils.preTestSetup()}
     @Test fun doubleDefinedListenerShouldThrowIllegalStateException() {
         on(0, IntType.ITEM, "touch") { _, _ -> return@on true}
         Assertions.assertThrows(IllegalStateException::class.java) {
