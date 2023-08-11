@@ -158,6 +158,17 @@ import java.io.File
         }
     }
 
+    @Test fun offerWithMoreUnnotedItemsThanOfferAmountShouldSucceed() {
+        TestUtils.getMockPlayer("onlyUnnotedOfferWithExtraItemsSucceed").use { p ->
+            val offer = generateUnsentOffer(4151, 10, 1500, true, p.name, OfferState.PENDING)
+            val mkt = StockMarket()
+            p.inventory.add(Item(Items.ABYSSAL_WHIP_4151, 20))
+            Assertions.assertEquals(StockMarket.OfferConfirmResult.Success, mkt.confirmOffer(p, offer, 0))
+            Assertions.assertEquals(10, p.inventory.getAmount(4151))
+            Assertions.assertEquals(0, p.inventory.getAmount(4152))
+        }
+    }
+
     @Test fun offerWithOnlyUnnotedAmountShouldSucceed() {
         TestUtils.getMockPlayer("onlyUnnotedOfferSucceed").use { p ->
             val offer = generateUnsentOffer(4151, 10, 1500, true, p.name, OfferState.PENDING)

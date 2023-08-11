@@ -19,6 +19,7 @@ import core.game.ge.PriceIndex
 import core.game.interaction.InterfaceListener
 import core.tools.Log
 import core.tools.SystemLogger
+import kotlin.math.min
 
 /**
  * Handles the grand exchange interface (Stock Market)
@@ -250,7 +251,7 @@ class StockMarket : InterfaceListener {
                 sendMessage(player, "offer.")
                 return OfferConfirmResult.NotEnoughItemsOrCoins
             }
-            val amountUnnoted = amountInInventory(player, offer.itemID)
+            val amountUnnoted = min(amountInInventory(player, offer.itemID), offer.amount)
             val amountLeft = offer.amount - amountUnnoted
             val removedUnnoted = if (amountUnnoted > 0) removeItem(player, Item(offer.itemID, amountUnnoted)) else true
             val removeNoted = if (amountLeft > 0) removeItem(player, Item(itemDefinition(offer.itemID).noteId, amountLeft)) else true
