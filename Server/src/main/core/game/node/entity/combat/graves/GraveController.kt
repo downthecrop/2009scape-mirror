@@ -244,6 +244,7 @@ class GraveController : PersistWorld, TickListener, InteractionListener, Command
 
         fun serializeToServerStore() {
             val archive = ServerStore.getArchive("active-graves")
+            archive.clear()
             for ((uid,grave) in activeGraves) {
                 val g = JSONObject()
                 g["ticksRemaining"] = grave.ticksRemaining
