@@ -241,10 +241,9 @@ class StockMarket : InterfaceListener {
                 sendMessage(player, "offer.")
                 return
             }
-            var item: Item
             val amountUnnoted = amountInInventory(player, offer.itemID)
             val amountLeft = offer.amount - amountUnnoted
-            val removedUnnoted = removeItem(player, Item(offer.itemID, amountUnnoted).also { item = it })
+            val removedUnnoted = if (amountUnnoted > 0) removeItem(player, Item(offer.itemID, amountUnnoted)) else true
             val removeNoted = if (amountLeft > 0) removeItem(player, Item(itemDefinition(offer.itemID).noteId, amountLeft)) else true
             if (!removedUnnoted || !removeNoted) return
             if(GrandExchange.dispatch(player, offer))
@@ -253,7 +252,12 @@ class StockMarket : InterfaceListener {
             }
             else
             {
-                addItem(player, item.id, item.amount)
+                if (amountUnnoted > 0)
+                    addItem(player, offer.itemID, offer.amount - amountLeft)
+                if (amountLeft > 0)
+                    addItem(player, itemDefinition(offer.itemID).noteId, amountLeft)
+                sendMessage(player, "Unable to place GE offer. Please try again.")
+                return
             }
         }
         else
