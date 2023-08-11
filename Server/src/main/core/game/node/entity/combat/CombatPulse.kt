@@ -353,6 +353,7 @@ class CombatPulse(
     override fun start() {
         super.start()
         entity!!.face(victim)
+        entity.walkingQueue.reset()
     }
 
     override fun stop() {
