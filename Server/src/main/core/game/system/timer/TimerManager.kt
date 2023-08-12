@@ -56,6 +56,12 @@ class TimerManager (val entity: Entity) {
             timer.save(obj, entity)
             root [timer.identifier] = obj
         }
+        for (timer in newTimers) {
+            if (timer !is PersistTimer) continue
+            val obj = JSONObject()
+            timer.save(obj, entity)
+            root [timer.identifier] = obj
+        }
     }
 
     fun parseTimers (root: JSONObject) {

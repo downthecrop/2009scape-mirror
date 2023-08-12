@@ -7,27 +7,50 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.rs09.consts.Items
 import content.global.ame.RandomEventNPC
-import core.game.world.GameWorld
+import core.api.getTimer
+import core.api.getWorldTicks
+import core.game.system.timer.impl.AntiMacro
+import org.json.simple.JSONObject
 
-class RandomEventManagerTests {
+class RandomEventTests {
     init {
         TestUtils.preTestSetup()
     }
 
-    @Test fun loginShouldEnableManager() {
-        val p = TestUtils.getMockPlayer("Bill")
-        RandomEventManager().login(p)
-        val manager = content.global.ame.RandomEventManager.getInstance(p)
-        Assertions.assertNotNull(manager)
-        Assertions.assertEquals(true, manager!!.enabled)
+    @Test fun loginShouldRegisterRandomEventTimer() {
+        TestUtils.getMockPlayer("antimacroAutoRegister").use { p ->
+            Assertions.assertNotNull(getTimer<AntiMacro>(p))
+        }
     }
 
     @Test fun loginShouldSetNextSpawn() {
-        val p = TestUtils.getMockPlayer("Bill")
-        RandomEventManager().login(p)
-        val manager = content.global.ame.RandomEventManager.getInstance(p)
-        Assertions.assertNotNull(manager)
-        Assertions.assertEquals(true, manager!!.nextSpawn > GameWorld.ticks)
+        TestUtils.getMockPlayer("antimacroautosetsnextspawnifunset").use { p ->
+            val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer is null.")
+            Assertions.assertNotEquals(getWorldTicks(), timer.nextExecution)
+            Assertions.assertEquals(true, timer.nextExecution - getWorldTicks() >= AntiMacro.MIN_DELAY_TICKS)
+            Assertions.assertEquals(true, timer.nextExecution - getWorldTicks() <= AntiMacro.MAX_DELAY_TICKS)
+        }
+    }
+
+    @Test fun remainingDelayShouldPersistRelog() {
+        TestUtils.getMockPlayer("antimacrotimeremainingpersists").use { p ->
+            val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer is null.")
+            timer.nextExecution = getWorldTicks() + 666
+            p.relog()
+            Assertions.assertEquals(getWorldTicks() + 666, getTimer<AntiMacro>(p)!!.nextExecution)
+        }
+    }
+
+    @Test fun delayShouldBeRestartedOnceDepleted() {
+        TestUtils.getMockPlayer("delayrestartoncedepleted").use { p ->
+            val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer is null.")
+            TestUtils.advanceTicks(2, false)
+            timer.nextExecution = 5 //run in 5 ticks
+            TestUtils.advanceTicks(5, false)
+            Assertions.assertNotEquals(6, timer.nextExecution)
+            Assertions.assertEquals(true, timer.nextExecution - getWorldTicks() >= AntiMacro.MIN_DELAY_TICKS)
+            Assertions.assertEquals(true, timer.nextExecution - getWorldTicks() <= AntiMacro.MAX_DELAY_TICKS)
+        }
     }
 
     @Test fun shouldSpawnRandomEventWithinMAXTICKSGivenNoRestrictions() {
