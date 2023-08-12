@@ -15,7 +15,7 @@ import org.json.simple.*
  * Will notify the player of various levels of remaining poison immunity, and then remove itself once it has run out.
  * This timer is a "soft" timer, meaning it will tick down even while other timers would normally stall (e.g. during entity delays or when the entity has a modal open.)
 **/
-class PoisonImmunity : PersistTimer (1, "poison:immunity", isSoft = true) {
+class PoisonImmunity : PersistTimer (1, "poison:immunity", isSoft = true, flags = arrayOf(TimerFlag.ClearOnDeath)) {
     var ticksRemaining = 0
 
     override fun save (root: JSONObject, entity: Entity) {

@@ -8,7 +8,7 @@ import kotlin.reflect.full.createInstance
 /**
  * A timer implementation with support for saving and loading arbitrary data. See `RSTimer` for more info on timers themselves.
 **/
-abstract class PersistTimer (runInterval: Int, identifier: String, isSoft: Boolean = false, isAuto: Boolean = false) : RSTimer (runInterval, identifier, isSoft, isAuto) {
+abstract class PersistTimer (runInterval: Int, identifier: String, isSoft: Boolean = false, isAuto: Boolean = false, flags: Array<TimerFlag> = arrayOf()) : RSTimer (runInterval, identifier, isSoft, isAuto, flags) {
     open fun save (root: JSONObject, entity: Entity) {
         root["ticksLeft"] = (nextExecution - getWorldTicks()).toString()
     }

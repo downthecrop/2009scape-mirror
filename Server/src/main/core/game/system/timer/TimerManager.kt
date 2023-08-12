@@ -27,11 +27,14 @@ class TimerManager (val entity: Entity) {
             if (timer.nextExecution > getWorldTicks()) continue
             if (!canRunNormalTimers && !timer.isSoft) continue
 
-            if (timer.run(entity)) {
-                timer.nextExecution = getWorldTicks() + timer.runInterval
-            } else {
-                timer.nextExecution = Int.MAX_VALUE
-                toRemoveTimers.add(timer)
+            try {
+                if (timer.run(entity)) {
+                    timer.nextExecution = getWorldTicks() + timer.runInterval
+                } else removeTimer(timer)
+            } catch (e: Exception) {
+                log (this::class.java, Log.ERR, "Prematurely removing timer ${timer::class.java.simpleName} from ${entity.name} because it threw an exception when ran. Exception follows:")
+                e.printStackTrace()
+                removeTimer(timer)
             }
         }
 
@@ -47,6 +50,13 @@ class TimerManager (val entity: Entity) {
         activeTimers.clear()
         newTimers.clear()
         toRemoveTimers.clear()
+    }
+
+    fun onEntityDeath() {
+        for (timer in activeTimers) {
+            if (timer.flags.contains(TimerFlag.ClearOnDeath))
+                removeTimer(timer)
+        }
     }
 
     fun saveTimers (root: JSONObject) {
@@ -82,10 +92,10 @@ class TimerManager (val entity: Entity) {
     inline fun <reified T: RSTimer> removeTimer () {
         for (timer in activeTimers)
             if (timer is T)
-                toRemoveTimers.add(timer)
+                removeTimer(timer)
         for (timer in newTimers)
             if (timer is T)
-                toRemoveTimers.add(timer)
+                removeTimer(timer)
     }
 
     inline fun <reified T: RSTimer> getTimer () : T? {
@@ -118,13 +128,15 @@ class TimerManager (val entity: Entity) {
     fun removeTimer (identifier: String) {
         for (timer in activeTimers)
             if (timer.identifier == identifier)
-                toRemoveTimers.add(timer)
+                removeTimer(timer)
         for (timer in newTimers)
             if (timer.identifier == identifier)
-                toRemoveTimers.add(timer)
+                removeTimer(timer)
     }
 
     fun removeTimer (timer: RSTimer) {
+        timer.nextExecution = Int.MAX_VALUE
         toRemoveTimers.add(timer)
+        try { timer.onRemoval(entity) } catch (e: Exception) { e.printStackTrace() }
     }
 }

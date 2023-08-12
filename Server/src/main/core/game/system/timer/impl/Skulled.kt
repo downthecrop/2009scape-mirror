@@ -6,7 +6,7 @@ import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import org.json.simple.*
 
-class Skulled : PersistTimer (1, "skulled") {
+class Skulled : PersistTimer (1, "skulled", flags = arrayOf(TimerFlag.ClearOnDeath)) {
     override fun onRegister (entity: Entity) {
         if (entity !is Player) return
         entity.skullManager.setSkullIcon(0)

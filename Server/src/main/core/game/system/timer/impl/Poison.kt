@@ -16,7 +16,7 @@ import org.json.simple.*
  * Every time the damage is applied, the severity decreases by 1. Poison ends when severity reaches 0.
  * Example: 30 Severity. Deals 6 damage 5 times, then 5 damage 5 times, and so on.
 **/
-class Poison : PersistTimer (30, "poison") {
+class Poison : PersistTimer (30, "poison", flags = arrayOf(TimerFlag.ClearOnDeath)) {
     lateinit var damageSource: Entity
 
     var severity = 0

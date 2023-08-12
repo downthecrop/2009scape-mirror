@@ -9,7 +9,8 @@ import kotlin.reflect.full.createInstance
  * default PersistTimer behavior, which automatically starts the timer only if there's saved data for that timer present. In truth, there's very few
  * timers that should have isAuto true. 
 **/
-abstract class RSTimer (var runInterval: Int, val identifier: String = "generictimer", val isSoft: Boolean = false, val isAuto: Boolean = false) {
+abstract class RSTimer (var runInterval: Int, val identifier: String = "generictimer", val isSoft: Boolean = false, val isAuto: Boolean = false, val flags: Array<TimerFlag> = arrayOf()) {
+
     /**
      * Executed every time the run interval of the timer elapses.
      * Execution will be delayed if this timer has `isSoft` set to false (which 99% of timers should) if the entity has a modal open or is otherwise stalled.
@@ -27,6 +28,11 @@ abstract class RSTimer (var runInterval: Int, val identifier: String = "generict
      * Called by core code when the timer is first registered. Called after parse on PersistTimers.
     **/
     open fun onRegister (entity: Entity) {}
+
+    /**
+     * Called by core code when the timer is being removed.
+     */
+    open fun onRemoval (entity: Entity) {}
 
     var lastExecution: Int = 0
     var nextExecution: Int = 0
