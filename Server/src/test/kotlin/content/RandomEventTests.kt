@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.rs09.consts.Items
 import content.global.ame.RandomEventNPC
-import core.api.getTimer
-import core.api.getWorldTicks
+import core.api.*
 import core.game.system.timer.impl.AntiMacro
 import org.json.simple.JSONObject
 
@@ -36,7 +35,7 @@ class RandomEventTests {
         TestUtils.getMockPlayer("antimacrotimeremainingpersists").use { p ->
             val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer is null.")
             timer.nextExecution = getWorldTicks() + 666
-            p.relog()
+            p.relog(ticksToWait = 100)
             Assertions.assertEquals(getWorldTicks() + 666, getTimer<AntiMacro>(p)!!.nextExecution)
         }
     }
@@ -47,34 +46,34 @@ class RandomEventTests {
             TestUtils.advanceTicks(2, false)
             timer.nextExecution = 5 //run in 5 ticks
             TestUtils.advanceTicks(5, false)
-            Assertions.assertNotEquals(6, timer.nextExecution)
             Assertions.assertEquals(true, timer.nextExecution - getWorldTicks() >= AntiMacro.MIN_DELAY_TICKS)
             Assertions.assertEquals(true, timer.nextExecution - getWorldTicks() <= AntiMacro.MAX_DELAY_TICKS)
         }
     }
 
-    @Test fun shouldSpawnRandomEventWithinMAXTICKSGivenNoRestrictions() {
-        val p = TestUtils.getMockPlayer("Bill")
-        p.setAttribute("tutorial:complete", true) //tutorial has to be complete to spawn randoms
-        RandomEventManager.MIN_DELAY_TICKS = 10
-        RandomEventManager.MAX_DELAY_TICKS = 20
-        RandomEventManager().login(p)
-        TestUtils.advanceTicks(RandomEventManager.MAX_DELAY_TICKS + 5)
-        RandomEventManager.MIN_DELAY_TICKS = 3000
-        RandomEventManager.MAX_DELAY_TICKS = 9000
-        Assertions.assertNotNull(p.getAttribute("re-npc", null))
+    @Test fun shouldSpawnRandomEventGivenNoRestrictions() {
+        TestUtils.getMockPlayer("antimacroshouldspawnrandom").use {p ->
+            val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer is null!")
+            TestUtils.advanceTicks(5, false)
+            timer.nextExecution = getWorldTicks() + 5
+            TestUtils.advanceTicks(10, false)
+            Assertions.assertNotNull(p.getAttribute(AntiMacro.EVENT_NPC, null))
+            Assertions.assertEquals(true, p.getAttribute<RandomEventNPC>(AntiMacro.EVENT_NPC).isActive)
+        }
     }
 
     @Test fun teleportAndNotePunishmentShouldNotAffectAlreadyNotedItems() {
-        val p = TestUtils.getMockPlayer("Shitforbrains")
-        p.setAttribute("tutorial:complete", true)
-        RandomEventManager().login(p)
+        TestUtils.getMockPlayer("teleportpunishment1").use {p ->
+            val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer is null!")
+            TestUtils.advanceTicks(5, false)
+            timer.nextExecution = getWorldTicks() + 5
+            TestUtils.advanceTicks(10, false)
 
-        p.inventory.add(Item(Items.RAW_SHARK_384, 1000))
-        content.global.ame.RandomEventManager.getInstance(p)?.fireEvent()
-        p.getAttribute<RandomEventNPC>("re-npc")!!.noteAndTeleport()
+            addItem(p, Items.RAW_SHARK_384, 1000)
+            getAttribute<RandomEventNPC?>(p, AntiMacro.EVENT_NPC, null)!!.noteAndTeleport()
 
-        Assertions.assertEquals(1000, p.inventory.getAmount(Items.RAW_SHARK_384))
+            Assertions.assertEquals(1000, amountInInventory(p, Items.RAW_SHARK_384))
+        }
     }
 
     @Test fun teleportAndNotePunishmentShouldNoteNotableUnnotedItems() {

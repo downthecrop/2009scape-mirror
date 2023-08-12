@@ -125,6 +125,7 @@ class MockPlayer(name: String) : Player(PlayerDetails(name)), AutoCloseable {
 
     fun flagTutComplete(complete: Boolean) {
         this.setAttribute("/save:tutorial:complete", complete)
+        this.setAttribute("/save:rules:confirmed", complete)
     }
 
     override fun update() {
@@ -149,7 +150,7 @@ class MockPlayer(name: String) : Player(PlayerDetails(name)), AutoCloseable {
         this.playerFlags.lastSceneGraph = location
     }
 
-    fun relog() {
+    fun relog(ticksToWait: Int = -1) {
         val json = PlayerSaver(this).populate()
         val parse = PlayerSaveParser(this)
         parse.saveFile = json
@@ -168,6 +169,8 @@ class MockPlayer(name: String) : Player(PlayerDetails(name)), AutoCloseable {
         scripts = ScriptProcessor(this)
         clearAttributes()
         hasInit = false
+
+        if (ticksToWait > 0) TestUtils.advanceTicks(ticksToWait, false)
 
         configureBasicProperties()
         parse.parseData()
