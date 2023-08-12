@@ -1,15 +1,12 @@
 package content
 
 import TestUtils
-import content.global.ame.RandomEventManager
-import core.game.node.item.Item
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
-import org.rs09.consts.Items
 import content.global.ame.RandomEventNPC
 import core.api.*
 import core.game.system.timer.impl.AntiMacro
-import org.json.simple.JSONObject
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
+import org.rs09.consts.Items
 
 class RandomEventTests {
     init {

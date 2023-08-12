@@ -31,7 +31,7 @@ class AntiMacro : PersistTimer(0, "antimacro", isAuto = true) {
         if (entity !is Player)
             entity.timers.removeTimer(this)
 
-        if (nextExecution == getWorldTicks())
+        if (runInterval == 0)
             setNextExecution()
     }
 
@@ -40,7 +40,8 @@ class AntiMacro : PersistTimer(0, "antimacro", isAuto = true) {
     }
 
     override fun parse(root: JSONObject, entity: Entity) {
-        nextExecution = getWorldTicks() + (root["ticksRemaining"]?.toString()?.toIntOrNull() ?: 0)
+        runInterval = (root["ticksRemaining"]?.toString()?.toIntOrNull() ?: 0)
+        nextExecution = getWorldTicks() + runInterval
     }
 
     private fun setNextExecution() {
