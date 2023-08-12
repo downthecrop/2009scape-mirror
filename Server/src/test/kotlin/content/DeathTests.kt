@@ -153,6 +153,38 @@ class DeathTests {
         Assertions.assertEquals(true, newGrave?.isActive)
     }
 
+    @Test fun graveDeserializedFromServerStoreShouldNaturallyExpire() {
+        TestUtils.getMockPlayer("graveExpirationFromDeserializationTest").use {p ->
+            val inventory = arrayOf(
+                Items.BRONZE_2H_SWORD_1307.asItem(),
+                Items.BRONZE_AXE_1351.asItem()
+            )
+            val startTime = GameWorld.ticks
+            val grave = GraveController.produceGrave(GraveType.MEM_PLAQUE)
+            grave.initialize(p, Location.create(0,0,0), inventory)
+            val expectedTicksRemaining = secondsToTicks(GraveType.MEM_PLAQUE.durationMinutes * 60) - (GameWorld.ticks - startTime)
+            Assertions.assertEquals(expectedTicksRemaining, grave.ticksRemaining)
+
+            GraveController.serializeToServerStore()
+            GraveController.activeGraves.remove(p.details.uid)
+            GraveController.deserializeFromServerStore()
+
+            var newGrave = GraveController.activeGraves[p.details.uid]
+            Assertions.assertNotNull(newGrave)
+            Assertions.assertEquals(expectedTicksRemaining, newGrave?.ticksRemaining ?: -1)
+            Assertions.assertEquals(2, newGrave?.getItems()?.size ?: -1)
+
+            TestUtils.advanceTicks(expectedTicksRemaining + 1, false)
+            Assertions.assertEquals(null, GraveController.activeGraves[p.details.uid])
+
+            GraveController.serializeToServerStore()
+            GraveController.deserializeFromServerStore()
+
+            newGrave = GraveController.activeGraves[p.details.uid]
+            Assertions.assertNull(newGrave)
+        }
+    }
+
     @Test fun regularDeathShouldSpawnGraveWithItems() {
         val inventory = arrayOf(
                 Items.RUNE_SCIMITAR_1333.asItem(),
