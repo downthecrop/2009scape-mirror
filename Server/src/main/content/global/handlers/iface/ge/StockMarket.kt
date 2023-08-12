@@ -19,6 +19,7 @@ import core.game.ge.PriceIndex
 import core.game.interaction.InterfaceListener
 import core.tools.Log
 import core.tools.SystemLogger
+import kotlin.math.min
 
 /**
  * Handles the grand exchange interface (Stock Market)
@@ -216,19 +217,28 @@ class StockMarket : InterfaceListener {
         offer.visualize(player)
     }
 
-    fun confirmOffer(player: Player, offer: GrandExchangeOffer, index: Int)
+    enum class OfferConfirmResult {
+        Success,
+        ZeroCoins,
+        TooManyCoins,
+        NotEnoughItemsOrCoins,
+        ItemRemovalFailure,
+        OfferPlacementError
+    }
+
+    fun confirmOffer(player: Player, offer: GrandExchangeOffer, index: Int) : OfferConfirmResult
     {
         if(offer.offeredValue < 1)
         {
             playAudio(player, Audio(4039, 1, 1))
             sendMessage(player, "You can't make an offer for 0 coins.")
-            return
+            return OfferConfirmResult.ZeroCoins
         }
         if(offer.amount > Int.MAX_VALUE / offer.offeredValue)
         {
             playAudio(player, Audio(4039, 1, 1))
             sendMessage(player, "You can't ${if(offer.sell) "sell" else "buy"} this much!")
-            return
+            return OfferConfirmResult.TooManyCoins
         }
         offer.index = index
         if(offer.sell)
@@ -239,21 +249,25 @@ class StockMarket : InterfaceListener {
                 playAudio(player, Audio(4039, 1, 1))
                 sendMessage(player, "You do not have enough of this item in your inventory to cover the")
                 sendMessage(player, "offer.")
-                return
+                return OfferConfirmResult.NotEnoughItemsOrCoins
             }
-            var item: Item
-            val amountUnnoted = amountInInventory(player, offer.itemID)
+            val amountUnnoted = min(amountInInventory(player, offer.itemID), offer.amount)
             val amountLeft = offer.amount - amountUnnoted
-            val removedUnnoted = removeItem(player, Item(offer.itemID, amountUnnoted).also { item = it })
+            val removedUnnoted = if (amountUnnoted > 0) removeItem(player, Item(offer.itemID, amountUnnoted)) else true
             val removeNoted = if (amountLeft > 0) removeItem(player, Item(itemDefinition(offer.itemID).noteId, amountLeft)) else true
-            if (!removedUnnoted || !removeNoted) return
+            if (!removedUnnoted || !removeNoted) return OfferConfirmResult.ItemRemovalFailure
             if(GrandExchange.dispatch(player, offer))
             {
                 player.removeAttribute("ge-temp")
             }
             else
             {
-                addItem(player, item.id, item.amount)
+                if (amountUnnoted > 0)
+                    addItem(player, offer.itemID, offer.amount - amountLeft)
+                if (amountLeft > 0)
+                    addItem(player, itemDefinition(offer.itemID).noteId, amountLeft)
+                sendMessage(player, "Unable to place GE offer. Please try again.")
+                return OfferConfirmResult.OfferPlacementError
             }
         }
         else
@@ -263,7 +277,7 @@ class StockMarket : InterfaceListener {
             {
                 playAudio(player, Audio(4039, 1, 1))
                 sendMessage(player, "You do not have enough coins to cover the offer.")
-                return
+                return OfferConfirmResult.NotEnoughItemsOrCoins
             }
             if(GrandExchange.dispatch(player, offer) && removeItem(player, Item(995, total)))
             {
@@ -273,6 +287,7 @@ class StockMarket : InterfaceListener {
         playAudio(player, Audio(4043, 1, 1))
         offer.visualize(player)
         toMainInterface(player)
+        return OfferConfirmResult.Success
     }
 
     fun getInventoryAmount(player: Player, itemId: Int): Int {
