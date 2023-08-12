@@ -12,6 +12,9 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Handles the Abyssal whip's Energy drain special attack.
@@ -62,12 +65,12 @@ public final class EnergyDrainSpecialHandler extends MeleeSwingHandler implement
 			((Player) entity).getSettings().updateRunEnergy(-10);
 		}
 		state.setEstimatedHit(hit);
-		entity.asPlayer().getAudioManager().send(new Audio(2713), true);
 		return 1;
 	}
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
+		playAudio(entity.asPlayer(), Sounds.ENERGYDRAIN_2713, 10, 0, true, entity.asPlayer().getLocation(), 5);
 		entity.animate(ANIMATION);
 		victim.graphics(GRAPHIC);
 	}

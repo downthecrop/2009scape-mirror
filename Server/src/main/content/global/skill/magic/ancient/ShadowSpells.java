@@ -17,6 +17,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
 /**
  * Handles the Shadow spells from the Ancient spellbook.
@@ -81,10 +82,10 @@ public final class ShadowSpells extends CombatSpell {
 
 	@Override
 	public Plugin<SpellType> newInstance(SpellType arg) throws Throwable {
-		SpellBook.ANCIENT.register(12, new ShadowSpells(SpellType.RUSH, 52, 31.0, 175, 176, new Animation(1978, Priority.HIGH), null, RUSH_PROJECTILE, RUSH_END, Runes.SOUL_RUNE.getItem(1), Runes.DEATH_RUNE.getItem(2), Runes.CHAOS_RUNE.getItem(2), Runes.AIR_RUNE.getItem(1)));
-		SpellBook.ANCIENT.register(14, new ShadowSpells(SpellType.BURST, 64, 37.0, 177, 178, new Animation(1979, Priority.HIGH), null, BURST_PROJECTILE, BURST_END, Runes.SOUL_RUNE.getItem(2), Runes.DEATH_RUNE.getItem(2), Runes.CHAOS_RUNE.getItem(4), Runes.AIR_RUNE.getItem(1)));
-		SpellBook.ANCIENT.register(13, new ShadowSpells(SpellType.BLITZ, 76, 43.0, 181, 182, new Animation(1978, Priority.HIGH), null, null, BLITZ_END, Runes.SOUL_RUNE.getItem(2), Runes.BLOOD_RUNE.getItem(2), Runes.DEATH_RUNE.getItem(2), Runes.AIR_RUNE.getItem(2)));
-		SpellBook.ANCIENT.register(15, new ShadowSpells(SpellType.BARRAGE, 88, 48.0, 181, 185, new Animation(1979, Priority.HIGH), null, null, BARRAGE_END, Runes.SOUL_RUNE.getItem(3), Runes.BLOOD_RUNE.getItem(2), Runes.DEATH_RUNE.getItem(4), Runes.AIR_RUNE.getItem(4)));
+		SpellBook.ANCIENT.register(12, new ShadowSpells(SpellType.RUSH, 52, 31.0, Sounds.SHADOW_CAST_178, Sounds.SHADOW_RUSH_IMPACT_179, new Animation(1978, Priority.HIGH), null, RUSH_PROJECTILE, RUSH_END, Runes.SOUL_RUNE.getItem(1), Runes.DEATH_RUNE.getItem(2), Runes.CHAOS_RUNE.getItem(2), Runes.AIR_RUNE.getItem(1)));
+		SpellBook.ANCIENT.register(14, new ShadowSpells(SpellType.BURST, 64, 37.0, Sounds.SHADOW_CAST_178, Sounds.SHADOW_BURST_IMPACT_177, new Animation(1979, Priority.HIGH), null, BURST_PROJECTILE, BURST_END, Runes.SOUL_RUNE.getItem(2), Runes.DEATH_RUNE.getItem(2), Runes.CHAOS_RUNE.getItem(4), Runes.AIR_RUNE.getItem(1)));
+		SpellBook.ANCIENT.register(13, new ShadowSpells(SpellType.BLITZ, 76, 43.0, Sounds.SHADOW_CAST_178, Sounds.SHADOW_BLITZ_IMPACT_176, new Animation(1978, Priority.HIGH), null, null, BLITZ_END, Runes.SOUL_RUNE.getItem(2), Runes.BLOOD_RUNE.getItem(2), Runes.DEATH_RUNE.getItem(2), Runes.AIR_RUNE.getItem(2)));
+		SpellBook.ANCIENT.register(15, new ShadowSpells(SpellType.BARRAGE, 88, 48.0, Sounds.SHADOW_CAST_178, Sounds.SHADOW_BARRAGE_IMPACT_175, new Animation(1979, Priority.HIGH), null, null, BARRAGE_END, Runes.SOUL_RUNE.getItem(3), Runes.BLOOD_RUNE.getItem(2), Runes.DEATH_RUNE.getItem(4), Runes.AIR_RUNE.getItem(4)));
 		return this;
 	}
 

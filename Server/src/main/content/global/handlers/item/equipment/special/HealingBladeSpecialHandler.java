@@ -12,6 +12,9 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Handles the healing blade special attack.
@@ -69,12 +72,12 @@ public final class HealingBladeSpecialHandler extends MeleeSwingHandler implemen
 		}
 		entity.getSkills().heal(healthRestore);
 		entity.getSkills().incrementPrayerPoints(prayerRestore);
-		entity.asPlayer().getAudioManager().send(new Audio(3857), true);
 		return 1;
 	}
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
+		playAudio(entity.asPlayer(), Sounds.GODWARS_SARADOMIN_SPECIAL_3857, 10, 0, true, entity.asPlayer().getLocation(), 5);
 		entity.visualize(ANIMATION, GRAPHIC);
 	}
 

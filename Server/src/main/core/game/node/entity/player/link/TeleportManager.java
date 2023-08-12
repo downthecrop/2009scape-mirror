@@ -11,6 +11,7 @@ import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
+import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.hasTimerActive;
 
@@ -240,6 +241,10 @@ public class TeleportManager {
 					@Override
 					public boolean pulse() {
 						if (delay == 0) {
+							if (entity instanceof Player) {
+								entity.asPlayer().getAudioManager().send(new Audio(Sounds.BLOCK_TELEPORT_197), true);
+							}
+
 							entity.getAnimator().forceAnimation(new Animation(getSettings().getStartEmote()));
 							entity.graphics(new Graphics(getSettings().getStartGfx()));
 						} else if (delay == 4) {
@@ -449,9 +454,9 @@ public class TeleportManager {
 						switch (++delay) {
 							case 2:
 								entity.animate(Animation.create(3265));
-                                if(entity instanceof Player) {
-                                    ((Player) entity).getAudioManager().send(1098, 1);
-                                }
+								if(entity instanceof Player) {
+									((Player) entity).getAudioManager().send(1098, 1);
+								}
 								break;
 							case 4:
 								entity.animate(Animation.create(3266));
@@ -831,3 +836,4 @@ public class TeleportManager {
 		this.teleportType = teleportType;
 	}
 }
+

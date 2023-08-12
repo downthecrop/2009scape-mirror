@@ -16,6 +16,9 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
 import core.game.node.entity.combat.RangeSwingHandler;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Represents the descent of darkness sepcial handler.
@@ -121,8 +124,6 @@ public final class DescentOfDarknessSpecialHandler extends RangeSwingHandler imp
 			start = state.getAmmunition().getStartGraphics();
 			if (state.isFrozen()) {
 				if (entity instanceof Player) {
-					entity.asPlayer().getAudioManager().send(new Audio(3736), true);
-					entity.asPlayer().getAudioManager().send(new Audio(3737), true);
 				}
 				DRAGON_PROJECTILE.copy(entity, victim, 5).send();
 			} else {
@@ -145,6 +146,8 @@ public final class DescentOfDarknessSpecialHandler extends RangeSwingHandler imp
 
 	@Override
 	public void visualizeImpact(Entity entity, Entity victim, BattleState state) {
+		playAudio(entity.asPlayer(), Sounds.DARKBOW_SHADOW_ATTACK_3736, 10, 20, true, victim.getLocation(), 10);
+		playAudio(entity.asPlayer(), Sounds.DARKBOW_SHADOW_IMPACT_3737, 10, 40, true, victim.getLocation(), 10);
 		victim.visualize(victim.getProperties().getDefenceAnimation(), state.isFrozen() ? DRAGON_IMPACT : DARKNESS_IMPACT);
 	}
 }

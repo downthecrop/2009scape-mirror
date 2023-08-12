@@ -11,6 +11,9 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Represents the Seercull's special attack which lowers the opponent's magic
@@ -66,6 +69,7 @@ public final class SeercullSpecialHandler extends RangeSwingHandler implements P
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
+		playAudio(entity.asPlayer(), Sounds.SOULSHOT_2546, 10, 0, true, entity.asPlayer().getLocation(), 5);
 		victim.graphics(new Graphics(474));
 		int speed = (int) (35 + (entity.getLocation().getDistance(victim.getLocation()) * 10));
 		entity.visualize(entity.getProperties().getAttackAnimation(), DRAWBACK_GFX);

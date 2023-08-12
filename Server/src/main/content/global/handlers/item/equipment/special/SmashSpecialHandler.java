@@ -12,6 +12,9 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Handles Statius' Warhammer special attack - Smash.
@@ -66,6 +69,7 @@ public final class SmashSpecialHandler extends MeleeSwingHandler implements Plug
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
+		playAudio(entity.asPlayer(), Sounds.TZHAAR_KET_OM_CRUSH_2520, 10, 0, true, entity.asPlayer().getLocation(), 4);
 		entity.visualize(ANIMATION, GRAPHIC);
 	}
 }

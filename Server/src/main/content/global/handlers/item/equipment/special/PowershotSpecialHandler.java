@@ -10,6 +10,9 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
 import core.game.node.entity.combat.RangeSwingHandler;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Handles the Magic longbow special attack "Powershot".
@@ -57,7 +60,6 @@ public final class PowershotSpecialHandler extends RangeSwingHandler implements 
 		if (isAccurateImpact(entity, victim, CombatStyle.RANGE, 1.98, 1.0)) {
 			hit = RandomFunction.random(calculateHit(entity, victim, 1.0));
 		}
-		entity.asPlayer().getAudioManager().send(2536);
 		state.setEstimatedHit(hit);
 		Companion.useAmmo(entity, state, victim.getLocation());
 		return 1 + (int) Math.ceil(entity.getLocation().getDistance(victim.getLocation()) * 0.3);
@@ -65,6 +67,7 @@ public final class PowershotSpecialHandler extends RangeSwingHandler implements 
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
+		playAudio(entity.asPlayer(), Sounds.POWERSHOT_2536, 10, 0, true, entity.asPlayer().getLocation(), 5);
 		entity.visualize(state.getRangeWeapon().getAnimation(), GRAPHIC);
 		int speed = (int) (46 + (entity.getLocation().getDistance(victim.getLocation()) * 5));
 		Projectile.create(entity, victim, 249, 40, 36, 45, speed, 5, 11).send();

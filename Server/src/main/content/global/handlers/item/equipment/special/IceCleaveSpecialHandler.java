@@ -11,6 +11,7 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.*;
 
@@ -60,7 +61,6 @@ public final class IceCleaveSpecialHandler extends MeleeSwingHandler implements 
 			hit = RandomFunction.random(calculateHit(entity, victim, 1.005));
 		}
 		state.setEstimatedHit(hit);
-		entity.asPlayer().getAudioManager().send(3846);
 		return 1;
 	}
 
@@ -75,6 +75,7 @@ public final class IceCleaveSpecialHandler extends MeleeSwingHandler implements 
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
+		playAudio(entity.asPlayer(), Sounds.GODWARS_GODSWORD_SLASH_3846, 10, 0, true, entity.asPlayer().getLocation(), 5);
 		entity.visualize(ANIMATION, GRAPHIC);
 	}
 }

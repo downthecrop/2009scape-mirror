@@ -12,6 +12,9 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Handles the Saradomin sword special attack.
@@ -56,7 +59,6 @@ public final class SaradominsLightningHandler extends MeleeSwingHandler implemen
 		}
 		state.setEstimatedHit(hit);
 		state.setSecondaryHit(secondary);
-		entity.asPlayer().getAudioManager().send(new Audio(3853), true);
 		return 1;
 	}
 
@@ -75,8 +77,10 @@ public final class SaradominsLightningHandler extends MeleeSwingHandler implemen
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
+		playAudio(entity.asPlayer(), Sounds.GODWARS_SARADOMIN_MAGIC_IMPACT_3853, 10, 0, true, entity.asPlayer().getLocation(), 5);
 		entity.visualize(ANIMATION, GRAPHIC);
 	}
+
 
 	@Override
 	public Object fireEvent(String identifier, Object... args) {

@@ -17,6 +17,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
 /**
  * Handles the Blood spells from the Ancient spellbook.
@@ -80,10 +81,10 @@ public final class BloodSpells extends CombatSpell {
 
 	@Override
 	public Plugin<SpellType> newInstance(SpellType arg) throws Throwable {
-		SpellBook.ANCIENT.register(4, new BloodSpells(SpellType.RUSH, 56, 33.0, -1, -1, new Animation(1978, Priority.HIGH), null, RUSH_PROJECTILE, RUSH_END, Runes.BLOOD_RUNE.getItem(1), Runes.DEATH_RUNE.getItem(2), Runes.CHAOS_RUNE.getItem(2)));
-		SpellBook.ANCIENT.register(6, new BloodSpells(SpellType.BURST, 68, 39.0, -1, -1, new Animation(1979, Priority.HIGH), null, null, BURST_END, Runes.BLOOD_RUNE.getItem(2), Runes.DEATH_RUNE.getItem(2), Runes.CHAOS_RUNE.getItem(4)));
-		SpellBook.ANCIENT.register(5, new BloodSpells(SpellType.BLITZ, 80, 45.0, -1, -1, new Animation(1978, Priority.HIGH), null, BLITZ_PROJECTILE, BLITZ_END, Runes.BLOOD_RUNE.getItem(4), Runes.DEATH_RUNE.getItem(2)));
-		SpellBook.ANCIENT.register(7, new BloodSpells(SpellType.BARRAGE, 92, 51.0, -1, -1, new Animation(1979, Priority.HIGH), null, null, BARRAGE_END, Runes.SOUL_RUNE.getItem(1), Runes.BLOOD_RUNE.getItem(4), Runes.DEATH_RUNE.getItem(4)));
+		SpellBook.ANCIENT.register(4, new BloodSpells(SpellType.RUSH, 56, 33.0, Sounds.BLOOD_RUSH_CASTING_108, Sounds.BLOOD_RUSH_IMPACT_110, new Animation(1978, Priority.HIGH), null, RUSH_PROJECTILE, RUSH_END, Runes.BLOOD_RUNE.getItem(1), Runes.DEATH_RUNE.getItem(2), Runes.CHAOS_RUNE.getItem(2)));
+		SpellBook.ANCIENT.register(6, new BloodSpells(SpellType.BURST, 68, 39.0, Sounds.BLOOD_CAST_106, Sounds.BLOOD_BURST_IMPACT_105, new Animation(1979, Priority.HIGH), null, null, BURST_END, Runes.BLOOD_RUNE.getItem(2), Runes.DEATH_RUNE.getItem(2), Runes.CHAOS_RUNE.getItem(4)));
+		SpellBook.ANCIENT.register(5, new BloodSpells(SpellType.BLITZ, 80, 45.0, Sounds.BLOOD_CAST_106, Sounds.BLOOD_BLITZ_IMPACT_104, new Animation(1978, Priority.HIGH), null, BLITZ_PROJECTILE, BLITZ_END, Runes.BLOOD_RUNE.getItem(4), Runes.DEATH_RUNE.getItem(2)));
+		SpellBook.ANCIENT.register(7, new BloodSpells(SpellType.BARRAGE, 92, 51.0, Sounds.BLOOD_CAST_106, Sounds.BLOOD_BARRAGE_IMPACT_102, new Animation(1979, Priority.HIGH), null, null, BARRAGE_END, Runes.SOUL_RUNE.getItem(1), Runes.BLOOD_RUNE.getItem(4), Runes.DEATH_RUNE.getItem(4)));
 		return this;
 	}
 

@@ -18,6 +18,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.*;
 
@@ -93,7 +94,7 @@ public final class IceSpells extends CombatSpell {
 	 * @param end The end graphics.
 	 */
 	private IceSpells(SpellType type, int level, double baseExperience, int impactSound, Animation anim, Graphics start, Projectile projectile, Graphics end, Item... runes) {
-		super(type, SpellBook.ANCIENT, level, baseExperience, 171, impactSound, anim, start, projectile, end, runes);
+		super(type, SpellBook.ANCIENT, level, baseExperience, Sounds.ICE_CAST_171, impactSound, anim, start, projectile, end, runes);
 	}
 
 	@Override
@@ -120,10 +121,10 @@ public final class IceSpells extends CombatSpell {
 
 	@Override
 	public Plugin<SpellType> newInstance(SpellType arg) throws Throwable {
-		SpellBook.ANCIENT.register(0, new IceSpells(SpellType.RUSH, 58, 34.0, 173, new Animation(1978, Priority.HIGH), null, RUSH_PROJECTILE, RUSH_END, Runes.DEATH_RUNE.getItem(2), Runes.CHAOS_RUNE.getItem(2), Runes.WATER_RUNE.getItem(2)));
-		SpellBook.ANCIENT.register(2, new IceSpells(SpellType.BURST, 70, 40.0, 170, new Animation(1979, Priority.HIGH), null, BURST_PROJECTILE, BURST_END, Runes.DEATH_RUNE.getItem(2), Runes.CHAOS_RUNE.getItem(4), Runes.WATER_RUNE.getItem(4)));
-		SpellBook.ANCIENT.register(1, new IceSpells(SpellType.BLITZ, 82, 46.0, 169, new Animation(1978, Priority.HIGH), BLITZ_START, null, BLITZ_END, Runes.BLOOD_RUNE.getItem(2), Runes.DEATH_RUNE.getItem(2), Runes.WATER_RUNE.getItem(3)));
-		SpellBook.ANCIENT.register(3, new IceSpells(SpellType.BARRAGE, 94, 52.0, 168, new Animation(1979, Priority.HIGH), null, BARRAGE_PROJECTILE, BARRAGE_END, Runes.BLOOD_RUNE.getItem(2), Runes.DEATH_RUNE.getItem(4), Runes.WATER_RUNE.getItem(6)));
+		SpellBook.ANCIENT.register(0, new IceSpells(SpellType.RUSH, 58, 34.0, Sounds.ICE_RUSH_IMPACT_173, new Animation(1978, Priority.HIGH), null, RUSH_PROJECTILE, RUSH_END, Runes.DEATH_RUNE.getItem(2), Runes.CHAOS_RUNE.getItem(2), Runes.WATER_RUNE.getItem(2)));
+		SpellBook.ANCIENT.register(2, new IceSpells(SpellType.BURST, 70, 40.0, Sounds.ICE_BURST_IMPACT_170, new Animation(1979, Priority.HIGH), null, BURST_PROJECTILE, BURST_END, Runes.DEATH_RUNE.getItem(2), Runes.CHAOS_RUNE.getItem(4), Runes.WATER_RUNE.getItem(4)));
+		SpellBook.ANCIENT.register(1, new IceSpells(SpellType.BLITZ, 82, 46.0, Sounds.ICE_BLITZ_IMPACT_169, new Animation(1978, Priority.HIGH), BLITZ_START, null, BLITZ_END, Runes.BLOOD_RUNE.getItem(2), Runes.DEATH_RUNE.getItem(2), Runes.WATER_RUNE.getItem(3)));
+		SpellBook.ANCIENT.register(3, new IceSpells(SpellType.BARRAGE, 94, 52.0, Sounds.ICE_BARRAGE_IMPACT_168, new Animation(1979, Priority.HIGH), null, BARRAGE_PROJECTILE, BARRAGE_END, Runes.BLOOD_RUNE.getItem(2), Runes.DEATH_RUNE.getItem(4), Runes.WATER_RUNE.getItem(6)));
 		return this;
 	}
 

@@ -12,6 +12,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.*;
 
@@ -62,6 +63,7 @@ public final class ExcaliburSpecialHandler extends MeleeSwingHandler implements 
         if (!p.getSettings().drainSpecial(SPECIAL_ENERGY))
             return -1;
         p.sendChat("For Camelot!");
+        playAudio(entity.asPlayer(), Sounds.SANCTUARY_2539);
         p.visualize(ANIMATION, GRAPHIC);
         switch(p.getEquipment().get(EquipmentContainer.SLOT_WEAPON).getId()) {
             case 35: // Regular ol' excalibur

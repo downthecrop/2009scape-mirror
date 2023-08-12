@@ -12,6 +12,9 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Handles the Judgement special attack.
@@ -59,12 +62,12 @@ public final class JudgementSpecialHandler extends MeleeSwingHandler implements 
 			hit = RandomFunction.random(calculateHit(entity, victim, 1.25));
 		}
 		state.setEstimatedHit(hit);
-		entity.asPlayer().getAudioManager().send(new Audio(3865), true);
 		return 1;
 	}
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
+		playAudio(entity.asPlayer(), Sounds.GODWARS_GODSWORD_SPECIAL_ATTACK_3865, 10, 0, true, entity.asPlayer().getLocation(), 5);
 		entity.visualize(ANIMATION, GRAPHIC);
 	}
 }

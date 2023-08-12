@@ -12,6 +12,9 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Handles the Rampage special attack.
@@ -58,6 +61,7 @@ public final class RampageSpecialHandler extends MeleeSwingHandler implements Pl
 			return -1;
 		}
 		p.sendChat("Raarrrrrgggggghhhhhhh!");
+		playAudio(entity.asPlayer(), Sounds.RAMPAGE_2538, 1);
 		p.visualize(ANIMATION, GRAPHIC);
 		@SuppressWarnings("unused")
 		int boost = 0;
@@ -70,7 +74,6 @@ public final class RampageSpecialHandler extends MeleeSwingHandler implements Pl
 			p.getSkills().updateLevel(i, (int) -drain, (int) (p.getSkills().getStaticLevel(i) - drain));
 		}
 		p.getSkills().updateLevel(Skills.STRENGTH, (int) (p.getSkills().getStaticLevel(Skills.STRENGTH) * 0.20));
-		p.getAudioManager().send(new Audio(386), true);
 		return -1;
 	}
 

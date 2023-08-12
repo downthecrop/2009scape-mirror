@@ -16,6 +16,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.*;
 
@@ -92,10 +93,10 @@ public final class SmokeSpells extends CombatSpell {
 
 	@Override
 	public Plugin<SpellType> newInstance(SpellType arg) throws Throwable {
-		SpellBook.ANCIENT.register(8, new SmokeSpells(SpellType.RUSH, 50, 30.0, 176, 177, new Animation(1978, Priority.HIGH), null, RUSH_PROJECTILE, RUSH_END, Runes.DEATH_RUNE.getItem(2), Runes.CHAOS_RUNE.getItem(2), Runes.FIRE_RUNE.getItem(1), Runes.AIR_RUNE.getItem(1)));
-		SpellBook.ANCIENT.register(10, new SmokeSpells(SpellType.BURST, 62, 36.0, 179, 180, new Animation(1979, Priority.HIGH), null, BURST_PROJECTILE, BURST_END, Runes.DEATH_RUNE.getItem(2), Runes.CHAOS_RUNE.getItem(4), Runes.FIRE_RUNE.getItem(2), Runes.AIR_RUNE.getItem(2)));
-		SpellBook.ANCIENT.register(9, new SmokeSpells(SpellType.BLITZ, 74, 42.0, 183, 184, new Animation(1978, Priority.HIGH), null, BLITZ_PROJECTILE, BLITZ_END, Runes.BLOOD_RUNE.getItem(2), Runes.DEATH_RUNE.getItem(2), Runes.FIRE_RUNE.getItem(2), Runes.AIR_RUNE.getItem(2)));
-		SpellBook.ANCIENT.register(11, new SmokeSpells(SpellType.BARRAGE, 86, 48.0, 183, 185, new Animation(1979, Priority.HIGH), null, BARRAGE_PROJECTILE, BARRAGE_END, Runes.BLOOD_RUNE.getItem(2), Runes.DEATH_RUNE.getItem(4), Runes.FIRE_RUNE.getItem(4), Runes.AIR_RUNE.getItem(4)));
+		SpellBook.ANCIENT.register(8, new SmokeSpells(SpellType.RUSH, 50, 30.0, Sounds.SMOKE_CAST_183, Sounds.SMOKE_RUSH_IMPACT_185, new Animation(1978, Priority.HIGH), null, RUSH_PROJECTILE, RUSH_END, Runes.DEATH_RUNE.getItem(2), Runes.CHAOS_RUNE.getItem(2), Runes.FIRE_RUNE.getItem(1), Runes.AIR_RUNE.getItem(1)));
+		SpellBook.ANCIENT.register(10, new SmokeSpells(SpellType.BURST, 62, 36.0, Sounds.SMOKE_CAST_183, Sounds.SMOKE_BURST_IMPACT_182, new Animation(1979, Priority.HIGH), null, BURST_PROJECTILE, BURST_END, Runes.DEATH_RUNE.getItem(2), Runes.CHAOS_RUNE.getItem(4), Runes.FIRE_RUNE.getItem(2), Runes.AIR_RUNE.getItem(2)));
+		SpellBook.ANCIENT.register(9, new SmokeSpells(SpellType.BLITZ, 74, 42.0, Sounds.SMOKE_CAST_183, Sounds.SMOKE_BLITZ_IMPACT_181, new Animation(1978, Priority.HIGH), null, BLITZ_PROJECTILE, BLITZ_END, Runes.BLOOD_RUNE.getItem(2), Runes.DEATH_RUNE.getItem(2), Runes.FIRE_RUNE.getItem(2), Runes.AIR_RUNE.getItem(2)));
+		SpellBook.ANCIENT.register(11, new SmokeSpells(SpellType.BARRAGE, 86, 48.0, Sounds.SMOKE_CAST_183, Sounds.SMOKE_BARRAGE_IMPACT_180, new Animation(1979, Priority.HIGH), null, BARRAGE_PROJECTILE, BARRAGE_END, Runes.BLOOD_RUNE.getItem(2), Runes.DEATH_RUNE.getItem(4), Runes.FIRE_RUNE.getItem(4), Runes.AIR_RUNE.getItem(4)));
 		return this;
 	}
 

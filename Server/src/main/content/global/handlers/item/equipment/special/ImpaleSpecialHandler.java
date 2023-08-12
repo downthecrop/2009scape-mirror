@@ -12,6 +12,9 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Handles the Rune claws special attack "Impale".
@@ -64,6 +67,7 @@ public final class ImpaleSpecialHandler extends MeleeSwingHandler implements Plu
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
+		playAudio(entity.asPlayer(), Sounds.IMPALE_2534, 10, 0, true, entity.asPlayer().getLocation(), 5);
 		if (((Player) entity).getDetails().getRights() == Rights.ADMINISTRATOR) {
 			entity.animate(Animation.create(2068));
 			return;

@@ -14,6 +14,9 @@ import core.plugin.Plugin;
 import core.tools.RandomFunction;
 import core.game.node.entity.combat.RangeSwingHandler;
 import core.game.world.GameWorld;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Handles the magic shortbow special attack "Snapshot".
@@ -72,7 +75,6 @@ public final class SnapshotSpecialHandler extends RangeSwingHandler implements P
 		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 0.9, 1.0)) {
 			hit = RandomFunction.random(max);
 		}
-		entity.asPlayer().getAudioManager().send(2545);
 		state.setSecondaryHit(hit);
 		Companion.useAmmo(entity, state, victim.getLocation());
 		return 1 + (int) Math.ceil(entity.getLocation().getDistance(victim.getLocation()) * 0.3);
@@ -100,6 +102,7 @@ public final class SnapshotSpecialHandler extends RangeSwingHandler implements P
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
+		playAudio(entity.asPlayer(), Sounds.SNAPSHOT_2545, 10, 0, true, entity.asPlayer().getLocation(), 5);
 		entity.visualize(ANIMATION, GRAPHIC);
 		int speed = (int) (27 + (entity.getLocation().getDistance(victim.getLocation()) * 5));
 		Projectile.create(entity, victim, 249, 40, 36, 20, speed, 15, 11).send();

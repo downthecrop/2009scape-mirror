@@ -13,6 +13,8 @@ import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.item.ItemPlugin;
+import core.game.world.map.MapDistance;
+import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
@@ -20,6 +22,7 @@ import core.plugin.Plugin;
 import core.game.node.entity.combat.CombatPulse;
 import core.game.world.GameWorld;
 import core.plugin.ClassScanner;
+import org.rs09.consts.Sounds;
 
 import java.util.concurrent.TimeUnit;
 
@@ -84,6 +87,7 @@ public final class DragonfireShieldPlugin extends OptionHandler {
                                                         setVarp(player, 301, 0);
 						}
 						player.removeAttribute("dfs_spec");
+						playAudio(entity.asPlayer(), Sounds.DRAGONSLAYER_SHIELDFIRE_3761, 10, 0, true, entity.asPlayer().getLocation(), 5);
 						Item shield = player.getEquipment().get(EquipmentContainer.SLOT_SHIELD);
 						if (shield == null || shield.getId() != 11283) {
 							return -1;
@@ -97,7 +101,13 @@ public final class DragonfireShieldPlugin extends OptionHandler {
 					}
 					return super.swing(entity, victim, state);
 				}
-			};
+				@Override
+				public void visualizeImpact(Entity entity, Entity victim, BattleState state) {
+						playAudio(entity.asPlayer(), Sounds.FIRESTRIKE_HIT_161, 10, 20, true, victim.getLocation(), 5);
+						super.visualizeImpact(entity, victim, state);
+				}
+
+				};
 			attack.setHandler(handler);
 			Entity victim = player.getProperties().getCombatPulse().getVictim();
 			if (player.getProperties().getCombatPulse().isAttacking() && handler.canSwing(player, victim) == InteractionType.STILL_INTERACT) {
@@ -110,6 +120,7 @@ public final class DragonfireShieldPlugin extends OptionHandler {
 			player.getInventory().replace(new Item(11284), item.getSlot());
 			player.graphics(Graphics.create(1160));
 			player.getPacketDispatch().sendMessage("You release the charges.");
+			playAudio(player,Sounds.DRAGONSLAYER_SHIELD_EMPTY_3760);
 			return true;
 		case "inspect":
 			if (item.getId() == 11284) {

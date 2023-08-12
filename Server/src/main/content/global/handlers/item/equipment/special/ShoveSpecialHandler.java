@@ -14,7 +14,9 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
+import static core.api.ContentAPIKt.playAudio;
 import static core.api.ContentAPIKt.stun;
 
 /**
@@ -104,12 +106,12 @@ public final class ShoveSpecialHandler extends MeleeSwingHandler implements Plug
 				victim.getWalkingQueue().addPath(dest.getX(), dest.getY());
 			}
 		}
-		entity.asPlayer().getAudioManager().send(2533);
 		return 1;
 	}
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
+		playAudio(entity.asPlayer(), Sounds.SHOVE_2544, 10, 0, true, entity.asPlayer().getLocation(), 5);
 		entity.visualize(ANIMATION, GRAPHIC);
 	}
 

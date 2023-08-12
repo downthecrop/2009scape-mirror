@@ -15,6 +15,7 @@ import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.*;
 
@@ -137,7 +138,7 @@ public class DragonfireSwingHandler extends CombatSwingHandler {
                     shield.setCharge(shield.getCharge() + 20);
                     EquipmentContainer.updateBonuses(p);
                     p.getPacketDispatch().sendMessage("Your dragonfire shield glows more brightly.");
-
+                    playAudio(p, Sounds.DRAGONSLAYER_ABSORB_FIRE_3740);
                     p.faceLocation(entity.getCenterLocation());
                     victim.visualize(Animation.create(6695), Graphics.create(1163));
                 } else {

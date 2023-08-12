@@ -16,6 +16,9 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Handles the Powerstab special attack.
@@ -94,6 +97,7 @@ public final class PowerstabSpecialHandler extends MeleeSwingHandler implements 
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
+		playAudio(entity.asPlayer(), Sounds.DRAGON_AXE_THUNDER_2530, 10, 0, true, entity.asPlayer().getLocation(), 6);
 		entity.visualize(ANIMATION, GRAPHIC);
 	}
 

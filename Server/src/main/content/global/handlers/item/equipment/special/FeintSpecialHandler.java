@@ -10,6 +10,9 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Handles Vesta's Longsword special attack, feint.
@@ -58,6 +61,7 @@ public final class FeintSpecialHandler extends MeleeSwingHandler implements Plug
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
+		playAudio(entity.asPlayer(), Sounds.CLEAVE_2529, 10, 0, true, entity.asPlayer().getLocation(), 5);
 		entity.animate(ANIMATION);
 	}
 }

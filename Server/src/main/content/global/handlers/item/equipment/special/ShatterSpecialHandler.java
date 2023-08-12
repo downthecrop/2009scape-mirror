@@ -12,6 +12,9 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Handles the Shatter special attack.
@@ -57,13 +60,13 @@ public final class ShatterSpecialHandler extends MeleeSwingHandler implements Pl
 		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 0.87, 1.0)) {
 			hit = RandomFunction.random(calculateHit(entity, victim, 1.3546));
 		}
-		entity.asPlayer().getAudioManager().send(new Audio(2541), true);
 		state.setEstimatedHit(hit);
 		return 1;
 	}
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
+		playAudio(entity.asPlayer(), Sounds.SHATTER_2541, 10, 0, true, entity.asPlayer().getLocation(), 5);
 		entity.visualize(ANIMATION, GRAPHIC);
 	}
 }
