@@ -11,6 +11,7 @@ import core.game.container.impl.EquipmentContainer;
 import core.game.container.impl.InventoryListener;
 import core.game.dialogue.DialogueInterpreter;
 import core.game.interaction.InteractPlugin;
+import core.game.interaction.InteractionListeners;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
@@ -54,6 +55,7 @@ import core.net.packet.context.SkillContext;
 import core.net.packet.out.BuildDynamicScene;
 import core.net.packet.out.SkillLevel;
 import core.net.packet.out.UpdateSceneGraph;
+import core.plugin.Plugin;
 import core.tools.*;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
@@ -653,6 +655,13 @@ public class Player extends Entity {
 			}
 			GroundItemManager.create(new Item(526), getLocation(), k);
 			final Container[] c = DeathTask.getContainers(this);
+
+			for (Item i : getEquipment().toArray()) {
+				if (i == null) continue;
+				InteractionListeners.run(i.getId(), this, i, false);
+				Plugin equipPlugin = i.getDefinition().getConfiguration("equipment", null);
+				if (equipPlugin != null) equipPlugin.fireEvent("unequip");
+			}
 
 			boolean canCreateGrave = GraveController.allowGenerate(this);
 			if (canCreateGrave) {
