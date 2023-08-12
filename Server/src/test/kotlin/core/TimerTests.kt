@@ -1,13 +1,12 @@
 package core
 
 import TestUtils
-import core.api.closeInterface
-import core.api.impact
-import core.api.logWithStack
-import core.api.registerTimer
+import core.api.*
 import core.game.node.entity.Entity
+import core.game.node.entity.skill.Skills
 import core.game.system.timer.RSTimer
 import core.game.system.timer.TimerFlag
+import core.game.system.timer.impl.SkillRestore
 import core.tools.Log
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -52,6 +51,49 @@ class TimerTests {
 
             TestUtils.advanceTicks(18, false)
             Assertions.assertEquals(2, incrementer)
+        }
+    }
+
+    @Test fun skillRestoreTimerShouldSlowlyRaiseLoweredStats() {
+        TestUtils.getMockPlayer("statrestore-slowrestore").use { p ->
+            val timer = SkillRestore()
+            registerTimer(p, timer)
+            p.skills.staticLevels[Skills.FARMING] = 20
+            setTempLevel(p, Skills.FARMING, 10)
+
+            TestUtils.advanceTicks(timer.restoreTicks[Skills.FARMING] + 3, false)
+            Assertions.assertEquals(11, getDynLevel(p, Skills.FARMING))
+        }
+    }
+    @Test fun skillRestoreTimerShouldSlowlyLowerBoostedStats() {
+        TestUtils.getMockPlayer("statrestore-slowdrain").use { p ->
+            val timer = SkillRestore()
+            p.timers.registerTimer(timer)
+            setTempLevel(p, Skills.FARMING, 6)
+
+            TestUtils.advanceTicks(timer.restoreTicks[Skills.FARMING] + 3, false)
+            Assertions.assertEquals(5, getDynLevel(p, Skills.FARMING))
+        }
+    }
+
+    @Test fun skillRestoreTimerShouldRaiseLoweredHp() {
+        TestUtils.getMockPlayer("statrestore-raiseloweredhp").use { p ->
+            val timer = SkillRestore()
+            registerTimer(p, timer)
+            p.skills.lifepoints /= 2
+            TestUtils.advanceTicks(600, false)
+            Assertions.assertEquals(10, p.skills.lifepoints)
+        }
+    }
+
+    @Test fun skillRestoreTimerShouldNeverLowerBoostedHp() {
+        TestUtils.getMockPlayer("statrestore-neverlowerhp").use { p ->
+            val timer = SkillRestore()
+            registerTimer(p, timer)
+            p.skills.lifepoints = 50
+
+            TestUtils.advanceTicks(500, false)
+            Assertions.assertEquals(50, p.skills.lifepoints)
         }
     }
 }
