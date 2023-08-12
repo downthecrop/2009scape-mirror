@@ -77,27 +77,31 @@ class RandomEventTests {
     }
 
     @Test fun teleportAndNotePunishmentShouldNoteNotableUnnotedItems() {
-        val p = TestUtils.getMockPlayer("shitforbrains2")
-        p.setAttribute("tutorial:complete", true)
-        RandomEventManager().login(p)
+        TestUtils.getMockPlayer("teleportpunishment2").use {p ->
+            val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer is null!")
+            TestUtils.advanceTicks(5, false)
+            timer.nextExecution = getWorldTicks() + 5
+            TestUtils.advanceTicks(10, false)
 
-        p.inventory.add(Item(4151, 5))
-        content.global.ame.RandomEventManager.getInstance(p)?.fireEvent()
-        p.getAttribute<RandomEventNPC>("re-npc")!!.noteAndTeleport()
+            addItem(p, Items.ABYSSAL_WHIP_4151, 5)
+            getAttribute<RandomEventNPC?>(p, AntiMacro.EVENT_NPC, null)!!.noteAndTeleport()
 
-        Assertions.assertEquals(5, p.inventory.getAmount(4152))
-        Assertions.assertEquals(0, p.inventory.getAmount(4151))
+            Assertions.assertEquals(5, amountInInventory(p, Items.ABYSSAL_WHIP_4152))
+            Assertions.assertEquals(0, amountInInventory(p, Items.ABYSSAL_WHIP_4151))
+        }
     }
 
     @Test fun teleportAndNotePunishmentShouldNotAffectUnnotableItems() {
-        val p = TestUtils.getMockPlayer("shitforbrains3")
-        p.setAttribute("tutorial:complete", true)
-        RandomEventManager().login(p)
+        TestUtils.getMockPlayer("teleportpunishment3").use {p ->
+            val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer is null!")
+            TestUtils.advanceTicks(5, false)
+            timer.nextExecution = getWorldTicks() + 5
+            TestUtils.advanceTicks(10, false)
 
-        p.inventory.add(Item(Items.AIR_RUNE_556, 30))
-        content.global.ame.RandomEventManager.getInstance(p)?.fireEvent()
-        p.getAttribute<RandomEventNPC>("re-npc")!!.noteAndTeleport()
+            addItem(p, Items.AIR_RUNE_556, 30)
+            getAttribute<RandomEventNPC?>(p, AntiMacro.EVENT_NPC, null)!!.noteAndTeleport()
 
-        Assertions.assertEquals(30, p.inventory.getAmount(Items.AIR_RUNE_556))
+            Assertions.assertEquals(30, amountInInventory(p, Items.AIR_RUNE_556))
+        }
     }
 }
