@@ -31,6 +31,8 @@ public enum SpecialLadders implements LadderAchievementCheck {
     ALKHARID_SOCRCERESS_UP(Location.create(3325,3142,0),Location.create(3325,3139,1)),
     ALKHARID_SOCRCERESS_DOWN(Location.create(3325,3139,1),Location.create(3325,3143,0)),
 
+    CLOCKTOWER_HIDDEN_LADDER(Location.create(2572,9631,0),Location.create(2572,3230,0)),
+
     DRAYNOR_SEWER_SOUTHEAST_DOWN(new Location(3118, 3244, 0), new Location(3118, 9643, 0)),
     DRAYNOR_SEWER_SOUTHEAST_UP(new Location(3118, 9643, 0), new Location(3118, 3243, 0)),
     DRAYNOR_SEWER_NORTHWEST_DOWN(new Location(3084, 3272, 0), new Location(3085, 9672, 0)),
