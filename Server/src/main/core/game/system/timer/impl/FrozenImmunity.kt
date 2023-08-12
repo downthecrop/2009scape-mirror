@@ -15,7 +15,7 @@ class FrozenImmunity : PersistTimer (1, "frozen:immunity") {
     }
 
     override fun parse (root: JSONObject, entity: Entity) {
-        runInterval = root["ticksRemaining"].toString().toInt()
+        runInterval = root["ticksLeft"].toString().toInt()
     }
 
     override fun onRegister (entity: Entity) {
