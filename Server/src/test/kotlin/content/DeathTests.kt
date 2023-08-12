@@ -162,8 +162,6 @@ class DeathTests {
             val startTime = GameWorld.ticks
             val grave = GraveController.produceGrave(GraveType.MEM_PLAQUE)
             grave.initialize(p, Location.create(0,0,0), inventory)
-
-            TestUtils.advanceTicks(30, false)
             val expectedTicksRemaining = secondsToTicks(GraveType.MEM_PLAQUE.durationMinutes * 60) - (GameWorld.ticks - startTime)
             Assertions.assertEquals(expectedTicksRemaining, grave.ticksRemaining)
 
