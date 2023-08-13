@@ -2,12 +2,16 @@ package content
 
 import TestUtils
 import content.global.ame.RandomEventNPC
+import content.global.ame.RandomEvents
 import core.api.*
 import core.game.system.timer.impl.AntiMacro
+import core.game.world.map.Location
+import core.game.world.map.zone.ZoneRestriction
 import core.game.world.map.zone.impl.WildernessZone
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.rs09.consts.Items
+import org.rs09.consts.NPCs
 
 class RandomEventTests {
     init {
@@ -104,12 +108,18 @@ class RandomEventTests {
     }
 
     @Test fun randomEventShouldNotSpawnInEventRestrictedArea() {
-        //Wilderness is Random Event restricted
-        WildernessZone().configure()
+
         TestUtils.getMockPlayer("antimacronospawninrestrictedzone").use { p ->
-            p.location = WildernessZone.getInstance().borders[0].randomLoc
             val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer was null!")
             TestUtils.advanceTicks(5, false)
+
+            //Wilderness is Random Event restricted
+            WildernessZone.getInstance().configure()
+            val loc = Location.create(3131, 3595)
+            p.location = loc
+
+            Assertions.assertEquals(loc, p.location)
+
             timer.nextExecution = getWorldTicks() + 5
             TestUtils.advanceTicks(10, false)
             Assertions.assertNull(AntiMacro.getEventNpc(p))
@@ -165,6 +175,44 @@ class RandomEventTests {
             timer.nextExecution = getWorldTicks() + 5
             TestUtils.advanceTicks(10, false)
             Assertions.assertNotNull(AntiMacro.getEventNpc(p))
+        }
+    }
+
+    @Test fun shouldBeAbleToForceRandomEvent() {
+        TestUtils.getMockPlayer("antimacroforcerand").use { p ->
+            TestUtils.advanceTicks(5, false)
+            AntiMacro.forceEvent(p)
+            TestUtils.advanceTicks(1, false)
+            Assertions.assertNotNull(AntiMacro.getEventNpc(p))
+        }
+    }
+
+    @Test fun shouldBeAbleToForceSpecificRandomEvent() {
+        TestUtils.getMockPlayer("antimacroforcespecific").use { p ->
+            TestUtils.advanceTicks(5, false)
+            AntiMacro.forceEvent(p, RandomEvents.TREE_SPIRIT)
+            TestUtils.advanceTicks(1, false)
+            Assertions.assertNotNull(AntiMacro.getEventNpc(p))
+            Assertions.assertEquals(NPCs.TREE_SPIRIT_438, AntiMacro.getEventNpc(p)?.originalId)
+        }
+    }
+
+    @Test fun parseAntiMacroCommandArgsShouldReturnExpectedValues() {
+        val testData = arrayOf(
+            Triple("revent -p test", "test", null),
+            Triple("revent -p test ", "test", null),
+            Triple("revent -p test -e certer ", "test", RandomEvents.CERTER),
+            Triple("revent -p test_user -e Sandwich lady", "test_user", RandomEvents.SANDWICH_LADY),
+            Triple("revent -p test user -e sandwich Lady ", "test_user", RandomEvents.SANDWICH_LADY),
+            Triple("revent -e sandwich Lady -p test user ", "test_user", RandomEvents.SANDWICH_LADY),
+            Triple("revent test", "test", null),
+            Triple("revent test -e sAndwich Lady", "test", RandomEvents.SANDWICH_LADY)
+        )
+
+        for ((commandStr, expectedUser, expectedEvent) in testData) {
+            val (resultUser, resultEvent) = AntiMacro.parseCommandArgs(commandStr, "revent")
+            Assertions.assertEquals(expectedUser, resultUser)
+            Assertions.assertEquals(expectedEvent, resultEvent)
         }
     }
 }
