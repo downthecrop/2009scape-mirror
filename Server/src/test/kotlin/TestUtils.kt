@@ -181,10 +181,6 @@ class MockPlayer(name: String) : Player(PlayerDetails(name)), AutoCloseable {
     override fun debug(string: String?) {
         log (this::class.java, Log.DEBUG, "[$name] -> Received Debug: $string")
     }
-
-    override fun debug(string: String?) {
-        log (this::class.java, Log.DEBUG, "[$name] -> Received Debug: $string")
-    }
 }
 
 class MockSession : IoSession(null, null) {
