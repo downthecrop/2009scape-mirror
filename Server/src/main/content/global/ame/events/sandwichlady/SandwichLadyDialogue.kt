@@ -6,6 +6,7 @@ import core.game.node.entity.combat.ImpactHandler
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.dialogue.DialogueFile
+import core.game.system.timer.impl.AntiMacro
 import core.tools.END_DIALOGUE
 
 class SandwichLadyDialogue(val isChoice: Boolean) : DialogueFile() {
@@ -26,13 +27,13 @@ class SandwichLadyDialogue(val isChoice: Boolean) : DialogueFile() {
                 0 -> if(choice != assigned){
                     npc!!.sendChat("That's not what I said you could have!")
                     player!!.impactHandler.manualHit(npc,3,ImpactHandler.HitsplatType.NORMAL)
-                    content.global.ame.RandomEventManager.getInstance(player!!)!!.event?.terminate()
+                    AntiMacro.terminateEventNpc(player!!)
                 } else {
                     npc("Here you are, dear. I hope you enjoy it!")
                     if(!player!!.inventory.add(Item(assigned))){
                         GroundItemManager.create(Item(assigned),player)
                     }
-                    content.global.ame.RandomEventManager.getInstance(player!!)!!.event?.terminate()
+                    AntiMacro.terminateEventNpc(player!!)
                     stage = END_DIALOGUE
                 }
             }

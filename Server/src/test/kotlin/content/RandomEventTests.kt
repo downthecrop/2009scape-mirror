@@ -4,6 +4,7 @@ import TestUtils
 import content.global.ame.RandomEventNPC
 import core.api.*
 import core.game.system.timer.impl.AntiMacro
+import core.game.world.map.zone.impl.WildernessZone
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.rs09.consts.Items
@@ -99,6 +100,71 @@ class RandomEventTests {
             getAttribute<RandomEventNPC?>(p, AntiMacro.EVENT_NPC, null)!!.noteAndTeleport()
 
             Assertions.assertEquals(30, amountInInventory(p, Items.AIR_RUNE_556))
+        }
+    }
+
+    @Test fun randomEventShouldNotSpawnInEventRestrictedArea() {
+        //Wilderness is Random Event restricted
+        WildernessZone().configure()
+        TestUtils.getMockPlayer("antimacronospawninrestrictedzone").use { p ->
+            p.location = WildernessZone.getInstance().borders[0].randomLoc
+            val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer was null!")
+            TestUtils.advanceTicks(5, false)
+            timer.nextExecution = getWorldTicks() + 5
+            TestUtils.advanceTicks(10, false)
+            Assertions.assertNull(AntiMacro.getEventNpc(p))
+        }
+    }
+
+    @Test fun randomEventShouldNotSpawnIfOneAlreadyActive() {
+        TestUtils.getMockPlayer("antimacronospawnifalreadyhas").use { p ->
+            val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer was null!")
+            TestUtils.advanceTicks(5, false)
+            timer.nextExecution = getWorldTicks() + 5
+            TestUtils.advanceTicks(10, false)
+            Assertions.assertNotNull(AntiMacro.getEventNpc(p))
+
+            val previousEvent = AntiMacro.getEventNpc(p)
+
+            timer.nextExecution = getWorldTicks() + 5
+            TestUtils.advanceTicks(10, false)
+            Assertions.assertNotNull(AntiMacro.getEventNpc(p))
+            Assertions.assertEquals(previousEvent, AntiMacro.getEventNpc(p))
+        }
+    }
+
+    @Test fun randomEventShouldSpawnIfCurrentOneIsInactive() {
+        TestUtils.getMockPlayer("antimacrospawnifcurrentinactive").use { p ->
+            val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer was null!")
+            TestUtils.advanceTicks(5, false)
+            timer.nextExecution = getWorldTicks() + 5
+            TestUtils.advanceTicks(10, false)
+            Assertions.assertNotNull(AntiMacro.getEventNpc(p))
+
+            val previousEvent = AntiMacro.getEventNpc(p)
+            AntiMacro.terminateEventNpc(p)
+
+            timer.nextExecution = getWorldTicks() + 5
+            TestUtils.advanceTicks(10, false)
+            Assertions.assertNotNull(AntiMacro.getEventNpc(p))
+            Assertions.assertNotEquals(previousEvent, AntiMacro.getEventNpc(p))
+        }
+    }
+
+    @Test fun randomEventSystemShouldSupportPauseAndUnpause() {
+        TestUtils.getMockPlayer("antimacropause").use { p ->
+            val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer was null!")
+            TestUtils.advanceTicks(5, false)
+            timer.nextExecution = getWorldTicks() + 5
+
+            AntiMacro.pause(p)
+            TestUtils.advanceTicks(10, false)
+            Assertions.assertNull(AntiMacro.getEventNpc(p))
+
+            AntiMacro.unpause(p)
+            timer.nextExecution = getWorldTicks() + 5
+            TestUtils.advanceTicks(10, false)
+            Assertions.assertNotNull(AntiMacro.getEventNpc(p))
         }
     }
 }

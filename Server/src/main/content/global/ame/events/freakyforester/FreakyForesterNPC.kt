@@ -1,12 +1,12 @@
 package content.global.ame.events.freakyforester
 
-import content.global.ame.RandomEventManager
 import content.global.ame.RandomEventNPC
 import core.api.*
 import org.rs09.consts.NPCs
 import core.api.utils.WeightBasedTable
 import core.game.node.entity.npc.NPC
 import core.game.system.task.Pulse
+import core.game.system.timer.impl.AntiMacro
 import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Sounds
 
@@ -28,7 +28,7 @@ class FreakyForesterNPC(override var loot: WeightBasedTable? = null) : RandomEve
                     7 -> {
                         FreakUtils.teleport(player)
                         FreakUtils.giveFreakTask(player)
-                        RandomEventManager.getInstance(player)!!.event?.terminate()
+                        AntiMacro.terminateEventNpc(player)
                         openDialogue(player, FreakyForesterDialogue(), FreakUtils.freakNpc)
                         resetAnimator(player)
                     }

@@ -546,26 +546,6 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         define("finishbins", Privilege.ADMIN, "", "Finishes any in-progress compost bins."){ player, _ ->
         }
 
-        define("testlady", Privilege.ADMIN){ player, _ ->
-            content.global.ame.RandomEventManager.getInstance(player)!!.event = RandomEvents.RIVER_TROLL.npc.create(player)
-            content.global.ame.RandomEventManager.getInstance(player)!!.event!!.init()
-        }
-
-        define("freak", Privilege.ADMIN){ player, _ ->
-            content.global.ame.RandomEventManager.getInstance(player)!!.event = RandomEvents.FREAKY_FORESTER.npc.create(player)
-            content.global.ame.RandomEventManager.getInstance(player)!!.event!!.init()
-        }
-
-        define("bob", Privilege.ADMIN){ player, _ ->
-            content.global.ame.RandomEventManager.getInstance(player)!!.event = RandomEvents.EVIL_BOB.npc.create(player)
-            content.global.ame.RandomEventManager.getInstance(player)!!.event!!.init()
-        }
-
-        define("revent", Privilege.ADMIN){ player, _ ->
-            println(player.pulseManager.current)
-            content.global.ame.RandomEventManager.getInstance(player)!!.fireEvent()
-        }
-
         define("addcredits", Privilege.ADMIN){ player, _ ->
             player.details.credits += 100
         }

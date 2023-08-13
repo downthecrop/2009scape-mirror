@@ -30,7 +30,6 @@ object TimerRegistry {
 
     @JvmStatic
     fun addAutoTimers (entity: Entity) {
-        (entity as? Player)?.debug ("Adding auto timers...")
         for (timer in autoTimers) {
             if (!hasTimerActive (entity, timer.identifier))
                 registerTimer (entity, timer.retrieveInstance())
