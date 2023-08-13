@@ -6,7 +6,6 @@ import content.global.ame.RandomEvents
 import core.api.*
 import core.game.system.timer.impl.AntiMacro
 import core.game.world.map.Location
-import core.game.world.map.zone.ZoneRestriction
 import core.game.world.map.zone.impl.WildernessZone
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test

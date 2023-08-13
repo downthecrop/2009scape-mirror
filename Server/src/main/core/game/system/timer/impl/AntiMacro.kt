@@ -89,7 +89,7 @@ class AntiMacro : PersistTimer(0, "antimacro", isAuto = true), Commands {
     }
 
     override fun defineCommands() {
-        define("revent", Privilege.ADMIN, "::revent [-p] <lt>player name<gt> [-e <lt>event name<gt>]", "Spawns a random event for the target player. Optional -e parameter to pass a specific event.") {player, args ->
+        define("revent", Privilege.ADMIN, "::revent [-p] <lt>player name<gt> [-e <lt>event name<gt>]", "Spawns a random event for the target player.<br>Optional -e parameter to pass a specific event.") {player, args ->
             if (args.size == 1) {
                 val possible = RandomEvents.values()
                 for (event in possible) {
