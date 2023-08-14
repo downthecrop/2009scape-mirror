@@ -2,6 +2,8 @@ package content
 
 import TestUtils
 import core.api.EquipmentSlot
+import core.api.addItem
+import core.api.impact
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import org.junit.jupiter.api.Assertions
@@ -11,6 +13,7 @@ import core.game.global.action.EquipHandler
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListeners
+import core.game.node.entity.player.info.Rights
 
 class EquipTests {
     companion object {
@@ -140,5 +143,27 @@ class EquipTests {
         Assertions.assertEquals(Items.DRAGON_CLAWS_14484, p.equipment.get(EquipmentSlot.WEAPON.ordinal).id)
         Assertions.assertEquals(p.inventory.getSlot(Item(Items.ABYSSAL_WHIP_4151)), 25)
         Assertions.assertEquals(p.inventory.getSlot(Item(Items.RUNE_DEFENDER_8850)), 0)
+    }
+
+    @Test fun graveDeathWithEquippedItemShouldFireUnequipHooks() {
+        TestUtils.getMockPlayer("graveunequip").use {p ->
+            var hookFired = false
+            val tempHook = object : InteractionListener {
+                override fun defineListeners() {
+                    onUnequip(Items.ABYSSAL_WHIP_4151) { player, node ->
+                        hookFired = true
+                        return@onUnequip true
+                    }
+                }
+            }
+
+            tempHook.defineListeners()
+            p.details.rights = Rights.REGULAR_PLAYER
+            addItem(p, Items.ABYSSAL_WHIP_4151, 28)
+            p.equipment.replace(Item(Items.ABYSSAL_WHIP_4151), EquipmentSlot.WEAPON.ordinal)
+            impact(p, p.skills.lifepoints)
+            TestUtils.advanceTicks(25, false)
+            Assertions.assertEquals(true, hookFired)
+        }
     }
 }
