@@ -60,7 +60,7 @@ class Poison : PersistTimer (30, "poison", flags = arrayOf(TimerFlag.ClearOnDeat
         )
 
         if (severity == 0 && entity is Player)
-            sendMessage(entity, "The poison has wore off.")
+            sendMessage(entity, "The poison has worn off.")
         return severity > 0
     }
 
