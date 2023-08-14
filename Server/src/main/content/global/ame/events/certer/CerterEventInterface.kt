@@ -1,10 +1,10 @@
 package content.global.ame.events.certer
 
-import content.global.ame.RandomEventManager
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import org.rs09.consts.Items
 import core.game.interaction.InterfaceListener
+import core.game.system.timer.impl.AntiMacro
 
 class CerterEventInterface : InterfaceListener {
     val CERTER_INTERFACE = 184
@@ -37,7 +37,7 @@ class CerterEventInterface : InterfaceListener {
             val correctAnswer = player.getAttribute("certer:correctIndex", 0)
             player.setAttribute("certer:correct", correctAnswer == answer)
             player.interfaceManager.close()
-            player.dialogueInterpreter.open(CerterDialogue(false), RandomEventManager.getInstance(player)!!.event?.asNpc())
+            player.dialogueInterpreter.open(CerterDialogue(false), AntiMacro.getEventNpc(player))
             return@on true
         }
 

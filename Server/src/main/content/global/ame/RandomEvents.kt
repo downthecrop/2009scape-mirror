@@ -19,7 +19,7 @@ import core.api.utils.WeightBasedTable
 import core.api.utils.WeightedItem
 import core.game.node.entity.skill.Skills
 
-enum class RandomEvents(val npc: RandomEventNPC, val loot: WeightBasedTable? = null, val skillId: Int = -1, val type: String = "") {
+enum class RandomEvents(val npc: RandomEventNPC, val loot: WeightBasedTable? = null, val skillIds: IntArray = intArrayOf(), val type: String = "") {
     SANDWICH_LADY(npc = SandwichLadyRENPC()),
     GENIE(npc = GenieNPC()),
     CERTER(npc = CerterNPC(), loot = WeightBasedTable.create(
@@ -41,14 +41,14 @@ enum class RandomEvents(val npc: RandomEventNPC, val loot: WeightBasedTable? = n
     )),
     DRILL_DEMON(npc = SeargentDamienNPC()),
     EVIL_CHICKEN(npc = EvilChickenNPC()),
-    EVIL_BOB(npc = EvilBobNPC(), skillId = Skills.FISHING),
+    EVIL_BOB(npc = EvilBobNPC(), skillIds = intArrayOf(Skills.FISHING, Skills.MAGIC)),
     SURPRISE_EXAM(npc = MysteriousOldManNPC(), type = "sexam"),
-    FREAKY_FORESTER(npc = FreakyForesterNPC(), skillId = Skills.WOODCUTTING),
-    TREE_SPIRIT(npc = TreeSpiritRENPC(), skillId = Skills.WOODCUTTING),
-    RIVER_TROLL(RiverTrollRENPC(), skillId = Skills.FISHING),
-    ROCK_GOLEM(RockGolemRENPC(), skillId = Skills.MINING),
-    SHADE(ShadeRENPC(), skillId = Skills.PRAYER),
-    ZOMBIE(ZombieRENPC(), skillId = Skills.PRAYER);
+    FREAKY_FORESTER(npc = FreakyForesterNPC(), skillIds = intArrayOf(Skills.WOODCUTTING)),
+    TREE_SPIRIT(npc = TreeSpiritRENPC(), skillIds = intArrayOf(Skills.WOODCUTTING)),
+    RIVER_TROLL(RiverTrollRENPC(), skillIds = intArrayOf(Skills.FISHING)),
+    ROCK_GOLEM(RockGolemRENPC(), skillIds = intArrayOf(Skills.MINING)),
+    SHADE(ShadeRENPC(), skillIds = intArrayOf(Skills.PRAYER)),
+    ZOMBIE(ZombieRENPC(), skillIds = intArrayOf(Skills.PRAYER));
 
     companion object {
         @JvmField
@@ -68,11 +68,12 @@ enum class RandomEvents(val npc: RandomEventNPC, val loot: WeightBasedTable? = n
 
         private fun populateMappings() {
             for (event in values()) {
-                if (event.skillId != -1) {
-                    val list = skillMap[event.skillId] ?: ArrayList<RandomEvents>().also { skillMap[event.skillId] = it }
+                for (id in event.skillIds) {
+                    val list = skillMap[id] ?: ArrayList<RandomEvents>().also { skillMap[id] = it }
                     list.add (event)
                 }
-                else nonSkillList.add (event)
+                if (event.skillIds.isEmpty())
+                    nonSkillList.add (event)
             }
         }
     }

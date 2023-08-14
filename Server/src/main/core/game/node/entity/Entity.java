@@ -105,7 +105,7 @@ public abstract class Entity extends Node {
 	 * The reward locks.
 	 */
 	private final ActionLocks locks = new ActionLocks();
-	public final ScriptProcessor scripts = new ScriptProcessor(this);
+	public ScriptProcessor scripts = new ScriptProcessor(this);
 	public final int[] clocks = new int[10];
 
 

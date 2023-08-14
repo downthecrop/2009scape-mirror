@@ -3,7 +3,7 @@ package content.global.ame.events.sandwichlady
 import core.game.node.item.Item
 import org.rs09.consts.Items
 import core.game.interaction.InterfaceListener
-import content.global.ame.RandomEventManager
+import core.game.system.timer.impl.AntiMacro
 
 class SandwichLadyInterface  : InterfaceListener {
 
@@ -18,7 +18,7 @@ class SandwichLadyInterface  : InterfaceListener {
 
     override fun defineInterfaceListeners() {
         on(SANDWICH_INTERFACE){player, _, _, buttonID, _, _ ->
-            val event = RandomEventManager.getInstance(player)!!.event
+            val event = AntiMacro.getEventNpc(player)
             if (event == null) {
                 player.interfaceManager.close()
                 return@on true

@@ -219,7 +219,7 @@ public class Player extends Entity {
 	/**
 	 * The quest repository.
 	 */
-	private QuestRepository questRepository = new QuestRepository(this);
+	public QuestRepository questRepository = new QuestRepository(this);
 
 	/**
 	 * The prayer manager.
@@ -239,7 +239,7 @@ public class Player extends Entity {
 	/**
 	 * The saved data.
 	 */
-	private SavedData savedData = new SavedData(this);
+	public SavedData savedData = new SavedData(this);
 
 	/**
 	 * The request manager.

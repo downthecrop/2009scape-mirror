@@ -1,29 +1,31 @@
-import content.global.ame.RandomEventManager
 import content.global.skill.farming.timers.CropGrowth
+import core.ServerConstants
+import core.api.log
 import core.cache.Cache
 import core.cache.crypto.ISAACCipher
 import core.cache.crypto.ISAACPair
-import core.game.node.entity.player.Player
-import core.game.node.entity.player.info.PlayerDetails
-import core.game.node.entity.player.info.Rights
-import core.game.node.entity.player.link.IronmanMode
-import core.game.node.item.Item
-import core.net.IoSession
-import core.net.packet.IoBuffer
-import org.rs09.consts.Items
-import core.ServerConstants
-import core.api.log
+import core.game.interaction.ScriptProcessor
 import core.game.node.Node
 import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.npc.NPC
-import core.game.node.entity.skill.SkillBonus
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.VarpManager
+import core.game.node.entity.player.info.PlayerDetails
+import core.game.node.entity.player.info.Rights
+import core.game.node.entity.player.info.login.PlayerSaveParser
+import core.game.node.entity.player.info.login.PlayerSaver
+import core.game.node.entity.player.link.IronmanMode
+import core.game.node.entity.player.link.SavedData
+import core.game.node.entity.player.link.quest.QuestRepository
+import core.game.node.entity.skill.Skills
 import core.game.node.item.GroundItem
+import core.game.node.item.Item
 import core.game.shops.Shop
 import core.game.shops.ShopItem
-import core.tools.SystemLogger
 import core.game.system.config.ConfigParser
 import core.game.system.config.ServerConfigParser
 import core.game.system.timer.TimerRegistry
+import core.game.system.timer.impl.AntiMacro
 import core.game.system.timer.impl.Disease
 import core.game.system.timer.impl.Poison
 import core.game.world.GameWorld
@@ -31,10 +33,11 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.repository.Repository
 import core.game.world.update.UpdateSequence
+import core.net.IoSession
+import core.net.packet.IoBuffer
 import core.net.packet.PacketProcessor
 import core.tools.Log
-import org.rs09.consts.Scenery
-import java.io.Closeable
+import org.rs09.consts.Items
 import java.net.URI
 import java.nio.ByteBuffer
 
@@ -85,6 +88,7 @@ object TestUtils {
         TimerRegistry.registerTimer(Poison())
         TimerRegistry.registerTimer(Disease())
         TimerRegistry.registerTimer(CropGrowth())
+        TimerRegistry.registerTimer(AntiMacro())
     }
 
     fun loadFile(path: String) : URI? {
@@ -111,12 +115,17 @@ object TestUtils {
 
 class MockPlayer(name: String) : Player(PlayerDetails(name)), AutoCloseable {
     var hasInit = false
-    init {
+    init { configureBasicProperties(); flagTutComplete(false); init(); flagTutComplete(true) }
+
+    fun configureBasicProperties() {
         this.details.session = MockSession()
         this.location = ServerConstants.HOME_LOCATION
         this.properties.attackStyle = WeaponInterface.AttackStyle(0, WeaponInterface.BONUS_CRUSH)
-        init()
-        this.setAttribute("tutorial:complete", true)
+    }
+
+    fun flagTutComplete(complete: Boolean) {
+        this.setAttribute("/save:tutorial:complete", complete)
+        this.setAttribute("/save:rules:confirmed", complete)
     }
 
     override fun update() {
@@ -139,6 +148,37 @@ class MockPlayer(name: String) : Player(PlayerDetails(name)), AutoCloseable {
         super.setLocation(location)
         RegionManager.move(this)
         this.playerFlags.lastSceneGraph = location
+    }
+
+    fun relog(ticksToWait: Int = -1) {
+        val json = PlayerSaver(this).populate()
+        val parse = PlayerSaveParser(this)
+        parse.saveFile = json
+
+        close()
+        timers.clearTimers()
+        inventory.clear()
+        bank.clear()
+        equipment.clear()
+        skills = Skills(this)
+        savedData = SavedData(this)
+        questRepository = QuestRepository(this)
+        varpManager = VarpManager(this)
+        varpMap.clear()
+        saveVarp.clear()
+        scripts = ScriptProcessor(this)
+        clearAttributes()
+        hasInit = false
+
+        if (ticksToWait > 0) TestUtils.advanceTicks(ticksToWait, false)
+
+        configureBasicProperties()
+        parse.parseData()
+        init()
+    }
+
+    override fun debug(string: String?) {
+        log (this::class.java, Log.DEBUG, "[$name] -> Received Debug: $string")
     }
 }
 

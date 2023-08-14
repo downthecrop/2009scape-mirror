@@ -7,6 +7,7 @@ import content.global.ame.RandomEvents
 import content.minigame.gnomecooking.*
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import core.game.system.timer.impl.AntiMacro
 
 /**
  * Handles the NPC talk-to option.
@@ -31,10 +32,10 @@ class NPCTalkListener : InteractionListener {
         on(IntType.NPC,"talk-to","talk","talk to"){ player, node ->
             val npc = node.asNpc()
             if(RandomEvents.randomIDs.contains(node.id)){
-                if(content.global.ame.RandomEventManager.getInstance(player)!!.event == null || content.global.ame.RandomEventManager.getInstance(player)!!.event!! != node.asNpc()){
+                if(AntiMacro.getEventNpc(player) == null || AntiMacro.getEventNpc(player) != node.asNpc()){
                     player.sendMessage("They aren't interested in talking to you.")
                 } else {
-                    content.global.ame.RandomEventManager.getInstance(player)!!.event!!.talkTo(node.asNpc())
+                    AntiMacro.getEventNpc(player)?.talkTo(node.asNpc())
                 }
                 return@on true
             }

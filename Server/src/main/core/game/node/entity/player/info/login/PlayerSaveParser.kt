@@ -39,7 +39,7 @@ class PlayerSaveParser(val player: Player) {
     var saveFile: JSONObject? = null
     var read = true
 
-    init {
+    fun parse() {
         val JSON = File(ServerConstants.PLAYER_SAVE_PATH + player.name + ".json")
         if(JSON.exists())
         {
@@ -49,36 +49,38 @@ class PlayerSaveParser(val player: Player) {
         if (read) {
             saveFile = parser.parse(reader) as JSONObject
         }
+
+        if (read) {
+            parseData()
+        }
     }
 
-    fun parse() {
-        if (read) {
-            parseCore()
-            parseAttributes()
-            parseSkills()
-            parseSettings()
-            parseQuests()
-            parseAppearance()
-            parseGrave()
-            parseVarps()
-            parseStates()
-            parseSpellbook()
-            parseSavedData()
-            parseAutocastSpell()
-            parseFarming()
-            parseConfigs()
-            parseMonitor()
-            parseMusic()
-            parseFamiliars()
-            parseBankPin()
-            parseHouse()
-            parseIronman()
-            parseEmoteManager()
-            parseStatistics()
-            parseAchievements()
-            parsePouches()
-            parsePouches()
-        }
+    fun parseData() {
+        parseCore()
+        parseAttributes()
+        parseSkills()
+        parseSettings()
+        parseQuests()
+        parseAppearance()
+        parseGrave()
+        parseVarps()
+        parseStates()
+        parseSpellbook()
+        parseSavedData()
+        parseAutocastSpell()
+        parseFarming()
+        parseConfigs()
+        parseMonitor()
+        parseMusic()
+        parseFamiliars()
+        parseBankPin()
+        parseHouse()
+        parseIronman()
+        parseEmoteManager()
+        parseStatistics()
+        parseAchievements()
+        parsePouches()
+        parsePouches()
     }
 
     fun runContentHooks()

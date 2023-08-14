@@ -4,6 +4,7 @@ import content.global.ame.RandomEventNPC
 import core.api.*
 import core.api.utils.WeightBasedTable
 import core.game.node.entity.npc.NPC
+import core.game.system.timer.impl.AntiMacro
 import org.rs09.consts.NPCs
 import org.rs09.consts.Sounds
 
@@ -24,7 +25,7 @@ class EvilBobNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(N
                 EvilBobUtils.teleport(player)
                 resetAnimator(player)
                 openDialogue(player, EvilBobDialogue(), NPCs.EVIL_BOB_2479)
-                content.global.ame.RandomEventManager.getInstance(player)?.event?.terminate()
+                AntiMacro.terminateEventNpc(player)
             }
         }
     }

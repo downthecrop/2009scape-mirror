@@ -34,7 +34,7 @@ class PlayerSaver (val player: Player){
     companion object {
         val contentHooks = ArrayList<PersistPlayer>()
     }
-    private fun populate(): JSONObject {
+    fun populate(): JSONObject {
         val saveFile = JSONObject()
         saveCoreData(saveFile)
         saveSkills(saveFile)

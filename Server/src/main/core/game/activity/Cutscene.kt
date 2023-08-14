@@ -23,6 +23,7 @@ import org.rs09.consts.Components
 import core.ServerConstants
 import core.api.Event
 import core.api.utils.PlayerCamera
+import core.game.system.timer.impl.AntiMacro
 import core.tools.SystemLogger
 import core.game.world.GameWorld
 import core.tools.Log
@@ -238,7 +239,7 @@ abstract class Cutscene(val player: Player) {
         player.lock()
         player.hook(Event.SelfDeath, CUTSCENE_DEATH_HOOK)
         player.logoutListeners["cutscene"] = {player -> player.location = exitLocation; player.getCutscene()?.end() }
-        content.global.ame.RandomEventManager.getInstance(player)!!.enabled = false
+        AntiMacro.pause(player)
     }
 
     /**
@@ -275,7 +276,7 @@ abstract class Cutscene(val player: Player) {
                 clearNPCs()
                 player.unhook(CUTSCENE_DEATH_HOOK)
                 player.logoutListeners.remove("cutscene")
-                content.global.ame.RandomEventManager.getInstance(player)?.enabled = true
+                AntiMacro.unpause(player)
                 PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 0))
                 try {
                     endActions?.invoke()

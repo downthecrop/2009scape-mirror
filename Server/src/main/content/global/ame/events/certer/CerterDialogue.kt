@@ -5,6 +5,7 @@ import core.game.component.Component
 import core.game.node.entity.impl.PulseType
 import core.game.node.entity.player.link.emote.Emotes
 import core.game.dialogue.DialogueFile
+import core.game.system.timer.impl.AntiMacro
 import core.tools.END_DIALOGUE
 
 class CerterDialogue(val initial: Boolean) : DialogueFile() {
@@ -30,13 +31,13 @@ class CerterDialogue(val initial: Boolean) : DialogueFile() {
                     npc("Sorry, I don't think so.").also {
                         player!!.setAttribute("certer:reward", true)
                         stage = END_DIALOGUE
-                        content.global.ame.RandomEventManager.getInstance(player!!)?.event?.terminate()
+                        AntiMacro.terminateEventNpc(player!!)
                     }
                 } else {
                     npc("Thank you, I hope you like your present. I must be", "leaving now though.").also {
                         player!!.setAttribute("certer:reward", true)
                         stage = END_DIALOGUE
-                        content.global.ame.RandomEventManager.getInstance(player!!)!!.event!!.loot!!.roll().forEach { addItemOrDrop(player!!, it.id, it.amount) }
+                        AntiMacro.rollEventLoot(player!!).forEach { addItemOrDrop(player!!, it.id, it.amount) }
                     }
                 }
             }
@@ -51,7 +52,7 @@ class CerterDialogue(val initial: Boolean) : DialogueFile() {
             // Wave goodbye
             npc!!.animate(Emotes.WAVE.animation)
             // Terminate the event
-            content.global.ame.RandomEventManager.getInstance(player!!)?.event?.terminate()
+            AntiMacro.terminateEventNpc(player!!)
         } else {
             player!!.setAttribute("random:pause", false)
         }

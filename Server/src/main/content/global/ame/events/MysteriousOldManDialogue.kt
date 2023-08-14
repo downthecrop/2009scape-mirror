@@ -3,6 +3,7 @@ package content.global.ame.events
 import core.game.node.entity.player.Player
 import content.global.ame.events.supriseexam.SurpriseExamUtils
 import core.game.dialogue.DialogueFile
+import core.game.system.timer.impl.AntiMacro
 
 class MysteriousOldManDialogue(val type: String) : DialogueFile() {
 
@@ -22,11 +23,11 @@ class MysteriousOldManDialogue(val type: String) : DialogueFile() {
                     1 -> {
                         end()
                         teleport(player!!,type)
-                        content.global.ame.RandomEventManager.getInstance(player!!)?.event?.terminate()
+                        AntiMacro.terminateEventNpc(player!!)
                     }
                     2 -> {
                         end()
-                        content.global.ame.RandomEventManager.getInstance(player!!)?.event?.terminate()
+                        AntiMacro.terminateEventNpc(player!!)
                     }
                 }
             }
