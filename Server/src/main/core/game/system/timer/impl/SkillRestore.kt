@@ -21,7 +21,7 @@ class SkillRestore : RSTimer (1, "skillrestore", isAuto = true, isSoft = true) {
         for (i in 0 until 24) {
             if (i == Skills.PRAYER) continue
             if (ticksSinceLastRestore[i]++ >= restoreTicks[i]) {
-                if (i == Skills.HITPOINTS) {
+                if (i == Skills.HITPOINTS && entity.skills.lifepoints < entity.skills.maximumLifepoints) {
                     skills.heal (getHealAmount(entity))
                 } else {
                     val max = getStatLevel (entity, i)

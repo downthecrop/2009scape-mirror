@@ -99,7 +99,7 @@ class RevGuardianBehavior : NPCBehavior() {
 
     override fun tick(self: NPC): Boolean {
         val target = getAttribute<Player?>(self, "dw-threat-target", null) ?: return true
-        if (!target.isActive) {
+        if (!target.isActive || DeathTask.isDead(target)) {
             self.clear()
             return true
         }

@@ -9,7 +9,7 @@ import core.game.node.entity.combat.ImpactHandler
 import core.tools.RandomFunction
 import org.json.simple.*
 
-class Disease : PersistTimer (30, "disease") {
+class Disease : PersistTimer (30, "disease", flags = arrayOf(TimerFlag.ClearOnDeath)) {
     var hitsLeft = 25
 
     override fun save (root: JSONObject, entity: Entity) {

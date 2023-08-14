@@ -43,6 +43,7 @@ import java.nio.ByteBuffer
 
 object TestUtils {
     var uidCounter = 0
+    const val PLAYER_DEATH_TICKS = 14
 
     fun getMockPlayer(name: String, ironman: IronmanMode = IronmanMode.NONE, rights: Rights = Rights.ADMINISTRATOR): MockPlayer {
         val p = MockPlayer(name)

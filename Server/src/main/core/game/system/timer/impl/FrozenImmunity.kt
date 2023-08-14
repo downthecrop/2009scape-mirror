@@ -7,7 +7,7 @@ import core.game.node.entity.player.Player
 import core.game.world.repository.Repository
 import org.json.simple.*
 
-class FrozenImmunity : PersistTimer (1, "frozen:immunity") {
+class FrozenImmunity : PersistTimer (1, "frozen:immunity", flags = arrayOf(TimerFlag.ClearOnDeath)) {
     var ticksRemaining = 0
 
     override fun save (root: JSONObject, entity: Entity) {

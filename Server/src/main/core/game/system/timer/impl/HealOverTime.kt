@@ -7,7 +7,7 @@ import core.game.node.entity.player.Player
 import org.json.simple.*
 import kotlin.math.min
 
-class HealOverTime : PersistTimer (1, "healovertime") {
+class HealOverTime : PersistTimer (1, "healovertime", flags = arrayOf(TimerFlag.ClearOnDeath)) {
     var healRemaining = 0
     var healPerTick = 0
 

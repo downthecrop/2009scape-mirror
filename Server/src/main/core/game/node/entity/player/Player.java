@@ -700,8 +700,6 @@ public class Player extends Entity {
 		getPrayer().reset();
 		super.finalizeDeath(killer);
 		appearance.sync();
-                timers.removeTimer("poison");
-                timers.removeTimer("poison:immunity");
 		if (!getSavedData().getGlobalData().isDeathScreenDisabled()) {
 			getInterfaceManager().open(new Component(153));
 		}

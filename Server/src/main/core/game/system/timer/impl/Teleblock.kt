@@ -6,7 +6,7 @@ import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import org.json.simple.*
 
-class Teleblock : PersistTimer (1, "teleblock") {
+class Teleblock : PersistTimer (1, "teleblock", flags = arrayOf(TimerFlag.ClearOnDeath)) {
     override fun run (entity: Entity) : Boolean {
         return false
     }

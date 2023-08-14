@@ -33,8 +33,6 @@ import core.game.system.timer.TimerRegistry;
 
 import java.util.*;
 
-import static core.api.ContentAPIKt.isStunned;
-
 /**
  * An entity is a movable node, such as players and NPCs.
  * @author Emperor
@@ -278,6 +276,7 @@ public abstract class Entity extends Node {
 		skills.rechargePrayerPoints();
 		impactHandler.getImpactQueue().clear();
 		impactHandler.setDisabledTicks(10);
+		timers.onEntityDeath();
 		removeAttribute("combat-time");
 		face(null);
 		//Check if it's a Loar shade and transform back into the shadow version.
