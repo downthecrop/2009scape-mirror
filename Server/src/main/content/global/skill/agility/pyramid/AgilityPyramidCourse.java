@@ -223,15 +223,14 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 		}
 		player.lock(4);
 		player.getPacketDispatch().sendMessage("You climb the low wall...");
+		playAudio(player, Sounds.CLIMB_WALL_2453,10, 40);
 		if (fail) {
 			Location end = player.getLocation().transform(d, 1);
 			player.lock(3);
-			playAudio(player, Sounds.PYRAMID_SLIP_1397, 10, 25);
 			AgilityHandler.failWalk(player, 2, player.getLocation(), end, end, Animation.create(1106), 15, getHitAmount(player), "You lost your balance!");
 			AgilityHandler.forceWalk(player, -1, end, player.getLocation(), ForceMovement.WALK_ANIMATION, 10, 0.0, null, 4);
 			return;
 		}
-		playAudio(player, Sounds.CLIMB_WALL_2453,10, 40);
 		AgilityHandler.forceWalk(player, 0, player.getLocation(), player.getLocation().transform(d, 2), Animation.create(1252), 6, 8, "... and make it over.");
 		player.animate(Animation.RESET, 4);
 	}

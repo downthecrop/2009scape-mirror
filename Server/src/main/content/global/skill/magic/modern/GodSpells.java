@@ -13,7 +13,6 @@ import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
-import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
@@ -22,6 +21,8 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import org.rs09.consts.Items;
 import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the god spells.
@@ -192,19 +193,19 @@ public final class GodSpells extends CombatSpell {
 			if (state.getEstimatedHit() == -1) {
 				target.graphics(SPLASH_GRAPHIC);
 				if (projectile == SARA_PROJECTILE) {
-					sendAudio(target, new Audio(Sounds.SARADOMIN_STRIKE_FAIL_1656, 1, 20));
+					playGlobalAudio(target.getLocation(), Sounds.SARADOMIN_STRIKE_FAIL_1656, 1, 20);
 				}
 				if (projectile == GUTHIX_PROJECTILE) {
-					sendAudio(target, new Audio(Sounds.CLAWS_OF_GUTHIX_FAIL_1652, 1, 20));
+					playGlobalAudio(target.getLocation(), Sounds.CLAWS_OF_GUTHIX_FAIL_1652, 1, 20);
 				}
 				if (projectile == ZAM_PROJECTILE) {
-					sendAudio(target, new Audio(Sounds.FLAMES_OF_ZAMORAK_FAIL_1654, 1, 20));
+					playGlobalAudio(target.getLocation(), Sounds.FLAMES_OF_ZAMORAK_FAIL_1654, 1, 20);
 				}
 				return;
 			}
 		}
 		target.graphics(endGraphic);
-		sendAudio(entity, new Audio(impactAudio, 1));
+		playGlobalAudio(target.getLocation(), impactAudio, 1);
 	}
 
 	@Override

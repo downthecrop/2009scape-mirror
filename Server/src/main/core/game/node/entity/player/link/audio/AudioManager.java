@@ -2,7 +2,6 @@ package core.game.node.entity.player.link.audio;
 
 import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
-import core.game.world.map.MapDistance;
 import core.game.world.map.RegionManager;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.DefaultContext;
@@ -92,14 +91,19 @@ public class AudioManager {
 	/**
 	 * Sends an audio packet.
 	 * @param audio the audio.
-	 * @param global if globally heard.
+	 * @param global if the audio can be heard globally by other players.
+	 * @param loc the location where the audio will play from. If location = null the players location is used.
 	 */
 	public void send(Audio audio, boolean global, Location loc) {
 		if (global) {
-			send(audio, RegionManager.getLocalPlayers(player, MapDistance.SOUND.getDistance()), loc);
-			return;
-		}
-		PacketRepository.send(AudioPacket.class, new DefaultContext(player, audio, loc));
+			List<Player> players = RegionManager.getLocalPlayers(loc != null ? loc : player.getLocation(), audio.getRadius());
+			for (Player p : players) {
+				if (p == null) {
+					continue;
+				}
+				PacketRepository.send(AudioPacket.class, new DefaultContext(p, audio, loc));
+			}
+		} else PacketRepository.send(AudioPacket.class, new DefaultContext(player, audio, loc));
 	}
 
 	/**
@@ -114,19 +118,6 @@ public class AudioManager {
 			}
 			p.getAudioManager().send(audio, false, loc);
 		}
-	}
-
-	/**
-	 * Plays the given Audio for the given Entity.
-	 * @param audioId the audio to play.
-	 * @param volume the volume.
-	 * @param delay the delay.
-	 * @param global if other nearby entities should be able to hear it.
-	 * @param location the location where the audio will play.
-	 * @param radius the distance the audio can be heard from the given location.
-	 */
-	public void send(int audioId, int volume, int delay, boolean global, Location location, int radius) {
-		send(new Audio(audioId, volume, delay, radius), global, location);
 	}
 
 	/**

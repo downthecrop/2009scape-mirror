@@ -9,7 +9,6 @@ import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
@@ -446,12 +445,10 @@ class CombatPulse(
                             val n = victim.asNpc()
                             val audio = n.getAudio(1)
                             if (audio != null) {
-                                entity.asPlayer().audioManager.send(audio, true)
+                                playGlobalAudio(victim.location, audio.id)
                             }
                         } else if (state.estimatedHit != 0 && victim is Player) {
-                            val sounds = intArrayOf(516, 517, 518)
-                            val audio = Audio(sounds[RandomFunction.random(sounds.size)])
-                            audio.send(victim.asPlayer(), true)
+                            playHurtAudio(victim.asPlayer())
                         }
                         handler.impact(entity, victim, state)
                         handler.onImpact(entity, victim, state)

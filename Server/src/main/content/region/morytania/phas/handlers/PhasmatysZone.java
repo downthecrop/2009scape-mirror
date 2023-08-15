@@ -26,6 +26,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import org.rs09.consts.NPCs;
 import core.plugin.ClassScanner;
+import org.rs09.consts.Sounds;
 
 /**
  * Handles the phasmatys zone area.
@@ -333,6 +334,7 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
         if (player.getInventory().remove(bone.getBoneMeal(), new Item(4286, 1))) {
             player.lock(1);
             player.animate(Animation.create(1651));
+            playAudio(player, Sounds.PRAYER_BOOST_2671);
             player.getInventory().add(new Item(1925), new Item(1931));
             player.getSkills().addExperience(Skills.PRAYER, bone.getExperience() * 4, true);
             player.sendMessage("You put some ectoplasm and bonemeal into the Ectofuntus, and worship it.");

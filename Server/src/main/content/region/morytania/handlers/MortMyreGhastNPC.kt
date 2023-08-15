@@ -20,6 +20,7 @@ import kotlinx.coroutines.launch
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import content.region.morytania.quest.naturespirit.NSUtils
+import org.rs09.consts.Sounds
 
 @Initializable
 class MortMyreGhastNPC : AbstractNPC {
@@ -75,6 +76,7 @@ class MortMyreGhastNPC : AbstractNPC {
                     break
                 }
             }
+            playAudio(player, Sounds.GHAST_ATTACK_433)
 
             if(!hasFood && RandomFunction.roll(3)) {
                 sendMessage(player, "An attacking Ghast just misses you.")

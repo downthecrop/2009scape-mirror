@@ -12,6 +12,10 @@ import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
+import static core.api.ContentAPIKt.playHurtAudio;
 
 /**
  * Represents the abstract draynor tree npc.
@@ -65,7 +69,9 @@ public final class DraynorTreeNPC extends AbstractNPC {
 				for (Player p : players) {
 					faceTemporary(p, 2);
 					getAnimator().forceAnimation(ANIMATION);
+					playAudio(p, Sounds.NASTY_TREE_ATTACK_651);
 					int hit = RandomFunction.random(2);
+					if (hit > 0) playHurtAudio(p, 20);
 					p.getImpactHandler().manualHit(this, hit, hit > 0 ? HitsplatType.NORMAL : HitsplatType.MISS);
 					attackDelay = GameWorld.getTicks() + 3;
 					p.animate(p.getProperties().getDefenceAnimation());

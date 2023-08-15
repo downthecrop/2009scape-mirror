@@ -59,7 +59,7 @@ public final class AgilityHandler {
 				player.getProperties().setTeleportLocation(dest);
 				if (hit > 0) {
 					player.getImpactHandler().setDisabledTicks(0);
-					player.getImpactHandler().manualHit(player, hit, HitsplatType.NORMAL);
+					impact(player, hit, HitsplatType.NORMAL);
 				}
 				if (message != null) {
 					player.getPacketDispatch().sendMessage(message);

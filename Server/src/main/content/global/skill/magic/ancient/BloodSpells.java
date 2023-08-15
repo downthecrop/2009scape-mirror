@@ -19,6 +19,8 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import org.rs09.consts.Sounds;
 
+import static core.api.ContentAPIKt.playGlobalAudio;
+
 /**
  * Handles the Blood spells from the Ancient spellbook.
  * @author Emperor
@@ -95,7 +97,7 @@ public final class BloodSpells extends CombatSpell {
 			projectile.transform(entity, (Entity) target, false, 58, 10).send();
 		}
 		entity.animate(animation);
-		sendAudio(entity, getAudio());
+		playGlobalAudio(entity.getLocation(), audio.getId(), 1, 20);
 	}
 
 	@Override

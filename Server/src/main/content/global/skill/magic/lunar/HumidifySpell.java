@@ -12,6 +12,9 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playGlobalAudio;
 
 /**
  * Represents the humidify spell.
@@ -74,7 +77,7 @@ public final class HumidifySpell extends MagicSpell {
 		p.lock(ANIMATION.getDuration() + 1);
 		p.animate(ANIMATION);
 		p.graphics(GRAPHIC);
-		p.getAudioManager().send(3614);
+		playGlobalAudio(p.getLocation(), Sounds.LUNAR_HUMIDIFY_3614, 1, 20);
 		for (int k = 0; k < 28; k++) {
 			for (int i = 0; i < 21; i++) {
 				if (p.getInventory().contains(EMPTY[i], 1)) {

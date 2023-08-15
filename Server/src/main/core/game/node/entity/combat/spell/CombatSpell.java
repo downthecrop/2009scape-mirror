@@ -20,6 +20,8 @@ import org.rs09.consts.Sounds;
 import java.util.ArrayList;
 import java.util.List;
 
+import static core.api.ContentAPIKt.playGlobalAudio;
+
 /**
  * Represents a combat magic spell.
  * @author Emperor
@@ -134,12 +136,12 @@ public abstract class CombatSpell extends MagicSpell {
 	 */
 	public void visualizeImpact(Entity entity, Entity target, BattleState state) {
 		if (state.getEstimatedHit() == -1) {
-			sendAudio(target, new Audio(Sounds.SPELLFAIL_227, 1, 20));
+			playGlobalAudio(target.getLocation(), Sounds.SPELLFAIL_227, 1, 20);
 			target.graphics(SPLASH_GRAPHIC);
 			return;
 		}
 		target.graphics(endGraphic);
-		sendAudio(target, new Audio(impactAudio, 1, 20));
+		playGlobalAudio(target.getLocation(), impactAudio, 1, 20);
 	}
 
 	@Override
@@ -171,7 +173,7 @@ public abstract class CombatSpell extends MagicSpell {
 				entity.animate(animation);
 			}
 		}
-		sendAudio(entity);
+		playGlobalAudio(entity.getLocation(), audio.getId(), 1, 20);
 	}
 
 	@Override

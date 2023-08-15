@@ -10,6 +10,7 @@ import core.game.node.entity.combat.spell.CombatSpell;
 import core.game.node.entity.combat.spell.SpellType;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.impl.Animator.Priority;
+import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
@@ -107,7 +108,7 @@ public final class SmokeSpells extends CombatSpell {
 			projectile.transform(entity, (Entity) target, false, 58, 10).send();
 		}
 		entity.animate(animation);
-		sendAudio(entity, audio);
+		playGlobalAudio(entity.getLocation(), audio.getId(), 1, 20);
 	}
 
 	@Override

@@ -76,6 +76,9 @@ import core.net.packet.out.MusicPacket
 import core.game.system.timer.*
 import core.game.system.timer.impl.*
 import core.game.node.entity.combat.CombatSwingHandler
+import core.net.packet.context.DefaultContext
+import core.net.packet.out.AudioPacket
+import org.rs09.consts.Sounds
 import java.util.regex.*
 import java.io.*
 import kotlin.math.*
@@ -576,6 +579,7 @@ fun playJingle(player: Player, jingleId: Int) {
  */
 fun impact(entity: Entity, amount: Int, type: ImpactHandler.HitsplatType = ImpactHandler.HitsplatType.NORMAL) {
     entity.impactHandler.manualHit(entity, amount, type)
+    if (entity is Player) playHurtAudio(entity)
 }
 
 /**
@@ -822,18 +826,56 @@ fun playAudio(player: Player, audio: Audio, global: Boolean = false) {
 }
 
 /**
- * Plays the given Audio for the given Entity
- * @param player the player to play the audio for
- * @param audio the audio to play
- * @param volume the volume
- * @param delay the delay
- * @param global if other nearby entities should be able to hear it
- * @param location the location where the audio will play
- * @param radius the distance the audio can be heard from the given location
+ * Plays audio for the player
+ * @param player the player to play the defined audio for
+ * @param audio the audio id to play
+ * @param volume the volume for the audio (for some audio ids it is used to define how many times to play/loop the audio)
+ * @param delay the delay in client cycles (50 cycles = 1 second)
+ * @param global if other nearby players should be able to hear the audio
+ * @param location the location where the audio will play from (if a location is defined the sound will fade with distance)
+ * @param radius the distance the audio can be heard from the defined location (default = 8 tiles if undefined)
  */
 @JvmOverloads
-fun playAudio(player: Player, audio: Int, volume: Int = 10, delay: Int = 0, global: Boolean = false, location: Location? = null, radius: Int = 15) {
-    player.audioManager.send(audio, volume, delay, global, location, radius)
+fun playAudio(player: Player, audio: Int, volume: Int = 10, delay: Int = 0, global: Boolean = false, location: Location? = null, radius: Int = 8) {
+    if (global) {
+        val nearbyPlayers = RegionManager.getLocalPlayers(location ?: player.location, radius)
+        for ( player in nearbyPlayers ) {
+            PacketRepository.send(AudioPacket::class.java, DefaultContext(player, Audio(audio, volume, delay, radius), location))
+        }
+    } else {
+        PacketRepository.send(AudioPacket::class.java, DefaultContext(player, Audio(audio, volume, delay, radius), location))
+    }
+}
+
+/**
+ * Plays audio for players near a defined location
+ * @param location the location where the audio will play from (The sound will fade with distance)
+ * @param audio the audio id to play
+ * @param volume the volume for the audio (for some audio ids it is used to define how many times to play/loop the audio)
+ * @param delay the delay in client cycles (50 cycles = 1 second)
+ * @param radius the distance the audio can be heard from the defined location (default = 8 tiles if undefined)
+ */
+@JvmOverloads
+fun playGlobalAudio(location: Location, audio: Int, volume: Int = 10, delay: Int = 0, radius: Int = 8) {
+    val nearbyPlayers = RegionManager.getLocalPlayers(location, radius)
+    for (player in nearbyPlayers) {
+        PacketRepository.send(AudioPacket::class.java, DefaultContext(player, Audio(audio, volume, delay, radius), location))
+    }
+}
+
+/**
+ * Plays a random hurt audio for the player based on gender
+ * @param player the player to play hurt audio for
+ * @param delay the delay in client cycles (50 cycles = 1 second)
+ */
+fun playHurtAudio(player: Player, delay: Int = 0) {
+    val maleHurtAudio = intArrayOf(Sounds.HUMAN_HIT4_516, Sounds.HUMAN_HIT5_517, Sounds.HUMAN_HIT_518, Sounds.HUMAN_HIT_6_522)
+    val femaleHurtAudio = intArrayOf(Sounds.FEMALE_HIT_506, Sounds.FEMALE_HIT_507, Sounds.FEMALE_HIT2_508, Sounds.FEMALE_HIT_2_510)
+    if (player.isMale) {
+        playAudio(player, maleHurtAudio.random(), 10, delay)
+    } else {
+        playAudio(player, femaleHurtAudio.random(), 10, delay)
+    }
 }
 
 /**

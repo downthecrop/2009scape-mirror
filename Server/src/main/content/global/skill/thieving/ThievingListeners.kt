@@ -1,24 +1,21 @@
 package content.global.skill.thieving
 
 import content.global.skill.skillcapeperks.SkillcapePerks
-import core.api.stun
+import core.api.*
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.impl.Animator
-import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.skill.Skills
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import org.rs09.consts.Items
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
-import core.tools.secondsToTicks
+import org.rs09.consts.Sounds
 
 class ThievingListeners : InteractionListener {
 
     private val PICKPOCKET_ANIM = Animation(881,Animator.Priority.HIGH)
     private val NPC_ANIM = Animation(422)
-    private val SUCCESS = Audio(2581, 1, 0)
 
     override fun defineListeners() {
 
@@ -56,8 +53,7 @@ class ThievingListeners : InteractionListener {
                 node.asNpc().face(player)
                 node.asNpc().animator.animate(NPC_ANIM)
 
-                val hitSoundId = 518 + RandomFunction.random(4) // choose 1 of 4 possible hit noises
-                player.audioManager.send(hitSoundId, 1, 20) // OSRS defines a delay of 20
+                playHurtAudio(player, 20)
 
                 stun(player, pickpocketData.stunTime)
 
@@ -65,7 +61,7 @@ class ThievingListeners : InteractionListener {
 
                 node.asNpc().face(null)
             } else {
-                player.audioManager.send(SUCCESS)
+                playAudio(player, Sounds.PICK_2581)
                 player.lock(2)
                 pickpocketData.table.roll().forEach { player.inventory.add(it) }
                 player.skills.addExperience(Skills.THIEVING,pickpocketData.experience)

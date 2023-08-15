@@ -7,6 +7,9 @@ import core.game.node.item.Item;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
 import core.tools.StringUtils;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Handles the attaching of a hilt on the godsword blade.
@@ -40,6 +43,7 @@ public final class GodswordHiltAttachPlugin extends UseWithHandler {
 		item = new Item(item.getId() - 8);
 		player.getInventory().add(item);
 		String name = item.getDefinition().getName();
+		playAudio(player, Sounds.GODWARS_GODSWORD_FIX_3889);
 		player.getPacketDispatch().sendMessage("You attach the hilt to the blade and make a" + (StringUtils.isPlusN(name) ? "n " : " ") + name + ".");
 		return true;
 	}

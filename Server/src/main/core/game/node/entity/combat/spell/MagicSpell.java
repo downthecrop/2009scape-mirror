@@ -12,8 +12,6 @@ import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.Item;
 import core.game.world.GameWorld;
-import core.game.world.map.MapDistance;
-import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
@@ -21,6 +19,9 @@ import core.tools.RandomFunction;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static core.api.ContentAPIKt.playAudio;
+import static core.api.ContentAPIKt.playGlobalAudio;
 
 /**
  * Represents a magic spell.
@@ -160,7 +161,7 @@ public abstract class MagicSpell implements Plugin<SpellType> {
 	public void visualize(Entity entity, Node target) {
 		entity.graphics(graphic);
 		entity.animate(animation);
-		sendAudio(entity);
+		playGlobalAudio(entity.getLocation(), audio.getId(), 1, 20);
 	}
 
 	/**
@@ -330,30 +331,6 @@ public abstract class MagicSpell implements Plugin<SpellType> {
 	 */
 	public int levelRequirement() {
 		return level;
-	}
-
-	/**
-	 * Sends the Audio packet for all players to hear (in a distance specified
-	 * by ).
-	 * @param entity The entity from where this Audio comes from.
-	 */
-	public void sendAudio(Entity entity) {
-		sendAudio(entity, audio);
-	}
-
-	/**
-	 * Sends the Audio packet for all players to hear (in a distance specified
-	 * by ).
-	 * @param entity The entity from where this Audio comes from.
-	 * @param audio The Audio to send.
-	 */
-	public void sendAudio(Entity entity, Audio audio) {
-		if (audio == null || audio.getId() < 0) {
-			return;
-		}
-		for (Player p : RegionManager.getLocalPlayers(entity, MapDistance.SOUND.getDistance())) {
-			p.getAudioManager().send(audio);
-		}
 	}
 
 	@Override

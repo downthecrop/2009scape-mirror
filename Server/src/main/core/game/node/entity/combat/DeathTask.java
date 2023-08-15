@@ -18,6 +18,8 @@ import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
 
+import static core.api.ContentAPIKt.playGlobalAudio;
+
 /**
  * Handles an entity death task.
  * @author Emperor
@@ -51,7 +53,7 @@ public final class DeathTask extends NodeTask {
 				Player p = killer.asPlayer();
 				Audio audio = e.asNpc().getAudio(2);
 				if (audio != null) {
-					audio.send(p, true);
+					playGlobalAudio(e.getLocation(), audio.getId());
 				}
 			}
 		}

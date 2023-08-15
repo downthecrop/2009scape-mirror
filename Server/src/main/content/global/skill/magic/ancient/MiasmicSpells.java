@@ -101,7 +101,7 @@ public final class MiasmicSpells extends CombatSpell {
 			projectile.transform(entity, (Entity) target, false, 58, 10).send();
 		}
 		entity.animate(animation);
-		sendAudio(entity, audio);
+		playGlobalAudio(entity.getLocation(), audio.getId(), 1, 20);
 	}
 
 	@Override

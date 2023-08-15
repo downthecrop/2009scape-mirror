@@ -13,6 +13,7 @@ import org.rs09.consts.Items
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.game.world.GameWorld.Pulser
+import org.rs09.consts.Sounds
 
 private const val LOADER = 11162
 private const val BONE_GRINDER = 11163
@@ -92,6 +93,7 @@ class BoneGrinderListener : InteractionListener {
                     0 -> {
                         lock(player, FILL_ANIM.duration)
                         animate(player, FILL_ANIM)
+                        playAudio(player, Sounds.FILL_GRINDER_1133)
                     }
                     FILL_ANIM.duration -> {
                         sendMessage(player,"You fill the hopper with bones.")
@@ -173,6 +175,7 @@ class BoneGrinderListener : InteractionListener {
                         lock(player, WIND_ANIM.duration)
                         animate(player, WIND_ANIM)
                         sendMessage(player,"You wind the handle.")
+                        playAudio(player, Sounds.GRINDER_GRINDING_1131)
                     }
                     WIND_ANIM.duration -> {
                         sendMessage(player,"The bonemeal falls into the bin.")
@@ -233,6 +236,7 @@ class BoneGrinderListener : InteractionListener {
                     0 -> {
                         face(player,Location(3658, 3525, 1))
                         animate(player, SCOOP_ANIM)
+                        playAudio(player, Sounds.GRINDER_EMPTY_1136)
                     }
                     SCOOP_ANIM.duration -> {
                         if(removeItem(player,Item(Items.EMPTY_POT_1931),Container.INVENTORY)){

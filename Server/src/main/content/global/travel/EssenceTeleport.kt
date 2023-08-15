@@ -18,6 +18,7 @@ import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
 import core.game.world.GameWorld
+import org.rs09.consts.Sounds
 
 /**
  * Represents a utilitity class for rune essence teleporting.
@@ -57,7 +58,7 @@ object EssenceTeleport {
         npc.faceTemporary(player, 1)
         npc.graphics(GLOWING_HANDS_GFX)
         lock(player,4)
-        player.audioManager.send(125)
+        playGlobalAudio(player.location, Sounds.CURSE_ALL_125, 1)
         Projectile.create(npc, player, CURSE_PROJECTILE).send()
         npc.sendChat("Senventior Disthine Molenko!")
         GameWorld.Pulser.submit(object : Pulse(1) {

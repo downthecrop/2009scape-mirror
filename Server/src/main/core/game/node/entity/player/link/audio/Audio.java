@@ -24,7 +24,7 @@ public class Audio {
     /**
      * The default radius in tiles of positional audio in [0,16).
      */
-    public static final int RADIUS = 15;
+    public static final int RADIUS = 8;
 
 	/**
 	 * The id of the audio piece.

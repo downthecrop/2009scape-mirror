@@ -12,6 +12,7 @@ import core.game.node.entity.player.link.prayer.PrayerType
 import core.game.node.entity.skill.Skills
 import content.global.skill.summoning.familiar.Familiar
 import core.api.log
+import core.api.playGlobalAudio
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
@@ -20,9 +21,9 @@ import core.game.world.map.path.Pathfinder
 import core.game.world.map.path.Pathfinder.*
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
-import core.tools.SystemLogger
 import core.game.system.config.ItemConfigParser
 import core.tools.Log
+import org.rs09.consts.Sounds
 import java.util.*
 import kotlin.math.floor
 
@@ -357,10 +358,11 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
                     if (audio == null || audio.id == 0) {
                         audio = audios[0]
                     }
-                    entity.asPlayer().audioManager.send(audio, true, entity.location)
+                    playGlobalAudio(entity.location, audio.id)
                 }
-            } else {
-                entity.asPlayer().audioManager.send(2564)
+            } else if (type == CombatStyle.MELEE) {
+                //plays a punching sound when no weapon is equipped
+                playGlobalAudio(entity.location, Sounds.HUMAN_ATTACK_2564)
             }
         } else if (entity is NPC && victim is Player) {
             val npc = entity.asNpc()

@@ -2,6 +2,7 @@ package content.global.skill.magic.ancient;
 
 import java.util.List;
 
+import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.combat.spell.Runes;
 import core.game.node.Node;
@@ -18,6 +19,9 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
+import static core.api.ContentAPIKt.playGlobalAudio;
 
 /**
  * Handles the Shadow spells from the Ancient spellbook.
@@ -96,7 +100,7 @@ public final class ShadowSpells extends CombatSpell {
 			projectile.transform(entity, (Entity) target, false, 58, 10).send();
 		}
 		entity.animate(animation);
-		sendAudio(entity, audio);
+		playGlobalAudio(entity.getLocation(), audio.getId(), 1, 20);
 	}
 
 	@Override

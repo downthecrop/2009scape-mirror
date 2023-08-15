@@ -11,9 +11,7 @@ import core.game.node.entity.combat.spell.SpellType;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
-import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.Item;
-import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
@@ -104,15 +102,14 @@ public final class IceSpells extends CombatSpell {
 			projectile.transform(entity, (Entity) target, false, 58, 10).send();
 		}
 		entity.animate(animation);
-		sendAudio(entity, audio);
+		playGlobalAudio(entity.getLocation(), audio.getId(), 1, 20);
+
 	}
 
 	@Override
 	public void visualizeImpact(Entity entity, Entity target, BattleState state) {
 		if (state.isFrozen()) {
-			if (target == entity.getProperties().getCombatPulse().getVictim()) {
-				sendAudio(target, new Audio(impactAudio, 1, 20));
-			}
+			playGlobalAudio(target.getLocation(), impactAudio, 1, 20);
 			target.graphics(BARRAGE_ORB);
 			return;
 		}

@@ -19,6 +19,9 @@ import core.plugin.Initializable;
 import core.tools.RandomFunction;
 import org.rs09.consts.Sounds;
 
+import static core.api.ContentAPIKt.impact;
+import static core.api.ContentAPIKt.playAudio;
+
 /**
  * The desert zone map.
  * @author Emperor
@@ -76,7 +79,7 @@ public final class DesertZone extends MapZone implements Plugin<Object> {
         if (drink(p)) {
             return;
         }
-        p.getImpactHandler().manualHit(p, RandomFunction.random(1, p.getLocation().getY() < 2990 ? 12 : 8), HitsplatType.NORMAL);
+        impact(p, RandomFunction.random(1, p.getLocation().getY() < 2990 ? 12 : 8), HitsplatType.NORMAL);
         p.getPacketDispatch().sendMessage("You start dying of thirst while you're in the desert.");
     }
 
@@ -105,7 +108,7 @@ public final class DesertZone extends MapZone implements Plugin<Object> {
                 p.getInventory().add(new Item(i.getId() + 2));
                 p.animate(ANIMATION);
                 p.getPacketDispatch().sendMessage("You take a drink of water.");
-                p.getAudioManager().send(Sounds.LIQUID_2401, 1);
+                playAudio(p, Sounds.LIQUID_2401, 1);
                 return true;
             }
         }
