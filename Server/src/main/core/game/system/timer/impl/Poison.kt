@@ -35,8 +35,8 @@ class Poison : PersistTimer (30, "poison", flags = arrayOf(TimerFlag.ClearOnDeat
 
     override fun parse (root: JSONObject, entity: Entity) {
         val uid = root["source-uid"].toString().toInt()
-        severity = root["severity"].toString().toInt()
         damageSource = Repository.getPlayerByUid (uid) ?: entity
+        severity = root["severity"].toString().toInt()
     }
 
     override fun onRegister (entity: Entity) {
