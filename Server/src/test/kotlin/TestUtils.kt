@@ -45,8 +45,8 @@ object TestUtils {
     var uidCounter = 0
     const val PLAYER_DEATH_TICKS = 14
 
-    fun getMockPlayer(name: String, ironman: IronmanMode = IronmanMode.NONE, rights: Rights = Rights.ADMINISTRATOR): MockPlayer {
-        val p = MockPlayer(name)
+    fun getMockPlayer(name: String, ironman: IronmanMode = IronmanMode.NONE, rights: Rights = Rights.ADMINISTRATOR, isBot: Boolean = false): MockPlayer {
+        val p = MockPlayer(name, isBot)
         p.ironmanManager.mode = ironman
         p.details.accountInfo.uid = uidCounter++
         p.setPlaying(true);
@@ -114,7 +114,7 @@ object TestUtils {
     }
 }
 
-class MockPlayer(name: String) : Player(PlayerDetails(name)), AutoCloseable {
+class MockPlayer(name: String, val isBot: Boolean) : Player(PlayerDetails(name)), AutoCloseable {
     var hasInit = false
     init { configureBasicProperties(); flagTutComplete(false); init(); flagTutComplete(true) }
 
@@ -122,6 +122,7 @@ class MockPlayer(name: String) : Player(PlayerDetails(name)), AutoCloseable {
         this.details.session = MockSession()
         this.location = ServerConstants.HOME_LOCATION
         this.properties.attackStyle = WeaponInterface.AttackStyle(0, WeaponInterface.BONUS_CRUSH)
+        this.artificial = isBot
     }
 
     fun flagTutComplete(complete: Boolean) {

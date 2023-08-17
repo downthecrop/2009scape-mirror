@@ -63,6 +63,13 @@ class RandomEventTests {
         }
     }
 
+    @Test fun shouldNotSpawnForArtificialPlayer() {
+        TestUtils.getMockPlayer("antimacroshouldspawnrandom", isBot = true).use {p ->
+            val timer = getTimer<AntiMacro>(p)
+            Assertions.assertEquals(null, timer)
+        }
+    }
+
     @Test fun teleportAndNotePunishmentShouldNotAffectAlreadyNotedItems() {
         TestUtils.getMockPlayer("teleportpunishment1").use {p ->
             val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer is null!")
