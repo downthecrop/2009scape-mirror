@@ -37,7 +37,7 @@ class AntiMacro : PersistTimer(0, "antimacro", isAuto = true), Commands {
     }
 
     override fun onRegister(entity: Entity) {
-        if (entity !is Player)
+        if (entity !is Player || entity.isArtificial)
             entity.timers.removeTimer(this)
 
         if (runInterval == 0)
