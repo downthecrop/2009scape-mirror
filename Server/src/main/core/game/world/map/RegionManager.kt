@@ -757,6 +757,31 @@ object RegionManager {
     }
 
     /**
+     * Gets a list of local players within a symmetric bounding box.
+     * @param l The location.
+     * @param xdist The distance from the location on the x plane that is considered within bounds.
+     * @param ydist The distance from the location on the y plane that is considered within bounds.
+     * @return The list of players.
+     */
+    @JvmStatic
+    fun getLocalPlayersBoundingBox(l: Location, xdist: Int, ydist: Int): MutableList<Player> {
+        val players: MutableList<Player> = LinkedList()
+        for (regionX in ((l.regionX - 6) shr 3)..((l.regionX + 6) shr 3)) {
+            for (regionY in ((l.regionY - 6) shr 3)..((l.regionY + 6) shr 3)) {
+                for (player in forId((regionX shl 8) or regionY).planes[l.z].players) {
+                    if (player.location.x >= l.getX() - xdist &&
+                        player.location.x <= l.getX() + xdist &&
+                        player.location.y >= l.getY() - ydist &&
+                        player.location.y <= l.getY() + ydist) {
+                        players.add(player)
+                    }
+                }
+            }
+        }
+        return players
+    }
+
+    /**
      * Gets a list of local players.
      * @param l The location.
      * @param distance The distance to that location.

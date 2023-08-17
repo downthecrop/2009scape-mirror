@@ -19,8 +19,8 @@ import core.tools.RandomFunction;
 
 /**
  * Represents the wilderness obelisk plugin.
- * @author 'Vexia
- * @version 1.0
+ * @author 'Vexia, small changes by Player Name
+ * @version 1.1
  */
 @Initializable
 public final class WildernessObeliskPlugin extends OptionHandler {
@@ -90,20 +90,23 @@ public final class WildernessObeliskPlugin extends OptionHandler {
 					}
 					return true;
 				}
-				int index = RandomFunction.random(Obelisk.values().length);
-				Obelisk newObelisk = Obelisk.values()[index];
-				if (newObelisk == stationObelisk) {
-					newObelisk = Obelisk.values()[index++ % Obelisk.values().length];
-				}
-				for (Player player : RegionManager.getLocalPlayers(center, 1)) {
-					player.getPacketDispatch().sendMessage("Ancient magic teleports you somewhere in the wilderness.");
-					int xDif = stationObelisk.getLocation().getX() - player.getLocation().getX();
-					int yDif = stationObelisk.getLocation().getY() - player.getLocation().getY();
-					if (xDif > 0 || yDif > 0) {
-						player.getTeleporter().send(Location.create(newObelisk.getLocation().getX() - xDif, newObelisk.getLocation().getY() - yDif, 0), TeleportType.OBELISK, 2);
-					} else {
-						player.getTeleporter().send(Location.create(newObelisk.getLocation().getX() + xDif, newObelisk.getLocation().getY() + yDif, 0), TeleportType.OBELISK, 2);
+				// Determine new obelisk
+				Obelisk[] newObelisks = Obelisk.values();
+				for (int i = 0; i < newObelisks.length; i++) {
+					// Find our current obelisk and remove it from the candidate set by replacing it with the last obelisk
+					if (newObelisks[i] == stationObelisk) {
+						newObelisks[i] = newObelisks[newObelisks.length - 1];
+						break;
 					}
+				}
+				int index = RandomFunction.random(0, newObelisks.length - 1); //cutting out the last one that is now duplicated
+				Obelisk newObelisk = newObelisks[index];
+				// Teleport players standing within a 3-by-3 bounding box
+				for (Player player : RegionManager.getLocalPlayersBoundingBox(center, 1, 1)) {
+					player.getPacketDispatch().sendMessage("Ancient magic teleports you somewhere in the wilderness.");
+					int xOffset = player.getLocation().getX() - center.getX();
+					int yOffset = player.getLocation().getY() - center.getY();
+					player.getTeleporter().send(Location.create(newObelisk.getLocation().getX() + xOffset, newObelisk.getLocation().getY() + yOffset, 0), TeleportType.OBELISK, 2);
 				}
 				super.setDelay(1);
 				return false;
