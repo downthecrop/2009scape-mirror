@@ -12,11 +12,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class FairyChefDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class FairyChefDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npcl(core.game.dialogue.FacialExpression.OLD_DEFAULT,"'Ello, sugar. I'm afraid I can't gossip right now, I've got a cake in the oven.").also { stage = 99 }
+        npcl(FacialExpression.OLD_DEFAULT,"'Ello, sugar. I'm afraid I can't gossip right now, I've got a cake in the oven.").also { stage = 99 }
         return true
     }
 
@@ -28,7 +28,7 @@ class FairyChefDialogue(player: Player? = null) : core.game.dialogue.DialoguePlu
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return FairyChefDialogue(player)
     }
 

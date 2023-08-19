@@ -10,8 +10,8 @@ import core.plugin.Initializable
  * Dialogue for Kazgar
  * @author Ceikry
  */
-class KazgarDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+class KazgarDialogue(player: Player? = null) : DialoguePlugin(player) {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return KazgarDialogue(player)
     }
 

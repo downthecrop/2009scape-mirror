@@ -12,11 +12,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class ThorodinDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class ThorodinDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.OLD_DEFAULT,"Good day, sir.").also { stage = 0 }
+        npc(FacialExpression.OLD_DEFAULT,"Good day, sir.").also { stage = 0 }
         return true
     }
 
@@ -28,35 +28,35 @@ class ThorodinDialogue(player: Player? = null) : core.game.dialogue.DialoguePlug
 
             1 -> when(buttonId){
                 1 -> {
-                    player(core.game.dialogue.FacialExpression.FRIENDLY, "What are you doing down here?").also { stage = 10 }
+                    player(FacialExpression.FRIENDLY, "What are you doing down here?").also { stage = 10 }
                 }
 
                 2 -> {
-                    player(core.game.dialogue.FacialExpression.NEUTRAL, "Good day.").also { stage = 99 }
+                    player(FacialExpression.NEUTRAL, "Good day.").also { stage = 99 }
                 }
             }
 
             10 -> {
-                npc(core.game.dialogue.FacialExpression.OLD_DEFAULT,"We're extending the cave so more people can live in it.",
+                npc(FacialExpression.OLD_DEFAULT,"We're extending the cave so more people can live in it.",
                     "These Miscellanians aren't so bad.",
                     "They appreciate the benefits of living underground.").also { stage++ }
             }
 
             11 -> {
-                player(core.game.dialogue.FacialExpression.ASKING,"...such as?").also { stage++ }
+                player(FacialExpression.ASKING,"...such as?").also { stage++ }
             }
 
             12 -> {
-                npc(core.game.dialogue.FacialExpression.OLD_DEFAULT,"Not getting rained on, for example.",
+                npc(FacialExpression.OLD_DEFAULT,"Not getting rained on, for example.",
                     "Did you do anything about that monster Donal", "was talking about?").also { stage++ }
             }
 
             13 -> {
-                player(core.game.dialogue.FacialExpression.FRIENDLY,"It's been taken care of.").also { stage++ }
+                player(FacialExpression.FRIENDLY,"It's been taken care of.").also { stage++ }
             }
 
             14 -> {
-                npc(core.game.dialogue.FacialExpression.OLD_HAPPY,"Glad to hear it.",
+                npc(FacialExpression.OLD_HAPPY,"Glad to hear it.",
                     "Now we can get on with excavating.").also { stage = 99 }
             }
 
@@ -65,7 +65,7 @@ class ThorodinDialogue(player: Player? = null) : core.game.dialogue.DialoguePlug
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return ThorodinDialogue(player)
     }
 

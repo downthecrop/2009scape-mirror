@@ -79,7 +79,7 @@ class BlackDemonCutscene(player: Player) : Cutscene(player) {
             }
             11 -> {
                 end{
-                    BlackDemonNPC(NPCs.BLACK_DEMON_677, Location.create(2485, 9864, 0)).init();
+                    BlackDemonNPC(NPCs.BLACK_DEMON_677, Location.create(2485, 9864, 0)).init()
                 }
             }
         }

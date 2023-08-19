@@ -15,7 +15,7 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class FlowerGirlDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class FlowerGirlDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -27,14 +27,14 @@ class FlowerGirlDialogue(player: Player? = null) : core.game.dialogue.DialoguePl
             false -> npc(FacialExpression.NEUTRAL, "Hello.").also { stage = 1 }
         }
         */
-        npc(core.game.dialogue.FacialExpression.NEUTRAL, "Hello.").also { stage = 1 }
+        npc(FacialExpression.NEUTRAL, "Hello.").also { stage = 1 }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
             1 -> {
-                player(core.game.dialogue.FacialExpression.ASKING, "Good day. What are you doing?").also { stage++ }
+                player(FacialExpression.ASKING, "Good day. What are you doing?").also { stage++ }
             }
 
             2 -> {
@@ -44,7 +44,7 @@ class FlowerGirlDialogue(player: Player? = null) : core.game.dialogue.DialoguePl
                     false -> npc(FacialExpression.NEUTRAL, "I'm selling flowers, 15gp for three. Would you like some?").also { stage++ }
                 }
                  */
-                npc(core.game.dialogue.FacialExpression.NEUTRAL, "I'm selling flowers, 15gp for three. Would you like some?").also { stage++ }
+                npc(FacialExpression.NEUTRAL, "I'm selling flowers, 15gp for three. Would you like some?").also { stage++ }
             }
 
             3 -> {
@@ -54,15 +54,15 @@ class FlowerGirlDialogue(player: Player? = null) : core.game.dialogue.DialoguePl
             4 -> when(buttonId){
                 1 -> {
                     if (player.inventory.contains(995,15)) {
-                            npc(core.game.dialogue.FacialExpression.HAPPY, "Thank you! Here you go.").also { stage = 99 }
+                            npc(FacialExpression.HAPPY, "Thank you! Here you go.").also { stage = 99 }
                             player.inventory.remove(Item(995, 15))
                             addItemOrDrop(player, 2460, 1)
                     } else {
-                        player(core.game.dialogue.FacialExpression.HALF_THINKING, "I'm sorry, but I don't have 15gp.").also { stage = 99 }
+                        player(FacialExpression.HALF_THINKING, "I'm sorry, but I don't have 15gp.").also { stage = 99 }
                     }
                 }
                 2 -> {
-                    player(core.game.dialogue.FacialExpression.NEUTRAL, "No, thank you.").also { stage = 99 }
+                    player(FacialExpression.NEUTRAL, "No, thank you.").also { stage = 99 }
                 }
             }
 
@@ -71,7 +71,7 @@ class FlowerGirlDialogue(player: Player? = null) : core.game.dialogue.DialoguePl
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return FlowerGirlDialogue(player)
     }
 

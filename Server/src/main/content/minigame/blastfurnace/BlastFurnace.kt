@@ -185,7 +185,7 @@ object BlastFurnace {
                                 if(bar.product.id == Items.GOLD_BAR_2357 &&
                                     player.equipment[EquipmentContainer.SLOT_HANDS] != null &&
                                     player.equipment[EquipmentContainer.SLOT_HANDS].id == GOLDSMITH_GAUNTLETS_776) {
-                                    experience *= 2.5;
+                                    experience *= 2.5
                                 }
                                 rewardXP(player, Skills.SMITHING, experience)
                                 totalAmount = barsAmount + oreAmount

@@ -34,7 +34,7 @@ class HaroldDialogueFile : DialogueFile() {
         // This jumpStage is needed to resume the conversation after the dice interface.
         // The dice interface closes the dialogue file.
         if(getAttribute(player!!, ATTRIBUTE_JUMPSTAGE, 0) != 0) {
-            stage = getAttribute(player!!, ATTRIBUTE_JUMPSTAGE, 0);
+            stage = getAttribute(player!!, ATTRIBUTE_JUMPSTAGE, 0)
             setAttribute(player!!, ATTRIBUTE_JUMPSTAGE, 0)
         }
         println(getAttribute(player!!, ATTRIBUTE_HAROLD_MONEY, -1))
@@ -198,7 +198,7 @@ class HaroldDialogueFile : DialogueFile() {
                         sendMessage(player!!, "Harold has given you some of your winnings!")
                         val haroldAmount = getAttribute(player!!, ATTRIBUTE_HAROLD_MONEY, 200)
                         setAttribute(player!!, ATTRIBUTE_HAROLD_MONEY,0)
-                        addItemOrDrop(player!!, Items.COINS_995, haroldAmount);
+                        addItemOrDrop(player!!, Items.COINS_995, haroldAmount)
                         stage++
                     }
                     37 -> npcl(FacialExpression.FRIENDLY, "I'll write you out an IOU for the rest.").also { stage++ }
@@ -286,7 +286,7 @@ class HaroldDialogueFile : DialogueFile() {
                         sendMessage(player!!, "Harold has given you some of your winnings!")
                         val haroldAmount = getAttribute(player!!, ATTRIBUTE_HAROLD_MONEY, 200)
                         setAttribute(player!!, ATTRIBUTE_HAROLD_MONEY,0)
-                        addItemOrDrop(player!!, Items.COINS_995, haroldAmount);
+                        addItemOrDrop(player!!, Items.COINS_995, haroldAmount)
                         stage++
                     }
                     34 -> npcl(FacialExpression.DRUNK, "I owe you the resht!").also { stage++ }
@@ -304,7 +304,7 @@ class HaroldDialogueFile : DialogueFile() {
                         if (inInventory(player!!, Items.IOU_3103)){
                             stage = 5
                         } else {
-                            stage++;
+                            stage++
                         }
                     }
                     1 -> playerl(FacialExpression.FRIENDLY, "I've lost the IOU you gave me.").also { stage++ }
@@ -355,7 +355,7 @@ class HaroldDialogueFile : DialogueFile() {
                         if (inInventory(player!!, Items.COMBINATION_3102) || inInventory(player!!, Items.IOU_3103)){
                             stage = 5
                         } else {
-                            stage++;
+                            stage++
                         }
                     }
                     1 -> playerl(FacialExpression.FRIENDLY, "I've lost the IOU you gave me.").also { stage++ }

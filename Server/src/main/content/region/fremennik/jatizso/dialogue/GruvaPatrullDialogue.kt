@@ -8,21 +8,21 @@ import org.rs09.consts.NPCs
 import core.tools.END_DIALOGUE
 
 @Initializable
-class GruvaPatrullDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+class GruvaPatrullDialogue(player: Player? = null) : DialoguePlugin(player) {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return GruvaPatrullDialogue(player)
     }
 
     override fun open(vararg args: Any?): Boolean {
-        npcl(core.game.dialogue.FacialExpression.FRIENDLY,"Ho! Outerlander.")
+        npcl(FacialExpression.FRIENDLY,"Ho! Outerlander.")
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            0 -> playerl(core.game.dialogue.FacialExpression.HALF_ASKING, "What's down the scary-looking staircase?").also { stage++ }
-            1 -> npcl(core.game.dialogue.FacialExpression.NEUTRAL, "These are the stairs down to the mining caves. There are rich veins of many types down there, and miners too. Though be careful; some of the trolls occasionally sneak into the far end of the cave.").also { stage++ }
-            2 -> playerl(core.game.dialogue.FacialExpression.NEUTRAL, "Thanks. I'll look out for them.").also { stage = END_DIALOGUE }
+            0 -> playerl(FacialExpression.HALF_ASKING, "What's down the scary-looking staircase?").also { stage++ }
+            1 -> npcl(FacialExpression.NEUTRAL, "These are the stairs down to the mining caves. There are rich veins of many types down there, and miners too. Though be careful; some of the trolls occasionally sneak into the far end of the cave.").also { stage++ }
+            2 -> playerl(FacialExpression.NEUTRAL, "Thanks. I'll look out for them.").also { stage = END_DIALOGUE }
         }
         return true
     }

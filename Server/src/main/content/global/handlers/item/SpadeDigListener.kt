@@ -7,7 +7,7 @@ object SpadeDigListener {
     val listeners = HashMap<Location,(Player) -> Unit>()
 
     fun registerListener(location: Location, method: (Player) -> Unit){
-        listeners.putIfAbsent(location,method);
+        listeners.putIfAbsent(location,method)
     }
 
     @JvmStatic

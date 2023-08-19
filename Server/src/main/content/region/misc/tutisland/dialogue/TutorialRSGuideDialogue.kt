@@ -15,8 +15,8 @@ import content.region.misc.tutisland.handlers.TutorialStage
  * @author Ceikry
  */
 @Initializable
-class TutorialRSGuideDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+class TutorialRSGuideDialogue(player: Player? = null) : DialoguePlugin(player) {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return TutorialRSGuideDialogue(player)
     }
 
@@ -32,7 +32,7 @@ class TutorialRSGuideDialogue(player: Player? = null) : core.game.dialogue.Dialo
                 player,
                 interpreter.sendDialogues(
                     npc,
-                    core.game.dialogue.FacialExpression.HALF_GUILTY,
+                    FacialExpression.HALF_GUILTY,
                     "Greetings! Please follow the onscreen",
                     "instructions!"
                 )
@@ -46,7 +46,7 @@ class TutorialRSGuideDialogue(player: Player? = null) : core.game.dialogue.Dialo
                 player,
                 interpreter.sendDialogues(
                     npc,
-                    core.game.dialogue.FacialExpression.HALF_GUILTY,
+                    FacialExpression.HALF_GUILTY,
                     "Greetings! I see you are a new arrival to this land. My",
                     "job is to welcome all new visitors. So welcome!"
                 )
@@ -60,7 +60,7 @@ class TutorialRSGuideDialogue(player: Player? = null) : core.game.dialogue.Dialo
                 player,
                 interpreter.sendDialogues(
                     npc,
-                    core.game.dialogue.FacialExpression.HALF_GUILTY,
+                    FacialExpression.HALF_GUILTY,
                     "Please follow the onscreen instructions!"
                 )
             )
@@ -75,7 +75,7 @@ class TutorialRSGuideDialogue(player: Player? = null) : core.game.dialogue.Dialo
                 player,
                 interpreter.sendDialogues(
                     npc,
-                    core.game.dialogue.FacialExpression.FRIENDLY,
+                    FacialExpression.FRIENDLY,
                     "You have already learned the first thing needed to",
                     "succeed in this world: talking to other people!"
                 )
@@ -85,7 +85,7 @@ class TutorialRSGuideDialogue(player: Player? = null) : core.game.dialogue.Dialo
                 player,
                 interpreter.sendDialogues(
                     npc,
-                    core.game.dialogue.FacialExpression.FRIENDLY,
+                    FacialExpression.FRIENDLY,
                     "You will find many inhabitants of this world have useful",
                     "things to say to you. By clicking on them with your",
                     "mouse you can talk to them."
@@ -96,7 +96,7 @@ class TutorialRSGuideDialogue(player: Player? = null) : core.game.dialogue.Dialo
                 player,
                 interpreter.sendDialogues(
                     npc,
-                    core.game.dialogue.FacialExpression.FRIENDLY,
+                    FacialExpression.FRIENDLY,
                     "I would also suggest reading through some of the",
                     "supporting information on the website. There you can",
                     "find the starter guides, which contain all the",
@@ -108,7 +108,7 @@ class TutorialRSGuideDialogue(player: Player? = null) : core.game.dialogue.Dialo
                 player,
                 interpreter.sendDialogues(
                     npc,
-                    core.game.dialogue.FacialExpression.FRIENDLY,
+                    FacialExpression.FRIENDLY,
                     "contain helpful tips to help you on your",
                     "journey."
                 )
@@ -118,7 +118,7 @@ class TutorialRSGuideDialogue(player: Player? = null) : core.game.dialogue.Dialo
                     player,
                     interpreter.sendDialogues(
                         npc,
-                        core.game.dialogue.FacialExpression.FRIENDLY,
+                        FacialExpression.FRIENDLY,
                         "To continue the tutorial go through that door over",
                         "there and speak to your first instructor!"
                     )

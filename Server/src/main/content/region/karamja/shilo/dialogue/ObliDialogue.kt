@@ -12,11 +12,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class ObliDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class ObliDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.FRIENDLY,"Welcome to Obli's General Store Bwana!",
+        npc(FacialExpression.FRIENDLY,"Welcome to Obli's General Store Bwana!",
             "Would you like to see my items?").also { stage = 0 }
         return true
     }
@@ -28,8 +28,8 @@ class ObliDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(p
             }
 
             1 -> when (buttonId) {
-                1 -> player(core.game.dialogue.FacialExpression.FRIENDLY, "Yes, please.").also { stage = 10 }
-                2 -> player(core.game.dialogue.FacialExpression.FRIENDLY, "No, but thanks for the offer.").also { stage = 99 }
+                1 -> player(FacialExpression.FRIENDLY, "Yes, please.").also { stage = 10 }
+                2 -> player(FacialExpression.FRIENDLY, "No, but thanks for the offer.").also { stage = 99 }
             }
 
             10 -> {
@@ -41,7 +41,7 @@ class ObliDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(p
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return ObliDialogue(player)
     }
 

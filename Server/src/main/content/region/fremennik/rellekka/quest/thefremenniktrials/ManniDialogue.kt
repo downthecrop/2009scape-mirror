@@ -51,7 +51,7 @@ class ManniDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(
                     return true
                 } else {
                     npc("Come back when you're ready to begin", "the contest.")
-                    stage = 1000;
+                    stage = 1000
                     return true
                 }
             }

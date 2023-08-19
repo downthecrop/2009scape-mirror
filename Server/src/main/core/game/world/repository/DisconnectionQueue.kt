@@ -113,7 +113,7 @@ class DisconnectionQueue {
     fun add(player: Player, clear: Boolean = false) {
         if(queue[player.name] != null) return
         queue[player.name] = DisconnectionEntry(player, clear)
-        log(this::class.java, Log.INFO, "Queueing ${player.name} for disconnection.");
+        log(this::class.java, Log.INFO, "Queueing ${player.name} for disconnection.")
     }
 
     operator fun contains(name: String?): Boolean {

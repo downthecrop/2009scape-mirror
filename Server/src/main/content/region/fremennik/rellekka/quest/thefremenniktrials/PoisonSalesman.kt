@@ -8,7 +8,7 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 
 @Initializable
-class PoisonSalesman(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
+class PoisonSalesman(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
         options("Talk about the Murder Mystery Quest","Talk about the Fremennik Trials")
@@ -92,7 +92,7 @@ class PoisonSalesman(player: Player? = null) : core.game.dialogue.DialoguePlugin
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return PoisonSalesman(player)
     }
 

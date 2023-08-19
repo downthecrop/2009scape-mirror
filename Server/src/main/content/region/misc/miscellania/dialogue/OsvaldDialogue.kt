@@ -12,18 +12,18 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class OsvaldDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class OsvaldDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.FRIENDLY,"Welcome to the Miscellania food store.","We've only opened recently.").also { stage = 0 }
+        npc(FacialExpression.FRIENDLY,"Welcome to the Miscellania food store.","We've only opened recently.").also { stage = 0 }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
             0-> {
-                npc(core.game.dialogue.FacialExpression.NEUTRAL, "Would you like to buy anything,",
+                npc(FacialExpression.NEUTRAL, "Would you like to buy anything,",
                     "your Royal Highness?").also { stage++ }
             }
 
@@ -35,15 +35,15 @@ class OsvaldDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
 
             2 -> when(buttonId){
                 1 -> {
-                    player(core.game.dialogue.FacialExpression.ASKING, "Could you show me what you have for sale?").also { stage = 10 }
+                    player(FacialExpression.ASKING, "Could you show me what you have for sale?").also { stage = 10 }
                 }
 
                 2 -> {
-                    player(core.game.dialogue.FacialExpression.NEUTRAL, "No thank you, I don't need food just now.").also { end() }
+                    player(FacialExpression.NEUTRAL, "No thank you, I don't need food just now.").also { end() }
                 }
 
                 3 -> {
-                    player(core.game.dialogue.FacialExpression.ASKING, "What's it like living down here?").also { stage = 20 }
+                    player(FacialExpression.ASKING, "What's it like living down here?").also { stage = 20 }
                 }
             }
 
@@ -52,7 +52,7 @@ class OsvaldDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
             }
 
             20 -> {
-                npc(core.game.dialogue.FacialExpression.FRIENDLY, "The town's thriving.",
+                npc(FacialExpression.FRIENDLY, "The town's thriving.",
                     "I'm sure it'll soon be as busy as Rellekka!").also { stage = 99 }
             }
 
@@ -63,7 +63,7 @@ class OsvaldDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return OsvaldDialogue(player)
     }
 

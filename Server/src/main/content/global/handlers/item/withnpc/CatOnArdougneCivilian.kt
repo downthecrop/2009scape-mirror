@@ -50,7 +50,7 @@ class CatOnArdougneCivilian: InteractionListener {
             player.familiarManager.removeDetails(used.id)
             removeItem(player,used,Container.INVENTORY)
             addItem(player,Items.DEATH_RUNE_560,100)
-            return@onUseWith true;
+            return@onUseWith true
         }
     }
 }

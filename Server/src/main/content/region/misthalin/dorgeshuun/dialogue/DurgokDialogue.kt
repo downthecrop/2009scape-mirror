@@ -15,11 +15,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class DurgokDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class DurgokDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npcl(core.game.dialogue.FacialExpression.OLD_NORMAL,"Frogburger! There's nothing like grilled frog in a bun. Do you want one? Only 10gp!").also { stage = 0 }
+        npcl(FacialExpression.OLD_NORMAL,"Frogburger! There's nothing like grilled frog in a bun. Do you want one? Only 10gp!").also { stage = 0 }
         return true
     }
 
@@ -27,16 +27,16 @@ class DurgokDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
         when(stage){
             0 -> options("Yes, please.", "No, thanks.").also { stage++ }
             1 -> when(buttonId) {
-                1 -> player(core.game.dialogue.FacialExpression.FRIENDLY, "Yes please!").also { stage = 10 }
-                2 -> player(core.game.dialogue.FacialExpression.FRIENDLY, "No thanks.").also { stage = 99 }
+                1 -> player(FacialExpression.FRIENDLY, "Yes please!").also { stage = 10 }
+                2 -> player(FacialExpression.FRIENDLY, "No thanks.").also { stage = 99 }
             }
 
             10 -> if (player.inventory.contains(Items.COINS_995, 10)) {
                 player.inventory.remove(Item(Items.COINS_995, 10))
                 addItemOrDrop(player, Items.FROGBURGER_10962, 1)
-                npc(core.game.dialogue.FacialExpression.OLD_NORMAL, "There you go.").also { stage = 99 }
+                npc(FacialExpression.OLD_NORMAL, "There you go.").also { stage = 99 }
             } else {
-                npc(core.game.dialogue.FacialExpression.OLD_NORMAL, "I'm sorry, but you need 10gp for that.").also { stage = 99 }
+                npc(FacialExpression.OLD_NORMAL, "I'm sorry, but you need 10gp for that.").also { stage = 99 }
             }
 
             99 -> end()
@@ -44,7 +44,7 @@ class DurgokDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return DurgokDialogue(player)
     }
 

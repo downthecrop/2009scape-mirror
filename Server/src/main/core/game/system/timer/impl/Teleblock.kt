@@ -1,10 +1,11 @@
 package core.game.system.timer.impl
 
-import core.game.system.timer.*
-import core.api.*
+import core.api.sendMessage
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
-import org.json.simple.*
+import core.game.system.timer.PersistTimer
+import core.game.system.timer.RSTimer
+import core.game.system.timer.TimerFlag
 
 class Teleblock : PersistTimer (1, "teleblock", flags = arrayOf(TimerFlag.ClearOnDeath)) {
     override fun run (entity: Entity) : Boolean {

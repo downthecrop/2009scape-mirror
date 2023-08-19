@@ -15,8 +15,8 @@ import content.region.misc.tutisland.handlers.TutorialStage
  * @author Ceikry
  */
 @Initializable
-class TutorialPrayerDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+class TutorialPrayerDialogue(player: Player? = null) : DialoguePlugin(player) {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return TutorialPrayerDialogue(player)
     }
 
@@ -24,9 +24,9 @@ class TutorialPrayerDialogue(player: Player? = null) : core.game.dialogue.Dialog
         npc = args[0] as NPC
         when(getAttribute(player, "tutorial:stage", 0))
         {
-            60 -> npcl(core.game.dialogue.FacialExpression.FRIENDLY, "Greetings! I'd just like to briefly go over two topics with you: Prayer, and Friend's.")
-            62 -> npcl(core.game.dialogue.FacialExpression.FRIENDLY, "Prayers have all sorts of wonderful benefits! From boosting defence and damage, to protecting you from outside damage, to saving items on death!")
-            65 -> npcl(core.game.dialogue.FacialExpression.FRIENDLY, "For your friend and ignore lists, it's quite simple really! Use your friend list to keep track of players who you like, and ignore those you don't!")
+            60 -> npcl(FacialExpression.FRIENDLY, "Greetings! I'd just like to briefly go over two topics with you: Prayer, and Friend's.")
+            62 -> npcl(FacialExpression.FRIENDLY, "Prayers have all sorts of wonderful benefits! From boosting defence and damage, to protecting you from outside damage, to saving items on death!")
+            65 -> npcl(FacialExpression.FRIENDLY, "For your friend and ignore lists, it's quite simple really! Use your friend list to keep track of players who you like, and ignore those you don't!")
         }
         return true
     }
@@ -35,8 +35,8 @@ class TutorialPrayerDialogue(player: Player? = null) : core.game.dialogue.Dialog
         when(getAttribute(player, "tutorial:stage", 0))
         {
             60 -> when(stage++){
-                0 -> playerl(core.game.dialogue.FacialExpression.FRIENDLY, "Alright, sounds fun!")
-                1 -> npcl(core.game.dialogue.FacialExpression.FRIENDLY, "Right, so first thing: Prayer. Prayer is trained by offering bones to the gods, and can grant you many boons!")
+                0 -> playerl(FacialExpression.FRIENDLY, "Alright, sounds fun!")
+                1 -> npcl(FacialExpression.FRIENDLY, "Right, so first thing: Prayer. Prayer is trained by offering bones to the gods, and can grant you many boons!")
                 2 -> {
                     end()
                     setAttribute(player, "tutorial:stage", 61)
@@ -45,8 +45,8 @@ class TutorialPrayerDialogue(player: Player? = null) : core.game.dialogue.Dialog
             }
 
             62 -> when(stage++){
-                0 -> playerl(core.game.dialogue.FacialExpression.AMAZED, "Very cool!")
-                1 -> npcl(core.game.dialogue.FacialExpression.FRIENDLY, "Next up, let's talk about friends.")
+                0 -> playerl(FacialExpression.AMAZED, "Very cool!")
+                1 -> npcl(FacialExpression.FRIENDLY, "Next up, let's talk about friends.")
                 2 -> {
                     end()
                     setAttribute(player, "tutorial:stage", 63)

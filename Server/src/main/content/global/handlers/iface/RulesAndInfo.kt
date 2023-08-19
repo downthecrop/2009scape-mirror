@@ -34,7 +34,7 @@ object RulesAndInfo {
         val pin = getAttribute(player, "rules:pin", RandomFunction.random(1000,9999))
         setAttribute(player, "/save:rules:pin", pin)
 
-        var ln = setBaseRulesAndInfo(player);
+        var ln = setBaseRulesAndInfo(player)
 
         setInterfaceText(player, "<col=ffffff>If you agree to the above, type ::confirmrules $pin", 384, ln++)
         setInterfaceText(player, "", 384, ln)

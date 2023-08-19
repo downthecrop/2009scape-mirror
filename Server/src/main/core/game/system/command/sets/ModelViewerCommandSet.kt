@@ -19,9 +19,9 @@ class ModelViewerCommandSet  : CommandSet(Privilege.ADMIN) {
         const val ATTRIBUTE_YAW = "modelYaw"
 
         private fun display(player: Player, pageNum: Int, buttonID: Int) : Boolean {
-            BookInterface.clearBookLines(player, BookInterface.FANCY_BOOK_2_27, BookInterface.FANCY_BOOK_2_27_LINE_IDS);
-            BookInterface.clearButtons(player, BookInterface.FANCY_BOOK_2_27, BookInterface.FANCY_BOOK_2_27_BUTTON_IDS);
-            BookInterface.setTitle(player, BookInterface.FANCY_BOOK_2_27, BookInterface.FANCY_BOOK_2_27_LINE_IDS, TITLE);
+            BookInterface.clearBookLines(player, BookInterface.FANCY_BOOK_2_27, BookInterface.FANCY_BOOK_2_27_LINE_IDS)
+            BookInterface.clearButtons(player, BookInterface.FANCY_BOOK_2_27, BookInterface.FANCY_BOOK_2_27_BUTTON_IDS)
+            BookInterface.setTitle(player, BookInterface.FANCY_BOOK_2_27, BookInterface.FANCY_BOOK_2_27_LINE_IDS, TITLE)
 
             // Custom button interfaces for model book
             // These are non-standard. No pages are "turned" here.

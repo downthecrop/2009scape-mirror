@@ -47,7 +47,7 @@ class ServerConstants {
         var PLAYER_SAVE_PATH: String? = null
 
         @JvmField
-        var PLAYER_ATTRIBUTE_PATH = "ish";
+        var PLAYER_ATTRIBUTE_PATH = "ish"
 
         //path to the various config files, such as npc_spawns.json
         var CONFIG_PATH: String? = null

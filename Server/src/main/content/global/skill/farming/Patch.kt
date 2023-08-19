@@ -299,7 +299,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
         if(patch.type == PatchType.TREE) {
             // Willow branches
             if(harvestAmt < 6) {
-                harvestAmt++;
+                harvestAmt++
             }
         }
 

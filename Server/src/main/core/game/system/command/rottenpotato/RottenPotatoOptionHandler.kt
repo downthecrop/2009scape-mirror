@@ -24,7 +24,7 @@ class RottenPotatoOptionHandler : OptionHandler() {
         for(option in ROTTEN_POTATO_OPTIONS) {
             ItemDefinition.forId(Items.ROTTEN_POTATO_5733).handlers["option:${option.toLowerCase()}"] = this
         }
-        return this;
+        return this
     }
 
     override fun handle(player: Player?, node: Node?, option: String?): Boolean {

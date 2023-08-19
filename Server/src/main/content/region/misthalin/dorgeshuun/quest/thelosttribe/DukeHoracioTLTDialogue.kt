@@ -29,7 +29,7 @@ class DukeHoracioTLTDialogue(val questStage: Int) : DialogueFile() {
 
                 4 -> sendNormalDialogue(
                     Sigmund,
-                    core.game.dialogue.FacialExpression.ANGRY,
+                    FacialExpression.ANGRY,
                     "Yes your grace, but if there is any possibility that this",
                     "is a goblin incursion then we should take that possibility",
                     "very seriously!"
@@ -38,7 +38,7 @@ class DukeHoracioTLTDialogue(val questStage: Int) : DialogueFile() {
                 5 -> player("I think we should at least investigate.").also { stage++ }
                 6 -> sendNormalDialogue(
                     Sigmund,
-                    core.game.dialogue.FacialExpression.WORRIED,
+                    FacialExpression.WORRIED,
                     "Your grace, I think you should listen to " + (if (player!!.isMale) "him" else "her") + "."
                 ).also { stage++ }
 
@@ -64,7 +64,7 @@ class DukeHoracioTLTDialogue(val questStage: Int) : DialogueFile() {
 
                 2 -> sendNormalDialogue(
                     Sigmund,
-                    core.game.dialogue.FacialExpression.WORRIED,
+                    FacialExpression.WORRIED,
                     "It is unknown to me, your grace. But the fact it is",
                     "there is enough to prove the Cook's story. It must have",
                     "been dropped by a goblin as it fled."
@@ -73,14 +73,14 @@ class DukeHoracioTLTDialogue(val questStage: Int) : DialogueFile() {
                 3 -> npc("I've never heard of a goblin wearing something so well-", "crafted.").also { stage++ }
                 4 -> sendNormalDialogue(
                     Sigmund,
-                    core.game.dialogue.FacialExpression.ANGRY,
+                    FacialExpression.ANGRY,
                     "Then it must have been stolen!"
                 ).also { stage++ }
 
                 5 -> npc("But it wasn't stolen from us. Where could it be from?").also { stage++ }
                 6 -> sendNormalDialogue(
                     Sigmund,
-                    core.game.dialogue.FacialExpression.ANGRY,
+                    FacialExpression.ANGRY,
                     "That doesn't matter! You said yourself that goblins",
                     "couldn't have made that, so they must have stolen it",
                     "from somewhere."
@@ -88,14 +88,14 @@ class DukeHoracioTLTDialogue(val questStage: Int) : DialogueFile() {
 
                 7 -> sendNormalDialogue(
                     Sigmund,
-                    core.game.dialogue.FacialExpression.ANGRY,
+                    FacialExpression.ANGRY,
                     "Horrible, thieving goblins have broken into our cellar!",
                     "We must retaliate immediately!"
                 ).also { stage++ }
 
                 8 -> sendNormalDialogue(
                     Sigmund,
-                    core.game.dialogue.FacialExpression.ANGRY,
+                    FacialExpression.ANGRY,
                     "First we should wipe out the goblins east of the river,",
                     "then we can march on the goblin village to the north-",
                     "west..."
@@ -124,7 +124,7 @@ class DukeHoracioTLTDialogue(val questStage: Int) : DialogueFile() {
 
                 1 -> sendNormalDialogue(
                     Sigmund,
-                    core.game.dialogue.FacialExpression.ANGRY,
+                    FacialExpression.ANGRY,
                     "What more proof do we need? Nasty, smelly goblins",
                     "have been living under our feet all this time! We must",
                     "crush them at once!"
@@ -156,7 +156,7 @@ class DukeHoracioTLTDialogue(val questStage: Int) : DialogueFile() {
 
                 1 -> sendNormalDialogue(
                     Sigmund,
-                    core.game.dialogue.FacialExpression.ANGRY,
+                    FacialExpression.ANGRY,
                     "And I suppose you believe them, goblin lover?"
                 ).also { stage++ }
 
@@ -181,7 +181,7 @@ class DukeHoracioTLTDialogue(val questStage: Int) : DialogueFile() {
                 1 -> npc("Sigmund! Is this your doing?").also { stage++ }
                 2 -> sendNormalDialogue(
                     Sigmund,
-                    core.game.dialogue.FacialExpression.WORRIED,
+                    FacialExpression.WORRIED,
                     "Of...of course not! The goblins must have, um, dropped",
                     "the silverware as they ran away."
                 ).also { stage++ }
@@ -194,7 +194,7 @@ class DukeHoracioTLTDialogue(val questStage: Int) : DialogueFile() {
 
                 4 -> sendNormalDialogue(
                     Sigmund,
-                    core.game.dialogue.FacialExpression.THINKING,
+                    FacialExpression.THINKING,
                     "But don't you see it was for the best? For goblins to be",
                     "living under our feet like this... ugh. It doesn't matter",
                     "how civilised they are: all sub-human species must be",

@@ -14,14 +14,14 @@ import core.tools.END_DIALOGUE
  */
 
 @Initializable
-class FurTraderDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class FurTraderDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
        if (!isQuestComplete(player, "Fremennik Trials")) {
-           npc(core.game.dialogue.FacialExpression.ANNOYED, "I don't sell to outerlanders.").also { stage = END_DIALOGUE }
+           npc(FacialExpression.ANNOYED, "I don't sell to outerlanders.").also { stage = END_DIALOGUE }
        } else {
-           npcl(core.game.dialogue.FacialExpression.FRIENDLY,"Welcome back, ${player.getAttribute("fremennikname","fremmyname")}. Have you seen the furs I have today?").also { stage = 10 }
+           npcl(FacialExpression.FRIENDLY,"Welcome back, ${player.getAttribute("fremennikname","fremmyname")}. Have you seen the furs I have today?").also { stage = 10 }
        }
         return true
     }
@@ -33,7 +33,7 @@ class FurTraderDialogue(player: Player? = null) : core.game.dialogue.DialoguePlu
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return FurTraderDialogue(player)
     }
 

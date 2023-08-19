@@ -12,11 +12,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class OronwenDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class OronwenDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.FRIENDLY,"Hello, can I help?").also { stage = 0 }
+        npc(FacialExpression.FRIENDLY,"Hello, can I help?").also { stage = 0 }
         return true
     }
 
@@ -25,8 +25,8 @@ class OronwenDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugi
             0 -> options("Yes please. What are you selling?", "No thanks.").also { stage++ }
 
             1 -> when(buttonId) {
-                1 -> player(core.game.dialogue.FacialExpression.FRIENDLY, "Yes please. What are you selling?").also { stage = 10 }
-                2 -> player(core.game.dialogue.FacialExpression.FRIENDLY, "No thanks.").also { stage = 99 }
+                1 -> player(FacialExpression.FRIENDLY, "Yes please. What are you selling?").also { stage = 10 }
+                2 -> player(FacialExpression.FRIENDLY, "No thanks.").also { stage = 99 }
             }
 
             10 -> end().also { npc.openShop(player) }
@@ -36,7 +36,7 @@ class OronwenDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugi
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return OronwenDialogue(player)
     }
 

@@ -13,17 +13,17 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class DartogDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class DartogDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.OLD_NORMAL,"Hello, surface-dweller.").also { stage = 0 }
+        npc(FacialExpression.OLD_NORMAL,"Hello, surface-dweller.").also { stage = 0 }
         return true
     }
 
-    private var fr = core.game.dialogue.FacialExpression.FRIENDLY
-    private var ask = core.game.dialogue.FacialExpression.ASKING
-    private var nor = core.game.dialogue.FacialExpression.OLD_NORMAL
+    private var fr = FacialExpression.FRIENDLY
+    private var ask = FacialExpression.ASKING
+    private var nor = FacialExpression.OLD_NORMAL
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage) {
@@ -62,7 +62,7 @@ class DartogDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return DartogDialogue(player)
     }
 

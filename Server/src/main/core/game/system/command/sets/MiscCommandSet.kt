@@ -596,7 +596,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         }
 
         define("rules", Privilege.STANDARD, "", "Shows the rules."){ player, _ ->
-            RulesAndInfo.setBaseRulesAndInfo(player);
+            RulesAndInfo.setBaseRulesAndInfo(player)
             player.packetDispatch.sendInterfaceConfig(384, 17, true)
             openInterface(player, 384)
         }

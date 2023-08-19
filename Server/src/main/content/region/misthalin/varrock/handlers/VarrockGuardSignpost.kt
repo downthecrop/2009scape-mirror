@@ -1,16 +1,17 @@
 package content.region.misthalin.varrock.handlers
 
-import core.api.*
+import core.GlobalStats
+import core.api.log
+import core.api.registerMapZone
+import core.api.sendDialogue
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListener
 import core.game.interaction.Option
 import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBorders
-import core.GlobalStats
-import core.game.interaction.InteractionListener
-import core.game.interaction.IntType
 import core.tools.Log
-import core.tools.SystemLogger
 
 class VarrockGuardSignpost : InteractionListener {
     override fun defineListeners() {

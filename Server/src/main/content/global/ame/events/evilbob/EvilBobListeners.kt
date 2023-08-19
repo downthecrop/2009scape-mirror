@@ -31,7 +31,7 @@ class EvilBobListeners : InteractionListener, MapArea {
             if (getAttribute(player!!, EvilBobUtils.attentiveNewSpot, false) || getAttribute(player!!, EvilBobUtils.eventComplete, false)) {
                 sendDialogue(player, "You don't know if this is a good place to go fishing. Perhaps you should ask someone, like one of the human servants.")
             } else if (!inInventory(player, Items.SMALL_FISHING_NET_303)) {
-                sendNPCDialogue(player, NPCs.SERVANT_2481, "You'll need a fishing net. There are plenty scattered around the beach.", FacialExpression.SAD);
+                sendNPCDialogue(player, NPCs.SERVANT_2481, "You'll need a fishing net. There are plenty scattered around the beach.", FacialExpression.SAD)
             } else if (freeSlots(player) == 0) {
                 sendDialogue(player, "You don't have enough space in your inventory.")
             } else if (getAttribute(player, EvilBobUtils.fishCaught, false)) {

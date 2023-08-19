@@ -60,7 +60,7 @@ class CharlieDialogue : DialogueFile() {
                                 when (count) {
                                     0 -> {
                                         // Spawn in narnode
-                                        npc.init();
+                                        npc.init()
                                         lock(player!!,10)
                                         forceWalk(npc, player!!.location.transform(Direction.EAST, 2), "SMART")
                                     }
@@ -77,9 +77,9 @@ class CharlieDialogue : DialogueFile() {
                                     }
                                     8 -> {
                                         unlock(player!!)
-                                        npc.clear();
+                                        npc.clear()
                                         setQuestStage(player!!, questName, 55)
-                                        return true;
+                                        return true
                                     }
                                 }
                                 count++

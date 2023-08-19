@@ -439,7 +439,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
             if (!(state.targets.size == 1 && state.targets[0] == state)) {
                 for (s in state.targets) {
                     if (s != null && s != state) {
-                        adjustBattleState(entity, victim, s);
+                        adjustBattleState(entity, victim, s)
                     }
                 }
             }
@@ -651,7 +651,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
                     for(x2 in 0 until victim!!.size()) {
                         for(y2 in 0 until victim!!.size()) {
                             val dst = victim!!.location.transform(x2, y2, 0)
-                            val path = Pathfinder.PROJECTILE.find(src, 1, dst, 1, 1, 0, 0, 0, false, RegionManager::getClippingFlag)
+                            val path = PROJECTILE.find(src, 1, dst, 1, 1, 0, 0, 0, false, RegionManager::getClippingFlag)
                             if(path.isSuccessful && (!checkClose || path.points.size <= 1)) {
                                 return true
                             }

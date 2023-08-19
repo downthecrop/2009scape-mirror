@@ -61,12 +61,12 @@ object PestControlHelper {
         return false
     }
 
-    fun getMyPestControlSession1(p: PestControlTestBot): content.minigame.pestcontrol.PestControlSession? {
-        return p.getExtension(content.minigame.pestcontrol.PestControlSession::class.java)
+    fun getMyPestControlSession1(p: PestControlTestBot): PestControlSession? {
+        return p.getExtension(PestControlSession::class.java)
     }
 
-    fun getMyPestControlSession2(p: PestControlTestBot2): content.minigame.pestcontrol.PestControlSession? {
-        return p.getExtension(content.minigame.pestcontrol.PestControlSession::class.java)
+    fun getMyPestControlSession2(p: PestControlTestBot2): PestControlSession? {
+        return p.getExtension(PestControlSession::class.java)
     }
 
 }

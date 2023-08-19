@@ -12,11 +12,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class ChadwellDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class ChadwellDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.FRIENDLY,"Good day. What can I get you?").also { stage = 0 }
+        npc(FacialExpression.FRIENDLY,"Good day. What can I get you?").also { stage = 0 }
         return true
     }
 
@@ -24,20 +24,20 @@ class ChadwellDialogue(player: Player? = null) : core.game.dialogue.DialoguePlug
         when(stage){
             0 -> options("Let's see what you've got.", "Nothing thanks.").also { stage++ }
             1 -> when (buttonId) {
-                1 -> player(core.game.dialogue.FacialExpression.FRIENDLY, "Let's see what you've got.").also { stage = 5 }
-                2 -> player(core.game.dialogue.FacialExpression.FRIENDLY, "Nothing thanks.").also { stage = 10 }
+                1 -> player(FacialExpression.FRIENDLY, "Let's see what you've got.").also { stage = 5 }
+                2 -> player(FacialExpression.FRIENDLY, "Nothing thanks.").also { stage = 10 }
             }
 
             5 -> end().also { npc.openShop(player) }
 
-            10 -> npc(core.game.dialogue.FacialExpression.FRIENDLY, "Okay then.").also { stage = 99 }
+            10 -> npc(FacialExpression.FRIENDLY, "Okay then.").also { stage = 99 }
 
             99 -> end()
         }
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return ChadwellDialogue(player)
     }
 

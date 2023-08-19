@@ -9,7 +9,7 @@ import core.plugin.Initializable
 import org.rs09.consts.Items
 
 @Initializable
-class GeoffreyDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
+class GeoffreyDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun open(vararg args: Any?): Boolean {
         val diary = player.achievementDiaryManager.getDiary(DiaryType.SEERS_VILLAGE)
         if (diary.levelRewarded.any()) {
@@ -38,7 +38,7 @@ class GeoffreyDialogue(player: Player? = null) : core.game.dialogue.DialoguePlug
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return GeoffreyDialogue(player)
     }
 

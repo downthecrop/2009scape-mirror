@@ -4,23 +4,23 @@ import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
-import org.rs09.consts.NPCs
 import core.tools.END_DIALOGUE
+import org.rs09.consts.NPCs
 
 @Initializable
-class ThakkradSigmundsonDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+class ThakkradSigmundsonDialogue(player: Player? = null) : DialoguePlugin(player) {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return ThakkradSigmundsonDialogue(player)
     }
 
     override fun open(vararg args: Any?): Boolean {
-        npcl(core.game.dialogue.FacialExpression.FRIENDLY, "Greetings! I can cure your Yak Hides if you'd like!")
+        npcl(FacialExpression.FRIENDLY, "Greetings! I can cure your Yak Hides if you'd like!")
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            0 -> playerl(core.game.dialogue.FacialExpression.FRIENDLY, "Good to know!").also { stage = END_DIALOGUE }
+            0 -> playerl(FacialExpression.FRIENDLY, "Good to know!").also { stage = END_DIALOGUE }
         }
         return true
     }

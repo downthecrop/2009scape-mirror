@@ -16,26 +16,26 @@ import core.tools.END_DIALOGUE
  */
 
 @Initializable
-class TalkToChiefDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class TalkToChiefDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!isQuestComplete(player, "Fremennik Trials")) {
-            npcl(core.game.dialogue.FacialExpression.ANNOYED, "I cannot speak to you outerlander! Talk to Brundt, the Chieftain!").also { stage = END_DIALOGUE }
+            npcl(FacialExpression.ANNOYED, "I cannot speak to you outerlander! Talk to Brundt, the Chieftain!").also { stage = END_DIALOGUE }
         } else {
-            player(core.game.dialogue.FacialExpression.FRIENDLY, "Hello.").also { stage = 0 }
+            player(FacialExpression.FRIENDLY, "Hello.").also { stage = 0 }
         }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            0 -> npc(core.game.dialogue.FacialExpression.FRIENDLY, "Hello to you, too!").also { stage = END_DIALOGUE }
+            0 -> npc(FacialExpression.FRIENDLY, "Hello to you, too!").also { stage = END_DIALOGUE }
          }
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return TalkToChiefDialogue(player)
     }
 

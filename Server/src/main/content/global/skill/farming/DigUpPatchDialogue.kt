@@ -10,10 +10,10 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 
 @Initializable
-class DigUpPatchDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
+class DigUpPatchDialogue(player: Player? = null) : DialoguePlugin(player) {
     var patch: Patch? = null
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return DigUpPatchDialogue(player)
     }
 

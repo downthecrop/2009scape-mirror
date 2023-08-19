@@ -12,11 +12,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class CrateGoblinDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class CrateGoblinDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.OLD_NORMAL,"Excuse me, I need to deliver this.").also { stage = 99 }
+        npc(FacialExpression.OLD_NORMAL,"Excuse me, I need to deliver this.").also { stage = 99 }
         return true
     }
 
@@ -28,7 +28,7 @@ class CrateGoblinDialogue(player: Player? = null) : core.game.dialogue.DialogueP
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return CrateGoblinDialogue(player)
     }
 

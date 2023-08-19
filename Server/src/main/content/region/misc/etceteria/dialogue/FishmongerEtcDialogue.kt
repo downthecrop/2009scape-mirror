@@ -12,11 +12,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class FishmongerEtcDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class FishmongerEtcDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npcl(core.game.dialogue.FacialExpression.FRIENDLY,"Welcome, ${player.getAttribute("fremennikname","fremmyname")}. My fish is fresher than any in Miscellania.").also { stage = 0 }
+        npcl(FacialExpression.FRIENDLY,"Welcome, ${player.getAttribute("fremennikname","fremmyname")}. My fish is fresher than any in Miscellania.").also { stage = 0 }
         return true
     }
 
@@ -27,7 +27,7 @@ class FishmongerEtcDialogue(player: Player? = null) : core.game.dialogue.Dialogu
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return FishmongerEtcDialogue(player)
     }
 

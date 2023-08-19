@@ -79,7 +79,7 @@ class KeldagrimOptionHandlers : OptionHandler() {
  * Dialogue used for the trapdoor in the grand exchange.
  */
 @Initializable
-class GETrapdoorDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class GETrapdoorDialogue(player: Player? = null) : DialoguePlugin(player){
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
             0 -> end()
@@ -103,7 +103,7 @@ class GETrapdoorDialogue(player: Player? = null) : core.game.dialogue.DialoguePl
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return GETrapdoorDialogue(player)
     }
 

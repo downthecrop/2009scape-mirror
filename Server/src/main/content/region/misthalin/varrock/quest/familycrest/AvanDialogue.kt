@@ -9,12 +9,12 @@ import core.plugin.Initializable
 import org.rs09.consts.Items
 
 @Initializable
-class AvanDialogue (player: Player? = null): core.game.dialogue.DialoguePlugin(player) {
+class AvanDialogue (player: Player? = null): DialoguePlugin(player) {
 
     val CREST_PIECE_AVAN: Item = Item(779)
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
-        return AvanDialogue(player);
+    override fun newInstance(player: Player?): DialoguePlugin {
+        return AvanDialogue(player)
     }
 
     override fun open(vararg args: Any?): Boolean {
@@ -121,7 +121,7 @@ class AvanDialogue (player: Player? = null): core.game.dialogue.DialoguePlugin(p
             }
             else{
                 player("I have the ring and necklace right here.")
-                stage = 300;
+                stage = 300
             }
             201 -> npc("Well, I won't entrust you with my piece of the crest " ,
                     "until you have brought me a necklace of perfect gold " ,

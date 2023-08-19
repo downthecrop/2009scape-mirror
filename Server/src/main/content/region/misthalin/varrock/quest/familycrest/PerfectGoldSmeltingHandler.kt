@@ -2,7 +2,7 @@ package content.region.misthalin.varrock.quest.familycrest
 
 
 import core.api.addItem
-import core.api.animate;
+import core.api.animate
 import core.api.removeItem
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler
@@ -19,7 +19,7 @@ import core.game.world.GameWorld.Pulser
 class PerfectGoldSmeltingHandler : UseWithHandler(Items.PERFECT_GOLD_ORE_446){
 
 
-    private val furnaceIDs: IntArray = FurnaceOptionPlugin.SmeltUseWithHandler.furnaceIDS;
+    private val furnaceIDs: IntArray = FurnaceOptionPlugin.SmeltUseWithHandler.furnaceIDS
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         for(furnace in furnaceIDs){

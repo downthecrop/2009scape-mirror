@@ -31,7 +31,7 @@ val SINISTER_CHEST_HERBS = arrayOf(Item(205, 2), Item(207, 3), Item(209), Item(2
 
 public class YanilleAgilityDungeonListeners : InteractionListener {
     override fun defineListeners() {
-        ZoneBuilder.configure(YanilleAgilityDungeon());
+        ZoneBuilder.configure(YanilleAgilityDungeon())
 
         on(1728, IntType.SCENERY, "climb-down") { player, _ ->
 			player.teleport(Location(2620, 9565, 0))
@@ -65,17 +65,17 @@ public class YanilleAgilityDungeonListeners : InteractionListener {
                 player.sendMessage("The chest is locked.")
             } else {
                 if (player.getInventory().freeSlots() == 0) {
-                    player.sendMessage("You don't have enough inventory space.");
+                    player.sendMessage("You don't have enough inventory space.")
                     return@on true
                 }
                 player.lock(1)
                 if(player.inventory.remove(Item(Items.SINISTER_KEY_993, 1))) {
-                    player.sendMessages("You unlock the chest with your key...", "A foul gas seeps from the chest");
+                    player.sendMessages("You unlock the chest with your key...", "A foul gas seeps from the chest")
                     applyPoison (player, player, 2)
                     for(item in SINISTER_CHEST_HERBS) {
                         addItemOrDrop(player, item.id, item.amount)
                     }
-                    SceneryBuilder.replace(target.asScenery(), target.asScenery().transform(target.id + 1), 5);
+                    SceneryBuilder.replace(target.asScenery(), target.asScenery().transform(target.id + 1), 5)
                 }
             }
             return@on true
@@ -97,14 +97,14 @@ public class YanilleAgilityDungeonListeners : InteractionListener {
 	 */
 	fun handleBalancingLedge(player: Player, scenery: Scenery) {
 		if (player.skills.getLevel(Skills.AGILITY) < 40) {
-			player.getDialogueInterpreter().sendDialogue("You need an Agility level of at least 40 in order to do this.");
-			return;
-		}
+			player.getDialogueInterpreter().sendDialogue("You need an Agility level of at least 40 in order to do this.")
+            return
+        }
 		val dir = Direction.getLogicalDirection(player.location, scenery.location)
 		val diff = if(player.location.y == 9512) { 0 } else { 1 }
-		var end = scenery.location;
-		var xp = 0.0;
-		if (AgilityHandler.hasFailed(player, 40, 0.01)) {
+		var end = scenery.location
+        var xp = 0.0
+        if (AgilityHandler.hasFailed(player, 40, 0.01)) {
 			player.lock(3)
 			GameWorld.Pulser.submit(object : Pulse(2, player) {
 				override public fun pulse(): Boolean {
@@ -113,11 +113,11 @@ public class YanilleAgilityDungeonListeners : InteractionListener {
 				}
 			})
 		} else {
-			xp = 22.5;
-			end = scenery.location.transform(dir.getStepX() * 7, dir.getStepY() * 7, 0);
-		}
-		AgilityHandler.walk(player, -1, player.location, end, Animation.create(157 - diff), xp, null);
-	}
+			xp = 22.5
+            end = scenery.location.transform(dir.getStepX() * 7, dir.getStepY() * 7, 0)
+        }
+		AgilityHandler.walk(player, -1, player.location, end, Animation.create(157 - diff), xp, null)
+    }
 
 }
 
@@ -173,7 +173,7 @@ public class SalarinTwistedNPC : AbstractNPC {
     }
 
     override public fun getIds(): IntArray {
-        return intArrayOf(205);
+        return intArrayOf(205)
     }
 
 }

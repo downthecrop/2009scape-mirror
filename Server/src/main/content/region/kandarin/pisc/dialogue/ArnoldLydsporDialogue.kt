@@ -20,36 +20,36 @@ import core.tools.START_DIALOGUE
  * @author vddCore
  */
 @Initializable
-class ArnoldLydsporDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
+class ArnoldLydsporDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> npcl(
-                core.game.dialogue.FacialExpression.FRIENDLY,
+                FacialExpression.FRIENDLY,
                 "Ah, you come back! What you want from Arnold, heh?"
             ).also { stage++ }
 
             1 -> showTopics(
                 IfTopic(
-                    core.game.dialogue.FacialExpression.ASKING,
+                    FacialExpression.ASKING,
                     "Can you open my bank account, please?",
                     2,
                     !hasIronmanRestriction(player, IronmanMode.ULTIMATE)
                 ),
 
                 IfTopic(
-                    core.game.dialogue.FacialExpression.NEUTRAL,
+                    FacialExpression.NEUTRAL,
                     "I'd like to check my bank PIN settings.",
                     3,
                     !hasIronmanRestriction(player, IronmanMode.ULTIMATE)
                 ),
                 IfTopic(
-                    core.game.dialogue.FacialExpression.NEUTRAL,
+                    FacialExpression.NEUTRAL,
                     "I'd like to collect items.",
                     4,
                     !hasIronmanRestriction(player, IronmanMode.ULTIMATE)
                 ),
-                Topic(core.game.dialogue.FacialExpression.ASKING, "Would you like to trade?", 5),
-                Topic(core.game.dialogue.FacialExpression.FRIENDLY, "Nothing, I just came to chat.", 7)
+                Topic(FacialExpression.ASKING, "Would you like to trade?", 5),
+                Topic(FacialExpression.FRIENDLY, "Nothing, I just came to chat.", 7)
             )
 
             2 -> {
@@ -68,7 +68,7 @@ class ArnoldLydsporDialogue(player: Player? = null) : core.game.dialogue.Dialogu
             }
 
             5 -> npcl(
-                core.game.dialogue.FacialExpression.FRIENDLY,
+                FacialExpression.FRIENDLY,
                 "Ja, I have wide range of stock..."
             ).also { stage++ }
 
@@ -77,7 +77,7 @@ class ArnoldLydsporDialogue(player: Player? = null) : core.game.dialogue.Dialogu
                 end()
             }
 
-            7 -> npcl(core.game.dialogue.FacialExpression.FRIENDLY,
+            7 -> npcl(FacialExpression.FRIENDLY,
                 "Ah, that is nice - always I like to chat, but " +
                 "Herr Caranos tell me to get back to work! " +
                 "Here, you been nice, so have a present."
@@ -93,17 +93,17 @@ class ArnoldLydsporDialogue(player: Player? = null) : core.game.dialogue.Dialogu
             }
 
             9 -> playerl(
-                core.game.dialogue.FacialExpression.HALF_THINKING,
+                FacialExpression.HALF_THINKING,
                 "A cabbage?"
             ).also { stage++ }
 
             10 -> npcl(
-                core.game.dialogue.FacialExpression.HAPPY,
+                FacialExpression.HAPPY,
                 "Ja, cabbage is good for you!"
             ).also { stage++ }
 
             11 -> playerl(
-                core.game.dialogue.FacialExpression.NEUTRAL,
+                FacialExpression.NEUTRAL,
                 "Um... Thanks!"
             ).also { stage = END_DIALOGUE }
         }

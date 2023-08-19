@@ -50,7 +50,7 @@ class MapDumpCommand : CommandPlugin() {
                     LocationObjectMap[value] = locations
                 }
             }
-            return;
+            return
         }
 
         private fun findObj(player: Player?, args: List<String>?) {
@@ -76,7 +76,7 @@ class MapDumpCommand : CommandPlugin() {
                 }
             }
 
-            return;
+            return
         }
     }
 }

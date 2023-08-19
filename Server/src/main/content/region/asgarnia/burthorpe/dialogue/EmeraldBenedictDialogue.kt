@@ -18,17 +18,17 @@ import core.tools.START_DIALOGUE
  * @author vddCore
  */
 @Initializable
-class EmeraldBenedictDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
+class EmeraldBenedictDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> if(hasIronmanRestriction(player, IronmanMode.ULTIMATE)) {
                 npcl(
-                    core.game.dialogue.FacialExpression.ANNOYED,
+                    FacialExpression.ANNOYED,
                     "Get lost, tin can."
                 ).also { stage = END_DIALOGUE }
             } else {
                 npcl(
-                    core.game.dialogue.FacialExpression.SUSPICIOUS,
+                    FacialExpression.SUSPICIOUS,
                     "Got anything you don't want to lose?"
                 ).also {
                     if (hasAwaitingGrandExchangeCollections(player)) {
@@ -40,22 +40,22 @@ class EmeraldBenedictDialogue(player: Player? = null) : core.game.dialogue.Dialo
             }
 
             1 -> npcl(
-                core.game.dialogue.FacialExpression.SUSPICIOUS,
+                FacialExpression.SUSPICIOUS,
                 "By the way, a little bird told me you got some stuff waiting for you " +
                 "on the Grand Exchange."
             ).also { stage++ }
 
             2 -> showTopics(
-                Topic(core.game.dialogue.FacialExpression.ASKING, "Yes, actually. Can you help?", 3),
+                Topic(FacialExpression.ASKING, "Yes, actually. Can you help?", 3),
                 IfTopic(
-                    core.game.dialogue.FacialExpression.ASKING,
+                    FacialExpression.ASKING,
                     "Yes, but can you switch my bank accounts?",
                     4,
                     hasActivatedSecondaryBankAccount(player)
                 ),
-                Topic(core.game.dialogue.FacialExpression.ASKING, "Yes, but can you show me my PIN settings?", 5),
-                Topic(core.game.dialogue.FacialExpression.ASKING, "Yes, but can you show me my collection box?", 6),
-                Topic(core.game.dialogue.FacialExpression.ANNOYED, "Yes, thanks. And I'll keep hold of it too.", END_DIALOGUE)
+                Topic(FacialExpression.ASKING, "Yes, but can you show me my PIN settings?", 5),
+                Topic(FacialExpression.ASKING, "Yes, but can you show me my collection box?", 6),
+                Topic(FacialExpression.ANNOYED, "Yes, thanks. And I'll keep hold of it too.", END_DIALOGUE)
             )
 
             3 -> {
@@ -66,7 +66,7 @@ class EmeraldBenedictDialogue(player: Player? = null) : core.game.dialogue.Dialo
             4 -> {
                 toggleBankAccount(player)
                 npcl(
-                    core.game.dialogue.FacialExpression.SUSPICIOUS,
+                    FacialExpression.SUSPICIOUS,
                     "Sure thing. Feel free to rummage through whatever's in your ${getBankAccountName(player)} now."
                 ).also { stage = END_DIALOGUE }
             }

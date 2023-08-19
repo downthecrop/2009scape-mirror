@@ -92,7 +92,7 @@ class LecternPlugin : OptionHandler() {
             for (item in requiredItems) {
                 val staff = MagicStaff.forId(item.id)
                 if (staff != null && player.equipment.containsAtLeastOneItem(staff.staves)) {
-                    continue;
+                    continue
                 }
                 if (!player.inventory.containsItem(item)) {
                     //TODO staffs
@@ -171,7 +171,7 @@ class LecternPlugin : OptionHandler() {
                 if (ttb != null && ttb.canMake(player)) {
                     player.interfaceManager.close()
                     var requiredItemsCountingStaves = ttb.requiredItems.filter({ item ->
-                        val staff = MagicStaff.forId(item.id);
+                        val staff = MagicStaff.forId(item.id)
                         !(staff != null && player.equipment.containsAtLeastOneItem(staff.staves))
                     }).toTypedArray()
                     player.pulseManager.run(object : Pulse(1) {

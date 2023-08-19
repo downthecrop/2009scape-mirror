@@ -9,15 +9,15 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 
 @Initializable
-class AluftGianneJrDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
+class AluftGianneJrDialogue(player: Player? = null) : DialoguePlugin(player) {
     var tutorialStage = -1
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return AluftGianneJrDialogue(player)
     }
 
     override fun npc(vararg messages: String?): Component {
-        return super.npc(core.game.dialogue.FacialExpression.OLD_NORMAL,*messages)
+        return super.npc(FacialExpression.OLD_NORMAL,*messages)
     }
 
     override fun open(vararg args: Any?): Boolean {
@@ -33,7 +33,7 @@ class AluftGianneJrDialogue(player: Player? = null) : core.game.dialogue.Dialogu
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
             0 -> npc("Sure, go talk to my dad. I'll put","a good word in!").also { stage++ }
-            1 -> player(core.game.dialogue.FacialExpression.THINKING,"Th-thanks...?").also { stage++ }
+            1 -> player(FacialExpression.THINKING,"Th-thanks...?").also { stage++ }
             2 -> {
                 end()
                 player.setAttribute("/save:$GC_BASE_ATTRIBUTE:$GC_TUT_PROG",0)

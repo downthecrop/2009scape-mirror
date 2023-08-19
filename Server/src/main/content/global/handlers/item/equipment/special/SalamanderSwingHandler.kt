@@ -52,7 +52,7 @@ class SalamanderSwingHandler(private var style: CombatStyle) : CombatSwingHandle
         if (entity is Player) {
             state.weapon = Weapon(entity.equipment[3])
         }
-        if (state!!.weapon == null || !SalamanderSwingHandler.hasAmmo(entity, state)) {
+        if (state!!.weapon == null || !hasAmmo(entity, state)) {
             entity!!.properties.combatPulse.stop()
             return -1
         }
@@ -67,7 +67,7 @@ class SalamanderSwingHandler(private var style: CombatStyle) : CombatSwingHandle
             return -1
         }
         if(state.estimatedHit > victim.skills.lifepoints) state.estimatedHit = victim.skills.lifepoints
-        SalamanderSwingHandler.useAmmo(entity, state)
+        useAmmo(entity, state)
         return 1
     }
 

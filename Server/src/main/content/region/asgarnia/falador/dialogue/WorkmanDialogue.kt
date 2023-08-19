@@ -12,26 +12,26 @@ import org.rs09.consts.NPCs.WORKMAN_3236
  */
 
 @Initializable
-class WorkmanDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class WorkmanDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        player(core.game.dialogue.FacialExpression.FRIENDLY,"Hiya.").also { stage = 0 }
+        player(FacialExpression.FRIENDLY,"Hiya.").also { stage = 0 }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
             0 -> {
-                npc(core.game.dialogue.FacialExpression.ASKING, "What do you want? I've got work to do!").also { stage++ }
+                npc(FacialExpression.ASKING, "What do you want? I've got work to do!").also { stage++ }
             }
 
             1 -> {
-                player(core.game.dialogue.FacialExpression.ASKING, "Can you teach me anything?").also { stage++ }
+                player(FacialExpression.ASKING, "Can you teach me anything?").also { stage++ }
             }
 
             2 -> {
-                npcl(core.game.dialogue.FacialExpression.ANNOYED, "No - I've got one lousy apprentice already, and that's quite enough hassle! Go away!").also { stage = 99 }
+                npcl(FacialExpression.ANNOYED, "No - I've got one lousy apprentice already, and that's quite enough hassle! Go away!").also { stage = 99 }
             }
 
             99 -> end()
@@ -39,7 +39,7 @@ class WorkmanDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugi
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return WorkmanDialogue(player)
     }
 

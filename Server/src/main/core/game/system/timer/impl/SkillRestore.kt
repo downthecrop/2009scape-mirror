@@ -9,7 +9,7 @@ import core.game.node.entity.skill.Skills
 import core.game.system.timer.*
 import core.game.event.*
 
-import org.rs09.consts.Items;
+import org.rs09.consts.Items
 
 class SkillRestore : RSTimer (1, "skillrestore", isAuto = true, isSoft = true) {
     val ticksSinceLastRestore = IntArray (25)
@@ -28,7 +28,7 @@ class SkillRestore : RSTimer (1, "skillrestore", isAuto = true, isSoft = true) {
                     val current = getDynLevel (entity, i)
 
                     if (current != max)
-                        skills.updateLevel (i, if (current < max) 1 else -1, max);
+                        skills.updateLevel (i, if (current < max) 1 else -1, max)
                 }
                 ticksSinceLastRestore[i] = 0
             }

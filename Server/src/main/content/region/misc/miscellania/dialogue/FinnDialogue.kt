@@ -13,11 +13,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class FinnDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class FinnDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.FRIENDLY,"Can I help you, your Royal Highness?").also { stage = 0 }
+        npc(FacialExpression.FRIENDLY,"Can I help you, your Royal Highness?").also { stage = 0 }
         stage = 0
         return true
     }
@@ -30,15 +30,15 @@ class FinnDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(p
 
             1 -> when(buttonId){
                 1 -> {
-                    player(core.game.dialogue.FacialExpression.ASKING, "Yes please. What are you selling?").also { stage = 10 }
+                    player(FacialExpression.ASKING, "Yes please. What are you selling?").also { stage = 10 }
                 }
 
                 2 -> {
-                    player(core.game.dialogue.FacialExpression.NEUTRAL, "No thanks.").also { stage = 99 }
+                    player(FacialExpression.NEUTRAL, "No thanks.").also { stage = 99 }
                 }
 
                 3 -> {
-                    player(core.game.dialogue.FacialExpression.ASKING, "What's it like living down here?").also { stage = 20 }
+                    player(FacialExpression.ASKING, "What's it like living down here?").also { stage = 20 }
                 }
             }
 
@@ -47,7 +47,7 @@ class FinnDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(p
             }
 
             20 -> {
-                npc(core.game.dialogue.FacialExpression.HALF_WORRIED, "A lot drier in the winter than it is above ground.").also { stage = 99 }
+                npc(FacialExpression.HALF_WORRIED, "A lot drier in the winter than it is above ground.").also { stage = 99 }
             }
 
             99 -> {
@@ -58,7 +58,7 @@ class FinnDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(p
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return FinnDialogue(player)
     }
 

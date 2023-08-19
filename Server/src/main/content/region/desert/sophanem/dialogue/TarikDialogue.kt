@@ -10,7 +10,7 @@ import org.rs09.consts.NPCs
 import core.tools.END_DIALOGUE
 
 @Initializable
-class TarikDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
+class TarikDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun open(vararg args: Any?): Boolean {
         npcl(FacialExpression.WORRIED, "Ouch!")
         return true
@@ -77,7 +77,7 @@ class TarikDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(
         return intArrayOf(NPCs.TARIK_4478)
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return TarikDialogue(player)
     }
 }

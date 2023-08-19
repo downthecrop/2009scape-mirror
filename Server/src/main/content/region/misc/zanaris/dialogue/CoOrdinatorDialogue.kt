@@ -12,11 +12,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class CoOrdinatorDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class CoOrdinatorDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        player(core.game.dialogue.FacialExpression.FRIENDLY, "Hello, what are you doing?").also { stage = 0 }
+        player(FacialExpression.FRIENDLY, "Hello, what are you doing?").also { stage = 0 }
         return true
     }
 
@@ -24,11 +24,11 @@ class CoOrdinatorDialogue(player: Player? = null) : core.game.dialogue.DialogueP
         when(stage){
             0 -> {
                 when ((1..5).random()) {
-                    1 -> npcl(core.game.dialogue.FacialExpression.OLD_DISTRESSED,"Sorry, I don't have time for idle chit-chat, I need to find a Winter Fairy to send to Trollheim!").also { stage = 99 }
-                    2 -> npcl(core.game.dialogue.FacialExpression.OLD_DISTRESSED,"Sorry, I don't have time for idle chit-chat, I need to send a fairy to get little Freddie's tooth!").also { stage = 99 }
-                    3 -> npcl(core.game.dialogue.FacialExpression.OLD_DISTRESSED,"Sorry, I don't have time for idle chit-chat, I need to send an Autumn Fairy off to Burthorpe!").also { stage = 99 }
-                    4 -> npcl(core.game.dialogue.FacialExpression.OLD_DISTRESSED,"Sorry, I don't have time to talk, I need to send a Tooth Fairy to visit Sarah-Jane!").also { stage = 99 }
-                    5 -> npcl(core.game.dialogue.FacialExpression.OLD_DISTRESSED,"Sorry, I don't have time to stop, I need to send a weather fairy off to Etceteria!").also { stage = 99 }
+                    1 -> npcl(FacialExpression.OLD_DISTRESSED,"Sorry, I don't have time for idle chit-chat, I need to find a Winter Fairy to send to Trollheim!").also { stage = 99 }
+                    2 -> npcl(FacialExpression.OLD_DISTRESSED,"Sorry, I don't have time for idle chit-chat, I need to send a fairy to get little Freddie's tooth!").also { stage = 99 }
+                    3 -> npcl(FacialExpression.OLD_DISTRESSED,"Sorry, I don't have time for idle chit-chat, I need to send an Autumn Fairy off to Burthorpe!").also { stage = 99 }
+                    4 -> npcl(FacialExpression.OLD_DISTRESSED,"Sorry, I don't have time to talk, I need to send a Tooth Fairy to visit Sarah-Jane!").also { stage = 99 }
+                    5 -> npcl(FacialExpression.OLD_DISTRESSED,"Sorry, I don't have time to stop, I need to send a weather fairy off to Etceteria!").also { stage = 99 }
                 }
             }
 
@@ -37,7 +37,7 @@ class CoOrdinatorDialogue(player: Player? = null) : core.game.dialogue.DialogueP
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return CoOrdinatorDialogue(player)
     }
 

@@ -93,7 +93,7 @@ object RewardChest {
         player.interfaceManager.open(Component(Components.TRAIL_REWARD_364))
         BossKillCounter.addtoBarrowsCount(player)
         for(item in rewards){
-            announceIfRare(player, item);
+            announceIfRare(player, item)
             if(!player.inventory.add(item)){
                 GroundItemManager.create(item,player)
             }

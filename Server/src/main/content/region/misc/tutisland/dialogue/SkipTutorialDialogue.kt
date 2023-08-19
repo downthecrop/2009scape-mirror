@@ -15,13 +15,13 @@ import content.region.misc.tutisland.handlers.TutorialStage
  * @author Ceikry
  */
 @Initializable
-class SkipTutorialDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+class SkipTutorialDialogue(player: Player? = null) : DialoguePlugin(player) {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return SkipTutorialDialogue(player)
     }
 
     override fun open(vararg args: Any?): Boolean {
-        npcl(core.game.dialogue.FacialExpression.FRIENDLY, "Hey, would you like to skip to the end? Choose wisely! This is the only time you get this choice.")
+        npcl(FacialExpression.FRIENDLY, "Hey, would you like to skip to the end? Choose wisely! This is the only time you get this choice.")
         return true
     }
 

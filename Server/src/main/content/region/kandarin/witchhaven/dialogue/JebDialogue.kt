@@ -13,11 +13,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class JebDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class JebDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.FRIENDLY,"Hello there.").also { stage = 99 }
+        npc(FacialExpression.FRIENDLY,"Hello there.").also { stage = 99 }
         return true
     }
 
@@ -28,7 +28,7 @@ class JebDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(pl
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return JebDialogue(player)
     }
 

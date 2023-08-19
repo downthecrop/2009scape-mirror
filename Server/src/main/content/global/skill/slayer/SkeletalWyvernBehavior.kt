@@ -1,10 +1,6 @@
 package content.global.skill.slayer
 
 import content.global.handlers.item.equipment.special.DragonfireSwingHandler
-import core.api.EquipmentSlot
-import core.api.getItemFromEquipment
-import core.game.node.entity.Entity
-import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.combat.CombatSwingHandler
 import core.game.node.entity.combat.MultiSwingHandler
@@ -12,10 +8,8 @@ import core.game.node.entity.combat.equipment.SwitchAttack
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.npc.NPCBehavior
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.prayer.PrayerType
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
-import core.tools.RandomFunction
 import org.rs09.consts.Items
 
 class SkeletalWyvernBehavior : NPCBehavior(*Tasks.SKELETAL_WYVERN.ids) {

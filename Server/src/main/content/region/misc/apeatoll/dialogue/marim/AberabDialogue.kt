@@ -12,11 +12,11 @@ import core.plugin.Initializable
  */
 
 @Initializable
-class AberabDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class AberabDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.OLD_ANGRY1,"Grr ... Get out of my way...")
+        npc(FacialExpression.OLD_ANGRY1,"Grr ... Get out of my way...")
         stage = 99
         return true
     }
@@ -28,7 +28,7 @@ class AberabDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return AberabDialogue(player)
     }
 

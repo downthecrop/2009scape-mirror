@@ -51,21 +51,21 @@ object CanoeUtils {
             2 -> FROM_BARBARIAN.getOrDefault(destId,0)
             3 -> FROM_EDGE.getOrDefault(destId,0)
             4 -> FROM_WILDERNESS.getOrDefault(destId,0)
-            else -> 0;
+            else -> 0
         }
     }
 
     fun getShapeAnimation(axe: SkillingTool): Animation{
         return when(axe){
-            SkillingTool.BRONZE_AXE -> Animation(6744);
-            SkillingTool.IRON_AXE -> Animation(6743);
-            SkillingTool.STEEL_AXE -> Animation(6742);
-            SkillingTool.BLACK_AXE -> Animation(6741);
-            SkillingTool.MITHRIL_AXE -> Animation(6740);
-            SkillingTool.ADAMANT_AXE -> Animation(6739);
-            SkillingTool.RUNE_AXE -> Animation(6738);
-            SkillingTool.DRAGON_AXE -> Animation(6745);
-            else -> axe.animation;
+            SkillingTool.BRONZE_AXE -> Animation(6744)
+            SkillingTool.IRON_AXE -> Animation(6743)
+            SkillingTool.STEEL_AXE -> Animation(6742)
+            SkillingTool.BLACK_AXE -> Animation(6741)
+            SkillingTool.MITHRIL_AXE -> Animation(6740)
+            SkillingTool.ADAMANT_AXE -> Animation(6739)
+            SkillingTool.RUNE_AXE -> Animation(6738)
+            SkillingTool.DRAGON_AXE -> Animation(6745)
+            else -> axe.animation
         }
     }
 

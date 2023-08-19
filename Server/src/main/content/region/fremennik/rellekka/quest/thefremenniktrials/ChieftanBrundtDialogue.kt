@@ -12,7 +12,7 @@ import kotlin.random.Random
 import org.rs09.consts.*
 
 @Initializable
-class ChieftanBrundt(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
     val gender = if (player?.isMale == true){"brother"} else "sister"
     val fName = player?.getAttribute("fremennikname","bringle")
 
@@ -281,7 +281,7 @@ class ChieftanBrundt(player: Player? = null) : core.game.dialogue.DialoguePlugin
     }
 
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return ChieftanBrundt(player)
     }
 

@@ -1,7 +1,7 @@
 package content.data.consumables.effects
 
-import core.api.*
-import core.game.system.timer.impl.PoisonImmunity
+import core.api.registerTimer
+import core.api.spawnTimer
 import core.game.consumable.ConsumableEffect
 import core.game.node.entity.player.Player
 

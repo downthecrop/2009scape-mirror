@@ -2,7 +2,7 @@ package content.region.wilderness.handlers
 
 import core.api.*
 import core.game.node.entity.Entity
-import core.game.node.entity.npc.NPC;
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import content.global.skill.summoning.familiar.Familiar
 import core.game.world.map.zone.ZoneBorders

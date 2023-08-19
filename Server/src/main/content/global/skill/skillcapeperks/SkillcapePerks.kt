@@ -220,7 +220,7 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
 
         override fun open(vararg args: Any?): Boolean {
             options("Air","Mind","Water","Earth","More...")
-            stage = 0;
+            stage = 0
             return true
         }
 

@@ -1,9 +1,9 @@
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeUnit
 
 import core.api.*
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.CombatStyle
-import core.game.node.entity.impl.Animator.Priority;
+import core.game.node.entity.impl.Animator.Priority
 import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
@@ -167,7 +167,7 @@ class PitfallListeners : InteractionListener {
             return@setDest dst
         }
         on(PIT, IntType.SCENERY, "trap") { player, node ->
-            val pit = node as Scenery;
+            val pit = node as Scenery
             // TODO: check hunter level, remove logs
             if(player.skills.getLevel(Skills.HUNTER) < 31) {
                 player.sendMessage("You need a hunter level of 31 to set a pitfall trap.")
@@ -204,12 +204,12 @@ class PitfallListeners : InteractionListener {
             return@on true
         }
         on(SPIKED_PIT, IntType.SCENERY, "jump") { player, node ->
-            val pit = node as Scenery;
+            val pit = node as Scenery
             val src = player.getLocation()
             val dir = pitJumpSpots(pit.getLocation())!![src]
             if(dir != null) {
                 val dst = src.transform(dir, 3)
-                ForceMovement.run(player, src, dst, ForceMovement.WALK_ANIMATION, Animation(1603), dir, 16);
+                ForceMovement.run(player, src, dst, ForceMovement.WALK_ANIMATION, Animation(1603), dir, 16)
                 playAudio(player, getAudio(Sounds.HUNTING_JUMP_2635))
                 val pitfall_npc: Entity? = player.getAttribute("pitfall_npc", null)
                 if(pitfall_npc != null && pitfall_npc.getLocation().getDistance(src) < 3.0) {
@@ -247,7 +247,7 @@ class PitfallListeners : InteractionListener {
             return@on true
         }
         on(SPIKED_PIT, IntType.SCENERY, "dismantle") { player, node ->
-            val pit = node as Scenery;
+            val pit = node as Scenery
             playAudio(player, getAudio(Sounds.HUNTING_TAKEBRANCHES_2649))
             player.removeAttribute("pitfall:timestamp:${pit.location.x}:${pit.location.y}")
             player.incrementAttribute("pitfall:count", -1)
@@ -289,11 +289,11 @@ class PitfallListeners : InteractionListener {
 
     fun lootCorpse(player: Player, pit: Scenery, xp: Double, goodFur: Int, badFur: Int) {
         if(player.inventory.freeSlots() < 2) {
-            player.sendMessage("You don't have enough inventory space. You need 2 more free slots.");   
+            player.sendMessage("You don't have enough inventory space. You need 2 more free slots.")
             return
         }
         setPitState(player, pit.location, 0)
-        player.getSkills().addExperience(Skills.HUNTER, xp, true);
+        player.getSkills().addExperience(Skills.HUNTER, xp, true)
         player.inventory.add(Item(Items.BIG_BONES_532))
         playAudio(player, getAudio(Sounds.HUNTING_TAKEBRANCHES_2649))
         // TODO: what's the actual probability of tatty vs perfect fur?

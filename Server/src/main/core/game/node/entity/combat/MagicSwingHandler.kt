@@ -154,7 +154,7 @@ open class MagicSwingHandler (vararg flags: SwingHandlerFlag)
         if (entity is Player && !flags.contains(SwingHandlerFlag.IGNORE_PRAYER_BOOSTS_ACCURACY)) {
             prayer += entity.prayer.getSkillBonus(Skills.MAGIC)
         }
-        val additional = getSetMultiplier(entity, Skills.MAGIC);
+        val additional = getSetMultiplier(entity, Skills.MAGIC)
         val effective = floor(level * prayer * additional + spellBonus)
         val bonus =
             if (!flags.contains(SwingHandlerFlag.IGNORE_STAT_BOOSTS_ACCURACY))

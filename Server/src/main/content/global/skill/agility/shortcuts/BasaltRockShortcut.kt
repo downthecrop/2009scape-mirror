@@ -42,16 +42,16 @@ class BasaltRockShortcut : AgilityShortcut {
      * 2522, 3600 R1, 3601, 3602 R2
      */
     override fun newInstance(arg: Any?): Plugin<Any> {
-        configure(content.global.skill.agility.shortcuts.BasaltRockShortcut(intArrayOf(4550), 1, 0.0, "jump-to")) //Beach South*
-        configure(content.global.skill.agility.shortcuts.BasaltRockShortcut(intArrayOf(4551), 1, 0.0, "jump-across")) //Beach South Rock 1*
-        configure(content.global.skill.agility.shortcuts.BasaltRockShortcut(intArrayOf(4552), 1, 0.0, "jump-across")) //South Rock 2
-        configure(content.global.skill.agility.shortcuts.BasaltRockShortcut(intArrayOf(4553), 1, 0.0, "jump-across")) //South Rock 2 (other side)
-        configure(content.global.skill.agility.shortcuts.BasaltRockShortcut(intArrayOf(4554), 1, 0.0, "jump-across")) //Middle Rock 3
-        configure(content.global.skill.agility.shortcuts.BasaltRockShortcut(intArrayOf(4555), 1, 0.0, "jump-across")) //Middle Rock 3 (other side)
-        configure(content.global.skill.agility.shortcuts.BasaltRockShortcut(intArrayOf(4556), 1, 0.0, "jump-across")) //North Rock 4
-        configure(content.global.skill.agility.shortcuts.BasaltRockShortcut(intArrayOf(4557), 1, 0.0, "jump-across")) //North Rock 4 (other side)
-        configure(content.global.skill.agility.shortcuts.BasaltRockShortcut(intArrayOf(4558), 1, 0.0, "jump-across")) //Rocky Shore North Rock 5*
-        configure(content.global.skill.agility.shortcuts.BasaltRockShortcut(intArrayOf(4559), 1, 0.0, "jump-to")) //Rocky Shore North*
+        configure(BasaltRockShortcut(intArrayOf(4550), 1, 0.0, "jump-to")) //Beach South*
+        configure(BasaltRockShortcut(intArrayOf(4551), 1, 0.0, "jump-across")) //Beach South Rock 1*
+        configure(BasaltRockShortcut(intArrayOf(4552), 1, 0.0, "jump-across")) //South Rock 2
+        configure(BasaltRockShortcut(intArrayOf(4553), 1, 0.0, "jump-across")) //South Rock 2 (other side)
+        configure(BasaltRockShortcut(intArrayOf(4554), 1, 0.0, "jump-across")) //Middle Rock 3
+        configure(BasaltRockShortcut(intArrayOf(4555), 1, 0.0, "jump-across")) //Middle Rock 3 (other side)
+        configure(BasaltRockShortcut(intArrayOf(4556), 1, 0.0, "jump-across")) //North Rock 4
+        configure(BasaltRockShortcut(intArrayOf(4557), 1, 0.0, "jump-across")) //North Rock 4 (other side)
+        configure(BasaltRockShortcut(intArrayOf(4558), 1, 0.0, "jump-across")) //Rocky Shore North Rock 5*
+        configure(BasaltRockShortcut(intArrayOf(4559), 1, 0.0, "jump-to")) //Rocky Shore North*
         return this
     }
 

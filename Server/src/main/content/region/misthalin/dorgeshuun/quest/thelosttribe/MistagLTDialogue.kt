@@ -53,6 +53,6 @@ class MistagLTDialogue(val isGreeting: Boolean, val questStage: Int) : DialogueF
     }
 
     override fun npc(vararg messages: String?): Component? {
-        return npc(core.game.dialogue.FacialExpression.OLD_NORMAL,*messages)
+        return npc(FacialExpression.OLD_NORMAL,*messages)
     }
 }

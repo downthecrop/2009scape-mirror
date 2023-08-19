@@ -6,7 +6,7 @@ import core.game.interaction.OptionHandler
 import core.game.node.Node
 import content.global.skill.summoning.familiar.GiantEntNPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.audio.Audio;
+import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse

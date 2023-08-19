@@ -16,12 +16,12 @@ class EasterBunnyDialogueFile(val NEED_BASKET : Boolean) : DialogueFile() {
         if(NEED_BASKET){
             when(stage++){
                 0 -> npc("Hello, adventurer! Thank goodness you're here!")
-                1 -> player(core.game.dialogue.FacialExpression.THINKING,"Thanks goodness I'M here?")
+                1 -> player(FacialExpression.THINKING,"Thanks goodness I'M here?")
                 2 -> npc("Yes, yes, I need your help, you see!")
                 3 -> npc("I have lost ALL of my eggs. What a terrible thing.")
                 4 -> npc("Us easter bunnies rely on EGGS to live.")
                 5 -> npc("Take this basket, please, and do me a kindness.")
-                6 -> player(core.game.dialogue.FacialExpression.THINKING,"What kindness might that be?")
+                6 -> player(FacialExpression.THINKING,"What kindness might that be?")
                 7 -> npc("I need you to try and gather up as many of my","lost eggs as you can.")
                 8 -> npc("Please, for me? I will reward you for your time.")
                 9 -> player("Fine, I suppose I will.")
@@ -39,8 +39,8 @@ class EasterBunnyDialogueFile(val NEED_BASKET : Boolean) : DialogueFile() {
             when (stage) {
                 0 -> options("Ask about rewards", "Ask about egg location").also { stage++ }
                 1 -> when (buttonID) {
-                    1 -> player(core.game.dialogue.FacialExpression.THINKING, "What kind of rewards can I claim?").also { stage = 10 }
-                    2 -> player(core.game.dialogue.FacialExpression.THINKING, "Where were some eggs last seen?").also { stage = 20 }
+                    1 -> player(FacialExpression.THINKING, "What kind of rewards can I claim?").also { stage = 10 }
+                    2 -> player(FacialExpression.THINKING, "Where were some eggs last seen?").also { stage = 20 }
                 }
 
                 10 -> {

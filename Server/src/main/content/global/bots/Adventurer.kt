@@ -582,7 +582,7 @@ class Adventurer(val style: CombatStyle): Script() {
             // At the Crumbling Wall in Falador
             ZoneBorders(2937,3356,2936,3353) to { it: Adventurer ->
                 // Interact with the Crumbling Wall
-                val wall = it.scriptAPI.getNearestNode("Crumbling wall", true);
+                val wall = it.scriptAPI.getNearestNode("Crumbling wall", true)
                 if (wall == null) {
                     it.refresh()
                     it.ticks = 0

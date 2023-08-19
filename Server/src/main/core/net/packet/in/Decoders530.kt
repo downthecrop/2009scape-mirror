@@ -755,7 +755,7 @@ enum class Decoders530(val opcode: Int) {
             val showGroundDeco =        (prefs shr 5) and 1 == 1
             val selectiveRoofs =        (prefs shr 4) and 1 == 1
             val allLayersVisible =      (prefs shr 3) and 1 == 1
-            val brightness =            prefs and 0x7;
+            val brightness =            prefs and 0x7
             //added in the above so that we don't have to figure it out later, not doing more
             //because we currently have genuinely no use for this information.
             return Packet.PlayerPrefsUpdate(player, prefs)

@@ -58,7 +58,7 @@ class CaptainErrdoDialogue: DialogueFile(){
                     1 -> npcl("If you wish.").also {
                         stage = END_DIALOGUE
                         player!!.interfaceManager.open(Component(138))
-                        Gliders.sendConfig(npc, player);
+                        Gliders.sendConfig(npc, player)
 
                     }
                 }

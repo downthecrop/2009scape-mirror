@@ -129,11 +129,11 @@ class AFURepairClimbHandler : InteractionListener {
     }
 
     companion object {
-        fun isRepaired(player: Player, beacon: content.minigame.allfiredup.AFUBeacon): Boolean{
-            if(beacon == content.minigame.allfiredup.AFUBeacon.DEATH_PLATEAU) return RepairClimbObject.DEATH_PLATEAU.isRepaired(player)
-            if(beacon == content.minigame.allfiredup.AFUBeacon.BURTHORPE) return RepairClimbObject.BURTHORPE.isRepaired(player)
-            if(beacon == content.minigame.allfiredup.AFUBeacon.GWD) return RepairClimbObject.GWD.isRepaired(player)
-            if(beacon == content.minigame.allfiredup.AFUBeacon.TEMPLE) return RepairClimbObject.TEMPLE.isRepaired(player)
+        fun isRepaired(player: Player, beacon: AFUBeacon): Boolean{
+            if(beacon == AFUBeacon.DEATH_PLATEAU) return RepairClimbObject.DEATH_PLATEAU.isRepaired(player)
+            if(beacon == AFUBeacon.BURTHORPE) return RepairClimbObject.BURTHORPE.isRepaired(player)
+            if(beacon == AFUBeacon.GWD) return RepairClimbObject.GWD.isRepaired(player)
+            if(beacon == AFUBeacon.TEMPLE) return RepairClimbObject.TEMPLE.isRepaired(player)
             else return true
         }
     }

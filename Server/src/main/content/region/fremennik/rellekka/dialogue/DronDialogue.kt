@@ -14,27 +14,27 @@ import core.tools.END_DIALOGUE
  */
 
 @Initializable
-class DronDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class DronDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!isQuestComplete(player, "Making History")) {
-            player(core.game.dialogue.FacialExpression.FRIENDLY, "Excuse me.").also { stage = 0 }
+            player(FacialExpression.FRIENDLY, "Excuse me.").also { stage = 0 }
         } else {
-            player(core.game.dialogue.FacialExpression.FRIENDLY, "Excuse me.").also { stage = 10 }
+            player(FacialExpression.FRIENDLY, "Excuse me.").also { stage = 10 }
         }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            0 -> npc(core.game.dialogue.FacialExpression.ANNOYED, "Leave me or I'll destroy you!").also { stage = END_DIALOGUE }
-            10 -> npc(core.game.dialogue.FacialExpression.ANNOYED, "You have your answers, now go away!").also { stage = END_DIALOGUE }
+            0 -> npc(FacialExpression.ANNOYED, "Leave me or I'll destroy you!").also { stage = END_DIALOGUE }
+            10 -> npc(FacialExpression.ANNOYED, "You have your answers, now go away!").also { stage = END_DIALOGUE }
         }
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return DronDialogue(player)
     }
 

@@ -143,7 +143,7 @@ object Repository {
                     val oldPl = players[i]
                     players.remove(oldPl)
                     oldPl.clear()
-                    break;
+                    break
                 }
             }
         }

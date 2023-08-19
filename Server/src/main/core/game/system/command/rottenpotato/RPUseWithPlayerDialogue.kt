@@ -10,11 +10,11 @@ import core.plugin.Initializable
  * Rotten Potato -> Player interaction dialogue
  * @author Ceikry
  */
-class RPUseWithPlayerDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
+class RPUseWithPlayerDialogue(player: Player? = null) : DialoguePlugin(player) {
     var other: Player? = null
     val ID = 38575796
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return RPUseWithPlayerDialogue(player)
     }
 

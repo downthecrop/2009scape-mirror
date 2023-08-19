@@ -34,7 +34,7 @@ class PestControlTestBot(l: Location) : PvMBots(legitimizeLocation(l)){
     init {
         val random100 = Random().nextInt(100)
         if (random100 < 30) {
-            setAttribute("pc_role","defend_squire");
+            setAttribute("pc_role","defend_squire")
         } else
         {
             setAttribute("pc_role","attack_portals")
@@ -156,8 +156,8 @@ class PestControlTestBot(l: Location) : PvMBots(legitimizeLocation(l)){
                 this.walkToPosSmart(myBoat.outsideBoatBorder.randomLoc)
                 movetimer += RandomFunction.normalPlusWeightRandDist(400, 200)
             }
-                movetimer = RandomFunction.normalPlusWeightRandDist(100, 50);
-            return;
+                movetimer = RandomFunction.normalPlusWeightRandDist(100, 50)
+            return
         }
         val test = getClosestNodeWithEntry(15, myBoat.ladderId)
         test ?: randomWalk(1,1)

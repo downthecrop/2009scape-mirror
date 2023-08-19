@@ -7,8 +7,8 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 
 @Initializable
-class BlazeSharpeyeDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+class BlazeSharpeyeDialogue(player: Player? = null) : DialoguePlugin(player) {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return BlazeSharpeyeDialogue(player)
     }
 
@@ -46,7 +46,7 @@ class BlazeSharpeyeDialogue(player: Player? = null) : core.game.dialogue.Dialogu
             110 -> npc("I need you to light a couple of beacons for me to make","sure we can see the glow from the flames over the","horizon.").also { stage++ }
             111 -> npc("So! First of all, you'll need to know how to light a beacon.").also { stage++ }
             112 -> npc("Our technique is super-secret, but quite effective. All","you do is put twenty logs of the same type on a","beacon and...").also { stage++ }
-            113 -> npc(core.game.dialogue.FacialExpression.AMAZED,"SET IT ON FIRE WITH A TINDERBOX").also { stage++ }
+            113 -> npc(FacialExpression.AMAZED,"SET IT ON FIRE WITH A TINDERBOX").also { stage++ }
             114 -> player("You really enjoy your job, don't you?").also { stage++ }
             115 -> npc("Yes. Yes I do. Now, why don't you go over there and","try lighting that beacon. Show us what you've got.").also { stage++; player.questRepository.getQuest("All Fired Up").setStage(player,20) }
             116 -> options("Does it matter what type of log I use?","Okay.").also { stage++ }

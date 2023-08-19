@@ -12,26 +12,26 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class EmbalmerDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class EmbalmerDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.SUSPICIOUS,"What are you doing?").also { stage = 0 }
+        npc(FacialExpression.SUSPICIOUS,"What are you doing?").also { stage = 0 }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            0 -> playerl(core.game.dialogue.FacialExpression.FRIENDLY, "I have this acne potion which I thought might help ease your itching.").also { stage++ }
-            1 -> npcl(core.game.dialogue.FacialExpression.ANNOYED, "If I thought that these spots could be cured by some potion, I would have mixed up one myself before now.").also { stage++ }
-            2 -> player(core.game.dialogue.FacialExpression.SAD, "Sorry, I was just trying to help.").also { stage = 99 }
+            0 -> playerl(FacialExpression.FRIENDLY, "I have this acne potion which I thought might help ease your itching.").also { stage++ }
+            1 -> npcl(FacialExpression.ANNOYED, "If I thought that these spots could be cured by some potion, I would have mixed up one myself before now.").also { stage++ }
+            2 -> player(FacialExpression.SAD, "Sorry, I was just trying to help.").also { stage = 99 }
 
             99 -> end()
         }
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return EmbalmerDialogue(player)
     }
 

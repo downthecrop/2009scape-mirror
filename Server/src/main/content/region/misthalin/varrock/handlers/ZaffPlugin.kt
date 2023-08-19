@@ -403,7 +403,7 @@ class ZaffPlugin : OptionHandler() {
 
                     if(removeItem(player, Item(Items.COINS_995, coinage), Container.INVENTORY)){
                         addItem(player, Items.BATTLESTAFF_1392, amt)
-                        ZaffPlugin.getStoreFile()[player.username.toLowerCase()] = amt + ammount
+                        getStoreFile()[player.username.toLowerCase()] = amt + ammount
                     }
                 } }
                 2 -> {

@@ -13,13 +13,13 @@ import org.rs09.consts.Items
  * Handles Boriss' dialogue
  * @author Ceikry
  */
-class BrotherBordissDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+class BrotherBordissDialogue(player: Player? = null) : DialoguePlugin(player) {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return BrotherBordissDialogue(player)
     }
 
     override fun npc(vararg messages: String?): Component {
-        return npc(core.game.dialogue.FacialExpression.OLD_NORMAL,*messages)
+        return npc(FacialExpression.OLD_NORMAL,*messages)
     }
 
     override fun open(vararg args: Any?): Boolean {

@@ -5,19 +5,19 @@ import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
-import org.rs09.consts.NPCs
 import core.tools.END_DIALOGUE
+import org.rs09.consts.NPCs
 
 /**
  * @author qmqz
  */
 
 @Initializable
-class WaitingOnTheShowDialogues(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class WaitingOnTheShowDialogues(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.ANNOYED, "Shhh! I'm waiting for the show!").also { stage = END_DIALOGUE }
+        npc(FacialExpression.ANNOYED, "Shhh! I'm waiting for the show!").also { stage = END_DIALOGUE }
         return true
     }
 
@@ -25,7 +25,7 @@ class WaitingOnTheShowDialogues(player: Player? = null) : core.game.dialogue.Dia
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return WaitingOnTheShowDialogues(player)
     }
 

@@ -16,8 +16,8 @@ import content.region.misc.tutisland.handlers.TutorialStage
  * @author Ceikry
  */
 @Initializable
-class TutorialMasterChefDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+class TutorialMasterChefDialogue(player: Player? = null) : DialoguePlugin(player) {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return TutorialMasterChefDialogue(player)
     }
 
@@ -29,7 +29,7 @@ class TutorialMasterChefDialogue(player: Player? = null) : core.game.dialogue.Di
                 player,
                 interpreter.sendDialogues(
                     npc,
-                    core.game.dialogue.FacialExpression.FRIENDLY,
+                    FacialExpression.FRIENDLY,
                     "Ah! Welcome, newcomer. I am the Master Chef, Lev. It",
                     "is here I will teach you how to cook food truly fit for a",
                     "king."
@@ -69,7 +69,7 @@ class TutorialMasterChefDialogue(player: Player? = null) : core.game.dialogue.Di
                     player,
                     interpreter.sendDialogues(
                         player,
-                        core.game.dialogue.FacialExpression.HALF_GUILTY,
+                        FacialExpression.HALF_GUILTY,
                         "I already know how to cook. Brynna taught me just",
                         "now."
                     )
@@ -78,7 +78,7 @@ class TutorialMasterChefDialogue(player: Player? = null) : core.game.dialogue.Di
                     player,
                     interpreter.sendDialogues(
                         npc,
-                        core.game.dialogue.FacialExpression.LAUGH,
+                        FacialExpression.LAUGH,
                         "Hahahahahaha! You call THAT cooking? Some shrimp",
                         "on an open log fire? Oh, no, no no. I am going to",
                         "teach you the fine art of cooking bread."
@@ -88,7 +88,7 @@ class TutorialMasterChefDialogue(player: Player? = null) : core.game.dialogue.Di
                     player,
                     interpreter.sendDialogues(
                         npc,
-                        core.game.dialogue.FacialExpression.FRIENDLY,
+                        FacialExpression.FRIENDLY,
                         "And no fine meal is complete without good music, so",
                         "we'll cover that while you're here too."
                     )

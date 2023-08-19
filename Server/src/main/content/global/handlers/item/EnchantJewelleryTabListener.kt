@@ -73,7 +73,7 @@ class EnchantJewelleryTabListener : InteractionListener {
                             addItem(player, product)
                             playAudio(player, Audio(979), false)
                             animate(player, 4069, true)
-                            break;
+                            break
                         }
                     }
                 }

@@ -12,34 +12,34 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class InnKeeperDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class InnKeeperDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        player(core.game.dialogue.FacialExpression.FRIENDLY,"Hello.").also { stage = 0 }
+        player(FacialExpression.FRIENDLY,"Hello.").also { stage = 0 }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
             0 -> {
-                npc(core.game.dialogue.FacialExpression.CHILD_NEUTRAL, "Welcome to the King's Axe inn!", "What can I help you with?").also { stage++ }
+                npc(FacialExpression.CHILD_NEUTRAL, "Welcome to the King's Axe inn!", "What can I help you with?").also { stage++ }
             }
 
             1 -> {
-                player(core.game.dialogue.FacialExpression.ASKING, "Can I have some beer please?").also { stage++ }
+                player(FacialExpression.ASKING, "Can I have some beer please?").also { stage++ }
             }
 
             2 -> {
-                npc(core.game.dialogue.FacialExpression.CHILD_NORMAL, "Go to the bar downstairs.", "I only deal with residents.").also { stage++ }
+                npc(FacialExpression.CHILD_NORMAL, "Go to the bar downstairs.", "I only deal with residents.").also { stage++ }
             }
 
             3 -> {
-                player(core.game.dialogue.FacialExpression.THINKING, "Residents? People live here?").also { stage++ }
+                player(FacialExpression.THINKING, "Residents? People live here?").also { stage++ }
             }
 
             4 -> {
-                npc(core.game.dialogue.FacialExpression.CHILD_LOUDLY_LAUGHING, "No, just guests that stay the night.").also { stage = 99 }
+                npc(FacialExpression.CHILD_LOUDLY_LAUGHING, "No, just guests that stay the night.").also { stage = 99 }
             }
 
             99 -> end()
@@ -47,7 +47,7 @@ class InnKeeperDialogue(player: Player? = null) : core.game.dialogue.DialoguePlu
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return InnKeeperDialogue(player)
     }
 

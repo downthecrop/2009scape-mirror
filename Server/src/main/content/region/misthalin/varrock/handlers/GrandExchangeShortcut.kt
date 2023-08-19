@@ -62,7 +62,7 @@ class GrandExchangeShortcut : InteractionListener {
             lock(player, 4)
             val o = node as Scenery
             val path = SHORTCUTS[o.id]!!
-            ForceMovement.run(player, path[0], o.location, ForceMovement.WALK_ANIMATION, CLIMB_DOWN, direction(path[0], o.location), ForceMovement.WALKING_SPEED, ForceMovement.WALKING_SPEED, false);
+            ForceMovement.run(player, path[0], o.location, ForceMovement.WALK_ANIMATION, CLIMB_DOWN, direction(path[0], o.location), ForceMovement.WALKING_SPEED, ForceMovement.WALKING_SPEED, false)
             runCrawlPulse(player, path)
             return@on true
         }

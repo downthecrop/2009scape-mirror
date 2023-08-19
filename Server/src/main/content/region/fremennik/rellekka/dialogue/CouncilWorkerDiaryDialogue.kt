@@ -17,7 +17,7 @@ class CouncilWorkerDiaryDialogue() : DialogueFile() {
         //todo all this dialogue is inauthentic and sucks, this is just a patch to fix the absolutely garbage and incorrect way of granting the diary rewards that doesn't even give the lamp. -Ceik June 2023
         when (stage) {
             START_DIALOGUE -> {
-                player(core.game.dialogue.FacialExpression.FRIENDLY, "About my achievement diary...");stage++
+                player(FacialExpression.FRIENDLY, "About my achievement diary...");stage++
             }
             1 -> {
                 if (!AchievementDiary.hasClaimedLevelRewards(player, DiaryType.FREMENNIK, 0)) {
@@ -48,7 +48,7 @@ class CouncilWorkerDiaryDialogue() : DialogueFile() {
 
             10 -> {
                 npc(COUNCIL_WORKER, "Sure!")
-                AchievementDiary.grantReplacement(player, DiaryType.FREMENNIK, 0);
+                AchievementDiary.grantReplacement(player, DiaryType.FREMENNIK, 0)
                 stage = 2
             }
         }

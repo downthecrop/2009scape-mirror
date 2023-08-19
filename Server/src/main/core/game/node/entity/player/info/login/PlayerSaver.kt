@@ -102,7 +102,7 @@ class PlayerSaver (val player: Player){
             for(key in player.gameAttributes.savedAttributes){
                 val value = player.gameAttributes.attributes[key]
                 value ?: continue
-                val isExpirable = player.gameAttributes.keyExpirations.containsKey(key);
+                val isExpirable = player.gameAttributes.keyExpirations.containsKey(key)
                 val attr = JSONObject()
                 val type = when(value){
                     is Int -> "int"

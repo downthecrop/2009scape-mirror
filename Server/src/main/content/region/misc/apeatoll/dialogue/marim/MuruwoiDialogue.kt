@@ -13,11 +13,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class MuruwoiDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class MuruwoiDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.OLD_ANGRY1,"Grr ... Get out of my way...")
+        npc(FacialExpression.OLD_ANGRY1,"Grr ... Get out of my way...")
         stage = 99
         return true
     }
@@ -29,7 +29,7 @@ class MuruwoiDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugi
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return MuruwoiDialogue(player)
     }
 

@@ -144,7 +144,7 @@ class HairDresserInterface : ComponentPlugin(){
         }
         sendPlayerOnInterface(player, usedInterface, player_model_child)
         sendPlayerOnInterface(player, usedInterface, player_head_child)
-        sendAnimationOnInterface(player, core.game.dialogue.FacialExpression.HAPPY.animationId, usedInterface, player_head_child)
+        sendAnimationOnInterface(player, FacialExpression.HAPPY.animationId, usedInterface, player_head_child)
         player.toggleWardrobe(true)
 
         component?.setCloseEvent{pl,_ ->

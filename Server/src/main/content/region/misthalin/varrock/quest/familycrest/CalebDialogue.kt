@@ -10,11 +10,11 @@ import org.rs09.consts.Items
 
 
 @Initializable
-class CalebDialogue (player: Player? = null): core.game.dialogue.DialoguePlugin(player) {
+class CalebDialogue (player: Player? = null): DialoguePlugin(player) {
 
     val CREST_PIECE: Item = Item(780)
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return CalebDialogue(player)
     }
 
@@ -141,7 +141,7 @@ class CalebDialogue (player: Player? = null): core.game.dialogue.DialoguePlugin(
             301 -> sendDialogue("You exchange the fish for Caleb's piece of the crest.").also{stage++}.also{
                 player.inventory.remove(Item(315),Item(329), Item(361), Item(365), Item(373))
                 player.inventory.add(CREST_PIECE)
-                player.questRepository.getQuest("Family Crest").setStage(player, 12);
+                player.questRepository.getQuest("Family Crest").setStage(player, 12)
             }
 
             302 -> options("Uh... what happened to the rest of it?" , "Thank you very much!").also{stage++}
@@ -189,12 +189,12 @@ class CalebDialogue (player: Player? = null): core.game.dialogue.DialoguePlugin(
             403 ->
                 if(player.inventory.containItems(CREST_PIECE.id, 782) || player.bank.containItems(CREST_PIECE.id, 782)) {
                         npc("Then why are you wasting your time here?")
-                        stage = 1000;
-                    }
+                        stage = 1000
+                }
                 else{
                         player("I have lost the fragment that you gave me...")
-                        stage++;
-                    }
+                        stage++
+                }
             404 -> npc("I have some good news for you then. " ,
                     "One of my customers found this on their travels " ,
                     "and recognised it as mine and returned it to me here.").also{stage++}

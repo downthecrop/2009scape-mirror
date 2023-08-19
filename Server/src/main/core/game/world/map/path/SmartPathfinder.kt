@@ -289,7 +289,7 @@ internal constructor() : Pathfinder() {
         var queue = PriorityQueue(4096, UIntAsPointComparator(end))
         queue.add(((curX.toUInt()) shl 8) or (curY.toUInt()))
         while(!foundPath && !queue.isEmpty()) {
-            val point = queue.poll();
+            val point = queue.poll()
             val curCost = ((point and 0xff0000u) shr 16).toInt()
             curX = ((point and 0x0000ff00u) shr 8).toInt()
             curY = (point and 0x000000ffu).toInt()
@@ -324,7 +324,7 @@ internal constructor() : Pathfinder() {
                 if(0 <= newSceneX && newSceneX < 104 && 0 <= newSceneY && newSceneY < 104 && via[newSceneX][newSceneY] == 0) {
                     if(dir.canMoveFrom(z, absX, absY, clipMaskSupplier)) {
                         val diagonalPenalty = Math.abs(dir.stepX) + Math.abs(dir.stepY) - 1
-                        val flag = flagForDirection(dir);
+                        val flag = flagForDirection(dir)
                         check(newSceneX, newSceneY, flag, newCost, diagonalPenalty)
                         if(via[newSceneX][newSceneY] == flag) {
                             queue.add(((newCost + diagonalPenalty).toUInt() shl 16) or (newSceneX.toUInt() shl 8) or newSceneY.toUInt())

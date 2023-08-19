@@ -49,7 +49,7 @@ object TestUtils {
         val p = MockPlayer(name, isBot)
         p.ironmanManager.mode = ironman
         p.details.accountInfo.uid = uidCounter++
-        p.setPlaying(true);
+        p.setPlaying(true)
         p.playerFlags.lastSceneGraph = p.location ?: ServerConstants.HOME_LOCATION
         Repository.addPlayer(p)
         //Update sequence has a separate list of players for some reason...

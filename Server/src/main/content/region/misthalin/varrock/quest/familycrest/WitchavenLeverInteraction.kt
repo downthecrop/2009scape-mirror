@@ -8,7 +8,7 @@ import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
 import core.net.packet.out.ClearScenery
 import core.net.packet.out.ConstructScenery
-import core.net.packet.out.UpdateAreaPosition;
+import core.net.packet.out.UpdateAreaPosition
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 
@@ -26,7 +26,7 @@ fun doDoor(player: Player, scenery: Scenery) {
         ForceMovement.WALK_ANIMATION,
         ForceMovement.WALK_ANIMATION,
         direction,
-        8);
+        8)
 
 }
 

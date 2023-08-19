@@ -44,13 +44,13 @@ class GloughDialogue : DialogueFile() {
                             var count = 0
                             val npc = NPC.create(163,Location.create(2477, 3462, 1), null)
                             val ladderClimbAnimation = Animation(828)
-                            val cell = Location.create(2464, 3496, 3);
+                            val cell = Location.create(2464, 3496, 3)
                             override fun pulse(): Boolean {
                                 when (count) {
                                     0 -> {
                                         // Spawn in the gnome guard
                                         lock(player!!, 10)
-                                        npc.init();
+                                        npc.init()
                                         forceWalk(npc, player!!.location.transform(Direction.WEST,2), "SMART")
                                         player!!.dialogueInterpreter.sendDialogues(npc, FacialExpression.ANNOYED, "Come with me!")
                                     }
@@ -69,11 +69,11 @@ class GloughDialogue : DialogueFile() {
                                         player!!.animator.animate(ladderClimbAnimation)
                                     }
                                     8 -> {
-                                        npc.clear();
+                                        npc.clear()
                                         setQuestStage(player!!, questName, 50)
                                         teleport(player!!, cell)
                                         player!!.unlock()
-                                        return true;
+                                        return true
                                     }
                                 }
                                 count++

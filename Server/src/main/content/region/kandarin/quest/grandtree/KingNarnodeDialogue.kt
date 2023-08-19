@@ -21,10 +21,10 @@ import org.rs09.consts.NPCs
 
 class KingNarnodeDialogue : DialogueFile() {
 
-    val trapdoorLocation = Location(2464,3497,0);
+    val trapdoorLocation = Location(2464,3497,0)
     val closedTrapDoor = Scenery(2446, Location(2463,3497,0), 22,  0)
     val openedTrapDoor = Scenery(2445, Location(2463,3497,0), 22,  0)
-    val tunnels = Location(2464, 9897, 0);
+    val tunnels = Location(2464, 9897, 0)
     val ladderClimbAnimation = Animation(828)
 
     fun leadDownLadder(){
@@ -49,8 +49,8 @@ class KingNarnodeDialogue : DialogueFile() {
                         player!!.animator.animate(ladderClimbAnimation)
                     }
                     5 -> {
-                        teleport(player!!, tunnels);
-                        npc!!.pulseManager.clear();
+                        teleport(player!!, tunnels)
+                        npc!!.pulseManager.clear()
                     }
                     7 -> {
                         // We are now underground
@@ -59,7 +59,7 @@ class KingNarnodeDialogue : DialogueFile() {
                         unlock(player!!)
                         openDialogue(player!!, KingNarnodeUnderGroundDialogue(), undergroundNarnode)
                     }
-                    10 -> return true;
+                    10 -> return true
                 }
                 count++
                 return false
@@ -81,7 +81,7 @@ class KingNarnodeDialogue : DialogueFile() {
                     5 -> npcl("Traveller, can I speak to you in strictest confidence?").also { stage++ }
                     6 -> playerl("Of course sire.").also { stage++ }
                     7 -> npcl("Not here, follow me.").also {
-                        stage = END_DIALOGUE;
+                        stage = END_DIALOGUE
                         // Animate Narnode to walk to the trapdoor and climb the ladder
                         leadDownLadder()
                     }
@@ -100,10 +100,10 @@ class KingNarnodeDialogue : DialogueFile() {
                             if(!player!!.hasItem(Item(Items.TRANSLATION_BOOK_784))) {
                                 addItemOrDrop(player!!,Items.TRANSLATION_BOOK_784)
                             }
-                            stage = END_DIALOGUE;
+                            stage = END_DIALOGUE
                         } else {
                             npcl("Traveller, any word from Hazelmere?")
-                            stage++;
+                            stage++
                         }
                     }
                     1 -> playerl("Not yet.").also { stage = END_DIALOGUE }
@@ -371,8 +371,8 @@ class KingNarnodeUnderGroundDialogue : DialogueFile() {
                         player!!.animator.animate(ladderClimbAnimation)
                     }
                     5 -> {
-                        teleport(player!!, ladderExit);
-                        npc!!.pulseManager.clear();
+                        teleport(player!!, ladderExit)
+                        npc!!.pulseManager.clear()
                         unlock(player!!)
                     }
                     10 -> return true
@@ -466,7 +466,7 @@ class KingNarnodeUnderGroundDialogue : DialogueFile() {
                 17 -> npcl("I'll show you the way back up.").also { stage++ }
                 18 -> {
                     npcl("Up here.")
-                    leadUpLadder();
+                    leadUpLadder()
                     stage = END_DIALOGUE
                 }
 
@@ -497,7 +497,7 @@ class KingNarnodeUnderGroundDialogue : DialogueFile() {
                     setQuestStage(player!!, questName, 10)
                     addItemOrDrop(player!!, Items.BARK_SAMPLE_783)
                     addItemOrDrop(player!!, Items.TRANSLATION_BOOK_784)
-                    leadUpLadder();
+                    leadUpLadder()
                 } else {
                     npcl("You don't have inventory space for my book or the bark! Clear some space and speak to me again")
                 }.also { stage = END_DIALOGUE }

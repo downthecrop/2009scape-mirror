@@ -141,7 +141,7 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
             if(reward == Items.CLAY_434){
                 val bracelet = getItemFromEquipment(player, EquipmentSlot.HANDS)
                 if(bracelet != null && bracelet.id == Items.BRACELET_OF_CLAY_11074){
-                    var charges = player.getAttribute("jewellery-charges:bracelet-of-clay", 28);
+                    var charges = player.getAttribute("jewellery-charges:bracelet-of-clay", 28)
                     charges--
                     reward = Items.SOFT_CLAY_1761
                     sendMessage(player, "Your bracelet of clay softens the clay for you.")

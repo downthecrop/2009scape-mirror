@@ -25,7 +25,7 @@ class KnightsNotes : InteractionListener {
             ScrollLine("know how I am going to get this message to you, why is that",11),
             ScrollLine("talking skull never around when he's needed? Your comrade,",12),
             ScrollLine("Sir Gerry.",13),
-        );
+        )
     }
 
     override fun defineListeners() {
@@ -36,7 +36,7 @@ class KnightsNotes : InteractionListener {
             player!!.packetDispatch.sendInterfaceConfig(228, 9, false) // childId 7 is left 8 is right
             addDialogueAction(player) { player, button ->
                 if (button == 2) {
-                    sendMessage(player, "You break the wax seal and open the scroll.");
+                    sendMessage(player, "You break the wax seal and open the scroll.")
                     if (removeItem(player, Items.KNIGHTS_NOTES_11734)) {
                         addItem(player, Items.KNIGHTS_NOTES_11735)
                         ScrollInterface.scrollSetup(player, Components.MESSAGESCROLL_220, CONTENTS)

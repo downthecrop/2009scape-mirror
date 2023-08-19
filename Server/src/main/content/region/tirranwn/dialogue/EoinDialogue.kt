@@ -12,24 +12,24 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class EoinDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class EoinDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        player(core.game.dialogue.FacialExpression.FRIENDLY,"Hello.").also { stage = 0 }
+        player(FacialExpression.FRIENDLY,"Hello.").also { stage = 0 }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            0 -> npcl(core.game.dialogue.FacialExpression.FRIENDLY, "Sorry, I cannot stop or Iona will catch me, we are playing tag!").also { stage = 99 }
+            0 -> npcl(FacialExpression.FRIENDLY, "Sorry, I cannot stop or Iona will catch me, we are playing tag!").also { stage = 99 }
 
             99 -> end()
         }
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return EoinDialogue(player)
     }
 

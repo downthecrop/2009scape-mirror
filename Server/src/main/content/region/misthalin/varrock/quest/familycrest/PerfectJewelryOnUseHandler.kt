@@ -19,7 +19,7 @@ class PerfectJewelryOnUseHandler : UseWithHandler(Items.PERFECT_GOLD_BAR_2365){
 
     override fun handle(event: NodeUsageEvent?): Boolean {
         event ?: return false
-        event.player.dialogueInterpreter.open("perfect-jewelry");
+        event.player.dialogueInterpreter.open("perfect-jewelry")
         return true
     }
 

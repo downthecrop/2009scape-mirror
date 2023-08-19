@@ -1,11 +1,10 @@
 package content.global.skill.farming
 
-import core.api.*
+import content.global.skill.farming.timers.Compost
+import core.api.getOrStartTimer
 import core.cache.def.impl.SceneryDefinition
-import core.cache.def.impl.VarbitDefinition
-import core.game.node.scenery.Scenery
 import core.game.node.entity.player.Player
-import content.global.skill.farming.timers.*
+import core.game.node.scenery.Scenery
 
 enum class CompostBins(val varbit: Int) {
     FALADOR_COMPOST(740),

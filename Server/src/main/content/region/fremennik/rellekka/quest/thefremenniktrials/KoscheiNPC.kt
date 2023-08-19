@@ -196,7 +196,7 @@ class KoscheiNPC constructor(id: Int = 0, location: Location? = null, session: K
             when(counter++) {
                 0 -> player?.lock().also { player?.animate(Animation(1332)).also { player?.sendMessage("Oh dear you are...") }}
                 1 -> player?.setAttribute("/save:fremtrials:thorvald-vote",true).also {
-                    player?.setAttribute("/save:fremtrials:votesplayer", player.getAttribute("fremtrials:votesplayer", 0) + 1);
+                    player?.setAttribute("/save:fremtrials:votesplayer", player.getAttribute("fremtrials:votesplayer", 0) + 1)
                     player?.removeAttribute("fremtrials:warrior-accepted")
                 }
                 3 -> player?.teleport(Location.create(2666,3694,1)).also { koschei.session?.close() }

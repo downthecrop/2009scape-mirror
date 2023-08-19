@@ -12,24 +12,24 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class TyrasGuardTent(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class TyrasGuardTent(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        player(core.game.dialogue.FacialExpression.FRIENDLY,"Hello").also { stage = 0 }
+        player(FacialExpression.FRIENDLY,"Hello").also { stage = 0 }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            0 -> npcl(core.game.dialogue.FacialExpression.NEUTRAL,"Sorry, can't stop to talk. You should go to General Hining if you need something.").also { stage = 99 }
+            0 -> npcl(FacialExpression.NEUTRAL,"Sorry, can't stop to talk. You should go to General Hining if you need something.").also { stage = 99 }
 
             99 -> end()
         }
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return TyrasGuardTent(player)
     }
 

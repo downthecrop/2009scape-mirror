@@ -53,7 +53,7 @@ object DrillDemonUtils {
             setVarbit(player, tempOffsetList[i], tempList[i])
         }
 
-        player.dialogueInterpreter.sendDialogues(NPCs.SERGEANT_DAMIEN_2790, core.game.dialogue.FacialExpression.OLD_NORMAL,when(task){
+        player.dialogueInterpreter.sendDialogues(NPCs.SERGEANT_DAMIEN_2790, FacialExpression.OLD_NORMAL,when(task){
             DD_SIGN_JOG -> "Get over there and jog in place!"
             DD_SIGN_JUMP -> "I need 40 jumping jacks stat!"
             DD_SIGN_PUSHUP -> "Get over there and give me 20 pushups!"

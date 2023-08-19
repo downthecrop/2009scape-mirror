@@ -215,7 +215,7 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
                             // TODO: more precise formula
                             val points_per_xp = if (level < 40) { 2.0*(40.0 - level.toDouble())/10.0 } else { 1.0 }
                             val points = player.getAttribute("vinesweeper:points", 0)
-                            val xp = points / points_per_xp;
+                            val xp = points / points_per_xp
                             player.skills.addExperience(Skills.FARMING, xp)
                             player.setAttribute("/save:vinesweeper:points", 0)
                             sendUpdatedPoints(player)
@@ -360,7 +360,7 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
         val VINESWEEPER_BORDERS = ZoneBorders(1600,4672,1663,4735)
 
         fun sendUpdatedPoints(player: Player) {
-            val points = player.getAttribute("vinesweeper:points", 0);
+            val points = player.getAttribute("vinesweeper:points", 0)
             setVarbit(player, 4449, points)
         }
 
@@ -431,7 +431,7 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
                 val oldPoints = player.getAttribute("vinesweeper:points", 0)
                 player.setAttribute("/save:vinesweeper:points", Math.max(oldPoints-10, 0))
                 sendUpdatedPoints(player)
-                player.sendMessage("Oh dear! It looks like you dug up a potato seed by mistake.");
+                player.sendMessage("Oh dear! It looks like you dug up a potato seed by mistake.")
                 scheduleNPCs(player, loc, false, false)
                 val scenery = getScenery(loc)
                 if(scenery != null) {
@@ -534,7 +534,8 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
 
 @Initializable
 class VinesweeperNPC : AbstractNPC {
-    var seedDestinations: ArrayList<Vinesweeper.SeedDestination> = ArrayList();
+    var seedDestinations: ArrayList<Vinesweeper.SeedDestination> = ArrayList()
+
     constructor() : super(RABBITS[0], null, true) {}
     private constructor(id: Int, location: Location) : super(id, location) {}
     override fun construct(id: Int, location: Location, vararg objects: Any?): AbstractNPC {

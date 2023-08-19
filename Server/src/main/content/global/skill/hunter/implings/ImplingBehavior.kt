@@ -7,7 +7,7 @@ import core.game.world.map.path.ClipMaskSupplier
 import core.game.node.entity.npc.*
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.SpellBookManager;
+import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.item.Item
 import core.game.node.entity.combat.CombatStyle
 import content.global.skill.magic.spellconsts.Modern
@@ -34,19 +34,19 @@ class ImplingBehavior : NPCBehavior (*Impling.getIds()) {
     }
 
     override fun canBeAttackedBy(self: NPC, attacker: Entity, style: CombatStyle, shouldSendMessage: Boolean) : Boolean {
-        if (attacker !is Player) return false;
+        if (attacker !is Player) return false
 
         if (style != CombatStyle.MAGIC) {
             if (shouldSendMessage)
                 sendMessage (attacker, "You can't do that.")
-            return false;
+            return false
         }
 
         val spellBook = attacker.spellBookManager.spellBook
         if (spellBook != SpellBookManager.SpellBook.MODERN.interfaceId) {
             if (shouldSendMessage)
                 sendMessage (attacker, "The impling is too fast for that.")
-            return false;
+            return false
         }
 
         val spellId = attacker.properties.spell.spellId

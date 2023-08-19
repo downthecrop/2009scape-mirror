@@ -14,22 +14,22 @@ private val VALID_LOGS = arrayOf(Items.LOGS_1511, Items.OAK_LOGS_1521, Items.WIL
 
 @Initializable
 //TODO: Add requirements for beacon keepers to watch beacons, most of the requirements were not possible to implement at the time of writing this.
-class BeaconTenderDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
+class BeaconTenderDialogue(player: Player? = null) : DialoguePlugin(player) {
     var index = 0
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return BeaconTenderDialogue(player)
     }
 
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
         index = getIndexOf((args[0] as NPC).originalId)
-        if(index == content.minigame.allfiredup.AFUBeacon.GWD.ordinal && player.skills.getLevel(Skills.SUMMONING) < 81){
+        if(index == AFUBeacon.GWD.ordinal && player.skills.getLevel(Skills.SUMMONING) < 81){
             npc("Awwf uurrrhur","(You need 81 Summoning to communicate with Nanuq.)")
             stage = 1000
             return true
         }
-        if(index == content.minigame.allfiredup.AFUBeacon.MONASTERY.ordinal && player.skills.getLevel(Skills.PRAYER) < 53){
+        if(index == AFUBeacon.MONASTERY.ordinal && player.skills.getLevel(Skills.PRAYER) < 53){
             npc("I will aid you when your devotion is","strong enough.","(You need 53 Prayer for him to assist you.)")
             stage = 1000
             return true
@@ -39,12 +39,12 @@ class BeaconTenderDialogue(player: Player? = null) : core.game.dialogue.Dialogue
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val beacon = content.minigame.allfiredup.AFUBeacon.values()[index]
+        val beacon = AFUBeacon.values()[index]
         val logs = getLogs(player,5)
         val session: AFUSession? = player.getAttribute("afu-session",null)
         when(stage){
             0 -> player("Hello!").also { stage++ }
-            1 -> if(beacon.getState(player) == content.minigame.allfiredup.BeaconState.LIT && session?.isWatched(index) == false){
+            1 -> if(beacon.getState(player) == BeaconState.LIT && session?.isWatched(index) == false){
                     options("Can you watch this beacon for me?","Nevermind.").also { stage = 10 }
                  } else {
                     npc("Carry on, adventurer.").also { stage = 1000 }

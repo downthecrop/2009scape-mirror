@@ -10,13 +10,13 @@ import core.tools.START_DIALOGUE
 abstract class DialogueFile {
     var player: Player? = null
     var npc: NPC? = null
-    var interpreter: core.game.dialogue.DialogueInterpreter? = null
+    var interpreter: DialogueInterpreter? = null
     open var stage = START_DIALOGUE
-    var dialoguePlugin: core.game.dialogue.DialoguePlugin? = null
+    var dialoguePlugin: DialoguePlugin? = null
 
     abstract fun handle(componentID: Int, buttonID: Int)
 
-    fun load(player: Player, npc: NPC?, interpreter: core.game.dialogue.DialogueInterpreter): DialogueFile {
+    fun load(player: Player, npc: NPC?, interpreter: DialogueInterpreter): DialogueFile {
         this.player = player
         this.npc = npc
         this.interpreter = interpreter
@@ -29,7 +29,7 @@ abstract class DialogueFile {
         if (npc != null) {
             return interpreter!!.sendDialogues(
                 npc,
-                if (npc!!.id > 8591) core.game.dialogue.FacialExpression.OLD_NORMAL else core.game.dialogue.FacialExpression.FRIENDLY,
+                if (npc!!.id > 8591) FacialExpression.OLD_NORMAL else FacialExpression.FRIENDLY,
                 *messages
             )
         }
@@ -37,10 +37,10 @@ abstract class DialogueFile {
     }
 
     open fun npc(id: Int, vararg messages: String?): Component? {
-        return interpreter!!.sendDialogues(id, core.game.dialogue.FacialExpression.FRIENDLY, *messages)
+        return interpreter!!.sendDialogues(id, FacialExpression.FRIENDLY, *messages)
     }
 
-    open fun npc(expression: core.game.dialogue.FacialExpression?, vararg messages: String?): Component? {
+    open fun npc(expression: FacialExpression?, vararg messages: String?): Component? {
         return if (npc == null) {
             interpreter!!.sendDialogues(0, expression, *messages)
         } else interpreter!!.sendDialogues(npc, expression, *messages)
@@ -50,7 +50,7 @@ abstract class DialogueFile {
         return interpreter!!.sendDialogues(player, null, *messages)
     }
 
-    open fun player(expression: core.game.dialogue.FacialExpression?, vararg messages: String?): Component? {
+    open fun player(expression: FacialExpression?, vararg messages: String?): Component? {
         return interpreter!!.sendDialogues(player, expression, *messages)
     }
 
@@ -59,7 +59,7 @@ abstract class DialogueFile {
      * @param expr the FacialExpression to use, located in the FacialExpression enum.
      * @param msg the message for the NPC to say
      */
-    open fun npcl(expr: core.game.dialogue.FacialExpression?, msg: String?): Component? {
+    open fun npcl(expr: FacialExpression?, msg: String?): Component? {
         return npc(expr, *splitLines(msg!!))
     }
 
@@ -72,7 +72,7 @@ abstract class DialogueFile {
      * @param expr the FacialExpression to use, located in the FacialExpression enum.
      * @param msg the message for the player to say
      */
-    open fun playerl(expr: core.game.dialogue.FacialExpression?, msg: String?): Component? {
+    open fun playerl(expr: FacialExpression?, msg: String?): Component? {
         return player(expr, *splitLines(msg!!))
     }
 
@@ -84,7 +84,7 @@ abstract class DialogueFile {
         if(interpreter != null) interpreter!!.close()
     }
 
-    open fun sendNormalDialogue(entity: Entity?, expression: core.game.dialogue.FacialExpression?, vararg messages: String?) {
+    open fun sendNormalDialogue(entity: Entity?, expression: FacialExpression?, vararg messages: String?) {
         interpreter!!.sendDialogues(entity, expression, *messages)
     }
 

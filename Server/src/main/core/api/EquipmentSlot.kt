@@ -27,7 +27,7 @@ enum class EquipmentSlot {
             slotMap["chest"] = CHEST; slotMap["body"] = CHEST; slotMap["torso"] = CHEST
             slotMap["shield"] = SHIELD; slotMap["off"] = SHIELD
             slotMap["legs"] = LEGS; slotMap["leg"] = LEGS
-            slotMap["hands"] = HANDS; slotMap["hand"] = HANDS; slotMap["brace"] = HANDS; slotMap["bracelet"] = HANDS;
+            slotMap["hands"] = HANDS; slotMap["hand"] = HANDS; slotMap["brace"] = HANDS; slotMap["bracelet"] = HANDS
             slotMap["feet"] = FEET
             slotMap["ring"] = RING
             slotMap["ammo"] = AMMO; slotMap["ammunition"] = AMMO

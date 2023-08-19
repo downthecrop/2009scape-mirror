@@ -14,27 +14,27 @@ import core.tools.END_DIALOGUE
  */
 
 @Initializable
-class LonghallBouncerDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class LonghallBouncerDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!isQuestComplete(player, "Fremennik Trials")) {
-            npcl(core.game.dialogue.FacialExpression.ANNOYED, "Hey, outerlander. You can't go through there. Talent only, backstage.").also { stage = END_DIALOGUE }
+            npcl(FacialExpression.ANNOYED, "Hey, outerlander. You can't go through there. Talent only, backstage.").also { stage = END_DIALOGUE }
         } else{
-            npcl(core.game.dialogue.FacialExpression.ANNOYED, "You can't go through there. Talent only, backstage.").also { stage = 0 }
+            npcl(FacialExpression.ANNOYED, "You can't go through there. Talent only, backstage.").also { stage = 0 }
         }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            0 -> player(core.game.dialogue.FacialExpression.PANICKED, "But I'm a Bard!").also { stage++ }
-            1 -> npcl(core.game.dialogue.FacialExpression.FRIENDLY, "No you're not. I saw your performance. I was paid well to keep you from ever setting foot on stage here again.").also { stage = END_DIALOGUE }
+            0 -> player(FacialExpression.PANICKED, "But I'm a Bard!").also { stage++ }
+            1 -> npcl(FacialExpression.FRIENDLY, "No you're not. I saw your performance. I was paid well to keep you from ever setting foot on stage here again.").also { stage = END_DIALOGUE }
         }
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return LonghallBouncerDialogue(player)
     }
 

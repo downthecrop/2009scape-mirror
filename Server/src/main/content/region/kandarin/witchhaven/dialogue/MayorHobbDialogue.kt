@@ -13,11 +13,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class MayorHobbDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class MayorHobbDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npcl(core.game.dialogue.FacialExpression.FRIENDLY,"Well hello there; welcome to our little village. Pray, stay awhile.").also { stage = 99 }
+        npcl(FacialExpression.FRIENDLY,"Well hello there; welcome to our little village. Pray, stay awhile.").also { stage = 99 }
         return true
     }
 
@@ -28,7 +28,7 @@ class MayorHobbDialogue(player: Player? = null) : core.game.dialogue.DialoguePlu
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return MayorHobbDialogue(player)
     }
 

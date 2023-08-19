@@ -15,7 +15,7 @@ import org.rs09.consts.Items
  * @author Splinter
  * @author pain
  */
-class TheLadyOfTheLake(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
+class TheLadyOfTheLake(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
@@ -24,7 +24,7 @@ class TheLadyOfTheLake(player: Player? = null) : core.game.dialogue.DialoguePlug
             0
         } else if(player.achievementDiaryManager.getDiary(DiaryType.SEERS_VILLAGE).isComplete(2)
             && player.equipment.contains(14631,1) && player.equipment.contains(35,1)){
-            npcl(core.game.dialogue.FacialExpression.HAPPY,"I am the Lady of the Lake.")
+            npcl(FacialExpression.HAPPY,"I am the Lady of the Lake.")
             110
         }
         else {
@@ -49,7 +49,7 @@ class TheLadyOfTheLake(player: Player? = null) : core.game.dialogue.DialoguePlug
                     }
                 3 -> player("Good day.").also { stage = 10000 }
             }
-            100 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"I am the Lady of the Lake.").also { stage = 145 }
+            100 -> npcl(FacialExpression.HAPPY,"I am the Lady of the Lake.").also { stage = 145 }
             110 -> player("And I'm-").also { stage++ }
             111 -> npc(
                     "You're " + player.name + ". And I see from the sign you",
@@ -143,7 +143,7 @@ class TheLadyOfTheLake(player: Player? = null) : core.game.dialogue.DialoguePlug
         return true
     }
 
-    override fun newInstance(player: Player): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player): DialoguePlugin {
         return TheLadyOfTheLake(player)
     }
 

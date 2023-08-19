@@ -15,9 +15,9 @@ import core.tools.START_DIALOGUE
  * @author vddcore
  */
 @Initializable
-class HuntingExpertRellekkaDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
+class HuntingExpertRellekkaDialogue(player: Player? = null) : DialoguePlugin(player) {
 
-    override fun newInstance(player: Player): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player): DialoguePlugin {
         return HuntingExpertRellekkaDialogue(player)
     }
 
@@ -25,7 +25,7 @@ class HuntingExpertRellekkaDialogue(player: Player? = null) : core.game.dialogue
         npc = args[0] as NPC
 
         npcl(
-            core.game.dialogue.FacialExpression.HAPPY,
+            FacialExpression.HAPPY,
             "Good day, you seem to have a keen eye. "
             + "Maybe even some hunter's blood in that body of yours?"
         )
@@ -36,48 +36,48 @@ class HuntingExpertRellekkaDialogue(player: Player? = null) : core.game.dialogue
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> showTopics(
-                Topic(core.game.dialogue.FacialExpression.ASKING, "Is there anything you can teach me?", 1),
-                Topic(core.game.dialogue.FacialExpression.NEUTRAL, "Nevermind.", END_DIALOGUE)
+                Topic(FacialExpression.ASKING, "Is there anything you can teach me?", 1),
+                Topic(FacialExpression.NEUTRAL, "Nevermind.", END_DIALOGUE)
             )
 
             1 -> npcl(
-                core.game.dialogue.FacialExpression.FRIENDLY,
+                FacialExpression.FRIENDLY,
                 "I can teach you how to hunt."
             ).also { stage++ }
 
             2 -> playerl(
-                core.game.dialogue.FacialExpression.THINKING,
+                FacialExpression.THINKING,
                 "What kind of creatures can I hunt?"
             ).also { stage++ }
 
             3 -> npcl(
-                core.game.dialogue.FacialExpression.FRIENDLY,
+                FacialExpression.FRIENDLY,
                 "Many creatures in many ways. You need to make some traps "
                 + "and catch birds!"
             ).also { stage++ }
 
             4 -> playerl(
-                core.game.dialogue.FacialExpression.HALF_ASKING,
+                FacialExpression.HALF_ASKING,
                 "Birds?"
             ).also { stage++ }
 
             5 -> npcl(
-                core.game.dialogue.FacialExpression.ANNOYED,
+                FacialExpression.ANNOYED,
                 "Yes, birds! Like the ones here!"
             ).also { stage++ }
 
             6 -> npcl(
-                core.game.dialogue.FacialExpression.ANNOYED,
+                FacialExpression.ANNOYED,
                 "Look. Just... Get some hunting gear and go set up some traps."
             ).also { stage++ }
 
             7 -> playerl(
-                core.game.dialogue.FacialExpression.HALF_ROLLING_EYES,
+                FacialExpression.HALF_ROLLING_EYES,
                 "Is that it?"
             ).also { stage++ }
 
             8 -> npcl(
-                core.game.dialogue.FacialExpression.FURIOUS,
+                FacialExpression.FURIOUS,
                 "JUST GO DO IT!"
             ).also { stage = END_DIALOGUE }
         }

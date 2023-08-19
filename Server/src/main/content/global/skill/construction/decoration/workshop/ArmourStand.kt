@@ -57,8 +57,8 @@ class ArmourStand : UseWithHandler(494, 468, 496, 470, 498, 472, 500, 502, 474, 
         return true
     }
     @Initializable
-    class RepairDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
-        override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    class RepairDialogue(player: Player? = null) : DialoguePlugin(player){
+        override fun newInstance(player: Player?): DialoguePlugin {
             return RepairDialogue(player)
         }
         var item: Item? = null

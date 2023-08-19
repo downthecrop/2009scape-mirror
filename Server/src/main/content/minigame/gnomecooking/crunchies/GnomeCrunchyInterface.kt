@@ -50,7 +50,7 @@ class GnomeCrunchyInterface : ComponentPlugin() {
         for(item in crunchy.requiredItems){
             if(!player.inventory.containsItem(item)){
                 hasAll = false
-                break;
+                break
             }
         }
 

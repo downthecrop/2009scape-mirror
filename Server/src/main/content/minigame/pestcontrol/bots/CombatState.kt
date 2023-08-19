@@ -32,7 +32,7 @@ class CombatState(val bot: PestControlTestBot) {
                     removeList.add(port)
                 } else {
                     portal = port
-                    break;
+                    break
                 }
             }
             sesh.aportals.removeAll(removeList)

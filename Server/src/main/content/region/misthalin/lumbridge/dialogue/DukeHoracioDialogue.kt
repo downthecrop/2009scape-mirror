@@ -15,7 +15,7 @@ import core.tools.END_DIALOGUE
  * Core dialogue plugin for Duke Horacio, redirects to more specific DialogueFiles.
  * @author Ceikry
  */
-class DukeHoracioDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
+class DukeHoracioDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun getIds(): IntArray {
         return intArrayOf(741)
@@ -30,7 +30,7 @@ class DukeHoracioDialogue(player: Player? = null) : core.game.dialogue.DialogueP
             addOption("Lost Tribe", DukeHoracioTLTDialogue(player.questRepository.getStage("Lost Tribe")))
         }
         if (!sendChoices()) {
-            interpreter.sendDialogues(npc, core.game.dialogue.FacialExpression.HALF_GUILTY, "Greetings. Welcome to my castle.")
+            interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Greetings. Welcome to my castle.")
         }
 
         return true
@@ -50,13 +50,13 @@ class DukeHoracioDialogue(player: Player? = null) : core.game.dialogue.DialogueP
             }
             1 -> when (buttonId) {
                 1 -> {
-                    interpreter.sendDialogues(player, core.game.dialogue.FacialExpression.HALF_GUILTY, "Have any quests for me?")
+                    interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Have any quests for me?")
                     stage = 20
                 }
                 2 -> {
                     interpreter.sendDialogues(
                         npc,
-                        core.game.dialogue.FacialExpression.HALF_GUILTY,
+                        FacialExpression.HALF_GUILTY,
                         "I hear many of the local people earn money by learning a",
                         "skill. Many people get by in life by becoming accomplished",
                         "smiths, cooks, miners and woodcutters."
@@ -80,7 +80,7 @@ class DukeHoracioDialogue(player: Player? = null) : core.game.dialogue.DialogueP
         return true
     }
 
-    override fun newInstance(player: Player): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player): DialoguePlugin {
         return DukeHoracioDialogue(player)
     }
 }

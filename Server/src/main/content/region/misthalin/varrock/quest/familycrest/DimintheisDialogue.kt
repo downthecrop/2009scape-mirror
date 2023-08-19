@@ -27,7 +27,7 @@ class DimintheisDialogue(player: Player? = null): core.game.dialogue.DialoguePlu
 
         if (questStage == 20 && inInventory(player, Items.FAMILY_CREST_782)) {
             player("I have retrieved your crest.").also{ stage = 5000 }
-            return true;
+            return true
         }
 
         val hasGauntlets = hasAnItem(player, Items.COOKING_GAUNTLETS_775, Items.GOLDSMITH_GAUNTLETS_776, Items.CHAOS_GAUNTLETS_777, Items.FAMILY_GAUNTLETS_778).container != null
@@ -179,7 +179,7 @@ class DimintheisDialogue(player: Player? = null): core.game.dialogue.DialoguePlu
             1000 -> end()
         }
 
-        return true;
+        return true
     }
 
     override fun getIds(): IntArray {

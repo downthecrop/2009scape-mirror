@@ -4,8 +4,8 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.tools.START_DIALOGUE
 
-class EmptyPlugin(player: Player? = null,val file: DialogueFile?) : core.game.dialogue.DialoguePlugin(player) {
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+class EmptyPlugin(player: Player? = null,val file: DialogueFile?) : DialoguePlugin(player) {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return EmptyPlugin(player,null)
     }
 

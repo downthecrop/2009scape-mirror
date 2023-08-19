@@ -25,7 +25,7 @@ class WardrobeHandler : OptionHandler() {
         } else {
             player.interfaceManager.open(Component(594))
         }
-        return true;
+        return true
     }
 
 }

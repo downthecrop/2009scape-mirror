@@ -39,11 +39,11 @@ class ConstructionDoorPlugin : OptionHandler() {
 
     override fun handle(player: Player, node: Node, option: String): Boolean {
         val `object` = node as Scenery
-        val second = core.game.global.action.DoorActionHandler.getSecondDoor(`object`, player)
+        val second = DoorActionHandler.getSecondDoor(`object`, player)
         when (option) {
             "pick-lock", "force" -> return false //TODO
         }
-        core.game.global.action.DoorActionHandler.open(`object`, second, getReplaceId(`object`), getReplaceId(second), true, 500, false)
+        DoorActionHandler.open(`object`, second, getReplaceId(`object`), getReplaceId(second), true, 500, false)
         return true
     }
 

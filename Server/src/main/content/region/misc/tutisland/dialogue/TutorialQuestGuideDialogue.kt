@@ -18,8 +18,8 @@ import content.region.misc.tutisland.handlers.TutorialStage
  * @author Ceikry
  */
 @Initializable
-class TutorialQuestGuideDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+class TutorialQuestGuideDialogue(player: Player? = null) : DialoguePlugin(player) {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return TutorialQuestGuideDialogue(player)
     }
 
@@ -31,7 +31,7 @@ class TutorialQuestGuideDialogue(player: Player? = null) : core.game.dialogue.Di
                 player,
                 interpreter.sendDialogues(
                     npc,
-                    core.game.dialogue.FacialExpression.FRIENDLY,
+                    FacialExpression.FRIENDLY,
                     "Ah. Welcome, adventurer. I'm here to tell you all about",
                     "quests. Lets start by opening the Quest List."
                 )
@@ -41,7 +41,7 @@ class TutorialQuestGuideDialogue(player: Player? = null) : core.game.dialogue.Di
                 player,
                 interpreter.sendDialogues(
                     npc,
-                    core.game.dialogue.FacialExpression.FRIENDLY,
+                    FacialExpression.FRIENDLY,
                     "Now you have the journal open. I'll tell you a bit about",
                     "it At the moment all the quests are shown in red, which",
                     "means you have not started them yet."
@@ -76,7 +76,7 @@ class TutorialQuestGuideDialogue(player: Player? = null) : core.game.dialogue.Di
                     player,
                     interpreter.sendDialogues(
                         npc,
-                        core.game.dialogue.FacialExpression.FRIENDLY,
+                        FacialExpression.FRIENDLY,
                         "When you start a quest it will change colour to yellow,",
                         "and to green when you've finished. This is so you can",
                         "easily see what's complete, what's started and what's left",
@@ -87,7 +87,7 @@ class TutorialQuestGuideDialogue(player: Player? = null) : core.game.dialogue.Di
                     player,
                     interpreter.sendDialogues(
                         npc,
-                        core.game.dialogue.FacialExpression.FRIENDLY,
+                        FacialExpression.FRIENDLY,
                         "The start of quests are easy to find. Look out for the",
                         "star icons on the minimap, just like the one you should",
                         "see marking my house."
@@ -97,7 +97,7 @@ class TutorialQuestGuideDialogue(player: Player? = null) : core.game.dialogue.Di
                     player,
                     interpreter.sendDialogues(
                         npc,
-                        core.game.dialogue.FacialExpression.FRIENDLY,
+                        FacialExpression.FRIENDLY,
                         "There's not a lot more I can tell you about questing.",
                         "You have to experience the thrill of it yourself to fully",
                         "understand. You may find some adventure in the caves",

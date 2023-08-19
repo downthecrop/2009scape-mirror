@@ -15,7 +15,7 @@ private const val WHITE_WOLF_CONDUCTOR = 2181
 private const val KELDAGRIM_CONDUCTOR = 2182
 
 @Initializable
-class CartConductorDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
+class CartConductorDialogue(player: Player? = null) : DialoguePlugin(player) {
     var visitedKeldagrim = false
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
@@ -61,7 +61,7 @@ class CartConductorDialogue(player: Player? = null) : core.game.dialogue.Dialogu
     }
 
     override fun npc(vararg messages: String?): Component {
-        return super.npc(core.game.dialogue.FacialExpression.OLD_NORMAL, *messages)
+        return super.npc(FacialExpression.OLD_NORMAL, *messages)
     }
 
     override fun open(vararg args: Any?): Boolean {
@@ -77,7 +77,7 @@ class CartConductorDialogue(player: Player? = null) : core.game.dialogue.Dialogu
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return CartConductorDialogue(player)
     }
 

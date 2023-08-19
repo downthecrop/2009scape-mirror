@@ -12,18 +12,18 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class HallaDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class HallaDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.FRIENDLY,"Welcome to Miscellania's first clothing store!", "We sell clothing made especially for Fremenniks", "and Dwarves.").also { stage = 0 }
+        npc(FacialExpression.FRIENDLY,"Welcome to Miscellania's first clothing store!", "We sell clothing made especially for Fremenniks", "and Dwarves.").also { stage = 0 }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
             0 -> {
-                npc(core.game.dialogue.FacialExpression.ASKING, "Can I help you with anything, your Royal Highness?").also { stage++ }
+                npc(FacialExpression.ASKING, "Can I help you with anything, your Royal Highness?").also { stage++ }
             }
 
             1 -> {
@@ -32,15 +32,15 @@ class HallaDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(
 
             2 -> when(buttonId){
                 1 -> {
-                    player(core.game.dialogue.FacialExpression.FRIENDLY, "I'd like to look at what you have for sale.").also { stage = 10 }
+                    player(FacialExpression.FRIENDLY, "I'd like to look at what you have for sale.").also { stage = 10 }
                 }
 
                 2 -> {
-                    player(core.game.dialogue.FacialExpression.NEUTRAL, "No thank you, I'm fine.").also { stage = 99 }
+                    player(FacialExpression.NEUTRAL, "No thank you, I'm fine.").also { stage = 99 }
                 }
 
                 3 -> {
-                    player(core.game.dialogue.FacialExpression.ASKING, "What's it like living down here?").also { stage = 20 }
+                    player(FacialExpression.ASKING, "What's it like living down here?").also { stage = 20 }
                 }
             }
 
@@ -49,10 +49,10 @@ class HallaDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(
             }
 
             20 -> {
-                npc(core.game.dialogue.FacialExpression.NEUTRAL, "It's very spacious down here.", "One of the dwarves said that the caves go on for miles!").also { stage++ }
+                npc(FacialExpression.NEUTRAL, "It's very spacious down here.", "One of the dwarves said that the caves go on for miles!").also { stage++ }
             }
             21 -> {
-                npc(core.game.dialogue.FacialExpression.NEUTRAL, "The only problem I find is that the lighting's not very good,", "which means I make mistakes when cutting cloth.").also { stage = 99 }
+                npc(FacialExpression.NEUTRAL, "The only problem I find is that the lighting's not very good,", "which means I make mistakes when cutting cloth.").also { stage = 99 }
             }
 
             99 -> end()
@@ -60,7 +60,7 @@ class HallaDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return HallaDialogue(player)
     }
 

@@ -13,15 +13,15 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class ZooknockDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class ZooknockDialogue(player: Player? = null) : DialoguePlugin(player){
 
 
-    var fr = core.game.dialogue.FacialExpression.FRIENDLY
-    var neu = core.game.dialogue.FacialExpression.NEUTRAL
-    var ask = core.game.dialogue.FacialExpression.ASKING
-    var nor = core.game.dialogue.FacialExpression.OLD_NORMAL
-    var ntalk1 = core.game.dialogue.FacialExpression.OLD_CALM_TALK1
-    var ntalk2 = core.game.dialogue.FacialExpression.OLD_CALM_TALK2
+    var fr = FacialExpression.FRIENDLY
+    var neu = FacialExpression.NEUTRAL
+    var ask = FacialExpression.ASKING
+    var nor = FacialExpression.OLD_NORMAL
+    var ntalk1 = FacialExpression.OLD_CALM_TALK1
+    var ntalk2 = FacialExpression.OLD_CALM_TALK2
 
     var hasSpokenToZook = false
 
@@ -52,7 +52,7 @@ class ZooknockDialogue(player: Player? = null) : core.game.dialogue.DialoguePlug
             12 -> playerl(neu, "No, I have been accompanied by Flight Commander Waydar. We flew south on a special type of glider and landed on a small island to our east.").also { stage++ }
             13 -> npcl(ntalk2, "The so called Crash Island. We left there one of our number, Lumdo, to guard our gliders until our return.").also { stage++ }
             14 -> player(neu, "Yes, we have met. He ferried me across to the atoll.").also { stage++ }
-            15 -> npcl(core.game.dialogue.FacialExpression.OLD_ANGRY1, "He did!? He was explicitly ordered to guard the gliders! How did this happen? Who is guarding the gliders now?").also { stage++ }
+            15 -> npcl(FacialExpression.OLD_ANGRY1, "He did!? He was explicitly ordered to guard the gliders! How did this happen? Who is guarding the gliders now?").also { stage++ }
             16 -> playerl(ntalk1, "Waydar ordered him to leave his post. He is guarding the gliders himself.").also { stage++ }
             17 -> npcl(ntalk2, "Flight Commander Waydar you said? For some reason that name is familiar...").also { stage++ }
             18 -> player(ask, "So why are you here?").also { stage++ }
@@ -61,7 +61,7 @@ class ZooknockDialogue(player: Player? = null) : core.game.dialogue.DialoguePlug
             21 -> npc(ntalk1, "Correct. I assume Lumdo told you this?").also { stage++ }
             22 -> player(ask, "Yes. What happened when you landed here?").also { stage++ }
             23 -> npcl(ntalk2, "We split up into several small groups to search the island for potential gnome glider launch sites. Whilst we knew the island to be inhabited, we did not expect its occupants to be quite so ... militant.").also { stage++ }
-            24 -> player(core.game.dialogue.FacialExpression.THINKING, "...").also { stage++ }
+            24 -> player(FacialExpression.THINKING, "...").also { stage++ }
             25 -> npcl(ntalk1, "Monkeys. Lots of monkeys. They are unlike any other type of monkey we've come across. A far cry from the usual wild variety, these were armed with high quality weaponry and uncanny tactical ability.").also { stage++ }
             26 -> npcl(ntalk2, "We were overwhelmed in numbers. Some of us managed to escape, but the rest were taken captive.").also { stage++ }
             27 -> player(ask, "Who survived?").also { stage++ }
@@ -135,7 +135,7 @@ class ZooknockDialogue(player: Player? = null) : core.game.dialogue.DialoguePlug
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return ZooknockDialogue(player)
     }
 

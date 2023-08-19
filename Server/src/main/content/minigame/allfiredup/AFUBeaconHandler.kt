@@ -23,26 +23,26 @@ class AFUBeaconListeners : InteractionListener {
 
     override fun defineListeners() {
         on(IntType.SCENERY,"add-logs","light"){ player, node ->
-            val beacon = content.minigame.allfiredup.AFUBeacon.forLocation(node.location)
+            val beacon = AFUBeacon.forLocation(node.location)
             val questComplete = player.questRepository.isComplete("All Fired Up")
             val questStage = player.questRepository.getStage("All Fired Up")
 
-            if ((beacon != content.minigame.allfiredup.AFUBeacon.RIVER_SALVE && beacon != content.minigame.allfiredup.AFUBeacon.RAG_AND_BONE && !questComplete)
-                || (beacon == content.minigame.allfiredup.AFUBeacon.RIVER_SALVE && questStage < 20 && !questComplete)
-                || (beacon == content.minigame.allfiredup.AFUBeacon.RAG_AND_BONE && questStage < 50 && !questComplete)) {
+            if ((beacon != AFUBeacon.RIVER_SALVE && beacon != AFUBeacon.RAG_AND_BONE && !questComplete)
+                || (beacon == AFUBeacon.RIVER_SALVE && questStage < 20 && !questComplete)
+                || (beacon == AFUBeacon.RAG_AND_BONE && questStage < 50 && !questComplete)) {
                 player.dialogueInterpreter.sendDialogues(player, core.game.dialogue.FacialExpression.THINKING, "I probably shouldn't mess with this.")
                 return@on true
             }
             player.debug(beacon.getState(player).name)
 
             when (beacon.getState(player)) {
-                content.minigame.allfiredup.BeaconState.EMPTY -> fillBeacon(player, beacon, questComplete)
+                BeaconState.EMPTY -> fillBeacon(player, beacon, questComplete)
 
-                content.minigame.allfiredup.BeaconState.DYING -> restoreBeacon(player, beacon, questComplete)
+                BeaconState.DYING -> restoreBeacon(player, beacon, questComplete)
 
-                content.minigame.allfiredup.BeaconState.FILLED -> lightBeacon(player, beacon, questComplete)
+                BeaconState.FILLED -> lightBeacon(player, beacon, questComplete)
 
-                content.minigame.allfiredup.BeaconState.LIT, content.minigame.allfiredup.BeaconState.WARNING -> {
+                BeaconState.LIT, BeaconState.WARNING -> {
                     player.debug("INVALID BEACON STATE")
                 }
             }
@@ -50,24 +50,24 @@ class AFUBeaconListeners : InteractionListener {
         }
     }
 
-    fun fillBeacon(player: Player, beacon: content.minigame.allfiredup.AFUBeacon, questComplete: Boolean){
+    fun fillBeacon(player: Player, beacon: AFUBeacon, questComplete: Boolean){
 
         when(beacon){
-            content.minigame.allfiredup.AFUBeacon.MONASTERY -> {
+            AFUBeacon.MONASTERY -> {
                 if(player.skills.getLevel(Skills.PRAYER) < 31){
                     player.dialogueInterpreter.sendDialogues(NPC(beacon.keeper).getShownNPC(player), core.game.dialogue.FacialExpression.ANGRY,"You must join the monastery to light this beacon!")
                     return
                 }
             }
 
-            content.minigame.allfiredup.AFUBeacon.GWD -> {
+            AFUBeacon.GWD -> {
                 if(!AFURepairClimbHandler.isRepaired(player, beacon)){
                     player.dialogueInterpreter.sendDialogue("You must repair the windbreak before you","can light this beacon.")
                     return
                 }
             }
 
-            content.minigame.allfiredup.AFUBeacon.GOBLIN_VILLAGE -> {
+            AFUBeacon.GOBLIN_VILLAGE -> {
                 if(!player.questRepository.isComplete("Lost Tribe")){
                     player.dialogueInterpreter.sendDialogues(NPC(beacon.keeper).getShownNPC(player), core.game.dialogue.FacialExpression.THINKING,"We no trust you outsider. You no light our beacon.","(Complete Lost Tribe to use this beacon.)")
                     return
@@ -117,7 +117,7 @@ class AFUBeaconListeners : InteractionListener {
         }
     }
 
-    fun lightBeacon(player: Player, beacon: content.minigame.allfiredup.AFUBeacon, questComplete: Boolean){
+    fun lightBeacon(player: Player, beacon: AFUBeacon, questComplete: Boolean){
         var session: AFUSession? = null
         if(questComplete){
             session = player.getAttribute("afu-session",null)
@@ -164,7 +164,7 @@ class AFUBeaconListeners : InteractionListener {
         }
     }
 
-    fun restoreBeacon(player: Player, beacon: content.minigame.allfiredup.AFUBeacon, questComplete: Boolean){
+    fun restoreBeacon(player: Player, beacon: AFUBeacon, questComplete: Boolean){
         var session: AFUSession? = null
         if(questComplete){
             session = player.getAttribute("afu-session",null)

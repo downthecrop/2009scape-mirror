@@ -33,8 +33,8 @@ class MakeOverInterface : ComponentPlugin(){
         player.packetDispatch.sendNpcOnInterface(1,component.id, MALE_CHILD_ID)
         player.packetDispatch.sendNpcOnInterface(5,component.id, FEMALE_CHILD_ID)
         //Send chathead animations to interface
-        player.packetDispatch.sendAnimationInterface(core.game.dialogue.FacialExpression.SILENT.animationId,component.id, MALE_CHILD_ID)
-        player.packetDispatch.sendAnimationInterface(core.game.dialogue.FacialExpression.SILENT.animationId,component.id, FEMALE_CHILD_ID)
+        player.packetDispatch.sendAnimationInterface(FacialExpression.SILENT.animationId,component.id, MALE_CHILD_ID)
+        player.packetDispatch.sendAnimationInterface(FacialExpression.SILENT.animationId,component.id, FEMALE_CHILD_ID)
 
         //Check for makeover voucher and then change interface text if it's there
         if(player.inventory.containsAtLeastOneItem(Items.MAKEOVER_VOUCHER_5606)){

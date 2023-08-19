@@ -210,7 +210,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
                         rewardXP(player, Skills.STRENGTH, PlunderUtils.getSarcophagusXp(player))
                         if(RandomFunction.roll(25))
                         {
-                            val mummy = content.minigame.pyramidplunder.PyramidPlunderMummyNPC(player.location, player)
+                            val mummy = PyramidPlunderMummyNPC(player.location, player)
                             mummy.isRespawn = false
                             mummy.init()
                             mummy.attack(player)
@@ -235,7 +235,7 @@ class PyramidPlunderMinigame : InteractionListener, TickListener, LogoutListener
             runTask(player){
                 if(RandomFunction.roll(25))
                 {
-                    val swarm = content.minigame.pyramidplunder.PyramidPlunderSwarmNPC(player.location, player)
+                    val swarm = PyramidPlunderSwarmNPC(player.location, player)
                     swarm.isRespawn = false
                     swarm.init()
                     swarm.attack(player)

@@ -8,8 +8,8 @@ import content.minigame.allfiredup.BeaconState
 import core.api.*
 
 @Initializable
-class SquireFyreDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+class SquireFyreDialogue(player: Player? = null) : DialoguePlugin(player){
+    override fun newInstance(player: Player?): DialoguePlugin {
         return SquireFyreDialogue(player)
     }
 

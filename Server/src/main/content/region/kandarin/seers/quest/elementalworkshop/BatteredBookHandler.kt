@@ -17,7 +17,7 @@ class BatteredBookHandler : InteractionListener {
 
     companion object {
         private val TITLE = "Book of the elemental shield"
-        private val CONTENTS = EWUtils.PAGES;
+        private val CONTENTS = EWUtils.PAGES
 
         private fun display(player:Player, pageNum: Int, buttonID: Int) : Boolean {
             BookInterface.pageSetup(player, BookInterface.FANCY_BOOK_3_49, TITLE, CONTENTS)

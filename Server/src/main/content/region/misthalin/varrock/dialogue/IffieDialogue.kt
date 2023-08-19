@@ -9,10 +9,10 @@ import core.plugin.Initializable
  * @author afaroutdude
  */
 @Initializable
-class IffieDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
+class IffieDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun open(vararg args: Any?): Boolean {
         npc("Sorry, dearie, if I stop to chat I'll lose count.", "Talk to my sister instead; she likes to chat.", "You'll find her upstairs in the church.")
-        stage = 999;
+        stage = 999
         return true
     }
 
@@ -23,7 +23,7 @@ class IffieDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return IffieDialogue(player)
     }
 

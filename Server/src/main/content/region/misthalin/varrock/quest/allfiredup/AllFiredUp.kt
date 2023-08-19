@@ -82,7 +82,7 @@ class AllFiredUp : Quest("All Fired Up", 157, 156, 1){
         player.packetDispatch.sendItemZoomOnInterface(Items.TINDERBOX_590, 235, 277, 3 + 2)
         player.skills.addExperience(Skills.FIREMAKING, 5500.0)
         player.inventory.add(Item(995,20000))
-        content.minigame.allfiredup.AFUBeacon.resetAllBeacons(player)
+        AFUBeacon.resetAllBeacons(player)
         setVarbit(player, 1283, 0)
         player.questRepository.syncronizeTab(player)
     }

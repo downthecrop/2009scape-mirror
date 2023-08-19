@@ -13,11 +13,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class DerrikDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class DerrikDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.FRIENDLY,"Good day, Sir. Can I help you with anything?").also { stage = 0 }
+        npc(FacialExpression.FRIENDLY,"Good day, Sir. Can I help you with anything?").also { stage = 0 }
         return true
     }
 
@@ -30,15 +30,15 @@ class DerrikDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
 
             1 -> when(buttonId){
                 1 -> {
-                    player(core.game.dialogue.FacialExpression.ASKING, "Can I use your anvil?").also { stage = 5 }
+                    player(FacialExpression.ASKING, "Can I use your anvil?").also { stage = 5 }
                 }
                 2 -> {
-                    player(core.game.dialogue.FacialExpression.NEUTRAL, "Nothing, thanks.").also { stage = 99 }
+                    player(FacialExpression.NEUTRAL, "Nothing, thanks.").also { stage = 99 }
                 }
             }
 
             5 -> {
-                npc(core.game.dialogue.FacialExpression.NEUTRAL, "You may.").also { stage = 99 }
+                npc(FacialExpression.NEUTRAL, "You may.").also { stage = 99 }
             }
 
             99 -> end()
@@ -46,7 +46,7 @@ class DerrikDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return DerrikDialogue(player)
     }
 

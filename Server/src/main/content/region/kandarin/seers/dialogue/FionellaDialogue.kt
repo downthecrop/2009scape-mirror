@@ -13,11 +13,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class FionellaDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class FionellaDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.FRIENDLY,"Can I help you at all?").also { stage = 0 }
+        npc(FacialExpression.FRIENDLY,"Can I help you at all?").also { stage = 0 }
         return true
     }
 
@@ -30,15 +30,15 @@ class FionellaDialogue(player: Player? = null) : core.game.dialogue.DialoguePlug
 
             1 -> when(buttonId){
                 1 -> {
-                    player(core.game.dialogue.FacialExpression.FRIENDLY, "Yes please. What are you selling?").also { stage = 10 }
+                    player(FacialExpression.FRIENDLY, "Yes please. What are you selling?").also { stage = 10 }
                 }
 
                 2 -> {
-                    player(core.game.dialogue.FacialExpression.FRIENDLY, "No thanks.").also { stage = 99 }
+                    player(FacialExpression.FRIENDLY, "No thanks.").also { stage = 99 }
                 }
             }
 
-            10 -> npc(core.game.dialogue.FacialExpression.FRIENDLY, "Take a look.").also { stage = 100 }
+            10 -> npc(FacialExpression.FRIENDLY, "Take a look.").also { stage = 100 }
 
             99 -> end()
             100 -> end().also { npc.openShop(player) }
@@ -46,7 +46,7 @@ class FionellaDialogue(player: Player? = null) : core.game.dialogue.DialoguePlug
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return FionellaDialogue(player)
     }
 

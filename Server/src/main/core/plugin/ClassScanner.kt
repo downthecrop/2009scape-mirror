@@ -150,7 +150,7 @@ object ClassScanner {
                     definePlugin(clazz)
                 }
             } catch (t: Throwable) {
-                log(this::class.java, Log.ERR,  "Failed to load plugin ${p.name}.");
+                log(this::class.java, Log.ERR,  "Failed to load plugin ${p.name}.")
 
                 if (t is NoSuchMethodException && p.superclass.simpleName == core.game.dialogue.DialoguePlugin::class.simpleName) {
                     log(this::class.java, Log.ERR, 

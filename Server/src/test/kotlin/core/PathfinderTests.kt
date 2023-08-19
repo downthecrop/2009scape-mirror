@@ -108,7 +108,7 @@ class PathfinderTests {
             npc.init()
             GameWorld.Pulser.submit(object : MovementPulse(p, npc) {
                 override fun pulse(): Boolean {
-                    return true;
+                    return true
                 }
             })
             TestUtils.advanceTicks(10, false)
@@ -124,7 +124,7 @@ class PathfinderTests {
             npc.init()
             GameWorld.Pulser.submit(object : MovementPulse(p, npc) {
                 override fun pulse(): Boolean {
-                    return true;
+                    return true
                 }
             })
             TestUtils.advanceTicks(10, false)
@@ -141,7 +141,7 @@ class PathfinderTests {
             npc.init()
             GameWorld.Pulser.submit(object : MovementPulse(p, npc, DestinationFlag.ENTITY) {
                 override fun pulse(): Boolean {
-                    return true;
+                    return true
                 }
             })
             TestUtils.advanceTicks(10, false)

@@ -13,13 +13,13 @@ import core.tools.RandomFunction
  */
 
 @Initializable
-class AfflictedDialogue : core.game.dialogue.DialoguePlugin {
+class AfflictedDialogue : DialoguePlugin {
     private val chats = arrayOf("ughugh", "knows'is", "knows'is", "nots", "pirsl", "wot's", "zurgle", "gurghl", "mee's", "seysyi", "sfriess", "says")
 
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
         chats.shuffle()
-        interpreter.sendDialogues( npc, core.game.dialogue.FacialExpression.ASKING, chats.copyOfRange(0, RandomFunction.random(1, 6)).contentToString()
+        interpreter.sendDialogues( npc, FacialExpression.ASKING, chats.copyOfRange(0, RandomFunction.random(1, 6)).contentToString()
                 .replace("[", "").replace("]", "").replace(",", ""))
         return true
     }
@@ -36,7 +36,7 @@ class AfflictedDialogue : core.game.dialogue.DialoguePlugin {
         return true
     }
 
-    override fun newInstance(player: Player): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player): DialoguePlugin {
         return AfflictedDialogue(player)
     }
 }

@@ -45,8 +45,8 @@ class AIRepository {
 
         @JvmStatic fun clearAllBots() {
             PulseRepository.toList().forEach { (_, it) ->
-                it.stop();
-                it.botScript.bot.clear();
+                it.stop()
+                it.botScript.bot.clear()
                 AIPlayer.deregister((it.botScript.bot as AIPlayer).uid)
             }
         }

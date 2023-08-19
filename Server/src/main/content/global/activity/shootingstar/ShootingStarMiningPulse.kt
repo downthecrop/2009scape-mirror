@@ -89,7 +89,7 @@ class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: Shootin
         if(bonusXp > 0) {
             val delta = Math.min(bonusXp, xp)
             player.incrementAttribute("/save:shooting-star:bonus-xp", (-delta).toInt())
-            xp += delta;
+            xp += delta
             if(player.getAttribute("shooting-star:bonus-xp", 0) <= 0) {
                 player.sendMessage("You have obtained all of your bonus xp from the star.")
             }

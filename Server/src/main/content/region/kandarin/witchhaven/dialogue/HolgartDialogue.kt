@@ -12,28 +12,28 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class HolgartDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class HolgartDialogue(player: Player? = null) : DialoguePlugin(player){
     fun gender (male : String = "sir", female : String = "madam") = if (player.isMale) male else female
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        player(core.game.dialogue.FacialExpression.FRIENDLY,"Hello there.").also { stage = 0 }
+        player(FacialExpression.FRIENDLY,"Hello there.").also { stage = 0 }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            0 -> npc(core.game.dialogue.FacialExpression.FRIENDLY, "Well hello " + gender() + ", beautiful day isn't it?").also { stage++ }
-            1 -> player(core.game.dialogue.FacialExpression.FRIENDLY, "Not bad I suppose.").also { stage++ }
-            2 -> npc(core.game.dialogue.FacialExpression.FRIENDLY, "Just smell that sea air... beautiful.").also { stage++ }
-            3 -> player(core.game.dialogue.FacialExpression.FRIENDLY, "Hmm... lovely...").also { stage = 99 }
+            0 -> npc(FacialExpression.FRIENDLY, "Well hello " + gender() + ", beautiful day isn't it?").also { stage++ }
+            1 -> player(FacialExpression.FRIENDLY, "Not bad I suppose.").also { stage++ }
+            2 -> npc(FacialExpression.FRIENDLY, "Just smell that sea air... beautiful.").also { stage++ }
+            3 -> player(FacialExpression.FRIENDLY, "Hmm... lovely...").also { stage = 99 }
 
             99 -> end()
         }
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return HolgartDialogue(player)
     }
 

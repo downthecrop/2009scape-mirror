@@ -18,7 +18,7 @@ class MTAListeners : InteractionListener {
             return@on true
         }
         setDest(IntType.NPC, intArrayOf(NPCs.MAZE_GUARDIAN_3102), "talk-to") { player, node ->
-			return@setDest node.location.transform(Direction.getDirection(player.location, node.location), -1);
+			return@setDest node.location.transform(Direction.getDirection(player.location, node.location), -1)
         }
     }
 }

@@ -44,7 +44,7 @@ class ChronozonCaveZone: MapZone("FC ChronozoneZone", true), Plugin<Unit> {
                         5
                     ).contains(chronozon)
                 ) {
-                    chronozon.setPlayer(e);
+                    chronozon.setPlayer(e)
                     chronozon.isRespawn = false
                     chronozon.init()
                 }

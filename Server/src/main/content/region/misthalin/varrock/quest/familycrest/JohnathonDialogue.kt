@@ -10,9 +10,9 @@ import core.plugin.Initializable
 import org.rs09.consts.Items
 
 @Initializable
-class JohnathonDialogue(player: Player? = null): core.game.dialogue.DialoguePlugin(player)  {
+class JohnathonDialogue(player: Player? = null): DialoguePlugin(player)  {
     val CREST_PIECE: Item = Item(781)
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return JohnathonDialogue(player)
     }
 
@@ -28,7 +28,7 @@ class JohnathonDialogue(player: Player? = null): core.game.dialogue.DialoguePlug
 
         if(qstage < 16){
             npc("I don't feel so well... maybe we can talk later")
-            stage = 1000;
+            stage = 1000
         }
         else{
             when(qstage){
@@ -53,7 +53,7 @@ class JohnathonDialogue(player: Player? = null): core.game.dialogue.DialoguePlug
                     "too much... My head... " ,
                     "will not... stop spinning...").also { stage++ }
             4 -> sendDialogue("Sweat is pouring down Jonathons' face.").also { stage = 1000
-            player.questRepository.getQuest("Family Crest").setStage(player, 17);
+            player.questRepository.getQuest("Family Crest").setStage(player, 17)
             }
 
             100 -> npc("Ooooh... thank you... Wow! " ,

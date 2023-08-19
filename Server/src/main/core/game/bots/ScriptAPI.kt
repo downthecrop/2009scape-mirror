@@ -192,7 +192,7 @@ class ScriptAPI(private val bot: Player) {
             return false
 
         if (acceptedPredicate != null) {
-            return acceptedPredicate(e) && !Pathfinder.find(bot, e).isMoveNear;
+            return acceptedPredicate(e) && !Pathfinder.find(bot, e).isMoveNear
         } else {
             val name = e?.name
             return (acceptedNames?.stream()?.anyMatch({ s -> s.equals(name, true) }) ?: true && !Pathfinder.find(bot, e).isMoveNear)

@@ -11,11 +11,11 @@ import core.plugin.Initializable
  */
 
 @Initializable
-class AchiettiesDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class AchiettiesDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.FRIENDLY,"Greetings. Welcome to the Heroes' Guild.")
+        npc(FacialExpression.FRIENDLY,"Greetings. Welcome to the Heroes' Guild.")
         stage = 99
         return true
     }
@@ -27,7 +27,7 @@ class AchiettiesDialogue(player: Player? = null) : core.game.dialogue.DialoguePl
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return AchiettiesDialogue(player)
     }
 

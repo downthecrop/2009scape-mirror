@@ -12,11 +12,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class FernaheiDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class FernaheiDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.FRIENDLY,"Welcome to Fernahei's Fishing Shop Bwana!",
+        npc(FacialExpression.FRIENDLY,"Welcome to Fernahei's Fishing Shop Bwana!",
             "Would you like to see my items?").also { stage = 0 }
         return true
     }
@@ -28,8 +28,8 @@ class FernaheiDialogue(player: Player? = null) : core.game.dialogue.DialoguePlug
             }
 
             1 -> when (buttonId) {
-                1 -> player(core.game.dialogue.FacialExpression.FRIENDLY, "Yes, please.").also { stage = 10 }
-                2 -> player(core.game.dialogue.FacialExpression.FRIENDLY, "No, but thanks for the offer.").also { stage = 20 }
+                1 -> player(FacialExpression.FRIENDLY, "Yes, please.").also { stage = 10 }
+                2 -> player(FacialExpression.FRIENDLY, "No, but thanks for the offer.").also { stage = 20 }
             }
 
             10 -> {
@@ -37,7 +37,7 @@ class FernaheiDialogue(player: Player? = null) : core.game.dialogue.DialoguePlug
             }
 
             20 -> {
-                npc(core.game.dialogue.FacialExpression.FRIENDLY, "That's fine, and thanks for your interest.").also { stage = 99 }
+                npc(FacialExpression.FRIENDLY, "That's fine, and thanks for your interest.").also { stage = 99 }
             }
 
             99 -> end()
@@ -45,7 +45,7 @@ class FernaheiDialogue(player: Player? = null) : core.game.dialogue.DialoguePlug
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return FernaheiDialogue(player)
     }
 

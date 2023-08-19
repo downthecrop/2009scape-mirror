@@ -12,26 +12,26 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class CarolineDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class CarolineDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        player(core.game.dialogue.FacialExpression.FRIENDLY,"Hello again.").also { stage = 0 }
+        player(FacialExpression.FRIENDLY,"Hello again.").also { stage = 0 }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            0 -> npc(core.game.dialogue.FacialExpression.FRIENDLY, "Hello traveller, how are you?").also { stage++ }
-            1 -> player(core.game.dialogue.FacialExpression.FRIENDLY, "Not bad thanks, yourself?").also { stage++ }
-            2 -> npcl(core.game.dialogue.FacialExpression.FRIENDLY, "I'm good. Busy as always looking after Kent and Kennith but no complaints.").also { stage = 99 }
+            0 -> npc(FacialExpression.FRIENDLY, "Hello traveller, how are you?").also { stage++ }
+            1 -> player(FacialExpression.FRIENDLY, "Not bad thanks, yourself?").also { stage++ }
+            2 -> npcl(FacialExpression.FRIENDLY, "I'm good. Busy as always looking after Kent and Kennith but no complaints.").also { stage = 99 }
 
             99 -> end()
         }
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return CarolineDialogue(player)
     }
 

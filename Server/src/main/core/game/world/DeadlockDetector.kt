@@ -7,7 +7,7 @@ import java.lang.management.ManagementFactory
 
 class DeadlockDetector : Runnable {
     override fun run() {
-        val mbean = ManagementFactory.getThreadMXBean();
+        val mbean = ManagementFactory.getThreadMXBean()
         val deadLockedThreads = mbean.findDeadlockedThreads()
 
 

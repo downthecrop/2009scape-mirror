@@ -3,12 +3,12 @@ package content.global.ame.events.drilldemon
 import core.game.dialogue.DialoguePlugin
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
-import org.rs09.consts.NPCs
 import core.tools.END_DIALOGUE
+import org.rs09.consts.NPCs
 
 @Initializable
-class SeargentDamienDefaultPlugin(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+class SeargentDamienDefaultPlugin(player: Player? = null) : DialoguePlugin(player) {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return SeargentDamienDefaultPlugin(player)
     }
 

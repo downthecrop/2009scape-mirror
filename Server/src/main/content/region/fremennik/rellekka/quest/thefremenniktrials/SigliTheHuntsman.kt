@@ -10,30 +10,30 @@ import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 
 @Initializable
-class SigliTheHuntsman(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class SigliTheHuntsman(player: Player? = null) : DialoguePlugin(player){
     override fun open(vararg args: Any?): Boolean {
         if(player?.inventory?.contains(3702,1) == true){
-            npcl(core.game.dialogue.FacialExpression.HAPPY,"Greetings outerlander.")
+            npcl(FacialExpression.HAPPY,"Greetings outerlander.")
             stage = 165
             return true
         }
         else if(player?.inventory?.contains(3701,1) == true){
-            playerl(core.game.dialogue.FacialExpression.ASKING,"So you really don't mind giving this away to me?")
+            playerl(FacialExpression.ASKING,"So you really don't mind giving this away to me?")
             stage = 170
             return true
         }
         else if(player?.getAttribute("sigmundreturning",false) == true){
-            playerl(core.game.dialogue.FacialExpression.ASKING,"I have an item to trade.")
+            playerl(FacialExpression.ASKING,"I have an item to trade.")
             stage = 175
             return true
         }
         if(player?.getAttribute("sigmund-steps", 0) == 6){
-            npcl(core.game.dialogue.FacialExpression.HAPPY,"Greetings outerlander.")
+            npcl(FacialExpression.HAPPY,"Greetings outerlander.")
             stage = 160
             return true
         }
         else if(player?.getAttribute("sigmund-steps", 0) == 5){
-            npcl(core.game.dialogue.FacialExpression.HAPPY,"Greetings outerlander.")
+            npcl(FacialExpression.HAPPY,"Greetings outerlander.")
             stage = 150
             return true
         }
@@ -48,7 +48,7 @@ class SigliTheHuntsman(player: Player? = null) : core.game.dialogue.DialoguePlug
             return true
         }
         else if(player.questRepository.isComplete("Fremennik Trials")){
-            playerl(core.game.dialogue.FacialExpression.HAPPY,"Hello again Sigli.")
+            playerl(FacialExpression.HAPPY,"Hello again Sigli.")
             stage = 180
             return true
         }
@@ -58,7 +58,7 @@ class SigliTheHuntsman(player: Player? = null) : core.game.dialogue.DialoguePlug
             return true
         }
         else{
-            npcl(core.game.dialogue.FacialExpression.HAPPY,"I do not speak to outerlanders. If you have anything of import to say, go and speak to the Chieftain.")
+            npcl(FacialExpression.HAPPY,"I do not speak to outerlanders. If you have anything of import to say, go and speak to the Chieftain.")
             stage = 1000
             return true
         }
@@ -103,50 +103,50 @@ class SigliTheHuntsman(player: Player? = null) : core.game.dialogue.DialoguePlug
 
             //Draugen killed
             100 -> player("Thanks!").also {
-                                                        player.removeAttribute("fremtrials:draugen-killed");
-                                                        player.setAttribute("/save:fremtrials:sigli-vote",true)
+                                                        player.removeAttribute("fremtrials:draugen-killed")
+                player.setAttribute("/save:fremtrials:sigli-vote",true)
                                                         player?.setAttribute("/save:fremtrials:votes",player.getAttribute("fremtrials:votes",0) + 1)
                                                         player?.inventory?.remove(Item(3697))
                                                         stage = 1000
                                                      }
 
-            150 -> playerl(core.game.dialogue.FacialExpression.ASKING,"I don't suppose you have any idea where I could find a map to unspoiled hunting grounds, do you?").also { stage++ }
-            151 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"Well, of course I do. I wouldn't be much of a huntsman if I didn't know where to find my prey now, would I outerlander?").also { stage++ }
-            152 -> playerl(core.game.dialogue.FacialExpression.ASKING,"No, I guess not. So can I have it?").also { stage++ }
-            153 -> npcl(core.game.dialogue.FacialExpression.ANNOYED,"Directions to my hunting grounds could mean the end of my livelihood. The only way I would be prepared to give them up would be...").also { stage++ }
-            154 -> playerl(core.game.dialogue.FacialExpression.THINKING,"What? Power? Money? Women? Wine?").also { stage++ }
-            155 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"...a new string for my hunting bow. Not just any bowstring; I need a custom bowstring, balanced for my bow precisely to keep my hunt competitive.").also { stage++ }
-            156 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"Only in this way would I allow the knowledge of my hunting grounds to be passed on to strangers.").also { stage++ }
-            157 -> playerl(core.game.dialogue.FacialExpression.THINKING,"So where would I get that?").also { stage++ }
-            158 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"I have no idea. But then again, I'm happy with my old bowstring and being the only person who knows where my hunting ground is.").also {
+            150 -> playerl(FacialExpression.ASKING,"I don't suppose you have any idea where I could find a map to unspoiled hunting grounds, do you?").also { stage++ }
+            151 -> npcl(FacialExpression.HAPPY,"Well, of course I do. I wouldn't be much of a huntsman if I didn't know where to find my prey now, would I outerlander?").also { stage++ }
+            152 -> playerl(FacialExpression.ASKING,"No, I guess not. So can I have it?").also { stage++ }
+            153 -> npcl(FacialExpression.ANNOYED,"Directions to my hunting grounds could mean the end of my livelihood. The only way I would be prepared to give them up would be...").also { stage++ }
+            154 -> playerl(FacialExpression.THINKING,"What? Power? Money? Women? Wine?").also { stage++ }
+            155 -> npcl(FacialExpression.HAPPY,"...a new string for my hunting bow. Not just any bowstring; I need a custom bowstring, balanced for my bow precisely to keep my hunt competitive.").also { stage++ }
+            156 -> npcl(FacialExpression.HAPPY,"Only in this way would I allow the knowledge of my hunting grounds to be passed on to strangers.").also { stage++ }
+            157 -> playerl(FacialExpression.THINKING,"So where would I get that?").also { stage++ }
+            158 -> npcl(FacialExpression.HAPPY,"I have no idea. But then again, I'm happy with my old bowstring and being the only person who knows where my hunting ground is.").also {
                 player?.incrementAttribute("sigmund-steps",1)
                 stage = 1000
             }
-            160 -> playerl(core.game.dialogue.FacialExpression.ASKING,"I don't suppose you have any idea where I could find a finely balanced custom bowstring, do you?").also { stage++ }
-            161 -> npcl(core.game.dialogue.FacialExpression.ANNOYED,"If I knew I would not have asked you to go and get me one, now would I?").also { stage = 1000 }
+            160 -> playerl(FacialExpression.ASKING,"I don't suppose you have any idea where I could find a finely balanced custom bowstring, do you?").also { stage++ }
+            161 -> npcl(FacialExpression.ANNOYED,"If I knew I would not have asked you to go and get me one, now would I?").also { stage = 1000 }
 
-            165 -> playerl(core.game.dialogue.FacialExpression.HAPPY,"Here. I have your bowstring. Give me your map to the hunting grounds.").also {
+            165 -> playerl(FacialExpression.HAPPY,"Here. I have your bowstring. Give me your map to the hunting grounds.").also {
                 removeItem(player,3702)
                 addItem(player,3701)
                 stage++
             }
-            166 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"Well met, outerlander. I see some hunting potential within you. Here, take my map, I was getting too dependent on it for my skill anyway.").also { stage = 1000 }
+            166 -> npcl(FacialExpression.HAPPY,"Well met, outerlander. I see some hunting potential within you. Here, take my map, I was getting too dependent on it for my skill anyway.").also { stage = 1000 }
 
-            170 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"No outerlander... it is hard to explain. That map makes my role as huntsman too easy. I fear my skills are becoming dulled.").also { stage++ }
-            171 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"Now I must track my prey once more. To begin again from scratch... I feel this may keep me sharp.").also { stage = 1000 }
+            170 -> npcl(FacialExpression.HAPPY,"No outerlander... it is hard to explain. That map makes my role as huntsman too easy. I fear my skills are becoming dulled.").also { stage++ }
+            171 -> npcl(FacialExpression.HAPPY,"Now I must track my prey once more. To begin again from scratch... I feel this may keep me sharp.").also { stage = 1000 }
 
-            175 -> npcl(core.game.dialogue.FacialExpression.ANNOYED,"Not the one I want, outerlander.").also { stage = 1000 }
+            175 -> npcl(FacialExpression.ANNOYED,"Not the one I want, outerlander.").also { stage = 1000 }
 
-            180 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"Hello again to you ${player.getAttribute("fremennikname","spinky")}. How goes the hunt?").also { stage++ }
-            181 -> playerl(core.game.dialogue.FacialExpression.ASKING,"They hunt? I've already done your task! That's why I'm a Fremennik now!").also { stage++ }
-            182 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"You think so do you? The Draugen is always out there, just as I and my hunters are always on its trail to keep it at bay. The hunt will never end until I do.").also { stage = 1000 }
+            180 -> npcl(FacialExpression.HAPPY,"Hello again to you ${player.getAttribute("fremennikname","spinky")}. How goes the hunt?").also { stage++ }
+            181 -> playerl(FacialExpression.ASKING,"They hunt? I've already done your task! That's why I'm a Fremennik now!").also { stage++ }
+            182 -> npcl(FacialExpression.HAPPY,"You think so do you? The Draugen is always out there, just as I and my hunters are always on its trail to keep it at bay. The hunt will never end until I do.").also { stage = 1000 }
 
             1000 -> end()
         }
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return SigliTheHuntsman(player)
     }
 

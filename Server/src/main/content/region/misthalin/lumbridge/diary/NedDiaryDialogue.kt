@@ -115,7 +115,7 @@ class NedDiaryDialogue : DialogueFile() {
                 stage = 0
             }
             60 -> {
-                AchievementDiary.grantReplacement(player, DiaryType.LUMBRIDGE, level);
+                AchievementDiary.grantReplacement(player, DiaryType.LUMBRIDGE, level)
                 npc("You better be more careful this time.")
                 stage = 0
             }

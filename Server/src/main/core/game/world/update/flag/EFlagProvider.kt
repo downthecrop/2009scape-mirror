@@ -11,8 +11,8 @@ enum class EFlagType {
     NPC;
     companion object {
         @JvmStatic fun of (e: Entity) : EFlagType {
-            if (e is core.game.node.entity.player.Player) return EFlagType.Player
-            else return EFlagType.NPC
+            if (e is core.game.node.entity.player.Player) return Player
+            else return NPC
         }
     }
 }

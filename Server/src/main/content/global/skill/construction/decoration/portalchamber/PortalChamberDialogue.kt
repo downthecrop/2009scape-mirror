@@ -10,7 +10,7 @@ import core.plugin.Initializable
  * @author Ceikry
  */
 @Initializable
-class PortalChamberDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
+class PortalChamberDialogue(player: Player? = null) : DialoguePlugin(player) {
     var portal = "none"
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
@@ -41,7 +41,7 @@ class PortalChamberDialogue(player: Player? = null) : core.game.dialogue.Dialogu
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return PortalChamberDialogue(player)
     }
 

@@ -12,11 +12,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class JariDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class JariDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.OLD_DEFAULT,"Good day, sir.").also { stage = 0 }
+        npc(FacialExpression.OLD_DEFAULT,"Good day, sir.").also { stage = 0 }
         return true
     }
 
@@ -28,20 +28,20 @@ class JariDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(p
 
             1 -> when(buttonId){
                 1 -> {
-                    player(core.game.dialogue.FacialExpression.FRIENDLY, "What are you doing down here?").also { stage = 10 }
+                    player(FacialExpression.FRIENDLY, "What are you doing down here?").also { stage = 10 }
                 }
 
                 2 -> {
-                    player(core.game.dialogue.FacialExpression.NEUTRAL, "Good day.").also { stage = 99 }
+                    player(FacialExpression.NEUTRAL, "Good day.").also { stage = 99 }
                 }
             }
 
             10 -> {
-                npc(core.game.dialogue.FacialExpression.OLD_DEFAULT,"I'm waiting to work on the digging.").also { stage++ }
+                npc(FacialExpression.OLD_DEFAULT,"I'm waiting to work on the digging.").also { stage++ }
             }
 
             11 -> {
-                npc(core.game.dialogue.FacialExpression.OLD_HAPPY,"It's the first excavation I've worked on, ",
+                npc(FacialExpression.OLD_HAPPY,"It's the first excavation I've worked on, ",
                     "and I'm looking forward to it.").also { stage = 99 }
             }
 
@@ -50,7 +50,7 @@ class JariDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(p
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return JariDialogue(player)
     }
 

@@ -1,7 +1,5 @@
 package content.global.skill.construction
 
-import content.global.skill.construction.BuildHotspot
-
 /**
  * Represents a hotspot.
  * @author Emperor

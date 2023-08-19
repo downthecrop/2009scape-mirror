@@ -12,14 +12,14 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class MazionDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class MazionDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when ((1..3).random()) {
-            1 -> npc(core.game.dialogue.FacialExpression.FRIENDLY, "Nice weather we're having today!").also { stage = 99 }
-            2 -> npc(core.game.dialogue.FacialExpression.FRIENDLY, "Hello " + player.name + ", fine day today!").also { stage = 99 }
-            3 -> npc(core.game.dialogue.FacialExpression.ANNOYED, "Please leave me alone, a parrot stole my banana.").also { stage = 99 }
+            1 -> npc(FacialExpression.FRIENDLY, "Nice weather we're having today!").also { stage = 99 }
+            2 -> npc(FacialExpression.FRIENDLY, "Hello " + player.name + ", fine day today!").also { stage = 99 }
+            3 -> npc(FacialExpression.ANNOYED, "Please leave me alone, a parrot stole my banana.").also { stage = 99 }
         }
             return true
     }
@@ -31,7 +31,7 @@ class MazionDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return MazionDialogue(player)
     }
 

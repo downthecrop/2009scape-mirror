@@ -1,10 +1,10 @@
 package core.game.system.timer.impl
 
-import core.api.*
-import core.game.system.timer.*
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
-import org.json.simple.*
+import core.game.system.timer.PersistTimer
+import core.game.system.timer.RSTimer
+import core.game.system.timer.TimerFlag
 
 class Skulled : PersistTimer (1, "skulled", flags = arrayOf(TimerFlag.ClearOnDeath)) {
     override fun onRegister (entity: Entity) {

@@ -8,9 +8,9 @@ import core.plugin.Initializable
 
 
 @Initializable
-class PerfectJewelryHandler (player: Player? = null): core.game.dialogue.DialoguePlugin(player){
+class PerfectJewelryHandler (player: Player? = null): DialoguePlugin(player){
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return PerfectJewelryHandler(player)
     }
 
@@ -18,7 +18,7 @@ class PerfectJewelryHandler (player: Player? = null): core.game.dialogue.Dialogu
         println(player.name)
         if(player.inventory.containItems(2365, 1603)){
             options("Craft perfect ruby ring", "Craft perfect ruby necklace")
-            stage = 1;
+            stage = 1
         }
         return true
     }
@@ -36,7 +36,7 @@ class PerfectJewelryHandler (player: Player? = null): core.game.dialogue.Dialogu
                 }
                 else{
                     sendDialogue("You do not have everything to make this item.")
-                    stage = 1000;
+                    stage = 1000
                 }
 
                 2-> if(player.inventory.containItems(2365, 1603) && player.inventory.containItems(1597)){
@@ -47,7 +47,7 @@ class PerfectJewelryHandler (player: Player? = null): core.game.dialogue.Dialogu
                 }
                 else{
                     sendDialogue("You do not have everything to make this item.")
-                    stage = 1000;
+                    stage = 1000
                 }
             }
 
@@ -58,7 +58,7 @@ class PerfectJewelryHandler (player: Player? = null): core.game.dialogue.Dialogu
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(core.game.dialogue.DialogueInterpreter.getDialogueKey("perfect-jewelry"))
+        return intArrayOf(DialogueInterpreter.getDialogueKey("perfect-jewelry"))
     }
 
 }

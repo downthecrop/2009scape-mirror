@@ -19,34 +19,34 @@ class SummoningTabListener : InterfaceListener {
                             player.getPacketDispatch().sendMessage("Your familiar is not a beast of burden.")
                             return@on true
                         }
-                        val beast = player.getFamiliarManager().getFamiliar() as BurdenBeast;
+                        val beast = player.getFamiliarManager().getFamiliar() as BurdenBeast
                         if (beast.getContainer().isEmpty()) {
                             player.getPacketDispatch().sendMessage("Your familiar is not carrying any items.")
                             return@on true
                         }
-                        beast.withdrawAll();
+                        beast.withdrawAll()
                         return@on true
                     }
-                    player.getPacketDispatch().sendMessage("You don't have a follower.");
+                    player.getPacketDispatch().sendMessage("You don't have a follower.")
                 }
                 53 -> {
                     if (player.getFamiliarManager().hasFamiliar()) {
                         if(opcode == 155) {
                             // Dismiss familiar
-                            player.getDialogueInterpreter().open("dismiss_dial");
+                            player.getDialogueInterpreter().open("dismiss_dial")
                         } else if(opcode == 196) {
                             // Dismiss now
-                            player.getFamiliarManager().dismiss(false);
+                            player.getFamiliarManager().dismiss(false)
                         }
                     } else {
-                        player.getPacketDispatch().sendMessage("You don't have a follower.");
+                        player.getPacketDispatch().sendMessage("You don't have a follower.")
                     }
                 }
                 else -> {
                     if (player.getFamiliarManager().hasFamiliar()) {
-                        player.getFamiliarManager().getFamiliar().executeSpecialMove(FamiliarSpecial(player));
+                        player.getFamiliarManager().getFamiliar().executeSpecialMove(FamiliarSpecial(player))
                     } else {
-                        player.getPacketDispatch().sendMessage("You don't have a follower.");
+                        player.getPacketDispatch().sendMessage("You don't have a follower.")
                     }
                 }
             }

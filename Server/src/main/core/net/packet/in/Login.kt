@@ -130,7 +130,7 @@ object Login {
     fun proceedWith(session: IoSession, details: PlayerDetails, opcode: Int) {
         if (Repository.uid_map.contains(details.uid)) {
             session.write(AuthResponse.AlreadyOnline)
-            return;
+            return
         }
         details.session = session
         details.info.translate(UIDInfo(details.ipAddress, "DEPRECATED", "DEPRECATED", "DEPRECATED"))

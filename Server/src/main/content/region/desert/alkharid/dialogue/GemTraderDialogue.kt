@@ -1,7 +1,7 @@
 package content.region.desert.alkharid.dialogue
 
-import core.game.dialogue.DialoguePlugin;
-import core.game.dialogue.FacialExpression;
+import core.game.dialogue.DialoguePlugin
+import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
@@ -46,7 +46,7 @@ class GemTraderDialogue (player: Player? = null): DialoguePlugin(player){
             }
 
             10 -> when(buttonId){
-                1 -> npc.openShop(player).also { stage = 1000 };
+                1 -> npc.openShop(player).also { stage = 1000 }
                 2 -> player("No, thank you.").also{stage = 1000}
                 3 -> npc("Fitzharmon, eh? Hmmm... If I'm not mistaken, ",
                         "that's the family name of a member ",
@@ -54,7 +54,7 @@ class GemTraderDialogue (player: Player? = null): DialoguePlugin(player){
             }
 
             20 -> when(buttonId){
-                1 -> npc.openShop(player).also { stage = 1000 };
+                1 -> npc.openShop(player).also { stage = 1000 }
                 2 -> player("No, thank you.").also{stage = 1000}
             }
 
@@ -73,8 +73,8 @@ class GemTraderDialogue (player: Player? = null): DialoguePlugin(player){
                     "high standards of 'gold perfection', then...").also{stage++}
             103 ->  npc("Well, maybe we'll all get lucky ",
                     "and the scorpions will deal with him.").also{
-                        stage = 1000;
-                        player.questRepository.getQuest("Family Crest").setStage(player, 13)
+                        stage = 1000
+                player.questRepository.getQuest("Family Crest").setStage(player, 13)
             }
 
             1000 -> end()

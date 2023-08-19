@@ -54,11 +54,11 @@ class BankInterface : InterfaceListener {
         private const val OP_SET_TAB = 155
         private const val OP_COLLAPSE_TAB = 196
 
-        private const val THRESHOLD_TO_DISPLAY_EXACT_QUANTITY_ON_EXAMINE = 100000;
+        private const val THRESHOLD_TO_DISPLAY_EXACT_QUANTITY_ON_EXAMINE = 100000
     }
 
     private fun onBankInterfaceOpen(player: Player, component: Component): Boolean {
-        player.bank.sendBankSpace();
+        player.bank.sendBankSpace()
 
         val settings = IfaceSettingsBuilder()
             .enableAllOptions()

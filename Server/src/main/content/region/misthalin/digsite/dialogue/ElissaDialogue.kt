@@ -12,18 +12,18 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class ElissaDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class ElissaDialogue(player: Player? = null) : DialoguePlugin(player){
 
-    var fr = core.game.dialogue.FacialExpression.FRIENDLY
-    var ask = core.game.dialogue.FacialExpression.ASKING
-    var ann = core.game.dialogue.FacialExpression.ANNOYED
-    var neu = core.game.dialogue.FacialExpression.ANNOYED
-    var ama = core.game.dialogue.FacialExpression.AMAZED
+    var fr = FacialExpression.FRIENDLY
+    var ask = FacialExpression.ASKING
+    var ann = FacialExpression.ANNOYED
+    var neu = FacialExpression.ANNOYED
+    var ama = FacialExpression.AMAZED
     var qb = 2
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.FRIENDLY,"Hello there.").also { stage = 0 }
+        npc(FacialExpression.FRIENDLY,"Hello there.").also { stage = 0 }
         return true
     }
 
@@ -91,7 +91,7 @@ class ElissaDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return ElissaDialogue(player)
     }
 

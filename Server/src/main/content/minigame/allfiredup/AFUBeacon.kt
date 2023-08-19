@@ -27,11 +27,11 @@ enum class AFUBeacon(val title: String, val fmLevel: Int, val varbit: Int, val l
     PLATEAU("",92,5159,Location.create(2964, 3931, 0),147.9);
 
     companion object {
-        fun forLocation(location: Location): content.minigame.allfiredup.AFUBeacon {
+        fun forLocation(location: Location): AFUBeacon {
             for (beacon in values()) {
                 if (beacon.location.equals(location)) return beacon
             }
-            return content.minigame.allfiredup.AFUBeacon.RIVER_SALVE.also { log(this::class.java, Log.WARN,  "Unhandled Beacon Location ${location.toString()}") }
+            return AFUBeacon.RIVER_SALVE.also { log(this::class.java, Log.WARN,  "Unhandled Beacon Location ${location.toString()}") }
         }
 
         fun resetAllBeacons(player: Player){
@@ -61,7 +61,7 @@ enum class AFUBeacon(val title: String, val fmLevel: Int, val varbit: Int, val l
         setVarbit(player, varbit, 1, true)
     }
 
-    fun getState(player: Player): content.minigame.allfiredup.BeaconState {
+    fun getState(player: Player): BeaconState {
         return BeaconState.values()[getVarbit(player, varbit)]
     }
 }

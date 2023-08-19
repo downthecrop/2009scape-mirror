@@ -20,7 +20,7 @@ import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.emote.Emotes
 import core.game.node.entity.player.link.quest.QuestRepository
-import core.game.node.entity.player.link.prayer.PrayerType;
+import core.game.node.entity.player.link.prayer.PrayerType
 import core.game.node.entity.skill.Skills
 import content.data.skill.SkillingTool
 import content.global.skill.slayer.Tasks
@@ -1439,7 +1439,7 @@ fun <A, G> visualize(entity: Entity, anim: A, gfx: G) {
  * @param pulse the Pulse object to submit
  */
 fun submitWorldPulse(pulse: Pulse) {
-    GameWorld.Pulser.submit(pulse)
+    Pulser.submit(pulse)
 }
 
 /**
@@ -1928,7 +1928,7 @@ fun runcs2 (player: Player, scriptId: Int, vararg arguments: Any) {
 fun sendItemSelect (player: Player, vararg options: String, keepAlive: Boolean = false, callback: (slot: Int, optionIndex: Int) -> Unit) {
     player.interfaceManager.openSingleTab(Component(12))
     val scriptArgs = arrayOf ((12 shl 16) + 18, 93, 4, 7, 0, -1, "", "", "", "", "", "", "", "", "")
-    for (i in 0 until kotlin.math.min(9, options.size))
+    for (i in 0 until min(9, options.size))
         scriptArgs[6 + i] = options[i]
     runcs2(player, 150, *scriptArgs)
     val settings = IfaceSettingsBuilder()
@@ -1941,8 +1941,8 @@ fun sendItemSelect (player: Player, vararg options: String, keepAlive: Boolean =
 
 fun announceIfRare(player: Player, item: Item) {
     if (item.definition.getConfiguration(ItemConfigParser.RARE_ITEM, false)) {
-        sendNews("${player.username} has just received: ${item.amount} x ${item.name}.");
-        GlobalKillCounter.incrementRareDrop(player, item);
+        sendNews("${player.username} has just received: ${item.amount} x ${item.name}.")
+        GlobalKillCounter.incrementRareDrop(player, item)
     }
 }
 

@@ -26,7 +26,7 @@ class HistoryOfTheGoblinRace : ComponentPlugin() {
         val qstage = player.questRepository.getQuest("Lost Tribe").getStage(player)
         component?.setCloseEvent { player, c ->
             if(qstage == 42 || qstage == 41 ) {
-                player.dialogueInterpreter.sendDialogues(player, core.game.dialogue.FacialExpression.THINKING, "Hey... The symbol of the 'Dorgeshuun' tribe looks just", "like the symbol on the brooch I found.")
+                player.dialogueInterpreter.sendDialogues(player, FacialExpression.THINKING, "Hey... The symbol of the 'Dorgeshuun' tribe looks just", "like the symbol on the brooch I found.")
                 player.questRepository.getQuest("Lost Tribe").setStage(player, 43)
             }
             player.removeAttribute("hgr-index")

@@ -194,7 +194,7 @@ class TheGolemListeners : InteractionListener {
         fun initializeStatuettes(player: Player) {
             if(!player.getAttribute("the-golem:statuette-rotation:initialized", false)) {
                 for(i in 0 until 4) {
-                    player.setAttribute("/save:the-golem:statuette-rotation:${i}", RandomFunction.random(2));
+                    player.setAttribute("/save:the-golem:statuette-rotation:${i}", RandomFunction.random(2))
                 }
                 player.setAttribute("/save:the-golem:statuette-rotation:initialized", true)
             }
@@ -331,7 +331,7 @@ class TheGolemListeners : InteractionListener {
 
     fun penOnPapyrus(player: Player): Boolean {
         if(!player.getAttribute("the-golem:varmen-notes-read", false)) {
-            player.sendMessage("You don't know what to write.");
+            player.sendMessage("You don't know what to write.")
             return true
         }
         if(player.inventory.remove(Item(Items.PAPYRUS_970, 1))) {
@@ -343,7 +343,7 @@ class TheGolemListeners : InteractionListener {
 
     fun implementOnGolem(player: Player): Boolean {
         if(!player.getAttribute("the-golem:varmen-notes-read", false)) {
-            player.sendMessage("You don't know what that would do.");
+            player.sendMessage("You don't know what that would do.")
             return true
         }
         if(player.questRepository.getStage("The Golem") == 7) {

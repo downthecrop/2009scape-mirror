@@ -14,11 +14,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class NurmofDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class NurmofDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npcl(core.game.dialogue.FacialExpression.OLD_NORMAL,"Greetings and welcome to my pickaxe shop. Do you want to buy my premium quality pickaxes?").also { stage = 0 }
+        npcl(FacialExpression.OLD_NORMAL,"Greetings and welcome to my pickaxe shop. Do you want to buy my premium quality pickaxes?").also { stage = 0 }
         return true
     }
 
@@ -28,19 +28,19 @@ class NurmofDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
 
             1 -> when (buttonId) {
                 1 -> end().also { npc.openShop(player) }
-                2 -> player(core.game.dialogue.FacialExpression.FRIENDLY, "No thank you.").also { stage = 99 }
-                3 -> player(core.game.dialogue.FacialExpression.HALF_ASKING, "Are your pickaxes better than other pickaxes, then?").also { stage = 10 }
+                2 -> player(FacialExpression.FRIENDLY, "No thank you.").also { stage = 99 }
+                3 -> player(FacialExpression.HALF_ASKING, "Are your pickaxes better than other pickaxes, then?").also { stage = 10 }
             }
 
-            10 -> npcl(core.game.dialogue.FacialExpression.OLD_NORMAL,"Of course they are! My pickaxes are made of higher grade metal than your ordinary bronze pickaxes, allowing you to mine ore just that little bit faster.").also {
+            10 -> npcl(FacialExpression.OLD_NORMAL,"Of course they are! My pickaxes are made of higher grade metal than your ordinary bronze pickaxes, allowing you to mine ore just that little bit faster.").also {
                 if(!getAttribute(player, "pre-dq:said-hi", true)) {
                     stage++
                 } else {
                     stage = 99
                 }
             }
-            11 -> playerl(core.game.dialogue.FacialExpression.FRIENDLY, "By the way, Doric says hello!").also { stage++ }
-            12 -> npcl(core.game.dialogue.FacialExpression.OLD_HAPPY, "Oh! Thank you for telling me, adventurer!").also { stage = 99 }
+            11 -> playerl(FacialExpression.FRIENDLY, "By the way, Doric says hello!").also { stage++ }
+            12 -> npcl(FacialExpression.OLD_HAPPY, "Oh! Thank you for telling me, adventurer!").also { stage = 99 }
             99 -> {
                 setAttribute(player, "pre-dq:said-hi", true)
                 end()
@@ -49,7 +49,7 @@ class NurmofDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return NurmofDialogue(player)
     }
 

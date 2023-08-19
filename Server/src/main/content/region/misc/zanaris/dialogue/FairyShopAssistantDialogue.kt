@@ -12,11 +12,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class FairyShopAssistantDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class FairyShopAssistantDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.OLD_HAPPY,"Can I help you at all?").also { stage = 0 }
+        npc(FacialExpression.OLD_HAPPY,"Can I help you at all?").also { stage = 0 }
         return true
     }
 
@@ -26,7 +26,7 @@ class FairyShopAssistantDialogue(player: Player? = null) : core.game.dialogue.Di
 
             1 -> when (buttonId) {
                 1 -> end().also { npc.openShop(player) }
-                2 -> player(core.game.dialogue.FacialExpression.NEUTRAL, "No thanks.").also { stage = 99 }
+                2 -> player(FacialExpression.NEUTRAL, "No thanks.").also { stage = 99 }
             }
 
             99 -> end()
@@ -34,7 +34,7 @@ class FairyShopAssistantDialogue(player: Player? = null) : core.game.dialogue.Di
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return FairyShopAssistantDialogue(player)
     }
 

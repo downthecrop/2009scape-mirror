@@ -12,11 +12,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class FullangrDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class FullangrDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.OLD_DEFAULT,"Good day, sir.").also { stage = 0 }
+        npc(FacialExpression.OLD_DEFAULT,"Good day, sir.").also { stage = 0 }
         return true
     }
 
@@ -28,16 +28,16 @@ class FullangrDialogue(player: Player? = null) : core.game.dialogue.DialoguePlug
 
             1 -> when(buttonId){
                 1 -> {
-                    player(core.game.dialogue.FacialExpression.FRIENDLY, "What are you doing down here?").also { stage = 10 }
+                    player(FacialExpression.FRIENDLY, "What are you doing down here?").also { stage = 10 }
                 }
 
                 2 -> {
-                    player(core.game.dialogue.FacialExpression.NEUTRAL, "Good day.").also { stage = 99 }
+                    player(FacialExpression.NEUTRAL, "Good day.").also { stage = 99 }
                 }
             }
 
             10 -> {
-                npc(core.game.dialogue.FacialExpression.OLD_DEFAULT,"I'm working on the digging, of course.",
+                npc(FacialExpression.OLD_DEFAULT,"I'm working on the digging, of course.",
                     "It's a small excavation, so only two of us ",
                     "can work on it at a time.").also { stage = 99 }
             }
@@ -47,7 +47,7 @@ class FullangrDialogue(player: Player? = null) : core.game.dialogue.DialoguePlug
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return FullangrDialogue(player)
     }
 

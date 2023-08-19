@@ -198,7 +198,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
                 .enableOptions(0 until 9)
                 .build()
             player.packetDispatch.sendIfaceSettings(settings, 0, 621, 0, 28)
-            player.packetDispatch.sendRunScript(150, "IviiiIsssssssss", "", "", "", "", "Sell X", "Sell 10", "Sell 5", "Sell 1", "Value", -1, 0, 7, 4, 93, 621 shl 16);
+            player.packetDispatch.sendRunScript(150, "IviiiIsssssssss", "", "", "", "", "Sell X", "Sell 10", "Sell 5", "Sell 1", "Value", -1, 0, 7, 4, 93, 621 shl 16)
             return@onOpen true
         }
 

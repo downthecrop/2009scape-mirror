@@ -452,7 +452,7 @@ class GardenObjectsPlugin : InteractionListener {
 
         @Throws(Throwable::class)
         override fun newInstance(arg: Any?): Plugin<Any?> {
-            UseWithHandler.addHandler(233, UseWithHandler.ITEM_TYPE, this)
+            addHandler(233, ITEM_TYPE, this)
             return this
         }
 

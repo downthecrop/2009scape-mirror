@@ -496,6 +496,6 @@ class VisualCommand : CommandPlugin() {
                 return true
             }*/
         }
-        return false;
+        return false
     }
 }

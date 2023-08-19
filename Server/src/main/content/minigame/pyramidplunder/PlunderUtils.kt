@@ -172,7 +172,7 @@ object PlunderUtils {
     fun getDoor(player: Player) : Int
     {
         if (getRoom(player) == null)
-            return -1;
+            return -1
         val room = getRoom(player)!!.room
         return PlunderData.doors[room - 1]
     }

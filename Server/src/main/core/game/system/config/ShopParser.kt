@@ -19,8 +19,8 @@ class ShopParser{
         fun openUid(player: Player,uid: Int): Boolean {
 /*            val shop = UID_SHOPS[uid] ?: return false;
             shop.open(player);*/
-            return true;
-        }
+            return true
+}
     }
 
     fun load(){

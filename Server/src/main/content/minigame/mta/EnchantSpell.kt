@@ -86,7 +86,7 @@ class EnchantSpell : MagicSpell {
                 }
             }
             if (pizazz != 0) {
-                content.minigame.mta.impl.EnchantingZone.ZONE.incrementPoints(entity, content.minigame.mta.MTAType.ENCHANTERS.ordinal, pizazz)
+                content.minigame.mta.impl.EnchantingZone.ZONE.incrementPoints(entity, MTAType.ENCHANTERS.ordinal, pizazz)
             }
         }
         return true

@@ -2,8 +2,6 @@ package content.global.skill.gather
 
 import content.global.skill.fishing.FishingSpot
 import content.global.skill.gather.fishing.FishingPulse
-import content.global.skill.gather.mining.MiningSkillPulse
-import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.Node
 import core.game.node.entity.npc.NPC

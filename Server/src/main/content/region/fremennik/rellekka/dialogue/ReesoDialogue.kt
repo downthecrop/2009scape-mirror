@@ -14,14 +14,14 @@ import core.tools.END_DIALOGUE
  */
 
 @Initializable
-class ReesoDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class ReesoDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!isQuestComplete(player, "Fremennik Trials")) {
-            npcl(core.game.dialogue.FacialExpression.ANNOYED, "Please do not disturb me, outerlander. I have much to do.").also { stage = END_DIALOGUE }
+            npcl(FacialExpression.ANNOYED, "Please do not disturb me, outerlander. I have much to do.").also { stage = END_DIALOGUE }
         } else {
-            npcl(core.game.dialogue.FacialExpression.STRUGGLE, "Sorry, ${player.getAttribute("fremennikname","fremmyname")}, I must get on with my work.").also { stage = END_DIALOGUE }
+            npcl(FacialExpression.STRUGGLE, "Sorry, ${player.getAttribute("fremennikname","fremmyname")}, I must get on with my work.").also { stage = END_DIALOGUE }
         }
 
         return true
@@ -31,7 +31,7 @@ class ReesoDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return ReesoDialogue(player)
     }
 

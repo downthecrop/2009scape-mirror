@@ -12,22 +12,22 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class RunaDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class RunaDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.FRIENDLY,"Would you like to try some fine Miscellanian ale,", "your Royal Highness?").also { stage = 0 }
+        npc(FacialExpression.FRIENDLY,"Would you like to try some fine Miscellanian ale,", "your Royal Highness?").also { stage = 0 }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
             0 -> {
-                npc(core.game.dialogue.FacialExpression.ASKING, "Well I say Miscellanian, but it's actually brewed", "on the mainland.").also { stage++ }
+                npc(FacialExpression.ASKING, "Well I say Miscellanian, but it's actually brewed", "on the mainland.").also { stage++ }
             }
 
             1 -> {
-                npc(core.game.dialogue.FacialExpression.FRIENDLY, "Would you like to try some anyway?").also { stage++ }
+                npc(FacialExpression.FRIENDLY, "Would you like to try some anyway?").also { stage++ }
             }
 
             2 -> {
@@ -36,15 +36,15 @@ class RunaDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(p
 
             3 -> when(buttonId){
                 1 -> {
-                    player(core.game.dialogue.FacialExpression.ASKING, "Yes please.").also { stage = 10 }
+                    player(FacialExpression.ASKING, "Yes please.").also { stage = 10 }
                 }
 
                 2 -> {
-                    player(core.game.dialogue.FacialExpression.NEUTRAL, "No thank you.").also { stage = 99 }
+                    player(FacialExpression.NEUTRAL, "No thank you.").also { stage = 99 }
                 }
 
                 3 -> {
-                    player(core.game.dialogue.FacialExpression.ASKING, "What's it like living down here?").also { stage = 20 }
+                    player(FacialExpression.ASKING, "What's it like living down here?").also { stage = 20 }
                 }
             }
 
@@ -53,11 +53,11 @@ class RunaDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(p
             }
 
             20 -> {
-                npc(core.game.dialogue.FacialExpression.HALF_WORRIED, "Business is booming!").also { stage++ }
+                npc(FacialExpression.HALF_WORRIED, "Business is booming!").also { stage++ }
             }
 
             21 -> {
-                npc(core.game.dialogue.FacialExpression.HALF_WORRIED, "Now, if only I hadn't taken a loss to the beer I sold", "to those teenagers.").also { end() }
+                npc(FacialExpression.HALF_WORRIED, "Now, if only I hadn't taken a loss to the beer I sold", "to those teenagers.").also { end() }
             }
 
             99 -> {
@@ -67,7 +67,7 @@ class RunaDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(p
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return RunaDialogue(player)
     }
 

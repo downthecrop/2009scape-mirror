@@ -137,7 +137,7 @@ open class MeleeSwingHandler (vararg flags: SwingHandlerFlag)
         if(entity is Player && SkillcapePerks.isActive(SkillcapePerks.PRECISION_STRIKES, entity)){ //Attack skillcape perk
             effectiveAttackLevel += 6
         }
-        effectiveAttackLevel *= getSetMultiplier(entity, Skills.ATTACK);
+        effectiveAttackLevel *= getSetMultiplier(entity, Skills.ATTACK)
         effectiveAttackLevel = floor(effectiveAttackLevel)
 
         if (!flags.contains(SwingHandlerFlag.IGNORE_STAT_BOOSTS_ACCURACY))

@@ -15,31 +15,31 @@ import core.tools.START_DIALOGUE
  * @author vddCore
  */
 @Initializable
-class BalneaDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
+class BalneaDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> playerl(
-                core.game.dialogue.FacialExpression.FRIENDLY,
+                FacialExpression.FRIENDLY,
                 "Hi there!"
             ).also { stage++ }
 
             1 -> npcl(
-                core.game.dialogue.FacialExpression.NEUTRAL,
+                FacialExpression.NEUTRAL,
                 "I'm ever so busy at the moment; please come back after the grand opening."
             ).also { stage++ }
 
             2 -> playerl(
-                core.game.dialogue.FacialExpression.HALF_ASKING,
+                FacialExpression.HALF_ASKING,
                 "What grand reopening?"
             ).also { stage++ }
 
             3 -> npcl(
-                core.game.dialogue.FacialExpression.ANNOYED,
+                FacialExpression.ANNOYED,
                 "I'm sorry, I really can't spare the time to talk to you."
             ).also { stage++ }
 
             4 -> playerl(
-                core.game.dialogue.FacialExpression.THINKING,
+                FacialExpression.THINKING,
                 "Uh, sure."
             ).also { stage = END_DIALOGUE }
         }

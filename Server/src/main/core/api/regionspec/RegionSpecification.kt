@@ -3,7 +3,6 @@ package core.api.regionspec
 import core.api.regionspec.contracts.*
 import core.game.world.map.Region
 import core.game.world.map.RegionChunk
-import core.game.world.map.RegionPlane
 import core.game.world.map.build.DynamicRegion
 
 class RegionSpecification(val regionContract: RegionSpecContract = EmptyRegionContract(), vararg val chunkContracts: ChunkSpecContract = arrayOf(EmptyChunkContract())) {

@@ -30,25 +30,25 @@ class GnomeStrongholdCourse
         val `object` = node as Scenery
         when (`object`.id) {
             2295 -> {
-                content.global.skill.agility.GnomeStrongholdCourse.Companion.TRAINERS[0]!!.sendChat("Okay get over that log, quick quick!")
+                TRAINERS[0]!!.sendChat("Okay get over that log, quick quick!")
 				sendMessage(player, "You walk carefully across the slippery log...")
                 AgilityHandler.walk(player, 0, Location.create(2474, 3436, 0), Location.create(2474, 3429, 0), Animation.create(155), 7.5, "...You make it safely to the other side.")
                 return true
             }
             2285 -> {
-                content.global.skill.agility.GnomeStrongholdCourse.Companion.TRAINERS[1]!!.sendChat("Move it, move it, move it!")
+                TRAINERS[1]!!.sendChat("Move it, move it, move it!")
 				sendMessage(player, "You climb the netting...")
                 AgilityHandler.climb(player, 1, Animation.create(828), `object`.location.transform(0, -1, 1), 7.5, null)
                 return true
             }
             35970 -> {
-                content.global.skill.agility.GnomeStrongholdCourse.Companion.TRAINERS[2]!!.sendChat("That's it - straight up.")
+                TRAINERS[2]!!.sendChat("That's it - straight up.")
 				sendMessage(player, "You climb the tree..")
                 AgilityHandler.climb(player, 2, Animation.create(828), Location.create(2473, 3420, 2), 5.0, "...To the platform above.")
                 return true
             }
             2312 -> {
-                content.global.skill.agility.GnomeStrongholdCourse.Companion.TRAINERS[3]!!.sendChat("Come on scaredy cat, get across that rope!")
+                TRAINERS[3]!!.sendChat("Come on scaredy cat, get across that rope!")
 				sendMessage(player, "You carefully cross the tightrope.")
                 AgilityHandler.walk(player, 3, Location.create(2477, 3420, 2), Location.create(2483, 3420, 2), Animation.create(155), 7.5, null)
                 return true
@@ -63,7 +63,7 @@ class GnomeStrongholdCourse
                 return true
             }
             2286 -> {
-                content.global.skill.agility.GnomeStrongholdCourse.Companion.TRAINERS[4]!!.sendChat("My Granny can move faster than you.")
+                TRAINERS[4]!!.sendChat("My Granny can move faster than you.")
                 player.faceLocation(player.location.transform(0, 2, 0))
 				sendMessage(player, "You climb the netting...")
                 AgilityHandler.climb(player, 5, Animation.create(828), player.location.transform(0, 2, 0), 7.5, null)
@@ -76,11 +76,11 @@ class GnomeStrongholdCourse
 					sendMessage(player, "You can't do that from here.")
                     return true
                 }
-                if (content.global.skill.agility.GnomeStrongholdCourse.Companion.USED_PIPES[index] > GameWorld.ticks) {
+                if (USED_PIPES[index] > GameWorld.ticks) {
 					sendMessage(player, "The pipe is being used.")
                     return true
                 }
-                content.global.skill.agility.GnomeStrongholdCourse.Companion.USED_PIPES[index] = GameWorld.ticks + 10
+                USED_PIPES[index] = GameWorld.ticks + 10
 
                 player.lock()
                 //Animations and force walking
@@ -117,12 +117,12 @@ class GnomeStrongholdCourse
     }
 
     override fun configure() {
-        content.global.skill.agility.GnomeStrongholdCourse.Companion.TRAINERS[0] = NPC.create(162, Location.create(2473, 3438, 0))
-        content.global.skill.agility.GnomeStrongholdCourse.Companion.TRAINERS[1] = NPC.create(162, Location.create(2478, 3426, 0))
-        content.global.skill.agility.GnomeStrongholdCourse.Companion.TRAINERS[2] = NPC.create(162, Location.create(2474, 3422, 1))
-        content.global.skill.agility.GnomeStrongholdCourse.Companion.TRAINERS[3] = NPC.create(162, Location.create(2472, 3419, 2))
-        content.global.skill.agility.GnomeStrongholdCourse.Companion.TRAINERS[4] = NPC.create(162, Location.create(2489, 3425, 0))
-        for (npc in content.global.skill.agility.GnomeStrongholdCourse.Companion.TRAINERS) {
+        TRAINERS[0] = NPC.create(162, Location.create(2473, 3438, 0))
+        TRAINERS[1] = NPC.create(162, Location.create(2478, 3426, 0))
+        TRAINERS[2] = NPC.create(162, Location.create(2474, 3422, 1))
+        TRAINERS[3] = NPC.create(162, Location.create(2472, 3419, 2))
+        TRAINERS[4] = NPC.create(162, Location.create(2489, 3425, 0))
+        for (npc in TRAINERS) {
             npc!!.init()
             npc.walkRadius = 3
         }
@@ -139,7 +139,7 @@ class GnomeStrongholdCourse
     }
 
     override fun createInstance(player: Player): AgilityCourse {
-        return content.global.skill.agility.GnomeStrongholdCourse(player)
+        return GnomeStrongholdCourse(player)
     }
 
     companion object {

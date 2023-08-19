@@ -12,12 +12,12 @@ import core.plugin.Initializable
  * @author Ceikry
  */
 @Initializable
-class AsyffDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class AsyffDialogue(player: Player? = null) : DialoguePlugin(player){
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            0 -> player(core.game.dialogue.FacialExpression.ASKING,"Err...what are you saying exactly?").also { stage++ }
-            1 -> npc(core.game.dialogue.FacialExpression.LAUGH,"I'm just saying that perhaps you would","like to peruse my selection of garments.").also { stage++ }
-            2 -> npc(core.game.dialogue.FacialExpression.LAUGH,"Or, if that doesn't interest you, then maybe you have","something else to offer? I'm always on the look out","for interesting or unusual new materials.").also { stage++ }
+            0 -> player(FacialExpression.ASKING,"Err...what are you saying exactly?").also { stage++ }
+            1 -> npc(FacialExpression.LAUGH,"I'm just saying that perhaps you would","like to peruse my selection of garments.").also { stage++ }
+            2 -> npc(FacialExpression.LAUGH,"Or, if that doesn't interest you, then maybe you have","something else to offer? I'm always on the look out","for interesting or unusual new materials.").also { stage++ }
             3 -> options("Okay, let's see what you've got then.","Can you make clothing suitable for hunting in?","I think I might just leave the perusing for now thanks.","What sort of unusual materials did you have in mind?").also { stage++ }
             4 -> when(buttonId){
                 1 -> player("Okay, let's see what you've got then.").also { stage = 10 }
@@ -45,12 +45,12 @@ class AsyffDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.HAPPY,"Now you look like someone who goes to","a lot of fancy dress parties.")
+        npc(FacialExpression.HAPPY,"Now you look like someone who goes to","a lot of fancy dress parties.")
         stage = 0
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return AsyffDialogue(player)
     }
 

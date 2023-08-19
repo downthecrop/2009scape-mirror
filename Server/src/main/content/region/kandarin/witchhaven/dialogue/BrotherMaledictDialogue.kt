@@ -13,11 +13,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class BrotherMaledictDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class BrotherMaledictDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.FRIENDLY,"The blessings of Saradomin be with you child.").also { stage = 99 }
+        npc(FacialExpression.FRIENDLY,"The blessings of Saradomin be with you child.").also { stage = 99 }
         return true
     }
 
@@ -28,7 +28,7 @@ class BrotherMaledictDialogue(player: Player? = null) : core.game.dialogue.Dialo
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return BrotherMaledictDialogue(player)
     }
 

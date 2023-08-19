@@ -1,9 +1,7 @@
 package core.game.interaction
 
 import core.game.node.Node
-import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
-import core.game.world.GameWorld
 
 typealias UseWithExecutor = (Player, Node, Node, Int) -> Boolean
 typealias InteractExecutor = (Player, Node, Int) -> Boolean

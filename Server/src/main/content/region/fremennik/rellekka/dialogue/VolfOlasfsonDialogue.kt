@@ -14,31 +14,31 @@ import core.tools.END_DIALOGUE
  */
 
 @Initializable
-class VolfOlasfsonDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class VolfOlasfsonDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!isQuestComplete(player, "Fremennik Trials")) {
-            npc(core.game.dialogue.FacialExpression.ANNOYED, "Sorry, outlander, but I have things to be doing.").also { stage = END_DIALOGUE }
+            npc(FacialExpression.ANNOYED, "Sorry, outlander, but I have things to be doing.").also { stage = END_DIALOGUE }
         } else if (isQuestComplete(player, "Fremennik Trials") && !isQuestComplete(player, "Olaf's Quest")) {
-            npc(core.game.dialogue.FacialExpression.FRIENDLY, "Hello there. Enjoying the view?").also { stage = 0 }
+            npc(FacialExpression.FRIENDLY, "Hello there. Enjoying the view?").also { stage = 0 }
         } else if (isQuestComplete(player, "Fremennik Trials") && isQuestComplete(player, "Olaf's Quest")) {
-            npcl(core.game.dialogue.FacialExpression.ASKING, "Hello again, friend! Does my father send any word... or treasures like before?").also { stage = 10 }
+            npcl(FacialExpression.ASKING, "Hello again, friend! Does my father send any word... or treasures like before?").also { stage = 10 }
         }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            0 -> player(core.game.dialogue.FacialExpression.FRIENDLY, "Yes I am. You have a lovely yurt.").also { stage++ }
-            1 -> npc(core.game.dialogue.FacialExpression.FRIENDLY, "Thanks! I exercise it regularly.").also { stage = END_DIALOGUE }
+            0 -> player(FacialExpression.FRIENDLY, "Yes I am. You have a lovely yurt.").also { stage++ }
+            1 -> npc(FacialExpression.FRIENDLY, "Thanks! I exercise it regularly.").also { stage = END_DIALOGUE }
 
-            10 -> playerl(core.game.dialogue.FacialExpression.HALF_GUILTY, "Not today, but if he does, you will be the first to know.").also { stage = END_DIALOGUE }
+            10 -> playerl(FacialExpression.HALF_GUILTY, "Not today, but if he does, you will be the first to know.").also { stage = END_DIALOGUE }
         }
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return VolfOlasfsonDialogue(player)
     }
 

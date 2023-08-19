@@ -11,7 +11,7 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class BlackGuardDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class BlackGuardDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -26,7 +26,7 @@ class BlackGuardDialogue(player: Player? = null) : core.game.dialogue.DialoguePl
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return BlackGuardDialogue(player)
     }
 

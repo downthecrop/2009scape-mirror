@@ -98,7 +98,7 @@ class ChronozonNPC(id: Int, location: Location?) : AbstractNPC(667, Location(308
     }
 
     fun setPlayer(player: Player){
-        m_targetPlayer = player;
+        m_targetPlayer = player
     }
 
 }

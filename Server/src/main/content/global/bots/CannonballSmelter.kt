@@ -155,7 +155,7 @@ class CannonballSmelter : Script() {
                     val furnace = scriptAPI.getNearestNode(11666, true)
                     scriptAPI.interact(bot, furnace, "smelt")
                     // TODO: should bots use real interfaces?
-                    bot.pulseManager.run(SmeltingPulse(bot, null, Bar.STEEL, 9));
+                    bot.pulseManager.run(SmeltingPulse(bot, null, Bar.STEEL, 9))
                 } else {
                     state = State.SMELTING_CBALLS
                 }
@@ -273,6 +273,6 @@ class CannonballSmelter : Script() {
         skills.put(Skills.HITPOINTS,99)
         skills.put(Skills.DEFENCE,99)
         skills.put(Skills.SMITHING,35)
-        quests.add("Dwarf Cannon");
+        quests.add("Dwarf Cannon")
     }
 }

@@ -13,14 +13,14 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class FishmongerMiscDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class FishmongerMiscDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!isQuestComplete(player, "Throne of Miscellania")) {
-            npcl(core.game.dialogue.FacialExpression.FRIENDLY,"Greetings, Sir. Get your fresh fish here! I've heard that the Etceterian fish is stored in a cow shed.").also { stage = 0 }
+            npcl(FacialExpression.FRIENDLY,"Greetings, Sir. Get your fresh fish here! I've heard that the Etceterian fish is stored in a cow shed.").also { stage = 0 }
         } else {
-            npcl(core.game.dialogue.FacialExpression.FRIENDLY,"Greetings, Your Highness. Have some fresh fish! I've heard that the Etceterian fish is stored in a cow shed.").also { stage = 0 }
+            npcl(FacialExpression.FRIENDLY,"Greetings, Your Highness. Have some fresh fish! I've heard that the Etceterian fish is stored in a cow shed.").also { stage = 0 }
         }
         return true
     }
@@ -32,7 +32,7 @@ class FishmongerMiscDialogue(player: Player? = null) : core.game.dialogue.Dialog
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return FishmongerMiscDialogue(player)
     }
 

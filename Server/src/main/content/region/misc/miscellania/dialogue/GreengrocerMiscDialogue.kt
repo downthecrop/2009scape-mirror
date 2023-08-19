@@ -13,11 +13,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class GreengrocerMiscDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class GreengrocerMiscDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.FRIENDLY,"Welcome, Sir.",
+        npc(FacialExpression.FRIENDLY,"Welcome, Sir.",
             "I sell only the finest and freshest vegetables!").also { stage = 0 }
         return true
     }
@@ -31,7 +31,7 @@ class GreengrocerMiscDialogue(player: Player? = null) : core.game.dialogue.Dialo
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return GreengrocerMiscDialogue(player)
     }
 

@@ -15,13 +15,13 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class BarlakDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
-    private var pask = core.game.dialogue.FacialExpression.ASKING
-    private var pfr = core.game.dialogue.FacialExpression.FRIENDLY
-    private var pneu = core.game.dialogue.FacialExpression.NEUTRAL
-    private var nhap = core.game.dialogue.FacialExpression.OLD_HAPPY
-    private var ntalk1 = core.game.dialogue.FacialExpression.OLD_CALM_TALK1
-    private var ntalk2 = core.game.dialogue.FacialExpression.OLD_CALM_TALK2
+class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
+    private var pask = FacialExpression.ASKING
+    private var pfr = FacialExpression.FRIENDLY
+    private var pneu = FacialExpression.NEUTRAL
+    private var nhap = FacialExpression.OLD_HAPPY
+    private var ntalk1 = FacialExpression.OLD_CALM_TALK1
+    private var ntalk2 = FacialExpression.OLD_CALM_TALK2
 
     private var curItem = 0
 
@@ -164,22 +164,22 @@ class BarlakDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
                 }
             }
 
-            150 -> player(core.game.dialogue.FacialExpression.THINKING, "What?").also { stage++ }
-            151 -> npc(core.game.dialogue.FacialExpression.OLD_DISTRESSED, "I don't have any bones!").also { stage++ }
+            150 -> player(FacialExpression.THINKING, "What?").also { stage++ }
+            151 -> npc(FacialExpression.OLD_DISTRESSED, "I don't have any bones!").also { stage++ }
             152 -> options("Then how do you stand up?", "What do you need bones for?", "Will you buy anything besides bones?", "What kind of bones do you need?", "Goodbye").also { stage++ }
             153 -> when (buttonId) {
-                1 -> player(core.game.dialogue.FacialExpression.THINKING, "Then how do you stand up?").also { stage = 200 }
-                2 -> player(core.game.dialogue.FacialExpression.THINKING, "What do you need bones for?").also { stage = 220 }
-                3 -> player(core.game.dialogue.FacialExpression.THINKING, "Will you buy anything besides bones?").also { stage = 240 }
-                4 -> player(core.game.dialogue.FacialExpression.THINKING, "What kind of bones do you need?").also { stage = 260 }
+                1 -> player(FacialExpression.THINKING, "Then how do you stand up?").also { stage = 200 }
+                2 -> player(FacialExpression.THINKING, "What do you need bones for?").also { stage = 220 }
+                3 -> player(FacialExpression.THINKING, "Will you buy anything besides bones?").also { stage = 240 }
+                4 -> player(FacialExpression.THINKING, "What kind of bones do you need?").also { stage = 260 }
                 5 -> player(pfr, "Goodbye.").also { stage = 280 }
             }
 
-            200 -> npc(core.game.dialogue.FacialExpression.OLD_CALM_TALK1, "What?").also { stage++ }
-            201 -> playerl(core.game.dialogue.FacialExpression.FRIENDLY, "How do you stand up if you have no bones? Shouldn't you collapse into a gelatinous blob?").also { stage++ }
-            202 -> npc(core.game.dialogue.FacialExpression.OLD_LAUGH1, "Ha, ha, ha, ha, ha!").also { stage = 152 }
+            200 -> npc(FacialExpression.OLD_CALM_TALK1, "What?").also { stage++ }
+            201 -> playerl(FacialExpression.FRIENDLY, "How do you stand up if you have no bones? Shouldn't you collapse into a gelatinous blob?").also { stage++ }
+            202 -> npc(FacialExpression.OLD_LAUGH1, "Ha, ha, ha, ha, ha!").also { stage = 152 }
 
-            220 -> npcl(core.game.dialogue.FacialExpression.OLD_LAUGH1, "To stand up properly. Otherwise I'd collapse into a gelatinous blob! Ha, ha, ha, ha, ha! No, seriously, I need bones to use as a Construction material.").also { stage++ }
+            220 -> npcl(FacialExpression.OLD_LAUGH1, "To stand up properly. Otherwise I'd collapse into a gelatinous blob! Ha, ha, ha, ha, ha! No, seriously, I need bones to use as a Construction material.").also { stage++ }
             221 -> npcl(ntalk1, "We always need big bones to prop up the mine shafts and to make other temporary structures.").also { stage = 152 }
             240 -> npcl(ntalk2, "Well, I've had a few people bring me some interesting giant shells. They say they came from giant snails and giant tortoises. Of course, like the bones, some shells are better than others.").also { stage++ }
             241 -> npcl(ntalk1, "I'll give you 250gp for ordinary shells, but what I really need are perfect shells.").also { stage++ }
@@ -237,7 +237,7 @@ class BarlakDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
         return sets[curItem][3]
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return BarlakDialogue(player)
     }
 

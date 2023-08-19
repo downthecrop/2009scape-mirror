@@ -320,7 +320,7 @@ class GrandExchange : StartupListener, Commands {
 
         private fun canUpdatePriceIndex(seller: GrandExchangeOffer, buyer: GrandExchangeOffer): Boolean {
             if(seller.playerUID == buyer.playerUID) return false
-            if(!ServerConstants.BOTS_INFLUENCE_PRICE_INDEX && (seller.isBot || buyer.isBot)) return false;
+            if(!ServerConstants.BOTS_INFLUENCE_PRICE_INDEX && (seller.isBot || buyer.isBot)) return false
             return true
         }
 

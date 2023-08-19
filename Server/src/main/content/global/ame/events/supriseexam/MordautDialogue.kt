@@ -60,6 +60,6 @@ class MordautDialogue(val examComplete: Boolean, val questionCorrect: Boolean = 
     }
 
     override fun npc(vararg messages: String?): Component? {
-        return super.npc(core.game.dialogue.FacialExpression.OLD_NORMAL,*messages)
+        return super.npc(FacialExpression.OLD_NORMAL,*messages)
     }
 }

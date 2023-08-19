@@ -46,9 +46,9 @@ class BurthorpeSoldierDialogue(player: Player? = null) : DialoguePlugin(player) 
                 "Braccae tuae aperiuntur.",
                 "Vescere bracis meis.",
                 "Corripe cervisiam!",
-        );
+        )
 
-        val randomStages = arrayOf(10, 20, 30, 40, 50);
+        val randomStages = arrayOf(10, 20, 30, 40, 50)
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {

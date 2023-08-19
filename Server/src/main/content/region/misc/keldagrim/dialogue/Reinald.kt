@@ -16,7 +16,7 @@ const val REINALD = 2194
  * @author Ceikry
  */
 @Initializable
-class ReinaldDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class ReinaldDialogue(player: Player? = null) : DialoguePlugin(player){
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage++){
             0 -> options("Yes, please!", "No, thanks.")
@@ -34,7 +34,7 @@ class ReinaldDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugi
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return ReinaldDialogue(player)
     }
 

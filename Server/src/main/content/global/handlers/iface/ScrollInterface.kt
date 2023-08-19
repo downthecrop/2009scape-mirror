@@ -24,7 +24,7 @@ class ScrollInterface {
             closeInterface(player) // Important: Close previous interfaces.
             if (scrollComponent == Components.MESSAGESCROLL_220) {
                 openInterface(player, Components.MESSAGESCROLL_220)
-                setPageContent(player, Components.MESSAGESCROLL_220, MESSAGESCROLL_220_LINE_IDS, contents);
+                setPageContent(player, Components.MESSAGESCROLL_220, MESSAGESCROLL_220_LINE_IDS, contents)
             }
         }
 

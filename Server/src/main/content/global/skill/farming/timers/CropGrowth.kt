@@ -21,7 +21,7 @@ class CropGrowth : PersistTimer (500, "farming:crops", isSoft = true) {
 
     //Sync the 5 minute run cycles with :05 on realtime clocks - authentic
     override fun getInitialRunDelay() : Int {
-        val now = LocalTime.now();
+        val now = LocalTime.now()
         val minsUntil5MinSync = 5 - (now.getMinute() % 5)
         val ticks = secondsToTicks (minsUntil5MinSync * 60)
         player.debug("[CropGrowth] Scheduled first growth cycle for $ticks ticks from now.")

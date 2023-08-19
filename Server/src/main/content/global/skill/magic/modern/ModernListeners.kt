@@ -87,7 +87,7 @@ class ModernListeners : SpellListener("modern"){
 
         onCast(Modern.CAMELOT_TELEPORT, NONE){ player, _->
             requires(player,45, arrayOf(Item(Items.AIR_RUNE_556,5),Item(Items.LAW_RUNE_563)))
-            player.achievementDiaryManager.finishTask(player, DiaryType.SEERS_VILLAGE, 1, 5);
+            player.achievementDiaryManager.finishTask(player, DiaryType.SEERS_VILLAGE, 1, 5)
             sendTeleport(player,55.5, Location.create(2758, 3478, 0))
         }
 

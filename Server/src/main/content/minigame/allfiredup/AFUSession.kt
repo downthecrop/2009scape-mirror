@@ -13,7 +13,7 @@ import core.tools.colorize
  * @author Ceikry
  */
 class AFUSession(val player: Player? = null) : LogoutListener {
-    private val beaconTimers = Array(14){i -> BeaconTimer(0, content.minigame.allfiredup.AFUBeacon.values()[i]) }
+    private val beaconTimers = Array(14){i -> BeaconTimer(0, AFUBeacon.values()[i]) }
     private val logInventories = Array(14){Item(0,0)}
     private val beaconWatched = Array(14){false}
     private var isActive = false
@@ -61,7 +61,7 @@ class AFUSession(val player: Player? = null) : LogoutListener {
         beaconTimers[beaconIndex].ticks = ticks
     }
 
-    fun refreshTimer(beacon: content.minigame.allfiredup.AFUBeacon, logID: Int){
+    fun refreshTimer(beacon: AFUBeacon, logID: Int){
         val ticks = getTicks(logID) * 5
         beaconTimers.forEach {
             if(it.beacon.ordinal == beacon.ordinal) it.ticks += ticks
@@ -111,11 +111,11 @@ class AFUSession(val player: Player? = null) : LogoutListener {
     }
 
     override fun logout(player: Player) {
-        content.minigame.allfiredup.AFUBeacon.resetAllBeacons(player)
+        AFUBeacon.resetAllBeacons(player)
         val session: AFUSession? = player.getAttribute("afu-session",null)
         session?.end()
         player.removeAttribute("afu-session")
     }
 
-    internal class BeaconTimer(var ticks: Int, val beacon: content.minigame.allfiredup.AFUBeacon)
+    internal class BeaconTimer(var ticks: Int, val beacon: AFUBeacon)
 }

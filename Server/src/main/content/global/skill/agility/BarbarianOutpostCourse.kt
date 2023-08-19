@@ -31,7 +31,7 @@ class BarbarianOutpostCourse
  */
 @JvmOverloads constructor(player: Player? = null) : AgilityCourse(player, 6, 46.2) {
     override fun createInstance(player: Player): AgilityCourse {
-        return content.global.skill.agility.BarbarianOutpostCourse(player)
+        return BarbarianOutpostCourse(player)
     }
 
     override fun handle(player: Player, node: Node, option: String): Boolean {
@@ -88,7 +88,7 @@ class BarbarianOutpostCourse
 			sendMessage(player, "You cannot do that from here.")
             return
         }
-        if (content.global.skill.agility.BarbarianOutpostCourse.Companion.ropeDelay > GameWorld.ticks) {
+        if (ropeDelay > GameWorld.ticks) {
 			sendMessage(player, "The rope is being used.")
             return
         }
@@ -96,7 +96,7 @@ class BarbarianOutpostCourse
             AgilityHandler.fail(player, 0, Location.create(2549, 9951, 0), null, getHitAmount(player), "You slip and fall to the pit below.")
             return
         }
-        content.global.skill.agility.BarbarianOutpostCourse.Companion.ropeDelay = GameWorld.ticks + 2
+        ropeDelay = GameWorld.ticks + 2
         player.packetDispatch.sendSceneryAnimation(`object`, Animation.create(497), true)
         AgilityHandler.forceWalk(player, 0, player.location, Location.create(2551, 3549, 0), Animation.create(751), 50, 22.0, "You skillfully swing across.", 1)
     }
@@ -176,7 +176,7 @@ class BarbarianOutpostCourse
         NPCDefinition.forId(385).handlers["option:pick-up"] = this
 		NPCDefinition.forId(386).handlers["option:pick-up"] = this
 		NPCDefinition.forId(387).handlers["option:pick-up"] = this
-        ClassScanner.definePlugin(content.global.skill.agility.BarbarianOutpostCourse.BarbarianGuardDialogue())
+        ClassScanner.definePlugin(BarbarianGuardDialogue())
     }
 
     override fun getDestination(node: Node, n: Node): Location? {
@@ -209,7 +209,7 @@ class BarbarianOutpostCourse
         constructor(player: Player?) : super(player) {}
 
         override fun newInstance(player: Player): core.game.dialogue.DialoguePlugin {
-            return content.global.skill.agility.BarbarianOutpostCourse.BarbarianGuardDialogue(player)
+            return BarbarianGuardDialogue(player)
         }
 
         override fun open(vararg args: Any): Boolean {

@@ -146,7 +146,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
          */
         define("dumpappearance", Privilege.MODERATOR){ player, _ ->
             val json = JSONObject()
-            PlayerSaver(player).saveAppearance(json);
+            PlayerSaver(player).saveAppearance(json)
             val equipJson = PlayerSaver(player).saveContainer(player.equipment)
             json["equipment"] = equipJson
             val jsonString = json.toJSONString()

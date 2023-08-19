@@ -2,8 +2,8 @@ package content.region.desert.alkharid.dialogue
 
 import core.api.animate
 import core.api.getStatLevel
-import core.game.dialogue.DialoguePlugin;
-import core.game.dialogue.FacialExpression;
+import core.game.dialogue.DialoguePlugin
+import core.game.dialogue.FacialExpression
 import core.game.dialogue.Topic
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player

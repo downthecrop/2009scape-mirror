@@ -7,34 +7,34 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 
 @Initializable
-class OlafTheBard(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class OlafTheBard(player: Player? = null) : DialoguePlugin(player){
     override fun open(vararg args: Any?): Boolean {
         if(player.inventory.contains(3700,1)){
-            playerl(core.game.dialogue.FacialExpression.HAPPY,"Hello Olaf. Do you have a beautiful love song written for me?")
+            playerl(FacialExpression.HAPPY,"Hello Olaf. Do you have a beautiful love song written for me?")
             stage = 65
         }
         else if(player.inventory.contains(3699,1)){
-            playerl(core.game.dialogue.FacialExpression.ASKING,"So you think this song is pretty good then?")
+            playerl(FacialExpression.ASKING,"So you think this song is pretty good then?")
             stage = 70
             return true
         }
         else if(player?.getAttribute("sigmundreturning",false) == true){
-            playerl(core.game.dialogue.FacialExpression.ASKING,"I've got a trade item; is it for you?")
+            playerl(FacialExpression.ASKING,"I've got a trade item; is it for you?")
             stage = 75
             return true
         }
         else if(player?.getAttribute("sigmund-steps",0) == 3){
-            playerl(core.game.dialogue.FacialExpression.ASKING,"I don't suppose you have any idea where I could find some custom sturdy boots, do you?")
+            playerl(FacialExpression.ASKING,"I don't suppose you have any idea where I could find some custom sturdy boots, do you?")
             stage = 60
             return true
         }
         else if(player?.getAttribute("sigmund-steps",0)!! == 2){
-            playerl(core.game.dialogue.FacialExpression.ASKING,"I don't suppose you have any idea where I could find a love ballad, do you?")
+            playerl(FacialExpression.ASKING,"I don't suppose you have any idea where I could find a love ballad, do you?")
             stage = 50
             return true
         }
         else if(player?.getAttribute("lyreConcertPlayed",false)!!){
-            playerl(core.game.dialogue.FacialExpression.HAPPY,"So can I rely on your vote with the council of elders in my favour?")
+            playerl(FacialExpression.HAPPY,"So can I rely on your vote with the council of elders in my favour?")
             stage = 40
             return true
         }
@@ -44,7 +44,7 @@ class OlafTheBard(player: Player? = null) : core.game.dialogue.DialoguePlugin(pl
             return true
         }
         else if(player.questRepository.isComplete("Fremennik Trials")){
-            npcl(core.game.dialogue.FacialExpression.HAPPY,"Hello again to you, ${player.getAttribute("fremennikname","schlonko")}. Us bards should stick together, what can I do for you?")
+            npcl(FacialExpression.HAPPY,"Hello again to you, ${player.getAttribute("fremennikname","schlonko")}. Us bards should stick together, what can I do for you?")
             stage = 98
             return true
         }
@@ -54,7 +54,7 @@ class OlafTheBard(player: Player? = null) : core.game.dialogue.DialoguePlugin(pl
             return true
         }
         else{
-            playerl(core.game.dialogue.FacialExpression.HAPPY,"Hello there. So you're a bard?")
+            playerl(FacialExpression.HAPPY,"Hello there. So you're a bard?")
             stage = 150
             return true
         }
@@ -99,9 +99,9 @@ class OlafTheBard(player: Player? = null) : core.game.dialogue.DialoguePlugin(pl
                 28 -> npc("Is that clear enough, outerlander? Would you like me","to repeat anything?").also { stage++ }
                 29 -> player("No thanks. I think I've got it.").also { stage = 1000 }
 
-            40 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"You have a truly poetic soul! Anyone who can compose such a beautiful epic, and then perform it so flawlessly can only bring good to our clan!").also { stage++ }
-            41 -> playerl(core.game.dialogue.FacialExpression.THINKING,"Erm... so that's a yes, then?").also { stage++ }
-            42 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"Absolutely! We must collaborate together on a duet sometime, don't you think?").also {
+            40 -> npcl(FacialExpression.HAPPY,"You have a truly poetic soul! Anyone who can compose such a beautiful epic, and then perform it so flawlessly can only bring good to our clan!").also { stage++ }
+            41 -> playerl(FacialExpression.THINKING,"Erm... so that's a yes, then?").also { stage++ }
+            42 -> npcl(FacialExpression.HAPPY,"Absolutely! We must collaborate together on a duet sometime, don't you think?").also {
                 setAttribute(player, "/save:fremtrials:olaf-vote",true)
                 setAttribute(player, "/save:fremtrials:votes",getAttribute(player, "fremtrials:votes",0) + 1)
                 stage = 1000
@@ -109,53 +109,53 @@ class OlafTheBard(player: Player? = null) : core.game.dialogue.DialoguePlugin(pl
 
 
             //Sigmund bullshit
-            50 -> npcl(core.game.dialogue.FacialExpression.HAPPY," Well, as official Fremennik bard, it falls within my remit to compose all music for the tribe. I am fully versed in all the various types of romantic music.").also { stage++ }
-            51 -> playerl(core.game.dialogue.FacialExpression.HAPPY,"Great! Can you write me one then?").also { stage++ }
-            52 -> npcl(core.game.dialogue.FacialExpression.THINKING,"Well... Normally I would be thrilled at the chance to show my skill as a poet in composing a seductively romantic ballad...").also { stage++ }
-            53 -> playerl(core.game.dialogue.FacialExpression.ANNOYED,"Let me guess; Here comes the 'but'.").also { stage++ }
-            54 -> npcl(core.game.dialogue.FacialExpression.SAD,"...but unfortunately I cannot concentrate fully upon my work recently.").also { stage++ }
-            55 -> playerl(core.game.dialogue.FacialExpression.ASKING,"Why is that then?").also { stage++ }
-            56 -> npcl(core.game.dialogue.FacialExpression.NEUTRAL,"It is these old worn out shoes of mine... As a bard I am expected to wander the lands, singing of the glorious battles of our warriors.").also { stage++ }
-            57 -> npcl(core.game.dialogue.FacialExpression.NEUTRAL,"If you can find me a pair of sturdy boots to replace these old worn out ones of mine, I will be happy to spend the time on composing you a romantic ballad.").also {
+            50 -> npcl(FacialExpression.HAPPY," Well, as official Fremennik bard, it falls within my remit to compose all music for the tribe. I am fully versed in all the various types of romantic music.").also { stage++ }
+            51 -> playerl(FacialExpression.HAPPY,"Great! Can you write me one then?").also { stage++ }
+            52 -> npcl(FacialExpression.THINKING,"Well... Normally I would be thrilled at the chance to show my skill as a poet in composing a seductively romantic ballad...").also { stage++ }
+            53 -> playerl(FacialExpression.ANNOYED,"Let me guess; Here comes the 'but'.").also { stage++ }
+            54 -> npcl(FacialExpression.SAD,"...but unfortunately I cannot concentrate fully upon my work recently.").also { stage++ }
+            55 -> playerl(FacialExpression.ASKING,"Why is that then?").also { stage++ }
+            56 -> npcl(FacialExpression.NEUTRAL,"It is these old worn out shoes of mine... As a bard I am expected to wander the lands, singing of the glorious battles of our warriors.").also { stage++ }
+            57 -> npcl(FacialExpression.NEUTRAL,"If you can find me a pair of sturdy boots to replace these old worn out ones of mine, I will be happy to spend the time on composing you a romantic ballad.").also {
                 player?.incrementAttribute("sigmund-steps",1)
                 stage = 1000
             }
-            60 -> npcl(core.game.dialogue.FacialExpression.ANNOYED,"I'm sorry outerlander... If I did, I would not trouble you to go and find them for me, would I?").also { stage = 1000 }
+            60 -> npcl(FacialExpression.ANNOYED,"I'm sorry outerlander... If I did, I would not trouble you to go and find them for me, would I?").also { stage = 1000 }
 
-            65 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"That depends outerlander... Do you have some new boots for me? My feet get so tired roaming the land...").also { stage++ }
-            66 -> playerl(core.game.dialogue.FacialExpression.HAPPY,"As a matter of fact - I do!").also {
+            65 -> npcl(FacialExpression.HAPPY,"That depends outerlander... Do you have some new boots for me? My feet get so tired roaming the land...").also { stage++ }
+            66 -> playerl(FacialExpression.HAPPY,"As a matter of fact - I do!").also {
                 removeItem(player,3700)
                 addItem(player,3699)
                 stage++
             }
-            67 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"Oh! Superb! Those are great! They're just what I was looking for! Here, take this song with my compliments! It is one of my finest works yet!").also { stage = 1000 }
+            67 -> npcl(FacialExpression.HAPPY,"Oh! Superb! Those are great! They're just what I was looking for! Here, take this song with my compliments! It is one of my finest works yet!").also { stage = 1000 }
 
-            70 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"Ahhh.... outerlander... it is the most beautiful romantic ballad I have ever been inspired to write...").also { stage++ }
-            71 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"Only a woman with a heart of icy stone could fail be to be moved by its beauty!").also { stage++ }
-            72 -> playerl(core.game.dialogue.FacialExpression.HAPPY,"Thanks! That sounds perfect!").also { stage = 1000 }
+            70 -> npcl(FacialExpression.HAPPY,"Ahhh.... outerlander... it is the most beautiful romantic ballad I have ever been inspired to write...").also { stage++ }
+            71 -> npcl(FacialExpression.HAPPY,"Only a woman with a heart of icy stone could fail be to be moved by its beauty!").also { stage++ }
+            72 -> playerl(FacialExpression.HAPPY,"Thanks! That sounds perfect!").also { stage = 1000 }
 
-            75 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"Only if it's a new pair of boots.").also { stage = 1000 }
+            75 -> npcl(FacialExpression.HAPPY,"Only if it's a new pair of boots.").also { stage = 1000 }
 
             98 -> options("I was wondering...","I forget now...").also { stage++ }
             99 -> when(buttonId){
-                1 -> playerl(core.game.dialogue.FacialExpression.ASKING,"I was wondering... Can I learn to play my lyre again?").also { stage++ }
-                2 -> playerl(core.game.dialogue.FacialExpression.THINKING,"I forget now...").also { stage = 1000 }
+                1 -> playerl(FacialExpression.ASKING,"I was wondering... Can I learn to play my lyre again?").also { stage++ }
+                2 -> playerl(FacialExpression.THINKING,"I forget now...").also { stage = 1000 }
             }
 
-            100 -> npcl(core.game.dialogue.FacialExpression.HAPPY, "Well that is an interesting question. Let me let you into a little secret. If you make another offering to the Fossegrimen you will learn a secret melody.").also { stage++ }
-            101 -> playerl(core.game.dialogue.FacialExpression.ASKING,"What kind of melody?").also { stage++ }
-            102 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"It is the song of Rellekka. When you play it, it will bring you back to this town where you are in this world.").also { stage++ }
-            103 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"We often go adventuring with bards for precisely this reason. No matter where we have ended up we can return safe and sound to home.").also { stage++ }
-            104 -> playerl(core.game.dialogue.FacialExpression.HAPPY,"Thanks, Olaf!").also { stage = 1000 }
+            100 -> npcl(FacialExpression.HAPPY, "Well that is an interesting question. Let me let you into a little secret. If you make another offering to the Fossegrimen you will learn a secret melody.").also { stage++ }
+            101 -> playerl(FacialExpression.ASKING,"What kind of melody?").also { stage++ }
+            102 -> npcl(FacialExpression.HAPPY,"It is the song of Rellekka. When you play it, it will bring you back to this town where you are in this world.").also { stage++ }
+            103 -> npcl(FacialExpression.HAPPY,"We often go adventuring with bards for precisely this reason. No matter where we have ended up we can return safe and sound to home.").also { stage++ }
+            104 -> playerl(FacialExpression.HAPPY,"Thanks, Olaf!").also { stage = 1000 }
 
-            150 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"I am afraid I cannot speak to outerlanders. Besides, I am busy composing an epic.").also { stage = 1000 }
+            150 -> npcl(FacialExpression.HAPPY,"I am afraid I cannot speak to outerlanders. Besides, I am busy composing an epic.").also { stage = 1000 }
 
             1000 -> end()
         }
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return OlafTheBard(player)
     }
 

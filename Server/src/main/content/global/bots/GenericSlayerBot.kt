@@ -144,7 +144,7 @@ class GenericSlayerBot : Script() {
                         bot.inventory.clear()
                         for(item in inventory)
                             bot.inventory.add(item)
-                        scriptAPI.withdraw(org.rs09.consts.Items.LOBSTER_379,10)
+                        scriptAPI.withdraw(Items.LOBSTER_379,10)
                         bot.fullRestore()
 
                         if(assignment.amount <= 0){

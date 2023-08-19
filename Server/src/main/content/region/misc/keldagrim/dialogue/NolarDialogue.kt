@@ -12,11 +12,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class NolarDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class NolarDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.CHILD_NORMAL,"I have a wide variety of crafting tools on offer,",
+        npc(FacialExpression.CHILD_NORMAL,"I have a wide variety of crafting tools on offer,",
             "care to take a look?").also { stage = 0 }
         return true
     }
@@ -29,10 +29,10 @@ class NolarDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(
 
             1 -> when(buttonId){
                 1 -> {
-                    player(core.game.dialogue.FacialExpression.FRIENDLY, "Yes please!").also { stage = 10 }
+                    player(FacialExpression.FRIENDLY, "Yes please!").also { stage = 10 }
                 }
                 2 -> {
-                    player(core.game.dialogue.FacialExpression.FRIENDLY, "No thanks.").also { stage = 99 }
+                    player(FacialExpression.FRIENDLY, "No thanks.").also { stage = 99 }
                 }
             }
 
@@ -45,7 +45,7 @@ class NolarDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return NolarDialogue(player)
     }
 

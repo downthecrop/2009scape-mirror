@@ -12,11 +12,11 @@ import org.rs09.consts.NPCs
  */
 
 @Initializable
-class AlvissDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
+class AlvissDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(core.game.dialogue.FacialExpression.OLD_DEFAULT,"Good day, sir.").also { stage = 0 }
+        npc(FacialExpression.OLD_DEFAULT,"Good day, sir.").also { stage = 0 }
         return true
     }
 
@@ -28,26 +28,26 @@ class AlvissDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
 
             1 -> when(buttonId){
                 1 -> {
-                    player(core.game.dialogue.FacialExpression.FRIENDLY, "What are you doing down here?").also { stage = 10 }
+                    player(FacialExpression.FRIENDLY, "What are you doing down here?").also { stage = 10 }
                 }
 
                 2 -> {
-                    player(core.game.dialogue.FacialExpression.NEUTRAL, "Good day.").also { stage = 99 }
+                    player(FacialExpression.NEUTRAL, "Good day.").also { stage = 99 }
                 }
             }
 
             10 -> {
-                npc(core.game.dialogue.FacialExpression.OLD_DEFAULT,"I'm waiting for my shift, of course.",
+                npc(FacialExpression.OLD_DEFAULT,"I'm waiting for my shift, of course.",
                     "We can't dig all the time, you know.").also { stage++ }
             }
 
             11 -> {
-                npc(core.game.dialogue.FacialExpression.OLD_DEFAULT," I'm also researching the links between the ",
+                npc(FacialExpression.OLD_DEFAULT," I'm also researching the links between the ",
                     "Fremenniks and the Dwarves.").also { stage++ }
             }
 
             12 -> {
-                npc(core.game.dialogue.FacialExpression.OLD_DEFAULT,"I've found that we have some mythology in common.").also { stage = 99 }
+                npc(FacialExpression.OLD_DEFAULT,"I've found that we have some mythology in common.").also { stage = 99 }
             }
 
             99 -> end()
@@ -55,7 +55,7 @@ class AlvissDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return AlvissDialogue(player)
     }
 

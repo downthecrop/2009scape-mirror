@@ -12,13 +12,13 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 
 @Initializable
-class MistagDialogue (player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+class MistagDialogue (player: Player? = null) : DialoguePlugin(player){
+    override fun newInstance(player: Player?): DialoguePlugin {
         return MistagDialogue(player)
     }
 
     override fun npc(vararg messages: String?): Component {
-        return npc(core.game.dialogue.FacialExpression.OLD_NORMAL,*messages)
+        return npc(FacialExpression.OLD_NORMAL,*messages)
     }
 
     override fun open(vararg args: Any?): Boolean {

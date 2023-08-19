@@ -26,8 +26,8 @@ class FogInteractionHandler : PluginInteraction(30204, 30203){
         override fun pulse(): Boolean {
             player.faceLocation(obj.location)
             when(obj.id) {
-                30204 ->  core.game.global.action.ClimbActionHandler.climbLadder(player, obj, "climb-down")
-                30203 -> core.game.global.action.ClimbActionHandler.climbLadder(player,obj,"climb-up")
+                30204 ->  ClimbActionHandler.climbLadder(player, obj, "climb-down")
+                30203 -> ClimbActionHandler.climbLadder(player,obj,"climb-up")
             }
             return true
         }

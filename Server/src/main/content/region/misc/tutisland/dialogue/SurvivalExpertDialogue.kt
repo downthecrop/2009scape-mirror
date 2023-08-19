@@ -18,8 +18,8 @@ import content.region.misc.tutisland.handlers.TutorialStage
  * @author Ceikry
  */
 @Initializable
-class SurvivalExpertDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+class SurvivalExpertDialogue(player: Player? = null) : DialoguePlugin(player) {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return SurvivalExpertDialogue(player)
     }
 
@@ -32,7 +32,7 @@ class SurvivalExpertDialogue(player: Player? = null) : core.game.dialogue.Dialog
                 player,
                 interpreter.sendDialogues(
                     npc,
-                    core.game.dialogue.FacialExpression.FRIENDLY,
+                    FacialExpression.FRIENDLY,
                     "Hello there, newcomer. My name is Brynna. My job is",
                     "to teach you a few survival tips and tricks. First off",
                     "we're going to start with the most basic survival skill of",
@@ -44,7 +44,7 @@ class SurvivalExpertDialogue(player: Player? = null) : core.game.dialogue.Dialog
                 player,
                 interpreter.sendDialogues(
                     npc,
-                    core.game.dialogue.FacialExpression.FRIENDLY,
+                    FacialExpression.FRIENDLY,
                     "Well done! Next we need to get some food in our",
                     "bellies. We'll need something to cook. There are shrimp",
                     "in the pond there, so let's catch and cook some."

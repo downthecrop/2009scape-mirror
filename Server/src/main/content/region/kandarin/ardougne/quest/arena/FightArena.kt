@@ -90,7 +90,7 @@ class FightArena : Quest("Fight Arena", 61, 60, 2, 17, 0, 1, 14) {
         player ?: return
         var ln = 10
 
-        player.packetDispatch.sendItemZoomOnInterface(Items.COINS_995, 230, 277, 5)
+        player.packetDispatch.sendItemZoomOnInterface(COINS_995, 230, 277, 5)
 
         drawReward(player, "2 Quest Point", ln++)
         drawReward(player, "1000 gold coins", ln++)

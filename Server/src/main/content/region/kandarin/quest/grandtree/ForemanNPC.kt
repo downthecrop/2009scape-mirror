@@ -32,7 +32,7 @@ class ForemanNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,locat
     override fun defineListeners() {
         on(this.ids, IntType.NPC, "talk-to"){ player, npc ->
             openDialogue(player, ForemanDialogue(), npc)
-            return@on true;
+            return@on true
         }
     }
 
@@ -58,7 +58,7 @@ class ForemanDialogue: DialogueFile(){
             3 -> npcl("Right. Glough sent a human?").also { stage++ }
             4 -> playerl("His gnomes are busy.").also { stage++ }
             5 -> npcl("Hmm...in that case we'd better go to my office. Follow me.").also {
-                val foremanOffice = Location.create(2954, 3024, 0);
+                val foremanOffice = Location.create(2954, 3024, 0)
                 GameWorld.Pulser.submit(object : Pulse(0) {
                     var count = 0
                     override fun pulse(): Boolean {
@@ -78,7 +78,7 @@ class ForemanDialogue: DialogueFile(){
                         return false
                     }
                 })
-                stage++;
+                stage++
             }
             6 -> npcl("Tell me again why you're here.").also { stage++ }
             7 -> playerl("Er...Glough sent me?").also { stage++ }

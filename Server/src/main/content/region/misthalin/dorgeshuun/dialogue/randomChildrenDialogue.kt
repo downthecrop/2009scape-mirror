@@ -12,14 +12,14 @@ import core.plugin.Initializable
  */
 
 @Initializable
-class randomChildrenDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
-    var a = core.game.dialogue.FacialExpression.OLD_NORMAL
-    var b = core.game.dialogue.FacialExpression.FRIENDLY
+class randomChildrenDialogue(player: Player? = null) : DialoguePlugin(player){
+    var a = FacialExpression.OLD_NORMAL
+    var b = FacialExpression.FRIENDLY
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when ((1..5).random()) {
-            1 -> npc(core.game.dialogue.FacialExpression.OLD_NORMAL, "Are you a surface-dweller?").also { stage = 0 }
+            1 -> npc(FacialExpression.OLD_NORMAL, "Are you a surface-dweller?").also { stage = 0 }
             2 -> npcl(a, "Are you " + player.name + "? Did you help Zanik save the city?").also { stage = 10 }
             3 -> npc(a, "Sorry, I'm not meant to talk to strangers.").also { stage = 99 }
             4 -> npc(a, "Shh! Don't tell anyone!").also { stage = 20 }
@@ -47,7 +47,7 @@ class randomChildrenDialogue(player: Player? = null) : core.game.dialogue.Dialog
         return true
     }
 
-    override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player?): DialoguePlugin {
         return randomChildrenDialogue(player)
     }
 

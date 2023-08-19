@@ -45,8 +45,8 @@ class FremennikTrials : Quest("Fremennik Trials",64,63,3,347,0,1,10){
             line(player,"Thorvald the Warrior",line++,player.getAttribute("fremtrials:thorvald-vote",false))
             line(player,"Sigmund the Merchant",line++,player.getAttribute("fremtrials:sigmund-vote",false))
             line(player,"Peer the Seer",line++,player.getAttribute("fremtrials:peer-vote",false))
-            val voteCount = player.getAttribute("fremtrials:votes",0);
-            var voteText = "${voteCount} votes";
+            val voteCount = player.getAttribute("fremtrials:votes",0)
+            var voteText = "${voteCount} votes"
             if (voteCount === 1) {
                 voteText = "1 vote"
             }

@@ -1,15 +1,11 @@
 package content.global.activity.penguinhns
 
-import org.json.simple.JSONObject
 import core.ServerStore
 import core.api.StartupListener
 import core.api.log
-import core.game.worldevents.PluginSet
-import core.game.worldevents.WorldEvent
-import core.game.world.GameWorld
 import core.plugin.ClassScanner
 import core.tools.Log
-import core.tools.SystemLogger
+import org.json.simple.JSONObject
 
 class PenguinHNSEvent : StartupListener {
     val manager = PenguinManager()
