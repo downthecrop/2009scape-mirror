@@ -22,9 +22,9 @@ import core.net.packet.out.MinimapState
 import org.rs09.consts.Components
 import core.ServerConstants
 import core.api.Event
+import core.api.utils.CameraShakeType
 import core.api.utils.PlayerCamera
 import core.game.system.timer.impl.AntiMacro
-import core.tools.SystemLogger
 import core.game.world.GameWorld
 import core.tools.Log
 
@@ -312,6 +312,42 @@ abstract class Cutscene(val player: Player) {
     {
         val globalLoc = base.transform(regionX, regionY, 0)
         camera.rotateTo(globalLoc.x, globalLoc.y, height, speed)
+    }
+
+    /**
+     * Rotates the camera to face the given difference of the X and Y coordinates
+     * @param regionX the difference X value to rotate the camera to (0-63)
+     * @param regionY the difference Y value to rotate the camera to (0-63)
+     * @param height (optional) the height of the camera, defaults to 300.
+     * @param speed (optional) the speed of the camera transition, defaults to 100.
+     */
+    fun rotateCameraBy(diffX: Int, diffY: Int, diffHeight: Int = 300, diffSpeed: Int = 100)
+    {
+        camera.rotateBy(diffX, diffY, diffHeight, diffSpeed)
+    }
+
+    /**
+     * Manipulates the camera using different camera types. Also known as "shake"
+     * @param cameraType the "type" of shake: TRUCK, PEDESTAL, DOLLY, PAN, TILT
+     * @param jitter (optional) the amount to rock the camera while looping
+     * @param amplitude (optional) the maximum extent of camera vibration
+     * @param frequency (optional) the rate at which jitter and amplitude are repeated
+     * @param speed (optional) the rate at which the whole camera "shake" loop is repeated
+     *
+     * WARNING: Playing around with camera shake values may potentially trigger seizures for people with photosensitive epilepsy.
+     * Please use care when using the "shake" camera values.
+     */
+    fun shakeCamera(cameraType: CameraShakeType, jitter: Int = 0, amplitude: Int = 0, frequency: Int = 128, speed: Int = 2)
+    {
+        camera.shake(cameraType.ordinal, jitter, amplitude, frequency, speed)
+    }
+
+    /**
+     * Resets the camera to the current player position
+     */
+    fun resetCamera()
+    {
+        camera.reset()
     }
 
     /**

@@ -64,44 +64,6 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             }
         }
 
-        define("movcam", Privilege.ADMIN, "::movcam <lt>Region X<gt> <lt>Region Y<gt> [<lt>Height<gt> <lt>Speed<gt>]", "Moves the camera to the given region-local coordinates.") {player, args ->
-            val regionX = args[1].toIntOrNull() ?: return@define
-            val regionY = args[2].toIntOrNull() ?: return@define
-            var height = 300
-            var speed = 100
-
-            if (args.size > 3)
-                height = args[3].toIntOrNull() ?: return@define
-
-            if (args.size > 4)
-                speed = args[4].toIntOrNull() ?: return@define
-
-            val region = RegionManager.forId(player.location.regionId)
-            val base = region.baseLocation
-
-            val globalLoc = base.transform(regionX, regionY, 0)
-            PlayerCamera(player).panTo(globalLoc.x, globalLoc.y, height, speed)
-        }
-
-        define("rotcam", Privilege.ADMIN, "::rotcam <lt>Region X<gt> <lt>Region Y<gt> [<lt>Height<gt> <lt>Speed<gt>]", "Rotates the camera to face the given region-local coordinates.") {player, args ->
-            val regionX = args[1].toIntOrNull() ?: return@define
-            val regionY = args[2].toIntOrNull() ?: return@define
-            var height = 300
-            var speed = 100
-
-            if (args.size > 3)
-                height = args[3].toIntOrNull() ?: return@define
-
-            if (args.size > 4)
-                speed = args[4].toIntOrNull() ?: return@define
-
-            val region = RegionManager.forId(player.location.regionId)
-            val base = region.baseLocation
-
-            val globalLoc = base.transform(regionX, regionY, 0)
-            PlayerCamera(player).rotateTo(globalLoc.x, globalLoc.y, height, speed)
-        }
-
         define("anmacs", Privilege.ADMIN) { player, _ ->
             AnmaCutscene(player).start()
         }
