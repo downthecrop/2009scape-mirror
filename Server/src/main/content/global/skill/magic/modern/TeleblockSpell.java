@@ -91,7 +91,7 @@ public final class TeleblockSpell extends CombatSpell {
 			entity.asPlayer().sendMessage("You and your opponent must both be in the wilderness for you to use this spell.");
 			return false;
 		}
-		if (((Player) target).isTeleBlocked()) {
+		if (hasTimerActive(target.asPlayer(), "teleblock")) {
 			entity.asPlayer().sendMessage("That player is already affected by this spell.");
 			return false;
 		}
@@ -113,13 +113,13 @@ public final class TeleblockSpell extends CombatSpell {
 	
 	@Override
 	public void fireEffect(Entity entity, Entity victim, BattleState state) {
-		if(!victim.isTeleBlocked() && victim instanceof Player && state.getStyle().getSwingHandler().isAccurateImpact(entity, victim)){
+		if(!hasTimerActive(victim, "teleblock") && victim instanceof Player && state.getStyle().getSwingHandler().isAccurateImpact(entity, victim)){
 			int ticks = 500;
 			if(((Player) victim).getPrayer().get(PrayerType.PROTECT_FROM_MAGIC)){
 				ticks /= 2;
 			}
-                        registerTimer(victim, spawnTimer("teleblock", ticks));
-		} else if(victim.isTeleBlocked()){
+			registerTimer(victim, spawnTimer("teleblock", ticks));
+		} else if(hasTimerActive(victim, "teleblock")){
 			entity.asPlayer().sendMessage("Your target is already blocked from teleporting.");
 		}
 	}
