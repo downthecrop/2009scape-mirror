@@ -7,7 +7,6 @@ import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.combat.MeleeSwingHandler;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.audio.Audio;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
@@ -15,7 +14,7 @@ import core.plugin.Initializable;
 import core.tools.RandomFunction;
 import org.rs09.consts.Sounds;
 
-import static core.api.ContentAPIKt.playAudio;
+import static core.api.ContentAPIKt.playGlobalAudio;
 
 /**
  * Handles Darklight's special attack, Weaken.
@@ -76,6 +75,6 @@ public final class WeakenSpecialHandler extends MeleeSwingHandler implements Plu
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
 		entity.visualize(ANIMATION, GRAPHIC);
-		playAudio(entity.asPlayer(), Sounds.DARKLIGHT_WEAKEN_225, 10, 0, true, entity.asPlayer().getLocation(), 5);
+		playGlobalAudio(entity.getLocation(), Sounds.DARKLIGHT_WEAKEN_225);
 	}
 }

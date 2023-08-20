@@ -14,7 +14,7 @@ import core.tools.RandomFunction;
 import core.game.node.entity.combat.RangeSwingHandler;
 import org.rs09.consts.Sounds;
 
-import static core.api.ContentAPIKt.playAudio;
+import static core.api.ContentAPIKt.playGlobalAudio;
 
 /**
  * Represents the Dorgeshuun crossbow's special attack - snipe.
@@ -71,7 +71,7 @@ public final class SnipeSpecialHandler extends RangeSwingHandler implements Plug
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
-		playAudio(entity.asPlayer(), Sounds.DTTD_BONE_CROSSBOW_SA_1080, 10, 0, true, entity.asPlayer().getLocation(), 5);
+		playGlobalAudio(entity.getLocation(), Sounds.DTTD_BONE_CROSSBOW_SA_1080);
 		entity.animate(ANIMATION);
 		Projectile.create(entity, victim, 698, 36, 25, 35, 72).send();
 	}

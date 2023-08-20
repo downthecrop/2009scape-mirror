@@ -9,15 +9,14 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
-import core.game.node.entity.player.link.audio.Audio
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
 import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
-import core.tools.Log
 import org.rs09.consts.Items
+import org.rs09.consts.Sounds
 import rs09.game.content.activity.castlewars.areas.CastleWarsWaitingArea
 import java.util.*
 
@@ -80,7 +79,7 @@ class CastleWarsListeners : InteractionListener {
 
             // If item is added to inventory, play pickup sound
             if (addItem(player, rewardItem)) {
-                playAudio(player, Audio(2582))
+                playAudio(player, Sounds.PICK2_2582)
 
             // Warn player inventory full using custom dialogue box
             } else {
@@ -127,7 +126,7 @@ class CastleWarsListeners : InteractionListener {
             // Bucket fill animation
             animate(player, 832)
             // Bucket fill sound
-            playAudio(player, Audio(2609, 1))
+            playAudio(player, Sounds.TAP_FILL_2609)
             // Replace empty -> full water bucket
             replaceSlot(player, used.asItem().slot, Item(Items.BUCKET_OF_WATER_1929))
             return@onUseWith true
@@ -142,7 +141,7 @@ class CastleWarsListeners : InteractionListener {
             // Delay sound to line up with "jump" movement
             runTask(player, 1) {
                 // Play jumping sound
-                playAudio(player, Audio(2461))
+                playAudio(player, Sounds.JUMP_2461)
             }
             return@on true
         }

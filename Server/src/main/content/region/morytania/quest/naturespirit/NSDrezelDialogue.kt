@@ -1,16 +1,16 @@
 package content.region.morytania.quest.naturespirit
 
 import core.api.*
-import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.audio.Audio
 import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 import core.game.dialogue.DialogueFile
+import core.game.dialogue.FacialExpression
 import core.tools.END_DIALOGUE
+import org.rs09.consts.Sounds
 
 class NSDrezelDialogue : DialogueFile() {
     var questStage = 0
@@ -104,7 +104,7 @@ private class BlessingPulse(val drezel: NPC, val player: Player) : Pulse(){
 
     override fun pulse(): Boolean {
         when(ticks){
-            0 -> animate(drezel, 1162).also { spawnProjectile(drezel, player, 268); playAudio(player, Audio(2674)) }
+            0 -> animate(drezel, 1162).also { spawnProjectile(drezel, player, 268); playAudio(player, Sounds.PRAYER_RECHARGE_2674) }
             2 -> visualize(player, Animation(645), Graphics(267, 100))
             4 -> unlock(player).also { player.questRepository.getQuest("Nature Spirit").setStage(player, 40); return true }
         }

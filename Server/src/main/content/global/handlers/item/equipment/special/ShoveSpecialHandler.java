@@ -16,8 +16,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import org.rs09.consts.Sounds;
 
-import static core.api.ContentAPIKt.playAudio;
-import static core.api.ContentAPIKt.stun;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the dragon spear special attack.
@@ -111,7 +110,7 @@ public final class ShoveSpecialHandler extends MeleeSwingHandler implements Plug
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
-		playAudio(entity.asPlayer(), Sounds.SHOVE_2544, 10, 0, true, entity.asPlayer().getLocation(), 5);
+		playGlobalAudio(entity.getLocation(), Sounds.SHOVE_2544);
 		entity.visualize(ANIMATION, GRAPHIC);
 	}
 

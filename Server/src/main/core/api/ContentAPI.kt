@@ -60,7 +60,6 @@ import core.game.system.config.ItemConfigParser
 import core.game.system.config.ServerConfigParser
 import core.game.world.GameWorld
 import core.game.world.GameWorld.Pulser
-import core.game.world.map.path.ProjectilePathfinder
 import core.game.world.repository.Repository
 import core.game.consumable.*
 import core.ServerConstants
@@ -556,13 +555,6 @@ fun getWorldTicks(): Int {
 }
 
 /**
- * Gets an Audio object with specified id, volume, etc
- */
-fun getAudio(id: Int, volume: Int = 10, delay: Int = 1): Audio {
-    return Audio(id, volume, delay)
-}
-
-/**
  * Plays a jingle by id
  * @param player the player to play the jingle for
  * @param jingleId the jingle to play
@@ -816,50 +808,32 @@ fun <T> animate(entity: Entity, anim: T, forced: Boolean = false) {
 }
 
 /**
- * Plays the given Audio for the given Entity
- * @param player the player to play the audio for
- * @param audio the Audio to play
- * @param global if other nearby entities should be able to hear it
- */
-fun playAudio(player: Player, audio: Audio, global: Boolean = false) {
-    player.audioManager.send(audio, global)
-}
-
-/**
  * Plays audio for the player
  * @param player the player to play the defined audio for
  * @param audio the audio id to play
- * @param volume the volume for the audio (for some audio ids it is used to define how many times to play/loop the audio)
  * @param delay the delay in client cycles (50 cycles = 1 second)
- * @param global if other nearby players should be able to hear the audio
- * @param location the location where the audio will play from (if a location is defined the sound will fade with distance)
+ * @param loops the number of times to loop audio (for some audio ids it is used to define how many times to loop the audio)
+ * @param location the location where the audio will play from (The sound will fade with distance)
  * @param radius the distance the audio can be heard from the defined location (default = 8 tiles if undefined)
  */
 @JvmOverloads
-fun playAudio(player: Player, audio: Int, volume: Int = 10, delay: Int = 0, global: Boolean = false, location: Location? = null, radius: Int = 8) {
-    if (global) {
-        val nearbyPlayers = RegionManager.getLocalPlayers(location ?: player.location, radius)
-        for ( player in nearbyPlayers ) {
-            PacketRepository.send(AudioPacket::class.java, DefaultContext(player, Audio(audio, volume, delay, radius), location))
-        }
-    } else {
-        PacketRepository.send(AudioPacket::class.java, DefaultContext(player, Audio(audio, volume, delay, radius), location))
-    }
+fun playAudio(player: Player, audio: Int, delay: Int = 0, loops: Int = 1, location: Location? = null, radius: Int = 8) {
+        PacketRepository.send(AudioPacket::class.java, DefaultContext(player, Audio(audio, loops, delay, radius), location))
 }
 
 /**
  * Plays audio for players near a defined location
  * @param location the location where the audio will play from (The sound will fade with distance)
  * @param audio the audio id to play
- * @param volume the volume for the audio (for some audio ids it is used to define how many times to play/loop the audio)
  * @param delay the delay in client cycles (50 cycles = 1 second)
+ * @param loops the number of times to loop audio (for some audio ids it is used to define how many times to loop the audio)
  * @param radius the distance the audio can be heard from the defined location (default = 8 tiles if undefined)
  */
 @JvmOverloads
-fun playGlobalAudio(location: Location, audio: Int, volume: Int = 10, delay: Int = 0, radius: Int = 8) {
+fun playGlobalAudio(location: Location, audio: Int, delay: Int = 0, loops: Int = 1, radius: Int = 8) {
     val nearbyPlayers = RegionManager.getLocalPlayers(location, radius)
     for (player in nearbyPlayers) {
-        PacketRepository.send(AudioPacket::class.java, DefaultContext(player, Audio(audio, volume, delay, radius), location))
+        PacketRepository.send(AudioPacket::class.java, DefaultContext(player, Audio(audio, loops, delay, radius), location))
     }
 }
 
@@ -872,9 +846,9 @@ fun playHurtAudio(player: Player, delay: Int = 0) {
     val maleHurtAudio = intArrayOf(Sounds.HUMAN_HIT4_516, Sounds.HUMAN_HIT5_517, Sounds.HUMAN_HIT_518, Sounds.HUMAN_HIT_6_522)
     val femaleHurtAudio = intArrayOf(Sounds.FEMALE_HIT_506, Sounds.FEMALE_HIT_507, Sounds.FEMALE_HIT2_508, Sounds.FEMALE_HIT_2_510)
     if (player.isMale) {
-        playAudio(player, maleHurtAudio.random(), 10, delay)
+        playAudio(player, maleHurtAudio.random(), delay)
     } else {
-        playAudio(player, femaleHurtAudio.random(), 10, delay)
+        playAudio(player, femaleHurtAudio.random(), delay)
     }
 }
 

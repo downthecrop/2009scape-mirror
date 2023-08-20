@@ -74,7 +74,7 @@ public class FishbowlPlugin extends OptionHandler {
                     if (player.getInventory().remove(item)) {
                         player.lock(2);
                         player.getInventory().add(new Item(FISHBOWL_EMPTY));
-                        playAudio(player, Sounds.LIQUID_2401, 1);
+                        playAudio(player, Sounds.LIQUID_2401);
                         player.getPacketDispatch().sendMessage("You empty the contents of the fishbowl onto the ground.");
                     }
                     break;

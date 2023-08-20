@@ -4,7 +4,6 @@ import core.api.*
 import core.game.component.Component
 import core.game.ge.OfferState
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.audio.Audio
 import core.game.node.item.Item
 import core.net.packet.PacketRepository
 import core.net.packet.context.ConfigContext
@@ -19,6 +18,7 @@ import core.game.ge.PriceIndex
 import core.game.interaction.InterfaceListener
 import core.tools.Log
 import core.tools.SystemLogger
+import org.rs09.consts.Sounds
 import kotlin.math.min
 
 /**
@@ -230,13 +230,13 @@ class StockMarket : InterfaceListener {
     {
         if(offer.offeredValue < 1)
         {
-            playAudio(player, Audio(4039, 1, 1))
+            playAudio(player, Sounds.GE_TRADE_ERROR_4039)
             sendMessage(player, "You can't make an offer for 0 coins.")
             return OfferConfirmResult.ZeroCoins
         }
         if(offer.amount > Int.MAX_VALUE / offer.offeredValue)
         {
-            playAudio(player, Audio(4039, 1, 1))
+            playAudio(player, Sounds.GE_TRADE_ERROR_4039)
             sendMessage(player, "You can't ${if(offer.sell) "sell" else "buy"} this much!")
             return OfferConfirmResult.TooManyCoins
         }
@@ -246,7 +246,7 @@ class StockMarket : InterfaceListener {
             val maxAmt = getInventoryAmount(player, offer.itemID)
             if(offer.amount > maxAmt)
             {
-                playAudio(player, Audio(4039, 1, 1))
+                playAudio(player, Sounds.GE_TRADE_ERROR_4039)
                 sendMessage(player, "You do not have enough of this item in your inventory to cover the")
                 sendMessage(player, "offer.")
                 return OfferConfirmResult.NotEnoughItemsOrCoins
@@ -275,7 +275,7 @@ class StockMarket : InterfaceListener {
             val total = offer.amount * offer.offeredValue
             if(!inInventory(player, 995, total))
             {
-                playAudio(player, Audio(4039, 1, 1))
+                playAudio(player, Sounds.GE_TRADE_ERROR_4039)
                 sendMessage(player, "You do not have enough coins to cover the offer.")
                 return OfferConfirmResult.NotEnoughItemsOrCoins
             }
@@ -284,7 +284,7 @@ class StockMarket : InterfaceListener {
                 player.removeAttribute("ge-temp")
             }
         }
-        playAudio(player, Audio(4043, 1, 1))
+        playAudio(player, Sounds.GE_PLACE_ITEM_4043)
         offer.visualize(player)
         toMainInterface(player)
         return OfferConfirmResult.Success
@@ -360,7 +360,7 @@ class StockMarket : InterfaceListener {
                 val note = item.noteChange
                 if(note == -1 || !hasSpaceFor(player, Item(note, item.amount)))
                 {
-                    playAudio(player, Audio(4039, 1, 1))
+                    playAudio(player, Sounds.GE_TRADE_ERROR_4039)
                     sendMessage(player, "You do not have enough room in your inventory.")
                     return
                 }

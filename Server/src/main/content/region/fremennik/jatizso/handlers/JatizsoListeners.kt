@@ -2,7 +2,6 @@ package content.region.fremennik.jatizso.handlers
 
 import core.api.*
 import core.game.node.entity.npc.NPC
-import core.game.node.entity.player.link.audio.Audio
 import core.game.system.task.Pulse
 import core.game.world.map.Direction
 import core.game.world.map.Location
@@ -11,6 +10,7 @@ import org.rs09.consts.NPCs
 import content.region.fremennik.jatizso.dialogue.LeftieRightieDialogue
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import org.rs09.consts.Sounds
 
 class JatizsoListeners : InteractionListener {
     val GATES_CLOSED = intArrayOf(21403,21405)
@@ -71,7 +71,7 @@ class JatizsoListeners : InteractionListener {
                     replaceScenery(other.asScenery(), other.id, -1, Direction.SOUTH)
                 }
             }
-            playAudio(player, getAudio(81))
+            playAudio(player, Sounds.NICEDOOR_OPEN_81)
             return@on true
         }
 
@@ -121,7 +121,7 @@ class JatizsoListeners : InteractionListener {
         }
 
         on(BELL, IntType.SCENERY, "ring-bell"){ player, _ ->
-            playAudio(player, Audio(15))
+            playAudio(player, Sounds.STEEL_15)
             sendMessage(player, "You ring the warning bell, but everyone ignores it!")
             return@on true
         }

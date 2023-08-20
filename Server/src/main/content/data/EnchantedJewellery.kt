@@ -6,7 +6,6 @@ import core.api.*
 import core.game.event.TeleportEvent
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
-import core.game.node.entity.player.link.audio.Audio
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.map.Location
@@ -14,6 +13,7 @@ import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 import core.game.world.GameWorld.Pulser
+import org.rs09.consts.Sounds
 import java.util.*
 
 /**
@@ -223,7 +223,7 @@ enum class EnchantedJewellery(
                         0 -> {
                             lock(player,4)
                             visualize(player, ANIMATION, GRAPHICS)
-                            playAudio(player, AUDIO, true)
+                            playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
                             player.impactHandler.disabledTicks = 4
                         }
                         3 -> {
@@ -325,7 +325,6 @@ enum class EnchantedJewellery(
 
     companion object {
         private val ANIMATION = Animation(714)
-        private val AUDIO = Audio(200)
         private val GRAPHICS = Graphics(308, 100, 50)
         val idMap = HashMap<Int, EnchantedJewellery>()
 

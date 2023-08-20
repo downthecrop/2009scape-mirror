@@ -5,12 +5,11 @@ import core.game.component.Component
 import core.game.component.ComponentDefinition
 import core.game.component.ComponentPlugin
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.Log
-import core.tools.SystemLogger
+import org.rs09.consts.Sounds
 
 /**
  * Represents the experience interface.
@@ -94,7 +93,7 @@ class ExperienceInterface() : ComponentPlugin() {
         /**
          * Represents the sound to send.
          */
-        private val SOUND = Audio(1270, 12, 1)
+        private val SOUND = Sounds.TBCU_FINDGEM_1270
         @JvmField
         public val COMPONENT_ID = 134
     }

@@ -256,7 +256,7 @@ class ModernListeners : SpellListener("modern"){
             player.animate(Animation(if (high) 713 else 712))
             player.graphics(Graphics(if (high) 113 else 112))
         }
-        playAudio(player, Audio(if (high) 97 else 98))
+        playAudio(player, if (high) Sounds.HIGH_ALCHEMY_97 else Sounds.LOW_ALCHEMY_98)
 
         if (coins.amount > 0)
             player.inventory.add(coins)

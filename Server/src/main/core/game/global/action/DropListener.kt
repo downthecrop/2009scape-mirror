@@ -8,12 +8,12 @@ import core.game.node.Node
 import core.game.node.entity.combat.graves.GraveController
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.login.PlayerParser
-import core.game.node.entity.player.link.audio.Audio
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.system.config.ItemConfigParser
 import content.global.skill.summoning.pet.Pets
 import org.rs09.consts.Items
+import org.rs09.consts.Sounds
 
 /**
  * Represents the item drop/destroy/dissolve handler.
@@ -25,9 +25,9 @@ class DropListener : InteractionListener {
     }
 
     companion object {
-        private val DROP_COINS_SOUND = Audio(10, 1, 0)
-        private val DROP_ITEM_SOUND = Audio(2739, 1, 0)
-        private val DESTROY_ITEM_SOUND = Audio(4500, 1, 0)
+        private val DROP_COINS_SOUND = Sounds.EYEGLO_COIN_10
+        private val DROP_ITEM_SOUND = Sounds.PUT_DOWN_2739
+        private val DESTROY_ITEM_SOUND = Sounds.DESTROY_OBJECT_2381
         @JvmStatic fun drop(player: Player, item: Item) : Boolean {
             return handleDropAction(player, item)
         }

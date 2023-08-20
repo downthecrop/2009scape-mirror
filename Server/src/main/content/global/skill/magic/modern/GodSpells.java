@@ -193,19 +193,19 @@ public final class GodSpells extends CombatSpell {
 			if (state.getEstimatedHit() == -1) {
 				target.graphics(SPLASH_GRAPHIC);
 				if (projectile == SARA_PROJECTILE) {
-					playGlobalAudio(target.getLocation(), Sounds.SARADOMIN_STRIKE_FAIL_1656, 1, 20);
+					playGlobalAudio(target.getLocation(), Sounds.SARADOMIN_STRIKE_FAIL_1656, 20);
 				}
 				if (projectile == GUTHIX_PROJECTILE) {
-					playGlobalAudio(target.getLocation(), Sounds.CLAWS_OF_GUTHIX_FAIL_1652, 1, 20);
+					playGlobalAudio(target.getLocation(), Sounds.CLAWS_OF_GUTHIX_FAIL_1652, 20);
 				}
 				if (projectile == ZAM_PROJECTILE) {
-					playGlobalAudio(target.getLocation(), Sounds.FLAMES_OF_ZAMORAK_FAIL_1654, 1, 20);
+					playGlobalAudio(target.getLocation(), Sounds.FLAMES_OF_ZAMORAK_FAIL_1654, 20);
 				}
 				return;
 			}
 		}
 		target.graphics(endGraphic);
-		playGlobalAudio(target.getLocation(), impactAudio, 1);
+		playGlobalAudio(target.getLocation(), impactAudio);
 	}
 
 	@Override

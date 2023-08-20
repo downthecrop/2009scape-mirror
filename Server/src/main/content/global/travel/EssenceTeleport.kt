@@ -58,7 +58,7 @@ object EssenceTeleport {
         npc.faceTemporary(player, 1)
         npc.graphics(GLOWING_HANDS_GFX)
         lock(player,4)
-        playGlobalAudio(player.location, Sounds.CURSE_ALL_125, 1)
+        playGlobalAudio(player.location, Sounds.CURSE_ALL_125, 0, 1)
         Projectile.create(npc, player, CURSE_PROJECTILE).send()
         npc.sendChat("Senventior Disthine Molenko!")
         GameWorld.Pulser.submit(object : Pulse(1) {

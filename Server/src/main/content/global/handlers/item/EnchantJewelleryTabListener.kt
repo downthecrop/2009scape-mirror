@@ -4,8 +4,8 @@ import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
-import core.game.node.entity.player.link.audio.Audio
 import org.rs09.consts.Items
+import org.rs09.consts.Sounds
 
 class EnchantJewelleryTabListener : InteractionListener {
 
@@ -71,7 +71,7 @@ class EnchantJewelleryTabListener : InteractionListener {
                         val product = items[item.id] ?: continue
                         if (removeItem(player, node.id) && (removeItem(player, item.id))) {
                             addItem(player, product)
-                            playAudio(player, Audio(979), false)
+                            playAudio(player, Sounds.POH_TABLET_BREAK_979)
                             animate(player, 4069, true)
                             break
                         }

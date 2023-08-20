@@ -1,7 +1,6 @@
 package content.region.kandarin.seers.quest.elementalworkshop
 
 import core.api.*
-import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
@@ -65,14 +64,14 @@ class EWListeners : InteractionListener {
     private val smithElementalShield = Animation(Animations.HUMAN_COOKING_RANGE_896)
 
     /* Sound effects */
-    private val fillStoneBowlSFX = Audio(Sounds.FILL_STONE_BOWL_1537, 1)
-    private val fillFurnaceWithLavaSFX = Audio(Sounds.FILL_FURNACE_WITH_LAVA_1538)
-    private val pullLeverResetGatesSFX = Audio(Sounds.PULL_LEVER_RESET_GATE_1540)
-    private val turnWaterControlsSFX = Audio(Sounds.TURN_METAL_WATER_VALVE)
-    private val pullLeverEnabledSFX = Audio(Sounds.PULL_LEVER_ENABLED_1547)
-    private val pullLeverDisabledSFX = Audio(Sounds.PULL_LEVER_DISABLED_1548)
-    private val bellowLeverSFX = Audio(Sounds.PULL_LEVER_GENERAL_2400)
-    private val smithElementalShieldSFX = Audio(2721)
+    private val fillStoneBowlSFX = Sounds.FILL_STONE_BOWL_1537
+    private val fillFurnaceWithLavaSFX = Sounds.FILL_FURNACE_WITH_LAVA_1538
+    private val pullLeverResetGatesSFX = Sounds.PULL_LEVER_RESET_GATE_1540
+    private val turnWaterControlsSFX = Sounds.TURN_METAL_WATER_VALVE
+    private val pullLeverEnabledSFX = Sounds.PULL_LEVER_ENABLED_1547
+    private val pullLeverDisabledSFX = Sounds.PULL_LEVER_DISABLED_1548
+    private val bellowLeverSFX = Sounds.PULL_LEVER_GENERAL_2400
+    private val smithElementalShieldSFX = Sounds.ANVIL_4_2721
 
     /* In-game locations */
     private val leftWaterControlsLocation = Location.create(2713, 9907, 0)

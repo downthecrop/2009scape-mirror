@@ -108,7 +108,7 @@ public final class DesertZone extends MapZone implements Plugin<Object> {
                 p.getInventory().add(new Item(i.getId() + 2));
                 p.animate(ANIMATION);
                 p.getPacketDispatch().sendMessage("You take a drink of water.");
-                playAudio(p, Sounds.LIQUID_2401, 1);
+                playAudio(p, Sounds.LIQUID_2401);
                 return true;
             }
         }

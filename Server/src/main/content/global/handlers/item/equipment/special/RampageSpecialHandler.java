@@ -61,7 +61,7 @@ public final class RampageSpecialHandler extends MeleeSwingHandler implements Pl
 			return -1;
 		}
 		p.sendChat("Raarrrrrgggggghhhhhhh!");
-		playAudio(entity.asPlayer(), Sounds.RAMPAGE_2538, 1);
+		playAudio(entity.asPlayer(), Sounds.RAMPAGE_2538);
 		p.visualize(ANIMATION, GRAPHIC);
 		@SuppressWarnings("unused")
 		int boost = 0;

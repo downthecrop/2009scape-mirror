@@ -7,7 +7,6 @@ import core.game.interaction.InteractionListener
 import core.game.node.entity.combat.DeathTask
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.npc.NPCBehavior
-import core.game.node.entity.player.link.audio.Audio
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.update.flag.context.Animation
@@ -75,7 +74,7 @@ class SheepBehavior : NPCBehavior(*sheepIds), InteractionListener {
                     setAttribute(player, ATTR_IS_PENGUIN_SHEEP_SHEARED, true)
                 }
                 animate(player, Animation(893))
-                playAudio(player, Audio(Sounds.PENGUINSHEEP_ESCAPE_686), false)
+                playAudio(player, Sounds.PENGUINSHEEP_ESCAPE_686)
                 sendMessage(player, "The... whatever it is... manages to get away from you!")
                 animate(sheep, Animation(3570))
                 sheep.moveStep()
@@ -100,7 +99,7 @@ class SheepBehavior : NPCBehavior(*sheepIds), InteractionListener {
             if (random != 4) {
                 sheep.locks.lockMovement(2)
                 sheep.transform(NPCs.SHEEP_5153)
-                playAudio(player, Audio(Sounds.SHEAR_SHEEP_761), false)
+                playAudio(player, Sounds.SHEAR_SHEEP_761)
                 sendMessage(player, "You get some wool.")
                 addItem(player, Items.WOOL_1737) // 5160
                 GameWorld.Pulser.submit(object : Pulse(80, sheep) {

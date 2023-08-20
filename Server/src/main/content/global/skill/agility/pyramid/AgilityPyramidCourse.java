@@ -196,7 +196,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 			player.getPacketDispatch().sendMessage("You must be level 30 agility or higher to climb down the rocks.");
 			return;
 		}
-		playAudio(player, Sounds.CLIMBING_LOOP_2454, 6);
+		playAudio(player, Sounds.CLIMBING_LOOP_2454, 0, 6);
 		if (!scale) {
 			ForceMovement.run(player, player.getLocation(), end, Animation.create(740), Animation.create(740), Direction.WEST, 13).setEndAnimation(Animation.RESET);
 		} else {
@@ -223,7 +223,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 		}
 		player.lock(4);
 		player.getPacketDispatch().sendMessage("You climb the low wall...");
-		playAudio(player, Sounds.CLIMB_WALL_2453,10, 40);
+		playAudio(player, Sounds.CLIMB_WALL_2453, 40);
 		if (fail) {
 			Location end = player.getLocation().transform(d, 1);
 			player.lock(3);
@@ -247,10 +247,10 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 		final boolean fail = player.getSkills().getLevel(Skills.AGILITY) < 75 && hasFailed(player);
 		final Location end = player.getLocation().transform(dir.getStepX() * (fail ? 3 : 5), dir.getStepY() * (fail ? 3 : 5), 0);
 		player.getPacketDispatch().sendMessage("You put your foot on the ledge and try to edge across...");
-		playAudio(player, Sounds.BALANCING_LEDGE_2451, 5);
+		playAudio(player, Sounds.BALANCING_LEDGE_2451, 0, 5);
 		if (fail) {
 			player.lock(4);
-			playAudio(player, Sounds.FALL_LAND_2455, 10, 125);
+			playAudio(player, Sounds.FALL_LAND_2455, 125);
 			AgilityHandler.walk(player, -1, player.getLocation(), end, Animation.create(157 - diff), 0.0, "You slip and fall to the level below.");
 			GameWorld.getPulser().submit(new Pulse(3, player) {
 				@Override
@@ -297,13 +297,13 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 		final boolean fail = player.getSkills().getLevel(Skills.AGILITY) >= 75 ? false : hasFailed(player) ;
 		final Location end = object.getLocation().transform(object.getId() != 10868 ? dir : dir.getOpposite(), fail ? 2 : 5);
 		AgilityHandler.walk(player, fail ? -1 : 1, player.getLocation(), end, Animation.create(155), fail ? 0.0 : 56.4, fail ? null : "You walk carefully across the slippery plank...");
-		playAudio(player, Sounds.PLANKWALK_2480, 3);
+		playAudio(player, Sounds.PLANKWALK_2480, 0, 3);
 		if (fail) {
 			GameWorld.getPulser().submit(new Pulse(2, player) {
 				@Override
 				public boolean pulse() {
 					final Location dest = transformLevel(end.transform(!custom ? 2 : 0, custom ? -2 : 0, 0));
-					playAudio(player, Sounds.FALL_LAND_2455, 10, 50);
+					playAudio(player, Sounds.FALL_LAND_2455, 50);
 					AgilityHandler.failWalk(player, 2, end, dest, dest, Animation.create(764), 10, 10, null);
 					return true;
 				}
@@ -331,13 +331,13 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 			}
 			dest = transformLevel(dest);
 			player.lock(8);
-			playAudio(player, Sounds.JUMP_NO_LAND_2467, 10, 30);
-			playAudio(player, Sounds.FALL_LAND_2455, 10, 200);
+			playAudio(player, Sounds.JUMP_NO_LAND_2467, 30);
+			playAudio(player, Sounds.FALL_LAND_2455, 200);
 			AgilityHandler.forceWalk(player, -1, player.getLocation(), end, Animation.create(3068), 10, 0.0, "... and miss your footing.");
 			AgilityHandler.fail(player, 8, dest, Animation.create(3068), 8, null);
 			return;
 		}
-		playAudio(player, Sounds.JUMP2_2462, 10 , 30);
+		playAudio(player, Sounds.JUMP2_2462, 30);
 		player.lock(4);
 		AgilityHandler.forceWalk(player, 2, player.getLocation(), player.getLocation().transform(dir, 3), Animation.create(3067), 20, 22, null);
 	}
@@ -355,7 +355,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 		int mod = player.getLocation().equals(new Location(3359, 2849, 2)) ? 0 : player.getLocation().equals(new Location(3357, 2841, 2)) ? 1 : player.getLocation().equals(new Location(3367, 2832, 1)) ? 1 : player.getLocation().equals(new Location(3372, 2832, 1)) ? 0 : object.getLocation().equals(new Location(3370, 2831, 1)) ? 0 : rot == 1 && dir == Direction.EAST ? 0 : rot == 3 && (dir == Direction.WEST || dir == Direction.EAST) ? 1 : rot == 0 && dir == Direction.SOUTH ? 1 : dir == Direction.WEST && rot != 3 || dir == Direction.EAST ? 1 : 0;
 		final Animation animation = Animation.create(387 - mod);
 		playAudio(player, Sounds.HANDHOLDS_GRAB_TO_SECOND_2450);
-		playAudio(player, Sounds.FALL_LAND_2455, 10, 170);
+		playAudio(player, Sounds.FALL_LAND_2455, 170);
 		if (fail) {
 			Location dest = object.getLocation().transform(dir, 1);
 			dest = rot == 1 && dir == Direction.EAST ? dest.transform(1, 2, 0) : rot == 1 && dir == Direction.WEST && player.getLocation().getY() < 2841 ? dest.transform(0, -2, 0) : rot == 1 && dir == Direction.WEST ? dest.transform(0, 2, 0): dest.transform(dir == Direction.NORTH || dir == Direction.SOUTH ? -1 : dir == Direction.WEST ? 1 : 0, dir == Direction.SOUTH ? 1 : dir == Direction.WEST || dir == Direction.EAST ? -1 : 0, 0);

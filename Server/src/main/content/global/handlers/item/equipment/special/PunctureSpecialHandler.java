@@ -13,7 +13,7 @@ import core.plugin.Plugin;
 import core.tools.RandomFunction;
 import org.rs09.consts.Sounds;
 
-import static core.api.ContentAPIKt.playAudio;
+import static core.api.ContentAPIKt.playGlobalAudio;
 
 /**
  * Handles the puncture special attack combat swing.
@@ -82,7 +82,7 @@ public final class PunctureSpecialHandler extends MeleeSwingHandler implements P
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
-		playAudio(entity.asPlayer(), Sounds.PUNCTURE_2537, 10, 0, true, entity.asPlayer().getLocation(), 5);
+		playGlobalAudio(entity.getLocation(), Sounds.PUNCTURE_2537);
 		entity.visualize(ANIMATION, GRAPHIC);
 	}
 }

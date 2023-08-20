@@ -188,7 +188,7 @@ class PitfallListeners : InteractionListener {
             
             player.setAttribute("pitfall:timestamp:${pit.location.x}:${pit.location.y}", System.currentTimeMillis())
             setPitState(player, pit.location, 1)
-            playAudio(player, getAudio(Sounds.HUNTING_PLACEBRANCHES_2639))
+            playAudio(player, Sounds.HUNTING_PLACEBRANCHES_2639)
             val collapsePulse = object : Pulse(201, player) {
                 override fun pulse(): Boolean {
                     val oldTime = player.getAttribute("pitfall:timestamp:${pit.location.x}:${pit.location.y}", System.currentTimeMillis())
@@ -210,7 +210,7 @@ class PitfallListeners : InteractionListener {
             if(dir != null) {
                 val dst = src.transform(dir, 3)
                 ForceMovement.run(player, src, dst, ForceMovement.WALK_ANIMATION, Animation(1603), dir, 16)
-                playAudio(player, getAudio(Sounds.HUNTING_JUMP_2635))
+                playAudio(player, Sounds.HUNTING_JUMP_2635)
                 val pitfall_npc: Entity? = player.getAttribute("pitfall_npc", null)
                 if(pitfall_npc != null && pitfall_npc.getLocation().getDistance(src) < 3.0) {
                     val last_pit_loc: Location? = pitfall_npc.getAttribute("last_pit_loc", null)
@@ -248,7 +248,7 @@ class PitfallListeners : InteractionListener {
         }
         on(SPIKED_PIT, IntType.SCENERY, "dismantle") { player, node ->
             val pit = node as Scenery
-            playAudio(player, getAudio(Sounds.HUNTING_TAKEBRANCHES_2649))
+            playAudio(player, Sounds.HUNTING_TAKEBRANCHES_2649)
             player.removeAttribute("pitfall:timestamp:${pit.location.x}:${pit.location.y}")
             player.incrementAttribute("pitfall:count", -1)
             setPitState(player, pit.location, 0)
@@ -281,7 +281,7 @@ class PitfallListeners : InteractionListener {
                 return@on true
             }
             entity.attack(player)
-            playAudio(player, getAudio(Sounds.HUNTING_TEASE_FELINE_2651))
+            playAudio(player, Sounds.HUNTING_TEASE_FELINE_2651)
             player.setAttribute("pitfall_npc", entity)
             return@on true
         }
@@ -295,7 +295,7 @@ class PitfallListeners : InteractionListener {
         setPitState(player, pit.location, 0)
         player.getSkills().addExperience(Skills.HUNTER, xp, true)
         player.inventory.add(Item(Items.BIG_BONES_532))
-        playAudio(player, getAudio(Sounds.HUNTING_TAKEBRANCHES_2649))
+        playAudio(player, Sounds.HUNTING_TAKEBRANCHES_2649)
         // TODO: what's the actual probability of tatty vs perfect fur?
         val chance = RandomFunction.getSkillSuccessChance(50.0, 100.0, player.skills.getLevel(Skills.HUNTER))
         if(RandomFunction.random(0.0, 100.0) < chance) {

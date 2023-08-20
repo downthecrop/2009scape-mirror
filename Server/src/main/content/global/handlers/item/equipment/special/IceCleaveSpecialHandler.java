@@ -75,7 +75,7 @@ public final class IceCleaveSpecialHandler extends MeleeSwingHandler implements 
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
-		playAudio(entity.asPlayer(), Sounds.GODWARS_GODSWORD_SLASH_3846, 10, 0, true, entity.asPlayer().getLocation(), 5);
+		playGlobalAudio(entity.getLocation(), Sounds.GODWARS_GODSWORD_SLASH_3846);
 		entity.visualize(ANIMATION, GRAPHIC);
 	}
 }

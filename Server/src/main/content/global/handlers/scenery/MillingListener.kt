@@ -4,11 +4,11 @@ import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.audio.Audio
 import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import org.rs09.consts.Scenery
+import org.rs09.consts.Sounds
 
 private const val GRAIN = Items.GRAIN_1947
 private const val SWEETCORN = Items.SWEETCORN_5986
@@ -20,7 +20,7 @@ private val HOPPER_CONTROLS = intArrayOf(Scenery.HOPPER_CONTROLS_2718, Scenery.H
 private val FLOUR_BINS = intArrayOf(Scenery.FLOUR_BIN_1782, Scenery.FLOUR_BIN_5792, Scenery.FLOUR_BIN_22420, Scenery.FLOUR_BIN_22421, Scenery.FLOUR_BIN_24070, Scenery.FLOUR_BIN_36878)
 private const val VARP = 695
 private val ANIMATION = Animation(3571)
-private val SOUND = Audio(3189)
+private val SOUND = Sounds.GIANT_ROC_APPROACHES_3189
 
 /**
  * Handles interactions with windmills

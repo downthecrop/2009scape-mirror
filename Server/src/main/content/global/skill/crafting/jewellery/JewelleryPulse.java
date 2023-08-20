@@ -58,7 +58,7 @@ public final class JewelleryPulse extends SkillPulse<Item> {
 	public void animate() {
 		if (ticks % 5 == 0) {
 			player.animate(ANIMATION);
-			playAudio(player, Sounds.FURNACE_2725, 1);
+			playAudio(player, Sounds.FURNACE_2725);
 		}
 	}
 

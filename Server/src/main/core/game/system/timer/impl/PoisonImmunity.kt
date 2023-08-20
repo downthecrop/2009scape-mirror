@@ -5,10 +5,8 @@ import core.api.*
 import core.tools.*
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
-import core.game.node.entity.combat.ImpactHandler
-import core.game.world.repository.Repository
-import core.game.node.entity.player.link.audio.Audio
 import org.json.simple.*
+import org.rs09.consts.Sounds
 
 /**
  * A timer that replicates the behavior of poison immunity mechanics. Runs every tick.
@@ -35,11 +33,11 @@ class PoisonImmunity : PersistTimer (1, "poison:immunity", isSoft = true, flags 
 
         if (entity is Player && ticksRemaining == secondsToTicks(30)) {
             sendMessage(entity, colorize("%RYou have 30 seconds remaining on your poison immunity."))
-            playAudio(entity, Audio(3120))
+            playAudio(entity, Sounds.CLOCK_TICK_1_3120, 0, 3)
         }
         else if (entity is Player && ticksRemaining == 0) {
             sendMessage(entity, colorize("%RYour poison immunity has expired."))
-            playAudio(entity, Audio(2607))
+            playAudio(entity, Sounds.DRAGON_POTION_FINISHED_2607)
         }
 
         return ticksRemaining > 0

@@ -102,14 +102,14 @@ public final class IceSpells extends CombatSpell {
 			projectile.transform(entity, (Entity) target, false, 58, 10).send();
 		}
 		entity.animate(animation);
-		playGlobalAudio(entity.getLocation(), audio.getId(), 1, 20);
+		playGlobalAudio(entity.getLocation(), audio.getId(), 20);
 
 	}
 
 	@Override
 	public void visualizeImpact(Entity entity, Entity target, BattleState state) {
 		if (state.isFrozen()) {
-			playGlobalAudio(target.getLocation(), impactAudio, 1, 20);
+			playGlobalAudio(target.getLocation(), impactAudio, 20);
 			target.graphics(BARRAGE_ORB);
 			return;
 		}

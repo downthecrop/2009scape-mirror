@@ -77,7 +77,7 @@ public final class HumidifySpell extends MagicSpell {
 		p.lock(ANIMATION.getDuration() + 1);
 		p.animate(ANIMATION);
 		p.graphics(GRAPHIC);
-		playGlobalAudio(p.getLocation(), Sounds.LUNAR_HUMIDIFY_3614, 1, 20);
+		playGlobalAudio(p.getLocation(), Sounds.LUNAR_HUMIDIFY_3614, 20);
 		for (int k = 0; k < 28; k++) {
 			for (int i = 0; i < 21; i++) {
 				if (p.getInventory().contains(EMPTY[i], 1)) {

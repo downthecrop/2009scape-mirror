@@ -14,7 +14,7 @@ import core.plugin.Initializable;
 import core.tools.RandomFunction;
 import org.rs09.consts.Sounds;
 
-import static core.api.ContentAPIKt.playAudio;
+import static core.api.ContentAPIKt.playGlobalAudio;
 
 /**
  * Handles the Bone dagger special attack "Backstab".
@@ -73,7 +73,7 @@ public final class BackstabSpecialHandler extends MeleeSwingHandler implements P
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
-		playAudio(entity.asPlayer(), Sounds.DTTD_BONE_DAGGER_STAB_1084, 10, 0, true, entity.asPlayer().getLocation(), 5);
+		playGlobalAudio(entity.getLocation(), Sounds.DTTD_BONE_DAGGER_STAB_1084);
 		entity.visualize(ANIMATION, GRAPHIC);
 	}
 }

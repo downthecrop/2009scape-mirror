@@ -63,7 +63,7 @@ public final class MovingBlockNPC extends AbstractNPC {
 			getWalkingQueue().addPath(loc.getX(), loc.getY());
 			for (Player p : RegionManager.getLocalPlayers(getTileLocations()[0], 4)) {
 				checkBlock(p);
-				playAudio(p, Sounds.PYRAMID_BLOCK_1395, 10, 30);
+				playAudio(p, Sounds.PYRAMID_BLOCK_1395, 30);
 			}
 			moving = true;
 			GameWorld.getPulser().submit(new Pulse(1, this) {
@@ -137,7 +137,7 @@ public final class MovingBlockNPC extends AbstractNPC {
 							}
 						}
 						player.lock(4);
-						playAudio(player, Sounds.LAND_FLAT_2469, 10 , 50);
+						playAudio(player, Sounds.LAND_FLAT_2469, 50);
 						player.setAttribute("block-move", GameWorld.getTicks() + 4);
 						if(dest != null) {
 							AgilityHandler.failWalk(player, close ? 1 : 3, player.getLocation(), dest, AgilityPyramidCourse.transformLevel(dest), Animation.create(3066), 10, 8, null, getId() == 3124 ? Direction.WEST : Direction.SOUTH);

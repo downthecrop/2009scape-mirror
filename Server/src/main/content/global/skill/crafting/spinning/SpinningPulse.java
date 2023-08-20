@@ -70,7 +70,7 @@ public final class SpinningPulse extends SkillPulse<Item> {
     public void animate() {
         if (ticks % 5 == 0) {
             player.animate(ANIMATION);
-            playAudio(player, Sounds.SPINNING_2590, 1);
+            playAudio(player, Sounds.SPINNING_2590);
         }
     }
 

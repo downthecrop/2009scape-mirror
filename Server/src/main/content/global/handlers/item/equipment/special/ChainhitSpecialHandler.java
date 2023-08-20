@@ -25,7 +25,7 @@ import org.rs09.consts.Sounds;
 import java.util.Iterator;
 import java.util.List;
 
-import static core.api.ContentAPIKt.playAudio;
+import static core.api.ContentAPIKt.playGlobalAudio;
 
 /**
  * Handles the Rune throwing axe special attack "Chain-hit".
@@ -107,7 +107,7 @@ public final class ChainhitSpecialHandler extends RangeSwingHandler implements P
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
-		playAudio(entity.asPlayer(), Sounds.CHAINSHOT_2528, 10, 0, true, entity.asPlayer().getLocation(), 5);
+		playGlobalAudio(entity.getLocation(), Sounds.CHAINSHOT_2528);
 		entity.visualize(ANIMATION, GRAPHIC);
 		int speed = (int) (32 + (entity.getLocation().getDistance(victim.getLocation()) * 5));
 		Projectile.create(entity, victim, 258, 40, 36, 32, speed, 5, 11).send();

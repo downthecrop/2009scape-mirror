@@ -6,7 +6,6 @@ import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
 import core.game.node.entity.player.link.IronmanMode
-import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
@@ -24,6 +23,7 @@ import core.game.world.map.zone.impl.WildernessZone
 import core.game.world.repository.Repository
 import core.tools.secondsToTicks
 import core.tools.colorize
+import org.rs09.consts.Sounds
 import java.util.Map
 import kotlin.math.min
 
@@ -122,7 +122,7 @@ class GraveController : PersistWorld, TickListener, InteractionListener, Command
         player.skills.prayerPoints -= blessAmount
         setAttribute(g, "blessed", true)
 
-        playAudio(player, Audio(2674))
+        playAudio(player, Sounds.PRAYER_RECHARGE_2674)
         animate(player, 645)
 
         val gOwner = Repository.uid_map[g.ownerUid]
@@ -155,7 +155,7 @@ class GraveController : PersistWorld, TickListener, InteractionListener, Command
         player.skills.prayerPoints -= restoreAmount
         setAttribute(g, "repaired", true)
 
-        playAudio(player, Audio(2674))
+        playAudio(player, Sounds.PRAYER_RECHARGE_2674)
         animate(player, 645)
         return true
     }

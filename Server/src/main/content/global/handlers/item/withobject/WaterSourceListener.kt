@@ -46,10 +46,10 @@ class WaterSourceListener : InteractionListener {
                         sendMessage(player, formatMsgText(used.name, vessel.fillMsg))
                         addItemOrDrop(player, vessel.output)
                             if(with.name.contains("well", ignoreCase = true)) {
-                                playAudio(player, getAudio(Sounds.WELL_FILL_2615, 1))
+                                playAudio(player, Sounds.WELL_FILL_2615)
                             }
                             else {
-                                playAudio(player, getAudio(Sounds.TAP_FILL_2609, 1))
+                                playAudio(player, Sounds.TAP_FILL_2609)
                             }
 
                     }

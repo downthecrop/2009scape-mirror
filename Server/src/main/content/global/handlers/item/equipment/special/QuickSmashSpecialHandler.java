@@ -6,7 +6,6 @@ import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.combat.MeleeSwingHandler;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.audio.Audio;
 import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
@@ -15,7 +14,7 @@ import core.plugin.Plugin;
 import core.tools.RandomFunction;
 import org.rs09.consts.Sounds;
 
-import static core.api.ContentAPIKt.playAudio;
+import static core.api.ContentAPIKt.playGlobalAudio;
 
 /**
  * Handles the granite maul special attack.
@@ -81,7 +80,7 @@ public final class QuickSmashSpecialHandler extends MeleeSwingHandler implements
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
-		playAudio(entity.asPlayer(), Sounds.QUICKSMASH_2715, 10, 0, true, entity.asPlayer().getLocation(), 5);
+		playGlobalAudio(entity.getLocation(), Sounds.QUICKSMASH_2715);
 		entity.visualize(ANIMATION, GRAPHIC);
 		victim.animate(victim.getProperties().getDefenceAnimation());
 	}

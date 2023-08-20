@@ -136,12 +136,12 @@ public abstract class CombatSpell extends MagicSpell {
 	 */
 	public void visualizeImpact(Entity entity, Entity target, BattleState state) {
 		if (state.getEstimatedHit() == -1) {
-			playGlobalAudio(target.getLocation(), Sounds.SPELLFAIL_227, 1, 20);
+			playGlobalAudio(target.getLocation(), Sounds.SPELLFAIL_227, 20);
 			target.graphics(SPLASH_GRAPHIC);
 			return;
 		}
 		target.graphics(endGraphic);
-		playGlobalAudio(target.getLocation(), impactAudio, 1, 20);
+		playGlobalAudio(target.getLocation(), impactAudio, 20);
 	}
 
 	@Override
@@ -173,7 +173,7 @@ public abstract class CombatSpell extends MagicSpell {
 				entity.animate(animation);
 			}
 		}
-		playGlobalAudio(entity.getLocation(), audio.getId(), 1, 20);
+		playGlobalAudio(entity.getLocation(), audio.getId(), 20);
 	}
 
 	@Override
