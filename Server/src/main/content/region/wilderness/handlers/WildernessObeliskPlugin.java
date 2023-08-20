@@ -19,8 +19,9 @@ import core.tools.RandomFunction;
 
 /**
  * Represents the wilderness obelisk plugin.
- * @author 'Vexia, small changes by Player Name
- * @version 1.1
+ * @author 'Vexia
+ * @author Player Name
+ * @version 1.2
  */
 @Initializable
 public final class WildernessObeliskPlugin extends OptionHandler {
@@ -103,10 +104,14 @@ public final class WildernessObeliskPlugin extends OptionHandler {
 				Obelisk newObelisk = newObelisks[index];
 				// Teleport players standing within a 3-by-3 bounding box
 				for (Player player : RegionManager.getLocalPlayersBoundingBox(center, 1, 1)) {
-					player.getPacketDispatch().sendMessage("Ancient magic teleports you somewhere in the wilderness.");
-					int xOffset = player.getLocation().getX() - center.getX();
-					int yOffset = player.getLocation().getY() - center.getY();
-					player.getTeleporter().send(Location.create(newObelisk.getLocation().getX() + xOffset, newObelisk.getLocation().getY() + yOffset, 0), TeleportType.OBELISK, 2);
+					if (player.timers.getTimer("teleblock") == null) {
+						player.getPacketDispatch().sendMessage("Ancient magic teleports you somewhere in the wilderness.");
+						int xOffset = player.getLocation().getX() - center.getX();
+						int yOffset = player.getLocation().getY() - center.getY();
+						player.getTeleporter().send(Location.create(newObelisk.getLocation().getX() + xOffset, newObelisk.getLocation().getY() + yOffset, 0), TeleportType.OBELISK, 2);
+					} else {
+						player.getPacketDispatch().sendMessage("A magical force has stopped you from teleporting.");
+					}
 				}
 				super.setDelay(1);
 				return false;

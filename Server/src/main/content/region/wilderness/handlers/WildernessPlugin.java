@@ -71,7 +71,8 @@ public final class WildernessPlugin extends OptionHandler {
 	 * Represents the plugin used to handle kbd nodes.
 	 * 
 	 * @author 'Vexia
-	 * @version 1.0
+	 * @author Player Name
+	 * @version 1.1
 	 */
 	public static final class KBDPlugin extends OptionHandler {
 
@@ -123,9 +124,13 @@ public final class WildernessPlugin extends OptionHandler {
 					if (player.getLocation().withinDistance(LOCATIONS[5])) {
 						animate(player, 2140, false);
 						playAudio(player, Sounds.LEVER_2400);
-						player.getPacketDispatch().sendMessage("You pull the lever...");
-						player.getTeleporter().send(LOCATIONS[4], TeleportType.NORMAL);
-						player.getPacketDispatch().sendMessage("... and teleport into the lair of the King Black Dragon!", 5);
+						if (player.isTeleBlocked()) {
+							player.getPacketDispatch().sendMessage("A magical force has stopped you from teleporting.");
+						} else {
+							player.getPacketDispatch().sendMessage("You pull the lever...");
+							player.getTeleporter().send(LOCATIONS[4], TeleportType.NORMAL);
+							player.getPacketDispatch().sendMessage("... and teleport into the lair of the King Black Dragon!", 5);
+						}
 					}
 					break;
 				case 1817:

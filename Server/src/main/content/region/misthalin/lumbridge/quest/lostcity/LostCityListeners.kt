@@ -17,6 +17,7 @@ import core.game.world.GameWorld
 /**
  * This class covers some listeners for the Lost City quest
  * @author lila
+ * @author Player Name
  */
 @Initializable
 class LostCityListeners : InteractionListener {
@@ -36,8 +37,12 @@ class LostCityListeners : InteractionListener {
                     override fun pulse(): Boolean {
                         when (count++) {
                             0 -> {
-                                sendMessage(player,"The world starts to shimmer...")
-                                teleport(player, Location(2452, 4473, 0), TeleportType.FAIRY_RING)
+                                if (player.isTeleBlocked()) {
+                                    sendMessage(player,"A magical force has stopped you from teleporting.")
+                                } else {
+                                    sendMessage(player,"The world starts to shimmer...")
+                                    teleport(player, Location(2452, 4473, 0), TeleportType.FAIRY_RING)
+                                }
                             }
                             1 -> return isQuestComplete(player,quest)
                             2 -> {

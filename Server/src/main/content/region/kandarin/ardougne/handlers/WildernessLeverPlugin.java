@@ -68,8 +68,12 @@ public final class WildernessLeverPlugin extends OptionHandler {
 		GameWorld.getPulser().submit(new Pulse(2, player) {
 			@Override
 			public boolean pulse() {
-				lever.message(player, index);
-				lever.teleport(player, lever.getLocation(index));
+				if (player.timers.getTimer("teleblock") == null) {
+					lever.message(player, index);
+					lever.teleport(player, lever.getLocation(index));
+				} else {
+					player.getPacketDispatch().sendMessage("A magical force has stopped you from teleporting.");
+				}
 				return true;
 			}
 		});
