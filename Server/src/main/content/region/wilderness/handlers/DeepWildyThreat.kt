@@ -5,6 +5,7 @@ import content.region.wilderness.handlers.revenants.RevenantNPC
 import content.region.wilderness.handlers.revenants.RevenantType
 import core.api.*
 import core.game.node.entity.Entity
+import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.combat.DeathTask
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.npc.NPCBehavior
@@ -107,7 +108,6 @@ class RevGuardianBehavior : NPCBehavior() {
             if (WildernessZone.isInZone(target.properties.teleportLocation))
                 self.properties.teleportLocation = target.properties.teleportLocation
         }
-        sendChat(self, "ticking")
         self.attack(target)
         return true
     }
@@ -115,6 +115,16 @@ class RevGuardianBehavior : NPCBehavior() {
     override fun onCreation(self: NPC) {
         Graphics.send(Graphics(86), self.location)
         sendChat(self, chats.random())
+    }
+
+    override fun canBeAttackedBy(self: NPC, attacker: Entity, style: CombatStyle, shouldSendMessage: Boolean): Boolean {
+        val target = getAttribute<Player?>(self, "dw-threat-target", null)
+        if (attacker != target) {
+            if (shouldSendMessage && attacker is Player)
+                sendMessage(attacker, "This revenant is focused on someone else.")
+            return false
+        }
+        return super.canBeAttackedBy(self, attacker, style, shouldSendMessage)
     }
 
     override fun onDeathStarted(self: NPC, killer: Entity) {
@@ -126,6 +136,7 @@ class RevGuardianBehavior : NPCBehavior() {
 
     override fun onDropTableRolled(self: NPC, killer: Entity, drops: ArrayList<Item>) {
         val target = getAttribute<Player?>(self, "dw-threat-target", null) ?: return
+        if (killer != target) drops.clear()
         val timer = getOrStartTimer<DWThreatTimer>(target)
         timer.ticksLeft = 0
     }
