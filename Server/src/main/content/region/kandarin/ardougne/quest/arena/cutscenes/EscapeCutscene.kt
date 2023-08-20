@@ -67,7 +67,7 @@ class EscapeCutscene(player: Player) : Cutscene(player) {
                 moveCamera(47, 20)
                 rotateCamera(45, 15)
                 teleport(player, 47, 15)
-                Jeremy.teleport(location(56, 31, 0))
+                teleport(Jeremy, 56, 31)
                 timedUpdate(2)
             }
 
