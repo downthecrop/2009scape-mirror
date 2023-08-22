@@ -55,6 +55,7 @@ class EscapeCutscene(player: Player) : Cutscene(player) {
             }
 
             6 -> {
+                teleport(Jeremy, 56, 31)
                 loadRegion(10289)
                 addNPC(JEREMYRESCUE, 41, 17, Direction.NORTH)
                 addNPC(GENERAL, 45, 19, Direction.NORTH)
@@ -67,7 +68,6 @@ class EscapeCutscene(player: Player) : Cutscene(player) {
                 moveCamera(47, 20)
                 rotateCamera(45, 15)
                 teleport(player, 47, 15)
-                teleport(Jeremy, 56, 31)
                 timedUpdate(2)
             }
 
