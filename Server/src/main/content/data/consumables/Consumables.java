@@ -10,6 +10,9 @@ import content.data.consumables.effects.KegOfBeerEffect;
 
 import java.util.HashMap;
 
+import static core.tools.TickUtilsKt.minutesToTicks;
+import static core.tools.TickUtilsKt.secondsToTicks;
+
 /**
  * Represents a repository of active consumables in the framework.
  */
@@ -320,10 +323,10 @@ public enum Consumables {
 	SUPER_STRENGTH(new Potion(new int[] {2440, 157, 159, 161}, new SkillEffect(Skills.STRENGTH, 3, 0.2))),
 	SUPER_ATTACK(new Potion(new int[] {2436, 145, 147, 149}, new SkillEffect(Skills.ATTACK, 3, 0.2))),
 	SUPER_DEFENCE(new Potion(new int[] {2442, 163, 165, 167}, new SkillEffect(Skills.DEFENCE, 3, 0.2))),
-	ANTIPOISON(new Potion(new int[] {2446, 175, 177, 179}, new AddTimerEffect("poison:immunity", 143))),
-	ANTIPOISON_(new Potion(new int[] {5943, 5945, 5947, 5949}, new AddTimerEffect("poison:immunity", 863))),
-	ANTIPOISON__(new Potion(new int[] {5952, 5954, 5956, 5958}, new AddTimerEffect("poison:immunity", 2000))),
-	SUPER_ANTIP(new Potion(new int[] {2448, 181, 183, 185}, new AddTimerEffect("poison:immunity", 1000))),
+	ANTIPOISON(new Potion(new int[] {2446, 175, 177, 179}, new AddTimerEffect("poison:immunity", secondsToTicks(90)))),
+	ANTIPOISON_(new Potion(new int[] {5943, 5945, 5947, 5949}, new AddTimerEffect("poison:immunity", minutesToTicks(9)))),
+	ANTIPOISON__(new Potion(new int[] {5952, 5954, 5956, 5958}, new AddTimerEffect("poison:immunity", minutesToTicks(12)))),
+	SUPER_ANTIP(new Potion(new int[] {2448, 181, 183, 185}, new AddTimerEffect("poison:immunity", minutesToTicks(6)))),
 	RELICYM(new Potion(new int[] {4842, 4844, 4846, 4848}, new MultiEffect(new SetAttributeEffect("disease:immunity", 300), new RemoveTimerEffect("disease")))),
 	AGILITY(new Potion(new int[] {3032, 3034, 3036, 3038}, new SkillEffect(Skills.AGILITY, 3, 0))),
 	HUNTER(new Potion(new int[] {9998, 10000, 10002, 10004}, new SkillEffect(Skills.HUNTER, 3, 0))),

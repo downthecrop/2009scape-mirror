@@ -7,7 +7,7 @@ import core.game.node.entity.player.Player
 
 class AddTimerEffect (val identifier: String, vararg val args: Any) : ConsumableEffect() {
     override fun activate (p: Player) {
-        val timer = spawnTimer (identifier, args) ?: return
+        val timer = spawnTimer (identifier, *args) ?: return
         registerTimer (p, timer)
     }
 }
