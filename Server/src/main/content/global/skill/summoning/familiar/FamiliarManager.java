@@ -446,7 +446,7 @@ public final class FamiliarManager {
 	 * @return The usingSummoning.
 	 */
 	public boolean isUsingSummoning() {
-		return hasPouch || hasFamiliar();
+		return hasPouch || (hasFamiliar() && !hasPet());
 	}
 
 	/**
