@@ -16,6 +16,9 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Represents the wilderness obelisk plugin.
@@ -77,7 +80,7 @@ public final class WildernessObeliskPlugin extends OptionHandler {
 				break;
 			}
 		}
-		player.getAudioManager().send(204);
+		playAudio(player, Sounds.WILDERNESS_TELEPORT_204);
 		GameWorld.getPulser().submit(new Pulse(6, player) {
 			@Override
 			public boolean pulse() {

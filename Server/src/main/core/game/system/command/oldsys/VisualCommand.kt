@@ -416,10 +416,6 @@ class VisualCommand : CommandPlugin() {
                 player!!.impactHandler.manualHit(player, toInteger(args!![1]!!), HitsplatType.NORMAL)
                 return true
             }
-            "sound" -> {
-                player!!.audioManager.send(Audio(args!![1]!!.toInt(), 10, 1))
-                return true
-            }
             "noclip" -> {
                 player!!.setAttribute("no_clip", !player.getAttribute("no_clip", false))
                 return true

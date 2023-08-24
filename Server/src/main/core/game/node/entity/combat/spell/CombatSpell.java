@@ -173,7 +173,7 @@ public abstract class CombatSpell extends MagicSpell {
 				entity.animate(animation);
 			}
 		}
-		playGlobalAudio(entity.getLocation(), audio.getId(), 20);
+		playGlobalAudio(entity.getLocation(), audio.id, 20);
 	}
 
 	@Override

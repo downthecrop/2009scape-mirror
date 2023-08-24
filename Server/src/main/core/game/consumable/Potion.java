@@ -1,10 +1,12 @@
 package core.game.consumable;
 
 import content.data.consumables.Consumables;
-import content.region.kandarin.barcrawl.BarcrawlManager;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.Item;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 public class Potion extends Drink {
 
@@ -40,7 +42,7 @@ public class Potion extends Drink {
     @Override
     protected void executeConsumptionActions(Player player) {
         player.animate(animation);
-        player.getAudioManager().send(SOUND);
+        playAudio(player, Sounds.LIQUID_2401);
     }
 
     @Override

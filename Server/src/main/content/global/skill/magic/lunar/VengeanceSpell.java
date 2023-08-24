@@ -13,6 +13,10 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
+import static core.api.ContentAPIKt.playGlobalAudio;
 
 /**
  * Handles the vengeance (other) spell.
@@ -81,7 +85,7 @@ public final class VengeanceSpell extends MagicSpell {
 		visualize(entity, p);
 		entity.setAttribute("vengeance_delay", ticks + 50);
 		p.setAttribute("vengeance", true);
-		p.getAudioManager().send(vengOther ? 2908 : 2907);
+		playGlobalAudio(p.getLocation(), vengOther ? Sounds.LUNAR_VENGENCE_OTHER_2908 : Sounds.LUNAR_VENGENCE_2907);
 		return true;
 	}
 

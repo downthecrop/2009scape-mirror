@@ -225,8 +225,8 @@ class PitfallListeners : InteractionListener {
                         //pitfall_npc.setLocation(pit.getLocation());
                         //pitfall_npc.walkingQueue.addPath(pit.location.x, pit.location.y);
                         teleport(pitfall_npc, pit.location)
-                        player.audioManager.send(Sounds.HUNTING_PITFALL_COLLAPSE_2638, 10, 0, 10, pit.location)
-                        player.audioManager.send(Sounds.PANTHER_DEATH_667, 10, 50, 10, pit.location)
+                        playAudio(player, Sounds.HUNTING_PITFALL_COLLAPSE_2638, 0, 1, pit.location, 10)
+                        playAudio(player, Sounds.PANTHER_DEATH_667, 50, 1, pit.location, 10)
                         pitfall_npc.startDeath(null)
                         player.removeAttribute("pitfall:timestamp:${pit.location.x}:${pit.location.y}")
                         player.incrementAttribute("pitfall:count", -1)
@@ -238,7 +238,7 @@ class PitfallListeners : InteractionListener {
                         val npcdst = dst.transform(dir, if(dir == Direction.SOUTH || dir == Direction.WEST) 1 else 0)
                         teleport(pitfall_npc, npcdst)
                         pitfall_npc.animate(Animation(5232, Priority.HIGH))
-                        player.audioManager.send(Sounds.HUNTING_BIGCAT_JUMP_2619, 10, 0, 10, pit.location)
+                        playAudio(player, Sounds.HUNTING_BIGCAT_JUMP_2619, 0, 1, pit.location, 10)
                         pitfall_npc.attack(player)
                         pitfall_npc.setAttribute("last_pit_loc", pit.location)
                     }

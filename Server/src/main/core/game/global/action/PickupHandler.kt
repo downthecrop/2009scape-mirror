@@ -4,8 +4,8 @@ import core.game.event.PickUpEvent
 import core.api.getItemName
 import content.data.GodType
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.audio.Audio
 import content.global.skill.runecrafting.RunePouch
+import core.api.playAudio
 import core.game.node.entity.player.info.LogType
 import core.game.node.item.GroundItem
 import core.game.node.item.GroundItemManager
@@ -13,9 +13,9 @@ import core.game.node.item.Item
 import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
 import core.game.node.entity.player.info.PlayerMonitor
-import core.tools.SystemLogger
 import core.game.system.config.GroundSpawnLoader
 import core.game.world.GameWorld
+import org.rs09.consts.Sounds
 
 /**
  * A class used to handle the picking up of ground items.
@@ -66,7 +66,7 @@ object PickupHandler {
             }
             */
 
-            player.audioManager.send(Audio(2582, 10, 1))
+            playAudio(player, Sounds.PICK2_2582)
             player.dispatch(PickUpEvent(item.id))
         }
         return true

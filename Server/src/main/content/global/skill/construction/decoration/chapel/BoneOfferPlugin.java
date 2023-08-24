@@ -18,6 +18,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
 /**
  * Handles the offering of bones on an altar.
@@ -98,7 +99,7 @@ public class BoneOfferPlugin extends UseWithHandler {
 				if (counter == 1 || counter % 5 == 0) {
 					if (player.getInventory().remove(new Item(b.getItemId()))) {
 						player.animate(ANIM);
-						player.getAudioManager().send(new Audio(958));
+						playAudio(player, Sounds.POH_OFFER_BONES_958);
 						player.getPacketDispatch().sendPositionedGraphics(GFX, gfxLoc);
 						player.sendMessage(getMessage(isLit(left), isLit(right)));
 						player.getSkills().addExperience(Skills.PRAYER, b.getExperience() * getMod(altar, isLit(left), isLit(right)));

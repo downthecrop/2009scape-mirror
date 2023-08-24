@@ -8,6 +8,9 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Represents a birds nest.
@@ -93,7 +96,7 @@ public enum BirdNest {
 	 */
 	public static void drop(final Player player) {
 		final BirdNest nest = getRandomNest(false);
-		player.getAudioManager().send(1997);
+		playAudio(player, Sounds.CUCKOO_1_1997);
 		GroundItemManager.create(nest.getNest(), player);
 		player.getPacketDispatch().sendMessage("<col=FF0000>A bird's nest falls out of the tree.");
 	}

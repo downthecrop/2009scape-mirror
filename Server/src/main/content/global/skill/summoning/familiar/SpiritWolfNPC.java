@@ -15,6 +15,9 @@ import core.game.world.map.path.Path;
 import core.game.world.map.path.Pathfinder;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Handles the Spirit wolf familiar.
@@ -105,7 +108,7 @@ public final class SpiritWolfNPC extends Familiar {
 			return false;
 		}
 		visualizeSpecialMove();
-		owner.getAudioManager().send(4265);
+		playAudio(owner, Sounds.WOLF_HOWL2_4265);
 		faceTemporary(npc, owner, 2);
 		super.visualize(Animation.create(8293), new Graphics(1334, 96));
 		Projectile.magic(this, npc, 1333, 40, 36, 50, 5).send();

@@ -15,12 +15,12 @@ import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
 import core.game.world.GameWorld;
+import org.rs09.consts.Sounds;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static core.api.ContentAPIKt.setVarp;
-import static core.api.ContentAPIKt.setVarbit;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Represents a managing class of a players prayers.
@@ -82,7 +82,7 @@ public final class Prayer {
 	 * Starts the redemption effect.
 	 */
 	public void startRedemption() {
-		player.getAudioManager().send(2681);
+		playAudio(player, Sounds.REDEMPTION_HEAL_2681);
 		player.graphics(Graphics.create(436));
 		player.getSkills().heal((int) (player.getSkills().getStaticLevel(Skills.PRAYER) * 0.25));
 		player.getSkills().setPrayerPoints(0.0);
@@ -102,7 +102,7 @@ public final class Prayer {
 				}
 			}
 		}
-		player.getAudioManager().send(159);
+		playAudio(player, Sounds.FIREBREATH_159);
 		player.graphics(Graphics.create(437));
 		int maximum = (int) (player.getSkills().getStaticLevel(Skills.PRAYER) * 0.25) - 1;
 		if (killer != player && killer.getLocation().withinDistance(player.getLocation(), 1)) {
@@ -131,7 +131,7 @@ public final class Prayer {
 
 		if(prayerActiveTicks > 0 && prayerActiveTicks % 2 == 0){
 			if(getPlayer().getSkills().getPrayerPoints() == 0){
-                getPlayer().getAudioManager().send(2672);
+                playAudio(getPlayer(), Sounds.PRAYER_DRAIN_2672);
 				reset();
 				return;
 			}

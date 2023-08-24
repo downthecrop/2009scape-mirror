@@ -22,11 +22,13 @@ import core.game.world.GameWorld;
 import core.game.world.repository.Repository;
 import core.plugin.CorePluginTypes.XPGainPlugins;
 import org.rs09.consts.Items;
+import org.rs09.consts.Sounds;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 import static core.api.ContentAPIKt.getWorldTicks;
+import static core.api.ContentAPIKt.playAudio;
 import static java.lang.Math.floor;
 import static java.lang.Math.max;
 
@@ -362,7 +364,7 @@ public final class Skills {
 			setLevel(i, staticLevel);
 		}
 		if (entity instanceof Player) {
-			entity.asPlayer().getAudioManager().send(2674);
+			playAudio(entity.asPlayer(), Sounds.PRAYER_RECHARGE_2674);
 		}
 		rechargePrayerPoints();
 	}

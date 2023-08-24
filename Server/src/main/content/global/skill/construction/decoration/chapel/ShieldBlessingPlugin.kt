@@ -1,14 +1,15 @@
 package content.global.skill.construction.decoration.chapel
 
+import core.api.playAudio
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler
-import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
 import org.rs09.consts.Items
+import org.rs09.consts.Sounds
 
 const val HOLY_ELIXER = 13754
 const val SPIRIT_SHIELD = 13734
@@ -38,7 +39,7 @@ class ShieldBlessingPlugin : UseWithHandler(HOLY_ELIXER, SPIRIT_SHIELD) {
         }
 
         player.animator.animate(Animation(896))
-        player.audioManager.send(Audio(958))
+        playAudio(player, Sounds.POH_OFFER_BONES_958)
 
         if(player.inventory.remove(Item(HOLY_ELIXER)) && player.inventory.remove(Item(SPIRIT_SHIELD)))
             player.inventory.add(Item(Items.BLESSED_SPIRIT_SHIELD_13736))

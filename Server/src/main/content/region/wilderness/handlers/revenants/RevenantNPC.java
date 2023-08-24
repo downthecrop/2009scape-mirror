@@ -19,6 +19,10 @@ import core.tools.RandomFunction;
 import core.game.node.entity.combat.CombatSwingHandler;
 import core.game.system.config.NPCConfigParser;
 import core.game.world.GameWorld;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
+import static core.api.ContentAPIKt.playGlobalAudio;
 
 /**
  * Handles a revenant NPC.
@@ -105,9 +109,7 @@ public class RevenantNPC extends AbstractNPC {
 	@Override
 	public void finalizeDeath(Entity killer) {
 		super.finalizeDeath(killer);
-		if (killer instanceof Player) {
-			killer.asPlayer().getAudioManager().send(4063, true);
-		}
+		playGlobalAudio(killer.getLocation(),4063);
 	}
 
 	@Override
@@ -121,7 +123,7 @@ public class RevenantNPC extends AbstractNPC {
 			getProperties().getCombatPulse().delayNextAttack(3);
 			getSkills().heal(10);
 			for (Player p : RegionManager.getLocalPlayers(this)) {
-				p.getAudioManager().send(2393);
+				playAudio(p, Sounds.EAT_2393);
 			}
 			setAttribute("eat-delay", GameWorld.getTicks() + 6);
 		}

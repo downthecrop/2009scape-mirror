@@ -18,6 +18,9 @@ import core.game.world.map.zone.ZoneBuilder;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Handles the animation
@@ -132,7 +135,7 @@ public final class AnimationRoom extends MapZone implements Plugin<Object> {
 							return true;
 						}
 					}
-					player.getAudioManager().send(1909);
+					playAudio(player, Sounds.WARGUILD_ANIMATE_1909);
 					player.logoutListeners.put("animation-room", player1 -> {
 						for(int item : set.getPieces()) player1.getInventory().add(new Item(item));
 						return Unit.INSTANCE;
@@ -144,7 +147,7 @@ public final class AnimationRoom extends MapZone implements Plugin<Object> {
 				}
 				if (getDelay() == 4) {
 					setDelay(1);
-					player.getAudioManager().send(1910);
+					playAudio(player, Sounds.WARGUILD_ANIMATOR_ACTIVATE_1910);
 					ForceMovement.run(player, player.getLocation().transform(0, 1, 0)).setDirection(Direction.SOUTH);
 					return false;
 				}

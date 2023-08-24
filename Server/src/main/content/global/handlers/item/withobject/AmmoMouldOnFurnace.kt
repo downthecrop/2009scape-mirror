@@ -40,7 +40,7 @@ class AmmoMouldOnFurnace : InteractionListener {
                     0 -> {
                         sendMessage(player,"You heat the steel bar into a liquid state.")
                         animate(player, 3243) // 899 would be preferable but the arms spaz out
-                        player.audioManager.send(Sounds.FURNACE_2725, 1)
+                        playAudio(player, Sounds.FURNACE_2725)
                     }
                     3 -> {
                         sendMessage(player,"You pour the molten metal into your cannonball mould.")

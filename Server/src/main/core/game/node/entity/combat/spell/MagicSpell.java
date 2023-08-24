@@ -160,7 +160,7 @@ public abstract class MagicSpell implements Plugin<SpellType> {
 	public void visualize(Entity entity, Node target) {
 		entity.graphics(graphic);
 		entity.animate(animation);
-		playGlobalAudio(entity.getLocation(), audio.getId(), 20);
+		playGlobalAudio(entity.getLocation(), audio.id, 20);
 	}
 
 	/**

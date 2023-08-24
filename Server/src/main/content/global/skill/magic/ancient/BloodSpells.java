@@ -97,7 +97,7 @@ public final class BloodSpells extends CombatSpell {
 			projectile.transform(entity, (Entity) target, false, 58, 10).send();
 		}
 		entity.animate(animation);
-		playGlobalAudio(entity.getLocation(), audio.getId(), 20);
+		playGlobalAudio(entity.getLocation(), audio.id, 20);
 	}
 
 	@Override

@@ -154,8 +154,8 @@ public final class AssistSession extends Pulse implements RequestModule {
 		player.animate(ANIMATION);
 		player.graphics(GRAPHIC);
 		partener.animate(ANIMATION);
-		partener.getAudioManager().send(4010);
-		player.getAudioManager().send(4010);
+		playAudio(partener, 4010);
+		playAudio(player, 4010);
 		toggleIcon(player, false);
 		toggleIcon(partener, false);
 		GameWorld.getPulser().submit(this);

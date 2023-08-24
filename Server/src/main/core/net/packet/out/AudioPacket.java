@@ -15,15 +15,15 @@ public class AudioPacket implements OutgoingPacket<DefaultContext> {
     public static IoBuffer write(IoBuffer buffer, Audio audio, Location loc) {
 		if(loc == null) {
             buffer.put((byte) 172);
-            buffer.putShort(audio.getId());
-            buffer.put((byte) audio.getVolume());
-            buffer.putShort(audio.getDelay());
+            buffer.putShort(audio.id);
+            buffer.put((byte) audio.loops);
+            buffer.putShort(audio.delay);
         } else {
             buffer.put((byte) 97);
             buffer.put((byte) (loc.getChunkOffsetX() << 4 | loc.getChunkOffsetY()));
-            buffer.putShort(audio.getId());
-            buffer.put((byte) (audio.getRadius() << 4 | audio.getVolume() & 7));
-            buffer.put((byte) audio.getDelay());
+            buffer.putShort(audio.id);
+            buffer.put((byte) (audio.radius << 4 | audio.loops & 7));
+            buffer.put((byte) audio.delay);
         }
         return buffer;
     }

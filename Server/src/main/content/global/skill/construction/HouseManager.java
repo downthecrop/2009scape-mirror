@@ -8,7 +8,6 @@ import core.api.regionspec.RegionSpecification;
 import core.api.regionspec.contracts.FillChunkContract;
 import core.game.dialogue.FacialExpression;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.skill.Skills;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
@@ -25,6 +24,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import core.tools.SystemLogger;
 import core.game.world.GameWorld;
+import org.rs09.consts.Sounds;
 
 import java.awt.*;
 import java.nio.ByteBuffer;
@@ -224,7 +224,7 @@ public final class HouseManager {
 
 	private void openLoadInterface(Player player) {
 		player.getInterfaceManager().openComponent(399);
-		player.getAudioManager().send(new Audio(984));
+		playAudio(player, Sounds.POH_TELEPORT_984);
 		submitCloseLoadInterfacePulse(player);
 	}
 

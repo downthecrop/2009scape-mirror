@@ -32,6 +32,8 @@ import core.plugin.Initializable;
 import core.tools.RandomFunction;
 import org.rs09.consts.Sounds;
 
+import static core.api.ContentAPIKt.playAudio;
+
 /**
  * Handles the strong hold of security.
  * @author Vexia
@@ -131,7 +133,7 @@ public final class StrongHoldSecurityPlugin extends MapZone implements Plugin<Ob
 				if (player.getSavedData().getGlobalData().hasStrongholdReward(1)) {
 					player.getDialogueInterpreter().open(70099, "You have already claimed your reward from this level.");
 				} else {
-					player.getAudioManager().send(Sounds.DOOR_CREAK_61);
+					playAudio(player, Sounds.DOOR_CREAK_61);
 					PacketRepository.send(MusicPacket.class, new MusicContext(player, 157, true));
 					player.getDialogueInterpreter().open(54678);
 				}
@@ -140,7 +142,7 @@ public final class StrongHoldSecurityPlugin extends MapZone implements Plugin<Ob
 				if (player.getSavedData().getGlobalData().hasStrongholdReward(3)) {
 					player.getDialogueInterpreter().open(70099, "You have already claimed your reward from this level.");
 				} else {
-					player.getAudioManager().send(Sounds.DOOR_CREAK_61);
+					playAudio(player, Sounds.DOOR_CREAK_61);
 					PacketRepository.send(MusicPacket.class, new MusicContext(player, 177, true));
 					player.getDialogueInterpreter().open(96878);
 				}
@@ -149,7 +151,7 @@ public final class StrongHoldSecurityPlugin extends MapZone implements Plugin<Ob
 				if (player.getSavedData().getGlobalData().hasStrongholdReward(2)) {
 					player.getDialogueInterpreter().open(70099, "You have already claimed your reward from this level.");
 				} else {
-					player.getAudioManager().send(Sounds.DOOR_CREAK_61);
+					playAudio(player, Sounds.DOOR_CREAK_61);
 					PacketRepository.send(MusicPacket.class, new MusicContext(player, 179, true));
 					player.getDialogueInterpreter().open(56875);
 				}
@@ -158,7 +160,7 @@ public final class StrongHoldSecurityPlugin extends MapZone implements Plugin<Ob
 				if (!player.getSavedData().getGlobalData().hasStrongholdReward(4)) {
 					PacketRepository.send(MusicPacket.class, new MusicContext(player, 158, true));
 				}
-				player.getAudioManager().send(Sounds.SOS_CHOIR_1246);
+				playAudio(player, Sounds.SOS_CHOIR_1246);
 				player.getDialogueInterpreter().open(96873);
 				return true;
 			case 16152:// skeleton
@@ -237,7 +239,7 @@ public final class StrongHoldSecurityPlugin extends MapZone implements Plugin<Ob
 	private static void openDoor(final Player player, final Scenery object) {
 		player.lock(3);
 		player.animate(Animation.create(4282));
-		player.getAudioManager().send(Sounds.SOS_THROUGH_DOOR_2858);
+		playAudio(player, Sounds.SOS_THROUGH_DOOR_2858);
 		GameWorld.getPulser().submit(new Pulse(1, player) {
 			int counter;
 

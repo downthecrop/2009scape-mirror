@@ -7,7 +7,6 @@ import core.game.dialogue.DialogueInterpreter;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.audio.Audio;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -15,6 +14,9 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playGlobalAudio;
 
 /**
  * Handles the POH Mounted Glory.
@@ -79,7 +81,7 @@ public class MountedGloryPlugin extends OptionHandler {
 		}
 		player.lock();
 		player.visualize(ANIMATION, GRAPHICS);
-        player.getAudioManager().send(new Audio(200), true);	
+		playGlobalAudio(player.getLocation(), Sounds.TELEPORT_ALL_200);
 		player.getImpactHandler().setDisabledTicks(4);
 		GameWorld.getPulser().submit(new Pulse(4, player) {
 			@Override

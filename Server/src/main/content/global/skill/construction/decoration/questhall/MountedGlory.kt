@@ -1,14 +1,15 @@
 package content.global.skill.construction.decoration.questhall
 
+import core.api.playGlobalAudio
 import core.api.teleport
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.audio.Audio
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
-import core.game.interaction.InteractionListener
-import core.game.interaction.IntType
+import org.rs09.consts.Sounds
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
@@ -53,7 +54,7 @@ class MountedGlory : InteractionListener {
                     1 -> {
                         player.lock(5)
                         player.visualize(Animation(714), Graphics(308, 100, 50))
-                        player.getAudioManager().send(Audio(200), true)
+                        playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
                     }
                     4 -> player.animator.reset().also { teleport(player, TELEPORTS[int]) }
                 }

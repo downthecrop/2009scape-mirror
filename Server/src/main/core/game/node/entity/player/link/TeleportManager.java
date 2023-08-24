@@ -13,7 +13,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import org.rs09.consts.Sounds;
 
-import static core.api.ContentAPIKt.hasTimerActive;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the entity teleport.
@@ -203,18 +203,14 @@ public class TeleportManager {
 					@Override
 					public boolean pulse() {
 						if (delay == 0) {
-							if (entity instanceof Player) {
-								entity.asPlayer().getAudioManager().send(new Audio(200), true);
-							}
+							playGlobalAudio(entity.getLocation(), Sounds.TELEPORT_ALL_200);
 							entity.getAnimator().forceAnimation(new Animation(getSettings().getStartEmote()));
 							entity.graphics(new Graphics(getSettings().getStartGfx()));
 						} else if (delay == 3) {
 							entity.getProperties().setTeleportLocation(Location.create(location));
 							fireRandom(entity, location);
 						} else if (delay == 4) {
-							if (entity instanceof Player) {
-								entity.asPlayer().getAudioManager().send(new Audio(201), true);
-							}
+							playGlobalAudio(entity.getLocation(), Sounds. TELEPORT_REVERSE_201);
 							entity.getAnimator().forceAnimation(new Animation(getSettings().getEndEmote(), Priority.HIGH));
 							entity.graphics(new Graphics(getSettings().getEndGfx()));
 							return true;
@@ -241,10 +237,7 @@ public class TeleportManager {
 					@Override
 					public boolean pulse() {
 						if (delay == 0) {
-							if (entity instanceof Player) {
-								entity.asPlayer().getAudioManager().send(new Audio(Sounds.BLOCK_TELEPORT_197), true);
-							}
-
+							playGlobalAudio(entity.getLocation(), Sounds.BLOCK_TELEPORT_197, 0, 7);
 							entity.getAnimator().forceAnimation(new Animation(getSettings().getStartEmote()));
 							entity.graphics(new Graphics(getSettings().getStartGfx()));
 						} else if (delay == 4) {
@@ -311,9 +304,7 @@ public class TeleportManager {
 					@Override
 					public boolean pulse() {
 						if (delay == 0) {
-							if (entity instanceof Player) {
-								entity.asPlayer().getAudioManager().send(979);
-							}
+							playGlobalAudio(entity.getLocation(), Sounds.POH_TABLET_BREAK_979);
 							entity.getAnimator().forceAnimation(new Animation(4069));
 						} else if (delay == 2) {
 							entity.getAnimator().forceAnimation(new Animation(getSettings().getStartEmote(), Priority.HIGH));
@@ -354,7 +345,7 @@ public class TeleportManager {
 								player.getProperties().setTeleportLocation(location);
 								return true;
 							default:
-								entity.asPlayer().getAudioManager().send(getAudio(count));
+								playGlobalAudio(entity.getLocation(), getAudio(count));
 								player.getPacketDispatch().sendGraphic(HOME_GRAPHICS[count]);
 								player.getPacketDispatch().sendAnimation(HOME_ANIMATIONS[count]);
 								break;
@@ -424,9 +415,7 @@ public class TeleportManager {
 					@Override
 					public boolean pulse() {
 						if (delay == 0) {
-							if (entity instanceof Player) {
-								entity.asPlayer().getAudioManager().send(199);
-							}
+								playGlobalAudio(entity.getLocation(), Sounds.TELE_OTHER_CAST_199);
 							entity.getAnimator().forceAnimation(new Animation(getSettings().getStartEmote()));
 							entity.graphics(new Graphics(getSettings().getStartGfx()));
 						} else if (delay == 3) {
@@ -455,7 +444,7 @@ public class TeleportManager {
 							case 2:
 								entity.animate(Animation.create(3265));
 								if(entity instanceof Player) {
-									((Player) entity).getAudioManager().send(1098, 1);
+									playAudio(entity.asPlayer(), Sounds.FT_FAIRY_TELEPORT_1098);
 								}
 								break;
 							case 4:
@@ -503,18 +492,14 @@ public class TeleportManager {
 					@Override
 					public boolean pulse() {
 						if (delay == 0) {
-							if (entity instanceof Player) {
-								entity.asPlayer().getAudioManager().send(200);
-							}
+							playGlobalAudio(entity.getLocation(), Sounds.TELEPORT_ALL_200);
 							entity.getAnimator().forceAnimation(new Animation(getSettings().getStartEmote()));
 							entity.graphics(new Graphics(getSettings().getStartGfx()));
 						} else if (delay == 3) {
 							entity.getProperties().setTeleportLocation(Location.create(location));
 							fireRandom(entity, location);
 						} else if (delay == 4) {
-							if (entity instanceof Player) {
-								entity.asPlayer().getAudioManager().send(201);
-							}
+								playGlobalAudio(entity.getLocation(), Sounds.TELEPORT_REVERSE_201);
 							entity.getAnimator().forceAnimation(new Animation(getSettings().getEndEmote(), Priority.HIGH));
 							entity.graphics(new Graphics(getSettings().getEndGfx()));
 							return true;
@@ -541,18 +526,14 @@ public class TeleportManager {
 					@Override
 					public boolean pulse() {
 						if (delay == 0) {
-							if (entity instanceof Player) {
-								entity.asPlayer().getAudioManager().send(200);
-							}
+								playGlobalAudio(entity.getLocation(), Sounds.TELEPORT_ALL_200);
 							entity.getAnimator().forceAnimation(new Animation(getSettings().getStartEmote()));
 							entity.graphics(new Graphics(getSettings().getStartGfx()));
 						} else if (delay == 3) {
 							entity.getProperties().setTeleportLocation(Location.create(location));
 							fireRandom(entity, location);
 						} else if (delay == 4) {
-							if (entity instanceof Player) {
-								entity.asPlayer().getAudioManager().send(201);
-							}
+							playGlobalAudio(entity.getLocation(), Sounds.TELEPORT_REVERSE_201);
 							entity.getAnimator().forceAnimation(new Animation(getSettings().getEndEmote(), Priority.HIGH));
 							entity.graphics(new Graphics(getSettings().getEndGfx()));
 							return true;
@@ -580,7 +561,7 @@ public class TeleportManager {
 					public boolean pulse() {
 						if (delay == 0) {
 							if (entity instanceof Player) {
-								entity.asPlayer().getAudioManager().send(5036);
+								playAudio(entity.asPlayer(), 5036);
 							}
 							entity.getAnimator().forceAnimation(new Animation(getSettings().getStartEmote()));
 							entity.graphics(new Graphics(getSettings().getStartGfx()));
@@ -588,7 +569,7 @@ public class TeleportManager {
 							entity.getProperties().setTeleportLocation(Location.create(location));
 							fireRandom(entity, location);
 							if (entity instanceof Player) {
-								entity.asPlayer().getAudioManager().send(5034);
+								playAudio(entity.asPlayer(), 5034);
 							}
 							entity.getAnimator().forceAnimation(new Animation(getSettings().getEndEmote(), Priority.HIGH));
 							entity.graphics(new Graphics(getSettings().getEndGfx()));
@@ -616,18 +597,14 @@ public class TeleportManager {
 					@Override
 					public boolean pulse() {
 						if (delay == 0) {
-							if (entity instanceof Player) {
-								entity.asPlayer().getAudioManager().send(200);
-							}
+								playGlobalAudio(entity.getLocation(), Sounds.TELEPORT_ALL_200);
 							entity.getAnimator().forceAnimation(new Animation(getSettings().getStartEmote()));
 							entity.graphics(new Graphics(getSettings().getStartGfx()));
 						} else if (delay == 3) {
 							entity.getProperties().setTeleportLocation(Location.create(location));
 							fireRandom(entity, location);
 						} else if (delay == 4) {
-							if (entity instanceof Player) {
-								entity.asPlayer().getAudioManager().send(201);
-							}
+							playGlobalAudio(entity.getLocation(), Sounds.TELEPORT_REVERSE_201);
 							entity.getAnimator().forceAnimation(new Animation(getSettings().getEndEmote(), Priority.HIGH));
 							entity.graphics(new Graphics(getSettings().getEndGfx()));
 							return true;

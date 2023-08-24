@@ -3,6 +3,9 @@ package content.global.skill.cooking;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 public class IntentionalBurnPulse extends StandardCookingPulse {
     int initial,product,amount;
@@ -47,7 +50,7 @@ public class IntentionalBurnPulse extends StandardCookingPulse {
         if (player.getInventory().remove(initialItem)) {
             player.getInventory().add(productItem);
             player.getPacketDispatch().sendMessage(getMessage(initialItem, productItem, burned));
-            player.getAudioManager().send(SOUND);
+            playAudio(player, Sounds.FRY_2577);
             return true;
         }
         return false;

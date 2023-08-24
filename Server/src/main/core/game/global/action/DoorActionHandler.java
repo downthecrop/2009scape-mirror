@@ -2,7 +2,6 @@ package core.game.global.action;
 
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.scenery.Constructed;
 import core.game.node.scenery.Scenery;
@@ -18,6 +17,7 @@ import core.game.world.GameWorld;
 import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.hasRequirement;
+import static core.api.ContentAPIKt.playAudio;
 
 import java.awt.*;
 
@@ -45,11 +45,11 @@ public final class DoorActionHandler {
         if (object instanceof Constructed && (o = ((Constructed) object).getReplaced()) != null) {
             DoorConfigLoader.Door d = DoorConfigLoader.Companion.forId(object.getId());
             if (d != null && d.isMetal()) {
-                player.getAudioManager().send(Sounds.IRON_DOOR_CLOSE_70);
+                playAudio(player, Sounds.IRON_DOOR_CLOSE_70);
             } else if (d != null && d.isFence()){
-                player.getAudioManager().send(Sounds.GATE_CLOSE_66);
+                playAudio(player, Sounds.GATE_CLOSE_66);
             } else {
-                player.getAudioManager().send(60);
+                playAudio(player, 60);
             }
             SceneryBuilder.replace(object, o);
             if (second instanceof Constructed && (o = ((Constructed) second).getReplaced()) != null) {
@@ -61,20 +61,20 @@ public final class DoorActionHandler {
         if (object.getDefinition().hasAction("close")) {
             if (second != null) {
                 player.getPacketDispatch().sendMessage("The doors appear to be stuck.");
-                player.getAudioManager().send(Sounds.DOOR_CREAK_61);
+                playAudio(player, Sounds.DOOR_CREAK_61);
                 return;
             }
             DoorConfigLoader.Door d = DoorConfigLoader.Companion.forId(object.getId());
             if (d != null && d.isMetal()) {
-                player.getAudioManager().send(Sounds.IRON_DOOR_OPEN_71);
+                playAudio(player, Sounds.IRON_DOOR_OPEN_71);
             } else if (d != null && d.isFence()){
-                player.getAudioManager().send(Sounds.GATE_OPEN_67);
+                playAudio(player, Sounds.GATE_OPEN_67);
             } else {
-                player.getAudioManager().send(Sounds.DOOR_OPEN_62);
+                playAudio(player, Sounds.DOOR_OPEN_62);
             }
             if (d == null) {
                 player.getPacketDispatch().sendMessage("The door appears to be stuck.");
-                player.getAudioManager().send(Sounds.DOOR_CREAK_61);
+                playAudio(player, Sounds.DOOR_CREAK_61);
                 return;
             }
             int firstDir = (object.getRotation() + 3) % 4;
@@ -93,11 +93,11 @@ public final class DoorActionHandler {
             return;
         }
         if (d.isMetal()) {
-            player.getAudioManager().send(Sounds.IRON_DOOR_OPEN_71);
+            playAudio(player, Sounds.IRON_DOOR_OPEN_71);
         } else if (d.isFence()){
-            player.getAudioManager().send(Sounds.GATE_OPEN_67);
+            playAudio(player, Sounds.GATE_OPEN_67);
         } else {
-            player.getAudioManager().send(Sounds.DOOR_OPEN_62);
+            playAudio(player, Sounds.DOOR_OPEN_62);
         }
         if (second != null) {
             DoorConfigLoader.Door s = DoorConfigLoader.Companion.forId(second.getId());
@@ -124,14 +124,14 @@ public final class DoorActionHandler {
         if (entity instanceof Player) {
             DoorConfigLoader.Door d = DoorConfigLoader.Companion.forId(object.getId());
             if (d != null && d.isMetal()) {
-                ((Player) entity).getAudioManager().send(Sounds.IRON_DOOR_OPEN_71, 10);
-                ((Player) entity).getAudioManager().send(Sounds.IRON_DOOR_CLOSE_70, 10, 60);
+                playAudio(entity.asPlayer(), Sounds.IRON_DOOR_OPEN_71);
+                playAudio(entity.asPlayer(), Sounds.IRON_DOOR_CLOSE_70, 60);
             } else if (d != null && d.isFence()){
-                ((Player) entity).getAudioManager().send(Sounds.GATE_OPEN_67, 10);
-                ((Player) entity).getAudioManager().send(Sounds.GATE_CLOSE_66, 10, 60);
+                playAudio(entity.asPlayer(), Sounds.GATE_OPEN_67);
+                playAudio(entity.asPlayer(), Sounds.GATE_CLOSE_66, 60);
             } else {
-                ((Player) entity).getAudioManager().send(Sounds.DOOR_OPEN_62,10);
-                ((Player) entity).getAudioManager().send(60,10,60);
+                playAudio(entity.asPlayer(), Sounds.DOOR_OPEN_62);
+                playAudio(entity.asPlayer(), 60, 60);
             }
             entity.asPlayer().logoutListeners.put("autowalk", player -> {
                 player.setLocation(loc);

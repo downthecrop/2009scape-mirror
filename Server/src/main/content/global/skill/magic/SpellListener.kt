@@ -1,5 +1,6 @@
 package content.global.skill.magic
 
+import core.api.playAudio
 import core.api.setAttribute
 import core.cache.def.impl.ItemDefinition
 import core.game.node.Node
@@ -76,7 +77,7 @@ abstract class SpellListener(val bookName: String) : Listener {
         if(player.getAttribute("tablet-spell",false)) return
         player.visualize(anim,gfx)
         if(soundID != -1){
-            player.audioManager.send(soundID)
+            playAudio(player, soundID)
         }
     }
 

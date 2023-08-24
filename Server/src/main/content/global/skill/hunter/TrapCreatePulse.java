@@ -57,21 +57,21 @@ public final class TrapCreatePulse extends SkillPulse<Node> {
 		if (checkRequirements()){
 		switch(trap) {
 			case BIRD_SNARE:
-				player.getAudioManager().send(Sounds.HUNTING_SETNOOSE_2646, 10, 40);
+				playAudio(player, Sounds.HUNTING_SETNOOSE_2646, 40);
 				break;
 			case BOX_TRAP:
-				player.getAudioManager().send(Sounds.HUNTING_LAYBOXTRAP_2636, 10, 20);
+				playAudio(player, Sounds.HUNTING_LAYBOXTRAP_2636, 20);
 				break;
 			case NET_TRAP:
 				lock(player, 3);
-				player.getAudioManager().send(Sounds.HUNTING_SET_TWITCHNET_2644);
+				playAudio(player, Sounds.HUNTING_SET_TWITCHNET_2644);
 				break;
 			case RABBIT_SNARE:
-				player.getAudioManager().send(Sounds.HUNTING_SETSNARE_2647);
+				playAudio(player, Sounds.HUNTING_SETSNARE_2647);
 				break;
 			case DEAD_FALL:
 				lock(player, 6);
-				player.getAudioManager().send(Sounds.HUNTING_SETDEADFALL_2645, 10, 130);
+				playAudio(player, Sounds.HUNTING_SETDEADFALL_2645, 130);
 			}
 		}
 	}

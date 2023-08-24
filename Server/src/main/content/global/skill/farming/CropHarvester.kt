@@ -6,7 +6,6 @@ import core.game.interaction.OptionHandler
 import core.game.node.Node
 import content.global.skill.summoning.familiar.GiantEntNPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
@@ -14,6 +13,7 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
 import org.rs09.consts.Items
+import org.rs09.consts.Sounds
 
 val livesBased = arrayOf(PatchType.HERB, PatchType.CACTUS, PatchType.BELLADONNA, PatchType.HOPS, PatchType.ALLOTMENT,PatchType.EVIL_TURNIP)
 
@@ -65,17 +65,17 @@ class CropHarvester : OptionHandler() {
                         else -> Animation(0)
                     }
                     val sound = when(requiredItem){
-                        Items.SPADE_952 -> Audio(1470, 1, 1)
-                        Items.SECATEURS_5329 -> Audio(2437, 1, 1)
-                        Items.MAGIC_SECATEURS_7409 -> Audio(2437, 1, 1)
-                        else -> Audio(0)
+                        Items.SPADE_952 -> Sounds.DIGSPADE_1470
+                        Items.SECATEURS_5329 -> Sounds.FARMING_PICK_2437
+                        Items.MAGIC_SECATEURS_7409 -> Sounds.FARMING_PICK_2437
+                        else -> 0
                     }
                     if(!player.inventory.containsItem(Item(requiredItem))){
                         player.sendMessage("You lack the needed tool to harvest these crops.")
                         return true
                     }
                     player.animator.animate(anim)
-                    player.audioManager.send(sound)
+                    playAudio(player, sound)
                     delay = 2
                     player.inventory.add(reward)
                     player.skills.addExperience(Skills.FARMING,plantable.harvestXP)

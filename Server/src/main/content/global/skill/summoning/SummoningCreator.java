@@ -10,6 +10,9 @@ import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Represents a utility class of creating summoning nodes.
@@ -157,7 +160,7 @@ public final class SummoningCreator {
 			if (getDelay() == 1) {
 				setDelay(4);
 				player.getPacketDispatch().sendSceneryAnimation(object, Animation.create(8509));
-                player.getAudioManager().send(4164); // 4277 also sounds the same
+                playAudio(player, Sounds.CRAFT_POUCH_4164); // 4277 also sounds the same
 				return false;
 			}
 			player.getPacketDispatch().sendSceneryAnimation(object, Animation.create(8510));

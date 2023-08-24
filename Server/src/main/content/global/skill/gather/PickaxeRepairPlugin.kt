@@ -1,10 +1,12 @@
 package content.global.skill.gather
 
+import core.api.playAudio
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.plugin.Plugin
+import org.rs09.consts.Sounds
 
 /**
  * Repairs pickaxes after being broken
@@ -35,7 +37,7 @@ class PickaxeRepairPlugin : UseWithHandler(480,482,484,486,488,490){
         event.player.inventory.remove(used.asItem())
         event.player.inventory.add(Item(product))
         event.player.sendMessage("You carefully reattach the head to the handle.")
-        event.player.audioManager.send(10)
+        playAudio(event.player, Sounds.EYEGLO_COIN_10)
         return true
     }
 

@@ -11,6 +11,8 @@ import org.rs09.consts.Sounds;
 
 import java.util.HashMap;
 
+import static core.api.ContentAPIKt.playAudio;
+
 /**
  * Handles items with "empty" options
  * @author ceik
@@ -29,7 +31,7 @@ public final class EmptyOptionPlugin extends OptionHandler {
         }
 		if(EmptyItem.emptyItemMap.get(node.getId()) != null){
 			player.getInventory().remove(node.asItem());
-			player.getAudioManager().send(Sounds.LIQUID_2401, 1);
+			playAudio(player, Sounds.LIQUID_2401, 0 ,1);
 			player.getInventory().add(EmptyItem.getEmpty(node.getId()));
 			player.getPacketDispatch().sendMessage(EmptyItem.getEmptyMessage(node.getId()));
 		} else {

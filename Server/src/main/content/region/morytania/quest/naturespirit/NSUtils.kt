@@ -11,6 +11,7 @@ import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
 import org.rs09.consts.Items
 import content.region.morytania.handlers.MortMyreGhastNPC
+import org.rs09.consts.Sounds
 
 object NSUtils {
     fun flagFungusPlaced(player: Player) {
@@ -122,7 +123,7 @@ object NSUtils {
      */
     private fun handleVisuals(player: Player) {
         player.skills.decrementPrayerPoints(RandomFunction.random(1, 3).toDouble())
-        player.audioManager.send(1493)
+        playAudio(player, Sounds.CAST_BLOOM_1493)
         val AROUND_YOU = player.location.surroundingTiles
         for (location in AROUND_YOU) {
             // The graphic is meant to play on a 3x3 radius around you, but not

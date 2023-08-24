@@ -9,7 +9,6 @@ import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.spell.SpellType;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.audio.Audio;
 import core.game.bots.AIPlayer;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.item.Item;
@@ -17,8 +16,11 @@ import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
 import java.util.List;
+
+import static core.api.ContentAPIKt.playGlobalAudio;
 
 @Initializable
 public class StatRestoreSpell extends MagicSpell {
@@ -87,7 +89,7 @@ public class StatRestoreSpell extends MagicSpell {
 		}
 		super.meetsRequirements(player, true, true);
 		potion.getEffect().activate(player);
-		player.getAudioManager().send(new Audio (2899), true);
+		playGlobalAudio(player.getLocation(), Sounds.LUNAR_STAT_SHARE_2899);
 		player.animate(ANIMATION);
 		player.graphics(GRAPHICS);
 		player.getInventory().remove(item);

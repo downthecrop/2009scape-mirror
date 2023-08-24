@@ -229,10 +229,10 @@ public enum BoltEffect {
 		if (sound != null) {
 			Entity attacker = state.getAttacker();
 			if (attacker instanceof Player) {
-				sound.send(attacker.asPlayer(), true);
+				playGlobalAudio(attacker.getLocation(), sound.id);
 			}
 			if (victim instanceof Player) {
-				sound.send(victim.asPlayer(), true);
+				playGlobalAudio(victim.getLocation(), sound.id);
 			}
 		}
 		if (graphics != null) {

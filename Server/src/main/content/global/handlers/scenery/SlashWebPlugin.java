@@ -12,13 +12,15 @@ import core.game.node.entity.combat.equipment.WeaponInterface.AttackStyle;
 import core.game.node.entity.combat.equipment.WeaponInterface.WeaponInterfaces;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
-import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Handles the slashing of a web object.
@@ -74,7 +76,7 @@ public final class SlashWebPlugin extends OptionHandler {
 		}
 		final boolean success = RandomFunction.random(2) == 1;
 		player.lock(2);
-		player.getAudioManager().send(new Audio(2548));
+		playAudio(player, Sounds.STABSWORD_SLASH_2548);
 		player.animate(weapon == KNIFE ? KNIFE_ANIMATION : ANIMATION);
 		if (success) {
 			player.getPacketDispatch().sendMessage("You slash the web apart.");

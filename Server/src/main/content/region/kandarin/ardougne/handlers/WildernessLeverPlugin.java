@@ -17,6 +17,9 @@ import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Handles wilderness levers.
@@ -64,7 +67,7 @@ public final class WildernessLeverPlugin extends OptionHandler {
 	private static void pullLever(final Player player, final LeverSets lever, final int index) {
 		player.lock(2);
 		player.animate(lever.getAnimation());
-		player.getAudioManager().send(new Audio(2400));
+		playAudio(player, Sounds.LEVER_2400);
 		GameWorld.getPulser().submit(new Pulse(2, player) {
 			@Override
 			public boolean pulse() {

@@ -33,7 +33,9 @@ import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
 
+import static core.api.ContentAPIKt.playAudio;
 import static core.api.ContentAPIKt.setVarp;
 
 /**
@@ -148,9 +150,8 @@ public final class CatapultRoom extends MapZone implements Plugin<Object> {
 			Scenery object = RegionManager.getObject(Location.create(2840, 3552, 1));
 			if(object != null)
 				SceneryBuilder.replace(object, object.transform(attack.objectId), 4);
-			Audio sound = new Audio(1911);
 			for (Player p : players) {
-				p.getAudioManager().send(sound);
+				playAudio(p, Sounds.WARGUILD_CATAPULT_ANVIL_1911);
 			}
 			return players.isEmpty();
 		}

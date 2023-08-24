@@ -1,12 +1,14 @@
 package content.global.skill.magic
 
 import content.global.skill.magic.spellconsts.Modern
+import core.api.playAudio
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import org.rs09.consts.Sounds
 
 class SpellTablets : InteractionListener {
     val B2P_TABLET = Items.BONES_TO_PEACHES_8015
@@ -30,7 +32,7 @@ class SpellTablets : InteractionListener {
     }
 
     fun breakTablet(player: Player){
-        player.audioManager.send(979)
+        playAudio(player, Sounds.POH_TABLET_BREAK_979)
         player.animator.forceAnimation(Animation(4069))
         player.lock(5)
         player.setAttribute("tablet-spell",true)

@@ -1,13 +1,13 @@
 package core.game.consumable;
 
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 public class Food extends Consumable {
-
-	public static final Audio SOUND = new Audio(2393, 1, 1);
 
 	public Food(final int[] ids, final ConsumableEffect effect, final String... messages) {
 		super(ids, effect, messages);
@@ -30,6 +30,6 @@ public class Food extends Consumable {
 	}
 
 	private void playEatingSound(Player player) {
-		player.getAudioManager().send(SOUND);
+		playAudio(player, Sounds.EAT_2393);
 	}
 }

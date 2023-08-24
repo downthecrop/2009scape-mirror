@@ -5,6 +5,9 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * 
@@ -48,7 +51,7 @@ public class ChiselLimestonePulse extends SkillPulse<Item> {
 	@Override
 	public void animate() {
 		if (ticks % 5 == 0 || ticks < 1) {
-			player.getAudioManager().send(2586);
+			playAudio(player, Sounds.CHISEL_2586);
 			player.animate(Animation.create(4470));
 		}
 	}

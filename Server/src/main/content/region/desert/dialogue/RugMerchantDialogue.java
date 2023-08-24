@@ -295,7 +295,7 @@ public final class RugMerchantDialogue extends DialoguePlugin {
 			player.getInterfaceManager().removeTabs(0,1,2,3,4,5,6,7,8,9,10,11,12,13);
 			player.getEquipment().replace(new Item(Items.MAGIC_CARPET_5614),EquipmentContainer.SLOT_WEAPON);
 			player.getPacketDispatch().sendInterfaceConfig(548,69,true);
-			player.getAudioManager().send(Sounds.CARPET_RISE_1196);
+			playAudio(player, Sounds.CARPET_RISE_1196);
 			playJingle(player, 132);
 
 			registerLogoutListener(player, "magic-carpet", (pl) -> {
@@ -342,7 +342,7 @@ public final class RugMerchantDialogue extends DialoguePlugin {
 						player.unlock();
 						player.animate(new Animation(-1));
                                                 setVarp(player, 499, 0);
-						player.getAudioManager().send(Sounds.CARPET_DESCEND_1195);
+						playAudio(player, Sounds.CARPET_DESCEND_1195);
 
 						clearLogoutListener(player, "magic-carpet");
 

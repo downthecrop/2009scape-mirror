@@ -53,7 +53,7 @@ public final class DeathTask extends NodeTask {
 				Player p = killer.asPlayer();
 				Audio audio = e.asNpc().getAudio(2);
 				if (audio != null) {
-					playGlobalAudio(e.getLocation(), audio.getId());
+					playGlobalAudio(e.getLocation(), audio.id);
 				}
 			}
 		}

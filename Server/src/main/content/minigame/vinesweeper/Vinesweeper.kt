@@ -25,10 +25,6 @@ import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import core.tools.RandomFunction
-import org.rs09.consts.Animations
-import org.rs09.consts.Components
-import org.rs09.consts.Items
-import org.rs09.consts.NPCs
 import content.minigame.vinesweeper.Vinesweeper.Companion.FARMERS
 import content.minigame.vinesweeper.Vinesweeper.Companion.FARMER_CLEAR_RADIUS
 import content.minigame.vinesweeper.Vinesweeper.Companion.HOLES
@@ -43,6 +39,7 @@ import core.game.interaction.IntType
 import core.game.interaction.InterfaceListener
 import core.game.world.GameWorld
 import core.game.world.GameWorld.ticks
+import org.rs09.consts.*
 import org.rs09.consts.Graphics as Gfx
 import org.rs09.consts.Scenery as Sceneries
 
@@ -505,7 +502,7 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
                 npc.faceTemporary(player, 1)
                 npc.graphics(Graphics(108))
                 player.lock()
-                player.audioManager.send(125)
+                playAudio(player, Sounds.CURSE_ALL_125, 0, 1)
                 Projectile.create(npc, player, 109).send()
                 npc.sendChat("Avach nimporto!")
                 GameWorld.Pulser.submit(object : Pulse(1, player) {

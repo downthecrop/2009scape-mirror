@@ -14,6 +14,7 @@ import core.net.packet.out.RepositionChild;
 import core.net.packet.out.StringPacket;
 import core.tools.RandomFunction;
 import org.json.simple.JSONObject;
+import org.rs09.consts.Sounds;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -148,7 +149,7 @@ public class BankPinManager {
 		player.getInterfaceManager().close();
 		tempPin = null;
 		sendMessages(messages);
-		player.getAudioManager().send(1040);
+		playAudio(player, Sounds.PIN_PENDING_1040);
 		player.getInterfaceManager().open(new Component(14));
 	}
 
@@ -268,7 +269,7 @@ public class BankPinManager {
 		for (int i = 60; i < 66; i++) {
 			player.getPacketDispatch().sendInterfaceConfig(14, i, show);
 		}
-		player.getAudioManager().send(1040);
+		playAudio(player, Sounds.PIN_PENDING_1040);
 		player.getPacketDispatch().sendInterfaceConfig(14, 89, !show);
 		player.getPacketDispatch().sendInterfaceConfig(14, 91, !show);
 		player.getPacketDispatch().sendInterfaceConfig(14, 87, !show);
@@ -341,13 +342,13 @@ public class BankPinManager {
 	public void handlePinStage(int stage) {
 		if (stage == 4) {
 			if (!hasPin() || changeState == 2) {
-				player.getAudioManager().send(1040);
+				playAudio(player, Sounds.PIN_PENDING_1040);
 				player.getPacketDispatch().sendString("Now please enter that number again!", 13, 28);
 				shuffleDigits();
 				return;
 			} else {
 				if (!tempPin.equals(pin)) {
-					player.getAudioManager().send(1042);
+					playAudio(player, Sounds.PIN_CANCEL_1042);
 					player.getInterfaceManager().close();
 					player.sendMessage("The PIN you entered is incorrect.");
 					if (setTries(getTries() + 1) >= 2) {
@@ -394,7 +395,7 @@ public class BankPinManager {
 		}
 		shuffleDigits();
 		if (stage != 0) {
-			player.getAudioManager().send(1041);
+			playAudio(player, Sounds.PIN_BEEP_1041);
 		}
 	}
 
@@ -475,7 +476,7 @@ public class BankPinManager {
 		pendingDelay = -1;
 		pin = null;
 		unlocked = false;
-		player.getAudioManager().send(1042);
+		playAudio(player, Sounds.PIN_CANCEL_1042);
 		openSettings(messages);
 	}
 

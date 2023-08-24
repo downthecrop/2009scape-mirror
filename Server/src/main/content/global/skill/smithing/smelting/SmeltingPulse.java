@@ -111,7 +111,7 @@ public class SmeltingPulse extends SkillPulse<Item> {
                 player.visualize(Animation.create(725), new Graphics(148, 96));
             } else {
                 player.animate(Animation.create(3243)); // Used to be 899 but that looked wonky and broken
-                player.getAudioManager().send(Sounds.FURNACE_2725, 1);
+                playAudio(player, Sounds.FURNACE_2725);
             }
         }
     }

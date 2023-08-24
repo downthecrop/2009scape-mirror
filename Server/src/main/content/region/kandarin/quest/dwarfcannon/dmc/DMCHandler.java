@@ -21,6 +21,7 @@ import core.tools.RandomFunction;
 import org.jetbrains.annotations.NotNull;
 import core.game.node.entity.combat.CombatSwingHandler;
 import core.game.world.GameWorld;
+import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.*;
 
@@ -75,13 +76,13 @@ public final class DMCHandler implements LogoutListener {
 		}
 		player.getPacketDispatch().sendSceneryAnimation(cannon, Animation.create(direction.getAnimationId()));
 		Location l = cannon.getLocation().transform(1, 1, 0);
-        player.getAudioManager().send(new Audio(2877), true, l);
+		playGlobalAudio(l, Sounds.MCANNON_TURN_2877);
 		direction = DMCRevolution.values()[(direction.ordinal() + 1) % DMCRevolution.values().length];
 		for (NPC npc : RegionManager.getLocalNpcs(l, 10)) {
 			if (direction.isInSight(npc.getLocation().getX() - l.getX(), npc.getLocation().getY() - l.getY()) && npc.isAttackable(player, CombatStyle.RANGE, false) && CombatSwingHandler.isProjectileClipped(npc, l, false)) {
 				int speed = (int) (25 + (l.getDistance(npc.getLocation()) * 10));
 				Projectile.create(l, npc.getLocation(), 53, 40, 36, 20, speed, 0, 128).send();
-                player.getAudioManager().send(new Audio(1667), true, l);
+				playGlobalAudio(l, Sounds.MCANNON_FIRE_1667);
 				cannonballs--;
 				int hit = 0;
 				if (player.getSwingHandler(false).isAccurateImpact(player, npc, CombatStyle.RANGE, 1.2, 1.0)) {
@@ -197,7 +198,7 @@ public final class DMCHandler implements LogoutListener {
                                         registerTimer (player, handler.timer);
 					return true;
 				}
-                player.getAudioManager().send(new Audio(2876), true);
+				playGlobalAudio(player.getLocation(), Sounds.MCANNON_SETUP_2876);
                 if(count != 0) {
                     SceneryBuilder.remove(object);
                     SceneryBuilder.add(object = object.transform(object.getId() + 1));

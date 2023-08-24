@@ -5,7 +5,6 @@ import core.api.*
 import core.cache.def.impl.ItemDefinition
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.PlayerDetails
-import core.game.node.entity.player.link.audio.Audio
 import core.game.system.command.Privilege
 import core.game.system.config.ItemConfigParser
 import core.game.system.task.Pulse
@@ -14,6 +13,7 @@ import core.game.world.repository.Repository
 import core.tools.Log
 import core.tools.SystemLogger
 import core.tools.colorize
+import org.rs09.consts.Sounds
 import java.lang.Integer.max
 import java.util.concurrent.LinkedBlockingDeque
 
@@ -279,7 +279,7 @@ class GrandExchange : StartupListener, Commands {
             buyer.completedAmount += amount
 
             if(seller.amountLeft < 1 && seller.player != null)
-                seller.player!!.audioManager.send(Audio(4042,1,1))
+                playAudio(seller.player!!, Sounds.GE_COLLECT_COINS_4042)
 
             seller.addWithdrawItem(995, amount * if(sellerBias) buyer.offeredValue else seller.offeredValue)
             buyer.addWithdrawItem(seller.itemID, amount)

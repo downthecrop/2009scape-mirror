@@ -1,13 +1,12 @@
 package core.game.consumable;
 
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
 
-public class Drink extends Consumable {
+import static core.api.ContentAPIKt.playAudio;
 
-	public static final Audio SOUND = new Audio(4580, 1, 1);
+public class Drink extends Consumable {
 
 	public Drink(int[] ids, ConsumableEffect effect, String... messages) {
 		super(ids, effect, messages);
@@ -26,7 +25,7 @@ public class Drink extends Consumable {
 	@Override
 	protected void executeConsumptionActions(Player player) {
 		player.animate(animation);
-		player.getAudioManager().send(SOUND);
+		playAudio(player, 4580);
 	}
 
 	@Override

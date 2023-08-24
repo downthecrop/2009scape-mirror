@@ -14,8 +14,10 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.hasRequirement;
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Handles the praying at an alter.
@@ -93,7 +95,7 @@ public class PrayerAltarPlugin extends OptionHandler {
 	 */
 	public void visualize(Player player) {
 		player.lock(3);
-		player.getAudioManager().send(2674);
+		playAudio(player, Sounds.PRAYER_RECHARGE_2674);
 		player.animate(Animation.create(645));
 	}
 

@@ -12,12 +12,13 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
 
-import static core.api.ContentAPIKt.inEquipment;
+import static core.api.ContentAPIKt.*;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_BASE;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_RC;
-import static core.api.ContentAPIKt.hasRequirement;
+
 import core.game.world.GameWorld;
 import org.rs09.consts.Items;
+import org.rs09.consts.Sounds;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -152,7 +153,7 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
     public void animate() {
         player.animate(ANIMATION);
         player.graphics(GRAPHICS);
-        player.getAudioManager().send(2710);
+        playAudio(player, Sounds.BIND_RUNES_2710);
     }
 
     @Override

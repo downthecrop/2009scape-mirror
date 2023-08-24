@@ -11,6 +11,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
+import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.*;
 
@@ -45,7 +46,7 @@ public class UnicornStallionNPC extends Familiar {
 	@Override
 	protected boolean specialMove(FamiliarSpecial special) {
 		Player player = (Player) special.getNode();
-		player.getAudioManager().send(4372);
+		playAudio(player, Sounds.HEALING_AURA_4372);
 		visualize(Animation.create(8267), Graphics.create(1356));
 		player.getSkills().heal((int) (player.getSkills().getMaximumLifepoints() * 0.15));
 		return true;
@@ -77,7 +78,7 @@ public class UnicornStallionNPC extends Familiar {
 					player.sendMessage("You are not poisoned.");
 					return true;
 				}
-				player.getAudioManager().send(4372);
+				playAudio(player, Sounds.HEALING_AURA_4372);
 				familiar.visualize(Animation.create(8267), Graphics.create(1356));
                                 curePoison(player);
 				player.getSkills().updateLevel(Skills.SUMMONING, -2, 0);

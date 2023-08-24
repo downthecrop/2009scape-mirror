@@ -628,7 +628,7 @@ public class NPC extends Entity {
 		int[] audios = getDefinition().getConfiguration(NPCConfigParser.COMBAT_AUDIO, null);
 		if (audios != null) {
 			Audio audio = new Audio(audios[index]);
-			if (audio != null && audio.getId() != 0) {
+			if (audio != null && audio.id != 0) {
 				return audio;
 			}
 		}

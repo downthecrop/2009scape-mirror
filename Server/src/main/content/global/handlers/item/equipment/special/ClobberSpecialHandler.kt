@@ -1,6 +1,7 @@
 package content.global.handlers.item.equipment.special
 
 import core.ServerConstants
+import core.api.playAudio
 import core.game.container.impl.EquipmentContainer
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
@@ -18,6 +19,7 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.RandomFunction
 import org.rs09.consts.Items
+import org.rs09.consts.Sounds
 
 
 /**
@@ -70,7 +72,7 @@ class ClobberSpecialHandler : MeleeSwingHandler(), Plugin<Any> {
         victim.skills.updateLevel(Skills.DEFENCE, -hit, 0)
         victim.skills.updateLevel(Skills.MAGIC, -hit, 0)
 
-        player.audioManager.send(AUTHENTIC_AUDIO)
+        playAudio(player, Sounds.CLOBBER_2531, 20)
         return 1
     }
 
@@ -84,7 +86,7 @@ class ClobberSpecialHandler : MeleeSwingHandler(), Plugin<Any> {
         player.sendChat("Chop chop!")
         player.skills.updateLevel(Skills.WOODCUTTING, 3, player.skills.getStaticLevel(Skills.WOODCUTTING) + 3)
         visualize(player, null, null)
-        player.audioManager.send(OSRS_AUDIO)
+        playAudio(player, Sounds.CLOBBER_2531, 20)
         return -1
     }
 
@@ -103,16 +105,6 @@ class ClobberSpecialHandler : MeleeSwingHandler(), Plugin<Any> {
          * The graphic.
          */
         private val GRAPHIC = Graphics(479, 96)
-
-        /**
-         * The authentic sound.
-         */
-        private val AUTHENTIC_AUDIO = Audio(2531)
-
-        /**
-         * The OSRS sound.
-         */
-        private val OSRS_AUDIO = Audio(2530)
 
         /**
          * The item.

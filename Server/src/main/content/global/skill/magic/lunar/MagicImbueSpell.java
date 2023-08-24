@@ -13,6 +13,9 @@ import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * The magic imbue spell.
@@ -61,7 +64,7 @@ public class MagicImbueSpell extends MagicSpell {
 		player.lock(ANIMATION.getDuration() + 1);
 		player.graphics(GRAPHIC);
 		player.animate(ANIMATION);
-		player.getAudioManager().send(2888, 1, 1);
+		playAudio(player, Sounds.LUNAR_EMBUE_RUNES_2888);
 		player.getPacketDispatch().sendMessage("You are charged to combine runes!");
 		return true;
 	}

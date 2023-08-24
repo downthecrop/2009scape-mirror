@@ -9,16 +9,18 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.combat.spell.SpellType;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.item.Item;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
 
 import java.util.Iterator;
 import java.util.List;
+
+import static core.api.ContentAPIKt.playGlobalAudio;
 
 /**
  * Represents the healing spell.
@@ -105,8 +107,8 @@ public final class HealSpell extends MagicSpell {
 			player.getImpactHandler().manualHit(player, transfer, null);
 			o.getSkills().heal(transfer);
 			player.animate(ANIMATION);
-			player.getAudioManager().send(new Audio(2895), true);
-			o.getAudioManager().send(new Audio(2892), true);
+			playGlobalAudio(player.getLocation(), Sounds.LUNAR_HEAL_OTHER_2895);
+			playGlobalAudio(o.getLocation(), Sounds.LUNAR_HEAL_OTHER_INDIVIDUAL_2892);
 			o.graphics(GRAPHICS);
 		} else {
 			List<Player> players = RegionManager.getLocalPlayers(player, 1);
@@ -130,9 +132,9 @@ public final class HealSpell extends MagicSpell {
 			}
 			player.getImpactHandler().manualHit(player, percentage, HitsplatType.NORMAL);
 			player.animate(ANIMATION_G);
-			player.getAudioManager().send(new Audio(2894), true);
+			playGlobalAudio(player.getLocation(), Sounds.LUNAR_HEAL_GROUP_2894);
 			for (Player p : players) {
-				p.getAudioManager().send(new Audio(2892), true);
+				playGlobalAudio(p.getLocation(), Sounds.LUNAR_HEAL_OTHER_INDIVIDUAL_2892);
 				p.graphics(GRAPHICS_G);
 				p.getSkills().heal(percentage);
 			}

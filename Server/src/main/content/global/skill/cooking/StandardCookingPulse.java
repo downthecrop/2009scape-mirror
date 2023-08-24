@@ -13,6 +13,9 @@ import core.game.system.task.Pulse;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
 import org.rs09.consts.Items;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 public class StandardCookingPulse extends Pulse {
     //range animation
@@ -170,7 +173,7 @@ public class StandardCookingPulse extends Pulse {
                 player.getInventory().add(CookableItems.getBurnt(initial));
             }
             player.getPacketDispatch().sendMessage(getMessage(initialItem, productItem, burned));
-            player.getAudioManager().send(SOUND);
+            playAudio(player, Sounds.FRY_2577);
             return true;
         }
         return false;

@@ -8,7 +8,6 @@ import core.game.node.entity.combat.equipment.SwitchAttack;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.Item;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -17,8 +16,9 @@ import core.plugin.Initializable;
 import core.tools.RandomFunction;
 import core.game.node.entity.combat.CombatSwingHandler;
 import core.game.node.entity.combat.MultiSwingHandler;
+import org.rs09.consts.Sounds;
 
-import static core.api.ContentAPIKt.getPathableRandomLocalCoordinate;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the chaos elemental npc.
@@ -138,14 +138,14 @@ public class ChaosElementalNPC extends AbstractNPC {
 					return;
 				}
 				if (attack.getProjectile().getProjectileId() == 557) {
-					player.getAudioManager().send(new Audio(350), true); // C. Elemental Discord Impact SFX
+					playGlobalAudio(player.getLocation(), Sounds.CHAOS_ELEMENTAL_HIT_351); // C. Elemental Discord Impact SFX
 				}
 				else if (attack.getProjectile().getProjectileId() == 554) {
-					player.getAudioManager().send(new Audio(346), true); // C. Elemental Confusion Impact SFX
+					playAudio(player, Sounds.CHAOS_ELEMENTAL_CONFUSION_IMPACT_346); // C. Elemental Confusion Impact SFX
 					Location loc = getPathableRandomLocalCoordinate(player, 10, entity.getLocation(), 3);
 					player.teleport(loc);
 				} else if (attack.getProjectile().getProjectileId() == 551) {
-					player.getAudioManager().send(new Audio(353), true); // C. Elemental Madness Impact SFX
+					playGlobalAudio(player.getLocation(), Sounds.CHAOS_ELEMENTAL_MADNESS_IMPACT_353); // C. Elemental Madness Impact SFX
 					if (player.getInventory().freeSlots() < 1 || player.getEquipment().itemCount() < 1) {
 						return;
 					}

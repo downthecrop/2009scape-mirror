@@ -2,6 +2,7 @@ package content.minigame.mta
 
 import content.global.skill.magic.SpellListener
 import content.global.skill.magic.spellconsts.Modern
+import core.api.playAudio
 import core.game.node.item.Item
 import core.game.world.map.Direction
 import core.game.world.update.flag.context.Animation
@@ -10,6 +11,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import org.rs09.consts.Sounds
 
 class MTAListeners : InteractionListener {
     override fun defineListeners() {
@@ -55,7 +57,7 @@ class MTASpellListeners : SpellListener("modern"){
             p.lock(3)
             p.visualize(HIGH_ALCH_ANIM,HIGH_ALCH_GFX)
             if(p.inventory.remove(Item(item.id,1))){
-                p.audioManager.send(97)
+                playAudio(p, Sounds.HIGH_ALCHEMY_97)
                 if (coins.amount != 0) {
                     p.inventory.add(coins)
                 }
@@ -90,7 +92,7 @@ class MTASpellListeners : SpellListener("modern"){
             p.lock(3)
             p.visualize(LOW_ALCH_ANIM,LOW_ALCH_GFX)
             if(p.inventory.remove(Item(item.id,1))){
-                p.audioManager.send(97)
+                playAudio(p, Sounds.HIGH_ALCHEMY_97)
                 if (coins.amount != 0) {
                     p.inventory.add(coins)
                 }

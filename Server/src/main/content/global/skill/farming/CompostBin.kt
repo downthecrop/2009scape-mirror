@@ -9,6 +9,7 @@ import core.tools.RandomFunction
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.rs09.consts.Items
+import org.rs09.consts.Sounds
 import java.util.concurrent.TimeUnit
 
 class CompostBin(val player: Player, val bin: CompostBins) {
@@ -25,14 +26,14 @@ class CompostBin(val player: Player, val bin: CompostBins) {
 
     fun close() {
         isClosed = true
-        player.audioManager.send(2428)          
+        playAudio(player, Sounds.COMPOST_CLOSE_2428)
         finishedTime = System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(RandomFunction.random(35,50).toLong())
         updateBit()
     }
 
     fun open(){
         isClosed = false
-        player.audioManager.send(2429)        
+        playAudio(player, Sounds.COMPOST_OPEN_2429)
         updateBit()
     }
 
@@ -47,7 +48,7 @@ class CompostBin(val player: Player, val bin: CompostBins) {
             isSuperCompost = true
             isClosed = false
         }
-        player.audioManager.send(Audio (2443, 1, 1))
+        playAudio(player, Sounds.FARMING_SCOOP_2443)
         updateBit()
         if(isSuperCompost) rewardXP(player, Skills.FARMING, 8.5)
         else rewardXP(player, Skills.FARMING, 4.5)
@@ -116,7 +117,7 @@ class CompostBin(val player: Player, val bin: CompostBins) {
         } else item.amount
         for(i in 0 until amount) {
 
-            player.audioManager.send(2441)
+            playAudio(player, Sounds.FARMING_PUTIN_2441)
             addItem(item.id)
         }
     }

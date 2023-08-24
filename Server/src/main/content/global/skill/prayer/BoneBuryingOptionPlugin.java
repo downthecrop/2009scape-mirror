@@ -7,12 +7,14 @@ import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Represents the bone bury option plugin.
@@ -26,10 +28,6 @@ public final class BoneBuryingOptionPlugin extends OptionHandler {
 	 */
 	private static final Animation ANIMATION = new Animation(827);
 
-	/**
-	 * Represents the sound to use.
-	 */
-	private static final Audio SOUND = new Audio(2738, 10, 1);
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
@@ -57,7 +55,7 @@ public final class BoneBuryingOptionPlugin extends OptionHandler {
 		player.lock(2);
 		player.animate(ANIMATION);
 		player.getPacketDispatch().sendMessage("You dig a hole in the ground...");
-		player.getAudioManager().send(SOUND);
+		playAudio(player, Sounds.BONES_DOWN_2738);
 		final Bones bonee = bone;
 		GameWorld.getPulser().submit(new Pulse(2, player) {
 			@Override

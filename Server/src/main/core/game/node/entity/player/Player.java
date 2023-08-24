@@ -24,7 +24,6 @@ import core.game.node.entity.player.info.login.LoginConfiguration;
 import core.game.node.entity.player.info.login.PlayerParser;
 import core.game.node.entity.player.link.*;
 import core.game.node.entity.player.link.appearance.Appearance;
-import core.game.node.entity.player.link.audio.AudioManager;
 import core.game.node.entity.player.link.diary.AchievementDiaryManager;
 import core.game.node.entity.player.link.emote.EmoteManager;
 import core.game.node.entity.player.link.music.MusicPlayer;
@@ -60,6 +59,7 @@ import core.tools.*;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import org.rs09.consts.Items;
+import org.rs09.consts.Sounds;
 import proto.management.ClanLeaveNotification;
 import proto.management.PlayerStatusUpdate;
 import core.GlobalStats;
@@ -90,8 +90,6 @@ import static core.api.ContentAPIKt.*;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_BASE;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_DEATHS;
 import static core.tools.GlobalsKt.colorize;
-import static core.game.world.map.zone.impl.WildernessZone.WILDERNESS_PROT_ATTR;
-import static core.game.world.map.zone.impl.WildernessZone.WILDERNESS_HIGHER_NEXTFEE;
 
 /**
  * Represents a player entity.
@@ -266,11 +264,6 @@ public class Player extends Entity {
 	 * The house manager.
 	 */
 	private final HouseManager houseManager = new HouseManager();
-
-	/**
-	 * The audio manager.
-	 */
-	private final AudioManager audioManager = new AudioManager(this);
 
 	/**
 	 * The bank pin manager.
@@ -448,12 +441,12 @@ public class Player extends Entity {
 			int time = getAttribute("fire:immune",0) - GameWorld.getTicks();
 			if(time == TickUtilsKt.secondsToTicks(30)){
 				sendMessage(colorize("%RYou have 30 seconds remaining on your antifire potion."));
-				getAudioManager().send(3120);
+				playAudio(this, Sounds.CLOCK_TICK_1_3120, 0, 3);
 			}
 			if(time == 0){
 				sendMessage(colorize("%RYour antifire potion has expired."));
 				removeAttribute("fire:immune");
-				getAudioManager().send(2607);
+				playAudio(this, Sounds.DRAGON_POTION_FINISHED_2607);
 			}
 		}
 		if(getAttribute("poison:immunity",0) > 0){
@@ -461,12 +454,12 @@ public class Player extends Entity {
 			debug(time + "");
 			if(time == TickUtilsKt.secondsToTicks(30)){
 				sendMessage(colorize("%RYou have 30 seconds remaining on your antipoison potion."));
-				getAudioManager().send(3120);
+				playAudio(this, Sounds.CLOCK_TICK_1_3120, 0, 3);
 			}
 			if(time == 0){
 				sendMessage(colorize("%RYour antipoison potion has expired."));
 				removeAttribute("poison:immunity");
-				getAudioManager().send(2607);
+				playAudio(this, Sounds.DRAGON_POTION_FINISHED_2607);
 			}
 		}
 		if(getAttribute("infinite-special", false)) {
@@ -1291,14 +1284,6 @@ public class Player extends Entity {
 	 */
 	public HouseManager getHouseManager() {
 		return houseManager;
-	}
-
-	/**
-	 * Gets the audioManager.
-	 * @return the audioManager
-	 */
-	public AudioManager getAudioManager() {
-		return audioManager;
 	}
 
 	/**

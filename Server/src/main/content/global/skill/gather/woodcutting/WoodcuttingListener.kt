@@ -12,14 +12,13 @@ import core.api.*
 import core.cache.def.impl.ItemDefinition
 import core.game.container.impl.EquipmentContainer
 import core.game.event.ResourceProducedEvent
+import core.game.interaction.Clocks
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.interaction.Clocks
 import core.game.node.Node
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.impl.Projectile
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
@@ -169,7 +168,7 @@ class WoodcuttingListener : InteractionListener {
                     SceneryBuilder.replace(node, node.transform(0), resource.getRespawnDuration())
                 }
                 node.setActive(false)
-                player.getAudioManager().send(TREE_FALLING_2734)
+                playAudio(player, TREE_FALLING_2734)
                 return true
             }
         }
@@ -196,11 +195,10 @@ class WoodcuttingListener : InteractionListener {
                     .filter { p: Player -> p.username != player.username }
                     .toList()
             val soundIndex = RandomFunction.random(0, woodcuttingSounds.size)
-            player.audioManager.send(
-                    Audio(woodcuttingSounds[soundIndex]),
-                    playersAroundMe,
-                    player.location
-            )
+
+            for (p in playersAroundMe) {
+                playAudio(p, woodcuttingSounds[soundIndex])
+            }
         }
     }
 

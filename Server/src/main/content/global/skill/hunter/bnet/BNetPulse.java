@@ -15,6 +15,8 @@ import org.rs09.consts.Sounds;
 
 import java.util.Random;
 
+import static core.api.ContentAPIKt.playAudio;
+
 /**
  * Handles the butterfly net catch pulse.
  * @author Vexia
@@ -94,7 +96,7 @@ public final class BNetPulse extends SkillPulse<NPC> {
 	public void animate() {
 		if (ticks < 1) {
 			player.animate(ANIMATION);
-			player.getAudioManager().send(Sounds.HUNTING_BUTTERFLYNET_2623);
+			playAudio(player, Sounds.HUNTING_BUTTERFLYNET_2623);
 		}
 	}
 

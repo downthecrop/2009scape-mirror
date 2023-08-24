@@ -22,6 +22,9 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
 import core.game.global.action.PickupHandler;
 import core.game.world.GameWorld;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Represents the telekenitic grab spell.
@@ -143,7 +146,7 @@ public final class TelekineticGrabSpell extends MagicSpell {
 						player.getPacketDispatch().sendMessage("Too late!");
 						return true;
 					}
-					player.getAudioManager().send(3008);
+					playAudio(player, Sounds.VULNERABILITY_IMPACT_3008);
 					if (!teleZone) {
 						player.getInventory().add(new Item(g.getId(), g.getAmount(), g.getCharge()));
 					} else {

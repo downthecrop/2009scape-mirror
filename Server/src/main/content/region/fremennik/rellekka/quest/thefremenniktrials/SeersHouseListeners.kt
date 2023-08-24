@@ -15,6 +15,7 @@ import core.game.global.action.DoorActionHandler
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import org.rs09.consts.NPCs
+import org.rs09.consts.Sounds
 
 class SeersHouseListeners : InteractionListener {
 
@@ -269,7 +270,7 @@ class SeersHouseListeners : InteractionListener {
 
         onUseWith(IntType.SCENERY,REDHERRING,COOKINGRANGE) { player, used, with ->
             player.animate(Animation(883,Animator.Priority.HIGH))
-            player.audioManager.send(Audio(2577, 1, 1))
+            playAudio(player, Sounds.FRY_2577)
             removeItem(player,REDHERRING)
             addItem(player,REDGOOP)
             sendDialogue(player,"As you cook the herring on the stove, the colouring on it peels off separately as a red sticky goop...")
@@ -894,7 +895,7 @@ class SeersHouseListeners : InteractionListener {
 
         onUseWith(IntType.SCENERY, FROZENBUCKET, COOKINGRANGE) { player, used, with ->
             player.animate(Animation(883,Animator.Priority.HIGH))
-            player.audioManager.send(Audio(2577, 1, 1))
+            playAudio(player, Sounds.FRY_2577)
             removeItem(player,FROZENBUCKET)
             addItem(player,EMPTYBUCKET)
             sendMessage(player,"You place the frozen bucket on the range. The ice turns to steam.")
@@ -903,7 +904,7 @@ class SeersHouseListeners : InteractionListener {
 
         onUseWith(IntType.SCENERY, FROZENJUG, COOKINGRANGE) { player, used, with ->
             player.animate(Animation(883,Animator.Priority.HIGH))
-            player.audioManager.send(Audio(2577, 1, 1))
+            playAudio(player, Sounds.FRY_2577)
             removeItem(player,FROZENJUG)
             addItem(player,EMPTYJUG)
             sendMessage(player,"You place the frozen jug on the range. The ice turns to steam.")
@@ -912,7 +913,7 @@ class SeersHouseListeners : InteractionListener {
 
         onUseWith(IntType.SCENERY, FROZENVASE, COOKINGRANGE) { player, used, with ->
             player.animate(Animation(883,Animator.Priority.HIGH))
-            player.audioManager.send(Audio(2577, 1, 1))
+            playAudio(player, Sounds.FRY_2577)
             removeItem(player,FROZENVASE)
             addItem(player,VASE)
             sendMessage(player,"You place the frozen vase on the range. The ice turns into steam.")
@@ -921,7 +922,7 @@ class SeersHouseListeners : InteractionListener {
 
         onUseWith(IntType.SCENERY, FROZENKEY, COOKINGRANGE) { player, used, with ->
             player.animate(Animation(883,Animator.Priority.HIGH))
-            player.audioManager.send(Audio(2577, 1, 1))
+            playAudio(player, Sounds.FRY_2577)
             removeItem(player,FROZENKEY)
             addItem(player,SEERSKEY)
             sendMessage(player,"The heat of the range melts the ice around the key.")

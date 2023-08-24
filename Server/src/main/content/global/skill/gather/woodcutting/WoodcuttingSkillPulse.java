@@ -29,6 +29,7 @@ import org.rs09.consts.Sounds;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static core.api.ContentAPIKt.playAudio;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_BASE;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_LOGS;
 
@@ -123,11 +124,9 @@ public class WoodcuttingSkillPulse extends Pulse {
 
             int soundIndex = RandomFunction.random(0, woodcuttingSounds.length);
 
-            player.getAudioManager().send(
-                new Audio(woodcuttingSounds[soundIndex]),
-                playersAroundMe,
-                player.getLocation()
-            );
+            for (Player p : playersAroundMe) {
+                playAudio(p, woodcuttingSounds[soundIndex]);
+            }
         }
     }
 
@@ -216,7 +215,7 @@ public class WoodcuttingSkillPulse extends Pulse {
                 }
                 node.setActive(false);
 
-                player.getAudioManager().send(Sounds.TREE_FALLING_2734);
+                playAudio(player, Sounds.TREE_FALLING_2734);
                 return true;
             }
         }

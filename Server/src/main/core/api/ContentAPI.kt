@@ -810,30 +810,30 @@ fun <T> animate(entity: Entity, anim: T, forced: Boolean = false) {
 /**
  * Plays audio for the player
  * @param player the player to play the defined audio for
- * @param audio the audio id to play
+ * @param id the audio id to play
  * @param delay the delay in client cycles (50 cycles = 1 second)
  * @param loops the number of times to loop audio (for some audio ids it is used to define how many times to loop the audio)
  * @param location the location where the audio will play from (The sound will fade with distance)
  * @param radius the distance the audio can be heard from the defined location (default = 8 tiles if undefined)
  */
 @JvmOverloads
-fun playAudio(player: Player, audio: Int, delay: Int = 0, loops: Int = 1, location: Location? = null, radius: Int = 8) {
-        PacketRepository.send(AudioPacket::class.java, DefaultContext(player, Audio(audio, loops, delay, radius), location))
+fun playAudio(player: Player, id: Int, delay: Int = 0, loops: Int = 1, location: Location? = null, radius: Int = Audio.defaultAudioRadius) {
+    PacketRepository.send(AudioPacket::class.java, DefaultContext(player, Audio(id, delay, loops, radius), location))
 }
 
 /**
  * Plays audio for players near a defined location
  * @param location the location where the audio will play from (The sound will fade with distance)
- * @param audio the audio id to play
+ * @param id the audio id to play
  * @param delay the delay in client cycles (50 cycles = 1 second)
  * @param loops the number of times to loop audio (for some audio ids it is used to define how many times to loop the audio)
  * @param radius the distance the audio can be heard from the defined location (default = 8 tiles if undefined)
  */
 @JvmOverloads
-fun playGlobalAudio(location: Location, audio: Int, delay: Int = 0, loops: Int = 1, radius: Int = 8) {
+fun playGlobalAudio(location: Location, id: Int, delay: Int = 0, loops: Int = 1, radius: Int = Audio.defaultAudioRadius) {
     val nearbyPlayers = RegionManager.getLocalPlayers(location, radius)
     for (player in nearbyPlayers) {
-        PacketRepository.send(AudioPacket::class.java, DefaultContext(player, Audio(audio, loops, delay, radius), location))
+        PacketRepository.send(AudioPacket::class.java, DefaultContext(player, Audio(id, delay, loops, radius), location))
     }
 }
 
@@ -2803,7 +2803,7 @@ fun stun(entity: Entity, ticks: Int) {
     entity.clocks[Clocks.STUN] = getWorldTicks() + ticks
     entity.graphics(Graphics(80, 96))
     if (entity is Player) {
-        entity.audioManager.send(Audio(2727, 1, 0))
+        playAudio(entity.asPlayer(), Sounds.STUNNED_2727)
         entity.animate(Animation(424, Animator.Priority.VERY_HIGH))
         sendMessage(entity, "You have been stunned!")
     }

@@ -15,6 +15,9 @@ import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * The stat spy spell.
@@ -72,7 +75,7 @@ public final class StatSpySpell extends MagicSpell {
 			final Player o = ((Player) target);
 			player.animate(ANIMATION);
 			player.face(o);
-			player.getAudioManager().send(3620);
+			playAudio(player, Sounds.LUNAR_STAT_SPY_3620);
 			COMPONENT.setCloseEvent(new CloseEvent() {
 				@Override
 				public boolean close(Player player, Component c) {
@@ -82,7 +85,7 @@ public final class StatSpySpell extends MagicSpell {
 			});
 			player.graphics(EYE);
 			o.graphics(GRAPHIC);
-			player.getAudioManager().send(3621);
+			playAudio(player, Sounds.LUNAR_STAT_SPY_IMPACT_3621);
 			for (int[] element : SKILLS) {
 				player.getPacketDispatch().sendString("" + o.getSkills().getLevel(element[0]) + "", 523, element[1]);
 				player.getPacketDispatch().sendString("" + o.getSkills().getStaticLevel(element[0]) + "", 523, element[2]);

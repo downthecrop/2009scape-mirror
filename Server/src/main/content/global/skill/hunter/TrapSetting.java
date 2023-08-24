@@ -18,6 +18,8 @@ import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
 import org.rs09.consts.Sounds;
 
+import static core.api.ContentAPIKt.playAudio;
+
 /**
  * A setting for a trap type.
  * @author Vexia
@@ -309,18 +311,18 @@ public class TrapSetting {
 						wrapper.setObject(getFinalId(wrapper, node));
 						switch(wrapper.getType()) {
 							case BIRD_SNARE:
-								player.getAudioManager().send(Sounds.HUNTING_NOOSE_2637, 10, 0, 10, wrapper.getObject().getLocation());
-								player.getAudioManager().send(Sounds.HUNTING_BIRDCAUGHT_2625, 10, 20, 10, wrapper.getObject().getLocation());
+								playAudio(player, Sounds.HUNTING_NOOSE_2637, 0, 1, wrapper.getObject().getLocation(), 10);
+								playAudio(player, Sounds.HUNTING_BIRDCAUGHT_2625, 20, 1, wrapper.getObject().getLocation(), 10);
 								break;
 							case BOX_TRAP:
-								player.getAudioManager().send(Sounds.HUNTING_BOXTRAP_2627, 10, 0, 10, wrapper.getObject().getLocation());
+								playAudio(player, Sounds.HUNTING_BOXTRAP_2627, 0, 1, wrapper.getObject().getLocation(), 10);
 								break;
 							case NET_TRAP:
-								player.getAudioManager().send(Sounds.HUNTING_TWITCHNET_2652, 10, 0, 10, wrapper.getObject().getLocation());
-								player.getAudioManager().send(Sounds.SALAMANDER_HIT_739, 10, 20, 10, wrapper.getObject().getLocation());
+								playAudio(player, Sounds.HUNTING_TWITCHNET_2652, 0, 1, wrapper.getObject().getLocation(), 10);
+								playAudio(player, Sounds.SALAMANDER_HIT_739, 20, 1, wrapper.getObject().getLocation(), 10);
 								break;
 							case DEAD_FALL:
-								player.getAudioManager().send(Sounds.HUNTING_DEADFALL_2631, 10, 0, 10, wrapper.getObject().getLocation());
+								playAudio(player, Sounds.HUNTING_DEADFALL_2631, 0, 1, wrapper.getObject().getLocation(), 10);
 								break;
 						}
 						return true;

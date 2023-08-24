@@ -12,6 +12,9 @@ import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Represents the rolling block obstacle.
@@ -29,8 +32,8 @@ public final class RollingBlock implements MovementHook {
 		final boolean fail = backwards || AgilityHandler.hasFailed(player, 2, 0.3);
 		player.lock(5);
 		AgilityPyramidCourse.addConfig(player, stone, 1, false);
-		player.getAudioManager().send(1396);
-		player.getAudioManager().send(2469, 10 , 40);
+		playAudio(player, Sounds.PYRAMID_SCRAPE_1396);
+		playAudio(player, Sounds.LAND_FLAT_2469, 40);
 
 		if(e.isPlayer())
 		{

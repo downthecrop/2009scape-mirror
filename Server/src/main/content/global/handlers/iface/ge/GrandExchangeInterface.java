@@ -8,7 +8,6 @@ import core.game.component.ComponentPlugin;
 import core.game.ge.GEGuidePrice;
 import core.game.ge.GEItemSet;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
 import core.net.packet.PacketRepository;
@@ -19,6 +18,9 @@ import core.plugin.Plugin;
 import core.game.ge.GrandExchangeOffer;
 import core.game.ge.GrandExchangeRecords;
 import core.game.world.GameWorld;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Handles the Grand Exchange interface options.
@@ -178,7 +180,7 @@ public class GrandExchangeInterface extends ComponentPlugin {
 					player.getInventory().refresh();
 					player.getPacketDispatch().sendMessage("You successfully traded your item components for a set!");
 				}
-				player.getAudioManager().send(new Audio(4044, 1, 1));
+				playAudio(player, Sounds.GE_TRADE_OK_4044);
 				PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, player.getAttribute("container-key", 93), player.getInventory(), false));
 				break;
 			case 155:

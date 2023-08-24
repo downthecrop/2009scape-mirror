@@ -12,6 +12,7 @@ import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
+import org.rs09.consts.Sounds
 import java.util.concurrent.TimeUnit
 
 @Initializable
@@ -68,7 +69,7 @@ class FruitAndBerryPicker : OptionHandler() {
 				}
 
                 player.animator.animate(animation)
-                player.audioManager.send(2437)        
+                playAudio(player, Sounds.FARMING_PICK_2437)
                 addItemOrDrop(player,reward.id,reward.amount)
                 player.skills.addExperience(Skills.FARMING,plantable.harvestXP)
                 patch.setCurrentState(patch.getCurrentState() - 1)

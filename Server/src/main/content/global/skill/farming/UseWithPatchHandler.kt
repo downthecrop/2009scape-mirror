@@ -9,6 +9,7 @@ import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import org.rs09.consts.Sounds
 
 class UseWithPatchHandler : InteractionListener {
     val RAKE = Items.RAKE_5341
@@ -99,7 +100,7 @@ class UseWithPatchHandler : InteractionListener {
                         player.pulseManager.run(object: Pulse(){
                             override fun pulse(): Boolean {
                                 player.animator.animate(plantCureAnim)
-                                player.audioManager.send(2438)
+                                playAudio(player, Sounds.FARMING_PLANTCURE_2438)
                                 if(player.inventory.remove(usedItem)){
                                     player.inventory.add(Item(Items.VIAL_229))
                                     p.cureDisease()
@@ -123,7 +124,7 @@ class UseWithPatchHandler : InteractionListener {
                                     return true
                                 }
                                 player.animator.animate(wateringCanAnim)
-                                player.audioManager.send(2446)
+                                playAudio(player, Sounds.FARMING_WATERING_2446)
                                 if(player.inventory.remove(usedItem)){
                                     player.inventory.add(Item(usedItem.id.getNext()))
                                     p.water()
@@ -138,7 +139,7 @@ class UseWithPatchHandler : InteractionListener {
                     val p = patch.getPatchFor(player)
                     if(p.compost == CompostType.NONE) {
                         player.animator.animate(pourBucketAnim)
-                        player.audioManager.send(2427)
+                        playAudio(player, Sounds.FARMING_COMPOST_2427)
                         player.pulseManager.run(object : Pulse(){
                             override fun pulse(): Boolean {
                                 if(player.inventory.remove(usedItem,false)){
@@ -207,7 +208,7 @@ class UseWithPatchHandler : InteractionListener {
                     player.lock()
                     if(player.inventory.remove(plantItem)) {
                         player.animator.animate(Animation(2291))
-                        player.audioManager.send(2432)
+                        playAudio(player, Sounds.FARMING_DIBBING_2432)
                         player.pulseManager.run(object : Pulse(3) {
                             override fun pulse(): Boolean {
                                 if(plantable == Plantable.JUTE_SEED && patch == FarmingPatch.MCGRUBOR_HOPS && !player.achievementDiaryManager.hasCompletedTask(DiaryType.SEERS_VILLAGE,0,7)){

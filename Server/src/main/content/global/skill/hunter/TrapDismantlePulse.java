@@ -46,20 +46,20 @@ public final class TrapDismantlePulse extends SkillPulse<Scenery> {
 		switch(trap) {
 			case BIRD_SNARE:
 				lock(player,5);
-				player.getAudioManager().send(Sounds.HUNTING_DISMANTLE_2632, 10, 50);
+				playAudio(player, Sounds.HUNTING_DISMANTLE_2632, 50);
 				break;
 			case BOX_TRAP:
 				lock(player,4);
-				player.getAudioManager().send(Sounds.HUNTING_DISMANTLE_2632, 10, 50);
+				playAudio(player, Sounds.HUNTING_DISMANTLE_2632, 50);
 				break;
 			case NET_TRAP:
 				lock(player, 5);
-				player.getAudioManager().send(Sounds.HUNTING_DISMANTLE_2632, 10, 20);
+				playAudio(player, Sounds.HUNTING_DISMANTLE_2632, 20);
 				break;
 			case RABBIT_SNARE:
 			case DEAD_FALL:
 				lock(player, 4);
-				player.getAudioManager().send(Sounds.HUNTING_DISMANTLE_2632, 10, 80);
+				playAudio(player, Sounds.HUNTING_DISMANTLE_2632, 80);
 				break;
 			}
 		}

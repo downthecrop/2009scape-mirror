@@ -7,6 +7,9 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Represents the plugin used to handle the dig option on a spade.
@@ -24,7 +27,7 @@ public class SpadeDigOptionPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		player.getAudioManager().send(1470,1,1);
+		playAudio(player, Sounds.DIGSPADE_1470);
 		if (!DigSpadeHandler.dig(player)) {
 			player.sendMessage("You dig but find nothing.");
 		}

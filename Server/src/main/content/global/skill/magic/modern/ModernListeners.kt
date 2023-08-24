@@ -187,7 +187,7 @@ class ModernListeners : SpellListener("modern"){
             }
         }
         visualizeSpell(player,BONE_CONVERT_ANIM, BONE_CONVERT_GFX)
-        player.audioManager.send(Audio(114))
+        playAudio(player, Sounds.BONES_TO_BANANAS_ALL_114)
         removeRunes(player)
         addXP(player,if(bananas) 25.0 else 65.0)
         setDelay(player,false)
@@ -223,7 +223,7 @@ class ModernListeners : SpellListener("modern"){
         player.lock(3)
         removeRunes(player)
         addXP(player,53.0)
-        player.audioManager.send(Sounds.SUPERHEAT_ALL_190)
+        playAudio(player, Sounds.SUPERHEAT_ALL_190)
         showMagicTab(player)
         player.pulseManager.run(SmeltingPulse(player, item, bar, 1, true))
         setDelay(player,false)

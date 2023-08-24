@@ -5,6 +5,7 @@ import core.game.event.ItemUnequipEvent
 import core.game.container.impl.EquipmentContainer
 import content.global.handlers.item.equipment.brawling_gloves.BrawlingGlovesManager
 import content.global.skill.slayer.SlayerEquipmentFlags
+import core.api.playAudio
 import core.game.node.Node
 import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.player.Player
@@ -14,6 +15,7 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListeners
 import core.game.system.config.ItemConfigParser
+import org.rs09.consts.Sounds
 
 /**
  * Represents the equipment equipping handler plugin.
@@ -65,7 +67,7 @@ class EquipHandler : InteractionListener {
             player.dialogueInterpreter.close()
 
             /* TODO: Send different equip sound based on what is being equip.*/
-            player.audioManager.send(item.definition.getConfiguration(ItemConfigParser.EQUIP_AUDIO, 2244))
+            playAudio(player, item.definition.getConfiguration(ItemConfigParser.EQUIP_AUDIO, 2244))
 
             if (player.properties.autocastSpell != null) {
                 val itemEquipmentSlot = item.definition.getConfiguration<Int>(ItemConfigParser.EQUIP_SLOT, -1)
@@ -125,7 +127,7 @@ class EquipHandler : InteractionListener {
             }
             if (player.equipment.remove(item)) {
                 /* TODO: Send different unequip sound based on what is being unequipped.*/
-                player.audioManager.send(Audio(2238, 10, 1))
+                playAudio(player, Sounds.EQUIP_FUN_2238)
                 player.dialogueInterpreter.close()
                 player.inventory.add(item)
 

@@ -12,6 +12,9 @@ import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Represents the wilderness interface plugin.
@@ -67,7 +70,7 @@ public final class WildernessInterfacePlugin extends ComponentPlugin {
 				ForceMovement.run(player, Location.create(l.getX() - 1, y, 0), Location.create(l.getX() + 2, y, 0), ANIMATION, 20).setEndAnimation(null);
 			}
 		}
-		player.getAudioManager().send(new Audio(2462, 10, 30));
+		playAudio(player, Sounds.JUMP2_2462, 30);
 		/*if (GameWorld.getSettings().isPvp()) {
 			ActivityManager.register(new BountyHunterActivity(CraterType.MID_LEVEL));
 			ActivityManager.register(new BountyHunterActivity(CraterType.HIGH_LEVEL));
@@ -92,7 +95,7 @@ public final class WildernessInterfacePlugin extends ComponentPlugin {
 				ForceMovement.run(player, Location.create(l.getX() - 1, y, 0), Location.create(l.getX() + 2, y, 0), ANIMATION, 20).setEndAnimation(null);
 			}
 		}
-		player.getAudioManager().send(new Audio(2462, 10, 30));
+		playAudio(player, Sounds.JUMP2_2462, 30);
 		/*if (GameWorld.getSettings().isPvp()) {
 			ActivityManager.register(new BountyHunterActivity(CraterType.MID_LEVEL));
 			ActivityManager.register(new BountyHunterActivity(CraterType.HIGH_LEVEL));

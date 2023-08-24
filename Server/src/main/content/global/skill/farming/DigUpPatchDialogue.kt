@@ -1,5 +1,6 @@
 package content.global.skill.farming
 
+import core.api.playAudio
 import core.game.dialogue.DialoguePlugin
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.audio.Audio
@@ -8,6 +9,7 @@ import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
+import org.rs09.consts.Sounds
 
 @Initializable
 class DigUpPatchDialogue(player: Player? = null) : DialoguePlugin(player) {
@@ -35,8 +37,8 @@ class DigUpPatchDialogue(player: Player? = null) : DialoguePlugin(player) {
                 1 -> {
                     end()
                     player.animator.animate(Animation(830))
-                    player.audioManager.send(Audio(1470, 1, 1))
-                    player.pulseManager.run(object : Pulse(){
+                    playAudio(player, Sounds.DIGSPADE_1470)
+                        player.pulseManager.run(object : Pulse(){
                         override fun pulse(): Boolean {
                             if(patch?.patch?.type == PatchType.TREE){
                                 if(patch?.getCurrentState() == (patch?.plantable?.value ?: 0) + (patch?.plantable?.stages ?: 0) + 2 && patch?.isWeedy() != true){

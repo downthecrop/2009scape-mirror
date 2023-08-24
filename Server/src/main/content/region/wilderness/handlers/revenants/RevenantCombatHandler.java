@@ -12,6 +12,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.game.node.entity.combat.MultiSwingHandler;
 import core.game.world.GameWorld;
+import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.*;
 
@@ -44,7 +45,7 @@ public class RevenantCombatHandler extends MultiSwingHandler {
 			SwitchAttack attack = getCurrent();
 			if (attack != null) {
 				if (attack.getStyle() == CombatStyle.RANGE) {
-					victim.asPlayer().getAudioManager().send(4061, true);
+					playGlobalAudio(victim.getLocation(), 4061, 0, 1, 10);
 				}
 			}
 		}
@@ -59,14 +60,14 @@ public class RevenantCombatHandler extends MultiSwingHandler {
 				if (attack.getStyle() == CombatStyle.RANGE && !hasTimerActive(victim, "frozen") && !hasTimerActive(victim, "frozen:immunity")) {
                                         registerTimer(victim, spawnTimer("frozen", 16, true));
 					sendMessage((Player) victim, "The icy darts freeze your muscles!");
-					victim.asPlayer().getAudioManager().send(4059, true);
+					playGlobalAudio(victim.getLocation(), 4059, 0, 1, 10);
 				} else if (attack.getStyle() == CombatStyle.MAGIC) {
 					int ticks = 500;
 					if (victim.asPlayer().getPrayer().get(PrayerType.PROTECT_FROM_MAGIC)) {
 						ticks /= 2;
 					}
 					if (hasTimerActive(victim, "teleblock")) {
-						victim.asPlayer().getAudioManager().send(4064, true);
+						playGlobalAudio(victim.getLocation(), 4064, 0, 1, 10);
 					} else {
                                                 registerTimer (victim, spawnTimer("teleblock", ticks));
 					}
@@ -86,9 +87,9 @@ public class RevenantCombatHandler extends MultiSwingHandler {
 			SwitchAttack attack = getCurrent();
 			if (attack != null) {
 				if (attack.getStyle() == CombatStyle.MAGIC) {
-					victim.asPlayer().getAudioManager().send(202, true);
+					playGlobalAudio(entity.getLocation(), Sounds.TELEPORTBLOCK_CAST_202, 0, 1, 10);
 				} else if (attack.getStyle() == CombatStyle.RANGE) {
-					victim.asPlayer().getAudioManager().send(4062, true);
+					playGlobalAudio(entity.getLocation(), 4062, 0, 1, 10);
 				}
 			}
 		}

@@ -10,7 +10,9 @@ import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import content.global.travel.EssenceTeleport
+import core.api.playAudio
 import core.game.world.GameWorld
+import org.rs09.consts.Sounds
 
 @Initializable
 class CrompertyDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
@@ -102,7 +104,7 @@ class CrompertyDialogue(player: Player? = null) : core.game.dialogue.DialoguePlu
         npc.faceTemporary(player, 1)
         npc.graphics(Graphics(108))
         player.lock()
-        player.audioManager.send(125)
+        playAudio(player, Sounds.CURSE_ALL_125, 0, 1)
         Projectile.create(npc, player, 109).send()
         npc.sendChat("Dipsolum sententa sententi!")
         GameWorld.Pulser.submit(object : Pulse(1) {

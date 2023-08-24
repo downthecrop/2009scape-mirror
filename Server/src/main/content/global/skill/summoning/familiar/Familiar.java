@@ -30,6 +30,7 @@ import core.game.node.entity.combat.CombatSwingHandler;
 import core.tools.SystemLogger;
 import core.game.world.GameWorld;
 import content.global.skill.summoning.SummoningPouch;
+import org.rs09.consts.Sounds;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -371,7 +372,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		if (specialMove(special)) {
 			setAttribute("special-delay", GameWorld.getTicks() + 3);
 			owner.getInventory().remove(new Item(scroll.getItemId()));
-			owner.getAudioManager().send(4161);
+			playAudio(owner, Sounds.SPELL_4161);
 			visualizeSpecialMove();
 			updateSpecialPoints(specialCost);
 			owner.getSkills().addExperience(Skills.SUMMONING, scroll.getExperience(), true);
@@ -564,10 +565,11 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		getProperties().setTeleportLocation(destination);
 		if (!(this instanceof Pet)) {
             if(firstCall) {
-                owner.getAudioManager().send(4366);
+				// TODO: Each familiar has its own initial summon sound that needs to be implemented at some point
+                playAudio(owner, Sounds.SUMMON_NPC_188);
                 firstCall = false;
             } else {
-                owner.getAudioManager().send(188);
+                playAudio(owner, Sounds.SUMMON_NPC_188);
             }
 			if (size() > 1) {
 				graphics(LARGE_SUMMON_GRAPHIC);

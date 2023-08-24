@@ -367,7 +367,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
         } else if (entity is NPC && victim is Player) {
             val npc = entity.asNpc()
             val audio = npc.getAudio(0)
-            audio?.send(victim.asPlayer(), true, entity.location)
+            if (audio != null) playGlobalAudio(entity.location, audio.id)
         }
     }
 
