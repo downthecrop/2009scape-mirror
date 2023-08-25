@@ -558,18 +558,11 @@ public final class BuildingUtils {
 			}
 			else if (count == 3) {
 				room = Room.create(player, RoomProperties.ROOF_3_EXIT);
-				room.setRotation(DIRECTIONS[(index + 2) % 4]);
 			}
 			else if ((exits[0] != exits[2]) || (exits[1] != exits[3])) {
 				room = Room.create(player, RoomProperties.ROOF_3_EXIT);
-				if (exits[2]) {
-					room.setRotation(DIRECTIONS[exits[3] ? 3 : 1]);
-				}
 			} else {
 				room = Room.create(player, RoomProperties.ROOF_2_EXIT);
-				if (exits[0] || exits[2]) {
-					room.setRotation(DIRECTIONS[1]);
-				}
 			}
 			player.getHouseManager().getRooms()[z + 1][x][y] = room;
 		}
@@ -657,45 +650,24 @@ public final class BuildingUtils {
 	 * Gets the exit requirements for the given room.
 	 * @param roomX The room x-coordinate.
 	 * @param roomY The room y-coordinate.
-	 * @return The disabled exit indexes.
+	 * @return The requirements on the exit indexes. -1 if exit must be absent, +1 if exit must be present.
 	 */
 	private static int[] getExitRequirements(Player player, int z, int roomX, int roomY) {
 		int[] exits = new int[4];
-		if (roomX == 0) {
-			exits[2] = -1;
-		}
-		else if (player.getHouseManager().hasExit(z, roomX - 1, roomY, Direction.EAST)) {
+		int deltaX = roomX - player.getLocation().getChunkX();
+		int deltaY = roomY - player.getLocation().getChunkY();
+		if (deltaX > 0) {
+			// player is to our west
 			exits[2] = 1;
-		}
-		else if (player.getHouseManager().hasRoomAt(z, roomX - 1, roomY)) {
-			exits[2] = -1;
-		}
-		if (roomY == 7) {
-			exits[3] = -1;
-		}
-		else if (player.getHouseManager().hasExit(z, roomX, roomY + 1, Direction.SOUTH)) {
-			exits[3] = 1;
-		}
-		else if (player.getHouseManager().hasRoomAt(z, roomX, roomY + 1)) {
-			exits[3] = -1;
-		}
-		if (roomX == 7) {
-			exits[0] = -1;
-		}
-		else if (player.getHouseManager().hasExit(z, roomX + 1, roomY, Direction.WEST)) {
+		} else if (deltaX < 0) {
+			// player is to our east
 			exits[0] = 1;
-		}
-		else if (player.getHouseManager().hasRoomAt(z, roomX + 1, roomY)) {
-			exits[0] = -1;
-		}
-		if (roomY == 0) {
-			exits[1] = -1;
-		}
-		else if (player.getHouseManager().hasExit(z, roomX, roomY - 1, Direction.NORTH)) {
+		} else if (deltaY > 0) {
+			// player is to our south
 			exits[1] = 1;
-		}
-		else if (player.getHouseManager().hasRoomAt(z, roomX, roomY - 1)) {
-			exits[1] = -1;
+		} else if (deltaY < 0) {
+			// player is to our north
+			exits[3] = 1;
 		}
 		return exits;
 	}
