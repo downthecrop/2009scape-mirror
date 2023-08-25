@@ -190,6 +190,9 @@ public final class WalkingQueue {
 		if (player.getSettings().getWeight() > 0.0) {
 			rate *= 1 + (player.getSettings().getWeight() / 100);
 		}
+        if (hasTimerActive(player, "hamstrung")) {
+            rate *= 4;
+        }
 		return rate;
 	}
 
