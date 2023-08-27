@@ -1,18 +1,19 @@
 package content.region.misc.keldagrim.handlers
 
+import content.minigame.blastfurnace.BlastFurnace
 import core.api.*
 import core.cache.def.impl.SceneryDefinition
-import core.game.dialogue.DialoguePlugin
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
-import core.game.node.scenery.Scenery
 import core.game.world.map.Location
 import core.plugin.Initializable
 import core.plugin.Plugin
 import core.game.dialogue.DialogueFile
-import core.game.node.entity.skill.Skills
+import core.game.dialogue.DialoguePlugin
+import core.tools.END_DIALOGUE
+import org.rs09.consts.Items
 
 /**
  * File that contains several plugins relating to Keldagrim,
@@ -38,16 +39,6 @@ class KeldagrimOptionHandlers : OptionHandler() {
                 when (node.id) {
                     5973 -> player.properties.teleportLocation = Location.create(2838, 10125)
                     5998 -> player.properties.teleportLocation = Location.create(2780, 10161)
-                }
-            }
-            "climb-up" -> {
-                when(node.id){
-                    9138 -> player.properties.teleportLocation = Location.create(2930, 10197, 0)
-                }
-            }
-            "climb-down" -> {
-                when(node.id){
-                    9084 -> player.dialogueInterpreter.open(BlastFurnaceDoorDialogue(),Scenery(9084, location(2929,10196,0)))
                 }
             }
             "open" -> {
@@ -113,38 +104,23 @@ class GETrapdoorDialogue(player: Player? = null) : DialoguePlugin(player){
 }
 
 
-class BlastFurnaceDoorDialogue : DialogueFile(){
+class BlastFurnaceDoorDialogue(val fee: Int) : DialogueFile(){
     var init = true
     override fun handle(componentID: Int, buttonID: Int) {
-        if (init) {
-            stage = if (player!!.getSkills().getLevel(Skills.SMITHING) >= 60) {
-                100
-            } else {
-                5
-            }
-            init = false
-        }
         when(stage){
-            5 -> sendDialogue(player!!,"You must be Smithing Level 60 or higher in order to enter the Blast Furnace").also { stage = 10 }
-            10 -> sendDialogue(player!!,"However, you may enter if you pay the entrance fee").also { stage = 20 }
-            20 -> options("Yes","No").also { stage = 30 }
-            30 -> when(buttonID){
+            0 -> sendDialogue(player!!,"You must be Smithing Level 60 or higher in order to enter the Blast Furnace").also { stage++ }
+            1 -> sendDialogue(player!!,"However, you may enter for 10 minutes if you pay the entrance fee.<br>($fee gp)").also { stage++ }
+            2 -> options("Yes","No").also { stage++ }
+            3 -> when(buttonID){
                 1 -> {
-                    if(player!!.equipment.contains(6465,1) && player!!.inventory.contains(995, 1250)){
-                        removeItem(player!!, Item(995, 1250), Container.INVENTORY)
-                        player!!.setAttribute("BlastTimer",1000)
-                        player?.properties?.teleportLocation = Location.create(1940, 4958, 0).also { end() }
-                    }
-                    else if (player!!.inventory.contains(995, 2500)) {
-                        removeItem(player!!, Item(995, 2500), Container.INVENTORY)
-                        player!!.setAttribute("BlastTimer",1000)
-                        player?.properties?.teleportLocation = Location.create(1940, 4958, 0).also { end() }
-                    } else sendDialogue(player!!, "You don't have enough gold to pay the fee!").also { stage = 40 }
+                    if (removeItem(player!!, Item(Items.COINS_995, fee)))
+                        BlastFurnace.enter(player!!, true)
+                    else
+                        sendDialogue(player!!, "You don't have enough gold to cover the entrance fee!")
+                    stage = END_DIALOGUE
                 }
-                20 -> sendDialogue(player!!,"Then get out of here!").also { stage = 40 }
+                20 -> sendDialogue(player!!,"Then get out of here!").also { stage = END_DIALOGUE }
             }
-            40 -> end()
-            100 -> player?.properties?.teleportLocation = Location.create(1940, 4958, 0).also { stage = 40 }
         }
     }
 }

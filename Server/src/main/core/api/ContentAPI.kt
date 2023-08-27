@@ -472,6 +472,10 @@ fun addScenery (sceneryId: Int, location: Location, rotation: Int = 0, type: Int
     return scenery
 }
 
+fun addScenery (scenery: Scenery) {
+    SceneryBuilder.add(scenery)
+}
+
 /**
  * Remove a scenery from the world
  * @param scenery the Scenery object to remove.
@@ -1271,7 +1275,7 @@ fun truncateLoc (mover: Entity, destination: Location) : Pair<Boolean,Location> 
  * @param callback (optional) a callback called when the forced  movement completes
  * @see NOTE: There are 30 client cycles per second.
 */
-fun forceMove (player: Player, start: Location, dest: Location, startArrive: Int, destArrive: Int, dir: Direction? = null, anim: Int = -1, callback: (()->Unit)? = null) {
+fun forceMove (player: Player, start: Location, dest: Location, startArrive: Int, destArrive: Int, dir: Direction? = null, anim: Int = 819, callback: (()->Unit)? = null) {
     var direction: Direction
 
     if (dir == null) {

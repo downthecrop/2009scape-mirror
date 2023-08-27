@@ -2,308 +2,259 @@ package content.minigame.blastfurnace
 
 import content.global.skill.smithing.smelting.Bar
 import core.api.*
-import core.game.container.impl.EquipmentContainer
+import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
-import core.game.system.task.Pulse
-import core.game.world.map.Location
+import core.game.world.map.zone.ZoneBorders
 import core.tools.RandomFunction
+import org.json.simple.JSONObject
 import org.rs09.consts.Items
-import org.rs09.consts.Items.GOLDSMITH_GAUNTLETS_776
+import org.rs09.consts.NPCs
+import kotlin.math.max
 
-/**le Blast Furnace has arrived:
- * Handles most of the Blast Furnace's operating logic, there is some crosstalk between
- * this file and BlastFurnaceListeners.kt as well as the BlastFurnaceZone.kt.
- * This also handles a lot of the varbit fuckery for the furnace. The other
- * varbit fuckery is handled in BlastFurnaceListeners.
- * Varbits are still slightly busted but not in a way that breaks the operation or usage of
- * Blast Furnace, just visual and I've had enough of the funny binary numbers to say fuck it
- * and will just come back to it at a later date.
- * @author phil lips*/
+class BlastFurnace : MapArea, PersistPlayer, TickListener {
+    override fun defineAreaBorders(): Array<ZoneBorders> {
+        return arrayOf(bfArea)
+    }
 
-object BlastFurnace {
-
-    val belt1 = getScenery(1943, 4967, 0)
-    val belt2 = getScenery(1943, 4966, 0)
-    val belt3 = getScenery(1943, 4965, 0)
-    val disLoc = getScenery(1941, 4963, 0)
-    var pipe1 = getScenery(1943, 4961, 0)
-    var pipe2 = getScenery(1947, 4961, 0)
-    var cogs1 = getScenery(1945, 4965, 0)
-    var cogs2 = getScenery(1945, 4967, 0)
-    var beltLoc1 = getScenery(1944, 4965, 0)
-    var beltLoc2 = getScenery(1944, 4967, 0)
-    var gearsLoc = getScenery(1945, 4966, 0)
-    var stoveLoc = getScenery(1948, 4963, 0)
-
-    val mPot = 9098
-
-    var gaugeViewList = ArrayList<Player>()
-    var blastFurnacePlayerList = ArrayList<Player>()
-    var furnaceTemp = 0
-    var pumpPipeBroken = false
-    var potPipeBroken = false
-    var stoveCoke = 0
-    var stoveTemp = 0
-    var beltRunning = false
-    var makeBars = false
-    var beltBroken = false
-    var cogBroken = false
-    var pumping = false
-    var pedaling = false
-    var barsHot = false
-    var giveSmithXp = 0
-
-    /**This pulse object handles checks between*/
-    var blastPulse = object : Pulse() {
-        override fun pulse(): Boolean {
-            gaugeViewList.forEach {
-                var anim = furnaceTemp + 2452
-                animateInterface(it, 30, 4, anim)
-            }
-            blastFurnacePlayerList.forEach {
-                if(it.getAttribute("BlastTimer",0) > 0 && it.getSkills().getLevel(Skills.SMITHING) < 60){
-                    it.incrementAttribute("BlastTimer",-1)
-                } else if(it.getAttribute("BlastTimer",0) <= 0 && it.getSkills().getLevel(Skills.SMITHING) < 60){
-                    it.removeAttribute("BlastTimer")
-                    sendDialogue(it,"Your time in the Blast Furnace has run out!")
-                    it.properties.teleportLocation = Location.create(2931, 10197, 0)
-                } else if(it.getAttribute("BlastTimer",false) && it.getSkills().getLevel(Skills.SMITHING) >= 60){
-                    it.removeAttribute("BlastTimer")
-                }
-                if(giveSmithXp > 0){
-                    rewardXP(it,Skills.SMITHING,1.0)
-                    giveSmithXp--
-                }
-            }
-            //interfaceManager()
-            runConveyor()
-            stoveCokeTemperature()
-            furnaceTemperature()
-            operateFurnace()
-            breakStuff()
-            fixStuff()
-            return false
+    override fun savePlayer(player: Player, save: JSONObject) {
+        val state = playerStates[player.details.uid]
+        if (state != null) {
+            save["bf-state"] = state.toJson()
         }
     }
 
-    /**This handles the coke stove temperature, if there is coke in the
-     * coke oven the temperature will raise, otherwise the temperature
-     * will lower, 0-33 is cold, 34-66 is warm, 67-100 is hot*/
-    fun stoveCokeTemperature() {
-        if (getWorldTicks() % 10 == 0 && stoveCoke > 0) {
-            stoveCoke--
-        }
-        if (stoveCoke > 0) {
-            if (stoveTemp < 100) {
-                stoveTemp += 1
-            }
-        } else if (stoveTemp > 0) {
-            stoveTemp--
-        }
-        if (stoveTemp > 66 && stoveLoc!!.id != 9087) {
-            stoveLoc = getScenery(1948, 4963, 0)
-            replaceScenery(stoveLoc!!, 9087, -1)
-        } else if (stoveTemp in 34..66 && stoveLoc!!.id != 9086) {
-            stoveLoc = getScenery(1948, 4963, 0)
-            replaceScenery(stoveLoc!!, 9086, -1)
-        } else if (stoveTemp < 32 && stoveLoc!!.id != 9085) {
-            stoveLoc = getScenery(1948, 4963, 0)
-            replaceScenery(stoveLoc!!, 9085, -1)
+    override fun parsePlayer(player: Player, data: JSONObject) {
+        playerStates.remove(player.details.uid)
+        if (data.containsKey("bf-state")) {
+            val stateObj = data["bf-state"] as JSONObject
+            getPlayerState(player).readJson(stateObj)
         }
     }
 
-    /**This handles the raising and lowering of the furnace temperature
-     * depending on whether or not the coke stove is hot and if the
-     * furnace pump is being operated. A hot coke stove will raise the
-     * temperature the fastest, a warm coke stove will raise it slowly,
-     * and a cold stove will raise it the slowest*/
-    fun furnaceTemperature() {
-        if (stoveTemp >= 67 && pumping && furnaceTemp < 100 && (!pumpPipeBroken || !pumpPipeBroken)) {
-            furnaceTemp += 3
-        } else if (stoveTemp >= 34 && pumping && furnaceTemp < 100 && (!pumpPipeBroken || !pumpPipeBroken)) {
-            furnaceTemp += 2
-        } else if (stoveTemp > 0 && pumping && furnaceTemp < 100 && (!pumpPipeBroken || !pumpPipeBroken)) {
-            furnaceTemp += 1
-        } else if (furnaceTemp > 0) {
-            furnaceTemp -= 1
+    override fun areaEnter(entity: Entity) {
+        if (entity is Player) {
+            playersInArea.add(entity)
+            val state = getPlayerState(entity)
+            for (ore in state.oresOnBelt)
+                ore.createNpc()
         }
     }
 
-    /**Tells the furnace whether or not to smelt bars depending on if
-     * the furnace temperature is in the right range. Also contains the
-     * logic for smelting the players ore given the fact that they actually
-     * have ore in their ore container and/or have coal in their coal container*/
-    fun operateFurnace() {
-        makeBars = furnaceTemp in 51..66
-        blastFurnacePlayerList.forEach { player ->
-            var playerCoal = player.blastCoal.getAmount(Items.COAL_453)
-            var playerOre = player.blastOre.toArray().filterNotNull()
-            var barsAmountFree = player.blastBars.freeSlots()
-            var barsAmount = player.blastBars.itemCount()
-            var oreAmount = player.blastOre.itemCount()
-            var totalAmount = barsAmount + oreAmount
-            if (barsHot) {
-                setVarbit(player, 936, 2)
-            }else if (makeBars && playerOre.isNotEmpty() && barsAmountFree > 0 && totalAmount < 56 && player.getAttribute("OreInPot",false) == true) {
-                playerOre.forEach { oreID ->
-                    playerCoal = player.blastCoal.getAmount(Items.COAL_453)
-                    var bars = arrayOf(Bar.forOre(oreID.id)!!)
-                    if(oreID.id == Items.IRON_ORE_440) {
-                        bars = arrayOf(Bar.STEEL, Bar.IRON)
-                    }
-                    inner@ for(bar in bars) {
-                        var hasRequirements = true
-                        for(required in bar.ores) {
-                            if(required.id == Items.COAL_453) {
-                                if(!player.blastCoal.contains(Items.COAL_453, required.amount / 2)) {
-                                    hasRequirements = false
-                                }
-                            } else if(!player.blastOre.containsItem(required)) {
-                                hasRequirements = false
-                            }
-                        }
-                        if(hasRequirements) {
-                            var removed = true
-                            for(required in bar.ores) {
-                                if(required.id == Items.COAL_453) {
-                                    if(!player.blastCoal.remove(Item(Items.COAL_453, required.amount / 2))) {
-                                        removed = false
-                                    }
-                                } else {
-                                    if(!player.blastOre.remove(required)) {
-                                        removed = false
-                                    }
-                                }
-                            }
-                            if(removed) {
-                                setVarbit(player, 936, 1)
-                                barsHot = true
-                                player.blastBars.add(bar.product)
-                                var experience = bar.experience
-                                if(bar.product.id == Items.GOLD_BAR_2357 &&
-                                    player.equipment[EquipmentContainer.SLOT_HANDS] != null &&
-                                    player.equipment[EquipmentContainer.SLOT_HANDS].id == GOLDSMITH_GAUNTLETS_776) {
-                                    experience *= 2.5
-                                }
-                                rewardXP(player, Skills.SMITHING, experience)
-                                totalAmount = barsAmount + oreAmount
-                                giveSmithXp++
-                                break@inner
-                            }
-                        }
-                    }
-                }
-            }
-            if(!barsHot && playerOre.isNotEmpty()) {
-                var coalToAdd = 0
-                playerOre.forEach { oreID ->
-                    when(oreID.id){
-                        Items.RUNITE_ORE_451 -> coalToAdd = (player.blastOre.getAmount(451) * 4) - playerCoal
-                        Items.ADAMANTITE_ORE_449 -> coalToAdd = (player.blastOre.getAmount(449) * 3) - playerCoal
-                        Items.MITHRIL_ORE_447 -> coalToAdd = (player.blastOre.getAmount(447) * 2) - playerCoal
-                        Items.IRON_ORE_440 -> coalToAdd = player.blastOre.getAmount(440) - playerCoal
-                    }
-                }
-                if (coalToAdd < 0){
-                    setVarbit(player, 940, 0)
-                } else setVarbit(player, 940, coalToAdd)
-            }
-            else if(playerOre.isEmpty()) {
-                setVarbit(player, 940, 0)
-            }
-            if(playerOre.isEmpty() && player.getAttribute("OreInPot",false)){
-                player.removeAttribute("OreInPot")
+    override fun areaLeave(entity: Entity, logout: Boolean) {
+        if (entity is Player) {
+            playersInArea.remove(entity)
+            val state = getPlayerState(entity)
+            for (ore in state.oresOnBelt) {
+                ore.npcInstance?.clear()
+                ore.npcInstance = null
             }
         }
     }
 
-    /**This handles the conveyor belt, if the pedals are running and the belt
-     * isn't broken then the conveyor belt will run*/
-    fun runConveyor() {
-        if (pedaling && (!beltBroken && !cogBroken)) {
-            animateScenery(belt1!!, 2435)
-            animateScenery(belt2!!, 2435)
-            animateScenery(belt3!!, 2435)
-            animateScenery(beltLoc1!!, 2436)
-            animateScenery(beltLoc2!!, 2436)
-            animateScenery(cogs1!!, 2436)
-            animateScenery(cogs2!!, 2436)
-            animateScenery(gearsLoc!!, 2436)
-            beltRunning = true
-        } else {
-            animateScenery(belt1!!, -1)
-            animateScenery(belt2!!, -1)
-            animateScenery(belt3!!, -1)
-            animateScenery(beltLoc1!!, -1)
-            animateScenery(beltLoc2!!, -1)
-            animateScenery(cogs1!!, -1)
-            animateScenery(cogs2!!, -1)
-            animateScenery(gearsLoc!!, -1)
-            beltRunning = false
+    override fun tick() {
+        if (state.beltBroken || state.cogBroken) pedaler = null
+        if (state.potPipeBroken || state.pumpPipeBroken) pumper = null
+        state.tick(pumper != null, pedaler != null)
+
+        if (playersInArea.size > 0) {
+            updateVisuals()
+            if (getWorldTicks() % 2 == 0) {
+                updatePedaler()
+                updatePumper()
+            }
+            processBars()
         }
 
+        //Reset each tick
+        pumper = null
+        pedaler = null
     }
 
-    /**Its just one of those days*/
-    fun breakStuff() {
-        if (pumping && furnaceTemp > 76) {
-            if (RandomFunction.random(1, 100) > 20 && (!potPipeBroken || !pumpPipeBroken)) {
-                if (RandomFunction.random(1, 100) > 50 && !potPipeBroken) {
-                    pipe1 = getScenery(1943, 4961, 0)
-                    potPipeBroken = true
-                }
-                if (RandomFunction.random(1, 100) <= 50 && !pumpPipeBroken) {
-                    pipe2 = getScenery(1947, 4961, 0)
-                    pumpPipeBroken = true
-                }
+    private fun updatePumper() {
+        if (pumper != null) {
+            if (state.stoveTemp == 0) return
+            if (state.furnaceTemp == 100 && RandomFunction.roll(5)) {
+                impact(pumper!!, (0.2 * pumper!!.skills.maximumLifepoints).toInt())
+                sendMessage(pumper!!, "A blast of hot air cooks you a bit.")
+                pumper!!.pulseManager.clear()
+                return
             }
-        }
-        if (beltRunning && (!beltBroken || !cogBroken)) {
-            if (RandomFunction.random(1, 100) <= 2) {
-                beltLoc2 = getScenery(1944, 4967, 0)
-                beltBroken = true
-            } else if (RandomFunction.random(1, 100) <= 2) {
-                cogs2 = getScenery(1945, 4967, 0)
-                cogBroken = true
-            }
-        }
-        if (beltBroken && beltLoc2!!.id != 9103) {
-            beltLoc2 = getScenery(1944, 4967, 0)
-            replaceScenery(beltLoc2!!, 9103, -1)
-        }
-        if (cogBroken && cogs2!!.id != 9105) {
-            cogs2 = getScenery(1945, 4967, 0)
-            replaceScenery(cogs2!!, 9105, -1)
-        }
-        if (potPipeBroken && pipe1!!.id != 9117) {
-            pipe1 = getScenery(1943, 4961, 0)
-            replaceScenery(pipe1!!, 9117, -1)
-        }
-        if (pumpPipeBroken && pipe2!!.id != 9121) {
-            pipe2 = getScenery(1947, 4961, 0)
-            replaceScenery(pipe2!!, 9121, -1)
+            rewardXP(pumper!!, Skills.STRENGTH, 4.0)
         }
     }
 
-    /**This replaces the breakable objects IDs back to their unbroken state*/
-    fun fixStuff() {
-        if (!potPipeBroken && pipe1!!.id != 9116) {
-            pipe1 = getScenery(1943, 4961, 0)
-            replaceScenery(pipe1!!, 9116, -1)
+    private fun updatePedaler() {
+        if (pedaler == null) return
+        var oresPedaled = false
+        for (state in playerStates.values) {
+            if (state.oresOnBelt.isEmpty()) continue
+            state.updateOres()
+            oresPedaled = true
         }
-        if (!pumpPipeBroken && pipe2!!.id != 9120) {
-            pipe2 = getScenery(1947, 4961, 0)
-            replaceScenery(pipe2!!, 9120, -1)
+        if (oresPedaled) {
+            rewardXP(pedaler!!, Skills.AGILITY, 2.0)
+            pedaler!!.settings.runEnergy -= 2
         }
-        if (!beltBroken && beltLoc2!!.id != 9102) {
-            beltLoc2 = getScenery(1944, 4967, 0)
-            replaceScenery(beltLoc2!!, 9102, -1)
+    }
+
+    private fun updateVisuals() {
+        sceneryController.updateStove(state.stoveTemp)
+        sceneryController.updateBreakable(
+            state.potPipeBroken,
+            state.pumpPipeBroken,
+            state.beltBroken,
+            state.cogBroken
+        )
+        sceneryController.updateAnimations(pedaler != null, state.beltBroken, state.cogBroken)
+    }
+
+    private fun processBars() {
+        if (state.furnaceTemp !in 51..66) return
+        var totalProcessed = 0
+        for (player in playersInArea) {
+            if (getPlayerState(player).processOresIntoBars())
+                totalProcessed++
         }
-        if (!cogBroken && cogs2!!.id != 9104) {
-            cogs2 = getScenery(1945, 4967, 0)
-            replaceScenery(cogs2!!, 9104, -1)
+        if (totalProcessed == 0) return
+        for (player in playersInArea)
+            rewardXP(player, Skills.SMITHING, totalProcessed.toDouble())
+    }
+
+    companion object {
+        val bfArea = ZoneBorders (1934, 4955, 1958, 4975)
+        val playersInArea = ArrayList<Player>()
+        val playerStates = HashMap<Int, BFPlayerState>()
+        val state = BlastState()
+        val sceneryController = BFSceneryController()
+        var pedaler: Player? = null
+        var pumper: Player? = null
+
+
+        fun insideBorders (player: Player) : Boolean {
+            return bfArea.insideBorder(player.location)
+        }
+
+        fun placeAllOre (p: Player, id: Int = -1, accountForSkill: Boolean = false) {
+            val oreCounts = HashMap<Int, Int>()
+            val oreContainer = getOreContainer(p)
+            val level = if (accountForSkill) getStatLevel(p, Skills.SMITHING) else 99
+
+            for (item in p.inventory.toArray()) {
+                if (item == null) continue
+                if (getNpcForOre(item.id) == -1) continue
+                if (id != -1 && item.id != id) continue
+
+                val bar = getBarForOreId(item.id, oreContainer.coalAmount(), level)!!
+                if (bar.level > level) continue
+
+                oreCounts[item.id] = (oreCounts[item.id] ?: 0) + item.amount
+            }
+
+            for ((oreId, amount) in oreCounts) {
+                var maxAmt = oreContainer.getAvailableSpace(oreId, level)
+
+                if (oreId == Items.COPPER_ORE_436 || oreId == Items.TIN_ORE_438)
+                    maxAmt += (BlastConsts.ORE_LIMIT - getAmountOnBelt(p, oreId))
+
+                if (oreId == Items.COAL_453)
+                    maxAmt -= getAmountOnBelt(p, oreId)
+                else
+                    maxAmt -= getTotalOreOnBelt(p)
+
+                maxAmt = maxAmt.coerceAtMost(amount).coerceAtLeast(0)
+                if (maxAmt == 0) continue
+
+                if (removeItem(p, Item(oreId, maxAmt)))
+                    addOreToBelt(p, oreId, maxAmt)
+            }
+        }
+
+        fun getPlayerState (p: Player) : BFPlayerState {
+            if (playerStates[p.details.uid] != null)
+                return playerStates[p.details.uid]!!
+            val state = BFPlayerState(p)
+            playerStates[p.details.uid] = state
+            return state
+        }
+
+        fun getOreContainer (p: Player) : BFOreContainer {
+            return getPlayerState(p).container
+        }
+
+        fun addOreToBelt (p: Player, id: Int, amount: Int) : BFBeltOre {
+            val beltOre = BFBeltOre(p, id, amount, BFBeltOre.ORE_START_LOC)
+            beltOre.createNpc()
+            getPlayerState(p).oresOnBelt.add(beltOre)
+            return beltOre
+        }
+
+        fun getAmountOnBelt (p: Player, id: Int) : Int {
+            var total = 0
+            for (ore in getPlayerState(p).oresOnBelt) {
+                if (ore.id == id)
+                    total += ore.amount
+            }
+            return total
+        }
+
+        fun getTotalOreOnBelt (p: Player) : Int {
+            var total = 0
+            for (ore in getPlayerState(p).oresOnBelt)
+                if (ore.id != Items.COAL_453) total += ore.amount
+            return total
+        }
+
+        fun getNeededCoal (bar: Bar) : Int {
+            var coalAmount = 0
+
+            if (bar.ores.size == 1)
+                return coalAmount
+
+            for (ore in bar.ores) {
+                if (ore.id == Items.COAL_453) {
+                    coalAmount = ore.amount
+                    break
+                }
+            }
+            if (coalAmount > 1) coalAmount /= 2
+            return coalAmount
+        }
+
+
+        fun getBarForOreId (id: Int, coalAmount: Int, level: Int) : Bar? {
+            return when (id) {
+                Items.COPPER_ORE_436, Items.TIN_ORE_438 -> Bar.BRONZE
+                Items.IRON_ORE_440 -> if (coalAmount >= 1 && level >= Bar.STEEL.level) Bar.STEEL else Bar.IRON
+                else -> Bar.forOre(id)
+            }
+        }
+
+        fun getNpcForOre (id: Int) : Int {
+            return when (id) {
+                Items.IRON_ORE_440 -> NPCs.IRON_ORE_2556
+                Items.COPPER_ORE_436 -> NPCs.COPPER_ORE_2555
+                Items.TIN_ORE_438 -> NPCs.TIN_ORE_2554
+                Items.COAL_453 -> NPCs.COAL_2562
+                Items.MITHRIL_ORE_447 -> NPCs.MITHRIL_ORE_2557
+                Items.ADAMANTITE_ORE_449 -> NPCs.ADAMANTITE_ORE_2558
+                Items.SILVER_ORE_442 -> NPCs.SILVER_ORE_2560
+                Items.GOLD_ORE_444 -> NPCs.GOLD_ORE_2561
+                Items.RUNITE_ORE_451 -> NPCs.RUNITE_ORE_2559
+                else -> -1
+            }
+        }
+
+        fun getEntranceFee (hasCharos: Boolean, smithLevel: Int) : Int {
+            if (smithLevel >= BlastConsts.SMITH_REQ) return 0
+            return if (hasCharos) BlastConsts.ENTRANCE_FEE / 2 else BlastConsts.ENTRANCE_FEE
+        }
+
+        fun enter (player: Player, feePaid: Boolean) {
+            if (feePaid && !hasTimerActive<BFTempEntranceTimer>(player))
+                registerTimer(player, BFTempEntranceTimer())
+            teleport(player, BlastConsts.ENTRANCE_LOC)
         }
     }
 }
