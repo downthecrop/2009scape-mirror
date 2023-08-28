@@ -246,6 +246,14 @@ public final class CharacterDesign {
 	private static void changeGender(Player player, boolean male) {
 		player.setAttribute("male", male);
                 setVarp(player, 1262, male ? 1 : 0);
+				if (male) {
+					setVarbit(player, 5008, 1);
+					setVarbit(player, 5009, 0);
+				}
+				else {
+					setVarbit(player, 5008, 0);
+					setVarbit(player, 5009, 1);
+				}
 		reset(player);
 	}
 
