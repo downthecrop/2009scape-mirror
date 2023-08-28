@@ -1,12 +1,15 @@
+import content.data.consumables.Consumables
 import core.api.IfaceSettingsBuilder
 import core.api.splitLines
 import content.global.skill.slayer.Master
 import content.global.skill.slayer.SlayerManager
 import content.global.skill.slayer.Tasks
+import core.game.node.item.Item
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import org.rs09.consts.Items
 
 class APITests {
     var testPlayer: MockPlayer
@@ -177,5 +180,172 @@ class APITests {
         Assertions.assertEquals(expectedLine1, lines.getOrNull(0) ?: "")
         Assertions.assertEquals(expectedLine2, lines.getOrNull(1) ?: "")
         Assertions.assertEquals(expectedLine3, lines.getOrNull(2) ?: "")
+    }
+
+    @Test fun consumableStackableItemShouldNotRemoveStack() {
+        val stackableItem = Item(Items.PURPLE_SWEETS_10476, 999)
+        TestUtils.getMockPlayer("Inventory Consumable Stack Slot Tester").use { player ->
+            // Inventory setup
+            player.inventory.clear()
+            player.inventory.add(stackableItem, false, 0)
+
+            // Setup
+            val consumable = Consumables.getConsumableById(stackableItem.id)
+            consumable.consumable.consume(player.inventory.get(0), player)
+            TestUtils.advanceTicks(2, false)
+
+            // Get item in that slot,
+            val updatedConsumable = player.inventory.get(0)
+
+            // Maintains slot clicked + Amount is decremented
+            Assertions.assertEquals(0, updatedConsumable.slot)
+            Assertions.assertEquals(998, updatedConsumable.amount)
+        }
+    }
+
+    @Test fun consumableMultiPieceItemShouldBeRemovedFromCorrectSlot() {
+        val consumables: Array<Item?> = arrayOf(
+            Item(Items.CAKE_1891, 8),
+            Item(Items.TWO_THIRDS_CAKE_1893, 8),
+            Item(Items.SLICE_OF_CAKE_1895, 8)
+        )
+
+        TestUtils.getMockPlayer("Inventory Consumable Multi Piece Tester").use { player ->
+            // Inventory setup
+            player.inventory.clear()
+            player.inventory.add(*consumables)
+
+            val lastWholeCakeContainerIndex = 7
+            val lastWholeCake = player.inventory.get(lastWholeCakeContainerIndex)
+
+            val consumable = Consumables.getConsumableById(lastWholeCake.id)
+            consumable.consumable.consume(player.inventory.get(lastWholeCakeContainerIndex), player)
+            TestUtils.advanceTicks(2, false)
+
+            // Cake amounts are correct
+            val wholeCakeAmount = player.inventory.getAmount(Items.CAKE_1891)
+            val twoThirdsCakeAmount = player.inventory.getAmount(Items.TWO_THIRDS_CAKE_1893)
+            Assertions.assertEquals(7, wholeCakeAmount)
+            Assertions.assertEquals(9, twoThirdsCakeAmount)
+
+            // Cake was replaced in correct spot
+            val inventorySlot0 = player.inventory.get(0)
+            val inventorySlot7 = player.inventory.get(7)
+            Assertions.assertEquals(Items.CAKE_1891, inventorySlot0.id)
+            Assertions.assertEquals(Items.TWO_THIRDS_CAKE_1893, inventorySlot7.id)
+        }
+    }
+
+    @Test fun consumableMultiPieceItemShouldAddReturnItemToCorrectSlot() {
+        val PIE_DISH_NONCONSUMABLE_2313 = Items.PIE_DISH_2313
+        val consumables: Array<Item?> = arrayOf(
+            Item(Items.APPLE_PIE_2323, 8),
+            Item(Items.HALF_AN_APPLE_PIE_2335, 8),
+            Item(Items.REDBERRY_PIE_2325, 8)
+        )
+
+        TestUtils.getMockPlayer("Inventory Consumable Multi Piece With Return Tester").use { player ->
+            // Inventory setup
+            player.inventory.clear()
+            player.inventory.add(*consumables)
+
+            val lastWholePieContainerIndex = 7
+            val lastWholePie = player.inventory.get(lastWholePieContainerIndex)
+
+            val wholePieConsumable = Consumables.getConsumableById(lastWholePie.id)
+            wholePieConsumable.consumable.consume(player.inventory.get(lastWholePieContainerIndex), player)
+            TestUtils.advanceTicks(2, false)
+
+            // Pie amounts are correct
+            var wholePieAmount = player.inventory.getAmount(Items.APPLE_PIE_2323)
+            var halfPieAmount = player.inventory.getAmount(Items.HALF_AN_APPLE_PIE_2335)
+            Assertions.assertEquals(7, wholePieAmount)
+            Assertions.assertEquals(9, halfPieAmount)
+
+            // Pie was replaced in correct spot
+            val inventorySlot0 = player.inventory.get(0)
+            val inventorySlot7 = player.inventory.get(7)
+            Assertions.assertEquals(Items.APPLE_PIE_2323, inventorySlot0.id)
+            Assertions.assertEquals(Items.HALF_AN_APPLE_PIE_2335, inventorySlot7.id)
+
+            // Tests for pie halves + pie tins
+            val firstHalfPieContainerIndex = 7
+            val firstHalfPie = player.inventory.get(firstHalfPieContainerIndex)
+            val halfPieConsumable = Consumables.getConsumableById(firstHalfPie.id)
+            halfPieConsumable.consumable.consume(player.inventory.get(firstHalfPieContainerIndex), player)
+            TestUtils.advanceTicks(2, false)
+
+            // Pie amounts are correct
+            halfPieAmount = player.inventory.getAmount(Items.HALF_AN_APPLE_PIE_2335)
+            val pieDishAmount = player.inventory.getAmount(PIE_DISH_NONCONSUMABLE_2313)
+            Assertions.assertEquals(8, halfPieAmount)
+            Assertions.assertEquals(1, pieDishAmount)
+
+            val updatedSlot7 = player.inventory.get(7)
+            Assertions.assertEquals(PIE_DISH_NONCONSUMABLE_2313, updatedSlot7.id)
+        }
+    }
+
+    @Test fun consumableItemShouldNotHaveReturnItem() {
+        val consumables: Array<Item?> = arrayOf(
+            Item(Items.TROUT_333, 8),
+            Item(Items.SHARK_385, 8),
+            Item(Items.LOBSTER_379, 8)
+        )
+        TestUtils.getMockPlayer("Inventory Consumable No Return Item Tester").use { player ->
+            // Inventory setup
+            player.inventory.clear()
+            player.inventory.add(*consumables)
+
+            // Feed the player copious amounts of fish
+            val lastTroutContainerIndex = 7
+            val lastTrout = player.inventory.get(lastTroutContainerIndex)
+
+            val troutConsumable = Consumables.getConsumableById(lastTrout.id)
+            troutConsumable.consumable.consume(player.inventory.get(lastTroutContainerIndex), player)
+            TestUtils.advanceTicks(4, false)
+
+            val sharkConsumable = Consumables.getConsumableById(Items.SHARK_385)
+            for (n in 0..7) {
+                sharkConsumable.consumable.consume(player.inventory.get(n + 8), player)
+                TestUtils.advanceTicks(4, false)
+            }
+
+            val lobsterConsumable = Consumables.getConsumableById(Items.LOBSTER_379)
+            for (n in 16..23 step 2) {
+                lobsterConsumable.consumable.consume(player.inventory.get(n), player)
+                TestUtils.advanceTicks(4, false)
+            }
+
+            // Trout amounts are correct
+            val troutAmount = player.inventory.getAmount(Items.TROUT_333)
+            Assertions.assertEquals(7, troutAmount)
+
+            // Trout was removed from the correct spot
+            val inventorySlot0 = player.inventory.get(0)
+            val inventorySlot7: Item? = player.inventory.get(7)
+            Assertions.assertEquals(Items.TROUT_333, inventorySlot0.id)
+            Assertions.assertNull(inventorySlot7)
+
+            val sharkAmount = player.inventory.getAmount(Items.SHARK_385)
+            Assertions.assertEquals(0, sharkAmount)
+            for (n in 8..15) {
+                val inventoryItem: Item? = player.inventory.get(n)
+                Assertions.assertNull(inventoryItem)
+            }
+
+            val lobsterAmount = player.inventory.getAmount(Items.LOBSTER_379)
+            Assertions.assertEquals(4, lobsterAmount)
+
+            for (n in 16..23) {
+                if (n % 2 == 0) {
+                    val inventoryItem: Item? = player.inventory.get(n)
+                    Assertions.assertNull(inventoryItem)
+                } else {
+                    val inventoryItem: Item = player.inventory.get(n)
+                    Assertions.assertEquals(Items.LOBSTER_379, inventoryItem.id)
+                }
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 package content.global.skill.firemaking;
 
+import core.api.Container;
 import core.game.event.LitFireEvent;
 import core.game.node.entity.skill.SkillPulse;
 import core.game.node.entity.skill.Skills;
@@ -13,6 +14,10 @@ import core.game.world.GameWorld;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
+import org.rs09.consts.Items;
+
+import static core.api.ContentAPIKt.inInventory;
+import static core.api.ContentAPIKt.replaceSlot;
 
 /**
  * Represents the pulse used to light a log.
@@ -28,7 +33,8 @@ public final class FireMakingPulse extends SkillPulse<Item> {
 	/**
 	 * Represents the tinderbox item.
 	 */
-	private static final Item TINDERBOX = new Item(590);
+	private static final Item TINDERBOX = new Item(Items.TINDERBOX_590);
+
 
 	/**
 	 * Represents the log being burned.
@@ -82,7 +88,8 @@ public final class FireMakingPulse extends SkillPulse<Item> {
 		}
 		if (player.getAttribute("remove-log", false)) {
 			player.removeAttribute("remove-log");
-			if (player.getInventory().remove(node)) {
+			if (inInventory(player, node.getId(), 1)) {
+				replaceSlot(player, node.getSlot(), new Item(node.getId(), (node.getAmount() - 1)), node, Container.INVENTORY);
 				GroundItemManager.create(groundItem);
 			}
 		}
@@ -139,7 +146,7 @@ public final class FireMakingPulse extends SkillPulse<Item> {
 
 	@Override
 	public void message(int type) {
-		String name = node.getId() == 3125 ? "bones" : "logs";
+		String name = node.getId() == Items.JOGRE_BONES_3125 ? "bones" : "logs";
 		switch (type) {
 		case 0:
 			player.getPacketDispatch().sendMessage("You attempt to light the " + name + "..");
@@ -171,7 +178,7 @@ public final class FireMakingPulse extends SkillPulse<Item> {
 	 * @return {@code GroundItem} the itemm.
 	 */
 	public static GroundItem getAsh(final Player player, Log fire, final Scenery object) {
-		final GroundItem ash = new GroundItem(new Item(592), object.getLocation(), player);
+		final GroundItem ash = new GroundItem(new Item(Items.ASHES_592), object.getLocation(), player);
 		ash.setDecayTime(fire.getLife() + 200);
 		return ash;
 	}

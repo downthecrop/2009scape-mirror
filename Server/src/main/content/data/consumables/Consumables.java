@@ -2,12 +2,12 @@ package content.data.consumables;
 
 import content.data.consumables.effects.*;
 import core.game.consumable.*;
-import org.rs09.consts.Items;
 import core.game.node.entity.player.link.diary.DiaryType;
-import core.game.world.update.flag.context.Animation;
 import core.game.node.entity.skill.Skills;
-import content.data.consumables.effects.KegOfBeerEffect;
+import core.game.world.update.flag.context.Animation;
+import org.rs09.consts.Items;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static core.tools.TickUtilsKt.minutesToTicks;
@@ -377,6 +377,8 @@ public enum Consumables {
 
 	public static HashMap<Integer,Consumables> consumables = new HashMap<>();
 
+	public static ArrayList<Integer> potions = new ArrayList<>();
+
 	private final Consumable consumable;
 	public boolean isIgnoreMainClock = false;
 
@@ -405,6 +407,11 @@ public enum Consumables {
 	static {
 		for (Consumables consumable : Consumables.values()) {
 			add(consumable);
+			if (consumable.consumable instanceof Potion) {
+				for (int pot : consumable.consumable.getIds()) {
+					potions.add(pot);
+				}
+			}
 		}
 	}
 }

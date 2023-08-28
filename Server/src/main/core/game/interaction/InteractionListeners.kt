@@ -1,7 +1,5 @@
 package core.game.interaction
 
-import core.api.forceWalk
-import core.api.queueScript
 import core.game.event.InteractionEvent
 import core.game.event.UseWithEvent
 import core.game.node.Node
@@ -218,8 +216,8 @@ object InteractionListeners {
         } else {
             if(flipped) player.dispatch(UseWithEvent(with.id, used.id))
             else player.dispatch(UseWithEvent(used.id, with.id))
-            if(flipped) method.invoke(player,with,used)
-            else method.invoke(player,used,with)
+            if(flipped) return method.invoke(player,with,used)
+            else return method.invoke(player,used,with)
         }
         return true
     }

@@ -337,12 +337,18 @@ fun replaceSlot(player: Player, slot: Int, item: Item, currentItem: Item? = null
         Container.BANK -> player.bank
     }
 
+    if (item.id == -1 || item.amount <= 0) {
+        return cont.replace(null, slot)
+    }
+
     if (currentItem == null) {
         return cont.replace(item, slot)
     }
 
-    if (cont.remove(currentItem))
+    if (cont.remove(currentItem, slot, true)) {
         return cont.replace(item, slot)
+    }
+
     PlayerMonitor.log(player, LogType.DUPE_ALERT, "Potential slot-replacement-based dupe attempt, slot: $slot, item: $item")
     val other = when (container) {
         Container.INVENTORY -> Container.EQUIPMENT

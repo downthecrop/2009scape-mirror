@@ -50,13 +50,14 @@ public abstract class Consumable {
 		executeConsumptionActions(player);
 		final int nextItemId = getNextItemId(item.getId());
 
-		if(item.getAmount() > 1){
-			removeItem(player, item.getId(), Container.INVENTORY);
-		} else 	removeItem(player, item, Container.INVENTORY);
-
-		if (nextItemId != -1) {
-			addItem(player, nextItemId, 1, Container.INVENTORY);
+		// STACKABLE + NON-RETURN
+		if (ids.length == 1) {
+			replaceSlot(player, item.getSlot(), new Item(item.getId(), (item.getAmount() - 1)), item, Container.INVENTORY);
+		} else {
+			// ITEM HAS RETURN
+			replaceSlot(player, item.getSlot(), new Item(nextItemId, 1), item, Container.INVENTORY);
 		}
+
 		final int initialLifePoints = player.getSkills().getLifepoints();
 		Consumables.getConsumableById(item.getId()).getConsumable().effect.activate(player);
 		sendMessages(player, initialLifePoints, item, messages);

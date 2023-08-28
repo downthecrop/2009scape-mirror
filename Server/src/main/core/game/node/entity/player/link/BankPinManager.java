@@ -220,36 +220,36 @@ public class BankPinManager {
 	public void handleConfirmInterface(int button) {
 		boolean confirm = button != 91;
 		switch (status) {
-		case NO_PIN:
-			if (!confirm) {
-				toggleConfirmInterface(false);
-				player.getInterfaceManager().close();
-				openSettings("No changes made.");
-				break;
-			}
-			openPin();
-			break;
-		case PENDING:
-			if (confirm) {
-				unlock();
-			} else {
-				cancelPin("The PIN has been cancelled", "and will NOT be set.", "", "You still do not have a Bank", "PIN.");
-			}
-			break;
-		case ACTIVE:
-			if (confirm) {
-				if (unlocked) {
-					cancelPin("Your Bank PIN has now been", "deleted.", "", "This means that there is no", "PIN protection on your bank", "account.");
-				} else {
-					deleting = true;
-					openPin();
+			case NO_PIN:
+				if (!confirm) {
+					toggleConfirmInterface(false);
+					player.getInterfaceManager().close();
+					openSettings("No changes made.");
+					break;
 				}
-			} else {
-				openSettings("No changes made.");
-			}
-			break;
-		default:
-			break;
+				openPin();
+				break;
+			case PENDING:
+				if (confirm) {
+					unlock();
+				} else {
+					cancelPin("The PIN has been cancelled", "and will NOT be set.", "", "You still do not have a Bank", "PIN.");
+				}
+				break;
+			case ACTIVE:
+				if (confirm) {
+					if (unlocked) {
+						cancelPin("Your Bank PIN has now been", "deleted.", "", "This means that there is no", "PIN protection on your bank", "account.");
+					} else {
+						deleting = true;
+						openPin();
+					}
+				} else {
+					openSettings("No changes made.");
+				}
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -348,7 +348,7 @@ public class BankPinManager {
 				return;
 			} else {
 				if (!tempPin.equals(pin)) {
-					playAudio(player, Sounds.PIN_CANCEL_1042);
+					playAudio(player, Sounds.PILLORY_WRONG_2277);
 					player.getInterfaceManager().close();
 					player.sendMessage("The PIN you entered is incorrect.");
 					if (setTries(getTries() + 1) >= 2) {
@@ -368,6 +368,7 @@ public class BankPinManager {
 					return;
 				}
 				unlock();
+				playAudio(player, Sounds.PILLORY_SUCCESS_2274);
 				player.sendMessage("You have correctly entered your PIN.");
 			}
 			return;
@@ -440,8 +441,8 @@ public class BankPinManager {
 		if (stage >= 4) {
 			stage = stage - 4;
 		}
-                setVarp(player, 562, bitValue);
-                setVarp(player, 563, digits.get(8) | digits.get(9) << 4 | stage << 26);
+		setVarp(player, 562, bitValue);
+		setVarp(player, 563, digits.get(8) | digits.get(9) << 4 | stage << 26);
 		for (int i = 0; i < 9; i++) {
 			int child = (i > 2 ? i + 1 : i) + 11;
 			int positionX = 37 + ((i % 3) * 95) + RandomFunction.random(2, 45);
