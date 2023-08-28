@@ -81,7 +81,6 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
             val shouldWarn = when(star.location){
                 "North Edgeville mining site",
                 "Southern wilderness mine",
-                "Wilderness Volcano bank",
                 "Wilderness hobgoblin mine",
                 "Pirates' Hideout mine",
                 "Lava Maze mining site",
