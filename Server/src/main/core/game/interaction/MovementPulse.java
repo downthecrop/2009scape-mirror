@@ -4,6 +4,7 @@ import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.impl.WalkingQueue;
 import core.game.node.entity.npc.NPC;
+import core.game.node.entity.npc.NPCBehavior;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
 import core.game.world.map.Direction;
@@ -175,6 +176,11 @@ public abstract class MovementPulse extends Pulse {
         if (pathfinder == null) {
             if (mover instanceof Player) {
                 this.pathfinder = Pathfinder.SMART;
+            } else if (mover instanceof NPC) {
+                NPC npc = (NPC)mover;
+                NPCBehavior behavior = npc.behavior;
+                Pathfinder pf = behavior != null ? behavior.getPathfinderOverride(npc) : null;
+                this.pathfinder = pf != null ? pf : Pathfinder.DUMB;
             } else {
                 this.pathfinder = Pathfinder.DUMB;
             }

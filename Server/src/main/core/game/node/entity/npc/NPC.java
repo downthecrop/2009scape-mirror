@@ -8,6 +8,7 @@ import core.game.interaction.MovementPulse;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.spell.CombatSpell;
+import core.game.node.entity.combat.CombatPulse;
 import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.combat.spell.DefaultCombatSpell;
 import core.game.node.entity.combat.equipment.WeaponInterface;
@@ -187,6 +188,7 @@ public class NPC extends Entity {
 	 */
 	public static NPC create(int id, Location location, Direction direction, Object... objects) {
 		NPC n = AbstractNPC.forId(id);
+
 		if (n != null) {
 			n = ((AbstractNPC) n).construct(id, location, objects);
 		}
@@ -229,6 +231,8 @@ public class NPC extends Entity {
 			}
 		}
 		behavior.onCreation(this);
+        // FIXME: hack around MovementPulse's constructor getting run while behavior is null when behavior is set between NPC constructor and init.
+        getProperties().setCombatPulse(new CombatPulse(this));
 	}
 
 	@Override

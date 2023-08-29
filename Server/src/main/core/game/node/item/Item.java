@@ -106,6 +106,14 @@ public class Item extends Node{
 		return value * getAmount();
 	}
 
+    public long getAlchemyValue() {
+		long value = 1;
+		if (definition.getAlchemyValue(true) > value) {
+			value = definition.getAlchemyValue(true);
+		}
+		return value * getAmount();
+    }
+
 	/**
 	 * Gets a copy of the item.
 	 * @return The item copy.

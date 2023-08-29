@@ -1,7 +1,11 @@
 package core.game.node.entity.player.link;
 
+import core.game.container.Container;
+import core.game.container.ContainerEvent;
+import core.game.container.ContainerListener;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
+import core.game.node.item.Item;
 import core.ServerConstants;
 import static core.api.ContentAPIKt.*;
 
@@ -17,6 +21,35 @@ import static core.game.world.map.zone.impl.WildernessZone.WILDERNESS_PROT_ATTR;
  * @author Emperor
  */
 public final class SkullManager {
+    public enum SkullIcon {
+        NONE(-1),
+        WHITE(0),
+        RED(1),
+        BH_RED5(2),
+        BH_BLUE4(3),
+        BH_GREEN3(4),
+        BH_GREY2(5),
+        BH_BROWN1(6),
+        SCREAM(7);
+        public final int id;
+        SkullIcon(int id) {
+            this.id = id;
+        }
+        public static SkullIcon forId(int id) {
+            switch(id) {
+                case 0: return SkullIcon.WHITE;
+                case 1: return SkullIcon.RED;
+                case 2: return SkullIcon.BH_RED5;
+                case 3: return SkullIcon.BH_BLUE4;
+                case 4: return SkullIcon.BH_GREEN3;
+                case 5: return SkullIcon.BH_GREY2;
+                case 6: return SkullIcon.BH_BROWN1;
+                case 7: return SkullIcon.SCREAM;
+                default: return SkullIcon.NONE;
+            }
+        }
+    }
+
 
 	/**
 	 * The player instance.
@@ -198,15 +231,74 @@ public final class SkullManager {
 		return skulled || deepWilderness;
 	}
 
-        public boolean isDeepWilderness() {
-                return deepWilderness;
-        }
+    public boolean isDeepWilderness() {
+            return deepWilderness;
+    }
 
-        public void setDeepWilderness (boolean deepWildy) {
-                setSkullIcon(deepWildy ? 1 : skulled ? 0 : -1);
-                setSkullCheckDisabled(deepWildy);
-                deepWilderness = deepWildy;
+    public void setDeepWilderness (boolean deepWildy) {
+            if(deepWildy) {
+                updateDWSkullIcon();
+            } else {
+                removeDWSkullIcon();
+            }
+            setSkullCheckDisabled(deepWildy);
+            deepWilderness = deepWildy;
+    }
+
+    public static final long DEEP_WILD_DROP_RISK_THRESHOLD = 100000;
+    public void updateDWSkullIcon() {
+        if (player.getAttribute("deepwild-value-listener") == null) {
+            ContainerListener listener = new ContainerListener() {
+                @Override
+                public void update(Container c, ContainerEvent event) {
+                    refresh(c);
+                }
+
+                @Override
+                public void refresh(Container c) {
+                    updateDWSkullIcon();
+                }
+            };
+            player.setAttribute("deepwild-value-listener", listener);
+            player.getInventory().getListeners().add(listener);
+            player.getEquipment().getListeners().add(listener);
         }
+        long value = 0;
+        long maxValue = 0;
+        for (Item item : player.getInventory().toArray()) {
+            if (item != null) {
+                long alchValue = item.getAlchemyValue();
+                value += alchValue;
+                maxValue = Math.max(maxValue, alchValue);
+            }
+        }
+        for (Item item : player.getEquipment().toArray()) {
+            if (item != null) {
+                long alchValue = item.getAlchemyValue();
+                value += alchValue;
+                maxValue = Math.max(maxValue, alchValue);
+            }
+        }
+        // Act as if protect item is always active when calculating risk
+        value -= maxValue;
+        player.setAttribute("deepwild-value-risk", value);
+        SkullIcon skull = SkullIcon.BH_BROWN1;
+        if (value >= DEEP_WILD_DROP_RISK_THRESHOLD) {
+            skull = SkullIcon.RED;
+        }
+        setSkullIcon(skull.id);
+    }
+
+    public void removeDWSkullIcon() {
+        setSkullIcon(skulled ? 0 : -1);
+        ContainerListener listener = player.getAttribute("deepwild-value-listener");
+        if (listener != null) {
+            player.getInventory().getListeners().remove(listener);
+            player.getEquipment().getListeners().remove(listener);
+        }
+        player.removeAttribute("deepwild-value-listener");
+        player.removeAttribute("deepwild-value-risk");
+    }
 
 	/**
 	 * Sets the skulled.

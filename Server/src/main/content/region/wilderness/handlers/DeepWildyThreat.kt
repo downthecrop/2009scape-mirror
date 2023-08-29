@@ -14,6 +14,7 @@ import core.game.node.item.Item
 import core.game.system.command.Privilege
 import core.game.system.timer.PersistTimer
 import core.game.system.timer.impl.Disease
+import core.game.world.map.path.Pathfinder
 import core.game.world.map.zone.impl.WildernessZone
 import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
@@ -45,6 +46,7 @@ class DWThreatTimer : PersistTimer(1, "dw-threat"), Commands {
     var ticksLeft = 0
     var lastMessage = 0
     var currentRev: NPC? = null
+    var forceSpawn = false
 
     override fun run(entity: Entity): Boolean {
         if (ticksLeft-- <= 0) return false
@@ -61,7 +63,8 @@ class DWThreatTimer : PersistTimer(1, "dw-threat"), Commands {
             else if (ticksLeft >= 500)  1500
             else 2_000_000
 
-        if ((currentRev == null || DeathTask.isDead(currentRev) || !currentRev!!.isActive) && RandomFunction.roll(rollchance)) {
+        if ((currentRev == null || DeathTask.isDead(currentRev) || !currentRev!!.isActive) && (forceSpawn || RandomFunction.roll(rollchance))) {
+            forceSpawn = false
             val type = RevenantType.getClosestHigherOrEqual(entity.properties.currentCombatLevel)
             val npc = NPC.create(type.ids.random(), entity.location)
             npc.isRespawn = false
@@ -80,10 +83,12 @@ class DWThreatTimer : PersistTimer(1, "dw-threat"), Commands {
 
     override fun save(root: JSONObject, entity: Entity) {
         root["threat-time-remaining"] = ticksLeft.toString()
+        root["threat-forceSpawn"] = (currentRev != null).toString()
     }
 
     override fun parse(root: JSONObject, entity: Entity) {
         ticksLeft = root["threat-time-remaining"]?.toString()?.toIntOrNull() ?: 0
+        forceSpawn = root["threat-forceSpawn"]?.toString()?.toBoolean() ?: false
     }
 
     override fun defineCommands() {
@@ -139,5 +144,9 @@ class RevGuardianBehavior : NPCBehavior() {
         if (killer != target) drops.clear()
         val timer = getOrStartTimer<DWThreatTimer>(target)
         timer.ticksLeft = 0
+    }
+
+    override fun getPathfinderOverride(self: NPC): Pathfinder? {
+        return Pathfinder.SMART
     }
 }

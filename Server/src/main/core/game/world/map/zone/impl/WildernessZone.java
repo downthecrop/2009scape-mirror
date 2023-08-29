@@ -1,9 +1,10 @@
 package core.game.world.map.zone.impl;
 
+import content.global.handlers.item.equipment.brawling_gloves.BrawlingGloves;
+import content.global.skill.summoning.familiar.Familiar;
 import content.region.wilderness.handlers.DeepWildyThreat;
 import core.game.component.Component;
 import core.game.interaction.Option;
-import content.global.handlers.item.equipment.brawling_gloves.BrawlingGloves;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.CombatStyle;
@@ -12,17 +13,17 @@ import core.game.node.entity.npc.agg.AggressiveBehavior;
 import core.game.node.entity.npc.agg.AggressiveHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.Rights;
-import content.global.skill.summoning.familiar.Familiar;
+import core.game.node.entity.player.link.SkullManager;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
+import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneRestriction;
+import core.game.world.repository.Repository;
 import core.tools.RandomFunction;
 import org.rs09.consts.NPCs;
-import core.game.world.GameWorld;
-import core.game.world.repository.Repository;
 
 
 /**
@@ -94,7 +95,9 @@ public final class WildernessZone extends MapZone {
                 if (!(killer instanceof Player)) return;
 
                 boolean isDeepWildy = ((Player) killer).getSkullManager().isDeepWilderness();
-                boolean isValidTarget = e instanceof NPC && (isDeepWildy || e.asNpc().getName().contains("Revenant") || e.getId() == NPCs.CHAOS_ELEMENTAL_3200);
+                boolean isRevOrCele = e.asNpc().getName().contains("Revenant") || e.getId() == NPCs.CHAOS_ELEMENTAL_3200;
+                boolean isSufficientRisk = ((Player) killer).getAttribute("deepwild-value-risk", 0L) > SkullManager.DEEP_WILD_DROP_RISK_THRESHOLD;
+                boolean isValidTarget = e instanceof NPC && ((isDeepWildy && isSufficientRisk) || isRevOrCele);
 
 				if (isDeepWildy) {
 					DeepWildyThreat.adjustThreat((Player) killer, 50);
@@ -102,12 +105,12 @@ public final class WildernessZone extends MapZone {
 
                 if (!isValidTarget) return;
 
-                int cEleGloveRate = isDeepWildy ? 50 : 150;
-                int normalGloveRate = isDeepWildy ? 100 : 150;
-
                 int pvpGearRate = getNewDropRate(e.asNpc().getDefinition().getCombatLevel());
-                if (isDeepWildy)
+                if (isDeepWildy && isRevOrCele)
                     pvpGearRate /= 2;
+
+                int cEleGloveRate = isDeepWildy ? 50 : 150;
+                int normalGloveRate = isDeepWildy && isRevOrCele ? 100 : (int)((1.0/(1.0-Math.pow(1.0 - (1.0/(double)pvpGearRate), 16.0))) * 5.0 / 6.0);
 
                 if (RandomFunction.roll(e.getId() == NPCs.CHAOS_ELEMENTAL_3200 ? cEleGloveRate : normalGloveRate)) {
                         byte glove = (byte) RandomFunction.random(1, 13);

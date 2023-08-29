@@ -9,6 +9,7 @@ import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.combat.CombatSwingHandler
 import core.game.world.map.path.ClipMaskSupplier
+import core.game.world.map.path.Pathfinder
 
 open class NPCBehavior(vararg val ids: Int = intArrayOf()) : ContentInterface {
     companion object {
@@ -133,6 +134,13 @@ open class NPCBehavior(vararg val ids: Int = intArrayOf()) : ContentInterface {
      * @return the SwingHandler instance to be used for this cycle of combat
      */
     open fun getSwingHandlerOverride(self: NPC, original: CombatSwingHandler) : CombatSwingHandler {return original}
+
+    /**
+     * Called by MovementPulse to determine if a non-default Pathfinder should be used (e.g. whether this npc should intelligently walk around obstacles)
+     */
+    open fun getPathfinderOverride(self: NPC): Pathfinder? {
+        return null
+    }
 
     /**
      * Called by pathfinding code to determine the clipping mask supplier this NPC should use. You can use this to ignore water, etc.

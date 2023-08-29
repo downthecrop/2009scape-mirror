@@ -33,7 +33,7 @@ public final class Properties {
 	/**
 	 * The entity's combat pulse.
 	 */
-	private final CombatPulse combatPulse;
+	private CombatPulse combatPulse;
 
 	/**
 	 * If the entity is retaliating.
@@ -330,6 +330,14 @@ public final class Properties {
 	 */
 	public CombatPulse getCombatPulse() {
 		return combatPulse;
+	}
+
+	/**
+	 * Sets the combatPulse.
+	 * @return The void.
+	 */
+	public void setCombatPulse(CombatPulse combatPulse) {
+		this.combatPulse = (CombatPulse)combatPulse;
 	}
 
 	/**
