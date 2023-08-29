@@ -12,6 +12,7 @@ import core.game.container.impl.InventoryListener;
 import core.game.dialogue.DialogueInterpreter;
 import core.game.interaction.InteractPlugin;
 import core.game.interaction.InteractionListeners;
+import core.game.interaction.QueueStrength;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
@@ -954,7 +955,7 @@ public class Player extends Entity {
 	 * @return {@code True} if so.
 	 */
 	public boolean allowRemoval() {
-		return !(inCombat() || getSkills().getLifepoints() < 1 || DeathTask.isDead(this) || isTeleporting());
+		return !(inCombat() || getSkills().getLifepoints() < 1 || DeathTask.isDead(this) || isTeleporting() || scripts.hasTypeInQueue(QueueStrength.SOFT));
 	}
 
 	/**

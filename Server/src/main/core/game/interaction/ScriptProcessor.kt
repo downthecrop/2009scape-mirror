@@ -94,21 +94,10 @@ class ScriptProcessor(val entity: Entity) {
         var strongInQueue = false
         var softInQueue = false
         var anyExecuted = false
-        for (i in 0 until queue.size) {
-            val script = queue[i]
-            if (script is QueuedScript && script.strength == QueueStrength.STRONG)
-                strongInQueue = true
-            if (script is QueuedUseWith && script.strength == QueueStrength.STRONG)
-                strongInQueue = true
-            if (script is QueuedScript && script.strength == QueueStrength.SOFT)
-                softInQueue = true
-            if (script is QueuedUseWith && script.strength == QueueStrength.SOFT)
-                softInQueue = true
-        }
+        strongInQueue = hasTypeInQueue(QueueStrength.STRONG)
+        softInQueue = hasTypeInQueue(QueueStrength.SOFT)
 
-        if (softInQueue) {
-            removeWeakScripts()
-            removeNormalScripts()
+        if (softInQueue || strongInQueue) {
             if (entity is Player) {
                 entity.interfaceManager.close()
                 entity.interfaceManager.closeChatbox()
@@ -118,11 +107,6 @@ class ScriptProcessor(val entity: Entity) {
 
         if (strongInQueue) {
             removeWeakScripts()
-            if (entity is Player) {
-                entity.interfaceManager.close()
-                entity.interfaceManager.closeChatbox()
-                entity.dialogueInterpreter.close()
-            }
         }
 
         val toRemove = ArrayList<Script<*>>()
@@ -314,5 +298,15 @@ class ScriptProcessor(val entity: Entity) {
 
     private fun getActiveInteraction() : Script<*>? {
         return opScript ?: apScript
+    }
+
+    fun hasTypeInQueue (type: QueueStrength) : Boolean {
+        for (script in queue) {
+            if (script is QueuedScript && script.strength == type)
+                return true
+            else if (script is QueuedUseWith && script.strength == type)
+                return true
+        }
+        return false
     }
 }
