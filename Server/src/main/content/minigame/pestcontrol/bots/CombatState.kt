@@ -97,30 +97,22 @@ class CombatState(val bot: PestControlTestBot) {
         }
     }
 
-    //Functions
-
     fun randomWalkTo(loc: Location, radius: Int) {
+        var newloc = loc.transform(RandomFunction.random(radius, -radius),
+            RandomFunction.random(radius, -radius), 0)
         if(!bot.walkingQueue.isMoving) {
-            GlobalScope.launch {
-                var newloc = loc.transform(RandomFunction.random(radius, -radius),
-                        RandomFunction.random(radius, -radius), 0)
-                walkToIterator(newloc)
-            }
+            walkToIterator(newloc)
         }
     }
 
     private fun walkToIterator(loc: Location){
         var diffX = loc.x - bot.location.x
         var diffY = loc.y - bot.location.y
-        while(!bot.location.transform(diffX, diffY, 0).withinDistance(bot.location)) {
-            diffX /= 2
-            diffY /= 2
-        }
+
         GameWorld.Pulser.submit(object : MovementPulse(bot, bot.location.transform(diffX, diffY, 0), Pathfinder.SMART) {
             override fun pulse(): Boolean {
                 return true
             }
         })
     }
-
 }

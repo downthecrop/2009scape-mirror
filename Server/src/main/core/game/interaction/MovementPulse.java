@@ -7,6 +7,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.npc.NPCBehavior;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
+import core.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.Point;
@@ -191,6 +192,12 @@ public abstract class MovementPulse extends Pulse {
 
         if (destination instanceof NPC || destination instanceof Player)
             destinationFlag = DestinationFlag.ENTITY;
+
+        if (mover.currentMovement != null) {
+            mover.currentMovement.stop();
+            mover.getWalkingQueue().reset();
+        }
+        mover.currentMovement = this;
     }
 
     @Override

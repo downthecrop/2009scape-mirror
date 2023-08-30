@@ -106,6 +106,8 @@ public abstract class Entity extends Node {
 	public ScriptProcessor scripts = new ScriptProcessor(this);
 	public final int[] clocks = new int[10];
 
+	public MovementPulse currentMovement;
+
 
 	/**
 	 * The mapping of event types to event hooks
