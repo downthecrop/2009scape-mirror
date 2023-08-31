@@ -13,10 +13,12 @@ import content.region.asgarnia.falador.dialogue.RisingSunInnBartenderDialogue
 import content.global.handlers.iface.FairyRing
 import content.global.skill.crafting.lightsources.LightSources
 import content.global.skill.farming.FarmingPatch
+import core.api.getStatLevel
 import core.game.diary.AreaDiaryTask
 import core.game.diary.DiaryEventHookBase
 import core.game.diary.DiaryLevel
 import core.game.event.*
+import core.game.node.entity.skill.Skills
 
 class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
     companion object {
@@ -152,7 +154,7 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
             }
         }
 
-        if (event.option == "pickpocket" && (event.target.id in FALADOR_GUARD && inBorders(player, FALADOR_GENERAL_AREA))) {
+        if (event.option == "pickpocket" && (event.target.id in FALADOR_GUARD && inBorders(player, FALADOR_GENERAL_AREA) && getStatLevel(player, Skills.THIEVING) >= 40)) {
             finishTask(
                     player,
                     DiaryLevel.MEDIUM,

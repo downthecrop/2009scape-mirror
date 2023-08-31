@@ -43,8 +43,11 @@ public final class CradleOfLifeDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean open(Object... args) {
-		if (player.getSavedData().getGlobalData().getStrongHoldRewards()[3]) {
-			player.getEmoteManager().unlock(Emotes.STOMP);
+		if (player.getSavedData().getGlobalData().getStrongHoldRewards()[3] && player.getSavedData().getGlobalData().getStrongHoldRewards()[2] && player.getSavedData().getGlobalData().getStrongHoldRewards()[1] && player.getSavedData().getGlobalData().getStrongHoldRewards()[0]) {
+			// Unlocks emotes for older accounts who don't have the previous level emotes
+			player.getEmoteManager().unlock(Emotes.FLAP);
+			player.getEmoteManager().unlock(Emotes.SLAP_HEAD);
+			player.getEmoteManager().unlock(Emotes.IDEA);
 		}
 		if (player.getInventory().freeSlots() == 0) {
 			player.getPacketDispatch().sendMessage("You don't have enough inventory space.");

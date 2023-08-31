@@ -1,14 +1,13 @@
 package core.game.node.entity.player.link;
 
-import content.region.wilderness.handlers.WildernessObeliskPlugin;
 import core.ServerConstants;
 import core.game.node.entity.Entity;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.audio.Audio;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
+import core.game.world.map.zone.ZoneRestriction;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import org.rs09.consts.Sounds;
@@ -100,7 +99,7 @@ public class TeleportManager {
 			if (!entity.getZoneMonitor().teleport(teleportType, null)) {
 				return false;
 			}
-			if (teleportType != -1 && entity.isTeleBlocked()) {
+			if (teleportType != -1 && (entity.isTeleBlocked() || entity.getZoneMonitor().isRestricted(ZoneRestriction.TELEPORT))) {
 				if (entity.isPlayer())
 					entity.asPlayer().sendMessage("A magical force has stopped you from teleporting.");
 				return false;

@@ -34,6 +34,11 @@ public enum ZoneRestriction {
 	 * Do not spawn a grave if a player dies here
 	 */
 	GRAVES,
+
+	/**
+	 * No teleporting allowed.
+	 */
+	TELEPORT,
 	;
 
 	/**

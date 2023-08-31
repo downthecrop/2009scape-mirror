@@ -1,9 +1,13 @@
 package content.region.misthalin.barbvillage.stronghold;
 
+import core.api.Container;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.emote.Emotes;
 import core.game.node.item.Item;
+import org.rs09.consts.Items;
+
+import static core.api.ContentAPIKt.addItem;
 
 /**
  * Represents the grain of plenty dialogue plugin.
@@ -12,10 +16,6 @@ import core.game.node.item.Item;
  */
 public final class GrainOfPlentyDialogue extends DialoguePlugin {
 
-	/**
-	 * Represents the coins item.
-	 */
-	private static final Item COINS = new Item(995, 3000);
 
 	/**
 	 * Constructs a new {@code GrainOfPlenty} {@code Object}.
@@ -50,7 +50,7 @@ public final class GrainOfPlentyDialogue extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 0:
-			if (player.getInventory().freeSlots() == 0) {
+			if (!addItem(player, Items.COINS_995, 3000, Container.INVENTORY)) {
 				player.getPacketDispatch().sendMessage("You don't have enough inventory space.");
 				end();
 				break;
@@ -58,7 +58,6 @@ public final class GrainOfPlentyDialogue extends DialoguePlugin {
 			player.getSavedData().getGlobalData().getStrongHoldRewards()[1] = true;
 			interpreter.sendDialogue("...congratualtions adventurer, you have been deemed worthy of this", "reward. You have also unlocked the Slap Head emote!");
 			stage = 1;
-			player.getInventory().add(COINS);
 			player.getEmoteManager().unlock(Emotes.SLAP_HEAD);
 			break;
 		case 1:

@@ -176,7 +176,7 @@ class WildernessCourse
         val fail = AgilityHandler.hasFailed(player, 1, 0.3)
         val origLoc = player.location
         registerLogoutListener(player, "steppingstone"){p ->
-            teleport(p, origLoc)
+            player.location = origLoc
         }
         submitWorldPulse(object : Pulse(2, player){
             var counter = 0

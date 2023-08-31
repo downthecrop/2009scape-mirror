@@ -1,5 +1,6 @@
 package core.cache.def.impl;
 
+import core.ServerConstants;
 import core.api.EquipmentSlot;
 import core.cache.Cache;
 import core.cache.def.Definition;
@@ -10,6 +11,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.game.node.item.ItemPlugin;
+import core.game.world.GameWorld;
 import core.net.packet.PacketRepository;
 import core.net.packet.out.WeightUpdate;
 import core.plugin.Plugin;
@@ -613,6 +615,9 @@ public class ItemDefinition extends Definition<Item> {
 		for (Container c : container) {
 			for (Item i : c.toArray()) {
 				if (i == null) {
+					continue;
+				}
+				if (GameWorld.getSettings().getSkillcape_perks() && i.getId() == Items.RUNECRAFT_CAPE_9765 || i.getId() == Items.RUNECRAFT_CAPET_9766) {
 					continue;
 				}
 				if (!i.getDefinition().isAllowedOnEntrana()) {

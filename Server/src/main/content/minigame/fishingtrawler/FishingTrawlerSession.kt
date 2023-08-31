@@ -1,6 +1,5 @@
 package content.minigame.fishingtrawler
 
-import core.api.LogoutListener
 import core.api.MapArea
 import core.api.getRegionBorders
 import core.api.*
@@ -24,7 +23,6 @@ import org.rs09.consts.Items
 import core.game.system.command.sets.FISHING_TRAWLER_GAMES_WON
 import core.game.system.command.sets.FISHING_TRAWLER_SHIPS_SANK
 import core.game.system.command.sets.STATS_BASE
-import core.tools.SystemLogger
 import core.tools.secondsToTicks
 import core.tools.ticksToSeconds
 import java.util.concurrent.TimeUnit
@@ -43,7 +41,7 @@ private const val HOLE_SOUTH_Y = 23
 private const val LEAKING_ID = 2167
 private const val PATCHED_ID = 2168
 
-class FishingTrawlerSession(val activity: FishingTrawlerActivity? = null) : LogoutListener, MapArea {
+class FishingTrawlerSession(val activity: FishingTrawlerActivity? = null) : MapArea {
     constructor(region: DynamicRegion, activity: FishingTrawlerActivity) : this(activity) {this.region = region; this.base = region.baseLocation}
     var players: ArrayList<Player> = ArrayList()
     var netRipped = false
@@ -80,7 +78,12 @@ class FishingTrawlerSession(val activity: FishingTrawlerActivity? = null) : Logo
             updateOverlay(player)
             player.properties.teleportLocation = base.transform(36,24,0)
             player.setAttribute("ft-session",this)
-            registerTimer (player, spawnTimer("teleblock", timeLeft))
+            registerLogoutListener(player, "ft-logout") {
+                val session = player.getAttribute<FishingTrawlerSession?>("ft-session",null) ?: return@registerLogoutListener
+                player.location = Location.create(2667, 3161, 0)
+                session.players.remove(player)
+                player.locks.unlockTeleport()
+            }
         }
         zone.register(getRegionBorders(region.id))
     }
@@ -104,7 +107,6 @@ class FishingTrawlerSession(val activity: FishingTrawlerActivity? = null) : Logo
                 player.appearance.setAnimations(Animation(188))
                 player.properties.teleportLocation = session.base.transform(36,24,0)
                 player.incrementAttribute("/save:$STATS_BASE:$FISHING_TRAWLER_SHIPS_SANK")
-                removeTimer(player, "teleblock")
             }
             return true
         }
@@ -136,6 +138,9 @@ class FishingTrawlerSession(val activity: FishingTrawlerActivity? = null) : Logo
                 session.isActive = false
                 session.swapBoatType(7755)
                 session.zone.unregister(getRegionBorders(session.region.id))
+                for(player in session.players) {
+                    player.locks.lockTeleport(1000000)
+                }
             }
 
             if(RandomFunction.random(100) <= 9){
@@ -148,6 +153,7 @@ class FishingTrawlerSession(val activity: FishingTrawlerActivity? = null) : Logo
                     player.interfaceManager.closeOverlay()
                     player.properties.teleportLocation = Location.create(2666, 3162, 0)
                     player.incrementAttribute("/save:$STATS_BASE:$FISHING_TRAWLER_GAMES_WON")
+                    clearLogoutListener(player, "ft-logout")
                 }
                 session.zone.unregister(getRegionBorders(session.region.id))
             }
@@ -278,18 +284,12 @@ class FishingTrawlerSession(val activity: FishingTrawlerActivity? = null) : Logo
         FishingTrawlerOverlay.sendUpdate(player, ((waterAmount / 500.0) * 100).toInt(), netRipped, fishAmount, TimeUnit.SECONDS.toMinutes(ticksToSeconds(timeLeft).toLong()).toInt() + 1)
     }
 
-    override fun logout(player: Player) {
-        val session = player.getAttribute<FishingTrawlerSession?>("ft-session",null) ?: return
-        player.location = Location.create(2667, 3161, 0)
-        session.players.remove(player)
-    }
-
     override fun defineAreaBorders(): Array<ZoneBorders> {
         return arrayOf()
     }
 
     override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(ZoneRestriction.CANNON, ZoneRestriction.FIRES, ZoneRestriction.RANDOM_EVENTS)
+        return arrayOf(ZoneRestriction.CANNON, ZoneRestriction.FIRES, ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.TELEPORT)
     }
 
     override fun areaEnter(entity: Entity) {

@@ -1,9 +1,12 @@
 package content.region.misthalin.barbvillage.stronghold;
 
+import core.api.Container;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.emote.Emotes;
-import core.game.node.item.Item;
+import org.rs09.consts.Items;
+
+import static core.api.ContentAPIKt.addItem;
 
 /**
  * Represents the dialogue plugin used for the box of health.
@@ -11,11 +14,6 @@ import core.game.node.item.Item;
  * @version 1.0
  */
 public final class BoxOfHealthDialogue extends DialoguePlugin {
-
-	/**
-	 * Represents the coins to recieve.
-	 */
-	private static final Item COINS = new Item(995, 5000);
 
 	/**
 	 * Constructs a new {@code BoxOfHealth} {@code Object}.
@@ -50,13 +48,12 @@ public final class BoxOfHealthDialogue extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 0:
-			if (player.getInventory().freeSlots() == 0) {
+			if (!addItem(player, Items.COINS_995, 5000, Container.INVENTORY)) {
 				player.getPacketDispatch().sendMessage("You don't have enough inventory space.");
 				end();
 				break;
 			}
 			stage = 1;
-			player.getInventory().add(COINS);
 			interpreter.sendDialogue("...congratulations adventurer, you have been deemed worthy of this", "reward. You have also unlocked the Idea emote!");
 			player.getEmoteManager().unlock(Emotes.IDEA);
 			player.getSavedData().getGlobalData().getStrongHoldRewards()[2] = true;

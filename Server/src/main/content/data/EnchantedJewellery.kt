@@ -225,6 +225,7 @@ enum class EnchantedJewellery(
                             visualize(player, ANIMATION, GRAPHICS)
                             playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
                             player.impactHandler.disabledTicks = 4
+                            closeInterface(player)
                         }
                         3 -> {
                             teleport(player,location)

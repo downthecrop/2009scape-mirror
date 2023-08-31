@@ -129,7 +129,7 @@ public final class CyclopesRoom extends MapZone implements Plugin<Object> {
 
 	@Override
 	public void configure() {
-		super.register(new ZoneBorders(2838, 3534, 2876, 3556));
+		super.register(new ZoneBorders(2838, 3534, 2876, 3556, 2));
 	}
 
 	@Override

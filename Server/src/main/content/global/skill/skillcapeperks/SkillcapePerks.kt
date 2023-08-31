@@ -10,9 +10,10 @@ import core.game.world.map.zone.impl.DarkZone
 import core.plugin.Initializable
 import core.game.world.GameWorld
 import content.global.skill.farming.*
-import core.api.getAttribute
-import core.api.sendDialogue
-import core.api.hasRequirement
+import core.api.*
+import core.cache.def.impl.ItemDefinition
+import org.rs09.consts.Items
+import org.rs09.consts.Sounds
 
 enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)? = null) {
     BAREFISTED_SMITHING("cape_perks:barefisted-smithing"),
@@ -257,12 +258,13 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
 
         fun sendAltar(player: Player,altar: Altar){
             end()
-            if (altar == Altar.DEATH && !hasRequirement(player, "Mourning's End Part II"))
+            if (altar == Altar.DEATH && !hasRequirement(player, "Mourning's End Part II")) return
+            if (altar == Altar.ASTRAL && !hasRequirement(player, "Lunar Diplomacy")) return
+            if (altar == Altar.BLOOD && !hasRequirement(player, "Legacy of Seergaze")) return
+            if (altar == Altar.LAW && !ItemDefinition.canEnterEntrana(player)) {
+                sendItemDialogue(player, Items.SARADOMIN_SYMBOL_8055, "No weapons or armour are permitted on holy Entrana.")
                 return
-            else if (altar == Altar.ASTRAL && !hasRequirement(player, "Lunar Diplomacy"))
-                return
-            else if (altar == Altar.BLOOD && !hasRequirement(player, "Legacy of Seergaze"))
-                return
+            }
 
             var endLoc = if (altar == Altar.ASTRAL) Location.create(2151, 3864, 0) else altar.ruin.end
 

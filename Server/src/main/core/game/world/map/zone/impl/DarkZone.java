@@ -6,6 +6,7 @@ import core.game.event.UseWithEvent;
 import core.game.component.Component;
 import content.data.LightSource;
 import core.game.interaction.Option;
+import core.game.interaction.QueueStrength;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.CombatStyle;
@@ -21,8 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import core.api.Event;
 import core.game.world.GameWorld;
 
-import static core.api.ContentAPIKt.getItemName;
-import static core.api.ContentAPIKt.runTask;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles a dark area.
@@ -156,9 +156,11 @@ public final class DarkZone extends MapZone implements EventHook<UseWithEvent>{
 	public void updateOverlay(Player player) {
 		LightSource source = LightSource.getActiveLightSource(player);
 		if(SkillcapePerks.isActive(SkillcapePerks.CONSTANT_GLOW,player)){
-			if(player.getInterfaceManager().getOverlay().getId() == DARKNESS_OVERLAY.getId())
-				player.getInterfaceManager().closeOverlay();
-			return;
+			queueScript(player, 1, QueueStrength.SOFT, false, (Integer stage) -> {
+				if(player.getInterfaceManager().getOverlay().getId() == DARKNESS_OVERLAY.getId())
+					player.getInterfaceManager().closeOverlay();
+				return stopExecuting(player);
+			});
 		}
 		int overlay = -1;
 		if (player.getInterfaceManager().getOverlay() != null) {

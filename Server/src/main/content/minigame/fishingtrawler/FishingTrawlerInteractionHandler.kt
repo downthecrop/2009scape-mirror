@@ -1,9 +1,9 @@
 package content.minigame.fishingtrawler
 
+import core.api.clearLogoutListener
 import core.game.activity.ActivityManager
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
-import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.map.Location
@@ -14,7 +14,6 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.game.system.command.sets.FISHING_TRAWLER_LEAKS_PATCHED
 import core.game.system.command.sets.STATS_BASE
-import core.tools.colorize
 import kotlin.math.ceil
 
 /**
@@ -89,6 +88,8 @@ class FishingTrawlerInteractionHandler : InteractionListener {
             player.dialogueInterpreter.sendDialogue("You climb onto the floating barrel and begin to kick your way to the","shore.","You make it to the shore tired and weary.")
             player.appearance.setDefaultAnimations()
             player.appearance.sync()
+            clearLogoutListener(player, "ft-logout")
+            player.locks.unlockTeleport()
             return@on true
         }
 
