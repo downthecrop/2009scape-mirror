@@ -11,7 +11,7 @@ import core.tools.END_DIALOGUE
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 
-class DoricDoricsQuestDialogue(val dStage: Int) : DialogueFile() {
+class DoricDoricsQuestDialogue(private val dStage: Int) : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         when(dStage) {
             10 -> handleQuestStartDialogue(player, false)

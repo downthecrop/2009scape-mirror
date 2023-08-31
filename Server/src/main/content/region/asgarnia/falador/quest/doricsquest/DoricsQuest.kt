@@ -21,7 +21,7 @@ class DoricsQuest : Quest("Doric's Quest", 17, 16, 1, 31, 0, 1, 100) {
             line(player, "!!Falador??.", line++)
             line(player, "There aren't any requirements but !!Level 15 Mining?? will help.", line++)
         } else {
-            if(stage == 50) {
+            if(stage in 1..99) {
                 line(player, "I have spoken to !!Doric??.", line++)
                 line(player, "I need to collect some items and bring them to !!Doric??:", line++)
                 line(player, "6 Clay", line++, inInventory(player, Items.CLAY_434, 6))
