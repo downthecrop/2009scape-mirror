@@ -1,7 +1,9 @@
 package content.global.skill.agility.shortcuts
 
+import core.api.*
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
+import core.game.interaction.QueueStrength
 import core.game.node.Node
 import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.player.Player
@@ -38,15 +40,18 @@ class SteppingStoneShortcut : OptionHandler() {
         }
         val offset = getOffset(player,finalDest)
         player.debug("Offset: ${offset.first},${offset.second}")
-        player.pulseManager.run(object : Pulse(2){
-            override fun pulse(): Boolean {
-                val there = player.location == finalDest
-                if(!there){
-                    ForceMovement.run(player,player.location,player.location.transform(offset.first,offset.second,0), ANIMATION,10)
-                }
-                return there
+        lock(player, 3)
+        player.locks.lockTeleport(3)
+        queueScript(player, 2, QueueStrength.SOFT) {
+            val there = player.location == finalDest
+            if (!there) {
+                lock(player, 3)
+                player.locks.lockTeleport(3)
+                ForceMovement.run(player,player.location,player.location.transform(offset.first,offset.second,0), ANIMATION,10)
+                return@queueScript delayScript(player, 2)
             }
-        })
+            return@queueScript stopExecuting(player)
+        }
         return true
     }
 

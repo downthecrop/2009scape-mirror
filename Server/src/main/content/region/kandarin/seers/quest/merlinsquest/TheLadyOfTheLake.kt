@@ -82,7 +82,14 @@ class TheLadyOfTheLake(player: Player? = null) : DialoguePlugin(player) {
             117 -> player("Thanks!").also { stage = 10000 }
             145 -> options("I seek the sword Excalibur.", "Good day.").also { stage = 150 }
             150 -> when (buttonId) {
-                1 -> player("I seek the sword Excalibur.").also { stage = 161 }
+                1 -> {
+                    player("I seek the sword Excalibur.")
+                    if (quest.getStage(player) < 50) {
+                        stage = 250
+                    } else {
+                        stage = 161
+                    }
+                }
                 2 -> player("Good day.").also { stage = 10000 }
             }
             161 -> if (quest.getStage(player) == 50 || quest.getStage(player) == 60) { // they haven't proven themselves yet

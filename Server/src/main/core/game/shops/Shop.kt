@@ -307,7 +307,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         {
             if(removeItem(player, cost))
             {
-                if (item.amount == 0 && amountInInventory(player, cost.id) == 0) {
+                if (item.amount == 0) {
                     item.amount = 1
                 }
                 if(!hasSpaceFor(player, item)) {

@@ -175,7 +175,9 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
          * Opens the credit/voting shop
          */
         define("shop", Privilege.STANDARD, "", "Opens the credit shop."){ player, _ ->
-            player.interfaceManager.open(Component(Components.CREDIT_SHOP))
+            if (player.locks.isInteractionLocked || player.locks.isMovementLocked) {
+                sendMessage(player, "You can't open the shop right now.")
+            } else player.interfaceManager.open(Component(Components.CREDIT_SHOP))
         }
 
         /**

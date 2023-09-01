@@ -99642,7 +99642,7 @@
   {
     "requirements": "{1,70}-{4,70}",
     "ge_buy_limit": "2",
-    "examine": "A rune plateskirt in the colours of Armadyl.",
+    "examine": "A plateskirt of great craftsmanship.",
     "rare_item": "true",
     "durability": null,
     "weight": "8",

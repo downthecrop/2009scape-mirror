@@ -15,6 +15,8 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Handles the thieving of chests.
  * @author Vexia
@@ -146,19 +148,19 @@ public final class ThievableChestPlugin extends OptionHandler {
 				player.sendMessage("It looks like this chest has already been looted.");
 				return;
 			}
-			player.lock();
-			player.animate(Animation.create(536));
 			if (player.getSkills().getLevel(Skills.THIEVING) < level) {
-				player.lock(2);
+				animate(player, 536, false);
+				lock(player, 2);
 				player.sendMessage("You search the chest for traps.");
 				player.sendMessage("You find nothing.", 1);
-				player.unlock();
 				return;
 			}
 			if (player.getInventory().freeSlots() == 0) {
 				player.getPacketDispatch().sendMessage("Not enough inventory space.");
 				return;
 			}
+			lock(player, 6);
+			animate(player, 536, false);
 			player.sendMessage("You find a trap on the chest...");
 			player.getImpactHandler().setDisabledTicks(6);
 			GameWorld.getPulser().submit(new Pulse(1, player) {
@@ -172,10 +174,10 @@ public final class ThievableChestPlugin extends OptionHandler {
 						break;
 					case 4:
 						player.animate(Animation.create(536));
+						player.faceLocation(object.getLocation());
 						player.sendMessage("You open the chest.");
 						break;
 					case 6:
-						player.unlock();
 						for (Item i : rewards) {
 							player.getInventory().add(i, player);
 						}

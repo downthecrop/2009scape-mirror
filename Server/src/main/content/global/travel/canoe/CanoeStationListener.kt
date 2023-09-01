@@ -10,6 +10,7 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 
 import core.api.*
+import core.game.interaction.QueueStrength
 import org.rs09.consts.Sounds
 
 class CanoeStationListener : InteractionListener {
@@ -52,15 +53,13 @@ class CanoeStationListener : InteractionListener {
             player.faceLocation(CanoeUtils.getFaceLocation(player.location))
             player.animate(axe.animation)
             setVarbit(player,varbit,STAGE_TREE_NONINTERACTABLE)
-            player.pulseManager.run(object : Pulse(4){
-                override fun pulse(): Boolean {
-                    player.animator.stop()
-                    setVarbit(player,varbit,STAGE_LOG_CHOPPED)
-                    player.packetDispatch.sendSceneryAnimation(node.asScenery().getChild(player), FALL, false)
-                    player.unlock()
-                    return true
-                }
-            })
+            queueScript(player, 4, QueueStrength.SOFT) {
+                player.animator.stop()
+                setVarbit(player,varbit,STAGE_LOG_CHOPPED)
+                player.packetDispatch.sendSceneryAnimation(node.asScenery().getChild(player), FALL, false)
+                player.unlock()
+                return@queueScript stopExecuting(player)
+            }
             return@on true
         }
 
