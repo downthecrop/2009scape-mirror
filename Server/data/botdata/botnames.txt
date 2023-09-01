@@ -6,17 +6,17 @@
 0416347345
 05venom04
 0600
-07Ash
-07Ashley
-07Ato07
-07Chris
-07Dans
-07Paul
-07Skillerino
-07TroyScape
-07milo456
-07scaping
-07wan
+09Ash
+09Ashley
+09Ato09
+09Chris
+09Dans
+09Paul
+09Skillerino
+09TroyScape
+09milo456
+09scaping
+09wan
 0800
 0837
 0920
@@ -26,7 +26,6 @@
 0Giesel42O
 0Joker0
 0LKI
-0SRS
 0Tempest0
 0X010
 0anabanthis0
@@ -62,7 +61,6 @@
 0rphaned
 0samaBdabbin
 0smasher0
-0srs
 0ssimpwner
 0taku
 0verdrinking
@@ -198,7 +196,7 @@
 2 h p
 2000
 2006nope
-2007Anthony
+2009Anthony
 200mslay1day
 2011Turmoil
 209th
@@ -1639,7 +1637,7 @@ Ashn
 Ashoo
 Ashsole
 Ashton
-Ashwin07
+Ashwin09
 Ashyy
 Asian
 AskMeDolCare
@@ -2044,7 +2042,7 @@ Back
 Back2Backk
 Back2ourdays
 BackInTime
-BackintheOSR
+Backinthe09RS
 Backlit
 Backus
 Baco
@@ -2521,7 +2519,7 @@ BieBras
 Biebop
 Bierliebe
 BierryTaudet
-Bierscape07
+Bierscape09
 Biffo89
 Biffsy
 Bifta89
@@ -2872,7 +2870,7 @@ Bobby Brawl
 BobbyBigLips
 BobbySmooth
 Bobbyccf
-Bobbydrake07
+Bobbydrake09
 BobbyyHill
 Bobi
 Bobicles2
@@ -2934,7 +2932,7 @@ Bomtastic
 BonQong
 Bonar
 Bond
-Bond07
+Bond09
 BondedLiam
 Bonden
 Bondkyle
@@ -4639,7 +4637,7 @@ Coronad1
 Corp
 CorpToMax
 Corpletics
-CorposRS
+Corp09RS
 CorruptDingo
 Corsa
 Corsetti
@@ -5309,7 +5307,7 @@ Darz
 Darzix
 DasGoose
 DasReich88
-Dasgirl07
+Dasgirl09
 Dat2eWoord
 DatBoyLoy
 DatGuySteve
@@ -5531,7 +5529,7 @@ Dellamor
 Dellies
 Delmaro
 Delonius
-Delphan07
+Delphan09
 Delskiii
 Delsym
 Delta
@@ -6834,7 +6832,7 @@ Engen
 Enginaer
 Enginarc
 Enginear
-Enginerd07
+Enginerd09
 Englandwon
 Englebassen
 English
@@ -6928,7 +6926,7 @@ Erijk
 Erik
 ErikProbably
 Erikci Jr
-Erikito07
+Erikito09
 Erikoiskahvi
 Erinus
 Erkki
@@ -7955,7 +7953,7 @@ Frazze
 Frazzt
 Freaak
 Freak
-Freako07
+Freako09
 Freaks
 Freakxx
 Fred
@@ -8060,7 +8058,7 @@ Frote
 Frovz
 Froya
 Froyotech
-Froz07
+Froz09
 Frozah
 Froze
 Frozen
@@ -11200,7 +11198,7 @@ Jazo
 Jazpurs
 Jazz
 JazzFlap
-JazzMaster07
+JazzMaster09
 Jazzjr89
 Jazzy
 JazzyFlips
@@ -11661,7 +11659,7 @@ Juezz90
 Juffo
 Jugalator
 Jugernought
-JuggaloOSR
+Juggalo09R
 Juggerthot
 JuhQ
 Juheniqus
@@ -12366,7 +12364,7 @@ KingCudii
 KingDweebus
 KingEider
 KingFlugal
-KingGoblin07
+KingGoblin09
 KingGrekus
 KingGunshow
 KingJacula
@@ -16531,9 +16529,9 @@ OSColbyStock
 OSGingerkiin
 OSGrindscape
 OSRASS
-OSReaper
-OSRhys
-OSRvape
+09Reaper
+09Rhys
+09Rvape
 OSSD
 OSSoulwars
 OSzerox
@@ -16582,7 +16580,7 @@ Ochit
 Ochrie
 Ocra
 Ocst
-Octane07
+Octane09
 Octanes
 OctarineJake
 Octave
@@ -16818,7 +16816,7 @@ OppositePoop
 Oprego
 Optic
 Opticplex
-Opticplex07
+Opticplex09
 Optimus
 Opts
 Optyfen
@@ -21864,7 +21862,7 @@ SteveChamp
 SteveGuy241
 SteveMCOG
 SteveMerch
-SteveOwner07
+SteveOwner09
 SteveSnow15
 SteveTheMuss
 Stevee
@@ -23209,7 +23207,7 @@ Tiffs
 Tiftanlar
 TigTheWelder
 Tiger
-Tigerheart07
+Tigerheart09
 Tigerlady
 Tigerlady203
 Tigerr
@@ -23389,7 +23387,7 @@ Tomazon
 Tombalo
 Tombat
 Tombazv2
-Tombea07
+Tombea09
 Tomdabom
 TomehhG
 TomiL
@@ -24263,7 +24261,7 @@ Valdevon
 Valdomiro B
 Valendale
 Valete
-ValgeHunt07
+ValgeHunt09
 ValheraUK
 Valhk
 Valiente
@@ -24845,7 +24843,7 @@ Warnings
 WarpedMatrix
 Warph
 Warrior
-Warrior07rs
+Warrior09rs
 WarriorHome
 Warstroy
 Wartika
@@ -24925,7 +24923,7 @@ Weaky
 Wealthy
 WeardBeird
 Wearwolf
-Weasel07
+Weasel09
 WeaselToast
 Weaselious
 Weav
@@ -26057,7 +26055,7 @@ Zetta
 Zettty
 Zeug
 Zeus
-Zeus07
+Zeus09
 Zeusvdl
 Zeveria
 Zevosh
@@ -27599,7 +27597,7 @@ fuktig
 funky
 fuzzlumpkin
 fuzzydenuts
-fwft07
+fwft09
 fxck
 fxck versace
 fyfaen
@@ -29108,7 +29106,7 @@ mks200
 mlbg
 mlgb
 mlgkittycat
-mlkia07
+mlkia09
 mlong06
 mmigo
 mmmmmmmmhmm
@@ -30519,7 +30517,7 @@ tombradynfl
 tominator87
 tommybun
 tomrichmond9
-tomriddle07
+tomriddle09
 tonttitonder
 tony el gros
 toomastoomas
@@ -30613,7 +30611,7 @@ typto
 tyrant
 tzuyah
 tzuyufan14
-u dead now07
+u dead now09
 uEnv
 uKnoTheRules
 uLiveButOnce
