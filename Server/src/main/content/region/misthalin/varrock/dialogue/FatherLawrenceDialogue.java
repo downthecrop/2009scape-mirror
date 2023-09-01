@@ -82,7 +82,7 @@ public final class FatherLawrenceDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 41:
-			interpreter.sendDialogues(npc, null, "Can't you see that I'm in the middle of a sermon?!");
+			interpreter.sendDialogues(npc, null, "Can't you see that I'm in the middle of a Sermon?!");
 			stage = 42;
 			break;
 		case 42:
@@ -94,7 +94,7 @@ public final class FatherLawrenceDialogue extends DialoguePlugin {
 			stage = 44;
 			break;
 		case 44:
-			interpreter.sendDialogues(player, null, "Yes well it certainly seems like you have a captive", "audience!");
+			interpreter.sendDialogues(player, null, "Yes, well, it certainly seems like you have a captive", "audience!");
 			stage = 45;
 			break;
 		case 45:
@@ -110,7 +110,7 @@ public final class FatherLawrenceDialogue extends DialoguePlugin {
 			stage = 48;
 			break;
 		case 48:
-			interpreter.sendDialogues(player, null, "Yes, very confused...Anyway, Romeo wishes to be", "married to Juliet! She must be rescued from her", "father's control!");
+			interpreter.sendDialogues(player, null, "Yes, very confused....Anyway, Romeo wishes to be", "married to Juliet! She must be rescued from her", "father's control!");
 			stage = 49;
 			break;
 		case 49:
@@ -130,7 +130,7 @@ public final class FatherLawrenceDialogue extends DialoguePlugin {
 			stage = 53;
 			break;
 		case 53:
-			interpreter.sendDialogues(npc, null, "Then Romeo can collect her from the crypt! Go to the", "Apothercary, tell him I sent you and that you'll need a", "'Cadava' potion.");
+			interpreter.sendDialogues(npc, null, "Then Romeo can collect her from the crypt! Go to the", "Apothecary, tell him I sent you and that you'll need a", "'Cadava' potion.");
 			stage = 54;
 			break;
 		case 54:

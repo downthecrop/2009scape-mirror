@@ -397,7 +397,7 @@ public final class RJCutscenePlugin extends CutscenePlugin {
 				stage = 414;
 				break;
 			case 414:
-				interpreter.sendDialogues(player, null, "I have not be honest, it's not getting any better...");
+				interpreter.sendDialogues(player, null, "I have to be honest, it's not getting any better...");
 				stage = 415;
 				break;
 			case 415:
@@ -440,7 +440,7 @@ public final class RJCutscenePlugin extends CutscenePlugin {
 				stage = 424;
 				break;
 			case 424:
-				interpreter.sendDialogues(npc, null, "Oh yes, Father Lawrence...he's our long time confidant,", "he might have a solution! yes, yes, you have to go and", "talk to Lather Fawrence for us and ask him if he's got", "any suggestions for our predicatment?");
+				interpreter.sendDialogues(npc, null, "Oh yes, Father Lawrence...he's our long time confidant,", "he might have a solution! yes, yes, you have to go and", "talk to Lather Fawrence for us and ask him if he's got", "any suggestions for our predicament?");
 				stage = 425;
 				break;
 			case 425:
@@ -448,7 +448,7 @@ public final class RJCutscenePlugin extends CutscenePlugin {
 				stage = 426;
 				break;
 			case 426:
-				interpreter.sendDialogues(npc, null, "Lawther Fawrence! Oh he's....");
+				interpreter.sendDialogues(npc, null, "Lather Fawrence! Oh he's...");
 				stage = 427;
 				break;
 			case 427:
@@ -730,7 +730,7 @@ public final class RJCutscenePlugin extends CutscenePlugin {
 				});
 				break;
 			case 745:
-				interpreter.sendDialogues(npc, null, "Juliet...");
+				interpreter.sendDialogues(npc, null, "Juliet....?");
 				stage = 746;
 				break;
 			case 746:

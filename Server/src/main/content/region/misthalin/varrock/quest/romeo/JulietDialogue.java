@@ -102,10 +102,10 @@ public final class JulietDialogue extends DialoguePlugin {
 			break;
 		case 60:
 			if (!player.getInventory().contains(756, 1)) {
-				interpreter.sendDialogues(player, null, "Hi Juliet! I have an interesting propostion for", "you...suggested by Father Lawrence. It may be the", "only way you'll be able to escape from this house and", "be with Romeo.");
+				interpreter.sendDialogues(player, null, "Hi Juliet! I have an interesting proposition for", "you...suggested by Father Lawrence. It may be the", "only way you'll be able to escape from this house and", "be with Romeo.");
 				stage = 950;
 			} else {
-				interpreter.sendDialogues(player, null, "Hi Juliet! I have an interesting propostion for", "you...suggested by Father Lawrence. It may be the", "only way you'll be able to escape from this house and", "be with Romeo.");
+				interpreter.sendDialogues(player, null, "Hi Juliet! I have an interesting proposition for", "you...suggested by Father Lawrence. It may be the", "only way you'll be able to escape from this house and", "be with Romeo.");
 				stage = 950;
 			}
 			break;
@@ -200,7 +200,7 @@ public final class JulietDialogue extends DialoguePlugin {
 			stage = 2010;
 			break;
 		case 2010:
-			interpreter.sendDialogues(phil, FacialExpression.FURIOUS, "OH NO...JULIET HAS...DIED?....", "Ooooooohhhhhhh.....(sob).Juliet...my poor dead cousin!");
+			interpreter.sendDialogues(phil, FacialExpression.FURIOUS, "OH NO...JULIET HAS...DIED?....", "Oooooohhhhhh....(sob), (sob).Juliet...my poor dead cousin!");
 			stage = 2011;
 			break;
 		case 2011:
