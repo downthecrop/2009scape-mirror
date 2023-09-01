@@ -2831,6 +2831,9 @@ fun isStunned(entity: Entity) : Boolean {
  * @see To those whe ask "why severity instead of plain damage?" to which the answer is: severity is how it works authentically, and allows for scenarios where, e.g. a poison should hit 6 once, and then drop to 5 immediately.
 **/
 fun applyPoison (entity: Entity, source: Entity, severity: Int) {
+    if(hasTimerActive<PoisonImmunity>(entity)) {
+        return
+    }
     val existingTimer = getTimer<Poison>(entity)
 
     if (existingTimer != null) {

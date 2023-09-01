@@ -40,10 +40,6 @@ class Poison : PersistTimer (30, "poison", flags = arrayOf(TimerFlag.ClearOnDeat
     }
 
     override fun onRegister (entity: Entity) {
-        if (hasTimerActive<PoisonImmunity>(entity)) {
-            removeTimer<Poison>(entity)
-            return
-        }
         if (entity is Player) {
             sendMessage(entity, "You have been poisoned.")
             entity.debug ("[Poison] -> Received for $severity severity.")

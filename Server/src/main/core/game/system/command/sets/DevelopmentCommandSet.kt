@@ -279,5 +279,16 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             val id = args[1].toIntOrNull() ?: 9804
             player.dialogueInterpreter.sendDialogues(player, id, "Expression ID: $id")
         }
+
+        define("timers", Privilege.ADMIN, "::timers", "Print out timers") { player, args ->
+            player.sendMessage("Active timers:")
+            for(timer in player.timers.activeTimers) {
+                player.sendMessage("  ${timer.identifier} ${timer.nextExecution}")
+            }
+            player.sendMessage("New timers:")
+            for(timer in player.timers.newTimers) {
+                player.sendMessage("  ${timer.identifier}")
+            }
+        }
     }
 }
