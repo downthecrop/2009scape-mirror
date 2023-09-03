@@ -17,9 +17,13 @@ class FreakListeners : InteractionListener, MapArea {
     private val freakNpc = NPCs.FREAKY_FORESTER_2458
     private val pheasants = intArrayOf(NPCs.PHEASANT_2459,NPCs.PHEASANT_2460,NPCs.PHEASANT_2461,NPCs.PHEASANT_2462)
     override fun defineListeners() {
-        on(freakNpc,IntType.NPC,"talk-to"){player, node ->
-            if (getAttribute(player, FreakUtils.freakTask, -1) == -1) FreakUtils.giveFreakTask(player)
-            openDialogue(player, FreakyForesterDialogue(), node.asNpc())
+        on(freakNpc,IntType.NPC,"talk-to") { player, node ->
+            if (inBorders(player, FreakUtils.freakArea)) {
+                if (getAttribute(player, FreakUtils.freakTask, -1) == -1) FreakUtils.giveFreakTask(player)
+                openDialogue(player, FreakyForesterDialogue(), node.asNpc())
+            } else {
+                sendMessage(player, "They aren't interested in talking to you.")
+            }
             return@on true
         }
 
@@ -49,7 +53,7 @@ class FreakListeners : InteractionListener, MapArea {
         }
     }
     override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(2587, 4758, 2616,4788))
+        return arrayOf(FreakUtils.freakArea)
     }
 
     override fun getRestrictions(): Array<ZoneRestriction> {

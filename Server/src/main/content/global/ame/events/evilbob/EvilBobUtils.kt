@@ -77,16 +77,16 @@ object EvilBobUtils {
             when (RandomFunction.getRandom(1)) {
                 0 -> {
                     player.skills.addExperience(Skills.FISHING, experience)
-                    runTask(player, 8) { sendDialogue(player, "You feel somehow that you've become better at fishing.") }
+                    openDialogue(player, EvilBobDialogue(rewardDialogue = true, rewardXpSkill = Skills.FISHING), NPCs.EVIL_BOB_2479)
                 }
                 1 -> {
                     player.skills.addExperience(Skills.MAGIC, experience)
-                    runTask(player, 8) { sendDialogue(player, "You feel somehow that you've become better at magic.") }
+                    openDialogue(player, EvilBobDialogue(rewardDialogue = true, rewardXpSkill = Skills.MAGIC), NPCs.EVIL_BOB_2479)
                 }
             }
         } else {
             player.skills.addExperience(Skills.FISHING, experience)
-            runTask(player, 6) { sendDialogue(player, "You feel somehow that you've become better at fishing.") }
+            openDialogue(player, EvilBobDialogue(rewardDialogue = true, rewardXpSkill = Skills.FISHING), NPCs.EVIL_BOB_2479)
         }
     }
 }

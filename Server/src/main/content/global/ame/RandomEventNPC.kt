@@ -1,6 +1,7 @@
 package content.global.ame
 
 import content.global.ame.events.MysteriousOldManNPC
+import core.api.playGlobalAudio
 import core.api.poofClear
 import core.game.interaction.MovementPulse
 import core.game.node.entity.impl.PulseType
@@ -14,6 +15,8 @@ import core.game.world.update.flag.context.Graphics
 import core.integrations.discord.Discord
 import core.api.utils.WeightBasedTable
 import core.tools.secondsToTicks
+import core.tools.ticksToCycles
+import org.rs09.consts.Sounds
 import kotlin.random.Random
 import kotlin.reflect.full.createInstance
 
@@ -37,11 +40,12 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
     }
 
     open fun terminate() {
-        finalized = true
         pulseManager.clear(PulseType.STANDARD)
-        if (initialized) {
+        if (initialized && !finalized) {
             poofClear(this)
+            playGlobalAudio(this.location, Sounds.SMOKEPUFF_1930, ticksToCycles(1))
         }
+        finalized = true
     }
 
     open fun follow() {

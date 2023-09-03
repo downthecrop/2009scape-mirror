@@ -3,6 +3,7 @@ package content.global.ame.events.evilbob
 import content.global.ame.RandomEventNPC
 import core.api.*
 import core.api.utils.WeightBasedTable
+import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
 import core.game.system.timer.impl.AntiMacro
 import org.rs09.consts.NPCs
@@ -13,24 +14,31 @@ class EvilBobNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(N
     override fun init() {
         super.init()
         sendChat("meow")
-        lock(player, 10)
-        runTask(player, 6) {
-            sendChat(player, "No... what? Nooooooooooooo!")
-            player.animate(EvilBobUtils.teleAnim)
-            player.graphics(EvilBobUtils.telegfx)
-            playAudio(player, Sounds.TELEPORT_ALL_200)
-            EvilBobUtils.giveEventFishingSpot(player)
-            runTask(player, 3) {
-                sendMessage(player, "Welcome to Scape2009.")
-                EvilBobUtils.teleport(player)
-                resetAnimator(player)
-                openDialogue(player, EvilBobDialogue(), NPCs.EVIL_BOB_2479)
-                AntiMacro.terminateEventNpc(player)
+        queueScript(player, 4, QueueStrength.SOFT) { stage: Int ->
+            when (stage) {
+                0 -> {
+                    lock(player, 6)
+                    sendChat(player, "No... what? Nooooooooooooo!")
+                    animate(player, EvilBobUtils.teleAnim)
+                    player.graphics(EvilBobUtils.telegfx)
+                    playAudio(player, Sounds.TELEPORT_ALL_200)
+                    EvilBobUtils.giveEventFishingSpot(player)
+                    return@queueScript delayScript(player, 3)
+                }
+                1 -> {
+                    sendMessage(player, "Welcome to Scape2009.")
+                    EvilBobUtils.teleport(player)
+                    resetAnimator(player)
+                    openDialogue(player, EvilBobDialogue(), NPCs.EVIL_BOB_2479)
+                    AntiMacro.terminateEventNpc(player)
+                    return@queueScript stopExecuting(player)
+                }
+                else -> return@queueScript stopExecuting(player)
             }
         }
     }
 
     override fun talkTo(npc: NPC) {
-        player.dialogueInterpreter.open(EvilBobDialogue(), this.asNpc())
+        openDialogue(player, EvilBobDialogue(), this.asNpc())
     }
 }

@@ -5,6 +5,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
+import core.game.world.map.zone.ZoneBorders
 import core.tools.RandomFunction
 
 object FreakUtils{
@@ -13,6 +14,7 @@ object FreakUtils{
     const val freakTask = "/save:freakyf:task"
     const val freakComplete = "/save:freakyf:complete"
     const val pheasantKilled = "freakyf:killed"
+    val freakArea = ZoneBorders(2587, 4758, 2616, 4788)
     fun giveFreakTask(player: Player) {
         when(RandomFunction.getRandom(4)) {
             0 -> setAttribute(player, freakTask, NPCs.PHEASANT_2459)

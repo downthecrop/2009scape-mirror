@@ -5,6 +5,7 @@ import content.global.ame.RandomEvents
 import core.api.*
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.info.Rights
 import core.game.node.item.Item
 import core.game.system.command.Privilege
 import core.game.system.timer.PersistTimer
@@ -39,6 +40,9 @@ class AntiMacro : PersistTimer(0, "antimacro", isAuto = true), Commands {
     override fun onRegister(entity: Entity) {
         if (entity !is Player || entity.isArtificial)
             entity.timers.removeTimer(this)
+        if (entity is Player && entity.rights == Rights.ADMINISTRATOR) {
+            pause(entity)
+        }
 
         if (runInterval == 0)
             setNextExecution()

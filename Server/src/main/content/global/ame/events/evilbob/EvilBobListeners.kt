@@ -4,8 +4,10 @@ import core.api.*
 import core.game.dialogue.FacialExpression
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.entity.Entity
 import core.game.node.entity.player.link.emote.Emotes
+import core.game.node.entity.skill.Skills
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
@@ -98,35 +100,35 @@ class EvilBobListeners : InteractionListener, MapArea {
         on(EvilBobUtils.exitPortal, IntType.SCENERY, "enter") { player, portal ->
             if (getAttribute(player, EvilBobUtils.eventComplete, false)) {
                 lock(player, 12)
-                submitWorldPulse(object : Pulse() {
-                    var counter = 0
-                    override fun pulse(): Boolean {
-                        when (counter++) {
-                            1 -> forceMove(player, player.location, portal.location, 0, 50, null, 819)
-                            4 -> {
-                                player.faceLocation(Location.create(3421, 4777, 0))
-                                emote(player, Emotes.RASPBERRY)
-                                sendChat(player, "Be seeing you!")
-
-                            }
-                            7 -> {
-                                player.animate(EvilBobUtils.teleAnim)
-                                player.graphics(EvilBobUtils.telegfx)
-                                playAudio(player, Sounds.TELEPORT_ALL_200)
-
-                            }
-                            10 -> {
-                                sendMessage(player, "Welcome back to 2009Scape.")
-                                teleport(player, getAttribute(player, EvilBobUtils.prevLocation, Location.create(3222, 3219, 0)))
-                                EvilBobUtils.reward(player)
-                                EvilBobUtils.cleanup(player)
-                                sendPlayerDialogue(player, "That was the strangest dream I've ever had! Assuming it was a dream...", FacialExpression.HALF_ASKING)
-                                resetAnimator(player)
-                            }
+                queueScript(player, 0, QueueStrength.SOFT) { stage: Int ->
+                    when (stage) {
+                        0 -> {
+                            forceMove(player, player.location, portal.location, 0, 50, null, 819)
+                            return@queueScript delayScript(player, 3)
                         }
-                        return false
+                        1 -> {
+                            player.faceLocation(Location.create(3421, 4777, 0))
+                            emote(player, Emotes.RASPBERRY)
+                            sendChat(player, "Be seeing you!")
+                            return@queueScript delayScript(player,2)
+                        }
+                        2 -> {
+                            animate(player, EvilBobUtils.teleAnim)
+                            player.graphics(EvilBobUtils.telegfx)
+                            playAudio(player, Sounds.TELEPORT_ALL_200)
+                            return@queueScript delayScript(player, 2)
+                        }
+                        3 -> {
+                            sendMessage(player, "Welcome back to 2009Scape.")
+                            teleport(player, getAttribute(player, EvilBobUtils.prevLocation, Location.create(3222, 3219, 0)))
+                            EvilBobUtils.reward(player)
+                            EvilBobUtils.cleanup(player)
+                            resetAnimator(player)
+                            return@queueScript stopExecuting(player)
+                        }
+                        else -> return@queueScript stopExecuting(player)
                     }
-                })
+                }
             } else sendNPCDialogue(player, NPCs.EVIL_BOB_2479, "You're going nowhere, human!", FacialExpression.CHILD_NEUTRAL)
                 return@on true
             }

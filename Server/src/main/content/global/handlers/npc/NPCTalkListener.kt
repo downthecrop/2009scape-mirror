@@ -32,7 +32,7 @@ class NPCTalkListener : InteractionListener {
         on(IntType.NPC,"talk-to","talk","talk to"){ player, node ->
             val npc = node.asNpc()
             if(RandomEvents.randomIDs.contains(node.id)){
-                if(AntiMacro.getEventNpc(player) == null || AntiMacro.getEventNpc(player) != node.asNpc()){
+                if(AntiMacro.getEventNpc(player) == null || AntiMacro.getEventNpc(player) != node.asNpc() || AntiMacro.getEventNpc(player)?.finalized == true) {
                     player.sendMessage("They aren't interested in talking to you.")
                 } else {
                     AntiMacro.getEventNpc(player)?.talkTo(node.asNpc())

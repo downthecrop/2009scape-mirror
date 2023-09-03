@@ -5,17 +5,21 @@ import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
+import core.game.node.entity.skill.Skills
 import core.tools.END_DIALOGUE
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 
-class EvilBobDialogue : DialogueFile() {
+class EvilBobDialogue(val rewardDialogue: Boolean = false, val rewardXpSkill: Int = Skills.FISHING) : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.EVIL_BOB_2479)
         if (getAttribute(player!!, EvilBobUtils.assignedFishingZone, "none") == "none") giveEventFishingSpot(player!!)
             when (stage) {
                 0 -> {
-                    if (getAttribute(player!!, EvilBobUtils.eventComplete, false)) {
+                    if (rewardDialogue) {
+                        sendPlayerDialogue(player!!, "That was the strangest dream I've ever had! Assuming it was a dream...", FacialExpression.HALF_ASKING)
+                        stage = if (rewardXpSkill == Skills.FISHING) 900 else 901
+                    } else if (getAttribute(player!!, EvilBobUtils.eventComplete, false)) {
                         sendDialogue(player!!, "Evil Bob appears to be sleeping, best not to wake him up.").also { stage = END_DIALOGUE }
                     } else if (removeItem(player!!, Items.RAW_FISHLIKE_THING_6200)) {
                         setAttribute(player!!, EvilBobUtils.fishCaught, false)
@@ -104,6 +108,8 @@ class EvilBobDialogue : DialogueFile() {
                 805 -> npcl(FacialExpression.CHILD_NORMAL,"I am your leader, you are but a slave.").also { stage++ }
                 806 -> playerl(FacialExpression.ANGRY, "I am not a slave, I am a free man!").also { stage++ }
                 807 -> npcl(FacialExpression.CHILD_NORMAL, "Ah-ha-ha-ha-ha-ha!").also { stage = END_DIALOGUE }
+                900 -> sendDialogue(player!!, "You feel somehow that you've become better at fishing.").also { stage = END_DIALOGUE }
+                901 -> sendDialogue(player!!, "You feel somehow that you've become better at magic.").also { stage = END_DIALOGUE }
             }
         }
 }

@@ -1,27 +1,30 @@
 package core.game.system.command.sets
 
-import core.api.*
+import content.global.handlers.item.SpadeDigListener
 import content.region.misc.tutisland.handlers.iface.CharacterDesign
+import core.api.*
+import core.game.dialogue.DialogueFile
+import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.system.task.Pulse
-import core.game.world.map.Location
-import core.game.world.map.RegionManager
-import core.game.world.update.flag.context.Animation
-import core.plugin.Initializable
-import org.json.simple.JSONObject
-import core.game.dialogue.DialogueFile
-import content.global.handlers.item.SpadeDigListener
 import core.game.node.entity.player.info.login.PlayerSaver
 import core.game.system.command.Privilege
+import core.game.system.task.Pulse
 import core.game.world.GameWorld
-import core.game.world.repository.Repository
+import core.game.world.map.Location
+import core.game.world.map.RegionManager
 import core.game.world.repository.Repository.getPlayerByName
+import core.game.world.update.flag.context.Animation
+import core.game.world.update.flag.context.Graphics
+import core.plugin.Initializable
 import core.tools.END_DIALOGUE
+import core.tools.RandomFunction
+import org.json.simple.JSONObject
+import org.rs09.consts.Sounds
 import java.awt.HeadlessException
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
-import java.util.*
+import kotlin.streams.toList
 
 @Initializable
 class FunCommandSet : CommandSet(Privilege.ADMIN) {
@@ -186,6 +189,24 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
             CharacterDesign.reopen(player)
         }
 
+        /**
+         * Cast a weakened version of ice barrage on nearby players within the defined radius.
+         * This spell will never kill or freeze a player
+         */
+        define("barrage", Privilege.ADMIN, "::barrage radius ", "Cast a weak barrage on all nearby players. Will never kill players") { player, args ->
+            if (args.size != 2)
+                reject(player, "Usage: ::barrage radius[max = 50]")
+            val radius = if (args[1].toInt() > 50) 50 else args[1].toInt()
+            val nearbyPlayers = RegionManager.getLocalPlayers(player, radius).stream().filter { p: Player -> p.username != player.username }.toList()
+            animate(player, 1978)
+            playGlobalAudio(player.location, Sounds.ICE_CAST_171)
+            for (p in nearbyPlayers) {
+                playGlobalAudio(p.location, Sounds.ICE_BARRAGE_IMPACT_168, 20)
+                val impactAmount = if (p.skills.lifepoints < 10 ) 0 else RandomFunction.getRandom(3)
+                impact(p, impactAmount, ImpactHandler.HitsplatType.NORMAL)
+                p.graphics(Graphics(369, 0))
+            }
+        }
     }
 
     fun bury(player: Player){
