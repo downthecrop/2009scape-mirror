@@ -232,7 +232,8 @@ public class NPC extends Entity {
 		}
 		behavior.onCreation(this);
         // FIXME: hack around MovementPulse's constructor getting run while behavior is null when behavior is set between NPC constructor and init.
-        getProperties().setCombatPulse(new CombatPulse(this));
+		// FIXME: Commented out as a fix. most npcs were not being able to attack with range/magic due to setting the combat pulse.
+        // getProperties().setCombatPulse(new CombatPulse(this));
 	}
 
 	@Override
