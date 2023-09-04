@@ -58,9 +58,9 @@ class CrompertyDialogue(player: Player? = null) : core.game.dialogue.DialoguePlu
 
             15 -> npcl(core.game.dialogue.FacialExpression.THINKING,"Well...Hmm. I would guess somewhere between here and the Wizards' Tower in Misthalin.").also { stage++ }
             16 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"All I know is that it hasn't got there yet as the wizards there would have contacted me.").also { stage++ }
-            17 -> npcl(core.game.dialogue.FacialExpression.THINKING,"I'm using the GPDT for delivery. They assured me it would be delivered promptly.").also { stage++ }
-            18 -> playerl(core.game.dialogue.FacialExpression.ASKING,"Who are the GPDT?").also { stage++ }
-            19 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"The Gielinor Parcel Delivery Team. They come very highly recommended.").also { stage++ }
+            17 -> npcl(core.game.dialogue.FacialExpression.THINKING,"I'm using the RPDT for delivery. They assured me it would be delivered promptly.").also { stage++ }
+            18 -> playerl(core.game.dialogue.FacialExpression.ASKING,"Who are the RPDT?").also { stage++ }
+            19 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"The Runescape Parcel Delivery Team. They come very highly recommended.").also { stage++ }
             20 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"Their motto is: \"We aim to deliver your stuff at some point after you have paid us!\"").also { stage = 1000 }
 
             25 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"By all means! I'm afraid I can't give you any specifics as to where you will come out however. Presumably wherever the other block is located.").also { stage++ }
