@@ -88,6 +88,14 @@ public final class AnimationDefinition {
 		return duration;
 	}
 
+	public int getCycles() {
+		if (durations == null) return 0;
+		int duration = 0;
+		for (int i : durations)
+			duration += i;
+		return duration;
+	}
+
 	/**
 	 * Gets the duration of this animation in (600ms) ticks.
 	 * @return The duration in ticks.

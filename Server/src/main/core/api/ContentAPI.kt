@@ -64,6 +64,7 @@ import core.game.world.repository.Repository
 import core.game.consumable.*
 import core.ServerConstants
 import core.api.utils.Vector
+import core.cache.def.impl.AnimationDefinition
 import core.game.node.entity.player.link.quest.Quest
 import core.tools.*
 import core.game.world.update.flag.*
@@ -431,7 +432,12 @@ fun resetAnimator(player: Player) {
  *  @return the number of ticks the given animation lasts for
  */
 fun animationDuration(animation: Animation): Int {
-    return animation.definition.durationTicks
+    return cyclesToTicks(animation.definition.cycles)
+}
+
+fun animationCycles (animation: Int) : Int {
+    val def = AnimationDefinition.forId(animation)
+    return def.cycles
 }
 
 /**

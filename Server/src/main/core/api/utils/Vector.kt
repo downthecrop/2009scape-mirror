@@ -1,5 +1,6 @@
 package core.api.utils
 
+import core.game.world.map.Direction
 import core.game.world.map.Location
 import kotlin.math.*
 
@@ -43,6 +44,21 @@ class Vector (val x: Double, val y: Double) {
 
     fun toLocation (plane: Int = 0) : Location {
         return Location.create(floor(x).toInt(), floor(y).toInt(), plane)
+    }
+
+    fun toDirection() : Direction {
+        val norm = normalized()
+
+        if (norm.x >= 0.85) return Direction.EAST
+        else if (norm.x <= -0.85) return Direction.WEST
+
+        if (norm.y > 0) {
+            if (norm.y >= 0.85) return Direction.NORTH
+            return if (norm.x > 0) Direction.NORTH_EAST else Direction.NORTH_WEST
+        } else {
+            if (norm.y <= -0.85) return Direction.SOUTH
+            return if (norm.x > 0) Direction.SOUTH_EAST else Direction.SOUTH_WEST
+        }
     }
 
     companion object {

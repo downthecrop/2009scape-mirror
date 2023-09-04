@@ -5,6 +5,8 @@ import content.global.skill.slayer.Master
 import content.global.skill.slayer.SlayerManager
 import content.global.skill.slayer.Tasks
 import core.game.node.item.Item
+import core.api.utils.Vector
+import core.game.world.map.Direction
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import org.junit.jupiter.api.Assertions
@@ -346,6 +348,26 @@ class APITests {
                     Assertions.assertEquals(Items.LOBSTER_379, inventoryItem.id)
                 }
             }
+        }
+    }
+
+    @Test fun vectorToDirectionShouldReturnExpectedDirections() {
+        val testData = arrayOf(
+            Pair(Vector(1.0, 0.0), Direction.EAST),
+            Pair(Vector(-1.0, 0.0), Direction.WEST),
+            Pair(Vector(0.0, 1.0), Direction.NORTH),
+            Pair(Vector(0.0, -1.0), Direction.SOUTH),
+            Pair(Vector(1.0, 1.0), Direction.NORTH_EAST),
+            Pair(Vector(1.0, -1.0), Direction.SOUTH_EAST),
+            Pair(Vector(-1.0, 1.0), Direction.NORTH_WEST),
+            Pair(Vector(-1.0, -1.0), Direction.SOUTH_WEST),
+            Pair(Vector(15.0, 0.0), Direction.EAST),
+            Pair(Vector(15.0, 1.0), Direction.EAST),
+            Pair(Vector(-15.0, -9.7), Direction.SOUTH_WEST)
+        )
+
+        for ((vec, expDir) in testData) {
+            Assertions.assertEquals(expDir, vec.toDirection(), "Vector: $vec")
         }
     }
 }
