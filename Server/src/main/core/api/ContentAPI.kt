@@ -337,7 +337,7 @@ fun replaceSlot(player: Player, slot: Int, item: Item, currentItem: Item? = null
         Container.BANK -> player.bank
     }
 
-    if (item.id == -1 || item.amount <= 0) {
+    if (item.id == 65535 || item.amount <= 0) {
         return cont.replace(null, slot)
     }
 
