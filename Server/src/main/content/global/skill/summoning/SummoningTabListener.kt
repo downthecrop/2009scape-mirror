@@ -1,5 +1,6 @@
 import content.global.skill.summoning.familiar.BurdenBeast
 import content.global.skill.summoning.familiar.FamiliarSpecial
+import core.api.sendMessage
 import core.game.interaction.InterfaceListener
 
 class SummoningTabListener : InterfaceListener {
@@ -15,6 +16,10 @@ class SummoningTabListener : InterfaceListener {
                 }
                 67 -> {
                     if (player.getFamiliarManager().hasFamiliar()) {
+                        if (player.familiarManager.familiar.isInvisible || !player.familiarManager.familiar.location.withinDistance(player.location)) {
+                            sendMessage(player, "Your familiar is too far away!")
+                            return@on true
+                        }
                         if (!player.getFamiliarManager().getFamiliar().isBurdenBeast()) {
                             player.getPacketDispatch().sendMessage("Your familiar is not a beast of burden.")
                             return@on true

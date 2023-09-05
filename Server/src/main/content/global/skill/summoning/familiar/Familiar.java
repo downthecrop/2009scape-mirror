@@ -561,7 +561,8 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 			//spamTimer = 50;
 			return false;
 		}
-		setInvisible(getZoneMonitor().isRestricted(ZoneRestriction.FOLLOWERS) && !owner.getLocks().isLocked("enable_summoning"));
+		setInvisible(owner.getZoneMonitor().isRestricted(ZoneRestriction.FOLLOWERS) && !owner.getLocks().isLocked("enable_summoning"));
+		if (isInvisible()) return true;
 		getProperties().setTeleportLocation(destination);
 		if (!(this instanceof Pet)) {
             if(firstCall) {
