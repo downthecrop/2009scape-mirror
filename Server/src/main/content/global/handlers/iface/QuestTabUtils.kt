@@ -24,7 +24,7 @@ object QuestTabUtils {
         val questList = HashSet<String>()
         var maxQpReq = 0
         var qpPenalty = 0
-
+        closeInterface(player)
         for (req in unmetReqs) {
             if (req is QuestReq)
                 questList.add(req.questReq.questName)
