@@ -57,7 +57,7 @@ public final class EmoteCluePlugin extends EmoteClueScroll {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		Emotes emote = Emotes.BECKON;
 		register(new EmoteCluePlugin("digsite-beckon", 2677, ClueLevel.MEDIUM, emote, Emotes.BOW, new int[][] { { 6328 }, { 1267 }, { 658 } }, "Beckon in the Digsite, near the<br>eastern winch. Bow or curtsy<br>before you talk to me.<br>Equip a green gnome hat,<br>snakeskin boots and an<br>iron pickaxe.", new ZoneBorders(3368, 3425, 3371, 3429)));
-		register(new EmoteCluePlugin("tai-bwo-beckon", 2678, ClueLevel.MEDIUM, emote, Emotes.CLAP, new int[][] { { 1099 }, { 2552, 2554, 2556, 2558, 2560, 2562, 2564, 2568 }, { 1143 } }, "Beckon in Tai Bwo<br>Wannai. Clap before<br>you talk to me.<br>Equip green<br>dragonhide chaps, a<br>ring of dueling and a<br>mithril medium helmet.", new ZoneBorders(2771, 3053, 2814, 3074)));
+		register(new EmoteCluePlugin("tai-bwo-beckon", 2678, ClueLevel.MEDIUM, emote, Emotes.CLAP, new int[][] { { 1099 }, { 2552, 2554, 2556, 2558, 2560, 2562, 2564, 2566, 2568 }, { 1143 } }, "Beckon in Tai Bwo<br>Wannai. Clap before<br>you talk to me.<br>Equip green<br>dragonhide chaps, a<br>ring of dueling and a<br>mithril medium helmet.", new ZoneBorders(2771, 3053, 2814, 3074)));
 		emote = Emotes.BLOW_KISS;
 		//register(new EmoteCluePlugin("shilo-kiss", 2681, ClueLevel.HARD, emote, new int[][] { { 4089 }, { 5016 }, { 1127 } }, "Blow a kiss between<br>the tables in Shilo<br>Village bank. Beware<br>of double agents!<br>Equip a blue mystic<br>hat, bone spear and<br>rune plate body.", new ZoneBorders(2849, 2950, 2855, 2957)));
 		emote = Emotes.BOW;
