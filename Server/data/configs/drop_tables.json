@@ -8088,12 +8088,6 @@
         "maxAmount": "1"
       },
       {
-        "minAmount": "1",
-        "weight": "1.0",
-        "id": "9185",
-        "maxAmount": "1"
-      },
-      {
         "minAmount": "4",
         "weight": "10.0",
         "id": "561",
