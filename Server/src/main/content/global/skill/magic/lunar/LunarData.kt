@@ -3,40 +3,7 @@ package content.global.skill.magic.lunar
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.node.item.Item
-import core.game.world.update.flag.context.Animation
-import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
-
-// Animations
-val BAKE_PIE_ANIM = Animation(4413)
-val STATSPY_ANIM = Animation(6293)
-val CURE_PLANT_ANIM = Animation(4409)
-val NPC_CONTACT_ANIM = Animation(4413)
-val PLANK_MAKE_ANIM = Animation(6298)
-val STRING_JEWELLERY_ANIM = Animation(4412)
-val SUPERGLASS_MAKE_ANIM = Animation(4413)
-val FERTILE_SOIL_ANIM = Animation(4413)
-val CURE_ME_ANIM = Animation(4411)
-val CURE_GROUP_ANIM = Animation(4409)
-val CURE_OTHER_ANIM = Animation(4411)
-val ENERGY_TRANSFER_ANIM = Animation(4411)
-val HUNTER_KIT_ANIM = Animation(6303)
-
-// Graphics
-val BAKE_PIE_GFX = Graphics(746,75)
-val STATSPY_GFX = Graphics(1059)
-val CURE_PLANT_GFX = Graphics(742,100)
-val NPC_CONTACT_GFX = Graphics(730,130)
-val PLANK_MAKE_GFX = Graphics(1063, 120)
-val STRING_JEWELLERY_GFX = Graphics(728, 100)
-val SUPERGLASS_MAKE_GFX = Graphics(729, 120)
-val FERTILE_SOIL_GFX = Graphics(724)
-val CURE_ME_GFX = Graphics(731, 90)
-val CURE_GROUP_GFX = Graphics(751, 130)
-val CURE_OTHER_GFX = Graphics(738, 130)
-val ENERGY_TRANSFER_GFX = Graphics(738, 90)
-val HUNTER_KIT_GFX = Graphics(1024)
 
 private val HunterKitContents = intArrayOf(
     Items.NOOSE_WAND_10150,
@@ -62,7 +29,7 @@ class HunterKitInteraction : InteractionListener {
     }
 }
 
-enum class JewelleryString(val unstrung: Int, val strung: Int) {
+enum class StringJewelleryItems(val unstrung: Int, val strung: Int) {
     GOLD(Items.GOLD_AMULET_1673, Items.GOLD_AMULET_1692),
     SAPPHIRE(Items.SAPPHIRE_AMULET_1675, Items.SAPPHIRE_AMULET_1694),
     EMERALD(Items.EMERALD_AMULET_1677, Items.EMERALD_AMULET_1696),
@@ -74,13 +41,46 @@ enum class JewelleryString(val unstrung: Int, val strung: Int) {
     HOLY(Items.UNSTRUNG_SYMBOL_1714, Items.UNBLESSED_SYMBOL_1716),
     UNHOLY(Items.UNSTRUNG_EMBLEM_1720, Items.UNPOWERED_SYMBOL_1722);
     companion object {
-        val productOfString = values().associate { it.unstrung to it.strung }
-        fun forId(id : Int) : Int {
+        private val productOfString = values().associate { it.unstrung to it.strung }
+        fun forId(id: Int): Int {
             return productOfString[id]!!
         }
 
         fun unstrungContains(id: Int): Boolean {
             return productOfString.contains(id)
+        }
+    }
+}
+
+enum class HumidifyItems(val empty: Int, val full: Int) {
+    VIAL(Items.VIAL_229, Items.VIAL_OF_WATER_227),
+    WATERSKIN0(Items.WATERSKIN0_1831, Items.WATERSKIN4_1823),
+    WATERSKIN1(Items.WATERSKIN1_1829, Items.WATERSKIN4_1823),
+    WATERSKIN2(Items.WATERSKIN2_1827, Items.WATERSKIN4_1823),
+    WATERSKIN3(Items.WATERSKIN3_1825, Items.WATERSKIN4_1823),
+    BUCKET(Items.BUCKET_1925, Items.BUCKET_OF_WATER_1929),
+    BOWL(Items.BOWL_1923, Items.BOWL_OF_WATER_1921),
+    JUG(Items.JUG_1935, Items.JUG_OF_WATER_1937),
+    WATERING_CAN0(Items.WATERING_CAN_5331, Items.WATERING_CAN8_5340),
+    WATERING_CAN1(Items.WATERING_CAN1_5333, Items.WATERING_CAN8_5340),
+    WATERING_CAN2(Items.WATERING_CAN2_5334, Items.WATERING_CAN8_5340),
+    WATERING_CAN3(Items.WATERING_CAN3_5335, Items.WATERING_CAN8_5340),
+    WATERING_CAN4(Items.WATERING_CAN4_5336, Items.WATERING_CAN8_5340),
+    WATERING_CAN5(Items.WATERING_CAN5_5337, Items.WATERING_CAN8_5340),
+    WATERING_CAN6(Items.WATERING_CAN6_5338, Items.WATERING_CAN8_5340),
+    WATERING_CAN7(Items.WATERING_CAN7_5339, Items.WATERING_CAN8_5340),
+    FISHBOWL(Items.FISHBOWL_6667, Items.FISHBOWL_6668),
+    KETTLE(Items.KETTLE_7688, Items.FULL_KETTLE_7690),
+    ENCHANTED_VIAL(Items.ENCHANTED_VIAL_731, Items.HOLY_WATER_732),
+    CUP(Items.EMPTY_CUP_1980, Items.CUP_OF_WATER_4458);
+    companion object {
+        private val productOfFill = values().associate { it.empty to it.full }
+        fun forId(id: Int): Int {
+            return productOfFill[id]!!
+        }
+
+        fun emptyContains(id: Int): Boolean {
+            return productOfFill.contains(id)
         }
     }
 }

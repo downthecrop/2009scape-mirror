@@ -1,6 +1,7 @@
 package content.global.skill.magic
 
 import core.api.playAudio
+import core.api.playGlobalAudio
 import core.api.setAttribute
 import core.cache.def.impl.ItemDefinition
 import core.game.node.Node
@@ -73,11 +74,38 @@ abstract class SpellListener(val bookName: String) : Listener {
         player.skills.addExperience(Skills.MAGIC,amount)
     }
 
-    fun visualizeSpell(player: Player,anim:Animation,gfx: Graphics,soundID: Int = -1){
+    /**
+     * @param player The player to visualize the spell on
+     * @param anim The animation object. I.e. Animation(Animations.LUNAR_SPELLBOOK_*)
+     * @param gfx The graphics object. I.e. Graphics(Graphics.LUNAR_SPELLBOOK_*, height in int)
+     * @param soundID The sound to play, either raw integer or from the Sounds ConstLib. Defaults to -1 (Nothing).
+     * @param delay The delay that should be applied before the sound plays, defaults to 0.
+     * @param global Whether the sound should be played globally instead of per-player. Defaults to true.
+     */
+    fun visualizeSpell(player: Player, anim: Animation, gfx: Graphics, soundID: Int = -1, delay: Int = 0, global: Boolean = true){
         if(player.getAttribute("tablet-spell",false)) return
-        player.visualize(anim,gfx)
+        player.visualize(anim, gfx)
         if(soundID != -1){
-            playAudio(player, soundID)
+            if(global) playGlobalAudio(player.location, soundID, delay)
+            else playAudio(player, soundID, delay)
+        }
+    }
+
+    /**
+     * @param player The player to visualize the spell on
+     * @param anim The integer ID of the animation, found in the Animations ConstLib.
+     * @param gfx The integer ID of the graphics to show, found in the Graphics ConstLib.
+     * @param height How high the graphics should display above the ground(?). Defaults to 0.
+     * @param soundID The sound to play, either raw integer or from the Sounds ConstLib. Defaults to -1 (Nothing).
+     * @param delay The delay that should be applied before the sound plays, defaults to 0.
+     * @param global Whether the sound should be played globally instead of per-player. Defaults to true.
+     */
+    fun visualizeSpell(player: Player, anim: Int, gfx: Int, height: Int = 0, soundID: Int = -1, delay: Int = 0, global: Boolean = true) {
+        if(player.getAttribute("tablet-spell",false)) return
+        player.visualize(Animation(anim), Graphics(gfx, height))
+        if(soundID != -1){
+            if(global) playGlobalAudio(player.location, soundID, delay)
+            else playAudio(player, soundID, delay)
         }
     }
 

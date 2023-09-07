@@ -34,11 +34,11 @@ object Lunar {
     const val HEAL_GROUP = 30
     const val OURANIA_TELEPORT = 31
     const val CURE_PLANT = 32
-    const val MOONCLAN_GR_TELEPORT = 33
-    const val WATERBIRTH_GR_TELEPORT = 34
-    const val BARBARIAN_GR_TELEPORT = 35
-    const val KHAZARD_GR_TELEPORT = 36
-    const val FISHING_GUILD_GR_TELEPORT = 37
-    const val CATHERBY_GR_TELEPORT = 38
-    const val ICE_PLATEAU_GR_TELEPORT = 39
+    const val MOONCLAN_GROUP_TELEPORT = 33
+    const val WATERBIRTH_GROUP_TELEPORT = 34
+    const val BARBARIAN_GROUP_TELEPORT = 35
+    const val KHAZARD_GROUP_TELEPORT = 36
+    const val FISHING_GUILD_GROUP_TELEPORT = 37
+    const val CATHERBY_GROUP_TELEPORT = 38
+    const val ICE_PLATEAU_GROUP_TELEPORT = 39
 }

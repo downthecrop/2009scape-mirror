@@ -22,126 +22,40 @@ import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.repository.Repository
+import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
-import org.rs09.consts.Components
-import org.rs09.consts.Items
-import org.rs09.consts.Sounds
+import org.rs09.consts.*
 import kotlin.math.floor
 
 class LunarListeners : SpellListener("lunar"), Commands {
 
     override fun defineListeners() {
+        // Level 0
         onCast(Lunar.HOME_TELEPORT, NONE) { player, _ ->
             requires(player)
             player.teleporter.send(Location.create(2100, 3914, 0),TeleportManager.TeleportType.HOME)
             setDelay(player,true)
         }
 
-        onCast(Lunar.MOONCLAN_TELEPORT, NONE) { player, _ ->
-            requires(player,69, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563,1), Item(Items.EARTH_RUNE_557,2)))
-            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
-            sendTeleport(player,66.0, Location.create(2111, 3916, 0))
-        }
-
-        onCast(Lunar.MOONCLAN_GR_TELEPORT, NONE) { player, _ ->
-            requires(player,70, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563,1), Item(Items.EARTH_RUNE_557,4)))
-            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
-            sendGroupTeleport(player,67.0,"Moonclan Island",Location.create(2111, 3916, 0))
-        }
-
-        onCast(Lunar.OURANIA_TELEPORT, NONE) { player, _ ->
-            requires(player,71, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563,1), Item(Items.EARTH_RUNE_557,6)))
-            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
-            sendTeleport(player,69.0, Location.create(2469, 3247, 0))
-        }
-
-        onCast(Lunar.WATERBIRTH_TELEPORT, NONE){ player, _ ->
-            requires(player,72, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563), Item(Items.WATER_RUNE_555)))
-            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
-            sendTeleport(player,71.0, Location.create(2527, 3739, 0))
-        }
-
-        onCast(Lunar.WATERBIRTH_GR_TELEPORT, NONE) { player, _ ->
-            requires(player,73, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563), Item(Items.WATER_RUNE_555,5)))
-            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
-            sendGroupTeleport(player,72.0,"Waterbirth Island", Location.create(2527, 3739, 0))
-        }
-
-        onCast(Lunar.BARBARIAN_TELEPORT, NONE) { player, _ ->
-            requires(player,75, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563,2), Item(Items.FIRE_RUNE_554,3)))
-            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
-            sendTeleport(player,76.0, Location.create(2544, 3572, 0))
-        }
-
-        onCast(Lunar.BARBARIAN_GR_TELEPORT, NONE) { player, _ ->
-            requires(player,77, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563,2), Item(Items.FIRE_RUNE_554,6)))
-            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
-            sendGroupTeleport(player,77.0,"Barbarian Outpost", Location.create(2544, 3572, 0))
-        }
-
-        onCast(Lunar.KHAZARD_TELEPORT, NONE) { player, _ ->
-            requires(player,78, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563,2), Item(Items.WATER_RUNE_555,4)))
-            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
-            sendTeleport(player,80.0, Location.create(2656, 3157, 0))
-        }
-
-        onCast(Lunar.KHAZARD_GR_TELEPORT, NONE) { player, _ ->
-            requires(player,79, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563,2), Item(Items.WATER_RUNE_555,8)))
-            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
-            sendGroupTeleport(player,81.0, "Port Khazard", Location.create(2656, 3157, 0))
-        }
-
-        onCast(Lunar.FISHING_GUILD_TELEPORT, NONE) { player, _ ->
-            requires(player,85, arrayOf(Item(Items.ASTRAL_RUNE_9075,3), Item(Items.LAW_RUNE_563,3), Item(Items.WATER_RUNE_555,10)))
-            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
-            sendTeleport(player,89.0, Location.create(2611, 3393, 0))
-        }
-
-        onCast(Lunar.FISHING_GUILD_GR_TELEPORT, NONE) { player, _ ->
-            requires(player,86, arrayOf(Item(Items.ASTRAL_RUNE_9075,3), Item(Items.LAW_RUNE_563,3), Item(Items.WATER_RUNE_555,14)))
-            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
-            sendGroupTeleport(player,90.0,"Fishing Guild", Location.create(2611, 3393, 0))
-        }
-
-        onCast(Lunar.CATHERBY_TELEPORT, NONE) { player, _ ->
-            requires(player,87, arrayOf(Item(Items.ASTRAL_RUNE_9075,3), Item(Items.LAW_RUNE_563,3), Item(Items.WATER_RUNE_555,10)))
-            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
-            sendTeleport(player,92.0, Location.create(2804, 3433, 0))
-        }
-
-        onCast(Lunar.CATHERBY_GR_TELEPORT, NONE) { player, _ ->
-            requires(player,88, arrayOf(Item(Items.ASTRAL_RUNE_9075,3), Item(Items.LAW_RUNE_563,3), Item(Items.WATER_RUNE_555,15)))
-            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
-            sendGroupTeleport(player,93.0,"Catherby", Location.create(2804, 3433, 0))
-        }
-
-        onCast(Lunar.ICE_PLATEAU_TELEPORT, NONE) { player, _ ->
-            requires(player,89, arrayOf(Item(Items.ASTRAL_RUNE_9075,3), Item(Items.LAW_RUNE_563,3), Item(Items.WATER_RUNE_555,8)))
-            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
-            sendTeleport(player,96.0, Location.create(2972, 3873, 0))
-        }
-
-        onCast(Lunar.ICE_PLATEAU_GR_TELEPORT, NONE) { player, _ ->
-            requires(player,90, arrayOf(Item(Items.ASTRAL_RUNE_9075,3), Item(Items.LAW_RUNE_563,3), Item(Items.WATER_RUNE_555,16)))
-            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
-            sendGroupTeleport(player,99.0, "Ice Plateau", Location.create(2972, 3873, 0))
-        }
-
+        // Level 65
         onCast(Lunar.BAKE_PIE, NONE) { player, _ ->
             requires(player,65, arrayOf(Item(Items.ASTRAL_RUNE_9075), Item(Items.FIRE_RUNE_554,5), Item(Items.WATER_RUNE_555,4)))
             bakePie(player)
         }
 
-        onCast(Lunar.MONSTER_EXAMINE, NPC) { player, node ->
-            requires(player,66, arrayOf(Item(Items.ASTRAL_RUNE_9075), Item(Items.MIND_RUNE_558), Item(Items.COSMIC_RUNE_564)))
-            examineMonster(player,node!!.asNpc())
-        }
-
+        // Level 66
         onCast(Lunar.CURE_PLANT, OBJECT) { player, node ->
             requires(player,66, arrayOf(Item(Items.ASTRAL_RUNE_9075), Item(Items.EARTH_RUNE_557,8)))
             curePlant(player,node!!.asScenery())
         }
 
+        // Level 66
+        onCast(Lunar.MONSTER_EXAMINE, NPC) { player, node ->
+            requires(player,66, arrayOf(Item(Items.ASTRAL_RUNE_9075), Item(Items.MIND_RUNE_558), Item(Items.COSMIC_RUNE_564)))
+            examineMonster(player,node!!.asNpc())
+        }
+
+        // Level 67
         onCast(Lunar.NPC_CONTACT, NONE) { player, _ ->
             requires(player,67, arrayOf(Item(Items.ASTRAL_RUNE_9075), Item(Items.COSMIC_RUNE_564), Item(Items.AIR_RUNE_556,2)))
             player.interfaceManager.open(Component(429))
@@ -149,49 +63,223 @@ class LunarListeners : SpellListener("lunar"), Commands {
                 removeRunes(player)
                 addXP(player,63.0)
                 setDelay(player,false)
-                visualizeSpell(player, NPC_CONTACT_ANIM, NPC_CONTACT_GFX,3618)
+                visualizeSpell(player, Animations.LUNAR_SPELLBOOK_NPC_CONTACT_4413, Graphics.LUNAR_SPELLBOOK_NPC_CONTACT_728, 130,3618)
             }
         }
 
-        onCast(Lunar.PLANK_MAKE, ITEM) { player, node ->
-            requires(player, 86, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.NATURE_RUNE_561, 1), Item(Items.EARTH_RUNE_557, 15)))
-            plankMake(player, node!!.asItem())
+        // Level 68
+        onCast(Lunar.CURE_OTHER, PLAYER) { player, node ->
+            node?.let { cureOther(player, node) }
         }
 
-        onCast(Lunar.STRING_JEWELLERY, NONE) { player, _ ->
-            requires(player, 80, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.EARTH_RUNE_557, 10), Item(Items.WATER_RUNE_555, 5)))
-            stringJewellery(player)
+        // Level 68
+        onCast(Lunar.HUMIDIFY, NONE) { player, _ ->
+            requires(player, 68, arrayOf(Item(Items.ASTRAL_RUNE_9075, 1), Item(Items.WATER_RUNE_555, 3), Item(Items.FIRE_RUNE_554, 1)))
+            humidify(player)
         }
 
+        // Level 69
+        onCast(Lunar.MOONCLAN_TELEPORT, NONE) { player, _ ->
+            requires(player,69, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563,1), Item(Items.EARTH_RUNE_557,2)))
+            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
+            sendTeleport(player,66.0, Location.create(2111, 3916, 0))
+        }
+
+        // Level 70
+        onCast(Lunar.MOONCLAN_GROUP_TELEPORT, NONE) { player, _ ->
+            requires(player,70, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563,1), Item(Items.EARTH_RUNE_557,4)))
+            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
+            sendGroupTeleport(player,67.0,"Moonclan Island",Location.create(2111, 3916, 0))
+        }
+
+        // Level 71
+        onCast(Lunar.OURANIA_TELEPORT, NONE) { player, _ ->
+            requires(
+                player,
+                71,
+                arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.LAW_RUNE_563, 1), Item(Items.EARTH_RUNE_557, 6))
+            )
+            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
+            sendTeleport(player, 69.0, Location.create(2469, 3247, 0))
+        }
+
+        // Level 71
+        onCast(Lunar.CURE_ME, NONE) { player, _ ->
+            cureMe(player)
+        }
+
+        // Level 71
+        onCast(Lunar.HUNTER_KIT, NONE) { player, _ ->
+            if(freeSlots(player) == 0) sendMessage(player, "Not enough inventory space!").also { return@onCast }
+            hunterKit(player)
+        }
+
+        // Level 72
+        onCast(Lunar.WATERBIRTH_TELEPORT, NONE){ player, _ ->
+            requires(player,72, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563), Item(Items.WATER_RUNE_555)))
+            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
+            sendTeleport(player,71.0, Location.create(2527, 3739, 0))
+        }
+
+        // Level 73
+        onCast(Lunar.WATERBIRTH_GROUP_TELEPORT, NONE) { player, _ ->
+            requires(player,73, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563), Item(Items.WATER_RUNE_555,5)))
+            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
+            sendGroupTeleport(player,72.0,"Waterbirth Island", Location.create(2527, 3739, 0))
+        }
+
+        // Level 74
+        onCast(Lunar.CURE_GROUP, NONE) { player, _ ->
+            cureGroup(player)
+        }
+
+        // Level 75
+        /**
+         * Stat Spy
+         */
+
+        // Level 75
+        onCast(Lunar.BARBARIAN_TELEPORT, NONE) { player, _ ->
+            requires(player,75, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563,2), Item(Items.FIRE_RUNE_554,3)))
+            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
+            sendTeleport(player,76.0, Location.create(2544, 3572, 0))
+        }
+
+        // Level 76
+        onCast(Lunar.BARBARIAN_GROUP_TELEPORT, NONE) { player, _ ->
+            requires(player,77, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563,2), Item(Items.FIRE_RUNE_554,6)))
+            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
+            sendGroupTeleport(player,77.0,"Barbarian Outpost", Location.create(2544, 3572, 0))
+        }
+
+        // Level 77
         onCast(Lunar.SUPERGLASS_MAKE, NONE) { player, _ ->
             requires(player, 77, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.FIRE_RUNE_554, 6), Item(Items.AIR_RUNE_556, 10)))
             superglassMake(player)
         }
 
+        // Level 78
+        onCast(Lunar.KHAZARD_TELEPORT, NONE) { player, _ ->
+            requires(player,78, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563,2), Item(Items.WATER_RUNE_555,4)))
+            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
+            sendTeleport(player,80.0, Location.create(2656, 3157, 0))
+        }
+
+        // Level 79
+        onCast(Lunar.KHAZARD_GROUP_TELEPORT, NONE) { player, _ ->
+            requires(player,79, arrayOf(Item(Items.ASTRAL_RUNE_9075,2), Item(Items.LAW_RUNE_563,2), Item(Items.WATER_RUNE_555,8)))
+            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
+            sendGroupTeleport(player,81.0, "Port Khazard", Location.create(2656, 3157, 0))
+        }
+
+        // Level 79
+        /**
+         * Dream
+         */
+
+        // Level 80
+        onCast(Lunar.STRING_JEWELLERY, NONE) { player, _ ->
+            requires(player, 80, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.EARTH_RUNE_557, 10), Item(Items.WATER_RUNE_555, 5)))
+            stringJewellery(player)
+        }
+
+        // Level 81
+        /**
+         * Stat Restore Pot Share
+         */
+
+        // Level 82
+        /**
+         * Magic Imbue
+         */
+
+        // Level 83
         onCast(Lunar.FERTILE_SOIL, OBJECT) { player, node ->
             node?.let { fertileSoil(player, node.asScenery()) }
         }
 
-        onCast(Lunar.CURE_ME, NONE) { player, _ ->
-            cureMe(player)
+        // Level 84
+        /**
+         * Boost Potion Share
+         */
+
+        // Level 85
+        onCast(Lunar.FISHING_GUILD_TELEPORT, NONE) { player, _ ->
+            requires(player,85, arrayOf(Item(Items.ASTRAL_RUNE_9075,3), Item(Items.LAW_RUNE_563,3), Item(Items.WATER_RUNE_555,10)))
+            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
+            sendTeleport(player,89.0, Location.create(2611, 3393, 0))
         }
 
-        onCast(Lunar.CURE_GROUP, NONE) { player, _ ->
-            cureGroup(player)
+        // Level 86
+        onCast(Lunar.FISHING_GUILD_GROUP_TELEPORT, NONE) { player, _ ->
+            requires(player,86, arrayOf(Item(Items.ASTRAL_RUNE_9075,3), Item(Items.LAW_RUNE_563,3), Item(Items.WATER_RUNE_555,14)))
+            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
+            sendGroupTeleport(player,90.0,"Fishing Guild", Location.create(2611, 3393, 0))
         }
 
-        onCast(Lunar.CURE_OTHER, PLAYER) { player, node ->
-            node?.let { cureOther(player, node) }
+        // Level 86
+        onCast(Lunar.PLANK_MAKE, ITEM) { player, node ->
+            requires(player, 86, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.NATURE_RUNE_561, 1), Item(Items.EARTH_RUNE_557, 15)))
+            plankMake(player, node!!.asItem())
         }
 
+        // Level 87
+        onCast(Lunar.CATHERBY_TELEPORT, NONE) { player, _ ->
+            requires(player,87, arrayOf(Item(Items.ASTRAL_RUNE_9075,3), Item(Items.LAW_RUNE_563,3), Item(Items.WATER_RUNE_555,10)))
+            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
+            sendTeleport(player,92.0, Location.create(2804, 3433, 0))
+        }
+
+        // Level 88
+        onCast(Lunar.CATHERBY_GROUP_TELEPORT, NONE) { player, _ ->
+            requires(player,88, arrayOf(Item(Items.ASTRAL_RUNE_9075,3), Item(Items.LAW_RUNE_563,3), Item(Items.WATER_RUNE_555,15)))
+            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
+            sendGroupTeleport(player,93.0,"Catherby", Location.create(2804, 3433, 0))
+        }
+
+        // Level 89
+        onCast(Lunar.ICE_PLATEAU_TELEPORT, NONE) { player, _ ->
+            requires(player,89, arrayOf(Item(Items.ASTRAL_RUNE_9075,3), Item(Items.LAW_RUNE_563,3), Item(Items.WATER_RUNE_555,8)))
+            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
+            sendTeleport(player,96.0, Location.create(2972, 3873, 0))
+        }
+
+        // Level 90
+        onCast(Lunar.ICE_PLATEAU_GROUP_TELEPORT, NONE) { player, _ ->
+            requires(player,90, arrayOf(Item(Items.ASTRAL_RUNE_9075,3), Item(Items.LAW_RUNE_563,3), Item(Items.WATER_RUNE_555,16)))
+            if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
+            sendGroupTeleport(player,99.0, "Ice Plateau", Location.create(2972, 3873, 0))
+        }
+
+        // Level 91
         onCast(Lunar.ENERGY_TRANSFER, PLAYER) { player, node ->
             node?.let { energyTransfer(player, node) }
         }
 
-        onCast(Lunar.HUNTER_KIT, NONE) { player, _ ->
-            if(freeSlots(player) == 0) sendMessage(player, "Not enough inventory space!").also { return@onCast }
-            hunterKit(player)
-        }
+        // Level 92
+        /**
+         * Heal Other
+         */
+
+        // Level 93
+        /**
+         * Vengeance Other
+         */
+
+        // Level 94
+        /**
+         * Vengeance
+         */
+
+        // Level 95
+        /**
+         * Heal Group
+         */
+
+        // Level 96
+        /**
+         * Spellbook Swap
+         */
     }
 
     // Lunar spellbook-related debug commands
@@ -215,6 +303,19 @@ class LunarListeners : SpellListener("lunar"), Commands {
                 sendMessage(player, "::poison username damage")
             }
         }
+        define("humidifykit", privilege = Privilege.ADMIN) { player, _ ->
+            if(freeSlots(player) < 24) {
+                sendMessage(player, "Not enough free space.")
+                return@define
+            } else {
+                addItem(player, Items.ASTRAL_RUNE_9075, 100)
+                addItem(player, Items.WATER_RUNE_555, 300)
+                addItem(player, Items.FIRE_RUNE_554, 100)
+                for(item in HumidifyItems.values()) {
+                    addItem(player, item.empty)
+                }
+            }
+        }
     }
     private fun plankMake(player: Player, item: Item) {
 
@@ -229,7 +330,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
         }
         lock(player, 3)
         setDelay(player, false)
-        visualizeSpell(player, PLANK_MAKE_ANIM, PLANK_MAKE_GFX, 3617)
+        visualizeSpell(player, Animations.LUNAR_SPELLBOOK_PLANK_MAKE_6298, Graphics.LUNAR_SPELLBOOK_PLANK_MAKE_1063, 120, Sounds.LUNAR_MAKE_PLANK_3617)
         removeRunes(player)
         replaceSlot(player, item.slot, plankType.plank)
         addXP(player, 90.0)
@@ -281,7 +382,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
         patch.cureDisease()
         removeRunes(player)
         addXP(player,60.0)
-        visualizeSpell(player, CURE_PLANT_ANIM, CURE_PLANT_GFX)
+        visualizeSpell(player, Animations.LUNAR_SPELLBOOK_CURE_PLANT_4409, Graphics.LUNAR_SPELLBOOK_CURE_PLANT_748, 100, Sounds.LUNAR_CURE_GROUP_2882)
         setDelay(player,false)
     }
 
@@ -292,7 +393,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
         }
 
         player.faceLocation(npc.location)
-        visualizeSpell(player, STATSPY_ANIM, STATSPY_GFX,3620)
+        visualizeSpell(player, Animations.LUNAR_SPELLBOOK_STATSPY_6293, Graphics.LUNAR_SPELLBOOK_STAT_SPY_OVER_PLAYER_1060, soundID = Sounds.LUNAR_STAT_SPY_3620)
         removeRunes(player)
         addXP(player,66.0)
         setDelay(player,false)
@@ -330,10 +431,10 @@ class LunarListeners : SpellListener("lunar"), Commands {
             var counter = 0
             override fun pulse(): Boolean {
                 if(playerPies.isEmpty()) return true
-                if(counter == 0) delay = BAKE_PIE_ANIM.definition.durationTicks + 1
-                val item = playerPies.get(0)
+                if(counter == 0) delay = Animation(Animations.LUNAR_SPELLBOOK_BAKE_PIE_4413).definition.durationTicks + 1
+                val item = playerPies[0]
                 val pie = CookableItems.forId(item.id)
-                visualizeSpell(player, BAKE_PIE_ANIM, BAKE_PIE_GFX, 2879)
+                visualizeSpell(player, Animations.LUNAR_SPELLBOOK_BAKE_PIE_4413, Graphics.LUNAR_SPELLBOOK_BAKE_PIE_746, 75, Sounds.LUNAR_BAKE_PIE_2879)
                 addXP(player,60.0)
                 player.skills.addExperience(Skills.COOKING,pie.experience)
                 setDelay(player,false)
@@ -357,7 +458,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
     private fun sendGroupTeleport(player: Player, xp: Double, destName: String, loc: Location){
         RegionManager.getLocalPlayers(player,1).forEach {
             if(it == player) return@forEach
-            if(it.isTeleBlocked()) return@forEach
+            if(it.isTeleBlocked) return@forEach
             if(!it.isActive) return@forEach
             if(!it.settings.isAcceptAid) return@forEach
             if(it.ironmanManager.isIronman) return@forEach
@@ -374,7 +475,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
 
         for(item in player.inventory.toArray()) {
             if(item == null) continue
-            if(!JewelleryString.unstrungContains(item.id)) continue
+            if(!StringJewelleryItems.unstrungContains(item.id)) continue
             playerJewellery.add(item)
         }
 
@@ -385,13 +486,13 @@ class LunarListeners : SpellListener("lunar"), Commands {
                 if (playerJewellery.isEmpty())
                     return true
                 requires(player, 80, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.EARTH_RUNE_557, 10), Item(Items.WATER_RUNE_555, 5)))
-                if(counter == 0) delay = animationDuration(STRING_JEWELLERY_ANIM) + 1
+                if(counter == 0) delay = animationDuration(Animation(Animations.LUNAR_SPELLBOOK_STRING_JEWELLERY_4412)) + 1
                 val item = playerJewellery[0]
-                val strung = JewelleryString.forId(item.id)
+                val strung = StringJewelleryItems.forId(item.id)
                 setDelay(player,false)
                 if(removeItem(player, item) && addItem(player, strung)) {
                     removeRunes(player, true)
-                    visualizeSpell(player, STRING_JEWELLERY_ANIM, STRING_JEWELLERY_GFX, 2903)
+                    visualizeSpell(player, Animations.LUNAR_SPELLBOOK_STRING_JEWELLERY_4412, Graphics.LUNAR_SPELLBOOK_STRING_JEWELLERY_730, 100, Sounds.LUNAR_STRING_AMULET_2903)
                     rewardXP(player, Skills.CRAFTING, 4.0)
                     addXP(player, 83.0)
                     playerJewellery.remove(item)
@@ -404,11 +505,11 @@ class LunarListeners : SpellListener("lunar"), Commands {
     }
 
     private fun superglassMake(player: Player) {
-        val GLASSWEED = hashSetOf(Items.SODA_ASH_1781, Items.SEAWEED_401, Items.SWAMP_WEED_10978)
+        val GLASS_WEEDS = hashSetOf(Items.SODA_ASH_1781, Items.SEAWEED_401, Items.SWAMP_WEED_10978)
         val inv = player.inventory.toArray()
         var playerWeed: Int = amountInInventory(player, Items.SODA_ASH_1781) + amountInInventory(player, Items.SEAWEED_401) + amountInInventory(player, Items.SWAMP_WEED_10978)
         var playerSand: Int = amountInInventory(player, Items.BUCKET_OF_SAND_1783)
-        var index: Int = 0
+        var index = 0
 
         fun addMolten(): Boolean {
             if(RandomFunction.randomDouble(1.0) < 0.3) {
@@ -425,7 +526,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
             for (item in inv) {
                 if (item == null) continue
                 if (index == size) break
-                if (GLASSWEED.contains(item.id)) {
+                if (GLASS_WEEDS.contains(item.id)) {
                     if (removeItem(player, item) && removeItem(player, Items.BUCKET_OF_SAND_1783) && addMolten()) {
                         index++
                     } else {
@@ -439,7 +540,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
 
         if(index == size && size != 0) {
             removeRunes(player, true)
-            visualizeSpell(player, SUPERGLASS_MAKE_ANIM, SUPERGLASS_MAKE_GFX, 2896)
+            visualizeSpell(player, Animations.LUNAR_SPELLBOOK_SUPERGLASS_MAKE_4413, Graphics.LUNAR_SPELLBOOK_SUPERGLASS_MAKE_729, 120, Sounds.LUNAR_HEATGLASS_2896)
             rewardXP(player, Skills.CRAFTING, 10.0)
             addXP(player, 78.0)
         }
@@ -468,8 +569,8 @@ class LunarListeners : SpellListener("lunar"), Commands {
         }
         requires(player, 83, arrayOf(Item(Items.ASTRAL_RUNE_9075, 3), Item(Items.NATURE_RUNE_561, 2), Item(Items.EARTH_RUNE_557, 15)))
         removeRunes(player, true)
-        animate(player, FERTILE_SOIL_ANIM)
-        sendGraphics(FERTILE_SOIL_GFX, target.location)
+        animate(player, Animations.LUNAR_SPELLBOOK_FERTILE_SOIL_4413)
+        sendGraphics(Graphics.LUNAR_SPELLBOOK_FERTILE_SOIL_724, target.location)
         playGlobalAudio(target.location, Sounds.LUNAR_FERTILIZE_2891)
         patch.compost = CompostType.SUPER
         sendMessage(player, "You fertilize the soil.")
@@ -483,7 +584,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
         }
         requires(player, 71, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.LAW_RUNE_563, 1), Item(Items.COSMIC_RUNE_564, 2)))
         removeRunes(player, true)
-        visualizeSpell(player, CURE_ME_ANIM, CURE_ME_GFX, 2880)
+        visualizeSpell(player, Animations.LUNAR_SPELLBOOK_CURE_ME_4411, Graphics.LUNAR_SPELLBOOK_CURE_ME_742, 90, Sounds.LUNAR_CURE_2884)
         curePoison(player)
         addXP(player, 69.0)
         playAudio(player, Sounds.LUNAR_CURE_OTHER_INDIVIDUAL_2900)
@@ -493,7 +594,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
     private fun cureGroup(player: Player) {
         requires(player, 74, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.LAW_RUNE_563, 2), Item(Items.COSMIC_RUNE_564, 2)))
         removeRunes(player, true)
-        visualizeSpell(player, CURE_GROUP_ANIM, CURE_GROUP_GFX, 2882)
+        visualizeSpell(player, Animations.LUNAR_SPELLBOOK_CURE_GROUP_4409, Graphics.LUNAR_SPELLBOOK_CURE_GROUP_744, 130, Sounds.LUNAR_CURE_GROUP_2882)
         curePoison(player)
         for(acct in RegionManager.getLocalPlayers(player, 1)) {
             if(!acct.isActive || acct.locks.isInteractionLocked) {
@@ -504,8 +605,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
             }
             curePoison(acct)
             sendMessage(acct, "You have been cured of poison.")
-            playGlobalAudio(acct.location, Sounds.LUNAR_CURE_OTHER_INDIVIDUAL_2889)
-            visualize(acct, -1, CURE_GROUP_GFX)
+            visualizeSpell(acct, -1, Graphics.LUNAR_SPELLBOOK_CURE_GROUP_744, 130, Sounds.LUNAR_CURE_OTHER_INDIVIDUAL_2889)
         }
         addXP(player, 74.0)
     }
@@ -530,9 +630,8 @@ class LunarListeners : SpellListener("lunar"), Commands {
         }
         requires(player, 68, arrayOf(Item(Items.ASTRAL_RUNE_9075, 1), Item(Items.LAW_RUNE_563), Item(Items.EARTH_RUNE_557, 10)))
         player.face(p)
-        visualizeSpell(player, CURE_OTHER_ANIM, CURE_OTHER_GFX, 2886)
-        visualize(p, -1, CURE_OTHER_GFX)
-        playGlobalAudio(p.location, Sounds.LUNAR_CURE_OTHER_INDIVIDUAL_2889)
+        visualizeSpell(player, Animations.LUNAR_SPELLBOOK_CURE_OTHER_4411, Graphics.LUNAR_SPELLBOOK_CURE_OTHER_736, 130, Sounds.LUNAR_CURE_OTHER_2886)
+        visualizeSpell(p, -1, Graphics.LUNAR_SPELLBOOK_CURE_OTHER_736, 130, Sounds.LUNAR_CURE_OTHER_INDIVIDUAL_2889)
         removeRunes(player, true)
         curePoison(p)
         sendMessage(p, "You have been cured of poison.")
@@ -559,8 +658,8 @@ class LunarListeners : SpellListener("lunar"), Commands {
         }
         requires(player, 91, arrayOf(Item(Items.ASTRAL_RUNE_9075, 3), Item(Items.LAW_RUNE_563, 2), Item(Items.NATURE_RUNE_561, 1)))
         player.face(p)
-        visualizeSpell(player, ENERGY_TRANSFER_ANIM, ENERGY_TRANSFER_GFX, 2885)
-        visualize(p, -1, CURE_OTHER_GFX)
+        visualizeSpell(player, Animations.LUNAR_SPELLBOOK_ENERGY_TRANSFER_4411, Graphics.LUNAR_SPELLBOOK_ENERGY_TRANSFER_738, 90, Sounds.LUNAR_ENERGY_TRANSFER_2885)
+        visualize(p, -1, Graphics.LUNAR_SPELLBOOK_ENERGY_TRANSFER_738)
         val hp = floor(player.skills.lifepoints * 0.10)
         var r = hp
         if(r > (100 - p.settings.runEnergy)) {
@@ -590,11 +689,42 @@ class LunarListeners : SpellListener("lunar"), Commands {
         requires(player, 71, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.EARTH_RUNE_557, 2)))
         removeRunes(player, true)
         if(addItem(player, Items.HUNTER_KIT_11159)) {
-            visualizeSpell(player, HUNTER_KIT_ANIM, HUNTER_KIT_GFX, 3615)
+            visualizeSpell(player, Animations.LUNAR_SPELLBOOK_HUNTER_KIT_6303, Graphics.LUNAR_SPELLBOOK_HUNTER_KIT_1074, soundID = Sounds.LUNAR_HUNTER_KIT_3615)
             addXP(player, 70.0)
             setDelay(player, 2)
         }
     }
+
+    private fun humidify(player: Player) {
+        val playerEmpties = ArrayDeque<Item>()
+
+        for(item in player.inventory.toArray()) {
+            if(item == null) continue
+            if(!HumidifyItems.emptyContains(item.id)) continue
+            playerEmpties.add(item)
+        }
+
+        if(playerEmpties.isEmpty()) {
+            sendMessage(player, "You have nothing in your inventory that this spell can humidify.")
+            return
+        }
+
+
+        removeRunes(player)
+        delayEntity(player, Animation(Animations.LUNAR_SPELLBOOK_HUMIDIFY_6294).duration)
+        visualizeSpell(player, Animations.LUNAR_SPELLBOOK_HUMIDIFY_6294, Graphics.LUNAR_SPELLBOOK_HUMIDIFY_1061, 20, Sounds.LUNAR_HUMIDIFY_3614)
+        for(item in playerEmpties) {
+            val filled = HumidifyItems.forId(item.id)
+            removeItem(player, item.id) && addItem(player, filled)
+        }
+        addXP(player, 65.0)
+        /**
+        queueScript(player) {
+            return@queueScript stopExecuting(player)
+        }
+        */
+    }
+
 }
 
 
