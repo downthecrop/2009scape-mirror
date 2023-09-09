@@ -432,7 +432,7 @@ fun resetAnimator(player: Player) {
  *  @return the number of ticks the given animation lasts for
  */
 fun animationDuration(animation: Animation): Int {
-    return cyclesToTicks(animation.definition.cycles)
+    return animation.definition.durationTicks
 }
 
 fun animationCycles (animation: Int) : Int {
