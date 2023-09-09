@@ -16,56 +16,30 @@ import core.api.utils.WeightedItem
 /**
  * The reward chest.
  * @author Ceikry
- * and slightly kermit
+ * @author kermit
+ * @author Player Name
  */
 object RewardChest {
-    /**
-     * The low profit drop table.
-     */
-    private val DROP_TABLE = WeightBasedTable.create(
-            //Weighted total = 3050
-            WeightedItem(Items.COINS_995,             1, 5306, 950.0),
-            WeightedItem(Items.MIND_RUNE_558,        60, 60, 300.0),
-            WeightedItem(Items.MIND_RUNE_558,       100, 850, 300.0),
-            WeightedItem(Items.CHAOS_RUNE_562,      115, 720, 300.0),
-            WeightedItem(Items.DEATH_RUNE_560,       15, 15, 300.0),
-            WeightedItem(Items.DEATH_RUNE_560,       70, 230, 300.0),
-            WeightedItem(Items.BLOOD_RUNE_565,       35, 230, 300.0),
-            WeightedItem(Items.BOLT_RACK_4740,   35, 280, 300.0),
-            //Weight total = 975
-            WeightedItem(Items.SUPER_DEFENCE2_165,    1, 1, 325.0),
-            WeightedItem(Items.PRAYER_POTION2_141,    1, 1, 325.0),
-            WeightedItem(Items.RESTORE_POTION2_129,   1, 1, 325.0),
-            //Weight total = 53
-            WeightedItem(Items.TOOTH_HALF_OF_A_KEY_985, 1, 1, 25.0),
-            WeightedItem(Items.LOOP_HALF_OF_A_KEY_987,  1, 1, 25.0),
-            WeightedItem(Items.DRAGON_MED_HELM_1149,   1, 1, 3.0),
-            //Weight total = 120 BARROWS ITEMS V
-            WeightedItem(4708, 1, 1, 5.0),
-            WeightedItem(4710, 1, 1, 5.0),
-            WeightedItem(4712, 1, 1, 5.0),
-            WeightedItem(4714, 1, 1, 5.0),
-            WeightedItem(4716, 1, 1, 5.0),
-            WeightedItem(4718, 1, 1, 5.0),
-            WeightedItem(4720, 1, 1, 5.0),
-            WeightedItem(4722, 1, 1, 5.0),
-            WeightedItem(4724, 1, 1, 5.0),
-            WeightedItem(4726, 1, 1, 5.0),
-            WeightedItem(4728, 1, 1, 5.0),
-            WeightedItem(4730, 1, 1, 5.0),
-            WeightedItem(4732, 1, 1, 5.0),
-            WeightedItem(4734, 1, 1, 5.0),
-            WeightedItem(4736, 1, 1, 5.0),
-            WeightedItem(4738, 1, 1, 5.0),
-            WeightedItem(4745, 1, 1, 5.0),
-            WeightedItem(4747, 1, 1, 5.0),
-            WeightedItem(4749, 1, 1, 5.0),
-            WeightedItem(4751, 1, 1, 5.0),
-            WeightedItem(4753, 1, 1, 5.0),
-            WeightedItem(4755, 1, 1, 5.0),
-            WeightedItem(4757, 1, 1, 5.0),
-            WeightedItem(4759, 1, 1, 5.0)
+    private val REGULAR_DROPS = WeightBasedTable.create(
+            WeightedItem(Items.COINS_995,               1,   5306, 950.0),
+            WeightedItem(Items.MIND_RUNE_558,           60,  60,   300.0),
+            WeightedItem(Items.MIND_RUNE_558,           100, 850,  300.0),
+            WeightedItem(Items.CHAOS_RUNE_562,          115, 720,  300.0),
+            WeightedItem(Items.DEATH_RUNE_560,          15,  15,   300.0),
+            WeightedItem(Items.DEATH_RUNE_560,          70,  230,  300.0),
+            WeightedItem(Items.BLOOD_RUNE_565,          35,  230,  300.0),
+            WeightedItem(Items.BOLT_RACK_4740,          35,  280,  300.0),
+            WeightedItem(Items.TOOTH_HALF_OF_A_KEY_985, 1,    1,   25.0),
+            WeightedItem(Items.LOOP_HALF_OF_A_KEY_987,  1,    1,   25.0),
+            WeightedItem(Items.DRAGON_MED_HELM_1149,    1,    1,   3.0)
     )
+    private val AHRIM  = arrayOf(4708, 4710, 4712, 4714)
+    private val DHAROK = arrayOf(4716, 4718, 4720, 4722)
+    private val GUTHAN = arrayOf(4724, 4726, 4728, 4730)
+    private val KARIL  = arrayOf(4732, 4734, 4736, 4738)
+    private val TORAG  = arrayOf(4745, 4747, 4749, 4751)
+    private val VERAC  = arrayOf(4753, 4755, 4757, 4759)
+    private val BARROWS_DROP_IDS = arrayOf(AHRIM, DHAROK, GUTHAN, KARIL, TORAG, VERAC)
 
     /**
      * Rewards the player.
@@ -74,28 +48,61 @@ object RewardChest {
      */
     @JvmStatic
     fun reward(player: Player) {
-        for (killed in player.savedData.activityData.barrowBrothers) {
-            if (!killed){
-                player.sendMessage("You can't loot the chest until you kill all 6 barrows brothers.")
-                player.removeAttribute("barrow:looted")
-                // Because they haven't
-                // actually looted the
-                // chest yet.
-                return
+        var rewards: MutableList<Item> = ArrayList()
+
+        // Roll barrows rewards
+        var barrowsRewardsIDs: MutableList<Int> = ArrayList()
+        for (i in 0..5) {
+            if (player.savedData.activityData.barrowBrothers[i]) {
+                barrowsRewardsIDs.addAll(BARROWS_DROP_IDS[i])
             }
         }
-        val rewards: MutableList<Item> = ArrayList()
-        var maxRolls = 2 + RandomFunction.random(1,4)
+        val nKilledBrothers = barrowsRewardsIDs.size / 4
+        val maxRolls = 1 + maxOf(0, RandomFunction.random(nKilledBrothers - 3, nKilledBrothers))
+        var nBarrowsRewards = 0
+        val barrowsItemChance = 5 * barrowsRewardsIDs.size
         for (i in 0 until maxRolls) {
-            rewards.addAll(DROP_TABLE.roll())
+            if (RandomFunction.random(3223) <= barrowsItemChance) {
+                nBarrowsRewards++
+            }
         }
-        InterfaceContainer.generateItems(player, rewards.toTypedArray(), arrayOf("Examine"), 364, 4,3,4)
+        if (nBarrowsRewards > barrowsRewardsIDs.size) {
+            nBarrowsRewards = barrowsRewardsIDs.size
+        }
+
+        // Award all non-barrows rewards (using the remaining rolls)
+        val remainingRolls = maxRolls - nBarrowsRewards
+        if (remainingRolls > 0) {
+            val nonBarrowsRewards = REGULAR_DROPS.roll(null, remainingRolls)
+            addItem@for (i in 0 until nonBarrowsRewards.size) {
+                if (i > 0) {
+                    // If we have already awarded this item, just combine their amounts
+                    for (j in 0 until rewards.size) {
+                        if (nonBarrowsRewards[i].id == rewards[j].id) {
+                            rewards[j].amount += nonBarrowsRewards[i].amount
+                            continue@addItem
+                        }
+                    }
+                }
+                rewards.add(nonBarrowsRewards[i])
+            }
+        }
+
+        // Award a random selection of barrows rewards, if rolled
+        if (nBarrowsRewards > 0) {
+            barrowsRewardsIDs.shuffle()
+            for (i in 0 until nBarrowsRewards) {
+                rewards.add(Item(barrowsRewardsIDs[i], 1))
+            }
+        }
+
+        InterfaceContainer.generateItems(player, rewards.toTypedArray(), arrayOf("Examine"), 364, 4, 3, 4)
         player.interfaceManager.open(Component(Components.TRAIL_REWARD_364))
         BossKillCounter.addtoBarrowsCount(player)
-        for(item in rewards){
+        for (item in rewards) {
             announceIfRare(player, item)
-            if(!player.inventory.add(item)){
-                GroundItemManager.create(item,player)
+            if (!player.inventory.add(item)) {
+                GroundItemManager.create(item, player)
             }
         }
     }
