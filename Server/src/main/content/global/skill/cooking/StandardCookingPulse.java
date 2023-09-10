@@ -26,7 +26,7 @@ public class StandardCookingPulse extends Pulse {
 
     //Cooking sound
     public static final Audio SOUND = new Audio(2577, 1, 1);
-    
+
     private static final int LUMBRIDGE_RANGE = 114;
 
     private final int initial;
@@ -96,7 +96,7 @@ public class StandardCookingPulse extends Pulse {
     public boolean reward() {
         if (getDelay() == 1) {
             int delay = object.getName().toLowerCase().contains("range") ? 5 : 4;
-            if(SkillcapePerks.isActive(SkillcapePerks.HASTY_COOKING, player)) {
+            if (SkillcapePerks.isActive(SkillcapePerks.HASTY_COOKING, player)) {
                 delay -= 1;
             }
             setDelay(delay);
@@ -110,7 +110,7 @@ public class StandardCookingPulse extends Pulse {
         }
         return amount < 1;
     }
-    
+
     public boolean isBurned(final Player player, final Scenery object, int food) {
         boolean hasGauntlets = player.getEquipment().containsItem(new Item(Items.COOKING_GAUNTLETS_775));
         int effectiveCookingLevel = player.getSkills().getLevel(Skills.COOKING);
@@ -118,7 +118,8 @@ public class StandardCookingPulse extends Pulse {
             effectiveCookingLevel -= 5;
         }
         CookableItems item = CookableItems.forId(food);
-        int low, high;
+        int low;
+        int high;
         if (hasGauntlets && CookableItems.gauntletValues.containsKey(food)) {
             int[] successValues = CookableItems.gauntletValues.get(food);
             low = successValues[0];
@@ -189,11 +190,19 @@ public class StandardCookingPulse extends Pulse {
         if (CookableItems.intentionalBurn(food.getId())) {
             return "You deliberately burn the perfectly good piece of meat.";
         }
-        if (!burned) {
+
+        if (!burned && food.getName().startsWith("Raw")) {
             return "You manage to cook some " + food.getName().replace("Raw ", "");
-        } else {
+        } else if (burned && food.getName().startsWith("Raw")) {
             return "You accidentally burn some " + food.getName().replace("Raw ", "");
         }
+
+        if (!burned && food.getName().startsWith(("Uncooked"))) {
+            return "You manage to cook some " + food.getName().replace("Uncooked ", "");
+        } else if (burned && food.getName().startsWith(("Uncooked"))) {
+            return "You accidentally burn some " + food.getName().replace("Uncooked ", "");
+        }
+        return null;
     }
 
     private Animation getAnimation(final Scenery object) {
