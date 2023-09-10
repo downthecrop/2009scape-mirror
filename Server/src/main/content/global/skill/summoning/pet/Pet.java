@@ -11,6 +11,7 @@ import static core.api.ContentAPIKt.*;
  * Represents a pet.
  * @author Emperor
  * @author 'Vexia
+ * @author Player Name
  */
 public final class Pet extends Familiar {
 
@@ -33,6 +34,11 @@ public final class Pet extends Familiar {
 	 * The pets type.
 	 */
 	private final Pets pet;
+
+	/**
+	 * Whether a hunger warning has been fired yet; 0 = none, 1 = hungry, 2 = starving.
+	 */
+	private int hasWarned = 0;
 
 	/**
 	 * Constructs a new {@code Pet} {@code Object}.
@@ -67,11 +73,13 @@ public final class Pet extends Familiar {
 			}
 		}
 		double hunger = petDetails.getHunger();
-		if (hunger >= 75.0 && hunger <= 90.0 && hunger % 5 == 0) {
+		if (hunger >= 75.0 && hunger <= 90.0 && hasWarned < 1) {
 			owner.sendMessage("<col=ff0000>Your pet is getting hungry.</col>");
+			hasWarned = 1;
 		}
-		else if (hunger >= 90.0 && hunger % 1 == 0) {
+		else if (hunger >= 90.0 && hasWarned < 2) {
 			owner.getPacketDispatch().sendMessage("<col=ff0000>Your pet is starving, feed it before it runs off.</col>");
+			hasWarned = 2;
 		}
 		if (hunger >= 100.0 && growthRate != 0 && pet.getFood().length != 0) {
 			owner.getFamiliarManager().dismiss(false);
