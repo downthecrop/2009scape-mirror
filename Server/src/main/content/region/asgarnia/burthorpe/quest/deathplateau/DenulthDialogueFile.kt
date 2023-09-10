@@ -173,32 +173,6 @@ class DenulthDialogueFile : DialogueFile() {
                     }
                 }
             }
-            100 -> {
-                // This should go to Troll Stronghold.
-                when(stage) {
-                    0 -> playerl(FacialExpression.FRIENDLY, "Hello!").also { stage++ }
-                    1 -> npcl(FacialExpression.HAPPY, "Welcome back friend!").also { stage++ }
-                    2 -> showTopics(
-                        Topic("How goes your fight with the trolls?", 10),
-                        Topic("I thought the White Knights controlled Asgarnia?", 20),
-                        Topic(FacialExpression.HAPPY, "See you about Denulth!", 30)
-                    )
-
-                    10 -> npcl(FacialExpression.HALF_WORRIED, "I'm afraid I have bad news. We made our attack as planned, but we met unexpected resistance.").also { stage++ }
-                    11 -> playerl(FacialExpression.HALF_ASKING, "What happened?").also { stage++ }
-                    12 -> npcl(FacialExpression.WORRIED, "We were ambushed by trolls coming from the north. They captured Dunstan's son, Godric, who we enlisted at your request, we tried to follow but we were repelled at the foot of their stronghold.").also { stage++ }
-                    13 -> showTopics(
-                        Topic(FacialExpression.SAD, "I'm sorry to hear that.", END_DIALOGUE),
-                        Topic("Is there anything I can do to help?", 100)
-                    )
-                    100 -> npcl(FacialExpression.LAUGH, "Not until we implement Troll Stronghold you can't!").also { stage = END_DIALOGUE }
-                    /**
-                    100 -> npcl(FacialExpression.HALF_WORRIED, "The way to the stronghold is treacherous, friend. Even if you manage to climb your way up, there will be many trolls defending the stronghold.").also{ stage++ }
-                    101 -> playerl(FacialExpression.FRIENDLY, "I'll get Godric back!").also { stage++ }
-                    102 -> npcl(FacialExpression.HAPPY, "God speed friend! I would send some of my men with you, but none of them are brave enough to follow.").also { stage = END_DIALOGUE; strongholdquest.start(player)
-                    **/
-                }
-            }
         }
     }
 }

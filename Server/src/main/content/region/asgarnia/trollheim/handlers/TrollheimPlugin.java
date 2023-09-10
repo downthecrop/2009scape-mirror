@@ -291,6 +291,12 @@ public final class TrollheimPlugin extends OptionHandler {
 					} else {
 						bandaid(player, player.getLocation(), Location.create(2911, 3686, 0), JUMP);
 					}
+				} else if (loc.equals(new Location(2857, 3612, 0)) || loc.equals(new Location(2856, 3612, 0))) {
+					if (player.getSkills().getLevel(Skills.AGILITY) < 15) {
+						player.getPacketDispatch().sendMessage("You need an Agility level of 15 in order to climb this rock.");
+						return true;
+					}
+					bandaid(player, player.getLocation(), player.getLocation().getY() < object.getLocation().getY() ? player.getLocation().transform(0, 2, 0) : player.getLocation().transform(0, -2, 0), JUMP);
 				} else {
 					bandaid(player, player.getLocation(), player.getLocation().getY() < object.getLocation().getY() ? player.getLocation().transform(0, 2, 0) : player.getLocation().transform(0, -2, 0), JUMP);
 				}
