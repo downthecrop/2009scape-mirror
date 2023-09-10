@@ -19,6 +19,7 @@ import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
 import core.game.system.command.sets.STATS_BASE
 import core.game.system.command.sets.STATS_ROCKS
+import core.game.world.map.zone.ZoneBorders
 import core.tools.RandomFunction
 import core.tools.prependArticle
 import org.rs09.consts.Items
@@ -88,6 +89,12 @@ class MiningListener : InteractionListener {
                     }
                     player.setAttribute("/save:jewellery-charges:bracelet-of-clay", charges)
                 }
+            }
+
+            //If the player is mining gold in the witchaven dungeon, reward family crest perfect gold ore
+            val familyCrestGoldOreArea = ZoneBorders(2733, 9695, 2741, 9683)
+            if (reward == Items.GOLD_ORE_444 && inBorders(player, familyCrestGoldOreArea)) {
+                reward = Items.PERFECT_GOLD_ORE_446
             }
             val rewardName = getItemName(reward).lowercase()
 

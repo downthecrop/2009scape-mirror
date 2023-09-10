@@ -14,6 +14,7 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
+import org.rs09.consts.Sounds
 
 class GrandTreeListeners: InteractionListener {
 
@@ -199,7 +200,8 @@ class GrandTreeListeners: InteractionListener {
                     forceMove(player, player.location, player.location.transform(0, -2, 0), 25, 60, null, 819)
                 }
                 animate(player, 2572, false)
-                // animateScenery(roots.asScenery(), 1)
+                animateScenery(roots.asScenery(), 452)
+                playAudio(player, Sounds.TANGLEVINE_APPEAR_2316)
             }
             return@on true
         }

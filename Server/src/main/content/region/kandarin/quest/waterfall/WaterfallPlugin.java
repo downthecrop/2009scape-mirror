@@ -484,6 +484,10 @@ public final class WaterfallPlugin extends OptionHandler {
 			}
 
 			if (useditem.getId() == PEBBLE.getId() && object.getId() == 1992 && ItemDefinition.canEnterEntrana(player)) {
+				if (player.getFamiliarManager().hasFamiliar()) {
+					sendMessage(player, "You can't take a follower into the tomb.");
+					return false;
+				}
 				player.getPacketDispatch().sendMessage("You place the pebble in the gravestone's small indent.");
 				player.getPacketDispatch().sendMessage("It fits perfectly.");
 				player.getPacketDispatch().sendMessage("You hear a loud creak.", 4);

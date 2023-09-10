@@ -110,6 +110,7 @@ public final class TouristTrapPlugin extends OptionHandler {
         SceneryDefinition.forId(18951).getHandlers().put("option:use", this);
         SceneryDefinition.forId(2684).getHandlers().put("option:search", this);
         SceneryDefinition.forId(2684).getHandlers().put("option:look at", this);
+        SceneryDefinition.forId(18875).getHandlers().put("option:inspect", this);
         NPCDefinition.forId(830).getHandlers().put("option:watch", this);
         NPCDefinition.forId(4975).getHandlers().put("option:talk-to", this);
         NPCDefinition.forId(4976).getHandlers().put("option:talk-to", this);
@@ -480,6 +481,11 @@ public final class TouristTrapPlugin extends OptionHandler {
                             return true;
                         }
                     });
+                }
+                break;
+            case "inspect":
+                if (id == 18875) {
+                    sendDialogue(player, "You remember that Irena mentioned something about Ana wearing a red scarf before she left for the desert.");
                 }
                 break;
         }

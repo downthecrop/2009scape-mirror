@@ -142,7 +142,7 @@ public final class KlarenseDialogue extends DialoguePlugin {
 				stage = 9;
 				break;
 			case 9:
-				interpreter.sendDialogues(npc, FacialExpression.HAPPY,"How does, 2,000 gold sound? I'll even throw in my", "cabin boy, Jenkiins, for free! He'll swab the decks and", "splice the mainsails for you!");
+				interpreter.sendDialogues(npc, FacialExpression.HAPPY,"How does, 2,000 gold sound? I'll even throw in my", "cabin boy, Jenkins, for free! He'll swab the decks and", "splice the mainsails for you!");
 				stage = 10;
 				break;
 			case 10:

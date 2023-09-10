@@ -265,7 +265,7 @@ public enum WoodcuttingNode {
                 reward = 10810;
                 respawnRate = 75 | 130 << 16;
                 rate = 0.73;
-                experience = 140.2;
+                experience = 40.0;
                 level = 54;
                 rewardAmount = 35;
                 baseLow = 6;
@@ -344,6 +344,10 @@ public enum WoodcuttingNode {
                 experience = 37.5;
                 level = 15;
                 rewardAmount = 10;
+                baseLow = 32;
+                baseHigh = 100;
+                tierModLow = 16;
+                tierModHigh = 50;
                 break;
             case 20:
                 reward = 1519;
@@ -352,6 +356,10 @@ public enum WoodcuttingNode {
                 experience = 67.8;
                 level = 30;
                 rewardAmount = 20;
+                baseLow = 16;
+                baseHigh = 50;
+                tierModLow = 8;
+                tierModHigh = 25;
                 break;
             case 21:
                 reward = 1517;
@@ -360,6 +368,10 @@ public enum WoodcuttingNode {
                 experience = 100.0;
                 level = 45;
                 rewardAmount = 30;
+                baseLow = 8;
+                baseHigh = 25;
+                tierModLow = 4;
+                tierModHigh = 12.5;
                 break;
             case 22:
                 reward = 1515;
@@ -368,6 +380,10 @@ public enum WoodcuttingNode {
                 experience = 175.0;
                 level = 60;
                 rewardAmount = 40;
+                baseLow = 4;
+                baseHigh = 12.5;
+                tierModLow = 2;
+                tierModHigh = 6.25;
                 break;
             case 23:
                 reward = 1513;
@@ -376,6 +392,10 @@ public enum WoodcuttingNode {
                 experience = 250.0;
                 level = 75;
                 rewardAmount = 50;
+                baseLow = 2;
+                baseHigh = 6;
+                tierModLow = 1;
+                tierModHigh = 3;
                 break;
         }
     }

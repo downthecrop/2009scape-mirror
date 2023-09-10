@@ -15,6 +15,7 @@ import core.game.event.ResourceProducedEvent
 import core.game.interaction.Clocks
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.Node
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
@@ -77,7 +78,7 @@ class WoodcuttingListener : InteractionListener {
             val reward = resource.getReward()
             val rewardAmount: Int
 
-            if (tool.id == Items.INFERNO_ADZE_13661 && RandomFunction.roll(4)) {
+            if (tool.id == Items.INFERNO_ADZE_13661 && reward != Items.BARK_3239 && RandomFunction.roll(4)) {
                 sendMessage(player, "You chop some logs. The heat of the inferno adze incinerates them.")
                 Projectile.create(
                         player, null,
@@ -115,6 +116,8 @@ class WoodcuttingListener : InteractionListener {
                 //send the message for the resource reward
                 if (resource == WoodcuttingNode.DRAMEN_TREE) {
                     player.packetDispatch.sendMessage("You cut a branch from the Dramen tree.")
+                } else if (reward == Items.BARK_3239 && rewardAmount == 0) {
+                    player.packetDispatch.sendMessage("You chop away some bark, but it falls to pieces before you can pick it up.")
                 } else {
                     player.packetDispatch.sendMessage("You get some " + ItemDefinition.forId(reward).name.lowercase(Locale.getDefault()) + ".")
                 }
@@ -159,6 +162,12 @@ class WoodcuttingListener : InteractionListener {
                     if (fPatch != null) {
                         val patch = fPatch.getPatchFor(player)
                         patch.setCurrentState(patch.getCurrentState() + 1)
+                        node.isActive = false
+                        playAudio(player, TREE_FALLING_2734)
+                        queueScript(player, 2, QueueStrength.SOFT) {
+                            node.isActive = true
+                            return@queueScript stopExecuting(player)
+                        }
                     }
                     return true
                 }
@@ -249,12 +258,12 @@ class WoodcuttingListener : InteractionListener {
         }
 
         // Bark
-        if (reward == 3239) {
-            // If we receive the item, give the full experience points otherwise give the base amount
+        if (reward == Items.BARK_3239) {
+            // If we receive the item, give the experience points
             if (amount >= 1) {
-                experience = 275.2
+                experience = 82.5
             } else {
-                amount = 1
+                return 0.0
             }
         }
 

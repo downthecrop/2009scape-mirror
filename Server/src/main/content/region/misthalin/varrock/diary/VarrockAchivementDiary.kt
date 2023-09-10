@@ -13,6 +13,7 @@ import org.rs09.consts.Scenery
 import content.region.misthalin.varrock.dialogue.ElsieDialogue
 import content.global.handlers.iface.FairyRing
 import content.global.skill.magic.TeleportMethod
+import core.api.getStatLevel
 import core.api.inBorders
 import core.game.diary.AreaDiaryTask
 import core.game.diary.DiaryEventHookBase
@@ -194,7 +195,7 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
             }
         }
 
-        if (event.option == "pickpocket" && (event.target.id == NPCs.GUARD_5920 && inBorders(player, VARROCK_PALACE))) {
+        if (event.option == "pickpocket" && (event.target.id == NPCs.GUARD_5920 && inBorders(player, VARROCK_PALACE) && getStatLevel(player, Skills.THIEVING) >= 40)) {
             finishTask(
                 player,
                 DiaryLevel.MEDIUM,
