@@ -12,6 +12,7 @@ import core.game.system.timer.PersistTimer
 import core.game.world.map.zone.ZoneRestriction
 import core.game.world.repository.Repository
 import core.tools.RandomFunction
+import core.tools.colorize
 import org.json.simple.JSONObject
 
 class AntiMacro : PersistTimer(0, "antimacro", isAuto = true), Commands {
@@ -40,9 +41,8 @@ class AntiMacro : PersistTimer(0, "antimacro", isAuto = true), Commands {
     override fun onRegister(entity: Entity) {
         if (entity !is Player || entity.isArtificial)
             entity.timers.removeTimer(this)
-        if (entity is Player && entity.rights == Rights.ADMINISTRATOR) {
-            pause(entity)
-        }
+        if (entity is Player && entity.rights == Rights.ADMINISTRATOR)
+            paused = true
 
         if (runInterval == 0)
             setNextExecution()
@@ -106,6 +106,10 @@ class AntiMacro : PersistTimer(0, "antimacro", isAuto = true), Commands {
             val target = Repository.getPlayerByName(arg.targetPlayer)
             if (target == null)
                 reject(player, "Unable to find user ${arg.targetPlayer}.")
+            if (target!!.rights == Rights.ADMINISTRATOR) {
+                unpause(target)
+                sendMessage(target, colorize("%RAntiMacro timer unpaused until next login."))
+            }
 
             forceEvent(target!!, arg.targetEvent)
         }
