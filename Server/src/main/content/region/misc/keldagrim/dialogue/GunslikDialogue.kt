@@ -11,25 +11,24 @@ import core.tools.START_DIALOGUE
 import org.rs09.consts.NPCs
 
 @Initializable
-class NolarDialogue(player: Player? = null) : DialoguePlugin(player){
-
+class GunslikDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            START_DIALOGUE -> npc(FacialExpression.OLD_DEFAULT, "I have a wide variety of crafting tools on offer,", "care to take a look?").also { stage++ }
+            START_DIALOGUE -> npcl(FacialExpression.OLD_DEFAULT, "What can I interest you in? We have something of everything here!").also { stage++ }
             1 -> showTopics(
-                    Topic(FacialExpression.FRIENDLY, "Yes please!", 2),
-                    Topic(FacialExpression.FRIENDLY, "No thanks.", END_DIALOGUE),
+                    Topic(FacialExpression.FRIENDLY, "Oh good!", 2),
+                    Topic(FacialExpression.FRIENDLY, "Nothing, thanks.", END_DIALOGUE),
             )
-            2 -> end().also{ openNpcShop(player, NPCs.NOLAR_2158) }
+            2 -> end().also{ openNpcShop(player, NPCs.GUNSLIK_2154) }
         }
         return true
     }
 
     override fun newInstance(player: Player?): DialoguePlugin {
-        return NolarDialogue(player)
+        return GunslikDialogue(player)
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.NOLAR_2158)
+        return intArrayOf(NPCs.GUNSLIK_2154)
     }
 }

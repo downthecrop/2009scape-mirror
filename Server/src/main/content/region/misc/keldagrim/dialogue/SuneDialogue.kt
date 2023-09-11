@@ -11,25 +11,23 @@ import core.tools.START_DIALOGUE
 import org.rs09.consts.NPCs
 
 @Initializable
-class NolarDialogue(player: Player? = null) : DialoguePlugin(player){
+class SuneDialogue(player: Player? = null) : DialoguePlugin(player){
 
+    // This npc travels between Tati's house and the city's marketplace.
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            START_DIALOGUE -> npc(FacialExpression.OLD_DEFAULT, "I have a wide variety of crafting tools on offer,", "care to take a look?").also { stage++ }
-            1 -> showTopics(
-                    Topic(FacialExpression.FRIENDLY, "Yes please!", 2),
-                    Topic(FacialExpression.FRIENDLY, "No thanks.", END_DIALOGUE),
-            )
-            2 -> end().also{ openNpcShop(player, NPCs.NOLAR_2158) }
+            START_DIALOGUE -> npcl(FacialExpression.OLD_ANGRY1, "Can you leave me alone please? I'm trying to get a bit of rest.").also {
+                stage = END_DIALOGUE
+            }
         }
         return true
     }
 
     override fun newInstance(player: Player?): DialoguePlugin {
-        return NolarDialogue(player)
+        return SuneDialogue(player)
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.NOLAR_2158)
+        return intArrayOf(NPCs.SUNE_2191)
     }
 }
