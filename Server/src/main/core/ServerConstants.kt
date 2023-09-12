@@ -305,5 +305,8 @@ class ServerConstants {
 
         @JvmField
         var BETTER_AGILITY_PYRAMID_GP = true
+
+        @JvmField
+        var BETTER_DFS = true
     }
 }
