@@ -4,6 +4,7 @@ import core.game.node.entity.player.Player
 import core.game.system.command.Command
 import core.game.system.command.CommandMapping
 import core.game.system.command.Privilege
+import core.tools.Log
 import core.tools.colorize
 
 /**
@@ -32,7 +33,9 @@ interface Commands : ContentInterface {
      * Glorified player.sendMessage with black text coloring and an arrow. Use this when you need to
      * notify/inform a player of some information from within the command without ending execution.
      */
-    fun notify(player: Player, message: String){
+    fun notify(player: Player, message: String, logToConsole: Boolean = false){
+        if (logToConsole)
+            log (this::class.java, Log.DEBUG, message)
         player.sendMessage(colorize("-->$message"))
     }
 

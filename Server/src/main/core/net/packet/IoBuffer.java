@@ -247,6 +247,8 @@ public class IoBuffer {
             return buf.get() & 0xFF;
         }
 
+		public int g1b() { return buf.get(); }
+
         public int g1add() {
             return (buf.get() - 128) & 0xFF;
         }
@@ -266,6 +268,13 @@ public class IoBuffer {
         public int g2add() {
             return ((buf.get() & 0xff) << 8) + ((buf.get() - 128) & 0xFF);
         }
+
+		public int g2b() {
+			int value = ((buf.get() & 0xFF) << 8) + (buf.get() & 0xFF);
+			if (value > 32767)
+				value -= 0x10000;
+			return value;
+		}
 
         public int ig2() {
             return (buf.get() & 0xFF) + ((buf.get() & 0xFF) << 8);
@@ -770,8 +779,9 @@ public class IoBuffer {
 	 * @return
 	 */
 	public String getJagString() {
-		buf.get();
-		return ByteBufferUtils.getString(buf);
+		byte b = buf.get();
+		if (b == 0) return "";
+		return ((char) b) + ByteBufferUtils.getString(buf);
 	}
 
 	/**
