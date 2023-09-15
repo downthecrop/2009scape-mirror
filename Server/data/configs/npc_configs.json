@@ -71334,6 +71334,21 @@
     "id": "2335"
   },
   {
+    "examine": "Founder and Director of the Piscatoris Fishing Colony.",
+    "name": "Herman Caranos",
+    "id": "3822"
+  },
+  {
+    "examine": "Engineer for the Piscatoris Fishing Colony.",
+    "name": "Franklin Caranos",
+    "id": "3823"
+  },
+  {
+    "examine": "Secretary and Storemaster for the Piscatoris Fishing Colony.",
+    "name": "Arnold Lydspor",
+    "id": "3824"
+  },
+  {
     "examine": "Perhaps this gardener might look after your crops for you.",
     "name": "Frizzy Skernip",
     "id": "4560"
@@ -72276,5 +72291,24 @@
     "examine": "He looks dangerous!",
     "name": "Turael",
     "id": "8273"
+  },
+  {
+    "examine": "Doesn't seem to want to go away.",
+    "combat_style": "2",
+    "melee_animation": "811",
+    "range_animation": "811",
+    "attack_speed": "4",
+    "magic_level": "100",
+    "defence_animation": "0",
+    "magic_animation": "811",
+    "death_animation": "836",
+    "name": "Skeleton Mage",
+    "defence_level": "60",
+    "lifepoints": "80",
+    "strength_level": "10",
+    "id": "3851",
+    "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+    "range_level": "1",
+    "attack_level": "10"
   }
 ]
