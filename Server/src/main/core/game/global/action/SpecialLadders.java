@@ -38,6 +38,16 @@ public enum SpecialLadders implements LadderAchievementCheck {
     DRAYNOR_SEWER_NORTHWEST_DOWN(new Location(3084, 3272, 0), new Location(3085, 9672, 0)),
     DRAYNOR_SEWER_NORTHWEST_UP(new Location(3084, 9672, 0), new Location(3084, 3271, 0)),
 
+    BURTHORPE_HEROES_GUILD_STAIRS_UP(new Location(2895,3513,0), new Location(2897, 3513,1)),
+
+    TREE_GNOME_STRONGHOLD_WEST_BAR_STAIRS_UP( new Location(2417, 3490, 0), new Location(2418, 3492,1)),
+    TREE_GNOME_STRONGHOLD_WEST_BAR_STAIRS_DOWN(new Location(2418, 3491,1), new Location(2419, 3491, 0)),
+
+    WATERBIRTH_ISLAND_DUNGEON_SUBLEVEL_2_WALLASALKI_3_LADDER_DOWN(new Location(1799,4387,2), new Location(1799,4388,1)),
+
+    FALADOR_WHITE_KNIGHT_CASTLE_WEST_TOWER_STAIRS_UP(new Location(2960, 3338,1), new Location(2959,3339,2)),
+    FALADOR_WHITE_KNIGHT_CASTLE_WEST_TOWER_STAIRS_DOWN(new Location(2960,3339,2), new Location(2960,3340,1)),
+
     PORT_SARIM_RAT_PITS_DOWN(new Location(3018,3232,0), new Location(2962,9650,0)) {
         @Override
         public void checkAchievement(Player player) {
