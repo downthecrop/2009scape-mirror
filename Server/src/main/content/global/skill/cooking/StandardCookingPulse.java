@@ -192,15 +192,15 @@ public class StandardCookingPulse extends Pulse {
         }
 
         if (!burned && food.getName().startsWith("Raw")) {
-            return "You manage to cook some " + food.getName().replace("Raw ", "");
+            return "You manage to cook some " + food.getName().replace("Raw ", "") + ".";
         } else if (burned && food.getName().startsWith("Raw")) {
-            return "You accidentally burn some " + food.getName().replace("Raw ", "");
+            return "You accidentally burn some " + food.getName().replace("Raw ", "") + ".";
         }
 
         if (!burned && food.getName().startsWith(("Uncooked"))) {
-            return "You manage to cook some " + food.getName().replace("Uncooked ", "");
+            return "You manage to cook some " + food.getName().replace("Uncooked ", "") + ".";
         } else if (burned && food.getName().startsWith(("Uncooked"))) {
-            return "You accidentally burn some " + food.getName().replace("Uncooked ", "");
+            return "You accidentally burn some " + food.getName().replace("Uncooked ", "") + ".";
         }
         return null;
     }

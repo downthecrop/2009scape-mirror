@@ -79,7 +79,7 @@ public final class CrystalChestPlugin extends UseWithHandler {
 				player.getInventory().add(i, player);
 			}
 			player.getPacketDispatch().sendMessage("You unlock the chest with your key.");
-			player.getPacketDispatch().sendMessage("You find some teasure in the chest!");
+			player.getPacketDispatch().sendMessage("You find some treasure in the chest!");
 		}
 		return true;
 	}
