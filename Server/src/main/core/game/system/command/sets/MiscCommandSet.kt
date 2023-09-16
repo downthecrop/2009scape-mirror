@@ -578,6 +578,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
                 sendDialogue(player, "Thank you!")
                 player.unlock()
                 player.removeAttribute("rules:pin")
+                if(ServerConstants.NEW_PLAYER_ANNOUNCEMENT) sendNews("A new player has joined. Welcome ${player.username}!")
             }
             else
             {

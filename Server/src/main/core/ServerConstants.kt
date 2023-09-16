@@ -308,5 +308,8 @@ class ServerConstants {
 
         @JvmField
         var BETTER_DFS = true
+
+        @JvmField
+        var NEW_PLAYER_ANNOUNCEMENT = true
     }
 }
