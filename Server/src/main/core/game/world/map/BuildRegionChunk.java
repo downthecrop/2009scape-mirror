@@ -109,7 +109,15 @@ public class BuildRegionChunk extends RegionChunk {
 			}
 		}
 		clear();
-		rotation = (direction.toInteger() + (direction.toInteger() % 2 == 0 ? 2 : 0)) % 4;
+		switch(direction) {
+			case NORTH: rotation = 0; break;
+			case EAST:  rotation = 1; break;
+			case SOUTH: rotation = 2; break;
+			case WEST:  rotation = 3; break;
+			default: rotation = (direction.toInteger() + (direction.toInteger() % 2 == 0 ? 2 : 0)) % 4;
+				log(this.getClass(), Log.ERR,  "Attempted to rotate a chunk in a non-cardinal direction - using fallback rotation code. This should be investigated!");
+				break;
+		};
 		for (int i = 0; i < objects.length; i++) {
 			for (int x = 0; x < SIZE; x++) {
 				for (int y = 0; y < SIZE; y++) {
