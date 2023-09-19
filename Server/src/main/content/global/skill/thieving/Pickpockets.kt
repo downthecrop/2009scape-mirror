@@ -135,7 +135,7 @@ enum class Pickpockets(val ids: IntArray, val requiredLevel: Int, val low: Doubl
     GUARD(intArrayOf(9, 32, 206, 296, 297, 298, 299, 344, 345, 346, 368, 678, 812, 9, 32, 296, 297, 298, 299, 2699, 2700, 2701, 2702, 2703, 3228, 3229, 3230, 3231, 3232, 3233, 3241, 3407, 3408, 4307, 4308, 4309, 4310, 4311, 5919, 5920), 40, 50.0, 240.0, 46.5, 2,2,5, WeightBasedTable.create(
        WeightedItem(Items.COINS_995,30,30,1.0,true)
     )),
-    FREMENNIK_CITIZEN(intArrayOf(2462), 45, 65.0, 240.0, 65.0, 2, 2, 5, WeightBasedTable.create(
+    FREMENNIK_CITIZEN(intArrayOf(1305, 1306, 1308, 1309, 1310, 1311, 1312, 1313, 1314, 2462), 45, 65.0, 240.0, 65.0, 2, 2, 5, WeightBasedTable.create(
        WeightedItem(Items.COINS_995,40,40,1.0,true)
     )),
     BEARDED_BANDIT(intArrayOf(1880, 1881, 6174), 45, 50.0, 240.0, 65.0, 5,5,5, WeightBasedTable.create(
