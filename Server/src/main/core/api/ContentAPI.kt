@@ -368,7 +368,14 @@ fun replaceSlot(player: Player, slot: Int, item: Item, currentItem: Item? = null
  */
 fun addItemOrDrop(player: Player, id: Int, amount: Int = 1) {
     val item = Item(id, amount)
-    if (!player.inventory.add(item)) GroundItemManager.create(item, player)
+    if(amount == 1 || item.definition.isStackable) {
+        if (!player.inventory.add(item)) GroundItemManager.create(item, player)
+    } else {
+        val singleItem = Item(id, 1)
+        for(i in 0 until amount) {
+            if(!player.inventory.add(singleItem)) GroundItemManager.create(singleItem, player)
+        }
+    }
 }
 
 /**
