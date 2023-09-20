@@ -64,7 +64,7 @@ class LumbridgeCookDialogue (player: Player? = null) : DialoguePlugin(player){
                 1 -> npc("It looked a bit like a goblin, but it had big bulging eyes.","It wasn't wearing armour, but it had this odd helmet","with a light on it.").also { stage++ }
                 2 -> npc("The tunnel was too dark for me to follow it, so I went","to tell the Duke. But when we went down to the cellar","the hole had been blocked up, and no one believes me.").also { stage++ }
                 3 -> player("I believe you.").also { stage++ }
-                4 -> npc("Thank you, ${player.name}! If you can convince the Duke","I'm telling the truth then we can get to the bottom of","this mystery.").also { stage = 1000; player.questRepository.getQuest("Lost Tribe").setStage(player,20) }
+                4 -> npc("Thank you, ${player.username}! If you can convince the Duke","I'm telling the truth then we can get to the bottom of","this mystery.").also { stage = 1000; player.questRepository.getQuest("Lost Tribe").setStage(player,20) }
                 5 -> end()
             }
             return true

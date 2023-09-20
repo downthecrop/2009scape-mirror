@@ -21,7 +21,7 @@ class UnferthDialogue(player: Player? = null) : DialoguePlugin(player) {
 //                2 -> playerl(FacialExpression.FRIENDLY, "I'm so sorry Unferth.").also { stage++ }
 //                3 -> npcl(FacialExpression.FRIENDLY, "Gertrude asked me if I'd like one of her new kittens. I don't think I'm ready for that yet.").also { stage++ }
 //                4 -> playerl(FacialExpression.FRIENDLY, "Give it time. Things will get better, I promise.").also { stage++ }
-//                5 -> npcl(FacialExpression.FRIENDLY, "Thanks ${player.name}.").also { stage = END_DIALOGUE }
+//                5 -> npcl(FacialExpression.FRIENDLY, "Thanks, ${player.username}.").also { stage = END_DIALOGUE }
 //            }
         when (stage) {
             START_DIALOGUE -> npcl(FacialExpression.GUILTY, "Hello.").also { stage++ }

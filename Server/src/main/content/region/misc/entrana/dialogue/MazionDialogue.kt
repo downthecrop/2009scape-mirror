@@ -18,7 +18,7 @@ class MazionDialogue(player: Player? = null) : DialoguePlugin(player){
         npc = args[0] as NPC
         when ((1..3).random()) {
             1 -> npc(FacialExpression.FRIENDLY, "Nice weather we're having today!").also { stage = 99 }
-            2 -> npc(FacialExpression.FRIENDLY, "Hello " + player.name + ", fine day today!").also { stage = 99 }
+            2 -> npc(FacialExpression.FRIENDLY, "Hello, " + player.username + ", fine day today!").also { stage = 99 }
             3 -> npc(FacialExpression.ANNOYED, "Please leave me alone, a parrot stole my banana.").also { stage = 99 }
         }
             return true

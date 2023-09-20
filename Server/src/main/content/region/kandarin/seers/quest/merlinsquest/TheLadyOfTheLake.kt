@@ -52,7 +52,7 @@ class TheLadyOfTheLake(player: Player? = null) : DialoguePlugin(player) {
             100 -> npcl(FacialExpression.HAPPY,"I am the Lady of the Lake.").also { stage = 145 }
             110 -> player("And I'm-").also { stage++ }
             111 -> npc(
-                    "You're " + player.name + ". And I see from the sign you",
+                    "You're " + player.username + ". And I see from the sign you",
                     "wear that you have earned the trust of Sir Kay."
                 ).also { stage++ }
             112 -> player("It was nothing.. really...").also { stage++ }

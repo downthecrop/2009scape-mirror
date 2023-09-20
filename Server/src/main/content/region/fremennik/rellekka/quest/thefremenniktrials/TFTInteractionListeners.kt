@@ -354,7 +354,7 @@ class TFTInteractionListeners : InteractionListener {
 
     class LyreConcertPulse(val player: Player, val Lyre: Int) : Pulse(){
         val GENERIC_LYRICS = arrayOf(
-            "${player.name?.capitalize()} is my name,",
+            "${player.username?.capitalize()} is my name,",
             "I haven't much to say",
             "But since I have to sing this song.",
             "I'll just go ahead and play."

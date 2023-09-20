@@ -36,7 +36,7 @@ class BonzaraDialogue(player: Player? = null) : DialoguePlugin(player){
 
             20 -> npcl(FacialExpression.OLD_DEFAULT, "Never mind that child. You should worry more about who you are and the nature of the forces that have driven you here.").also { stage++ }
             21 -> player(FacialExpression.THINKING, "I'll ... keep that in mind, thanks.").also { stage++ }
-            22 -> npc(FacialExpression.OLD_DEFAULT, "We WILL meet again, " + player.name + ".").also { stage++ }
+            22 -> npc(FacialExpression.OLD_DEFAULT, "We WILL meet again, " + player.username + ".").also { stage++ }
             23 -> player(FacialExpression.SUSPICIOUS, "Ok...").also { stage = 99 }
 
             99 -> end()

@@ -20,7 +20,7 @@ class randomChildrenDialogue(player: Player? = null) : DialoguePlugin(player){
         npc = args[0] as NPC
         when ((1..5).random()) {
             1 -> npc(FacialExpression.OLD_NORMAL, "Are you a surface-dweller?").also { stage = 0 }
-            2 -> npcl(a, "Are you " + player.name + "? Did you help Zanik save the city?").also { stage = 10 }
+            2 -> npcl(a, "Are you " + player.username + "? Did you help Zanik save the city?").also { stage = 10 }
             3 -> npc(a, "Sorry, I'm not meant to talk to strangers.").also { stage = 99 }
             4 -> npc(a, "Shh! Don't tell anyone!").also { stage = 20 }
             5 -> npc(a, "Help! Help! The surface people are attacking!").also { stage = 30 }

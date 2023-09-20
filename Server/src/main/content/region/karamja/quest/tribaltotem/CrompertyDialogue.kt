@@ -19,7 +19,7 @@ class CrompertyDialogue(player: Player? = null) : core.game.dialogue.DialoguePlu
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npcl(core.game.dialogue.FacialExpression.HAPPY,"Hello ${player.name}, I'm Cromperty. Sedridor has told me about you. As a wizard and an inventor he has aided me in my great invention!")
+        npcl(core.game.dialogue.FacialExpression.HAPPY,"Hello, ${player.username}, I'm Cromperty. Sedridor has told me about you. As a wizard and an inventor he has aided me in my great invention!")
         stage = 0
         return true
     }

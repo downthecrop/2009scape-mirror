@@ -23,7 +23,7 @@ class EvilChickenNPC(override var loot: WeightBasedTable? = null) : RandomEventN
         val id = ids.toList()[index]
         this.transform(id)
         this.attack(player)
-        sendChat(phrases.random().replace("@name",player.name.capitalize()))
+        sendChat(phrases.random().replace("@name",player.username.capitalize()))
         this.isRespawn = false
     }
 
@@ -37,7 +37,7 @@ class EvilChickenNPC(override var loot: WeightBasedTable? = null) : RandomEventN
             this.terminate()
         }
         if(getWorldTicks() % 10 == 0){
-            sendChat(phrases.random().replace("@name",player.name.capitalize()))
+            sendChat(phrases.random().replace("@name",player.username.capitalize()))
         }
         super.tick()
         if(!player.viewport.currentPlane.npcs.contains(this)) this.clear()

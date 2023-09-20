@@ -613,7 +613,7 @@ public class Player extends Entity {
 		}
 		if (killer instanceof Player && getWorldTicks() - killer.getAttribute("/save:last-murder-news", 0) >= 500) {
 			Item wep = getItemFromEquipment((Player) killer, EquipmentSlot.WEAPON);
-			sendNews(killer.getName() + " has murdered " + getName() + " with " + (wep == null ? "their fists." : (StringUtils.isPlusN(wep.getName()) ? "an " : "a ") + wep.getName()));
+			sendNews(killer.getUsername() + " has murdered " + getUsername() + " with " + (wep == null ? "their fists." : (StringUtils.isPlusN(wep.getName()) ? "an " : "a ") + wep.getName()));
 			killer.setAttribute("/save:last-murder-news", getWorldTicks());
 		}
 		getPacketDispatch().sendMessage("Oh dear, you are dead!");

@@ -33,7 +33,7 @@ class ElfTrackerDialogue(player: Player? = null) : DialoguePlugin(player){
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
             0 -> npc(FacialExpression.SUSPICIOUS, "Human! You must be one of Tyras's men...").also { stage++ }
-            1 -> playerl(FacialExpression.HALF_GUILTY, "No, I'm " + player.name + "! Lord Iorwerth said you might be able to help me.").also { stage++ }
+            1 -> playerl(FacialExpression.HALF_GUILTY, "No, I'm " + player.username + "! Lord Iorwerth said you might be able to help me.").also { stage++ }
             2 -> npc(FacialExpression.SUSPICIOUS, "And you have something to prove this?").also { stage++ }
             3 -> {
                 //todo check quest stages whenever it's added

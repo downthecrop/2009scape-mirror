@@ -29,7 +29,7 @@ class ZandarHorfyreDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int) : Boolean {
         when (stage) {
-            -1 -> npcl(FacialExpression.NEUTRAL,"My name is Zandar Horfyre, and you ${ player.name } are trespassing in my tower, not to mention attacking my students! I thank you to leave immediately!").also{ stage++ }
+            -1 -> npcl(FacialExpression.NEUTRAL,"My name is Zandar Horfyre, and you, ${ player.username }, are trespassing in my tower, not to mention attacking my students! I thank you to leave immediately!").also{ stage++ }
             0 -> options("Ok, I was going anyway.", "No, I think I'll stay for a bit.").also{ stage++ }
             1 -> when(buttonId) {
                 1 -> player("Ok, I was going anyway.").also{ stage = 10 }

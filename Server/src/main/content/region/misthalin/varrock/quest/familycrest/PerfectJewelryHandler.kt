@@ -15,7 +15,6 @@ class PerfectJewelryHandler (player: Player? = null): DialoguePlugin(player){
     }
 
     override fun open(vararg args: Any?): Boolean {
-        println(player.name)
         if(player.inventory.containItems(2365, 1603)){
             options("Craft perfect ruby ring", "Craft perfect ruby necklace")
             stage = 1

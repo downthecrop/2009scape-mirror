@@ -20,8 +20,8 @@ class DwarvenBoatmanForthDialogue(player: Player? = null) : DialoguePlugin(playe
         if (!getAttribute(player, "/save:keldagrim-visited", false)) {
             when (stage) {
                 START_DIALOGUE -> npcl(FacialExpression.OLD_HAPPY, "Ho there, human!").also { stage++ }
-                1 -> playerl(FacialExpression.FRIENDLY, "${player.name}.").also { stage++ }
-                2 -> npcl(FacialExpression.OLD_HAPPY, "Ho there, ${player.name}! Want to take a ride with me?").also { stage++ }
+                1 -> playerl(FacialExpression.FRIENDLY, "${player.username}.").also { stage++ }
+                2 -> npcl(FacialExpression.OLD_HAPPY, "Ho there, ${player.username}! Want to take a ride with me?").also { stage++ }
                 3 -> playerl(FacialExpression.FRIENDLY, "Where are you going? Across the river?").also { stage++ }
                 4 -> npcl(FacialExpression.OLD_HAPPY, "No no, that's what the ferryman is for! I'm going to Keldagrim, my home!").also { stage++ }
                 5 -> playerl(FacialExpression.FRIENDLY, "How much will that cost me then?").also { stage++ }
@@ -54,7 +54,7 @@ class DwarvenBoatmanForthDialogue(player: Player? = null) : DialoguePlugin(playe
             }
         } else {
             when (stage) {
-                START_DIALOGUE -> npcl(FacialExpression.OLD_HAPPY, "Hello again, ${player.name}! Want to go back to Keldagrim?").also { stage++ }
+                START_DIALOGUE -> npcl(FacialExpression.OLD_HAPPY, "Hello again, ${player.username}! Want to go back to Keldagrim?").also { stage++ }
                 1 -> showTopics(
                         Topic(FacialExpression.FRIENDLY, "Yes, please take me.", 2),
                         Topic(FacialExpression.FRIENDLY, "What, on your ship? No way.", 3),

@@ -13,7 +13,7 @@ class GenieNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(NPC
 
     override fun tick() {
         if(RandomFunction.random(1,15) == 5){
-            sendChat(phrases.random().replace("@name",player.name.capitalize()))
+            sendChat(phrases.random().replace("@name",player.username.capitalize()))
         }
         super.tick()
     }
@@ -21,7 +21,7 @@ class GenieNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(NPC
     override fun init() {
         super.init()
         playAudio(player, Sounds.GENIE_APPEAR_2301)
-        sendChat(phrases.random().replace("@name",player.name.capitalize()))
+        sendChat(phrases.random().replace("@name",player.username.capitalize()))
     }
 
     override fun talkTo(npc: NPC) {

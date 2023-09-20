@@ -32,7 +32,7 @@ class BjornAndEldgrimDialogues(player: Player? = null) : DialoguePlugin(player){
             1 -> player(FacialExpression.ASKING, "The who?").also { stage++ }
             2 -> npcl(FacialExpression.DRUNK, "That guy over there by that stuff! (hic) Yeh, abshoultely! He's da bosh!").also { stage = END_DIALOGUE }
 
-            10 -> player(FacialExpression.ASKING, "${player.name}?").also { stage++ }
+            10 -> player(FacialExpression.ASKING, "${player.username}?").also { stage++ }
             11 -> npcl(FacialExpression.DRUNK, "Nah nah nah, not them, the other one, whatshyerfashe!").also { stage++ }
             12 -> player(FacialExpression.ASKING, "${player.getAttribute("fremennikname","fremmyname")}?").also { stage++ }
             13 -> npc(FacialExpression.DRUNK, "Thatsh what I said diddle I?").also { stage++ }
