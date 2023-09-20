@@ -34,8 +34,9 @@ public final class SummoningCreationPlugin extends ComponentPlugin {
 		switch (button) {
 		case 18:
 		case 17:
-			SummoningCreator.configure(player, button == 17);
-			break;
+            player.getInterfaceManager().close();
+            SummoningCreator.configure(player, button == 17);
+            return true;
 		}
 		switch (component.getId()) {
 		case 669:
