@@ -225,6 +225,7 @@ class PitfallListeners : InteractionListener {
                         //pitfall_npc.setLocation(pit.getLocation());
                         //pitfall_npc.walkingQueue.addPath(pit.location.x, pit.location.y);
                         teleport(pitfall_npc, pit.location)
+                        pitfall_npc.removeAttribute("last_pit_loc")
                         playAudio(player, Sounds.HUNTING_PITFALL_COLLAPSE_2638, 0, 1, pit.location, 10)
                         playAudio(player, Sounds.PANTHER_DEATH_667, 50, 1, pit.location, 10)
                         pitfall_npc.startDeath(null)
