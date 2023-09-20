@@ -192,8 +192,8 @@ class FurClothingInterface : ComponentPlugin(){
         KYATT_HEAD(Item(10103),1000, KYATT_HAT,17,"Kyatt"),
         KYATT_CHEST(Item(10103),200, KYATT_TOP,17,"Kyatt"),
         KYATT_BOT(Item(10103),200, KYATT_LEGS,17,"Kyatt"),
-        GLOVES_SILENCE(Item(10115),600, GLOVES_OF_SILENCE,22,"Dark kebbit"),
-        SPOT_CAPE(Item(10125),400, SPOTTED_CAPE,23,"Spotted kebbit"),
-        DASH_CAPE(Item(10127),800, SPOTTIER_CAPE,24,"Dashing kebbit")
+        GLOVES_SILENCE(Item(10115,2),600, GLOVES_OF_SILENCE,22,"Dark kebbit"),
+        SPOT_CAPE(Item(10125,2),400, SPOTTED_CAPE,23,"Spotted kebbit"),
+        DASH_CAPE(Item(10127,2),800, SPOTTIER_CAPE,24,"Dashing kebbit")
     }
 }
