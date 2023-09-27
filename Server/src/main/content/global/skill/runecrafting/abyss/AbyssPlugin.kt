@@ -15,6 +15,7 @@ import content.global.skill.runecrafting.abyss.AbyssalNPC
 import content.global.skill.runecrafting.abyss.DarkMageDialogue
 import content.global.skill.runecrafting.abyss.ZamorakMageDialogue
 import core.game.system.task.Pulse
+import core.game.system.timer.impl.Skulled
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
@@ -214,7 +215,8 @@ class AbyssPlugin : InteractionListener {
             npc.visualize(Animation(1979), Graphics(4))
             npc.sendChat("Veniens! Sallakar! Rinnesset!")
             player.skills.decrementPrayerPoints(100.0)
-            player.skullManager.checkSkull(player)
+            removeTimer<Skulled>(player)
+            registerTimer(player, spawnTimer<Skulled>(2000))
             GameWorld.Pulser.submit(object : Pulse(2, player) {
                 override fun pulse(): Boolean {
                     rotateObstacles(player,teleportLoc)
