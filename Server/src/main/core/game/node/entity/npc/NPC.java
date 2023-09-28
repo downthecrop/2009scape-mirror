@@ -390,7 +390,7 @@ public class NPC extends Entity {
 		super.checkImpact(state);
 		Entity entity = state.getAttacker();
 		behavior.beforeDamageReceived(this, entity, state);
-		if (task != null && entity instanceof Player && task.levelReq > entity.getSkills().getStaticLevel(Skills.SLAYER)) {
+		if (task != null && entity instanceof Player && task.levelReq > entity.getSkills().getLevel(Skills.SLAYER)) {
 			state.neutralizeHits();
 		}
 	}
@@ -400,7 +400,7 @@ public class NPC extends Entity {
 		if (isInvisible()) {
 			return false;
 		}
-		if (task != null && entity instanceof Player && task.levelReq > entity.getSkills().getStaticLevel(Skills.SLAYER)) {
+		if (task != null && entity instanceof Player && task.levelReq > entity.getSkills().getLevel(Skills.SLAYER)) {
             if(message) {
                 ((Player) entity).getPacketDispatch().sendMessage("You need a higher slayer level to know how to wound this monster.");
             }
