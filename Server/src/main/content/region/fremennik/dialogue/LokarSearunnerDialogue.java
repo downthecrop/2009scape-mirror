@@ -21,7 +21,7 @@ import static core.api.ContentAPIKt.hasRequirement;
 public class LokarSearunnerDialogue extends DialoguePlugin {
 
 	/**
-	 * The location of relekka.
+	 * The location of Rellekka.
 	 */
 	private static final Location RELEKKA = new Location(2621, 3687, 0);
 
@@ -59,10 +59,10 @@ public class LokarSearunnerDialogue extends DialoguePlugin {
 		npc = (NPC) args[0];
 		switch (npc.getId()) {
 		case 4536:
-			npc("Hi, would you like to take a boat trip to relekka?");
+			npc("Hi, would you like to take a boat trip to Rellekka?");
 			break;
 		case 4537:
-			npc("Hi, would you like to take a boat trip to pirate's cove?");
+			npc("Hi, would you like to take a boat trip to Pirates' Cove?");
 			break;
 		}
 		return true;
