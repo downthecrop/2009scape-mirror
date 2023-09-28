@@ -161,6 +161,8 @@ object ServerConfigParser {
         ServerConstants.GRAFANA_TTL_DAYS = data.getLong("integrations.grafana_log_ttl_days", 7L).toInt()
         ServerConstants.BETTER_DFS = data.getBoolean("world.better_dfs", true)
         ServerConstants.NEW_PLAYER_ANNOUNCEMENT = data.getBoolean("world.new_player_announcement", true)
+        ServerConstants.HOLIDAY_EVENT_RANDOMS = data.getBoolean("world.holiday_event_randoms", true)
+        ServerConstants.FORCE_HALLOWEEN_RANDOMS = data.getBoolean("world.force_halloween_randoms", false)
 
         val logLevel = data.getString("server.log_level", "VERBOSE").uppercase()
         ServerConstants.LOG_LEVEL = parseEnumEntry<LogLevel>(logLevel) ?: LogLevel.VERBOSE

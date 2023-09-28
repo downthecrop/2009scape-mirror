@@ -1,0 +1,24 @@
+package core.game.worldevents.holiday.halloween.randoms
+
+import core.api.*
+import core.api.utils.WeightBasedTable
+import core.game.worldevents.holiday.HolidayRandomEventNPC
+import core.tools.RandomFunction
+import org.rs09.consts.Sounds
+
+class GhostHolidayRandomNPC(override var loot: WeightBasedTable? = null) : HolidayRandomEventNPC(2716) {
+    override fun init() {
+        super.init()
+        this.isAggressive = false
+        playGlobalAudio(this.location, Sounds.BIGGHOST_APPEAR_1595)
+        animate(player, 2836)
+        sendChat(this, "WooooOOOooOOo")
+        sendMessage(player, "The air suddenly gets colder...")
+    }
+
+    override fun tick() {
+        super.tick()
+        if (RandomFunction.roll(10))
+            playGlobalAudio(this.location, Sounds.BIGGHOST_LAUGH_1600)
+    }
+}

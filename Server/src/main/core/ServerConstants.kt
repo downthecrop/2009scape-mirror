@@ -311,5 +311,11 @@ class ServerConstants {
 
         @JvmField
         var NEW_PLAYER_ANNOUNCEMENT = true
+
+        @JvmField
+        var HOLIDAY_EVENT_RANDOMS = true
+
+        @JvmField
+        var FORCE_HALLOWEEN_RANDOMS = false
     }
 }
