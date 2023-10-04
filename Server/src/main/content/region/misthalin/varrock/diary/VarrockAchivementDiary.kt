@@ -1,7 +1,6 @@
 package content.region.misthalin.varrock.diary
 
 import content.global.skill.prayer.Bones
-import content.global.travel.canoe.Canoe
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
@@ -13,6 +12,7 @@ import org.rs09.consts.Scenery
 import content.region.misthalin.varrock.dialogue.ElsieDialogue
 import content.global.handlers.iface.FairyRing
 import content.global.skill.magic.TeleportMethod
+import content.global.travel.canoe.CanoeListener
 import core.api.getStatLevel
 import core.api.inBorders
 import core.game.diary.AreaDiaryTask
@@ -219,8 +219,8 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
         player.viewport.region?.let {
             when (it.id) {
                 12342 -> {
-                    if (event.iface == Components.CANOE_52
-                        && Canoe.getCanoeFromChild(event.buttonId) == Canoe.WAKA) {
+                    if (event.iface == CanoeListener.CANOE_SHAPING_INTERFACE
+                        && event.buttonId == CanoeListener.CANOE_SHAPING_BUTTONS[CanoeListener.Companion.Canoes.WAKA.ordinal]) {
                         finishTask(
                             player,
                             DiaryLevel.HARD,

@@ -206,6 +206,10 @@ public final class InterfaceManager {
 			player.removeAttribute("runscript");
 			player.getPacketDispatch().sendRunScript(101, "");
 		}
+		// Component 333 is an immediate(no-fading) full-screen HD-mode black screen which auto-clears when interrupted.
+		if (overlay != null && overlay.getId() == 333) {
+			closeOverlay();
+		}
 		if (opened != null && opened.close(player)) {
 			if (opened != null && (!opened.getDefinition().isWalkable() || opened.getId() == 14)) {
 				PacketRepository.send(CloseInterface.class, new InterfaceContext(player, opened.getDefinition().getWindowPaneId(isResizable()), opened.getDefinition().getChildId(isResizable()), opened.getId(), opened.getDefinition().isWalkable()));
