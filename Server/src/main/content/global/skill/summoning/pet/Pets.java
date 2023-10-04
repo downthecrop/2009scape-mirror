@@ -1,13 +1,17 @@
 package content.global.skill.summoning.pet;
 
 import core.game.node.entity.player.Player;
+import core.tools.Log;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static core.api.ContentAPIKt.log;
+
 /**
  * An enum containing all the pets and their info.
  * @author Emperor
+ * @author Player Name
  */
 public enum Pets {
 
@@ -446,35 +450,35 @@ public enum Pets {
 
 	/**
 	 * Gets the NPC id for this pet.
-	 * @param stage The stage of the pet.
-	 * @return The NPc id.
+	 * @param itemId An int giving the ID of the item for which we want to know the corresponding NPC id.
+	 * @return The NPC id.
 	 */
-	public int getNpcId(int stage) {
-		switch (stage) {
-			case 0:
-				return babyNpcId;
-			case 1:
-				return grownNpcId;
-			case 2:
-				return overgrownNpcId;
+	public int getNpcId(int itemId) {
+		if (itemId == babyItemId) {
+			return babyNpcId;
 		}
-		return 0;
+		if (itemId == grownItemId) {
+			return grownNpcId;
+		}
+		if (itemId == overgrownItemId) {
+			return overgrownNpcId;
+		}
+		log(this.getClass(), Log.ERR, "Could not locate NPC ID for pet item " + itemId);
+		return -1;
 	}
 
 	/**
-	 * Gets the item id for this pet.
-	 * @param stage The stage of the pet.
-	 * @return The item id.
+	 * Gets the next growth stage's item ID for this pet.
+	 * @param itemId An int giving the current pet's item ID.
+	 * @return The item ID for the next growth stage, or -1 if there isn't any (i.e. pet is already overgrown).
 	 */
-	public int getItemId(int stage) {
-		switch (stage) {
-			case 0:
-				return babyItemId;
-			case 1:
-				return grownItemId;
-			case 2:
-				return overgrownItemId;
+	public int getNextStageItemId(int itemId) {
+		if (itemId == babyItemId) {
+			return grownItemId;
 		}
-		return 0;
+		if (itemId == grownItemId) {
+			return overgrownItemId;
+		}
+		return -1;
 	}
 }

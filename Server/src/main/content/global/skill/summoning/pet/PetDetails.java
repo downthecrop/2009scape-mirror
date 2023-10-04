@@ -2,11 +2,10 @@ package content.global.skill.summoning.pet;
 
 
 
-import core.game.world.GameWorld;
-
 /**
  * A class containing pet details for a certain pet.
  * @author Emperor
+ * @author Player Name
  */
 public final class PetDetails {
 
@@ -21,9 +20,9 @@ public final class PetDetails {
 	private double growth = 0.0;
 
 	/**
-	 * The current stage of the pet (0 - baby, 1 - grown, 2 - overgrown).
+	 * The individual, an in principle arbitrary integer read off of the item's charge slot.
 	 */
-	private int stage;
+	private int individual;
 
 	/**
 	 * Constructs a new {@code PetDetails} {@code Object}.
@@ -38,15 +37,9 @@ public final class PetDetails {
 	 * @param amount The amount.
 	 */
 	public void updateHunger(double amount) {
-		if(GameWorld.getSettings().isDevMode()){
-			hunger += amount * 100;
-		} else {
-			hunger += amount;
-		}
+		hunger += amount;
 		if (hunger < 0.0) {
 			hunger = 0.0;
-		} else if (hunger > 100.0) {
-			hunger = 100.0;
 		}
 	}
 
@@ -80,19 +73,18 @@ public final class PetDetails {
 	}
 
 	/**
-	 * Gets the stage.
-	 * @return The stage.
+	 * Sets the individual.
+	 * @param individual The individual to set.
 	 */
-	public int getStage() {
-		return stage;
+	public void setIndividual(int individual) {
+		this.individual = individual;
 	}
 
 	/**
-	 * Sets the stage.
-	 * @param stage The stage to set.
+	 * Gets the individual.
+	 * @return The individual.
 	 */
-	public void setStage(int stage) {
-		this.stage = stage;
+	public int getIndividual() {
+		return individual;
 	}
-
 }

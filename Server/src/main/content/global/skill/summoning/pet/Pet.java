@@ -4,6 +4,8 @@ import content.global.skill.skillcapeperks.SkillcapePerks;
 import content.global.skill.summoning.familiar.Familiar;
 import content.global.skill.summoning.familiar.FamiliarSpecial;
 import core.game.node.entity.player.Player;
+import core.game.node.item.Item;
+import core.game.world.GameWorld;
 
 import static core.api.ContentAPIKt.*;
 
@@ -66,10 +68,12 @@ public final class Pet extends Familiar {
 	public void handleTickActions() {
 		final PetDetails petDetails = details;
 		if (getPet().getFood().length > 0) {
-			if(SkillcapePerks.isActive(SkillcapePerks.PET_MASTERY, owner)) {
-				petDetails.updateHunger(0);
-			} else {
-				petDetails.updateHunger(petDetails.getStage() == 0 ? 0.025 : 0.018);
+			if(!SkillcapePerks.isActive(SkillcapePerks.PET_MASTERY, owner)) {
+				double amount = itemId == pet.getBabyItemId() ? 0.025 : 0.018;
+				if (GameWorld.getSettings().isDevMode()) {
+					amount *= 100;
+				}
+				petDetails.updateHunger(amount);
 			}
 		}
 		double hunger = petDetails.getHunger();
@@ -84,13 +88,17 @@ public final class Pet extends Familiar {
 		if (hunger >= 100.0 && growthRate != 0 && pet.getFood().length != 0) {
 			owner.getFamiliarManager().dismiss(false);
 			owner.getFamiliarManager().setFamiliar(null);
-                        setVarp(owner, 1175, 0);
+			setVarp(owner, 1175, 0);
 			owner.sendMessage("<col=ff0000>Your pet has run away.</col>");
 			return;
 		}
 		double growth = petDetails.getGrowth();
-		if (pet.getGrowthRate() > 0.000) {
-			petDetails.updateGrowth(pet.getGrowthRate());
+		double growthrate = pet.getGrowthRate();
+		if (growthrate > 0.000) {
+			if (GameWorld.getSettings().isDevMode()) {
+				growthrate *= 100;
+			}
+			petDetails.updateGrowth(growthrate);
 			if (growth == 100.0) {
 				growNextStage();
 			}
@@ -102,31 +110,27 @@ public final class Pet extends Familiar {
 		} else if (!getPulseManager().hasPulseRunning()) {
 			startFollowing();
 		}
-                setVarp(owner, 1175, ((int) details.getGrowth() << 1) | ((int) details.getHunger() << 9));
+        setVarp(owner, 1175, ((int) details.getGrowth() << 1) | ((int) details.getHunger() << 9));
 	}
 
 	/**
 	 * Method used to grow the npc's next stage.
 	 */
-	public final void growNextStage() {
-		if (details.getStage() == 3) {
-			return;
-		}
+	public void growNextStage() {
 		if (pet == null) {
 			return;
 		}
-		int npcId = pet.getNpcId(details.getStage() + 1);
-		if (npcId < 1) {
+		int newItemId = pet.getNextStageItemId(itemId);
+		if (newItemId == -1) {
+			// then this pet is already overgrown
 			return;
 		}
-		details.setStage(details.getStage() + 1);
-		int itemId = pet.getItemId(details.getStage());
-		if (pet.getNpcId(details.getStage() + 1) > 0) {
-			details.updateGrowth(-100.0);
-		}
-		clear();
-		Pet newPet = new Pet(owner, details, itemId, npcId);
+		int npcId = pet.getNpcId(newItemId);
+		details.updateGrowth(-100.0);
+		Pet newPet = new Pet(owner, details, newItemId, npcId);
 		newPet.growthRate = growthRate;
+		newPet.hasWarned = hasWarned;
+		owner.getFamiliarManager().dismiss(false);
 		owner.getFamiliarManager().setFamiliar(newPet);
 		owner.getPacketDispatch().sendMessage("<col=ff0000>Your pet has grown larger.</col>");
 		owner.getFamiliarManager().spawnFamiliar();
@@ -169,6 +173,16 @@ public final class Pet extends Familiar {
 	 */
 	public int getItemId() {
 		return itemId;
+	}
+
+	/**
+	 * Gets the itemId with the individual hashed in.
+	 * @return The itemIdHash.
+	 */
+	public int getItemIdHash() {
+		Item item = new Item(itemId);
+		item.setCharge(details.getIndividual());
+		return item.getIdHash();
 	}
 
 	/**

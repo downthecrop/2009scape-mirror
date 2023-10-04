@@ -867,6 +867,21 @@ public class Container {
     }
 
     /**
+     * Gets all instances of an item, and returns them.
+     * @author Player Name
+     * @param item the item.
+     * @return a list of all items that were found (can be length 0).
+     */
+    public ArrayList<Item> getAll(Item item){
+        ArrayList<Item> ret = new ArrayList<Item>();
+        for(Item i : items){
+            if(i == null) continue;
+            if(item.getId() == i.getId()) ret.add(i);
+        }
+        return ret;
+    }
+
+    /**
      * Gets the next free slot.
      *
      * @return The slot, or <code>-1</code> if there are no available slots.

@@ -279,12 +279,11 @@ class PlayerSaver (val player: Player){
             detail.put("petId",it.key.toString())
             detail.put("hunger",it.value.hunger.toString())
             detail.put("growth",it.value.growth.toString())
-            detail.put("stage",it.value.stage.toString())
             petDetails.add(detail)
         }
         familiarManager.put("petDetails",petDetails)
         if(player.familiarManager.hasPet()){
-            familiarManager.put("currentPet",(player.familiarManager.familiar as Pet).pet.babyItemId.toString())
+            familiarManager.put("currentPet",(player.familiarManager.familiar as Pet).getItemIdHash().toString())
         } else if (player.familiarManager.hasFamiliar()){
             val familiar = JSONObject()
             familiar.put("originalId",player.familiarManager.familiar.originalId.toString())

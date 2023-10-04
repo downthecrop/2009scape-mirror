@@ -4,6 +4,7 @@ import content.global.skill.summoning.pet.Pet;
 import content.global.skill.summoning.pet.Pets;
 import core.cache.def.impl.ItemDefinition;
 import core.game.component.Component;
+import core.game.container.Container;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import core.game.node.entity.skill.Skills;
@@ -27,6 +28,7 @@ import static core.api.ContentAPIKt.*;
 /**
  * Handles a player's familiar.
  * @author Emperor
+ * @author Player Name
  */
 public final class FamiliarManager {
 
@@ -73,34 +75,58 @@ public final class FamiliarManager {
 		this.player = player;
 	}
 
-	public final void parse(JSONObject familiarData){
+	public final void parse(JSONObject familiarData) {
+		int currentPet = -1;
+		if (familiarData.containsKey("currentPet")) {
+			currentPet = Integer.parseInt(familiarData.get("currentPet").toString());
+		}
 		JSONArray petDetails = (JSONArray) familiarData.get("petDetails");
-		for(int i = 0 ; i < petDetails.size(); i++){
+		for (int i = 0 ; i < petDetails.size(); i++) {
 			JSONObject detail = (JSONObject) petDetails.get(i);
 			PetDetails details = new PetDetails(0);
 			details.updateHunger(Double.parseDouble(detail.get("hunger").toString()));
 			details.updateGrowth(Double.parseDouble(detail.get("growth").toString()));
-			details.setStage(Integer.parseInt(detail.get("stage").toString()));
-			this.petDetails.put(Integer.parseInt(detail.get("petId").toString()),details);
+			int itemIdHash = Integer.parseInt(detail.get("petId").toString());
+			// The below is for migrating legacy saves, which stored baby item IDs + growth stages
+			if (detail.containsKey("stage")) {
+				// The "itemIdHash" is actually the baby item ID. The "stage" gives the actual pet stage we want.
+				int babyItemId = itemIdHash;
+				int itemId = babyItemId;
+				int stage = Integer.parseInt(detail.get("stage").toString());
+				if (stage > 0) {
+					Pets pets = Pets.forId(babyItemId);
+					itemId = pets.getNextStageItemId(itemId);
+					if (stage > 1) {
+						itemId = pets.getNextStageItemId(itemId);
+					}
+				}
+				Item item = new Item(itemId);
+				item.setCharge(1000); //this is the default value that will correspond to the player's item
+				itemIdHash = item.getIdHash();
+				if (currentPet != -1 && currentPet == babyItemId) {
+					currentPet = itemIdHash;
+				}
+			}
+			this.petDetails.put(itemIdHash, details);
 		}
 
-		if(familiarData.containsKey("currentPet")){
-			int currentPet = Integer.parseInt( familiarData.get("currentPet").toString());
+		if (currentPet != -1) {
 			PetDetails details = this.petDetails.get(currentPet);
-			Pets pets = Pets.forId(currentPet);
+			int itemId = currentPet >> 16 & 0xFFFF;
+			Pets pets = Pets.forId(itemId);
 			if (details == null) {
 				details = new PetDetails(pets.getGrowthRate() == 0.0 ? 100.0 : 0.0);
 				this.petDetails.put(currentPet, details);
 			}
-			familiar = new Pet(player, details, currentPet, pets.getNpcId(details.getStage()));
-		} else if(familiarData.containsKey("familiar")){
+			familiar = new Pet(player, details, itemId, pets.getNpcId(itemId));
+		} else if (familiarData.containsKey("familiar")) {
 			JSONObject currentFamiliar = (JSONObject) familiarData.get("familiar");
 			int familiarId = Integer.parseInt( currentFamiliar.get("originalId").toString());
 			familiar = FAMILIARS.get(familiarId).construct(player,familiarId);
 			familiar.ticks = Integer.parseInt( currentFamiliar.get("ticks").toString());
 			familiar.specialPoints = Integer.parseInt( currentFamiliar.get("specialPoints").toString());
 			JSONArray famInv = (JSONArray) currentFamiliar.get("inventory");
-			if(famInv != null){
+			if (famInv != null) {
 				((BurdenBeast) familiar).container.parse(famInv);
 			}
 			familiar.setAttribute("hp",Integer.parseInt( currentFamiliar.get("lifepoints").toString()));
@@ -124,14 +150,14 @@ public final class FamiliarManager {
 	 * @param deleteItem we should delete the item.
 	 */
 	public void summon(Item item, boolean pet, boolean deleteItem) {
-        boolean renew = false;
+		boolean renew = false;
 		if (hasFamiliar()) {
-            if(familiar.getPouchId() == item.getId()) {
-                renew = true;
-            } else {
-                player.getPacketDispatch().sendMessage("You already have a follower.");
-                return;
-            }
+			if(familiar.getPouchId() == item.getId()) {
+				renew = true;
+			} else {
+				player.getPacketDispatch().sendMessage("You already have a follower.");
+				return;
+			}
 		}
 		if (player.getZoneMonitor().isRestricted(ZoneRestriction.FOLLOWERS) && !player.getLocks().isLocked("enable_summoning")) {
 			player.getPacketDispatch().sendMessage("This is a Summoning-free area.");
@@ -156,28 +182,28 @@ public final class FamiliarManager {
 		final int npcId = pouch.getNpcId();
 		Familiar fam = !renew ? FAMILIARS.get(npcId) : familiar;
 		if (fam == null) {
-			player.getPacketDispatch().sendMessage("Invalid familiar " + npcId + " - report on 2009scape github");
+			player.getPacketDispatch().sendMessage("Invalid familiar " + npcId + " - report on 2009scape GitLab");
 			return;
 		}
-        if(!renew) {
-            fam = fam.construct(player, npcId);
-            if (fam.getSpawnLocation() == null) {
-                player.getPacketDispatch().sendMessage("The spirit in this pouch is too big to summon here. You will need to move to a larger");
-                player.getPacketDispatch().sendMessage("area.");
-                return;
-            }
-        }
+		if(!renew) {
+			fam = fam.construct(player, npcId);
+			if (fam.getSpawnLocation() == null) {
+				player.getPacketDispatch().sendMessage("The spirit in this pouch is too big to summon here. You will need to move to a larger");
+				player.getPacketDispatch().sendMessage("area.");
+				return;
+			}
+		}
 		if (!player.getInventory().remove(item)) {
 			return;
 		}
 		player.getSkills().updateLevel(Skills.SUMMONING, -pouch.getSummonCost(), 0);
 		player.getSkills().addExperience(Skills.SUMMONING, pouch.getSummonExperience());
-        if(!renew) {
-            familiar = fam;
-            spawnFamiliar();
-        } else {
-            familiar.refreshTimer();
-        }
+		if(!renew) {
+			familiar = fam;
+			spawnFamiliar();
+		} else {
+			familiar.refreshTimer();
+		}
 		player.getAppearance().sync();
 	}
 
@@ -219,6 +245,7 @@ public final class FamiliarManager {
 	 */
 	private boolean summonPet(final Item item, boolean deleteItem, boolean morph, Location location) {
 		final int itemId = item.getId();
+		int itemIdHash = item.getIdHash();
 		if (itemId > 8850 && itemId < 8900) {
 			return false;
 		}
@@ -230,18 +257,26 @@ public final class FamiliarManager {
 			player.getDialogueInterpreter().sendDialogue("You need a summoning level of " + pets.getSummoningLevel() + " to summon this.");
 			return false;
 		}
-		int baseItemId = pets.getBabyItemId();
-		PetDetails details = petDetails.get(baseItemId);
-		if (details == null) {
+
+		PetDetails details = petDetails.get(itemIdHash);
+		if (details == null) { //init new pet
 			details = new PetDetails(pets.getGrowthRate() == 0.0 ? 100.0 : 0.0);
-			petDetails.put(baseItemId, details);
+			// Find an available individual slot
+			ArrayList<Integer> taken = new ArrayList<Integer>();
+			Container[] searchSpace = {player.getInventory(), player.getBankPrimary(), player.getBankSecondary()};
+			for (Container container : searchSpace) {
+				for (Item i : container.getAll(item)) {
+					taken.add(i.getCharge());
+				}
+			}
+			int individual;
+			for (individual = 0; taken.contains(individual) && individual < 0xFFFF; individual++) {}
+			details.setIndividual(individual);
+			item.setCharge(individual);
+			itemIdHash = item.getIdHash(); //updates the hashed item to include the new "charge" value
+			petDetails.put(itemIdHash, details);
 		}
-		int id = pets.getItemId(details.getStage());
-		if (itemId != id) {
-			player.getPacketDispatch().sendMessage("This is not the right pet, grow the pet correctly.");
-			return true;
-		}
-		int npcId = pets.getNpcId(details.getStage());
+		int npcId = pets.getNpcId(itemId);
 		if (npcId > 0) {
 			familiar = new Pet(player, details, itemId, npcId);
 			if (deleteItem) {
@@ -314,7 +349,9 @@ public final class FamiliarManager {
 		}
 		Pet pet = ((Pet) familiar);
 		PetDetails details = pet.getDetails();
-		if (player.getInventory().add(new Item(pet.getPet().getItemId(details.getStage())))) {
+		Item petItem = new Item(pet.getItemId());
+		petItem.setCharge(details.getIndividual());
+		if (player.getInventory().add(petItem)) {
 			player.animate(Animation.create(827));
 			player.getFamiliarManager().dismiss();
 		}
@@ -365,7 +402,7 @@ public final class FamiliarManager {
 	 */
 	public void dismiss(boolean saveDetails) {
 		if (hasPet() && !saveDetails) {
-			removeDetails(((Pet) familiar).getItemId());
+			removeDetails(((Pet) familiar).getItemIdHash());
 		}
 		if (hasFamiliar()) {
 			familiar.dismiss();
@@ -412,9 +449,9 @@ public final class FamiliarManager {
 	 * @param value the value.
 	 */
 	public void setConfig(int value) {
-                int current = getVarp(player, 1160);
+		int current = getVarp(player, 1160);
 		int newVal = current + value;
-                setVarp(player, 1160, newVal);
+		setVarp(player, 1160, newVal);
 	}
 
 	/**
