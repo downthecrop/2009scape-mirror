@@ -350,7 +350,7 @@ public enum Consumables {
 	PRAYERMIX(new BarbarianMix(new int[] {11465, 11467}, new MultiEffect(new PrayerEffect(7, 0.25), new HealingEffect(6)))),
 	ZAMMY_MIX(new BarbarianMix(new int[] {11521, 11523}, new MultiEffect(new DamageEffect(10, true), new SkillEffect(Skills.ATTACK, 0, 0.15), new SkillEffect(Skills.STRENGTH, 0, 0.25), new SkillEffect(Skills.DEFENCE, 0, -0.1), new RandomPrayerEffect(0, 10)))),
 	ATT_MIX(new BarbarianMix(new int[] {11429, 11431}, new MultiEffect(new SkillEffect(Skills.ATTACK, 3, 0.1), new HealingEffect(3)))),
-	ANTIP_MIX(new BarbarianMix(new int[] {11433, 11435}, new MultiEffect(new AddTimerEffect("poison:immunity", 143), new HealingEffect(3)))),
+	ANTIP_MIX(new BarbarianMix(new int[] {11433, 11435}, new MultiEffect(new AddTimerEffect("poison:immunity", secondsToTicks(90)), new HealingEffect(3)))),
 	RELIC_MIX(new BarbarianMix(new int[] {11437, 11439}, new MultiEffect(new RemoveTimerEffect("disease"), new SetAttributeEffect("disease:immunity", 300), new HealingEffect(3)))),
 	STR_MIX(new BarbarianMix(new int[] {11443, 11441}, new MultiEffect(new SkillEffect(Skills.STRENGTH, 3, 0.1), new HealingEffect(3)))),
 	RESTO_MIX(new BarbarianMix(new int[] {11449, 11451}, new MultiEffect(new RestoreEffect(10, 0.3), new HealingEffect(3)))),
@@ -364,6 +364,8 @@ public enum Consumables {
 	SUPER_ENERGY_MIX(new BarbarianMix(new int[] {11481, 11483}, new MultiEffect(new EnergyEffect(20), new HealingEffect(6)))),
 	HUNTING_MIX(new BarbarianMix(new int[] {11517, 11519}, new MultiEffect(new SkillEffect(Skills.HUNTER, 3, 0), new HealingEffect(6)))),
 	SUPER_STR_MIX(new BarbarianMix(new int[] {11485, 11487}, new MultiEffect(new SkillEffect(Skills.STRENGTH, 5, 0.15), new HealingEffect(6)))),
+	ANTIDOTE_PLUS_MIX(new BarbarianMix(new int[] {11501, 11503}, new MultiEffect(new AddTimerEffect("poison:immunity", minutesToTicks(9)), new RandomHealthEffect(3, 7)))),
+	ANTIP_SUPERMIX(new BarbarianMix(new int[] {11473, 11475}, new MultiEffect(new AddTimerEffect("poison:immunity", minutesToTicks(6)), new RandomHealthEffect(3, 7)))),
 
     /** Stealing creation potions */
 	SC_PRAYER(new Potion(new int[] {14207, 14209, 14211, 14213, 14215}, new PrayerEffect(7, 0.25))),
