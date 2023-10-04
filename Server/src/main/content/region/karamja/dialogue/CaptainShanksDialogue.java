@@ -21,7 +21,7 @@ public final class CaptainShanksDialogue extends DialoguePlugin {
     private static final Item TICKET = new Item(Items.SHIP_TICKET_621);
 
     /**
-     * Constructs a new {@code CaptainBarnabyDialogue} {@code Object}.
+     * Constructs a new {@code CaptainShanksDialogue} {@code Object}.
      */
     public CaptainShanksDialogue() {
         /**
@@ -30,7 +30,7 @@ public final class CaptainShanksDialogue extends DialoguePlugin {
     }
 
     /**
-     * Constructs a new {@code CaptainBarnabyDialogue} {@code Object}.
+     * Constructs a new {@code CaptainShanksDialogue} {@code Object}.
      * @param player the player.
      */
     public CaptainShanksDialogue(Player player) {
