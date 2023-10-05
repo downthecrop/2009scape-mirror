@@ -309,6 +309,7 @@ public enum Consumables {
 	EQUA_LEAVES(new Food(new int[]{2128}, new HealingEffect(1))),
 	CHOC_ICE(new Food(new int[]{6794}, new HealingEffect(6))),
 	EDIBLE_SEAWEED(new Food(new int[] {403}, new HealingEffect(4))),
+	FROG_SPAWN(new Food(new int[] {5004}, new RandomHealthEffect(3, 7), "You eat the frogspawn. Yuck.")),
 
 	/** Special Events */
 	PUMPKIN(new Food(new int[] {1959}, new HealingEffect(14))),
