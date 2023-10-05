@@ -122,7 +122,7 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
             selfBots.filter { it.isIdle() }.forEach { it.activate(true) }
         }
         isSpawned = true
-        Repository.sendNews("A shooting star level ${level.ordinal + 1} just crashed near ${location.toLowerCase()}!")
+        Repository.sendNews("A shooting star level ${level.ordinal + 1} just crashed near ${location}!")
     }
 
     /**
