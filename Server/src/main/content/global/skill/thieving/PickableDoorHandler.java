@@ -53,6 +53,9 @@ public class PickableDoorHandler extends OptionHandler {
         pickableDoors.add(new PickableDoor(new Location[]{Location.create(2579, 3307, 1)}, 61, 50));
         pickableDoors.add(new PickableDoor(new Location[]{Location.create(3018, 3187, 0)}, 1, 0.0));
         pickableDoors.add(new PickableDoor(new Location[]{Location.create(2601, 9482, 0)}, 82, 0.0, true));
+        pickableDoors.add(new PickableDoor(new Location[]{Location.create(3044, 3956, 0)}, 39, 35.0, true, true));
+        pickableDoors.add(new PickableDoor(new Location[]{Location.create(3041, 3959, 0)}, 39, 35.0, true, true));
+        pickableDoors.add(new PickableDoor(new Location[]{Location.create(3038, 3956, 0)}, 39, 35.0, true, true));
         return this;
     }
 
@@ -123,6 +126,27 @@ public class PickableDoorHandler extends OptionHandler {
         private final boolean lockpick;
 
         /**
+         * If the door should be flipped around when checking for which side requires lockpicking.
+         */
+        private final boolean flipped;
+
+        /**
+         * Constructs a new {@code PickableDoor} {@code Object}.
+         * @param locations the locations.
+         * @param level the level.
+         * @param experience the experience.
+         * @param lockpick the lock pick.
+         * @param flipped the door to be flipped when lockpicking.
+         */
+        public PickableDoor(final Location[] locations, int level, double experience, boolean lockpick, boolean flipped) {
+            this.locations = locations;
+            this.level = level;
+            this.experience = experience;
+            this.lockpick = lockpick;
+            this.flipped = flipped;
+        }
+
+        /**
          * Constructs a new {@code PickableDoor} {@code Object}.
          * @param locations the locations.
          * @param level the level.
@@ -130,10 +154,7 @@ public class PickableDoorHandler extends OptionHandler {
          * @param lockpick the lock pick.
          */
         public PickableDoor(final Location[] locations, int level, double experience, boolean lockpick) {
-            this.locations = locations;
-            this.level = level;
-            this.experience = experience;
-            this.lockpick = lockpick;
+            this(locations, level, experience, lockpick, false);
         }
 
         /**
@@ -159,7 +180,7 @@ public class PickableDoorHandler extends OptionHandler {
          * @param object the object.
          */
         public void open(Player player, Scenery object) {
-            if (isInside(player, object)) {
+            if (isInside(player, object) != flipped) {
                 DoorActionHandler.handleAutowalkDoor(player, object);
                 player.getPacketDispatch().sendMessage("You go through the door.");
             } else {
@@ -174,7 +195,7 @@ public class PickableDoorHandler extends OptionHandler {
          */
         public void pickLock(Player player, Scenery object) {
             boolean success = RandomFunction.random(12) >= 4;
-            if (isInside(player, object)) {
+            if (isInside(player, object) != flipped) {
                 player.getPacketDispatch().sendMessage("The door is already unlocked.");
                 return;
             }

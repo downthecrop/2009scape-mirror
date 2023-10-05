@@ -3149,7 +3149,7 @@
     "combat_audio": "2503,15,512",
     "attack_speed": "5",
     "respawn_delay": "25",
-    "defence_animation": "0",
+    "defence_animation": "388",
     "weakness": "7",
     "magic_animation": "0",
     "death_animation": "836",
