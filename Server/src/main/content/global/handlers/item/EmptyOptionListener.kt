@@ -1,10 +1,9 @@
 package content.global.handlers.item
 
 import core.api.*
+import core.cache.def.impl.ItemDefinition
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.node.item.Item
-import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 import org.rs09.consts.Sounds
 import java.util.*
@@ -16,7 +15,7 @@ class EmptyOptionListener : InteractionListener {
 
     override fun defineListeners() {
 
-        on(IntType.ITEM, "empty", "empty bowl") { player, node ->
+        on(EmptyItem.emptyItemList.toIntArray(), IntType.ITEM, "empty", "empty bowl", "empty dish") { player, node ->
             if (node.name.contains("brew") || node.name.contains("potion") || node.name.lowercase(Locale.getDefault()).contains("poison") || node.name.lowercase(Locale.getDefault()).contains("serum") || node.name.contains("cure") || node.name.contains("mix") || node.name.contains("balm")) {
                 if (removeItem(player, node.id)) {
                     addItem(player, EmptyItem.getEmpty(Items.POTION_195)!!)
@@ -64,13 +63,19 @@ class EmptyOptionListener : InteractionListener {
             var emptyItemMap = HashMap<Int, Int?>()
             var emptyMessageMap = HashMap<Int, String>()
             var emptyAudioMap = HashMap<Int, Int>()
+            var emptyItemList = ArrayList<Int>()
 
             init {
                 for (item in values()) {
                     emptyItemMap.putIfAbsent(item.fullId, item.emptyId)
                     emptyMessageMap.putIfAbsent(item.fullId, item.emptyMessage)
                     emptyAudioMap.putIfAbsent(item.fullId, item.audioId)
+                    emptyItemList.add(item.fullId)
                 }
+                for (item in ItemDefinition.getDefinitions().values)
+                    if (item.name.contains("potion") || item.name.contains("brew") || item.name.contains("poison") || item.name.lowercase(Locale.getDefault()).contains("serum") || item.name.contains("cure") || item.name.contains("mix") || item.name.contains("balm")) {
+                        emptyItemList.add(item.id)
+                    }
             }
 
             fun getEmpty(id: Int): Int? {
