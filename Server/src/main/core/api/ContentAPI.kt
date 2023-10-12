@@ -2996,4 +2996,13 @@ fun calculateDragonfireMaxHit(entity: Entity, maxDamage: Int, wyvern: Boolean = 
     return Math.max(unprotectableDamage, effectiveDamage.toInt())
 }
 
+/**
+ * Opens a single interface tab from given ID.
+ * @param player the player to open interface for
+ * @param component the component ID to open
+ */
+fun openSingleTab(player: Player, component: Int) {
+    player.interfaceManager.openSingleTab(Component(component))
+}
+
 private class ContentAPI

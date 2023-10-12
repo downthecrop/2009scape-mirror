@@ -1,8 +1,13 @@
 package content.global.skill.magic.lunar
 
-import core.api.*
+import core.api.addItemOrDrop
+import core.api.freeSlots
+import core.api.removeItem
+import core.api.sendMessage
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.node.entity.skill.Skills
+import core.game.node.item.Item
 import org.rs09.consts.Items
 
 private val HunterKitContents = intArrayOf(
@@ -85,3 +90,46 @@ enum class HumidifyItems(val empty: Int, val full: Int) {
     }
 }
 
+enum class PlankType (val log: Item, val plank: Item, val price: Int) {
+    WOOD(Item(1511), Item(960), 70),
+    OAK(Item(1521), Item(8778), 175),
+    TEAK(Item(6333), Item(8780), 350),
+    MAHOGANY(Item(6332), Item(8782), 1050);
+    companion object {
+        fun getForLog(item: Item): PlankType? {
+            for (plankType in values()) {
+                if (plankType.log.id == item.id) {
+                    return plankType
+                }
+            }
+            return null
+        }
+    }
+}
+
+val statSpySkills = arrayOf(
+    intArrayOf(Skills.ATTACK, 1, 2),
+    intArrayOf(Skills.HITPOINTS, 5, 6),
+    intArrayOf(Skills.MINING, 9, 10),
+    intArrayOf(Skills.STRENGTH, 13, 14),
+    intArrayOf(Skills.AGILITY, 17, 18),
+    intArrayOf(Skills.SMITHING, 21, 22),
+    intArrayOf(Skills.DEFENCE, 25, 26),
+    intArrayOf(Skills.HERBLORE, 29, 30),
+    intArrayOf(Skills.FISHING, 33, 34),
+    intArrayOf(Skills.RANGE, 37, 38),
+    intArrayOf(Skills.THIEVING, 41, 42),
+    intArrayOf(Skills.COOKING, 45, 46),
+    intArrayOf(Skills.PRAYER, 49, 50),
+    intArrayOf(Skills.CRAFTING, 53, 54),
+    intArrayOf(Skills.FIREMAKING, 57, 58),
+    intArrayOf(Skills.MAGIC, 61, 62),
+    intArrayOf(Skills.FLETCHING, 65, 66),
+    intArrayOf(Skills.WOODCUTTING, 69, 70),
+    intArrayOf(Skills.RUNECRAFTING, 73, 74),
+    intArrayOf(Skills.SLAYER, 77, 78),
+    intArrayOf(Skills.FARMING, 81, 82),
+    intArrayOf(Skills.CONSTRUCTION, 85, 86),
+    intArrayOf(Skills.HUNTER, 89, 90),
+    intArrayOf(Skills.SUMMONING, 93, 94)
+)
