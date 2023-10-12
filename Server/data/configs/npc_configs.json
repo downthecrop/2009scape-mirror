@@ -10047,10 +10047,11 @@
   },
   {
     "examine": "He's had a fair bit to drink...",
-    "start_gfx": "33",
+    "start_gfx": "",
     "combat_style": "1",
     "melee_animation": "99",
     "range_animation": "99",
+    "combat_audio": "2707,419,418",
     "attack_speed": "5",
     "magic_level": "20",
     "defence_animation": "101",
@@ -24669,6 +24670,7 @@
     "combat_style": "1",
     "melee_animation": "4230",
     "range_animation": "4230",
+    "combat_audio": "2695,513,512",
     "attack_speed": "5",
     "magic_level": "30",
     "defence_animation": "404",
@@ -24682,7 +24684,9 @@
     "id": "2476",
     "bonuses": "30,20,10,20,20,30,30,10,20,10,30,30,20,30,20",
     "range_level": "20",
-    "attack_level": "8"
+    "projectile": "27",
+    "attack_level": "8",
+    "prj_height": ""
   },
   {
     "examine": "Apparently a master of quizzes!",
@@ -49160,10 +49164,10 @@
     "range_animation": "0",
     "attack_speed": "4",
     "magic_level": "1",
-    "respawn_degitlay": "60",
     "defence_animation": "0",
     "weakness": "2",
     "slayer_exp": "93",
+    "respawn_delay": "60",
     "magic_animation": "0",
     "death_animation": "6081",
     "name": "Cave bug",

@@ -1,5 +1,6 @@
 package core.game.node.entity.combat
 
+import content.global.ame.RandomEventNPC
 import content.global.handlers.item.equipment.special.SalamanderSwingHandler
 import core.game.container.impl.EquipmentContainer
 import core.game.interaction.MovementPulse
@@ -132,7 +133,7 @@ class CombatPulse(
             if (handler == null) {
                 handler = entity.getSwingHandler(true)
             }
-            if (!v.isAttackable(entity, handler!!.type, true)) {
+            if (!v.isAttackable(entity, handler!!.type, true) && entity != getAttribute<RandomEventNPC?>(v, AntiMacro.EVENT_NPC, null)) {
                 return true
             }
             if (!swing(entity, victim, handler)) {
@@ -440,6 +441,8 @@ class CombatPulse(
                     if (DeathTask.isDead(victim) || DeathTask.isDead(entity)) {
                         return true
                     }
+                    if (entity is NPC)
+                        entity.asNpc().behavior.beforeAttackFinalized(entity, victim, state)
                     if (impact || getDelay() == 0) {
                         if (state.estimatedHit != 0 && victim is NPC && entity is Player) {
                             val n = victim.asNpc()
