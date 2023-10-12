@@ -207,10 +207,10 @@ class TheGolemListeners : InteractionListener {
             val statuetteTaken = if(hasStatuette(player)) { 1 } else { 0 }
             val statuettePlaced = if(player.getAttribute("the-golem:placed-statuette", false)) { 1 } else { 0 }
             initializeStatuettes(player)
+            val rotation0 = player.getAttribute("the-golem:statuette-rotation:0", 0)
             val rotation1 = player.getAttribute("the-golem:statuette-rotation:1", 0)
             val rotation2 = player.getAttribute("the-golem:statuette-rotation:2", 0)
             val rotation3 = player.getAttribute("the-golem:statuette-rotation:3", 0)
-            val rotation4 = player.getAttribute("the-golem:statuette-rotation:4", 0)
             val doorOpen = player.getAttribute("the-golem:door-open", false)
             var clientStage = 0
             if(player.questRepository.getStage("The Golem") > 0) {
@@ -226,10 +226,10 @@ class TheGolemListeners : InteractionListener {
             setVarbit(player, 348, clayUsed)
             setVarbit(player, 354, gemsTaken)
             setVarbit(player, 355, statuetteTaken)
-            setVarbit(player, 349, rotation1)
-            setVarbit(player, 350, rotation2)
-            setVarbit(player, 351, rotation3)
-            setVarbit(player, 352, statuettePlaced * (rotation4 + 1))
+            setVarbit(player, 349, rotation0)
+            setVarbit(player, 350, rotation1)
+            setVarbit(player, 351, rotation2)
+            setVarbit(player, 352, statuettePlaced * (rotation3 + 1))
         }
     }
 
@@ -279,10 +279,10 @@ class TheGolemListeners : InteractionListener {
             return true
         }
         val index = when(node.wrapper.id) {
-            6303 -> 1
-            6304 -> 2
-            6305 -> 3
-            6306 -> 4
+            6303 -> 0
+            6304 -> 1
+            6305 -> 2
+            6306 -> 3
             else -> return true
         }
         initializeStatuettes(player)
@@ -297,12 +297,12 @@ class TheGolemListeners : InteractionListener {
 
     fun checkDoor(player: Player) {
         if(!player.getAttribute("the-golem:door-open", false)) {
+            val rotation0 = player.getAttribute("the-golem:statuette-rotation:0", 0)
             val rotation1 = player.getAttribute("the-golem:statuette-rotation:1", 0)
             val rotation2 = player.getAttribute("the-golem:statuette-rotation:2", 0)
             val rotation3 = player.getAttribute("the-golem:statuette-rotation:3", 0)
-            val rotation4 = player.getAttribute("the-golem:statuette-rotation:4", 0)
             val placed = player.getAttribute("the-golem:placed-statuette", false)
-            if(rotation1 == 1 && rotation2 == 1 && rotation3 == 0 && rotation4 == 0 && placed) {
+            if(rotation0 == 1 && rotation1 == 1 && rotation2 == 0 && rotation3 == 0 && placed) {
                 player.sendMessage("The door grinds open.")
                 player.setAttribute("/save:the-golem:door-open", true)
             }
