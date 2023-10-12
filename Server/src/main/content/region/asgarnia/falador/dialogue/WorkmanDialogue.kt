@@ -5,36 +5,24 @@ import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
-import org.rs09.consts.NPCs.WORKMAN_3236
+import core.tools.END_DIALOGUE
+import core.tools.START_DIALOGUE
+import org.rs09.consts.NPCs
 
 /**
  * @author qmqz
+ * https://youtu.be/DwQgAQqaXos
  */
 
 @Initializable
-class WorkmanDialogue(player: Player? = null) : DialoguePlugin(player){
-
-    override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        player(FacialExpression.FRIENDLY,"Hiya.").also { stage = 0 }
-        return true
-    }
+class WorkmanDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when(stage){
-            0 -> {
-                npc(FacialExpression.ASKING, "What do you want? I've got work to do!").also { stage++ }
-            }
-
-            1 -> {
-                player(FacialExpression.ASKING, "Can you teach me anything?").also { stage++ }
-            }
-
-            2 -> {
-                npcl(FacialExpression.ANNOYED, "No - I've got one lousy apprentice already, and that's quite enough hassle! Go away!").also { stage = 99 }
-            }
-
-            99 -> end()
+        when (stage) {
+            START_DIALOGUE -> player(FacialExpression.FRIENDLY, "Hiya.").also { stage++ }
+            1 -> npc(FacialExpression.ANNOYED, "What do you want? I've got work to do!").also { stage++ }
+            2 -> player(FacialExpression.ASKING, "Can you teach me anything?").also { stage++ }
+            3 -> npcl(FacialExpression.ANNOYED, "No - I've got one lousy apprentice already, and that's quite enough hassle! Go away!").also { stage = END_DIALOGUE }
         }
         return true
     }
@@ -44,6 +32,6 @@ class WorkmanDialogue(player: Player? = null) : DialoguePlugin(player){
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(WORKMAN_3236)
+        return intArrayOf(NPCs.WORKMAN_3236)
     }
 }
