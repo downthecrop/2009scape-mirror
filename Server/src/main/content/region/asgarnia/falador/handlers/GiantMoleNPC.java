@@ -1,5 +1,6 @@
 package content.region.asgarnia.falador.handlers;
 
+import content.global.skill.skillcapeperks.SkillcapePerks;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
@@ -257,7 +258,7 @@ public final class GiantMoleNPC extends AbstractNPC {
 		DigAction action = new DigAction() {
 			@Override
 			public void run(Player player) {
-				if (!LightSource.hasActiveLightSource(player)) {
+				if (!SkillcapePerks.isActive(SkillcapePerks.CONSTANT_GLOW, player) && !LightSource.hasActiveLightSource(player)) {
 					player.getPacketDispatch().sendMessage("It's going to be dark down there, I should bring a light source.");
 					return;
 				}
