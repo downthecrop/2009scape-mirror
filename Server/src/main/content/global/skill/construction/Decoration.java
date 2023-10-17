@@ -381,14 +381,14 @@ public enum Decoration {
 	WEAPONS_RACK(13382, 8029, 44, 180.0, new Item(8780, 2)),
 	EXTRA_WEAPONS_RACK(13383, 8030, 54, 440.0, new Item(8780, 4), new Item(2353, 4)),
 	BOXING_MAT_CORNER(13126, 8023, 32, 570.0, new Item(8778, 6), new Item(8790, 4)),
-	FENCING_MAT_CORNER(13135, 8024, 41, 570.0, new Item(8770, 8), new Item(7991, 6)),
-	COMBAT_MAT_CORNER(13138, 8025, 51, 630.0, new Item(8780, 6), new Item(7991, 6)),
+	FENCING_MAT_CORNER(13135, 8024, 41, 570.0, new Item(8770, 8), new Item(8790, 6)),
+	COMBAT_MAT_CORNER(13138, 8025, 51, 630.0, new Item(8780, 6), new Item(8790, 6)),
 	BOXING_MAT_SIDE(13128, 8023, 32, 570.0, new Item(8778, 6), new Item(8790, 4)),
-	FENCING_MAT_SIDE(13134, 8024, 41, 570.0, new Item(8770, 8), new Item(7991, 6)),
-	COMBAT_MAT_SIDE(13139, 8025, 51, 630.0, new Item(8780, 6), new Item(7991, 6)),
+	FENCING_MAT_SIDE(13134, 8024, 41, 570.0, new Item(8770, 8), new Item(8790, 6)),
+	COMBAT_MAT_SIDE(13139, 8025, 51, 630.0, new Item(8780, 6), new Item(8790, 6)),
 	BOXING_MAT(13127, 8023, 32, 570.0, new Item(8778, 6), new Item(8790, 4)),
-	FENCING_MAT(13136, 8024, 41, 570.0, new Item(8770, 8), new Item(7991, 6)),
-	COMBAT_MAT(13140, 8025, 51, 630.0, new Item(8780, 6), new Item(7991, 6)),
+	FENCING_MAT(13136, 8024, 41, 570.0, new Item(8770, 8), new Item(8790, 6)),
+	COMBAT_MAT(13140, 8025, 51, 630.0, new Item(8780, 6), new Item(8790, 6)),
 	
 	
 	/**
