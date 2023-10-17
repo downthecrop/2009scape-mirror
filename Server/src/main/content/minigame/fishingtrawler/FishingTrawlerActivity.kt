@@ -1,5 +1,6 @@
 package content.minigame.fishingtrawler
 
+import core.api.MapArea
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
@@ -10,6 +11,7 @@ import core.plugin.Initializable
 import core.tools.ticksToSeconds
 import core.game.activity.ActivityManager
 import core.game.activity.ActivityPlugin
+import core.game.world.map.zone.ZoneBorders
 import core.tools.colorize
 
 
@@ -17,13 +19,14 @@ import core.tools.colorize
  * Handles the fishing trawler "waiting room"
  * @author Ceikry
  */
-private val WAIT_TIME = if(GameWorld.settings?.isDevMode == true) 10 else 203
+private val WAIT_TIME = if(GameWorld.settings?.isDevMode == true) 30 else 203
 private val waitingPlayers = ArrayList<Player>()
+private val ftWaitingArea = arrayOf(ZoneBorders(2668, 3165, 2675, 3184))
 private val sessions = ArrayList<FishingTrawlerSession>()
 private var activity: FishingTrawlerActivity? = null
 private var nextStart = GameWorld.ticks + WAIT_TIME
 @Initializable
-class FishingTrawlerActivity : ActivityPlugin("fishing trawler",false,false,true,ZoneRestriction.CANNON,ZoneRestriction.FIRES,ZoneRestriction.FOLLOWERS,ZoneRestriction.RANDOM_EVENTS) {
+class FishingTrawlerActivity : ActivityPlugin("fishing trawler",false,false,true,ZoneRestriction.CANNON,ZoneRestriction.FIRES,ZoneRestriction.FOLLOWERS,ZoneRestriction.RANDOM_EVENTS), MapArea {
 
     init {
         activity = this
@@ -85,5 +88,13 @@ class FishingTrawlerActivity : ActivityPlugin("fishing trawler",false,false,true
 
     override fun getSpawnLocation(): Location {
         return Location.create(2667, 3161, 0)
+    }
+
+    override fun defineAreaBorders(): Array<ZoneBorders> {
+        return ftWaitingArea
+    }
+
+    override fun getRestrictions(): Array<ZoneRestriction> {
+        return arrayOf(ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.TELEPORT)
     }
 }

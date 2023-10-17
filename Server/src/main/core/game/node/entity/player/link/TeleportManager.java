@@ -99,7 +99,7 @@ public class TeleportManager {
 			if (!entity.getZoneMonitor().teleport(teleportType, null)) {
 				return false;
 			}
-			if (teleportType != -1 && (entity.isTeleBlocked() || entity.getZoneMonitor().isRestricted(ZoneRestriction.TELEPORT))) {
+			if (teleportType != -1 && entity.isTeleBlocked()) {
 				if (entity.isPlayer())
 					entity.asPlayer().sendMessage("A magical force has stopped you from teleporting.");
 				return false;

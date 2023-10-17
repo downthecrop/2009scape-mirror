@@ -16,6 +16,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.TeleportManager;
 import core.game.node.entity.skill.Skills;
 import core.game.system.task.Pulse;
+import core.game.world.map.zone.ZoneRestriction;
 import org.jetbrains.annotations.NotNull;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -928,7 +929,7 @@ public abstract class Entity extends Node {
 	 * @return {@code True} if so.
 	 */
 	public boolean isTeleBlocked() {
-                return timers.getTimer("teleblock") != null || getLocks().isTeleportLocked();
+                return timers.getTimer("teleblock") != null || getLocks().isTeleportLocked() || getZoneMonitor().isRestricted(ZoneRestriction.TELEPORT);
 	}
 
 	/**
