@@ -94,7 +94,7 @@ class CharlieDialogue : DialogueFile() {
                     when(stage) {
                         0 -> playerl("How are you doing Charlie?").also { stage++ }
                         1 -> npcl("I've been better.").also { stage++ }
-                        2 -> playerl("Glough has some plan to rule RuneScape!").also { stage++ }
+                        2 -> playerl("Glough has some plan to rule 2009Scape!").also { stage++ }
                         3 -> npcl("I wouldn't put it past him, the Gnome's crazy!").also { stage++ }
                         4 -> playerl("I need some proof to convince the King.").also { stage++ }
                         5 -> npcl("Hmm...you could be in luck! Before Glough had me locked up I heard him mention that he'd left his chest keys at his girlfriend's.").also { stage++ }
