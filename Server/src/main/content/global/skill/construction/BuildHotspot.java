@@ -46,8 +46,8 @@ public enum BuildHotspot {
 	KITCHEN_TABLE(15405, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.KITCHEN_WOODEN_TABLE,Decoration.KITCHEN_OAK_TABLE, Decoration.KITCHEN_TEAK_TABLE), 
 	CAT_BLANKET(15402, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.CAT_BLANKET, Decoration.CAT_BASKET,Decoration.CAST_BASKET_CUSHIONED), 
 	STOVE(15398, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.BASIC_FIREPIT, Decoration.FIREPIT_WITH_HOOK, Decoration.FIREPIT_WITH_POT, Decoration.SMALL_OVEN, Decoration.LARGE_OVEN, Decoration.BASIC_RANGE, Decoration.FANCY_RANGE), 
-	SHELVES(15400, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.WOODEN_SHELVES_1,Decoration.WOODEN_SHELVES_2, Decoration.WOODEN_SHELVES_3,Decoration.OAK_SHELVES_1, Decoration.OAK_SHELVES_2, Decoration.TEAK_SHELVES_1, Decoration.TEAK_SHELVES_2), 
-	SHELVES_2(15399, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.WOODEN_SHELVES_1,Decoration.WOODEN_SHELVES_2, Decoration.WOODEN_SHELVES_3,Decoration.OAK_SHELVES_1, Decoration.OAK_SHELVES_2,Decoration.TEAK_SHELVES_1, Decoration.TEAK_SHELVES_2), 
+	SHELVES(15400, BuildHotspotType.LINKED, BuildingUtils.BUILD_HIGH_ANIM, Decoration.WOODEN_SHELVES_1,Decoration.WOODEN_SHELVES_2, Decoration.WOODEN_SHELVES_3,Decoration.OAK_SHELVES_1, Decoration.OAK_SHELVES_2, Decoration.TEAK_SHELVES_1, Decoration.TEAK_SHELVES_2), 
+	SHELVES_2(15399, BuildHotspotType.LINKED, BuildingUtils.BUILD_HIGH_ANIM, Decoration.WOODEN_SHELVES_1,Decoration.WOODEN_SHELVES_2, Decoration.WOODEN_SHELVES_3,Decoration.OAK_SHELVES_1, Decoration.OAK_SHELVES_2,Decoration.TEAK_SHELVES_1, Decoration.TEAK_SHELVES_2), 
 	BARRELS(15401, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.BASIC_BEER_BARREL, Decoration.CIDER_BARREL,Decoration.ASGARNIAN_ALE_BARREL, Decoration.GREENMANS_ALE_BARREL,Decoration.DRAGON_BITTER_BARREL, Decoration.CHEFS_DELIGHT_BARREL),
 	
 	/**
@@ -255,7 +255,7 @@ public enum BuildHotspot {
 	 * Chapel hotspots.
 	 */
 	ALTAR(15270, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_ALTAR, Decoration.TEAK_ALTAR, Decoration.CLOTH_ALTAR, Decoration.MAHOGANY_ALTAR, Decoration.LIMESTONE_ALTAR, Decoration.MARBLE_ALTAR, Decoration.GILDED_ALTAR), 
-	STATUE(15275, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.SMALL_STATUE, Decoration.MEDIUM_STATUE, Decoration.LARGE_STATUE), 
+	STATUE(15275, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_MID_ANIM, Decoration.SMALL_STATUE, Decoration.MEDIUM_STATUE, Decoration.LARGE_STATUE), 
 	MUSICAL(15276, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.WINDCHIMES, Decoration.BELLS, Decoration.ORGAN), 
 	ICON(15269, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.SARADOMIN_SYMBOL, Decoration.ZAMORAK_SYMBOL, Decoration.GUTHIX_SYMBOL, Decoration.SARADOMIN_ICON, Decoration.ZAMORAK_ICON, Decoration.GUTHIX_ICON, Decoration.ICON_OF_BOB), 
 	BURNERS(15271, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_MID_ANIM, Decoration.STEEL_TORCHES, Decoration.WOODEN_TORCHES, Decoration.STEEL_CANDLESTICKS, Decoration.GOLD_CANDLESTICKS, Decoration.INCENSE_BURNERS, Decoration.MAHOGANY_BURNERS, Decoration.MARBLE_BURNERS), 
@@ -279,7 +279,7 @@ public enum BuildHotspot {
 	/**
 	 * Throne room hotspots.
 	 */
-	THRONE(15426, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_THRONE, Decoration.TEAK_THRONE, Decoration.MAHOGANY_THRONE, Decoration.GILDED_THRONE, Decoration.SKELETON_THRONE, Decoration.CRYSTAL_THRONE, Decoration.DEMONIC_THRONE),
+	THRONE(15426, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_THRONE, Decoration.TEAK_THRONE, Decoration.MAHOGANY_THRONE, Decoration.GILDED_THRONE, Decoration.SKELETON_THRONE, Decoration.CRYSTAL_THRONE, Decoration.DEMONIC_THRONE),
 	LEVER(15435, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_LEVER, Decoration.TEAK_LEVER, Decoration.MAHOGANY_LEVER),
 	FLOOR(new int[] { 15427, 15428, 15429, 15430, 15431, 15432 }, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_LOW_ANIM, Decoration.FLOOR_DECORATION, Decoration.STEEL_CAGE, Decoration.FLOOR_TRAP, Decoration.MAGIC_CIRCLE, Decoration.MAGIC_CAGE),
 	SEATING1(15436, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_MID_ANIM, Decoration.CARVED_TEAK_BENCH, Decoration.MAHOGANY_BENCH, Decoration.GILDED_BENCH),
@@ -396,6 +396,7 @@ public enum BuildHotspot {
 		linkedHotspots.add(new BuildHotspot[] { DUNGEON_DOOR_LEFT2, DUNGEON_DOOR_RIGHT2 });
 		linkedHotspots.add(new BuildHotspot[] { HABITAT_1, HABITAT_2 });
 		linkedHotspots.add(new BuildHotspot[] { SMALL_PLANT_1, SMALL_PLANT1 });
+		linkedHotspots.add(new BuildHotspot[] { SHELVES, SHELVES_2 });
 	}
 	
 	/**
