@@ -39,7 +39,7 @@ public final class WildernessZone extends MapZone {
 	/**
 	 * The wilderness zone.
 	 */
-	private static final WildernessZone INSTANCE = new WildernessZone(new ZoneBorders(2944, 3525, 3400, 3975), new ZoneBorders(3070, 9924, 3135, 10002), ZoneBorders.forRegion(12193), ZoneBorders.forRegion(11937));
+	private static final WildernessZone INSTANCE = new WildernessZone(new ZoneBorders(2944, 3525, 3400, 3975), new ZoneBorders(3070, 9924, 3135, 10002), ZoneBorders.forRegion(12192), ZoneBorders.forRegion(12193), ZoneBorders.forRegion(11937));
 
         public static final String WILDERNESS_PROT_ATTR = "/save:wilderness-protection-active";
         public static final String WILDERNESS_HIGHER_NEXTFEE = "/save:wilderness-higher-next-fee";

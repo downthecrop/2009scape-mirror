@@ -6,6 +6,7 @@ import core.game.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.TeleportManager;
 import core.game.node.entity.player.link.TeleportManager.TeleportType;
 import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
@@ -124,13 +125,9 @@ public final class WildernessPlugin extends OptionHandler {
 					if (player.getLocation().withinDistance(LOCATIONS[5])) {
 						animate(player, 2140, false);
 						playAudio(player, Sounds.LEVER_2400);
-						if (player.isTeleBlocked()) {
-							player.getPacketDispatch().sendMessage("A magical force has stopped you from teleporting.");
-						} else {
-							player.getPacketDispatch().sendMessage("You pull the lever...");
-							player.getTeleporter().send(LOCATIONS[4], TeleportType.NORMAL);
-							player.getPacketDispatch().sendMessage("... and teleport into the lair of the King Black Dragon!", 5);
-						}
+						player.getPacketDispatch().sendMessage("You pull the lever...");
+						player.getTeleporter().send(LOCATIONS[4], TeleportType.NORMAL, TeleportManager.WILDY_TELEPORT);
+						player.getPacketDispatch().sendMessage("... and teleport into the lair of the King Black Dragon!", 5);
 					}
 					break;
 				case 1817:
