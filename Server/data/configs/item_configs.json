@@ -87463,7 +87463,7 @@
   {
     "remove_sleeves": "true",
     "ge_buy_limit": "2",
-    "examine": "See table",
+    "examine": "Bob says: 'Never give your password out to anyone.'",
     "grand_exchange_price": "8196",
     "durability": null,
     "name": "Bob shirt",
@@ -87485,7 +87485,7 @@
   {
     "remove_sleeves": "true",
     "ge_buy_limit": "2",
-    "examine": "See table",
+    "examine": "Bob says: 'Always check the second trade screen.'",
     "grand_exchange_price": "14700",
     "durability": null,
     "name": "Bob shirt",
@@ -87507,7 +87507,7 @@
   {
     "remove_sleeves": "true",
     "ge_buy_limit": "2",
-    "examine": "See table",
+    "examine": "Bob says: 'Never trade in the wilderness!'",
     "grand_exchange_price": "8403",
     "durability": null,
     "name": "Bob shirt",
@@ -87529,7 +87529,7 @@
   {
     "remove_sleeves": "true",
     "ge_buy_limit": "2",
-    "examine": "See table",
+    "examine": "Bob says: 'A bank pin will keep your items secure.'",
     "grand_exchange_price": "9230",
     "durability": null,
     "name": "Bob shirt",
@@ -87551,7 +87551,7 @@
   {
     "remove_sleeves": "true",
     "ge_buy_limit": "2",
-    "examine": "See table",
+    "examine": "Bob says: 'Keep your computer keylogger free and virus scanned.'",
     "grand_exchange_price": "8197",
     "durability": null,
     "name": "Bob shirt",
