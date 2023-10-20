@@ -72,7 +72,7 @@ There are many ways everyone can contribute! From the most seasoned programmers 
 * **Wiki Editors**: Did you know we have a wiki? Well it's always in need of people to fill it out and stay on top of it. Editing the wiki is one of the easiest ways you can contribute to 2009Scape! If you're an active player and have the will, there's so much you could be helping out with over at the wiki. [Click here to go to the wiki](https://cdn.2009scape.org/wiki/doku.php?id=start).
 
 
-* **JSON editors**: We could always use more JSON editors! Please note that JSON editing **must** be done using the [Thanos Tool](https://gitlab.com/2009scape/rs09-thanos-tool/-/jobs/artifacts/master/raw/build/libs/thanostool.jar?job=build).
+* **JSON editors**: We could always use more JSON editors! Please note that JSON editing **must** be done using the [Thanos Tool](https://gitlab.com/2009scape/tools/rs09-thanos-tool/-/jobs/5153567519/artifacts/file/build/libs/zaros.jar). **This does not run on modern Java** and requires **Java 11** to run (using the usual 'java -jar zaros.jar').
 
 
 * **Authenticity Auditors**: As a remake, authenticity is central to our core values! We could always use someone to go through the game and create large lists of simple tasks that can be done to bring us closer to the authentic 2009 game! The preferred way to do this is one-area-at-a-time. If you want to see an example of some audits we've done in the past, take a look [here](https://gitlab.com/2009scape/2009scape/-/issues/46).
