@@ -75,7 +75,7 @@ public final class TeleotherSpells extends MagicSpell {
 			return false;
 		}
 		Player o = (Player) target;
-		if (!o.isActive() || o.getLocks().isTeleportLocked() || o.getInterfaceManager().isOpened()) {
+		if (!o.isActive() || o.isTeleBlocked() || o.getInterfaceManager().isOpened()) {
 			p.getPacketDispatch().sendMessage("The other player is currently busy.");
 			return false;
 		}
