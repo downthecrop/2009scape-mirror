@@ -72338,5 +72338,20 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
     "range_level": "1",
     "attack_level": "10"
+  },
+  {
+    "examine": "Blaec seems to be covered in sand.",
+    "name": "Blaec",
+    "id": "3115"
+  },
+  {
+    "examine": "Looks otherworldy...",
+    "name": "Fairy Queen",
+    "id": "4437"
+  },
+  {
+    "examine": "A delicate creature from this strange realm.",
+    "name": "Fairy",
+    "id": "4443"
   }
 ]
