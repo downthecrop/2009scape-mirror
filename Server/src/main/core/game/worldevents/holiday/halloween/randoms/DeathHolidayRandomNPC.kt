@@ -22,9 +22,9 @@ class DeathHolidayRandomNPC(override var loot: WeightBasedTable? = null) : Holid
                 }
                 1 -> {
                     when(RandomFunction.getRandom(2)) {
-                        0 -> sendChat(this, "Your end is near, ${player.name.capitalize()}...")
-                        1 -> sendChat(this, "Time is running out, ${player.name.capitalize()}...")
-                        2 -> sendChat(this, "Tick tock, ${player.name.capitalize()}...")
+                        0 -> sendChat(this, "Your end is near, ${player.username.capitalize()}...")
+                        1 -> sendChat(this, "Time is running out, ${player.username.capitalize()}...")
+                        2 -> sendChat(this, "Tick tock, ${player.username.capitalize()}...")
                     }
                     return@queueScript delayScript(this, 4)
                 }
