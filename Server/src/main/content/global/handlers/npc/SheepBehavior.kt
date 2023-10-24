@@ -69,6 +69,7 @@ class SheepBehavior : NPCBehavior(*sheepIds), InteractionListener {
     override fun defineListeners() {
         on(IntType.NPC, "shear") { player, node ->
             val sheep = node as NPC
+            sheep.faceTemporary(player, 1)
             if (sheep.id == NPCs.SHEEP_3579) {
                 if (player.questRepository.getQuest("Sheep Shearer").isStarted(player)) {
                     setAttribute(player, ATTR_IS_PENGUIN_SHEEP_SHEARED, true)
