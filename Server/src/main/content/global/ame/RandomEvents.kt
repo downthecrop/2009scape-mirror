@@ -14,6 +14,7 @@ import content.global.ame.events.rivertroll.RiverTrollRENPC
 import content.global.ame.events.rockgolem.RockGolemRENPC
 import content.global.ame.events.sandwichlady.SandwichLadyRENPC
 import content.global.ame.events.shade.ShadeRENPC
+import content.global.ame.events.swarm.SwarmNPC
 import content.global.ame.events.treespirit.TreeSpiritRENPC
 import content.global.ame.events.zombie.ZombieRENPC
 
@@ -43,6 +44,7 @@ enum class RandomEvents(val npc: RandomEventNPC, val loot: WeightBasedTable? = n
     )),
     DRILL_DEMON(npc = SeargentDamienNPC()),
     EVIL_CHICKEN(npc = EvilChickenNPC()),
+    SWARM(npc = SwarmNPC()),
     EVIL_BOB(npc = EvilBobNPC(), skillIds = intArrayOf(Skills.FISHING, Skills.MAGIC)),
     DRUNKEN_DWARF(npc = DrunkenDwarfNPC()),
     RICK_TURPENTINE(npc = RickTurpentineNPC(), loot = CERTER.loot),

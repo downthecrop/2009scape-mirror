@@ -5395,6 +5395,7 @@
     "examine": "Insects buzzing around.",
     "melee_animation": "0",
     "range_animation": "0",
+    "combat_audio": "819,821,820",
     "defence_animation": "0",
     "magic_animation": "0",
     "death_animation": "0",
@@ -5404,7 +5405,7 @@
     "lifepoints": "10",
     "strength_level": "1",
     "id": "411",
-    "aggressive": "true",
+    "aggressive": "false",
     "range_level": "1",
     "attack_level": "1"
   },
