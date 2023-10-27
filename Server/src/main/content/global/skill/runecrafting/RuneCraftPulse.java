@@ -1,6 +1,7 @@
 package content.global.skill.runecrafting;
 
 import content.global.handlers.item.equipment.fistofguthixgloves.FOGGlovesManager;
+import core.ServerConstants;
 import core.game.container.impl.EquipmentContainer;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
@@ -333,6 +334,12 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
             return 1;
         }
         int rcLevel = player.getSkills().getLevel(Skills.RUNECRAFTING);
+        int runecraftingFormulaRevision = ServerConstants.RUNECRAFTING_FORMULA_REVISION;
+        boolean lumbridgeDiary = player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE).isComplete(1);
+        return RuneCraftPulse.getMultiplier(rcLevel, rune, runecraftingFormulaRevision, lumbridgeDiary);
+    }
+
+    public static int getMultiplier(int rcLevel, Rune rune, int runecraftingFormulaRevision, boolean lumbridgeDiary) {
         int[] multipleLevels = rune.getMultiple();
         int i = 0;
         for (int level : multipleLevels) {
@@ -341,17 +348,18 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
             }
         }
 
-        if(multipleLevels.length > i) {
+        if(multipleLevels.length > i && runecraftingFormulaRevision >= 573) {
             int a = Math.max(multipleLevels[i-1], rune.getLevel());
             int b = multipleLevels[i];
-            double chance = ((double)rcLevel - (double)a) / ((double)b - (double)a);
-            player.debug(String.format("%d %d %d, %f", a, b, rcLevel, chance));
-            if(RandomFunction.random(0.0, 1.0) < chance) {
-                i += 1;
+            if(b <= 99 || runecraftingFormulaRevision >= 581) {
+                double chance = ((double)rcLevel - (double)a) / ((double)b - (double)a);
+                if(RandomFunction.random(0.0, 1.0) < chance) {
+                    i += 1;
+                }
             }
         }
 
-        if (player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE).isComplete(1)
+        if (lumbridgeDiary
                 && new ArrayList<>(Arrays.asList(Rune.AIR, Rune.WATER, Rune.FIRE, Rune.EARTH)).contains(rune)
                 && RandomFunction.getRandom(10) == 0) { //approximately 10% chance
             i += 1;

@@ -9,19 +9,19 @@ import core.game.node.item.Item;
  * @date 01/11/2013
  */
 public enum Rune {
-	AIR(Runes.AIR_RUNE.transform(), 1, 5, new int[] { 1, 11, 22, 33, 44, 55, 66, 77, 88, 99 }),
-	MIND(Runes.MIND_RUNE.transform(), 2, 5.5, new int[] { 1, 14, 28, 42, 56, 70, 84, 98 }),
-	WATER(Runes.WATER_RUNE.transform(), 5, 6, new int[] { 1, 19, 38, 57, 76, 95 }),
-	EARTH(Runes.EARTH_RUNE.transform(), 9, 6.5, new int[] { 1, 26, 52, 78 }),
-	FIRE(Runes.FIRE_RUNE.transform(), 14, 7, new int[] { 1, 35, 70 }),
-	BODY(Runes.BODY_RUNE.transform(), 20, 7.5, new int[] { 1, 46, 92 }),
-	COSMIC(Runes.COSMIC_RUNE.transform(), 27, 8, new int[] { 1, 59 }),
-	CHAOS(Runes.CHAOS_RUNE.transform(), 35, 8.5, new int[] { 1, 74 }),
-	ASTRAL(Runes.ASTRAL_RUNE.transform(), 40, 8.7, new int[] { 1, 82 }),
-	NATURE(Runes.NATURE_RUNE.transform(), 44, 9, new int[] { 1, 91 }),
-	LAW(Runes.LAW_RUNE.transform(), 54, 9.5),
-	DEATH(Runes.DEATH_RUNE.transform(), 65, 10),
-	BLOOD(Runes.BLOOD_RUNE.transform(), 77, 10.5),
+	AIR(Runes.AIR_RUNE.transform(), 1, 5, new int[] { 1, 11, 22, 33, 44, 55, 66, 77, 88, 99, 110 }),
+	MIND(Runes.MIND_RUNE.transform(), 2, 5.5, new int[] { 1, 14, 28, 42, 56, 70, 84, 98, 112 }),
+	WATER(Runes.WATER_RUNE.transform(), 5, 6, new int[] { 1, 19, 38, 57, 76, 95, 114 }),
+	EARTH(Runes.EARTH_RUNE.transform(), 9, 6.5, new int[] { 1, 26, 52, 78, 104 }),
+	FIRE(Runes.FIRE_RUNE.transform(), 14, 7, new int[] { 1, 35, 70, 105 }),
+	BODY(Runes.BODY_RUNE.transform(), 20, 7.5, new int[] { 1, 46, 92, 138 }),
+	COSMIC(Runes.COSMIC_RUNE.transform(), 27, 8, new int[] { 1, 59, 118 }),
+	CHAOS(Runes.CHAOS_RUNE.transform(), 35, 8.5, new int[] { 1, 74, 148 }),
+	ASTRAL(Runes.ASTRAL_RUNE.transform(), 40, 8.7, new int[] { 1, 82, 164 }),
+	NATURE(Runes.NATURE_RUNE.transform(), 44, 9, new int[] { 1, 91, 182 }),
+	LAW(Runes.LAW_RUNE.transform(), 54, 9.5, new int[] { 1, 110, }),
+	DEATH(Runes.DEATH_RUNE.transform(), 65, 10, new int[] { 1, 131 }),
+	BLOOD(Runes.BLOOD_RUNE.transform(), 77, 10.5, new int[] { 1, 154 }),
 	SOUL(Runes.SOUL_RUNE.transform(), 90, 11);
 
 	/**
