@@ -19,6 +19,7 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.command.sets.STATS_BASE
 import core.game.system.command.sets.STATS_FISH
+import core.game.world.GameWorld
 import core.game.world.map.path.Pathfinder
 import core.tools.RandomFunction
 import core.tools.colorize
@@ -68,13 +69,25 @@ class FishingListener : InteractionListener{
             if (!hasSpaceFor(player, Item(fish.id)) || !op.removeBait(player)) return restartScript(player)
             player.dispatch(ResourceProducedEvent(fish.id, fish.getItem().amount, node))
             val item = fish.getItem()
-            sendMessage(player, "You successfully catch some ${item.name.lowercase().replace("raw ", "")}.")
+            val bigFishId = Fish.getBigFish(fish)
+            val bigFishChance = if (GameWorld.settings?.isDevMode == true) 10 else 5000
+            if (bigFishId != null && RandomFunction.roll(bigFishChance)) {
+                sendMessage(player, "You catch an enormous" + getItemName(fish!!.id).lowercase().replace("raw", "") + "!")
+                addItemOrDrop(player, bigFishId, 1)
+            } else {
+                var msg = if (fish == Fish.ANCHOVIE || fish == Fish.SHRIMP) "You catch some" else "You catch a"
+                msg += getItemName(fish!!.id).lowercase().replace("raw", "").replace("big", "")
+                msg += if (fish == Fish.SHARK) "!" else "."
+                sendMessage(player, msg)
+                addItemOrDrop(player, item.id, item.amount)
+            }
+
             if (isActive(SkillcapePerks.GREAT_AIM, player) && RandomFunction.roll(20)) {
                 addItemOrDrop(player, item.id, item.amount)
                 sendMessage(player, colorize("%RYour expert aim catches you a second fish."))
+                player.incrementAttribute("$STATS_BASE:$STATS_FISH")
             }
 
-            addItemOrDrop(player, item.id, item.amount)
             player.incrementAttribute("$STATS_BASE:$STATS_FISH")
             var xp = fish.experience
             if ((item.id == Items.RAW_SWORDFISH_371 && inEquipment(player, Items.SWORDFISH_GLOVES_12860))

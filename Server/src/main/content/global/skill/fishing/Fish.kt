@@ -36,10 +36,14 @@ enum class Fish(val id: Int, val level: Int, val experience: Double, val lowChan
 
     companion object {
         val fishMap: HashMap<Int, Fish> = HashMap()
+        val bigFishMap: HashMap<Fish, Int> = HashMap()
         init {
             for(fish in values()) {
                 fishMap[fish.id] = fish
             }
+            bigFishMap[Fish.BASS]      = Items.BIG_BASS_7989
+            bigFishMap[Fish.SWORDFISH] = Items.BIG_SWORDFISH_7991
+            bigFishMap[Fish.SHARK]     = Items.BIG_SHARK_7993
         }
 
         @JvmStatic
@@ -47,7 +51,10 @@ enum class Fish(val id: Int, val level: Int, val experience: Double, val lowChan
             return fishMap[item.id]
         }
 
-
+        @JvmStatic
+        fun getBigFish(fish: Fish) : Int? {
+            return bigFishMap[fish]
+        }
     }
 
     fun getSuccessChance(level: Int): Double {
