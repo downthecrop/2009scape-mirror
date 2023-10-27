@@ -77,17 +77,6 @@ public final class AnimalMagnetismPlugin extends OptionHandler {
 		case 10500:
 			player.getPacketDispatch().sendMessage("Perhaps you should wait a few hundred years or so?");
 			break;
-		case 4251:
-		case 4252:
-                        if (!hasRequirement(player, "Ghosts Ahoy"))
-                            return true;
-			if (option.equalsIgnoreCase("empty")) {
-				handleEctophial(player, (Item) node);
-			} else {
-				player.getInventory().remove(node.asItem());
-				player.sendMessage("The ectophial disappears as it hits the ground...");
-			}
-			break;
 		case 10492:
 			open(player);
 			break;
@@ -121,34 +110,6 @@ public final class AnimalMagnetismPlugin extends OptionHandler {
 		clearCache(player);
 		player.getInterfaceManager().open(new Component(480));
 		player.getPacketDispatch().sendMessage("You fiddle with the notes.");
-	}
-
-	/**
-	 * Handles the ectophial emptying.
-	 * @param player the player.
-	 * @param item the item.
-	 */
-	private void handleEctophial(final Player player, final Item item) {
-		if(teleport(player,Location.create(3658, 3517, 0), TeleportType.ECTOPHIAL)) {
-			player.getInventory().replace(new Item(4252), item.getSlot());
-			player.sendMessage("...and the world changes around you.", 4);
-			playAudio(player, 4580);
-			player.sendMessage("You empty the ectoplasm onto the ground around your feet...");
-			player.getPulseManager().run(new Pulse(9, player) {
-				@Override
-				public boolean pulse() {
-					player.faceLocation(new Location(3659, 3519, 0));
-					if (player.getInventory().containsItem(new Item(4252))) {
-						player.animate(Animation.create(1652));
-						playAudio(player, Sounds.FILL_ECTOPLASM_1132);
-						player.getInventory().remove(new Item(4252));
-						player.getInventory().add(item);
-						player.sendMessage("You refill the ectophial from the Ectofuntus.");
-					}
-					return true;
-				}
-			});
-		}
 	}
 
 	/**

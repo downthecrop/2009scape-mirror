@@ -506,13 +506,6 @@ public class TeleportManager {
 						delay++;
 						return false;
 					}
-
-					@Override
-					public void stop() {
-						super.stop();
-						entity.unlock();
-						entity.lock(4);
-					}
 				};
 			}
 		},
