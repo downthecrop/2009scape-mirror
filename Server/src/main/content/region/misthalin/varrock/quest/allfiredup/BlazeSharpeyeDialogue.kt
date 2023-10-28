@@ -38,7 +38,7 @@ class BlazeSharpeyeDialogue(player: Player? = null) : DialoguePlugin(player) {
             102 -> player("It sounds like you've already got everything figured","out. How do I fit into this?").also { stage++ }
             103 -> npc("Well, to test these beacons, we need someone to light a","couple of them for us, so that we can determine","whether or not they'll actually be visible.").also { stage++ }
             104 -> player("You mean, you went out and built these huge things","without knowing that they'd work?").also { stage++ }
-            105 -> npc("Dont interrupt. Now, yours truly has recruited some","of the sharpest eyes this side of the River Salve to look","after these beacons and to watch the horizon for signs","of danger.").also { stage++ }
+            105 -> npc("Don't interrupt. Now, yours truly has recruited some","of the sharpest eyes this side of the River Salve to look","after these beacons and to watch the horizon for signs","of danger.").also { stage++ }
             106 -> npc("In case of emergency, we've all got a supply of logs","and can start a fire faster than a cat can sneeze.").also { stage++ }
             107 -> npc("As soon as we spot a threat from the Wilderness or the","glow from another beacon, we can light our own","beacons and send a warning right across Misthalin,","faster than any courier could ever run.").also { stage++ }
             108 -> npc("We've agreed to use gnomish firelighters to colour the","flames of our beacons' fires in an actual emergency, so","it's safe to test the network with normal fires.").also { stage++ }
@@ -46,7 +46,7 @@ class BlazeSharpeyeDialogue(player: Player? = null) : DialoguePlugin(player) {
             110 -> npc("I need you to light a couple of beacons for me to make","sure we can see the glow from the flames over the","horizon.").also { stage++ }
             111 -> npc("So! First of all, you'll need to know how to light a beacon.").also { stage++ }
             112 -> npc("Our technique is super-secret, but quite effective. All","you do is put twenty logs of the same type on a","beacon and...").also { stage++ }
-            113 -> npc(FacialExpression.AMAZED,"SET IT ON FIRE WITH A TINDERBOX").also { stage++ }
+            113 -> npc(FacialExpression.AMAZED,"SET IT ON FIRE WITH A TINDERBOX!").also { stage++ }
             114 -> player("You really enjoy your job, don't you?").also { stage++ }
             115 -> npc("Yes. Yes I do. Now, why don't you go over there and","try lighting that beacon. Show us what you've got.").also { stage++; player.questRepository.getQuest("All Fired Up").setStage(player,20) }
             116 -> options("Does it matter what type of log I use?","Okay.").also { stage++ }
@@ -68,7 +68,7 @@ class BlazeSharpeyeDialogue(player: Player? = null) : DialoguePlugin(player) {
             301 -> npc("Absolutely! I can see a warm, delicious glow on the","horizon. If you have sharp eyes and know what to look","for it's trivial.").also { stage++ }
             302 -> npc("This beacon, however, is struggling at the moment.","Do you see how the fire has died down?").also { stage++ }
             303 -> player("Hmm, yes. The fire is a bit smaller and the logs look","rather charred.").also { stage++ }
-            304 -> npc("If a beacon's fire starts to die down, you can restor it","to its blazing glory by adding five logs.").also { stage++ }
+            304 -> npc("If a beacon's fire starts to die down, you can restore it","to its blazing glory by adding five logs.").also { stage++ }
             305 -> npc("You wouldn't mind topping this one up for me, would","you? Oh, how I love to see things burn!").also { stage++; player.questRepository.getQuest("All Fired Up").setStage(player, 70) }
             306 -> options("Oh, alright, then.","Don't you have logs of your own you can use?").also { stage++ }
             307 -> when(buttonId){
@@ -95,7 +95,7 @@ class BlazeSharpeyeDialogue(player: Player? = null) : DialoguePlugin(player) {
             411 -> player("Not yet, I'm afraid.").also { stage++ }
             412 -> npc("Well, what are you waiting for? This is a serious","matter! I'm sure King Roald is on the edge of his","throne, waiting for the news.").also { stage++ }
             413 -> player("I'll get right on that.").also { stage = 1000; player.questRepository.getQuest("All Fired Up").setStage(player,90) }
-            420 -> npc("Yes... YESS HAHAHAHHA FIRE").also { stage = 412 }
+            420 -> npc("Yes... YES HAHAHAHA FIRE").also { stage = 412 }
 
             1000 -> end()
         }

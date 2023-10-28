@@ -22,7 +22,7 @@ class DenulthDialogueFile : DialogueFile() {
                         if (hasAnItem(player!!, Items.CLIMBING_BOOTS_3105).exists()) {
                             playerl(FacialExpression.FRIENDLY, " I've got some climbing boots.").also { stage = 2 }
                         } else {
-                            playerl(FacialExpression.FRIENDLY, "I haven't found a way to climb up yet.?").also { stage = 3 }
+                            playerl(FacialExpression.FRIENDLY, "I haven't found a way to climb up yet.").also { stage = 3 }
                         }
                     }
                     2 -> npcl(FacialExpression.FRIENDLY, "Then hurry, friend! What are you still doing here?").also { stage = END_DIALOGUE }

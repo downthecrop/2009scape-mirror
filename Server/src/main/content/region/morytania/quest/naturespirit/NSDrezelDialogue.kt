@@ -44,7 +44,7 @@ class NSDrezelDialogue : DialogueFile() {
                     2 -> playerl(FacialExpression.NEUTRAL, "Sorry, I don't think I can help.").also { stage = END_DIALOGUE }
                 }
 
-                20 -> npcl(FacialExpression.NEUTRAL, "That's great! Many Thanks! Now then, please be aware of the Ghasts, you cannot attack them, only Filliman knew how to take them on.").also { stage++ }
+                20 -> npcl(FacialExpression.NEUTRAL, "That's great! Many thanks! Now then, please be aware of the Ghasts, you cannot attack them, only Filliman knew how to take them on.").also { stage++ }
                 21 -> npcl(FacialExpression.NEUTRAL, "Just run from them if you can. If you start to get lost, try to make your way back to the temple.").also { stage++ }
                 22 -> {
                     sendDoubleItemDialogue(player!!, Items.MEAT_PIE_2327, Items.APPLE_PIE_2323, "The cleric hands you some food.")

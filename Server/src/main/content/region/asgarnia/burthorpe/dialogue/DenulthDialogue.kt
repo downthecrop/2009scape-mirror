@@ -74,7 +74,7 @@ class DenulthDialogue(player: Player? = null) : DialoguePlugin(player) {
                 14 -> npcl(FacialExpression.HALF_WORRIED, "The way to the stronghold is treacherous, friend. Even if you manage to climb your way up, there will be many trolls defending the stronghold.").also{ stage++ }
                 15 -> showTopics(
                         Topic("I'll get Godric back!", 16),
-                        Topic("I'm sorry, there's nothing I can do.'", END_DIALOGUE)
+                        Topic("I'm sorry, there's nothing I can do.", END_DIALOGUE)
                 )
                 16 -> npcl(FacialExpression.HAPPY, "God speed friend! I would send some of my men with you, but none of them are brave enough to follow.").also {
                     stage = END_DIALOGUE
