@@ -37,13 +37,13 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Force animation + messages on all NPCs in a radius of 10 from the player.
          */
-        define("npcareaanim", Privilege.ADMIN, "::npcareaanim <lt>Animation ID<gt> <lt>String<gt>") { player, args ->
-            if (args.size < 3) {
-                reject(player, "Syntax error: ::npcareaanim <Animation ID> <String>")
+        define("npcanim", Privilege.ADMIN, "::npcanim <lt>Animation ID<gt>") { player, args ->
+            if (args.size < 2) {
+                reject(player, "Syntax error: ::npcanim <Animation ID>")
             }
             npcs = RegionManager.getLocalNpcs(player.location, 10)
             for (n in npcs) {
-                n.sendChat(args.slice(2 until args.size).joinToString(" "))
+                n.sendChat(args.slice(1 until args.size).joinToString(" "))
                 n.lock(6)
                 n.faceTemporary(player, 6)
                 n.animator.animate(Animation(args[1].toInt()))
