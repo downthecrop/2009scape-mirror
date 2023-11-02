@@ -1,6 +1,7 @@
 package content.global.ame.events.drilldemon
 
 import core.api.*
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
@@ -18,26 +19,26 @@ object DrillDemonUtils {
     val DD_SIGN_JUMP = 3
     val DD_CORRECT_OFFSET = "/save:drilldemon:offset"
     val DD_CORRECT_COUNTER = "/save:drilldemon:numcorrect"
-    val DD_AREA = ZoneBorders(3158,4817, 3168, 4823)
+    val DD_AREA = ZoneBorders(3158, 4817, 3168, 4823)
     val DD_NPC = NPCs.SERGEANT_DAMIEN_2790
 
-    fun teleport(player: Player){
-        setAttribute(player, DD_KEY_RETURN_LOC,player.location)
+    fun teleport(player: Player) {
+        setAttribute(player, DD_KEY_RETURN_LOC, player.location)
         teleport(player, Location.create(3163, 4819, 0))
         player.interfaceManager.closeDefaultTabs()
         setComponentVisibility(player, 548, 69, true)
         setComponentVisibility(player, 746, 12, true)
     }
 
-    fun changeSignsAndAssignTask(player: Player){
+    fun changeSignsAndAssignTask(player: Player) {
         setVarp(player, DD_SIGN_VARP, 0)
         val tempList = arrayListOf(DD_SIGN_JOG, DD_SIGN_JUMP, DD_SIGN_PUSHUP, DD_SIGN_SITUP).shuffled().toMutableList()
         val tempOffsetList = arrayListOf(1335, 1336, 1337, 1338).shuffled().toMutableList()
         val task = tempList.random()
         val taskOffset = tempOffsetList.random()
 
-        setAttribute(player, DD_KEY_TASK,task)
-        setAttribute(player, DD_CORRECT_OFFSET,taskOffset)
+        setAttribute(player, DD_KEY_TASK, task)
+        setAttribute(player, DD_CORRECT_OFFSET, taskOffset)
 
         tempList.remove(task)
         tempOffsetList.remove(taskOffset)
@@ -47,7 +48,7 @@ object DrillDemonUtils {
         }
     }
 
-    fun getVarbitForId(id: Int): Int{
+    fun getVarbitForId(id: Int): Int {
         return when (id) {
             10076 -> 1335
             10077 -> 1336
@@ -57,7 +58,7 @@ object DrillDemonUtils {
         }
     }
 
-    fun getMatTask(id: Int, player: Player): Int{
+    fun getMatTask(id: Int, player: Player): Int {
         return getVarbit(player, getVarbitForId(id))
     }
 
@@ -85,14 +86,18 @@ object DrillDemonUtils {
     }
 
     fun reward(player: Player) {
-        val hasHat = hasAnItem(player, Items.CAMO_HELMET_6656).container != null
-        val hasShirt = hasAnItem(player, Items.CAMO_TOP_6654).container != null
-        val hasPants = hasAnItem(player, Items.CAMO_BOTTOMS_6655).container != null
-        when {
-            !hasHat -> addItemOrDrop(player, Items.CAMO_HELMET_6656)
-            !hasShirt -> addItemOrDrop(player, Items.CAMO_TOP_6654)
-            !hasPants -> addItemOrDrop(player, Items.CAMO_BOTTOMS_6655)
-            else -> addItemOrDrop(player, Items.COINS_995, 500)
+        queueScript(player, 2, QueueStrength.SOFT) {
+            val hasHat = hasAnItem(player, Items.CAMO_HELMET_6656).container != null
+            val hasShirt = hasAnItem(player, Items.CAMO_TOP_6654).container != null
+            val hasPants = hasAnItem(player, Items.CAMO_BOTTOMS_6655).container != null
+            when {
+                !hasHat -> addItemOrDrop(player, Items.CAMO_HELMET_6656)
+                !hasShirt -> addItemOrDrop(player, Items.CAMO_TOP_6654)
+                !hasPants -> addItemOrDrop(player, Items.CAMO_BOTTOMS_6655)
+                else -> addItemOrDrop(player, Items.COINS_995, 500)
+            }
+            return@queueScript stopExecuting(player)
         }
+
     }
 }

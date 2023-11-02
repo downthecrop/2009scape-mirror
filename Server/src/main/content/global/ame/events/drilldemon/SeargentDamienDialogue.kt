@@ -1,10 +1,11 @@
 package content.global.ame.events.drilldemon
 
-import core.api.*
+import core.api.getAttribute
+import core.api.sendItemDialogue
+import core.api.unlock
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
-
 import core.tools.END_DIALOGUE
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
