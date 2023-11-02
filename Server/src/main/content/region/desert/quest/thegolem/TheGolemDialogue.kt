@@ -1,14 +1,17 @@
 package content.region.desert.quest.thegolem
 
 import core.api.*
+import core.game.dialogue.DialoguePlugin
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
+import core.game.dialogue.DialogueBuilder
+import core.game.dialogue.DialogueBuilderFile
 
 @Initializable
-public final class ClayGolemDialoguePlugin(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
-    override fun newInstance(player: Player): core.game.dialogue.DialoguePlugin {
+public final class ClayGolemDialoguePlugin(player: Player? = null) : DialoguePlugin(player) {
+    override fun newInstance(player: Player): DialoguePlugin {
         return ClayGolemDialoguePlugin(player)
     }
     override fun open(vararg objects: Any?): Boolean {
@@ -24,8 +27,8 @@ public final class ClayGolemDialoguePlugin(player: Player? = null) : core.game.d
     }
 }
 
-class ClayGolemDialogueFile : core.game.dialogue.DialogueBuilderFile() {
-    override fun create(b: core.game.dialogue.DialogueBuilder) {
+class ClayGolemDialogueFile : DialogueBuilderFile() {
+    override fun create(b: DialogueBuilder) {
         val opt1 = b.onQuestStages("The Golem", 0)
             .npc("Damage... severe...", "task... incomplete...")
             .options()
@@ -33,7 +36,7 @@ class ClayGolemDialogueFile : core.game.dialogue.DialogueBuilderFile() {
             .optionIf("Shall I try to repair you?") { player -> return@optionIf player.questRepository.getQuest("The Golem").hasRequirements(player) }
             .playerl("Shall I try to repair you?")
             .npcl("Repairs... needed...")
-            .endWith(){ player -> if (player.questRepository.getStage("The Golem") < 1 ) { setQuestStage(player, "The Golem", 1) } }
+            .endWith(){ _, player -> if (player.questRepository.getStage("The Golem") < 1 ) { setQuestStage(player, "The Golem", 1) } }
         opt1
             .option("I'm not going to find a conversation here!")
             .playerl("I'm not going to find a conversation here!")
@@ -49,7 +52,7 @@ class ClayGolemDialogueFile : core.game.dialogue.DialogueBuilderFile() {
             .npcl("A great demon. It broke through from its dimension to attack the city.")
             .npcl("The golem army was created to fight it. Many were destroyed, but we drove the demon back!")
             .npcl("The demon is still wounded. You must open the portal so that I can strike the final blow and complete my task.")
-            .endWith() { player -> setQuestStage(player, "The Golem", 3) }
+            .endWith() { _, player -> setQuestStage(player, "The Golem", 3) }
         b.onQuestStages("The Golem", 3)
             .npcl("The demon is still wounded. You must open the portal so that I can strike the final blow and complete my task.")
             .end()
@@ -59,32 +62,32 @@ class ClayGolemDialogueFile : core.game.dialogue.DialogueBuilderFile() {
             .npcl("The demon must be defeated...")
             .playerl("No, you don't understand. I saw the demon's skeleton. It must have died of its wounds.")
             .npcl("Demon must be defeated! Task incomplete.")
-            .endWith() { player -> setQuestStage(player, "The Golem", 5) }
+            .endWith() { _, player -> setQuestStage(player, "The Golem", 5) }
         b.onQuestStages("The Golem", 5)
             .npcl("Task incomplete.")
             .playerl("Oh, how am I going to convince you?")
-            .endWith() { player -> setQuestStage(player, "The Golem", 6) }
+            .endWith() { _, player -> setQuestStage(player, "The Golem", 6) }
         b.onQuestStages("The Golem", 6, 7)
             .npcl("My task is incomplete. You must open the portal so I can defeat the great demon.")
             .playerl("I already told you, he's dead!")
             .npcl("Task incomplete.")
             .playerl("Oh, how am I going to convince you?")
-            .endWith() { player -> if(player.questRepository.getStage("The Golem") < 7) { setQuestStage(player, "The Golem", 7) } }
+            .endWith() { df, player -> if(player.questRepository.getStage("The Golem") < 7) { setQuestStage(player, "The Golem", 7) } }
     }
 }
 
-class ClayGolemProgramDialogueFile : core.game.dialogue.DialogueBuilderFile() {
-    override fun create(b: core.game.dialogue.DialogueBuilder) {
+class ClayGolemProgramDialogueFile : DialogueBuilderFile() {
+    override fun create(b: DialogueBuilder) {
         b.onQuestStages("The Golem", 8)
             .npc("New instructions...", "Updating program...")
             .npcl("Task complete!")
             .npcl("Thank you. Now my mind is at rest.")
-            .endWith() { player -> finishQuest(player, "The Golem") }
+            .endWith() { _, player -> finishQuest(player, "The Golem") }
     }
 }
 
-class CuratorHaigHalenGolemDialogue : core.game.dialogue.DialogueBuilderFile() {
-    override fun create(b: core.game.dialogue.DialogueBuilder) {
+class CuratorHaigHalenGolemDialogue : DialogueBuilderFile() {
+    override fun create(b: DialogueBuilder) {
         val opt1 = b.onQuestStages("The Golem", 3)
             .npcl("Ah yes, a very impressive artefact. The people of that city were excellent sculptors.")
             .npcl("It's in the display case upstairs.")

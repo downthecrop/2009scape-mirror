@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static core.tools.DialogueConstKt.END_DIALOGUE;
 
@@ -323,13 +325,61 @@ public final class DialogueInterpreter {
      * @param itemId The item id.
      */
     public Component sendItemMessage(int itemId, String... messages) {
-        player.getInterfaceManager().openChatbox(131);
-        String message = messages[0];
-        for (int i = 1; i < messages.length; i++) {
-            message += "<br>" + messages[i];
+        if(1 <= messages.length && messages.length < 4) {
+            ArrayList<String> packedMessages = new ArrayList();
+            for(int i = 0; i < messages.length/2; i++) {
+                packedMessages.add(messages[i] + "<br>" + messages[i+1]);
+            }
+            if(messages.length % 2 == 1) {
+                packedMessages.add(messages[messages.length-1]);
+            }
+
+            int interfaceId = 241 + (packedMessages.size() - 1);
+            player.getInterfaceManager().openChatbox(interfaceId);
+            player.getPacketDispatch().sendItemOnInterface(itemId, 1, interfaceId, 1);
+            ItemDefinition itemDef = ItemDefinition.forId(itemId);
+            player.getPacketDispatch().sendAngleOnInterface(interfaceId, 1, itemDef.getModelZoom() / 2, itemDef.getModelRotationX(), itemDef.getModelRotationY());
+            player.getPacketDispatch().sendString("", interfaceId, 3);
+            for(int i = 0; i < packedMessages.size(); i++) {
+                //System.out.printf("sendItemMessage[%d]: %s\n", i, packedMessages[i]);
+                player.getPacketDispatch().sendString(packedMessages.get(i), interfaceId, 4+i);
+            }
+        } else {
+            int interfaceId = 131;
+            //int interfaceId = 173;
+            //int interfaceId = 519;
+            //int interfaceId = 757;
+            //int interfaceId = 760;
+            player.getInterfaceManager().openChatbox(interfaceId);
+            String message = messages[0];
+            for (int i = 1; i < messages.length; i++) {
+                message += "<br>" + messages[i];
+            }
+            switch(interfaceId) {
+                case 131:
+                    player.getPacketDispatch().sendString(message, 131, 1);
+                    player.getPacketDispatch().sendItemOnInterface(itemId, 1, 131, 2);
+                    break;
+                case 173:
+                    player.getPacketDispatch().sendString(message, 173, 4);
+                    player.getPacketDispatch().sendString("", 173, 3);
+                    player.getPacketDispatch().sendItemOnInterface(itemId, 1, 173, 1);
+                    break;
+                case 519:
+                    player.getPacketDispatch().sendString(message, 519, 1);
+                    player.getPacketDispatch().sendItemOnInterface(itemId, 1, 519, 0);
+                    break;
+                case 757:
+                    player.getPacketDispatch().sendString(message, 757, 2);
+                    player.getPacketDispatch().sendString("", 757, 1);
+                    player.getPacketDispatch().sendItemOnInterface(itemId, 1, 757, 0);
+                    break;
+                case 760:
+                    player.getPacketDispatch().sendString(message, 760, 0);
+                    player.getPacketDispatch().sendItemOnInterface(itemId, 1, 760, 1);
+                    break;
+            }
         }
-        player.getPacketDispatch().sendString(message, 131, 1);
-        player.getPacketDispatch().sendItemOnInterface(itemId, 1, 131, 2);
         return player.getInterfaceManager().getChatbox();
     }
 
@@ -337,14 +387,7 @@ public final class DialogueInterpreter {
      * Send a message with an item next to it.
      */
     public Component sendItemMessage(final Item item, String... messages) {
-        player.getInterfaceManager().openChatbox(131);
-        String message = messages[0];
-        for (int i = 1; i < messages.length; i++) {
-            message += "<br>" + messages[i];
-        }
-        player.getPacketDispatch().sendString(message, 131, 1);
-        player.getPacketDispatch().sendItemOnInterface(item.getId(), item.getAmount(), 131, 2);
-        return player.getInterfaceManager().getChatbox();
+        return sendItemMessage(item.getId(), messages);
     }
 
     /**
@@ -455,6 +498,19 @@ public final class DialogueInterpreter {
         return sendDialogues(npcId, expression == null ? -1 : expression.getAnimationId(), messages);
     }
 
+    static Pattern GENDERED_SUBSTITUTION = Pattern.compile("@g\\[([^,]*),([^\\]]*)\\]");
+    public static String doSubstitutions(Player player, String msg) {
+        msg = msg.replace("@name", player.getUsername());
+        StringBuilder sb = new StringBuilder();
+        Matcher m = GENDERED_SUBSTITUTION.matcher(msg);
+        int index = player.isMale() ? 1 : 2;
+        while(m.find()) {
+            m.appendReplacement(sb, m.group(index));
+        }
+        m.appendTail(sb);
+        return sb.toString();
+    }
+
     /**
      * Send dialogues based on the amount of specified messages.
      * @param npcId The npc id.
@@ -474,6 +530,7 @@ public final class DialogueInterpreter {
         }
         player.getPacketDispatch().sendAnimationInterface(expression, interfaceId, 2);
         if (npc) {
+            player.getPacketDispatch().sendItemOnInterface(-1, 1, interfaceId, 1);
             player.getPacketDispatch().sendNpcOnInterface(npcId, interfaceId, 2);
             player.getPacketDispatch().sendString(NPCDefinition.forId(npcId).getName(), interfaceId, 3);
         } else {
@@ -481,7 +538,7 @@ public final class DialogueInterpreter {
             player.getPacketDispatch().sendString(player.getUsername(), interfaceId, 3);
         }
         for (int i = 0; i < messages.length; i++) {
-            player.getPacketDispatch().sendString(messages[i].toString().replace("@name", player.getUsername()), interfaceId, (i + 4));
+            player.getPacketDispatch().sendString(doSubstitutions(player, messages[i].toString()), interfaceId, (i + 4));
         }
         player.getInterfaceManager().openChatbox(interfaceId);
         player.getPacketDispatch().sendInterfaceConfig(player.getInterfaceManager().getChatbox().getId(), 3, false);

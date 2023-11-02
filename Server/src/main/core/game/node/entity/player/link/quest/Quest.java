@@ -146,6 +146,12 @@ public abstract class Quest implements Plugin<Object> {
 	}
 
 	/**
+	 * Resets the quest. This is called when ::setQuestStage is set to 0.
+	 * Useful to override and reset quest player attributes.
+	 */
+	public void reset(Player player) {}
+
+	/**
 	 * Draws a line on the journal component.
 	 * @param player The player.
 	 * @param message The message.

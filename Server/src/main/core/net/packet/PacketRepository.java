@@ -77,7 +77,7 @@ public final class PacketRepository {
 		OUTGOING_PACKETS.put(Varbit.class, new Varbit());
                 OUTGOING_PACKETS.put(ResetInterface.class, new ResetInterface());
         OUTGOING_PACKETS.put(VarcUpdate.class, new VarcUpdate());
-		OUTGOING_PACKETS.put(InterfaceSetAngle.class, new InterfaceSetAngle());
+        OUTGOING_PACKETS.put(InterfaceSetAngle.class, new InterfaceSetAngle());
 	}
 
 	/**

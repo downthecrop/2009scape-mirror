@@ -62,8 +62,9 @@ public final class AnimalMagnetismPlugin extends OptionHandler {
 	public boolean handle(Player player, Node node, String option) {
 		switch (node.getId()) {
 		case 5167:
-                        if (!hasRequirement(player, "Creature of Fenkenstrain"))
-                            break;
+			if (!hasRequirement(player, "Creature of Fenkenstrain")) {
+				break;
+			}
 			player.teleport(new Location(3577, 9927));
 			break;
 		case 5198:

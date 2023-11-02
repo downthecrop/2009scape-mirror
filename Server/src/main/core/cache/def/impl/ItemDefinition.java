@@ -61,12 +61,12 @@ public class ItemDefinition extends Definition<Item> {
 	/**
 	 * The model rotation.
 	 */
-	private int modelRotationY;
+	private int modelRotationX;
 
 	/**
 	 * The model rotation.
 	 */
-	private int modelRotationX;
+	private int modelRotationY;
 
 	/**
 	 * The model offset.
@@ -320,9 +320,9 @@ public class ItemDefinition extends Definition<Item> {
 			} else if (opcode == 4) {
 				def.modelZoom = buffer.getShort() & 0xFFFF;
 			} else if (opcode == 5) {
-				def.modelRotationY = buffer.getShort() & 0xFFFF;
-			} else if (opcode == 6) {
 				def.modelRotationX = buffer.getShort() & 0xFFFF;
+			} else if (opcode == 6) {
+				def.modelRotationY = buffer.getShort() & 0xFFFF;
 			} else if (opcode == 7) {
 				def.modelOffsetX = buffer.getShort() & 0xFFFF;
 				if (def.modelOffsetX > 32767)
@@ -495,11 +495,11 @@ public class ItemDefinition extends Definition<Item> {
 		modelOffsetY = templateReference.modelOffsetY;
 		textureColour1 = templateReference.textureColour1;
 		value = reference.value;
-		modelRotationX = templateReference.modelRotationX;
+		modelRotationY = templateReference.modelRotationY;
 		stackable = true;
 		unnoted = false;
 		modifiedModelColors = templateReference.modifiedModelColors;
-		modelRotationY = templateReference.modelRotationY;
+		modelRotationX = templateReference.modelRotationX;
 		modelZoom = templateReference.modelZoom;
 		textureColour1 = templateReference.textureColour1;
 		handlers.put(ItemConfigParser.TRADEABLE, true);
@@ -518,8 +518,8 @@ public class ItemDefinition extends Definition<Item> {
 		textureColour2 = reference.textureColour2;
 		groundActions = reference.groundActions;
 		unknownArray1 = reference.unknownArray1;
-		modelRotationY = templateReference.modelRotationY;
 		modelRotationX = templateReference.modelRotationX;
+		modelRotationY = templateReference.modelRotationY;
 		originalModelColors = reference.originalModelColors;
 		name = reference.name;
 		maleWornModelId1 = reference.maleWornModelId1;
@@ -548,7 +548,7 @@ public class ItemDefinition extends Definition<Item> {
 	public void transferRecolourDefinition(ItemDefinition reference, ItemDefinition templateReference) {
 		femaleWornModelId2 = reference.femaleWornModelId2;
 		options = new String[5];
-		modelRotationX = templateReference.modelRotationX;
+		modelRotationY = templateReference.modelRotationY;
 		name = reference.name;
 		maleWornModelId1 = reference.maleWornModelId1;
 		modelOffsetY = templateReference.modelOffsetY;
@@ -557,7 +557,7 @@ public class ItemDefinition extends Definition<Item> {
 		modelOffsetX = templateReference.modelOffsetX;
 		unknownArray1 = reference.unknownArray1;
 		stackable = reference.stackable;
-		modelRotationY = templateReference.modelRotationY;
+		modelRotationX = templateReference.modelRotationX;
 		textureColour1 = reference.textureColour1;
 		colourEquip1 = reference.colourEquip1;
 		textureColour2 = reference.textureColour2;
@@ -803,32 +803,32 @@ public class ItemDefinition extends Definition<Item> {
 	 * Gets the modelRotation1.
 	 * @return The modelRotation1.
 	 */
-	public int getModelRotation1() {
-		return modelRotationY;
+	public int getModelRotationX() {
+		return modelRotationX;
 	}
 
 	/**
 	 * Sets the modelRotation1.
 	 * @param modelRotation1 The modelRotation1 to set.
 	 */
-	public void setModelRotation1(int modelRotation1) {
-		this.modelRotationY = modelRotation1;
+	public void setModelRotationX(int modelRotation1) {
+		this.modelRotationX = modelRotation1;
 	}
 
 	/**
 	 * Gets the modelRotation2.
 	 * @return The modelRotation2.
 	 */
-	public int getModelRotation2() {
-		return modelRotationX;
+	public int getModelRotationY() {
+		return modelRotationY;
 	}
 
 	/**
 	 * Sets the modelRotation2.
 	 * @param modelRotation2 The modelRotation2 to set.
 	 */
-	public void setModelRotation2(int modelRotation2) {
-		this.modelRotationX = modelRotation2;
+	public void setModelRotationY(int modelRotation2) {
+		this.modelRotationY = modelRotation2;
 	}
 
 	/**
