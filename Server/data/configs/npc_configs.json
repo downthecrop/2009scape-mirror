@@ -10678,7 +10678,7 @@
     "attack_level": "24"
   },
   {
-    "examine": "Could his name be 'Lurch'?",
+    "examine": "It looks very hungry!",
     "melee_animation": "7183",
     "slayer_exp": "50",
     "death_animation": "7185",
@@ -12931,7 +12931,7 @@
     "attack_level": "42"
   },
   {
-    "examine": "Could his name be 'Lurch'?",
+    "examine": "It looks very hungry!",
     "melee_animation": "7183",
     "slayer_exp": "50",
     "death_animation": "7185",
