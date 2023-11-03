@@ -72424,5 +72424,21 @@
     "examine": "A delicate creature from this strange realm.",
     "name": "Fairy",
     "id": "4443"
+  },
+  {
+    "examine": "A very strange plant.",
+    "death_animation": "355",
+    "name": "Strange Plant",
+    "defence_level": "300",
+    "melee_animation": "353",
+    "lifepoints": "100",
+    "id": "408",
+    "magic_level": "200",
+    "defence_animation": "354"
+  },
+  {
+    "examine": "A very strange plant.",
+    "name": "Strange Plant",
+    "id": "407"
   }
 ]

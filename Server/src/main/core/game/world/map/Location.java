@@ -294,10 +294,10 @@ public final class Location extends Node {
 	public ArrayList<Location> getCardinalTiles() {
 		ArrayList<Location> locs = new ArrayList<>();
 
-		locs.add(transform(0, 1, 0));
-		locs.add(transform(0, -1, 0));
 		locs.add(transform(-1, 0, 0));
+		locs.add(transform(0, -1, 0));
 		locs.add(transform(1, 0, 0));
+		locs.add(transform(0, 1, 0));
 		return locs;
 	}
 

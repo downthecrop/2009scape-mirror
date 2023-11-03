@@ -2192,6 +2192,23 @@ fun getPathableRandomLocalCoordinate(target: Entity, radius: Int, center: Locati
 }
 
 /**
+ * Returns a pathable cardinal location in a 1 tile radius in order of west, south, east, north.
+ * @param entity the entity used to check if the loc is pathable
+ * @param center the center location
+ */
+fun getPathableCardinal(target: Entity, center: Location) : Location {
+    var tiles = center.cardinalTiles
+
+    for (tile in tiles) {
+        val path = Pathfinder.find(center, tile, target.size())
+        if (path.isSuccessful && !path.isMoveNear)
+            return tile
+    }
+
+    return center
+}
+
+/**
  * Returns the player's active slayer task.
  * @author bushtail
  * @param player the player whose task we are checking.
