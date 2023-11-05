@@ -328,8 +328,8 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Set a specific skill to a specific level
          */
-        define("setlevel", Privilege.ADMIN, "::setlevel <lt>SKILL NAME<gt> <lt>LEVEL<gt>", "Sets SKILL NAME to LEVEL."){player,args ->
-            if(args.size != 3) reject(player,"Usage: ::setlevel skillname level")
+        define("setlevel", Privilege.ADMIN, "::setlevel <lt>SKILL NAME<gt> <lt>LEVEL<gt> <lt>PLAYER<gt>", "Sets SKILL NAME to LEVEL for PLAYER (self if omitted)."){player,args ->
+            if(args.size < 3) reject(player,"Usage: ::setlevel skillname level")
             val skillname = args[1]
             val desiredLevel: Int? = args[2].toIntOrNull()
             if(desiredLevel == null){
@@ -337,12 +337,19 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             }
             if(desiredLevel!! > 99) reject(player,"Level must be 99 or lower.")
             val skill = Skills.getSkillByName(skillname)
-
             if(skill < 0) reject(player, "Must use a valid skill name!")
-
-            player.skills.setStaticLevel(skill,desiredLevel)
-            player.skills.setLevel(skill,desiredLevel)
-            player.skills.updateCombatLevel()
+            var target = player
+            if (args.size > 3) {
+                val n = args.slice(3 until args.size).joinToString("_")
+                val foundtarget = Repository.getPlayerByName(n)
+                if (foundtarget == null) {
+                    reject(player,"Invalid player \"${n}\" or player not online")
+                }
+                target = foundtarget!!
+            }
+            target.skills.setStaticLevel(skill,desiredLevel)
+            target.skills.setLevel(skill,desiredLevel)
+            target.skills.updateCombatLevel()
         }
 
         /**
