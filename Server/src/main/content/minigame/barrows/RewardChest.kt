@@ -21,17 +21,15 @@ import core.api.utils.WeightedItem
  */
 object RewardChest {
     private val REGULAR_DROPS = WeightBasedTable.create(
-            WeightedItem(Items.COINS_995,               1,   5306, 950.0),
-            WeightedItem(Items.MIND_RUNE_558,           60,  60,   300.0),
-            WeightedItem(Items.MIND_RUNE_558,           100, 850,  300.0),
-            WeightedItem(Items.CHAOS_RUNE_562,          115, 720,  300.0),
-            WeightedItem(Items.DEATH_RUNE_560,          15,  15,   300.0),
-            WeightedItem(Items.DEATH_RUNE_560,          70,  230,  300.0),
-            WeightedItem(Items.BLOOD_RUNE_565,          35,  230,  300.0),
-            WeightedItem(Items.BOLT_RACK_4740,          35,  280,  300.0),
-            WeightedItem(Items.TOOTH_HALF_OF_A_KEY_985, 1,    1,   25.0),
-            WeightedItem(Items.LOOP_HALF_OF_A_KEY_987,  1,    1,   25.0),
-            WeightedItem(Items.DRAGON_MED_HELM_1149,    1,    1,   3.0)
+            WeightedItem(Items.COINS_995,               1,   777, 380.0),
+            WeightedItem(Items.MIND_RUNE_558,           250, 350, 125.0),
+            WeightedItem(Items.CHAOS_RUNE_562,          115, 135, 125.0),
+            WeightedItem(Items.DEATH_RUNE_560,          70,  85,  125.0),
+            WeightedItem(Items.BLOOD_RUNE_565,          35,  45,  125.0),
+            WeightedItem(Items.BOLT_RACK_4740,          35,  40,  125.0),
+            WeightedItem(Items.TOOTH_HALF_OF_A_KEY_985, 1,   1,   3.0),
+            WeightedItem(Items.LOOP_HALF_OF_A_KEY_987,  1,   1,   3.0),
+            WeightedItem(Items.DRAGON_MED_HELM_1149,    1,   1,   1.0)
     )
     private val AHRIM  = arrayOf(4708, 4710, 4712, 4714)
     private val DHAROK = arrayOf(4716, 4718, 4720, 4722)
@@ -48,51 +46,33 @@ object RewardChest {
      */
     @JvmStatic
     fun reward(player: Player) {
-        var rewards: MutableList<Item> = ArrayList()
-
-        // Roll barrows rewards
         var barrowsRewardsIDs: MutableList<Int> = ArrayList()
         for (i in 0..5) {
             if (player.savedData.activityData.barrowBrothers[i]) {
                 barrowsRewardsIDs.addAll(BARROWS_DROP_IDS[i])
             }
         }
-        val nKilledBrothers = barrowsRewardsIDs.size / 4
-        val maxRolls = 1 + maxOf(0, RandomFunction.random(nKilledBrothers - 3, nKilledBrothers))
-        var nBarrowsRewards = 0
-        val barrowsItemChance = 5 * barrowsRewardsIDs.size
-        for (i in 0 until maxRolls) {
-            if (RandomFunction.random(3223) <= barrowsItemChance) {
-                nBarrowsRewards++
-            }
-        }
-        if (nBarrowsRewards > barrowsRewardsIDs.size) {
-            nBarrowsRewards = barrowsRewardsIDs.size
-        }
+        barrowsRewardsIDs.shuffle()
 
-        // Award all non-barrows rewards (using the remaining rolls)
-        val remainingRolls = maxRolls - nBarrowsRewards
-        if (remainingRolls > 0) {
-            val nonBarrowsRewards = REGULAR_DROPS.roll(null, remainingRolls)
-            addItem@for (i in 0 until nonBarrowsRewards.size) {
-                if (i > 0) {
-                    // If we have already awarded this item, just combine their amounts
-                    for (j in 0 until rewards.size) {
-                        if (nonBarrowsRewards[i].id == rewards[j].id) {
-                            rewards[j].amount += nonBarrowsRewards[i].amount
-                            continue@addItem
-                        }
+        var rewards: MutableList<Item> = ArrayList()
+        val nKilled = barrowsRewardsIDs.size / 4
+        roll@for (i in 0 until nKilled+1) {
+            if (barrowsRewardsIDs.size > 0 && RandomFunction.roll(450 - 58 * nKilled)) {
+                // Award a random item from a random brother
+                val reward = barrowsRewardsIDs[0]
+                rewards.add(Item(reward, 1))
+                barrowsRewardsIDs.removeAt(0)
+            } else {
+                // Award a drop from the regular drop table
+                val drop = REGULAR_DROPS.roll(null, 1)[0]
+                for (i in 0 until rewards.size) {
+                    // If we have already awarded this item, just add to the previous quantity
+                    if (rewards[i].id == drop.id) {
+                        rewards[i].amount += drop.amount
+                        continue@roll
                     }
                 }
-                rewards.add(nonBarrowsRewards[i])
-            }
-        }
-
-        // Award a random selection of barrows rewards, if rolled
-        if (nBarrowsRewards > 0) {
-            barrowsRewardsIDs.shuffle()
-            for (i in 0 until nBarrowsRewards) {
-                rewards.add(Item(barrowsRewardsIDs[i], 1))
+                rewards.add(drop)
             }
         }
 
