@@ -28,7 +28,7 @@ val CREATURE_OF_FENKENSTRAIN = "Creature of Fenkenstrain"
  * 100 - Stoped Fenkenstrain by stealing ring of charos
  */
 @Initializable
-class CreatureOfFenkenstrain : Quest("Creature of Fenkenstrain", 41, 40, 1, 399, 0, 1, 9) {
+class CreatureOfFenkenstrain : Quest("Creature of Fenkenstrain", 41, 40, 2, 399, 0, 1, 9) {
 
     companion object {
         const val questName = "Creature of Fenkenstrain"
