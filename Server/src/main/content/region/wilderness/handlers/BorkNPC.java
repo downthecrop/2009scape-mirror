@@ -49,7 +49,7 @@ public class BorkNPC extends AbstractNPC {
 	/**
 	 * The chats the legion can say.
 	 */
-	private static final String[] LEGION_CHATS = new String[] { "For bork!", "Die human!", "Resistance is futile!", "We are the collective!", "From a triangle!!", "Hup! 2... 3... 4!!" };
+	private static final String[] LEGION_CHATS = new String[] { "For Bork!", "Die, human!", "Resistance is futile!", "We are the collective!", "Form a triangle!!", "To the attack!", "Hup! 2... 3... 4!!" };
 
 	/**
 	 * The chance items.

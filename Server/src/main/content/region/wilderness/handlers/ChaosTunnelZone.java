@@ -123,7 +123,7 @@ public final class ChaosTunnelZone extends MapZone implements Plugin<Object> {
 				break;
 			case 28779:// portal
 				if (target.getLocation().equals(new Location(3326, 5469, 0))) {
-					entity.asPlayer().sendMessage("You can't go back throught his portal.");
+					entity.asPlayer().sendMessage("You can't go back through this portal.");
 					return true;
 				}
 				teleport(entity.asPlayer(), target.asScenery());

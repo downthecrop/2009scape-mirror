@@ -65,7 +65,7 @@ public final class GliderPulse extends Pulse {
             player.getProperties().setTeleportLocation(glider.getLocation());
         } else if (count == 5) {
             if (crash) {
-                player.getPacketDispatch().sendMessage("The glider becomes uncontrolable and crashes down...");
+                player.getPacketDispatch().sendMessage("The glider becomes uncontrollable and crashes down...");
                 PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.RESET, 0, 0, 0, 0, 0));
             }
             player.getInterfaceManager().closeOverlay();
