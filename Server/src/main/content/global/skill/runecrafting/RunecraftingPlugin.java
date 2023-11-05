@@ -1,5 +1,6 @@
 package content.global.skill.runecrafting;
 
+import content.global.travel.EssenceTeleport;
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
@@ -13,15 +14,14 @@ import core.game.node.entity.player.info.Rights;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
+import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.MinimapStateContext;
 import core.net.packet.out.MinimapState;
+import core.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import content.global.travel.EssenceTeleport;
-import core.game.world.GameWorld;
-import core.plugin.ClassScanner;
 
 import static core.api.ContentAPIKt.hasRequirement;
 
@@ -38,7 +38,6 @@ public class RunecraftingPlugin extends OptionHandler {
 		ClassScanner.definePlugin(new TiaraPlugin());
 		ClassScanner.definePlugin(new RunePouchPlugin());
 		ClassScanner.definePlugin(new EnchantTiaraPlugin());
-		ClassScanner.definePlugin(new MysteriousRuinPlugin());
 		ClassScanner.definePlugin(new CombinationRunePlugin());
 		SceneryDefinition.forId(2492).getHandlers().put("option:use", this);
 		NPCDefinition.forId(553).getHandlers().put("option:teleport", this);
@@ -107,15 +106,8 @@ public class RunecraftingPlugin extends OptionHandler {
 			final Talisman talisman = Talisman.forItem(((Item) node));
 			talisman.locate(player);
 			break;
-		case "enter":
-			final MysteriousRuin ruin = MysteriousRuin.forObject(((Scenery) node));
-			if (ruin == null) {
-				return true;
-			}
-			ruin.enter(player);
-			break;
 		case "climb":
-			int id = ((Scenery) node).getId();
+			int id = (node).getId();
 			switch (id) {
 			case 26849:
 				ClimbActionHandler.climb(player, null, new Location(3271, 4861, 0));
@@ -136,11 +128,6 @@ public class RunecraftingPlugin extends OptionHandler {
 		for (Altar altar : Altar.values()) {
 			SceneryDefinition.forId(altar.getObject()).getHandlers().put("option:craft-rune", this);
 			SceneryDefinition.forId(altar.getPortal()).getHandlers().put("option:use", this);
-		}
-		for (MysteriousRuin ruin : MysteriousRuin.values()) {
-			for (int i : ruin.getObject()) {
-				SceneryDefinition.forId(i).getHandlers().put("option:enter", this);
-			}
 		}
 		for (Talisman talisman : Talisman.values()) {
 			ItemDefinition.forId(talisman.getTalisman().getId()).getHandlers().put("option:locate", this);

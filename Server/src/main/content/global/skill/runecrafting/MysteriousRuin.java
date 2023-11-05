@@ -1,11 +1,7 @@
 package content.global.skill.runecrafting;
 
-import core.game.container.impl.EquipmentContainer;
-import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
-
-import static core.api.ContentAPIKt.hasRequirement;
 
 /**
  * Represents a mysterious ruin.
@@ -65,32 +61,6 @@ public enum MysteriousRuin {
 		this.end = end;
 		this.talisman = talisman;
 		this.tiara = tiara;
-	}
-
-	/**
-	 * Enters the ruin.
-	 * @param player the player.
-	 */
-	public void enter(Player player) {
-                if (this == DEATH) {
-                    if (!hasRequirement(player, "Mourning's End Part II"))
-                        return;
-                }
-                if (this == BLOOD) {
-                    if (!hasRequirement(player, "Legacy of Seergaze"))
-                        return;
-                }
-		if (player.getEquipment().get(EquipmentContainer.SLOT_HAT) == null) {
-			return;
-		}
-		if (getTiara() == null) {
-			return;
-		}
-		if (getTiara().getTiara().getId() != player.getEquipment().get(EquipmentContainer.SLOT_HAT).getId()) {
-			return;
-		}
-		player.getProperties().setTeleportLocation(getEnd());
-		player.getPacketDispatch().sendMessage("You feel a powerful force take hold of you...");
 	}
 
 	/**
