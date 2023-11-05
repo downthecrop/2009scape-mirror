@@ -203,7 +203,7 @@ public final class ZoneMonitor {
 	 * @return {@code True} if so.
 	 */
 	public boolean teleport(int type, Node node) {
-		if (type != -1 && entity.isTeleBlocked()) {
+		if (type != -1 && entity.isTeleBlocked() && !canTeleportByGlory(type, node)) {
 			if (entity.isPlayer()) {
 				entity.asPlayer().sendMessage("A magical force has stopped you from teleporting.");
 			}
@@ -215,6 +215,34 @@ public final class ZoneMonitor {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * Checks if a player can teleport with a glory in >= 1 <= 30 wilderness level
+	 * @return {@code True} if so.
+	 */
+	private boolean canTeleportByGlory(int type, Node node) {
+		if (type != 1 || !node.asItem().getName().contains("Amulet of glory")) {
+			return false;
+		}
+
+		if (entity.timers.getTimer("teleblock") != null)
+			return false;
+
+		if (entity.getZoneMonitor().isRestricted(ZoneRestriction.TELEPORT)) {
+			return false;
+		}
+
+		if (entity.getLocks().isTeleportLocked()) {
+			if (entity.isPlayer()) {
+				Player p = entity.asPlayer();
+				if (p.getSkullManager().getLevel() >= 1 && p.getSkullManager().getLevel() <= 30) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	/**
