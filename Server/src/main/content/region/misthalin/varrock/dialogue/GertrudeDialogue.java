@@ -1,5 +1,8 @@
 package content.region.misthalin.varrock.dialogue;
 
+import content.global.skill.summoning.pet.Pet;
+import content.global.skill.summoning.pet.PetDetails;
+import core.game.container.Container;
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC;
@@ -8,6 +11,8 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+
+import java.util.Map;
 
 /**
  * Represents the gertrude dialogue plugin.
@@ -326,20 +331,18 @@ public final class GertrudeDialogue extends DialoguePlugin {
 		case 503:
 			boolean has = false;
 			int[] kittens = new int[] { 1555, 1556, 1557, 1558, 1559, 1560, 7583 };
-			for (int i : kittens) {
-				// if (player.getFamiliarManager().hasFamiliar()) {TODO:Pet
-				// if
-				// (player.getFamiliarManager().getFamiliar().getDetails()
-				// instanceof PetDetails) {
-				// final PetDetails details = ((PetDetails)
-				// player.getFamiliarManager().getFamiliar().getDetails());
-				// if (details.getPet().getBabyItemId() == i) {
-				// has = true;
-				// break;
-				// }
-				// }
-				// }
-				if (player.getInventory().contains(i, 1) || player.getBank().contains(i, 1)) {
+			if (player.getFamiliarManager().hasFamiliar()) {
+				Pet pet = (Pet) player.getFamiliarManager().getFamiliar();
+				for (int i : kittens) {
+					if (pet.getItemId() == i) {
+						has = true;
+						break;
+					}
+				}
+			}
+			Container[] searchSpace = {player.getInventory(), player.getBankPrimary(), player.getBankSecondary()};
+			for (Container container : searchSpace) {
+				if (container.containsAtLeastOneItem(kittens)) {
 					has = true;
 					break;
 				}

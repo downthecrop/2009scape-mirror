@@ -113,6 +113,14 @@ public abstract class Node {
 	}
 
 	/**
+	 * Gets the node id hash (only relevant if the node is an item).
+	 * @return the id hash.
+	 */
+	public int getIdHash() {
+		return this instanceof Item ? ((Item) this).getIdHash() : -1;
+	}
+
+	/**
 	 * Gets the center location.
 	 * @return The center location.
 	 */

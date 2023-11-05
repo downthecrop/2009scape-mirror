@@ -418,14 +418,10 @@ public final class FamiliarManager {
 
 	/**
 	 * Removes the details for this pet.
-	 * @param itemId The item id of the pet.
+	 * @param itemIdHash The item id hash of the pet.
 	 */
-	public void removeDetails(int itemId) {
-		Pets pets = Pets.forId(itemId);
-		if (pets == null) {
-			return;
-		}
-		petDetails.remove(pets.getBabyItemId());
+	public void removeDetails(int itemIdHash) {
+		petDetails.remove(itemIdHash);
 	}
 
 	/**
