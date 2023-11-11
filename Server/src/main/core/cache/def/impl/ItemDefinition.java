@@ -1551,7 +1551,6 @@ public class ItemDefinition extends Definition<Item> {
 		if (!player.getAttribute("equip_stats_open", false)) {
 			return;
 		}
-		PacketRepository.send(WeightUpdate.class, player.getPacketDispatch().getContext());
 		int index = 0;
 		int[] bonuses = player.getProperties().getBonuses();
 		for (int i = 36; i < 50; i++) {
@@ -1563,8 +1562,6 @@ public class ItemDefinition extends Definition<Item> {
 			player.getPacketDispatch().sendString(BONUS_NAMES[index++] + bonusValue, 667, i);
 		}
 		player.getPacketDispatch().sendString("Attack bonus", 667, 34);
-		DecimalFormat dec = new DecimalFormat("#.#");
-		player.getPacketDispatch().sendString(dec.format(player.getSettings().getWeight())+" kg", 667, 32);
 	}
 
 	/**

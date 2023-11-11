@@ -70,7 +70,7 @@ public final class PacketRepository {
 		OUTGOING_PACKETS.put(CommunicationMessage.class, new CommunicationMessage());		//
 		OUTGOING_PACKETS.put(UpdateClanChat.class, new UpdateClanChat());					//
 		OUTGOING_PACKETS.put(UpdateGroundItemAmount.class, new UpdateGroundItemAmount());   //
-		OUTGOING_PACKETS.put(WeightUpdate.class, new WeightUpdate());						//
+		//OUTGOING_PACKETS.put(WeightUpdate.class, new WeightUpdate());						//
 		OUTGOING_PACKETS.put(UpdateRandomFile.class, new UpdateRandomFile());				//
 		OUTGOING_PACKETS.put(InstancedLocationUpdate.class, new InstancedLocationUpdate());	//
 		OUTGOING_PACKETS.put(CSConfigPacket.class, new CSConfigPacket());					//

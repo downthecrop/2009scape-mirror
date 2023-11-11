@@ -363,7 +363,6 @@ public final class EquipmentContainer extends Container {
 		if (!player.getInterfaceManager().hasMainComponent(667)) {
 			return;
 		}
-		PacketRepository.send(WeightUpdate.class, player.getPacketDispatch().getContext());
 		int index = 0;
 		int[] bonuses = player.getProperties().getBonuses();
 		for (int i = 36; i < 50; i++) {

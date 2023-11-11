@@ -1,5 +1,6 @@
 package content.global.skill.cooking
 
+import core.api.amountInInventory
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
@@ -15,6 +16,7 @@ import org.rs09.consts.Items.UNCOOKED_CAKE_1889
 /**
  * @author Ceikry
  * @author bushtail - added bear meat for sinew making
+ * @author Woah     - added single food cooking
  */
 class CookingRewrite : InteractionListener {
 
@@ -47,7 +49,17 @@ class CookingRewrite : InteractionListener {
             }
 
             //cook a standard item
-            player.dialogueInterpreter.open(CookingDialogue(item.id,obj))
+            if (amountInInventory(player, item.id) > 1) {
+                player.dialogueInterpreter.open(CookingDialogue(item.id,obj))
+            } else {
+            // Don't display dialogue if player only has *1* of the item
+                val product = if (CookableItems.intentionalBurn(item.id)) { // checks intentional burning
+                    CookableItems.getIntentionalBurn(item.id).id
+                } else {
+                    CookableItems.forId(item.id).cooked
+                }
+                cook(player, obj, item.id, product, 1)
+            }
             return@onUseWith true
         }
 

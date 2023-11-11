@@ -232,7 +232,7 @@ public final class WildernessZone extends MapZone {
 		if (p.getSkullManager().isWildernessDisabled()) {
 			return;
 		}
-		p.getInterfaceManager().openWildernessOverlay(new Component(381));
+		p.getInterfaceManager().openOverlay(new Component(381));
 		p.getSkullManager().setLevel(getWilderness(p));
 		p.getPacketDispatch().sendString("Level: " + p.getSkullManager().getLevel(), 381, 1);
 		if(GameWorld.getSettings().getWild_pvp_enabled()) {

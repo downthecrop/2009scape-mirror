@@ -3,7 +3,6 @@ package content.global.skill.cooking
 import core.api.*
 import core.cache.def.impl.ItemDefinition
 import core.game.node.scenery.Scenery
-import content.global.skill.cooking.CookableItems
 import content.global.skill.cooking.CookingRewrite.Companion.cook
 import core.net.packet.PacketRepository
 import core.net.packet.context.ChildPositionContext
@@ -15,6 +14,7 @@ import core.tools.START_DIALOGUE
 /**
  * @author Ceikry
  * @author bushtail - fixing it up
+ * @auther Woah     - for more fixing up
  */
 
 class CookingDialogue(vararg val args: Any) : DialogueFile(){
@@ -47,7 +47,7 @@ class CookingDialogue(vararg val args: Any) : DialogueFile(){
                                 "Dry the meat into sinew",
                                 "Cook the meat"
                             )
-                            stage = 100
+                            stage = if (amountInInventory(player!!, initial) > 1) 100 else 101
                             return
                         }
                     }
@@ -78,11 +78,24 @@ class CookingDialogue(vararg val args: Any) : DialogueFile(){
                 when (buttonID) {
                     1 -> {
                         product = Items.SINEW_9436
-                        display(Items.COOKED_MEAT_2142)
+                        display()
                     }
                     2 -> {
                         product = CookableItems.forId(initial).cooked
                         display()
+                    }
+                }
+            }
+
+            101 -> {
+                when (buttonID) {
+                    1 -> {
+                        end()
+                        cook(player!!, `object`, initial, Items.SINEW_9436, 1)
+                    }
+                    2 -> {
+                        end()
+                        cook(player!!, `object`, initial, CookableItems.forId(initial).cooked, 1)
                     }
                 }
             }
@@ -99,12 +112,23 @@ class CookingDialogue(vararg val args: Any) : DialogueFile(){
         return -1
     }
 
-    fun display(vararg args : Int) {
+    fun display() {
+        player!!.packetDispatch.sendItemZoomOnInterface(initial, 160, 307, 2)
+        player!!.packetDispatch.sendString("<br><br><br><br>${ItemDefinition.forId(initial).name}", 307, 6)
+
+        // Re-format this interface because it is not formatted properly for the chat-box
+        // Swords
+        PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 307, 0, 12, 15))
+        PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 307, 1, 431, 15))
+        // "How many would you like to cook?"
+        PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 307, 7, 0, 12))
+        // Right click context menu boxes
+        PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 307, 3, 58, 27))
+        PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 307, 4, 58, 27))
+        PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 307, 5, 58, 27))
+        PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 307, 6, 58, 27))
+
         player!!.interfaceManager.openChatbox(307)
-        PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 307, 3, 60, 90))
-        PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 307, 2, 208, 20))
-        player!!.packetDispatch.sendItemZoomOnInterface(if(args.size == 1) args[0] else product, 160, 307, 2)
-        player!!.packetDispatch.sendString(ItemDefinition.forId(product).name, 307, 3)
         stage = 1
     }
 }

@@ -53,7 +53,7 @@ public enum InterfaceType {
     /**
      * Wilderness overlay
      */
-    WILDERNESS_OVERLAY(Components.TOPLEVEL_548, Components.TOPLEVEL_FULLSCREEN_746, 11, 3);
+    OVERLAY_B(Components.TOPLEVEL_548, Components.TOPLEVEL_FULLSCREEN_746, 11, 3);
 
 	/**
 	 * The fixed window pane id.

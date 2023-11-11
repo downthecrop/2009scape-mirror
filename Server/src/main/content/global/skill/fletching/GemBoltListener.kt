@@ -53,7 +53,7 @@ class GemBoltListener : InteractionListener {
 
 
             val handler: SkillDialogueHandler =
-                    object : SkillDialogueHandler(player, SkillDialogue.ONE_OPTION, Item(bolt.product)) {
+                    object : SkillDialogueHandler(player, SkillDialogue.MAKE_SET_ONE_OPTION, Item(bolt.product)) {
                         override fun create(amount: Int, index: Int) {
                             player.pulseManager.run(GemBoltPulse(player, used as? Item, bolt, amount))
                         }
@@ -63,7 +63,6 @@ class GemBoltListener : InteractionListener {
                         }
                     }
             handler.open()
-            PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 309, 2, 210, 10))
             return@onUseWith true
         }
     }

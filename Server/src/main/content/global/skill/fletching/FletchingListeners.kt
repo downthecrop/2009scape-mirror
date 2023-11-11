@@ -63,7 +63,7 @@ class FletchingListeners : InteractionListener {
 
         onUseWith(IntType.ITEM,ARROW_SHAFT,*FEATHERS){ player, shaft, feather ->
             val handler: SkillDialogueHandler =
-                object : SkillDialogueHandler(player, SkillDialogue.ONE_OPTION, Item(FLETCHED_SHAFT)) {
+                object : SkillDialogueHandler(player, SkillDialogue.MAKE_SET_ONE_OPTION, Item(FLETCHED_SHAFT)) {
                     override fun create(amount: Int, index: Int) {
                         player.pulseManager.run(HeadlessArrowPulse(player, shaft.asItem(), Item(feather.id), amount))
                     }
@@ -73,14 +73,13 @@ class FletchingListeners : InteractionListener {
                     }
                 }
             handler.open()
-            PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, Components.SKILL_MULTI1_309, 2, 210, 10))
             return@onUseWith true
         }
 
         onUseWith(IntType.ITEM,FLETCHED_SHAFT,*UNFINISHED_ARROWS){ player, shaft, unfinished ->
             val head = Fletching.arrowHeadMap[unfinished.id] ?: return@onUseWith false
             val handler: SkillDialogueHandler =
-                object : SkillDialogueHandler(player, SkillDialogue.ONE_OPTION, head.getFinished()) {
+                object : SkillDialogueHandler(player, SkillDialogue.MAKE_SET_ONE_OPTION, head.getFinished()) {
                     override fun create(amount: Int, index: Int) {
                         player.pulseManager.run(ArrowHeadPulse(player, shaft.asItem(), head, amount))
                     }
@@ -90,7 +89,6 @@ class FletchingListeners : InteractionListener {
                     }
                 }
             handler.open()
-            PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, Components.SKILL_MULTI1_309, 2, 210, 10))
             return@onUseWith true
         }
 

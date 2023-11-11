@@ -1,5 +1,7 @@
 package content.global.handlers.iface;
 
+import content.global.skill.summoning.familiar.BurdenBeast;
+import core.api.ContentAPIKt;
 import core.cache.def.impl.ItemDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
@@ -24,6 +26,7 @@ import core.game.global.action.EquipHandler;
 import core.game.interaction.IntType;
 import core.game.interaction.InteractionListeners;
 import core.game.world.GameWorld;
+import core.tools.Log;
 
 /**
  * Represents the equipment interface.
@@ -35,6 +38,7 @@ public final class EquipmentInterface extends ComponentPlugin {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
+		ComponentDefinition.put(102, this);
 		ComponentDefinition.put(387, this);
 		ComponentDefinition.put(667, this);
 		ComponentDefinition.put(670, this);
@@ -111,20 +115,46 @@ public final class EquipmentInterface extends ComponentPlugin {
 				if (p.getInterfaceManager().isOpened() && p.getInterfaceManager().getOpened().getId() == 102) {
 					return true;
 				}
-				boolean skulled = p.getSkullManager().isSkulled();
-				boolean usingProtect = p.getPrayer().get(PrayerType.PROTECT_ITEMS);
-				p.getInterfaceManager().openComponent(102);
-				p.getPacketDispatch().sendIfaceSettings(211, 0, 2, 6684690, 4);
-				p.getPacketDispatch().sendIfaceSettings(212, 0, 2, 6684693, 42);
+
+				// (Highlight white items are auto destroyed on death Enum#616 (Items kept on death interface) TODO: Parse server sided
+				// SCRIPT 118 - Items kept on death interface CS
+				// ARG 0: Safe location check Takes: 0 Safe Area/2 in POH/3 in Castle Wars/4 in Trouble Brewing/5 in Barbass
+				int zoneType = p.getZoneMonitor().getType();
+				// ARG 1: Amount of items kept on death Takes: 0/1/3/4
 				Container[] itemArray = DeathTask.getContainers(p);
 				Container kept = itemArray[0];
-				int state = 0; // 1=familiar carrying items
-				int keptItems = skulled ? (usingProtect ? 1 : 0) : (usingProtect ? 4 : 3);
-				int zoneType = p.getZoneMonitor().getType();
-				int pvpType = p.getSkullManager().isWilderness() ? 0 : 1;
-				Object[] params = new Object[] { 11510, 12749, "", state, pvpType, kept.getId(3), kept.getId(2), kept.getId(1), kept.getId(0), keptItems, zoneType };
-				PacketRepository.send(ContainerPacket.class, new ContainerContext(p, 149, 0, 91, itemArray[1], false));
-				p.getPacketDispatch().sendRunScript(118, "iiooooiisii", params);
+				int amtKeptOnDeath = kept.itemCount();
+				if (amtKeptOnDeath > 4 && zoneType == 0) {
+					ContentAPIKt.log(this.getClass(), Log.ERR, "Items kept on death interface should not contain more than 4 items when not in a safe zone!");
+				}
+				// ARG 2: Item kept on death slot 0
+				int slot0 = kept.getId(0);
+				// ARG 3: Item kept on death slot 1
+				int slot1 = kept.getId(1);
+				// ARG 4: Item kept on death slot 2
+				int slot2 = kept.getId(2);
+				// ARG 5: Item kept on death slot 3
+				int slot3 = kept.getId(3);
+				// ARG 6: Player skulled Takes: 0 not skulled/1 skulled
+				int skulled = p.getSkullManager().isSkulled() ? 1 : 0;
+				// ARG 7: Player has summoning creature out Takes: 0 not out/1 Creature summoned
+				int hasBoB;
+				if (p.getFamiliarManager().hasFamiliar()) {
+					if (p.getFamiliarManager().getFamiliar().isBurdenBeast()) {
+						hasBoB = ((BurdenBeast) p.getFamiliarManager().getFamiliar()).getContainer().isEmpty() ? 0 : 1;
+					} else {
+						hasBoB = 0;
+					}
+				} else {
+					hasBoB = 0;
+				}
+				// ARG 8: String for effect:
+				// 			if (arg1 == 0) arg8 + " This reduces the items you keep from three to zero!"
+				//			if (arg1 == 1) arg8 + " This reduces the items you keep from three to zero!" + "<br>" + "<br>" + "However, you also have the " + "<col=ff3333>" + "Protect Items" + "<col=ff981f>" + " prayer active, which saves you one extra item!");
+				Object[] params = new Object[] { hasBoB, skulled, slot3, slot2, slot1, slot0, amtKeptOnDeath, zoneType, "You are skulled." };
+				p.getPacketDispatch().sendRunScript(118, "siiooooii", params);
+
+				p.getInterfaceManager().openComponent(102);
 				break;
 			case 28:
 				if (opcode == 81) {

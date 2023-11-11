@@ -15,7 +15,6 @@ import core.net.packet.out.WindowsPane;
 import core.tools.Log;
 import org.rs09.consts.Components;
 import content.region.misc.tutisland.handlers.TutorialStage;
-import core.tools.SystemLogger;
 
 import static core.api.ContentAPIKt.log;
 import static core.api.ContentAPIKt.*;
@@ -612,29 +611,12 @@ public final class InterfaceManager {
 			return;
 		}
 		overlay = component;
-		if (overlay.getDefinition().getType() != InterfaceType.OVERLAY) {
+		if (overlay.getDefinition().getType() != InterfaceType.OVERLAY && overlay.getDefinition().getType() != InterfaceType.OVERLAY_B) {
 			log(this.getClass(), Log.WARN,  "Set interface type to OVERLAY for component " + component.getId() + ", definition requires updating!");
 			overlay.getDefinition().setType(InterfaceType.OVERLAY);
 			overlay.getDefinition().setWalkable(true);
 		}
 		overlay.open(player);
-	}
-
-	/**
-	 * Opens the wilderness overlay.
-	 * @param component The component.
-	 */
-	public void openWildernessOverlay(Component component) {
-		if (wildyOverlay != null && !wildyOverlay.close(player)) {
-			return;
-		}
-		wildyOverlay = component;
-		if (wildyOverlay.getDefinition().getType() != InterfaceType.WILDERNESS_OVERLAY) {
-			log(this.getClass(), Log.WARN,  "Set interface type to WILDERNESS_OVERLAY for component " + component.getId() + ", definition requires updating!");
-			wildyOverlay.getDefinition().setType(InterfaceType.WILDERNESS_OVERLAY);
-			wildyOverlay.getDefinition().setWalkable(true);
-		}
-		wildyOverlay.open(player);
 	}
 
 	/**

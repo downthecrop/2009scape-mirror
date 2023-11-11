@@ -123,6 +123,37 @@ open class SkillDialogueHandler(
                 }
             }
         },
+        MAKE_SET_ONE_OPTION(582, 4, 1) {
+            override fun display(player: Player, handler: SkillDialogueHandler) {
+                val item = handler.data[0] as Item
+
+                // Send item + item name to interface
+                player.packetDispatch.sendItemZoomOnInterface(item.id, 160, 582, 2)
+                player.packetDispatch.sendString("<br><br><br><br>" + item.name, 582, 5)
+
+                // Re-format this interface because it is not formatted properly for the chat-box
+                // Swords
+                PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 582, 0, 12, 15))
+                PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 582, 1, 431, 15))
+                // "How many would you like to make?"
+                PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 582, 6, 0, 12))
+                // Item displayed
+                PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 582, 2, 207, 23))
+                // Right click context menu boxes
+                PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 582, 3, 58, 27))
+                PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 582, 4, 58, 27))
+                PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 582, 5, 58, 27))
+            }
+
+            override fun getAmount(handler: SkillDialogueHandler, buttonId: Int): Int {
+                return when(buttonId){
+                    4 -> 1
+                    3 -> 5
+                    2 -> 10
+                    else -> handler.getAll(getIndex(handler, buttonId))
+                }
+            }
+        },
         TWO_OPTION(303, 7, 2) {
             override fun display(player: Player, handler: SkillDialogueHandler) {
                 var item: Item

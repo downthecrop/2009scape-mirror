@@ -49,7 +49,7 @@ public class FletchingPlugin extends UseWithHandler {
 		//handle darts
 		if(Fletching.isDart(event.getUsedItem().getId())){
 			final Fletching.Darts dart = Fletching.dartMap.get(event.getUsedItem().getId());
-			SkillDialogueHandler handler = new SkillDialogueHandler(player, SkillDialogue.ONE_OPTION, dart.getFinished()) {
+			SkillDialogueHandler handler = new SkillDialogueHandler(player, SkillDialogue.MAKE_SET_ONE_OPTION, dart.getFinished()) {
 				@Override
 				public void create(final int amount, int index) {
 					player.getPulseManager().run(new DartPulse(player, event.getUsedItem(), dart, amount));
@@ -60,7 +60,6 @@ public class FletchingPlugin extends UseWithHandler {
 				}
 			};
 			handler.open();
-			PacketRepository.send(RepositionChild.class, new ChildPositionContext(player, 309, 2, 230, 10));
 			return true;
 		}
 
@@ -78,7 +77,7 @@ public class FletchingPlugin extends UseWithHandler {
 			final boolean hasFeather = (featherId == 314 || (featherId >= 10087 && featherId <= 10091));
 
 			if (hasFeather) {
-				SkillDialogueHandler handler = new SkillDialogueHandler(player, SkillDialogue.ONE_OPTION, bolt.getFinished()) {
+				SkillDialogueHandler handler = new SkillDialogueHandler(player, SkillDialogue.MAKE_SET_ONE_OPTION, bolt.getFinished()) {
 					@Override
 					public void create(final int amount, int index) {
 						player.getPulseManager().run(new BoltPulse(player, event.getUsedItem(), bolt, new Item(featherId), amount));
@@ -89,7 +88,6 @@ public class FletchingPlugin extends UseWithHandler {
 					}
 				};
 				handler.open();
-				PacketRepository.send(RepositionChild.class, new ChildPositionContext(player, 309, 2, 210, 10));
 				return true;
 			}
 			return false;

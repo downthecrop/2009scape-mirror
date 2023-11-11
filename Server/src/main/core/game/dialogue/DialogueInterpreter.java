@@ -11,8 +11,10 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.net.packet.PacketRepository;
+import core.net.packet.context.ChildPositionContext;
 import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
+import core.net.packet.out.RepositionChild;
 import core.plugin.PluginManifest;
 import core.plugin.PluginType;
 import core.game.system.config.ItemConfigParser;
@@ -263,8 +265,6 @@ public final class DialogueInterpreter {
      * @return The component.
      */
     public Component sendDestroyItem(int id, String message) {
-        player.getInterfaceManager().openChatbox(94);
-        PacketRepository.send(ContainerPacket.class, new ContainerContext(player, 94, 93, 93, new Item[] { new Item(id) }, 1, false));
         String text = ItemDefinition.forId(id).getConfiguration(ItemConfigParser.DESTROY_MESSAGE, "Are you sure you want to destroy this object?");
         if (text.length() > 200) {
             String[] words = text.split(" ");
@@ -279,11 +279,11 @@ public final class DialogueInterpreter {
             }
             text = sb.toString();
         }
-        player.getPacketDispatch().sendString("Are you sure you want to destroy this object?", 94, 2);
-        player.getPacketDispatch().sendString("Yes.", 94, 3);
-        player.getPacketDispatch().sendString("No.", 94, 4);
         player.getPacketDispatch().sendString(text, 94, 7);
         player.getPacketDispatch().sendString(ItemDefinition.forId(id).getName(), 94, 8);
+        player.getPacketDispatch().sendItemOnInterface(id, 1, 94, 9);
+
+        player.getInterfaceManager().openChatbox(94);
         return player.getInterfaceManager().getChatbox();
     }
 

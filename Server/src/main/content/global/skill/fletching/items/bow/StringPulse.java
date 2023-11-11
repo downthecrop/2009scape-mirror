@@ -1,5 +1,7 @@
 package content.global.skill.fletching.items.bow;
 
+import core.api.Container;
+import core.api.ContentAPIKt;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.node.entity.skill.SkillPulse;
@@ -44,6 +46,9 @@ public class StringPulse extends SkillPulse<Item> {
         }
         if (player.getSkills().getLevel(Skills.FLETCHING) < bow.level) {
             player.getDialogueInterpreter().sendDialogue("You need a fletching level of " + bow.level + " to string this bow.");
+            return false;
+        }
+        if (!player.getInventory().containsItem(new Item(bow.unfinished))) {
             return false;
         }
         if (!player.getInventory().containsItem(new Item(bow.string))) {

@@ -4,6 +4,7 @@ import core.api.*
 import core.cache.def.impl.ItemDefinition
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.node.item.Item
 import org.rs09.consts.Items
 import org.rs09.consts.Sounds
 import java.util.*
@@ -17,18 +18,14 @@ class EmptyOptionListener : InteractionListener {
 
         on(EmptyItem.emptyItemList.toIntArray(), IntType.ITEM, "empty", "empty bowl", "empty dish") { player, node ->
             if (node.name.contains("brew") || node.name.contains("potion") || node.name.lowercase(Locale.getDefault()).contains("poison") || node.name.lowercase(Locale.getDefault()).contains("serum") || node.name.contains("cure") || node.name.contains("mix") || node.name.contains("balm")) {
-                if (removeItem(player, node.id)) {
-                    addItem(player, EmptyItem.getEmpty(Items.POTION_195)!!)
-                    playAudio(player, EmptyItem.getEmptyAudio(Items.POTION_195)!!)
-                }
+                replaceSlot(player, node.asItem().slot, Item(EmptyItem.getEmpty(Items.POTION_195)!!), node.asItem())
+                playAudio(player, EmptyItem.getEmptyAudio(Items.POTION_195)!!)
                 return@on true
             }
             if (EmptyItem.emptyItemMap[node.id] != null) {
-                if (removeItem(player, node.id)) {
-                    addItem(player, EmptyItem.getEmpty(node.id)!!)
-                    if (EmptyItem.getEmptyAudio(node.id) != -1) playAudio(player, EmptyItem.getEmptyAudio(node.id)!!)
-                    EmptyItem.getEmptyMessage(node.id)?.let { sendMessage(player, it) }
-                }
+                replaceSlot(player, node.asItem().slot, Item(EmptyItem.getEmpty(node.id)!!), node.asItem())
+                if (EmptyItem.getEmptyAudio(node.id) != -1) playAudio(player, EmptyItem.getEmptyAudio(node.id)!!)
+                EmptyItem.getEmptyMessage(node.id)?.let { sendMessage(player, it) }
             }
             return@on true
         }
