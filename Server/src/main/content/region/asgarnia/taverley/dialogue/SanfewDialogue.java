@@ -120,7 +120,7 @@ public class SanfewDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 200:
-			interpreter.sendDialogues(npc, null, "Well hand 'em over then lad!");
+			interpreter.sendDialogues(npc, null, "Well hand 'em over then " + (player.isMale() ? "lad" : "lass") + "!");
 			stage = 201;
 			break;
 		case 201:
