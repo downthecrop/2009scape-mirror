@@ -63,13 +63,13 @@ class SkillRestore : RSTimer (1, "skillrestore", isAuto = true, isSoft = true) {
             
             when (event.type) {
                 PrayerType.RAPID_HEAL -> { 
-                    restore.restoreTicks [Skills.HITPOINTS] -= 50
+                    restore.restoreTicks [Skills.HITPOINTS] = 50
                     restore.ticksSinceLastRestore [Skills.HITPOINTS] = 0
                 }
                 PrayerType.RAPID_RESTORE -> {
                     for (i in 0 until 24) {
                         if (i == Skills.HITPOINTS || i == Skills.PRAYER || i == Skills.SUMMONING) continue
-                        restore.restoreTicks [i] -= 50
+                        restore.restoreTicks [i] = 50
                         restore.ticksSinceLastRestore [i] = 0
                     }
                 }
@@ -84,13 +84,13 @@ class SkillRestore : RSTimer (1, "skillrestore", isAuto = true, isSoft = true) {
 
             when (event.type) {
                 PrayerType.RAPID_HEAL -> {
-                    restore.restoreTicks [Skills.HITPOINTS] += 50
+                    restore.restoreTicks [Skills.HITPOINTS] = 100
                     restore.ticksSinceLastRestore [Skills.HITPOINTS] = 0
                 }
                 PrayerType.RAPID_RESTORE -> {
                     for (i in 0 until 24) {
                         if (i == Skills.HITPOINTS || i == Skills.PRAYER || i == Skills.SUMMONING) continue
-                        restore.restoreTicks [i] += 50
+                        restore.restoreTicks [i] = 100
                         restore.ticksSinceLastRestore [i] = 0
                     }
                 }

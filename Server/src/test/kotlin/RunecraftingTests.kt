@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test
 class RunecraftTests {
     fun rollRc(rcLevel: Int, rune: Rune, revision: Int, lo: Double, hi: Double) {
         var total = 0.0
-        for(i in 0 until 1000) {
+        for(i in 0 until 3000) {
             total += RuneCraftPulse.getMultiplier(rcLevel, rune, revision, false)
         }
-        val average = total / 1000.0
+        val average = total / 3000.0
         Assertions.assertTrue(lo <= average && average <= hi, "rollRc: ${rcLevel} ${rune.name} ${revision}: ${average}")
     }
 
@@ -33,7 +33,7 @@ class RunecraftTests {
 
         rollRc(99, Rune.NATURE, 530, 2.0, 2.0);
         rollRc(99, Rune.NATURE, 573, 2.0, 2.0);
-        rollRc(99, Rune.NATURE, 581, 2.0, 2.1);
+        rollRc(99, Rune.NATURE, 581, 2.04, 2.14);
     }
     @Test fun testLawRcMultipliers() {
         rollRc(54, Rune.LAW, 530, 1.0, 1.0);
