@@ -1,5 +1,6 @@
 package core.game.worldevents.holiday
 
+import core.game.worldevents.holiday.christmas.randoms.*
 import core.game.worldevents.holiday.halloween.randoms.*
 
 enum class HolidayRandomEvents(val npc: HolidayRandomEventNPC, val type: String) {
@@ -9,12 +10,20 @@ enum class HolidayRandomEvents(val npc: HolidayRandomEventNPC, val type: String)
     ZOMBIE(npc = ZombieHolidayRandomNPC(), "halloween"),
     WITCH(npc = WitchHolidayRandomNPC(), "halloween"),
     DEATH(npc = DeathHolidayRandomNPC(), "halloween"),
-    VAMPIRE(npc = VampireHolidayRandomNPC(), "halloween");
+    VAMPIRE(npc = VampireHolidayRandomNPC(), "halloween"),
+    CHOIR(npc = ChoirHolidayRandomNPC(), "christmas"),
+    SANTA(npc = SantaHolidayRandomNPC(), "christmas"),
+    SNOWMAN_FIGHT(npc = SnowmanFightHolidayRandom(), "christmas"),
+    JACK_FROST(npc = JackFrostHolidayRandomNPC(), "christmas"),
+    SNOWMAN(npc = SnowmanHolidayRandomNPC(), "christmas"),
+    SNOWSTORM(npc = SnowStormHolidayRandomNPC(), "christmas"),
+    COOK(npc = CookHolidayRandomNPC(), "christmas");
 
     companion object {
         @JvmField
         val halloweenEventsList = ArrayList<HolidayRandomEvents>()
         val christmasEventsList = ArrayList<HolidayRandomEvents>()
+        val holidayRandomIDs = HolidayRandomEvents.values().map { it.npc.id }.toList()
 
         init {
             populateMappings()

@@ -444,7 +444,7 @@ class CombatPulse(
                     if (entity is NPC)
                         entity.asNpc().behavior.beforeAttackFinalized(entity, victim, state)
                     if (impact || getDelay() == 0) {
-                        if (state.estimatedHit != 0 && victim is NPC && entity is Player) {
+                        if (state.estimatedHit != 0 && victim is NPC) {
                             val n = victim.asNpc()
                             val audio = n.getAudio(1)
                             if (audio != null) {

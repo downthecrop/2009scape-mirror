@@ -49,12 +49,9 @@ public final class DeathTask extends NodeTask {
 		Entity killer = n.length > 0 ? (Entity) n[0] : e;
 		if (e instanceof NPC) {
 			killer.removeAttribute("combat-time");
-			if (killer instanceof Player) {
-				Player p = killer.asPlayer();
-				Audio audio = e.asNpc().getAudio(2);
-				if (audio != null) {
-					playGlobalAudio(e.getLocation(), audio.id);
-				}
+			Audio audio = e.asNpc().getAudio(2);
+			if (audio != null) {
+				playGlobalAudio(e.getLocation(), audio.id);
 			}
 		}
 		e.graphics(Animator.RESET_G);

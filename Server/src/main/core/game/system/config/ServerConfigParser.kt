@@ -163,6 +163,7 @@ object ServerConfigParser {
         ServerConstants.NEW_PLAYER_ANNOUNCEMENT = data.getBoolean("world.new_player_announcement", true)
         ServerConstants.HOLIDAY_EVENT_RANDOMS = data.getBoolean("world.holiday_event_randoms", true)
         ServerConstants.FORCE_HALLOWEEN_RANDOMS = data.getBoolean("world.force_halloween_randoms", false)
+        ServerConstants.FORCE_CHRISTMAS_RANDOMS = data.getBoolean("world.force_christmas_randoms", false)
         ServerConstants.RUNECRAFTING_FORMULA_REVISION = data.getLong("world.runecrafting_formula_revision", 581).toInt()
 
         val logLevel = data.getString("server.log_level", "VERBOSE").uppercase()

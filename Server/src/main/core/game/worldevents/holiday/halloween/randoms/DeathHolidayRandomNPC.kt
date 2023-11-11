@@ -1,14 +1,14 @@
 package core.game.worldevents.holiday.halloween.randoms
 
 import core.api.*
-import core.api.utils.WeightBasedTable
 import core.game.interaction.QueueStrength
+import core.game.node.entity.npc.NPC
 import core.game.worldevents.holiday.HolidayRandomEventNPC
 import core.game.worldevents.holiday.HolidayRandoms
 import core.tools.RandomFunction
 import org.rs09.consts.Sounds
 
-class DeathHolidayRandomNPC(override var loot: WeightBasedTable? = null) : HolidayRandomEventNPC(2862) {
+class DeathHolidayRandomNPC() : HolidayRandomEventNPC(2862) {
     override fun init() {
         super.init()
         playJingle(player, 337)
@@ -35,5 +35,8 @@ class DeathHolidayRandomNPC(override var loot: WeightBasedTable? = null) : Holid
                 else -> return@queueScript stopExecuting(this)
             }
         }
+    }
+
+    override fun talkTo(npc: NPC) {
     }
 }

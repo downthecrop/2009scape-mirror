@@ -1,7 +1,6 @@
 package core.game.worldevents.holiday
 
 import core.api.*
-import core.api.utils.WeightBasedTable
 import core.game.interaction.MovementPulse
 import core.game.node.entity.impl.PulseType
 import core.game.node.entity.npc.NPC
@@ -15,16 +14,14 @@ import kotlin.reflect.full.createInstance
 
 abstract class HolidayRandomEventNPC(id:Int) : NPC(id) {
     lateinit var player: Player
-    abstract var loot: WeightBasedTable?
     var spawnLocation: Location? = null
     var initialized = false
     var finalized = false
     var timerPaused = false
     var ticksLeft = secondsToTicks(30)
 
-    open fun create(player: Player, loot: WeightBasedTable? = null, type: String = ""): HolidayRandomEventNPC {
+    open fun create(player: Player, type: String = ""): HolidayRandomEventNPC {
         val event = this::class.createInstance()
-        event.loot = loot
         event.player = player
         event.spawnLocation = RegionManager.getSpawnLocation(player, this)
         return event
@@ -83,4 +80,6 @@ abstract class HolidayRandomEventNPC(id:Int) : NPC(id) {
         super.clear()
         if(player.getAttribute<HolidayRandomEventNPC?>("holiday-npc", null) == this) player.removeAttribute("holiday-npc")
     }
+
+    abstract fun talkTo(npc: NPC)
 }

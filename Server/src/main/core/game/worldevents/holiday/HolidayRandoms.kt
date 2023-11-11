@@ -1,7 +1,6 @@
 package core.game.worldevents.holiday
 
 import content.global.ame.RandomEventNPC
-import content.global.skill.construction.HouseLocation
 import core.ServerConstants
 import core.api.*
 import core.game.node.entity.Entity
@@ -63,6 +62,10 @@ class HolidayRandoms() : PersistTimer(0, "holiday", isAuto = true), Commands {
                 sendMessage(player, colorize("%OA chill goes down your spine..."))
                 currentHoliday = "halloween"
             }
+            "christmas" -> {
+                sendMessage(player, colorize("%GHappy Holidays."))
+                currentHoliday = "christmas"
+            }
             "none" -> player.timers.removeTimer(this)
         }
 
@@ -74,6 +77,9 @@ class HolidayRandoms() : PersistTimer(0, "holiday", isAuto = true), Commands {
         val currentDate = LocalDate.now()
         if ((!currentDate.isBefore(halloweenStartDate) && !currentDate.isAfter(halloweenEndDate)) || ServerConstants.FORCE_HALLOWEEN_RANDOMS)
             return "halloween"
+
+        if ((!currentDate.isBefore(christmasStartDate) && !currentDate.isAfter(christmasEndDate)) || ServerConstants.FORCE_CHRISTMAS_RANDOMS)
+            return "christmas"
 
         return "none"
     }
@@ -120,7 +126,8 @@ class HolidayRandoms() : PersistTimer(0, "holiday", isAuto = true), Commands {
         }
         return when (currentHoliday) {
             "halloween" -> HolidayRandomEvents.getHolidayRandom("halloween")
-            else -> HolidayRandomEvents.SPIDER
+            "christmas" -> HolidayRandomEvents.getHolidayRandom("christmas")
+            else -> throw Exception("Invalid event type!")
         }
     }
 
@@ -148,7 +155,7 @@ class HolidayRandoms() : PersistTimer(0, "holiday", isAuto = true), Commands {
 
         define("forcehrevents", Privilege.ADMIN, "::forcehrevents [eventname]", "Force enable holiday random events.") { player, args ->
             if (args.size == 1) {
-                notify(player, "Holidays: halloween")
+                notify(player, "Holidays: halloween, christmas")
                 return@define
             }
             val event = args[1]
@@ -166,15 +173,26 @@ class HolidayRandoms() : PersistTimer(0, "holiday", isAuto = true), Commands {
                         registerTimer(p, HolidayRandoms())
                     }
                 }
+                "christmas" -> {
+                    ServerConstants.FORCE_CHRISTMAS_RANDOMS = true
+                    for (p in Repository.players) {
+                        if (getTimer<HolidayRandoms>(p) != null || p.isArtificial) {
+                            continue
+                        }
+                        notify(p, colorize("%GChristmas Randoms are now enabled!"))
+                        registerTimer(p, HolidayRandoms())
+                    }
+                }
                 else -> reject(player, "Invalid event!")
             }
         }
 
         define("stophrevents", Privilege.ADMIN, "::stophrevents", "Stops all holiday random events.") { player, _ ->
-            if (checkIfHoliday() == "none")
+            if (checkIfHoliday() == "none" || !ServerConstants.HOLIDAY_EVENT_RANDOMS)
                 reject(player, "No holiday random events are currently active.")
             ServerConstants.HOLIDAY_EVENT_RANDOMS = false
             ServerConstants.FORCE_HALLOWEEN_RANDOMS = false
+            ServerConstants.FORCE_CHRISTMAS_RANDOMS = false
             for (p in Repository.players) {
                 if (getTimer<HolidayRandoms>(p) == null) {
                     continue

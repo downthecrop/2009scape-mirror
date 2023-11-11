@@ -319,6 +319,9 @@ class ServerConstants {
         var FORCE_HALLOWEEN_RANDOMS = false
 
         @JvmField
+        var FORCE_CHRISTMAS_RANDOMS = false
+
+        @JvmField
         var RUNECRAFTING_FORMULA_REVISION = 581
     }
 }

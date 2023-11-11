@@ -1,9 +1,9 @@
 package core.game.worldevents.holiday.halloween.randoms
 
 import core.api.*
-import core.api.utils.WeightBasedTable
 import core.game.interaction.QueueStrength
 import core.game.node.entity.combat.ImpactHandler
+import core.game.node.entity.npc.NPC
 import core.game.worldevents.holiday.HolidayRandomEventNPC
 import core.game.worldevents.holiday.HolidayRandoms
 import core.game.worldevents.holiday.ResetHolidayAppearance
@@ -11,7 +11,7 @@ import core.tools.RandomFunction
 import core.tools.colorize
 import org.rs09.consts.Sounds
 
-class VampireHolidayRandomNPC(override var loot: WeightBasedTable? = null) : HolidayRandomEventNPC(1023) {
+class VampireHolidayRandomNPC() : HolidayRandomEventNPC(1023) {
     override fun init() {
         super.init()
         playGlobalAudio(this.location, Sounds.REGULAR_VAMPIRE_APPEAR_1897)
@@ -42,5 +42,8 @@ class VampireHolidayRandomNPC(override var loot: WeightBasedTable? = null) : Hol
                 else -> return@queueScript stopExecuting(this)
             }
         }
+    }
+
+    override fun talkTo(npc: NPC) {
     }
 }

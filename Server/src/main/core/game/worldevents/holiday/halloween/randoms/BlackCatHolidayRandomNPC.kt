@@ -1,15 +1,15 @@
 package core.game.worldevents.holiday.halloween.randoms
 
 import core.api.*
-import core.api.utils.WeightBasedTable
 import core.game.interaction.QueueStrength
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
+import core.game.node.entity.npc.NPC
 import core.game.worldevents.holiday.HolidayRandomEventNPC
 
 import core.game.worldevents.holiday.HolidayRandoms
 import org.rs09.consts.Sounds
 
-class BlackCatHolidayRandomNPC(override var loot: WeightBasedTable? = null) : HolidayRandomEventNPC(4607) {
+class BlackCatHolidayRandomNPC() : HolidayRandomEventNPC(4607) {
     override fun init() {
         super.init()
         queueScript(this, 8, QueueStrength.SOFT) {
@@ -24,5 +24,8 @@ class BlackCatHolidayRandomNPC(override var loot: WeightBasedTable? = null) : Ho
             HolidayRandoms.terminateEventNpc(player)
             return@queueScript stopExecuting(this)
         }
+    }
+
+    override fun talkTo(npc: NPC) {
     }
 }

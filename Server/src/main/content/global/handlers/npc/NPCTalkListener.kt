@@ -5,9 +5,13 @@ import content.region.kandarin.barcrawl.BarcrawlManager
 import content.region.kandarin.barcrawl.BarcrawlType
 import content.global.ame.RandomEvents
 import content.minigame.gnomecooking.*
+import core.api.getAttribute
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.game.system.timer.impl.AntiMacro
+import core.game.worldevents.holiday.HolidayRandomEventNPC
+import core.game.worldevents.holiday.HolidayRandomEvents
+import core.game.worldevents.holiday.HolidayRandoms
 
 /**
  * Handles the NPC talk-to option.
@@ -37,6 +41,18 @@ class NPCTalkListener : InteractionListener {
                 } else {
                     AntiMacro.getEventNpc(player)?.talkTo(node.asNpc())
                 }
+                return@on true
+            }
+            if (HolidayRandomEvents.holidayRandomIDs.contains(node.id) && node is HolidayRandomEventNPC) {
+                if(HolidayRandoms.getEventNpc(player) == null || HolidayRandoms.getEventNpc(player) != node.asNpc() || HolidayRandoms.getEventNpc(player)?.finalized == true) {
+                    player.sendMessage("They aren't interested in talking to you.")
+                } else {
+                    HolidayRandoms.getEventNpc(player)?.talkTo(node.asNpc())
+                }
+                return@on true
+            }
+            if (getAttribute(npc, "holiday_random_extra_npc", false) && HolidayRandoms.getEventNpc(player) != null) {
+                HolidayRandoms.getEventNpc(player)?.talkTo(node.asNpc())
                 return@on true
             }
             if (!npc.getAttribute("facing_booth", false)) {

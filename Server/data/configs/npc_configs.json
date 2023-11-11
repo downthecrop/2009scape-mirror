@@ -60583,22 +60583,30 @@
     "attack_level": "1"
   },
   {
+    "examine": "A snowman in fake dragon armour.",
+    "combat_audio": "29,3295,3287",
+    "melee_animation": "7558",
+    "defence_animation": "7559",
+    "death_animation": "7560",
     "name": "Dragon snowman",
     "defence_level": "1",
     "safespot": null,
-    "lifepoints": "10",
-    "combat_audio": "408,410,409",
+    "lifepoints": "20",
     "strength_level": "1",
     "id": "6743",
     "range_level": "1",
     "attack_level": "1"
   },
   {
+    "examine": "Arr!",
+    "combat_audio": "29,3295,3287",
+    "melee_animation": "7558",
+    "defence_animation": "7559",
+    "death_animation": "7560",
     "name": "Pirate snowman",
     "defence_level": "1",
     "safespot": null,
-    "lifepoints": "10",
-    "combat_audio": "703,705,704",
+    "lifepoints": "20",
     "strength_level": "1",
     "id": "6745",
     "range_level": "1",
@@ -72440,5 +72448,28 @@
     "examine": "A very strange plant.",
     "name": "Strange Plant",
     "id": "407"
+  },
+  {
+    "agg_radius": "",
+    "examine": "A helmetted, barbarian snowman.",
+    "death_animation": "7560",
+    "name": "Barbarian Snowman",
+    "defence_level": "1",
+    "melee_animation": "7565",
+    "lifepoints": "20",
+    "combat_audio": "12,3295,3287",
+    "id": "6742",
+    "defence_animation": "7559"
+  },
+  {
+    "examine": "A snow dwarf.",
+    "death_animation": "7560",
+    "name": "Dwarf Snowman",
+    "defence_level": "1",
+    "melee_animation": "7565",
+    "lifepoints": "20",
+    "combat_audio": "12,3295,3287",
+    "id": "6744",
+    "defence_animation": "7559"
   }
 ]

@@ -778,8 +778,13 @@ fun sendMessage(player: Player, message: String) {
  * @param entity the entity to send the chat for
  * @param message the message to display
  */
-fun sendChat(entity: Entity, message: String) {
-    entity.sendChat(message)
+fun sendChat(entity: Entity, message: String, delay: Int = -1) {
+    if (delay > -1) {
+        queueScript(entity, delay, QueueStrength.SOFT) {
+            entity.sendChat(message)
+            return@queueScript stopExecuting(entity)
+        }
+    } else entity.sendChat(message)
 }
 
 /**

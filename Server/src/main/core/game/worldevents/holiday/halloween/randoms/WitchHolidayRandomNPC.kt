@@ -1,16 +1,16 @@
 package core.game.worldevents.holiday.halloween.randoms
 
 import core.api.*
-import core.api.utils.WeightBasedTable
 import core.game.interaction.QueueStrength
 import core.game.node.entity.combat.ImpactHandler
+import core.game.node.entity.npc.NPC
 import core.game.worldevents.holiday.ResetHolidayAppearance
 import core.game.worldevents.holiday.HolidayRandomEventNPC
 import core.game.worldevents.holiday.HolidayRandoms
 import core.tools.RandomFunction
 import org.rs09.consts.Sounds
 
-class WitchHolidayRandomNPC(override var loot: WeightBasedTable? = null) : HolidayRandomEventNPC(611) {
+class WitchHolidayRandomNPC() : HolidayRandomEventNPC(611) {
     override fun init() {
         super.init()
         when (RandomFunction.getRandom(4)) {
@@ -145,5 +145,8 @@ class WitchHolidayRandomNPC(override var loot: WeightBasedTable? = null) : Holid
                 }
             }
         }
+    }
+
+    override fun talkTo(npc: NPC) {
     }
 }

@@ -123,7 +123,7 @@ class Giftmas : Commands, StartupListener, LoginListener, InteractionListener {
         private val MESSAGE_DAILYXP_REACHED_SKILLING = colorize("%RYou have reached your daily limit of presents from skilling!")
         private val MESSAGE_DAILYXP_REACHED_COMBAT = colorize("%RYou have reached your daily limit of presents from combat!")
         private val MESSAGE_PRESENT_GRANTED = colorize("%GYou find a present while training!")
-        private val MBOX_LOOT = WeightBasedTable.create(
+        val MBOX_LOOT = WeightBasedTable.create(
             WeightedItem(Items.TOY_HORSEY_2520, 1, 1, 0.025),
             WeightedItem(Items.TOY_HORSEY_2522, 1, 1, 0.025),
             WeightedItem(Items.TOY_HORSEY_2524, 1, 1, 0.025),

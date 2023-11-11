@@ -364,7 +364,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
                 //plays a punching sound when no weapon is equipped
                 playGlobalAudio(entity.location, Sounds.HUMAN_ATTACK_2564)
             }
-        } else if (entity is NPC && victim is Player) {
+        } else if (entity is NPC) {
             val npc = entity.asNpc()
             val audio = npc.getAudio(0)
             if (audio != null) playGlobalAudio(entity.location, audio.id)
