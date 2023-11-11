@@ -1,6 +1,7 @@
 package core.game.dialogue
 
 import core.api.splitLines
+import core.cache.def.impl.NPCDefinition
 import core.game.component.Component
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
@@ -46,6 +47,17 @@ abstract class DialogueFile {
         } else interpreter!!.sendDialogues(npc, expression, *messages)
     }
 
+    open fun npc(id: Int, expression: FacialExpression?, vararg messages: String?): Component? {
+        val chatBoxComponent = interpreter!!.sendDialogues(id, expression, *messages)
+        return chatBoxComponent
+    }
+
+    open fun npc(id: Int, title: String, expression: FacialExpression?, vararg messages: String?): Component? {
+        val chatBoxComponent = interpreter!!.sendDialogues(id, expression, *messages)
+        player!!.packetDispatch.sendString(title, chatBoxComponent.id, 3)
+        return chatBoxComponent
+    }
+
     open fun player(vararg messages: String?): Component? {
         return interpreter!!.sendDialogues(player, null, *messages)
     }
@@ -61,6 +73,14 @@ abstract class DialogueFile {
      */
     open fun npcl(expr: FacialExpression?, msg: String?): Component? {
         return npc(expr, *splitLines(msg!!))
+    }
+
+    open fun npcl(id: Int, expr: FacialExpression?, msg: String?): Component? {
+        return npc(id, expr, *splitLines(msg!!))
+    }
+
+    open fun npcl(id: Int, title: String, expr: FacialExpression?, msg: String?): Component? {
+        return npc(id, title, expr, *splitLines(msg!!))
     }
 
     open fun npcl(msg: String?): Component? {

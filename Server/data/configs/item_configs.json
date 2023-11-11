@@ -70492,7 +70492,7 @@
     "id": "7812"
   },
   {
-    "examine": "See article",
+    "examine": "There is a goblin bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70500,7 +70500,7 @@
     "id": "7813"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Goblin skull",
     "archery_ticket_price": "0",
@@ -70514,7 +70514,7 @@
     "id": "7815"
   },
   {
-    "examine": "See article",
+    "examine": "There is a bear bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70522,21 +70522,21 @@
     "id": "7816"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Bear ribs",
     "archery_ticket_price": "0",
     "id": "7817"
   },
   {
-    "examine": "Unpolished: This needs a good polish.",
+    "examine": "This needs a good polish.",
     "durability": null,
     "name": "Ram skull",
     "archery_ticket_price": "0",
     "id": "7818"
   },
   {
-    "examine": "See article",
+    "examine": "There is a ram bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70544,7 +70544,7 @@
     "id": "7819"
   },
   {
-    "examine": "Unpolished: This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Ram skull",
     "archery_ticket_price": "0",
@@ -70558,7 +70558,7 @@
     "id": "7821"
   },
   {
-    "examine": "See article",
+    "examine": "There is a unicorn bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70566,7 +70566,7 @@
     "id": "7822"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Unicorn bone",
     "archery_ticket_price": "0",
@@ -70580,7 +70580,7 @@
     "id": "7824"
   },
   {
-    "examine": "See article",
+    "examine": "There is a giant rat bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70588,7 +70588,7 @@
     "id": "7825"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Giant rat bone",
     "archery_ticket_price": "0",
@@ -70603,7 +70603,7 @@
     "id": "7827"
   },
   {
-    "examine": "See article",
+    "examine": "There is a giant bat bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70611,7 +70611,7 @@
     "id": "7828"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Giant bat wing",
     "weight": "0.9",
@@ -70627,7 +70627,7 @@
     "id": "7830"
   },
   {
-    "examine": "See article",
+    "examine": "There is a wolf bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70635,7 +70635,7 @@
     "id": "7831"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Wolf bone",
     "weight": "0.9",
@@ -70651,7 +70651,7 @@
     "id": "7833"
   },
   {
-    "examine": "See article",
+    "examine": "There is a bat bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70659,7 +70659,7 @@
     "id": "7834"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Bat wing",
     "weight": "0.9",
@@ -70675,7 +70675,7 @@
     "id": "7836"
   },
   {
-    "examine": "See article",
+    "examine": "There is a rat bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70683,7 +70683,7 @@
     "id": "7837"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Rat bone",
     "weight": "0.9",
@@ -70699,7 +70699,7 @@
     "id": "7839"
   },
   {
-    "examine": "See article",
+    "examine": "There is a baby blue dragon bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70707,7 +70707,7 @@
     "id": "7840"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Baby dragon bone",
     "weight": "0.9",
@@ -70723,7 +70723,7 @@
     "id": "7842"
   },
   {
-    "examine": "See article",
+    "examine": "There is a ogre bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70731,7 +70731,7 @@
     "id": "7843"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Ogre ribs",
     "weight": "0.9",
@@ -70747,7 +70747,7 @@
     "id": "7845"
   },
   {
-    "examine": "See article",
+    "examine": "There is a jogre bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70755,7 +70755,7 @@
     "id": "7846"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Jogre bone",
     "weight": "0.9",
@@ -70771,7 +70771,7 @@
     "id": "7848"
   },
   {
-    "examine": "See article",
+    "examine": "There is a zogre bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70779,7 +70779,7 @@
     "id": "7849"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Zogre bone",
     "weight": "0.9",
@@ -70795,7 +70795,7 @@
     "id": "7851"
   },
   {
-    "examine": "See article",
+    "examine": "There is a mogre bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70803,7 +70803,7 @@
     "id": "7852"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Mogre bone",
     "weight": "0.9",
@@ -70811,14 +70811,14 @@
     "id": "7853"
   },
   {
-    "examine": "This needs a good polish./ This belongs in a museum!",
+    "examine": "This needs a good polish.",
     "durability": null,
     "name": "Monkey paw",
     "archery_ticket_price": "0",
     "id": "7854"
   },
   {
-    "examine": "See article",
+    "examine": "There is a monkey bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70826,7 +70826,7 @@
     "id": "7855"
   },
   {
-    "examine": "This needs a good polish./ This belongs in a museum!",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Monkey paw",
     "archery_ticket_price": "0",
@@ -70841,7 +70841,7 @@
     "id": "7857"
   },
   {
-    "examine": "See article",
+    "examine": "There is a Dagannoth bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70849,7 +70849,7 @@
     "id": "7858"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Dagannoth ribs",
     "weight": "0.9",
@@ -70865,7 +70865,7 @@
     "id": "7860"
   },
   {
-    "examine": "See article",
+    "examine": "There is a snake bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70873,7 +70873,7 @@
     "id": "7861"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Snake spine",
     "weight": "0.9",
@@ -70889,7 +70889,7 @@
     "id": "7863"
   },
   {
-    "examine": "See article",
+    "examine": "There is a zombie bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70897,7 +70897,7 @@
     "id": "7864"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Zombie bone",
     "weight": "0.9",
@@ -70913,7 +70913,7 @@
     "id": "7866"
   },
   {
-    "examine": "See article",
+    "examine": "There is a werewolf bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70921,7 +70921,7 @@
     "id": "7867"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Werewolf bone",
     "weight": "0.9",
@@ -70937,7 +70937,7 @@
     "id": "7869"
   },
   {
-    "examine": "See article",
+    "examine": "There is a moss giant bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70945,7 +70945,7 @@
     "id": "7870"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Moss giant bone",
     "weight": "0.9",
@@ -70961,7 +70961,7 @@
     "id": "7872"
   },
   {
-    "examine": "See article",
+    "examine": "There is a fire giant bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70969,7 +70969,7 @@
     "id": "7873"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This bone belongs in a museum!",
     "durability": null,
     "name": "Fire giant bone",
     "weight": "0.9",
@@ -70985,7 +70985,7 @@
     "id": "7875"
   },
   {
-    "examine": "See article",
+    "examine": "There is an ice giant bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -70993,7 +70993,7 @@
     "id": "7876"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Ice giant ribs",
     "weight": "0.9",
@@ -71009,7 +71009,7 @@
     "id": "7878"
   },
   {
-    "examine": "See article",
+    "examine": "There is a terrorbird bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -71017,7 +71017,7 @@
     "id": "7879"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Terrorbird wing",
     "weight": "0.9",
@@ -71033,7 +71033,7 @@
     "id": "7881"
   },
   {
-    "examine": "See article",
+    "examine": "There is a ghoul bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -71041,7 +71041,7 @@
     "id": "7882"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Ghoul bone",
     "weight": "0.9",
@@ -71057,7 +71057,7 @@
     "id": "7884"
   },
   {
-    "examine": "See article",
+    "examine": "There is a troll bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -71065,7 +71065,7 @@
     "id": "7885"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Troll bone",
     "weight": "0.9",
@@ -71081,7 +71081,7 @@
     "id": "7887"
   },
   {
-    "examine": "See article",
+    "examine": "There is a seagull bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -71089,7 +71089,7 @@
     "id": "7888"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Seagull wing",
     "weight": "0.9",
@@ -71105,7 +71105,7 @@
     "id": "7890"
   },
   {
-    "examine": "See article",
+    "examine": "There is an undead cow bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -71113,7 +71113,7 @@
     "id": "7891"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Undead cow ribs",
     "weight": "0.9",
@@ -71122,7 +71122,7 @@
   },
   {
     "shop_price": "160",
-    "examine": "Unpolished: This needs a good polish. Polished: This bone belongs in a museum!",
+    "examine": "This needs a good polish.",
     "durability": null,
     "name": "Experiment bone",
     "weight": "0.9",
@@ -71130,7 +71130,7 @@
     "id": "7893"
   },
   {
-    "examine": "See article",
+    "examine": "There is an experiment bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -71139,7 +71139,7 @@
   },
   {
     "shop_price": "160",
-    "examine": "Unpolished: This needs a good polish. Polished: This bone belongs in a museum!",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Experiment bone",
     "weight": "0.9",
@@ -71155,7 +71155,7 @@
     "id": "7896"
   },
   {
-    "examine": "See article",
+    "examine": "There is a rabbit bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -71163,7 +71163,7 @@
     "id": "7897"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Rabbit bone",
     "weight": "0.9",
@@ -71171,7 +71171,7 @@
     "id": "7898"
   },
   {
-    "examine": "Dirty:This bone needs a good polish.",
+    "examine": "This bone needs a good polish.",
     "durability": null,
     "name": "Basilisk bone",
     "weight": "0.9",
@@ -71179,7 +71179,7 @@
     "id": "7899"
   },
   {
-    "examine": "See article",
+    "examine": "There is a basilisk bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -71187,7 +71187,7 @@
     "id": "7900"
   },
   {
-    "examine": "Dirty:This bone needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Basilisk bone",
     "weight": "0.9",
@@ -71203,7 +71203,7 @@
     "id": "7902"
   },
   {
-    "examine": "See article",
+    "examine": "There is a desert lizard bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -71211,7 +71211,7 @@
     "id": "7903"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Desert lizard bone",
     "weight": "0.9",
@@ -71227,7 +71227,7 @@
     "id": "7905"
   },
   {
-    "examine": "See article",
+    "examine": "There is a cave goblin bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -71235,7 +71235,7 @@
     "id": "7906"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Cave goblin skull",
     "weight": "0.9",
@@ -71251,7 +71251,7 @@
     "id": "7908"
   },
   {
-    "examine": "See article",
+    "examine": "There is a big frog bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -71259,7 +71259,7 @@
     "id": "7909"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Big frog leg",
     "weight": "1",
@@ -71275,7 +71275,7 @@
     "id": "7911"
   },
   {
-    "examine": "See article",
+    "examine": "There is a vulture bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -71283,7 +71283,7 @@
     "id": "7912"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Vulture wing",
     "weight": "0.9",
@@ -71299,7 +71299,7 @@
     "id": "7914"
   },
   {
-    "examine": "See article",
+    "examine": "There is a jackal bone in here.",
     "durability": null,
     "name": "Bone in vinegar",
     "weight": "1",
@@ -71307,7 +71307,7 @@
     "id": "7915"
   },
   {
-    "examine": "This needs a good polish.",
+    "examine": "This belongs in a museum!",
     "durability": null,
     "name": "Jackal bone",
     "weight": "0.9",

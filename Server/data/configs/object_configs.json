@@ -20008,6 +20008,26 @@
     "ids": "14003"
   },
   {
+    "examine": "Well, I have the logs in place, now to get something to boil.",
+    "ids": "14005"
+  },
+  {
+    "examine": "Covered in a thick layer of grease.",
+    "ids": "14006"
+  },
+  {
+    "examine": "I'm glad this isn't for dinner.",
+    "ids": "14007"
+  },
+  {
+    "examine": "This smells so very, very bad...",
+    "ids": "14008"
+  },
+  {
+    "examine": "It seems to have all boiled away.",
+    "ids": "14009"
+  },
+  {
     "examine": "Home sweet home?",
     "ids": "15477"
   },
