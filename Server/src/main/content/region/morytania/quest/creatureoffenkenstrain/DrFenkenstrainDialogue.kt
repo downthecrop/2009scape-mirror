@@ -26,6 +26,12 @@ class DrFenkenstrainDialogue (player: Player? = null) : DialoguePlugin(player) {
 class DrFenkenstrainDialogueFile : DialogueBuilderFile() {
 
     companion object {
+        private fun allPartsSubmitted(player: Player): Boolean {
+            return getAttribute(player, CreatureOfFenkenstrain.attributeArms, false) &&
+                    getAttribute(player, CreatureOfFenkenstrain.attributeLegs, false) &&
+                    getAttribute(player, CreatureOfFenkenstrain.attributeTorso, false) &&
+                    getAttribute(player, CreatureOfFenkenstrain.attributeHead, false)
+        }
         private fun reqArms(player: Player): Boolean {
             return !getAttribute(player, CreatureOfFenkenstrain.attributeArms, false) && inInventory(player, Items.ARMS_4195)
         }
@@ -47,9 +53,8 @@ class DrFenkenstrainDialogueFile : DialogueBuilderFile() {
                         .goto(returnJoin)
                 branch.onValue(1)
                         .betweenStage { _, player, _, _ ->
-                            if (removeItem(player, item)) {
-                                setAttribute(player, attributeToSet, true)
-                            }
+                            setAttribute(player, attributeToSet, true)
+                            removeItem(player, item)
                         }
                         .npcl(successMsg)
                         .goto(returnJoin)
@@ -131,10 +136,10 @@ class DrFenkenstrainDialogueFile : DialogueBuilderFile() {
                 .options().let { optionBuilder ->
                     val continuePath = b.placeholder()
 
-                    optionBuilder.optionIf("I have some body parts for you.") { player -> return@optionIf reqArms(player) || reqLegs(player) || reqTorso(player) || reqHead(player) }
+                    optionBuilder.optionIf("I have some body parts for you.") { player -> return@optionIf allPartsSubmitted(player) || reqArms(player) || reqLegs(player) || reqTorso(player) || reqHead(player) }
                             .playerl("I have some body parts for you.")
                             .goto(continuePath) // Continue down below.
-                    optionBuilder.optionIf("Do you know where I could find body parts?") { player -> return@optionIf !(reqArms(player) || reqLegs(player) || reqTorso(player) || reqHead(player)) }
+                    optionBuilder.optionIf("Do you know where I could find body parts?") { player -> return@optionIf !(allPartsSubmitted(player) || reqArms(player) || reqLegs(player) || reqTorso(player) || reqHead(player)) }
                             .playerl("Do you know where I could find body parts?")
                             .npcl("The soil of Morytania is unique in its ability to preserve the bodies of the dead, which is one reason why I have chosen to carry out my experiments here.")
                             .npcl("I recommend digging up some graves in the local area. To the south-east you will find the Haunted Woods; I believe there are many graves there.")
@@ -168,10 +173,7 @@ class DrFenkenstrainDialogueFile : DialogueBuilderFile() {
                 // Dialogue path to look for head.
                 .let{ builder -> return@let hasPart(builder, Item(Items.DECAPITATED_HEAD_4198, 1), CreatureOfFenkenstrain.attributeHead, "Fantastic, you've brought me a head.") }
                 .branch { player ->
-                    return@branch if (getAttribute(player, CreatureOfFenkenstrain.attributeHead, false) &&
-                            getAttribute(player, CreatureOfFenkenstrain.attributeLegs, false) &&
-                            getAttribute(player, CreatureOfFenkenstrain.attributeTorso, false) &&
-                            getAttribute(player, CreatureOfFenkenstrain.attributeHead, false)) { 1 } else { 0 }
+                    return@branch if (allPartsSubmitted(player)) { 1 } else { 0 }
                 }.let{ branch ->
                     // Failure branch
                     branch.onValue(0)

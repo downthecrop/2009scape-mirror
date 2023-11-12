@@ -21,9 +21,9 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
     companion object {
         private val itemToAttribute = hashMapOf(
                 Items.ARMS_4195 to CreatureOfFenkenstrain.attributeArms,
-                Items.LEGS_4196 to CreatureOfFenkenstrain.attributeArms,
-                Items.TORSO_4194 to CreatureOfFenkenstrain.attributeArms,
-                Items.DECAPITATED_HEAD_4197 to CreatureOfFenkenstrain.attributeArms
+                Items.LEGS_4196 to CreatureOfFenkenstrain.attributeLegs,
+                Items.TORSO_4194 to CreatureOfFenkenstrain.attributeTorso,
+                Items.DECAPITATED_HEAD_4197 to CreatureOfFenkenstrain.attributeHead
         )
 
         enum class Graves(val location: Location, val graveName: String, val unearthText: String, val unearthItem: Int?) {
@@ -106,8 +106,8 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
                 override fun pulse(): Boolean {
                     player.animate(Animation(-1))
                     if(grave?.unearthItem != null &&
-                            !hasAnItem(player, grave.unearthItem).exists() &&
-                            !getAttribute(player, itemToAttribute[grave.unearthItem] ?: "", false)) {
+                            !hasAnItem(player, grave.unearthItem).exists()
+                            /* && !getAttribute(player, itemToAttribute[grave.unearthItem] ?: "", false) */) {
                         sendItemDialogue(player, grave.unearthItem, grave.unearthText)
                         addItemOrDrop(player, grave.unearthItem)
                     } else {
