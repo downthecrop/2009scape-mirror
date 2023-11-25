@@ -10,6 +10,9 @@ import core.game.world.map.zone.impl.DarkZone
 import core.plugin.Initializable
 import core.game.world.GameWorld
 import content.global.skill.farming.*
+import core.ServerStore
+import core.ServerStore.Companion.getBoolean
+import core.ServerStore.Companion.getInt
 import core.api.*
 import core.cache.def.impl.ItemDefinition
 import org.rs09.consts.Items
@@ -29,28 +32,30 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
     DAMAGE_SPONG("cape_perks:damage-sponge"),
     MARATHON_RUNNER("cape_perks:marathon-runner"),
     LIBRARIAN_MAGUS("cape_perks:librarian-magus",{player ->
-       val time = player.getAttribute("cape_perks:librarian-magus-timer",0L)
-        if(player.getAttribute("cape_perks:librarian-magus-charges",2) > 0 || System.currentTimeMillis() > time){
-            if(System.currentTimeMillis() > time) player.setAttribute("/save:cape_perks:librarian-magus-charges",3)
+        val store = ServerStore.getArchive("daily-librarian-magus")
+        val used = store.getInt(player.name,0)
+        if (used >= 3) {
+            player.dialogueInterpreter.sendDialogue("Your cape is still on cooldown.")
+        } else {
             player.dialogueInterpreter.open(509871234)
-            if(System.currentTimeMillis() > time)
-                player.setAttribute("/save:cape_perks:librarian-magus-timer",System.currentTimeMillis() + java.util.concurrent.TimeUnit.DAYS.toMillis(1))
+            store[player.name] = used + 1
         }
     }),
-    ABYSS_WARPING("cape_perks:abyss_warp",{ player ->
-        val time = player.getAttribute("cape_perks:abyssal_warp_timer",0L)
-        if(player.getAttribute("cape_perks:abyssal_warp",3) > 0 || System.currentTimeMillis() > time){
-            if(System.currentTimeMillis() > time) player.setAttribute("/save:cape_perks:abyssal_warp",3)
-            player.dialogueInterpreter.open(509871233)
-            if(System.currentTimeMillis() > time)
-                player.setAttribute("/save:cape_perks:abyssal_warp_timer",System.currentTimeMillis() + java.util.concurrent.TimeUnit.DAYS.toMillis(1))
+    ABYSS_WARPING("cape_perks:abyss_warp",{player ->
+        val store = ServerStore.getArchive("daily-abyss-warp")
+        val used = store.getInt(player.name,0)
+        if (used >= 3) {
+            player.dialogueInterpreter.sendDialogue("Your cape is still on cooldown.")
         } else {
-            player.dialogueInterpreter.sendDialogue("Your cape is still on cooldown.","Ready in " + java.util.concurrent.TimeUnit.MILLISECONDS.toMinutes(time - System.currentTimeMillis()) + " minutes.")
+            player.dialogueInterpreter.open(509871233)
+            store[player.name] = used + 1
         }
     }),
     SEED_ATTRACTION("cape_perks:seed_attract",{player ->
-        val time = player.getAttribute("cape_perks:seed_attract_timer",0L)
-        if(System.currentTimeMillis() > time){
+        val store = ServerStore.getArchive("daily-seed-attract")
+        if (store.getBoolean(player.name)) {
+            player.dialogueInterpreter.sendDialogue("Your cape is still on cooldown.")
+        } else {
             val possibleSeeds = Plantable.values()
             for(i in 0 until 10){
                 var seed = possibleSeeds.random()
@@ -63,9 +68,7 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
                 }
             }
             player.dialogueInterpreter.sendDialogue("You pluck off the seeds that were stuck to your cape.")
-            player.setAttribute("/save:cape_perks:seed_attract_timer",System.currentTimeMillis() + java.util.concurrent.TimeUnit.DAYS.toMillis(1))
-        } else {
-            player.dialogueInterpreter.sendDialogue("Your cape is still on cooldown.","Ready in " + java.util.concurrent.TimeUnit.MILLISECONDS.toMinutes(time - System.currentTimeMillis()) + " minutes.")
+            store[player.name] = true
         }
     }),
     TRICKS_OF_THE_TRADE("cape_perks:tott",{player ->

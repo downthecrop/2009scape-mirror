@@ -82,7 +82,7 @@ class StarSpriteDialogue(player: Player? = null) : core.game.dialogue.DialoguePl
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
-                npc("I'm a star sprite! I Was in my star in the sky, when it", "lost control and crashed into the ground. With half my", "star sticking into the ground, I became stuck.", "Fortunately, I was mined out by the kind creatures of")
+                npc("I'm a star sprite! I was in my star in the sky, when it", "lost control and crashed into the ground. With half my", "star sticking into the ground, I became stuck.", "Fortunately, I was mined out by the kind creatures of")
                 stage++
             }
             1 -> {
