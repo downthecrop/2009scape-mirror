@@ -265,8 +265,7 @@ class AbyssPlugin : InteractionListener {
                 override fun pulse(): Boolean {
                     when (count++) {
                         1 -> sendMessage(player, messages[0])
-                        3 -> return if (RandomFunction.random(100) < getStatLevel(player,skill)
-                        ) {
+                        3 -> return if (RandomFunction.random(100) < getStatLevel(player,skill)+1) {
                             sendMessage(player, colorize("%G${messages[1]}"))
                             if(varbitVal != null) { setVarbit(player, 625, varbitVal) }
                             false
