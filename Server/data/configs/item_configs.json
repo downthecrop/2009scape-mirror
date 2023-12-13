@@ -20737,8 +20737,8 @@
     "durability": null,
     "name": "Burnt curry",
     "tradeable": "true",
-    "archery_ticket_price":"0",
-    "id":"2013"
+    "archery_ticket_price": "0",
+    "id": "2013"
   },
   {
     "durability": null,
@@ -34994,7 +34994,9 @@
     "examine": "The lowest maintenance pet you will ever have.",
     "walk_anim": "6658",
     "durability": null,
+    "weight": "1",
     "turn90ccw_anim": "6663",
+    "two_handed": "true",
     "turn180_anim": "6659",
     "render_anim": "792",
     "equipment_slot": "3",
