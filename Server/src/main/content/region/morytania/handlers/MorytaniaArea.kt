@@ -14,11 +14,17 @@ import core.game.world.GameWorld
 
 class MorytaniaArea : MapArea {
     override fun defineAreaBorders(): Array<ZoneBorders> {
-       return arrayOf(ZoneBorders(3426, 3191, 3715, 3588))
+       return arrayOf(
+               ZoneBorders(3426, 3191, 3715, 3588), //Morytania overworld
+               ZoneBorders(3520, 9856, 3583, 9919) //Werewolf agility course
+       )
     }
 
     override fun areaEnter(entity: Entity) {
-        if (entity is Player && entity !is AIPlayer && !isQuestComplete(entity, "Priest in Peril")) {
+        if (entity is Player && entity !is AIPlayer && (
+            !isQuestComplete(entity, "Priest in Peril") || //not allowed to be anywhere in Morytania
+            defineAreaBorders()[1].insideBorder(entity) //Werewolf agility course is not implemented
+        )) {
             kickThemOut(entity)
         }
     }
