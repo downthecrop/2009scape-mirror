@@ -1,29 +1,22 @@
-package content.region.asgarnia.burthorpe.dialogue
-
+import core.api.openDialogue
+import core.game.dialogue.DialogueBuilder
+import core.game.dialogue.DialogueBuilderFile
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
+import org.rs09.consts.NPCs
 
 /**
  * @author qmqz
+ * @author Trident101
  */
 
 @Initializable
 class AchiettiesDialogue(player: Player? = null) : DialoguePlugin(player){
 
-    override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        npc(FacialExpression.FRIENDLY,"Greetings. Welcome to the Heroes' Guild.")
-        stage = 99
-        return true
-    }
-
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when(stage){
-            99 -> end()
-        }
+        openDialogue(player, AchiettiesDialogueFile(), npc)
         return true
     }
 
@@ -32,6 +25,15 @@ class AchiettiesDialogue(player: Player? = null) : DialoguePlugin(player){
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(796)
+        return intArrayOf(NPCs.ACHIETTIES_796)
+    }
+}
+
+class AchiettiesDialogueFile : DialogueBuilderFile() {
+
+    override fun create(b: DialogueBuilder) {
+        b.defaultDialogue().npcl(FacialExpression.FRIENDLY,
+            "Greetings. Welcome to the Heroes' Guild."
+        )
     }
 }

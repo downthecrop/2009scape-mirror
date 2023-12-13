@@ -19920,7 +19920,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "Common bucket: It's a bucket of water.2008 Easter event: It's a bucket of water from the Easter Bunny's warren. Regular bucket filled from Braindeath Island: It's a bucket of... water?",
+    "examine": "It's a bucket of water.",
     "grand_exchange_price": "72",
     "durability": null,
     "name": "Bucket of water",
@@ -49283,7 +49283,7 @@
     "id": "5517"
   },
   {
-    "examine": "When empty:",
+    "examine": "This contains mystical teleport information...",
     "durability": null,
     "name": "Scrying orb",
     "weight": "1",
@@ -49291,7 +49291,7 @@
     "id": "5518"
   },
   {
-    "examine": "When empty:",
+    "examine": "This orb apparently contains a cypher spell.",
     "durability": null,
     "name": "Scrying orb",
     "weight": "1",

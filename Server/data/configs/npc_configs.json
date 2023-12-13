@@ -72515,5 +72515,15 @@
     "combat_audio": "12,3295,3287",
     "id": "6744",
     "defence_animation": "7559"
+  },
+  {
+    "examine": "Distinctly heroic.",
+    "name": "Achietties",
+    "id": "796"
+  },
+  {
+    "examine": "The hat is a dead give away.",
+    "name": "Wizard Cromperty",
+    "id": "2328"
   }
 ]

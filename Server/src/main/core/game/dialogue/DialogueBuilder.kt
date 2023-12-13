@@ -300,6 +300,9 @@ class DialogueBuilder(var target: DialogueBuilderFile, var clauseIndex: Int = -1
         clauseIndex = target.data.size - 1
         return this
     }
+    fun defaultDialogue(): DialogueBuilder {
+        return onPredicate({ _ -> return@onPredicate true})
+    }
     fun onQuestStages(name: String, vararg stages: Int): DialogueBuilder {
         return onPredicate() { player ->
             val questStage = player.questRepository.getStage(name)
