@@ -11523,7 +11523,7 @@
   {
     "default": [],
     "charm": [],
-    "ids": "438,439,440,441,442,443,655,4470",
+    "ids": "438,439,440,441,442,443,4470",
     "description": "Tree Spirit (Hostile Woodcutting Random Event/Enchanted Valley)",
     "main": [
       {

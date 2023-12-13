@@ -320,6 +320,10 @@ public enum WoodcuttingNode {
                 experience = 25.0;
                 level = 36;
                 rewardAmount = Integer.MAX_VALUE;
+                baseLow = 255;
+                baseHigh = 255;
+                tierModLow = 0;
+                tierModHigh = 0;
                 break;
             case 30:
                 reward = 3692;

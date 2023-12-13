@@ -54,12 +54,4 @@ class TreeSpiritNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, l
             }
         }
     }
-
-    override fun isAttackable(entity: Entity, style: CombatStyle, message: Boolean): Boolean {
-        if(entity != target) {
-            return false
-        }
-        return super.isAttackable(entity, style, message)
-    }
-
 }
