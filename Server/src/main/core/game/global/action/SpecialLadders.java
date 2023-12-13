@@ -56,6 +56,9 @@ public enum SpecialLadders implements LadderAchievementCheck {
     },
     PORT_SARIM_RAT_PITS_UP(new Location(2962,9651,0), new Location(3018,3231,0)),
     ENTRANA_GLASSBLOWING_PIPE_HOUSE_DOWN(new Location(2816, 3352, 1), new Location(2817, 3352, 0)),
+    PATERDOMUS_TEMPLE_STAIRCASE_NORTH_UP(new Location(3415, 3490, 0), new Location(3415, 3491, 1)),
+    PATERDOMUS_TEMPLE_STAIRCASE_NORTH_DOWN(new Location(3415, 3491, 1), new Location(3414,3491,0)),
+    PATERDOMUS_TEMPLE_STAIRCASE_SOUTH_DOWN(new Location(3415, 3486,1), new Location(3414, 3486,0)),
     PHASMATYS_BAR_DOWN(new Location(3681,3498,0), new Location(3682,9961,0)),
     PHASMATYS_BAR_UP(new Location(3682,9962,0), new Location(3681,3497,0)),
     SEERS_VILLAGE_SPINNING_HOUSE_ROOFTOP_UP(new Location(2715,3472,1), new Location(2714,3472,3)) {

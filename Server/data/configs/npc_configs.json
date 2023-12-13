@@ -6944,6 +6944,16 @@
     "attack_level": "1"
   },
   {
+    "examine": "A being from a mysterious realm.",
+    "name": "Jukat",
+    "id": "564"
+  },
+  {
+    "examine": "Is he invisible, or just floating clothing?",
+    "name": "Irksol",
+    "id": "566"
+  },
+  {
     "examine": "Looks strange and mysterious.",
     "melee_animation": "0",
     "range_animation": "0",
@@ -16520,6 +16530,11 @@
     "bonuses": "10,15,5,10,30,5,30,30,30,10,30,5,40,5,5",
     "range_level": "1",
     "attack_level": "25"
+  },
+  {
+    "examine": "She looks dangerous!",
+    "name": "Chaeldar",
+    "id": "1598"
   },
   {
     "examine": "A spiky crawling critter. ",
@@ -31775,6 +31790,11 @@
     "attack_level": "1"
   },
   {
+    "examine": "White and fluffy",
+    "name": "Sheep",
+    "id": "3310"
+  },
+  {
     "name": "Tanglefoot",
     "defence_level": "1",
     "safespot": null,
@@ -38363,6 +38383,11 @@
     "id": "4419",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "A healing fairy.",
+    "name": "Fairy Nuff",
+    "id": "4434"
   },
   {
     "examine": "Horseplay.",
@@ -44957,6 +44982,11 @@
     "id": "5163",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "White and fluffy",
+    "name": "Sheep",
+    "id": "5164"
   },
   {
     "examine": "This goat belongs to the mountain camp people.",
