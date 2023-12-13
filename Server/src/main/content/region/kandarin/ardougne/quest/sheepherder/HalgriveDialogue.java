@@ -3,6 +3,8 @@ package content.region.kandarin.ardougne.quest.sheepherder;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.game.dialogue.DialoguePlugin;
+import core.api.*;
+import org.rs09.consts.Items;
 
 @Initializable
 public class HalgriveDialogue extends DialoguePlugin {
@@ -141,6 +143,20 @@ public class HalgriveDialogue extends DialoguePlugin {
                 break;
             case 201:
                 npc("Well, please do hurry!");
+                stage++;
+                break;
+            case 202:
+                if  (ContentAPIKt.hasAnItem(player, Items.SHEEP_FEED_279).getContainer() != null){
+                    player("I'll do my best sir.");
+                    stage = 108;
+                } else {
+                    player("Some more sheep poison would be appreciated...");
+                    stage++;
+                }
+                break;
+            case 203:
+                ContentAPIKt.addItemOrDrop(player, Items.SHEEP_FEED_279, 1);
+                npc("Certainly adventurer. Please hurry!");
                 stage = 108;
                 break;
             case 205:
