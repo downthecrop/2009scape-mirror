@@ -4,6 +4,7 @@ import content.global.handlers.iface.BookInterface
 import content.global.handlers.iface.BookLine
 import content.global.handlers.iface.Page
 import content.global.handlers.iface.PageSet
+import core.ServerConstants
 import core.api.setAttribute
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -19,7 +20,7 @@ class AstronomyBook : InteractionListener {
             PageSet(
                 Page(
                     BookLine("A History of Astronomy", 55),
-                    BookLine("in 2009Scape.", 56),
+                    BookLine("in ${ServerConstants.SERVER_NAME}.", 56),
                     BookLine("", 57),
                     BookLine("At the start of the 4th age,", 58),
                     BookLine("a learned man by the", 59),
@@ -50,7 +51,7 @@ class AstronomyBook : InteractionListener {
                     BookLine("grew adept at using his", 56),
                     BookLine("specialized skills, and followed", 57),
                     BookLine("the movements of stars", 58),
-                    BookLine("in 2009Scape, which are", 59),
+                    BookLine("in ${ServerConstants.SERVER_NAME}, which are", 59),
                     BookLine("mapped and named, and still", 60),
                     BookLine("used to this day.", 61),
                     BookLine("", 62),

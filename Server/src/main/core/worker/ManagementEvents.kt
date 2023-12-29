@@ -270,10 +270,10 @@ object ManagementEvents {
                         initializeClanWith(info)
                     } else {
                         SystemLogger.logMS("Creating default server clan")
-                        if (GameWorld.settings!!.enable_default_clan && event.clanOwner == ServerConstants.SERVER_NAME) {
+                        if (GameWorld.settings!!.enable_default_clan && event.clanOwner == ServerConstants.SERVER_NAME.toLowerCase()) {
                             //Create a user with the default clan and some basic settings and stick them in the account storage
                             if (info == UserAccountInfo.createDefault()) {
-                                info.username = ServerConstants.SERVER_NAME
+                                info.username = ServerConstants.SERVER_NAME.toLowerCase()
                                 info.password = ServerConstants.MS_SECRET_KEY
                                 info.rights = 2
                                 GameWorld.authenticator.createAccountWith(info)

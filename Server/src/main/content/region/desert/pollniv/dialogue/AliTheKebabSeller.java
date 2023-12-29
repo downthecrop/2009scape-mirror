@@ -1,5 +1,6 @@
 package content.region.desert.pollniv.dialogue;
 
+import core.ServerConstants;
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC;
@@ -62,7 +63,7 @@ public class AliTheKebabSeller extends DialoguePlugin {
                 stage = 8;
                 break;
             case 8:
-                npc("I offer two different types of kebabs: the standard","run-of-the-mill kebab seen throughout 2009scape and","enjoyed by many a intoxicated dwarf, and my specialty,","the extra-hot kebab. So which shall it be?");
+                npc("I offer two different types of kebabs: the standard","run-of-the-mill kebab seen throughout " + ServerConstants.SERVER_NAME + " and","enjoyed by many a intoxicated dwarf, and my specialty,","the extra-hot kebab. So which shall it be?");
                 stage = 9;
                 break;
             case 9:

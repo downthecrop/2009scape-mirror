@@ -1,5 +1,6 @@
 package content.region.asgarnia.falador.dialogue;
 
+import core.ServerConstants;
 import core.Util;
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
@@ -65,7 +66,7 @@ public class SirReniteeDialogue extends DialoguePlugin {
                 end();
                 break;
             case 100:
-                interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Hmm, well, mmm, do you have a family crest? I keep", "track of every 2009Scape family, you know, so I might", "be able to find yours.");
+                interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Hmm, well, mmm, do you have a family crest? I keep", "track of every " + ServerConstants.SERVER_NAME + " family, you know, so I might", "be able to find yours.");
                 stage = 110;
                 break;
             case 110:

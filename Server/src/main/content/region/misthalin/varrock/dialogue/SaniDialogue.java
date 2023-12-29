@@ -107,11 +107,11 @@ public class SaniDialogue extends DialoguePlugin {
 			stage++;
 			break;
 		case 22:
-			player("I see...", "So this means that you only sell common armours", "to help adventurers like nyself get started in the world", "of Keldagrim.");
+			player("I see...", "So this means that you only sell common armours", "to help adventurers like myself get started in the world", "of Gielinor.");
 			stage++;
 			break;
 		case 23:
-			npc("Indeed, that is true. If you have any more questions", "The Keldagrim guide near the green portal should be able", "to assist you further.");
+			npc("Indeed, that is true. If you have any more questions", "The Gielinor guide near the green portal should be able", "to assist you further.");
 			stage = 0;
 			break;
 		case 30:

@@ -47,9 +47,9 @@ class NedDiaryDialogue : DialogueFile() {
             }
             10 -> {
                 npc(
-                    "Ah, well it's a diary that helps you keep track of",
+                    "Ah, well, it's a diary that helps you keep track of",
                     "particular achievements you've made in the world of",
-                    "2009Scape. In Lumbridge and Draynor i can help you",
+                    "Gielinor. In Lumbridge and Draynor I can help you",
                     "discover some very useful things indeed."
                 )
                 stage++

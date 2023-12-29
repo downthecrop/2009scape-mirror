@@ -121,7 +121,7 @@ public final class BountyHunterActivity extends ActivityPlugin {
 	};
 
 	/**
-	 * The game pulse (doesn't update every tick on 2009scape as well).
+	 * The game pulse (doesn't update every tick on 2009Scape as well).
 	 */
 	private final Pulse gamePulse = new Pulse(10) {
 		@Override

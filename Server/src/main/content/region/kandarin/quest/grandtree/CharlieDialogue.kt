@@ -1,6 +1,7 @@
 package content.region.kandarin.quest.grandtree
 
 import content.region.kandarin.quest.grandtree.TheGrandTree.Companion.questName
+import core.ServerConstants
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.global.action.DoorActionHandler
@@ -50,8 +51,8 @@ class CharlieDialogue : DialogueFile() {
                     2 -> npcl("I shouldn't tell you this adventurer. But if you want to get to the bottom of this you should go and talk to the Karamja Shipyard foreman.").also { stage++ }
                     3 -> playerl("Why?").also { stage++ }
                     4 -> npcl("Glough sent me to Karamja to meet him. I delivered a large amount of gold. For what? I don't know. He may be able to tell you what Glough's up to. That's if you can get out of here. You'll find him").also { stage++ }
-                    5 -> npcl("in the Karamja Shipyard, east of Shilo Village. Be careful! If he discovers you're not working for Glough, there'll be trouble! The sea men use the password Ka-Lu-Min.").also { stage++ }
-                    6 -> playerl("Thanks Charlie!").also {
+                    5 -> npcl("in the Karamja Shipyard, east of Shilo Village. Be careful! If he discovers you're not working for Glough, there'll be trouble! The seamen use the password Ka-Lu-Min.").also { stage++ }
+                    6 -> playerl("Thanks, Charlie!").also {
                         stage = END_DIALOGUE
                         GameWorld.Pulser.submit(object : Pulse(0) {
                             var count = 0
@@ -66,7 +67,7 @@ class CharlieDialogue : DialogueFile() {
                                     }
 
                                     2 -> {
-                                        sendNPCDialogue(player!!, npc.id,"Traveller please accept my apologies! Glough had no right to arrest you! I just think he's scared of humans. Let me get you out of there.")
+                                        sendNPCDialogue(player!!, npc.id,"Traveller, please accept my apologies! Glough had no right to arrest you! I just think he's scared of humans. Let me get you out of there.")
                                     }
 
                                     4 -> {
@@ -92,9 +93,9 @@ class CharlieDialogue : DialogueFile() {
             55 -> {
                 if(player!!.hasItem(Item(Items.LUMBER_ORDER_787))){
                     when(stage) {
-                        0 -> playerl("How are you doing Charlie?").also { stage++ }
+                        0 -> playerl("How are you doing, Charlie?").also { stage++ }
                         1 -> npcl("I've been better.").also { stage++ }
-                        2 -> playerl("Glough has some plan to rule 2009Scape!").also { stage++ }
+                        2 -> playerl("Glough has some plan to rule ${ServerConstants.SERVER_NAME}!").also { stage++ }
                         3 -> npcl("I wouldn't put it past him, the Gnome's crazy!").also { stage++ }
                         4 -> playerl("I need some proof to convince the King.").also { stage++ }
                         5 -> npcl("Hmm...you could be in luck! Before Glough had me locked up I heard him mention that he'd left his chest keys at his girlfriend's.").also { stage++ }

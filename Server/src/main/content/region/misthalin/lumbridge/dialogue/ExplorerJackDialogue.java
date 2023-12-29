@@ -87,7 +87,7 @@ public class ExplorerJackDialogue extends DialoguePlugin {
 			}
 			break;
 		case 1:
-			player("Oh sorry. I was just looking around");
+			player("Oh sorry. I was just looking around.");
 			stage++;
 			break;
 		case 2:
@@ -95,15 +95,15 @@ public class ExplorerJackDialogue extends DialoguePlugin {
 			stage++;
 			break;
 		case 3:
-			player("Uh...and all what?");
+			player("Uh... and all what?");
 			stage++;
 			break;
 		case 4:
-			npc("Splendid! I love a person with a sense of humour. I bet", "you're from Ardougne eh? Ha!");
+			npc("Splendid! I love a person with a sense of humour. I bet", "you're from Ardougne, eh? Ha!");
 			stage = -1;
 			break;
 		case 10:
-			npc("Ah, well it's a diary that helps you keep track of", "particular achievements you've made in the world of", "Keldagrim. In Lumbridge and Draynor I can help you", "discover some very useful things indeed.");
+			npc("Ah, well, it's a diary that helps you keep track of", "particular achievements you've made in the world of Gielinor. In Lumbridge and Draynor I can help you", "discover some very useful things indeed.");
 			stage++;
 			break;
 		case 11:

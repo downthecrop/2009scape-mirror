@@ -113,7 +113,7 @@ public final class LoginConfiguration {
         player.getPacketDispatch().sendString("Credits", 378, 94);
         player.getPacketDispatch().sendString(player.getDetails().getCredits() + "", 378, 96);
         player.getPacketDispatch().sendString(" ", 378, 229);
-        player.getPacketDispatch().sendString("Want to contribute to 2009scape? <br>Visit the github using the link below!", 378, 230);
+        player.getPacketDispatch().sendString("Want to contribute to " + ServerConstants.SERVER_NAME + "? <br>Visit the GitLab using the link below!", 378, 230);
         player.getPacketDispatch().sendString(" ", 378, 231);
         player.getPacketDispatch().sendString("Github", 378, 240);
         player.getPacketDispatch().sendString(GameWorld.getSettings().getMessage_string(), messModel, getMessageChild(messModel));

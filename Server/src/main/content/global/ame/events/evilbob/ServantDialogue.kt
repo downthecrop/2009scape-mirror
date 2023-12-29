@@ -1,5 +1,6 @@
 package content.global.ame.events.evilbob
 
+import core.ServerConstants
 import core.api.getAttribute
 import core.api.setAttribute
 import core.game.dialogue.DialogueFile
@@ -34,7 +35,7 @@ class ServantDialogue : DialogueFile() {
                     }
                 }
                 2 -> npcl(FacialExpression.SAD, "Come? Come where?").also { stage++ }
-                3 -> playerl(FacialExpression.FRIENDLY, "Away from this place! To 2009Scape proper!").also { stage++ }
+                3 -> playerl(FacialExpression.FRIENDLY, "Away from this place! To ${ServerConstants.SERVER_NAME} proper!").also { stage++ }
                 4 -> npcl(FacialExpression.SAD, "You go, ${player!!.username}, I don't belong there... I belong here, in Scape2009. This is the only place I can ever go...").also { stage++ }
                 5 -> options("But I love you!", "Oh alright then.").also { stage++ }
                 6 -> when(buttonID) {

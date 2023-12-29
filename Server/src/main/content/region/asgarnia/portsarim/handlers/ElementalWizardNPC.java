@@ -1,5 +1,6 @@
 package content.region.asgarnia.portsarim.handlers;
 
+import core.ServerConstants;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.plugin.Initializable;
 import core.game.dialogue.DialoguePlugin;
@@ -245,7 +246,7 @@ public final class ElementalWizardNPC extends AbstractNPC {
 				stage = 21;
 				break;
 			case 21:
-				npc("Many say it was the greatest building in the history of", "2009scape, a magnificent monument to human ingenuity.");
+				npc("Many say it was the greatest building in the history of", ServerConstants.SERVER_NAME + ", a magnificent monument to human ingenuity.");
 				stage = 22;
 				break;
 			case 22:

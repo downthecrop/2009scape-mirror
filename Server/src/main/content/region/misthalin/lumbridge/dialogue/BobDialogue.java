@@ -211,7 +211,7 @@ public final class BobDialogue extends DialoguePlugin {
 			}
 			break;
 		case 110:
-			npc("Ah, well it's a diary that helps you keep track of", "particular achievements you've made in the world of", "Keldagrim. In Lumbridge and Draynor i can help you", "discover some very useful things indeed.");
+			npc("Ah, well, it's a diary that helps you keep track of", "particular achievements you've made in the world of", "Gielinor. In Lumbridge and Draynor I can help you", "discover some very useful things indeed.");
 			stage++;
 			break;
 		case 111:

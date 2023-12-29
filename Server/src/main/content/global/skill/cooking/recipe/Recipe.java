@@ -23,7 +23,7 @@ import core.game.node.item.Item;
 public abstract class Recipe {
 
 	/**
-	 * Represents the array of active recipes in Keldagrim..
+	 * Represents the array of active recipes in 2009Scape.
 	 */
     // TODO:
     // - Making this an enum would drastically save on file/line count, since the recipes seem to mostly be plain-old-data classes

@@ -73,7 +73,7 @@ public class AlchemyGuardianDialogue extends DialoguePlugin {
 			stage++;
 			break;
 		case 12:
-			npc("around Keldagrim. Keep an eye on the cost of each", "items as these will change from time-to-time, as will the", "location of the items. Occasionally one of the items will", "be indicated as costing no runestones to convert to");
+			npc("around Gielinor. Keep an eye on the cost of each", "item as these will change from time-to-time, as will the", "location of the items. Occasionally one of the items will", "be indicated as costing no runestones to convert to");
 			stage++;
 			break;
 		case 13:

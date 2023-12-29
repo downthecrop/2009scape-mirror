@@ -67,7 +67,7 @@ public class GraveyardGuardianDialogue extends DialoguePlugin {
 			}
 			break;
 		case 10:
-			npc("Have you noticed all the bones around the room? These", "are teleported here from all over Keldagrim to help", "clean up the landscape of countless bones left behind", "from combat. What better use for these bones than to");
+			npc("Have you noticed all the bones around the room? These", "are teleported here from all over Gielinor to help", "clean up the landscape of countless bones left behind", "from combat. What better use for these bones than to");
 			stage++;
 			break;
 		case 11:

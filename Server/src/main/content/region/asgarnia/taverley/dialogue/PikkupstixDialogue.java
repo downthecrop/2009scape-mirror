@@ -1,5 +1,6 @@
 package content.region.asgarnia.taverley.dialogue;
 
+import core.ServerConstants;
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
 import core.game.node.entity.skill.Skills;
@@ -698,7 +699,7 @@ public final class PikkupstixDialogue extends DialoguePlugin {
 				stage = 104;
 				break;
 			case 104:
-				npc("This is reflected in your increased ability to raise animals", "as pets. It takes a skilled summoner to be able to raise", "some of 2009scape's more exotic animals, such as the lizards", "of Karamja, or even dragons!");
+				npc("This is reflected in your increased ability to raise animals", "as pets. It takes a skilled summoner to be able to raise", "some of " + ServerConstants.SERVER_NAME + "'s more exotic animals, such as the lizards", "of Karamja, or even dragons!");
 				stage = 105;
 				break;
 			case 105:

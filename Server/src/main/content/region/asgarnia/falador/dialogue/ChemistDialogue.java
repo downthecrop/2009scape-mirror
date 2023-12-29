@@ -290,7 +290,7 @@ public final class ChemistDialogue extends DialoguePlugin {
                 break;
 
             case 110:
-                npc("Ah, well it's a diary that helps you keep track of", "particular achievements you've made here on", "2009Scape.");
+                npc("Ah, well, it's a diary that helps you keep track of", "particular achievements you've made here on Gielinor.");
                 stage = 111;
                 break;
             case 111:

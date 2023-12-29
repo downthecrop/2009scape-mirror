@@ -9,7 +9,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 
 /**
- * Represents the 2009scape instructor plugin.
+ * Represents the 2009Scape instructor plugin.
  * @author 'Vexia
  * @date 20.11.2013
  */

@@ -1,5 +1,6 @@
 package content.global.ame.events.evilbob
 
+import core.ServerConstants
 import core.api.*
 import core.game.dialogue.FacialExpression
 import core.game.interaction.IntType
@@ -119,7 +120,7 @@ class EvilBobListeners : InteractionListener, MapArea {
                             return@queueScript delayScript(player, 2)
                         }
                         3 -> {
-                            sendMessage(player, "Welcome back to 2009Scape.")
+                            sendMessage(player, "Welcome back to ${ServerConstants.SERVER_NAME}.")
                             teleport(player, getAttribute(player, EvilBobUtils.prevLocation, Location.create(3222, 3219, 0)))
                             EvilBobUtils.reward(player)
                             EvilBobUtils.cleanup(player)

@@ -1,5 +1,6 @@
 package core.game.system.communication;
 
+import core.ServerConstants;
 import core.game.component.Component;
 import core.game.activity.ActivityPlugin;
 import core.game.node.entity.player.Player;
@@ -100,7 +101,7 @@ public final class ClanRepository {
 	 * @return {@code True} if the player successfully entered the clan chat.
 	 */
 	public boolean enter(Player player) {
-		if (!owner.equals("2009scape") && players.size() >= MAX_MEMBERS) {
+		if (!owner.equals(ServerConstants.SERVER_NAME.toLowerCase()) && players.size() >= MAX_MEMBERS) {
 			player.getPacketDispatch().sendMessage("The channel you tried to join is full.:clan:");
 			return false;
 		}

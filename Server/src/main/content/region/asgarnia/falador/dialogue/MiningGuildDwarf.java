@@ -111,7 +111,7 @@ public final class MiningGuildDwarf extends DialoguePlugin {
 			stage = 22;
 			break;
 		case 22:
-			interpreter.sendDialogues(npc, FacialExpression.NEUTRAL, "No, this is only a mining outpost. We dwarves don't", "much like to settle in human cities. Most of the ore is", "carted off to Keldagrim, the great dwarven city-", "They've got a special blast furnace up there - it makes");
+			interpreter.sendDialogues(npc, FacialExpression.NEUTRAL, "No, this is only a mining outpost. We dwarves don't", "much like to settle in human cities. Most of the ore is", "carted off to Keldagrim, the great dwarven city.", "They've got a special blast furnace up there - it makes");
 			stage = 23;
 			break;
 		case 23:

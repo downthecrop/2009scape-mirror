@@ -1,5 +1,6 @@
 package content.region.misthalin.barbvillage.stronghold.playersafety;
 
+import core.ServerConstants;
 import core.api.Container;
 import core.game.component.Component;
 import core.game.node.entity.player.link.emote.Emotes;
@@ -138,7 +139,7 @@ public class ProfessorHenryDialogue extends DialoguePlugin {
 			increment();
 			break;
 		case 10:
-			sendNormalDialogue(npc, FacialExpression.HALF_GUILTY, "Here you can take part in the Player Safety test: a set", "of valuable lessons to learn about staying safe in ", "2009scape.");
+			sendNormalDialogue(npc, FacialExpression.HALF_GUILTY, "Here you can take part in the Player Safety test: a set", "of valuable lessons to learn about staying safe in ", ServerConstants.SERVER_NAME + ".");
 			increment();
 			break;
 		case 11:

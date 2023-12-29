@@ -75,7 +75,7 @@ public final class SquireTypeDialogue extends DialoguePlugin {
 			stage = 12;
 			break;
 		case 12:
-			npc("The Void Knights, they are great warriors of balance", "who do Guthix's work here in 2009scape.");
+			npc("The Void Knights, they are great warriors of balance", "who do Guthix's work here in Gielinor.");
 			stage = 13;
 			break;
 		case 13:

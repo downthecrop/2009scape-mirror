@@ -19,7 +19,7 @@ class NedPARDialogue(val questStage: Int) : DialogueFile() {
             START_DIALOGUE -> options(
                 "Ned, could you make other things from wool?",
                 "Yes, I would like some rope.",
-                "No thanks Ned, I don't need any."
+                "No thanks, Ned, I don't need any."
             ).also { stage++ }
 
             1 -> when(buttonID){

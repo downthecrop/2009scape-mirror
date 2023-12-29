@@ -182,7 +182,7 @@ public final class FamiliarManager {
 		final int npcId = pouch.getNpcId();
 		Familiar fam = !renew ? FAMILIARS.get(npcId) : familiar;
 		if (fam == null) {
-			player.getPacketDispatch().sendMessage("Invalid familiar " + npcId + " - report on 2009scape GitLab");
+			player.getPacketDispatch().sendMessage("Invalid familiar " + npcId + " - report on 2009Scape GitLab");
 			return;
 		}
 		if(!renew) {

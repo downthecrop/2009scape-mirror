@@ -179,10 +179,10 @@ class TutorialMagicTutorDialogue(player: Player? = null) : core.game.dialogue.Di
                     RulesAndInfo.openFor(player)
 
                     if (GameWorld.settings!!.enable_default_clan) {
-                        player.communication.currentClan = ServerConstants.SERVER_NAME
+                        player.communication.currentClan = ServerConstants.SERVER_NAME.toLowerCase()
 
                         val clanJoin = JoinClanRequest.newBuilder()
-                        clanJoin.clanName = ServerConstants.SERVER_NAME
+                        clanJoin.clanName = ServerConstants.SERVER_NAME.toLowerCase()
                         clanJoin.username = player.name
 
                         ManagementEvents.publish(clanJoin.build())

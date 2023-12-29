@@ -74,11 +74,11 @@ public final class OutpostSquireDialogue extends DialoguePlugin {
 			stage = 6;
 			break;
 		case 6:
-			npc("The Void Knights, they are great warriors of balance", "who do Guthix's work here in 2009scape.");
+			npc("The Void Knights, they are great warriors of balance", "who do Guthix's work here in Gielinor.");
 			stage = 11;
 			break;
 		case 11:
-			options("Wow, can I join?", "What kind of work?", "What's '2009scape'?", "Uh huh, sure.");
+			options("Wow, can I join?", "What kind of work?", "What's 'Gielinor'?", "Uh huh, sure.");
 			stage = 12;
 			break;
 		case 12:
@@ -92,7 +92,7 @@ public final class OutpostSquireDialogue extends DialoguePlugin {
 				stage = 17;
 				break;
 			case 3:
-				player("What's '2009scape'?");
+				player("What's 'Gielinor'?");
 				stage = 15;
 				break;
 			case 4:
@@ -112,11 +112,11 @@ public final class OutpostSquireDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 17:
-			npc("Ah well you see we try to keep 2009scape as Guthix", "intended, it's very challenging. Actually we've been", "having some problems recently, maybe you could help", "us?");
+			npc("Ah well you see we try to keep Gielinor as Guthix", "intended, it's very challenging. Actually we've been", "having some problems recently, maybe you could help", "us?");
 			stage = 18;
 			break;
 		case 18:
-			options("Yeah ok, what's the problem?", "What's '2009scape'?", "I'd rather not, sorry.");
+			options("Yeah OK, what's the problem?", "What's 'Gielinor'?", "I'd rather not, sorry.");
 			stage = 19;
 			break;
 		case 19:
@@ -126,7 +126,7 @@ public final class OutpostSquireDialogue extends DialoguePlugin {
 				stage = 191;
 				break;
 			case 2:
-				player("What's '2009scape'?");
+				player("What's 'Gielinor'?");
 				stage = 15;
 				break;
 			case 3:

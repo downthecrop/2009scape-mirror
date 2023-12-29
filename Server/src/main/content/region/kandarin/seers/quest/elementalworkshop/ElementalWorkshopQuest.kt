@@ -25,7 +25,7 @@ import core.game.system.command.Privilege
  *      Quality Assurance: Andrew C
  *      QuestHelp: Rob M
  *
- * 2009scape adaptation:
+ * 2009Scape adaptation:
  *   @author Woah, with love
  */
 @Initializable
