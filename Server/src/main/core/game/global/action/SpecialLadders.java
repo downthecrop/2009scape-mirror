@@ -48,6 +48,16 @@ public enum SpecialLadders implements LadderAchievementCheck {
     FALADOR_WHITE_KNIGHT_CASTLE_WEST_TOWER_STAIRS_UP(new Location(2960, 3338,1), new Location(2959,3339,2)),
     FALADOR_WHITE_KNIGHT_CASTLE_WEST_TOWER_STAIRS_DOWN(new Location(2960,3339,2), new Location(2960,3340,1)),
 
+    CASTLEWARS_SARADOMIN_MAIN_FLOOR_STAIRS_DOWN(Location.create(2419, 3080, 1), Location.create(2419, 3077, 0)),
+    CASTLEWARS_SARADOMIN_MAIN_FLOOR_STAIRS_UP(Location.create(2428, 3081, 1), Location.create(2430, 3080, 2)),
+    CASTLEWARS_SARADOMIN_OUTER_WALL_STAIRS_UP(Location.create(2417, 3077, 0), Location.create(2416, 3075, 0)),
+    CASTLEWARS_SARADOMIN_OUTER_WALL_STAIRS_DOWN(Location.create(2417, 3075, 0), Location.create(2417, 3078, 0)),
+
+    CASTLEWARS_ZAMORAK_TOP_FLOOR_DOWN(Location.create(2374, 3133, 3), Location.create(2374, 3130, 2)),
+    CASTLEWARS_ZAMORAK_MAIN_FLOOR_STAIRS_UP(Location.create(2380, 3129, 0), Location.create(2379, 3127, 1)),
+    CASTLEWARS_ZAMORAK_OUTERWALL_STAIRS_UP(Location.create(2382, 3130, 0), Location.create(2383, 3132, 0)),
+    CASTLEWARS_ZAMOUTER_WALL_STAIRS_DOWN(Location.create(2382, 3132, 0), Location.create(2382, 3129, 0)),
+
     PORT_SARIM_RAT_PITS_DOWN(new Location(3018,3232,0), new Location(2962,9650,0)) {
         @Override
         public void checkAchievement(Player player) {
