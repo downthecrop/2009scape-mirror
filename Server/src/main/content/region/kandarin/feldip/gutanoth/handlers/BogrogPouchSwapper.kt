@@ -7,6 +7,7 @@ import content.global.skill.summoning.SummoningPouch
 import content.global.skill.summoning.SummoningScroll
 import core.game.node.item.Item
 import core.game.world.map.zone.ZoneBorders
+import kotlin.math.ceil
 import kotlin.math.floor
 
 /**
@@ -76,7 +77,6 @@ object BogrogPouchSwapper {
         if(item == null) item = SummoningPouch.get(SummoningScroll.forItemId(itemID)?.pouch ?: -1).also { isScroll = true }
         item ?: return 0.0
         var shardQuantity = item.items[item.items.size - 1].amount * 0.7
-        if(isScroll) shardQuantity /= 20.0
-        return shardQuantity
+        return if(isScroll) shardQuantity / 20.0 else ceil(shardQuantity)
     }
 }
