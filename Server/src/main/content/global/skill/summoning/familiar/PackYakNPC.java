@@ -1,5 +1,8 @@
 package content.global.skill.summoning.familiar;
 
+import core.api.Container;
+import core.game.node.entity.player.info.LogType;
+import core.game.node.entity.player.info.PlayerMonitor;
 import core.game.system.config.ItemConfigParser;
 import core.plugin.Initializable;
 import content.global.skill.summoning.SummoningScroll;
@@ -8,6 +11,9 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
+
+import static core.api.ContentAPIKt.addItem;
+import static core.api.ContentAPIKt.removeItem;
 
 /**
  * Represents the Pack Yak familiar.
@@ -45,7 +51,7 @@ public class PackYakNPC extends BurdenBeast {
 			return false;
 		}
 		if (!item.getDefinition().getConfiguration(ItemConfigParser.BANKABLE, true)) {
-			player.sendMessage("A magical force prevents you from banking this item");
+			player.sendMessage("A magical force prevents you from banking this item.");
 			return false;
 		}
 		Item remove = item;
@@ -53,12 +59,25 @@ public class PackYakNPC extends BurdenBeast {
 			remove = new Item(item.getId(), 1);
 			item = new Item(item.getNoteChange(), 1);
 		}
-		if (player.getInventory().remove(remove) && player.getBank().add(item)) {
+		boolean success = addItem(player, item.getId(), item.getAmount(), Container.BANK);
+		if (success) {
+			success = removeItem(player, remove, Container.INVENTORY);
+			if (!success) {
+				// Add worked, but remove failed. This should never happen (it by definition constitutes an item duplication).
+				boolean recovered = removeItem(player, item, Container.BANK);
+				if (recovered) {
+					PlayerMonitor.log(player, LogType.DUPE_ALERT, "Successfully recovered from potential dupe attempt involving the winter storage scroll");
+				} else {
+					PlayerMonitor.log(player, LogType.DUPE_ALERT, "Failed to recover from potentially successful dupe attempt involving the winter storage scroll");
+				}
+			}
+		}
+		if (success) {
 			player.getDialogueInterpreter().close();
 			graphics(Graphics.create(1358));
-			player.getPacketDispatch().sendMessage("The pak yak has sent an item to your bank.");
+			player.getPacketDispatch().sendMessage("The pack yak has sent an item to your bank.");
 		} else {
-			player.getPacketDispatch().sendMessage("The pak yak can't send that item to your bank.");
+			player.getPacketDispatch().sendMessage("The pack yak can't send that item to your bank.");
 		}
 		return true;
 	}
