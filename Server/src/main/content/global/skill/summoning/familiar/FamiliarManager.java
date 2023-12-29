@@ -63,11 +63,6 @@ public final class FamiliarManager {
 	private boolean hasPouch;
 	
 	/**
-	 * The list of insured pets.
-	 */
-	private List<Pets> insuredPets = new ArrayList<>(20);
-
-	/**
 	 * Constructs a new {@code FamiliarManager} {@code Object}.
 	 * @param player The player.
 	 */
@@ -81,7 +76,7 @@ public final class FamiliarManager {
 			currentPet = Integer.parseInt(familiarData.get("currentPet").toString());
 		}
 		JSONArray petDetails = (JSONArray) familiarData.get("petDetails");
-		for (int i = 0 ; i < petDetails.size(); i++) {
+		for (int i = 0; i < petDetails.size(); i++) {
 			JSONObject detail = (JSONObject) petDetails.get(i);
 			PetDetails details = new PetDetails(0);
 			details.updateHunger(Double.parseDouble(detail.get("hunger").toString()));
@@ -258,18 +253,34 @@ public final class FamiliarManager {
 			return false;
 		}
 
-		PetDetails details = petDetails.get(itemIdHash);
-		if (details == null) { //init new pet
-			details = new PetDetails(pets.getGrowthRate() == 0.0 ? 100.0 : 0.0);
-			// Find an available individual slot
-			ArrayList<Integer> taken = new ArrayList<Integer>();
-			Container[] searchSpace = {player.getInventory(), player.getBankPrimary(), player.getBankSecondary()};
+		// If this pet does not have an individual ID yet, we need to find it an available one.
+		// If it does, we need to verify that this ID is not already used for a different pet. This is needed to correct a historical bug that allowed multiple pets to be assigned the same individual ID (the historical code only checked the *current* stage item ID, failing to realize that we also need to account for *future* stage item IDs, in case the current pet grows up, resulting in a clash when it did). Saves affected by that bug will have multiple copies of the same item pointing to the same pet, which we have an opportunity to rectify now.
+		ArrayList<Integer> taken = new ArrayList<Integer>();
+		Container[] searchSpace = {player.getInventory(), player.getBankPrimary(), player.getBankSecondary()};
+		for (int checkId = pets.getBabyItemId(); checkId != -1; checkId = pets.getNextStageItemId(checkId)) {
+			Item check = new Item(checkId, 1);
 			for (Container container : searchSpace) {
-				for (Item i : container.getAll(item)) {
+				for (Item i : container.getAll(check)) {
 					taken.add(i.getCharge());
 				}
 			}
-			int individual;
+		}
+		PetDetails details = petDetails.get(itemIdHash);
+		int individual = item.getCharge();
+		if (details != null) { //we have this pet on file, but we need to check that it wasn't affected by the historical bug mentioned above
+			details.setIndividual(individual);
+			int count = 0;
+			for (int i : taken) {
+				if (i == individual) {
+					count++;
+				}
+			}
+			if (count > 1) { //this pet is sadly conjoined with another individual of its kind; untangle it by initializing it anew (which is what should have happened in the first place, save the minor detail of hunger propagation from the previous stage, which we no longer have any record of)
+				details = null;
+			}
+		}
+		if (details == null) { //init new pet
+			details = new PetDetails(pets.getGrowthRate() == 0.0 ? 100.0 : 0.0);
 			for (individual = 0; taken.contains(individual) && individual < 0xFFFF; individual++) {}
 			details.setIndividual(individual);
 			item.setCharge(individual);
@@ -281,7 +292,10 @@ public final class FamiliarManager {
 			familiar = new Pet(player, details, itemId, npcId);
 			if (deleteItem) {
 				player.animate(new Animation(827));
-				player.getInventory().remove(item);
+				// We cannot use player().getInventory().remove(item), because that will remove the first pet item it sees, rather than the specific one (with the specific charge value) the player clicked.
+				// Instead, find the specific item the player dropped by slot, and remove that specific one.
+				int slot = player.getInventory().getSlotHash(item);
+				player.getInventory().remove(item, slot, true);
 			}
 			if (morph) {
 				morphFamiliar(location);
@@ -352,6 +366,7 @@ public final class FamiliarManager {
 		Item petItem = new Item(pet.getItemId());
 		petItem.setCharge(details.getIndividual());
 		if (player.getInventory().add(petItem)) {
+			petDetails.put(pet.getItemIdHash(),details);
 			player.animate(Animation.create(827));
 			player.getFamiliarManager().dismiss();
 		}
@@ -398,22 +413,11 @@ public final class FamiliarManager {
 
 	/**
 	 * Dismisses the familiar.
-	 * @param saveDetails the details of a pet.
 	 */
-	public void dismiss(boolean saveDetails) {
-		if (hasPet() && !saveDetails) {
-			removeDetails(((Pet) familiar).getItemIdHash());
-		}
+	public void dismiss() {
 		if (hasFamiliar()) {
 			familiar.dismiss();
 		}
-	}
-
-	/**
-	 * Dismisses the familiar.
-	 */
-	public void dismiss() {
-		dismiss(true);
 	}
 
 	/**

@@ -1,5 +1,6 @@
 import content.global.skill.summoning.familiar.BurdenBeast
 import content.global.skill.summoning.familiar.FamiliarSpecial
+import content.global.skill.summoning.pet.Pet
 import core.api.sendMessage
 import core.game.interaction.InterfaceListener
 
@@ -8,23 +9,23 @@ class SummoningTabListener : InterfaceListener {
         on(662) { player, _, opcode, buttonID, _, _ ->
             when(buttonID) {
                 51 -> {
-                    if (player.getFamiliarManager().hasFamiliar()) {
-                        player.getFamiliarManager().getFamiliar().call()
+                    if (player.familiarManager.hasFamiliar()) {
+                        player.familiarManager.familiar.call()
                     } else {
                         player.getPacketDispatch().sendMessage("You don't have a follower.")
                     }
                 }
                 67 -> {
-                    if (player.getFamiliarManager().hasFamiliar()) {
+                    if (player.familiarManager.hasFamiliar()) {
                         if (player.familiarManager.familiar.isInvisible || !player.familiarManager.familiar.location.withinDistance(player.location)) {
                             sendMessage(player, "Your familiar is too far away!")
                             return@on true
                         }
-                        if (!player.getFamiliarManager().getFamiliar().isBurdenBeast()) {
+                        if (!player.familiarManager.familiar.isBurdenBeast()) {
                             player.getPacketDispatch().sendMessage("Your familiar is not a beast of burden.")
                             return@on true
                         }
-                        val beast = player.getFamiliarManager().getFamiliar() as BurdenBeast
+                        val beast = player.familiarManager.familiar as BurdenBeast
                         if (beast.getContainer().isEmpty()) {
                             player.getPacketDispatch().sendMessage("Your familiar is not carrying any items.")
                             return@on true
@@ -35,21 +36,25 @@ class SummoningTabListener : InterfaceListener {
                     player.getPacketDispatch().sendMessage("You don't have a follower.")
                 }
                 53 -> {
-                    if (player.getFamiliarManager().hasFamiliar()) {
+                    if (player.familiarManager.hasFamiliar()) {
                         if(opcode == 155) {
                             // Dismiss familiar
                             player.getDialogueInterpreter().open("dismiss_dial")
                         } else if(opcode == 196) {
                             // Dismiss now
-                            player.getFamiliarManager().dismiss(false)
+                            if (player.getFamiliarManager().getFamiliar() is Pet) {
+                                val pet = player.familiarManager.familiar as Pet
+                                player.familiarManager.removeDetails(pet.getItemIdHash())
+                            }
+                            player.familiarManager.dismiss()
                         }
                     } else {
                         player.getPacketDispatch().sendMessage("You don't have a follower.")
                     }
                 }
                 else -> {
-                    if (player.getFamiliarManager().hasFamiliar()) {
-                        player.getFamiliarManager().getFamiliar().executeSpecialMove(FamiliarSpecial(player))
+                    if (player.familiarManager.hasFamiliar()) {
+                        player.familiarManager.familiar.executeSpecialMove(FamiliarSpecial(player))
                     } else {
                         player.getPacketDispatch().sendMessage("You don't have a follower.")
                     }

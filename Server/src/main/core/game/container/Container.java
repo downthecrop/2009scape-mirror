@@ -849,6 +849,26 @@ public class Container {
     }
 
     /**
+     * Gets the item slot, taking into account the item's whole hash rather than just the ID part.
+     *
+     * @param item The item.
+     * @return The slot of the item in this container.
+     */
+    public int getSlotHash(Item item) {
+        if (item == null) {
+            return -1;
+        }
+        int idHash = item.getIdHash();
+        for (int i = 0; i < items.length; i++) {
+            Item it = items[i];
+            if (it != null && it.getIdHash() == idHash) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
      * Gets the item instance.
      *
      * @param item the item.

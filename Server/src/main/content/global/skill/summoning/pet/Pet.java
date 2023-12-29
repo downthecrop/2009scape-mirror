@@ -86,7 +86,8 @@ public final class Pet extends Familiar {
 			hasWarned = 2;
 		}
 		if (hunger >= 100.0 && growthRate != 0 && pet.getFood().length != 0) {
-			owner.getFamiliarManager().dismiss(false);
+			owner.getFamiliarManager().removeDetails(this.getItemIdHash());
+			owner.getFamiliarManager().dismiss();
 			owner.getFamiliarManager().setFamiliar(null);
 			setVarp(owner, 1175, 0);
 			owner.sendMessage("<col=ff0000>Your pet has run away.</col>");
@@ -125,14 +126,15 @@ public final class Pet extends Familiar {
 			// then this pet is already overgrown
 			return;
 		}
+		owner.getFamiliarManager().removeDetails(this.getItemIdHash());
+		owner.getFamiliarManager().dismiss();
+		owner.getPacketDispatch().sendMessage("<col=ff0000>Your pet has grown larger.</col>");
 		int npcId = pet.getNpcId(newItemId);
 		details.updateGrowth(-100.0);
 		Pet newPet = new Pet(owner, details, newItemId, npcId);
 		newPet.growthRate = growthRate;
 		newPet.hasWarned = hasWarned;
-		owner.getFamiliarManager().dismiss(false);
 		owner.getFamiliarManager().setFamiliar(newPet);
-		owner.getPacketDispatch().sendMessage("<col=ff0000>Your pet has grown larger.</col>");
 		owner.getFamiliarManager().spawnFamiliar();
 	}
 
@@ -149,22 +151,6 @@ public final class Pet extends Familiar {
 	@Override
 	public boolean isCombatFamiliar() {
 		return false;
-	}
-
-	/**
-	 * Gets the growthRate.
-	 * @return The growthRate.
-	 */
-	public double getGrowthRate() {
-		return growthRate;
-	}
-
-	/**
-	 * Sets the growthRate.
-	 * @param growthRate The growthRate to set.
-	 */
-	public void setGrowthRate(double growthRate) {
-		this.growthRate = growthRate;
 	}
 
 	/**

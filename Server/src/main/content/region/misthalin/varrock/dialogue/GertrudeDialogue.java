@@ -340,7 +340,7 @@ public final class GertrudeDialogue extends DialoguePlugin {
 					}
 				}
 			}
-			Container[] searchSpace = {player.getInventory(), player.getBankPrimary(), player.getBankSecondary()};
+			Container[] searchSpace = {player.getInventory(), player.getBank()};
 			for (Container container : searchSpace) {
 				if (container.containsAtLeastOneItem(kittens)) {
 					has = true;
