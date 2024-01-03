@@ -4911,7 +4911,7 @@
   },
   {
     "ge_buy_limit": "10000",
-    "examine": "These would feed a dog for months.",
+    "examine": "These would feed a dog for months!",
     "grand_exchange_price": "1300",
     "durability": null,
     "name": "Dragon bones",
