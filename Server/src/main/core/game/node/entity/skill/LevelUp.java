@@ -124,9 +124,13 @@ public final class LevelUp {
 			player.getSkills().incrementPrayerPoints(1);
 		}
 		if (player.getSkills().getStaticLevel(slot) == 99 && !player.isArtificial()) {
-			Repository.sendNews(player.getUsername() + " has just achieved level 99 " + Skills.SKILL_NAME[slot]);
+			Repository.sendNews(player.getUsername() + " has just achieved level 99 " + Skills.SKILL_NAME[slot] + "!");
 			Skillcape.trim(player);
 			player.getEmoteManager().unlock(Emotes.SKILLCAPE);
+			if (player.skills.getTotalLevel() == 2376)
+			{
+				sendNews(player.getUsername() + " has just achieved level 99 in all skills!");
+			}
 		}
 		player.setAttribute("/save:levelup:" + slot, true);
 		sendFlashingIcons(player, slot);
