@@ -116,7 +116,7 @@ class ElkoyDialogue : DialogueFile(){
                     3 -> npcl("There's not many of us left. Once you could find tree gnomes anywhere in the world, now we hide in small groups to avoid capture.").also { stage++ }
                     4 -> playerl("Capture from whom?").also { stage++ }
                     5 -> npcl("Tree gnomes have been hunted for so called 'fun' since as long as I can remember.").also { stage++ }
-                    6 -> npcl("Our main thread nowadays are General Khazard's troops. They know no mercy, but are also very dense. They'll never find their way through our maze.").also { stage++ }
+                    6 -> npcl("Our main threat nowadays are General Khazard's troops. They know no mercy, but are also very dense. They'll never find their way through our maze.").also { stage++ }
                     7 -> npcl("Have fun.").also { stage = END_DIALOGUE }
                 }
             }
