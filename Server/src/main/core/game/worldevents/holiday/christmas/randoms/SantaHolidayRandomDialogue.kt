@@ -38,7 +38,7 @@ class SantaHolidayRandomDialogue : DialogueFile() {
             30 -> npcl(FacialExpression.HAPPY, "Since you have been a good ${if (player!!.isMale) "boy" else "girl"} this year, you get a gift. Merry Christmas, ${player!!.username}!").also { stage = 31 }
             31 -> {
                 val loot = Giftmas.MBOX_LOOT.roll().first()
-                addItem(player!!, loot.id, loot.amount)
+                addItemOrDrop(player!!, loot.id, loot.amount)
                 HolidayRandoms.terminateEventNpc(player!!)
                 end()
             }
