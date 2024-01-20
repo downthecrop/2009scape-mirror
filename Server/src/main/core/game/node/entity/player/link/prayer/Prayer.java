@@ -14,6 +14,7 @@ import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
+import core.game.event.*;
 import core.game.world.GameWorld;
 import org.rs09.consts.Sounds;
 
@@ -63,19 +64,21 @@ public final class Prayer {
 	 * Method used to reset this prayer managers cached prayers.
 	 */
 	public void reset() {
+		// Immediately clear the lights on the client interface and terminate any bonuses
 		for (PrayerType type : getActive()) {
-                        setVarp(player, type.getConfig(), 0, false);
+			setVarp(player, type.getConfig(), 0, false);
+			player.dispatch(new PrayerDeactivatedEvent(type));
 		}
 		getActive().clear();
-        // Clear the overhead prayer icon a tick later
-        GameWorld.getPulser().submit(new Pulse(1) {
-            @Override
-            public boolean pulse() {
-                player.getAppearance().setHeadIcon(-1);
-                player.getAppearance().sync();
-                return true;
-            }
-        });
+		// Clear the overhead prayer icon a tick later
+		GameWorld.getPulser().submit(new Pulse(1) {
+			@Override
+			public boolean pulse() {
+				player.getAppearance().setHeadIcon(-1);
+				player.getAppearance().sync();
+				return true;
+			}
+		});
 	}
 
 	/**
@@ -131,7 +134,8 @@ public final class Prayer {
 
 		if(prayerActiveTicks > 0 && prayerActiveTicks % 2 == 0){
 			if(getPlayer().getSkills().getPrayerPoints() == 0){
-                playAudio(getPlayer(), Sounds.PRAYER_DRAIN_2672);
+				playAudio(getPlayer(), Sounds.PRAYER_DRAIN_2672);
+				getPlayer().sendMessage("You have run out of prayer points; you must recharge at an altar.");
 				reset();
 				return;
 			}
