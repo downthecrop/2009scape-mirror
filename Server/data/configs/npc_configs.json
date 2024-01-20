@@ -72525,5 +72525,10 @@
     "examine": "The hat is a dead give away.",
     "name": "Wizard Cromperty",
     "id": "2328"
+  },
+  {
+    "examine": "An intelligent-looking shop owner.",
+    "name": "Obli",
+    "id": "516"
   }
 ]
