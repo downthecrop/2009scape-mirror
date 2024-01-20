@@ -1,12 +1,12 @@
 package content.global.bots
 
-import content.global.handlers.iface.GlassInterface
+import content.global.skill.crafting.glass.GlassCraftingPulse
+import content.global.skill.crafting.glass.GlassProduct
+import core.game.bots.Script
+import core.game.bots.SkillingBotAssembler
 import core.game.node.entity.skill.Skills
-import content.global.skill.crafting.GlassProduct
 import core.game.node.item.Item
 import org.rs09.consts.Items
-import core.game.bots.SkillingBotAssembler
-import core.game.bots.Script
 
 class GlassBlowingBankstander : Script(){
     var state = State.BLOWING
@@ -17,7 +17,7 @@ class GlassBlowingBankstander : Script(){
             State.BLOWING -> {
                 bot.inventory.add(Item(Items.GLASSBLOWING_PIPE_1785))
                 bot.inventory.add(Item(Items.MOLTEN_GLASS_1775,27))
-                GlassInterface.make(bot, GlassProduct.ORB,27)
+                bot.pulseManager.run(GlassCraftingPulse(bot, GlassProduct.ORB, 27))
                 State.BANKING
             }
 
