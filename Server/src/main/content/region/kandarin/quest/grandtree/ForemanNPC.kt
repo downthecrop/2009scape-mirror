@@ -125,7 +125,7 @@ class ForemanDialogue: DialogueFile(){
             42 -> playerl("Take over?").also { stage++ }
             43 -> npcl("Of course, why else would Glough want 30 battleships? Between you and me I don't think he stands a chance.").also { stage++ }
             44 -> playerl("No?").also { stage++ }
-            45 -> npcl("I mean, for the kind of battleships Glough's ordered I'll need tons and tons of limber! Still, if he says he can supply the wood I'm sure he can! Anyway, here's the order for the lumber.").also { stage++ }
+            45 -> npcl("I mean, for the kind of battleships Glough's ordered I'll need tons and tons of lumber! Still, if he says he can supply the wood I'm sure he can! Anyway, here's the order for the lumber.").also { stage++ }
             46 -> sendDialogue(player!!, "The Foreman gives you the Lumber order.").also {
                 addItemOrDrop(player!!,Items.LUMBER_ORDER_787)
                 stage++
