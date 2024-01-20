@@ -110,7 +110,7 @@ public enum Consumables {
 	MINT_CAKE(new Food(new int[] {9475}, new EnergyEffect(50))),
 
 	/** Vegetables */
-	POTATO(new Food(new int[] {1942}, new HealingEffect(1))),
+	POTATO(new Food(new int[] {1942}, new HealingEffect(1), "You eat the potato. Yuck!")),
 	BAKED_POTATO(new Food(new int[] {6701}, new HealingEffect(2))),
 	SPICY_SAUCE(new Food(new int[] {7072, 1923}, new HealingEffect(2))),
 	CHILLI_CON_CARNE(new Food(new int[] {7062, 1923}, new HealingEffect(5))),
@@ -153,10 +153,10 @@ public enum Consumables {
 	PINEAPPLE_CHUNKS(new Food(new int[] {2116}, new HealingEffect(2))),
 	PINEAPPLE_RING(new Food(new int[] {2118}, new HealingEffect(2))),
 	DWELLBERRIES(new Food(new int[] {2126}, new HealingEffect(2))),
-	JANGERBERRIES(new Food(new int[] {247}, new MultiEffect(new SkillEffect(Skills.ATTACK, 2, 0), new SkillEffect(Skills.STRENGTH, 1, 0), new PrayerEffect(1, 0), new SkillEffect(Skills.DEFENCE, -1, 0)))),
+	JANGERBERRIES(new Food(new int[] {247}, new MultiEffect(new SkillEffect(Skills.ATTACK, 2, 0), new SkillEffect(Skills.STRENGTH, 1, 0), new PrayerEffect(1, 0), new SkillEffect(Skills.DEFENCE, -1, 0)), "You eat the jangerberries.", "They taste very bitter.")),
 	STRAWBERRY(new Food(new int[] {5504}, new MultiEffect(new HealingEffect(1), new PercentageHealthEffect(6)))),
 	TOMATO(new Food(new int[] {1982}, new HealingEffect(2))),
-	WATERMELON(new FakeConsumable(5982, new String[] {"Try using a knife to slice it into pieces."})),
+	WATERMELON(new FakeConsumable(5982, new String[] {"You can't eat it whole; maybe you should cut it up."})),
 	WATERMELON_SLICE(new Food(new int[] {5984}, new PercentageHealthEffect(5))),
 	LEMON(new Food(new int[] {2102}, new HealingEffect(2))),
 	LEMON_CHUNKS(new Food(new int[] {2104}, new HealingEffect(2))),

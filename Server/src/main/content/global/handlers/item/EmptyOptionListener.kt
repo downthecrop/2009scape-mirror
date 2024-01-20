@@ -37,7 +37,7 @@ class EmptyOptionListener : InteractionListener {
         BONE_MEAL(Items.BONEMEAL_4255, Items.EMPTY_POT_1931, "You empty the pot of crushed bones."),
         BUCKET_OF_SAND(Items.BUCKET_OF_SAND_1783, Items.BUCKET_1925, "You empty the contents of the bucket onto the floor.", Sounds.SAND_BUCKET_2584),
         BUCKET_OF_MILK(Items.BUCKET_OF_MILK_1927, Items.BUCKET_1925, "You empty the contents of the bucket onto the floor.", Sounds.LIQUID_2401),
-        BUCKET_OF_WATER(Items.BUCKET_OF_WATER_1929, Items.BUCKET_1925, "You empty the contents of the bucket onto the floor.", Sounds.LIQUID_2401),
+        BUCKET_OF_WATER(Items.BUCKET_OF_WATER_1929, Items.BUCKET_1925, "You empty the contents of the bucket on the floor.", Sounds.LIQUID_2401),
         BUCKET_OF_COMPOST(Items.COMPOST_6032, Items.BUCKET_1925, "You empty the bucket of compost."),
         BUCKET_OF_SUPERCOMPOST(Items.SUPERCOMPOST_6034, Items.BUCKET_1925, "You empty the bucket of supercompost."),
         BUCKET_OF_SLIME(Items.BUCKET_OF_SLIME_4286, Items.BUCKET_1925, "You empty the contents of the bucket on the floor.", Sounds.LIQUID_2401),

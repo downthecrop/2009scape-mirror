@@ -56,9 +56,9 @@ public class Potion extends Drink {
         final int dosesLeft = ids.length - consumedDoses;
         player.getPacketDispatch().sendMessage("You drink some of your " + getFormattedName(item) + ".");
         if (dosesLeft > 1) {
-            player.getPacketDispatch().sendMessage("You have " + dosesLeft + " doses of your potion left.");
+            player.getPacketDispatch().sendMessage("You have " + dosesLeft + " doses of potion left.");
         } else if (dosesLeft == 1) {
-            player.getPacketDispatch().sendMessage("You have 1 dose of your potion left.");
+            player.getPacketDispatch().sendMessage("You have 1 dose of potion left.");
         } else {
             player.getPacketDispatch().sendMessage("You have finished your potion.");
         }

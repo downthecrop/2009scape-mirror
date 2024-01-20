@@ -8,7 +8,6 @@ import core.game.world.map.Location
 import org.json.simple.JSONObject
 import org.rs09.consts.Items
 import core.ServerStore
-import core.ServerStore.Companion.getBoolean
 import core.ServerStore.Companion.getInt
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -24,7 +23,11 @@ class ExplorersRingPlugin : InteractionListener {
         on(RINGS, IntType.ITEM, "run-replenish"){ player, node ->
             val charges = getStoreFile().getInt(player.username.toLowerCase() + ":run")
             if (charges >= getRingLevel(node.id)) {
-                sendMessage(player,"You have used all the charges you can for one day.")
+                sendDialogue(player,"Your ring appears to have no more run energy recharges left for today.")
+                return@on true
+            }
+            if (player.settings.runEnergy == 100.0) {
+                sendMessage(player, "You are fully rested. You do not need to use the ring's power for the moment.")
                 return@on true
             }
             player.settings.updateRunEnergy(-50.0)
@@ -50,7 +53,7 @@ class ExplorersRingPlugin : InteractionListener {
                 sendMessage(player, "You have used up all of your charges for the day.")
                 return@on true
             }
-            sendDialogue(player, "Choose the item you wish to convert to coins.")
+            sendDialogue(player, "Choose the item that you wish to convert to coins.")
             addDialogueAction (player) {_,_ -> 
                 sendItemSelect (player, "Choose") { slot, optionIndex ->
                     val item = player.inventory[slot]
