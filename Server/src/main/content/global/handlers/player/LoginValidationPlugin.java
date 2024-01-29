@@ -1,18 +1,20 @@
 package content.global.handlers.player;
 
+import core.api.Container;
 import core.game.activity.ActivityManager;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.SystemManager;
+import core.game.world.GameWorld;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.plugin.PluginManifest;
 import core.plugin.PluginType;
-import core.game.world.GameWorld;
-
-import static core.api.ContentAPIKt.setVarp;
+import org.rs09.consts.Items;
 
 import java.util.concurrent.TimeUnit;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Validates a player login.
@@ -27,7 +29,7 @@ public final class LoginValidationPlugin implements Plugin<Player> {
 	/**
 	 * Represents the quest point items to remove.
 	 */
-	private static final Item[] QUEST_ITEMS = new Item[] { new Item(9813), new Item(9814)};
+	private static final Item[] QUEST_ITEMS = new Item[] { new Item(Items.QUEST_POINT_CAPE_9813), new Item(Items.QUEST_POINT_HOOD_9814)};
 
 	/**
 	 * Constructs a new {@Code LoginValidationPlugin} {@Code Object}
@@ -78,18 +80,42 @@ public final class LoginValidationPlugin implements Plugin<Player> {
 	 * @param player the player.
 	 */
 	private static void checkQuestPointsItems(final Player player) {
-		if (!player.getQuestRepository().hasCompletedAll() &&
-			(player.getEquipment().contains(9813, 1) || player.getEquipment().contains(9814, 1))
-		) {
+		if (!player.getQuestRepository().hasCompletedAll() && anyInEquipment(player, Items.QUEST_POINT_CAPE_9813, Items.QUEST_POINT_HOOD_9814)) {
+			String location1 = null;
+			String location2 = null;
+			int item1 = 0;
+			int item2 = 0;
+			int amt = 0;
 			for (Item i : QUEST_ITEMS) {
-				if (player.getEquipment().remove(i)) {
-					player.getDialogueInterpreter().sendItemMessage(i, "As you no longer have completed all the quests, your " + i.getName() + " unequips itself to your " + (player.getInventory().freeSlots() < 1 ? "bank" : "inventory") + "!");
-					if (player.getInventory().freeSlots() < 1) {
-						player.getBank().add(i);
+				if (removeItem(player, i, Container.EQUIPMENT)) {
+					amt++;
+					String location;
+					if (addItem(player, i.getId(), i.getAmount(), Container.INVENTORY)) {
+						location = "your inventory";
+					} else if (addItem(player, i.getId(), i.getAmount(), Container.BANK)) {
+						location = "your bank";
 					} else {
-						player.getInventory().add(i);
+						location = "the Wise Old Man";
+						if (i.getId() == Items.QUEST_POINT_CAPE_9813) {
+							setAttribute(player, "/save:reclaim-qp-cape", true);
+						} else {
+							setAttribute(player, "/save:reclaim-qp-hood", true);
+						}
+					}
+					if (amt == 1) {
+						item1 = i.getId();
+						location1 = location;
+					}
+					if (amt == 2) {
+						item2 = i.getId();
+						location2 = location;
 					}
 				}
+			}
+			if (amt == 2) {
+				sendDoubleItemDialogue(player, item1, item2, "As you no longer have completed all the quests, your " + getItemName(item1) + " unequips itself to " + location1 + " and your " + getItemName(item2) + " unequips itself to " + location2 + "!");
+			} else {
+				sendItemDialogue(player, item1, "As you no longer have completed all the quests, your " + getItemName(item1) + " unequips itself to " + location1 + "!");
 			}
 		}
 	}

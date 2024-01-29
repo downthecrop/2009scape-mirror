@@ -1,5 +1,6 @@
 package content.region.misthalin.draynor.dialogue;
 
+import core.api.Container;
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC;
@@ -7,6 +8,9 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.plugin.Initializable;
 import core.game.node.item.Item;
+import org.rs09.consts.Items;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Represents the dialogue plugin used for the wise old man.
@@ -69,6 +73,29 @@ public final class WiseOldManDialogue extends DialoguePlugin {
     public boolean handle(int interfaceId, int buttonId) {
         switch (stage) {
             case 0:
+                if (getAttribute(player, "reclaim-qp-cape", false) || getAttribute(player, "reclaim-qp-hood", false)) {
+                    if (getAttribute(player, "reclaim-qp-cape", false) && getAttribute(player, "reclaim-qp-hood", false)) {
+                        npcl(FacialExpression.NEUTRAL, "I assume you're looking for your items? I've placed them " + (freeSlots(player) < 2 ? "at your feet." : "in your inventory."));
+                        removeAttribute(player, "reclaim-qp-cape");
+                        removeAttribute(player, "reclaim-qp-hood");
+                        addItemOrDrop(player, Items.QUEST_POINT_CAPE_9813, 1);
+                        addItemOrDrop(player, Items.QUEST_POINT_HOOD_9814, 1);
+                        stage = 505;
+                        return true;
+                    } else if (getAttribute(player, "reclaim-qp-cape", false)) {
+                        npcl(FacialExpression.NEUTRAL, "I assume you're looking for your Quest Point Cape? I've placed it " + (freeSlots(player) < 1 ? "at your feet." : "in your inventory."));
+                        removeAttribute(player, "reclaim-qp-cape");
+                        addItemOrDrop(player, Items.QUEST_POINT_CAPE_9813, 1);
+                        stage = 505;
+                        return true;
+                    } else {
+                        npcl(FacialExpression.NEUTRAL, "I assume you're looking for your Quest Point Hood? I've placed it " + (freeSlots(player) < 1 ? "at your feet." : "in your inventory."));
+                        removeAttribute(player, "reclaim-qp-hood");
+                        addItemOrDrop(player, Items.QUEST_POINT_HOOD_9814, 1);
+                        stage = 505;
+                        return true;
+                    }
+                }
                 if (player.getQuestRepository().hasCompletedAll()) {
                     options("Quest Point Cape.", "Something else.");
                     stage = 500;
