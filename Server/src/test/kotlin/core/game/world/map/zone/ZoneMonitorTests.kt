@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test
 
 class ZoneMonitorTests {
 
-    val GLORIES = intArrayOf(1710, 1708, 1706, 1712)
+    val GLORIES = intArrayOf(1710, 1708, 1706, 1704)
 
     init {
         TestUtils.preTestSetup()
