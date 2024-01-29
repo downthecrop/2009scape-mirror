@@ -58,7 +58,7 @@ public final class CandleMakerDialogue extends DialoguePlugin {
 				NPC npc = node.asNpc();
 				Quest quest = player.getQuestRepository().getQuest("Merlin's Crystal");
 				if (quest.getStage(player) > 60) {
-					Shops.openId(player, 198);
+					Shops.openId(player, 56);
 				} else {
 					npc.openShop(player);
 				}
@@ -175,7 +175,7 @@ public final class CandleMakerDialogue extends DialoguePlugin {
 		case 30:
 			end();
 			if (quest.getStage(player) > 60) {
-				Shops.openId(player, 198);
+				Shops.openId(player, 56);
 			} else {
 				npc.openShop(player);
 			}

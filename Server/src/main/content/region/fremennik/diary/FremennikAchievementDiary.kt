@@ -1,16 +1,9 @@
 package content.region.fremennik.diary
 
-import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.diary.DiaryType
-import core.game.world.map.zone.ZoneBorders
-import org.rs09.consts.Items
-import org.rs09.consts.NPCs
-import org.rs09.consts.Scenery
-import content.minigame.barbassault.CaptainCainDialogue
-import content.region.fremennik.rellekka.dialogue.HuntingExpertRellekkaDialogue
 import content.global.handlers.iface.FairyRing
-import content.global.skill.cooking.dairy.DairyChurnDialogue
+import content.minigame.barbassault.CaptainCainDialogue
 import content.region.fremennik.jatizso.dialogue.TowerGuardDialogue
+import content.region.fremennik.rellekka.dialogue.HuntingExpertRellekkaDialogue
 import content.region.fremennik.rellekka.quest.thefremenniktrials.ChieftanBrundt
 import core.api.inBorders
 import core.api.inEquipment
@@ -18,9 +11,12 @@ import core.game.diary.AreaDiaryTask
 import core.game.diary.DiaryEventHookBase
 import core.game.diary.DiaryLevel
 import core.game.event.*
+import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.SpellBookManager
+import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
-import org.rs09.consts.Components
+import core.game.world.map.zone.ZoneBorders
+import org.rs09.consts.*
 
 class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
     companion object {
@@ -166,16 +162,6 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
                     )
                 }
             }
-
-            is DairyChurnDialogue -> {
-                if (event.optionId == 12) {
-                    finishTask(
-                        player,
-                        DiaryLevel.MEDIUM,
-                        MediumTasks.MAKE_CHEESE_WITH_CHURN
-                    )
-                }
-            }
         }
     }
 
@@ -183,9 +169,21 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
         when (player.viewport.region.id) {
             10553 -> if (event.source.id in FISHING_SPOTS) {
                 finishTask(
-                    player,
-                    DiaryLevel.EASY,
+                        player,
+                        DiaryLevel.EASY,
                         EasyTasks.PIER_CATCH_FISH
+                )
+            } else if (event.itemId == Items.CHEESE_1985) {
+                finishTask(
+                        player,
+                        DiaryLevel.MEDIUM,
+                        MediumTasks.MAKE_CHEESE_WITH_CHURN
+                )
+            } else if (event.source.id == Scenery.FISH_STALL_4277) {
+                finishTask(
+                        player,
+                        DiaryLevel.MEDIUM,
+                        MediumTasks.STEAL_FISH_FROM_STALL
                 )
             }
 
@@ -298,14 +296,6 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
 
     override fun onInteracted(player: Player, event: InteractionEvent) {
         when (player.viewport.region.id) {
-            10553 -> if (event.target.id == Scenery.FISH_STALL_4277 && event.option == "steal-from" && player.questRepository.isComplete("Fremennik Trials")) {
-                finishTask(
-                    player,
-                    DiaryLevel.MEDIUM,
-                    MediumTasks.STEAL_FISH_FROM_STALL
-                )
-            }
-
             10811 -> if (event.target.id == Scenery.COLLAPSED_TRAP_19233 && inBorders(player, RELLEKKA_HUNTING_AREA) && event.option == "dismantle") {
                 finishTask(
                     player,

@@ -9,9 +9,9 @@ import content.global.skill.skillcapeperks.SkillcapePerks.Companion.isActive
 import content.global.skill.summoning.familiar.Forager
 import core.api.*
 import core.game.event.ResourceProducedEvent
+import core.game.interaction.Clocks
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.interaction.Clocks
 import core.game.node.Node
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -42,6 +42,7 @@ class FishingListener : InteractionListener{
         val npc = node as? NPC ?: return clearScripts(player)
         val spot = FishingSpot.forId(npc.id) ?: return clearScripts(player)
         val op = spot.getOptionByName(getUsedOption(player)) ?: return clearScripts(player)
+
         var forager: Forager? = null
 
         if (player.familiarManager.hasFamiliar() && player.familiarManager.familiar is Forager) {
@@ -58,7 +59,20 @@ class FishingListener : InteractionListener{
                 val dest = player.location.transform(player.direction)
                 Pathfinder.find(it, dest).walk(it)
             }
-            sendMessage(player, "You attempt to catch some fish...")
+            when (op.option) {
+                "cage" -> if (spot.name == "CAGE_HARPOON") {
+                    sendMessage(player, "You attempt to catch a lobster.")
+                } else sendMessage(player, "You attempt to catch a crayfish.")
+                "harpoon" -> sendMessage(player, "You start harpooning fish.")
+                "net" -> sendMessage(player, "You cast out your net...")
+                in arrayOf("bait", "lure") -> {
+                    sendMessage(player, "You cast out your line...")
+                    sendMessage(player, "You attempt to catch a fish.")
+                }
+                else -> { // Probably not authentic, but covers unknown cases.
+                    sendMessage(player, "You attempt to catch some fish...")
+                }
+            }
         }
 
         if (clockReady(player, Clocks.SKILLING)) {
@@ -72,11 +86,15 @@ class FishingListener : InteractionListener{
             val bigFishId = Fish.getBigFish(fish)
             val bigFishChance = if (GameWorld.settings?.isDevMode == true) 10 else 5000
             if (bigFishId != null && RandomFunction.roll(bigFishChance)) {
-                sendMessage(player, "You catch an enormous" + getItemName(fish!!.id).lowercase().replace("raw", "") + "!")
+                sendMessage(player, "You catch an enormous" + getItemName(fish.id).lowercase().replace("raw", "") + "!")
                 addItemOrDrop(player, bigFishId, 1)
             } else {
-                var msg = if (fish == Fish.ANCHOVIE || fish == Fish.SHRIMP) "You catch some" else "You catch a"
-                msg += getItemName(fish!!.id).lowercase().replace("raw", "").replace("big", "")
+                var msg = when (fish) {
+                    in arrayOf(Fish.ANCHOVIE, Fish.SHRIMP, Fish.SEAWEED) -> "You catch some "
+                    in arrayOf(Fish.OYSTER) -> "You catch an "
+                    else -> "You catch a "
+                }
+                msg += getItemName(fish.id).lowercase().replace("raw ", "").replace("big ", "")
                 msg += if (fish == Fish.SHARK) "!" else "."
                 sendMessage(player, msg)
                 addItemOrDrop(player, item.id, item.amount)
@@ -109,20 +127,29 @@ class FishingListener : InteractionListener{
 
     private fun checkRequirements(player: Player, option: FishingOption, node: Node) : Boolean {
         if (!inInventory(player, option.tool) && !hasBarbTail(player, option)) {
-            player.dialogueInterpreter.sendDialogue("You need a " + getItemName(option.tool).lowercase() + " to catch these fish.")
+            // The fly fishing rod & net dialogue is confirmed from videos. Others are assumptions based upon this.
+            var msg = "You need a "
+            msg += if (getItemName(option.tool).contains("net", true)) "net to " else "${getItemName(option.tool).lowercase()} to "
+            msg += if (option.option in arrayOf("lure", "bait")) "${option.option} these fish." else "catch these fish."
+            sendDialogue(player, msg)
             return false
         }
         if (!option.hasBait(player)) {
-            player.dialogueInterpreter.sendDialogue("You don't have any " + option.getBaitName().lowercase() + "s left.")
+            var msg = "You don't have any " + option.getBaitName().lowercase()
+            msg += if (option.getBaitName() == getItemName(Items.FISHING_BAIT_313)) " left." else "s left."
+            sendDialogue(player, msg)
             return false
         }
-        if (player.skills.getLevel(Skills.FISHING) < option!!.level) {
-            val f = option!!.fish[option!!.fish.size - 1]
-            player.dialogueInterpreter.sendDialogue("You need a fishing level of " + f.level + " to catch " + (if (f == Fish.SHRIMP || f == Fish.ANCHOVIE) "" else "a") + " " + getItemName(f.id).lowercase() + ".".trim { it <= ' ' })
+        if (!hasLevelDyn(player, Skills.FISHING, option.level)) {
+            sendDialogue(player, "You need a Fishing level of at least ${option.level} to ${option.option} these fish.")
             return false
         }
-        if (player.inventory.freeSlots() == 0) {
-            player.dialogueInterpreter.sendDialogue("You don't have enough space in your inventory.")
+        if (freeSlots(player) == 0) {
+            if (option.fish.contains(Fish.LOBSTER)) {
+                sendDialogue(player, "You can't carry any more lobsters.")
+            } else {
+                sendDialogue(player, "You can't carry any more fish.")
+            }
             return false
         }
         return node.isActive && node.location.withinDistance(player.location, 1)

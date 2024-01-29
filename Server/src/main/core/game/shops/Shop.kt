@@ -1,24 +1,22 @@
 package core.game.shops
 
+import core.ServerConstants
 import core.api.*
+import core.game.component.Component
+import core.game.container.*
+import core.game.container.Container
 import core.game.event.ItemShopPurchaseEvent
 import core.game.event.ItemShopSellEvent
-import core.game.component.Component
-import core.game.container.Container
-import core.game.container.ContainerEvent
-import core.game.container.ContainerListener
-import core.game.container.ContainerType
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
+import core.game.shops.Shops.Companion.logShop
+import core.game.system.config.ItemConfigParser
+import core.game.world.GameWorld
 import core.net.packet.PacketRepository
 import core.net.packet.context.ContainerContext
 import core.net.packet.out.ContainerPacket
 import org.rs09.consts.Components
 import org.rs09.consts.Items
-import core.ServerConstants
-import core.game.shops.Shops.Companion.logShop
-import core.game.system.config.ItemConfigParser
-import core.game.world.GameWorld
 import java.lang.Integer.max
 import java.lang.Integer.min
 import kotlin.math.ceil
@@ -78,8 +76,8 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         }
 
         val settings = IfaceSettingsBuilder()
-            .enableOptions(0..9)
-            .build()
+                .enableOptions(0..9)
+                .build()
 
         player.packetDispatch.sendIfaceSettings(settings, if (main) 23 else 24, Components.SHOP_TEMPLATE_620, 0, cont.capacity())
         player.packetDispatch.sendRunScript(150, "IviiiIsssssssss", "", "", "", "", "Buy X", "Buy 10", "Buy 5", "Buy 1", "Value", -1, 0, 4, 10, 92, (620 shl 16) or if (main) 23 else 24)
@@ -196,21 +194,21 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         var (isPlayerStock, shopSlot) = getStockSlot(shopItemId)
 
         val stockAmt =
-            if(isPlayerStock)
-                0
-            else{
-                if(shopSlot != -1) stock[shopSlot].amount
-                else 0
-            }
-        val currentAmt =
-            if(isPlayerStock) playerStock.getAmount(shopItemId)
-            else {
-                if(shopSlot != -1) shopCont[shopSlot].amount
-                else {
-                    isPlayerStock = true
+                if(isPlayerStock)
                     0
+                else{
+                    if(shopSlot != -1) stock[shopSlot].amount
+                    else 0
                 }
-            }
+        val currentAmt =
+                if(isPlayerStock) playerStock.getAmount(shopItemId)
+                else {
+                    if(shopSlot != -1) shopCont[shopSlot].amount
+                    else {
+                        isPlayerStock = true
+                        0
+                    }
+                }
 
         val price = when(currency)
         {
@@ -240,9 +238,9 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
 
 
         val price: Int = ceil(item.definition.value * mod.toDouble() / 100.0).toInt()
-/*        if(player.getVarp(532) == 6529){
-            price = 3 * price / 2
-        }*/
+        /*        if(player.getVarp(532) == 6529){
+                    price = 3 * price / 2
+                }*/
         return max(price, 1)
     }
 
@@ -300,7 +298,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
             while(amt-- > 1)
                 cost.amount += getGPCost(Item(item.id, 1), if (isMainStock) stock[slot].amount else playerStock[slot].amount, --inStockAmt)
         } else {
-          cost.amount = cost.amount * item.amount
+            cost.amount = cost.amount * item.amount
         }
 
         if(inInventory(player, cost.id, cost.amount))
@@ -338,7 +336,8 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         }
         else
         {
-            sendMessage(player, "You don't have enough ${cost.name.toLowerCase()} to buy that many.")
+            sendMessage(player, "You don't have enough ${cost.name.lowercase()} to buy that many.")
+            return TransactionStatus.Failure("Not enough money in inventory")
         }
 
         player.dispatch(ItemShopPurchaseEvent(item.id, item.amount, cost))

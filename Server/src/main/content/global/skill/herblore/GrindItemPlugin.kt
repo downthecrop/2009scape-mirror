@@ -1,9 +1,12 @@
 package content.global.skill.herblore
 
+import core.api.addItem
+import core.api.amountInInventory
+import core.api.removeItem
+import core.game.dialogue.SkillDialogueHandler
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler
 import core.game.node.entity.skill.SkillPulse
-import content.global.skill.herblore.GrindingItem
 import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
 import core.net.packet.PacketRepository
@@ -11,7 +14,9 @@ import core.net.packet.context.ChildPositionContext
 import core.net.packet.out.RepositionChild
 import core.plugin.Initializable
 import core.plugin.Plugin
-import core.game.dialogue.SkillDialogueHandler
+import org.rs09.consts.Items
+import kotlin.math.ceil
+import kotlin.math.roundToInt
 
 /**
  * plugin used to handle the grinding of an item.
@@ -30,14 +35,19 @@ class GrindItemPlugin : UseWithHandler(233) {
 
     override fun handle(event: NodeUsageEvent): Boolean {
         val grind = GrindingItem.forItem(if (event.usedItem.id == 233) event.baseItem else event.usedItem)
-        val handler = object : SkillDialogueHandler(event.player,SkillDialogue.ONE_OPTION,grind.product){
+        val handler = object : SkillDialogueHandler(event.player,SkillDialogue.ONE_OPTION,grind.product) {
             override fun create(amount: Int, index: Int) {
-                player.pulseManager.run(object : SkillPulse<Item>(player,event.usedItem){
+                player.pulseManager.run(object : SkillPulse<Item>(player,event.usedItem) {
                     var amt = 0
                     init {
                         amt = amount
-                        if(amt > player.inventory.getAmount(node)){
-                            amt = player.inventory.getAmount(node)
+                        if(amt > amountInInventory(player, node.id)) {
+                            amt = amountInInventory(player, node.id)
+                        }
+                        if (node.id == FISHING_BAIT) {
+                            if(amt > (amountInInventory(player, node.id) / 10)) {
+                                amt = ceil(amountInInventory(player, node.id).toDouble() / 10).roundToInt()
+                            }
                         }
                         super.setDelay(2)
                     }
@@ -50,8 +60,20 @@ class GrindItemPlugin : UseWithHandler(233) {
                     }
 
                     override fun reward(): Boolean {
-                        if(player.inventory.remove(node)){
-                            player.inventory.add(GrindingItem.forItem(node).product)
+                        if (node.id == Items.FISHING_BAIT_313) {
+                            var quantity = 0
+                            quantity = if (amountInInventory(player, FISHING_BAIT) >= 10) {
+                                10
+                            } else {
+                                amountInInventory(player, FISHING_BAIT)
+                            }
+                            if (removeItem(player, Item(node.id, quantity))) {
+                                addItem(player, GrindingItem.forItem(node).product.id, quantity)
+                            }
+                        } else {
+                            if (removeItem(player, Item(node.id, 1))) {
+                                addItem(player, GrindingItem.forItem(node).product.id)
+                            }
                         }
                         amt--
                         return amt <= 0
@@ -61,7 +83,7 @@ class GrindItemPlugin : UseWithHandler(233) {
             }
 
             override fun getAll(index: Int): Int {
-                return player.inventory.getAmount(event.usedItem)
+                return amountInInventory(player, event.usedItem.id)
             }
         }
         handler.open()
@@ -74,5 +96,6 @@ class GrindItemPlugin : UseWithHandler(233) {
          * Represents the animation to use.
          */
         private val ANIMATION = Animation(364)
+        private const val FISHING_BAIT = Items.FISHING_BAIT_313
     }
 }

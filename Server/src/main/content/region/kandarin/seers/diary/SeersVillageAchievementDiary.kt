@@ -1,12 +1,5 @@
 package content.region.kandarin.seers.diary
 
-import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.diary.DiaryType
-import core.game.node.item.Item
-import core.game.world.map.Location
-import core.game.world.map.zone.ZoneBorders
-import org.rs09.consts.Items
-import org.rs09.consts.NPCs
 import content.global.handlers.iface.FairyRing
 import content.global.handlers.item.withnpc.PoisonChaliceOnKingArthurDialogue
 import core.api.inBorders
@@ -14,8 +7,15 @@ import core.api.inEquipment
 import core.game.diary.DiaryEventHookBase
 import core.game.diary.DiaryLevel
 import core.game.event.*
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.diary.DiaryType
+import core.game.node.item.Item
+import core.game.world.map.Location
+import core.game.world.map.zone.ZoneBorders
+import org.rs09.consts.Items
+import org.rs09.consts.NPCs
 
-class SeersVillageAchivementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) {
+class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) {
     companion object {
         private const val ATTRIBUTE_CUT_YEW_COUNT = "diary:seers:cut-yew"
         private const val ATTRIBUTE_BASS_CAUGHT = "diary:seers:bass-caught"
@@ -45,6 +45,10 @@ class SeersVillageAchivementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) 
         private val WORKSHOP_ELEMENTALS = arrayOf(
             NPCs.FIRE_ELEMENTAL_1019, NPCs.EARTH_ELEMENTAL_1020,
             NPCs.AIR_ELEMENTAL_1021, NPCs.WATER_ELEMENTAL_1022
+        )
+
+        private val CHURN_PRODUCT = arrayOf(
+            Items.CHEESE_1985, Items.POT_OF_CREAM_2130, Items.PAT_OF_BUTTER_6697
         )
 
         object EasyTasks {
@@ -94,6 +98,14 @@ class SeersVillageAchivementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) 
 
     override fun onResourceProduced(player: Player, event: ResourceProducedEvent) {
         when (player.viewport.region.id) {
+            10807 -> if (event.itemId in CHURN_PRODUCT) {
+                finishTask(
+                    player,
+                    DiaryLevel.EASY,
+                        EasyTasks.SINCLAIR_MANSION_USE_CHURN
+                )
+            }
+
             10806 -> if (event.itemId == Items.YEW_LOGS_1515) {
                 progressIncrementalTask(
                     player,
@@ -263,8 +275,8 @@ class SeersVillageAchivementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) 
         if (inBorders(player, SEERS_BANK_AREA)) {
             if (event.itemId == Items.MAGIC_SHORTBOW_861 && event.isHigh) {
                 finishTask(
-                    player,
-                    DiaryLevel.HARD,
+                        player,
+                        DiaryLevel.HARD,
                         HardTasks.HIGH_ALCH_MAGIC_SHORTBOW_INSIDE_BANK
                 )
             }
@@ -274,9 +286,19 @@ class SeersVillageAchivementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) 
     override fun onFairyRingDialed(player: Player, event: FairyRingDialEvent) {
         if (event.fairyRing == FairyRing.ALS) {
             finishTask(
-                player,
-                DiaryLevel.HARD,
+                    player,
+                    DiaryLevel.HARD,
                     HardTasks.DIAL_FAIRY_RING_MCGRUBORS_WOOD
+            )
+        }
+    }
+
+    override fun onItemPurchasedFromShop(player: Player, event: ItemShopPurchaseEvent) {
+        if (event.itemId == Items.CANDLE_36 && player.viewport.region.id == 11061) {
+            finishTask(
+                    player,
+                    DiaryLevel.EASY,
+                    EasyTasks.BUY_CANDLE
             )
         }
     }

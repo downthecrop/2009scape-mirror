@@ -1,4 +1,4 @@
-package content.region.kandarin.catherby.dialogue;
+package content.region.misthalin.lumbridge.dialogue;
 
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
@@ -13,7 +13,7 @@ import core.game.node.item.Item;
  * @version 1.0
  */
 @Initializable
-public final class CandleSellerPlugin extends DialoguePlugin {
+public final class CandleSellerDialogue extends DialoguePlugin {
 
 	/**
 	 * Represents the coins item.
@@ -28,7 +28,7 @@ public final class CandleSellerPlugin extends DialoguePlugin {
 	/**
 	 * Constructs a new {@code CandleSellerPlugin} {@code Object}.
 	 */
-	public CandleSellerPlugin() {
+	public CandleSellerDialogue() {
 		/**
 		 * empty.
 		 */
@@ -38,13 +38,13 @@ public final class CandleSellerPlugin extends DialoguePlugin {
 	 * Constructs a new {@code CandleSellerPlugin} {@code Object}.
 	 * @param player the player.
 	 */
-	public CandleSellerPlugin(Player player) {
+	public CandleSellerDialogue(Player player) {
 		super(player);
 	}
 
 	@Override
 	public DialoguePlugin newInstance(Player player) {
-		return new CandleSellerPlugin(player);
+		return new CandleSellerDialogue(player);
 	}
 
 	@Override

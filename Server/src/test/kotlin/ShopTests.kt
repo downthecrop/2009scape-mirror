@@ -1,11 +1,12 @@
+
 import core.game.node.entity.player.link.IronmanMode
 import core.game.node.item.Item
+import core.game.shops.Shop
+import core.game.shops.Shops
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.rs09.consts.Items
-import core.game.shops.Shop
-import core.game.shops.Shops
 import kotlin.math.min
 import kotlin.math.roundToInt
 
@@ -228,7 +229,7 @@ class ShopTests {
     }
 
     @Test fun shouldAllowStandardPlayerToBuy() {
-        testPlayer.inventory.add(Item(995, 100000))
+        testPlayer.inventory.add(Item(995, 125000))
         testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
         testPlayer.setAttribute("shop-main", true)
         val status = general.buy(testPlayer, 0, 1)
@@ -236,7 +237,7 @@ class ShopTests {
     }
 
     @Test fun shouldAllowStandardPlayerToBuyOverstock() {
-        testPlayer.inventory.add(Item(995, 100000))
+        testPlayer.inventory.add(Item(995, 125000))
         testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
         testPlayer.setAttribute("shop-main", true)
         general.getContainer(testPlayer).add(Item(4151, 100))
@@ -245,7 +246,7 @@ class ShopTests {
     }
 
     @Test fun shouldAllowStandardPlayerToBuyPlayerStock() {
-        testPlayer.inventory.add(Item(995, 100000))
+        testPlayer.inventory.add(Item(995, 125000))
         testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
         testPlayer.setAttribute("shop-main", false)
         general.playerStock.add(Item(4151, 100))

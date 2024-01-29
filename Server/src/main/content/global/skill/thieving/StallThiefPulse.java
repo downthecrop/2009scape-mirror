@@ -1,5 +1,6 @@
 package content.global.skill.thieving;
 
+import core.game.event.ResourceProducedEvent;
 import core.game.node.entity.skill.SkillPulse;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.npc.NPC;
@@ -119,6 +120,7 @@ public final class StallThiefPulse extends SkillPulse<Scenery> {
 				return true;
 			}
 			player.getPacketDispatch().sendMessage("You steal " + (StringUtils.isPlusN(item.getName()) ? "an" : "a") + " " + item.getName().toLowerCase() + " from the " + stall.name().toLowerCase().replace('_',' ') + ".");
+			player.dispatch(new ResourceProducedEvent(item.getId(), item.getAmount(), node, 0));
 		}
 		return true;
 	}

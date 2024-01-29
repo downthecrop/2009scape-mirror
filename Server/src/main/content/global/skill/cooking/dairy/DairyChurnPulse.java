@@ -1,5 +1,8 @@
 package content.global.skill.cooking.dairy;
 
+import content.region.fremennik.rellekka.handlers.RellekkaUtils;
+import content.region.fremennik.rellekka.handlers.RellekkaZone;
+import core.game.event.ResourceProducedEvent;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.entity.skill.SkillPulse;
@@ -10,6 +13,9 @@ import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.tools.StringUtils;
 import org.rs09.consts.Items;
+
+import static core.api.ContentAPIKt.location;
+import static core.api.ContentAPIKt.sendMessage;
 
 /**
  * Represents the skill pulse used to make a dairy product.
@@ -106,14 +112,9 @@ public final class DairyChurnPulse extends SkillPulse<Item> {
                     }
                 }
                 player.getPacketDispatch().sendMessage("You make " + (StringUtils.isPlusN(dairy.getProduct().getName().toLowerCase()) ? "an" : "a") + " " + dairy.getProduct().getName().toLowerCase() + ".");
+				player.dispatch(new ResourceProducedEvent(dairy.getProduct().getId(), amount, node, BUCKET_OF_MILK.getId()));
                 player.getSkills().addExperience(Skills.COOKING, dairy.getExperience(), true);
-
-                // Seers village diary
-                if (player.getLocation().withinDistance(new Location(2730, 3578, 0))
-                        && !player.getAchievementDiaryManager().getDiary(DiaryType.SEERS_VILLAGE).isComplete(0,8)) {
-                    player.getAchievementDiaryManager().getDiary(DiaryType.SEERS_VILLAGE).updateTask(player,0,8,true);
-                }
-                break;
+				break;
             }
         }
 

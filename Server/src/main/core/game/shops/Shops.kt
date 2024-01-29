@@ -1,23 +1,25 @@
 package core.game.shops
 
+import content.global.skill.crafting.TanningProduct
+import core.ServerConstants
 import core.api.*
+import core.game.ge.GrandExchange
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListener
+import core.game.interaction.InterfaceListener
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import content.global.skill.crafting.TanningProduct
+import core.game.system.command.Privilege
+import core.tools.END_DIALOGUE
+import core.tools.Log
+import core.tools.secondsToTicks
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import org.rs09.consts.Components
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
-import core.ServerConstants
-import core.game.interaction.InteractionListener
-import core.game.interaction.IntType
-import core.game.interaction.InterfaceListener
-import core.game.system.command.Privilege
 import java.io.FileReader
-import core.tools.*
-import core.game.ge.*
 
 /**
  * The "controller" class for shops. Handles opening shops from various NPC interactions and updating stock, etc.
@@ -154,6 +156,15 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
             }
             return@on true
         }
+
+        on(NPCs.CANDLE_MAKER_562, IntType.NPC, "trade") { player, node ->
+            if (getQuestStage(player, "Merlin's Crystal") > 60) {
+                openId(player, 56)
+            } else {
+                shopsByNpc[node.id]?.openFor(player)
+            }
+            return@on true
+        }
     }
 
     override fun defineInterfaceListeners() {
@@ -179,7 +190,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
 
             when(opcode)
             {
-                OP_VALUE -> sendMessage(player, "${getItemName(if (isMainStock) shop.stock[slot].itemId else shop.playerStock[slot].id)}: This item currently costs ${price.amount} ${price.name.toLowerCase()}.")
+                OP_VALUE -> sendMessage(player, "${getItemName(if (isMainStock) shop.stock[slot].itemId else shop.playerStock[slot].id)}: This item currently costs ${price.amount} ${price.name.lowercase()}.")
                 OP_BUY_1 -> shop.buy(player, slot, 1)
                 OP_BUY_5 -> shop.buy(player, slot, 5)
                 OP_BUY_10 -> shop.buy(player, slot, 10)
