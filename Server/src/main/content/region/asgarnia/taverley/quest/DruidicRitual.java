@@ -66,10 +66,11 @@ public class DruidicRitual extends Quest {
 				return true;
 			}
 		}));
+		player.getPacketDispatch().sendString("You have completed the Druidic Ritual Quest!", 277, 4);
+		player.getPacketDispatch().sendItemZoomOnInterface(249, 240, 277, 3 + 2);
 		player.getPacketDispatch().sendString("4 Quest Points", 277, 8 + 2);
 		player.getPacketDispatch().sendString("250 Herblore XP", 277, 9 + 2);
 		player.getPacketDispatch().sendString("Access to Herblore skill", 277, 10 + 2);
-		player.getPacketDispatch().sendItemZoomOnInterface(249, 240, 277, 3 + 2);
 		player.getSkills().addExperience(Skills.HERBLORE, 250);
 		player.getInterfaceManager().closeChatbox();
 	}

@@ -38,12 +38,12 @@ class DeathPlateau : Quest("Death Plateau",44, 43, 1, 314, 0, 1, 80) {
                         line(player,"!!equipment room?? and !!unlock?? the door.",line++,)
                     }
                     // Technically this part is to be done in parallel with the ball mechanism part above.
-                    in 19..99 -> {
-                        line(player,"I have offered to help !!Denulth?? by finding !!another way?? up",line++,)
-                        line(player,"!!Death Plateau.??",line++,)
-                        line(player,"",line++,)
+                    in 19..100 -> {
+                        line(player,"I have found another way up Death Plateau.",line++, stage>26)
+                        line++
                         line(player,"I have found the combination to the equipment room and",line++,stage>18)
                         line(player,"unlocked the door.",line++,stage>18)
+                        line++
                     }
                 }
             }
@@ -62,11 +62,12 @@ class DeathPlateau : Quest("Death Plateau",44, 43, 1, 314, 0, 1, 80) {
                         line(player,"!!Toad and Chicken.?? the guard wouldn't talk to me! I bought",line++,stage>18)
                         line(player,"the guard a drink and he seemed more helpful.",line++,stage>18)
                     }
-                    in 15..99 -> {
+                    in 15..100 -> {
                         line(player,"The equipment room guard is staying at the local inn, the",line++,stage>18)
                         line(player,"!!Toad and Chicken.?? the guard wouldn't talk to me! I bought",line++,stage>18)
                         line(player,"the guard a drink and he seemed more helpful. I gambled",line++,stage>18)
                         line(player,"with the guard until he ran out of money, he wrote out an !!IOU.??",line++,stage>18)
+                        line++
                     }
                 }
             }
@@ -76,10 +77,11 @@ class DeathPlateau : Quest("Death Plateau",44, 43, 1, 314, 0, 1, 80) {
                         line(player,"It turned out the IOU was written on the back of the",line++,stage>18)
                         line(player,"combination!",line++,stage>18)
                     }
-                    in 17..99 -> {
+                    in 17..100 -> {
                         line(player,"It turned out the IOU was written on the back of the",line++,stage>18)
                         line(player,"combination! I put the stone balls in the right places on the",line++,stage>18)
                         line(player,"stone mechanism and unlocked the door!",line++,stage>18)
+                        line++
                     }
                 }
             }
@@ -117,7 +119,7 @@ class DeathPlateau : Quest("Death Plateau",44, 43, 1, 314, 0, 1, 80) {
                         line(player,"I need to !!check?? that the !!secret way?? is !!safe?? for the !!Imperial??", line++, false)
                         line(player,"!!Guard?? to use.", line++, false)
                     }
-                    in 26 .. 99 -> {
+                    in 26 .. 100 -> {
                         line(player, "I found the !!sherpa's?? house. I gave Tenzing the ten loaves", line++, true)
                         line(player, "of bread, ten cooked trout and the Spiked boots. Tenzing", line++, true)
                         line(player, "has given me a map of the secret way. I checked the", line++, true)
@@ -130,15 +132,27 @@ class DeathPlateau : Quest("Death Plateau",44, 43, 1, 314, 0, 1, 80) {
                         line(player, "!!Dunstan?? will help me if I get his !!son signed up?? for the", line++, false)
                         line(player, "!!Imperial Guard??. I will need an !!Iron bar?? for the boots", line++, false)
                     }
-                    in 24 .. 99 -> {
+                    in 24 .. 100 -> {
                         line(player,"I have given Dunstan the certificate to prove that his son", line++, true)
                         line(player,"has been signed up for the Imperial Guard. Dunstan made", line++, true)
                         line(player, "me the Spiked boots.", line++, true)
+                        line++
                     }
                 }
             }
-            if(stage >= 30) {
-                line(player,"I should go and tell !!Denulth?? I've completed my mission.", line++, false)
+            when(stage) {
+                in 30 .. 40 -> {
+                    line(player, "I should go and tell !!Denulth?? I've completed my mission.", line++, false)
+                }
+                in 41 .. 100 -> {
+                    line(player, "I gave Denulth the secret way map and the combination.", line++, true)
+                    line(player, "Denulth gave me some Steel claws and trained me in.", line++, true)
+                    line(player, "attack. I'm now an honorary member of the Imperial Guard!", line++, true)
+                }
+            }
+            if (stage >= 100) {
+                line++
+                line(player,"<col=FF0000>QUEST COMPLETE!</col>", line)
             }
         }
     }
