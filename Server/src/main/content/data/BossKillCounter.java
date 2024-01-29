@@ -30,11 +30,6 @@ public enum BossKillCounter {
         8355, 8356, 8357, 8358, 8359, 8360,
         8361, 8362, 8363, 8364, 8365, 8366,
         }, "Tormented demon", -1),
-	CALLISTO(new int[] { 8610 }, "Callisto", 14658),
-	SCORPIA(new int[] { 8611 }, "Scorpia", 14661),
-	VENENATIS(new int[] { 8612 }, "Venenatis", 14657),
-	VETION(new int[] { 8613 }, "Vet'ion", 14659),
-	KRAKEN(new int[] { 8614 }, "Cave Kraken", 14651),
 	
 
 	;
