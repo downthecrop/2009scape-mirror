@@ -45,7 +45,7 @@ class SantaHolidayRandomDialogue : DialogueFile() {
             40 -> npcl(FacialExpression.NEUTRAL, "If you work on being a good ${if (player!!.isMale) "boy" else "girl"} from now on you will make it on the nice list!").also { stage = 41 }
             41 -> npcl(FacialExpression.NEUTRAL, "Since you are on the naughty list, you get coal.").also { stage = 42 }
             42 -> {
-                addItemOrDrop(player!!, Items.COAL_454, RandomFunction.getRandom(20))
+                addItemOrDrop(player!!, Items.COAL_454, RandomFunction.random(1, 21))
                 HolidayRandoms.terminateEventNpc(player!!)
                 end()
             }
