@@ -103,10 +103,10 @@ class FishingListener : InteractionListener{
             if (isActive(SkillcapePerks.GREAT_AIM, player) && RandomFunction.roll(20)) {
                 addItemOrDrop(player, item.id, item.amount)
                 sendMessage(player, colorize("%RYour expert aim catches you a second fish."))
-                player.incrementAttribute("$STATS_BASE:$STATS_FISH")
+                player.incrementAttribute("/save:$STATS_BASE:$STATS_FISH")
             }
 
-            player.incrementAttribute("$STATS_BASE:$STATS_FISH")
+            player.incrementAttribute("/save:$STATS_BASE:$STATS_FISH")
             var xp = fish.experience
             if ((item.id == Items.RAW_SWORDFISH_371 && inEquipment(player, Items.SWORDFISH_GLOVES_12860))
                 || (item.id == Items.RAW_SHARK_383 && inEquipment(player, Items.SHARK_GLOVES_12861))) {
