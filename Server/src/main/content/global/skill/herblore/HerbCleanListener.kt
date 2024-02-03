@@ -19,7 +19,7 @@ class HerbCleanListener : InteractionListener {
             val herb: Herbs = Herbs.forItem(node as Item) ?: return@on true
 
             if (getDynLevel(player, Skills.HERBLORE) < herb.level) {
-                sendMessage(player, "You need level " + herb.level + " Herblore to clean the " + herb.product.name.replace("Clean", "Grimy") + ".")
+                sendMessage(player, "You cannot clean this herb. You need a Herblore level of " + herb.level + " to attempt this.")
                 return@on true
             }
 
