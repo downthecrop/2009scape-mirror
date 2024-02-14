@@ -49,7 +49,7 @@ public final class KittenInteractDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean open(Object... args) {
-		interpreter.sendOptions("Interact with Kitten", "Stroke", "Chase-Vermin", "Shoo-away.");
+		interpreter.sendOptions("Interact with Kitten", "Stroke", "Chase vermin", "Shoo away");
 		stage = 0;
 		return true;
 	}
@@ -113,11 +113,14 @@ public final class KittenInteractDialogue extends DialoguePlugin {
 		case 560:
 			switch (buttonId) {
 			case 1:// yes
-				player.sendChat("Shoo cat!");
-				player.getFamiliarManager().getFamiliar().sendChat("Miaow!");
-				// player.getFamiliarManager().getFamiliar().dismiss();//TODO:
-				// Pet
-				player.getPacketDispatch().sendMessage("The cat has run away.");
+				if (player.getFamiliarManager().hasFamiliar()) { //in case the cat had already run away from hunger by the time the player clicked 'yes'
+					player.sendChat("Shoo cat!");
+					Pet currentPet = (Pet) player.getFamiliarManager().getFamiliar();
+					player.getFamiliarManager().getFamiliar().sendChat("Miaow!");
+					player.getFamiliarManager().removeDetails(currentPet.getItemIdHash());
+					player.getFamiliarManager().getFamiliar().dismiss();
+					player.getPacketDispatch().sendMessage("The cat has run away.");
+				}
 				end();
 				break;
 			case 2:// no

@@ -283,9 +283,11 @@ public final class FamiliarManager {
 			details = new PetDetails(pets.getGrowthRate() == 0.0 ? 100.0 : 0.0);
 			for (individual = 0; taken.contains(individual) && individual < 0xFFFF; individual++) {}
 			details.setIndividual(individual);
-			item.setCharge(individual);
-			itemIdHash = item.getIdHash(); //updates the hashed item to include the new "charge" value
-			petDetails.put(itemIdHash, details);
+			// Make a copy of the item to extract what the item's idHash will be when including the individual ID as a "charge" value.
+			// The copy is necessary since the player's inventory still contains the default-charged item, which we will be removing only later.
+			Item newItem = item.copy();
+			newItem.setCharge(individual);
+			petDetails.put(newItem.getIdHash(), details);
 		}
 		int npcId = pets.getNpcId(itemId);
 		if (npcId > 0) {
