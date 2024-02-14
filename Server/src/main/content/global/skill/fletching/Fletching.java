@@ -97,7 +97,7 @@ public class Fletching {
     }
     public enum Limb {
         WOODEN_STOCK(9440,9420,9454,9, 12, new Animation(4436)),
-        OAK_STOCK(9442,9422,9176,24, 32, new Animation(4437)),
+        OAK_STOCK(9442,9422,9456,24, 32, new Animation(4437)),
         WILLOW_STOCK(9444,9423,9457,39, 44, new Animation(4438)),
         TEAK_STOCK(9446,9425,9459,46, 54, new Animation(4439)),
         MAPLE_STOCK(9448,9427,9461,54, 64, new Animation(4440)),
