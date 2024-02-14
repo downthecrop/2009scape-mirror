@@ -1753,7 +1753,7 @@
   },
   {
     "examine": "Danger!",
-    "ids": "1032,5127,29373"
+    "ids": "1032,5127"
   },
   {
     "examine": "This tells you which way is which.",
@@ -20296,6 +20296,10 @@
     "ids": "32031"
   },
   {
+    "examine": "Now that's what I call slimline!",
+    "ids": "32072"
+  },
+  {
     "examine": "A really bad portrait of the King.",
     "ids": "32326"
   },
@@ -20622,6 +20626,10 @@
   {
     "examine": "Keeps the puppies out of trouble.",
     "ids": "28341"
+  },
+  {
+    "examine": "Warning! Danger of death.",
+    "ids": "29373"
   },
   {
     "examine": "There are some toolboxes on this table.",

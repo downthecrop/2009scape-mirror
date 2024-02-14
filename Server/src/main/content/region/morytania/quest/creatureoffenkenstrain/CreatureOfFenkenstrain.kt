@@ -1,6 +1,5 @@
 package content.region.morytania.quest.creatureoffenkenstrain
 
-import content.region.desert.quest.thegolem.TheGolemListeners
 import core.api.*
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.player.Player

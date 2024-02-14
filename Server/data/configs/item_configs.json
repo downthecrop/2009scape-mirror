@@ -766,6 +766,13 @@
     "equipment_slot": "13"
   },
   {
+    "examine": "A lever to open something perhaps?",
+    "durability": null,
+    "name": "Lever",
+    "archery_ticket_price": "0",
+    "id": "83"
+  },
+  {
     "destroy_message": "You can reclaim this item from the place you found it.",
     "examine": "The power in this staff causes it to vibrate gently.",
     "durability": null,
