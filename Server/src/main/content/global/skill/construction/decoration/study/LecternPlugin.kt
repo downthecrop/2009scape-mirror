@@ -18,6 +18,7 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import core.game.world.GameWorld
 import core.game.interaction.InterfaceListener
+import org.rs09.consts.Items
 
 /**
  * Handles the lectern
@@ -47,21 +48,21 @@ class LecternPlugin : OptionHandler() {
              * The required decoration (lectern)
              */
             private val requiredDecorations: Array<Decoration>, vararg requiredItems: Item) {
-        ARDOUGNE(2, 51, 61.0, Item(TeleTabsListener.TeleTabs.ADDOUGNE_TELEPORT.item), arrayOf<Decoration>(Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(563, 2), Item(555, 2)),
-        BONES_TO_BANANNAS(3, 15, 25.0, Item(8014), arrayOf<Decoration>(Decoration.DEMON_LECTERN, Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(561, 1), Item(557, 2), Item(555, 2)),
-        BONES_TO_PEACHES(4, 60, 35.5, Item(8015), arrayOf<Decoration>(Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(561, 2), Item(557, 4), Item(555, 4)),
-        CAMELOT(5, 45, 55.5, Item(TeleTabsListener.TeleTabs.CAMELOT_TELEPORT.item), arrayOf<Decoration>(Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(563), Item(556, 5)),
-        ENCHANT_DIAMOND(6, 57, 67.0, Item(8019), arrayOf<Decoration>(Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(564), Item(557, 10)),
-        ENCHANT_DRAGONSTONE(7, 68, 78.0, Item(8020), arrayOf<Decoration>(Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(564), Item(557, 15), Item(555, 15)),
-        ENCHANT_EMERALD(8, 27, 37.0, Item(8017), arrayOf<Decoration>(Decoration.DEMON_LECTERN, Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(564), Item(556, 3)),
-        ENCHANT_ONYX(9, 87, 97.0, Item(8021), arrayOf<Decoration>(Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(564), Item(557, 20), Item(554, 20)),
-        ENCHANT_RUBY(10, 49, 59.0, Item(8018), arrayOf<Decoration>(Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(564), Item(554, 5)),
-        ENCHANT_SAPPHIRE(11, 7, 17.5, Item(8016), arrayOf<Decoration>(Decoration.OAK_LECTERN, Decoration.EAGLE_LECTERN, Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN, Decoration.DEMON_LECTERN, Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(564), Item(555)),
-        FALADOR(12, 37, 48.0, Item(TeleTabsListener.TeleTabs.FALADOR_TELEPORT.item), arrayOf<Decoration>(Decoration.EAGLE_LECTERN, Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(563), Item(555), Item(556, 3)),
-        LUMBRIDGE(13, 31, 41.0, Item(TeleTabsListener.TeleTabs.LUMBRIDGE_TELEPORT.item), arrayOf<Decoration>(Decoration.EAGLE_LECTERN, Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(563), Item(557), Item(556, 3)),
-        HOUSE(14, 40, 30.0, Item(8013), arrayOf<Decoration>(Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(563), Item(557), Item(556)),
-        VARROCK(15, 25, 35.0, Item(TeleTabsListener.TeleTabs.VARROCK_TELEPORT.item), arrayOf<Decoration>(Decoration.OAK_LECTERN, Decoration.EAGLE_LECTERN, Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN, Decoration.DEMON_LECTERN, Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(563), Item(554), Item(556, 3)),
-        WATCHTOWER(16, 58, 68.0, Item(TeleTabsListener.TeleTabs.WATCH_TOWER_TELEPORT.item), arrayOf<Decoration>(Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(563, 2), Item(557, 2));
+        ARDOUGNE(2, 51, 61.0, Item(TeleTabsListener.TeleTabs.ADDOUGNE_TELEPORT.item), arrayOf<Decoration>(Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563, 2), Item(Items.WATER_RUNE_555, 2)),
+        BONES_TO_BANANNAS(3, 15, 25.0, Item(Items.BONES_TO_BANANAS_8014), arrayOf<Decoration>(Decoration.DEMON_LECTERN, Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.NATURE_RUNE_561, 1), Item(Items.EARTH_RUNE_557, 2), Item(Items.WATER_RUNE_555, 2)),
+        BONES_TO_PEACHES(4, 60, 35.5, Item(Items.BONES_TO_PEACHES_8015), arrayOf<Decoration>(Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.NATURE_RUNE_561, 2), Item(Items.EARTH_RUNE_557, 4), Item(Items.WATER_RUNE_555, 4)),
+        CAMELOT(5, 45, 55.5, Item(TeleTabsListener.TeleTabs.CAMELOT_TELEPORT.item), arrayOf<Decoration>(Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563), Item(Items.AIR_RUNE_556, 5)),
+        ENCHANT_DIAMOND(6, 57, 67.0, Item(Items.ENCHANT_DIAMOND_8019), arrayOf<Decoration>(Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.COSMIC_RUNE_564), Item(Items.EARTH_RUNE_557, 10)),
+        ENCHANT_DRAGONSTONE(7, 68, 78.0, Item(Items.ENCHANT_DRAGONSTN_8020), arrayOf<Decoration>(Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.COSMIC_RUNE_564), Item(Items.EARTH_RUNE_557, 15), Item(Items.WATER_RUNE_555, 15)),
+        ENCHANT_EMERALD(8, 27, 37.0, Item(Items.ENCHANT_EMERALD_8017), arrayOf<Decoration>(Decoration.DEMON_LECTERN, Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.COSMIC_RUNE_564), Item(Items.AIR_RUNE_556, 3)),
+        ENCHANT_ONYX(9, 87, 97.0, Item(Items.ENCHANT_ONYX_8021), arrayOf<Decoration>(Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.COSMIC_RUNE_564), Item(Items.EARTH_RUNE_557, 20), Item(Items.FIRE_RUNE_554, 20)),
+        ENCHANT_RUBY(10, 49, 59.0, Item(Items.ENCHANT_RUBY_8018), arrayOf<Decoration>(Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.COSMIC_RUNE_564), Item(Items.FIRE_RUNE_554, 5)),
+        ENCHANT_SAPPHIRE(11, 7, 17.5, Item(Items.ENCHANT_SAPPHIRE_8016), arrayOf<Decoration>(Decoration.OAK_LECTERN, Decoration.EAGLE_LECTERN, Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN, Decoration.DEMON_LECTERN, Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.COSMIC_RUNE_564), Item(Items.WATER_RUNE_555)),
+        FALADOR(12, 37, 48.0, Item(TeleTabsListener.TeleTabs.FALADOR_TELEPORT.item), arrayOf<Decoration>(Decoration.EAGLE_LECTERN, Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563), Item(Items.WATER_RUNE_555), Item(Items.AIR_RUNE_556, 3)),
+        LUMBRIDGE(13, 31, 41.0, Item(TeleTabsListener.TeleTabs.LUMBRIDGE_TELEPORT.item), arrayOf<Decoration>(Decoration.EAGLE_LECTERN, Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563), Item(Items.EARTH_RUNE_557), Item(Items.AIR_RUNE_556, 3)),
+        HOUSE(14, 40, 30.0, Item(Items.TELEPORT_TO_HOUSE_8013), arrayOf<Decoration>(Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563), Item(Items.EARTH_RUNE_557), Item(Items.AIR_RUNE_556)),
+        VARROCK(15, 25, 35.0, Item(TeleTabsListener.TeleTabs.VARROCK_TELEPORT.item), arrayOf<Decoration>(Decoration.OAK_LECTERN, Decoration.EAGLE_LECTERN, Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN, Decoration.DEMON_LECTERN, Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563), Item(Items.FIRE_RUNE_554), Item(Items.AIR_RUNE_556, 3)),
+        WATCHTOWER(16, 58, 68.0, Item(TeleTabsListener.TeleTabs.WATCH_TOWER_TELEPORT.item), arrayOf<Decoration>(Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563, 2), Item(Items.EARTH_RUNE_557, 2));
 
         /**
          * The required items
@@ -215,6 +216,6 @@ class LecternPlugin : OptionHandler() {
         /**
          * Soft clay
          */
-        private val SOFT_CLAY = Item(1761, 1)
+        private val SOFT_CLAY = Item(Items.SOFT_CLAY_1761, 1)
     }
 }

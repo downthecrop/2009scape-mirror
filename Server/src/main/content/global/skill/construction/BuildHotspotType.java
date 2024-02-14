@@ -10,7 +10,7 @@ public enum BuildHotspotType {
 	INDIVIDUAL,
 	RECURSIVE,
 	LINKED,
-	CREST, 
+	CREST,
 	STAIRCASE;
 	
 	BuildHotspotType() {

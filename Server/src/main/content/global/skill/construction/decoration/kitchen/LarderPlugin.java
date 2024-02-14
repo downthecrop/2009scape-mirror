@@ -10,6 +10,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
+import org.rs09.consts.Items;
 
 /**
  * Handles the interactions for the three Larders.
@@ -95,19 +96,19 @@ public final class LarderPlugin extends OptionHandler {
 			case 1:
 				switch (buttonId) {
 				case 1:
-					player.getInventory().add(new Item(7738, 1));
+					player.getInventory().add(new Item(Items.TEA_LEAVES_7738, 1));
 					end();
 					break;
 				case 2:
-					player.getInventory().add(new Item(1927, 1));
+					player.getInventory().add(new Item(Items.BUCKET_OF_MILK_1927, 1));
 					end();
 					break;
 				case 3:
-					player.getInventory().add(new Item(1944, 1));
+					player.getInventory().add(new Item(Items.EGG_1944, 1));
 					end();
 					break;
 				case 4:
-					player.getInventory().add(new Item(1933, 1));
+					player.getInventory().add(new Item(Items.POT_OF_FLOUR_1933, 1));
 					end();
 					break;
 				case 5:
@@ -120,19 +121,19 @@ public final class LarderPlugin extends OptionHandler {
 			case 2:
 				switch (buttonId) {
 				case 1:
-					player.getInventory().add(new Item(1942, 1));
+					player.getInventory().add(new Item(Items.POTATO_1942, 1));
 					end();
 					break;
 				case 2:
-					player.getInventory().add(new Item(1550, 1));
+					player.getInventory().add(new Item(Items.GARLIC_1550, 1));
 					end();
 					break;
 				case 3:
-					player.getInventory().add(new Item(1957, 1));
+					player.getInventory().add(new Item(Items.ONION_1957, 1));
 					end();
 					break;
 				case 4:
-					player.getInventory().add(new Item(1985, 1));
+					player.getInventory().add(new Item(Items.CHEESE_1985, 1));
 					end();
 					break;
 				}

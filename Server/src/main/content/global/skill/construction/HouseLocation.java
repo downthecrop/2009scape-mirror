@@ -79,7 +79,7 @@ public enum HouseLocation {
 					}
 					if (player.getSkills().hasLevel(Skills.CONSTRUCTION, hl.levelRequirement)) {
 						if (player.getInventory().contains(995, hl.cost)) {
-							player.getInventory().remove(new Item(995, hl.cost));
+							player.getInventory().remove(new Item(Items.COINS_995, hl.cost));
 							player.getHouseManager().setLocation(hl);
 							player.sendMessage("<col=006600>You have changed your house location to " + hl.name() + "!");
 						} else {

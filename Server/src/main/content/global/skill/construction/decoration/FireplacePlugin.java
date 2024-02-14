@@ -14,6 +14,7 @@ import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
+import org.rs09.consts.Items;
 
 /**
  * Handles the various fireplaces that you may light in Construction.
@@ -51,7 +52,7 @@ public final class FireplacePlugin extends OptionHandler {
 				if (!obj.isActive()) {
 					return true;
 				}
-				player.getInventory().remove(new Item(1511));
+				player.getInventory().remove(new Item(Items.LOGS_1511));
 				player.getSkills().addExperience(Skills.FIREMAKING, 80);
 				SceneryBuilder.replace(new Scenery(obj.getId(), obj.getLocation()), new Scenery(obj.getId() + 1, obj.getLocation(), obj.getRotation()), 1000);
 				player.sendMessage("You light the fireplace.");

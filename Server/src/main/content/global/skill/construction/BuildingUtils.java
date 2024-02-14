@@ -19,6 +19,7 @@ import core.net.packet.out.ContainerPacket;
 import core.tools.Log;
 import org.jetbrains.annotations.NotNull;
 import core.tools.SystemLogger;
+import org.rs09.consts.Items;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,7 +68,7 @@ public final class BuildingUtils {
 	/**
 	 * The plank item.
 	 */
-	public static final Item PLANK = new Item(960);
+	public static final Item PLANK = new Item(Items.PLANK_960);
 
 	/**
 	 * The watering can(8) item id.

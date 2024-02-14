@@ -10,6 +10,7 @@ import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
+import org.rs09.consts.Items;
 
 /**
  * Handles the shelves in the kitchen room.
@@ -107,23 +108,23 @@ public final class ShelfPlugin extends OptionHandler {
 				switch (buttonId) {
 				case 1:
 					end();
-					player.getInventory().add(new Item(7688, 1));
+					player.getInventory().add(new Item(Items.KETTLE_7688, 1));
 					break;
 				case 2:
 					end();
-					player.getInventory().add(new Item(7702, 1));
+					player.getInventory().add(new Item(Items.TEAPOT_7702, 1));
 					break;
 				case 3:
 					end();
-					player.getInventory().add(new Item(7728, 1));
+					player.getInventory().add(new Item(Items.EMPTY_CUP_7728, 1));
 					break;
 				case 4:
 					end();
-					player.getInventory().add(new Item(1919, 1));
+					player.getInventory().add(new Item(Items.BEER_GLASS_1919, 1));
 					break;
 				case 5:
 					end();
-					player.getInventory().add(new Item(1887, 1));
+					player.getInventory().add(new Item(Items.CAKE_TIN_1887, 1));
 					break;
 				}
 				break;
@@ -131,23 +132,23 @@ public final class ShelfPlugin extends OptionHandler {
 				switch (buttonId) {
 				case 1:
 					end();
-					player.getInventory().add(new Item(7688, 1));
+					player.getInventory().add(new Item(Items.KETTLE_7688, 1));
 					break;
 				case 2:
 					end();
-					player.getInventory().add(new Item(7702, 1));
+					player.getInventory().add(new Item(Items.TEAPOT_7702, 1));
 					break;
 				case 3:
 					end();
-					player.getInventory().add(new Item(7728, 1));
+					player.getInventory().add(new Item(Items.EMPTY_CUP_7728, 1));
 					break;
 				case 4:
 					end();
-					player.getInventory().add(new Item(1919, 1));
+					player.getInventory().add(new Item(Items.BEER_GLASS_1919, 1));
 					break;
 				case 5:
 					end();
-					player.getInventory().add(new Item(1923, 1));
+					player.getInventory().add(new Item(Items.BOWL_1923, 1));
 					break;
 				}
 				break;
@@ -155,19 +156,19 @@ public final class ShelfPlugin extends OptionHandler {
 				switch (buttonId) {
 				case 1:
 					end();
-					player.getInventory().add(new Item(7688, 1));
+					player.getInventory().add(new Item(Items.KETTLE_7688, 1));
 					break;
 				case 2:
 					end();
-					player.getInventory().add(new Item(7702, 1));
+					player.getInventory().add(new Item(Items.TEAPOT_7702, 1));
 					break;
 				case 3:
 					end();
-					player.getInventory().add(new Item(4244, 1));
+					player.getInventory().add(new Item(Items.PORCELAIN_CUP_4244, 1));
 					break;
 				case 4:
 					end();
-					player.getInventory().add(new Item(1919, 1));
+					player.getInventory().add(new Item(Items.BEER_GLASS_1919, 1));
 					break;
 				case 5:
 					interpreter.sendOptions("Select an Option", "Bowl", "Cake tin");
@@ -179,30 +180,30 @@ public final class ShelfPlugin extends OptionHandler {
 				switch (buttonId) {
 				case 1:
 					end();
-					player.getInventory().add(new Item(1923, 1));
+					player.getInventory().add(new Item(Items.BOWL_1923, 1));
 					break;
 				case 2:
 					end();
-					player.getInventory().add(new Item(1887, 1));
+					player.getInventory().add(new Item(Items.CAKE_TIN_1887, 1));
 					break;
 				}
 			case 5:// teak shelves
 				switch (buttonId) {
 				case 1:
 					end();
-					player.getInventory().add(new Item(7688, 1));
+					player.getInventory().add(new Item(Items.KETTLE_7688, 1));
 					break;
 				case 2:
 					end();
-					player.getInventory().add(new Item(7702, 1));
+					player.getInventory().add(new Item(Items.TEAPOT_7702, 1));
 					break;
 				case 3:
 					end();
-					player.getInventory().add(new Item(7735, 1));
+					player.getInventory().add(new Item(Items.PORCELAIN_CUP_7735, 1));
 					break;
 				case 4:
 					end();
-					player.getInventory().add(new Item(1919, 1));
+					player.getInventory().add(new Item(Items.BEER_GLASS_1919, 1));
 					break;
 				case 5:
 					interpreter.sendOptions("Select an Option", "Bowl", "Pie dish", "Empty pot");
@@ -214,15 +215,15 @@ public final class ShelfPlugin extends OptionHandler {
 				switch (buttonId) {
 				case 1:
 					end();
-					player.getInventory().add(new Item(1923, 1));
+					player.getInventory().add(new Item(Items.BOWL_1923, 1));
 					break;
 				case 2:
 					end();
-					player.getInventory().add(new Item(2313, 1));
+					player.getInventory().add(new Item(Items.PIE_DISH_2313, 1));
 					break;
 				case 3:
 					end();
-					player.getInventory().add(new Item(1931, 1));
+					player.getInventory().add(new Item(Items.EMPTY_POT_1931, 1));
 					break;
 				}
 				break;

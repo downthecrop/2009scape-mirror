@@ -18,6 +18,7 @@ import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.path.Pathfinder;
 import content.global.handlers.iface.SawmillPlankInterface.Plank;
+import org.rs09.consts.Items;
 
 /**
  * Handles the Servant's dialogues.
@@ -146,7 +147,7 @@ public class HouseServantDialogue extends DialoguePlugin {
 			stage++;
 			break;
 		case 3:
-			if (type != null && player.getInventory().getAmount(995) >= type.getCost() && player.getInventory().remove(new Item(995, type.getCost()))) {
+			if (type != null && player.getInventory().getAmount(995) >= type.getCost() && player.getInventory().remove(new Item(Items.COINS_995, type.getCost()))) {
 				manager.setServant(new Servant(type));
 				interpreter.sendDialogue("The servant heads to your house.");
 				stage = 100;
@@ -218,11 +219,11 @@ public class HouseServantDialogue extends DialoguePlugin {
 					interpreter.sendDialogues(servant, servant.getId() == 4243 ? FacialExpression.HALF_GUILTY : null, "You have no need to pay me yet, I haven't performed", "any of my services for you.");
 					break;
 				}
-				if (!player.getInventory().containsItem(new Item(995, type.getCost()))) {
+				if (!player.getInventory().containsItem(new Item(Items.COINS_995, type.getCost()))) {
 					interpreter.sendDialogues(servant, servant.getId() == 4243 ? FacialExpression.HALF_GUILTY : null, "Thanks for the kind gesture, but you don't have enough", "money to pay me. I require " + type.getCost() + " coins every eight uses", "of my services.");
 					break;
 				}
-				if (player.getInventory().remove(new Item(995, type.getCost()))) {
+				if (player.getInventory().remove(new Item(Items.COINS_995, type.getCost()))) {
 					interpreter.sendDialogues(servant, servant.getId() == 4243 ? FacialExpression.HALF_GUILTY : null, "Thank you very much.");
 					servant.setUses(0);
 				}
@@ -311,18 +312,18 @@ public class HouseServantDialogue extends DialoguePlugin {
 		case 60:
 			switch(buttonId) {
 			case 1: //planks
-				bankFetch(player, new Item(960));
+				bankFetch(player, new Item(Items.PLANK_960));
 				stage = 100;
 				break;
 			case 2: //oak
-				bankFetch(player, new Item(8778));
+				bankFetch(player, new Item(Items.OAK_PLANK_8778));
 				stage = 100;
 				break;
 			case 3: //teak
-				bankFetch(player, new Item(8780));
+				bankFetch(player, new Item(Items.TEAK_PLANK_8780));
 				break;
 			case 4: //mahog
-				bankFetch(player, new Item(8782));
+				bankFetch(player, new Item(Items.MAHOGANY_PLANK_8782));
 				break;
 			case 5:
 				options("Soft clay", "Limestone bricks", "Steel bars", "Cloth", "More options");
@@ -333,16 +334,16 @@ public class HouseServantDialogue extends DialoguePlugin {
 		case 61:
 			switch(buttonId) {
 			case 1: //clay
-				bankFetch(player, new Item(1761));
+				bankFetch(player, new Item(Items.SOFT_CLAY_1761));
 				break;
 			case 2: //lime
-				bankFetch(player, new Item(3420));
+				bankFetch(player, new Item(Items.LIMESTONE_BRICK_3420));
 				break;
 			case 3: //steel bars
-				bankFetch(player, new Item(2353));
+				bankFetch(player, new Item(Items.STEEL_BAR_2353));
 				break;
 			case 4: //cloth
-				bankFetch(player, new Item(8790));
+				bankFetch(player, new Item(Items.BOLT_OF_CLOTH_8790));
 				break;
 			case 5: 
 				options("Gold leaves", "Marble blocks", "Magic stones");
@@ -353,13 +354,13 @@ public class HouseServantDialogue extends DialoguePlugin {
 		case 62:
 			switch(buttonId) {
 			case 1: //leaves
-				bankFetch(player, new Item(4692));
+				bankFetch(player, new Item(Items.GOLD_LEAF_4692));
 				break;
 			case 2: //marble
-				bankFetch(player, new Item(8786));
+				bankFetch(player, new Item(Items.MARBLE_BLOCK_8786));
 				break;
 			case 3: //magic stones
-				bankFetch(player, new Item(4703));
+				bankFetch(player, new Item(Items.MAGIC_STONE_4703));
 				break;
 			}
 			break;
@@ -478,7 +479,7 @@ public class HouseServantDialogue extends DialoguePlugin {
 					return;
 				}
 				end();
-				if (player.getInventory().remove(new Item(item.getId(), amt)) && player.getInventory().remove(new Item(995, amt * plank.getPrice()))) {
+				if (player.getInventory().remove(new Item(item.getId(), amt)) && player.getInventory().remove(new Item(Items.COINS_995, amt * plank.getPrice()))) {
 					manager.getServant().setItem(new Item(plank.getPlank().getId(), amt));
 					servant.setInvisible(true);
 					servant.getLocks().lockMovement(100);

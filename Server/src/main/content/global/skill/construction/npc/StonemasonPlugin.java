@@ -48,7 +48,7 @@ public class StonemasonPlugin extends OptionHandler {
 		 * Constructs a new {@Code SupplyStore} {@Code Object}
 		 *//*
 		public SupplyStore() {
-			super("Keldagrim Stonemason", new Item[] { new Item(3420, 1000), new Item(8786, 20), new Item(8784, 20), new Item(8788, 10) }, false);
+			super("Keldagrim Stonemason", new Item[] { new Item(Items.LIMESTONE_BRICK_3420, 1000), new Item(Items.MARBLE_BLOCK_8786, 20), new Item(Items.GOLD_LEAF_8784, 20), new Item(Items.MAGIC_STONE_8788, 10) }, false);
 		}
 
 		@Override

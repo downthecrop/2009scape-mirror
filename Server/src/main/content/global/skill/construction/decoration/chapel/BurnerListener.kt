@@ -7,6 +7,7 @@ import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import org.rs09.consts.Items
 
 /**
  * Handles the lighting of the torches of the Chapel.
@@ -21,14 +22,14 @@ class BurnerListener : InteractionListener {
             if (player.ironmanManager.checkRestriction() && !player.houseManager.isInHouse(player)) {
                 return@on true
             }
-            if (!player.inventory.containsItem(Item(590)) || !player.inventory.containsItem(Item(251))) {
+            if (!player.inventory.containsItem(Item(Items.TINDERBOX_590)) || !player.inventory.containsItem(Item(Items.CLEAN_MARRENTILL_251))) {
                 player.dialogueInterpreter.sendDialogue(
                     "You'll need a tinderbox and a clean marrentill herb in order to",
                     "light the burner."
                 )
                 return@on true
             }
-            if (player.inventory.remove(Item(251))) {
+            if (player.inventory.remove(Item(Items.CLEAN_MARRENTILL_251))) {
                 player.lock(1)
                 player.animate(Animation.create(3687))
                 player.sendMessage("You burn some marrentill in the incense burner.")

@@ -9,6 +9,7 @@ import core.game.node.scenery.Scenery;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Items;
 
 /**
  * Handles the Construction beer barrels.
@@ -44,7 +45,7 @@ public class BeerBarrelPlugin extends UseWithHandler {
 		Player player = event.getPlayer();
 		final Scenery object = (Scenery) event.getUsedWith();
 
-		if (player.getInventory().remove(new Item(1919))) {
+		if (player.getInventory().remove(new Item(Items.BEER_GLASS_1919))) {
 			player.animate(Animation.create(3661 + (object.getId() - 13569)));
 			player.sendMessage("You fill up your glass with " + object.getName().toLowerCase().replace("barrel", "").trim() + ".");
 			player.getInventory().add(new Item(getReward(object.getId()), 1));

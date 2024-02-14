@@ -215,7 +215,7 @@ public class PortalChamberPlugin extends OptionHandler {
 					PortalChamberPlugin.direct(player, "LUMBRIDGE");
 					return true;
 				}
-			}, 
+			},
 			new PageAction("Falador Portal") {
 				@Override
 				public boolean run(Player player) {

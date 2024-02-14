@@ -131,7 +131,7 @@ class EstateAgentDialogue : core.game.dialogue.DialoguePlugin {
 
             7 -> {
                 if (player.inventory.contains(995, 1000)) {
-                    player.inventory.remove(Item(995, 1000))
+                    player.inventory.remove(Item(Items.COINS_995, 1000))
                     player.houseManager.createNewHouseAt(HouseLocation.RIMMINGTON)
                     npc(
                         "Thank you. Go through the Rimmington house portal",

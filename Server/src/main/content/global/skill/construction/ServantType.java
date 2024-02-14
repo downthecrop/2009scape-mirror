@@ -2,6 +2,7 @@ package content.global.skill.construction;
 
 
 import core.game.node.item.Item;
+import org.rs09.consts.Items;
 
 /**
  * Represents a type of servant
@@ -11,10 +12,10 @@ import core.game.node.item.Item;
 public enum ServantType {
 	NONE(-1, -1, -1, -1, -1),
 	RICK(4235, 500,  6, 20, 60),
-	MAID(4237, 1000, 10, 25, 50, new Item(2003)),
-	COOK(4239, 3000, 16, 30, 17, new Item(2301), new Item(712)),
-	BUTLER(4241, 5000, 20, 40, 12, new Item(1897), new Item(712)),
-	DEMON_BUTLER(4243, 10000, 26, 50, 7, new Item(2011))
+	MAID(4237, 1000, 10, 25, 50, new Item(Items.STEW_2003)),
+	COOK(4239, 3000, 16, 30, 17, new Item(Items.PINEAPPLE_PIZZA_2301), new Item(Items.CUP_OF_TEA_712)),
+	BUTLER(4241, 5000, 20, 40, 12, new Item(Items.CHOCOLATE_CAKE_1897), new Item(Items.CUP_OF_TEA_712)),
+	DEMON_BUTLER(4243, 10000, 26, 50, 7, new Item(Items.CURRY_2011))
 	;
 
 	/**

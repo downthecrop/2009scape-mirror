@@ -16,6 +16,7 @@ import core.game.node.scenery.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
+import org.rs09.consts.Items;
 
 /**
  * Handles the clockmakers bench in the workshop
@@ -35,13 +36,13 @@ public class ClockmakersBenchPlugin extends OptionHandler {
 	private enum Craftable {
 		
 		TOY_HORSEY(2520, 10, BuildingUtils.PLANK),
-		CLOCKWORK(8792, 8, new Item(2353)),
-		TOY_SOLDIER(7759, 13, BuildingUtils.PLANK, new Item(8792)),
-		TOY_DOLL(7763, 18, BuildingUtils.PLANK, new Item(8792)),
-		TOY_MOUSE(7767, 33, BuildingUtils.PLANK, new Item(8792)),
-		TOY_CAT(7771, 85, BuildingUtils.PLANK, new Item(8792)),
-		WATCH(2575, 28, new Item(8792), new Item(2353)),
-		SEXTANT(2574, 23, new Item(2353));
+		CLOCKWORK(8792, 8, new Item(Items.STEEL_BAR_2353)),
+		TOY_SOLDIER(7759, 13, BuildingUtils.PLANK, new Item(Items.CLOCKWORK_8792)),
+		TOY_DOLL(7763, 18, BuildingUtils.PLANK, new Item(Items.CLOCKWORK_8792)),
+		TOY_MOUSE(7767, 33, BuildingUtils.PLANK, new Item(Items.CLOCKWORK_8792)),
+		TOY_CAT(7771, 85, BuildingUtils.PLANK, new Item(Items.CLOCKWORK_8792)),
+		WATCH(2575, 28, new Item(Items.CLOCKWORK_8792), new Item(Items.STEEL_BAR_2353)),
+		SEXTANT(2574, 23, new Item(Items.STEEL_BAR_2353));
 		
 		/**
 		 * The itemId to give after making this

@@ -12,6 +12,7 @@ import core.plugin.Initializable;
 import core.game.dialogue.DialogueInterpreter;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.skill.Skills;
+import org.rs09.consts.Items;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -193,7 +194,7 @@ public final class BuildRoomDialogue extends DialoguePlugin {
 						options("Rotate clockwise", "Rotate anticlockwise", "Build", "Cancel");
 						return true;
 					case 3:
-						if (player.getInventory().remove(new Item(995, room.getProperties().getCost()))) {
+						if (player.getInventory().remove(new Item(Items.COINS_995, room.getProperties().getCost()))) {
 							room.setRotation(directions[index]);
 							boolean[] exit = new boolean[exits.length];
 							for (int i = 0; i < exit.length; i++) {
