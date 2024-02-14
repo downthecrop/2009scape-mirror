@@ -147,10 +147,15 @@ open class SkillDialogueHandler(
 
             override fun getAmount(handler: SkillDialogueHandler, buttonId: Int): Int {
                 return when(buttonId){
+                    // "Continue" Option
+                    5 -> 1
+                    // "Make 1 set" Option
                     4 -> 1
+                    // "Make 5 sets" Option
                     3 -> 5
+                    // "Make 10 sets" Option
                     2 -> 10
-                    else -> handler.getAll(getIndex(handler, buttonId))
+                    else -> 10
                 }
             }
         },
