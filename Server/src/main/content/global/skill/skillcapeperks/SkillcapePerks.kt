@@ -16,7 +16,6 @@ import core.ServerStore.Companion.getInt
 import core.api.*
 import core.cache.def.impl.ItemDefinition
 import org.rs09.consts.Items
-import org.rs09.consts.Sounds
 
 enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)? = null) {
     BAREFISTED_SMITHING("cape_perks:barefisted-smithing"),
@@ -59,7 +58,7 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
             val possibleSeeds = Plantable.values()
             for(i in 0 until 10){
                 var seed = possibleSeeds.random()
-                while(seed == Plantable.SCARECROW || seed.applicablePatch == PatchType.FRUIT_TREE || seed.applicablePatch == PatchType.TREE || seed.applicablePatch == PatchType.SPIRIT_TREE){
+                while(seed == Plantable.SCARECROW || seed.applicablePatch == PatchType.FRUIT_TREE_PATCH || seed.applicablePatch == PatchType.TREE_PATCH || seed.applicablePatch == PatchType.SPIRIT_TREE_PATCH){
                     seed = possibleSeeds.random()
                 }
                 val reward = core.game.node.item.Item(seed.itemID)

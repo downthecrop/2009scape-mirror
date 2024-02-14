@@ -15,14 +15,14 @@ import core.plugin.Plugin
 import org.rs09.consts.Items
 import org.rs09.consts.Sounds
 
-val livesBased = arrayOf(PatchType.HERB, PatchType.CACTUS, PatchType.BELLADONNA, PatchType.HOPS, PatchType.ALLOTMENT,PatchType.EVIL_TURNIP)
+val livesBased = arrayOf(PatchType.HERB_PATCH, PatchType.CACTUS_PATCH, PatchType.BELLADONNA_PATCH, PatchType.HOPS_PATCH, PatchType.ALLOTMENT, PatchType.EVIL_TURNIP_PATCH)
 
 @Initializable
 class CropHarvester : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.setOptionHandler("harvest",this)
-        SceneryDefinition.setOptionHandler("pick",this)
+        SceneryDefinition.setOptionHandler("harvest", this)
+        SceneryDefinition.setOptionHandler("pick", this)
         return this
     }
 
@@ -34,61 +34,70 @@ class CropHarvester : OptionHandler() {
             val fPatch = FarmingPatch.forObject(node.asScenery())
             fPatch ?: return null
             val patch = fPatch.getPatchFor(player)
+            val patchName = patch.patch.type.displayName()
             val plantable = patch.plantable
             plantable ?: return null
+            var firstHarvest = true
 
             return object : Pulse(0) {
                 override fun pulse(): Boolean {
                     var reward = Item(crop)
 
                     val familiar = player.familiarManager.familiar
-                    if(familiar != null && familiar is GiantEntNPC) {
+                    if (familiar != null && familiar is GiantEntNPC) {
                         familiar.modifyFarmingReward(fPatch, reward)
                     }
-                    if(!player.inventory.hasSpaceFor(reward)){
-                        player.sendMessage("You don't have enough inventory space for that.")
+                    if (!hasSpaceFor(player, reward)) {
+                        sendMessage(player, "You have run out of inventory space.")
                         return true
                     }
-                    var requiredItem = when(fPatch.type){
-                        PatchType.HERB, PatchType.TREE -> Items.SECATEURS_5329
+                    var requiredItem = when (fPatch.type) {
+                        PatchType.TREE_PATCH -> Items.SECATEURS_5329
                         else -> Items.SPADE_952
                     }
-                    if(requiredItem == Items.SECATEURS_5329){
-                        if(player.inventory.containsAtLeastOneItem(Items.MAGIC_SECATEURS_7409)){
+                    if (requiredItem == Items.SECATEURS_5329) {
+                        if (inInventory(player, Items.MAGIC_SECATEURS_7409)) {
                             requiredItem = Items.MAGIC_SECATEURS_7409
                         }
                     }
-                    val anim = when(requiredItem){
-                        Items.SPADE_952 -> Animation(830)
-                        Items.SECATEURS_5329 -> if (fPatch.type == PatchType.TREE) Animation(2277) else Animation(7227)
-                        Items.MAGIC_SECATEURS_7409 -> if (fPatch.type == PatchType.TREE) Animation(3340) else Animation(7228)
+                    val anim = when (requiredItem) {
+                        Items.SPADE_952 -> if (fPatch.type == PatchType.HERB_PATCH) Animation(2282) else Animation(830)
+                        Items.SECATEURS_5329 -> if (fPatch.type == PatchType.TREE_PATCH) Animation(2277) else Animation(7227)
+                        Items.MAGIC_SECATEURS_7409 -> if (fPatch.type == PatchType.TREE_PATCH) Animation(3340) else Animation(7228)
                         else -> Animation(0)
                     }
-                    val sound = when(requiredItem){
+                    val sound = when (requiredItem) {
                         Items.SPADE_952 -> Sounds.DIGSPADE_1470
                         Items.SECATEURS_5329 -> Sounds.FARMING_PICK_2437
                         Items.MAGIC_SECATEURS_7409 -> Sounds.FARMING_PICK_2437
                         else -> 0
                     }
-                    if(!player.inventory.containsItem(Item(requiredItem))){
-                        player.sendMessage("You lack the needed tool to harvest these crops.")
+                    if (!inInventory(player, requiredItem)) {
+                        sendMessage(player, "You lack the needed tool to harvest these crops.")
                         return true
                     }
-                    player.animator.animate(anim)
+                    if (firstHarvest) {
+                        sendMessage(player, "You begin to harvest the $patchName.")
+                        firstHarvest = false
+                    }
+                    animate(player, anim)
                     playAudio(player, sound)
                     delay = 2
-                    player.inventory.add(reward)
-                    player.skills.addExperience(Skills.FARMING,plantable.harvestXP)
-                    if(patch.patch.type in livesBased){
+                    addItem(player, reward.id)
+                    rewardXP(player, Skills.FARMING, plantable.harvestXP)
+                    if (patch.patch.type in livesBased) {
                         patch.rollLivesDecrement(
                             getDynLevel(player, Skills.FARMING),
                             requiredItem == Items.MAGIC_SECATEURS_7409
                         )
                     } else {
                         patch.harvestAmt--
-                        if(patch.harvestAmt <= 0 && crop == plantable.harvestItem){
+                        if (patch.harvestAmt <= 0 && crop == plantable.harvestItem) {
                             patch.clear()
                         }
+                    }
+                    if (patch.cropLives <= 0 || patch.harvestAmt <= 0) {
+                        sendMessage(player, "The $patchName is now empty.")
                     }
                     return patch.cropLives <= 0 || patch.harvestAmt <= 0
                 }
@@ -105,13 +114,18 @@ class CropHarvester : OptionHandler() {
         val plantable = patch.plantable
         plantable ?: return false
 
-        if(patch.isWeedy()){
-            player.sendMessage("Something seems to have gone wrong here. Report this.")
+        if (patch.isWeedy() || patch.isEmptyAndWeeded()) {
+            sendMessage(player, "Something seems to have gone wrong here. Report this.")
+            return true
+        }
+
+        if (!hasSpaceFor(player, Item(plantable.harvestItem))) {
+            sendMessage(player, "You don't have enough inventory space to do that.")
             return true
         }
 
         val pulse = harvestPulse(player, node, plantable.harvestItem) ?: return false
-        player.pulseManager.run(pulse)
+        submitIndividualPulse(player, pulse)
 
         return true
     }

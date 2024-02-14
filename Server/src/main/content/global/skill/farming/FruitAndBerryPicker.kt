@@ -45,34 +45,46 @@ class FruitAndBerryPicker : OptionHandler() {
 
         val animation = Animation(2281)
 
-        if(patch.getFruitOrBerryCount() <= 0){
-            player.sendMessage("This shouldn't be happening. Please report this.")
+        if (patch.getFruitOrBerryCount() <= 0) {
+            sendMessage(player, "This shouldn't be happening. Please report this.")
             return true
         }
 
-        if(!player.inventory.hasSpaceFor(Item(plantable.harvestItem))){
-            player.sendMessage("You do not have enough inventory space for this.")
+        if (!hasSpaceFor(player, Item(plantable.harvestItem))) {
+            sendMessage(player, "You don't have enough inventory space to do that.")
             return true
         }
 
-        if(System.currentTimeMillis() - patch.nextGrowth > TimeUnit.MINUTES.toMillis(45)){
+        if (System.currentTimeMillis() - patch.nextGrowth > TimeUnit.MINUTES.toMillis(45)) {
             patch.nextGrowth = System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(45)
         }
 
-        player.pulseManager.run(object : Pulse(animation.duration){
+        submitIndividualPulse(player, object : Pulse(animation.duration) {
             override fun pulse(): Boolean {
 				val reward = Item(plantable.harvestItem, 1)
 
+                if (!hasSpaceFor(player, reward)) {
+                    sendMessage(player, "You have run out of inventory space.")
+                    return true
+                }
+
 				val familiar = player.familiarManager.familiar
-				if(familiar != null && familiar is GiantEntNPC) {
+				if (familiar != null && familiar is GiantEntNPC) {
 					familiar.modifyFarmingReward(fPatch, reward)
 				}
 
-                player.animator.animate(animation)
+                animate(player, animation)
                 playAudio(player, Sounds.FARMING_PICK_2437)
-                addItemOrDrop(player,reward.id,reward.amount)
-                player.skills.addExperience(Skills.FARMING,plantable.harvestXP)
+                addItemOrDrop(player, reward.id, reward.amount)
+                rewardXP(player, Skills.FARMING, plantable.harvestXP)
                 patch.setCurrentState(patch.getCurrentState() - 1)
+
+                if (patch.patch.type == PatchType.CACTUS_PATCH) {
+                    sendMessage(player, "You carefully pick a spine from the cactus.")
+                } else {
+                    val determiner = if (patch.patch.type == PatchType.BUSH_PATCH) "some" else "a"
+                    sendMessage(player, "You pick $determiner ${reward.name.lowercase()}.")
+                }
 
                 return patch.getFruitOrBerryCount() == 0
             }

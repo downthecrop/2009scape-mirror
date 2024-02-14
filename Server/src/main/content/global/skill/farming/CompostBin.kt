@@ -2,7 +2,6 @@ package content.global.skill.farming
 
 import core.api.*
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.tools.RandomFunction
@@ -26,14 +25,19 @@ class CompostBin(val player: Player, val bin: CompostBins) {
 
     fun close() {
         isClosed = true
+        sendMessage(player, "You close the compost bin.")
+        // TODO: Add animation - https://youtu.be/B50dwm8fdcQ?t=225 https://youtu.be/BHYgNDLx0s4?t=488
         playAudio(player, Sounds.COMPOST_CLOSE_2428)
+        sendMessage(player, "The contents have begun to rot.")
         finishedTime = System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(RandomFunction.random(35,50).toLong())
         updateBit()
     }
 
     fun open(){
         isClosed = false
+        // TODO: Add animation
         playAudio(player, Sounds.COMPOST_OPEN_2429)
+        sendMessage(player, "You open the compost bin.")
         updateBit()
     }
 

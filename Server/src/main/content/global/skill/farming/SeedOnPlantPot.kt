@@ -7,6 +7,7 @@ import core.game.interaction.IntType
 import core.game.node.entity.player.Player
 import content.global.skill.farming.timers.*
 import core.game.interaction.InteractionListener
+import core.tools.prependArticle
 
 class SeedlingListener : InteractionListener {
     override fun defineListeners() {
@@ -18,7 +19,7 @@ class SeedlingListener : InteractionListener {
         val seed = used.asItem() ?: return false
         val pot = with.asItem() ?: return false
 
-        if(!inInventory(player, Items.GARDENING_TROWEL_5325)){
+        if (!inInventory(player, Items.GARDENING_TROWEL_5325)) {
             sendDialogue(player, "You need a gardening trowel on you to do this.")
             return false
         }
@@ -27,6 +28,8 @@ class SeedlingListener : InteractionListener {
         if (seedling == -1) return false
         if (!removeItem(player, seed.id) || !removeItem(player, pot)) return true
         addItem(player, seedling)
+        sendMessage(player, "You sow ${prependArticle(seed.name.lowercase())} in the plantpot.")
+        sendMessage(player, "It needs watering before it will grow.")
         return true
     }
 
@@ -46,11 +49,12 @@ class SeedlingListener : InteractionListener {
         return true
     }
 
-    private fun Int.getNext(): Int{
+    private fun Int.getNext(): Int {
         val index = WATERING_CANS.indexOf(this)
         if (index == -1) return Items.WATERING_CAN_5331
         return if (index != WATERING_CANS.size -1) WATERING_CANS[index + 1] else Items.WATERING_CAN_5331
     }
+
     fun getSeedling(id: Int) : Int {
         return when (id) {
             Items.ACORN_5312 ->            Items.OAK_SEEDLING_5358

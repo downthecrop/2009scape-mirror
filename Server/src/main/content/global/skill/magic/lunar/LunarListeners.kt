@@ -328,7 +328,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
             return
         }
         val patch = fPatch.getPatchFor(player)
-        if(!patch.isDiseased && !patch.isWeedy()){
+        if(!patch.isDiseased && !patch.isWeedy() && !patch.isEmptyAndWeeded()){
             sendMessage(player, "It is growing just fine.")
             return
         }
@@ -642,7 +642,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
         animate(player, Animations.LUNAR_SPELLBOOK_FERTILE_SOIL_4413)
         sendGraphics(Graphics.LUNAR_SPELLBOOK_FERTILE_SOIL_724, target.location)
         playGlobalAudio(target.location, Sounds.LUNAR_FERTILIZE_2891)
-        patch.compost = CompostType.SUPER
+        patch.compost = CompostType.SUPERCOMPOST
         sendMessage(player, "You fertilize the soil.")
         addXP(player, 87.0)
     }

@@ -77,10 +77,10 @@ public class GiantEntNPC extends Forager {
 
     public void modifyFarmingReward(FarmingPatch fPatch, Item reward) {
 		PatchType patchType = fPatch.getType();
-		if(patchType == PatchType.FRUIT_TREE ||
-			patchType == PatchType.BUSH ||
-			patchType == PatchType.BELLADONNA ||
-			patchType == PatchType.CACTUS) {
+		if(patchType == PatchType.FRUIT_TREE_PATCH ||
+			patchType == PatchType.BUSH_PATCH ||
+			patchType == PatchType.BELLADONNA_PATCH ||
+			patchType == PatchType.CACTUS_PATCH) {
 			if(RandomFunction.roll(2)) {
 				reward.setAmount(2 * reward.getAmount());
 			}

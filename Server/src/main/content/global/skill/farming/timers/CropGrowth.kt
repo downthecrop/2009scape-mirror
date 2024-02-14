@@ -1,6 +1,5 @@
 package content.global.skill.farming.timers
 
-import core.api.*
 import core.tools.*
 import core.game.system.timer.*
 import org.json.simple.*
@@ -58,12 +57,12 @@ class CropGrowth : PersistTimer (500, "farming:crops", isSoft = true) {
     private fun runOfflineCatchupLogic() {
         for ((_, patch) in patchMap) {
             val type = patch.patch.type
-            val shouldPlayCatchup = !patch.isGrown() || (type == PatchType.BUSH && patch.getFruitOrBerryCount() < 4) || (type == PatchType.FRUIT_TREE && patch.getFruitOrBerryCount() < 6)
+            val shouldPlayCatchup = !patch.isGrown() || (type == PatchType.BUSH_PATCH && patch.getFruitOrBerryCount() < 4) || (type == PatchType.FRUIT_TREE_PATCH && patch.getFruitOrBerryCount() < 6)
             if(shouldPlayCatchup && patch.plantable != null && !patch.isDead){
                 var stagesToSimulate = if (!patch.isGrown()) patch.plantable!!.stages - patch.currentGrowthStage else 0
-                if (type == PatchType.BUSH)
+                if (type == PatchType.BUSH_PATCH)
                     stagesToSimulate += Math.min(4, 4 - patch.getFruitOrBerryCount())
-                if (type == PatchType.FRUIT_TREE)
+                if (type == PatchType.FRUIT_TREE_PATCH)
                     stagesToSimulate += Math.min(6, 6 - patch.getFruitOrBerryCount())
 
                 val nowTime = System.currentTimeMillis()

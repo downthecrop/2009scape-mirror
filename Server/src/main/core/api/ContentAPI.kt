@@ -767,10 +767,15 @@ fun emote(entity: Entity, emote: Emotes) {
 
 /**
  * Sends a message to the given player.
+ *
+ * The message will be split on word boundaries into multiple lines so
+ * that none of the lines will overflow the player's message box.
+ *
  * @param player the player to send the message to.
+ * @param message the message to send.
  */
 fun sendMessage(player: Player, message: String) {
-    player.sendMessage(message)
+    player.sendMessages(*splitLines(message, 86))
 }
 
 /**
