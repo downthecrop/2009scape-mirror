@@ -24,6 +24,7 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
         private const val ATTRIBUTE_ELEMENTAL_KILL_FLAGS = "diary:seers:elemental-kills"
         private const val ATTRIBUTE_ARCHER_KILL_FLAGS = "diary:seers:archer-kills"
         private const val ATTRIBUTE_COAL_TRUCK_FULL = "diary:seers:coal-truck-full"
+        private const val ATTRIBUTE_FLAX_PICKED = "diary:seers:flax-picked"
 
         private val SEERS_VILLAGE_AREA = ZoneBorders(2687, 3455, 2742, 3507)
         private val SEERS_BANK_AREA = ZoneBorders(2721, 3490, 2730, 3493)
@@ -98,11 +99,13 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
 
     override fun onResourceProduced(player: Player, event: ResourceProducedEvent) {
         when (player.viewport.region.id) {
-            10807 -> if (event.itemId in CHURN_PRODUCT) {
-                finishTask(
+            10805 -> if (event.itemId == Items.FLAX_1779) {
+                progressIncrementalTask(
                     player,
                     DiaryLevel.EASY,
-                        EasyTasks.SINCLAIR_MANSION_USE_CHURN
+                        EasyTasks.PICK_5_FLAX,
+                    ATTRIBUTE_FLAX_PICKED,
+                    5
                 )
             }
 
@@ -113,6 +116,14 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
                         HardTasks.CUT_5_YEW_LOGS,
                     ATTRIBUTE_CUT_YEW_COUNT,
                     5
+                )
+            }
+
+            10807 -> if (event.itemId in CHURN_PRODUCT) {
+                finishTask(
+                    player,
+                    DiaryLevel.EASY,
+                    EasyTasks.SINCLAIR_MANSION_USE_CHURN
                 )
             }
 

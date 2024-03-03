@@ -6,6 +6,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.game.node.item.Item;
+import org.rs09.consts.Items;
 
 /**
  * Handles the SanibochDialogue dialogue.
@@ -129,7 +130,7 @@ public class SanibochDialogue extends DialoguePlugin {
 			if (player.getInventory().remove(item)) {
 				player.getPacketDispatch().sendMessage("You pay Saniboch 875 coins.");
 				player.setAttribute("saniboch:paid", true);
-				interpreter.sendItemMessage(item, "You give Saniboch 875 coins.");
+				interpreter.sendItemMessage(Items.COINS_6964, "You give Saniboch 875 coins.");
 				stage = 33;
 				break;
 			}

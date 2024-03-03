@@ -16,6 +16,7 @@ class KaramjaAchievementDiary : DiaryEventHookBase(DiaryType.KARAMJA) {
     companion object {
         private const val ATTRIBUTE_SEAWEED_PICKED = "diary:karamja:seaweed-picked"
         private const val ATTRIBUTE_PALM_LEAF_PICKED = "diary:karamja:palm-leaf-picked"
+        private const val ATTRIBUTE_BANANA_PICKED = "diary:karamja:banana-picked"
 
         private val MAIN_ISLAND_AREA = ZoneBorders(2749, 2886, 2972, 3132)
         private val BANANA_FISHING_SPOT_AREA = ZoneBorders(2923, 3173, 2928, 3182)
@@ -83,6 +84,14 @@ class KaramjaAchievementDiary : DiaryEventHookBase(DiaryType.KARAMJA) {
 
     override fun onResourceProduced(player: Player, event: ResourceProducedEvent) {
         when (player.viewport.region.id) {
+            10802 -> if (event.itemId == Items.GOLD_ORE_444) {
+                finishTask(
+                    player,
+                    DiaryLevel.EASY,
+                    EasyTasks.BRIMHAVEN_MINE_GOLD
+                )
+            }
+
             11310, 11410 -> if (event.itemId == Items.UNCUT_RED_TOPAZ_1629) {
                 finishTask(
                     player,
@@ -91,11 +100,13 @@ class KaramjaAchievementDiary : DiaryEventHookBase(DiaryType.KARAMJA) {
                 )
             }
 
-            10802 -> if (event.itemId == Items.GOLD_ORE_444) {
-                finishTask(
+            11569 -> if (event.itemId == Items.BANANA_1963) {
+                progressIncrementalTask(
                     player,
                     DiaryLevel.EASY,
-                        EasyTasks.BRIMHAVEN_MINE_GOLD
+                        EasyTasks.PICK_5_BANANAS,
+                    ATTRIBUTE_BANANA_PICKED,
+                    5
                 )
             }
         }

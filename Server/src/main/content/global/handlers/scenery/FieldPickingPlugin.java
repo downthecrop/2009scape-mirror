@@ -2,6 +2,7 @@ package content.global.handlers.scenery;
 
 import core.cache.def.impl.SceneryDefinition;
 import core.game.container.impl.EquipmentContainer;
+import core.game.event.ResourceProducedEvent;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
@@ -68,6 +69,7 @@ public final class FieldPickingPlugin extends OptionHandler {
 		player.setAttribute("delay:picking", GameWorld.getTicks() + (plant == PickingPlant.FLAX ? 2 : 3));
 		player.animate(ANIMATION);
 		playAudio(player, Sounds.PICK_2581, 30);
+		player.dispatch(new ResourceProducedEvent(reward.getId(), reward.getAmount(), node, -1));
 		if (plant.name().startsWith("NETTLES") && (player.getEquipment().get(EquipmentContainer.SLOT_HANDS) == null || player.getEquipment().get(EquipmentContainer.SLOT_HANDS) != null && !player.getEquipment().get(EquipmentContainer.SLOT_HANDS).getName().contains("glove"))) {
 			player.getPacketDispatch().sendMessage("You have been stung by the nettles!");
 			player.getImpactHandler().manualHit(player, 2, HitsplatType.POISON);
@@ -108,12 +110,6 @@ public final class FieldPickingPlugin extends OptionHandler {
 				} else {
 					player.getPacketDispatch().sendMessage("You pick a handful of nettles.");
 				}
-				if (banana && !player.getAchievementDiaryManager().hasCompletedTask(DiaryType.KARAMJA, 0, 0)) {
-					int picked = player.getAttribute("b-picked", 0);
-					picked++;
-					player.setAttribute("b-picked", picked);
-					player.getAchievementDiaryManager().updateTask(player, DiaryType.KARAMJA, 0, 0, picked == 5);
-				}
 				return true;
 			}
 		});
@@ -130,17 +126,6 @@ public final class FieldPickingPlugin extends OptionHandler {
 		int charge = object.getCharge();
 		playAudio(player, Sounds.PICK_2581);
 		player.getPacketDispatch().sendMessage("You pick some flax.");
-
-		// Seers achievement diary
-		if (player.getViewport().getRegion().getId() == 10805
-				&& !player.getAchievementDiaryManager().getDiary(DiaryType.SEERS_VILLAGE).isComplete(0,0)) {
-			if (player.getAttribute("diary:seers:flax-picked", 0) >= 4) {
-				player.setAttribute("/save:diary:seers:flax-picked", 5);
-				player.getAchievementDiaryManager().getDiary(DiaryType.SEERS_VILLAGE).updateTask(player,0,0,true);
-			} else {
-				player.setAttribute("/save:diary:seers:flax-picked", player.getAttribute("diary:seers:flax-picked", 0) + 1);
-			}
-		}
 
 		if (charge > 1000 + RandomFunction.random(2, 8)) {
 			object.setActive(false);
