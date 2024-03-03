@@ -6,6 +6,8 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the arrow pulse for creating unfinished arrows.
  * @author 'Vexia
@@ -74,6 +76,10 @@ public final class HeadlessArrowPulse extends SkillPulse<Item> {
 			useSets = true;
 		} else {
 			useSets = false;
+		}
+		if (!hasSpaceFor(player, HEADLESS_ARROW.asItem())) {
+			sendDialogue(player, "You do not have enough inventory space.");
+			return false;
 		}
 		return true;
 	}

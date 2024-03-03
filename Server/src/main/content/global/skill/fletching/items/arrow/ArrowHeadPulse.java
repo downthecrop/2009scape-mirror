@@ -7,6 +7,8 @@ import content.global.skill.fletching.Fletching;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the arrow head pulse to complete the headless arrow.
  * @author 'Vexia
@@ -51,6 +53,10 @@ public class ArrowHeadPulse extends SkillPulse<Item> {
 		}
 		if (player.getSkills().getLevel(Skills.FLETCHING) < arrow.level) {
 			player.getDialogueInterpreter().sendDialogue("You need a fletching level of " + arrow.level + " to do this.");
+			return false;
+		}
+		if (!hasSpaceFor(player, arrow.getFinished())) {
+			sendDialogue(player, "You do not have enough inventory space.");
 			return false;
 		}
 		return true;

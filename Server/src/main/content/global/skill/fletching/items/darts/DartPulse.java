@@ -6,6 +6,8 @@ import content.global.skill.fletching.Fletching;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 
+import static core.api.ContentAPIKt.*;
+
 /**
  * Represents the dart pulse.
  * @author ceikry
@@ -46,6 +48,10 @@ public final class DartPulse extends SkillPulse<Item> {
 		}
 		if (!player.getQuestRepository().isComplete("The Tourist Trap")){
 			player.getDialogueInterpreter().sendDialogue("You need to have completed Tourist Trap to fletch darts.");
+			return false;
+		}
+		if (!hasSpaceFor(player, dart.getFinished())) {
+			sendDialogue(player, "You do not have enough inventory space.");
 			return false;
 		}
 		return true;
