@@ -1,6 +1,7 @@
 package content.region.kandarin.quest.grandtree
 
 import content.region.misthalin.dorgeshuun.quest.thelosttribe.LostTribeCutscene
+import core.ServerConstants
 import core.api.openDialogue
 import core.api.sendChat
 import core.api.sendDialogue
@@ -61,7 +62,7 @@ class BlackDemonCutscene(player: Player) : Cutscene(player) {
                 playerDialogueUpdate(FacialExpression.SCARED, "Glough?")
             }
             6 -> {
-                dialogueUpdate(NPCs.GLOUGH_671, FacialExpression.ANGRY, "You really are becoming a headache! Well, at least now you can die knowing you were right, it will save me having to hunt you down like all the other human filth of RuneScape!")
+                dialogueUpdate(NPCs.GLOUGH_671, FacialExpression.ANGRY, "You really are becoming a headache! Well, at least now you can die knowing you were right, it will save me having to hunt you down like all the other human filth of " + ServerConstants.SERVER_NAME + "!")
             }
             7 -> {
                 playerDialogueUpdate(FacialExpression.SCARED, "You're crazy, Glough!")

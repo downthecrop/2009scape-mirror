@@ -2770,7 +2770,7 @@
     "id": "291"
   },
   {
-    "examine": "A book on elven history in northern RuneScape.",
+    "examine": "A book on elven history in northern 2009Scape.",
     "durability": null,
     "name": "Book on baxtorian",
     "archery_ticket_price": "0",
@@ -5044,7 +5044,7 @@
   {
     "shop_price": "1",
     "ge_buy_limit": "100",
-    "examine": "Issued by RuneScape Council to all new citizens.",
+    "examine": "Issued by 2009Scape Council to all new citizens.",
     "grand_exchange_price": "123",
     "durability": null,
     "name": "Newcomer map",
@@ -5547,7 +5547,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "A book on the history of astronomy in RuneScape.",
+    "examine": "A book on the history of astronomy in 2009Scape.",
     "grand_exchange_price": "658",
     "durability": null,
     "name": "Astronomy book",
@@ -25863,7 +25863,7 @@
     "id": "2573"
   },
   {
-    "examine": "Used by navigators to find their position in RuneScape.",
+    "examine": "Used by navigators to find their position in 2009Scape.",
     "durability": null,
     "name": "Sextant",
     "weight": "0.2",
@@ -25879,7 +25879,7 @@
     "id": "2575"
   },
   {
-    "examine": "A navigator's chart of RuneScape.",
+    "examine": "A navigator's chart of 2009Scape.",
     "durability": null,
     "name": "Chart",
     "archery_ticket_price": "0",
@@ -32009,7 +32009,7 @@
     "id": "3240"
   },
   {
-    "examine": "One of RuneScape's many citizens. In Karamja or South of Falador: One of RuneScape's many citizens, apparently trying to be an explorer. In Lumbridge: One of Lumbridge's many citizens. In a Falador home: One of RuneScape's many citizens. He looks worried ",
+    "examine": "One of 2009Scape's many citizens.",
     "durability": null,
     "name": "Man",
     "archery_ticket_price": "0",
@@ -41824,7 +41824,7 @@
     "stand_turn_anim": "823"
   },
   {
-    "examine": "Perhaps not the most powerful weapon in RuneScape.",
+    "examine": "Perhaps not the most powerful weapon in 2009Scape.",
     "durability": null,
     "weight": "0.4",
     "attack_speed": "4",
@@ -92026,7 +92026,7 @@
   },
   {
     "turn90cw_anim": "821",
-    "examine": "Perhaps not the most powerful weapon in RuneScape.",
+    "examine": "Perhaps not the most powerful weapon in 2009Scape.",
     "walk_anim": "1830",
     "durability": null,
     "weight": "0.4",
@@ -117691,9 +117691,9 @@
   },
   {
     "destroy_message": "Hopefully, the family has more papyrus and charcoal.",
-    "examine": "Your best impression of a map of RuneScape.",
+    "examine": "Your best impression of a map of 2009Scape.",
     "durability": null,
-    "name": "Map of runescape",
+    "name": "Map of 2009Scape",
     "destroy": "true",
     "archery_ticket_price": "0",
     "attack_speed": "4",
@@ -123695,7 +123695,7 @@
     "bonuses": "55,55,55,0,0,5,5,5,5,5,0,60,0,0,0"
   },
   {
-    "destroy_message": "You can get another copy by searching bookshelves around RuneScape.",
+    "destroy_message": "You can get another copy by searching bookshelves around 2009Scape.",
     "shop_price": "5",
     "examine": "A book about the Wilderness.",
     "durability": null,

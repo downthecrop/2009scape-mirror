@@ -4,6 +4,7 @@ import content.global.handlers.iface.BookInterface
 import content.global.handlers.iface.BookLine
 import content.global.handlers.iface.Page
 import content.global.handlers.iface.PageSet
+import core.ServerConstants
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
@@ -211,7 +212,7 @@ class GoblinBook : InteractionListener {
                                 BookLine("Commander to lead you.", 74),
                                 BookLine("Under new Commander", 75),
                                 BookLine("goblins will conquer all of", 76),
-                                BookLine("RuneScape, every race and", 77),
+                                BookLine(ServerConstants.SERVER_NAME + ", every race and", 77),
                                 BookLine("every god! And then Big", 78),
                                 BookLine("High War God will return", 79),
                                 BookLine("and sit on throne of bronze", 80),

@@ -10,6 +10,7 @@ import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import content.global.travel.EssenceTeleport
+import core.ServerConstants
 import core.api.playAudio
 import core.game.world.GameWorld
 import org.rs09.consts.Sounds
@@ -27,7 +28,7 @@ class CrompertyDialogue(player: Player? = null) : core.game.dialogue.DialoguePlu
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
             0 -> options("Two jobs? that's got to be tough","So what have you invented?","Can you teleport me to the Rune Essence?").also { stage++ }
-            1 ->when(buttonId){
+            1 -> when(buttonId){
                 1 -> playerl(core.game.dialogue.FacialExpression.HAPPY,"Two jobs? That's got to be tough.").also { stage = 5 }
                 2 -> playerl(core.game.dialogue.FacialExpression.ASKING,"So, what have you invented?").also { stage = 10 }
                 3 -> playerl(core.game.dialogue.FacialExpression.HAPPY,"Can you teleport me to the Rune Essence?").also {
@@ -56,11 +57,11 @@ class CrompertyDialogue(player: Player? = null) : core.game.dialogue.DialoguePlu
                 2 -> playerl(core.game.dialogue.FacialExpression.ASKING,"Can I be teleported please?").also { stage = 25 }
             }
 
-            15 -> npcl(core.game.dialogue.FacialExpression.THINKING,"Well...Hmm. I would guess somewhere between here and the Wizards' Tower in Misthalin.").also { stage++ }
+            15 -> npcl(core.game.dialogue.FacialExpression.THINKING,"Well... Hmm. I would guess somewhere between here and the Wizards' Tower in Misthalin.").also { stage++ }
             16 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"All I know is that it hasn't got there yet as the wizards there would have contacted me.").also { stage++ }
             17 -> npcl(core.game.dialogue.FacialExpression.THINKING,"I'm using the RPDT for delivery. They assured me it would be delivered promptly.").also { stage++ }
             18 -> playerl(core.game.dialogue.FacialExpression.ASKING,"Who are the RPDT?").also { stage++ }
-            19 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"The Runescape Parcel Delivery Team. They come very highly recommended.").also { stage++ }
+            19 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"The ${ServerConstants.SERVER_NAME} Parcel Delivery Team. They come very highly recommended.").also { stage++ }
             20 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"Their motto is: \"We aim to deliver your stuff at some point after you have paid us!\"").also { stage = 1000 }
 
             25 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"By all means! I'm afraid I can't give you any specifics as to where you will come out however. Presumably wherever the other block is located.").also { stage++ }

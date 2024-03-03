@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.grandtree
 
+import core.ServerConstants
 import core.api.*
 import core.game.component.Component
 import core.game.dialogue.DialogueFile
@@ -57,7 +58,7 @@ class ForemanDialogue: DialogueFile(){
             2 -> playerl("Glough sent me to check on how you are doing.").also { stage++ }
             3 -> npcl("Right. Glough sent a human?").also { stage++ }
             4 -> playerl("His gnomes are busy.").also { stage++ }
-            5 -> npcl("Hmm...in that case we'd better go to my office. Follow me.").also {
+            5 -> npcl("Hmm... in that case we'd better go to my office. Follow me.").also {
                 val foremanOffice = Location.create(2954, 3024, 0)
                 GameWorld.Pulser.submit(object : Pulse(0) {
                     var count = 0
@@ -81,7 +82,7 @@ class ForemanDialogue: DialogueFile(){
                 stage++
             }
             6 -> npcl("Tell me again why you're here.").also { stage++ }
-            7 -> playerl("Er...Glough sent me?").also { stage++ }
+            7 -> playerl("Er... Glough sent me?").also { stage++ }
             8 -> npcl("By the way how is Glough? Still with his wife?").also { stage++ }
             9 -> options("Yes, they're getting on great.","Always arguing as usual!","Sadly his wife is no longer with us!").also { stage++ }
             10 -> when(buttonID){
@@ -89,7 +90,7 @@ class ForemanDialogue: DialogueFile(){
                 2 -> playerl("Always arguing as usual!").also { stage++ }
                 3 -> playerl("Sadly his wife is no longer with us!").also { stage = 20 }
             }
-            11 -> npcl("Really? That's odd, considering she died last year. Die imposter!").also {
+            11 -> npcl("Really? That's odd, considering she died last year. Die, imposter!").also {
                 attackPlayer()
                 stage = END_DIALOGUE
             }
@@ -111,7 +112,7 @@ class ForemanDialogue: DialogueFile(){
                 2 -> playerl("Alia.").also { stage++ }
                 3 -> playerl("Elena.").also { stage++ }
             }
-            33 -> npcl("You almost had me fooled! Die imposter!").also {
+            33 -> npcl("You almost had me fooled! Die, imposter!").also {
                 attackPlayer()
                 stage = END_DIALOGUE
             }
@@ -121,7 +122,7 @@ class ForemanDialogue: DialogueFile(){
             38 -> playerl("Indeed.").also { stage++ }
             39 -> npcl("When I was asked to build a fleet large enough to invade Port Sarim and carry 300 gnome troops I said: 'If anyone can, I can.'").also { stage++ }
             40 -> playerl("That's a lot of troops!").also { stage++ }
-            41 -> npcl("True but if the gnomes are really going to take over RuneScape they'll need at least that.").also { stage++ }
+            41 -> npcl("True, but if the gnomes are really going to take over " + ServerConstants.SERVER_NAME + " they'll need at least that.").also { stage++ }
             42 -> playerl("Take over?").also { stage++ }
             43 -> npcl("Of course, why else would Glough want 30 battleships? Between you and me I don't think he stands a chance.").also { stage++ }
             44 -> playerl("No?").also { stage++ }
