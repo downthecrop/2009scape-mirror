@@ -10,7 +10,7 @@ import core.api.utils.WeightedItem
 import java.util.stream.IntStream
 
 enum class Pickpockets(val ids: IntArray, val requiredLevel: Int, val low: Double, val high: Double, val experience: Double, val stunDamageMin: Int, val stunDamageMax: Int, val stunTime: Int, val table: WeightBasedTable) {
-    MAN(intArrayOf(1, 2, 3, 4, 5, 6, 16, 24, 25, 170, 3224, 3915, 3226, 3227, 5924, 5923), 1, 180.0, 240.0, 8.0, 1, 1,5, WeightBasedTable.create(
+    MAN(intArrayOf(1, 2, 3, 4, 5, 6, 16, 24, 25, 170, 1086, 3224, 3915, 3226, 3227, 5924, 5923), 1, 180.0, 240.0, 8.0, 1, 1,5, WeightBasedTable.create(
         WeightedItem(Items.COINS_995,3,3,1.0,true)
     )),
     FARMER(intArrayOf(7, 1757, 1758), 10, 180.0, 240.0, 14.5, 1,1,5, WeightBasedTable.create(
