@@ -1,0 +1,29 @@
+version: '3.3'
+services:
+  app:
+    build: .
+    container_name: "2009scape_app"
+    depends_on:
+      - database
+    restart: unless-stopped
+    volumes:
+      - "2009scape_app:/app"
+    ports:
+      - "43595:43595"
+
+  database:
+    image: mysql:5.7
+    container_name: "2009scape_db"
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - "2009scape_db:/var/lib/mysql"
+      - "./Server/db_exports/global.sql:/docker-entrypoint-initdb.d/global.sql"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_ROOT_USER: "root"
+volumes:
+  2009scape_app:
+  2009scape_db:
