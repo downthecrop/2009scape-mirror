@@ -90,6 +90,12 @@ public class ProfessorHenryDialogue extends DialoguePlugin {
 			stage++;
 			break;
 		case 907:
+			if (player.getInventory().freeSlots() == 0) {
+				sendNormalDialogue(npc, FacialExpression.HALF_GUILTY, "It seems your inventory is full.");
+				stage = -1;
+				return false;
+			}
+
 			if (removeItem(player, Items.TEST_PAPER_12626, Container.INVENTORY)) {
 				showReward(player);
 				end();
