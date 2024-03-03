@@ -231,7 +231,7 @@ public final class DraynorBankGuard extends DialoguePlugin {
 			stage = 52;
 			break;
 		case 52:
-			npc("The Bank has already replaces all the stolen items that", "belonged to customers.");
+			npc("The Bank has already replaced all the stolen items that", "belonged to customers.");
 			stage = 53;
 			break;
 		case 53:
