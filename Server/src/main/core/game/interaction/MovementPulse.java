@@ -200,6 +200,11 @@ public abstract class MovementPulse extends Pulse {
         mover.currentMovement = this;
     }
 
+    private void clearInferiorScripts() {
+        mover.scripts.removeWeakScripts();
+        mover.scripts.removeNormalScripts();
+    }
+
     @Override
     public boolean update() {
         if (!mover.getViewport().getRegion().isActive())
@@ -211,6 +216,8 @@ public abstract class MovementPulse extends Pulse {
             stop();
             return true;
         }
+
+        clearInferiorScripts();
 
         mover.face(null);
         updatePath();
