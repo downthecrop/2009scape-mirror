@@ -52,6 +52,7 @@ public final class AncientTeleportPlugin extends MagicSpell {
 	@Override
 	public boolean cast(Entity entity, Node target) {
 		if (entity.isTeleBlocked() || !super.meetsRequirements(entity, true, false)) {
+			entity.asPlayer().sendMessage("A magical force has stopped you from teleporting.");
 			return false;
 		}
 		if (entity.getTeleporter().send(location.transform(0, RandomFunction.random(3), 0), getSpellId() == 28 ? TeleportType.HOME : TeleportType.ANCIENT)) {
