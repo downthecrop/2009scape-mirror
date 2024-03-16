@@ -609,6 +609,8 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
 
         val entries = offerAmounts.entries.sortedBy({ e -> getItemName(e.key) })
         var lineId = 11
+
+        closeInterface(player)
         setScrollTitle(player, "Bot Stock - \"$searchTerm\"")
         for(i in 0..299) {
             val offer = entries.elementAtOrNull(i)
@@ -635,6 +637,8 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
 
         val entries = offerAmounts.entries.sortedBy({ e -> getItemName(e.key) })
         var lineId = 11
+
+        closeInterface(player)
         setScrollTitle(player, "Bot Stock")
         for(i in 0..299) {
             val offer = entries.elementAtOrNull(i)
@@ -667,6 +671,8 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
 
         val entries = offerAmounts.entries.sortedBy({ e -> getItemName(e.key) })
         var lineId = 11
+
+        closeInterface(player)
         setScrollTitle(player, "Active Sell Offers")
         for(i in 0..299) {
             val offer = entries.elementAtOrNull(i)
@@ -699,6 +705,8 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
 
         val entries = offerAmounts.entries.sortedBy({ e -> getItemName(e.key) })
         var lineId = 11
+
+        closeInterface(player)
         setScrollTitle(player, "Active Buy Offers")
         for(i in 0..299) {
             val offer = entries.elementAtOrNull(i)
@@ -743,6 +751,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             }
         }
 
+        closeInterface(player)
         setScrollTitle(player, "Results for \"$searchTerm\"")
 
         var lineId = 11
