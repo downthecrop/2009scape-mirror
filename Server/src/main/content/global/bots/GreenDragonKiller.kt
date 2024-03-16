@@ -1,5 +1,7 @@
 package content.global.bots
 
+import content.global.skill.prayer.BoneBuryListener
+import core.api.submitIndividualPulse
 import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
 import core.game.node.entity.Entity
@@ -7,7 +9,6 @@ import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.combat.InteractionType
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
-import content.global.skill.prayer.BoneBuryingOptionPlugin
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.map.Location
@@ -21,6 +22,7 @@ import core.game.bots.CombatBotAssembler
 import core.game.bots.Script
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListeners
+import core.game.node.Node
 import core.game.node.entity.combat.CombatSwingHandler
 import core.game.node.entity.combat.MeleeSwingHandler
 import kotlin.random.Random
@@ -224,7 +226,7 @@ class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Scr
 
     private fun attemptToBuryBone() {
         if (bot.inventory.containsAtLeastOneItem(Items.DRAGON_BONES_536)) {
-            BoneBuryingOptionPlugin().handle(bot, bot.inventory.get(Item(Items.DRAGON_BONES_536)), "bury")
+            InteractionListeners.run(Items.DRAGON_BONES_536, IntType.ITEM, "bury", bot, bot.inventory.get(Item(Items.DRAGON_BONES_536)))
         }
     }
 

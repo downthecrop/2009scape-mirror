@@ -1,23 +1,23 @@
 package content.region.morytania.phas.handlers
 
-import core.api.Container
-import core.api.*
 import content.global.skill.prayer.Bones
+import core.api.*
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListener
 import core.game.node.entity.impl.PulseType
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.system.task.Pulse
+import core.game.world.GameWorld.Pulser
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
-import core.game.interaction.InteractionListener
-import core.game.interaction.IntType
-import core.game.world.GameWorld.Pulser
+import org.rs09.consts.Scenery
 import org.rs09.consts.Sounds
 
-private const val LOADER = 11162
-private const val BONE_GRINDER = 11163
-private const val BIN = 11164
+private const val LOADER = Scenery.LOADER_11162
+private const val BONE_GRINDER = Scenery.BONE_GRINDER_11163
+private const val BIN = Scenery.BIN_11164
 
 private const val LOADED_BONE_KEY = "/save:bonegrinder-bones"
 private const val BONE_HOPPER_KEY = "/save:bonegrinder-hopper"
@@ -73,8 +73,12 @@ class BoneGrinderListener : InteractionListener {
 
     fun handleFill(player: Player): Boolean{
         val bone = getBone(player)
-        if(bone == null){
-            sendMessage(player,"You have no bones to grind.")
+        if((bone == null) || (bone.bonemealId == null)) {
+            if (inInventory(player, Items.MARINATED_J_BONES_3130) || inInventory(player, Items.MARINATED_J_BONES_3133)) {
+                sendDialogue(player, "These bones could break the bone grinder. Perhaps I should find some different bones.")
+            } else {
+                sendMessage(player, "You have no bones to grind.")
+            }
             return true
         }
         if(getAttribute(player, BONE_HOPPER_KEY,false)){
@@ -240,7 +244,7 @@ class BoneGrinderListener : InteractionListener {
                     }
                     SCOOP_ANIM.duration -> {
                         if(removeItem(player,Item(Items.EMPTY_POT_1931),Container.INVENTORY)){
-                            addItem(player,bone.boneMeal.id)
+                            addItem(player, bone.bonemealId!!)
                         }
                         return true
                     }

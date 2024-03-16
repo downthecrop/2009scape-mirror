@@ -36,12 +36,12 @@ public class BoneOfferPlugin extends UseWithHandler {
 	 * The offer Animation.
 	 */
 	private final Animation ANIM = new Animation(896);
-	
+
 	/**
 	 * Constructor.
 	 */
 	public BoneOfferPlugin() {
-		super(526, 2859, 528, 3183, 3179, 530, 532, 3125, 4812, 3123, 534, 6812, 536, 4830, 4832, 6729, 4834, 14693);
+		super(526, 528, 530, 532, 534, 536, 2530, 2859, 3123, 3125, 3127, 3179, 3180, 3181, 3182, 3183, 3185, 3186, 3187, 4812, 4830, 4832, 4834, 6729, 6812);
 	}
 
 	@Override

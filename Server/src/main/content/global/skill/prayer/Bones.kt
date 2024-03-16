@@ -1,73 +1,64 @@
 package content.global.skill.prayer
 
-import core.game.node.item.Item
-import java.util.ArrayList
-import java.util.HashMap
+import org.rs09.consts.Items
 
 /**
  * Represents the type of bones.
  * @author Apache Ah64
  */
-enum class Bones
-/**
- * Construct a new `Bones` `Object`.
- * @param itemId The item id.
- * @param experience The experience given by burying the bone.
- */(
-        /**
-         * The bone item id.
-         */
-        val itemId: Int,
-        /**
-         * The experience given by burying the bone.
-         */
-        val experience: Double) {
-    BONES(2530, 4.5),
-    BONES_2(526, 4.5),
-    WOLF_BONES(2859, 4.5),
-    BURNT_BONES(528, 4.5),
-    MONKEY_BONES(3183, 5.0),
-    MONKEY_BONES2(3179, 5.0),
-    BAT_BONES(530, 5.3),
-    BIG_BONES(532, 15.0),
-    JOGRE_BONES(3125, 15.0),
-    ZOGRE_BONES(4812, 12.5),
-    SHAIKAHAN_BONES(3123, 25.0),
-    BABY_DRAGON_BONES(534, 30.0),
-    WYVERN_BONES(6812, 50.0),
-    DRAGON_BONES(536, 72.0),
-    FAYRG(4830, 84.0),
-    RAURG_BONES(4832, 96.0),
-    DAGANNOTH(6729, 125.0),
-    OURG_BONES(4834, 140.0),
-    LAVA_DRAGON_BONES(14693, 85.0);
+enum class Bones(
     /**
-     * Get the bone experience given when you bury the bone.
-     * @return The experience.
+     * Construct a new `Bones` `Object`.
+     * @param itemId The item id.
+     * @param experience The experience given by burying the bone.
      */
 
     /**
-     * Gets the bone meal item.
-     * @return the item.
+     * The bone item id.
      */
-    val boneMeal: Item
-        get() {
-            return when(this){
-                FAYRG -> Item(4852)
-                RAURG_BONES -> Item(4853)
-                OURG_BONES -> Item(4854)
-                else -> Item(4255 + ordinal)
-            }
-        }
+    val itemId: Int,
 
     /**
-     * Gets the config value for the bone type.
-     * @param hopper the hopper.
-     * @return the value.
+     * The experience given by burying the bone.
      */
-    fun getConfigValue(hopper: Boolean): Int {
-        return (if (this == BONES_2) ordinal else ordinal - 1) or (if (hopper) 4 else 8) shl 16
-    }
+    val experience: Double,
+
+    /**
+     * The bones' bonemeal item id if applicable.
+     */
+    val bonemealId: Int?,
+) {
+    BONES(Items.BONES_526, 4.5, Items.BONEMEAL_4255),
+    BONES_2(Items.BONES_2530, 4.5, Items.BONEMEAL_4255),
+    BONES_3(Items.BONES_3187, 4.5, Items.BONEMEAL_4255),
+    WOLF_BONES(Items.WOLF_BONES_2859, 4.5, Items.BONEMEAL_4257),
+    BURNT_BONES(Items.BURNT_BONES_528, 4.5, Items.BONEMEAL_4258),
+    SMALL_NINJA_MONKEY_BONES(Items.MONKEY_BONES_3179, 16.0, Items.BONEMEAL_4256),
+    MEDIUM_NINJA_MONKEY_BONES(Items.MONKEY_BONES_3180, 18.0, Items.BONEMEAL_4270),
+    GORILLA_BONES(Items.MONKEY_BONES_3181, 18.0, Items.BONEMEAL_4855),
+    BEARDED_GORILLA_BONES(Items.MONKEY_BONES_3182, 18.0, Items.BONEMEAL_5615),
+    KARAMJA_MONKEY_BONES(Items.MONKEY_BONES_3183, 5.0, Items.BONEMEAL_4260),
+    SMALL_ZOMBIE_MONKEY_BONES(Items.MONKEY_BONES_3185, 5.0, Items.BONEMEAL_6728),
+    LARGE_ZOMBIE_MONKEY_BONES(Items.MONKEY_BONES_3186, 5.0, Items.BONEMEAL_6810),
+    BAT_BONES(Items.BAT_BONES_530, 5.3, Items.BONEMEAL_4261),
+    BIG_BONES(Items.BIG_BONES_532, 15.0, Items.BONEMEAL_4262),
+    JOGRE_BONES(Items.JOGRE_BONES_3125, 15.0, Items.BONEMEAL_4263),
+    ZOGRE_BONES(Items.ZOGRE_BONES_4812, 22.5, Items.BONEMEAL_4264),
+    SHAIKAHAN_BONES(Items.SHAIKAHAN_BONES_3123, 25.0, Items.BONEMEAL_4265),
+    BABY_DRAGON_BONES(Items.BABYDRAGON_BONES_534, 30.0, Items.BONEMEAL_4266),
+    WYVERN_BONES(Items.WYVERN_BONES_6812, 50.0, Items.BONEMEAL_4267), //The bonemeal id should be 6810
+    DRAGON_BONES(Items.DRAGON_BONES_536, 72.0, Items.BONEMEAL_4268),
+    FAYRG(Items.FAYRG_BONES_4830, 84.0, Items.BONEMEAL_4852),
+    RAURG_BONES(Items.RAURG_BONES_4832, 96.0, Items.BONEMEAL_4853),
+    DAGANNOTH(Items.DAGANNOTH_BONES_6729, 125.0, Items.BONEMEAL_4271), // The bonemeal id should be 6728
+    OURG_BONES(Items.OURG_BONES_4834, 140.0, Items.BONEMEAL_4854),
+    BURNT_JOGRE_BONES(Items.BURNT_JOGRE_BONES_3127, 16.0, Items.BONEMEAL_4259),
+    BURNT_RAW_PASTY_JOGRE_BONES(Items.PASTY_JOGRE_BONES_3128, 17.0, null),
+    BURNT_COOKED_PASTY_JOGRE_BONES(Items.PASTY_JOGRE_BONES_3129, 17.0, null),
+    MARINATED_JOGRE_BONES(Items.MARINATED_J_BONES_3130, 18.0, null),
+    RAW_PASTY_JOGRE_BONES(Items.PASTY_JOGRE_BONES_3131, 17.0, null),
+    COOKED_PASTY_JOGRE_BONES(Items.PASTY_JOGRE_BONES_3132, 17.0, null),
+    MARINATED_JOGRE_BONES_BAD(Items.MARINATED_J_BONES_3133, 18.0, null);
 
     companion object {
         /**
@@ -83,23 +74,7 @@ enum class Bones
         @JvmStatic
         fun forBoneMeal(itemId: Int): Bones? {
             for (bone in values()) {
-                if (bone.boneMeal.id == itemId) {
-                    return bone
-                }
-            }
-            return null
-        }
-
-        /**
-         * Gets the config value for the bone.
-         * @param value the value.
-         * @param hopper hopper.
-         * @return `True` if so.
-         */
-        @JvmStatic
-        fun forConfigValue(value: Int, hopper: Boolean): Bones? {
-            for (bone in values()) {
-                if (bone.getConfigValue(hopper) == value) {
+                if (bone.bonemealId == itemId) {
                     return bone
                 }
             }

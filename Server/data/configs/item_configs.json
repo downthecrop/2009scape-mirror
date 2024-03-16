@@ -25493,6 +25493,7 @@
   {
     "shop_price": "140",
     "grand_exchange_price": "140",
+    "examine": "Bones are for burying!",
     "durability": null,
     "name": "Bones",
     "tradeable": "true",
@@ -30805,55 +30806,62 @@
     "examine": "These blackened Jogre bones have been somehow burnt.",
     "durability": null,
     "name": "Burnt jogre bones",
+    "tradeable": "false",
     "weight": "0.8",
     "archery_ticket_price": "0",
     "id": "3127"
   },
   {
-    "examine": "See article",
+    "examine": "Burnt Jogre bones smothered with raw Karambwanji Paste.",
     "durability": null,
     "name": "Pasty jogre bones",
-    "weight": "1",
+    "tradeable": "false",
+    "weight": "0.8",
     "archery_ticket_price": "0",
     "id": "3128"
   },
   {
-    "examine": "See article",
+    "examine": "Burnt Jogre bones smothered with cooked Karambwanji paste.",
     "durability": null,
     "name": "Pasty jogre bones",
-    "weight": "1",
+    "tradeable": "false",
+    "weight": "0.8",
     "archery_ticket_price": "0",
     "id": "3129"
   },
   {
-    "examine": "Burnt Jogre bones marinated in lovely Karambwanji sauce. Perfect./Burnt Jogre bones marinated in lovely Karabwanji sauce. Not quite right.",
+    "examine": "Burnt Jogre bones marinated in a lovely Karambwanji sauce. Perfect.",
     "durability": null,
     "name": "Marinated j' bones",
-    "weight": "1",
+    "tradeable": "false",
+    "weight": "0.8",
     "archery_ticket_price": "0",
     "id": "3130"
   },
   {
-    "examine": "See article",
+    "examine": "Jogre bones smothered with raw Karambwanji paste.",
     "durability": null,
     "name": "Pasty jogre bones",
-    "weight": "1",
+    "tradeable": "false",
+    "weight": "0.8",
     "archery_ticket_price": "0",
     "id": "3131"
   },
   {
-    "examine": "See article",
+    "examine": "Jogre bones smothered with cooked Karambwanji paste.",
     "durability": null,
     "name": "Pasty jogre bones",
-    "weight": "1",
+    "tradeable": "false",
+    "weight": "0.8",
     "archery_ticket_price": "0",
     "id": "3132"
   },
   {
-    "examine": "Burnt Jogre bones marinated in lovely Karambwanji sauce. Perfect./Burnt Jogre bones marinated in lovely Karabwanji sauce. Not quite right.",
+    "examine": "Jogre Bones marinated in Karambwanji sauce. Not quite right.",
     "durability": null,
     "name": "Marinated j' bones",
-    "weight": "1",
+    "tradeable": "false",
+    "weight": "0.8",
     "archery_ticket_price": "0",
     "id": "3133"
   },
@@ -31352,7 +31360,7 @@
     "id": "3178"
   },
   {
-    "examine": "These are small/medium sized monkey bones.",
+    "examine": "These are smallish monkey bones.",
     "grand_exchange_price": "383",
     "durability": null,
     "name": "Monkey bones",
@@ -31362,7 +31370,7 @@
     "id": "3179"
   },
   {
-    "examine": "These are small/medium sized monkey bones.",
+    "examine": "These are medium sized monkey bones.",
     "grand_exchange_price": "383",
     "durability": null,
     "name": "Monkey bones",
@@ -31372,7 +31380,7 @@
     "id": "3180"
   },
   {
-    "examine": "These are small/medium sized monkey bones.",
+    "examine": "These are quite large monkey bones.",
     "grand_exchange_price": "383",
     "durability": null,
     "name": "Monkey bones",
@@ -31382,7 +31390,7 @@
     "id": "3181"
   },
   {
-    "examine": "These are small/medium sized monkey bones.",
+    "examine": "These are quite large monkey bones.",
     "grand_exchange_price": "383",
     "durability": null,
     "name": "Monkey bones",
@@ -31393,7 +31401,7 @@
   },
   {
     "ge_buy_limit": "10000",
-    "examine": "These are small/medium sized monkey bones.",
+    "examine": "These are small monkey bones.",
     "grand_exchange_price": "588",
     "durability": null,
     "name": "Monkey bones",
@@ -31412,7 +31420,7 @@
     "id": "3184"
   },
   {
-    "examine": "These are small/medium sized monkey bones.",
+    "examine": "These are smallish monkey bones. They smell extremely nauseating.",
     "grand_exchange_price": "383",
     "durability": null,
     "name": "Monkey bones",
@@ -31422,7 +31430,7 @@
     "id": "3185"
   },
   {
-    "examine": "These are small/medium sized monkey bones.",
+    "examine": "These are small monkey bones. They smell extremely nauseating.",
     "grand_exchange_price": "383",
     "durability": null,
     "name": "Monkey bones",
@@ -38950,7 +38958,7 @@
     "id": "4255"
   },
   {
-    "examine": "A pot of crushed bones.",
+    "examine": "A pot of crushed small ninja monkey bones.",
     "durability": null,
     "name": "Bonemeal",
     "weight": "1",
@@ -38974,7 +38982,7 @@
     "id": "4258"
   },
   {
-    "examine": "A pot of crushed monkey bones.",
+    "examine": "A pot of crushed burnt jogre bones.",
     "durability": null,
     "name": "Bonemeal",
     "weight": "1",
@@ -39062,7 +39070,7 @@
     "id": "4269"
   },
   {
-    "examine": "A pot of crushed [type of bones].",
+    "examine": "A pot of crushed medium ninja monkey bones.",
     "durability": null,
     "name": "Bonemeal",
     "weight": "1",
@@ -44036,7 +44044,7 @@
     "id": "4854"
   },
   {
-    "examine": "A pot of crushed [type of bones].",
+    "examine": "A pot of crushed gorilla monkey bones.",
     "durability": null,
     "name": "Bonemeal",
     "weight": "1",
@@ -50115,7 +50123,7 @@
     "stand_turn_anim": "330"
   },
   {
-    "examine": "A pot of crushed [type of bones].",
+    "examine": "A pot of crushed bearded gorilla monkey bones.",
     "durability": null,
     "name": "Bonemeal",
     "weight": "1",
@@ -61087,7 +61095,7 @@
     "id": "6727"
   },
   {
-    "examine": "A pot of crushed [type of bones].",
+    "examine": "A pot of crushed small zombie monkey bones.",
     "durability": null,
     "name": "Bonemeal",
     "weight": "1",
@@ -61847,7 +61855,7 @@
     "bonuses": "0,0,0,-31,-18,43,45,41,-4,68,20,0,0,0,0"
   },
   {
-    "examine": "A pot of crushed [type of bones].",
+    "examine": "A pot of crushed large zombie monkey bones.",
     "durability": null,
     "name": "Bonemeal",
     "weight": "1",

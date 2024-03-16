@@ -1,9 +1,8 @@
 package content.region.morytania.phas.handlers;
 
-import static core.api.ContentAPIKt.*;
-
+import content.global.skill.agility.AgilityHandler;
 import content.global.skill.prayer.Bones;
-import content.region.morytania.phas.dialogue.*;
+import content.region.morytania.phas.dialogue.NecrovarusDialogue;
 import core.game.global.action.ClimbActionHandler;
 import core.game.interaction.Option;
 import core.game.node.Node;
@@ -11,22 +10,23 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.Skills;
-import content.global.skill.agility.AgilityHandler;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
-import core.game.system.task.Pulse;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
 import core.game.world.update.flag.context.Animation;
+import core.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import org.rs09.consts.NPCs;
-import core.plugin.ClassScanner;
 import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
+import static core.api.ContentAPIKt.sendMessage;
 
 /**
  * Handles the phasmatys zone area.
@@ -39,8 +39,6 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
     Bones[] bones;
     Player player;
     Bones bone;
-    boolean notFirst;
-
 
     /**
      * Constructs a new {@code PhasmatysZone} {@code Object}.
@@ -57,7 +55,6 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
         ClassScanner.definePlugin(new EctoplasmFillPlugin());
         return this;
     }
-
 
     @Override
     public boolean interact(Entity e, Node target, Option option) {
@@ -132,64 +129,6 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
         return super.interact(e, target, option);
     }
 
-    public Pulse emptyPulse = new Pulse(5) {
-        //the bin
-        Scenery emptyobj = new Scenery(11164, 3658, 3525, 1);
-
-        @Override
-        public boolean pulse() {
-            //player.getProperties().setTeleportLocation(new Location(3658,3524,1));
-            player.faceLocation(new Location(3658, 3525, 1));
-            empty(player, emptyobj);
-            player.getWalkingQueue().reset();
-            player.getWalkingQueue().addPath(3660, 3524, true);
-            player.setAttribute("bgfirst?", false);
-            player.getPulseManager().run(fillPulse);
-            return true;
-        }
-    };
-    public Pulse windPulse = new Pulse(5) {
-        //the crank
-        Scenery windobj = new Scenery(11163, 3659, 3525, 1);
-
-        @Override
-        public boolean pulse() {
-            //player.getProperties().setTeleportLocation(new Location(3659,3524,1));
-            player.faceLocation(new Location(3659, 3525, 1));
-            wind(player, windobj);
-            player.getWalkingQueue().reset();
-            player.getWalkingQueue().addPath(3658, 3524, true);
-            player.getPulseManager().run(emptyPulse);
-            return true;
-        }
-    };
-    public Pulse fillPulse = new Pulse(5) {
-        //the hopper
-        @Override
-        public boolean pulse() {
-            if (hasBoneInInventory(player)) {
-                bone = getBone(player);
-            } else {
-                player.debug("No bones in inventory, or bones not in bones array.");
-                player.setAttribute("bgfirst?", true);
-                return true;
-            }
-
-            player.faceLocation(new Location(3660, 3525, 1));
-            if (player.getInventory().remove(new Item(bone.getItemId()))) {
-                player.getLocks().lockInteractions(2);
-                player.debug("Using bone " + bone.getItemId() + " on grinder.. bone info:" + b);
-                player.animate(Animation.create(1649));
-                setVarp(player, 408, bone.getConfigValue(true), true);
-                player.sendMessage("You put some bones in the grinder's hopper.", 1);
-                player.getWalkingQueue().reset();
-                player.getWalkingQueue().addPath(3659, 3524, true);
-                player.getPulseManager().run(windPulse);
-            }
-            return true;
-        }
-    };
-
     /**
      * Checks if the player has the amulet equipped.
      *
@@ -198,108 +137,6 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
      */
     public static boolean hasAmulet(Player player) {
         return player.getEquipment().contains(552, 1);
-    }
-
-    /**
-     * Checks the status of a grinder.
-     *
-     * @param player the player.
-     * @param object the object.
-     */
-    private void checkStatus(Player player, Scenery object) {
-        String status = "The grinder is empty.";
-        if (hasBones(player, object, true)) {
-            status = "There are some bones in the hopper.";
-        } else if (hasBones(player, object, false)) {
-            status = "There are some crushed bones in the bin.";
-        }
-        player.sendMessage(status);
-    }
-
-    /**
-     * Emptys the grinder.
-     *
-     * @param player the player.
-     * @param object the object.
-     */
-    private void empty(Player player, Scenery object) {
-        if (hasBones(player, object, true)) {
-            player.sendMessage("You need to wind the handle to grind the bones.");
-            return;
-        }
-        if (!hasBones(player, object, false)) {
-            player.sendMessage("The grinder is already empty.");
-            return;
-        }
-        if (!player.getInventory().contains(1931, 1)) {
-            player.sendMessage("You need an empty pot to put the crushed bones into.");
-            return;
-        }
-        final Bones bone = Bones.forConfigValue(getVarp(player, 408), false);
-        player.getLocks().lockInteractions(2);
-        player.animate(Animation.create(1650));
-        setVarp(player, 408, 0, true);
-        player.sendMessage("You fill a pot with crushed bones.");
-        player.getInventory().replace(bone.getBoneMeal(), player.getInventory().getSlot(new Item(1931)));
-    }
-
-    /**
-     * Windws the grinder.
-     *
-     * @param player the player.
-     * @param object the object.
-     */
-    private void wind(Player player, Scenery object) {
-        final Bones bone = Bones.forConfigValue(getVarp(player, 408), true);
-        player.getLocks().lockInteractions(3);
-        player.animate(Animation.create(1648));
-        player.sendMessage("You wind the grinder handle.");
-        if (hasBones(player, object, true)) {
-            setVarp(player, 408, bone.getConfigValue(false), true);
-            player.sendMessage("Some crushed bones pour into the bin.", 3);
-        }
-    }
-
-    /**
-     * Checks if bones are in the hopper.
-     *
-     * @param player   the player.
-     * @param inHopper in the hopper or in the bin.
-     * @param object   the object.
-     * @return {@code True} if so.
-     */
-    public static boolean hasBones(Player player, Scenery object, boolean inHopper) {
-        int value = getVarp(player, 408);
-        for (Bones bone : Bones.values()) {
-            if (bone.getConfigValue(inHopper) == value) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean hasBoneInInventory(Player player) {
-        Bones[] bones = Bones.values();
-        for (int c = 0; c < bones.length; c++) {
-            Bones bone = bones[c];
-            int boneId = bone.getItemId();
-            if (player.getInventory().containsItem(new Item(boneId))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static Bones getBone(Player player) {
-        Bones[] bones = Bones.values();
-        for (int b = 0; b < bones.length; b++) {
-            Bones bone = bones[b];
-            int boneId = bone.getItemId();
-            if (player.getInventory().containsItem(new Item(boneId))) {
-                return bone;
-            }
-        }
-        return null;
     }
 
     /**
@@ -331,7 +168,7 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
             player.getDialogueInterpreter().sendDialogue("You need ectoplasm to put into the Ectofuntus.");
             return;
         }
-        if (player.getInventory().remove(bone.getBoneMeal(), new Item(4286, 1))) {
+        if (player.getInventory().remove(new Item(bone.getBonemealId()), new Item(4286, 1))) {
             player.lock(1);
             player.animate(Animation.create(1651));
             playAudio(player, Sounds.PRAYER_BOOST_2671);
