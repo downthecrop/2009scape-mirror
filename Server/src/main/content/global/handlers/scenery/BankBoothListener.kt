@@ -52,9 +52,11 @@ class BankBoothListener : InteractionListener {
                     var amount = item.amount
                     val freeSlotCount = freeSlots(player)
 
-                    if (amount > freeSlotCount) {
-                        amount = freeSlotCount
-                    }
+                    // If there is exactly one more note than free slots
+                    // the note disappearing can be used as the last slot
+                    if (amount > freeSlotCount && amount != freeSlotCount + 1) {
+                            amount = freeSlotCount
+                        }
 
                     if (removeItem(player, Item(item.id, amount))) {
                         addItem(player, item.noteChange, amount)
