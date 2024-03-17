@@ -43,7 +43,7 @@ public class PhilopDialogue extends DialoguePlugin {
 			stage = 3;
 			break;
 		case 3:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Enjoy playing with your dragon, then.");
+			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Enjoy playing with your dragon, then.");
 			stage = 4;
 			break;
 		case 4:
