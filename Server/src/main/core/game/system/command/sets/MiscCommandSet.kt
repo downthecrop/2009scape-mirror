@@ -553,17 +553,18 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
                 else -> reject(player, usageStr)
             }
         }
-        define("allow_aggro", Privilege.ADMIN) { player, args ->
-            val usageStr = "Usage: ::allow_aggro true | false"
+        define("allowaggro", Privilege.ADMIN, "allowaggro true | false", "Toggle NPCs aggroing on you") { player, args ->
+            val usageStr = "Usage: ::allowaggro true | false"
             if(args.size < 2) {
-                reject(player, usageStr)
+                notify(player, "Allow admin aggression is currently ${player.getAttribute("/save:allow_admin_aggression", false)}")
+                return@define
             }
             when(args[1]) {
                 "true" -> player.setAttribute("/save:allow_admin_aggression", true)
                 "false" -> player.setAttribute("/save:allow_admin_aggression", false)
                 else -> reject(player, usageStr)
-
             }
+            notify(player, "Setting aggro ${args[1]}")
         }
 
         define("rules", Privilege.STANDARD, "", "Shows the rules."){ player, _ ->
