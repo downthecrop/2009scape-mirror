@@ -31616,15 +31616,23 @@
     "attack_level": "30"
   },
   {
+    "examine": "A member of the Black Guard",
+    "slayer_task": "29",
+    "melee_animation": "99",
+    "range_animation": "0",
+    "defence_animation": "0",
+    "weakness": "6",
     "slayer_exp": "16",
+    "magic_animation": "0",
+    "death_animation": "102",
     "name": "Black Guard",
-    "defence_level": "1",
+    "defence_level": "30",
     "safespot": null,
-    "lifepoints": "10",
-    "strength_level": "1",
+    "lifepoints": "42",
+    "strength_level": "30",
     "id": "3279",
     "range_level": "1",
-    "attack_level": "1"
+    "attack_level": "30"
   },
   {
     "examine": "He looks busy.",
