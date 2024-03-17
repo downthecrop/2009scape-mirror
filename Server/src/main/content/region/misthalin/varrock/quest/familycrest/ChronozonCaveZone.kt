@@ -11,23 +11,19 @@ import core.game.world.map.zone.ZoneBuilder
 import core.plugin.Initializable
 import core.plugin.Plugin
 import content.region.misthalin.varrock.quest.familycrest.ChronozonNPC
+import core.game.node.item.Item
+import org.rs09.consts.Items
+import org.rs09.consts.NPCs
 
 
 @Initializable
 class ChronozonCaveZone: MapZone("FC ChronozoneZone", true), Plugin<Unit> {
 
-    val triggers = ArrayList<Location>()
-    var chronozon = ChronozonNPC(667, Location(3086, 9936, 0))
+    val spawnLoc = Location(3086, 9936, 0)
+    var chronozon = ChronozonNPC(NPCs.CHRONOZON_667, spawnLoc)
+
     override fun configure() {
         register(ZoneBorders(3082, 9929, 3091, 9940))
-        triggers.add(Location.create(3083, 9939))
-        triggers.add(Location.create(3084, 9939))
-        triggers.add(Location.create(3085, 9939))
-        triggers.add(Location.create(3086, 9939))
-        triggers.add(Location.create(3087, 9939))
-        triggers.add(Location.create(3088, 9939))
-        triggers.add(Location.create(3089, 9939))
-        triggers.add(Location.create(3090, 9939))
     }
 
     override fun move(e: Entity?, from: Location?, to: Location?): Boolean {
@@ -37,16 +33,17 @@ class ChronozonCaveZone: MapZone("FC ChronozoneZone", true), Plugin<Unit> {
     override fun enter(e: Entity?): Boolean {
         if (e != null) {
             if (e.isPlayer) {
-                chronozon = ChronozonNPC(667, Location(3086, 9936, 0))
-                var player = e as Player
-                if (player.questRepository.getQuest("Family Crest").getStage(e) == 19 && !RegionManager.getLocalNpcs(
-                        Location(3086, 9936, 0),
-                        5
-                    ).contains(chronozon)
-                ) {
-                    chronozon.setPlayer(e)
-                    chronozon.isRespawn = false
-                    chronozon.init()
+                val player = e as Player
+                if (player.questRepository.getQuest("Family Crest").getStage(e) in (19..99) &&
+                    !player.hasItem(Item(Items.CREST_PART_781))){
+                    // Chronozon is allowed to spawn (quest stage right and the player doesn't have the crest part)
+                    // Now check there is not one already
+                    if(!RegionManager.getLocalNpcs(spawnLoc, 5).contains(chronozon)){
+                        chronozon.setPlayer(e)
+                        chronozon.isRespawn = false
+                        chronozon.location = spawnLoc
+                        chronozon.init()
+                    }
                 }
             }
             return true
