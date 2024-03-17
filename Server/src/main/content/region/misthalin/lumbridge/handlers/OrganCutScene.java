@@ -18,6 +18,8 @@ import core.net.packet.context.CameraContext.CameraType;
 import core.plugin.Initializable;
 import core.net.packet.out.CameraViewPacket;
 
+import static core.api.ContentAPIKt.animateScenery;
+
 /**
  * Represents the organ cutscene.
  * @author 'Vexia
@@ -53,7 +55,7 @@ public final class OrganCutScene extends CutscenePlugin {
 		GameWorld.getPulser().submit(new Pulse(3) {
 			@Override
 			public boolean pulse() {
-				player.getPacketDispatch().sendSceneryAnimation(RegionManager.getObject(base.transform(42, 14, 0)), new Animation(9841));
+				animateScenery(player, newOrgin, 9982, false); // Not animation 9841
 				PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.POSITION, player.getLocation().getX() + 2, player.getLocation().getY() - 3, 400, 1, 1));
 				PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.ROTATION, player.getLocation().getX() + 1, player.getLocation().getY(), 400, 1, 1));
 				return true;
