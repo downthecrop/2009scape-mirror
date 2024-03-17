@@ -1,6 +1,6 @@
 package content.region.misthalin.digsite.dialogue
 
-import content.global.handlers.item.withnpc.ArchaeologicalExpertListener
+import content.region.misthalin.digsite.quest.thedigsite.ArchaeologicalExpertListener
 import core.api.addItemOrDrop
 import core.api.sendDialogue
 import core.game.dialogue.FacialExpression

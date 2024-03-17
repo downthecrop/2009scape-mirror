@@ -407,6 +407,12 @@ class DialogueBuilder(var target: DialogueBuilderFile, var clauseIndex: Int = -1
         return DialogueBranchBuilder(target, clauseIndex, branches)
     }
 
+    fun branchStages(f: (Player) -> Int): DialogueBranchBuilder {
+        var branches = BranchesData(HashMap(), f)
+        target.data[clauseIndex].nodes.add(BranchNode(branches))
+        return DialogueBranchBuilder(target, clauseIndex, branches)
+    }
+
     fun branchBoolAttribute(attrName: String, defaultVal: Boolean): DialogueBranchBuilder {
         return branch({ player -> return@branch if(player.getAttribute(attrName, defaultVal)) { 1 } else { 0 } })
     }

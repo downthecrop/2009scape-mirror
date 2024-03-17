@@ -2188,18 +2188,6 @@
     "metal": "false"
   },
   {
-    "id": "24560",
-    "replaceId": "15515",
-    "fence": "true",
-    "metal": "false"
-  },
-  {
-    "id": "24561",
-    "replaceId": "15517",
-    "fence": "true",
-    "metal": "false"
-  },
-  {
     "id": "24565",
     "replaceId": "36316",
     "fence": "false",

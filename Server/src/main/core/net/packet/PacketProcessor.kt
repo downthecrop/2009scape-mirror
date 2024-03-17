@@ -270,7 +270,7 @@ object PacketProcessor {
             }
             is Packet.ItemExamine -> {
                 val def = ItemDefinition.forId(pkt.id) ?: return
-                pkt.player.debug("[ITEM] ID: ${pkt.id} Value: ${def.value}")
+                pkt.player.debug("[ITEM] ID: ${pkt.id} Value: ${def.value} Model: ${def.interfaceModelId}")
                 pkt.player.sendMessage(def.examine)
             }
             is Packet.SceneryExamine -> {

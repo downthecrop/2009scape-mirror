@@ -3584,7 +3584,7 @@
     "ids": "2375"
   },
   {
-    "examine": "Soil",
+    "examine": "Soil. Dug up!",
     "ids": "2376,2377,2378"
   },
   {
@@ -6384,12 +6384,12 @@
     "ids": "4131"
   },
   {
-    "examine": "These doors look very ominous. A sign says 'To the tombs'.",
-    "ids": "4132,4133"
+    "examine": "This tells you which way is which.",
+    "ids": "4132,4133,4134,4135"
   },
   {
-    "examine": "Large doors set into the hillside.",
-    "ids": "4134,4135,4136,4137"
+    "examine": "These doors look very ominous. A sign says 'To the tombs'.",
+    "ids": "4136,4137"
   },
   {
     "examine": "Items are for sale here.",
@@ -20028,6 +20028,26 @@
     "ids": "14009"
   },
   {
+    "examine": "Stop examining signs! You're in the Wilderness now!",
+    "ids": "14503"
+  },
+  {
+    "examine": "Danger, Wilderness up ahead. Last chance to turn back...",
+    "ids": "14504"
+  },
+  {
+    "examine": "Danger, Wilderness up ahead. Watch out for the Beast!",
+    "ids": "14505"
+  },
+  {
+    "examine": "Danger, Wilderness up ahead. Beware of stray magma.",
+    "ids": "14506"
+  },
+  {
+    "examine": "Danger, Wilderness up ahead. Almost certain death!",
+    "ids": "14507"
+  },
+  {
     "examine": "Home sweet home?",
     "ids": "15477"
   },
@@ -20040,8 +20060,24 @@
     "ids": "15748"
   },
   {
+    "examine": "Large urn.",
+    "ids": "17362"
+  },
+  {
     "examine": "A large fish.",
     "ids": "18482"
+  },
+  {
+    "examine": "A sign on a cactus.",
+    "ids": "18876"
+  },
+  {
+    "examine": "Dead and half-buried.",
+    "ids": "19996"
+  },
+  {
+    "examine": "Dead animal head. Lovely.",
+    "ids": "19997"
   },
   {
     "examine": "Might be worth opening?",
@@ -20148,6 +20184,10 @@
     "ids": "29939,29943,29944,29945,29947,29951,29952,29953,29954"
   },
   {
+    "examine": "An interesting sign.",
+    "ids": "31297,31298,31299,31300,31301"
+  },
+  {
     "examine": "I wonder what this spooky contains.",
     "ids": "37051"
   },
@@ -20214,6 +20254,14 @@
   {
     "examine": "A wooden crate.",
     "ids": "15031"
+  },
+  {
+    "examine": "A sealed barrel with a warning sign on it.",
+    "ids": "17296"
+  },
+  {
+    "examine": "A barrel with a warning sign on it.",
+    "ids": "17297"
   },
   {
     "examine": "A beautiful landscape.",
@@ -20317,7 +20365,7 @@
   },
   {
     "examine": "A wooden barrel for storage.",
-    "ids": "31136,36798"
+    "ids": "17308,31136,36798"
   },
   {
     "examine": "A home for baby creatures.",
@@ -20542,10 +20590,6 @@
   {
     "examine": "Popular on sandy beaches where fruity cocktails may be found.",
     "ids": "18856"
-  },
-  {
-    "examine": "Stop examining signs! You're in the Wilderness now!",
-    "ids": "14503"
   },
   {
     "examine": "Looks like part of the entrance is blocked by rubble.",

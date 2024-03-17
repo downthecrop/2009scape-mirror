@@ -6540,10 +6540,28 @@
     "id": "704"
   },
   {
+    "shop_price": "1",
+    "examine": "A mixture of strong chemicals.",
+    "durability": null,
+    "name": "Mixed chemicals",
+    "weight": "0.03",
+    "archery_ticket_price": "0",
+    "id": "705"
+  },
+  {
+    "shop_price": "1",
+    "examine": "A mixture of strong chemicals.",
+    "durability": null,
+    "name": "Mixed chemicals",
+    "weight": "0.035",
+    "archery_ticket_price": "0",
+    "id": "706"
+  },
+  {
     "examine": "A mixture of strong chemicals.",
     "durability": null,
     "name": "Chemical compound",
-    "weight": "2",
+    "weight": "0.035",
     "archery_ticket_price": "0",
     "id": "707"
   },

@@ -11,10 +11,6 @@ import core.game.node.entity.player.Player
 import org.rs09.consts.Items
 
 class ChemicalsBook : InteractionListener {
-
-    // Part of The Dig Site quest. It has some information on how to
-    // make an explosive potion that can be used to destroy some blocks.
-
     companion object {
         private val TITLE = "Volatile chemicals Experimental Test Notes"
         private val CONTENTS = arrayOf(
@@ -65,7 +61,6 @@ class ChemicalsBook : InteractionListener {
             ),
         )
     }
-
 
     private fun display(player: Player, pageNum: Int, buttonID: Int): Boolean {
         BookInterface.pageSetup(
