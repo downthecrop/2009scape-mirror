@@ -15,7 +15,7 @@ class TheDoorDialogues(val it: Int) : DialogueFile() {
         npc = NPC(NPCs.MASTER_CRAFTER_805)
         when(it) {
             0 -> when(stage) {
-                0 -> npcl(FacialExpression.FRIENDLY, "Welcome to the Guild of Master craftsmen.").also{ stage = END_DIALOGUE }
+                0 -> npcl(FacialExpression.FRIENDLY, "Welcome to the Guild of Master Craftsmen.").also{ stage = END_DIALOGUE }
             }
             1 -> when(stage) {
                 0 -> npcl(FacialExpression.ASKING, "Where's your brown apron? You can't come in here unless you're wearing one.").also{ stage++ }
@@ -25,8 +25,5 @@ class TheDoorDialogues(val it: Int) : DialogueFile() {
                 0 -> npcl(FacialExpression.NEUTRAL, "Sorry, only experienced crafters are allowed in here. You must be level 40 or above to enter.").also{ stage = END_DIALOGUE }
             }
         }
-
     }
-
-
 }

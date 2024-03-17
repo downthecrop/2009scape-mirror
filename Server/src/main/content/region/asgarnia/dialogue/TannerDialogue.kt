@@ -1,5 +1,6 @@
 package content.region.asgarnia.dialogue
 
+import content.global.skill.crafting.TanningProduct
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
@@ -34,8 +35,7 @@ class TannerDialogue(player: Player? = null) : DialoguePlugin(player) {
                 2 -> player(FacialExpression.SUSPICIOUS, "Leather is rather weak stuff.").also { stage = 20 }
             }
 
-            10 -> npcl(FacialExpression.FRIENDLY, "Certainly!").also { stage = END_DIALOGUE }.also{ npc.openShop(player) }
-
+            10 -> npcl(FacialExpression.FRIENDLY, "Certainly!").also { stage = 30 }
             20 -> npcl(FacialExpression.NOD_YES, "Normal leather may be quite weak, but it's very cheap - I " +
                     "make it from cowhides for only 1 gp per hide - and it's so easy to craft that anyone can work with it.").also{ stage++ }
             21 -> npcl(FacialExpression.HALF_THINKING, "Alternatively you could try hard leather. It's not so easy " +
@@ -43,6 +43,10 @@ class TannerDialogue(player: Player? = null) : DialoguePlugin(player) {
             22 -> npcl(FacialExpression.FRIENDLY, "I can also tan snake hides and dragonhides, suitable for crafting" +
                     "into the highest quality armour for rangers.").also{ stage++ }
             23 -> player(FacialExpression.NEUTRAL, "Thanks, I'll bear it in mind.").also { stage = END_DIALOGUE }
+            30 -> {
+                end()
+                TanningProduct.open(player, npc.id)
+            }
         }
         return true
     }
