@@ -360,8 +360,6 @@ public enum Bars {
 	/**
 	 * Steel Lantern
 	 */
-	STEEL_LANTERN(BarType.STEEL, SmithingType.TYPE_LANTERN, 4527, 49),
-	
 	STEEL_BULLSEYE(BarType.STEEL, SmithingType.TYPE_BULLSEYE, 4544, 49),
 
 	/**

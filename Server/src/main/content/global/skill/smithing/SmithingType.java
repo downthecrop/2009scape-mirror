@@ -52,7 +52,7 @@ public enum SmithingType {
 	/**
 	 * Bullseye 
 	 */
-	TYPE_BULLSEYE(1, 90, 91, new int[] { 96, 95, 94, 93 }, 1),
+	TYPE_BULLSEYE(1, 162, 163, new int[] { 168, 167, 166, 165 }, 1),
 
 	/**
 	 * Spit Iron
@@ -61,7 +61,7 @@ public enum SmithingType {
 	/**
 	 * 
 	 */
-	TYPE_WIRE(1, 90, 91, new int[] { 96, 95, 94, 93 }, 1),
+	TYPE_WIRE(1, 82, 83, new int[] { 88, 87, 86, 85 }, 1),
 
 	/**
 	 * Arrow Tips
@@ -99,11 +99,6 @@ public enum SmithingType {
 	TYPE_SQUARE_SHIELD(2, 154, 155, new int[] { 160, 159, 158, 157 }, 1),
 
 	/**
-	 * Latern
-	 */
-	TYPE_LANTERN(1, 162, 163, new int[] { 168, 167, 166, 165 }, 1),
-
-	/**
 	 * Oil Lantern
 	 */
 	TYPE_OIL_LANTERN(1,162,163,new int[] {168,167,166,165},1),
@@ -116,7 +111,7 @@ public enum SmithingType {
 	/**
 	 * The studs type.
 	 */
-	TYPE_STUDS(1, 170, 171, new int[] { 175, 176, 174, 173, 172 }, 1),
+	TYPE_STUDS(1, 98, 99, new int[] { 104, 103, 102, 101, 100 }, 1),
 
 	/**
 	 * Warhammer
