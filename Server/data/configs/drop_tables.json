@@ -58922,9 +58922,6 @@
     ]
   },
   {
-    "charm": [],
-    "ids": "1676",
-    "description": "Experiment (level 51)",
     "default": [
       {
         "minAmount": "1",
@@ -58939,6 +58936,9 @@
         "maxAmount": "1"
       }
     ],
+    "charm": [],
+    "ids": "1676",
+    "description": "Experiment (level 51)",
     "main": []
   },
   {
