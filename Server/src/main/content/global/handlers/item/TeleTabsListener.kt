@@ -5,14 +5,18 @@ import core.api.removeItem
 import core.api.teleport
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.item.Item
 import core.game.world.map.Location
+import core.api.hasRequirement;
 
 class TeleTabsListener : InteractionListener {
 
-    enum class TeleTabs(val item: Int, val location: Location, val exp: Double) {
-        ADDOUGNE_TELEPORT(8011, Location.create(2662, 3307, 0), 61.0),
+    enum class TeleTabs(val item: Int, val location: Location, val exp: Double, val requirementCheck: (Player) -> Boolean = { true }) {
+        ADDOUGNE_TELEPORT(8011, Location.create(2662, 3307, 0), 61.0, {
+            player -> hasRequirement(player, "Plague City");
+        }),
         AIR_ALTAR_TELEPORT(13599, Location.create(2978, 3296, 0), 0.0),
         ASTRAL_ALTAR_TELEPORT(13611, Location.create(2156, 3862, 0), 0.0),
         BLOOD_ALTAR_TELEPORT(13610, Location.create(3559, 9778, 0), 0.0),
@@ -47,7 +51,7 @@ class TeleTabsListener : InteractionListener {
             val tabEnum = TeleTabs.forId(tab)
             if (tabEnum != null && inInventory(player,tab)) {
                 val tabloc = tabEnum.location
-                if (inInventory(player, tab)) {
+                if (inInventory(player, tab) && tabEnum.requirementCheck(player)) {
                     if (teleport(player, tabloc, TeleportManager.TeleportType.TELETABS)) {
                         removeItem(player, Item(node.id, 1))
                     }

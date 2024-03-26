@@ -17,7 +17,7 @@ class NonBankingMiner : Script() {
         }
         //checks if the bot has tin ore in his inventory and drops it if he does
         if(bot.inventory.containsAtLeastOneItem(Items.TIN_ORE_438)){
-            produceGroundItem(null,438,1,bot.location)
+            produceGroundItem(bot,438,1,bot.location)
             bot.inventory.remove(Item(Items.TIN_ORE_438,1))
         }
         //The following is to prevent lucky bots from breaking by having a full inventory of gems

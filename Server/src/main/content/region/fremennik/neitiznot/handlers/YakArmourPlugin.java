@@ -71,6 +71,7 @@ public class YakArmourPlugin extends UseWithHandler {
 		 * The index.
 		 */
 		private final int index;
+		private final int YAK_BODY_INDEX = 1;
 
 		/**
 		 * The ticks.
@@ -96,7 +97,7 @@ public class YakArmourPlugin extends UseWithHandler {
 
 		@Override
 		public boolean checkRequirements() {
-			int level = (index == 1 ? 46 : 43);
+			int level = (index == YAK_BODY_INDEX ? 46 : 43);
 			if (player.getSkills().getLevel(Skills.CRAFTING) < level) {
 				player.getDialogueInterpreter().sendDialogue("You need a Crafting level of at least " + level + " in order to do this.");
 				return false;
@@ -108,7 +109,7 @@ public class YakArmourPlugin extends UseWithHandler {
 				player.getDialogueInterpreter().sendDialogue("You need some thread to make anything out of leather.");
 				return false;
 			}
-			int reqAmount = index == 1 ? 1 : 2;
+			int reqAmount = index == YAK_BODY_INDEX ? 2 : 1;
 			if (!player.getInventory().contains(10820, reqAmount)) {
 				player.getDialogueInterpreter().sendDialogue("You don't have the required amount of yak-hide in order to do this.");
 				return false;
@@ -129,7 +130,7 @@ public class YakArmourPlugin extends UseWithHandler {
 			if (++ticks % 5 != 0) {
 				return false;
 			}
-			int reqAmount = index == 1 ? 1 : 2;
+			int reqAmount = index == YAK_BODY_INDEX ? 2 : 1;
 			if (player.getInventory().remove(new Item(10820, reqAmount))) {
 			    player.getInventory().add(node);
 				player.getSkills().addExperience(Skills.CRAFTING, 32, true);

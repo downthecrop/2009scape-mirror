@@ -196,7 +196,7 @@ public final class HouseManager {
 		}
 		player.setAttribute("poh_entry", HouseManager.this);
 		player.lock(1);
-		player.sendMessage("House location: " + houseRegion.getBaseLocation() + ", entry: " + getEnterLocation());
+		player.debug("House location: " + houseRegion.getBaseLocation() + ", entry: " + getEnterLocation());
 	}
 
 	/**

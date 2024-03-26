@@ -287,7 +287,7 @@ public enum Consumables {
 	CUP_OF_TEA(new Drink(new int[] {712, 1980}, new MultiEffect(new HealingEffect(3), new SkillEffect(Skills.ATTACK, 3, 0)), "Aaah, nothing like a nice cuppa tea!")),
 	CUP_OF_TEA_NETTLE(new Drink(new int[] {4242, 1980}, new EnergyEffect(10))),
 	CUP_OF_TEA_MILKY_NETTLE(new Drink(new int[] {4243, 1980}, new EnergyEffect(10))),
-	NETTLE_TEA(new Drink(new int[] {4239, 1980}, new NettleTeaEffect())),
+	NETTLE_TEA(new Drink(new int[] {4239, 1923}, new NettleTeaEffect())),
 	NETTLE_TEA_MILKY(new Drink(new int[] {4240, 1980}, new NettleTeaEffect())),
 	CUP_OF_TEA_CLAY(new Drink(new int[] {7730, 7728}, new SkillEffect(Skills.CONSTRUCTION, 1, 0), "You feel refreshed and ready for more building.")),
 	CUP_OF_TEA_CLAY_MILKY(new Drink(new int[] {7731, 7728}, new SkillEffect(Skills.CONSTRUCTION, 1, 0))),

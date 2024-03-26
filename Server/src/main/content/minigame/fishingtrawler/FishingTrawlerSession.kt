@@ -160,6 +160,9 @@ class FishingTrawlerSession(val activity: FishingTrawlerActivity? = null) : MapA
 
             for(player in session.players){
                 session.updateOverlay(player)
+                if(session.timeLeft <= 1) {
+                    lockInteractions(player, 2)
+                }
             }
             session.tickMurphy()
             return !session.isActive

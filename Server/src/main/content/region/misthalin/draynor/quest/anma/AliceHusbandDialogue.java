@@ -1,10 +1,12 @@
 package content.region.misthalin.draynor.quest.anma;
 
 import core.game.dialogue.DialoguePlugin;
+import core.game.dialogue.FacialExpression;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import content.region.misthalin.draynor.quest.anma.AnmaCutscene;
+import org.rs09.consts.Items;
 
 /**
  * Handles the husband of alice's npc dialogue.
@@ -46,6 +48,10 @@ public final class AliceHusbandDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean open(Object... args) {
+		if (!player.getEquipment().containsAtLeastOneItem(Items.GHOSTSPEAK_AMULET_552)) {
+			npc("Wooo wooo wooooo!");
+			return true;
+		}
 		quest = player.getQuestRepository().getQuest(AnimalMagnetism.NAME);
 		switch (quest.getStage(player)) {
 		case 0:
@@ -85,6 +91,10 @@ public final class AliceHusbandDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
+		if (!player.getEquipment().containsAtLeastOneItem(Items.GHOSTSPEAK_AMULET_552)) {
+			end();
+			return true;
+		}
 		switch (quest.getStage(player)) {
 		default:
 			switch (stage) {
