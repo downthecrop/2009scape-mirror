@@ -49,7 +49,8 @@ class MasterCrafterDialogue(player: Player? = null) : DialoguePlugin(player) {
             ).also { stage++ }
 
             101 -> options(
-                "99000 gold! Are you mad?", "That's fine."
+                "99000 gold! Are you mad?",
+                "That's fine."
             ).also { stage++ }
 
             102 -> {
@@ -59,26 +60,10 @@ class MasterCrafterDialogue(player: Player? = null) : DialoguePlugin(player) {
                         "99000 gold! Are you mad?"
                     ).also { stage++ }
 
-                    2 -> {
-                        when {
-                            !inInventory(player, Items.COINS_995, 99000) -> playerl(
-                                FacialExpression.NEUTRAL,
-                                "But, unfortunately, I don't have enough money with me."
-                            ).also { stage = 111 }
-
-                            freeSlots(player) < 2 -> npcl(
-                                FacialExpression.FRIENDLY,
-                                "Unfortunately all Skillcapes are only available with a free hood, it's part " +
-                                        "of a skill promotion deal; buy one get one free, you know. So you'll need " +
-                                        "to free up some inventory space before I can sell you one."
-                            ).also { stage = END_DIALOGUE }
-
-                            else -> playerl(
-                                FacialExpression.FRIENDLY,
-                                "That's fine."
-                            ).also { stage = 112 }
-                        }
-                    }
+                    2 -> playerl(
+                        FacialExpression.FRIENDLY,
+                        "That's fine."
+                    ).also { stage = 110 }
                 }
             }
 
@@ -88,19 +73,34 @@ class MasterCrafterDialogue(player: Player? = null) : DialoguePlugin(player) {
                         "such a prestigious item! You can find me here if you change your mind."
             ).also { stage = END_DIALOGUE }
 
+            110 -> {
+                when {
+                    !inInventory(player, Items.COINS_995, 99000) -> playerl(
+                        FacialExpression.NEUTRAL,
+                        "But, unfortunately, I don't have enough money with me."
+                    ).also { stage = 111 }
+
+                    freeSlots(player) < 2 -> npcl(
+                        FacialExpression.FRIENDLY,
+                        "Unfortunately all Skillcapes are only available with a free hood, it's part " +
+                                "of a skill promotion deal; buy one get one free, you know. So you'll need " +
+                                "to free up some inventory space before I can sell you one."
+                    ).also { stage = END_DIALOGUE }
+
+                    else -> {
+                        Skillcape.purchase(player, Skills.CRAFTING)
+                        npcl(
+                            FacialExpression.FRIENDLY,
+                            "Excellent! Wear that cape with pride my friend."
+                        ).also { stage = END_DIALOGUE }
+                    }
+                }
+            }
 
             111 -> npcl(
                 FacialExpression.FRIENDLY,
                 "Well, come back and see me when you do."
             ).also { stage = END_DIALOGUE }
-
-            112 -> {
-                Skillcape.purchase(player, Skills.CRAFTING)
-                npcl(
-                    FacialExpression.FRIENDLY,
-                    "Excellent! Wear that cape with pride my friend."
-                ).also { stage = END_DIALOGUE }
-            }
         }
         return true
     }
