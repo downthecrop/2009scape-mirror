@@ -25,7 +25,7 @@ class GlassMakePulse(
         sendMessage(player, "You heat the sand and soda ash in the furnace to make glass.")
 
         if (removeItem(player, Items.SODA_ASH_1781) && removeItem(player, Items.BUCKET_OF_SAND_1783)) {
-            addItem(player, Items.EMPTY_BUCKET_3727)
+            addItem(player, Items.BUCKET_1925)
             addItem(player, Items.MOLTEN_GLASS_1775)
             rewardXP(player, Skills.CRAFTING, 20.0)
             player.dispatch(ResourceProducedEvent(product, amount, player))
