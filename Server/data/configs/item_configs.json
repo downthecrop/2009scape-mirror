@@ -131030,14 +131030,5 @@
     "archery_ticket_price": "0",
     "id": "14658",
     "equipment_slot": "0"
-  },
-  {
-    "destroy_message": "You can find another one of these by searching things.",
-    "examine": "A not so hidden egg.",
-    "name": "Easter egg",
-    "tradeable": "false",
-    "archery_ticket_price": "0",
-    "destroy": "true",
-    "id": "14659"
   }
 ]
