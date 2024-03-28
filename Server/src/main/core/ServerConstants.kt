@@ -7,6 +7,7 @@ import core.tools.mysql.Database
 import core.tools.secondsToTicks
 import rs09.game.content.activity.castlewars.CastleWars
 import java.math.BigInteger
+import java.util.*
 
 /**
  * A class holding various variables for the server.
@@ -316,12 +317,18 @@ class ServerConstants {
         var HOLIDAY_EVENT_RANDOMS = true
 
         @JvmField
-        var FORCE_HALLOWEEN_RANDOMS = false
+        var FORCE_HALLOWEEN_EVENTS = false
 
         @JvmField
-        var FORCE_CHRISTMAS_RANDOMS = false
+        var FORCE_CHRISTMAS_EVENTS = false
+
+        @JvmField
+        var FORCE_EASTER_EVENTS = false
 
         @JvmField
         var RUNECRAFTING_FORMULA_REVISION = 581
+
+        @JvmField
+        var STARTUP_MOMENT = Calendar.getInstance()
     }
 }

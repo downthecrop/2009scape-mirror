@@ -1,16 +1,15 @@
 package core.game.system.config
 
 import com.moandjiezana.toml.Toml
-import core.game.world.map.Location
-import core.tools.mysql.Database
 import core.ServerConstants
 import core.api.log
 import core.api.parseEnumEntry
-import core.tools.SystemLogger
 import core.game.world.GameSettings
 import core.game.world.GameWorld
+import core.game.world.map.Location
 import core.tools.Log
 import core.tools.LogLevel
+import core.tools.mysql.Database
 import java.io.File
 import java.net.URL
 import kotlin.system.exitProcess
@@ -162,8 +161,9 @@ object ServerConfigParser {
         ServerConstants.BETTER_DFS = data.getBoolean("world.better_dfs", true)
         ServerConstants.NEW_PLAYER_ANNOUNCEMENT = data.getBoolean("world.new_player_announcement", true)
         ServerConstants.HOLIDAY_EVENT_RANDOMS = data.getBoolean("world.holiday_event_randoms", true)
-        ServerConstants.FORCE_HALLOWEEN_RANDOMS = data.getBoolean("world.force_halloween_randoms", false)
-        ServerConstants.FORCE_CHRISTMAS_RANDOMS = data.getBoolean("world.force_christmas_randoms", false)
+        ServerConstants.FORCE_HALLOWEEN_EVENTS = data.getBoolean("world.force_halloween_randoms", false)
+        ServerConstants.FORCE_CHRISTMAS_EVENTS = data.getBoolean("world.force_christmas_randoms", false)
+        ServerConstants.FORCE_EASTER_EVENTS = data.getBoolean("world.force_easter_randoms", true)
         ServerConstants.RUNECRAFTING_FORMULA_REVISION = data.getLong("world.runecrafting_formula_revision", 581).toInt()
 
         val logLevel = data.getString("server.log_level", "VERBOSE").uppercase()
