@@ -38,8 +38,8 @@ class EasterEvent : WorldEvent("easter"), TickListener, InteractionListener, Log
         for (egg in spawnedItems)
         {
             GroundItemManager.destroy(egg)
-            spawnedItems.clear()
         }
+        spawnedItems.clear()
 
         val (locName, locData) = getRandomLocations()
         currentLoc = locName
