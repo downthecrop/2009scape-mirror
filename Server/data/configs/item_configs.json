@@ -131022,7 +131022,7 @@
   {
     "destroy_message": "This item can not be reclaimed.",
     "shop_price": "1",
-    "examine": "A rabbit-like dornment, back in black!",
+    "examine": "A rabbit-like adornment, back in black!",
     "name": "Bunny ears",
     "tradeable": "false",
     "destroy": "true",
