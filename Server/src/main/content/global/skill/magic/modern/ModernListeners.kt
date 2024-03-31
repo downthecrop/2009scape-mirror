@@ -239,7 +239,7 @@ class ModernListeners : SpellListener("modern"){
         }
 
         val coins = Item(995, item.definition.getAlchemyValue(high))
-        if (coins.amount > 0 && !player.inventory.hasSpaceFor(coins)) {
+        if (item.amount > 1 && coins.amount > 0 && !player.inventory.hasSpaceFor(coins)) {
             player.sendMessage("Not enough space in your inventory!")
             return false
         }
@@ -258,11 +258,10 @@ class ModernListeners : SpellListener("modern"){
         }
         playAudio(player, if (high) Sounds.HIGH_ALCHEMY_97 else Sounds.LOW_ALCHEMY_98)
 
-        if (coins.amount > 0)
-            player.inventory.add(coins)
-
         player.dispatch(ItemAlchemizationEvent(item.id, high))
-        player.inventory.remove(Item(item.id, 1))
+        if (player.inventory.remove(Item(item.id, 1)) && coins.amount > 0) {
+            player.inventory.add(coins)
+        }
         removeRunes(player)
         addXP(player, if (high) 65.0 else 31.0)
         showMagicTab(player)

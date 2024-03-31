@@ -11,8 +11,12 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import org.rs09.consts.Items;
 
 import java.util.Map;
+
+import static core.api.ContentAPIKt.freeSlots;
+import static core.api.ContentAPIKt.inInventory;
 
 /**
  * Represents the gertrude dialogue plugin.
@@ -55,14 +59,14 @@ public final class GertrudeDialogue extends DialoguePlugin {
 		final Quest quest = player.getQuestRepository().getQuest("Gertrude's Cat");
 		switch (quest.getStage(player)) {
 		case 0:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Hello, are you ok?");
+			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Hello, are you OK?");
 			break;
 		case 10:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Hello Gertrude.");
+			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Hello, Gertrude.");
 			stage = 210;
 			break;
 		case 20:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Hello Gertrude.");
+			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Hello, Gertrude.");
 			stage = 230;
 			break;
 		case 30:
@@ -94,7 +98,7 @@ public final class GertrudeDialogue extends DialoguePlugin {
 		final Quest quest = player.getQuestRepository().getQuest("Gertrude's Cat");
 		switch (stage) {
 		case 0:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Do I look ok? Those kids drive me crazy.");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Do I look OK? Those kids drive me crazy.");
 			stage = 1;
 			break;
 		case 1:
@@ -260,7 +264,7 @@ public final class GertrudeDialogue extends DialoguePlugin {
 			stage = 323;
 			break;
 		case 323:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "That's ok, I like to do my bit.");
+			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "That's OK, I like to do my bit.");
 			stage = 324;
 			break;
 		case 324:
@@ -331,7 +335,7 @@ public final class GertrudeDialogue extends DialoguePlugin {
 		case 503:
 			boolean has = false;
 			int[] kittens = new int[] { 1555, 1556, 1557, 1558, 1559, 1560, 7583 };
-			if (player.getFamiliarManager().hasFamiliar()) {
+			if (player.getFamiliarManager().hasFamiliar() && player.getFamiliarManager().hasPet()) {
 				Pet pet = (Pet) player.getFamiliarManager().getFamiliar();
 				for (int i : kittens) {
 					if (pet.getItemId() == i) {
@@ -362,12 +366,15 @@ public final class GertrudeDialogue extends DialoguePlugin {
 		case 901:
 			switch (buttonId) {
 			case 1:// yes
-				if (!player.getInventory().contains(995, 100)) {
-					player.getPacketDispatch().sendMessage("You need a 100 coins to buy a kitten.");
+				boolean hasMoney = inInventory(player, Items.COINS_995, 100);
+				if (!hasMoney) {
+					player.getPacketDispatch().sendMessage("You need 100 coins to buy a kitten.");
 					end();
 					break;
 				} else {
-					if (player.getInventory().freeSlots() == 0) {
+					boolean hasExtraMoney = inInventory(player, Items.COINS_995, 101);
+					boolean hasSpace = freeSlots(player) > 0 || !hasExtraMoney;
+					if (player.getFamiliarManager().hasFamiliar() && !hasSpace) {
 						player.getPacketDispatch().sendMessage("You don't have enough inventory space.");
 						end();
 						break;
@@ -382,7 +389,7 @@ public final class GertrudeDialogue extends DialoguePlugin {
 			}
 			break;
 		case 903:
-			interpreter.sendDialogues(npc, null, "Ok then, here you go.");
+			interpreter.sendDialogues(npc, null, "OK then, here you go.");
 			stage = 904;
 			break;
 		case 904:
@@ -390,16 +397,15 @@ public final class GertrudeDialogue extends DialoguePlugin {
 			stage = 905;
 			break;
 		case 905:
-			if (!player.getInventory().containsItem(COINS)) {
-				end();
-				return true;
-			}
 			if (player.getInventory().remove(COINS)) {
 				interpreter.sendDialogue("Gertrude gives you another kitten.");
 				stage = 906;
 				final Item kitten = getKitten();
-				player.getInventory().add(kitten);
-				player.getFamiliarManager().summon(kitten, true);
+				if (player.getFamiliarManager().hasFamiliar()) {
+					player.getInventory().add(kitten);
+				} else {
+					player.getFamiliarManager().summon(kitten, true, false);
+				}
 			}
 			break;
 		case 906:
