@@ -16,6 +16,7 @@ import core.net.packet.out.ConstructScenery;
 
 import static core.api.ContentAPIKt.log;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -75,14 +76,12 @@ public class BuildRegionChunk extends RegionChunk {
 				}
 			}
 		}
-		if (items != null) {
-			for (Item item : items) {
-				if (item != null && item.isActive() && item.getLocation() != null) {
-					GroundItem g = (GroundItem) item;
-					if (!g.isPrivate() || g.droppedBy(player)) {
-						ConstructGroundItem.write(buffer, item);
-						updated = true;
-					}
+		ArrayList<GroundItem> totalItems = drawItems(items, player);
+		for (GroundItem item : totalItems) {
+			if (item != null && item.isActive() && item.getLocation() != null) {
+				if (!item.isPrivate() || item.droppedBy(player)) {
+					ConstructGroundItem.write(buffer, item);
+					updated = true;
 				}
 			}
 		}

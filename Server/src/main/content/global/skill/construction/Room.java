@@ -172,9 +172,11 @@ public final class Room {
 					if (object != null && object.getDefinition().hasAction("Build")) {
 						if (properties.isChamber() && BuildingUtils.isDoorHotspot(object)) {
 							if (!placeDoors(house, chunk, object, housePlane, x, y, rotation)) {
+								SceneryBuilder.remove(object);
 								chunk.remove(object);
 							}
 						} else {
+							SceneryBuilder.remove(object);
 							chunk.remove(object);
 						}
 					}

@@ -232,6 +232,10 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             setAttribute (player, "chunkdraw", !getAttribute(player, "chunkdraw", false))
         }
 
+        define("drawclipping", Privilege.ADMIN, "", "Draws the clipping flags of the region you're standing in") {player, _ ->
+            setAttribute (player, "clippingdraw", !getAttribute(player, "clippingdraw", false))
+        }
+
         define("drawregions", Privilege.ADMIN, "", "DRaws the border of the region you're standing in") {player, _ -> 
             setAttribute (player, "regiondraw", !getAttribute(player, "regiondraw", false))
         }

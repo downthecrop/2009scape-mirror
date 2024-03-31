@@ -26,32 +26,32 @@ import static core.api.ContentAPIKt.log;
  *
  */
 public class RegionChunk {
-	
+
 	/**
 	 * The chunk size.
 	 */
 	public static final int SIZE = 8;
-	
+
 	/**
 	 * The base location of the copied region chunk.
 	 */
 	protected Location base;
-	
+
 	/**
 	 * The current base location.
 	 */
 	protected Location currentBase;
-	
+
 	/**
 	 * The region plane.
 	 */
 	protected RegionPlane plane;
-	
+
 	/**
 	 * The items in this chunk.
 	 */
 	protected List<GroundItem> items;
-	
+
 	/**
 	 * The scenerys in this chunk.
 	 */
@@ -61,12 +61,12 @@ public class RegionChunk {
 	 * The rotation.
 	 */
 	protected int rotation;
-	
+
 	/**
 	 * The update flags.
 	 */
 	private List<UpdateFlag<?>> flags = new ArrayList<>(20);
-	
+
 	/**
 	 * Constructs a new {@code RegionChunk} {@code Object}.
 	 * @param base The base location of the region chunk.
@@ -149,62 +149,74 @@ public class RegionChunk {
 				}
 			}
 		}
-                ArrayList<GroundItem> totalItems = items != null ? new ArrayList(items) : new ArrayList();
-
-                boolean drawChunks = player.getAttribute("chunkdraw", false);
-                boolean drawRegions = player.getAttribute("regiondraw", false);
-
-                if (drawChunks) {
-                    Location l = currentBase;
-                    for (int x = 0; x < SIZE; x++) {
-                        for (int y = 0; y < SIZE; y++) {
-                            boolean add = false;
-                            if (y == 0 || y == SIZE - 1)
-                                add = true;
-                            else if (x == 0 || x == SIZE - 1)
-                                add = true;
-                            if (add)
-                                totalItems.add(new GroundItem(new Item(13444), l.transform(x, y, 0), player));
-                        }
-                    }
-                }
-
-                if (drawRegions) {
-                    Location l = currentBase;
-                    int localX = l.getLocalX();
-                    int localY = l.getLocalY();
-                    
-                    for (int x = 0; x < SIZE; x++)
-                        for (int y = 0; y < SIZE; y++) {
-                            boolean add = false;
-                            if (localY == 0 || localY == 56)
-                                if (localY == 0 && y == 0)
-                                    add = true;
-                                else if (localY == 56 && y == SIZE - 1)
-                                    add = true;
-                            if (localX == 0 || localX == 56)
-                                if (localX == 0 && x == 0)
-                                    add = true;
-                                else if (localX == 56 && x == SIZE - 1)
-                                    add = true;
-
-                            if (add)
-                                totalItems.add(new GroundItem(new Item(13444), l.transform(x,y,0), player));
-                    }
-                }
-
-		if (totalItems != null) {
-			for (Item item : totalItems) {
-				if (item != null && item.isActive() && item.getLocation() != null) {
-					GroundItem g = (GroundItem) item;
-					if (!g.isPrivate() || g.droppedBy(player)) {
-						ConstructGroundItem.write(buffer, item);
-						updated = true;
-					}
+		ArrayList<GroundItem> totalItems = drawItems(items, player);
+		for (GroundItem item : totalItems) {
+			if (item != null && item.isActive() && item.getLocation() != null) {
+				if (!item.isPrivate() || item.droppedBy(player)) {
+					ConstructGroundItem.write(buffer, item);
+					updated = true;
 				}
 			}
 		}
 		return updated;
+	}
+
+
+	public ArrayList<GroundItem> drawItems(List<GroundItem> items, Player player) {
+		ArrayList<GroundItem> totalItems = items != null ? new ArrayList<GroundItem>(items) : new ArrayList<GroundItem>();
+
+		if (player.getAttribute("chunkdraw", false)) {
+			Location l = currentBase;
+			for (int x = 0; x < SIZE; x++) {
+				for (int y = 0; y < SIZE; y++) {
+					boolean add = false;
+					if (y == 0 || y == SIZE - 1)
+						add = true;
+					else if (x == 0 || x == SIZE - 1)
+						add = true;
+					if (add)
+						totalItems.add(new GroundItem(new Item(13444), l.transform(x, y, 0), player));
+				}
+			}
+		}
+
+		if (player.getAttribute("regiondraw", false)) {
+			Location l = currentBase;
+			int localX = l.getLocalX();
+			int localY = l.getLocalY();
+
+			for (int x = 0; x < SIZE; x++)
+				for (int y = 0; y < SIZE; y++) {
+					boolean add = false;
+					if (localY == 0 || localY == 56)
+						if (localY == 0 && y == 0)
+							add = true;
+						else if (localY == 56 && y == SIZE - 1)
+							add = true;
+					if (localX == 0 || localX == 56)
+						if (localX == 0 && x == 0)
+							add = true;
+						else if (localX == 56 && x == SIZE - 1)
+							add = true;
+
+					if (add)
+						totalItems.add(new GroundItem(new Item(13444), l.transform(x,y,0), player));
+				}
+		}
+
+		if (player.getAttribute("clippingdraw", false)) {
+			Location l = currentBase;
+			for (int x = 0; x < SIZE; x++) {
+				for (int y = 0; y < SIZE; y++) {
+					int flag = RegionManager.getClippingFlag(l.getZ(), l.getX() + x, l.getY() + y);
+					if (flag > 0) {
+						totalItems.add(new GroundItem(new Item(flag), l.transform(x, y, 0), player));
+					}
+				}
+			}
+		}
+
+		return totalItems;
 	}
 
 	/**
@@ -222,7 +234,7 @@ public class RegionChunk {
 			player.getSession().write(buffer);
 		}
 	}
-	
+
 	/**
 	 * Rotates the chunk.
 	 * @param direction The direction.
@@ -267,7 +279,7 @@ public class RegionChunk {
 			}
 		}
 	}
-	
+
 	/**
 	 * Gets the new coordinates for an object/chunk tile when rotating.
 	 * @param x The current x-coordinate.
@@ -306,7 +318,7 @@ public class RegionChunk {
 		}
 		return items;
 	}
-	
+
 	/**
 	 * Sets the items.
 	 * @param items The items to set.
@@ -324,7 +336,7 @@ public class RegionChunk {
 	public Scenery[] getObjects(int chunkX, int chunkY) {
 		return new Scenery[] { objects[chunkX][chunkY] };
 	}
-	
+
 	/**
 	 * Gets the objects.
 	 * @return The objects.
@@ -387,7 +399,7 @@ public class RegionChunk {
 	public void resetFlags() {
 		flags.clear();
 	}
-	
+
 	/**
 	 * Gets the region plane.
 	 * @return The plane.
