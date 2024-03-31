@@ -45,7 +45,7 @@ public final class MonkOfEntranaDialogue extends DialoguePlugin {
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
 		if (npc.getId() == 2730 || npc.getId() == 658 || npc.getId() == 2731) {
-			interpreter.sendDialogues(npc, null, "Do you wish to leave holy entrana?");
+			interpreter.sendDialogues(npc, null, "Do you wish to leave holy Entrana?");
 			stage = 500;
 			return true;
 		}

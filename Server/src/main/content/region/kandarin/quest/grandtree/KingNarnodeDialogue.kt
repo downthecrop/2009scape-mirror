@@ -231,7 +231,7 @@ class KingNarnodeDialogue : DialogueFile() {
                 when(stage) {
                     0 -> npcl("Hello Traveller, did you speak to Glough?").also { stage++ }
                     1 -> playerl("Not yet.").also { stage++ }
-                    2 -> npcl("OK. He lives just in front of the Grand Tree. Let me know when you’ve talked to him.").also{ stage = END_DIALOGUE }
+                    2 -> npcl("OK. He lives just in front of the Grand Tree. Let me know when you've talked to him.").also{ stage = END_DIALOGUE }
                 }
             }
             45 -> {
@@ -255,7 +255,7 @@ class KingNarnodeDialogue : DialogueFile() {
             }
             55 -> {
                 when(stage){
-                    0 -> playerl("King Nardone, I need to talk!").also { stage++ }
+                    0 -> playerl("King Narnode, I need to talk!").also { stage++ }
                     1 -> npcl("Traveller, what are you doing here? The stronghold has been put on full alert! It's not safe for you here!").also { stage++ }
                     2 -> playerl("Your Highness, I believe Glough is killing the trees in order to make a mass fleet of warships!").also { stage++ }
                     3 -> npcl("That's an absurd accusation!").also { stage++ }

@@ -275,7 +275,7 @@ enum class EnchantedJewellery(
         val slayerManager = getInstance(player)
         if (!slayerManager.hasTask()) {
             sendNPCDialogue(player, slayerManager.master!!.npc, "You need something new to hunt. Come and " +
-                    "see me When you can and I'll give you a new task.", core.game.dialogue.FacialExpression.HALF_GUILTY)
+                    "see me when you can and I'll give you a new task.", core.game.dialogue.FacialExpression.HALF_GUILTY)
             return
         }
         sendNPCDialogue(player, slayerManager.master!!.npc, "You're currently " +

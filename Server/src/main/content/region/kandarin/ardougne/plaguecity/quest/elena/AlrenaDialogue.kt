@@ -29,7 +29,7 @@ class AlrenaDialogue(player: Player? = null) : DialoguePlugin(player) {
             0 -> when (stage) {
                 1 -> npcl(FacialExpression.NEUTRAL, "Oh, hello there.").also { stage++ }
                 2 -> playerl(FacialExpression.FRIENDLY, "Are you ok?").also { stage++ }
-                3 -> npcl(FacialExpression.NEUTRAL, "Not too bad... I've just got some troubles on my mind…").also { stage = END_DIALOGUE }
+                3 -> npcl(FacialExpression.NEUTRAL, "Not too bad... I've just got some troubles on my mind...").also { stage = END_DIALOGUE }
             }
 
             1 -> when (stage) {

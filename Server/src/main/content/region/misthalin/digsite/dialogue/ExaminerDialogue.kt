@@ -173,7 +173,7 @@ class ExaminerDialogueFile : DialogueBuilderFile() {
                                     setQuestStage(player, TheDigSite.questName, 6)
                                 }
                                 openInterface(player, 444)
-                                setInterfaceText(player, player.name, 444, 5)
+                                setInterfaceText(player, player.username, 444, 5)
                             }
 
                 }
@@ -305,7 +305,7 @@ class ExaminerDialogueFile : DialogueBuilderFile() {
                                     setQuestStage(player, TheDigSite.questName, 5)
                                 }
                                 openInterface(player, 441)
-                                setInterfaceText(player, player.name, 441, 5)
+                                setInterfaceText(player, player.username, 441, 5)
                             }
 
                 }
@@ -485,7 +485,7 @@ class ExaminerDialogueFile : DialogueBuilderFile() {
                                     setQuestStage(player, TheDigSite.questName, 4)
                                 }
                                 openInterface(player, 440)
-                                setInterfaceText(player, player.name, 440, 5)
+                                setInterfaceText(player, player.username, 440, 5)
                             }
 
                 }
