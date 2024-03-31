@@ -96,6 +96,13 @@ public final class MusicPlayer {
 	}
 
 	/**
+	 * Clears the unlocked songs. This should only be used in the permadeath code.
+	 */
+	public void clearUnlocked() {
+		this.unlocked.clear();
+	}
+
+	/**
 	 * Checks if the player has enough songs unlocked for the Air guitar emote.
 	 * @return {@code True} if so.
 	 */

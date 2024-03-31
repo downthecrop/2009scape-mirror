@@ -1,42 +1,39 @@
 package core.game.system.command.sets
 
+import content.global.handlers.iface.RulesAndInfo
+import content.global.skill.farming.timers.*
+import content.minigame.fishingtrawler.TrawlerLoot
+import content.region.misthalin.draynor.quest.anma.AnmaCutscene
+import core.ServerConstants
 import core.api.*
-import core.api.InputType
+import core.api.utils.Permadeath.permadeath
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.SceneryDefinition
 import core.cache.def.impl.VarbitDefinition
+import core.game.bots.AIRepository
 import core.game.component.Component
+import core.game.ge.GrandExchange
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
+import core.game.system.command.CommandMapping
+import core.game.system.command.Privilege
 import core.game.system.communication.CommunicationInfo
 import core.game.world.map.RegionManager
 import core.game.world.map.build.DynamicRegion
+import core.game.world.repository.Repository
 import core.plugin.Initializable
+import core.tools.Log
 import core.tools.StringUtils
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.rs09.consts.Components
-import core.ServerConstants
-import core.game.bots.AIRepository
-import core.api.utils.PlayerCamera
-import content.global.ame.RandomEvents
-import content.region.misthalin.draynor.quest.anma.AnmaCutscene
-import core.game.ge.GrandExchange
-import content.global.handlers.iface.RulesAndInfo
-import content.minigame.fishingtrawler.TrawlerLoot
-import core.game.system.command.CommandMapping
-import core.game.system.command.Privilege
-import core.game.world.repository.Repository
-import core.tools.Log
-import core.tools.colorize
 import java.awt.HeadlessException
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
-import content.global.skill.farming.timers.*
 
 @Initializable
 class MiscCommandSet : CommandSet(Privilege.ADMIN){
@@ -375,6 +372,22 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
                     }
                 }
             }
+        }
+
+        /**
+         * Permadeaths a player, resetting their save
+         */
+        define("permadeath", Privilege.ADMIN, "::permadeath <lt>PLAYER<gt>", "Permadeaths PLAYER (self if omitted), completely wiping their save."){player,args ->
+            var target = player
+            if (args.size > 1) {
+                val n = args.slice(1 until args.size).joinToString("_")
+                val foundtarget = Repository.getPlayerByName(n)
+                if (foundtarget == null) {
+                    reject(player, "Invalid player \"${n}\" or player not online")
+                }
+                target = foundtarget!!
+            }
+            permadeath(target)
         }
 
         define("log", Privilege.ADMIN){player,_ ->

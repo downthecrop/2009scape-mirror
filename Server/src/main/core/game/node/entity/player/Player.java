@@ -69,7 +69,6 @@ import core.game.node.entity.combat.CombatSwingHandler;
 import content.global.handlers.item.equipment.EquipmentDegrader;
 import core.game.node.entity.combat.graves.Grave;
 import core.game.node.entity.combat.graves.GraveController;
-import core.game.node.entity.player.info.login.PlayerSaver;
 import core.game.node.entity.state.State;
 import core.game.node.entity.state.StateRepository;
 import core.game.world.GameWorld;
@@ -88,6 +87,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import static core.api.ContentAPIKt.*;
+import static core.api.utils.Permadeath.PermadeathKt.permadeath;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_BASE;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_DEATHS;
 import static core.tools.GlobalsKt.colorize;
@@ -315,7 +315,7 @@ public class Player extends Entity {
 
 	public byte[] opCounts = new byte[255];
 
-        public int invalidPacketCount = 0;
+	public int invalidPacketCount = 0;
 
 	/**
 	 * Constructs a new {@code Player} {@code Object}.
@@ -597,7 +597,7 @@ public class Player extends Entity {
 
 	@Override
 	public void finalizeDeath(Entity killer) {
-                if (!isPlaying()) return; //if the player has already been full cleared, it has already disconnected. This code is probably getting called because something is maintaining a stale reference.
+		if (!isPlaying()) return; //if the player has already been full cleared, it has already disconnected. This code is probably getting called because something is maintaining a stale reference.
 		GlobalStats.incrementDeathCount();
 		settings.setSpecialEnergy(100);
 		settings.updateRunEnergy(settings.getRunEnergy() - 100);
@@ -626,19 +626,7 @@ public class Player extends Entity {
 				String gender = this.isMale() ? "man " : "woman ";
 				if (getAttributes().containsKey("permadeath")) {
 					Repository.sendNews("Permadeath Hardcore Iron" + gender + " " + this.getUsername() + " has fallen. Total Level: " + this.getSkills().getTotalLevel()); // Not enough room for XP
-					equipment.clear();
-					inventory.clear();
-					bank.clear();
-					skills = new Skills(this);
-					clearAttributes();
-					setAttribute("/save:permadeath", true);
-					savedData = new SavedData(this);
-					questRepository = new QuestRepository(this);
-					varpManager = new VarpManager(this);
-                                        varpMap.clear();
-                                        saveVarp.clear();
-					new PlayerSaver(this).save();
-					clear();
+					permadeath(this);
 					return;
 				} else {
 					Repository.sendNews("Hardcore Iron " + gender + " " + this.getUsername() + " has fallen. Total Level: " + this.getSkills().getTotalLevel()); // Not enough room for XP
