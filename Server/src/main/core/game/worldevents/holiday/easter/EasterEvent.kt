@@ -113,7 +113,7 @@ class EasterEvent : WorldEvent("easter"), TickListener, InteractionListener, Log
         }
         else if (eggsBroken == 15)
         {
-            addItem(player, BUN_EARS)
+            addItemOrDrop(player, BUN_EARS)
             sendMessage(player, colorize("%RYou have been given bunny ears!"))
         }
         else if (eggsBroken % 5 == 0)
