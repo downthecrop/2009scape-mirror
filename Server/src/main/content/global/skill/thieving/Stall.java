@@ -6,6 +6,9 @@ import core.tools.RandomFunction;
 
 import java.util.*;
 
+import static org.rs09.consts.Items.CANDLE_36;
+import static org.rs09.consts.Scenery.CANDLES_19127;
+
 /**
  * Represents a thieving stall.
  * @author Ceikry, Woahscam
@@ -28,9 +31,9 @@ public enum Stall {
 	SCIMITAR_STALL(new Integer[]{4878}, new Integer[] { 4797 }, 65, new Item[]{new Item(1323, 1)}, 100, 134,"equipment"),
 	MAGIC_STALL(new Integer[]{4877}, new Integer[] { 4797 }, 65, new Item[]{new Item(556, 1), new Item(557, 1), new Item(554, 1), new Item(555, 1), new Item(563, 1)}, 100, 134,"equipment"),
 	GENERAL_STALL(new Integer[]{4876}, new Integer[] { 4797 }, 5, new Item[]{new Item(1931, 1), new Item(2347, 1), new Item(590, 1)}, 16, 12,"goods"),
-	FOOD_STALL(new Integer[]{4875}, new Integer[] { 4797 }, 5, new Item[]{new Item(1963, 1)}, 16, 12,"food");
+	FOOD_STALL(new Integer[]{4875}, new Integer[] { 4797 }, 5, new Item[]{new Item(1963, 1)}, 16, 12,"food"),
 	//CRAFTING_STALL (Ape Atoll) shares same drops/exp as regular crafting stall
-
+	CANDLES(new Integer[]{CANDLES_19127}, new Integer[]{CANDLES_19127}, 20, new Item[]{new Item(CANDLE_36, 1)}, 20, 0, "candles");
 	//Quest Stalls Rocking Out
 	//CUSTOMS_EVIDENCE_FILES(new Integer[]{FIND OBJ ID}, FIND OBJ EMPTY ID, 63, new Item[]{new Item(1333, 1), new Item(1617, 1), new Item(1619, 1), new Item(1623, 1), new Item(385, 1), new Item(2359, 1), new Item(2357, 1), new Item(2351, 1), new Item(7114, 1), new Item(7134, 1), new Item(1025, 1), new Item(1281, 1), new Item(1325, 1), new Item(1323, 1), new Item(1321, 1), new Item(995, 300)}, 75, 100);
 

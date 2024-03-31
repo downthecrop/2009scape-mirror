@@ -2847,6 +2847,10 @@ fun delayAttack(entity: Entity, ticks: Int) {
 }
 
 fun stun(entity: Entity, ticks: Int) {
+    stun(entity, ticks, true)
+}
+
+fun stun(entity: Entity, ticks: Int, sendMessage: Boolean) {
     entity.walkingQueue.reset()
     entity.pulseManager.clear()
     entity.locks.lockMovement(ticks)
@@ -2855,7 +2859,9 @@ fun stun(entity: Entity, ticks: Int) {
     if (entity is Player) {
         playAudio(entity.asPlayer(), Sounds.STUNNED_2727)
         entity.animate(Animation(424, Animator.Priority.VERY_HIGH))
-        sendMessage(entity, "You have been stunned!")
+        if (sendMessage) {
+            sendMessage(entity, "You have been stunned!")
+        }
     }
 }
 

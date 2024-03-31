@@ -20,6 +20,7 @@ public class ThievingOptionPlugin extends OptionHandler {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		SceneryDefinition.setOptionHandler("steal-from", this);
 		SceneryDefinition.setOptionHandler("steal from", this);
+		SceneryDefinition.setOptionHandler("steal", this);
 		return this;
 	}
 
@@ -28,6 +29,7 @@ public class ThievingOptionPlugin extends OptionHandler {
 		switch (option) {
 		case "steal-from":
 		case "steal from":
+		case "steal":
 			player.getPulseManager().run(new StallThiefPulse(player, (Scenery) node, Stall.forObject((Scenery) node)));
 			player.getLocks().lockInteractions(6);
 			break;

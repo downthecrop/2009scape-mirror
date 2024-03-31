@@ -1,6 +1,7 @@
 package content.global.skill.thieving;
 
 import core.game.event.ResourceProducedEvent;
+import core.game.node.entity.combat.ImpactHandler;
 import core.game.node.entity.skill.SkillPulse;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.npc.NPC;
@@ -9,6 +10,8 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.world.GameWorld;
+import core.game.world.map.Direction;
+import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
@@ -119,6 +122,9 @@ public final class StallThiefPulse extends SkillPulse<Scenery> {
 				player.getPacketDispatch().sendMessage("You steal grapes from the grape stall.");
 				return true;
 			}
+			if(stall == Stall.CANDLES) {
+				return true;
+			}
 			player.getPacketDispatch().sendMessage("You steal " + (StringUtils.isPlusN(item.getName()) ? "an" : "a") + " " + item.getName().toLowerCase() + " from the " + stall.name().toLowerCase().replace('_',' ') + ".");
 			player.dispatch(new ResourceProducedEvent(item.getId(), item.getAmount(), node, 0));
 		}
@@ -127,11 +133,12 @@ public final class StallThiefPulse extends SkillPulse<Scenery> {
 
 	@Override
 	public void message(int type) {
-		switch (type) {
-		case 0:
-			player.getPacketDispatch().sendMessage("You attempt to steal some " + stall.msgItem +  " from the " + stall.name().toLowerCase().replace('_',' '));
-			break;
+		if(stall == Stall.CANDLES) {
+			return;
 		}
+        if (type == 0) {
+            player.getPacketDispatch().sendMessage("You attempt to steal some " + stall.msgItem + " from the " + stall.name().toLowerCase().replace('_', ' '));
+        }
 	}
 
 	/**
@@ -141,6 +148,15 @@ public final class StallThiefPulse extends SkillPulse<Scenery> {
 	private boolean success() {
 		int mod = 0;
 		if (RandomFunction.random(15 + mod) < 4) {
+			if(stall == Stall.CANDLES) {
+				stun(player, 15, false);
+				impact(player, 1, ImpactHandler.HitsplatType.NORMAL);
+				// Location playerLoc = player.getLocation();
+				// forceMove(player, playerLoc, new Location(playerLoc.getX() - 1, playerLoc.getY() - 1),
+				// 		0, 4, Direction.SOUTH_WEST, 819, null);
+				player.sendMessage("A higher power smites you");
+				return false;
+			}
 			for (NPC npc : RegionManager.getLocalNpcs(player.getLocation(), 8)) {
 				if (!npc.getProperties().getCombatPulse().isAttacking() && (npc.getId() == 32 || npc.getId() == 2236)) {
 					npc.sendChat("Hey! Get your hands off there!");
