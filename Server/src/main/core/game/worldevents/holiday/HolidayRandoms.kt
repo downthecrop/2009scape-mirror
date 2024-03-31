@@ -75,10 +75,10 @@ class HolidayRandoms() : PersistTimer(0, "holiday", isAuto = true), Commands {
 
     fun checkIfHoliday(): String {
         val currentDate = LocalDate.now()
-        if ((!currentDate.isBefore(halloweenStartDate) && !currentDate.isAfter(halloweenEndDate)) || ServerConstants.FORCE_HALLOWEEN_RANDOMS)
+        if ((!currentDate.isBefore(halloweenStartDate) && !currentDate.isAfter(halloweenEndDate)) || ServerConstants.FORCE_HALLOWEEN_EVENTS)
             return "halloween"
 
-        if ((!currentDate.isBefore(christmasStartDate) && !currentDate.isAfter(christmasEndDate)) || ServerConstants.FORCE_CHRISTMAS_RANDOMS)
+        if ((!currentDate.isBefore(christmasStartDate) && !currentDate.isAfter(christmasEndDate)) || ServerConstants.FORCE_CHRISTMAS_EVENTS)
             return "christmas"
 
         return "none"
@@ -164,7 +164,7 @@ class HolidayRandoms() : PersistTimer(0, "holiday", isAuto = true), Commands {
             ServerConstants.HOLIDAY_EVENT_RANDOMS = true
             when (event) {
                 "halloween" -> {
-                    ServerConstants.FORCE_HALLOWEEN_RANDOMS = true
+                    ServerConstants.FORCE_HALLOWEEN_EVENTS = true
                     for (p in Repository.players) {
                         if (getTimer<HolidayRandoms>(p) != null || p.isArtificial) {
                             continue
@@ -174,7 +174,7 @@ class HolidayRandoms() : PersistTimer(0, "holiday", isAuto = true), Commands {
                     }
                 }
                 "christmas" -> {
-                    ServerConstants.FORCE_CHRISTMAS_RANDOMS = true
+                    ServerConstants.FORCE_CHRISTMAS_EVENTS = true
                     for (p in Repository.players) {
                         if (getTimer<HolidayRandoms>(p) != null || p.isArtificial) {
                             continue
@@ -191,8 +191,8 @@ class HolidayRandoms() : PersistTimer(0, "holiday", isAuto = true), Commands {
             if (checkIfHoliday() == "none" || !ServerConstants.HOLIDAY_EVENT_RANDOMS)
                 reject(player, "No holiday random events are currently active.")
             ServerConstants.HOLIDAY_EVENT_RANDOMS = false
-            ServerConstants.FORCE_HALLOWEEN_RANDOMS = false
-            ServerConstants.FORCE_CHRISTMAS_RANDOMS = false
+            ServerConstants.FORCE_HALLOWEEN_EVENTS = false
+            ServerConstants.FORCE_CHRISTMAS_EVENTS = false
             for (p in Repository.players) {
                 if (getTimer<HolidayRandoms>(p) == null) {
                     continue

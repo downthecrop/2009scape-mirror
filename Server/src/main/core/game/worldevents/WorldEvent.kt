@@ -1,42 +1,33 @@
 package core.game.worldevents
 
-import core.tools.SystemLogger
-import core.plugin.Plugin
-import org.json.simple.JSONObject
 import core.ServerStore
+import core.api.ContentInterface
 import core.plugin.ClassScanner
+import core.plugin.Plugin
 import core.tools.Log
+import org.json.simple.JSONObject
 import java.util.*
 
 /**
  * The class other world events should extend off of.
  * @author Ceikry
  */
-open class WorldEvent(var name: String) {
+abstract class WorldEvent(var name: String) : ContentInterface {
     var plugins = PluginSet()
 
     /**
      * if the event is active or not. Can be used to check dates or just always return true
      * whatever you need for this specific event
      */
-    open fun checkActive(): Boolean {
+    open fun checkActive(cal: Calendar): Boolean {
         return false
     }
 
     /**
-     * Check to see if the event should trigger. An event trigger could spawn shooting stars, or a world boss
-     * or whatever kind of whacky shit you need it to do.
-     */
-    open fun checkTrigger(): Boolean{
-        return true
-    }
-
-    /**
-     * Used to initialize the event, which loads all associated plugins.
+     * Used to initialize the event
      * The WorldEventInitializer runs this if checkActive() returns true.
      */
-    open fun initialize(){
-        plugins.initialize()
+    open fun initEvent(){
     }
 
     /**
@@ -45,11 +36,6 @@ open class WorldEvent(var name: String) {
     fun log(message: String){
         core.api.log(this::class.java, Log.FINE,  "[World Events($name)] $message")
     }
-
-    /**
-     * Used to start, or "fire", world events.
-     */
-    open fun fireEvent() {}
 }
 
 
@@ -74,11 +60,11 @@ object WorldEvents {
     private var events = hashMapOf<String, WorldEvent>()
 
     fun add(event: WorldEvent){
-        events.put(event.name.toLowerCase(),event)
+        events[event.name.lowercase(Locale.getDefault())] = event
     }
 
     fun get(name: String): WorldEvent?{
-        return events.get(name.toLowerCase())
+        return events[name.lowercase(Locale.getDefault())]
     }
 
     fun getArchive() : JSONObject {

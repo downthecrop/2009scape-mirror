@@ -1,29 +1,32 @@
 package core.plugin
 
+import core.ServerConstants
 import core.api.*
 import core.game.activity.ActivityManager
 import core.game.activity.ActivityPlugin
-import core.game.node.entity.Entity
-import core.game.node.entity.player.info.login.LoginConfiguration
-import core.game.node.entity.player.link.quest.Quest
-import core.game.node.entity.player.link.quest.QuestRepository
-import core.game.world.map.Location
-import core.game.world.map.zone.MapZone
-import core.game.world.map.zone.ZoneBuilder
-import io.github.classgraph.ClassGraph
-import io.github.classgraph.ClassInfo
-import io.github.classgraph.ScanResult
-import core.game.system.timer.*
 import core.game.bots.PlayerScripts
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
+import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPCBehavior
+import core.game.node.entity.player.info.login.LoginConfiguration
 import core.game.node.entity.player.info.login.PlayerSaveParser
 import core.game.node.entity.player.info.login.PlayerSaver
-import core.tools.SystemLogger
-import core.tools.SystemLogger.logStartup
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.player.link.quest.QuestRepository
+import core.game.system.timer.RSTimer
+import core.game.system.timer.TimerRegistry
 import core.game.world.GameWorld
+import core.game.world.map.Location
+import core.game.world.map.zone.MapZone
+import core.game.world.map.zone.ZoneBuilder
+import core.game.worldevents.WorldEvent
+import core.game.worldevents.WorldEvents
 import core.tools.Log
+import core.tools.SystemLogger.logStartup
+import io.github.classgraph.ClassGraph
+import io.github.classgraph.ClassInfo
+import io.github.classgraph.ScanResult
 import java.util.function.Consumer
 
 /**
@@ -90,6 +93,10 @@ object ClassScanner {
         scanResults.getClassesImplementing("core.api.ContentInterface").filter { !it.isAbstract }.forEach {
             try {
                 val clazz = it.loadClass().newInstance()
+                if(clazz is WorldEvent) { //Check world event first so if it's not active we don't register tick listeners, etc.
+                    if (!clazz.checkActive(ServerConstants.STARTUP_MOMENT)) return@forEach
+                    WorldEvents.add(clazz)
+                }
                 if(clazz is LoginListener) GameWorld.loginListeners.add(clazz)
                 if(clazz is LogoutListener) GameWorld.logoutListeners.add(clazz)
                 if(clazz is TickListener) GameWorld.tickListeners.add(clazz)

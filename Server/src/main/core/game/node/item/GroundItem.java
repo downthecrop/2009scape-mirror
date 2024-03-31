@@ -37,6 +37,8 @@ public class GroundItem extends Item {
 	 */
 	private boolean removed;
 
+	public boolean forceVisible;
+
 	/**
 	 * Constructs a new {@code GroundItem} {@code Object}.
 	 * @param item The item
@@ -99,7 +101,7 @@ public class GroundItem extends Item {
 	 * @return {@code True} if so.
 	 */
 	public boolean isPrivate() {
-		return remainPrivate || (decayTime - GameWorld.getTicks() > 100);
+		return !forceVisible && (remainPrivate || (decayTime - GameWorld.getTicks() > 100));
 	}
 
 	@Override

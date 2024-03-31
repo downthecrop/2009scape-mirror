@@ -131018,5 +131018,17 @@
     "examine": "You should not have this.",
     "name": "ASDT Slot",
     "id": "14430"
+  },
+  {
+    "destroy_message": "This item can not be reclaimed.",
+    "shop_price": "1",
+    "examine": "A rabbit-like adornment, back in black!",
+    "name": "Bunny ears",
+    "tradeable": "false",
+    "destroy": "true",
+    "weight": "0.2",
+    "archery_ticket_price": "0",
+    "id": "14658",
+    "equipment_slot": "0"
   }
 ]
