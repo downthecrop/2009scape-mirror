@@ -567,6 +567,7 @@ public final class HouseManager {
 				break;
 			}
 			case SOUTH: {
+				chunkX = 7 - chunkX;
 				chunkY = 7 - chunkY;
 				break;
 			}

@@ -68,7 +68,7 @@ public enum RoomProperties {
 			new Hotspot(BuildHotspot.TREE_1, 6, 6,7,7)),
 
 	/**
-	 * Woman's place.
+	 * The kitchen.
 	 */
 	KITCHEN(5000, 5, 0, 2, 7, Room.CHAMBER, new Hotspot(BuildHotspot.CAT_BLANKET, 0, 0),
 			new Hotspot(BuildHotspot.WINDOW, 0, 2),
