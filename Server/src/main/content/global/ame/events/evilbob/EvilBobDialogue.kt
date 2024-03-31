@@ -22,10 +22,8 @@ class EvilBobDialogue(val rewardDialogue: Boolean = false, val rewardXpSkill: In
                     } else if (getAttribute(player!!, EvilBobUtils.eventComplete, false)) {
                         sendDialogue(player!!, "Evil Bob appears to be sleeping, best not to wake him up.").also { stage = END_DIALOGUE }
                     } else if (removeItem(player!!, Items.RAW_FISHLIKE_THING_6200)) {
-                        setAttribute(player!!, EvilBobUtils.fishCaught, false)
                         playerl(FacialExpression.NEUTRAL, "Here, I've brought you some fish.").also { stage = 500 }
                     } else if (removeItem(player!!, Items.RAW_FISHLIKE_THING_6204)) {
-                        setAttribute(player!!, EvilBobUtils.fishCaught, false)
                         setAttribute(player!!, EvilBobUtils.attentive, true)
                         setAttribute(player!!, EvilBobUtils.attentiveNewSpot, true)
                         playerl(FacialExpression.NEUTRAL, "Here, I've brought you some fish.").also { stage = 600 }

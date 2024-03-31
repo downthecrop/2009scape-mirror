@@ -37,7 +37,8 @@ class EvilBobListeners : InteractionListener, MapArea {
                 sendNPCDialogue(player, NPCs.SERVANT_2481, "You'll need a fishing net. There are plenty scattered around the beach.", FacialExpression.SAD)
             } else if (freeSlots(player) == 0) {
                 sendDialogue(player, "You don't have enough space in your inventory.")
-            } else if (getAttribute(player, EvilBobUtils.fishCaught, false)) {
+            } else if (inInventory(player, Items.FISHLIKE_THING_6202) || inInventory(player, Items.FISHLIKE_THING_6206) ||
+                    inInventory(player, Items.RAW_FISHLIKE_THING_6200) || inInventory(player, Items.RAW_FISHLIKE_THING_6204)) {
                 sendNPCDialogue(player, NPCs.SERVANT_2481, "You've already got a fish. Come over here to uncook it, then serve it to Evil Bob.", FacialExpression.SAD)
             } else {
                 lock(player, 6)
@@ -68,7 +69,6 @@ class EvilBobListeners : InteractionListener, MapArea {
                     }
                     sendItemDialogue(player, Items.FISHLIKE_THING_6202, "You catch a... what is this?? Is this a fish?? And it's cooked already??")
                     resetAnimator(player)
-                    setAttribute(player, EvilBobUtils.fishCaught, true)
                 }
             }
             return@on true
