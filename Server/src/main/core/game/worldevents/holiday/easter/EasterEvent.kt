@@ -61,7 +61,7 @@ class EasterEvent : WorldEvent("easter"), TickListener, InteractionListener, Log
 
     override fun login(player: Player) {
         if (spawnedItems.isNotEmpty())
-            sendMessage(player, colorize("%GEggs have been spotted in $currentLoc!"))
+            sendMessage(player, colorize("%GEggs were last spotted in $currentLoc!"))
         player.hook(Event.XpGained, xpEventHook)
     }
 
