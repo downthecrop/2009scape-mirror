@@ -62,14 +62,25 @@ class EasterEventTests {
             sampleB = inst.getRandomLocations()
         }
         Assertions.assertEquals(true, similarityTolerance > 0)
+    }
 
-        val usedLocations = ArrayList<Location>()
-        for (loc in sampleB.second)
+    @Test fun eachLocationGroupShouldContainNoDuplicateLocations() {
+        for (locSet in arrayOf(
+            EasterEvent.FALADOR_SPOTS,
+            EasterEvent.EDGEVILLE_SPOTS,
+            EasterEvent.DRAYNOR_SPOTS,
+            EasterEvent.LUMBRIDGE_SPOTS,
+            EasterEvent.TREE_GNOME_STRONGHOLD_SPOTS
+        ))
         {
-            if (!usedLocations.contains(loc))
-                usedLocations.add(loc)
-            else
-                Assertions.fail("Loc $loc appeared more than once!")
+            val usedLocations = ArrayList<Location>()
+            for (loc in locSet)
+            {
+                if (!usedLocations.contains(loc))
+                    usedLocations.add(loc)
+                else
+                    Assertions.fail("Loc $loc appeared more than once!")
+            }
         }
     }
 
