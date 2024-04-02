@@ -26,7 +26,7 @@ import core.tools.colorize
 import org.rs09.consts.Items
 import java.util.*
 
-class EasterEvent : WorldEvent("easter"), TickListener, InteractionListener, LoginListener {
+class EasterEvent : WorldEvent("easter"), TickListener, InteractionListener, LoginListener, Commands {
     private val spawnedItems = ArrayList<GroundItem>()
     private var timeUntilNextEggSpawn = 0
     private var currentLoc = ""
@@ -65,6 +65,13 @@ class EasterEvent : WorldEvent("easter"), TickListener, InteractionListener, Log
         player.hook(Event.XpGained, xpEventHook)
     }
 
+    override fun defineCommands() {
+        define("eggspawntest") {player, _ ->
+            notify(player, "Spawning 10 eggs nearby...")
+            repeat(10) { spawnEggFor(player) }
+        }
+    }
+
     object xpEventHook : EventHook<XPGainEvent>
     {
         override fun process(entity: Entity, event: XPGainEvent) {
@@ -76,16 +83,11 @@ class EasterEvent : WorldEvent("easter"), TickListener, InteractionListener, Log
 
             val activeEggRate = if (GameWorld.settings!!.isDevMode) EGG_RATE_DEV else EGG_RATE
 
-            if (RandomFunction.roll(activeEggRate)) {
-                val dirs = Direction.values()
-                val dir = dirs[RandomFunction.random(dirs.size)]
-                val loc = entity.location.transform(dir, 3)
-                if (!Pathfinder.find(entity, loc).isSuccessful) return
-                GroundItemManager.create(Item(eggs.random()), loc, entity)
-                sendMessage(entity, colorize("%RAn egg has appeared nearby."))
-            }
+            if (RandomFunction.roll(activeEggRate))
+                spawnEggFor(entity)
         }
     }
+
 
     fun getRandomLocations() : Pair<String, List<Location>>
     {
@@ -251,7 +253,7 @@ class EasterEvent : WorldEvent("easter"), TickListener, InteractionListener, Log
             Location.create(3089, 3481, 0),Location.create(3084, 3479, 0),Location.create(3108, 3499, 0),
             Location.create(3110, 3517, 0),Location.create(3091, 3512, 0),Location.create(3092, 3507, 0),
             Location.create(3081, 3513, 0),Location.create(3079, 3513, 1),Location.create(3080, 3508, 1),
-            Location.create(3108, 3499, 0),Location.create(3093, 3467, 0))
+            Location.create(3093, 3467, 0))
 
         val TREE_GNOME_STRONGHOLD_SPOTS = arrayOf(
             Location.create(2480, 3507, 0),Location.create(2486, 3513, 0),Location.create(2453, 3512, 0),
@@ -286,6 +288,17 @@ class EasterEvent : WorldEvent("easter"), TickListener, InteractionListener, Log
                 EGG_D -> GFX_D
                 else  -> GFX_A
             }
+        }
+
+        fun spawnEggFor (player: Player)
+        {
+            val dirs = Direction.values()
+            val dir = dirs[RandomFunction.random(dirs.size)]
+            var loc = player.location.transform(dir, 3)
+            val path = Pathfinder.find(player, loc)
+            loc = Location.create(path.points.last.x, path.points.last.y, loc.z)
+            GroundItemManager.create(Item(eggs.random()), loc, player)
+            sendMessage(player, colorize("%RAn egg has appeared nearby."))
         }
 
         val lootTable = WeightBasedTable.create(
