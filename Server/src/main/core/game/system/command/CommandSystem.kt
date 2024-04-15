@@ -1,7 +1,7 @@
 package core.game.system.command
 
 import core.game.node.entity.player.Player
-import core.game.system.command.CommandSet
+import core.tools.colorize
 
 /**
  * Represents a managing system used to dispatch incoming commands.
@@ -21,9 +21,11 @@ class CommandSystem {
         if(command == null) {
             for (set in CommandSet.values()) {
                 if (set.interpret(player, arguments[0], *arguments)) {
+                    player.sendMessage(colorize("-->%Y${arguments[0]}: Deprecated command"))
                     return true
                 }
             }
+            player.sendMessage(colorize("-->%R${arguments[0]}: command not found"))
         } else {
             try {
                 command.attemptHandling(player, arguments)

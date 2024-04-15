@@ -48,6 +48,7 @@ class VisualCommand : CommandPlugin() {
             "invisible", "invis", "seti" -> {
                 player!!.isInvisible = !player.isInvisible
                 player.sendMessage("You are now " + (if (player.isInvisible) "invisible" else "rendering") + " for other players.")
+                return true
             }
             "maxkc" -> {
                 var i = 0
@@ -120,6 +121,7 @@ class VisualCommand : CommandPlugin() {
                 }
                 location = Location.create(args[2]!!.toInt(), args[3]!!.toInt(), if (args.size > 4) args[4]!!.toInt() else 0)
                 player!!.packetDispatch.sendPositionedGraphic(args[1]!!.toInt(), if (args.size > 5) args[5]!!.toInt() else 0, if (args.size > 6) args[6]!!.toInt() else 0, location)
+                return true
             }
             "npc" -> {
                 if (args!!.size < 2) {
@@ -174,8 +176,14 @@ class VisualCommand : CommandPlugin() {
                 player!!.debug("Is tele allowed here? " + RegionManager.isTeleportPermitted(player!!.location))
                 return true
             }
-            "oib" -> player!!.interfaceManager.openInfoBars()
-            "char" -> CharacterDesign.open(player)
+            "oib" -> {
+                player!!.interfaceManager.openInfoBars()
+                return true
+            }
+            "char" -> {
+                CharacterDesign.open(player)
+                return true
+            }
             "savenpc" -> return true
             "objwithanim" -> {
                 val go = Scenery(toInteger(args!![1]!!), player!!.location, 0)
@@ -212,7 +220,10 @@ class VisualCommand : CommandPlugin() {
                 player!!.interfaceManager.openComponent(componentId)
                 return true
             }
-            "ti" -> player!!.packetDispatch.sendInterfaceConfig(90, 87, false)
+            "ti" -> {
+                player!!.packetDispatch.sendInterfaceConfig(90, 87, false)
+                return true
+            }
             "iconfig", "inter_config" -> {
                 if (args!!.size < 2) {
                     player!!.debug("syntax error: interface-id child hidden")
@@ -252,6 +263,7 @@ class VisualCommand : CommandPlugin() {
                         }
                     })
                 }
+                return true
             }
             "loop_anim_on_i" -> {
                 var anim = toInteger(args!![1]!!)
@@ -262,12 +274,14 @@ class VisualCommand : CommandPlugin() {
                         return false
                     }
                 })
+                return true
             }
             "send_i_anim" -> {
                 val iface = args?.getOrNull(0) ?: return true
                 val anim = args.getOrNull(1) ?: return true
 
                 player?.packetDispatch?.sendAnimationInterface(toInteger(anim), toInteger(iface),7)
+                return true
             }
             "loop_inter" -> {
                 val st = toInteger(args!![1]!!)

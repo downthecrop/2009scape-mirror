@@ -42,7 +42,7 @@ class QuestCommandSet : CommandSet(Privilege.ADMIN){
          * Sets stage of quest
          */
         define("setqueststage"){player,args ->
-            if (args.size < 2) {
+            if (args.size < 3) {
                 reject(player,"You must specify the index# of a quest, and a stage number")
             }
             val quest = args[1].toIntOrNull() ?: reject(player,"INVALID QUEST")
