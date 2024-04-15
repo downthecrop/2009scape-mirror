@@ -489,7 +489,7 @@ public class AchievementDiary {
 
 	/**
 	 * Determines if a replacement reward can be given for the particular diary and level.
-	 * Checks to make sure the player has completed the level and claimed the rewards, and has not completed
+	 * Checks to make sure the player has completed the level and claimed the rewards, and has not claimed
 	 * the next diary level.
 	 * @param player the player to check
 	 * @param type the DiaryType: LUMBRIDGE, FALADOR, etc.
@@ -497,11 +497,11 @@ public class AchievementDiary {
 	 * @return whether or not a replacement can be granted.
 	 */
 	public static boolean canReplaceReward(Player player, DiaryType type, int level) {
-		Item reward = type.getRewards(level)[0];
-		return hasCompletedLevel(player, type, level)
-				&& !hasCompletedLevel(player, type, level + 1)
+        Item reward = type.getRewards(level)[0];
+		boolean claimed = hasCompletedLevel(player, type, level)
 				&& hasClaimedLevelRewards(player, type, level)
 				&& !player.hasItem(reward);
+		return level == 2 ? claimed : claimed && !hasClaimedLevelRewards(player, type, level+1);
 	}
 
 	/**
@@ -543,14 +543,18 @@ public class AchievementDiary {
 
 	/**
 	 * Checks if a player can claim the rewards for the given level of the given diary
-	 * Checks to make sure the player hasn't completed the next level.
+	 * Checks to make sure the player hasn't claimed the next level.
 	 * @param player the player to check
 	 * @param type the DiaryType: LUMBRIDGE, FALADOR, etc.
 	 * @param level the level to check
 	 * @return whether or not the player can claim the rewards
 	 */
 	public static boolean canClaimLevelRewards(Player player, DiaryType type, int level) {
-		return !hasCompletedLevel(player, type, level + 1) && hasCompletedLevel(player, type, level) && !hasClaimedLevelRewards(player, type, level);
+		if (level == 2)
+			// Cannot be a higher level to claim
+			return  hasCompletedLevel(player, type, level) && !hasClaimedLevelRewards(player, type, level);
+		else
+			return !hasClaimedLevelRewards(player, type, level + 1) && hasCompletedLevel(player, type, level) && !hasClaimedLevelRewards(player, type, level);
 	}
 
 	/**
