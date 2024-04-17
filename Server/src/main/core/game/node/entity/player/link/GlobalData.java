@@ -821,8 +821,8 @@ public final class GlobalData {
 	}
 
 	/**
-	 * Gets the read plagues.
-	 * @return The plague
+	 * Gets the read plaques.
+	 * @return The plaques
 	 */
 	public boolean[] getReadPlaques() {
 		return readPlaques;

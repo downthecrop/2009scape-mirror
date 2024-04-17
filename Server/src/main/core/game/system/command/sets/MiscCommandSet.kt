@@ -606,6 +606,72 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
                 sendDialogue(player, "Wrong pin. Try again.")
             }
         }
+
+        define("setplayerstrong", Privilege.ADMIN, "setplayerstrong <0-4>",
+            "Set the player progress through the Stronghold of Player Safety test."){player, args ->
+            /*
+             * 0 = Not started
+             * 1 = Received test
+             * 2 = Completed test, needs to be marked
+             * 3 = Test marked
+             * 4 = Dungeon cleared
+             */
+            if(args.size < 2){
+                notify(player, "Player Stronghold progression currently: ${player.savedData.globalData.testStage}")
+                return@define
+            }
+            val stage = args[1].toIntOrNull() ?: (-1).also { reject(player, "Please enter a valid number") }
+            if (stage in 0 .. 4){
+                player.savedData.globalData.testStage = stage
+                notify(player, "Setting test stage to $stage")
+                if (stage in 0..2){
+                    setVarp(player, 1203, 0, true)
+                    notify(player, "The poster passage is now hidden")
+                }
+                else{
+                    setVarp(player, 1203, 1 shl 29, true)
+                    notify(player, "The poster passage is now usable")
+                }
+                if (stage == 4){
+                    setVarbit(player, 4499, 1,true)
+                    notify(player, "The loot has been taken already")
+                }
+                else {
+                    setVarbit(player, 4499, 0, true)
+                    notify(player, "The loot can be reacquired")
+                }
+            }
+            else{
+                reject(player, "Only stages 0-4 are valid")
+            }
+        }
+
+        define("setplaqueread", Privilege.ADMIN, "setplaqueread <true/false>",
+            "Set the plaques in the player safety stronghold to read or not read."){player, args ->
+            if (args.size == 1) {
+                notify(
+                    player,
+                    "Currently the plaques ${if (player.savedData.globalData.hasReadPlaques()) "have" else "have not"} been read"
+                )
+                return@define
+            }
+            when(args[1]) {
+                "true" -> setPlaqueReadStatus(player, true)
+                "false" -> setPlaqueReadStatus(player, false)
+                else -> reject(player, "Only true or false can be used")
+
+            }
+            notify(player, "Setting plaques read to: ${args[1]}")
+
+        }
+    }
+
+    fun setPlaqueReadStatus(player: Player, status: Boolean){
+        // For some reason the loop has to be this way to have read write access
+        for (i in 0 until player.savedData.globalData.readPlaques.size){
+            player.savedData.globalData.readPlaques[i] = status
+        }
+
     }
 
     fun showGeBotsearch(player: Player, searchTerm: String)

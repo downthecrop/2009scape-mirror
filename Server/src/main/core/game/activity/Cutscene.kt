@@ -223,13 +223,19 @@ abstract class Cutscene(val player: Player) {
         logCutscene("Added NPC $id at location LOCAL[$regionX,$regionY,$plane] GLOBAL[${npc.location.x},${npc.location.y},$plane]")
     }
 
-    fun start()
+    fun start(){
+        start(true)
+    }
+
+    fun start(hideMiniMap: Boolean)
     {
         logCutscene("Starting cutscene for ${player.username}.")
         region = RegionManager.forId(player.location.regionId)
         base = RegionManager.forId(player.location.regionId).baseLocation
         setup()
-        PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 2))
+        if (hideMiniMap) {
+            PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 2))
+        }
         runStage(player.getCutsceneStage())
         setAttribute(player, ATTRIBUTE_CUTSCENE, this)
         setAttribute(player, ATTRIBUTE_CUTSCENE_STAGE, 0)
@@ -244,24 +250,26 @@ abstract class Cutscene(val player: Player) {
 
     /**
      * Ends this cutscene, fading the screen to black, teleporting the player to the exit location, and then fading it back in and executing the endActions passed to this method.
+     * @param fade (optional) should the cutscene fade to black?
      * @param endActions (optional) a method that executes when the cutscene fully completes
      */
-    fun end(endActions: (() -> Unit)? = null)
+    fun end(fade: Boolean = true, endActions: (() -> Unit)? = null)
     {
         ended = true
-        fadeToBlack()
+        if (fade) fadeToBlack()
         GameWorld.Pulser.submit(object : Pulse(){
             var tick: Int = 0
             override fun pulse(): Boolean {
-                when(tick++)
-                {
-                    8 -> player.properties.teleportLocation = exitLocation
-                    9 -> fadeFromBlack()
-                    16 -> {
-                        return true
+                if (fade) {
+                    when (tick++) {
+                        8 -> player.properties.teleportLocation = exitLocation
+                        9 -> fadeFromBlack()
+                        16 -> return true
+                        else -> return false
                     }
                 }
-                return false
+                else player.properties.teleportLocation = exitLocation
+                return true
             }
 
             override fun stop() {
