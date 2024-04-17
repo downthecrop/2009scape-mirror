@@ -2,8 +2,10 @@ package content.data
 
 import content.global.skill.magic.TeleportMethod
 import content.global.skill.slayer.SlayerManager.Companion.getInstance
+import core.ServerConstants
 import core.api.*
 import core.game.event.TeleportEvent
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.item.Item
@@ -18,7 +20,7 @@ import java.util.*
 
 /**
  * Represents an enchanted jewellery.
- * @author Vexia & downthecrop
+ * @author Vexia, downthecrop, Player Name
  */
 enum class EnchantedJewellery(
 
@@ -186,6 +188,13 @@ enum class EnchantedJewellery(
             Items.RING_OF_WEALTH2_14642,
             Items.RING_OF_WEALTH1_14640,
             Items.RING_OF_WEALTH_14638
+    ),
+    RING_OF_LIFE(arrayOf<String>(),
+            arrayOf(
+                Location.create(ServerConstants.HOME_LOCATION)
+            ),
+            true,
+            Items.RING_OF_LIFE_2570
     );
 
     val isCrumble: Boolean = crumble
@@ -199,7 +208,7 @@ enum class EnchantedJewellery(
     constructor(options: Array<String>, locations: Array<Location>, vararg ids: Int) : this(options, locations, false, *ids)
 
     /**
-     * Method used to teleport the player to the desired location.
+     * Method used when the player "Use"s the jewellery piece.
      * @param player the player.
      * @param item the used jewellery item.
      * @param buttonID the button id.
@@ -212,39 +221,52 @@ enum class EnchantedJewellery(
             }
             return
         }
+        attemptTeleport(player, item, buttonID, isEquipped)
+    }
+
+    /**
+     * Method used to actually teleport the player to the desired location.
+     * @param player the player.
+     * @param item the used jewellery item.
+     * @param buttonID the button id.
+     * @param isEquipped If the player is operating.
+     */
+    fun attemptTeleport(player: Player, item: Item, buttonID: Int, isEquipped: Boolean): Boolean {
         val itemIndex = getItemIndex(item)
         val nextJewellery = Item(getNext(itemIndex))
-        if (canTeleport(player, nextJewellery)) {
-            Pulser.submit(object : Pulse(0) {
-                private var count = 0
-                private var location = getLocation(buttonID)
-                override fun pulse(): Boolean {
-                    when (count) {
-                        0 -> {
-                            lock(player,4)
-                            visualize(player, ANIMATION, GRAPHICS)
-                            playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
-                            player.impactHandler.disabledTicks = 4
-                            closeInterface(player)
-                        }
-                        3 -> {
-                            teleport(player,location)
-                            resetAnimator(player)
-                            if (isLastItemIndex(itemIndex)) {
-                                if (isCrumble) crumbleJewellery(player, item, isEquipped)
-                            } else {
-                                replaceJewellery(player, item, nextJewellery, isEquipped)
-                            }
-                            unlock(player)
-                            player.dispatch(TeleportEvent(TeleportManager.TeleportType.NORMAL, TeleportMethod.JEWELRY, item, location))
-                            return true
-                        }
-                    }
-                    count += 1
-                    return false
-                }
-            })
+        if (!canTeleport(player, nextJewellery)) {
+            return false
         }
+        Pulser.submit(object : Pulse(0) {
+            private var count = 0
+            private var location = getLocation(buttonID)
+            override fun pulse(): Boolean {
+                when (count) {
+                    0 -> {
+                        lock(player,4)
+                        visualize(player, ANIMATION, GRAPHICS)
+                        playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
+                        player.impactHandler.disabledTicks = 4
+                        closeInterface(player)
+                    }
+                    3 -> {
+                        teleport(player,location)
+                        resetAnimator(player)
+                        if (isLastItemIndex(itemIndex)) {
+                            if (isCrumble) crumbleJewellery(player, item, isEquipped)
+                        } else {
+                            replaceJewellery(player, item, nextJewellery, isEquipped)
+                        }
+                        unlock(player)
+                        player.dispatch(TeleportEvent(TeleportManager.TeleportType.NORMAL, TeleportMethod.JEWELRY, item, location))
+                        return true
+                    }
+                }
+                count += 1
+                return false
+            }
+        })
+        return true
     }
 
     private fun replaceJewellery(player: Player, item: Item, nextJewellery: Item, isEquipped: Boolean) {
@@ -262,8 +284,11 @@ enum class EnchantedJewellery(
             removeItem(player, item)
         }
         if (isSlayerRing(item)) {
-            addItem(player, Items.ENCHANTED_GEM_4155)
-            sendMessage(player, "Your Ring of Slaying reverts back into a regular enchanted gem.")
+            queueScript(player, 1, QueueStrength.SOFT) {
+                addItemOrDrop(player, Items.ENCHANTED_GEM_4155)
+                sendMessage(player, "Your Ring of Slaying reverts back into a regular enchanted gem.")
+                return@queueScript stopExecuting(player)
+            }
         }
     }
 

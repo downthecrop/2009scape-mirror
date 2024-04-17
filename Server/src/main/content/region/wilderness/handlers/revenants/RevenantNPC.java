@@ -26,7 +26,7 @@ import static core.api.ContentAPIKt.playGlobalAudio;
 
 /**
  * Handles a revenant NPC.
- * @author Ceikry-ish (mostly Vexia code still)
+ * @author Ceikry-ish (mostly Vexia code still), Player Name
  */
 @Initializable
 public class RevenantNPC extends AbstractNPC {
@@ -88,6 +88,7 @@ public class RevenantNPC extends AbstractNPC {
 		configureBonuses();
 		super.configure();
 		this.swingHandler = new RevenantCombatHandler(getProperties().getAttackAnimation(), getProperties().getMagicAnimation(), getProperties().getRangeAnimation());
+		setAttribute("food-items", 20);
 	}
 
 	@Override
@@ -116,16 +117,23 @@ public class RevenantNPC extends AbstractNPC {
 	public void tick() {
 		skills.pulse();
 		getWalkingQueue().update();
-		if (this.getViewport().getRegion().isActive())
+		if (this.getViewport().getRegion().isActive()) {
 			getUpdateMasks().prepare(this);
-		if (!DeathTask.isDead(this) && getSkills().getLifepoints() <= (getSkills().getStaticLevel(Skills.HITPOINTS) / 2) && getAttribute("eat-delay", 0) < GameWorld.getTicks()) {
-			lock(3);
-			getProperties().getCombatPulse().delayNextAttack(3);
-			getSkills().heal(10);
-			for (Player p : RegionManager.getLocalPlayers(this)) {
-				playAudio(p, Sounds.EAT_2393);
+		}
+		if (!DeathTask.isDead(this)) {
+			int curhp = getSkills().getLifepoints();
+			int maxhp = getSkills().getStaticLevel(Skills.HITPOINTS);
+			int fooditems = getAttribute("food-items", 0);
+			if (curhp < maxhp / 2 && fooditems > 0 && getAttribute("eat-delay", 0) < GameWorld.getTicks()) {
+				lock(3);
+				getProperties().getCombatPulse().delayNextAttack(3);
+				getSkills().heal(maxhp / 6);
+				for (Player p : RegionManager.getLocalPlayers(this)) {
+					playAudio(p, Sounds.EAT_2393);
+				}
+				setAttribute("eat-delay", GameWorld.getTicks() + 6);
+				setAttribute("food-items", fooditems - 1);
 			}
-			setAttribute("eat-delay", GameWorld.getTicks() + 6);
 		}
 		behavior.tick(this);
 		if (aggressiveHandler != null && aggressiveHandler.selectTarget()) {
@@ -196,9 +204,9 @@ public class RevenantNPC extends AbstractNPC {
 	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 		if (entity instanceof Player) {
 			if (!hasAcceptableCombatLevel(entity.asPlayer()) && !entity.asPlayer().isAdmin()) {
-                if(message) {
-                    entity.asPlayer().sendMessage("The level difference between you and your opponent is too great.");
-                }
+				if (message) {
+					entity.asPlayer().sendMessage("The level difference between you and your opponent is too great.");
+				}
 				return false;
 			}
 		}

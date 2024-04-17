@@ -19,7 +19,7 @@ class SkillRestore : RSTimer (1, "skillrestore", isAuto = true, isSoft = true) {
         var skills = entity.skills
 
         for (i in 0 until 24) {
-            if (i == Skills.PRAYER) continue
+            if (i == Skills.PRAYER || i == Skills.SUMMONING) continue
             if (ticksSinceLastRestore[i]++ >= restoreTicks[i]) {
                 if (i == Skills.HITPOINTS && entity.skills.lifepoints < entity.skills.maximumLifepoints) {
                     skills.heal (getHealAmount(entity))

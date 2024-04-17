@@ -60,9 +60,9 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
         if(entity is Player) {
             entity.interfaceManager.closeOverlay()
             if(!logout) {
-                entity.sendMessage("Winkin's Farm thanks you for your visit.")
-                entity.sendMessage("Leftover ogleroots and flags have been returned to the establishment.")
-                entity.sendMessage("You have been reimbursed at a rate of 10gp per ogleroot and the flags have been collected.")
+                sendMessage(entity, "Winkin's Farm thanks you for your visit.")
+                sendMessage(entity, "Leftover ogleroots and flags have been returned to the establishment.")
+                sendMessage(entity, "You have been reimbursed at a rate of 10gp per ogleroot and the flags have been collected.")
                 val flags = entity.inventory.getAmount(Item(Items.FLAG_12625))
                 if(flags > 0) {
                     entity.setAttribute("/save:vinesweeper:stored-flags", flags)

@@ -1,6 +1,6 @@
 package core.game.node.entity.combat;
 
-import core.ServerConstants;
+import content.data.EnchantedJewellery;
 import core.game.container.impl.EquipmentContainer;
 import core.game.node.entity.skill.Skills;
 import content.global.skill.summoning.familiar.Familiar;
@@ -14,6 +14,7 @@ import core.game.system.task.Pulse;
 import core.game.bots.AIPlayer;
 import core.game.world.GameWorld;
 import core.game.world.map.zone.ZoneType;
+import org.rs09.consts.Items;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -200,12 +201,13 @@ public final class ImpactHandler {
 		impactQueue.add(impact);
 		if (entity instanceof Player && !dead) {
 			final Player p = entity.asPlayer();
-			if (p.getZoneMonitor().getType() != ZoneType.SAFE.getId() && p.getSkullManager().getLevel() <= 30 && (p.getEquipment().contains(2570, 1))) {
+			if (p.getZoneMonitor().getType() != ZoneType.SAFE.getId() && (p.getEquipment().contains(Items.RING_OF_LIFE_2570, 1))) {
 				int percentage = (int) (entity.getSkills().getStaticLevel(Skills.HITPOINTS) * 0.10);
 				if (p.getSkills().getLifepoints() <= percentage) {
-					p.getEquipment().remove(new Item(2570));
-					p.sendMessage("Your ring of life saves you and in the process is destroyed.");
-					p.teleport(ServerConstants.HOME_LOCATION);
+					Item rolItem = new Item(Items.RING_OF_LIFE_2570);
+					if (EnchantedJewellery.RING_OF_LIFE.attemptTeleport(p, rolItem, 0, true)) {
+						p.sendMessage("Your ring of life saves you and in the process is destroyed.");
+					}
 				}
 			}
 		}

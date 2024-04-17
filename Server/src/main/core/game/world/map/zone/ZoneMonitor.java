@@ -24,12 +24,12 @@ import org.rs09.consts.Items;
 public final class ZoneMonitor {
 
 	/**
-	 * The set of dragonstone teleport jewellery, which allow teleporting from up to and including level 30 wildy.
-	 * Used to check if a player can teleport from 20 < level <= 30 wildy, see canTeleportByDragonstoneJewellery.
+	 * The set of jewellery which allow teleporting from up to and including level 30 wildy.
+	 * Used to check if a player can teleport from 20 < level <= 30 wildy, see canTeleportByJewellery.
 	 * Note: the check is based on the nextJewellery (see EnchantedJewellery.kt), so this list should not contain the (4) items, and should contain the empty ones.
 	 * @author Player Name
 	 */
-	static final Set<Integer> DRAGONSTONE_TELEPORT_JEWELLERY = Set.of(
+	static final Set<Integer> MID_WILDY_TELEPORT_JEWELLERY = Set.of(
 		Items.AMULET_OF_GLORY_1704,
 		Items.AMULET_OF_GLORY1_1706,
 		Items.AMULET_OF_GLORY2_1708,
@@ -49,7 +49,8 @@ public final class ZoneMonitor {
 		Items.RING_OF_WEALTH_14638,
 		Items.RING_OF_WEALTH1_14640,
 		Items.RING_OF_WEALTH2_14642,
-		Items.RING_OF_WEALTH3_14644
+		Items.RING_OF_WEALTH3_14644,
+		Items.RING_OF_LIFE_2570
 	);
 
 	/**
@@ -235,7 +236,7 @@ public final class ZoneMonitor {
 	 * @return {@code True} if so.
 	 */
 	public boolean teleport(int type, Node node) {
-		if (type != -1 && entity.isTeleBlocked() && !canTeleportByDragonstoneJewellery(type, node)) {
+		if (type != -1 && entity.isTeleBlocked() && !canTeleportByJewellery(type, node)) {
 			if (entity.isPlayer()) {
 				entity.asPlayer().sendMessage("A magical force has stopped you from teleporting.");
 			}
@@ -250,11 +251,11 @@ public final class ZoneMonitor {
 	}
 
 	/**
-	 * Checks if a player can teleport with a dragonstone jewellery piece in >= 1 <= 30 wilderness level
+	 * Checks if a player can teleport with a jewellery piece in >= 1 <= 30 wilderness level
 	 * @return {@code True} if so.
 	 */
-	private boolean canTeleportByDragonstoneJewellery(int type, Node node) {
-		if (type != 1 || !DRAGONSTONE_TELEPORT_JEWELLERY.contains(node.asItem().getId())) {
+	private boolean canTeleportByJewellery(int type, Node node) {
+		if (type != 1 || !MID_WILDY_TELEPORT_JEWELLERY.contains(node.asItem().getId())) {
 			return false;
 		}
 		if (entity.timers.getTimer("teleblock") != null)

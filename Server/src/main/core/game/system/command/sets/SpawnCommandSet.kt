@@ -1,12 +1,12 @@
 package core.game.system.command.sets
 
 import core.api.log
+import core.api.sendMessage
 import core.cache.Cache
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
 import core.game.node.entity.npc.NPC
 import core.game.node.item.Item
-import core.tools.SystemLogger
 import core.game.system.command.CommandPlugin
 import core.plugin.Initializable
 import core.game.system.command.Privilege
@@ -22,19 +22,40 @@ class SpawnCommandSet : CommandSet(Privilege.ADMIN){
          */
         define("npc"){player,args ->
             if (args.size < 2) {
-                reject(player,"syntax error: id (optional) direction")
+                reject(player, "syntax: id (required) amount (optional) isWalks (optional)")
                 return@define
             }
-            val npc = NPC.create(CommandPlugin.toInteger(args[1]!!), player!!.location)
-            npc.setAttribute("spawned:npc", true)
-            npc.isRespawn = false
-            npc.direction = player.direction
-            npc.init()
-            npc.isWalks = args.size > 2
-            val npcString = "{" + npc.location.x + "," + npc.location.y + "," + npc.location.z + "," + (if (npc.isWalks) "1" else "0") + "," + npc.direction.ordinal + "}"
+            val amount = if (args.size > 2) CommandPlugin.toInteger(args[2]) else 1
+            if (amount < 1) {
+                reject(player, "Invalid amount")
+                return@define
+            }
+            if (amount > 900) {
+                reject(player, "Based on experience, spawning that many NPCs at once is a bad idea")
+                return@define
+            }
+            var isWalks = false
+            if (args.size > 3) {
+                if (args[3] == "true") {
+                    isWalks = true
+                } else if (args[3] != "" && args[3] != "false") {
+                    reject(player, "The \"isWalks\" argument only accepts \"true\" and \"false\"")
+                    return@define
+                }
+            }
+            var npcString = ""
+            for (i in 1..amount) {
+                val npc = NPC.create(CommandPlugin.toInteger(args[1]), player.location)
+                npc.setAttribute("spawned:npc", true)
+                npc.isRespawn = false
+                npc.direction = player.direction
+                npc.init()
+                npc.isWalks = isWalks
+                npcString = "{" + npc.location.x + "," + npc.location.y + "," + npc.location.z + "," + (if (npc.isWalks) "1" else "0") + "," + npc.direction.ordinal + "}"
+                println(npcString)
+            }
             val clpbrd = Toolkit.getDefaultToolkit().systemClipboard
             clpbrd.setContents(StringSelection(npcString), null)
-            println(npcString)
         }
 
         /**

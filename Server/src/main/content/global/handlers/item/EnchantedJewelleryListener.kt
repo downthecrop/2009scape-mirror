@@ -11,10 +11,11 @@ import content.data.EnchantedJewellery
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.tools.START_DIALOGUE
+import org.rs09.consts.Items
 
 /**
  * Listener for enchanted jewellery options
- * @author Ceikry & downthecrop
+ * @author Ceikry, downthecrop, Player Name
  */
 class EnchantedJewelleryListener : InteractionListener {
 
@@ -33,6 +34,10 @@ class EnchantedJewelleryListener : InteractionListener {
     private fun handle(player: Player, node: Node, isEquipped: Boolean) {
         player.pulseManager.clear(PulseType.STANDARD)
         val item = node.asItem()
+        if (item.id == Items.RING_OF_LIFE_2570) {
+            sendMessage(player, "You can't operate that.")
+            return
+        }
         val jewellery = EnchantedJewellery.idMap[item.id]
         if (jewellery != null) {
             if (jewellery.isLastItemIndex(jewellery.getItemIndex(item)) && !jewellery.isCrumble) {

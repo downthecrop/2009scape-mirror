@@ -5,10 +5,12 @@ import core.api.teleport
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
+import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
+import org.rs09.consts.Items
 import org.rs09.consts.Sounds
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -46,6 +48,9 @@ class MountedGlory : InteractionListener {
         }
     }
     private fun mountedGloryTeleport(player : Player, int : Int) {
+        if (!player.zoneMonitor.teleport(1, Item(Items.AMULET_OF_GLORY_1704))) {
+            return
+        }
         Executors.newSingleThreadScheduledExecutor().schedule({
         player.pulseManager.run(object : Pulse() {
             var counter = 0

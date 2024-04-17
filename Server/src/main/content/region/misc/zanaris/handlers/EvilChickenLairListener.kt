@@ -33,6 +33,10 @@ class EvilChickenLairListener: InteractionListener {
             }
             return@onUseWith true
         }
+        onUseWith(IntType.SCENERY, Items.EGG_1944, Scenery.CHICKEN_SHRINE_12093) { player, _, _ ->
+            sendMessage(player, "Nice idea, but nothing interesting happens.")
+            return@onUseWith true
+        }
         onUseWith(IntType.SCENERY, Items.ROPE_954, Scenery.TUNNEL_ENTRANCE_12253) { player, _, node ->
             if(removeItem(player, Item(Items.ROPE_954)))
                 replaceScenery(node as core.game.node.scenery.Scenery, Scenery.TUNNEL_ENTRANCE_12254, 100)
