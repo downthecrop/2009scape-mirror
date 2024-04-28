@@ -1,20 +1,27 @@
 package content.minigame.barbassault
 
-import core.api.*
+import core.api.Container
+import core.api.addItem
+import core.api.inInventory
+import core.api.removeItem
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
+import core.tools.END_DIALOGUE
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
-import core.tools.END_DIALOGUE
 import java.text.SimpleDateFormat
 import java.time.temporal.ChronoUnit
 import java.util.*
 
 @Initializable
 class CaptainCainDialogue(player: Player? = null) : DialoguePlugin(player) {
+    companion object {
+        const val TORSO_PRICE = 4_500_000
+    }
+
     val sdf = SimpleDateFormat("ddMMyyyy")
     override fun newInstance(player: Player?): DialoguePlugin {
         return CaptainCainDialogue(player)
@@ -38,10 +45,10 @@ class CaptainCainDialogue(player: Player? = null) : DialoguePlugin(player) {
                 2 -> playerl(FacialExpression.HALF_THINKING, "No, thanks.").also { stage = END_DIALOGUE }
             }
 
-            10 -> npcl(FacialExpression.FRIENDLY, "Alright, then, that'll be 7,500,000 gold please.").also { stage++ }
+            10 -> npcl(FacialExpression.FRIENDLY, "Alright, then, that'll be 4,500,000 gold please.").also { stage++ }
             11 -> options("Here you go!","Nevermind.").also { stage++ }
             12 -> when(buttonId){
-                1 -> if(inInventory(player, 995, 7500000))
+                1 -> if(inInventory(player, 995, ))
                     playerl(FacialExpression.FRIENDLY, "Here you go!").also { stage = 20 }
                 else
                     playerl(FacialExpression.HALF_GUILTY, "Actually, I don't have that much.").also { stage = END_DIALOGUE }
@@ -51,7 +58,7 @@ class CaptainCainDialogue(player: Player? = null) : DialoguePlugin(player) {
 
             20 -> {
                 npcl(FacialExpression.FRIENDLY, "Thank you much, kind sir. And here's your torso.")
-                if(removeItem(player, Item(995,7500000), Container.INVENTORY)) {
+                if(removeItem(player, Item(995, TORSO_PRICE), Container.INVENTORY)) {
                     addItem(player, Items.FIGHTER_TORSO_10551, 1)
                 }
                 stage = END_DIALOGUE
