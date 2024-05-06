@@ -131,13 +131,10 @@ public final class BankContainer extends Container {
 		super.refresh();
 		player.getInventory().getListeners().add(listener);
 		player.getInventory().refresh();
-                setVarp(player, 1249, lastAmountX);
+		setVarp(player, 1249, lastAmountX);
 		int settings = new IfaceSettingsBuilder().enableOptions(new IntRange(0, 5)).enableExamine().enableSlotSwitch().build();
 		player.getPacketDispatch().sendIfaceSettings(settings, 0, 763, 0, 27);
-		player.getPacketDispatch().sendRunScript(1451, "");
 		open = true;
-		setTabConfigurations();
-		sendBankSpace();
 	}
 	
 	public void open(Player player) {
@@ -165,8 +162,7 @@ public final class BankContainer extends Container {
 		player.getPacketDispatch().sendIfaceSettings(settings, 0, 763, 0, 27);
 		player.getPacketDispatch().sendRunScript(1451, "");
 		open = true;
-		this.player.getBank().setTabConfigurations(player);
-		
+
 	}
 	
 	@Override
@@ -250,20 +246,7 @@ public final class BankContainer extends Container {
 				increaseTabStartSlots(tabIndex);
 			}
 			super.add(add, true, preferredSlot);
-			setTabConfigurations();
 		}
-	}
-	
-	/**
-	 * Re-opens the bank interface.
-	 */
-	public void reopen() {
-		if (!open) {
-			return;
-		}
-		player.getInterfaceManager().close();
-		open();
-		refresh();
 	}
 
 	/**
@@ -302,15 +285,11 @@ public final class BankContainer extends Container {
 		if (super.remove(item, slot, false)) {
 			player.getInventory().add(add);
 		}
-		int tabId = getTabByItemSlot(slot);
 		if (get(slot) == null) {
+			int tabId = getTabByItemSlot(slot);
 			decreaseTabStartSlots(tabId);
-		}
-		setTabConfigurations();
-		shift();
-		if (player.getAttribute("search", false)) {
-			reopen();
-		}
+			shift();
+		} else update();
 	}
 
 	/**
@@ -386,8 +365,7 @@ public final class BankContainer extends Container {
 	 * Sends the bank space values on the interface.
 	 */
 	public void sendBankSpace() {
-		player.getPacketDispatch().sendString(Integer.toString(capacity() - freeSlots()), 762, 97);
-		player.getPacketDispatch().sendString(Integer.toString(capacity()), 762, 98);
+		setVarc(player, 192, capacity() - freeSlots());
 	}
 	
 	/**
@@ -411,47 +389,17 @@ public final class BankContainer extends Container {
 			replace(tempTabItems[i], slot, false);
 		}
 		refresh(); //We only refresh once.
-		setTabConfigurations();
 	}
 	
 	/**
 	 * Sets the tab configs.
 	 */
 	public void setTabConfigurations() {
-		int value = getItemsInTab(1);
-		value += getItemsInTab(2) << 10;
-		value += getItemsInTab(3) << 20;
-                setVarp(player, 1246, value);
-		value = getItemsInTab(4);
-		value += getItemsInTab(5) << 10;
-		value += getItemsInTab(6) << 20;
-                setVarp(player, 1247, value);
-		value = -2013265920;
-		value += (134217728 * (tabIndex == 10 ? 0 : tabIndex));
-		value += getItemsInTab(7);
-		value += getItemsInTab(8) << 10;
-                setVarp(player, 1248, value);
+		for (int i = 0; i < 8; i++) {
+			setVarbit(player, 4885 + i, getItemsInTab(i + 1));
+		}
 	}
-	
-	/**
-	 * Sets the tab configs.
-	 */
-	public void setTabConfigurations(Player player) {
-		int value = getItemsInTab(1);
-		value += getItemsInTab(2) << 10;
-		value += getItemsInTab(3) << 20;
-                setVarp(player, 1246, value);
-		value = getItemsInTab(4);
-		value += getItemsInTab(5) << 10;
-		value += getItemsInTab(6) << 20;
-                setVarp(player, 1247, value);
-		value = -2013265920;
-		value += (134217728 * (tabIndex == 10 ? 0 : tabIndex));
-		value += getItemsInTab(7);
-		value += getItemsInTab(8) << 10;
-                setVarp(player, 1248, value);
-	}
-	
+
 	/**
 	 * Gets the amount of items in one tab.
 	 * @param tabId The tab index.
@@ -515,14 +463,9 @@ public final class BankContainer extends Container {
 	 * @param tabIndex The tabIndex to set.
 	 */
 	public void setTabIndex(int tabIndex) {
-		this.tabIndex = tabIndex;
-
-		/*
-		 * Kludge to update the interface
-		 * after dumping all to prevent
-		 * "invisible" items in slots.
-		 */
-		update(true);
+		this.tabIndex = tabIndex == 0 ? 10 : tabIndex;
+		setVarbit(player, 4893, tabIndex + 1);
+		setAttribute(player, "bank:lasttab", tabIndex);
 	}
 
 	/**
