@@ -68,7 +68,7 @@ class TravelFromKeldagrimPulse(val player: Player, val dest: Location): Pulse(){
 
 class TravelToKeldagrimPulse(val player: Player) : Pulse(){
     var counter = 0
-    var cartNPC = NPC(1546)
+    var cartNPC = NPC(1544)
     override fun pulse(): Boolean {
         when(counter++){
             0 -> player.lock().also { player.interfaceManager.open(Component(115)) }
