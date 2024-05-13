@@ -95,8 +95,8 @@ public final class KalphiteQueenNPC extends AbstractNPC {
 	public void finalizeDeath(Entity killer) {
 		if (getId() == 1160) {
 			removeAttribute("disable:drop");
-			reTransform();
 			super.finalizeDeath(killer);
+			reTransform();
 			BossKillCounter.addtoKillcount((Player) killer, 1160);
 			return;
 		}
