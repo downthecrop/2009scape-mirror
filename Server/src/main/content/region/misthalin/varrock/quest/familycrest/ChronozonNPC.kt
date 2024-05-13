@@ -29,14 +29,6 @@ class ChronozonNPC(id: Int, location: Location?) : AbstractNPC(NPCs.CHRONOZON_66
         return intArrayOf(NPCs.CHRONOZON_667)
     }
 
-    override fun handleTickActions() {
-        super.handleTickActions()
-        if (!targetplayer.isActive || targetplayer.getLocation().getDistance(getLocation()) > 15) {
-            clear()
-        }
-
-    }
-
     override fun checkImpact(state: BattleState?) {
         if (state != null) {
             if(amountOfAirDamageTaken == 0 || amountOfWaterDamageTaken == 0 ||
@@ -82,6 +74,8 @@ class ChronozonNPC(id: Int, location: Location?) : AbstractNPC(NPCs.CHRONOZON_66
         if(killer == targetplayer) {
             if (targetplayer.questRepository.getStage("Family Crest") != 20){
                 targetplayer.questRepository.getQuest("Family Crest").setStage(targetplayer, 20)
+                // Make sure to despawn Chronozon
+                this.clear()
             }
         }
         clear()
