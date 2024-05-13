@@ -4,6 +4,7 @@ import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.VarpManager
 import core.game.node.entity.player.info.login.PlayerSaver
+import core.game.node.entity.player.link.IronmanMode
 import core.game.node.entity.player.link.SavedData
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.player.link.quest.QuestRepository
@@ -42,6 +43,7 @@ fun permadeath(target: Player) {
         }
     }
     target.musicPlayer.clearUnlocked()
+    target.ironmanManager.mode = IronmanMode.NONE
     PlayerSaver(target).save()
     target.clear()
 }

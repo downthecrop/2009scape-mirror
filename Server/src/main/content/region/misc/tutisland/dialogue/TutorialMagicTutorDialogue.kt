@@ -93,7 +93,7 @@ class TutorialMagicTutorDialogue(player: Player? = null) : core.game.dialogue.Di
                 }
             }
             71 -> when(stage){
-                0 -> options("Set Ironman Mode (current: ${player.ironmanManager.mode.name})", "Change XP Rate (current: ${player.skills.experienceMutiplier}x)", "I'm ready now.").also { stage++ }
+                0 -> options("Set Ironman Mode (current: ${player.ironmanManager.mode.name})", "Change XP Rate (current: ${player.skills.experienceMultiplier}x)", "I'm ready now.").also { stage++ }
                 1 -> when(buttonId){
                     1 -> options("None","Standard","Hardcore (Permadeath!)","Ultimate","Nevermind.").also { stage = 10 }
                     2 -> options("1.0x","2.5x","5.0x","10x").also { stage = 20 }
@@ -107,7 +107,7 @@ class TutorialMagicTutorDialogue(player: Player? = null) : core.game.dialogue.Di
                         val mode = IronmanMode.values()[buttonId - 1]
                         player.dialogueInterpreter.sendDialogue("You set your ironman mode to: ${mode.name}.")
                         player.ironmanManager.mode = mode
-                        if (player.skills.experienceMutiplier == 10.0 && mode != IronmanMode.HARDCORE) player.skills.experienceMutiplier = 5.0
+                        if (player.skills.experienceMultiplier == 10.0 && mode != IronmanMode.HARDCORE) player.skills.experienceMultiplier = 5.0
                     }
                     else
                     {
@@ -124,7 +124,7 @@ class TutorialMagicTutorDialogue(player: Player? = null) : core.game.dialogue.Di
                         return true
                     }
                     player.dialogueInterpreter.sendDialogue("You set your XP rate to: ${rate}x.")
-                    player.skills.experienceMutiplier = rate
+                    player.skills.experienceMultiplier = rate
                     stage = 0
                 }
 
@@ -154,9 +154,9 @@ class TutorialMagicTutorDialogue(player: Player? = null) : core.game.dialogue.Di
                     {
                         setAttribute(player, "/save:permadeath", true)
                     }
-                    else if(player.skills.experienceMutiplier == 10.0)
+                    else if(player.skills.experienceMultiplier == 10.0)
                     {
-                        player.skills.experienceMutiplier = 5.0
+                        player.skills.experienceMultiplier = 5.0
                     }
 
                     //This overwrites the stuck dialogue after teleporting to Lumbridge for some reason

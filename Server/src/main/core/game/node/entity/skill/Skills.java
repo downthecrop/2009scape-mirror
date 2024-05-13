@@ -41,7 +41,7 @@ public final class Skills {
 	/**
 	 * Represents the constant modifier of experience.
 	 */
-	public double experienceMutiplier = 5.0;
+	public double experienceMultiplier = 5.0;
 
 	/**
 	 * The maximum experience multiplier.
@@ -289,7 +289,7 @@ public final class Skills {
 	private double getExperienceMod(int slot, double experience, boolean playerMod, boolean multiplyer) {
 		//Keywords for people ctrl + Fing the project
 		//xprate xp rate xp multiplier skilling rate
-		return experienceMutiplier;
+		return experienceMultiplier;
 		/*if (!(entity instanceof Player)) {
 			return 1.0;
 		}
@@ -414,14 +414,14 @@ public final class Skills {
 				setLifepoints(staticLevels[i]);
 			}
 		}
-		experienceMutiplier = 5.0;
+		experienceMultiplier = 5.0;
 		updateCombatLevel();
 	}
 
 	public void parseExpRate(ByteBuffer buffer) {
-		experienceMutiplier = buffer.getDouble();
-		if(GameWorld.getSettings().getDefault_xp_rate() != experienceMutiplier){
-			experienceMutiplier = GameWorld.getSettings().getDefault_xp_rate();
+		experienceMultiplier = buffer.getDouble();
+		if(GameWorld.getSettings().getDefault_xp_rate() != experienceMultiplier){
+			experienceMultiplier = GameWorld.getSettings().getDefault_xp_rate();
 		}
 	}
 
@@ -445,7 +445,7 @@ public final class Skills {
 	}
 
 	public void saveExpRate(ByteBuffer buffer) {
-		buffer.putDouble(experienceMutiplier);
+		buffer.putDouble(experienceMultiplier);
 	}
 
 	/**
