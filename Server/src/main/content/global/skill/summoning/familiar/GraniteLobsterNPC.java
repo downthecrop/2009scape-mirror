@@ -22,7 +22,7 @@ public class GraniteLobsterNPC extends Forager {
 	/**
 	 * The fish.
 	 */
-	private static final Item[] FISH = new Item[] { new Item(383), new Item(377) };
+	private static final Item[] FISH = new Item[] { new Item(383), new Item(371) };
 
 	/**
 	 * Constructs a new {@code GraniteLobsterNPC} {@code Object}.
@@ -61,7 +61,7 @@ public class GraniteLobsterNPC extends Forager {
 
 	@Override
 	public void handlePassiveAction() {
-		if (RandomFunction.random(4) == 1) {
+		if (RandomFunction.random(40) == 1) {
 			final Item item = FISH[RandomFunction.random(FISH.length)];
 			animate(Animation.create(8107));
 			Fish fish = Fish.forItem(item);
