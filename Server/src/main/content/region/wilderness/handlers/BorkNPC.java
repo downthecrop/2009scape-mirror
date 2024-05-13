@@ -532,6 +532,7 @@ public class BorkNPC extends AbstractNPC {
 		public void configure() {
 			region = DynamicRegion.create(12374);
 			region.setMulticombat(true);
+			region.setMusicId(488);
 			setRegionBase();
 			registerRegion(region.getId());
 		}

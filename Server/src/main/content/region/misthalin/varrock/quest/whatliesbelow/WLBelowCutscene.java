@@ -297,6 +297,7 @@ public class WLBelowCutscene extends CutscenePlugin {
 	@Override
 	public void configure() {
 		region = DynamicRegion.create(12854);
+		region.setMusicId(250);
 		setRegionBase();
 		registerRegion(region.getId());
 	}

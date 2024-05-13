@@ -140,9 +140,11 @@ public final class LoginConfiguration {
         player.updateAppearance();
         player.getPlayerFlags().setUpdateSceneGraph(true);
         player.getPacketDispatch().sendInterfaceConfig(226, 1, true);
+
         if(player.getGlobalData().getTestStage() == 3 && !player.getEmoteManager().isUnlocked(Emotes.SAFETY_FIRST)){
             player.getEmoteManager().unlock(Emotes.SAFETY_FIRST);
         }
+
         for (Item item : player.getEquipment().toArray()) {
             //Run equip hooks for all items equipped on login.
             //We should have already been doing this.
@@ -164,6 +166,7 @@ public final class LoginConfiguration {
                 }
             }
         }
+
         SpellBookManager.SpellBook currentSpellBook = SpellBookManager.SpellBook.forInterface(player.getSpellBookManager().getSpellBook());
         if (currentSpellBook == SpellBookManager.SpellBook.ANCIENT && !hasRequirement(player, "Desert Treasure")) {
             player.sendMessage(colorize("%RAs you can no longer use Ancient Magic, you have been set back to Modern."));
@@ -173,6 +176,7 @@ public final class LoginConfiguration {
             player.getSpellBookManager().setSpellBook(SpellBookManager.SpellBook.MODERN);
         }
         player.getSpellBookManager().update(player);
+
         // 1050 is checked client-side for making piety/chivalry disallowed sfx, likely due to the minigame requirement.
         // Set it here unconditionally until the minigame is implemented.
         setVarbit(player, 3909, 8, false);
