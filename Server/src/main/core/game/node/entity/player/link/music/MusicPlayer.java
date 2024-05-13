@@ -36,7 +36,7 @@ public final class MusicPlayer {
 	/**
 	 * The configuration ids.
 	 */
-	private static final int[] CONFIG_IDS = { 20, 21, 22, 23, 24, 25, 298, 311, 346, 414, 464, 598, 662, 721, 906, 1009, 1104, 1136, 180, 1202, 1381, 1394, };
+	private static final int[] CONFIG_IDS = { 20, 21, 22, 23, 24, 25, 298, 311, 346, 414, 464, 598, 662, 721, 906, 1009, 1104, 1136, 1180, 1202};
 
 	/**
 	 * The player.
@@ -139,12 +139,11 @@ public final class MusicPlayer {
 		int[] values = new int[CONFIG_IDS.length];
 		for (MusicEntry entry : unlocked.values()) {
 			int listIndex = entry.getIndex();
-			int index = (listIndex + 1) / 32;
+			int index = listIndex / 32;
 			if (index >= CONFIG_IDS.length) {
-
 				continue;
 			}
-			values[index] |= 1 << (listIndex - (index * 32));
+			values[index] |= 1 << (listIndex & 31);
 		}
 		for (int i = 0; i < CONFIG_IDS.length; i++) {
 			setVarp(player, CONFIG_IDS[i], values[i]);
