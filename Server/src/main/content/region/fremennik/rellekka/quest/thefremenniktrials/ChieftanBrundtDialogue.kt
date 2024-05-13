@@ -68,7 +68,7 @@ class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
             return true
         }
         else if(player?.questRepository?.getStage("Fremennik Trials")!! == 0) {
-            npc("Greetings outlander!")
+            npc("Greetings outerlander!")
             stage = 0
         }
         return true
@@ -99,7 +99,7 @@ class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
 
 
             //Do you have any quests?
-            300 -> {npc("Quests, you say outlander? Well, I would not call it a","quest as such, but if you are brave of heart and strong","of body, perhaps..."); stage++}
+            300 -> {npc("Quests, you say outerlander? Well, I would not call it a","quest as such, but if you are brave of heart and strong","of body, perhaps..."); stage++}
             301 -> {npc("No, you would not be interested. Forget I said","anything, outerlander."); stage++ }
             302 -> {options("Yes, I am interested.","No, I'm not interested."); stage++ }
             303 -> when(buttonId){
@@ -172,17 +172,11 @@ class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
             545 -> playerl(FacialExpression.HAPPY,"I have seven members of the council prepared to vote in my favour now!").also { stage++ }
             546 -> npcl(FacialExpression.HAPPY,"I know outerlander, for I have been closely monitoring your progress so far!").also {stage++}
             547 -> npcl(FacialExpression.HAPPY,"Then let us put the formality aside, and let me personally welcome you into the Fremennik! May you bring us honour!").also {
-                if(player.inventory.freeSlots() >= 10){
-                    println(GenerateFremennikName())
                     player.setAttribute("/save:fremennikname", GenerateFremennikName())
                     stage = 560
-                }
-                else stage = 548
-
             }
-            548 -> sendDialogue("You require 10 free spaces in your backpack to claim your reward.").also { stage = 1000 }
 
-            550 -> npcl(FacialExpression.HAPPY,"If you need any help with your trials, I suggest you speak to Askeladden. He is currently doing his own trials of manhood to become a true Fremennik.")
+            550 -> npcl(FacialExpression.HAPPY,"If you need any help with your trials, I suggest you speak to Askeladden. He is currently doing his own trials of manhood to become a true Fremennik.").also { stage = END_DIALOGUE }
 
             560 -> npcl(FacialExpression.HAPPY,"From this day onward, you are outerlander no more! In honour of your acceptance into the Fremennik, you gain a new name: ${player.getAttribute("fremennikname","how did u break this")}.").also {
                 cleanupAttributes(player)
@@ -239,7 +233,7 @@ class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
             642 -> npcl(FacialExpression.HAPPY,"As I say, my knowledge outside of this town is rather limited, and I know no more than this.").also { stage++ }
             643 -> npcl(FacialExpression.HAPPY,"Was there anything else you wished to hear tell of?").also { stage = 616 }
 
-            645 -> npcl(FacialExpression.HAPPY,"Ah, now that is something I know a great deal about. Believe it or not, all outerlanders were once orginally Fremenniks.").also { stage++ }
+            645 -> npcl(FacialExpression.HAPPY,"Ah, now that is something I know a great deal about. Believe it or not, all outerlanders were once originally Fremenniks.").also { stage++ }
             646 -> npcl(FacialExpression.HAPPY,"When first man came to these lands all were Fremenniks, and followed our ways. We lived a happy life, and never settled in one place for long.").also { stage++ }
             647 -> npcl(FacialExpression.HAPPY,"We travelled by boat along the coastlines, never taking more from the land than could be regrown by the same time in the following year.").also { stage++ }
             648 -> npcl(FacialExpression.HAPPY,"However, many moons past, some of our tribesmen were weary of constantly travelling the lands, and decided to build themselves permanent homes.").also { stage++ }
