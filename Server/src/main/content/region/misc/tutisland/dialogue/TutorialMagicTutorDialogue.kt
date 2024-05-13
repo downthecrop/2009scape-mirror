@@ -138,6 +138,7 @@ class TutorialMagicTutorDialogue(player: Player? = null) : core.game.dialogue.Di
                 40 -> {
                     setAttribute(player, "/save:tutorial:complete", true)
                     setVarbit(player, 3756, 0)
+                    setVarp(player, 281, 1000, true)
                     teleport(player, Location.create(3233, 3230), TeleportManager.TeleportType.NORMAL)
                     closeOverlay(player)
 
