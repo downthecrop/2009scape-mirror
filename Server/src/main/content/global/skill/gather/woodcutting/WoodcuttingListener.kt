@@ -156,7 +156,7 @@ class WoodcuttingListener : InteractionListener {
         //OSRS: https://oldschool.runescape.wiki/w/Woodcutting scroll down to the mechanics section
         //RS3 : https://runescape.wiki/w/Woodcutting scroll down to the mechanics section, and expand the tree felling chances table
         if (resource.getRespawnRate() > 0) {
-            if (RandomFunction.roll(8) || resource.identifier.toInt() == 1 || resource.identifier.toInt() == 2 || resource.identifier.toInt() == 3 || resource.identifier.toInt() == 6) {
+            if (RandomFunction.roll(8) || listOf(1, 2, 3, 4, 6).contains(resource.identifier.toInt())){
                 if (resource.isFarming()) {
                     val fPatch = forObject(node.asScenery())
                     if (fPatch != null) {
