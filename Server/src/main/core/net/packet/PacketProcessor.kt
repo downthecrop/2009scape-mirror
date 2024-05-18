@@ -521,7 +521,7 @@ object PacketProcessor {
         player.debug("Slot: ${pkt.slot}, ItemID: ${pkt.itemId}")
         player.debug("RCM Index: ${pkt.optIndex}, Op: ${pkt.opcode}")
         player.debug("-------------------------------------")
-        if (player.dialogueInterpreter.dialogue != null && pkt.opcode != 132 && pkt.iface != 64)
+        if (player.dialogueInterpreter.dialogue != null && pkt.opcode != 132 && pkt.iface != 64 && pkt.iface != 746)
             player.dialogueInterpreter.close()
         if (player.locks.isComponentLocked)
             return
