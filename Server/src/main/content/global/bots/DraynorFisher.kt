@@ -8,6 +8,8 @@ import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
 import core.game.bots.SkillingBotAssembler
 import core.game.bots.Script
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListeners
 
 class DraynorFisher  : Script() {
     val fishingZone = ZoneBorders(3085, 3223,3089, 3233)
@@ -22,7 +24,11 @@ class DraynorFisher  : Script() {
                     scriptAPI.walkTo(fishingZone.randomLoc)
                 else {
                     val spot = scriptAPI.getNearestNode(316,false)
-                    spot?.interaction?.handle(bot,spot.interaction[0]) ?: scriptAPI.walkTo(fishingZone.randomLoc)
+                    if (spot != null) {
+                        InteractionListeners.run(spot.id, IntType.NPC,"net",bot,spot)
+                    } else {
+                        scriptAPI.walkTo(fishingZone.randomLoc)
+                    }
                     if(bot.inventory.getMaximumAdd(Item(4151)) < 5)
                         state = State.BANKING
                 }
