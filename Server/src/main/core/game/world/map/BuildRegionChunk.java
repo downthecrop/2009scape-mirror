@@ -6,6 +6,7 @@ import core.game.node.item.GroundItem;
 import core.game.node.item.Item;
 import core.game.node.scenery.Constructed;
 import core.game.node.scenery.Scenery;
+import core.game.node.scenery.SceneryBuilder;
 import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.world.map.build.LandscapeParser;
@@ -100,11 +101,12 @@ public class BuildRegionChunk extends RegionChunk {
 		for (int x = 0; x < SIZE; x++) {
 			for (int y = 0; y < SIZE; y++) {
 				for (int i = 0; i < objects.length; i++) {
-					copy[i][x][y] = objects[i][x][y];
-					objects[i][x][y] = null;
+					Scenery object = copy[i][x][y] = objects[i][x][y];
+					if (object != null) {
+						SceneryBuilder.remove(object);
+						this.remove(object);
+					}
 				}
-				plane.getObjects()[baseX + x][baseY + y] = null;
-				plane.getFlags().clearFlag(baseX + x, baseY + y);
 			}
 		}
 		clear();
