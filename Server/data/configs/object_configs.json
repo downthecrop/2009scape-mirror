@@ -20060,6 +20060,10 @@
     "ids": "15748"
   },
   {
+    "examine": "Danger - Possibly deadly creatures below!",
+    "ids": "16083,16151,16117"
+  },
+  {
     "examine": "Large urn.",
     "ids": "17362"
   },
@@ -20190,6 +20194,10 @@
   {
     "examine": "I wonder what this spooky contains.",
     "ids": "37051"
+  },
+  {
+    "examine": "The mine has collapsed.",
+    "ids": "37634"
   },
   {
     "examine": "It really was this big!",
