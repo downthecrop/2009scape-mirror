@@ -272,11 +272,11 @@ public enum Consumables {
 	BRAINDEATH_RUM(new Drink(new int[] {7157}, new MultiEffect(new SkillEffect(Skills.DEFENCE, 0, -0.1), new SkillEffect(Skills.ATTACK, 0, -0.05), new SkillEffect(Skills.PRAYER, 0, -0.05), new SkillEffect(Skills.RANGE, 0, -0.05), new SkillEffect(Skills.MAGIC, 0, -0.05), new SkillEffect(Skills.HERBLORE, 0, -0.05), new SkillEffect(Skills.STRENGTH, 3, 0), new SkillEffect(Skills.MINING, 1, 0)), "With a sense of impending doom you drink the 'rum'. You try very hard not to die.")),
 	RUM_TROUBLE_BREWING_RED(new Drink(new int[] {8940, 8940}, new TroubleBrewingRumEffect("Oh gods! It tastes like burning!"), new Animation(9605))),
 	RUM_TROUBLE_BREWING_BLUE(new Drink(new int[] {8941, 8941}, new TroubleBrewingRumEffect("My Liver! My Liver is melting!"), new Animation(9604))),
-	VODKA(new Drink(new int[] {2015}, new MultiEffect(new SkillEffect(Skills.STRENGTH, 3, 0), new SkillEffect(Skills.ATTACK, -3, 0)))),
+	VODKA(new Drink(new int[] {2015}, new MultiEffect(new HealingEffect(2), new SkillEffect(Skills.ATTACK, -4, 0), new SkillEffect(Skills.STRENGTH, 4, 0)))),
 	GIN(new Drink(new int[] {2019}, new MultiEffect(new SkillEffect(Skills.STRENGTH, 1, 0), new SkillEffect(Skills.ATTACK, 4, 0), new RandomHealthEffect(3, 4)))),
 	BRANDY(new Drink(new int[] {2021}, new MultiEffect(new HealingEffect(5), new SkillEffect(Skills.ATTACK, 4, 0)))),
 	WHISKY(new Drink(new int[] {2017}, new MultiEffect(new HealingEffect(5), new SkillEffect(Skills.STRENGTH, 3, 0), new SkillEffect(Skills.ATTACK, -4, 0)))),
-	BOTTLE_OF_WINE(new Drink(new int[] {2015, 7921}, new MultiEffect(new HealingEffect(14), new SkillEffect(Skills.ATTACK, -3, 0)))),
+	BOTTLE_OF_WINE(new Drink(new int[] {7919, 7921}, new MultiEffect(new HealingEffect(14), new SkillEffect(Skills.ATTACK, -3, 0)))),
 
 	/** Wine */
 	JUG_OF_WINE(new Drink(new int[] {1993, 1935}, new MultiEffect(new HealingEffect(11), new SkillEffect(Skills.ATTACK, -2, 0)))),

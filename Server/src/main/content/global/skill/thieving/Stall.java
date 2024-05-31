@@ -19,7 +19,7 @@ public enum Stall {
 	CRAFTING_STALL(new Integer[]{4874, 6166}, new Integer[] { 4797, 6984 }, 5, new Item[]{new Item(1592, 1), new Item(1597, 1), new Item(1755, 1)}, 16, 12,"crafting supplies"),
 	TEA_STALL(new Integer[]{635, 6574}, new Integer[] { 634, 6573 }, 5, new Item[]{new Item(712, 1)}, 16, 12,"tea"),
 	SILK_STALL(new Integer[]{34383, 2560}, new Integer[] { 34381, 634 }, 20, new Item[]{new Item(950, 1)}, 24, 13,"silk"),
-	WINE_STALL(new Integer[]{2046}, new Integer[] { 634 }, 22, new Item[]{new Item(1935, 1), new Item(1937, 1), new Item(1993, 1), new Item(7919, 1)}, 27, 27,"wine"), //OBJECT MISSING IN CACHE
+	WINE_STALL(new Integer[]{14011}, new Integer[] { 634 }, 22, new Item[]{new Item(1935, 1), new Item(1937, 1), new Item(1993, 1), new Item(7919, 1)}, 27, 27,"wine"),
 	MARKET_SEED_STALL(new Integer[]{7053}, new Integer[] { 634 }, 27, new Item[]{new Item(5096, 1), new Item(5097, 1), new Item(5101, 1), new Item(5318, 1), new Item(5319, 1), new Item(5324, 1)}, 10, 19,"seeds"),
 	FUR_STALL(new Integer[]{ 34387, 2563, 4278}, new Integer[] { 34381, 634, 634 }, 35, new Item[]{new Item(6814, 1), new Item(958, 1)}, 36, 25,"fur"),
 	FISH_STALL(new Integer[]{ 4277, 4705, 4707 }, new Integer[] { 634, 634, 634 }, 42, new Item[]{new Item(331, 1), new Item(359, 1), new Item(377, 1)}, 42, 27,"fish"),
