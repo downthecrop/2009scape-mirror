@@ -1,5 +1,7 @@
 package content.region.misthalin.barbvillage.dialogue
 
+import content.region.kandarin.quest.scorpioncatcher.SCPeksaDialogue
+import content.region.kandarin.quest.scorpioncatcher.ScorpionCatcher
 import core.api.getQuestStage
 import core.api.openDialogue
 import core.game.dialogue.DialoguePlugin
@@ -34,8 +36,7 @@ class PeksaDialogue(player: Player? = null) : DialoguePlugin(player){
                 showTopics(
                     Topic("I could be, yes.", GO_SHOPPING),
                     Topic("No, I'll pass on that.", LEAVE),
-                    // todo get the quest state from Scorpion catcher to make this work
-                    // IfTopic("Scorpion Stuff", SCORPION_CATCHER, getQuestStage(player, "Scorpion Catcher") == 50)
+                    IfTopic("I've heard you have a small scorpion in your possession.", DIALOGUE_SCORPION_CATCHER, getQuestStage(player, "Scorpion Catcher") == ScorpionCatcher.QUEST_STATE_OTHER_SCORPIONS)
                 )
             }
 
@@ -48,9 +49,9 @@ class PeksaDialogue(player: Player? = null) : DialoguePlugin(player){
                 npcl(FacialExpression.HALF_GUILTY, "Well, come back if you change your mind.").also { stage = END_DIALOGUE }
             }
 
-            // DIALOGUE_SCORPION_CATCHER -> {
-            //     openDialogue(player, PeksaDialogueSC(), npc)
-            // }
+            DIALOGUE_SCORPION_CATCHER -> {
+                openDialogue(player, SCPeksaDialogue(getQuestStage(player, "Scorpion Catcher")), npc)
+            }
         }
 
         return true

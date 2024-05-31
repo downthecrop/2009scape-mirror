@@ -5215,6 +5215,7 @@
     "melee_animation": "0",
     "range_animation": "0",
     "combat_audio": "3611,3612,3610",
+    "respawn_delay": "60",
     "defence_animation": "0",
     "magic_animation": "0",
     "death_animation": "0",
@@ -5237,6 +5238,7 @@
     "strength_level": "1",
     "id": "386",
     "range_level": "1",
+    "respawn_delay": "60",
     "attack_level": "1"
   },
   {
@@ -5249,6 +5251,7 @@
     "strength_level": "1",
     "id": "387",
     "range_level": "1",
+    "respawn_delay": "60",
     "attack_level": "1"
   },
   {

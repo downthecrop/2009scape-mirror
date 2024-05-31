@@ -4243,77 +4243,85 @@
     "tradeable": "false",
     "destroy": "true",
     "archery_ticket_price": "0",
-    "id": "456"
+    "id": "456",
+    "weight": "0.15"
   },
   {
     "destroy_message": "You will need to speak to Thormac to get another cage.",
-    "examine": "It's empty!",
+    "examine": "There is 1 scorpion inside.",
     "durability": null,
     "name": "Scorpion cage",
     "tradeable": "false",
     "destroy": "true",
     "archery_ticket_price": "0",
-    "id": "457"
+    "id": "457",
+    "weight": "0.175"
   },
   {
     "destroy_message": "You will need to speak to Thormac to get another cage.",
-    "examine": "It's empty!",
+    "examine": "There are 2 scorpions inside.",
     "durability": null,
     "name": "Scorpion cage",
     "tradeable": "false",
     "destroy": "true",
     "archery_ticket_price": "0",
-    "id": "458"
+    "id": "458",
+    "weight": "0.2"
   },
   {
     "destroy_message": "You will need to speak to Thormac to get another cage.",
-    "examine": "It's empty!",
+    "examine": "There is 1 scorpion inside.",
     "durability": null,
     "name": "Scorpion cage",
     "tradeable": "false",
     "destroy": "true",
     "archery_ticket_price": "0",
-    "id": "459"
+    "id": "459",
+    "weight": "0.175"
   },
   {
     "destroy_message": "You will need to speak to Thormac to get another cage.",
-    "examine": "It's empty!",
+    "examine": "There are 2 scorpions inside.",
     "durability": null,
     "name": "Scorpion cage",
     "tradeable": "false",
     "destroy": "true",
     "archery_ticket_price": "0",
-    "id": "460"
+    "id": "460",
+    "weight": "0.2"
   },
   {
     "destroy_message": "You will need to speak to Thormac to get another cage.",
-    "examine": "It's empty!",
+    "examine": "There is 1 scorpion inside.",
     "durability": null,
     "name": "Scorpion cage",
     "tradeable": "false",
     "destroy": "true",
     "archery_ticket_price": "0",
-    "id": "461"
+    "id": "461",
+    "weight": "0.175"
   },
   {
     "destroy_message": "You will need to speak to Thormac to get another cage.",
-    "examine": "It's empty!",
+    "examine": "There are 2 scorpions inside.",
     "durability": null,
     "name": "Scorpion cage",
     "tradeable": "false",
     "destroy": "true",
     "archery_ticket_price": "0",
-    "id": "462"
+    "id": "462",
+    "weight": "0.2"
   },
   {
     "destroy_message": "You will need to speak to Thormac to get another cage.",
-    "examine": "It's empty!",
+    "examine": "There are 3 scorpions inside.",
     "durability": null,
     "name": "Scorpion cage",
     "tradeable": "false",
     "destroy": "true",
     "archery_ticket_price": "0",
-    "id": "463"
+    "id": "463",
+    "weight": "0.225"
   },
   {
     "ge_buy_limit": "10000",

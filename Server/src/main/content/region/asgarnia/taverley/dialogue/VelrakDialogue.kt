@@ -21,7 +21,6 @@ class VelrakDialogue(player: Player? = null) : DialoguePlugin(player) {
             playerl(FacialExpression.HALF_THINKING, "Are you still here?").also { stage = 100 }
         } else {
             npcl(FacialExpression.FRIENDLY, "Thank you for rescuing me! It isn't very comfy in this cell.")
-            removeItem(player, Items.JAIL_KEY_1591, Container.INVENTORY)
         }
         return true
     }

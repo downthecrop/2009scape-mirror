@@ -60,7 +60,7 @@ class SeerDiaryDialogue : DialogueFile() {
         // This has to be npc otherwise wordwrap goes wrong and extends to 5 lines
         ASK_FOR_HELP -> npc(FacialExpression.HAPPY, "I certainly do - we have a set of tasks spanning Seers'", "Village, Catherby, Hemenster and the Sinclair Mansion.",
         "Just complete the tasks listed in the Achievement Diary", "and they will be ticked off automatically.").also { stage++ }
-        ASK_FOR_HELP + 1 -> playerl(FacialExpression.ASKING, "Hi! Can you help me out with the Achievement Diary tasks?").also { stage++ }
+        ASK_FOR_HELP + 1 -> playerl(FacialExpression.ASKING, "Can you help me out with the Achievement Diary tasks?").also { stage++ }
         ASK_FOR_HELP + 2 -> npcl(FacialExpression.SAD,
         "I'm afraid not. It is important that adventurers complete the tasks unaided. That way, only the truly worthy collect the spoils.").also {
             stage = END_DIALOGUE

@@ -48,12 +48,17 @@ class QuestCommandSet : CommandSet(Privilege.ADMIN){
             val quest = args[1].toIntOrNull() ?: reject(player,"INVALID QUEST")
             val stage = args[2].toIntOrNull() ?: reject(player,"INVALID STAGE")
             val questObject = player.questRepository.forIndex(quest as Int)
-            player.questRepository.setStageNonmonotonic(questObject, stage as Int)
-            if (stage == 0){
-                questObject.reset(player)
+            if (questObject == null){
+                reject(player, "$quest did not match anything in the quest repository")
             }
-            questObject.updateVarps(player)
-            notify(player, "<col=209dff>Setting " + questObject.name + " to stage $stage</col>")
+            else{
+                player.questRepository.setStageNonmonotonic(questObject, stage as Int)
+                if (stage == 0) {
+                    questObject.reset(player)
+                }
+                questObject.updateVarps(player)
+                notify(player, "<col=209dff>Setting " + questObject.name + " to stage $stage</col>")
+            }
         }
 
         /**

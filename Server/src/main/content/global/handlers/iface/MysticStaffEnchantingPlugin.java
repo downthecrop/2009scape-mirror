@@ -20,7 +20,6 @@ import java.util.HashMap;
 public final class MysticStaffEnchantingPlugin extends ComponentPlugin {
 
     private final Component COMPONENT = new Component(332);
-    private final int cost = 40000;
 
     protected enum EnchantedStaff {
         AIR(Items.MYSTIC_AIR_STAFF_1405, Items.AIR_BATTLESTAFF_1397, 21),
@@ -28,7 +27,8 @@ public final class MysticStaffEnchantingPlugin extends ComponentPlugin {
         EARTH(Items.MYSTIC_EARTH_STAFF_1407, Items.EARTH_BATTLESTAFF_1399, 23),
         FIRE(Items.MYSTIC_FIRE_STAFF_1401, Items.FIRE_BATTLESTAFF_1393, 24),
         LAVA(Items.MYSTIC_LAVA_STAFF_3054, Items.LAVA_BATTLESTAFF_3053, 25),
-        MUD(Items.MYSTIC_MUD_STAFF_6563, Items.MUD_BATTLESTAFF_6562, 26);
+        MUD(Items.MYSTIC_MUD_STAFF_6563, Items.MUD_BATTLESTAFF_6562, 26),
+        STEAM(Items.MYSTIC_STEAM_STAFF_11738, Items.STEAM_BATTLESTAFF_11736, 27);
 
         public final int enchanted;
         public final int basic;
@@ -68,7 +68,6 @@ public final class MysticStaffEnchantingPlugin extends ComponentPlugin {
 
     @Override
     public boolean handle(Player player, Component component, int opcode, int buttonId, int slot, int itemId) {
-        player.getPacketDispatch().sendMessage("op: " + opcode + " button: " + buttonId + " slot: "+ slot + " item: " + itemId);
 
         if (EnchantedStaff.childToBasic.containsKey(buttonId)) {
             Item basicStaff = new Item(EnchantedStaff.childToBasic.get(buttonId));
@@ -78,9 +77,10 @@ public final class MysticStaffEnchantingPlugin extends ComponentPlugin {
                 player.getPacketDispatch().sendMessage("You don't have a" + (StringUtils.isPlusN(basicStaff.getName()) ? "n " : " ") + basicStaff.getName() + " to enchant.");
                 return true;
             }
+            int cost = player.getEquipment().contains(Items.SEERS_HEADBAND_14631, 1)? 27000 : 40000;
             if (!player.getInventory().contains(995, cost)) {
                 player.getInterfaceManager().close();
-                player.getDialogueInterpreter().sendDialogues(389, null, "I need 40,000 coins for materials. Come", "back when you have the money!");
+                player.getDialogueInterpreter().sendDialogues(389, null, "I need " + String.format("%,d", cost) + " coins for materials. Come", "back when you have the money!");
                 return true;
             }
             if (player.getInventory().remove(basicStaff, new Item(995, cost))) {
