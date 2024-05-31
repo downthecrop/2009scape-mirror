@@ -40,6 +40,7 @@ import core.game.interaction.InterfaceListener
 import core.game.world.GameWorld
 import core.game.world.GameWorld.ticks
 import org.rs09.consts.*
+import kotlin.math.min
 import org.rs09.consts.Graphics as Gfx
 import org.rs09.consts.Scenery as Sceneries
 
@@ -369,7 +370,10 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
         }
 
         fun populateSeeds() {
-            while(SEED_LOCS.size < MAX_SEEDS) {
+            val holes = countHoles()
+            val seeds = min(1.0 * MAX_SEEDS, holes * 0.13).toInt()
+            var tries = 0 // Prevent the while loop from crashing the server
+            while(SEED_LOCS.size < seeds && tries++ < 1000) {
                 val loc = VINESWEEPER_BORDERS.getRandomLoc()
                 val scenery = getScenery(loc)
                 if(scenery != null && HOLES.contains(scenery.id)) {
@@ -378,9 +382,23 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
             }
         }
 
-        fun faceHole(player: Player, hole: Scenery) {
-
+        private fun countHoles(): Int {
+            val northEastX = VINESWEEPER_BORDERS.northEastX
+            val northEastY = VINESWEEPER_BORDERS.northEastY
+            val southWestX = VINESWEEPER_BORDERS.southWestX
+            val southWestY = VINESWEEPER_BORDERS.southWestY
+            var holeCount = 0
+            for (x in southWestX .. northEastX){
+                for (y in southWestY .. northEastY){
+                    val scenery = getScenery(x, y, 0)
+                    if(scenery != null && HOLES.contains(scenery.id)) {
+                        holeCount++
+                    }
+                }
+            }
+            return holeCount
         }
+
         fun plantFlag(player: Player, hole: Scenery) {
             if(player.inventory.remove(Item(Items.FLAG_12625, 1))) {
                 player.lock()
