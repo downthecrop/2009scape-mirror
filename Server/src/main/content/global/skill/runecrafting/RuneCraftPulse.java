@@ -167,19 +167,6 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
         return true;
     }
 
-    @Override
-    public void message(int type) {
-        switch (type) {
-            case 1:
-                if (altar != Altar.OURANIA) {
-                    player.getPacketDispatch().sendMessage("You bind the temple's power into " + (combination ? combo.getRune().getName().toLowerCase() : rune.getRune().getName().toLowerCase()) + "s.");
-                } else {
-                    player.getPacketDispatch().sendMessage("You bind the temple's power into runes.");
-                }
-                break;
-        }
-    }
-
     /**
      * Method used to craft runes.
      */
@@ -195,6 +182,7 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
             Item i = new Item(rune.getRune().getId(), total);
 
             if (player.getInventory().remove(item) && player.getInventory().hasSpaceFor(i)) {
+                player.getPacketDispatch().sendMessage("You bind the temple's power into " + (combination ? combo.getRune().getName().toLowerCase() : rune.getRune().getName().toLowerCase()) + "s.");
                 player.getInventory().add(i);
                 player.incrementAttribute("/save:" + STATS_BASE + ":" + STATS_RC, amount);
                 
@@ -224,6 +212,7 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
             }
         } else {
             if (player.getInventory().remove(item)) {
+                player.getPacketDispatch().sendMessage("You bind the temple's power into runes.");
                 player.incrementAttribute("/save:" + STATS_BASE + ":" + STATS_RC, amount);
                 for (int i = 0; i < amount; i++) {
                     Rune rune = null;
