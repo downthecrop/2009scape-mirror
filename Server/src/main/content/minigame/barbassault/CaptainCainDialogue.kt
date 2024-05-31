@@ -48,7 +48,7 @@ class CaptainCainDialogue(player: Player? = null) : DialoguePlugin(player) {
             10 -> npcl(FacialExpression.FRIENDLY, "Alright, then, that'll be 4,500,000 gold please.").also { stage++ }
             11 -> options("Here you go!","Nevermind.").also { stage++ }
             12 -> when(buttonId){
-                1 -> if(inInventory(player, 995, ))
+                1 -> if(inInventory(player, 995, TORSO_PRICE))
                     playerl(FacialExpression.FRIENDLY, "Here you go!").also { stage = 20 }
                 else
                     playerl(FacialExpression.HALF_GUILTY, "Actually, I don't have that much.").also { stage = END_DIALOGUE }
