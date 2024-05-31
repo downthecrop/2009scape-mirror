@@ -15,7 +15,7 @@ public enum TanningProduct {
 	SOFT_LEATHER(1, 1739, 1741),
 	HARD_LEATHER(2, 1739, 1743),
 	SNAKESKIN(3, 6287, 6289),
-	SNAKESKIN2(4, 6287, 6289),
+	SNAKESKIN2(4, 7801, 6289),
 	GREEN_DHIDE(5, 1753, 1745),
 	BLUEDHIDE(6, 1751, 2505),
 	REDDHIDE(7, 1749, 2507),
@@ -120,9 +120,9 @@ public enum TanningProduct {
 		} else if (def == HARD_LEATHER) {
 			coins = 3;
 		} else if (def == SNAKESKIN) {
-			coins = 20;
-		} else if (def == SNAKESKIN2) {
 			coins = 15;
+		} else if (def == SNAKESKIN2) {
+			coins = 20;
 		} else {
 			coins = 20;
 		}

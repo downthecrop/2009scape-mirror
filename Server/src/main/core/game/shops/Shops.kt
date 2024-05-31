@@ -126,8 +126,8 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
     override fun defineListeners() {
         on(IntType.NPC, "trade", "shop"){ player, node ->
             val npc = node as NPC
-            if (npc.id == 2824) {
-                TanningProduct.open(player, 2824)
+            if (npc.id == 2824 || npc.id == 1041 || npc.id == 804) {
+                TanningProduct.open(player, npc.id)
                 return@on true
             }
             if (npc.id == 7601) {

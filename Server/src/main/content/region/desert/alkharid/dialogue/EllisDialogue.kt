@@ -1,33 +1,24 @@
-package content.region.asgarnia.dialogue
+package content.region.desert.alkharid.dialogue
 
 import content.global.skill.crafting.TanningProduct
-import core.api.amountInInventory
 import core.api.inInventory
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.player.Player
 import core.game.node.entity.npc.NPC
 import core.plugin.Initializable
-import org.rs09.consts.Items
-import org.rs09.consts.NPCs
 import core.tools.END_DIALOGUE
+import org.rs09.consts.NPCs
 
 /**
- * Handles the Crafting Guild Tanner's dialogue.
- * @author bushtail
+ * Handles Ellis's dialogue.
  */
-
 @Initializable
-class TannerDialogue(player: Player? = null) : DialoguePlugin(player) {
-
-    override fun newInstance(player: Player): DialoguePlugin {
-        return TannerDialogue(player)
-    }
+class EllisDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npcl(FacialExpression.NEUTRAL, "Greetings friend. I am a manufacturer of leather.")
-        stage = 0
+        npcl(FacialExpression.FRIENDLY, "Greetings friend. I am a manufacturer of leather.").also { stage = 0 }
         return true
     }
 
@@ -56,7 +47,7 @@ class TannerDialogue(player: Player? = null) : DialoguePlugin(player) {
                 2 -> playerl(FacialExpression.NEUTRAL, "No thanks.").also { stage = 13 }
             }
 
-            12 -> end().also { TanningProduct.open(player, NPCs.TANNER_804) }
+            12 -> end().also { TanningProduct.open(player, NPCs.ELLIS_2824) }
             13 -> npcl(FacialExpression.FRIENDLY, "Very well, @g[sir,madam], as you wish.").also { stage = END_DIALOGUE }
 
             20 -> when (buttonId) {
@@ -74,8 +65,11 @@ class TannerDialogue(player: Player? = null) : DialoguePlugin(player) {
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TANNER_804)
+    override fun newInstance(player: Player?): DialoguePlugin {
+        return EllisDialogue(player)
     }
 
+    override fun getIds(): IntArray {
+        return intArrayOf(NPCs.ELLIS_2824)
+    }
 }

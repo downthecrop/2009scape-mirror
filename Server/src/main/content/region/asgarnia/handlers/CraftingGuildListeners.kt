@@ -2,14 +2,14 @@ package content.region.asgarnia.handlers
 
 import content.global.skill.crafting.TanningProduct
 import core.api.*
+import core.game.interaction.IntType
 import core.game.node.entity.skill.Skills
 import core.game.world.map.Location
 import org.rs09.consts.Items
+import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import content.region.asgarnia.dialogue.TheDoorDialogues
 import core.game.interaction.InteractionListener
-import core.game.interaction.IntType
-import org.rs09.consts.NPCs
 
 /**
  * @author bushtail
@@ -17,13 +17,18 @@ import org.rs09.consts.NPCs
 
 class CraftingGuildListeners : InteractionListener {
     private val GUILD_DOOR = Scenery.GUILD_DOOR_2647
-    private val REQUIRED_ITEMS = intArrayOf(Items.BROWN_APRON_1757, Items.CRAFTING_CAPE_9780, Items.CRAFTING_CAPET_9781)
+    private val APRON = Items.BROWN_APRON_1757
+    private val CAPE = Items.CRAFTING_CAPE_9780
 
     override fun defineListeners() {
         on(GUILD_DOOR, IntType.SCENERY, "open") { player, door ->
             if (player.location == Location.create(2933, 3289, 0)) {
                 if (hasLevelStat(player, Skills.CRAFTING, 40)) {
-                    if (anyInEquipment(player, *REQUIRED_ITEMS)) {
+                    if (inEquipment(player, APRON)) {
+                        openDialogue(player, TheDoorDialogues(0))
+                        core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, door.asScenery())
+                        return@on true
+                    } else if (inEquipment(player, CAPE)) {
                         openDialogue(player, TheDoorDialogues(0))
                         core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, door.asScenery())
                         return@on true
