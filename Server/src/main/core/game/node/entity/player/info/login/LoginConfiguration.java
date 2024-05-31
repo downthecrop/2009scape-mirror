@@ -152,18 +152,8 @@ public final class LoginConfiguration {
             if (item == null) continue;
             player.getEquipment().remove(item);
             if (!InteractionListeners.run(item.getId(), player, item, true) || !player.getEquipment().add(item, true, false)) {
-                if (player.getInventory().add(item))
-                    player.sendMessage (colorize("%RAs you can no longer wear " + item.getName() + ", it has been unequipped."));
-                else if (player.getBankPrimary().add(item))
-                    player.sendMessage (colorize("%RAs you can no longer wear " + item.getName() + ", it has been sent to your bank."));
-                else if (player.getBankSecondary().add(item))
-                    player.sendMessage (colorize("%RAs you can no longer wear " + item.getName() + ", it has been sent to your secondary bank."));
-                else {
-                    player.sendMessage (colorize("%RAs you can no longer wear " + item.getName() + ", and your inventory and both banks are full,"));
-                    player.sendMessage (colorize("%RIt has been placed on the ground under your feet. Don't forget to grab it."));
-                    player.sendMessage ("(Also, consider cleaning out your banks maybe? I mean jesus.)");
-                    GroundItemManager.create (item, player);
-                }
+                player.sendMessage(colorize("%RAs you can no longer wear " + item.getName() + ", it has been unequipped."));
+                addItemOrBank(player, item.getId(), item.getAmount());
             }
         }
 

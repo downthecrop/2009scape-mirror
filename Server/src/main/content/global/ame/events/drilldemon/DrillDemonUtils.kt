@@ -11,7 +11,7 @@ import org.rs09.consts.NPCs
 
 object DrillDemonUtils {
     val DD_KEY_TASK = "/save:drilldemon:task"
-    val DD_KEY_RETURN_LOC = "/save:drilldemon:original-loc"
+    val DD_KEY_RETURN_LOC = "/save:original-loc"
     val DD_SIGN_VARP = 531
     val DD_SIGN_JOG = 0
     val DD_SIGN_SITUP = 1

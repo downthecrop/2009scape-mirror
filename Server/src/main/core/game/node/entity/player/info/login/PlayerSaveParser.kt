@@ -48,9 +48,6 @@ class PlayerSaveParser(val player: Player) {
         reader ?: log(this::class.java, Log.WARN,  "Couldn't find save file for ${player.name}, or save is corrupted.").also { read = false }
         if (read) {
             saveFile = parser.parse(reader) as JSONObject
-        }
-
-        if (read) {
             parseData()
         }
     }
@@ -80,7 +77,7 @@ class PlayerSaveParser(val player: Player) {
         parseStatistics()
         parseAchievements()
         parsePouches()
-        parsePouches()
+        parseVersion()
     }
 
     fun runContentHooks()
@@ -377,5 +374,11 @@ class PlayerSaveParser(val player: Player) {
         player.settings.parse(settingsData)
     }
 
-
+    fun parseVersion() {
+        saveFile ?: return
+        player.version = 0
+        if (saveFile!!.containsKey("version")) {
+            player.version = saveFile!!["version"].toString().toInt()
+        }
+    }
 }

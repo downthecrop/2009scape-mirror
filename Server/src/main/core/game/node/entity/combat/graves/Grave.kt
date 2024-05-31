@@ -49,7 +49,7 @@ class Grave : AbstractNPC {
 
         this.ownerUid = player.details.uid
         this.ownerUsername = player.username
-        this.location = location
+        this.location = player.getAttribute("/save:original-loc",location)
         this.isRespawn = false
         this.isWalks = false
         this.isNeverWalks = true

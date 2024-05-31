@@ -91,6 +91,7 @@ import static core.api.utils.Permadeath.PermadeathKt.permadeath;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_BASE;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_DEATHS;
 import static core.tools.GlobalsKt.colorize;
+import static org.rs09.consts.Items.BONES_526;
 
 /**
  * Represents a player entity.
@@ -310,11 +311,18 @@ public class Player extends Entity {
 	 * The amount of targets that the player can shoot left for the archery minigame.
 	 */
 	private int archeryTargets = 0;
-
 	private int archeryTotal = 0;
 
-	public byte[] opCounts = new byte[255];
+	/**
+	 * The save file version.
+	 */
+	public int version = ServerConstants.CURRENT_SAVEFILE_VERSION;
 
+	/**
+	 * Packet administration.
+	 * opCounts is used to enforce an authentic limit of 10 of each inbound packet per user per tick.
+	 */
+	public byte[] opCounts = new byte[255];
 	public int invalidPacketCount = 0;
 
 	/**
@@ -611,7 +619,7 @@ public class Player extends Entity {
 		if (this.isArtificial() && killer instanceof NPC) {
 			return;
 		}
-		if (killer instanceof Player && getWorldTicks() - killer.getAttribute("/save:last-murder-news", 0) >= 500) {
+		if (killer instanceof Player && killer.getName() != getName() /* happens if you died via typeless damage from an external cause, e.g. bugs in a dark cave without a light source */ && getWorldTicks() - killer.getAttribute("/save:last-murder-news", 0) >= 500) {
 			Item wep = getItemFromEquipment((Player) killer, EquipmentSlot.WEAPON);
 			sendNews(killer.getUsername() + " has murdered " + getUsername() + " with " + (wep == null ? "their fists." : (StringUtils.isPlusN(wep.getName()) ? "an " : "a ") + wep.getName()));
 			killer.setAttribute("/save:last-murder-news", getWorldTicks());
@@ -630,7 +638,7 @@ public class Player extends Entity {
 					return;
 				}
 			}
-			GroundItemManager.create(new Item(526), getLocation(), k);
+			GroundItemManager.create(new Item(BONES_526), this.getAttribute("/save:original-loc",location), k);
 			final Container[] c = DeathTask.getContainers(this);
 
 			for (Item i : getEquipment().toArray()) {
@@ -684,6 +692,10 @@ public class Player extends Entity {
 		skullManager.setSkulled(false);
 		removeAttribute("combat-time");
 		getPrayer().reset();
+		removeAttribute("original-loc"); //in case you died inside a random event
+		interfaceManager.openDefaultTabs(); //in case you died inside a random that had blanked them
+		setComponentVisibility(this, 548, 69, false); //reenable the logout button (SD)
+		setComponentVisibility(this, 746, 12, false); //reenable the logout button (HD)
 		super.finalizeDeath(killer);
 		appearance.sync();
 		if (!getSavedData().getGlobalData().isDeathScreenDisabled()) {

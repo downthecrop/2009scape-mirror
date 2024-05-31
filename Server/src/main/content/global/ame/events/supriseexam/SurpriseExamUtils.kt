@@ -13,7 +13,7 @@ import core.ServerConstants
 
 object SurpriseExamUtils {
 
-    val SE_KEY_LOC = "supexam:loc"
+    val SE_KEY_LOC = "/save:original-loc"
     val SE_KEY_INDEX = "supexam:index"
     val SE_LOGOUT_KEY = "suprise_exam"
     val SE_DOOR_KEY = "supexam:door"

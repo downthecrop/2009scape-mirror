@@ -40,7 +40,7 @@ class GraveController : PersistWorld, TickListener, InteractionListener, Command
             player.details.rights = Rights.REGULAR_PLAYER
             setAttribute(player, "tutorial:complete", true)
             player.impactHandler.manualHit(player, player.skills.lifepoints, ImpactHandler.HitsplatType.NORMAL)
-            notify(player, "Grave created at ${player.location}")
+            notify(player, "Grave created at ${player.getAttribute("/save:original-loc",player.location)}")
             GameWorld.Pulser.submit(object : Pulse(15) {
                 override fun pulse(): Boolean {
                     player.details.rights = Rights.ADMINISTRATOR

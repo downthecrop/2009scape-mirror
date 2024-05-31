@@ -8,6 +8,8 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.tools.RandomFunction;
 
+import static core.api.ContentAPIKt.addItemOrBank;
+
 /**
  * Represents the gertrudes fortress quest.
  * @author 'Vexia
@@ -84,7 +86,7 @@ public class GertrudesCat extends Quest {
 		player.getPacketDispatch().sendItemZoomOnInterface(kitten.getId(), 240, 277, 3 + 2);
 		setStage(player, 100);
 		if (player.getFamiliarManager().hasFamiliar()) {
-			player.getInventory().add(kitten);
+			addItemOrBank(player, kitten.getId(), 1);
 		} else {
 			player.getFamiliarManager().summon(kitten, true, false);
 		}

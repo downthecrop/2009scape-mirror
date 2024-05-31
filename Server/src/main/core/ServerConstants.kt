@@ -18,6 +18,9 @@ class ServerConstants {
         var NOAUTH_DEFAULT_ADMIN: Boolean = true
 
         @JvmField
+        var CURRENT_SAVEFILE_VERSION = 1
+
+        @JvmField
         var DAILY_ACCOUNT_LIMIT = 3
 
         @JvmField

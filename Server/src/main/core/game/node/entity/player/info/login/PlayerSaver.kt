@@ -56,6 +56,7 @@ class PlayerSaver (val player: Player){
         saveStatManager(saveFile)
         saveAttributes(saveFile)
         savePouches(saveFile)
+        saveVersion(saveFile)
         contentHooks.forEach { it.savePlayer(player, saveFile) }
         return saveFile
     }
@@ -94,6 +95,10 @@ class PlayerSaver (val player: Player){
 
     fun savePouches(root: JSONObject){
         player.pouchManager.save(root)
+    }
+
+    fun saveVersion(root: JSONObject){
+        root.put("version", player.version)
     }
 
     fun saveAttributes(root: JSONObject){

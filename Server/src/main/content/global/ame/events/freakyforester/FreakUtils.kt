@@ -10,7 +10,7 @@ import core.tools.RandomFunction
 
 object FreakUtils{
     const val freakNpc = NPCs.FREAKY_FORESTER_2458
-    const val freakPreviousLoc = "/save:freakyf:location"
+    const val freakPreviousLoc = "/save:original-loc"
     const val freakTask = "/save:freakyf:task"
     const val freakComplete = "/save:freakyf:complete"
     const val pheasantKilled = "freakyf:killed"
