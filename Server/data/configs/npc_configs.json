@@ -32272,16 +32272,21 @@
     "attack_level": "1"
   },
   {
+    "examine": "Big, ugly, and smelly.",
+    "slayer_task": "64",
+    "melee_animation": "359",
+    "attack_speed": "7",
+    "respawn_delay": "60",
+    "defence_animation": "360",
+    "weakness": "8",
+    "death_animation": "361",
     "name": "Ogre",
-    "defence_level": "1",
+    "defence_level": "27",
     "safespot": null,
     "lifepoints": "60",
-    "strength_level": "1",
-    "attack_speed": "7",
+    "strength_level": "27",
     "id": "3419",
     "aggressive": "true",
-    "range_level": "1",
-    "respawn_delay": "60",
     "attack_level": "1"
   },
   {
