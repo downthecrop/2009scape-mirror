@@ -1,15 +1,15 @@
 package content.global.handlers.iface.bank
 
+import content.global.dialogue.BankDepositDialogue
+import content.global.dialogue.BankHelpDialogue
+import core.ServerConstants
 import core.api.*
 import core.game.component.Component
 import core.game.container.Container
+import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import org.rs09.consts.Components
 import org.rs09.consts.Items
-import core.ServerConstants
-import content.global.dialogue.BankDepositDialogue
-import content.global.dialogue.BankHelpDialogue
-import core.game.interaction.InterfaceListener
 
 /**
  * Allows the user to interact with the Bank Interface.
@@ -58,8 +58,6 @@ class BankInterface : InterfaceListener {
     }
 
     private fun onBankInterfaceOpen(player: Player, component: Component): Boolean {
-        player.bank.sendBankSpace()
-
         val settings = IfaceSettingsBuilder()
             .enableAllOptions()
             .enableSlotSwitch()
@@ -74,14 +72,12 @@ class BankInterface : InterfaceListener {
             ServerConstants.BANK_SIZE
         )
 
+        resetSearch(player)
         return false
     }
 
     private fun handleTabInteraction(player: Player, component: Component, opcode: Int, buttonID: Int, slot: Int, itemID: Int): Boolean {
-        if (getAttribute(player, "search", false)) {
-            player.bank.reopen()
-        }
-
+        resetSearch(player)
         val clickedTabIndex = -((buttonID - 41) / 2)
 
         when (opcode) {
@@ -102,36 +98,16 @@ class BankInterface : InterfaceListener {
     private fun handleBankMenu(player: Player, component: Component, opcode: Int, buttonID: Int, slot: Int, itemID: Int): Boolean {
         val item = player.bank.get(slot)
             ?: return true
+        resetSearch(player)
 
         when (opcode) {
-            OP_AMOUNT_ONE -> runWorldTask { player.bank.takeItem(slot, 1) }
-            OP_AMOUNT_FIVE -> runWorldTask { player.bank.takeItem(slot, 5) }
-            OP_AMOUNT_TEN -> runWorldTask { player.bank.takeItem(slot, 10) }
-            OP_AMOUNT_LAST_X -> runWorldTask {
-                player.bank.takeItem(
-                    slot,
-                    player.bank.lastAmountX
-                )
-            }
-            OP_AMOUNT_X -> runWorldTask {
-                BankUtils.transferX(
-                    player,
-                    slot,
-                    true
-                )
-            }
-            OP_AMOUNT_ALL -> runWorldTask {
-                player.bank.takeItem(
-                    slot,
-                    player.bank.getAmount(item)
-                )
-            }
-            OP_AMOUNT_ALL_BUT_ONE -> runWorldTask {
-                player.bank.takeItem(
-                    slot,
-                    player.bank.getAmount(item) - 1
-                )
-            }
+            OP_AMOUNT_ONE -> player.bank.takeItem(slot, 1)
+            OP_AMOUNT_FIVE -> player.bank.takeItem(slot, 5)
+            OP_AMOUNT_TEN -> player.bank.takeItem(slot, 10)
+            OP_AMOUNT_LAST_X -> player.bank.takeItem(slot, player.bank.lastAmountX)
+            OP_AMOUNT_X -> BankUtils.transferX(player, slot, true)
+            OP_AMOUNT_ALL -> player.bank.takeItem(slot, player.bank.getAmount(item))
+            OP_AMOUNT_ALL_BUT_ONE -> player.bank.takeItem(slot, player.bank.getAmount(item) - 1)
             OP_EXAMINE -> {
                 var examineText = item.definition.examine
                 val id = item.definition.id
@@ -150,6 +126,7 @@ class BankInterface : InterfaceListener {
     private fun handleInventoryMenu(player: Player, component: Component, opcode: Int, buttonID: Int, slot: Int, itemID: Int): Boolean {
         val item = player.inventory.get(slot)
             ?: return true
+        resetSearch(player)
 
         when (opcode) {
             OP_AMOUNT_ONE -> player.bank.addItem(slot, 1)
@@ -210,5 +187,12 @@ class BankInterface : InterfaceListener {
         }
 
         return false
+    }
+
+    private fun resetSearch (player: Player)
+    {
+        val lastTab = getAttribute(player, "bank:lasttab", 0)
+        player.bank.tabIndex = lastTab
+        setVarc(player, 190, 1) //re-enable "Search" right-click option on search button.
     }
 }

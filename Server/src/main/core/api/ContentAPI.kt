@@ -1,36 +1,61 @@
 package core.api
 
 import com.moandjiezana.toml.Toml
+import content.data.consumables.*
+import content.data.skill.SkillingTool
+import content.global.handlers.iface.ge.StockMarket
+import content.global.skill.slayer.SlayerManager
+import content.global.skill.slayer.Tasks
+import content.global.skill.summoning.familiar.BurdenBeast
+import core.ServerConstants
+import core.api.utils.GlobalKillCounter
+import core.api.utils.Vector
+import core.cache.def.impl.AnimationDefinition
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.SceneryDefinition
 import core.cache.def.impl.VarbitDefinition
+import core.game.activity.Cutscene
 import core.game.component.Component
+import core.game.consumable.*
 import core.game.container.impl.EquipmentContainer
+import core.game.dialogue.DialogueFile
+import core.game.dialogue.SkillDialogueHandler
+import core.game.ge.GrandExchangeRecords
+import core.game.interaction.*
 import core.game.node.Node
 import core.game.node.entity.Entity
+import core.game.node.entity.combat.CombatSwingHandler
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.info.LogType
+import core.game.node.entity.player.info.PlayerMonitor
 import core.game.node.entity.player.link.HintIconManager
 import core.game.node.entity.player.link.IronmanMode
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.emote.Emotes
-import core.game.node.entity.player.link.quest.QuestRepository
 import core.game.node.entity.player.link.prayer.PrayerType
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.player.link.quest.QuestRepository
 import core.game.node.entity.skill.Skills
-import content.data.skill.SkillingTool
-import content.global.skill.slayer.Tasks
-import content.global.skill.summoning.familiar.BurdenBeast
 import core.game.node.item.GroundItem
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
+import core.game.requirement.*
+import core.game.shops.Shops
+import core.game.system.config.ItemConfigParser
+import core.game.system.config.ServerConfigParser
 import core.game.system.task.Pulse
+import core.game.system.timer.*
+import core.game.system.timer.impl.*
+import core.game.world.GameWorld
+import core.game.world.GameWorld.Pulser
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
@@ -39,48 +64,21 @@ import core.game.world.map.path.Pathfinder
 import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneBuilder
+import core.game.world.repository.Repository
+import core.game.world.update.flag.*
 import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag
+import core.game.world.update.flag.context.*
+import core.net.packet.PacketRepository
+import core.net.packet.context.DefaultContext
+import core.net.packet.context.MusicContext
+import core.net.packet.out.AudioPacket
+import core.net.packet.out.MusicPacket
+import core.tools.*
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
-import core.game.dialogue.DialogueFile
-import core.game.dialogue.SkillDialogueHandler
-import core.api.utils.GlobalKillCounter
-import core.game.shops.Shops
-import core.game.ge.GrandExchangeRecords
-import core.game.interaction.InteractionListeners
-import content.global.handlers.iface.ge.StockMarket
-import content.global.skill.slayer.SlayerManager
-import content.data.consumables.*
-import core.game.activity.Cutscene
-import core.game.interaction.*
-import core.game.node.entity.player.info.LogType
-import core.game.node.entity.player.info.PlayerMonitor
-import core.tools.SystemLogger
-import core.game.system.config.ItemConfigParser
-import core.game.system.config.ServerConfigParser
-import core.game.world.GameWorld
-import core.game.world.GameWorld.Pulser
-import core.game.world.repository.Repository
-import core.game.consumable.*
-import core.ServerConstants
-import core.api.utils.Vector
-import core.cache.def.impl.AnimationDefinition
-import core.game.node.entity.player.link.quest.Quest
-import core.tools.*
-import core.game.world.update.flag.*
-import core.game.world.update.flag.context.*
-import core.game.requirement.*
-import core.net.packet.PacketRepository
-import core.net.packet.context.MusicContext
-import core.net.packet.out.MusicPacket
-import core.game.system.timer.*
-import core.game.system.timer.impl.*
-import core.game.node.entity.combat.CombatSwingHandler
-import core.net.packet.context.DefaultContext
-import core.net.packet.out.AudioPacket
 import org.rs09.consts.Sounds
-import java.util.regex.*
 import java.io.*
+import java.util.regex.*
 import kotlin.math.*
 
 /**
@@ -1271,6 +1269,11 @@ fun setVarbit (player: Player, varbitId: Int, value: Int, save: Boolean = false)
     setVarbit (player, def, value, save)
 }
 
+fun setVarc (player: Player, varc: Int, value: Int)
+{
+    player.packetDispatch.sendVarcUpdate(varc.toShort(), value)
+}
+
 fun reinitVarps (player: Player) {
     for ((index, value) in player.varpMap) {
         setVarp(player, index, value, player.saveVarp[index] ?: false)
@@ -2068,7 +2071,7 @@ fun dumpContainer(player: Player, container: core.game.container.Container): Int
                 }
 
                 container.remove(item)
-                bank.add(unnote(item))
+                bank.add(unnote(item), false)
                 dumpedCount++
             }
         }
