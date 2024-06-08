@@ -53,7 +53,7 @@ class CaptainCainDialogue(player: Player? = null) : DialoguePlugin(player) {
                 else
                     playerl(FacialExpression.HALF_GUILTY, "Actually, I don't have that much.").also { stage = END_DIALOGUE }
 
-                2 -> playerl(FacialExpression.FRIENDLY, "On second thought, nevermind.").also { stage = END_DIALOGUE }
+                2 -> playerl(FacialExpression.FRIENDLY, "On second thought, never mind.").also { stage = END_DIALOGUE }
             }
 
             20 -> {
