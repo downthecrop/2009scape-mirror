@@ -468,7 +468,7 @@ class CombatPulse(
     }
 
     init {
-        movement = object : MovementPulse(entity, null, DestinationFlag.ENTITY) {
+        movement = object : MovementPulse(entity, null) {
             override fun pulse(): Boolean {
                 return false
             }
