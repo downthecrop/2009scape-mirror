@@ -66,35 +66,52 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
                 return@on true
             }
 
-            val condition: (Player) -> Boolean = when(star.location.toLowerCase()){
-                "canifis bank" -> { p -> hasRequirement(p, "Priest in Peril") }
-                //"Burgh de Rott bank" -> { p -> p.questRepository.isComplete("Priest in Peril")} // for now, require this as it is in Morytania. remove when appropriate quests added - Crash
-                "crafting guild" -> {p -> hasLevelStat(p, Skills.CRAFTING, 40) }
-                "lletya bank" -> {p -> hasRequirement(p, "Mourning's End Part I") }
-                "jatizso mine" -> {p -> hasRequirement(player, "Fremennik Trials") }
-                "south crandor mining site" -> {p -> hasRequirement(p, "Dragon Slayer") }
-                "shilo village mining site" -> {p -> hasRequirement(p, "Shilo Village") }
-                "mos le'harmless bank" -> {p -> hasRequirement(p, "Cabin Fever") }
-                else -> {_ -> true}
+            class RingDialogue(val star: ShootingStar) : DialogueFile() {
+                val shouldWarn = when (star.location) {
+                    "North Edgeville mining site",
+                    "Southern wilderness mine",
+                    "Wilderness hobgoblin mine",
+                    "Pirates' Hideout mine",
+                    "Lava Maze mining site",
+                    "Mage Arena bank" -> true
+                    else -> false
+                }
+
+                override fun handle(componentID: Int, buttonID: Int) {
+                    fun teleportToStar(player: Player) {
+                        val condition: (p: Player) -> Boolean = when (star.location.toLowerCase()) {
+                            "canifis bank"              -> {p -> requireQuest(p, "Priest in Peril", "to access this.") }
+                            //"burgh de rott bank"        -> {p -> hasRequirement(p, "In Aid of the Myreque") } //disabled: crash
+                            "crafting guild"            -> {p -> hasLevelStat(p, Skills.CRAFTING, 40)       }
+                            "lletya bank"               -> {p -> hasRequirement(p, "Mourning's End Part I") }
+                            "jatizso mine"              -> {p -> hasRequirement(p, "The Fremennik Isles")   }
+                            "south crandor mining site" -> {p -> hasRequirement(p, "Dragon Slayer")         }
+                            "shilo village mining site" -> {p -> hasRequirement(p, "Shilo Village")         }
+                            "mos le'harmless bank"      -> {p -> hasRequirement(p, "Cabin Fever")           } //needs to be updated to check for completion when the quest releases; https://runescape.wiki/w/Mos_Le%27Harmless?oldid=913025
+                            "lunar isle mine"           -> {p -> hasRequirement(p, "Lunar Diplomacy")       }
+                            "miscellania coal mine"     -> {p -> requireQuest(p, "The Fremennik Trials", "to access this.") }
+                            //"neitiznot runite mine"     -> {p -> hasRequirement(p, "The Fremennik Isles") } //disabled: currently not reachable
+                            else -> {_ -> true}
+                        }
+                        if (!condition.invoke(player)) {
+                            sendDialogue(player,"Magical forces prevent your teleportation.")
+                        } else if (teleport(player, star.crash_locations[star.location]!!.transform(0, -1, 0), TeleportManager.TeleportType.MINIGAME)) {
+                            getRingStoreFile()[player.username.toLowerCase()] = true
+                        }
+                    }
+                    when (stage) {
+                        0 -> dialogue(if (star.spriteSpawned) "The star sprite has already been freed." else "The star sprite is still trapped.").also { if (shouldWarn) stage++ else stage += 2 }
+                        1 -> dialogue("WARNING: The star is located in the wilderness.").also { stage++ }
+                        2 -> player.dialogueInterpreter.sendOptions("Teleport to the star?", "Yes", "No").also { stage++ }
+                        3 -> when (buttonID) {
+                            1 -> end().also { teleportToStar(player) }
+                            2 -> end()
+                        }
+                    }
+                }
             }
 
-            if(!condition.invoke(player)){
-                sendDialogue(player, "Magical forces prevent your teleportation.")
-                return@on true
-            }
-
-            val shouldWarn = when(star.location){
-                "North Edgeville mining site",
-                "Southern wilderness mine",
-                "Wilderness hobgoblin mine",
-                "Pirates' Hideout mine",
-                "Lava Maze mining site",
-                "Mage Arena bank" -> true
-                else -> false
-            }
-
-            openDialogue(player, RingDialogue(shouldWarn, star))
-
+            openDialogue(player, RingDialogue(star))
             return@on true
         }
     }
@@ -118,26 +135,6 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
     }
 
     private data class ScoreboardEntry(val player: String, val time: Int)
-
-    private class RingDialogue(val shouldWarn: Boolean, val star: ShootingStar) : DialogueFile(){
-        override fun handle(componentID: Int, buttonID: Int) {
-            when (stage) {
-                0 -> dialogue(if (star.spriteSpawned) "The star sprite has already been freed." else "The star sprite is still trapped.").also { if (shouldWarn) stage++ else stage += 2 }
-                1 -> dialogue("WARNING: The star is located in the wilderness.").also { stage++ }
-                2 -> player!!.dialogueInterpreter.sendOptions("Teleport to the star?", "Yes", "No").also { stage++ }
-                3 -> when (buttonID) {
-                    1 -> teleport(player!!, star).also { end() }
-                    2 -> end()
-                }
-            }
-        }
-
-        fun teleport(player: Player, star: ShootingStar){
-            if (teleport(player, star.crash_locations[star.location]!!.transform(0, -1, 0), TeleportManager.TeleportType.MINIGAME)) {
-                getRingStoreFile()[player.username.toLowerCase()] = true
-            }
-        }
-    }
 
     companion object {
         private val star = ShootingStar()

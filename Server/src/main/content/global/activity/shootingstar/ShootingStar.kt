@@ -26,12 +26,12 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
             "Brimhaven mining site" to Location.create(2743, 3143, 0), // Brimhaven mining site
             "South Crandor mining site" to Location.create(2822, 3239, 0), // South Crandor mining site (requires Dragon Slayer)
             "Karamja mining site" to Location.create(2854, 3032, 0), // Karamja mining site
-            "Shilo Village mining site" to Location.create(2826, 2997, 0), // Shilo Village mining site/Gem rocks
+            "Shilo Village mining site" to Location.create(2826, 2997, 0), // Shilo Village mining site/Gem rocks (requires Shilo Village prereqs)
             "Relleka mining site" to Location.create(2682, 3700, 0), // Rellekka mining site
-            "Jatizso mine" to Location.create(2393, 3815, 0), //Jatiszo mining site (requires Fremennik Trials)
-            //"Lunar Isle mine" to Location.create(2140, 3939, 0), // Lunar Isle mine (requires Lunar Diplomacy?)
-            //"Miscellania coal mine" to Location.create(2529, 3887, 0), // Miscellania coal mine (requires Fremennik Trials)
-            //"Neitiznot runite mine" to Location.create(2376, 3835, 0), // Near the Neitiznot runite mine (requires Fremennik Trials) currently inaccessible as bridge does not work
+            "Jatizso mine" to Location.create(2393, 3815, 0), //Jatiszo mining site (requires Fremennik Isles prereqs)
+            "Lunar Isle mine" to Location.create(2140, 3939, 0), // Lunar Isle mine (requires Lunar Diplomacy prereqs)
+            "Miscellania coal mine" to Location.create(2529, 3887, 0), // Miscellania coal mine (requires Fremennik Trials)
+            //"Neitiznot runite mine" to Location.create(2376, 3835, 0), // Near the Neitiznot runite mine (requires Fremennik Isles prereqs) currently inaccessible as bridge does not work
             "Ardougne mining site" to Location.create(2600, 3232, 0), // Ardougne mining site (Monastery)
             "Ardougne eastern mine" to Location.create(2706, 3334, 0), // Ardougne mining site (Legends Guild)
             "Kandarin Coal trucks" to Location.create(2589, 3485, 0), // Kandarin Coal trucks
@@ -48,11 +48,11 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
             "South-west Varrock mine" to Location.create(3176, 3362, 0), // South-west Varrock mine / Champion's Guild mine
             "Varrock east bank" to Location.create(3259, 3407, 0), // Varrock east bank / Rune shop
             "Lumbridge Swamp south-east mine" to Location.create(3227, 3150, 0), // Lumbridge Swamp south-east mine
-            //"Burgh de Rott bank" to Location.create(3500, 3219, 0), // Burgh de Rott bank (requires Quest to enter)
+            //"Burgh de Rott bank" to Location.create(3500, 3219, 0), // Burgh de Rott bank (requires quest to enter)
             "Canifis Bank" to Location.create(3504, 3487, 0), // Canifis bank
-            "Mos Le'Harmless bank" to Location.create(3687, 2969, 0), // Mos Le'Harmless bank (requires Quest to enter but is currently accessible for Slayer)
+            "Mos Le'Harmless bank" to Location.create(3687, 2969, 0), // Mos Le'Harmless bank (requires quest to enter but is currently accessible for Slayer)
             "Gnome stronghold Bank" to Location.create(2460, 3432, 0), // Gnome stronghold bank
-            "Lletya bank" to Location.create(2329, 3163, 0), // Lletya bank (requires Roving Elves?)
+            "Lletya bank" to Location.create(2329, 3163, 0), // Lletya bank (requires MEP1 prereqs)
             "Piscatoris mining site" to Location.create(2336, 3636, 0), // Piscatoris mining site
             "North Edgeville mining site" to Location.create(3101, 3569, 0), // Wilderness Steel mine / Zamorak mage mine
             "Southern wilderness mine" to Location.create(3025, 3591, 0), // Wilderness skeleton mine
