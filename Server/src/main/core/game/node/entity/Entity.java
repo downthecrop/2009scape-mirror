@@ -660,7 +660,7 @@ public abstract class Entity extends Node {
 	/**
 	 * Registers a new force chat update flag to the update masks.
 	 * @param string The string.
-	 * @return {@code True} if succesful.
+	 * @return {@code True} if successful.
 	 */
 	public boolean sendChat(String string) {
             return getUpdateMasks().register(EntityFlag.ForceChat, string);
