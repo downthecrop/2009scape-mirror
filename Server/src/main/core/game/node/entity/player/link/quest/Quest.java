@@ -1,5 +1,6 @@
 package core.game.node.entity.player.link.quest;
 
+import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
 import core.plugin.Plugin;
@@ -137,7 +138,10 @@ public abstract class Quest implements Plugin<Object> {
 		player.getQuestRepository().setStage(this, 100);
 		player.getQuestRepository().incrementPoints(getQuestPoints());
 		player.getQuestRepository().syncronizeTab(player);
-		player.getInterfaceManager().open(new Component(277));
+		player.getInterfaceManager().open(new Component(277).setCloseEvent((p, c) -> {
+			this.questCloseEvent(p, c);
+			return true;
+		}));
 		player.getPacketDispatch().sendString("" + player.getQuestRepository().getPoints() + "", 277, 7);
 		player.getPacketDispatch().sendString("You have completed the " + getName() + " Quest!", 277, 4);
 		player.getPacketDispatch().sendMessage("Congratulations! Quest complete!");
@@ -150,6 +154,12 @@ public abstract class Quest implements Plugin<Object> {
 	 * Useful to override and reset quest player attributes.
 	 */
 	public void reset(Player player) {}
+
+	/**
+	 * Function callback when closing the quest.
+	 * Override this to follow up on dialogue after the component closes.
+	 */
+	public void questCloseEvent(Player player, Component component) {}
 
 	/**
 	 * Draws a line on the journal component.
