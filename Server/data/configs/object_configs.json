@@ -16741,7 +16741,7 @@
   },
   {
     "examine": "Better not eat them!",
-    "ids": "12003"
+    "ids": "12003,12128"
   },
   {
     "examine": "It's going to be a tight squeeze!",
@@ -16881,7 +16881,7 @@
   },
   {
     "examine": "A wall jutting out into the path.",
-    "ids": "12127,12128,12129,12130"
+    "ids": "12127,12129,12130"
   },
   {
     "examine": "Spooky.",
