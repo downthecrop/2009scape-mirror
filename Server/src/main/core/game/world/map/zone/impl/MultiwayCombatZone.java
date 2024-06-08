@@ -85,6 +85,9 @@ public final class MultiwayCombatZone extends MapZone {
 		register(new ZoneBorders(3097, 4224, 3225, 4317));
 		register(new ZoneBorders(3116, 5412, 3362, 5584));
 		register(new ZoneBorders(3078, 5520, 3123, 5552, 0));
+		// Ice queen
+		register(new ZoneBorders(2855, 9928, 2880, 9968));
+		registerRegion(11318); //White wolf mountain
 		registerRegion(11844); //Corporeal beast
 		registerRegion(10329);//TDS
 		registerRegion(13370);//Venenatis

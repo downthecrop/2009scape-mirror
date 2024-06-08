@@ -58954,5 +58954,19 @@
     "ids": "3672,3673,5168,5169,5170",
     "description": "Ram",
     "main": []
+  },
+  {
+    "default": [],
+    "charm": [],
+    "ids": "795",
+    "description": "",
+    "main": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "1580",
+        "maxAmount": "1"
+      }
+    ]
   }
 ]

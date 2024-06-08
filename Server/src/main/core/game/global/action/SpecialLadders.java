@@ -59,6 +59,9 @@ public enum SpecialLadders implements LadderAchievementCheck {
     CASTLEWARS_ZAMORAK_OUTERWALL_STAIRS_UP(Location.create(2382, 3130, 0), Location.create(2383, 3132, 0)),
     CASTLEWARS_ZAMOUTER_WALL_STAIRS_DOWN(Location.create(2382, 3132, 0), Location.create(2382, 3129, 0)),
 
+    WHITE_WOLF_MOUNTAIN_FAKE_LADDER_1_UP(Location.create(2837, 9927, 0), Location.create(2837, 3527, 0)),
+    WHITE_WOLF_MOUNTAIN_FAKE_LADDER_2_UP(Location.create(2823, 9930, 0), Location.create(2823, 3529, 0)),
+
     PORT_SARIM_RAT_PITS_DOWN(new Location(3018,3232,0), new Location(2962,9650,0)) {
         @Override
         public void checkAchievement(Player player) {
