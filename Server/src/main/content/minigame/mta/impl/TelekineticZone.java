@@ -32,7 +32,7 @@ import content.minigame.mta.MTAZone;
 
 /**
  * Handles the telekinetic zone.
- * @author Vexia
+ * @author Vexia, Player Name
  */
 public class TelekineticZone extends MTAZone {
 
@@ -302,7 +302,7 @@ public class TelekineticZone extends MTAZone {
 				}
 				Location next = statue.getLocation().transform(dir, 1);
 				Path path = Pathfinder.find(statue.getLocation(), next);
-				boolean end = !path.isSuccessful() || path.isMoveNear() || path.getPoints().size() != 1;
+				boolean end = !path.isSuccessful() || path.isMoveNear() || path.getPoints().size() > 2;
 				if (end) {
 					return true;
 				}
