@@ -312,7 +312,7 @@ public abstract class MovementPulse extends Pulse {
         if (interactLocation == null)
             interactLocation = loc;
 
-        if (destination instanceof Entity || interactLocation == null || (!mover.getWalkingQueue().hasPath() && interactLocation.getDistance(mover.getLocation()) > 0) || (usingTruncatedPath && destination.getLocation().getDistance(mover.getLocation()) < 14)) {
+        if (destination instanceof Entity || interactLocation == null || (mover.getWalkingQueue().getQueue().size() <= 1 && interactLocation.getDistance(mover.getLocation()) > 0) || (usingTruncatedPath && destination.getLocation().getDistance(mover.getLocation()) < 14)) {
             if (!checkAllowMovement())
                 return;
             if (destination instanceof Entity && previousLoc != null && previousLoc.equals(loc) && mover.getWalkingQueue().hasPath())
