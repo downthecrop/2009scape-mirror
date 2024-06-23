@@ -90,6 +90,8 @@ class SalamanderSwingHandler(private var style: CombatStyle) : CombatSwingHandle
     }
 
     override fun calculateHit(entity: Entity?, victim: Entity?, modifier: Double): Int {
+        entity ?: return 0
+
         //Checking style is necessary for ::calcmaxhit to function after changing attack style but before attacking
         checkStyle(entity)
         if (style == CombatStyle.MAGIC) {
@@ -144,7 +146,7 @@ class SalamanderSwingHandler(private var style: CombatStyle) : CombatSwingHandle
         /**
          * The instance for the swing handler.
          */
-        val INSTANCE = SalamanderSwingHandler(CombatStyle.MELEE)
+        val INSTANCE = SalamanderSwingHandler(CombatStyle.RANGE)
 
         /**
          * Gets the id of the tar used by a salamander.
