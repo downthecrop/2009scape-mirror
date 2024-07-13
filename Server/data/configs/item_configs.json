@@ -38696,7 +38696,7 @@
   },
   {
     "destroy_message": "Another can be received from pickpocketing Dr. Fenkenstrain in the tower.",
-    "examine": "Unactivated: The Ring of charos.Activated: The power within this ring has been activated.",
+    "examine": "The Ring of charos",
     "durability": null,
     "name": "Ring of charos",
     "tradeable": "false",
@@ -59397,7 +59397,7 @@
   },
   {
     "destroy_message": "Another can be received from pickpocketing Dr. Fenkenstrain in the tower.",
-    "examine": "Unactivated: The Ring of charos.Activated: The power within this ring has been activated.",
+    "examine": "The power within this ring has been activated.",
     "durability": null,
     "name": "Ring of charos(a)",
     "tradeable": "false",
