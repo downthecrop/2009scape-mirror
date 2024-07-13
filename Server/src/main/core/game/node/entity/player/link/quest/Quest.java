@@ -76,12 +76,27 @@ public abstract class Quest implements Plugin<Object> {
 	private final int[] configs;
 
 	/**
-	 * Constructs a new {@Code Quest} {@Code Object}
-	 * @param name The name.
-	 * @param index The index.
-	 * @param buttonId The button Id.
-	 * @param questPoints The rewarded quest points.
-	 * @param configs The configs.
+	 * Constructs a new {@link Quest}
+	 * @param name of the quest. Prereqs reference this
+	 * @param index of the quest, usually buttonId + 1
+	 * @param buttonId of the quest on the quest list in game
+	 * @param questPoints rewarded after completing quest
+	 * @param configs of Varp/Varbit and values to set the quest color to red/yellow/green. e.g. {234, 0, 1, 10}
+	 * <br><br>
+	 * Configs are made of either 4/5 numbers:<br>
+	 * 4 numbers: {1: VARP to set, 2: red quest name, 3: yellow quest name, 4: green quest name}<br>
+	 * 5 numbers: {1: VARP(Ignored), 2: VARPBIT to set, 3: red quest name, 4: yellow quest name, 5: green quest name}<br>
+	 * <br>
+	 * VARP/VARPBIT is set to values before/during/after quest at stage 0/1-99/100.
+	 * Get these values from the VARPTOOL.<br>
+	 * <br>
+	 * If you see VARP (e.g. ./get_varp.sh 120):<br>
+	 * if (VARP[26] == 80 || VARP[26] == 90) return 2; if (VARP[26] == 0) return 0; return 1; }; if (arg0 == 89)<br>
+	 * Use 4 numbers: {26, 0, 1, 80} -> {VARP, return 0, return 1, return 2}<br>
+	 * <br>
+	 * If you see VARPBIT (e.g. ./get_varp.sh 119):<br>
+	 * if (VARPBIT[451] > 1) return 2; if (VARPBIT[451] == 0) return 0; return 1; }; if (arg0 == 88)<br>
+	 * Use 5 numbers: {0, 451, 0, 1, 2} -> {Ignore, VARPBIT, return 0, return 1, return 2}<br>
 	 */
 	public Quest(String name, int index, int buttonId, int questPoints, int...configs) {
 		this.name = name;
@@ -229,6 +244,11 @@ public abstract class Quest implements Plugin<Object> {
 		if (configs.length < 4) {
 			throw new IndexOutOfBoundsException("Quest -> " + name + " configs array length was not valid. config length = " + configs.length + "!");
 		}
+		if (configs.length >= 5) {
+			// {questVarpId, questVarbitId, valueToSet}
+			return new int[] {configs[0], configs[1], stage == 0 ? configs[2] : stage >= 100 ? configs[4] : configs[3]};
+		}
+		// {questVarpId, valueToSet}
 		return new int[] {configs[0], stage == 0 ? configs[1] : stage >= 100 ? configs[3] : configs[2]};
 	}
 

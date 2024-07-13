@@ -74,8 +74,17 @@ public final class QuestRepository {
         int[] config = null;
         for(Quest quest : QUESTS.values()){
             config = quest.getConfig(player,getStage(quest));
-            
-            setVarp(player, config[0], config[1]);
+
+            // {questVarpId, questVarbitId, valueToSet}
+            if (config.length == 3) {
+                // This is to set quests with VARPBIT, ignoring VARP value
+                setVarbit(player, config[1], config[2]);
+            } else {
+                // This is the original VARP quests
+                // {questVarpId, valueToSet}
+                setVarp(player, config[0], config[1]);
+            }
+
             quest.updateVarps(player);
         }
     }
