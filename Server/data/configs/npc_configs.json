@@ -12337,26 +12337,26 @@
   {
     "examine": "I don't think insect repellent will work...",
     "melee_animation": "6224",
+    "range_animation": "0",
+    "combat_audio": "567,569,568",
     "attack_speed": "4",
     "poisonous": "true",
+    "magic_level": "1",
     "respawn_delay": "60",
+    "defence_animation": "6227",
     "weakness": "7",
     "slayer_exp": "90",
     "poison_amount": "4",
     "magic_animation": "0",
     "death_animation": "6228",
-    "lifepoints": "90",
-    "id": "1154",
-    "aggressive": "true",
-    "bonuses": "0,0,0,0,0,25,25,5,50,50,0,0,0,0,0",
-    "range_animation": "0",
-    "combat_audio": "567,569,568",
-    "magic_level": "1",
-    "defence_animation": "6227",
     "name": "Kalphite Soldier",
     "defence_level": "70",
     "safespot": null,
+    "lifepoints": "90",
     "strength_level": "70",
+    "id": "1154",
+    "aggressive": "true",
+    "bonuses": "0,0,0,0,0,25,25,5,50,50,0,0,0,0,0",
     "range_level": "1",
     "attack_level": "70"
   },
@@ -19279,25 +19279,25 @@
   {
     "examine": "A foul-smelling blob of protoplasm.",
     "melee_animation": "1789",
+    "range_animation": "0",
+    "combat_audio": "784,786,785",
     "attack_speed": "4",
     "poisonous": "true",
+    "magic_level": "13",
     "respawn_delay": "15",
+    "defence_animation": "0",
     "weakness": "1",
     "slayer_exp": "25",
     "poison_amount": "3",
     "magic_animation": "0",
     "death_animation": "1792",
-    "lifepoints": "25",
-    "id": "1831",
-    "aggressive": "false",
-    "range_animation": "0",
-    "combat_audio": "784,786,785",
-    "magic_level": "13",
-    "defence_animation": "0",
     "name": "Cave slime",
     "defence_level": "35",
     "safespot": null,
+    "lifepoints": "25",
     "strength_level": "13",
+    "id": "1831",
+    "aggressive": "false",
     "clue_level": "0",
     "range_level": "1",
     "attack_level": "13"
@@ -24070,16 +24070,16 @@
     "attack_level": "1"
   },
   {
-    "examine": "A dwarf gone bad.",
-    "respawn_delay": "150",
     "slayer_exp": "61",
     "weakness": "6",
+    "examine": "A dwarf gone bad.",
     "name": "Chaos dwarf",
     "defence_level": "1",
     "safespot": null,
     "lifepoints": "10",
     "strength_level": "1",
     "id": "2423",
+    "respawn_delay": "150",
     "range_level": "1",
     "attack_level": "1"
   },
@@ -30539,46 +30539,66 @@
     "attack_level": "1"
   },
   {
+    "agg_radius": "",
+    "examine": "He looks a bit dodgy.",
+    "melee_animation": "422",
+    "respawn_delay": "60",
+    "defence_animation": "425",
     "death_animation": "836",
     "name": "Cuffs",
     "defence_level": "1",
     "safespot": null,
     "lifepoints": "7",
-    "melee_animation": "422",
     "strength_level": "1",
     "id": "3237",
     "range_level": "1",
-    "respawn_delay": "60",
-    "attack_level": "1",
-    "defence_animation": "425"
+    "attack_level": "1"
   },
   {
+    "agg_radius": "",
+    "examine": "Looks unpleasant.",
+    "melee_animation": "422",
+    "respawn_delay": "60",
+    "defence_animation": "425",
+    "death_animation": "836",
+    "name": "Narf",
+    "defence_level": "1",
+    "safespot": null,
+    "lifepoints": "7",
+    "strength_level": "1",
+    "id": "3238",
+    "range_level": "1",
+    "attack_level": "1"
+  },
+  {
+    "examine": "Seems to be loitering.",
+    "melee_animation": "422",
+    "respawn_delay": "60",
+    "defence_animation": "425",
     "death_animation": "836",
     "name": "Rusty",
     "defence_level": "1",
     "safespot": null,
     "lifepoints": "7",
-    "melee_animation": "422",
     "strength_level": "1",
     "id": "3239",
     "range_level": "1",
-    "respawn_delay": "60",
-    "attack_level": "1",
-    "defence_animation": "425"
+    "attack_level": "1"
   },
   {
+    "examine": "Untrustworthy.",
+    "melee_animation": "422",
+    "respawn_delay": "60",
+    "defence_animation": "425",
     "death_animation": "836",
     "name": "Jeff",
     "defence_level": "1",
     "safespot": null,
     "lifepoints": "7",
-    "melee_animation": "422",
     "strength_level": "1",
     "id": "3240",
     "range_level": "1",
-    "respawn_delay": "60",
-    "attack_level": "1",
-    "defence_animation": "425"
+    "attack_level": "1"
   },
   {
     "melee_animation": "395",
@@ -53762,26 +53782,26 @@
     "examine": "A mage who serves Armadyl above all else - even death.",
     "combat_style": "2",
     "melee_animation": "6952",
+    "range_animation": "6952",
     "attack_speed": "5",
+    "magic_level": "150",
     "respawn_delay": "25",
+    "defence_animation": "6955",
     "weakness": "4",
     "magic_animation": "6952",
     "death_animation": "6956",
-    "lifepoints": "75",
-    "id": "6231",
-    "aggressive": "true",
-    "bonuses": "0,0,0,0,0,9,12,5,45,28,0,0,0,0,0",
-    "prj_height": "92",
-    "range_animation": "6952",
-    "magic_level": "150",
-    "defence_animation": "6955",
     "name": "Spiritual mage",
     "defence_level": "111",
     "safespot": null,
+    "lifepoints": "75",
     "strength_level": "1",
+    "id": "6231",
+    "aggressive": "true",
+    "bonuses": "0,0,0,0,0,9,12,5,45,28,0,0,0,0,0",
     "clue_level": "2",
     "range_level": "1",
     "projectile": "1199",
+    "prj_height": "92",
     "attack_level": "1"
   },
   {
@@ -54470,27 +54490,27 @@
     "attack_level": "1"
   },
   {
+    "agg_radius": "64",
     "examine": "A battle-honed goblin. ",
     "start_gfx": "1202",
     "combat_style": "2",
     "melee_animation": "6154",
+    "range_animation": "6154",
     "attack_speed": "5",
+    "magic_level": "150",
     "respawn_delay": "50",
+    "defence_animation": "6155",
     "weakness": "3",
     "magic_animation": "6154",
     "death_animation": "6156",
-    "lifepoints": "127",
-    "id": "6263",
-    "aggressive": "true",
-    "bonuses": "0,0,0,0,0,0,0,0,0,0,0,6,0,0,0",
-    "agg_radius": "64",
-    "range_animation": "6154",
-    "magic_level": "150",
-    "defence_animation": "6155",
     "name": "Sergeant Steelwill",
     "defence_level": "150",
     "safespot": null,
+    "lifepoints": "127",
     "strength_level": "50",
+    "id": "6263",
+    "aggressive": "true",
+    "bonuses": "0,0,0,0,0,0,0,0,0,0,0,6,0,0,0",
     "range_level": "1",
     "projectile": "1203",
     "attack_level": "80"
@@ -71830,46 +71850,55 @@
     "respawn_delay": "1"
   },
   {
+    "examine": "A baby impling. Ahhh.",
     "name": "Baby Impling Puro",
     "id": "6055",
     "respawn_delay": "7"
   },
   {
+    "examine": "A young impling. It's not fair!",
     "name": "Young Impling Puro",
     "id": "6056",
     "respawn_delay": "7"
   },
   {
+    "examine": "An impling gourmet. Mmmm, tasty.",
     "name": "Gourmet Impling Puro",
     "id": "6057",
     "respawn_delay": "7"
   },
   {
+    "examine": "An earth impling. Rock on.",
     "name": "Earth Impling Puro",
     "id": "6058",
     "respawn_delay": "50"
   },
   {
+    "examine": "An impling who likes magic. Magic!",
     "name": "Essence Impling Puro",
     "id": "6059",
     "respawn_delay": "50"
   },
   {
+    "examine": "An impling with varied tastes.",
     "name": "Eclectic Impling Puro",
     "id": "6060",
     "respawn_delay": "7"
   },
   {
+    "examine": "A very stealthy impling.",
     "name": "Ninja Impling Puro",
     "id": "6063",
     "respawn_delay": "9999"
   },
   {
+    "examine": "A nature impling. Right on, maaan.",
     "name": "Nature Impling Puro",
     "id": "6061",
     "respawn_delay": "9999"
   },
   {
+    "examine": "Ooh, shiny things!",
     "name": "Magpie Impling Puro",
     "id": "6062",
     "respawn_delay": "9999"
@@ -72026,5 +72055,55 @@
     "id": "7155",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "She looks like she means business.",
+    "name": "Balnea",
+    "id": "7047"
+  },
+  {
+    "examine": "Ooh, shiny things!",
+    "name": "Magpie Impling",
+    "id": "1035"
+  },
+  {
+    "examine": "An earth impling. Rock on.",
+    "name": "Earth Impling",
+    "id": "1031"
+  },
+  {
+    "examine": "A baby impling. Ahhh.",
+    "name": "Baby Impling",
+    "id": "1028"
+  },
+  {
+    "examine": "A young impling. It's not fair!",
+    "name": "Young Impling",
+    "id": "1029"
+  },
+  {
+    "examine": "An impling gourmet. Mmmm, tasty.",
+    "name": "Gourmet Impling",
+    "id": "1030"
+  },
+  {
+    "examine": "An impling who likes magic. Magic!",
+    "name": "Essence Impling",
+    "id": "1032"
+  },
+  {
+    "examine": "An impling with varied tastes.",
+    "name": "Eclectic Impling",
+    "id": "1033"
+  },
+  {
+    "examine": "A very stealthy impling.",
+    "name": "Ninja Impling",
+    "id": "6053"
+  },
+  {
+    "examine": "A nature impling. Right on, maaan.",
+    "name": "Nature Impling",
+    "id": "1034"
   }
 ]
