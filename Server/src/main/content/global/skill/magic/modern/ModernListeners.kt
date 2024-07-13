@@ -1,64 +1,37 @@
 package content.global.skill.magic.modern
 
 import content.global.skill.magic.SpellListener
+import content.global.skill.magic.SpellUtils.hasRune
 import content.global.skill.magic.TeleportMethod
 import content.global.skill.magic.spellconsts.Modern
-import core.game.event.ItemAlchemizationEvent
-import core.game.event.TeleportEvent
 import content.global.skill.prayer.Bones
+import content.global.skill.smithing.smelting.Bar
+import content.global.skill.smithing.smelting.SmeltingPulse
+import core.ServerConstants
+import core.api.*
+import core.game.event.ItemAlchemizationEvent
+import core.game.event.ResourceProducedEvent
+import core.game.event.TeleportEvent
 import core.game.interaction.MovementPulse
+import core.game.node.Node
 import core.game.node.entity.Entity
+import core.game.node.entity.combat.spell.MagicStaff
+import core.game.node.entity.impl.Animator
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
-import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
-import content.global.skill.smithing.smelting.Bar
-import content.global.skill.smithing.smelting.SmeltingPulse
 import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
-import core.ServerConstants
-import core.api.*
-import core.game.node.entity.combat.spell.MagicStaff
-import core.game.node.entity.impl.Animator
+import org.rs09.consts.Scenery
 import org.rs09.consts.Sounds
 
 class ModernListeners : SpellListener("modern"){
-
-    private val CONFUSE_START = Graphics(102, 96)
-    private val CONFUSE_PROJECTILE = Projectile.create(null as Entity?, null, 103, 40, 36, 52, 75, 15, 11)
-    private val CONFUSE_END = Graphics(104, 96)
-    private val WEAKEN_START = Graphics(105, 96)
-    private val WEAKEN_PROJECTILE = Projectile.create(null as Entity?, null, 106, 40, 36, 52, 75, 15, 11)
-    private val WEAKEN_END = Graphics(107, 96)
-    private val CURSE_START = Graphics(108, 96)
-    private val CURSE_PROJECTILE = Projectile.create(null as Entity?, null, 109, 40, 36, 52, 75, 15, 11)
-    private val CURSE_END = Graphics(110, 96)
-    private val VULNER_START = Graphics(167, 96)
-    private val VULNER_PROJECTILE = Projectile.create(null as Entity?, null, 168, 40, 36, 52, 75, 15, 11)
-    private val VULNER_END = Graphics(169, 96)
-    private val ENFEEBLE_START = Graphics(170, 96)
-    private val ENFEEBLE_PROJECTILE = Projectile.create(null as Entity?, null, 171, 40, 36, 52, 75, 15, 11)
-    private val ENFEEBLE_END = Graphics(172, 96)
-    private val STUN_START = Graphics(173, 96)
-    private val STUN_PROJECTILE = Projectile.create(null as Entity?, null, 174, 40, 36, 52, 75, 15, 11)
-    private val STUN_END = Graphics(107, 96)
-    private val LOW_ANIMATION = Animation(716, Animator.Priority.HIGH)
-    private val HIGH_ANIMATION = Animation(729, Animator.Priority.HIGH)
-    private val LOW_ALCH_ANIM = Animation(712)
-    private val LOW_ALCH_GFX = Graphics(112,5)
-    private val HIGH_ALCH_ANIM = Animation(713)
-    private val HIGH_ALCH_GFX = Graphics(113,5)
-    private val BONE_CONVERT_GFX = Graphics(141, 96)
-    private val BONE_CONVERT_ANIM = Animation(722)
-
-
     override fun defineListeners() {
-
         onCast(Modern.HOME_TELEPORT, NONE){ player, _ ->
             if (!getAttribute(player, "tutorial:complete", false)) {
                 return@onCast
@@ -151,6 +124,11 @@ class ModernListeners : SpellListener("modern"){
             requires(player,60, arrayOf(Item(Items.EARTH_RUNE_557,4), Item(Items.WATER_RUNE_555,4), Item(Items.NATURE_RUNE_561,2)))
             boneConvert(player,false)
         }
+
+        onCast(Modern.CHARGE_WATER_ORB, OBJECT, Scenery.OBELISK_OF_WATER_2151, 3, method = ::chargeOrb)
+        onCast(Modern.CHARGE_EARTH_ORB, OBJECT, Scenery.OBELISK_OF_EARTH_29415, 3, method = ::chargeOrb)
+        onCast(Modern.CHARGE_FIRE_ORB, OBJECT, Scenery.OBELISK_OF_FIRE_2153, 3, method = ::chargeOrb)
+        onCast(Modern.CHARGE_AIR_ORB, OBJECT, Scenery.OBELISK_OF_AIR_2152, 3, method = ::chargeOrb)
     }
 
     private fun boneConvert(player: Player,bananas: Boolean){
@@ -194,7 +172,7 @@ class ModernListeners : SpellListener("modern"){
     }
 
     private fun superheat(player: Player,item: Item){
-        if(!item.name.contains("ore") && !item.name.toLowerCase().equals("coal")){
+        if(!item.name.contains("ore") && !item.name.equals("coal", true)){
             player.sendMessage("You can only cast this spell on ore.")
             return
         }
@@ -229,7 +207,7 @@ class ModernListeners : SpellListener("modern"){
         setDelay(player,false)
     }
 
-        public fun alchemize(player: Player, item: Item, high: Boolean) : Boolean {
+    fun alchemize(player: Player, item: Item, high: Boolean, explorersRing: Boolean = false): Boolean {
         if(item.name == "Coins") player.sendMessage("You can't alchemize something that's already gold!").also { return false }
         if((!item.definition.isTradeable) && (!item.definition.isAlchemizable)) player.sendMessage("You can't cast this spell on something like that.").also { return false }
 
@@ -248,16 +226,17 @@ class ModernListeners : SpellListener("modern"){
             player.pulseManager.clear()
         }
 
-        val weapon = player.equipment.getItem(getItemFromEquipment(player, EquipmentSlot.WEAPON))
-        if (weapon != null && !weapon.equals(MagicStaff.FIRE_RUNE)) {
-            player.animate(Animation(if (high) 9633 else 9625))
-            player.graphics(Graphics(if (high) 1693 else 1692))
+        if (explorersRing) {
+            visualize(player, LOW_ALCH_ANIM, EXPLORERS_RING_GFX)
         } else {
-            player.animate(Animation(if (high) 713 else 712))
-            player.graphics(Graphics(if (high) 113 else 112))
+            val weapon = getItemFromEquipment(player, EquipmentSlot.WEAPON)
+            if (weapon != null && weapon.id in MagicStaff.FIRE_RUNE.staves) {
+                visualize(player, if (high) HIGH_ALCH_STAFF_ANIM else LOW_ALCH_STAFF_ANIM, if (high) HIGH_ALCH_STAFF_GFX else LOW_ALCH_STAFF_GFX)
+            } else {
+                visualize(player, if (high) HIGH_ALCH_ANIM else LOW_ALCH_ANIM, if (high) HIGH_ALCH_GFX else LOW_ALCH_GFX)
+            }
         }
         playAudio(player, if (high) Sounds.HIGH_ALCHEMY_97 else Sounds.LOW_ALCHEMY_98)
-
         player.dispatch(ItemAlchemizationEvent(item.id, high))
         if (player.inventory.remove(Item(item.id, 1)) && coins.amount > 0) {
             player.inventory.add(coins)
@@ -307,5 +286,80 @@ class ModernListeners : SpellListener("modern"){
         removeRunes(player)
         addXP(player,30.0)
         setDelay(player,true)
+    }
+
+    private fun chargeOrb(player: Player, node: Node?) {
+        if (node == null) return
+        val spell = ChargeOrbData.spellMap[node.id] ?: return
+        requires(player, spell.level, spell.requiredRunes)
+        removeAttribute(player, "spell:runes")
+        face(player, node)
+        sendSkillDialogue(player) {
+            withItems(spell.chargedOrb)
+            calculateMaxAmount { return@calculateMaxAmount amountInInventory(player, Items.UNPOWERED_ORB_567) }
+            create { _, amount ->
+                var crafted = 0
+                queueScript(player, 0) {
+                    if (!hasLevelDyn(player, Skills.CRAFTING, spell.level)) {
+                        sendMessage(player, "You need a magic level of ${spell.level} to cast this spell.")
+                        return@queueScript stopExecuting(player)
+                    }
+                    for (rune in spell.requiredRunes) {
+                        if(!hasRune(player,rune)){
+                            sendMessage(player, "You don't have enough ${rune.name.lowercase()}s to cast this spell.")
+                            return@queueScript stopExecuting(player)
+                        }
+                    }
+                    visualizeSpell(player, CHARGE_ORB_ANIM, spell.graphics, spell.sound)
+                    removeRunes(player)
+                    addItem(player, spell.chargedOrb)
+                    addXP(player, spell.experience)
+                    setDelay(player, 3)
+                    crafted++
+
+                    if (crafted == 5 && spell.chargedOrb == Items.WATER_ORB_571) {
+                        player.dispatch(ResourceProducedEvent(spell.chargedOrb, crafted, node))
+                    }
+                    if (amount == crafted) { return@queueScript stopExecuting(player) }
+                    setCurrentScriptState(player, 0)
+                    return@queueScript delayScript(player, 6)
+                }
+            }
+        }
+        return
+    }
+    companion object {
+        private val CONFUSE_START = Graphics(102, 96)
+        private val CONFUSE_PROJECTILE = Projectile.create(null as Entity?, null, 103, 40, 36, 52, 75, 15, 11)
+        private val CONFUSE_END = Graphics(104, 96)
+        private val WEAKEN_START = Graphics(105, 96)
+        private val WEAKEN_PROJECTILE = Projectile.create(null as Entity?, null, 106, 40, 36, 52, 75, 15, 11)
+        private val WEAKEN_END = Graphics(107, 96)
+        private val CURSE_START = Graphics(108, 96)
+        private val CURSE_PROJECTILE = Projectile.create(null as Entity?, null, 109, 40, 36, 52, 75, 15, 11)
+        private val CURSE_END = Graphics(110, 96)
+        private val VULNER_START = Graphics(167, 96)
+        private val VULNER_PROJECTILE = Projectile.create(null as Entity?, null, 168, 40, 36, 52, 75, 15, 11)
+        private val VULNER_END = Graphics(169, 96)
+        private val ENFEEBLE_START = Graphics(170, 96)
+        private val ENFEEBLE_PROJECTILE = Projectile.create(null as Entity?, null, 171, 40, 36, 52, 75, 15, 11)
+        private val ENFEEBLE_END = Graphics(172, 96)
+        private val STUN_START = Graphics(173, 96)
+        private val STUN_PROJECTILE = Projectile.create(null as Entity?, null, 174, 40, 36, 52, 75, 15, 11)
+        private val STUN_END = Graphics(107, 96)
+        private val LOW_ANIMATION = Animation(716, Animator.Priority.HIGH)
+        private val HIGH_ANIMATION = Animation(729, Animator.Priority.HIGH)
+        private val LOW_ALCH_ANIM = Animation(9623)
+        private val LOW_ALCH_STAFF_ANIM = Animation(9625)
+        private val HIGH_ALCH_ANIM = Animation(9631)
+        private val HIGH_ALCH_STAFF_ANIM = Animation(9633)
+        private val LOW_ALCH_GFX = Graphics(763)
+        private val HIGH_ALCH_GFX = Graphics(1691)
+        private val LOW_ALCH_STAFF_GFX = Graphics(1692)
+        private val HIGH_ALCH_STAFF_GFX = Graphics(1693)
+        private val EXPLORERS_RING_GFX = Graphics(1698)
+        private val BONE_CONVERT_GFX = Graphics(141, 96)
+        private val BONE_CONVERT_ANIM = Animation(722)
+        private val CHARGE_ORB_ANIM = Animation(726)
     }
 }

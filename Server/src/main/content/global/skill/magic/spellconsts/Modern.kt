@@ -17,10 +17,14 @@ object Modern {
     const val SNARE = 30
     const val ARDOUGNE_TELEPORT = 32
     const val HIGH_ALCHEMY = 34
+    const val CHARGE_WATER_ORB = 35
     const val WATCHTOWER_TELEPORT = 37
+    const val CHARGE_EARTH_ORB = 39
     const val BONES_TO_PEACHES = 40
     const val TROLLHEIM_TELEPORT = 44
+    const val CHARGE_FIRE_ORB = 46
     const val APE_ATOLL_TELEPORT = 47
+    const val CHARGE_AIR_ORB = 49
     const val VULNERABILITY = 50
     const val ENFEEBLE = 53
     const val ENTANGLE = 56

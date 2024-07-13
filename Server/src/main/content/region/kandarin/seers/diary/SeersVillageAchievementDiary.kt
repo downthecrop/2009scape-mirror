@@ -99,6 +99,14 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
     }
 
     override fun onResourceProduced(player: Player, event: ResourceProducedEvent) {
+        if (event.source.id == Scenery.OBELISK_OF_WATER_2151 && event.amount >= 5) {
+            finishTask(
+                player,
+                DiaryLevel.HARD,
+                HardTasks.CHARGE_5_WATER_ORBS_AT_ONCE
+            )
+        }
+
         when (player.viewport.region.id) {
             10805 -> if (event.itemId == Items.FLAX_1779) {
                 progressIncrementalTask(
@@ -311,6 +319,24 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
                     player,
                     DiaryLevel.EASY,
                         EasyTasks.BUY_CANDLE
+            )
+        }
+
+        if (event.currency.id == Items.ARCHERY_TICKET_1464) {
+            finishTask(
+                player,
+                DiaryLevel.MEDIUM,
+                    MediumTasks.RANGING_GUILD_BUY_SOMETHING_FOR_TICKETS
+            )
+        }
+    }
+
+    override fun onInterfaceOpened(player: Player, event: InterfaceOpenEvent) {
+        if (event.component.id == 332) {
+            finishTask(
+                player,
+                DiaryLevel.MEDIUM,
+                    MediumTasks.THORMAC_SORCERER_TALK_ABOUT_MYSTIC_STAVES
             )
         }
     }

@@ -59,7 +59,7 @@ class ExplorersRingPlugin : InteractionListener {
                     val item = player.inventory[slot]
                     if (item == null)
                         return@sendItemSelect
-                    if (!ModernListeners().alchemize(player, item, false))
+                    if (!ModernListeners().alchemize(player, item, false, explorersRing = true))
                         return@sendItemSelect
                     getStoreFile()[player.username.lowercase() + ":alchs"] = remaining - 1
                 }
