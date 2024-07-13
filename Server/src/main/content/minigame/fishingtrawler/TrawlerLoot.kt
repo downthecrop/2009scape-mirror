@@ -56,6 +56,7 @@ object TrawlerLoot {
      */
     @JvmStatic
     fun addLootAndMessage(player: Player, fishLevel: Int, rolls: Int, skipJunk: Boolean) {
+        if (rolls < 1) return
         val frequencyList = listOf<MutableMap<String, Int>>(HashMap(), HashMap(), HashMap())
         getLoot(fishLevel, rolls, skipJunk).forEach {
             if (!player.bank.add(it)) GroundItemManager.create(it, player)

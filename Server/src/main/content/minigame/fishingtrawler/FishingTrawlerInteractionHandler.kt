@@ -74,8 +74,8 @@ class FishingTrawlerInteractionHandler : InteractionListener {
         }
 
         on(REWARD_NET, IntType.SCENERY, "inspect"){ player, _ ->
-            val session: FishingTrawlerSession? = player.getAttribute("ft-session",null)
-            if(session == null || session.boatSank){
+            val rolls = player.getAttribute("/save:ft-rolls", 0)
+            if (rolls == 0) {
                 player.dialogueInterpreter.sendDialogues(player, core.game.dialogue.FacialExpression.GUILTY,"I'd better not go stealing other people's fish.")
                 return@on true
             }
@@ -162,9 +162,8 @@ class NetLootDialogue(player: Player? = null): core.game.dialogue.DialoguePlugin
     }
 
     override fun open(vararg args: Any?): Boolean {
-        session = player.getAttribute("ft-session",null)
-        if(session == null) return false
-        rolls = ceil(session!!.fishAmount / session!!.players.size.toDouble()).toInt()
+        rolls = player.getAttribute("/save:ft-rolls", 0)
+        if (rolls == 0) return false
         player.dialogueInterpreter.sendOptions("Skip Junk Items?","Yes","No")
         stage = 0
         return true
@@ -177,7 +176,7 @@ class NetLootDialogue(player: Player? = null): core.game.dialogue.DialoguePlugin
             2 -> TrawlerLoot.addLootAndMessage(player, level, rolls, false)
         }
         player.skills.addExperience(Skills.FISHING,(((0.015 * player.skills.getLevel(Skills.FISHING))) * player.skills.getLevel(Skills.FISHING)) * rolls)
-        player.removeAttribute("ft-session")
+        player.removeAttribute("ft-rolls")
         end()
         return true
     }
