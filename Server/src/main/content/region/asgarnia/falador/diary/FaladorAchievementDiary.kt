@@ -19,6 +19,7 @@ import core.game.diary.DiaryEventHookBase
 import core.game.diary.DiaryLevel
 import core.game.event.*
 import core.game.node.entity.skill.Skills
+import core.game.world.map.Location
 
 class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
     companion object {
@@ -281,6 +282,16 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
                     )
                 }
             }
+        }
+    }
+
+    override fun onPrayerPointsRecharged(player: Player, event: PrayerPointsRechargeEvent) {
+        if (event.altar.id == Scenery.ALTAR_39842 && event.altar.location == Location(2995, 3177, 0)) {
+            finishTask(
+                player,
+                DiaryLevel.EASY,
+                    EasyTasks.PORT_SARIM_RECHARGE_PRAYER_POINTS
+            )
         }
     }
 }

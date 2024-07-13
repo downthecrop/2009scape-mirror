@@ -14,6 +14,7 @@ import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
+import org.rs09.consts.Scenery
 
 class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) {
     companion object {
@@ -288,7 +289,7 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
                 finishTask(
                         player,
                         DiaryLevel.HARD,
-                        HardTasks.HIGH_ALCH_MAGIC_SHORTBOW_INSIDE_BANK
+                            HardTasks.HIGH_ALCH_MAGIC_SHORTBOW_INSIDE_BANK
                 )
             }
         }
@@ -299,7 +300,7 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
             finishTask(
                     player,
                     DiaryLevel.HARD,
-                    HardTasks.DIAL_FAIRY_RING_MCGRUBORS_WOOD
+                        HardTasks.DIAL_FAIRY_RING_MCGRUBORS_WOOD
             )
         }
     }
@@ -309,8 +310,20 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
             finishTask(
                     player,
                     DiaryLevel.EASY,
-                    EasyTasks.BUY_CANDLE
+                        EasyTasks.BUY_CANDLE
             )
+        }
+    }
+
+    override fun onPrayerPointsRecharged(player: Player, event: PrayerPointsRechargeEvent) {
+        if (player.viewport.region.id == 10806) {
+            if (event.altar.id == Scenery.ALTAR_409 || event.altar.id == Scenery.ALTAR_19145) {
+                finishTask(
+                    player,
+                    DiaryLevel.EASY,
+                        EasyTasks.PRAY_AT_ALTAR
+                )
+            }
         }
     }
 }
