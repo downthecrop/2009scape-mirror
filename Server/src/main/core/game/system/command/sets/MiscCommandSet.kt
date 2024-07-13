@@ -1,6 +1,6 @@
 package core.game.system.command.sets
 
-import content.global.handlers.iface.RulesAndInfo
+import content.global.handlers.iface.*
 import content.global.skill.farming.timers.*
 import content.minigame.fishingtrawler.TrawlerLoot
 import content.region.misthalin.draynor.quest.anma.AnmaCutscene
@@ -189,13 +189,9 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             when(mode){
                 "buying" -> showGeBuy(player)
                 "selling" -> showGeSell(player)
-                "search" -> sendInputDialogue(player, InputType.STRING_LONG, "Enter search term:"){value ->
-                    showOffers(player, value as String)
-                }
+                "search" -> showGeInputDialogue(player, args, ::showOffers)
                 "bots" -> showGeBots(player)
-                "botsearch" -> sendInputDialogue(player, InputType.STRING_LONG, "Enter search term:"){value ->
-                    showGeBotsearch(player, value as String)
-                }
+                "botsearch" -> showGeInputDialogue(player, args, ::showGeBotsearch)
                 else -> reject(player, "Invalid mode used. Available modes are: buying, selling, search")
             }
         }
@@ -687,19 +683,14 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             offerPrice[offer.itemID] = offer.offeredValue
         }
 
-        val entries = offerAmounts.entries.sortedBy({ e -> getItemName(e.key) })
-        var lineId = 11
-
-        closeInterface(player)
-        setScrollTitle(player, "Bot Stock - \"$searchTerm\"")
-        for(i in 0..299) {
-            val offer = entries.elementAtOrNull(i)
-            if (offer != null)
-                setInterfaceText(player, "${getItemName(offer.key)} (<col=6bff89>x${offer.value}</col>) -> Price: <col=e8d151>${offerPrice[offer.key]}</col>gp", Components.QUESTJOURNAL_SCROLL_275, lineId++)
-            else
-                setInterfaceText(player, "", Components.QUESTJOURNAL_SCROLL_275, lineId++)
+        val entries    = offerAmounts.entries.sortedBy({ e -> getItemName(e.key) })
+        val leftLines  = ArrayList<String>(entries.size)
+        val rightLines = ArrayList<String>(entries.size)
+        for (entry in entries) {
+            leftLines.add("${getItemName(entry.key)} (<col=357f44>x${entry.value}</col>)")
+            rightLines.add("Price: <col=3a3414>${offerPrice[entry.key]}</col>gp")
         }
-        openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
+        showGeBook(player, "Bot Stock - \"$searchTerm\"", leftLines, rightLines)
     }
 
     fun showGeBots(player: Player)
@@ -715,19 +706,14 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             offerPrice[offer.itemID] = offer.offeredValue
         }
 
-        val entries = offerAmounts.entries.sortedBy({ e -> getItemName(e.key) })
-        var lineId = 11
-
-        closeInterface(player)
-        setScrollTitle(player, "Bot Stock")
-        for(i in 0..299) {
-            val offer = entries.elementAtOrNull(i)
-            if (offer != null)
-                setInterfaceText(player, "${getItemName(offer.key)} (<col=6bff89>x${offer.value}</col>) -> Price: <col=e8d151>${offerPrice[offer.key]}</col>gp", Components.QUESTJOURNAL_SCROLL_275, lineId++)
-            else
-                setInterfaceText(player, "", Components.QUESTJOURNAL_SCROLL_275, lineId++)
+        val entries    = offerAmounts.entries.sortedBy({ e -> getItemName(e.key) })
+        val leftLines  = ArrayList<String>(entries.size)
+        val rightLines = ArrayList<String>(entries.size)
+        for (entry in entries) {
+            leftLines.add("${getItemName(entry.key)} (<col=357f44>x${entry.value}</col>)")
+            rightLines.add("Price: <col=3a3414>${offerPrice[entry.key]}</col>gp")
         }
-        openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
+        showGeBook(player, "Bot Stock", leftLines, rightLines)
     }
 
     fun showGeSell(player: Player){
@@ -749,19 +735,14 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             lowestPrice[offer.itemID] = price
         }
 
-        val entries = offerAmounts.entries.sortedBy({ e -> getItemName(e.key) })
-        var lineId = 11
-
-        closeInterface(player)
-        setScrollTitle(player, "Active Sell Offers")
-        for(i in 0..299) {
-            val offer = entries.elementAtOrNull(i)
-            if (offer != null)
-                setInterfaceText(player, "${getItemName(offer.key)} (<col=6bff89>x${offer.value}</col>) -> Lowest: <col=e8d151>${lowestPrice[offer.key]}</col>gp", Components.QUESTJOURNAL_SCROLL_275, lineId++)
-            else
-                setInterfaceText(player, "", Components.QUESTJOURNAL_SCROLL_275, lineId++)
+        val entries    = offerAmounts.entries.sortedBy({ e -> getItemName(e.key) })
+        val leftLines  = ArrayList<String>(entries.size)
+        val rightLines = ArrayList<String>(entries.size)
+        for (entry in entries) {
+            leftLines.add("${getItemName(entry.key)} (<col=357f44>x${entry.value}</col>)")
+            rightLines.add("Price: <col=3a3414>${lowestPrice[entry.key]}</col>gp")
         }
-        openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
+        showGeBook(player, "Active Sell Offers", leftLines, rightLines)
     }
 
     fun showGeBuy(player: Player){
@@ -783,28 +764,27 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             highestPrice[offer.itemID] = price
         }
 
-        val entries = offerAmounts.entries.sortedBy({ e -> getItemName(e.key) })
-        var lineId = 11
-
-        closeInterface(player)
-        setScrollTitle(player, "Active Buy Offers")
-        for(i in 0..299) {
-            val offer = entries.elementAtOrNull(i)
-            if (offer != null)
-                setInterfaceText(player, "${getItemName(offer.key)} (<col=6bff89>x${offer.value}</col>) -> Highest: <col=e8d151>${highestPrice[offer.key]}</col>gp", Components.QUESTJOURNAL_SCROLL_275, lineId++)
-            else
-                setInterfaceText(player, "", Components.QUESTJOURNAL_SCROLL_275, lineId++)
+        val entries    = offerAmounts.entries.sortedBy({ e -> getItemName(e.key) })
+        val leftLines  = ArrayList<String>(entries.size)
+        val rightLines = ArrayList<String>(entries.size)
+        for (entry in entries) {
+            leftLines.add("${getItemName(entry.key)} (<col=357f44>x${entry.value}</col>)")
+            rightLines.add("Highest: <col=3a3414>${highestPrice[entry.key]}</col>gp")
         }
-        openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
+        showGeBook(player, "Active Buy Offers", leftLines, rightLines)
     }
 
     fun showOffers(player: Player, searchTerm: String){
         val offers = GrandExchange.getValidOffers().filter { getItemName(it.itemID).contains(searchTerm, true) || getItemName(it.itemID).equals(searchTerm, true) }
-        val buyingAmount = HashMap<Int, Int>()
+        if (offers.isEmpty()) {
+            sendMessage(player, "No results.")
+            return
+        }
+
+        val buyingAmount  = HashMap<Int, Int>()
         val buyingHighest = HashMap<Int, Int>()
         val sellingAmount = HashMap<Int,Int>()
         val sellingLowest = HashMap<Int,Int>()
-
         for(offer in offers)
         {
             if(offer.sell)
@@ -831,39 +811,64 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             }
         }
 
-        closeInterface(player)
-        setScrollTitle(player, "Results for \"$searchTerm\"")
-
-        var lineId = 11
-        for(i in 0..299) {
-            if(i > buyingAmount.keys.size)
-            {
-                val offer = sellingAmount.entries.elementAtOrNull(i - buyingAmount.keys.size)
-                if(offer != null) {
-                    setInterfaceText(player, "[SELLING] ${getItemName(offer.key)} (<col=6bff89>x${offer.value}</col>) -> Lowest: <col=e8d151>${sellingLowest[offer.key]}</col>gp", Components.QUESTJOURNAL_SCROLL_275, lineId++)
-                    continue
-                }
+        val numLines   = offers.size + 1
+        val leftLines  = ArrayList<String>(numLines)
+        val rightLines = ArrayList<String>(numLines)
+        for (i in 0..numLines) {
+            if (i < buyingAmount.keys.size) {
+                val offer = buyingAmount.entries.elementAtOrNull(i) ?: continue
+                leftLines.add("[BUYING] ${getItemName(offer.key)} (<col=357f44>x${offer.value}</col>)")
+                rightLines.add("Highest: <col=3a3414>${buyingHighest[offer.key]}</col>gp")
+            } else if (i == buyingAmount.keys.size) {
+                leftLines.add("")
+                rightLines.add("")
+            } else {
+                val offer = sellingAmount.entries.elementAtOrNull(i - buyingAmount.keys.size - 1) ?: continue
+                leftLines.add("[SELLING] ${getItemName(offer.key)} (<col=357f44>x${offer.value}</col>)")
+                rightLines.add("Lowest: <col=3a3414>${sellingLowest[offer.key]}</col>gp")
             }
-            else if(i < buyingAmount.keys.size)
-            {
-                val offer = buyingAmount.entries.elementAtOrNull(i)
-                if(offer != null) {
-                    setInterfaceText(player, "[BUYING] ${getItemName(offer.key)} (<col=6bff89>x${offer.value}</col>) -> Highest: <col=e8d151>${buyingHighest[offer.key]}</col>gp", Components.QUESTJOURNAL_SCROLL_275, lineId++)
-                    continue
-                }
-            }
-            else {
-                setInterfaceText(player, "<str>                                                                                                                  </str>", Components.QUESTJOURNAL_SCROLL_275, lineId++)
-                continue
-            }
-
-            setInterfaceText(player, "", Components.QUESTJOURNAL_SCROLL_275, lineId++)
         }
-        openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
+        showGeBook(player, "Results for \"$searchTerm\"", leftLines, rightLines)
     }
 
-    fun setScrollTitle(player: Player, text: String){
-        setInterfaceText(player, text, Components.QUESTJOURNAL_SCROLL_275, 2)
+    private fun showGeInputDialogue(player: Player, args: Array<String>, op: (Player, String) -> (Unit)) {
+        if (args.size > 2) {
+            val target = args.copyOfRange(2, args.size).joinToString(" ").lowercase()
+            op(player, target)
+        } else {
+            sendInputDialogue(player, InputType.STRING_LONG, "Enter search term:",) { value ->
+                op(player, value as String)
+            }
+        }
     }
 
+    private fun showGeBook(player: Player, title: String, leftLines: ArrayList<String>, rightLines: ArrayList<String>) {
+        if (leftLines.size == 0) {
+            sendMessage(player, "No results.")
+            return
+        }
+        val lineIds  = BookInterface.FANCY_BOOK_26_LINE_IDS
+        val contents = ArrayList<PageSet>()
+        val leftChunks  = leftLines.chunked(15)
+        val rightChunks = rightLines.chunked(15)
+        for (i in leftChunks.indices) {
+            val size = leftChunks[i].size
+            val leftPageLines  = ArrayList<BookLine>(size)
+            val rightPageLines = ArrayList<BookLine>(size)
+            for (j in leftChunks[i].indices) {
+                leftPageLines.add(BookLine(leftChunks[i][j], lineIds[j+3])) //+3 to skip title and buttons
+                rightPageLines.add(BookLine(rightChunks[i][j], lineIds[j+3+15])) //+15 because right pages have different ids
+            }
+            val leftPage  = Page(*leftPageLines.toTypedArray())
+            val rightPage = Page(*rightPageLines.toTypedArray())
+            contents.add(PageSet(leftPage, rightPage))
+        }
+
+        closeInterface(player)
+        fun display(player: Player, pageNum: Int, buttonID: Int): Boolean {
+            BookInterface.pageSetup(player, BookInterface.FANCY_BOOK_26, title, contents.toTypedArray())
+            return true
+        }
+        BookInterface.openBook(player, BookInterface.FANCY_BOOK_26, ::display)
+    }
 }
