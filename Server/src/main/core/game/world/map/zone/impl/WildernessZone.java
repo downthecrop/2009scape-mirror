@@ -2,7 +2,6 @@ package core.game.world.map.zone.impl;
 
 import content.global.handlers.item.equipment.brawling_gloves.BrawlingGloves;
 import content.global.skill.summoning.familiar.Familiar;
-import content.region.wilderness.handlers.DeepWildyThreat;
 import core.game.component.Component;
 import core.game.interaction.Option;
 import core.game.node.Node;
@@ -23,6 +22,7 @@ import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneRestriction;
 import core.game.world.repository.Repository;
 import core.tools.RandomFunction;
+import org.rs09.consts.Items;
 import org.rs09.consts.NPCs;
 
 
@@ -41,8 +41,8 @@ public final class WildernessZone extends MapZone {
 	 */
 	private static final WildernessZone INSTANCE = new WildernessZone(new ZoneBorders(2944, 3525, 3400, 3975), new ZoneBorders(3070, 9924, 3135, 10002), ZoneBorders.forRegion(12192), ZoneBorders.forRegion(12193), ZoneBorders.forRegion(11937));
 
-        public static final String WILDERNESS_PROT_ATTR = "/save:wilderness-protection-active";
-        public static final String WILDERNESS_HIGHER_NEXTFEE = "/save:wilderness-higher-next-fee";
+	public static final String WILDERNESS_PROT_ATTR = "/save:wilderness-protection-active";
+	public static final String WILDERNESS_HIGHER_NEXTFEE = "/save:wilderness-higher-next-fee";
 
 	/**
 	 * The zone borders.
@@ -92,50 +92,37 @@ public final class WildernessZone extends MapZone {
 	}
 
 	private void rollWildernessExclusiveLoot(Entity e, Entity killer) {
-                if (!(killer instanceof Player)) return;
+		if (!(killer instanceof Player)) return;
+		if (!(e instanceof NPC)) return;
+		if (!(e.getId() == NPCs.CHAOS_ELEMENTAL_3200 || e.asNpc().getName().contains("Revenant"))) return;
 
-                boolean isDeepWildy = ((Player) killer).getSkullManager().isDeepWilderness();
-                boolean isRevOrCele = e.asNpc().getName().contains("Revenant") || e.getId() == NPCs.CHAOS_ELEMENTAL_3200;
-                boolean isSufficientRisk = ((Player) killer).getAttribute("deepwild-value-risk", 0L) > SkullManager.DEEP_WILD_DROP_RISK_THRESHOLD;
-                boolean isValidTarget = e instanceof NPC && ((isDeepWildy && isSufficientRisk) || isRevOrCele);
+		int pvpGearRate = getNewDropRate(e.asNpc().getDefinition().getCombatLevel());
+		boolean higherRate = ((Player) killer).getSkullManager().isDeepWilderness() && ((Player) killer).getAttribute("deepwild-value-risk", 0L) > SkullManager.DEEP_WILD_DROP_RISK_THRESHOLD;
+		if (higherRate) {
+			pvpGearRate /= 2;
+		}
+		int cEleGloveRate = 50;
+		int normalGloveRate = higherRate ? 100 : (int) ((1.0 / (1.0 - Math.pow(1.0 - (1.0 / (double) pvpGearRate), 16.0))) * 5.0 / 6.0);
 
-				if (isDeepWildy) {
-					DeepWildyThreat.adjustThreat((Player) killer, 50);
+		if (RandomFunction.roll(e.getId() == NPCs.CHAOS_ELEMENTAL_3200 ? cEleGloveRate : normalGloveRate)) {
+			byte glove = (byte) RandomFunction.random(1, 14);
+			Item reward = new Item(BrawlingGloves.forIndicator(glove).getId());
+			GroundItemManager.create(reward, e.asNpc().getDropLocation(), killer.asPlayer());
+			Repository.sendNews(killer.getUsername() + " has received " + reward.getName().toLowerCase() + " from a " + e.asNpc().getName() + "!");
+		}
+		for (int j : PVP_GEAR) {
+			boolean chance = RandomFunction.roll(pvpGearRate);
+			if (chance) {
+				Item reward;
+				if (j == Items.MORRIGANS_JAVELIN_13879 || j == Items.MORRIGANS_THROWING_AXE_13883) {
+					reward = new Item(j, RandomFunction.random(15, 50));
+				} else {
+					reward = new Item(j);
 				}
-
-                if (!isValidTarget) return;
-
-                int pvpGearRate = getNewDropRate(e.asNpc().getDefinition().getCombatLevel());
-                if (isDeepWildy && isRevOrCele)
-                    pvpGearRate /= 2;
-
-                int cEleGloveRate = isDeepWildy ? 50 : 150;
-                int normalGloveRate = isDeepWildy && isRevOrCele ? 100 : (int)((1.0/(1.0-Math.pow(1.0 - (1.0/(double)pvpGearRate), 16.0))) * 5.0 / 6.0);
-
-                if (RandomFunction.roll(e.getId() == NPCs.CHAOS_ELEMENTAL_3200 ? cEleGloveRate : normalGloveRate)) {
-                        byte glove = (byte) RandomFunction.random(1, 14);
-                        Item reward = new Item(BrawlingGloves.forIndicator(glove).getId());
-                        GroundItemManager.create(reward, e.asNpc().getDropLocation(), killer.asPlayer());
-                        Repository.sendNews(killer.getUsername() + " has received " + reward.getName().toLowerCase() + " from a " + e.asNpc().getName() + "!");
-						if (isDeepWildy)
-							DeepWildyThreat.adjustThreat((Player) killer, 750);
-                }
-
-                for (int j : PVP_GEAR) {
-                        boolean chance = RandomFunction.roll(pvpGearRate);
-                        if (chance) {
-                                Item reward;
-                                if (j == 13879 || j == 13883) { // checks if it's a javelin or throwing axe
-                                        reward = new Item(j, RandomFunction.random(15, 50));
-                                } else {
-                                        reward = new Item(j);
-                                }
-                                Repository.sendNews(killer.asPlayer().getUsername() + " has received a " + reward.getName() + " from a " + e.asNpc().getName() + "!");
-                                GroundItemManager.create(reward, ((NPC) e).getDropLocation(), killer.asPlayer());
-								if (isDeepWildy)
-									DeepWildyThreat.adjustThreat((Player) killer, 3000);
-                        }
-                }
+				GroundItemManager.create(reward, ((NPC) e).getDropLocation(), killer.asPlayer());
+				Repository.sendNews(killer.asPlayer().getUsername() + " has received a " + reward.getName() + " from a " + e.asNpc().getName() + "!");
+			}
+		}
 	}
 
 	/**
@@ -155,8 +142,6 @@ public final class WildernessZone extends MapZone {
 		}
 		return super.interact(e, target, option);
 	}
-
-
 
 	@Override
 	public boolean enter(Entity e) {
@@ -324,12 +309,12 @@ public final class WildernessZone extends MapZone {
 	 * @return the level.
 	 */
 	public static int getWilderness(Entity e) {
-        int y = e.getLocation().getY();
-        if(6400 < y) {
-            return ((y - 9920) / 8) + 1;
-        } else {
-            return ((y - 3520) / 8) + 1;
-        }
+		int y = e.getLocation().getY();
+		if(6400 < y) {
+			return ((y - 9920) / 8) + 1;
+		} else {
+			return ((y - 3520) / 8) + 1;
+		}
 	}
 
 	/**

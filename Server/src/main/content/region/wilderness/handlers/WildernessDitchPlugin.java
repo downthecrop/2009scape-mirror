@@ -52,6 +52,10 @@ public final class WildernessDitchPlugin extends OptionHandler {
 		player.faceLocation(node.getLocation());
 		Scenery ditch = (Scenery) node;
 		player.setAttribute("wildy_ditch", ditch);
+		/*
+
+		Comment out the annoying ditch warning until the doomsayer has been implemented so that players can disable it properly.
+
 		if(!player.isArtificial()) {
 			if (ditch.getRotation() % 2 == 0) {
 				if (player.getLocation().getY() <= node.getLocation().getY()) {
@@ -65,6 +69,7 @@ public final class WildernessDitchPlugin extends OptionHandler {
 				}
 			}
 		}
+		*/
 		WildernessInterfacePlugin.handleDitch(player);
 	}
 

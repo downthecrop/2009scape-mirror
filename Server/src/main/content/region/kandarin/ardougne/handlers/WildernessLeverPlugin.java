@@ -1,5 +1,6 @@
 package content.region.kandarin.ardougne.handlers;
 
+import core.ServerConstants;
 import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.dialogue.DialogueInterpreter;
@@ -8,7 +9,6 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.TeleportManager;
-import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
@@ -20,10 +20,11 @@ import core.plugin.ClassScanner;
 import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.playAudio;
+import static content.region.wilderness.handlers.WildernessGateHandlerKt.enterDeepWilderness;
 
 /**
  * Handles wilderness levers.
- * @author 'Vexia
+ * @author 'Vexia, Player Name
  * @version 1.0
  */
 @Initializable
@@ -279,7 +280,6 @@ public final class WildernessLeverPlugin extends OptionHandler {
 		public Location[] getLocations() {
 			return locations;
 		}
-
 	}
 
 	/**
@@ -325,7 +325,14 @@ public final class WildernessLeverPlugin extends OptionHandler {
 		public boolean open(Object... args) {
 			lever = (LeverSets) args[0];
 			id = (int) args[1];
-			interpreter.sendDialogue("Warning! Pulling the lever will teleport you deep into the wilderness.");
+			if (ServerConstants.ENHANCED_DEEP_WILDERNESS) {
+				enterDeepWilderness(player, (player) -> {
+					lever.pull(player, lever.getIndex(id), true);
+					return null;
+				}, "Pulling the lever will teleport you into the deep wilderness.");
+			} else {
+				interpreter.sendDialogue("Warning! Pulling the lever will teleport you deep into the wilderness.");
+			}
 			return true;
 		}
 

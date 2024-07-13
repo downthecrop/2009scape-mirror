@@ -334,6 +334,9 @@ class ServerConstants {
         var RUNECRAFTING_FORMULA_REVISION = 581
 
         @JvmField
+        var ENHANCED_DEEP_WILDERNESS = false
+
+        @JvmField
         var STARTUP_MOMENT = Calendar.getInstance()
     }
 }

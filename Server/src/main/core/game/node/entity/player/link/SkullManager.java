@@ -236,7 +236,7 @@ public final class SkullManager {
     }
 
     public void setDeepWilderness (boolean deepWildy) {
-            if(deepWildy) {
+            if(ServerConstants.ENHANCED_DEEP_WILDERNESS && deepWildy) {
                 updateDWSkullIcon();
             } else {
                 removeDWSkullIcon();
