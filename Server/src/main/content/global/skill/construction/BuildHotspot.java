@@ -33,7 +33,7 @@ public enum BuildHotspot {
 	FIREPLACE(15418, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.CLAY_FIREPLACE, Decoration.STONE_FIREPLACE,Decoration.MARBLE_FIREPLACE),
 	FIREPLACE2(15267, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.CLAY_FIREPLACE, Decoration.STONE_FIREPLACE,Decoration.MARBLE_FIREPLACE),
 	CURTAINS(15419, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_MID_ANIM, Decoration.TORN_CURTAINS, Decoration.CURTAINS, Decoration.OPULENT_CURTAINS),
-	BOOKCASE(15416,  BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.WOODEN_BOOKCASE, Decoration.OAK_BOOKCASE, Decoration.MAHOGANY_BOOKCASE),
+	BOOKCASE(15416,  BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.WOODEN_BOOKCASE, Decoration.OAK_BOOKCASE, Decoration.MAHOGANY_BOOKCASE),
 	RUG(15415, BuildHotspotType.LINKED, BuildingUtils.BUILD_LOW_ANIM, Decoration.BROWN_RUG_CORNER, Decoration.RED_RUG_CORNER, Decoration.OPULENT_RUG_CORNER),
 	RUG2(15414, BuildHotspotType.LINKED, BuildingUtils.BUILD_LOW_ANIM, Decoration.BROWN_RUG_END, Decoration.RED_RUG_END, Decoration.OPULENT_RUG_END),
 	RUG3(15413, BuildHotspotType.LINKED, BuildingUtils.BUILD_LOW_ANIM, Decoration.BROWN_RUG_CENTER, Decoration.RED_RUG_CENTER, Decoration.OPULENT_RUG_CENTER),
@@ -186,7 +186,7 @@ public enum BuildHotspot {
 	LANDSCAPE(15393, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.LUMBRIDGE, Decoration.THE_DESERT, Decoration.MORYTANIA, Decoration.KARAMJA, Decoration.ISAFDAR),
 	SWORD(15395, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.SILVERLIGHT, Decoration.EXCALIBUR, Decoration.DARKLIGHT),
 	MAP(15396, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.SMALL_MAP, Decoration.MEDIUM_MAP, Decoration.LARGE_MAP),
-	BOOKCASE2(15397, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.WOODEN_BOOKCASE, Decoration.OAK_BOOKCASE, Decoration.MAHOGANY_BOOKCASE),
+	BOOKCASE2(15397, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.WOODEN_BOOKCASE, Decoration.OAK_BOOKCASE, Decoration.MAHOGANY_BOOKCASE),
 
 	/**
 	 * Manegerie Hotspots
@@ -237,7 +237,7 @@ public enum BuildHotspot {
 	GLOBE(15421, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.GLOBE, Decoration.ORNAMENTAL_GLOBE, Decoration.LUNAR_GLOBE, Decoration.CELESTIAL_GLOBE, Decoration.ARMILLARY_SPHERE, Decoration.SMALL_ORREY, Decoration.LARGE_ORREY),
 	LECTERN(15420, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_LECTERN, Decoration.EAGLE_LECTERN, Decoration.DEMON_LECTERN, Decoration.TEAK_EAGLE_LECTERN, Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN),
 	CRYSTAL_BALL(15422, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.CRYSTAL_BALL, Decoration.ELEMENTAL_SPHERE, Decoration.CRYSTAL_OF_POWER),
-	BOOKCASE3(15425, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.WOODEN_BOOKCASE, Decoration.OAK_BOOKCASE, Decoration.MAHOGANY_BOOKCASE),
+	BOOKCASE3(15425, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.WOODEN_BOOKCASE, Decoration.OAK_BOOKCASE, Decoration.MAHOGANY_BOOKCASE),
 	WALL_CHART(15423, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.ALCHEMICAL_CHART, Decoration.ASTRONOMICAL_CHART, Decoration.INFERNAL_CHART),
 	TELESCOPE(15424, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.TELESCOPE1, Decoration.TELESCOPE2, Decoration.TELESCOPE3),
 	
