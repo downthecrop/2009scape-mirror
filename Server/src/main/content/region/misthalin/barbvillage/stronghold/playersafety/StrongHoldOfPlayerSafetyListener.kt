@@ -225,7 +225,7 @@ package content.region.misthalin.barbvillage.stronghold.playersafety
                  }
                  else{
                      player.emoteManager.unlock(Emotes.SAFETY_FIRST)
-                     addItem(player, Items.COINS_995, 1000)
+                     addItem(player, Items.COINS_995, 10000)
                      addItem(player, Items.SAFETY_GLOVES_12629)
                      sendItemDialogue(player, Items.SAFETY_GLOVES_12629,
                          "You open the chest to find a large pile of gold, along with a pair of safety gloves. ")
