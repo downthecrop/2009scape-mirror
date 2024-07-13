@@ -12,6 +12,9 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 import core.tools.RandomFunction;
+import org.rs09.consts.Sounds;
+
+import static core.api.ContentAPIKt.playAudio;
 
 /**
  * Handles a morph item.
@@ -65,6 +68,7 @@ public class MorphItemPlugin implements Plugin<Object> {
 	 */
 	private void morph(Player player, Item item) {
 		int morphId = item.getId() == 6583 ? 2626 : EASTER_EGG_IDS[RandomFunction.random(EASTER_EGG_IDS.length)];
+		playAudio(player, 1520);
 		player.getInterfaceManager().close();
 		player.getAppearance().transformNPC(morphId);
 		player.getInterfaceManager().removeTabs(0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);

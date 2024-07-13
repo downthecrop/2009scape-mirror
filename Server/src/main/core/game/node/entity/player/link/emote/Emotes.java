@@ -14,6 +14,7 @@ import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 
+import static core.api.ContentAPIKt.playJingle;
 /**
  * Represents an emote.
  *
@@ -50,10 +51,10 @@ public enum Emotes {
     SHRUG(8, Animation.create(2113)),
     CHEER(9, Animation.create(862)),
     BECKON(10, Animation.create(864)),
-	//Switch laugh id 11, to 12, and switch Jump id 12 to 11. Id's were mismatched.
-	//This caused the LAUGH to proc JUMP_FOR_JOY and JUMP_FOR_JOY to proc LAUGH! :)
-	JUMP_FOR_JOY(11, Animation.create(2109)),
-	LAUGH(12, Animation.create(861)),
+    //Switch laugh id 11, to 12, and switch Jump id 12 to 11. Id's were mismatched.
+    //This caused the LAUGH to proc JUMP_FOR_JOY and JUMP_FOR_JOY to proc LAUGH! :)
+    JUMP_FOR_JOY(11, Animation.create(2109)),
+    LAUGH(12, Animation.create(861)),
     YAWN(13, Animation.create(2111)) {
         @Override
         public void play(Player player) {
@@ -166,7 +167,12 @@ public enum Emotes {
         }
     },
     SNOWMAN_DANCE(40, Animation.create(7531), "This emote can be unlocked by playing a Christmas holiday event."),
-    AIR_GUITAR(41, Animation.create(2414), Graphics.create(1537), "This emote can be accessed by unlocking 200 pieces of music."),
+    AIR_GUITAR(41, Animation.create(2414), Graphics.create(1537), "This emote can be accessed by unlocking 200 pieces of music.") {
+        public void play(Player player) {
+            playJingle(player, 302);
+            super.play(player);
+        }
+    },
     SAFETY_FIRST(42, Animation.create(8770), Graphics.create(1553), "You can't use this emote yet. Visit the Stronghold of Player safety to<br>unlock it."),
     EXPLORE(43, Animation.create(9990), Graphics.create(1734), "You can't use this emote yet. You must complete all the Lumbridge <br>and Draynor beginner tasks to unlock it."),
     TRICK(44, Animation.create(10530), Graphics.create(1863), "This emote can be unlocked by playing a Halloween holiday event."),
@@ -174,7 +180,7 @@ public enum Emotes {
     GIVE_THANKS(46, "This emote can be unlocked by playing a Thanksgiving holiday event.") {
         @Override
         public void play(final Player player) {
-			GameWorld.getPulser().submit(new Pulse(1, player) {
+            GameWorld.getPulser().submit(new Pulse(1, player) {
                 int counter;
 
                 @Override

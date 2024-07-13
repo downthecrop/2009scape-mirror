@@ -6,6 +6,13 @@ import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import kotlinx.coroutines.delay
+import org.rs09.consts.Sounds
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+
+
 
 class ToyListeners : InteractionListener {
     companion object {
@@ -14,10 +21,12 @@ class ToyListeners : InteractionListener {
         private val MARIONETTE_WALK = Animation(3004)
         private val MARIONETTE_BOW = Animation(3005)
         private val MARIONETTE_DANCE = Animation(3006)
-        private val MARIONETTE_GFX = arrayOf(intArrayOf(507, 508, 509, 510), intArrayOf(511, 512, 513, 514), intArrayOf(515, 516, 517, 518))
+        private val MARIONETTE_GFX =
+            arrayOf(intArrayOf(507, 508, 509, 510), intArrayOf(511, 512, 513, 514), intArrayOf(515, 516, 517, 518))
         private val SNOWGLOBE_SHAKE = Animation(7535) //Initial Shake
         private val SNOWGLOBE_HOLDFACE = Animation(7536) //Immediately after shake, player holds the snow globe to face
-        private val SNOWGLOBE_INTERFACE = 659 //After HOLDFACE this interface is displayed, player either clicks 'continue' for inv of snowballs, or 'close' for no snowballs
+        private val SNOWGLOBE_INTERFACE =
+            659 //After HOLDFACE this interface is displayed, player either clicks 'continue' for inv of snowballs, or 'close' for no snowballs
         private val SNOWGLOBE_DOWNFAST = Animation(7537) //Used when player hit 'close' on the interface
         private val SNOWGLOBE_DOWNSLOW = Animation(7538) //Used when the player hit 'continue' on the interface
         private val SNOWGLOBE_STOMP = Animation(7528) //When player hits continue this animation plays
@@ -34,7 +43,7 @@ class ToyListeners : InteractionListener {
     }
 
     override fun defineListeners() {
-        on(Items.CHOCATRICE_CAPE_12634, IntType.ITEM, "operate"){ player, _ ->
+        on(Items.CHOCATRICE_CAPE_12645, IntType.ITEM, "operate") { player, _ ->
             lockInteractions(player, 2)
             visualize(player, 8903, 1566)
             return@on true
@@ -44,18 +53,18 @@ class ToyListeners : InteractionListener {
             val index = MARIONETTES.indexOf(marionette.id)
 
             lockInteractions(player, 2)
-            when(getUsedOption(player)) {
+            when (getUsedOption(player)) {
                 "jump" -> visualize(player, MARIONETTE_JUMP, MARIONETTE_GFX[index][0])
                 "walk" -> visualize(player, MARIONETTE_WALK, MARIONETTE_GFX[index][1])
-                "bow" ->  visualize(player, MARIONETTE_BOW, MARIONETTE_GFX[index][2])
+                "bow" -> visualize(player, MARIONETTE_BOW, MARIONETTE_GFX[index][2])
                 "dance" -> visualize(player, MARIONETTE_DANCE, MARIONETTE_GFX[index][3])
             }
             return@on true
         }
 
-        on(Items.REINDEER_HAT_10507, IntType.ITEM, "operate"){ player, _ ->
+        on(Items.REINDEER_HAT_10507, IntType.ITEM, "operate") { player, _ ->
             lockInteractions(player, 2)
-            animate(player, 5059)
+            visualize(player, 5059, 859)
             return@on true
         }
 
@@ -64,7 +73,7 @@ class ToyListeners : InteractionListener {
             animate(player, SNOWGLOBE_SHAKE)
             runTask(player, 3) {
                 animate(player, SNOWGLOBE_HOLDFACE)
-                runTask(player){
+                runTask(player) {
                     openInterface(player, SNOWGLOBE_INTERFACE)
                 }
             }
@@ -80,17 +89,17 @@ class ToyListeners : InteractionListener {
             return@on true
         }
 
-        on(Items.TOY_KITE_12844, IntType.ITEM, "fly"){ player, _ ->
+        on(Items.TOY_KITE_12844, IntType.ITEM, "fly","operate") { player, _ ->
             lockInteractions(player, 2)
             animate(player, TOY_KITE_FLY)
             return@on true
         }
 
-        on(Items.YO_YO_4079, IntType.ITEM, "play", "loop", "walk", "crazy"){ player, _ ->
+        on(Items.YO_YO_4079, IntType.ITEM, "play", "loop", "walk", "crazy") { player, _ ->
             val option = getUsedOption(player)
 
             lockInteractions(player, 2)
-            when(option) {
+            when (option) {
                 "play" -> animate(player, YOYO_PLAY)
                 "loop" -> animate(player, YOYO_LOOP)
                 "walk" -> animate(player, YOYO_WALK)
@@ -99,11 +108,11 @@ class ToyListeners : InteractionListener {
             return@on true
         }
 
-        on(Items.ZOMBIE_HEAD_6722, IntType.ITEM, "talk-at", "display", "question"){ player, _ ->
+        on(Items.ZOMBIE_HEAD_6722, IntType.ITEM, "talk-at", "display", "question") { player, _ ->
             val option = getUsedOption(player)
 
             lockInteractions(player, 2)
-            when(option) {
+            when (option) {
                 "talk-at" -> {
                     animate(player, ZOMBIE_HEAD_TALK_AT)
                     sendChat(player, "Alas!")
@@ -114,6 +123,13 @@ class ToyListeners : InteractionListener {
                     sendChat(player, "MWAHAHAHAHAHAHAH")
                 }
             }
+            return@on true
+        }
+        on(Items.RUBBER_CHICKEN_4566,   IntType.ITEM, "operate", "Dance") { player, _ ->
+            lockInteractions(player, 2)
+            visualize(player, 1835, -1)
+            playJingle(player, 99);
+            playAudio(player, 355,  100);
             return@on true
         }
     }
