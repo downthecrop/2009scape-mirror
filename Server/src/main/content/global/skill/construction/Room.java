@@ -2,9 +2,13 @@ package content.global.skill.construction;
 
 
 import core.game.node.entity.player.Player;
+import core.game.node.scenery.Constructed;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.world.map.*;
+import core.tools.Log;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Represents a room.
@@ -93,7 +97,7 @@ public final class Room {
 		Region.load(region, true);
 		chunk = region.getPlanes()[style.getPlane()].getRegionChunk(properties.getChunkX(), properties.getChunkY());
 	}
-	
+
 	/**
 	 * Gets the hotspot object for the given hotspot type.
 	 * @param hotspot The hotspot type.
@@ -154,6 +158,7 @@ public final class Room {
 			chunk.rotate(rotation);
 		}
 		if (!house.isBuildingMode()) {
+			placeDoors(housePlane, house, chunk);
 			removeHotspots(housePlane, house, chunk);
 		}
 	}
@@ -165,17 +170,16 @@ public final class Room {
 	 * @param chunk The region chunk used.
 	 */
 	private void removeHotspots(int housePlane, HouseManager house, BuildRegionChunk chunk) {
-		for (int i = 0; i < BuildRegionChunk.ARRAY_SIZE; i++) {
-			for (int x = 0; x < 8; x++) {
-				for (int y = 0; y < 8; y++) {
+		if (properties.isRoof()) return;
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+				for (int i = 0; i < BuildRegionChunk.ARRAY_SIZE; i++) {
 					Scenery object = chunk.get(x, y, i);
-					if (object != null && object.getDefinition().hasAction("Build")) {
-						if (properties.isChamber() && BuildingUtils.isDoorHotspot(object)) {
-							if (!placeDoors(house, chunk, object, housePlane, x, y, rotation)) {
-								SceneryBuilder.remove(object);
-								chunk.remove(object);
-							}
-						} else {
+					if (object != null) {
+						boolean isBuilt = object instanceof Constructed;
+						boolean isWall  = object.getId() == 13065 || object.getId() == house.getStyle().getWallId();
+						boolean isDoor  = object.getId() == house.getStyle().getDoorId() || object.getId() == house.getStyle().getSecondDoorId();
+						if (!isBuilt && !isWall && !isDoor) {
 							SceneryBuilder.remove(object);
 							chunk.remove(object);
 						}
@@ -186,65 +190,92 @@ public final class Room {
 	}
 
 	/**
-	 * Places the doors when needed.
-	 * @param chunk The chunk.
-	 * @param object The object.
-	 * @param x The x-coordinate of the object.
-	 * @param y The y-coordinate of the object.
+	 * Replaces the door hotspots with doors, walls, or passageways as needed.
+	 * TODO: it is believed that doors authentically remember their open/closed state for the usual duration (see e.g. https://www.youtube.com/watch?v=nRGux739h8s 1:00 vs 1:55), but this is not possible with the current HouseManager approach, which deallocates the instance as soon as the player leaves.
+	 * @param housePlane The room's plane in house.
+	 * @param house The house manager.
+	 * @param chunk The region chunk used.
 	 */
-	private boolean placeDoors(HouseManager house, BuildRegionChunk chunk, Scenery object, int z, int x, int y, Direction rotation) {
-		int doorX;
-		int doorY;
-		switch (rotation) {
-		case EAST:
-			doorX = y;
-			doorY = 7 - x;
-			break;
-		case SOUTH:
-			doorX = 7 - x;
-			doorY = 7 - y;
-			break;
-		case WEST:
-			doorX = 7 - y;
-			doorY = x;
-			break;
-		default:
-			doorX = x;
-			doorY = y;
-			break;
-		}
-		int chunkX = chunk.getCurrentBase().getChunkX();
-		int chunkY = chunk.getCurrentBase().getChunkY();
-		boolean houseExit = true;
-		Room r;
-		if (doorX == 0 && chunkX > 0 && (r = house.getRooms()[z][chunkX - 1][chunkY]) != null && r.getProperties().isChamber()) {
-			houseExit =  false;
-		}
-		else if (doorX == 7 && chunkX < 7 && (r = house.getRooms()[z][chunkX + 1][chunkY]) != null && r.getProperties().isChamber()) {
-			houseExit =  false;
-		}
-		else if (doorY == 0 && chunkY > 0 && (r = house.getRooms()[z][chunkX][chunkY - 1]) != null && r.getProperties().isChamber()) {
-			houseExit =  false;
-		}
-		else if (doorY == 7 && chunkY < 7 && (r = house.getRooms()[z][chunkX][chunkY + 1]) != null && r.getProperties().isChamber()) {
-			houseExit =  false;
-		}
-		int replaceId = object.getId() % 2 != 0 ? house.getStyle().getDoorId() : house.getStyle().getSecondDoorId();
-		houseExit = false;
-		if (z != 0 && houseExit) {
-			r = house.getRooms()[z][chunkX][chunkY];
-			if (r.getProperties().isDungeon()) {
-				replaceId = 13065;
-			} else {
-				replaceId = house.getStyle().getWallId();
+	private void placeDoors(int housePlane, HouseManager house, BuildRegionChunk chunk) {
+		Room[][][] rooms = house.getRooms();
+		int rx = chunk.getCurrentBase().getChunkX();
+		int ry = chunk.getCurrentBase().getChunkY();
+		for (int i = 0; i < BuildRegionChunk.ARRAY_SIZE; i++) {
+			for (int x = 0; x < 8; x++) {
+				for (int y = 0; y < 8; y++) {
+					Scenery object = chunk.get(x, y, i);
+					if (object != null && BuildingUtils.isDoorHotspot(object)) {
+						boolean edge = false;
+						Room otherRoom = null;
+						switch (object.getRotation()) {
+							case 0: //east
+								edge = rx == 0;
+								otherRoom = edge ? null : rooms[housePlane][rx - 1][ry];
+								break;
+							case 1: //south
+								edge = ry == 7;
+								otherRoom = edge ? null : rooms[housePlane][rx][ry + 1];
+								break;
+							case 2: //west
+								edge = rx == 7;
+								otherRoom = edge ? null : rooms[housePlane][rx + 1][ry];
+								break;
+							case 3: //north
+								edge = ry == 0;
+								otherRoom = edge ? null : rooms[housePlane][rx][ry - 1];
+								break;
+							default:
+								log(this.getClass(), Log.ERR, "Impossible rotation when placing doors??");
+						}
+						int replaceId = getReplaceId(housePlane, house, this, edge, otherRoom, object);
+						if (replaceId == -1) {
+							continue;
+						}
+						SceneryBuilder.replace(object, object.transform(replaceId));
+					}
+				}
 			}
 		}
-		else if (!houseExit) {
-			return false;
-		}
-		return SceneryBuilder.replace(object, object.transform(replaceId, object.getRotation(), chunk.getCurrentBase().transform(x, y, 0)), true, true);
 	}
-	
+
+	/**
+	 * Checks if rooms transition between inside<>outside the house and returns the appropriate door replacement.
+	 * @param housePlane The room's plane in house.
+	 * @param house The house manager.
+	 * @param room The room the door is in.
+	 * @param edge Whether the door is adjacent to an edge.
+	 * @param otherRoom The room the door is adjacent to.
+	 * @param object The door object itself.
+	 */
+	private int getReplaceId(int housePlane, HouseManager house, Room room, boolean edge, Room otherRoom, Scenery object) {
+		boolean thisOutside = !room.getProperties().isChamber();
+		if (edge && thisOutside) {
+			// No door or wall
+			return -1;
+		}
+		if (!edge) {
+			boolean otherOutside = otherRoom == null || !otherRoom.getProperties().isChamber();
+			if (thisOutside == otherOutside) {
+				// Free passage, unless the other room has a blind wall here
+				if (otherRoom == null) {
+					return -1;
+				}
+				boolean exit = otherRoom.getExits()[object.getRotation()];
+				if (exit) {
+					return -1;
+				}
+			}
+			if (thisOutside != otherOutside && housePlane == 0) {
+				// Door if we are the inside room only
+				if (thisOutside) {
+					return -1;
+				}
+				return object.getId() % 2 != 0 ? house.getStyle().getDoorId() : house.getStyle().getSecondDoorId();
+			}
+		}
+		return room.getProperties().isDungeon() ? 13065 : house.getStyle().getWallId();
+	}
+
 	/**
 	 * Sets the decoration index for a group of object ids
 	 * @param index The index.

@@ -1,13 +1,13 @@
 package content.global.skill.construction.decoration
 
+import content.global.skill.construction.BuildHotspot
+import content.global.skill.construction.HousingStyle
 import core.cache.def.impl.SceneryDefinition
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.OptionHandler
 import core.game.node.Node
-import core.game.node.scenery.Scenery
 import core.game.node.entity.player.Player
-import content.global.skill.construction.BuildHotspot
-import content.global.skill.construction.HousingStyle
+import core.game.node.scenery.Scenery
 import core.plugin.Initializable
 import core.plugin.Plugin
 
@@ -38,11 +38,11 @@ class ConstructionDoorPlugin : OptionHandler() {
     }
 
     override fun handle(player: Player, node: Node, option: String): Boolean {
-        val `object` = node as Scenery
-        val second = DoorActionHandler.getSecondDoor(`object`, player)
         when (option) {
             "pick-lock", "force" -> return false //TODO
         }
+        val `object` = node as Scenery
+        val second = DoorActionHandler.getSecondDoor(`object`, player)
         DoorActionHandler.open(`object`, second, getReplaceId(`object`), getReplaceId(second), true, 500, false)
         return true
     }
