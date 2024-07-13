@@ -239,6 +239,8 @@ class ServerConstants {
             arrayOf(Location.create(2660, 3158, 0), "fishing trawler", "trawler"),
             arrayOf(Location.create(2800, 3667, 0), "mountain camp"),
             arrayOf(Location.create(2575, 3250, 0), "clocktower"),
+            arrayOf(Location.create(2544, 3759, 0), "waterbirth"),
+            arrayOf(Location.create(2899, 4450, 0), "dks"),
             arrayOf(CastleWars.lobbyBankArea.randomLoc, "cwars", "castle wars", "castle war", "castlewars", "castlewar", "castle")
         )
 
