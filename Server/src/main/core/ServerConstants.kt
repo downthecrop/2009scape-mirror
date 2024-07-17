@@ -338,5 +338,11 @@ class ServerConstants {
 
         @JvmField
         var STARTUP_MOMENT = Calendar.getInstance()
+
+        @JvmField
+        var CONNECTIVITY_CHECK_URL = "http://google.com"
+
+        @JvmField
+        var CONNECTIVITY_TIMEOUT = 500
     }
 }

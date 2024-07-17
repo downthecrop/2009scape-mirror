@@ -166,6 +166,8 @@ object ServerConfigParser {
         ServerConstants.FORCE_EASTER_EVENTS = data.getBoolean("world.force_easter_randoms", false)
         ServerConstants.RUNECRAFTING_FORMULA_REVISION = data.getLong("world.runecrafting_formula_revision", 581).toInt()
         ServerConstants.ENHANCED_DEEP_WILDERNESS = data.getBoolean("world.enhanced_deep_wilderness", false)
+        ServerConstants.CONNECTIVITY_CHECK_URL = data.getString("server.connectivity_check_url", "http://www.google.com")
+        ServerConstants.CONNECTIVITY_TIMEOUT = data.getLong("server.connectivity_timeout", 500L).toInt()
 
         val logLevel = data.getString("server.log_level", "VERBOSE").uppercase()
         ServerConstants.LOG_LEVEL = parseEnumEntry<LogLevel>(logLevel) ?: LogLevel.VERBOSE
