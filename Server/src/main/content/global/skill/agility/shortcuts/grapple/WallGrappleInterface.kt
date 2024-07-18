@@ -23,6 +23,7 @@ class WallGrappleInterfaceImpl: WallGrappleInterface{
 
     override fun jump(player: Player, destination: Location): Boolean {
         // todo this doesn't look great compared to what it used to look like
+        closeAllInterfaces(player)
         forceWalk(player, destination,"smart" )
         face(player, destination)
         // We're teleporting if we are animating so make the strength SOFT

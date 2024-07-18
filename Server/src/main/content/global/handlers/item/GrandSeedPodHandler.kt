@@ -62,6 +62,7 @@ class GrandSeedPodHandler : InteractionListener {
             }
 
             if (opt == "squash") {
+                closeAllInterfaces(player)
                 visualize(player, SQUASH_ANIM_BEGIN, SQUASH_GRAPHICS_BEGIN)
                 delayEntity(player, 12)
                 queueScript(player, 3, QueueStrength.SOFT) {stage: Int ->

@@ -1607,6 +1607,16 @@ fun closeTabInterface(player: Player) {
 }
 
 /**
+ * Closes any open (both chat and non-chat) interfaces for the player
+ * @param player the player to close the interfaces for
+ */
+fun closeAllInterfaces(player: Player) {
+    player.interfaceManager.close()
+    player.interfaceManager.closeChatbox()
+    player.dialogueInterpreter.close()
+}
+
+/**
  * Sends a dialogue that uses the player's chathead.
  * @param player the player to send the dialogue to
  * @param msg the message to send.

@@ -46,6 +46,7 @@ class DropListener : InteractionListener {
                 if (getAttribute(player, "equipLock:${node.id}", 0 ) > getWorldTicks())
                     return false
 
+                closeAllInterfaces(player)
                 queueScript (player, strength = QueueStrength.SOFT) {
                     if (player.inventory.replace(null, item.slot) != item) return@queueScript stopExecuting(player)
                     val droppedItem = item.dropItem

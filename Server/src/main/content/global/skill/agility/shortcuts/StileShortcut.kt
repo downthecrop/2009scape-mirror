@@ -19,6 +19,7 @@ class StileShortcut : InteractionListener {
             val startLoc = p.location.transform(direction, 1)
             val endLoc = p.location.transform(direction, 2)
 
+            closeAllInterfaces(p)
             p.walkingQueue.reset()
             p.walkingQueue.addPath(startLoc.x, startLoc.y)
             forceMove(p, startLoc, endLoc, 0, animationCycles(839), direction, 839)

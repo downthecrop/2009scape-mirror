@@ -52,6 +52,7 @@ class EnchantJewelleryTabListener : InteractionListener {
 
     override fun defineListeners() {
         on(IntType.ITEM, "break") {player, node ->
+            closeAllInterfaces(player)
             delayEntity(player, 1)
             queueScript(player, strength = QueueStrength.SOFT) {
 

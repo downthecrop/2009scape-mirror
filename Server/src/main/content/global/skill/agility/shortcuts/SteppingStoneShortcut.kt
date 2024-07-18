@@ -40,6 +40,7 @@ class SteppingStoneShortcut : OptionHandler() {
         }
         val offset = getOffset(player,finalDest)
         player.debug("Offset: ${offset.first},${offset.second}")
+        closeAllInterfaces(player)
         lock(player, 3)
         player.locks.lockTeleport(3)
         queueScript(player, 2, QueueStrength.SOFT) {

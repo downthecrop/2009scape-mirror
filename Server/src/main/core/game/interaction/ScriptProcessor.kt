@@ -12,7 +12,6 @@ import core.game.world.map.Location
 import core.game.world.map.path.Pathfinder
 import core.game.bots.AIPlayer
 import core.tools.Log
-import core.tools.SystemLogger
 import java.lang.Integer.max
 import java.io.*
 
@@ -97,11 +96,9 @@ class ScriptProcessor(val entity: Entity) {
         strongInQueue = hasTypeInQueue(QueueStrength.STRONG)
         softInQueue = hasTypeInQueue(QueueStrength.SOFT)
 
-        if (softInQueue || strongInQueue) {
+        if (strongInQueue) {
             if (entity is Player) {
-                entity.interfaceManager.close()
-                entity.interfaceManager.closeChatbox()
-                entity.dialogueInterpreter.close()
+                closeAllInterfaces(entity)
             }
         }
 
@@ -118,10 +115,8 @@ class ScriptProcessor(val entity: Entity) {
                         continue
                     if (script.nextExecution > GameWorld.ticks)
                         continue
-                    if ((script.strength == QueueStrength.STRONG || script.strength == QueueStrength.SOFT) && entity is Player) {
-                        entity.interfaceManager.close()
-                        entity.interfaceManager.closeChatbox()
-                        entity.dialogueInterpreter.close()
+                    if ((script.strength == QueueStrength.STRONG) && entity is Player) {
+                        closeAllInterfaces(entity)
                     }
                     script.nextExecution = GameWorld.ticks + 1
                     val finished = executeScript(script)
@@ -142,10 +137,8 @@ class ScriptProcessor(val entity: Entity) {
                     }
                     if (script.nextExecution > GameWorld.ticks)
                         continue
-                    if ((script.strength == QueueStrength.STRONG || script.strength == QueueStrength.SOFT)) {
-                        entity.interfaceManager.close()
-                        entity.interfaceManager.closeChatbox()
-                        entity.dialogueInterpreter.close()
+                    if ((script.strength == QueueStrength.STRONG)) {
+                        closeAllInterfaces(entity)
                     }
                     script.nextExecution = GameWorld.ticks + 1
                     val finished = executeScript(script)
@@ -284,9 +277,7 @@ class ScriptProcessor(val entity: Entity) {
             return
         }
         if (strength == QueueStrength.STRONG && entity is Player) {
-            entity.interfaceManager.close()
-            entity.interfaceManager.closeChatbox()
-            entity.dialogueInterpreter.close()
+            closeAllInterfaces(entity)
         }
         script.nextExecution = max(GameWorld.ticks + 1, script.nextExecution)
         queue.add(script)

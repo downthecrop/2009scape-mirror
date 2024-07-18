@@ -106,7 +106,7 @@ abstract class AbstractGrappleShortcut : InteractionListener {
     }
 
     protected fun grapple(player: Player, message: String?): Boolean {
-
+        closeAllInterfaces(player)
         lock(player, animationDuration)
         // TODO is this right? should we force the player to cross?
         queueScript(player, strength = QueueStrength.SOFT) { stage: Int ->
