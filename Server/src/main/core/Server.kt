@@ -3,20 +3,21 @@ package core
 import core.api.log
 import core.game.system.SystemManager
 import core.game.system.SystemState
-import core.net.NioReactor
-import core.tools.TimeStamp
-import kotlinx.coroutines.*
-import core.tools.SystemLogger
 import core.game.system.config.ServerConfigParser
 import core.game.world.GameWorld
-import core.game.world.repository.Repository
+import core.net.NioReactor
 import core.tools.Log
+import core.tools.NetworkReachability
+import core.tools.TimeStamp
+import kotlinx.coroutines.*
 import java.io.File
 import java.io.FileWriter
 import java.lang.management.ManagementFactory
 import java.lang.management.ThreadMXBean
 import java.net.BindException
+import java.net.URL
 import java.util.*
+import kotlin.math.max
 import kotlin.system.exitProcess
 
 
@@ -42,6 +43,8 @@ object Server {
      */
     @JvmStatic
     var reactor: NioReactor? = null
+
+    var networkReachability = NetworkReachability.Reachable
 
     /**
      * The main method, in this method we load background utilities such as
@@ -95,6 +98,11 @@ object Server {
             GlobalScope.launch {
                 delay(20000)
                 while (running) {
+                    val timeStart = System.currentTimeMillis()
+                    if (!checkConnectivity())
+                        networkReachability = NetworkReachability.Unreachable
+                    else
+                        networkReachability = NetworkReachability.Reachable
                     if (System.currentTimeMillis() - lastHeartbeat > 7200 && running) {
                         log(this::class.java, Log.ERR, "Triggering reboot due to heartbeat timeout")
                         log(this::class.java, Log.ERR, "Creating thread dump...")
@@ -115,10 +123,34 @@ object Server {
                         if (!SystemManager.isTerminated())
                             exitProcess(0)
                     }
-                    delay(625)
+                    val timeNow = System.currentTimeMillis()
+                    delay(max(0L, 625 - (timeNow - timeStart)))
                 }
             }
         }
+    }
+
+    private fun checkConnectivity(): Boolean
+    {
+        //Has to be done this way because you can't actually ping in Java unless you run the whole thing as root
+        val urls = ServerConstants.CONNECTIVITY_CHECK_URL.split(",")
+        var timeout = ServerConstants.CONNECTIVITY_TIMEOUT
+        if (timeout * urls.size > 5000) //Limit timeout down to 5000ms so other watchdog functions continue as expected.
+            timeout = 5000 / urls.size
+        for (targetUrl in urls) {
+            try {
+                val url = URL(targetUrl)
+                val conn = url.openConnection()
+                conn.connectTimeout = timeout
+                conn.connect()
+                conn.getInputStream().close()
+                return true
+            } catch (e: Exception) {
+                log(this::class.java, Log.WARN, "${targetUrl} failed to respond. Are we offline?")
+                continue
+            }
+        }
+        return false
     }
 
     @JvmStatic

@@ -1,25 +1,25 @@
 package core.worker
 
-import core.api.submitWorldPulse
-import core.game.system.task.Pulse
-import core.plugin.CorePluginTypes.Managers
 import core.Server
 import core.ServerConstants
 import core.ServerStore
 import core.api.log
-import core.tools.SystemLogger
+import core.api.submitWorldPulse
+import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.repository.Repository
 import core.game.world.update.UpdateSequence
+import core.integrations.grafana.Grafana
 import core.net.packet.PacketProcessor
 import core.net.packet.PacketWriteQueue
+import core.plugin.CorePluginTypes.Managers
 import core.tools.Log
+import core.tools.NetworkReachability
 import core.tools.colorize
 import java.lang.Long.max
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.system.exitProcess
-import core.integrations.grafana.*
 
 /**
  * Handles the running of pulses and writing of masks, etc
@@ -38,7 +38,11 @@ class MajorUpdateWorker {
             Grafana.startTick()
             val start = System.currentTimeMillis()
             Server.heartbeat()
-            handleTickActions()
+
+            if (Server.networkReachability == NetworkReachability.Reachable)
+                handleTickActions()
+            else
+                tickOffline()
 
             for (player in Repository.players.filter { !it.isArtificial }) {
                 if (System.currentTimeMillis() - player.session.lastPing > 20000L) {
@@ -87,6 +91,12 @@ class MajorUpdateWorker {
         }
 
         log(this::class.java, Log.FINE,  "Update worker stopped.")
+    }
+
+    fun tickOffline()
+    {
+        Repository.disconnectionQueue.update() //continue processing disconnection queue
+        GameWorld.pulse() //continue incrementing the global tick count
     }
 
     fun handleTickActions(skipPulseUpdate: Boolean = false) {
