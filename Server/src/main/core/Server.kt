@@ -146,6 +146,7 @@ object Server {
                 conn.getInputStream().close()
                 return true
             } catch (e: Exception) {
+                log(this::class.java, Log.WARN, "${targetUrl} failed to respond. Are we offline?")
                 continue
             }
         }
