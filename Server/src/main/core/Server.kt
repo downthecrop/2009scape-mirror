@@ -133,16 +133,23 @@ object Server {
     private fun checkConnectivity(): Boolean
     {
         //Has to be done this way because you can't actually ping in Java unless you run the whole thing as root
-        try {
-            val url = URL(ServerConstants.CONNECTIVITY_CHECK_URL)
-            val conn = url.openConnection()
-            conn.connectTimeout = ServerConstants.CONNECTIVITY_TIMEOUT
-            conn.connect()
-            conn.getInputStream().close()
-            return true
-        } catch (e: Exception) {
-            return false
+        val urls = ServerConstants.CONNECTIVITY_CHECK_URL.split(",")
+        var timeout = ServerConstants.CONNECTIVITY_TIMEOUT
+        if (timeout * urls.size > 5000) //Limit timeout down to 5000ms so other watchdog functions continue as expected.
+            timeout = 5000 / urls.size
+        for (targetUrl in urls) {
+            try {
+                val url = URL(targetUrl)
+                val conn = url.openConnection()
+                conn.connectTimeout = timeout
+                conn.connect()
+                conn.getInputStream().close()
+                return true
+            } catch (e: Exception) {
+                continue
+            }
         }
+        return false
     }
 
     @JvmStatic
