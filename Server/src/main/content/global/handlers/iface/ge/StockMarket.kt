@@ -98,7 +98,7 @@ class StockMarket : InterfaceListener {
                 209,211 -> if (openedOffer == null){
                     SystemLogger.logGE("[WARN] Player tried to withdraw item with null openedOffer!")
                     return@on false
-                } else withdraw(player, openedOffer, (button - 209) shr 1)
+                } else withdraw(player, openedOffer, (button - 209) shr 1, op)
                 190 -> confirmOffer(player, tempOffer, openedIndex).also { return@on true }
                 194 -> player.interfaceManager.openChatbox(Components.OBJDIALOG_389)
                 203 -> abortOffer(player, openedOffer)
@@ -342,7 +342,7 @@ class StockMarket : InterfaceListener {
         }
 
         @JvmStatic
-        fun withdraw(player: Player, offer: GrandExchangeOffer, index: Int)
+        fun withdraw(player: Player, offer: GrandExchangeOffer, index: Int, op: Int)
         {
             val item = offer.withdraw[index]
             if(item == null)
@@ -351,20 +351,32 @@ class StockMarket : InterfaceListener {
                 return
             }
 
-            if(hasSpaceFor(player, item))
-            {
-                addItem(player, item.id, item.amount)
-            }
-            else
-            {
-                val note = item.noteChange
-                if(note == -1 || !hasSpaceFor(player, Item(note, item.amount)))
-                {
-                    playAudio(player, Sounds.GE_TRADE_ERROR_4039)
-                    sendMessage(player, "You do not have enough room in your inventory.")
-                    return
+            when (op) {
+                // withdraw notes
+                155 -> {
+                    val note = item.noteChange
+                    if (note == -1) {
+                        sendMessage(player, "This item cannot be noted")
+                        return
+                    }
+                    if (hasSpaceFor(player, Item(note, item.amount))) {
+                        addItem(player, note, item.amount)
+                    } else {
+                        playAudio(player, Sounds.GE_TRADE_ERROR_4039)
+                        sendMessage(player, "You do not have enough room in your inventory.")
+                        return
+                    }
                 }
-                else addItem(player, note, item.amount)
+                // withdraw items
+                196 -> {
+                    if (hasSpaceFor(player, item)) {
+                        addItem(player, item.id, item.amount)
+                    } else {
+                        playAudio(player, Sounds.GE_TRADE_ERROR_4039)
+                        sendMessage(player, "You do not have enough room in your inventory.")
+                        return
+                    }
+                }
             }
 
             offer.withdraw[index] = null

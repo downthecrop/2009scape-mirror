@@ -112,7 +112,7 @@ public class GrandExchangeInterface extends ComponentPlugin {
 		GrandExchangeOffer offer;
 		GrandExchangeRecords records = GrandExchangeRecords.getInstance(player);
 		if (index > -1 && (offer = records.getOffer(records.getOfferRecords()[index])) != null) {
-			StockMarket.withdraw(player, offer, slot >> 1);
+			StockMarket.withdraw(player, offer, slot >> 1, opcode);
 		}
 		return true;
 	}
