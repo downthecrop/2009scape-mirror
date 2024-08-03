@@ -20,7 +20,8 @@ enum class FishingOption(val tool: Int, val level: Int, val animation: Animation
     SHARK_HARPOON(Items.HARPOON_311, 76, Animation(618), null, "harpoon", Fish.SHARK),
     MONKFISH_NET(Items.SMALL_FISHING_NET_303, 62, Animation(621), null, "net", Fish.MONKFISH),
     MORTMYRE_ROD(Items.FISHING_ROD_307, 5, Animation(622), intArrayOf(Items.FISHING_BAIT_313), "bait", Fish.SLIMY_EEL),
-    LUMBDSWAMP_ROD(Items.FISHING_ROD_307, 5, Animation(622), intArrayOf(Items.FISHING_BAIT_313), "bait", Fish.SLIMY_EEL, Fish.FROG_SPAWN),
+    LUMBDSWAMP_ROD(Items.FISHING_ROD_307, 5, Animation(622), intArrayOf(Items.FISHING_BAIT_313), "bait", Fish.SLIMY_EEL, Fish.CAVE_EEL),
+    LUMBDSWAMP_NET(Items.SMALL_FISHING_NET_303, 1, Animation(621), null, "net", Fish.FROG_SPAWN),
     KBWANJI_NET(Items.SMALL_FISHING_NET_303, 5, Animation(621), null, "net", Fish.KARAMBWANJI),
     KARAMBWAN_VES(Items.KARAMBWAN_VESSEL_3157, 65, Animation(1193), intArrayOf((Items.RAW_KARAMBWANJI_3150)), "fish", Fish.KARAMBWAN),
     OILY_FISHING_ROD(Items.OILY_FISHING_ROD_1585, 53, Animation(622), intArrayOf(Items.FISHING_BAIT_313), "bait", Fish.LAVA_EEL);

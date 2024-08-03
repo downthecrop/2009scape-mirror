@@ -109,6 +109,7 @@ enum class FishingSpot(val ids: IntArray, vararg val options: FishingOption) {
             NPCs.FISHING_SPOT_2067,
             NPCs.FISHING_SPOT_2068
         ),
+        FishingOption.LUMBDSWAMP_NET,
         FishingOption.LUMBDSWAMP_ROD
     ),
     SPOT_KBWANJI(
