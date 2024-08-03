@@ -1,13 +1,18 @@
 package content.global.skill.herblore;
 
 import core.game.node.item.Item;
+import org.rs09.consts.Items;
 
 /**
  * Represents a tar to create.
  * @author 'Vexia
  */
 public enum Tars {
-	GUAM_TAR(Herbs.GUAM.getProduct(), 19, 30, new Item(10142)), MARRENTILL_TAR(Herbs.MARRENTILL.getProduct(), 31, 42.5, new Item(10143)), TARROMIN_TAR(Herbs.TARROMIN.getProduct(), 39, 55, new Item(10144)), HARRALANDER_TAR(Herbs.HARRALANDER.getProduct(), 44, 72.5, new Item(10145));
+	GUAM_TAR(Herbs.GUAM.getProduct(), 19, 30, new Item(10142)),
+	GROUND_GUAM_TAR(new Item(Items.GROUND_GUAM_6681), 19, 30, new Item(10142)),
+	MARRENTILL_TAR(Herbs.MARRENTILL.getProduct(), 31, 42.5, new Item(10143)),
+	TARROMIN_TAR(Herbs.TARROMIN.getProduct(), 39, 55, new Item(10144)),
+	HARRALANDER_TAR(Herbs.HARRALANDER.getProduct(), 44, 72.5, new Item(10145));
 
 	/**
 	 * Represents the ingredient.
