@@ -27,7 +27,7 @@ public class GodBookPlugin extends OptionHandler {
 		for (GodBook book : GodBook.values()) {
 			book.getDamagedBook().getDefinition().getHandlers().put("option:check", this);
 		}
-		ClassScanner.definePlugins(new PageHandler(), new GodBookItem(), new SymbolBlessHandler());
+		ClassScanner.definePlugins(new PageHandler(), new GodBookItem());
 		return this;
 	}
 
@@ -49,77 +49,6 @@ public class GodBookPlugin extends OptionHandler {
 			}
 		}
 		return true;
-	}
-
-	/**
-	 * Handles the blessing of a symbol with a god book.
-	 * @author Vexia
-	 */
-	public class SymbolBlessHandler extends UseWithHandler {
-
-		/**
-		 * Constructs a new {@code SymbolBlessHandler} {@code Object}
-		 */
-		public SymbolBlessHandler() {
-			super(1716);
-		}
-
-		@Override
-		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			for (GodBook book : GodBook.values()) {
-				addHandler(book.getBook().getId(), ITEM_TYPE, this);
-			}
-			return this;
-		}
-
-		@Override
-		public boolean handle(NodeUsageEvent event) {
-			Player player = event.getPlayer();
-			GodBook book = GodBook.forItem(event.getUsedItem(), false);
-			if (book == null) {
-				return false;
-			}
-			final Item symbol = event.getUsedWith().asItem();
-			if (player.getSkills().getLevel(Skills.PRAYER) < 50) {
-				player.sendMessage("You need a Prayer level of at least 50 in order to do this.");
-				return true;
-			}
-			if (player.getSkills().getPrayerPoints() < 4) {
-				player.sendMessage("You need at least 4 prayer points in order to do this.");
-				return true;
-			}
-			if (book == GodBook.BOOK_OF_BALANCE) {
-				player.getDialogueInterpreter().sendOptions("Select an Option", "Unholy symbol", "Holy symbol");
-				player.getDialogueInterpreter().addAction(new DialogueAction() {
-
-					@Override
-					public void handle(Player player, int buttonId) {
-						bless(player, symbol, buttonId == 1 ? GodBook.UNHOLY_BOOK : GodBook.HOLY_BOOK);
-					}
-
-				});
-				return true;
-			}
-			bless(player, symbol, book);
-			return true;
-		}
-
-		/**
-		 * Blesses a symbol.
-		 * @param player the player.
-		 * @param book the book.
-		 */
-		private void bless(Player player, Item symbol, GodBook book) {
-			if (!player.getInventory().containsItem(symbol)) {
-				return;
-			}
-			if (player.getInventory().get(symbol.getSlot()) == null) {
-				return;
-			}
-			player.getInventory().replace(book.getBlessItem()[0], symbol.getSlot());
-			player.getSkills().decrementPrayerPoints(4);
-		}
-
 	}
 
 	/**

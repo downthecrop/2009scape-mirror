@@ -8,6 +8,9 @@ import org.rs09.consts.Items
 import core.game.dialogue.DialogueFile
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import core.game.node.Node
+import core.game.node.entity.skill.Skills
+import core.game.node.item.Item
 
 class GodBookListeners : InteractionListener {
 
@@ -20,15 +23,41 @@ class GodBookListeners : InteractionListener {
             openDialogue(player, HOLY_DIALOGUE(BOOK.SARA))
             return@on true
         }
-
         on(GB_ZAMORAK, IntType.ITEM, "preach"){ player, _ ->
             openDialogue(player, HOLY_DIALOGUE(BOOK.ZAM))
             return@on true
         }
-
         on(GB_GUTHIX, IntType.ITEM, "preach"){ player, _ ->
             openDialogue(player, HOLY_DIALOGUE(BOOK.GUTHIX))
             return@on true
+        }
+
+        fun bless(player: Player, node: Node, product: Int) {
+            if (player.skills.getStaticLevel(Skills.PRAYER) < 50) {
+                sendMessage(player, "You need a Prayer level of at least 50 in order to do this.")
+            } else if (player.skills.prayerPoints < 4) {
+                sendMessage(player, "You need at least 4 prayer points in order to do this.")
+            } else {
+                sendMessage(player, "You bless the ${node.asItem().name.lowercase()}.")
+                player.skills.decrementPrayerPoints(4.0)
+                replaceSlot(player, node.asItem().slot, Item(product), node.asItem())
+            }
+        }
+        onUseWith(IntType.ITEM, GB_SARADOMIN, Items.UNBLESSED_SYMBOL_1716) { player, _, symbol ->
+            bless(player, symbol, Items.HOLY_SYMBOL_1718)
+            return@onUseWith true
+        }
+        onUseWith(IntType.ITEM, GB_ZAMORAK, Items.UNPOWERED_SYMBOL_1722) { player, _, symbol ->
+            bless(player, symbol, Items.UNHOLY_SYMBOL_1724)
+            return@onUseWith true
+        }
+        onUseWith(IntType.ITEM, GB_GUTHIX, Items.UNBLESSED_SYMBOL_1716) { player, _, symbol ->
+            bless(player, symbol, Items.HOLY_SYMBOL_1718)
+            return@onUseWith true
+        }
+        onUseWith(IntType.ITEM, GB_GUTHIX, Items.UNPOWERED_SYMBOL_1722) { player, _, symbol ->
+            bless(player, symbol, Items.UNHOLY_SYMBOL_1724)
+            return@onUseWith true
         }
     }
 
@@ -129,6 +158,5 @@ class GodBookListeners : InteractionListener {
                 }
             })
         }
-
     }
 }
