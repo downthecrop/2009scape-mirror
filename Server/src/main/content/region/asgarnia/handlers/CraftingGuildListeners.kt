@@ -12,23 +12,15 @@ import content.region.asgarnia.dialogue.TheDoorDialogues
 import core.game.interaction.InteractionListener
 
 /**
- * @author bushtail
+ * @author bushtail, Player Name
  */
 
 class CraftingGuildListeners : InteractionListener {
-    private val GUILD_DOOR = Scenery.GUILD_DOOR_2647
-    private val APRON = Items.BROWN_APRON_1757
-    private val CAPE = Items.CRAFTING_CAPE_9780
-
     override fun defineListeners() {
-        on(GUILD_DOOR, IntType.SCENERY, "open") { player, door ->
+        on(Scenery.GUILD_DOOR_2647, IntType.SCENERY, "open") { player, door ->
             if (player.location == Location.create(2933, 3289, 0)) {
                 if (hasLevelStat(player, Skills.CRAFTING, 40)) {
-                    if (inEquipment(player, APRON)) {
-                        openDialogue(player, TheDoorDialogues(0))
-                        core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, door.asScenery())
-                        return@on true
-                    } else if (inEquipment(player, CAPE)) {
+                    if (anyInEquipment(player, Items.BROWN_APRON_1757, Items.CRAFTING_CAPE_9780, Items.CRAFTING_CAPET_9781)) {
                         openDialogue(player, TheDoorDialogues(0))
                         core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, door.asScenery())
                         return@on true
