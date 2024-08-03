@@ -22,10 +22,7 @@ class MusicConfigLoader {
     val parser = JSONParser()
     var reader: FileReader? = null
     fun load(){
-        var count = 0
-        reader = FileReader(ServerConstants.CONFIG_PATH + "music_configs.json")
-        var configs = parser.parse(reader) as JSONArray
-
+        // Populate the server data map
         val songs = DataMap.get(1351)
         val names = DataMap.get(1345)
 
@@ -35,7 +32,24 @@ class MusicConfigLoader {
             MusicEntry.getSongs().putIfAbsent(songId, entry)
         }
 
-        for(config in configs){
+        // Parse the region-wide music config file
+        var count = 0
+        reader = FileReader(ServerConstants.CONFIG_PATH + "music_regions.json")
+        var configs = parser.parse(reader) as JSONArray
+        for(config in configs) {
+            val e = config as JSONObject
+            val region = Integer.parseInt(e["region"].toString())
+            val id = Integer.parseInt(e["id"].toString())
+            RegionManager.forId(region).music = MusicEntry.forId(id)
+            count++
+            log(this::class.java, Log.FINE, "Parsed $count region music configs.")
+        }
+
+        // Parse the file with tile-specific music locations
+        count = 0
+        reader = FileReader(ServerConstants.CONFIG_PATH + "music_tiles.json")
+        configs = parser.parse(reader) as JSONArray
+        for(config in configs) {
             val e = config as JSONObject
             val musicId = Integer.parseInt(e["id"].toString())
             val string = e["borders"].toString()
@@ -43,9 +57,6 @@ class MusicConfigLoader {
             var tokens: Array<String>? = null
             var borders: ZoneBorders? = null
             for (border in borderArray) {
-                if(border.isEmpty()){
-                    continue
-                }
                 tokens = border.replace("{", "").replace("}", "").split(",").toTypedArray()
                 borders = ZoneBorders(tokens[0].toInt(), tokens[1].toInt(), tokens[2].toInt(), tokens[3].toInt())
                 if (border.contains("[")) { //no exception borders
@@ -59,8 +70,6 @@ class MusicConfigLoader {
                         e = exception.replace("[", "").replace("]", "").split(",".toRegex()).toTypedArray()
                         borders.addException(ZoneBorders(e[0].toInt(), e[1].toInt(), e[2].toInt(), e[3].toInt()))
                     }
-                    e = null
-                    exceptions = null
                 }
                 val zone = MusicZone(musicId, borders)
                 for (id in borders.getRegionIds()) {
@@ -69,6 +78,6 @@ class MusicConfigLoader {
             }
             count++
         }
-        log(this::class.java, Log.FINE,  "Parsed $count music configs.")
+        log(this::class.java, Log.FINE,  "Parsed $count tile music configs.")
     }
 }

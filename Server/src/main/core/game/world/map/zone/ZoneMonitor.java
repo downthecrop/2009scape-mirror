@@ -5,6 +5,7 @@ import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.music.MusicEntry;
 import core.game.node.entity.player.link.music.MusicZone;
 import core.game.node.entity.player.link.request.RequestType;
 import core.game.node.item.Item;
@@ -15,6 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import core.game.world.map.Region;
 import org.rs09.consts.Items;
 
 /**
@@ -396,21 +398,25 @@ public final class ZoneMonitor {
 		for (Iterator<MusicZone> it = musicZones.iterator(); it.hasNext();) {
 			MusicZone zone = it.next();
 			if (!zone.getBorders().insideBorder(l.getX(), l.getY())) {
-				zone.leave(player, false);
-				it.remove();
+				if (zone.leave(player, false)) {
+					it.remove();
+				}
 			}
 		}
-		for (MusicZone zone : player.getViewport().getRegion().getMusicZones()) {
-			if (!zone.getBorders().insideBorder(l.getX(), l.getY())) {
-				continue;
-			}
-			if (!musicZones.contains(zone)) {
+		Region r = player.getViewport().getRegion();
+		for (MusicZone zone : r.getMusicZones()) {
+			if (zone.getBorders().insideBorder(l.getX(), l.getY())) {
 				zone.enter(player);
-				musicZones.add(zone);
+				return;
 			}
 		}
-		if (musicZones.isEmpty() && !player.getMusicPlayer().isPlaying()) {
-			player.getMusicPlayer().playDefault();
+		MusicEntry music = r.getMusic();
+		if (music == null) {
+			if (!player.getMusicPlayer().isPlaying()) {
+				player.getMusicPlayer().playDefault();
+			}
+		} else {
+			player.getMusicPlayer().play(music);
 		}
 	}
 

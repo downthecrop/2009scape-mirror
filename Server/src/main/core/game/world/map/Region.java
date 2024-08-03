@@ -3,6 +3,7 @@ package core.game.world.map;
 import core.cache.Cache;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.music.MusicEntry;
 import core.game.node.entity.player.link.music.MusicZone;
 import core.game.system.communication.CommunicationInfo;
 import core.game.system.task.Pulse;
@@ -11,7 +12,6 @@ import core.game.world.map.build.LandscapeParser;
 import core.game.world.map.build.MapscapeParser;
 import core.game.world.map.zone.RegionZone;
 import core.tools.Log;
-import core.tools.SystemLogger;
 import core.game.system.config.XteaParser;
 import core.game.world.GameWorld;
 import core.game.world.repository.Repository;
@@ -62,7 +62,12 @@ public class Region {
 	private final List<RegionZone> regionZones = new ArrayList<>(20);
 
 	/**
-	 * The music zones lying in this region.
+	 * The region-wide music track for this region.
+	 */
+	private MusicEntry music = null;
+
+	/**
+	 * Any tile-specific music zones lying in this region.
 	 */
 	private final List<MusicZone> musicZones = new ArrayList<>(20);
 
@@ -268,14 +273,14 @@ public class Region {
 		}
 	}
 
-        public boolean flagInactive(boolean force) {
-            if (unload(this, force)) {
-                active = false;
-                return true;
-            } else {
-                return false;
-            }
-        }
+	public boolean flagInactive(boolean force) {
+		if (unload(this, force)) {
+			active = false;
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	/**
 	 * Flags the region as inactive.
@@ -345,7 +350,7 @@ public class Region {
 		}
 	}
 
-        public static boolean unload(Region r) {
+	public static boolean unload(Region r) {
             return unload(r, false);
         }
 
@@ -374,10 +379,10 @@ public class Region {
 				}
 			}
 		}
-                if (r.isBuild())
-                    r.setLoaded(false);
-                r.activityPulse.stop();
-        return true;
+		if (r.isBuild())
+			r.setLoaded(false);
+		r.activityPulse.stop();
+	        return true;
 	}
 
 	/**
@@ -471,6 +476,21 @@ public class Region {
 	 */
 	public RegionPlane[] getPlanes() {
 		return planes;
+	}
+
+	/**
+	 * Sets the region-wide music track.
+	 */
+	public void setMusic(MusicEntry music) {
+		this.music = music;
+	}
+
+	/**
+	 * Gets the region-wide music track
+	 * @return The music entry
+	 */
+	public MusicEntry getMusic() {
+		return this.music;
 	}
 
 	/**
