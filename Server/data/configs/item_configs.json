@@ -4243,8 +4243,8 @@
     "tradeable": "false",
     "destroy": "true",
     "archery_ticket_price": "0",
-    "id": "456",
-    "weight": "0.15"
+    "weight": "0.15",
+    "id": "456"
   },
   {
     "destroy_message": "You will need to speak to Thormac to get another cage.",
@@ -4254,8 +4254,8 @@
     "tradeable": "false",
     "destroy": "true",
     "archery_ticket_price": "0",
-    "id": "457",
-    "weight": "0.175"
+    "weight": "0.175",
+    "id": "457"
   },
   {
     "destroy_message": "You will need to speak to Thormac to get another cage.",
@@ -4265,8 +4265,8 @@
     "tradeable": "false",
     "destroy": "true",
     "archery_ticket_price": "0",
-    "id": "458",
-    "weight": "0.2"
+    "weight": "0.2",
+    "id": "458"
   },
   {
     "destroy_message": "You will need to speak to Thormac to get another cage.",
@@ -4276,8 +4276,8 @@
     "tradeable": "false",
     "destroy": "true",
     "archery_ticket_price": "0",
-    "id": "459",
-    "weight": "0.175"
+    "weight": "0.175",
+    "id": "459"
   },
   {
     "destroy_message": "You will need to speak to Thormac to get another cage.",
@@ -4287,8 +4287,8 @@
     "tradeable": "false",
     "destroy": "true",
     "archery_ticket_price": "0",
-    "id": "460",
-    "weight": "0.2"
+    "weight": "0.2",
+    "id": "460"
   },
   {
     "destroy_message": "You will need to speak to Thormac to get another cage.",
@@ -4298,8 +4298,8 @@
     "tradeable": "false",
     "destroy": "true",
     "archery_ticket_price": "0",
-    "id": "461",
-    "weight": "0.175"
+    "weight": "0.175",
+    "id": "461"
   },
   {
     "destroy_message": "You will need to speak to Thormac to get another cage.",
@@ -4309,8 +4309,8 @@
     "tradeable": "false",
     "destroy": "true",
     "archery_ticket_price": "0",
-    "id": "462",
-    "weight": "0.2"
+    "weight": "0.2",
+    "id": "462"
   },
   {
     "destroy_message": "You will need to speak to Thormac to get another cage.",
@@ -4320,8 +4320,8 @@
     "tradeable": "false",
     "destroy": "true",
     "archery_ticket_price": "0",
-    "id": "463",
-    "weight": "0.225"
+    "weight": "0.225",
+    "id": "463"
   },
   {
     "ge_buy_limit": "10000",
@@ -72394,6 +72394,7 @@
     "id": "7973"
   },
   {
+    "examine": "I should get it stuffed!",
     "durability": null,
     "name": "Crawling hand",
     "archery_ticket_price": "0",
@@ -72458,6 +72459,7 @@
     "id": "7981"
   },
   {
+    "examine": "I could mount this on my wall!",
     "durability": null,
     "name": "Crawling hand",
     "archery_ticket_price": "0",
@@ -72465,7 +72467,7 @@
     "id": "7982"
   },
   {
-    "examine": "I should get it stuffed!",
+    "examine": "I could mount this on my wall!",
     "durability": null,
     "name": "Cockatrice head",
     "tradeable": "false",
@@ -72475,7 +72477,7 @@
     "id": "7983"
   },
   {
-    "examine": "I should get it stuffed!",
+    "examine": "I could mount this on my wall!",
     "durability": null,
     "name": "Basilisk head",
     "tradeable": "false",
@@ -72485,7 +72487,7 @@
     "id": "7984"
   },
   {
-    "examine": "I should get it stuffed!",
+    "examine": "I could mount this on my wall!",
     "durability": null,
     "name": "Kurask head",
     "tradeable": "false",
@@ -72495,7 +72497,7 @@
     "id": "7985"
   },
   {
-    "examine": "I should get it stuffed!",
+    "examine": "I could mount this on my wall!",
     "durability": null,
     "name": "Abyssal head",
     "tradeable": "false",
@@ -72505,7 +72507,7 @@
     "id": "7986"
   },
   {
-    "examine": "I should get it stuffed!",
+    "examine": "I could mount these on my wall!",
     "durability": null,
     "name": "Kbd heads",
     "tradeable": "false",
@@ -72515,7 +72517,7 @@
     "id": "7987"
   },
   {
-    "examine": "I should get it stuffed!",
+    "examine": "I could mount this on my wall!",
     "durability": null,
     "name": "Kq head",
     "archery_ticket_price": "0",
@@ -72530,7 +72532,7 @@
     "id": "7989"
   },
   {
-    "examine": "Whopper! I should get this stuffed!",
+    "examine": "I should mount this on my wall!",
     "durability": null,
     "name": "Big bass",
     "weight": "6",
@@ -72545,14 +72547,14 @@
     "id": "7991"
   },
   {
-    "examine": "Whopper! I should get this stuffed!",
+    "examine": "I should mount this on my wall!",
     "durability": null,
     "name": "Big swordfish",
     "archery_ticket_price": "0",
     "id": "7992"
   },
   {
-    "examine": "Its a monster! I should get this stuffed!",
+    "examine": "It's a monster! I should get this stuffed!",
     "durability": null,
     "name": "Big shark",
     "weight": "0.7",
@@ -72560,7 +72562,7 @@
     "id": "7993"
   },
   {
-    "examine": "Its a monster! I should get this stuffed!",
+    "examine": "I should mount this on my wall!",
     "durability": null,
     "name": "Big shark",
     "weight": "0.7",
@@ -73289,6 +73291,7 @@
     "id": "8248"
   },
   {
+    "examine": "A trophy of a mighty slayer!",
     "durability": null,
     "name": "Crawling hand",
     "archery_ticket_price": "0",
@@ -73296,7 +73299,7 @@
     "id": "8260"
   },
   {
-    "examine": "I should get it stuffed!",
+    "examine": "A trophy of a mighty slayer!",
     "durability": null,
     "name": "Cockatrice head",
     "tradeable": "false",
@@ -73306,7 +73309,7 @@
     "id": "8261"
   },
   {
-    "examine": "I should get it stuffed!",
+    "examine": "A trophy of a mighty slayer!",
     "durability": null,
     "name": "Basilisk head",
     "tradeable": "false",
@@ -73316,7 +73319,7 @@
     "id": "8262"
   },
   {
-    "examine": "I should get it stuffed!",
+    "examine": "A trophy of a mighty slayer!",
     "durability": null,
     "name": "Kurask head",
     "tradeable": "false",
@@ -73326,7 +73329,7 @@
     "id": "8263"
   },
   {
-    "examine": "I should get it stuffed!",
+    "examine": "A trophy of a mighty slayer!!",
     "durability": null,
     "name": "Abyssal head",
     "tradeable": "false",
@@ -73336,7 +73339,7 @@
     "id": "8264"
   },
   {
-    "examine": "I should get it stuffed!",
+    "examine": "A trophy of a mighty dragon-slayer!",
     "durability": null,
     "name": "Kbd heads",
     "tradeable": "false",
@@ -73346,7 +73349,7 @@
     "id": "8265"
   },
   {
-    "examine": "I should get it stuffed!",
+    "examine": "A trophy of a mighty kalphite slayer!",
     "durability": null,
     "name": "Kq head",
     "archery_ticket_price": "0",
@@ -77088,16 +77091,16 @@
     "requirements": "{1,20}-{2,10}",
     "ge_buy_limit": "10",
     "examine": "A magic cave horror mask.",
-    "grand_exchange_price": "989400",
     "durability": null,
     "rare_item": "true",
+    "weight": "10",
+    "equipment_slot": "0",
+    "grand_exchange_price": "989400",
     "name": "Black mask (10)",
     "tradeable": "true",
-    "weight": "10",
     "archery_ticket_price": "0",
     "id": "8901",
-    "bonuses": "0,0,0,-3,-1,9,10,8,-1,9,0,0,0,0,0",
-    "equipment_slot": "0"
+    "bonuses": "0,0,0,-3,-1,9,10,8,-1,9,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "10",
