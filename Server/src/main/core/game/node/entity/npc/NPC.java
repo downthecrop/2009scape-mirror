@@ -575,7 +575,7 @@ public class NPC extends Entity {
 		handleDrops(p, killer);
 		if (!isRespawn())
 			clear();
-                isRespawning = true;
+		isRespawning = true;
 		behavior.onDeathFinished(this, killer);
 		killer.dispatch(new NPCKillEvent(this));
 		setRespawnTick(GameWorld.getTicks() + definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 17));

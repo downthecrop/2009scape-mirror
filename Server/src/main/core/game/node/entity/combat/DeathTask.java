@@ -82,8 +82,8 @@ public final class DeathTask extends NodeTask {
 		e.getProperties().setTeleportLocation(spawn);
 		e.unlock();
 		e.finalizeDeath(killer);
-		e.getImpactHandler().getImpactLog().clear();// check if this needs to be
-													// before finalize
+		e.getImpactHandler().getNpcImpactLog().clear();// check if this needs to be before finalize
+		e.getImpactHandler().getPlayerImpactLog().clear();// check if this needs to be before finalize
 		e.getImpactHandler().setDisabledTicks(4);
 		e.dispatch(new SelfDeathEvent(killer));
 	}

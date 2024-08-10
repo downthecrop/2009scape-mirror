@@ -6,7 +6,6 @@ import core.game.node.entity.skill.Skills;
 import content.global.skill.summoning.familiar.Familiar;
 import content.global.skill.summoning.pet.Pet;
 import core.game.node.entity.Entity;
-import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.prayer.PrayerType;
 import core.game.node.item.Item;
@@ -14,13 +13,13 @@ import core.game.system.task.Pulse;
 import core.game.bots.AIPlayer;
 import core.game.world.GameWorld;
 import core.game.world.map.zone.ZoneType;
+import core.game.world.repository.Repository;
 import org.rs09.consts.Items;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
-import java.util.stream.Collectors;
 
 /**
  * Class used for handling combat impacts.
@@ -39,9 +38,14 @@ public final class ImpactHandler {
 	private int disabledTicks;
 
 	/**
-	 * The impact log.
+	 * The NPC impact log.
 	 */
-	private final Map<Entity, Integer> impactLog = new HashMap<>();
+	private final Map<Entity, Integer> npcImpactLog = new HashMap<>();
+
+	/**
+	 * The player impact log. This is by player uid to cope with players relogging.
+	 */
+	private final Map<Integer, Integer> playerImpactLog = new HashMap<>();
 
 	/**
 	 * Gets the current hitsplats to show.
@@ -167,11 +171,14 @@ public final class ImpactHandler {
 			return null;
 		}
 		if (hit > 0) {
-			Integer value = impactLog.get(source);
-			if (value == null) {
-				value = 0;
+			if (source instanceof Player) {
+				int uid = source.asPlayer().getDetails().getUid();
+				Integer value = playerImpactLog.get(uid);
+				playerImpactLog.put(uid, value == null ? hit : hit + value);
+			} else {
+				Integer value = npcImpactLog.get(source);
+				npcImpactLog.put(source, value == null ? hit : hit + value);
 			}
-			impactLog.put(source, hit + value);
 		}
 		if (style != null && style.getSwingHandler() != null && source instanceof Player) {
 			Player player = source.asPlayer();
@@ -248,35 +255,47 @@ public final class ImpactHandler {
 		if (entity instanceof Player) {
 			return killer;
 		}
+
 		int damage = -1;
-		for (Entity e : impactLog.keySet()) {
-			if (e == this.entity) {
-				continue;
+		if (playerImpactLog.isEmpty()) {
+			for (Entity e : npcImpactLog.keySet()) {
+				if (e == this.entity) {
+					continue;
+				}
+				int amount = npcImpactLog.get(e);
+				if (amount > damage) {
+					damage = amount;
+					entity = e;
+				}
 			}
-			int amount = impactLog.get(e);
-			if (amount > damage || (entity instanceof NPC && e instanceof Player)) {
+			return entity;
+		}
+
+		int player = 0; //needs to be fake-initialized because java is dumb
+		for (int uid : playerImpactLog.keySet()) {
+			int amount = playerImpactLog.get(uid);
+			if (amount > damage) {
 				damage = amount;
-				entity = e;
+				player = uid;
 			}
 		}
-		return entity;
+		return Repository.getPlayerByUid(player);
 	}
 
 	/**
-	 * Gets the impact log.
-	 * @return The impact log.
+	 * Gets the npc impact log.
+	 * @return The npc impact log.
 	 */
-	public Map<Entity, Integer> getImpactLog() {
-		return impactLog;
+	public Map<Entity, Integer> getNpcImpactLog() {
+		return npcImpactLog;
 	}
 
 	/**
-	 * Gets the impact log filtered for Player objects
-	 * @return The impact log of each Player and their damage
+	 * Gets the player impact log.
+	 * @return The player impact log.
 	 */
-	public  Map<Player, Integer> getPlayerImpactLog() {
-		return impactLog.entrySet().stream().filter(entry -> entry.getKey() instanceof Player).collect(
-				Collectors.toMap(m -> m.getKey().asPlayer(), m -> m.getValue()));
+	public Map<Integer, Integer> getPlayerImpactLog() {
+		return playerImpactLog;
 	}
 
 	/**

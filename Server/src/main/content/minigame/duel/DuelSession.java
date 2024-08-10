@@ -263,7 +263,7 @@ public final class DuelSession extends ComponentPlugin {
 		Player o = getOpposite(p);
 		o.getImpactHandler().setDisabledTicks(6);
 		o.teleport(RandomFunction.getRandomElement(DuelArea.RESPAWN_LOCATIONS));
-		boolean victory = type == 0 || type == 2 || type == 1 && p.getImpactHandler().getImpactLog().containsKey(o);
+		boolean victory = type == 0 || type == 2 || type == 1 && p.getImpactHandler().getPlayerImpactLog().containsKey(o.getDetails().getUid());
 		fightState = 2;
 		p.removeExtension(DuelSession.class);
 		end();

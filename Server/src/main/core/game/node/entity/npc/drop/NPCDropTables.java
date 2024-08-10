@@ -147,7 +147,7 @@ public final class NPCDropTables {
 			List<Player> players = RegionManager.getLocalPlayers(npc, 16);
 			List<Player> looters = new ArrayList<>(20);
 			for (Player p : players) {
-				if (p != null && p.getCommunication().getClan() != null && p.getCommunication().getClan() == player.getCommunication().getClan() && p.getCommunication().isLootShare() && p.getCommunication().getLootRequirement().ordinal() >= p.getCommunication().getClan().getLootRequirement().ordinal() && npc.getImpactHandler().getImpactLog().containsKey(p)) {
+				if (p != null && p.getCommunication().getClan() != null && p.getCommunication().getClan() == player.getCommunication().getClan() && p.getCommunication().isLootShare() && p.getCommunication().getLootRequirement().ordinal() >= p.getCommunication().getClan().getLootRequirement().ordinal() && !p.getIronmanManager().isIronman()) {
 					looters.add(p);
 				}
 			}
