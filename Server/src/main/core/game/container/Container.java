@@ -221,7 +221,7 @@ public class Container {
     public boolean add(Item item, boolean fireListener, int preferredSlot) {
         item = item.copy();
         int maximum = getMaximumAdd(item);
-        if (maximum == 0 || (item.getDefinition().isStackable() && item.getAmount() == 0)) {
+        if (maximum == 0) {
             return false;
         }
         if (preferredSlot > -1 && items[preferredSlot] != null) {
