@@ -183,19 +183,25 @@ class ModernListeners : SpellListener("modern"){
             return
         }
 
-        var bar = Bar.forOre(item.id) ?: return
-        if(bar == Bar.IRON && player.inventory.getAmount(Items.COAL_453) >= 2 && player.skills.getLevel(Skills.SMITHING) >= Bar.STEEL.level && player.inventory.contains(Items.IRON_ORE_441,1)) bar = Bar.STEEL
+        fun returnBar(player: Player,item: Item): Bar? {
+            // Loop through all metal bars starting with the highest tier
+            for (potentialBar in Bar.values().reversed()) {
+                // Check if the ore being cast on is needed for the current bar being considered
+                val inputOreInBar = potentialBar.ores.map{it.id}.contains(item.id)
+                // Check the player has all the required ores (and corresponding quantities) to make the current bar being considered
+                val playerHasNecessaryOres = potentialBar.ores.all{ore -> inInventory(player, ore.id, ore.amount)}
+                // If both tests pass return the current bar being considered as the one the spell should try to make
+                if (inputOreInBar && playerHasNecessaryOres) return potentialBar
+            }
+            // If none of the bars passed both tests the player must be missing a required ore
+            player.packetDispatch.sendMessage("You do not have the required ores to make this bar.")
+            return null
+        }
+        var bar = returnBar(player,item)?: return
 
         if(player.skills.getLevel(Skills.SMITHING) < bar.level){
             player.sendMessage("You need a smithing level of ${bar.level} to superheat that ore.")
             return
-        }
-
-        for (items in bar.ores) {
-            if (!player.inventory.contains(items.id, items.amount)) {
-                player.packetDispatch.sendMessage("You do not have the required ores to make this bar.")
-                return
-            }
         }
 
         player.lock(3)
