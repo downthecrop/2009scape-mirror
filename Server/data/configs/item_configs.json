@@ -98752,6 +98752,7 @@
     "bonuses": "36,36,36,0,0,-10,-10,-9,0,-10,0,42,0,0,0"
   },
   {
+    "requirements": "{0,40}",
     "ge_buy_limit": "100",
     "turn90cw_anim": "1207",
     "examine": "A rune-tipped, one-handed hasta.",
