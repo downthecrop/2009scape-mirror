@@ -42,8 +42,8 @@ class MusicConfigLoader {
             val id = Integer.parseInt(e["id"].toString())
             RegionManager.forId(region).music = MusicEntry.forId(id)
             count++
-            log(this::class.java, Log.FINE, "Parsed $count region music configs.")
         }
+        log(this::class.java, Log.FINE, "Parsed $count region music configs.")
 
         // Parse the file with tile-specific music locations
         count = 0
