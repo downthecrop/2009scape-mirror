@@ -920,6 +920,14 @@ fun openDialogue(player: Player, dialogue: Any, vararg args: Any) {
 }
 
 /**
+ * Closes any opened dialogue.
+ */
+fun closeDialogue(player: Player) {
+    player.dialogueInterpreter.close()
+    player.interfaceManager.closeChatbox()
+}
+
+/**
  * Gets an NPC with the given ID from the repository.
  * @param id the ID of the NPC to locate
  * @returns an NPC instance matching the ID if it finds one, null otherwise
@@ -1645,6 +1653,18 @@ fun sendPlayerOnInterface(player: Player, iface: Int, child: Int) {
  */
 fun sendNPCDialogue(player: Player, npc: Int, msg: String, expr: core.game.dialogue.FacialExpression = core.game.dialogue.FacialExpression.FRIENDLY) {
     player.dialogueInterpreter.sendDialogues(npc, expr, *splitLines(msg))
+}
+
+/**
+ * Sends a dialogue that uses the player's chathead.
+ * @param player the player to send the dialogue to
+ * @param npc the ID of the NPC to use for the chathead
+ * @param expr the FacialExpression to use. An enum exists for these called FacialExpression.
+ * @param msg the message to send.
+ */
+fun sendNPCDialogueLines(player: Player, npc: Int, expr: core.game.dialogue.FacialExpression, hideContinue: Boolean, vararg msgs: String) {
+    val dialogueComponent = player.dialogueInterpreter.sendDialogues(npc, expr, *msgs)
+    player.packetDispatch.sendInterfaceConfig(dialogueComponent.id, msgs.size + 4, hideContinue)
 }
 
 /**

@@ -1,5 +1,6 @@
 package content.region.asgarnia.falador.quest.blackknightsfortress;
 
+import content.region.asgarnia.falador.quest.recruitmentdrive.SirAmikVarzeDialogueFile;
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC;
@@ -7,6 +8,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
+
+import static core.api.ContentAPIKt.openDialogue;
 
 /**
  * Represents the sir amik varze dialogue.
@@ -72,35 +75,7 @@ public class SirAmikVarzeDialogue extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (quest.getStage(player)) {
 		case 100:
-			switch (stage) {
-			case 0:
-				interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "Hello, friend!");
-				stage = 1;
-				break;
-			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_ASKING, "Do you have any other quests for me to do?");
-				stage = 2;
-				break;
-			case 2:
-				interpreter.sendDialogues(npc, FacialExpression.HALF_THINKING, "Quests, eh?", "Well, I don't have anything on the go at the moment,", "but there is an organisation that is always looking for", "capable adventurers to assist them.");
-				stage = 3;
-				break;
-			case 3:
-				interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Your excellent work sorting out those Black Knights", "means I will happily write you a letter of", "recommendation.");
-				stage = 4;
-				break;
-			case 4:
-				interpreter.sendDialogues(npc, FacialExpression.HALF_ASKING, "Would you like me to put your name forwards to", "them?");
-				stage = 5;
-				break;
-			case 5:
-				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "No thanks.");
-				stage = 6;
-				break;
-			case 6:
-				end();
-				break;
-			}
+			openDialogue(player, new SirAmikVarzeDialogueFile(), npc);
 			break;
 		case 30:
 			switch (stage) {

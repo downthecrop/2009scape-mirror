@@ -1,15 +1,11 @@
 package content.region.morytania.quest.creatureoffenkenstrain
 
-import content.global.travel.canoe.CanoeListener
 import core.api.*
 import core.game.dialogue.FacialExpression
 import core.game.global.action.DoorActionHandler
 import core.game.global.action.PickupHandler
 import core.game.interaction.InteractionListener
-import core.game.node.Node
-import core.game.node.entity.player.Player
 import core.game.node.item.GroundItem
-import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation

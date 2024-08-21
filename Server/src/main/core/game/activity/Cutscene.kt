@@ -122,6 +122,29 @@ abstract class Cutscene(val player: Player) {
     }
 
     /**
+     * Sends a dialogue to the player using the given NPC ID, which updates the cutscene stage by default when continued.
+     * @param npcId the ID of the NPC to send a dialogue for
+     * @param expression the FacialExpression the NPC should use
+     * @param message the message to send
+     * @param onContinue (optional) a method that runs when the dialogue is "continued." Increments the cutscene stage by default.
+     */
+    fun dialogueLinesUpdate(npcId: Int, expression: core.game.dialogue.FacialExpression, vararg message: String, onContinue: () -> Unit = {incrementStage()})
+    {
+        logCutscene("Sending NPC dialogue lines update.")
+        sendNPCDialogueLines(player, npcId, expression, true, *message)
+        player.dialogueInterpreter.addAction { _,_ -> onContinue.invoke() }
+    }
+
+    /**
+     * Forces the dialogue to close.
+     */
+    fun dialogueClose()
+    {
+        logCutscene("Sending dialogue close.")
+        closeDialogue(player)
+    }
+
+    /**
      * Sends a non-NPC dialogue to the player, which updates the cutscene stage by default when continued
      * @param message the message to send
      * @param onContinue (optional) a method that runs when the dialogue is "continued." Increments the cutscene stage by default.
@@ -246,6 +269,51 @@ abstract class Cutscene(val player: Player) {
         player.hook(Event.SelfDeath, CUTSCENE_DEATH_HOOK)
         player.logoutListeners["cutscene"] = {player -> player.location = exitLocation; player.getCutscene()?.end() }
         AntiMacro.pause(player)
+    }
+
+
+    /**
+     * Ends this cutscene, teleporting the player to the exit location, and then fading it back in and executing the endActions passed to this method.
+     * @param endActions (optional) a method that executes when the cutscene fully completes
+     */
+    fun endWithoutFade(endActions: (() -> Unit)? = null)
+    {
+        ended = true
+        GameWorld.Pulser.submit(object : Pulse(){
+            var tick: Int = 0
+            override fun pulse(): Boolean {
+                when(tick++)
+                {
+                    0 -> player.properties.teleportLocation = exitLocation
+                    1 -> {
+                        return true
+                    }
+                }
+                return false
+            }
+
+            override fun stop() {
+                super.stop()
+                player ?: return
+                player.removeAttribute(ATTRIBUTE_CUTSCENE)
+                player.removeAttribute(ATTRIBUTE_CUTSCENE_STAGE)
+                player.properties.isSafeZone = false
+                player.properties.safeRespawn = ServerConstants.HOME_LOCATION
+                player.interfaceManager.restoreTabs()
+                player.unlock()
+                clearNPCs()
+                player.unhook(CUTSCENE_DEATH_HOOK)
+                player.logoutListeners.remove("cutscene")
+                AntiMacro.unpause(player)
+                PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 0))
+                try {
+                    endActions?.invoke()
+                } catch (e: Exception) {
+                    log(this::class.java, Log.ERR,  "There's some bad nasty code in ${this::class.java.simpleName} end actions!")
+                    e.printStackTrace()
+                }
+            }
+        })
     }
 
     /**

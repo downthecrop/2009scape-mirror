@@ -10,6 +10,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
+import core.game.world.GameWorld;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ChildPositionContext;
 import core.net.packet.context.ContainerContext;
@@ -501,6 +502,7 @@ public final class DialogueInterpreter {
     static Pattern GENDERED_SUBSTITUTION = Pattern.compile("@g\\[([^,]*),([^\\]]*)\\]");
     public static String doSubstitutions(Player player, String msg) {
         msg = msg.replace("@name", player.getUsername());
+        msg = msg.replace("@servername", GameWorld.getSettings().getName());
         StringBuilder sb = new StringBuilder();
         Matcher m = GENDERED_SUBSTITUTION.matcher(msg);
         int index = player.isMale() ? 1 : 2;

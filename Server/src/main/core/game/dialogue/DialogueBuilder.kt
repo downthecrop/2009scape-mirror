@@ -295,6 +295,14 @@ class DialogueBuilder(var target: DialogueBuilderFile, var clauseIndex: Int = -1
         }
     }
 
+    /**
+     * The first if-statement to a dialogue. At minimum, you must have "b.onPredicate { _ -> true }"
+     * PLEASE BE CAREFUL ABOUT HAVING COMPLEX PREDICATE.
+     * If at any point during a dialogue that the predicate is not satisfied,
+     * it will block further dialogue progression and any dialogue will suddenly disappear.
+     * e.g. onPredicate(x==2) but during dialogue you set x=3, dialogue after it will disappear.
+     * Think of this as a repeated filter at every dialogue step.
+     */
     fun onPredicate(predicate: (player: Player) -> Boolean): DialogueBuilder {
         target.data.add(DialogueClause(predicate, ArrayList()))
         clauseIndex = target.data.size - 1
