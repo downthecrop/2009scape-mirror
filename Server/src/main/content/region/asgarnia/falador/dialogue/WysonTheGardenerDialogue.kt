@@ -121,7 +121,7 @@ class WysonTheGardenerDialogue : core.game.dialogue.DialoguePlugin {
             }
             133 -> end()
             140 -> {
-                npc("Thanks for being generous", "here's an extra woad leave.")
+                npc("Thanks for being generous", "here's an extra woad leaf.")
                 stage = 141
             }
             141 -> if (player.inventory.contains(995, 20)) {
