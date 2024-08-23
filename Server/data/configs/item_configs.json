@@ -119738,6 +119738,7 @@
     "equipment_slot": "0"
   },
   {
+    "requirements": "{11,62}",
     "shop_price": "100",
     "examine": "It burns, burns, burns...",
     "durability": null,
@@ -119753,6 +119754,7 @@
     "point_price": "50"
   },
   {
+    "requirements": "{11,79}",
     "destroy_message": "To get another pair of Flame Gloves, you need to keep ten beacons alight simultaneously and then talk to King Roald.",
     "shop_price": "200",
     "examine": "The hottest gloves in town.",
@@ -119767,6 +119769,7 @@
     "equipment_slot": "9"
   },
   {
+    "requirements": "{11,92}",
     "shop_price": "300",
     "examine": "Danger: risk of fire.",
     "durability": null,
