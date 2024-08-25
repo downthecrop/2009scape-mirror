@@ -321,7 +321,7 @@ public class StravenDialogue extends DialoguePlugin {
 				stage = 47;
 				break;
 			case 47:
-				npc("Although having said that, a rival gang of ours, er,", "theirs, called the Black Arm Gang is supposedly metting", "a contact from Port Sarim today in the Blue Moon", "Inn.");
+				npc("Although having said that, a rival gang of ours, er,", "theirs, called the Black Arm Gang is supposedly meeting", "a contact from Port Sarim today in the Blue Moon", "Inn.");
 				stage = 48;
 				break;
 			case 48:
