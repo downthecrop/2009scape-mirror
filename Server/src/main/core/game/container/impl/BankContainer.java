@@ -2,6 +2,7 @@ package core.game.container.impl;
 
 import core.api.IfaceSettingsBuilder;
 import core.game.container.access.InterfaceContainer;
+import kotlin.Unit;
 import kotlin.ranges.IntRange;
 import org.rs09.consts.Vars;
 import core.ServerConstants;
@@ -238,7 +239,7 @@ public final class BankContainer extends Container {
 			}
 		}
 
-		if (player.getInventory().remove(item, slot, true)) {
+		if (player.getInventory().remove(item, slot, false)) {
 			int preferredSlot = -1;
 			if (tabIndex != 0 && tabIndex != 10 && !super.contains(add.getId(), 1)) {
 				preferredSlot = tabStartSlot[tabIndex] + getItemsInTab(tabIndex);
@@ -246,6 +247,7 @@ public final class BankContainer extends Container {
 				increaseTabStartSlots(tabIndex);
 			}
 			super.add(add, true, preferredSlot);
+			player.getInventory().update();
 		}
 	}
 
@@ -283,13 +285,14 @@ public final class BankContainer extends Container {
 			add = item;
 		}
 		if (super.remove(item, slot, false)) {
-			player.getInventory().add(add);
+			player.getInventory().add(add, false);
 		}
 		if (get(slot) == null) {
 			int tabId = getTabByItemSlot(slot);
 			decreaseTabStartSlots(tabId);
 			shift();
 		} else update();
+		player.getInventory().update();
 	}
 
 	/**
