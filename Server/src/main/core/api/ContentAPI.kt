@@ -1253,8 +1253,17 @@ fun getVarbit (player: Player, varbitId: Int) : Int {
 @JvmOverloads
 fun setVarp (player: Player, varpIndex: Int, value: Int, save: Boolean = false) {
     player.varpMap[varpIndex] = value
-    player.saveVarp[varpIndex] = save    
+    if (player.saveVarp[varpIndex] != true && save)
+        player.saveVarp[varpIndex] = true //only set if we're choosing to save. Prevents accidental unsaving. if you REALLY want to unsave a varp, use unsaveVarp.
     player.packetDispatch.sendVarp(varpIndex, value)
+}
+
+fun saveVarp (player: Player, varpIndex: Int) {
+    player.saveVarp[varpIndex] = true
+}
+
+fun unsaveVarp (player: Player, varpIndex: Int) {
+    player.saveVarp.remove(varpIndex)
 }
 
 @JvmOverloads

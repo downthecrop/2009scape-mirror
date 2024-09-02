@@ -1,8 +1,6 @@
 package content.global.handlers.iface
 
 import core.api.*
-import core.cache.def.impl.DataMap
-import core.game.component.Component
 import core.game.event.FairyRingDialEvent
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
@@ -11,11 +9,7 @@ import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
-import core.net.packet.PacketRepository
-import core.net.packet.context.ContainerContext
-import core.net.packet.out.ContainerPacket
 import core.tools.RandomFunction
-
 
 
 /**
@@ -26,15 +20,11 @@ class FairyRingInterface : InterfaceListener {
     companion object {
         const val RINGS_IFACE = 734
         const val LOG_IFACE_ID = 735
-        const val TRANSMIT_NOREDRAW_CHILD = 64000
-        const val MAP_LOG_ID_TO_CHILD = 1467
-        const val LOG_INV_HOOK = 816
+        const val VARP_F_RING = 816
         const val VB_LOG_SORT_ORDER = 4618
         const val VB_RING_1 = 2341
         const val VB_RING_2 = 2342
         const val VB_RING_3 = 2343
-        val LOG_ID_BUFFER = ArrayList<Int>()
-        val LOG_ID_CHILD_MAP = DataMap.get(MAP_LOG_ID_TO_CHILD)
         val RING_1 = arrayOf('a','d','c','b')
         val RING_2 = arrayOf('i','l','k','j')
         val RING_3 = arrayOf('p','s','r','q')
@@ -43,7 +33,12 @@ class FairyRingInterface : InterfaceListener {
     override fun defineInterfaceListeners() {
 
         onOpen(RINGS_IFACE){ player, _ ->
-            player.interfaceManager.openSingleTab(Component(LOG_IFACE_ID))
+            openSingleTab(player, LOG_IFACE_ID)
+            saveVarp(player, VARP_F_RING)
+            return@onOpen true
+        }
+
+        onOpen(LOG_IFACE_ID){ player, _ ->
             drawLog(player)
             return@onOpen true
         }
@@ -76,8 +71,7 @@ class FairyRingInterface : InterfaceListener {
     /**
      * Draws the travel log interface
      * Currently, the visited logs is a bool array in globalData. Someone should migrate this to prefs or something at some point.
-     * The child hash is used to lookup the log entry "ID" from the cache's enums. This ID is then populated in a list and sent as an update for container 816.
-     * Transmitting an update for container 816 then triggers the relevant CS2 to fire (don't ask me), causing the ring codes to be inserted above the log entry and the entries to be properly rearranged.
+     * On transmit of Varp 816, which all used varbits are part of here, the CS2 is invoked to populate the codes in the log and sort them correctly.
      * @param player The player to draw the interface for
      */
     private fun drawLog (player: Player)
@@ -90,31 +84,13 @@ class FairyRingInterface : InterfaceListener {
             if (ring.childId == -1) {
                 continue
             }
-            val compHash = (LOG_IFACE_ID shl 16) or (ring.childId and 0xFFFF)
-            for ((key, value) in LOG_ID_CHILD_MAP.dataStore) {
-                if (value == compHash) {
-                    LOG_ID_BUFFER.add(key)
-                    break
-                }
-            }
-            setInterfaceText(player, "          ${ring.tip}", LOG_IFACE_ID, ring.childId)
+            setInterfaceText(player, "<br>${ring.tip}", LOG_IFACE_ID, ring.childId)
         }
-        if (LOG_ID_BUFFER.size > 0)
-        {
-            val ids = LOG_ID_BUFFER.toIntArray()
-            val ctx = ContainerContext (
-                player, LOG_IFACE_ID,
-                TRANSMIT_NOREDRAW_CHILD, LOG_INV_HOOK, ids
-            )
-            PacketRepository.send(ContainerPacket::class.java, ctx)
-        }
-        LOG_ID_BUFFER.clear()
     }
 
     private fun toggleSortOrder(player: Player) {
         val curSort = getVarbit(player, VB_LOG_SORT_ORDER) == 0
         setVarbit(player, VB_LOG_SORT_ORDER, if (curSort) 1 else 0)
-        sendChat(player, "Set VB to ${getVarbit(player, VB_LOG_SORT_ORDER)}")
         drawLog(player)
     }
 
