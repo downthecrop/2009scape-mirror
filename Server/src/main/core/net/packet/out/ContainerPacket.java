@@ -47,8 +47,8 @@ public final class ContainerPacket implements OutgoingPacket<ContainerContext> {
 					buffer.p2(context.getLength());
 					for (int i = 0; i < context.getLength(); i++)
 					{
-						buffer.p2(context.ids[i]);
 						buffer.putS(1);
+						buffer.p2(context.ids[i] + 1);
 					}
 				}
 				else {

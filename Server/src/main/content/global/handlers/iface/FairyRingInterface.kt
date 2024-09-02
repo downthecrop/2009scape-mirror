@@ -30,6 +30,9 @@ class FairyRingInterface : InterfaceListener {
         const val MAP_LOG_ID_TO_CHILD = 1467
         const val LOG_INV_HOOK = 816
         const val VB_LOG_SORT_ORDER = 4618
+        const val VB_RING_1 = 2341
+        const val VB_RING_2 = 2342
+        const val VB_RING_3 = 2343
         val LOG_ID_BUFFER = ArrayList<Int>()
         val LOG_ID_CHILD_MAP = DataMap.get(MAP_LOG_ID_TO_CHILD)
         val RING_1 = arrayOf('a','d','c','b')
@@ -41,36 +44,25 @@ class FairyRingInterface : InterfaceListener {
 
         onOpen(RINGS_IFACE){ player, _ ->
             player.interfaceManager.openSingleTab(Component(LOG_IFACE_ID))
-            player.setAttribute("fr:ring1", 0)
-            player.setAttribute("fr:ring2", 0)
-            player.setAttribute("fr:ring3", 0)
             drawLog(player)
             return@onOpen true
         }
 
         onClose(RINGS_IFACE){ player, _ ->
             closeTabInterface(player)
-            player.removeAttribute("fr:ring1")
-            player.removeAttribute("fr:ring2")
-            player.removeAttribute("fr:ring3")
-            setVarp(player, 816, 0)
-            closeTabInterface(player)
             return@onClose true
         }
 
         on(RINGS_IFACE){ player, _, _, buttonID, _, _ ->
-            if(player.getAttribute("fr:time",0L) > System.currentTimeMillis()) return@on true
-            var delayIncrementer = 1750L
             when(buttonID){
-                23 -> delayIncrementer += increment(player,1)
-                25 -> delayIncrementer += increment(player,2)
-                27 -> delayIncrementer += increment(player,3)
+                23 -> increment(player,1)
+                25 -> increment(player,2)
+                27 -> increment(player,3)
                 24 -> decrement(player,1)
                 26 -> decrement(player,2)
                 28 -> decrement(player,3)
                 21 -> confirm(player)
             }
-            player.setAttribute("fr:time",System.currentTimeMillis() + delayIncrementer)
             return@on true
         }
 
@@ -105,14 +97,14 @@ class FairyRingInterface : InterfaceListener {
                     break
                 }
             }
-            setInterfaceText(player, "<br>${ring.tip}", LOG_IFACE_ID, ring.childId)
+            setInterfaceText(player, "          ${ring.tip}", LOG_IFACE_ID, ring.childId)
         }
         if (LOG_ID_BUFFER.size > 0)
         {
+            val ids = LOG_ID_BUFFER.toIntArray()
             val ctx = ContainerContext (
                 player, LOG_IFACE_ID,
-                TRANSMIT_NOREDRAW_CHILD, LOG_INV_HOOK,
-                LOG_ID_BUFFER.toIntArray()
+                TRANSMIT_NOREDRAW_CHILD, LOG_INV_HOOK, ids
             )
             PacketRepository.send(ContainerPacket::class.java, ctx)
         }
@@ -122,32 +114,40 @@ class FairyRingInterface : InterfaceListener {
     private fun toggleSortOrder(player: Player) {
         val curSort = getVarbit(player, VB_LOG_SORT_ORDER) == 0
         setVarbit(player, VB_LOG_SORT_ORDER, if (curSort) 1 else 0)
+        sendChat(player, "Set VB to ${getVarbit(player, VB_LOG_SORT_ORDER)}")
         drawLog(player)
     }
 
-    fun increment(player: Player,ring: Int): Long{
-        val curIndex = player.getAttribute("fr:ring$ring",0)
-        var nextIndex = 0
-        if(curIndex == 3) nextIndex = 0
-        else if(curIndex == 1) nextIndex = 3
-        else if(curIndex == 2) nextIndex = 2
-        else nextIndex = curIndex + 1
-        player.setAttribute("fr:ring$ring",nextIndex)
-        return if (curIndex == 1) 1750L else 0L
+    fun increment(player: Player,ring: Int) {
+        val vbit = when(ring) {
+            1 -> VB_RING_1
+            2 -> VB_RING_2
+            3 -> VB_RING_3
+            else -> return
+        }
+        val curIndex = getVarbit(player, vbit)
+        val nextIndex: Int = if(curIndex == 3) 0
+        else curIndex + 1
+        setVarbit(player, vbit, nextIndex)
     }
 
     fun decrement(player: Player,ring: Int){
-        val curIndex = player.getAttribute("fr:ring$ring",0)
-        var nextIndex = 0
-        if(curIndex == 0) nextIndex = 3
-        else nextIndex = curIndex - 1
-        player.setAttribute("fr:ring$ring",nextIndex)
+        val vbit = when(ring) {
+            1 -> VB_RING_1
+            2 -> VB_RING_2
+            3 -> VB_RING_3
+            else -> return
+        }
+        val curIndex = getVarbit(player, vbit)
+        val nextIndex: Int = if(curIndex == 0) 3
+        else curIndex - 1
+        setVarbit(player, vbit, nextIndex)
     }
 
     private fun confirm(player: Player){
-        val ring1index = player.getAttribute("fr:ring1",0)
-        val ring2index = player.getAttribute("fr:ring2",0)
-        val ring3index = player.getAttribute("fr:ring3",0)
+        val ring1index = getVarbit(player, VB_RING_1)
+        val ring2index = getVarbit(player, VB_RING_2)
+        val ring3index = getVarbit(player, VB_RING_3)
         val code = "${RING_1[ring1index]}${RING_2[ring2index]}${RING_3[ring3index]}"
         val ring: FairyRing? = try {
             FairyRing.valueOf(code.uppercase())
