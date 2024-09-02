@@ -42,19 +42,30 @@ public final class ContainerPacket implements OutgoingPacket<ContainerContext> {
 					}
 				}
 			} else {
-				buffer.putShort(context.getItems().length);
-				for (Item item : context.getItems())
-					if (item != null) {
-						int amount = item.getAmount();
-						if (amount < 0 || amount > 254) {
-							buffer.putS(255).putInt(amount);
-						} else {
-							buffer.putS(amount);
-						}
-						buffer.putShort(item.getId() + 1);
-					} else {
-						buffer.putS(0).putShort(0);
+				if (context.ids != null)
+				{
+					buffer.p2(context.getLength());
+					for (int i = 0; i < context.getLength(); i++)
+					{
+						buffer.p2(context.ids[i]);
+						buffer.putS(1);
 					}
+				}
+				else {
+					buffer.putShort(context.getItems().length);
+					for (Item item : context.getItems())
+						if (item != null) {
+							int amount = item.getAmount();
+							if (amount < 0 || amount > 254) {
+								buffer.putS(255).putInt(amount);
+							} else {
+								buffer.putS(amount);
+							}
+							buffer.putShort(item.getId() + 1);
+						} else {
+							buffer.putS(0).putShort(0);
+						}
+				}
 			}
 		}
 		buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());context.getPlayer().getSession().write(buffer);

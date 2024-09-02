@@ -1,42 +1,54 @@
 package content.global.handlers.iface
 
 import core.api.*
-import core.game.event.FairyRingDialEvent
+import core.cache.def.impl.DataMap
 import core.game.component.Component
+import core.game.event.FairyRingDialEvent
+import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.system.task.Pulse
+import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
+import core.net.packet.PacketRepository
+import core.net.packet.context.ContainerContext
+import core.net.packet.out.ContainerPacket
 import core.tools.RandomFunction
-import core.game.interaction.InterfaceListener
-import core.game.world.GameWorld
 
-val RING_1 = arrayOf('a','d','c','b')
-val RING_2 = arrayOf('i','l','k','j')
-val RING_3 = arrayOf('p','s','r','q')
+
 
 /**
  * Handles the fairy ring interface
  * @author Ceikry
  */
 class FairyRingInterface : InterfaceListener {
-
-    val RINGS = 734
-    val TRAVEL_LOG = 735
+    companion object {
+        const val RINGS_IFACE = 734
+        const val LOG_IFACE_ID = 735
+        const val TRANSMIT_NOREDRAW_CHILD = 64000
+        const val MAP_LOG_ID_TO_CHILD = 1467
+        const val LOG_INV_HOOK = 816
+        const val VB_LOG_SORT_ORDER = 4618
+        val LOG_ID_BUFFER = ArrayList<Int>()
+        val LOG_ID_CHILD_MAP = DataMap.get(MAP_LOG_ID_TO_CHILD)
+        val RING_1 = arrayOf('a','d','c','b')
+        val RING_2 = arrayOf('i','l','k','j')
+        val RING_3 = arrayOf('p','s','r','q')
+    }
 
     override fun defineInterfaceListeners() {
 
-        onOpen(RINGS){player, _ ->
-            player.interfaceManager.openSingleTab(Component(TRAVEL_LOG))
+        onOpen(RINGS_IFACE){ player, _ ->
+            player.interfaceManager.openSingleTab(Component(LOG_IFACE_ID))
             player.setAttribute("fr:ring1", 0)
             player.setAttribute("fr:ring2", 0)
             player.setAttribute("fr:ring3", 0)
-            FairyRing.drawLog(player)
+            drawLog(player)
             return@onOpen true
         }
 
-        onClose(RINGS){player, _ ->
+        onClose(RINGS_IFACE){ player, _ ->
             closeTabInterface(player)
             player.removeAttribute("fr:ring1")
             player.removeAttribute("fr:ring2")
@@ -46,7 +58,7 @@ class FairyRingInterface : InterfaceListener {
             return@onClose true
         }
 
-        on(RINGS){player, _, _, buttonID, _, _ ->
+        on(RINGS_IFACE){ player, _, _, buttonID, _, _ ->
             if(player.getAttribute("fr:time",0L) > System.currentTimeMillis()) return@on true
             var delayIncrementer = 1750L
             when(buttonID){
@@ -62,24 +74,55 @@ class FairyRingInterface : InterfaceListener {
             return@on true
         }
 
-        on(TRAVEL_LOG,12){player, _, _, _, _, _ ->
+        on(LOG_IFACE_ID,12){ player, _, _, _, _, _ ->
             toggleSortOrder(player)
             return@on true
         }
 
     }
 
-    private fun toggleSortOrder(player: Player): Long{
-        val ring1index = player.getAttribute("fr:ring1",0)
-        var toSet = player.getAttribute("fr:sortorder",true)
-        toSet = !toSet
-        player.setAttribute("fr:sortorder",toSet)
-        if(toSet) {
-            setVarp(player, 816, ring1index)
-            player.setAttribute("fr:ring2",0)
-            player.setAttribute("fr:ring3",0)
+    /**
+     * Draws the travel log interface
+     * Currently, the visited logs is a bool array in globalData. Someone should migrate this to prefs or something at some point.
+     * The child hash is used to lookup the log entry "ID" from the cache's enums. This ID is then populated in a list and sent as an update for container 816.
+     * Transmitting an update for container 816 then triggers the relevant CS2 to fire (don't ask me), causing the ring codes to be inserted above the log entry and the entries to be properly rearranged.
+     * @param player The player to draw the interface for
+     */
+    private fun drawLog (player: Player)
+    {
+        for (i in FairyRing.values().indices) {
+            if (!player.savedData.globalData.hasTravelLog(i)) {
+                continue
+            }
+            val ring = FairyRing.values()[i]
+            if (ring.childId == -1) {
+                continue
+            }
+            val compHash = (LOG_IFACE_ID shl 16) or (ring.childId and 0xFFFF)
+            for ((key, value) in LOG_ID_CHILD_MAP.dataStore) {
+                if (value == compHash) {
+                    LOG_ID_BUFFER.add(key)
+                    break
+                }
+            }
+            setInterfaceText(player, "<br>${ring.tip}", LOG_IFACE_ID, ring.childId)
         }
-        return -1750L
+        if (LOG_ID_BUFFER.size > 0)
+        {
+            val ctx = ContainerContext (
+                player, LOG_IFACE_ID,
+                TRANSMIT_NOREDRAW_CHILD, LOG_INV_HOOK,
+                LOG_ID_BUFFER.toIntArray()
+            )
+            PacketRepository.send(ContainerPacket::class.java, ctx)
+        }
+        LOG_ID_BUFFER.clear()
+    }
+
+    private fun toggleSortOrder(player: Player) {
+        val curSort = getVarbit(player, VB_LOG_SORT_ORDER) == 0
+        setVarbit(player, VB_LOG_SORT_ORDER, if (curSort) 1 else 0)
+        drawLog(player)
     }
 
     fun increment(player: Player,ring: Int): Long{
@@ -207,24 +250,5 @@ enum class FairyRing(val tile: Location?, val tip: String = "", val childId: Int
 
     open fun checkAccess(player: Player) : Boolean {
         return true
-    }
-
-    companion object {
-        /**
-         * Draws the travel log.
-         * @param player the player.
-         */
-        fun drawLog(player: Player) {
-            for (i in FairyRing.values().indices) {
-                if (!player.savedData.globalData.hasTravelLog(i)) {
-                    continue
-                }
-                val ring = FairyRing.values()[i]
-                if (ring.childId == -1) {
-                    continue
-                }
-                setInterfaceText(player, "<br>${ring.tip}", 735, ring.childId)
-            }
-        }
     }
 }
