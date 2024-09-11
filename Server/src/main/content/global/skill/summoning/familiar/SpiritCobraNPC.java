@@ -56,7 +56,7 @@ public class SpiritCobraNPC extends Familiar {
 	 * @author Vexia
 	 */
 	public enum Egg {
-		COCKATRICE(new Item(1944), new Item(12109)), SARATRICE(new Item(10533), new Item(12113)), ZAMATRICE(new Item(10532), new Item(12115)), GUTHATRICE(new Item(10531), new Item(12111)), CORACATRICE(new Item(11964), new Item(12119)), PENGATRICE(new Item(12483), new Item(12117)), VULATRICE(new Item(11695), new Item(12121));
+		COCKATRICE(new Item(1944), new Item(12109)), SARATRICE(new Item(5077), new Item(12113)), ZAMATRICE(new Item(5076), new Item(12115)), GUTHATRICE(new Item(5078), new Item(12111)), CORACATRICE(new Item(11964), new Item(12119)), PENGATRICE(new Item(12483), new Item(12117)), VULATRICE(new Item(11965), new Item(12121));
 
 		/**
 		 * The egg item.
