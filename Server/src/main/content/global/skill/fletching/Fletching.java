@@ -190,13 +190,13 @@ public class Fletching {
 
     }
     public enum ArrowHeads {
-        BRONZE_ARROW(39, 882, 1, 2.6),
-        IRON_ARROW(40, 884, 15, 3.8),
-        STEEL_ARROW(41, 886, 30, 6.3),
-        MITHRIL_ARROW(42, 888, 45, 8.8),
-        ADAMANT_ARROW(43, 890, 60, 11.3),
-        RUNE_ARROW(44, 892, 75, 13.8),
-        DRAGON_ARROW(11237, 11212, 90, 16.3),
+        BRONZE_ARROW(39, 882, 1, 1.3),
+        IRON_ARROW(40, 884, 15, 2.5),
+        STEEL_ARROW(41, 886, 30, 5),
+        MITHRIL_ARROW(42, 888, 45, 7.5),
+        ADAMANT_ARROW(43, 890, 60, 10),
+        RUNE_ARROW(44, 892, 75, 12.5),
+        DRAGON_ARROW(11237, 11212, 90, 15),
         BROAD_ARROW(13278, 4160, 52, 15);
 
         public int unfinished,finished,level;
