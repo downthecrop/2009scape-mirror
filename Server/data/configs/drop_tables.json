@@ -20184,6 +20184,208 @@
         "maxAmount": "1"
       }
     ],
+    "ids": "1338",
+    "description": "Chaos Tunnels / Lighthouse Dagannoths",
+    "main": [
+      {
+        "minAmount": "1",
+        "weight": "5.0",
+        "id": "1237",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "5.0",
+        "id": "1239",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "1243",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "15",
+        "weight": "4.0",
+        "id": "555",
+        "maxAmount": "15"
+      },
+      {
+        "minAmount": "15",
+        "weight": "2.0",
+        "id": "886",
+        "maxAmount": "15"
+      },
+      {
+        "minAmount": "3",
+        "weight": "1.0",
+        "id": "828",
+        "maxAmount": "3"
+      },
+      {
+        "minAmount": "1",
+        "weight": "18.0",
+        "id": "14428",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "12.0",
+        "id": "301",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "3",
+        "weight": "4.0",
+        "id": "345",
+        "maxAmount": "3"
+      },
+      {
+        "minAmount": "5",
+        "weight": "4.0",
+        "id": "327",
+        "maxAmount": "5"
+      },
+      {
+        "minAmount": "1",
+        "weight": "3.0",
+        "id": "311",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "15",
+        "weight": "2.0",
+        "id": "314",
+        "maxAmount": "15"
+      },
+      {
+        "minAmount": "50",
+        "weight": "2.0",
+        "id": "313",
+        "maxAmount": "50"
+      },
+      {
+        "minAmount": "1",
+        "weight": "2.0",
+        "id": "377",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "2.0",
+        "id": "359",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "10",
+        "weight": "2.0",
+        "id": "402",
+        "maxAmount": "10"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "413",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "2",
+        "weight": "1.0",
+        "id": "411",
+        "maxAmount": "2"
+      },
+      {
+        "minAmount": "56",
+        "weight": "29.0",
+        "id": "995",
+        "maxAmount": "56"
+      },
+      {
+        "minAmount": "25",
+        "weight": "9.0",
+        "id": "995",
+        "maxAmount": "25"
+      },
+      {
+        "minAmount": "44",
+        "weight": "8.0",
+        "id": "995",
+        "maxAmount": "44"
+      },
+      {
+        "minAmount": "41",
+        "weight": "6.0",
+        "id": "995",
+        "maxAmount": "41"
+      },
+      {
+        "minAmount": "12",
+        "weight": "2.0",
+        "id": "45",
+        "maxAmount": "12"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "405",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "5733",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "14426",
+        "maxAmount": "1"
+      }
+    ]
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "526",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [
+      {
+        "minAmount": "1",
+        "weight": "55.0",
+        "id": "0",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "13.0",
+        "id": "12158",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "6.0",
+        "id": "12159",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "25.0",
+        "id": "12160",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "12163",
+        "maxAmount": "1"
+      }
+    ],
     "ids": "2455",
     "description": "Waterbirth Dagannoths (Melee Variant)",
     "main": [
