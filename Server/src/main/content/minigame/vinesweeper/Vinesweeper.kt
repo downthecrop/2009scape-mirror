@@ -34,6 +34,7 @@ import content.minigame.vinesweeper.Vinesweeper.Companion.SEED_LOCS
 import content.minigame.vinesweeper.Vinesweeper.Companion.populateSeeds
 import content.minigame.vinesweeper.Vinesweeper.Companion.scheduleNPCs
 import content.minigame.vinesweeper.Vinesweeper.Companion.sendPoints
+import core.cache.def.impl.ItemDefinition
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.game.interaction.InterfaceListener
@@ -83,7 +84,12 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
         on(Sceneries.PORTAL_29534, IntType.SCENERY, "enter") { player, _ ->
             val x = player.getAttribute("vinesweeper:return-tele:x", 3052)
             val y = player.getAttribute("vinesweeper:return-tele:y", 3304)
-            teleport(player, Location(x, y))
+            val loc = Location(x, y)
+            if (ZoneBorders.forRegion(11060).insideBorder(loc) && !ItemDefinition.canEnterEntrana(player)) {
+                sendMessage(player, "The power of Saradomin prevents you from taking armour or weaponry to Entrana.");
+                return@on true
+            }
+            teleport(player, loc)
             return@on true
         }
         on(SIGNS, IntType.SCENERY, "read") { player, node ->

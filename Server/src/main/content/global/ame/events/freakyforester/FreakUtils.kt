@@ -27,7 +27,9 @@ object FreakUtils{
     }
 
     fun teleport(player: Player) {
-        setAttribute(player, freakPreviousLoc, player.location)
+        if (getAttribute(player, freakPreviousLoc,null) == null) {
+            setAttribute(player, freakPreviousLoc, player.location)
+        }
         teleport(player, Location.create(2599, 4777 ,0))
     }
 

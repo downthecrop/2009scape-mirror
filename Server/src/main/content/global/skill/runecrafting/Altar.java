@@ -85,7 +85,7 @@ public enum Altar {
                 }
 		if (this == LAW) {
 			if (!ItemDefinition.canEnterEntrana(player)) {
-				player.sendMessage("You can't take weapons and armour into the law rift.");
+				player.sendMessage("The power of Saradomin prevents you from taking armour or weaponry to Entrana.");
 				return;
 			}
 		}

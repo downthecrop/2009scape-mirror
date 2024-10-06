@@ -84,7 +84,10 @@ public final class ShipCharter {
 	 */
 	public static int getCost(final Player player, Destination destination) {
 		int cost = destination.getCost(player, destination);
-		if (player.getEquipment().containsItem(RING_OF_CHAROS)) {// TODO: cabin fever quest
+		if (player.getQuestRepository().isComplete("Cabin Fever")) {
+			cost -= Math.round((cost / 2.));
+		}
+		if (player.getEquipment().containsItem(RING_OF_CHAROS)) {
 			cost -= Math.round((cost / 2.));
 		}
 		return cost;
@@ -96,12 +99,10 @@ public final class ShipCharter {
 	 * @return the hidden childs.
 	 */
 	public static int[] getHiddenComponents(final Player player, Destination base) {
-		final Destination[] restrictions = new Destination[] { /**
-																* 
-																* Destination.MOS_LE_HARMLESS,
-																*/
-		Destination.OO_GLOG, Destination.SHIPYARD, /* Destination.PORT_TYRAS, */
-		Destination.CRANDOR };
+		final Destination[] restrictions = new Destination[] { /* Destination.MOS_LE_HARMLESS, */
+			Destination.OO_GLOG, Destination.SHIPYARD, /* Destination.PORT_TYRAS, */
+			Destination.CRANDOR
+		};
 		List<Integer> childs = new ArrayList<>(20);
 		for (Destination destination : restrictions) {
 			childs.add(destination.getXChild());
@@ -141,10 +142,15 @@ public final class ShipCharter {
 		PORT_PHASMATYS(Location.create(3705, 3503, 1), 24, new int[] { 3650, 3250, 1850, 0, 0, 0, 2050, 1850, 3200, 1100 }, Location.create(3702, 3502, 0), 2, 13) {
 			@Override
 			public boolean checkTravel(Player player) {
-				return requireQuest(player, "Priest in Peril", "to go there");
+				return requireQuest(player, "Priest in Peril", "to go there.");
 			}
 		},
-		CRANDOR(new Location(2792, 3417, 1), 32, new int[] { 0, 480, 480, 925, 400, 3650, 1600, 400, 3200, 3800 }, null, 10, 21),
+		CRANDOR(Location.create(2792, 3417, 1), 32, new int[] { 0, 480, 480, 925, 400, 3650, 1600, 400, 3200, 3800 }, null, 10, 21) {
+			@Override
+			public boolean checkTravel(Player player) {
+				return requireQuest(player, "Dragon Slayer", "to go there.");
+			}
+		},
 		BRIMHAVEN(Location.create(2763, 3238, 1), 28, new int[] { 0, 480, 480, 925, 400, 3650, 1600, 400, 3200, 3800 }, Location.create(2760, 3238, 0), 6, 17){
 			@Override
 			public int getCost(Player player, Destination destination) {
@@ -161,7 +167,13 @@ public final class ShipCharter {
 				return super.getCost(player, destination);
 			}
 		},
-		PORT_TYRAS(Location.create(2142, 3122, 0), 23, new int[] { 3200, 3200, 3200, 1600, 3200, 3200, 3200, 3200, 0, 3200 }, Location.create(2143, 3122, 0), 1, 12),
+		PORT_TYRAS(Location.create(2142, 3122, 0), 23, new int[] { 3200, 3200, 3200, 1600, 3200, 3200, 3200, 3200, 0, 3200 }, Location.create(2143, 3122, 0), 1, 12) {
+			@Override
+			public boolean checkTravel(Player player) {
+				return hasRequirement(player, "Regicide");
+			}
+
+		},
 		KARAMJA(Location.create(2957, 3158, 1), 27, new int[] { 200, 480, 0, 225, 400, 1850, 0, 200, 3200, 2000 }, Location.create(2954, 3156, 0), 5, 16) {
 			@Override
 			public int getCost(Player player, Destination destination) {
@@ -178,9 +190,19 @@ public final class ShipCharter {
 				return super.getCost(player, destination);
 			}
 		},
-		SHIPYARD(Location.create(3001, 3032, 0), 26, new int[] { 400, 1600, 200, 225, 720, 1850, 400, 0, 3200, 900 }, Location.create(3001, 3032, 0), 4, 15),
+		SHIPYARD(Location.create(3001, 3032, 0), 26, new int[] { 400, 1600, 200, 225, 720, 1850, 400, 0, 3200, 900 }, Location.create(3001, 3032, 0), 4, 15) {
+			@Override
+			public boolean checkTravel(Player player) {
+				return requireQuest(player, "The Grand Tree", "to go there.");
+			}
+		},
 		OO_GLOG(Location.create(2623, 2857, 0), 33, new int[] { 300, 3400, 2000, 550, 5000, 2800, 1400, 900, 3200, 0}, Location.create(2622, 2857, 0), 11, 22),
-		MOS_LE_HARMLESS(Location.create(3671, 2931, 0), 31, new int[] { 725, 625, 1025, 0, 1025, 0, 325, 275, 1600, 500 }, Location.create(3671, 2933, 0), 9, 20);
+		MOS_LE_HARMLESS(Location.create(3671, 2931, 0), 31, new int[] { 725, 625, 1025, 0, 1025, 0, 325, 275, 1600, 500 }, Location.create(3671, 2933, 0), 9, 20) {
+			@Override
+			public boolean checkTravel(Player player) {
+				return hasRequirement(player, "Cabin Fever");
+			}
+		};
 
 		/**
 		 * Constructs a new {@code ShipCharter} {@code Object}.

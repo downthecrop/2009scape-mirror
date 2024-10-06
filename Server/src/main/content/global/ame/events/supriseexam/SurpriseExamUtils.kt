@@ -30,12 +30,12 @@ object SurpriseExamUtils {
     )
 
     fun teleport(player: Player){
-        player.setAttribute(SE_KEY_LOC,player.location)
-
+        if (getAttribute(player, SE_KEY_LOC, null) == null) {
+            player.setAttribute(SE_KEY_LOC, player.location)
+        }
         registerLogoutListener(player, SE_LOGOUT_KEY){p ->
             p.location = getAttribute(p, SE_KEY_LOC, ServerConstants.HOME_LOCATION)
         }
-
         player.properties.teleportLocation = Location.create(1886, 5025, 0)
     }
 

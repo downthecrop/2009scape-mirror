@@ -16,7 +16,6 @@ object EvilBobUtils {
     const val prevLocation = "/save:original-loc"
     const val eventComplete = "/save:evilbob:eventcomplete"
     const val assignedFishingZone = "/save:evilbob:fishingzone"
-    const val fishCaught = "evilbob:fishcaught"
     const val attentive = "/save:evilbob:attentive"
     const val servantHelpDialogueSeen = "/save:evilbob:servantdialogeseen"
     const val attentiveNewSpot = "/save:evilbob:attentivenewspot"
@@ -53,7 +52,9 @@ object EvilBobUtils {
     }
 
     fun teleport(player: Player) {
-        setAttribute(player, prevLocation, player.location)
+        if (getAttribute(player, prevLocation, null) == null) {
+            setAttribute(player, prevLocation, player.location)
+        }
         player.properties.teleportLocation = Location.create(3419, 4776, 0)
     }
 

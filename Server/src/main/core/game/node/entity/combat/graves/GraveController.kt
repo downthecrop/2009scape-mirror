@@ -106,6 +106,12 @@ class GraveController : PersistWorld, TickListener, InteractionListener, Command
             return true
         }
 
+        val gOwner = Repository.uid_map[g.ownerUid]
+        if (gOwner != null && gOwner.ironmanManager.isIronman) {
+            sendMessage(player, "This grave belongs to an Ironman.")
+            return true
+        }
+
         if (getStatLevel(player, Skills.PRAYER) < 70) {
             sendMessage(player, "You need a Prayer level of 70 to bless a grave.")
             return true
@@ -125,7 +131,6 @@ class GraveController : PersistWorld, TickListener, InteractionListener, Command
         playAudio(player, Sounds.PRAYER_RECHARGE_2674)
         animate(player, 645)
 
-        val gOwner = Repository.uid_map[g.ownerUid]
         if (gOwner != null) {
             sendMessage(gOwner, colorize("%RYour grave has been blessed."))
         }

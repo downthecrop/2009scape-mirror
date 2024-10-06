@@ -23,7 +23,9 @@ object DrillDemonUtils {
     val DD_NPC = NPCs.SERGEANT_DAMIEN_2790
 
     fun teleport(player: Player) {
-        setAttribute(player, DD_KEY_RETURN_LOC, player.location)
+        if (getAttribute(player, DD_KEY_RETURN_LOC, null) == null) {
+            setAttribute(player, DD_KEY_RETURN_LOC, player.location)
+        }
         teleport(player, Location.create(3163, 4819, 0))
         player.interfaceManager.closeDefaultTabs()
         setComponentVisibility(player, 548, 69, true)

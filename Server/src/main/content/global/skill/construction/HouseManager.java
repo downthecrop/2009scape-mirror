@@ -188,6 +188,7 @@ public final class HouseManager {
 			construct();
 		}
 		player.setAttribute("poh_entry", HouseManager.this);
+		player.setAttribute("/save:original-loc", location.getExitLocation());
 		player.lock(1);
 		player.debug("House location: " + houseRegion.getBaseLocation() + ", entry: " + getEnterLocation());
 	}
@@ -267,6 +268,7 @@ public final class HouseManager {
 		if (house.isInHouse(player)) {
 			player.animate(Animation.RESET);
 			player.getProperties().setTeleportLocation(house.location.getExitLocation());
+			removeAttribute(player, "original-loc");
 		}
 	}
 
