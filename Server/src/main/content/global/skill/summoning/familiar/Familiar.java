@@ -27,7 +27,6 @@ import core.tools.Log;
 import core.tools.RandomFunction;
 import core.game.node.entity.combat.CombatPulse;
 import core.game.node.entity.combat.CombatSwingHandler;
-import core.tools.SystemLogger;
 import core.game.world.GameWorld;
 import content.global.skill.summoning.SummoningPouch;
 import org.rs09.consts.Sounds;
@@ -120,7 +119,30 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	 */
 	private final int attackStyle;
 
-  private boolean firstCall = true;
+	/**
+	 * The amount of points to drain every tick.
+	 * This is a constant depending on the familiar's level req and time remaining (GL #1903).
+	 * https://runescape.wiki/w/Summoning_points?oldid=2171795: "Over the life of the familiar, the number of summoning
+	 * points drained will be equal to the level required to summon the familiar (unless you run out of summoning
+	 * points). This means that if a player summons a bunyip with 75 Summoning points remaining, 7 points will be
+	 * drained immediately, and 61 more will be drained over the life the bunyip, for a total of 68 points (the level of
+	 * the bunyip)."
+	 */
+	private final double pointsPerTick;
+
+	/**
+	 * Keeps track of the fractional pointsPerTick that have been drained already. If >1.0, drain a point and subtract
+	 * 1.0. Note that this means that we will never drain a point on the final tick (unless pointsPerTick turned out to
+	 * be integer, but this case is handled by the 'ticks > 0' check in handleTickActions()). This is intentional; it
+	 * allows us to, correctly, artificially extend the interval by one so that the drain events are evenly spaced
+	 * throughout the lifetime of the summon (refer to the dreadfowl example below).
+	 */
+	private double fracDrain = 0.0;
+
+	/**
+	 * Whether this is the first call (i.e. not a renew summon).
+	 */
+	private boolean firstCall = true;
 
 	/**
 	 * Constructs a new {@code Familiar} {@code Object}.
@@ -141,6 +163,23 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		this.specialCost = specialCost;
 		this.combatFamiliar = NPCDefinition.forId(getOriginalId() + 1).getName().equals(getName());
 		this.attackStyle = attackStyle;
+		/* The initial points are drained on summon. Then, the remaining points are drained over an interval.
+		 * To prevent the last point from being drained only very late, we artificially extend the interval by one.
+		 * Example: a dreadfowl drains 1 point on summon, and then needs to drain 3 points over 400 ticks. Naively
+		 * draining a point on ticks 133, 266, and 399 allows players to save a point at the expense of just one tick.
+		 * Instead, we drain on ticks 100, 200, and 300.
+		 * Example 2: a spirit tz-kih drains 3 points on summon, then needs to drain 19 more points over 1800 ticks.
+		 * This means it needs to drain a point every 90 ticks, since the 0th tick remaining will not drain.
+		 * Example 3: a vampire bat needs to drain 27 points over 3300 ticks. It hence drains a point every ~118 ticks.
+		 * Example 4: an abyssal titan drains 10 points on summon, then needs to drain 83 more points over 3200 ticks.
+		 * This means it needs to drain a point every ~34 ticks.
+		 */
+		if (pouchId == -1) {
+			this.pointsPerTick = 0.0;
+		} else {
+			int drain = pouch.getLevelRequired() - pouch.getSummonCost() + 1;
+			this.pointsPerTick = (double) drain / maximumTicks;
+		}
 	}
 
 	/**
@@ -176,17 +215,22 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 			transform();
 		}
 	}
-	
-	@Override	
+
+	@Override
 	public void init() {
 		init(getSpawnLocation(), true);
 	}
 
 	@Override
 	public void handleTickActions() {
-		if (ticks-- % 50 == 0) {
-			updateSpecialPoints(-15);
+		ticks--;
+		fracDrain += pointsPerTick;
+		if (fracDrain > 1.0 && ticks > 0) {
+			fracDrain -= 1.0;
 			owner.getSkills().updateLevel(Skills.SUMMONING, -1, 0);
+		}
+		if (ticks % 50 == 0) {
+			updateSpecialPoints(-15);
 			if (!getText().isEmpty()) {
 				super.sendChat(getText());
 			}
@@ -231,7 +275,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	@Override
 	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 		if (entity == owner) {
-			if(message) {
+			if (message) {
 				owner.getPacketDispatch().sendMessage("You can't just betray your own familiar like that!");
 			}
 			return false;
@@ -243,13 +287,13 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		}
 		if (!getProperties().isMultiZone()) {
 			if (entity instanceof Player && !((Player) entity).getProperties().isMultiZone()) {
-				if(message) {
+				if (message) {
 					((Player) entity).getPacketDispatch().sendMessage("You have to be in multicombat to attack a player's familiar.");
 				}
 				return false;
 			}
 			if (entity instanceof Player) {
-				if(message) {
+				if (message) {
 					((Player) entity).getPacketDispatch().sendMessage("This familiar is not in the a multicombat zone.");
 				}
 			}
@@ -257,13 +301,13 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		}
 		if (entity instanceof Player) {
 			if (!((Player) entity).getSkullManager().isWilderness()) {
-				if(message) {
+				if (message) {
 					((Player) entity).getPacketDispatch().sendMessage("You have to be in the wilderness to attack a player's familiar.");
 				}
 				return false;
 			}
 			if (!owner.getSkullManager().isWilderness()) {
-				if(message) {
+				if (message) {
 					((Player) entity).getPacketDispatch().sendMessage("This familiar's owner is not in the wilderness.");
 				}
 				return false;
@@ -340,8 +384,8 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	private void sendTimeRemaining() {
 		int minutes = ticks / 100;
 		int centiminutes = ticks % 100;
-                setVarbit(owner, 4534, minutes);
-                setVarbit(owner, 4290, centiminutes > 49 ? 1 : 0);
+		setVarbit(owner, 4534, minutes);
+		setVarbit(owner, 4290, centiminutes > 49 ? 1 : 0);
 	}
 
 	/**
@@ -542,9 +586,9 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	 * Sends the familiar packets.
 	 */
 	public void sendConfiguration() {
-                setVarp(owner, 448, getPouchId());
-                setVarp(owner, 1174, getOriginalId());
-                setVarp(owner, 1175, specialCost << 23);
+		setVarp(owner, 448, getPouchId());
+		setVarp(owner, 1174, getOriginalId());
+		setVarp(owner, 1175, specialCost << 23);
 		sendTimeRemaining();
 		updateSpecialPoints(0);
 	}
@@ -565,13 +609,13 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		if (isInvisible()) return true;
 		getProperties().setTeleportLocation(destination);
 		if (!(this instanceof Pet)) {
-            if(firstCall) {
+			if (firstCall) {
 				// TODO: Each familiar has its own initial summon sound that needs to be implemented at some point
-                playAudio(owner, Sounds.SUMMON_NPC_188);
-                firstCall = false;
-            } else {
-                playAudio(owner, Sounds.SUMMON_NPC_188);
-            }
+				playAudio(owner, Sounds.SUMMON_NPC_188);
+				firstCall = false;
+			} else {
+				playAudio(owner, Sounds.SUMMON_NPC_188);
+			}
 			if (size() > 1) {
 				graphics(LARGE_SUMMON_GRAPHIC);
 			} else {
@@ -607,10 +651,10 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		getPulseManager().clear();
 		owner.getInterfaceManager().removeTabs(7);
 		owner.getFamiliarManager().setFamiliar(null);
-                setVarp(owner, 448, -1);
-                setVarp(owner, 1176, 0);
-                setVarp(owner, 1175, 182986);
-                setVarp(owner, 1174, -1);
+		setVarp(owner, 448, -1);
+		setVarp(owner, 1176, 0);
+		setVarp(owner, 1175, 182986);
+		setVarp(owner, 1174, -1);
 		owner.getAppearance().sync();
 		owner.getInterfaceManager().setViewedTab(3);
 	}
@@ -624,14 +668,14 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		if (specialPoints > 60) {
 			specialPoints = 60;
 		}
-                setVarp(owner, 1177, specialPoints);
+		setVarp(owner, 1177, specialPoints);
 	}
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		for (int id : getIds()) {
 			if (FamiliarManager.getFamiliars().containsKey(id)) {
-				log(this.getClass(), Log.ERR,  "Familiar " + id + " was already registered!");
+				log(this.getClass(), Log.ERR, "Familiar " + id + " was already registered!");
 				return null;
 			}
 			FamiliarManager.getFamiliars().put(id, this);
