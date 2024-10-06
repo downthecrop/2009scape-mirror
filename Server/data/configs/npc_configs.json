@@ -26861,7 +26861,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "An angry Ogre in a funny hat.",
+    "examine": "Big, ugly, and smelly.",
     "melee_animation": "359",
     "range_animation": "359",
     "attack_speed": "6",
@@ -26869,14 +26869,14 @@
     "magic_animation": "359",
     "death_animation": "361",
     "name": "Ogre",
-    "defence_level": "30",
+    "defence_level": "54",
     "safespot": null,
-    "lifepoints": "48",
-    "strength_level": "30",
+    "lifepoints": "60",
+    "strength_level": "54",
     "id": "2801",
     "aggressive": "true",
     "range_level": "1",
-    "attack_level": "30"
+    "attack_level": "54"
   },
   {
     "examine": "They just call him 'Coach'.",
