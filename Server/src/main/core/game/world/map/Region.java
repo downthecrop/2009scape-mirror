@@ -3,7 +3,6 @@ package core.game.world.map;
 import core.cache.Cache;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.music.MusicEntry;
 import core.game.node.entity.player.link.music.MusicZone;
 import core.game.system.communication.CommunicationInfo;
 import core.game.system.task.Pulse;
@@ -62,9 +61,9 @@ public class Region {
 	private final List<RegionZone> regionZones = new ArrayList<>(20);
 
 	/**
-	 * The region-wide music track for this region.
+	 * The region-wide music track ID for this region.
 	 */
-	private MusicEntry music = null;
+	private int music = -1;
 
 	/**
 	 * Any tile-specific music zones lying in this region.
@@ -481,15 +480,15 @@ public class Region {
 	/**
 	 * Sets the region-wide music track.
 	 */
-	public void setMusic(MusicEntry music) {
+	public void setMusic(int music) {
 		this.music = music;
 	}
 
 	/**
 	 * Gets the region-wide music track
-	 * @return The music entry
+	 * @return The music entry ID
 	 */
-	public MusicEntry getMusic() {
+	public int getMusic() {
 		return this.music;
 	}
 

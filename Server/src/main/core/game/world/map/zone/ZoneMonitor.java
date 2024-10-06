@@ -410,13 +410,13 @@ public final class ZoneMonitor {
 				return;
 			}
 		}
-		MusicEntry music = r.getMusic();
-		if (music == null) {
+		int music = r.getMusic();
+		if (music == -1) {
 			if (!player.getMusicPlayer().isPlaying()) {
 				player.getMusicPlayer().playDefault();
 			}
 		} else {
-			player.getMusicPlayer().play(music);
+			player.getMusicPlayer().unlock(music, true);
 		}
 	}
 

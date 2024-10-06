@@ -40,7 +40,7 @@ class MusicConfigLoader {
             val e = config as JSONObject
             val region = Integer.parseInt(e["region"].toString())
             val id = Integer.parseInt(e["id"].toString())
-            RegionManager.forId(region).music = MusicEntry.forId(id)
+            RegionManager.forId(region).music = id
             count++
         }
         log(this::class.java, Log.FINE, "Parsed $count region music configs.")

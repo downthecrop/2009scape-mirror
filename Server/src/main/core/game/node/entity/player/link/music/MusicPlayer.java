@@ -10,9 +10,7 @@ import core.net.packet.context.StringContext;
 import core.net.packet.out.MusicPacket;
 import core.net.packet.out.StringPacket;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import static core.api.ContentAPIKt.*;
 
@@ -199,10 +197,9 @@ public final class MusicPlayer {
 	public void unlock(int id, boolean play) {
 		MusicEntry entry = MusicEntry.forId(id);
 		if (entry == null) {
-
 			return;
 		}
-		if (!unlocked.containsKey(entry.getIndex())) {
+		if (!entry.getName().equals(" ") && !unlocked.containsKey(entry.getIndex())) {
 			unlocked.put(entry.getIndex(), entry);
 			player.getPacketDispatch().sendMessage("<col=FF0000>You have unlocked a new music track: " + entry.getName() + ".</col>");
 			refreshList();
