@@ -85,7 +85,7 @@ public final class PowerstabSpecialHandler extends MeleeSwingHandler implements 
 				BattleState s = targets[count++] = new BattleState(entity, e);
 				int hit = 0;
 				if (isAccurateImpact(entity, e)) {
-					hit = RandomFunction.random(calculateHit(entity, e, 1.0));
+					hit = RandomFunction.random(calculateHit(entity, e, 1.0) + 1);
 				}
                 s.setStyle(CombatStyle.MELEE);
 				s.setEstimatedHit(hit);

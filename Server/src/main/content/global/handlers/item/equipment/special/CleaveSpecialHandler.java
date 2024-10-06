@@ -57,8 +57,8 @@ public final class CleaveSpecialHandler extends MeleeSwingHandler implements Plu
 		}
         state.setStyle(CombatStyle.MELEE);
 		int hit = 0;
-		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.18, 1.0)) {
-			hit = RandomFunction.random(calculateHit(entity, victim, 1.2203));
+		if (isAccurateImpact(entity, victim, CombatStyle.MELEE)) {
+			hit = RandomFunction.random(calculateHit(entity, victim, 1.25) + 1);
 		}
 		state.setEstimatedHit(hit);
 		return 1;

@@ -3,9 +3,11 @@ package content.global.handlers.item.equipment.special;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
+import core.game.node.entity.combat.DeathTask;
 import core.game.node.entity.combat.MeleeSwingHandler;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.prayer.PrayerType;
 import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
@@ -65,16 +67,22 @@ public final class QuickSmashSpecialHandler extends MeleeSwingHandler implements
 				return -1;
 			}
 		}
+		if (DeathTask.isDead(victim)) {
+			return -1;
+		}
 		if (!p.getSettings().drainSpecial(SPECIAL_ENERGY)) {
 			return -1;
 		}
-        // TODO: apply protection prayers/experience manually (since this is bypassing normal BattleState machinery)
 		visualize(entity, victim, null);
 		int hit = 0;
 		if (isAccurateImpact(entity, victim)) {
-			hit = RandomFunction.random(calculateHit(entity, victim, 1.));
+			hit = RandomFunction.random(calculateHit(entity, victim, 1.0) + 1);
 		}
-		victim.getImpactHandler().handleImpact(entity, hit, CombatStyle.MELEE);
+		if (victim.hasProtectionPrayer(CombatStyle.MELEE))
+			hit *= (victim instanceof Player) ? 0.6 : 0;
+		BattleState b = new BattleState();
+		b.setEstimatedHit(victim.getImpactHandler().handleImpact(entity, hit, CombatStyle.MELEE).getAmount());
+		addExperience(entity, victim, b);
 		return 1;
 	}
 

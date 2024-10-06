@@ -323,9 +323,6 @@ public final class EquipmentContainer extends Container {
 			if (item != null) {
 				int[] bonus = item.getDefinition().getConfiguration(ItemConfigParser.BONUS, new int[15]);
 				for (int i = 0; i < bonus.length; i++) {
-					if (i == 14 && bonuses[i] != 0) {
-						continue;
-					}
 					bonuses[i] += bonus[i];
 				}
 			}

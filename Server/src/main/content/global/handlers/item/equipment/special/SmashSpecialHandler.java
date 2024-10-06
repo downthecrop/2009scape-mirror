@@ -59,7 +59,8 @@ public final class SmashSpecialHandler extends MeleeSwingHandler implements Plug
         state.setStyle(CombatStyle.MELEE);
 		int hit = 0;
 		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.0, 1.0)) {
-			hit = RandomFunction.random(calculateHit(entity, victim, RandomFunction.random(1.0, 1.5)));
+			int max = calculateHit(entity, victim, 1.0);
+			hit = max / 4 + RandomFunction.random(max + 1);
 			int lower = (int) (victim.getSkills().getLevel(Skills.DEFENCE) * 0.30);
 			victim.getSkills().updateLevel(Skills.DEFENCE, -lower, 0);
 		}

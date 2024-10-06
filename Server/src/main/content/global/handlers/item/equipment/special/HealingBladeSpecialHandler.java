@@ -57,20 +57,20 @@ public final class HealingBladeSpecialHandler extends MeleeSwingHandler implemen
 		}
         state.setStyle(CombatStyle.MELEE);
 		int hit = 0;
-		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.12, 0.98)) {
-			hit = RandomFunction.random(calculateHit(entity, victim, 1.005));
+		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 2.0, 1.0)) {
+			hit = RandomFunction.random(calculateHit(entity, victim, 1.1) + 1);
+			int healthRestore = hit / 2;
+			double prayerRestore = hit * 0.25;
+			if (healthRestore < 10) {
+				healthRestore = 10;
+			}
+			if (prayerRestore < 5) {
+				prayerRestore = 5;
+			}
+			entity.getSkills().heal(healthRestore);
+			entity.getSkills().incrementPrayerPoints(prayerRestore);
 		}
 		state.setEstimatedHit(hit);
-		int healthRestore = hit / 2;
-		double prayerRestore = hit * 0.25;
-		if (healthRestore < 10) {
-			healthRestore = 10;
-		}
-		if (prayerRestore < 5) {
-			prayerRestore = 5;
-		}
-		entity.getSkills().heal(healthRestore);
-		entity.getSkills().incrementPrayerPoints(prayerRestore);
 		return 1;
 	}
 

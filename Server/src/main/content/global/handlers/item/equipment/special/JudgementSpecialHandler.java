@@ -57,8 +57,8 @@ public final class JudgementSpecialHandler extends MeleeSwingHandler implements 
 		}
         state.setStyle(CombatStyle.MELEE);
 		int hit = 0;
-		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.25, 0.98)) {
-			hit = RandomFunction.random(calculateHit(entity, victim, 1.25));
+		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 2.0, 1.0)) {
+			hit = RandomFunction.random((int) (calculateHit(entity, victim, 1.1) * 1.25) + 1);
 		}
 		state.setEstimatedHit(hit);
 		return 1;

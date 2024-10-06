@@ -57,8 +57,8 @@ public final class EnergyDrainSpecialHandler extends MeleeSwingHandler implement
 		}
         state.setStyle(CombatStyle.MELEE);
 		int hit = 0;
-		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.2, 1.0)) {
-			hit = RandomFunction.random(calculateHit(entity, victim, 1));
+		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.25, 1.0)) {
+			hit = RandomFunction.random(calculateHit(entity, victim, 1) + 1);
 		}
 		if (victim instanceof Player) {
 			((Player) victim).getSettings().updateRunEnergy(10);

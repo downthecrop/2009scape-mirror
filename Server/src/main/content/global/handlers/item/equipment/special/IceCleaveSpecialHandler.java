@@ -57,8 +57,8 @@ public final class IceCleaveSpecialHandler extends MeleeSwingHandler implements 
 		}
         state.setStyle(CombatStyle.MELEE);
 		int hit = 0;
-		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.075, 0.98)) {
-			hit = RandomFunction.random(calculateHit(entity, victim, 1.005));
+		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 2.0, 1.0)) {
+			hit = RandomFunction.random(calculateHit(entity, victim, 1.1) + 1);
 		}
 		state.setEstimatedHit(hit);
 		return 1;

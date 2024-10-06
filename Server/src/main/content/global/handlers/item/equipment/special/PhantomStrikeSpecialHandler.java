@@ -49,7 +49,7 @@ public final class PhantomStrikeSpecialHandler extends RangeSwingHandler impleme
         state.setMaximumHit(max);
         int hit = 0;
         if (isAccurateImpact(entity, victim)) {
-            hit = RandomFunction.random(max);
+            hit = RandomFunction.random(max + 1);
         }
         state.setEstimatedHit(hit);
         Companion.useAmmo(entity, state, victim.getLocation());

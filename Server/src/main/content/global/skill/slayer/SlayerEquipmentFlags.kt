@@ -72,7 +72,7 @@ object SlayerEquipmentFlags {
         val isCape = SlayerManager.getInstance(player).flags.equipmentFlags == 0x3F
         val hasMask = hasBlackMask(player)
 
-        return if(hasMask) 1.15
+        return if(hasMask) 1.1667
         else if(isCape) 1.075
         else 1.0
     }

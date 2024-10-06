@@ -3,6 +3,7 @@ package content.global.handlers.item.equipment.special;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
+import core.game.node.entity.combat.SwingHandlerFlag;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
@@ -24,6 +25,13 @@ import static core.api.ContentAPIKt.playGlobalAudio;
  */
 @Initializable
 public final class SnapshotSpecialHandler extends RangeSwingHandler implements Plugin<Object> {
+
+	/**
+	 * Constructs a new {@code SnapshotSpecialHandler} {@code Object}.
+	 */
+	public SnapshotSpecialHandler() {
+		super(SwingHandlerFlag.IGNORE_PRAYER_BOOSTS_DAMAGE);
+	}
 
 	/**
 	 * The special energy required.
@@ -67,13 +75,13 @@ public final class SnapshotSpecialHandler extends RangeSwingHandler implements P
 		int max = calculateHit(entity, victim, 1.0);
 		state.setMaximumHit(max);
 		int hit = 0;
-		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 0.9, 1.0)) {
-			hit = RandomFunction.random(max);
+		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.43, 1.0)) {
+			hit = RandomFunction.random(max + 1);
 		}
 		state.setEstimatedHit(hit);
 		hit = 0;
-		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 0.9, 1.0)) {
-			hit = RandomFunction.random(max);
+		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.43, 1.0)) {
+			hit = RandomFunction.random(max + 1);
 		}
 		state.setSecondaryHit(hit);
 		Companion.useAmmo(entity, state, victim.getLocation());

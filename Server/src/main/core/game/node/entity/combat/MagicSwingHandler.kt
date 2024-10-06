@@ -1,5 +1,6 @@
 package core.game.node.entity.combat
 
+import content.global.skill.skillcapeperks.SkillcapePerks
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.equipment.ArmourSet
 import core.game.node.entity.combat.spell.SpellType
@@ -61,7 +62,7 @@ open class MagicSwingHandler (vararg flags: SwingHandlerFlag)
         for (s in state.targets) {
             var hit = -1
             s.spell = spell
-            if (isAccurateImpact(entity, s.victim, CombatStyle.MAGIC, 1.3, 1.0)) {
+            if (isAccurateImpact(entity, s.victim, CombatStyle.MAGIC)) {
                 s.maximumHit = max
                 hit = RandomFunction.random(max)
             }
@@ -136,31 +137,31 @@ open class MagicSwingHandler (vararg flags: SwingHandlerFlag)
     }
 
     override fun calculateAccuracy(entity: Entity?): Int {
-        val baseLevel = entity!!.skills.getStaticLevel(Skills.MAGIC)
-        var spellRequirement = baseLevel
-        if (entity is Player) {
-            if (entity.getProperties().spell != null) {
-                spellRequirement = entity.getProperties().spell.level
-            } else if (entity.getProperties().autocastSpell != null) {
-                spellRequirement = entity.getProperties().autocastSpell.level
+        entity ?: return 0
+
+        val styleAttackBonus = entity.properties.bonuses[WeaponInterface.BONUS_MAGIC] + 64
+        when (entity) {
+            is Player -> {
+                var effectiveMagicLevel = entity.skills.getLevel(Skills.MAGIC, true).toDouble()
+                if(!flags.contains(SwingHandlerFlag.IGNORE_PRAYER_BOOSTS_ACCURACY))
+                    effectiveMagicLevel = floor(effectiveMagicLevel + (entity.prayer.getSkillBonus(Skills.MAGIC) * effectiveMagicLevel))
+                effectiveMagicLevel += 8
+                effectiveMagicLevel *= getSetMultiplier(entity, Skills.MAGIC)
+                effectiveMagicLevel = floor(effectiveMagicLevel)
+
+                if (!flags.contains(SwingHandlerFlag.IGNORE_STAT_BOOSTS_ACCURACY))
+                    effectiveMagicLevel *= styleAttackBonus
+                else effectiveMagicLevel *= 64
+
+                return effectiveMagicLevel.toInt()
+            }
+            is NPC -> {
+                val magicLevel = entity.skills.getLevel(Skills.MAGIC) + 9
+                return magicLevel * styleAttackBonus
             }
         }
-        var spellBonus = 0.0
-        if (baseLevel > spellRequirement) {
-            spellBonus = (baseLevel - spellRequirement) * .3
-        }
-        val level = entity.skills.getLevel(Skills.MAGIC, true)
-        var prayer = 1.0
-        if (entity is Player && !flags.contains(SwingHandlerFlag.IGNORE_PRAYER_BOOSTS_ACCURACY)) {
-            prayer += entity.prayer.getSkillBonus(Skills.MAGIC)
-        }
-        val additional = getSetMultiplier(entity, Skills.MAGIC)
-        val effective = floor(level * prayer * additional + spellBonus)
-        val bonus =
-            if (!flags.contains(SwingHandlerFlag.IGNORE_STAT_BOOSTS_ACCURACY))
-                entity.properties.bonuses[WeaponInterface.BONUS_MAGIC]
-            else 0
-        return floor((effective + 8) * (bonus + 64) / 10).toInt()
+
+        return 0
     }
 
     override fun calculateHit(entity: Entity?, victim: Entity?, modifier: Double): Int {
@@ -183,14 +184,31 @@ open class MagicSwingHandler (vararg flags: SwingHandlerFlag)
     }
 
     override fun calculateDefence(victim: Entity?, attacker: Entity?): Int {
-        val level = victim!!.skills.getLevel(Skills.DEFENCE, true)
-        var prayer = 1.0
-        if (victim is Player) {
-            prayer += victim.prayer.getSkillBonus(Skills.MAGIC)
+        victim ?: return 0
+        attacker ?: return 0
+
+        val styleDefenceBonus = victim.properties.bonuses[WeaponInterface.BONUS_MAGIC + 5] + 64
+        when (victim) {
+            is Player -> {
+                var effectiveDefenceLevel = victim.skills.getLevel(Skills.DEFENCE).toDouble()
+                effectiveDefenceLevel = floor(effectiveDefenceLevel + (victim.prayer.getSkillBonus(Skills.DEFENCE) * effectiveDefenceLevel))
+                if (victim.properties.attackStyle.style == WeaponInterface.STYLE_DEFENSIVE || victim.properties.attackStyle.style == WeaponInterface.STYLE_LONG_RANGE) effectiveDefenceLevel += 3
+                else if (victim.properties.attackStyle.style == WeaponInterface.STYLE_CONTROLLED) effectiveDefenceLevel += 1
+                effectiveDefenceLevel *= getSetMultiplier(victim, Skills.DEFENCE)
+
+                var effectiveMagicLevel = victim.skills.getLevel(Skills.MAGIC).toDouble()
+                effectiveMagicLevel = floor(effectiveMagicLevel + (victim.prayer.getSkillBonus(Skills.MAGIC) * effectiveMagicLevel))
+
+                effectiveDefenceLevel = effectiveDefenceLevel * 0.3 + effectiveMagicLevel * 0.7 + 8
+                return effectiveDefenceLevel.toInt() * styleDefenceBonus
+            }
+            is NPC -> {
+                val defLevel = victim.skills.getLevel(Skills.MAGIC) + 9
+                return defLevel * styleDefenceBonus
+            }
         }
-        val effective = floor(level * prayer * 0.3) + victim.skills.getLevel(Skills.MAGIC, true) * 0.7
-        val equipment = victim.properties.bonuses[WeaponInterface.BONUS_MAGIC + 5]
-        return floor((effective + 8) * (equipment + 64) / 10).toInt()
+
+        return 0
     }
 
     override fun getSetMultiplier(e: Entity?, skillId: Int): Double {

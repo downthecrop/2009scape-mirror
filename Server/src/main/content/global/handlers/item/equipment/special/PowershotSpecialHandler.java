@@ -56,10 +56,7 @@ public final class PowershotSpecialHandler extends RangeSwingHandler implements 
 			return -1;
 		}
         state.setStyle(CombatStyle.RANGE);
-		int hit = 0;
-		if (isAccurateImpact(entity, victim, CombatStyle.RANGE, 1.98, 1.0)) {
-			hit = RandomFunction.random(calculateHit(entity, victim, 1.0));
-		}
+		int hit = RandomFunction.random(calculateHit(entity, victim, 1.0) + 1);
 		state.setEstimatedHit(hit);
 		Companion.useAmmo(entity, state, victim.getLocation());
 		return 1 + (int) Math.ceil(entity.getLocation().getDistance(victim.getLocation()) * 0.3);

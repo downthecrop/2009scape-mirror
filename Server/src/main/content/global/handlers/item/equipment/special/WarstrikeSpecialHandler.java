@@ -57,8 +57,8 @@ public final class WarstrikeSpecialHandler extends MeleeSwingHandler implements 
 		}
         state.setStyle(CombatStyle.MELEE);
 		int hit = 0;
-		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.049, 0.98)) {
-			hit = RandomFunction.random(calculateHit(entity, victim, 1.1));
+		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 2.0, 1.0)) {
+			hit = RandomFunction.random((int) (calculateHit(entity, victim, 1.1) * 1.1) + 1);
 		}
 		state.setEstimatedHit(hit);
 		if (victim instanceof Player) {
@@ -68,10 +68,10 @@ public final class WarstrikeSpecialHandler extends MeleeSwingHandler implements 
 		if (left > 0) {
 			left = -victim.getSkills().updateLevel(Skills.STRENGTH, -left, 0);
 			if (left > 0) {
-				left = -victim.getSkills().updateLevel(Skills.ATTACK, -left, 0);
+				left = (int) -(victim.getSkills().getPrayerPoints() + left);
+				victim.getSkills().decrementPrayerPoints(left);
 				if (left > 0) {
-					left = (int) -(victim.getSkills().getPrayerPoints() + left);
-					victim.getSkills().decrementPrayerPoints(left);
+					left = -victim.getSkills().updateLevel(Skills.ATTACK, -left, 0);
 					if (left > 0) {
 						left = -victim.getSkills().updateLevel(Skills.MAGIC, -left, 0);
 						if (left > 0)

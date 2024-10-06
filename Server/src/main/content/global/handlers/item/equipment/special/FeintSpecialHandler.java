@@ -52,8 +52,9 @@ public final class FeintSpecialHandler extends MeleeSwingHandler implements Plug
 		}
         state.setStyle(CombatStyle.MELEE);
 		int hit = 0;
-		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.0, 1.0)) {
-			hit = RandomFunction.random(calculateHit(entity, victim, RandomFunction.random(1.0, 1.2)));
+		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.0, 0.25)) {
+			int minDamage = calculateHit(entity, victim, 0.2);
+			hit = minDamage + RandomFunction.random(calculateHit(entity, victim, 1.0) + 1);
 		}
 		state.setEstimatedHit(hit);
 		return 1;

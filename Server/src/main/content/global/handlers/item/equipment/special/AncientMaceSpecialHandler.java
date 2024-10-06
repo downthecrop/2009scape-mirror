@@ -57,7 +57,7 @@ public final class AncientMaceSpecialHandler extends MeleeSwingHandler implement
         state.setStyle(CombatStyle.MELEE);
 		int hit = 0;
 		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.1, 0.98)) {
-			hit = RandomFunction.random(calculateHit(entity, victim, 1));
+			hit = RandomFunction.random(calculateHit(entity, victim, 1) + 1);
 			if (entity.getSkills().getPrayerPoints() < entity.getSkills().getStaticLevel(5)) {
 				entity.getSkills().setPrayerPoints(entity.getSkills().getPrayerPoints() + hit);
 			}

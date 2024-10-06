@@ -13,14 +13,14 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.GroundItem
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
+import core.game.system.config.ItemConfigParser
 import core.game.system.task.Pulse
+import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Graphics
-import core.tools.RandomFunction
-import core.tools.SystemLogger
-import core.game.world.GameWorld
 import core.tools.Log
+import core.tools.RandomFunction
 import java.util.*
 import kotlin.math.ceil
 import kotlin.math.floor
@@ -83,7 +83,7 @@ open class RangeSwingHandler (vararg flags: SwingHandlerFlag)
         state.estimatedHit = hit
         if (state.weapon.type == WeaponType.DOUBLE_SHOT) {
             if (isAccurateImpact(entity, victim, CombatStyle.RANGE)) {
-                hit = RandomFunction.random(calculateHit(entity, victim, 1.0))
+                hit = RandomFunction.random(calculateHit(entity, victim, 1.0) + 1)
             }
             state.secondaryHit = hit
         }
@@ -183,56 +183,92 @@ open class RangeSwingHandler (vararg flags: SwingHandlerFlag)
 
     override fun calculateAccuracy(entity: Entity?): Int {
         entity ?: return 0
-        var effectiveRangedLevel = entity.skills.getLevel(Skills.RANGE).toDouble()
-        if(entity is Player && !flags.contains(SwingHandlerFlag.IGNORE_PRAYER_BOOSTS_ACCURACY))
-            effectiveRangedLevel = floor(effectiveRangedLevel + (entity.prayer.getSkillBonus(Skills.RANGE) * effectiveRangedLevel))
-        if(entity.properties.attackStyle.style == WeaponInterface.STYLE_RANGE_ACCURATE) effectiveRangedLevel += 3
-        effectiveRangedLevel += 8
-        effectiveRangedLevel *= getSetMultiplier(entity, Skills.RANGE)
-        if(entity is Player && SkillcapePerks.isActive(SkillcapePerks.ACCURATE_MARKSMAN,entity)) effectiveRangedLevel *= 1.1
 
-        effectiveRangedLevel = floor(effectiveRangedLevel)
-        if (!flags.contains(SwingHandlerFlag.IGNORE_STAT_BOOSTS_ACCURACY))
-            effectiveRangedLevel *= (entity.properties.bonuses[entity.properties.attackStyle.bonusType] + 64)
-        else effectiveRangedLevel *= 64
+        val styleAttackBonus = entity.properties.bonuses[entity.properties.attackStyle.bonusType] + 64
+        when (entity) {
+            is Player -> {
+                var effectiveRangedLevel = entity.skills.getLevel(Skills.RANGE).toDouble()
+                if(!flags.contains(SwingHandlerFlag.IGNORE_PRAYER_BOOSTS_ACCURACY))
+                    effectiveRangedLevel = floor(effectiveRangedLevel + (entity.prayer.getSkillBonus(Skills.RANGE) * effectiveRangedLevel))
+                if(entity.properties.attackStyle.style == WeaponInterface.STYLE_RANGE_ACCURATE) effectiveRangedLevel += 3
+                effectiveRangedLevel += 8
+                effectiveRangedLevel *= getSetMultiplier(entity, Skills.RANGE)
+                if(SkillcapePerks.isActive(SkillcapePerks.ACCURATE_MARKSMAN,entity)) effectiveRangedLevel *= 1.1
 
-        return floor(effectiveRangedLevel).toInt()
+                effectiveRangedLevel = floor(effectiveRangedLevel)
+                if (!flags.contains(SwingHandlerFlag.IGNORE_STAT_BOOSTS_ACCURACY))
+                    effectiveRangedLevel *= styleAttackBonus
+                else effectiveRangedLevel *= 64
+
+                return effectiveRangedLevel.toInt()
+            }
+            is NPC -> {
+                val rangedLevel = entity.skills.getLevel(Skills.RANGE) + 9
+                return rangedLevel * styleAttackBonus
+            }
+        }
+
+        return 0
     }
 
     override fun calculateHit(entity: Entity?, victim: Entity?, modifier: Double): Int {
-        val level = entity!!.skills.getLevel(Skills.RANGE)
-        val bonus = entity.properties.bonuses[14]
-        var prayer = 1.0
-        if (entity is Player && !flags.contains(SwingHandlerFlag.IGNORE_PRAYER_BOOSTS_DAMAGE)) {
-            prayer += entity.prayer.getSkillBonus(Skills.RANGE)
-        }
-        var cumulativeStr = floor(level * prayer)
-        if (entity.properties.attackStyle.style == WeaponInterface.STYLE_RANGE_ACCURATE) {
-            cumulativeStr += 3.0
-        }
-        cumulativeStr *= getSetMultiplier(entity, Skills.RANGE)
+        entity ?: return 0
 
-        if (!flags.contains(SwingHandlerFlag.IGNORE_STAT_BOOSTS_DAMAGE))
-            cumulativeStr *= (bonus + 64)
-        else cumulativeStr *= 64
+        var styleStrengthBonus = entity.properties.bonuses[14] + 64
+        when (entity) {
+            is Player -> {
+                if(entity.equipment[EquipmentContainer.SLOT_WEAPON] != null && RangeWeapon.get(entity.equipment[EquipmentContainer.SLOT_WEAPON].id).ammunitionSlot != EquipmentContainer.SLOT_ARROWS && entity.equipment[EquipmentContainer.SLOT_ARROWS] != null)
+                    styleStrengthBonus -= entity.equipment[EquipmentContainer.SLOT_ARROWS].definition.getConfiguration<IntArray>(ItemConfigParser.BONUS)[14]
+                var effectiveStrengthLevel = entity.skills.getLevel(Skills.RANGE).toDouble()
+                if(!flags.contains(SwingHandlerFlag.IGNORE_PRAYER_BOOSTS_DAMAGE))
+                    effectiveStrengthLevel = floor(effectiveStrengthLevel + (entity.prayer.getSkillBonus(Skills.RANGE) * effectiveStrengthLevel))
+                if(entity.properties.attackStyle.style == WeaponInterface.STYLE_RANGE_ACCURATE) effectiveStrengthLevel += 3
+                effectiveStrengthLevel += 8
+                effectiveStrengthLevel *= getSetMultiplier(entity, Skills.RANGE)
+                effectiveStrengthLevel = floor(effectiveStrengthLevel)
+                if (!flags.contains(SwingHandlerFlag.IGNORE_STAT_BOOSTS_DAMAGE))
+                    effectiveStrengthLevel *= styleStrengthBonus
+                else effectiveStrengthLevel *= 64
 
-        return floor((1.5 + (ceil(cumulativeStr) / 640.0)) * modifier).toInt()
-        //return ((14 + cumulativeStr + bonus / 8 + cumulativeStr * bonus * 0.016865) * modifier).toInt() / 10 + 1
+                return (floor((0.5 + (effectiveStrengthLevel / 640.0))) * modifier).toInt()
+            }
+            is NPC -> {
+                val rangedLevel = entity.skills.getLevel(Skills.RANGE) + 9
+                return (floor((0.5 + (rangedLevel * styleStrengthBonus / 640.0))) * modifier).toInt()
+            }
+        }
+
+        return 0
     }
 
     override fun calculateDefence(victim: Entity?, attacker: Entity?): Int {
         victim ?: return 0
         attacker ?: return 0
 
-        val defLevel = victim.skills.getLevel(Skills.DEFENCE)
         val styleDefenceBonus = victim.properties.bonuses[attacker.properties.attackStyle.bonusType + 5] + 64
-        return defLevel * styleDefenceBonus
+        when (victim) {
+            is Player -> {
+                var effectiveDefLevel = victim.skills.getLevel(Skills.DEFENCE).toDouble()
+                effectiveDefLevel = floor(effectiveDefLevel + (victim.prayer.getSkillBonus(Skills.DEFENCE) * effectiveDefLevel))
+                if (victim.properties.attackStyle.style == WeaponInterface.STYLE_DEFENSIVE || victim.properties.attackStyle.style == WeaponInterface.STYLE_LONG_RANGE) effectiveDefLevel += 3
+                else if (victim.properties.attackStyle.style == WeaponInterface.STYLE_CONTROLLED) effectiveDefLevel += 1
+                effectiveDefLevel += 8
+                effectiveDefLevel *= getSetMultiplier(victim, Skills.DEFENCE)
+                return effectiveDefLevel.toInt() * styleDefenceBonus
+            }
+            is NPC -> {
+                val defLevel = victim.skills.getLevel(Skills.DEFENCE) + 9
+                return defLevel * styleDefenceBonus
+            }
+        }
+
+        return 0
     }
 
     override fun getSetMultiplier(e: Entity?, skillId: Int): Double {
         if(skillId == Skills.RANGE) {
             if(e is Player && e.isWearingVoid(CombatStyle.RANGE)) {
-                return 1.1
+                return 1.2
             }
         }
         return 1.0

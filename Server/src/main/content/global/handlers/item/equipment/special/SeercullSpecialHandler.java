@@ -1,5 +1,6 @@
 package content.global.handlers.item.equipment.special;
 
+import core.game.node.entity.combat.SwingHandlerFlag;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
@@ -23,6 +24,13 @@ import static core.api.ContentAPIKt.playGlobalAudio;
  */
 @Initializable
 public final class SeercullSpecialHandler extends RangeSwingHandler implements Plugin<Object> {
+
+	/**
+	 * Constructs a new {@code SeercullSpecialHandler} {@code Object}.
+	 */
+	public SeercullSpecialHandler() {
+		super(SwingHandlerFlag.IGNORE_PRAYER_BOOSTS_DAMAGE);
+	}
 
 	/**
 	 * The special energy required.
@@ -57,11 +65,9 @@ public final class SeercullSpecialHandler extends RangeSwingHandler implements P
 		if (!((Player) entity).getSettings().drainSpecial(SPECIAL_ENERGY)) {
 			return -1;
 		}
-		int hit = 0;
-		if (isAccurateImpact(entity, victim, CombatStyle.RANGE, 1.05, 1.0)) {
-			hit = RandomFunction.random(calculateHit(entity, victim, 1.0));
+		int hit = RandomFunction.random(calculateHit(entity, victim, 1.0) + 1);
+		if (victim.getSkills().getLevel(Skills.MAGIC) >= victim.getSkills().getStaticLevel(Skills.MAGIC))
 			victim.getSkills().updateLevel(Skills.MAGIC, -hit, 0);
-		}
 		Companion.useAmmo(entity, state, victim.getLocation());
 		state.setEstimatedHit(hit);
 		return 1;

@@ -52,9 +52,9 @@ public final class SaradominsLightningHandler extends MeleeSwingHandler implemen
         state.setStyle(CombatStyle.MAGIC);
 		int hit = 0;
 		int secondary = 0;
-		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.10, 0.98)) {
-			hit = RandomFunction.random(calculateHit(entity, victim, 1.1));
-			secondary = 5 + RandomFunction.RANDOM.nextInt(14);
+		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.10, 1.0)) {
+			hit = RandomFunction.random(calculateHit(entity, victim, 1.1) + 1);
+			secondary = 1 + RandomFunction.random(16);
 		}
 		state.setEstimatedHit(hit);
 		state.setSecondaryHit(secondary);

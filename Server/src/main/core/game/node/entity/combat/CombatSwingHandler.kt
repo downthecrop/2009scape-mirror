@@ -173,26 +173,21 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
      * @return `True` if the hit is accurate.
      */
     fun isAccurateImpact(entity: Entity?, victim: Entity?, style: CombatStyle?, accuracyMod: Double, defenceMod: Double): Boolean {
-        var mod = 1.33
+        var mod = 1.0
         if (victim == null || style == null) {
             return false
         }
         if (victim is Player && entity is Familiar && victim.prayer[PrayerType.PROTECT_FROM_SUMMONING]) {
             mod = 0.0
         }
-        val attack = calculateAccuracy(entity) * accuracyMod * mod * getSetMultiplier(entity, Skills.ATTACK)
-        val defence = calculateDefence(victim, entity) * defenceMod * getSetMultiplier(victim, Skills.DEFENCE)
+        val attack = calculateAccuracy(entity) * accuracyMod * mod
+        val defence = calculateDefence(victim, entity) * defenceMod
         val chance: Double = if (attack > defence) {
-            1 - ((defence + 2) / ((2 * attack) + 1))
+            1 - ((defence + 2) / (2 * (attack + 1)))
         } else {
-            attack / ((2 * defence) + 1)
+            attack / (2 * (defence + 1))
         }
-        val ratio = chance * 100
-        val accuracy = floor(ratio)
-        val block = floor(101 - ratio)
-        val acc = Math.random() * accuracy
-        val def = Math.random() * block
-        return (acc > def).also { if(entity?.username?.toLowerCase() == "test10") log(this::class.java, Log.FINE,  "Should hit: $it") }
+        return Math.random() < chance
     }
 
     /**

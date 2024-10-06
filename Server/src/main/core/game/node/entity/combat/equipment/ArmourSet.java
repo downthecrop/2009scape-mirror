@@ -21,7 +21,7 @@ public enum ArmourSet {
 	AHRIM(new Graphics(401, 96), new int[][] { { 4708, 4856, 4857, 4858, 4859 }, { 4710, 4862, 4863, 4864, 4865 }, { 4712, 4868, 4869, 4870, 4871 }, { 4714, 4874, 4875, 4876, 4877 } }) {
 		@Override
 		public boolean effect(Entity e, Entity victim, BattleState state) {
-			if (RandomFunction.random(100) < 20) {
+			if (RandomFunction.random(100) < 25 && state.getEstimatedHit() > -1) {
 				victim.getSkills().updateLevel(Skills.STRENGTH, -5, 0);
 				return true;
 			}
@@ -78,8 +78,8 @@ public enum ArmourSet {
 	KARIL(new Graphics(400, 96), new int[][] { { 4732, 4928, 4929, 4930, 4931 }, { 4734, 4934, 4935, 4936, 4937 }, { 4736, 4940, 4941, 4942, 4943 }, { 4738, 4946, 4947, 4948, 4949 } }) {
 		@Override
 		public boolean effect(Entity e, Entity victim, BattleState state) {
-			if (state.getEstimatedHit() > 9 && RandomFunction.random(100) < 20) {
-				victim.getSkills().updateLevel(Skills.AGILITY, -(state.getEstimatedHit() / 10), 0);
+			if (state.getEstimatedHit() > 0 && RandomFunction.random(100) < 25) {
+				victim.getSkills().updateLevel(Skills.AGILITY, -(victim.getSkills().getDynamicLevels()[Skills.AGILITY] / 5), 0);
 				return true;
 			}
 			return false;
@@ -100,7 +100,7 @@ public enum ArmourSet {
 	TORAG(new Graphics(399, 96), new int[][] { { 4745, 4952, 4953, 4954, 4955 }, { 4747, 4958, 4959, 4960, 4961 }, { 4749, 4964, 4965, 4966, 4967 }, { 4751, 4970, 4971, 4972, 4973 } }) {
 		@Override
 		public boolean effect(Entity e, Entity victim, BattleState state) {
-			if (state.getEstimatedHit() > 0 && RandomFunction.random(100) < 20) {
+			if (state.getEstimatedHit() > 0 && RandomFunction.random(100) < 25) {
 				if (victim instanceof Player) {
 					((Player) victim).getSettings().updateRunEnergy(20);
 				}

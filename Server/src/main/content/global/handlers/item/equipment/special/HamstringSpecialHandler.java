@@ -46,7 +46,8 @@ public final class HamstringSpecialHandler extends RangeSwingHandler implements 
         state.setMaximumHit(max);
         int hit = 0;
         if (isAccurateImpact(entity, victim)) {
-            hit = RandomFunction.random(max);
+            int minDamage = calculateHit(entity, victim, 0.2);
+            hit = minDamage + RandomFunction.random(calculateHit(entity, victim, 1.0) + 1);
         }
         state.setEstimatedHit(hit);
         Companion.useAmmo(entity, state, victim.getLocation());

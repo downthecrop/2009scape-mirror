@@ -46,10 +46,11 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             player.toggleDebug()
         }
 
-        define("calc_accuracy", Privilege.STANDARD, "::calc_accuracy <lt>NPC ID<gt>", "Calculates and prints your current chance to hit a given NPC."){ player, args ->
+        define("calcaccuracy", Privilege.STANDARD, "::calcaccuracy <lt>NPC ID<gt>", "Calculates and prints your current chance to hit a given NPC."){ player, args ->
             val handler = player.getSwingHandler(false)
             player.sendMessage("handler type: ${handler.type}")
-            player.sendMessage("calculateAccuracy: ${handler.calculateAccuracy(player)}")
+            val accuracy = handler.calculateAccuracy(player)
+            player.sendMessage("calculateAccuracy: ${accuracy}")
 
             if (args.size > 1)
             {
@@ -57,7 +58,14 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
                 val npc = NPC(npcId)
                 npc.initConfig()
                 player.sendMessage("npc: ${npc.name}. npc defence: ${npc.skills.getLevel(Skills.DEFENCE)}")
-                player.sendMessage("calculateDefence: ${handler.calculateDefence(npc, player)}")
+                val defence = handler.calculateDefence(npc, player)
+                player.sendMessage("calculateDefence: ${defence}")
+                val chance: Double = if (accuracy > defence) {
+                    1.0 - ((defence + 2.0) / (2.0 * (accuracy + 1.0)))
+                } else {
+                    accuracy / (2.0 * (defence + 1.0))
+                }
+                player.sendMessage("chance to hit: ${chance}")
             }
         }
 
@@ -107,7 +115,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         define("calcmaxhit", Privilege.STANDARD, "", "Calculates and shows you your current max hit.") { player, _ ->
             val swingHandler = player.getSwingHandler(false)
             val hit = swingHandler.calculateHit(player, player, 1.0)
-            notify(player, "max hit (${(swingHandler as Object).getClass().getName()}): ${hit}")
+            notify(player, "max hit: ${hit} (${(swingHandler as Object).getClass().getName()})")
         }
 
         /**

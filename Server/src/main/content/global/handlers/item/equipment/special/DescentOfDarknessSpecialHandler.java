@@ -30,7 +30,7 @@ public final class DescentOfDarknessSpecialHandler extends RangeSwingHandler imp
 	/**
 	 * The special energy required.
 	 */
-	private static final int SPECIAL_ENERGY = 65;
+	private static final int SPECIAL_ENERGY = 55;
 
 	/**
 	 * The descent of dragons projectile.
@@ -102,13 +102,13 @@ public final class DescentOfDarknessSpecialHandler extends RangeSwingHandler imp
 		state.setMaximumHit(max);
 		int hit = minDamage;
 		if (isAccurateImpact(entity, victim, CombatStyle.RANGE, 1.15, 1.0)) {
-			hit += RandomFunction.random(max - minDamage);
+			hit += RandomFunction.random(max - minDamage + 1);
 		}
 		state.setEstimatedHit(hit);
 		if (w.getType() == WeaponType.DOUBLE_SHOT) {
 			hit = minDamage;
 			if (isAccurateImpact(entity, victim, CombatStyle.RANGE, 1.15, 1.0)) {
-				hit += RandomFunction.random(max - minDamage);
+				hit += RandomFunction.random(max - minDamage + 1);
 			}
 			state.setSecondaryHit(hit);
 		}

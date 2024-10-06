@@ -56,8 +56,8 @@ public final class SeverSpecialHandler extends MeleeSwingHandler implements Plug
 			return -1;
         state.setStyle(CombatStyle.MELEE);
 		int hit = 0;
-		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.124, 1.0)) {
-			hit = RandomFunction.random(calculateHit(entity, victim, 1.0));
+		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.25, 1.0)) {
+			hit = RandomFunction.random(calculateHit(entity, victim, 1.0) + 1);
 			if (victim instanceof Player) {
 				Player p = (Player) victim;
 				if (p.getPrayer().get(PrayerType.PROTECT_FROM_MAGIC)) {

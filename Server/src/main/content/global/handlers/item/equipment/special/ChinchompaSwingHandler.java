@@ -31,13 +31,6 @@ public final class ChinchompaSwingHandler extends RangeSwingHandler {
 	 */
 	private static final Graphics END_GRAPHIC = new Graphics(157, 96);
 
-	/**
-	 * Constructs a new {@code ChinchompaSwingHandler} {@code Object}.
-	 */
-	public ChinchompaSwingHandler() {
-		super(SwingHandlerFlag.IGNORE_STAT_BOOSTS_DAMAGE);
-	}
-
 	@Override
 	public int swing(Entity entity, Entity victim, BattleState state) {
 		boolean multi = entity.getProperties().isMultiZone() && victim.getProperties().isMultiZone();
@@ -72,7 +65,7 @@ public final class ChinchompaSwingHandler extends RangeSwingHandler {
 				s.setStyle(CombatStyle.RANGE);
 				int hit = 0;
 				if (isAccurateImpact(entity, e, CombatStyle.RANGE)) {
-					hit = RandomFunction.random(calculateHit(entity, e, 1.0));
+					hit = RandomFunction.random(calculateHit(entity, e, 1.0) + 1);
 				}
 				s.setEstimatedHit(hit);
 			}

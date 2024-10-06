@@ -61,18 +61,13 @@ public final class PunctureSpecialHandler extends MeleeSwingHandler implements P
 			return -1;
 		}
         state.setStyle(CombatStyle.MELEE);
-		// First hit
-		//double accuracyMod, double defenceMod
 		int hit = 0;
-		// 											 		accuracyMod defenceMod
-		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.05, 1.0)) {
-			hit = RandomFunction.random(calculateHit(entity, victim, 1.1306));
+		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.15, 1.0)) {
+			hit = RandomFunction.random(calculateHit(entity, victim, 1.15) + 1);
 		}
 		state.setEstimatedHit(hit);
-		// Second hit
-		// 											 		accuracyMod defenceMod
-		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.05, 1.0)) {
-			hit = RandomFunction.random(calculateHit(entity, victim, 1.1306));
+		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.15, 1.0)) {
+			hit = RandomFunction.random(calculateHit(entity, victim, 1.15) + 1);
 		} else {
 			hit = 0;
 		}

@@ -2,6 +2,10 @@ package content
 
 import TestUtils
 import content.global.handlers.item.equipment.special.ChinchompaSwingHandler
+import core.api.EquipmentSlot
+import core.game.container.impl.EquipmentContainer.updateBonuses
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListeners
 import core.game.node.entity.combat.MagicSwingHandler
 import core.game.node.entity.combat.MeleeSwingHandler
 import core.game.node.entity.combat.RangeSwingHandler
@@ -9,8 +13,10 @@ import core.game.node.entity.combat.SwingHandlerFlag
 import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.player.link.prayer.PrayerType
 import core.game.node.entity.skill.Skills
+import core.game.node.item.Item
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import org.rs09.consts.Items
 
 class CombatTests {
     init {
@@ -115,12 +121,17 @@ class CombatTests {
         }
     }
 
-    @Test fun chinchompaSwingHandlerIgnoresStatsForDamage() {
+    @Test fun chinchompaSwingHandlerIgnoresAmmoSlotForDamage() {
         val handler = ChinchompaSwingHandler()
 
         TestUtils.getMockPlayer("chinchompaStatTest").use { p ->
+            p.skills.staticLevels[Skills.RANGE] = 99
+            p.skills.dynamicLevels[Skills.RANGE] = 99
+            p.equipment.replace(Item(Items.CHINCHOMPA_10033), EquipmentSlot.WEAPON.ordinal)
+            updateBonuses(p)
             val damageBaseline = handler.calculateHit(p, p, 1.0)
-            p.properties.bonuses[14] = 250
+            p.equipment.replace(Item(Items.DRAGON_ARROW_11212), EquipmentSlot.AMMO.ordinal)
+            updateBonuses(p)
             Assertions.assertEquals(damageBaseline, handler.calculateHit(p, p, 1.0))
         }
     }

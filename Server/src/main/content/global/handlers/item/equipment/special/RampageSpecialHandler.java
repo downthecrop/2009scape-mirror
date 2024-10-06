@@ -65,15 +65,15 @@ public final class RampageSpecialHandler extends MeleeSwingHandler implements Pl
 		p.visualize(ANIMATION, GRAPHIC);
 		@SuppressWarnings("unused")
 		int boost = 0;
-		for (int i = 0; i < 6; i++) {
-			if (i == 2 || i == 3 || i == 5) {
-				continue;
+		for (int i = 0; i < 7; i++) {
+			if (i == Skills.ATTACK || i == Skills.DEFENCE || i == Skills.RANGE || i == Skills.MAGIC) {
+				int drain = (int) (p.getSkills().getLevel(i) * 0.1);
+				boost += drain;
+				p.getSkills().updateLevel(i, -drain, 0);
 			}
-			double drain = p.getSkills().getLevel(i) * 0.1;
-			boost += drain;
-			p.getSkills().updateLevel(i, (int) -drain, (int) (p.getSkills().getStaticLevel(i) - drain));
 		}
-		p.getSkills().updateLevel(Skills.STRENGTH, (int) (p.getSkills().getStaticLevel(Skills.STRENGTH) * 0.20));
+		boost = 10 + (boost / 4);
+		p.getSkills().updateLevel(Skills.STRENGTH, boost, Math.max(p.getSkills().getStaticLevel(Skills.STRENGTH) + boost, p.getSkills().getLevel(Skills.STRENGTH)));
 		return -1;
 	}
 

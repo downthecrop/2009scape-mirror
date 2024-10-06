@@ -59,7 +59,7 @@ public final class ImpaleSpecialHandler extends MeleeSwingHandler implements Plu
         state.setStyle(CombatStyle.MELEE);
 		int hit = 0;
 		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.1, 0.98)) {
-			hit = RandomFunction.random(calculateHit(entity, victim, 1.1));
+			hit = RandomFunction.random(calculateHit(entity, victim, 1.1) + 1);
 		}
 		state.setEstimatedHit(hit);
 		return 1;

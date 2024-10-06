@@ -1,9 +1,7 @@
 package content.global.handlers.item.equipment.special;
 
 import core.game.node.entity.Entity;
-import core.game.node.entity.combat.BattleState;
-import core.game.node.entity.combat.CombatStyle;
-import core.game.node.entity.combat.DeathTask;
+import core.game.node.entity.combat.*;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.impl.Projectile;
@@ -17,7 +15,6 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
-import core.game.node.entity.combat.RangeSwingHandler;
 import core.game.world.GameWorld;
 import core.game.world.repository.Repository;
 import org.rs09.consts.Sounds;
@@ -33,6 +30,13 @@ import static core.api.ContentAPIKt.playGlobalAudio;
  */
 @Initializable
 public final class ChainhitSpecialHandler extends RangeSwingHandler implements Plugin<Object> {
+
+	/**
+	 * Constructs a new {@code ChainhitSpecialHandler} {@code Object}.
+	 */
+	public ChainhitSpecialHandler() {
+		super(SwingHandlerFlag.IGNORE_PRAYER_BOOSTS_DAMAGE);
+	}
 
 	/**
 	 * The sp::ecial energy required.
@@ -159,7 +163,7 @@ public final class ChainhitSpecialHandler extends RangeSwingHandler implements P
 					public boolean pulse() {
 						BattleState bs = new BattleState(entity, e);
 						bs.setMaximumHit(calculateHit(player, e, 1.0));
-						bs.setEstimatedHit(RandomFunction.RANDOM.nextInt(bs.getMaximumHit()));
+						bs.setEstimatedHit(RandomFunction.random(bs.getMaximumHit() + 1));
 						handleHit(victim, e, player, bs);
 						ChainhitSpecialHandler.super.visualizeImpact(player, e, bs);
 						return true;

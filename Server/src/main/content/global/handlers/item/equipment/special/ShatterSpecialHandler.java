@@ -56,8 +56,8 @@ public final class ShatterSpecialHandler extends MeleeSwingHandler implements Pl
 		}
         state.setStyle(CombatStyle.MELEE);
 		int hit = 0;
-		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 0.87, 1.0)) {
-			hit = RandomFunction.random(calculateHit(entity, victim, 1.3546));
+		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.25, 1.0)) {
+			hit = RandomFunction.random(calculateHit(entity, victim, 1.5) + 1);
 		}
 		state.setEstimatedHit(hit);
 		return 1;
