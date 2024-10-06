@@ -36,6 +36,7 @@ class PlayerSaver (val player: Player){
     }
     fun populate(): JSONObject {
         val saveFile = JSONObject()
+        saveVersion(saveFile)
         saveCoreData(saveFile)
         saveSkills(saveFile)
         saveSettings(saveFile)
@@ -56,7 +57,6 @@ class PlayerSaver (val player: Player){
         saveStatManager(saveFile)
         saveAttributes(saveFile)
         savePouches(saveFile)
-        saveVersion(saveFile)
         contentHooks.forEach { it.savePlayer(player, saveFile) }
         return saveFile
     }
@@ -278,17 +278,21 @@ class PlayerSaver (val player: Player){
 
     fun saveFamiliarManager(root: JSONObject){
         val familiarManager = JSONObject()
-        val petDetails = JSONArray()
+        val petDetails = JSONObject()
         player.familiarManager.petDetails.map {
-            val detail = JSONObject()
-            detail.put("petId",it.key.toString())
-            detail.put("hunger",it.value.hunger.toString())
-            detail.put("growth",it.value.growth.toString())
-            petDetails.add(detail)
+            val petId = it.key
+            val petData = JSONArray()
+            for (v in it.value) {
+                val pet = JSONObject()
+                pet.put("hunger",v.hunger.toString())
+                pet.put("growth",v.growth.toString())
+                petData.add(pet)
+            }
+            petDetails.put(petId.toString(), petData)
         }
         familiarManager.put("petDetails",petDetails)
         if(player.familiarManager.hasPet()){
-            familiarManager.put("currentPet",(player.familiarManager.familiar as Pet).getItemIdHash().toString())
+            familiarManager.put("currentPet",(player.familiarManager.familiar as Pet).getItemId().toString())
         } else if (player.familiarManager.hasFamiliar()){
             val familiar = JSONObject()
             familiar.put("originalId",player.familiarManager.familiar.originalId.toString())

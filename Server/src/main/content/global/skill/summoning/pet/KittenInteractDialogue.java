@@ -117,8 +117,8 @@ public final class KittenInteractDialogue extends DialoguePlugin {
 					player.sendChat("Shoo cat!");
 					Pet currentPet = (Pet) player.getFamiliarManager().getFamiliar();
 					player.getFamiliarManager().getFamiliar().sendChat("Miaow!");
-					player.getFamiliarManager().removeDetails(currentPet.getItemIdHash());
 					player.getFamiliarManager().getFamiliar().dismiss();
+					player.getFamiliarManager().removeDetails(currentPet.getItemId());
 					player.getPacketDispatch().sendMessage("The cat has run away.");
 				}
 				end();

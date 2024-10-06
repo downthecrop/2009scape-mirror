@@ -47,7 +47,7 @@ class CatOnArdougneCivilian: InteractionListener {
     override fun defineListeners() {
         onUseWith(IntType.NPC,cats,*civilians){ player, used, _ ->
             sendItemDialogue(player,Items.DEATH_RUNE_560,"You hand over the cat.<br>You are given 100 Death Runes.")
-            player.familiarManager.removeDetails(used.idHash)
+            player.familiarManager.removeDetails(used.id)
             removeItem(player,used,Container.INVENTORY)
             addItem(player,Items.DEATH_RUNE_560,100)
             return@onUseWith true

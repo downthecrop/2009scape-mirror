@@ -20,11 +20,6 @@ public final class PetDetails {
 	private double growth = 0.0;
 
 	/**
-	 * The individual, an in principle arbitrary integer read off of the item's charge slot.
-	 */
-	private int individual;
-
-	/**
 	 * Constructs a new {@code PetDetails} {@code Object}.
 	 * @param growth The growth value.
 	 */
@@ -65,6 +60,13 @@ public final class PetDetails {
 	}
 
 	/**
+	 * Sets the hunger. (You probably want to use updateHunger() instead.)
+	 */
+	public void setHunger(double value) {
+		this.hunger = value;
+	}
+
+	/**
 	 * Gets the growth.
 	 * @return The growth.
 	 */
@@ -73,18 +75,9 @@ public final class PetDetails {
 	}
 
 	/**
-	 * Sets the individual.
-	 * @param individual The individual to set.
+	 * Sets the growth. (You probably want to use updateGrowth() instead.)
 	 */
-	public void setIndividual(int individual) {
-		this.individual = individual;
-	}
-
-	/**
-	 * Gets the individual.
-	 * @return The individual.
-	 */
-	public int getIndividual() {
-		return individual;
+	public void setGrowth(double value) {
+		this.growth = value;
 	}
 }

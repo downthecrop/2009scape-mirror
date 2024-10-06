@@ -55,7 +55,7 @@ public final class DismissDialoguePlugin extends DialoguePlugin {
 				if (player.getFamiliarManager().getFamiliar() instanceof Pet) {
 					interpreter.sendDialogues(player, null, "Run along; I'm setting you free.");
 					Pet pet = (Pet) player.getFamiliarManager().getFamiliar();
-					player.getFamiliarManager().removeDetails(pet.getItemIdHash());
+					player.getFamiliarManager().removeDetails(pet.getItemId());
 				} else {
 					end();
 				}

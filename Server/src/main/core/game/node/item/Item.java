@@ -197,14 +197,6 @@ public class Item extends Node{
 	}
 
 	/**
-	 * Sets the id hash.
-	 * @param hash the hash to set
-	 */
-	public void setIdHash(int hash) {
-		this.idHash = hash;
-	}
-
-	/**
 	 * Checks if the item has a wrapper plugin.
 	 * @return {@code True} if so.
 	 */

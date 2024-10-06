@@ -326,6 +326,7 @@ fun addItem(player: Player, id: Int, amount: Int = 1, container: Container = Con
  * @param player the player whose container to modify
  * @param slot the slot to use
  * @param item the item to replace the slot with
+ * @param currentItem the current item that is being replaced
  * @param container the Container to modify
  * @return the item that was previously in the slot, or null if none.
  */
@@ -356,6 +357,41 @@ fun replaceSlot(player: Player, slot: Int, item: Item, currentItem: Item? = null
     if (removeItem(player, currentItem, other))
         return cont.replace(item, slot)
     return null
+}
+
+/**
+ * Replaces all items a player owns anywhere (equipment, inventory, bank, second bank)
+ * @param player the player whose inventory to remove the item from
+ * @param itemId the item ID to replace
+ * @param replaceId the replacement item ID
+ * @author Player Name
+ */
+fun replaceAllItems(player: Player, itemId: Int, replaceId: Int) {
+    val item = Item(itemId)
+    for (container in arrayOf(player.inventory, player.equipment, player.bankPrimary, player.bankSecondary)) {
+        val hasItems = container.getAll(item)
+        if (!item.definition.isStackable && (container == player.inventory || container == player.equipment)) {
+            for (target in hasItems) {
+                val newItem = Item(replaceId, target.amount)
+                container.replace(newItem, target.slot, true)
+            }
+        } else {
+            if (hasItems.size > 0) {
+                val target = hasItems[0]
+                var count = 0
+                for (x in hasItems) {
+                    count += x.amount
+                }
+                val newItem = Item(replaceId, count)
+                container.replace(newItem, target.slot, true)
+            }
+            if (hasItems.size > 1) {
+                for (i in 1 until hasItems.size) {
+                    container.remove(hasItems[i], hasItems[i].slot, true)
+                }
+            }
+        }
+    }
 }
 
 /**

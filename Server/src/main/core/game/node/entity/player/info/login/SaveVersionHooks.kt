@@ -1,11 +1,11 @@
 package core.game.node.entity.player.info.login
 
+import content.global.skill.summoning.pet.Pets
 import core.ServerConstants
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import org.rs09.consts.Items
-
 
 /**
  * Runs one-time save-version-related hooks.
@@ -13,13 +13,10 @@ import org.rs09.consts.Items
  */
 
 class SaveVersionHooks : LoginListener {
-
     override fun login(player: Player) {
         if (player.version < ServerConstants.CURRENT_SAVEFILE_VERSION) {
-            sendMessage(player, "<col=CC6600>Migrating save file version ${player.version} to current save file version ${ServerConstants.CURRENT_SAVEFILE_VERSION}.</col>")
 
-            // Perform actual migrations
-            if (player.version < 1) { // GL #1811
+            if (player.version < 1) { // GL !1811
                 // Give out crafting hoods if the player bought any crafting capes when the hoods were not obtainable
                 var hasHoods = 0
                 var hasCapes = 0
@@ -60,10 +57,18 @@ class SaveVersionHooks : LoginListener {
                 }
             }
 
-            // Finish up
+            if (player.version < 2) { //GL !1799
+                // Most of the migration for this MR happens in FamiliarManager.java, but we fix up any pet items here
+                val pets = Pets.values()
+                for (pet in pets) {
+                    for (id in arrayOf(pet.babyItemId, pet.grownItemId, pet.overgrownItemId)) {
+                        replaceAllItems(player, id, id)
+                        // The trick here is that replaceAllItems ignores the item charge value, and will hence cause it to be lost, making all pets authentically stack again
+                    }
+                }
+            }
+
             player.version = ServerConstants.CURRENT_SAVEFILE_VERSION
-            sendMessage(player, "<col=CC6600>Save file migration complete. Happy scaping!</col>")
         }
     }
-
 }

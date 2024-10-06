@@ -53,6 +53,7 @@ class PlayerSaveParser(val player: Player) {
     }
 
     fun parseData() {
+        parseVersion()
         parseCore()
         parseAttributes()
         parseSkills()
@@ -77,7 +78,6 @@ class PlayerSaveParser(val player: Player) {
         parseStatistics()
         parseAchievements()
         parsePouches()
-        parseVersion()
     }
 
     fun runContentHooks()

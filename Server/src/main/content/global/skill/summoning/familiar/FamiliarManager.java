@@ -4,7 +4,6 @@ import content.global.skill.summoning.pet.Pet;
 import content.global.skill.summoning.pet.Pets;
 import core.cache.def.impl.ItemDefinition;
 import core.game.component.Component;
-import core.game.container.Container;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import core.game.node.entity.skill.Skills;
@@ -20,7 +19,6 @@ import core.game.world.update.flag.context.Animation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static core.api.ContentAPIKt.*;
@@ -38,9 +36,9 @@ public final class FamiliarManager {
 	private static final Map<Integer, Familiar> FAMILIARS = new HashMap<>();
 
 	/**
-	 * The pet details mapping, sorted by item id.
+	 * The pet details mapping.
 	 */
-	private final Map<Integer, PetDetails> petDetails = new HashMap<Integer, PetDetails>();
+	private final Map<Integer, ArrayList<PetDetails>> petDetails = new HashMap<>();
 
 	/**
 	 * The player.
@@ -70,50 +68,69 @@ public final class FamiliarManager {
 		this.player = player;
 	}
 
-	public final void parse(JSONObject familiarData) {
+	public void parse(JSONObject familiarData) {
+		for (Pets pet : Pets.values()) {
+			for (int id : new int[]{pet.getBabyItemId(), pet.getGrownItemId(), pet.getOvergrownItemId()}) {
+				if (id != -1) {
+					petDetails.put(id, new ArrayList<PetDetails>());
+				}
+			}
+		}
+
 		int currentPet = -1;
 		if (familiarData.containsKey("currentPet")) {
 			currentPet = Integer.parseInt(familiarData.get("currentPet").toString());
 		}
-		JSONArray petDetails = (JSONArray) familiarData.get("petDetails");
-		for (int i = 0; i < petDetails.size(); i++) {
-			JSONObject detail = (JSONObject) petDetails.get(i);
-			PetDetails details = new PetDetails(0);
-			details.updateHunger(Double.parseDouble(detail.get("hunger").toString()));
-			details.updateGrowth(Double.parseDouble(detail.get("growth").toString()));
-			int itemIdHash = Integer.parseInt(detail.get("petId").toString());
-			// The below is for migrating legacy saves, which stored baby item IDs + growth stages
-			if (detail.containsKey("stage")) {
-				// The "itemIdHash" is actually the baby item ID. The "stage" gives the actual pet stage we want.
-				int babyItemId = itemIdHash;
-				int itemId = babyItemId;
-				int stage = Integer.parseInt(detail.get("stage").toString());
-				if (stage > 0) {
-					Pets pets = Pets.forId(babyItemId);
-					itemId = pets.getNextStageItemId(itemId);
-					if (stage > 1) {
+		if (player.version < 2) { //migrate the v1 format
+			JSONArray petDetails = (JSONArray) familiarData.get("petDetails");
+			for (Object petDetail : petDetails) {
+				JSONObject detail = (JSONObject) petDetail;
+				PetDetails details = new PetDetails(0);
+				details.updateHunger(Double.parseDouble(detail.get("hunger").toString()));
+				details.updateGrowth(Double.parseDouble(detail.get("growth").toString()));
+				int itemId;
+				int itemIdHash = Integer.parseInt(detail.get("petId").toString());
+				// The below is for migrating the v0 format, which stored baby item IDs + growth stages
+				if (detail.containsKey("stage")) {
+					// The itemIdHash is actually the baby item ID. The "stage" gives the actual pet stage we want.
+					int babyItemId = itemIdHash;
+					itemId = babyItemId;
+					int stage = Integer.parseInt(detail.get("stage").toString());
+					if (stage > 0) {
+						Pets pets = Pets.forId(babyItemId);
 						itemId = pets.getNextStageItemId(itemId);
+						if (stage > 1) {
+							itemId = pets.getNextStageItemId(itemId);
+						}
 					}
+				} else {
+					itemId = itemIdHash >> 16 & 0xFFFF; //in the legacy v1 format, was hash rather than item id
 				}
-				Item item = new Item(itemId);
-				item.setCharge(1000); //this is the default value that will correspond to the player's item
-				itemIdHash = item.getIdHash();
-				if (currentPet != -1 && currentPet == babyItemId) {
-					currentPet = itemIdHash;
+				this.petDetails.get(itemId).add(details);
+			}
+			if (currentPet > 65536) {
+				currentPet = currentPet >> 16 & 0xFFFF; //in the legacy v1 format, was hash rather than item id
+			}
+        } else {
+			JSONObject petDetails = (JSONObject) familiarData.get("petDetails");
+			for (Object key : petDetails.keySet()) {
+				int itemId = Integer.parseInt(key.toString());
+				this.petDetails.put(itemId, new ArrayList<>());
+				JSONArray values = (JSONArray) petDetails.get(key.toString());
+				for (Object petDetail : values) {
+					JSONObject detail = (JSONObject) petDetail;
+					PetDetails details = new PetDetails(0);
+					details.updateHunger(Double.parseDouble(detail.get("hunger").toString()));
+					details.updateGrowth(Double.parseDouble(detail.get("growth").toString()));
+					this.petDetails.get(itemId).add(details);
 				}
 			}
-			this.petDetails.put(itemIdHash, details);
 		}
-
 		if (currentPet != -1) {
-			PetDetails details = this.petDetails.get(currentPet);
-			int itemId = currentPet >> 16 & 0xFFFF;
-			Pets pets = Pets.forId(itemId);
-			if (details == null) {
-				details = new PetDetails(pets.getGrowthRate() == 0.0 ? 100.0 : 0.0);
-				this.petDetails.put(currentPet, details);
-			}
-			familiar = new Pet(player, details, itemId, pets.getNpcId(itemId));
+			int last = this.petDetails.get(currentPet).size() - 1;
+			PetDetails details = this.petDetails.get(currentPet).get(last);
+			Pets pets = Pets.forId(currentPet);
+			familiar = new Pet(player, details, currentPet, pets.getNpcId(currentPet));
 		} else if (familiarData.containsKey("familiar")) {
 			JSONObject currentFamiliar = (JSONObject) familiarData.get("familiar");
 			int familiarId = Integer.parseInt( currentFamiliar.get("originalId").toString());
@@ -147,7 +164,7 @@ public final class FamiliarManager {
 	public void summon(Item item, boolean pet, boolean deleteItem) {
 		boolean renew = false;
 		if (hasFamiliar()) {
-			if(familiar.getPouchId() == item.getId()) {
+			if (familiar.getPouchId() == item.getId()) {
 				renew = true;
 			} else {
 				player.getPacketDispatch().sendMessage("You already have a follower.");
@@ -180,7 +197,7 @@ public final class FamiliarManager {
 			player.getPacketDispatch().sendMessage("Invalid familiar " + npcId + " - report on 2009Scape GitLab");
 			return;
 		}
-		if(!renew) {
+		if (!renew) {
 			fam = fam.construct(player, npcId);
 			if (fam.getSpawnLocation() == null) {
 				player.getPacketDispatch().sendMessage("The spirit in this pouch is too big to summon here. You will need to move to a larger");
@@ -193,7 +210,7 @@ public final class FamiliarManager {
 		}
 		player.getSkills().updateLevel(Skills.SUMMONING, -pouch.getSummonCost(), 0);
 		player.getSkills().addExperience(Skills.SUMMONING, pouch.getSummonExperience());
-		if(!renew) {
+		if (!renew) {
 			familiar = fam;
 			spawnFamiliar();
 		} else {
@@ -217,11 +234,10 @@ public final class FamiliarManager {
 	 * @param deleteItem the item.
 	 * @param location the location.
 	 */
-	public void morphPet(final Item item, boolean deleteItem, Location location) {
-		if (hasFamiliar()) {
-			familiar.dismiss();
-		}
-		summonPet(item, deleteItem, true, location);
+	public void morphPet(final Item item, boolean deleteItem, Location location, double hunger, double growth) {
+		int hasWarned = ((Pet) familiar).getHasWarned();
+		familiar.dismiss();
+		summonPet(item, deleteItem, true, location, hasWarned, hunger, growth);
 	}
 	
 	/**
@@ -230,7 +246,7 @@ public final class FamiliarManager {
 	 * @param deleteItem the item.
 	 */
 	private boolean summonPet(final Item item, boolean deleteItem) {
-		return summonPet(item, deleteItem, false, null);
+		return summonPet(item, deleteItem, false, null, 0, -1, -1);
 	}
 	
 	/**
@@ -238,9 +254,8 @@ public final class FamiliarManager {
 	 * @param item the item.
 	 * @param morph the pet.
 	 */
-	private boolean summonPet(final Item item, boolean deleteItem, boolean morph, Location location) {
+	private boolean summonPet(final Item item, boolean deleteItem, boolean morph, Location location, int hasWarned, double hunger, double growth) {
 		final int itemId = item.getId();
-		int itemIdHash = item.getIdHash();
 		if (itemId > 8850 && itemId < 8900) {
 			return false;
 		}
@@ -252,52 +267,24 @@ public final class FamiliarManager {
 			player.getDialogueInterpreter().sendDialogue("You need a summoning level of " + pets.getSummoningLevel() + " to summon this.");
 			return false;
 		}
-
-		// If this pet does not have an individual ID yet, we need to find it an available one.
-		// If it does, we need to verify that this ID is not already used for a different pet. This is needed to correct a historical bug that allowed multiple pets to be assigned the same individual ID (the historical code only checked the *current* stage item ID, failing to realize that we also need to account for *future* stage item IDs, in case the current pet grows up, resulting in a clash when it did). Saves affected by that bug will have multiple copies of the same item pointing to the same pet, which we have an opportunity to rectify now.
-		ArrayList<Integer> taken = new ArrayList<Integer>();
-		Container[] searchSpace = {player.getInventory(), player.getBankPrimary(), player.getBankSecondary()};
-		for (int checkId = pets.getBabyItemId(); checkId != -1; checkId = pets.getNextStageItemId(checkId)) {
-			Item check = new Item(checkId, 1);
-			for (Container container : searchSpace) {
-				for (Item i : container.getAll(check)) {
-					taken.add(i.getCharge());
-				}
-			}
+		int last = this.petDetails.get(itemId).size() - 1;
+		if (last < 0) { //new pet
+			last = 0;
+			PetDetails details = new PetDetails(pets.getGrowthRate() == 0.0 ? 100.0 : 0.0);
+			this.petDetails.get(itemId).add(details);
 		}
-		PetDetails details = petDetails.get(itemIdHash);
-		int individual = item.getCharge();
-		if (details != null) { //we have this pet on file, but we need to check that it wasn't affected by the historical bug mentioned above
-			details.setIndividual(individual);
-			int count = 0;
-			for (int i : taken) {
-				if (i == individual) {
-					count++;
-				}
-			}
-			if (count > 1) { //this pet is sadly conjoined with another individual of its kind; untangle it by initializing it anew (which is what should have happened in the first place, save the minor detail of hunger propagation from the previous stage, which we no longer have any record of)
-				details = null;
-			}
-		}
-		if (details == null) { //init new pet
-			details = new PetDetails(pets.getGrowthRate() == 0.0 ? 100.0 : 0.0);
-			for (individual = 0; taken.contains(individual) && individual < 0xFFFF; individual++) {}
-			details.setIndividual(individual);
-			// Make a copy of the item to extract what the item's idHash will be when including the individual ID as a "charge" value.
-			// The copy is necessary since the player's inventory still contains the default-charged item, which we will be removing only later.
-			Item newItem = item.copy();
-			newItem.setCharge(individual);
-			petDetails.put(newItem.getIdHash(), details);
-		}
+		PetDetails details = this.petDetails.get(itemId).get(last);
 		int npcId = pets.getNpcId(itemId);
 		if (npcId > 0) {
 			familiar = new Pet(player, details, itemId, npcId);
+			((Pet) familiar).setHasWarned(hasWarned);
+			if (hunger != -1) ((Pet) familiar).getDetails().setHunger(hunger);
+			if (growth != -1) ((Pet) familiar).getDetails().setGrowth(growth);
 			if (deleteItem) {
 				player.animate(new Animation(827));
-				// We cannot use player().getInventory().remove(item), because that will remove the first pet item it sees, rather than the specific one (with the specific charge value) the player clicked.
-				// Instead, find the specific item the player dropped by slot, and remove that specific one.
-				int slot = player.getInventory().getSlotHash(item);
-				player.getInventory().remove(item, slot, true);
+				if (!player.getInventory().remove(item, true)) {
+					return false;
+				}
 			}
 			if (morph) {
 				morphFamiliar(location);
@@ -364,11 +351,7 @@ public final class FamiliarManager {
 			return;
 		}
 		Pet pet = ((Pet) familiar);
-		PetDetails details = pet.getDetails();
-		Item petItem = new Item(pet.getItemId());
-		petItem.setCharge(details.getIndividual());
-		if (player.getInventory().add(petItem)) {
-			petDetails.put(pet.getItemIdHash(),details);
+		if (player.getInventory().add(new Item(pet.getItemId()))) {
 			player.animate(Animation.create(827));
 			player.getFamiliarManager().dismiss();
 		}
@@ -423,11 +406,23 @@ public final class FamiliarManager {
 	}
 
 	/**
-	 * Removes the details for this pet.
-	 * @param itemIdHash The item id hash of the pet.
+	 * Adds pet details for a new pet to that pet's stack.
+	 * @param itemId The item id of the pet.
+	 * @param details The new pet details.
 	 */
-	public void removeDetails(int itemIdHash) {
-		petDetails.remove(itemIdHash);
+	public void addDetails(int itemId, PetDetails details) {
+		petDetails.get(itemId).add(details);
+	}
+
+	/**
+	 * Removes the details for this pet.
+	 * @param itemId The item id of the pet.
+	 */
+	public void removeDetails(int itemId) {
+		int last = petDetails.get(itemId).size() - 1;
+		if (last >= 0) {
+			petDetails.get(itemId).remove(last);
+		}
 	}
 
 	/**
@@ -521,7 +516,7 @@ public final class FamiliarManager {
 	}
 
 
-	public Map<Integer, PetDetails> getPetDetails() {
+	public Map<Integer, ArrayList<PetDetails>> getPetDetails() {
 		return petDetails;
 	}
 }

@@ -44,7 +44,7 @@ class SummoningTabListener : InterfaceListener {
                             // Dismiss now
                             if (player.getFamiliarManager().getFamiliar() is Pet) {
                                 val pet = player.familiarManager.familiar as Pet
-                                player.familiarManager.removeDetails(pet.getItemIdHash())
+                                player.familiarManager.removeDetails(pet.getItemId())
                             }
                             player.familiarManager.dismiss()
                         }
