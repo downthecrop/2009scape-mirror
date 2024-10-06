@@ -114,7 +114,6 @@ class ChampionChallengeListener : InteractionListener, MapArea {
     )
 
     private val PORTCULLIS = Scenery.PORTCULLIS_10553
-    private val LADDER = Scenery.LADDER_10554
     private val CHAMPION_STATUE_CLOSED = Scenery.CHAMPION_STATUE_10556
     private val CHAMPION_STATUE_OPEN = Scenery.CHAMPION_STATUE_10557
     private val TRAPDOOR_CLOSED = Scenery.TRAPDOOR_10558
@@ -124,6 +123,13 @@ class ChampionChallengeListener : InteractionListener, MapArea {
     private val ARENA_ZONE = 12696
 
     override fun defineListeners() {
+        // Champion's Guild Basement Ladder to Main Floor
+        addClimbDest(Location(3190, 9758, 0), Location(3190, 3356, 0))
+        // Champion Statue Ladder to Arena
+        addClimbDest(Location(3184, 9758, 0), Location(3182, 9758, 0))
+        // Arena Ladder to Champion's Guild Basement
+        addClimbDest(Location(3183, 9758, 0), Location(3185, 9758, 0))
+
         on(LARXUS, IntType.NPC, "talk-to") { player, _ ->
             openDialogue(player, LarxusDialogue(false))
             return@on true
@@ -134,32 +140,23 @@ class ChampionChallengeListener : InteractionListener, MapArea {
             return@on true
         }
 
-        on(TRAPDOOR_CLOSED, IntType.SCENERY, "open") { _, node ->
-            replaceScenery(node.asScenery(), TRAPDOOR_OPEN, 100, node.location)
-            return@on true
-        }
-
         onUseWith(IntType.NPC, ChampionScrollsDropHandler.SCROLLS, NPCs.LARXUS_3050) { player, _, _ ->
             openDialogue(player, LarxusDialogue(true))
             return@onUseWith true
         }
 
+        on(TRAPDOOR_CLOSED, IntType.SCENERY, "open") { _, node ->
+            replaceScenery(node.asScenery(), TRAPDOOR_OPEN, 100, node.location)
+            return@on true
+        }
+
         on(TRAPDOOR_OPEN, IntType.SCENERY, "close") { _, node ->
-            replaceScenery(node.asScenery(), TRAPDOOR_CLOSED, 100, node.location)
+            replaceScenery(node.asScenery(), TRAPDOOR_CLOSED, -1, node.location)
             return@on true
         }
 
         on(CHAMPION_STATUE_CLOSED, IntType.SCENERY, "open") { _, node ->
             replaceScenery(node.asScenery(), CHAMPION_STATUE_OPEN, 100, node.location)
-            return@on true
-        }
-
-        on(LADDER, IntType.SCENERY, "climb-up") { player, _ ->
-            teleport(player, Location.create(3185, 9758, 0))
-            return@on true
-        }
-        on(CHAMPION_STATUE_OPEN, IntType.SCENERY, "climb-down") { player, _ ->
-            teleport(player, Location.create(3182, 9758, 0))
             return@on true
         }
 

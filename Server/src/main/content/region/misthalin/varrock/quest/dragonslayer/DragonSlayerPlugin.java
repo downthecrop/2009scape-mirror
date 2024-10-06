@@ -101,10 +101,6 @@ public final class DragonSlayerPlugin extends OptionHandler {
 		SceneryDefinition.forId(25161).getHandlers().put("option:climb-over", this);
 		NPCDefinition.forId(742).getHandlers().put("option:attack", this);
 		NPCDefinition.forId(745).getHandlers().put("option:attack", this);
-		// guild
-		SceneryDefinition.forId(24357).getHandlers().put("option:climb-up", this);
-		SceneryDefinition.forId(10558).getHandlers().put("option:open", this);
-		SceneryDefinition.forId(10560).getHandlers().put("option:climb-up", this);
 		return this;
 	}
 
@@ -113,25 +109,12 @@ public final class DragonSlayerPlugin extends OptionHandler {
 		final Quest quest = player.getQuestRepository().getQuest("Dragon Slayer");
 		final int id = node instanceof Item ? ((Item) node).getId() : node instanceof Scenery ? ((Scenery) node).getId() : ((NPC) node).getId();
 		switch (id) {
-		case 10560:
-			ClimbActionHandler.climb(player, new Animation(828), Location.create(3191, 3355, 0));
-			break;
-		case 10558:
-			ClimbActionHandler.climb(player, new Animation(-1), Location.create(3189, 9758, 0));
-			return true;
 		case 1755:
 			if (player.getLocation().withinDistance(Location.create(2939, 9656, 0))) {
 				ClimbActionHandler.climb(player, new Animation(828), Location.create(2939, 3256, 0));
 			} else {
 				ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 				return true;
-			}
-			break;
-		case 24357:
-			if (player.getLocation().getDistance(Location.create(3188, 3358, 0)) < 3) {
-				ClimbActionHandler.climb(player, new Animation(828), Location.create(3188, 3354, 1));
-			} else {
-				ClimbActionHandler.climbLadder(player, (Scenery) node, "climb-up");
 			}
 			break;
 		case 742:

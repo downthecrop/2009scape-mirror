@@ -1,5 +1,6 @@
 package content.region.misthalin.lumbridge.handlers;
 
+import core.api.Container;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.component.Component;
@@ -21,6 +22,9 @@ import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Items;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Represents the node option handler for lumbridge.
@@ -45,6 +49,7 @@ public final class LumbridgeNodePlugin extends OptionHandler {
 		SceneryDefinition.forId(22114).getHandlers().put("option:open", this);
 		SceneryDefinition.forId(29355).getHandlers().put("option:climb-up", this);
 		SceneryDefinition.forId(37655).getHandlers().put("option:view", this);
+        SceneryDefinition.forId(org.rs09.consts.Scenery.LOGS_36974).getHandlers().put("option:take-axe", this);
 		return this;
 	}
 
@@ -114,8 +119,13 @@ public final class LumbridgeNodePlugin extends OptionHandler {
             case 37655:
                 player.getInterfaceManager().open(new Component(270));
                 break;
-
-
+            case org.rs09.consts.Scenery.LOGS_36974:
+                if (!addItem(player, Items.BRONZE_AXE_1351, 1, Container.INVENTORY)) {
+                    sendMessage(player, "You don't have enough inventory space to hold that item.");
+                } else {
+                    replaceScenery(node.asScenery(), org.rs09.consts.Scenery.LOGS_36975, 300, null);
+                }
+                return true;
         }
         return true;
     }

@@ -37,9 +37,6 @@ public final class DemonSlayerPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		SceneryDefinition.forId(881).getHandlers().put("option:open", this);
-		SceneryDefinition.forId(882).getHandlers().put("option:close", this);
-		SceneryDefinition.forId(882).getHandlers().put("option:climb-down", this);
 		SceneryDefinition.forId(DRAIN_ID).getHandlers().put("option:search", this);
 		SceneryDefinition.forId(17429).getHandlers().put("option:take", this);
 		NPCDefinition.forId(DemonSlayerCutscene.DELRITH).getHandlers().put("option:attack", this);
@@ -71,23 +68,6 @@ public final class DemonSlayerPlugin extends OptionHandler {
 				player.sendMessage("You search the castle drain and find nothing of value.");
 			}
 			return true;
-		case 881:
-			SceneryBuilder.replace(((Scenery) node), ((Scenery) node).transform(882));
-			break;
-		case 882:
-			switch (option) {
-			case "climb-down":
-				if (node.getLocation().equals(new Location(3237, 3458, 0))) {
-					ClimbActionHandler.climb(player, new Animation(828), SEWER_LOCATION);
-				} else {
-					ClimbActionHandler.climbLadder(player, (Scenery) node, option);
-				}
-				break;
-			case "close":
-				SceneryBuilder.replace(((Scenery) node), ((Scenery) node).transform(881));
-				break;
-			}
-			break;
 		case 17429:
 			if (quest.getStage(player) == 20 && player.getInventory().add(DemonSlayer.FIRST_KEY)) {
                                 setVarp(player, 222, 4757762, true);
