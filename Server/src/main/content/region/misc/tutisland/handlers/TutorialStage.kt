@@ -814,10 +814,10 @@ object TutorialStage {
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
-                        "This is your worn equipment.",
-                        "From here you can see what items you have equipped. You will",
-                        "notice the button 'Show Equipment Stats'. Click on this now to",
-                        "display the details of what you have equipped.",
+                        "This is your worn inventory.",
+                        "From here you can see what items you have equipped. Let's",
+                        "get one of those slots filled, go back to your inventory and",
+                        "right click your dagger, select wield from the menu.",
                         ""
                     )
                 )
