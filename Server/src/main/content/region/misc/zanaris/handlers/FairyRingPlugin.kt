@@ -1,13 +1,15 @@
 package content.region.misc.zanaris.handlers
 
-import core.api.*
-import core.game.component.Component
+import content.global.handlers.iface.FairyRingInterface
+import core.api.anyInEquipment
+import core.api.hasRequirement
+import core.api.openInterface
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager.TeleportType
 import core.game.world.map.Location
 import org.rs09.consts.Items
-import core.game.interaction.InteractionListener
-import core.game.interaction.IntType
 
 /**
  * Handles interactions with fairy rings
@@ -59,17 +61,7 @@ class FairyRingPlugin : InteractionListener {
         return true
     }
 
-    private fun reset(player: Player) {
-        player.removeAttribute("fairy-delay")
-        player.removeAttribute("fairy_location_combo")
-        for (i in 0..2) {
-            setVarp(player, 816 + i, 0)
-        }
-    }
-
     private fun openFairyRing(player: Player) {
-        reset(player)
-        player.interfaceManager.openSingleTab(Component(735))
-        player.interfaceManager.open(Component(734))
+        openInterface(player, FairyRingInterface.RINGS_IFACE)
   }
 }

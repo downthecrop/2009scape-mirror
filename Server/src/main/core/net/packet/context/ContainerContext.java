@@ -34,7 +34,9 @@ public final class ContainerContext implements Context {
 	/**
 	 * The items.
 	 */
-	private final Item[] items;
+	private Item[] items;
+
+	public int[] ids;
 
 	/**
 	 * The length of the array to send.
@@ -112,6 +114,17 @@ public final class ContainerContext implements Context {
 		this.items = items;
 		this.length = length;
 		this.split = split;
+		this.slots = null;
+	}
+
+	public ContainerContext(Player player, int interfaceId, int childId, int containerId, int[] items) {
+		this.player = player;
+		this.interfaceId = interfaceId;
+		this.childId = childId;
+		this.containerId = containerId;
+		this.ids = items;
+		this.length = items.length;
+		this.split = false;
 		this.slots = null;
 	}
 

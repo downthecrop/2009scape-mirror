@@ -2,109 +2,128 @@ package content.global.handlers.iface
 
 import core.api.*
 import core.game.event.FairyRingDialEvent
-import core.game.component.Component
+import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.system.task.Pulse
+import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.tools.RandomFunction
-import core.game.interaction.InterfaceListener
-import core.game.world.GameWorld
 
-val RING_1 = arrayOf('a','d','c','b')
-val RING_2 = arrayOf('i','l','k','j')
-val RING_3 = arrayOf('p','s','r','q')
 
 /**
  * Handles the fairy ring interface
  * @author Ceikry
  */
 class FairyRingInterface : InterfaceListener {
-
-    val RINGS = 734
-    val TRAVEL_LOG = 735
+    companion object {
+        const val RINGS_IFACE = 734
+        const val LOG_IFACE_ID = 735
+        const val VARP_F_RING = 816
+        const val VB_LOG_SORT_ORDER = 4618
+        const val VB_RING_1 = 2341
+        const val VB_RING_2 = 2342
+        const val VB_RING_3 = 2343
+        val RING_1 = arrayOf('a','d','c','b')
+        val RING_2 = arrayOf('i','l','k','j')
+        val RING_3 = arrayOf('p','s','r','q')
+    }
 
     override fun defineInterfaceListeners() {
 
-        onOpen(RINGS){player, _ ->
-            player.interfaceManager.openSingleTab(Component(TRAVEL_LOG))
-            player.setAttribute("fr:ring1", 0)
-            player.setAttribute("fr:ring2", 0)
-            player.setAttribute("fr:ring3", 0)
-            FairyRing.drawLog(player)
+        onOpen(RINGS_IFACE){ player, _ ->
+            openSingleTab(player, LOG_IFACE_ID)
+            saveVarp(player, VARP_F_RING)
             return@onOpen true
         }
 
-        onClose(RINGS){player, _ ->
-            closeTabInterface(player)
-            player.removeAttribute("fr:ring1")
-            player.removeAttribute("fr:ring2")
-            player.removeAttribute("fr:ring3")
-            setVarp(player, 816, 0)
+        onOpen(LOG_IFACE_ID){ player, _ ->
+            drawLog(player)
+            return@onOpen true
+        }
+
+        onClose(RINGS_IFACE){ player, _ ->
             closeTabInterface(player)
             return@onClose true
         }
 
-        on(RINGS){player, _, _, buttonID, _, _ ->
-            if(player.getAttribute("fr:time",0L) > System.currentTimeMillis()) return@on true
-            var delayIncrementer = 1750L
+        on(RINGS_IFACE){ player, _, _, buttonID, _, _ ->
             when(buttonID){
-                23 -> delayIncrementer += increment(player,1)
-                25 -> delayIncrementer += increment(player,2)
-                27 -> delayIncrementer += increment(player,3)
+                23 -> increment(player,1)
+                25 -> increment(player,2)
+                27 -> increment(player,3)
                 24 -> decrement(player,1)
                 26 -> decrement(player,2)
                 28 -> decrement(player,3)
                 21 -> confirm(player)
             }
-            player.setAttribute("fr:time",System.currentTimeMillis() + delayIncrementer)
             return@on true
         }
 
-        on(TRAVEL_LOG,12){player, _, _, _, _, _ ->
+        on(LOG_IFACE_ID,12){ player, _, _, _, _, _ ->
             toggleSortOrder(player)
             return@on true
         }
 
     }
 
-    private fun toggleSortOrder(player: Player): Long{
-        val ring1index = player.getAttribute("fr:ring1",0)
-        var toSet = player.getAttribute("fr:sortorder",true)
-        toSet = !toSet
-        player.setAttribute("fr:sortorder",toSet)
-        if(toSet) {
-            setVarp(player, 816, ring1index)
-            player.setAttribute("fr:ring2",0)
-            player.setAttribute("fr:ring3",0)
+    /**
+     * Draws the travel log interface
+     * Currently, the visited logs is a bool array in globalData. Someone should migrate this to prefs or something at some point.
+     * On transmit of Varp 816, which all used varbits are part of here, the CS2 is invoked to populate the codes in the log and sort them correctly.
+     * @param player The player to draw the interface for
+     */
+    private fun drawLog (player: Player)
+    {
+        for (i in FairyRing.values().indices) {
+            if (!player.savedData.globalData.hasTravelLog(i)) {
+                continue
+            }
+            val ring = FairyRing.values()[i]
+            if (ring.childId == -1) {
+                continue
+            }
+            setInterfaceText(player, "<br>${ring.tip}", LOG_IFACE_ID, ring.childId)
         }
-        return -1750L
     }
 
-    fun increment(player: Player,ring: Int): Long{
-        val curIndex = player.getAttribute("fr:ring$ring",0)
-        var nextIndex = 0
-        if(curIndex == 3) nextIndex = 0
-        else if(curIndex == 1) nextIndex = 3
-        else if(curIndex == 2) nextIndex = 2
-        else nextIndex = curIndex + 1
-        player.setAttribute("fr:ring$ring",nextIndex)
-        return if (curIndex == 1) 1750L else 0L
+    private fun toggleSortOrder(player: Player) {
+        val curSort = getVarbit(player, VB_LOG_SORT_ORDER) == 0
+        setVarbit(player, VB_LOG_SORT_ORDER, if (curSort) 1 else 0)
+        drawLog(player)
+    }
+
+    fun increment(player: Player,ring: Int) {
+        val vbit = when(ring) {
+            1 -> VB_RING_1
+            2 -> VB_RING_2
+            3 -> VB_RING_3
+            else -> return
+        }
+        val curIndex = getVarbit(player, vbit)
+        val nextIndex: Int = if(curIndex == 3) 0
+        else curIndex + 1
+        setVarbit(player, vbit, nextIndex)
     }
 
     fun decrement(player: Player,ring: Int){
-        val curIndex = player.getAttribute("fr:ring$ring",0)
-        var nextIndex = 0
-        if(curIndex == 0) nextIndex = 3
-        else nextIndex = curIndex - 1
-        player.setAttribute("fr:ring$ring",nextIndex)
+        val vbit = when(ring) {
+            1 -> VB_RING_1
+            2 -> VB_RING_2
+            3 -> VB_RING_3
+            else -> return
+        }
+        val curIndex = getVarbit(player, vbit)
+        val nextIndex: Int = if(curIndex == 0) 3
+        else curIndex - 1
+        setVarbit(player, vbit, nextIndex)
     }
 
     private fun confirm(player: Player){
-        val ring1index = player.getAttribute("fr:ring1",0)
-        val ring2index = player.getAttribute("fr:ring2",0)
-        val ring3index = player.getAttribute("fr:ring3",0)
+        val ring1index = getVarbit(player, VB_RING_1)
+        val ring2index = getVarbit(player, VB_RING_2)
+        val ring3index = getVarbit(player, VB_RING_3)
         val code = "${RING_1[ring1index]}${RING_2[ring2index]}${RING_3[ring3index]}"
         val ring: FairyRing? = try {
             FairyRing.valueOf(code.uppercase())
@@ -207,24 +226,5 @@ enum class FairyRing(val tile: Location?, val tip: String = "", val childId: Int
 
     open fun checkAccess(player: Player) : Boolean {
         return true
-    }
-
-    companion object {
-        /**
-         * Draws the travel log.
-         * @param player the player.
-         */
-        fun drawLog(player: Player) {
-            for (i in FairyRing.values().indices) {
-                if (!player.savedData.globalData.hasTravelLog(i)) {
-                    continue
-                }
-                val ring = FairyRing.values()[i]
-                if (ring.childId == -1) {
-                    continue
-                }
-                setInterfaceText(player, "<br>${ring.tip}", 735, ring.childId)
-            }
-        }
     }
 }
