@@ -22,6 +22,7 @@ import org.rs09.consts.NPCs;
  */
 @Initializable
 public class PriestInPerilOptionPlugin extends OptionHandler {
+
 	/**
 	 * (non-Javadoc)
 	 * @see Plugin#newInstance(Object)
@@ -105,6 +106,8 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 				} else {
 					item = 2347;
 				}
+				player.getPacketDispatch().sendItemZoomOnInterface(item, 512, 272, 4);
+				player.getPacketDispatch().sendAngleOnInterface(272, 4, 512, 128, 0);
 				message = "Saradomin is the hammer that crushes evil everywhere.";
 			}
 			if (id == 3498) {
@@ -113,6 +116,8 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 				} else {
 					item = 1733;
 				}
+				player.getPacketDispatch().sendItemZoomOnInterface(item, 512, 272, 4);
+				player.getPacketDispatch().sendAngleOnInterface(272, 4, 512, 128, 0);
 				message = "Saradomin is the needle that binds our lives together.";
 			}
 			if (id == 3495) {
@@ -121,6 +126,8 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 				} else {
 					item = 1931;
 				}
+				player.getPacketDispatch().sendItemZoomOnInterface(item, 512, 272, 4);
+				player.getPacketDispatch().sendAngleOnInterface(272, 4, 512, 128, 0);
 				message = "Saradomin is the vessel that keeps our lives from harm.";
 			}
 			if (id == 3497) {
@@ -129,6 +136,8 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 				} else {
 					item = 314;
 				}
+				player.getPacketDispatch().sendItemZoomOnInterface(item, 512, 272, 4);
+				player.getPacketDispatch().sendAngleOnInterface(272, 4, 512, 128, 0);
 				message = "Saradomin is the delicate touch that brushes us with love.";
 			}
 			if (id == 3494) {
@@ -137,6 +146,8 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 				} else {
 					item = 36;
 				}
+				player.getPacketDispatch().sendItemZoomOnInterface(item, 512, 272, 4);
+				player.getPacketDispatch().sendAngleOnInterface(272, 4, 512, 256, 0);
 				message = "Saradomin is the light that shines throughout our lives.";
 			}
 			if (id == 3499) {
@@ -145,6 +156,8 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 				} else {
 					item = 2944;
 				}
+				player.getPacketDispatch().sendItemZoomOnInterface(item, 512, 272, 4);
+				player.getPacketDispatch().sendAngleOnInterface(272, 4, 512, 256, 0);
 				message = "Saradomin is the key that unlocks the mysteries of life.";
 			}
 			if (id == 3493) {
@@ -153,10 +166,13 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 				} else {
 					item = 590;
 				}
+				player.getPacketDispatch().sendItemZoomOnInterface(item, 320, 272, 4);
+				player.getPacketDispatch().sendAngleOnInterface(272, 4, 320, 256, 0);
 				message = "Saradomin is the spark that lights the fire in our hearts.";
 			}
 			player.getPacketDispatch().sendString(message, 272, 17);
-			player.getPacketDispatch().sendItemZoomOnInterface(item, 175, 272, 4);
+			// In SD, this is fine. in HD, this gets clipped when you zoom out too much or zoom in too much.
+			//player.getPacketDispatch().sendItemZoomOnInterface(item, 175, 272, 4);
 			break;
 		case "take-from":
 			player.getImpactHandler().handleImpact(player, 2, CombatStyle.MELEE);
