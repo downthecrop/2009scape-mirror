@@ -566,12 +566,12 @@ class PlayerSaver (val player: Player){
             val skill = JSONObject()
             skill.put("id",i.toString())
             skill.put("static",player.skills.staticLevels[i].toString())
-            if(i == Skills.HITPOINTS){
-                skill.put("dynamic",player.skills.lifepoints.toString())
-            } else if (i == Skills.PRAYER){
-                skill.put("dynamic",ceil(player.skills.prayerPoints).toInt().toString())
-            } else {
-                skill.put("dynamic",player.skills.dynamicLevels[i].toString())
+            skill.put("dynamic",player.skills.dynamicLevels[i].toString())
+            if (i == Skills.HITPOINTS) {
+                skill.put("lifepoints",player.skills.lifepoints.toString())
+            }
+            if (i == Skills.PRAYER) {
+                skill.put("prayerPoints",player.skills.prayerPoints.toString())
             }
             skill.put("experience",player.skills.getExperience(i).toString())
             skills.add(skill)

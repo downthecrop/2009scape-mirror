@@ -1,6 +1,7 @@
 package core.game.node.entity.skill;
 
 import content.global.skill.skillcapeperks.SkillcapePerks;
+import core.ServerConstants;
 import core.game.event.DynamicSkillLevelChangeEvent;
 import core.game.event.XPGainEvent;
 import content.global.handlers.item.equipment.brawling_gloves.BrawlingGloves;
@@ -369,36 +370,30 @@ public final class Skills {
 		rechargePrayerPoints();
 	}
 
-	/**
-	 * Parses the skill data from the buffer.
-	 * @param buffer The byte buffer.
-	 */
-	public void parse(ByteBuffer buffer) {
-		for (int i = 0; i < 24; i++) {
-			experience[i] = ((double) buffer.getInt() / 10D);
-			dynamicLevels[i] = buffer.get() & 0xFF;
-			if (i == HITPOINTS) {
-				lifepoints = dynamicLevels[i];
-			} else if (i == PRAYER) {
-				prayerPoints = dynamicLevels[i];
-			}
-			staticLevels[i] = buffer.get() & 0xFF;
-		}
-		experienceGained = buffer.getInt();
-	}
-
 	public void parse(JSONArray skillData){
 		for(int i = 0; i < skillData.size(); i++){
 			JSONObject skill = (JSONObject) skillData.get(i);
 			int id = Integer.parseInt( skill.get("id").toString());
-			dynamicLevels[id] = Integer.parseInt( skill.get("dynamic").toString());
-			if (id == HITPOINTS) {
-				lifepoints = dynamicLevels[i];
-			} else if (id == PRAYER) {
-				prayerPoints = dynamicLevels[i];
-			}
-			staticLevels[id] = Integer.parseInt( skill.get("static").toString());
+			dynamicLevels[id] = Integer.parseInt(skill.get("dynamic").toString());
+			staticLevels[id] = Integer.parseInt(skill.get("static").toString());
 			experience[id] = Double.parseDouble(skill.get("experience").toString());
+			int version = entity instanceof Player ? entity.asPlayer().version : ServerConstants.CURRENT_SAVEFILE_VERSION;
+			if (i == HITPOINTS) {
+				if (version < 3 && !skill.containsKey("lifepoints")) { //!1881
+					lifepoints = dynamicLevels[id];
+					dynamicLevels[id] = staticLevels[id];
+				} else {
+					lifepoints = Integer.parseInt(skill.get("lifepoints").toString());
+				}
+			}
+			if (i == PRAYER) {
+				if (version < 3 && !skill.containsKey("prayerPoints")) { //!1881
+					prayerPoints = dynamicLevels[id];
+					dynamicLevels[id] = staticLevels[id];
+				} else {
+					prayerPoints = Double.parseDouble(skill.get("prayerPoints").toString());
+				}
+			}
 		}
 	}
 
@@ -432,13 +427,7 @@ public final class Skills {
 	public void save(ByteBuffer buffer) {
 		for (int i = 0; i < 24; i++) {
 			buffer.putInt((int) (experience[i] * 10));
-			if (i == HITPOINTS) {
-				buffer.put((byte) lifepoints);
-			} else if (i == PRAYER) {
-				buffer.put((byte) Math.ceil(prayerPoints));
-			} else {
-				buffer.put((byte) dynamicLevels[i]);
-			}
+			buffer.put((byte) dynamicLevels[i]);
 			buffer.put((byte) staticLevels[i]);
 		}
 		buffer.putInt((int) experienceGained);
