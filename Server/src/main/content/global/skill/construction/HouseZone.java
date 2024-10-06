@@ -37,7 +37,7 @@ public final class HouseZone extends MapZone {
      * Constructs the house zone object.
      */
     public HouseZone(HouseManager house) {
-        super("poh-zone" + house, true, ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.FOLLOWERS);
+        super("poh-zone" + house, true);
         this.house = house;
     }
 

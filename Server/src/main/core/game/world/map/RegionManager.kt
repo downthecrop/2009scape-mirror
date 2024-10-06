@@ -312,23 +312,37 @@ object RegionManager {
         if (owner == null || node == null) {
             return null
         }
-        var destination: Location? = null
         outer@ for (i in 0..7) {
             val dir = Direction.get(i)
-            inner@for(j in 0 until node.size()) {
-                val l = owner.location.transform(dir, j)
-                for (x in 0 until node.size()) {
-                    for (y in 0 until node.size()) {
-                        if (isClipped(l.transform(x, y, 0))) {
-                            continue@inner
-                        }
+            var stepX = dir.stepX
+            var stepY = dir.stepY
+            // For objects that are larger than 1, the below corrects for the fact that their origin is on the SW tile
+            if (dir.stepX < 0) {
+                stepX -= (node.size() - 1)
+            }
+            if (dir.stepY < 0) {
+                stepY -= (node.size() - 1)
+            }
+            if (owner.size() > 1) { //e.g. if you used ::pnpc to morph yourself into a large NPC
+                if (dir.stepX > 0) {
+                    stepX += (owner.size() - 1)
+                }
+                if (dir.stepY > 0) {
+                    stepY += (owner.size() - 1)
+                }
+            }
+            val l = owner.location.transform(stepX, stepY, 0)
+            // Check if ALL target tiles are unclipped
+            for (x in 0 until node.size()) {
+                for (y in 0 until node.size()) {
+                    if (isClipped(l.transform(x, y, 0))) {
+                        continue@outer
                     }
                 }
-                destination = l
-                break@outer
             }
+            return l
         }
-        return destination
+        return null
     }
 
     /**
