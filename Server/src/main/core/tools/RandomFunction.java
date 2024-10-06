@@ -49,9 +49,9 @@ public class RandomFunction {
 	 * @param chance the 1/chance rate for the roll to succeed
 	 * @return true if you hit the roll, false otherwise
 	 */
-	public static boolean roll(int chance){
+	public static boolean roll(int chance) {
 		if (chance <= 1) return true;
-		return random(chance + 1) == chance / 2;
+		return random(chance) == 1;
 	}
 
 	/**

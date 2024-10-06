@@ -204,7 +204,7 @@ public class SmeltingPulse extends SkillPulse<Item> {
                 }
                 return true;
             } else {
-                return RandomFunction.getRandom(100) <= (player.getSkills().getLevel(Skills.SMITHING) >= 45 ? 80 : 50);
+                return RandomFunction.nextBool();
             }
         }
         return true;
