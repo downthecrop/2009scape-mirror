@@ -79,16 +79,6 @@ public class WhatLiesBelow extends Quest {
 	public static final Item BEACON_RING = new Item(Items.BEACON_RING_11014);
 
 	/**
-	 * The requirement messages.
-	 */
-	private static final String[] REQS = new String[] {
-			"<blue>Have level 35 <red>Runecrafting.",
-			"<blue>Be able to defeat a <red>level 47 enemy.",
-			"<blue>I need to have completed the <red>Rune Mysteries <blue>quest.",
-			"<blue>Have a <red>Mining <blue>level of 42 to use the <red>Chaos Tunnel."
-	};
-
-	/**
 	 * The requirements.
 	 */
 	private final boolean[] requirements = new boolean[4];
@@ -109,36 +99,81 @@ public class WhatLiesBelow extends Quest {
 	@Override
 	public void drawJournal(Player player, int stage) {
 		super.drawJournal(player, stage);
-		switch (stage) {
-		case 0:
-			line(player, "<blue>I can start this quest by speaking to <red>Rat Burgiss <blue>on the<n><blue>road south of <red>Varrock.<n><blue>Before I begin I will need to:<n>" + getReqMessage(player), 11);
-			break;
-		case 10:
-			line(player, "<red>Rat<blue>, a trader in Varrock, has asked me to help him with a task.<n><blue>I need to kill<red> outlaws <blue>west of Varrock so that I can collect 5 of <n><blue>Rat's <red>papers<blue>.", 11);
-			break;
-		case 20:
-			line(player, "<red>Rat<blue>, a trader in Varrock, has asked me to help him with a task.<n><str>I need to kill outlaws west of Varrock so that I can collect<n><str>5 of Rat's papers.I have delivered Rat's folder to him. Perhaps I<n><str>should speak to him again.<n><blue>I need to deliver <red>Rat's<blue> letter to <red>Surok Magis<n><blue>in <red>Varrock.", 11);
-			break;
-		case 30:
-		case 40:
-			line(player, "<str>Rat, a trader in Varrock, has asked me to help him with a task.<n><str>Surok, a Wizard in Varrock, has asked me to complete a task for him.<n><str>I need to kill the outlaws west of Varrock so that I can collect<n><str>5 of Rat's papers.<str>I have delivered Rat's folder to him. Perhaps I<n><str>should speak to him again.<str>I need to deliver Rat's letter to <n><str>Surok Magis in Varrock. <str>I need to talk to Surok about the<n><str>secret he has for me.<n><blue>I need to infuse the <red>metal wand <blue>with <red>chaos runes <blue>at the <red>Chaos Altar<blue>.<n><blue>I also need<blue>to find or buy an empty <red>bowl.", 11);
-			break;
-		case 50:
-			line(player, "<str>Rat, a trader in Varrock, has asked me to help him with a task.<n><str>Surok, a Wizard in Varrock, has asked me to complete a task for him.<n><str>I need to kill the outlaws west of Varrock so that I can collect<n><str>5 of Rat's papers.<str>I have delivered Rat's folder to him. Perhaps I<n><str>should speak to him again.<str>I need to deliver Rat's letter to <n><str>Surok Magis in Varrock. <str>I need to talk to Surok about the<n><str>secret he has for me.<n><str>I need to infuse the <str>metal wand <str>with chaos runes <str>at the <str>Chaos Altar<str>.<n><str>I also need<str> to find or buy an empty <str>bowl.<n><str>I need to infuse the metal wand with chaos runes at the Chaos Altar.<n><str>I also need to find or buy an empty bowl.<n><str>I need to take the glowing wand I have created back to Surok in Varrock<n><str>with an empty bowl.<n><str>I need to deliver Surok's letter to Rat who is waiting for me south<n><blue>of Varrock. <blue>I should speak to <red>Rat<blue> again; he is waiting for me <n><blue>south of Varrock", 11);
-			break;
-		case 60:
-			line(player, "<str>Rat, a trader in Varrock, has asked me to help him with a task.<n><str>Surok, a Wizard in Varrock, has asked me to complete a task for him.<n><str>I need to kill the outlaws west of Varrock so that I can collect<n><str>5 of Rat's papers.<str>I have delivered Rat's folder to him. Perhaps I<n><str>should speak to him again.<str>I need to deliver Rat's letter to <n><str>Surok Magis in Varrock. <str>I need to talk to Surok about the<n><str>secret he has for me.<n><str>I need to infuse the <str>metal wand <str>with chaos runes <str>at the <str>Chaos Altar<str>.<n><str>I also need<str> to find or buy an empty <str>bowl.<n><str>I need to infuse the metal wand with chaos runes at the Chaos Altar.<n><str>I also need to find or buy an empty bowl.<n><str>I need to take the glowing wand I have created back to Surok in Varrock<n><str>with an empty bowl.<n><str>I need to deliver Surok's letter to Rat who is waiting for me south<n><str>of Varrock.<str>I should speak to Rat again; he is waiting for me <n><str>south of Varrock<n><blue>I need to speak to <red>Zaff <blue>of <red>Zaff's Staffs <blue>in Varrock.", 11);
-			break;
-		case 70:
-			line(player, "<str>Rat, a trader in Varrock, has asked me to help him with a task.<n><str>Surok, a Wizard in Varrock, has asked me to complete a task for him.<n><str>I need to kill the outlaws west of Varrock so that I can collect<n><str>5 of Rat's papers.<str>I have delivered Rat's folder to him. Perhaps I<n><str>should speak to him again.<str>I need to deliver Rat's letter to <n><str>Surok Magis in Varrock. <str>I need to talk to Surok about the<n><str>secret he has for me.<n><str>I need to infuse the <str>metal wand <str>with chaos runes <str>at the <str>Chaos Altar<str>.<n><str>I also need<str> to find or buy an empty <str>bowl.<n><str>I need to infuse the metal wand with chaos runes at the Chaos Altar.<n><str>I also need to find or buy an empty bowl.<n><str>I need to take the glowing wand I have created back to Surok in Varrock<n><str>with an empty bowl.<n><str>I need to deliver Surok's letter to Rat who is waiting for me south<n><str>of Varrock.<str>I should speak to Rat again; he is waiting for me <n><str>south of Varrock<n><str>I need to speak to Zaff of Zaff's Staffs in Varrock.<n><blue>I need to tell <red>Surok <blue>in Varrock that he is under arrest.", 11);
-			break;
-		case 80:
-		case 90:
-			line(player, "<str>Rat, a trader in Varrock, has asked me to help him with a task.<n><str>Surok, a Wizard in Varrock, has asked me to complete a task for him.<n><str>I need to kill the outlaws west of Varrock so that I can collect<n><str>5 of Rat's papers.<str>I have delivered Rat's folder to him. Perhaps I<n><str>should speak to him again.<str>I need to deliver Rat's letter to <n><str>Surok Magis in Varrock. <str>I need to talk to Surok about the<n><str>secret he has for me.<n><str>I need to infuse the <str>metal wand <str>with chaos runes <str>at the <str>Chaos Altar<str>.<n><str>I also need<str> to find or buy an empty <str>bowl.<n><str>I need to infuse the metal wand with chaos runes at the Chaos Altar.<n><str>I also need to find or buy an empty bowl.<n><str>I need to take the glowing wand I have created back to Surok in Varrock<n><str>with an empty bowl.<n><str>I need to deliver Surok's letter to Rat who is waiting for me south<n><str>of Varrock.<str>I should speak to Rat again; he is waiting for me <n><str>south of Varrock<n><str>I need to speak to Zaff of Zaff's Staffs in Varrock.<n><str>I need to tell Surok in Varrock that he is under arrest.<n><str>I need to defeat King Roald in Varrock so that Zaff can remove the<n><str>mind-control spell.<n><blue>I need to tell <red>Rat <blue>what has happened; he is waiting for me<n><blue>south of Varrock.", 11);
-			break;
-		case 100:
-			line(player, "<str>Rat, a trader in Varrock, has asked me to help him with a task.<n><str>Surok, a Wizard in Varrock, has asked me to complete a task for him.<n><str>I need to kill the outlaws west of Varrock so that I can collect<n><str>5 of Rat's papers.<str>I have delivered Rat's folder to him. Perhaps I<n><str>should speak to him again.<str>I need to deliver Rat's letter to <n><str>Surok Magis in Varrock. <str>I need to talk to Surok about the<n><str>secret he has for me.<n><str>I need to infuse the <str>metal wand <str>with chaos runes <str>at the <str>Chaos Altar<str>.<n><str>I also need<str> to find or buy an empty <str>bowl.<n><str>I need to infuse the metal wand with chaos runes at the Chaos Altar.<n><str>I also need to find or buy an empty bowl.<n><str>I need to take the glowing wand I have created back to Surok in Varrock<n><str>with an empty bowl.<n><str>I need to deliver Surok's letter to Rat who is waiting for me south<n><str>of Varrock.<str>I should speak to Rat again; he is waiting for me <n><str>south of Varrock<n><str>I need to speak to Zaff of Zaff's Staffs in Varrock.<n><str>I need to tell Surok in Varrock that he is under arrest.<n><str>I need to defeat King Roald in Varrock so that Zaff can remove the<n><str>mind-control spell.<n><str>I need to tell Rat what has happened; he is waiting for me<n><str>south of Varrock.<n><n><col=FF0000>QUEST COMPLETE!<n><blue>I have been given information about the <red>Chaos Tunnel<blue>.<n><blue>Zaff has given me the <red>Beacon Ring<blue>.", 11);
-			break;
+		var line = 12;
+
+		if(stage == 0){
+			line(player, "I can start this quest by speaking to !!Rat Burgiss?? on the", line++);
+			line(player, "road south of !!Varrock??.", line++);
+			line(player, "Before I begin I will need to:", line++);
+			line(player, "Have level 35 !!Runecrafting??.", line++, getStatLevel(player, Skills.RUNECRAFTING) >= 35);
+			line(player, "Be able to defeat a !!level 47 enemy??.", line++);
+			line(player, "I need to have completed the !!Rune Mysteries?? quest.", line++, isQuestComplete(player, "Rune Mysteries"));
+			line(player, "Have a !!Mining?? level of 42 to use the !!Chaos Tunnel??.", line++, getStatLevel(player, Skills.MINING) >= 42);
+		} else {
+			// These are somehow at the top with different stage when crossed out.
+			if (stage >= 10) {
+				line(player, "!!Rat??, a trader in Varrock, has asked me to help him with a", line++, stage >= 30);
+				line(player, "task.", line++, stage >= 30);
+			}
+			if (stage >= 30) {
+				line(player, "!!Surok??, a Wizard in Varrock, has asked me to complete a", line++, stage >= 50);
+				line(player, "task for him.", line++, stage >= 50);
+			}
+			// End
+
+			if (stage >= 10) {
+				line(player, "I need to kill !!outlaws?? west of Varrock so that I can collect 5", line++, stage >= 20);
+				line(player, "of Rat's !!papers??.", line++, stage >= 20);
+				if (inInventory(player, Items.FULL_FOLDER_11007, 1)) {
+					line(player, "I should take the !!full folder?? back to Rat.", line++);
+				}
+			}
+			if (stage >= 20) {
+				line(player, "I have delivered Rat's folder to him. Perhaps I should", line++, stage >= 30);
+				line(player, "should speak to him again.", line++, stage >= 30);
+				// Should be separated stages
+				line(player, "I need to deliver !!Rat's?? letter to !!Surok Magis?? in !!Varrock??.", line++, stage >= 30);
+				// Should be separated stages
+				line(player, "I need to talk to !!Surok?? about the secret he has for me.", line++, stage >= 30);
+			}
+			if (stage >= 30) {
+				line(player, "I need to infuse the !!metal wand?? with !!chaos runes?? at the", line++, stage >= 50);
+				line(player, "!!Chaos Altar??. I also need to find or buy an empty !!bowl??.", line++, stage >= 50);
+			}
+			if (stage >= 50) {
+				line(player, "I need to take the !!glowing wand?? I have created back to", line++, true);
+				line(player, "!!Surok?? in Varrock along with an empty !!bowl??.", line++, true);
+				// Should be separated stages
+				line(player, "I need to deliver !!Surok's letter?? to !!Rat?? who is waiting for me", line++, true);
+				line(player, "south of Varrock.", line++, true);
+				// Should be separated stages
+				line(player, "I should speak to !!Rat?? again; he is waiting for me south of", line++, stage >= 60);
+				line(player, "Varrock.", line++, stage >= 60);
+			}
+			if (stage >= 60) {
+				line(player, "I need to speak to !!Zaff?? of !!Zaff's Staffs?? in Varrock.", line++, stage >= 70);
+			}
+			if (stage >= 70) {
+				line(player, "I need to tell !!Surok?? in Varrock that he is under arrest.", line++, stage >= 80);
+			}
+			if (stage >= 80) {
+				line(player, "I need to defeat !!King Roald?? in Varrock so that !!Zaff?? can", line++, true);
+				line(player, "remove the mind-control spell.", line++, true);
+				// Should be separated stages
+				line(player, "I need to tell !!Rat?? what has happened; he is waiting for me", line++, stage >= 100);
+				line(player, "south of Varrock.", line++, stage >= 100);
+			}
+			if (stage >= 100) {
+				line++;
+				line++;
+				line(player,"<col=FF0000>QUEST COMPLETE!</col>", line++);
+				line++;
+				line(player, "I have been given information about the !!Chaos Tunnel??.", line++);
+				line(player, "Zaff has given me the !!Beacon Ring??.", line++);
+				line++;
+				line(player, "I have also been given !!8,000 Runecrafting XP, 2000??.", line++);
+				line(player, "!!Defence XP?? and !!1 Quest Point??.", line++);
+			}
 		}
 	}
 
@@ -161,22 +196,6 @@ public class WhatLiesBelow extends Quest {
 		player.getQuestRepository().syncronizeTab(player);
 	}
 
-	/**
-	 * Gets the req message.
-	 * @return the message.
-	 */
-	public String getReqMessage(Player player) {
-		hasRequirements(player);
-		String s = "";
-		for (int i = 0; i < requirements.length; i++) {
-			String l = REQS[i];
-			if (requirements[i]) {
-				l = l.replace("<blue>", "").replace("<red>", "").trim();
-			}
-			s += (requirements[i] ? "<str>" : "") + l + "<n>";
-		}
-		return s;
-	}
 
 	@Override
 	public boolean hasRequirements(Player player) {

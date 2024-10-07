@@ -136,23 +136,23 @@ class TheDigSite : Quest("The Dig Site", 47, 46, 2, 131, 0, 1, 9) {
                 line(player, "the exams.", line++)
             }
             if (stage >= 4 || getAttribute(player, attributeStudentBrownExam1Talked, false)) {
-                line(player, "I need to speak to the student in the brown top about the", line++, true)
+                line(player, "I need to speak to the student in the orange top about the", line++, true)
                 line(player, "exams.", line++, true)
             } else if (stage >= 3) {
-                line(player, "I need to speak to the student in the brown top about the", line++)
+                line(player, "I need to speak to the student in the orange top about the", line++)
                 line(player, "exams.", line++)
             }
 
             if (stage >= 4 || getAttribute(player, attributeStudentGreenExam1ObtainAnswer, false)) {
                 line(player, "I have agreed to help the student in the green top.", line++, true)
-                line(player, "He has lost his animal skull and thinks he may have", line++, true)
-                line(player, "dropped it around the site. I need to find it and return", line++, true)
-                line(player, "it to him. Maybe one of the workmen has picked it up?", line++, true)
+                line(player, "He has lost his Animal Skull and thinks he may have", line++, true)
+                line(player, "dropped it around the digsite. I need to find it and return it", line++, true)
+                line(player, "to him. Maybe one of the workmen has picked it up?", line++, true)
             } else if (stage >= 3 && getAttribute(player, attributeStudentGreenExam1Talked, false)) {
                 line(player, "I have agreed to help the student in the green top.", line++)
-                line(player, "He has lost his animal skull and thinks he may have", line++)
-                line(player, "dropped it around the site. I need to find it and return", line++)
-                line(player, "it to him. Maybe one of the workmen has picked it up?", line++)
+                line(player, "He has lost his !!Animal Skull?? and thinks he may have", line++)
+                line(player, "dropped it around the digsite. I need to find it and return it", line++)
+                line(player, "to him. Maybe one of the workmen has picked it up?", line++)
             }
             if (stage >= 4) {
                 line(player, "I should talk to him to see if he can help with my exams.", line++, true)
@@ -166,38 +166,36 @@ class TheDigSite : Quest("The Dig Site", 47, 46, 2, 131, 0, 1, 9) {
 
             if (stage >= 4 || getAttribute(player, attributeStudentPurpleExam1ObtainAnswer, false)) {
                 line(player, "I have agreed to help the student in the purple skirt.", line++, true)
-                line(player, "She has lost her lucky teddy bear mascot and thinks she", line++, true)
-                line(player, "may have dropped it by the strange relic at the centre of", line++, true)
-                line(player, "the campus, maybe in a bush. I need to find it and return", line++, true)
-                line(player, "it to her.", line++, true)
+                line(player, "She has lost her Lucky Mascot and thinks she may have", line++, true)
+                line(player, "dropped it around the large urns on the digsite. I need to", line++, true)
+                line(player, "find it and return it to her.", line++, true)
             } else if (stage >= 3 && getAttribute(player, attributeStudentPurpleExam1Talked, false)) {
                 line(player, "I have agreed to help the student in the purple skirt.", line++)
-                line(player, "She has lost her lucky teddy bear mascot and thinks she", line++)
-                line(player, "may have dropped it by the strange relic at the centre of", line++)
-                line(player, "the campus, maybe in a bush. I need to find it and return", line++)
-                line(player, "it to her.", line++)
+                line(player, "She has lost her !!Lucky Mascot?? and thinks she may have", line++)
+                line(player, "dropped it around the large urns on the digsite. I need to", line++)
+                line(player, "find it and return it to her.", line++)
             }
             if (stage >= 4) {
                 line(player, "I should talk to her to see if she can help with my exams.", line++, true)
-                line(player, "She gave me an answer to one of the questions on the first", line++, true)
-                line(player, "exam.", line++, true)
+                line(player, "She gave me an answer to one of the questions on the", line++, true)
+                line(player, "first exam.", line++, true)
             } else if (stage >= 3 && getAttribute(player, attributeStudentPurpleExam1ObtainAnswer, false)) {
                 line(player, "I should talk to her to see if she can help with my exams.", line++)
-                line(player, "She gave me an answer to one of the questions on the first", line++)
-                line(player, "exam.", line++)
+                line(player, "She gave me an answer to one of the questions on the", line++)
+                line(player, "first exam.", line++)
             }
 
 
             if (stage >= 4 || getAttribute(player, attributeStudentBrownExam1ObtainAnswer, false)) {
-                line(player, "I have agreed to help the student in the brown top.", line++, true)
-                line(player, "He has lost his special cup and thinks he may have dropped", line++, true)
-                line(player, "it while he was near the panning site, possibly in the", line++, true)
-                line(player, "water. I need to find it and return it.", line++, true)
+                line(player, "I have agreed to help the student in the orange top.", line++, true)
+                line(player, "He has lost his Special Cup and thinks he may have", line++, true)
+                line(player, "dropped it around the tents near the panning site. I need", line++, true)
+                line(player, "to find it and return it.", line++, true)
             } else if (stage >= 3 && getAttribute(player, attributeStudentBrownExam1Talked, false)) {
-                line(player, "I have agreed to help the student in the brown top.", line++)
-                line(player, "He has lost his special cup and thinks he may have dropped", line++)
-                line(player, "it while he was near the panning site, possibly in the", line++)
-                line(player, "water. I need to find it and return it.", line++)
+                line(player, "I have agreed to help the student in the orange top.", line++)
+                line(player, "He has lost his !!Special Cup?? and thinks he may have", line++)
+                line(player, "dropped it around the tents near the panning site. I need", line++)
+                line(player, "to find it and return it.", line++)
             }
             if (stage >= 4) {
                 line(player, "I should talk to him to see if he can help with my exams.", line++, true)
@@ -226,11 +224,11 @@ class TheDigSite : Quest("The Dig Site", 47, 46, 2, 131, 0, 1, 9) {
             }
 
             if (stage >= 5) {
-                line(player, "I need to study for my second exam. Perhaps the students", line++, true)
-                line(player, "on the site can help?", line++, true)
+                line(player, "I need to study for my second exam. Perhaps the three", line++, true)
+                line(player, "students on the digsite can help me again?", line++, true)
             } else if (stage >= 4) {
-                line(player, "I need to study for my second exam. Perhaps the students", line++)
-                line(player, "on the site can help?", line++)
+                line(player, "I need to study for my second exam. Perhaps the three", line++)
+                line(player, "students on the digsite can help me again?", line++)
             }
             if (stage >= 5 || getAttribute(player, attributeStudentGreenExam2ObtainAnswer, false)) {
                 line(player, "I need to speak to the student in the green top about the", line++, true)
@@ -241,16 +239,16 @@ class TheDigSite : Quest("The Dig Site", 47, 46, 2, 131, 0, 1, 9) {
             }
             if (stage >= 5 || getAttribute(player, attributeStudentPurpleExam2ObtainAnswer, false)) {
                 line(player, "I need to speak to the student in the purple skirt about", line++, true)
-                line(player, "the exams. 2 ", line++, true)
+                line(player, "the exams.", line++, true)
             } else if (stage >= 4) {
                 line(player, "I need to speak to the student in the purple skirt about", line++)
                 line(player, "the exams.", line++)
             }
             if (stage >= 5 || getAttribute(player, attributeStudentBrownExam2ObtainAnswer, false)) {
-                line(player, "I need to speak to the student in the brown top about the", line++, true)
+                line(player, "I need to speak to the student in the orange top about the", line++, true)
                 line(player, "exams.", line++, true)
             } else if (stage >= 4) {
-                line(player, "I need to speak to the student in the brown top about the", line++)
+                line(player, "I need to speak to the student in the orange top about the", line++)
                 line(player, "exams.", line++)
             }
             if (stage >= 5) {
@@ -269,11 +267,11 @@ class TheDigSite : Quest("The Dig Site", 47, 46, 2, 131, 0, 1, 9) {
             }
 
             if (stage >= 6) {
-                line(player, "I need to study for my third exam. Perhaps the students", line++, true)
-                line(player, "on the site can help?", line++, true)
+                line(player, "I should research for my third exam. Perhaps the students", line++, true)
+                line(player, "can help me again?", line++, true)
             } else if (stage >= 5) {
-                line(player, "I need to study for my third exam. Perhaps the students", line++)
-                line(player, "on the site can help?", line++)
+                line(player, "I should research for my third exam. Perhaps the students", line++)
+                line(player, "can help me again?", line++)
             }
             if (stage >= 6 || getAttribute(player, attributeStudentGreenExam3ObtainAnswer, false)) {
                 line(player, "I need to speak to the student in the green top about the", line++, true)
@@ -284,7 +282,7 @@ class TheDigSite : Quest("The Dig Site", 47, 46, 2, 131, 0, 1, 9) {
             }
             if (stage >= 6 || getAttribute(player, attributeStudentPurpleExam3Talked, false)) {
                 line(player, "I need to speak to the student in the purple skirt about", line++, true)
-                line(player, "the exams. 3", line++, true)
+                line(player, "the exams.", line++, true)
             } else if (stage >= 5) {
                 line(player, "I need to speak to the student in the purple skirt about", line++)
                 line(player, "the exams.", line++)
@@ -295,10 +293,10 @@ class TheDigSite : Quest("The Dig Site", 47, 46, 2, 131, 0, 1, 9) {
                 line(player, "I need to bring her an Opal.", line++)
             }
             if (stage >= 6 || getAttribute(player, attributeStudentBrownExam3ObtainAnswer, false)) {
-                line(player, "I need to speak to the student in the brown top about the", line++, true)
+                line(player, "I need to speak to the student in the orange top about the", line++, true)
                 line(player, "exams.", line++, true)
             } else if (stage >= 5) {
-                line(player, "I need to speak to the student in the brown top about the", line++)
+                line(player, "I need to speak to the student in the orange top about the", line++)
                 line(player, "exams.", line++)
             }
             if (stage >= 6) {

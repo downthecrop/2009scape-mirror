@@ -5,6 +5,7 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
+import org.rs09.consts.Items;
 
 import static core.api.ContentAPIKt.*;
 
@@ -31,32 +32,120 @@ public class WolfWhistle extends Quest {
 	@Override
 	public void drawJournal(Player player, int stage) {
 		super.drawJournal(player, stage);
-		switch (stage) {
-		case 0:
-			line(player, BLUE + "I can begin this quest by talking to " + RED + "Pikkupstix" + BLUE + ", who lives in", 4+ 7);
-			line(player, RED + "Taverley.", 5+ 7);
-			break;
-		case 10:
-			line(player, "<blue>Having spoken to <red>Pikkupstix<blue>, it seems that all I have to do<br><br><blue>is get rid of the <red>little rabbit upstairs in his house.", 4+ 7);
-			break;
-		case 20:
-			line(player, "<str>Having spoken to Pikkupstix, it seems that all I have to do<br><br><str>is get rid of the little rabbit upstairs in his house.<br><br><br><br><blue>It appears that I have underestimated the rabbit in this<br><br><blue>case; it is some <red>huge rabbit-wolf-monster-bird-thing<blue>. I<br><br><blue>think I should speak to <red>Pikkupstix<blue> to find out what is going<br><br><blue>on.", 4+ 7);
-			break;
-		case 30:
-			line(player, "<str>Having spoken to Pikkupstix, it seems that all I have to do<br><br><str>is get rid of the little rabbit upstairs in his house.<br><br><str>It appears that I have underestimated the rabbit in this<br><br><str>case; it is some huge rabbit-wolf-monster-bird-thing. I<br><br><str>think I should speak to Pikkupstix to find out what is going<br><br><str>on.<br><br><br><br><blue>I have spoken to <red>Pikkupstix<blue>, who has promised to teach me<br><br><blue>the secrets of <red>Summoning<blue> if I can help dismiss the <red>giant<br><br><red>wolpertinger<blue>. To do this, I need to bring him <red>2 lots of wolf<br><br><red>bones<blue>.<br><br>" + (player.getInventory().containsItem(WOLF_BONES) ? "<str>" : "<blue>") + "I need to get 2 lots of wolf bones.", 4+ 7);
-			break;
-		case 40:
-			line(player, "<str>Having spoken to Pikkupstix, it seems that all I have to do<br><br><str>is get rid of the little rabbit upstairs in his house.<br><br><str>It appears that I have underestimated the rabbit in this<br><br><str>case; it is some huge rabbit-wolf-monster-bird-thing. I<br><br><str>think I should speak to Pikkupstix to find out what is going<br><br><str>on.<br><br><br><br><str>I have spoken to Pikkupstix, who has promised to teach me<br><br><str>the secrets of Summoning if I can help dismiss the giant<br><br><str>wolpertinger. To do this, I need to bring him 2 lots of wolf<br><br><str>bones.<br><br><str>I have given Pikkupstix all of the items he requested.<br><br><br><br><blue>Pikkupstix has given me some<red> gold charms<blue>, <red>spirit shards<br><br><blue>and <red>pouches<blue>, with which to make a <red>spirit wolf pouch <blue>and<br><br><blue>some <red>Howl scrolls<blue>. I will then be able to use them to dismiss<br><br><blue>the <red>giant wolpertinger<blue>.<br><br><blue>I need to open the <red>trapdoor<blue> with the <red>trapdoor key<blue> that I<br><br><blue>have been given. ", 4+ 7);
-			break;
-		case 50:
-			line(player, "<str>Having spoken to Pikkupstix, it seems that all I have to do<br><br><str>is get rid of the little rabbit upstairs in his house.<br><br><str>It appears that I have underestimated the rabbit in this<br><br><str>case; it is some huge rabbit-wolf-monster-bird-thing. I<br><br><str>think I should speak to Pikkupstix to find out what is going<br><br><str>on.<br><br><br><br><str>I have spoken to Pikkupstix, who has promised to teach me<br><br><str>the secrets of Summoning if I can help dismiss the giant<br><br><str>wolpertinger. To do this, I need to bring him 2 lots of wolf<br><br><str>bones.<br><br><br><br><blue>Pikkupstix has given me some<red> gold charms<blue>, <red>spirit shards<br><br><blue>and <red>pouches<blue>, with which to make a <red>spirit wolf pouch <blue>and<br><br><blue>some <red>Howl scrolls<blue>. I will then be able to use them to dismiss<br><br><blue>the <red>giant wolpertinger<blue>.<br><br><blue>I have infused the 2 spirit wolf pouches, but I need to<br><br><blue>transform one of them into scrolls at the obelisk.", 4+ 7);
-			break;
-		case 60:
-			line(player, "<str>Having spoken to Pikkupstix, it seems that all I have to do<br><br><str>is get rid of the little rabbit upstairs in his house.<br><br><str>It appears that I have underestimated the rabbit in this<br><br><str>case; it is some huge rabbit-wolf-monster-bird-thing. I<br><br><str>think I should speak to Pikkupstix to find out what is going<br><br><str>on.<br><br><br><br><str>I have spoken to Pikkupstix, who has promised to teach me<br><br><str>the secrets of Summoning if I can help dismiss the giant<br><br><str>wolpertinger. To do this, I need to bring him 2 lots of wolf<br><br><str>bones.<br><br><br><br><blue>Pikkupstix has given me some<red> gold charms<blue>, <red>spirit shards<br><br><blue>and <red>pouches<blue>, with which to make a <red>spirit wolf pouch <blue>and<br><br><blue>some <red>Howl scrolls<blue>. I will then be able to use them to dismiss<br><br><blue>the <red>giant wolpertinger<blue>.<br><br><str>I have infused the 2 spirit wolf pouches, but I need to<br><br><str>transform one of them into scrolls at the obelisk.<br><br><blue>I have dismissed the <red>giant wolpertinger<blue>.", 4+ 7);
-			break;
-		case 100:
-			line(player, "<str>Having spoken to Pikkupstix, it seems that all I have to do<br><br><str>is get rid of the little rabbit upstairs in his house.<br><br><str>It appears that I have underestimated the rabbit in this<br><br><str>case; it is some huge rabbit-wolf-monster-bird-thing. I<br><br><str>think I should speak to Pikkupstix to find out what is going<br><br><str>on.<br><br><br><br><str>I have spoken to Pikkupstix, who has promised to teach me<br><br><str>the secrets of Summoning if I can help dismiss the giant<br><br><str>wolpertinger. To do this, I need to bring him 2 lots of wolf<br><br><str>bones.<br><br><br><br><blue>Pikkupstix has given me some<red> gold charms<blue>, <red>spirit shards<br><br><blue>and <red>pouches<blue>, with which to make a <red>spirit wolf pouch <blue>and<br><br><blue>some <red>Howl scrolls<blue>. I will then be able to use them to dismiss<br><br><blue>the <red>giant wolpertinger<blue>.<br><br><str>I have infused the 2 spirit wolf pouches, but I need to<br><br><str>transform one of them into scrolls at the obelisk.<br><br><blue>I have dismissed the <red>giant wolpertinger<blue>.<br><br><br><br><col=FF0000>QUEST COMPLETE!", 4+ 7);
-			break;
+		var line = 12;
+
+		if(stage == 0){
+			line(player, "I can begin this quest by talking to !!Pikkupstix??, who lives in", line++, false);
+			line(player, "!!Taverly??.", line++, false);
+		} else {
+			if (stage >= 10) {
+				line(player, "Having spoken to !!Pikkupstix??, it seems that all I have to do", line++, stage >= 20);
+				line(player, "is get rid of the !!little rabbit upstairs in his house??.", line++, stage >= 20);
+				line++;
+			}
+			if (stage >= 20) {
+				line(player, "It appears that I have underestimated the rabbit in this", line++, stage >= 30);
+				line(player, "case; it is some !!huge rabbit-wolf-monster-bird-thing??. I", line++, stage >= 30);
+				line(player, "think I should speak to !!Pikkupstix?? to find out what is going", line++, stage >= 30);
+				line(player, "on.", line++, stage >= 30);
+				line++;
+			}
+			// Clicking on the ladder - sendMessage("There is no reason to go up there and face that thing again.")
+			if (stage >= 30) {
+				line(player, "I have spoken to !!Pikkupstix??, who has promised to teach me ", line++, stage >= 40);
+				line(player, "the secrets of !!Summoning?? if I can help dismiss the !!giant??", line++, stage >= 40);
+				line(player, "!!wolpertinger??. To do this, I need to bring him !!2 lots of wolf??", line++, stage >= 40);
+				line(player, "!!bones??.", line++, stage >= 40);
+
+				if (stage == 30) {
+					line(player, "!!I need to get 2 lots of wolf bones.??", line++, inInventory(player, Items.WOLF_BONES_2859, 2));
+				} else {
+					line(player, "I have given Pikkupstix all of the items he requested.", line++, true);
+					line++;
+				}
+			}
+			if (stage >= 40) {
+				line(player, "Pikkupstix has given me some !!gold charms??, !!spirit shards??", line++, stage >= 50);
+				line(player, "and !!pouches??, with which to make a !!spirit wolf pouch?? and", line++, stage >= 50);
+				line(player, "some !!Howl scrolls??. I will then be able to use them to dismiss", line++, stage >= 50);
+				line(player, "the !!giant wolpertinger??.", line++, stage >= 50);
+			}
+			if (stage == 40 && inInventory(player, Items.TRAPDOOR_KEY_12528, 1)) {
+				line(player, "I need to open the !!trapdoor?? with the !!trapdoor key?? that I", line++, false);
+				line(player, "have been given.", line++, false);
+			} else if (stage >= 50 || player.getAttribute("has-key", false)) {
+				line(player, "I have unlocked the trapdoor.", line++, true);
+			}
+
+			// This part is a shitshow.
+			if (stage >= 50 || (stage >= 40 && (inInventory(player, Items.SPIRIT_WOLF_POUCH_12047, 1) || inInventory(player, Items.HOWL_SCROLL_12425, 1)))) {
+				line(player, "I need to go into Pikkupstix's !!cellar?? and !!infuse a pouch?? at", line++, stage >= 50);
+				line(player, "the obelisk, using the items I have been given.", line++, stage >= 50);
+				line++;
+				line(player, "I have infused the spirit wolf pouch and made some Howl", line++, stage >= 50);
+				line(player, "scrolls. I should speak with !!Pikkupstix?? about how to use", line++, stage >= 50);
+				line(player, "them.", line++, stage >= 50);
+				line++;
+			} else if (stage >= 40 && inInventory(player, Items.SPIRIT_WOLF_POUCH_12047, 2)) {
+				line(player, "I have infused the 2 spirit wolf pouches, but I need to", line++, false);
+				line(player, "transform one of them into scrolls at the obelisk.", line++, false);
+			} else if (stage >= 40 && player.getAttribute("has-key", false)) {
+				line(player, "I need to go into Pikkupstix's !!cellar?? and !!infuse a pouch?? at", line++);
+				line(player, "the obelisk, using the items I have been given.", line++);
+				line(player, "!!I need to bring 2 lots of wolf bones.??", line++, inInventory(player, Items.WOLF_BONES_2859, 2));
+				line(player, "!!I need to bring the pouches.??", line++, inInventory(player, Items.POUCH_12155, 2));
+				line(player, "!!I need to bring the gold charms.??", line++, inInventory(player, Items.GOLD_CHARM_12158, 2));
+				line(player, "!!I need to bring the spirit shards.??", line++, inInventory(player, Items.SPIRIT_SHARDS_12183, 14));
+			}
+
+			if (stage >= 50) {
+				line(player, "I have been told how to use the spirit wolf pouch and Howl", line++, stage >= 60);
+				line(player, "scrolls. I should go back upstairs and confront the !!giant??", line++, stage >= 60);
+				line(player, "!!wolpertinger??.", line++, stage >= 60);
+				line++;
+			}
+			if (stage == 50) { // Does not stay.
+				if (inInventory(player, Items.SPIRIT_WOLF_POUCH_12047, 1)) {
+					line(player, "I have the spirit wolf pouch on me.", line++, false);
+				} else {
+					line(player, "!!I have lost the spirit wolf pouch.??", line++, false);
+				}
+				if (inInventory(player, Items.HOWL_SCROLL_12425, 1)) {
+					line(player, "I have the Howl scroll on me.", line++, false);
+				} else {
+					line(player, "!!I have lost the Howl scroll.??", line++, false);
+				}
+			}
+
+			if (stage >= 60) {
+				// Technically, there should be an extra stage speaking to Pikkupstix here, but it is not available.
+				line(player, "I have banished the giant !!wolpertinger??. I should speak with", line++, true);
+				line(player, "!!Pikkupstix?? to get my reward.", line++, true);
+				line++;
+				if (player.getSkills().getLevel(Skills.SUMMONING) >= player.getSkills().getStaticLevel(Skills.SUMMONING) || stage >= 100) {
+					line(player, "I am feeling drained of Summoning skill points and need to", line++, true);
+					line(player, "recharge at the !!obelisk??.", line++, true);
+					line++;
+					line(player, "I have banished the giant !!wolpertinger?? and refreshed my", line++, stage >= 100);
+					line(player, "Summoning skill points. I should speak with !!Pikkupstix?? to", line++, stage >= 100);
+					line(player, "get my reward.", line++, stage >= 100);
+					line++;
+				} else {
+					line(player, "I am feeling drained of Summoning skill points and need to", line++);
+					line(player, "recharge at the !!obelisk??.", line++);
+					line++;
+				}
+			}
+
+			if (stage >= 100) {
+				line(player, "I have been given access to the secrets of Summoning.", line++, true);
+				line(player,"<col=FF0000>QUEST COMPLETE!</col>", line++);
+				line(player, "!!Reward:??", line++);
+				line(player, "1 Quest Point,", line++);
+				line(player, "access to the Summoning skill", line++);
+				line(player, "275 gold charms", line++);
+				line(player, "and 276 Summoning XP", line++);
+			}
 		}
 	}
 

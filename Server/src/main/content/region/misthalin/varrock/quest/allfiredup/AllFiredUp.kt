@@ -111,12 +111,10 @@ class AllFiredUp : Quest("All Fired Up", 157, 156, 1){
                 line(player, "restore a beacon to its blazing state. I've tended the", line++, true)
                 line(player, "beacon near Blaze and have reported back to him.", line++, true)
             } else if (stage == 80) {
-                line(player, "!!Blaze?? has now asked me to maintain the nearby !!beacon??.", line++, false)
-                line(player, "To maintain the !!beacon??, I need to add !!five logs?? of the same", line++, false)
-                line(player, "type.", line++, false)
-                line(player, "I've placed five logs on the !!beacon?? to restore it to its", line++, false)
-                line(player, "blazing state. Now that it's blazing brightly, perhaps I should", line++, false)
-                line(player, "speak with Blaze.", line++, false)
+                line(player, "!!Blaze?? has explained how to maintain a beacon. When the", line++, false)
+                line(player, "fire begins to die out, !!five more logs?? can be added to", line++, false)
+                line(player, "restore a beacon to its blazing state.", line++, false)
+                line(player, "!!Blaze?? has asked me to maintain the !!beacon?? nearest him.", line++, false)
             }
 
             if (stage > 90) {

@@ -67,12 +67,13 @@ class CreatureOfFenkenstrain : Quest("Creature of Fenkenstrain", 41, 40, 2, 399,
             } else if (stage >= 1) {
                 line(player, "I should go up to the castle and speak to !!Dr Fenkenstrain??", line++, false)
             }
-            line++
             if (stage >= 3) {
-                line(player, "I gave a torso, some arms and legs, and a head to Fenkenstrain,", line++, true)
-                line(player, "who then wanted a needle and 5 lots of thread, so that he could", line++, true)
-                line(player, "sew the bodyparts together and create his creature.", line++, true)
+                line(player, "I gave a torso, some arms and legs, and a head to", line++, true)
+                line(player, "Fenkenstrain, who then wanted a needle and 5 lots of", line++, true)
+                line(player, "thread, so that he could sew the bodyparts together and", line++, true)
+                line(player, "create his creature.", line++, true)
             } else if (stage >= 2) {
+                line++
                 line(player, "I need to find these body parts for !!Fenkenstrain??:", line++, false)
                 line(player, "a pair of !!arms??", line++, false)
                 line(player, "a pair legs !!legs??", line++, false)
@@ -84,7 +85,6 @@ class CreatureOfFenkenstrain : Quest("Creature of Fenkenstrain", 41, 40, 2, 399,
                 line(player, "elsewhere, so perhaps I should look at the graves in the", line++, false)
                 line(player, "local area", line++, false)
             }
-            line++
             if (stage >= 4) {
                 line(player, "I brought Fenkenstrain a needle and 5 quantities of", line++, true)
                 line(player, "thread.", line++, true)
@@ -92,15 +92,13 @@ class CreatureOfFenkenstrain : Quest("Creature of Fenkenstrain", 41, 40, 2, 399,
                 line(player, "I need to bring !!Fenkenstrain?? a !!needle?? and !!5 quantities??", line++, false)
                 line(player, "!!of thread??.", line++, false)
             }
-            line++
             if (stage >= 5) {
                 line(player, "I repaired the lightning conductor, and Fenkenstrain", line++, true)
                 line(player, "brought the Creature to life.", line++, true)
             } else if (stage >= 4) {
-                line(player, "I need to repair the !!lightning conductor?? on the", line++, false)
-                line(player, "!!balcony?? above.", line++, false)
+                line(player, "!!Fenkenstrain?? has ordered me to repair the lightning", line++, false)
+                line(player, "conductor.", line++, false)
             }
-            line++
             if (stage == 5) {
                 line(player, "!!Fenkenstrain?? wants to talk to me.", line++, false)
                 line++
@@ -115,10 +113,9 @@ class CreatureOfFenkenstrain : Quest("Creature of Fenkenstrain", 41, 40, 2, 399,
                 line(player, "The !!Creature?? went on a rampage, and !!Fenkenstrain?? wants", line++, false)
                 line(player, "me to go up the !!Tower?? to destroy it.", line++, false)
             }
-            line++
             if (stage >= 8) {
-                line(player, "I stole Fenkenstrain's Ring of Charos, and he released me from", line++, true)
-                line(player, "his service.", line++, true)
+                line(player, "I stole Fenkenstrain's Ring of Charos, and he released", line++, true)
+                line(player, "me from his service.", line++, true)
             } else if (stage >= 7) {
                 line(player, "I must find a way to stop Fenkenstrain's experiments.", line++, false)
             }

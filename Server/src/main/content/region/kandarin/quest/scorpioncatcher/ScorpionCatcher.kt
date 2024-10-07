@@ -29,20 +29,7 @@ class ScorpionCatcher : Quest("Scorpion Catcher", 108, 107,  1, 76, 0, 1, 6) {
     override fun drawJournal(player: Player?, stage: Int) {
         super.drawJournal(player, stage)
 
-        var ln = 11
-
-        /**
-         * Just draw this if the quest is done
-         */
-        if (stage == QUEST_STATE_DONE) {
-            ln++
-            line(player, "I helped !!Thormac?? get his scorpions back.", ln++)
-            line(player, "Now he can upgrade my battlestaffs into mystic staffs.", ln)
-            ln++
-            ln++
-            line(player, "<col=FF0000>QUEST COMPLETE!</col>", ln)
-            return
-        }
+        var ln = 12
 
         val caughtTaverly = player!!.getAttribute(ATTRIBUTE_TAVERLY, false)
         val caughtBarb = player.getAttribute(ATTRIBUTE_BARB, false)
@@ -54,51 +41,92 @@ class ScorpionCatcher : Quest("Scorpion Catcher", 108, 107,  1, 76, 0, 1, 6) {
             ln++ //blank line
             line(player, "Requirements:", ln++)
             line(player, "Level 31 Prayer", ln, player.skills.staticLevels[Skills.PRAYER] >= 31)
-        }
-        else {
-            line(player, "Speak to Thormac.", ln++, true)
-            ln++
+        } else {
+            line(player, "I've spoken to Thormac in the Sorcerer's Tower south-west", ln++, true)
+            line(player, "of Catherby. He's lost his pet Kharid Scorpions and needs", ln++, true)
+            line(player, "my help to find them.", ln++, true)
 
-            if (stage == QUEST_STATE_TALK_SEERS) {
-                line(player, "I've spoken to !!Thormac?? in the !!Sorcerer's Tower?? south-west of !!Catherby.??", ln++)
-                line(player, "He's lost his pet !!Kharid Scorpions?? and needs my help to find them.", ln++)
-                // Todo check this line
-                line(player, "He's told me to ask a !!Seer?? for help.", ln)
+            // 10 -> 20
+            if (stage >= QUEST_STATE_DARK_PLACE) {
+                ln++
+                line(player, "I've spoken to a Seer and been given the location of one", ln++, true)
+                line(player, "of the Kharid Scorpions.", ln++, true)
+            } else if (stage >= QUEST_STATE_TALK_SEERS) {
+                ln++
+                line(player, "I need to go to the !!Seers' Village?? and talk to the !!Seer??", ln++)
+                line(player, "about the lost !!Kharid Scorpions??.", ln++)
             }
-            else {
-                // todo check this line
-                line(player, "I talked to a Seer. He told me where I should look.", ln++, caughtTaverly)
+
+            // 20 -> 20 + 1st Scorpion
+            if (stage >= QUEST_STATE_DARK_PLACE && caughtTaverly || stage >= QUEST_STATE_OTHER_SCORPIONS) {
                 ln++
-                line(player, "The first !!Kharid Scorpion?? is in a secret room near some", ln++, caughtTaverly)
-                line(player, "nasty spiders with two coffins nearby.", ln++, caughtTaverly)
+                line(player, "The first Kharid Scorpion is in a secret room near some", ln++, true)
+                line(player, "nasty spiders with two coffins nearby.", ln++, true)
+            } else if (stage >= QUEST_STATE_DARK_PLACE) {
                 ln++
-                if (stage == QUEST_STATE_DARK_PLACE && caughtTaverly){
-                    // Todo check this line
-                    line(player, "I should go back to the Seer and ask about the other scorpions.", ln++)
-                }
+                line(player, "The first !!Kharid Scorpion?? is in a secret room near some", ln++)
+                line(player, "!!nasty spiders?? with two !!coffins?? nearby.", ln++)
+                // Jan 21, 2010 version has a slightly updated but similar location.
+//                line(player, "The first !!Kharid Scorpion?? is in a !!dark place between a lake??", ln++)
+//                line(player, "and a !!holy island??. It will be close when you enter.", ln++)
+                ln++
+                line(player, "I'll need to talk to a !!Seer?? again one I've caught the first", ln++)
+                line(player, "!!Kharid Scorpion??.", ln++)
+            }
 
-                if (stage >= QUEST_STATE_OTHER_SCORPIONS){
-                    val barb_strike = caughtBarb || (stage == QUEST_STATE_PEKSA_HELP)
-                    line(player, "The second !!Kharid Scorpion?? has been in a !!village of??", ln++, barb_strike)
-                    line(player, "!!uncivilised-looking warriors in the east.?? It's been picked up", ln++, barb_strike)
-                    line(player, "by some sort of !!merchant??", ln++, barb_strike)
+            // 20 + 1st Scorpion -> 30
+            if (stage >= QUEST_STATE_OTHER_SCORPIONS) {
+                // This line disappears when the you talk to the Seer again.
+            } else if (stage >= QUEST_STATE_DARK_PLACE && caughtTaverly){
+                // Todo check this line
+                ln++
+                line(player, "I should go back to the Seer and ask about the other", ln++)
+                line(player, "scorpions.", ln++)
+            }
+
+            // 30 -> 40
+            if (stage >= QUEST_STATE_OTHER_SCORPIONS){
+                ln++
+                val barb_strike = caughtBarb || (stage == QUEST_STATE_PEKSA_HELP)
+                line(player, "The second !!Kharid Scorpion?? has been in a !!village of??", ln++, barb_strike || stage == QUEST_STATE_DONE)
+                line(player, "!!uncivilised-looking warriors in the east??. It's been picked up", ln++, barb_strike || stage == QUEST_STATE_DONE)
+                line(player, "by some sort of !!merchant??.", ln++, barb_strike || stage == QUEST_STATE_DONE)
+                // Jan 21, 2010 version has a slightly updated but similar location.
+//                line(player, "The second !!Kharid Scorpion?? was once in a !!village two??", ln++, barb_strike || stage == QUEST_STATE_DONE)
+//                line(player, "!!canoe trips from lumbridge??. A !!shopkeeper?? there picked it up.", ln++, barb_strike || stage == QUEST_STATE_DONE)
+                if (stage == QUEST_STATE_PEKSA_HELP){
+                    // todo check this block
                     ln++
-                    if (stage == QUEST_STATE_PEKSA_HELP){
-                        // todo check this block
-                        line(player, "I spoke with !!Peksa?? who said he sent it to his brother", ln++, caughtBarb)
-                        line(player, "at the !!Barbarian outpost.??", ln++, caughtBarb)
-                        ln++
-                    }
-
-                    line(player, "The third !!Kharid Scorpion?? is in some sort of !!upstairs room??", ln++, caughtMonk)
-                    line(player, "with !!brown clothing on a table??", ln++, caughtMonk)
+                    line(player, "I spoke with !!Peksa?? who said he sent it to his brother", ln++, caughtBarb)
+                    line(player, "at the !!Barbarian outpost.??", ln++, caughtBarb)
                 }
+                ln++
+                line(player, "The third !!Kharid Scorpion?? is in some sort of !!upstairs room??", ln++, caughtMonk || stage == QUEST_STATE_DONE)
+                line(player, "with !!brown clothing on a table??.", ln++, caughtMonk || stage == QUEST_STATE_DONE)
+                // Jan 21, 2010 version has a slightly updated but similar location.
+//                line(player, "The third !!Kharid Scorpion?? is in an !!upstairs room?? with !!brown??", ln++, caughtMonk || stage == QUEST_STATE_DONE)
+//                line(player, "!!clothing on a table?? The clothing is adorned with a golden", ln++, caughtMonk || stage == QUEST_STATE_DONE)
+//                line(player, "four-pointed star. You should start looking where monks", ln++, caughtMonk || stage == QUEST_STATE_DONE)
+//                line(player, "reside.", ln++, caughtMonk || stage == QUEST_STATE_DONE)
+            }
 
-                if (caughtBarb && caughtTaverly && caughtMonk && stage >= QUEST_STATE_OTHER_SCORPIONS){
-                    ln++
-                    line(player, "I should tell !!Thormac?? I have all of his scorpions.", ln)
-                }
+            // 40 -> 100
+            if (stage == QUEST_STATE_DONE) {
+                // This line disappears when you complete the quest.
+            } else if (caughtBarb && caughtTaverly && caughtMonk && stage >= QUEST_STATE_OTHER_SCORPIONS){
+                ln++
+                line(player, "I need to take the !!Kharid Scorpions?? to !!Thormac??.", ln)
+            }
 
+            // 100
+            if (stage == QUEST_STATE_DONE) {
+                ln++
+                line(player, "I've spoken to Thormac and he thanked me for finding his", ln++, true)
+                line(player, "pet Kharid Scorpions.", ln++, true)
+                ln++
+                ln++
+                line(player, "<col=FF0000>QUEST COMPLETE!</col>", ln)
+                return
             }
 
         }

@@ -63,8 +63,10 @@ class TrollStronghold : Quest("Troll Stronghold",128, 127, 1, 317, 0, 1, 50) {
             } else if (stage >= 3) {
                 line(player, "I have accepted the !!Troll Champion's?? challenge.", line++)
             }
-            if (stage in 5..7) {
-                line++
+            line++
+            if (stage >= 7) {
+                line(player, "I found my way into the Troll Stronghold", line++, true)
+            } else if (stage >= 5) {
                 line(player, "I have to find a way to get into the !!Troll Stronghold??", line++)
             }
             line++

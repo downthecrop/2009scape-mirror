@@ -68210,6 +68210,28 @@
     "attack_level": "28"
   },
   {
+    "examine": "Not the best of vocalists.",
+    "combat_style": "1",
+    "melee_animation": "9449",
+    "range_animation": "9382",
+    "combat_audio": "284,286,285",
+    "magic_level": "65",
+    "respawn_delay": "60",
+    "defence_animation": "9451",
+    "weakness": "0",
+    "magic_animation": "9382",
+    "death_animation": "9450",
+    "name": "Mighty banshee",
+    "defence_level": "65",
+    "safespot": null,
+    "lifepoints": "85",
+    "strength_level": "65",
+    "id": "7786",
+    "aggressive": "true",
+    "range_level": "0",
+    "attack_level": "65"
+  },
+  {
     "examine": "A big, scary hand! ",
     "melee_animation": "1802",
     "attack_speed": "6",
@@ -72229,9 +72251,9 @@
     "id": "796"
   },
   {
-    "examine": "The hat is a dead give away.",
     "name": "Wizard Cromperty",
-    "id": "2328"
+    "id": "2328",
+    "examine": "The hat is a dead give away."
   },
   {
     "examine": "An intelligent-looking shop owner.",

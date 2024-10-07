@@ -40,34 +40,66 @@ public class SheepHerder extends Quest {
     @Override
     public void drawJournal(Player player, int stage) {
         boolean hasGear = (player.getInventory().containsItem(PLAGUE_BOTTOM) && player.getInventory().containsItem(PLAGUE_TOP) || (player.getEquipment().containsItem(PLAGUE_BOTTOM) && player.getEquipment().containsItem(PLAGUE_TOP))) || stage >= 20;
-        int line = 11;
+        int line = 12;
         boolean sheepDead = player.getAttribute("sheep_herder:all_dead",false);
         super.drawJournal(player, stage);
-        if(stage < 10){
-            line(player,"I can start this quest by speaking to !!Councillor Halgrive??",line++);
-            line(player, "near to the !!Zoo?? in !!East Ardougne.??",line++);
+        if(stage == 0){
+            line(player,"I can start this quest by speaking to !!Councillor Halgrive??", line++);
+            line(player, "near to the !!Zoo?? in !!East Ardougne??.", line++);
         } else {
-            switch(stage){
-                case 10:
-                    line(player, "!!Councillor Halgrive?? said I should speak to !!Doctor Orbon?? about", line++, hasGear);
-                    line(player, "Getting some protective gear.", line++, hasGear);
-                    line(player, "I need to !!locate the diseased sheep?? and corral them !!into the pin??", line++,sheepDead);
-                    line(player, "After which, I need to !!poison them?? and !!incinerate their bones.??", line++,sheepDead);
-                    if(sheepDead) {
-                        line(player,"I should inform !!Councillor Halgrive?? that I have taken care of the problem.",line++);
+            line(player,"Councillor Halgrive asked me to dispose of four plague", line++, true);
+            line(player,"bearing sheep just north of Ardougne and I accepted.", line++, true);
+            line(player,"He gave me some poisoned sheep feed to do this.", line++, true);
+            if(hasGear) {
+                line(player, "I bought some protective clothing from Dr. Orbon in the", line++, true);
+                line(player, "chapel north of Ardougne Zoo. I could now kill the sheep.", line++, true);
+            } else {
+                line(player, "!!Councillor Halgrive?? said I should speak to !!Doctor Orbon??", line++);
+                line(player, "about getting some protective gear.", line++);
+            }
+            if(stage == 10) {
+                // This is not authentic.
+//                line(player, "I need to !!locate the diseased sheep?? and corral them !!into the pen??", line++,sheepDead);
+//                line(player, "After which, I need to !!poison them?? and !!incinerate their bones.??", line++,sheepDead);
+                line++;
+                if (sheepDead) {
+                    line(player, "I equipped a prod and then I used it to to herd the diseased", line++, true);
+                    line(player, "sheep to a pen where I could safely kill them and", line++, true);
+                    line(player, "incinerate their bones.", line++, true);
+                    line(player,"I should return to !!Councillor Halgrive?? to collect the reward", line++);
+                    line(player,"he has promised me for my hard work.", line++);
+                } else {
+                    if (player.getAttribute("sheep_herder:red_dead", false)) {
+                        line(player, "I have killed the first sheep and incinerated its bones.", line++, true);
                     } else {
-                        line(player, "I still need:", line++);
-                        line(player, "A !!Red Sheep??", line++, player.getAttribute("sheep_herder:red_dead", false));
-                        line(player, "A !!Blue Sheep??", line++, player.getAttribute("sheep_herder:blue_dead", false));
-                        line(player, "A !!Green Sheep??", line++, player.getAttribute("sheep_herder:green_dead", false));
-                        line(player, "A !!Yellow Sheep??", line++, player.getAttribute("sheep_herder:yellow_dead", false));
+                        line(player, "I must find the first sheep and herd it to the special pen.", line++);
                     }
-                    break;
-                case 100:
-                    line(player,"I helped Councillor Halgrive by putting down",line++,true);
-                    line(player,"plague-bearing sheep.",line++,true);
-                    line(player,"%%QUEST COMPLETE!&&",line++);
-                    break;
+                    if (player.getAttribute("sheep_herder:green_dead", false)) {
+                        line(player, "I have killed the second sheep and incinerated its bones.", line++, true);
+                    } else {
+                        line(player, "I must find the second sheep and herd it to the special", line++);
+                        line(player, "pen.", line++);
+                    }
+                    if (player.getAttribute("sheep_herder:blue_dead", false)) {
+                        line(player, "I have killed the third sheep and incinerated its bones.", line++, true);
+                    } else {
+                        line(player, "I must find the third sheep and herd it to the special pen.", line++);
+                    }
+                    if (player.getAttribute("sheep_herder:yellow_dead", false)) {
+                        line(player, "I have killed the fourth sheep and incinerated its bones.", line++, true);
+                    } else {
+                        line(player, "I must find the fourth sheep and herd it to the special pen.", line++);
+                    }
+                }
+            }
+
+            if(stage >= 100) {
+                line(player, "I equipped a prod to herd the diseased sheep and then I", line++, true);
+                line(player, "used it to incinerate all four plagued sheep.", line++, true);
+                line(player, "I returned to let Councillor Halgrive know that the plagued", line++, true);
+                line(player, "sheep were no more and claimed my reward.", line++, true);
+                line++;
+                line(player, "%%QUEST COMPLETE!&&", line++, false);
             }
         }
     }

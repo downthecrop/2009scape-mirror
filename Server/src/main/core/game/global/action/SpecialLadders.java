@@ -25,6 +25,11 @@ public enum SpecialLadders implements LadderAchievementCheck {
     JATIZSO_SHOUT_TOWER_UP(Location.create(2373, 3800, 2),Location.create(2374, 3800, 0)),
     JATIZSO_SHOUT_TOWER_DOWN(Location.create(2373, 3800, 0),Location.create(2374, 3800, 2)),
 
+    // sendMessage(player, "You descend into the somewhat smoky depths of the well, to the accompaniment of")
+    // sendMessage(player, "eery wails.") https://youtu.be/x8abdpkJ6ZA
+    POLLNIVNEACH_SLAYER_DUNGEON_UP(Location.create(3358,2971,0), Location.create(3359,9354,0)),
+    // sendMessage(player, "You nimbly climb up the bucket rope, emerging into Pollnivneach's bustling square.") https://youtu.be/LVwbmCNjlzQ
+    POLLNIVNEACH_SLAYER_DUNGEON_DOWN(Location.create(3358,9352,0), Location.create(3358,2970,0)),
     ALKHARID_ZEKE_UP(Location.create(3284,3186,0), Location.create(3284,3190,1)),
     ALKHARID_ZEKE_DOWN(Location.create(3284,3190,1), Location.create(3284,3186,0)),
     ALKHARID_CRAFTING_UP(Location.create(3311,3187,0),Location.create(3314,3187,1)),

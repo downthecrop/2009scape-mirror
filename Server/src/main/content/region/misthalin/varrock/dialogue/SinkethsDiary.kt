@@ -10,8 +10,8 @@ import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
 import org.rs09.consts.Items
 
-class SinkethsDiary
-    : InteractionListener {
+// This is not formatted well. See _-88E9n9jWA
+class SinkethsDiary : InteractionListener {
     // Obtainable during the What Lies Below quest.
     companion object {
         private val TITLE = "Sin'keth's diary"
