@@ -134,7 +134,9 @@ public abstract class UseWithHandler implements Plugin<Object> {
                     event.getPlayer().getPulseManager().run(new MovementPulse(event.getPlayer(), event.getUsedWith()) {
                         @Override
                         public boolean pulse() {
-                            event.getPlayer().debug("Unhandled use with interaction: item used: " + event.getUsed() + " with: " + event.getUsedWith());
+                            event.getPlayer().debug("Unhandled use with interaction:");
+                            event.getPlayer().debug("Used: " + event.getUsed());
+                            event.getPlayer().debug("With: " + event.getUsedWith());
                             event.getPlayer().getPacketDispatch().sendMessage("Nothing interesting happens.");
                             return true;
                         }
