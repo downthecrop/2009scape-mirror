@@ -190,7 +190,7 @@ public final class ZamorakMageDialogue extends DialoguePlugin {
 					stage++;
 					break;
 				case 201:
-					npc("And there is an ubundant supply of this 'essence' there", "you say?");
+					npc("And there is an abundant supply of this 'essence' there", "you say?");
 					stage++;
 					break;
 				case 202:
@@ -299,7 +299,7 @@ public final class ZamorakMageDialogue extends DialoguePlugin {
 				switch (stage) {
 				case 0:
 					if (!player.hasItem(ORBS[0]) && !player.getInventory().containsItem(ORBS[1])) {
-						player("Uh...", "No...", "I kinda lost that orb thingy that you have me.");
+						player("Uh...", "No...", "I kinda lost that orb thingy that you gave me.");
 						stage++;
 						break;
 					}
@@ -313,14 +313,14 @@ public final class ZamorakMageDialogue extends DialoguePlugin {
 					break;
 				case 1:
 					player.getInventory().add(ORBS[0], player);
-					npc("What?", "Incompetent fool. Take this.", "And do not make me refret allying myself with you.");
+					npc("What?", "Incompetent fool. Take this.", "And do not make me regret allying myself with you.");
 					stage++;
 					break;
 				case 2:
 					end();
 					break;
 				case 3:
-					npc("I assume the task to be self-explainatory.", "What is it you wish to know?");
+					npc("I assume the task to be self-explanatory.", "What is it you wish to know?");
 					stage++;
 					break;
 				case 4:
@@ -328,7 +328,7 @@ public final class ZamorakMageDialogue extends DialoguePlugin {
 					stage++;
 					break;
 				case 5:
-					npc("All I wish for you to do is to teleport to this 'rune", "essence' location from three different locations wile", "carrying the scrying orb I gave you.", "It will collect the data as you teleport.");
+					npc("All I wish for you to do is to teleport to this 'rune", "essence' location from three different locations while", "carrying the scrying orb I gave you.", "It will collect the data as you teleport.");
 					stage++;
 					break;
 				case 6:

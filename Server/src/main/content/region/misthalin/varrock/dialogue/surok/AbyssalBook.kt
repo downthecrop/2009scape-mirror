@@ -144,7 +144,7 @@ class AbyssalBook : InteractionListener {
                     BookLine("- if the barriers between", 57),
                     BookLine("these dimensions are", 58),
                     BookLine("sufficiently weakened,", 59),
-                    BookLine("there ma exist the", 60),
+                    BookLine("there may exist the", 60),
                     BookLine("possibility of an alternative", 61),
                     BookLine("method to proceed", 62),
                     BookLine("with Operation:", 63),

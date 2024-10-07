@@ -225,7 +225,7 @@ public final class GuildmasterDialogue extends DialoguePlugin {
 				stage = 112;
 				break;
 			case 112:
-				npc("Then, of course, you'll need to find a captain willy to", "sail to Crandor, and I'm not sure where you'd find one", "of them!");
+				npc("Then, of course, you'll need to find a captain willing to", "sail to Crandor, and I'm not sure where you'd find one", "of them!");
 				stage = 113;
 				break;
 			case 113:
@@ -286,7 +286,7 @@ public final class GuildmasterDialogue extends DialoguePlugin {
 					handleDescription(buttonId);
 					break;
 				case 2:
-					player("I talked to Oziach and he have me a quest.");
+					player("I talked to Oziach and he gave me a quest.");
 					stage = 3;
 					break;
 				}
@@ -332,7 +332,7 @@ public final class GuildmasterDialogue extends DialoguePlugin {
 				stage = 14;
 				break;
 			case 14:
-				npc("Some refuegees managed to escape in fishing boats.", "They landed on the coast, north of Rimmington, and", "set up camp but the dragon followed them and burned", "the camp to the ground.");
+				npc("Some refugees managed to escape in fishing boats.", "They landed on the coast, north of Rimmington, and", "set up camp but the dragon followed them and burned", "the camp to the ground.");
 				stage = 15;
 				break;
 			case 15:
