@@ -117,8 +117,8 @@ enum class FarmingPatch(val varbit: Int, val type: PatchType) {
         }
     }
 
-    fun getPatchFor(player: Player): Patch{
-        var crops = getOrStartTimer <CropGrowth> (player)!!
-        return crops.getPatch(this)
+    fun getPatchFor(player: Player, addPatch : Boolean = true): Patch{
+        val crops = getOrStartTimer <CropGrowth> (player)
+        return crops.getPatch(this, addPatch)
     }
 }

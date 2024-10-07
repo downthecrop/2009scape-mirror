@@ -36,13 +36,22 @@ class HealthChecker : OptionHandler() {
         rewardXP(player, Skills.FARMING, patch.plantable?.checkHealthXP ?: 0.0)
         patch.isCheckHealth = false
         when (type) {
-            PatchType.TREE_PATCH -> patch.setCurrentState(patch.getCurrentState() + 1)
-            PatchType.FRUIT_TREE_PATCH -> patch.setCurrentState(patch.getCurrentState() - 14)
-            PatchType.BUSH_PATCH -> {
-                sendMessage(player, "You examine the bush for signs of disease and find that it's in perfect health.")
-                patch.setCurrentState(patch.plantable!!.value + patch.plantable!!.stages + 4)
+            PatchType.TREE_PATCH -> {
+                patch.setCurrentState(patch.getCurrentState() + 1)
+                sendMessage(player, "You examine the tree for signs of disease and find that it is in perfect health.")
             }
-            PatchType.CACTUS_PATCH -> patch.setCurrentState(patch.plantable!!.value + patch.plantable!!.stages + 3)
+            PatchType.FRUIT_TREE_PATCH -> {
+                patch.setCurrentState(patch.getCurrentState() - 14)
+                sendMessage(player, "You examine the tree for signs of disease and find that it is in perfect health.")
+            }
+            PatchType.BUSH_PATCH -> {
+                patch.setCurrentState(patch.plantable!!.value + patch.plantable!!.stages + 4)
+                sendMessage(player, "You examine the bush for signs of disease and find that it's in perfect health.")
+            }
+            PatchType.CACTUS_PATCH -> {
+                patch.setCurrentState(patch.plantable!!.value + patch.plantable!!.stages + 3)
+                sendMessage(player, "You examine the cactus for signs of disease and find that it is in perfect health.")
+            }
             else -> log(this::class.java, Log.ERR, "Unreachable patch type from when(type) switch in HealthChecker.kt")
         }
 

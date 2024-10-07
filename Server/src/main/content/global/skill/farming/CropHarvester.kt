@@ -61,7 +61,13 @@ class CropHarvester : OptionHandler() {
                         }
                     }
                     val anim = when (requiredItem) {
-                        Items.SPADE_952 -> if (fPatch.type == PatchType.HERB_PATCH) Animation(2282) else Animation(830)
+                        Items.SPADE_952 -> {
+                            when (fPatch.type) {
+                                PatchType.HERB_PATCH -> Animation(2282)
+                                PatchType.FLOWER_PATCH -> Animation(2292)
+                                else -> Animation(830)
+                            }
+                        }
                         Items.SECATEURS_5329 -> if (fPatch.type == PatchType.TREE_PATCH) Animation(2277) else Animation(7227)
                         Items.MAGIC_SECATEURS_7409 -> if (fPatch.type == PatchType.TREE_PATCH) Animation(3340) else Animation(7228)
                         else -> Animation(0)
@@ -76,12 +82,15 @@ class CropHarvester : OptionHandler() {
                         sendMessage(player, "You lack the needed tool to harvest these crops.")
                         return true
                     }
-                    if (firstHarvest) {
+                    val sendHarvestMessages = if (fPatch.type == PatchType.FLOWER_PATCH) false else true
+                    if (sendHarvestMessages && firstHarvest) {
                         sendMessage(player, "You begin to harvest the $patchName.")
                         firstHarvest = false
                     }
                     animate(player, anim)
                     playAudio(player, sound)
+                    // TODO: If a flower patch is being harvested, delay the clearing of the
+                    // patch until after the animation has played - https://youtu.be/lg4GktlVNUY?t=75
                     delay = 2
                     addItem(player, reward.id)
                     rewardXP(player, Skills.FARMING, plantable.harvestXP)
@@ -96,7 +105,7 @@ class CropHarvester : OptionHandler() {
                             patch.clear()
                         }
                     }
-                    if (patch.cropLives <= 0 || patch.harvestAmt <= 0) {
+                    if (sendHarvestMessages && (patch.cropLives <= 0 || patch.harvestAmt <= 0)) {
                         sendMessage(player, "The $patchName is now empty.")
                     }
                     return patch.cropLives <= 0 || patch.harvestAmt <= 0

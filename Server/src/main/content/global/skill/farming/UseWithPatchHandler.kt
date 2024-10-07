@@ -5,7 +5,6 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
-import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -21,11 +20,14 @@ class UseWithPatchHandler : InteractionListener {
     val SECATEURS = Items.SECATEURS_5329
     val MAGIC_SECATEURS = Items.MAGIC_SECATEURS_7409
     val TROWEL = Items.GARDENING_TROWEL_5325
-    val pourBucketAnim = Animation(2283)
-    val wateringCanAnim = Animation(2293)
-    val plantCureAnim = Animation(2288)
-    val secateursTreeAnim = Animation(2277)
-    val magicSecateursTreeAnim = Animation(3340)
+    val spadeDigAnim = getAnimation(830)
+    val trowelDigAnim = getAnimation(2272)
+    val pourBucketAnim = getAnimation(2283)
+    val seedDibberAnim = getAnimation(2291)
+    val wateringCanAnim = getAnimation(2293)
+    val plantCureAnim = getAnimation(2288)
+    val secateursTreeAnim = getAnimation(2277)
+    val magicSecateursTreeAnim = getAnimation(3340)
 
     @JvmField
     val allowedNodes = ArrayList<Int>()
@@ -46,7 +48,7 @@ class UseWithPatchHandler : InteractionListener {
                 RAKE -> PatchRaker.rake(player,patch)
                 SEED_DIBBER -> sendMessage(player, "I should plant a seed, not the seed dibber.")
                 SPADE -> {
-                    val anim = getAnimation(830)
+                    val anim = spadeDigAnim
                     val p = patch.getPatchFor(player)
                     if (p.isDead) {
                         sendMessage(player, "You start digging the farming patch...")
@@ -112,7 +114,7 @@ class UseWithPatchHandler : InteractionListener {
                         return@onUseWith true
                     }
 
-                    val anim = Animation(2272)
+                    val anim = trowelDigAnim
 
                     submitIndividualPulse(player, object : Pulse(anim.duration) {
                         override fun pulse(): Boolean {
@@ -156,13 +158,19 @@ class UseWithPatchHandler : InteractionListener {
                 Items.WATERING_CAN_5331,Items.WATERING_CAN1_5333,Items.WATERING_CAN2_5334,Items.WATERING_CAN3_5335,Items.WATERING_CAN4_5336,Items.WATERING_CAN5_5337,Items.WATERING_CAN6_5338,Items.WATERING_CAN7_5339,Items.WATERING_CAN8_5340 -> {
                     val p = patch.getPatchFor(player)
                     val t = p.patch.type
-                    if (p.isWatered || p.isEmptyAndWeeded() || p.isGrown() || p.plantable == Plantable.SCARECROW) {
-                        sendMessage(player, "This patch doesn't need watering.")
-                    } else if (t == PatchType.ALLOTMENT || t == PatchType.FLOWER_PATCH || t == PatchType.HOPS_PATCH) {
+                    if (t == PatchType.ALLOTMENT || t == PatchType.FLOWER_PATCH || t == PatchType.HOPS_PATCH) {
                         submitIndividualPulse(player, object : Pulse() {
                             override fun pulse(): Boolean {
-                                if (p.isWeedy()) {
+                                if (p.isWeedy() || p.isEmptyAndWeeded()) {
                                     sendMessage(player, "You should grow something first.")
+                                    return true
+                                }
+                                if (p.isWatered || p.isGrown() || p.plantable == Plantable.SCARECROW) {
+                                    sendMessage(player, "This patch doesn't need watering.")
+                                    return true
+                                }
+                                if (p.isDiseased || p.isDead) {
+                                    sendMessage(player, "Water isn't going to cure that!")
                                     return true
                                 }
                                 if (usedItem.id == Items.WATERING_CAN_5331) {
@@ -178,6 +186,8 @@ class UseWithPatchHandler : InteractionListener {
                                 return true
                             }
                         })
+                    } else {
+                        sendMessage(player, "This patch doesn't need watering.")
                     }
                 }
 
@@ -212,9 +222,9 @@ class UseWithPatchHandler : InteractionListener {
                     val plantable = Plantable.forItemID(usedItem.id) ?: return@onUseWith false
 
                     if (plantable.applicablePatch != patch.type) {
-                        val seedNamePlural = StringUtils.plusS(plantable.name.replace("_", " ").lowercase())
+                        val plantableNamePlural = StringUtils.plusS(plantable.displayName)
                         val patchType = if (plantable.applicablePatch == PatchType.ALLOTMENT) "a vegetable patch" else prependArticle(plantable.applicablePatch.displayName())
-                        sendMessage(player, "You can only plant $seedNamePlural in $patchType.")
+                        sendMessage(player, "You can only plant $plantableNamePlural in $patchType.")
                         return@onUseWith true
                     }
 
@@ -232,37 +242,40 @@ class UseWithPatchHandler : InteractionListener {
                         return@onUseWith true
                     }
 
-                    val plantItem =
-                        if (patch.type == PatchType.ALLOTMENT) Item(plantable.itemID,3) else if (patch.type == PatchType.HOPS_PATCH) {
-                            if (plantable == Plantable.JUTE_SEED) Item(plantable.itemID,3) else Item(plantable.itemID,4)
-                        } else {
-                            Item(plantable.itemID,1)
-                        }
-
-                    if (patch.type == PatchType.ALLOTMENT) {
-                        if (!player.inventory.containsItem(plantItem)) {
-                            sendMessage(player, "You need 3 seeds to plant an allotment patch.")
-                            return@onUseWith true
-                        }
+                    val plantItem = when (patch.type) {
+                        PatchType.ALLOTMENT -> Item(plantable.itemID, 3)
+                        PatchType.HOPS_PATCH -> if (plantable == Plantable.JUTE_SEED) Item(plantable.itemID, 3) else Item(plantable.itemID, 4)
+                        else -> Item(plantable.itemID,1)
                     }
-                    if (patch.type != PatchType.FRUIT_TREE_PATCH && patch.type != PatchType.TREE_PATCH) {
-                        if (!inInventory(player, Items.SEED_DIBBER_5343)) {
-                            sendMessage(player, "You need a seed dibber to plant that.")
-                            return@onUseWith true
-                        }
-                    } else {
-                        if (!inInventory(player, Items.SPADE_952) && plantable != Plantable.SCARECROW) {
-                            sendMessage(player, "You need a spade to plant that.")
-                            return@onUseWith true
-                        }
+
+                    if (!player.inventory.containsItem(plantItem)) {
+                        val seedPlural = if (plantItem.amount == 1) "seed" else "seeds"
+                        sendMessage(player, "You need ${plantItem.amount} $seedPlural to plant ${prependArticle(patch.type.displayName())}.")
+                        return@onUseWith true
+                    }
+
+                    val requiredItem = when (patch.type) {
+                        PatchType.TREE_PATCH, PatchType.FRUIT_TREE_PATCH -> Items.SPADE_952
+                        PatchType.FLOWER_PATCH -> if (plantable == Plantable.SCARECROW) null else Items.SEED_DIBBER_5343
+                        else -> Items.SEED_DIBBER_5343
+                    }
+                    if (requiredItem != null && !inInventory(player, requiredItem)) {
+                        sendMessage(player, "You need ${prependArticle(requiredItem.asItem().name.lowercase())} to plant that.")
+                        return@onUseWith true
                     }
                     player.lock()
                     if (removeItem(player, plantItem)) {
-                        if (plantable != Plantable.SCARECROW) {
-                            animate(player, 2291)
-                            playAudio(player, Sounds.FARMING_DIBBING_2432)
+                        when (requiredItem) {
+                            Items.SPADE_952 -> {
+                                animate(player, spadeDigAnim)
+                                playAudio(player, Sounds.DIGSPADE_1470)
+                            }
+                            Items.SEED_DIBBER_5343 -> {
+                                animate(player, seedDibberAnim)
+                                playAudio(player, Sounds.FARMING_DIBBING_2432)
+                            }
                         }
-                        val delay = if (plantable == Plantable.SCARECROW) 0 else 3
+                        val delay = if (patch.type == PatchType.TREE_PATCH || patch.type == PatchType.FRUIT_TREE_PATCH || plantable == Plantable.SCARECROW) 0 else 3
                         submitIndividualPulse(player, object : Pulse(delay) {
                             override fun pulse(): Boolean {
                                 if (plantable == Plantable.JUTE_SEED && patch == FarmingPatch.MCGRUBOR_HOPS && !player.achievementDiaryManager.hasCompletedTask(DiaryType.SEERS_VILLAGE, 0, 7)) {
@@ -275,8 +288,11 @@ class UseWithPatchHandler : InteractionListener {
                                     addItem(player, Items.PLANT_POT_5350)
                                 }
 
-                                val itemAmount = if (plantItem.amount == 1) "a" else plantItem.amount
-                                val itemName = if (plantItem.amount == 1) getItemName(plantItem.id).lowercase() else StringUtils.plusS(getItemName(plantItem.id).lowercase())
+                                val itemAmount =
+                                    if (p.patch.type == PatchType.TREE_PATCH || p.patch.type == PatchType.FRUIT_TREE_PATCH) "the"
+                                    else if (plantItem.amount == 1) "a"
+                                    else plantItem.amount
+                                val itemName = if (plantItem.amount == 1) plantable.displayName else StringUtils.plusS(plantable.displayName)
                                 val patchName = p.patch.type.displayName()
                                 if (plantable == Plantable.SCARECROW) {
                                     sendMessage(player, "You place the scarecrow in the $patchName.")

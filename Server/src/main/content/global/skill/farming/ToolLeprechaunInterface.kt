@@ -69,7 +69,7 @@ class ToolLeprechaunInterface : InterfaceListener {
                             setHasMagicSecateurs(player,false)
                         }
                     } else {
-                        sendMessage(player, "You already have one of those stored.")
+                        sendMessage(player, "You cannot store more than one pair of secateurs in here.")
                     }
                 }
                 22 -> {
@@ -80,7 +80,7 @@ class ToolLeprechaunInterface : InterfaceListener {
                         removeItem(player, can)
                         setWateringCan(player,can)
                     } else {
-                        sendMessage(player, "You already have one of those stored.")
+                        sendMessage(player, "You cannot store more than one watering can in here.")
                     }
                 }
                 23 -> doDeposit(player, Items.GARDENING_TROWEL_5325, ::setHasGardeningTrowel, ::hasGardeningTrowel)
@@ -119,7 +119,15 @@ class ToolLeprechaunInterface : InterfaceListener {
             depositMethod.invoke(player, true)
             removeItem(player, item)
         } else {
-            sendMessage(player, "You already have one of those stored.")
+            val itemName = when (item) {
+                // secateurs and watering cans are handled separately
+                Items.RAKE_5341 -> "rake"
+                Items.SEED_DIBBER_5343 -> "dibber"
+                Items.SPADE_952 -> "spade"
+                Items.GARDENING_TROWEL_5325 -> "trowel"
+                else -> getItemName(item).lowercase()
+            }
+            sendMessage(player, "You cannot store more than one $itemName in here.")
         }
     }
 

@@ -19,6 +19,19 @@ class CompostBin(val player: Player, val bin: CompostBins) {
     var finishedTime = 0L
     var isFinished = false
 
+    /**
+     * Resets the compost bin to its initial state.
+     */
+    fun reset() {
+        items.clear()
+        isSuperCompost = true
+        isTomatoes = true
+        isClosed = false
+        finishedTime = 0L
+        isFinished = false
+        updateBit()
+    }
+
     fun isFull() : Boolean {
         return items.size == 15
     }

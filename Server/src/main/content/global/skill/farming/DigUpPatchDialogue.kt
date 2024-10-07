@@ -24,7 +24,7 @@ class DigUpPatchDialogue(player: Player? = null) : DialoguePlugin(player) {
         }
         if (patch?.patch?.type == PatchType.TREE_PATCH) {
             val isTreeStump = patch?.getCurrentState() == patch?.plantable!!.value + patch?.plantable!!.stages + 2
-            if (!isTreeStump) {
+            if (patch!!.isGrown() && !isTreeStump) {
                 sendMessage(player, "You need to chop this tree down first.") // this message is not authentic
                 stage = 1000
                 return true

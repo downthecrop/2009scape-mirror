@@ -43,7 +43,7 @@ public class HydraNPC extends Familiar {
             Scenery scenery = (Scenery)node;
             FarmingPatch farmingPatch = FarmingPatch.forObject(scenery);
             if(farmingPatch != null) {
-                Patch patch = farmingPatch.getPatchFor(owner);
+                Patch patch = farmingPatch.getPatchFor(owner, true);
                 patch.regrowIfTreeStump();
                 return true;
             }

@@ -15,7 +15,7 @@ object PatchRaker {
         val p = patch.getPatchFor(player)
         val patchName = p.patch.type.displayName()
         var firstRake = true
-        if (p.isEmptyAndWeeded()) {
+        if (!p.isWeedy()) {
             sendMessage(player, "This $patchName doesn't need weeding right now.")
             return
         }

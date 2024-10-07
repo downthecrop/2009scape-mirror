@@ -123,6 +123,9 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
                 log(this::class.java, Log.DEBUG, "Patch for ${player.username} at varbit ${patch.varbit} with plantable ${plantable?.name ?: "none"} was set to diseased at stage $currentGrowthStage, which isn't valid.")
                 return (state and (0x80.inv()))
             }
+            else if (state in listOf(0, 1, 2, 3)){
+                // we're weedy (or an empty plot) as normal just continue
+            }
             else {
                 log (this::class.java, Log.ERR, "Patch for ${player.username} at varbit ${patch.varbit} with plantable ${plantable?.name ?: "none"} was set to state $state at growth stage $currentGrowthStage, which isn't valid. We're not sure why this is happening.")
             }
@@ -134,6 +137,13 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
         return compost != CompostType.NONE
     }
 
+    /**
+     * Returns true if the patch is fully grown.
+     *
+     * Note: This returns true if the patch is fully weedy.
+     * Use `plantable == null` to check if a patch does
+     * not have anything planted.
+     */
     fun isGrown(): Boolean{
         return currentGrowthStage == (plantable?.stages ?: 0)
     }
@@ -276,18 +286,18 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             return
         }
 
-        diseaseMod = when(compost){
+        // This is so a cheat can force disease
+        diseaseMod = if (diseaseMod < 0) -128 else when(compost){
             CompostType.NONE -> 0
             CompostType.COMPOST -> 8
             CompostType.SUPERCOMPOST -> 13
         }
 
-        if(patch != FarmingPatch.TROLL_STRONGHOLD_HERB && RandomFunction.random(128) <= (17 - diseaseMod) && !isWatered && !isGrown() && !protectionPaid && !isFlowerProtected() && patch.type != PatchType.EVIL_TURNIP_PATCH ){
-            //bush, tree, fruit tree, herb and cactus can not disease on stage 1(0) of growth.
-            if(!((patch.type == PatchType.BUSH_PATCH || patch.type == PatchType.TREE_PATCH || patch.type == PatchType.FRUIT_TREE_PATCH || patch.type == PatchType.CACTUS_PATCH || patch.type == PatchType.HERB_PATCH) && currentGrowthStage == 0)) {
-                isDiseased = true
-                return
-            }
+        if(patch != FarmingPatch.TROLL_STRONGHOLD_HERB && RandomFunction.random(128) <= (17 - diseaseMod) && !isWatered && !isGrown() && !protectionPaid && !isFlowerProtected() && patch.type != PatchType.EVIL_TURNIP_PATCH && currentGrowthStage != 0){
+            isDiseased = true
+            // If we manually set disease mod reset it back to 0 so that crops can naturally grow after being treated/accidentally attempted to disease when they cannot be
+            if (diseaseMod < 0) diseaseMod = 0
+            return
         }
 
         if((patch.type == PatchType.FRUIT_TREE_PATCH || patch.type == PatchType.TREE_PATCH || patch.type == PatchType.BUSH_PATCH || patch.type == PatchType.CACTUS_PATCH) && plantable != null && plantable?.stages == currentGrowthStage + 1){
@@ -376,7 +386,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             FarmingPatch.CATHERBY_ALLOTMENT_S,FarmingPatch.CATHERBY_ALLOTMENT_N -> FarmingPatch.CATHERBY_FLOWER_C
             FarmingPatch.PORT_PHAS_ALLOTMENT_SE,FarmingPatch.PORT_PHAS_ALLOTMENT_NW -> FarmingPatch.PORT_PHAS_FLOWER_C
             else -> return false
-        }.getPatchFor(player)
+        }.getPatchFor(player, false)
 
         return (fpatch.plantable != null &&
             (fpatch.plantable == plantable?.protectionFlower || fpatch.plantable == Plantable.forItemID(Items.WHITE_LILY_SEED_14589))

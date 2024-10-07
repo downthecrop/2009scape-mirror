@@ -320,30 +320,38 @@ class LunarListeners : SpellListener("lunar"), Commands {
     }
 
     // Level 66
-    fun curePlant(player: Player, obj: Scenery){
+    fun curePlant(player: Player, obj: Scenery) {
+        if (CompostBins.forObject(obj) != null) {
+            sendMessage(player, "Bins don't often get diseased.")
+            return
+        }
         val fPatch = FarmingPatch.forObject(obj)
-        if(fPatch == null){
-            sendMessage(player, "You attempt to cast Cure Plant on ${obj.definition.name}!")
-            sendMessage(player, "Nothing interesting happens.")
+        if (fPatch == null) {
+            sendMessage(player, "Umm... this spell won't cure that!")
             return
         }
         val patch = fPatch.getPatchFor(player)
-        if(!patch.isDiseased && !patch.isWeedy() && !patch.isEmptyAndWeeded()){
-            sendMessage(player, "It is growing just fine.")
-            return
-        }
-        if(patch.isWeedy()){
+        if (patch.isWeedy()) {
             sendMessage(player, "The weeds are healthy enough already.")
             return
         }
-        if(patch.isDead){
-            sendMessage(player, "It says 'Cure' not 'Resurrect'. Although death may arise from disease, it is not in itself a disease and hence cannot be cured. So there.")
+        if (patch.isEmptyAndWeeded()) {
+            sendMessage(player, "There's nothing there to cure.")
             return
         }
-        if(patch.isGrown()){
+        if (patch.isGrown()) {
             sendMessage(player, "That's not diseased.")
             return
         }
+        if (patch.isDead) {
+            sendMessage(player, "It says 'Cure' not 'Resurrect'. Although death may arise from disease, it is not in itself a disease and hence cannot be cured. So there.")
+            return
+        }
+        if (!patch.isDiseased) {
+            sendMessage(player, "It is growing just fine.")
+            return
+        }
+
         patch.cureDisease()
         removeRunes(player)
         addXP(player,60.0)

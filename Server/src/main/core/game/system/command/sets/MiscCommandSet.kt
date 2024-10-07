@@ -532,6 +532,24 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         }
 
         define("finishbins", Privilege.ADMIN, "", "Finishes any in-progress compost bins."){ player, _ ->
+            val bins = getOrStartTimer<Compost>(player).getBins()
+            for (bin in bins) {
+                if (!bin.isFinished && bin.isClosed) bin.finish()
+            }
+        }
+
+        define("resetbins", Privilege.ADMIN, "", "Resets the player's compost bins to their initial states."){ player, _ ->
+            val bins = getOrStartTimer<Compost>(player).getBins()
+            for (bin in bins) bin.reset()
+        }
+
+        define("diseasecrops", Privilege.ADMIN, "", "Disease all crops"){ player, _ ->
+            val state = getOrStartTimer<CropGrowth>(player)
+            for (patch in state.getPatches()){
+                patch.diseaseMod = -128
+                patch.nextGrowth = System.currentTimeMillis() + 1
+            }
+            state.run(player)
         }
 
         define("addcredits", Privilege.ADMIN){ player, _ ->

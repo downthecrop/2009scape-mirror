@@ -108,8 +108,8 @@ abstract class DialogueFile {
         interpreter!!.sendDialogues(entity, expression, *messages)
     }
 
-    open fun options(vararg options: String?) {
-        interpreter!!.sendOptions("Select an Option", *options)
+    open fun options(vararg options: String?, title: String = "Select an Option") {
+        interpreter!!.sendOptions(title, *options)
     }
 
     /**
@@ -151,7 +151,7 @@ abstract class DialogueFile {
         player?.dialogueInterpreter?.sendDialogue(*messages)
     }
 
-    fun showTopics(vararg topics: Topic<*>): Boolean {
+    fun showTopics(vararg topics: Topic<*>, title: String = "Select an Option"): Boolean {
         val validTopics = ArrayList<String>()
         topics.filter { if(it is IfTopic) it.showCondition else true }.forEach {
                 topic -> interpreter!!.activeTopics.add(topic)
@@ -172,7 +172,7 @@ abstract class DialogueFile {
             interpreter!!.activeTopics.clear()
             return false
         }
-        else { options(*validTopics.toTypedArray())
+        else { options(*validTopics.toTypedArray(), title = title)
             return false
         }
     }
