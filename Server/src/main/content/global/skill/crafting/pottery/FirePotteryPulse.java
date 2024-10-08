@@ -56,7 +56,7 @@ public final class FirePotteryPulse extends SkillPulse<Item> {
             return false;
         }
         if (!player.getInventory().containsItem(pottery.getUnfinished())) {
-            player.getPacketDispatch().sendMessage("You need a " + pottery.name().toLowerCase() + "in order to do this.");
+            player.getPacketDispatch().sendMessage("You need a " + pottery.name().toLowerCase() + " in order to do this.");
             return false;
         }
         return true;
