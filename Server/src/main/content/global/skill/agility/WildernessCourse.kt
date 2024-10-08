@@ -116,25 +116,19 @@ class WildernessCourse
                 when (counter++) {
                     0 -> {
                         AgilityHandler.forceWalk(player, -1, Location.create(x, 3937, 0), Location.create(x, 3940, 0), Animation.create(10580), 15, 0.0, null, 1) //10
-                        println("1")
                         player.teleporter.send(Location.create(3004, 3947, 0), TeleportManager.TeleportType.INSTANT, TeleportManager.WILDY_TELEPORT)
-                        println("tele")
                         counter++
                         AgilityHandler.forceWalk(player, 0, Location.create(x, 3948, 0), Location.create(x, 3950, 0), Animation.create(10579), 20, 12.5, null, 5) //20
-                        println("3")
                         return true
                     }
                     2 -> {
                         player.teleporter.send(Location.create(3004, 3947, 0), TeleportManager.TeleportType.INSTANT, TeleportManager.WILDY_TELEPORT)
-                        println("tele")
                         counter++
                         AgilityHandler.forceWalk(player, 0, Location.create(x, 3948, 0), Location.create(x, 3950, 0), Animation.create(10579), 20, 12.5, null, 5)
-                        println("3")
                         return true
                     }
                     3 -> {
                         AgilityHandler.forceWalk(player, 0, Location.create(x, 3948, 0), Location.create(x, 3950, 0), Animation.create(10579), 20, 12.5, null, 5)
-                        println("3")
                         return true
                     }
                 }

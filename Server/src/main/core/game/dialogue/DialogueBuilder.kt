@@ -5,7 +5,7 @@ import core.game.node.entity.player.Player
 import core.tools.END_DIALOGUE
 import java.util.regex.Pattern
 
-val DEBUG_DIALOGUE = true
+val DEBUG_DIALOGUE = false
 val NUMBER_PATTERN1 = Pattern.compile("^(\\d+) \\[label", Pattern.MULTILINE)
 val NUMBER_PATTERN2 = Pattern.compile("(\\d+) -> (\\d+)")
 

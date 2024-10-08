@@ -62,8 +62,6 @@ class Poison : PersistTimer (30, "poison", flags = arrayOf(TimerFlag.ClearOnDeat
 
     override fun getTimer (vararg args: Any) : RSTimer {
         val timer = Poison()
-        for (arg in args) 
-            println(arg)
         timer.damageSource = args[0] as? Entity ?: return timer
         timer.severity = args[1] as? Int ?: return timer
         return timer
