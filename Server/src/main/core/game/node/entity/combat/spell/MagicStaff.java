@@ -27,7 +27,7 @@ public enum MagicStaff {
 	/**
 	 * Represents the earth rune staves.
 	 */
-	EARTH_RUNE(557, 3053, 3055, 3056, 1385, 1399, 1407, 557, 6563, 6562);
+	EARTH_RUNE(557, 3053, 3054, 3055, 3056, 1385, 1399, 1407, 557, 6563, 6562);
 
 	/**
 	 * The magic staves mapping.
