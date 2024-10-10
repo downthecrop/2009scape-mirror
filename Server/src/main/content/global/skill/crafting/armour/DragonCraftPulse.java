@@ -95,9 +95,6 @@ public final class DragonCraftPulse extends SkillPulse<Item> {
 			player.getInventory().add(item);
 			player.getSkills().addExperience(Skills.CRAFTING, hide.getExperience(), true);
 			LeatherCrafting.decayThread(player);
-			if (LeatherCrafting.isLastThread(player)) {
-				LeatherCrafting.removeThread(player);
-			}
 			amount--;
 		}
 		return amount < 1;

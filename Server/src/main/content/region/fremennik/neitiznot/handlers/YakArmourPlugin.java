@@ -135,9 +135,6 @@ public class YakArmourPlugin extends UseWithHandler {
 			    player.getInventory().add(node);
 				player.getSkills().addExperience(Skills.CRAFTING, 32, true);
 				LeatherCrafting.decayThread(player);
-				if (LeatherCrafting.isLastThread(player)) {
-					LeatherCrafting.removeThread(player);
-				}
 				player.sendMessage("You make " + node.getName().toLowerCase() + ".");
 			}
 			amount--;

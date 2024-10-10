@@ -1,8 +1,12 @@
 package content.global.skill.crafting.armour;
 
+import core.api.Container;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
+import org.rs09.consts.Items;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Represents a useful class for leather crafting related information.
@@ -41,51 +45,16 @@ public final class LeatherCrafting {
 	private static final Component COMPONENT = new Component(154);
 
 	/**
-	 * Checks if its the last thrad.
-	 * @return {@code True} if so.
-	 */
-	public static boolean isLastThread(final Player player) {
-		final Item thread = getThread(player);
-		if (thread == null) {
-			return false;
-		}
-		int charge = thread.getCharge();
-		return charge >= 1004;
-	}
-
-	/**
 	 * Method used to decay thread.
-     */
-	public static void decayThread(final Player player) {
-		final Item thread = getThread(player);
-		if (thread == null) {
-			return;
-		}
-		int charge = thread.getCharge();
-		thread.setCharge(charge + 1);
-	}
-
-	/**
-	 * Method used to remove thread.
-	 * @param player the player.
-     */
-	public static void removeThread(final Player player) {
-		if (player.getInventory().remove(THREAD)) {
-			player.getPacketDispatch().sendMessage("You use a reel of your thread.");
-			Item thread = getThread(player);
-			if (thread != null) {
-				thread.setCharge(1000);
-			}
-		}
-	}
-
-	/**
-	 * Gets the thread.
-	 * @param player the player.
-	 * @return the item.
+	 * @author Player Name
 	 */
-	public static Item getThread(final Player player) {
-		return player.getInventory().get(player.getInventory().getSlot(THREAD));
+	public static void decayThread(final Player player) {
+		int charges = getAttribute(player, "threadCharges", 5) - 1;
+		if (charges <= 0 && removeItem(player, Items.THREAD_1734, Container.INVENTORY)) {
+			charges = 5;
+			sendMessage(player, "You use a reel of your thread.");
+		}
+		setAttribute(player, "/save:threadCharges", charges);
 	}
 
 	/**

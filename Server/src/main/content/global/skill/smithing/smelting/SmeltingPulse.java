@@ -1,9 +1,12 @@
 package content.global.skill.smithing.smelting;
 
 import static core.api.ContentAPIKt.*;
+
+import core.api.Container;
 import core.api.EquipmentSlot;
 import core.game.event.ResourceProducedEvent;
 import core.game.container.impl.EquipmentContainer;
+import core.tools.Log;
 import org.rs09.consts.Items;
 import core.game.world.map.Location;
 import core.game.node.entity.skill.SkillPulse;
@@ -175,16 +178,6 @@ public class SmeltingPulse extends SkillPulse<Item> {
     }
 
     /**
-     * Checks if the player has a ring of forging.
-     *
-     * @param player the player.
-     * @return {@code True} if so.
-     */
-    public boolean hasForgingRing(Player player) {
-        return player.getEquipment().containsItem(RING_OF_FORGING);
-    }
-
-    /**
      * Checks if the forging is a succes.
      *
      * @param player the player.
@@ -192,16 +185,18 @@ public class SmeltingPulse extends SkillPulse<Item> {
      */
     public boolean success(Player player) {
         if (bar == Bar.IRON && !superHeat) {
-            if (hasForgingRing(player)) {
-                Item ring = getItemFromEquipment(player, EquipmentSlot.RING);
-                if(ring != null){
-                    if(getCharge(ring) == 1000) setCharge(ring, 140);
-                    adjustCharge(ring, -1);
-                    if(getCharge(ring) == 0){
-                        player.getEquipment().remove(ring);
+            if (inEquipment(player, Items.RING_OF_FORGING_2568, 1)) {
+                int charges = getAttribute(player, "ringOfForgingCharges", 140) - 1;
+                if (charges <= 0) {
+                    if (removeItem(player, Items.RING_OF_FORGING_2568, Container.EQUIPMENT)) {
+                        charges = 140;
                         sendMessage(player, "Your ring of forging uses up its last charge and disintegrates.");
+                    } else {
+                        log(this.getClass(), Log.ERR, "Failed to delete empty ring of forging for player " + player.getName());
+                        return false; //unfair but prevents exploit if the impossible happens
                     }
                 }
+                setAttribute(player, "/save:ringOfForgingCharges", charges);
                 return true;
             } else {
                 return RandomFunction.nextBool();

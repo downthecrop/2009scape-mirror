@@ -90,10 +90,6 @@ public final class SoftCraftPulse extends SkillPulse<Item> {
 		    player.getInventory().add(item);
 			player.getSkills().addExperience(Skills.CRAFTING, soft.getExperience(), true);
 			LeatherCrafting.decayThread(player);
-			if (LeatherCrafting.isLastThread(player)) {
-				LeatherCrafting.removeThread(player);
-			}
-
 			if (soft == LeatherCrafting.SoftLeather.GLOVES) {
 				player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 1, 3);
 			}
