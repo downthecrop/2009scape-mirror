@@ -54,6 +54,7 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 import core.ServerConstants
 import core.api.utils.Vector
+import kotlin.random.Random
 
 class ScriptAPI(private val bot: Player) {
     val GRAPHICSUP = Graphics(1576)
@@ -396,6 +397,20 @@ class ScriptAPI(private val bot: Player) {
         }
     }
 
+    /**
+     * @param location the location you want the coordinates randomized for.
+     * @param xMin the minimum range value X coordinates should be randomized by, must be xMin <= xMax ex: -1 min 1 max.
+     * @param xMax the maximum range value X coordinates should be randomized by, must be xMin <= xMax ex: -1 min 1 max.
+     * @param yMin the minimum range value Y coordinates should be randomized by, must be yMin <= yMax ex: -1 min 1 max.
+     * @param yMax the maximum range value Y coordinates should be randomized by, must be yMin <= yMax ex: -1 min 1 max.
+     * @param staticZ this value is static and does not change from what is given, must be actual Z value of location.
+     * @author Kermit
+     */
+    fun randomizeLocationInRanges(location: Location, xMin: Int, xMax: Int, yMin: Int, yMax: Int, staticZ: Int): Location {
+        val newX = location.x + Random.nextInt(xMin, xMax)
+        val newY = location.y + Random.nextInt(yMin, yMax)
+        return Location(newX, newY, staticZ)
+    }
 
     /**
      * The iterator for long-distance walking. Limited by doors and large obstacles like mountains.
@@ -553,7 +568,7 @@ class ScriptAPI(private val bot: Player) {
                             1517 -> continue
                             1519 -> continue
                             1521 -> continue
-                            else -> Repository.sendNews(SERVER_GE_NAME + " just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE.")
+                            else -> sendNews(SERVER_GE_NAME + " just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.lowercase() + " on the GE.")
                         }
                     }
                     bot.bank.remove(item)
@@ -562,7 +577,35 @@ class ScriptAPI(private val bot: Player) {
                 return true
             }
         }
-        bot.pulseManager.run(toCounterPulseAll())
+        if (ge != null) {
+            bot.pulseManager.run(toCounterPulseAll())
+        }
+    }
+
+    /**
+     * Function to bank all items that are not excluded at a nearby bank.
+     * @author Kermit & Ceikry
+     */
+    fun depositAtBank(){
+        val bank: Scenery? = getNearestNode("Bank booth", true) as Scenery?
+        class BankingPulse : MovementPulse(bot, bank, DestinationFlag.OBJECT) {
+            override fun pulse(): Boolean {
+                bot.faceLocation(bank?.location)
+                for (item in bot.inventory.toArray()) {
+                    item ?: continue
+                    when (item.id) {
+                        Items.RUNE_AXE_1359, Items.TINDERBOX_590, Items.ADAMANT_PICKAXE_1271, Items.COINS_995 -> continue
+                    }
+                    bot.bank.add(item)
+                    bot.inventory.remove(item)
+                }
+//                log(this::class.java, Log.FINE, "${bot.username} Just finished banking at ${bot.location} || Bank contents: ${bot.bank}")
+                return true
+            }
+        }
+        if (bank != null) {
+            bot.pulseManager.run(BankingPulse())
+        }
     }
 
     /**

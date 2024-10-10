@@ -11,6 +11,7 @@ import core.game.bots.SkillingBotAssembler
 import java.util.Timer
 import java.util.concurrent.Executors
 import kotlin.concurrent.schedule
+import kotlin.random.Random
 
 class ImmerseWorld : StartupListener {
 
@@ -23,6 +24,12 @@ class ImmerseWorld : StartupListener {
     companion object {
         var assembler = CombatBotAssembler()
         var skillingBotAssembler = SkillingBotAssembler()
+
+        private fun randomizeLocationInRanges(location: Location, xMin: Int, xMax: Int, yMin: Int, yMax: Int): Location {
+            val newX = location.x + Random.nextInt(xMin, xMax)
+            val newY = location.y + Random.nextInt(yMin, yMax)
+            return Location(newX, newY, 0)
+        }
 
         fun spawnBots()
         {
@@ -43,10 +50,10 @@ class ImmerseWorld : StartupListener {
             }
         }
 
-        fun immerseAdventurer() {
-            for (i in 0..(GameWorld.settings?.max_adv_bots ?: 50)) {
-                var random: Long = (10000..300000).random().toLong()
-                Timer().schedule(random) {
+        fun immerseAdventurer(){
+            for (i in 0..(GameWorld.settings?.max_adv_bots ?: 50)){
+                var random = Random.nextInt(20000, 400000).toLong()
+                Timer().schedule(random){
                     spawn_adventurers()
                 }
             }
@@ -55,14 +62,17 @@ class ImmerseWorld : StartupListener {
         fun spawn_adventurers() {
             val lumbridge = Location.create(3221, 3219, 0)
             val tiers = listOf<CombatBotAssembler.Tier>(CombatBotAssembler.Tier.LOW, CombatBotAssembler.Tier.MED)
-            GeneralBotCreator(
-                Adventurer(CombatStyle.MELEE),
-                assembler.MeleeAdventurer(tiers.random(), lumbridge)
-            )
-            GeneralBotCreator(
-                Adventurer(CombatStyle.RANGE),
-                assembler.RangeAdventurer(tiers.random(), lumbridge)
-            )
+            if (Random.nextBoolean()) {
+                GeneralBotCreator(
+                    Adventurer(CombatStyle.MELEE),
+                    assembler.MeleeAdventurer(tiers.random(), randomizeLocationInRanges(lumbridge,-1,1,-1,1))
+                )
+            } else {
+                GeneralBotCreator(
+                    Adventurer(CombatStyle.RANGE),
+                    assembler.RangeAdventurer(tiers.random(), randomizeLocationInRanges(lumbridge,-1,1,-1,1))
+                )
+            }
         }
 
         fun immerseFishingGuild() {

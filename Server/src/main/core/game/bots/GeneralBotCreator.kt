@@ -98,7 +98,7 @@ class GeneralBotCreator {
                 }*/
                 if(!botScript.running) return true //has to be separated this way or it double-submits the respawn pulse.
 
-                if (botPulsesTriggeredThisTick++ >= 50)
+                if (botPulsesTriggeredThisTick++ >= 75)
                     return false
 
                 val idleRoll = RandomFunction.random(10)

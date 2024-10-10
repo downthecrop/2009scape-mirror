@@ -53,7 +53,7 @@ class CombatBotAssembler {
         val bot = CombatBot(location)
 
         generateStats(bot, tier, Skills.RANGE, Skills.DEFENCE)
-        gearRangedBot(bot, crossbow ?: Random().nextInt() % 2 == 0)
+        gearRangedBot(bot, (crossbow ?: (Random().nextInt() % 2)) == 0)
         return bot
     }
 
@@ -82,7 +82,7 @@ class CombatBotAssembler {
     fun MeleeAdventurer(tier: Tier, location: Location): CombatBot {
         val bot = CombatBot(location)
         var max = 0
-        val level = RandomFunction.random(25, 65).also {max = 99 }
+        val level = RandomFunction.random(25, 69).also {max = 99 }
         generateStats(bot,tier,Skills.ATTACK, Skills.STRENGTH, Skills.DEFENCE)
         bot.skills.setStaticLevel(Skills.HITPOINTS, level)
         bot.skills.setStaticLevel(Skills.ATTACK, level + 5)
@@ -114,7 +114,7 @@ class CombatBotAssembler {
     fun RangeAdventurer(tier: Tier, location: Location): CombatBot {
         val bot = CombatBot(location)
         var max = 0
-        val level = RandomFunction.random(35, 65).also {max = 75 }
+        val level = RandomFunction.random(35, 69).also {max = 75 }
         generateStats(bot,tier,Skills.ATTACK, Skills.STRENGTH)
         bot.skills.setStaticLevel(Skills.HITPOINTS, level)
         bot.skills.setStaticLevel(Skills.DEFENCE, level)
