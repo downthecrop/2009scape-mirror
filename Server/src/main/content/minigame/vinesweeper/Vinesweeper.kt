@@ -3,8 +3,21 @@ package content.minigame.vinesweeper
 import BlinkinDialogue
 import FarmerDialogue.Companion.FARMER_FLAG_LINES
 import WinkinDialogue
+import content.minigame.vinesweeper.Vinesweeper.Companion.FARMERS
+import content.minigame.vinesweeper.Vinesweeper.Companion.FARMER_CLEAR_RADIUS
+import content.minigame.vinesweeper.Vinesweeper.Companion.HOLES
+import content.minigame.vinesweeper.Vinesweeper.Companion.NUMBERS
+import content.minigame.vinesweeper.Vinesweeper.Companion.RABBITS
+import content.minigame.vinesweeper.Vinesweeper.Companion.SEED_LOCS
+import content.minigame.vinesweeper.Vinesweeper.Companion.populateSeeds
+import content.minigame.vinesweeper.Vinesweeper.Companion.scheduleNPCs
+import content.minigame.vinesweeper.Vinesweeper.Companion.sendPoints
 import core.api.*
+import core.cache.def.impl.ItemDefinition
 import core.game.component.Component
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListener
+import core.game.interaction.InterfaceListener
 import core.game.interaction.MovementPulse
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.DeathTask
@@ -18,6 +31,8 @@ import core.game.node.item.Item
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
 import core.game.system.task.Pulse
+import core.game.world.GameWorld
+import core.game.world.GameWorld.ticks
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.zone.ZoneBorders
@@ -25,22 +40,8 @@ import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import core.tools.RandomFunction
-import content.minigame.vinesweeper.Vinesweeper.Companion.FARMERS
-import content.minigame.vinesweeper.Vinesweeper.Companion.FARMER_CLEAR_RADIUS
-import content.minigame.vinesweeper.Vinesweeper.Companion.HOLES
-import content.minigame.vinesweeper.Vinesweeper.Companion.NUMBERS
-import content.minigame.vinesweeper.Vinesweeper.Companion.RABBITS
-import content.minigame.vinesweeper.Vinesweeper.Companion.SEED_LOCS
-import content.minigame.vinesweeper.Vinesweeper.Companion.populateSeeds
-import content.minigame.vinesweeper.Vinesweeper.Companion.scheduleNPCs
-import content.minigame.vinesweeper.Vinesweeper.Companion.sendPoints
-import core.cache.def.impl.ItemDefinition
-import core.game.interaction.InteractionListener
-import core.game.interaction.IntType
-import core.game.interaction.InterfaceListener
-import core.game.world.GameWorld
-import core.game.world.GameWorld.ticks
 import org.rs09.consts.*
+import kotlin.math.max
 import kotlin.math.min
 import org.rs09.consts.Graphics as Gfx
 import org.rs09.consts.Scenery as Sceneries
@@ -217,7 +218,7 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
                             player.packetDispatch.sendInterfaceConfig(686, 60, true)
                             val level = player.skills.getStaticLevel(Skills.FARMING)
                             // TODO: more precise formula
-                            val points_per_xp = if (level < 40) { 2.0*(40.0 - level.toDouble())/10.0 } else { 1.0 }
+                            val points_per_xp = if (level < 40) { max(1.0, 2.0*(40.0 - level.toDouble())/10.0) } else { 1.0 }
                             val points = player.getAttribute("vinesweeper:points", 0)
                             val xp = points / points_per_xp
                             player.skills.addExperience(Skills.FARMING, xp)

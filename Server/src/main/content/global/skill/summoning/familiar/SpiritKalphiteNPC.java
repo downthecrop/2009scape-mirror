@@ -44,30 +44,31 @@ public class SpiritKalphiteNPC extends BurdenBeast {
 
 	@Override
 	protected boolean specialMove(FamiliarSpecial special) {
-		if (!isOwnerAttackable()) {
-			return false;
-		}
-		final List<Entity> entitys = RegionManager.getLocalEntitys(owner, 6);
-		visualize(Animation.create(8517), Graphics.create(1350));
-		GameWorld.getPulser().submit(new Pulse(1, owner) {
-			@Override
-			public boolean pulse() {
-				int count = 0;
-				for (Entity entity : entitys) {
-					if (count > 5) {
-						return true;
-					}
-					if (!canCombatSpecial(entity)) {
-						continue;
-					}
-					Projectile.magic(SpiritKalphiteNPC.this, entity, 1349, 40, 36, 50, 5).send();
-					sendFamiliarHit(entity, 20);
-					count++;
-				}
-				return true;
-			}
-		});
-		return false;
+		return false; ///bodge this for now, until someone fixes this abomination.
+//		if (!isOwnerAttackable()) {
+//			return false;
+//		}
+//		final List<Entity> entitys = RegionManager.getLocalEntitys(owner, 6);
+//		visualize(Animation.create(8517), Graphics.create(1350));
+//		GameWorld.getPulser().submit(new Pulse(1, owner) {
+//			@Override
+//			public boolean pulse() {
+//				int count = 0;
+//				for (Entity entity : entitys) {
+//					if (count > 5) {
+//						return true;
+//					}
+//					if (!canCombatSpecial(entity)) {
+//						continue;
+//					}
+//					Projectile.magic(SpiritKalphiteNPC.this, entity, 1349, 40, 36, 50, 5).send();
+//					sendFamiliarHit(entity, 20);
+//					count++;
+//				}
+//				return true;
+//			}
+//		});
+//		return false;
 	}
 
 	@Override
