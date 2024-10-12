@@ -1,5 +1,6 @@
 package content.global.ame.events.freakyforester
 
+import core.ServerConstants
 import core.api.*
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
@@ -35,7 +36,7 @@ object FreakUtils{
 
     fun cleanup(player: Player) {
         player.locks.unlockTeleport()
-        player.properties.teleportLocation = getAttribute(player,freakPreviousLoc,null)
+        player.properties.teleportLocation = getAttribute(player,freakPreviousLoc, ServerConstants.HOME_LOCATION)
         removeAttributes(player, freakPreviousLoc, freakTask, freakComplete, pheasantKilled)
         removeAll(player, Items.RAW_PHEASANT_6178)
         removeAll(player, Items.RAW_PHEASANT_6178, Container.BANK)

@@ -1,5 +1,6 @@
 package content.global.ame.events.evilbob
 
+import core.ServerConstants
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
@@ -60,7 +61,7 @@ object EvilBobUtils {
 
     fun cleanup(player: Player) {
         player.locks.unlockTeleport()
-        player.properties.teleportLocation = getAttribute(player, prevLocation, null)
+        player.properties.teleportLocation = getAttribute(player, prevLocation, ServerConstants.HOME_LOCATION)
         removeAttributes(player, assignedFishingZone, eventComplete, prevLocation, attentive, servantHelpDialogueSeen, attentiveNewSpot, startingDialogueSeen)
         removeAll(player, Items.FISHLIKE_THING_6202)
         removeAll(player, Items.FISHLIKE_THING_6202, Container.BANK)

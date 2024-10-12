@@ -1,5 +1,6 @@
 package content.global.ame.events.drilldemon
 
+import core.ServerConstants
 import core.api.*
 import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
@@ -67,7 +68,8 @@ object DrillDemonUtils {
     fun cleanup(player: Player) {
         player.locks.unlockTeleport()
         unlock(player)
-        teleport(player, getAttribute(player, DD_KEY_RETURN_LOC, Location.create(3222, 3218, 0)))
+        val destination = getAttribute(player, DD_KEY_RETURN_LOC, ServerConstants.HOME_LOCATION ?: Location.create(3222, 3218, 0))
+        teleport(player, destination)
         removeAttribute(player, DD_KEY_RETURN_LOC)
         removeAttribute(player, DD_KEY_TASK)
         removeAttribute(player, DD_CORRECT_OFFSET)

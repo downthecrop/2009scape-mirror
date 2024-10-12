@@ -1,5 +1,6 @@
 package content.global.ame.events.supriseexam
 
+import core.Server
 import core.api.*
 import core.game.node.entity.impl.PulseType
 import core.game.node.entity.player.Player
@@ -40,17 +41,12 @@ object SurpriseExamUtils {
     }
 
     fun cleanup(player: Player){
-        player.properties.teleportLocation = player.getAttribute(SE_KEY_LOC,null)
+        player.properties.teleportLocation = player.getAttribute(SE_KEY_LOC, ServerConstants.HOME_LOCATION)
         clearLogoutListener(player, SE_LOGOUT_KEY)
-        player.removeAttribute(SE_KEY_LOC)
-        player.removeAttribute(SE_KEY_INDEX)
-        player.removeAttribute(SE_KEY_CORRECT)
+        removeAttributes(player, SE_KEY_LOC, SE_KEY_INDEX, SE_KEY_CORRECT)
         player.pulseManager.run(object : Pulse(2){
             override fun pulse(): Boolean {
-                val reward = Item(Items.BOOK_OF_KNOWLEDGE_11640)
-                if(!player.inventory.add(reward)){
-                    GroundItemManager.create(reward,player)
-                }
+                addItemOrDrop(player, Items.BOOK_OF_KNOWLEDGE_11640)
                 return true
             }
         }, PulseType.CUSTOM_1)

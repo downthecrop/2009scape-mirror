@@ -57,7 +57,7 @@ class FreakListeners : InteractionListener, MapArea {
     }
 
     override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS)
+        return arrayOf(ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS, ZoneRestriction.OFF_MAP)
     }
 
     override fun areaEnter(entity: Entity) {

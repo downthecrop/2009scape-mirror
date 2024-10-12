@@ -2,6 +2,7 @@ package core.game.node.entity.player;
 
 import content.global.handlers.item.equipment.special.SalamanderSwingHandler;
 import content.global.skill.runecrafting.PouchManager;
+import core.api.ContentAPIKt;
 import core.api.EquipmentSlot;
 import core.game.component.Component;
 import core.game.container.Container;
@@ -44,6 +45,7 @@ import core.game.system.task.Pulse;
 import core.game.world.map.*;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.path.Pathfinder;
+import core.game.world.map.zone.ZoneRestriction;
 import core.game.world.map.zone.ZoneType;
 import core.game.world.update.flag.PlayerFlags;
 import core.game.world.update.flag.*;
@@ -475,11 +477,22 @@ public class Player extends Entity {
 			settings.setSpecialEnergy(100);
 		}
 
-		//Decrements prayer points
+		// Decrement prayer points
 		getPrayer().tick();
 
-		//update wealth tracking
+		// Update wealth tracking
 		checkForWealthUpdate(false);
+
+		// Check if the player is on the map
+		// This is only a sanity check to detect improper usage of the 'original-loc' attribute, hence only do this work if the attribute is set
+		if (ContentAPIKt.getAttribute(this, "/save:original-loc", null) != null) {
+			int rid = location.getRegionId();
+			Region r = RegionManager.forId(rid);
+			if (!(r instanceof DynamicRegion) && !getZoneMonitor().isRestricted(ZoneRestriction.OFF_MAP)) {
+				log(this.getClass(), Log.ERR, "Player " + getUsername() + " has the original-loc attribute set but isn't actually off-map! This indicates a bug in the code that set that attribute. The original-loc is: " + getAttribute("/save:original-loc") + ", good luck debugging!");
+				ContentAPIKt.removeAttribute(this, "original-loc");
+			}
+		}
 	}
 
 	private void checkForWealthUpdate(boolean force) {

@@ -121,7 +121,8 @@ class EvilBobListeners : InteractionListener, MapArea {
                         }
                         3 -> {
                             sendMessage(player, "Welcome back to ${ServerConstants.SERVER_NAME}.")
-                            teleport(player, getAttribute(player, EvilBobUtils.prevLocation, Location.create(3222, 3219, 0)))
+                            val destination = getAttribute(player, EvilBobUtils.prevLocation, ServerConstants.HOME_LOCATION ?: Location.create(3222, 3218, 0))
+                            teleport(player, destination)
                             EvilBobUtils.reward(player)
                             EvilBobUtils.cleanup(player)
                             resetAnimator(player)
@@ -139,7 +140,7 @@ class EvilBobListeners : InteractionListener, MapArea {
     }
 
     override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS)
+        return arrayOf(ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS, ZoneRestriction.OFF_MAP)
     }
 
     override fun areaEnter(entity: Entity) {
