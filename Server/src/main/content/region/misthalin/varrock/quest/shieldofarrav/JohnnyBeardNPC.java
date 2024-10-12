@@ -43,10 +43,12 @@ public final class JohnnyBeardNPC extends AbstractNPC {
 	@Override
 	public void finalizeDeath(final Entity killer) {
 		super.finalizeDeath(killer);
-		final Player p = ((Player) killer);
-		final Quest quest = p.getQuestRepository().getQuest("Shield of Arrav");
-		if (quest.getStage(p) == 60 && ShieldofArrav.isPhoenixMission(p) && !p.getInventory().containsItem(ShieldofArrav.INTEL_REPORT) && !p.getBank().containsItem(ShieldofArrav.INTEL_REPORT)) {
-			GroundItemManager.create(ShieldofArrav.INTEL_REPORT, getLocation(), p);
+		if (killer instanceof Player) {
+			final Player p = ((Player) killer);
+			final Quest quest = p.getQuestRepository().getQuest("Shield of Arrav");
+			if (quest.getStage(p) == 60 && ShieldofArrav.isPhoenixMission(p) && !p.getInventory().containsItem(ShieldofArrav.INTEL_REPORT) && !p.getBank().containsItem(ShieldofArrav.INTEL_REPORT)) {
+				GroundItemManager.create(ShieldofArrav.INTEL_REPORT, getLocation(), p);
+			}
 		}
 	}
 
