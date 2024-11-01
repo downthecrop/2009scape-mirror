@@ -106567,16 +106567,17 @@
     "id": "12480"
   },
   {
-    "examine": "(Baby) Can't fly and can barely walk, but adorable nonetheless. (adult) Emperor of all he surveys.",
+    "examine": "Can't fly and can barely walk, but adorable nonetheless.",
     "durability": null,
     "name": "Baby penguin",
     "archery_ticket_price": "0",
     "id": "12481"
   },
   {
-    "examine": "I can hatch this in an Incubator.",
+    "examine": "I can hatch this in an incubator.",
     "durability": null,
     "name": "Penguin egg",
+    "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "12483"
   },
@@ -108972,14 +108973,14 @@
     "id": "12761"
   },
   {
-    "examine": "(Baby) Can't fly and can barely walk, but adorable nonetheless. (adult) Emperor of all he surveys.",
+    "examine": "Can't fly and can barely walk, but adorable nonetheless.",
     "durability": null,
     "name": "Baby penguin",
     "archery_ticket_price": "0",
     "id": "12763"
   },
   {
-    "examine": "(Baby) Can't fly and can barely walk, but adorable nonetheless. (adult) Emperor of all he surveys.",
+    "examine": "Can't fly and can barely walk, but adorable nonetheless.",
     "durability": null,
     "name": "Baby penguin",
     "archery_ticket_price": "0",
@@ -132095,5 +132096,20 @@
     "archery_ticket_price": "0",
     "id": "14658",
     "equipment_slot": "0"
+  },
+  {
+    "examine": "Emperor of all he surveys.",
+    "name": "Penguin",
+    "id": "12482"
+  },
+  {
+    "examine": "Emperor of all he surveys.",
+    "name": "Penguin",
+    "id": "12762"
+  },
+  {
+    "examine": "Emperor of all he surveys.",
+    "name": "Penguin",
+    "id": "12764"
   }
 ]
