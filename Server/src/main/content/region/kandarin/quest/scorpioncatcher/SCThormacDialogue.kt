@@ -87,9 +87,9 @@ class SCThormacDialogue(val questStage: Int) : DialogueFile() {
 
 
             WAITING_FOR_SCORPIONS -> {
-                if (!hasAnItem(player!!, Items.SCORPION_CAGE_456, Items.SCORPION_CAGE_457, Items.SCORPION_CAGE_458,
+                if (!hasAnItem(player!!, arrayOf(Items.SCORPION_CAGE_456, Items.SCORPION_CAGE_457, Items.SCORPION_CAGE_458,
                     Items.SCORPION_CAGE_459, Items.SCORPION_CAGE_460, Items.SCORPION_CAGE_461,
-                    Items.SCORPION_CAGE_462).exists()){
+                    Items.SCORPION_CAGE_462), false).exists()){
                     playerl(FacialExpression.SAD, "I've lost my cage.").also { stage = GIVE_ANOTHER_CAGE }
                 }
                 else{

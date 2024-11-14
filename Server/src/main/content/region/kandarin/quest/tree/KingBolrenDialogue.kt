@@ -187,8 +187,13 @@ class KingBolrenDialogue : DialogueFile() {
             }
             isQuestComplete(player!!, questName) -> {
                 when(stage) {
-                    0 -> playerl("Hello Bolren.").also { stage++ }
-                    1 -> npcl("Thank you for your help traveler.").also { stage = END_DIALOGUE }
+                    0 -> playerl("Hello again Bolren.").also { stage++ }
+                    1 -> npcl("Well hello, it's good to see you again.").also { stage = if (hasAnItem(player!!, Items.GNOME_AMULET_589).container != null) END_DIALOGUE else 2 }
+                    2 -> playerl("I've lost my amulet.").also { stage++ }
+                    3 -> npcl("Oh dear. Here, take another. We are truly indebted to you.").also {
+                        addItemOrDrop(player!!, Items.GNOME_AMULET_589)
+                        stage = END_DIALOGUE
+                    }
                 }
             }
         }

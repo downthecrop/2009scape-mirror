@@ -247,14 +247,40 @@ class ContainerisedItem(val container: core.game.container.Container?, val itemI
 }
 
 /**
- * Check if player has any of the specified item IDs equipped, in inventory, or in banks
- * Returns a ContainerisedItem containing the container and the item ID if found, otherwise ContainerisedItem(null, -1) if not found
+ * Check if player has the specified item ID equipped, in inventory, or in their bank
+ * @param id The item ID to check
+ * @return A ContainerisedItem containing the container and the item ID if found, otherwise ContainerisedItem(null, -1) if not found
  */
-fun hasAnItem(player: Player, vararg ids: Int): ContainerisedItem {
-    for (searchSpace in arrayOf(player.inventory, player.equipment, player.bankPrimary, player.bankSecondary)) {
+fun hasAnItem(player: Player, id: Int): ContainerisedItem {
+    return hasAnItem(player, arrayOf(id), false)
+}
+
+/**
+ * Check if player has the specified item ID equipped, in inventory, or in their bank
+ * @param id The item ID to check
+ * @param checkSecondBank Whether to check the player's second bank.
+ * @return A ContainerisedItem containing the container and the item ID if found, otherwise ContainerisedItem(null, -1) if not found
+ */
+fun hasAnItem(player: Player, id: Int, checkSecondBank: Boolean): ContainerisedItem {
+    return hasAnItem(player, arrayOf(id), checkSecondBank)
+}
+
+/**
+ * Check if player has any of the specified item IDs equipped, in inventory, or in their bank
+ * @param ids An array of item IDs to check
+ * @param checkSecondBank Whether to check the player's second bank.
+ * @return A ContainerisedItem containing the container and the item ID if found, otherwise ContainerisedItem(null, -1) if not found
+ */
+fun hasAnItem(player: Player, ids: Array<Int>, checkSecondBank: Boolean): ContainerisedItem {
+    val searchSpace = if (checkSecondBank) {
+        arrayOf(player.inventory, player.equipment, player.bankPrimary, player.bankSecondary)
+    } else {
+        arrayOf(player.inventory, player.equipment, player.bankPrimary)
+    }
+    for (container in searchSpace) {
         for (id in ids) {
-            if (searchSpace.containItems(id)) {
-                return ContainerisedItem(searchSpace, id)
+            if (container.containItems(id)) {
+                return ContainerisedItem(container, id)
             }
         }
     }
