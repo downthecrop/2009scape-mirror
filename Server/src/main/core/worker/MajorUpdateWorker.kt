@@ -66,12 +66,18 @@ class MajorUpdateWorker {
 
                 ServerStore.clearDailyEntries()
                 if (ServerConstants.DAILY_RESTART) {
+                    for (player in Repository.players.filter { !it.isArtificial }) {
+                        player.packetDispatch.sendSystemUpdate(500)
+                    }
                     Repository.sendNews(colorize("%RSERVER GOING DOWN FOR DAILY RESTART IN 5 MINUTES!"))
                     ServerConstants.DAILY_RESTART = false
                     submitWorldPulse(object : Pulse(100) {
                         var counter = 0
                         override fun pulse(): Boolean {
                             counter++
+                            for (player in Repository.players.filter { !it.isArtificial }) {
+                                player.packetDispatch.sendSystemUpdate((5 - counter) * 100)
+                            }
                             if (counter == 5) {
                                 exitProcess(0)
                             }
