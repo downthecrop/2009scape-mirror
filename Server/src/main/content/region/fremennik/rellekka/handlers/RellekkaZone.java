@@ -1,6 +1,5 @@
 package content.region.fremennik.rellekka.handlers;
 
-import content.region.fremennik.rellekka.dialogue.JarvaldDialogue;
 import content.region.fremennik.rellekka.dialogue.MariaGunnarsDialogue;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.system.task.Pulse;
@@ -41,7 +40,6 @@ public final class RellekkaZone extends MapZone implements Plugin<Object> {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		ZoneBuilder.configure(this);
-		ClassScanner.definePlugin(new JarvaldDialogue());
 		ClassScanner.definePlugins(new RellekaOptionHandler(), new MariaGunnarsDialogue());
 		ClassScanner.definePlugin(new OptionHandler() {
 

@@ -200,7 +200,6 @@ class JarvaldDialogue(player: Player? = null) : DialoguePlugin(player) {
 	}
 
 	override fun getIds(): IntArray {
-		// 2435 is a wrapper for 2436
-		return intArrayOf(2435, NPCs.JARVALD_2436, NPCs.JARVALD_2437, NPCs.JARVALD_2438)
+		return intArrayOf(NPCs.JARVALD_2435, NPCs.JARVALD_2436, NPCs.JARVALD_2437, NPCs.JARVALD_2438)
 	}
 }
