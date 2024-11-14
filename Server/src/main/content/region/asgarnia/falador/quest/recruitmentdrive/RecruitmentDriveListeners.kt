@@ -305,6 +305,8 @@ class RecruitmentDriveListeners : InteractionListener {
                 // Clear inventory whenever you leave the recruitment drive area
                 entity.inventory.clear()
                 entity.equipment.clear()
+                // Restore player normal tabs on leave
+                entity.interfaceManager.openDefaultTabs()
                 // Teleport you out if you log out. You should do this in one sitting.
                 if (logout) {
                     PacketRepository.send(MinimapState::class.java, MinimapStateContext(entity, 0))
