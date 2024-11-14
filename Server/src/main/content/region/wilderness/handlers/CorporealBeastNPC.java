@@ -2,15 +2,11 @@ package content.region.wilderness.handlers;
 
 import content.data.BossKillCounter;
 import core.game.node.entity.Entity;
-import core.game.node.entity.combat.BattleState;
-import core.game.node.entity.combat.CombatStyle;
-import core.game.node.entity.combat.CombatSwingHandler;
+import core.game.node.entity.combat.*;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
-import core.game.node.entity.combat.MultiSwingHandler;
 import core.game.node.entity.combat.equipment.SwitchAttack;
 import core.game.node.entity.combat.equipment.Weapon;
 import core.game.node.entity.impl.Projectile;
-import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.npc.NPCBehavior;
 import core.game.node.entity.player.Player;
@@ -22,7 +18,6 @@ import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
-import core.plugin.Plugin;
 import core.tools.RandomFunction;
 import org.rs09.consts.NPCs;
 
@@ -32,7 +27,6 @@ import java.util.List;
 /**
  * Handles the Corporeal beast NPC.
  * @author Emperor
- *
  */
 @Initializable
 public final class CorporealBeastNPC extends NPCBehavior {
@@ -41,19 +35,24 @@ public final class CorporealBeastNPC extends NPCBehavior {
 	 * The combat handler.
 	 */
 	private final MultiSwingHandler combatHandler = new CombatHandler();
-	
+
 	/**
 	 * The dark energy core NPC.
 	 */
 	public NPC darkEnergyCore;
-	
+
+	/**
+	 * Whether to force a dark core spawn roll on our next swing (only done if we just got hit >= 32 damage).
+	 */
+	public boolean forceCoreRoll = false;
+
 	/**
 	 * Constructs a new {@code CorporealBeastNPC} {@code Object}.
 	 */
 	public CorporealBeastNPC() {
-        super(new int[]{NPCs.CORPOREAL_BEAST_8133});
+		super(new int[] { NPCs.CORPOREAL_BEAST_8133 });
 	}
-	
+
 	@Override
 	public void onCreation(NPC self) {
 		self.configureBossData();
@@ -64,27 +63,31 @@ public final class CorporealBeastNPC extends NPCBehavior {
 		return combatHandler;
 	}
 
-    @Override
-    public void beforeDamageReceived(NPC self, Entity attacker, BattleState state) {
-        if(state.getStyle() == CombatStyle.MELEE || state.getStyle() == CombatStyle.RANGE) {
-            Weapon w = state.getWeapon();
-            String name = w != null ? w.getName() : "";
-            if(w == null || name.toLowerCase().indexOf("spear") == -1) {
-                if(state.getEstimatedHit() > 0) {
-                    state.setEstimatedHit(state.getEstimatedHit()/2);
-                }
-                if(state.getSecondaryHit() > 0) {
-                    state.setSecondaryHit(state.getSecondaryHit()/2);
-                }
-            }
-        }
-        if(state.getEstimatedHit() > 100) {
-            state.setEstimatedHit(100);
-        }
-        if(state.getSecondaryHit() > 100) {
-            state.setSecondaryHit(100);
-        }
-    }
+	@Override
+	public void beforeDamageReceived(NPC self, Entity attacker, BattleState state) {
+		if (state.getStyle() == CombatStyle.MELEE || state.getStyle() == CombatStyle.RANGE) {
+			Weapon w = state.getWeapon();
+			String name = w != null ? w.getName() : "";
+			if (w == null || name.toLowerCase().indexOf("spear") == -1) {
+				if (state.getEstimatedHit() > 0) {
+					state.setEstimatedHit(state.getEstimatedHit() / 2);
+				}
+				if (state.getSecondaryHit() > 0) {
+					state.setSecondaryHit(state.getSecondaryHit() / 2);
+				}
+			}
+		}
+		if (state.getEstimatedHit() >= 32) {
+			CorporealBeastNPC corp = (CorporealBeastNPC) self.behavior;
+			corp.forceCoreRoll = true;
+		}
+		if (state.getEstimatedHit() > 100) {
+			state.setEstimatedHit(100);
+		}
+		if (state.getSecondaryHit() > 100) {
+			state.setSecondaryHit(100);
+		}
+	}
 
 	@Override
 	public void onDeathFinished(NPC self, Entity killer) {
@@ -94,41 +97,46 @@ public final class CorporealBeastNPC extends NPCBehavior {
 			darkEnergyCore = null;
 		}
 	}
-	
+
 	/**
 	 * Handles the Corporeal beast's combat.
 	 * @author Emperor
-	 *
 	 */
 	static class CombatHandler extends MultiSwingHandler {
 
-		
 		/**
 		 * Constructs a new {@code CombatHandler} {@code Object}.
 		 */
 		public CombatHandler() {
 			super(
-					//Melee (crush)
-					new SwitchAttack(CombatStyle.MELEE.getSwingHandler(), Animation.create(10057)).setMaximumHit(52),
-					//Melee (slash)
-					new SwitchAttack(CombatStyle.MELEE.getSwingHandler(), Animation.create(10058)).setMaximumHit(51),
-					//Magic (drain skill)
-					new SwitchAttack(CombatStyle.MAGIC.getSwingHandler(), Animation.create(10410), null, null, Projectile.create(null, null, 1823, 60, 36, 41, 46)).setMaximumHit(55),
-					//Magic (location based)
-					new SwitchAttack(CombatStyle.MAGIC.getSwingHandler(), Animation.create(10410), null, null, Projectile.create(null, null, 1824, 60, 36, 41, 46)).setMaximumHit(42),
-					//Magic (hit through prayer)
-					new SwitchAttack(CombatStyle.MAGIC.getSwingHandler(), Animation.create(10410), null, null, Projectile.create(null, null, 1825, 60, 36, 41, 46)).setMaximumHit(66)
-					);
+				//Melee (crush)
+				new SwitchAttack(CombatStyle.MELEE.getSwingHandler(), Animation.create(10057)).setMaximumHit(51),
+				//Melee (slash)
+				new SwitchAttack(CombatStyle.MELEE.getSwingHandler(), Animation.create(10058)).setMaximumHit(51),
+				//Magic (drain skill, blocked by prayer)
+				new SwitchAttack(CombatStyle.MAGIC.getSwingHandler(), Animation.create(10410), null, null, Projectile.create(null, null, 1823, 60, 36, 41, 46)).setMaximumHit(55),
+				//Magic (location-based, hits through prayer)
+				new SwitchAttack(CombatStyle.MAGIC.getSwingHandler(), Animation.create(10410), null, null, Projectile.create(null, null, 1824, 60, 36, 41, 46)).setMaximumHit(42),
+				//Magic (hits through prayer)
+				new SwitchAttack(CombatStyle.MAGIC.getSwingHandler(), Animation.create(10410), null, null, Projectile.create(null, null, 1825, 60, 36, 41, 46)).setMaximumHit(65)
+			);
 		}
 
 		@Override
 		public int swing(Entity entity, Entity victim, BattleState state) {
-			spawnDarkCore(entity, (CorporealBeastNPC)((NPC) entity).behavior, victim);
+			// If we're below the right HP threshold, roll a chance to spawn the dark core
+			CorporealBeastNPC corp = (CorporealBeastNPC) ((NPC) entity).behavior;
+			double thresh = entity.getSkills().getMaximumLifepoints() * (0.3 + (entity.getViewport().getCurrentPlane().getPlayers().size() * 0.05));
+			if (corp.forceCoreRoll || entity.getSkills().getLifepoints() < thresh) {
+				rollDarkCore(entity, corp, victim);
+				corp.forceCoreRoll = false;
+			}
+			// If we can stomp, do that for our turn
 			if (doStompAttack(entity)) {
 				entity.getProperties().getCombatPulse().setNextAttack(entity.getProperties().getAttackSpeed());
 				return -1;
 			}
-			//Location based attack.
+			// Location-based attack.
 			if (super.getNext().getProjectile() != null && super.getNext().getProjectile().getProjectileId() == 1824) {
 				setCurrent(getNext());
 				CombatStyle style = getCurrent().getStyle();
@@ -142,18 +150,17 @@ public final class CorporealBeastNPC extends NPCBehavior {
 			}
 			return super.swing(entity, victim, state);
 		}
-		
+
 		/**
-		 * Spawns a dark core.
+		 * Rolls a 1/8 chance to spawn a dark core.
 		 * @param npc The corporeal beast NPC.
 		 * @param victim The victim.
 		 */
-		private void spawnDarkCore(Entity corp, final CorporealBeastNPC npc, Entity victim) {
-			if (npc.darkEnergyCore != null && npc.darkEnergyCore.isActive()) {
+		private void rollDarkCore(Entity corp, final CorporealBeastNPC npc, Entity victim) {
+			if (npc.darkEnergyCore != null && npc.darkEnergyCore.isActive() && !DeathTask.isDead(npc.darkEnergyCore)) {
 				return;
 			}
-			double max = corp.getSkills().getMaximumLifepoints() * (0.3 + (corp.getViewport().getCurrentPlane().getPlayers().size() * 0.05));
-			if (corp.getSkills().getLifepoints() > max) {
+			if (!RandomFunction.roll(8)) {
 				return;
 			}
 			Location l = RegionManager.getTeleportLocation(victim.getLocation(), 3);
@@ -163,8 +170,8 @@ public final class CorporealBeastNPC extends NPCBehavior {
 			GameWorld.getPulser().submit(new Pulse(2, corp) {
 				@Override
 				public boolean pulse() {
-                                        if (npc.darkEnergyCore == null)
-                                            return true;
+					if (npc.darkEnergyCore == null)
+						return true;
 					npc.darkEnergyCore.init();
 					return true;
 				}
@@ -184,6 +191,7 @@ public final class CorporealBeastNPC extends NPCBehavior {
 				boolean secondStage = false;
 				List<Player> players = RegionManager.getLocalPlayers(entity);
 				Location[] locations = null;
+
 				@Override
 				public boolean pulse() {
 					if (!secondStage) {
@@ -215,11 +223,14 @@ public final class CorporealBeastNPC extends NPCBehavior {
 					locations = null;
 					return true;
 				}
+
 				private void hit(Player p) {
-					int max = p.hasProtectionPrayer(CombatStyle.MAGIC) ? 13 : 42;
 					int hit = 0;
 					if (isAccurateImpact(entity, p)) {
-						hit = RandomFunction.random(max);
+						hit = RandomFunction.random(42);
+						if (p.hasProtectionPrayer(CombatStyle.MAGIC)) {
+							hit = (int) (hit * 0.6);
+						}
 					}
 					p.getImpactHandler().handleImpact(entity, hit, CombatStyle.MAGIC);
 				}
@@ -252,7 +263,7 @@ public final class CorporealBeastNPC extends NPCBehavior {
 			}
 			return false;
 		}
-		
+
 		@Override
 		public void adjustBattleState(Entity entity, Entity victim, BattleState state) {
 			super.adjustBattleState(entity, victim, state);
@@ -262,10 +273,9 @@ public final class CorporealBeastNPC extends NPCBehavior {
 					int skill = random == 0 ? Skills.PRAYER : random == 1 ? Skills.MAGIC : Skills.SUMMONING;
 					int drain = 1 + RandomFunction.random(6);
 					if ((skill == Skills.PRAYER ? victim.getSkills().getPrayerPoints() : victim.getSkills().getLevel(skill)) < 1) {
-						victim.getImpactHandler().manualHit(entity, drain, HitsplatType.NORMAL,2);
+						victim.getImpactHandler().manualHit(entity, drain, HitsplatType.NORMAL, 2);
 						((Player) victim).getPacketDispatch().sendMessage("Your Hitpoints have been slightly drained!");
-					}
-					else {
+					} else {
 						if (skill == Skills.PRAYER) {
 							victim.getSkills().decrementPrayerPoints(drain);
 						} else {
@@ -278,11 +288,13 @@ public final class CorporealBeastNPC extends NPCBehavior {
 				}
 			}
 		}
-		
+
 		@Override
 		protected int getFormattedHit(Entity entity, Entity victim, BattleState state, int hit) {
 			if (getCurrent().getProjectile() == null || getCurrent().getProjectile().getProjectileId() != 1825) {
 				hit = (int) entity.getFormattedHit(state, hit);
+			} else if (victim.hasProtectionPrayer(CombatStyle.MAGIC)) {
+				hit = (int) (hit * 0.6);
 			}
 			return formatHit(victim, hit);
 		}

@@ -9,6 +9,8 @@ import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
+import core.game.world.map.path.Path;
+import core.game.world.map.path.Pathfinder;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 
@@ -16,8 +18,7 @@ import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the Dark Energy Core NPC.
- * @author Emperor
- *
+ * @author Emperor, Player Name
  */
 @Initializable
 public final class DarkEnergyCoreNPC extends AbstractNPC {
@@ -31,21 +32,22 @@ public final class DarkEnergyCoreNPC extends AbstractNPC {
 	 * The amount of ticks.
 	 */
 	private int ticks = 0;
-	
+
 	/**
 	 * The amount of failed attacks.
 	 */
 	private int fails = 0;
-	
+
 	/**
 	 * Constructs a new {@code DarkEnergyCoreNPC} {@code Object}.
 	 */
 	public DarkEnergyCoreNPC() {
 		this(8127, null);
 	}
-	
+
 	/**
 	 * Constructs a new {@code DarkEnergyCoreNPC} {@code Object}.
+	 *
 	 * @param id The NPC id.
 	 * @param location The location.
 	 */
@@ -59,14 +61,15 @@ public final class DarkEnergyCoreNPC extends AbstractNPC {
 		if (objects.length > 0) {
 			core.master = (NPC) objects[0];
 		}
+		core.setRespawn(false);
 		return core;
 	}
-	
+
 	@Override
 	public boolean canStartCombat(Entity victim) {
 		return false; //No combat needed.
 	}
-	
+
 	@Override
 	public void handleTickActions() {
 		ticks++;
@@ -91,8 +94,11 @@ public final class DarkEnergyCoreNPC extends AbstractNPC {
 			if (jump) {
 				Entity victim = master.getProperties().getCombatPulse().getVictim();
 				if (++fails >= 3 && victim != null && victim.getViewport().getCurrentPlane() == getViewport().getCurrentPlane()) {
-					jump(victim.getLocation());
-					fails = 0;
+					Path path = Pathfinder.find(getLocation(), victim.getLocation(), 1);
+					if (path.isSuccessful() || !path.isMoveNear()) {
+						jump(victim.getLocation());
+						fails = 0;
+					}
 				}
 			} else {
 				fails = 0;
@@ -119,7 +125,6 @@ public final class DarkEnergyCoreNPC extends AbstractNPC {
 
 	@Override
 	public int[] getIds() {
-		return new int[] { 8127 };
+		return new int[]{8127};
 	}
-
 }
