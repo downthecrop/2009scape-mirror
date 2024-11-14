@@ -349,7 +349,7 @@ public final class BuildingUtils {
 	 */
 	public static void removeDecoration(Player player, Scenery object) {
 		if (object.getId() == Decoration.PORTAL.getObjectId() && player.getHouseManager().getPortalAmount() <= 1) {
-			player.getPacketDispatch().sendMessage("You need atleast one portal, how else would you leave your house?");
+			sendMessage(player, "You need at least one portal, how else would you leave your house?");
 			return;
 		}
 		Location l = object.getLocation();
@@ -369,6 +369,10 @@ public final class BuildingUtils {
 			if (objectId == object.getId() && hotspot.getCurrentX() == l.getChunkOffsetX() && hotspot.getCurrentY() == l.getChunkOffsetY()) {
 				player.animate(REMOVE_ANIMATION);
 				removeDecoration(player, region, room, hotspot, object, style);
+				Decoration decoration = Decoration.forObjectId(object.getId());
+				for (Item item : decoration.getRefundItems()) {
+					addItemOrDrop(player, item.getId(), item.getAmount());
+				}
 				break;
 			}
 		}

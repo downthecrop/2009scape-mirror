@@ -4,8 +4,10 @@ import core.api.playGlobalAudio
 import core.api.teleport
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
+import core.game.node.scenery.Scenery
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
@@ -27,27 +29,31 @@ class MountedGlory : InteractionListener {
     )
 
     override fun defineListeners() {
-        on(MOUNTED_GLORY, IntType.SCENERY, "Edgeville") { player, _ ->
-            mountedGloryTeleport(player,0)
+        on(MOUNTED_GLORY, IntType.SCENERY, "Edgeville") { player, `object` ->
+            mountedGloryAction(player, `object`, 0)
             return@on true
         }
 
-        on(MOUNTED_GLORY, IntType.SCENERY, "Karamja") { player, _ ->
-            mountedGloryTeleport(player,1)
+        on(MOUNTED_GLORY, IntType.SCENERY, "Karamja") { player, `object` ->
+            mountedGloryAction(player, `object`, 1)
             return@on true
         }
 
-        on(MOUNTED_GLORY, IntType.SCENERY, "Draynor Village") { player, _ ->
-            mountedGloryTeleport(player,2)
+        on(MOUNTED_GLORY, IntType.SCENERY, "Draynor Village") { player, `object` ->
+            mountedGloryAction(player, `object`, 2)
             return@on true
         }
 
-        on(MOUNTED_GLORY, IntType.SCENERY, "Al Kharid") { player, _ ->
-            mountedGloryTeleport(player,3)
+        on(MOUNTED_GLORY, IntType.SCENERY, "Al Kharid") { player, `object` ->
+            mountedGloryAction(player, `object`, 3)
             return@on true
         }
     }
-    private fun mountedGloryTeleport(player : Player, int : Int) {
+    private fun mountedGloryAction(player : Player, `object` : Node, int : Int) {
+        if (player.houseManager.isBuildingMode) {
+            player.dialogueInterpreter.open("con:removedec", `object` as Scenery)
+            return
+        }
         if (!player.zoneMonitor.teleport(1, Item(Items.AMULET_OF_GLORY_1704))) {
             return
         }
