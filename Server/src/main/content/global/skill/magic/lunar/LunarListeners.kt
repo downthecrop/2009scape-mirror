@@ -9,6 +9,7 @@ import content.global.skill.magic.spellconsts.Lunar
 import core.api.*
 import core.game.component.CloseEvent
 import core.game.component.Component
+import core.game.interaction.QueueStrength
 import core.game.node.Node
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.npc.NPC
@@ -169,9 +170,10 @@ class LunarListeners : SpellListener("lunar"), Commands {
         }
 
         // Level 79
-        /**
-         * Dream
-         */
+        onCast(Lunar.DREAM, NONE) { player, _ ->
+            requires(player, 79, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.BODY_RUNE_559, 5), Item(Items.COSMIC_RUNE_564, 1)))
+            dream(player)
+        }
 
         // Level 80
         onCast(Lunar.STRING_JEWELLERY, NONE) { player, _ ->
@@ -576,9 +578,38 @@ class LunarListeners : SpellListener("lunar"), Commands {
     }
 
     // Level 79
-    /**
-     * Dream
-     */
+    private fun dream(player: Player) {
+        if(player.skills.lifepoints >= getStatLevel(player, Skills.HITPOINTS)) {
+            sendMessage(player, "You have no need to cast this spell since your hitpoints are already full.")
+            return
+        }
+
+        animate(player, Animations.LUNAR_SPELLBOOK_DREAM_START_6295)
+        delayEntity(player, 4)
+        queueScript(player, 4, QueueStrength.WEAK) { stage: Int ->
+            when(stage) {
+                0 -> {
+                    animate(player, Animations.LUNAR_SPELLBOOK_DREAM_MID_6296)
+                    sendGraphics(Graphics.LUNAR_SPELLBOOK_DREAM_1056, player.location)
+                    playAudio(player, Sounds.LUNAR_SLEEP_3619)
+                    return@queueScript delayScript(player, 5)
+                }
+                else -> {
+                    sendGraphics(Graphics.LUNAR_SPELLBOOK_DREAM_1056, player.location)
+                    // This heals 2 HP every min. Naturally you heal 1 for a total of 3
+                    // The script steps every 5 ticks and we want 50 ticks before a heal
+                    if (stage.mod(10) == 0){
+                        heal(player, 1)
+                        if(player.skills.lifepoints >= getStatLevel(player, Skills.HITPOINTS)) {
+                            animate(player, Animations.LUNAR_SPELLBOOK_DREAM_END_6297)
+                            return@queueScript stopExecuting(player)
+                        }
+                    }
+                    return@queueScript delayScript(player, 5)
+                }
+            }
+        }
+    }
 
     private fun stringJewellery(player: Player) {
         val playerJewellery = ArrayDeque<Item>()
