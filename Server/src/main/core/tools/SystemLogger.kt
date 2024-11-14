@@ -19,7 +19,7 @@ import java.util.*
 object SystemLogger {
     val t = Terminal()
     val errT = t.forStdErr()
-    val formatter = SimpleDateFormat("HH:mm:ss")
+    val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXX")
 
     private fun getTime(): String{
         return "[" + formatter.format(Date(System.currentTimeMillis())) +"]"
