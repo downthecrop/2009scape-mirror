@@ -26,25 +26,31 @@ class TelescopePlugin : OptionHandler() {
     }
 
     override fun handle(player: Player?, node: Node?, option: String?): Boolean {
+        val obj = node?.asScenery() as Scenery
         val star = ShootingStarPlugin.getStar()
         val delay: Int = 25000 + (25000 / 3)
         val timeLeft = delay - star.ticks
-        val fakeTimeLeftBecauseFuckPlayers = TimeUnit.MILLISECONDS.toMinutes(timeLeft * 600L) + if(RandomFunction.random(0,100) % 2 == 0) 2 else -2
-        val obj = node?.asScenery() as Scenery
+        val window = when (obj.id) {
+            13657 -> 9
+            13658 -> 2
+            else  -> 24
+        }
+        val fakeTimeLeft = RandomFunction.random(-window, window+1) + TimeUnit.MILLISECONDS.toMinutes(timeLeft * 600L)
         player?.lock()
         player?.animate(ANIMATION)
-        player?.interfaceManager?.open(Component(782)).also { player?.unlock()
-        Pulser.submit(object : Pulse(2, player) {
-            override fun pulse(): Boolean {
-                if (obj.isActive) {
-                    player?.dialogueInterpreter?.sendDialogue("You see a shooting star! The star looks like it will land","in about $fakeTimeLeftBecauseFuckPlayers minutes!")
+        player?.interfaceManager?.open(Component(782)).also {
+            player?.unlock()
+            Pulser.submit(object : Pulse(2, player) {
+                override fun pulse(): Boolean {
+                    if (obj.isActive) {
+                        player?.dialogueInterpreter?.sendDialogue("You see a shooting star! The star looks like it will land","in about $fakeTimeLeft minutes!")
+                        return true
+                    }
                     return true
                 }
-                return true
-            }
-        })
-        return true
-    }
+            })
+            return true
+        }
     }
 
     companion object {
