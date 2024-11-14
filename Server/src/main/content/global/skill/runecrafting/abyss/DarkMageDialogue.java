@@ -4,6 +4,7 @@ import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
+import org.rs09.consts.Items;
 
 /**
  * Handles the dark mages dialogue.
@@ -140,18 +141,18 @@ public final class DarkMageDialogue extends DialoguePlugin {
 	private boolean repair() {
 		player.pouchManager.getPouches().forEach((id, pouch) -> {
 			pouch.setCurrentCap(pouch.getCapacity());
-			pouch.setCharges(10);
-			Item essence = null;
-			if(!pouch.getContainer().isEmpty()){
-				int ess = pouch.getContainer().get(0).getId();
-				int amount = pouch.getContainer().getAmount(ess);
-				essence = new Item(ess,amount);
+			pouch.setCharges(pouch.getMaxCharges());
+			Item essItem = null;
+			if (!pouch.getContainer().isEmpty()) {
+				int essence = pouch.getContainer().get(0).getId();
+				int amount = pouch.getContainer().getAmount(essence);
+				essItem = new Item(essence, amount);
 			}
 			pouch.remakeContainer();
-			if(essence != null){
-				pouch.getContainer().add(essence);
+			if (essItem != null) {
+				pouch.getContainer().add(essItem);
 			}
-			if(id != 5509) {
+			if (id != Items.SMALL_POUCH_5509) {
 				if (player.getInventory().contains(id + 1, 1)) {
 					player.getInventory().remove(new Item(id + 1, 1));
 					player.getInventory().add(new Item(id, 1));

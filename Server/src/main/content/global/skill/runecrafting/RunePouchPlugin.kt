@@ -11,7 +11,7 @@ import core.tools.colorize
 
 /**
  * Handles the rune pouches.
- * @author Ceikry
+ * @author Ceikry, Player Name
  */
 class RunePouchPlugin : OptionHandler() {
     @Throws(Throwable::class)
@@ -37,21 +37,11 @@ class RunePouchPlugin : OptionHandler() {
                 if(preferenceFlag == 0) rEssAmt else pEssAmt
         )
 
-
-        if(player.pouchManager.isDecayedPouch(node.id)){
-            player.debug("E2")
-            when(option) { //Handling for IF the pouch has already completely decayed
-                "drop" -> player.dialogueInterpreter.open(9878,Item(node.id))
-                else -> player.sendMessage(colorize("%RThis pouch has completely decayed and needs to be repaired."))
-            }
-        } else {
-            player.debug("E")
-            when (option) { //Normal handling
-                "fill" -> player.pouchManager.addToPouch(node.id, essence.amount, essence.id)
-                "empty" -> player.pouchManager.withdrawFromPouch(node.id)
-                "check" -> player.pouchManager.checkAmount(node.id)
-                "drop" -> player.dialogueInterpreter.open(9878,Item(node.id))
-            }
+        when (option) {
+            "fill"  -> player.pouchManager.addToPouch(node.id, essence.amount, essence.id)
+            "empty" -> player.pouchManager.withdrawFromPouch(node.id)
+            "check" -> player.pouchManager.checkAmount(node.id)
+            "drop"  -> player.dialogueInterpreter.open(9878,Item(node.id))
         }
         return true
     }
