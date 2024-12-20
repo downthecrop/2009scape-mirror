@@ -308,7 +308,10 @@ object PacketProcessor {
             }
             is Packet.TrackingAfkTimeout -> {
                 if (pkt.player.details.rights != Rights.ADMINISTRATOR)
+                {
+                    pkt.player.isAfkLogout = true
                     pkt.player.packetDispatch.sendLogout()
+                }
             }
             is Packet.TrackingCameraPos -> {
                 //TODO Refactor the player monitor to be actually useful and log this

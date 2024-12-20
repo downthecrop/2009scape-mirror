@@ -1,22 +1,22 @@
 package content.region.misc.tutisland.dialogue
 
+import content.global.handlers.iface.RulesAndInfo
 import content.region.misc.tutisland.handlers.*
+import core.ServerConstants
 import core.api.*
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.IronmanMode
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.item.Item
+import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.plugin.Initializable
+import core.tools.END_DIALOGUE
+import core.worker.ManagementEvents
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import proto.management.JoinClanRequest
-import core.ServerConstants
-import content.global.handlers.iface.RulesAndInfo
-import core.game.world.GameWorld
-import core.tools.END_DIALOGUE
-import core.worker.ManagementEvents
 
 /**
  * Handles the magic tutor's dialogue
@@ -95,8 +95,8 @@ class TutorialMagicTutorDialogue(player: Player? = null) : core.game.dialogue.Di
             71 -> when(stage){
                 0 -> options("Set Ironman Mode (current: ${player.ironmanManager.mode.name})", "Change XP Rate (current: ${player.skills.experienceMultiplier}x)", "I'm ready now.").also { stage++ }
                 1 -> when(buttonId){
-                    1 -> options("None","Standard","Hardcore (Permadeath!)","Ultimate","Nevermind.").also { stage = 10 }
-                    2 -> options("1.0x","2.5x","5.0x","10x").also { stage = 20 }
+                    1 -> options("None","Standard","Ultimate","Nevermind.").also { stage = 10 }
+                    2 -> options("1.0x","2.5x","5.0x").also { stage = 20 }
                     3 -> npcl(core.game.dialogue.FacialExpression.FRIENDLY, "Well, you're all finished here now. I'll give you a reasonable number of starting items when you leave.").also { stage = 30 }
                 }
 
@@ -104,22 +104,31 @@ class TutorialMagicTutorDialogue(player: Player? = null) : core.game.dialogue.Di
                     stage = 0
                     if(buttonId < 5)
                     {
-                        val mode = IronmanMode.values()[buttonId - 1]
+                        val mode = when (buttonId - 1)
+                        {
+                            0 -> IronmanMode.NONE
+                            1 -> IronmanMode.STANDARD
+                            2 -> IronmanMode.ULTIMATE
+                            else -> IronmanMode.NONE
+                        }
+                        if (mode != IronmanMode.NONE) stage = 11
                         player.dialogueInterpreter.sendDialogue("You set your ironman mode to: ${mode.name}.")
                         player.ironmanManager.mode = mode
-                        if (player.skills.experienceMultiplier == 10.0 && mode != IronmanMode.HARDCORE) player.skills.experienceMultiplier = 5.0
+                        if (player.skills.experienceMultiplier == 10.0) player.skills.experienceMultiplier = 5.0
                     }
                     else
                     {
                         handle(interfaceId, 0)
                     }
                 }
+                11 -> player.dialogueInterpreter.sendPlainMessage(false, *splitLines("WARNING: You have selected an ironman mode. This is an uncompromising mode that WILL completely restrict your ability to trade. This MAY leave you unable to complete certain content, including quests.")).also { stage = 0 }
 
                 20 -> {
-                    val rates = arrayOf(1.0,2.5,5.0,10.0)
+                    val rates = arrayOf(1.0,2.5,5.0)
                     val rate = rates[buttonId - 1]
-                    if(rate == 10.0 && player.ironmanManager.mode != IronmanMode.HARDCORE) {
-                        player.dialogueInterpreter.sendDialogue("10.0x is only available to Hardcore Ironmen!")
+                    if(rate == 10.0) {
+                        player.dialogueInterpreter.sendDialogue("10.0x is no longer available!")
+                        player.skills.experienceMultiplier = 5.0
                         stage = 0
                         return true
                     }
@@ -150,11 +159,7 @@ class TutorialMagicTutorDialogue(player: Player? = null) : core.game.dialogue.Di
                     player.inventory.add(*STARTER_PACK)
                     player.bank.add(*STARTER_BANK)
 
-                    if(player.ironmanManager.mode == IronmanMode.HARDCORE)
-                    {
-                        setAttribute(player, "/save:permadeath", true)
-                    }
-                    else if(player.skills.experienceMultiplier == 10.0)
+                    if(player.skills.experienceMultiplier == 10.0)
                     {
                         player.skills.experienceMultiplier = 5.0
                     }

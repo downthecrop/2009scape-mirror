@@ -4,11 +4,9 @@ import core.api.log
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.login.PlayerParser
 import core.game.system.task.TaskExecutor
-import core.tools.SystemLogger
 import core.game.world.GameWorld
 import core.tools.Log
-import java.util.*
-import java.util.concurrent.ConcurrentHashMap
+import core.tools.secondsToTicks
 
 /**
  * Handles disconnecting players queuing.
@@ -37,7 +35,10 @@ class DisconnectionQueue {
             else {
                 //Make sure there's no room for the disconnection queue to stroke out and leave someone logged in for 10 years.
                 queueTimers[it.key] = (queueTimers[it.key] ?: 0) + 3
-                if ((queueTimers[it.key] ?: Int.MAX_VALUE) >= 1500) {
+                val isValidAFKLogout = it.value?.player?.isAfkLogout == true
+                val seconds = if (isValidAFKLogout) 30 else 5 * 60 //30 seconds for AFK logout, 5 minutes for normal logout
+                val ticksNeeded = secondsToTicks(seconds)
+                if ((queueTimers[it.key] ?: Int.MAX_VALUE) >= ticksNeeded) {
                     it.value?.player?.let { player ->
                         player.finishClear()
                         Repository.removePlayer(player)
