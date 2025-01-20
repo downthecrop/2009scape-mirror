@@ -448,9 +448,9 @@ fun addItemOrDrop(player: Player, id: Int, amount: Int = 1) {
 fun addItemOrBank(player: Player, id: Int, amount: Int = 1) {
     val item = Item(id, amount)
     if (!player.inventory.add(item)) {
-        if (player.bankPrimary.add(item)) {
+        if (player.ironmanManager.mode != IronmanMode.ULTIMATE && player.bankPrimary.add(item)) {
             sendMessage(player, colorize("%RThe ${item.name} has been sent to your bank."))
-        } else if (player.bankSecondary.add(item)) {
+        } else if (player.ironmanManager.mode != IronmanMode.ULTIMATE && player.bankSecondary.add(item)) {
             sendMessage(player, colorize("%RThe ${item.name} has been sent to your secondary bank."))
         } else {
             GroundItemManager.create(item, player)

@@ -1,8 +1,12 @@
 package content.minigame.fishingtrawler
 
 import content.global.skill.fishing.Fish
+import core.api.Container
+import core.api.addItem
+import core.api.addItemOrDrop
 import core.api.splitLines
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.IronmanMode
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.node.item.WeightedChanceItem
@@ -57,24 +61,33 @@ object TrawlerLoot {
     @JvmStatic
     fun addLootAndMessage(player: Player, fishLevel: Int, rolls: Int, skipJunk: Boolean) {
         if (rolls < 1) return
-        val frequencyList = listOf<MutableMap<String, Int>>(HashMap(), HashMap(), HashMap())
+        val frequencyList = listOf<MutableMap<Int, Int>>(HashMap(), HashMap(), HashMap())
         getLoot(fishLevel, rolls, skipJunk).forEach {
-            if (!player.bank.add(it)) GroundItemManager.create(it, player)
             when (it.id) {
-                in trawlerFishIds -> frequencyList[0].merge(it.name, 1, Int::plus)
-                in trawlerMisc -> frequencyList[1].merge(it.name, 1, Int::plus)
-                in junkItems -> frequencyList[2].merge(it.name, 1, Int::plus)
+                in trawlerFishIds -> frequencyList[0].merge(it.id, 1, Int::plus)
+                in trawlerMisc -> frequencyList[1].merge(it.id, 1, Int::plus)
+                in junkItems -> frequencyList[2].merge(it.id, 1, Int::plus)
             }
         }
-        player.sendMessage(colorize("%RYour reward has been sent to your bank:"))
-        // Extract and join each frequency maps entries as string. Split based on length, then send each line as message.
+        // Extract and join each frequency map's entries as items
         frequencyList.forEachIndexed { idx, fMap ->
             if (fMap.isNotEmpty()) {
+                // Give reward
+                fMap.forEach {
+                    if (player.ironmanManager.mode == IronmanMode.ULTIMATE || !addItem(player, it.key, it.value, Container.BANK)) {
+                        val notedIdIfFish = if (idx == 0) it.key + 1 else it.key
+                        addItemOrDrop(player, notedIdIfFish, it.value)
+                    }
+                }
+                // Split based on length, then send each line as message
                 splitLines(
-                    fMap.entries.joinToString(prefix = if (idx == 0) "Fish: " else if (idx == 1) "Misc: " else "Junk: ", postfix = ".") { "${it.key}: ${it.value}" },
+                    fMap.entries.joinToString(prefix = if (idx == 0) "Fish: " else if (idx == 1) "Misc: " else "Junk: ", postfix = ".") { "${Item(it.key).name}: ${it.value}" },
                     85
                 ).forEach { player.sendMessage(it) }
             }
+        }
+        if (player.ironmanManager.mode != IronmanMode.ULTIMATE) {
+            player.sendMessage(colorize("%RYour reward has been sent to your bank:"))
         }
     }
 

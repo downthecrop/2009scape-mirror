@@ -69,19 +69,19 @@ public final class FamiliarManager {
 	}
 
 	public void parse(JSONObject familiarData) {
-		for (Pets pet : Pets.values()) {
-			for (int id : new int[]{pet.getBabyItemId(), pet.getGrownItemId(), pet.getOvergrownItemId()}) {
-				if (id != -1) {
-					petDetails.put(id, new ArrayList<PetDetails>());
-				}
-			}
-		}
-
 		int currentPet = -1;
 		if (familiarData.containsKey("currentPet")) {
 			currentPet = Integer.parseInt(familiarData.get("currentPet").toString());
 		}
 		if (player.version < 2) { //migrate the v1 format
+			for (Pets pet : Pets.values()) {
+				for (int id : new int[]{pet.getBabyItemId(), pet.getGrownItemId(), pet.getOvergrownItemId()}) {
+					if (id != -1) {
+						petDetails.put(id, new ArrayList<PetDetails>());
+					}
+				}
+			}
+
 			JSONArray petDetails = (JSONArray) familiarData.get("petDetails");
 			for (Object petDetail : petDetails) {
 				JSONObject detail = (JSONObject) petDetail;
@@ -266,6 +266,9 @@ public final class FamiliarManager {
 		if (player.getSkills().getStaticLevel(Skills.SUMMONING) < pets.getSummoningLevel()) {
 			player.getDialogueInterpreter().sendDialogue("You need a summoning level of " + pets.getSummoningLevel() + " to summon this.");
 			return false;
+		}
+		if (!this.petDetails.containsKey(itemId)) {
+			petDetails.put(itemId, new ArrayList<PetDetails>());
 		}
 		int last = this.petDetails.get(itemId).size() - 1;
 		if (last < 0) { //new pet
