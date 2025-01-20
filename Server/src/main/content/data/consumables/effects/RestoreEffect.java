@@ -30,11 +30,13 @@ public class RestoreEffect extends ConsumableEffect {
         int[] skills = this.all_skills ? ALL_SKILLS : SKILLS;
         for(int skill : skills){
             int statL = sk.getStaticLevel(skill);
+            int boost = (int) (base + (statL * bonus));
             int curL = sk.getLevel(skill);
             if(curL < statL){
-                int boost = (int) (base + (statL * bonus));
                 p.getSkills().updateLevel(skill, boost, statL);
             }
+            if (skill == Skills.PRAYER)
+                p.getSkills().incrementPrayerPoints(boost);
         }
     }
 }
