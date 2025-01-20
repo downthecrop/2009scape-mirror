@@ -81,8 +81,9 @@ public final class HouseZone extends MapZone {
         if (e instanceof Player) {
             Player p = (Player) e;
             HouseManager.leave(p);
+	    return true;
         }
-        return true;
+        return super.death(e, killer);
     }
 
     @Override
