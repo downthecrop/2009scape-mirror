@@ -263,51 +263,53 @@ class UseWithPatchHandler : InteractionListener {
                         sendMessage(player, "You need ${prependArticle(requiredItem.asItem().name.lowercase())} to plant that.")
                         return@onUseWith true
                     }
-                    player.lock()
-                    if (removeItem(player, plantItem)) {
-                        when (requiredItem) {
-                            Items.SPADE_952 -> {
-                                animate(player, spadeDigAnim)
-                                playAudio(player, Sounds.DIGSPADE_1470)
+
+                    queueScript(player, 0, QueueStrength.WEAK) { stage: Int ->
+                        when (stage) {
+                            0 -> {
+                                val (anim, sound) = when (requiredItem) {
+                                    Items.SPADE_952 -> Pair(spadeDigAnim, Sounds.DIGSPADE_1470)
+                                    else -> Pair(seedDibberAnim,Sounds.FARMING_DIBBING_2432)
+                                }
+                                animate(player, anim)
+                                playAudio(player, sound)
+                                val delay = if (patch.type == PatchType.TREE_PATCH || patch.type == PatchType.FRUIT_TREE_PATCH || plantable == Plantable.SCARECROW) 3 else 0
+                                return@queueScript delayScript(player,anim.duration + delay)
                             }
-                            Items.SEED_DIBBER_5343 -> {
-                                animate(player, seedDibberAnim)
-                                playAudio(player, Sounds.FARMING_DIBBING_2432)
+                            1 -> {
+                                if (removeItem(player, plantItem)) {
+                                    if (plantable == Plantable.JUTE_SEED && patch == FarmingPatch.MCGRUBOR_HOPS && !player.achievementDiaryManager.hasCompletedTask(DiaryType.SEERS_VILLAGE, 0, 7)) {
+                                        player.achievementDiaryManager.finishTask(player, DiaryType.SEERS_VILLAGE, 0, 7)
+                                    }
+                                    p.plant(plantable)
+                                    rewardXP(player, Skills.FARMING, plantable.plantingXP)
+                                    p.setNewHarvestAmount()
+                                    if (p.patch.type == PatchType.TREE_PATCH || p.patch.type == PatchType.FRUIT_TREE_PATCH) {
+                                        addItem(player, Items.PLANT_POT_5350)
+                                    }
+
+                                    val itemAmount =
+                                        if (p.patch.type == PatchType.TREE_PATCH || p.patch.type == PatchType.FRUIT_TREE_PATCH) "the"
+                                        else if (plantItem.amount == 1) "a"
+                                        else plantItem.amount
+                                    val itemName =
+                                        if (plantItem.amount == 1) plantable.displayName else StringUtils.plusS(
+                                            plantable.displayName
+                                        )
+                                    val patchName = p.patch.type.displayName()
+                                    if (plantable == Plantable.SCARECROW) {
+                                        sendMessage(player, "You place the scarecrow in the $patchName.")
+                                    } else {
+                                        sendMessage(player, "You plant $itemAmount $itemName in the $patchName.")
+                                    }
+                                }
+                                return@queueScript stopExecuting(player)
                             }
+                            else -> return@queueScript stopExecuting(player)
                         }
-                        val delay = if (patch.type == PatchType.TREE_PATCH || patch.type == PatchType.FRUIT_TREE_PATCH || plantable == Plantable.SCARECROW) 0 else 3
-                        submitIndividualPulse(player, object : Pulse(delay) {
-                            override fun pulse(): Boolean {
-                                if (plantable == Plantable.JUTE_SEED && patch == FarmingPatch.MCGRUBOR_HOPS && !player.achievementDiaryManager.hasCompletedTask(DiaryType.SEERS_VILLAGE, 0, 7)) {
-                                    player.achievementDiaryManager.finishTask(player, DiaryType.SEERS_VILLAGE, 0, 7)
-                                }
-                                p.plant(plantable)
-                                rewardXP(player, Skills.FARMING, plantable.plantingXP)
-                                p.setNewHarvestAmount()
-                                if (p.patch.type == PatchType.TREE_PATCH || p.patch.type == PatchType.FRUIT_TREE_PATCH) {
-                                    addItem(player, Items.PLANT_POT_5350)
-                                }
-
-                                val itemAmount =
-                                    if (p.patch.type == PatchType.TREE_PATCH || p.patch.type == PatchType.FRUIT_TREE_PATCH) "the"
-                                    else if (plantItem.amount == 1) "a"
-                                    else plantItem.amount
-                                val itemName = if (plantItem.amount == 1) plantable.displayName else StringUtils.plusS(plantable.displayName)
-                                val patchName = p.patch.type.displayName()
-                                if (plantable == Plantable.SCARECROW) {
-                                    sendMessage(player, "You place the scarecrow in the $patchName.")
-                                } else {
-                                    sendMessage(player, "You plant $itemAmount $itemName in the $patchName.")
-                                }
-
-                                player.unlock()
-                                return true
-                            }
-                        })
                     }
                 }
             }
-
             return@onUseWith true
         }
     }
