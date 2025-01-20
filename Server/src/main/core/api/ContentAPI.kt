@@ -4,6 +4,7 @@ import com.moandjiezana.toml.Toml
 import content.data.consumables.*
 import content.data.skill.SkillingTool
 import content.global.handlers.iface.ge.StockMarket
+import content.global.skill.slayer.SlayerEquipmentFlags
 import content.global.skill.slayer.SlayerManager
 import content.global.skill.slayer.Tasks
 import content.global.skill.summoning.familiar.BurdenBeast
@@ -2168,6 +2169,9 @@ fun dumpContainer(player: Player, container: core.game.container.Container): Int
                     if (!InteractionListeners.run(item.id, player, item, false)) {
                         sendMessage(player, "A magical force prevents you from removing your ${item.name}.")
                         return@forEach
+                    }
+                    if (SlayerEquipmentFlags.isSlayerEq(item.id)) {
+                        SlayerEquipmentFlags.updateFlags(player)
                     }
                 }
 
