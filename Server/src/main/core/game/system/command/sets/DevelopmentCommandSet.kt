@@ -213,7 +213,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             }
         }
 
-        define("itemsearch") {player, args ->
+        define("itemsearch", Privilege.STANDARD, "itemsearch name", "Searches for items that match the name.") {player, args ->
             val itemName = args.copyOfRange(1, args.size).joinToString(" ").lowercase()
             for (i in 0 until 15000) {
                 val name = getItemName(i).lowercase()
