@@ -20559,7 +20559,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "On ground: Cabbage... yuck!In inventory: Yuck, I don't like cabbage.",
+    "examine": "Yuck, I don't like cabbage.",
     "grand_exchange_price": "41",
     "durability": null,
     "name": "Cabbage",
@@ -20578,7 +20578,7 @@
     "id": "1966"
   },
   {
-    "examine": "On ground: Cabbage... yuck!In inventory: Yuck, I don't like cabbage.",
+    "examine": "Yuck, a cabbage from Draynor Manor. I don't like cabbage.",
     "grand_exchange_price": "55",
     "durability": null,
     "name": "Cabbage",
@@ -42660,7 +42660,7 @@
     "id": "4619"
   },
   {
-    "examine": "It looks horrible.On ground: Not good for eating.",
+    "examine": "It looks horrible.",
     "durability": null,
     "name": "Black mushroom",
     "weight": "1",
@@ -70692,7 +70692,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "In inventory: Nice bit of crafting! When released: Nice bit of crafting that...",
+    "examine": "Nice bit of crafting!",
     "grand_exchange_price": "3236",
     "durability": null,
     "name": "Toy doll",
@@ -70710,7 +70710,7 @@
     "id": "7764"
   },
   {
-    "examine": "In inventory: Nice bit of crafting! When released: Nice bit of crafting that...",
+    "examine": "Nice bit of crafting!",
     "grand_exchange_price": "3289",
     "durability": null,
     "name": "Toy doll (wound)",
