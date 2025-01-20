@@ -97,7 +97,7 @@ class CropHarvester : OptionHandler() {
                     if (patch.patch.type in livesBased) {
                         patch.rollLivesDecrement(
                             getDynLevel(player, Skills.FARMING),
-                            requiredItem == Items.MAGIC_SECATEURS_7409
+                            inInventory(player, Items.MAGIC_SECATEURS_7409) //add ||inEquipment() check when Fairy Tale pt 1 has been implemented
                         )
                     } else {
                         patch.harvestAmt--
