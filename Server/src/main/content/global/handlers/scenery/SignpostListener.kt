@@ -11,18 +11,21 @@ class SignpostListener : InteractionListener {
     override fun defineListeners() {
         on(Scenery.SIGNPOST_18493, IntType.SCENERY, "read") { player, node ->
             if (node.asScenery().location.equals(Location(3235, 3228))) {
+                // Authentic
                 setInterfaceText(player, "Head north towards Fred's farm, and the windmill.", 135, 3) // North
                 setInterfaceText(player, "South to the swamps of Lumbridge.", 135, 9) // South
                 setInterfaceText(player, "Cross the bridge and head east to Al Kharid or north to Varrock.", 135, 8) // East
                 setInterfaceText(player, "West to the Lumbridge Castle and Draynor Village. Beware the goblins!", 135, 12) // West
                 openInterface(player, Components.AIDE_COMPASS_135)
             } else if (node.asScenery().location.equals(Location(3261, 3230))) {
+                // Authentic
                 setInterfaceText(player, "North to farms and Varrock.", 135, 3) // North
                 setInterfaceText(player, "The River Lum lies to the south.", 135, 9) // South
                 setInterfaceText(player, "East to Al Kharid - toll gate; bring some money.", 135, 8) // East
                 setInterfaceText(player, "West to Lumbridge.", 135, 12) // West
                 openInterface(player, Components.AIDE_COMPASS_135)
             } else if (node.asScenery().location.equals(Location(2983, 3278))) {
+                // Authentic
                 setInterfaceText(player, "North to the glorious White Knights' city of Falador.", 135, 3) // North
                 setInterfaceText(player, "South to Rimmington.", 135, 9) // South
                 setInterfaceText(player, "East to Port Sarim and Draynor Village.", 135, 8) // East
@@ -45,12 +48,14 @@ class SignpostListener : InteractionListener {
         }
         on(Scenery.SIGNPOST_24263, IntType.SCENERY, "read") { player, node ->
             if (node.asScenery().location.equals(Location(3268, 3332))) {
+                // Authentic
                 setInterfaceText(player, "Sheep lay this way.", 135, 3) // North
                 setInterfaceText(player, "South through farms to Al Kharid and Lumbridge.", 135, 9) // South
                 setInterfaceText(player, "East to Al Kharid mine and follow the path north to Varrock east gate.", 135, 8) // East
                 setInterfaceText(player, "West to Champion's Guild and Varrock south gate.", 135, 12) // West
                 openInterface(player, Components.AIDE_COMPASS_135)
             } else if (node.asScenery().location.equals(Location(3283, 3333))) {
+                // Authentic
                 setInterfaceText(player, "North to Varrock mine and Varrock east gate.", 135, 3) // North
                 setInterfaceText(player, "South to large Mining area and Al Kharid.", 135, 9) // South
                 setInterfaceText(player, "Follow the path east to the Dig Site.", 135, 8) // East
@@ -66,7 +71,13 @@ class SignpostListener : InteractionListener {
             return@on true
         }
         on(Scenery.SIGNPOST_4132, IntType.SCENERY, "read") { player, node ->
-             if (node.asScenery().location.equals(Location(3166, 3286))) {
+            if (node.asScenery().location.equals(Location(3223, 3427))) {
+                setInterfaceText(player, "North to Varrock Palace.", 135, 3) // North
+                setInterfaceText(player, "South to the Champion's Guild.", 135, 9) // South
+                setInterfaceText(player, "East to the Dig Site.", 135, 8) // East
+                setInterfaceText(player, "West to Barbarian Village and Falador.", 135, 12) // West
+                openInterface(player, Components.AIDE_COMPASS_135)
+            } else if (node.asScenery().location.equals(Location(3166, 3286))) {
                 setInterfaceText(player, "North to the windmill.", 135, 3) // North
                 setInterfaceText(player, "South to a fishing pond next to Fred's farm.", 135, 9) // South
                 setInterfaceText(player, "East to Lumbridge.", 135, 8) // East
@@ -85,24 +96,24 @@ class SignpostListener : InteractionListener {
                 setInterfaceText(player, "Follow the path west to Ardougne.", 135, 12) // West
                 openInterface(player, Components.AIDE_COMPASS_135)
             } else if (node.asScenery().location.equals(Location(2604, 3240))) {
-                 setInterfaceText(player, "North to the Ardougne City Zoo.", 135, 3) // North
-                 setInterfaceText(player, "South to the Monastery.", 135, 9) // South
-                 setInterfaceText(player, "East to the Tower of Life.", 135, 8) // East
-                 setInterfaceText(player, "West to the Clocktower.", 135, 12) // West
-                 openInterface(player, Components.AIDE_COMPASS_135)
-             } else if (node.asScenery().location.equals(Location(2605, 3298))) {
-                 setInterfaceText(player, "North to the Fishing Guild and Hemenster.", 135, 3) // North
-                 setInterfaceText(player, "South to the Ardougne City Zoo.", 135, 9) // South
-                 setInterfaceText(player, "East to Ardougne Market.", 135, 8) // East
-                 setInterfaceText(player, "West to Ardougne Castle and West Ardougne.", 135, 12) // West
-                 openInterface(player, Components.AIDE_COMPASS_135)
-             } else if (node.asScenery().location.equals(Location(2646, 3404))) {
-                 setInterfaceText(player, "North to the Ranging Guild and Seer's Village.", 135, 3) // North
-                 setInterfaceText(player, "South to the Ardougne City.", 135, 9) // South
-                 setInterfaceText(player, "East to the Sorcerer's Tower.", 135, 8) // East
-                 setInterfaceText(player, "West to the Fishing Guild.", 135, 12) // West
-                 openInterface(player, Components.AIDE_COMPASS_135)
-             } else {
+                setInterfaceText(player, "North to Ardougne Zoo.", 135, 3) // North
+                setInterfaceText(player, "South to the Monastery.", 135, 9) // South
+                setInterfaceText(player, "East to the Tower of Life.", 135, 8) // East
+                setInterfaceText(player, "West to the Clocktower.", 135, 12) // West
+                openInterface(player, Components.AIDE_COMPASS_135)
+            } else if (node.asScenery().location.equals(Location(2605, 3298))) {
+                setInterfaceText(player, "North to the Fishing Guild and Baxtorian Falls.", 135, 3) // North
+                setInterfaceText(player, "South to Ardougne Zoo and Port Khazard.", 135, 9) // South
+                setInterfaceText(player, "East to Ardougne Market and Witchaven.", 135, 8) // East
+                setInterfaceText(player, "West to Ardougne Castle and Ardougne West.", 135, 12) // West
+                openInterface(player, Components.AIDE_COMPASS_135)
+            } else if (node.asScenery().location.equals(Location(2646, 3404))) {
+                setInterfaceText(player, "North to the Ranging Guild and Seer's Village.", 135, 3) // North
+                setInterfaceText(player, "South to the Ardougne City.", 135, 9) // South
+                setInterfaceText(player, "East to the Sorcerer's Tower.", 135, 8) // East
+                setInterfaceText(player, "West to the Fishing Guild.", 135, 12) // West
+                openInterface(player, Components.AIDE_COMPASS_135)
+            } else {
                 setInterfaceText(player, "North to unknown.", 135, 3) // North
                 setInterfaceText(player, "South to unknown.", 135, 9) // South
                 setInterfaceText(player, "East to unknown.", 135, 8) // East
@@ -122,7 +133,57 @@ class SignpostListener : InteractionListener {
                 setInterfaceText(player, "North to Edgeville.", 135, 3) // North
                 setInterfaceText(player, "South to Draynor Manor.", 135, 9) // South
                 setInterfaceText(player, "East to Varrock west gate.", 135, 8) // East
-                setInterfaceText(player, "West to Barbarian Village.", 135, 12) // West
+                setInterfaceText(player, "West to Barbarian Village and Falador.", 135, 12) // West
+                openInterface(player, Components.AIDE_COMPASS_135)
+            } else {
+                setInterfaceText(player, "North to unknown.", 135, 3) // North
+                setInterfaceText(player, "South to unknown.", 135, 9) // South
+                setInterfaceText(player, "East to unknown.", 135, 8) // East
+                setInterfaceText(player, "West to unknown.", 135, 12) // West
+                openInterface(player, Components.AIDE_COMPASS_135)
+            }
+            return@on true
+        }
+        on(Scenery.SIGNPOST_4135, IntType.SCENERY, "read") { player, node ->
+            if (node.asScenery().location.equals(Location(3448, 3486))) {
+                setInterfaceText(player, "North to the Slayer Tower.", 135, 3) // North
+                setInterfaceText(player, "South to Mort Myre Swamp.", 135, 9) // South
+                setInterfaceText(player, "East to Canifis.", 135, 8) // East
+                setInterfaceText(player, "West to Varrock.", 135, 12) // West
+                openInterface(player, Components.AIDE_COMPASS_135)
+            } else {
+                setInterfaceText(player, "North to unknown.", 135, 3) // North
+                setInterfaceText(player, "South to unknown.", 135, 9) // South
+                setInterfaceText(player, "East to unknown.", 135, 8) // East
+                setInterfaceText(player, "West to unknown.", 135, 12) // West
+                openInterface(player, Components.AIDE_COMPASS_135)
+            }
+            return@on true
+        }
+        on(Scenery.SIGNPOST_31296, IntType.SCENERY, "read") { player, node ->
+            if (node.asScenery().location.equals(Location(3304, 3109))) {
+                // Authentic
+                setInterfaceText(player, "North to Al Kharid.", 135, 3) // North
+                setInterfaceText(player, "South to the Desert Mining Camp and Pollnivneach.", 135, 9) // South
+                setInterfaceText(player, "East and across the river to the Ruins of Uzer.", 135, 8) // East
+                setInterfaceText(player, "West to the Kalphite Lair.", 135, 12) // West
+                openInterface(player, Components.AIDE_COMPASS_135)
+            } else {
+                setInterfaceText(player, "North to unknown.", 135, 3) // North
+                setInterfaceText(player, "South to unknown.", 135, 9) // South
+                setInterfaceText(player, "East to unknown.", 135, 8) // East
+                setInterfaceText(player, "West to unknown.", 135, 12) // West
+                openInterface(player, Components.AIDE_COMPASS_135)
+            }
+            return@on true
+        }
+        on(Scenery.STONE_SIGNPOST_11630, IntType.SCENERY, "read") { player, node ->
+            // Authentic // https://youtu.be/vvHXKTOh_g4
+            if (node.asScenery().location.equals(Location(2967, 3412))) {
+                setInterfaceText(player, "North to Goblin Village.", 135, 3) // North
+                setInterfaceText(player, "South to Falador.", 135, 9) // South
+                setInterfaceText(player, "East to Varrock.", 135, 8) // East
+                setInterfaceText(player, "West to Taverley.", 135, 12) // West
                 openInterface(player, Components.AIDE_COMPASS_135)
             } else {
                 setInterfaceText(player, "North to unknown.", 135, 3) // North
@@ -143,17 +204,17 @@ class SignpostListener : InteractionListener {
      * 		SceneryDefinition.forId(4133).getHandlers().put("option:read", this);
      * 		SceneryDefinition.forId(4134).getHandlers().put("option:read", this);
      * 		SceneryDefinition.forId(4135).getHandlers().put("option:read", this);
-     * 		SceneryDefinition.forId(5164).getHandlers().put("option:read", this);
-     * 		SceneryDefinition.forId(10090).getHandlers().put("option:read", this);
-     * 		SceneryDefinition.forId(13873).getHandlers().put("option:read", this);
-     * 		SceneryDefinition.forId(15522).getHandlers().put("option:read", this);
-     * 		SceneryDefinition.forId(25397).getHandlers().put("option:read", this);
-     * 		SceneryDefinition.forId(30039).getHandlers().put("option:read", this);
-     * 		SceneryDefinition.forId(30040).getHandlers().put("option:read", this);
-     * 		SceneryDefinition.forId(31296).getHandlers().put("option:read", this);
-     * 		SceneryDefinition.forId(31298).getHandlers().put("option:read", this);
-     * 		SceneryDefinition.forId(31299).getHandlers().put("option:read", this);
-     * 		SceneryDefinition.forId(31300).getHandlers().put("option:read", this);
+     *
+     * 		SceneryDefinition.forId(5164).getHandlers().put("option:read", this); No
+     * 		SceneryDefinition.forId(10090).getHandlers().put("option:read", this); No
+     *
+     * 		SceneryDefinition.forId(13873).getHandlers().put("option:read", this); No
+     *
+     * 		SceneryDefinition.forId(15522).getHandlers().put("option:read", this); No
+     * 		SceneryDefinition.forId(25397).getHandlers().put("option:read", this); No
+     *
+     * 		SceneryDefinition.forId(30039).getHandlers().put("option:read", this); // ????
+     * 		SceneryDefinition.forId(30040).getHandlers().put("option:read", this); // ??????
      * //		ObjectDefinition.forId(31301).getConfigurations().put("option:read", this);//goblin village
      * 		return this;
      * 	}

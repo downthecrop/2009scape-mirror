@@ -29,7 +29,8 @@ public class RomeoJuliet extends Quest {
 		case 10:
 			line(player, "<str>I have agreed to find Juliet for Romeo and tell her how he", 4+ 7);
 			line(player, "<str>feels. For some reason he can't just do this himself.", 5+ 7);
-			line(player, BLUE + "All I need to do now is find " + RED + "Juliet.", 6+ 7);
+			// https://www.youtube.com/watch?v=ush_RVY4tvw
+			line(player, BLUE + "I should go and speak to " + RED + "Juliet" + BLUE + ", wherever she is?", 7+ 7);
 			break;
 		case 20:
 			line(player, "<str>I have agreed to find Juliet for Romeo and tell her how he", 4+ 7);
@@ -113,6 +114,7 @@ public class RomeoJuliet extends Quest {
 			line(player, BLUE + "I have to find " + RED + "Romeo" + BLUE + " and tell him what's happened.", 18+ 7);
 			break;
 		case 100:
+			// https://www.youtube.com/watch?v=m4bZ4GmHxRs
 			line(player, "<str>Romeo and Juliet can be together in peace.", 4+ 7);
 			line(player, "<str>I went to the Apothecary regarding making this cadava", 5+ 7);
 			line(player, "<str>potion, and he told me to bring him some cadava berries.", 6+ 7);
@@ -121,7 +123,7 @@ public class RomeoJuliet extends Quest {
 			line(player, "<str>I told Romeo what was going to happen, but I'm not exactly", 9+ 7);
 			line(player, "<str>sure he understood what was happening. Ah well, I was", 10+ 7);
 			line(player, "<str>rewarded for all of my help regardless.", 11+ 7);
-			line(player, "<col=FF0000>QUEST COMPLETE!", 12+ 7);
+			line(player, "<col=FF0000>QUEST COMPLETE!", 13+ 7);
 			break;
 		}
 	}

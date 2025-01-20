@@ -15,18 +15,23 @@ class DoricsQuest : Quest("Doric's Quest", 17, 16, 1, 31, 0, 1, 100) {
     override fun drawJournal(player: Player?, stage: Int) {
         super.drawJournal(player, stage)
         player ?: return
-        var line = 11
+        var line = 12
         if(stage == 0) {
             line(player, "I can start this quest by speaking to !!Doric?? who is !!North of??", line++)
             line(player, "!!Falador??.", line++)
+            line++
             line(player, "There aren't any requirements but !!Level 15 Mining?? will help.", line++)
         } else {
             if(stage in 1..99) {
-                line(player, "I have spoken to !!Doric??.", line++)
-                line(player, "I need to collect some items and bring them to !!Doric??:", line++)
-                line(player, "6 Clay", line++, inInventory(player, Items.CLAY_434, 6))
-                line(player, "4 Copper Ore", line++, inInventory(player, Items.COPPER_ORE_436, 4))
-                line(player, "2 Iron Ore", line++, inInventory(player, Items.IRON_ORE_440, 2))
+                // https://www.youtube.com/watch?v=vm4BEXtMoO0
+                line(player, "I have spoken to Doric. He agreed to let me use his anvils", line++, true)
+                line(player, "if I bring him some materials.", line++, true)
+                line++
+                line(player, "I need to collect the following materials and bring them all", line++)
+                line(player, "to !!Doric??:", line++)
+                line(player, "!!6 Clay.??", line++, inInventory(player, Items.CLAY_434, 6))
+                line(player, "!!4 Copper Ore.??", line++, inInventory(player, Items.COPPER_ORE_436, 4))
+                line(player, "!!2 Iron Ore.??", line++, inInventory(player, Items.IRON_ORE_440, 2))
             }
 
             if(stage == 100) {
