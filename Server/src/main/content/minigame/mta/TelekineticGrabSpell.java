@@ -4,6 +4,7 @@ import content.minigame.mta.impl.TelekineticZone;
 import core.game.interaction.SpecialGroundItems;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
+import core.game.node.entity.combat.CombatSwingHandler;
 import core.game.node.entity.combat.spell.SpellType;
 import core.game.node.entity.combat.spell.SpellBlocks;
 import core.game.node.entity.impl.Projectile;
@@ -24,7 +25,7 @@ import core.game.global.action.PickupHandler;
 import core.game.world.GameWorld;
 import org.rs09.consts.Sounds;
 
-import static core.api.ContentAPIKt.playAudio;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Represents the telekenitic grab spell.
@@ -176,8 +177,12 @@ public final class TelekineticGrabSpell extends MagicSpell {
 		}
 		if (entity instanceof Player) {
 			final Player player = (Player) entity;
-			if (!player.getInventory().hasSpaceFor(((Item) item))) {
-				player.getPacketDispatch().sendMessage("You don't have enough inventory space.");
+			if (!CombatSwingHandler.isProjectileClipped(player, item, false)) {
+				sendMessage(player, "I can't reach that."); //TODO authentic message?
+				return false;
+			}
+			if (!hasSpaceFor(player, item)) {
+				sendMessage(player, "You don't have enough inventory space.");
 				return false;
 			}
 			if (!PickupHandler.canTake(player, item, 1)) {
