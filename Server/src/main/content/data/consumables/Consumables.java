@@ -52,7 +52,7 @@ public enum Consumables {
 	COOKED_JUBBLY(new Food(new int[] {7568}, new HealingEffect(15))),
 	BASS(new Food(new int[] {365}, new HealingEffect(13))),
 	SWORDFISH(new Food(new int[] {373}, new HealingEffect(14))),
-	LAVA_EEL(new Food(new int[] {2149}, new HealingEffect(14))),
+	LAVA_EEL(new Food(new int[] {2149}, new HealingEffect(11))),
 	MONKFISH(new Food(new int[] {7946}, new HealingEffect(16))),
 	SHARK(new Food(new int[] {385}, new HealingEffect(20))),
 	SEA_TURTLE(new Food(new int[] {397}, new HealingEffect(21))),

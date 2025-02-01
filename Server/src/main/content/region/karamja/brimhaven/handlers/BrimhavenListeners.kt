@@ -45,21 +45,6 @@ class BrimhavenListeners : InteractionListener {
         private const val RESTAURANT_REAR_DOOR = Scenery.DOOR_1591
 
         /**
-         * Represents the door of the Black Arm Gang office used in the Heroes' Quest.
-         */
-        private const val GANG_OFFICE_DOOR = Scenery.DOOR_2626
-
-        /**
-         * Represents the door guarded by Garv on ScarFace Pete's mansion used in the Heroes' Quest.
-         */
-        private const val MANSION_DOOR = Scenery.DOOR_2627
-
-        /**
-         * Represents the kitchen door in the Shrimp and Parrot restaurant used in the Heroes' Quest.
-         */
-        private const val RESTAURANT_KITCHEN_DOOR = Scenery.DOOR_2628
-
-        /**
          * Represents Lubufu's karambwan fishing spot unlocked in Tai Bwo Wannai Trio.
          */
         private const val KARAMBWAN_FISHING_SPOT = NPCs.FISHING_SPOT_1178
@@ -105,21 +90,6 @@ class BrimhavenListeners : InteractionListener {
         on(RESTAURANT_REAR_DOOR, IntType.SCENERY, "open") { player, _ ->
             sendMessage(player, "You try and open the door...")
             sendMessage(player, "The door is locked tight, I can't open it.")
-            return@on true
-        }
-
-        on(GANG_OFFICE_DOOR, IntType.SCENERY, "open") { player, _ ->
-            openDialogue(player, 789, Repository.findNPC(789)!!)
-            return@on true
-        }
-
-        on(MANSION_DOOR, IntType.SCENERY, "open") { player, _ ->
-            openDialogue(player, 788, Repository.findNPC(788)!!, true)
-            return@on true
-        }
-
-        on(RESTAURANT_KITCHEN_DOOR, IntType.SCENERY, "open") { player, _ ->
-            sendMessage(player, "The door is securely closed.")
             return@on true
         }
 

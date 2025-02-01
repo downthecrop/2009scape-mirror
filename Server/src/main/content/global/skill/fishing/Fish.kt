@@ -24,7 +24,7 @@ enum class Fish(val id: Int, val level: Int, val experience: Double, val lowChan
     LOBSTER(Items.RAW_LOBSTER_377, 40, 90.0, 0.16, 0.375),
     BASS(Items.RAW_BASS_363, 46, 100.0, 0.078, 0.16),
     SWORDFISH(Items.RAW_SWORDFISH_371, 50, 100.0, 0.105, 0.191),
-    LAVA_EEL(Items.RAW_LAVA_EEL_2148, 53, 30.0, 0.227, 0.379),
+    LAVA_EEL(Items.RAW_LAVA_EEL_2148, 53, 60.0, 0.227, 0.379),
     MONKFISH(Items.RAW_MONKFISH_7944, 62, 120.0, 0.293, 0.356),
     KARAMBWAN(Items.RAW_KARAMBWAN_3142, 65, 105.0, 0.414, 0.629),
     SHARK(Items.RAW_SHARK_383, 76, 110.0, 0.121, 0.16),

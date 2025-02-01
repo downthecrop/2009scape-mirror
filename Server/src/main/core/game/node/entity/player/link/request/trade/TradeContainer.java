@@ -161,7 +161,8 @@ public final class TradeContainer extends Container {
 		String targetMac = target.getDetails().getMacAddress();
 		String playerHost = player.getDetails().getCompName();
 		String targetHost = target.getDetails().getCompName();
-		if (item.getId() == 11174 || item.getId() == 11173 || item.getId() == 759) {
+		// Ironman trading exceptions for Shield of Arrav and Heroes Quest
+		if (item.getId() == 11174 || item.getId() == 11173 || item.getId() == 759 || item.getId() == 1586 || item.getId() == 1577) {
 			return true;
 		}
 		if (player.getIronmanManager().isIronman() || target != null && target.getIronmanManager().isIronman()) {

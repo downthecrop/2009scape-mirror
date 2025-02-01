@@ -58866,6 +58866,26 @@
     "main": []
   },
   {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "526",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "1583",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "6108",
+    "description": "",
+    "main": []
+  },
+  {
     "default": [],
     "charm": [],
     "ids": "795",

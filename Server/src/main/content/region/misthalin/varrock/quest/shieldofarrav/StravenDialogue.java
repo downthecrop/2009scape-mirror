@@ -5,6 +5,9 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
+import content.region.asgarnia.burthorpe.quest.heroesquest.StravenDialogueFile;
+
+import static core.api.ContentAPIKt.openDialogue;
 
 /**
  * Represents the dialogue which handles the straven NPC.
@@ -46,6 +49,14 @@ public class StravenDialogue extends DialoguePlugin {
 		quest = player.getQuestRepository().getQuest("Shield of Arrav");
 		switch (quest.getStage(player)) {
 		case 100:
+			if (ShieldofArrav.isPhoenix(player)) {
+				Quest heroesQuest = player.getQuestRepository().getQuest("Heroes' Quest");
+				if (0 < heroesQuest.getStage(player) && heroesQuest.getStage(player) < 100) {
+					openDialogue(player, new StravenDialogueFile(), npc);
+					break;
+				}
+			}
+			// Continues below if not during the Heroes' Quest
 		case 70:
 			if (ShieldofArrav.isPhoenix(player)) {
 				npc("Greetings fellow gang member.");

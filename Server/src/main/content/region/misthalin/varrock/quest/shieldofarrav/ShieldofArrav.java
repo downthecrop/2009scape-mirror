@@ -226,6 +226,22 @@ public class ShieldofArrav extends Quest {
 	}
 
 	/**
+	 * Swaps the gang.
+	 * @param player the player.
+	 */
+	public static void swapGang(final Player player) {
+		if(isPhoenix(player)) {
+			player.setAttribute("/save:black-arm-gang", true);
+			player.setAttribute("/save:phoenix-gang", false);
+		} else if(isBlackArm(player)) {
+			player.setAttribute("/save:black-arm-gang", false);
+			player.setAttribute("/save:phoenix-gang", true);
+		} else {
+			player.setAttribute("/save:phoenix-gang", true);
+		}
+	}
+
+	/**
 	 * Method used to check if the player is part of the phoenix gang.
 	 * @param player the player.
 	 * @return <code>True</code> if so.

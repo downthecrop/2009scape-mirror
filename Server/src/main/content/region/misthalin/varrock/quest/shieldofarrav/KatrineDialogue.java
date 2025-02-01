@@ -1,10 +1,13 @@
 package content.region.misthalin.varrock.quest.shieldofarrav;
 
+import content.region.asgarnia.burthorpe.quest.heroesquest.KatrineDialogueFile;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
+
+import static core.api.ContentAPIKt.openDialogue;
 
 /**
  * Represents the katrine NPC dialogue.
@@ -50,9 +53,17 @@ public final class KatrineDialogue extends DialoguePlugin {
 		npc = (NPC) args[0];
 		quest = player.getQuestRepository().getQuest("Shield of Arrav");
 		switch (quest.getStage(player)) {
-		case 80:
-		case 90:
 		case 100:
+			if (ShieldofArrav.isBlackArm(player)) {
+				Quest heroesQuest = player.getQuestRepository().getQuest("Heroes' Quest");
+				if (0 < heroesQuest.getStage(player) && heroesQuest.getStage(player) < 100) {
+					openDialogue(player, new KatrineDialogueFile(), npc);
+					break;
+				}
+			}
+			// Continues below if not during the Heroes' Quest
+		case 90:
+		case 80:
 		case 70:
 			if (ShieldofArrav.isPhoenix(player)) {
 				npc("You've got some guts coming here, Phoenix guy!");
