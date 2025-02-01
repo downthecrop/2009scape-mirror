@@ -1,6 +1,5 @@
 package core.game.node.entity.player.link.quest;
 
-import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
 import core.plugin.Plugin;
@@ -213,6 +212,20 @@ public abstract class Quest implements Plugin<Object> {
 			send = send.replace("!!", "").replace("??", "").replace("%%", "").replace("&&", "");
 		}
 		player.getPacketDispatch().sendString(crossed ? "<str>" + send + "</str>" : send, JOURNAL_COMPONENT, line);
+	}
+
+	/**
+	 * Limits the quest log scroll to the number of lines minus 9.
+	 * Assumes that you start at line = 11 or line = 12.
+	 * Call this function at the end of the drawJournal function like: limitScroll(player, line);
+	 * @param player The player.
+	 * @param line The number of lines to scroll. Due to sendRunScript, it handles less than 12 lines pretty well.
+	 * @param startFromTop Whether to open the log at the top, defaults to opening the log at the very bottom.
+	 */
+	public void limitScrolling(Player player, int line, boolean startFromTop) {
+		// sendRunScript reverses the objects you pass in
+		// (args1: 0 is to start from bottom of scroll) (args0: child-12 lines to display)
+		player.getPacketDispatch().sendRunScript(1207, "ii", startFromTop ? 1 : 0, line - 9); // -9 to give text some padding instead of line - 11 or 12
 	}
 
 	/**

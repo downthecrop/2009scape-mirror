@@ -114,13 +114,12 @@ public class AchievementDiary {
 			}
 			child++;
 		}
-		//	sendString(player, builder.toString(), 11);
-		//Changes the size of the scroll bar
-		//player.getPacketDispatch().sendRunScript(1207, "i", new Object[] { 330 });
-		//sendString(player, builder.toString(), 11);
 		if (!player.getInterfaceManager().isOpened()) {
 			player.getInterfaceManager().open(new Component(DIARY_COMPONENT));
 		}
+		// Changes the size of the scroll bar (see 1207.cs2 for more)
+		// (args1: 1 is to start from top of scroll) (args0: child-12 lines to display)
+		player.getPacketDispatch().sendRunScript(1207, "ii", 1, child - 10);
 	}
 
 	/**

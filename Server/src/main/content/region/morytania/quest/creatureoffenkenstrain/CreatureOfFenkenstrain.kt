@@ -58,6 +58,7 @@ class CreatureOfFenkenstrain : Quest("Creature of Fenkenstrain", 41, 40, 2, 399,
             line(player, "I also need to have completed the following quests:", line++, false)
             line(player, "Priest in Peril", line++, isQuestComplete(player, "Priest in Peril"))
             line(player, "Restless Ghost", line++, isQuestComplete(player, "The Restless Ghost"))
+            limitScrolling(player, line, true)
         } else {
             line(player, "I read the signpost in Canifis, which tells of a butler", line++, true)
             line(player, "position that is available at the castle to the northeast.", line++, true)
@@ -123,6 +124,7 @@ class CreatureOfFenkenstrain : Quest("Creature of Fenkenstrain", 41, 40, 2, 399,
                 line++
                 line(player,"<col=FF0000>QUEST COMPLETE!</col>", line)
             }
+            limitScrolling(player, line, false)
         }
     }
 

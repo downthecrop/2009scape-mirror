@@ -1,13 +1,13 @@
 package content.region.misthalin.varrock.quest.allfiredup
 
+import content.minigame.allfiredup.AFUBeacon
+import core.api.setVarbit
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.Items
-import content.minigame.allfiredup.AFUBeacon
-import core.api.*
 
 /**
  * Represents the "All Fired Up" quest.
@@ -30,6 +30,7 @@ class AllFiredUp : Quest("All Fired Up", 157, 156, 1){
             line(player, "To start this quest, I require:", line++)
             line(player, "!!43 Firemaking??", line++, player.skills.getLevel(Skills.FIREMAKING) >= 43)
             line(player, "!!Completion of Priest in Peril??", line++, player.questRepository.isComplete("Priest in Peril"))
+            limitScrolling(player, line, true)
         } else {
             line(player, "I have agreed to help King Roald test the beacon network", line++, true)
             line(player, "that he hopes will serve as an early warning system,", line++, true)
@@ -133,6 +134,7 @@ class AllFiredUp : Quest("All Fired Up", 157, 156, 1){
                 line++
                 line(player,"<col=FF0000>QUEST COMPLETE!</col>", line)
             }
+            limitScrolling(player, line, false)
         }
     }
 

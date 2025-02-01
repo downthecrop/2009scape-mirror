@@ -37,6 +37,7 @@ public class WolfWhistle extends Quest {
 		if(stage == 0){
 			line(player, "I can begin this quest by talking to !!Pikkupstix??, who lives in", line++, false);
 			line(player, "!!Taverly??.", line++, false);
+			limitScrolling(player, line, true);
 		} else {
 			if (stage >= 10) {
 				line(player, "Having spoken to !!Pikkupstix??, it seems that all I have to do", line++, stage >= 20);
@@ -146,6 +147,7 @@ public class WolfWhistle extends Quest {
 				line(player, "275 gold charms", line++);
 				line(player, "and 276 Summoning XP", line++);
 			}
+			limitScrolling(player, line, false);
 		}
 	}
 

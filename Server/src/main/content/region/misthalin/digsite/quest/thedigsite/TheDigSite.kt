@@ -93,6 +93,7 @@ class TheDigSite : Quest("The Dig Site", 47, 46, 2, 131, 0, 1, 9) {
             line(player, "Level 10 Agility", line++, hasLevelStat(player, Skills.AGILITY, 10))
             line(player, "Level 10 Herblore", line++, hasLevelStat(player, Skills.HERBLORE, 10))
             line(player, "Level 25 Thieving", line++, hasLevelStat(player, Skills.THIEVING, 25))
+            limitScrolling(player, line, true)
         } else {
             line(player, "I should speak to an examiner about taking Earth Science", line++, true)
             line(player, "Exams.", line++, true)
@@ -362,6 +363,7 @@ class TheDigSite : Quest("The Dig Site", 47, 46, 2, 131, 0, 1, 9) {
                 line++
                 line(player,"<col=FF0000>QUEST COMPLETE!</col>", line)
             }
+            limitScrolling(player, line, false)
         }
     }
 

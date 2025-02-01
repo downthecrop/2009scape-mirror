@@ -1,8 +1,8 @@
 package content.region.kandarin.quest.templeofikov
 
 import core.api.*
-import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import org.rs09.consts.Items
@@ -59,6 +59,7 @@ class TempleOfIkov : Quest("Temple of Ikov", 121, 120, 1,26, 0, 1, 80 /* 80 or 9
             line(player, "Level 42 !!Thieving??", line++, hasLevelStat(player, Skills.THIEVING, 42))
             line(player, "Level 40 !!Ranged??", line++, hasLevelStat(player, Skills.RANGE, 40))
             line(player, "Ability to defeat a level 84 enemy with Ranged.", line++, false)
+            limitScrolling(player, line, true)
         } else {
             if (stage >= 2) {
                 line(player, "Lucien has asked me to retrieve the !!Staff of Armadyl?? from", line++, true)
@@ -165,8 +166,8 @@ class TempleOfIkov : Quest("Temple of Ikov", 121, 120, 1,26, 0, 1, 80 /* 80 or 9
                 line++
                 line(player,"<col=FF0000>QUEST COMPLETE!</col>", line)
             }
+            limitScrolling(player, line, false)
         }
-
     }
 
     override fun reset(player: Player) {
