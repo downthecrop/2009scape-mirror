@@ -27,12 +27,11 @@ public final class TzhaarCityPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		SceneryDefinition.forId(31284).getHandlers().put("option:enter", this);// karamja
-		// cave.
-		SceneryDefinition.forId(9359).getHandlers().put("option:enter", this);// tzhaar
-		// exit
+		SceneryDefinition.forId(31284).getHandlers().put("option:enter", this); //karamja cave.
+		SceneryDefinition.forId(9359).getHandlers().put("option:enter", this); //tzhaar exit
 		SceneryDefinition.forId(9356).getHandlers().put("option:enter", this);
 		SceneryDefinition.forId(9369).getHandlers().put("option:pass", this);
+		SceneryDefinition.forId(31292).getHandlers().put("option:go-through", this); //unimplemented door near fairy ring
 		new TzhaarDialogue().init();
 		return this;
 	}
@@ -63,6 +62,12 @@ public final class TzhaarCityPlugin extends OptionHandler {
 			case 9369:
 				ActivityManager.start(player, "fight pits", false);
 				break;
+			}
+			break;
+		case "go-through":
+			switch (id) {
+			case 31292:
+				return false;
 			}
 			break;
 		}

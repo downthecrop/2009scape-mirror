@@ -24,22 +24,19 @@ class DeathPlateauInteractionListener : InteractionListener {
         )
     }
     override fun defineListeners() {
-        on(Scenery.DOOR_3747, SCENERY, "open") { player, _ ->
-            // Harold's Door
-            if (player.location == location(2906, 3543, 1)) {
-                openDialogue(player, DeathPlateauDoorDialogueFile(1))
-            } else {
-                DoorActionHandler.handleAutowalkDoor(player, getScenery(2906, 3543, 1))
+        on(Scenery.DOOR_3747, SCENERY, "open") { player, node ->
+            // Harold's door
+            when (player.location) {
+                location(2906, 3543, 1), location(2905, 3543, 1), location(2907, 3543, 1) -> openDialogue(player, DeathPlateauDoorDialogueFile(1))
+                else -> DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             }
             return@on true
         }
         on(Scenery.DOOR_3745, SCENERY, "open") { player, node ->
-            if (node.location == location(2823, 3555, 0)) {
-                // 1st Door to Tenzing
-                openDialogue(player, DeathPlateauDoorDialogueFile(2))
-            } else if (node.location == location(2820, 3558, 0)) {
-                // 2nd Door to chicken pen
-                openDialogue(player, DeathPlateauDoorDialogueFile(3))
+            when (node.location) {
+                location(2823, 3555, 0) -> openDialogue(player, DeathPlateauDoorDialogueFile(2)) //1st door to Tenzing
+                location(2820, 3558, 0) -> openDialogue(player, DeathPlateauDoorDialogueFile(3)) //2nd door to chicken pen
+                else -> DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             }
             return@on true
         }
