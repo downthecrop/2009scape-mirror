@@ -1,19 +1,16 @@
 package content.global.skill.slayer
 
+import core.api.setVarp
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.SpellBookManager.SpellBook
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
-import content.global.skill.slayer.Master
-import content.global.skill.slayer.Tasks
 import core.tools.RandomFunction
 import org.rs09.consts.Items
-import java.util.ArrayList
-import core.api.*
 
 object SlayerUtils {
-    fun generate(player: Player, master: Master): Tasks?
+    fun generate(player: Player, master: Master): Master.Task?
     {
         val tasks: MutableList<Master.Task?> = ArrayList(10)
         val taskWeightSum = intArrayOf(0)
@@ -24,7 +21,7 @@ object SlayerUtils {
         tasks.shuffle(RandomFunction.RANDOM)
         var rnd = RandomFunction.random(taskWeightSum[0])
         for (task in tasks) {
-            if (rnd < task!!.weight) return task.task
+            if (rnd < task!!.weight) return task
             rnd -= task.weight
         }
         return null
@@ -35,11 +32,14 @@ object SlayerUtils {
         return player.getSkills().getLevel(Skills.SLAYER) >= task.levelReq && !SlayerManager.getInstance(player).flags.removed.contains(task) && task.hasQuestRequirements(player)
     }
 
-    fun assign(player: Player, task: Tasks, master: Master)
+    fun assign(player: Player, task: Master.Task, master: Master)
     {
         SlayerManager.getInstance(player).master = master
-        SlayerManager.getInstance(player).task = task
-        SlayerManager.getInstance(player).amount = RandomFunction.random(master.assignment_range[0], master.assignment_range[1])
+        SlayerManager.getInstance(player).task = task.task
+        if (task.task_range[0] == null)
+            SlayerManager.getInstance(player).amount = RandomFunction.random(master.default_assignment_range[0], master.default_assignment_range[1])
+        else
+            SlayerManager.getInstance(player).amount = RandomFunction.random(task.task_range[0], task.task_range[1])
         if (master == Master.DURADEL) {
             player.achievementDiaryManager.finishTask(player, DiaryType.KARAMJA, 2, 8)
         } else if (master == Master.VANNAKA) {
@@ -56,5 +56,25 @@ object SlayerUtils {
             state.spell != null && state.spell.spellId == 31 && player.spellBookManager
                 .spellBook == SpellBook.MODERN.interfaceId
         )
+    }
+
+    @JvmStatic
+    fun pluralise(str: String): String {
+        return when (str) {
+            "black bear" -> "bears"
+            "cyclops" -> "cyclopes"
+            "guard dog" -> "dogs"
+            "dwarf" -> "dwarves"
+            "elf warrior" -> "elves"
+            "jelly" -> "jellies"
+            "nechryael" -> str  // the plural and singular is the same
+            "turoth" -> str // the plural and singular is the same
+            "tzhaar-mej" -> "tzHaar"
+            "werewolf" -> "werewolves"
+            "wolf" -> "wolves"
+            "kalphite worker" -> "kalphites"
+            "scarab swarm" -> "scabarites"
+            else -> str + "s"
+        }
     }
 }

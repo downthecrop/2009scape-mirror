@@ -2,6 +2,7 @@ package content.data
 
 import content.global.skill.magic.TeleportMethod
 import content.global.skill.slayer.SlayerManager.Companion.getInstance
+import content.global.skill.slayer.SlayerUtils
 import core.ServerConstants
 import core.api.*
 import core.game.event.TeleportEvent
@@ -304,7 +305,7 @@ enum class EnchantedJewellery(
             return
         }
         sendNPCDialogue(player, slayerManager.master!!.npc, "You're currently " +
-                "assigned to kill ${getSlayerTaskName(player).lowercase(Locale.getDefault())}'s; " +
+                "assigned to kill ${SlayerUtils.pluralise(getSlayerTaskName(player))} " +
                 "only ${getSlayerTaskKillsRemaining(player)} more to go.", core.game.dialogue.FacialExpression.FRIENDLY)
         // Slayer tracker UI
         setVarp(player, 2502, slayerManager.flags.taskFlags shr 4)

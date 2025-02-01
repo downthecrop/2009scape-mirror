@@ -45,11 +45,12 @@ class SlayerCommandSet : CommandSet(Privilege.ADMIN){
 
             val npc = (args[1].toIntOrNull() ?: reject(player, "Must enter valid npc id")) as Int
             val task = (Tasks.forId(npc) ?: reject(player, "Must enter valid npc id")) as Tasks
+            val masterTask = Master.Task(task, 1)
             val amount = args.getOrNull(2)?.toIntOrNull()
                 ?.let { if (it !in 1..255) reject(player, "Amount must be an integer: 1-255.") else it } as Int?
 
             val slayer = SlayerManager.getInstance(player)
-            if (slayer.hasTask()) slayer.task = task else SlayerUtils.assign(player, task, Master.values().random())
+            if (slayer.hasTask()) slayer.task = task else SlayerUtils.assign(player, masterTask, Master.values().random())
             if (amount != null) slayer.amount = amount
             setVarp(player, 2502, slayer.flags.taskFlags shr 4)
         }

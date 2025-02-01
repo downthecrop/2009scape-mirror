@@ -15,6 +15,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 
+
 import static core.tools.DialogueConstKt.END_DIALOGUE;
 
 /**
@@ -349,7 +350,7 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
                 if (player.getInventory().freeSlots() != 0) {
                     player.getInventory().add(GEM);
                     SlayerManager.getInstance(player).generate(master);
-                    interpreter.sendDialogues(master.getNpc(), getExpression(master), "We'll start you off hunting " + SlayerManager.getInstance(player).getTaskName() + "'s, you'll need to", "kill " + SlayerManager.getInstance(player).getAmount() + " of them.");
+                    interpreter.sendDialogues(master.getNpc(), getExpression(master), "We'll start you off hunting " + SlayerUtils.pluralise(SlayerManager.getInstance(player).getTaskName()) + ", you'll need to", "kill " + SlayerManager.getInstance(player).getAmount() + " of them.");
                     stage = 510;
                 } else if (player.getInventory().freeSlots() == 0) {
                     player("Sorry, I don't have enough inventory space.");
@@ -485,7 +486,7 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
                     if (SlayerManager.getInstance(player).getTask() == Tasks.JAD) {
                         interpreter.sendDialogues(master.getNpc(), getExpression(master), "Excellent, you're doing great. Your new task is to", "defeat the almighty TzTok-Jad.");
                     } else {
-                        interpreter.sendDialogues(master.getNpc(), getExpression(master), "Excellent, you're doing great. Your new task is to kill", "" + SlayerManager.getInstance(player).getAmount() + " " + SlayerManager.getInstance(player).getTaskName() + "s.");
+                        interpreter.sendDialogues(master.getNpc(), getExpression(master), "Excellent, you're doing great. Your new task is to kill", "" + SlayerManager.getInstance(player).getAmount() + " " + SlayerUtils.pluralise(SlayerManager.getInstance(player).getTaskName()) + ".");
                     }
                     stage = 844;
                     break;
@@ -499,7 +500,7 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
                     if (SlayerManager.getInstance(player).getTask() == Tasks.JAD) {
                         interpreter.sendDialogues(master.getNpc(), getExpression(master), "Excellent, you're doing great. Your new task is to", "defeat the almighty TzTok-Jad.");
                     } else {
-                        interpreter.sendDialogues(master.getNpc(), getExpression(master), "Excellent, you're doing great. Your new task is to kill", "" + SlayerManager.getInstance(player).getAmount() + " " + SlayerManager.getInstance(player).getTaskName() + "'s.");
+                        interpreter.sendDialogues(master.getNpc(), getExpression(master), "Excellent, you're doing great. Your new task is to kill", "" + SlayerManager.getInstance(player).getAmount() + " " + SlayerUtils.pluralise(SlayerManager.getInstance(player).getTaskName()) + ".");
                     }
                     stage = 844;
                 }
