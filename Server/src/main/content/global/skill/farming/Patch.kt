@@ -154,7 +154,8 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
                 PatchType.FRUIT_TREE_PATCH -> setVarbit(player, patch.varbit, plantable!!.value + plantable!!.stages + 20)
                 PatchType.BUSH_PATCH -> setVarbit(player, patch.varbit, 250 + (plantable!!.ordinal - Plantable.REDBERRY_SEED.ordinal))
                 PatchType.CACTUS_PATCH -> setVarbit(player, patch.varbit, 31)
-                else -> log(this::class.java, Log.WARN,  "Invalid setting of isCheckHealth for patch type: " + patch.type.name)
+                PatchType.TREE_PATCH -> setVarbit(player, patch.varbit, plantable!!.value + plantable!!.stages)
+                else -> log(this::class.java, Log.WARN,  "Invalid setting of isCheckHealth for patch type: " + patch.type.name + "at" + patch.name)
             }
         } else {
             when(patch.type){
