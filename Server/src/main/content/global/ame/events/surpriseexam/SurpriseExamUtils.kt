@@ -1,4 +1,4 @@
-package content.global.ame.events.supriseexam
+package content.global.ame.events.surpriseexam
 
 import core.Server
 import core.api.*

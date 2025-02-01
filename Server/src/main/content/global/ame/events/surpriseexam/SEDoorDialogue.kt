@@ -1,4 +1,4 @@
-package content.global.ame.events.supriseexam
+package content.global.ame.events.surpriseexam
 
 import core.game.dialogue.DialogueFile
 import core.tools.END_DIALOGUE

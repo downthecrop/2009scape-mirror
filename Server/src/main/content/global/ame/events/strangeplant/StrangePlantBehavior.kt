@@ -32,4 +32,8 @@ class StrangePlantBehavior() : NPCBehavior(NPCs.STRANGE_PLANT_408) {
     override fun onDeathStarted(self: NPC, killer: Entity) {
         AntiMacro.terminateEventNpc(killer.asPlayer())
     }
+
+    override fun getXpMultiplier(self: NPC, attacker: Entity): Double {
+        return super.getXpMultiplier(self, attacker) / 16.0
+    }
 }

@@ -1,4 +1,4 @@
-package content.global.ame.events.supriseexam
+package content.global.ame.events.surpriseexam
 
 import core.game.component.Component
 import core.game.node.entity.player.Player

@@ -1,4 +1,4 @@
-package content.global.ame.events.supriseexam
+package content.global.ame.events.surpriseexam
 
 import core.game.node.entity.npc.NPC
 import org.rs09.consts.Components

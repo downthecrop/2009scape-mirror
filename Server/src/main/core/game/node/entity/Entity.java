@@ -489,7 +489,7 @@ public abstract class Entity extends Node {
 	}
 
 	/**
-	 * Checks if an entity can continue it's attack.
+	 * Checks if an entity can continue its attack.
 	 * @param target the target.
 	 * @param style the style.
 	 * @return {@code True} if so.

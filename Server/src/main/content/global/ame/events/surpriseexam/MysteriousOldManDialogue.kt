@@ -1,7 +1,7 @@
 package content.global.ame.events
 
 import core.game.node.entity.player.Player
-import content.global.ame.events.supriseexam.SurpriseExamUtils
+import content.global.ame.events.surpriseexam.SurpriseExamUtils
 import core.game.dialogue.DialogueFile
 import core.game.system.timer.impl.AntiMacro
 
