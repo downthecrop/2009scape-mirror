@@ -72,9 +72,9 @@ public class AggressiveBehavior {
 		if (entity instanceof NPC && target instanceof Player) {
 			NPC npc = (NPC) entity;
 			if (npc.getAggressiveHandler() != null && npc.getAggressiveHandler().isAllowTolerance() && !WildernessZone.isInZone(npc)) {
-                if (RegionManager.forId(regionId).isTolerated(target.asPlayer())) {
-                    return false;
-                }
+				if (RegionManager.forId(regionId).isTolerated(target.asPlayer())) {
+					return false;
+				}
 			}
 		}
 		int level = target.getProperties().getCurrentCombatLevel();
@@ -84,9 +84,9 @@ public class AggressiveBehavior {
 		return true;
 	}
 
-    public boolean ignoreCombatLevelDifference() {
-        return false;
-    }
+	public boolean ignoreCombatLevelDifference() {
+		return false;
+	}
 
 	/**
 	 * Gets the priority flag.
@@ -132,9 +132,9 @@ public class AggressiveBehavior {
 	 */
 	public Entity getLogicalTarget(Entity entity, List<Entity> possibleTargets) {
 		Entity target = null;
-		int comparingFlag = Integer.MAX_VALUE;
+		double comparingFlag = Double.MAX_VALUE;
 		for (Entity e : possibleTargets) {
-			int flag = getPriorityFlag(e);
+			double flag = (double)getPriorityFlag(e) + Math.random();
 			if (flag <= comparingFlag) {
 				comparingFlag = flag;
 				target = e;
