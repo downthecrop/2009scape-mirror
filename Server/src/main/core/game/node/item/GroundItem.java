@@ -202,9 +202,13 @@ public class GroundItem extends Item {
 		this.removed = removed;
 	}
 
+	/**
+	 * Gets the dropper uid.
+	 */
 	public int getDropperUid() {
 		return dropperUid;
 	}
+
 	@Override
 	public String toString() {
 		return "GroundItem [dropper=" + (dropper != null ? dropper.getUsername() : dropper) + ", ticks=" + ticks + ", decayTime=" + decayTime + ", remainPrivate=" + remainPrivate + ", removed=" + removed + "]";

@@ -6,7 +6,7 @@ import content.minigame.fishingtrawler.TrawlerLoot
 import content.region.misthalin.draynor.quest.anma.AnmaCutscene
 import core.ServerConstants
 import core.api.*
-import core.api.utils.Permadeath.permadeath
+import core.api.utils.permadeath
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.SceneryDefinition
 import core.cache.def.impl.VarbitDefinition

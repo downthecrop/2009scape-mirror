@@ -19,7 +19,6 @@ import org.json.simple.JSONObject
 import java.io.File
 import java.io.FileWriter
 import java.io.IOException
-import java.lang.Math.ceil
 import javax.script.ScriptEngineManager
 import java.util.*
 
@@ -612,15 +611,6 @@ class PlayerSaver (val player: Player){
 
         val bankSecondary = saveContainer(player.bankSecondary)
         coreData.put("bankSecondary",bankSecondary)
-
-        val bBars = saveContainer(player.blastBars)
-        coreData.put("blastBars",bBars)
-
-        val bOre = saveContainer(player.blastOre)
-        coreData.put("blastOre",bOre)
-
-        val bCoal = saveContainer(player.blastCoal)
-        coreData.put("blastCoal",bCoal)
 
         val bankTabs = JSONArray()
         for(i in player.bankPrimary.tabStartSlot.indices){

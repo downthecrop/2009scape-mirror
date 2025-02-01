@@ -327,9 +327,6 @@ class PlayerSaveParser(val player: Player) {
         player.bankPrimary.parse(bank)
         player.bankSecondary.parse(bankSecondary)
         player.equipment.parse(equipment)
-        bBars?.let{player.blastBars.parse(it)}
-        bOre?.let{player.blastOre.parse(bOre)}
-        bCoal?.let{player.blastCoal.parse(bCoal)}
         player.location = JSONUtils.parseLocation(location)
 
         if (varpData != null) {

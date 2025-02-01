@@ -470,16 +470,24 @@ public class BankPinManager {
 	}
 
 	/**
-	 * Cancels the pin.
+	 * Cancels the pin and shows the correct interface.
 	 */
 	public void cancelPin(String... messages) {
+		doCancelPin();
+		playAudio(player, Sounds.PIN_CANCEL_1042);
+		openSettings(messages);
+	}
+
+	/**
+	 * Actually cancels the pin.
+	 */
+	public void doCancelPin() {
 		status = PinStatus.NO_PIN;
 		pendingDelay = -1;
 		pin = null;
 		unlocked = false;
-		playAudio(player, Sounds.PIN_CANCEL_1042);
-		openSettings(messages);
 	}
+
 
 	/**
 	 * Checks if the pin is an easy guess.

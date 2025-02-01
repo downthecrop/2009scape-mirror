@@ -89,7 +89,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import static core.api.ContentAPIKt.*;
-import static core.api.utils.Permadeath.PermadeathKt.permadeath;
+import static core.api.utils.PermadeathKt.permadeath;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_BASE;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_DEATHS;
 import static core.tools.GlobalsKt.colorize;
@@ -154,21 +154,6 @@ public class Player extends Entity {
 	 * Is secondary bank in use or not
 	 */
 	public boolean useSecondaryBank = false;
-
-	/**
-	 * The Blast Furnace Coal Container.
-	 */
-	public final Container blastCoal = new Container(225, ContainerType.NEVER_STACK);
-
-	/**
-	 * The Blast Furnace Ore Container.
-	 */
-	public final Container blastOre = new Container(28, ContainerType.NEVER_STACK);
-
-	/**
-	 * The Blast Furnace Bars Container.
-	 */
-	public final Container blastBars = new Container(28, ContainerType.NEVER_STACK);
 
 	/**
 	 * The packet dispatcher.
