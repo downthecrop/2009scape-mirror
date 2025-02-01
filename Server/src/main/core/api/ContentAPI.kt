@@ -3122,7 +3122,7 @@ fun calculateDragonfireMaxHit(entity: Entity, maxDamage: Int, wyvern: Boolean = 
 
     if (entity is Player) {
         hasShield = hasDragonfireShieldProtection(entity, wyvern)
-        hasPotion = !wyvern && getAttribute(entity, "fire:immune", 0) >= getWorldTicks()
+        hasPotion = !wyvern && hasTimerActive<DragonFireImmunity>(entity)
         hasPrayer = entity.prayer.get(PrayerType.PROTECT_FROM_MAGIC)
 
         if (sendMessage) {
