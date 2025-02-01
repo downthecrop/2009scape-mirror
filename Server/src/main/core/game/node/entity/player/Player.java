@@ -130,6 +130,8 @@ public class Player extends Entity {
 
 	public HashMap<String,Function1<Player, Unit>> logoutListeners = new HashMap<>();
 
+	public Boolean isAfkLogout;
+
 	/**
 	 * The inventory.
 	 */
