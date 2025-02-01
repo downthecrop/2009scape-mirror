@@ -36,17 +36,21 @@ public final class ClanInterfacePlugin extends ComponentPlugin {
 		switch (component.getId()) {
 		case 589:
 			switch (button) {
-			case 9:
-				if (player.getInterfaceManager().getComponent(590) != null) {
-					player.getPacketDispatch().sendMessage("Please close the interface you have open before using 'Clan Setup'");
+				case 9:
+					if (player.getInterfaceManager().getComponent(590) != null) {
+						player.getPacketDispatch().sendMessage("Please close the interface you have open before using 'Clan Setup'");
+						return true;
+					}
+					ClanRepository.openSettings(player);
 					return true;
-				}
-				ClanRepository.openSettings(player);
-				return true;
-			case 14:
-				player.getDetails().getCommunication().toggleLootshare(player);
-				return true;
+				case 14:
+					if (player.getIronmanManager().checkRestriction()) {
+						return false;
+					}
+						player.getDetails().getCommunication().toggleLootshare(player);
+						return true;
 			}
+
 			break;
 		case 590:
 			final ClanRepository clan = ClanRepository.get(player.getName(), true);
