@@ -42,6 +42,13 @@ class IncubatorTimer : PersistTimer (500, "incubation") {
         root["eggs"] = arr
     }
 
+    override fun onRegister(entity: Entity) {
+        if (entity !is Player) return
+        for ((region, _) in incubatingEggs) {
+            setVarbit(entity.asPlayer(), varbitForRegion(region), 1, true)
+        }
+    }
+
     override fun run (entity: Entity) : Boolean {
         if (entity !is Player) return false
         for ((_, egg) in incubatingEggs) {
@@ -60,14 +67,14 @@ class IncubatorTimer : PersistTimer (500, "incubation") {
     }
 
     companion object {
-        val TAVERLY_REGION = 11573
-        val TAVERLY_VARBIT = 4277
+        val TAVERLEY_REGION = 11573
+        val TAVERLEY_VARBIT = 4277
         val YANILLE_REGION = 10288
         val YANILLE_VARBIT = 4221
 
         fun varbitForRegion (region: Int) : Int {
             return when (region) {
-                TAVERLY_REGION -> TAVERLY_VARBIT
+                TAVERLEY_REGION -> TAVERLEY_VARBIT
                 YANILLE_REGION -> YANILLE_VARBIT
                 else -> -1
             }
