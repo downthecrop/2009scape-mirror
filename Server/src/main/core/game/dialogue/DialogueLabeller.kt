@@ -2,6 +2,7 @@ package core.game.dialogue
 
 import core.api.InputType
 import core.api.face
+import core.api.openDialogue
 import core.api.splitLines
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -13,12 +14,12 @@ typealias ChatAnim = FacialExpression
 typealias InputType = InputType
 /** Create container class DialogueOption for [DialogueLabeller.options] */
 class DialogueOption(
-        val goto: String,
-        val option: String,
-        val spokenText: String = option,
-        val expression: ChatAnim = ChatAnim.NEUTRAL,
-        val skipPlayer: Boolean = false,
-        val callback: ((player: Player, npc: NPC) -> Boolean)? = null
+        val goto: String, // Required: Label to go to if player selects option.
+        val option: String, // Required: Printed text on the option list.
+        val spokenText: String = option, // Optional: Option selected will be spoken text unless provided here.
+        val expression: ChatAnim = ChatAnim.NEUTRAL, // Optional: Player expression to show.
+        val skipPlayer: Boolean = false, // Optional: Skips the player spoken text (if wildly different)
+        val optionIf: ((player: Player, npc: NPC) -> Boolean)? = null // Optional: Function to show/not show option.
 )
 
 /**
@@ -32,7 +33,7 @@ class DialogueOption(
  *
  * ! WARNING: DO NOT use functions in DialogueFile as it will cause unexpected behavior.
  *
- * Example: [content.region.misthalin.lumbridge.dialogue.RangedTutorDialogue]
+ * ! HELP: There are snippets below that you can copy and modify to use as part of your code.
  */
 abstract class DialogueLabeller : DialogueFile() {
 
@@ -41,11 +42,12 @@ abstract class DialogueLabeller : DialogueFile() {
          * Makes NPC stop in its tracks and look at player.
          * An alternative to setting up DialoguePlugin(player) to be used in InteractionListener.
          */
-        fun captureNPC(player: Player, npc: NPC) {
+        fun open(player: Player, dialogue: Any, npc: NPC) {
             face(npc, player.location)
             npc.setDialoguePlayer(player) // This prevents random walking in [NPC.java handleTickActions()]
             npc.getWalkingQueue().reset()
             npc.getPulseManager().clear()
+            openDialogue(player, dialogue, npc)
         }
     }
 
@@ -74,7 +76,7 @@ abstract class DialogueLabeller : DialogueFile() {
     /** Helper function to create an individual stage for each of the dialogue stages. */
     private fun assignIndividualStage(callback: () -> Unit) {
         if (startingStage == null) { startingStage = 0 }
-        if (stage == dialogueCounter) { // Run this stage when the stage equals to the dialogueCounter of this dialogue
+        if (stage == dialogueCounter && jumpTo == null) { // Run this stage when the stage equals to the dialogueCounter of this dialogue
             callback() // CALLBACK FUNCTION
             super.stage++ // Increment the stage to the next stage (only applies after a pass)
             stageHit = true // Flag that the stage was hit, so that it doesn't close the dialogue
@@ -97,15 +99,16 @@ abstract class DialogueLabeller : DialogueFile() {
     fun assignToIds(npcid: Int) { /* super.npc = NPC(npcid) */ }
 
     /** Marks the start of a series of dialogue that can be jumped to using a [goto]. */
-    fun label(label: String) {
+    fun label(label: String, nesting: () -> Unit = {}) {
         if (startingStage == null) { startingStage = 1 }
         dialogueCounter++
         labelStageMap[label] = dialogueCounter
+        nesting()
     }
 
     /** Jumps to a [label] after a series of dialogue. */
     fun goto(label: String) {
-        if (stage == dialogueCounter) {
+        if (stage == dialogueCounter && jumpTo == null) {
             jumpTo = labelStageMap[label]
         }
     }
@@ -122,9 +125,14 @@ abstract class DialogueLabeller : DialogueFile() {
      */
     fun exec(callback: (player: Player, npc: NPC) -> Unit) {
         if (startingStage == null) { startingStage = 0 }
-        if (stage == dialogueCounter) {
+        if (stage == dialogueCounter && jumpTo == null) {
             callback(player!!, npc!!)
         }
+    }
+
+    /** Manual stage. For custom creation of an individual stage. Must call interpreter in some form. **/
+    fun manual(callback: (player: Player, npc: NPC) -> Unit) {
+        assignIndividualStage { callback(player!!, npc!!) }
     }
 
     /** Dialogue player/playerl. Shows player chathead with text. **/
@@ -143,8 +151,12 @@ abstract class DialogueLabeller : DialogueFile() {
         assignIndividualStage { interpreter!!.sendDialogues(npc, chatAnim, *formatMessages(messages)) }
     }
     /** Dialogue npc/npcl. Shows npcId chathead with text. **/
-    fun npc(chatAnim: ChatAnim = ChatAnim.NEUTRAL, npcId: Int, vararg messages: String) {
+    fun npc(chatAnim: ChatAnim = ChatAnim.NEUTRAL, npcId: Int = npc!!.id, vararg messages: String) {
         assignIndividualStage { interpreter!!.sendDialogues(NPC(npcId), chatAnim, *formatMessages(messages)) }
+    }
+    /** Dialogue npc/npcl. Shows npcId chathead with text. **/
+    fun npc(npcId: Int = npc!!.id, vararg messages: String) {
+        assignIndividualStage { interpreter!!.sendDialogues(NPC(npcId), ChatAnim.NEUTRAL, *formatMessages(messages)) }
     }
     /** Dialogue npc/npcl. Shows npc chathead with text. **/
     fun npc(vararg messages: String) { npc(ChatAnim.NEUTRAL, *messages) }
@@ -175,7 +187,7 @@ abstract class DialogueLabeller : DialogueFile() {
     /** Dialogue option. Shows the option dialogue with choices for the user to select. **/
     fun options(vararg options: DialogueOption, title: String = "Select an Option") {
         // Filter out options that aren't shown.
-        val filteredOptions = options.filter{ if (it.callback != null) { it.callback.invoke(player!!, npc!!) } else { true } }
+        val filteredOptions = options.filter{ if (it.optionIf != null) { it.optionIf.invoke(player!!, npc!!) } else { true } }
         // Stage Part 1: Options List Dialogue
         assignIndividualStage { interpreter!!.sendOptions(title, *filteredOptions.map{ it.option }.toTypedArray()) }
         // Stage Part 2: Show spoken text.
@@ -211,9 +223,10 @@ abstract class DialogueLabeller : DialogueFile() {
             if (type == InputType.AMOUNT) {
                 player!!.setAttribute("parseamount", true)
             }
+            // This runscript is the same runscript as the one in ContentAPI sendInputDialogue
             player!!.setAttribute("runscript") { value: Any ->
                 optInput = value
-                // The next line is a hack. Because this prompt is overlays the actual chatbox, we trigger the next dialogue with a call to handle.
+                // The next line is a hack. Because this prompt overlays the actual chat box, we trigger the next dialogue with a call to handle.
                 interpreter!!.handle(player!!.interfaceManager.chatbox.id, 2)
             }
             player!!.setAttribute("input-type", type)
@@ -221,6 +234,16 @@ abstract class DialogueLabeller : DialogueFile() {
     }
     /** Dialogue input. Shows the input dialogue with an input box for the user to type in. Read [optInput] in an [exec] function for the value. **/
     fun input(numeric: Boolean, prompt: String = "Enter the amount") { input( if (numeric) { InputType.NUMERIC } else { InputType.STRING_SHORT }, prompt) }
+
+    /** Calls another dialogue file. Always use this to open another dialogue file instead of calling openDialogue() in exec{} due to interfaces clashing. **/
+    fun open(player: Player, dialogue: Any, vararg args: Any) {
+        assignIndividualStage { core.api.openDialogue(player, dialogue, *args) }
+    }
+
+    /** WARNING: DIALOGUE LABELLER WILL BREAK IN CERTAIN FUNCTIONS. USE open() instead. */
+    fun openDialogue(player: Player, dialogue: Any, vararg args: Any) {
+        core.api.openDialogue(player, dialogue, *args)
+    }
 
     /** Hook onto the handle function of DialogueFile. This function gets called every loop with a super.stage. */
     override fun handle(componentID: Int, buttonID: Int) {
@@ -249,3 +272,89 @@ abstract class DialogueLabeller : DialogueFile() {
         if (!stageHit) { end() } // If a dialogue stage is not hit, end the dialogues.
     }
 }
+
+/*
+// COPY PASTA SNIPPETS SECTION FOR QUICK BOILERPLATES
+
+// STANDARD: Initializing with DialoguePlugin.
+@Initializable
+class DonieDialogue (player: Player? = null) : DialoguePlugin(player) {
+    override fun newInstance(player: Player): DialoguePlugin {
+        return DonieDialogue(player)
+    }
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+        openDialogue(player, DonieDialogueFile(), npc)
+        return false
+    }
+    override fun getIds(): IntArray {
+        return intArrayOf(NPCs.DONIE_2238)
+    }
+}
+class DonieDialogueFile : DialogueLabeller() {
+    override fun addConversation() {
+        assignToIds(NPCs.DONIE_2238)
+
+        npc(ChatAnim.FRIENDLY, "Hello there, can I help you?")
+        goto("nowhere")
+    }
+}
+
+// NEW! (EXPERIMENTAL): Initializing with InteractionListener.
+class SomeDudeDialogue : InteractionListener {
+    override fun defineListeners() {
+        on(NPCs.PRIEST_OF_GUTHIX_8555, IntType.NPC, "talk-to") { player, node ->
+            DialogueLabeller.open(player, SomeDudeDialogueLabellerFile(), node as NPC)
+            return@on true
+        }
+    }
+}
+
+// Exec with quest stage branches.
+exec { player, npc ->
+    when(getQuestStage(player, SomeQuest.questName)) {
+        100 -> loadLabel(player, "SomeQuestStage100")
+        10, 20 -> loadLabel(player, "SomeQuestStage10")
+        else -> {
+            loadLabel(player, "SomeQuestStage0")
+        }
+    }
+}
+
+// Exec to move quest stage up.
+exec { player, npc ->
+    if (getQuestStage(player, SomeQuest.questName) == 0) {
+        setQuestStage(player, SomeQuest.questName, 10)
+    }
+}
+
+// Exec to add item, set attribute.
+exec { player, npc ->
+    if (removeItem(player, Items.ITEM_1)) {
+        addItemOrDrop(player, Items.ITEM_2)
+    }
+    if (getAttribute(player, attributeSomething, null) == null) {
+        setAttribute(player, attributeSomething, player.location)
+    }
+}
+
+// Open to another dialogue file.
+npc("I'm going to another file.")
+open(player!!, SomeDialogueFile2(), npc!!)
+...
+class SomeDialogueFile2 : DialogueLabeller() {
+    override fun addConversation() {
+        npc("This is another file.")
+    }
+}
+
+// Options with all the different controls.
+options(
+        DialogueOption("Label1", "Line 1 Say", expression=ChatAnim.THINKING),
+        DialogueOption("Label2", "Line 2 Huh", skipPlayer=true),
+        DialogueOption("Label3", "Line 3 Blah", spokenText="I say something else", expression=ChatAnim.FRIENDLY),
+        DialogueOption("Label4", "Line 4 What") { player, npc ->
+            return@DialogueOption false // Don't show
+        }
+)
+
+*/

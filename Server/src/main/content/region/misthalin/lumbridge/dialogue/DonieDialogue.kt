@@ -30,7 +30,7 @@ class DonieDialogueFile : DialogueLabeller() {
         options(
                 DialogueOption("whereami", "Where am I?", expression = ChatAnim.THINKING),
                 DialogueOption("howareyou", "How are you today?"),
-                DialogueOption("shoelace", "Your shoe lace is untied."),
+                DialogueOption("shoelace", "Your shoe lace is untied.", skipPlayer=true),
         )
 
         label("whereami")
@@ -45,9 +45,15 @@ class DonieDialogueFile : DialogueLabeller() {
         npc("Not just a pretty face eh? Ha ha ha.")
 
         label("shoelace")
+        open(player!!, DonieDialogueShoelaceFile(), npc!!)
+
+    }
+}
+class DonieDialogueShoelaceFile : DialogueLabeller() {
+    override fun addConversation() {
+        player("Your shoe lace is untied.")
         npc(ChatAnim.ANGRY, "No it's not!")
         player("No you're right. I have nothing to back that up.")
         npc(ChatAnim.ANGRY, "Fool! Leave me alone!")
-
     }
 }
