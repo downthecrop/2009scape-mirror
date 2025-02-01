@@ -13,8 +13,9 @@ class TimerManager (val entity: Entity) {
     val toRemoveTimers = ArrayList<RSTimer>()
 
     fun registerTimer (timer: RSTimer) {
+        timer.beforeRegister(entity)
+        newTimers.add(timer)
         timer.onRegister(entity)
-        newTimers.add (timer)
     }
 
     fun processTimers () {

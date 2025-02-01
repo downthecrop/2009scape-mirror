@@ -20,7 +20,7 @@ class Disease : PersistTimer (30, "disease", flags = arrayOf(TimerFlag.ClearOnDe
         hitsLeft = root["hitsLeft"].toString().toInt()
     }
 
-    override fun onRegister (entity: Entity) {
+    override fun beforeRegister (entity: Entity) {
         if (hasTimerActive<Disease>(entity))
             removeTimer(entity, this)
         else if (entity is Player)

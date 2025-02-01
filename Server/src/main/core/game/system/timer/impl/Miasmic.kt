@@ -15,7 +15,7 @@ class Miasmic : PersistTimer (1, "miasmic", flags = arrayOf(TimerFlag.ClearOnDea
         return false
     }
 
-    override fun onRegister (entity: Entity) {
+    override fun beforeRegister (entity: Entity) {
         if (hasTimerActive<MiasmicImmunity>(entity))
             removeTimer(entity, this)
         if (hasTimerActive<Miasmic>(entity))

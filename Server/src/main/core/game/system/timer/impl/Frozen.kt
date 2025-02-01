@@ -20,7 +20,7 @@ class Frozen : PersistTimer (1, "frozen", flags = arrayOf(TimerFlag.ClearOnDeath
         shouldApplyImmunity = root["applyImmunity"] as? Boolean ?: false
     }
 
-    override fun onRegister (entity: Entity) {
+    override fun beforeRegister (entity: Entity) {
         if (hasTimerActive<FrozenImmunity>(entity)) {
             removeTimer(entity, this)
             return

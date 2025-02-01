@@ -25,7 +25,14 @@ abstract class RSTimer (var runInterval: Int, val identifier: String = "generict
     open fun getInitialRunDelay() : Int { return runInterval }
 
     /**
+     * Called by core code before the timer is first registered. Called after parse on PersistTimers.
+     * Called before the timer has been added to the timer list.
+     **/
+    open fun beforeRegister (entity: Entity) {}
+
+    /**
      * Called by core code when the timer is first registered. Called after parse on PersistTimers.
+     * Called after the timer has been added to the timer list.
     **/
     open fun onRegister (entity: Entity) {}
 
