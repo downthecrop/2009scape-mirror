@@ -27,8 +27,22 @@ class LucienDialogue (player: Player? = null) : DialoguePlugin(player) {
 class LucienDialogueFile : DialogueBuilderFile() {
     override fun create(b: DialogueBuilder) {
         b.onQuestStages(TempleOfIkov.questName, 100)
-                .endWith { _, player ->
-                    sendMessage(player, "You have completed the Temple of Ikov quest.")
+                .playerl("I thought I killed you?!")
+                .npcl("Ha! Ha! Ha!")
+                .npcl("You can not kill me human!")
+                .branch { player ->
+                    return@branch if (inInventory(player, Items.PENDANT_OF_LUCIEN_86)) { 1 } else { 0 }
+                }.let { branch ->
+                    branch.onValue(1)
+                            .end()
+                    branch.onValue(0)
+                            .playerl("I've lost the pendant you gave me.")
+                            .npcl("Have another, it will remind you of my power!")
+                            .betweenStage { df, player, _, _ ->
+                                addItemOrDrop(player, Items.PENDANT_OF_LUCIEN_86)
+                            }
+                            .item(Items.PENDANT_OF_LUCIEN_86, "Lucien has given you another pendant!")
+                            .end()
                 }
         b.onQuestStages(TempleOfIkov.questName, 1,2,3,4,5,6,7)
                 .npcl("I told you not to meet me here again!")

@@ -25,6 +25,8 @@ class LucienEndingDialogueFile : DialogueBuilderFile() {
     override fun create(b: DialogueBuilder) {
         b.onQuestStages(TempleOfIkov.questName, 100)
                 .endWith { _, player ->
+                    // After quest is over: https://www.youtube.com/watch?v=81DXjfsFcMM
+                    sendMessage(player, "You feel that fighting this individual will be of little practical use.")
                     sendMessage(player, "You have completed the Temple of Ikov quest.")
                 }
         b.onQuestStages(TempleOfIkov.questName, 1,2,3,4,5,6,7)
