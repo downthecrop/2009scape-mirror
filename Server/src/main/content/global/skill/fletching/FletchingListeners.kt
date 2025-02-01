@@ -6,6 +6,7 @@ import content.global.skill.fletching.items.arrow.ArrowHeadPulse
 import content.global.skill.fletching.items.arrow.HeadlessArrowPulse
 import content.global.skill.fletching.items.bow.StringPulse
 import content.global.skill.fletching.items.crossbow.LimbPulse
+import core.api.*
 import core.game.node.item.Item
 import core.net.packet.PacketRepository
 import core.net.packet.context.ChildPositionContext
@@ -21,6 +22,7 @@ import org.rs09.consts.Items.YELLOW_FEATHER_10090
 import core.game.dialogue.SkillDialogueHandler
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import core.game.node.entity.player.Player
 
 class FletchingListeners : InteractionListener {
 
@@ -134,6 +136,36 @@ class FletchingListeners : InteractionListener {
             return@onUseWith true
         }
 
+        /**
+         * (Long) Kebbit bolts don't need feathers and go 6 at a time so use their own interaction
+         */
+        fun makeKebbitBolt(player : Player, ingredient : Item) : Boolean{
+            val longBolts = when(ingredient.id){
+                Items.KEBBIT_SPIKE_10105 -> false
+                Items.LONG_KEBBIT_SPIKE_10107 -> true
+                else -> return false
+            }
+            val level = if(longBolts) 42 else 26
+            if (getDynLevel(player, Skills.FLETCHING) < level){
+                sendMessage(player, "You need a fletching level of $level to create ${if (longBolts) "long " else ""}kebbit bolts.")
+                return true
+            }
+            val finalProduct = if(longBolts) Items.LONG_KEBBIT_BOLTS_10159 else Items.KEBBIT_BOLTS_10158
+            val xp = if(longBolts) 47.7 else 28.6 // source https://runescape.wiki/w/Fletching?oldid=1069981#Bolts_2
+            if(removeItem(player, ingredient.id)){
+                addItem(player, finalProduct, 6)
+                player.skills.addExperience(Skills.FLETCHING, xp)
+                animate(player, 885)
+            }
+            return true
+        }
+        onUseWith(IntType.ITEM, Items.CHISEL_1755, Items.KEBBIT_SPIKE_10105) { player, used, with ->
+            return@onUseWith makeKebbitBolt(player, with as Item)
+        }
+
+        onUseWith(IntType.ITEM, Items.CHISEL_1755, Items.LONG_KEBBIT_SPIKE_10107) { player, used, with ->
+            return@onUseWith makeKebbitBolt(player, with as Item)
+        }
     }
 
 }
