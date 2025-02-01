@@ -52,6 +52,22 @@ class SirTiffyCashienDialogue (player: Player? = null) : DialoguePlugin(player) 
 
 // Move this to Wanted!! Quest.
 class SirTiffyCashienAfterRecruitmentDriveQuestDialogueFile : DialogueBuilderFile() {
+    private fun dialogueChangeSpawnPoint(builder: DialogueBuilder, place: String, location: Location, tiffyLine1: String, tiffyLine2: String): DialogueBuilder {
+        return builder.npcl("${tiffyLine1} Are you sure?")
+            .options().let { optionBuilder ->
+                optionBuilder.option("Yes, I want to respawn in $place.")
+                    .playerl("Yes, I want to respawn in $place.")
+                    .npcl(tiffyLine2)
+                    .endWith { _, player ->
+                        setAttribute(player, "/save:spawnLocation", location)
+                        player.properties.spawnLocation = location
+                    }
+                optionBuilder.option("Actually, no thanks. I like my respawn point.")
+                    .playerl("Actually, no thanks. I like my respawn point.")
+                    .npcl("As you wish, what? Ta-ta for now.")
+            }
+    }
+
     override fun create(b: DialogueBuilder) {
         b.onPredicate { _ -> true }
                 .npc(FacialExpression.HAPPY, "What ho, @g[sirrah,milady].", "Jolly good show on the old training grounds thingy,", "what?")
@@ -79,24 +95,22 @@ class SirTiffyCashienAfterRecruitmentDriveQuestDialogueFile : DialogueBuilderFil
                             .endWith { _, player ->
                                 openNpcShop(player, npc!!.id)
                             }
-                    optionBuilder.option_playerl("Can I switch respawns please?")
-                            .npcl("I'm sorry dear @g[boy,gal], I'm afraid I can't switch your respawn point at the moment.")
-                            .end()
-//                    I have no idea how to do this properly.
-//                    optionBuilder.option("Can I switch respawns please?")
-//                            .branch { player -> if(player.properties.spawnLocation == Location(2997, 3375, 0)) { 1 } else { 0 } }
-//                            .let { branch ->
-//                                branch.onValue(1)
-//                                        .npcl("Ah, so you'd like to respawn in Falador, the good old homestead! Are you sure?")
-//                                        .endWith { _, player ->
-//                                            player.properties.spawnLocation = Location(2997, 3375, 0)
-//                                        }
-//                                branch.onValue(0)
-//                                        .npcl("What? You're saying you want to respawn in Lumbridge? Are you sure?")
-//                                        .endWith { _, player ->
-//                                            player.properties.spawnLocation = ServerConstants.HOME_LOCATION
-//                                        }
-//                            }
+                    optionBuilder.option("Can I switch respawns please?")
+                            .branch { player -> if (player.properties.spawnLocation == ServerConstants.HOME_LOCATION) { 1 } else { 0 } }
+                            .let { branch ->
+                                dialogueChangeSpawnPoint(
+                                    branch.onValue(1),
+                                    "Falador", Location(2971, 3340, 0), //https://www.youtube.com/watch?v=Mm15dHuIaVg
+                                    "Ah, so you'd like to respawn in Falador, the good old homestead!",
+                                    "Top-hole, what? Good old Fally is definitely the hot-spot nowadays!"
+                                )
+                                dialogueChangeSpawnPoint(
+                                    branch.onValue(0),
+                                    "Lumbridge", ServerConstants.HOME_LOCATION ?: Location(3222, 3218, 0),
+                                    "What? You're saying you want to respawn in Lumbridge?",
+                                    "Why anyone would want to visit that smelly little swamp village of oiks is quite beyond me, I'm afraid, but the deed is done now."
+                                )
+                            }
                     optionBuilder.option("Goodbye.")
                             .playerl("Well, see you around Tiffy.")
                             .npcl(FacialExpression.HAPPY,"Ta-ta for now, old bean!")

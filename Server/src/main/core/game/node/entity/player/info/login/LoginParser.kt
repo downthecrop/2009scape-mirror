@@ -1,11 +1,12 @@
 package core.game.node.entity.player.info.login
 
+import core.ServerConstants
 import core.api.*
+import core.auth.AuthResponse
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.PlayerDetails
 import core.game.system.SystemManager
 import core.game.system.task.Pulse
-import core.auth.AuthResponse
 import core.game.world.GameWorld
 import core.game.world.GameWorld.loginListeners
 import core.game.world.repository.Repository
@@ -27,8 +28,7 @@ class LoginParser(val details: PlayerDetails) {
             parser = PlayerParser.parse(player)
                 ?: throw IllegalStateException("Failed parsing save for: " + player.username) //Parse core
         }
-        catch (e: Exception)
-        {
+        catch (e: Exception) {
             e.printStackTrace()
             Repository.removePlayer(player)
             flag(AuthResponse.ErrorLoadingProfile)
@@ -37,6 +37,7 @@ class LoginParser(val details: PlayerDetails) {
             override fun pulse(): Boolean {
                 try {
                     if (details.session.isActive) {
+                        player.properties.spawnLocation = getAttribute(player, "/save:spawnLocation", ServerConstants.HOME_LOCATION)
                         loginListeners.forEach(Consumer { listener: LoginListener -> listener.login(player) }) //Run our login hooks
                         parser.runContentHooks() //Run our saved-content-parsing hooks
                         player.details.session.setObject(player)

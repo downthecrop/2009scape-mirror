@@ -1,14 +1,12 @@
 package core.game.system.command.sets
 
 import content.global.activity.jobs.JobManager
-import content.global.skill.slayer.Master
 import core.api.*
 import core.cache.Cache
 import core.cache.def.impl.DataMap
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.VarbitDefinition
 import core.cache.def.impl.Struct
-import core.game.dialogue.DialogueFile
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.SpellBookManager
@@ -20,7 +18,6 @@ import core.plugin.Initializable
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.rs09.consts.Items
-import core.tools.SystemLogger
 import core.game.system.command.Privilege
 import java.io.BufferedWriter
 import java.io.File
@@ -28,10 +25,10 @@ import java.io.FileWriter
 import java.util.Arrays
 import core.net.packet.PacketWriteQueue
 import core.tools.Log
-import core.game.world.update.flag.*
-import core.game.world.update.flag.context.*
-import core.game.node.entity.impl.*
+import core.game.node.entity.player.info.Rights
+import core.game.node.entity.skill.Skills
 import core.game.world.map.Location
+import core.game.world.repository.Repository
 
 @Initializable
 class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
