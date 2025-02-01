@@ -66,6 +66,12 @@ class LightSourceLighter : UseWithHandler(590,36,38){
 
         lightSource ?: return false
 
+        // For Sea Slug Quest - No lighting of any torch on the fishing platform.
+        if(event.player.location.isInRegion(11059)) {
+            event.player.sendMessage("Your tinderbox is damp from the sea crossing. It won't work here.")
+            return true
+        }
+
         if(!light(event.player,used,lightSource)){
             event.player.sendMessage("You need a Firemaking level of at least ${lightSource.levelRequired} to light this.")
         }

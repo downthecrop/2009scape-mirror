@@ -10474,6 +10474,11 @@
     "attack_level": "22"
   },
   {
+    "examine": "A rather nasty looking crustacean.",
+    "name": "Sea slug",
+    "id": "1006"
+  },
+  {
     "examine": "A servant of Zamorak.",
     "combat_style": "2",
     "melee_animation": "811",

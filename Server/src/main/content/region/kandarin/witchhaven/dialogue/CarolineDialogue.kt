@@ -1,40 +1,28 @@
 package content.region.kandarin.witchhaven.dialogue
 
+import content.region.kandarin.witchhaven.quest.seaslug.CarolineDialogueFile
+import core.api.*
+import core.game.dialogue.DialogueBuilder
+import core.game.dialogue.DialogueBuilderFile
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
+import org.rs09.consts.Items
 import org.rs09.consts.NPCs
-
-/**
- * @author qmqz
- */
 
 @Initializable
 class CarolineDialogue(player: Player? = null) : DialoguePlugin(player){
-
-    override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        player(FacialExpression.FRIENDLY,"Hello again.").also { stage = 0 }
-        return true
-    }
-
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when(stage){
-            0 -> npc(FacialExpression.FRIENDLY, "Hello traveller, how are you?").also { stage++ }
-            1 -> player(FacialExpression.FRIENDLY, "Not bad thanks, yourself?").also { stage++ }
-            2 -> npcl(FacialExpression.FRIENDLY, "I'm good. Busy as always looking after Kent and Kennith but no complaints.").also { stage = 99 }
-
-            99 -> end()
-        }
-        return true
-    }
-
-    override fun newInstance(player: Player?): DialoguePlugin {
+    override fun newInstance(player: Player): DialoguePlugin {
         return CarolineDialogue(player)
     }
-
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+        // Fallback to default. Always the start of Sea Slug
+        openDialogue(player!!, CarolineDialogueFile(), npc)
+        return true
+    }
     override fun getIds(): IntArray {
         return intArrayOf(NPCs.CAROLINE_696)
     }

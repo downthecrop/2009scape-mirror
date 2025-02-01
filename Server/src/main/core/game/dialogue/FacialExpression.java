@@ -90,6 +90,9 @@ public enum FacialExpression {
     //9855-9857 are like disgusted? does it just repeat after this?
 
     //Child Chathead?
+    CHILD_ANGRY(7168),
+    CHILD_SIDE_EYE(7169),
+    CHILD_THINKING_2(7170),
     CHILD_EVIL_LAUGH(7171),
     CHILD_FRIENDLY(7172),
     CHILD_NORMAL(7173),
@@ -98,8 +101,8 @@ public enum FacialExpression {
     CHILD_THINKING(7176),
     CHILD_SAD(7177),
     CHILD_GUILTY(7178),
-    CHILD_SUSPICIOUS(7179); //TODO: More?
-
+    CHILD_SUSPICIOUS(7179),
+    CHILD_SHOCKED(7180); //TODO: More?
 
 
     /**
