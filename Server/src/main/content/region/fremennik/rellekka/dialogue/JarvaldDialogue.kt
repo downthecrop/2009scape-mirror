@@ -172,11 +172,10 @@ class JarvaldDialogue(player: Player? = null) : DialoguePlugin(player) {
 				1 -> sail(true)
 				2 -> player("No, actually I have some stuff to do here first.").also { stage = 43 }
 			}
-			140 -> player("Hey, I have to say, that's a fine looking","hat you are wearing there.").also { stage++ }
-			141 -> npc("Aye, that it is ${fremname}!","Skulgrimen fashioned it for me from the carcass of","one of the monsters on Waterbirth Island after our last hunt!").also { stage++ }
-			142 -> npc("I hope to kill enough creatures to fashion","some fine armour as well","when next we leave!").also { stage++ }
-			143 -> options("Waterbirth Island?", "Can I come?", "Ok, 'bye.").also { stage++ }
-			144 -> when (buttonID) {
+			140 -> npc("Aye, that it is ${fremname}!","Skulgrimen fashioned it for me from the carcass of one","of the monsters on Waterbirth Island after our last hunt!").also { stage++ }
+			141 -> npc("I hope to kill enough creatures to fashion some fine","armour as well when next we leave!").also { stage++ }
+			142 -> options("Waterbirth Island?", "Can I come?", "Ok, 'bye.").also { stage++ }
+			143 -> when (buttonID) {
 				1 -> npc("You have not ever travelled to Waterbirth Island, ${fremname}?","I am surprised, it is a place of outstanding natural beauty.").also { stage = 108 }
 				2 -> player("Can I come?").also { stage = 130 }
 				3 -> player("Wow, you Fremenniks sure know how to party.","Well, see ya around.").also { stage = END_DIALOGUE }
