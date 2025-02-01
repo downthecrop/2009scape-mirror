@@ -164,10 +164,9 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
             }
 
             // Give the mining reward, increment 'rocks mined' attribute
-            if(addItem(player, reward, rewardAmount)) {
-                var rocksMined = getAttribute(player, "$STATS_BASE:$STATS_ROCKS", 0)
-                setAttribute(player, "/save:$STATS_BASE:$STATS_ROCKS", ++rocksMined)
-            }
+            addItemOrDrop(player, reward, rewardAmount)
+            var rocksMined = getAttribute(player, "$STATS_BASE:$STATS_ROCKS", 0)
+            setAttribute(player, "/save:$STATS_BASE:$STATS_ROCKS", rocksMined + rewardAmount)
 
             // Calculate bonus gem chance while mining
             if (!isMiningEssence) {
