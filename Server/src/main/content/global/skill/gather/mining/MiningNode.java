@@ -403,9 +403,6 @@ public enum MiningNode{
         //Runite
         RUNITE_ORE_0( 2107, 452,   (byte) 12),
         RUNITE_ORE_1( 2106, 450,   (byte) 12),
-        RUNITE_ORE_2( 6669, 21296, (byte) 12),
-        RUNITE_ORE_3( 6671, 21298, (byte) 12),
-        RUNITE_ORE_4( 6670, 21297, (byte) 12),
         RUNITE_ORE_5( 14861,25373, (byte) 12),
         RUNITE_ORE_6( 14860,25372, (byte) 12),
         RUNITE_ORE_7( 14859,25371, (byte) 12),
@@ -437,8 +434,14 @@ public enum MiningNode{
         GRANITE(10947,10945, (byte) 16),
 
         //Rubium?
-        RUBIUM(29746,29747, (byte) 17);
+        RUBIUM(29746,29747, (byte) 17),
 
+        //Magic stone (Tears of Guthix)
+        MAGIC_STONE_0( 6669, 21296, (byte) 18), // Was mistaken for RUNITE_ORE_2
+        MAGIC_STONE_1( 6671, 21298, (byte) 18), // Was mistaken for RUNITE_ORE_3
+        MAGIC_STONE_2( 6670, 21297, (byte) 18), // Was mistaken for RUNITE_ORE_4
+
+        ;
 
 
         public static List<WeightedChanceItem> gemRockGems = new ArrayList<>(20);
@@ -572,6 +575,13 @@ public enum MiningNode{
                     rate = 0.6;
                     reward = 12630;
                     level = 46;
+                    break;
+                case 18:
+                    respawnRate = 100 | 200 << 16;
+                    experience = 0.0;
+                    rate = 0.3;
+                    reward = 4703;
+                    level = 20;
                     break;
             }
         }

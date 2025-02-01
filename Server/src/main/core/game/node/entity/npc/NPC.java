@@ -523,6 +523,9 @@ public class NPC extends Entity {
 		return false;
 	}
 
+	public int getNextWalk() {
+		return nextWalk;
+	}
 	/**
 	 * Sets the next walk.
 	 */

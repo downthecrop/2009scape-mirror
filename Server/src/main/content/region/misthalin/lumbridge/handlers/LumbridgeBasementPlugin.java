@@ -55,7 +55,6 @@ public class LumbridgeBasementPlugin extends OptionHandler {
 		SceneryDefinition.forId(40849).getHandlers().put("option:jump-down", this);
 		SceneryDefinition.forId(40260).getHandlers().put("option:climb-through", this);
 		SceneryDefinition.forId(41077).getHandlers().put("option:crawl-through", this);
-		ClassScanner.definePlugins(new LightCreatureNPC(), new LightCreatureHandler());
 		SceneryBuilder.add(new Scenery(40260, Location.create(2526, 5828, 2), 2));
 		return this;
 	}
@@ -170,92 +169,4 @@ public class LumbridgeBasementPlugin extends OptionHandler {
 		return null;
 	}
 
-	/**
-	 * Handles the sapphire lantern on a light creature.
-	 * @author Vexia
-	 *
-	 */
-	public class LightCreatureHandler extends UseWithHandler {
-
-		/**
-		 * Constructs the {@code LightCreatureHandler}
-		 */
-		public LightCreatureHandler() {
-			super( 4700, 4701, 4702);
-		}
-
-		@Override
-		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			addHandler(2021, NPC_TYPE, this);
-			return this;
-		}
-
-		@Override
-		public boolean handle(NodeUsageEvent event) {
-			final Player player = event.getPlayer();
-                        if (!hasRequirement(player, "While Guthix Sleeps"))
-                            return true;
-			player.lock(2);
-			player.teleport(Location.create(2538, 5881, 0));
-			return true;
-		}
-		
-		@Override
-		public Location getDestination(Player player, Node with) {
-			if (player.getLocation().withinDistance(with.getLocation())) {
-				return player.getLocation();
-			}
-			return null;
-		}
-
-	}
-
-
-	/**
-	 * Handles the light creature npc.
-	 * @author Vexia
-	 *
-	 */
-	public class LightCreatureNPC extends AbstractNPC {
-
-		/**
-		 * Constructs the {@code LightCreatureNPC}
-		 */
-		public LightCreatureNPC() {
-			super(0, null);
-			this.setWalks(true);
-			this.setWalkRadius(10);
-		}
-
-		/**
-		 * Constructs the {@code LightCreatureNPC}
-		 */
-		public LightCreatureNPC(int id, Location location) {
-			super(id, location);
-		}
-
-		@Override
-		public AbstractNPC construct(int id, Location location, Object... objects) {
-			return new LightCreatureNPC(id, location);
-		}
-
-		@Override
-		public void handleTickActions() {
-			if (!getLocks().isMovementLocked()) {
-				if (isWalks() && !getPulseManager().hasPulseRunning() && nextWalk < GameWorld.getTicks()) {
-					setNextWalk();
-					Location l = getLocation().transform(-5 + RandomFunction.random(getWalkRadius()), -5 + RandomFunction.random(getWalkRadius()), 0);
-					if (canMove(l)) {
-						Pathfinder.find(this, l, true, Pathfinder.PROJECTILE).walk(this);
-					}
-				}
-			}
-		}
-
-		@Override
-		public int[] getIds() {
-			return new int[] {2021};
-		}
-
-	}
 }

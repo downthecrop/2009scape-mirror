@@ -85,6 +85,7 @@ public final class DarkZone extends MapZone implements EventHook<UseWithEvent>{
 	public void configure() {
 		register(new ZoneBorders(1728, 5120, 1791, 5247));
 		registerRegion(12693);
+		registerRegion(12948);
 		registerRegion(12949);
 		register(new ZoneBorders(3306,9661,3222,9600));
 		register(new ZoneBorders(3717,9473,3841,9346));

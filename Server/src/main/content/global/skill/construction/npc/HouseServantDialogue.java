@@ -360,7 +360,7 @@ public class HouseServantDialogue extends DialoguePlugin {
 				bankFetch(player, new Item(Items.MARBLE_BLOCK_8786));
 				break;
 			case 3: //magic stones
-				bankFetch(player, new Item(Items.MAGIC_STONE_4703));
+				bankFetch(player, new Item(Items.MAGIC_STONE_8788));
 				break;
 			}
 			break;

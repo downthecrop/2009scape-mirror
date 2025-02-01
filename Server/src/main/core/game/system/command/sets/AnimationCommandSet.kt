@@ -56,11 +56,23 @@ class AnimationCommandSet : CommandSet(Privilege.ADMIN) {
             if (args.size < 2) {
                 reject(player, "Syntax error: ::ranim <Render Animation ID>")
             }
-            try {
-                player.appearance.setAnimations(Animation.create(args[1].toInt()))
-                player.appearance.sync()
-            } catch (e: NumberFormatException) {
-                reject(player, "Syntax error: ::ranim <Render Animation ID>")
+            if (args.size > 2) {
+                GameWorld.Pulser.submit(object : Pulse(3, player) {
+                    var id = args[1].toInt()
+                    override fun pulse(): Boolean {
+                        player.appearance.setAnimations(Animation.create(id))
+                        player.appearance.sync()
+                        player.sendChat("Current: $id")
+                        return ++id >= args[2].toInt()
+                    }
+                })
+            } else {
+                try {
+                    player.appearance.setAnimations(Animation.create(args[1].toInt()))
+                    player.appearance.sync()
+                } catch (e: NumberFormatException) {
+                    reject(player, "Syntax error: ::ranim <Render Animation ID>")
+                }
             }
         }
 

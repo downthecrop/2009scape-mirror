@@ -612,9 +612,6 @@ public enum SkillingResource {
 	 */
 	RUNITE_ORE_0(2107, 85, 0.95, 1250 | 2500 << 16, 125.0, 451, 1, "runite rocks", null, 452, Skills.MINING),
 	RUNITE_ORE_1(2106, 85, 0.95, 1250 | 2500 << 16, 125.0, 451, 1, "runite rocks", null, 450, Skills.MINING),
-	RUNITE_ORE_2(6669, 85, 0.95, 1250 | 2500 << 16, 125.0, 451, 1, "runite rocks", null, 21296, Skills.MINING),
-	RUNITE_ORE_3(6671, 85, 0.95, 1250 | 2500 << 16, 125.0, 451, 1, "runite rocks", null, 21298, Skills.MINING),
-	RUNITE_ORE_4(6670, 85, 0.95, 1250 | 2500 << 16, 125.0, 451, 1, "runite rocks", null, 21297, Skills.MINING),
 	RUNITE_ORE_5(14861, 85, 0.95, 1250 | 2500 << 16, 125.0, 451, 1, "runite rocks", null, 25373, Skills.MINING),
 	RUNITE_ORE_6(14860, 85, 0.95, 1250 | 2500 << 16, 125.0, 451, 1, "runite rocks", null, 25372, Skills.MINING),
 	RUNITE_ORE_7(14859, 85, 0.95, 1250 | 2500 << 16, 125.0, 451, 1, "runite rocks", null, 25371, Skills.MINING),
@@ -632,7 +629,15 @@ public enum SkillingResource {
 	 */
 	GEM_ROCK_0(23567, 40, 0.95, 166 | 175 << 16, 65, 1625, 1, "gem rocks", null, 21297, Skills.MINING),
 	GEM_ROCK_1(23566, 40, 0.95, 166 | 175 << 16, 65, 1625, 1, "gem rocks", null, 21296, Skills.MINING),
-	GEM_ROCK_2(23568, 40, 0.95, 166 | 175 << 16, 65, 1625, 1, "gem rocks", null, 21298, Skills.MINING);
+	GEM_ROCK_2(23568, 40, 0.95, 166 | 175 << 16, 65, 1625, 1, "gem rocks", null, 21298, Skills.MINING),
+
+	/**
+	 * Magic stone.
+	 */
+	MAGIC_STONE_0(6669, 20, 0.3, 100 | 200 << 16, 0.0, 4703, 1, "magic stone", null, 21296, Skills.MINING),
+	MAGIC_STONE_1(6671, 20, 0.3, 100 | 200 << 16, 0.0, 4703, 1, "magic stone", null, 21298, Skills.MINING),
+	MAGIC_STONE_2(6670, 20, 0.3, 100 | 200 << 16, 0.0, 4703, 1, "magic stone", null, 21297, Skills.MINING);
+
 
 	/**
 	 * The resources mapping.
