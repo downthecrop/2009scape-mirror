@@ -34,6 +34,7 @@ public final class CockatriceFamiliarNPC implements Plugin<Object> {
 		ClassScanner.definePlugin(new SpiritPengatrice());
 		ClassScanner.definePlugin(new SpiritCoraxatrice());
 		ClassScanner.definePlugin(new SpiritVulatrice());
+		ClassScanner.definePlugin(new SpiritSaratrice());
 		return this;
 	}
 
@@ -58,7 +59,11 @@ public final class CockatriceFamiliarNPC implements Plugin<Object> {
 		GameWorld.getPulser().submit(new Pulse(1, familiar.getOwner(), familiar, target) {
 			@Override
 			public boolean pulse() {
-				target.getSkills().updateLevel(skill, -3, 0);
+				if(skill == 5) {
+					target.skills.decrementPrayerPoints(3);
+				}else {
+					target.getSkills().updateLevel(skill, -3, 0);
+				}
 				Projectile.magic(familiar, target, 1468, 40, 36, 71, 10).send();
 				familiar.sendFamiliarHit(target, 10, Graphics.create(1469));
 				return true;
@@ -294,6 +299,45 @@ public final class CockatriceFamiliarNPC implements Plugin<Object> {
 		@Override
 		public int[] getIds() {
 			return new int[] { 6887, 6888 };
+		}
+
+	}
+
+	/**
+	 * Represents the Spirit Saratrice familiar.
+	 * @author Aero - DeadlyGenga
+	 */
+	public class SpiritSaratrice extends Forager {
+
+		/**
+		 * Constructs a new {@code SpiritSaratriceNPC} {@code Object}.
+		 */
+		public SpiritSaratrice() {
+			this(null, 6879);
+		}
+
+		/**
+		 * Constructs a new {@code SpiritSaratriceNPC} {@code Object}.
+		 * @param owner The owner.
+		 * @param id The id.
+		 */
+		public SpiritSaratrice(Player owner, int id) {
+			super(owner, id, 3600, 12099, 3, WeaponInterface.STYLE_CAST, COCKATRICE_EGG);
+		}
+
+		@Override
+		public Familiar construct(Player owner, int id) {
+			return new SpiritSaratrice(owner, id);
+		}
+
+		@Override
+		protected boolean specialMove(FamiliarSpecial special) {
+			return petrifyingGaze(this, special, Skills.PRAYER);
+		}
+
+		@Override
+		public int[] getIds() {
+			return new int[] { 6879, 6880 };
 		}
 
 	}
