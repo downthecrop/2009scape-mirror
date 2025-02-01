@@ -72381,6 +72381,12 @@
     "id": "6053"
   },
   {
+    "examine": "A rare bird.",
+    "name": "Black Swan",
+    "water_npc": "true",
+    "id": "3297"
+  },
+  {
     "examine": "A nature impling. Right on, maaan.",
     "name": "Nature Impling",
     "id": "1034"
