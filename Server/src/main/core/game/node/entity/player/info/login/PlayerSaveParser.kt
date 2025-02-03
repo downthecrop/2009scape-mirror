@@ -59,7 +59,6 @@ class PlayerSaveParser(val player: Player) {
         parseAppearance()
         parseGrave()
         parseVarps()
-        parseStates()
         parseSpellbook()
         parseSavedData()
         parseAutocastSpell()
@@ -172,22 +171,6 @@ class PlayerSaveParser(val player: Player) {
     fun parseBankPin() {
         val bpData = saveFile!!["bankPinManager"] as JSONObject
         player.bankPinManager.parse(bpData)
-    }
-
-    fun parseStates() {
-        player.states.clear()
-        if (saveFile!!.containsKey("states")) {
-            val states: JSONArray = saveFile!!["states"] as JSONArray
-            for (state in states) {
-                val s = state as JSONObject
-                val stateId = s["stateKey"].toString()
-                if(player.states[stateId] != null) continue
-                val stateClass = player.registerState(stateId)
-                stateClass?.parse(s)
-                stateClass?.init()
-                player.states.put(stateId,stateClass)
-            }
-        }
     }
 
     fun parseFamiliars() {

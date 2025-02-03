@@ -1,6 +1,6 @@
 package core.cache.def.impl;
 
-import core.ServerConstants;
+import content.global.skill.summoning.familiar.BurdenBeast;
 import core.api.EquipmentSlot;
 import core.cache.Cache;
 import core.cache.def.Definition;
@@ -12,17 +12,12 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.game.node.item.ItemPlugin;
 import core.game.world.GameWorld;
-import core.net.packet.PacketRepository;
-import core.net.packet.out.WeightUpdate;
-import core.plugin.Plugin;
 import core.tools.Log;
 import core.tools.StringUtils;
-import core.tools.SystemLogger;
 import core.game.system.config.ItemConfigParser;
 import org.rs09.consts.Items;
 
 import java.nio.ByteBuffer;
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -33,7 +28,6 @@ import static core.api.ContentAPIKt.log;
 
 /**
  * Represents an item's definitions.
- * @author Jagex
  * @author Emperor
  */
 public class ItemDefinition extends Definition<Item> {

@@ -7,7 +7,6 @@ import core.game.interaction.OptionHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.tools.Log;
-import core.tools.SystemLogger;
 import core.game.world.GameWorld;
 
 import java.nio.ByteBuffer;

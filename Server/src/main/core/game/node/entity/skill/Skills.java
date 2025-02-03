@@ -25,7 +25,6 @@ import core.plugin.CorePluginTypes.XPGainPlugins;
 import org.rs09.consts.Items;
 import org.rs09.consts.Sounds;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 import static core.api.ContentAPIKt.getWorldTicks;
@@ -411,30 +410,6 @@ public final class Skills {
 		}
 		experienceMultiplier = 5.0;
 		updateCombatLevel();
-	}
-
-	public void parseExpRate(ByteBuffer buffer) {
-		experienceMultiplier = buffer.getDouble();
-		if(GameWorld.getSettings().getDefault_xp_rate() != experienceMultiplier){
-			experienceMultiplier = GameWorld.getSettings().getDefault_xp_rate();
-		}
-	}
-
-	/**
-	 * Saves the skill data on the buffer.
-	 * @param buffer The byte buffer.
-	 */
-	public void save(ByteBuffer buffer) {
-		for (int i = 0; i < 24; i++) {
-			buffer.putInt((int) (experience[i] * 10));
-			buffer.put((byte) dynamicLevels[i]);
-			buffer.put((byte) staticLevels[i]);
-		}
-		buffer.putInt((int) experienceGained);
-	}
-
-	public void saveExpRate(ByteBuffer buffer) {
-		buffer.putDouble(experienceMultiplier);
 	}
 
 	/**

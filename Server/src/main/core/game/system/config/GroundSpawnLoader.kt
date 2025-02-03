@@ -10,12 +10,10 @@ import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import core.ServerConstants
 import core.api.log
-import core.tools.SystemLogger
 import core.game.world.GameWorld
 import core.game.world.repository.Repository
 import core.tools.Log
 import java.io.*
-import java.nio.ByteBuffer
 
 class GroundSpawnLoader {
     val parser = JSONParser()
@@ -63,17 +61,6 @@ class GroundSpawnLoader {
 
         override fun toString(): String {
             return "GroundSpawn [name=" + getName() + ", respawnRate=" + respawnRate + ", loc=" + getLocation() + "]"
-        }
-
-        /**
-         * Method used to save this ground item to a byte buffer.
-         * @param buffer the buffer.
-         */
-        fun save(buffer: ByteBuffer) {
-            buffer.putInt(respawnRate)
-            buffer.putShort(id.toShort())
-            buffer.putInt(amount)
-            buffer.putShort((getLocation().x and 0xFFFF).toShort()).putShort((getLocation().y and 0xFFFF).toShort()).put(getLocation().z.toByte())
         }
 
         /**

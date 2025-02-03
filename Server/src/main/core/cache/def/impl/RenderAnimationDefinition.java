@@ -2,7 +2,6 @@ package core.cache.def.impl;
 
 import core.cache.Cache;
 import core.tools.Log;
-import core.tools.SystemLogger;
 import core.game.world.GameWorld;
 
 import java.lang.reflect.Array;

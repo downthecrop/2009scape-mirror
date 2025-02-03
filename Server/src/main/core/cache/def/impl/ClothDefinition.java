@@ -1,7 +1,6 @@
 package core.cache.def.impl;
 
 import java.nio.ByteBuffer;
-import java.util.Arrays;
 
 import core.ServerConstants;
 import core.cache.Cache;

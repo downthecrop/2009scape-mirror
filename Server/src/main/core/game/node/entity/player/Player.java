@@ -71,8 +71,6 @@ import core.game.node.entity.combat.CombatSwingHandler;
 import content.global.handlers.item.equipment.EquipmentDegrader;
 import core.game.node.entity.combat.graves.Grave;
 import core.game.node.entity.combat.graves.GraveController;
-import core.game.node.entity.state.State;
-import core.game.node.entity.state.StateRepository;
 import core.game.world.GameWorld;
 import core.game.world.repository.Repository;
 import core.game.world.update.MapChunkRenderer;
@@ -123,10 +121,9 @@ public class Player extends Entity {
 
 	public VarpManager varpManager = new VarpManager(this);
 
-        public HashMap<Integer, Integer> varpMap = new HashMap<>();
-        public HashMap<Integer, Boolean> saveVarp = new HashMap<>();
+	public HashMap<Integer, Integer> varpMap = new HashMap<>();
 
-	public HashMap<String,State> states = new HashMap<>();
+	public HashMap<Integer, Boolean> saveVarp = new HashMap<>();
 
 	public HashMap<String,Function1<Player, Unit>> logoutListeners = new HashMap<>();
 
@@ -500,21 +497,21 @@ public class Player extends Entity {
 				if (i == null) break;
 				totalWealth += (long) i.getDefinition().getValue() * i.getAmount();
 			}
-            GrandExchangeRecords ge = GrandExchangeRecords.getInstance(this);
-            for (int i=0; i<6; i++) {
-                GrandExchangeOffer offer = ge.getOffer(i);
-                if (offer != null) {
-                    totalWealth += offer.cacheValue();
-                }
-            }
+			GrandExchangeRecords ge = GrandExchangeRecords.getInstance(this);
+			for (int i=0; i<6; i++) {
+				GrandExchangeOffer offer = ge.getOffer(i);
+				if (offer != null) {
+					totalWealth += offer.cacheValue();
+				}
+			}
 
-            // This can lead to a false positive of up to 3 * 187.5k, but only for 3 ticks while a cannon is being constructed
-            if (this.getAttribute("dmc", null) != null) {
-                totalWealth += ItemDefinition.forId(Items.CANNON_BASE_6).getValue();
-                totalWealth += ItemDefinition.forId(Items.CANNON_STAND_8).getValue();
-                totalWealth += ItemDefinition.forId(Items.CANNON_BARRELS_10).getValue();
-                totalWealth += ItemDefinition.forId(Items.CANNON_FURNACE_12).getValue();
-            }
+			// This can lead to a false positive of up to 3 * 187.5k, but only for 3 ticks while a cannon is being constructed
+			if (this.getAttribute("dmc", null) != null) {
+				totalWealth += ItemDefinition.forId(Items.CANNON_BASE_6).getValue();
+				totalWealth += ItemDefinition.forId(Items.CANNON_STAND_8).getValue();
+				totalWealth += ItemDefinition.forId(Items.CANNON_BARRELS_10).getValue();
+				totalWealth += ItemDefinition.forId(Items.CANNON_FURNACE_12).getValue();
+			}
 
 			long diff = previousWealth == -1 ? 0L : totalWealth - previousWealth;
 			setAttribute("/save:last-wealth", totalWealth);
@@ -557,15 +554,15 @@ public class Player extends Entity {
 		return this.getIndex() | 0x8000;
 	}
 
-        @Override
-        public void onAttack (Entity e) {
-            if (e instanceof Player) {
-                Player p = (Player) e;
-                if (skullManager.isWildernessDisabled()) {
-                    return;
-                }
-            }
-        }
+	@Override
+	public void onAttack (Entity e) {
+		if (e instanceof Player) {
+			Player p = (Player) e;
+			if (skullManager.isWildernessDisabled()) {
+				return;
+			}
+		}
+	}
 
 	@Override
 	public CombatSwingHandler getSwingHandler(boolean swing) {
@@ -594,7 +591,7 @@ public class Player extends Entity {
 
 	@Override
 	public void commenceDeath(Entity killer) {
-                if (!isPlaying()) return;
+		if (!isPlaying()) return;
 		super.commenceDeath(killer);
 		if (prayer.get(PrayerType.RETRIBUTION)) {
 			prayer.startRetribution(killer);
@@ -747,18 +744,18 @@ public class Player extends Entity {
 		if (entity instanceof NPC && !((NPC) entity).getDefinition().hasAction("attack") && !((NPC) entity).isIgnoreAttackRestrictions(this)) {
 			return false;
 		}
-                if (entity instanceof Player) {
-                    Player p = (Player) entity;
-                    if (p.getSkullManager().isWilderness() && skullManager.isWilderness()) {
-                        if (!GameWorld.getSettings().getWild_pvp_enabled())
-                            return false;
-                        if (p.getSkullManager().hasWildernessProtection())
-                            return false;
-                        if (skullManager.hasWildernessProtection())
-                            return false;
-                        return true;
-                    } else return false;
-                }
+		if (entity instanceof Player) {
+			Player p = (Player) entity;
+			if (p.getSkullManager().isWilderness() && skullManager.isWilderness()) {
+				if (!GameWorld.getSettings().getWild_pvp_enabled())
+					return false;
+				if (p.getSkullManager().hasWildernessProtection())
+					return false;
+				if (skullManager.hasWildernessProtection())
+					return false;
+				return true;
+			} else return false;
+		}
 		return super.isAttackable(entity, style, message);
 	}
 
@@ -1346,7 +1343,6 @@ public class Player extends Entity {
 		return "Player [name=" + name + ", getRights()=" + getRights() + "]";
 	}
 
-
 	public String getCustomState() {
 		return customState;
 	}
@@ -1372,37 +1368,15 @@ public class Player extends Entity {
 		this.archeryTotal = archeryTotal;
 	}
 
-	public boolean hasActiveState(String key){
-		State state = states.get(key);
-		if(state != null && state.getPulse() != null){
-			return true;
+	public void updateAppearance() {
+		getUpdateMasks().register(EntityFlag.Appearance, this);
+	}
+
+	public void incrementInvalidPacketCount() {
+		invalidPacketCount++;
+		if (invalidPacketCount >= 5) {
+			clear();
+			log(this.getClass(), Log.ERR, "Disconnecting " + getName() + " for having a high rate of invalid packets. Potential packet bot misbehaving, or simply really bad connection.");
 		}
-		return false;
 	}
-
-	public State registerState(String key){
-		return StateRepository.forKey(key, this);
-	}
-
-	public void clearState(String key){
-		State state = states.get(key);
-		if(state == null) return;
-		Pulse pulse = state.getPulse();
-		if(pulse != null) {
-			pulse.stop();
-		}
-		states.remove(key);
-	}
-
-        public void updateAppearance() {
-            getUpdateMasks().register(EntityFlag.Appearance, this);
-        }
-
-        public void incrementInvalidPacketCount() {
-            invalidPacketCount++;
-            if (invalidPacketCount >= 5) {
-                clear();
-                log(this.getClass(), Log.ERR, "Disconnecting " + getName() + " for having a high rate of invalid packets. Potential packet bot misbehaving, or simply really bad connection.");
-            }
-        }
 }

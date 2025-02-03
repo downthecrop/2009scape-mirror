@@ -20,7 +20,6 @@ import core.game.world.GameWorld;
 import org.rs09.consts.Sounds;
 
 import java.awt.*;
-import java.nio.ByteBuffer;
 
 import static core.api.ContentAPIKt.*;
 import static core.api.regionspec.RegionSpecificationKt.fillWith;
@@ -99,36 +98,6 @@ public final class HouseManager {
 	}
 
 
-	public void save(ByteBuffer buffer) {
-		buffer.put((byte) location.ordinal());
-		buffer.put((byte) style.ordinal());
-		if (hasServant()) {
-			servant.save(buffer);
-		} else {
-			buffer.put((byte) -1);
-		}
-		for (int z = 0; z < 4; z++) {
-			for (int x = 0; x < 8; x++) {
-				for (int y = 0; y < 8; y++) {
-					Room room = rooms[z][x][y];
-					if (room != null) {
-						buffer.put((byte) z).put((byte) x).put((byte) y);
-						buffer.put((byte) room.getProperties().ordinal());
-						buffer.put((byte) room.getRotation().toInteger());
-						for (int i = 0; i < room.getHotspots().length; i++) {
-							if (room.getHotspots()[i].getDecorationIndex() > -1) {
-								buffer.put((byte) i);
-								buffer.put((byte) room.getHotspots()[i].getDecorationIndex());
-							}
-						}
-						buffer.put((byte) -1);
-					}
-				}
-			}
-		}
-		buffer.put((byte) -1);//Eof
-	}
-
 	public void parse(JSONObject data){
 		location = HouseLocation.values()[Integer.parseInt( data.get("location").toString())];
 		style = HousingStyle.values()[Integer.parseInt( data.get("style").toString())];
@@ -151,28 +120,6 @@ public final class HouseManager {
 			for(int j = 0; j < hotspots.size(); j++){
 				JSONObject spot = (JSONObject) hotspots.get(j);
 				room.getHotspots()[Integer.parseInt(spot.get("hotspotIndex").toString())].setDecorationIndex(Integer.parseInt(spot.get("decorationIndex").toString()));
-			}
-		}
-	}
-
-
-	public void parse(ByteBuffer buffer) {
-		location = HouseLocation.values()[buffer.get() & 0xFF];
-		style = HousingStyle.values()[buffer.get() & 0xFF];
-		servant = Servant.parse(buffer);
-		int z = 0;
-		while ((z = buffer.get()) != -1) {
-			if (z == 3) {
-				hasDungeon = true;
-			}
-			int x = buffer.get();
-			int y = buffer.get();
-			Room room = rooms[z][x][y] = new Room(RoomProperties.values()[buffer.get() & 0xFF]);
-			room.configure(style);
-			room.setRotation(Direction.get(buffer.get() & 0xFF));
-			int spot = 0;
-			while ((spot = buffer.get()) != -1) {
-				room.getHotspots()[spot].setDecorationIndex(buffer.get() & 0xFF);
 			}
 		}
 	}

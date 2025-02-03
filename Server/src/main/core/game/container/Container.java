@@ -8,7 +8,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.rs09.consts.Items;
 
-import java.nio.ByteBuffer;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -560,30 +559,6 @@ public class Container {
         return -1;
     }
 
-    /**
-     * Parses the container data from the byte buffer.
-     *
-     * @param buffer The byte buffer.
-     * @return The total value of all items (G.E price > Store price > High
-     * alchemy price).
-     */
-    public int parse(ByteBuffer buffer) {
-        int slot;
-        int total = 0;
-        while ((slot = buffer.getShort()) != -1) {
-            int id = buffer.getShort() & 0xFFFF;
-            int amount = buffer.getInt();
-            int charge = buffer.getInt();
-            if (id >= ItemDefinition.getDefinitions().size() || slot >= items.length || slot < 0) {
-                continue;
-            }
-            Item item = items[slot] = new Item(id, amount, charge);
-            item.setIndex(slot);
-            total += item.getValue();
-        }
-        return total;
-    }
-
     public void parse(JSONArray itemArray){
         AtomicInteger total = new AtomicInteger(0);
         itemArray.forEach(item -> {
@@ -599,30 +574,6 @@ public class Container {
                 total.set(total.get() + (int)it.getValue());
             }
         });
-    }
-
-    /**
-     * Saves the item data on the byte buffer.
-     *
-     * @param buffer The byte buffer.
-     * @return The total value of all items (G.E price > Store price > High
-     * alchemy price).
-     */
-    public long save(ByteBuffer buffer) {
-        long totalValue = 0;
-        for (int i = 0; i < items.length; i++) {
-            Item item = items[i];
-            if (item == null) {
-                continue;
-            }
-            buffer.putShort((short) i);
-            buffer.putShort((short) item.getId());
-            buffer.putInt(item.getAmount());
-            buffer.putInt(item.getCharge());
-            totalValue += item.getValue();
-        }
-        buffer.putShort((short) -1);
-        return totalValue;
     }
 
     /**

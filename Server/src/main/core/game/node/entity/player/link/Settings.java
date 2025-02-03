@@ -4,11 +4,7 @@ import core.game.system.config.ItemConfigParser;
 import org.json.simple.JSONObject;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
 import core.net.packet.IoBuffer;
-
-import java.nio.ByteBuffer;
 
 import static core.api.ContentAPIKt.*;
 
@@ -199,61 +195,9 @@ public final class Settings {
 	}
 
 	/**
-	 * Writes the settings on the byte buffer.
-	 * @param buffer The byte buffer.
+	 * Parses the settings from the save file.
+	 * @param settingsData The JSON object.
 	 */
-	public void save(ByteBuffer buffer) {
-		buffer.put((byte) 1).put((byte) brightness).put((byte) musicVolume).put((byte) soundEffectVolume).put((byte) areaSoundVolume).put((byte) (singleMouseButton ? 1 : 0)).put((byte) (disableChatEffects ? 1 : 0)).put((byte) (splitPrivateChat ? 1 : 0)).put((byte) (acceptAid ? 1 : 0)).put((byte) (runToggled ? 1 : 0)).put((byte) publicChatSetting).put((byte) privateChatSetting).put((byte) clanChatSetting).put((byte) tradeSetting).put((byte) assistSetting).put(((byte) runEnergy));
-		if (!player.getProperties().isRetaliating()) {
-			buffer.put((byte) 2);
-		}
-		if (specialEnergy != 100) {
-			buffer.put((byte) 3).put((byte) specialEnergy);
-		}
-		if (attackStyleIndex != 0) {
-			buffer.put((byte) 4).put((byte) attackStyleIndex);
-		}
-		buffer.put((byte) 0);
-	}
-
-	/**
-	 * Parses the settings from the byte buffer.
-	 * @param buffer The byte buffer.
-	 */
-	public void parse(ByteBuffer buffer) {
-		int opcode;
-		while ((opcode = buffer.get() & 0xFF) != 0) {
-			switch (opcode) {
-			case 1:
-				brightness = buffer.get();
-				musicVolume = buffer.get();
-				soundEffectVolume = buffer.get();
-				areaSoundVolume = buffer.get();
-				singleMouseButton = buffer.get() == 1;
-				disableChatEffects = buffer.get() == 1;
-				splitPrivateChat = buffer.get() == 1;
-				acceptAid = buffer.get() == 1;
-				runToggled = buffer.get() == 1;
-				publicChatSetting = buffer.get();
-				privateChatSetting = buffer.get();
-				clanChatSetting = buffer.get();
-				tradeSetting = buffer.get();
-				assistSetting = buffer.get();
-				runEnergy = buffer.get();
-				break;
-			case 2:
-				player.getProperties().setRetaliating(false);
-				break;
-			case 3:
-				specialEnergy = buffer.get() & 0xFF;
-				break;
-			case 4:
-				attackStyleIndex = buffer.get();
-				break;
-			}
-		}
-	}
-
 	public void parse(JSONObject settingsData){
 		brightness = Integer.parseInt( settingsData.get("brightness").toString());
 		musicVolume = Integer.parseInt( settingsData.get("musicVolume").toString());

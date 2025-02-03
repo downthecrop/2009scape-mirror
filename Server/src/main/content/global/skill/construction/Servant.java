@@ -5,8 +5,6 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.item.Item;
 import org.json.simple.JSONObject;
 
-import java.nio.ByteBuffer;
-
 /**
  * Represents a player's servant.
  * @author Emperor
@@ -44,26 +42,9 @@ public final class Servant extends NPC {
 	}
 
 	/**
-	 * Saves the servant details.
-	 * @param buffer The buffer to write on.
-	 */
-	public void save(ByteBuffer buffer) {
-		buffer.put((byte) type.ordinal());
-		buffer.putShort((byte) uses);
-		if (item == null) {
-			buffer.putShort((short) -1);
-		} else {
-			buffer.putShort((short) item.getId());
-			buffer.putInt(item.getAmount());
-		}
-		buffer.put((byte) (greet ? 1 : 0));
-	}
-	
-	/**
-	 * Parses the servant from the buffer.
+	 * Parses the servant from the save file.
 	 * @return The servant.
 	 */
-
 	public static Servant parse(JSONObject data){
 		int type = Integer.parseInt( data.get("type").toString());
 		Servant servant = new Servant(ServantType.values()[type]);
@@ -74,21 +55,6 @@ public final class Servant extends NPC {
 			servant.item = new Item(Integer.parseInt(item.get("id").toString()),Integer.parseInt(item.get("amount").toString()));
 		}
 		servant.greet = (boolean) data.get("greet");
-		return servant;
-	}
-
-	public static Servant parse(ByteBuffer buffer) {
-		int type = buffer.get();
-		if (type == -1) {
-			return null;
-		}
-		Servant servant = new Servant(ServantType.values()[type]);
-		servant.uses = buffer.getShort() & 0xFFFF;
-		int itemId = buffer.getShort() & 0xFFFF;
-		if ((short) itemId != -1) {
-			servant.item = new Item(itemId, buffer.getInt());
-		}
-		servant.greet = buffer.get() == 1;
 		return servant;
 	}
 

@@ -5,7 +5,6 @@ import core.game.node.item.Item;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.nio.ByteBuffer;
 import java.util.Arrays;
 
 /**
@@ -95,19 +94,6 @@ public final class QuestData {
 		}
 		witchsExperimentKilled = (boolean) data.get("witchsExperimentKilled");
 		witchsExperimentStage = Integer.parseInt( data.get("witchsExperimentStage").toString());
-	}
-
-	/**
-	 * Saves the desert treasure node.
-	 * @param buffer The buffer.
-	 */
-	private final void saveDesertTreasureNode(ByteBuffer buffer) {
-		buffer.put((byte) 8);
-		for (int i = 0; i < desertTreasure.length; i++) {
-			Item item = desertTreasure[i];
-			buffer.putShort((short) item.getId());
-			buffer.put((byte) item.getAmount());
-		}
 	}
 
 	/**

@@ -1,12 +1,10 @@
 package core.game.system.communication;
 
-import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.node.entity.player.Player;
 import core.tools.Log;
 import org.jetbrains.annotations.NotNull;
 import proto.management.PrivateMessage;
 import core.auth.UserAccountInfo;
-import core.tools.SystemLogger;
 import core.game.system.mysql.SQLTable;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
@@ -19,7 +17,6 @@ import core.net.packet.out.ContactPackets;
 import core.tools.StringUtils;
 import core.worker.ManagementEvents;
 
-import java.nio.ByteBuffer;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -212,27 +209,6 @@ public final class CommunicationInfo {
 				}
 			};
 			GameWorld.getPulser().submit(lootSharePulse);
-		}
-	}
-
-	/**
-	 * Roar temp
-	 * @param buffer
-	 */
-	public void parsePrevious(ByteBuffer buffer) {
-		int size = buffer.get() & 0xFF;
-		for (int i = 0; i < size; i++) {
-			String name = ByteBufferUtils.getString(buffer);
-			Contact contact = new Contact(name);
-			contact.setRank(ClanRank.FRIEND);
-			contacts.put(name, contact);
-		}
-		size = buffer.get() & 0xFF;
-		for (int i = 0; i < size; i++) {
-			blocked.add(ByteBufferUtils.getString(buffer));
-		}
-		if (buffer.get() == 1) {
-			ByteBufferUtils.getString(buffer);
 		}
 	}
 

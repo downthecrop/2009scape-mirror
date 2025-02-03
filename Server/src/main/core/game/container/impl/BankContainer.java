@@ -165,26 +165,6 @@ public final class BankContainer extends Container {
 		open = true;
 
 	}
-	
-	@Override
-	public long save(ByteBuffer buffer) {
-		buffer.putInt(lastAmountX);
-		buffer.put((byte) tabStartSlot.length);
-		for (int j : tabStartSlot) {
-			buffer.putShort((short) j);
-		}
-		return super.save(buffer);
-	}
-	
-	@Override
-	public int parse(ByteBuffer buffer) {
-		lastAmountX = buffer.getInt();
-		int length = buffer.get() & 0xFF;
-		for (int i = 0; i < length; i++) {
-			tabStartSlot[i] = buffer.getShort();
-		}
-		return super.parse(buffer);
-	}
 
 	/**
 	 * Closes the bank.

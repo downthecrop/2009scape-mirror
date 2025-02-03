@@ -47,7 +47,6 @@ class PlayerSaver (val player: Player){
         savePlayerMonitor(saveFile)
         saveMusicPlayer(saveFile)
         saveFamiliarManager(saveFile)
-        saveStateManager(saveFile)
         saveBankPinData(saveFile)
         saveHouseData(saveFile)
         saveAchievementData(saveFile)
@@ -260,19 +259,6 @@ class PlayerSaver (val player: Player){
             bankPinManager.put("tryDelay",player.bankPinManager.tryDelay.toString())
         }
         root.put("bankPinManager",bankPinManager)
-    }
-
-    fun saveStateManager(root: JSONObject){
-        val states = JSONArray()
-        player.states.forEach{key,clazz ->
-            if(clazz != null && clazz.pulse != null) {
-                val stateObj = JSONObject()
-                stateObj.put("stateKey", key)
-                clazz.save(stateObj)
-                states.add(stateObj)
-            }
-        }
-        root.put("states",states)
     }
 
     fun saveFamiliarManager(root: JSONObject){
