@@ -1,5 +1,6 @@
 package content.region.kandarin.witchhaven.quest.seaslug
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
@@ -8,7 +9,7 @@ import core.game.node.entity.skill.Skills
 
 class CarolineDialogueFile : DialogueBuilderFile() {
     override fun create(b: DialogueBuilder) {
-        b.onQuestStages(SeaSlug.questName, 0)
+        b.onQuestStages(Quests.SEA_SLUG, 0)
                 .playerl(FacialExpression.FRIENDLY, "Hello there.")
                 .npcl(FacialExpression.SAD, "Is there any chance you could help me?")
                 .playerl(FacialExpression.THINKING, "What's wrong?")
@@ -32,8 +33,8 @@ class CarolineDialogueFile : DialogueBuilderFile() {
                             .playerl("Ok, I'll go and see if they're ok.")
                             .npcl("I'll reward you for your time. It'll give me peace of mind to know Kennith and my husband, Kent, are safe.")
                             .endWith() { df, player ->
-                                if(getQuestStage(player, SeaSlug.questName) == 0) {
-                                    setQuestStage(player, SeaSlug.questName, 1)
+                                if(getQuestStage(player, Quests.SEA_SLUG) == 0) {
+                                    setQuestStage(player, Quests.SEA_SLUG, 1)
                                 }
                             }
                     optionBuilder.option_playerl("I'm sorry, I'm too busy.")
@@ -43,7 +44,7 @@ class CarolineDialogueFile : DialogueBuilderFile() {
                             .end()
                 }
 
-        b.onQuestStages(SeaSlug.questName, 1,2,3,4,5,6,7,8,9,10)
+        b.onQuestStages(Quests.SEA_SLUG, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
                 .playerl("Hello Caroline.")
                 .npcl("Brave @name, have you any news about my son and his father?")
                 .playerl("I'm working on it now Caroline.")
@@ -51,7 +52,7 @@ class CarolineDialogueFile : DialogueBuilderFile() {
                 .playerl("I'll do my best.")
                 .end()
 
-        b.onQuestStages(SeaSlug.questName, 11)
+        b.onQuestStages(Quests.SEA_SLUG, 11)
                 .playerl("Hello.")
                 .npcl("Brave @name, you've returned!")
                 .npcl("Kennith told me about the strange goings-on at the platform. I had no idea it was so serious.")
@@ -62,8 +63,8 @@ class CarolineDialogueFile : DialogueBuilderFile() {
                 .playerl(FacialExpression.FRIENDLY, "Thanks!")
                 .npcl(FacialExpression.FRIENDLY, "Thank you. Take care of yourself @name.")
                 .endWith() { df, player ->
-                    if(getQuestStage(player, SeaSlug.questName) == 11) {
-                        finishQuest(player, SeaSlug.questName)
+                    if(getQuestStage(player, Quests.SEA_SLUG) == 11) {
+                        finishQuest(player, Quests.SEA_SLUG)
                     }
                 }
     }

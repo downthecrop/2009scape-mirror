@@ -1,5 +1,6 @@
 package content.region.misthalin.dorgeshuun.quest.thelosttribe
 
+import content.data.Quests
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -23,14 +24,14 @@ class SigmundChestHandler : OptionHandler() {
 
     override fun handle(player: Player?, node: Node?, option: String?): Boolean {
         player ?: return false
-        if(player.questRepository.getQuest("Lost Tribe").getStage(player) == 47 && player.inventory.contains(Items.KEY_423,1)){
+        if(player.questRepository.getQuest(Quests.THE_LOST_TRIBE).getStage(player) == 47 && player.inventory.contains(Items.KEY_423,1)){
             player.inventory.remove(Item(Items.KEY_423))
             for(item in arrayOf(Items.HAM_ROBE_4300,Items.HAM_SHIRT_4298,Items.HAM_HOOD_4302).map { Item(it) }){
                 if(!player.inventory.add(item)){
                     GroundItemManager.create(item,player)
                 }
             }
-            player.questRepository.getQuest("Lost Tribe").setStage(player,48)
+            player.questRepository.getQuest(Quests.THE_LOST_TRIBE).setStage(player,48)
         } else {
             player.sendMessage("This chest requires a key.")
         }

@@ -57,7 +57,7 @@ class QuestCommandSet : CommandSet(Privilege.ADMIN){
                     questObject.reset(player)
                 }
                 questObject.updateVarps(player)
-                notify(player, "<col=209dff>Setting " + questObject.name + " to stage $stage</col>")
+                notify(player, "<col=209dff>Setting " + questObject.quest + " to stage $stage</col>")
             }
         }
 
@@ -82,7 +82,7 @@ class QuestCommandSet : CommandSet(Privilege.ADMIN){
         player.packetDispatch.sendString("<col=ecf0f1>" + "Available Quests" + "</col>", 275, 2)
         for (q in QuestRepository.getQuests().toSortedMap().values) {
             // Add a space to beginning and end of string for the strikethrough
-            player.packetDispatch.sendString("<col=ecf0f1>" + (if (q.isCompleted(player)) "<str> " else "") + q.name + " ", 275, lineId++)
+            player.packetDispatch.sendString("<col=ecf0f1>" + (if (q.isCompleted(player)) "<str> " else "") + q.quest + " ", 275, lineId++)
         }
     }
 
@@ -105,7 +105,7 @@ class QuestCommandSet : CommandSet(Privilege.ADMIN){
                 stage in 1..99 -> "ff8400"
                 else -> "ff0000"
             }
-            admin.packetDispatch.sendString("<col=ecf0f1>${q.name}</col>", 275, lineId++)
+            admin.packetDispatch.sendString("<col=ecf0f1>${q.quest}</col>", 275, lineId++)
             admin.packetDispatch.sendString("<col=ecf0f1>Index: </col><col=ff1f1f><shad=2>${q.index}</shad></col> | <col=ecf0f1>Stage:</col> <col=$statusColor><shad=2>${lookupUser.questRepository.getStage(q)}</shad></col>", 275, lineId++)
             admin.packetDispatch.sendString("<str>          ", 275, lineId++)
         }

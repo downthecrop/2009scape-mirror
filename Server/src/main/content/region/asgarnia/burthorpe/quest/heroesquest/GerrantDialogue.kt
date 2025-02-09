@@ -1,5 +1,6 @@
 package content.region.asgarnia.burthorpe.quest.heroesquest
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
@@ -38,7 +39,7 @@ class GerrantDialogueFile : DialogueBuilderFile() {
                     optionBuilder.option_playerl("Sorry, I'm not interested.")
                             .end()
 
-                    optionBuilder.optionIf("I want to find out how to catch a lava eel.") { player -> return@optionIf getQuestStage(player, HeroesQuest.questName) >= 1 }
+                    optionBuilder.optionIf("I want to find out how to catch a lava eel.") { player -> return@optionIf getQuestStage(player, Quests.HEROES_QUEST) >= 1 }
                             .playerl("I want to find out how to catch a lava eel.")
                             .npcl("Lava eels, eh? That's a tricky one, that is. You'll need a lava-proof fishing rod. The method for making this would be to take an ordinary fishing rod, and then cover it with fire-proof blamish oil.")
                             .branch { player ->

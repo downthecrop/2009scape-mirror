@@ -6,7 +6,6 @@ import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.quest.Quest
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Graphics
@@ -14,6 +13,7 @@ import core.plugin.Initializable
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import core.tools.END_DIALOGUE
+import content.data.Quests
 
 @Initializable
 class NSTarlockDialogue(player: Player? = null) : DialoguePlugin(player) {
@@ -25,7 +25,7 @@ class NSTarlockDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val quest = player.questRepository.getQuest("Nature Spirit")
+        val quest = player.questRepository.getQuest(Quests.NATURE_SPIRIT)
         questStage = quest.getStage(player)
 
         if(questStage > 10 && !inEquipment(player, Items.GHOSTSPEAK_AMULET_552)){
@@ -234,7 +234,7 @@ class NSTarlockDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     fun setQuest(stage: Int){
-        player.questRepository.getQuest("Nature Spirit").setStage(player, stage)
+        player.questRepository.getQuest(Quests.NATURE_SPIRIT).setStage(player, stage)
     }
 
 }

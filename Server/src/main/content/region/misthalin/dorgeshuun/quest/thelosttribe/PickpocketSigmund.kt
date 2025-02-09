@@ -1,5 +1,6 @@
 package content.region.misthalin.dorgeshuun.quest.thelosttribe
 
+import content.data.Quests
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
@@ -25,7 +26,7 @@ class PickpocketSigmund : InteractionListener {
                     when(counter++){
                         0 -> player.animator.animate(Animation(881))
                         3 -> {
-                            if(player.questRepository.getQuest("Lost Tribe").getStage(player) == 47 && !player.inventory.containsItem(Item(Items.KEY_423))){
+                            if(player.questRepository.getQuest(Quests.THE_LOST_TRIBE).getStage(player) == 47 && !player.inventory.containsItem(Item(Items.KEY_423))){
                                 player.inventory.add(Item(Items.KEY_423))
                                 player.dialogueInterpreter.sendItemMessage(Items.KEY_423,"You find a small key on Sigmund.")
                             } else {

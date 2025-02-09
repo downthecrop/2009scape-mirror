@@ -1,5 +1,6 @@
 package content.region.desert.quest.thetouristrap;
 
+import content.data.Quests;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.npc.NPC;
@@ -48,7 +49,7 @@ public final class IrenaDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest(TouristTrap.NAME);
+		quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP);
 		if (quest.getStage(player) == 95 && player.getInventory().containsItem(TouristTrap.ANNA_BARREL)) {
 			npc("Hey, great you've found Ana!");
 			stage = 900;

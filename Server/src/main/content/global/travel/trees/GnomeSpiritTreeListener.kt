@@ -12,12 +12,12 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.NPCs
-import content.region.kandarin.quest.tree.TreeGnomeVillage
 import core.game.dialogue.DialogueFile
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.game.world.GameWorld.Pulser
 import core.tools.END_DIALOGUE
+import content.data.Quests
 
 class GnomeSpiritTreeListener: InteractionListener {
     val spiritTrees = intArrayOf(1317,1293,1294)
@@ -46,7 +46,7 @@ class GnomeSpiritTreeTeleportDialogue: DialogueFile() {
     private val GRAPHICS = arrayOf(Graphics(1228), Graphics(1229))
 
     fun hasQuestCompleted(player: Player): Boolean {
-        if (!isQuestComplete(player, TreeGnomeVillage.questName)) {
+        if (!isQuestComplete(player, Quests.TREE_GNOME_VILLAGE)) {
             sendDialogue(player, "The tree doesn't feel like talking.")
             stage = END_DIALOGUE
             return false

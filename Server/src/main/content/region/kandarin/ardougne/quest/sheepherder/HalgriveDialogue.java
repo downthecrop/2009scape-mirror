@@ -5,6 +5,7 @@ import core.plugin.Initializable;
 import core.game.dialogue.DialoguePlugin;
 import core.api.*;
 import org.rs09.consts.Items;
+import content.data.Quests;
 
 @Initializable
 public class HalgriveDialogue extends DialoguePlugin {
@@ -21,7 +22,7 @@ public class HalgriveDialogue extends DialoguePlugin {
 
     @Override
     public boolean open(Object... args) {
-        if(player.getQuestRepository().getStage("Sheep Herder") < 10) {
+        if(player.getQuestRepository().getStage(Quests.SHEEP_HERDER) < 10) {
             player("Hello. How are you?");
             stage = 0;
             return true;
@@ -116,7 +117,7 @@ public class HalgriveDialogue extends DialoguePlugin {
                 stage++;
                 break;
             case 105:
-                player.getQuestRepository().getQuest("Sheep Herder").start(player);
+                player.getQuestRepository().getQuest(Quests.SHEEP_HERDER).start(player);
                 player.getDialogueInterpreter().sendDialogue("The councillor gives you some poisoned sheep feed.");
                 player.getInventory().add(SheepHerder.POISON);
                 stage++;
@@ -168,7 +169,7 @@ public class HalgriveDialogue extends DialoguePlugin {
                 stage++;
                 break;
             case 207:
-                player.getQuestRepository().getQuest("Sheep Herder").finish(player);
+                player.getQuestRepository().getQuest(Quests.SHEEP_HERDER).finish(player);
                 end();
                 break;
         }

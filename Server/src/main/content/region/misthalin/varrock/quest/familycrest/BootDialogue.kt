@@ -5,6 +5,7 @@ import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
+import content.data.Quests
 
 
 @Initializable
@@ -15,7 +16,7 @@ class BootDialogue (player: Player? = null): DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
-        val qstage = player?.questRepository?.getStage("Family Crest") ?: -1
+        val qstage = player?.questRepository?.getStage(Quests.FAMILY_CREST) ?: -1
 
         if(qstage < 14 || qstage > 14){
             npc(FacialExpression.OLD_NORMAL,"Hello tall person.")
@@ -61,7 +62,7 @@ class BootDialogue (player: Player? = null): DialoguePlugin(player){
 
             21 -> npc("I don't believe it's exactly easy to get to though...").also {
                 stage = 1000
-                player.questRepository.getQuest("Family Crest").setStage(player, 15)
+                player.questRepository.getQuest(Quests.FAMILY_CREST).setStage(player, 15)
             }
             1000 -> end()
         }

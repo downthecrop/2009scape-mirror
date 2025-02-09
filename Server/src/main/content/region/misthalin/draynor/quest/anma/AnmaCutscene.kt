@@ -8,6 +8,7 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Direction
 import org.rs09.consts.Animations
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 class AnmaCutscene(player: Player) : Cutscene(player) {
     override fun setup() {
@@ -182,7 +183,7 @@ class AnmaCutscene(player: Player) : Cutscene(player) {
             }
             32 -> {
                 end {
-                    setQuestStage(player, "Animal Magnetism", 20)
+                    setQuestStage(player, Quests.ANIMAL_MAGNETISM, 20)
                 }
             }
         }

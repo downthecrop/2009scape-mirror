@@ -14,6 +14,7 @@ import core.tools.END_DIALOGUE
 import org.rs09.consts.Components
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 class ShiloCart : InteractionListener {
 
@@ -67,7 +68,7 @@ class ShiloCart : InteractionListener {
 
 class CartQuickPay : DialogueFile(){
     override fun handle(interfaceId: Int, buttonId: Int) {
-        if (!hasRequirement(player!!, "Shilo Village")) return;
+        if (!hasRequirement(player!!, Quests.SHILO_VILLAGE)) return;
         val shilo = npc?.id == 510;
         when (stage) {
             0 -> if(inInventory(player!!,Items.COINS_995,10)){
@@ -103,7 +104,7 @@ class CartQuickPay : DialogueFile(){
 
 class CartTravelDialogue : DialogueFile(){
     override fun handle(componentID: Int, buttonID: Int) {
-        if (!hasRequirement(player!!, "Shilo Village")) return;
+        if (!hasRequirement(player!!, Quests.SHILO_VILLAGE)) return;
         val shilo = npc?.id == 510;
         when (stage) {
             0 -> npcl("I am offering a cart ride to " + (if (shilo) "Shilo Village" else "Brimhaven") + " if you're interested? It will cost 10 gold coins. Is that Ok?").also { stage++ }

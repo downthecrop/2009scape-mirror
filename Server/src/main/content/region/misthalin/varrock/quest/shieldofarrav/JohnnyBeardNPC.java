@@ -6,6 +6,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
 import core.game.world.map.Location;
+import content.data.Quests;
 
 /**
  * Represents the npc to handle Johnny the beard npc.
@@ -45,7 +46,7 @@ public final class JohnnyBeardNPC extends AbstractNPC {
 		super.finalizeDeath(killer);
 		if (killer instanceof Player) {
 			final Player p = ((Player) killer);
-			final Quest quest = p.getQuestRepository().getQuest("Shield of Arrav");
+			final Quest quest = p.getQuestRepository().getQuest(Quests.SHIELD_OF_ARRAV);
 			if (quest.getStage(p) == 60 && ShieldofArrav.isPhoenixMission(p) && !p.getInventory().containsItem(ShieldofArrav.INTEL_REPORT) && !p.getBank().containsItem(ShieldofArrav.INTEL_REPORT)) {
 				GroundItemManager.create(ShieldofArrav.INTEL_REPORT, getLocation(), p);
 			}

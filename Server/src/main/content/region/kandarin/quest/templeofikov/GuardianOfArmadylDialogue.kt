@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.templeofikov
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
@@ -143,8 +144,8 @@ class GuardianOfArmadylDialogueFile : DialogueBuilderFile() {
                                         .item(Items.ARMADYL_PENDANT_87, "The guardian has given you a pendant.")
                                         .endWith { _, player ->
                                             setAttribute(player, TempleOfIkov.attributeChosenEnding, 1)
-                                            if (getQuestStage(player, TempleOfIkov.questName) == 5) {
-                                                setQuestStage(player, TempleOfIkov.questName, 6)
+                                            if (getQuestStage(player, Quests.TEMPLE_OF_IKOV) == 5) {
+                                                setQuestStage(player, Quests.TEMPLE_OF_IKOV, 6)
                                             }
                                             addItemOrDrop(player, Items.ARMADYL_PENDANT_87)
                                         }

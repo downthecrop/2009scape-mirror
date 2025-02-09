@@ -15,6 +15,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 
 import static core.api.ContentAPIKt.hasRequirement;
+import content.data.Quests;
 
 /**
  * Handles a tunnel shortcut.
@@ -73,7 +74,7 @@ public class TunnelShortcut extends AgilityShortcut {
 	@Override
 	public void run(final Player player, Scenery object, String option, boolean failed) {
                 if (object.getId() == 14922) {
-                    if (!hasRequirement(player, "Swan Song"))
+                    if (!hasRequirement(player, Quests.SWAN_SONG))
                         return;
                 }
 		player.lock(6);

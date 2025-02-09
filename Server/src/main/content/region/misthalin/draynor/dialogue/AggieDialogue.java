@@ -9,6 +9,7 @@ import core.game.node.item.Item;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.game.world.update.flag.context.Animation;
+import content.data.Quests;
 
 /**
  * Represents the dialogue plugin used for the aggie npc.
@@ -115,7 +116,7 @@ public final class AggieDialogue extends DialoguePlugin {
 			stage = 42;
 			return true;
 		}
-		quest = player.getQuestRepository().getQuest("Prince Ali Rescue");
+		quest = player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE);
 		npc("What can I help you with?");
 		stage = 0;
 		return true;

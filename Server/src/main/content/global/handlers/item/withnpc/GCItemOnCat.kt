@@ -10,27 +10,27 @@ import org.rs09.consts.NPCs
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.game.world.GameWorld.Pulser
+import content.data.Quests
 
 class GCItemOnCat : InteractionListener {
     override fun defineListeners() {
-        val GERTCAT = "Gertrude's Cat"
         val BEND_DOWN = 827
 
         onUseWith(IntType.NPC, Items.BUCKET_OF_MILK_1927, NPCs.GERTRUDES_CAT_2997) { player, used, with ->
-            if(getQuestStage(player, GERTCAT) == 20 && removeItem(player, used.asItem())){
+            if(getQuestStage(player, Quests.GERTRUDES_CAT) == 20 && removeItem(player, used.asItem())){
                 addItem(player, Items.BUCKET_1925)
                 animate(player, BEND_DOWN) //bend down
                 sendChat(with.asNpc(), "Mew!")
-                setQuestStage(player, GERTCAT, 30)
+                setQuestStage(player, Quests.GERTRUDES_CAT, 30)
             }
             return@onUseWith true
         }
 
         onUseWith(IntType.NPC, Items.DOOGLE_SARDINE_1552, NPCs.GERTRUDES_CAT_2997){ player, used, with ->
-            if(getQuestStage(player, GERTCAT) == 30 && removeItem(player, used.asItem())){
+            if(getQuestStage(player, Quests.GERTRUDES_CAT) == 30 && removeItem(player, used.asItem())){
                 animate(player, BEND_DOWN)
                 sendChat(with.asNpc(), "Mew!")
-                setQuestStage(player, GERTCAT, 40)
+                setQuestStage(player, Quests.GERTRUDES_CAT, 40)
             }
             return@onUseWith true
         }
@@ -42,7 +42,7 @@ class GCItemOnCat : InteractionListener {
 
         onUseWith(IntType.NPC, Items.THREE_LITTLE_KITTENS_13236, NPCs.GERTRUDES_CAT_2997){ player, used, with ->
             if(removeItem(player, used.asItem())){
-                setQuestStage(player, GERTCAT, 60)
+                setQuestStage(player, Quests.GERTRUDES_CAT, 60)
                 //below copied verbatim from original, I don't like it.
                 Pulser.submit(object : Pulse(1) {
                     var count = 0

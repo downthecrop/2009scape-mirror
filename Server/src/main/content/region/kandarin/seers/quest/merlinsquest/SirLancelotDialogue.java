@@ -4,6 +4,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import content.data.Quests;
 
 /**
  * Represents the dialogue plugin used for king arthur.
@@ -42,7 +43,7 @@ public final class SirLancelotDialogue extends DialoguePlugin {
 		npc = (NPC) args[0];
 		npc("Greetings! I am Sir Lancelot, the greatest Knight in the", "land! What do you want?");
 		
-		quest = player.getQuestRepository().getQuest("Merlin's Crystal");
+		quest = player.getQuestRepository().getQuest(Quests.MERLINS_CRYSTAL);
 		stage = 0;
 		return true;
 	}

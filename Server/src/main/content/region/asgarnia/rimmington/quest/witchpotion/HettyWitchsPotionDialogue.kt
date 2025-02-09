@@ -1,5 +1,6 @@
 package content.region.asgarnia.rimmington.quest.witchpotion
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
@@ -30,8 +31,8 @@ class HettyWitchsPotionDialogue(private val dStage: Int) : DialogueFile() {
             3 -> npcl(FacialExpression.NEUTRAL, "You need an eye of newt, a rat's tail, an onion... Oh and a piece of burnt meat.").also { stage++ }
             4 -> {
                 playerl(FacialExpression.HAPPY, "Great, I'll go and get them.")
-                startQuest(player, WitchsPotion.QUEST_NAME)
-                setQuestStage(player, WitchsPotion.QUEST_NAME, 20)
+                startQuest(player, Quests.WITCHS_POTION)
+                setQuestStage(player, Quests.WITCHS_POTION, 20)
                 stage = END_DIALOGUE
             }
         }
@@ -67,7 +68,7 @@ class HettyWitchsPotionDialogue(private val dStage: Int) : DialogueFile() {
                         removeItem(player, Item(Items.BURNT_MEAT_2146, 1)) &&
                         removeItem(player, Item(Items.EYE_OF_NEWT_221, 1))) {
                     npcl(FacialExpression.HAPPY, "Ok, now drink from the cauldron.")
-                    setQuestStage(player, WitchsPotion.QUEST_NAME, 40)
+                    setQuestStage(player, Quests.WITCHS_POTION, 40)
                     stage = END_DIALOGUE
                 }
             }

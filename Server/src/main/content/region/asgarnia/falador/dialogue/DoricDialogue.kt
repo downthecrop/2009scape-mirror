@@ -16,12 +16,13 @@ import core.game.world.map.Location
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 @Initializable
 class DoricDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val qStage = getQuestStage(player, "Doric's Quest")
+        val qStage = getQuestStage(player, Quests.DORICS_QUEST)
         if(qStage == 0) {
             npcl(FacialExpression.OLD_NORMAL, "Hello traveller, what brings you to my humble smithy?").also { stage = 0 }
         } else if(qStage in 1..99) {

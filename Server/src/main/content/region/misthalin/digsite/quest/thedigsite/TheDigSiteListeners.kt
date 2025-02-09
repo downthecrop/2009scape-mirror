@@ -1,5 +1,6 @@
 package content.region.misthalin.digsite.quest.thedigsite
 
+import content.data.Quests
 import content.global.skill.thieving.ThievingListeners
 import core.api.*
 import core.api.utils.PlayerCamera
@@ -162,7 +163,7 @@ class TheDigSiteListeners : InteractionListener {
                 return@on true
             }
             sendMessage(player, "You attempt to pick the workman's pocket...")
-            if (getQuestStage(player, TheDigSite.questName) == 3) {
+            if (getQuestStage(player, Quests.THE_DIG_SITE) == 3) {
                 player.animator.animate(ThievingListeners.PICKPOCKET_ANIM)
                 val rollOutcome = ThievingListeners.pickpocketRoll(player, 84.0, 240.0, workmanPickpocketingTable)
                 if (rollOutcome != null) {
@@ -363,7 +364,7 @@ class TheDigSiteListeners : InteractionListener {
             val level3DigRight = ZoneBorders(3370, 3437, 3377, 3442)
             val level3DigLeft = ZoneBorders(3350, 3404, 3357, 3412)
             if (level3DigRight.insideBorder(player.location) || level3DigLeft.insideBorder(player.location)) {
-                if (getQuestStage(player, TheDigSite.questName) >= 6) {
+                if (getQuestStage(player, Quests.THE_DIG_SITE) >= 6) {
                     queueScript(player, 0, QueueStrength.NORMAL) { stage: Int ->
                         when (stage) {
                             0 -> {
@@ -392,7 +393,7 @@ class TheDigSiteListeners : InteractionListener {
 
             val level2Dig = ZoneBorders(3350, 3424, 3363, 3430)
             if (level2Dig.insideBorder(player.location)) {
-                if (getQuestStage(player, TheDigSite.questName) >= 5) {
+                if (getQuestStage(player, Quests.THE_DIG_SITE) >= 5) {
                     queueScript(player, 0, QueueStrength.NORMAL) { stage: Int ->
                         when (stage) {
                             0 -> {
@@ -422,7 +423,7 @@ class TheDigSiteListeners : InteractionListener {
             val level1DigCentre = ZoneBorders(3360, 3402, 3363, 3414)
             val level1DigRight = ZoneBorders(3367, 3403, 3372, 3414)
             if (level1DigCentre.insideBorder(player.location) || level1DigRight.insideBorder(player.location)) {
-                if (getQuestStage(player, TheDigSite.questName) >= 4) {
+                if (getQuestStage(player, Quests.THE_DIG_SITE) >= 4) {
                     queueScript(player, 0, QueueStrength.NORMAL) { stage: Int ->
                         when (stage) {
                             0 -> {
@@ -452,7 +453,7 @@ class TheDigSiteListeners : InteractionListener {
             val trainingDigLeft = ZoneBorders(3352, 3396, 3357, 3400)
             val trainingDigRight = ZoneBorders(3367, 3397, 3372, 3400)
             if (trainingDigLeft.insideBorder(player.location) || trainingDigRight.insideBorder(player.location)) {
-                if (getQuestStage(player, TheDigSite.questName) >= 3) {
+                if (getQuestStage(player, Quests.THE_DIG_SITE) >= 3) {
                     queueScript(player, 0, QueueStrength.NORMAL) { stage: Int ->
                         when (stage) {
                             0 -> {
@@ -483,12 +484,12 @@ class TheDigSiteListeners : InteractionListener {
 
         // 8: North East Winch goes to Doug Deeping
         on(Scenery.WINCH_2350, SCENERY, "operate") { player, _ ->
-            if (getQuestStage(player, TheDigSite.questName) >= 11) {
+            if (getQuestStage(player, Quests.THE_DIG_SITE) >= 11) {
                 sendMessage(player, "You try to climb down the rope...")
                 sendMessage(player, "You lower yourself into the shaft...")
                 teleport(player, Location(3369, 9763))
                 sendMessage(player, "You find yourself in a cavern...")
-            } else if (getQuestStage(player, TheDigSite.questName) >= 8) {
+            } else if (getQuestStage(player, Quests.THE_DIG_SITE) >= 8) {
                 if (getAttribute(player, TheDigSite.attributeRopeNorthEastWinch, false)) {
                     sendMessage(player, "You try to climb down the rope...")
                     sendMessage(player, "You lower yourself into the shaft...")
@@ -520,7 +521,7 @@ class TheDigSiteListeners : InteractionListener {
         // 8: Tie rope to winch
         onUseWith(IntType.SCENERY, Items.ROPE_954, Scenery.WINCH_2350) { player, used, with ->
             if (removeItem(player, used)) {
-                if (getQuestStage(player, TheDigSite.questName) >= 8) {
+                if (getQuestStage(player, Quests.THE_DIG_SITE) >= 8) {
                     setAttribute(player, TheDigSite.attributeRopeNorthEastWinch, true)
                     sendMessage(player, "You tie the rope to the bucket.")
                 } else {
@@ -545,12 +546,12 @@ class TheDigSiteListeners : InteractionListener {
 
         // 8: West Winch goes to Skeletons, Explosion and Stone Tablet
         on(Scenery.WINCH_2351, SCENERY, "operate") { player, _ ->
-            if (getQuestStage(player, TheDigSite.questName) >= 11) {
+            if (getQuestStage(player, Quests.THE_DIG_SITE) >= 11) {
                 sendMessage(player, "You try to climb down the rope...")
                 sendMessage(player, "You lower yourself into the shaft...")
                 teleport(player, Location(3352, 9753))
                 sendMessage(player, "You find yourself in a cavern...")
-            } else if (getQuestStage(player, TheDigSite.questName) >= 8) {
+            } else if (getQuestStage(player, Quests.THE_DIG_SITE) >= 8) {
                 if (getAttribute(player, TheDigSite.attributeRopeWestWinch, false)) {
                     sendMessage(player, "You try to climb down the rope...")
                     sendMessage(player, "You lower yourself into the shaft...")
@@ -581,7 +582,7 @@ class TheDigSiteListeners : InteractionListener {
         // 8: Tie rope to winch
         onUseWith(IntType.SCENERY, Items.ROPE_954, Scenery.WINCH_2351) { player, used, with ->
             if (removeItem(player, used)) {
-                if (getQuestStage(player, TheDigSite.questName) >= 8) {
+                if (getQuestStage(player, Quests.THE_DIG_SITE) >= 8) {
                     setAttribute(player, TheDigSite.attributeRopeWestWinch, true)
                     sendMessage(player, "You tie the rope to the bucket.")
                 } else {
@@ -614,14 +615,14 @@ class TheDigSiteListeners : InteractionListener {
 
         // 8: Investigating brick. Transitions to stage 9.
         on(Scenery.BRICK_2362, SCENERY, "search") { player, _ ->
-            if(getQuestStage(player, TheDigSite.questName) == 8) {
+            if(getQuestStage(player, Quests.THE_DIG_SITE) == 8) {
                 sendPlayerDialogue(player, "Hmmm, there's a room past these bricks. If I could move them out of the way then I could find out what's inside. Maybe there's someone around here who can help...", FacialExpression.THINKING)
-                setQuestStage(player, TheDigSite.questName, 9)
+                setQuestStage(player, Quests.THE_DIG_SITE, 9)
             }
-            if(getQuestStage(player, TheDigSite.questName) == 9) {
+            if(getQuestStage(player, Quests.THE_DIG_SITE) == 9) {
                 sendPlayerDialogue(player, "Hmmm, there's a room past these bricks. If I could move them out of the way then I could find out what's inside. Maybe there's someone around here who can help...", FacialExpression.THINKING)
             }
-            if(getQuestStage(player, TheDigSite.questName) == 10) {
+            if(getQuestStage(player, Quests.THE_DIG_SITE) == 10) {
                 sendPlayerDialogue(player, "The brick is covered with the chemicals I made.", FacialExpression.THINKING)
             }
             return@on true
@@ -749,12 +750,12 @@ class TheDigSiteListeners : InteractionListener {
 
         // 8/9: Pouring CHEMICAL_COMPOUND_707 on brick. Transitions to stage 10.
         onUseWith(SCENERY, Items.CHEMICAL_COMPOUND_707, Scenery.BRICK_2362) { player, used, with ->
-            if (getQuestStage(player, TheDigSite.questName) == 9) {
+            if (getQuestStage(player, Quests.THE_DIG_SITE) == 9) {
                 if(removeItem(player, used)) {
                     addItemOrDrop(player, Items.VIAL_229)
                     sendMessage(player, "You pour the compound over the bricks...")
                     sendPlayerDialogue(player, "Ok, the mixture is all over the bricks. I need some way to ignite this compound.", FacialExpression.THINKING)
-                    setQuestStage(player, TheDigSite.questName, 10)
+                    setQuestStage(player, Quests.THE_DIG_SITE, 10)
                 }
             }
             return@onUseWith true
@@ -762,8 +763,8 @@ class TheDigSiteListeners : InteractionListener {
 
         // 10: Lighting brick. Transitions to stage 11.
         onUseWith(SCENERY, Items.TINDERBOX_590, Scenery.BRICK_2362) { player, used, with ->
-            if(getQuestStage(player, TheDigSite.questName) == 10) {
-                setQuestStage(player, TheDigSite.questName, 11)
+            if(getQuestStage(player, Quests.THE_DIG_SITE) == 10) {
+                setQuestStage(player, Quests.THE_DIG_SITE, 11)
                 lock(player, 15)
                 queueScript(player, 0, QueueStrength.NORMAL) { stage: Int ->
                     when (stage) {

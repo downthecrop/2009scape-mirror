@@ -6,6 +6,7 @@ import core.game.dialogue.FacialExpression
 import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 @Initializable
 //Disabled because the quest isn't done yet.
@@ -27,12 +28,12 @@ class AskeladdenDialogue(player: Player? = null) : DialoguePlugin(player) {
                 stage = 35
                 return true
             }
-            else if(player.questRepository.isComplete("Fremennik Trials")){
+            else if(player.questRepository.isComplete(Quests.THE_FREMENNIK_TRIALS)){
                 playerl(FacialExpression.HAPPY,"Hello again Askeladden.")
                 stage = 40
                 return true
             }
-            else if (it.questRepository.getStage("Fremennik Trials") > 0) {
+            else if (it.questRepository.getStage(Quests.THE_FREMENNIK_TRIALS) > 0) {
                 player("Hello there.")
                 stage = 0
                 return true

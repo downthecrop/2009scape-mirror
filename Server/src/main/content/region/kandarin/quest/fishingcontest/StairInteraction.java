@@ -11,12 +11,13 @@ import core.plugin.Plugin;
 import core.game.interaction.PluginInteraction;
 import core.game.interaction.PluginInteractionManager;
 import core.game.world.repository.Repository;
+import content.data.Quests;
 
 @Initializable
 public class StairInteraction extends PluginInteraction {
     @Override
     public boolean handle(Player player, Node node) {
-        if(!player.getQuestRepository().isComplete("Fishing Contest")) {
+        if(!player.getQuestRepository().isComplete(Quests.FISHING_CONTEST)) {
             Scenery object = node.asScenery();
             switch (object.getId()) {
                 case 57:

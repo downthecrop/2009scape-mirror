@@ -10,6 +10,7 @@ import core.plugin.Initializable;
 import org.rs09.consts.Items;
 
 import java.util.HashMap;
+import content.data.Quests;
 
 @Initializable
 public class SheepHerder extends Quest {
@@ -35,7 +36,7 @@ public class SheepHerder extends Quest {
         boneMap.put(BLUE_SHEEP,BLUE_SHEEP_BONES);
     }
 
-    public SheepHerder(){super("Sheep Herder",113,112,4,60,0,1,3);}
+    public SheepHerder(){super(Quests.SHEEP_HERDER,113,112,4,60,0,1,3);}
 
     @Override
     public void drawJournal(Player player, int stage) {

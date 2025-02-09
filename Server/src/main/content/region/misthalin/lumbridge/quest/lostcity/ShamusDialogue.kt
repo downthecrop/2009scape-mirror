@@ -5,6 +5,7 @@ import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import core.api.getQuestStage
 import core.api.setQuestStage
+import content.data.Quests
 
 /**
  * ShamusDialogue, to handle the dialogue of Shamus the Leprechaun from the Lost City quest
@@ -13,9 +14,6 @@ import core.api.setQuestStage
  */
 @Initializable
 class ShamusDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
-
-    val quest = "Lost City"
-
     override fun open(vararg args: Any?): Boolean {
         npcl(core.game.dialogue.FacialExpression.ANNOYED,"Ay yer big elephant! Yer've caught me, to be sure! What would an elephant like yer be wanting wid ol' Shamus then?")
         stage = 0
@@ -23,7 +21,7 @@ class ShamusDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when(getQuestStage(player,quest)) {
+        when(getQuestStage(player, Quests.LOST_CITY)) {
             0 -> when(stage++) {
                 0 -> playerl(core.game.dialogue.FacialExpression.THINKING, "I'm not sure.")
                 1 -> npcl(core.game.dialogue.FacialExpression.ANNOYED,"Well you'll have to be catchin' me again when yer are, elephant!")
@@ -45,7 +43,7 @@ class ShamusDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
                 12 -> end().also {
                     ShamusTreeListener.disappearShamus()
                     sendDialogue("The leprechaun magically disappears.")
-                    setQuestStage(player,quest,20)
+                    setQuestStage(player, Quests.LOST_CITY, 20)
                 }
             }
             else -> when(stage++) {

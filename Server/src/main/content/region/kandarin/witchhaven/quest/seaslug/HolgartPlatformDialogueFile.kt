@@ -1,13 +1,13 @@
 package content.region.kandarin.witchhaven.quest.seaslug
 
-import core.api.*
+import content.data.Quests
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
 import core.game.dialogue.FacialExpression
 
 class HolgartPlatformDialogueFile : DialogueBuilderFile() {
     override fun create(b: DialogueBuilder) {
-        b.onQuestStages(SeaSlug.questName, 0,1,2,3,5,6,7,8,9,10,100)
+        b.onQuestStages(Quests.SEA_SLUG, 0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 100)
                 .playerl(FacialExpression.FRIENDLY, "Hey, Holgart.")
                 .npcl("Have you had enough of this place yet? It's really starting to scare me.")
                 .options().let { optionBuilder ->
@@ -20,7 +20,7 @@ class HolgartPlatformDialogueFile : DialogueBuilderFile() {
                             .end()
                 }
 
-        b.onQuestStages(SeaSlug.questName, 4)
+        b.onQuestStages(Quests.SEA_SLUG, 4)
                 .playerl("Holgart, something strange is going on here.")
                 .npcl("You're telling me, none of the sailors seem to remember who I am.")
                 .playerl("Apparently Kennith's father left for help a couple of days ago.")
@@ -29,7 +29,7 @@ class HolgartPlatformDialogueFile : DialogueBuilderFile() {
                     SeaSlugListeners.seaslugBoatTravel(player, 2)
                 }
 
-        b.onQuestStages(SeaSlug.questName, 11)
+        b.onQuestStages(Quests.SEA_SLUG, 11)
                 .playerl("Did you get the kid back to shore?")
                 .npcl("Yes, he's safe and sound with his parents. Your turn to return to land now adventurer.")
                 .playerl("Looking forward to it.")

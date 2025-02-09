@@ -10,6 +10,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager.TeleportType
 import core.game.world.map.Location
 import org.rs09.consts.Items
+import content.data.Quests
 
 /**
  * Handles interactions with fairy rings
@@ -50,7 +51,7 @@ class FairyRingPlugin : InteractionListener {
     }
 
     private fun fairyMagic(player: Player) : Boolean {
-        if (!hasRequirement(player, "Fairytale I - Growing Pains")) { // should be converted to a FTP2 stage requirement once FTP2 is implemented
+        if (!hasRequirement(player, Quests.FAIRYTALE_I_GROWING_PAINS)) { // should be converted to a FTP2 stage requirement once FTP2 is implemented
             player.sendMessage("The fairy ring is inert.")
             return false
         }

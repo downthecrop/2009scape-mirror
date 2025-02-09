@@ -13,6 +13,7 @@ import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import content.data.Quests;
 
 /**
  * Represents the plugin used to handle prince ali rescue quest interaction nodes.
@@ -35,7 +36,7 @@ public class PrinceAliRescuePlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final Quest quest = player.getQuestRepository().getQuest("Prince Ali Rescue");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE);
 		final int id = node instanceof Scenery ? ((Scenery) node).getId() : node instanceof NPC ? ((NPC) node).getId() : 0;
 		switch (id) {
 		case 925:

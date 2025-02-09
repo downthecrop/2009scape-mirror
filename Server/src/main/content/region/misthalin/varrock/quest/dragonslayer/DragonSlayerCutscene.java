@@ -28,6 +28,7 @@ import core.net.packet.out.MinimapState;
 
 
 import static core.api.ContentAPIKt.*;
+import content.data.Quests;
 
 /**
  * Represents the dragon slayer cutscene.
@@ -103,7 +104,7 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
 		player.animate(ANIMATION);
 		player.getDialogueInterpreter().close();
 		player.getDialogueInterpreter().sendDialogue("You are knocked unconscious and later awake on an ash-strewn", "beach.");
-		player.getQuestRepository().getQuest("Dragon Slayer").setStage(player, 40);
+		player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER).setStage(player, 40);
 		player.getSavedData().getQuestData().setDragonSlayerAttribute("repaired", false);
                 setVarp(player, 177, 8257540);
                 setVarp(player, 176, 8);
@@ -292,7 +293,7 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
 		@Override
 		public boolean open(Object... args) {
 			npc = (NPC) args[0];
-			quest = player.getQuestRepository().getQuest("Dragon Slayer");
+			quest = player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER);
 			if (args.length > 1) {
 				cutscene = ((DragonSlayerCutscene) args[1]);
 				npc("Ah it's good to feel that salt spray on my face once", "again!");

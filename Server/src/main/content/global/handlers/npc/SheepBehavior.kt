@@ -17,6 +17,7 @@ import org.rs09.consts.NPCs
 import org.rs09.consts.Sounds
 import core.game.world.map.Location
 import core.game.world.map.Direction
+import content.data.Quests
 
 private val sheepIds = intArrayOf(
         NPCs.SHEEP_42,
@@ -74,7 +75,7 @@ class SheepBehavior : NPCBehavior(*sheepIds), InteractionListener {
             val sheep = node as NPC
             sheep.faceTemporary(player, 1)
             if (sheep.id == NPCs.SHEEP_3579) {
-                if (player.questRepository.getQuest("Sheep Shearer").isStarted(player)) {
+                if (player.questRepository.getQuest(Quests.SHEEP_SHEARER).isStarted(player)) {
                     setAttribute(player, ATTR_IS_PENGUIN_SHEEP_SHEARED, true)
                 }
                 animate(player, Animation(893))

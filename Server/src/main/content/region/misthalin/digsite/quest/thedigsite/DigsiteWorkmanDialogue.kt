@@ -1,5 +1,6 @@
 package content.region.misthalin.digsite.quest.thedigsite
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.*
 import core.game.interaction.IntType
@@ -64,8 +65,8 @@ class DigsiteWorkmanDialogueFile : DialogueBuilderFile() {
                 .npc(FacialExpression.FRIENDLY, "I give permission... blah de blah... err. Okay, that's all in", "order, you may use the mineshaft now. I'll hang onto", "this scroll, shall I?")
                 .endWith { _, player ->
                     removeItem(player, Items.INVITATION_LETTER_696)
-                    if(getQuestStage(player, TheDigSite.questName) == 7) {
-                        setQuestStage(player, TheDigSite.questName, 8)
+                    if(getQuestStage(player, Quests.THE_DIG_SITE) == 7) {
+                        setQuestStage(player, Quests.THE_DIG_SITE, 8)
                     }
                 }
     }

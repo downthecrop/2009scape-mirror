@@ -100,7 +100,7 @@ public enum GodBook {
 	 * @param page the page.
 	 */
 	public void insertPage(Player player, Item book, Item page) {
-                if (!hasRequirement(player, "Horror from the Deep"))
+                if (!hasRequirement(player, Quests.HORROR_FROM_THE_DEEP))
                         return;
 		if (hasPage(player, book, page)) {
 			player.sendMessage("The book already has that page.");

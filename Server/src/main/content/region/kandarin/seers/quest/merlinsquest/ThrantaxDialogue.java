@@ -6,6 +6,7 @@ import core.game.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
+import content.data.Quests;
 
 /**
  * Handles the thrantax dialogue.
@@ -41,7 +42,7 @@ public class ThrantaxDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
-		final Quest quest = player.getQuestRepository().getQuest("Merlin's Crystal");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.MERLINS_CRYSTAL);
 		switch (stage) {
 		case 0:
 			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Now what were those magic words again?");

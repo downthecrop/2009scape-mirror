@@ -15,6 +15,7 @@ import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import org.rs09.consts.NPCs;
+import content.data.Quests;
 
 /**
  * Represents the quest node plugin handler.
@@ -93,7 +94,7 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final Quest quest = player.getQuestRepository().getQuest("Priest in Peril");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.PRIEST_IN_PERIL);
 		int id = node instanceof Scenery ? ((Scenery) node).getId() : ((NPC) node).getId();
 		switch (option) {
 		case "study":
@@ -194,7 +195,7 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 			break;
 		case 3443:
 			/** the barrier. */
-			if (!player.getQuestRepository().isComplete("Priest in Peril")) {
+			if (!player.getQuestRepository().isComplete(Quests.PRIEST_IN_PERIL)) {
 				player.getPacketDispatch().sendMessage("A magic force prevents you from passing through.");
 			} else {
 				player.getProperties().setTeleportLocation(Location.create(3425, 3485, 0));

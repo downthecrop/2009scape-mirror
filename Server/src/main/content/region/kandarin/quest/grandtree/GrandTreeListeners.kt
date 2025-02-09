@@ -1,6 +1,5 @@
 package content.region.kandarin.quest.grandtree
 
-import content.region.kandarin.quest.grandtree.TheGrandTree.Companion.questName
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -15,6 +14,7 @@ import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import org.rs09.consts.Sounds
+import content.data.Quests
 
 class GrandTreeListeners: InteractionListener {
 
@@ -90,7 +90,7 @@ class GrandTreeListeners: InteractionListener {
         }
 
         on(2444, IntType.SCENERY, "open"){ player, node ->
-            if(node.location == Location(2487,3464,2) && !isQuestComplete(player, questName)){
+            if(node.location == Location(2487,3464,2) && !isQuestComplete(player, Quests.THE_GRAND_TREE)){
                 if(getAttribute(player, "/save:grandtree:twig1", false) &&
                     getAttribute(player, "/save:grandtree:twig2", false) &&
                     getAttribute(player, "/save:grandtree:twig3", false) &&
@@ -103,7 +103,10 @@ class GrandTreeListeners: InteractionListener {
         }
 
         on(2446, IntType.SCENERY, "open"){ player, node ->
-            if(node.location == Location(2463, 3497, 0) && isQuestComplete(player!!, questName)){
+            if(node.location == Location(2463, 3497, 0) && isQuestComplete(
+                    player!!,
+                    Quests.THE_GRAND_TREE
+                )){
                 player.animator.animate(Animation(828))
                 // Go to tunnels
                 teleport(player, Location(2464, 9897, 0))
@@ -115,8 +118,8 @@ class GrandTreeListeners: InteractionListener {
             SceneryBuilder.replace(Scenery(2436, Location(2482,3462,1)),Scenery(2437, Location(2482,3462,1)),2)
             sendDialogue(player,"You found a scroll!")
             addItemOrDrop(player, Items.INVASION_PLANS_794)
-            if(getQuestStage(player!!, questName) < 60)
-                setQuestStage(player!!, questName, 60)
+            if(getQuestStage(player!!, Quests.THE_GRAND_TREE) < 60)
+                setQuestStage(player!!, Quests.THE_GRAND_TREE, 60)
             return@onUseWith true
         }
         onUseWith(IntType.SCENERY, Items.TWIGS_789, 2440){ player, used, with ->
@@ -165,7 +168,7 @@ class GrandTreeListeners: InteractionListener {
             return@on true
         }
         on(2435, IntType.SCENERY, "search"){ player, _ ->
-            if(getQuestStage(player, questName) == 47){
+            if(getQuestStage(player, Quests.THE_GRAND_TREE) == 47){
                 sendItemDialogue(player, Items.GLOUGHS_JOURNAL_785,"You've found Glough's Journal!")
                 addItemOrDrop(player, Items.GLOUGHS_JOURNAL_785)
             }
@@ -174,7 +177,7 @@ class GrandTreeListeners: InteractionListener {
 
         // Roots for Daconia rock
         on(32319, IntType.SCENERY, "search"){ player, node ->
-            if(getQuestStage(player, questName) < 99 || player.hasItem(Item(Items.DACONIA_ROCK_793))){ return@on true; }
+            if(getQuestStage(player, Quests.THE_GRAND_TREE) < 99 || player.hasItem(Item(Items.DACONIA_ROCK_793))){ return@on true; }
             // RNG for which root the rock is under
             if(node.location == roots[getAttribute(player,"grandtree:rock",1)]){
                 sendItemDialogue(player, Item(Items.DACONIA_ROCK_793), "You've found a Daconia rock!")
@@ -192,7 +195,7 @@ class GrandTreeListeners: InteractionListener {
             return@on true
         }
         on(2451, IntType.SCENERY, "push"){ player, roots ->
-            if (hasRequirement(player, "The Grand Tree")) {
+            if (hasRequirement(player, Quests.THE_GRAND_TREE)) {
                 val outsideMine = player.location == Location.create(2467, 9903, 0) || player.location == Location.create(2468, 9903, 0)
                 if(outsideMine) {
                     forceMove(player, player.location, player.location.transform(0, 2, 0), 25, 60, null, 819)

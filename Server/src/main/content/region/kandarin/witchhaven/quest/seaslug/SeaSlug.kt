@@ -1,6 +1,6 @@
 package content.region.kandarin.witchhaven.quest.seaslug
 
-import content.region.morytania.quest.creatureoffenkenstrain.CreatureOfFenkenstrain
+import content.data.Quests
 import core.api.*
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.player.Player
@@ -22,10 +22,9 @@ import org.rs09.consts.Items
  * https://www.youtube.com/watch?v=VR91Rbyuou4 (This has many other unvisited paths)
  */
 @Initializable
-class SeaSlug : Quest("Sea Slug", 109, 108, 1,159, 0, 1, 12) {
+class SeaSlug : Quest(Quests.SEA_SLUG, 109, 108, 1,159, 0, 1, 12) {
 
     companion object {
-        const val questName = "Sea Slug"
         const val questVarp = 159
     }
     override fun drawJournal(player: Player, stage: Int) {
@@ -33,7 +32,7 @@ class SeaSlug : Quest("Sea Slug", 109, 108, 1,159, 0, 1, 12) {
         var line = 12
         var stage = getStage(player)
 
-        var started = getQuestStage(player, questName) > 0
+        var started = getQuestStage(player, Quests.SEA_SLUG) > 0
 
         if (!started) {
             line(player, "I can start this quest by speaking to !!Caroline?? who is !!East??", line++, false)
@@ -174,10 +173,10 @@ class SeaSlug : Quest("Sea Slug", 109, 108, 1,159, 0, 1, 12) {
 
     override fun updateVarps(player: Player) {
         // The quest stages are perfectly aligned with the varp since the varp controls npcs and sceneries
-        if (getQuestStage(player, questName) >= 12) {
+        if (getQuestStage(player, Quests.SEA_SLUG) >= 12) {
             setVarp(player, questVarp, 12, true) // Except for stage 100 which is varp set to 12 obviously.
         } else {
-            setVarp(player, questVarp, getQuestStage(player, questName), true)
+            setVarp(player, questVarp, getQuestStage(player, Quests.SEA_SLUG), true)
         }
     }
 

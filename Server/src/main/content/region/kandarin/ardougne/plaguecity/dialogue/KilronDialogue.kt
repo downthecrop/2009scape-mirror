@@ -7,13 +7,14 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 @Initializable
 class KilronDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (player.questRepository.getQuest("Plague City").isCompleted(player)){
+        if (player.questRepository.getQuest(Quests.PLAGUE_CITY).isCompleted(player)){
             npcl(FacialExpression.FRIENDLY, "Looks like you won't be needing the rope ladder any more, adventurer. I heard it was you who started the revolution and freed West Ardougne!").also { stage = END_DIALOGUE }
         } else {
             playerl(FacialExpression.FRIENDLY, "Hello there.")

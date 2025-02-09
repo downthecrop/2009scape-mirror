@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.templeofikov
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
@@ -26,7 +27,7 @@ class LucienDialogue (player: Player? = null) : DialoguePlugin(player) {
 
 class LucienDialogueFile : DialogueBuilderFile() {
     override fun create(b: DialogueBuilder) {
-        b.onQuestStages(TempleOfIkov.questName, 100)
+        b.onQuestStages(Quests.TEMPLE_OF_IKOV, 100)
                 .playerl("I thought I killed you?!")
                 .npcl("Ha! Ha! Ha!")
                 .npcl("You can not kill me human!")
@@ -44,7 +45,7 @@ class LucienDialogueFile : DialogueBuilderFile() {
                             .item(Items.PENDANT_OF_LUCIEN_86, "Lucien has given you another pendant!")
                             .end()
                 }
-        b.onQuestStages(TempleOfIkov.questName, 1,2,3,4,5,6,7)
+        b.onQuestStages(Quests.TEMPLE_OF_IKOV, 1, 2, 3, 4, 5, 6, 7)
                 .npcl("I told you not to meet me here again!")
                 .branch { player ->
                     return@branch if (inInventory(player, Items.PENDANT_OF_LUCIEN_86)) { 1 } else { 0 }
@@ -65,7 +66,7 @@ class LucienDialogueFile : DialogueBuilderFile() {
                             .end()
                 }
 
-        b.onQuestStages(TempleOfIkov.questName, 0)
+        b.onQuestStages(Quests.TEMPLE_OF_IKOV, 0)
                 .npcl("I seek a hero to go on an important mission!")
                 .options().let { optionBuilder ->
                     val returnJoin = b.placeholder()
@@ -100,8 +101,8 @@ class LucienDialogueFile : DialogueBuilderFile() {
                                         .npcl("I cannot stay here much longer. ")
                                         .npcl("I will be west of the Grand Exchange in Varrock. I have a small holding up there.")
                                         .endWith { _, player ->
-                                            if(getQuestStage(player, TempleOfIkov.questName) == 0) {
-                                                setQuestStage(player, TempleOfIkov.questName, 1)
+                                            if (getQuestStage(player, Quests.TEMPLE_OF_IKOV) == 0) {
+                                                setQuestStage(player, Quests.TEMPLE_OF_IKOV, 1)
                                             }
                                         }
                                 optionBuilder.option_playerl("Oh no! Sounds far too dangerous!")

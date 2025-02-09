@@ -7,6 +7,7 @@ import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
 
 import static core.tools.DialogueConstKt.END_DIALOGUE;
+import content.data.Quests;
 
 
 /**
@@ -35,7 +36,7 @@ public class SigmundDialogue extends DialoguePlugin {
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
 		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Can I help you?");
-		if(player.getQuestRepository().getQuest("Lost Tribe").getStage(player) > 0 && player.getQuestRepository().getQuest("Lost Tribe").getStage(player) < 100){
+		if(player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE).getStage(player) > 0 && player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE).getStage(player) < 100){
 			npc("Have you found out what it was?");
 			stage = 34;
 			return true;
@@ -80,12 +81,12 @@ public class SigmundDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 10:
-			if(player.getQuestRepository().hasStarted("Lost Tribe") && !player.getQuestRepository().isComplete("Lost Tribe")){
+			if(player.getQuestRepository().hasStarted(Quests.THE_LOST_TRIBE) && !player.getQuestRepository().isComplete(Quests.THE_LOST_TRIBE)){
 				npc("No, not right now.");
 				stage = 12;
 				break;
 			}
-			if(player.getQuestRepository().isComplete("Goblin Diplomacy") && player.getQuestRepository().isComplete("Rune Mysteries") && !player.getQuestRepository().hasStarted("Lost Tribe")){
+			if(player.getQuestRepository().isComplete(Quests.GOBLIN_DIPLOMACY) && player.getQuestRepository().isComplete(Quests.RUNE_MYSTERIES) && !player.getQuestRepository().hasStarted(Quests.THE_LOST_TRIBE)){
 				npc("There was recently some damage to the castle cellar.","Part of the wall has collapsed.");
 				stage = 30;
 				break;
@@ -107,7 +108,7 @@ public class SigmundDialogue extends DialoguePlugin {
 		case 31:
 			npc("You should ask other people around the town if they","saw anything.");
 			stage = END_DIALOGUE;
-			player.getQuestRepository().getQuest("Lost Tribe").start(player);
+			player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE).start(player);
 			player.setAttribute("/save:tlt-witness", TLTNPCS[0]);
 			break;
 		case 34:

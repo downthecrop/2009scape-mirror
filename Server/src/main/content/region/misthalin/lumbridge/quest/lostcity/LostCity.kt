@@ -6,6 +6,7 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 /**
  * LostCity class for the Lost City quest
@@ -14,7 +15,7 @@ import org.rs09.consts.Items
  * @author Aero
  */
 @Initializable
-class LostCity : Quest("Lost City", 83, 82, 3, 147, 0, 1, 6) {
+class LostCity : Quest(Quests.LOST_CITY, 83, 82, 3, 147, 0, 1, 6) {
 
     class SkillRequirement(val skill: Int?, val level: Int?)
 

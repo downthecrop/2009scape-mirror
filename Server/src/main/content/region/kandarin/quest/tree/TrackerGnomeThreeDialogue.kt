@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.tree
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.tools.END_DIALOGUE
@@ -13,7 +14,7 @@ class TrackerGnomeThreeDialogue : DialogueFile(){
             4 to  "My legs and your legs.")
 
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = getQuestStage(player!!, TreeGnomeVillage.questName)
+        val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE)
         when {
             questStage == 30 -> {
                 when(stage) {

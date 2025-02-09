@@ -4,11 +4,13 @@ import content.global.handlers.iface.BookInterface
 import content.global.handlers.iface.BookLine
 import content.global.handlers.iface.Page
 import content.global.handlers.iface.PageSet
-import core.api.setAttribute
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
 import org.rs09.consts.Items
+import content.data.Quests
+import core.api.getQuestStage
+import core.api.setQuestStage
 
 /**
  * Shield of Arrav Book
@@ -18,7 +20,7 @@ import org.rs09.consts.Items
  */
 class ShieldofArravBook : InteractionListener {
     companion object {
-        private val TITLE = "Shield of Arrav"
+        private val TITLE = "The Shield of Arrav"
         private val CONTENTS = arrayOf(
             PageSet(
                 Page(
@@ -86,8 +88,8 @@ class ShieldofArravBook : InteractionListener {
         private fun display(player: Player, pageNum: Int, buttonID: Int) : Boolean {
             BookInterface.pageSetup(player, BookInterface.FANCY_BOOK_3_49, TITLE, CONTENTS)
             if (BookInterface.isLastPage(pageNum, CONTENTS.size)) {
-                if (player.questRepository.getQuest("Shield of Arrav").getStage(player) == 10) {
-                    player.questRepository.getQuest("Shield of Arrav").setStage(player, 20)
+                if (getQuestStage(player, Quests.SHIELD_OF_ARRAV) == 10) {
+                    setQuestStage(player, Quests.SHIELD_OF_ARRAV, 20)
                 }
             }
             return true

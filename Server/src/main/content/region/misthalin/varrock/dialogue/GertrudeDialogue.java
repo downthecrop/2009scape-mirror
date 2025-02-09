@@ -1,7 +1,6 @@
 package content.region.misthalin.varrock.dialogue;
 
 import content.global.skill.summoning.pet.Pet;
-import content.global.skill.summoning.pet.PetDetails;
 import core.game.container.Container;
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
@@ -13,10 +12,9 @@ import core.plugin.Initializable;
 import core.tools.RandomFunction;
 import org.rs09.consts.Items;
 
-import java.util.Map;
+import content.data.Quests;
 
-import static core.api.ContentAPIKt.freeSlots;
-import static core.api.ContentAPIKt.inInventory;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Represents the gertrude dialogue plugin.
@@ -56,8 +54,7 @@ public final class GertrudeDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		final Quest quest = player.getQuestRepository().getQuest("Gertrude's Cat");
-		switch (quest.getStage(player)) {
+		switch (getQuestStage(player, Quests.GERTRUDES_CAT)) {
 		case 0:
 			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Hello, are you OK?");
 			break;
@@ -95,7 +92,7 @@ public final class GertrudeDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
-		final Quest quest = player.getQuestRepository().getQuest("Gertrude's Cat");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.GERTRUDES_CAT);
 		switch (stage) {
 		case 0:
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Do I look OK? Those kids drive me crazy.");

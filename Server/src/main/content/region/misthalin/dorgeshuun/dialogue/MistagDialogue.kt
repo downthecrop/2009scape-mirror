@@ -1,5 +1,6 @@
 package content.region.misthalin.dorgeshuun.dialogue
 
+import content.data.Quests
 import core.game.component.Component
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
@@ -23,7 +24,7 @@ class MistagDialogue (player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val ltStage = player.questRepository.getStage("Lost Tribe")
+        val ltStage = player.questRepository.getStage(Quests.THE_LOST_TRIBE)
 
         if(args.size > 1 && args[1] == "greeting"){
             npc("A human knows ancient greeting?")

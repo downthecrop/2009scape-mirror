@@ -1,5 +1,6 @@
 package content.region.asgarnia.burthorpe.quest.trollstronghold
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
@@ -13,7 +14,7 @@ import org.rs09.consts.NPCs
 @Initializable
 class DadDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (getQuestStage(player!!, TrollStronghold.questName)) {
+        when (getQuestStage(player!!, Quests.TROLL_STRONGHOLD)) {
             in 3..4 -> {
                 when (stage) {
                     START_DIALOGUE -> npcl(FacialExpression.OLD_HAPPY, "What tiny human do in troll arena? Dad challenge human to fight!").also { stage++ }
@@ -27,7 +28,7 @@ class DadDialogue(player: Player? = null) : DialoguePlugin(player) {
                     3 -> npcl(FacialExpression.OLD_HAPPY, "Tiny human brave. Dad squish!").also { stage++ }
                     4 -> npc!!.attack(player).also {
                         npc!!.skills.lifepoints = npc!!.skills.maximumLifepoints // Reset dad to max hitpoints.
-                        setQuestStage(player!!, TrollStronghold.questName, 4)
+                        setQuestStage(player!!, Quests.TROLL_STRONGHOLD, 4)
                         stage = END_DIALOGUE
                     }
                 }

@@ -1,6 +1,6 @@
 package content.region.kandarin.ardougne.quest.arena.dialogue
 
-import content.region.kandarin.ardougne.quest.arena.FightArena
+import content.data.Quests
 import content.region.kandarin.ardougne.quest.arena.cutscenes.SecondFightCutscene
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -11,7 +11,7 @@ import org.rs09.consts.NPCs
 class HengradDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.HENGRAD_263)
-        when (getQuestStage(player!!, FightArena.FightArenaQuest)) {
+        when (getQuestStage(player!!, Quests.FIGHT_ARENA)) {
 
             in 72..87 -> when (stage) {
                 0 -> {
@@ -34,7 +34,7 @@ class HengradDialogue : DialogueFile() {
                 10 -> {
                     end()
                     SecondFightCutscene(player!!).start()
-                    setQuestStage(player!!, FightArena.FightArenaQuest, 88)
+                    setQuestStage(player!!, Quests.FIGHT_ARENA, 88)
                 }
             }
 

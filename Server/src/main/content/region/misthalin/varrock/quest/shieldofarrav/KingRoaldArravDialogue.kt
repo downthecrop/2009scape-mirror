@@ -1,11 +1,11 @@
 package content.region.misthalin.varrock.quest.shieldofarrav
 
-import content.region.misthalin.varrock.quest.shieldofarrav.ShieldofArrav
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.dialogue.DialogueFile
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
+import content.data.Quests
 
 
 private val CERTIFICATE = Item(769)
@@ -46,7 +46,7 @@ class KingRoaldArravDialogue() : DialogueFile() {
                         if (!player!!.inventory.add(Item(995, 600))) {
                             GroundItemManager.create(Item(995, 600), player)
                         }
-                        player!!.questRepository.getQuest("Shield of Arrav").finish(player)
+                        player!!.questRepository.getQuest(Quests.SHIELD_OF_ARRAV).finish(player)
                         stage = END_DIALOGUE
                     }
                 }

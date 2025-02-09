@@ -24,9 +24,10 @@ import core.game.world.GameWorld
 
 import kotlin.math.min
 import java.util.Random
+import content.data.Quests
 
 @Initializable
-class ChompyBird : Quest("Big Chompy Bird Hunting", 35, 34, 2, Vars.VARP_QUEST_CHOMPY, 0, 1, 65), InteractionListener {
+class ChompyBird : Quest(Quests.BIG_CHOMPY_BIRD_HUNTING, 35, 34, 2, Vars.VARP_QUEST_CHOMPY, 0, 1, 65), InteractionListener {
   companion object {
     val CAVE_ENTRANCE = Location.create(2646, 9378, 0)
     val CAVE_EXIT = Location.create(2630, 2997, 0) 

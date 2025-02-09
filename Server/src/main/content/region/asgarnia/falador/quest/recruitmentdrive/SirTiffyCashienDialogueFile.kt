@@ -1,5 +1,6 @@
 package content.region.asgarnia.falador.quest.recruitmentdrive
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
@@ -8,7 +9,7 @@ import org.rs09.consts.Items
 
 class SirTiffyCashienDialogueFile : DialogueBuilderFile() {
     override fun create(b: DialogueBuilder) {
-        b.onQuestStages(RecruitmentDrive.questName, 1)
+        b.onQuestStages(Quests.RECRUITMENT_DRIVE, 1)
                 .player(FacialExpression.FRIENDLY, "Sir Amik Varze sent me to meet you here for some", "sort of testing...")
                 .npc(FacialExpression.FRIENDLY, "Ah, @name!", "Amik told me all about you, dontchaknow!", "Spliffing job you you did with the old Black Knights there,", "absolutely first class.")
                 .playerl(FacialExpression.GUILTY, "...Thanks I think.")
@@ -84,13 +85,13 @@ class SirTiffyCashienDialogueFile : DialogueBuilderFile() {
                     }
 
                 }.endWith { _, player ->
-                    if (getQuestStage(player, RecruitmentDrive.questName) == 1) {
-                        setQuestStage(player, RecruitmentDrive.questName, 2)
+                    if (getQuestStage(player, Quests.RECRUITMENT_DRIVE) == 1) {
+                        setQuestStage(player, Quests.RECRUITMENT_DRIVE, 2)
                     }
                     RecruitmentDriveListeners.shuffleStages(player)
                     RecruitmentDriveListeners.StartTestCutscene(player).start()
                 }
-        b.onQuestStages(RecruitmentDrive.questName, 2)
+        b.onQuestStages(Quests.RECRUITMENT_DRIVE, 2)
                 .npc(FacialExpression.FRIENDLY, "Ah, what ho!", "Back for another go at the old testing, what?")
                 .options().let { optionBuilder ->
                     val continuePath = b.placeholder()
@@ -115,7 +116,7 @@ class SirTiffyCashienDialogueFile : DialogueBuilderFile() {
                             .end()
                     return@let continuePath.builder()
                 }
-        b.onQuestStages(RecruitmentDrive.questName, 3)
+        b.onQuestStages(Quests.RECRUITMENT_DRIVE, 3)
                 .npc(FacialExpression.HAPPY, "Oh, jolly well done!", "Your performance will need to be evaluated by Sir Vey", "personally, but I don't think it's going too far ahead of", "myself to welcome you to the team!")
                 .endWith { _, player ->
                     // Get a voucher and $3000 to change gender if you did do it during the quest.
@@ -124,7 +125,7 @@ class SirTiffyCashienDialogueFile : DialogueBuilderFile() {
                         addItemOrDrop(player, Items.COINS_995, 3000)
                     }
                     removeAttribute(player, RecruitmentDrive.attributeOriginalGender)
-                    finishQuest(player, RecruitmentDrive.questName)
+                    finishQuest(player, Quests.RECRUITMENT_DRIVE)
                 }
     }
 }

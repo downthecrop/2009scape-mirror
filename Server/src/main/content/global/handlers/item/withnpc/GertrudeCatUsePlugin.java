@@ -14,6 +14,7 @@ import core.game.world.map.path.Pathfinder;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import content.data.Quests;
 
 /**
  * Represents the plugin used to handle the use with interactions.
@@ -50,7 +51,7 @@ public final class GertrudeCatUsePlugin extends UseWithHandler {
 	public boolean handle(NodeUsageEvent event) {
 		final Player player = event.getPlayer();
 		final NPC npc = ((NPC) event.getUsedWith());
-		final Quest quest = player.getQuestRepository().getQuest("Gertrude's Cat");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.GERTRUDES_CAT);
 		if (event.getUsedItem().getId() == 1927 && quest.getStage(player) == 20) {
 			if (player.getInventory().remove(event.getUsedItem())) {
 				player.getInventory().add(EMPTY_BUCKET);

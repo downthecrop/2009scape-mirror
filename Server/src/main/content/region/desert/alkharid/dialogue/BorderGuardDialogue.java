@@ -9,6 +9,7 @@ import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.game.world.map.RegionManager;
+import content.data.Quests;
 
 /**
  * Represents the border guard dialogue plugin.
@@ -80,7 +81,7 @@ public final class BorderGuardDialogue extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 0:
-			if (player.getQuestRepository().getQuest("Prince Ali Rescue").getStage(player) > 50) {
+			if (player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE).getStage(player) > 50) {
 				npc("You may pass for free, you are a friend of Al-Kharid.");
 				stage = 100;
 			} else {

@@ -8,6 +8,7 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import core.tools.END_DIALOGUE
+import content.data.Quests
 
 /**
  * @author qmqz
@@ -18,7 +19,7 @@ class BlaninDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!isQuestComplete(player, "Fremennik Trials")) {
+        if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
             player(FacialExpression.FRIENDLY, "Good day.").also { stage = 0 }
         } else {
             player(FacialExpression.FRIENDLY, "That's one less thing to worry about.").also { stage = 10 }

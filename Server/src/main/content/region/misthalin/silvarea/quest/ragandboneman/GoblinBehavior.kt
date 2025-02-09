@@ -1,11 +1,10 @@
 package content.region.misthalin.silvarea.quest.ragandboneman
 
-import content.global.handlers.npc.ChromaticDragonBehavior
+import content.data.Quests
 import core.api.isQuestInProgress
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.npc.NPCBehavior
-import core.game.node.entity.npc.drop.DropFrequency
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.tools.RandomFunction
@@ -179,7 +178,7 @@ class GoblinBehavior : NPCBehavior(*goblinIds) {
     override fun onDropTableRolled(self: NPC, killer: Entity, drops: ArrayList<Item>) {
         super.onDropTableRolled(self, killer, drops)
         // Drops the Goblin Skull during Rag and Bone Man quest
-        if (killer is Player && isQuestInProgress(killer, RagAndBoneMan.questName, 1, 99)) {
+        if (killer is Player && isQuestInProgress(killer, Quests.RAG_AND_BONE_MAN, 1, 99)) {
             if(RandomFunction.roll(4)) {
                 drops.add(Item(Items.GOBLIN_SKULL_7812))
             }

@@ -9,6 +9,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 
 import static core.api.ContentAPIKt.hasRequirement;
+import content.data.Quests;
 
 /**
  * Represents the prayer interface.
@@ -27,7 +28,7 @@ public final class PrayerTabInterface extends ComponentPlugin {
 	public boolean handle(Player player, Component component, int opcode, int button, int slot, int itemId) {
 		final PrayerType type = PrayerType.get(button);
                 if (type == PrayerType.CHIVALRY || type == PrayerType.PIETY)
-                    if (!hasRequirement(player, "King's Ransom"))
+                    if (!hasRequirement(player, Quests.KINGS_RANSOM))
                         return true;
 		if (type == null) {
 			return true;

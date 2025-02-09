@@ -6,6 +6,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.game.node.item.Item;
+import content.data.Quests;
 
 /**
  * Handles the SanfewDialogue dialogue.
@@ -40,12 +41,12 @@ public class SanfewDialogue extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 0:
-			if (player.getQuestRepository().getQuest("Druidic Ritual").getStage(player) == 20) {
+			if (player.getQuestRepository().getQuest(Quests.DRUIDIC_RITUAL).getStage(player) == 20) {
 				interpreter.sendDialogues(npc, FacialExpression.HALF_ASKING, "Did you bring me the required ingredients for the", "potion?");
 				stage = 100;
 				break;
 			}
-			if (player.getQuestRepository().getQuest("Druidic Ritual").getStage(player) == 10) {
+			if (player.getQuestRepository().getQuest(Quests.DRUIDIC_RITUAL).getStage(player) == 10) {
 				interpreter.sendOptions("Select an Option", "I've been sent to help purify the Varrock stone circle.", "Actually, I don't need to speak to you.");
 				stage = 2;
 				break;
@@ -89,7 +90,7 @@ public class SanfewDialogue extends DialoguePlugin {
 			break;
 		case 8:
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "It is located somewhere in the mysterious underground", "halls which are located somewhere in the woods just", "South of here. They are too dangerous for me to go", "myself however.");
-			player.getQuestRepository().getQuest("Druidic Ritual").setStage(player, 20);
+			player.getQuestRepository().getQuest(Quests.DRUIDIC_RITUAL).setStage(player, 20);
 			stage = 9;
 			break;
 		case 9:
@@ -129,7 +130,7 @@ public class SanfewDialogue extends DialoguePlugin {
 			break;
 		case 202:
 			player.getInventory().remove(new Item(522, 1), new Item(523, 1), new Item(524, 1), new Item(525, 1));
-			player.getQuestRepository().getQuest("Druidic Ritual").setStage(player, 99);
+			player.getQuestRepository().getQuest(Quests.DRUIDIC_RITUAL).setStage(player, 99);
 			player.getQuestRepository().syncronizeTab(player);
 			interpreter.sendDialogues(npc, null, "Now go and talk to Kaqemeex and he will introduce", "you to the wonderful world of herblore and potion", "making!");
 			stage = 203;

@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.templeofikov
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.*
 import core.game.node.entity.player.Player
@@ -23,13 +24,13 @@ class LucienEndingDialogue (player: Player? = null) : DialoguePlugin(player) {
 
 class LucienEndingDialogueFile : DialogueBuilderFile() {
     override fun create(b: DialogueBuilder) {
-        b.onQuestStages(TempleOfIkov.questName, 100)
+        b.onQuestStages(Quests.TEMPLE_OF_IKOV, 100)
                 .endWith { _, player ->
                     // After quest is over: https://www.youtube.com/watch?v=81DXjfsFcMM
                     sendMessage(player, "You feel that fighting this individual will be of little practical use.")
                     sendMessage(player, "You have completed the Temple of Ikov quest.")
                 }
-        b.onQuestStages(TempleOfIkov.questName, 1,2,3,4,5,6,7)
+        b.onQuestStages(Quests.TEMPLE_OF_IKOV, 1, 2, 3, 4, 5, 6, 7)
                 .npcl(FacialExpression.FRIENDLY, "Have you got the Staff of Armadyl yet?")
                 .branch { player ->
                     return@branch if (inInventory(player, Items.STAFF_OF_ARMADYL_84)) { 1 } else { 0 }
@@ -46,8 +47,8 @@ class LucienEndingDialogueFile : DialogueBuilderFile() {
                                         .npcl(FacialExpression.FRIENDLY, "I can feel the power of the staff running through me! I will be more powerful and they shall bow down to me!")
                                         .npcl(FacialExpression.FRIENDLY, "I suppose you want your reward? I shall grant you much power!")
                                         .endWith { _, player ->
-                                            if(getQuestStage(player, TempleOfIkov.questName) == 6) {
-                                                finishQuest(player, TempleOfIkov.questName)
+                                            if(getQuestStage(player, Quests.TEMPLE_OF_IKOV) == 6) {
+                                                finishQuest(player, Quests.TEMPLE_OF_IKOV)
                                             }
                                         }
                                 optionBuilder.option_playerl("No, not yet.")

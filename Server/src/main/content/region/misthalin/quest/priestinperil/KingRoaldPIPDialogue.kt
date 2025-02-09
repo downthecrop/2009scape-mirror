@@ -3,6 +3,7 @@ package content.region.misthalin.quest.priestinperil
 import core.game.dialogue.DialogueFile
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
+import content.data.Quests
 
 
 class KingRoaldPIPDialogue(val questStage: Int) : DialogueFile() {
@@ -25,7 +26,7 @@ class KingRoaldPIPDialogue(val questStage: Int) : DialogueFile() {
                 8 -> when(buttonID){
                     1 -> {
                         player("Sure. I don't have anything better to do right now.")
-                        player!!.questRepository.getQuest("Priest in Peril").start(player)
+                        player!!.questRepository.getQuest(Quests.PRIEST_IN_PERIL).start(player)
                         stage++
                     }
                     2 -> {
@@ -58,7 +59,7 @@ class KingRoaldPIPDialogue(val questStage: Int) : DialogueFile() {
                 9 -> npc("You get back there and do whatever is necessary to", "safeguard my kingdom from attack, or I will see you", "beheaded for high treason!").also { stage++ }
                 10 -> {
                     player("Y-yes your Highness.")
-                    player!!.questRepository.getQuest("Priest in Peril").setStage(player,13)
+                    player!!.questRepository.getQuest(Quests.PRIEST_IN_PERIL).setStage(player,13)
                     stage = END_DIALOGUE
                 }
             }

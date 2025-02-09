@@ -8,6 +8,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 /**
  * @author qmqz
@@ -18,13 +19,13 @@ class ArchaeologistDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!player.questRepository.hasStarted("Desert Treasure")) {
-            if (player.questRepository.isComplete("The Digsite Quest") &&
-                player.questRepository.isComplete("The Tourist Trap") &&
-                player.questRepository.isComplete("The Temple of Ikov") &&
-                player.questRepository.isComplete("Priest In Peril") &&
-                player.questRepository.isComplete("Waterfall Quest") &&
-                player.questRepository.isComplete("Troll Stronghold") &&
+        if (!player.questRepository.hasStarted(Quests.DESERT_TREASURE)) {
+            if (player.questRepository.isComplete(Quests.THE_DIG_SITE) &&
+                player.questRepository.isComplete(Quests.THE_TOURIST_TRAP) &&
+                player.questRepository.isComplete(Quests.TEMPLE_OF_IKOV) &&
+                player.questRepository.isComplete(Quests.PRIEST_IN_PERIL) &&
+                player.questRepository.isComplete(Quests.WATERFALL_QUEST) &&
+                player.questRepository.isComplete(Quests.TROLL_STRONGHOLD) &&
                 player.skills.getStaticLevel(Skills.SLAYER) >= 10 &&
                 player.skills.getStaticLevel(Skills.FIREMAKING) >= 50 &&
                 player.skills.getStaticLevel(Skills.MAGIC) >= 50 &&
@@ -79,8 +80,8 @@ class ArchaeologistDialogue(player: Player? = null) : DialoguePlugin(player){
             "Come back and let me know what he says, I would hate",
             "to waste my time excavating anything that isn't worth",
             "my time as a world famous archaeologist!").also {
-                player.questRepository.getQuest("Desert Treasure").start(player)
-                setQuestStage(player, "Desert Treasure", 1)
+                player.questRepository.getQuest(Quests.DESERT_TREASURE).start(player)
+                setQuestStage(player, Quests.DESERT_TREASURE, 1)
                 stage = 99
             }
 

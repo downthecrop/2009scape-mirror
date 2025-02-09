@@ -14,6 +14,7 @@ import core.tools.StringUtils;
 
 import static core.api.ContentAPIKt.hasRequirement;
 import static core.api.ContentAPIKt.sendDialogue;
+import content.data.Quests;
 
 /**
  * Represents the pulse used to smith a bar.
@@ -67,11 +68,11 @@ public class SmithingPulse extends SkillPulse<Item> {
             player.getDialogueInterpreter().sendDialogue("You need a hammer to work the metal with.");
             return false;
         }
-        if (!player.getQuestRepository().isComplete("The Tourist Trap") && bar.getSmithingType() == SmithingType.TYPE_DART_TIP) {
+        if (!player.getQuestRepository().isComplete(Quests.THE_TOURIST_TRAP) && bar.getSmithingType() == SmithingType.TYPE_DART_TIP) {
             player.getDialogueInterpreter().sendDialogue("You need to complete Tourist Trap to smith dart tips.");
             return false;
         }
-        if (!hasRequirement(player, "Death Plateau", false) && bar.getSmithingType() == SmithingType.TYPE_CLAWS) {
+        if (!hasRequirement(player, Quests.DEATH_PLATEAU, false) && bar.getSmithingType() == SmithingType.TYPE_CLAWS) {
             sendDialogue(player, "You need to complete Death Plateau to smith claws.");
             return false;
         }

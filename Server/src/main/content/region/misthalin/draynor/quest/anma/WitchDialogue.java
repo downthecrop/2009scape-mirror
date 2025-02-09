@@ -1,5 +1,6 @@
 package content.region.misthalin.draynor.quest.anma;
 
+import content.data.Quests;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
@@ -45,7 +46,7 @@ public final class WitchDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean open(Object... args) {
-		quest = player.getQuestRepository().getQuest(AnimalMagnetism.NAME);
+		quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM);
 		switch (quest.getStage(player)) {
 		case 25:
 			npc("Hello, hello, my poppet. What brings you to my little", "room?");

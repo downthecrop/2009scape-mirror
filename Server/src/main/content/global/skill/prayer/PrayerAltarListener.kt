@@ -12,11 +12,12 @@ import core.game.node.entity.skill.Skills
 import core.game.world.map.Location
 import org.rs09.consts.Scenery
 import org.rs09.consts.Sounds
+import content.data.Quests
 
 class PrayerAltarListener : InteractionListener {
     override fun defineListeners() {
         on(altars, IntType.SCENERY, "pray", "pray-at") { player, node ->
-            if (node.id == Scenery.TRIBAL_STATUE_3863 && !hasRequirement(player, "Tai Bwo Wannai Trio")) {
+            if (node.id == Scenery.TRIBAL_STATUE_3863 && !hasRequirement(player, Quests.TAI_BWO_WANNAI_TRIO)) {
                 // https://runescape.wiki/w/Tribal_Statue?oldid=1940922
                 return@on true
             }
@@ -43,9 +44,9 @@ class PrayerAltarListener : InteractionListener {
         }
 
         on(Scenery.CHAOS_ALTAR_61, IntType.SCENERY, "check") { player, _ ->
-            if (getQuestStage(player, "Merlin's Crystal") == 70) {
+            if (getQuestStage(player, Quests.MERLINS_CRYSTAL) == 70) {
                 sendDialogue(player, "You find a small inscription at the bottom of the altar. It reads: 'Snarthon Candtrick Termanto'.")
-                setQuestStage(player, "Merlin's Crystal", 80)
+                setQuestStage(player, Quests.MERLINS_CRYSTAL, 80)
             } else {
                 sendMessage(player, "An altar of the evil god Zamorak.")
             }

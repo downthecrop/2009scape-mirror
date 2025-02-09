@@ -11,6 +11,7 @@ import core.game.node.item.Item;
 import core.plugin.Plugin;
 import core.game.shops.Shops;
 import core.plugin.ClassScanner;
+import content.data.Quests;
 
 /**
  * Represents the dialogue plugin used to handle the candle maker npc.
@@ -56,7 +57,7 @@ public final class CandleMakerDialogue extends DialoguePlugin {
 			@Override
 			public boolean handle(Player player, Node node, String option) {
 				NPC npc = node.asNpc();
-				Quest quest = player.getQuestRepository().getQuest("Merlin's Crystal");
+				Quest quest = player.getQuestRepository().getQuest(Quests.MERLINS_CRYSTAL);
 				if (quest.getStage(player) > 60) {
 					Shops.openId(player, 56);
 				} else {
@@ -78,7 +79,7 @@ public final class CandleMakerDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
-		final Quest quest = player.getQuestRepository().getQuest("Merlin's Crystal");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.MERLINS_CRYSTAL);
 		switch (stage) {
 		case 2:
 			if (quest.getStage(player) == 50 || quest.getStage(player) == 60) {// the player has defeated mordred and learned about the black candles

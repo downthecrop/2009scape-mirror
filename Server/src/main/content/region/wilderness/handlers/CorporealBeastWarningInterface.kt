@@ -5,6 +5,7 @@ import core.game.node.entity.player.Player
 import core.game.interaction.InterfaceListener
 import core.game.world.GameWorld
 import core.api.*
+import content.data.Quests
 
 /**
  * Handles the corporeal beast warning interface
@@ -16,7 +17,7 @@ class CorporealBeastWarningInterface : InterfaceListener {
 
     override fun defineInterfaceListeners() {
         on(COMPONENT_ID,17){player,component,_,_,_,_ ->
-            if (!hasRequirement(player, "Summer's End"))
+            if (!hasRequirement(player, Quests.SUMMERS_END))
                 return@on true
             if(player.getAttribute("corp-beast-cave-delay",0) <= GameWorld.ticks) {
                 player.properties.teleportLocation = player.location.transform(4, 0, 0).also { close(player,component) }

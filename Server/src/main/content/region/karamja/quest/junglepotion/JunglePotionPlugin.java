@@ -1,5 +1,6 @@
 package content.region.karamja.quest.junglepotion;
 
+import content.data.Quests;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.dialogue.DialogueInterpreter;
 import core.game.dialogue.DialoguePlugin;
@@ -33,7 +34,7 @@ public final class JunglePotionPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final Quest quest = player.getQuestRepository().getQuest(JunglePotion.NAME);
+		final Quest quest = player.getQuestRepository().getQuest(Quests.JUNGLE_POTION);
 		switch (node.getId()) {
 		case 2584:
 			player.getDialogueInterpreter().open("jogre_dialogue");

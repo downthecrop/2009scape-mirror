@@ -8,9 +8,10 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.Items
 import kotlin.math.min
+import content.data.Quests
 
 @Initializable
-class SheepShearer : Quest("Sheep Shearer", 28, 27, 1, 179, 0, 20, 21) {
+class SheepShearer : Quest(Quests.SHEEP_SHEARER, 28, 27, 1, 179, 0, 20, 21) {
     companion object {
         val ATTR_NUM_BALLS_OF_WOOL_DELIVERED = "/save:sheep-shearer:num-balls-of-wool-delivered"
         val ATTR_IS_PENGUIN_SHEEP_SHEARED = "/save:sheep-shearer:is-penguin-sheep-sheared"

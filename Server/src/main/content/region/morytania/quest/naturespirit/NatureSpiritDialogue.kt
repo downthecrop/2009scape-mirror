@@ -12,11 +12,12 @@ import core.plugin.Initializable
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import core.tools.END_DIALOGUE
+import content.data.Quests
 
 @Initializable
 class NatureSpiritDialogue(player: Player? = null) : DialoguePlugin(player){
 
-    val questStage = player?.questRepository?.getStage("Nature Spirit") ?: 0
+    val questStage = player?.questRepository?.getStage(Quests.NATURE_SPIRIT) ?: 0
     override fun newInstance(player: Player?): DialoguePlugin {
         return NatureSpiritDialogue(player)
     }
@@ -114,7 +115,7 @@ class NatureSpiritDialogue(player: Player? = null) : DialoguePlugin(player){
 
             //killed all dem buggers bruv
             350 -> npcl(FacialExpression.NEUTRAL, "Many thanks my friend, you have completed your quest!").also { stage++ }
-            351 -> end().also { player.questRepository.getQuest("Nature Spirit").finish(player) }
+            351 -> end().also { player.questRepository.getQuest(Quests.NATURE_SPIRIT).finish(player) }
         }
 
         return true
@@ -146,7 +147,7 @@ class NatureSpiritDialogue(player: Player? = null) : DialoguePlugin(player){
                     if(removeItem(player, Items.SILVER_SICKLE_2961, Container.INVENTORY)){
                         addItem(player, Items.SILVER_SICKLEB_2963)
                         unlock(player)
-                        player.questRepository.getQuest("Nature Spirit").setStage(player, 70)
+                        player.questRepository.getQuest(Quests.NATURE_SPIRIT).setStage(player, 70)
                         openDialogue(player, NPCs.NATURE_SPIRIT_1051, findLocalNPC(player, NPCs.NATURE_SPIRIT_1051) as NPC)
                         sendMessage(player, "Your sickle has been blessed! You can bless a new sickle by dipping it into the grotto waters.")
                     }
@@ -158,6 +159,6 @@ class NatureSpiritDialogue(player: Player? = null) : DialoguePlugin(player){
     }
 
     fun setQuest(stage: Int){
-        player!!.questRepository.getQuest("Nature Spirit").setStage(player!!, stage)
+        player!!.questRepository.getQuest(Quests.NATURE_SPIRIT).setStage(player!!, stage)
     }
 }

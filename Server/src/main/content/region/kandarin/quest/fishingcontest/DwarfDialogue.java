@@ -6,6 +6,7 @@ import core.game.node.item.GroundItemManager;
 import core.plugin.Initializable;
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
+import content.data.Quests;
 
 @Initializable
 public class DwarfDialogue extends DialoguePlugin {
@@ -22,7 +23,7 @@ public class DwarfDialogue extends DialoguePlugin {
     @Override
     public boolean open(Object... args) {
         npc = (NPC) args[0];
-        int questStage = player.getQuestRepository().getStage("Fishing Contest");
+        int questStage = player.getQuestRepository().getStage(Quests.FISHING_CONTEST);
         if((questStage < 20 && questStage > 0) && !player.getInventory().containsItem(FishingContest.FISHING_PASS)){
             player("I lost my fishing pass...");
             stage = 1000;
@@ -33,12 +34,12 @@ public class DwarfDialogue extends DialoguePlugin {
             stage = 2000;
             return true;
         }
-        if(player.getQuestRepository().getStage("Fishing Contest") >= 10 && !player.getAttribute("fishing_contest:won",false)){
+        if(player.getQuestRepository().getStage(Quests.FISHING_CONTEST) >= 10 && !player.getAttribute("fishing_contest:won",false)){
             npc(FacialExpression.OLD_NORMAL,"Have you won yet?");
             stage = 1500;
             return true;
         }
-        if(player.getQuestRepository().getStage("Fishing Contest") == 100){
+        if(player.getQuestRepository().getStage(Quests.FISHING_CONTEST) == 100){
             npc(FacialExpression.OLD_NORMAL,"Welcome, oh great fishing champion!","Feel free to pop by and use","our tunnel any time!");
             stage = 2500;
             return true;
@@ -172,7 +173,7 @@ public class DwarfDialogue extends DialoguePlugin {
                 if(!player.getInventory().add(FishingContest.FISHING_PASS)){
                     GroundItemManager.create(FishingContest.FISHING_PASS,player.getLocation());
                 }
-                player.getQuestRepository().getQuest("Fishing Contest").start(player);
+                player.getQuestRepository().getQuest(Quests.FISHING_CONTEST).start(player);
                 stage++;
                 break;
             case 58:
@@ -220,7 +221,7 @@ public class DwarfDialogue extends DialoguePlugin {
                 stage++;
                 break;
             case 2004:
-                player.getQuestRepository().getQuest("Fishing Contest").finish(player);
+                player.getQuestRepository().getQuest(Quests.FISHING_CONTEST).finish(player);
                 player.getInventory().remove(FishingContest.FISHING_TROPHY);
                 end();
                 break;

@@ -8,6 +8,7 @@ import core.game.node.item.Item;
 import core.game.system.task.Pulse;
 import core.plugin.Initializable;
 import core.game.world.GameWorld;
+import content.data.Quests;
 
 /**
  * Represents the dialogue used to handle the Pricne Ali NPC.
@@ -52,7 +53,7 @@ public class PrinceAliDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest("Prince Ali Rescue");
+		quest = player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE);
 		switch (quest.getStage(player)) {
 		case 50:
 			interpreter.sendDialogues(player, null, "Prince, I come to rescue you.");

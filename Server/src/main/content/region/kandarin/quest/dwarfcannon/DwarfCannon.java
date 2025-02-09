@@ -8,6 +8,7 @@ import core.plugin.ClassScanner;
 import core.game.node.entity.skill.Skills;
 
 import static core.api.ContentAPIKt.*;
+import content.data.Quests;
 
 /**
  * Represents the dwarf cannon quest.
@@ -15,12 +16,6 @@ import static core.api.ContentAPIKt.*;
  */
 @Initializable
 public class DwarfCannon extends Quest {
-	
-	/**
-	 * The name of this quest.
-	 */
-	public static final String NAME = "Dwarf Cannon";
-
 	/**
 	 * The dwarf remain item.
 	 */
@@ -40,13 +35,13 @@ public class DwarfCannon extends Quest {
 	 * The mould item.
 	 */
 	public static final Item MOULD = new Item(4);
-        public static int[] railVarbits = new int[] { 2240, 2241, 2242, 2243, 2244, 2245 };
+	public static int[] railVarbits = new int[] { 2240, 2241, 2242, 2243, 2244, 2245 };
 
 	/**
 	 * Constructs a new {@Code DwarfCannon} {@Code Object}
 	 */
 	public DwarfCannon() {
-		super(NAME, 49, 48, 1);
+		super(Quests.DWARF_CANNON, 49, 48, 1);
 	}
 	
 	@Override

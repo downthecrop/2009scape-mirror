@@ -6,6 +6,7 @@ import core.game.dialogue.FacialExpression
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import org.rs09.consts.Items
+import content.data.Quests
 
 class SSFredTheFarmerDialogue(val questStage: Int) : DialogueFile() {
     companion object {
@@ -58,7 +59,7 @@ class SSFredTheFarmerDialogue(val questStage: Int) : DialogueFile() {
 
             2000 -> {
                 // NOTE: In a July 2009 video, this only happens when the dialogue ends
-                startQuest(player!!, "Sheep Shearer")
+                startQuest(player!!, Quests.SHEEP_SHEARER)
                 npc(FacialExpression.NEUTRAL, "Good! Now one more thing, do you actually know how", "to shear a sheep?").also { stage++ }
             }
             2001 -> options("Of course!", "Err. No, I don't know actually.").also { stage++ }
@@ -150,7 +151,7 @@ class SSFredTheFarmerDialogue(val questStage: Int) : DialogueFile() {
             30101 -> {
                 val ballsOfWoolDelivered = SheepShearer.deliverBallsOfWool(player!!)
                 if (SheepShearer.getBallsOfWoolRequired(player!!) == 0) {
-                    setQuestStage(player!!, "Sheep Shearer", 90)
+                    setQuestStage(player!!, Quests.SHEEP_SHEARER, 90)
                     player(FacialExpression.HAPPY, "That's the last of them.").also { stage = 30300 }
                 } else {
                     sendDialogue(player!!, "You give Fred $ballsOfWoolDelivered balls of wool").also { stage = 30200 }
@@ -162,7 +163,7 @@ class SSFredTheFarmerDialogue(val questStage: Int) : DialogueFile() {
             30202 -> player(FacialExpression.NEUTRAL, "Ok I'll work on it.").also { stage = END_DIALOGUE }
 
             30300 -> npc(FacialExpression.SAD, "I guess I'd better pay you then.").also { stage++ }
-            STAGE_FINISH_QUEST -> finishQuest(player!!, "Sheep Shearer").also { stage = END_DIALOGUE }
+            STAGE_FINISH_QUEST -> finishQuest(player!!, Quests.SHEEP_SHEARER).also { stage = END_DIALOGUE }
 
             31000 -> npc(FacialExpression.NEUTRAL, "You need to collect ${SheepShearer.getBallsOfWoolRequired(player!!)} more balls of wool.").also { stage++ }
             31001 -> {

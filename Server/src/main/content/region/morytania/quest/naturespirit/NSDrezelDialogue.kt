@@ -11,11 +11,12 @@ import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
 import core.tools.END_DIALOGUE
 import org.rs09.consts.Sounds
+import content.data.Quests
 
 class NSDrezelDialogue : DialogueFile() {
     var questStage = 0
     override fun handle(componentID: Int, buttonID: Int) {
-        questStage = player!!.questRepository.getStage("Nature Spirit")
+        questStage = player!!.questRepository.getStage(Quests.NATURE_SPIRIT)
 
         if(questStage <= 5){
             when(stage){
@@ -51,12 +52,12 @@ class NSDrezelDialogue : DialogueFile() {
                     if(questStage == 0){
                         repeat(3) { addItemOrDrop(player!!, Items.MEAT_PIE_2327, 1) }
                         repeat(3) { addItemOrDrop(player!!, Items.APPLE_PIE_2323, 1) }
-                        player!!.questRepository.getQuest("Nature Spirit").setStage(player!!, 5)
+                        player!!.questRepository.getQuest(Quests.NATURE_SPIRIT).setStage(player!!, 5)
                     }
                     stage++
                 }
                 23 -> npcl(FacialExpression.NEUTRAL, "Please take this food to Filliman, he'll probably appreciate a bit of cooked food. Now, he's never revealed where he lives in the swamps but I guess he'd be to the south, search for him won't you?").also { stage++ }
-                24 -> playerl(FacialExpression.FRIENDLY, "I'll do my very best, don't worry, if he's in there and he's still alive I'll definitely find him.").also { stage = END_DIALOGUE; player!!.questRepository.getQuest("Nature Spirit").start(player!!) }
+                24 -> playerl(FacialExpression.FRIENDLY, "I'll do my very best, don't worry, if he's in there and he's still alive I'll definitely find him.").also { stage = END_DIALOGUE; player!!.questRepository.getQuest(Quests.NATURE_SPIRIT).start(player!!) }
             }
         }
 
@@ -85,7 +86,7 @@ class NSDrezelDialogue : DialogueFile() {
         }
 
         else if(questStage == 40){
-            npcl(FacialExpression.NEUTRAL, "There you go my friend, you're now blessed. It's funny, now I look at you, there seems to be something of the faith about you. Anyway, good luck with your quest!").also { stage = END_DIALOGUE; player!!.questRepository.getQuest("Nature Spirit").setStage(player!!, 45) }
+            npcl(FacialExpression.NEUTRAL, "There you go my friend, you're now blessed. It's funny, now I look at you, there seems to be something of the faith about you. Anyway, good luck with your quest!").also { stage = END_DIALOGUE; player!!.questRepository.getQuest(Quests.NATURE_SPIRIT).setStage(player!!, 45) }
         }
 
         else {
@@ -106,7 +107,7 @@ private class BlessingPulse(val drezel: NPC, val player: Player) : Pulse(){
         when(ticks){
             0 -> animate(drezel, 1162).also { spawnProjectile(drezel, player, 268); playAudio(player, Sounds.PRAYER_RECHARGE_2674) }
             2 -> visualize(player, Animation(645), Graphics(267, 100))
-            4 -> unlock(player).also { player.questRepository.getQuest("Nature Spirit").setStage(player, 40); return true }
+            4 -> unlock(player).also { player.questRepository.getQuest(Quests.NATURE_SPIRIT).setStage(player, 40); return true }
         }
         ticks++
         return false

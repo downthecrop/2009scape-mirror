@@ -12,6 +12,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 
 import static core.api.ContentAPIKt.hasRequirement;
+import content.data.Quests;
 
 /**
  * Handles related slayer nodes.
@@ -63,7 +64,7 @@ public class SlayerPlugin extends OptionHandler {
 			player.teleport(new Location(2729, 3733, 0));
 			break;
 		case 15767:
-                        if (!hasRequirement(player, "Cabin Fever"))
+                        if (!hasRequirement(player, Quests.CABIN_FEVER))
                             return true;
 			player.teleport(new Location(3748, 9373, 0));
 			break;

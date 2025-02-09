@@ -8,6 +8,7 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import core.tools.END_DIALOGUE
+import content.data.Quests
 
 /**
  * @author qmqz
@@ -18,11 +19,11 @@ class IngridHradsonDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!isQuestComplete(player, "Fremennik Trials")) {
+        if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
             npcl(FacialExpression.ANNOYED, "Outlander, I have work to be getting on with... Please stop bothering me.").also { stage = END_DIALOGUE }
-        } else if (isQuestComplete(player, "Fremennik Trials") && !isQuestComplete(player, "Olaf's Quest")) {
+        } else if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) && !isQuestComplete(player, Quests.OLAFS_QUEST)) {
             npc(FacialExpression.FRIENDLY, "Good afternoon! How do you like our village?").also { stage = 0 }
-        } else if (isQuestComplete(player, "Fremennik Trials") && isQuestComplete(player, "Olaf's Quest")) {
+        } else if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) && isQuestComplete(player, Quests.OLAFS_QUEST)) {
             npc(FacialExpression.ASKING, "Hello again! Have you any word from my husband?").also { stage = 10 }
         }
         return true

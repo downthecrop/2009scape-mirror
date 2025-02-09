@@ -12,6 +12,7 @@ import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
+import content.data.Quests;
 
 /**
  * Master plugin file for Roving Elves.
@@ -39,7 +40,7 @@ public final class RovingElvesPlugin extends OptionHandler {
 	@SuppressWarnings("static-access")
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		final Quest quest = player.getQuestRepository().getQuest("Roving Elves");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.ROVING_ELVES);
 		if (quest == null) {
 			player.sendMessage("Error! RovingElves quest cannot be found, please contact an admin!");
 			return true;

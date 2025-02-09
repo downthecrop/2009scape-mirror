@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.templeofikov
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
@@ -28,7 +29,7 @@ class WineldaDialogue (player: Player? = null) : DialoguePlugin(player) {
 
 class WineldaDialogueFile : DialogueBuilderFile() {
     override fun create(b: DialogueBuilder) {
-        b.onQuestStages(TempleOfIkov.questName, 5,6,7,100)
+        b.onQuestStages(Quests.TEMPLE_OF_IKOV, 5, 6, 7, 100)
                 .playerl(FacialExpression.FRIENDLY, "Hi again. Could you do the honours again please?")
                 .npcl(FacialExpression.FRIENDLY, "Certainly! We helps those that helps poor Winelda!")
                 .endWith { _, player ->
@@ -56,8 +57,8 @@ class WineldaDialogueFile : DialogueBuilderFile() {
                             .npcl(FacialExpression.FRIENDLY, "Good! Good! My potion is nearly ready! Bubble, bubble, toil and trouble!")
                             .npcl(FacialExpression.FRIENDLY, "Now we shows them ours magic! Hold on tight!")
                             .endWith { _, player ->
-                                if(getQuestStage(player, TempleOfIkov.questName) == 4) {
-                                    setQuestStage(player, TempleOfIkov.questName, 5)
+                                if(getQuestStage(player, Quests.TEMPLE_OF_IKOV) == 4) {
+                                    setQuestStage(player, Quests.TEMPLE_OF_IKOV, 5)
                                 }
                                 // There's a cutscene, but I'm lazy man.
                                 teleport(player, Location(2664, 9876, 0))

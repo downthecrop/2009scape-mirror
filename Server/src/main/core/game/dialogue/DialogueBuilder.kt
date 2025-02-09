@@ -1,5 +1,6 @@
 package core.game.dialogue
 
+import content.data.Quests
 import core.api.splitLines
 import core.game.node.entity.player.Player
 import core.tools.END_DIALOGUE
@@ -311,7 +312,7 @@ class DialogueBuilder(var target: DialogueBuilderFile, var clauseIndex: Int = -1
     fun defaultDialogue(): DialogueBuilder {
         return onPredicate({ _ -> return@onPredicate true})
     }
-    fun onQuestStages(name: String, vararg stages: Int): DialogueBuilder {
+    fun onQuestStages(name: Quests, vararg stages: Int): DialogueBuilder {
         return onPredicate() { player ->
             val questStage = player.questRepository.getStage(name)
             return@onPredicate stages.contains(questStage)

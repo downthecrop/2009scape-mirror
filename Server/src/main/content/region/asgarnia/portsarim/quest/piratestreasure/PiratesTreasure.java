@@ -7,6 +7,7 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.ClassScanner;
+import content.data.Quests;
 
 /**
  * Represents the pirates treasure quest.
@@ -50,7 +51,7 @@ public final class PiratesTreasure extends Quest {
 	 * Constructs a new {@Code PiratesTreasure} {@Code Object}
 	 */
 	public PiratesTreasure() {
-		super("Pirate's Treasure", 23, 22, 2, 71, 0, 1, 4);
+		super(Quests.PIRATES_TREASURE, 23, 22, 2, 71, 0, 1, 4);
 	}
 
 	@Override

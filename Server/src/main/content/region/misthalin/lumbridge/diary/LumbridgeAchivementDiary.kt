@@ -19,6 +19,7 @@ import core.game.diary.AreaDiaryTask
 import core.game.diary.DiaryEventHookBase
 import core.game.diary.DiaryLevel
 import core.game.event.*
+import content.data.Quests
 
 class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
 
@@ -346,7 +347,7 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
     override fun onDialogueOptionSelected(player: Player, event: DialogueOptionSelectionEvent) {
         when (event.dialogue) {
             is DukeHoracioDSDialogue -> {
-                val dragonSlayerStage = getQuestStage(player, "Dragon Slayer")
+                val dragonSlayerStage = getQuestStage(player, Quests.DRAGON_SLAYER)
 
                 if ((dragonSlayerStage == 100 && event.currentStage == 4)
                     || event.currentStage == 12) {

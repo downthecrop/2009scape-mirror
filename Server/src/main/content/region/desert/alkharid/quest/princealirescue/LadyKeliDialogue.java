@@ -10,6 +10,7 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.world.GameWorld;
 import core.game.world.map.RegionManager;
+import content.data.Quests;
 
 /**
  * Represents the dialogue which handles the lady keli transcript.
@@ -58,7 +59,7 @@ public final class LadyKeliDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest("Prince Ali Rescue");
+		quest = player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE);
 		switch (quest.getStage(player)) {
 		case 60:
 		case 100:

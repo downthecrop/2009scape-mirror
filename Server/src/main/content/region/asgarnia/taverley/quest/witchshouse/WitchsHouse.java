@@ -4,6 +4,7 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.plugin.Initializable;
+import content.data.Quests;
 
 /**
  * Created for 2009Scape
@@ -19,7 +20,7 @@ public class WitchsHouse extends Quest {
      * Constructs a new {@code WitchsHouse} {@code Object}.
      */
     public WitchsHouse() {
-        super("Witch's House", 124, 123, 4, 226, 0, 1, 7);
+        super(Quests.WITCHS_HOUSE, 124, 123, 4, 226, 0, 1, 7);
     }
 
     @Override

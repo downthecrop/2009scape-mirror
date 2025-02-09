@@ -1,6 +1,6 @@
 package content.region.kandarin.quest.grandtree
 
-import content.region.kandarin.quest.grandtree.TheGrandTree.Companion.questName
+import content.data.Quests
 import core.ServerConstants
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -18,7 +18,7 @@ import org.rs09.consts.NPCs
 class CharlieDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, questName)) {
+        when (getQuestStage(player!!, Quests.THE_GRAND_TREE)) {
             46 -> {
                 when (stage) {
                     0 -> playerl("Tell me. Why would you want to kill the Grand Tree?").also { stage++ }
@@ -32,7 +32,7 @@ class CharlieDialogue : DialogueFile() {
                     8 -> npcl("I don't know what he's up to. If you want to find out, you'd better search his home.").also { stage++ }
                     9 -> playerl("OK. Thanks Charlie.").also { stage++ }
                     10 -> npcl("Good luck!").also {
-                        setQuestStage(player!!, questName, 47)
+                        setQuestStage(player!!, Quests.THE_GRAND_TREE, 47)
                         stage = END_DIALOGUE
                     }
                 }
@@ -79,7 +79,7 @@ class CharlieDialogue : DialogueFile() {
                                     8 -> {
                                         unlock(player!!)
                                         npc.clear()
-                                        setQuestStage(player!!, questName, 55)
+                                        setQuestStage(player!!, Quests.THE_GRAND_TREE, 55)
                                         return true
                                     }
                                 }
@@ -102,7 +102,7 @@ class CharlieDialogue : DialogueFile() {
                         6 -> playerl("Where does she live?").also { stage++ }
                         7 -> npcl("Just west of the toad swamp.").also { stage++ }
                         8 -> playerl("OK, I'll see what I can find.").also {
-                            setQuestStage(player!!, questName, 60)
+                            setQuestStage(player!!, Quests.THE_GRAND_TREE, 60)
                             stage = END_DIALOGUE
                         }
                     }

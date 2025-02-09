@@ -6,6 +6,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.plugin.Initializable;
 import core.game.world.map.Location;
+import content.data.Quests;
 
 /**
  * Handles the temple guardian npc.
@@ -49,7 +50,7 @@ public class TempleGuardianNPC extends AbstractNPC {
 	public void finalizeDeath(final Entity killer) {
 		super.finalizeDeath(killer);
 		final Player p = ((Player) killer);
-		final Quest quest = p.getQuestRepository().getQuest("Priest in Peril");
+		final Quest quest = p.getQuestRepository().getQuest(Quests.PRIEST_IN_PERIL);
 		if (quest.getStage(p) == 11) {
 			quest.setStage(p, 12);
 		}

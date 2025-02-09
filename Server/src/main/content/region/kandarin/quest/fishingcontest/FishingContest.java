@@ -5,10 +5,11 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
+import content.data.Quests;
 
 @Initializable
 public class FishingContest extends Quest {
-    public FishingContest(){super("Fishing Contest",62,61,1,11,0,1,5);}
+    public FishingContest(){super(Quests.FISHING_CONTEST,62,61,1,11,0,1,5);}
     public static final Item FISHING_ROD = new Item(307);
     public static final Item FISHING_PASS = new Item(27);
     public static final Item RED_VINE_WORM = new Item(25);

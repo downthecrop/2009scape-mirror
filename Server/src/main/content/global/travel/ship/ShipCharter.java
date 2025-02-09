@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static core.api.ContentAPIKt.*;
+import content.data.Quests;
 
 /**
  * Represents a class used to charter ships.
@@ -84,7 +85,7 @@ public final class ShipCharter {
 	 */
 	public static int getCost(final Player player, Destination destination) {
 		int cost = destination.getCost(player, destination);
-		if (player.getQuestRepository().isComplete("Cabin Fever")) {
+		if (player.getQuestRepository().isComplete(Quests.CABIN_FEVER)) {
 			cost -= Math.round((cost / 2.));
 		}
 		if (player.getEquipment().containsItem(RING_OF_CHAROS)) {
@@ -142,13 +143,13 @@ public final class ShipCharter {
 		PORT_PHASMATYS(Location.create(3705, 3503, 1), 24, new int[] { 3650, 3250, 1850, 0, 0, 0, 2050, 1850, 3200, 1100 }, Location.create(3702, 3502, 0), 2, 13) {
 			@Override
 			public boolean checkTravel(Player player) {
-				return requireQuest(player, "Priest in Peril", "to go there.");
+				return requireQuest(player, Quests.PRIEST_IN_PERIL, "to go there.");
 			}
 		},
 		CRANDOR(Location.create(2792, 3417, 1), 32, new int[] { 0, 480, 480, 925, 400, 3650, 1600, 400, 3200, 3800 }, null, 10, 21) {
 			@Override
 			public boolean checkTravel(Player player) {
-				return requireQuest(player, "Dragon Slayer", "to go there.");
+				return requireQuest(player, Quests.DRAGON_SLAYER, "to go there.");
 			}
 		},
 		BRIMHAVEN(Location.create(2763, 3238, 1), 28, new int[] { 0, 480, 480, 925, 400, 3650, 1600, 400, 3200, 3800 }, Location.create(2760, 3238, 0), 6, 17){
@@ -170,7 +171,7 @@ public final class ShipCharter {
 		PORT_TYRAS(Location.create(2142, 3122, 0), 23, new int[] { 3200, 3200, 3200, 1600, 3200, 3200, 3200, 3200, 0, 3200 }, Location.create(2143, 3122, 0), 1, 12) {
 			@Override
 			public boolean checkTravel(Player player) {
-				return hasRequirement(player, "Regicide");
+				return hasRequirement(player, Quests.REGICIDE);
 			}
 
 		},
@@ -193,14 +194,14 @@ public final class ShipCharter {
 		SHIPYARD(Location.create(3001, 3032, 0), 26, new int[] { 400, 1600, 200, 225, 720, 1850, 400, 0, 3200, 900 }, Location.create(3001, 3032, 0), 4, 15) {
 			@Override
 			public boolean checkTravel(Player player) {
-				return requireQuest(player, "The Grand Tree", "to go there.");
+				return requireQuest(player, Quests.THE_GRAND_TREE, "to go there.");
 			}
 		},
 		OO_GLOG(Location.create(2623, 2857, 0), 33, new int[] { 300, 3400, 2000, 550, 5000, 2800, 1400, 900, 3200, 0}, Location.create(2622, 2857, 0), 11, 22),
 		MOS_LE_HARMLESS(Location.create(3671, 2931, 0), 31, new int[] { 725, 625, 1025, 0, 1025, 0, 325, 275, 1600, 500 }, Location.create(3671, 2933, 0), 9, 20) {
 			@Override
 			public boolean checkTravel(Player player) {
-				return hasRequirement(player, "Cabin Fever");
+				return hasRequirement(player, Quests.CABIN_FEVER);
 			}
 		};
 

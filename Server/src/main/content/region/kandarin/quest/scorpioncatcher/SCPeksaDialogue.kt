@@ -5,6 +5,7 @@ import core.game.dialogue.DialogueFile
 import core.game.dialogue.Topic
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
+import content.data.Quests
 
 class SCPeksaDialogue(val questStage: Int) : DialogueFile() {
 
@@ -32,7 +33,7 @@ class SCPeksaDialogue(val questStage: Int) : DialogueFile() {
 
             THANK_YOU -> {
                 playerl("Thanks for the information").also { stage++ }
-                setQuestStage(player!!, "Scorpion Catcher", ScorpionCatcher.QUEST_STATE_PEKSA_HELP)
+                setQuestStage(player!!, Quests.SCORPION_CATCHER, ScorpionCatcher.QUEST_STATE_PEKSA_HELP)
             }
             THANK_YOU + 1 -> npcl ("No problems! Tell Ivor I said hi!").also { stage = END_DIALOGUE }
         }

@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.waterfall;
 
+import content.data.Quests;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
@@ -13,17 +14,11 @@ import core.plugin.ClassScanner;
  */
 @Initializable
 public class WaterFall extends Quest {
-
-	/**
-	 * The name of this quest.
-	 */
-	public static final String NAME = "Waterfall";
-
 	/**
 	 * Constructs a new {@code WaterFall} {@code Object}.
      */
 	public WaterFall() {
-		super("Waterfall", 65, 64, 1, 65, 0, 1, 10);
+		super(Quests.WATERFALL_QUEST, 65, 64, 1, 65, 0, 1, 10);
 	}
 
 	@Override

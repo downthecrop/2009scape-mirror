@@ -20,6 +20,7 @@ import org.rs09.consts.Components
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import java.io.FileReader
+import content.data.Quests
 
 /**
  * The "controller" class for shops. Handles opening shops from various NPC interactions and updating stock, etc.
@@ -149,7 +150,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
         }
 
         on(NPCs.FUR_TRADER_1316, IntType.NPC, "trade") { player, node ->
-            if (!isQuestComplete(player, "Fremennik Trials")) {
+            if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
                 sendNPCDialogue(player, NPCs.FUR_TRADER_1316, "I don't sell to outerlanders.", core.game.dialogue.FacialExpression.ANNOYED).also { END_DIALOGUE }
             } else {
                 shopsByNpc[node.id]?.openFor(player)
@@ -158,7 +159,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
         }
 
         on(NPCs.CANDLE_MAKER_562, IntType.NPC, "trade") { player, node ->
-            if (getQuestStage(player, "Merlin's Crystal") > 60) {
+            if (getQuestStage(player, Quests.MERLINS_CRYSTAL) > 60) {
                 openId(player, 56)
             } else {
                 shopsByNpc[node.id]?.openFor(player)

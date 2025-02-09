@@ -14,6 +14,7 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.game.world.GameWorld.Pulser
 import core.tools.END_DIALOGUE
+import content.data.Quests
 
 
 /**
@@ -22,8 +23,7 @@ import core.tools.END_DIALOGUE
 */
 class BrotherOmadDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        val questName = "Monk's Friend"
-        val questStage = getQuestStage(player!!, questName)
+        val questStage = getQuestStage(player!!, Quests.MONKS_FRIEND)
         when (questStage) {
             0 -> {
                 when(stage) {
@@ -50,7 +50,7 @@ class BrotherOmadDialogue : DialogueFile() {
                     }
                     10 -> npcl(core.game.dialogue.FacialExpression.HALF_WORRIED, "Please do. We won't be able to help you as we are peaceful men but we would be grateful for your help!").also { stage++ }
                     11 -> playerl(core.game.dialogue.FacialExpression.HALF_ASKING, "Where are they?").also { stage++ }
-                    12 -> npcl(core.game.dialogue.FacialExpression.SAD, "They hide in a secret cave in the forest. It's hidden under a ring of stones. Please, bring back the blanket!").also { stage = END_DIALOGUE }.also { player!!.questRepository.getQuest("Monk's Friend").start(player) }.also { player!!.questRepository.syncronizeTab(player) }
+                    12 -> npcl(core.game.dialogue.FacialExpression.SAD, "They hide in a secret cave in the forest. It's hidden under a ring of stones. Please, bring back the blanket!").also { stage = END_DIALOGUE }.also { player!!.questRepository.getQuest(Quests.MONKS_FRIEND).start(player) }.also { player!!.questRepository.syncronizeTab(player) }
                 }
             }
             10 -> {
@@ -70,7 +70,7 @@ class BrotherOmadDialogue : DialogueFile() {
                     }
                     31 -> npcl(core.game.dialogue.FacialExpression.HAPPY, "Really, that's excellent, well done! Maybe now I will be able to get some rest.").also{stage++}
                     32 -> npcl(core.game.dialogue.FacialExpression.SAD, "*yawn*..I'm off to bed! Farewell brave traveller!").also{player!!.inventory.remove(Item(Items.CHILDS_BLANKET_90))
-                        setQuestStage(player!!, questName, 20); stage = END_DIALOGUE
+                        setQuestStage(player!!, Quests.MONKS_FRIEND, 20); stage = END_DIALOGUE
                     }
                 }
             }
@@ -105,7 +105,12 @@ class BrotherOmadDialogue : DialogueFile() {
                     996 -> npcl(core.game.dialogue.FacialExpression.NEUTRAL, "Okay traveller, take care.").also{stage = END_DIALOGUE }
                     997 -> npcl(core.game.dialogue.FacialExpression.NEUTRAL, "Of course, but we need the wine first.").also{stage = END_DIALOGUE }
                     42 -> npcl(core.game.dialogue.FacialExpression.FRIENDLY, "Oh, he won't be far. Probably out in the forest.").also{stage++}
-                    43 -> playerl(core.game.dialogue.FacialExpression.FRIENDLY, "Ok, I'll go and find him.").also { stage = END_DIALOGUE }.also{ setQuestStage(player!!, questName, 30)}
+                    43 -> playerl(core.game.dialogue.FacialExpression.FRIENDLY, "Ok, I'll go and find him.").also { stage = END_DIALOGUE }.also{
+                        setQuestStage(
+                            player!!,
+                            Quests.MONKS_FRIEND,
+                            30
+                        )}
                 }
             }
             30 -> {
@@ -192,7 +197,7 @@ class BrotherOmadDialogue : DialogueFile() {
                         monk.animator.animate(Animation(2109)) // Jump for joy
                     }
                     25 -> if (questComplete) {
-                        player!!.questRepository.getQuest("Monk's Friend").finish(player)
+                        player!!.questRepository.getQuest(Quests.MONKS_FRIEND).finish(player)
                     }
                 }
                 count++

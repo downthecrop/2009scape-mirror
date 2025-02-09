@@ -9,6 +9,7 @@ import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import content.data.Quests;
 
 /**
  * Handles the bar squeezing shortcut.
@@ -61,7 +62,7 @@ public class BarSqueezeShortcut extends AgilityShortcut {
 
 	@Override
 	public boolean checkRequirements(Player player) {
-		if (!player.getQuestRepository().isComplete("Priest in Peril") && !(player.getLocation().getY() >= 3159 && player.getLocation().getY() <= 3161)) {
+		if (!player.getQuestRepository().isComplete(Quests.PRIEST_IN_PERIL) && !(player.getLocation().getY() >= 3159 && player.getLocation().getY() <= 3161)) {
 			player.getDialogueInterpreter().sendDialogue("You need to have completed Priest in Peril in order to do this.");
 			return false;
 		}

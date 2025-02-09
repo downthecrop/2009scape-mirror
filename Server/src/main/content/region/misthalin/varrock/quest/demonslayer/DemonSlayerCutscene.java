@@ -30,6 +30,7 @@ import core.net.packet.out.CameraViewPacket;
 import core.net.packet.out.MinimapState;
 
 import static core.api.ContentAPIKt.*;
+import content.data.Quests;
 
 /**
  * Represents the cutscene during the combat of fighting delrith the demon.
@@ -121,7 +122,7 @@ public final class DemonSlayerCutscene extends CutscenePlugin {
 			return true;
 		}
 		final Player player = ((Player) entity);
-		final Quest quest = player.getQuestRepository().getQuest("Demon Slayer");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.DEMON_SLAYER);
 		boolean in = player.getAttribute("demon-slayer:cutscene", false);
 		if (quest.getStage(player) == 30 && !in && (player.getEquipment().containsItem(DemonSlayer.SILVERLIGHT) || player.getInventory().containsItem(DemonSlayer.SILVERLIGHT))) {
 			ActivityManager.start(player, "Demon Slayer Cutscene", false);
@@ -422,7 +423,7 @@ public final class DemonSlayerCutscene extends CutscenePlugin {
 						cutscene.end();
 						cutscene.delrith.clear();
                                                 setVarp(player, 222, 5653570, true);
-						player.getQuestRepository().getQuest("Demon Slayer").finish(player);
+						player.getQuestRepository().getQuest(Quests.DEMON_SLAYER).finish(player);
 						end();
 						return true;
 					}

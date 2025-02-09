@@ -9,6 +9,7 @@ import core.game.node.item.Item;
 import core.plugin.ClassScanner;
 
 import static core.api.ContentAPIKt.*;
+import content.data.Quests;
 
 /**
  * The what lies below quest.
@@ -17,12 +18,6 @@ import static core.api.ContentAPIKt.*;
  */
 @Initializable
 public class WhatLiesBelow extends Quest {
-
-    /**
-     * The name of the quest.
-     */
-    public static final String NAME = "What Lies Below";
-
     /**
      * The bowl item.
      */
@@ -87,7 +82,7 @@ public class WhatLiesBelow extends Quest {
 	 * Constructs a new {@Code WhatLiesBelow} {@Code Object}
      */
 	public WhatLiesBelow() {
-		super(NAME, 136, 135, 1);
+		super(Quests.WHAT_LIES_BELOW, 136, 135, 1);
 	}
 
 	@Override
@@ -107,7 +102,7 @@ public class WhatLiesBelow extends Quest {
 			line(player, "Before I begin I will need to:", line++);
 			line(player, "Have level 35 !!Runecrafting??.", line++, getStatLevel(player, Skills.RUNECRAFTING) >= 35);
 			line(player, "Be able to defeat a !!level 47 enemy??.", line++);
-			line(player, "I need to have completed the !!Rune Mysteries?? quest.", line++, isQuestComplete(player, "Rune Mysteries"));
+			line(player, "I need to have completed the !!Rune Mysteries?? quest.", line++, isQuestComplete(player, Quests.RUNE_MYSTERIES));
 			line(player, "Have a !!Mining?? level of 42 to use the !!Chaos Tunnel??.", line++, getStatLevel(player, Skills.MINING) >= 42);
 		} else {
 			// These are somehow at the top with different stage when crossed out.
@@ -202,7 +197,7 @@ public class WhatLiesBelow extends Quest {
 		requirements[0] = player.getSkills().getStaticLevel(Skills.RUNECRAFTING) >= 35;
 		requirements[1] = false;
 		requirements[3] = player.getSkills().getStaticLevel(Skills.MINING) >= 42;
-		requirements[2] = player.getQuestRepository().isComplete("Rune Mysteries");
+		requirements[2] = player.getQuestRepository().isComplete(Quests.RUNE_MYSTERIES);
 		return requirements[0] && requirements[2] && requirements[3];
 	}
 
@@ -217,7 +212,7 @@ public class WhatLiesBelow extends Quest {
 		} else if (stage > 0 && stage < 100) {
 			return new int[] { id, 1 };
 		}
-                setVarp(player, 1181, (1 << 8) + (1 << 9), true);
+		setVarp(player, 1181, (1 << 8) + (1 << 9), true);
 		return new int[] { id, 502 };
 	}
 	

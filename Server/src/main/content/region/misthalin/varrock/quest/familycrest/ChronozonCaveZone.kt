@@ -14,6 +14,7 @@ import core.api.getQuestStage
 import core.api.hasAnItem
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 
 @Initializable
@@ -34,7 +35,7 @@ class ChronozonCaveZone: MapZone("FC ChronozoneZone", true), Plugin<Unit> {
         if (e != null) {
             if (e.isPlayer) {
                 val player = e as Player
-                if (getQuestStage(player,"Family Crest") in (19..99) &&
+                if (getQuestStage(player,Quests.FAMILY_CREST) in (19..99) &&
                     !hasAnItem(player, Items.CREST_PART_781).exists()
                     ){
                     // Chronozon is allowed to spawn (quest stage right and the player doesn't have the crest part)

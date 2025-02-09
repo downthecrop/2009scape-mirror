@@ -1,5 +1,6 @@
 package content.region.misthalin.varrock.dialogue
 
+import content.data.Quests
 import content.region.misthalin.varrock.handlers.MuseumInteractionListener.Companion.handleMuseumDoor
 import core.api.forceWalk
 import core.api.getScenery
@@ -27,7 +28,7 @@ class DoorGuardDialogue(player: Player? = null) : DialoguePlugin(player) {
             1 -> npcl(FacialExpression.NEUTRAL, "Well, the main entrance is 'round the front. Just head west then north slightly, you can't miss it!").also { stage++ }
             2 -> playerl(FacialExpression.NEUTRAL, "What about these doors?").also { stage++ }
             3 -> {
-                if (isQuestComplete(player, "The Dig Site")) {
+                if (isQuestComplete(player, Quests.THE_DIG_SITE)) {
                     npcl(FacialExpression.NEUTRAL, "They're primarily for the workmen bringing finds from the Dig Site, but you can go through if you want.").also { stage++ }
                 } else {
                     npcl(FacialExpression.NEUTRAL, "They're for the workmen bringing finds from the Dig Site; sorry, but you can't go through.").also { stage = END_DIALOGUE }
@@ -57,7 +58,7 @@ class GateGuardDialogue(player: Player? = null) : DialoguePlugin(player) {
         // Shows the player walking to this spot first https://www.youtube.com/watch?v=t-oeY3a-ZSA&t=53s
         if (player.location != Location(3261, 3447)) forceWalk(player, Location(3261, 3447), "smart")
 
-        if (isQuestComplete(player, "The Dig Site")) {
+        if (isQuestComplete(player, Quests.THE_DIG_SITE)) {
             npcl(FacialExpression.NEUTRAL, "Welcome! Would you like to go into the Dig Site archaeology cleaning area?").also { stage = START_DIALOGUE }
         } else {
             npcl(FacialExpression.NEUTRAL, "You're not permitted in this area.").also { stage = END_DIALOGUE }

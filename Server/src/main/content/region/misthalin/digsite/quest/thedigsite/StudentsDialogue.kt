@@ -1,5 +1,6 @@
 package content.region.misthalin.digsite.quest.thedigsite
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
@@ -28,10 +29,10 @@ class StudentGreenDialogueFile : DialogueBuilderFile() {
     override fun create(b: DialogueBuilder) {
 
 
-        b.onQuestStages(TheDigSite.questName, 6,7,8,9,10,11,12,13,100)
+        b.onQuestStages(Quests.THE_DIG_SITE, 6, 7, 8, 9, 10, 11, 12, 13, 100)
                 .npcl(FacialExpression.FRIENDLY, " Oh, hi again. News of your find has spread fast; you are quite famous around here now.")
 
-        b.onQuestStages(TheDigSite.questName, 5)
+        b.onQuestStages(Quests.THE_DIG_SITE, 5)
                 .playerl(FacialExpression.FRIENDLY, "Hello there.")
                 .npcl(FacialExpression.FRIENDLY, "How's it going?")
                 .playerl(FacialExpression.FRIENDLY, "I need more help with the exam.")
@@ -42,7 +43,7 @@ class StudentGreenDialogueFile : DialogueBuilderFile() {
                     setAttribute(player, TheDigSite.attributeStudentGreenExam3ObtainAnswer, true)
                 }
 
-        b.onQuestStages(TheDigSite.questName, 4)
+        b.onQuestStages(Quests.THE_DIG_SITE, 4)
                 .playerl(FacialExpression.FRIENDLY, "Hello there.")
                 .npcl(FacialExpression.FRIENDLY, "How's it going?")
                 .playerl(FacialExpression.FRIENDLY, "I need more help with the exam.")
@@ -52,7 +53,7 @@ class StudentGreenDialogueFile : DialogueBuilderFile() {
                 .endWith { _, player ->
                     setAttribute(player, TheDigSite.attributeStudentGreenExam2ObtainAnswer, true)
                 }
-        b.onPredicate { player -> getQuestStage(player, TheDigSite.questName) == 3 && getAttribute(player, TheDigSite.attributeStudentGreenExam1ObtainAnswer, false)}
+        b.onPredicate { player -> getQuestStage(player, Quests.THE_DIG_SITE) == 3 && getAttribute(player, TheDigSite.attributeStudentGreenExam1ObtainAnswer, false)}
                 .playerl(FacialExpression.FRIENDLY, "Hello there.")
                 .npcl(FacialExpression.FRIENDLY, "How's it going?")
                 .playerl(FacialExpression.FRIENDLY, "I need more help with the exam.")
@@ -62,7 +63,7 @@ class StudentGreenDialogueFile : DialogueBuilderFile() {
                 .endWith { _, player ->
                     setAttribute(player, TheDigSite.attributeStudentGreenExam1ObtainAnswer, true)
                 }
-        b.onPredicate { player -> getQuestStage(player, TheDigSite.questName) == 3 && getAttribute(player, TheDigSite.attributeStudentGreenExam1Talked, false)}
+        b.onPredicate { player -> getQuestStage(player, Quests.THE_DIG_SITE) == 3 && getAttribute(player, TheDigSite.attributeStudentGreenExam1Talked, false)}
                 .branch { player ->
                     return@branch if (inInventory(player, Items.ANIMAL_SKULL_671)) { 1 } else { 0 }
                 }.let{ branch ->
@@ -86,7 +87,7 @@ class StudentGreenDialogueFile : DialogueBuilderFile() {
                             }
                     return@let branch
                 }
-        b.onQuestStages(TheDigSite.questName, 3)
+        b.onQuestStages(Quests.THE_DIG_SITE, 3)
                 .playerl(FacialExpression.FRIENDLY, "Hello there. Can you help me with the Earth Sciences exams at all?")
                 .npcl(FacialExpression.FRIENDLY, "Well... Maybe I will if you help me with something.")
                 .playerl(FacialExpression.FRIENDLY, "What's that?")
@@ -127,7 +128,7 @@ class StudentPurpleDialogueFile : DialogueBuilderFile() {
 
     override fun create(b: DialogueBuilder) {
 
-        b.onPredicate { player -> getQuestStage(player, TheDigSite.questName) == 5 && getAttribute(player, TheDigSite.attributeStudentPurpleExam3ObtainAnswer, false)}
+        b.onPredicate { player -> getQuestStage(player, Quests.THE_DIG_SITE) == 5 && getAttribute(player, TheDigSite.attributeStudentPurpleExam3ObtainAnswer, false)}
                 .playerl(FacialExpression.FRIENDLY, "Hello there.")
                 .npcl(FacialExpression.FRIENDLY, "How's it going?")
                 .playerl(FacialExpression.FRIENDLY, "I am stuck on some more exam questions.")
@@ -138,7 +139,7 @@ class StudentPurpleDialogueFile : DialogueBuilderFile() {
                     setAttribute(player, TheDigSite.attributeStudentPurpleExam3ObtainAnswer, true)
                 }
 
-        b.onPredicate { player -> getQuestStage(player, TheDigSite.questName) == 5 && getAttribute(player, TheDigSite.attributeStudentPurpleExam3Talked, false)}
+        b.onPredicate { player -> getQuestStage(player, Quests.THE_DIG_SITE) == 5 && getAttribute(player, TheDigSite.attributeStudentPurpleExam3Talked, false)}
                 .branch { player ->
                     return@branch if (inInventory(player, Items.OPAL_1609) || inInventory(player, Items.UNCUT_OPAL_1625)) { 1 } else { 0 }
                 }.let{ branch ->
@@ -170,7 +171,7 @@ class StudentPurpleDialogueFile : DialogueBuilderFile() {
                     return@let branch
                 }
 
-        b.onQuestStages(TheDigSite.questName, 5)
+        b.onQuestStages(Quests.THE_DIG_SITE, 5)
                 .playerl(FacialExpression.FRIENDLY, "Hello there.")
                 .npcl(FacialExpression.FRIENDLY, "What, you want more help?")
                 .playerl(FacialExpression.FRIENDLY, "Err... Yes please!")
@@ -184,7 +185,7 @@ class StudentPurpleDialogueFile : DialogueBuilderFile() {
                     setAttribute(player, TheDigSite.attributeStudentPurpleExam3Talked, true)
                 }
 
-        b.onQuestStages(TheDigSite.questName, 4)
+        b.onQuestStages(Quests.THE_DIG_SITE, 4)
                 .playerl(FacialExpression.FRIENDLY, "Hello there.")
                 .npcl(FacialExpression.FRIENDLY, "How's it going?")
                 .playerl(FacialExpression.FRIENDLY, "I am stuck on some more exam questions.")
@@ -194,7 +195,7 @@ class StudentPurpleDialogueFile : DialogueBuilderFile() {
                 .endWith { _, player ->
                     setAttribute(player, TheDigSite.attributeStudentPurpleExam2ObtainAnswer, true)
                 }
-        b.onPredicate { player -> getQuestStage(player, TheDigSite.questName) == 3 && getAttribute(player, TheDigSite.attributeStudentPurpleExam1ObtainAnswer, false)}
+        b.onPredicate { player -> getQuestStage(player, Quests.THE_DIG_SITE) == 3 && getAttribute(player, TheDigSite.attributeStudentPurpleExam1ObtainAnswer, false)}
                 .playerl(FacialExpression.FRIENDLY, "Hello there.")
                 .npcl(FacialExpression.FRIENDLY, "How's it going?")
                 .playerl(FacialExpression.FRIENDLY, "I am stuck on some more exam questions.")
@@ -204,7 +205,7 @@ class StudentPurpleDialogueFile : DialogueBuilderFile() {
                 .endWith { _, player ->
                     setAttribute(player, TheDigSite.attributeStudentPurpleExam1ObtainAnswer, true)
                 }
-        b.onPredicate { player -> getQuestStage(player, TheDigSite.questName) == 3 && getAttribute(player, TheDigSite.attributeStudentPurpleExam1Talked, false)}
+        b.onPredicate { player -> getQuestStage(player, Quests.THE_DIG_SITE) == 3 && getAttribute(player, TheDigSite.attributeStudentPurpleExam1Talked, false)}
                 .branch { player ->
                     return@branch if (inInventory(player, Items.TEDDY_673)) { 1 } else { 0 }
                 }.let{ branch ->
@@ -229,7 +230,7 @@ class StudentPurpleDialogueFile : DialogueBuilderFile() {
                             }
                     return@let branch
                 }
-        b.onQuestStages(TheDigSite.questName, 3)
+        b.onQuestStages(Quests.THE_DIG_SITE, 3)
                 .playerl(FacialExpression.FRIENDLY, "Hello there. Can you help me with the Earth Sciences exams at all?")
                 .npcl(FacialExpression.FRIENDLY, "I can if you help me...")
                 .playerl(FacialExpression.FRIENDLY, "How can I do that?")
@@ -266,7 +267,7 @@ class StudentBrownDialogueFile : DialogueBuilderFile() {
 
     override fun create(b: DialogueBuilder) {
 
-        b.onQuestStages(TheDigSite.questName, 5)
+        b.onQuestStages(Quests.THE_DIG_SITE, 5)
                 .playerl(FacialExpression.FRIENDLY, "Hello there.")
                 .npcl(FacialExpression.FRIENDLY, "How's it going?")
                 .playerl(FacialExpression.FRIENDLY, "There are more exam questions I'm stuck on.")
@@ -277,7 +278,7 @@ class StudentBrownDialogueFile : DialogueBuilderFile() {
                     setAttribute(player, TheDigSite.attributeStudentBrownExam3ObtainAnswer, true)
                 }
 
-        b.onQuestStages(TheDigSite.questName, 4)
+        b.onQuestStages(Quests.THE_DIG_SITE, 4)
                 .playerl(FacialExpression.FRIENDLY, "Hello there.")
                 .npcl(FacialExpression.FRIENDLY, "How's it going?")
                 .playerl(FacialExpression.FRIENDLY, "There are more exam questions I'm stuck on.")
@@ -287,7 +288,7 @@ class StudentBrownDialogueFile : DialogueBuilderFile() {
                 .endWith { _, player ->
                     setAttribute(player, TheDigSite.attributeStudentBrownExam2ObtainAnswer, true)
                 }
-        b.onPredicate { player -> getQuestStage(player, TheDigSite.questName) == 3 && getAttribute(player, TheDigSite.attributeStudentBrownExam1ObtainAnswer, false)}
+        b.onPredicate { player -> getQuestStage(player, Quests.THE_DIG_SITE) == 3 && getAttribute(player, TheDigSite.attributeStudentBrownExam1ObtainAnswer, false)}
                 .playerl(FacialExpression.FRIENDLY, "Hello there.")
                 .npcl(FacialExpression.FRIENDLY, "How's it going?")
                 .playerl(FacialExpression.FRIENDLY, "There are more exam questions I'm stuck on.")
@@ -297,7 +298,7 @@ class StudentBrownDialogueFile : DialogueBuilderFile() {
                 .endWith { _, player ->
                     setAttribute(player, TheDigSite.attributeStudentBrownExam1ObtainAnswer, true)
                 }
-        b.onPredicate { player -> getQuestStage(player, TheDigSite.questName) == 3 && getAttribute(player, TheDigSite.attributeStudentBrownExam1Talked, false)}
+        b.onPredicate { player -> getQuestStage(player, Quests.THE_DIG_SITE) == 3 && getAttribute(player, TheDigSite.attributeStudentBrownExam1Talked, false)}
                 .playerl(FacialExpression.FRIENDLY, "Hello there. How's the study going?")
                 .npcl(FacialExpression.FRIENDLY, "I'm getting there. Have you found my special cup yet?")
                 .branch { player ->
@@ -319,7 +320,7 @@ class StudentBrownDialogueFile : DialogueBuilderFile() {
                             }
                     return@let branch
                 }
-        b.onQuestStages(TheDigSite.questName, 3)
+        b.onQuestStages(Quests.THE_DIG_SITE, 3)
                 .playerl(FacialExpression.FRIENDLY, "Hello there. Can you help me with the Earth Sciences exams at all?")
                 .npcl(FacialExpression.FRIENDLY, "I can't do anything unless I find my special cup.")
                 .playerl(FacialExpression.FRIENDLY, "Your what?")

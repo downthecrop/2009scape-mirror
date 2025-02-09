@@ -12,6 +12,7 @@ import core.tools.RandomFunction;
 import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.playAudio;
+import content.data.Quests;
 
 
 /**
@@ -69,7 +70,7 @@ public final class HerblorePulse extends SkillPulse<Item> {
 
 	@Override
 	public boolean checkRequirements() {
-		if (!player.getQuestRepository().isComplete("Druidic Ritual")) {
+		if (!player.getQuestRepository().isComplete(Quests.DRUIDIC_RITUAL)) {
 			player.getPacketDispatch().sendMessage("You must complete the Druidic Ritual quest before you can use Herblore.");
 			return false;
 		}

@@ -8,9 +8,10 @@ import core.game.node.entity.skill.Skills
 import core.game.world.map.Location
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 @Initializable
-class TreeGnomeVillage: Quest("Tree Gnome Village", 125, 124, 2,  111, 0, 1, 9) {
+class TreeGnomeVillage: Quest(Quests.TREE_GNOME_VILLAGE, 125, 124, 2,  111, 0, 1, 9) {
     override fun newInstance(`object`: Any?): Quest {
         return this
     }
@@ -91,6 +92,5 @@ class TreeGnomeVillage: Quest("Tree Gnome Village", 125, 124, 2,  111, 0, 1, 9) 
     companion object {
         val mazeVillage = Location(2515,3159,0)
         val mazeEntrance = Location(2504,3192,0)
-        const val questName = "Tree Gnome Village"
     }
 }

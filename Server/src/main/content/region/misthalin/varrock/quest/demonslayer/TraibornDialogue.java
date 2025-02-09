@@ -12,6 +12,7 @@ import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
+import content.data.Quests;
 
 /**
  * Represents the dialogue used to handle the Traiborn NPC.
@@ -60,7 +61,7 @@ public class TraibornDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest("Demon Slayer");
+		quest = player.getQuestRepository().getQuest(Quests.DEMON_SLAYER);
 		switch (quest.getStage(player)) {
 		case 20:
 			if (player.getAttribute("demon-slayer:traiborn", false)) {

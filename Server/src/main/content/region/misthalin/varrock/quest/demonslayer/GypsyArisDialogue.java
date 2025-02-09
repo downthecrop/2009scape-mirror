@@ -17,6 +17,7 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.CameraContext;
 import core.net.packet.context.CameraContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
+import content.data.Quests;
 
 /**
  * Represents the dialogue which handles the transcript for the gypsy aris.
@@ -75,7 +76,7 @@ public final class GypsyArisDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest("Demon Slayer");
+		quest = player.getQuestRepository().getQuest(Quests.DEMON_SLAYER);
 		switch (quest.getStage(player)) {
 		case 100:
 			npc("Greetings young one.");

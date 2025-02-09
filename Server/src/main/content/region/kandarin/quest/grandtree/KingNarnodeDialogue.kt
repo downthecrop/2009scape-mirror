@@ -1,6 +1,6 @@
 package content.region.kandarin.quest.grandtree
 
-import content.region.kandarin.quest.grandtree.TheGrandTree.Companion.questName
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.interaction.MovementPulse
@@ -67,7 +67,7 @@ class KingNarnodeDialogue : DialogueFile() {
         })
     }
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, questName)) {
+        when (getQuestStage(player!!, Quests.THE_GRAND_TREE)) {
             0 -> {
                 when (stage) {
                     0 -> npcl("Welcome Traveller. I am King Narnode. It's nice to see an outsider.").also { stage++ }
@@ -222,7 +222,7 @@ class KingNarnodeDialogue : DialogueFile() {
                     64 -> npcl("First, I must warn the tree guardians. Please, could you tell the chief tree guardian, Glough. He lives in a tree house just in front of the Grand Tree.").also { stage++ }
                     65 -> npcl("If he's not there he will be at his girlfriend Anita's place. Meet me back here once you've told him.").also { stage++ }
                     66 -> playerl("Ok! I'll be back soon.").also {
-                        setQuestStage(player!!, questName, 40)
+                        setQuestStage(player!!, Quests.THE_GRAND_TREE, 40)
                         stage = END_DIALOGUE
                     }
                 }
@@ -242,7 +242,7 @@ class KingNarnodeDialogue : DialogueFile() {
                     3 -> npcl("Yes Glough really knows what he's doing. The human has been detained until we know who else is involved. Maybe Glough was right, maybe humans are invading!").also { stage++ }
                     4 -> playerl("I doubt it, can I speak to the prisoner?").also { stage++ }
                     5 -> npcl("Certainly. He's on the top level of the tree. Be careful, it's a long way down!").also {
-                        setQuestStage(player!!, questName, 46)
+                        setQuestStage(player!!, Quests.THE_GRAND_TREE, 46)
                         stage = END_DIALOGUE
                     }
                 }
@@ -281,7 +281,7 @@ class KingNarnodeDialogue : DialogueFile() {
                         }
                         7 -> npcl("On the other hand, if Glough's right about the humans we will need an army of gnomes to protect ourselves. ").also { stage++ }
                         8 -> npcl("So I've decided to allow Glough to raise a mighty gnome army. The Grand Tree's still slowly dying. If it is human sabotage we must respond!").also{
-                            setQuestStage(player!!, questName, 70)
+                            setQuestStage(player!!, Quests.THE_GRAND_TREE, 70)
                             removeItem(player!!, Item(Items.INVASION_PLANS_794), Container.INVENTORY)
                             stage = END_DIALOGUE
                         }
@@ -383,7 +383,7 @@ class KingNarnodeUnderGroundDialogue : DialogueFile() {
         })
     }
     override fun handle(componentID: Int, buttonID: Int) {
-        when(getQuestStage(player!!, questName)) {
+        when(getQuestStage(player!!, Quests.THE_GRAND_TREE)) {
             98 -> when (stage) {
                 0 -> npcl("Traveller, you're wounded! What happened?").also { stage++ }
                 1 -> playerl("It's Glough! He set a demon on me!").also { stage++ }
@@ -398,7 +398,7 @@ class KingNarnodeUnderGroundDialogue : DialogueFile() {
                 10 -> sendNPCDialogue(player!!, NPCs.GNOME_GUARD_163,"Yes sir!").also{ stage++ }
                 11 -> npcl("You have my full apologies Traveller! And my gratitude! A reward will have to wait though, the tree is still dying!").also {stage++}
                 12 -> npcl("The guards are clearing Glough's rock supply now but there must be more Daconia hidden somewhere in the roots! Help us search, we have little time!").also {
-                    setQuestStage(player!!, questName, 99)
+                    setQuestStage(player!!, Quests.THE_GRAND_TREE, 99)
                     // position of the daconia rock
                     if(getAttribute(player!!,"treegnome:rock",0) == 0){
                         val answer = (1..5).random()
@@ -425,7 +425,7 @@ class KingNarnodeUnderGroundDialogue : DialogueFile() {
                         11 -> playerl("Strange!").also { stage++ }
                         12 -> npcl("That's magic trees for you! All the best Traveller and thanks again!").also { stage++ }
                         13 -> playerl("You too, Your Highness!").also {
-                            finishQuest(player!!, questName)
+                            finishQuest(player!!, Quests.THE_GRAND_TREE)
                             removeItem(player!!, Items.DACONIA_ROCK_793)
                             stage = END_DIALOGUE
                         }
@@ -494,7 +494,7 @@ class KingNarnodeUnderGroundDialogue : DialogueFile() {
                 31 -> if (player!!.inventory.freeSlots() >= 2) {
                     npcl("Up here.")
                     stage = END_DIALOGUE
-                    setQuestStage(player!!, questName, 10)
+                    setQuestStage(player!!, Quests.THE_GRAND_TREE, 10)
                     addItemOrDrop(player!!, Items.BARK_SAMPLE_783)
                     addItemOrDrop(player!!, Items.TRANSLATION_BOOK_784)
                     leadUpLadder()

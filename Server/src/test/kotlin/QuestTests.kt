@@ -1,3 +1,4 @@
+import content.data.Quests
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.player.link.quest.QuestRepository
 import org.junit.jupiter.api.Assertions
@@ -10,7 +11,7 @@ class QuestTests {
         testPlayer = TestUtils.getMockPlayer("test")
     }
 
-    class TestQuest : Quest("Test Quest", 0, 0, 1, 1, 0, 1, 2) {
+    class TestQuest : Quest(Quests.TEST_QUEST, 0, 0, 1, 1, 0, 1, 2) {
         override fun newInstance(`object`: Any?): Quest {
             return this
         }
@@ -25,13 +26,13 @@ class QuestTests {
 
     @Test fun registerShouldMakeQuestImmediatelyAvailable() {
         QuestRepository.register(testQuest)
-        Assertions.assertNotNull(QuestRepository.getQuests()[testQuest.name])
+        Assertions.assertNotNull(QuestRepository.getQuests()[testQuest.quest])
     }
 
     @Test fun registerShouldMakeQuestImmediatelyAvailableToInstances() {
         QuestRepository.register(testQuest)
         val instance = QuestRepository(testPlayer)
-        Assertions.assertNotNull(instance.getQuest(testQuest.name))
+        Assertions.assertNotNull(instance.getQuest(testQuest.quest))
     }
 
     @Test fun getStageOnUnstartedQuestShouldNotThrowException() {
@@ -54,8 +55,8 @@ class QuestTests {
         Assertions.assertThrows(IllegalStateException::class.java, {
             QuestRepository.register(testQuest)
             val repo = QuestRepository(testPlayer)
-            repo.getQuest("Test Quest").finish(testPlayer)
-            repo.getQuest("Test Quest").finish(testPlayer)
+            repo.getQuest(Quests.TEST_QUEST).finish(testPlayer)
+            repo.getQuest(Quests.TEST_QUEST).finish(testPlayer)
         }, "Quest completed twice without throwing an exception or threw wrong exception!")
     }
 }

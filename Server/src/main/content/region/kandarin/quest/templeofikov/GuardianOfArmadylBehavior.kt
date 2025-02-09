@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.templeofikov
 
+import content.data.Quests
 import core.api.isQuestComplete
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
@@ -21,7 +22,7 @@ class GuardianOfArmadylBehavior : NPCBehavior(*guardianOfArmadylIds) {
     override fun onDropTableRolled(self: NPC, killer: Entity, drops: ArrayList<Item>) {
         super.onDropTableRolled(self, killer, drops)
         // Drops Pendant of Armadyl after quest complete when killed.
-        if (killer is Player && isQuestComplete(killer, TempleOfIkov.questName)) {
+        if (killer is Player && isQuestComplete(killer, Quests.TEMPLE_OF_IKOV)) {
             if(RandomFunction.roll(4)) {
                 drops.add(Item(Items.ARMADYL_PENDANT_87))
             }

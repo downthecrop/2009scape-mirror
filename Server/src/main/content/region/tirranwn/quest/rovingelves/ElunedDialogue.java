@@ -6,6 +6,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import org.rs09.consts.Items;
+import content.data.Quests;
 
 /**
  * Handles Eluned's Dialogue for Roving Elves.
@@ -28,7 +29,7 @@ public class ElunedDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
-		final Quest quest = player.getQuestRepository().getQuest("Roving Elves");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.ROVING_ELVES);
 		switch (stage) {
 		case 500:
 			end();
@@ -180,7 +181,7 @@ public class ElunedDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean open(Object... args) {
-		final Quest quest = player.getQuestRepository().getQuest("Roving Elves");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.ROVING_ELVES);
 		if (quest.getStage(player) == 10) {
 			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Hey there... Islwyn said you may be able to help me.", "He told me you know how to consecrate ground for an", "elven burial. I need to reconsecrate Glarial's resting", "place.");
 			stage = 1;

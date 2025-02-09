@@ -9,6 +9,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.game.interaction.PluginInteraction;
 import core.game.interaction.PluginInteractionManager;
+import content.data.Quests;
 
 @Initializable
 public class GateInteraction extends PluginInteraction {
@@ -27,11 +28,11 @@ public class GateInteraction extends PluginInteraction {
     }
 
     public boolean handleGate(Player player, Node node){
-        if(!player.getAttribute("fishing_contest:pass-shown",false) || player.getQuestRepository().getStage("Fishing Contest") < 10) {
+        if(!player.getAttribute("fishing_contest:pass-shown",false) || player.getQuestRepository().getStage(Quests.FISHING_CONTEST) < 10) {
             player.getPulseManager().run(new MovementPulse(player, node.asScenery().getLocation().transform(1, 0, 0)) {
                 @Override
                 public boolean pulse() {
-                    if(player.getQuestRepository().getStage("Fishing Contest") >= 10){
+                    if(player.getQuestRepository().getStage(Quests.FISHING_CONTEST) >= 10){
                         player.sendMessage("You should give your pass to Morris.");
                     } else {
                         player.sendMessage("You need a fishing pass to fish here.");

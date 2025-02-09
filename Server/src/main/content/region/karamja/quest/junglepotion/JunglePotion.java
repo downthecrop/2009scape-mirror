@@ -14,6 +14,7 @@ import core.tools.RandomFunction;
 import core.tools.StringUtils;
 
 import static core.api.ContentAPIKt.*;
+import content.data.Quests;
 
 /**
  * The main type or the jungle potion quest.
@@ -24,15 +25,10 @@ import static core.api.ContentAPIKt.*;
 public final class JunglePotion extends Quest {
 
 	/**
-	 * The name of the quest.
-	 */
-	public static final String NAME = "Jungle Potion";
-
-	/**
 	 * Constructs a new {@code JunglePotion} {@code Object}.
 	 */
 	public JunglePotion() {
-		super(NAME, 81, 80, 1, 175, 0, 1, 12);
+		super(Quests.JUNGLE_POTION, 81, 80, 1, 175, 0, 1, 12);
 	}
 	
 	@Override

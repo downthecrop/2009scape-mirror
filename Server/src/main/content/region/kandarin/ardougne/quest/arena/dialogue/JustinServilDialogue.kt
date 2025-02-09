@@ -1,6 +1,6 @@
 package content.region.kandarin.ardougne.quest.arena.dialogue
 
-import content.region.kandarin.ardougne.quest.arena.FightArena
+import content.data.Quests
 import core.api.face
 import core.api.findNPC
 import core.api.getQuestStage
@@ -14,7 +14,7 @@ import org.rs09.consts.NPCs
 class JustinServilDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.JUSTIN_SERVIL_267)
-        when (getQuestStage(player!!, FightArena.FightArenaQuest)) {
+        when (getQuestStage(player!!, Quests.FIGHT_ARENA)) {
 
             in 1..68 -> when (stage) {
                 0 -> playerl(FacialExpression.FRIENDLY, "Hello.").also { stage++ }

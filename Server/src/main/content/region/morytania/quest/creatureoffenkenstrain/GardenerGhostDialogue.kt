@@ -1,12 +1,10 @@
 package content.region.morytania.quest.creatureoffenkenstrain
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.*
 import core.game.node.entity.player.Player
-import core.game.node.item.Item
 import core.plugin.Initializable
-import core.tools.END_DIALOGUE
-import core.tools.START_DIALOGUE
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import java.util.*
@@ -41,7 +39,7 @@ class GardenerGhostDialogueFile : DialogueBuilderFile() {
         b.onPredicate { player -> !player.equipment.containsAtLeastOneItem(Items.GHOSTSPEAK_AMULET_552) }
                 .npcl("Wooo wooo wooooo.")
                 .end()
-        b.onQuestStages(CreatureOfFenkenstrain.questName, *(0 .. 8).toIntArray(), 100)
+        b.onQuestStages(Quests.CREATURE_OF_FENKENSTRAIN, *(0..8).toIntArray(), 100)
                 .options().let { optionBuilder ->
                     optionBuilder.option("Tell me about Fenkenstrain.")
                             .playerl("Can you tell me anything about Fenkenstrain?")
@@ -57,14 +55,20 @@ class GardenerGhostDialogueFile : DialogueBuilderFile() {
                             .npcl("Don't worry yerself. I'm not worried about bein' dead. Worse things could happen, I suppose.")
                             .npcl("One thing I do know is, there ain't no lord of the castle anymore, 'cept for old Fenky. Makes ya think a bit, don't it?")
                             .end()
-                    optionBuilder.optionIf("Do you know where the key to the shed is?") { player -> return@optionIf getQuestStage(player, CreatureOfFenkenstrain.questName) == 4 }
+                    optionBuilder.optionIf("Do you know where the key to the shed is?") { player -> return@optionIf getQuestStage(
+                        player,
+                        Quests.CREATURE_OF_FENKENSTRAIN
+                    ) == 4 }
                             .item(Items.GHOSTSPEAK_AMULET_552, "You feel power emanate from the Amulet of Ghostspeak", "and the air around you vibrates with the ghostly voice", "of the headless gardener.")
                             .npcl("Got it right 'ere in my pocket. Here you go.")
                             .iteml(4186, "The headless gardener hands you a rusty key.")
                             .endWith { _, player ->
                                 addItemOrDrop(player, Items.SHED_KEY_4186)
                             }
-                    optionBuilder.optionIf("Do you know where I can find a lightning conductor mould is?") { player -> return@optionIf getQuestStage(player, CreatureOfFenkenstrain.questName) == 4 }
+                    optionBuilder.optionIf("Do you know where I can find a lightning conductor mould is?") { player -> return@optionIf getQuestStage(
+                        player,
+                        Quests.CREATURE_OF_FENKENSTRAIN
+                    ) == 4 }
                             .item(Items.GHOSTSPEAK_AMULET_552, "You feel power emanate from the Amulet of Ghostspeak", "and the air around you vibrates with the ghostly voice", "of the headless gardener.")
                             .npcl("A conductor mould, you say? Let me see...")
                             .npcl("There used to be a bloke 'ere, sort of an 'andyman 'e was. Did everything 'round the place - fixed what was broke, swept the chimneys and the like. He would 'ave had a mould, I imagine.")
@@ -80,7 +84,10 @@ class GardenerGhostDialogueFile : DialogueBuilderFile() {
                             .playerl("Would you show me where the place was?")
                             .npcl("Well, oi s'pose oi've got ten minutes to spare.")
                             .endWith { df, player -> (df.npc!! as GardenerGhostNPC).startFollowing(player) }
-                    optionBuilder.optionIf("What's your name?") { player -> return@optionIf getQuestStage(player, CreatureOfFenkenstrain.questName) < 4 }
+                    optionBuilder.optionIf("What's your name?") { player -> return@optionIf getQuestStage(
+                        player,
+                        Quests.CREATURE_OF_FENKENSTRAIN
+                    ) < 4 }
                             .playerl("What's your name?")
                             .item(Items.GHOSTSPEAK_AMULET_552, "You feel power emanate from the Amulet of Ghostspeak", "and the air around you vibrates with the ghostly voice", "of the headless gardener.")
                             .npcl("Me name? It's been a moivellous long while, mate, since I had any use for such a thing as a name.")

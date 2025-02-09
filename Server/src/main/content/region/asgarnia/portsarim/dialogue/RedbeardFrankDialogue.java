@@ -12,6 +12,7 @@ import core.plugin.Initializable;
 import core.game.node.item.Item;
 
 import static core.tools.DialogueConstKt.END_DIALOGUE;
+import content.data.Quests;
 
 /**
  * Represents the dialogue to handle Rebeard Frank.
@@ -59,7 +60,7 @@ public class RedbeardFrankDialogue extends DialoguePlugin {
     @Override
     public boolean open(Object... args) {
         npc = (NPC) args[0];
-        quest = player.getQuestRepository().getQuest("Pirate's Treasure");
+        quest = player.getQuestRepository().getQuest(Quests.PIRATES_TREASURE);
         npc("Arr, Matey!");
         stage = 0;
         replacementReward = AchievementDiary.canReplaceReward(player, DiaryType.FALADOR, level);

@@ -10,7 +10,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import core.tools.Log
 import org.rs09.consts.Items
-import core.tools.SystemLogger
+import content.data.Quests
 
 /**
 * Represents the "Family Crest" quest.
@@ -18,7 +18,7 @@ import core.tools.SystemLogger
 */
 
 @Initializable
-class FamilyCrest: Quest("Family Crest", 59, 58, 1, 148, 0, 1, 11) {
+class FamilyCrest: Quest(Quests.FAMILY_CREST, 59, 58, 1, 148, 0, 1, 11) {
 
     override fun newInstance(`object`: Any?): Quest {
         return this

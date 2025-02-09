@@ -7,6 +7,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
 import core.plugin.Initializable;
 import core.game.node.item.Item;
+import content.data.Quests;
 
 /**
  * Represnets the dialogue used to handle the Leela npc.
@@ -76,7 +77,7 @@ public final class LeelaDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest("Prince Ali Rescue");
+		quest = player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE);
 		switch (quest.getStage(player)) {
 		case 60:
 		case 100:

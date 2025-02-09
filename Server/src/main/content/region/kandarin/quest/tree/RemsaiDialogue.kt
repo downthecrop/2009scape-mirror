@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.tree
 
+import content.data.Quests
 import core.api.inInventory
 import core.api.getQuestStage
 import org.rs09.consts.Items
@@ -8,7 +9,7 @@ import core.tools.END_DIALOGUE
 
 class RemsaiDialogue : DialogueFile(){
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = getQuestStage(player!!, TreeGnomeVillage.questName)
+        val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE)
         when {
             inInventory(player!!,Items.ORBS_OF_PROTECTION_588) -> {
                 when(stage) {

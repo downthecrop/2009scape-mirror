@@ -11,6 +11,7 @@ import org.rs09.consts.NPCs
 import core.game.bots.AIPlayer
 import core.game.dialogue.DialogueFile
 import core.game.world.GameWorld
+import content.data.Quests
 
 class MorytaniaArea : MapArea {
     override fun defineAreaBorders(): Array<ZoneBorders> {
@@ -22,7 +23,7 @@ class MorytaniaArea : MapArea {
 
     override fun areaEnter(entity: Entity) {
         if (entity is Player && entity !is AIPlayer && (
-            !isQuestComplete(entity, "Priest in Peril") || //not allowed to be anywhere in Morytania
+            !isQuestComplete(entity, Quests.PRIEST_IN_PERIL) || //not allowed to be anywhere in Morytania
             defineAreaBorders()[1].insideBorder(entity) //Werewolf agility course is not implemented
         )) {
             kickThemOut(entity)

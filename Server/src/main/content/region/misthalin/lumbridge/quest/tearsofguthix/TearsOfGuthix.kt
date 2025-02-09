@@ -1,12 +1,12 @@
 package content.region.misthalin.lumbridge.quest.tearsofguthix
 
+import content.data.Quests
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import org.rs09.consts.Items
-import java.util.*
 
 /**
  * Tears of Guthix Quest
@@ -17,10 +17,9 @@ import java.util.*
  * if (VARPBIT[451] > 1) return 2; if (VARPBIT[451] == 0) return 0; return 1; }; if (arg0 == 88)
  */
 @Initializable
-class TearsOfGuthix : Quest("Tears of Guthix", 120, 119, 1, 449, 451, 0, 1, 2) {
+class TearsOfGuthix : Quest(Quests.TEARS_OF_GUTHIX, 120, 119, 1, 449, 451, 0, 1, 2) {
 
     companion object {
-        const val questName = "Tears of Guthix"
         const val attributePreviousDate = "/save:quest:tearsofguthix-previousdateofaccess" // The date in milliseconds in which TOG was played.
         const val attributePreviousXPAmount = "/save:quest:tearsofguthix-previousxpamount" // The last snapshot of XP user had.
         const val attributePreviousQuestPoints = "/save:quest:tearsofguthix-previousquestpoints" // The last snapshot of quest points user had.
@@ -63,7 +62,7 @@ class TearsOfGuthix : Quest("Tears of Guthix", 120, 119, 1, 449, 451, 0, 1, 2) {
         var line = 12
         var stage = getStage(player)
 
-        var started = getQuestStage(player, questName) > 0
+        var started = getQuestStage(player, Quests.TEARS_OF_GUTHIX) > 0
 
         if (!started) {
             line(player, "I can start this quest by speaking to !!Juna the serpent?? who", line++, false)

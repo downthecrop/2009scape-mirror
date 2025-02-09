@@ -23,6 +23,7 @@ import core.game.global.action.PickupHandler;
 import core.game.world.repository.Repository;
 
 import java.util.List;
+import content.data.Quests;
 
 /**
  * Represents the shield of arrav plugin.
@@ -59,7 +60,7 @@ public final class ShieldArravPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final Quest quest = player.getQuestRepository().getQuest("Shield of Arrav");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.SHIELD_OF_ARRAV);
 		final int id = node instanceof Scenery ? ((Scenery) node).getId() : node instanceof Item ? ((Item) node).getId() : ((NPC) node).getId();
 		switch (id) {
 		case 769:

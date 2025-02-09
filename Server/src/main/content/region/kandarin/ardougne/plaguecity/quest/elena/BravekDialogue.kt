@@ -9,19 +9,20 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 @Initializable
 class BravekDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (player.questRepository.getStage("Plague City") == 0) {
+        if (player.questRepository.getStage(Quests.PLAGUE_CITY) == 0) {
             npcl(FacialExpression.ANGRY, "Go away, I'm busy! I'm... Um... In a meeting!").also { stage = END_DIALOGUE }
-        } else if (player.questRepository.getStage("Plague City") == 13) {
+        } else if (player.questRepository.getStage(Quests.PLAGUE_CITY) == 13) {
             npcl(FacialExpression.NEUTRAL, "My head hurts! I'll speak to you another day...").also { stage = 1 }
-        } else if (player.questRepository.getStage("Plague City") == 14) {
+        } else if (player.questRepository.getStage(Quests.PLAGUE_CITY) == 14) {
             npcl(FacialExpression.NEUTRAL, "Uurgh! My head still hurts too much to think straight. Oh for one of Trudi's hangover cures!").also { stage = 1 }
-        } else if (player.questRepository.getStage("Plague City") >= 16) {
+        } else if (player.questRepository.getStage(Quests.PLAGUE_CITY) >= 16) {
             npcl(FacialExpression.NEUTRAL, "Thanks again for the hangover cure.").also { stage = 1 }
         } else {
             npcl(FacialExpression.ANGRY, "Go away, I'm busy! I'm... Um... In a meeting!").also { stage = END_DIALOGUE }
@@ -30,7 +31,7 @@ class BravekDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (getQuestStage(player!!, PlagueCity.PlagueCityQuest)) {
+        when (getQuestStage(player!!, Quests.PLAGUE_CITY)) {
 
             13 -> when (stage) {
                 1 -> playerl(FacialExpression.FRIENDLY, "This is really important though!").also { stage = 2 }
@@ -55,7 +56,7 @@ class BravekDialogue(player: Player? = null) : DialoguePlugin(player) {
                     end()
                     sendItemDialogue(player!!, Items.A_SCRUFFY_NOTE_1508, "Bravek hands you a tatty piece of paper.").also { stage++ }
                     addItem(player!!, Items.A_SCRUFFY_NOTE_1508)
-                    setQuestStage(player!!, "Plague City", 14)
+                    setQuestStage(player!!, Quests.PLAGUE_CITY, 14)
                 }
             }
 
@@ -95,7 +96,7 @@ class BravekDialogue(player: Player? = null) : DialoguePlugin(player) {
                     end()
                     sendItemDialogue(player!!, Items.WARRANT_1503, "Bravek hands you a warrant.").also { stage = END_DIALOGUE }
                     addItem(player!!, Items.WARRANT_1503)
-                    setQuestStage(player!!, "Plague City", 16)
+                    setQuestStage(player!!, Quests.PLAGUE_CITY, 16)
                 }
             }
 

@@ -11,6 +11,7 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.tools.secondsToTicks
 import core.tools.colorize
+import content.data.Quests
 
 /**
  * Handles Ava's device
@@ -19,7 +20,7 @@ import core.tools.colorize
 class AvasDevice : InteractionListener, EventHook<TickEvent> {
     override fun defineListeners() {
         onEquip(devices) { player, _ ->
-            if (!isQuestComplete(player, "Animal Magnetism")) {
+            if (!isQuestComplete(player, Quests.ANIMAL_MAGNETISM)) {
                 sendMessage(player, "You need to complete Animal Magnetism to equip this.")
                 return@onEquip false
             }

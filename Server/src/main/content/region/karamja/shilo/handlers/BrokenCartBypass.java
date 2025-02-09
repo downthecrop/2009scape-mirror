@@ -12,6 +12,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 
 import static core.api.ContentAPIKt.hasRequirement;
+import content.data.Quests;
 
 
 /**
@@ -41,7 +42,7 @@ public class BrokenCartBypass extends OptionHandler {
         });
     }
     public final boolean handle(Player player, Node node, String options){
-        if (!hasRequirement(player, "Shilo Village"))
+        if (!hasRequirement(player, Quests.SHILO_VILLAGE))
             return true;
         Location location = new Location(0,0);
         Location playerloc = new Location(player.getLocation().getX(),player.getLocation().getY());

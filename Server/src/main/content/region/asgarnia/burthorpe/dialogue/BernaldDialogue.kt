@@ -20,8 +20,8 @@ class BernaldDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
 //        // Garden of Tranquility has not been implemented.
-//        if(hasRequirement(player!!, "Garden of Tranquility")) {
-//            if (isQuestComplete(player!!, DeathPlateau.questName)) {
+//        if(hasRequirement(player!!, Quests.GARDEN_OF_TRANQUILITY)) {
+//            if (isQuestComplete(player!!, Quests.DEATH_PLATEAU)) {
 //                when (stage) {
 //                    0 -> playerl(FacialExpression.FRIENDLY, "How are your grapes coming along?").also { stage++ }
 //                    1 -> npc(FacialExpression.FRIENDLY, "Marvellous, thanks to your help, " + player.username + "!").also { stage = END_DIALOGUE }

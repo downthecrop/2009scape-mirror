@@ -8,6 +8,7 @@ import core.game.dialogue.FacialExpression
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
+import content.data.Quests
 
 @Initializable
 class FishermanDialogue(player: Player? = null) : DialoguePlugin(player) {
@@ -37,9 +38,9 @@ class FishermanDialogue(player: Player? = null) : DialoguePlugin(player) {
             playerl(FacialExpression.ASKING,"I don't suppose you have any idea where I could find an exotic and extremely odd fish, do you?")
             stage = 1
             return true
-        } else if (isQuestComplete(player, "Fremennik Trials")){
+        } else if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)){
             player(FacialExpression.FRIENDLY, "Hello there.").also { stage = 100 }
-        } else if (!isQuestComplete(player, "Fremennik Trials")) {
+        } else if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
             player(FacialExpression.FRIENDLY, "Hello there.").also { stage = 200 }
         }
         return true

@@ -6,14 +6,14 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 /**
  * https://www.youtube.com/watch?v=Cl68Z0bsRq4
  */
 @Initializable
-class ClockTower : Quest("Clock Tower",38, 37, 1, 10, 0, 1, 8) {
+class ClockTower : Quest(Quests.CLOCK_TOWER,38, 37, 1, 10, 0, 1, 8) {
     companion object {
-        const val questName = "Clock Tower"
         const val attributeBlueCog = "/save:quest:clocktower-bluecogplaced"
         const val attributeBlackCog = "/save:quest:clocktower-blackcogplaced"
         const val attributeWhiteCog = "/save:quest:clocktower-whitecogplaced"

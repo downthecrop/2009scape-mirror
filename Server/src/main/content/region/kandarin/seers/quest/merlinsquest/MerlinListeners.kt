@@ -8,13 +8,14 @@ import core.game.global.action.DropListener
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.impl.ForceMovement
 import org.rs09.consts.Items
+import content.data.Quests
 
 class MerlinListeners : InteractionListener {
     private val BONE_DROP_LOCATION = Location(2780, 3515, 0)
 
     override fun defineListeners() {
         on (Items.BAT_BONES_530, IntType.ITEM, "drop") { player, node -> 
-            val merlinStage = getQuestStage(player, "Merlin's Crystal")
+            val merlinStage = getQuestStage(player, Quests.MERLINS_CRYSTAL)
             var doingQuest = player.location == BONE_DROP_LOCATION && merlinStage == 80
             var hasAuxiliaryRequirements = inInventory(player, Items.LIT_BLACK_CANDLE_32) && getAttribute<NPC?>(player, "thrantax_npc", null) == null
 

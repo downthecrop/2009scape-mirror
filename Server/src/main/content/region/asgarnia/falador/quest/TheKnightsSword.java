@@ -5,6 +5,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.plugin.Initializable;
 import core.game.node.item.Item;
+import content.data.Quests;
 
 /**
  * Represents The KnightSword quest.
@@ -23,7 +24,7 @@ public class TheKnightsSword extends Quest {
 	 * Constructs a new {@code TheKnightsSword} {@code Object}.
      */
 	public TheKnightsSword() {
-		super("The Knight's Sword", 22, 21, 1, 122, 0, 1, 7);
+		super(Quests.THE_KNIGHTS_SWORD, 22, 21, 1, 122, 0, 1, 7);
 	}
 	
 	@Override

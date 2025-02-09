@@ -5,6 +5,7 @@ import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
+import content.data.Quests
 
 @Initializable
 class BlazeSharpeyeDialogue(player: Player? = null) : DialoguePlugin(player) {
@@ -14,7 +15,7 @@ class BlazeSharpeyeDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
-        val qstage = player?.questRepository?.getStage("All Fired Up") ?: -1
+        val qstage = player?.questRepository?.getStage(Quests.ALL_FIRED_UP) ?: -1
         when(qstage){
               0 -> player.dialogueInterpreter.sendDialogue("He seems uninterested in talking.").also { stage = 1000 }
              10 -> player("So, what's going on?").also { stage = 100 }
@@ -48,7 +49,7 @@ class BlazeSharpeyeDialogue(player: Player? = null) : DialoguePlugin(player) {
             112 -> npc("Our technique is super-secret, but quite effective. All","you do is put twenty logs of the same type on a","beacon and...").also { stage++ }
             113 -> npc(FacialExpression.AMAZED,"SET IT ON FIRE WITH A TINDERBOX!").also { stage++ }
             114 -> player("You really enjoy your job, don't you?").also { stage++ }
-            115 -> npc("Yes. Yes I do. Now, why don't you go over there and","try lighting that beacon. Show us what you've got.").also { stage++; player.questRepository.getQuest("All Fired Up").setStage(player,20) }
+            115 -> npc("Yes. Yes I do. Now, why don't you go over there and","try lighting that beacon. Show us what you've got.").also { stage++; player.questRepository.getQuest(Quests.ALL_FIRED_UP).setStage(player,20) }
             116 -> options("Does it matter what type of log I use?","Okay.").also { stage++ }
             117 -> when(buttonId){
                 1 -> player("Does it matter what type of log I use?").also { stage = 150 }
@@ -61,7 +62,7 @@ class BlazeSharpeyeDialogue(player: Player? = null) : DialoguePlugin(player) {
             201 -> npc("Well, apparently, not for someone of your Firemaking","calibre and expertise. Now that you've got the hang of","things, we can get this show on the road.").also { stage++ }
             202 -> npc("If you'd be so kind as to light the beacon to the west","and report back to me, I can make sure I can clearly","see its glow on the horizon.").also { stage++ }
             203 -> npc("It's near the limestone quarry, north-east of Varrock,","west of the Rag and Bone Man's hovel.").also { stage++ }
-            204 -> npc("My colleague, Squire Fyre, is tending that beacon.","She'll help you out if you run into any trouble.").also { stage = 116; player.questRepository.getQuest("All Fired Up").setStage(player,40) }
+            204 -> npc("My colleague, Squire Fyre, is tending that beacon.","She'll help you out if you run into any trouble.").also { stage = 116; player.questRepository.getQuest(Quests.ALL_FIRED_UP).setStage(player,40) }
 
             //Stage = 60
             300 -> player("Can you really see it from this far away?").also { stage++ }
@@ -69,7 +70,7 @@ class BlazeSharpeyeDialogue(player: Player? = null) : DialoguePlugin(player) {
             302 -> npc("This beacon, however, is struggling at the moment.","Do you see how the fire has died down?").also { stage++ }
             303 -> player("Hmm, yes. The fire is a bit smaller and the logs look","rather charred.").also { stage++ }
             304 -> npc("If a beacon's fire starts to die down, you can restore it","to its blazing glory by adding five logs.").also { stage++ }
-            305 -> npc("You wouldn't mind topping this one up for me, would","you? Oh, how I love to see things burn!").also { stage++; player.questRepository.getQuest("All Fired Up").setStage(player, 70) }
+            305 -> npc("You wouldn't mind topping this one up for me, would","you? Oh, how I love to see things burn!").also { stage++; player.questRepository.getQuest(Quests.ALL_FIRED_UP).setStage(player, 70) }
             306 -> options("Oh, alright, then.","Don't you have logs of your own you can use?").also { stage++ }
             307 -> when(buttonId){
                 1 -> player("Oh, alright, then.").also { stage++ }
@@ -94,7 +95,7 @@ class BlazeSharpeyeDialogue(player: Player? = null) : DialoguePlugin(player) {
             410 -> npc("Imminently, I'm sure - we're just waiting for the word","from King Roald. Speaking of which, have you reported","back to him about the progress we've made?").also { stage++ }
             411 -> player("Not yet, I'm afraid.").also { stage++ }
             412 -> npc("Well, what are you waiting for? This is a serious","matter! I'm sure King Roald is on the edge of his","throne, waiting for the news.").also { stage++ }
-            413 -> player("I'll get right on that.").also { stage = 1000; player.questRepository.getQuest("All Fired Up").setStage(player,90) }
+            413 -> player("I'll get right on that.").also { stage = 1000; player.questRepository.getQuest(Quests.ALL_FIRED_UP).setStage(player,90) }
             420 -> npc("Yes... YES HAHAHAHA FIRE").also { stage = 412 }
 
             1000 -> end()

@@ -1,5 +1,6 @@
 package content.region.desert.quest.thetouristrap;
 
+import content.data.Quests;
 import core.game.dialogue.DialoguePlugin;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
@@ -57,7 +58,7 @@ public final class AnaDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean open(Object... args) {
-		quest = player.getQuestRepository().getQuest(TouristTrap.NAME);
+		quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP);
 		if ((quest.getStage(player) == 71 || quest.getStage(player) == 72) && args.length > 1) {
 			player.getDialogueInterpreter().sendDialogue("You see a barrel coming to the surface. Before too long you haul it", "onto the side. The barrel seems quite heavy and you hear a muffled", "sound coming from inside.");
 			stage = 400;
@@ -277,7 +278,7 @@ public final class AnaDialogue extends DialoguePlugin {
 		@Override
 		public boolean handle(NodeUsageEvent event) {
 			final Player player = event.getPlayer();
-			final Quest quest = player.getQuestRepository().getQuest(TouristTrap.NAME);
+			final Quest quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP);
 			switch (quest.getStage(player)) {
 			case 61:
 				player.getDialogueInterpreter().open(822, event.getUsedWith(), true);
@@ -320,7 +321,7 @@ public final class AnaDialogue extends DialoguePlugin {
 
 		@Override
 		public boolean isHidden(final Player player) {
-			Quest quest = player.getQuestRepository().getQuest(TouristTrap.NAME);
+			Quest quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP);
 			if (quest.getStage(player) > 61) {
 				return true;
 			}

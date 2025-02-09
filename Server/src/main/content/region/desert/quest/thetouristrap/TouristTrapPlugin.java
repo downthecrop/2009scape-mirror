@@ -1,5 +1,6 @@
 package content.region.desert.quest.thetouristrap;
 
+import content.data.Quests;
 import core.cache.def.impl.AnimationDefinition;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
@@ -135,7 +136,7 @@ public final class TouristTrapPlugin extends OptionHandler {
 
     @Override
     public boolean handle(final Player player, Node node, String option) {
-        final Quest quest = player.getQuestRepository().getQuest(TouristTrap.NAME);
+        final Quest quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP);
         final int id = node.getId();
         switch (option) {
             case "read":
@@ -356,7 +357,7 @@ public final class TouristTrapPlugin extends OptionHandler {
                             player.getInventory().add(TouristTrap.CELL_DOOR_KEY, player);
                             player.getDialogueInterpreter().sendItemMessage(TouristTrap.CELL_DOOR_KEY, "You find a cell door key.");
                             break;
-                        } else if (hasItem(player, TouristTrap.WROUGHT_IRON_KEY) && player.getQuestRepository().isComplete(TouristTrap.NAME)) {
+                        } else if (hasItem(player, TouristTrap.WROUGHT_IRON_KEY) && player.getQuestRepository().isComplete(Quests.THE_TOURIST_TRAP)) {
                             player.getInventory().add(TouristTrap.WROUGHT_IRON_KEY, player);
                             player.getDialogueInterpreter().sendItemMessage(TouristTrap.WROUGHT_IRON_KEY, "You find the key to the main gate.");
                             break;
@@ -633,7 +634,7 @@ public final class TouristTrapPlugin extends OptionHandler {
                 case 516:
                     player.getInventory().remove(TouristTrap.ANNA_BARREL);
                     player.getBank().remove(TouristTrap.ANNA_BARREL);
-                    player.getQuestRepository().getQuest(TouristTrap.NAME).setStage(player, 71);
+                    player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP).setStage(player, 71);
                     end();
                     break;
                 case 0:
@@ -700,7 +701,7 @@ public final class TouristTrapPlugin extends OptionHandler {
         @Override
         public boolean handle(final NodeUsageEvent event) {
             final Player player = event.getPlayer();
-            final Quest quest = player.getQuestRepository().getQuest(TouristTrap.NAME);
+            final Quest quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP);
             if (event.getUsedWith().getId() == 18958) {// cart
                 if (quest.getStage(player) == 72) {
                     player.lock(4);
@@ -800,7 +801,7 @@ public final class TouristTrapPlugin extends OptionHandler {
                                 }
                                 break;
                             case 33:
-                                player.getQuestRepository().getQuest(TouristTrap.NAME).setStage(player, 70);
+                                player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP).setStage(player, 70);
                                 player.getInventory().remove(TouristTrap.ANNA_BARREL);
                                 player.removeAttribute("ana-delay");
                                 AnnaCartCutscene.this.stop(true);
@@ -905,7 +906,7 @@ public final class TouristTrapPlugin extends OptionHandler {
                                 case 6:
                                     player.unlock();
                                     player.getInterfaceManager().closeOverlay();
-                                    player.getQuestRepository().getQuest(TouristTrap.NAME).setStage(player, 95);
+                                    player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP).setStage(player, 95);
                                     player.getInterfaceManager().close();
                                     player.getProperties().setTeleportLocation(Location.create(3258, 3029, 0));
                                     player.getInventory().add(TouristTrap.ANNA_BARREL);
@@ -1303,7 +1304,7 @@ public final class TouristTrapPlugin extends OptionHandler {
         @Override
         public boolean open(Object... args) {
             barrel = (Scenery) args[0];
-            quest = player.getQuestRepository().getQuest(TouristTrap.NAME);
+            quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP);
             if ((quest.getStage(player) == 70 || quest.getStage(player) == 72) && !player.hasItem(TouristTrap.ANNA_BARREL)) {
                 interpreter.sendDialogue("You search the barrels and find Ana.");
                 stage = 400;
@@ -1402,7 +1403,7 @@ public final class TouristTrapPlugin extends OptionHandler {
         @Override
         public boolean handle(NodeUsageEvent event) {
             final Player player = event.getPlayer();
-            final Quest quest = player.getQuestRepository().getQuest(TouristTrap.NAME);
+            final Quest quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP);
             if (quest.getStage(player) == 54 && player.getInventory().containsItem(TouristTrap.TECHNICAL_PLANS)) {
                 player.getDialogueInterpreter().open("bedabin-anvil");
                 return true;
@@ -1436,7 +1437,7 @@ public final class TouristTrapPlugin extends OptionHandler {
             @Override
             public boolean handle(NodeUsageEvent event) {
                 final Player player = event.getPlayer();
-                final Quest quest = player.getQuestRepository().getQuest(TouristTrap.NAME);
+                final Quest quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP);
                 if (!event.getUsedWith().getLocation().equals(Location.create(3292, 9423, 0))) {
                     return false;
                 }

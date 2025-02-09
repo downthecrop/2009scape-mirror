@@ -1,6 +1,5 @@
 package content.region.misthalin.varrock.quest.demonslayer;
 
-import content.region.misthalin.draynor.handlers.DraynorNodePlugin;
 import core.api.Container;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
@@ -16,6 +15,7 @@ import org.rs09.consts.Items;
 import static core.api.ContentAPIKt.*;
 import static core.tools.DialogueConstKt.END_DIALOGUE;
 import static core.tools.GlobalsKt.colorize;
+import content.data.Quests;
 
 /**
  * Represents the dialogue which handles the Sir Prysin NPC.
@@ -64,7 +64,7 @@ public class SirPyrsinDialogue extends DialoguePlugin {
 		} else if (args[0] instanceof Integer) {
 			id = ((int) args[0]);
 		}
-		quest = player.getQuestRepository().getQuest("Demon Slayer");
+		quest = player.getQuestRepository().getQuest(Quests.DEMON_SLAYER);
 		switch (quest.getStage(player)) {
 		case 30:
 			npc(id, "Have you sorted that demon out yet?");
@@ -481,7 +481,7 @@ public class SirPyrsinDialogue extends DialoguePlugin {
 	private final void handleDefault(int buttonId) {
 		switch (stage) {
 		case 0:
-			if(getQuestStage(player, "Demon Slayer") == 100)
+			if(getQuestStage(player, Quests.DEMON_SLAYER) == 100)
 				options("I am a mighty adventurer. Who are you?", "I'm not sure, I was hoping you could tell me.", "Hey can you give me another Silverlight");
 			else
 				options("I am a mighty adventurer. Who are you?", "I'm not sure, I was hoping you could tell me.");

@@ -4,6 +4,7 @@ import core.game.dialogue.FacialExpression
 import core.game.dialogue.DialogueFile
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
+import content.data.Quests
 
 /**
  * @author lila
@@ -19,7 +20,7 @@ class ArheinMCDialogue (val questStage: Int) : DialogueFile() {
             START_DIALOGUE -> playerl(FacialExpression.NEUTRAL, "Can you drop me off on the way down please?").also { stage++ }
             1 -> {
                 npcl(FacialExpression.ANNOYED,"I don't think Sir Mordred would like that. He wants as few outsiders visiting as possible. I wouldn't want to lose his business.")
-                val quest = player!!.questRepository.getQuest("Merlin's Crystal")
+                val quest = player!!.questRepository.getQuest(Quests.MERLINS_CRYSTAL)
                 player!!.questRepository.setStage(quest, 40)
                 stage = END_DIALOGUE
             }

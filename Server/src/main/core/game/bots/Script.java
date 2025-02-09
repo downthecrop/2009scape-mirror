@@ -1,5 +1,6 @@
 package core.game.bots;
 
+import content.data.Quests;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 
@@ -13,7 +14,7 @@ public abstract class Script {
     public ArrayList<Item> inventory = new ArrayList<>(20);
     public ArrayList<Item> equipment = new ArrayList<>(20);
     public Map<Integer, Integer> skills = new HashMap<>();
-    public ArrayList<String> quests = new ArrayList<>(20);
+    public ArrayList<Quests> quests = new ArrayList<>(20);
 
 
     public Player bot;
@@ -31,7 +32,7 @@ public abstract class Script {
             for (Map.Entry<Integer, Integer> skill : skills.entrySet()) {
                 setLevel(skill.getKey(), skill.getValue());
             }
-            for (String quest : quests) {
+            for (Quests quest : quests) {
                 bot.getQuestRepository().setStage(bot.getQuestRepository().getQuest(quest), 100);
             }
             for (Item i : equipment) {

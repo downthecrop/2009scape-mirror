@@ -4,6 +4,7 @@ import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
+import content.data.Quests;
 
 /**
  * Represents the vampire quest.
@@ -16,7 +17,7 @@ public class VampireSlayer extends Quest {
 	 * Constructs a new {@code VampireSlayer} {@code Object}.
      */
 	public VampireSlayer() {
-		super("Vampire Slayer", 30, 29, 3, 178, 0, 1, 3);
+		super(Quests.VAMPIRE_SLAYER, 30, 29, 3, 178, 0, 1, 3);
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.game.world.map.Location;
+import content.data.Quests;
 
 /**
  * Represents the juliet npc.
@@ -41,7 +42,7 @@ public final class JulietNPC extends AbstractNPC {
 
 	@Override
 	public boolean isHidden(final Player player) {
-		return player.getQuestRepository().getQuest("Romeo & Juliet").getStage(player) > 60 && player.getQuestRepository().getQuest("Romeo & Juliet").getStage(player) < 100;
+		return player.getQuestRepository().getQuest(Quests.ROMEO_JULIET).getStage(player) > 60 && player.getQuestRepository().getQuest(Quests.ROMEO_JULIET).getStage(player) < 100;
 	}
 
 	@Override

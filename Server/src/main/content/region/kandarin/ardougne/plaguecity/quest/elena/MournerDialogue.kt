@@ -9,12 +9,13 @@ import core.game.world.map.RegionManager.getObject
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 @Initializable
 class MournerDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.MOURNER_3216)
-        when (getQuestStage(player!!, PlagueCity.PlagueCityQuest)) {
+        when (getQuestStage(player!!, Quests.PLAGUE_CITY)) {
 
             in 0..6 -> when (stage) {
                 0 -> playerl(FacialExpression.FRIENDLY, "Hello.").also { stage++ }
@@ -70,7 +71,7 @@ class MournerDialogue : DialogueFile() {
                         findLocalNPC(player!!, NPCs.MOURNER_3216)!!.sendChat("Well you can't let them in...", 1)
                     }.also {
                         end()
-                        setQuestStage(player!!, "Plague City", 17)
+                        setQuestStage(player!!, Quests.PLAGUE_CITY, 17)
                         DoorActionHandler.handleAutowalkDoor(player, getObject(location(2540, 3273, 0))!!.asScenery())
                         sendDialogue(player!!, "You wait until the mourner's back is turned and sneak into the building.")
                     }

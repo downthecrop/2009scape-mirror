@@ -8,6 +8,7 @@ import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.plugin.Initializable;
 import core.game.world.update.flag.context.Animation;
+import content.data.Quests;
 
 /**
  * Represents the gertrude cat dialogue plugin.
@@ -53,7 +54,7 @@ public final class GertrudesCatDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
-		final Quest quest = player.getQuestRepository().getQuest("Gertrude's Cat");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.GERTRUDES_CAT);
 		switch (stage) {
 		case 545:
 			end();

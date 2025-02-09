@@ -1,16 +1,14 @@
 package core.game.content.quest.fremtrials
 
 import core.game.node.entity.player.Player
-import core.api.*
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
-import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.Items
-import content.minigame.allfiredup.AFUBeacon
+import content.data.Quests
 
 @Initializable
-class FremennikTrials : Quest("Fremennik Trials",64,63,3,347,0,1,10){
+class FremennikTrials : Quest(Quests.THE_FREMENNIK_TRIALS,64,63,3,347,0,1,10){
 
     class SkillRequirement(val skill: Int?, val level: Int?)
 
@@ -19,7 +17,7 @@ class FremennikTrials : Quest("Fremennik Trials",64,63,3,347,0,1,10){
     override fun drawJournal(player: Player?, stage: Int) {
         super.drawJournal(player, stage)
         var line = 11
-        val started = player?.questRepository?.getStage("Fremennik Trials")!! > 0
+        val started = player?.questRepository?.getStage(Quests.THE_FREMENNIK_TRIALS)!! > 0
 
         if(!started){
             line(player,"Requirements to complete quest:",line++)

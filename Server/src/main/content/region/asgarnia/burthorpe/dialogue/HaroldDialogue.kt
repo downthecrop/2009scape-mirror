@@ -1,14 +1,12 @@
 package content.region.asgarnia.burthorpe.dialogue
 
-import content.region.asgarnia.burthorpe.quest.deathplateau.DeathPlateau
+import content.data.Quests
 import content.region.asgarnia.burthorpe.quest.deathplateau.HaroldDialogueFile
 import core.api.*
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.update.flag.context.Animation
-import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
@@ -23,7 +21,7 @@ import org.rs09.consts.NPCs
 @Initializable
 class HaroldDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        if (isQuestInProgress(player!!, DeathPlateau.questName, 10, 29)) {
+        if (isQuestInProgress(player!!, Quests.DEATH_PLATEAU, 10, 29)) {
             // Call the dialogue file for Harold from the deathplateau quest folder.
             openDialogue(player!!, HaroldDialogueFile(), npc)
         }

@@ -4,6 +4,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.npc.NPC;
 import core.game.world.map.Location;
+import content.data.Quests;
 
 /**
  * Handles the thrantax npc.
@@ -28,7 +29,7 @@ public class ThrantaxNPC extends NPC {
 
         @Override
         public boolean isHidden(final Player player) {
-                if (player.getQuestRepository().getQuest("Merlin's Crystal").getStage(player) == 80 && this.getAttribute("thrantax_owner", "").equals(player.getUsername())) {
+                if (player.getQuestRepository().getQuest(Quests.MERLINS_CRYSTAL).getStage(player) == 80 && this.getAttribute("thrantax_owner", "").equals(player.getUsername())) {
                         return false;
                 }
                 return true;

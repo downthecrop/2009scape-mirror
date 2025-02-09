@@ -1,6 +1,6 @@
 package content.region.kandarin.quest.grandtree
 
-import content.region.kandarin.quest.grandtree.TheGrandTree.Companion.questName
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.node.item.Item
@@ -10,7 +10,7 @@ import org.rs09.consts.Items
 class HazelmereDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, questName)) {
+        when (getQuestStage(player!!, Quests.THE_GRAND_TREE)) {
             10 -> {
                 if(player!!.hasItem(Item(Items.BARK_SAMPLE_783))){
                     when (stage) {
@@ -24,7 +24,7 @@ class HazelmereDialogue : DialogueFile() {
                             if(removeItem(player!!, Items.BARK_SAMPLE_783)){
                                 addItemOrDrop(player!!, Items.HAZELMERES_SCROLL_786)
                             }
-                            setQuestStage(player!!, questName, 20)
+                            setQuestStage(player!!, Quests.THE_GRAND_TREE, 20)
                             stage = END_DIALOGUE
                         }
                     }

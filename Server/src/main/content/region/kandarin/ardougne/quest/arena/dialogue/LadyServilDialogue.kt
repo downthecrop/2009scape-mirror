@@ -1,6 +1,5 @@
 package content.region.kandarin.ardougne.quest.arena.dialogue
 
-import content.region.kandarin.ardougne.quest.arena.FightArena.Companion.FightArenaQuest
 import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.dialogue.DialoguePlugin
@@ -10,17 +9,18 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs09.consts.NPCs
+import content.data.Quests
 @Initializable
 class LadyServilDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         playerl(FacialExpression.FRIENDLY, "Hi there, looks like you're in some trouble.")
-        if (player.questRepository.getStage("Fight Arena") == 10) {
+        if (player.questRepository.getStage(Quests.FIGHT_ARENA) == 10) {
             playerl(FacialExpression.FRIENDLY, "Hello Lady Servil.")
-        } else if (player.questRepository.getStage("Fight Arena") == 30) {
+        } else if (player.questRepository.getStage(Quests.FIGHT_ARENA) == 30) {
             playerl(FacialExpression.FRIENDLY, "Lady Servil, I have managed to infiltrate General Khazard's arena.")
-        } else if (player.questRepository.getStage("Fight Arena") == 70) {
+        } else if (player.questRepository.getStage(Quests.FIGHT_ARENA) == 70) {
             playerl(FacialExpression.FRIENDLY, "Lady Servil. I freed your son, however he has returned to the arena to help your husband.").also { stage++ }
         } else {
             playerl(FacialExpression.FRIENDLY, "Hello Lady Servil.")
@@ -29,7 +29,7 @@ class LadyServilDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (getQuestStage(player!!, FightArenaQuest)) {
+        when (getQuestStage(player!!, Quests.FIGHT_ARENA)) {
 
             0 -> when (stage) {
                 0 -> npcl(FacialExpression.SAD, "Oh I wish this broken cart was my only problem. *sob* I've got to find my family.. **sob**").also { stage++ }
@@ -46,7 +46,7 @@ class LadyServilDialogue(player: Player? = null) : DialoguePlugin(player) {
                 8 -> playerl(FacialExpression.FRIENDLY, "I'll try my best to return your family.").also { stage++ }
                 9 -> {
                     end()
-                    setQuestStage(player!!, FightArenaQuest, 10)
+                    setQuestStage(player!!, Quests.FIGHT_ARENA, 10)
                     npcl(FacialExpression.SAD, "Please do. My family is wealthy and can reward you handsomely. I'll be waiting here for you.").also { stage = END_DIALOGUE }
                 }
             }
@@ -81,7 +81,7 @@ class LadyServilDialogue(player: Player? = null) : DialoguePlugin(player) {
                 2 -> npcl(FacialExpression.FRIENDLY, "All I can offer in return is material wealth. Please take these coins as a sign of my gratitude.").also { stage++ }
                 3 -> {
                     end()
-                    player!!.questRepository.getQuest("Fight Arena").finish(player)
+                    player!!.questRepository.getQuest(Quests.FIGHT_ARENA).finish(player)
                 }
             }
 

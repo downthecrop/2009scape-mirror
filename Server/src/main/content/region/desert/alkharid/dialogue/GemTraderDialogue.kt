@@ -1,11 +1,13 @@
 package content.region.desert.alkharid.dialogue
 
 import core.game.dialogue.DialoguePlugin
-import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
+import content.data.Quests
+import core.api.getQuestStage
+import core.api.setQuestStage
 
 /**
  * Represents the gem trader Dialogue plugin
@@ -21,17 +23,8 @@ class GemTraderDialogue (player: Player? = null): DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
-        val qstage = player?.questRepository?.getStage("Family Crest") ?: -1
-        if(qstage == 12){
-            npc("Good day to you, traveller. ",
-                    "Would you be interested in buying some gems?")
-            stage = 1
-        }
-        else{
-            npc("Good day to you, traveller. ",
-                    "Would you be interested in buying some gems?")
-            stage = 2
-        }
+        npc("Good day to you, traveller.", "Would you be interested in buying some gems?")
+        stage = if (getQuestStage(player, Quests.FAMILY_CREST) == 12) 1 else 2
         return true
     }
 
@@ -74,7 +67,7 @@ class GemTraderDialogue (player: Player? = null): DialoguePlugin(player){
             103 ->  npc("Well, maybe we'll all get lucky ",
                     "and the scorpions will deal with him.").also{
                         stage = 1000
-                player.questRepository.getQuest("Family Crest").setStage(player, 13)
+                setQuestStage(player, Quests.FAMILY_CREST, 13)
             }
 
             1000 -> end()

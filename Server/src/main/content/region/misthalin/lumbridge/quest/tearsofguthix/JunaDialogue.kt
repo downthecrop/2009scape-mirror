@@ -1,5 +1,6 @@
 package content.region.misthalin.lumbridge.quest.tearsofguthix
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
@@ -32,7 +33,7 @@ class JunaDialogue : InteractionListener {
 class JunaDialogueFile : DialogueBuilderFile() {
     override fun create(b: DialogueBuilder) {
 
-        b.onQuestStages(TearsOfGuthix.questName, 0)
+        b.onQuestStages(Quests.TEARS_OF_GUTHIX, 0)
                 .branch { player -> if(TearsOfGuthix.hasRequirements(player)) { 1 } else { 0 } }
                 .let { branch ->
                     branch.onValue(0)
@@ -67,8 +68,8 @@ class JunaDialogueFile : DialogueBuilderFile() {
                                         .npcl(FacialExpression.OLD_NORMAL,"There is a cave on the south side of the chasm that is similarly infused with the power of Guthix. The stone in that cave is the only substance that can catch the Tears of Guthix.")
                                         .npcl(FacialExpression.OLD_NORMAL,"Mine some stone from that cave, make it into a bowl, and bring it to me, and then I will let you catch the Tears.")
                                         .endWith { _, player ->
-                                            if(getQuestStage(player, TearsOfGuthix.questName) == 0) {
-                                                setQuestStage(player, TearsOfGuthix.questName, 1)
+                                            if(getQuestStage(player, Quests.TEARS_OF_GUTHIX) == 0) {
+                                                setQuestStage(player, Quests.TEARS_OF_GUTHIX, 1)
                                             }
                                         }
 
@@ -92,7 +93,7 @@ class JunaDialogueFile : DialogueBuilderFile() {
                 }
 
 
-        b.onQuestStages(TearsOfGuthix.questName, 1)
+        b.onQuestStages(Quests.TEARS_OF_GUTHIX, 1)
                 .npc(FacialExpression.OLD_NORMAL, "Before you can collect the Tears of Guthix you must", "make a bowl out of the stone in the cave on the south", "of the chasm.")
                 .branch { player -> if(inInventory(player, Items.STONE_BOWL_4704)) { 1 } else { 0 } }
                 .let{ branch ->
@@ -131,11 +132,11 @@ class JunaDialogueFile : DialogueBuilderFile() {
                 .npcl(FacialExpression.OLD_NORMAL, "Now... tell me another story, and I will let you collect the tears for the first time.")
                 .endWith { _, player ->
                     if (removeItem(player, Items.STONE_BOWL_4704)) {
-                        finishQuest(player, TearsOfGuthix.questName)
+                        finishQuest(player, Quests.TEARS_OF_GUTHIX)
                     }
                 }
 
-        b.onQuestStages(TearsOfGuthix.questName, 100)
+        b.onQuestStages(Quests.TEARS_OF_GUTHIX, 100)
                 .npcl(FacialExpression.OLD_NORMAL, "Tell me... a story...")
                 .let { builder ->
                     val returnJoin = b.placeholder()

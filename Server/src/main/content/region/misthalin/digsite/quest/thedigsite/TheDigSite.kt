@@ -1,12 +1,12 @@
 package content.region.misthalin.digsite.quest.thedigsite
 
-import content.region.morytania.quest.creatureoffenkenstrain.CreatureOfFenkenstrain
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 /**
  * The Dig Site Quest
@@ -29,9 +29,8 @@ import org.rs09.consts.Items
  * 100 - Talked to expert after showing him the STONE_TABLET_699
  */
 @Initializable
-class TheDigSite : Quest("The Dig Site", 47, 46, 2, 131, 0, 1, 9) {
+class TheDigSite : Quest(Quests.THE_DIG_SITE, 47, 46, 2, 131, 0, 1, 9) {
     companion object {
-        const val questName = "The Dig Site"
         const val attributeStudentGreenExam1Talked = "/save:quest:thedigsite-studentgreenexam1talked"
         const val attributeStudentGreenExam1ObtainAnswer = "/save:quest:thedigsite-studentgreenexam1obtainanswer"
         const val attributeStudentPurpleExam1Talked = "/save:quest:thedigsite-studentpurpleexam1talked"
@@ -83,7 +82,7 @@ class TheDigSite : Quest("The Dig Site", 47, 46, 2, 131, 0, 1, 9) {
         var line = 11
         var stage = getStage(player)
 
-        var started = getQuestStage(player, questName) > 0
+        var started = getQuestStage(player, Quests.THE_DIG_SITE) > 0
 
         if(!started){
             line++

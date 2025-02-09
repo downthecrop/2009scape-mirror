@@ -6,6 +6,7 @@ import core.game.dialogue.DialogueFile
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.tools.END_DIALOGUE
+import content.data.Quests
 
 /**
 * Handles MonasteryMonkDialogue Dialogue
@@ -13,7 +14,7 @@ import core.tools.END_DIALOGUE
 */
 class MonasteryMonkDialogue : DialogueFile() {
     override fun handle(interfaceId: Int, buttonId: Int) {
-        var questStage = player!!.questRepository.getStage("Monk's Friend")
+        var questStage = player!!.questRepository.getStage(Quests.MONKS_FRIEND)
         if (questStage == 0){
             when(stage) {
                 0 -> npcl(core.game.dialogue.FacialExpression.NEUTRAL,"Peace brother.").also { stage = END_DIALOGUE }

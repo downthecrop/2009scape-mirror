@@ -1,5 +1,6 @@
 package content.region.asgarnia.burthorpe.quest.deathplateau
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
@@ -9,7 +10,7 @@ import org.rs09.consts.Items
 class IOUNoteDialogueFile : DialogueFile() {
     var a = 0
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, DeathPlateau.questName)) {
+        when (getQuestStage(player!!, Quests.DEATH_PLATEAU)) {
             in 15..16 -> {
                 when (stage) {
                     0 -> player(FacialExpression.NEUTRAL, "The IOU says that Harold owes me some money.").also { stage++ }
@@ -18,7 +19,7 @@ class IOUNoteDialogueFile : DialogueFile() {
                     3 -> {
                         if (removeItem(player!!, Items.IOU_3103)) {
                             addItemOrDrop(player!!, Items.COMBINATION_3102)
-                            setQuestStage(player!!, DeathPlateau.questName, 16)
+                            setQuestStage(player!!, Quests.DEATH_PLATEAU, 16)
                             sendItemDialogue(player!!, Items.COMBINATION_3102, "You have found the combination!").also { stage++ }
                         }
                     }

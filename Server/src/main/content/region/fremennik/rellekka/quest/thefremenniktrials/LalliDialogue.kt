@@ -9,13 +9,14 @@ import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import core.game.node.item.Item
 import org.rs09.consts.Items
+import content.data.Quests
 
 @Initializable
 class LalliDialogue(player: Player? = null) : DialoguePlugin(player){
     override fun open(vararg args: Any?): Boolean {
         player?.let {
             println(it.getAttribute("lalliEatStew", false))
-            if (it.questRepository.isComplete("Fremennik Trials")){
+            if (it.questRepository.isComplete(Quests.THE_FREMENNIK_TRIALS)){
                 playerl(FacialExpression.NEUTRAL,"Hello there.")
                 stage = 100
                 return true
@@ -45,12 +46,12 @@ class LalliDialogue(player: Player? = null) : DialoguePlugin(player){
                 stage = 50
                 return true
             }
-            if(player.questRepository.isComplete("Fremennik Trials")){
+            if(player.questRepository.isComplete(Quests.THE_FREMENNIK_TRIALS)){
                 playerl(FacialExpression.HAPPY,"Hello there.")
                 stage = 100
                 return true
             }
-            if (it.questRepository.getStage("Fremennik Trials") > 0) {
+            if (it.questRepository.getStage(Quests.THE_FREMENNIK_TRIALS) > 0) {
                 player("Hello there.").also { stage = 0; return true }
             }
         }

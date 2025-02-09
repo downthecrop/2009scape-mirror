@@ -2,14 +2,15 @@ package content.region.asgarnia.falador.quest.recruitmentdrive
 
 import core.api.*
 import core.game.dialogue.*
+import content.data.Quests
 
 class SirAmikVarzeDialogueFile : DialogueBuilderFile() {
 
     override fun create(b: DialogueBuilder) {
-        b.onQuestStages(RecruitmentDrive.questName, 0)
+        b.onQuestStages(Quests.RECRUITMENT_DRIVE, 0)
                 .npcl(FacialExpression.FRIENDLY,"Hello, friend!")
                 .playerl(FacialExpression.THINKING, "Do you have any other quests for me to do?")
-                .branch { player -> if(isQuestComplete(player, "Black Knights' Fortress") && isQuestComplete(player, "Druidic Ritual")) { 1 } else { 0 } }
+                .branch { player -> if(isQuestComplete(player, Quests.BLACK_KNIGHTS_FORTRESS) && isQuestComplete(player, Quests.DRUIDIC_RITUAL)) { 1 } else { 0 } }
                 .let{ branch ->
                     // Failure branch
                     branch.onValue(0)
@@ -27,9 +28,9 @@ class SirAmikVarzeDialogueFile : DialogueBuilderFile() {
                             .npc("They are the Temple Knights, and you are to", "meet Sir Tiffy Cashien in Falador park for testing", "immediately.")
                             .playerl("Okey dokey, I'll go do that then.")
                             .endWith { _, player ->
-                                if(getQuestStage(player, RecruitmentDrive.questName) == 0) {
+                                if(getQuestStage(player, Quests.RECRUITMENT_DRIVE) == 0) {
                                     setAttribute(player, RecruitmentDrive.attributeOriginalGender, player.isMale)
-                                    setQuestStage(player, RecruitmentDrive.questName, 1)
+                                    setQuestStage(player, Quests.RECRUITMENT_DRIVE, 1)
                                 }
                             }
                     optionBuilder.option_playerl("No thanks")
@@ -44,14 +45,14 @@ class SirAmikVarzeDialogueFile : DialogueBuilderFile() {
                             .end()
                 }
 
-        b.onQuestStages(RecruitmentDrive.questName, 1,2,3,4)
+        b.onQuestStages(Quests.RECRUITMENT_DRIVE, 1, 2, 3, 4)
                 .npcl(FacialExpression.FRIENDLY,"Hello, friend!")
                 .playerl(FacialExpression.THINKING, "Can I just skip the test to become a Temple Knight?")
                 .npcl("No, I'm afraid not. I suggest you go meet Sir Tiffy in Falador Park, he will be expecting you.")
                 .end()
 
         // This should be after the Wanted Quest, but is the placeholder until that quest is implemented.
-        b.onQuestStages(RecruitmentDrive.questName, 100)
+        b.onQuestStages(Quests.RECRUITMENT_DRIVE, 100)
                 .npcl(FacialExpression.FRIENDLY,"Hello, friend!")
                 .npcl(FacialExpression.FRIENDLY,"Well @name, now that you are a White Knight, I expect you should be out there hunting Black Knights for us!")
                 .options().let { optionBuilder ->

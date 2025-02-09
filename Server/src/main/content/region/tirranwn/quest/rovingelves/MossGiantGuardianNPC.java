@@ -13,6 +13,7 @@ import core.game.node.item.Item;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
+import content.data.Quests;
 
 /**
  * The level 84 Moss Giant in Glarial's tomb.
@@ -47,7 +48,7 @@ public final class MossGiantGuardianNPC extends AbstractNPC {
 		super.finalizeDeath(killer);
 		if (killer instanceof Player) {
 			final Player player = (Player) killer;
-			final Quest quest = player.getQuestRepository().getQuest("Roving Elves");
+			final Quest quest = player.getQuestRepository().getQuest(Quests.ROVING_ELVES);
 			if (quest.getStage(player) == 15 && !player.getInventory().contains(RovingElves.CONSECRATION_SEED.getId(), 1)) {
 				player.getPacketDispatch().sendMessages("A small grey seed drops on the ground.");
 				GroundItemManager.create(new Item(RovingElves.CONSECRATION_SEED.getId()), getLocation(), player);

@@ -16,6 +16,7 @@ import core.plugin.Plugin;
 import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.*;
+import content.data.Quests;
 
 /**
  * Represents a plugin used to handle wilderness nodes.
@@ -49,7 +50,7 @@ public final class WildernessPlugin extends OptionHandler {
 			ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, Location.create(3239, 3606, 0), "You climb up the ladder to the surface.");
 			break;
 		case 39188:
-                        if (!hasRequirement(player, "Defender of Varrock"))
+                        if (!hasRequirement(player, Quests.DEFENDER_OF_VARROCK))
                             break;
 			ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_DOWN, Location.create(3241, 9991, 0), "You descend into the cavern below.");
 			break;

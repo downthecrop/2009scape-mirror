@@ -6,6 +6,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.game.node.entity.player.link.quest.Quest;
+import content.data.Quests;
 
 /**
  * Represents the dialogue plugin used for the morgan npc.
@@ -39,9 +40,9 @@ public final class MorganDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean open(Object... args) {
-		quest = player.getQuestRepository().getQuest("Vampire Slayer");
+		quest = player.getQuestRepository().getQuest(Quests.VAMPIRE_SLAYER);
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest("Vampire Slayer");
+		quest = player.getQuestRepository().getQuest(Quests.VAMPIRE_SLAYER);
 		if (quest.getStage(player) == 0) {
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Please please help us, bold adventurer!");
 			stage = 0;

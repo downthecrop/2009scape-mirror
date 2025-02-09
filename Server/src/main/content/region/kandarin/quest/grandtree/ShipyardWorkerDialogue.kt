@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.grandtree
 
+import content.data.Quests
 import core.api.getAttribute
 import core.api.getQuestStage
 import core.api.setAttribute
@@ -13,7 +14,7 @@ class ShipyardWorkerDialogue : DialogueFile(){
     override fun handle(componentID: Int, buttonID: Int) {
         when(stage){
             0 -> npcl("Hey you! What are you up to?").also {
-                if(getQuestStage(player!!, TheGrandTree.questName) == 55) {
+                if(getQuestStage(player!!, Quests.THE_GRAND_TREE) == 55) {
                     setAttribute(player!!, "/save:grandtree:opt1", false)
                     setAttribute(player!!, "/save:grandtree:opt2", false)
                     setAttribute(player!!, "/save:grandtree:opt3", false)

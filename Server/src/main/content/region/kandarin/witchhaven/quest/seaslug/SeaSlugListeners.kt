@@ -1,5 +1,6 @@
 package content.region.kandarin.witchhaven.quest.seaslug
 
+import content.data.Quests
 import core.api.*
 import core.game.global.action.ClimbActionHandler
 import core.game.interaction.IntType
@@ -96,9 +97,9 @@ class SeaSlugListeners : InteractionListener {
 
 
         on(Scenery.LADDER_18324, IntType.SCENERY, "climb-up") { player, _ ->
-            if (getQuestStage(player, SeaSlug.questName) in 5..6) {
-                if (getQuestStage(player, SeaSlug.questName) == 6 && inInventory(player, Items.LIT_TORCH_594)) {
-                    setQuestStage(player, SeaSlug.questName, 7)
+            if (getQuestStage(player, Quests.SEA_SLUG) in 5..6) {
+                if (getQuestStage(player, Quests.SEA_SLUG) == 6 && inInventory(player, Items.LIT_TORCH_594)) {
+                    setQuestStage(player, Quests.SEA_SLUG, 7)
                     ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, Location(2784, 3285, 1))
                 } else {
                     animate(player, 4785)
@@ -120,12 +121,12 @@ class SeaSlugListeners : InteractionListener {
         }
 
         on(Scenery.BADLY_REPAIRED_WALL_18381, IntType.SCENERY, "kick") { player, _ ->
-            if(getQuestStage(player, SeaSlug.questName) == 8) {
+            if(getQuestStage(player, Quests.SEA_SLUG) == 8) {
                 animate(player, 4804)
                 sendMessage(player, "You kick the loose panel.")
                 sendMessage(player, "The wood is rotted and crumbles away...")
                 sendMessage(player, "... leaving an opening big enough for Kennith to climb through.")
-                setQuestStage(player, SeaSlug.questName, 9)
+                setQuestStage(player, Quests.SEA_SLUG, 9)
             } else {
                 // https://youtu.be/OM-akv7oIZ0 2:41
                 sendMessage(player, "You kick the loose panel...")
@@ -135,13 +136,13 @@ class SeaSlugListeners : InteractionListener {
         }
 
         on(Scenery.CRANE_18327, IntType.SCENERY, "rotate") { player, node ->
-            if(getQuestStage(player, SeaSlug.questName) == 10) {
+            if(getQuestStage(player, Quests.SEA_SLUG) == 10) {
                 // This is supposed to be a cutscene, but goddamn do I hate programming cutscenes.
                 lock(player, 6)
                 player.dialogueInterpreter.sendPlainMessage(true, "Kennith scrambles through the broken wall...")
                 replaceScenery(node as core.game.node.scenery.Scenery, Scenery.CRANE_18326, 6)
                 animateScenery(node as core.game.node.scenery.Scenery, 4798)
-                setQuestStage(player, SeaSlug.questName, 11)
+                setQuestStage(player, Quests.SEA_SLUG, 11)
                 queueScript(player, 6, QueueStrength.SOFT) { stage: Int ->
                     sendDialogue(player, "Down below, you see Holgart collect the boy from the crane and lead him away to safety.")
                     return@queueScript stopExecuting(player)

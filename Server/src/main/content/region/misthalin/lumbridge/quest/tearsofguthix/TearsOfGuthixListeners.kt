@@ -1,5 +1,6 @@
 package content.region.misthalin.lumbridge.quest.tearsofguthix
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.interaction.IntType
@@ -105,7 +106,7 @@ class TearsOfGuthixListeners : InteractionListener {
         }
 
         onUseWith(NPC, Items.SAPPHIRE_LANTERN_4702, NPCs.LIGHT_CREATURE_2021) { player, used, with ->
-            if (hasRequirement(player, "While Guthix Sleeps")) {
+            if (hasRequirement(player, Quests.WHILE_GUTHIX_SLEEPS)) {
                 // Options when you have WGS - B6KHH7AQc2Q
                 openDialogue(player, object : DialogueFile(){
                     override fun handle(componentID: Int, buttonID: Int) {

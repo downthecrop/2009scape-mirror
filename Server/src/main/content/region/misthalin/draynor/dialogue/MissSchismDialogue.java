@@ -5,6 +5,7 @@ import core.game.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC;
 import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
+import content.data.Quests;
 
 /**
  * Represents the miss schism dialogue plugin.
@@ -90,7 +91,7 @@ public final class MissSchismDialogue extends DialoguePlugin {
 
 			break;
 		case 110:
-			if (player.getQuestRepository().isComplete("Vampire Slayer")) {
+			if (player.getQuestRepository().isComplete(Quests.VAMPIRE_SLAYER)) {
 				interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Well, there's nothing to tell NOW. You killed it.");
 				stage = 111;
 			} else {
@@ -156,7 +157,7 @@ public final class MissSchismDialogue extends DialoguePlugin {
 			stage = 23;
 			break;
 		case 23:
-			if(player.getQuestRepository().isComplete("Vampire Slayer")) {
+			if(player.getQuestRepository().isComplete(Quests.VAMPIRE_SLAYER)) {
 				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Well, now that I've cleared the vampire out of the manor,", "I guess you won't have too much trouble turning it into a", "museum.");
 				stage = 24;
 			} else {

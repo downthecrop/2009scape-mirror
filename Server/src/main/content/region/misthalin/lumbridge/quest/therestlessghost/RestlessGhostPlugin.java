@@ -1,5 +1,6 @@
 package content.region.misthalin.lumbridge.quest.therestlessghost;
 
+import content.data.Quests;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -106,11 +107,11 @@ public final class RestlessGhostPlugin extends OptionHandler {
 				searchAltar(player, object);
 				break;
 			case 15051:
-				if (!player.getQuestRepository().isComplete(RestlessGhost.NAME) && !player.getBank().containsItem(SKULL) && !player.getInventory().containsItem(SKULL)) {
+				if (!player.getQuestRepository().isComplete(Quests.THE_RESTLESS_GHOST) && !player.getBank().containsItem(SKULL) && !player.getInventory().containsItem(SKULL)) {
 					player.getInventory().add(SKULL);
 					player.getPacketDispatch().sendMessage("You find another skull.");
 				}
-				player.getQuestRepository().getQuest(RestlessGhost.NAME).setStage(player, 40);
+				player.getQuestRepository().getQuest(Quests.THE_RESTLESS_GHOST).setStage(player, 40);
 				break;
 			case 2145:
 				toggleCoffin(player, object);
@@ -132,7 +133,7 @@ public final class RestlessGhostPlugin extends OptionHandler {
 		player.animate(open ? OPEN_ANIM : CLOSE_ANIM);
 		SceneryBuilder.replace(object, object.transform(open ? 15061 : 2145));
 		player.getPacketDispatch().sendMessage("You " + (open ? "open" : "close") + " the coffin.");
-		if (open && !player.getQuestRepository().isComplete(RestlessGhost.NAME)) {
+		if (open && !player.getQuestRepository().isComplete(Quests.THE_RESTLESS_GHOST)) {
 			sendGhost();
 		}
 	}
@@ -161,7 +162,7 @@ public final class RestlessGhostPlugin extends OptionHandler {
 	 */
 	private void searchAltar(final Player player, final Scenery object) {
 		final boolean hasSkull = object.getId() == 15051;
-		if (player.getQuestRepository().getQuest(RestlessGhost.NAME).getStage(player) != 30) {
+		if (player.getQuestRepository().getQuest(Quests.THE_RESTLESS_GHOST).getStage(player) != 30) {
 			player.getPacketDispatch().sendMessage("You search the altar and find nothing.");
 			return;
 		}
@@ -170,7 +171,7 @@ public final class RestlessGhostPlugin extends OptionHandler {
 				GroundItemManager.create(SKULL, player);
 			}
                         setVarp(player, 728, 5, true);
-			player.getQuestRepository().getQuest(RestlessGhost.NAME).setStage(player, 40);
+			player.getQuestRepository().getQuest(Quests.THE_RESTLESS_GHOST).setStage(player, 40);
 			player.getPacketDispatch().sendMessage("The skeleton in the corner suddenly comes to life!");
 			sendSkeleton(player);
 		}
@@ -259,7 +260,7 @@ public final class RestlessGhostPlugin extends OptionHandler {
 			if (this.getRespawnTick() > GameWorld.getTicks()) {
 				return true;
 			}
-			return player.getQuestRepository().isComplete(RestlessGhost.NAME) || (pl != null && player != pl);
+			return player.getQuestRepository().isComplete(Quests.THE_RESTLESS_GHOST) || (pl != null && player != pl);
 		}
 
 		@Override

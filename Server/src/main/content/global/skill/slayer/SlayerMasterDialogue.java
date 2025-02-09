@@ -17,6 +17,7 @@ import core.plugin.Initializable;
 
 
 import static core.tools.DialogueConstKt.END_DIALOGUE;
+import content.data.Quests;
 
 /**
  * Represents the dialogue plugin used for a slayer master.
@@ -99,7 +100,7 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
             npc = (NPC) args[0];
         }
         master = Master.forId(args[0] instanceof NPC ? ((NPC) args[0]).getId() : (int) args[0]);
-        quest = player.getQuestRepository().getQuest("Animal Magnetism");
+        quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM);
 
         if (master == Master.DURADEL) {
             if (Skillcape.isMaster(player, Skills.SLAYER)) {

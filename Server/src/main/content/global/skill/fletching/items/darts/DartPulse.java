@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 
 import static core.api.ContentAPIKt.*;
+import content.data.Quests;
 
 /**
  * Represents the dart pulse.
@@ -46,7 +47,7 @@ public final class DartPulse extends SkillPulse<Item> {
 			player.getDialogueInterpreter().sendDialogue("You need a fletching level of " + dart.level + " to do this.");
 			return false;
 		}
-		if (!player.getQuestRepository().isComplete("The Tourist Trap")){
+		if (!player.getQuestRepository().isComplete(Quests.THE_TOURIST_TRAP)){
 			player.getDialogueInterpreter().sendDialogue("You need to have completed Tourist Trap to fletch darts.");
 			return false;
 		}

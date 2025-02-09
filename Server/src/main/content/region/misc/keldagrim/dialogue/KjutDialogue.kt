@@ -1,5 +1,6 @@
 package content.region.misc.keldagrim.dialogue
 
+import content.data.Quests
 import core.api.addItemOrDrop
 import core.api.inInventory
 import core.api.isQuestComplete
@@ -41,7 +42,7 @@ class KjutDialogue(player: Player? = null) : DialoguePlugin(player) {
                 stage = END_DIALOGUE
             }
             6 -> {
-                if (isQuestComplete(player, "Forgettable Tale of a Drunken Dwarf")) {
+                if (isQuestComplete(player, Quests.FORGETTABLE_TALE)) {
                     npcl(FacialExpression.OLD_DEFAULT, "I thought you would know plenty!").also { stage = 14 }
                 } else {
                     npcl(FacialExpression.OLD_DEFAULT, "Just go out in the streets, they can't be hard to find!").also { stage = 7 }

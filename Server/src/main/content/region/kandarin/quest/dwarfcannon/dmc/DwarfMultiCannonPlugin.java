@@ -12,6 +12,7 @@ import core.game.node.item.Item;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
 import core.plugin.ClassScanner;
+import content.data.Quests;
 
 /**
  * Handles the Dwarf multi-cannon.
@@ -73,7 +74,7 @@ public final class DwarfMultiCannonPlugin extends OptionHandler {
 				player.getPacketDispatch().sendMessage("You don't have all the cannon components!");
 				return true;
 			}
-			if (!player.getQuestRepository().isComplete("Dwarf Cannon") && player.getDetails().getRights() != Rights.ADMINISTRATOR) {
+			if (!player.getQuestRepository().isComplete(Quests.DWARF_CANNON) && player.getDetails().getRights() != Rights.ADMINISTRATOR) {
 				player.getPacketDispatch().sendMessage("You have to complete the Dwarf Cannon to know how to use this.");
 				return true;
 			}

@@ -10,6 +10,7 @@ import org.rs09.consts.Items
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.game.world.GameWorld
+import content.data.Quests
 
 private val VALID_LOGS = intArrayOf(Items.LOGS_1511, Items.OAK_LOGS_1521,Items.WILLOW_LOGS_1519,Items.MAPLE_LOGS_1517,Items.YEW_LOGS_1515,Items.MAGIC_LOGS_1513)
 private val FILL_ANIM = Animation(9136)
@@ -24,8 +25,8 @@ class AFUBeaconListeners : InteractionListener {
     override fun defineListeners() {
         on(IntType.SCENERY,"add-logs","light"){ player, node ->
             val beacon = AFUBeacon.forLocation(node.location)
-            val questComplete = player.questRepository.isComplete("All Fired Up")
-            val questStage = player.questRepository.getStage("All Fired Up")
+            val questComplete = player.questRepository.isComplete(Quests.ALL_FIRED_UP)
+            val questStage = player.questRepository.getStage(Quests.ALL_FIRED_UP)
 
             if ((beacon != AFUBeacon.RIVER_SALVE && beacon != AFUBeacon.RAG_AND_BONE && !questComplete)
                 || (beacon == AFUBeacon.RIVER_SALVE && questStage < 20 && !questComplete)
@@ -68,7 +69,7 @@ class AFUBeaconListeners : InteractionListener {
             }
 
             AFUBeacon.GOBLIN_VILLAGE -> {
-                if(!player.questRepository.isComplete("Lost Tribe")){
+                if(!player.questRepository.isComplete(Quests.THE_LOST_TRIBE)){
                     player.dialogueInterpreter.sendDialogues(NPC(beacon.keeper).getShownNPC(player), core.game.dialogue.FacialExpression.THINKING,"We no trust you outsider. You no light our beacon.","(Complete Lost Tribe to use this beacon.)")
                     return
                 }
@@ -151,7 +152,7 @@ class AFUBeaconListeners : InteractionListener {
                                 experience += session?.getBonusExperience() ?: 0.0
                                 player.skills.addExperience(Skills.FIREMAKING,experience)
                             } else {
-                                player.questRepository.getQuest("All Fired Up").setStage(player, player.questRepository.getStage("All Fired Up") + 10)
+                                player.questRepository.getQuest(Quests.ALL_FIRED_UP).setStage(player, player.questRepository.getStage(Quests.ALL_FIRED_UP) + 10)
                             }
                         }
                         2 -> player.unlock().also { return true }
@@ -183,7 +184,7 @@ class AFUBeaconListeners : InteractionListener {
                             if(questComplete){
                                 session?.refreshTimer(beacon,logs.id)
                             } else {
-                                player.questRepository.getQuest("All Fired Up").setStage(player, 80)
+                                player.questRepository.getQuest(Quests.ALL_FIRED_UP).setStage(player, 80)
                             }
                         }
                         2 -> player.unlock().also { return true }

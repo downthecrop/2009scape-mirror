@@ -2,6 +2,7 @@ package content.region.desert.quest.thetouristrap;
 
 import java.util.List;
 
+import content.data.Quests;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
@@ -57,7 +58,7 @@ public final class DesertGuardDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest(TouristTrap.NAME);
+		quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP);
 		switch (npc.getId()) {
 		case 5001:
 			switch (quest.getStage(player)) {

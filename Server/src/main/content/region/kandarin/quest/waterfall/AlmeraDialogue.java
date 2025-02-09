@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.waterfall;
 
+import content.data.Quests;
 import core.game.dialogue.DialogueInterpreter;
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
@@ -27,7 +28,7 @@ public class AlmeraDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
-		final Quest quest = player.getQuestRepository().getQuest(WaterFall.NAME);
+		final Quest quest = player.getQuestRepository().getQuest(Quests.WATERFALL_QUEST);
 		switch (stage) {
 			/* Main dialogue sequence */
 			case 0:
@@ -136,7 +137,7 @@ public class AlmeraDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean open(Object... args) {
-		final Quest quest = player.getQuestRepository().getQuest(WaterFall.NAME);
+		final Quest quest = player.getQuestRepository().getQuest(Quests.WATERFALL_QUEST);
 		if (quest.getStage(player) == 100) {
 			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Hello Almera.");
 			stage = 7;

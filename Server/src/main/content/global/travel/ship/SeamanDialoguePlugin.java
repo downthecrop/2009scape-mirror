@@ -11,6 +11,7 @@ import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
 
 import static core.api.ContentAPIKt.*;
+import content.data.Quests;
 
 /**
  * Represents the dialogue used to handle the sailing from and to karamja.
@@ -46,7 +47,7 @@ public class SeamanDialoguePlugin extends DialoguePlugin {
     @Override
     public boolean open(Object... args) {
         npc = (NPC) args[0];
-        if (args.length > 1 && player.getQuestRepository().isComplete("Pirate's Treasure")) {
+        if (args.length > 1 && player.getQuestRepository().isComplete(Quests.PIRATES_TREASURE)) {
 			if (player.getEquipment().get(EquipmentContainer.SLOT_RING) != null && player.getEquipment().get(EquipmentContainer.SLOT_RING).getId() == Items.RING_OF_CHAROSA_6465) {
 				travel();
 			} else if (player.getAchievementDiaryManager().getDiary(DiaryType.KARAMJA).isComplete(0)) {

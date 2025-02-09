@@ -10,14 +10,13 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.world.GameWorld;
-import core.game.world.map.Direction;
-import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
 
 import static core.api.ContentAPIKt.*;
+import content.data.Quests;
 
 /**
  * Represents the pulse used to thieve a stall.
@@ -74,12 +73,12 @@ public final class StallThiefPulse extends SkillPulse<Scenery> {
 			player.getPacketDispatch().sendMessage("You don't have enough inventory space.");
 			return false;
 		}
-		if (player.getLocation().isInRegion(10553) && !isQuestComplete(player, "Fremennik Trials") && stall.full_ids.contains(4278)) {
+		if (player.getLocation().isInRegion(10553) && !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) && stall.full_ids.contains(4278)) {
 			sendDialogue(player, "The fur trader is staring at you suspiciously. You cannot steal from his stall while he distrusts you.");
 			return false;
 		}
 
-		if (player.getLocation().isInRegion(10553) && !isQuestComplete(player, "Fremennik Trials") && stall.full_ids.contains(4277)) {
+		if (player.getLocation().isInRegion(10553) && !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) && stall.full_ids.contains(4277)) {
 			sendDialogue(player, "The fishmonger is staring at you suspiciously. You cannot steal from his stall while he distrusts you.");
 			return false;
 		}

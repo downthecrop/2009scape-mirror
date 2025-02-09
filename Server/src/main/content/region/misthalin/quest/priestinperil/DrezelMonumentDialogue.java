@@ -13,6 +13,7 @@ import org.rs09.consts.NPCs;
 import content.region.morytania.quest.naturespirit.NSDrezelDialogue;
 
 import static core.tools.DialogueConstKt.END_DIALOGUE;
+import content.data.Quests;
 
 /**
  * Represents the dialogue plugin used for the drezel monument.
@@ -52,7 +53,7 @@ public final class DrezelMonumentDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		Quest quest = player.getQuestRepository().getQuest("Priest in Peril");
+		Quest quest = player.getQuestRepository().getQuest(Quests.PRIEST_IN_PERIL);
 		if (quest.getStage(player) == 17) {
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Ah, " + player.getUsername() + ". I see you finally made it down here.", "Things are worse than I feared. I'm not sure if I will", "be able to repair the damage.");
 			stage = 900;
@@ -79,7 +80,7 @@ public final class DrezelMonumentDialogue extends DialoguePlugin {
 			stage = 420;
 		}*/
 
-		quest = player.getQuestRepository().getQuest("Nature Spirit");
+		quest = player.getQuestRepository().getQuest(Quests.NATURE_SPIRIT);
 
 		if(quest.getStage(player) <= 5){
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Greetings again adventurer, How go your travels in", "Morytania? Is it as evil as I have heard?");
@@ -95,7 +96,7 @@ public final class DrezelMonumentDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
-		final Quest quest = player.getQuestRepository().getQuest("Priest in Peril");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.PRIEST_IN_PERIL);
 		switch (stage) {
 		case 400:
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Ah, " + player.getUsername() + ". For all the assistance you have given", "both myself and Misthalin in your actions, I cannot let", "you pass without warning you.");

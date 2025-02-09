@@ -6,6 +6,7 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 /**
  * Recruitment Drive Quest
@@ -22,9 +23,8 @@ import org.rs09.consts.Items
  * 100 - Finish by talking to Tiffy.
  */
 @Initializable
-class RecruitmentDrive : Quest("Recruitment Drive", 103, 102, 1, 496, 0, 1, 2) {
+class RecruitmentDrive : Quest(Quests.RECRUITMENT_DRIVE, 103, 102, 1, 496, 0, 1, 2) {
     companion object {
-        const val questName = "Recruitment Drive"
         const val attributeOriginalGender = "/save:quest:recruitmentdrive-originalgender"
 
         // Stage state: (0: reset), (1: passed), (-1: failed)
@@ -43,17 +43,17 @@ class RecruitmentDrive : Quest("Recruitment Drive", 103, 102, 1, 496, 0, 1, 2) {
         var line = 12
         var stage = getStage(player)
 
-        var started = getQuestStage(player, questName) > 0
+        var started = getQuestStage(player, Quests.RECRUITMENT_DRIVE) > 0
 
         if(!started){
             line(player, "I can start this quest by speaking to !!Sir Amik Varze??,", line++)
             line(player, "upstairs in !!Falador Castle,??", line++)
-            if (isQuestComplete(player, "Druidic Ritual")) {
+            if (isQuestComplete(player, Quests.DRUIDIC_RITUAL)) {
                 line(player, "with the Druidic Ritual Quest completed,", line++, true)
             } else {
                 line(player, "with the !!Druidic Ritual Quest?? completed,", line++)
             }
-            if (isQuestComplete(player, "Black Knights' Fortress")) {
+            if (isQuestComplete(player, Quests.BLACK_KNIGHTS_FORTRESS)) {
                 line(player, "and since I have completed the Black Knights' Fortress", line++, true)
                 line(player, "Quest.", line++, true)
             } else {

@@ -10,13 +10,14 @@ import core.game.interaction.InteractionListener
 import core.api.getQuestStage
 import core.api.sendMessage
 import core.game.interaction.IntType
+import content.data.Quests
 
 class DramenTreeListener : InteractionListener {
 
     override fun defineListeners() {
 
         on(Sceneries.DRAMEN_TREE_1292, IntType.SCENERY, "chop down"){ player, node ->
-            val questStage = getQuestStage(player,"Lost City")
+            val questStage = getQuestStage(player,Quests.LOST_CITY)
             if (SkillingTool.getHatchet(player) == null) {
                 sendMessage(player,"You do not have an axe which you have the level to use.")
                 return@on true

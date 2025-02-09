@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
 import org.rs09.consts.Items
+import content.data.Quests
 
 /**
  * Handles the LadyOfTheLake dialogue.
@@ -35,7 +36,7 @@ class TheLadyOfTheLake(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val quest = player.questRepository.getQuest("Merlin's Crystal")
+        val quest = player.questRepository.getQuest(Quests.MERLINS_CRYSTAL)
         when (stage) {
             0 -> options("Who are you?", "I seek the sword Excalibur.", "Good day.").also { stage = 1 }
             1 -> when (buttonId) {

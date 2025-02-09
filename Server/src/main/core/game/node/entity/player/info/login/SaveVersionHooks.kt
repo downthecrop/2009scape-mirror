@@ -6,6 +6,7 @@ import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import org.rs09.consts.Items
+import content.data.Quests
 
 /**
  * Runs one-time save-version-related hooks.
@@ -38,7 +39,7 @@ class SaveVersionHooks : LoginListener {
                 }
 
                 // Unlock Surok's Theme if eligible
-                if (getQuestStage(player, "What Lies Below") > 70) {
+                if (getQuestStage(player, Quests.WHAT_LIES_BELOW) > 70) {
                     player.musicPlayer.unlock(250, false)
                 }
 

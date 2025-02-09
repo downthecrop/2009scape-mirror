@@ -7,16 +7,17 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 @Initializable
 class LocalDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (player.questRepository.getStage("Fight Arena") == 100) {
+        if (player.questRepository.getStage(Quests.FIGHT_ARENA) == 100) {
             npcl(FacialExpression.FRIENDLY, "Hey, you're the guy from the arena! How'd you get out?").also { stage = END_DIALOGUE }
-        } else if (player.questRepository.getStage("Fight Arena") in 91..99) {
+        } else if (player.questRepository.getStage(Quests.FIGHT_ARENA) in 91..99) {
             playerl(FacialExpression.FRIENDLY, "Hello.").also { stage = 9 }
-        } else if (player.questRepository.getStage("Fight Arena") >= 10) {
+        } else if (player.questRepository.getStage(Quests.FIGHT_ARENA) >= 10) {
             playerl(FacialExpression.FRIENDLY, "Hello.").also { stage = 0 }
         } else {
             playerl(FacialExpression.FRIENDLY, "Hello.").also { stage = 7 }

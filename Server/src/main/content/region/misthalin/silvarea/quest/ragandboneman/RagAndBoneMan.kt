@@ -6,6 +6,7 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 /**
  * Rag and Bone Man Quest
@@ -24,9 +25,8 @@ import org.rs09.consts.Items
  * Quest Journal 2012 https://www.youtube.com/watch?v=0I8fNTeAwA8&t=764
  */
 @Initializable
-class RagAndBoneMan : Quest("Rag and Bone Man",100, 99, 2, 714, 0, 1, 4) {
+class RagAndBoneMan : Quest(Quests.RAG_AND_BONE_MAN,100, 99, 2, 714, 0, 1, 4) {
     companion object {
-        const val questName = "Rag and Bone Man"
         const val attributeGoblinBone = "/save:quest:ragandboneman-goblinbonesubmit"
         const val attributeBearBone = "/save:quest:ragandboneman-bearbonesubmit"
         const val attributeBigFrogBone = "/save:quest:ragandboneman-bigfrogbonesubmit"

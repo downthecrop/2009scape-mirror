@@ -1,6 +1,6 @@
 package content.region.kandarin.quest.grandtree
 
-import content.region.kandarin.quest.grandtree.TheGrandTree.Companion.questName
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
@@ -15,7 +15,7 @@ import core.tools.END_DIALOGUE
 class GloughDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, questName)) {
+        when (getQuestStage(player!!, Quests.THE_GRAND_TREE)) {
             40 -> {
                 when (stage) {
                     0 -> playerl("Hello.").also { stage++ }
@@ -28,7 +28,7 @@ class GloughDialogue : DialogueFile() {
                     7 -> npcl("I should've known! The humans are going to invade!").also { stage++ }
                     8 -> playerl("Never!").also { stage++ }
                     9 -> npcl("Your type can't be trusted! I'll take care of this! Go back to the King.").also {
-                        setQuestStage(player!!, questName, 45)
+                        setQuestStage(player!!, Quests.THE_GRAND_TREE, 45)
                         stage = END_DIALOGUE
                     }
                 }
@@ -70,7 +70,7 @@ class GloughDialogue : DialogueFile() {
                                     }
                                     8 -> {
                                         npc.clear()
-                                        setQuestStage(player!!, questName, 50)
+                                        setQuestStage(player!!, Quests.THE_GRAND_TREE, 50)
                                         teleport(player!!, cell)
                                         player!!.unlock()
                                         return true

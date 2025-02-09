@@ -15,6 +15,7 @@ import core.game.node.scenery.Scenery;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
 import core.plugin.ClassScanner;
+import content.data.Quests;
 
 /**
  * Represents the option handler used for smithing.
@@ -68,7 +69,7 @@ public final class SmithingPlugin extends UseWithHandler {
 	@Override
 	public boolean handle(NodeUsageEvent event) {
 		final Player player = event.getPlayer();
-		if (((Scenery) event.getUsedWith()).getId() == 2782 && !player.getQuestRepository().isComplete("Doric's Quest")) {
+		if (((Scenery) event.getUsedWith()).getId() == 2782 && !player.getQuestRepository().isComplete(Quests.DORICS_QUEST)) {
 			player.getDialogueInterpreter().sendDialogue("Property of Doric the Dwarf.");
 			return true;
 		}

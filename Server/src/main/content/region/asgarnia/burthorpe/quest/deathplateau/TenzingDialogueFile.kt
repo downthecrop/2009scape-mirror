@@ -1,5 +1,6 @@
 package content.region.asgarnia.burthorpe.quest.deathplateau
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
@@ -12,7 +13,7 @@ import org.rs09.consts.Items
 class TenzingDialogueFile : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, DeathPlateau.questName)) {
+        when (getQuestStage(player!!, Quests.DEATH_PLATEAU)) {
             20 -> {
                 when (stage) {
                     START_DIALOGUE -> playerl(FacialExpression.FRIENDLY, "Hello!").also { stage++ }
@@ -34,7 +35,7 @@ class TenzingDialogueFile : DialogueFile() {
                     20 -> npcl(FacialExpression.FRIENDLY, "Thank you traveller!").also { stage++ }
                     21 -> sendItemDialogue(player!!, Items.CLIMBING_BOOTS_3105, "Tenzing has given you his Climbing boots.").also {
                         addItemOrDrop(player!!, Items.CLIMBING_BOOTS_3105, 1)
-                        setQuestStage(player!!, DeathPlateau.questName, 21)
+                        setQuestStage(player!!, Quests.DEATH_PLATEAU, 21)
                         stage = END_DIALOGUE
                     }
                     30 -> npcl(FacialExpression.ANNOYED, "Hmph.").also { stage = END_DIALOGUE }
@@ -104,7 +105,7 @@ class TenzingDialogueFile : DialogueFile() {
                     9 -> npcl(FacialExpression.FRIENDLY, "I don't think the Trolls have found the secret way yet, if they had I would've been attacked by now.").also { stage++ }
                     10 -> playerl(FacialExpression.FRIENDLY, "OK thanks but I think I'd better check the path. I don't want to send the Imperial Guards to their death!").also { stage++ }
                     11 -> npcl(FacialExpression.FRIENDLY, "You are wise for one so young.").also {
-                        setQuestStage(player!!, DeathPlateau.questName, 25)
+                        setQuestStage(player!!, Quests.DEATH_PLATEAU, 25)
                         stage = END_DIALOGUE
                     }
                 }

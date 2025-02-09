@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
+import content.data.Quests;
 
 /**
  * Handles Islwyn's dialogue for Roving Elves.
@@ -29,7 +30,7 @@ public class IslwynDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
-		final Quest quest = player.getQuestRepository().getQuest("Roving Elves");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.ROVING_ELVES);
 		switch (stage) {
 		case 500:
 			end();
@@ -355,8 +356,8 @@ public class IslwynDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean open(Object... args) {
-		final Quest quest = player.getQuestRepository().getQuest("Roving Elves");
-		final Quest waterfall = player.getQuestRepository().getQuest("Waterfall");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.ROVING_ELVES);
+		final Quest waterfall = player.getQuestRepository().getQuest(Quests.WATERFALL_QUEST);
 		if (quest.getStage(player) == 0 && waterfall.isCompleted(player)) {
 			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Hello there.");
 			stage = 0;

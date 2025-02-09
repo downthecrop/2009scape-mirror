@@ -11,6 +11,7 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import org.rs09.consts.Animations
 import org.rs09.consts.Items
+import content.data.Quests
 
 /**
  * Harold sub dialogue file for death plateau.
@@ -38,7 +39,7 @@ class HaroldDialogueFile : DialogueFile() {
             setAttribute(player!!, ATTRIBUTE_JUMPSTAGE, 0)
         }
         println(getAttribute(player!!, ATTRIBUTE_HAROLD_MONEY, -1))
-        when (getQuestStage(player!!, DeathPlateau.questName)) {
+        when (getQuestStage(player!!, Quests.DEATH_PLATEAU)) {
             10 -> { // First time meeting.
                 when (stage) {
                     START_DIALOGUE -> player(FacialExpression.FRIENDLY, "Hello there.").also { stage++ }
@@ -47,7 +48,7 @@ class HaroldDialogueFile : DialogueFile() {
                     3 -> npcl(FacialExpression.FRIENDLY, "Yeah.").also { stage++ }
                     4 -> playerl(FacialExpression.HAPPY, "Denulth said that you lost the combination to the equipment room ?").also { stage++ }
                     5 -> npcl(FacialExpression.FRIENDLY, "I don't want to talk about it!").also {
-                        setQuestStage(player!!, "Death Plateau", 11)
+                        setQuestStage(player!!, Quests.DEATH_PLATEAU, 11)
                         stage = END_DIALOGUE
                     }
                 }
@@ -71,7 +72,7 @@ class HaroldDialogueFile : DialogueFile() {
                     4 -> {
                         if (inInventory(player!!, Items.ASGARNIAN_ALE_1905, 1)) {
                             removeItem(player!!, Items.ASGARNIAN_ALE_1905)
-                            setQuestStage(player!!, "Death Plateau", 12)
+                            setQuestStage(player!!, Quests.DEATH_PLATEAU, 12)
                             sendMessage(player!!, "You give Harold an Asgarnian Ale.")
                             setAttribute(player!!, ATTRIBUTE_HAROLD_MONEY, 200)
                             sendItemDialogue(player!!, Items.ASGARNIAN_ALE_1905, "You give Harold an Asgarnian Ale.").also { stage++ }
@@ -81,7 +82,7 @@ class HaroldDialogueFile : DialogueFile() {
                     }
                     5 -> {
                         end()
-                        setQuestStage(player!!, "Death Plateau", 13)
+                        setQuestStage(player!!, Quests.DEATH_PLATEAU, 13)
                         animate(npc!!, Animations.HUMAN_EATTING_829)
                         runTask(npc!!, 5) {
                             npcl(FacialExpression.FRIENDLY, "Arrh. That hit the spot!").also { stage = END_DIALOGUE }
@@ -120,7 +121,7 @@ class HaroldDialogueFile : DialogueFile() {
                     }
                     24 -> {
                         end()
-                        setQuestStage(player!!, DeathPlateau.questName, 14)
+                        setQuestStage(player!!, Quests.DEATH_PLATEAU, 14)
                         npc!!.isWalks = false
                         animate(npc!!, Animations.HUMAN_EATTING_829)
                         runTask(npc!!, 4) {
@@ -204,7 +205,7 @@ class HaroldDialogueFile : DialogueFile() {
                     37 -> npcl(FacialExpression.FRIENDLY, "I'll write you out an IOU for the rest.").also { stage++ }
                     38 -> {
                         addItemOrDrop(player!!, Items.IOU_3103)
-                        setQuestStage(player!!, DeathPlateau.questName, 15)
+                        setQuestStage(player!!, Quests.DEATH_PLATEAU, 15)
                         sendMessage(player!!, "Harold has given you an IOU scribbled on some paper.")
                         sendItemDialogue(player!!, Items.IOU_3103, "Harold has given you an IOU scribbled on some paper.").also {stage = END_DIALOGUE}
                     }
@@ -292,7 +293,7 @@ class HaroldDialogueFile : DialogueFile() {
                     34 -> npcl(FacialExpression.DRUNK, "I owe you the resht!").also { stage++ }
                     35 -> {
                         addItemOrDrop(player!!, Items.IOU_3103)
-                        setQuestStage(player!!, DeathPlateau.questName, 15)
+                        setQuestStage(player!!, Quests.DEATH_PLATEAU, 15)
                         sendMessage(player!!, "Harold has given you an IOU scribbled on some paper.")
                         sendItemDialogue(player!!, Items.IOU_3103, "Harold has given you an IOU scribbled on some paper.").also {stage = END_DIALOGUE}
                     }

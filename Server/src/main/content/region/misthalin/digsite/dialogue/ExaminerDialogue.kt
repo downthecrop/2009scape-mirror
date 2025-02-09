@@ -1,5 +1,6 @@
 package content.region.misthalin.digsite.dialogue
 
+import content.data.Quests
 import content.region.misthalin.digsite.quest.thedigsite.TheDigSite
 import core.api.*
 import core.game.dialogue.*
@@ -29,7 +30,7 @@ class ExaminerDialogueFile : DialogueBuilderFile() {
 
     override fun create(b: DialogueBuilder) {
 
-        b.onQuestStages(TheDigSite.questName, 100)
+        b.onQuestStages(Quests.THE_DIG_SITE, 100)
                 .npcl(FacialExpression.HAPPY, "Hello there! My colleague tells me you helped to uncover a hidden altar to the god Zaros.")
                 .npcl(FacialExpression.HAPPY, "A great scholar and archaeologist indeed! Good health and prosperity to you.")
                 .options().let { optionBuilder ->
@@ -43,10 +44,10 @@ class ExaminerDialogueFile : DialogueBuilderFile() {
                             }
                 }
 
-        b.onQuestStages(TheDigSite.questName, 6,7,8,9,10,11,12)
+        b.onQuestStages(Quests.THE_DIG_SITE, 6, 7, 8, 9, 10, 11, 12)
                 .npcl(FacialExpression.FRIENDLY, "Well, what are you doing here? Get digging!")
 
-        b.onQuestStages(TheDigSite.questName, 5)
+        b.onQuestStages(Quests.THE_DIG_SITE, 5)
                 .playerl(FacialExpression.FRIENDLY, "Hello.")
                 .npcl(FacialExpression.FRIENDLY, "Ah, hello again.")
                 .options().let { optionBuilder ->
@@ -169,8 +170,8 @@ class ExaminerDialogueFile : DialogueBuilderFile() {
                             .playerl(FacialExpression.FRIENDLY, "I can dig wherever I want now!")
                             .npcl(FacialExpression.FRIENDLY, "Perhaps you should use your newfound skills to find an artefact on the digsite that will impress the archaeological expert.")
                             .endWith { _, player ->
-                                if(getQuestStage(player, TheDigSite.questName) == 5) {
-                                    setQuestStage(player, TheDigSite.questName, 6)
+                                if(getQuestStage(player, Quests.THE_DIG_SITE) == 5) {
+                                    setQuestStage(player, Quests.THE_DIG_SITE, 6)
                                 }
                                 openInterface(player, 444)
                                 setInterfaceText(player, player.username, 444, 5)
@@ -178,7 +179,7 @@ class ExaminerDialogueFile : DialogueBuilderFile() {
 
                 }
 
-        b.onQuestStages(TheDigSite.questName, 4)
+        b.onQuestStages(Quests.THE_DIG_SITE, 4)
                 .playerl(FacialExpression.FRIENDLY, "Hello.")
                 .npcl(FacialExpression.FRIENDLY, "Hello again.")
                 .options().let { optionBuilder ->
@@ -301,8 +302,8 @@ class ExaminerDialogueFile : DialogueBuilderFile() {
                             }
                             .npcl(FacialExpression.FRIENDLY, "You have now passed the Earth Sciences level 2 intermediate exam. Here is your certificate. Of course, you'll want to get studying for your next exam now!")
                             .endWith { _, player ->
-                                if(getQuestStage(player, TheDigSite.questName) == 4) {
-                                    setQuestStage(player, TheDigSite.questName, 5)
+                                if(getQuestStage(player, Quests.THE_DIG_SITE) == 4) {
+                                    setQuestStage(player, Quests.THE_DIG_SITE, 5)
                                 }
                                 openInterface(player, 441)
                                 setInterfaceText(player, player.username, 441, 5)
@@ -310,13 +311,13 @@ class ExaminerDialogueFile : DialogueBuilderFile() {
 
                 }
 
-        b.onQuestStages(TheDigSite.questName, 1,2,3)
+        b.onQuestStages(Quests.THE_DIG_SITE, 1, 2, 3)
                 // This is kinda messy due to the dialogue being reused in different stages.
                 .branch { player ->
-                    if (getQuestStage(player, TheDigSite.questName) == 2 && !inInventory(player, Items.SEALED_LETTER_683)){
+                    if (getQuestStage(player, Quests.THE_DIG_SITE) == 2 && !inInventory(player, Items.SEALED_LETTER_683)){
                         return@branch 1 // Reuse quest stage 1 if sealed letter is not in inventory.
                     }
-                    return@branch getQuestStage(player, TheDigSite.questName)
+                    return@branch getQuestStage(player, Quests.THE_DIG_SITE)
                 }
                 .let{ branch ->
                     val continuePath = b.placeholder()
@@ -360,8 +361,8 @@ class ExaminerDialogueFile : DialogueBuilderFile() {
                                 if (inInventory(player, Items.SEALED_LETTER_683)) {
                                     removeItem(player, Items.SEALED_LETTER_683)
                                 }
-                                if(getQuestStage(player, TheDigSite.questName) == 2) {
-                                    setQuestStage(player, TheDigSite.questName, 3)
+                                if(getQuestStage(player, Quests.THE_DIG_SITE) == 2) {
+                                    setQuestStage(player, Quests.THE_DIG_SITE, 3)
                                 }
                             }
                             .npcl(FacialExpression.NEUTRAL, "Good, good. We will begin the exam...")
@@ -481,8 +482,8 @@ class ExaminerDialogueFile : DialogueBuilderFile() {
                             .endWith { _, player ->
                                 // Because of onQuestStages and onPredicate, changing quest stage before the dialogue finishes breaks the flow.
                                 // As every stage, the onQuestStages and onPredicate functions are ran, so changing the values will switch out the stages.
-                                if(getQuestStage(player, TheDigSite.questName) == 3) {
-                                    setQuestStage(player, TheDigSite.questName, 4)
+                                if(getQuestStage(player, Quests.THE_DIG_SITE) == 3) {
+                                    setQuestStage(player, Quests.THE_DIG_SITE, 4)
                                 }
                                 openInterface(player, 440)
                                 setInterfaceText(player, player.username, 440, 5)
@@ -511,8 +512,8 @@ class ExaminerDialogueFile : DialogueBuilderFile() {
                             .npcl(FacialExpression.FRIENDLY, "He's also a very busy man, so I write the letters and he justs stamps them if he approves.")
                             .playerl(FacialExpression.FRIENDLY, "Oh, I see. I'll ask him if he'll approve me, and bring my stamped letter back here. Thanks.")
                             .endWith { _, player ->
-                                if(getQuestStage(player, TheDigSite.questName) == 0) {
-                                    setQuestStage(player, TheDigSite.questName, 1)
+                                if(getQuestStage(player, Quests.THE_DIG_SITE) == 0) {
+                                    setQuestStage(player, Quests.THE_DIG_SITE, 1)
                                 }
                             }
                     optionBuilder.option_playerl("Interesting...")

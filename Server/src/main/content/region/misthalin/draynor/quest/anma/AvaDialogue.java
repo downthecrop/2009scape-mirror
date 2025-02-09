@@ -3,6 +3,7 @@ package content.region.misthalin.draynor.quest.anma;
 import java.util.ArrayList;
 import java.util.List;
 
+import content.data.Quests;
 import core.game.container.Container;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.skill.Skills;
@@ -55,7 +56,7 @@ public final class AvaDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest(AnimalMagnetism.NAME);
+		quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM);
 		if (!quest.hasRequirements(player)) {
 			player.getPacketDispatch().sendMessage("She doesn't seem interested in talking to you.");
 			return false;

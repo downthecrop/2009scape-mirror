@@ -1,5 +1,6 @@
 package content.region.karamja.quest.junglepotion;
 
+import content.data.Quests;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
@@ -48,7 +49,7 @@ public final class TrufitusDialogue extends DialoguePlugin {
 
     @Override
     public boolean open(Object... args) {
-        quest = player.getQuestRepository().getQuest(JunglePotion.NAME);
+        quest = player.getQuestRepository().getQuest(Quests.JUNGLE_POTION);
         switch (quest.getStage(player)) {
             case 0:
                 npc("Greetings Bwana! I am Trufitus Shakaya of the Tai", "Bwo Wannai village.");

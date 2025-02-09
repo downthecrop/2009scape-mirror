@@ -1,14 +1,13 @@
 package content.region.asgarnia.burthorpe.quest.deathplateau
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
 import core.game.dialogue.Topic
-import core.game.node.entity.npc.NPC
 import core.game.node.item.Item
 import core.tools.END_DIALOGUE
 import org.rs09.consts.Items
-import org.rs09.consts.NPCs
 
 
 /**
@@ -20,7 +19,7 @@ import org.rs09.consts.NPCs
 
 class DenulthDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, DeathPlateau.questName)) {
+        when (getQuestStage(player!!, Quests.DEATH_PLATEAU)) {
             in 0..4 -> {
                 when (stage) {
                     0 -> playerl(FacialExpression.FRIENDLY, "Hello!").also { stage++ }
@@ -54,7 +53,7 @@ class DenulthDialogueFile : DialogueFile() {
                     309 -> playerl(FacialExpression.FRIENDLY, "A stone what...?!").also { stage++ }
                     310 -> npcl(FacialExpression.FRIENDLY, "Well citizen, the Prince is fond of puzzles. Why we couldn't just have a key is beyond me!").also { stage++ }
                     311 -> playerl(FacialExpression.SUSPICIOUS, "I'll get on it right away!").also {
-                        setQuestStage(player!!, DeathPlateau.questName, 5)
+                        setQuestStage(player!!, Quests.DEATH_PLATEAU, 5)
                         stage = END_DIALOGUE
                     }
                 }
@@ -104,7 +103,7 @@ class DenulthDialogueFile : DialogueFile() {
                     }
                     11 -> npcl(FacialExpression.FRIENDLY, "This certificate proves that we have accepted Dunstan's son for training in the Imperial Guard!").also { stage++ }
                     12 -> playerl(FacialExpression.FRIENDLY, "Thank you Denulth, I shall be back shortly!").also {
-                        setQuestStage(player!!, DeathPlateau.questName, 23)
+                        setQuestStage(player!!, Quests.DEATH_PLATEAU, 23)
                         stage = END_DIALOGUE
                     }
                 }
@@ -169,7 +168,7 @@ class DenulthDialogueFile : DialogueFile() {
                     12 -> npcl(FacialExpression.FRIENDLY, "You are now an honourary member of the Imperial Guard!").also { stage++ }
                     13 -> {
                         stage = END_DIALOGUE
-                        finishQuest(player!!, DeathPlateau.questName)
+                        finishQuest(player!!, Quests.DEATH_PLATEAU)
                     }
                 }
             }

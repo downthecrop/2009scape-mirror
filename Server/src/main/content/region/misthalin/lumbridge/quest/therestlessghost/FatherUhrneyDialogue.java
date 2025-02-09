@@ -1,5 +1,6 @@
 package content.region.misthalin.lumbridge.quest.therestlessghost;
 
+import content.data.Quests;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
@@ -49,13 +50,13 @@ public final class FatherUhrneyDialogue extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 0:
-			if (player.getQuestRepository().getQuest(RestlessGhost.NAME).getStage(player) == 0) {
+			if (player.getQuestRepository().getQuest(Quests.THE_RESTLESS_GHOST).getStage(player) == 0) {
 				options("Well, that's friendly.", "I've come to respossess your house.");
 				stage = 1;
-			} else if (player.getQuestRepository().getQuest(RestlessGhost.NAME).getStage(player) == 10) {
+			} else if (player.getQuestRepository().getQuest(Quests.THE_RESTLESS_GHOST).getStage(player) == 10) {
 				options("Well, that's friendly.", "I've come to respossess your house.", "Father Aereck sent me to talk to you.");
 				stage = 500;
-			} else if (player.getGameAttributes().getAttributes().containsKey("restless-ghost:urhney") || player.getQuestRepository().isComplete(RestlessGhost.NAME)) {
+			} else if (player.getGameAttributes().getAttributes().containsKey("restless-ghost:urhney") || player.getQuestRepository().isComplete(Quests.THE_RESTLESS_GHOST)) {
 				options("Well, that's friendly.", "I've come to respossess your house.", "I've lost the Amulet of Ghostspeak.");
 				stage = 514;
 			}
@@ -112,7 +113,7 @@ public final class FatherUhrneyDialogue extends DialoguePlugin {
 			}
 			interpreter.sendItemMessage(552, "Father Urhney hands you an amulet.");
 			player.getInventory().add(new Item(552, 1));
-			player.getQuestRepository().getQuest(RestlessGhost.NAME).setStage(player, 20);
+			player.getQuestRepository().getQuest(Quests.THE_RESTLESS_GHOST).setStage(player, 20);
 			player.getGameAttributes().setAttribute("/save:restless-ghost:urhney", true);
 			stage = 509;
 			break;

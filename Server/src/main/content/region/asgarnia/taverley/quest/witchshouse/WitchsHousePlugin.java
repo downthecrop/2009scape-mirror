@@ -18,6 +18,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 import core.tools.RandomFunction;
+import content.data.Quests;
 
 /**
  * Created for 2009Scape
@@ -39,7 +40,7 @@ public class WitchsHousePlugin extends OptionHandler {
 
     @Override
     public boolean handle(Player player, Node node, String option) {
-        final Quest quest = player.getQuestRepository().getQuest("Witch's House");
+        final Quest quest = player.getQuestRepository().getQuest(Quests.WITCHS_HOUSE);
         final int id = node instanceof Item ? ((Item) node).getId() : node instanceof Scenery ? ((Scenery) node).getId() : node instanceof NPC ? ((NPC) node).getId() : node.getId();
         // boolean killedExperiment = player.getAttribute("witchs_house:experiment_killed",false);
         // boolean experimentAlive = !player.getAttribute("witchs_house:experiment_killed", false);

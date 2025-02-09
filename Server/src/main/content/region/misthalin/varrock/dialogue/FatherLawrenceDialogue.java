@@ -6,6 +6,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.game.node.entity.player.link.quest.Quest;
+import content.data.Quests;
 
 /**
  * Represents the father lawrence dialogue plugin.
@@ -35,7 +36,7 @@ public final class FatherLawrenceDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		final Quest quest = player.getQuestRepository().getQuest("Romeo & Juliet");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.ROMEO_JULIET);
 		if (quest.getStage(player) < 30) {
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Oh to be a father in the times of whiskey.");
 			stage = 0;
@@ -68,7 +69,7 @@ public final class FatherLawrenceDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
-		final Quest quest = player.getQuestRepository().getQuest("Romeo & Juliet");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.ROMEO_JULIET);
 		switch (stage) {
 		case 0:
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "I sing and I drink and I wake up in gutters.");

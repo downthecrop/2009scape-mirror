@@ -17,6 +17,7 @@ import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 
 import static core.api.ContentAPIKt.hasRequirement;
+import content.data.Quests;
 
 /**
  * Handles the slayer reward interface plugin.
@@ -309,7 +310,7 @@ public class SlayerRewardPlugin extends ComponentPlugin {
 
 		@Override
 		public boolean handle(Player player, Node node, String option) {
-                        if (!hasRequirement(player, "Smoking Kills"))
+                        if (!hasRequirement(player, Quests.SMOKING_KILLS))
                             return true;
 			openTab(player, BUY);
 			return true;

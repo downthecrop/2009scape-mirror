@@ -4,6 +4,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
+import content.data.Quests
 
 /**
  * The Quest Journal and Configuration for the Cook's Assistant Quest.
@@ -11,7 +12,7 @@ import core.plugin.Initializable
  */
 
 @Initializable
-class CooksAssistant : Quest("Cook's Assistant",15, 14, 1, 29, 0, 1, 2){
+class CooksAssistant : Quest(Quests.COOKS_ASSISTANT,15, 14, 1, 29, 0, 1, 2){
     val MILK = 1927
     val FLOUR = 1933
     val EGG = 1944
@@ -21,7 +22,7 @@ class CooksAssistant : Quest("Cook's Assistant",15, 14, 1, 29, 0, 1, 2){
         super.drawJournal(player, stage)
 
         var line = 12
-        var stage = player?.questRepository?.getStage("Cook's Assistant")!!
+        var stage = player?.questRepository?.getStage(Quests.COOKS_ASSISTANT)!!
 
 
         if(stage < 10){ //If the quest has not been started

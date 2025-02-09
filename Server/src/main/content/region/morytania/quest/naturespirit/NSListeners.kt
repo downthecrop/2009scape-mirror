@@ -17,9 +17,9 @@ import core.game.shops.Shops
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import content.region.morytania.handlers.MortMyreGhastNPC
-import core.tools.SystemLogger
 import core.tools.END_DIALOGUE
 import core.tools.Log
+import content.data.Quests
 
 class NSListeners : InteractionListener {
 
@@ -63,7 +63,7 @@ class NSListeners : InteractionListener {
         }
 
         on(GROTTO_ENTRANCE, IntType.SCENERY, "enter"){ player, node ->
-            val questStage = player.questRepository.getQuest("Nature Spirit").getStage(player)
+            val questStage = player.questRepository.getQuest(Quests.NATURE_SPIRIT).getStage(player)
             if(questStage < 55) {
                 val npc = core.game.node.entity.npc.NPC.create(NPCs.FILLIMAN_TARLOCK_1050, Location.create(3440, 3336, 0))
                 npc.init()
@@ -76,7 +76,7 @@ class NSListeners : InteractionListener {
         }
 
         on(GROTTO_ALTAR, IntType.SCENERY, "search"){ player, node ->
-            val stage = player.questRepository.getStage("Nature Spirit")
+            val stage = player.questRepository.getStage(Quests.NATURE_SPIRIT)
             if(stage == 55){
                 openDialogue(player, FillimanCompletionDialogue(), NPC(NPCs.FILLIMAN_TARLOCK_1050))
                 return@on true
@@ -101,7 +101,7 @@ class NSListeners : InteractionListener {
         }
 
         on(WISHING_WELL, IntType.SCENERY, "make-wish"){ player, node ->
-            if(player.questRepository.isComplete("Nature Spirit") && player.questRepository.isComplete("Wolf Whistle"))
+            if(player.questRepository.isComplete(Quests.NATURE_SPIRIT) && player.questRepository.isComplete(Quests.WOLF_WHISTLE))
                 Shops.openId(player, 241)
             else
                 sendDialogue(player, "You can't do that yet.")
@@ -141,7 +141,7 @@ class NSListeners : InteractionListener {
 
         on(intArrayOf(DRUID_POUCH, DRUID_POUCH_EMPTY), IntType.ITEM, "fill"){ player, node ->
 
-            if(player.questRepository.getStage("Nature Spirit") >= 75) {
+            if(player.questRepository.getStage(Quests.NATURE_SPIRIT) >= 75) {
                 if (amountInInventory(player, PEAR) >= 3) {
                     if (node.id != Items.DRUID_POUCH_2958) {
                         removeItem(player, node, Container.INVENTORY)
@@ -183,7 +183,7 @@ class NSListeners : InteractionListener {
         }
 
         onUseWith(IntType.NPC, Items.SECATEURS_5329, NPCs.NATURE_SPIRIT_1051) {player, used, with -> 
-            if (!hasRequirement(player, "Fairytale I - Growing Pains"))
+            if (!hasRequirement(player, Quests.FAIRYTALE_I_GROWING_PAINS))
                 return@onUseWith true
             if (amountInInventory(player, Items.COINS_995) < 40000) {
                 sendDialogue(player, "You need 40,000 coins to do this.")
@@ -253,7 +253,7 @@ class CompleteSpellPulse(val player: Player) : Pulse(2){
     override fun pulse(): Boolean {
         when(counter++){
             0 -> repeat(6) { spawnProjectile(locations[it], dest, 268, 0, 1000, 0, 40, 20) }
-            1 -> player.questRepository.getQuest("Nature Spirit").setStage(player, 60)
+            1 -> player.questRepository.getQuest(Quests.NATURE_SPIRIT).setStage(player, 60)
             2 -> player.teleport(player.location.transform(0,0,1))
             3 -> openDialogue(player, NPCs.NATURE_SPIRIT_1051, findLocalNPC(player, NPCs.NATURE_SPIRIT_1051) as NPC).also { unlock(player); return true }
         }

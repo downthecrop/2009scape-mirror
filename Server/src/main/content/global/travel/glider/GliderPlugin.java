@@ -1,6 +1,6 @@
 package content.global.travel.glider;
 
-import content.region.kandarin.quest.grandtree.TheGrandTree;
+import content.data.Quests;
 import core.api.ContentAPIKt;
 import core.cache.def.impl.NPCDefinition;
 import core.game.component.Component;
@@ -31,7 +31,7 @@ public final class GliderPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		if(isQuestComplete(player, TheGrandTree.questName)){
+		if(isQuestComplete(player, Quests.THE_GRAND_TREE)){
 			player.getInterfaceManager().open(new Component(138));
 			Gliders.sendConfig(node.asNpc(), player);
 		} else {

@@ -8,6 +8,7 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 /**
 * Represents the "Monk's Friend" quest.
@@ -15,7 +16,7 @@ import org.rs09.consts.Items
 */
 
 @Initializable
-class MonksFriend: Quest("Monk's Friend", 89, 88, 1, 30, 0, 1, 80) {
+class MonksFriend: Quest(Quests.MONKS_FRIEND, 89, 88, 1, 30, 0, 1, 80) {
 
     override fun newInstance(`object`: Any?): Quest {
         return this

@@ -6,6 +6,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
+import content.data.Quests;
 
 /**
  * Represents the dialogue plugin used for king arthur.
@@ -48,7 +49,7 @@ public final class BeggarDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
-		final Quest quest = player.getQuestRepository().getQuest("Merlin's Crystal");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.MERLINS_CRYSTAL);
 		switch (stage) {
 		case 1:
 			if (quest.getStage(player) == 60 && player.getAttribute("beggar_npc") != null) {

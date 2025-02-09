@@ -7,6 +7,7 @@ import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
+import content.data.Quests
 
 @Initializable
 class SkulgrimenDialogue(player: Player? = null) : DialoguePlugin(player) {
@@ -38,7 +39,7 @@ class SkulgrimenDialogue(player: Player? = null) : DialoguePlugin(player) {
             stage = 1
             return true
         }
-        else if(player.questRepository.isComplete("Fremennik Trials")){
+        else if(player.questRepository.isComplete(Quests.THE_FREMENNIK_TRIALS)){
             npcl(FacialExpression.HAPPY,"Hello again, ${player.getAttribute("fremennikname","ringo")}. Come to see what's for sale?")
             stage = 1001
             return true

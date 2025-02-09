@@ -1,5 +1,6 @@
 package content.region.asgarnia.burthorpe.quest.heroesquest
 
+import content.data.Quests
 import core.api.getQuestStage
 import core.api.openDialogue
 import core.api.openNpcShop
@@ -7,7 +8,6 @@ import core.api.setQuestStage
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
 import core.game.dialogue.DialoguePlugin
-import core.game.dialogue.FacialExpression
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
@@ -40,13 +40,16 @@ class AlfonseTheWaiterDialogueFile : DialogueBuilderFile() {
                     optionBuilder.option_playerl("No thank you.")
                             .end()
 
-                    optionBuilder.optionIf("Do you sell Gherkins?"){ player -> return@optionIf getQuestStage(player, HeroesQuest.questName) >= 2 && HeroesQuest.isPhoenix(player) }
+                    optionBuilder.optionIf("Do you sell Gherkins?"){ player -> return@optionIf getQuestStage(
+                        player,
+                        Quests.HEROES_QUEST
+                    ) >= 2 && HeroesQuest.isPhoenix(player) }
                             .playerl("Do you sell Gherkins?")
                             .npc("Hmmmm Gherkins eh? Ask Charlie the cook, round the", "back. He may have some 'gherkins' for you!")
                             .linel("Alfonse winks at you.")
                             .endWith { _, player ->
-                                if(getQuestStage(player, HeroesQuest.questName) == 2) {
-                                    setQuestStage(player, HeroesQuest.questName, 3)
+                                if(getQuestStage(player, Quests.HEROES_QUEST) == 2) {
+                                    setQuestStage(player, Quests.HEROES_QUEST, 3)
                                 }
                             }
 

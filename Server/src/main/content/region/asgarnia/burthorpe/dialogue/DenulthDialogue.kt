@@ -1,8 +1,7 @@
 package content.region.asgarnia.burthorpe.dialogue
 
-import content.region.asgarnia.burthorpe.quest.deathplateau.DeathPlateau
+import content.data.Quests
 import content.region.asgarnia.burthorpe.quest.deathplateau.DenulthDialogueFile
-import content.region.asgarnia.burthorpe.quest.trollstronghold.TrollStronghold
 import core.api.isQuestComplete
 import core.api.isQuestInProgress
 import core.api.openDialogue
@@ -25,7 +24,7 @@ class DenulthDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
 
         // When Troll Stronghold is complete
-        if (isQuestComplete(player!!, TrollStronghold.questName)) {
+        if (isQuestComplete(player!!, Quests.TROLL_STRONGHOLD)) {
             when(stage) {
                 START_DIALOGUE -> playerl(FacialExpression.FRIENDLY, "Hello!").also { stage++ }
                 1 -> npcl(FacialExpression.HAPPY, "Welcome back friend!").also { stage++ }
@@ -49,13 +48,13 @@ class DenulthDialogue(player: Player? = null) : DialoguePlugin(player) {
         }
 
         // Troll Stronghold in progress
-        if (isQuestInProgress(player!!, TrollStronghold.questName, 1, 99)) {
+        if (isQuestInProgress(player!!, Quests.TROLL_STRONGHOLD, 1, 99)) {
             openDialogue(player!!, content.region.asgarnia.burthorpe.quest.trollstronghold.DenulthDialogueFile(), npc)
             return true
         }
 
         // When Death Plateau is completed, start Troll Stronghold
-        if (isQuestComplete(player!!, DeathPlateau.questName)) {
+        if (isQuestComplete(player!!, Quests.DEATH_PLATEAU)) {
             when(stage) {
                 START_DIALOGUE -> playerl(FacialExpression.FRIENDLY, "Hello!").also { stage++ }
                 1 -> npcl(FacialExpression.HAPPY, "Welcome back friend!").also { stage++ }
@@ -78,7 +77,7 @@ class DenulthDialogue(player: Player? = null) : DialoguePlugin(player) {
                 )
                 16 -> npcl(FacialExpression.HAPPY, "God speed friend! I would send some of my men with you, but none of them are brave enough to follow.").also {
                     stage = END_DIALOGUE
-                    setQuestStage(player!!, TrollStronghold.questName, 1)
+                    setQuestStage(player!!, Quests.TROLL_STRONGHOLD, 1)
                 }
 
                 20 -> npcl(FacialExpression.ANGRY, "You are right citizen. The White Knights have taken advantage of the old and weak king, they control most of Asgarnia, including Falador. However they do not control Burthorpe!").also { stage++ }

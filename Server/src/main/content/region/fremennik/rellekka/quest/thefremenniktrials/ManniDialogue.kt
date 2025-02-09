@@ -12,13 +12,14 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 @Initializable
 class ManniDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
     var curNPC: NPC? = NPC(0,Location(0,0,0))
     override fun open(vararg args: Any?): Boolean {
         curNPC = args[0] as? NPC
-        if(player?.questRepository?.getStage("Fremennik Trials")!! > 0){
+        if(player?.questRepository?.getStage(Quests.THE_FREMENNIK_TRIALS)!! > 0){
             if(player?.inventory?.contains(3707, 1) == true){
                 playerl(core.game.dialogue.FacialExpression.HAPPY,"Hey. I got your cocktail for you.")
                 stage = 170
@@ -60,7 +61,7 @@ class ManniDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(
                 stage = 1000
                 return true
             }
-            else if(player.questRepository.isComplete("Fremennik Trials")){
+            else if(player.questRepository.isComplete(Quests.THE_FREMENNIK_TRIALS)){
                 playerl(core.game.dialogue.FacialExpression.HAPPY,"Howdy!")
                 stage = 190
                 return true

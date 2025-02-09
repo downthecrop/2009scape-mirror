@@ -10,10 +10,9 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
-import core.tools.END_DIALOGUE
-import core.tools.START_DIALOGUE
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 /**
  * Roavar dialogue.
@@ -38,7 +37,7 @@ class RoavarDialogue (player: Player? = null) : DialoguePlugin(player) {
             1 -> showTopics(
                     Topic<Int?>(FacialExpression.HALF_GUILTY, "Can I buy a beer?", 10, false),
                     Topic<Int?>(FacialExpression.HALF_GUILTY, "Can I hear some gossip", 20, false),
-                    IfTopic<RoavarDialogueFile?>(FacialExpression.HALF_GUILTY, "Can I buy something to eat?", RoavarDialogueFile(1), player.getQuestRepository().getQuest("Creature of Fenkenstrain").getStage(player) == 2, false),
+                    IfTopic<RoavarDialogueFile?>(FacialExpression.HALF_GUILTY, "Can I buy something to eat?", RoavarDialogueFile(1), player.getQuestRepository().getQuest(Quests.CREATURE_OF_FENKENSTRAIN).getStage(player) == 2, false),
                     Topic<Int?>(FacialExpression.HALF_GUILTY, "Nothing thanks.", 40, false)
             )
 

@@ -14,12 +14,10 @@ import core.ServerConstants;
 import core.game.interaction.InteractionListeners;
 import content.global.handlers.iface.RulesAndInfo;
 import core.tools.Log;
-import core.tools.SystemLogger;
 import core.game.world.GameWorld;
 import core.game.world.repository.Repository;
 import core.game.world.update.UpdateSequence;
 import core.game.node.entity.player.link.SpellBookManager;
-import core.game.node.item.GroundItemManager;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,6 +28,7 @@ import java.util.stream.IntStream;
 
 import static core.api.ContentAPIKt.*;
 import static core.tools.GlobalsKt.colorize;
+import content.data.Quests;
 
 
 /**
@@ -158,10 +157,10 @@ public final class LoginConfiguration {
         }
 
         SpellBookManager.SpellBook currentSpellBook = SpellBookManager.SpellBook.forInterface(player.getSpellBookManager().getSpellBook());
-        if (currentSpellBook == SpellBookManager.SpellBook.ANCIENT && !hasRequirement(player, "Desert Treasure")) {
+        if (currentSpellBook == SpellBookManager.SpellBook.ANCIENT && !hasRequirement(player, Quests.DESERT_TREASURE)) {
             player.sendMessage(colorize("%RAs you can no longer use Ancient Magic, you have been set back to Modern."));
             player.getSpellBookManager().setSpellBook(SpellBookManager.SpellBook.MODERN);
-        } else if (currentSpellBook == SpellBookManager.SpellBook.LUNAR && !hasRequirement(player, "Lunar Diplomacy")) {
+        } else if (currentSpellBook == SpellBookManager.SpellBook.LUNAR && !hasRequirement(player, Quests.LUNAR_DIPLOMACY)) {
             player.sendMessage(colorize("%RAs you can no longer use Lunar Magic, you have been set back to Modern."));
             player.getSpellBookManager().setSpellBook(SpellBookManager.SpellBook.MODERN);
         }

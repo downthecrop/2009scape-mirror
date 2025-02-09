@@ -1,5 +1,6 @@
 package content.region.morytania.quest.creatureoffenkenstrain
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.*
 import core.game.node.entity.player.Player
@@ -65,13 +66,13 @@ class DrFenkenstrainDialogueFile : DialogueBuilderFile() {
 
     override fun create(b: DialogueBuilder) {
 
-        b.onQuestStages(CREATURE_OF_FENKENSTRAIN, 0)
+        b.onQuestStages(Quests.CREATURE_OF_FENKENSTRAIN, 0)
                 .npcl("Have you come to apply for the job?")
                 .playerl(FacialExpression.THINKING, "What job?")
                 .npcl("I've posted a note on the signpost in Canifis about it. Go take a look at it first.")
                 .end()
 
-        b.onQuestStages(CREATURE_OF_FENKENSTRAIN, 1)
+        b.onQuestStages(Quests.CREATURE_OF_FENKENSTRAIN, 1)
                 .npcl("Have you come to apply for the job?")
                 .options().let { optionBuilder ->
                     val continuePath = b.placeholder()
@@ -127,12 +128,12 @@ class DrFenkenstrainDialogueFile : DialogueBuilderFile() {
                 .npcl("I need you to get me enough dead body parts for me to stitch together a complete body, which I plan to bring to life.")
                 .playerl("Right...okay...if you insist.")
                 .endWith { _, player ->
-                    if(getQuestStage(player, CreatureOfFenkenstrain.questName) == 1) {
-                        setQuestStage(player, CreatureOfFenkenstrain.questName, 2)
+                    if(getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) == 1) {
+                        setQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN, 2)
                     }
                 }
 
-        b.onQuestStages(CreatureOfFenkenstrain.questName, 2)
+        b.onQuestStages(Quests.CREATURE_OF_FENKENSTRAIN, 2)
                 .options().let { optionBuilder ->
                     val continuePath = b.placeholder()
 
@@ -184,12 +185,12 @@ class DrFenkenstrainDialogueFile : DialogueBuilderFile() {
                 .npcl("Oh bother! I haven't got a needle or thread!")
                 .npcl("Go and get me a needle, and I'll need 5 lots of thread.")
                 .endWith { _, player ->
-                    if(getQuestStage(player, CreatureOfFenkenstrain.questName) == 2) {
-                        setQuestStage(player, CreatureOfFenkenstrain.questName, 3)
+                    if(getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) == 2) {
+                        setQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN, 3)
                     }
                 }
 
-        b.onQuestStages(CreatureOfFenkenstrain.questName, 3)
+        b.onQuestStages(Quests.CREATURE_OF_FENKENSTRAIN, 3)
                 .npcl("Where are my needle and thread, @name?")
                 // Dialogue path to look for 1 needle.
                 .let{ builder -> return@let hasPart(builder, Item(Items.NEEDLE_1733, 1), CreatureOfFenkenstrain.attributeNeedle, "Ah, a needle. Wonderful.") }
@@ -219,19 +220,19 @@ class DrFenkenstrainDialogueFile : DialogueBuilderFile() {
                 .playerl("Repair the lightning conductor, right. Can I have a break, soon? By law I'm entitled to 15 minutes every-")
                 .npcl("Repair the conductor and BEGONE!!")
                 .endWith { _, player ->
-                    if(getQuestStage(player, CreatureOfFenkenstrain.questName) == 3) {
-                        setQuestStage(player, CreatureOfFenkenstrain.questName, 4)
+                    if(getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) == 3) {
+                        setQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN, 4)
                     }
                 }
 
 
-        b.onQuestStages(CreatureOfFenkenstrain.questName, 4)
+        b.onQuestStages(Quests.CREATURE_OF_FENKENSTRAIN, 4)
                 .playerl(FacialExpression.THINKING, "How do I repair the lighting conductor?")
                 .npcl("Oh, it would be easier to do it myself! If you find a conductor mould you should be able to cast a new one.")
                 .npcl("Remember this, @name, my experiment will only work with a conductor made from silver.")
                 .end()
 
-        b.onQuestStages(CreatureOfFenkenstrain.questName, 5)
+        b.onQuestStages(Quests.CREATURE_OF_FENKENSTRAIN, 5)
                 .playerl("So did it work, then?")
                 .npcl("Yes, I'm afraid it did, @name - all too well.")
                 .playerl(FacialExpression.SUSPICIOUS, "I can't see it anywhere.")
@@ -244,19 +245,19 @@ class DrFenkenstrainDialogueFile : DialogueBuilderFile() {
                 .playerl(FacialExpression.SUSPICIOUS, "What do you want me to do about it?")
                 .npcl("Destroy it!!! Take the key to the Tower and take back the life I never should have granted!!!")
                 .endWith() { df, player ->
-                    if(getQuestStage(player, CreatureOfFenkenstrain.questName) == 5) {
-                        setQuestStage(player, CreatureOfFenkenstrain.questName, 6)
+                    if(getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) == 5) {
+                        setQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN, 6)
                     }
                     addItemOrDrop(player, Items.TOWER_KEY_4185)
                 }
 
-        b.onQuestStages(CreatureOfFenkenstrain.questName, 6)
+        b.onQuestStages(Quests.CREATURE_OF_FENKENSTRAIN, 6)
                 .npcl("So have you destroyed it?!!?")
                 .playerl("Not yet.")
                 .npcl("Please, hurry - save me!!!!")
                 .end()
 
-        b.onQuestStages(CreatureOfFenkenstrain.questName, 7)
+        b.onQuestStages(Quests.CREATURE_OF_FENKENSTRAIN, 7)
                 .npcl("So have you destroyed it?!!?")
                 .playerl("Never, now that he has told me the truth!")
                 .npcl("Oh my, oh my, this is exactly what I feared!")
@@ -265,7 +266,7 @@ class DrFenkenstrainDialogueFile : DialogueBuilderFile() {
                 .npcl("No! I refuse to release you! You must help me build another creature to destroy this dreadful mistake!!")
                 .end()
 
-        b.onQuestStages(CreatureOfFenkenstrain.questName, 8, 100)
+        b.onQuestStages(Quests.CREATURE_OF_FENKENSTRAIN, 8, 100)
                 .npcl("theyrecomingtogetme theyrecomingtogetme...")
                 .playerl("It is all you deserve. Lord Rologarth is master of this castle once more. Let him protect you - if he wants to.")
                 .npcl("theyrecomingtogetme theyrecomingtogetme...")

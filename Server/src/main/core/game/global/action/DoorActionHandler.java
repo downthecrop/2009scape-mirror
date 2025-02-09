@@ -1,5 +1,6 @@
 package core.game.global.action;
 
+import content.data.Quests;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
@@ -84,10 +85,6 @@ public final class DoorActionHandler {
             return;
         }
         DoorConfigLoader.Door d = DoorConfigLoader.Companion.forId(object.getId());
-        if (d != null && !d.getQuestRequirement().equals("")) {
-            if (!hasRequirement(player, d.getQuestRequirement()))
-                return;
-        }
         if (d == null || d.isAutoWalk()) {
             handleAutowalkDoor(player, object);
             return;

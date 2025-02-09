@@ -22,6 +22,7 @@ import core.plugin.Initializable;
 import core.tools.RandomFunction;
 
 import static core.api.ContentAPIKt.hasRequirement;
+import content.data.Quests;
 
 /**
  * Handles the lumbridge basement.

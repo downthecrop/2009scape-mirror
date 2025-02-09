@@ -1,5 +1,6 @@
 package content.region.morytania.quest.creatureoffenkenstrain
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.FacialExpression
 import core.game.global.action.DoorActionHandler
@@ -60,7 +61,7 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
 
         // 1: Reading Signpost to start the quest
         on(Items.NULL_5164, SCENERY, "read") { player, _ ->
-            if (getQuestStage(player, CreatureOfFenkenstrain.questName) < 7 ) {
+            if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) < 7 ) {
                 sendDialogueLines(
                         player,
                         "The signpost has a note pinned onto it. The note says:",
@@ -75,8 +76,11 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
                         "'AAARRGGGHHHHH!!!!!'",
                 )
             }
-            if(getQuest(player, CreatureOfFenkenstrain.questName).hasRequirements(player) && getQuestStage(player, CreatureOfFenkenstrain.questName) == 0) {
-                setQuestStage(player, CreatureOfFenkenstrain.questName, 1)
+            if(getQuest(player, Quests.CREATURE_OF_FENKENSTRAIN).hasRequirements(player) && getQuestStage(
+                    player,
+                    Quests.CREATURE_OF_FENKENSTRAIN
+                ) == 0) {
+                setQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN, 1)
             }
             return@on true
         }
@@ -195,7 +199,7 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
         on(Items.NULL_5167, SCENERY, "search") { player, node ->
             val scenery = node.asScenery()
             if(getAttribute(player, CreatureOfFenkenstrain.attributeUnlockedMemorial, false) ||
-                    getQuestStage(player, CreatureOfFenkenstrain.questName) > 2) {
+                getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) > 2) {
                 animateScenery(player, scenery, 1620)
                 var dest: Location? = null
                 if(scenery.location.equals(Location(3505, 3571))) {
@@ -226,7 +230,7 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
         on(Items.NULL_5167, SCENERY, "push") { player, node ->
             val scenery = node.asScenery()
             if (getAttribute(player, CreatureOfFenkenstrain.attributeUnlockedMemorial, false) ||
-                    getQuestStage(player, CreatureOfFenkenstrain.questName) > 2) {
+                getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) > 2) {
                 animateScenery(player, scenery, 1620)
                 var dest: Location? = null
                 if(scenery.location.equals(Location(3505, 3571))) {
@@ -252,7 +256,7 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
         // 5: Garden Shed Door
         on(Scenery.DOOR_5174, SCENERY, "open") { player, node ->
             if (getAttribute(player, CreatureOfFenkenstrain.attributeUnlockedShed, false) ||
-                    getQuestStage(player, CreatureOfFenkenstrain.questName) >= 5) {
+                getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) >= 5) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else if (inInventory(player, Items.SHED_KEY_4186)) {
                 if (removeItem(player, Items.SHED_KEY_4186)) {
@@ -268,7 +272,7 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
         // 5: Garden Shed Door
         onUseWith(SCENERY, Items.SHED_KEY_4186, Scenery.DOOR_5174) { player, used, with ->
             if (getAttribute(player, CreatureOfFenkenstrain.attributeUnlockedShed, false) ||
-                    getQuestStage(player, CreatureOfFenkenstrain.questName) >= 5) {
+                getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) >= 5) {
                 DoorActionHandler.handleAutowalkDoor(player, with.asScenery())
             } else if (removeItem(player, used)) {
                 DoorActionHandler.handleAutowalkDoor(player, with.asScenery())
@@ -342,8 +346,8 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
                 return@on true
             }
             if (removeItem(player, Items.CONDUCTOR_4201)) {
-                if(getQuestStage(player, CreatureOfFenkenstrain.questName) == 4) {
-                    setQuestStage(player, CreatureOfFenkenstrain.questName, 5)
+                if(getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) == 4) {
+                    setQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN, 5)
                 }
                 sendDialogue(player, "You repair the lightning conductor not one moment too soon - a tremendous bold of lightning melts the new lightning conductor, and power blazes throughout the castle, if only briefly.")
                 val scenery = node.asScenery()
@@ -355,7 +359,10 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
 
         // 6: Enter jail above
         on(Scenery.DOOR_5172, SCENERY, "open") { player, node ->
-            if (inInventory(player, Items.TOWER_KEY_4185) || getQuestStage(player, CreatureOfFenkenstrain.questName) > 7) {
+            if (inInventory(player, Items.TOWER_KEY_4185) || getQuestStage(
+                    player,
+                    Quests.CREATURE_OF_FENKENSTRAIN
+                ) > 7) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else {
                 sendMessage(player, "The door is locked.")
@@ -373,10 +380,10 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
 
         // 7: Pickpocket Ring of Charos from Fenkenstrain
         on(NPCs.DR_FENKENSTRAIN_1670, NPC, "pickpocket") { player, node ->
-            if (getQuestStage(player, CreatureOfFenkenstrain.questName) == 7) {
+            if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) == 7) {
                 sendMessage(player, "You steal the Ring of Charos from Fenkenstrain.")
-                finishQuest(player, CreatureOfFenkenstrain.questName)
-            } else if (getQuestStage(player, CreatureOfFenkenstrain.questName) > 7 && hasAnItem(player, Items.RING_OF_CHAROS_4202).container == null) {
+                finishQuest(player, Quests.CREATURE_OF_FENKENSTRAIN)
+            } else if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) > 7 && hasAnItem(player, Items.RING_OF_CHAROS_4202).container == null) {
                 // Allow Fenkenstrain to be pickpocketed beyond the quest if the ring is lost.
                 addItemOrDrop(player, Items.RING_OF_CHAROS_4202, 1)
                 sendMessage(player, "You steal the Ring of Charos from Fenkenstrain.")

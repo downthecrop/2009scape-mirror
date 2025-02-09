@@ -4,10 +4,9 @@ import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
 import core.game.dialogue.Topic
-import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
-import org.rs09.consts.NPCs
+import content.data.Quests
 
 /**
  * Eohric sub dialogue file for death plateau.
@@ -17,7 +16,7 @@ import org.rs09.consts.NPCs
  */
 class EohricDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, DeathPlateau.questName)) {
+        when (getQuestStage(player!!, Quests.DEATH_PLATEAU)) {
             in 5..9 -> {
                 when (stage) {
                     START_DIALOGUE -> player(FacialExpression.FRIENDLY, "Hi!").also { stage++ }
@@ -31,7 +30,7 @@ class EohricDialogueFile : DialogueFile() {
                     11 -> player(FacialExpression.FRIENDLY, "Do you know where he is staying?").also { stage++ }
                     12 -> npc(FacialExpression.FRIENDLY, "Harold is staying at the Toad and Chicken.").also { stage++ }
                     13 -> player(FacialExpression.FRIENDLY, "Thanks!").also {
-                        setQuestStage(player!!, "Death Plateau", 10)
+                        setQuestStage(player!!, Quests.DEATH_PLATEAU, 10)
                         HaroldDialogueFile.resetNpc(player!!)
                         stage = END_DIALOGUE
                     }
@@ -58,7 +57,7 @@ class EohricDialogueFile : DialogueFile() {
                     2 -> playerl(FacialExpression.HALF_GUILTY, "I found Harold but he won't talk to me!.").also { stage++ }
                     3 -> npcl(FacialExpression.THINKING, "Hmm. Harold has got in trouble a few over his drinking and gambling. Perhaps he'd open up after a drink?").also { stage++ }
                     4 -> playerl(FacialExpression.FRIENDLY, "Thanks, I'll try that!").also {
-                        setQuestStage(player!!, "Death Plateau", 12)
+                        setQuestStage(player!!, Quests.DEATH_PLATEAU, 12)
                         stage = END_DIALOGUE
                     }
                 }

@@ -1,5 +1,6 @@
 package content.minigame.allfiredup
 
+import content.data.Quests
 import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
@@ -26,7 +27,7 @@ class AFURepairClimbHandler : InteractionListener {
     override fun defineListeners() {
 
         on(repairIDs, IntType.SCENERY, "repair"){ player, _ ->
-            if (hasRequirement(player, "All Fired Up")){
+            if (hasRequirement(player, Quests.ALL_FIRED_UP)){
                 val rco: RepairClimbObject? = getClimbingObject(player)
                 repair(player,rco!!)
                 return@on true

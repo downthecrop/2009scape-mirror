@@ -7,6 +7,7 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.world.map.Location
 import org.rs09.consts.Scenery
+import content.data.Quests
 
 class SCWallListener : InteractionListener {
 
@@ -16,7 +17,7 @@ class SCWallListener : InteractionListener {
             //https://youtu.be/crc-47rwjvE?feature=shared&t=841
             // Otherwise the crack reverts back to normal
             // Doesn't make any sense but that's authentic...
-            if ((ScorpionCatcher.QUEST_STATE_DARK_PLACE .. 99).contains(getQuestStage(player, "Scorpion Catcher"))) {
+            if ((ScorpionCatcher.QUEST_STATE_DARK_PLACE .. 99).contains(getQuestStage(player, Quests.SCORPION_CATCHER))) {
                 // Check what side the player is on and teleport them to the other
                 if (player.location == Location(2875, 9799, 0)){
                     sendMessage(player, "You've found a secret door")

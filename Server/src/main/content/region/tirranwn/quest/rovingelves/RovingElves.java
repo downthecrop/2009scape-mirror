@@ -6,6 +6,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.ClassScanner;
+import content.data.Quests;
 
 /**
  * The Roving Elves quest.
@@ -43,7 +44,7 @@ public class RovingElves extends Quest {
 	 * Constructs a new {@Code RovingElves} {@Code Object}
      */
 	public RovingElves() {
-		super("Roving Elves", 105, 104, 1, 402, 0, 1, 6);
+		super(Quests.ROVING_ELVES, 105, 104, 1, 402, 0, 1, 6);
 	}
 
 	@Override

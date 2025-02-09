@@ -10,6 +10,7 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.CameraContext;
 import core.net.packet.context.CameraContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
+import content.data.Quests;
 
 /**
  * Represents the wally cutscene plugin.
@@ -54,7 +55,7 @@ public class WallyCutscenePlugin extends CutscenePlugin {
 
 	@Override
 	public void fade() {
-		player.getQuestRepository().getQuest("Demon Slayer").start(player);
+		player.getQuestRepository().getQuest(Quests.DEMON_SLAYER).start(player);
 		player.getDialogueInterpreter().open(882, Repository.findNPC(882), this);
 	}
 

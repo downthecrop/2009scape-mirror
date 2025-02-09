@@ -6,6 +6,7 @@ import core.game.node.entity.player.link.diary.DiaryType;
 import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
 import core.game.dialogue.DialoguePlugin;
+import content.data.Quests;
 
 
 /**
@@ -42,7 +43,7 @@ public final class FatherAereckDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		int questStage = player.getQuestRepository().getQuest(RestlessGhost.NAME).getStage(player);
+		int questStage = player.getQuestRepository().getQuest(Quests.THE_RESTLESS_GHOST).getStage(player);
 		if (questStage == 10) {
 			npc("Have you got rid of the ghost yet?");
 			stage = 520;
@@ -72,7 +73,7 @@ public final class FatherAereckDialogue extends DialoguePlugin {
     public boolean handle(int interfaceId, int buttonId) {
         switch (stage) {
             case 0:
-                if (player.getQuestRepository().isComplete("The Restless Ghost")) {
+                if (player.getQuestRepository().isComplete(Quests.THE_RESTLESS_GHOST)) {
                     interpreter.sendOptions("What would you like to say?", "Can you change my gravestone now?", "Who's Saradomin?", "Nice place you've got here.");
                     stage = 1;
                 } else {
@@ -128,7 +129,7 @@ public final class FatherAereckDialogue extends DialoguePlugin {
                 end();
                 break;
             case 510:
-                player.getQuestRepository().getQuest(RestlessGhost.NAME).start(player);
+                player.getQuestRepository().getQuest(Quests.THE_RESTLESS_GHOST).start(player);
                 player.getQuestRepository().syncronizeTab(player);
                 npc("Thank you. The problem is, there is a ghost in the", "church graveyard. I would like you to get rid of it.");
                 stage = 511;

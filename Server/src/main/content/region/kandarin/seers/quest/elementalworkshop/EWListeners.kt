@@ -16,6 +16,7 @@ import content.region.kandarin.seers.quest.elementalworkshop.EWUtils.currentStag
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.tools.Log
+import content.data.Quests
 
 /**
  * Listeners for the Elemental Workshop I quest
@@ -140,7 +141,7 @@ class EWListeners : InteractionListener {
                                 sendMessage(player, "Inside you find a small, old, battered key.")
                                 replaceSlot(player, with.asItem().slot, slashedBook)
                                 addItemOrDrop(player, Items.BATTERED_KEY_2887)
-                                setQuestStage(player, "Elemental Workshop I", 3)
+                                setQuestStage(player, Quests.ELEMENTAL_WORKSHOP_I, 3)
                                 return true
                             }
                         }
@@ -177,8 +178,8 @@ class EWListeners : InteractionListener {
                 return@on true
             }
             // Increment quest stage
-            if (getQuestStage(player, "Elemental Workshop I") < 5) {
-                setQuestStage(player, "Elemental Workshop I", 5)
+            if (getQuestStage(player, Quests.ELEMENTAL_WORKSHOP_I) < 5) {
+                setQuestStage(player, Quests.ELEMENTAL_WORKSHOP_I, 5)
             }
             // Allow player through the wall
             sendMessage(player, "You use the battered key to open the doors.")
@@ -200,7 +201,7 @@ class EWListeners : InteractionListener {
                 sendPlayerDialogue(player,
                     "Now to explore this area thoroughly, to find what " +
                             "forgotten secrets it contains.", core.game.dialogue.FacialExpression.NEUTRAL)
-                setQuestStage(player, "Elemental Workshop I", 7)
+                setQuestStage(player, Quests.ELEMENTAL_WORKSHOP_I, 7)
             }
             return@on true
         }
@@ -289,8 +290,8 @@ class EWListeners : InteractionListener {
                 sendMessage(player, "Following the instructions in the book you make an elemental shield.")
             }
             // Check to see if the quest is completed, if not, complete the quest
-            if (!player.questRepository.getQuest("Elemental Workshop I").isCompleted(player)) {
-                player.questRepository.getQuest("Elemental Workshop I").finish(player)
+            if (!player.questRepository.getQuest(Quests.ELEMENTAL_WORKSHOP_I).isCompleted(player)) {
+                player.questRepository.getQuest(Quests.ELEMENTAL_WORKSHOP_I).finish(player)
             }
             return@onUseWith true
         }

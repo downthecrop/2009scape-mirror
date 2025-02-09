@@ -9,6 +9,7 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 @Initializable
 class FairyQueenDialogue(player: Player? = null) : DialoguePlugin(player) {
@@ -20,7 +21,7 @@ class FairyQueenDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
 
-        if (!isQuestComplete(player, "Fairytale II - Cure a Queen")) {
+        if (!isQuestComplete(player, Quests.FAIRYTALE_II_CURE_A_QUEEN)) {
             options(
                 "How do crops and such survive down here?", "What's so good about this place?"
             ).also { stage = START_DIALOGUE }

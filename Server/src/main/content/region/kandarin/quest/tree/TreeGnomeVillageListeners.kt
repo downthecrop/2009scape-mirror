@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.tree
 
+import content.data.Quests
 import core.api.*
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -132,7 +133,7 @@ class TreeGnomeVillageListeners : InteractionListener {
         val climbAnimation = Animation(839)
         val wallLoc = Location(2509,3253,0)
         override fun handle(componentID: Int, buttonID: Int) {
-            if(getQuestStage(player!!, TreeGnomeVillage.questName) > 30){
+            if(getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE) > 30){
                 val northSouth = if (player!!.location.y <= wallLoc.y) Direction.NORTH else Direction.SOUTH
                 when(stage){
                     0 -> sendDialogue(player!!,"The wall has been reduced to rubble. It should be possible to climb over the remains").also{ stage++ }

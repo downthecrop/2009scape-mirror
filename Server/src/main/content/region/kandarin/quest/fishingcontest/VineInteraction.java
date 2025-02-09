@@ -10,6 +10,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.game.interaction.PluginInteraction;
 import core.game.interaction.PluginInteractionManager;
+import content.data.Quests;
 
 @Initializable
 public class VineInteraction extends PluginInteraction {
@@ -24,7 +25,7 @@ public class VineInteraction extends PluginInteraction {
     @Override
     public boolean handle(Player player, Node node) {
         if(node instanceof Scenery){
-            if(player.getQuestRepository().getStage("Fishing Contest") > 0 && player.getQuestRepository().getStage("Fishing Contest") < 100){
+            if(player.getQuestRepository().getStage(Quests.FISHING_CONTEST) > 0 && player.getQuestRepository().getStage(Quests.FISHING_CONTEST) < 100){
                 player.getPulseManager().run(new MovementPulse(player, node.asScenery().getLocation().transform(0, 0, 0)) {
                     @Override
                     public boolean pulse() {

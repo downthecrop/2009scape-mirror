@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.grandtree
 
+import content.data.Quests
 import core.ServerConstants
 import core.api.*
 import core.game.component.Component
@@ -38,7 +39,7 @@ class ForemanNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,locat
     }
 
     override fun finalizeDeath(killer: Entity?) {
-        if(getQuestStage(killer as Player, TheGrandTree.questName) == 55) {
+        if(getQuestStage(killer as Player, Quests.THE_GRAND_TREE) == 55) {
             sendMessage(killer,"The foreman drops a piece of paper as he dies.")
             produceGroundItem(killer, Items.LUMBER_ORDER_787, 1, this.location)
         }

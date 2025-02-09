@@ -8,9 +8,8 @@ import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
-import core.tools.END_DIALOGUE
-import core.tools.START_DIALOGUE
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 /**
  * Unferth Dialogue
@@ -37,7 +36,7 @@ class UnferthDialogue(player: Player? = null) : DialoguePlugin(player) {
 class UnferthDialogueFile : DialogueBuilderFile() {
 
     override fun create(b: DialogueBuilder) {
-        b.onPredicate { player -> isQuestComplete(player, "A Tail of Two Cats") }.playerl(
+        b.onPredicate { player -> isQuestComplete(player, Quests.A_TAIL_OF_TWO_CATS) }.playerl(
             FacialExpression.FRIENDLY, "Hi Unferth. How are you doing?"
         ).npcl(
             FacialExpression.GUILTY, "It's just not the same without Bob around."

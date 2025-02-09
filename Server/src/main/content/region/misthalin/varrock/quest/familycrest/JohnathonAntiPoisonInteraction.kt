@@ -6,6 +6,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import content.data.Quests
 
 class JohnathonAntiPosionInteraction: InteractionListener {
     override fun defineListeners() {
@@ -14,14 +15,14 @@ class JohnathonAntiPosionInteraction: InteractionListener {
         onUseWith(IntType.NPC, poisons, NPCs.JOHNATHON_668){ player, used, with ->
             val npc = with.asNpc()
             val antip = used.asItem()
-            val stage = getQuestStage(player, "Family Crest")
+            val stage = getQuestStage(player, Quests.FAMILY_CREST)
 
             val index = poisons.indexOf(used.id)
             val returnItem = if(index + 1 == poisons.size) Items.VIAL_229 else poisons[index + 1]
 
             if(stage == 17 && removeItem(player, antip)){
                 addItem(player, returnItem)
-                setQuestStage(player, "Family Crest", 18)
+                setQuestStage(player, Quests.FAMILY_CREST, 18)
                 openDialogue(player, NPCs.JOHNATHON_668, npc)
             } else {
                 sendMessage(player, "Nothing interesting happens.")

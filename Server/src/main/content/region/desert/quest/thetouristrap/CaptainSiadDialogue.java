@@ -1,5 +1,6 @@
 package content.region.desert.quest.thetouristrap;
 
+import content.data.Quests;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
@@ -42,7 +43,7 @@ public final class CaptainSiadDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest(TouristTrap.NAME);
+		quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP);
 		switch (quest.getStage(player)) {
 		default:
 			player.getPacketDispatch().sendMessage("The captain looks up from his work as you address him.");

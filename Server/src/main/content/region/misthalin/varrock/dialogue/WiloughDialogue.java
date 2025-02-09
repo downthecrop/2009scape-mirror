@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.plugin.Initializable;
 import core.game.node.item.Item;
+import content.data.Quests;
 
 /**
  * Represents the dialogue used for wilough.
@@ -55,7 +56,7 @@ public final class WiloughDialogue extends DialoguePlugin {
 		} else if (args[0] instanceof Integer) {
 			id = (int) args[0];
 		}
-		final Quest quest = player.getQuestRepository().getQuest("Gertrude's Cat");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.GERTRUDES_CAT);
 		switch (quest.getStage(player)) {
 		case 0:
 			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Hello again.");
@@ -82,7 +83,7 @@ public final class WiloughDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
-		final Quest quest = player.getQuestRepository().getQuest("Gertrude's Cat");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.GERTRUDES_CAT);
 		switch (stage) {
 		case 0:
 			interpreter.sendDialogues(id, FacialExpression.HALF_GUILTY, "You think you're tough do you?");

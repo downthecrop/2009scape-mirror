@@ -9,15 +9,16 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 @Initializable
 class EdmondDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if(inEquipmentOrInventory(player, Items.GAS_MASK_1506) && (player.questRepository.getStage("Plague City") == 2)) {
+        if(inEquipmentOrInventory(player, Items.GAS_MASK_1506) && (player.questRepository.getStage(Quests.PLAGUE_CITY) == 2)) {
             playerl(FacialExpression.FRIENDLY, "Hi Edmond, I've got the gas mask now.").also { stage++ }
-        } else if(player.questRepository.getStage("Plague City") > 2) {
+        } else if(player.questRepository.getStage(Quests.PLAGUE_CITY) > 2) {
             playerl(FacialExpression.FRIENDLY, "Hello Edmond.").also { stage++ }
         } else {
             playerl(FacialExpression.FRIENDLY, "Hello old man.").also { stage++ }
@@ -26,7 +27,7 @@ class EdmondDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (getQuestStage(player!!, PlagueCity.PlagueCityQuest)) {
+        when (getQuestStage(player!!, Quests.PLAGUE_CITY)) {
 
             0 -> when (stage) {
                 1 -> npcl(FacialExpression.NEUTRAL, "Sorry, I can't stop to talk...").also { stage++ }
@@ -56,7 +57,7 @@ class EdmondDialogue(player: Player? = null) : DialoguePlugin(player) {
                 19 -> npcl(FacialExpression.NEUTRAL, "The foresters keep a close eye on it, but there is a back way in.").also { stage++ }
                 20 -> {
                     end()
-                    setQuestStage(player!!, PlagueCity.PlagueCityQuest, 1)
+                    setQuestStage(player!!, Quests.PLAGUE_CITY, 1)
                 }
             }
 
@@ -78,7 +79,7 @@ class EdmondDialogue(player: Player? = null) : DialoguePlugin(player) {
                 2 -> npcl(FacialExpression.NEUTRAL, "The problem is the soil is rock hard. You'll need to pour on several buckets of water to soften it up. I'll keep an eye out for the mourners.").also { stage++ }
                 3 -> {
                     end()
-                    setQuestStage(player!!, "Plague City", 3)
+                    setQuestStage(player!!, Quests.PLAGUE_CITY, 3)
                 }
             }
 
@@ -137,7 +138,7 @@ class EdmondDialogue(player: Player? = null) : DialoguePlugin(player) {
                 3 -> npcl(FacialExpression.NEUTRAL, "Here take this magic scroll, I have little use for it but it may help you.").also { stage++ }
                 4 -> {
                     end()
-                    player!!.questRepository.getQuest("Plague City").finish(player)
+                    player!!.questRepository.getQuest(Quests.PLAGUE_CITY).finish(player)
                 }
             }
 

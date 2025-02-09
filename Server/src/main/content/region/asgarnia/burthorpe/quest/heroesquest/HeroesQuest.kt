@@ -1,5 +1,6 @@
 package content.region.asgarnia.burthorpe.quest.heroesquest
 
+import content.data.Quests
 import content.region.misthalin.varrock.quest.shieldofarrav.ShieldofArrav
 import core.api.*
 import core.game.node.entity.player.Player
@@ -12,7 +13,7 @@ import org.rs09.consts.Items
  * Heroes' Quest
  */
 @Initializable
-class HeroesQuest : Quest("Heroes' Quest",75, 74, 1, 188, 0, 1, 15) {
+class HeroesQuest : Quest(Quests.HEROES_QUEST,75, 74, 1, 188, 0, 1, 15) {
     /**
      *  Do note: "other players can help you even if they have already finished Heroes' Quest"
      *  1 - Talked to Achietties to start the quest
@@ -34,7 +35,6 @@ class HeroesQuest : Quest("Heroes' Quest",75, 74, 1, 188, 0, 1, 15) {
      */
 
     companion object {
-        const val questName = "Heroes' Quest"
         const val attributeGruborLetsYouIn = "/save:quest:heroesquest-gruborletsyouin"
         const val attributeGripTookPapers = "/save:quest:heroesquest-griptookpapers"
         const val attributeGripSaidDuties = "/save:quest:heroesquest-gripsaidduties"
@@ -42,10 +42,10 @@ class HeroesQuest : Quest("Heroes' Quest",75, 74, 1, 188, 0, 1, 15) {
         const val attributeHasOpenedChestDoor = "/save:quest:heroesquest-hasopenedchestdoor"
 
         fun checkQuestsAreComplete(player: Player): Boolean {
-            return isQuestComplete(player, "Shield of Arrav") &&
-                    isQuestComplete(player, "Lost City") &&
-                    isQuestComplete(player, "Merlin's Crystal") &&
-                    isQuestComplete(player, "Dragon Slayer") &&
+            return isQuestComplete(player, Quests.SHIELD_OF_ARRAV) &&
+                    isQuestComplete(player, Quests.LOST_CITY) &&
+                    isQuestComplete(player, Quests.MERLINS_CRYSTAL) &&
+                    isQuestComplete(player, Quests.DRAGON_SLAYER) &&
                     getQuestPoints(player) >= 55
         }
 
@@ -65,10 +65,10 @@ class HeroesQuest : Quest("Heroes' Quest",75, 74, 1, 188, 0, 1, 15) {
                     hasLevelStat(player, Skills.MINING, 50),
                     hasLevelStat(player, Skills.FISHING, 53),
                     hasLevelStat(player, Skills.COOKING, 53),
-                    isQuestComplete(player, "Shield of Arrav"),
-                    isQuestComplete(player, "Lost City"),
-                    isQuestComplete(player, "Merlin's Crystal"),
-                    isQuestComplete(player, "Dragon Slayer"),
+                    isQuestComplete(player, Quests.SHIELD_OF_ARRAV),
+                    isQuestComplete(player, Quests.LOST_CITY),
+                    isQuestComplete(player, Quests.MERLINS_CRYSTAL),
+                    isQuestComplete(player, Quests.DRAGON_SLAYER),
                     getQuestPoints(player) >= 55,
             ).all { it }
         }
@@ -85,7 +85,7 @@ class HeroesQuest : Quest("Heroes' Quest",75, 74, 1, 188, 0, 1, 15) {
         var line = 12
         var stage = getStage(player)
 
-        var started = getQuestStage(player!!, questName) > 0
+        var started = getQuestStage(player!!, Quests.HEROES_QUEST) > 0
 
         if(!started){
             if (checkQuestsAreComplete(player)) {
@@ -95,10 +95,10 @@ class HeroesQuest : Quest("Heroes' Quest",75, 74, 1, 188, 0, 1, 15) {
             } else {
                 line(player, "I can start this quest by speaking to !!Achietties?? at the", line++)
                 line(player, "!!Heroes' Guild?? located !!North?? of !!Taverly?? after completing", line++)
-                line(player, "!!The Shield of Arrav??", line++, isQuestComplete(player, "Shield of Arrav"))
-                line(player, "!!The Lost City??", line++, isQuestComplete(player, "Lost City"))
-                line(player, "!!Merlin's Crystal??", line++, isQuestComplete(player, "Merlin's Crystal"))
-                line(player, "!!The Dragon Slayer??", line++, isQuestComplete(player, "Dragon Slayer"))
+                line(player, "!!The Shield of Arrav??", line++, isQuestComplete(player, Quests.SHIELD_OF_ARRAV))
+                line(player, "!!The Lost City??", line++, isQuestComplete(player, Quests.LOST_CITY))
+                line(player, "!!Merlin's Crystal??", line++, isQuestComplete(player, Quests.MERLINS_CRYSTAL))
+                line(player, "!!The Dragon Slayer??", line++, isQuestComplete(player, Quests.DRAGON_SLAYER))
                 line(player, "!!and gaining 55 Quest Points??", line++, getQuestPoints(player) >= 55)
             }
             line(player, "To complete this quest I need:", line++, false)
@@ -217,7 +217,7 @@ class HeroesQuest : Quest("Heroes' Quest",75, 74, 1, 188, 0, 1, 15) {
     }
 
     override fun reset(player: Player) {
-        if (getQuestStage(player, questName) == 0) {
+        if (getQuestStage(player, Quests.HEROES_QUEST) == 0) {
             removeAttribute(player, attributeGruborLetsYouIn)
             removeAttribute(player, attributeGripTookPapers)
             removeAttribute(player, attributeGripSaidDuties)

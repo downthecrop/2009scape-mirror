@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.plugin.Initializable;
 import core.game.node.item.Item;
+import content.data.Quests;
 
 /**
  * Represents the dialogue of the Joe guard NPC.
@@ -49,7 +50,7 @@ public final class JoeGuardDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest("Prince Ali Rescue");
+		quest = player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE);
 		switch (quest.getStage(player)) {
 		case 40:
 			if (player.getAttribute("guard-drunk", false)) {

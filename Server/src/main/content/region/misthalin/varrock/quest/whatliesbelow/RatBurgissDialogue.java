@@ -1,5 +1,6 @@
 package content.region.misthalin.varrock.quest.whatliesbelow;
 
+import content.data.Quests;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
@@ -52,7 +53,7 @@ public class RatBurgissDialogue extends DialoguePlugin {
     @Override
     public boolean open(Object... args) {
         npc = (NPC) args[0];
-        quest = player.getQuestRepository().getQuest(WhatLiesBelow.NAME);
+        quest = player.getQuestRepository().getQuest(Quests.WHAT_LIES_BELOW);
         options("Hello there!", "I have a question about my Achievement Diary.");
 		stage = -1;
         return true;

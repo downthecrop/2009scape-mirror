@@ -21,6 +21,7 @@ import core.net.packet.context.CameraContext;
 import core.net.packet.context.CameraContext.CameraType;
 import core.plugin.Initializable;
 import core.net.packet.out.CameraViewPacket;
+import content.data.Quests;
 
 /**
  * Represents the romeo and juliet cutscene plugin.
@@ -93,7 +94,7 @@ public final class RJCutscenePlugin extends CutscenePlugin {
 
 	@Override
 	public void fade() {
-		player.getQuestRepository().getQuest("Romeo & Juliet").finish(player);
+		player.getQuestRepository().getQuest(Quests.ROMEO_JULIET).finish(player);
 	}
 
 	@Override
@@ -169,7 +170,7 @@ public final class RJCutscenePlugin extends CutscenePlugin {
 
 		@Override
 		public boolean handle(int interfaceId, int buttonId) {
-			Quest quest = player.getQuestRepository().getQuest("Romeo & Juliet");
+			Quest quest = player.getQuestRepository().getQuest(Quests.ROMEO_JULIET);
 			switch (stage) {
 			case 0:
 				interpreter.sendOptions("Select an Option", "No sorry. I haven't seen her.", "Perhaps I could help to find her for you?");
@@ -771,7 +772,7 @@ public final class RJCutscenePlugin extends CutscenePlugin {
 
 		@Override
 		public boolean open(Object... args) {
-			Quest quest = player.getQuestRepository().getQuest("Romeo & Juliet");
+			Quest quest = player.getQuestRepository().getQuest(Quests.ROMEO_JULIET);
 			npc = (NPC) args[0];
 			if (args.length > 1) {
 				cutscene = (RJCutscenePlugin) args[1];

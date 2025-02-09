@@ -7,6 +7,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.plugin.ClassScanner;
+import content.data.Quests;
 
 /**
  * Represents the demon slayer quest.
@@ -15,12 +16,6 @@ import core.plugin.ClassScanner;
  */
 @Initializable
 public class GoblinDiplomacy extends Quest {
-
-	/**
-	 * The name of the quest.
-	 */
-	public static final String NAME = "Goblin Diplomacy";
-
 	/**
 	 * Represents the orange goblin mail.
 	 */
@@ -45,7 +40,7 @@ public class GoblinDiplomacy extends Quest {
 	 * Constructs a new {@Code GoblinDiplomacy} {@Code Object}
 	 */
 	public GoblinDiplomacy() {
-		super("Goblin Diplomacy", 20, 19, 5);
+		super(Quests.GOBLIN_DIPLOMACY, 20, 19, 5);
 	}
 	
 	@Override

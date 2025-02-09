@@ -6,6 +6,7 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
+import content.data.Quests
 
 /**
  * Dialogue for the Lumbridge Cook.
@@ -29,16 +30,16 @@ class LumbridgeCookDialogue (player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if(player?.questRepository?.getQuest("Lost Tribe")?.getStage(player) == 10){
+        if (player?.questRepository?.getQuest(Quests.THE_LOST_TRIBE)?.getStage(player) == 10) {
             player("Did you see what happened in the cellar?")
             stage = 0
             return true
         }
-        if (player?.questRepository?.getQuest("Cook's Assistant")!!.getStage(player) <= 0) { //If the player has ot started cook's assistant
+        if (player?.questRepository?.getQuest(Quests.COOKS_ASSISTANT)!!.getStage(player) <= 0) { //If the player has ot started cook's assistant
             npc(FacialExpression.SAD, "What am I to do?")
             stage = 0
             return true
-        } else if (player?.questRepository?.getQuest("Cook's Assistant")!!.getStage(player) in 10..99) { //During the Cook's Assistant Quest
+        } else if (player?.questRepository?.getQuest(Quests.COOKS_ASSISTANT)!!.getStage(player) in 10..99) { //During the Cook's Assistant Quest
             if (player.getAttribute("cooks_assistant:all_submitted", false) || (player.getAttribute("cooks_assistant:milk_submitted", false) && player.getAttribute("cooks_assistant:flour_submitted", false) && player.getAttribute("cooks_assistant:egg_submitted", false))){ //If the player has handed all the ingredients to the chef but did not continue the dialogue
                 npc(FacialExpression.HAPPY, "You've brought me everything I need! I am saved!", "Thank you!")
                 stage = 200
@@ -57,14 +58,14 @@ class LumbridgeCookDialogue (player: Player? = null) : DialoguePlugin(player){
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        if(player.questRepository.getQuest("Lost Tribe").getStage(player) == 10){
+        if (player.questRepository.getQuest(Quests.THE_LOST_TRIBE).getStage(player) == 10) {
             when(stage){
                 //Lost Tribe
                 0 -> npc("Last night I was in the kitchen and I heard a noise","from the cellar. I opened the trapdoor and saw a","creature dart into a hole in the wall.").also { stage++ }
                 1 -> npc("It looked a bit like a goblin, but it had big bulging eyes.","It wasn't wearing armour, but it had this odd helmet","with a light on it.").also { stage++ }
                 2 -> npc("The tunnel was too dark for me to follow it, so I went","to tell the Duke. But when we went down to the cellar","the hole had been blocked up, and no one believes me.").also { stage++ }
                 3 -> player("I believe you.").also { stage++ }
-                4 -> npc("Thank you, ${player.username}! If you can convince the Duke","I'm telling the truth then we can get to the bottom of","this mystery.").also { stage = 1000; player.questRepository.getQuest("Lost Tribe").setStage(player,20) }
+                4 -> npc("Thank you, ${player.username}! If you can convince the Duke","I'm telling the truth then we can get to the bottom of","this mystery.").also { stage = 1000; player.questRepository.getQuest(Quests.THE_LOST_TRIBE).setStage(player,20) }
                 5 -> end()
             }
             return true
@@ -117,7 +118,7 @@ class LumbridgeCookDialogue (player: Player? = null) : DialoguePlugin(player){
             44 -> npc(FacialExpression.ANGRY, "I AM a real cook! I haven't got time to be chatting", "about culinary fashion. I'm in desperate need of help!").also { stage = 21 }
 
             //Yes, I'll help you
-            50 -> npc(FacialExpression.HAPPY, "Oh thank you, thank you. I need milk, an egg and", "flour. I'd be very grateful if you can get them for me.").also{ player?.questRepository?.getQuest("Cook's Assistant")?.start(player!!); stage++ }
+            50 -> npc(FacialExpression.HAPPY, "Oh thank you, thank you. I need milk, an egg and", "flour. I'd be very grateful if you can get them for me.").also{ player?.questRepository?.getQuest(Quests.COOKS_ASSISTANT)?.start(player!!); stage++ }
             51 -> player(FacialExpression.NEUTRAL, "So where do I find these ingredients then?").also { stage = 60 }
 
             //Where do I find these ingredients?
@@ -241,10 +242,10 @@ class LumbridgeCookDialogue (player: Player? = null) : DialoguePlugin(player){
             203 -> npc(FacialExpression.NEUTRAL, "Maybe, but I won't be holding my breath.").also { stage++ }
 
             //Activate the Cook's Assistant Quest Complete Certificate
-            204 -> end().also { player?.questRepository?.getQuest("Cook's Assistant")?.finish(player!!) }
+            204 -> end().also { player?.questRepository?.getQuest(Quests.COOKS_ASSISTANT)?.finish(player!!) }
 
             //Dialogue after Cook's Assistant Completion
-            300 -> if(player.questRepository.getQuest("Lost Tribe").getStage(player) == 10) {
+            300 -> if(player.questRepository.getQuest(Quests.THE_LOST_TRIBE).getStage(player) == 10) {
                 player("Do you know what happened in the castle cellar?").also { stage = 600 }
             } else {
                     options("I am getting strong and mighty.", "I keep on dying.", "Can I use your range?").also { stage++ }

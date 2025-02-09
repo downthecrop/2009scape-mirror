@@ -7,6 +7,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.integrations.discord.Discord;
+import content.data.Quests;
 
 /**
  * Represents the dialogue used to handle the wormbrain npc related to the
@@ -51,7 +52,7 @@ public final class WormbrainDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest("Dragon Slayer");
+		quest = player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER);
 		switch (quest.getStage(player)) {
 		default:
 			npc("Whut you want?");

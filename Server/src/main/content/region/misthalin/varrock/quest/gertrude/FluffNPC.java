@@ -4,6 +4,7 @@ import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.game.world.map.Location;
+import content.data.Quests;
 
 /**
  * Represents the plugin used for the fluff npc.
@@ -41,7 +42,7 @@ public final class FluffNPC extends AbstractNPC {
 
 	@Override
 	public boolean isHidden(final Player player) {
-		if (player.getQuestRepository().getQuest("Gertrude's Cat").getStage(player) < 20) {
+		if (player.getQuestRepository().getQuest(Quests.GERTRUDES_CAT).getStage(player) < 20) {
 			return true;
 		}
 		return player.getAttribute("hidefluff", 0L) > System.currentTimeMillis();

@@ -8,6 +8,7 @@ import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import content.region.morytania.quest.naturespirit.NSUtils;
+import content.data.Quests;
 
 /**
  * Handles the Silver Sickle (b) to collect Mort Myre Fungus.
@@ -28,7 +29,7 @@ public final class SilverSicklePlugin extends OptionHandler {
 		switch (option) {
 		case "operate":
 		case "cast bloom":
-			if(player.getQuestRepository().getQuest("Nature Spirit").getStage(player) >= 75) {
+			if(player.getQuestRepository().getQuest(Quests.NATURE_SPIRIT).getStage(player) >= 75) {
 				player.getPacketDispatch().sendAnimation(9021);
 				NSUtils.castBloom(player);
 			} else {

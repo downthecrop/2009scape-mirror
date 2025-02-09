@@ -1,5 +1,6 @@
 package content.region.misthalin.dorgeshuun.quest.thelosttribe
 
+import content.data.Quests
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler
 import core.game.node.entity.skill.Skills
@@ -25,7 +26,7 @@ class PickaxeOnRubble : UseWithHandler(1265,1267,1269,1271,1273,1275){
 
     override fun handle(event: NodeUsageEvent?): Boolean {
         val player = event?.player ?: return false
-        val stage = player.questRepository.getQuest("Lost Tribe").getStage(player)
+        val stage = player.questRepository.getQuest(Quests.THE_LOST_TRIBE).getStage(player)
         if(stage < 30){
             player.dialogueInterpreter.sendItemMessage(event.usedItem.id,"I should probably figure out what happened","before vandalizing the castle more.")
             return true

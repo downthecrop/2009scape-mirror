@@ -10,6 +10,7 @@ import content.region.misthalin.lumbridge.quest.runemysteries.DukeHoracioRMDialo
 import content.region.misthalin.dorgeshuun.quest.thelosttribe.DukeHoracioTLTDialogue
 import core.tools.DIALOGUE_INITIAL_OPTIONS_HANDLE
 import core.tools.END_DIALOGUE
+import content.data.Quests
 
 /**
  * Core dialogue plugin for Duke Horacio, redirects to more specific DialogueFiles.
@@ -23,11 +24,11 @@ class DukeHoracioDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
-        if ((player.questRepository.getQuest("Dragon Slayer").getStage(player) == 100 && !player.inventory.containsItem(DragonSlayer.SHIELD) && !player.bank.containsItem(DragonSlayer.SHIELD) )|| (player.questRepository.getQuest("Dragon Slayer").isStarted(player) && !player.questRepository.getQuest("Dragon Slayer").isCompleted(player))) {
-            addOption("Dragon Slayer", DukeHoracioDSDialogue(player.questRepository.getStage("Dragon Slayer")))
+        if ((player.questRepository.getQuest(Quests.DRAGON_SLAYER).getStage(player) == 100 && !player.inventory.containsItem(DragonSlayer.SHIELD) && !player.bank.containsItem(DragonSlayer.SHIELD) )|| (player.questRepository.getQuest(Quests.DRAGON_SLAYER).isStarted(player) && !player.questRepository.getQuest(Quests.DRAGON_SLAYER).isCompleted(player))) {
+            addOption("Dragon Slayer", DukeHoracioDSDialogue(player.questRepository.getStage(Quests.DRAGON_SLAYER)))
         }
-        if (!player.questRepository.isComplete("Lost Tribe") && player.questRepository.getQuest("Lost Tribe").isStarted(player)) {
-            addOption("Lost Tribe", DukeHoracioTLTDialogue(player.questRepository.getStage("Lost Tribe")))
+        if (!player.questRepository.isComplete(Quests.THE_LOST_TRIBE) && player.questRepository.getQuest(Quests.THE_LOST_TRIBE).isStarted(player)) {
+            addOption("Lost Tribe", DukeHoracioTLTDialogue(player.questRepository.getStage(Quests.THE_LOST_TRIBE)))
         }
         if (!sendChoices()) {
             interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Greetings. Welcome to my castle.")
@@ -66,8 +67,8 @@ class DukeHoracioDialogue(player: Player? = null) : DialoguePlugin(player) {
             }
             20 -> {
                 npc("Let me see...")
-                if (!player.questRepository.isComplete("Rune Mysteries")) {
-                    loadFile(DukeHoracioRMDialogue(player.questRepository.getStage("Rune Mysteries")))
+                if (!player.questRepository.isComplete(Quests.RUNE_MYSTERIES)) {
+                    loadFile(DukeHoracioRMDialogue(player.questRepository.getStage(Quests.RUNE_MYSTERIES)))
                 } else {
                     stage++
                 }

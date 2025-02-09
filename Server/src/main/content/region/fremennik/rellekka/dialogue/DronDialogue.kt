@@ -8,6 +8,7 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import core.tools.END_DIALOGUE
+import content.data.Quests
 
 /**
  * @author qmqz
@@ -18,7 +19,7 @@ class DronDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!isQuestComplete(player, "Making History")) {
+        if (!isQuestComplete(player, Quests.MAKING_HISTORY)) {
             player(FacialExpression.FRIENDLY, "Excuse me.").also { stage = 0 }
         } else {
             player(FacialExpression.FRIENDLY, "Excuse me.").also { stage = 10 }

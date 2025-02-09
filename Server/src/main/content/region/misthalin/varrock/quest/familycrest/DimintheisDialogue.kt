@@ -6,6 +6,7 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 
 @Initializable
@@ -18,12 +19,10 @@ class DimintheisDialogue(player: Player? = null): core.game.dialogue.DialoguePlu
         return DimintheisDialogue(player)
     }
 
-    private val questName = "Family Crest"
-
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
-        val questStage = getQuestStage(player, questName)
-        val questComplete = isQuestComplete(player, questName)
+        val questStage = getQuestStage(player, Quests.FAMILY_CREST)
+        val questComplete = isQuestComplete(player, Quests.FAMILY_CREST)
 
         if (questStage == 20 && inInventory(player, Items.FAMILY_CREST_782)) {
             player("I have retrieved your crest.").also{ stage = 5000 }
@@ -134,7 +133,7 @@ class DimintheisDialogue(player: Player? = null): core.game.dialogue.DialoguePlu
                 1 -> npc("I thank you greatly adventurer!").also { stage++ }
                 2 -> npc("I realise it was a lot to ask of a stranger.").also { stage  = 1000 }
             }
-            2012 -> if(startQuest(player, questName)) {
+            2012 -> if(startQuest(player, Quests.FAMILY_CREST)) {
                 npc("If you find Caleb, or my other sons... please... ",
                     "let them know their father still loves them...").also { stage = 1000 }
             } else {
@@ -167,7 +166,7 @@ class DimintheisDialogue(player: Player? = null): core.game.dialogue.DialoguePlu
                     "they should be able to imbue them with a skill for you.").also {
                         stage = 1000
                         if (removeItem(player, Items.FAMILY_CREST_782)) {
-                            finishQuest(player, questName)
+                            finishQuest(player, Quests.FAMILY_CREST)
                         }
                     }
 

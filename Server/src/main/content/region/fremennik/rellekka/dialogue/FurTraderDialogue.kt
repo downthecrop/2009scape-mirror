@@ -8,6 +8,7 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import core.tools.END_DIALOGUE
+import content.data.Quests
 
 /**
  * @author qmqz
@@ -18,7 +19,7 @@ class FurTraderDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-       if (!isQuestComplete(player, "Fremennik Trials")) {
+       if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
            npc(FacialExpression.ANNOYED, "I don't sell to outerlanders.").also { stage = END_DIALOGUE }
        } else {
            npcl(FacialExpression.FRIENDLY,"Welcome back, ${player.getAttribute("fremennikname","fremmyname")}. Have you seen the furs I have today?").also { stage = 10 }

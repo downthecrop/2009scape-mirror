@@ -5,6 +5,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
+import content.data.Quests;
 
 /**
  * Represents the dialogue used to handle the oziach dialogue.
@@ -43,7 +44,7 @@ public final class OziachDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest("Dragon Slayer");
+		quest = player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER);
 		player.debug("" + quest.getStage(player));
 		switch (quest.getStage(player)) {
 		case 100:
@@ -261,7 +262,7 @@ public final class OziachDialogue extends DialoguePlugin {
 			case 6:
 				end();
 				int heads = player.getInventory().getAmount(DragonSlayer.ELVARG_HEAD);
-				if (player.getInventory().remove(new Item(DragonSlayer.ELVARG_HEAD.getId(),heads)) && !player.getQuestRepository().getQuest("Dragon Slayer").isCompleted(player)) {
+				if (player.getInventory().remove(new Item(DragonSlayer.ELVARG_HEAD.getId(),heads)) && !player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER).isCompleted(player)) {
 					quest.finish(player);
 				}
 				break;

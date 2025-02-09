@@ -23,6 +23,7 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.game.world.GameWorld
 import core.plugin.ClassScanner
+import content.data.Quests
 
 
 class GardenObjectsPlugin : InteractionListener {
@@ -503,7 +504,7 @@ class GardenObjectsPlugin : InteractionListener {
 
         override fun open(vararg args: Any): Boolean {
             npc = args[0] as NPC
-            quest = player.questRepository.getQuest("Prince Ali Rescue")
+            quest = player.questRepository.getQuest(Quests.PRINCE_ALI_RESCUE)
             when (quest!!.getStage(player)) {
                 100 -> {
                     interpreter.sendDialogues(player, null, "I'd like to talk about sq'irks.")

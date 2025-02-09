@@ -16,6 +16,7 @@ import core.ServerStore.Companion.getInt
 import core.api.*
 import core.cache.def.impl.ItemDefinition
 import org.rs09.consts.Items
+import content.data.Quests
 
 enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)? = null) {
     BAREFISTED_SMITHING("cape_perks:barefisted-smithing"),
@@ -195,11 +196,11 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
             end()
             if(spellbook != null){
                 if (spellbook == SpellBookManager.SpellBook.ANCIENT) {
-                    if (!hasRequirement(player, "Desert Treasure"))
+                    if (!hasRequirement(player, Quests.DESERT_TREASURE))
                         return true
                 }
                 else if (spellbook == SpellBookManager.SpellBook.LUNAR) {
-                    if (!hasRequirement(player, "Lunar Diplomacy"))
+                    if (!hasRequirement(player, Quests.LUNAR_DIPLOMACY))
                         return true
                 }
                 player.spellBookManager.setSpellBook(spellbook)
@@ -260,9 +261,9 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
 
         fun sendAltar(player: Player,altar: Altar){
             end()
-            if (altar == Altar.DEATH && !hasRequirement(player, "Mourning's End Part II")) return
-            if (altar == Altar.ASTRAL && !hasRequirement(player, "Lunar Diplomacy")) return
-            if (altar == Altar.BLOOD && !hasRequirement(player, "Legacy of Seergaze")) return
+            if (altar == Altar.DEATH && !hasRequirement(player, Quests.MOURNINGS_END_PART_II)) return
+            if (altar == Altar.ASTRAL && !hasRequirement(player, Quests.LUNAR_DIPLOMACY)) return
+            if (altar == Altar.BLOOD && !hasRequirement(player, Quests.LEGACY_OF_SEERGAZE)) return
             if (altar == Altar.LAW && !ItemDefinition.canEnterEntrana(player)) {
                 sendItemDialogue(player, Items.SARADOMIN_SYMBOL_8055, "No weapons or armour are permitted on holy Entrana.")
                 return

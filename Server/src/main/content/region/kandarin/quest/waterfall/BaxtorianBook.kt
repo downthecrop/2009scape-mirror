@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.waterfall
 
+import content.data.Quests
 import content.global.handlers.iface.BookInterface
 import content.global.handlers.iface.BookLine
 import content.global.handlers.iface.Page
@@ -143,8 +144,8 @@ class BaxtorianBook : InteractionListener {
         )
         private fun display(player: Player, pageNum: Int, buttonID: Int) : Boolean {
             BookInterface.pageSetup(player, BookInterface.FANCY_BOOK_3_49, TITLE, CONTENTS)
-            if (player.questRepository.getQuest(WaterFall.NAME).getStage(player) == 20) {
-                player.questRepository.getQuest(WaterFall.NAME).setStage(player, 30)
+            if (player.questRepository.getQuest(Quests.WATERFALL_QUEST).getStage(player) == 20) {
+                player.questRepository.getQuest(Quests.WATERFALL_QUEST).setStage(player, 30)
             }
             return true
         }

@@ -20,12 +20,12 @@ import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
-import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 import content.global.handlers.item.equipment.special.DragonfireSwingHandler;
 
 import static core.api.ContentAPIKt.calculateDragonfireMaxHit;
+import content.data.Quests;
 
 
 /**
@@ -154,14 +154,14 @@ public final class ElvargNPC extends AbstractNPC {
             return super.isAttackable(entity, style, message);
         }
         final Player player = (Player) entity;
-        if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) == 40 && (player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD))) {
+        if (player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER).getStage(player) == 40 && (player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD))) {
             if(message) {
                 player.getPacketDispatch().sendMessage("You have already slain the dragon. Now you just need to return to Oziach for");
                 player.getPacketDispatch().sendMessage("your reward!");
             }
             return false;
         }
-        if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) > 40) {
+        if (player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER).getStage(player) > 40) {
             if(message) {
                 player.getPacketDispatch().sendMessage("You have already slain Elvarg.");
             }

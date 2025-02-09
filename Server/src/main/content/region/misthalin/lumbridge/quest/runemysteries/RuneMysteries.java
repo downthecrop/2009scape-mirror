@@ -3,6 +3,7 @@ package content.region.misthalin.lumbridge.quest.runemysteries;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.game.node.entity.player.link.quest.Quest;
+import content.data.Quests;
 
 /**
  * Represents the rune mysteries fortress quest.
@@ -15,7 +16,7 @@ public class RuneMysteries extends Quest {
 	 * Constructs a new {@code RuneMysteries} {@code Object}.
      */
 	public RuneMysteries() {
-		super("Rune Mysteries", 27, 26, 1, 63, 0, 1, 6);
+		super(Quests.RUNE_MYSTERIES, 27, 26, 1, 63, 0, 1, 6);
 	}
 
 	@Override

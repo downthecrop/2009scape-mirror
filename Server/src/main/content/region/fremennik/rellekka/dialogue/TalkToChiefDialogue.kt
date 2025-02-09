@@ -8,10 +8,11 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import core.tools.END_DIALOGUE
+import content.data.Quests
 
 /**
  * @author qmqz
- * There is no available dialogue for after Fremennik Trials,
+ * There is no available dialogue for after The Fremennik Trials,
  * only after Hero's Welcome which isn't in this revision.
  */
 
@@ -20,7 +21,7 @@ class TalkToChiefDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!isQuestComplete(player, "Fremennik Trials")) {
+        if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
             npcl(FacialExpression.ANNOYED, "I cannot speak to you outerlander! Talk to Brundt, the Chieftain!").also { stage = END_DIALOGUE }
         } else {
             player(FacialExpression.FRIENDLY, "Hello.").also { stage = 0 }

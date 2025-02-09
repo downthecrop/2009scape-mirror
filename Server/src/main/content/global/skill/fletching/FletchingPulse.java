@@ -9,6 +9,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
 import core.tools.StringUtils;
+import content.data.Quests;
 
 /**
  * fletching skill pulse
@@ -57,7 +58,7 @@ public final class FletchingPulse extends SkillPulse<Item> {
 			amount = player.getInventory().getAmount(node);
 		}
 		if (fletch == Fletching.FletchingItems.OGRE_ARROW_SHAFT) {
-			if (player.getQuestRepository().getQuest("Big Chompy Bird Hunting").getStage(player) == 0) {
+			if (player.getQuestRepository().getQuest(Quests.BIG_CHOMPY_BIRD_HUNTING).getStage(player) == 0) {
 				player.getPacketDispatch().sendMessage("You must have started Big Chompy Bird Hunting to make those.");
 				return false;
 			}

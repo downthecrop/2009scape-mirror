@@ -34,6 +34,7 @@ import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 
 import static core.api.ContentAPIKt.*;
+import content.data.Quests;
 
 /**
  * Handles the summoning training room.
@@ -81,7 +82,7 @@ public final class SummoningTrainingRoom extends OptionHandler {
 	public boolean handle(final Player player, Node node, String option) {
 		Scenery object = (Scenery) node;
 		Location loc = null;
-		Quest quest = player.getQuestRepository().getQuest("Wolf Whistle");
+		Quest quest = player.getQuestRepository().getQuest(Quests.WOLF_WHISTLE);
 		int questVal = quest.getStage(player) == 0 ? 0 : quest.getStage(player) > 0 && quest.getStage(player) < 100 ? 5 : 28893;
 		switch (option) {
 		case "close":
@@ -312,7 +313,7 @@ public final class SummoningTrainingRoom extends OptionHandler {
 			@Override
 			public boolean open(Object... args) {
 				cutscene = (CutscenePlugin) args[0];
-				quest = player.getQuestRepository().getQuest("Wolf Whistle");
+				quest = player.getQuestRepository().getQuest(Quests.WOLF_WHISTLE);
 				fluffy = NPC.create(6990, cutscene.getBase().transform(41, 52, 1));
 				fluffy.init();
 				fluffy.faceTemporary(player, 1);

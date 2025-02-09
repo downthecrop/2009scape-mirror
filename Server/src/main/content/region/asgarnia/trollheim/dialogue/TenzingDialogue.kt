@@ -1,6 +1,6 @@
 package content.region.asgarnia.trollheim.dialogue
 
-import content.region.asgarnia.burthorpe.quest.deathplateau.DeathPlateau
+import content.data.Quests
 import content.region.asgarnia.burthorpe.quest.deathplateau.TenzingDialogueFile
 import core.api.*
 import core.game.dialogue.DialoguePlugin
@@ -21,7 +21,7 @@ import org.rs09.consts.NPCs
 @Initializable
 class TenzingDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        if (isQuestInProgress(player!!, DeathPlateau.questName, 20, 29)) {
+        if (isQuestInProgress(player!!, Quests.DEATH_PLATEAU, 20, 29)) {
             openDialogue(player!!, TenzingDialogueFile(), npc)
             return true
         }

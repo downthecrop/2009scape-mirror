@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.tree
 
+import content.data.Quests
 import core.api.*
 import core.game.component.Component
 import core.game.node.entity.player.Player
@@ -10,7 +11,6 @@ import org.rs09.consts.Items
 import core.game.dialogue.DialogueFile
 import content.region.kandarin.quest.tree.TreeGnomeVillage.Companion.mazeEntrance
 import content.region.kandarin.quest.tree.TreeGnomeVillage.Companion.mazeVillage
-import content.region.kandarin.quest.tree.TreeGnomeVillage.Companion.questName
 import core.game.world.GameWorld.Pulser
 import core.tools.END_DIALOGUE
 
@@ -38,7 +38,7 @@ class ElkoyDialogue : DialogueFile(){
         })
     }
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = getQuestStage(player!!, questName)
+        val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE)
         val locY = player!!.location.y
         val followLocation = if(locY > 3161) "village" else "exit"
         when {

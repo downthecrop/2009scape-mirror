@@ -17,6 +17,7 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.*
+import content.data.Quests
 
 class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
     companion object {
@@ -322,7 +323,7 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
         }
 
         // You can alternatively browse her regular clothing store to complete the task, no purchase necessary.
-        if (event.target.id == NPCs.YRSA_1301 && event.option == "trade" && player.questRepository.isComplete("Fremennik Trials") && inBorders(player, YRSA_SHOP_BORDERS)) {
+        if (event.target.id == NPCs.YRSA_1301 && event.option == "trade" && player.questRepository.isComplete(Quests.THE_FREMENNIK_TRIALS) && inBorders(player, YRSA_SHOP_BORDERS)) {
             finishTask(
                 player,
                 DiaryLevel.MEDIUM,

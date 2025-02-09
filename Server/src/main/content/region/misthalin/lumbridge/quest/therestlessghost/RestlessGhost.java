@@ -9,6 +9,7 @@ import core.plugin.Initializable;
 import core.plugin.ClassScanner;
 
 import static core.api.ContentAPIKt.*;
+import content.data.Quests;
 
 
 /**
@@ -18,22 +19,16 @@ import static core.api.ContentAPIKt.*;
  */
 @Initializable
 public class RestlessGhost extends Quest {
-
-	/**
-	 * The name of the quest.
-	 */
-	public static final String NAME = "The Restless Ghost";
-
 	/**
 	 * The ghost speak amulet.
 	 */
 	public static final Item AMULET = new Item(552);
-	
+
 	/**
 	 * Constructs a new {@Code RestlessGhost} {@Code Object}
 	 */
 	public RestlessGhost() {
-		super(NAME, 25, 24, 1, 107, 0, 4, 5);
+		super(Quests.THE_RESTLESS_GHOST, 25, 24, 1, 107, 0, 4, 5);
 	}	
 
 	@Override

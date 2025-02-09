@@ -1,5 +1,6 @@
 package content.region.asgarnia.burthorpe.quest.heroesquest
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.node.entity.Entity
@@ -38,8 +39,8 @@ class GripBehavior : NPCBehavior(NPCs.GRIP_792) {
 
     override fun onDeathFinished(self: NPC, killer: Entity) {
         if (killer is Player) {
-            if (getQuestStage(killer, HeroesQuest.questName) == 4) {
-                setQuestStage(killer, HeroesQuest.questName, 5)
+            if (getQuestStage(killer, Quests.HEROES_QUEST) == 4) {
+                setQuestStage(killer, Quests.HEROES_QUEST, 5)
             }
 
             val gi = GroundItem(

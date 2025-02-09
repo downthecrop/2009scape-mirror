@@ -1,7 +1,6 @@
 package content.region.asgarnia.burthorpe.dialogue
 
-import content.region.asgarnia.burthorpe.quest.deathplateau.DeathPlateau
-import content.region.asgarnia.burthorpe.quest.trollstronghold.TrollStronghold
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
@@ -24,7 +23,7 @@ class DunstanDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         // When Troll Stronghold is complete
-        if (isQuestComplete(player!!, TrollStronghold.questName)) {
+        if (isQuestComplete(player!!, Quests.TROLL_STRONGHOLD)) {
             when (stage) {
                 START_DIALOGUE -> playerl(FacialExpression.FRIENDLY, "Hi!").also { stage++ }
                 1 -> npcl(FacialExpression.FRIENDLY, "Hi! What can I do for you?").also { stage++ }
@@ -47,13 +46,13 @@ class DunstanDialogue(player: Player? = null) : DialoguePlugin(player) {
         }
 
         // Troll Stronghold in progress
-        if (isQuestInProgress(player!!, TrollStronghold.questName, 1, 99)) {
+        if (isQuestInProgress(player!!, Quests.TROLL_STRONGHOLD, 1, 99)) {
             openDialogue(player!!, content.region.asgarnia.burthorpe.quest.trollstronghold.DunstanDialogueFile(), npc)
             return true
         }
 
         // When Death Plateau is complete
-        if (isQuestComplete(player!!, DeathPlateau.questName)) {
+        if (isQuestComplete(player!!, Quests.DEATH_PLATEAU)) {
             when (stage) {
                 START_DIALOGUE -> playerl(FacialExpression.FRIENDLY, "Hi!").also { stage++ }
                 1 -> npcl(FacialExpression.FRIENDLY, "Hi! What can I do for you?").also { stage++ }
@@ -75,7 +74,7 @@ class DunstanDialogue(player: Player? = null) : DialoguePlugin(player) {
         }
 
         // Death Plateau in progress
-        if (isQuestInProgress(player!!, DeathPlateau.questName, 21, 24)) {
+        if (isQuestInProgress(player!!, Quests.DEATH_PLATEAU, 21, 24)) {
             // Call the dialogue file for Dunstan from the deathplateau quest folder.
             openDialogue(player!!, content.region.asgarnia.burthorpe.quest.deathplateau.DunstanDialogueFile(), npc)
             return true

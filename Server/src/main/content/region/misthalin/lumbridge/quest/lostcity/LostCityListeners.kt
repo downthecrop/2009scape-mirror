@@ -13,6 +13,7 @@ import core.game.interaction.IntType
 import org.rs09.consts.Scenery as Sceneries
 import core.game.interaction.InteractionListener
 import core.game.world.GameWorld
+import content.data.Quests
 
 /**
  * This class covers some listeners for the Lost City quest
@@ -27,12 +28,11 @@ class LostCityListeners : InteractionListener {
         // the shed teleport, to allow players to access zanaris if they enter the shed while wielding the dramen staff
         on(Sceneries.DOOR_2406, IntType.SCENERY,"open"){ player, node ->
             core.game.global.action.DoorActionHandler.handleAutowalkDoor(player,node as Scenery)
-            val quest = "Lost City"
             val isOutsideShed = player.location.x < node.location.x
-            val canDramenTeleport = inEquipment(player,Items.DRAMEN_STAFF_772) && ( getQuestStage(player,quest) > 20 ) && isOutsideShed
-            if(canDramenTeleport) {
+            val canDramenTeleport = inEquipment(player,Items.DRAMEN_STAFF_772) && getQuestStage(player, Quests.LOST_CITY) > 20 && isOutsideShed
+            if (canDramenTeleport) {
                 var count = 0
-                // pulser to handle the teleport. after 2 ticks it checks if the player hasnt completed lost city; if so, then it finishes the quest after the teleport
+                // pulser to handle the teleport. after 2 ticks it checks if the player hasn't completed Lost City; if so, then it finishes the quest after the teleport
                 GameWorld.Pulser.submit(object : Pulse(2) {
                     override fun pulse(): Boolean {
                         when (count++) {
@@ -44,9 +44,9 @@ class LostCityListeners : InteractionListener {
                                     teleport(player, Location(2452, 4473, 0), TeleportType.FAIRY_RING)
                                 }
                             }
-                            1 -> return isQuestComplete(player,quest)
+                            1 -> return isQuestComplete(player, Quests.LOST_CITY)
                             2 -> {
-                                finishQuest(player,quest)
+                                finishQuest(player, Quests.LOST_CITY)
                                 return true
                             }
                         }
@@ -66,8 +66,8 @@ class LostCityListeners : InteractionListener {
                 if (removeItem(player, Item(Items.DRAMEN_BRANCH_771, 1), Container.INVENTORY)) {
                         sendDialogue(player,"You carve the branch into a staff.")
                         addItem(player, Items.DRAMEN_STAFF_772, 1, Container.INVENTORY)
-                    }
                 }
+            }
             return@onUseWith true
         }
     }

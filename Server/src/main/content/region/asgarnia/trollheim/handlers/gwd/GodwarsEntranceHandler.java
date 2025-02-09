@@ -18,6 +18,7 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 
 import static core.api.ContentAPIKt.*;
+import content.data.Quests;
 
 /**
  * Handles the entrance hole to the godwars dungeon.
@@ -67,7 +68,7 @@ public final class GodwarsEntranceHandler extends OptionHandler {
 			});
 			return true;
 		case 26338:
-                        if (!hasRequirement(player, "Troll Stronghold"))
+                        if (!hasRequirement(player, Quests.TROLL_STRONGHOLD))
                                 return true;
 			if (player.getSkills().getStaticLevel(Skills.STRENGTH) < 60) {
 				player.getPacketDispatch().sendMessage("You need a Strength level of 60 to move this boulder.");

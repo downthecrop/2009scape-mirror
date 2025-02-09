@@ -5,9 +5,10 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 @Initializable
-class ScorpionCatcher : Quest("Scorpion Catcher", 108, 107,  1, 76, 0, 1, 6) {
+class ScorpionCatcher : Quest(Quests.SCORPION_CATCHER, 108, 107,  1, 76, 0, 1, 6) {
     companion object {
         const val QUEST_STATE_NOT_STARTED = 0
         const val QUEST_STATE_TALK_SEERS = 10

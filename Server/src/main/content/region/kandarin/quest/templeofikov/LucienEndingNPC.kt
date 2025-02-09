@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.templeofikov
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.node.entity.Entity
@@ -40,8 +41,8 @@ class LucienEndingNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,
                     when(stage){
                         0 -> npcl("You have defeated me for now! I shall reappear in the North!").also { stage++ }
                         1 -> end().also {
-                            if(getQuestStage(player, TempleOfIkov.questName) == 6) {
-                                finishQuest(player, TempleOfIkov.questName)
+                            if(getQuestStage(player, Quests.TEMPLE_OF_IKOV) == 6) {
+                                finishQuest(player, Quests.TEMPLE_OF_IKOV)
                             }
                         }
                     }

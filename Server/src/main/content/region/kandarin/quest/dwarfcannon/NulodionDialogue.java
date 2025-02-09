@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.dwarfcannon;
 
+import content.data.Quests;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
@@ -49,7 +50,7 @@ public class NulodionDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest(DwarfCannon.NAME);
+		quest = player.getQuestRepository().getQuest(Quests.DWARF_CANNON);
 		switch (quest.getStage(player)) {
 		case 70:
 			player("Hello there.");

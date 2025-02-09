@@ -6,6 +6,7 @@ import core.game.node.item.Item
 import core.game.dialogue.DialogueFile
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
+import content.data.Quests
 
 class DukeHoracioRMDialogue(val questStage: Int) : DialogueFile() {
 
@@ -29,7 +30,7 @@ class DukeHoracioRMDialogue(val questStage: Int) : DialogueFile() {
                 10 -> npc("Thank you very much, stranger. I am sure the head", "wizard will reward you for such an interesting find.").also { stage++ }
                 11 -> {
                     interpreter!!.sendDialogue("The Duke hands you an " + Quest.BLUE + "air talisman</col>.").also { stage++ }
-                    player!!.questRepository.getQuest("Rune Mysteries").start(player)
+                    player!!.questRepository.getQuest(Quests.RUNE_MYSTERIES).start(player)
                     if (!player!!.inventory.add(TALISMAN)) {
                         GroundItemManager.create(TALISMAN, player!!.location, player)
                     }

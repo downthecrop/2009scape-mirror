@@ -1,5 +1,6 @@
 package content.region.misthalin.draynor.quest.anma;
 
+import content.data.Quests;
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
 import core.game.node.entity.player.Player;
@@ -52,7 +53,7 @@ public final class AliceHusbandDialogue extends DialoguePlugin {
 			npc("Wooo wooo wooooo!");
 			return true;
 		}
-		quest = player.getQuestRepository().getQuest(AnimalMagnetism.NAME);
+		quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM);
 		switch (quest.getStage(player)) {
 		case 0:
 			npc("Hi, I don't feel like talking.");

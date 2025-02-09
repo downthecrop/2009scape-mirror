@@ -1,15 +1,15 @@
 package content.region.kandarin.quest.grandtree
 
-import core.api.addItemOrDrop
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 @Initializable
-class TheGrandTree: Quest("The Grand Tree", 71, 70, 5, 150, 0, 1, 160) {
+class TheGrandTree: Quest(Quests.THE_GRAND_TREE, 71, 70, 5, 150, 0, 1, 160) {
     override fun newInstance(`object`: Any?): Quest {
         return this
     }
@@ -96,7 +96,4 @@ class TheGrandTree: Quest("The Grand Tree", 71, 70, 5, 150, 0, 1, 160) {
         }
     }
 
-    companion object {
-        const val questName = "The Grand Tree"
-    }
 }

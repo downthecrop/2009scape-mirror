@@ -5,6 +5,7 @@ import core.api.removeItem
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 @Initializable
 class ThorvaldDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
@@ -39,7 +40,7 @@ class ThorvaldDialogue(player: Player? = null) : core.game.dialogue.DialoguePlug
             stage = 150
             return true
         }
-        else if (player?.questRepository?.isComplete("Fremennik Trials")!!) {
+        else if (player?.questRepository?.isComplete(Quests.THE_FREMENNIK_TRIALS)!!) {
             playerl(core.game.dialogue.FacialExpression.FRIENDLY, "Howdy Thorvald!")
             stage = 0
             return true
@@ -49,12 +50,12 @@ class ThorvaldDialogue(player: Player? = null) : core.game.dialogue.DialoguePlug
             stage = 160
             return true
         }
-        else if(player.questRepository.isComplete("Fremennik Trials")){
+        else if(player.questRepository.isComplete(Quests.THE_FREMENNIK_TRIALS)){
             playerl(core.game.dialogue.FacialExpression.HAPPY,"Howdy Thorvald!")
             stage = 250
             return true
         }
-        else if(!player.questRepository.hasStarted("Fremennik Trials")){
+        else if(!player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS)){
             npcl(core.game.dialogue.FacialExpression.ANNOYED, "Leave me be, outerlander. I have nothing to say to the likes of you.")
             stage = 1000
             return true
@@ -75,7 +76,7 @@ class ThorvaldDialogue(player: Player? = null) : core.game.dialogue.DialoguePlug
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            //After Fremennik Trials
+            //After The Fremennik Trials
             0 -> npcl(core.game.dialogue.FacialExpression.FRIENDLY, "And greetings to you too. It is good to see new blood entering the Fremennik; we gain our strength by bringing new warriors into the tribe.").also { stage = 1000 }
 
             //Warrior Trial

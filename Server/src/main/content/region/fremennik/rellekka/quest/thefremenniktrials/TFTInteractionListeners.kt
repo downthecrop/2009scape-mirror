@@ -21,6 +21,7 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.game.system.config.ItemConfigParser
 import core.game.world.GameWorld.Pulser
+import content.data.Quests
 
 class TFTInteractionListeners : InteractionListener {
 
@@ -167,7 +168,7 @@ class TFTInteractionListeners : InteractionListener {
         on(LYRE_IDs, IntType.ITEM, "play"){ player, lyre ->
             if(getAttribute(player,"onStage",false) && !getAttribute(player,"lyreConcertPlayed",false)){
                 Pulser.submit(LyreConcertPulse(player,lyre.id))
-            } else if(getQuestStage(player, "Fremennik Trials") < 20 || !isQuestComplete(player, "Fremennik Trials")){
+            } else if(getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) < 20 || !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)){
                 sendMessage(player,"You lack the knowledge to play this.")
             } else if(LYRE_IDs.isLast(lyre.id)){
                 sendMessage(player,"Your lyre is out of charges!")
@@ -216,7 +217,7 @@ class TFTInteractionListeners : InteractionListener {
         }
 
         on(THORVALD_LADDER, IntType.SCENERY, "climb-down") { player, _ ->
-            if (isQuestComplete(player, "Fremennik Trials") || getAttribute(player, "fremtrials:thorvald-vote", false)) {
+            if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) || getAttribute(player, "fremtrials:thorvald-vote", false)) {
                 sendMessage(player,"You have no reason to go back down there.")
                 return@on true
             } else if (!getAttribute(player,"fremtrials:warrior-accepted",false)) {
@@ -263,7 +264,7 @@ class TFTInteractionListeners : InteractionListener {
         }
 
         on(SHOPNPCS, IntType.NPC, "Trade") { player, npc ->
-            if(isQuestComplete(player, "Fremennik Trials")){
+            if(isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)){
                 npc.asNpc().openShop(player)
             } else when(npc.id){
                 NPCs.THORA_THE_BARKEEP_1300 -> sendDialogue(player,"Only Fremenniks may buy drinks here.")

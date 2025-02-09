@@ -1,6 +1,6 @@
 package content.region.kandarin.ardougne.quest.arena.dialogue
 
-import content.region.kandarin.ardougne.quest.arena.FightArena
+import content.data.Quests
 import content.region.kandarin.ardougne.quest.arena.FightArenaListeners.Companion.General
 import content.region.kandarin.ardougne.quest.arena.cutscenes.JailCutscene
 import content.region.kandarin.ardougne.quest.arena.cutscenes.ThirdFightCutscene
@@ -16,7 +16,7 @@ import org.rs09.consts.NPCs
 class GeneralKhazardDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.GENERAL_KHAZARD_258)
-        when (getQuestStage(player!!, FightArena.FightArenaQuest)) {
+        when (getQuestStage(player!!, Quests.FIGHT_ARENA)) {
 
             in 68..70 -> when(stage){
                 0 -> npcl(FacialExpression.FRIENDLY, "Out of the way, guard! I don't tolerate disruption when I'm watching slaves being slaughtered.").also { stage = END_DIALOGUE }
@@ -109,7 +109,7 @@ class GeneralKhazardDialogue : DialogueFile() {
                 4 -> npcl(FacialExpression.OLD_EVIL_LAUGH, "You however have coused me much trouble today. You must remain here so that I may at least have the pleasure of killing you myself.").also { stage++ }
                 5 -> {
                     end()
-                    setQuestStage(player!!, FightArena.FightArenaQuest, 97)
+                    setQuestStage(player!!, Quests.FIGHT_ARENA, 97)
                     RegionManager.getNpc(player!!.location, NPCs.GENERAL_KHAZARD_258, 15)
                     General.attack(player!!)
                 }

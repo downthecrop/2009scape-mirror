@@ -1,5 +1,6 @@
 package content.region.misthalin.dorgeshuun.quest.thelosttribe
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
@@ -48,7 +49,7 @@ class DukeHoracioTLTDialogue(val questStage: Int) : DialogueFile() {
                         "this mystery. If there is a blocked tunnel then perhaps",
                         "you should try to un-block it."
                     )
-                    player!!.questRepository.getQuest("Lost Tribe").setStage(player, 30)
+                    player!!.questRepository.getQuest(Quests.THE_LOST_TRIBE).setStage(player, 30)
                     stage = END_DIALOGUE
                 }
             }
@@ -108,7 +109,7 @@ class DukeHoracioTLTDialogue(val questStage: Int) : DialogueFile() {
                         "brooch. The librarian in Varrock might be able to help",
                         "identify the symbol."
                     )
-                    player!!.questRepository.getQuest("Lost Tribe").setStage(player, 40)
+                    player!!.questRepository.getQuest(Quests.THE_LOST_TRIBE).setStage(player, 40)
                     stage = END_DIALOGUE
                 }
             }
@@ -140,7 +141,7 @@ class DukeHoracioTLTDialogue(val questStage: Int) : DialogueFile() {
                         player!!.name.capitalize() + ", I would still like you to find out more",
                         "about this tribe. It cannot hurt to know one's enemy."
                     )
-                    player!!.questRepository.getQuest("Lost Tribe").setStage(player, 45)
+                    player!!.questRepository.getQuest(Quests.THE_LOST_TRIBE).setStage(player, 45)
                     stage = END_DIALOGUE
                 }
             }
@@ -169,7 +170,7 @@ class DukeHoracioTLTDialogue(val questStage: Int) : DialogueFile() {
 
                 4 -> {
                     npc("Unless it is returned, I am afraid I will have no option", "but war.")
-                    player!!.questRepository.getQuest("Lost Tribe").setStage(player, 47)
+                    player!!.questRepository.getQuest(Quests.THE_LOST_TRIBE).setStage(player, 47)
                     stage = END_DIALOGUE
                 }
             }
@@ -216,7 +217,7 @@ class DukeHoracioTLTDialogue(val questStage: Int) : DialogueFile() {
                         "their leader to sign it."
                     )
                     addItemOrDrop(player!!, Items.PEACE_TREATY_5012)
-                    player!!.questRepository.getQuest("Lost Tribe").setStage(player, 50)
+                    player!!.questRepository.getQuest(Quests.THE_LOST_TRIBE).setStage(player, 50)
                     setVarbit(player!!, 532, 9, true)
                     stage = END_DIALOGUE
                 }

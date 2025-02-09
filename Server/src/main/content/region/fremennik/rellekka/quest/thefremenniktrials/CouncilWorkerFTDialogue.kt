@@ -5,6 +5,7 @@ import org.rs09.consts.Items
 import core.game.dialogue.DialogueFile
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
+import content.data.Quests
 
 const val COUNCIL_WORKER = 1287
 
@@ -32,7 +33,7 @@ class CouncilWorkerFTDialogue(val questStage: Int, var isBeerInteraction: Boolea
         else if(questStage in 1..99){
             when(stage){
                 START_DIALOGUE ->
-                    if(getQuestStage(player!!, "Fremennik Trials") > 0) {
+                    if(getQuestStage(player!!, Quests.THE_FREMENNIK_TRIALS) > 0) {
                         player("I know this is an odd question, but are you","a member of the elder council?"); stage = 1
                     } else {
                         end()

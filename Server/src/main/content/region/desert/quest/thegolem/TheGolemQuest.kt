@@ -19,9 +19,10 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
 import core.game.world.GameWorld
+import content.data.Quests
 
 @Initializable
-class TheGolemQuest : Quest("The Golem", 70, 69, 1, 437, 0, 1, 10) {
+class TheGolemQuest : Quest(Quests.THE_GOLEM, 70, 69, 1, 437, 0, 1, 10) {
     override fun newInstance(`object`: Any?): Quest {
         return this
     }
@@ -140,7 +141,7 @@ class DisplayCaseListener : InterfaceListener {
 
 class TheGolemListeners : InteractionListener {
     fun repairGolem(player: Player): Boolean {
-        if(player.questRepository.getStage("The Golem") == 1) {
+        if(player.questRepository.getStage(Quests.THE_GOLEM) == 1) {
             var clayUsed = player.getAttribute("the-golem:clay-used", 0) 
             val msg = when(clayUsed) {
                 0 -> "You apply some clay to the golem's wounds. The clay begins to harden in the hot sun."
@@ -157,7 +158,7 @@ class TheGolemListeners : InteractionListener {
                 player.setAttribute("/save:the-golem:clay-used", clayUsed)
                 updateVarps(player)
                 if(clayUsed == 4) {
-                    setQuestStage(player, "The Golem", 2)
+                    setQuestStage(player, Quests.THE_GOLEM, 2)
                 }
             }
         }
@@ -213,13 +214,13 @@ class TheGolemListeners : InteractionListener {
             val rotation3 = player.getAttribute("the-golem:statuette-rotation:3", 0)
             val doorOpen = player.getAttribute("the-golem:door-open", false)
             var clientStage = 0
-            if(player.questRepository.getStage("The Golem") > 0) {
+            if(player.questRepository.getStage(Quests.THE_GOLEM) > 0) {
                 clientStage = Math.max(clientStage, 1)
             }
             if(doorOpen) {
                 clientStage = Math.max(clientStage, 5)
             }
-            if(player.questRepository.getStage("The Golem") >= 100) {
+            if(player.questRepository.getStage(Quests.THE_GOLEM) >= 100) {
                 clientStage = Math.max(clientStage, 10)
             }
             setVarbit(player, 346, clientStage)
@@ -346,9 +347,9 @@ class TheGolemListeners : InteractionListener {
             player.sendMessage("You don't know what that would do.")
             return true
         }
-        if(player.questRepository.getStage("The Golem") == 7) {
+        if(player.questRepository.getStage(Quests.THE_GOLEM) == 7) {
             player.sendMessage("You insert the key and the golem's skull hinges open.")
-            setQuestStage(player, "The Golem", 8)
+            setQuestStage(player, Quests.THE_GOLEM, 8)
         }
         return true
     }
@@ -393,7 +394,7 @@ class TheGolemListeners : InteractionListener {
             if(!player.getAttribute("the-golem:seen-demon", false)) {
                 player.sendMessage("The room is dominated by a colossal horned skeleton!")
                 player.setAttribute("/save:the-golem:seen-demon", true)
-                setQuestStage(player, "The Golem", 4)
+                setQuestStage(player, Quests.THE_GOLEM, 4)
             }
             teleport(player, Location.create(3552, 4948, 0))
             return@on true

@@ -16,6 +16,7 @@ import org.rs09.consts.Items;
 import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.playAudio;
+import content.data.Quests;
 
 public class StandardCookingPulse extends Pulse {
     //range animation
@@ -72,7 +73,7 @@ public class StandardCookingPulse extends Pulse {
         this.experience = 0;
         if (properties != null) {
             // Handle Cook's Assistant range
-            if (object.getId() == LUMBRIDGE_RANGE && !player.getQuestRepository().isComplete("Cook's Assistant")) {
+            if (object.getId() == LUMBRIDGE_RANGE && !player.getQuestRepository().isComplete(Quests.COOKS_ASSISTANT)) {
                 player.getPacketDispatch().sendMessage("You need to have completed the Cook's Assistant quest in order to use that range.");
                 return false;
             }

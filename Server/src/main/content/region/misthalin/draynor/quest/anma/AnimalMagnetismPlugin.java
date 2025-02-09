@@ -19,7 +19,6 @@ import core.game.node.Node;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.TeleportManager.TeleportType;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
@@ -33,9 +32,9 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 import core.tools.RandomFunction;
-import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.*;
+import content.data.Quests;
 
 /**
  * Handles the animal magnetism plugin.
@@ -62,14 +61,14 @@ public final class AnimalMagnetismPlugin extends OptionHandler {
 	public boolean handle(Player player, Node node, String option) {
 		switch (node.getId()) {
 		case 5167:
-			if (!hasRequirement(player, "Creature of Fenkenstrain")) {
+			if (!hasRequirement(player, Quests.CREATURE_OF_FENKENSTRAIN)) {
 				break;
 			}
 			player.teleport(new Location(3577, 9927));
 			break;
 		case 5198:
 		case 5199:
-			if (player.getQuestRepository().getQuest(AnimalMagnetism.NAME).getStage(player) == 0) {
+			if (player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM).getStage(player) == 0) {
 				player.getDialogueInterpreter().sendDialogues((NPC) node, null, "Hello there, I'm busy with my research. Come back in a", "bit, could you?");
 				break;
 			}
@@ -198,7 +197,7 @@ public final class AnimalMagnetismPlugin extends OptionHandler {
 
 				@Override
 				public boolean handle(Player player, Node node, String option) {
-					final Quest quest = player.getQuestRepository().getQuest(AnimalMagnetism.NAME);
+					final Quest quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM);
 					if (quest.getStage(player) <= 28) {
 						SkillingTool tool = SkillingTool.getHatchet(player);
 						if (tool == null || tool.ordinal() < 4) {
@@ -243,7 +242,7 @@ public final class AnimalMagnetismPlugin extends OptionHandler {
 		public boolean handle(NodeUsageEvent event) {
 			final Player player = event.getPlayer();
 			final Animation animation = getAnimation(event.getUsedItem().getId());
-			final Quest quest = player.getQuestRepository().getQuest(AnimalMagnetism.NAME);
+			final Quest quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM);
 			player.animate(animation, 2);
 			if (quest.getStage(player) == 28) {
 				quest.setStage(player, 29);
@@ -293,7 +292,7 @@ public final class AnimalMagnetismPlugin extends OptionHandler {
 			final Object[] data = getIndex(button);
 			final boolean toggled = (boolean) data[1];
 			final int[] configs = getConfigs((int) data[0]);
-			final Quest quest = player.getQuestRepository().getQuest(AnimalMagnetism.NAME);
+			final Quest quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM);
 			player.getPacketDispatch().sendInterfaceConfig(480, configs[0], !toggled);
 			player.getPacketDispatch().sendInterfaceConfig(480, (int) data[2], toggled);
 			if (quest.getStage(player) == 33) {

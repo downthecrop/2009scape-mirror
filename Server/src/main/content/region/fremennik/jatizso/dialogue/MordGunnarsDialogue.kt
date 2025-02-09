@@ -8,6 +8,7 @@ import content.region.fremennik.rellekka.handlers.RellekkaDestination
 import content.region.fremennik.rellekka.handlers.RellekkaUtils
 import core.tools.END_DIALOGUE
 import core.api.*
+import content.data.Quests
 
 @Initializable
 class MordGunnarsDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
@@ -35,7 +36,7 @@ class MordGunnarsDialogue(player: Player? = null) : core.game.dialogue.DialogueP
 
             2 -> {
                 end()
-                if (!hasRequirement(player, "Fremennik Trials"))
+                if (!hasRequirement(player, Quests.THE_FREMENNIK_TRIALS))
                     return true
                 RellekkaUtils.sail(player, if(npc.id == NPCs.MORD_GUNNARS_5481) RellekkaDestination.RELLEKKA_TO_JATIZSO else RellekkaDestination.JATIZSO_TO_RELLEKKA)
             }

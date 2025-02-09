@@ -8,13 +8,14 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.Items
 import core.api.*
+import content.data.Quests
 
 @Initializable
 /**
  * Represents the lost tribe quest and quest journal
  * @author Ceikry
  */
-class LostTribe : Quest("Lost Tribe",84,83,1) {
+class LostTribe : Quest(Quests.THE_LOST_TRIBE,84,83,1) {
     override fun newInstance(`object`: Any?): Quest {
         return this
     }
@@ -27,8 +28,8 @@ class LostTribe : Quest("Lost Tribe",84,83,1) {
             line(player,"I can start this quest by speaking to !!Sigmund?? in !!Lumbridge??",line++)
             line(player,"!!Castle.??",line++)
             line(player,"I must have completed:",line++)
-            line(player,"Rune Mysteries",line++,player?.questRepository?.isComplete("Rune Mysteries") == true)
-            line(player,"Goblin Diplomacy",line++,player?.questRepository?.isComplete("Goblin Diplomacy") == true)
+            line(player,"Rune Mysteries" ,line++,player?.questRepository?.isComplete(Quests.RUNE_MYSTERIES) == true)
+            line(player,"Goblin Diplomacy" ,line++,player?.questRepository?.isComplete(Quests.GOBLIN_DIPLOMACY) == true)
             line(player,"and have:",line++)
             line(player,"Level 17 mining",line++,player.skills.getLevel(Skills.MINING) >= 17)
             line(player,"Level 13 agility",line++,player.skills.getLevel(Skills.AGILITY) >= 13)

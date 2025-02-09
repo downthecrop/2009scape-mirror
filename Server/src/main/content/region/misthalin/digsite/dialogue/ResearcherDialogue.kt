@@ -1,6 +1,6 @@
 package content.region.misthalin.digsite.dialogue
 
-import content.region.misthalin.digsite.quest.thedigsite.TheDigSite
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
@@ -13,7 +13,7 @@ import org.rs09.consts.NPCs
 @Initializable
 class ResearcherDialogue (player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        if (isQuestComplete(player, TheDigSite.questName)){
+        if (isQuestComplete(player, Quests.THE_DIG_SITE)){
             when (stage) {
                 START_DIALOGUE -> npcl(FacialExpression.FRIENDLY, "Hello there. What are you doing here?").also { stage++ }
                 1 -> playerl(FacialExpression.FRIENDLY, "Just looking around at the moment.").also { stage++ }

@@ -11,6 +11,7 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 
 /**
@@ -25,7 +26,7 @@ class JarvaldDialogue(player: Player? = null) : DialoguePlugin(player) {
 		val fremname = player.getAttribute("fremennikname","lebron james")
 		if (npc.id == NPCs.JARVALD_2438) {
 			// We're on Waterbirth Island
-			if (isQuestComplete(player, "Fremennik Trials")) {
+			if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
 				if (travelOption) {
 					npc("So what say you, stay here for the hunt,","or return home to sweet Rellekka to feast","and drink with your tribe?").also { stage = 201 }
 				} else {
@@ -40,7 +41,7 @@ class JarvaldDialogue(player: Player? = null) : DialoguePlugin(player) {
 			}
 		} else {
 			// We're in Rellekka
-			if (isQuestComplete(player, "Fremennik Trials")) {
+			if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
 				if (travelOption) {
 					npc("Of course, ${fremname}! Your presence is more than welcome","on this cull! You wish to leave now?").also { stage = 131 }
 				} else {
@@ -49,7 +50,7 @@ class JarvaldDialogue(player: Player? = null) : DialoguePlugin(player) {
 			} else {
 				if (travelOption) {
 					npc("So do you have the 1,000 coins for my service, and are", "you ready to leave?").also { stage = 41 }
-				} else if (isQuestInProgress(player, "Fremennik Trials", 1, 100)) {
+				} else if (isQuestInProgress(player, Quests.THE_FREMENNIK_TRIALS, 1, 100)) {
 					player("Hi, I don't suppose you are a member of", "the council of elders are you?").also { stage = 0 }
 				} else {
 					npc("What do you want from me outerlander?", "It is our policy not to associate with those not of our", "tribe.").also { stage = 3 }

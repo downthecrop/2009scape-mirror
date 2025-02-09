@@ -1,7 +1,6 @@
 package content.region.kandarin.quest.templeofikov
 
-import content.global.ame.events.drilldemon.DrillDemonUtils
-import content.global.ame.events.drilldemon.SeargentDamienDialogue
+import content.data.Quests
 import content.global.skill.agility.AgilityHandler
 import core.api.*
 import core.game.global.action.DoorActionHandler
@@ -9,7 +8,6 @@ import core.game.global.action.PickupHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
-import core.game.node.entity.Entity
 import core.game.node.entity.skill.Skills
 import core.game.node.item.GroundItem
 import core.game.node.item.Item
@@ -20,7 +18,6 @@ import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
-import org.rs09.consts.Sounds
 
 class TempleOfIkovListeners : InteractionListener {
 
@@ -63,8 +60,8 @@ class TempleOfIkovListeners : InteractionListener {
         // 1 - 2 Walk past the gate. You must always wear the pendant to get past this gate.
         on(intArrayOf(Scenery.GATE_94, Scenery.GATE_95), SCENERY, "open") { player, node ->
             if (inEquipment(player, Items.PENDANT_OF_LUCIEN_86)){
-                if(getQuestStage(player, TempleOfIkov.questName) == 1) {
-                    setQuestStage(player, TempleOfIkov.questName, 2)
+                if(getQuestStage(player, Quests.TEMPLE_OF_IKOV) == 1) {
+                    setQuestStage(player, Quests.TEMPLE_OF_IKOV, 2)
                 }
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else {
@@ -87,8 +84,8 @@ class TempleOfIkovListeners : InteractionListener {
             replaceScenery(node.asScenery(), 88, 3)
             animate(player, Animation(2140))
             if (getAttribute(player, TempleOfIkov.attributeDisabledTrap, false)) {
-                if(getQuestStage(player, TempleOfIkov.questName) == 2) {
-                    setQuestStage(player, TempleOfIkov.questName, 3)
+                if(getQuestStage(player, Quests.TEMPLE_OF_IKOV) == 2) {
+                    setQuestStage(player, Quests.TEMPLE_OF_IKOV, 3)
                 }
             } else {
                 AgilityHandler.fail(player, 2, Location.create(2682, 9855, 0), Animation(770), 20, "You slip and fall to the pit below.")
@@ -142,7 +139,10 @@ class TempleOfIkovListeners : InteractionListener {
 
         // C: Gate opens after attached lever
         on(intArrayOf(Scenery.GATE_89, Scenery.GATE_90), SCENERY, "open") { player, node ->
-            if (getAttribute(player, TempleOfIkov.attributeIceChamberAccess, false) || getQuestStage(player, TempleOfIkov.questName) >= 4){
+            if (getAttribute(player, TempleOfIkov.attributeIceChamberAccess, false) || getQuestStage(
+                    player,
+                    Quests.TEMPLE_OF_IKOV
+                ) >= 4){
                 // To be nice, you can "reset" the chest location by opening the gate.
                 // This is a failsafe if the attribute gets "stuck", although I doubt it will happen.
                 setAttribute(player, TempleOfIkov.attributeRandomChest, chestLocations.random())
@@ -189,7 +189,7 @@ class TempleOfIkovListeners : InteractionListener {
         // 3: Allow access to Fire Warrior Door after pulling the lever
         on(Scenery.DOOR_92, SCENERY, "open") { player, node ->
             removeAttribute(player, TempleOfIkov.attributeWarriorInstance)
-            if (getQuestStage(player, TempleOfIkov.questName) >= 3){
+            if (getQuestStage(player, Quests.TEMPLE_OF_IKOV) >= 3){
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else {
                 sendMessage(player, "The door won't open.")
@@ -200,7 +200,7 @@ class TempleOfIkovListeners : InteractionListener {
 
         // 3 - 4: Calls for the Fire Warrior, allows passing when Fire Warrior is defeated.
         on(Scenery.DOOR_93, SCENERY, "open") { player, node ->
-            if (getQuestStage(player, TempleOfIkov.questName) >= 4){
+            if (getQuestStage(player, Quests.TEMPLE_OF_IKOV) >= 4){
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else {
                 if (getAttribute(player, TempleOfIkov.attributeWarriorInstance, null) == null) {
@@ -240,7 +240,7 @@ class TempleOfIkovListeners : InteractionListener {
         }
 
         on(Items.STAFF_OF_ARMADYL_84, IntType.GROUNDITEM,"take") { player, node ->
-            if (getQuestStage(player, TempleOfIkov.questName) >= 6 && getAttribute(player, TempleOfIkov.attributeChosenEnding, 0) == 1){
+            if (getQuestStage(player, Quests.TEMPLE_OF_IKOV) >= 6 && getAttribute(player, TempleOfIkov.attributeChosenEnding, 0) == 1){
                 sendMessage(player, "You decide not to steal the staff as you have agreed to help the Guardians")
             }
             val npcs = findLocalNPCs(player, intArrayOf(NPCs.GUARDIAN_OF_ARMADYL_274, NPCs.GUARDIAN_OF_ARMADYL_275), 4)
@@ -248,8 +248,8 @@ class TempleOfIkovListeners : InteractionListener {
                 sendChat(npcs[0], "That is not thine to take!")
                 npcs[0].attack(player)
             } else {
-                if(getQuestStage(player, TempleOfIkov.questName) == 5) {
-                    setQuestStage(player, TempleOfIkov.questName, 6)
+                if(getQuestStage(player, Quests.TEMPLE_OF_IKOV) == 5) {
+                    setQuestStage(player, Quests.TEMPLE_OF_IKOV, 6)
                     setAttribute(player, TempleOfIkov.attributeChosenEnding, 2)
                 }
                 PickupHandler.take(player, node as GroundItem)

@@ -8,6 +8,7 @@ import core.game.node.entity.player.link.diary.AchievementDiary;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
+import content.data.Quests;
 
 /**
  * Represents the dialogue to handle reldo.
@@ -55,14 +56,14 @@ public class ReldoDialogue extends DialoguePlugin {
     @Override
     public boolean open(Object... args) {
         npc = (NPC) args[0];
-        knightSword = player.getQuestRepository().getQuest("The Knight's Sword");
-        shieldArrav = player.getQuestRepository().getQuest("Shield of Arrav");
+        knightSword = player.getQuestRepository().getQuest(Quests.THE_KNIGHTS_SWORD);
+        shieldArrav = player.getQuestRepository().getQuest(Quests.SHIELD_OF_ARRAV);
         if (args.length == 2 && ((String) args[1]).equals("book")) {
             player("Aha! 'The Shield of Arrav'! Exactly what I was looking", "for.");
             stage = 3;
             return true;
         }
-        if(player.getQuestRepository().getQuest("Lost Tribe").getStage(player) == 40 && player.getInventory().contains(Items.BROOCH_5008,1)){
+        if(player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE).getStage(player) == 40 && player.getInventory().contains(Items.BROOCH_5008,1)){
             options("Hello stranger.","I have a question about my Achievement Diary.","Ask about the brooch.");
         } else {
             options("Hello stranger.", "I have a question about my Achievement Diary.");
@@ -237,7 +238,7 @@ public class ReldoDialogue extends DialoguePlugin {
                     break;
                 case 2005:
                     npc("The other day I filed a book about ancient goblin tribes.","It's somewhere on the west end of the library, I think.","Maybe that will be of some use.");
-                    player.getQuestRepository().getQuest("Lost Tribe").setStage(player,42);
+                    player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE).setStage(player,42);
                     stage++;
                     break;
                 case 2006:

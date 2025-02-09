@@ -7,6 +7,7 @@ import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import content.data.Quests;
 
 /**
  * Represents the kaqemeex dialogue plugin.
@@ -55,17 +56,17 @@ public final class KaqemeexDialogue extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 0:
-			if (player.getQuestRepository().isComplete("Druidic Ritual")) {
+			if (player.getQuestRepository().isComplete(Quests.DRUIDIC_RITUAL)) {
 				interpreter.sendDialogues(npc, null, "Hello again. How is the Herblore going?");
 				stage = 600;
 				break;
 			}
-			if (player.getQuestRepository().getQuest("Druidic Ritual").getStage(player) == 10) {
+			if (player.getQuestRepository().getQuest(Quests.DRUIDIC_RITUAL).getStage(player) == 10) {
 				interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "Hello again.");
 				stage = 40;
 				break;
 			}
-			if (player.getQuestRepository().getQuest("Druidic Ritual").getStage(player) == 99) {
+			if (player.getQuestRepository().getQuest(Quests.DRUIDIC_RITUAL).getStage(player) == 99) {
 				interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "I have word from Sanfew that you have been very", "helpful in assisting him with his preparations for the", "purification ritual. As promised I will now teach you the", "ancient arts of Herblore.");
 				stage = 200;
 				break;
@@ -74,7 +75,7 @@ public final class KaqemeexDialogue extends DialoguePlugin {
 			stage = 1;
 			break;
 		case 1:
-			if (player.getQuestRepository().getQuest("Druidic Ritual").isStarted(player)) {
+			if (player.getQuestRepository().getQuest(Quests.DRUIDIC_RITUAL).isStarted(player)) {
 				if (Skillcape.isMaster(player, Skills.HERBLORE)) {
 					interpreter.sendOptions("Select an Option", "Can I buy a Skillcape of Herblore?", "Who are you?", "Did you build this?");
 					stage = 800;
@@ -164,7 +165,7 @@ public final class KaqemeexDialogue extends DialoguePlugin {
 			stage = 13;
 			break;
 		case 26:
-			player.getQuestRepository().getQuest("Druidic Ritual").start(player);
+			player.getQuestRepository().getQuest(Quests.DRUIDIC_RITUAL).start(player);
 			interpreter.sendDialogues(npc, FacialExpression.HAPPY, "Excellent. Go to the village south of this place and speak", "to my fellow Sanfew who is working on the purification", "ritual. He knows better than I what is required to", "complete it.");
 			stage = 27;
 			break;
@@ -184,7 +185,7 @@ public final class KaqemeexDialogue extends DialoguePlugin {
 			break;
 		case 200:
 			end();
-			player.getQuestRepository().getQuest("Druidic Ritual").finish(player);
+			player.getQuestRepository().getQuest(Quests.DRUIDIC_RITUAL).finish(player);
 			break;
 		case 500:
 			switch (buttonId) {

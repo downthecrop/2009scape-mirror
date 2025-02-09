@@ -8,6 +8,7 @@ import core.plugin.Initializable
 import org.rs09.consts.NPCs
 
 import core.api.*
+import content.data.Quests
 
 /**
  * Represents the ali morrisane dialogue.
@@ -36,7 +37,7 @@ class AliMorrisaneDialogue(player: Player? = null) : DialoguePlugin(player) {
                 1 -> playerl(FacialExpression.ASKING, "If you are, then why are you still selling goods from a stall?").also { stage = 10 }
                 2 -> {
                     end()
-                    if (!hasRequirement(player, "The Feud"))
+                    if (!hasRequirement(player, Quests.THE_FEUD))
                         return true
                     npc.openShop(player)
                 }
@@ -59,7 +60,7 @@ class AliMorrisaneDialogue(player: Player? = null) : DialoguePlugin(player) {
                 }
                 2 -> {
                     end()
-                    if (!hasRequirement(player, "The Feud"))
+                    if (!hasRequirement(player, Quests.THE_FEUD))
                         return true
                     npc.openShop(player)
                 }

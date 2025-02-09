@@ -1,5 +1,6 @@
 package content.region.misthalin.dorgeshuun.quest.thelosttribe
 
+import content.data.Quests
 import core.api.addItemOrDrop
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
@@ -39,7 +40,8 @@ class LostTribeOptionHandler : OptionHandler(){
             5008 -> player.interfaceManager.open(Component(50))
             5009 -> player.interfaceManager.open(Component(183))
             6916 -> {
-                if(!player.inventory.containsItem(BOOK) && !player.bank.containsItem(BOOK) && player.questRepository.getQuest("Lost Tribe").getStage(player) >= 41){
+                if(!player.inventory.containsItem(BOOK) && !player.bank.containsItem(BOOK) && player.questRepository.getQuest(
+                        Quests.THE_LOST_TRIBE).getStage(player) >= 41){
                     player.dialogueInterpreter.sendDialogue("'A History of the Goblin Race.' This must be it.")
                     player.inventory.add(BOOK)
                 } else {
@@ -47,10 +49,10 @@ class LostTribeOptionHandler : OptionHandler(){
                 }
             }
             6911 -> {
-                if(!player.inventory.containsItem(Item(Items.SILVERWARE_5011)) && player.questRepository.getQuest("Lost Tribe").getStage(player) == 48){
+                if(!player.inventory.containsItem(Item(Items.SILVERWARE_5011)) && player.questRepository.getQuest(Quests.THE_LOST_TRIBE).getStage(player) == 48){
                     player.dialogueInterpreter.sendItemMessage(Items.SILVERWARE_5011,"You find the missing silverware!")
                     addItemOrDrop(player, Items.SILVERWARE_5011)
-                    player.questRepository.getQuest("Lost Tribe").setStage(player,49)
+                    player.questRepository.getQuest(Quests.THE_LOST_TRIBE).setStage(player,49)
                 } else {
                     player.sendMessage("You find nothing.")
                 }

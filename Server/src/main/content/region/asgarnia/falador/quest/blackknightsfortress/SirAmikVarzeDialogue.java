@@ -10,6 +10,7 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 
 import static core.api.ContentAPIKt.openDialogue;
+import content.data.Quests;
 
 /**
  * Represents the sir amik varze dialogue.
@@ -48,7 +49,7 @@ public class SirAmikVarzeDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest("Black Knights' Fortress");
+		quest = player.getQuestRepository().getQuest(Quests.BLACK_KNIGHTS_FORTRESS);
 		switch (quest.getStage(player)) {
 		case 30:
 			interpreter.sendDialogues(player, FacialExpression.HAPPY, "I have ruined the Black Knights' invincibility potion.");

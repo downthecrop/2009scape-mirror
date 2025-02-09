@@ -1,6 +1,6 @@
 package content.region.kandarin.ardougne.quest.arena.dialogue
 
-import content.region.kandarin.ardougne.quest.arena.FightArena
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
@@ -12,7 +12,7 @@ class JeremyServilBDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.JEREMY_SERVIL_266)
-        when (getQuestStage(player!!, FightArena.FightArenaQuest)) {
+        when (getQuestStage(player!!, Quests.FIGHT_ARENA)) {
 
             in 1..84 -> when (stage) {
                 0 -> {
@@ -31,7 +31,7 @@ class JeremyServilBDialogue : DialogueFile() {
                 1 -> npcl(FacialExpression.FRIENDLY, "Thank you, we are truly indebted to you.").also { stage++ }
                 2 -> {
                     end()
-                    setQuestStage(player!!, FightArena.FightArenaQuest, 99)
+                    setQuestStage(player!!, Quests.FIGHT_ARENA, 99)
                 }
             }
 
@@ -47,7 +47,7 @@ class JeremyServilBDialogue : DialogueFile() {
                 }
                 2 -> {
                     end()
-                    setQuestStage(player!!, FightArena.FightArenaQuest, 99)
+                    setQuestStage(player!!, Quests.FIGHT_ARENA, 99)
                 }
             }
 

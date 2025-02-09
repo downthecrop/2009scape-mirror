@@ -7,8 +7,6 @@ import core.api.*
 import core.game.bots.*
 import core.game.ge.GrandExchange
 import core.game.interaction.DestinationFlag
-import core.game.interaction.IntType
-import core.game.interaction.InteractionListeners
 import core.game.interaction.MovementPulse
 import core.game.node.Node
 import core.game.node.entity.skill.Skills
@@ -16,6 +14,7 @@ import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
+import content.data.Quests
 
 @PlayerCompatible
 @ScriptName("Falador Cannonball Smelter")
@@ -273,6 +272,6 @@ class CannonballSmelter : Script() {
         skills.put(Skills.HITPOINTS,99)
         skills.put(Skills.DEFENCE,99)
         skills.put(Skills.SMITHING,35)
-        quests.add("Dwarf Cannon")
+        quests.add(Quests.DWARF_CANNON)
     }
 }

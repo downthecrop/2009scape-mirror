@@ -10,7 +10,7 @@ import core.tools.START_DIALOGUE
 
 /**
  * Provides dialogue tree for Balnea NPC involved in the
- * "As a first resort..." quest.
+ * "As a First Resort..." quest.
  *
  * @author vddCore
  */
@@ -44,7 +44,7 @@ class BalneaDialogue(player: Player? = null) : DialoguePlugin(player) {
             ).also { stage = END_DIALOGUE }
         }
 
-        /* TODO: "As a First Resort..." quest dialogue file is required here. */
+        /* TODO: "As a First Resort" quest dialogue file is required here. */
         return true
     }
 

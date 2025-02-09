@@ -14,6 +14,7 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 @Initializable
 class PeksaDialogue(player: Player? = null) : DialoguePlugin(player){
@@ -36,7 +37,7 @@ class PeksaDialogue(player: Player? = null) : DialoguePlugin(player){
                 showTopics(
                     Topic("I could be, yes.", GO_SHOPPING),
                     Topic("No, I'll pass on that.", LEAVE),
-                    IfTopic("I've heard you have a small scorpion in your possession.", DIALOGUE_SCORPION_CATCHER, getQuestStage(player, "Scorpion Catcher") == ScorpionCatcher.QUEST_STATE_OTHER_SCORPIONS)
+                    IfTopic("I've heard you have a small scorpion in your possession.", DIALOGUE_SCORPION_CATCHER, getQuestStage(player, Quests.SCORPION_CATCHER) == ScorpionCatcher.QUEST_STATE_OTHER_SCORPIONS)
                 )
             }
 
@@ -50,7 +51,7 @@ class PeksaDialogue(player: Player? = null) : DialoguePlugin(player){
             }
 
             DIALOGUE_SCORPION_CATCHER -> {
-                openDialogue(player, SCPeksaDialogue(getQuestStage(player, "Scorpion Catcher")), npc)
+                openDialogue(player, SCPeksaDialogue(getQuestStage(player, Quests.SCORPION_CATCHER)), npc)
             }
         }
 

@@ -3,6 +3,7 @@ package content.region.misthalin.varrock.quest.romeo;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.game.node.entity.player.link.quest.Quest;
+import content.data.Quests;
 
 /**
  * Represents the romeo and juliet quest.
@@ -15,7 +16,7 @@ public class RomeoJuliet extends Quest {
 	 * Constructs a new {@code RomeoJuliet} {@code Object}.
      */
 	public RomeoJuliet() {
-		super("Romeo & Juliet", 26, 25, 5, 144, 0, 1, 100);
+		super(Quests.ROMEO_JULIET, 26, 25, 5, 144, 0, 1, 100);
 	}
 
 	@Override
@@ -130,7 +131,7 @@ public class RomeoJuliet extends Quest {
 
 	@Override
 	public void finish(Player player) {
-		if(player.getQuestRepository().getQuest("Romeo & Juliet").isCompleted(player)){
+		if(player.getQuestRepository().getQuest(Quests.ROMEO_JULIET).isCompleted(player)){
 			return;
 		}
 		super.finish(player);

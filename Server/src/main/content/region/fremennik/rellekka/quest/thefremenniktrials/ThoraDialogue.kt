@@ -8,6 +8,7 @@ import core.game.node.item.Item
 import core.game.world.map.Location
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 @Initializable
 class ThoraDialogue(player: Player? = null) : DialoguePlugin(player){
@@ -36,7 +37,7 @@ class ThoraDialogue(player: Player? = null) : DialoguePlugin(player){
             playerl(FacialExpression.ASKING,"I don't suppose you have any idea where I could find the longhall barkeeps' legendary cocktail, do you?")
             stage = 1
         }
-        else if(player.questRepository.isComplete("Fremennik Trials")){
+        else if(player.questRepository.isComplete(Quests.THE_FREMENNIK_TRIALS)){
             npcl(FacialExpression.HAPPY,"Hello again, $fName. I suppose you want a drink? Or are you going to try another scam with that terrible Askeladden again?")
             stage = 50
         }

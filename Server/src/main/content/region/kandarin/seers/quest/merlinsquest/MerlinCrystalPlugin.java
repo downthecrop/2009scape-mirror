@@ -1,6 +1,5 @@
 package content.region.kandarin.seers.quest.merlinsquest;
 
-import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.activity.ActivityManager;
 import core.game.activity.CutscenePlugin;
@@ -9,13 +8,10 @@ import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
 import core.game.global.action.ClimbActionHandler;
 import core.game.global.action.DoorActionHandler;
-import core.game.global.action.DropListener;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
 import core.game.node.Node;
-import core.game.node.entity.Entity;
-import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
@@ -24,12 +20,12 @@ import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
-import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
+import content.data.Quests;
 
 /**
  * Handles the Merlin's Crystal Dialogue/Interactions.
@@ -73,7 +69,7 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final Quest quest = player.getQuestRepository().getQuest("Merlin's Crystal");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.MERLINS_CRYSTAL);
 		final int id = node instanceof Item ? ((Item) node).getId() : node instanceof Scenery ? ((Scenery) node).getId() : ((NPC) node).getId();
 		switch (id) {
 		case 62:
@@ -178,7 +174,7 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 
 		@Override
 		public boolean open(Object... args) {
-			final Quest quest = player.getQuestRepository().getQuest("Merlin's Crystal");
+			final Quest quest = player.getQuestRepository().getQuest(Quests.MERLINS_CRYSTAL);
 			if (quest.getStage(player) == 99) {
 				npc = (NPC) args[0];
 				npc("Thank you! Thank you! Thank you!");
@@ -328,8 +324,8 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 				if (p != null) {
 					p.stop(false);
 				}
-				if (player.getQuestRepository().getQuest("Merlin's Crystal").getStage(player) == 30) {
-					player.getQuestRepository().getQuest("Merlin's Crystal").setStage(player, 40);
+				if (player.getQuestRepository().getQuest(Quests.MERLINS_CRYSTAL).getStage(player) == 30) {
+					player.getQuestRepository().getQuest(Quests.MERLINS_CRYSTAL).setStage(player, 40);
 				}
 				player.unlock();
 				player.getProperties().setTeleportLocation(Location.create(2778, 3401, 0));
@@ -449,7 +445,7 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 
 		@Override
 		public boolean isHidden(final Player player) {
-			if (player.getQuestRepository().getQuest("Merlin's Crystal").getStage(player) == 60 && this.getAttribute("beggar_owner", "").equals(player.getUsername())) {
+			if (player.getQuestRepository().getQuest(Quests.MERLINS_CRYSTAL).getStage(player) == 60 && this.getAttribute("beggar_owner", "").equals(player.getUsername())) {
 				return false;
 			}
 			return true;

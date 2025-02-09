@@ -3,7 +3,6 @@ package content.global.skill.smithing.smelting;
 import static core.api.ContentAPIKt.*;
 
 import core.api.Container;
-import core.api.EquipmentSlot;
 import core.game.event.ResourceProducedEvent;
 import core.game.container.impl.EquipmentContainer;
 import core.tools.Log;
@@ -19,6 +18,7 @@ import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
 import org.rs09.consts.Sounds;
+import content.data.Quests;
 
 /**
  * Represents the pulse used to smelt.
@@ -90,7 +90,7 @@ public class SmeltingPulse extends SkillPulse<Item> {
         if (bar == null || player == null) {
             return false;
         }
-        if (bar == Bar.BLURITE && !player.getQuestRepository().isComplete("The Knight's Sword")) {
+        if (bar == Bar.BLURITE && !player.getQuestRepository().isComplete(Quests.THE_KNIGHTS_SWORD)) {
             return false;
         }
         if (player.getSkills().getLevel(Skills.SMITHING) < bar.getLevel()) {

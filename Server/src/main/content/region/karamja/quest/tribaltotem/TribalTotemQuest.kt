@@ -1,7 +1,6 @@
 package content.region.karamja.quest.tribaltotem
 
 import core.api.rewardXP
-import core.game.content.quest.fremtrials.FremennikTrials
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
@@ -9,9 +8,10 @@ import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 @Initializable
-class TribalTotem : Quest("Tribal Totem",126,125,1,200,0,1,5){
+class TribalTotem : Quest(Quests.TRIBAL_TOTEM,126,125,1,200,0,1,5){
     class SkillRequirement(val skill: Int?, val level: Int?)
 
     val requirements = arrayListOf<SkillRequirement>()
@@ -19,7 +19,7 @@ class TribalTotem : Quest("Tribal Totem",126,125,1,200,0,1,5){
     override fun drawJournal(player: Player?, stage: Int) {
         super.drawJournal(player, stage)
         var line = 11
-        val started = player?.questRepository?.getStage("Tribal Totem")!! > 0
+        val started = player?.questRepository?.getStage(Quests.TRIBAL_TOTEM)!! > 0
 
         if(!started){
             line(player,"I can start this quest by speaking to !!Kangai Mau?? in",line++)

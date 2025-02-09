@@ -6,6 +6,7 @@ import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
 import core.game.activity.ActivityManager;
 import core.game.dialogue.DialoguePlugin;
+import content.data.Quests;
 
 
 @Initializable
@@ -126,7 +127,7 @@ public final class BonzoDialogue extends DialoguePlugin {
                 player.getDialogueInterpreter().sendDialogue("You are given the Hemenester fishing trophy!");
                 player.getInventory().add(FishingContest.FISHING_TROPHY);
                 player.getInventory().remove(FishingContest.RAW_GIANT_CARP);
-                player.getQuestRepository().setStage(QuestRepository.getQuests().get("Fishing Contest"),20);
+                player.getQuestRepository().setStage(QuestRepository.getQuests().get(Quests.FISHING_CONTEST),20);
                 stage = 100;
                 break;
         }

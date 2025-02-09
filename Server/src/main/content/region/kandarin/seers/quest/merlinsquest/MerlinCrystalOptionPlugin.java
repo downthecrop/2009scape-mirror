@@ -8,6 +8,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.scenery.Scenery;
 import core.plugin.Plugin;
+import content.data.Quests;
 
 /**
  * Represents the quest node plugin handler.
@@ -23,7 +24,7 @@ public class MerlinCrystalOptionPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final Quest quest = player.getQuestRepository().getQuest("Merlin's Crystal");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.MERLINS_CRYSTAL);
 		int id = node instanceof Scenery ? ((Scenery) node).getId() : ((NPC) node).getId();
 		switch (id) {
 		case 247:

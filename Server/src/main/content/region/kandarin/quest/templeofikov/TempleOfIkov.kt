@@ -6,6 +6,7 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 /**
  * Temple of Ikov Quest
@@ -28,10 +29,9 @@ import org.rs09.consts.Items
  * D - Found ice arrows
  */
 @Initializable
-class TempleOfIkov : Quest("Temple of Ikov", 121, 120, 1,26, 0, 1, 80 /* 80 or 90 since there's 2 endings */) {
+class TempleOfIkov : Quest(Quests.TEMPLE_OF_IKOV, 121, 120, 1,26, 0, 1, 80 /* 80 or 90 since there's 2 endings */) {
 
     companion object {
-        const val questName = "Temple of Ikov"
         const val attributeChosenEnding = "/save:quest:templeofikov-chosenending"
 
         const val attributeDisabledTrap = "/save:quest:templeofikov-disabledtrap"
@@ -49,7 +49,7 @@ class TempleOfIkov : Quest("Temple of Ikov", 121, 120, 1,26, 0, 1, 80 /* 80 or 9
         var line = 12
         var stage = getStage(player)
 
-        var started = getQuestStage(player, questName) > 0
+        var started = getQuestStage(player, Quests.TEMPLE_OF_IKOV) > 0
 
         if (!started) {
             line(player, "I can start this quest at the !!Flying Horse Inn?? in !!Ardougne??", line++, false)

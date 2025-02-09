@@ -13,6 +13,7 @@ import org.rs09.consts.Scenery
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import kotlin.random.Random
+import content.data.Quests
 
 /**
  * File to be used for anything Morytania related.
@@ -43,7 +44,7 @@ class MorytaniaListeners : InteractionListener {
                     findLocalNPC(player, NPCs.ULIZIUS_1054)?.sendChat("Oh my! You're still alive!", 2)
                 }
             } else {
-                if (player.questRepository.hasStarted("Nature Spirit")) {
+                if (player.questRepository.hasStarted(Quests.NATURE_SPIRIT)) {
                     core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                 } else {
                     sendNPCDialogue(

@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.templeofikov
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.Entity
@@ -7,7 +8,6 @@ import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
-import core.game.system.task.Pulse
 import core.game.world.map.Location
 import org.rs09.consts.NPCs
 
@@ -64,8 +64,8 @@ class FireWarriorOfLesarkusNPC(id: Int = 0, val player: Player?, location: Locat
         if (entity is Player) {
             val player = entity.asPlayer()
             removeAttribute(player, TempleOfIkov.attributeWarriorInstance)
-            if(getQuestStage(player, TempleOfIkov.questName) == 3) {
-                setQuestStage(player, TempleOfIkov.questName, 4)
+            if(getQuestStage(player, Quests.TEMPLE_OF_IKOV) == 3) {
+                setQuestStage(player, Quests.TEMPLE_OF_IKOV, 4)
             }
             super.finalizeDeath(player)
         }

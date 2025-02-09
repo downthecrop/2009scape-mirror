@@ -1,5 +1,6 @@
 package content.region.morytania.quest.creatureoffenkenstrain
 
+import content.data.Quests
 import content.global.handlers.iface.BookInterface
 import content.global.handlers.iface.BookLine
 import content.global.handlers.iface.Page
@@ -46,7 +47,7 @@ class BookcaseEastDialogueFile : DialogueFile() {
                 4 -> sendDialogue(player!!, "The book is appallingly dull.").also { stage = END_DIALOGUE }
             }
             2 -> {
-                if (getQuestStage(player!!, CreatureOfFenkenstrain.questName) == 2) {
+                if (getQuestStage(player!!, Quests.CREATURE_OF_FENKENSTRAIN) == 2) {
                     sendItemDialogue(player!!, Items.OBSIDIAN_AMULET_4188, "You find an obsidian amulet in the secret compartment.").also {
                         addItemOrDrop(player!!, Items.OBSIDIAN_AMULET_4188, 1)
                         stage = END_DIALOGUE

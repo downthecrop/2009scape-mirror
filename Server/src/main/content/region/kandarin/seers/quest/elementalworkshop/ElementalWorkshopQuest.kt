@@ -9,6 +9,7 @@ import core.plugin.Initializable
 import org.rs09.consts.Items
 import org.rs09.consts.Vars
 import core.game.system.command.Privilege
+import content.data.Quests
 
 /**
  * Elemental Workshop I
@@ -29,7 +30,7 @@ import core.game.system.command.Privilege
  *   @author Woah, with love
  */
 @Initializable
-class ElementalWorkshopQuest : Quest("Elemental Workshop I", 52, 51, 1), Commands {
+class ElementalWorkshopQuest : Quest(Quests.ELEMENTAL_WORKSHOP_I, 52, 51, 1), Commands {
 
     override fun newInstance(`object`: Any?): Quest {
         return this

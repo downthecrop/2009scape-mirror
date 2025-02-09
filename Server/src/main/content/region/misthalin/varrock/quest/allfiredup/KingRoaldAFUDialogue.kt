@@ -4,6 +4,7 @@ import core.game.node.entity.skill.Skills
 import core.game.dialogue.DialogueFile
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
+import content.data.Quests
 
 
 class KingRoaldAFUDialogue(val questStage: Int) : DialogueFile() {
@@ -85,7 +86,7 @@ class KingRoaldAFUDialogue(val questStage: Int) : DialogueFile() {
                 17 -> {
                     player("Thank you, Your Majesty. I'll seek out Blaze", "right away.")
                     stage = END_DIALOGUE
-                    player!!.questRepository.getQuest("All Fired Up").start(player)
+                    player!!.questRepository.getQuest(Quests.ALL_FIRED_UP).start(player)
                 }
 
                 END_DIALOGUE -> end()
@@ -103,7 +104,7 @@ class KingRoaldAFUDialogue(val questStage: Int) : DialogueFile() {
                 6 -> npc("There is much more to be done and this is but a", "pittance compared to what I'm willing to offer for", "further assistance!").also { stage++ }
                 7 -> {
                     end()
-                    player!!.questRepository.getQuest("All Fired Up").finish(player)
+                    player!!.questRepository.getQuest(Quests.ALL_FIRED_UP).finish(player)
                 }
             }
         }

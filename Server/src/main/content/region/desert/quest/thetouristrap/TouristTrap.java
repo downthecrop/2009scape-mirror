@@ -14,6 +14,7 @@ import core.plugin.Initializable;
 import core.plugin.ClassScanner;
 
 import static core.api.ContentAPIKt.*;
+import content.data.Quests;
 
 /**
  * The main type for the tourist trap quest.
@@ -23,12 +24,6 @@ import static core.api.ContentAPIKt.*;
  */
 @Initializable
 public final class TouristTrap extends Quest {
-
-	/**
-	 * The name of the quest.
-	 */
-	public static final String NAME = "The Tourist Trap";
-
 	/**
 	 * The metal key item.
 	 */
@@ -113,7 +108,7 @@ public final class TouristTrap extends Quest {
 	 * Constructs a new {@code TouristTrap} {@code Object}.
      */
 	public TouristTrap() {
-		super(NAME, 123, 122, 2, 197, 0, 1, 30);
+		super(Quests.THE_TOURIST_TRAP, 123, 122, 2, 197, 0, 1, 30);
 	}
 	
 	@Override

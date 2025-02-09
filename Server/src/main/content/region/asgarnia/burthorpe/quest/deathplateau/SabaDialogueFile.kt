@@ -5,11 +5,12 @@ import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
 import core.game.dialogue.Topic
 import core.tools.END_DIALOGUE
+import content.data.Quests
 
 class SabaDialogueFile : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, DeathPlateau.questName)) {
+        when (getQuestStage(player!!, Quests.DEATH_PLATEAU)) {
             19 -> {
                 when (stage) {
                     0 -> player(FacialExpression.FRIENDLY, "Hello!").also { stage++ }
@@ -34,7 +35,7 @@ class SabaDialogueFile : DialogueFile() {
                     29 -> npcl(FacialExpression.HALF_GUILTY,"Before the trolls came there used to be a nettlesome Sherpa that took humans exploring or something equally stupid. Perhaps he'd know another way.").also { stage++ }
                     30 -> playerl(FacialExpression.FRIENDLY, "Where does this Sherpa live?").also { stage++ }
                     31 -> npcl(FacialExpression.ANNOYED,"I don't know but it can't be far as he used to be around all the time!").also {
-                        setQuestStage(player!!, "Death Plateau", 20)
+                        setQuestStage(player!!, Quests.DEATH_PLATEAU, 20)
                         stage = END_DIALOGUE }
                 }
             }

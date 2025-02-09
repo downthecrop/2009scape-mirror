@@ -10,6 +10,7 @@ import core.plugin.Initializable
 import core.tools.RandomFunction
 import core.tools.END_DIALOGUE
 import kotlin.random.Random
+import content.data.Quests
 
 @Initializable
 class PeerTheSeerDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
@@ -69,17 +70,17 @@ class PeerTheSeerDialogue(player: Player? = null) : core.game.dialogue.DialogueP
             stage = 120
             return true
         }
-        else if(player.questRepository.isComplete("Fremennik Trials")){
+        else if(player.questRepository.isComplete(Quests.THE_FREMENNIK_TRIALS)){
             npcl(core.game.dialogue.FacialExpression.SAD,"Uuuh... What was that dark presence I felt?")
             stage = 150
             return true
         }
-        else if(player.questRepository.hasStarted("Fremennik Trials")){
+        else if(player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS)){
             npcl(core.game.dialogue.FacialExpression.SAD,"Uuuh... What was that dark presence I felt?")
             stage = 50
             return true
         }
-        if (getQuestStage(player, "Fremennik Trials") == 0) {
+        if (getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) == 0) {
             npc(core.game.dialogue.FacialExpression.SAD,"Uuuh... What was that dark presence I felt?").also { stage = 300 }
         }
         return true
@@ -210,7 +211,7 @@ class PeerTheSeerDialogue(player: Player? = null) : core.game.dialogue.DialogueP
             123 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"Absolutely, outerlander. Your wisdom in passing my test marks you as worthy in my eyes.").also { stage = 1000 }
 
 
-            //After Fremennik Trials
+            //After The Fremennik Trials
             150 -> npcl(core.game.dialogue.FacialExpression.AMAZED,"!").also { stage++ }
             151 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"Ahem, sorry about that.").also {
                 stage = if(player.achievementDiaryManager.getDiary(DiaryType.FREMENNIK).isComplete(0)){

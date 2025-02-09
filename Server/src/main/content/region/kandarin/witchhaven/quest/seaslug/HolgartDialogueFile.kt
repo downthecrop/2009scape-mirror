@@ -1,22 +1,15 @@
 package content.region.kandarin.witchhaven.quest.seaslug
 
-import content.region.asgarnia.falador.quest.recruitmentdrive.RecruitmentDrive
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
-import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
-import core.game.node.entity.player.Player
-import core.game.node.entity.skill.Skills
-import core.game.world.map.Location
-import core.plugin.Initializable
-import org.rs09.consts.Components
 import org.rs09.consts.Items
-import org.rs09.consts.NPCs
 
 class HolgartDialogueFile : DialogueBuilderFile() {
     override fun create(b: DialogueBuilder) {
-        b.onQuestStages(SeaSlug.questName, 0)
+        b.onQuestStages(Quests.SEA_SLUG, 0)
                 .playerl(FacialExpression.FRIENDLY, "Hello.")
                 .npcl(FacialExpression.FRIENDLY, "Well hello @g[m'lad,m'laddy]. Beautiful day isn't it?")
                 .playerl("Not bad I suppose.")
@@ -24,7 +17,7 @@ class HolgartDialogueFile : DialogueBuilderFile() {
                 .playerl(FacialExpression.THINKING, "Hmm... lovely...")
                 .end()
 
-        b.onQuestStages(SeaSlug.questName, 1)
+        b.onQuestStages(Quests.SEA_SLUG, 1)
                 .npcl(FacialExpression.FRIENDLY, "Hello, m'hearty.")
                 .playerl("I would like a ride on your boat to the fishing platform.")
                 .npcl(FacialExpression.SAD, "I'm afraid it isn't sea worthy, it's full of holes. To fill the holes I'll need some swamp paste.")
@@ -39,8 +32,8 @@ class HolgartDialogueFile : DialogueBuilderFile() {
                             .npcl("If you make me some swamp paste I'll give you a ride in my boat.")
                             .playerl("I'll see what I can do.")
                             .endWith() { df, player ->
-                                if(getQuestStage(player, SeaSlug.questName) == 1) {
-                                    setQuestStage(player, SeaSlug.questName, 2)
+                                if(getQuestStage(player, Quests.SEA_SLUG) == 1) {
+                                    setQuestStage(player, Quests.SEA_SLUG, 2)
                                 }
                             }
                     branch.onValue(1)
@@ -53,13 +46,13 @@ class HolgartDialogueFile : DialogueBuilderFile() {
                             .iteml(Items.SWAMP_PASTE_1941, "You give Holgart the swamp paste.")
                             // Cutscene
                             .endWith() { df, player ->
-                                if(getQuestStage(player, SeaSlug.questName) == 1) {
-                                    setQuestStage(player, SeaSlug.questName, 3)
+                                if(getQuestStage(player, Quests.SEA_SLUG) == 1) {
+                                    setQuestStage(player, Quests.SEA_SLUG, 3)
                                 }
                             }
                 }
 
-        b.onQuestStages(SeaSlug.questName, 2)
+        b.onQuestStages(Quests.SEA_SLUG, 2)
                 .playerl(FacialExpression.FRIENDLY, "Hello.")
                 .npcl("Hello, m'hearty. Did you manage to make some swamp paste?")
                 .branch { player ->
@@ -79,15 +72,15 @@ class HolgartDialogueFile : DialogueBuilderFile() {
                             .iteml(Items.SWAMP_PASTE_1941, "You give Holgart the swamp paste.")
                             // Cutscene
                             .endWith() { df, player ->
-                                if(getQuestStage(player, SeaSlug.questName) == 2) {
-                                    setQuestStage(player, SeaSlug.questName, 3)
+                                if(getQuestStage(player, Quests.SEA_SLUG) == 2) {
+                                    setQuestStage(player, Quests.SEA_SLUG, 3)
                                 }
                             }
 
                 }
 
 
-        b.onQuestStages(SeaSlug.questName, 3,4,5,6,7,8,9,10,11,100)
+        b.onQuestStages(Quests.SEA_SLUG, 3, 4, 5, 6, 7, 8, 9, 10, 11, 100)
                 .playerl(FacialExpression.FRIENDLY, "Hello, Holgart.")
                 .npcl("Hello again land lover. There's some strange goings on, on that platform, I tell you.")
                 .options().let { optionBuilder ->

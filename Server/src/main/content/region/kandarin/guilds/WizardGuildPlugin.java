@@ -17,6 +17,7 @@ import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import content.global.travel.EssenceTeleport;
+import content.data.Quests;
 
 /**
  * Represents the wizard guild plugin.
@@ -74,7 +75,7 @@ public final class WizardGuildPlugin extends OptionHandler {
 			}
 			break;
 		case "teleport":
-			if (!player.getQuestRepository().isComplete("Rune Mysteries")) {
+			if (!player.getQuestRepository().isComplete(Quests.RUNE_MYSTERIES)) {
 				player.getPacketDispatch().sendMessage("You need to have completed the Rune Mysteries Quest to use this feature.");
 				return true;
 			}
@@ -133,7 +134,7 @@ public final class WizardGuildPlugin extends OptionHandler {
 				stage = 2;
 				break;
 			case 2:
-				if (!player.getQuestRepository().isComplete("Rune Mysteries")) {
+				if (!player.getQuestRepository().isComplete(Quests.RUNE_MYSTERIES)) {
 					player("Nothing thanks, I'm just looking around.");
 					stage = 4;
 					return true;

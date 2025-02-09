@@ -28,6 +28,7 @@ import core.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
 import static core.api.ContentAPIKt.hasRequirement;
+import content.data.Quests;
 
 /**
  * Handles the chaos tunnels.
@@ -233,7 +234,7 @@ public final class ChaosTunnelZone extends MapZone implements Plugin<Object> {
 	 */
 	private void teleport(Player player, Scenery object) {
 		if (object.getLocation().getX() == 3142 && object.getLocation().getY() == 5545) {
-                        if (hasRequirement(player, "What Lies Below"))
+                        if (hasRequirement(player, Quests.WHAT_LIES_BELOW))
 			    commenceBorkBattle(player);
 			return;
 		}

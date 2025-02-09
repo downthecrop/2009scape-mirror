@@ -24,6 +24,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 
 import static core.api.ContentAPIKt.hasRequirement;
+import content.data.Quests;
 
 /**
  * Handles runecraftign related options.
@@ -52,7 +53,7 @@ public class RunecraftingPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		if (!player.getQuestRepository().isComplete("Rune Mysteries") && player.getDetails().getRights() != Rights.ADMINISTRATOR) {
+		if (!player.getQuestRepository().isComplete(Quests.RUNE_MYSTERIES) && player.getDetails().getRights() != Rights.ADMINISTRATOR) {
 			player.getPacketDispatch().sendMessage("You need to finish the Rune Mysteries Quest in order to do this.");
 			return true;
 		}
@@ -97,7 +98,7 @@ public class RunecraftingPlugin extends OptionHandler {
 			}
                         Altar a = Altar.forObject(((Scenery) node));
                         if (a == Altar.ASTRAL) {
-                            if (!hasRequirement(player, "Lunar Diplomacy"))
+                            if (!hasRequirement(player, Quests.LUNAR_DIPLOMACY))
                                 return true;
                         }
 			player.getPulseManager().run(new RuneCraftPulse(player, null, a, false, null));

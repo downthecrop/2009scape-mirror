@@ -8,15 +8,16 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 @Initializable
 class TedRehnisonDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (player.questRepository.getStage("Plague City") == 9) {
+        if (player.questRepository.getStage(Quests.PLAGUE_CITY) == 9) {
             playerl(FacialExpression.NEUTRAL, "Hi, I hear a woman called Elena is staying here.").also { stage++ }
-        } else if (player.questRepository.getStage("Plague City") > 9) {
+        } else if (player.questRepository.getStage(Quests.PLAGUE_CITY) > 9) {
             npcl(FacialExpression.FRIENDLY, "Any luck finding Elena yet?").also { stage++ }
         } else {
             npcl(FacialExpression.FRIENDLY, "Go away. We don't want any.").also { stage = END_DIALOGUE }
@@ -25,7 +26,7 @@ class TedRehnisonDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (getQuestStage(player!!, PlagueCity.PlagueCityQuest)) {
+        when (getQuestStage(player!!, Quests.PLAGUE_CITY)) {
 
             9 -> when (stage) {
                 1 -> npcl(FacialExpression.FRIENDLY, "Yes she was staying here, but slightly over a week ago she was getting ready to go back. However she never managed to leave. My daughter Milli was playing near the west wall when she saw some shadowy figures jump").also { stage++ }

@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.dwarfcannon;
 
+import content.data.Quests;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
@@ -41,7 +42,7 @@ public class LollkDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest(DwarfCannon.NAME);
+		quest = player.getQuestRepository().getQuest(Quests.DWARF_CANNON);
 		switch (quest.getStage(player)) {
 		case 40:
 			npc("Thank the heavens, you saved me!", "I thought I'd be goblin lunch for sure!");

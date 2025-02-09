@@ -1,6 +1,5 @@
 package content.region.kandarin.ardougne.plaguecity.quest.elena
 
-import core.api.addItem
 import core.api.addItemOrDrop
 import core.api.removeAttributes
 import core.api.rewardXP
@@ -9,11 +8,11 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 @Initializable
-class PlagueCity : Quest("Plague City", 98, 97, 1, 165, 0, 1, 29) {
+class PlagueCity : Quest(Quests.PLAGUE_CITY, 98, 97, 1, 165, 0, 1, 29) {
     override fun newInstance(`object`: Any?): Quest { return this }
-    companion object { const val PlagueCityQuest = "Plague City" }
     override fun drawJournal(player: Player?, stage: Int) {
         super.drawJournal(player, stage)
         var line = 11

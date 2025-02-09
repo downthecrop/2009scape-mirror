@@ -1,5 +1,6 @@
 package content.region.misthalin.varrock.quest.whatliesbelow;
 
+import content.data.Quests;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.node.entity.player.link.diary.DiaryType;
@@ -56,7 +57,7 @@ public class WLBelowPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		final Quest quest = player.getQuestRepository().getQuest(WhatLiesBelow.NAME);
+		final Quest quest = player.getQuestRepository().getQuest(Quests.WHAT_LIES_BELOW);
 		switch (option) {
 		case "summon":
 		case "operate":

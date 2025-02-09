@@ -14,6 +14,7 @@ import core.ServerConstants
 import core.api.playAudio
 import core.game.world.GameWorld
 import org.rs09.consts.Sounds
+import content.data.Quests
 
 @Initializable
 class CrompertyDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
@@ -32,7 +33,7 @@ class CrompertyDialogue(player: Player? = null) : core.game.dialogue.DialoguePlu
                 1 -> playerl(core.game.dialogue.FacialExpression.HAPPY,"Two jobs? That's got to be tough.").also { stage = 5 }
                 2 -> playerl(core.game.dialogue.FacialExpression.ASKING,"So, what have you invented?").also { stage = 10 }
                 3 -> playerl(core.game.dialogue.FacialExpression.HAPPY,"Can you teleport me to the Rune Essence?").also {
-                    if(player.questRepository.isComplete("Rune Mysteries")){
+                    if(player.questRepository.isComplete(Quests.RUNE_MYSTERIES)){
                         EssenceTeleport.teleport(npc,player)
                         end()
                     }
@@ -73,7 +74,7 @@ class CrompertyDialogue(player: Player? = null) : core.game.dialogue.DialoguePlu
             28 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"As you wish.").also { stage = 1000 }
 
             30 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"Okey dokey! Ready?").also {
-                stage = if(player.questRepository.hasStarted("Tribal Totem") && player.questRepository.getStage("Tribal Totem") < 50) {
+                stage = if(player.questRepository.hasStarted(Quests.TRIBAL_TOTEM) && player.questRepository.getStage(Quests.TRIBAL_TOTEM) < 50) {
                     35
                 }
                 else 31
@@ -110,12 +111,12 @@ class CrompertyDialogue(player: Player? = null) : core.game.dialogue.DialoguePlu
         npc.sendChat("Dipsolum sententa sententi!")
         GameWorld.Pulser.submit(object : Pulse(1) {
             var counter = 0
-            var delivered = player.questRepository.getStage("Tribal Totem") >= 25
+            var delivered = player.questRepository.getStage(Quests.TRIBAL_TOTEM) >= 25
             override fun pulse(): Boolean {
                 when(counter++){
                     2 -> {
                         if(delivered) {
-                            player.questRepository.getQuest("Tribal Totem").setStage(player,30)
+                            player.questRepository.getQuest(Quests.TRIBAL_TOTEM).setStage(player,30)
                             player.properties.teleportLocation = LOCATIONS[1]
                         }
                         else player.properties.teleportLocation = LOCATIONS[0]

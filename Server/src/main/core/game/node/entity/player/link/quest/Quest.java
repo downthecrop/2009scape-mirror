@@ -1,5 +1,6 @@
 package core.game.node.entity.player.link.quest;
 
+import content.data.Quests;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
 import core.plugin.Plugin;
@@ -50,9 +51,9 @@ public abstract class Quest implements Plugin<Object> {
 	public static final int REWARD_COMPONENT = 277;
 	
 	/**
-	 * The name of the quest.
+	 * The quest as a Quests item (currently only used for the quest's name).
 	 */
-	private final String name;
+	private final Quests quest;
 	
 	/**
 	 * The index id of the quest.
@@ -76,7 +77,7 @@ public abstract class Quest implements Plugin<Object> {
 
 	/**
 	 * Constructs a new {@link Quest}
-	 * @param name of the quest. Prereqs reference this
+	 * @param quest of the quest. Prereqs reference this
 	 * @param index of the quest, usually buttonId + 1
 	 * @param buttonId of the quest on the quest list in game
 	 * @param questPoints rewarded after completing quest
@@ -97,8 +98,8 @@ public abstract class Quest implements Plugin<Object> {
 	 * if (VARPBIT[451] > 1) return 2; if (VARPBIT[451] == 0) return 0; return 1; }; if (arg0 == 88)<br>
 	 * Use 5 numbers: {0, 451, 0, 1, 2} -> {Ignore, VARPBIT, return 0, return 1, return 2}<br>
 	 */
-	public Quest(String name, int index, int buttonId, int questPoints, int...configs) {
-		this.name = name;
+	public Quest(Quests quest, int index, int buttonId, int questPoints, int...configs) {
+		this.quest = quest;
 		this.index = index;
 		this.buttonId = buttonId;
 		this.questPoints = questPoints;
@@ -131,7 +132,7 @@ public abstract class Quest implements Plugin<Object> {
 		for (int i = 0; i < 311; i++) {
 			player.getPacketDispatch().sendString("" , JOURNAL_COMPONENT, i);
 		}
-		player.getPacketDispatch().sendString("<col=8A0808>" + getName() + "</col>", JOURNAL_COMPONENT, 2);
+		player.getPacketDispatch().sendString("<col=8A0808>" + getQuest() + "</col>", JOURNAL_COMPONENT, 2);
 	
 	}
 
@@ -140,8 +141,8 @@ public abstract class Quest implements Plugin<Object> {
 	 * @param player The player.
 	 */
 	public void finish(Player player) {
-		if(player.getQuestRepository().isComplete(name)) {
-			throw new IllegalStateException("Tried to complete quest " + name + " twice, which is not allowed!");
+		if(player.getQuestRepository().isComplete(quest)) {
+			throw new IllegalStateException("Tried to complete quest " + quest + " twice, which is not allowed!");
 		}
 		for (int i = 0; i < 18; i++) {
 			if (i == 9 || i == 3 || i == 6) {
@@ -157,7 +158,7 @@ public abstract class Quest implements Plugin<Object> {
 			return true;
 		}));
 		player.getPacketDispatch().sendString("" + player.getQuestRepository().getPoints() + "", 277, 7);
-		player.getPacketDispatch().sendString("You have completed the " + getName() + " Quest!", 277, 4);
+		player.getPacketDispatch().sendString("You have completed the " + getQuest() + " Quest!", 277, 4);
 		player.getPacketDispatch().sendMessage("Congratulations! Quest complete!");
 		int questJingles[] = {152, 153, 154};
 		playJingle(player, questJingles[new Random().nextInt(3)]);
@@ -255,7 +256,7 @@ public abstract class Quest implements Plugin<Object> {
 	 */
 	public int[] getConfig(Player player, int stage) {
 		if (configs.length < 4) {
-			throw new IndexOutOfBoundsException("Quest -> " + name + " configs array length was not valid. config length = " + configs.length + "!");
+			throw new IndexOutOfBoundsException("Quest -> " + quest + " configs array length was not valid. config length = " + configs.length + "!");
 		}
 		if (configs.length >= 5) {
 			// {questVarpId, questVarbitId, valueToSet}
@@ -308,8 +309,8 @@ public abstract class Quest implements Plugin<Object> {
 	 * Gets the name.
 	 * @return the name.
 	 */
-	public String getName() {
-		return name;
+	public Quests getQuest() {
+		return quest;
 	}
 
 	/**
@@ -346,7 +347,7 @@ public abstract class Quest implements Plugin<Object> {
 
 	@Override
 	public String toString() {
-		return "Quest [name=" + name + ", index=" + index + ", buttonId=" + buttonId + ", questPoints=" + questPoints + ", configs=" + Arrays.toString(configs) + "]";
+		return "Quest [name=" + quest + ", index=" + index + ", buttonId=" + buttonId + ", questPoints=" + questPoints + ", configs=" + Arrays.toString(configs) + "]";
 	}
 
 }

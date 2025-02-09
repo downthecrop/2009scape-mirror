@@ -10,6 +10,7 @@ import core.game.node.scenery.SceneryBuilder;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.game.world.map.RegionManager;
+import content.data.Quests;
 
 /**
  * Represents the imp catcher quest.
@@ -48,7 +49,7 @@ public class ImpCatcher extends Quest {
 	 * Constructs a new {@Code ImpCatcher} {@Code Object}
 	 */
 	public ImpCatcher() {
-		super("Imp Catcher", 21, 20, 1, 160, 0, 1, 2);
+		super(Quests.IMP_CATCHER, 21, 20, 1, 160, 0, 1, 2);
 	}
 	
 	@Override

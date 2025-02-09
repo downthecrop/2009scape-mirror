@@ -11,6 +11,7 @@ import content.region.desert.alkharid.quest.princealirescue.NedPARDialogue
 import content.region.misthalin.lumbridge.diary.NedDiaryDialogue
 import core.game.world.GameWorld.settings
 import core.tools.END_DIALOGUE
+import content.data.Quests
 
 
 /**
@@ -41,8 +42,8 @@ class NedDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(pl
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
-                val dSlayerStage = player.questRepository.getStage("Dragon Slayer")
-                val parStage = player.questRepository.getStage("Prince Ali Rescue")
+                val dSlayerStage = player.questRepository.getStage(Quests.DRAGON_SLAYER)
+                val parStage = player.questRepository.getStage(Quests.PRINCE_ALI_RESCUE)
                 showTopics(
                     IfTopic("I'd like to talk about Dragon Slayer.", NedDSDialogue(dSlayerStage), dSlayerStage == 20 || dSlayerStage == 30),
                     IfTopic("I'd like to talk about Prince Ali Rescue.", NedPARDialogue(parStage), parStage == 20 || parStage == 30 || parStage == 40 || parStage == 50),

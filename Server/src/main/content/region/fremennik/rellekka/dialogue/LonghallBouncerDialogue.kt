@@ -8,6 +8,7 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import core.tools.END_DIALOGUE
+import content.data.Quests
 
 /**
  * @author qmqz
@@ -18,7 +19,7 @@ class LonghallBouncerDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!isQuestComplete(player, "Fremennik Trials")) {
+        if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
             npcl(FacialExpression.ANNOYED, "Hey, outerlander. You can't go through there. Talent only, backstage.").also { stage = END_DIALOGUE }
         } else{
             npcl(FacialExpression.ANNOYED, "You can't go through there. Talent only, backstage.").also { stage = 0 }

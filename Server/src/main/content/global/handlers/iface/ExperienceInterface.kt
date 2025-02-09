@@ -10,6 +10,7 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.Log
 import org.rs09.consts.Sounds
+import content.data.Quests
 
 /**
  * Represents the experience interface.
@@ -78,15 +79,15 @@ class ExperienceInterface() : ComponentPlugin() {
     }
 
     private fun checkHerblore(player: Player): Boolean{
-        return (player.questRepository.isComplete("Druidic Ritual"))
+        return (player.questRepository.isComplete(Quests.DRUIDIC_RITUAL))
     }
 
     private fun checkSummoning(player: Player): Boolean{
-        return player.questRepository.isComplete("Wolf Whistle")
+        return player.questRepository.isComplete(Quests.WOLF_WHISTLE)
     }
 
     private fun checkRunecrafting(player: Player): Boolean{
-        return player.questRepository.isComplete("Rune Mysteries")
+        return player.questRepository.isComplete(Quests.RUNE_MYSTERIES)
     }
 
     companion object {

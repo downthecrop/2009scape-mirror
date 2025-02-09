@@ -1,10 +1,7 @@
 package content.region.asgarnia.burthorpe.quest.trollstronghold
 
-import content.region.kandarin.quest.grandtree.ForemanDialogue
-import content.region.kandarin.quest.grandtree.TheGrandTree
+import content.data.Quests
 import core.api.*
-import core.game.interaction.IntType
-import core.game.interaction.InteractionListener
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
@@ -25,7 +22,7 @@ class TrollGeneralsNpc(id: Int = 0, location: Location? = null) : AbstractNPC(id
     }
 
     override fun finalizeDeath(killer: Entity?) {
-        if(isQuestInProgress(killer as Player, TrollStronghold.questName, 1, 7)) {
+        if(isQuestInProgress(killer as Player, Quests.TROLL_STRONGHOLD, 1, 7)) {
             produceGroundItem(killer, Items.PRISON_KEY_3135, 1, this.location)
         }
         super.finalizeDeath(killer)

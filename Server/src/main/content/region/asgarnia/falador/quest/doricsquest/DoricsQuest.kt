@@ -7,9 +7,10 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import org.rs09.consts.Components
 import org.rs09.consts.Items
+import content.data.Quests
 
 @Initializable
-class DoricsQuest : Quest("Doric's Quest", 17, 16, 1, 31, 0, 1, 100) {
+class DoricsQuest : Quest(Quests.DORICS_QUEST, 17, 16, 1, 31, 0, 1, 100) {
     override fun newInstance(`object`: Any?): Quest { return this }
 
     override fun drawJournal(player: Player?, stage: Int) {

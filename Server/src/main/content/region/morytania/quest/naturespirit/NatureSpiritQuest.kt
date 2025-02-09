@@ -6,9 +6,10 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 @Initializable
-class NatureSpiritQuest : Quest("Nature Spirit", 95, 94, 2, 307, 0, 1, 110 ) {
+class NatureSpiritQuest : Quest(Quests.NATURE_SPIRIT, 95, 94, 2, 307, 0, 1, 110 ) {
     override fun newInstance(`object`: Any?): Quest {
         return this
     }
@@ -21,9 +22,9 @@ class NatureSpiritQuest : Quest("Nature Spirit", 95, 94, 2, 307, 0, 1, 110 ) {
             line(player, "I can start this quest by speaking to !!Drezel?? in the temple.", line++)
             line(player, /* The "to" is [sic] */"to !!Saradomin?? at the mouth of the river !!Salve??.", line++)
             line(player, "I first need to complete :", line++)
-            line(player, "!!The Restless Ghost.??", line++, isQuestComplete(player, "The Restless Ghost"))
-            line(player, "!!Priest in Peril.??", line++, isQuestComplete(player, "Priest in Peril"))
-            if (isQuestComplete(player, "The Restless Ghost") && isQuestComplete(player, "Priest in Peril")) {
+            line(player, "!!The Restless Ghost.??", line++, isQuestComplete(player, Quests.THE_RESTLESS_GHOST))
+            line(player, "!!Priest in Peril.??", line++, isQuestComplete(player, Quests.PRIEST_IN_PERIL))
+            if (isQuestComplete(player, Quests.THE_RESTLESS_GHOST) && isQuestComplete(player, Quests.PRIEST_IN_PERIL)) {
                 line(player, "I've completed all the quest requirements.", line++)
             }
             line(player, "In order to complete this quest !!level 18 crafting?? would be", line++, getStatLevel(player, Skills.CRAFTING) >= 18)
@@ -31,7 +32,7 @@ class NatureSpiritQuest : Quest("Nature Spirit", 95, 94, 2, 307, 0, 1, 110 ) {
             if (getStatLevel(player, Skills.CRAFTING) >= 18) {
                 line(player, "I have a suitable crafting level for this quest.", line++)
             }
-            if (isQuestComplete(player, "The Restless Ghost") && isQuestComplete(player, "Priest in Peril") && getStatLevel(player, Skills.CRAFTING) >= 18) {
+            if (isQuestComplete(player, Quests.THE_RESTLESS_GHOST) && isQuestComplete(player, Quests.PRIEST_IN_PERIL) && getStatLevel(player, Skills.CRAFTING) >= 18) {
                 line(player, "I have all the requirements for this quest.", line++)
             }
         } else if (stage < 100) {

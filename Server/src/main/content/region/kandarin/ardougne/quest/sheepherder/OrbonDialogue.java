@@ -5,6 +5,7 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.game.dialogue.DialoguePlugin;
+import content.data.Quests;
 
 @Initializable
 public class OrbonDialogue extends DialoguePlugin {
@@ -21,7 +22,7 @@ public class OrbonDialogue extends DialoguePlugin {
 
     @Override
     public boolean open(Object... args) {
-        if(player.getQuestRepository().getStage("Sheep Herder") == 10){
+        if(player.getQuestRepository().getStage(Quests.SHEEP_HERDER) == 10){
             player("Hello doctor. I need to acquire some protective clothing","so that I can dispose of some escaped sheep infected","with the plague.");
             stage = 100;
             return true;

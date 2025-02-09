@@ -10,6 +10,7 @@ import core.tools.END_DIALOGUE
 import kotlin.random.Random
 
 import org.rs09.consts.*
+import content.data.Quests
 
 @Initializable
 class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
@@ -62,12 +63,12 @@ class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
             stage = 530
             return true
         }
-        else if(player.questRepository.isComplete("Fremennik Trials")){
+        else if(player.questRepository.isComplete(Quests.THE_FREMENNIK_TRIALS)){
             npcl(FacialExpression.HAPPY,"Hello again, $gender $fName. I hope your travels have brought you wealth and joy! What compels you to visit me on this day?")
             stage = 600
             return true
         }
-        else if(player?.questRepository?.getStage("Fremennik Trials")!! == 0) {
+        else if(player?.questRepository?.getStage(Quests.THE_FREMENNIK_TRIALS)!! == 0) {
             npc("Greetings outerlander!")
             stage = 0
         }
@@ -124,7 +125,7 @@ class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
 
             //I think I would enjoy the challenge of becoming an honorary fremennik
             320 -> {npc("As I say outerlander, you must find and speak to the","twelve members of the council of elders, and see what","tasks they might set you.");stage++}
-            321 -> {npc("If you can gain the support of seven of the twelve, then","you will be accepted as one of us without question.");stage = 1000;player?.questRepository?.getQuest("Fremennik Trials")?.start(player)}
+            321 -> {npc("If you can gain the support of seven of the twelve, then","you will be accepted as one of us without question.");stage = 1000;player?.questRepository?.getQuest(Quests.THE_FREMENNIK_TRIALS)?.start(player)}
 
             //That sounds too complicated for me.
             322 -> {npc("Well, that's what I expect from an outerlander.");stage = 1000}
@@ -180,7 +181,7 @@ class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
 
             560 -> npcl(FacialExpression.HAPPY,"From this day onward, you are outerlander no more! In honour of your acceptance into the Fremennik, you gain a new name: ${player.getAttribute("fremennikname","how did u break this")}.").also {
                 cleanupAttributes(player)
-                player.questRepository.getQuest("Fremennik Trials").finish(player)
+                player.questRepository.getQuest(Quests.THE_FREMENNIK_TRIALS).finish(player)
                 stage = 1000
             }
 
@@ -258,7 +259,7 @@ class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
             1201 -> npcl(FacialExpression.HALF_THINKING, "I suppose I can grant you one temporarily, provided you meet certain requirements.").also { stage++ }
             1202 -> npcl(FacialExpression.HAPPY, "Very well, $fName! Let me look you over and see if you're strong enough for this boon.").also { stage++ }
             1203 -> {
-                if (!hasRequirement(player, "Lunar Diplomacy") || player!!.hasItem(Item(Items.SEAL_OF_PASSAGE_9083)))
+                if (!hasRequirement(player, Quests.LUNAR_DIPLOMACY) || player!!.hasItem(Item(Items.SEAL_OF_PASSAGE_9083)))
                     npcl(FacialExpression.HALF_GUILTY, "I'm sorry, $fName. You just don't have the experience needed for this gift. Please come back when you've learned more.").also { stage = END_DIALOGUE }
                 else
                     npcl(FacialExpression.HAPPY, "Yes, yes... I see it. You've got the strength and wisdom for this gift. Please, take this. For now.").also { stage++ }

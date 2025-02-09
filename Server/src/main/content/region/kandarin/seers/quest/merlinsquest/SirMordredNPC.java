@@ -9,6 +9,7 @@ import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Graphics;
+import content.data.Quests;
 
 /**
  * Handles Sir Mordred
@@ -50,7 +51,7 @@ public class SirMordredNPC extends AbstractNPC {
 		super.getSkills().setLifepoints(50);
 		if (killer != null && killer.isPlayer()) {
 			final Player p = ((Player) killer);
-			Quest quest = p.getQuestRepository().getQuest("Merlin's Crystal");
+			Quest quest = p.getQuestRepository().getQuest(Quests.MERLINS_CRYSTAL);
 			if (quest.getStage(p) == 40) {
 				quest.setStage(p, 50);
 				p.getQuestRepository().syncronizeTab(p);

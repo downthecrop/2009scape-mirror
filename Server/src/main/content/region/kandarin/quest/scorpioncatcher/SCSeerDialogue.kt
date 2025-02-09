@@ -7,6 +7,7 @@ import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
+import content.data.Quests
 
 class SCSeerDialogue(val questStage: Int, private val dialogueEntry: Int) : DialogueFile() {
 
@@ -62,7 +63,7 @@ class SCSeerDialogue(val questStage: Int, private val dialogueEntry: Int) : Dial
             FIRST_SCORPION_GUIDE + 4 -> npcl("I can see a scorpion that you seek. It would appear to be near some nasty spiders. I can see two coffins there as well.").also { stage++ }
             FIRST_SCORPION_GUIDE + 5 -> npcl("The scorpion seems to be going through some crack in the wall. Its gone into some sort of secret room.").also { stage++ }
             FIRST_SCORPION_GUIDE + 6 -> npcl("Well see if you can find the scorpion then, and I'll try and get you some information on the others.").also {
-                setQuestStage(player!!, "Scorpion Catcher", ScorpionCatcher.QUEST_STATE_DARK_PLACE)
+                setQuestStage(player!!, Quests.SCORPION_CATCHER, ScorpionCatcher.QUEST_STATE_DARK_PLACE)
                 stage = END_DIALOGUE
             }
 
@@ -70,7 +71,7 @@ class SCSeerDialogue(val questStage: Int, private val dialogueEntry: Int) : Dial
             OTHER_SCORPIONS + 1 -> playerl("Any more scorpions?").also { stage++ }
             OTHER_SCORPIONS + 2 -> npcl ("It's good that you should ask. I have information on the last scorpion for you.").also { stage++ }
             OTHER_SCORPIONS + 3 -> npcl ("It seems to be in some sort of upstairs room. There seems to be some sort of brown clothing lying on a table.").also {
-                setQuestStage(player!!, "Scorpion Catcher", ScorpionCatcher.QUEST_STATE_OTHER_SCORPIONS)
+                setQuestStage(player!!, Quests.SCORPION_CATCHER, ScorpionCatcher.QUEST_STATE_OTHER_SCORPIONS)
                 stage = END_DIALOGUE
             }
         }

@@ -1,16 +1,14 @@
 package content.region.asgarnia.burthorpe.quest.trollstronghold
 
-import core.api.getQuestStage
+import content.data.Quests
 import core.api.isQuestInProgress
 import core.api.produceGroundItem
-import core.api.transformNpc
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.plugin.Initializable
-import core.tools.RandomFunction
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 
@@ -46,7 +44,7 @@ class TwigNpc(id: Int = 0, location: Location? = null) : AbstractNPC(id, locatio
     }
 
     override fun finalizeDeath(killer: Entity?) {
-        if (isQuestInProgress(killer as Player, TrollStronghold.questName, 8, 10)) {
+        if (isQuestInProgress(killer as Player, Quests.TROLL_STRONGHOLD, 8, 10)) {
             produceGroundItem(killer, Items.CELL_KEY_1_3136, 1, this.location)
         }
         super.finalizeDeath(killer)

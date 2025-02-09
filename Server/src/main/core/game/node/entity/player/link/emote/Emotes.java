@@ -1,5 +1,6 @@
 package core.game.node.entity.player.link.emote;
 
+import content.data.Quests;
 import core.game.container.impl.EquipmentContainer;
 import core.game.node.entity.player.info.Rights;
 import core.game.world.map.Direction;
@@ -106,7 +107,7 @@ public enum Emotes {
         public void play(Player player) {
             if(player.getLocation().getRegionId() == 13206 && !player.getAttribute("mistag-greeted", false)) {
                 RegionManager.getLocalNpcs(player).forEach(npc -> {
-                    if (npc.getId() == 2084 && npc.getLocation().withinDistance(player.getLocation(), 3) && player.getQuestRepository().getQuest("Lost Tribe").getStage(player) == 45) {
+                    if (npc.getId() == 2084 && npc.getLocation().withinDistance(player.getLocation(), 3) && player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE).getStage(player) == 45) {
                         player.getDialogueInterpreter().open(2084,npc,"greeting");
                         player.setAttribute("/save:mistag-greeted",true);
                     }

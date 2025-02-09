@@ -1,5 +1,6 @@
 package content.region.misthalin.varrock.quest.whatliesbelow;
 
+import content.data.Quests;
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
@@ -39,7 +40,7 @@ public class OutlawNPC extends AbstractNPC {
 		super.finalizeDeath(killer);
 		if (killer instanceof Player) {
 			Player p = killer.asPlayer();
-			Quest quest = p.getQuestRepository().getQuest(WhatLiesBelow.NAME);
+			Quest quest = p.getQuestRepository().getQuest(Quests.WHAT_LIES_BELOW);
 			if (quest.getStage(p) == 10) {
 				int amount = p.getInventory().getAmount(WhatLiesBelow.RATS_PAPER) + p.getBank().getAmount(WhatLiesBelow.RATS_PAPER);
 				if (amount < 5) {

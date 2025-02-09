@@ -14,6 +14,7 @@ import core.game.world.repository.Repository;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.game.world.update.flag.context.Graphics;
+import content.data.Quests;
 
 /**
  * Represents the plugin dialogue to handle the interaction with professor
@@ -81,7 +82,7 @@ public class ProfessorOddensteinPlugin extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		final Quest quest = player.getQuestRepository().getQuest("Ernest the Chicken");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.ERNEST_THE_CHICKEN);
 		switch (quest.getStage(player)) {
 		case 0:
 		case 10:
@@ -102,7 +103,7 @@ public class ProfessorOddensteinPlugin extends DialoguePlugin {
 
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
-		final Quest quest = player.getQuestRepository().getQuest("Ernest the Chicken");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.ERNEST_THE_CHICKEN);
 		switch (quest.getStage(player)) {
 		case 0:
 		case 100:

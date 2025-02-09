@@ -1,12 +1,13 @@
 package content.region.kandarin.quest.tree
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.tools.END_DIALOGUE
 
 class BallistaDialogue : DialogueFile(){
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = getQuestStage(player!!, TreeGnomeVillage.questName)
+        val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE)
         if (questStage > 30) {
             when (stage) {
                 0 -> sendDialogue(player!!, "The Khazard stronghold has already been breached.").also { stage = END_DIALOGUE }
@@ -28,7 +29,7 @@ class BallistaDialogue : DialogueFile(){
                     when (buttonID) {
                         answer -> {
                             sendDialogue(player!!, "The huge spear flies through the air and screams down directly into the Khazard stronghold. A deafening crash echoes over the battlefield as the front entrance is reduced to rubble.")
-                            setQuestStage(player!!, TreeGnomeVillage.questName, 31)
+                            setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE, 31)
                         }
                         else -> sendDialogue(player!!, "The huge spear completely misses the Khazard stronghold!")
                     }

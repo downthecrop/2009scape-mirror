@@ -12,6 +12,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.plugin.ClassScanner;
+import content.data.Quests;
 
 /**
  * Represents the demon slayer quest.
@@ -50,7 +51,7 @@ public class DemonSlayer extends Quest {
 	 * Constructs a new {@Code DemonSlayer} {@Code Object}
 	 */
 	public DemonSlayer() {
-		super("Demon Slayer", 16, 15, 3, 222, 0, 1, 3);
+		super(Quests.DEMON_SLAYER, 16, 15, 3, 222, 0, 1, 3);
 	}
 	
 	@Override
@@ -196,7 +197,7 @@ public class DemonSlayer extends Quest {
 		@Override
 		public boolean open(Object... args) {
 			npc = (NPC) args[0];
-			quest = player.getQuestRepository().getQuest("Demon Slayer");
+			quest = player.getQuestRepository().getQuest(Quests.DEMON_SLAYER);
 			switch (quest.getStage(player)) {
 			default:
 				interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "What are you doing up here? Only the palace guards", "are allowed up here.");

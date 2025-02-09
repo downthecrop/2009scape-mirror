@@ -10,12 +10,13 @@ import core.game.node.entity.player.link.TeleportManager
 import core.game.node.item.Item
 import core.game.world.map.Location
 import core.api.hasRequirement;
+import content.data.Quests
 
 class TeleTabsListener : InteractionListener {
 
     enum class TeleTabs(val item: Int, val location: Location, val exp: Double, val requirementCheck: (Player) -> Boolean = { true }) {
         ADDOUGNE_TELEPORT(8011, Location.create(2662, 3307, 0), 61.0, {
-            player -> hasRequirement(player, "Plague City");
+            player -> hasRequirement(player, Quests.PLAGUE_CITY);
         }),
         AIR_ALTAR_TELEPORT(13599, Location.create(2978, 3296, 0), 0.0),
         ASTRAL_ALTAR_TELEPORT(13611, Location.create(2156, 3862, 0), 0.0),

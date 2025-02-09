@@ -8,6 +8,7 @@ import core.game.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
+import content.data.Quests;
 
 /**
  * Represents the dialogue plugin used for king arthur.
@@ -56,7 +57,7 @@ public final class KingArthurDialogue extends DialoguePlugin {
             stage = 80;
             return true;
         } else {
-            Quest quest = player.getQuestRepository().getQuest("Merlin's Crystal");
+            Quest quest = player.getQuestRepository().getQuest(Quests.MERLINS_CRYSTAL);
             if (quest.getStage(player) == 99) {
                 player("I have freed Merlin from his crystal!");
                 stage = 900;
@@ -80,7 +81,7 @@ public final class KingArthurDialogue extends DialoguePlugin {
 
     @Override
     public boolean handle(int interfaceId, int buttonId) {
-        Quest quest = player.getQuestRepository().getQuest("Merlin's Crystal");
+        Quest quest = player.getQuestRepository().getQuest(Quests.MERLINS_CRYSTAL);
         switch (stage) {
             case 900:
                 end();

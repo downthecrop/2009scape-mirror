@@ -9,18 +9,19 @@ import core.game.world.map.Location
 import org.rs09.consts.Components
 import core.game.world.GameWorld
 import core.api.*
+import content.data.Quests
 
 object KeldagrimCartMethods {
     @JvmStatic
     fun goToKeldagrim(player: Player){
-        if (!hasRequirement(player, "The Giant Dwarf"))
+        if (!hasRequirement(player, Quests.THE_GIANT_DWARF))
             return
         GameWorld.Pulser.submit(TravelToKeldagrimPulse(player))
     }
 
     @JvmStatic
     fun leaveKeldagrimTo(player: Player, dest: Location){
-        if (!hasRequirement(player, "The Giant Dwarf"))
+        if (!hasRequirement(player, Quests.THE_GIANT_DWARF))
             return
         GameWorld.Pulser.submit(TravelFromKeldagrimPulse(player,dest))
     }

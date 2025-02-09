@@ -6,6 +6,7 @@ import core.game.activity.ActivityManager
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import org.rs09.consts.Items
+import content.data.Quests
 
 class DSCutsceneTrigger : MapArea {
   
@@ -16,7 +17,7 @@ class DSCutsceneTrigger : MapArea {
   override fun areaEnter(entity: Entity) {
     if (entity !is Player) return
 
-    val quest = entity.questRepository.getQuest("Demon Slayer")
+    val quest = entity.questRepository.getQuest(Quests.DEMON_SLAYER)
     val alreadyInCutscene = getAttribute(entity, "demon-slayer:cutscene", false)
     val hasSilverlight = inInventory(entity, Items.SILVERLIGHT_2402) || inEquipment(entity, Items.SILVERLIGHT_2402)
 

@@ -8,6 +8,7 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import core.tools.END_DIALOGUE
+import content.data.Quests
 
 /**
  * @author qmqz
@@ -18,11 +19,11 @@ class VolfOlasfsonDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!isQuestComplete(player, "Fremennik Trials")) {
+        if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
             npc(FacialExpression.ANNOYED, "Sorry, outlander, but I have things to be doing.").also { stage = END_DIALOGUE }
-        } else if (isQuestComplete(player, "Fremennik Trials") && !isQuestComplete(player, "Olaf's Quest")) {
+        } else if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) && !isQuestComplete(player, Quests.OLAFS_QUEST)) {
             npc(FacialExpression.FRIENDLY, "Hello there. Enjoying the view?").also { stage = 0 }
-        } else if (isQuestComplete(player, "Fremennik Trials") && isQuestComplete(player, "Olaf's Quest")) {
+        } else if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) && isQuestComplete(player, Quests.OLAFS_QUEST)) {
             npcl(FacialExpression.ASKING, "Hello again, friend! Does my father send any word... or treasures like before?").also { stage = 10 }
         }
         return true

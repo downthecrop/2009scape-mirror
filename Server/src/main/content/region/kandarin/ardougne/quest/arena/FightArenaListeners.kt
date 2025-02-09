@@ -13,6 +13,7 @@ import core.game.world.map.Location
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
+import content.data.Quests
 
 class FightArenaListeners : InteractionListener {
     companion object {
@@ -100,7 +101,7 @@ class FightArenaListeners : InteractionListener {
         }
 
         on(FULL_ARMOR_STAND, IntType.SCENERY, "borrow") { player, _ ->
-            if (player.questRepository.getStage("Fight Arena") >= 10 && !inEquipmentOrInventory(player, HELMET) && !inEquipmentOrInventory(player, ARMOR) && freeSlots(player) >= 2) {
+            if (player.questRepository.getStage(Quests.FIGHT_ARENA) >= 10 && !inEquipmentOrInventory(player, HELMET) && !inEquipmentOrInventory(player, ARMOR) && freeSlots(player) >= 2) {
                 replaceScenery(FULL_ARMOR_STAND_1!!.asScenery(), EMPTY_STAND, 10,location(2619, 3196, 0))
                 sendMessage(player, "You borrow the suit of armour. It looks like it's just your size.")
                 addItem(player, ARMOR, 1)
@@ -162,7 +163,7 @@ class FightArenaListeners : InteractionListener {
         }
 
         onUseWith(IntType.SCENERY, CELL_KEY, CELL_DOOR_1) { player, _, _ ->
-        if (player.questRepository.getStage("Fight Arena") >= 68){
+        if (player.questRepository.getStage(Quests.FIGHT_ARENA) >= 68){
                 sendDialogue(player, "I don't want to attract too much attention by freeing all the prisoners. I need to find Jeremy and he's not in this cell.")
             } else {
                 sendMessage(player, "The cell gate is securely locked.")
@@ -181,9 +182,9 @@ class FightArenaListeners : InteractionListener {
         }
 
         on(CENTER_DOOR, IntType.SCENERY, "open") { player, node ->
-            if (player.questRepository.getStage("Fight Arena") >= 91) {
+            if (player.questRepository.getStage(Quests.FIGHT_ARENA) >= 91) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
-            } else if (player.questRepository.getStage("Fight Arena") < 91) {
+            } else if (player.questRepository.getStage(Quests.FIGHT_ARENA) < 91) {
                 sendNPCDialogue(player, NPCs.KHAZARD_GUARD_255, "And where do you think you're going? Only General Khazard decides who fights in the arena. Get out of here.", FacialExpression.ANNOYED)
             } else {
                 sendMessage(player, "The gate is locked.")
@@ -254,7 +255,7 @@ class FightArenaListeners : InteractionListener {
                 2 -> {
                     end()
                     lock(player!!, 2)
-                    setQuestStage(player!!, FightArena.FightArenaQuest, 20)
+                    setQuestStage(player!!, Quests.FIGHT_ARENA, 20)
                     DoorActionHandler.handleAutowalkDoor(player, getScenery(2617, 3172, 0))
                 }
             }
@@ -276,7 +277,7 @@ class FightArenaListeners : InteractionListener {
                 2 -> {
                     end()
                     lock(player!!, 2)
-                    setQuestStage(player!!, FightArena.FightArenaQuest, 20)
+                    setQuestStage(player!!, Quests.FIGHT_ARENA, 20)
                     DoorActionHandler.handleAutowalkDoor(player, getScenery(2584, 3141, 0))
                 }
             }

@@ -7,6 +7,7 @@ import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
+import content.data.Quests
 
 @Initializable
 class YrsaDialogue(player: Player? = null) : DialoguePlugin(player) {
@@ -38,7 +39,7 @@ class YrsaDialogue(player: Player? = null) : DialoguePlugin(player) {
             stage = 1
             return true
         }
-        else if(player.questRepository.isComplete("Fremennik Trials")){
+        else if(player.questRepository.isComplete(Quests.THE_FREMENNIK_TRIALS)){
             npcl(FacialExpression.HAPPY,"Welcome to my clothes shop. I can change your shoes, or I've got a fine selection of clothes for sale.")
             stage = 30
             //Uncomment this out when we got the shoe shop up and running

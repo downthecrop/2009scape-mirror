@@ -7,15 +7,13 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import org.rs09.consts.Components
 import org.rs09.consts.Items
+import content.data.Quests
 
 /**
  * Represents the Witch's Potion Quest
  */
 @Initializable
-class WitchsPotion : Quest(QUEST_NAME, 31, 30, 1, 67, 0, 1, 3) {
-    companion object {
-        const val QUEST_NAME = "Witch's Potion"
-    }
+class WitchsPotion : Quest(Quests.WITCHS_POTION, 31, 30, 1, 67, 0, 1, 3) {
 
     override fun drawJournal(player: Player?, stage: Int) {
         super.drawJournal(player, stage)

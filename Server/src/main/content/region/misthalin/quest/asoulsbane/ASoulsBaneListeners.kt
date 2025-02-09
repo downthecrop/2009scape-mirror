@@ -4,6 +4,7 @@ import core.api.*
 import core.game.interaction.InteractionListener
 import core.game.world.map.Location
 import org.rs09.consts.Scenery
+import content.data.Quests
 
 // Temporary access since the monsters in there drop nothing.
 class ASoulsBaneListener : InteractionListener {
@@ -13,7 +14,7 @@ class ASoulsBaneListener : InteractionListener {
     }
     override fun defineListeners() {
         on(RIFT_IDS, SCENERY, "enter") { player, _ ->
-            if (hasRequirement(player, "A Soul's Bane")) {
+            if (hasRequirement(player, Quests.A_SOULS_BANE)) {
                 teleport(player, Location(3297, 9824, 0))
             }
             return@on true

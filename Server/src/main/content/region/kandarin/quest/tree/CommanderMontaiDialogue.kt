@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.tree
 
+import content.data.Quests
 import core.api.*
 import org.rs09.consts.Items
 import core.game.dialogue.DialogueFile
@@ -7,7 +8,7 @@ import core.tools.END_DIALOGUE
 
 class CommanderMontaiDialogue : DialogueFile(){
     override fun handle(componentID: Int, buttonID: Int) {
-        val questStage = getQuestStage(player!!, TreeGnomeVillage.questName)
+        val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE)
         if (questStage == 10) {
             when(stage) {
                 0 -> playerl("Hello.").also { stage++ }
@@ -24,7 +25,7 @@ class CommanderMontaiDialogue : DialogueFile(){
                 }
                 9 -> npcl("That's a shame, we could have done with your help.").also { stage = END_DIALOGUE }
                 10 -> npcl("Please be as quick as you can, I don't know how much longer we can hold out.").also {
-                    setQuestStage(player!!, TreeGnomeVillage.questName, 20)
+                    setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE, 20)
                     stage = END_DIALOGUE
                 }
             }
@@ -37,7 +38,7 @@ class CommanderMontaiDialogue : DialogueFile(){
                     3 -> {
                         // Remove the 6 normal logs
                         for(i in 1..6) { removeItem(player!!,Items.LOGS_1511) }
-                        setQuestStage(player!!, TreeGnomeVillage.questName, 25)
+                        setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE, 25)
                         npcl("That's excellent, now we can make more defensive battlements. Give me a moment to organize the troops and then come speak to me. I'll inform you of our next phase of attack.")
                         stage = END_DIALOGUE
                     }
@@ -69,7 +70,7 @@ class CommanderMontaiDialogue : DialogueFile(){
                 11 -> npcl("Thank you, you're braver than most.").also { stage++ }
                 12 -> npcl("I don't know how long I will be able to hold out. Once you have the coordinates come back and fire the ballista right into those monsters.").also { stage++ }
                 13 -> npcl("If you can retrieve the orb and bring safety back to my people, none of the blood spilled on this field will be in vain.").also {
-                    setQuestStage(player!!, TreeGnomeVillage.questName, 30)
+                    setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE, 30)
                     stage = END_DIALOGUE
                 }
             }

@@ -6,6 +6,7 @@ import core.game.node.item.Item;
 import core.plugin.Initializable;
 import content.region.misthalin.varrock.dialogue.KingRoaldDialogue;
 import core.plugin.ClassScanner;
+import content.data.Quests;
 
 /**
  * Represents the shield of arrav quest.
@@ -54,7 +55,7 @@ public class ShieldofArrav extends Quest {
 	 * Constructs a new {@Code ShieldofArrav} {@Code Object}
 	 */
 	public ShieldofArrav() {
-		super("Shield of Arrav", 29, 28, 1, 145, 0, 1, 7); 
+		super(Quests.SHIELD_OF_ARRAV, 29, 28, 1, 145, 0, 1, 7);
 	}
 
 	@Override

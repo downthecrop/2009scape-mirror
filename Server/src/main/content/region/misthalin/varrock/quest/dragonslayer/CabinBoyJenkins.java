@@ -5,6 +5,9 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.game.node.entity.player.link.quest.Quest;
+import content.data.Quests;
+
+import static core.api.ContentAPIKt.getQuestStage;
 
 /**
  * Represents the cabin boy jenkins dialogue.
@@ -12,12 +15,6 @@ import core.game.node.entity.player.link.quest.Quest;
  */
 @Initializable
 public class CabinBoyJenkins extends DialoguePlugin {
-
-	/**
-	 * Represents the quest instance.
-	 */
-	private Quest quest;
-
 	/**
 	 * Constructs a new {@code CabinBoyJenkins} {@code Object}.
 	 */
@@ -43,8 +40,7 @@ public class CabinBoyJenkins extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest("Dragon Slayer");
-		switch (quest.getStage(player)) {
+		switch (getQuestStage(player, Quests.DRAGON_SLAYER)) {
 		case 20:
 			npc("Ahoy! Whay d'ye think of yer ship then?");
 			stage = 0;
@@ -60,7 +56,7 @@ public class CabinBoyJenkins extends DialoguePlugin {
 
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
-		switch (quest.getStage(player)) {
+		switch (getQuestStage(player, Quests.DRAGON_SLAYER)) {
 		case 40:
 		case 30:
 			switch (stage) {

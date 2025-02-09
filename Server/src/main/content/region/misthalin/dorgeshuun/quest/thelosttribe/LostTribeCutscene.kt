@@ -1,5 +1,6 @@
 package content.region.misthalin.dorgeshuun.quest.thelosttribe
 
+import content.data.Quests
 import core.api.animate
 import core.api.face
 import core.game.activity.Cutscene
@@ -105,7 +106,7 @@ class LostTribeCutscene(player: Player) : Cutscene(player) {
             }
             19 -> {
                 end {
-                    player.questRepository.getQuest("Lost Tribe").finish(player)
+                    player.questRepository.getQuest(Quests.THE_LOST_TRIBE).finish(player)
                 }
             }
         }

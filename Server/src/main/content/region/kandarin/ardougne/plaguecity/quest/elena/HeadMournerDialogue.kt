@@ -8,12 +8,13 @@ import core.game.node.entity.npc.NPC
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 @Initializable
 class HeadMournerDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.HEAD_MOURNER_716)
-        when (getQuestStage(player!!, PlagueCity.PlagueCityQuest)) {
+        when (getQuestStage(player!!, Quests.PLAGUE_CITY)) {
 
             in 8..10 -> when (stage) {
                 0 -> npcl(FacialExpression.FRIENDLY, "Hmmm, how did you get over here? You're not one of this rabble. Ah well, you'll have to stay. Can't risk you going back now.").also { stage++ }
@@ -48,7 +49,7 @@ class HeadMournerDialogue : DialogueFile() {
                 8 -> npcl(FacialExpression.NEUTRAL, "I wouldn't get your hopes up though.").also { stage++ }
                 9 -> {
                     end()
-                    setQuestStage(player!!, "Plague City", 12)
+                    setQuestStage(player!!, Quests.PLAGUE_CITY, 12)
                     stage = END_DIALOGUE
                 }
             }

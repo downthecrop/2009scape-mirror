@@ -11,6 +11,7 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 
 import static core.api.ContentAPIKt.*;
+import content.data.Quests;
 
 
 /**
@@ -51,7 +52,7 @@ public final class DSlayerDrainPlugin extends UseWithHandler {
 	@Override
 	public boolean handle(NodeUsageEvent event) {
 		final Player player = event.getPlayer();
-		final Quest quest = player.getQuestRepository().getQuest("Demon Slayer");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.DEMON_SLAYER);
 		if (player.getInventory().remove(BUCKET_OF_WATER)) {
 			player.getInventory().add(BUCKET);
 			player.animate(ANIMATION);

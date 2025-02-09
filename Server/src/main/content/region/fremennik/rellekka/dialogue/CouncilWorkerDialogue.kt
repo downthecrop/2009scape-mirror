@@ -7,12 +7,13 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.plugin.Initializable
+import content.data.Quests
 
 @Initializable
 class CouncilWorkerDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if(getQuestStage(player, "Fremennik Trials") in 1..99){
+        if(getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) in 1..99){
             player.dialogueInterpreter.open((CouncilWorkerFTDialogue(1)))
         }
         else if(player.achievementDiaryManager.getDiary(DiaryType.FREMENNIK).isComplete(0, true)){

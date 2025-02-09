@@ -11,6 +11,7 @@ import content.region.misthalin.quest.priestinperil.KingRoaldPIPDialogue
 import core.tools.DIALOGUE_INITIAL_OPTIONS_HANDLE
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
+import content.data.Quests
 
 /**
  * Central dialogue plugin for King Roald. Reroutes to the more specific DialogueFiles
@@ -32,15 +33,15 @@ class KingRoaldDialogue(player: Player? = null) : DialoguePlugin(player) {
             return true
         }
 
-        if(player.questRepository.isComplete("Priest in Peril")) {
-            if (!player.questRepository.hasStarted("All Fired Up") || player.questRepository.getQuest("All Fired Up").getStage(player) == 90) {
-                addOption("All Fired Up", KingRoaldAFUDialogue(player.questRepository.getStage("All Fired Up")))
+        if(player.questRepository.isComplete(Quests.PRIEST_IN_PERIL)) {
+            if (!player.questRepository.hasStarted(Quests.ALL_FIRED_UP) || player.questRepository.getQuest(Quests.ALL_FIRED_UP).getStage(player) == 90) {
+                addOption("All Fired Up", KingRoaldAFUDialogue(player.questRepository.getStage(Quests.ALL_FIRED_UP)))
             }
         } else {
-            addOption("Priest in Peril", KingRoaldPIPDialogue(player.questRepository.getStage("Priest in Peril")))
+            addOption("Priest in Peril", KingRoaldPIPDialogue(player.questRepository.getStage(Quests.PRIEST_IN_PERIL)))
         }
 
-        if (player.questRepository.getQuest("Shield of Arrav").isStarted(player) && !player.questRepository.getQuest("Shield of Arrav").isCompleted(player)) {
+        if (player.questRepository.getQuest(Quests.SHIELD_OF_ARRAV).isStarted(player) && !player.questRepository.getQuest(Quests.SHIELD_OF_ARRAV).isCompleted(player)) {
             addOption("Shield of Arrav", KingRoaldArravDialogue())
         }
 

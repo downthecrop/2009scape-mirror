@@ -43,7 +43,7 @@ class GravePurchaseInterface : InterfaceListener {
             val cost = selectedType.cost
             val requirement = selectedType.requiredQuest
 
-            if (requirement.isNotEmpty() && !isQuestComplete(player, requirement)) {
+            if (requirement != null && !isQuestComplete(player, requirement)) {
                 sendDialogue(player, "That gravestone requires completion of $requirement.")
                 return@on true
             }

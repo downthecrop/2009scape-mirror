@@ -8,6 +8,7 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.game.world.map.Location;
+import content.data.Quests;
 
 /**
  * Represents the monk of zamorak npc.
@@ -57,7 +58,7 @@ public final class MonkOfZamorakNPC extends AbstractNPC {
 	public void finalizeDeath(final Entity killer) {
 		super.finalizeDeath(killer);
 		final Player p = ((Player) killer);
-		final Quest quest = p.getQuestRepository().getQuest("Priest in Peril");
+		final Quest quest = p.getQuestRepository().getQuest(Quests.PRIEST_IN_PERIL);
 		if (quest.isStarted(p)) {
 			GroundItemManager.create(GOLDEN_KEY, getLocation(), p);
 		}

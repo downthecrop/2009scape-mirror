@@ -3,11 +3,11 @@ package content.region.fremennik.rellekka.quest.thefremenniktrials
 import core.api.addItem
 import core.api.removeItem
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.info.PlayerDetails
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
+import content.data.Quests
 
 @Initializable
 class SigliTheHuntsman(player: Player? = null) : DialoguePlugin(player){
@@ -47,12 +47,12 @@ class SigliTheHuntsman(player: Player? = null) : DialoguePlugin(player){
             stage = 100
             return true
         }
-        else if(player.questRepository.isComplete("Fremennik Trials")){
+        else if(player.questRepository.isComplete(Quests.THE_FREMENNIK_TRIALS)){
             playerl(FacialExpression.HAPPY,"Hello again Sigli.")
             stage = 180
             return true
         }
-        else if(player.questRepository.hasStarted("Fremennik Trials")){
+        else if(player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS)){
             npc("What do you want outerlander?")
             stage = 0
             return true

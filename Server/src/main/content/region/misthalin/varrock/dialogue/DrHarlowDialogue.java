@@ -8,6 +8,7 @@ import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.plugin.Initializable;
 import core.game.node.item.Item;
+import content.data.Quests;
 
 /**
  * Represents the dialogue used for dr harlow.
@@ -56,10 +57,10 @@ public final class DrHarlowDialogue extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 0:
-			if (player.getQuestRepository().getQuest("Vampire Slayer").getStage(player) == 10) {
+			if (player.getQuestRepository().getQuest(Quests.VAMPIRE_SLAYER).getStage(player) == 10) {
 				interpreter.sendOptions("Select an Option", "No, you've had enough.", "Morgan needs your help!");
 				stage = 1;
-			} else if (player.getQuestRepository().getQuest("Vampire Slayer").getStage(player) == 20) {
+			} else if (player.getQuestRepository().getQuest(Quests.VAMPIRE_SLAYER).getStage(player) == 20) {
 				if (player.getInventory().contains(1917, 1)) {
 					interpreter.sendDialogues(player, null, "Here you go.");
 					stage = 20;
@@ -67,7 +68,7 @@ public final class DrHarlowDialogue extends DialoguePlugin {
 					interpreter.sendDialogues(player, null, "I'll just go and buy one.");
 					stage = 2;
 				}
-			} else if (player.getQuestRepository().getQuest("Vampire Slayer").getStage(player) == 30) {
+			} else if (player.getQuestRepository().getQuest(Quests.VAMPIRE_SLAYER).getStage(player) == 30) {
 				if (!player.getBank().contains(1549, 1) && !player.getInventory().contains(1549, 1)) {
 					if (!player.getInventory().add(ITEMS[0])) {
 						GroundItem item = new GroundItem(ITEMS[0], npc.getLocation(), player);
@@ -122,7 +123,7 @@ public final class DrHarlowDialogue extends DialoguePlugin {
 			stage = 10;
 			break;
 		case 10:
-			player.getQuestRepository().getQuest("Vampire Slayer").setStage(player, 20);
+			player.getQuestRepository().getQuest(Quests.VAMPIRE_SLAYER).setStage(player, 20);
 			end();
 			break;
 		case 2:
@@ -131,7 +132,7 @@ public final class DrHarlowDialogue extends DialoguePlugin {
 		case 20:
 			if (player.getInventory().remove(ITEMS[1])) {
 				interpreter.sendItemMessage(1917, "You give a beer to Dr Harlow.");
-				player.getQuestRepository().getQuest("Vampire Slayer").setStage(player, 30);
+				player.getQuestRepository().getQuest(Quests.VAMPIRE_SLAYER).setStage(player, 30);
 				stage = 21;
 			}
 			break;

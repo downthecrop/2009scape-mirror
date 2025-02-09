@@ -1,8 +1,8 @@
 package content.region.asgarnia.burthorpe.quest.heroesquest
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.*
-import core.game.global.action.DoorActionHandler
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.Items
@@ -28,7 +28,7 @@ class GarvDialogue(player: Player? = null) : DialoguePlugin(player){
 class GarvDialogueFile : DialogueBuilderFile() {
     override fun create(b: DialogueBuilder) {
         // Technically this won't happen since you have to get past Grubor.
-        b.onQuestStages(HeroesQuest.questName, 0,1,2)
+        b.onQuestStages(Quests.HEROES_QUEST, 0, 1, 2)
                 .npcl("Hello. What do you want?")
                 .options()
                 .let { optionBuilder ->
@@ -40,7 +40,7 @@ class GarvDialogueFile : DialogueBuilderFile() {
                             .end()
                 }
 
-        b.onQuestStages(HeroesQuest.questName, 3,4,5,6,100)
+        b.onQuestStages(Quests.HEROES_QUEST, 3, 4, 5, 6, 100)
                 // .npcl("Oi! Where do you think you're going pal?") - When you click on the door instead of Garv.
                 .npcl("Hello. What do you want?")
                 .playerl("Hi. I'm Hartigen. I've come to work here.")
@@ -55,8 +55,8 @@ class GarvDialogueFile : DialogueBuilderFile() {
                                 branch2.onValue(1)
                                         .npcl("You'd better come in then, Grip will want to talk to you.")
                                         .endWith { _, player ->
-                                            if(getQuestStage(player, HeroesQuest.questName) == 3) {
-                                                setQuestStage(player, HeroesQuest.questName, 4)
+                                            if(getQuestStage(player, Quests.HEROES_QUEST) == 3) {
+                                                setQuestStage(player, Quests.HEROES_QUEST, 4)
                                             }
                                         }
                                 branch2.onValue(0)

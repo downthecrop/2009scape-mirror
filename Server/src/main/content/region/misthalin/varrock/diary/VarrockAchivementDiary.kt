@@ -21,6 +21,7 @@ import core.game.diary.DiaryLevel
 import core.game.event.*
 import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.entity.skill.Skills
+import content.data.Quests
 
 class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
     companion object {
@@ -203,7 +204,7 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
             )
         }
 
-        if (player.questRepository.isComplete("Dragon Slayer")) {
+        if (player.questRepository.isComplete(Quests.DRAGON_SLAYER)) {
             if (event.target.id == NPCs.OZIACH_747 && event.option == "trade" && inBorders(player, OZIACH_SHOP)) {
                 finishTask(
                     player,

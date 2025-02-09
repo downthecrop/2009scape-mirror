@@ -12,11 +12,11 @@ import core.ServerStore.Companion.getBoolean
 import core.game.dialogue.DialogueFile
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
-import core.tools.SystemLogger
 import core.game.system.command.Privilege
 import core.game.world.GameWorld
 import core.tools.Log
 import core.tools.secondsToTicks
+import content.data.Quests
 
 class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Commands, StartupListener {
     override fun login(player: Player) {
@@ -80,17 +80,17 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
                 override fun handle(componentID: Int, buttonID: Int) {
                     fun teleportToStar(player: Player) {
                         val condition: (p: Player) -> Boolean = when (star.location.toLowerCase()) {
-                            "canifis bank"              -> {p -> requireQuest(p, "Priest in Peril", "to access this.") }
-                            //"burgh de rott bank"        -> {p -> hasRequirement(p, "In Aid of the Myreque") } //disabled: crash
-                            "crafting guild"            -> {p -> hasLevelStat(p, Skills.CRAFTING, 40)       }
-                            "lletya bank"               -> {p -> hasRequirement(p, "Mourning's End Part I") }
-                            "jatizso mine"              -> {p -> hasRequirement(p, "The Fremennik Isles")   }
-                            "south crandor mining site" -> {p -> hasRequirement(p, "Dragon Slayer")         }
-                            "shilo village mining site" -> {p -> hasRequirement(p, "Shilo Village")         }
-                            "mos le'harmless bank"      -> {p -> hasRequirement(p, "Cabin Fever")           } //needs to be updated to check for completion when the quest releases; https://runescape.wiki/w/Mos_Le%27Harmless?oldid=913025
-                            "lunar isle mine"           -> {p -> hasRequirement(p, "Lunar Diplomacy")       }
-                            "miscellania coal mine"     -> {p -> requireQuest(p, "The Fremennik Trials", "to access this.") }
-                            //"neitiznot runite mine"     -> {p -> hasRequirement(p, "The Fremennik Isles") } //disabled: currently not reachable
+                            "canifis bank"              -> {p -> requireQuest(p, Quests.PRIEST_IN_PERIL, "to access this.")}
+                            //"burgh de rott bank"        -> {p -> hasRequirement(p, Quests.IN_AID_OF_THE_MYREQUE)} //disabled: crash
+                            "crafting guild"            -> {p -> hasLevelStat(p, Skills.CRAFTING, 40)}
+                            "lletya bank"               -> {p -> hasRequirement(p, Quests.MOURNINGS_END_PART_I)}
+                            "jatizso mine"              -> {p -> hasRequirement(p, Quests.THE_FREMENNIK_ISLES)}
+                            "south crandor mining site" -> {p -> hasRequirement(p, Quests.DRAGON_SLAYER)}
+                            "shilo village mining site" -> {p -> hasRequirement(p, Quests.SHILO_VILLAGE)}
+                            "mos le'harmless bank"      -> {p -> hasRequirement(p, Quests.CABIN_FEVER)} //needs to be updated to check for completion when the quest releases; https://runescape.wiki/w/Mos_Le%27Harmless?oldid=913025
+                            "lunar isle mine"           -> {p -> hasRequirement(p, Quests.LUNAR_DIPLOMACY)}
+                            "miscellania coal mine"     -> {p -> requireQuest(p, Quests.THE_FREMENNIK_TRIALS, "to access this.")}
+                            //"neitiznot runite mine"     -> {p -> hasRequirement(p, Quests.THE_FREMENNIK_ISLES)} //disabled: currently not reachable
                             else -> {_ -> true}
                         }
                         if (!condition.invoke(player)) {

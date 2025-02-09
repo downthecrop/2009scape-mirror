@@ -15,6 +15,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
+import content.data.Quests;
 
 /**
  * Represents the pirates treasure plugin.
@@ -92,7 +93,7 @@ public final class PiratesTreasurePlugin extends OptionHandler {
 
 		@Override
 		public void run(Player player) {
-			final Quest quest = player.getQuestRepository().getQuest("Pirate's Treasure");
+			final Quest quest = player.getQuestRepository().getQuest(Quests.PIRATES_TREASURE);
 			player.lock(2);
 			if (quest.getStage(player) == 20) {
 				if (player.getSavedData().getQuestData().isGardenerAttack()) {

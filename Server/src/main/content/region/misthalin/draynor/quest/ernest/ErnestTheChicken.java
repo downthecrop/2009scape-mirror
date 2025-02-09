@@ -8,6 +8,7 @@ import core.game.node.item.Item;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.ClassScanner;
+import content.data.Quests;
 
 /**
  * Represents the ernest the chicken quest.
@@ -40,7 +41,7 @@ public final class ErnestTheChicken extends Quest {
 	 * Constructs a new {@code ErnestTheChicken} {@code Object}.
 	 */
 	public ErnestTheChicken() {
-		super("Ernest the Chicken", 19, 18, 4, 32, 0, 1, 3);
+		super(Quests.ERNEST_THE_CHICKEN, 19, 18, 4, 32, 0, 1, 3);
 	}
 
 	@Override
@@ -128,7 +129,7 @@ public final class ErnestTheChicken extends Quest {
 
 		@Override
 		public boolean isHidden(final Player player) {
-			return player.getQuestRepository().getQuest("Ernest the Chicken").getStage(player) == 100 || player.getAttribute("ernest-hide", false);
+			return player.getQuestRepository().getQuest(Quests.ERNEST_THE_CHICKEN).getStage(player) == 100 || player.getAttribute("ernest-hide", false);
 		}
 
 		@Override
@@ -174,7 +175,7 @@ public final class ErnestTheChicken extends Quest {
 		@Override
 		public boolean isHidden(final Player player) {
 			Player target = getAttribute("target", null);
-			if (target != null && target.getQuestRepository().getQuest("Ernest the Chicken").getStage(player) == 100) {
+			if (target != null && target.getQuestRepository().getQuest(Quests.ERNEST_THE_CHICKEN).getStage(player) == 100) {
 				clear();
 				return super.isHidden(player);
 			}

@@ -1,5 +1,6 @@
 package content.region.asgarnia.burthorpe.quest.deathplateau
 
+import content.data.Quests
 import core.api.*
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
@@ -74,16 +75,16 @@ class DeathPlateauInteractionListener : InteractionListener {
                 GroundItemManager.get(Items.STONE_BALL_3111, location(2895, 3562, 0), player) != null &&
                 GroundItemManager.get(Items.STONE_BALL_3112, location(2895, 3563, 0), player) != null &&
                 GroundItemManager.get(Items.STONE_BALL_3113, location(2895, 3564, 0), player) != null) {
-                if (getQuestStage(player, DeathPlateau.questName) == 16) {
+                if (getQuestStage(player, Quests.DEATH_PLATEAU) == 16) {
                     sendMessage(player, "The equipment room door has unlocked.")
-                    setQuestStage(player, DeathPlateau.questName, 19)
+                    setQuestStage(player, Quests.DEATH_PLATEAU, 19)
                 }
             }
             return@onUseWith true
         }
 
         on(Scenery.LARGE_DOOR_3743, SCENERY, "open") { player, node ->
-            if (getQuestStage(player, DeathPlateau.questName) > 16) {
+            if (getQuestStage(player, Quests.DEATH_PLATEAU) > 16) {
                 DoorActionHandler.handleAutowalkDoor(player, node as core.game.node.scenery.Scenery)
             } else {
                 sendMessage(player, "The door is locked.")

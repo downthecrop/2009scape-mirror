@@ -1,7 +1,6 @@
 package content.region.misthalin.lumbridge.quest.lostcity
 
 import core.game.node.entity.Entity
-import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
@@ -10,6 +9,7 @@ import org.rs09.consts.NPCs
 import core.api.getQuestStage
 import core.api.sendDialogue
 import core.api.setQuestStage
+import content.data.Quests
 
 /**
  * TreeSpiritNPC class to handle the tree spirit that spawns out of the dramen tree
@@ -47,9 +47,8 @@ class TreeSpiritNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, l
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
         if (killer is Player) {
-            val quest = "Lost City"
-            if (getQuestStage(killer,quest) == 20) {
-                setQuestStage(killer,quest,21)
+            if (getQuestStage(killer, Quests.LOST_CITY) == 20) {
+                setQuestStage(killer, Quests.LOST_CITY,21)
                 sendDialogue(killer, "With the Tree Spirit defeated you can now chop the tree.")
             }
         }

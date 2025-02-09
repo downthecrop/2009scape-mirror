@@ -9,6 +9,7 @@ import core.game.node.item.Item;
 import core.tools.RandomFunction;
 
 import static core.api.ContentAPIKt.addItemOrBank;
+import content.data.Quests;
 
 /**
  * Represents the gertrudes fortress quest.
@@ -21,7 +22,7 @@ public class GertrudesCat extends Quest {
 	 * Constructs a new {@code GertrudesCat} {@code Object}.
 	 */
 	public GertrudesCat() {
-		super("Gertrude's Cat", 67, 66, 1, 180, 0, 1, 100);
+		super(Quests.GERTRUDES_CAT, 67, 66, 1, 180, 0, 1, 100);
 	}
 
 	@Override

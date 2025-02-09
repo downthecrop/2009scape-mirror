@@ -1,5 +1,6 @@
 package content.region.asgarnia.burthorpe.quest.heroesquest
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
@@ -26,7 +27,8 @@ class GruborDialogue (player: Player? = null) : DialoguePlugin(player) {
 class GruborDialogueFile : DialogueBuilderFile() {
     override fun create(b: DialogueBuilder) {
 
-        b.onPredicate { player -> getQuestStage(player, HeroesQuest.questName) >= 2 &&
+        b.onPredicate { player ->
+            getQuestStage(player, Quests.HEROES_QUEST) >= 2 &&
                 getAttribute(player, HeroesQuest.attributeGruborLetsYouIn, false) &&
                 HeroesQuest.isBlackArm(player)
         }
@@ -34,7 +36,8 @@ class GruborDialogueFile : DialogueBuilderFile() {
                 .npcl("Hi, I'm a little busy right now.")
                 .end()
 
-        b.onPredicate { player -> getQuestStage(player, HeroesQuest.questName) >= 2 &&
+        b.onPredicate { player ->
+            getQuestStage(player, Quests.HEROES_QUEST) >= 2 &&
                 !getAttribute(player, HeroesQuest.attributeGruborLetsYouIn, false) &&
                 HeroesQuest.isBlackArm(player)
         }

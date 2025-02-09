@@ -11,6 +11,7 @@ import core.game.dialogue.Topic
 import core.tools.END_DIALOGUE
 import org.rs09.consts.Items
 import content.region.kandarin.seers.quest.merlinsquest.ArheinMCDialogue
+import content.data.Quests
 
 
 /**
@@ -113,7 +114,7 @@ class ArheinDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin
             140 -> npcl(core.game.dialogue.FacialExpression.GUILTY,"Sorry pal, but I'm afraid I'm not quite ready to sail yet.").also { stage++ }
             141 -> npcl(core.game.dialogue.FacialExpression.NEUTRAL,"I'm waiting on a big delivery of candles which I need to deliver further along the coast.").also { stage = END_DIALOGUE }
             500 -> npcl(core.game.dialogue.FacialExpression.HALF_THINKING, "Yes, I do have orders to deliver there from time to time. I think I may have some bits and pieces for them when I leave here next actually.").also {
-                val queststage = player.questRepository.getStage("Merlin's Crystal")
+                val queststage = player.questRepository.getStage(Quests.MERLINS_CRYSTAL)
                 if(queststage == 30 || queststage == 40) {
                     loadFile(ArheinMCDialogue(queststage))
                 } else {

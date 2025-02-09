@@ -10,6 +10,7 @@ import core.plugin.Initializable;
 import core.game.world.map.Location;
 
 import static core.api.ContentAPIKt.*;
+import content.data.Quests;
 
 /**
  * Represents the dialogue plugin used to handle the customs officer.
@@ -54,7 +55,7 @@ public final class CustomsOfficerDialogue extends DialoguePlugin {
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
 		if (args.length > 1) {
-			if (player.getQuestRepository().isComplete("Pirate's Treasure")) {
+			if (player.getQuestRepository().isComplete(Quests.PIRATES_TREASURE)) {
 				if (player.getInventory().containsItem(RUM)) {
 					interpreter.sendDialogues(npc, null, "Aha, trying to smuggle rum are we?");
 					stage = 900;

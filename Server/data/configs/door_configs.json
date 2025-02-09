@@ -1984,16 +1984,14 @@
     "replaceId": "28518",
     "fence": "false",
     "metal": "true",
-    "autowalk": "true",
-    "questRequirement": "Icthlarin's Little Helper"
+    "autowalk": "true"
   },
   {
     "id": "28514",
     "replaceId": "28518",
     "fence": "false",
     "metal": "true",
-    "autowalk": "true",
-    "questRequirement": "Icthlarin's Little Helper"
+    "autowalk": "true"
   },
   {
     "id": "21065",

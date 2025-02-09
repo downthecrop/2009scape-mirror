@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 
 @Initializable
@@ -20,7 +21,7 @@ class CalebDialogue (player: Player? = null): DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
-        val qstage = player?.questRepository?.getStage("Family Crest") ?: -1
+        val qstage = player?.questRepository?.getStage(Quests.FAMILY_CREST) ?: -1
 
         if (qstage == 100) {
             options("Can you change my gauntlets for me?", "Nevermind")
@@ -122,7 +123,7 @@ class CalebDialogue (player: Player? = null): DialoguePlugin(player) {
 
             207 -> when(buttonId){
                 1 -> npc("You will? It would help me a lot!").also{stage = 1000}.also{
-                    player.questRepository.getQuest("Family Crest").setStage(player, 11)
+                    player.questRepository.getQuest(Quests.FAMILY_CREST).setStage(player, 11)
                 }
 
                 2 -> npc("It's a valuable family heirloom. " ,
@@ -141,7 +142,7 @@ class CalebDialogue (player: Player? = null): DialoguePlugin(player) {
             301 -> sendDialogue("You exchange the fish for Caleb's piece of the crest.").also{stage++}.also{
                 player.inventory.remove(Item(315),Item(329), Item(361), Item(365), Item(373))
                 player.inventory.add(CREST_PIECE)
-                player.questRepository.getQuest("Family Crest").setStage(player, 12)
+                player.questRepository.getQuest(Quests.FAMILY_CREST).setStage(player, 12)
             }
 
             302 -> options("Uh... what happened to the rest of it?" , "Thank you very much!").also{stage++}

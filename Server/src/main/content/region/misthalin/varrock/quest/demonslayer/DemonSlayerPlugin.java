@@ -2,7 +2,6 @@ package content.region.misthalin.varrock.quest.demonslayer;
 
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
-import core.game.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
@@ -10,12 +9,11 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
-import core.game.node.scenery.SceneryBuilder;
 import core.game.world.map.Location;
-import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 
 import static core.api.ContentAPIKt.*;
+import content.data.Quests;
 
 
 /**
@@ -46,7 +44,7 @@ public final class DemonSlayerPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final Quest quest = player.getQuestRepository().getQuest("Demon Slayer");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.DEMON_SLAYER);
 		final int id = node instanceof Scenery ? ((Scenery) node).getId() : node instanceof Item ? ((Item) node).getId() : ((NPC) node).getId();
 		switch (id) {
 		case 880:

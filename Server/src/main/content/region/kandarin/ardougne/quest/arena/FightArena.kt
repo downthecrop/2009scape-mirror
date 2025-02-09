@@ -6,13 +6,12 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
-import org.rs09.consts.Items
 import org.rs09.consts.Items.COINS_995
+import content.data.Quests
 
 @Initializable
-class FightArena : Quest("Fight Arena", 61, 60, 2, 17, 0, 1, 14) {
+class FightArena : Quest(Quests.FIGHT_ARENA, 61, 60, 2, 17, 0, 1, 14) {
     override fun newInstance(`object`: Any?): Quest { return this }
-    companion object { const val FightArenaQuest = "Fight Arena" }
     override fun drawJournal(player: Player?, stage: Int) {
         super.drawJournal(player, stage)
         var line = 11

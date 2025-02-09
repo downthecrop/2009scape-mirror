@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.dwarfcannon;
 
+import content.data.Quests;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
@@ -44,7 +45,7 @@ public class CaptainLawgofDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean open(Object... args) {
-		quest = player.getQuestRepository().getQuest(DwarfCannon.NAME);
+		quest = player.getQuestRepository().getQuest(Quests.DWARF_CANNON);
 		switch (quest.getStage(player)) {
 		case 80:
 			player("Hi.");

@@ -1,7 +1,7 @@
 package content.global.handlers.item.withobject
 
+import content.data.Quests
 import core.api.*
-import content.region.kandarin.quest.dwarfcannon.DwarfCannon
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
@@ -19,8 +19,8 @@ class AmmoMouldOnFurnace : InteractionListener {
     private fun cannonBallOnUseWithHandler(player: Player, used: Node, with: Node): Boolean {
         face(player, with.centerLocation)
 
-        if(!isQuestComplete(player, DwarfCannon.NAME)) {
-            sendDialogue(player, "You need to complete the ${DwarfCannon.NAME} quest in order to do this.")
+        if(!isQuestComplete(player, Quests.DWARF_CANNON)) {
+            sendDialogue(player, "You need to complete the ${Quests.DWARF_CANNON} quest in order to do this.")
             return true
         }
         if (getDynLevel(player, Skills.SMITHING) < levelRequirement) {

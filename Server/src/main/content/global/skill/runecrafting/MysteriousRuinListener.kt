@@ -1,5 +1,6 @@
 package content.global.skill.runecrafting
 
+import content.data.Quests
 import content.region.misthalin.varrock.diary.VarrockAchivementDiary.Companion.EasyTasks.ENTER_EARTH_ALTAR
 import core.api.*
 import core.game.container.impl.EquipmentContainer.SLOT_HAT
@@ -19,7 +20,7 @@ class MysteriousRuinListener : InteractionListener {
     private val animation = Animation(827)
     private val allowedUsed = arrayOf(1438, 1448, 1444, 1440, 1442, 5516, 1446, 1454, 1452, 1462, 1458, 1456, 1450, 1460).toIntArray()
     private val allowedWith = allRuins()
-    private val nothingInteresting = "Nothing interesting happens"
+    private val nothingInteresting = "Nothing interesting happens."
 
     override fun defineListeners() {
         onUseWith(IntType.SCENERY, allowedUsed, *allowedWith) { player, used, with ->
@@ -76,9 +77,9 @@ class MysteriousRuinListener : InteractionListener {
 
     private fun checkQuestCompletion(player: Player, ruin: MysteriousRuin): Boolean {
         return when (ruin) {
-            MysteriousRuin.DEATH -> hasRequirement(player, QuestReq(MEP_2), true)
-            MysteriousRuin.BLOOD -> hasRequirement(player, QuestReq(SEERGAZE), true)
-            else -> hasRequirement(player, QuestReq(RUNE_MYSTERIES), true)
+            MysteriousRuin.DEATH -> hasRequirement(player, Quests.MOURNINGS_END_PART_II, true)
+            MysteriousRuin.BLOOD -> hasRequirement(player, Quests.LEGACY_OF_SEERGAZE, true)
+            else -> hasRequirement(player, Quests.RUNE_MYSTERIES, true)
         }
     }
 

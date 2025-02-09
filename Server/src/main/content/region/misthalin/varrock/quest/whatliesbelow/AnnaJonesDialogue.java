@@ -1,5 +1,6 @@
 package content.region.misthalin.varrock.quest.whatliesbelow;
 
+import content.data.Quests;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
@@ -40,7 +41,7 @@ public class AnnaJonesDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean open(Object... args) {
-		quest = player.getQuestRepository().getQuest(WhatLiesBelow.NAME);
+		quest = player.getQuestRepository().getQuest(Quests.WHAT_LIES_BELOW);
 		switch (quest.getStage(player)) {
 		default:
 			if (args.length >= 2) {

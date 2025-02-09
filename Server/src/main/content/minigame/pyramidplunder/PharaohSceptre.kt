@@ -13,6 +13,7 @@ import org.rs09.consts.Items
 import core.game.dialogue.DialogueFile
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import content.data.Quests
 
 /**
  * Adds functionality to the pharoah's scepter
@@ -23,7 +24,7 @@ class PharaohSceptre : InteractionListener {
         val SCEPTRES = intArrayOf(Items.PHARAOHS_SCEPTRE_9044, Items.PHARAOHS_SCEPTRE_9046, Items.PHARAOHS_SCEPTRE_9048, Items.PHARAOHS_SCEPTRE_9050)
 
         on(SCEPTRES, IntType.ITEM, "teleport", "operate"){ player, node ->
-            if (!hasRequirement(player, "Icthlarin's Little Helper"))
+            if (!hasRequirement(player, Quests.ICTHLARINS_LITTLE_HELPER))
                 return@on true
 
             val sceptre = node.asItem()

@@ -19,6 +19,7 @@ import core.plugin.Plugin;
 
 import java.util.ArrayList;
 import java.util.List;
+import content.data.Quests;
 
 /**
  * Represents the plugin used for the furnace.
@@ -64,7 +65,7 @@ public final class FurnaceOptionPlugin extends OptionHandler {
 	private static void show(final Player player) {
 		player.getInterfaceManager().openChatbox(311);
 		player.getPacketDispatch().sendItemZoomOnInterface(2349, 150, 311, 4);
-		if (player.getQuestRepository().isComplete("The Knight's Sword")) {
+		if (player.getQuestRepository().isComplete(Quests.THE_KNIGHTS_SWORD)) {
 			player.getPacketDispatch().sendString("<br><br><br><br><col=000000>Blurite", 311, 20);
 		}
 		player.getPacketDispatch().sendItemZoomOnInterface(Bar.BLURITE.getProduct().getId(), 150, 311, 5);

@@ -10,6 +10,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.game.world.GameWorld;
+import content.data.Quests;
 
 /**
  * Represents the falador squire dialogue plugin.
@@ -59,7 +60,7 @@ public final class FaladorSquireDialogue extends DialoguePlugin {
     @Override
     public boolean open(Object... args) {
         npc = (NPC) args[0];
-        quest = player.getQuestRepository().getQuest("The Knight's Sword");
+        quest = player.getQuestRepository().getQuest(Quests.THE_KNIGHTS_SWORD);
         interpreter.sendOptions("What do you want to do?", "Chat", "Talk about the Falador Achievement Diary");
         stage = -1;
 		replacementReward = AchievementDiary.canReplaceReward(player, DiaryType.FALADOR, level);

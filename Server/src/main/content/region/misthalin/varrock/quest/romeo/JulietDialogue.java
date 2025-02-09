@@ -15,6 +15,7 @@ import core.game.world.map.path.Path;
 import core.game.world.map.path.Pathfinder;
 import core.game.world.repository.Repository;
 import core.game.world.update.flag.context.Animation;
+import content.data.Quests;
 
 /**
  * Represents the dialogue of the juliet NPC.
@@ -67,7 +68,7 @@ public final class JulietDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean open(Object... args) {
-		quest = player.getQuestRepository().getQuest("Romeo & Juliet");
+		quest = player.getQuestRepository().getQuest(Quests.ROMEO_JULIET);
 		npc = (NPC) args[0];
 		if (args.length > 1) {
 			cutscene = (JulietCutscenePlugin) args[1];
@@ -123,7 +124,7 @@ public final class JulietDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
-		final Quest quest = player.getQuestRepository().getQuest("Romeo & Juliet");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.ROMEO_JULIET);
 		final NPC phil = cutscene != null ? cutscene.getPhillipia() : (NPC) Repository.findNPC(3325);
 		final NPC dad = cutscene != null ? cutscene.getNPCS().get(2) : (NPC) Repository.findNPC(3324);
 		switch (stage) {

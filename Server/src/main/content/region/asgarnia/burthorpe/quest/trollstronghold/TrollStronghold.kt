@@ -1,51 +1,37 @@
 package content.region.asgarnia.burthorpe.quest.trollstronghold
 
-import content.region.asgarnia.burthorpe.quest.deathplateau.DeathPlateau
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 /**
  * Troll Stronghold Quest
  * @author ovenbread
  */
 @Initializable
-class TrollStronghold : Quest("Troll Stronghold",128, 127, 1, 317, 0, 1, 50) {
+class TrollStronghold : Quest(Quests.TROLL_STRONGHOLD,128, 127, 1, 317, 0, 1, 50) {
 
-    /**
-     *  1 - Talked to Denulth to start the quest
-     *  3 - Enter the Arena with Dad
-     *  4 - Start fighting Dad
-     *  5 - Dad surrenders or gets killed, allowed to exit the Arena
-     *  8 - Unlocks Prison Gate
-     *  9 - Unlocked Mad Eadgar's cell
-     *  10 - Unlocked Godric's cell
-     *  11 - Unlocked both Mad Eadgar's and Godric's cell
-     *  100 - Finish at Dunstan
-     */
-    companion object {
-        const val questName = "Troll Stronghold"
-    }
     override fun drawJournal(player: Player?, stage: Int) {
         super.drawJournal(player, stage)
         var line = 12
         var stage = getStage(player)
 
-        var started = getQuestStage(player!!, questName) > 0
+        var started = getQuestStage(player!!, Quests.TROLL_STRONGHOLD) > 0
 
         if(!started){
             line(player, "I can start this quest by speaking to !!Denulth?? in his tent at", line++)
             line(player, "the !!Imperial Guard camp?? in !!Burthorpe?? after completing the", line++)
-            line(player, "!!Death Plateau Quest??", line++, isQuestComplete(player, DeathPlateau.questName))
+            line(player, "!!Death Plateau Quest??", line++, isQuestComplete(player, Quests.DEATH_PLATEAU))
             line++
             line(player, "To complete this quest I need:", line++)
             line(player, "Level 15 Agility.", line++, hasLevelStat(player, Skills.AGILITY, 15))
             line(player, "I also need to be able to defeat a !!level 113 Troll??.", line++)
             line(player, "Level 30 Thieving might be useful.", line++, hasLevelStat(player, Skills.THIEVING, 30))
-            if (isQuestComplete(player, DeathPlateau.questName) && hasLevelStat(player, Skills.AGILITY, 15) && hasLevelStat(player, Skills.THIEVING, 30)) {
+            if (isQuestComplete(player, Quests.DEATH_PLATEAU) && hasLevelStat(player, Skills.AGILITY, 15) && hasLevelStat(player, Skills.THIEVING, 30)) {
                 line(player, "I have all the requirements to start this quest.", line++)
             }
         } else {

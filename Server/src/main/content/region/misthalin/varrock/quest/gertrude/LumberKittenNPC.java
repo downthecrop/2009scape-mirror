@@ -7,6 +7,7 @@ import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import content.data.Quests;
 
 /**
  * Represents the lumber kittens at the lumber yard.
@@ -77,7 +78,7 @@ public final class LumberKittenNPC extends AbstractNPC {
 
 	@Override
 	public boolean isHidden(final Player player) {
-		Quest quest = player.getQuestRepository().getQuest("Gertrude's Cat");
+		Quest quest = player.getQuestRepository().getQuest(Quests.GERTRUDES_CAT);
 		if (hidden) {
 			return true;
 		}

@@ -7,6 +7,7 @@ import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 
 class ChronozonNPC(id: Int, location: Location?) : AbstractNPC(NPCs.CHRONOZON_667, Location(3086, 9936, 0)){
@@ -72,8 +73,8 @@ class ChronozonNPC(id: Int, location: Location?) : AbstractNPC(NPCs.CHRONOZON_66
 
     override fun finalizeDeath(killer: Entity?) {
         if(killer == targetplayer) {
-            if (targetplayer.questRepository.getStage("Family Crest") != 20){
-                targetplayer.questRepository.getQuest("Family Crest").setStage(targetplayer, 20)
+            if (targetplayer.questRepository.getStage(Quests.FAMILY_CREST) != 20){
+                targetplayer.questRepository.getQuest(Quests.FAMILY_CREST).setStage(targetplayer, 20)
                 // Make sure to despawn Chronozon
                 this.clear()
             }

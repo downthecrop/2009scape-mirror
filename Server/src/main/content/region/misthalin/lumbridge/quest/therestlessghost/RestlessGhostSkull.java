@@ -1,5 +1,6 @@
 package content.region.misthalin.lumbridge.quest.therestlessghost;
 
+import content.data.Quests;
 import core.api.Container;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
@@ -42,7 +43,7 @@ public final class RestlessGhostSkull extends UseWithHandler {
 		}
 		if (removeItem(event.getPlayer(), Items.SKULL_964, Container.INVENTORY)) {
 			event.getPlayer().getPacketDispatch().sendMessage("You put the skull in the coffin.");
-			event.getPlayer().getQuestRepository().getQuest(RestlessGhost.NAME).finish(event.getPlayer());
+			event.getPlayer().getQuestRepository().getQuest(Quests.THE_RESTLESS_GHOST).finish(event.getPlayer());
 		}
 		return true;
 	}

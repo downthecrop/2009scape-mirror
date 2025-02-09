@@ -6,19 +6,20 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
+import content.data.Quests
 
 @Initializable
 class PoisonSalesman(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        options("Talk about the Murder Mystery Quest","Talk about the Fremennik Trials")
+        options("Talk about the Murder Mystery Quest","Talk about the The Fremennik Trials")
         stage = START_DIALOGUE
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        //val murderMysteryStage = player.questRepository.isComplete("Murder Mystery")
-        val fremennikTrialsStage = player.questRepository.getStage("Fremennik Trials")
+        //val murderMysteryStage = player.questRepository.isComplete(Quests.MURDER_MYSTERY)
+        val fremennikTrialsStage = player.questRepository.getStage(Quests.THE_FREMENNIK_TRIALS)
 
         when (stage) {
             START_DIALOGUE -> when (buttonId) {
@@ -26,7 +27,7 @@ class PoisonSalesman(player: Player? = null) : DialoguePlugin(player) {
                 2 -> { player("Hello."); stage = 10 }
             }
 
-            //Fremennik Trials
+            //The Fremennik Trials
             10 -> {
                 /**when (fremennikTrialsStage) {
                     0 -> { npc("Come see me if you ever need low-alcohol beer!"); stage = END_DIALOGUE }

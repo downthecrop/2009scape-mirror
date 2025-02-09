@@ -9,6 +9,7 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 /**
  * Penda Dialogue
@@ -18,7 +19,7 @@ import org.rs09.consts.NPCs
 @Initializable
 class PendaDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int) : Boolean {
-        if(isQuestComplete(player!!, "Death Plateau")) {
+        if(isQuestComplete(player!!, Quests.DEATH_PLATEAU)) {
             when (stage) {
                 START_DIALOGUE -> playerl(FacialExpression.FRIENDLY, "Hi!").also { stage = (1..5).toIntArray().random() }
                 1 -> npcl(FacialExpression.HAPPY, "I heard about what you did, thank you!").also { stage = END_DIALOGUE }

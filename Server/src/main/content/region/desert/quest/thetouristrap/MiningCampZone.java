@@ -1,5 +1,6 @@
 package content.region.desert.quest.thetouristrap;
 
+import content.data.Quests;
 import core.game.interaction.Option;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
@@ -83,7 +84,7 @@ public final class MiningCampZone extends MapZone implements Plugin<Object> {
 	 * @return {@code True} if removed.
 	 */
 	public boolean checkAnna(final Player p) {
-		final Quest quest = p.getQuestRepository().getQuest(TouristTrap.NAME);
+		final Quest quest = p.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP);
 		if (p.getAttribute("ana-delay", 0) > GameWorld.getTicks()) {
 			return false;
 		}

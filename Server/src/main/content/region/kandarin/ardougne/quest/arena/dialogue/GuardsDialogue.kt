@@ -9,6 +9,7 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 
 @Initializable
@@ -16,7 +17,7 @@ class GuardsDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (player.questRepository.getStage("Fight Arena") == 100) {
+        if (player.questRepository.getStage(Quests.FIGHT_ARENA) == 100) {
             npcl(FacialExpression.FRIENDLY, "It's you! I don't believe it. You beat the General! You are a traitor to the uniform!").also { stage = END_DIALOGUE }
         } else if (allInEquipment(player, Items.KHAZARD_HELMET_74, Items.KHAZARD_ARMOUR_75)) {
             playerl(FacialExpression.FRIENDLY, "Hello.").also { stage = 0 }
@@ -51,7 +52,7 @@ class GuardsDialogue(player: Player? = null) : DialoguePlugin(player) {
 class KhazardGuard254Dialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (player.questRepository.getStage("Fight Arena") == 100) {
+        if (player.questRepository.getStage(Quests.FIGHT_ARENA) == 100) {
             npcl(FacialExpression.FRIENDLY, "It's you! I don't believe it. You beat the General! You are a traitor to the uniform!").also { stage = END_DIALOGUE }
         } else if (allInEquipment(player, Items.KHAZARD_HELMET_74, Items.KHAZARD_ARMOUR_75)) {
             playerl(FacialExpression.FRIENDLY, "Hello.").also { stage = 0 }
@@ -95,7 +96,7 @@ class KhazardGuard254Dialogue(player: Player? = null) : DialoguePlugin(player) {
 class KhazardGuard255Dialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (player.questRepository.getStage("Fight Arena") == 100) {
+        if (player.questRepository.getStage(Quests.FIGHT_ARENA) == 100) {
             npcl(FacialExpression.FRIENDLY, "It's you! I don't believe it. You beat the General! You are a traitor to the uniform!").also { stage = END_DIALOGUE }
         } else if (allInEquipment(player, Items.KHAZARD_HELMET_74, Items.KHAZARD_ARMOUR_75)) {
             playerl(FacialExpression.FRIENDLY, "Hello.").also { stage = 0 }
@@ -130,7 +131,7 @@ class KhazardGuard256Dialogue(player: Player? = null) : DialoguePlugin(player) {
         npc = args[0] as NPC
         if (allInEquipment(player, Items.KHAZARD_HELMET_74, Items.KHAZARD_ARMOUR_75)) {
             playerl(FacialExpression.FRIENDLY, "Hello.").also { stage = 0 }
-        } else if (player.questRepository.getStage("Fight Arena") == 100) {
+        } else if (player.questRepository.getStage(Quests.FIGHT_ARENA) == 100) {
             npcl(FacialExpression.FRIENDLY, "It's you! I don't believe it. You beat the General! You are a traitor to the uniform!").also { stage = END_DIALOGUE }
         } else {
             playerl(FacialExpression.FRIENDLY, "Hi.").also { stage = 3 }

@@ -23,6 +23,7 @@ import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 import org.rs09.consts.Items;
 import org.rs09.consts.Sounds;
+import content.data.Quests;
 
 
 /**
@@ -158,11 +159,11 @@ public final class RugMerchantDialogue extends DialoguePlugin {
 			}
 			end();
 			destination = options.length == 1 ? options[0] : options[buttonId - 1];
-                        if (destination == RugDestination.UZER && !hasRequirement(player, "The Golem"))
+                        if (destination == RugDestination.UZER && !hasRequirement(player, Quests.THE_GOLEM))
                             break;
-                        else if (destination == RugDestination.BEDABIN_CAMP && !hasRequirement(player, "The Tourist Trap"))
+                        else if (destination == RugDestination.BEDABIN_CAMP && !hasRequirement(player, Quests.THE_TOURIST_TRAP))
                             break;
-                        else if (destination == RugDestination.SOPHANEM && !hasRequirement(player, "Icthlarin's Little Helper"))
+                        else if (destination == RugDestination.SOPHANEM && !hasRequirement(player, Quests.ICTHLARINS_LITTLE_HELPER))
                             break;
 			if(player.getEquipment().get(EquipmentContainer.SLOT_WEAPON) != null){
 				player.sendMessage(colorize("%RYou must unequip all your weapons before you can fly on a carpet."));

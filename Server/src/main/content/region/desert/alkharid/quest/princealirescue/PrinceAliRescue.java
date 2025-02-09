@@ -6,6 +6,7 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.ClassScanner;
+import content.data.Quests;
 
 /**
  * Represents the prince ali rescue quest.
@@ -44,7 +45,7 @@ public class PrinceAliRescue extends Quest {
 	 * Constructs a new {@Code PrinceAliRescue} {@Code Object}
 	 */
 	public PrinceAliRescue() {
-		super("Prince Ali Rescue", 24, 23, 3, 273, 0, 1, 110);
+		super(Quests.PRINCE_ALI_RESCUE, 24, 23, 3, 273, 0, 1, 110);
 	}
 
 	@Override

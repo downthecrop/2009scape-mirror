@@ -3,6 +3,7 @@ package content.region.misthalin.varrock.quest.dragonslayer;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
+import content.data.Quests;
 
 /**
  * Represents the dragon slayer npc.
@@ -39,7 +40,7 @@ public final class DSNedNPC extends AbstractNPC {
 
 	@Override
 	public boolean isHidden(final Player player) {
-		return player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) != 30 && player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) != 40;
+		return player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER).getStage(player) != 30 && player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER).getStage(player) != 40;
 	}
 
 	@Override

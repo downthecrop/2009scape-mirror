@@ -8,6 +8,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.world.map.Location;
+import content.data.Quests;
 
 /**
  * Represents the dialogue plugin used for a cave monk.
@@ -52,7 +53,7 @@ public final class CaveMonk extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest("Lost City");
+		quest = player.getQuestRepository().getQuest(Quests.LOST_CITY);
 		switch (quest.getStage(player)) {
 		case 0:
 		case 10:

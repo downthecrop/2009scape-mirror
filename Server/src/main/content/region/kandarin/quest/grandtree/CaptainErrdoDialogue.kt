@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.grandtree
 
+import content.data.Quests
 import content.global.travel.glider.Gliders
 import core.api.getQuestStage
 import core.api.teleport
@@ -10,7 +11,7 @@ import core.tools.END_DIALOGUE
 
 class CaptainErrdoDialogue: DialogueFile(){
     override fun handle(componentID: Int, buttonID: Int) {
-        when(getQuestStage(player!!, TheGrandTree.questName)){
+        when(getQuestStage(player!!, Quests.THE_GRAND_TREE)){
             55 -> {
                 if(player!!.location.regionId == 11567){
                     when(stage){

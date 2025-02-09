@@ -7,6 +7,7 @@ import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import content.data.Quests
 
 /**
  * Listener for Priest in Peril usage interactions
@@ -101,7 +102,7 @@ class PriestInPerilUseListener : InteractionListener {
                 return@onUseWith false
             }
 
-            setQuestStage(player, "Priest in Peril", 15)
+            setQuestStage(player, Quests.PRIEST_IN_PERIL, 15)
             sendMessage(player, "You have unlocked the cell door.")
 
             val npc = core.game.node.entity.npc.NPC.create(NPCs.DREZEL_7690, player.location)
@@ -117,7 +118,7 @@ class PriestInPerilUseListener : InteractionListener {
             }
 
             addItem(player, Items.BUCKET_1925)
-            setQuestStage(player, "Priest in Peril", 16)
+            setQuestStage(player, Quests.PRIEST_IN_PERIL, 16)
             sendMessage(player, "You pour the blessed water over the coffin...")
 
             return@onUseWith true

@@ -4,8 +4,8 @@ import content.global.handlers.iface.BookLine
 import content.global.handlers.iface.Page
 import content.global.handlers.iface.PageSet
 import core.game.node.entity.player.Player
-import org.rs09.consts.Vars
 import core.api.*
+import content.data.Quests
 
 /**
  * Utils for the Elemental Workshop I quest
@@ -102,6 +102,6 @@ object EWUtils {
     }
 
     fun currentStage(player: Player): Int {
-        return player.questRepository.getStage("Elemental Workshop I")
+        return player.questRepository.getStage(Quests.ELEMENTAL_WORKSHOP_I)
     }
 }

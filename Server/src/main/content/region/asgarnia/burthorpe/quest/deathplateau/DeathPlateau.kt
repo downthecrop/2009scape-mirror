@@ -5,9 +5,9 @@ import core.api.getAttribute
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
-import core.game.world.map.Location
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 /**
  * Death Plateau Quest
@@ -15,16 +15,13 @@ import org.rs09.consts.Items
  * @author ovenbread
  */
 @Initializable
-class DeathPlateau : Quest("Death Plateau",44, 43, 1, 314, 0, 1, 80) {
-    companion object {
-        const val questName = "Death Plateau"
-    }
+class DeathPlateau : Quest(Quests.DEATH_PLATEAU,44, 43, 1, 314, 0, 1, 80) {
     override fun drawJournal(player: Player?, stage: Int) {
         super.drawJournal(player, stage)
         var line = 12
         var stage = getStage(player)
 
-        var started = player?.questRepository?.getStage(questName)!! > 0
+        var started = player?.questRepository?.getStage(Quests.DEATH_PLATEAU)!! > 0
 
         if(!started){
             line(player, "I can start this quest by speaking to !!Denulth?? who is in his", line++)

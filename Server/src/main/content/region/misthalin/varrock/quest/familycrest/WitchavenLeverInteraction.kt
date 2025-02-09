@@ -11,6 +11,7 @@ import core.net.packet.out.ConstructScenery
 import core.net.packet.out.UpdateAreaPosition
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import content.data.Quests
 
 fun doDoor(player: Player, scenery: Scenery) {
     val d = if(scenery.rotation == 0 || scenery.rotation == 3) { -1 } else { 0 }
@@ -50,7 +51,7 @@ class WitchavenLeverInteraction : InteractionListener {
     override fun defineListeners() {
         on(LEVERS, IntType.SCENERY, "pull") { player, node ->
             val baseId = if(node.id % 2 == 0) { node.id - 1 } else { node.id }
-            if(player.questRepository.getQuest("Family Crest").getStage(player) == 0) {
+            if(player.questRepository.getQuest(Quests.FAMILY_CREST).getStage(player) == 0) {
                 player.sendMessage("Nothing interesting happens.")
             }
             val old = player.getAttribute("family-crest:witchaven-lever:${baseId}", false)
@@ -80,7 +81,7 @@ class WitchavenLeverInteraction : InteractionListener {
             val northA = player.getAttribute("family-crest:witchaven-lever:${NORTH_LEVER_A}", false)
             val northB = player.getAttribute("family-crest:witchaven-lever:${NORTH_LEVER_B}", false)
             val south = player.getAttribute("family-crest:witchaven-lever:${SOUTH_LEVER}", false)
-            val questComplete = player.questRepository.getQuest("Family Crest").getStage(player) >= 100
+            val questComplete = player.questRepository.getQuest(Quests.FAMILY_CREST).getStage(player) >= 100
             // Authentic door formulae from https://gitlab.com/open-runescape-classic/core/-/blob/develop/server/plugins/com/openrsc/server/plugins/authentic/quests/members/FamilyCrest.java#L575-657
             val canPass = when(node.id) {
                 NORTH_DOOR -> !northA && (south || northB)

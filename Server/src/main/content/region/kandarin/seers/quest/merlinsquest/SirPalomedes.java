@@ -5,6 +5,7 @@ import core.game.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
+import content.data.Quests;
 
 /**
  * Handles the SirPalomedes dialogue.
@@ -41,7 +42,7 @@ public class SirPalomedes extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 0:
-			Quest quest = player.getQuestRepository().getQuest("Merlin's Crystal");
+			Quest quest = player.getQuestRepository().getQuest(Quests.MERLINS_CRYSTAL);
 			if (quest.getStage(player) == 100) {
 				interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Congratulations on freeing Merlin!");
 				stage = 20;

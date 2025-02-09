@@ -1,6 +1,6 @@
 package content.region.kandarin.ardougne.quest.arena.dialogue
 
-import content.region.kandarin.ardougne.quest.arena.FightArena
+import content.data.Quests
 import content.region.kandarin.ardougne.quest.arena.cutscenes.EscapeCutscene
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -13,7 +13,7 @@ class JeremyServilADialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.JEREMY_SERVIL_265)
-        when (getQuestStage(player!!, FightArena.FightArenaQuest)) {
+        when (getQuestStage(player!!, Quests.FIGHT_ARENA)) {
 
             20 -> when (stage) {
                 0 -> {
@@ -29,7 +29,7 @@ class JeremyServilADialogue : DialogueFile() {
                 4 -> playerl(FacialExpression.FRIENDLY, "Don't lose heart, I'll be back.").also { stage++ }
                 5 -> {
                     end()
-                    setQuestStage(player!!, FightArena.FightArenaQuest, 40)
+                    setQuestStage(player!!, Quests.FIGHT_ARENA, 40)
                 }
             }
 

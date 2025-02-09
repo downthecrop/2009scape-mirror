@@ -24,6 +24,7 @@ import org.rs09.consts.Sounds;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import content.data.Quests;
 
 /**
  * A class used to craft runes.
@@ -102,15 +103,15 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
     @Override
     public boolean checkRequirements() {
         if (altar == Altar.ASTRAL) {
-            if (!hasRequirement(player, "Lunar Diplomacy"))
+            if (!hasRequirement(player, Quests.LUNAR_DIPLOMACY))
                 return false;
         }
         if (altar == Altar.DEATH) {
-            if (!hasRequirement(player, "Mourning's End Part II"))
+            if (!hasRequirement(player, Quests.MOURNINGS_END_PART_II))
                 return false;
         }
         if (altar == Altar.BLOOD) {
-            if (!hasRequirement(player, "Legacy of Seergaze"))
+            if (!hasRequirement(player, Quests.LEGACY_OF_SEERGAZE))
                 return false;
         }
         if (!altar.isOurania() && getDynLevel(player, Skills.RUNECRAFTING) < rune.getLevel()) {

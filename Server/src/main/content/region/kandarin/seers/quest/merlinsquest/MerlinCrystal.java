@@ -3,8 +3,8 @@ package content.region.kandarin.seers.quest.merlinsquest;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.plugin.Initializable;
-import content.region.kandarin.seers.quest.merlinsquest.TheLadyOfTheLake;
 import core.plugin.ClassScanner;
+import content.data.Quests;
 
 /**
  * Represents the merlin's crystal quest.
@@ -17,7 +17,7 @@ public final class MerlinCrystal extends Quest {
 	 * Constructs a new {@code MerlinCrystal} {@code Object}.
 	 */
 	public MerlinCrystal() {
-		super("Merlin's Crystal", 87, 86, 6, 14, 0, 1, 7);
+		super(Quests.MERLINS_CRYSTAL, 87, 86, 6, 14, 0, 1, 7);
 	}
 
 	@Override

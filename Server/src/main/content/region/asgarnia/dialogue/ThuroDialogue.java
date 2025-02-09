@@ -8,6 +8,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.plugin.Initializable;
 import core.game.node.item.Item;
+import content.data.Quests;
 
 /**
  * Represents the dialogue plugin used for thurgo.
@@ -77,7 +78,7 @@ public final class ThuroDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest("The Knight's Sword");
+		quest = player.getQuestRepository().getQuest(Quests.THE_KNIGHTS_SWORD);
 		player.removeAttribute("thurgo:1");
 		switch (quest.getStage(player)) {
 		default:

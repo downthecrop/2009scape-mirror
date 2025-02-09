@@ -13,6 +13,7 @@ import org.rs09.consts.NPCs
 import core.game.dialogue.IfTopic
 import core.game.dialogue.Topic
 import core.tools.END_DIALOGUE
+import content.data.Quests
 
 @Initializable
 class LumbridgeGuideDialogue(player: Player? = null) : DialoguePlugin(player) {
@@ -23,8 +24,8 @@ class LumbridgeGuideDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val staff = player.isStaff
         val ironman = player.ironmanManager.isIronman
-        val sheepShearerComplete = isQuestComplete(player, "Sheep Shearer")
-        val cooksAssistantComplete = isQuestComplete(player, "Cook's Assistant")
+        val sheepShearerComplete = isQuestComplete(player, Quests.SHEEP_SHEARER)
+        val cooksAssistantComplete = isQuestComplete(player, Quests.COOKS_ASSISTANT)
 
         when (stage) {
             0 -> npcl(FacialExpression.FRIENDLY, "Greetings, adventurer. I am Phileas, the Lumbridge Guide. I am here to give information and directions to new players. Do you require any help?").also { stage++ }

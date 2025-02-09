@@ -5,6 +5,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.game.node.entity.player.link.quest.Quest;
+import content.data.Quests;
 
 /**
  * Represents the oracle dialogue plugin related to dragon slayer.
@@ -43,7 +44,7 @@ public final class OracleDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest("Dragon Slayer");
+		quest = player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER);
 		switch (quest.getStage(player)) {
 		case 20:
 			player("I seek a piece of the map to the island of Crandor.");

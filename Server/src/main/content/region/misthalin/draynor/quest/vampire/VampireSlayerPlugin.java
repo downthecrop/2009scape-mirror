@@ -11,6 +11,7 @@ import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import content.data.Quests;
 
 /**
  * Represents the plugin to handle vampire slayer node handling.
@@ -51,7 +52,7 @@ public final class VampireSlayerPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final Quest quest = player.getQuestRepository().getQuest("Vampire Slayer");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.VAMPIRE_SLAYER);
 		switch (option) {
 		case "open":
 			int id = ((Scenery) node).getId();

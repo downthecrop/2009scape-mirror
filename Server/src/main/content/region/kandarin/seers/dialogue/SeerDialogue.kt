@@ -9,7 +9,6 @@ import core.api.isQuestInProgress
 import core.api.openDialogue
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
-import core.game.dialogue.IfTopic
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
@@ -17,6 +16,7 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import org.rs09.consts.NPCs
 import core.game.dialogue.Topic
+import content.data.Quests
 
 
 
@@ -47,12 +47,12 @@ class SeerDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val scorpionCatcherQuestStage = getQuestStage(player, "Scorpion Catcher")
+        val scorpionCatcherQuestStage = getQuestStage(player, Quests.SCORPION_CATCHER)
         when (stage) {
             START_DIALOGUE ->
                 npcl(FacialExpression.NEUTRAL, "Anyway, sorry about that.").also { stage++ }
             START_DIALOGUE+1 -> {
-                if (isQuestInProgress(player, "Scorpion Catcher", 1, 99)) {
+                if (isQuestInProgress(player, Quests.SCORPION_CATCHER, 1, 99)) {
                     showTopics(
                         Topic("Talk about Scorpion Catcher.", SC_QUEST, true),
                         Topic("Talk about Achievement Diary.", DIARY, true)

@@ -5,6 +5,7 @@ import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.plugin.Plugin;
+import content.data.Quests;
 
 /**
  * Represents the plugin used to send the cabbage down the hole.
@@ -29,7 +30,7 @@ public class BKCabbagePlugin extends UseWithHandler {
 	@Override
 	public boolean handle(NodeUsageEvent event) {
 		final Player player = event.getPlayer();
-		final Quest quest = player.getQuestRepository().getQuest("Black Knights' Fortress");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.BLACK_KNIGHTS_FORTRESS);
 		if (quest.getStage(player) == 20) {
 			if (event.getUsedItem().getId() == 1967) {
 				player.getDialogueInterpreter().sendDialogue("This is the wrong sort of cabbage!");

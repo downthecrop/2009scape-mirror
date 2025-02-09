@@ -9,6 +9,7 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import org.rs09.consts.Scenery
+import content.data.Quests
 
 class EvilChickenLairListener: InteractionListener {
     override fun defineListeners() {
@@ -17,7 +18,7 @@ class EvilChickenLairListener: InteractionListener {
         addClimbDest(Location.create(2455, 4380, 0), Location.create(2441, 4381, 0))
 
         onUseWith(IntType.SCENERY, Items.RAW_CHICKEN_2138, Scenery.CHICKEN_SHRINE_12093) { player, _, _ ->
-            if (!hasRequirement(player, "Legend's Quest"))
+            if (!hasRequirement(player, Quests.LEGENDS_QUEST))
                 return@onUseWith false
 
             if(removeItem(player,(Item(Items.RAW_CHICKEN_2138)))){

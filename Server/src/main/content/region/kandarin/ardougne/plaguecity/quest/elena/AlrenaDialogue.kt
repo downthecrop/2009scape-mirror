@@ -9,13 +9,14 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 @Initializable
 class AlrenaDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (player.questRepository.getStage("Plague City") == 1) {
+        if (player.questRepository.getStage(Quests.PLAGUE_CITY) == 1) {
             playerl(FacialExpression.FRIENDLY, "Hello, Edmond has asked me to help find your daughter.").also { stage++ }
         } else {
             playerl(FacialExpression.FRIENDLY, "Hello Madam.").also { stage++ }
@@ -24,7 +25,7 @@ class AlrenaDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
-        when (getQuestStage(player!!, PlagueCity.PlagueCityQuest)) {
+        when (getQuestStage(player!!, Quests.PLAGUE_CITY)) {
 
             0 -> when (stage) {
                 1 -> npcl(FacialExpression.NEUTRAL, "Oh, hello there.").also { stage++ }
@@ -49,7 +50,7 @@ class AlrenaDialogue(player: Player? = null) : DialoguePlugin(player) {
                 7 -> {
                     end()
                     addItem(player!!, Items.GAS_MASK_1506)
-                    setQuestStage(player!!, "Plague City", 2)
+                    setQuestStage(player!!, Quests.PLAGUE_CITY, 2)
                     setAttribute(player!!, PlagueCityListeners.BUCKET_USES_ATTRIBUTE, 0)
                     sendNPCDialogue(player!!, NPCs.ALRENA_710, "I'll make a spare mask. I'll hide it in the wardrobe in case the mourners come in.")
                 }

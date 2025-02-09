@@ -8,6 +8,7 @@ import core.game.node.item.Item;
 import org.rs09.consts.Items;
 
 import static core.api.ContentAPIKt.*;
+import content.data.Quests;
 
 
 /**
@@ -26,7 +27,7 @@ public class WolfWhistle extends Quest {
 	 * Constructs a new {@code WolfWhistle} {@code Object}.
      */
 	public WolfWhistle() {
-		super("Wolf Whistle", 146, 145, 1);
+		super(Quests.WOLF_WHISTLE, 146, 145, 1);
 	}
 
 	@Override

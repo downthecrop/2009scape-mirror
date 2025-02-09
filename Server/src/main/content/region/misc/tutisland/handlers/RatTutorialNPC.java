@@ -8,6 +8,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.world.map.Location;
+import content.data.Quests;
 
 /**
  * Handles the tutorial rat npc.
@@ -65,7 +66,7 @@ public class RatTutorialNPC extends AbstractNPC {
 		}
 		final Player p = ((Player) killer);
 		if (killer instanceof Player) {
-			if (p.getQuestRepository().getQuest("Witch's Potion").isStarted(p)) {
+			if (p.getQuestRepository().getQuest(Quests.WITCHS_POTION).isStarted(p)) {
 				GroundItemManager.create(new Item(300), getLocation(), p);
 			}
 		}

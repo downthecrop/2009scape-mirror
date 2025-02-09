@@ -13,6 +13,7 @@ import core.plugin.Plugin;
 
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_ALKHARID_GATE;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_BASE;
+import content.data.Quests;
 
 @Initializable
 public class TollGateOptionPlugin extends OptionHandler {
@@ -20,7 +21,7 @@ public class TollGateOptionPlugin extends OptionHandler {
 	@Override
 	public boolean handle(Player player, Node node, String option) {
 		if (option.equals("pay-toll(10gp)")) {
-			if (player.getQuestRepository().getQuest("Prince Ali Rescue").getStage(player) > 50) {
+			if (player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE).getStage(player) > 50) {
 				player.getPacketDispatch().sendMessage("The guards let you through for free.");
 				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 			} else {

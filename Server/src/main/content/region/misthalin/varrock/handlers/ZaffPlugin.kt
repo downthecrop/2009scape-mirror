@@ -17,6 +17,7 @@ import org.json.simple.JSONObject
 import org.rs09.consts.Items
 import core.ServerStore
 import core.ServerStore.Companion.getInt
+import content.data.Quests
 
 /**
  * Represents the plugin used for buying a battle staff from zeke.
@@ -70,7 +71,7 @@ class ZaffPlugin : OptionHandler() {
 
         override fun open(vararg args: Any): Boolean {
             npc = args[0] as NPC
-            quest = player.questRepository.getQuest("What Lies Below")
+            quest = player.questRepository.getQuest(Quests.WHAT_LIES_BELOW)
             interpreter.sendDialogues(
                 npc,
                 core.game.dialogue.FacialExpression.HALF_GUILTY,

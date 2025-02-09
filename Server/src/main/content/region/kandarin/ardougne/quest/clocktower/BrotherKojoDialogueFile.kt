@@ -1,5 +1,6 @@
 package content.region.kandarin.ardougne.quest.clocktower
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
@@ -22,7 +23,7 @@ class BrotherKojoDialogueFile : DialogueFile() {
             }
             return
         }
-        when (getQuestStage(player!!, ClockTower.questName)) {
+        when (getQuestStage(player!!, Quests.CLOCK_TOWER)) {
             0 -> {
                 when (stage) {
                     START_DIALOGUE -> player(FacialExpression.FRIENDLY, "Hello monk.").also { stage++ }
@@ -49,7 +50,7 @@ class BrotherKojoDialogueFile : DialogueFile() {
                     32 -> player(FacialExpression.FRIENDLY, "Well, I'll do my best.").also { stage++ }
                     33 -> npcl(FacialExpression.HAPPY, "Thank you again! And remember to be careful, the cellar is full of strange beasts!").also {
                         stage = END_DIALOGUE
-                        setQuestStage(player!!, ClockTower.questName, 1)
+                        setQuestStage(player!!, Quests.CLOCK_TOWER, 1)
                     }
                 }
             }
@@ -93,7 +94,7 @@ class BrotherKojoDialogueFile : DialogueFile() {
                     2 -> npcl(FacialExpression.FRIENDLY, "The townsfolk will all be able to know the correct time now! Thank you so much for all of your help! And as promised, here is your reward!").also { stage++ }
                     3 -> {
                         end()
-                        finishQuest(player!!, ClockTower.questName)
+                        finishQuest(player!!, Quests.CLOCK_TOWER)
                     }
                 }
             }

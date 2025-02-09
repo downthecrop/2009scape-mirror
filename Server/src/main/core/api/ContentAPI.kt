@@ -1,6 +1,7 @@
 package core.api
 
 import com.moandjiezana.toml.Toml
+import content.data.Quests
 import content.data.consumables.*
 import content.data.skill.SkillingTool
 import content.global.handlers.iface.ge.StockMarket
@@ -1909,14 +1910,14 @@ fun getQuestPoints(player: Player): Int {
 /**
  * Gets the stage for the given quest for the given player
  */
-fun getQuestStage(player: Player, quest: String): Int {
+fun getQuestStage(player: Player, quest: Quests): Int {
     return player.questRepository.getStage(quest)
 }
 
 /**
  * Sets the stage for the given quest for the given player
  */
-fun setQuestStage(player: Player, quest: String, stage: Int) {
+fun setQuestStage(player: Player, quest: Quests, stage: Int) {
     player.questRepository.setStage(QuestRepository.getQuests()[quest]!!, stage)
     player.questRepository.syncronizeTab(player)
 }
@@ -1924,14 +1925,14 @@ fun setQuestStage(player: Player, quest: String, stage: Int) {
 /**
  * Check if a quest is in progress
  */
-fun isQuestInProgress(player: Player, quest: String, startStage: Int, endStage: Int): Boolean {
+fun isQuestInProgress(player: Player, quest: Quests, startStage: Int, endStage: Int): Boolean {
     return player.questRepository.getStage(quest) in startStage..endStage
 }
 
 /**
  * Check if a quest is complete
  */
-fun isQuestComplete(player: Player, quest: String): Boolean {
+fun isQuestComplete(player: Player, quest: Quests): Boolean {
     return player.questRepository.getStage(quest) == 100
 }
 
@@ -1941,7 +1942,7 @@ fun isQuestComplete(player: Player, quest: String): Boolean {
  * @param quest The quest name string
  * @return the quest object
  */
-fun getQuest(player: Player, quest: String): Quest {
+fun getQuest(player: Player, quest: Quests): Quest {
     return player.questRepository.getQuest(quest)
 }
 
@@ -1949,7 +1950,7 @@ fun getQuest(player: Player, quest: String): Quest {
 /**
  * Check if a player meets the requirements to start a quest, and then starts it if they do. Returns success bool
  */
-fun startQuest(player: Player, quest: String): Boolean {
+fun startQuest(player: Player, quest: Quests): Boolean {
     val quest = player.questRepository.getQuest(quest)
     val canStart = quest.hasRequirements(player)
     if (!canStart) return false
@@ -1960,7 +1961,7 @@ fun startQuest(player: Player, quest: String): Boolean {
 /**
  * Finishes a quest, gives rewards, marks as completed, etc
  */
-fun finishQuest(player: Player, quest: String) {
+fun finishQuest(player: Player, quest: Quests) {
     player.questRepository.getQuest(quest).finish(player)
 }
 
@@ -2078,7 +2079,7 @@ fun announceIfRare(player: Player, item: Item) {
     }
 }
 
-fun hasRequirement (player: Player, req: QuestReq, message: Boolean = true) : Boolean {
+fun hasRequirement(player: Player, req: QuestReq, message: Boolean = true) : Boolean {
     var (isMet, unmetReqs) = req.evaluate(player)
     val messageList = ArrayList<String>()
 
@@ -2099,9 +2100,9 @@ fun hasRequirement (player: Player, req: QuestReq, message: Boolean = true) : Bo
     if (isMet) return true
     
     if (unmetReqs.size == 2 && unmetReqs[0] is QuestReq) {
-        messageList.add ("This requires completion of ${(unmetReqs[0] as QuestReq).questReq.questName} to access.")
+        messageList.add ("This requires completion of ${(unmetReqs[0] as QuestReq).questReq.quest} to access.")
     } else {
-        messageList.add ("You need the pre-reqs for ${req.questReq.questName} to access this.")
+        messageList.add ("You need the pre-reqs for ${req.questReq.quest} to access this.")
         messageList.add ("Please check the page in your quest journal for more info.")
     }
 
@@ -2113,8 +2114,8 @@ fun hasRequirement (player: Player, req: QuestReq, message: Boolean = true) : Bo
 }
 
 @JvmOverloads
-fun hasRequirement (player: Player, quest: String, message: Boolean = true) : Boolean {
-    val questReq = QuestRequirements.values().filter { it.questName.equals(quest, true) }.firstOrNull() ?: return false
+fun hasRequirement(player: Player, quest: Quests, message: Boolean = true) : Boolean {
+    val questReq = QuestRequirements.values().firstOrNull { it.quest == quest } ?: return false
     return hasRequirement(player, QuestReq(questReq), message)
 }
 
@@ -2809,15 +2810,15 @@ fun getCredits(player: Player) : Int {
 }
 
 /**
- * Asserts that a quest is required, and sends the player "You must have completed the $questName quest $message"
+ * Asserts that a quest is required, and sends the player "You must have completed the $quest quest $message"
  * @param player the player we are checking
- * @param questName the name of the quest we are checking for
- * @param message the text appended to "You must have completed the $questName quest ..." if the quest is not complete.
+ * @param quest the quest we are checking for
+ * @param message the text appended to "You must have completed the $quest quest ..." if the quest is not complete.
  * @return whether or not the quest has been completed
  */
-fun requireQuest(player: Player, questName: String, message: String) : Boolean {
-    if (!isQuestComplete(player, questName)) {
-        sendMessage(player, "You must have completed the $questName quest $message")
+fun requireQuest(player: Player, quest: Quests, message: String) : Boolean {
+    if (!isQuestComplete(player, quest)) {
+        sendMessage(player, "You must have completed the $quest quest $message")
         return false
     }
     return true

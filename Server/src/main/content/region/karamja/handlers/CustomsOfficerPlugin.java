@@ -7,6 +7,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import content.data.Quests;
 
 /**
  * Represents the customs officer plugin.
@@ -25,7 +26,7 @@ public final class CustomsOfficerPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		if (!player.getQuestRepository().isComplete("Pirate's Treasure")) {
+		if (!player.getQuestRepository().isComplete(Quests.PIRATES_TREASURE)) {
 			player.getDialogueInterpreter().open(((NPC) node).getId(), ((NPC) node));
 			player.getPacketDispatch().sendMessage("You may only use the Pay-fare option after completing Pirate's Treasure.");
 			return true;

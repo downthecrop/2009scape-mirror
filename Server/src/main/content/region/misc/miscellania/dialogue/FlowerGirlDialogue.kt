@@ -22,7 +22,7 @@ class FlowerGirlDialogue(player: Player? = null) : DialoguePlugin(player){
 
         //issues getting throne of miscellania status
         /*
-        when (player.questRepository.getQuest("Throne of Miscellania").isCompleted(player)) {
+        when (player.questRepository.getQuest(Quests.THRONE_OF_MISCELLANIA).isCompleted(player)) {
             true -> npc(FacialExpression.HAPPY, "Good day, Your Royal Highness.").also { stage = 1 }
             false -> npc(FacialExpression.NEUTRAL, "Hello.").also { stage = 1 }
         }
@@ -39,7 +39,7 @@ class FlowerGirlDialogue(player: Player? = null) : DialoguePlugin(player){
 
             2 -> {
                 /*
-                when (player.questRepository.getQuest("Throne of Miscellania").isCompleted(player)) {
+                when (player.questRepository.getQuest(Quests.THRONE_OF_MISCELLANIA).isCompleted(player)) {
                     true -> npc(FacialExpression.HAPPY, "I'm selling flowers, 15gp for three. Would you like some, Your Highness?").also { stage++ }
                     false -> npc(FacialExpression.NEUTRAL, "I'm selling flowers, 15gp for three. Would you like some?").also { stage++ }
                 }

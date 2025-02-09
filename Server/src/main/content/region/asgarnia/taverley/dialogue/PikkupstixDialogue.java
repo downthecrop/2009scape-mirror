@@ -11,6 +11,7 @@ import core.plugin.Initializable;
 import core.game.node.item.Item;
 
 import static core.api.ContentAPIKt.*;
+import content.data.Quests;
 
 /**
  * Handles the PikkupstixDialogue dialogue.
@@ -85,7 +86,7 @@ public final class PikkupstixDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest("Wolf Whistle");
+		quest = player.getQuestRepository().getQuest(Quests.WOLF_WHISTLE);
 		switch (quest.getStage(player)) {
 		case 0:
 			npc("You there! What are you doing here, as if I didn't have", "enough troubles?");

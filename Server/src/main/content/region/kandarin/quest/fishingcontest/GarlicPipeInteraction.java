@@ -13,6 +13,7 @@ import core.plugin.Plugin;
 import org.rs09.consts.Items;
 import core.game.interaction.PluginInteraction;
 import core.game.interaction.PluginInteractionManager;
+import content.data.Quests;
 
 @Initializable
 public class GarlicPipeInteraction extends PluginInteraction {
@@ -31,7 +32,7 @@ public class GarlicPipeInteraction extends PluginInteraction {
             Scenery usedWith = event.getUsedWith().asScenery();
             Item used = event.getUsedItem();
 
-            if(used.getId() == Items.GARLIC_1550 && usedWith.getId() == 41 && usedWith.getLocation().equals(Location.create(2638, 3446, 0)) && player.getQuestRepository().getStage("Fishing Contest") > 0){
+            if(used.getId() == Items.GARLIC_1550 && usedWith.getId() == 41 && usedWith.getLocation().equals(Location.create(2638, 3446, 0)) && player.getQuestRepository().getStage(Quests.FISHING_CONTEST) > 0){
                 player.getPulseManager().run(new MovementPulse(player, usedWith.getLocation().transform(0, -1, 0)) {
                     @Override
                     public boolean pulse() {

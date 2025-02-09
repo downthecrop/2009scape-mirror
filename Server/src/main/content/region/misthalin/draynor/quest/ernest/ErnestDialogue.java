@@ -5,6 +5,7 @@ import core.game.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC;
 import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
+import content.data.Quests;
 
 /**
  * Represents the dialogue which handles the interaction with ernest.
@@ -73,12 +74,12 @@ public final class ErnestDialogue extends DialoguePlugin {
 	 * Method used to finish the quest.
 	 */
 	public void finish() {
-		if (player.getQuestRepository().isComplete("Ernest the Chicken")) {
+		if (player.getQuestRepository().isComplete(Quests.ERNEST_THE_CHICKEN)) {
 			npc.clear();
 			return;
 		}
 		npc.clear();
-		player.getQuestRepository().getQuest("Ernest the Chicken").finish(player);
+		player.getQuestRepository().getQuest(Quests.ERNEST_THE_CHICKEN).finish(player);
 	}
 
 	@Override

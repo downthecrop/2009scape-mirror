@@ -5,6 +5,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
+import content.data.Quests;
 import content.region.asgarnia.burthorpe.quest.heroesquest.StravenDialogueFile;
 
 import static core.api.ContentAPIKt.openDialogue;
@@ -46,11 +47,11 @@ public class StravenDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest("Shield of Arrav");
+		quest = player.getQuestRepository().getQuest(Quests.SHIELD_OF_ARRAV);
 		switch (quest.getStage(player)) {
 		case 100:
 			if (ShieldofArrav.isPhoenix(player)) {
-				Quest heroesQuest = player.getQuestRepository().getQuest("Heroes' Quest");
+				Quest heroesQuest = player.getQuestRepository().getQuest(Quests.HEROES_QUEST);
 				if (0 < heroesQuest.getStage(player) && heroesQuest.getStage(player) < 100) {
 					openDialogue(player, new StravenDialogueFile(), npc);
 					break;

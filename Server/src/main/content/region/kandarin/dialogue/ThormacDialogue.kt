@@ -11,6 +11,7 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 @Initializable
 class ThormacDialogue(player: Player? = null) : DialoguePlugin(player) {
@@ -25,11 +26,11 @@ class ThormacDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (isQuestComplete(player, "Scorpion Catcher")){
+        if (isQuestComplete(player, Quests.SCORPION_CATCHER)){
             npc(FacialExpression.HAPPY, "Thank you for rescuing my scorpions.").also {stage = COMPLETED_QUEST}
         }
         else{
-            openDialogue(player, SCThormacDialogue(getQuestStage(player, "Scorpion Catcher")), npc)
+            openDialogue(player, SCThormacDialogue(getQuestStage(player, Quests.SCORPION_CATCHER)), npc)
         }
         return true
     }

@@ -7,6 +7,7 @@ import content.region.fremennik.rellekka.handlers.RellekkaDestination;
 import content.region.fremennik.rellekka.handlers.RellekkaUtils;
 
 import static core.api.ContentAPIKt.hasRequirement;
+import content.data.Quests;
 
 /**
  * Handles the maria gunnars dialogue.
@@ -65,7 +66,7 @@ public class MariaGunnarsDialogue extends DialoguePlugin {
 			break;
 		case 3:
 			end();
-                        if (!hasRequirement(player, "Fremennik Trials"))
+                        if (!hasRequirement(player, Quests.THE_FREMENNIK_TRIALS))
                             break;
 			if (npc.getId() == 5508) {
 				RellekkaUtils.sail(player, RellekkaDestination.RELLEKKA_TO_NEITIZNOT);

@@ -14,6 +14,7 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import content.data.Quests;
 
 /**
  * Represents the plugin used for handling a lumber yard crate.
@@ -30,7 +31,7 @@ public final class LumberYardCratePlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final Quest quest = player.getQuestRepository().getQuest("Gertrude's Cat");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.GERTRUDES_CAT);
 		switch (option) {
 		case "squeeze-under":
 			Location dest = null;

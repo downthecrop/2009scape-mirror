@@ -5,6 +5,7 @@ import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
+import content.data.Quests
 
 @Initializable
 class OlafTheBard(player: Player? = null) : DialoguePlugin(player){
@@ -43,12 +44,12 @@ class OlafTheBard(player: Player? = null) : DialoguePlugin(player){
             stage = 1000
             return true
         }
-        else if(player.questRepository.isComplete("Fremennik Trials")){
+        else if(player.questRepository.isComplete(Quests.THE_FREMENNIK_TRIALS)){
             npcl(FacialExpression.HAPPY,"Hello again to you, ${player.getAttribute("fremennikname","schlonko")}. Us bards should stick together, what can I do for you?")
             stage = 98
             return true
         }
-        else if(player.questRepository.hasStarted("Fremennik Trials")){
+        else if(player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS)){
             npc("Hello? Yes? You want something outerlander?")
             stage = 0
             return true

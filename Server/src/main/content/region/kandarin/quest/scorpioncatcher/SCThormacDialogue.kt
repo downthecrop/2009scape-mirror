@@ -9,6 +9,7 @@ import core.api.*
 import core.game.dialogue.Topic
 import core.game.node.item.Item
 import org.rs09.consts.Items
+import content.data.Quests
 
 class SCThormacDialogue(val questStage: Int) : DialogueFile() {
 
@@ -60,7 +61,7 @@ class SCThormacDialogue(val questStage: Int) : DialogueFile() {
             WHY_SHOULD_I_START -> npcl(FacialExpression.WORRIED, "Well I suppose I can aid you with my skills as a staff sorcerer. " +
                     "Most battlestaffs around here are a bit puny. I can beef them up for you a bit.").also {
                         // Need to recheck the quest stage since it may have been changed in this dialogue
-                        if(getQuestStage(player!!, "Scorpion Catcher") == 0) stage++
+                        if(getQuestStage(player!!, Quests.SCORPION_CATCHER) == 0) stage++
                         else stage = END_DIALOGUE
                     }
             WHY_SHOULD_I_START+1 -> showTopics(
@@ -75,7 +76,7 @@ class SCThormacDialogue(val questStage: Int) : DialogueFile() {
                     }
             HOW_TO_CATCH+1 -> {
                 sendItemDialogue(player!!, Items.SCORPION_CAGE_456, "Thormac gives you a cage.").also { stage++ }
-                startQuest(player!!, "Scorpion Catcher")
+                startQuest(player!!, Quests.SCORPION_CATCHER)
                 addItem(player!!, Items.SCORPION_CAGE_456)
             }
             HOW_TO_CATCH+2 -> npcl(FacialExpression.WORRIED, "If you go up to the village of Seers, to the North of " +
@@ -122,7 +123,7 @@ class SCThormacDialogue(val questStage: Int) : DialogueFile() {
                 player!!.removeAttribute("scorpion_catcher:caught_monk")
             }
             GOT_THEM_ALL+2 ->{
-                end().also { finishQuest(player!!, "Scorpion Catcher") }
+                end().also { finishQuest(player!!, Quests.SCORPION_CATCHER) }
             }
 
 

@@ -4,6 +4,7 @@ import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
+import content.data.Quests;
 
 /**
  * Represents the dialogue which handles the weapons master.
@@ -42,7 +43,7 @@ public final class WeaponsMasterDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest("Shield of Arrav");
+		quest = player.getQuestRepository().getQuest(Quests.SHIELD_OF_ARRAV);
 		switch (quest.getStage(player)) {
 		default:
 			if (args.length > 1) {

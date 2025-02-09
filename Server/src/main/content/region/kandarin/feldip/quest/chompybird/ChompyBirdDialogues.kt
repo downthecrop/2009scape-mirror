@@ -18,6 +18,7 @@ import core.game.node.item.Item
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
+import content.data.Quests
 
 @Initializable
 class RantzDialogue(player: Player? = null) : DialoguePlugin(player) {
@@ -32,7 +33,7 @@ class RantzDialogue(player: Player? = null) : DialoguePlugin(player) {
   override fun open(vararg args: Any?) : Boolean {
     npc = args[0] as NPC
 
-    val chompyBird = player.questRepository.getQuest("Big Chompy Bird Hunting")
+    val chompyBird = player.questRepository.getQuest(Quests.BIG_CHOMPY_BIRD_HUNTING)
     val chompyStage = chompyBird.getStage(player)
 
     val hasOgreBow = inInventory(player, Items.OGRE_BOW_2883) || inEquipment(player, Items.OGRE_BOW_2883) || inBank(player, Items.OGRE_BOW_2883)
@@ -142,7 +143,7 @@ class BugsDialogue(player: Player? = null) : DialoguePlugin(player) {
   override fun open(vararg args: Any?) : Boolean {
     npc = args[0] as NPC
 
-    val chompyBird = player.questRepository.getQuest("Big Chompy Bird Hunting")
+    val chompyBird = player.questRepository.getQuest(Quests.BIG_CHOMPY_BIRD_HUNTING)
     val chompyStage = chompyBird.getStage(player)
 
     when (chompyStage) {
@@ -172,7 +173,7 @@ class FycieDialogue(player: Player? = null) : DialoguePlugin(player) {
   override fun open(vararg args: Any?) : Boolean {
     npc = args[0] as NPC
 
-    val chompyBird = player.questRepository.getQuest("Big Chompy Bird Hunting")
+    val chompyBird = player.questRepository.getQuest(Quests.BIG_CHOMPY_BIRD_HUNTING)
     val chompyStage = chompyBird.getStage(player)
 
     when (chompyStage) {

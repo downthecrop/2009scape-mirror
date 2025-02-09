@@ -3,17 +3,16 @@ package content.region.asgarnia.burthorpe.quest.deathplateau
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
-import core.game.node.entity.npc.NPC
 import core.game.node.item.Item
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import org.rs09.consts.Items
-import org.rs09.consts.NPCs
+import content.data.Quests
 
 class DunstanDialogueFile : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, DeathPlateau.questName)) {
+        when (getQuestStage(player!!, Quests.DEATH_PLATEAU)) {
             21 -> {
                 when (stage) {
                     START_DIALOGUE -> playerl(FacialExpression.FRIENDLY, "Hi!").also { stage++ }
@@ -29,7 +28,7 @@ class DunstanDialogueFile : DialogueFile() {
                     10 -> npcl(FacialExpression.FRIENDLY, "My son has just turned 16 and I'd very much like him to join the Imperial Guard. The Prince's elite forces are invite only so it's very unlikely he'll get in. If you can arrange that you have a deal!").also { stage++ }
                     11 -> playerl(FacialExpression.FRIENDLY, "That won't be a problem as I'm helping out the Imperial Guard!").also { stage++ }
                     12 -> npcl(FacialExpression.FRIENDLY, "Excellent! You'll need to bring an Iron bar for the spikes!").also {
-                        setQuestStage(player!!, "Death Plateau", 22)
+                        setQuestStage(player!!, Quests.DEATH_PLATEAU, 22)
                         stage = END_DIALOGUE
                     }
                 }
@@ -60,7 +59,7 @@ class DunstanDialogueFile : DialogueFile() {
 
                     5 -> npcl(FacialExpression.FRIENDLY, "Thank you!").also {
                         // Jumps to the next stage immediately in one continuous dialogue (questStage 24, stage 2).
-                        setQuestStage(player!!, "Death Plateau", 24)
+                        setQuestStage(player!!, Quests.DEATH_PLATEAU, 24)
                         stage = 2
                     }
                 }

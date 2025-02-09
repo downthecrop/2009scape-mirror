@@ -1,5 +1,6 @@
 package content.region.kandarin.quest.dwarfcannon;
 
+import content.data.Quests;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
@@ -17,7 +18,6 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.tools.Log;
-import core.tools.SystemLogger;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -61,14 +61,14 @@ public class DwarfCannonPlugin extends OptionHandler {
 			@Override
 			public boolean handle(NodeUsageEvent event) {
 				final Player player = event.getPlayer();
-				final Quest quest = player.getQuestRepository().getQuest(DwarfCannon.NAME);
+				final Quest quest = player.getQuestRepository().getQuest(Quests.DWARF_CANNON);
 				if (quest.getStage(player) > 50) {
 					player.getDialogueInterpreter().sendDialogues(player, null, "This should work nicely now that I've fixed it.");
 					return true;
 				}
 				//setVarp(player, 1, 2041, true);
                                 setVarp(player, 0, 8, true);
-				player.getQuestRepository().getQuest(DwarfCannon.NAME).setStage(player, 60);
+				player.getQuestRepository().getQuest(Quests.DWARF_CANNON).setStage(player, 60);
 				player.sendMessage("Well done! You've fixed the cannon! Better go and tell Captain Lawgof.");
 				/*
 				 * Component component = new Component(409);
@@ -85,7 +85,7 @@ public class DwarfCannonPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, final Node node, String option) {
-		final Quest quest = player.getQuestRepository().getQuest(DwarfCannon.NAME);
+		final Quest quest = player.getQuestRepository().getQuest(Quests.DWARF_CANNON);
 		switch (node.getId()) {
 		case 3:
 			if (!node.getLocation().equals(new Location(3015, 3453, 0))) {
@@ -309,7 +309,7 @@ public class DwarfCannonPlugin extends OptionHandler {
 
 				//setVarp(player, 1, 2041, true);
 				//setVarp(player, 0, 8, true);
-				player.getQuestRepository().getQuest(DwarfCannon.NAME).setStage(player, 60);
+				player.getQuestRepository().getQuest(Quests.DWARF_CANNON).setStage(player, 60);
 				player.sendMessage("Well done! You've fixed the cannon! Better go and tell Captain Lawgof.");
 				GameWorld.getPulser().submit(new Pulse(5, player) {
 					@Override

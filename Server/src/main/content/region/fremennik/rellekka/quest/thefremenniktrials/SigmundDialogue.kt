@@ -8,6 +8,7 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 @Initializable
 class SigmundDialogue (player: Player? = null) : DialoguePlugin(player) {
@@ -22,12 +23,12 @@ class SigmundDialogue (player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if(player.questRepository.isComplete("Fremennik Trials")){
+        if(player.questRepository.isComplete(Quests.THE_FREMENNIK_TRIALS)){
             playerl(FacialExpression.HAPPY,"Hello there!")
             stage = 50
             return true
         }
-        else if(!player.questRepository.hasStarted("Fremennik Trials")){
+        else if(!player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS)){
             playerl(FacialExpression.HAPPY,"Hello there!")
             stage = 60
             return true

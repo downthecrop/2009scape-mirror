@@ -3,6 +3,7 @@ package content.region.kandarin.quest.waterfall;
 import java.util.ArrayList;
 import java.util.List;
 
+import content.data.Quests;
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
@@ -130,7 +131,7 @@ public final class WaterfallPlugin extends OptionHandler {
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
 		final int id = node.getId();
-		final Quest quest = player.getQuestRepository().getQuest(WaterFall.NAME);
+		final Quest quest = player.getQuestRepository().getQuest(Quests.WATERFALL_QUEST);
 		if (quest == null) {
 			player.sendMessage("Error! Waterfall quest cannot be found.");
 			return true;
@@ -141,7 +142,7 @@ public final class WaterfallPlugin extends OptionHandler {
 			player.getPulseManager().run(new Pulse(2, player) {
 				@Override
 				public boolean pulse() {
-					if ((player.getEquipment().containsAtLeastOneItem(295) || player.getInventory().contains(295, 1)) || player.getQuestRepository().isComplete("Waterfall")) {
+					if ((player.getEquipment().containsAtLeastOneItem(295) || player.getInventory().contains(295, 1)) || player.getQuestRepository().isComplete(Quests.WATERFALL_QUEST)) {
 						player.getPacketDispatch().sendMessage("You walk through the door.");
 						player.teleport(new Location(2575, 9861));
 					} else {
@@ -425,7 +426,7 @@ public final class WaterfallPlugin extends OptionHandler {
 		public boolean handle(NodeUsageEvent event) {
 			final Player player = event.getPlayer();
 			Item useditem = event.getUsedItem();
-			final Quest quest = player.getQuestRepository().getQuest(WaterFall.NAME);
+			final Quest quest = player.getQuestRepository().getQuest(Quests.WATERFALL_QUEST);
 			final Scenery object = (Scenery) event.getUsedWith();
 
 			if (useditem.getId() == ROPE.getId() && object.getId() == 1996 || object.getId() == 1997) {

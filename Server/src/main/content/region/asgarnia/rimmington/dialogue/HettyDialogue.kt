@@ -1,7 +1,7 @@
 package content.region.asgarnia.rimmington.dialogue
 
+import content.data.Quests
 import content.region.asgarnia.rimmington.quest.witchpotion.HettyWitchsPotionDialogue
-import content.region.asgarnia.rimmington.quest.witchpotion.WitchsPotion
 import core.api.*
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
@@ -20,7 +20,7 @@ class HettyDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
 
-        val questStage = getQuestStage(player, WitchsPotion.QUEST_NAME)
+        val questStage = getQuestStage(player, Quests.WITCHS_POTION)
 
         when(questStage) {
             0 -> npcl(FacialExpression.NEUTRAL, "What could you want with an old woman like me?").also { stage = 0 }

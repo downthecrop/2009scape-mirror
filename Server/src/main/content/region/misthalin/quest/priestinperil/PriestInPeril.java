@@ -6,6 +6,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
+import content.data.Quests;
 
 /**
  * Represents the <b>Quest</b> priest in peril.
@@ -18,7 +19,7 @@ public class PriestInPeril extends Quest {
 	 * Constructs a new {@code PriestInPeril} {@code Object}.
      */
 	public PriestInPeril() {
-		super("Priest in Peril", 99, 98, 1, 302, 0, 1, 100);
+		super(Quests.PRIEST_IN_PERIL, 99, 98, 1, 302, 0, 1, 100);
 	}
 
 	@Override

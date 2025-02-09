@@ -1,6 +1,6 @@
 package content.region.kandarin.ardougne.quest.arena.dialogue
 
-import content.region.kandarin.ardougne.quest.arena.FightArena
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
@@ -15,7 +15,7 @@ import org.rs09.consts.NPCs
 class ALazyGuardDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.A_LAZY_KHAZARD_GUARD_8498)
-        when (getQuestStage(player!!, FightArena.FightArenaQuest)) {
+        when (getQuestStage(player!!, Quests.FIGHT_ARENA)) {
 
             in 40..49 -> when (stage) {
                 0 -> {
@@ -27,7 +27,7 @@ class ALazyGuardDialogue : DialogueFile() {
                 3 -> npcl(FacialExpression.FRIENDLY, "Now I just want a decent drink. Mind you, too much Khali brew and I'll fall asleep.").also { stage++ }
                 4 -> {
                     end()
-                    setQuestStage(player!!, FightArena.FightArenaQuest, 50)
+                    setQuestStage(player!!, Quests.FIGHT_ARENA, 50)
                 }
             }
 
@@ -71,7 +71,7 @@ class ALazyGuardDialogue : DialogueFile() {
                 14 -> {
                     end()
                     setVarbit(player!!, 5627, 2)
-                    setQuestStage(player!!, FightArena.FightArenaQuest, 68)
+                    setQuestStage(player!!, Quests.FIGHT_ARENA, 68)
                 }
             }
 

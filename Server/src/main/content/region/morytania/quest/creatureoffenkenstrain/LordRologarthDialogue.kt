@@ -1,11 +1,11 @@
 package content.region.morytania.quest.creatureoffenkenstrain
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
@@ -27,7 +27,7 @@ class LordRologarthDialogue (player: Player? = null) : DialoguePlugin(player) {
 
 class LordRologarthDialogueFile : DialogueBuilderFile() {
     override fun create(b: DialogueBuilder) {
-        b.onQuestStages(CreatureOfFenkenstrain.questName, 6)
+        b.onQuestStages(Quests.CREATURE_OF_FENKENSTRAIN, 6)
                 .playerl("I am commanded to destroy you, creature!")
                 .npcl("Oh that's *hic* not very *hic* nice ...")
                 .playerl("Are you feeling ok?")
@@ -49,11 +49,11 @@ class LordRologarthDialogueFile : DialogueBuilderFile() {
                 .playerl("That's it - I'm leaving this dreadful place, whether I get paid or not. Is there anything I can do for you before I leave?")
                 .npcl("Only one - please stop Fenkenstrain from carrying on his experiments, once and for all, so that no other poor soul has to endure suffering such as that of my people and I.")
                 .endWith() { df, player ->
-                    if(getQuestStage(player, CreatureOfFenkenstrain.questName) == 6) {
-                        setQuestStage(player, CreatureOfFenkenstrain.questName, 7)
+                    if(getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) == 6) {
+                        setQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN, 7)
                     }
                 }
-        b.onQuestStages(CreatureOfFenkenstrain.questName, 7)
+        b.onQuestStages(Quests.CREATURE_OF_FENKENSTRAIN, 7)
                 .playerl(FacialExpression.THINKING, "Do you know how I can stop Fenkenstrain's experiments?")
                 .npcl("Take the Ring of Charos from him.")
                 .playerl(FacialExpression.THINKING, "What is this ring?")
@@ -61,7 +61,7 @@ class LordRologarthDialogueFile : DialogueBuilderFile() {
                 .npcl("The Ring of Charos has many powers, but Fenkenstrain has bent them to his down evil purposes. Without the power of the ring, he will not be able to raise the dead from their sleep.")
                 .npcl("It has one other, extremely important use - it confuses the werewolves' senses, making them believe that they smell one of their own kind. Without the ring, Fenkenstrain will be at their mercy.")
                 .end()
-        b.onQuestStages(CreatureOfFenkenstrain.questName, 8, 100)
+        b.onQuestStages(Quests.CREATURE_OF_FENKENSTRAIN, 8, 100)
                 .npcl("How goes it, friend?")
                 .playerl("I stole the Ring of Charos from Fenkenstrain.")
                 .npcl("I saw him climb up into the Tower to hide. It doesn't matter - soon the werewolves will come for him, and his experiments will be forever ceased.")

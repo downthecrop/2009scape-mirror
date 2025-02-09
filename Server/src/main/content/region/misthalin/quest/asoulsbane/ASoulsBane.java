@@ -6,6 +6,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.plugin.Initializable;
 import core.game.content.quest.members.asoulsbane.SoulsBaneLaunaDialogue;
 import core.plugin.PluginManager;
+import content.data.Quests;
 
 */
 /**
@@ -14,10 +15,8 @@ import core.plugin.PluginManager;
 
 @Initializable
 public class ASoulsBane extends Quest {
-    public static final String NAME = "A Soul's Bane";
-
     public ASoulsBane() {
-        super(NAME, 115, 114, 1, 709, 0, 1, 1261);
+        super(Quests.A_SOULS_BANE, 115, 114, 1, 709, 0, 1, 1261);
     }
 
     // config 710 does a lot of shit

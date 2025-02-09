@@ -1,6 +1,6 @@
 package content.region.asgarnia.trollheim.dialogue
 
-import content.region.asgarnia.burthorpe.quest.deathplateau.DeathPlateau
+import content.data.Quests
 import content.region.asgarnia.burthorpe.quest.deathplateau.SabaDialogueFile
 import core.api.getQuestStage
 import core.api.openDialogue
@@ -20,7 +20,7 @@ import org.rs09.consts.NPCs
 @Initializable
 class SabaDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        if (getQuestStage(player!!, DeathPlateau.questName) >= 19) {
+        if (getQuestStage(player!!, Quests.DEATH_PLATEAU) >= 19) {
             openDialogue(player!!, SabaDialogueFile(), npc)
             return true
         }

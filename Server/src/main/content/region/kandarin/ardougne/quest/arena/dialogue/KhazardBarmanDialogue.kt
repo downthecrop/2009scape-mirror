@@ -1,6 +1,6 @@
 package content.region.kandarin.ardougne.quest.arena.dialogue
 
-import content.region.kandarin.ardougne.quest.arena.FightArena
+import content.data.Quests
 import core.api.addItem
 import core.api.getQuestStage
 import core.api.removeItem
@@ -17,7 +17,7 @@ import org.rs09.consts.NPCs
 class KhazardBarmanDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.KHAZARD_BARMAN_259)
-        when (getQuestStage(player!!, FightArena.FightArenaQuest)) {
+        when (getQuestStage(player!!, Quests.FIGHT_ARENA)) {
             in 0..49 -> {
                 when (stage) {
                     0 -> playerl(FacialExpression.HAPPY, "Hello. I'll have a beer please.").also { stage = 1 }
@@ -58,7 +58,7 @@ class KhazardBarmanDialogue : DialogueFile() {
                     9 -> if (removeItem(player!!, Item(COINS_995, 5))){
                             end()
                             addItem(player!!, Items.KHALI_BREW_77, 1)
-                            setQuestStage(player!!, FightArena.FightArenaQuest, 60)
+                        setQuestStage(player!!, Quests.FIGHT_ARENA, 60)
                             stage = END_DIALOGUE
                     } else {
                         end()

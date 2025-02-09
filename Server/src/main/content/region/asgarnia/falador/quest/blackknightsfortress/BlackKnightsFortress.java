@@ -5,6 +5,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.ClassScanner;
+import content.data.Quests;
 
 /**
  * Represents the black knights fortress quest.
@@ -23,7 +24,7 @@ public final class BlackKnightsFortress extends Quest {
 	 * Constructs a new {@Code BlackKnightsFortress} {@Code Object}
 	 */
 	public BlackKnightsFortress() {
-		super("Black Knights' Fortress", 14, 13, 3, 130, 0, 1, 4);
+		super(Quests.BLACK_KNIGHTS_FORTRESS, 14, 13, 3, 130, 0, 1, 4);
 	}
 	
 	@Override

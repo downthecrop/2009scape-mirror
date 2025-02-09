@@ -30,7 +30,7 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
             "Relleka mining site" to Location.create(2682, 3700, 0), // Rellekka mining site
             "Jatizso mine" to Location.create(2393, 3815, 0), //Jatiszo mining site (requires Fremennik Isles prereqs)
             "Lunar Isle mine" to Location.create(2140, 3939, 0), // Lunar Isle mine (requires Lunar Diplomacy prereqs)
-            "Miscellania coal mine" to Location.create(2529, 3887, 0), // Miscellania coal mine (requires Fremennik Trials)
+            "Miscellania coal mine" to Location.create(2529, 3887, 0), // Miscellania coal mine (requires The Fremennik Trials)
             //"Neitiznot runite mine" to Location.create(2376, 3835, 0), // Near the Neitiznot runite mine (requires Fremennik Isles prereqs) currently inaccessible as bridge does not work
             "Ardougne mining site" to Location.create(2600, 3232, 0), // Ardougne mining site (Monastery)
             "Ardougne eastern mine" to Location.create(2706, 3334, 0), // Ardougne mining site (Legends Guild)

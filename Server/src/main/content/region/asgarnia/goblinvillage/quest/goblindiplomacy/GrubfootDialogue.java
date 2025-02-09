@@ -1,5 +1,6 @@
 package content.region.asgarnia.goblinvillage.quest.goblindiplomacy;
 
+import content.data.Quests;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
@@ -42,7 +43,7 @@ public final class GrubfootDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest(GoblinDiplomacy.NAME);
+		quest = player.getQuestRepository().getQuest(Quests.GOBLIN_DIPLOMACY);
 		switch (quest.getStage(player)) {
 		case 100:
 			npc("Me lonely.");

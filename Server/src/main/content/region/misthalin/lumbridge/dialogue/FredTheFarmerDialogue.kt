@@ -11,6 +11,7 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
+import content.data.Quests
 
 @Initializable
 class FredTheFarmerDialogue(player: Player? = null) : DialoguePlugin(player) {
@@ -20,8 +21,8 @@ class FredTheFarmerDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
-        if (getQuestStage(player, "Sheep Shearer") in 1..99) {
-            openDialogue(player, SSFredTheFarmerDialogue(getQuestStage(player, "Sheep Shearer")), npc)
+        if (getQuestStage(player, Quests.SHEEP_SHEARER) in 1..99) {
+            openDialogue(player, SSFredTheFarmerDialogue(getQuestStage(player, Quests.SHEEP_SHEARER)), npc)
         } else {
             npc(FacialExpression.ANGRY, "What are you doing on my land? You're not the one", "who keeps leaving all my gates open and letting out all", "my sheep are you?").also { stage = START_DIALOGUE }
         }
@@ -31,7 +32,7 @@ class FredTheFarmerDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> showTopics(
-                IfTopic(FacialExpression.NEUTRAL, "I'm looking for a quest.", 1000, getQuestStage(player!!, "Sheep Shearer") == 0),
+                IfTopic(FacialExpression.NEUTRAL, "I'm looking for a quest.", 1000, getQuestStage(player!!, Quests.SHEEP_SHEARER) == 0),
                 Topic(FacialExpression.HALF_GUILTY, "I'm looking for something to kill.", 100),
                 Topic(FacialExpression.HALF_GUILTY, "I'm lost.", 200)
             )
@@ -40,7 +41,7 @@ class FredTheFarmerDialogue(player: Player? = null) : DialoguePlugin(player) {
 
             200 -> npc(FacialExpression.HALF_GUILTY, "How can you be lost? Just follow the road east and", "south. You'll end up in Lumbridge fairly quickly.").also { stage = END_DIALOGUE }
 
-            1000 -> openDialogue(player, SSFredTheFarmerDialogue(getQuestStage(player, "Sheep Shearer")), npc)
+            1000 -> openDialogue(player, SSFredTheFarmerDialogue(getQuestStage(player, Quests.SHEEP_SHEARER)), npc)
         }
         return true
     }

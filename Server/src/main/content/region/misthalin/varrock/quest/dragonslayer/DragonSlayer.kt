@@ -23,13 +23,14 @@ import core.integrations.discord.Discord
 import core.plugin.ClassScanner.definePlugins
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 /**
  * Represents the dragon slayer quest.
  * @author Vexia - Converted to Kotlin with use of event hooks by not-Vexia
  */
 @Initializable
-class DragonSlayer : Quest("Dragon Slayer", 18, 17, 2, 176, 0, 1, 10), LoginListener {
+class DragonSlayer : Quest(Quests.DRAGON_SLAYER, 18, 17, 2, 176, 0, 1, 10), LoginListener {
     override fun newInstance(`object`: Any?): Quest {
         definePlugins(
             CrandorMapPlugin(),
@@ -323,7 +324,7 @@ class DragonSlayer : Quest("Dragon Slayer", 18, 17, 2, 176, 0, 1, 10), LoginList
     }
 
     override fun login(player: Player) {
-        if (getQuestStage(player, this.name) == 20) {
+        if (getQuestStage(player, this.quest) == 20) {
             player.hook(Event.SpellCast, SpellCastHook)
             player.hook(Event.PickedUp, PickedUpHook)
         }

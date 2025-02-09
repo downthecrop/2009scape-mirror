@@ -1,6 +1,5 @@
 package content.region.kandarin.ardougne.quest.arena.npc
 
-import content.region.kandarin.ardougne.quest.arena.FightArena
 import content.region.kandarin.ardougne.quest.arena.dialogue.GeneralKhazardDialogue
 import core.api.*
 import core.game.node.entity.Entity
@@ -11,6 +10,7 @@ import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 @Initializable
 class ScorpionNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
@@ -52,9 +52,8 @@ class ScorpionNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, loc
 
     override fun finalizeDeath(killer: Entity?) {
         if (killer is Player) {
-            val quest = "Fight Arena"
-            if (getQuestStage(killer, quest) == 88) {
-                setQuestStage(killer, FightArena.FightArenaQuest, 89)
+            if (getQuestStage(killer, Quests.FIGHT_ARENA) == 88) {
+                setQuestStage(killer, Quests.FIGHT_ARENA, 89)
             }
             removeAttribute(killer, "spawn-scorpion")
             openDialogue(killer, GeneralKhazardDialogue())

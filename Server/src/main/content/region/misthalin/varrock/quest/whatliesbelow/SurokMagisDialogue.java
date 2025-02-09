@@ -1,5 +1,6 @@
 package content.region.misthalin.varrock.quest.whatliesbelow;
 
+import content.data.Quests;
 import core.game.activity.ActivityManager;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
@@ -50,7 +51,7 @@ public class SurokMagisDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest(WhatLiesBelow.NAME);
+		quest = player.getQuestRepository().getQuest(Quests.WHAT_LIES_BELOW);
 		switch (quest.getStage(player)) {
 		default:
 			npc("Excuse me?");

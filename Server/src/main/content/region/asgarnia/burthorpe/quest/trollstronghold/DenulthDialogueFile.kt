@@ -1,5 +1,6 @@
 package content.region.asgarnia.burthorpe.quest.trollstronghold
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
@@ -14,7 +15,7 @@ import org.rs09.consts.Items
  */
 class DenulthDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        when (getQuestStage(player!!, TrollStronghold.questName)) {
+        when (getQuestStage(player!!, Quests.TROLL_STRONGHOLD)) {
             in 1..7 -> {
                 when (stage) {
                     START_DIALOGUE -> npcl(FacialExpression.FRIENDLY, "How are you getting on with rescuing Godric?").also { stage++ }

@@ -1,12 +1,12 @@
 package content.region.kandarin.seers.quest.elementalworkshop
 
 import content.global.handlers.iface.BookInterface
-import core.api.setAttribute
 import core.api.setQuestStage
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
 import org.rs09.consts.Items
+import content.data.Quests
 
 /**
  * Battered book handler for the Elemental Workshop I quest
@@ -23,7 +23,7 @@ class BatteredBookHandler : InteractionListener {
             BookInterface.pageSetup(player, BookInterface.FANCY_BOOK_3_49, TITLE, CONTENTS)
             if (BookInterface.isLastPage(pageNum, CONTENTS.size)) {
                 if (EWUtils.currentStage(player) == 0) {
-                    setQuestStage(player, "Elemental Workshop I", 1)
+                    setQuestStage(player, Quests.ELEMENTAL_WORKSHOP_I, 1)
                 }
             }
             return true

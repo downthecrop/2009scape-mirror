@@ -1,6 +1,6 @@
 package content.global.travel.glider;
 
-import content.region.kandarin.quest.grandtree.TheGrandTree;
+import content.data.Quests;
 import core.game.component.Component;
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
@@ -58,7 +58,7 @@ public final class CaptainDalburDialogue extends DialoguePlugin {
 			stage = 1;
 			break;
 		case 1:
-			if(!isQuestComplete(player, TheGrandTree.questName)){
+			if(!isQuestComplete(player, Quests.THE_GRAND_TREE)){
 				interpreter.sendDialogues(npc, FacialExpression.ANNOYED, "I only fly friends of the gnomes!");
 				stage = END_DIALOGUE;
 			}

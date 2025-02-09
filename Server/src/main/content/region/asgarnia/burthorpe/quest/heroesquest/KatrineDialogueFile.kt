@@ -1,5 +1,6 @@
 package content.region.asgarnia.burthorpe.quest.heroesquest
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.*
 import org.rs09.consts.Items
@@ -7,7 +8,7 @@ import org.rs09.consts.Items
 class KatrineDialogueFile : DialogueBuilderFile() {
     override fun create(b: DialogueBuilder) {
         // 0 is handled by default in the old KatrineDialogue.
-        b.onQuestStages(HeroesQuest.questName, 1)
+        b.onQuestStages(Quests.HEROES_QUEST, 1)
                 .playerl("Hey.")
                 .npcl("Hey.")
                 .options()
@@ -30,15 +31,15 @@ class KatrineDialogueFile : DialogueBuilderFile() {
                             .npcl("Visit our hideout in the alleyway on palm street.")
                             .npcl("To get in you will need to tell them the secret password 'four leaved clover'.")
                             .endWith { _, player ->
-                                if(getQuestStage(player, HeroesQuest.questName) == 1) {
-                                    setQuestStage(player, HeroesQuest.questName, 2)
+                                if(getQuestStage(player, Quests.HEROES_QUEST) == 1) {
+                                    setQuestStage(player, Quests.HEROES_QUEST, 2)
                                 }
                             }
 
                 }
 
         // This is not authentic, she falls back to a boring default conversation, but I guess people might need help during the quest
-        b.onQuestStages(HeroesQuest.questName, 2,3,4)
+        b.onQuestStages(Quests.HEROES_QUEST, 2, 3, 4)
                 .playerl("What am I supposed to be doing again?")
                 .npcl("You told me you wanted to get the rank of master thief! Now pay attention.")
                 .npcl("Some of the MOST coveted prizes in thiefdom right now are in the pirate town of Brimhaven on Karamja.")
@@ -72,7 +73,7 @@ class KatrineDialogueFile : DialogueBuilderFile() {
          */
 
 
-        b.onQuestStages(HeroesQuest.questName, 5)
+        b.onQuestStages(Quests.HEROES_QUEST, 5)
                 .branch { player ->
                     return@branch if (inInventory(player, Items.PETES_CANDLESTICK_1577)) { 1 } else { 0 }
                 }.let { branch ->
@@ -94,8 +95,8 @@ class KatrineDialogueFile : DialogueBuilderFile() {
                                         .endWith { _, player ->
                                             if (removeItem(player, Items.PETES_CANDLESTICK_1577)) {
                                                 addItemOrDrop(player, Items.THIEVES_ARMBAND_1579)
-                                                if (getQuestStage(player, HeroesQuest.questName) == 5) {
-                                                    setQuestStage(player, HeroesQuest.questName, 6)
+                                                if (getQuestStage(player, Quests.HEROES_QUEST) == 5) {
+                                                    setQuestStage(player, Quests.HEROES_QUEST, 6)
                                                 }
                                             }
                                         }
@@ -114,7 +115,7 @@ class KatrineDialogueFile : DialogueBuilderFile() {
                 }
 
         // I lost the armband and some stupid default shit.
-        b.onQuestStages(HeroesQuest.questName, 6)
+        b.onQuestStages(Quests.HEROES_QUEST, 6)
                 .playerl("I have lost my master thief's armband...")
                 .npcl("Lucky I 'ave a spare ain't it? Don't lose it again.")
                 .endWith { _, player ->

@@ -8,6 +8,7 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import content.data.Quests
 
 @Initializable
 class JohnathonDialogue(player: Player? = null): DialoguePlugin(player)  {
@@ -18,7 +19,7 @@ class JohnathonDialogue(player: Player? = null): DialoguePlugin(player)  {
 
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
-        val qstage = player?.questRepository?.getStage("Family Crest") ?: -1
+        val qstage = player?.questRepository?.getStage(Quests.FAMILY_CREST) ?: -1
 
         if (qstage == 100) {
             options("Can you change my gauntlets for me?", "Nevermind")
@@ -53,7 +54,7 @@ class JohnathonDialogue(player: Player? = null): DialoguePlugin(player)  {
                     "too much... My head... " ,
                     "will not... stop spinning...").also { stage++ }
             4 -> sendDialogue("Sweat is pouring down Jonathons' face.").also { stage = 1000
-            player.questRepository.getQuest("Family Crest").setStage(player, 17)
+            player.questRepository.getQuest(Quests.FAMILY_CREST).setStage(player, 17)
             }
 
             100 -> npc("Ooooh... thank you... Wow! " ,
@@ -68,7 +69,7 @@ class JohnathonDialogue(player: Player? = null): DialoguePlugin(player)  {
                     "I lost a lot of equipment in our last battle when he " ,
                     "bested me and forced me away from his den. He probably still has it now.").also{
                 stage = 200
-                player.questRepository.getQuest("Family Crest").setStage(player, 19)
+                player.questRepository.getQuest(Quests.FAMILY_CREST).setStage(player, 19)
                     }
 
             200 -> options("So is this Chronozon hard to defeat?", "Where can I find Chronozon?", "So how did you end up getting poisoned?", "I will be on my way now.").also{stage++}

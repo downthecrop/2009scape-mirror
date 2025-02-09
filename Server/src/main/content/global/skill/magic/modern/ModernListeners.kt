@@ -29,6 +29,7 @@ import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 import org.rs09.consts.Scenery
 import org.rs09.consts.Sounds
+import content.data.Quests
 
 class ModernListeners : SpellListener("modern"){
     override fun defineListeners() {
@@ -65,28 +66,28 @@ class ModernListeners : SpellListener("modern"){
         }
 
         onCast(Modern.ARDOUGNE_TELEPORT, NONE){ player, _ ->
-            if (!hasRequirement(player, "Plague City"))
+            if (!hasRequirement(player, Quests.PLAGUE_CITY))
                 return@onCast
             requires(player,51, arrayOf(Item(Items.WATER_RUNE_555,2),Item(Items.LAW_RUNE_563,2)))
             sendTeleport(player,61.0, Location.create(2662, 3307, 0))
         }
 
         onCast(Modern.WATCHTOWER_TELEPORT, NONE){ player, _ ->
-            if (!hasRequirement(player, "Watchtower"))
+            if (!hasRequirement(player, Quests.WATCHTOWER))
                 return@onCast
             requires(player,58, arrayOf(Item(Items.EARTH_RUNE_557,2),Item(Items.LAW_RUNE_563,2)))
             sendTeleport(player,68.0, Location.create(2549, 3112, 0))
         }
 
         onCast(Modern.TROLLHEIM_TELEPORT, NONE){ player, _ ->
-            if (!hasRequirement(player, "Eadgar's Ruse"))
+            if (!hasRequirement(player, Quests.EADGARS_RUSE))
                 return@onCast
             requires(player,61, arrayOf(Item(Items.FIRE_RUNE_554,2),Item(Items.LAW_RUNE_563,2)))
             sendTeleport(player,68.0, Location.create(2891, 3678, 0))
         }
 
         onCast(Modern.APE_ATOLL_TELEPORT, NONE){ player, _ ->
-            if (!hasRequirement(player, "Monkey Madness"))
+            if (!hasRequirement(player, Quests.MONKEY_MADNESS))
                 return@onCast
             requires(player,64, arrayOf(Item(Items.FIRE_RUNE_554,2),Item(Items.WATER_RUNE_555,2),Item(Items.LAW_RUNE_563,2),Item(Items.BANANA_1963)))
             sendTeleport(player,74.0, Location.create(2754, 2784, 0))

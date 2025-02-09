@@ -11,6 +11,7 @@ import content.region.misthalin.draynor.quest.anma.AnimalMagnetismPlugin.HammerM
 import content.region.misthalin.draynor.quest.anma.AnimalMagnetismPlugin.ResearchNoteHandler;
 import core.plugin.Initializable;
 import content.region.misthalin.draynor.quest.anma.AnimalMagnetismPlugin.UndeadTreePlugin;
+import content.data.Quests;
 
 /**
  * Handles the animal magnetism quest.
@@ -18,12 +19,6 @@ import content.region.misthalin.draynor.quest.anma.AnimalMagnetismPlugin.UndeadT
  */
 @Initializable
 public final class AnimalMagnetism extends Quest {
-
-	/**
-	 * The name of this quest.
-	 */
-	public static String NAME = "Animal Magnetism";
-
 	/**
 	 * The crone made amulet item.
 	 */
@@ -103,7 +98,7 @@ public final class AnimalMagnetism extends Quest {
 	 * Constructs a new {@code AnimalMagnetism} {@code Object}.
 	 */
 	public AnimalMagnetism() {
-		super("Animal Magnetism", 33, 32, 1);
+		super(Quests.ANIMAL_MAGNETISM, 33, 32, 1);
 	}
 	
 	@Override
@@ -219,9 +214,9 @@ public final class AnimalMagnetism extends Quest {
 
 	@Override
 	public boolean hasRequirements(Player player) {
-		requirements[0] = player.getQuestRepository().isComplete("The Restless Ghost");
-		requirements[1] = player.getQuestRepository().isComplete("Ernest the Chicken");
-		requirements[2] = player.getQuestRepository().isComplete("Priest in Peril");
+		requirements[0] = player.getQuestRepository().isComplete(Quests.THE_RESTLESS_GHOST);
+		requirements[1] = player.getQuestRepository().isComplete(Quests.ERNEST_THE_CHICKEN);
+		requirements[2] = player.getQuestRepository().isComplete(Quests.PRIEST_IN_PERIL);
 		requirements[3] = player.getSkills().getStaticLevel(Skills.RANGE) >= 30;
 		requirements[4] = player.getSkills().getStaticLevel(Skills.SLAYER) >= 18;
 		requirements[5] = player.getSkills().getStaticLevel(Skills.CRAFTING) >= 19;

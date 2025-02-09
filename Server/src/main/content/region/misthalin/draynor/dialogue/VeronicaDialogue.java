@@ -6,6 +6,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.game.node.entity.player.link.quest.Quest;
+import content.data.Quests;
 
 /**
  * Represents the dialogue used to handle the interaction between veronica.
@@ -39,7 +40,7 @@ public class VeronicaDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
-		final Quest quest = player.getQuestRepository().getQuest("Ernest the Chicken");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.ERNEST_THE_CHICKEN);
 		switch (quest.getStage(player)) {
 		case 0:
 			switch (stage) {
@@ -169,7 +170,7 @@ public class VeronicaDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		final Quest quest = player.getQuestRepository().getQuest("Ernest the Chicken");
+		final Quest quest = player.getQuestRepository().getQuest(Quests.ERNEST_THE_CHICKEN);
 		switch (quest.getStage(player)) {
 		case 0:
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Can you please help me? I'm in a terrible spot of", "trouble.");

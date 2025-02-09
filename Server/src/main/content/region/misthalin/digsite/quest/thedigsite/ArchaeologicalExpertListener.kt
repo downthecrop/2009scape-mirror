@@ -1,10 +1,9 @@
 package content.region.misthalin.digsite.quest.thedigsite
 
-import content.region.misthalin.digsite.dialogue.ArchaeologistcalExpertUsedOnDialogueFile
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
-import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -109,8 +108,8 @@ class ArchaeologicalExpertListenerDialogueFile(val it: Int) : DialogueBuilderFil
                     if (removeItem(player, Items.ANCIENT_TALISMAN_681)) {
                         addItemOrDrop(player, Items.INVITATION_LETTER_696)
                     }
-                    if(getQuestStage(player, TheDigSite.questName) == 6) {
-                        setQuestStage(player, TheDigSite.questName, 7)
+                    if(getQuestStage(player, Quests.THE_DIG_SITE) == 6) {
+                        setQuestStage(player, Quests.THE_DIG_SITE, 7)
                     }
                 }
 
@@ -124,8 +123,8 @@ class ArchaeologicalExpertListenerDialogueFile(val it: Int) : DialogueBuilderFil
                 .item(Items.GOLD_BAR_2357, "The expert gives you two gold bars as payment.")
                 .endWith { _, player ->
                     if (removeItem(player, Items.STONE_TABLET_699)) {
-                        if(getQuestStage(player, TheDigSite.questName) == 11) {
-                            finishQuest(player, TheDigSite.questName)
+                        if(getQuestStage(player, Quests.THE_DIG_SITE) == 11) {
+                            finishQuest(player, Quests.THE_DIG_SITE)
                         }
                     }
                 }

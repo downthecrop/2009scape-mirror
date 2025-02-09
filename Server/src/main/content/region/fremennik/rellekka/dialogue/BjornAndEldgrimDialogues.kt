@@ -8,6 +8,7 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import core.tools.END_DIALOGUE
+import content.data.Quests
 
 /**
  * @author qmqz
@@ -18,9 +19,9 @@ class BjornAndEldgrimDialogues(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!isQuestComplete(player, "Fremennik Trials")) {
+        if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
             player(FacialExpression.FRIENDLY, "Hello there.").also { stage = 0 }
-        } else if (isQuestComplete(player, "Fremennik Trials")) {
+        } else if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
             npc(FacialExpression.DRUNK, "Hey! Itsh you again! Whatshyerfashe!").also { stage = 10 }
         }
         return true

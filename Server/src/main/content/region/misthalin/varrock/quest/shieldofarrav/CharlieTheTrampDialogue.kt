@@ -6,6 +6,7 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
+import content.data.Quests
 
 /**
  * @author qmqz
@@ -13,8 +14,6 @@ import org.rs09.consts.NPCs
 
 @Initializable
 class CharlieTheTrampDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
-    var q = "Shield of Arrav"
-
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(core.game.dialogue.FacialExpression.FRIENDLY,"Spare some change guv?").also { stage = 0 }
@@ -70,11 +69,11 @@ class CharlieTheTrampDialogue(player: Player? = null) : core.game.dialogue.Dialo
             282 -> npc(core.game.dialogue.FacialExpression.AFRAID, "But don't upset her, she's pretty dangerous.").also { stage++ }
             283 -> npcl(core.game.dialogue.FacialExpression.FRIENDLY, "I also heard that Reldo the librarian knows more about them, go talk to him.").also { stage++ }
             284 -> {
-                if (!player.questRepository.hasStarted(q)) {
-                    player.questRepository.getQuest(q).start(player)
-                    player.questRepository.getQuest(q).setStage(player,50)
+                if (!player.questRepository.hasStarted(Quests.SHIELD_OF_ARRAV)) {
+                    player.questRepository.getQuest(Quests.SHIELD_OF_ARRAV).start(player)
+                    player.questRepository.getQuest(Quests.SHIELD_OF_ARRAV).setStage(player,50)
                 } else if (!ShieldofArrav.isBlackArm(player) && !ShieldofArrav.isPhoenix(player)) {
-                    player.questRepository.getQuest(q).setStage(player, 50)
+                    player.questRepository.getQuest(Quests.SHIELD_OF_ARRAV).setStage(player, 50)
                 }
                 end()
             }

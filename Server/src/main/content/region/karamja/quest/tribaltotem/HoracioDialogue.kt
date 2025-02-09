@@ -4,12 +4,13 @@ import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
+import content.data.Quests
 
 @Initializable
 class HoracioDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        if(player.questRepository.hasStarted("Tribal Totem")){
+        if(player.questRepository.hasStarted(Quests.TRIBAL_TOTEM)){
             npcl(FacialExpression.HAPPY,"It's a fine day to be out in a garden, isn't it? ")
             stage = 5
         }

@@ -6,6 +6,7 @@ import core.game.dialogue.FacialExpression;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
+import content.data.Quests;
 
 /**
  * Created for 2009Scape
@@ -32,7 +33,7 @@ public class BoyDialoguePlugin extends DialoguePlugin {
 
     @Override
     public boolean open(Object... args) {
-        final Quest quest = player.getQuestRepository().getQuest("Witch's House");
+        final Quest quest = player.getQuestRepository().getQuest(Quests.WITCHS_HOUSE);
         player.debug(quest.isStarted(player) + " " + quest.getStage(player) );
         if (!quest.isStarted(player) && quest.getStage(player) < 10) {
             player("Hello young man.");
@@ -55,7 +56,7 @@ public class BoyDialoguePlugin extends DialoguePlugin {
 
     @Override
     public boolean handle(int interfaceId, int buttonId) {
-        final Quest quest = player.getQuestRepository().getQuest("Witch's House");
+        final Quest quest = player.getQuestRepository().getQuest(Quests.WITCHS_HOUSE);
         switch(stage) {
             case -1:
                 end();

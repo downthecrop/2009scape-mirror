@@ -1,5 +1,6 @@
 package content.region.misthalin.lumbridge.quest.tearsofguthix
 
+import content.data.Quests
 import core.api.*
 import core.game.component.Component
 import core.game.event.EventHook
@@ -102,15 +103,15 @@ class TearsOfGuthixMinigame : InteractionListener, EventHook<TickEvent>, MapArea
                     acc
                 }
                 // If you don't have Druidic Ritual completed, you cannot earn xp on it.
-                else if (curr == Skills.HERBLORE && !isQuestComplete(player, "Druidic Ritual")) {
+                else if (curr == Skills.HERBLORE && !isQuestComplete(player, Quests.DRUIDIC_RITUAL)) {
                     acc
                 }
                 // If you don't have Rune Mysteries, you cannot earn xp on it.
-                else if (curr == Skills.RUNECRAFTING && !isQuestComplete(player, "Rune Mysteries")) {
+                else if (curr == Skills.RUNECRAFTING && !isQuestComplete(player, Quests.RUNE_MYSTERIES)) {
                     acc
                 }
                 // If you don't have Wolf Whistle, you cannot earn xp on it.
-                else if (curr == Skills.SUMMONING && !isQuestComplete(player, "Wolf Whistle")) {
+                else if (curr == Skills.SUMMONING && !isQuestComplete(player, Quests.WOLF_WHISTLE)) {
                     acc
                 }
                 else if (player.skills.getExperience(acc) <= player.skills.getExperience(curr)) {

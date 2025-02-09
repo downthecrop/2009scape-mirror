@@ -1,5 +1,6 @@
 package content.region.misthalin.draynor.quest.anma;
 
+import content.data.Quests;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
@@ -41,7 +42,7 @@ public final class AliceDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest(AnimalMagnetism.NAME);
+		quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM);
 		switch (quest.getStage(player)) {
 		default:
 			options("What are you selling?", "I'm okay, thank you.");

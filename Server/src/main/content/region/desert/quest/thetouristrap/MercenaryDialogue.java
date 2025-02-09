@@ -1,5 +1,6 @@
 package content.region.desert.quest.thetouristrap;
 
+import content.data.Quests;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
@@ -46,7 +47,7 @@ public final class MercenaryDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean open(Object... args) {
-		quest = player.getQuestRepository().getQuest(TouristTrap.NAME);
+		quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP);
 		switch (quest.getStage(player)) {
 		default:
 			npc("What are you doing here?");

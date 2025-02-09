@@ -1,6 +1,6 @@
 package content.region.asgarnia.falador.dialogue
 
-import content.region.asgarnia.falador.quest.recruitmentdrive.RecruitmentDrive
+import content.data.Quests
 import content.region.asgarnia.falador.quest.recruitmentdrive.SirTiffyCashienDialogueFile
 import core.ServerConstants
 import core.api.*
@@ -20,13 +20,13 @@ class SirTiffyCashienDialogue (player: Player? = null) : DialoguePlugin(player) 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
 
         // Completed Recruitment Drive & Start Wanted!! Quest
-        if (isQuestComplete(player!!, RecruitmentDrive.questName)) {
+        if (isQuestComplete(player!!, Quests.RECRUITMENT_DRIVE)) {
             openDialogue(player, SirTiffyCashienAfterRecruitmentDriveQuestDialogueFile(), npc)
             return true
         }
 
         // Recruitment Drive Quest
-        if (isQuestInProgress(player!!, RecruitmentDrive.questName, 1, 99)) {
+        if (isQuestInProgress(player!!, Quests.RECRUITMENT_DRIVE, 1, 99)) {
             openDialogue(player, SirTiffyCashienDialogueFile(), npc)
             return true
         }

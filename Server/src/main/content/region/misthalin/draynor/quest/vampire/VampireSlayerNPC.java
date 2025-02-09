@@ -11,6 +11,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.game.world.map.Location;
 import core.tools.RandomFunction;
+import content.data.Quests;
 
 /**
  * Handles the Vampie Slayer npc.
@@ -127,7 +128,7 @@ public class VampireSlayerNPC extends AbstractNPC {
 			return;
 		}
 		final Player p = ((Player) killer);
-		final Quest quest = p.getQuestRepository().getQuest("Vampire Slayer");
+		final Quest quest = p.getQuestRepository().getQuest(Quests.VAMPIRE_SLAYER);
 		if (p.getInventory().containsItem(HAMMER) && p.getInventory().remove(STAKE)) {
 			if (quest.getStage(p) == 30) {
 				quest.finish(p);

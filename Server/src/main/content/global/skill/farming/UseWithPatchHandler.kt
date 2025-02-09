@@ -12,6 +12,7 @@ import core.game.interaction.QueueStrength
 import core.tools.StringUtils
 import core.tools.prependArticle
 import org.rs09.consts.Sounds
+import content.data.Quests
 
 class UseWithPatchHandler : InteractionListener {
     val RAKE = Items.RAKE_5341
@@ -39,7 +40,7 @@ class UseWithPatchHandler : InteractionListener {
             val usedItem = used.asItem()
 
             if (patch == FarmingPatch.TROLL_STRONGHOLD_HERB) {
-                if (!hasRequirement(player, "My Arm's Big Adventure"))
+                if (!hasRequirement(player, Quests.MY_ARMS_BIG_ADVENTURE))
                     return@onUseWith true
             }
 

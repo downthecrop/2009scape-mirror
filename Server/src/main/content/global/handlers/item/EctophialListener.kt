@@ -13,6 +13,7 @@ import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 import org.rs09.consts.Scenery
 import org.rs09.consts.Sounds
+import content.data.Quests
 
 @Suppress("unused")
 class EctophialListener : InteractionListener {
@@ -37,7 +38,7 @@ class EctophialListener : InteractionListener {
         }
 
         on(Items.ECTOPHIAL_4251, IntType.ITEM, "empty") { player, node ->
-            if (!hasRequirement(player, "Ghosts Ahoy"))
+            if (!hasRequirement(player, Quests.GHOSTS_AHOY))
                 return@on true
 
             if (player.isTeleBlocked) {

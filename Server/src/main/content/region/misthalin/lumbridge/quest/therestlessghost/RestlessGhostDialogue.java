@@ -1,5 +1,6 @@
 package content.region.misthalin.lumbridge.quest.therestlessghost;
 
+import content.data.Quests;
 import core.game.node.entity.npc.NPC;
 import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
@@ -43,17 +44,17 @@ public class RestlessGhostDialogue extends DialoguePlugin {
 				interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Wooo wooo wooooo!");
 				stage = 1;
 			} else {
-				if (player.getQuestRepository().getQuest(RestlessGhost.NAME).getStage(player) == 20) {
+				if (player.getQuestRepository().getQuest(Quests.THE_RESTLESS_GHOST).getStage(player) == 20) {
 					interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Not very good actually.");
 					stage = 500;
 					break;
 				}
-				if (player.getQuestRepository().getQuest(RestlessGhost.NAME).getStage(player) == 30) {
+				if (player.getQuestRepository().getQuest(Quests.THE_RESTLESS_GHOST).getStage(player) == 30) {
 					interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "How are you doing finding my skull?");
 					stage = 520;
 					break;
 				}
-				if (player.getQuestRepository().getQuest(RestlessGhost.NAME).getStage(player) == 40) {
+				if (player.getQuestRepository().getQuest(Quests.THE_RESTLESS_GHOST).getStage(player) == 40) {
 					interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "How are you doing finding my skull?");
 					stage = 550;
 					break;
@@ -111,7 +112,7 @@ public class RestlessGhostDialogue extends DialoguePlugin {
 			break;
 		case 511:
 			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Ok. I will try and get the skull back for you, then you", "can rest in peace.");
-			player.getQuestRepository().getQuest(RestlessGhost.NAME).setStage(player, 30);
+			player.getQuestRepository().getQuest(Quests.THE_RESTLESS_GHOST).setStage(player, 30);
 			stage = 512;
 			break;
 		case 512:

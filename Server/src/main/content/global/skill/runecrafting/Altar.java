@@ -5,6 +5,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 
 import static core.api.ContentAPIKt.hasRequirement;
+import content.data.Quests;
 
 /**
  * Represents an altar an it's relative information(corresponding ruin, etc)
@@ -72,15 +73,15 @@ public enum Altar {
 	 */
 	public void enterRift(Player player) {
                 if (this == ASTRAL) {
-                    if (!hasRequirement(player, "Lunar Diplomacy"))
+                    if (!hasRequirement(player, Quests.LUNAR_DIPLOMACY))
                         return;
                 }
                 if (this == DEATH) {
-                    if (!hasRequirement(player, "Mourning's End Part II"))
+                    if (!hasRequirement(player, Quests.MOURNINGS_END_PART_II))
                         return;
                 }
                 if (this == BLOOD) {
-                    if (!hasRequirement(player, "Legacy of Seergaze"))
+                    if (!hasRequirement(player, Quests.LEGACY_OF_SEERGAZE))
                         return;
                 }
 		if (this == LAW) {
@@ -89,7 +90,7 @@ public enum Altar {
 				return;
 			}
 		}
-		if (this == COSMIC && !player.getQuestRepository().isComplete("Lost City")) {
+		if (this == COSMIC && !player.getQuestRepository().isComplete(Quests.LOST_CITY)) {
 			player.getPacketDispatch().sendMessage("You need to have completed the Lost City quest in order to do that.");
 			return;
 		}

@@ -1,8 +1,8 @@
 package content.region.asgarnia.burthorpe.quest.trollstronghold
 
+import content.data.Quests
 import core.api.isQuestInProgress
 import core.api.produceGroundItem
-import core.api.transformNpc
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.npc.AbstractNPC
@@ -44,7 +44,7 @@ class BerryNpc(id: Int = 0, location: Location? = null) : AbstractNPC(id, locati
     }
 
     override fun finalizeDeath(killer: Entity?) {
-        if (isQuestInProgress(killer as Player, TrollStronghold.questName, 8, 10)) {
+        if (isQuestInProgress(killer as Player, Quests.TROLL_STRONGHOLD, 8, 10)) {
             produceGroundItem(killer, Items.CELL_KEY_2_3137, 1, this.location)
         }
         super.finalizeDeath(killer)

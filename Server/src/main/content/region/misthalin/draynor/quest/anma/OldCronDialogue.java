@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import content.region.misthalin.lumbridge.quest.therestlessghost.RestlessGhost;
+import content.data.Quests;
 
 /**
  * Handles the dialogue used for the old crone.
@@ -49,7 +50,7 @@ public final class OldCronDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		quest = player.getQuestRepository().getQuest("Animal Magnetism");
+		quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM);
 		switch (quest.getStage(player)) {
 		case 16:
 		case 17:

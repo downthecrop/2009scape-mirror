@@ -1,9 +1,9 @@
 package core.game.node.entity.player.link.quest;
 
+import content.data.Quests;
 import core.game.node.entity.player.Player;
 
 import core.tools.Log;
-import core.tools.SystemLogger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -25,7 +25,7 @@ public final class QuestRepository {
     /**
      * The static mapping of instanced quests.
      */
-    private static final Map<String, Quest> QUESTS = new TreeMap<>();
+    private static final Map<Quests, Quest> QUESTS = new TreeMap<>();
 
     /**
      * The mapping of quest indexes with related stages.
@@ -100,7 +100,7 @@ public final class QuestRepository {
         if(oldStage < stage) {
             quests.put(quest.getIndex(), stage);
         } else {
-            log(this.getClass(), Log.WARN,  String.format("Nonmonotonic QuestRepository.setStage call for player \"%s\", quest \"%s\", old stage %d, new stage %d", player.getName(), quest.getName(), oldStage, stage));
+            log(this.getClass(), Log.WARN,  String.format("Nonmonotonic QuestRepository.setStage call for player \"%s\", quest \"%s\", old stage %d, new stage %d", player.getName(), quest.getQuest(), oldStage, stage));
         }
     }
 
@@ -198,51 +198,49 @@ public final class QuestRepository {
     /**
      * Checks if the quest is complete.
      *
-     * @param name The name of the quest.
+     * @param quest The quest.
      * @return {@code True} if so.
      */
-    public boolean isComplete(String name) {
-        Quest quest = getQuest(name);
-        if (quest == null) {
-            log(this.getClass(), Log.ERR,  "Error can't check if quest is complete for " + name);
+    public boolean isComplete(Quests quest) {
+        Quest theQuest = getQuest(quest);
+        if (theQuest == null) {
+            log(this.getClass(), Log.ERR,  "Error can't check if quest is complete for " + quest);
             return false;
         }
-        return quest.getStage(player) >= 100;
+        return theQuest.getStage(player) >= 100;
     }
 
     /**
      * Checks if the quest has at least started.
      *
-     * @param name The name of the quest.
+     * @param quest The quest by id.
      * @return {@code True} if so.
      */
-    public boolean hasStarted(String name) {
-        Quest quest = getQuest(name);
+    public boolean hasStarted(Quests quest) {
+        Quest theQuest = getQuest(quest);
         if (quest == null) {
-            log(this.getClass(), Log.ERR,  "Error can't check if quest is complete for " + name);
+            log(this.getClass(), Log.ERR,  "Error can't check if quest is complete for " + quest);
             return false;
         }
-        return quest.getStage(player) > 0;
+        return theQuest.getStage(player) > 0;
     }
 
 
     /**
-     * Gets the stage of quest by name.
-     *
-     * @param name The name of the quest.
+     * Gets the stage of quest by id.
+     * @param quest The quest.
      * @return The stage.
      */
-    public int getStage(String name) {
-        var quest = QUESTS.get(name);
-        if (quest == null) {
+    public int getStage(Quests quest) {
+        var theQuest = QUESTS.get(quest);
+        if (theQuest == null) {
             return 0;
         }
-        return getStage(quest);
+        return getStage(theQuest);
     }
 
     /**
      * Gets the stage of a quest.
-     *
      * @param quest The quest.
      * @return The stage.
      */
@@ -251,13 +249,12 @@ public final class QuestRepository {
     }
 
     /**
-     * Gets the quest by name.
-     *
-     * @param name The name.
+     * Gets the quest by id.
+     * @param quest The quest.
      * @return The quest.
      */
-    public Quest getQuest(String name) {
-        return QUESTS.get(name);
+    public Quest getQuest(Quests quest) {
+        return QUESTS.get(quest);
     }
 
     /**
@@ -284,7 +281,7 @@ public final class QuestRepository {
      * @param quest The quest.
      */
     public static void register(Quest quest) {
-        QUESTS.put(quest.getName(), quest);
+        QUESTS.put(quest.getQuest(), quest);
     }
 
     /**
@@ -292,7 +289,7 @@ public final class QuestRepository {
      *
      * @return the quests.
      */
-    public static Map<String, Quest> getQuests() {
+    public static Map<Quests, Quest> getQuests() {
         return QUESTS;
     }
 

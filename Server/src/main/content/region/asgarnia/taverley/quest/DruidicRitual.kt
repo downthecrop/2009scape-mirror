@@ -1,6 +1,5 @@
 package content.region.asgarnia.taverley.quest
 
-import content.region.asgarnia.taverley.dialogue.KaqemeexDialogue
 import core.api.*
 import core.game.component.Component
 import core.game.interaction.QueueStrength
@@ -10,23 +9,20 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import org.rs09.consts.Items
-import org.rs09.consts.NPCs
+import content.data.Quests
 
 /**
  * Druidic Ritual Quest
  */
 @Initializable
-class DruidicRitual : Quest("Druidic Ritual", 48, 47, 4, 80, 0, 3, 4) {
+class DruidicRitual : Quest(Quests.DRUIDIC_RITUAL, 48, 47, 4, 80, 0, 3, 4) {
 
-    companion object {
-        const val questName = "Druidic Ritual"
-    }
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
         var line = 12
         var stage = getStage(player)
 
-        var started = getQuestStage(player, questName) > 0
+        var started = getQuestStage(player, Quests.DRUIDIC_RITUAL) > 0
 
         if (!started) {
             line(player, "I can start this quest by speaking to !!Kaqemeex?? who is at", line++)

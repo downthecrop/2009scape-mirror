@@ -1,20 +1,15 @@
 package content.region.kandarin.witchhaven.quest.seaslug
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
-import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
-import core.game.node.entity.player.Player
-import core.game.node.entity.skill.Skills
-import core.game.world.map.Location
-import core.plugin.Initializable
 import org.rs09.consts.Items
-import org.rs09.consts.NPCs
 
 class BaileyDialogueFile : DialogueBuilderFile() {
     override fun create(b: DialogueBuilder) {
-        b.onQuestStages(SeaSlug.questName, 0,1,2,3,4)
+        b.onQuestStages(Quests.SEA_SLUG, 0, 1, 2, 3, 4)
                 .playerl(FacialExpression.FRIENDLY, "Hello there.")
                 .npcl(FacialExpression.SCARED, "What? Who are you? Come inside quickly!")
                 .npcl(FacialExpression.SCARED, "What are you doing here?")
@@ -32,7 +27,7 @@ class BaileyDialogueFile : DialogueBuilderFile() {
                 .npcl(FacialExpression.SCARED, "That's okay. I just can't shake the feeling that this is the start of something... Terrible.")
                 .end()
 
-        b.onQuestStages(SeaSlug.questName, 5)
+        b.onQuestStages(Quests.SEA_SLUG, 5)
                 .playerl("Hello.")
                 .npcl(FacialExpression.EXTREMELY_SHOCKED, "Oh, thank the gods it's you. They've all gone mad I tell you, one of the fishermen tried to throw me into the sea!")
                 .playerl("They're all being controlled by the sea slugs.")
@@ -46,13 +41,13 @@ class BaileyDialogueFile : DialogueBuilderFile() {
                 .iteml(Items.UNLIT_TORCH_596, "Bailey gives you a torch.")
                 .npcl("I doubt the fishermen will come near you if you can get this torch lit. The only problem is all the wood and flint are damp... I can't light a thing!")
                 .endWith() { df, player ->
-                    if(getQuestStage(player, SeaSlug.questName) == 5) {
-                        setQuestStage(player, SeaSlug.questName, 6)
+                    if(getQuestStage(player, Quests.SEA_SLUG) == 5) {
+                            setQuestStage(player, Quests.SEA_SLUG, 6)
                     }
                 }
 
         // We aren't going to give you a spare torch. Go get an unlit torch somewhere else.
-        b.onQuestStages(SeaSlug.questName, 6,7,8)
+        b.onQuestStages(Quests.SEA_SLUG, 6, 7, 8)
                 .playerl("Hello.")
                 .npcl("Oh, thank the gods it's you. They've all gone mad I tell you, one of the fishermen tried to throw me into the sea!")
                 .playerl("They're all being controlled by the sea slugs.")
@@ -62,7 +57,7 @@ class BaileyDialogueFile : DialogueBuilderFile() {
                 .npcl("I doubt the fishermen will come near you if you can get this torch lit. The only problem is all the wood and flint are damp... I can't light a thing!")
                 .end()
 
-        b.onQuestStages(SeaSlug.questName, 9,10,100)
+        b.onQuestStages(Quests.SEA_SLUG, 9, 10, 100)
                 .playerl("I've managed to light the torch.")
                 .npcl("Well done traveller, you'd better get Kennith out of here soon. The fishermen are becoming stranger by the minute, and they keep pulling up those blasted sea slugs.")
                 .playerl("Don't worry I'm working on it.")

@@ -1,7 +1,6 @@
 package content.region.asgarnia.falador.quest.recruitmentdrive
 
-import content.region.asgarnia.burthorpe.quest.deathplateau.DeathPlateau
-import core.ServerConstants
+import content.data.Quests
 import core.api.*
 import core.game.activity.Cutscene
 import core.game.dialogue.FacialExpression
@@ -12,7 +11,6 @@ import core.game.interaction.QueueStrength
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneRestriction
@@ -255,8 +253,8 @@ class RecruitmentDriveListeners : InteractionListener {
         override fun runStage(stage: Int) {
             when (stage) {
                 0 -> {
-                    if (getQuestStage(player, RecruitmentDrive.questName) == 2) {
-                        setQuestStage(player, RecruitmentDrive.questName, 3)
+                    if (getQuestStage(player, Quests.RECRUITMENT_DRIVE) == 2) {
+                        setQuestStage(player, Quests.RECRUITMENT_DRIVE, 3)
                     }
                     closeDialogue(player)
                     fadeToBlack()

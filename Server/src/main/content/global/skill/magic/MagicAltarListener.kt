@@ -9,6 +9,7 @@ import core.game.node.entity.player.link.SpellBookManager.SpellBook
 import core.game.node.entity.skill.Skills
 import org.rs09.consts.Scenery
 import org.rs09.consts.Sounds
+import content.data.Quests
 
 class MagicAltarListener : InteractionListener {
     override fun defineListeners() {
@@ -24,7 +25,7 @@ class MagicAltarListener : InteractionListener {
     private fun meetsRequirements(player: Player, altar: Node): Boolean {
         val level = if (altar.id == ANCIENT_ALTAR) 50 else 65
 
-        if (!hasRequirement(player, if (altar.id == ANCIENT_ALTAR) "Desert Treasure" else "Lunar Diplomacy")) {
+        if (!hasRequirement(player, if (altar.id == ANCIENT_ALTAR) Quests.DESERT_TREASURE else Quests.LUNAR_DIPLOMACY)) {
             return false
         }
 
