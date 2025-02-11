@@ -34,10 +34,20 @@ import core.game.world.repository.Repository
 class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
     val farmKitItems = arrayListOf(Items.RAKE_5341, Items.SPADE_952, Items.SEED_DIBBER_5343, Items.WATERING_CAN8_5340, Items.SECATEURS_5329, Items.GARDENING_TROWEL_5325,Items.COMPOST_6032, Items.SUPERCOMPOST_6034, Items.PLANT_CURE_6036)
     val runeKitItems = arrayListOf(Items.AIR_RUNE_556, Items.EARTH_RUNE_557, Items.FIRE_RUNE_554, Items.WATER_RUNE_555, Items.MIND_RUNE_558, Items.BODY_RUNE_559, Items.DEATH_RUNE_560, Items.NATURE_RUNE_561, Items.CHAOS_RUNE_562, Items.LAW_RUNE_563, Items.COSMIC_RUNE_564, Items.BLOOD_RUNE_565, Items.SOUL_RUNE_566, Items.ASTRAL_RUNE_9075)
+
+    fun getPlayerFromArgs(player: Player, args: Array<String>, startindex: Int = 1): Player? {
+        val n = args.slice(startindex until args.size).joinToString("_")
+        if (n == "") { //no argument given -> return self player
+            return player
+        }
+        val target = Repository.getPlayerByName(n)
+        if (target == null) {
+            reject(player, "Could not find a player named '$n'")
+        }
+        return target
+    }
+
     override fun defineCommands() {
-        /**
-         * Gives the player a set of tools used to test farming stuff.
-         */
         define("farmkit", Privilege.ADMIN, "", "Provides a kit of various farming equipment."){player,_ ->
             for(item in farmKitItems){
                 player.inventory.add(Item(item))
@@ -290,6 +300,79 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             for(timer in player.timers.newTimers) {
                 player.sendMessage("  ${timer.identifier}")
             }
+        }
+
+        define("setpestpoints", Privilege.ADMIN, "::setpestpoints points player_name", "Sets your (or player_name's) Pest Control points to 'points'") { player, args ->
+            val target = getPlayerFromArgs(player, args, 2) ?: return@define
+            val points = args[1].toIntOrNull()
+            if (points == null) {
+                reject(player, "No valid 'points' argument given")
+            }
+            target.savedData.activityData.pestPoints = points!!
+        }
+
+        define("makeadmin", Privilege.ADMIN, "::makeadmin player_name", "Permanently gives admin rights to player_name (or self if empty)") { player, args ->
+            val target = getPlayerFromArgs(player, args, 1) ?: return@define
+            target.details.rights = Rights.ADMINISTRATOR
+            sendMessage(player, "Gave admin rights to ${target.username}.")
+            sendMessage(target, "You've been given admin rights by ${player.username}!")
+        }
+
+        define("dropadmin", Privilege.ADMIN, "::dropadmin", "Permanently drops admin rights from self") { player, _ ->
+            player.details.rights = Rights.REGULAR_PLAYER
+            sendMessage(player, "Dropped admin rights.")
+        }
+
+        define("max", Privilege.ADMIN, "::max player_name", "Gives all 99s to player_name (or self if empty)") { player, args ->
+            val target = getPlayerFromArgs(player, args, 1) ?: return@define
+            var index = 0
+            Skills.SKILL_NAME.forEach {
+                target.skills.setStaticLevel(index,99)
+                target.skills.setLevel(index,99)
+                index++
+            }
+            target.skills.updateCombatLevel()
+        }
+
+        define("noobme", Privilege.ADMIN, "::noobme player_name", "Sets player_name (or self if empty) back to default stats") { player, args ->
+            val target = getPlayerFromArgs(player, args, 1) ?: return@define
+            var index = 0
+            Skills.SKILL_NAME.forEach {
+                val level = if (index == Skills.HITPOINTS) 10 else 1
+                target.skills.setStaticLevel(index, level)
+                target.skills.setLevel(index, level)
+                index++
+            }
+            target.skills.updateCombatLevel()
+        }
+
+        define("setlevel", Privilege.ADMIN, "::setlevel <lt>SKILL NAME<gt> <lt>LEVEL<gt> <lt>PLAYER<gt>", "Sets SKILL NAME to LEVEL for PLAYER (self if omitted)."){player,args ->
+            if (args.size < 3) reject(player,"Usage: ::setlevel skillname level")
+            val skillname = args[1]
+            val desiredLevel: Int? = args[2].toIntOrNull()
+            if (desiredLevel == null) {
+                reject(player, "Level must be an integer.")
+            }
+            if (desiredLevel!! > 99) reject(player,"Level must be 99 or lower.")
+            val skill = Skills.getSkillByName(skillname)
+            if (skill < 0) reject(player, "Must use a valid skill name!")
+            val target = getPlayerFromArgs(player, args, 3) ?: return@define
+            target.skills.setStaticLevel(skill,desiredLevel)
+            target.skills.setLevel(skill,desiredLevel)
+            target.skills.updateCombatLevel()
+        }
+
+        define("addxp", Privilege.ADMIN, "::addxp <lt>skill name | id<gt> <lt>xp<gt>", "Add xp to skill") { player, args ->
+            if (args.size < 3) reject(player, "Usage: ::addxp <lt>skill name | id<gt> <lt>xp<gt> <lt>player(optional)<gt>")
+            val target = getPlayerFromArgs(player, args, 3) ?: return@define
+
+            val skill = args[1].toIntOrNull() ?: Skills.getSkillByName(args[1])
+            if (skill < 0 || skill >= Skills.NUM_SKILLS) reject(player, "Must use valid skill name or id.")
+
+            val xp = args[2].toDoubleOrNull()
+            if (xp == null || xp <= 0) reject(player, "Xp must be a positive number.")
+
+            target.skills.addExperience(skill, xp!!)
         }
     }
 }

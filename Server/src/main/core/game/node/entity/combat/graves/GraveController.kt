@@ -17,6 +17,7 @@ import org.rs09.consts.Items
 import core.ServerStore
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import core.game.interaction.QueueStrength
 import core.game.system.command.Privilege
 import core.game.world.GameWorld
 import core.game.world.map.zone.impl.WildernessZone
@@ -36,18 +37,16 @@ class GraveController : PersistWorld, TickListener, InteractionListener, Command
     }
 
     override fun defineCommands() {
-        define("forcegravedeath", Privilege.ADMIN, "", "Forces a death that should produce a grave.") {player, _ ->
+        define("forcegravedeath", Privilege.ADMIN, "", "Forces a death that should produce a grave.") { player, _ ->
             player.details.rights = Rights.REGULAR_PLAYER
             setAttribute(player, "tutorial:complete", true)
             player.impactHandler.manualHit(player, player.skills.lifepoints, ImpactHandler.HitsplatType.NORMAL)
-            notify(player, "Grave created at ${player.getAttribute("/save:original-loc",player.location)}")
-            GameWorld.Pulser.submit(object : Pulse(15) {
-                override fun pulse(): Boolean {
-                    player.details.rights = Rights.ADMINISTRATOR
-                    sendMessage(player, "Rights restored")
-                    return true
-                }
-            })
+            notify(player, "Grave created at ${player.getAttribute("/save:original-loc", player.location)}")
+            queueScript(player, 15, QueueStrength.SOFT) { stage: Int ->
+                player.details.rights = Rights.ADMINISTRATOR
+                sendMessage(player, "Rights restored")
+                return@queueScript stopExecuting(player)
+            }
         }
     }
 
