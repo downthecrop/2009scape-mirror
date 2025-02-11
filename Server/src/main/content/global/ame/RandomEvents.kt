@@ -13,6 +13,7 @@ import content.global.ame.events.pillory.PilloryNPC
 import content.global.ame.events.rickturpentine.RickTurpentineNPC
 import content.global.ame.events.rivertroll.RiverTrollRENPC
 import content.global.ame.events.rockgolem.RockGolemRENPC
+import content.global.ame.events.quizmaster.QuizMasterNPC
 import content.global.ame.events.sandwichlady.SandwichLadyRENPC
 import content.global.ame.events.shade.ShadeRENPC
 import content.global.ame.events.strangeplant.StrangePlantNPC
@@ -55,6 +56,7 @@ enum class RandomEvents(val npc: RandomEventNPC, val loot: WeightBasedTable? = n
     FREAKY_FORESTER(npc = FreakyForesterNPC(), skillIds = intArrayOf(Skills.WOODCUTTING)),
     PILLORY(npc = PilloryNPC(), skillIds = intArrayOf(Skills.THIEVING)),
     TREE_SPIRIT(npc = TreeSpiritRENPC(), skillIds = intArrayOf(Skills.WOODCUTTING)),
+    QUIZ_MASTER(npc = QuizMasterNPC()),
     RIVER_TROLL(RiverTrollRENPC(), skillIds = intArrayOf(Skills.FISHING)),
     ROCK_GOLEM(RockGolemRENPC(), skillIds = intArrayOf(Skills.MINING)),
     SHADE(ShadeRENPC(), skillIds = intArrayOf(Skills.PRAYER)),
