@@ -15,6 +15,7 @@ import core.ServerStore.Companion.getBoolean
 import core.ServerStore.Companion.getInt
 import core.api.*
 import core.cache.def.impl.ItemDefinition
+import core.tools.END_DIALOGUE
 import org.rs09.consts.Items
 import content.data.Quests
 
@@ -48,7 +49,6 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
             player.dialogueInterpreter.sendDialogue("Your cape is still on cooldown.")
         } else {
             player.dialogueInterpreter.open(509871233)
-            store[player.name] = used + 1
         }
     }),
     SEED_ATTRACTION("cape_perks:seed_attract",{player ->
@@ -223,54 +223,69 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
         }
 
         override fun open(vararg args: Any?): Boolean {
-            options("Air","Mind","Water","Earth","More...")
+            altarList(0)
             stage = 0
             return true
         }
 
         override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-            when(stage){
-                0 -> when(buttonId){
+            when(stage) {
+                0 -> when(buttonId) {
                     1 -> sendAltar(player, Altar.AIR)
                     2 -> sendAltar(player, Altar.MIND)
                     3 -> sendAltar(player, Altar.WATER)
                     4 -> sendAltar(player, Altar.EARTH)
-                    5 -> options("Fire","Body","Cosmic","Chaos","More...").also { stage++ }
+                    5 -> altarList(++stage)
                 }
-                1 -> when(buttonId){
-                    1 -> sendAltar(player, Altar.FIRE)
-                    2 -> sendAltar(player, Altar.BODY)
-                    3 -> sendAltar(player, Altar.COSMIC)
-                    4 -> sendAltar(player, Altar.CHAOS)
-                    5 -> options("Astral","Nature","Law","Death","More...").also { stage++ }
+                1 -> when(buttonId) {
+                    1 -> altarList(--stage)
+                    2 -> sendAltar(player, Altar.FIRE)
+                    3 -> sendAltar(player, Altar.BODY)
+                    4 -> sendAltar(player, Altar.COSMIC)
+                    5 -> altarList(++stage)
                 }
-                2 -> when(buttonId){
-                    1 -> sendAltar(player, Altar.ASTRAL)
-                    2 -> sendAltar(player, Altar.NATURE)
-                    3 -> sendAltar(player, Altar.LAW)
-                    4 -> sendAltar(player, Altar.DEATH)
-                    5 -> options("Blood","Nevermind").also { stage++ }
+                2 -> when(buttonId) {
+                    1 -> altarList(--stage)
+                    2 -> sendAltar(player, Altar.CHAOS)
+                    3 -> sendAltar(player, Altar.ASTRAL)
+                    4 -> sendAltar(player, Altar.NATURE)
+                    5 -> altarList(++stage)
                 }
-                3 -> when(buttonId){
-                    1 -> sendAltar(player, Altar.BLOOD)
-                    2 -> end()
+                3 -> when(buttonId) {
+                    1 -> altarList(--stage)
+                    2 -> sendAltar(player, Altar.LAW)
+                    3 -> sendAltar(player, Altar.DEATH)
+                    4 -> sendAltar(player, Altar.BLOOD)
+                    5 -> altarList(0).also { stage = 0 }
                 }
             }
             return true
         }
 
-        fun sendAltar(player: Player,altar: Altar){
+        fun altarList(stage: Int) {
+            when (stage) {
+                0 -> options("Air", "Mind", "Water", "Earth", "More...")
+                1 -> options("Back...", "Fire", "Body", "Cosmic", "More...")
+                2 -> options("Back...", "Chaos", "Astral", "Nature", "More...")
+                3 -> options("Back...", "Law", "Death", "Blood", "More...")
+            }
+        }
+
+        fun sendAltar(player: Player,altar: Altar) {
             end()
             if (altar == Altar.DEATH && !hasRequirement(player, Quests.MOURNINGS_END_PART_II)) return
             if (altar == Altar.ASTRAL && !hasRequirement(player, Quests.LUNAR_DIPLOMACY)) return
             if (altar == Altar.BLOOD && !hasRequirement(player, Quests.LEGACY_OF_SEERGAZE)) return
             if (altar == Altar.LAW && !ItemDefinition.canEnterEntrana(player)) {
-                sendItemDialogue(player, Items.SARADOMIN_SYMBOL_8055, "No weapons or armour are permitted on holy Entrana.")
+                sendMessage(player, "The power of Saradomin prevents you from taking armour or weaponry to Entrana.");
                 return
             }
 
             var endLoc = if (altar == Altar.ASTRAL) Location.create(2151, 3864, 0) else altar.ruin.end
 
+            val store = ServerStore.getArchive("daily-abyss-warp")
+            val used = store.getInt(player.name,0)
+            store[player.name] = used + 1
             player.teleporter.send(endLoc, TeleportManager.TeleportType.TELE_OTHER)
             player.incrementAttribute("/save:cape_perks:abyssal_warp",-1)
         }
