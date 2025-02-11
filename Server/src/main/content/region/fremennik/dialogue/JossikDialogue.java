@@ -10,8 +10,11 @@ import core.plugin.Initializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static core.api.ContentAPIKt.addItemOrDrop;
+import static core.api.ContentAPIKt.hasAnItem;
+
 /**
- * Handles the dialogue for jossik.
+ * Handles the dialogue for Jossik.
  * @author Vexia
  */
 @Initializable
@@ -71,23 +74,24 @@ public class JossikDialogue extends DialoguePlugin {
 		case 20:
 			boolean missing = false;
 			for (GodBook book : GodBook.values()) {
-				if (player.getSavedData().getGlobalData().hasCompletedGodBook(book) && !player.hasItem(book.getBook())) {
+				if (player.getSavedData().getGlobalData().hasCompletedGodBook(book) && hasAnItem(player, book.getBook().getId(), true).getContainer() == null) {
+					// i.e.: if you have a completed book on file but you lost it
 					missing = true;
-					player.getInventory().add(book.getBook(), player);
-					npc("As a matter of fact, I did! This book washed up on the", "beach, and I recognised it as yours!");
+					addItemOrDrop(player, book.getBook().getId(), 1);
 				}
 			}
 			int damaged = player.getSavedData().getGlobalData().getGodBook();
-			if (damaged != -1 && !player.hasItem(GodBook.values()[damaged].getDamagedBook())) {
+			if (damaged != -1 && hasAnItem(player, GodBook.values()[damaged].getDamagedBook().getId(), true).getContainer() == null) {
+				// i.e.: if you have an uncompleted book on file but you lost it
 				missing = true;
-				player.getInventory().add(GodBook.values()[damaged].getDamagedBook(), player);
-				npc("As a matter of fact, I did! This book washed up on the", "beach, and I recognised it as yours!");
+				addItemOrDrop(player, GodBook.values()[damaged].getDamagedBook().getId(), 1);
 			}
 			if (missing) {
+				npc("As a matter of fact, I did! This book washed up on the", "beach, and I recognised it as yours!");
 				stage = 23;
 				return true;
 			}
-			uncompleted = new ArrayList<>(5);
+			uncompleted = new ArrayList<>(3);
 			for (GodBook book : GodBook.values()) {
 				if (!player.getSavedData().getGlobalData().hasCompletedGodBook(book)) {
 					uncompleted.add(book);
@@ -95,12 +99,12 @@ public class JossikDialogue extends DialoguePlugin {
 			}
 			boolean hasUncompleted = false;
 			for (GodBook book : GodBook.values()) {
-				if (player.hasItem(book.getDamagedBook())) {
+				if (hasAnItem(player,book.getDamagedBook().getId(), true).getContainer() != null) {
+					// i.e.: you have an uncompleted book on file and you still have it -> do not allow the player to get a new one, GL #2035
 					hasUncompleted = true;
 				}
 			}
-			if (uncompleted.size() == 0 || hasUncompleted) {// all
-				// completed.
+			if (uncompleted.isEmpty() || hasUncompleted) {// all completed.
 				npc("No, sorry adventurer, I haven't.");
 				stage = 23;
 				return true;
