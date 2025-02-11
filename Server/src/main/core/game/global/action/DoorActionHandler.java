@@ -115,7 +115,9 @@ public final class DoorActionHandler {
         if (object.getCharge() == IN_USE_CHARGE) {
             return false;
         }
-        final Scenery second = (object.getId() == 3) ? null : getSecondDoor(object, entity);
+        // TODO: Maybe have this passed in as an optional parameter or overload handleAutowalkDoor?
+        boolean ignoreSecondDoor = (object.getId() == 3628 || object.getId() == 3629 || object.getId() == 3630 || object.getId() == 3631|| object.getId() == 3632); // Ignore second door for Maze Random
+        final Scenery second = (object.getId() == 3 || ignoreSecondDoor) ? null : getSecondDoor(object, entity);
         entity.lock(4);
         final Location loc = entity.getLocation();
         if (entity instanceof Player) {

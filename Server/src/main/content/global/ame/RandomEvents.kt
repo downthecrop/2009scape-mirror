@@ -8,6 +8,7 @@ import content.global.ame.events.drunkendwarf.DrunkenDwarfNPC
 import content.global.ame.events.evilbob.EvilBobNPC
 import content.global.ame.events.evilchicken.EvilChickenNPC
 import content.global.ame.events.freakyforester.FreakyForesterNPC
+import content.global.ame.events.maze.MazeNPC
 import content.global.ame.events.genie.GenieNPC
 import content.global.ame.events.pillory.PilloryNPC
 import content.global.ame.events.rickturpentine.RickTurpentineNPC
@@ -45,6 +46,7 @@ enum class RandomEvents(val npc: RandomEventNPC, val loot: WeightBasedTable? = n
         WeightedItem(Items.TOOTH_HALF_OF_A_KEY_985,1,1,0.1),
         WeightedItem(Items.LOOP_HALF_OF_A_KEY_987,1,1,0.1)
     )),
+    MAZE(npc = MazeNPC()),
     DRILL_DEMON(npc = SeargentDamienNPC()),
     EVIL_CHICKEN(npc = EvilChickenNPC()),
     STRANGE_PLANT(npc = StrangePlantNPC()),

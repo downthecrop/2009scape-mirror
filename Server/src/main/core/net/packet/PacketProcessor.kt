@@ -15,6 +15,7 @@ import core.game.node.entity.player.info.Rights
 import core.game.node.entity.player.info.login.LoginConfiguration
 import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.entity.combat.spell.MagicSpell
+import content.global.ame.events.maze.MazeInterface
 import content.global.skill.summoning.familiar.FamiliarSpecial
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
@@ -669,6 +670,11 @@ object PacketProcessor {
             scenery = Scenery(6898, Location(3219, 9618))
         if (pkt.id == 6899)
             scenery = Scenery(6899, Location(3221, 9618))
+
+        // Random Event Maze chests are overridden by the walls, which needs to be hacked in.
+        if ((scenery?.id == 3626 || scenery?.id == 3635) && (objId in 3635..3636)) {
+            scenery = MazeInterface.overrideScenery(scenery, objId)
+        }
 
         // Family crest levers don't have varps associated with them, so their state is validated with attributes
         // instead, and they always appear as their down/odd variant in the server's map
