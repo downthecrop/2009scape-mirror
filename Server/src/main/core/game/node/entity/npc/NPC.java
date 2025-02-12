@@ -8,7 +8,6 @@ import core.game.interaction.MovementPulse;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.spell.CombatSpell;
-import core.game.node.entity.combat.CombatPulse;
 import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.combat.spell.DefaultCombatSpell;
 import core.game.node.entity.combat.equipment.WeaponInterface;
@@ -29,7 +28,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.game.world.update.flag.*;
 import core.tools.RandomFunction;
-import core.api.utils.GlobalKillCounter;
+import core.api.utils.PlayerStatsCounter;
 import core.api.utils.Vector;
 import core.game.shops.Shops;
 import core.game.node.entity.combat.CombatSwingHandler;
@@ -573,7 +572,7 @@ public class NPC extends Entity {
 		Player p = !(killer instanceof Player) ? null : (Player) killer;
 		if (p != null) {
 			p.incrementAttribute("/save:" + STATS_BASE + ":" + STATS_ENEMIES_KILLED);
-            GlobalKillCounter.incrementKills(p, originalId);
+            PlayerStatsCounter.incrementKills(p, originalId);
 		}
 		handleDrops(p, killer);
 		if (!isRespawn())

@@ -10,7 +10,7 @@ import content.global.skill.slayer.SlayerManager
 import content.global.skill.slayer.Tasks
 import content.global.skill.summoning.familiar.BurdenBeast
 import core.ServerConstants
-import core.api.utils.GlobalKillCounter
+import core.api.utils.PlayerStatsCounter
 import core.api.utils.Vector
 import core.cache.def.impl.AnimationDefinition
 import core.cache.def.impl.ItemDefinition
@@ -2075,7 +2075,7 @@ fun sendItemSelect (player: Player, vararg options: String, keepAlive: Boolean =
 fun announceIfRare(player: Player, item: Item) {
     if (item.definition.getConfiguration(ItemConfigParser.RARE_ITEM, false)) {
         sendNews("${player.username} has just received: ${item.amount} x ${item.name}.")
-        GlobalKillCounter.incrementRareDrop(player, item)
+        PlayerStatsCounter.incrementRareDrop(player, item)
     }
 }
 

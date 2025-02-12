@@ -2,6 +2,7 @@ bin/**
 out/**
 data/logs/**
 data/profile/**
+data/playerstats/**
 .idea/**
 /bin
 .DS_Store**
