@@ -48,6 +48,10 @@ class BarbFishingPulse(player: Player) : SkillPulse<NPC>(player,NPC(1176)) {
     }
 
     override fun reward(): Boolean {
+        if (delay == 1){
+            super.setDelay(5)
+            return false
+        }
         val stragiXP = arrayOf(5,6,7)
         val fishXP = arrayOf(50,70,80)
         val reward = getRandomFish()
