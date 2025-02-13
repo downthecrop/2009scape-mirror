@@ -113,18 +113,18 @@ class ServerStore : PersistWorld {
         }
 
         @JvmStatic
-        fun JSONObject.getString(key: String): String {
-            return this[key] as? String ?: "nothing"
+        fun JSONObject.getString(key: String, default: String = "nothing"): String {
+            return this[key] as? String ?: default
         }
 
         @JvmStatic
-        fun JSONObject.getLong(key: String): Long {
-            return this[key] as? Long ?: 0L
+        fun JSONObject.getLong(key: String, default: Long = 0L): Long {
+            return this[key] as? Long ?: default
         }
 
         @JvmStatic
-        fun JSONObject.getBoolean(key: String): Boolean {
-            return this[key] as? Boolean ?: false
+        fun JSONObject.getBoolean(key: String, default: Boolean = false): Boolean {
+            return this[key] as? Boolean ?: default
         }
 
         fun List<Int>.toJSONArray(): JSONArray{

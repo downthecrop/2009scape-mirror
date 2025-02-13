@@ -267,7 +267,7 @@ public final class ChaosTunnelZone extends MapZone implements Plugin<Object> {
 	 * @param player The player.
 	 */
 	private void commenceBorkBattle(Player player) {
-		if (ServerStore.getBoolean(getStoreFile(), player.getUsername().toLowerCase()) && GameWorld.getSettings().isHosted()) {
+		if (ServerStore.getBoolean(getStoreFile(), player.getUsername().toLowerCase(), false) && GameWorld.getSettings().isHosted()) {
 			player.getPacketDispatch().sendMessage("The portal's magic is too weak to teleport you right now.");
 			return;
 		}

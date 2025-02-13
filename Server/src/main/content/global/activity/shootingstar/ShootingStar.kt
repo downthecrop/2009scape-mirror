@@ -11,12 +11,13 @@ import core.ServerStore.Companion.getString
 
 import content.global.bots.ShootingStarBot
 import core.game.world.repository.Repository
+import core.tools.RandomFunction
 
 /**
  * Represents a shooting star object (Only ever initialized once) (ideally)
  * @author Ceikry
  */
-class ShootingStar(var level: ShootingStarType = ShootingStarType.values().random()){
+class ShootingStar(var level: ShootingStarType = ShootingStarType.values().random()) {
     val crash_locations = mapOf(
             "East of Dark Wizards' Tower" to Location.create(2925, 3339, 0), // East of Dark Wizards' Tower
             "Crafting Guild" to Location.create(2940, 3280, 0), // Crafting Guild Mine
@@ -79,22 +80,15 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
      * Degrades a ShootingStar (or removes the starObject and spawns a Star Sprite if it's the last star)
      */
     fun degrade() {
-        if(level.ordinal == 0){
-            selfBots.filter { it.isMining() }.forEach { it.sleep() }
-            SceneryBuilder.remove(starObject)
-            isSpawned = false
-            starSprite.location = starObject.location
-            starSprite.init()
-            spriteSpawned = true
-            ShootingStarPlugin.getStoreFile().clear()
+        if(level.ordinal == 0) {
+            spawnSprite()
             return
         }
         level = getNextType()
         maxDust = level.totalStardust
         dustLeft = level.totalStardust
-
         ShootingStarPlugin.getStoreFile()["level"] = level.ordinal
-        ShootingStarPlugin.getStoreFile()["isDiscovered"] = isDiscovered
+        ShootingStarPlugin.getStoreFile()["dustLeft"] = dustLeft
 
         val newStar = Scenery(level.objectId, starObject.location)
         SceneryBuilder.replace(starObject, newStar)
@@ -110,7 +104,6 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
      */
     fun fire() {
         SceneryBuilder.remove(starObject)
-        rebuildVars()
         clearSprite()
         SceneryBuilder.add(starObject)
         if(!isSpawned) {
@@ -123,37 +116,54 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
         }
         isSpawned = true
         Repository.sendNews("A shooting star level ${level.ordinal + 1} just crashed near ${location}!")
+        ShootingStarPlugin.getStoreFile()["level"] = level.ordinal
+        ShootingStarPlugin.getStoreFile()["location"] = location
+        ShootingStarPlugin.getStoreFile()["isDiscovered"] = isDiscovered
+        ShootingStarPlugin.getStoreFile()["dustLeft"] = dustLeft
     }
 
     /**
      * Rebuilds some of the variables with new information.
      */
     fun rebuildVars(){
-        if(firstStar && ShootingStarPlugin.getStoreFile().isNotEmpty()){
-            level = ShootingStarType.values()[ShootingStarPlugin.getStoreFile().getInt("level")]
-            location = ShootingStarPlugin.getStoreFile().getString("location")
-            isDiscovered = ShootingStarPlugin.getStoreFile().getBoolean("isDiscovered")
-        } else {
-            level = ShootingStarType.values().random()
-            location = crash_locations.entries.random().key
-            isDiscovered = false
+        // Defaults
+        var levelOrd = RandomFunction.random(9)
+        level = ShootingStarType.values()[levelOrd]
+        location = crash_locations.entries.random().key
+        isDiscovered = false
+        dustLeft = level.totalStardust
+        ticks = 0
+        spriteSpawned = false
+
+        if (firstStar && ShootingStarPlugin.getStoreFile().isNotEmpty()) {
+            // Replace default with stored values, if any
+            levelOrd = ShootingStarPlugin.getStoreFile().getInt("level", levelOrd)
+            level = ShootingStarType.values()[levelOrd]
+            location = ShootingStarPlugin.getStoreFile().getString("location", location)
+            isDiscovered = ShootingStarPlugin.getStoreFile().getBoolean("isDiscovered", false)
+            dustLeft = ShootingStarPlugin.getStoreFile().getInt("dustLeft", dustLeft)
+            ticks = ShootingStarPlugin.getStoreFile().getInt("ticks", ticks)
+            spriteSpawned = ShootingStarPlugin.getStoreFile().getBoolean("spriteSpawned", false)
         }
 
         maxDust = level.totalStardust
-        dustLeft = level.totalStardust
         starObject = Scenery(level.objectId, crash_locations.get(location))
+    }
 
-        ShootingStarPlugin.getStoreFile()["level"] = level.ordinal
-        ShootingStarPlugin.getStoreFile()["location"] = location
-        ShootingStarPlugin.getStoreFile()["isDiscovered"] = false
-
-        ticks = 0
-        firstStar = false
+    fun spawnSprite() {
+        selfBots.filter { it.isMining() }.forEach { it.sleep() }
+        SceneryBuilder.remove(starObject)
+        isSpawned = false
+        starSprite.location = starObject.location
+        starSprite.init()
+        spriteSpawned = true
+        ShootingStarPlugin.getStoreFile()["spriteSpawned"] = spriteSpawned
     }
 
     fun clearSprite() {
         starSprite.clear()
         spriteSpawned = false
+        ShootingStarPlugin.getStoreFile()["spriteSpawned"] = spriteSpawned
     }
 
     /**
@@ -161,6 +171,7 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
      */
     fun decDust() {
         if(--dustLeft <= 0) degrade()
+        ShootingStarPlugin.getStoreFile()["dustLeft"] = dustLeft
     }
 
     /**

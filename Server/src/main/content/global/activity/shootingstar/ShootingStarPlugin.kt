@@ -27,14 +27,30 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
     override fun tick() {
         ++star.ticks
 
+        // Check if the current star sprite should expire
         val maxDelay = tickDelay + (tickDelay / 3)
         if(star.ticks > maxDelay && star.spriteSpawned){
             star.clearSprite()
         }
 
-        if ((star.ticks >= tickDelay && !star.spriteSpawned) || (!star.isSpawned && !star.spriteSpawned)) {
+        if (star.firstStar && !star.isSpawned && !star.spriteSpawned) {
+            // Apparently, the server has only just booted
+            star.rebuildVars()
+            if (star.spriteSpawned) {
+                star.spawnSprite()
+            } else {
+                star.fire()
+            }
+            star.firstStar = false
+        }
+
+        // Check if it's time to fire a new one
+        if (star.ticks >= tickDelay && !star.spriteSpawned) {
+            star.rebuildVars()
             star.fire()
         }
+
+        getStoreFile()["ticks"] = star.ticks
     }
 
     override fun defineListeners() {
@@ -122,6 +138,7 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
         }
 
         define("submit", Privilege.ADMIN) { _, _ ->
+            star.rebuildVars()
             star.fire()
         }
 

@@ -51,6 +51,7 @@ class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: Shootin
             player.sendMessage("You have ${player.skills.experienceMultiplier * player.getAttribute("shooting-star:bonus-xp", 0).toDouble()} bonus xp towards mining stardust.")
             ShootingStarPlugin.submitScoreBoard(player)
             star.isDiscovered = true
+            ShootingStarPlugin.getStoreFile()["isDiscovered"] = star.isDiscovered
             return player.skills.getLevel(Skills.MINING) >= star.miningLevel
         }
         
