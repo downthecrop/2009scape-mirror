@@ -83,15 +83,17 @@ class DunstanDialogueFile : DialogueFile() {
                     4 -> playerl(FacialExpression.FRIENDLY, "I don't have the climbing boots.").also { stage = END_DIALOGUE }
                     5 -> playerl(FacialExpression.FRIENDLY, "I don't have the iron bar or the climbing boots.").also { stage = END_DIALOGUE }
 
-                    7 -> sendDoubleItemDialogue(player!!, Items.IRON_BAR_2351, Items.CLIMBING_BOOTS_3105, "You give Dunstan an iron bar and the climbing boots.").also {
+                    7 -> sendDoubleItemDialogue(player!!, Items.IRON_BAR_2351, Items.CLIMBING_BOOTS_3105, "You give Dunstan an Iron bar and the climbing boots.").also {
+                        sendMessage(player!!, "You give Dunstan an Iron bar and the climbing boots.")
                         if (removeItem(player!!, Item(Items.CLIMBING_BOOTS_3105)) && removeItem(player!!, Item(Items.IRON_BAR_2351))) {
+                            addItemOrDrop(player!!, Items.SPIKED_BOOTS_3107)
                             stage++
                         } else {
                             stage = END_DIALOGUE
                         }
                     }
                     8 -> sendItemDialogue(player!!, Items.SPIKED_BOOTS_3107, "Dunstan has given you the spiked boots.").also { stage++
-                        addItemOrDrop(player!!, Items.SPIKED_BOOTS_3107)
+                        sendMessage(player!!, "Dunstan has given you the spiked boots.")
                     }
                     9 -> playerl(FacialExpression.FRIENDLY, "Thank you!").also { stage++ }
                     10 -> npcl(FacialExpression.FRIENDLY, "No problem.").also {

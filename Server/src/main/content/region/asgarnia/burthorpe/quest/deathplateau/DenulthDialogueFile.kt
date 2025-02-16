@@ -154,7 +154,7 @@ class DenulthDialogueFile : DialogueFile() {
                             stage = 8
                         }
                     }
-                    7 -> playerl(FacialExpression.FRIENDLY, "I have opened the door but I don't have the combination on me.").also { stage++ }
+                    7 -> playerl(FacialExpression.FRIENDLY, "I have opened the door but I don't have the combination on me.").also { stage = END_DIALOGUE }
                     8 -> playerl(FacialExpression.FRIENDLY, "Yes! The door is open and here is the combination.").also { stage++ }
                     9 -> sendItemDialogue(player!!, Items.COMBINATION_3102, "You give Denulth the combination to the equipment room.").also {
                         if (removeItem(player!!, Item(Items.COMBINATION_3102))) {

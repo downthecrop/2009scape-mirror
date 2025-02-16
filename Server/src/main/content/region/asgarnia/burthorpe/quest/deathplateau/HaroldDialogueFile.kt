@@ -112,6 +112,9 @@ class HaroldDialogueFile : DialogueFile() {
                         if (removeItem(player!!, Items.BLURBERRY_SPECIAL_2064)) {
                             sendMessage(player!!, "You give Harold a Blurberry Special.")
                             sendItemDialogue(player!!, Items.BLURBERRY_SPECIAL_2064, "You give Harold a Blurberry Special.").also { stage++ }
+                        } else if (removeItem(player!!, Items.BLURBERRY_SPECIAL_9520)) { // This should not be here since 9520 is used by the gnome restaurant minigame.
+                            sendMessage(player!!, "You give Harold a Blurberry Special.")
+                            sendItemDialogue(player!!, Items.BLURBERRY_SPECIAL_2064, "You give Harold a Blurberry Special.").also { stage++ }
                         } else if (removeItem(player!!, Items.PREMADE_BLURB_SP_2028)) {
                             sendMessage(player!!, "You give Harold a Blurberry Special.")
                             sendItemDialogue(player!!, Items.PREMADE_BLURB_SP_2028, "You give Harold a Blurberry Special.").also { stage++ }
