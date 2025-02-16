@@ -126,6 +126,9 @@ public final class Pet extends Familiar {
 			// then this pet is already overgrown
 			return;
 		}
+		if (pet.isKitten(itemId)) {
+			owner.incrementAttribute("/save:stats_manager:cats_raised");
+		}
 		owner.getFamiliarManager().removeDetails(getItemId());
 		owner.getFamiliarManager().addDetails(newItemId, details);
 		owner.getFamiliarManager().morphPet(new Item(newItemId), false, location, details.getHunger(), 0);

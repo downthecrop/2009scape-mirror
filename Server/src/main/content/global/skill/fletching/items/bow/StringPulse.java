@@ -1,7 +1,7 @@
 package content.global.skill.fletching.items.bow;
 
-import core.api.Container;
-import core.api.ContentAPIKt;
+import core.game.node.entity.player.info.LogType;
+import core.game.node.entity.player.info.PlayerMonitor;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.node.entity.skill.SkillPulse;
@@ -9,6 +9,8 @@ import core.game.node.entity.skill.Skills;
 import content.global.skill.fletching.Fletching;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
+
+import static core.api.ContentAPIKt.amountInInventory;
 
 /**
  * Represents the skill pulse of stringing.
@@ -27,6 +29,9 @@ public class StringPulse extends SkillPulse<Item> {
      */
     private int amount;
 
+    private int initialAmount;
+    private int processedAmount;
+
     /**
      * Constructs a new {@code StringbowPlugin.java} {@code Object}.
      *
@@ -37,6 +42,8 @@ public class StringPulse extends SkillPulse<Item> {
         super(player, node);
         this.bow = bow;
         this.amount = amount;
+        this.initialAmount = amountInInventory(player, node.getId());
+        this.processedAmount = 0;
     }
 
     @Override
@@ -70,6 +77,10 @@ public class StringPulse extends SkillPulse<Item> {
             player.getInventory().add(new Item(bow.product));
             player.getSkills().addExperience(Skills.FLETCHING, bow.experience, true);
             player.getPacketDispatch().sendMessage("You add a string to the bow.");
+            processedAmount++;
+            if (processedAmount > initialAmount) {
+                PlayerMonitor.log(player, LogType.DUPE_ALERT, "fletched item (" + player.getName() + ", " + bow.unfinished + "): initialAmount " + initialAmount + ", processedAmount " + processedAmount);
+            }
 
             if (bow == Fletching.String.MAGIC_SHORTBOW
                     && (new ZoneBorders(2721, 3489, 2724, 3493, 0).insideBorder(player)

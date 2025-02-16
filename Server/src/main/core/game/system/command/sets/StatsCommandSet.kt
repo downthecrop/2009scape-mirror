@@ -67,6 +67,8 @@ class StatsCommandSet : CommandSet(Privilege.STANDARD) {
                             77 -> sendLine(player,"Rocks Mined: ${queryPlayer.getAttribute("$STATS_BASE:$STATS_ROCKS",0)}",i)
                             78 -> sendLine(player,"Fish Caught: ${queryPlayer.getAttribute("$STATS_BASE:$STATS_FISH",0)}",i)
                             79 -> sendLine(player, "Essence Crafted: ${queryPlayer.getAttribute("$STATS_BASE:$STATS_RC",0)}", i)
+                            80 -> sendLine(player, "Food Cooked: ${queryPlayer.getAttribute("$STATS_BASE:$STATS_FOOD_COOKED",0)}", i)
+                            81 -> sendLine(player, "Cats Raised: ${queryPlayer.getAttribute("$STATS_BASE:$STATS_CATS_RAISED",0)}", i)
 
                             //Boss KC
                             82 -> sendLine(player, "KBD KC: ${globalData.bossCounters.get(BossKillCounter.KING_BLACK_DRAGON.ordinal)}",i)

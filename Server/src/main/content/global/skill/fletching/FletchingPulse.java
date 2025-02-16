@@ -85,7 +85,7 @@ public final class FletchingPulse extends SkillPulse<Item> {
 			if ( fletch == Fletching.FletchingItems.OGRE_ARROW_SHAFT ) {
 				item.setAmount(RandomFunction.random(3,6));
 			}
-		  player.getInventory().add(item);
+			player.getInventory().add(item);
 			player.getSkills().addExperience(Skills.FLETCHING, fletch.experience, true);
 			String message = getMessage();
 			player.getPacketDispatch().sendMessage(message);

@@ -4,6 +4,8 @@ import content.global.skill.skillcapeperks.SkillcapePerks;
 import core.game.event.ResourceProducedEvent;
 import core.game.node.entity.impl.Animator;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.info.LogType;
+import core.game.node.entity.player.info.PlayerMonitor;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.skill.Skills;
 import core.game.node.item.GroundItemManager;
@@ -15,7 +17,7 @@ import core.tools.RandomFunction;
 import org.rs09.consts.Items;
 import org.rs09.consts.Sounds;
 
-import static core.api.ContentAPIKt.playAudio;
+import static core.api.ContentAPIKt.*;
 import content.data.Quests;
 
 public class StandardCookingPulse extends Pulse {
@@ -39,12 +41,17 @@ public class StandardCookingPulse extends Pulse {
     private boolean burned = false;
     public CookableItems properties;
 
+    private int initialAmount;
+    private int processedAmount;
+
     public StandardCookingPulse(Player player, Scenery object, int initial, int product, int amount) {
         this.player = player;
         this.object = object;
         this.initial = initial;
         this.product = product;
         this.amount = amount;
+        this.initialAmount = amountInInventory(player, initial);
+        this.processedAmount = 0;
     }
 
     @Override
@@ -170,6 +177,11 @@ public class StandardCookingPulse extends Pulse {
                 player.getInventory().add(productItem);
                 player.dispatch(new ResourceProducedEvent(productItem.getId(), 1, object, initialItem.getId()));
                 player.getSkills().addExperience(Skills.COOKING, experience, true);
+                processedAmount++;
+                if (processedAmount > initialAmount) {
+                    PlayerMonitor.log(player, LogType.DUPE_ALERT, "cooked item (" + player.getName() + ", " + initialItem.getName() + "): initialAmount " + initialAmount + ", processedAmount " + processedAmount);
+                }
+                player.incrementAttribute("/save:stats_manager:food_cooked", 1);
             } else {
                 player.dispatch(new ResourceProducedEvent(CookableItems.getBurnt(initial).getId(), 1, object, initialItem.getId()));
                 player.getInventory().add(CookableItems.getBurnt(initial));
