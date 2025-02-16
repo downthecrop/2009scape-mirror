@@ -43,22 +43,22 @@ class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
             stage = 500
             return true
         }
-        else if(player.getAttribute("fremtrials:votes",0) >= 7){
+        else if (getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) > 0 && player.getAttribute("fremtrials:votes",0) >= 7) {
             npcl(FacialExpression.HAPPY," Greetings again outerlander! How goes your attempts to gain votes with the council of elders?")
             stage = 545
             return true
         }
-        else if(player.getAttribute("fremtrials:votes",0) in 3..6){
+        else if (getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) > 0 && player.getAttribute("fremtrials:votes",0) in 3..6) {
             npcl(FacialExpression.HAPPY," Greetings again outerlander! How goes your attempts to gain votes with the council of elders?")
             stage = 540
             return true
         }
-        else if(player.getAttribute("fremtrials:votes",0) == 1){
+        else if (getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) > 0 && player.getAttribute("fremtrials:votes",0) == 1) {
             npcl(FacialExpression.HAPPY," Greetings again outerlander! How goes your attempts to gain votes with the council of elders?")
             stage = 535
             return true
         }
-        else if(player.getAttribute("fremtrials:votes",-1) == 0){
+        else if (getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) > 0 && player.getAttribute("fremtrials:votes",-1) == 0) {
             npcl(FacialExpression.HAPPY," Greetings again outerlander! How goes your attempts to gain votes with the council of elders?")
             stage = 530
             return true

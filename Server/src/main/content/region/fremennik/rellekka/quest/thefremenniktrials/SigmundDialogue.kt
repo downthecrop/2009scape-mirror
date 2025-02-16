@@ -1,6 +1,7 @@
 package content.region.fremennik.rellekka.quest.thefremenniktrials
 
 import core.api.addItem
+import core.api.getQuestStage
 import core.api.removeItem
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
@@ -28,7 +29,7 @@ class SigmundDialogue (player: Player? = null) : DialoguePlugin(player) {
             stage = 50
             return true
         }
-        else if(!player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS)){
+        else if (getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) <= 0) {
             playerl(FacialExpression.HAPPY,"Hello there!")
             stage = 60
             return true
@@ -48,7 +49,7 @@ class SigmundDialogue (player: Player? = null) : DialoguePlugin(player) {
             stage = 25
             return true
         }
-        else if(!player?.getAttribute("fremtrials:sigmund-vote",false)!!){
+        else if (getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) > 0 && !player?.getAttribute("fremtrials:sigmund-vote",false)!!) {
             playerl(FacialExpression.HAPPY,"Hello there!")
             stage = 1
             return true

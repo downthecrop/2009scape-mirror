@@ -210,8 +210,8 @@ class TFTInteractionListeners : InteractionListener {
             return@on true
         }
 
-        on(SWENSEN_LADDER, IntType.SCENERY, "climb"){ player, _ ->
-            if(!getAttribute(player,"fremtrials:swensen-accepted",false)){
+        on(SWENSEN_LADDER, IntType.SCENERY, "climb-down") { player, _ ->
+            if (!getAttribute(player,"fremtrials:swensen-accepted",false)) {
                 sendNPCDialogue(player,1283,"Where do you think you're going?", core.game.dialogue.FacialExpression.ANGRY)
             }
             return@on true

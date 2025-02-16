@@ -77,7 +77,12 @@ class PriestInPerilUseListener : InteractionListener {
         }
 
         onUseWith(IntType.SCENERY, Items.GOLDEN_KEY_2944, Scenery.MONUMENT_3499) { player, used, _ ->
-            if (!getAttribute(player, "priest_in_peril:key", false) && removeItem(player, used)) {
+            // See GL #2112 and sources therein for why we do it this way
+            val hasNeverGrabbedKey = !getAttribute(player, "priest_in_peril:key", false)
+            val needsKeyForQuestStage = getQuestStage(player, Quests.PRIEST_IN_PERIL) <= 15
+            val hasTotallyLostKey = !hasAnItem(player, Items.IRON_KEY_2945, true).exists()
+            val giveNewKey = hasNeverGrabbedKey || (needsKeyForQuestStage && hasTotallyLostKey)
+            if (giveNewKey && removeItem(player, used)) {
                 addItem(player, Items.IRON_KEY_2945)
                 sendMessage(player, "You swap the golden key for the iron key.")
                 setAttribute(player, "/save:priest_in_peril:key", true)

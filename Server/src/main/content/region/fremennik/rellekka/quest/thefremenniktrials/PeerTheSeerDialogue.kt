@@ -65,7 +65,7 @@ class PeerTheSeerDialogue(player: Player? = null) : core.game.dialogue.DialogueP
             stage = 110
             return true
         }
-        else if(player.getAttribute("fremtrials:peer-vote",false)){
+        else if (getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) > 0 && player.getAttribute("fremtrials:peer-vote",false)) {
             npcl(core.game.dialogue.FacialExpression.SAD,"Uuuh... What was that dark presence I felt?")
             stage = 120
             return true
@@ -75,7 +75,7 @@ class PeerTheSeerDialogue(player: Player? = null) : core.game.dialogue.DialogueP
             stage = 150
             return true
         }
-        else if(player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS)){
+        else if(getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) > 0){
             npcl(core.game.dialogue.FacialExpression.SAD,"Uuuh... What was that dark presence I felt?")
             stage = 50
             return true

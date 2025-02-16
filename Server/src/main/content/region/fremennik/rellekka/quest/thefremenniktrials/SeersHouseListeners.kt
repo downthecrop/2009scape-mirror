@@ -1,5 +1,6 @@
 package content.region.fremennik.rellekka.quest.thefremenniktrials
 
+import content.data.Quests
 import core.api.*
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.player.Player
@@ -102,7 +103,7 @@ class SeersHouseListeners : InteractionListener {
             if(!player.getAttribute("PeerStarted",false)){
                 sendDialogue(player,"You should probably talk to the owner of this home.")
             }
-            if(getAttribute(player, "fremtrials:peer-vote", false))
+            if (getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) > 0 && getAttribute(player, "fremtrials:peer-vote", false))
             {
                 sendDialogue(player, "I don't need to go through that again.")
                 return@on true

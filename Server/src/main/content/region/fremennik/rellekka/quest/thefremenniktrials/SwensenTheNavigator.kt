@@ -1,6 +1,7 @@
 package content.region.fremennik.rellekka.quest.thefremenniktrials
 
 import core.api.addItem
+import core.api.getQuestStage
 import core.api.removeItem
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
@@ -52,7 +53,7 @@ class SwensenTheNavigator(player: Player? = null) : DialoguePlugin(player){
             stage = 140
             return true
         }
-        else if(player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS)){
+        else if (getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) > 0) {
             player("Hello!")
             stage = 0
             return true

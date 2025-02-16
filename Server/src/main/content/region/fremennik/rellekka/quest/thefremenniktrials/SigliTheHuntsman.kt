@@ -1,6 +1,7 @@
 package content.region.fremennik.rellekka.quest.thefremenniktrials
 
 import core.api.addItem
+import core.api.getQuestStage
 import core.api.removeItem
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
@@ -37,7 +38,7 @@ class SigliTheHuntsman(player: Player? = null) : DialoguePlugin(player){
             stage = 150
             return true
         }
-        else if(player?.getAttribute("fremtrials:sigli-vote",false)!!){
+        else if (getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) > 0 && player?.getAttribute("fremtrials:sigli-vote",false)!!) {
             npc("You have my vote!")
             stage = 1000
             return true
@@ -52,7 +53,7 @@ class SigliTheHuntsman(player: Player? = null) : DialoguePlugin(player){
             stage = 180
             return true
         }
-        else if(player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS)){
+        else if(getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) > 0){
             npc("What do you want outerlander?")
             stage = 0
             return true

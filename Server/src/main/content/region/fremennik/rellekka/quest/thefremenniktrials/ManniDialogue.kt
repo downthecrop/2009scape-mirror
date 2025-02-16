@@ -1,6 +1,7 @@
 package content.region.fremennik.rellekka.quest.thefremenniktrials
 
 import core.api.addItem
+import core.api.getQuestStage
 import core.api.removeItem
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.npc.NPC
@@ -56,8 +57,8 @@ class ManniDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(
                     return true
                 }
             }
-            else if(player?.getAttribute("fremtrials:manni-vote",false) == true){
-                npc("e have my vote!")
+            else if (getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) > 0 && player?.getAttribute("fremtrials:manni-vote",false) == true) {
+                npc("Ye have my vote!")
                 stage = 1000
                 return true
             }

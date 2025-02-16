@@ -49,7 +49,7 @@ class OlafTheBard(player: Player? = null) : DialoguePlugin(player){
             stage = 98
             return true
         }
-        else if(player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS)){
+        else if(getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) > 0){
             npc("Hello? Yes? You want something outerlander?")
             stage = 0
             return true

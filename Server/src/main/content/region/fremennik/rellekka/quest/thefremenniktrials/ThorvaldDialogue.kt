@@ -1,6 +1,7 @@
 package content.region.fremennik.rellekka.quest.thefremenniktrials
 
 import core.api.addItem
+import core.api.getQuestStage
 import core.api.removeItem
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
@@ -45,7 +46,7 @@ class ThorvaldDialogue(player: Player? = null) : core.game.dialogue.DialoguePlug
             stage = 0
             return true
         }
-        else if(player!!.getAttribute("fremtrials:thorvald-vote", false)!!){
+        else if (getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) > 0 && player!!.getAttribute("fremtrials:thorvald-vote", false)!!) {
             playerl(core.game.dialogue.FacialExpression.FRIENDLY, "So can I count on your vote at the council of elders now Thorvald?")
             stage = 160
             return true
@@ -55,12 +56,12 @@ class ThorvaldDialogue(player: Player? = null) : core.game.dialogue.DialoguePlug
             stage = 250
             return true
         }
-        else if(!player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS)){
+        else if(getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) == 0){
             npcl(core.game.dialogue.FacialExpression.ANNOYED, "Leave me be, outerlander. I have nothing to say to the likes of you.")
             stage = 1000
             return true
         }
-        else if (!player!!.getAttribute("fremtrials:thorvald-vote", false)!!) {
+        else if (getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) > 0 && !player!!.getAttribute("fremtrials:thorvald-vote", false)!!) {
             if (player!!.getAttribute("fremtrials:warrior-accepted", false)!!) {
                 options("What do I have to do again?", "Who is my opponent?", "Can't I do something else?")
                 stage = 100
