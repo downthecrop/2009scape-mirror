@@ -1,5 +1,6 @@
 package content.global.ame.events.quizmaster
 
+import content.global.ame.returnPlayer
 import core.ServerConstants
 import core.api.*
 import core.api.utils.WeightBasedTable
@@ -8,7 +9,6 @@ import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
 import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
-import core.game.world.map.Location
 import core.tools.END_DIALOGUE
 import org.rs09.consts.Components
 import org.rs09.consts.Items
@@ -16,7 +16,6 @@ import org.rs09.consts.Items
 class QuizMasterDialogueFile : DialogueFile() {
     companion object {
         const val QUIZMASTER_INTERFACE = Components.MACRO_QUIZSHOW_191
-        const val QUIZMASTER_ATTRIBUTE_RETURN_LOC = "/save:original-loc"
         const val QUIZMASTER_ATTRIBUTE_QUESTIONS_CORRECT = "/save:quizmaster:questions-correct"
         const val QUIZMASTER_ATTRIBUTE_RANDOM_ANSWER = "quizmaster:random-answer"
 
@@ -106,7 +105,7 @@ class QuizMasterDialogueFile : DialogueFile() {
             5 -> options("1000 Coins", "Random Item").also { stage++ }
             6 -> {
                 resetAnimator(player!!)
-                teleport(player!!, getAttribute(player!!, QUIZMASTER_ATTRIBUTE_RETURN_LOC, Location.create(3222, 3218, 0)))
+                returnPlayer(player!!)
                 when (buttonID) {
                     1 -> {
                         queueScript(player!!, 0, QueueStrength.SOFT) { stage: Int ->
@@ -121,9 +120,7 @@ class QuizMasterDialogueFile : DialogueFile() {
                         }
                     }
                 }
-                removeAttribute(player!!, QUIZMASTER_ATTRIBUTE_RETURN_LOC)
-                removeAttribute(player!!, QUIZMASTER_ATTRIBUTE_QUESTIONS_CORRECT)
-                removeAttribute(player!!, QUIZMASTER_ATTRIBUTE_RANDOM_ANSWER)
+                removeAttributes(player!!, QUIZMASTER_ATTRIBUTE_QUESTIONS_CORRECT, QUIZMASTER_ATTRIBUTE_RANDOM_ANSWER)
                 stage = END_DIALOGUE
                 end()
             }

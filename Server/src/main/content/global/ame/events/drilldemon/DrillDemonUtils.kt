@@ -1,9 +1,11 @@
 package content.global.ame.events.drilldemon
 
-import core.ServerConstants
+import content.global.ame.kidnapPlayer
+import content.global.ame.returnPlayer
 import core.api.*
 import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.TeleportManager
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
@@ -12,7 +14,6 @@ import org.rs09.consts.NPCs
 
 object DrillDemonUtils {
     val DD_KEY_TASK = "/save:drilldemon:task"
-    val DD_KEY_RETURN_LOC = "/save:original-loc"
     val DD_SIGN_VARP = 531
     val DD_SIGN_JOG = 0
     val DD_SIGN_SITUP = 1
@@ -24,10 +25,7 @@ object DrillDemonUtils {
     val DD_NPC = NPCs.SERGEANT_DAMIEN_2790
 
     fun teleport(player: Player) {
-        if (getAttribute(player, DD_KEY_RETURN_LOC, null) == null) {
-            setAttribute(player, DD_KEY_RETURN_LOC, player.location)
-        }
-        teleport(player, Location.create(3163, 4819, 0))
+        kidnapPlayer(player, Location.create(3163, 4819, 0), TeleportManager.TeleportType.INSTANT)
         player.interfaceManager.closeDefaultTabs()
         setComponentVisibility(player, 548, 69, true)
         setComponentVisibility(player, 746, 12, true)
@@ -66,14 +64,8 @@ object DrillDemonUtils {
     }
 
     fun cleanup(player: Player) {
-        player.locks.unlockTeleport()
-        unlock(player)
-        val destination = getAttribute(player, DD_KEY_RETURN_LOC, ServerConstants.HOME_LOCATION ?: Location.create(3222, 3218, 0))
-        teleport(player, destination)
-        removeAttribute(player, DD_KEY_RETURN_LOC)
-        removeAttribute(player, DD_KEY_TASK)
-        removeAttribute(player, DD_CORRECT_OFFSET)
-        removeAttribute(player, DD_CORRECT_COUNTER)
+        returnPlayer(player)
+        removeAttributes(player, DD_KEY_TASK, DD_CORRECT_OFFSET, DD_CORRECT_COUNTER)
         player.interfaceManager.openDefaultTabs()
         setComponentVisibility(player, 548, 69, false)
         setComponentVisibility(player, 746, 12, false)

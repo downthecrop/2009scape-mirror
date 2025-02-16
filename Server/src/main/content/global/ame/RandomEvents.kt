@@ -3,7 +3,7 @@ package content.global.ame
 import org.rs09.consts.Items
 import content.global.ame.events.MysteriousOldManNPC
 import content.global.ame.events.certer.CerterNPC
-import content.global.ame.events.drilldemon.SeargentDamienNPC
+import content.global.ame.events.drilldemon.SergeantDamienNPC
 import content.global.ame.events.drunkendwarf.DrunkenDwarfNPC
 import content.global.ame.events.evilbob.EvilBobNPC
 import content.global.ame.events.evilchicken.EvilChickenNPC
@@ -47,7 +47,7 @@ enum class RandomEvents(val npc: RandomEventNPC, val loot: WeightBasedTable? = n
         WeightedItem(Items.LOOP_HALF_OF_A_KEY_987,1,1,0.1)
     )),
     MAZE(npc = MazeNPC()),
-    DRILL_DEMON(npc = SeargentDamienNPC()),
+    DRILL_DEMON(npc = SergeantDamienNPC()),
     EVIL_CHICKEN(npc = EvilChickenNPC()),
     STRANGE_PLANT(npc = StrangePlantNPC()),
     SWARM(npc = SwarmNPC()),

@@ -1,22 +1,18 @@
 package content.global.ame.events.surpriseexam
 
-import core.Server
+import content.global.ame.kidnapPlayer
+import content.global.ame.returnPlayer
 import core.api.*
 import core.game.node.entity.impl.PulseType
 import core.game.node.entity.player.Player
-import core.game.node.item.GroundItemManager
-import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import org.rs09.consts.Components
 import org.rs09.consts.Items
-import core.ServerConstants
+import core.game.node.entity.player.link.TeleportManager
 
 object SurpriseExamUtils {
-
-    val SE_KEY_LOC = "/save:original-loc"
     val SE_KEY_INDEX = "supexam:index"
-    val SE_LOGOUT_KEY = "suprise_exam"
     val SE_DOOR_KEY = "supexam:door"
     val INTER_PATTERN_CHILDS = intArrayOf(6,7,8)
     val INTER_OPTION_CHILDS = intArrayOf(10,11,12,13)
@@ -30,20 +26,13 @@ object SurpriseExamUtils {
         intArrayOf(Items.FLY_FISHING_ROD_309,Items.BARBARIAN_ROD_11323,Items.SMALL_FISHING_NET_303,Items.HARPOON_311)
     )
 
-    fun teleport(player: Player){
-        if (getAttribute(player, SE_KEY_LOC, null) == null) {
-            player.setAttribute(SE_KEY_LOC, player.location)
-        }
-        registerLogoutListener(player, SE_LOGOUT_KEY){p ->
-            p.location = getAttribute(p, SE_KEY_LOC, ServerConstants.HOME_LOCATION)
-        }
-        player.properties.teleportLocation = Location.create(1886, 5025, 0)
+    fun teleport(player: Player) {
+        kidnapPlayer(player, Location.create(1886, 5025, 0), TeleportManager.TeleportType.INSTANT)
     }
 
     fun cleanup(player: Player){
-        player.properties.teleportLocation = player.getAttribute(SE_KEY_LOC, ServerConstants.HOME_LOCATION)
-        clearLogoutListener(player, SE_LOGOUT_KEY)
-        removeAttributes(player, SE_KEY_LOC, SE_KEY_INDEX, SE_KEY_CORRECT)
+        returnPlayer(player)
+        removeAttributes(player, SE_KEY_INDEX, SE_KEY_CORRECT)
         player.pulseManager.run(object : Pulse(2){
             override fun pulse(): Boolean {
                 addItemOrDrop(player, Items.BOOK_OF_KNOWLEDGE_11640)

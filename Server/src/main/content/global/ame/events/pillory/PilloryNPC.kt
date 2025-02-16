@@ -1,10 +1,12 @@
 package content.global.ame.events.pillory
 
 import content.global.ame.RandomEventNPC
+import content.global.ame.kidnapPlayer
 import core.api.*
 import core.api.utils.WeightBasedTable
 import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
+import core.game.node.entity.player.link.TeleportManager
 import core.game.system.timer.impl.AntiMacro
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Graphics
@@ -29,11 +31,9 @@ class PilloryNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(N
                     return@queueScript delayScript(player, 3)
                 }
                 1 -> {
-                    if (getAttribute<Location?>(player, PilloryInterface.PILLORY_ATRRIBUTE_RETURN_LOC, null) == null) {
-                        setAttribute(player, PilloryInterface.PILLORY_ATRRIBUTE_RETURN_LOC, player.location)
-                    }
                     PilloryInterface.initPillory(player)
-                    teleport(player, PilloryInterface.LOCATIONS.random()) // 9 random spots!
+                    val dest = PilloryInterface.LOCATIONS.random() //9 random spots!
+                    kidnapPlayer(player, dest, TeleportManager.TeleportType.INSTANT)
                     AntiMacro.terminateEventNpc(player)
                     sendGraphics(Graphics(1577, 0, 0), player.location)
                     animate(player,8941)

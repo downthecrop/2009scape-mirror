@@ -1,5 +1,6 @@
 package content.global.ame.events.maze
 
+import content.global.ame.returnPlayer
 import core.api.*
 import core.api.utils.WeightBasedTable
 import core.api.utils.WeightedItem
@@ -11,7 +12,6 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
-import core.game.node.scenery.SceneryBuilder
 import core.game.system.task.Pulse
 import core.game.world.GameWorld.Pulser
 import core.game.world.map.Location
@@ -24,7 +24,6 @@ class MazeInterface : InteractionListener, EventHook<TickEvent>, MapArea {
     companion object {
         const val MAZE_TIMER_INTERFACE = Components.MAZETIMER_209
         const val MAZE_TIMER_VARP = 531 // Interface 209 child 2 config: [531, 0]
-        const val MAZE_ATTRIBUTE_RETURN_LOC = "/save:original-loc"
         const val MAZE_ATTRIBUTE_TICKS_LEFT = "maze:percent-ticks-left"
         const val MAZE_ATTRIBUTE_CHESTS_OPEN = "/save:maze:chests-opened"
 
@@ -217,9 +216,8 @@ class MazeInterface : InteractionListener, EventHook<TickEvent>, MapArea {
                         return@queueScript delayScript(player, 3)
                     }
                     2 -> {
-                        teleport(player, getAttribute(player, MAZE_ATTRIBUTE_RETURN_LOC, Location.create(3222, 3218, 0)))
+                        returnPlayer(player)
                         sendGraphics(Graphics(1577, 0, 0), player.location)
-                        removeAttribute(player, MAZE_ATTRIBUTE_RETURN_LOC)
                         animate(player,8941)
                         closeOverlay(player)
                         return@queueScript delayScript(player, 1)

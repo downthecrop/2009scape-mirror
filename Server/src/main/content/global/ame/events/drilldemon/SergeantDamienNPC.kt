@@ -10,11 +10,11 @@ import core.game.interaction.QueueStrength
 import core.game.system.timer.impl.AntiMacro
 import core.tools.secondsToTicks
 
-class SeargentDamienNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(NPCs.SERGEANT_DAMIEN_2790) {
+class SergeantDamienNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(NPCs.SERGEANT_DAMIEN_2790) {
 
     override fun init() {
         super.init()
-        sendChat(player.username.capitalize() + "! Drop and give me 20!")
+        sendChat(player.username+ "! Drop and give me 20!")
         queueScript(player, 4, QueueStrength.SOFT) { stage: Int ->
             when (stage) {
                 0 -> {

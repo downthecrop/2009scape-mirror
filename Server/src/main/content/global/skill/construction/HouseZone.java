@@ -3,11 +3,12 @@ package content.global.skill.construction;
 
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
+import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.zone.MapZone;
-import core.game.world.map.zone.ZoneRestriction;
 import core.game.world.map.RegionManager;
 import core.game.world.map.Region;
 import core.game.system.task.Pulse;
+import core.game.world.map.zone.ZoneRestriction;
 
 import static core.api.ContentAPIKt.*;
 
@@ -90,6 +91,7 @@ public final class HouseZone extends MapZone {
     public boolean leave(Entity e, boolean logout) {
         if (e instanceof Player) {
             Player p = (Player) e;
+            // The below tears down the house if the owner was the one who left
             if (house == p.getHouseManager()) {
                 house.expelGuests(p);
                 int toRemove = previousRegion;
@@ -110,7 +112,11 @@ public final class HouseZone extends MapZone {
                     }
                 });
             }
+            // Clear logout listener and original-loc (if appropriate)
             clearLogoutListener(p, "houselogout");
+            if (!getAttribute(p, "kidnapped-by-random", false)) {
+                removeAttribute(p, "/save:original-loc");
+            }
             return true;
         }
         return true;

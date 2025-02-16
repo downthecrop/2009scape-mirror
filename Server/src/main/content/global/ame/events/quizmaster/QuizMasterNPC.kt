@@ -1,10 +1,12 @@
 package content.global.ame.events.quizmaster
 
 import content.global.ame.RandomEventNPC
+import content.global.ame.kidnapPlayer
 import core.api.*
 import core.api.utils.WeightBasedTable
 import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
+import core.game.node.entity.player.link.TeleportManager
 import core.game.system.timer.impl.AntiMacro
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Graphics
@@ -35,12 +37,8 @@ class QuizMasterNPC(var type: String = "", override var loot: WeightBasedTable? 
                     return@queueScript delayScript(player, 3)
                 }
                 1 -> {
-                    if (getAttribute<Location?>(player, QuizMasterDialogueFile.QUIZMASTER_ATTRIBUTE_RETURN_LOC, null) == null) {
-                        setAttribute(player, QuizMasterDialogueFile.QUIZMASTER_ATTRIBUTE_RETURN_LOC, player.location)
-                    }
+                    kidnapPlayer(player, Location(1952, 4764, 1), TeleportManager.TeleportType.INSTANT)
                     setAttribute(player, QuizMasterDialogueFile.QUIZMASTER_ATTRIBUTE_QUESTIONS_CORRECT, 0)
-                    //MazeInterface.initMaze(player)
-                    teleport(player, Location(1952, 4764, 1))
                     AntiMacro.terminateEventNpc(player)
                     sendGraphics(Graphics(1577, 0, 0), player.location)
                     animate(player,8941)

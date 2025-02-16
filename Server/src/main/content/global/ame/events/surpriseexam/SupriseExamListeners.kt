@@ -10,6 +10,7 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import content.global.handlers.iface.ExperienceInterface
 import core.api.MapArea
+import core.api.removeItem
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneRestriction
 
@@ -23,7 +24,7 @@ class SupriseExamListeners : InteractionListener, MapArea {
             return@on true
         }
 
-        on(SurpriseExamUtils.SE_DOORS, IntType.SCENERY, "open"){ player, node ->
+        on(SurpriseExamUtils.SE_DOORS, IntType.SCENERY, "open") { player, node ->
             val correctDoor = player.getAttribute(SurpriseExamUtils.SE_DOOR_KEY,-1)
 
             if(correctDoor == -1){
@@ -42,7 +43,7 @@ class SupriseExamListeners : InteractionListener, MapArea {
 
         on(Items.BOOK_OF_KNOWLEDGE_11640, IntType.ITEM, "read") { player, _ ->
             player.setAttribute("caller") { skill: Int, p: Player ->
-                if (p.inventory.remove(Item(Items.BOOK_OF_KNOWLEDGE_11640))) {
+                if (removeItem(p, Items.BOOK_OF_KNOWLEDGE_11640)) {
                     val level = p.skills.getStaticLevel(skill)
                     val experience = level * 15.0
                     p.skills.addExperience(skill, experience)

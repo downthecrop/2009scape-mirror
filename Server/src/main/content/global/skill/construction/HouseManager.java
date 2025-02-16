@@ -204,7 +204,7 @@ public final class HouseManager {
 	}
 
 	/**
-	 * Leaves this house.
+	 * Leaves this house through the portal.
 	 * @param player The player leaving.
 	 */
 	public static void leave(Player player) {
@@ -215,7 +215,6 @@ public final class HouseManager {
 		if (house.isInHouse(player)) {
 			player.animate(Animation.RESET);
 			player.getProperties().setTeleportLocation(house.location.getExitLocation());
-			removeAttribute(player, "original-loc");
 		}
 	}
 

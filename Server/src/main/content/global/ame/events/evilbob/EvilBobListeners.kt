@@ -1,5 +1,6 @@
 package content.global.ame.events.evilbob
 
+import content.global.ame.returnPlayer
 import core.ServerConstants
 import core.api.*
 import core.game.dialogue.FacialExpression
@@ -8,8 +9,6 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
 import core.game.node.entity.Entity
 import core.game.node.entity.player.link.emote.Emotes
-import core.game.node.entity.skill.Skills
-import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneRestriction
@@ -121,8 +120,7 @@ class EvilBobListeners : InteractionListener, MapArea {
                         }
                         3 -> {
                             sendMessage(player, "Welcome back to ${ServerConstants.SERVER_NAME}.")
-                            val destination = getAttribute(player, EvilBobUtils.prevLocation, ServerConstants.HOME_LOCATION ?: Location.create(3222, 3218, 0))
-                            teleport(player, destination)
+                            returnPlayer(player)
                             EvilBobUtils.reward(player)
                             EvilBobUtils.cleanup(player)
                             resetAnimator(player)

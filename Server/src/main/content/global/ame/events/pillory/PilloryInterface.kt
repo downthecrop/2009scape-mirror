@@ -1,6 +1,7 @@
 package content.global.ame.events.pillory
 
 import content.global.ame.RandomEvents
+import content.global.ame.returnPlayer
 import core.api.*
 import core.game.dialogue.FacialExpression
 import core.game.interaction.IntType
@@ -42,11 +43,10 @@ import org.rs09.consts.Sounds
 class PilloryInterface : InterfaceListener, InteractionListener, MapArea {
     companion object {
         const val PILLORY_LOCK_INTERFACE = 189
-        const val PILLORY_ATRRIBUTE_RETURN_LOC = "/save:original-loc"
         const val PILLORY_ATTRIBUTE_EVENT_KEYS = "pillory:event-keys"
         const val PILLORY_ATTRIBUTE_EVENT_LOCK = "pillory:event-lock"
-        const val PILLORY_ATRRIBUTE_NEEDED_TO_GET_CORRECT = "/save:pillory:target-correct"
-        const val PILLORY_ATRRIBUTE_CORRECT_COUNTER = "/save:pillory:num-correct"
+        const val PILLORY_ATTRIBUTE_NEEDED_TO_GET_CORRECT = "/save:pillory:target-correct"
+        const val PILLORY_ATTRIBUTE_CORRECT_COUNTER = "/save:pillory:num-correct"
 
         val LOCATIONS = arrayOf(
                 // Varrock Cages
@@ -64,8 +64,8 @@ class PilloryInterface : InterfaceListener, InteractionListener, MapArea {
         )
 
         fun initPillory(player: Player) {
-            setAttribute(player, PILLORY_ATRRIBUTE_NEEDED_TO_GET_CORRECT, 3)
-            setAttribute(player, PILLORY_ATRRIBUTE_CORRECT_COUNTER, 0)
+            setAttribute(player, PILLORY_ATTRIBUTE_NEEDED_TO_GET_CORRECT, 3)
+            setAttribute(player, PILLORY_ATTRIBUTE_CORRECT_COUNTER, 0)
             player.dialogueInterpreter.sendPlainMessage(true, "", "Solve the pillory puzzle to be returned to where you came from.")
         }
 
@@ -82,8 +82,8 @@ class PilloryInterface : InterfaceListener, InteractionListener, MapArea {
             player.packetDispatch.sendModelOnInterface(9749 + keys[2], PILLORY_LOCK_INTERFACE, 6, 0)
             player.packetDispatch.sendModelOnInterface(9749 + keys[3], PILLORY_LOCK_INTERFACE, 7, 0)
 
-            val numberToGetCorrect = getAttribute(player, PILLORY_ATRRIBUTE_NEEDED_TO_GET_CORRECT, 3)
-            val correctCount = getAttribute(player, PILLORY_ATRRIBUTE_CORRECT_COUNTER, 0)
+            val numberToGetCorrect = getAttribute(player, PILLORY_ATTRIBUTE_NEEDED_TO_GET_CORRECT, 3)
+            val correctCount = getAttribute(player, PILLORY_ATTRIBUTE_CORRECT_COUNTER, 0)
             for (i in 1.. 6) {
                 // Set if lock is red or green.
                 if (i <= correctCount) {
@@ -101,12 +101,12 @@ class PilloryInterface : InterfaceListener, InteractionListener, MapArea {
             val lock = getAttribute(player, PILLORY_ATTRIBUTE_EVENT_LOCK, -1)
             if (keys[buttonID] == lock) {
                 // CORRECT ANSWER
-                setAttribute(player, PILLORY_ATRRIBUTE_CORRECT_COUNTER, getAttribute(player, PILLORY_ATRRIBUTE_CORRECT_COUNTER, 0) + 1)
-                if (getAttribute(player, PILLORY_ATRRIBUTE_NEEDED_TO_GET_CORRECT, 3) <= getAttribute(player, PILLORY_ATRRIBUTE_CORRECT_COUNTER, -1)) {
+                setAttribute(player, PILLORY_ATTRIBUTE_CORRECT_COUNTER, getAttribute(player, PILLORY_ATTRIBUTE_CORRECT_COUNTER, 0) + 1)
+                if (getAttribute(player, PILLORY_ATTRIBUTE_NEEDED_TO_GET_CORRECT, 3) <= getAttribute(player, PILLORY_ATTRIBUTE_CORRECT_COUNTER, -1)) {
                     player.dialogueInterpreter.sendPlainMessage(true, "", "You've escaped!")
                     sendMessage(player, "You've escaped!")
-                    removeAttribute(player, PILLORY_ATRRIBUTE_NEEDED_TO_GET_CORRECT)
-                    removeAttribute(player, PILLORY_ATRRIBUTE_CORRECT_COUNTER)
+                    removeAttribute(player, PILLORY_ATTRIBUTE_NEEDED_TO_GET_CORRECT)
+                    removeAttribute(player, PILLORY_ATTRIBUTE_CORRECT_COUNTER)
                     closeInterface(player)
                     queueScript(player, 0, QueueStrength.SOFT) { stage: Int ->
                         when (stage) {
@@ -120,10 +120,9 @@ class PilloryInterface : InterfaceListener, InteractionListener, MapArea {
                             1 -> {
                                 val loot = RandomEvents.CERTER.loot!!.roll(player)[0]
                                 addItemOrDrop(player, loot.id, loot.amount)
-                                teleport(player, getAttribute(player, PILLORY_ATRRIBUTE_RETURN_LOC, Location.create(3222, 3218, 0)))
+                                returnPlayer(player)
                                 sendGraphics(Graphics(1577, 0, 0), player.location)
                                 animate(player,8941)
-                                removeAttribute(player, PILLORY_ATRRIBUTE_RETURN_LOC)
                                 closeInterface(player)
                                 return@queueScript stopExecuting(player)
                             }
@@ -137,19 +136,19 @@ class PilloryInterface : InterfaceListener, InteractionListener, MapArea {
                         true,
                         "",
                         "Correct!",
-                        "" + getAttribute(player, PILLORY_ATRRIBUTE_CORRECT_COUNTER, 0) + " down, " +
-                                (getAttribute(player, PILLORY_ATRRIBUTE_NEEDED_TO_GET_CORRECT, 3) - getAttribute(player, PILLORY_ATRRIBUTE_CORRECT_COUNTER, 0)) + " to go!")
+                        "" + getAttribute(player, PILLORY_ATTRIBUTE_CORRECT_COUNTER, 0) + " down, " +
+                                (getAttribute(player, PILLORY_ATTRIBUTE_NEEDED_TO_GET_CORRECT, 3) - getAttribute(player, PILLORY_ATTRIBUTE_CORRECT_COUNTER, 0)) + " to go!")
                 // Animation for the star, but it doesn't work.
-                player.packetDispatch.sendInterfaceConfig(PILLORY_LOCK_INTERFACE, 16 + getAttribute(player, PILLORY_ATRRIBUTE_CORRECT_COUNTER, 1), false)
-                sendAnimationOnInterface(player, 4135, PILLORY_LOCK_INTERFACE, 16 + getAttribute(player, PILLORY_ATRRIBUTE_CORRECT_COUNTER, 1))
+                player.packetDispatch.sendInterfaceConfig(PILLORY_LOCK_INTERFACE, 16 + getAttribute(player, PILLORY_ATTRIBUTE_CORRECT_COUNTER, 1), false)
+                sendAnimationOnInterface(player, 4135, PILLORY_LOCK_INTERFACE, 16 + getAttribute(player, PILLORY_ATTRIBUTE_CORRECT_COUNTER, 1))
             } else {
                 // WRONG ANSWER
                 player.dialogueInterpreter.close()
                 player.dialogueInterpreter.sendDialogues(NPCs.TRAMP_2794 , FacialExpression.OLD_ANGRY1, "Bah, that's not right.","Use the key that matches the hole", "in the spinning lock.")
-                if (getAttribute(player, PILLORY_ATRRIBUTE_NEEDED_TO_GET_CORRECT, 0) < 6) {
-                    setAttribute(player, PILLORY_ATRRIBUTE_NEEDED_TO_GET_CORRECT, getAttribute(player, PILLORY_ATRRIBUTE_NEEDED_TO_GET_CORRECT, 0) + 1)
+                if (getAttribute(player, PILLORY_ATTRIBUTE_NEEDED_TO_GET_CORRECT, 0) < 6) {
+                    setAttribute(player, PILLORY_ATTRIBUTE_NEEDED_TO_GET_CORRECT, getAttribute(player, PILLORY_ATTRIBUTE_NEEDED_TO_GET_CORRECT, 0) + 1)
                 }
-                setAttribute(player, PILLORY_ATRRIBUTE_CORRECT_COUNTER, 0)
+                setAttribute(player, PILLORY_ATTRIBUTE_CORRECT_COUNTER, 0)
                 closeInterface(player)
             }
         }

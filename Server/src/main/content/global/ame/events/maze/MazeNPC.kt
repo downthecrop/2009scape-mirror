@@ -1,10 +1,12 @@
 package content.global.ame.events.maze
 
 import content.global.ame.RandomEventNPC
+import content.global.ame.kidnapPlayer
 import core.api.*
 import core.api.utils.WeightBasedTable
 import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
+import core.game.node.entity.player.link.TeleportManager
 import core.game.system.timer.impl.AntiMacro
 import core.game.world.map.Location
 import core.game.world.map.build.DynamicRegion
@@ -28,9 +30,6 @@ class MazeNPC(var type: String = "", override var loot: WeightBasedTable? = null
                     return@queueScript delayScript(player, 3)
                 }
                 1 -> {
-                    if (getAttribute<Location?>(player, MazeInterface.MAZE_ATTRIBUTE_RETURN_LOC, null) == null) {
-                        setAttribute(player, MazeInterface.MAZE_ATTRIBUTE_RETURN_LOC, player.location)
-                    }
                     MazeInterface.initMaze(player)
                     // Note: This event is NOT instanced:
                     // Sources:
@@ -40,7 +39,7 @@ class MazeNPC(var type: String = "", override var loot: WeightBasedTable? = null
                     // https://youtu.be/0oBCkLArUmc (2011 - even with personal Mysterious Old Man) - "Sorry, this is not the old man you are looking for."
                     // https://youtu.be/FMuKZm-Ikgs (2011)
                     // val region = DynamicRegion.create(11591)
-                    teleport(player, MazeInterface.STARTING_POINTS.random()) // 10 random spots
+                    kidnapPlayer(player, MazeInterface.STARTING_POINTS.random(), TeleportManager.TeleportType.INSTANT) // 10 random spots
                     AntiMacro.terminateEventNpc(player)
                     sendGraphics(Graphics(1577, 0, 0), player.location)
                     animate(player,8941)

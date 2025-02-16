@@ -1,8 +1,10 @@
 package content.global.ame.events.evilbob
 
-import core.ServerConstants
+import content.global.ame.kidnapPlayer
+import content.global.ame.returnPlayer
 import core.api.*
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.skill.Skills
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
@@ -14,7 +16,6 @@ import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 
 object EvilBobUtils {
-    const val prevLocation = "/save:original-loc"
     const val eventComplete = "/save:evilbob:eventcomplete"
     const val assignedFishingZone = "/save:evilbob:fishingzone"
     const val attentive = "/save:evilbob:attentive"
@@ -53,16 +54,11 @@ object EvilBobUtils {
     }
 
     fun teleport(player: Player) {
-        if (getAttribute(player, prevLocation, null) == null) {
-            setAttribute(player, prevLocation, player.location)
-        }
-        player.properties.teleportLocation = Location.create(3419, 4776, 0)
+        kidnapPlayer(player, Location.create(3419, 4776, 0), TeleportManager.TeleportType.INSTANT)
     }
 
     fun cleanup(player: Player) {
-        player.locks.unlockTeleport()
-        player.properties.teleportLocation = getAttribute(player, prevLocation, ServerConstants.HOME_LOCATION)
-        removeAttributes(player, assignedFishingZone, eventComplete, prevLocation, attentive, servantHelpDialogueSeen, attentiveNewSpot, startingDialogueSeen)
+        removeAttributes(player, assignedFishingZone, eventComplete, attentive, servantHelpDialogueSeen, attentiveNewSpot, startingDialogueSeen)
         removeAll(player, Items.FISHLIKE_THING_6202)
         removeAll(player, Items.FISHLIKE_THING_6202, Container.BANK)
         removeAll(player, Items.FISHLIKE_THING_6206)

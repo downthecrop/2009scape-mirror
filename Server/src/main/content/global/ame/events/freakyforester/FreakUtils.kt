@@ -1,17 +1,18 @@
 package content.global.ame.events.freakyforester
 
-import core.ServerConstants
+import content.global.ame.kidnapPlayer
+import content.global.ame.returnPlayer
 import core.api.*
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.TeleportManager
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import core.tools.RandomFunction
 
 object FreakUtils{
     const val freakNpc = NPCs.FREAKY_FORESTER_2458
-    const val freakPreviousLoc = "/save:original-loc"
     const val freakTask = "/save:freakyf:task"
     const val freakComplete = "/save:freakyf:complete"
     const val pheasantKilled = "freakyf:killed"
@@ -28,16 +29,12 @@ object FreakUtils{
     }
 
     fun teleport(player: Player) {
-        if (getAttribute(player, freakPreviousLoc,null) == null) {
-            setAttribute(player, freakPreviousLoc, player.location)
-        }
-        teleport(player, Location.create(2599, 4777 ,0))
+        kidnapPlayer(player, Location.create(2599, 4777 ,0), TeleportManager.TeleportType.INSTANT)
     }
 
     fun cleanup(player: Player) {
-        player.locks.unlockTeleport()
-        player.properties.teleportLocation = getAttribute(player,freakPreviousLoc, ServerConstants.HOME_LOCATION)
-        removeAttributes(player, freakPreviousLoc, freakTask, freakComplete, pheasantKilled)
+        returnPlayer(player)
+        removeAttributes(player, freakTask, freakComplete, pheasantKilled)
         removeAll(player, Items.RAW_PHEASANT_6178)
         removeAll(player, Items.RAW_PHEASANT_6178, Container.BANK)
         removeAll(player, Items.RAW_PHEASANT_6179)
