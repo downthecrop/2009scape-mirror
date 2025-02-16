@@ -196,6 +196,18 @@ fun inEquipment(player: Player, id: Int, amount: Int = 1): Boolean {
 }
 
 /**
+ * Check if any item is in a player's inventory
+ * @param player the player
+ * @param ids the set of item ids to check
+ * @return true if the player has at least one of the items in their inventory, false if none are present
+ */
+fun anyInInventory(player: Player, vararg ids: Int): Boolean {
+    return ids.any{ id ->
+        inInventory(player, id)
+    }
+}
+
+/**
  * Check if an item exists in a player's equipment or inventory
  * @param player the player whose equipment to check
  * @param id the ID of the item to check for
@@ -1702,9 +1714,10 @@ fun closeAllInterfaces(player: Player) {
  * @param player the player to send the dialogue to
  * @param msg the message to send.
  * @param expr the FacialExpression to use. An enum exists for these called FacialExpression. Defaults to FacialExpression.FRIENDLY
+ * @param hide should the continue button be hidden?
  */
-fun sendPlayerDialogue(player: Player, msg: String, expr: core.game.dialogue.FacialExpression = core.game.dialogue.FacialExpression.FRIENDLY) {
-    player.dialogueInterpreter.sendDialogues(player, expr, *splitLines(msg))
+fun sendPlayerDialogue(player: Player, msg: String, expr: core.game.dialogue.FacialExpression = core.game.dialogue.FacialExpression.FRIENDLY, hide: Boolean = false) {
+    player.dialogueInterpreter.sendDialogues(player, expr, hide, *splitLines(msg))
 }
 
 /**
@@ -1723,9 +1736,11 @@ fun sendPlayerOnInterface(player: Player, iface: Int, child: Int) {
  * @param npc the ID of the NPC to use for the chathead
  * @param msg the message to send.
  * @param expr the FacialExpression to use. An enum exists for these called FacialExpression. Defaults to FacialExpression.FRIENDLY
+ * @param hide should the continue button be hidden?
  */
-fun sendNPCDialogue(player: Player, npc: Int, msg: String, expr: core.game.dialogue.FacialExpression = core.game.dialogue.FacialExpression.FRIENDLY) {
-    player.dialogueInterpreter.sendDialogues(npc, expr, *splitLines(msg))
+fun sendNPCDialogue(player: Player, npc: Int, msg: String, expr: core.game.dialogue.FacialExpression = core.game.dialogue.FacialExpression.FRIENDLY,
+                    hide: Boolean = false) {
+    player.dialogueInterpreter.sendDialogues(npc, expr, hide,  *splitLines(msg))
 }
 
 /**

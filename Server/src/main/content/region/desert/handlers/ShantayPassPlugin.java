@@ -92,7 +92,7 @@ public class ShantayPassPlugin extends OptionHandler {
 		case "quick-pass":
 			if (player.getLocation().getY() > 3116) {
 				if (!inInventory(player, Items.SHANTAY_PASS_1854, 1)) {
-					sendNPCDialogue(player, 838, "You need a Shantay pass to get through this gate. See Shantay, he will sell you one for a very reasonable price.", FacialExpression.NEUTRAL);
+					sendNPCDialogue(player, 838, "You need a Shantay pass to get through this gate. See Shantay, he will sell you one for a very reasonable price.", FacialExpression.NEUTRAL, false);
 					return true;
 				}
 				if (!removeItem(player, Items.SHANTAY_PASS_1854, Container.INVENTORY)) return true;

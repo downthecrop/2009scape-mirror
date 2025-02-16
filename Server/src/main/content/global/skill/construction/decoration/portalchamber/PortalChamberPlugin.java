@@ -17,6 +17,8 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 
+import static content.region.kandarin.ardougne.quest.plaguecity.PlagueCityListeners.ARDOUGNE_TELE_ATTRIBUTE;
+
 /**
  * PortalChamberPlugin
  * @author Clayton Williams
@@ -87,6 +89,12 @@ public class PortalChamberPlugin extends OptionHandler {
 				}
 				for (Locations l : Locations.values()) {
 					if (l.name().contains(identifier)) {
+						if (l == Locations.ARDOUGNE){
+							if (player.getAttribute(ARDOUGNE_TELE_ATTRIBUTE, false)){
+								player.sendMessage("You do not have the requirements to direct the portal there");
+								return;
+							}
+						}
 						Item[] runes = l.runes;
 						if (!player.getInventory().containsItems(runes)) {
 							player.sendMessage("You do not have the required runes to build this portal");
@@ -130,6 +138,12 @@ public class PortalChamberPlugin extends OptionHandler {
 			case "enter":
 				String objectName = object.getName();
 				for (Locations l : Locations.values()) {
+					if (l == Locations.ARDOUGNE){
+						if (player.getAttribute(ARDOUGNE_TELE_ATTRIBUTE, false)){
+							player.sendMessage("You do not have the requirements to enter this portal.");
+							return false;
+						}
+					}
 					if (objectName.toLowerCase().contains(l.name().toLowerCase())) {
 						player.teleport(l.location);
 						if (player.getHouseManager().isInHouse(player) && node.getId() == 13635) {

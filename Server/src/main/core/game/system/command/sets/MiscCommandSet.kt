@@ -73,6 +73,16 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             AnmaCutscene(player).start()
         }
 
+        define("setsaveversion", Privilege.ADMIN) { player, args ->
+            try{
+                player.version = args[1].toInt()
+                notify(player, "Setting save version to ${player.version}")
+            }
+            catch (nfe: NumberFormatException){
+                reject(player, "Save versions can only be an integer")
+            }
+        }
+
         /**
          * Prints player's current location
          */

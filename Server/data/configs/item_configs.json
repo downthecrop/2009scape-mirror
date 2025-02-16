@@ -16309,6 +16309,7 @@
     "examine": "Maybe I should read this...",
     "durability": null,
     "name": "A magic scroll",
+    "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "1505"
   },
@@ -16324,7 +16325,7 @@
     "equipment_slot": "0"
   },
   {
-    "examine": "Quite a small key (Plague City).",
+    "examine": "Quite a small key.",
     "durability": null,
     "name": "A small key",
     "archery_ticket_price": "0",
@@ -55738,7 +55739,7 @@
     "equipment_slot": "4"
   },
   {
-    "examine": "Damaged: These are in need of a good tailor.Repaired: A pair of mourner trousers.",
+    "examine": "These are in need of a good tailor.",
     "durability": null,
     "name": "Mourner trousers",
     "weight": "2.25",
@@ -55746,7 +55747,7 @@
     "id": "6066"
   },
   {
-    "examine": "Damaged: These are in need of a good tailor.Repaired: A pair of mourner trousers.",
+    "examine": "A pair of mourner trousers.",
     "durability": null,
     "name": "Mourner trousers",
     "weight": "2.25",

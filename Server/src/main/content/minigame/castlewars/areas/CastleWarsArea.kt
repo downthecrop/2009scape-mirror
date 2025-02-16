@@ -65,7 +65,6 @@ abstract class CastleWarsArea : MapArea, LogoutListener, InteractionListener {
             defineAreaBorders().forEach { border ->
                 if (border.insideBorder(player)) {
                     sendMessage(player, "You can't remove your team's colours")
-                    // TODO: Equipping a cape or helmet causes issues
                     return@onUnequip false
                 }
             }

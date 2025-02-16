@@ -1,12 +1,15 @@
 package core.game.node.entity.player.info.login
 
+import content.data.Quests
 import content.global.skill.summoning.pet.Pets
+import content.region.kandarin.ardougne.quest.plaguecity.PlagueCity
 import core.ServerConstants
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
+import core.tools.Log
 import org.rs09.consts.Items
-import content.data.Quests
+import org.rs09.consts.Vars
 
 /**
  * Runs one-time save-version-related hooks.
@@ -16,6 +19,7 @@ import content.data.Quests
 class SaveVersionHooks : LoginListener {
     override fun login(player: Player) {
         if (player.version < ServerConstants.CURRENT_SAVEFILE_VERSION) {
+            log(this::class.java, Log.FINE, "Upgrading ${player.name} from ${player.version} to ${ServerConstants.CURRENT_SAVEFILE_VERSION}")
 
             if (player.version < 1) { // GL !1811
                 // Give out crafting hoods if the player bought any crafting capes when the hoods were not obtainable
@@ -69,6 +73,15 @@ class SaveVersionHooks : LoginListener {
                 }
             }
 
+            if (player.version < 3) {
+                // Damage control on Plague city. There are a few varbits that should have been set for spawning
+                when (getQuestStage(player, Quests.PLAGUE_CITY)){
+                    in 6..98 -> setVarbit(player, Vars.VARBIT_QUEST_PLAGUE_CITY_EDMOND_TUNNELS, 1) // Edmond is in the tunnel
+                    in 99..100 ->setVarbit(player, Vars.VARBIT_QUEST_PLAGUE_CITY_RESCUE_ELENA, 1)  // Elena is free
+                }
+            }
+
+            // Finish up
             player.version = ServerConstants.CURRENT_SAVEFILE_VERSION
         }
     }

@@ -10,6 +10,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import content.global.skill.construction.Decoration
+import content.region.kandarin.ardougne.quest.plaguecity.PlagueCityListeners.Companion.ARDOUGNE_TELE_ATTRIBUTE
 import core.game.node.entity.combat.spell.MagicStaff
 import core.game.node.item.Item
 import core.game.system.task.Pulse
@@ -83,6 +84,11 @@ class LecternPlugin : OptionHandler() {
             if (this == BONES_TO_PEACHES && !player.savedData.activityData.isBonesToPeaches) {
                 player.sendMessages("You need the Bones to Peaches ability purchased from MTA before making these.", "This requirement doesn't apply to actually using the tabs.")
                 return false
+            }
+            if(this == ARDOUGNE && !getAttribute(player, ARDOUGNE_TELE_ATTRIBUTE, false)){
+                sendMessage(player, "You need to unlock Ardougne teleport before you can make a tablet.")
+                return false
+
             }
             var found = false
             for (d in requiredDecorations) if (d.objectId == objectId) found = true

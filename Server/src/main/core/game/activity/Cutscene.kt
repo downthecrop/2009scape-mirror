@@ -122,11 +122,12 @@ abstract class Cutscene(val player: Player) {
      * @param expression the FacialExpression the NPC should use
      * @param message the message to send
      * @param onContinue (optional) a method that runs when the dialogue is "continued." Increments the cutscene stage by default.
+     * @param hide Should the continue button be hidden?
      */
-    fun dialogueUpdate(npcId: Int, expression: core.game.dialogue.FacialExpression, message: String, onContinue: () -> Unit = {incrementStage()})
+    fun dialogueUpdate(npcId: Int, expression: core.game.dialogue.FacialExpression, message: String, onContinue: () -> Unit = {incrementStage()}, hide: Boolean = false)
     {
         logCutscene("Sending NPC dialogue update.")
-        sendNPCDialogue(player, npcId, message, expression)
+        sendNPCDialogue(player, npcId, message, expression, hide)
         player.dialogueInterpreter.addAction { _,_ -> onContinue.invoke() }
     }
 

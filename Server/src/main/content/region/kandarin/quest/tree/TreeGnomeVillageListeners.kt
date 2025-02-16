@@ -93,17 +93,25 @@ class TreeGnomeVillageListeners : InteractionListener {
             return@on true
         }
         on(closedChest, IntType.SCENERY, "open"){ player, node ->
-            SceneryBuilder.replace(node.asScenery(), Scenery(openedChest, node.location, node.asScenery().rotation),10)
+            replaceScenery(node.asScenery(), openedChest, -1)
             val upperGuard: NPC = RegionManager.getNpc(player.location, NPCs.KHAZARD_COMMANDER_478, 6) ?: return@on true
             upperGuard.sendChat("Oi. You! Get out of there.")
             upperGuard.attack(player)
             return@on true
         }
         on(openedChest, IntType.SCENERY, "search"){ player, _ ->
-            if(!inInventory(player,Items.ORB_OF_PROTECTION_587)){
-                sendDialogue(player,"You search the chest. Inside you find the gnomes' stolen orb of protection.")
-                addItemOrDrop(player,Items.ORB_OF_PROTECTION_587)
+            if (getQuestStage(player, Quests.TREE_GNOME_VILLAGE) >= 31) {
+                if (!hasAnItem(player, Items.ORB_OF_PROTECTION_587).exists()) {
+                    sendDialogue(player, "You search the chest. Inside you find the gnomes' stolen orb of protection.")
+                    addItemOrDrop(player, Items.ORB_OF_PROTECTION_587)
+                    return@on true
+                }
             }
+            sendMessage(player, "You search the chest but find nothing.")
+            return@on false
+        }
+        on(openedChest, IntType.SCENERY, "close"){ _, node ->
+            replaceScenery(node.asScenery(), closedChest, -1)
             return@on true
         }
         on(strongholdDoor, IntType.SCENERY, "open"){ player, node ->
@@ -119,9 +127,7 @@ class TreeGnomeVillageListeners : InteractionListener {
     }
 
     fun squeezeThrough(player: Player){
-        val squeezeAnim = Animation.create(3844)
-
-        var dest = if (player.location.y >= 3161) 
+        val dest = if (player.location.y >= 3161)
             player.location.transform(Direction.SOUTH, 1)
         else 
             player.location.transform(Direction.NORTH, 1)

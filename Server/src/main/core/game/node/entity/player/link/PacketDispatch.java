@@ -202,7 +202,12 @@ public final class PacketDispatch {
 	 * @param childId The child id.
 	 */
 	public void sendPlayerOnInterface(int interfaceId, int childId) {
-		PacketRepository.send(DisplayModel.class, new DisplayModelContext(player, interfaceId, childId));
+		// fixme right now for iface 68-71 the player is massive
+		// The zoom for the other windows is 2150
+		// for these 4 individuals it should be 796 but dmc.setZoom doesn't work
+		DisplayModelContext dmc = new DisplayModelContext(player, interfaceId, childId);
+		dmc.setZoom(796); // this appears to do nothing
+		PacketRepository.send(DisplayModel.class, dmc);
 	}
 
 	/**

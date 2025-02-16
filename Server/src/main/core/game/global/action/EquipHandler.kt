@@ -33,9 +33,17 @@ class EquipHandler : InteractionListener {
 
     fun handleEquip(player: Player, node: Node) {
         val item = node.asItem()
+        val itemEquipmentSlot = item.definition.getConfiguration<Int>(ItemConfigParser.EQUIP_SLOT, -1)
 
-        if (item == null || player.inventory[item.slot] != item || item.name.toLowerCase().contains("goblin mail")) {
+        val currentEquippedItem = player.equipment[itemEquipmentSlot]
+        if (item == null || currentEquippedItem == item || item.name.toLowerCase().contains("goblin mail")) {
             return
+        }
+
+        if(currentEquippedItem != null){
+            if(!InteractionListeners.run(currentEquippedItem.id, player, currentEquippedItem, false)){
+                return
+            }
         }
 
         val equipStateListener = item.definition.getConfiguration<Plugin<Any>>("equipment", null)
@@ -45,7 +53,7 @@ class EquipHandler : InteractionListener {
                 return
             }
         }
-        if (!InteractionListeners.run(node.id, player, node, true)) {
+        if (!InteractionListeners.run(node.id, player, item, true)) {
             return
         }
 
@@ -70,7 +78,6 @@ class EquipHandler : InteractionListener {
             playAudio(player, item.definition.getConfiguration(ItemConfigParser.EQUIP_AUDIO, 2244))
 
             if (player.properties.autocastSpell != null) {
-                val itemEquipmentSlot = item.definition.getConfiguration<Int>(ItemConfigParser.EQUIP_SLOT, -1)
 
                 if (itemEquipmentSlot == EquipmentContainer.SLOT_WEAPON) {
                     player.properties.autocastSpell = null

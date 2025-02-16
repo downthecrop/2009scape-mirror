@@ -1,5 +1,6 @@
 package content.global.skill.magic.modern
 
+import content.data.Quests
 import content.global.skill.magic.SpellListener
 import content.global.skill.magic.SpellUtils.hasRune
 import content.global.skill.magic.TeleportMethod
@@ -22,6 +23,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
+import content.region.kandarin.ardougne.quest.plaguecity.PlagueCityListeners
 import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
@@ -29,7 +31,6 @@ import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 import org.rs09.consts.Scenery
 import org.rs09.consts.Sounds
-import content.data.Quests
 
 class ModernListeners : SpellListener("modern"){
     override fun defineListeners() {
@@ -66,10 +67,15 @@ class ModernListeners : SpellListener("modern"){
         }
 
         onCast(Modern.ARDOUGNE_TELEPORT, NONE){ player, _ ->
-            if (!hasRequirement(player, Quests.PLAGUE_CITY))
-                return@onCast
-            requires(player,51, arrayOf(Item(Items.WATER_RUNE_555,2),Item(Items.LAW_RUNE_563,2)))
-            sendTeleport(player,61.0, Location.create(2662, 3307, 0))
+            if (getAttribute(player, PlagueCityListeners.ARDOUGNE_TELE_ATTRIBUTE, false)){
+                    requires(player,51, arrayOf(Item(Items.WATER_RUNE_555,2),Item(Items.LAW_RUNE_563,2)))
+                    sendTeleport(player,61.0, Location.create(2662, 3307, 0))
+                }
+            else {
+                // source https://runescape.salmoneus.net/forums/topic/289818-ardougne-teleport-help/
+                sendDialogue(player, "You haven\'t learnt how to cast this spell yet")
+            }
+            return@onCast
         }
 
         onCast(Modern.WATCHTOWER_TELEPORT, NONE){ player, _ ->

@@ -434,7 +434,7 @@ public final class DialogueInterpreter {
      * @return The chatbox component.
      */
     public Component sendDialogues(Entity entity, int expression, String... messages) {
-        return sendDialogues(entity instanceof Player ? -1 : ((NPC) entity).getShownNPC(player).getId(), expression, messages);
+        return sendDialogues(entity instanceof Player ? -1 : ((NPC) entity).getShownNPC(player).getId(), expression, false, messages);
     }
 
     /**
@@ -442,12 +442,11 @@ public final class DialogueInterpreter {
      * @param npcId The npc id.
      * @param expression The entity's facial expression.
      * @param messages The messages.
-     * @param hide the continue.
+     * @param hide should the continue button be hidden?
      * @return The chatbox component.
      */
     public Component sendDialogues(int npcId, FacialExpression expression, boolean hide, String... messages) {
-        sendDialogues(npcId, expression == null ? -1 : expression.getAnimationId(), messages);
-        return player.getInterfaceManager().getChatbox();
+        return sendDialogues(npcId, expression == null ? -1 : expression.getAnimationId(), hide, messages);
     }
 
     /**
@@ -458,34 +457,18 @@ public final class DialogueInterpreter {
      * @return The chatbox component.
      */
     public Component sendDialogues(Entity entity, FacialExpression expression, boolean hide, String... messages) {
-        sendDialogues(entity, expression, messages);
-        player.getPacketDispatch().sendInterfaceConfig(player.getInterfaceManager().getChatbox().getId(), 3, hide);
-        return player.getInterfaceManager().getChatbox();
+        return sendDialogues(entity.getId(), expression == null ? -1 : expression.getAnimationId(), hide, messages);
     }
 
     /**
      * Send dialogues based on the amount of specified messages.
      * @param expression The entity's facial expression.
      * @param messages The messages.
-     * @param hide the continue.
+     * @param hide should the continue button be hidden?
      * @return The chatbox component.
      */
     public Component sendDialogues(Entity entity, int expression, boolean hide, String... messages) {
-        sendDialogues(entity, expression, messages);
-        player.getPacketDispatch().sendInterfaceConfig(player.getInterfaceManager().getChatbox().getId(), 3, hide);
-        return player.getInterfaceManager().getChatbox();
-    }
-
-    /**
-     * Send dialogues based on the amount of specified messages.
-     * @param expression The entity's facial expression.
-     * @param messages The messages.
-     * @return The chatbox component.
-     */
-    public Component sendDialogues(int npcId, int expression, boolean hide, String... messages) {
-        sendDialogues(npcId, expression, messages);
-        player.getPacketDispatch().sendInterfaceConfig(player.getInterfaceManager().getChatbox().getId(), 3, hide);
-        return player.getInterfaceManager().getChatbox();
+        return sendDialogues(entity.getId(), expression, hide, messages);
     }
 
     /**
@@ -496,7 +479,7 @@ public final class DialogueInterpreter {
      * @return The chatbox component.
      */
     public Component sendDialogues(int npcId, FacialExpression expression, String... messages) {
-        return sendDialogues(npcId, expression == null ? -1 : expression.getAnimationId(), messages);
+        return sendDialogues(npcId, expression == null ? -1 : expression.getAnimationId(),false,  messages);
     }
 
     static Pattern GENDERED_SUBSTITUTION = Pattern.compile("@g\\[([^,]*),([^\\]]*)\\]");
@@ -512,7 +495,6 @@ public final class DialogueInterpreter {
         m.appendTail(sb);
         return sb.toString();
     }
-
     /**
      * Send dialogues based on the amount of specified messages.
      * @param npcId The npc id.
@@ -521,18 +503,31 @@ public final class DialogueInterpreter {
      * @return The chatbox component.
      */
     public Component sendDialogues(int npcId, int expression, String... messages) {
+        return sendDialogues(npcId, expression, false, messages);
+    }
+
+    /**
+     * Send dialogues based on the amount of specified messages.
+     * @param npcId The npc id.
+     * @param expression The entity's facial expression.
+     * @param messages The messages.
+     * @param hide should the continue button be hidden?
+     * @return The chatbox component.
+     */
+    public Component sendDialogues(int npcId, int expression, boolean hide, String... messages) {
         if (messages.length < 1 || messages.length > 4) {
             System.err.println("Invalid amount of messages: " + messages.length);
             return null;
         }
         boolean npc = npcId > -1;
         int interfaceId = (npc ? 240 : 63) + messages.length;
+        interfaceId += hide ? 4 : 0;
         if (expression == -1) {
             expression = FacialExpression.HALF_GUILTY.getAnimationId();
         }
         player.getPacketDispatch().sendAnimationInterface(expression, interfaceId, 2);
+        player.getPacketDispatch().sendItemOnInterface(-1, 1, interfaceId, 1);
         if (npc) {
-            player.getPacketDispatch().sendItemOnInterface(-1, 1, interfaceId, 1);
             player.getPacketDispatch().sendNpcOnInterface(npcId, interfaceId, 2);
             player.getPacketDispatch().sendString(NPCDefinition.forId(npcId).getName(), interfaceId, 3);
         } else {
@@ -540,7 +535,7 @@ public final class DialogueInterpreter {
             player.getPacketDispatch().sendString(player.getUsername(), interfaceId, 3);
         }
         for (int i = 0; i < messages.length; i++) {
-            player.getPacketDispatch().sendString(doSubstitutions(player, messages[i].toString()), interfaceId, (i + 4));
+            player.getPacketDispatch().sendString(doSubstitutions(player, messages[i]), interfaceId, (i + 4));
         }
         player.getInterfaceManager().openChatbox(interfaceId);
         player.getPacketDispatch().sendInterfaceConfig(player.getInterfaceManager().getChatbox().getId(), 3, false);

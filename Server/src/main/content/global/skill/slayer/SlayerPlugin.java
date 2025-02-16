@@ -28,7 +28,6 @@ public class SlayerPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		SceneryDefinition.forId(8783).getHandlers().put("option:open", this);
 		SceneryDefinition.forId(8785).getHandlers().put("option:climb-up", this);
 		SceneryDefinition.forId(23158).getHandlers().put("option:exit", this);
 		SceneryDefinition.forId(23157).getHandlers().put("option:exit", this);
@@ -53,9 +52,6 @@ public class SlayerPlugin extends OptionHandler {
 	@Override
 	public boolean handle(Player player, Node node, String option) {
 		switch (node.getId()) {
-		case 8783:
-			player.teleport(new Location(2044, 4649, 0));
-			break;
 		case 8785:
 			player.teleport(new Location(2543, 3327, 0));
 			break;
