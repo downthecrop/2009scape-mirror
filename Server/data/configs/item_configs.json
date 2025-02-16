@@ -5719,7 +5719,7 @@
   },
   {
     "shop_price": "35",
-    "examine": "Allows you to rest in the luxurious Paramayer&#91;sic&#93; Inn.",
+    "examine": "Allows you to rest in the luxurious Paramayer Inn.",
     "durability": null,
     "name": "Paramaya ticket",
     "archery_ticket_price": "0",
@@ -5727,7 +5727,7 @@
   },
   {
     "shop_price": "35",
-    "examine": "Allows you to rest in the luxurious Paramayer&#91;sic&#93; Inn.",
+    "examine": "Allows you to rest in the luxurious Paramayer Inn.",
     "durability": null,
     "name": "Paramaya ticket",
     "archery_ticket_price": "0",
@@ -33982,7 +33982,7 @@
   {
     "requirements": "{1,40}",
     "ge_buy_limit": "2",
-    "examine": "Rune platebody with complete gold trim &amp; plating.",
+    "examine": "Rune platebody with complete gold trim & plating.",
     "durability": null,
     "weight": "10",
     "absorb": "3,0,6",
@@ -48987,7 +48987,7 @@
     "id": "5419"
   },
   {
-    "examine": "There are &lt;number of potatoes&gt; in this sack.",
+    "examine": "There is one potato in this sack.",
     "grand_exchange_price": "1276",
     "durability": null,
     "name": "Potatoes(1)",
@@ -49004,7 +49004,7 @@
     "id": "5421"
   },
   {
-    "examine": "There are &lt;number of potatoes&gt; in this sack.",
+    "examine": "There are two potatoes in this sack.",
     "grand_exchange_price": "1276",
     "durability": null,
     "name": "Potatoes(2)",
@@ -49021,7 +49021,7 @@
     "id": "5423"
   },
   {
-    "examine": "There are &lt;number of potatoes&gt; in this sack.",
+    "examine": "There are three potatoes in this sack.",
     "grand_exchange_price": "1276",
     "durability": null,
     "name": "Potatoes(3)",
@@ -49038,7 +49038,7 @@
     "id": "5425"
   },
   {
-    "examine": "There are &lt;number of potatoes&gt; in this sack.",
+    "examine": "There are four potatoes in this sack.",
     "grand_exchange_price": "1276",
     "durability": null,
     "name": "Potatoes(4)",
@@ -49055,7 +49055,7 @@
     "id": "5427"
   },
   {
-    "examine": "There are &lt;number of potatoes&gt; in this sack.",
+    "examine": "There are five potatoes in this sack.",
     "grand_exchange_price": "1276",
     "durability": null,
     "name": "Potatoes(5)",
@@ -49072,7 +49072,7 @@
     "id": "5429"
   },
   {
-    "examine": "There are &lt;number of potatoes&gt; in this sack.",
+    "examine": "There are six potatoes in this sack.",
     "grand_exchange_price": "1276",
     "durability": null,
     "name": "Potatoes(6)",
@@ -49089,7 +49089,7 @@
     "id": "5431"
   },
   {
-    "examine": "There are &lt;number of potatoes&gt; in this sack.",
+    "examine": "There are seven potatoes in this sack.",
     "grand_exchange_price": "1276",
     "durability": null,
     "name": "Potatoes(7)",
@@ -49106,7 +49106,7 @@
     "id": "5433"
   },
   {
-    "examine": "There are &lt;number of potatoes&gt; in this sack.",
+    "examine": "There are eight potatoes in this sack.",
     "grand_exchange_price": "1276",
     "durability": null,
     "name": "Potatoes(8)",
@@ -49123,7 +49123,7 @@
     "id": "5435"
   },
   {
-    "examine": "There are &lt;number of potatoes&gt; in this sack.",
+    "examine": "There are nine potatoes in this sack.",
     "grand_exchange_price": "1276",
     "durability": null,
     "name": "Potatoes(9)",
@@ -49141,7 +49141,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "There are &lt;number of potatoes&gt; in this sack.",
+    "examine": "There are ten potatoes in this sack.",
     "grand_exchange_price": "1052",
     "durability": null,
     "name": "Potatoes(10)",
@@ -49333,7 +49333,7 @@
     "id": "5459"
   },
   {
-    "examine": "There are &lt;number of cabbages&gt; in this sack.",
+    "examine": "There is one cabbage in this sack.",
     "grand_exchange_price": "1304",
     "durability": null,
     "name": "Cabbages(1)",
@@ -49349,7 +49349,7 @@
     "id": "5461"
   },
   {
-    "examine": "There are &lt;number of cabbages&gt; in this sack.",
+    "examine": "There are two cabbages in this sack.",
     "grand_exchange_price": "1304",
     "durability": null,
     "name": "Cabbages(2)",
@@ -49365,7 +49365,7 @@
     "id": "5463"
   },
   {
-    "examine": "There are &lt;number of cabbages&gt; in this sack.",
+    "examine": "There are three cabbages in this sack.",
     "grand_exchange_price": "1304",
     "durability": null,
     "name": "Cabbages(3)",
@@ -49381,7 +49381,7 @@
     "id": "5465"
   },
   {
-    "examine": "There are &lt;number of cabbages&gt; in this sack.",
+    "examine": "There are four cabbages in this sack.",
     "grand_exchange_price": "1304",
     "durability": null,
     "name": "Cabbages(4)",
@@ -49397,7 +49397,7 @@
     "id": "5467"
   },
   {
-    "examine": "There are &lt;number of cabbages&gt; in this sack.",
+    "examine": "There are five cabbages in this sack.",
     "grand_exchange_price": "1304",
     "durability": null,
     "name": "Cabbages(5)",
@@ -49413,7 +49413,7 @@
     "id": "5469"
   },
   {
-    "examine": "There are &lt;number of cabbages&gt; in this sack.",
+    "examine": "There are six cabbages in this sack.",
     "grand_exchange_price": "1304",
     "durability": null,
     "name": "Cabbages(6)",
@@ -49429,7 +49429,7 @@
     "id": "5471"
   },
   {
-    "examine": "There are &lt;number of cabbages&gt; in this sack.",
+    "examine": "There are seven cabbages in this sack.",
     "grand_exchange_price": "1304",
     "durability": null,
     "name": "Cabbages(7)",
@@ -49445,7 +49445,7 @@
     "id": "5473"
   },
   {
-    "examine": "There are &lt;number of cabbages&gt; in this sack.",
+    "examine": "There are eight cabbages in this sack.",
     "grand_exchange_price": "1304",
     "durability": null,
     "name": "Cabbages(8)",
@@ -49461,7 +49461,7 @@
     "id": "5475"
   },
   {
-    "examine": "There are &lt;number of cabbages&gt; in this sack.",
+    "examine": "There are nine cabbages in this sack.",
     "grand_exchange_price": "1304",
     "durability": null,
     "name": "Cabbages(9)",
@@ -49478,7 +49478,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "There are &lt;number of cabbages&gt; in this sack.",
+    "examine": "There are ten cabbages in this sack.",
     "grand_exchange_price": "917",
     "durability": null,
     "name": "Cabbages(10)",
@@ -58309,7 +58309,7 @@
   {
     "shop_price": "150",
     "ge_buy_limit": "100",
-    "examine": "A &lt;colour&gt; armband, as worn by the Tai Bwo Wannai locals.",
+    "examine": "A brown armband, as worn by the Tai Bwo Wannai locals.",
     "grand_exchange_price": "734",
     "durability": null,
     "name": "Villager armband",
@@ -58442,7 +58442,7 @@
   {
     "shop_price": "150",
     "ge_buy_limit": "100",
-    "examine": "A &lt;colour&gt; armband, as worn by the Tai Bwo Wannai locals.",
+    "examine": "A blue armband, as worn by the Tai Bwo Wannai locals.",
     "grand_exchange_price": "672",
     "durability": null,
     "name": "Villager armband",
@@ -58553,7 +58553,7 @@
   {
     "shop_price": "150",
     "ge_buy_limit": "100",
-    "examine": "A &lt;colour&gt; armband, as worn by the Tai Bwo Wannai locals.",
+    "examine": "A yellow armband, as worn by the Tai Bwo Wannai locals.",
     "grand_exchange_price": "823",
     "durability": null,
     "name": "Villager armband",
@@ -58664,7 +58664,7 @@
   {
     "shop_price": "150",
     "ge_buy_limit": "100",
-    "examine": "A &lt;colour&gt; armband, as worn by the Tai Bwo Wannai locals.",
+    "examine": "A pink armband, as worn by the Tai Bwo Wannai locals.",
     "grand_exchange_price": "1697",
     "durability": null,
     "name": "Villager armband",
@@ -59764,7 +59764,7 @@
   },
   {
     "destroy_message": "You will not get a replacement for the present. Open it for your reward.",
-    "examine": "Thanks for all your help! Love, Bob &amp; Neite.",
+    "examine": "Thanks for all your help! Love, Bob & Neite.",
     "durability": null,
     "name": "Present",
     "tradeable": "false",
@@ -93158,7 +93158,7 @@
   },
   {
     "requirements": "{1,40}",
-    "examine": "Rune platebody with complete gold trim &amp; plating.",
+    "examine": "Rune platebody with complete gold trim & plating.",
     "durability": null,
     "weight": "10",
     "absorb": "3,0,6",
@@ -105245,28 +105245,28 @@
     "id": "12196"
   },
   {
-    "examine": "(hatchling) A hatchling &lt;dragon colour&gt; dragon.(baby) A bigger baby &lt;colour&gt; dragon.",
+    "examine": "A hatchling green dragon.",
     "durability": null,
     "name": "Dragon hatchling",
     "archery_ticket_price": "0",
     "id": "12197"
   },
   {
-    "examine": "Baby: Little NipperAdult: Bigger Nipper.",
+    "examine": "Little Nipper.",
     "durability": null,
     "name": "Baby giant crab",
     "archery_ticket_price": "0",
     "id": "12198"
   },
   {
-    "examine": "(Baby) A stripy little baby raccoon.(Adult) He can run with us.",
+    "examine": "A stripy little baby raccoon.",
     "durability": null,
     "name": "Baby raccoon",
     "archery_ticket_price": "0",
     "id": "12199"
   },
   {
-    "examine": "Adult: An experienced nut-thief.Baby: A tiny nut-thief.",
+    "examine": "An experienced nut-thief.",
     "durability": null,
     "name": "Squirrel",
     "archery_ticket_price": "0",
@@ -106499,28 +106499,28 @@
     "id": "12468"
   },
   {
-    "examine": "(hatchling) A hatchling &lt;dragon colour&gt; dragon.(baby) A bigger baby &lt;colour&gt; dragon.",
+    "examine": "A hatchling red dragon.",
     "durability": null,
-    "name": "Hatchling dragon",
+    "name": "Dragon hatchling",
     "archery_ticket_price": "0",
     "id": "12469"
   },
   {
-    "examine": "(hatchling) A hatchling &lt;dragon colour&gt; dragon.(baby) A bigger baby &lt;colour&gt; dragon.",
+    "examine": "A hatchling blue dragon.",
     "durability": null,
     "name": "Hatchling dragon",
     "archery_ticket_price": "0",
     "id": "12471"
   },
   {
-    "examine": "(hatchling) A hatchling &lt;dragon colour&gt; dragon.(baby) A bigger baby &lt;colour&gt; dragon.",
+    "examine": "A hatchling green dragon.",
     "durability": null,
     "name": "Hatchling dragon",
     "archery_ticket_price": "0",
     "id": "12473"
   },
   {
-    "examine": "(hatchling) A hatchling &lt;dragon colour&gt; dragon.(baby) A bigger baby &lt;colour&gt; dragon.",
+    "examine": "A hatchling black dragon.",
     "durability": null,
     "name": "Hatchling dragon",
     "archery_ticket_price": "0",
@@ -122125,7 +122125,7 @@
   {
     "lendable": "true",
     "destroy_message": "Drop",
-    "examine": "Rune platebody with complete gold trim &amp; plating.",
+    "examine": "Rune platebody with complete gold trim & plating.",
     "grand_exchange_price": "2034838",
     "durability": null,
     "name": "Gilded platebody",
