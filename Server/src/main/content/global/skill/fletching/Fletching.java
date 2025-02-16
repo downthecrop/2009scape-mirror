@@ -132,6 +132,7 @@ public class Fletching {
             YEW_LONGBOW((byte) 1,66,855,70, 75, new Animation(6688)),
             MAGIC_SHORTBOW((byte) 1,72,861,80, 83.3, new Animation(6683)),
             MAGIC_LONGBOW((byte) 1,70,859,85, 91.5, new Animation(6689)),
+            OGRE_COMP_BOW((byte) 1,4825,4827,30, 45, new Animation(-1)),
 
             //crossbows
             BRONZE_CBOW((byte) 2,9454,9174,9, 6, new Animation(6671)),
@@ -266,7 +267,7 @@ public class Fletching {
     }
     private enum Items{
         STANDARD(1511,FletchingItems.ARROW_SHAFT, FletchingItems.SHORT_BOW, FletchingItems.LONG_BOW, FletchingItems.WOODEN_STOCK),
-        ACHEY(2862, FletchingItems.OGRE_ARROW_SHAFT),
+        ACHEY(2862, FletchingItems.OGRE_ARROW_SHAFT, FletchingItems.OGRE_COMP_BOW),
         OAK(1521, FletchingItems.OAK_SHORTBOW, FletchingItems.OAK_LONGBOW, FletchingItems.OAK_STOCK),
         WILLOW(1519, FletchingItems.WILLOW_SHORTBOW, FletchingItems.WILLOW_LONGBOW, FletchingItems.WILLOW_STOCK),
         MAPLE(1517, FletchingItems.MAPLE_SHORTOW, FletchingItems.MAPLE_LONGBOW, FletchingItems.MAPLE_STOCK),
@@ -304,6 +305,7 @@ public class Fletching {
         
         //Achey logs
         OGRE_ARROW_SHAFT(2864, 6.4, 5, 4),
+        OGRE_COMP_BOW(4825, 45, 30, 1),
 
         //Oak logs
         OAK_SHORTBOW(54, 16.5, 20, 1),

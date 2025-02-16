@@ -164,7 +164,7 @@ class ChompyBirdNPC : AbstractNPC, InteractionListener {
       return@on true
     }
 
-    on(Items.OGRE_BOW_2883, IntType.ITEM, "check kills") { player, _ ->
+    on(intArrayOf(Items.OGRE_BOW_2883, Items.COMP_OGRE_BOW_4827), IntType.ITEM, "check kills") { player, _ ->
       val amount = player.getAttribute("chompy-kills", 0)
       sendDialogue(player, "You have killed $amount chompy birds.")
       return@on true

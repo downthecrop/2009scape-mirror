@@ -1818,8 +1818,11 @@ fun sendItemDialogue(player: Player, item: Any, message: String) {
  * @param item2 the ID of the second item to show
  * @param message the text to display
  */
-fun sendDoubleItemDialogue(player: Player, item1: Int, item2: Int, message: String) {
-    player.dialogueInterpreter.sendDoubleItemMessage(item1, item2, message)
+fun sendDoubleItemDialogue(player: Player, item1: Any, item2: Any, message: String) {
+    when (item1) {
+        is Item -> player.dialogueInterpreter.sendDoubleItemMessage(item1, item2 as Item, message)
+        is Int -> player.dialogueInterpreter.sendDoubleItemMessage(item1, item2 as Int, message)
+    }
 }
 
 /**

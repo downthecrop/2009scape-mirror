@@ -9,6 +9,7 @@ import core.game.node.item.Item;
 public enum UnfinishedPotion {
 	GUAM(Herbs.GUAM.getProduct(), 3, new Item(91)),
 	MARRENTILL(Herbs.MARRENTILL.getProduct(), 5, new Item(93)),
+	ROGUES_PURSE(Herbs.ROGUES_PURSE.getProduct(), 5, new Item(4840)),
 	TARROMIN(Herbs.TARROMIN.getProduct(), 12, new Item(95)),
 	HARRALANDER(Herbs.HARRALANDER.getProduct(), 22, new Item(97)),
 	RANARR(Herbs.RANARR.getProduct(), 30, new Item(99)),

@@ -36,18 +36,28 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
 
         /**
          * Force animation + messages on all NPCs in a radius of 10 from the player.
+         * Add an optional 3rd argument if cycling through a range of animation ids.
          */
-        define("npcanim", Privilege.ADMIN, "::npcanim <lt>Animation ID<gt>") { player, args ->
+        define("npcanim", Privilege.ADMIN, "::npcanim <lt>Animation ID<gt> <lt>Optional: End Animation ID<gt>") { player, args ->
             if (args.size < 2) {
                 reject(player, "Syntax error: ::npcanim <Animation ID>")
             }
             npcs = RegionManager.getLocalNpcs(player.location, 10)
             for (n in npcs) {
-                n.sendChat(args.slice(1 until args.size).joinToString(" "))
                 n.lock(6)
                 n.faceTemporary(player, 6)
-                n.animator.animate(Animation(args[1].toInt()))
-                n.animate(Animation.create(-1), 6)
+                if (args.size == 2) {
+                    n.sendChat(args.slice(1 until args.size).joinToString(" "))
+                    n.animate(Animation(args[1].toInt()))
+                    n.animate(Animation.create(-1), 6)
+                }
+                if (args.size == 3) {
+                    var count = 0
+                    for(animNum in args[1].toInt()..args[2].toInt()) {
+                        count++
+                        n.animate(Animation(animNum), count*6)
+                    }
+                }
             }
         }
 

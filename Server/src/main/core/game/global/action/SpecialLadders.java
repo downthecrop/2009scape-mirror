@@ -3,6 +3,7 @@ package core.game.global.action;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.world.map.Location;
+import content.region.kandarin.feldip.quest.zogreflesheaters.ZogreFleshEatersListeners;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -80,6 +81,13 @@ public enum SpecialLadders implements LadderAchievementCheck {
     PATERDOMUS_TEMPLE_STAIRCASE_SOUTH_DOWN(new Location(3415, 3486,1), new Location(3414, 3486,0)),
     PHASMATYS_BAR_DOWN(new Location(3681,3498,0), new Location(3682,9961,0)),
     PHASMATYS_BAR_UP(new Location(3682,9962,0), new Location(3681,3497,0)),
+    YANNILE_HOUSE_DOWN(new Location(2597, 3107,1), new Location(2597, 3107,0)),
+    YANNILE_HOUSE_UP(new Location(2597, 3107,0), new Location(2597, 3107,1)) {
+        @Override
+        public void checkAchievement(Player player) {
+            ZogreFleshEatersListeners.ladderMakesSithikTurnIntoOgre(player);
+        }
+    },
     SEERS_VILLAGE_SPINNING_HOUSE_ROOFTOP_UP(new Location(2715,3472,1), new Location(2714,3472,3)) {
         @Override
         public void checkAchievement(Player player) {

@@ -38,6 +38,11 @@ public final class FletchingPulse extends SkillPulse<Item> {
 	private int amount = 0;
 
 	/**
+	 * Represents the amount to arrows fletched (for ogre arrow shafts which is a random number from 2-6).
+	 */
+	private int finalAmount = 0;
+
+	/**
 	 * Constructs a new {@code FletchingPulse.java} {@code Object}.
 	 * @param player
 	 * @param node
@@ -63,6 +68,17 @@ public final class FletchingPulse extends SkillPulse<Item> {
 				return false;
 			}
 		}
+		if (fletch == Fletching.FletchingItems.OGRE_COMP_BOW) {
+			// Technically, this isn't supposed to show up till you've asked Grish.
+			if (player.getQuestRepository().getQuest(Quests.ZOGRE_FLESH_EATERS).getStage(player) < 8) {
+				player.getPacketDispatch().sendMessage("You must have started Zogre Flesh Eaters and asked Grish to make this.");
+				return false;
+			}
+			if (!player.getInventory().contains(2859, 1)) {
+				player.getPacketDispatch().sendMessage("You need to have Wolf Bones in order to make this.");
+				return false;
+			}
+		}
 		return true;
 	}
 
@@ -83,7 +99,16 @@ public final class FletchingPulse extends SkillPulse<Item> {
 		if (player.getInventory().remove(node)) {
 			final Item item = new Item(fletch.id,fletch.amount);
 			if ( fletch == Fletching.FletchingItems.OGRE_ARROW_SHAFT ) {
-				item.setAmount(RandomFunction.random(3,6));
+				// The amount of shafts given is random; between two and six will be made.
+				finalAmount = RandomFunction.random(2,6);
+				item.setAmount(finalAmount);
+			}
+			if ( fletch == Fletching.FletchingItems.OGRE_COMP_BOW ) {
+				if (!player.getInventory().contains(2859, 1)) {
+					return false;
+				} else {
+					player.getInventory().remove(new Item(2859));
+				}
 			}
 			player.getInventory().add(item);
 			player.getSkills().addExperience(Skills.FLETCHING, fletch.experience, true);
@@ -111,6 +136,8 @@ public final class FletchingPulse extends SkillPulse<Item> {
 		switch (fletch) {
 		case ARROW_SHAFT:
 			return "You carefully cut the wood into 15 arrow shafts.";
+		case OGRE_ARROW_SHAFT:
+			return "You carefully cut the wood into " + finalAmount + " arrow shafts.";
 		default:
 			return "You carefully cut the wood into " + (StringUtils.isPlusN(fletch.getItem().getName()) ? "an" : "a") + " " + fletch.getItem().getName().replace("(u)", "").trim() + ".";
 		}

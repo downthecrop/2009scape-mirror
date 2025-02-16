@@ -256,27 +256,6 @@ class ChompyBird : Quest(Quests.BIG_CHOMPY_BIRD_HUNTING, 35, 34, 2, Vars.VARP_QU
       return@onUseWith true
     }
 
-    onUseWith(IntType.ITEM, Items.OGRE_ARROW_SHAFT_2864, Items.FEATHER_314) { player, used, with ->
-      val shaftAmount = amountInInventory(player, used.id)
-      val featherAmount = amountInInventory(player, with.id)
-      var maxAmount = min(shaftAmount, featherAmount)
-      
-      submitIndividualPulse(player, object : Pulse(3) {
-        override fun pulse() : Boolean {
-          val iterAmount = min(maxAmount, 6)
-          if (removeItem(player, Item(Items.OGRE_ARROW_SHAFT_2864, iterAmount)) && removeItem(player, Item(Items.FEATHER_314, iterAmount))) 
-          {
-            addItem(player, Items.FLIGHTED_OGRE_ARROW_2865, iterAmount)
-            rewardXP(player, Skills.FLETCHING, 0.9 * iterAmount)
-            maxAmount -= iterAmount
-          }
-          return maxAmount == 0
-        }
-      })
-
-      return@onUseWith true
-    }
-
     onUseWith(IntType.ITEM, Items.WOLF_BONES_2859, Items.CHISEL_1755) { player, used, with ->
       val maxAmount = amountInInventory(player, used.id)
 
@@ -324,6 +303,7 @@ class ChompyBird : Quest(Quests.BIG_CHOMPY_BIRD_HUNTING, 35, 34, 2, Vars.VARP_QU
         val amountThisIter = min(6, getMaxAmount())
         if (removeItem(player, Item(used.id, amountThisIter)) && removeItem(player, Item(with.id, amountThisIter))) {
           addItem(player, Items.OGRE_ARROW_2866, amountThisIter)
+          sendMessage(player, "You make $amountThisIter ogre arrows.")
           rewardXP(player, Skills.FLETCHING, 6.0)
         }
       }

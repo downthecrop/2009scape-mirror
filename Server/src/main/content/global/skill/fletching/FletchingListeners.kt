@@ -1,12 +1,13 @@
 package content.global.skill.fletching
 
-import core.game.node.entity.skill.Skills
-import content.global.skill.fletching.Fletching
+import content.data.Quests
 import content.global.skill.fletching.items.arrow.ArrowHeadPulse
 import content.global.skill.fletching.items.arrow.HeadlessArrowPulse
+import content.global.skill.fletching.items.arrow.HeadlessOgreArrowPulse
 import content.global.skill.fletching.items.bow.StringPulse
 import content.global.skill.fletching.items.crossbow.LimbPulse
 import core.api.*
+import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.net.packet.PacketRepository
 import core.net.packet.context.ChildPositionContext
@@ -34,7 +35,9 @@ class FletchingListeners : InteractionListener {
     val MITH_GRAPPLE = Items.MITH_GRAPPLE_9418
     val ROPE_GRAPPLE = Items.MITH_GRAPPLE_9419
     val ARROW_SHAFT = Items.ARROW_SHAFT_52
+    val OGRE_ARROW_SHAFT = Items.OGRE_ARROW_SHAFT_2864
     val FLETCHED_SHAFT = Items.HEADLESS_ARROW_53
+    val FLIGHTED_OGRE_ARROW = Items.FLIGHTED_OGRE_ARROW_2865
     val UNFINISHED_ARROWS = Fletching.ArrowHeads.values().map(Fletching.ArrowHeads::unfinished).toIntArray()
     val FEATHERS = intArrayOf(FEATHER_314,STRIPY_FEATHER_10087,RED_FEATHER_10088,BLUE_FEATHER_10089,YELLOW_FEATHER_10090,ORANGE_FEATHER_10091)
     val UNSTRUNG_BOWS = Fletching.String.values().map(Fletching.String::unfinished).toIntArray()
@@ -44,6 +47,14 @@ class FletchingListeners : InteractionListener {
 
         onUseWith(IntType.ITEM,STRINGS,*UNSTRUNG_BOWS){ player, string, bow ->
             val enum = Fletching.stringMap[bow.id] ?: return@onUseWith false
+
+            if (bow.id == Items.UNSTRUNG_COMP_BOW_4825) {
+                // You shouldn't be able to string a bow
+                if (getQuestStage(player, Quests.ZOGRE_FLESH_EATERS) < 8) {
+                    player.packetDispatch.sendMessage("You must have started Zogre Flesh Eaters and asked Grish to string this.")
+                    return@onUseWith true
+                }
+            }
             if(enum.string != string.id){
                 player.sendMessage("That's not the right kind of string for this.")
                 return@onUseWith true
@@ -74,6 +85,21 @@ class FletchingListeners : InteractionListener {
                         return player.inventory.getAmount(FLETCHED_SHAFT)
                     }
                 }
+            handler.open()
+            return@onUseWith true
+        }
+
+        onUseWith(IntType.ITEM,OGRE_ARROW_SHAFT,*FEATHERS){ player, shaft, feather ->
+            val handler: SkillDialogueHandler =
+                    object : SkillDialogueHandler(player, SkillDialogue.MAKE_SET_ONE_OPTION, Item(FLIGHTED_OGRE_ARROW)) {
+                        override fun create(amount: Int, index: Int) {
+                            player.pulseManager.run(HeadlessOgreArrowPulse(player, shaft.asItem(), Item(feather.id, 4), amount))
+                        }
+
+                        override fun getAll(index: Int): Int {
+                            return player.inventory.getAmount(FLIGHTED_OGRE_ARROW)
+                        }
+                    }
             handler.open()
             return@onUseWith true
         }

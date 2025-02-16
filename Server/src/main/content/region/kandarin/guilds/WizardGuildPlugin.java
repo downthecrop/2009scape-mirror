@@ -36,7 +36,6 @@ public final class WizardGuildPlugin extends OptionHandler {
 		SceneryDefinition.forId(2155).getHandlers().put("option:open", this);
 		SceneryDefinition.forId(1722).getHandlers().put("option:climb-up", this);
 		new WizardDistentorDialogue().init();
-		new ZavisticRarveDialogue().init();
 		new ProfessorImblewynDialogue().init();
 		new WizardFrumsconeDialogue().init();
 		new RobeStoreDialogue().init();
@@ -172,68 +171,6 @@ public final class WizardGuildPlugin extends OptionHandler {
 		@Override
 		public int[] getIds() {
 			return new int[] { 462 };
-		}
-
-	}
-
-	/**
-	 * Represents the dialogue used for zavistic rarve.
-	 * @author 'Vexia
-	 * @version 1.0
-	 */
-	public final class ZavisticRarveDialogue extends DialoguePlugin {
-
-		/**
-		 * Constructs a new {@code ZavisticRarveDialogue} {@code Object}.
-		 */
-		public ZavisticRarveDialogue() {
-			/**
-			 * empty.
-			 */
-		}
-
-		/**
-		 * Constructs a new {@code ZavisticRarveDialogue} {@code Object}.
-		 * @param player the player.
-		 */
-		public ZavisticRarveDialogue(final Player player) {
-			super(player);
-		}
-
-		@Override
-		public DialoguePlugin newInstance(Player player) {
-			return new ZavisticRarveDialogue(player);
-		}
-
-		@Override
-		public boolean open(Object... args) {
-			npc = (NPC) args[0];
-			npc("What are you doing...Oh, it's you...sorry...didn't", "realise... what can I do for you?");
-			stage = 0;
-			return true;
-		}
-
-		@Override
-		public boolean handle(int interfaceId, int buttonId) {
-			switch (stage) {
-			case 0:
-				player("Thanks for your help with all of this.");
-				stage = 1;
-				break;
-			case 1:
-				npc("Ooohh, no thanks required. It's I who should be", "thanking you my friend...your investigative mind has", "shown how vigilant we really should be for this type of", "evil use of the magical arts.");
-				stage = 2;
-				break;
-			case 2:
-				end();
-				break;
-			}
-			return true;
-		}
-
-		@Override
-		public int[] getIds() {
-			return new int[] { 2059 };
 		}
 
 	}

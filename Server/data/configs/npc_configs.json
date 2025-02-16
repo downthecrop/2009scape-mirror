@@ -19220,6 +19220,21 @@
     "attack_level": "1"
   },
   {
+    "examine": "A human zombie.",
+    "melee_animation": "5568",
+    "combat_audio": "931,923,922",
+    "defence_animation": "5567",
+    "death_animation": "5569",
+    "name": "Zombie",
+    "defence_level": "30",
+    "safespot": null,
+    "lifepoints": "50",
+    "strength_level": "30",
+    "id": "1826",
+    "range_level": "1",
+    "attack_level": "30"
+  },
+  {
     "examine": "Flies like a rock.",
     "melee_animation": "9454",
     "range_animation": "1516",
@@ -21498,16 +21513,28 @@
     "attack_level": "1"
   },
   {
+    "examine": "A partially decomposing zombie ogre.",
+    "slayer_task": "64",
+    "combat_audio": "",
+    "melee_animation": "359",
+    "range_animation": "359",
+    "attack_speed": "6",
+    "magic_level": "1",
+    "respawn_delay": "60",
+    "defence_animation": "360",
+    "slayer_exp": "",
+    "weakness": "7",
+    "magic_animation": "359",
+    "death_animation": "361",
     "name": "Slash Bash",
-    "defence_level": "1",
+    "defence_level": "60",
     "safespot": null,
-    "lifepoints": "103",
-    "strength_level": "1",
+    "lifepoints": "100",
+    "strength_level": "120",
     "id": "2060",
     "aggressive": "true",
-    "range_level": "1",
-    "respawn_delay": "60",
-    "attack_level": "1"
+    "range_level": "100",
+    "attack_level": "100"
   },
   {
     "examine": "I can see fish swimming in the water.",
