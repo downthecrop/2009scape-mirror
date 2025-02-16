@@ -58,7 +58,7 @@ class PlayerStatsCounter(
                             "Porting kill counters for player $progress/$totalPlayers"
                         )
                         if (player is String) {
-                            val playerUid = resolveUIDFromPlayerUsername(player)
+                            val playerUid = resolveUIDFromPlayerUsername(player.replace(" ", "_"))
                             log(
                                 PlayerStatsCounter::class.java,
                                 Log.INFO,
@@ -91,7 +91,7 @@ class PlayerStatsCounter(
                             "Porting rare drops for player $progress/$totalPlayers"
                         )
                         if (player is String) {
-                            val playerUid = resolveUIDFromPlayerUsername(player)
+                            val playerUid = resolveUIDFromPlayerUsername(player.replace(" ", "_"))
                             log(
                                 PlayerStatsCounter::class.java,
                                 Log.INFO,
