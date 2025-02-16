@@ -41,6 +41,11 @@ public final class MonkOfEntranaDialogue extends DialoguePlugin {
 		return new MonkOfEntranaDialogue(player);
 	}
 
+	public void sail(Player player, Ships ship) {
+		ship.sail(player);
+		playJingle(player, 172);
+	}
+
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
@@ -98,7 +103,7 @@ public final class MonkOfEntranaDialogue extends DialoguePlugin {
 			stage = 25;
 			break;
 		case 23:
-			interpreter.sendDialogues(npc, null, "Do not try and decieve us again. Come back when you", "have liad down your Zamorakian instruments of death.");
+			interpreter.sendDialogues(npc, null, "Do not try to deceive us again. Come back when you", "have laid down your Zamorakian instruments of death.");
 			stage = 24;
 			break;
 		case 24:
@@ -106,8 +111,7 @@ public final class MonkOfEntranaDialogue extends DialoguePlugin {
 			break;
 		case 25:
 			end();
-			Ships.PORT_SARIM_TO_ENTRANA.sail(player);
-			playJingle(player, 172);
+			sail(player, Ships.PORT_SARIM_TO_ENTRANA);
 			if (!player.getAchievementDiaryManager().getDiary(DiaryType.FALADOR).isComplete(0, 14)) {
 				player.getAchievementDiaryManager().getDiary(DiaryType.FALADOR).updateTask(player, 0, 14, true);
 			}
@@ -133,9 +137,7 @@ public final class MonkOfEntranaDialogue extends DialoguePlugin {
 			stage = 511;
 			break;
 		case 511:
-			end();
-			Ships.ENTRANA_TO_PORT_SARIM.sail(player);
-			playJingle(player, 172);
+			sail(player, Ships.ENTRANA_TO_PORT_SARIM);
 			break;
 		case 520:
 			end();

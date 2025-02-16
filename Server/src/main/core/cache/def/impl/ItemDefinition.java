@@ -661,7 +661,9 @@ public class ItemDefinition extends Definition<Item> {
 			Items.HAM_CLOAK_4304,
 			Items.HAM_LOGO_4306,
 			Items.GLOVES_4308,
-			Items.BOOTS_4310
+			Items.BOOTS_4310,
+			Items.ZAMORAK_ROBE_1033,
+			Items.ZAMORAK_ROBE_1035
 	));
 	private static final HashSet<Integer> entranaBannedItems = new HashSet(Arrays.asList(
 			/**Items.BUTTERFLY_NET_10010, easing the restriction until barehanded implementation**/

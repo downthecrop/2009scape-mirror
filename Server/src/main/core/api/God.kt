@@ -88,6 +88,8 @@ enum class God(vararg val validItems: Int) {
         Items.ZAMORAK_STAFF_2417,
         Items.ZAMORAK_STOLE_10474,
         Items.ZAMORAK_SYMBOL_8056,
+        Items.ZAMORAK_ROBE_1033,
+        Items.ZAMORAK_ROBE_1035,
     ),
     GUTHIX(
         Items.STEEL_HERALDIC_HELM_8692,
@@ -118,12 +120,6 @@ enum class God(vararg val validItems: Int) {
         Items.GUTHIX_ROBE_TOP_10788,
         Items.GUTHIX_STAFF_2416,
         Items.GUTHIX_STOLE_10472,
-        Items.GUTHIX_SYMBOL_8057
-    ),
-    ZAROS(
-        Items.ANCIENT_STAFF_13406,
-        Items.ANCIENT_STAFF_4675,
-        Items.ANCIENT_MACE_11061,
-        Items.ANCIENT_BOOK_7633,
+        Items.GUTHIX_SYMBOL_8057,
     )
 }

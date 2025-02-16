@@ -1731,7 +1731,7 @@ fun sendPlayerOnInterface(player: Player, iface: Int, child: Int) {
 }
 
 /**
- * Sends a dialogue that uses the player's chathead.
+ * Sends a dialogue that uses the npc's chathead.
  * @param player the player to send the dialogue to
  * @param npc the ID of the NPC to use for the chathead
  * @param msg the message to send.
@@ -1744,7 +1744,7 @@ fun sendNPCDialogue(player: Player, npc: Int, msg: String, expr: core.game.dialo
 }
 
 /**
- * Sends a dialogue that uses the player's chathead.
+ * Sends a dialogue that uses the npc's chathead.
  * @param player the player to send the dialogue to
  * @param npc the ID of the NPC to use for the chathead
  * @param expr the FacialExpression to use. An enum exists for these called FacialExpression.
