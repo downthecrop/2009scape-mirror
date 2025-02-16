@@ -15,6 +15,8 @@ import core.game.node.item.Item;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
 
+import static core.api.ContentAPIKt.getStatLevel;
+
 /**
  * Represents the pest control reward interface.
  * @author 'Vexia
@@ -185,20 +187,36 @@ public final class PCRewardInterface extends ComponentPlugin {
 	}
 
 	/**
-	 * Method used to calculate the experience the player can recieve in this
-	 * skill.
+	 * Method used to calculate the experience the player can receive in this skill.
 	 * @param player the player.
 	 * @return the experience as an integer.
 	 */
-	public static double calculateExperience(final Player player, final int skillId) {
-		int level = player.getSkills().getStaticLevel(skillId);
-		double divideBy = 30;//17.5-33 ideal range
-		if (skillId == Skills.PRAYER) {
-			divideBy = 67;// 34-75 ideal range
-		} else if (skillId == Skills.MAGIC || skillId == Skills.RANGE) {
-			divideBy = 29;//19.1-31 ideal range
+	public static int calculateExperience(final Player player, final int skillId, final int points) {
+		int level = getStatLevel(player, skillId);
+		int N = 0;
+		switch (skillId) {
+			case Skills.PRAYER:
+				N = 18;
+				break;
+			case Skills.MAGIC:
+			case Skills.RANGE:
+				N = 32;
+				break;
+			case Skills.ATTACK:
+			case Skills.STRENGTH:
+			case Skills.DEFENCE:
+			case Skills.HITPOINTS:
+				N = 35;
+				break;
 		}
-		return (int) ((level * level) / divideBy) * (player.getSkills().experienceMultiplier / 2);
+		int xpPerPoint = (int) ((double) (level * level) / 600) * N;
+		double bonus = 1.0;
+		if (points >= 100) {
+			bonus = 1.1;
+		} else if (points >= 10) {
+			bonus = 1.01;
+		}
+		return (int) (points * xpPerPoint * bonus);
 	}
 
 	/**
@@ -207,7 +225,7 @@ public final class PCRewardInterface extends ComponentPlugin {
 	 * @param skillId the skillId.
 	 * @return the string to send.
 	 */
-	public static final String getSkillCondition(final Player player, final int skillId) {
+	public static String getSkillCondition(final Player player, final int skillId) {
 		if (player.getSkills().getStaticLevel(skillId) < 25) {
 			return RED + "Must reach level 25 first.";
 		}
@@ -221,7 +239,7 @@ public final class PCRewardInterface extends ComponentPlugin {
 	 * @return the string.
 	 */
 	public static String getSkillXp(final Player player, int skillId) {
-		return Skills.SKILL_NAME[skillId] + " - " + (int) calculateExperience(player, skillId) + " xp";
+		return Skills.SKILL_NAME[skillId] + " - " + calculateExperience(player, skillId, 1) + " xp";
 	}
 
 	/**
@@ -229,7 +247,7 @@ public final class PCRewardInterface extends ComponentPlugin {
 	 * @param skill the skill index.
 	 * @return the skill child id.
 	 */
-	public static final int getSkillChild(final int skill) {
+	public static int getSkillChild(final int skill) {
 		return SKILL_HEADER[skill];
 	}
 
@@ -264,7 +282,7 @@ public final class PCRewardInterface extends ComponentPlugin {
 	 * Method used to confirm the reward.
 	 * @param player the player.
 	 */
-	public final void confirm(final Player player) {
+	public void confirm(final Player player) {
 		if (!hasReward(player)) {
 			player.getPacketDispatch().sendMessage("Please choose a reward.");
 			return;
@@ -281,9 +299,9 @@ public final class PCRewardInterface extends ComponentPlugin {
 		if (player.getSavedData().getActivityData().getPestPoints() >= points) {
 			player.getSavedData().getActivityData().decreasePestPoints(points);
 			if (reward.isSkillReward()) {
-				final double experience = ((int) calculateExperience(player, reward.getSkill()) * points);
+				int experience = calculateExperience(player, reward.getSkill(), points);
 				player.getSkills().addExperience(reward.getSkill(), experience);
-				message = "The Void Knight has granted you " + (int) (experience * player.getSkills().experienceMultiplier) + " " + reward.getName() + ".";
+				message = "The Void Knight has granted you " + experience + " " + reward.getName() + ".";
 			} else {
 				if (!reward.checkItemRequirement(player, option)) {
 					return;
