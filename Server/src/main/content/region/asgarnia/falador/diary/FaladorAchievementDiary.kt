@@ -212,6 +212,9 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
                 )
             }
         }
+        if (event.npc.id == NPCs.MOGRE_114){
+            finishTask(player, DiaryLevel.HARD, HardTasks.MUDSKIPPER_POINT_KILL_MOGRE)
+        }
     }
 
     override fun onItemPurchasedFromShop(player: Player, event: ItemShopPurchaseEvent) {

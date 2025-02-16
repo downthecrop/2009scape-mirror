@@ -72,7 +72,7 @@ public final class FieldPickingPlugin extends OptionHandler {
 		player.dispatch(new ResourceProducedEvent(reward.getId(), reward.getAmount(), node, -1));
 		if (plant.name().startsWith("NETTLES") && (player.getEquipment().get(EquipmentContainer.SLOT_HANDS) == null || player.getEquipment().get(EquipmentContainer.SLOT_HANDS) != null && !player.getEquipment().get(EquipmentContainer.SLOT_HANDS).getName().contains("glove"))) {
 			player.getPacketDispatch().sendMessage("You have been stung by the nettles!");
-			player.getImpactHandler().manualHit(player, 2, HitsplatType.POISON);
+			player.getImpactHandler().manualHit(player, 6, HitsplatType.POISON);
 			return true;
 		}
 		if (plant.respawn != -1 && plant != PickingPlant.FLAX) {

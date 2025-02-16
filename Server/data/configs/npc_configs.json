@@ -72145,6 +72145,7 @@
   {
     "examine": "A sea bird.",
     "name": "Gull",
+    "water_npc": "true",
     "id": "2726"
   },
   {
@@ -87866,5 +87867,30 @@
     "name": "Elena",
     "id": "335",
     "examine": "She doesn't look too happy."
+  },
+  {
+    "examine": "Use 1344 to change me",
+    "name": "Skippy Varbit",
+    "id": "2795"
+  },
+  {
+    "examine": "He looks angry and smells drunk.",
+    "name": "Skippy",
+    "id": "2796"
+  },
+  {
+    "name": "Skippy",
+    "id": "2797",
+    "examine": "Skippy, just looking a little 'tender'."
+  },
+  {
+    "name": "Skippy",
+    "id": "2798",
+    "examine": "He seems a lot less angry and smells a great deal fresher."
+  },
+  {
+    "name": "Skippy",
+    "id": "2799",
+    "examine": "He seems a bit confused."
   }
 ]

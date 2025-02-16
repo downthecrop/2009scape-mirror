@@ -106,7 +106,7 @@ public enum Master {
 			// new Task(Tasks.KILLERWATTS,6),
 			new Task(Tasks.KURASKS,7),
 			new Task(Tasks.LESSER_DEMONS,7),
-			//new Task(Tasks.MOGRES,7),
+			new Task(Tasks.MOGRES,7),
 			// new Task(Tasks.MOLANISKS,7),
 			new Task(Tasks.MOSS_GIANTS,7),
 			new Task(Tasks.OGRES,7),
