@@ -22,6 +22,7 @@ import core.game.interaction.IntType
 import core.game.system.config.ItemConfigParser
 import core.game.world.GameWorld.Pulser
 import content.data.Quests
+import core.game.interaction.QueueStrength
 
 class TFTInteractionListeners : InteractionListener {
 
@@ -155,7 +156,7 @@ class TFTInteractionListeners : InteractionListener {
                     sendNPCDialogue(player,1278,"Yeah you're good to go through. Olaf tells me you're some kind of outerlander bard here on tour. I doubt you're worse than Olaf is.")
                     core.game.global.action.DoorActionHandler.handleAutowalkDoor(player,door.asScenery())
                 }
-                getAttribute(player,"lyreConcertPlayed",false) -> {
+                getAttribute(player,"lyreConcertPlayed",false) || isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) -> {
                     core.game.global.action.DoorActionHandler.handleAutowalkDoor(player,door.asScenery())
                 }
                 else -> {
@@ -167,7 +168,7 @@ class TFTInteractionListeners : InteractionListener {
 
         on(LYRE_IDs, IntType.ITEM, "play"){ player, lyre ->
             if(getAttribute(player,"onStage",false) && !getAttribute(player,"lyreConcertPlayed",false)){
-                Pulser.submit(LyreConcertPulse(player,lyre.id))
+                playLyreConcert(player, lyre.id)
             } else if(getQuestStage(player, Quests.THE_FREMENNIK_TRIALS) < 20 || !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)){
                 sendMessage(player,"You lack the knowledge to play this.")
             } else if(LYRE_IDs.isLast(lyre.id)){
@@ -353,7 +354,7 @@ class TFTInteractionListeners : InteractionListener {
         }
     }
 
-    class LyreConcertPulse(val player: Player, val Lyre: Int) : Pulse(){
+    fun playLyreConcert(player: Player, lyre: Int) {
         val GENERIC_LYRICS = arrayOf(
             "${player.username?.capitalize()} is my name,",
             "I haven't much to say",
@@ -378,7 +379,6 @@ class TFTInteractionListeners : InteractionListener {
             "I will simply tell you this:",
             "I've joined the Legends' Guild!"
         )
-        var counter = 0
         val questPoints = getQuestPoints(player)
         val champGuild = player.achievementDiaryManager?.hasCompletedTask(DiaryType.VARROCK, 1, 1)?: false
         val legGuild = questPoints >= 111
@@ -401,15 +401,17 @@ class TFTInteractionListeners : InteractionListener {
             else -> GENERIC_LYRICS
         }
 
-        override fun pulse(): Boolean {
-            when(counter++){
+        queueScript(player, 0, QueueStrength.SOFT) { stage ->
+            when (stage) {
                 0 -> {
                     player.lock()
                     animate(player,1318,true)
+                    return@queueScript delayScript(player, 1)
                 }
                 2 -> {
                     animate(player,1320,true)
                     player.musicPlayer.play(MusicEntry.forId(165))
+                    return@queueScript delayScript(player, 1)
                 }
                 4 -> {
                     animate(player,1320,true)
@@ -433,13 +435,15 @@ class TFTInteractionListeners : InteractionListener {
                 }
                 14 ->{
                     setAttribute(player,"/save:lyreConcertPlayed",true)
-                    player.removeAttribute("LyreEnchanted")
-                    if(removeItem(player,Lyre))
-                        addItem(player,Items.ENCHANTED_LYRE_3690)
+                    removeAttribute(player, "/save:LyreEnchanted")
+                    if (removeItem(player,lyre)) {
+                        addItem(player, Items.ENCHANTED_LYRE_3690)
+                    }
                     player.unlock()
+                    return@queueScript stopExecuting(player)
                 }
             }
-            return false
+            return@queueScript delayScript(player, 1)
         }
     }
 
