@@ -140,6 +140,30 @@ class TeleportCommandSet : CommandSet(Privilege.ADMIN){
         }
 
         /**
+         * Finds a list of objects/sceneries in a region
+         */
+        define("findobjs", Privilege.ADMIN, "::findobjs <lt>REGION ID<gt> <lt>SCENERY ID<gt>", "Finds all locations of scenery objects of id."){player, args ->
+            if(args.size < 4) reject(player, "Usage: region_id scenery_id")
+            val regionId = args[1].toInt()
+            val sceneryId = args[2].toInt()
+            val sceneryIdEnd = args[3].toInt()
+
+            val region = RegionManager.forId(regionId)
+
+            GlobalScope.launch {
+                for (plane in region.planes) {
+                    for (objects in plane.objects.filterNotNull()) {
+                        for (parent in objects.filterNotNull()) {
+                            if (parent.id in sceneryId..sceneryIdEnd) {
+                                println(parent.location)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /**
          * Teleport to a specific player
          */
         define("teleto", Privilege.ADMIN, "::teleto <lt>USERNAME<gt>", "Teleports to the named player."){player,args ->

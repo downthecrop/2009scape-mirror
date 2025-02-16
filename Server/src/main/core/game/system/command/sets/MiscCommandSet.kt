@@ -411,6 +411,20 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             setVarbit(player, index!!, value!!)
         }
 
+        define("setvarbits", Privilege.ADMIN, "::setvarbits <lt>FROM VARBIT ID<gt> <lt>TO VARBIT ID<gt> <lt>VALUE<gt>", ""){
+            player,args ->
+            if(args.size != 4){
+                reject(player,"Usage: ::setvarbits fromvarbit tovarbit value")
+            }
+            val fromIndex = args[1].toIntOrNull()!!
+            val toIndex = args[2].toIntOrNull()!!
+            val value = args[3].toIntOrNull()!!
+
+            for (index in fromIndex..toIndex) {
+                setVarbit(player, index, value)
+            }
+        }
+
         define("getvarbit", Privilege.ADMIN, "::getvarbit <lt>VARBIT ID<gt>", "") {
             player, args ->
             if (args.size != 2)

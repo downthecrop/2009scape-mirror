@@ -28,6 +28,25 @@ class AnimationCommandSet : CommandSet(Privilege.ADMIN) {
         }
 
         /**
+         * Force the player to play animation <Animation ID>
+         */
+        define("anims", Privilege.ADMIN, "::anim <lt>Animation ID<gt>", "Plays the animation with the given ID."){ player, args ->
+            if (args.size < 3) {
+                reject(player, "Syntax error: ::anim <Animation ID>")
+            }
+            val animation = args[1].toInt()
+            val animationTo = args[2].toInt()
+            GameWorld.Pulser.submit(object : Pulse(3, player) {
+                var someId = animation
+                override fun pulse(): Boolean {
+                    player.animate(Animation.create(someId))
+                    someId += 1
+                    return someId >= animationTo
+                }
+            })
+        }
+
+        /**
          * Force the player to loop animation <Animation ID>
          */
         define("loopanim", Privilege.ADMIN, "::loopanim <lt>Animation ID<gt> <lt>Times<gt>", "Plays the animation with the given ID the given number of times"){ player, args ->

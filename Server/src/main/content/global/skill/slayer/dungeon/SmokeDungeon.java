@@ -132,7 +132,7 @@ public final class SmokeDungeon extends MapZone implements Plugin<Object> {
 	 * @param player the player.
 	 */
 	private static void effect(Player player) {
-		int hit = 2;
+		int hit = 10;
 		setDelay(player);
 		if (RandomFunction.random(2) == 1) {
 			player.sendChat(CHATS[RandomFunction.random(CHATS.length)]);

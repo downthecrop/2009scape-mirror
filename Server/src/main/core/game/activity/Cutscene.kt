@@ -58,6 +58,15 @@ abstract class Cutscene(val player: Player) {
     }
 
     /**
+     * Immediately closes the player's overlay.
+     */
+    fun closeOverlay()
+    {
+        logCutscene("Close ${player.username}'s overlay.")
+        player.interfaceManager.closeOverlay()
+    }
+
+    /**
      * Fade the player's view to black. This process can be safely assumed to take about 8 ticks to complete.
      */
     fun fadeToBlack()

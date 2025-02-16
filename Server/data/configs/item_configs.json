@@ -42749,7 +42749,7 @@
     "equipment_slot": "12"
   },
   {
-    "examine": "Frank's shiny silver coated pot.",
+    "examine": "A silver pot made by Ruantun.",
     "durability": null,
     "name": "Silver pot",
     "tradeable": "false",
@@ -42766,7 +42766,7 @@
     "id": "4659"
   },
   {
-    "examine": "Frank's shiny silver coated pot.",
+    "examine": "A silver pot made by Ruantun filled with your blood.",
     "durability": null,
     "name": "Silver pot",
     "tradeable": "false",
@@ -42775,7 +42775,7 @@
     "id": "4660"
   },
   {
-    "examine": "A silver pot made by Ruantun and blessed on Entrana.",
+    "examine": "A blessed silver pot made by Ruantun filled with your blood.",
     "durability": null,
     "name": "Blessed pot",
     "weight": "2",
@@ -42783,7 +42783,7 @@
     "id": "4661"
   },
   {
-    "examine": "Frank's shiny silver coated pot.",
+    "examine": "A silver pot made by Ruantun filled with blood and garlic.",
     "durability": null,
     "name": "Silver pot",
     "tradeable": "false",
@@ -42792,7 +42792,7 @@
     "id": "4662"
   },
   {
-    "examine": "A silver pot made by Ruantun and blessed on Entrana.",
+    "examine": "A blessed silver pot filled with blood and garlic.",
     "durability": null,
     "name": "Blessed pot",
     "weight": "2",
@@ -42800,7 +42800,7 @@
     "id": "4663"
   },
   {
-    "examine": "Frank's shiny silver coated pot.",
+    "examine": "A silver pot made by Ruantun filled with blood and spices.",
     "durability": null,
     "name": "Silver pot",
     "tradeable": "false",
@@ -42809,7 +42809,7 @@
     "id": "4664"
   },
   {
-    "examine": "A silver pot made by Ruantun and blessed on Entrana.",
+    "examine": "A blessed silver pot filled with blood and spices.",
     "durability": null,
     "name": "Blessed pot",
     "weight": "2",
@@ -42817,7 +42817,7 @@
     "id": "4665"
   },
   {
-    "examine": "Frank's shiny silver coated pot.",
+    "examine": "A silver pot made by Ruantun filled with blood, garlic and spices.",
     "durability": null,
     "name": "Silver pot",
     "tradeable": "false",
@@ -42826,7 +42826,7 @@
     "id": "4666"
   },
   {
-    "examine": "A silver pot made by Ruantun and blessed on Entrana.",
+    "examine": "A blessed silver pot filled with blood, garlic and spices.",
     "durability": null,
     "name": "Blessed pot",
     "weight": "2",

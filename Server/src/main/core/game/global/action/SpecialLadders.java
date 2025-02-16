@@ -37,6 +37,9 @@ public enum SpecialLadders implements LadderAchievementCheck {
     ALKHARID_CRAFTING_DOWN(Location.create(3314,3187,1),Location.create(3310,3187,0)),
     ALKHARID_SOCRCERESS_UP(Location.create(3325,3142,0),Location.create(3325,3139,1)),
     ALKHARID_SOCRCERESS_DOWN(Location.create(3325,3139,1),Location.create(3325,3143,0)),
+    KHARIDIAN_DESERT_SUMMONING_UP(Location.create(3299,9318,0),Location.create(3303,2897,0)),
+    KHARIDIAN_DESERT_SUMMONING_DOWN(Location.create(3304,2897,0),Location.create(3299,9317,0)),
+    SHADOW_DUNGEON_UP(new Location(2629, 5072,0), new Location(2548, 3421,0)),
 
     CLOCKTOWER_HIDDEN_LADDER(Location.create(2572,9631,0),Location.create(2572,3230,0)),
 
