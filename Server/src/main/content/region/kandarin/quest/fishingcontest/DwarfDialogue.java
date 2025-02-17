@@ -24,6 +24,11 @@ public class DwarfDialogue extends DialoguePlugin {
     public boolean open(Object... args) {
         npc = (NPC) args[0];
         int questStage = player.getQuestRepository().getStage(Quests.FISHING_CONTEST);
+        if(player.getQuestRepository().getStage(Quests.FISHING_CONTEST) == 100){
+            npc(FacialExpression.OLD_NORMAL,"Welcome, oh great fishing champion!","Feel free to pop by and use","our tunnel any time!");
+            stage = 2500;
+            return true;
+        }
         if((questStage < 20 && questStage > 0) && !player.getInventory().containsItem(FishingContest.FISHING_PASS)){
             player("I lost my fishing pass...");
             stage = 1000;
@@ -37,11 +42,6 @@ public class DwarfDialogue extends DialoguePlugin {
         if(player.getQuestRepository().getStage(Quests.FISHING_CONTEST) >= 10 && !player.getAttribute("fishing_contest:won",false)){
             npc(FacialExpression.OLD_NORMAL,"Have you won yet?");
             stage = 1500;
-            return true;
-        }
-        if(player.getQuestRepository().getStage(Quests.FISHING_CONTEST) == 100){
-            npc(FacialExpression.OLD_NORMAL,"Welcome, oh great fishing champion!","Feel free to pop by and use","our tunnel any time!");
-            stage = 2500;
             return true;
         }
         npc(FacialExpression.OLD_NORMAL,"Hmph! What do you want?");

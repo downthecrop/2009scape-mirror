@@ -19,27 +19,50 @@ public class FishingContest extends Quest {
     public static final Item GARLIC = new Item(1550);
     public static final Item SPADE = new Item(952);
 
+    // Winner is stranger in black if you did not do the garlic.
+    // https://www.youtube.com/watch?v=6zL7M8mCL30
 
     @Override
     public void drawJournal(Player player, int stage) {
-        int line = 11;
+        int line = 12;
         super.drawJournal(player, stage);
-        if(stage < 10) {
-            line(player, "I can start this quest by trying to take the !!shortcut??", line++);
-            line(player, "near !!White Wolf Mountain??", line++);
-            line(player,"I need level !!10 Fishing?? to start this quest.",line++,player.getSkills().getLevel(Skills.FISHING) >= 10);
-        } else if (stage >= 10){
-            line(player,"The !!mountain Dwarves' home?? would be an ideal way to get across ",line++,stage >= 20);
-            line(player,"White Wolf Mountain safely. However, the Dwarves aren't too",line++, stage >= 20);
-            line(player,"fond of strangers. They will let you through if you can !!bring ",line++, stage >= 20);
-            line(player,"!!them a trophy.?? The trophy is the prize for the annual Hemenster",line++,stage >= 20);
-            line(player,"!!fishing competition.??",line++,stage >= 20);
-            if(stage == 20)
-            line(player,"I should return to !!Austri?? or !!Vestri??.",line++);
 
-            if(stage >= 100){
-                line(player,"%%QUEST COMPLETE!&&",line++);
+        if (stage == 0) {
+            line(player, "I can start this quest by speaking to the !!Dwarves?? at the", line++);
+            line(player, "tunnel entrances on either side of !!White Wolf Mountain??.", line++);
+            line(player,"!!I must have level 10 fishing.??", line++, player.getSkills().getLevel(Skills.FISHING) >= 10);
+        } else if ( stage < 100 ) {
+            line(player, "The Dwarves will let me use the tunnel through White Wolf", line++, true);
+            line(player, "Mountain if I can will the Hemenster Fishing Competition.", line++, true);
+
+            if (stage >= 20) {
+                line(player,"I easily won the contest by catching some Giant Carp.", line++, false);
+            } else if (stage >= 10) {
+                // https://youtu.be/z4MfANC2KqI
+                line(player, "They gave me a !!Fishing Contest Pass?? to enter the contest.", line++, false);
+                line(player, "I need to bring them back the !!Hemenster Fishing Trophy??.", line++, false);
             }
+
+            if (stage >= 100) {
+
+            } else if (stage >= 20) {
+                // https://youtu.be/rysJl-DRihE
+                line(player, "I should take back the !!Trophy?? back to the !!Dwarf?? at the side of", line++, false);
+                line(player, "!!White Wolf Mountain?? and claim my !!reward??.", line++, false);
+            }
+
+        } else {
+            // https://youtu.be/u5Osw_jas4A
+            line(player, "The Dwarves' wanted me to earn their friendship by winning", line++, true);
+            line(player, "the Hemenster Fishing Competition.", line++, true);
+            line(player, "I scared away a vampyre with some garlic and easily won the", line++, true);
+            line(player, "contest by catching some Giant Carp.", line++, true);
+            line++;
+            line(player,"%%QUEST COMPLETE!&&", line++);
+            line++;
+            line(player, "As a reward for getting the Fishing Competition Trophy the", line++, false);
+            line(player, "Dwarves will let me use their tunnel to travel quickly and", line++, false);
+            line(player, "safely under White Wolf Mountain anytime I wish.", line++, false);
         }
     }
 
@@ -48,9 +71,10 @@ public class FishingContest extends Quest {
         int ln = 10;
         super.finish(player);
         player.getPacketDispatch().sendItemZoomOnInterface(FISHING_TROPHY.getId(), 230, 277, 5);
+        // https://youtu.be/8dK362LbYdE
         drawReward(player,"1 Quest Point",ln++);
-        drawReward(player,"2437 Fishing XP.",ln++);
-        drawReward(player,"Access to the White Wolf Mountain shortcut.",ln);
+        drawReward(player,"2437 Fishing XP",ln++);
+        drawReward(player,"Access to Tunnel shortcut",ln);
         player.removeAttribute("fishing_contest:garlic");
         player.removeAttribute("fishing_contest:won");
         player.removeAttribute("fishing_contest:pass-shown");
