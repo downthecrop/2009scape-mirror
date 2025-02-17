@@ -78,10 +78,12 @@ class RecruitmentDrive : Quest(Quests.RECRUITMENT_DRIVE, 103, 102, 1, 496, 0, 1,
                 line(player, "Luckily, I was too smart to fall for any of their little tricks,", line++, true)
                 line(player, "and passed the test with flying colours.", line++, true)
             } else if (stage >= 2) {
-                line(player, "I went to !!Falador Park??, and met a strange old man named", line++, false)
-                line(player, "!!Tiffy??.", line++, false)
-                line(player, "He sent me to a !!secret training ground??, where my wits", line++, false)
-                line(player, "were thoroughly tested.", line++, false)
+                // http://youtu.be/Otc7ATq3tik 4:17 - I guess this is why no one opens their quest log
+                line(player, "A man named !!Tiffy?? brought me !!here, to the secret training??", line++, false)
+                line(player, "!!grounds?? so that I could be tested for the job.", line++, false)
+                line++
+                line(player, "I should !!work out?? what I am supposed to do to complete", line++, false)
+                line(player, "these rooms...", line++, false)
             }
 
             if (stage >= 4) {

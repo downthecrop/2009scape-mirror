@@ -36,7 +36,7 @@ public class BoyDialoguePlugin extends DialoguePlugin {
         final Quest quest = player.getQuestRepository().getQuest(Quests.WITCHS_HOUSE);
         player.debug(quest.isStarted(player) + " " + quest.getStage(player) );
         if (!quest.isStarted(player) && quest.getStage(player) < 10) {
-            player("Hello young man.");
+            player(FacialExpression.FRIENDLY, "Hello young man.");
             setStage(1);
             return true;
         }
@@ -46,9 +46,9 @@ public class BoyDialoguePlugin extends DialoguePlugin {
             return true;
         }
         if (!player.getInventory().containsItem(BALL)) {
-            npc( FacialExpression.OLD_NORMAL, "Have you gotten my ball back yet?");
+            npc( FacialExpression.CHILD_THINKING, "Have you gotten my ball back yet?");
         } else {
-            player("Hi, I have got your ball back. It was MUCH harder", "than I thought it would be.");
+            player(FacialExpression.NEUTRAL, "Hi, I have got your ball back. It was MUCH harder", "than I thought it would be.");
         }
         setStage(11);
         return true;
@@ -72,11 +72,11 @@ public class BoyDialoguePlugin extends DialoguePlugin {
             case 3:
                 switch(buttonId) {
                     case 1:
-                        player("What's the matter?");
+                        player(FacialExpression.THINKING, "What's the matter?");
                         setStage(5);
                         break;
                     case 2:
-                        player("Well if you're not going to answer then I'll go.");
+                        player(FacialExpression.NEUTRAL, "Well if you're not going to answer then I'll go.");
                         next();
                         break;
                 }
@@ -86,7 +86,7 @@ public class BoyDialoguePlugin extends DialoguePlugin {
                 finish();
                 break;
             case 5:
-                npc(FacialExpression.OLD_NORMAL, "I've kicked my ball over that hedge, into that garden!", "The old lady who lives there is scary... She's locked the","ball in her wooden shed! Can you get my ball back for", "me please?");
+                npc(FacialExpression.CHILD_SAD, "I've kicked my ball over that hedge, into that garden!", "The old lady who lives there is scary... She's locked the","ball in her wooden shed! Can you get my ball back for", "me please?");
                 next();
                 break;
             case 6:
@@ -96,17 +96,17 @@ public class BoyDialoguePlugin extends DialoguePlugin {
             case 7:
                 switch(buttonId) {
                     case 1:
-                        player("Ok, I'll see what I can do.");
+                        player(FacialExpression.NEUTRAL, "Ok, I'll see what I can do.");
                         setStage(10);
                         break;
                     case 2:
-                        player("Get it back yourself.");
+                        player(FacialExpression.NEUTRAL, "Get it back yourself.");
                         next();
                         break;
                 }
                 break;
             case 8:
-                npc(FacialExpression.OLD_NORMAL, "You're a meany.");
+                npc(FacialExpression.CHILD_SAD, "You're a meany.");
                 next();
                 break;
             case 9:
@@ -114,13 +114,13 @@ public class BoyDialoguePlugin extends DialoguePlugin {
                 finish();
                 break;
             case 10:
-                npc(FacialExpression.OLD_NORMAL, "Thanks mister!");
+                npc(FacialExpression.CHILD_FRIENDLY, "Thanks mister!");
                 finish();
                 quest.start(player);
                 break;
             case 11:
                 if (!player.getInventory().containsItem(BALL)) {
-                    player("Not yet.");
+                    player(FacialExpression.NEUTRAL, "Not yet.");
                     next();
                 } else {
                     if (player.getInventory().remove(BALL))
@@ -129,11 +129,11 @@ public class BoyDialoguePlugin extends DialoguePlugin {
                 }
                 break;
             case 12:
-                npc(FacialExpression.OLD_NORMAL, "Well it's in the shed in that garden.");
+                npc(FacialExpression.CHILD_ANGRY, "Well it's in the shed in that garden.");
                 finish();
                 break;
             case 13:
-                npc(FacialExpression.OLD_NORMAL, "Thank you so much!");
+                npc(FacialExpression.CHILD_FRIENDLY, "Thank you so much!");
                 next();
                 break;
             case 14:

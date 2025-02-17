@@ -59,22 +59,22 @@ public final class WiloughDialogue extends DialoguePlugin {
 		final Quest quest = player.getQuestRepository().getQuest(Quests.GERTRUDES_CAT);
 		switch (quest.getStage(player)) {
 		case 0:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Hello again.");
+			interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Hello again.");
 			stage = 0;
 			break;
 		case 10:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Hello there, I've been looking for you.");
+			interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Hello there, I've been looking for you.");
 			stage = 100;
 			break;
 		case 20:
 		case 30:
 		case 40:
 		case 50:
-			interpreter.sendDialogues(player, null, "Where did you say you saw Fluffs?");
+			interpreter.sendDialogues(player, FacialExpression.THINKING, "Where did you say you saw Fluffs?");
 			stage = 130;
 			break;
 		default:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Hello again.");
+			interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Hello again.");
 			stage = 0;
 			break;
 		}
@@ -86,23 +86,23 @@ public final class WiloughDialogue extends DialoguePlugin {
 		final Quest quest = player.getQuestRepository().getQuest(Quests.GERTRUDES_CAT);
 		switch (stage) {
 		case 0:
-			interpreter.sendDialogues(id, FacialExpression.HALF_GUILTY, "You think you're tough do you?");
+			interpreter.sendDialogues(id, FacialExpression.CHILD_ANGRY, "You think you're tough do you?");
 			stage = 1;
 			break;
 		case 1:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Pardon?");
+			interpreter.sendDialogues(player, FacialExpression.THINKING, "Pardon?");
 			stage = 2;
 			break;
 		case 2:
-			interpreter.sendDialogues(id, FacialExpression.HALF_GUILTY, "I can beat anyone up!");
+			interpreter.sendDialogues(id, FacialExpression.CHILD_ANGRY, "I can beat anyone up!");
 			stage = 3;
 			break;
 		case 3:
-			interpreter.sendDialogues(781, FacialExpression.HALF_GUILTY, "He can you know!");
+			interpreter.sendDialogues(781, FacialExpression.CHILD_ANGRY, "He can you know!");
 			stage = 4;
 			break;
 		case 4:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Really?");
+			interpreter.sendDialogues(player, FacialExpression.THINKING, "Really?");
 			stage = 5;
 			break;
 		case 5:
@@ -113,59 +113,59 @@ public final class WiloughDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 100:// stage 10
-			interpreter.sendDialogues(id, FacialExpression.HALF_GUILTY, "I didn't mean to take it! I just forgot to pay.");
+			interpreter.sendDialogues(id, FacialExpression.CHILD_SURPRISED, "I didn't mean to take it! I just forgot to pay.");
 			stage = 101;
 			break;
 		case 101:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "What? I'm trying to help your mum find Fluffs.");
+			interpreter.sendDialogues(player, FacialExpression.THINKING, "What? I'm trying to help your mum find Fluffs.");
 			stage = 102;
 			break;
 		case 102:
-			interpreter.sendDialogues(id == 783 ? 781 : 783, null, "I might be able to help. Fluffs followed me to our secret", "play area and I haven't seen her since.");
+			interpreter.sendDialogues(id == 783 ? 781 : 783, FacialExpression.CHILD_SIDE_EYE, "Ohh...well, in that case I might be able to help. Fluffs", "followed me to my super secret hideout, I haven't seen", "her since. She's probably off eating small creatures", "somewhere.");
 			stage = 103;
 			break;
 		case 103:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Where is this play area?");
+			interpreter.sendDialogues(player, FacialExpression.THINKING, "Where is this secret hideout? I really need to find that", "cat for your mum.");
 			stage = 104;
 			break;
 		case 104:
-			interpreter.sendDialogues(id == 783 ? 781 : 783, null, "If I told you that, it wouldn't be a secret.");
+			interpreter.sendDialogues(id == 783 ? 781 : 783, FacialExpression.CHILD_SIDE_EYE, "If I told you that, it wouldn't be a secret.");
 			stage = 105;
 			break;
 		case 105:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "What will make you tell me?");
+			interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "What will make you tell me?");
 			stage = 106;
 			break;
 		case 106:
-			interpreter.sendDialogues(id == 783 ? 781 : 783, null, "Well...now you ask, I am a bit short on cash.");
+			interpreter.sendDialogues(id == 783 ? 781 : 783, FacialExpression.CHILD_SUSPICIOUS, "Well...now you ask, I am a bit short on cash.");
 			stage = 107;
 			break;
 		case 107:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "How much?");
+			interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "How much?");
 			stage = 108;
 			break;
 		case 108:
-			interpreter.sendDialogues(id == 783 ? 781 : 783, null, "10 coins.");
+			interpreter.sendDialogues(id == 783 ? 781 : 783, FacialExpression.CHILD_SIDE_EYE, "10 coins.");
 			stage = 109;
 			break;
 		case 109:
-			interpreter.sendDialogues(id == 783 ? 783 : id, null, "10 coins?!");
+			interpreter.sendDialogues(id == 783 ? 783 : id, FacialExpression.CHILD_SURPRISED, "10 coins?!");
 			stage = 110;
 			break;
 		case 110:
-			interpreter.sendDialogues(id == 783 ? 783 : id, null, "I'll handle this.");
+			interpreter.sendDialogues(id == 783 ? 783 : id, FacialExpression.CHILD_NORMAL, "I'll handle this.");
 			stage = 111;
 			break;
 		case 111:
-			interpreter.sendDialogues(id == 783 ? 783 : id, null, "100 coins should cover it.");
+			interpreter.sendDialogues(id == 783 ? 783 : id, FacialExpression.CHILD_FRIENDLY, "100 coins should cover it.");
 			stage = 112;
 			break;
 		case 112:
-			interpreter.sendDialogues(player, null, "100 coins! Why should I pay you?");
+			interpreter.sendDialogues(player, FacialExpression.ANGRY, "100 coins! Why should I pay you?");
 			stage = 113;
 			break;
 		case 113:
-			interpreter.sendDialogues(id == 783 ? 783 : id, null, "You shouldn't, but we won't help otherwise. We never", "liked that cat anyway, so what do you say?");
+			interpreter.sendDialogues(id == 783 ? 783 : id,  FacialExpression.CHILD_NORMAL, "You shouldn't, but we won't help otherwise. We never", "liked that cat anyway, so what do you say?");
 			stage = 114;
 			break;
 		case 114:
@@ -175,17 +175,17 @@ public final class WiloughDialogue extends DialoguePlugin {
 		case 115:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, null, "I'm not paying you a penny.");
+				interpreter.sendDialogues(player, FacialExpression.ANGRY, "I'm not paying you a penny.");
 				stage = 116;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, null, "Okay then, I'll pay.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Okay then, I'll pay.");
 				stage = 118;
 				break;
 			}
 			break;
 		case 116:
-			interpreter.sendDialogues(id == 783 ? 783 : id, null, "Okay then, I'll find another way to make money.");
+			interpreter.sendDialogues(id == 783 ? 783 : id, FacialExpression.CHILD_SIDE_EYE, "Okay then, I'll find another way to make money.");
 			stage = 117;
 			break;
 		case 117:
@@ -206,26 +206,26 @@ public final class WiloughDialogue extends DialoguePlugin {
 			}
 			break;
 		case 119:
-			interpreter.sendDialogues(player, null, "There you go, now where did you see Fluffs?");
+			interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "There you go, now where did you see Fluffs?");
 			stage = 120;
 			break;
 		case 120:
-			interpreter.sendDialogues(id == 783 ? 783 : id, null, "We play at an abandoned lumber mill to the north east.", "Just beyond the Jolly Boar Inn. I saw Fluffs running", "around in there.");
+			interpreter.sendDialogues(id == 783 ? 783 : id, FacialExpression.CHILD_NORMAL, "We play at an abandoned lumber mill to the north east.", "Just beyond the Jolly Boar Inn. I saw Fluffs running", "around in there.");
 			stage = 121;
 			break;
 		case 121:
-			interpreter.sendDialogues(player, null, "Anything else?");
+			interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Anything else?");
 			stage = 122;
 			break;
 		case 122:
-			interpreter.sendDialogues(id == 783 ? 783 : id, null, "Well, you'll have to find the broken fence to get in. I'm", "sure you can manage that.");
+			interpreter.sendDialogues(id == 783 ? 783 : id, FacialExpression.CHILD_SIDE_EYE, "Well, you'll have to find the broken fence to get in. I'm", "sure you can manage that.");
 			stage = 123;
 			break;
 		case 123:
 			end();
 			break;
 		case 130:
-			interpreter.sendDialogues(id, null, "Weren't you listening? I saw the flea bag in the old", "lumber mill just north east of here. Just walk past the", "Jolly Boar Inn and you should find it.");
+			interpreter.sendDialogues(id, FacialExpression.CHILD_SIDE_EYE, "Weren't you listening? I saw the flea bag in the old", "lumber mill just north east of here. Just walk past the", "Jolly Boar Inn and you should find it.");
 			stage = 131;
 			break;
 		case 131:

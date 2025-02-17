@@ -92,7 +92,7 @@ public enum FacialExpression {
     //Child Chathead?
     CHILD_ANGRY(7168),
     CHILD_SIDE_EYE(7169),
-    CHILD_THINKING_2(7170),
+    CHILD_RECALLING(7170),
     CHILD_EVIL_LAUGH(7171),
     CHILD_FRIENDLY(7172),
     CHILD_NORMAL(7173),
@@ -102,8 +102,30 @@ public enum FacialExpression {
     CHILD_SAD(7177),
     CHILD_GUILTY(7178),
     CHILD_SUSPICIOUS(7179),
-    CHILD_SHOCKED(7180); //TODO: More?
+    CHILD_SURPRISED(7180),
 
+    ; //TODO: More?
+
+    /*
+     * From some sources: here's a potential list of chatheads.
+     * // 667
+     * Chat animation group: 1540; linked animations: [7, 8, 9, 6824]
+     * Chat animation group: 1489; linked animations: [225, 6550, 6551, 6552, 6553, 6555, 8372, 8373, 8374, 8375, 8581, 8582, 9178, 9179, 9180, 9181, 9183, 9187, 9189, 9190, 9192, 9202]
+     * Chat animation group: 82; linked animations: [554, 555, 556, 557, 562, 563, 564, 565, 567, 568, 569, 570, 571, 572, 573, 574, 575, 576, 577, 578, 588, 589, 590, 591, 592, 593, 594, 595, 596, 597, 598, 599, 600, 601, 602, 603, 610, 611, 612, 613, 614, 615, 616, 617]
+     * Chat animation group: 84; linked animations: [558, 559, 560, 561]
+     * Chat animation group: 80; linked animations: [584, 585, 586, 587]
+     * Chat animation group: 78; linked animations: [3874]
+     * Chat animation group: 77; linked animations: [4119, 4120, 4121, 4122]
+     * Chat animation group: 1124; linked animations: [4843, 4844, 4845, 4846, 8388, 8389, 8390, 8391, 8392, 8393, 8394, 8403, 8404, 8405, 8406, 8898, 8899, 8900]
+     * Chat animation group: 1309; linked animations: [5661, 5662, 5663, 5665]
+     * Chat animation group: 1421; linked animations: [6244, 6245, 6246, 7636, 7637, 7638, 7639, 8380, 8381, 8382, 8383, 8475, 8476, 8477, 8478]
+     * Chat animation group: 1627; linked animations: [7168, 7169, 7170, 7171, 7172, 7173, 7176, 7177, 7178, 7179, 7180, 8824]
+     * Chat animation group: 1698; linked animations: [7539, 7540, 7541, 7542, 8447, 8448, 8449, 8450]
+     * Chat animation group: 1885; linked animations: [8395, 8396, 8397, 8398]
+     * Chat animation group: 1882; linked animations: [8411, 8412, 8413, 8414]
+     * Chat animation group: 1887; linked animations: [8443, 8444, 8445, 8446, 9315, 9316, 9317, 9318, 9319]
+     * Chat animation group: 1906; linked animations: [8579, 8580, 8583, 8584, 8585, 8656, 8657, 8659, 8660, 8661, 8662]
+     */
 
     /**
      * The animation id.

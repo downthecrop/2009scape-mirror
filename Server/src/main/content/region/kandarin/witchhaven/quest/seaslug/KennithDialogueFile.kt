@@ -30,9 +30,9 @@ class KennithDialogueFile : DialogueBuilderFile() {
                 .playerl("Hello Kennith, are you okay?")
                 .npcl(FacialExpression.CHILD_SAD, "No, I want my daddy.")
                 .playerl("You'll be able to see him soon. First we need to get you back to land, come with me to the boat.")
-                .npcl(FacialExpression.CHILD_SHOCKED, "No!")
+                .npcl(FacialExpression.CHILD_SURPRISED, "No!")
                 .playerl("What, why not?")
-                .npcl(FacialExpression.CHILD_SHOCKED, "I'm scared of those nasty sea slugs. I won't go near them.")
+                .npcl(FacialExpression.CHILD_SURPRISED, "I'm scared of those nasty sea slugs. I won't go near them.")
                 .playerl("Okay, you wait here and I'll go figure another way to get you out.")
                 .endWith() { df, player ->
                     if(getQuestStage(player, Quests.SEA_SLUG) == 7) {

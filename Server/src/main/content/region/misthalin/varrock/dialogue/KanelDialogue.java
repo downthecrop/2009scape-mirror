@@ -7,13 +7,11 @@ import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
 
 /**
- * Represents the dialogue plugin used for kanel.
- * @author 'Vexia
- * @version 1.0
+ * Kanel - Child in Gertrude's House
  */
 @Initializable
 public final class KanelDialogue extends DialoguePlugin {
-
+	// https://www.youtube.com/watch?v=ANI7DaRVEbg
 	/**
 	 * Constructs a new {@code KanelDialogue} {@code Object}.
 	 */
@@ -39,7 +37,7 @@ public final class KanelDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Hello there.");
+		interpreter.sendDialogues(player, FacialExpression.FRIENDLY, "Hello there.");
 		stage = 0;
 		return true;
 	}
@@ -49,15 +47,15 @@ public final class KanelDialogue extends DialoguePlugin {
 
 		switch (stage) {
 		case 0:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Hel-lo?");
+			interpreter.sendDialogues(npc, FacialExpression.CHILD_THINKING, "Hel-lo?");
 			stage = 1;
 			break;
 		case 1:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Right. Goodbye.");
+			interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Right. Goodbye.");
 			stage = 2;
 			break;
 		case 2:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Bye?");
+			interpreter.sendDialogues(npc, FacialExpression.CHILD_THINKING, "Bye?");
 			stage = 3;
 			break;
 		case 3:

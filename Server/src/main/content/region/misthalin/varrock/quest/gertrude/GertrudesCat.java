@@ -82,7 +82,7 @@ public class GertrudesCat extends Quest {
 		player.getPacketDispatch().sendString("1525 Cooking XP", 277, 10 + 2);
 		player.getPacketDispatch().sendString("A chocolate cake", 277, 11 + 2);
 		player.getPacketDispatch().sendString("A bowl of stew", 277, 12 + 2);
-		player.getPacketDispatch().sendString("Raise cats.", 277, 13 + 2);
+		player.getPacketDispatch().sendString("The ability to raise cats", 277, 13 + 2);
 		player.getSkills().addExperience(Skills.COOKING, 1525);
 		player.getPacketDispatch().sendItemZoomOnInterface(kitten.getId(), 240, 277, 3 + 2);
 		setStage(player, 100);
