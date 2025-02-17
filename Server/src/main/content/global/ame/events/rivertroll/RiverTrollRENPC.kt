@@ -4,17 +4,14 @@ import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import content.global.ame.RandomEventNPC
 import core.api.utils.WeightBasedTable
-import java.lang.Integer.max
 
-
-val ids = 391..396
+val ids = (391..396).toList()
 
 class RiverTrollRENPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(391){
     override fun talkTo(npc: NPC) {}
     override fun init() {
         super.init()
-        val index = max(0, (player.properties.combatLevel / 20) - 1)
-        val id = ids.toList()[index]
+        val id = idForCombatLevel(ids, player)
         this.transform(id)
         this.attack(player)
         sendChat("Fishies be mine, leave dem fishies!")

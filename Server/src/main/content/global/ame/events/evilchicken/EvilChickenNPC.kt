@@ -9,9 +9,8 @@ import core.tools.RandomFunction
 import org.rs09.consts.Items
 import content.global.ame.RandomEventNPC
 import core.api.utils.WeightBasedTable
-import java.lang.Integer.max
 
-val ids = 2463..2468
+val ids = (2463..2468).toList()
 
 class EvilChickenNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(2463) {
     val phrases = arrayOf("Bwuk","Bwuk bwuk bwuk","Flee from me, @name!","Begone, @name!","Bwaaaauuuk bwuk bwuk","MUAHAHAHAHAAA!")
@@ -19,8 +18,7 @@ class EvilChickenNPC(override var loot: WeightBasedTable? = null) : RandomEventN
 
     override fun init() {
         super.init()
-        val index = max(0, (player.properties.combatLevel / 20) - 1)
-        val id = ids.toList()[index]
+        val id = idForCombatLevel(ids, player)
         this.transform(id)
         this.attack(player)
         sendChat(phrases.random().replace("@name",player.username.capitalize()))

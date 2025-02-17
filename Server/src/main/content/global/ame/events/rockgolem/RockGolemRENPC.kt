@@ -4,17 +4,14 @@ import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import content.global.ame.RandomEventNPC
 import core.api.utils.WeightBasedTable
-import kotlin.math.max
 
-
-val ids = 413..418
+val ids = (413..418).toList()
 
 class RockGolemRENPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(413){
     override fun talkTo(npc: NPC) {}
     override fun init() {
         super.init()
-        val index = max(0,(player.properties.combatLevel / 20) - 1)
-        val id = ids.toList()[index]
+        val id = idForCombatLevel(ids, player)
         this.transform(id)
         this.attack(player)
         sendChat("Raarrrgghh! Flee human!")
