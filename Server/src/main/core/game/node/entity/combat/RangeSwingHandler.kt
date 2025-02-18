@@ -30,11 +30,10 @@ import kotlin.math.floor
  * @author Emperor
  * @author Ceikry, conversion to Kotlin + cleanup
  */
-open class RangeSwingHandler (vararg flags: SwingHandlerFlag)
+open class RangeSwingHandler (vararg flags: SwingHandlerFlag) : CombatSwingHandler(CombatStyle.RANGE, *flags) {
 /**
  * Constructs a new `RangeSwingHandler` {@Code Object}.
  */
-    : CombatSwingHandler(CombatStyle.RANGE, *flags) {
     override fun canSwing(entity: Entity, victim: Entity): InteractionType? {
         if (!isProjectileClipped(entity, victim, false)) {
             return InteractionType.NO_INTERACT
@@ -75,8 +74,17 @@ open class RangeSwingHandler (vararg flags: SwingHandlerFlag)
             return -1
         }
         var hit = 0
-        if (isAccurateImpact(entity, victim, CombatStyle.RANGE)) {
-            val max = calculateHit(entity, victim, 1.0).also { if(entity?.name?.toLowerCase() == "test10") log(this::class.java, Log.FINE,  "Damage: $it") }
+        val armourPierce = state.ammunition != null && state.ammunition.effect != null && state.ammunition.effect == BoltEffect.DIAMOND && state.ammunition.effect.canFire(state)
+        if (armourPierce || isAccurateImpact(entity, victim, CombatStyle.RANGE)) {
+            val max: Int
+            if (armourPierce) {
+                state.ammunition.effect.impact(state)
+                flags.add(SwingHandlerFlag.IGNORE_STAT_REDUCTION)
+                max = (calculateHit(entity, victim, 1.0) * 1.15).toInt()
+                flags.remove(SwingHandlerFlag.IGNORE_STAT_REDUCTION)
+            } else {
+                max = calculateHit(entity, victim, 1.0)
+            }
             state.maximumHit = max
             hit = RandomFunction.random(max + 1)
         }
@@ -124,7 +132,7 @@ open class RangeSwingHandler (vararg flags: SwingHandlerFlag)
         if (state.ammunition != null && entity is Player) {
             val damage = state.ammunition.poisonDamage
             if (state.estimatedHit > 0 && damage > 8 && RandomFunction.random(10) < 4) {
-                applyPoison (victim, entity, damage)
+                applyPoison(victim, entity, damage)
             }
         }
         super.adjustBattleState(entity, victim, state)
@@ -161,7 +169,7 @@ open class RangeSwingHandler (vararg flags: SwingHandlerFlag)
     }
 
     override fun impact(entity: Entity?, victim: Entity?, state: BattleState?) {
-        if (state!!.ammunition != null && state.ammunition.effect != null && state.ammunition.effect.canFire(state)) {
+        if (state!!.ammunition != null && state.ammunition.effect != null && state.ammunition.effect != BoltEffect.DIAMOND && state.ammunition.effect.canFire(state)) {
             state.ammunition.effect.impact(state)
         }
         val hit = state.estimatedHit
@@ -220,7 +228,13 @@ open class RangeSwingHandler (vararg flags: SwingHandlerFlag)
                 if(entity.equipment[EquipmentContainer.SLOT_WEAPON] != null && RangeWeapon.get(entity.equipment[EquipmentContainer.SLOT_WEAPON].id).ammunitionSlot != EquipmentContainer.SLOT_ARROWS && entity.equipment[EquipmentContainer.SLOT_ARROWS] != null)
                     styleStrengthBonus -= entity.equipment[EquipmentContainer.SLOT_ARROWS].definition.getConfiguration<IntArray>(ItemConfigParser.BONUS)[14]
                 var effectiveStrengthLevel = entity.skills.getLevel(Skills.RANGE).toDouble()
-                if(!flags.contains(SwingHandlerFlag.IGNORE_PRAYER_BOOSTS_DAMAGE))
+                if (flags.contains(SwingHandlerFlag.IGNORE_STAT_REDUCTION)) {
+                    val staticLevel = entity.skills.getStaticLevel(Skills.RANGE).toDouble()
+                    if (staticLevel > effectiveStrengthLevel) {
+                        effectiveStrengthLevel = staticLevel
+                    }
+                }
+                if (!flags.contains(SwingHandlerFlag.IGNORE_PRAYER_BOOSTS_DAMAGE))
                     effectiveStrengthLevel = floor(effectiveStrengthLevel + (entity.prayer.getSkillBonus(Skills.RANGE) * effectiveStrengthLevel))
                 if(entity.properties.attackStyle.style == WeaponInterface.STYLE_RANGE_ACCURATE) effectiveStrengthLevel += 3
                 effectiveStrengthLevel += 8

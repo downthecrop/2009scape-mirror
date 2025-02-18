@@ -64,16 +64,16 @@ open class MeleeSwingHandler (vararg flags: SwingHandlerFlag)
         if (entity is Player) {
             state.weapon = Weapon(entity.equipment[3])
         }
-        if (entity!!.properties.armourSet === ArmourSet.VERAC && RandomFunction.random(100) < 25) {
+        if (entity!!.properties.armourSet == ArmourSet.VERAC && RandomFunction.roll(4)) {
             state.armourEffect = ArmourSet.VERAC
         }
-        if (state.armourEffect === ArmourSet.VERAC || isAccurateImpact(entity, victim, CombatStyle.MELEE)) {
+        if (state.armourEffect == ArmourSet.VERAC || isAccurateImpact(entity, victim, CombatStyle.MELEE)) {
             var max = calculateHit(entity, victim, 1.0)
             if (victim != null) {
-                if (entity is NPC && state.armourEffect === ArmourSet.VERAC && victim.hasProtectionPrayer(CombatStyle.MELEE)) max = max * 2 / 3
+                if (entity is NPC && state.armourEffect == ArmourSet.VERAC && victim.hasProtectionPrayer(CombatStyle.MELEE)) max = max * 2 / 3
             }
             state.maximumHit = max
-            hit = RandomFunction.random(max + 1) + (if (entity is Player && state.armourEffect === ArmourSet.VERAC) 1 else 0)
+            hit = RandomFunction.random(max + 1)
         }
         state.estimatedHit = hit
         if(victim != null) {

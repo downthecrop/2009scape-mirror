@@ -31,10 +31,14 @@ import kotlin.math.floor
  * Handles a combat swing.
  * @author Emperor
  * @author Ceikry - Kotlin refactoring, general cleanup
+ * @author Player Name - converted `flags` to ArrayList
  */
 abstract class CombatSwingHandler(var type: CombatStyle?) {
-    var flags: Array<out SwingHandlerFlag> = emptyArray()
-    constructor(type: CombatStyle?, vararg flags: SwingHandlerFlag) : this(type) { this.flags = flags }
+    var flags: ArrayList<SwingHandlerFlag> = ArrayList(SwingHandlerFlag.values().size)
+    constructor(type: CombatStyle?, vararg flags: SwingHandlerFlag) : this(type) {
+        this.flags = arrayListOf(*flags)
+    }
+
     /**
      * The mapping of the special attack handlers.
      */
@@ -664,5 +668,6 @@ enum class SwingHandlerFlag {
     IGNORE_STAT_BOOSTS_DAMAGE,
     IGNORE_STAT_BOOSTS_ACCURACY,
     IGNORE_PRAYER_BOOSTS_DAMAGE,
-    IGNORE_PRAYER_BOOSTS_ACCURACY
+    IGNORE_PRAYER_BOOSTS_ACCURACY,
+    IGNORE_STAT_REDUCTION
 }

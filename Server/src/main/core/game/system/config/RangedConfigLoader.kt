@@ -8,7 +8,6 @@ import core.game.node.entity.combat.equipment.BoltEffect
 import core.game.node.entity.combat.equipment.RangeWeapon
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
-import core.tools.SystemLogger
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics

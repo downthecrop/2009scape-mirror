@@ -21,7 +21,6 @@ import static core.api.ContentAPIKt.*;
  */
 public enum BoltEffect {
 	OPAL(9236, Graphics.create(749), new Audio(2918)) {
-
 		@Override
 		public void impact(BattleState state) {
 			state.setEstimatedHit(state.getEstimatedHit() + RandomFunction.random(3, 20));
@@ -33,7 +32,6 @@ public enum BoltEffect {
 
 	},
 	JADE(9237, new Graphics(755), new Audio(2916)) {
-
 		@Override
 		public void impact(BattleState state) {
 			if (state.getVictim() instanceof Player) {
@@ -59,7 +57,6 @@ public enum BoltEffect {
 
 	},
 	PEARL(9238, Graphics.create(750), new Audio(2920)) {
-
 		@Override
 		public void impact(BattleState state) {
 			state.setEstimatedHit(state.getEstimatedHit() + RandomFunction.random(3, 20));
@@ -108,12 +105,11 @@ public enum BoltEffect {
 	EMERALD(9241, new Graphics(752), new Audio(2919)) {
 		@Override
 		public void impact(BattleState state) {
-                        applyPoison(state.getVictim(), state.getAttacker(), 40);
+			applyPoison(state.getVictim(), state.getAttacker(), 40);
 			super.impact(state);
 		}
 	},
 	RUBY(9242, new Graphics(754), new Audio(2911, 1)) {   // in this case, volume is the number of times to play the sound...
-
 		@Override
 		public void impact(BattleState state) {  // hit target for 20% of their HP, hit self for 10% of HP
 			int victimPoints = (int) (state.getVictim().getSkills().getLifepoints() * 0.20);
@@ -135,15 +131,8 @@ public enum BoltEffect {
 			return super.canFire(state) && state.getAttacker().getSkills().getLifepoints() - playerPoints >= 1;
 		}
 	},
-	DIAMOND(9243, new Graphics(758), new Audio(2913)) {
-		@Override
-		public void impact(BattleState state) {
-			state.setEstimatedHit(state.getEstimatedHit() + RandomFunction.random(5, 14));  // unauthentic, needs fixing
-			super.impact(state);
-		}
-	},
+	DIAMOND(9243, new Graphics(758), new Audio(2913)) { /* handled in RangeSwingHandler.kt::swing(entity: Entity?, victim: Entity?, state: BattleState?) */ },
 	DRAGON(9244, new Graphics(756), new Audio(2915)) {
-
 		@Override
 		public void impact(BattleState state) {
 			state.setEstimatedHit(state.getEstimatedHit() + RandomFunction.random(17, 29));
@@ -165,10 +154,8 @@ public enum BoltEffect {
 			}
 			return super.canFire(state);
 		}
-
 	},
 	ONYX(9245, new Graphics(753), new Audio(2917)) {
-
 		@Override
 		public void impact(BattleState state) {
 			int newDamage = (int) (state.getEstimatedHit() * 0.25);
@@ -270,5 +257,4 @@ public enum BoltEffect {
 	public int getItemId() {
 		return itemId;
 	}
-
 }

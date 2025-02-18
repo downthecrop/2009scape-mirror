@@ -74,7 +74,7 @@ public final class Ammunition {
 	 * Loads all the {@code Ammunition} info to the mapping.
 	 * @return {@code True}.
 	 */
-	public static final boolean initialize() {
+	public static boolean initialize() {
 		Document doc;
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -141,7 +141,7 @@ public final class Ammunition {
 	 * @param id The ammo id.
 	 * @return The ammunition object.
 	 */
-	public static final Ammunition get(int id) {
+	public static Ammunition get(int id) {
 		return AMMUNITION.get(id);
 	}
 
@@ -189,7 +189,7 @@ public final class Ammunition {
 	}
 
 	/**
-	 * Sets the baeffect.
+	 * Sets the effect.
 	 * @param effect the effect to set.
 	 */
 	public void setEffect(BoltEffect effect) {
