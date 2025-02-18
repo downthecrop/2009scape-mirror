@@ -12,6 +12,8 @@ import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.system.config.ItemConfigParser
 import content.global.skill.summoning.pet.Pets
+import core.game.node.entity.player.info.LogType
+import core.game.node.entity.player.info.PlayerMonitor
 import org.rs09.consts.Items
 import org.rs09.consts.Sounds
 
@@ -33,7 +35,7 @@ class DropListener : InteractionListener {
         }
         private fun handleDropAction(player: Player, node: Node) : Boolean {
             val option = getUsedOption(player)
-            var item = node as? Item ?: return false
+            val item = node as? Item ?: return false
             if (option == "drop") {
                 if (Pets.forId(item.id) != null) {
                     player.familiarManager.summon(item, true, true)
@@ -43,12 +45,21 @@ class DropListener : InteractionListener {
                     sendMessage(player, "You cannot drop items on top of graves!")
                     return false
                 }
-                if (getAttribute(player, "equipLock:${node.id}", 0 ) > getWorldTicks())
+                if (player.locks.equipmentLock != null) {
                     return false
+                }
 
                 closeAllInterfaces(player)
-                queueScript (player, strength = QueueStrength.SOFT) {
-                    if (player.inventory.replace(null, item.slot) != item) return@queueScript stopExecuting(player)
+                queueScript(player, strength = QueueStrength.SOFT) { //do this as a script to allow dropping multiple items in the same tick (authentic)
+                    // It's possible for state to change between queueing the script and executing it at the end of the tick (https://forum.2009scape.org/viewtopic.php?f=8&t=1195-lost-bandos-chestplate-whilst-making-iron-titans&p=5292). So, sanity check:
+                    val current = player.inventory.get(item.slot)
+                    if (current == null || current !== item) {
+                        return@queueScript stopExecuting(player)
+                    }
+                    if (player.inventory.replace(null, item.slot) !== item) {
+                        PlayerMonitor.log(player, LogType.DUPE_ALERT, "Potential exploit attempt when player ${player.name} tried to drop ${item.amount}x ${item.id}. The item has been lost and will need to be refunded to the player, but how did they get this to happen?")
+                        return@queueScript stopExecuting(player)
+                    }
                     val droppedItem = item.dropItem
                     if (droppedItem.id == Items.COINS_995) playAudio(player, DROP_COINS_SOUND) else playAudio(player, DROP_ITEM_SOUND)
                     GroundItemManager.create(droppedItem, player.location, player)
