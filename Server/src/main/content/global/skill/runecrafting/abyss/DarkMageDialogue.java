@@ -6,6 +6,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import org.rs09.consts.Items;
 
+import static core.api.ContentAPIKt.replaceAllItems;
+
 /**
  * Handles the dark mages dialogue.
  * @author Vexia
@@ -153,14 +155,7 @@ public final class DarkMageDialogue extends DialoguePlugin {
 				pouch.getContainer().add(essItem);
 			}
 			if (id != Items.SMALL_POUCH_5509) {
-				if (player.getInventory().contains(id + 1, 1)) {
-					player.getInventory().remove(new Item(id + 1, 1));
-					player.getInventory().add(new Item(id, 1));
-				}
-				if (player.getBank().contains(id + 1, 1)) {
-					player.getBank().remove(new Item(id + 1, 1));
-					player.getBank().add(new Item(id, 1));
-				}
+				replaceAllItems(player, id + 1, id);
 			}
 		});
 		return true;

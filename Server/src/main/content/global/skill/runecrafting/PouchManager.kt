@@ -75,11 +75,11 @@ class PouchManager(val player: Player) {
                     pouch.currentCap = pouch.capacity
                     pouch.charges = pouch.maxCharges
                     pouch.remakeContainer()
+                    replaceAllItems(player, itemId, itemId - 1) //in case the player had more copies
                 }
             } else {
                 if (!isDecayedPouch(itemId)) {
-                    val slot = player.inventory.getSlot(Item(itemId))
-                    replaceSlot(player, slot, Item(itemId + 1))
+                    replaceAllItems(player, itemId, itemId + 1)
                 }
                 sendMessage(player, "Your pouch has decayed through use.") //https://www.youtube.com/watch?v=FUcPYrgPUlQ
                 pouch.charges = 9 * pouch.currentCap //implied by multiple contemporaneous sources, quantified only by https://oldschool.runescape.wiki/w/Large_pouch

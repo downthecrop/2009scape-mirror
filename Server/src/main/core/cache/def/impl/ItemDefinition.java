@@ -605,8 +605,13 @@ public class ItemDefinition extends Definition<Item> {
 	 * @return {@code True} if so.
 	 */
 	public static boolean canEnterEntrana(Player player) {
-		Container[] container = new Container[] { player.getInventory(), player.getEquipment() };
-		for (Container c : container) {
+		Container[] containers;
+		if (player.getFamiliarManager().hasFamiliar() && player.getFamiliarManager().getFamiliar().isBurdenBeast()) {
+			containers = new Container[] { player.getInventory(), player.getEquipment(), ((BurdenBeast) player.getFamiliarManager().getFamiliar()).getContainer() };
+		} else {
+			containers = new Container[] { player.getInventory(), player.getEquipment() };
+		}
+		for (Container c : containers) {
 			for (Item i : c.toArray()) {
 				if (i == null) {
 					continue;

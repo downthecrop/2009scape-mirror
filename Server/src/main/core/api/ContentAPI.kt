@@ -408,14 +408,21 @@ fun replaceSlot(player: Player, slot: Int, item: Item, currentItem: Item? = null
  */
 fun replaceAllItems(player: Player, itemId: Int, replaceId: Int) {
     val item = Item(itemId)
-    for (container in arrayOf(player.inventory, player.equipment, player.bankPrimary, player.bankSecondary)) {
+    val containers = if (player.familiarManager.hasFamiliar() && player.familiarManager.familiar.isBurdenBeast()) {
+        arrayOf(player.inventory, player.equipment, player.bankPrimary, player.bankSecondary, (player.familiarManager.familiar as BurdenBeast).container)
+    } else {
+        arrayOf(player.inventory, player.equipment, player.bankPrimary, player.bankSecondary)
+    }
+    for (container in containers) {
         val hasItems = container.getAll(item)
-        if (!item.definition.isStackable && (container == player.inventory || container == player.equipment)) {
+        if (!item.definition.isStackable && container != player.bankPrimary && container != player.bankSecondary) {
+            // just replace
             for (target in hasItems) {
                 val newItem = Item(replaceId, target.amount)
                 container.replace(newItem, target.slot, true)
             }
         } else {
+            // add to existing stack if possible
             if (hasItems.size > 0) {
                 val target = hasItems[0]
                 var count = 0
