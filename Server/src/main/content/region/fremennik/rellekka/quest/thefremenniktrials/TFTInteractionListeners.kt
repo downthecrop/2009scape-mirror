@@ -213,7 +213,9 @@ class TFTInteractionListeners : InteractionListener {
         on(SWENSEN_LADDER, IntType.SCENERY, "climb-down") { player, _ ->
             if (!getAttribute(player,"fremtrials:swensen-accepted",false)) {
                 sendNPCDialogue(player,1283,"Where do you think you're going?", core.game.dialogue.FacialExpression.ANGRY)
+                return@on true
             }
+            core.game.global.action.ClimbActionHandler.climb(player, Animation(828), Location.create(2631, 10006, 0))
             return@on true
         }
 
