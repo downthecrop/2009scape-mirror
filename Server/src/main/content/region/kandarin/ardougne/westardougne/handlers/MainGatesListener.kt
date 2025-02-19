@@ -13,7 +13,7 @@ class MainGatesListener : InteractionListener {
 
     override fun defineListeners() {
         on(intArrayOf(Scenery.ARDOUGNE_WALL_DOOR_9738, Scenery.ARDOUGNE_WALL_DOOR_9330), IntType.SCENERY, "open") { player, node ->
-            if (isQuestComplete(player, Quests.BIOHAZARD)) {
+            if (hasRequirement(player, Quests.BIOHAZARD)) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else if(inBorders(player, 2556, 3298, 2557, 3301)){
                 lock(player,2)
