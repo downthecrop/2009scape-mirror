@@ -109,7 +109,7 @@ class PyramidArea {
                 Location(3259, 9313, 0),
         )
 
-        val safeZone = ZoneBorders(3227, 3239, 9310, 9320)
+        val safeZone = ZoneBorders(3227, 9310, 3239, 9320)
 
         // Direction.NORTH - LEFT
         // rot 0 - LEFT
@@ -150,12 +150,15 @@ class PyramidArea {
         /** Trapdoor randomly throws you out of the Pyramid. */
         fun trapdoorTrap(player: Player) {
             stopWalk(player)
+            player.walkingQueue.reset()
+            forceWalk(player, Location(3233, 2887, 0), "")
             lock(player, 8)
             sendMessage(player, "You accidentally trigger a trap...")
             // addScenery(6521, location) -> animateScenery(scenery, 1939), but 6522 does it for you.
             val pitfallScenery = addScenery(6522, player.location) // Scenery - Trapdoor Scenery
             animate(player, 1950) // Anim - Player Falling Animation
             queueScript(player, 4, QueueStrength.SOFT) { stage ->
+                player.walkingQueue.reset()
                 when (stage) {
                     0 -> {
                         sendGraphics(354, player.location) // Gfx - Puff of Smoke
@@ -169,7 +172,14 @@ class PyramidArea {
                         sendMessage(player, "...and tumble unharmed outside the pyramid.")
                         closeOverlay(player)
                         openOverlay(player, Components.FADE_FROM_BLACK_170)
+                        stopWalk(player)
+                        player.walkingQueue.reset()
                         // animate(player, ??) // Anim - Player Getting Up https://www.youtube.com/watch?v=95OvIPFYCwg
+                        return@queueScript delayScript(player, 3)
+                    }
+                    2 -> {
+                        player.walkingQueue.reset()
+                        forceWalk(player, Location(3233, 2887, 0), "")
                         return@queueScript stopExecuting(player)
                     }
                     else -> return@queueScript stopExecuting(player)
@@ -179,8 +189,6 @@ class PyramidArea {
 
         /** Mummies randomly spawns out of a sarcophagus. */
         fun spawnMummy(player: Player, sarcophagusLocation: Location) {
-            stopWalk(player)
-            lock(player, 3)
             val sarcophagusScenery = getScenery(sarcophagusLocation) ?: return
             val locationInFront = sarcophagusScenery.location.transform(getNewLocation(sarcophagusScenery.direction))
             // There are 6 sarcophagus, 6512 - 6517 with different door designs.
@@ -201,6 +209,7 @@ class PyramidArea {
             mummyNpc.init()
             mummyNpc.walkingQueue.addPath(locationInFront.x, locationInFront.y)
             sendChat(mummyNpc, "Rawr!")
+            lock(player, 1)
             stopWalk(player)
             queueScript(player, 2, QueueStrength.SOFT) { stage ->
                 stopWalk(player)
@@ -252,34 +261,30 @@ class PyramidAreaFirstThree: MapArea {
                 getRegionBorders(11597),
                 getRegionBorders(11341),
                 getRegionBorders(11085),
-                getRegionBorders(12945),
         )
     }
 
     override fun entityStep(entity: Entity, location: Location, lastLocation: Location) {
         if (entity is Player) {
+            val averageLevel = (
+                    getDynLevel(entity, Skills.AGILITY) +
+                            getDynLevel(entity, Skills.THIEVING)
+                    ) / 2.0
+            val randomValue = RandomFunction.randomDouble(99.5)
 
-            if (!PyramidArea.safeZone.insideBorder(entity.location)) { // Safezone is talking to Azzanadra.
-                val averageLevel = (
-                        getDynLevel(entity, Skills.AGILITY) +
-                                getDynLevel(entity, Skills.THIEVING)
-                        ) / 2
-                val randomValue = RandomFunction.randomDouble(99.5)
+            if ((1..20).random() == 1) {
+                // A mummy would jump out if you walk near a sarcophagus of 2 radius.
+                val sarcoph = PyramidArea.nearSarcophagus(entity.location)
+                if (sarcoph != null) {
+                    PyramidArea.spawnMummy(entity, sarcoph)
+                }
+            }
 
-                if ((1..10).random() == 1) {
-                    // A mummy would jump out if you walk near a sarcophagus of 2 radius.
-                    val sarcoph = PyramidArea.nearSarcophagus(entity.location)
-                    if (sarcoph != null) {
-                        PyramidArea.spawnMummy(entity, sarcoph)
-                    }
-                }
-
-                if ((1..60).random() == 1) {
-                    PyramidArea.spawnScarabs(entity)
-                }
-                if (randomValue > averageLevel) {
-                    PyramidArea.trapdoorTrap(entity)
-                }
+            if ((1..80).random() == 2) {
+                PyramidArea.spawnScarabs(entity)
+            }
+            if (randomValue > averageLevel && (1..128).random() == 1) {
+                PyramidArea.trapdoorTrap(entity)
             }
         }
     }
@@ -295,16 +300,16 @@ class PyramidAreaFinal: MapArea {
 
     override fun entityStep(entity: Entity, location: Location, lastLocation: Location) {
         if (entity is Player) {
-
-            if ((1..30).random() == 1) {
-                PyramidArea.spawnScarabs(entity)
-            }
-
-            if ((1..15).random() == 1) {
-                // A mummy would jump out if you walk near a sarcophagus of 2 radius.
-                val sarcoph = PyramidArea.nearSarcophagus(entity.location)
-                if (sarcoph != null) {
-                    PyramidArea.spawnMummy(entity, sarcoph)
+            if (!PyramidArea.safeZone.insideBorder(entity.location)) { // Safezone is talking to Azzanadra.
+                if ((1..20).random() == 1) {
+                    // A mummy would jump out if you walk near a sarcophagus of 2 radius.
+                    val sarcoph = PyramidArea.nearSarcophagus(entity.location)
+                    if (sarcoph != null) {
+                        PyramidArea.spawnMummy(entity, sarcoph)
+                    }
+                }
+                if ((1..80).random() == 2) {
+                    PyramidArea.spawnScarabs(entity)
                 }
             }
 
