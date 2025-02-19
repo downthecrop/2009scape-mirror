@@ -9,6 +9,7 @@ import core.game.interaction.QueueStrength
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
 import core.game.node.entity.player.Player
+import core.game.node.item.Item
 import core.game.world.map.Location
 import org.rs09.consts.Components
 import org.rs09.consts.Items
@@ -76,7 +77,8 @@ class SeaSlugListeners : InteractionListener {
         // Your torch goes out on the crossing.
 
         onUseWith(IntType.ITEM, Items.SWAMP_TAR_1939, Items.POT_OF_FLOUR_1933){ player, used, with ->
-            if(removeItem(player, used) && removeItem(player, with)) {
+            val toRemove = Item(used.id, 1, used.asItem().slot)
+            if(removeItem(player, toRemove) && removeItem(player, with)) {
                 sendMessage(player, "You mix the flour with the swamp tar.")
                 sendMessage(player, "It mixes into a paste.")
                 addItemOrDrop(player, Items.EMPTY_POT_1931)
@@ -88,7 +90,8 @@ class SeaSlugListeners : InteractionListener {
         // You can only cook it using firewood.
         // sendMessage(player, "You can't cook that in a range.")
         onUseWith(SCENERY, Items.RAW_SWAMP_PASTE_1940, Scenery.FIRE_2732) { player, used, with ->
-            if(removeItem(player, used)) {
+            val toRemove = Item(used.id, 1, used.asItem().slot)
+            if(removeItem(player, toRemove)) {
                 sendMessage(player, "You warm the paste over the fire. It thickens into a sticky goo.")
                 addItemOrDrop(player, Items.SWAMP_PASTE_1941)
             }
