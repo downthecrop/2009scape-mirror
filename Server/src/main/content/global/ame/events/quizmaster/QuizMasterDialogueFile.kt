@@ -58,7 +58,7 @@ class QuizMasterDialogueFile : DialogueFile() {
 
         // Random Item should be "Mystery Box", but the current MYSTERY_BOX_6199 is already inauthentically used by Giftmas.
         val tableRoll = WeightBasedTable.create(
-                WeightedItem(Items.LAMP_6796, 1, 1, 1.0, false),
+                WeightedItem(Items.LAMP_2528, 1, 1, 1.0, false),
                 WeightedItem(Items.CABBAGE_1965, 1, 1, 1.0, false),
                 WeightedItem(Items.DIAMOND_1601, 1, 1, 1.0, false),
                 WeightedItem(Items.BUCKET_1925, 1, 1, 1.0, false),
