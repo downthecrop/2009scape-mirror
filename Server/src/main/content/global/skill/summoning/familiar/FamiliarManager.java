@@ -128,7 +128,12 @@ public final class FamiliarManager {
 		}
 		if (currentPet != -1) {
 			int last = this.petDetails.get(currentPet).size() - 1;
-			PetDetails details = this.petDetails.get(currentPet).get(last);
+			PetDetails details;
+			if (last < 0) { //missing data in save due to historical bug (see GL !2077)
+				details = new PetDetails(0);
+			} else {
+				details = this.petDetails.get(currentPet).get(last);
+			}
 			Pets pets = Pets.forId(currentPet);
 			familiar = new Pet(player, details, currentPet, pets.getNpcId(currentPet));
 		} else if (familiarData.containsKey("familiar")) {
@@ -414,6 +419,9 @@ public final class FamiliarManager {
 	 * @param details The new pet details.
 	 */
 	public void addDetails(int itemId, PetDetails details) {
+		if (petDetails.get(itemId) == null) {
+			petDetails.put(itemId, new ArrayList<>());
+		}
 		petDetails.get(itemId).add(details);
 	}
 
