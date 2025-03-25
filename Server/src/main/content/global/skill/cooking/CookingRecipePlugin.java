@@ -44,29 +44,30 @@ public final class CookingRecipePlugin extends UseWithHandler {
 	@Override
 	public boolean handle(NodeUsageEvent event) {
 		Recipe recipe = null;
+		Item part = null;
         // TODO: Transitioning to a Listener would save an O(n) pass through the recipes list on every use-with
+		recipeloop:
 		for (Recipe temp : Recipe.RECIPES) {
 			if (temp.isSingular()) {
 				if (temp.getBase().getId() == event.getUsedItem().getId() || temp.getBase().getId() == event.getBaseItem().getId()) {
 					for (Item ingredient : temp.getIngredients()) {
 						if (ingredient.getId() == event.getBaseItem().getId() || ingredient.getId() == event.getUsedItem().getId()) {
 							recipe = temp;
-							break;
+							break recipeloop;
 						}
 					}
 				}
 			} else {
-				Item part = null;
-				Item ingredient = null;
 				for (int k = 0; k < temp.getParts().length; k++) {
 					for (int i = 0; i < temp.getIngredients().length; i++) {
-						part = temp.getParts()[k];
-						ingredient = temp.getIngredients()[i];
-						if (part.getId() == event.getUsedItem().getId() && ingredient.getId() == event.getBaseItem().getId() || part.getId() == event.getBaseItem().getId() && ingredient.getId() == event.getUsedItem().getId()) {
+						Item tempPart = temp.getParts()[k];
+						Item ingredient = temp.getIngredients()[i];
+						if (tempPart.getId() == event.getUsedItem().getId() && ingredient.getId() == event.getBaseItem().getId() || tempPart.getId() == event.getBaseItem().getId() && ingredient.getId() == event.getUsedItem().getId()) {
 							if (k == i) {// represents that this ingredient can
 								// mix with the other.
 								recipe = temp;
-								break;
+								part = tempPart;
+								break recipeloop;
 							}
 						}
 					}
@@ -76,6 +77,7 @@ public final class CookingRecipePlugin extends UseWithHandler {
 		if (recipe != null) {
             final Player player = event.getPlayer();
             final Recipe recipe_ = recipe;
+            final Item part_ = part;
             SkillDialogueHandler handler = new SkillDialogueHandler(player, SkillDialogue.ONE_OPTION, recipe.getProduct()) {
                 @Override
                 public void create(final int amount, int index) {
@@ -91,7 +93,7 @@ public final class CookingRecipePlugin extends UseWithHandler {
 
                 @Override
                 public int getAll(int index) {
-                    return player.getInventory().getAmount(recipe_.getBase());
+                    return player.getInventory().getAmount(part_ != null ? part_ : recipe_.getBase());
                 }
             };
             if (player.getInventory().getAmount(recipe.getBase()) == 1) {

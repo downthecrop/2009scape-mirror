@@ -119,6 +119,9 @@ public abstract class Recipe {
 			}
 		}
 		if (index != -1) {
+			if (!player.getInventory().containItems(event.getBaseItem().getId(), event.getUsedItem().getId())) {
+				return;
+			}
 			if (player.getInventory().remove(event.getBaseItem()) && player.getInventory().remove(event.getUsedItem())) {
 				player.getInventory().add(getParts()[index + 1]);
 				String message = getMixMessage(event);
