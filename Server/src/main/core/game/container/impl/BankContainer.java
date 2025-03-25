@@ -130,8 +130,8 @@ public final class BankContainer extends Container {
 		});
 		player.getInterfaceManager().openSingleTab(new Component(763));
 		super.refresh();
-		player.getInventory().getListeners().add(listener);
 		player.getInventory().refresh();
+		player.getInventory().getListeners().add(listener);
 		setVarp(player, 1249, lastAmountX);
 		int settings = new IfaceSettingsBuilder().enableOptions(new IntRange(0, 5)).enableExamine().enableSlotSwitch().build();
 		player.getPacketDispatch().sendIfaceSettings(settings, 0, 763, 0, 27);
