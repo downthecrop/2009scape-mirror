@@ -90,7 +90,7 @@ public class PortalChamberPlugin extends OptionHandler {
 				for (Locations l : Locations.values()) {
 					if (l.name().contains(identifier)) {
 						if (l == Locations.ARDOUGNE){
-							if (player.getAttribute(ARDOUGNE_TELE_ATTRIBUTE, false)){
+							if (!player.getAttribute(ARDOUGNE_TELE_ATTRIBUTE, false)) {
 								player.sendMessage("You do not have the requirements to direct the portal there");
 								return;
 							}
@@ -138,12 +138,6 @@ public class PortalChamberPlugin extends OptionHandler {
 			case "enter":
 				String objectName = object.getName();
 				for (Locations l : Locations.values()) {
-					if (l == Locations.ARDOUGNE){
-						if (player.getAttribute(ARDOUGNE_TELE_ATTRIBUTE, false)){
-							player.sendMessage("You do not have the requirements to enter this portal.");
-							return false;
-						}
-					}
 					if (objectName.toLowerCase().contains(l.name().toLowerCase())) {
 						player.teleport(l.location);
 						if (player.getHouseManager().isInHouse(player) && node.getId() == 13635) {
