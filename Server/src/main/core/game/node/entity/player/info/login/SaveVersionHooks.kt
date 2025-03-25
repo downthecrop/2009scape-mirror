@@ -81,6 +81,22 @@ class SaveVersionHooks : LoginListener {
                 }
             }
 
+            if (player.version < 4) { //GL !2065
+                replaceAllItems(player, Items.BLURBERRY_SPECIAL_9520, Items.BLURBERRY_SPECIAL_2064)
+                replaceAllItems(player, Items.BLURBERRY_SPECIAL_9521, Items.BLURBERRY_SPECIAL_2065)
+                replaceAllItems(player, Items.LAMP_6796, Items.LAMP_2528)
+                replaceAllItems(player, Items.RUNE_SHIELDH1_10667, Items.RUNE_SHIELDH1_7336)
+                replaceAllItems(player, Items.RUNE_SHIELDH2_10670, Items.RUNE_SHIELDH2_7342)
+                replaceAllItems(player, Items.RUNE_SHIELDH3_10673, Items.RUNE_SHIELDH3_7348)
+                replaceAllItems(player, Items.RUNE_SHIELDH4_10676, Items.RUNE_SHIELDH4_7354)
+                replaceAllItems(player, Items.RUNE_SHIELDH5_10679, Items.RUNE_SHIELDH5_7360)
+                replaceAllItems(player, Items.ADAMANT_SHIELDH1_10666, Items.ADAMANT_SHIELDH1_7334)
+                replaceAllItems(player, Items.ADAMANT_SHIELDH2_10669, Items.ADAMANT_SHIELDH2_7340)
+                replaceAllItems(player, Items.ADAMANT_SHIELDH3_10672, Items.ADAMANT_SHIELDH3_7346)
+                replaceAllItems(player, Items.ADAMANT_SHIELDH4_10675, Items.ADAMANT_SHIELDH4_7352)
+                replaceAllItems(player, Items.ADAMANT_SHIELDH5_10678, Items.ADAMANT_SHIELDH5_7358)
+            }
+
             // Finish up
             player.version = ServerConstants.CURRENT_SAVEFILE_VERSION
         }

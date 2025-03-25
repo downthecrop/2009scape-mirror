@@ -109,15 +109,9 @@ class HaroldDialogueFile : DialogueFile() {
                     21 -> playerl(FacialExpression.ASKING, "What?").also { stage++ }
                     22 -> npcl(FacialExpression.FRIENDLY, "I really fancy one of those Blurberry Specials. I never get over to the Gnome Stronghold so I haven't had one for ages!").also { stage++ }
                     23 -> {
-                        if (removeItem(player!!, Items.BLURBERRY_SPECIAL_2064)) {
+                        if (removeItem(player!!, Items.BLURBERRY_SPECIAL_2064) || removeItem(player!!, Items.PREMADE_BLURB_SP_2028)) {
                             sendMessage(player!!, "You give Harold a Blurberry Special.")
                             sendItemDialogue(player!!, Items.BLURBERRY_SPECIAL_2064, "You give Harold a Blurberry Special.").also { stage++ }
-                        } else if (removeItem(player!!, Items.BLURBERRY_SPECIAL_9520)) { // This should not be here since 9520 is used by the gnome restaurant minigame.
-                            sendMessage(player!!, "You give Harold a Blurberry Special.")
-                            sendItemDialogue(player!!, Items.BLURBERRY_SPECIAL_2064, "You give Harold a Blurberry Special.").also { stage++ }
-                        } else if (removeItem(player!!, Items.PREMADE_BLURB_SP_2028)) {
-                            sendMessage(player!!, "You give Harold a Blurberry Special.")
-                            sendItemDialogue(player!!, Items.PREMADE_BLURB_SP_2028, "You give Harold a Blurberry Special.").also { stage++ }
                         } else {
                             player(FacialExpression.FRIENDLY, "I'll go and get you one.").also { stage = END_DIALOGUE }
                         }
