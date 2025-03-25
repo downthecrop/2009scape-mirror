@@ -80,7 +80,7 @@ public final class PCLanderZone extends MapZone {
 			for (PestControlActivityPlugin a : activities) {
 				if (a.getWaitingPlayers().remove(e)) {
 					if (logout) {
-						e.getProperties().setTeleportLocation(a.getLeaveLocation());
+						e.setLocation(a.getLeaveLocation());
 					}
 					break;
 				}
