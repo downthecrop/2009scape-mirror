@@ -59959,6 +59959,7 @@
     "attack_speed": "5",
     "turn180_anim": "1206",
     "equipment_slot": "3",
+    "attack_anims": "419,419,419,419",
     "grand_exchange_price": "423100",
     "stand_anim": "813",
     "tradeable": "true",
@@ -119757,18 +119758,18 @@
   },
   {
     "requirements": "{11,79}",
-    "destroy_message": "To get another pair of Flame Gloves, you need to keep ten beacons alight simultaneously and then talk to King Roald.",
     "shop_price": "200",
     "examine": "The hottest gloves in town.",
     "durability": null,
-    "name": "Flame gloves",
     "destroy": "true",
-    "archery_ticket_price": "0",
     "attack_speed": "4",
-    "id": "13660",
     "absorb": "0,0,0",
-    "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-    "equipment_slot": "9"
+    "equipment_slot": "9",
+    "destroy_message": "To get another pair of Flame Gloves, you need to keep ten beacons alight simultaneously and then talk to King Roald.",
+    "name": "Flame gloves",
+    "archery_ticket_price": "0",
+    "id": "13660",
+    "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
     "requirements": "{11,92}",
