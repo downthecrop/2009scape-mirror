@@ -199,17 +199,16 @@ class MazeInterface : InteractionListener, EventHook<TickEvent>, MapArea {
 
         on(Scenery.STRANGE_SHRINE_3634, IntType.SCENERY, "touch") { player, node ->
             player.unhook(this)
+            lock(player, 12)
             closeOverlay(player)
             queueScript(player, 0, QueueStrength.SOFT) { stage: Int ->
                 when (stage) {
                     0 -> {
-                        lock(player, 6)
                         sendGraphics(Graphics(86, 0, 3), player.location)
                         animate(player,862)
                         return@queueScript delayScript(player, 6)
                     }
                     1 -> {
-                        lock(player, 6)
                         sendGraphics(Graphics(1576, 0, 0), player.location)
                         animate(player,8939)
                         playAudio(player, Sounds.TELEPORT_ALL_200)
