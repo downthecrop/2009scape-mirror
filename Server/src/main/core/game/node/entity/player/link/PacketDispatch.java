@@ -224,6 +224,10 @@ public final class PacketDispatch {
 		PacketRepository.send(DisplayModel.class, new DisplayModelContext(player, ModelType.MODEL, modelID,zoom,interfaceId,childId,new Object()));
 	}
 
+	public void sendRepositionOnInterface(int interfaceId, int childId, int positionX, int positionY){
+		PacketRepository.send(RepositionChild.class, new ChildPositionContext(player, interfaceId, childId, positionX, positionY));
+	}
+
 	public void sendAngleOnInterface(int interfaceId, int childId, int zoom, int pitch, int yaw){
 		PacketRepository.send(InterfaceSetAngle.class, new DefaultContext(player, pitch, zoom, yaw, interfaceId, childId));
 	}

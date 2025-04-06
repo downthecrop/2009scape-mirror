@@ -326,61 +326,37 @@ public final class DialogueInterpreter {
      * @param itemId The item id.
      */
     public Component sendItemMessage(int itemId, String... messages) {
-        if(1 <= messages.length && messages.length < 4) {
-            ArrayList<String> packedMessages = new ArrayList();
-            for(int i = 0; i < messages.length/2; i++) {
-                packedMessages.add(messages[i] + "<br>" + messages[i+1]);
-            }
-            if(messages.length % 2 == 1) {
-                packedMessages.add(messages[messages.length-1]);
-            }
-
-            int interfaceId = 241 + (packedMessages.size() - 1);
-            player.getInterfaceManager().openChatbox(interfaceId);
-            player.getPacketDispatch().sendItemOnInterface(itemId, 1, interfaceId, 1);
-            ItemDefinition itemDef = ItemDefinition.forId(itemId);
-            player.getPacketDispatch().sendAngleOnInterface(interfaceId, 1, itemDef.getModelZoom() / 2, itemDef.getModelRotationX(), itemDef.getModelRotationY());
-            player.getPacketDispatch().sendString("", interfaceId, 3);
-            for(int i = 0; i < packedMessages.size(); i++) {
-                //System.out.printf("sendItemMessage[%d]: %s\n", i, packedMessages[i]);
-                player.getPacketDispatch().sendString(packedMessages.get(i), interfaceId, 4+i);
-            }
-        } else {
-            int interfaceId = 131;
-            //int interfaceId = 173;
-            //int interfaceId = 519;
-            //int interfaceId = 757;
-            //int interfaceId = 760;
-            player.getInterfaceManager().openChatbox(interfaceId);
-            String message = messages[0];
-            for (int i = 1; i < messages.length; i++) {
-                message += "<br>" + messages[i];
-            }
-            switch(interfaceId) {
-                case 131:
-                    player.getPacketDispatch().sendString(message, 131, 1);
-                    player.getPacketDispatch().sendItemOnInterface(itemId, 1, 131, 2);
-                    break;
-                case 173:
-                    player.getPacketDispatch().sendString(message, 173, 4);
-                    player.getPacketDispatch().sendString("", 173, 3);
-                    player.getPacketDispatch().sendItemOnInterface(itemId, 1, 173, 1);
-                    break;
-                case 519:
-                    player.getPacketDispatch().sendString(message, 519, 1);
-                    player.getPacketDispatch().sendItemOnInterface(itemId, 1, 519, 0);
-                    break;
-                case 757:
-                    player.getPacketDispatch().sendString(message, 757, 2);
-                    player.getPacketDispatch().sendString("", 757, 1);
-                    player.getPacketDispatch().sendItemOnInterface(itemId, 1, 757, 0);
-                    break;
-                case 760:
-                    player.getPacketDispatch().sendString(message, 760, 0);
-                    player.getPacketDispatch().sendItemOnInterface(itemId, 1, 760, 1);
-                    break;
-            }
+        // Select interface based on number of messages - 241 (1 line) to 244 (4 lines)
+        int interfaceId = 240 + messages.length;
+        player.getInterfaceManager().openChatbox(interfaceId);
+        player.getPacketDispatch().sendInterfaceConfig(interfaceId, 1, false);
+        player.getPacketDispatch().sendInterfaceConfig(interfaceId, 2, false);
+        // Hide or empty the title, since double item messages do not have them. (Child 3)
+        player.getPacketDispatch().sendString("", interfaceId, 3);
+        // Loop and print messages on Child 4,5,6,7 based on messages count.
+        for(int i = 0; i < messages.length; i++) {
+            player.getPacketDispatch().sendString(messages[i], interfaceId, 4+i);
         }
+        // Set the first Item (child 1)
+        ItemDefinition itemDef = ItemDefinition.forId(itemId);
+        player.getPacketDispatch().sendItemOnInterface(itemId, 1, interfaceId, 2);
+        player.getPacketDispatch().sendAngleOnInterface(interfaceId, 2, itemDef.getModelZoom() / 2, itemDef.getModelRotationX(), itemDef.getModelRotationY());
+        player.getPacketDispatch().sendRepositionOnInterface(interfaceId, 2, 45, 46);
+        // Hide the second item which seems to be used for double items (child 1)
+        player.getPacketDispatch().sendInterfaceConfig(interfaceId, 1, true);
+        // These are old interfaces which made no sense to use them.
+//        player.getPacketDispatch().sendString(message, 131, 1);
+//        player.getPacketDispatch().sendItemOnInterface(itemId, 1, 131, 2);
+//        player.getPacketDispatch().sendString(message, 173, 4);
+//        player.getPacketDispatch().sendString("", 173, 3);
+//        player.getPacketDispatch().sendItemOnInterface(itemId, 1, 173, 1);
+//        player.getPacketDispatch().sendString(message, 519, 1);
+//        player.getPacketDispatch().sendItemOnInterface(itemId, 1, 519, 0);
+//        player.getPacketDispatch().sendString(message, 757, 2);
+//        player.getPacketDispatch().sendString("", 757, 1);
+//        player.getPacketDispatch().sendItemOnInterface(itemId, 1, 757, 0);
+//        player.getPacketDispatch().sendString(message, 760, 0);
+//        player.getPacketDispatch().sendItemOnInterface(itemId, 1, 760, 1);
         return player.getInterfaceManager().getChatbox();
     }
 
@@ -395,23 +371,40 @@ public final class DialogueInterpreter {
      * Send a message with an item next to it.
      * @param message The message.
      */
-    public Component sendDoubleItemMessage(int first, int second, String message) {
-        player.getInterfaceManager().openChatbox(131);
-        player.getPacketDispatch().sendString(message, 131, 1);
-        player.getPacketDispatch().sendItemOnInterface(first, 1, 131, 0);
-        player.getPacketDispatch().sendItemOnInterface(second, 1, 131, 2);
-        return player.getInterfaceManager().getChatbox();
+    public Component sendDoubleItemMessage(int first, int second, String... message) {
+        return sendDoubleItemMessage(new Item(first), new Item(second), message);
     }
 
     /**
-     * Send a message with an item next to it.
-     * @param message The message.
+     * Send a message with two items next to it.
+     * Note that interface 241 to 244 contains 2 childs for images, which is used for sendDoubleItemMessage.
+     * @param first The first item to display.
+     * @param second The second item to display.
+     * @param messages The array of messages, one message per line.
      */
-    public Component sendDoubleItemMessage(Item first, Item second, String message) {
-        player.getInterfaceManager().openChatbox(131);
-        player.getPacketDispatch().sendString(message, 131, 1);
-        player.getPacketDispatch().sendItemOnInterface(first.getId(), first.getAmount(), 131, 0);
-        player.getPacketDispatch().sendItemOnInterface(second.getId(), second.getAmount(), 131, 2);
+    public Component sendDoubleItemMessage(Item first, Item second, String... messages) {
+        // Select interface based on number of messages - 241 (1 line) to 244 (4 lines)
+        int interfaceId = 240 + messages.length;
+        player.getInterfaceManager().openChatbox(interfaceId);
+        player.getPacketDispatch().sendInterfaceConfig(interfaceId, 1, false);
+        player.getPacketDispatch().sendInterfaceConfig(interfaceId, 2, false);
+        // Hide or empty the title, since double item messages do not have them.
+        player.getPacketDispatch().sendString("", interfaceId, 3);
+        // Loop and print messages on child 4,5,6,7 based on messages count.
+        for(int i = 0; i < messages.length; i++) {
+            player.getPacketDispatch().sendString(messages[i], interfaceId, 4+i);
+        }
+        // Set the first item
+        ItemDefinition itemDef = ItemDefinition.forId(first.getId());
+        player.getPacketDispatch().sendItemOnInterface(first.getId(), first.getAmount(), interfaceId, 1);
+        player.getPacketDispatch().sendAngleOnInterface(interfaceId, 1, (int)(itemDef.getModelZoom() / 1.5), itemDef.getModelRotationX(), itemDef.getModelRotationY());
+        player.getPacketDispatch().sendRepositionOnInterface(interfaceId, 1, 40, 40);
+        // Set the second items
+        ItemDefinition itemDef2 = ItemDefinition.forId(second.getId());
+        player.getPacketDispatch().sendItemOnInterface(second.getId(), second.getAmount(), interfaceId, 2);
+        player.getPacketDispatch().sendAngleOnInterface(interfaceId, 2, (int)(itemDef2.getModelZoom() / 1.5), itemDef2.getModelRotationX(), itemDef2.getModelRotationY());
+        player.getPacketDispatch().sendRepositionOnInterface(interfaceId, 2, 60, 65);
+
         return player.getInterfaceManager().getChatbox();
     }
 
@@ -525,19 +518,24 @@ public final class DialogueInterpreter {
         if (expression == -1) {
             expression = FacialExpression.HALF_GUILTY.getAnimationId();
         }
+        player.getInterfaceManager().openChatbox(interfaceId);
+        player.getPacketDispatch().sendInterfaceConfig(interfaceId, 1, true);
+        player.getPacketDispatch().sendInterfaceConfig(interfaceId, 2, false);
         player.getPacketDispatch().sendAnimationInterface(expression, interfaceId, 2);
         player.getPacketDispatch().sendItemOnInterface(-1, 1, interfaceId, 1);
         if (npc) {
+            player.getPacketDispatch().sendItemOnInterface(-1, 1, interfaceId, 1);
+            player.getPacketDispatch().sendRepositionOnInterface(interfaceId, 2, 45, 45);
             player.getPacketDispatch().sendNpcOnInterface(npcId, interfaceId, 2);
             player.getPacketDispatch().sendString(NPCDefinition.forId(npcId).getName(), interfaceId, 3);
         } else {
+            player.getPacketDispatch().sendRepositionOnInterface(interfaceId, 2, 426, 45); // 423 is 47 * 9
             player.getPacketDispatch().sendPlayerOnInterface(interfaceId, 2);
             player.getPacketDispatch().sendString(player.getUsername(), interfaceId, 3);
         }
         for (int i = 0; i < messages.length; i++) {
             player.getPacketDispatch().sendString(doSubstitutions(player, messages[i]), interfaceId, (i + 4));
         }
-        player.getInterfaceManager().openChatbox(interfaceId);
         player.getPacketDispatch().sendInterfaceConfig(player.getInterfaceManager().getChatbox().getId(), 3, false);
         return player.getInterfaceManager().getChatbox();
     }

@@ -172,7 +172,7 @@ public class IslwynDialogue extends DialoguePlugin {
 			stage = 21;
 			break;
 		case 21:
-			interpreter.sendDoubleItemMessage(RovingElves.CRYSTAL_BOW_FULL, RovingElves.CRYSTAL_SHIELD_FULL, "Islwyn shows you a crystal bow and a crystal shield.");
+			interpreter.sendDoubleItemMessage(RovingElves.CRYSTAL_BOW_FULL.getId(), RovingElves.CRYSTAL_SHIELD_FULL.getId(), "Islwyn shows you a crystal bow and a crystal shield.");
 			stage = 22;
 			break;
 		case 22:
