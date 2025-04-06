@@ -51,6 +51,7 @@ class TearsOfGuthix : Quest(Quests.TEARS_OF_GUTHIX, 120, 119, 1, 449, 451, 0, 1,
 
         fun hasRequirements(player: Player): Boolean {
             return arrayOf(
+                    getQuestPoints(player) >= 43,
                     hasLevelStat(player, Skills.FIREMAKING, 49),
                     hasLevelStat(player, Skills.CRAFTING, 20),
                     hasLevelStat(player, Skills.MINING, 20),
@@ -71,7 +72,7 @@ class TearsOfGuthix : Quest(Quests.TEARS_OF_GUTHIX, 120, 119, 1, 449, 451, 0, 1,
             line(player, "Level 49 firemaking", line++, hasLevelStat(player, Skills.FIREMAKING, 49))
             line(player, "!!Level 20 crafting??", line++, hasLevelStat(player, Skills.CRAFTING, 20))
             line(player, "!!Level 20 mining??", line++, hasLevelStat(player, Skills.MINING, 20))
-            line(player, "!!43 quest points??", line++, getQuestPoints(player) >= 55)
+            line(player, "!!43 quest points??", line++, getQuestPoints(player) >= 43)
             line(player, "!!Level 49 crafting would be an advantage??", line++, hasLevelStat(player, Skills.CRAFTING, 49))
             line(player, "!!Level 49 smithing would be an advantage??", line++, hasLevelStat(player, Skills.SMITHING, 49))
         } else if (stage < 100) {

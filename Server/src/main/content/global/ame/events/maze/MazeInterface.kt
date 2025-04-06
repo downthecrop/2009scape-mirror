@@ -160,7 +160,7 @@ class MazeInterface : InteractionListener, EventHook<TickEvent>, MapArea {
                 animate(player, 536)
     //          val actualScenery = RegionManager.getObject(node.location.z, node.location.x, node.location.y, 3626)
                 val tableRoll = CHEST_REWARDS.roll()
-                addItemOrBank(player, tableRoll[0].id)
+                addItemOrBank(player, tableRoll[0].id, tableRoll[0].amount)
                 when (tableRoll[0].id){
                     Items.AIR_RUNE_556 -> sendItemDialogue(player, Items.AIR_RUNE_556, "You've found some air runes!")
                     Items.WATER_RUNE_555 -> sendItemDialogue(player, Items.WATER_RUNE_555, "You've found some water runes!")
