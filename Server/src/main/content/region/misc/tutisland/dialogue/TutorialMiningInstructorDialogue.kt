@@ -1,9 +1,5 @@
 package content.region.misc.tutisland.dialogue
 
-import core.api.addItem
-import core.api.getAttribute
-import core.api.inInventory
-import core.api.setAttribute
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
@@ -12,6 +8,7 @@ import core.plugin.Initializable
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import content.region.misc.tutisland.handlers.TutorialStage
+import core.api.*
 
 /**
  * Handles the mining tutor's dialogue
@@ -30,7 +27,7 @@ class TutorialMiningInstructorDialogue(player: Player? = null) : DialoguePlugin(
             34 -> playerl(FacialExpression.FRIENDLY, "I prospected both types of rock! One set contains tin and the other has copper ore inside.")
             35 -> {
                 if(!inInventory(player, Items.BRONZE_PICKAXE_1265)) {
-                    addItem(player, Items.BRONZE_PICKAXE_1265)
+                    addItemOrDrop(player, Items.BRONZE_PICKAXE_1265)
                     player.dialogueInterpreter.sendItemMessage(Items.BRONZE_PICKAXE_1265, "Dezzick gives you a bronze pickaxe!")
                     stage = 3
                 }
@@ -41,7 +38,7 @@ class TutorialMiningInstructorDialogue(player: Player? = null) : DialoguePlugin(
             40 -> playerl(FacialExpression.ASKING, "How do I make a weapon out of this?")
             41 -> {
                 if(!inInventory(player, Items.HAMMER_2347)) {
-                    addItem(player, Items.HAMMER_2347)
+                    addItemOrDrop(player, Items.HAMMER_2347)
                     player.dialogueInterpreter.sendItemMessage(Items.HAMMER_2347, "Dezzick gives you a hammer!")
                     stage = 3
                 }

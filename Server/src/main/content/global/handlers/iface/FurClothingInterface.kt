@@ -162,9 +162,10 @@ class FurClothingInterface : ComponentPlugin(){
             return
         }
 
-        removeItem(player, requiredFur, Container.INVENTORY)
-        removeItem(player, coins, Container.INVENTORY)
-        addItem(player, clothing.product.id, amount)
+        if (removeItem(player, requiredFur, Container.INVENTORY) &&
+            removeItem(player, coins, Container.INVENTORY)) {
+            addItem(player, clothing.product.id, amount)
+        }
     }
 
     override fun newInstance(arg: Any?): Plugin<Any> {

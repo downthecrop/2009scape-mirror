@@ -61,8 +61,9 @@ class SapCollectListener : InteractionListener {
                 override fun pulse(): Boolean {
                     if (removeItem(player, Items.BUCKET_1925)) {
                         animate(player, ANIMATION)
-                        sendMessage(player, "You cut the tree and allow its sap to drip down into your bucket.")
-                        addItem(player, Items.BUCKET_OF_SAP_4687)
+                        if (addItem(player, Items.BUCKET_OF_SAP_4687)) {
+                            sendMessage(player, "You cut the tree and allow its sap to drip down into your bucket.")
+                        }
                         return true
                     }
                     return false

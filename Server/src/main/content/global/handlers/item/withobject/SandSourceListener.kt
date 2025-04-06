@@ -35,8 +35,9 @@ class SandSourceListener : InteractionListener {
                         animate(player, ANIMATION)
                     }
 
-                    sendMessage(player, "You fill the bucket with sand.")
-                    addItem(player, Items.BUCKET_OF_SAND_1783)
+                    if (addItem(player, Items.BUCKET_OF_SAND_1783)) {
+                        sendMessage(player, "You fill the bucket with sand.")
+                    }
                 }
 
                 animationTrigger++

@@ -17,7 +17,7 @@ class ScorpionCatcher : Quest(Quests.SCORPION_CATCHER, 108, 107,  1, 76, 0, 1, 6
         const val QUEST_STATE_PEKSA_HELP = 40
         const val QUEST_STATE_DONE = 100
 
-        const val ATTRIBUTE_TAVERLY = "scorpion_catcher:caught_taverly"
+        const val ATTRIBUTE_TAVERLEY = "scorpion_catcher:caught_taverly"
         const val ATTRIBUTE_BARB = "scorpion_catcher:caught_barb"
         const val ATTRIBUTE_MONK = "scorpion_catcher:caught_monk"
 
@@ -32,7 +32,7 @@ class ScorpionCatcher : Quest(Quests.SCORPION_CATCHER, 108, 107,  1, 76, 0, 1, 6
 
         var ln = 12
 
-        val caughtTaverly = player!!.getAttribute(ATTRIBUTE_TAVERLY, false)
+        val caughtTaverly = player!!.getAttribute(ATTRIBUTE_TAVERLEY, false)
         val caughtBarb = player.getAttribute(ATTRIBUTE_BARB, false)
         val caughtMonk = player.getAttribute(ATTRIBUTE_MONK, false)
 

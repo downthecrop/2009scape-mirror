@@ -35,7 +35,7 @@ object PatchRaker {
                 } else {
                     patch.getPatchFor(player).currentGrowthStage++
                     patch.getPatchFor(player).setCurrentState(++patchStage)
-                    addItem(player, Items.WEEDS_6055)
+                    addItem(player, Items.WEEDS_6055) //authentically destroys weeds if inventory was full
                     rewardXP(player, Skills.FARMING, 4.0)
                 }
                 if (patchStage >= 3) {

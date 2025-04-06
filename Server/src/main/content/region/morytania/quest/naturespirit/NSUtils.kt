@@ -58,7 +58,7 @@ object NSUtils {
         if(pouchAmt == 1) shouldAddEmptyPouch = true
         if(pouchAmt > 0 && removeItem(player, Items.DRUID_POUCH_2958, Container.INVENTORY)){
             if(shouldAddEmptyPouch){
-                addItem(player, Items.DRUID_POUCH_2957)
+                addItemOrDrop(player, Items.DRUID_POUCH_2957)
             }
             spawnProjectile(player, attacker, 268)
             submitWorldPulse(object : Pulse(){

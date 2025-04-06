@@ -56,7 +56,7 @@ public final class GrainOfPlentyDialogue extends DialoguePlugin {
 				break;
 			}
 			player.getSavedData().getGlobalData().getStrongHoldRewards()[1] = true;
-			interpreter.sendDialogue("...congratualtions adventurer, you have been deemed worthy of this", "reward. You have also unlocked the Slap Head emote!");
+			interpreter.sendDialogue("...congratulations adventurer, you have been deemed worthy of this", "reward. You have also unlocked the Slap Head emote!");
 			stage = 1;
 			player.getEmoteManager().unlock(Emotes.SLAP_HEAD);
 			break;

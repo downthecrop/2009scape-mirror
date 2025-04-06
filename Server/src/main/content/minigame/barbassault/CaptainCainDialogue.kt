@@ -1,9 +1,6 @@
 package content.minigame.barbassault
 
-import core.api.Container
-import core.api.addItem
-import core.api.inInventory
-import core.api.removeItem
+import core.api.*
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.player.Player
@@ -46,7 +43,7 @@ class CaptainCainDialogue(player: Player? = null) : DialoguePlugin(player) {
             }
 
             10 -> npcl(FacialExpression.FRIENDLY, "Alright, then, that'll be %,d gold please.".format(TORSO_PRICE)).also { stage++ }
-            11 -> options("Here you go!","Nevermind.").also { stage++ }
+            11 -> options("Here you go!","Never mind.").also { stage++ }
             12 -> when(buttonId){
                 1 -> if(inInventory(player, 995, TORSO_PRICE))
                     playerl(FacialExpression.FRIENDLY, "Here you go!").also { stage = 20 }
@@ -57,9 +54,13 @@ class CaptainCainDialogue(player: Player? = null) : DialoguePlugin(player) {
             }
 
             20 -> {
-                npcl(FacialExpression.FRIENDLY, "Thank you much, kind sir. And here's your torso.")
-                if(removeItem(player, Item(995, TORSO_PRICE), Container.INVENTORY)) {
-                    addItem(player, Items.FIGHTER_TORSO_10551, 1)
+                if (hasSpaceFor(player, Item(Items.FIGHTER_TORSO_10551)) || amountInInventory(player, Items.COINS_995) == TORSO_PRICE) {
+                    npcl(FacialExpression.FRIENDLY, "Thank you much, kind sir. And here's your torso.")
+                    if (removeItem(player, Item(Items.COINS_995, TORSO_PRICE), Container.INVENTORY)) {
+                        addItem(player, Items.FIGHTER_TORSO_10551, 1)
+                    }
+                } else {
+                    npcl(FacialExpression.FRIENDLY, "Sorry, you don't have space for it! Give my regards to Player Name - he made me check this before I take your cash.")
                 }
                 stage = END_DIALOGUE
             }

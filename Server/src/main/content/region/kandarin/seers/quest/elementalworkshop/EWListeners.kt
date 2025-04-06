@@ -103,7 +103,7 @@ class EWListeners : InteractionListener {
                 }
                 // Player needs to receive a battered book
                 sendItemDialogue(player, Item(Items.BATTERED_BOOK_2886), "You find a book titled 'The Elemental Shield'.")
-                addItem(player, batteredBook.id)
+                addItemOrDrop(player, batteredBook.id)
                 return@on true
             }
 
@@ -120,7 +120,7 @@ class EWListeners : InteractionListener {
             }
 
             sendItemDialogue(player, Item(Items.SLASHED_BOOK_9715), "You find a book titled 'The Elemental Shield'.")
-            addItem(player, slashedBook.id)
+            addItemOrDrop(player, slashedBook.id)
             if (player.inventory.addIfDoesntHave(batteredKey)) {
                 sendItemDialogue(player, Item(Items.BATTERED_KEY_2887),"You also find a key.")
             }
@@ -237,7 +237,7 @@ class EWListeners : InteractionListener {
         on(Scenery.CRATE_3400, IntType.SCENERY, "search") { player, _ ->
             if (!getAttribute(player, "/save:ew1:got_needle", false)) {
                 setAttribute(player, "/save:ew1:got_needle", true)
-                addItem(player, Items.NEEDLE_1733)
+                addItemOrDrop(player, Items.NEEDLE_1733)
                 sendMessage(player, "You find a needle.")
             } else {
                 sendMessage(player, "You search the crate but find nothing.")
@@ -249,7 +249,7 @@ class EWListeners : InteractionListener {
         on(Scenery.CRATE_3394, IntType.SCENERY, "search") { player, _ ->
             if (!getAttribute(player, "/save:ew1:got_leather", false)) {
                 setAttribute(player, "/save:ew1:got_leather", true)
-                addItem(player, Items.LEATHER_1741)
+                addItemOrDrop(player, Items.LEATHER_1741)
                 sendMessage(player, "You find some leather.")
             } else {
                 sendMessage(player, "You search the crate but find nothing.")

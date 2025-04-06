@@ -33,7 +33,7 @@ class TribalTotemListeners : InteractionListener {
         on(realCrate, IntType.SCENERY, "Investigate"){ player, node ->
             if(player.questRepository.getStage(Quests.TRIBAL_TOTEM) in 1..19 && !player.inventory.containsAtLeastOneItem(Items.ADDRESS_LABEL_1858)){
                 sendDialogue(player,"There is a label on this crate. It says; To Lord Handelmort, Handelmort Mansion Ardogune.You carefully peel it off and take it.")
-                addItem(player,Items.ADDRESS_LABEL_1858,1)
+                addItemOrDrop(player,Items.ADDRESS_LABEL_1858,1)
             }
             else if(player.questRepository.getStage(Quests.TRIBAL_TOTEM) in 1..19 && player.inventory.containsAtLeastOneItem(Items.ADDRESS_LABEL_1858)){
                 sendDialogue(player,"There was a label on this crate, but it's gone now since you took it!")
@@ -96,7 +96,7 @@ class TribalTotemListeners : InteractionListener {
         on(openChest, IntType.SCENERY, "Search"){ player, node ->
             if(!player.inventory.containsAtLeastOneItem(Items.TOTEM_1857)){
                 sendDialogue(player,"Inside the chest you find the tribal totem.")
-                addItem(player,Items.TOTEM_1857)
+                addItemOrDrop(player,Items.TOTEM_1857)
             }
             else{
                 sendDialogue(player,"Inside the chest you don't find anything because you already took the totem!")

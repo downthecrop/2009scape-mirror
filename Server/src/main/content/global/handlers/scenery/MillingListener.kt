@@ -85,13 +85,15 @@ class MillingListener : InteractionListener {
         if (removeItem(player, EMPTY_POT)) {
             if (getAttribute(player, "milling:sweetcorn", 0) > 0) {
                 setAttribute(player, "/save:milling:sweetcorn", (getAttribute(player, "milling:sweetcorn", 0) - 1))
-                addItem(player, POT_OF_CORNFLOUR)
-                sendMessage(player, if (player.getAttribute("milling:sweetcorn", 0) > 0) "You fill a pot with cornflour from the bin." else "You fill a pot with the last of the cornflour in the bin.")
+                if (addItem(player, POT_OF_CORNFLOUR)) {
+                    sendMessage(player, if (player.getAttribute("milling:sweetcorn", 0) > 0) "You fill a pot with cornflour from the bin." else "You fill a pot with the last of the cornflour in the bin.")
+                }
             }
             else if (getAttribute(player, "milling:grain", 0) > 0) {
                 setAttribute(player, "/save:milling:grain", (getAttribute(player, "milling:grain", 0) - 1))
-                addItem(player, POT_OF_FLOUR)
-                sendMessage(player, if (player.getAttribute("milling:grain", 0) > 0) "You fill a pot with flour from the bin." else "You fill a pot with the last of the flour in the bin.")
+                if (addItem(player, POT_OF_FLOUR)) {
+                    sendMessage(player, if (player.getAttribute("milling:grain", 0) > 0) "You fill a pot with flour from the bin." else "You fill a pot with the last of the flour in the bin.")
+                }
             }
             if (getAttribute(player, "milling:sweetcorn", 0) + getAttribute(player, "milling:grain", 0) <= 0) {
                 setVarp(player, VARP, 0, true)

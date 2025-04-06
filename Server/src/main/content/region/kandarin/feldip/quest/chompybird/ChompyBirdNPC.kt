@@ -153,7 +153,7 @@ class ChompyBirdNPC : AbstractNPC, InteractionListener {
       val bird = node.asNpc() 
 
       if (!bird.getAttribute("plucked", false)) {
-        addItem(player, Items.FEATHER_314, RandomFunction.random(25, 32))
+        addItemOrDrop(player, Items.FEATHER_314, RandomFunction.random(25, 32))
         produceGroundItem(player, Items.BONES_526, 1, bird.location)
         produceGroundItem(player, Items.RAW_CHOMPY_2876, 1, bird.location)
         bird.clear()

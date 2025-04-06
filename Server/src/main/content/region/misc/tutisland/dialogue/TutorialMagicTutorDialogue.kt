@@ -59,8 +59,8 @@ class TutorialMagicTutorDialogue(player: Player? = null) : core.game.dialogue.Di
             70 -> if(!inInventory(player, Items.AIR_RUNE_556) && !inInventory(player, Items.MIND_RUNE_558))
             {
                 player.dialogueInterpreter.sendDoubleItemMessage(Items.AIR_RUNE_556, Items.MIND_RUNE_558, "You receive some spare runes.")
-                addItem(player, Items.AIR_RUNE_556, 15)
-                addItem(player, Items.MIND_RUNE_558, 15)
+                addItemOrDrop(player, Items.AIR_RUNE_556, 15)
+                addItemOrDrop(player, Items.MIND_RUNE_558, 15)
                 return false
             }
             71 -> npcl(core.game.dialogue.FacialExpression.FRIENDLY, "Alright, last thing. Are you interested in being an ironman or changing your experience rate?")

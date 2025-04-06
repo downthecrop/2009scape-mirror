@@ -14,8 +14,8 @@ class DarklightListener : InteractionListener {
             if (!hasRequirement(player, Quests.SHADOW_OF_THE_STORM) || (!player.inventory.contains(Items.BLACK_MUSHROOM_INK_4622, 1) && (!player.inventory.contains(Items.SILVERLIGHT_2402, 1))))
                 return@onUseWith false
             if (removeItem(player, used.id) && removeItem(player, with.id))
-                addItem(player, Items.DARKLIGHT_6746)
-            return@onUseWith true
+                return@onUseWith addItem(player, Items.DARKLIGHT_6746)
+            return@onUseWith false
         }
     }
 }

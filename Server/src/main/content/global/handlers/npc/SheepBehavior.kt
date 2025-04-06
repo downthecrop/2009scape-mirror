@@ -105,8 +105,10 @@ class SheepBehavior : NPCBehavior(*sheepIds), InteractionListener {
                 sheep.locks.lockMovement(2)
                 sheep.transform(NPCs.SHEEP_5153)
                 playAudio(player, Sounds.SHEAR_SHEEP_761)
+                if (!addItem(player, Items.WOOL_1737)) { // 5160
+                    return@on false
+                }
                 sendMessage(player, "You get some wool.")
-                addItem(player, Items.WOOL_1737) // 5160
                 GameWorld.Pulser.submit(object : Pulse(80, sheep) {
                     override fun pulse(): Boolean {
                         sheep.reTransform()

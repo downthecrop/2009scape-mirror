@@ -42,14 +42,14 @@ class TutorialMasterChefDialogue(player: Player? = null) : DialoguePlugin(player
                     if(!inInventory(player, Items.BUCKET_OF_WATER_1929))
                     {
                         sendItemDialogue(player, Items.BUCKET_OF_WATER_1929, "The Master Chef gives you another bucket of water.")
-                        addItem(player, Items.BUCKET_OF_WATER_1929)
+                        addItemOrDrop(player, Items.BUCKET_OF_WATER_1929)
                         TutorialStage.load(player, 19)
                         return false
                     }
                     if(!inInventory(player, Items.POT_OF_FLOUR_1933))
                     {
                         sendItemDialogue(player, Items.POT_OF_FLOUR_1933, "The Master Chef gives you another pot of flour.")
-                        addItem(player, Items.POT_OF_FLOUR_1933)
+                        addItemOrDrop(player, Items.POT_OF_FLOUR_1933)
                         TutorialStage.load(player, 19)
                         return false
                     }
@@ -102,8 +102,8 @@ class TutorialMasterChefDialogue(player: Player? = null) : DialoguePlugin(player
                             "The Cooking Guide gives you a <col=08088A>bucket of water<col> and a <col=08088A>pot of flour</col>."
                         )
                     )
-                    addItem(player, Items.BUCKET_OF_WATER_1929)
-                    addItem(player, Items.POT_OF_FLOUR_1933)
+                    addItemOrDrop(player, Items.BUCKET_OF_WATER_1929)
+                    addItemOrDrop(player, Items.POT_OF_FLOUR_1933)
                     stage++
                 }
                 4 -> {

@@ -41,7 +41,7 @@ class VelrakDialogue(player: Player? = null) : DialoguePlugin(player) {
                 2 -> playerl(FacialExpression.NEUTRAL, "No, it's too dangerous for me too.").also { stage = 15 }
             }
 
-            14 -> sendItemDialogue(player, Items.DUSTY_KEY_1590, "Velrak reaches somewhere mysterious and passes you a key.").also { addItem(player, Items.DUSTY_KEY_1590, 1); stage = END_DIALOGUE }
+            14 -> sendItemDialogue(player, Items.DUSTY_KEY_1590, "Velrak reaches somewhere mysterious and passes you a key.").also { addItemOrDrop(player, Items.DUSTY_KEY_1590, 1); stage = END_DIALOGUE }
 
             15 -> npcl(FacialExpression.FRIENDLY, "I don't blame you!").also { stage = END_DIALOGUE }
 

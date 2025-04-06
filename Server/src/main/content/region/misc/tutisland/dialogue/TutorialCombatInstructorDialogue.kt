@@ -31,9 +31,9 @@ class TutorialCombatInstructorDialogue(player: Player? = null) : DialoguePlugin(
             54 -> {
                 player.dialogueInterpreter.sendDoubleItemMessage(Items.SHORTBOW_841, Items.BRONZE_ARROW_882, "The Combat Guide gives you some bronze arrows and a shortbow!")
                 if(!inInventory(player, Items.SHORTBOW_841) && !inEquipment(player, Items.SHORTBOW_841))
-                    addItem(player, Items.SHORTBOW_841)
+                    addItemOrDrop(player, Items.SHORTBOW_841)
                 if(!inInventory(player, Items.BRONZE_ARROW_882) && !inEquipment(player, Items.BRONZE_ARROW_882))
-                    addItem(player, Items.BRONZE_ARROW_882, 30)
+                    addItemOrDrop(player, Items.BRONZE_ARROW_882, 30)
             }
         }
         return true

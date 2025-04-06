@@ -70,8 +70,7 @@ class EnchantJewelleryTabListener : InteractionListener {
                     for (item in player.inventory.toArray()) {
                         if (item == null) continue
                         val product = items[item.id] ?: continue
-                        if (removeItem(player, node.id) && (removeItem(player, item.id))) {
-                            addItem(player, product)
+                        if (removeItem(player, node.id) && (removeItem(player, item.id)) && addItem(player, product)) {
                             playAudio(player, Sounds.POH_TABLET_BREAK_979)
                             animate(player, 4069, true)
                             break

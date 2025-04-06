@@ -75,7 +75,7 @@ class SeerDialogue(player: Player? = null) : DialoguePlugin(player) {
                     )
                 }
                 else if ((scorpionCatcherQuestStage == ScorpionCatcher.QUEST_STATE_DARK_PLACE) and
-                    getAttribute(player!!, ScorpionCatcher.ATTRIBUTE_TAVERLY, false)
+                    getAttribute(player!!, ScorpionCatcher.ATTRIBUTE_TAVERLEY, false)
                 ) {
                     playerl(
                         FacialExpression.NEUTRAL,

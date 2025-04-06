@@ -31,10 +31,8 @@ class SilverCraftingPulse(
         animate(player, Animations.HUMAN_FURNACE_SMELTING_3243)
         playAudio(player, Sounds.FURNACE_2725)
 
-        if (removeItem(player, Items.SILVER_BAR_2355, Container.INVENTORY)) {
-            addItem(player, product.producedItemId, product.amountProduced)
+        if (removeItem(player, Items.SILVER_BAR_2355, Container.INVENTORY) && addItem(player, product.producedItemId, product.amountProduced)) {
             rewardXP(player, Skills.CRAFTING, product.xpReward)
-
             player.dispatch(
                 ResourceProducedEvent(
                     product.producedItemId,

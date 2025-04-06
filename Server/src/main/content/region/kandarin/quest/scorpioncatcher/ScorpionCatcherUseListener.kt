@@ -1,342 +1,88 @@
 package content.region.kandarin.quest.scorpioncatcher
 
-import content.region.kandarin.quest.scorpioncatcher.ScorpionCatcher.Companion.ATTRIBUTE_TAVERLY
+import content.region.kandarin.quest.scorpioncatcher.ScorpionCatcher.Companion.ATTRIBUTE_TAVERLEY
 import content.region.kandarin.quest.scorpioncatcher.ScorpionCatcher.Companion.ATTRIBUTE_BARB
 import content.region.kandarin.quest.scorpioncatcher.ScorpionCatcher.Companion.ATTRIBUTE_MONK
-import core.api.addItem
+import core.api.*
 import core.game.node.item.Item
-import core.api.removeItem
-import core.api.runTask
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.node.Node
+import core.game.node.entity.player.Player
 import core.game.system.config.NPCConfigParser
 import core.game.world.GameWorld
+import core.tools.Log
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 
-
 class ScorpionCatcherUseListener : InteractionListener {
-
     override fun defineListeners() {
-        /**
-         * List of cages
-         *  Talvery Barbarian Monk
-         *     TBM
-         * 456 ---
-         * 457 O--
-         * 458 00-
-         * 459 -0-
-         * 460 -00
-         * 461 --0
-         * 462 0-0
-         * 463 000
-         *
-         * Scorpions
-         * 385 - Barbarian
-         * 386 - Taverly
-         * 387 - Monastery
-         */
+        val scorpToAttr = mapOf(
+            /* 385 - Barbarian
+             * 386 - Taverley
+             * 387 - Monastery
+             */
+            NPCs.KHARID_SCORPION_385 to ATTRIBUTE_BARB,
+            NPCs.KHARID_SCORPION_386 to ATTRIBUTE_TAVERLEY,
+            NPCs.KHARID_SCORPION_387 to ATTRIBUTE_MONK
+        )
+        val cageToScorps = mapOf(
+            /*  Taverley(386) Barbarian(385) Monastery(387)
+             *     TBM
+             * 456 ---
+             * 457 O--
+             * 458 00-
+             * 459 -0-
+             * 460 -00
+             * 461 --0
+             * 462 0-0
+             * 463 000
+             */
+            Items.SCORPION_CAGE_456 to setOf<Int>(),
+            Items.SCORPION_CAGE_457 to setOf(NPCs.KHARID_SCORPION_386),
+            Items.SCORPION_CAGE_458 to setOf(NPCs.KHARID_SCORPION_386, NPCs.KHARID_SCORPION_385),
+            Items.SCORPION_CAGE_459 to setOf(NPCs.KHARID_SCORPION_385),
+            Items.SCORPION_CAGE_460 to setOf(NPCs.KHARID_SCORPION_385, NPCs.KHARID_SCORPION_387),
+            Items.SCORPION_CAGE_461 to setOf(NPCs.KHARID_SCORPION_387),
+            Items.SCORPION_CAGE_462 to setOf(NPCs.KHARID_SCORPION_386, NPCs.KHARID_SCORPION_387),
+            Items.SCORPION_CAGE_463 to setOf(NPCs.KHARID_SCORPION_386, NPCs.KHARID_SCORPION_385, NPCs.KHARID_SCORPION_387)
+        )
 
-        /**
-         * Good captures
-         */
-
-        /**
-         * Empty cage on Taverly scorpion
-         */
-
-        // todo check this message
-        val haveAlready = "You already have this scorpion in this cage."
-        val catchMessage = "You catch a scorpion!"
-
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_456, NPCs.KHARID_SCORPION_386){ player, used, with ->
-            removeItem(player, Item(used.id, 1))
-            addItem(player, Items.SCORPION_CAGE_457)
-            player.sendMessage(catchMessage)
-            // This is the first time taverly has been caught
-            if (!player.getAttribute(ATTRIBUTE_TAVERLY, false)){
-                player.setAttribute("/save:$ATTRIBUTE_TAVERLY", true)
+        fun catchScorpion(player: Player, item: Node, scorpion: Node): Boolean {
+            val haveInCage = cageToScorps[item.id] ?: return false
+            if (scorpion.id in haveInCage) {
+                sendMessage(player, "You already have this scorpion in this cage.") //TODO check this message
+                return true
             }
-            runTask(player, 2) {
-                with.asNpc().respawnTick =
-                    GameWorld.ticks + with.asNpc().definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 34)
+            val newScorpionSet = haveInCage + setOf(scorpion.id)
+            var newItem: Int? = null
+            for ((cage, scorps) in cageToScorps) {
+                if (scorps == newScorpionSet) {
+                    newItem = cage
+                }
             }
-            return@onUseWith true
-        }
-        /**
-         * Barbarian cage on Taverly scorpion
-         */
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_459, NPCs.KHARID_SCORPION_386){ player, used, with ->
-            removeItem(player, Item(used.id, 1))
-            addItem(player, Items.SCORPION_CAGE_458)
-            player.sendMessage(catchMessage)
-            // This is the first time taverly has been caught
-            if (!player.getAttribute(ATTRIBUTE_TAVERLY, false)){
-                player.setAttribute("/save:$ATTRIBUTE_TAVERLY", true)
+            if (newItem == null) {
+                log(this::class.java, Log.ERR, "Error looking up new scorpion cage item - this isn't possible")
+                return false
             }
-            runTask(player, 2) {
-                with.asNpc().respawnTick =
-                    GameWorld.ticks + with.asNpc().definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 34)
+            val attribute = scorpToAttr[scorpion.id]
+            if (removeItem(player, Item(item.id, 1)) && addItem(player, newItem)) {
+                sendMessage(player, "You catch a scorpion!")
+                setAttribute(player, "/save:$attribute", true)
+                runTask(player, 2) {
+                    scorpion.asNpc().respawnTick = GameWorld.ticks + scorpion.asNpc().definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 34)
+                }
+                return true
             }
-            return@onUseWith true
-        }
-        /**
-         * Monk cage on Taverly scorpion
-         */
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_461, NPCs.KHARID_SCORPION_386){ player, used, with ->
-            removeItem(player, Item(used.id, 1))
-            addItem(player, Items.SCORPION_CAGE_462)
-            player.sendMessage(catchMessage)
-            // This is the first time taverly has been caught
-            if (!player.getAttribute(ATTRIBUTE_TAVERLY, false)){
-                player.setAttribute("/save:$ATTRIBUTE_TAVERLY", true)
-            }
-            runTask(player, 2) {
-                with.asNpc().respawnTick =
-                    GameWorld.ticks + with.asNpc().definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 34)
-            }
-            return@onUseWith true
-        }
-        /**
-         * Others on Taverly scorpion
-         */
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_460, NPCs.KHARID_SCORPION_386){ player, used, with ->
-            removeItem(player, Item(used.id, 1))
-            addItem(player, Items.SCORPION_CAGE_463)
-            player.sendMessage(catchMessage)
-            // This is the first time taverly has been caught
-            if (!player.getAttribute(ATTRIBUTE_TAVERLY, false)){
-                player.setAttribute("/save:$ATTRIBUTE_TAVERLY", true)
-            }
-            runTask(player, 2) {
-                with.asNpc().respawnTick =
-                    GameWorld.ticks + with.asNpc().definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 34)
-            }
-            return@onUseWith true
+            return false
         }
 
-        /**
-         * Empty cage on barbarian agility course scorpion
-         */
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_456, NPCs.KHARID_SCORPION_385){ player, used, with ->
-            removeItem(player, Item(used.id, 1))
-            addItem(player, Items.SCORPION_CAGE_459)
-            player.sendMessage(catchMessage)
-            // This is the first time barbarian has been caught
-            if (!player.getAttribute(ATTRIBUTE_BARB, false)){
-                player.setAttribute("/save:$ATTRIBUTE_BARB", true)
+        for (scorp in scorpToAttr.keys) {
+            for (cage in cageToScorps.keys) {
+                onUseWith(IntType.NPC, cage, scorp) { player, usedCage, usedScorp ->
+                    return@onUseWith catchScorpion(player, usedCage, usedScorp)
+                }
             }
-            runTask(player, 2) {
-                with.asNpc().respawnTick =
-                    GameWorld.ticks + with.asNpc().definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 34)
-            }
-            return@onUseWith true
         }
-        /**
-         * Cage with Taverly scorpion on barbarian scorpion
-         */
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_457, NPCs.KHARID_SCORPION_385) { player, used, with ->
-            removeItem(player, Item(used.id, 1))
-            addItem(player, Items.SCORPION_CAGE_458)
-            player.sendMessage(catchMessage)
-            // This is the first time barbarian has been caught
-            if (!player.getAttribute(ATTRIBUTE_BARB, false)){
-                player.setAttribute("/save:$ATTRIBUTE_BARB", true)
-            }
-            runTask(player, 2) {
-                with.asNpc().respawnTick =
-                    GameWorld.ticks + with.asNpc().definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 34)
-            }
-            return@onUseWith true
-        }
-        /**
-         * Cage with Monk scorpion on barbarian scorpion
-         */
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_461, NPCs.KHARID_SCORPION_385) { player, used, with ->
-            removeItem(player, Item(used.id, 1))
-            addItem(player, Items.SCORPION_CAGE_460)
-            player.sendMessage(catchMessage)
-            // This is the first time barbarian has been caught
-            if (!player.getAttribute(ATTRIBUTE_BARB, false)){
-                player.setAttribute("/save:$ATTRIBUTE_BARB", true)
-            }
-            runTask(player, 2) {
-                with.asNpc().respawnTick =
-                    GameWorld.ticks + with.asNpc().definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 34)
-            }
-            return@onUseWith true
-        }
-
-        /**
-         * Others on barbarian scorpion
-         */
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_462, NPCs.KHARID_SCORPION_385) { player, used, with ->
-            removeItem(player, Item(used.id, 1))
-            addItem(player, Items.SCORPION_CAGE_463)
-            player.sendMessage(catchMessage)
-            // This is the first time barbarian has been caught
-            if (!player.getAttribute(ATTRIBUTE_BARB, false)){
-                player.setAttribute("/save:$ATTRIBUTE_BARB", true)
-            }
-            runTask(player, 2) {
-                with.asNpc().respawnTick =
-                    GameWorld.ticks + with.asNpc().definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 34)
-            }
-            return@onUseWith true
-        }
-
-
-        /**
-         * Empty on Monk scorpion
-         */
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_456, NPCs.KHARID_SCORPION_387) { player, used, with ->
-            removeItem(player, Item(used.id, 1))
-            addItem(player, Items.SCORPION_CAGE_461)
-            player.sendMessage(catchMessage)
-            // This is the first time the monastery has been caught
-            if (!player.getAttribute(ATTRIBUTE_MONK, false)){
-                player.setAttribute("/save:$ATTRIBUTE_MONK", true)
-            }
-            runTask(player, 2) {
-                with.asNpc().respawnTick =
-                    GameWorld.ticks + with.asNpc().definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 34)
-            }
-            return@onUseWith true
-        }
-
-        /**
-         * Taverly cage on Monk scorpion
-         */
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_457, NPCs.KHARID_SCORPION_387) { player, used, with ->
-            removeItem(player, Item(used.id, 1))
-            addItem(player, Items.SCORPION_CAGE_462)
-            player.sendMessage(catchMessage)
-            // This is the first time the monastery has been caught
-            if (!player.getAttribute(ATTRIBUTE_MONK, false)){
-                player.setAttribute("/save:$ATTRIBUTE_MONK", true)
-            }
-            runTask(player, 2) {
-                with.asNpc().respawnTick =
-                    GameWorld.ticks + with.asNpc().definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 34)
-            }
-            return@onUseWith true
-        }
-
-        /**
-         * Barbarian cage on Monk scorpion
-         */
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_459, NPCs.KHARID_SCORPION_387) { player, used, with ->
-            removeItem(player, Item(used.id, 1))
-            addItem(player, Items.SCORPION_CAGE_460)
-            player.sendMessage(catchMessage)
-            // This is the first time the monastery has been caught
-            if (!player.getAttribute(ATTRIBUTE_MONK, false)){
-                player.setAttribute("/save:$ATTRIBUTE_MONK", true)
-            }
-            runTask(player, 2) {
-                with.asNpc().respawnTick =
-                    GameWorld.ticks + with.asNpc().definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 34)
-            }
-            return@onUseWith true
-        }
-
-        /**
-         * Others on Monk scorpion
-         */
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_458, NPCs.KHARID_SCORPION_387) { player, used, with ->
-            removeItem(player, Item(used.id, 1))
-            addItem(player, Items.SCORPION_CAGE_463)
-            player.sendMessage(catchMessage)
-            // This is the first time the monastery has been caught
-            if (!player.getAttribute(ATTRIBUTE_MONK, false)){
-                player.setAttribute("/save:$ATTRIBUTE_MONK", true)
-            }
-            runTask(player, 2) {
-                with.asNpc().respawnTick =
-                    GameWorld.ticks + with.asNpc().definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 34)
-            }
-            return@onUseWith true
-        }
-
-
-        /**
-         * Player being stupid and trying to recatch one they have already
-         */
-
-        /**
-         * Taverly
-         */
-        // Just Taverly
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_457, NPCs.KHARID_SCORPION_386){ player, _, _ ->
-            player.sendMessage(haveAlready)
-            return@onUseWith true
-        }
-        // Taverly and Barb
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_458, NPCs.KHARID_SCORPION_386){ player, _, _ ->
-            player.sendMessage(haveAlready)
-            return@onUseWith true
-        }
-        // Taverly and Monk
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_462, NPCs.KHARID_SCORPION_386){ player, _, _ ->
-            player.sendMessage(haveAlready)
-            return@onUseWith true
-        }
-        // All
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_463, NPCs.KHARID_SCORPION_386){ player, _, _ ->
-            player.sendMessage(haveAlready)
-            return@onUseWith true
-        }
-
-
-        /**
-         * Barbarian
-         */
-        // Just Barb
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_459, NPCs.KHARID_SCORPION_385){ player, _, _ ->
-            player.sendMessage(haveAlready)
-            return@onUseWith true
-        }
-        // Barb and Taverly
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_458, NPCs.KHARID_SCORPION_385){ player, _, _ ->
-            player.sendMessage(haveAlready)
-            return@onUseWith true
-        }
-        // Barb and Monk
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_460, NPCs.KHARID_SCORPION_385){ player, _, _ ->
-            player.sendMessage(haveAlready)
-            return@onUseWith true
-        }
-        // All
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_463, NPCs.KHARID_SCORPION_385){ player, _, _ ->
-            player.sendMessage(haveAlready)
-            return@onUseWith true
-        }
-
-        /**
-         * Monastery
-         */
-        // Just Monk
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_461, NPCs.KHARID_SCORPION_387){ player, _, _ ->
-            player.sendMessage(haveAlready)
-            return@onUseWith true
-        }
-        // Monk and Taverly
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_462, NPCs.KHARID_SCORPION_387){ player, _, _ ->
-            player.sendMessage(haveAlready)
-            return@onUseWith true
-        }
-        // Monk and Barb
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_460, NPCs.KHARID_SCORPION_387){ player, _, _ ->
-            player.sendMessage(haveAlready)
-            return@onUseWith true
-        }
-        // All
-        onUseWith(IntType.NPC, Items.SCORPION_CAGE_463, NPCs.KHARID_SCORPION_387){ player, _, _ ->
-            player.sendMessage(haveAlready)
-            return@onUseWith true
-        }
-
     }
-
-
 }

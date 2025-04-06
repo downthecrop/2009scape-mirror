@@ -8,18 +8,19 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import content.data.Quests
+import org.rs09.consts.Items
 
 @Initializable
 class YrsaDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if(player?.inventory?.contains(3708,1) == true){
+        if(player?.inventory?.contains(Items.FISCAL_STATEMENT_3708,1) == true){
             playerl(FacialExpression.HAPPY,"Hello. Can I have those boots now? Here is a written statement from Brundt outlining future tax burdens upon Fremennik merchants and shopkeepers for the year.")
             stage = 15
             return true
         }
-        else if(player?.inventory?.contains(3700,1) == true){
+        else if(player?.inventory?.contains(Items.STURDY_BOOTS_3700,1) == true){
             playerl(FacialExpression.ASKING,"Hey, these shoes look pretty comfy. Think you could make me a pair like them?")
             stage = 20
             return true
@@ -67,9 +68,9 @@ class YrsaDialogue(player: Player? = null) : DialoguePlugin(player) {
             10 -> npcl(FacialExpression.NEUTRAL,"Yes I do outerlander. Only the Chieftain may permit such a thing. Talk to him.").also { stage = 1000 }
 
             15 -> npcl(FacialExpression.HAPPY,"Certainly! Let me have a look at what he has written here, just give me a moment...").also {
-                removeItem(player,3708)
-                addItem(player,3700)
-                stage++
+                if (removeItem(player, Items.FISCAL_STATEMENT_3708) && addItem(player, Items.STURDY_BOOTS_3700)) {
+                    stage++
+                }
             }
             16 -> npcl(FacialExpression.HAPPY,"Yes, that all appears in order. Tell Olaf to come to me next time for shoes!").also { stage = 1000 }
 

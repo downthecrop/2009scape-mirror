@@ -127,10 +127,10 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
                 SkillingPets.checkPetDrop(player, SkillingPets.HERON)
                 val item = fish!!
                 if (isActive(SkillcapePerks.GREAT_AIM, player) && RandomFunction.random(100) <= 5) {
-                    addItem(player, item.id)
+                    addItemOrDrop(player, item.id)
                     player.sendMessage(colorize("%RYour expert aim catches you a second fish."))
                 }
-                addItem(player, item.id)
+                addItemOrDrop(player, item.id)
                 var fishCaught = player.getAttribute(STATS_BASE + ":" + STATS_FISH, 0)
                 player.setAttribute("/save:$STATS_BASE:$STATS_FISH", ++fishCaught)
                 player.skills.addExperience(Skills.FISHING, fish!!.experience, true)

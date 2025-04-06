@@ -1,6 +1,5 @@
 package core.game.worldevents.holiday.christmas.randoms
 
-import core.api.addItem
 import core.api.addItemOrDrop
 import core.api.getAttribute
 import core.game.dialogue.DialogueFile

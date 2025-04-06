@@ -25,8 +25,7 @@ class EctophialListener : InteractionListener {
         delayEntity(player, fillAnimation.duration)
         animate(player, fillAnimation)
         playAudio(player, Sounds.FILL_ECTOPLASM_1132)
-        if (removeItem(player, Items.ECTOPHIAL_4252)) {
-            addItem(player, Items.ECTOPHIAL_4251)
+        if (removeItem(player, Items.ECTOPHIAL_4252) && addItem(player, Items.ECTOPHIAL_4251)) {
             sendMessage(player, "You refill the ectophial from the Ectofuntus.")
         }
     }

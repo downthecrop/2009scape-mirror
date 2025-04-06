@@ -1,10 +1,7 @@
 package content.region.kandarin.ardougne.quest.arena.dialogue
 
 import content.data.Quests
-import core.api.addItem
-import core.api.getQuestStage
-import core.api.removeItem
-import core.api.setQuestStage
+import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
@@ -24,7 +21,7 @@ class KhazardBarmanDialogue : DialogueFile() {
                     1 -> npcl(FacialExpression.FRIENDLY, "There you go, that's two gold coins.").also { stage = 2 }
                     2 -> if (removeItem(player!!, Item(COINS_995, 2))) {
                         end()
-                        addItem(player!!, Items.BEER_1917, 1)
+                        addItemOrDrop(player!!, Items.BEER_1917, 1)
                         stage = END_DIALOGUE
                     } else {
                         end()
@@ -49,7 +46,7 @@ class KhazardBarmanDialogue : DialogueFile() {
                     7 -> npcl(FacialExpression.FRIENDLY, "There you go, that's five gold coins. I suggest lying down before you drink it. That way you have less distance to collapse.").also { stage = 9 }
                     8 -> if (removeItem(player!!, Item(COINS_995, 2))){
                         end()
-                        addItem(player!!, Items.BEER_1917, 1)
+                        addItemOrDrop(player!!, Items.BEER_1917, 1)
                         stage = END_DIALOGUE
                     } else {
                         end()
@@ -57,8 +54,8 @@ class KhazardBarmanDialogue : DialogueFile() {
                     }
                     9 -> if (removeItem(player!!, Item(COINS_995, 5))){
                             end()
-                            addItem(player!!, Items.KHALI_BREW_77, 1)
-                        setQuestStage(player!!, Quests.FIGHT_ARENA, 60)
+                            addItemOrDrop(player!!, Items.KHALI_BREW_77, 1)
+                            setQuestStage(player!!, Quests.FIGHT_ARENA, 60)
                             stage = END_DIALOGUE
                     } else {
                         end()

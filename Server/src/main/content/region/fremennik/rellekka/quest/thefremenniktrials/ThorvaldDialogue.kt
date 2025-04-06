@@ -5,18 +5,19 @@ import core.api.getQuestStage
 import core.api.removeItem
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
+import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import content.data.Quests
 
 @Initializable
 class ThorvaldDialogue(player: Player? = null) : core.game.dialogue.DialoguePlugin(player){
     override fun open(vararg args: Any?): Boolean {
-        if(player?.inventory?.contains(3706,1) == true){
+        if(player?.inventory?.contains(Items.CHAMPIONS_TOKEN_3706, 1) == true){
             playerl(core.game.dialogue.FacialExpression.HAPPY,"I would like your contract to offer your services as a bodyguard.")
             stage = 215
             return true
         }
-        else if(player?.inventory?.contains(3710,1) == true){
+        else if(player?.inventory?.contains(Items.WARRIORS_CONTRACT_3710, 1) == true){
             playerl(core.game.dialogue.FacialExpression.ASKING,"You didn't take much persuading to 'lower' yourself to a bodyguard.")
             stage = 220
             return true
@@ -179,9 +180,10 @@ class ThorvaldDialogue(player: Player? = null) : core.game.dialogue.DialoguePlug
             216 -> playerl(core.game.dialogue.FacialExpression.HAPPY,"It's a good thing I have the Champions' Token right here then, isn't it?").also { stage++ }
             217 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"Ah... well this is a different matter. With that token I can claim my rightful place as a champion in the Long hall!").also { stage++ }
             218 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"Here outerlander, I can suffer the indignity of playing babysitter if it means that I can then revel with my warrior equals in the Long Hall afterwards!").also {
-                removeItem(player,3706)
-                addItem(player,3710)
-                stage++
+                if (removeItem(player, Items.CHAMPIONS_TOKEN_3706)) {
+                    addItem(player, Items.WARRIORS_CONTRACT_3710)
+                    stage++
+                }
             }
             219 -> npcl(core.game.dialogue.FacialExpression.HAPPY,"Here outerlander, take this contract; I will fulfill it to my utmost.").also { stage = 1000 }
 

@@ -66,8 +66,9 @@ class IncubatorHandler : InteractionListener {
         val product = egg.product
         val name = product.name.lowercase()
 
-        sendMessage(player, "You take your $name out of the incubator.")
-        addItem(player, product.id)
+        if (addItem(player, product.id)) {
+            sendMessage(player, "You take your $name out of the incubator.")
+        }
         return true
     }
 }

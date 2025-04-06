@@ -392,16 +392,18 @@ class ZaffPlugin : OptionHandler() {
                     ammount = getStoreFile().getInt(player.username.toLowerCase())
                     var amt = value as Int
                     if(amt > maxStaffs - ammount) amt = maxStaffs - ammount
+                    if(amt == 0){
+                        return@sendInputDialogue
+                    }
                     val coinage = amt * 7000
                     if(!inInventory(player, Items.COINS_995, coinage)){
                         sendDialogue(player, "You can't afford that many.")
                         return@sendInputDialogue
                     }
-
-                    if(amt == 0){
+                    if(!hasSpaceFor(player, Item(Items.BATTLESTAFF_1392, amt)) && amountInInventory(player, Items.COINS_995) > coinage){
+                        sendDialogue(player, "You don't have enough inventory space.")
                         return@sendInputDialogue
                     }
-
                     if(removeItem(player, Item(Items.COINS_995, coinage), Container.INVENTORY)){
                         addItem(player, Items.BATTLESTAFF_1392, amt)
                         getStoreFile()[player.username.toLowerCase()] = amt + ammount

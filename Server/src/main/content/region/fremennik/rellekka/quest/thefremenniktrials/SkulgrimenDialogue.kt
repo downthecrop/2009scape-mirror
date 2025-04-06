@@ -8,18 +8,19 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import content.data.Quests
+import org.rs09.consts.Items
 
 @Initializable
 class SkulgrimenDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if(player?.inventory?.contains(3703,1) == true){
+        if(player?.inventory?.contains(Items.UNUSUAL_FISH_3703,1) == true){
             playerl(FacialExpression.HAPPY,"Hi there. I got your fish, so can I have that bowstring for Sigli now?")
             stage = 20
             return true
         }
-        else if(player?.inventory?.contains(3702,1) == true){
+        else if(player?.inventory?.contains(Items.CUSTOM_BOW_STRING_3702,1) == true){
             playerl(FacialExpression.ASKING,"So about this bowstring... was it hard to make or something?")
             stage = 25
             return true
@@ -72,9 +73,9 @@ class SkulgrimenDialogue(player: Player? = null) : DialoguePlugin(player) {
             17 -> npcl(FacialExpression.ANNOYED,"Ah. I see. I already told you. Some guy down by the docks was bragging. Best ask there, I reckon.").also { stage = 1000 }
 
             20 -> npcl(FacialExpression.HAPPY,"Ohh... That's a nice fish. Very pleased. Here. Take the bowstring. You fulfilled agreement. Only fair I do same. Good work outerlander.").also {
-                removeItem(player,3703)
-                addItem(player,3702)
-                stage++
+                if (removeItem(player, Items.UNUSUAL_FISH_3703) && addItem(player, Items.CUSTOM_BOW_STRING_3702)) {
+                    stage++
+                }
             }
             21 -> playerl(FacialExpression.HAPPY,"Thanks!").also { stage = 1000 }
 

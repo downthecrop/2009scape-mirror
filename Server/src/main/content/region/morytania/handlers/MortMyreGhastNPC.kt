@@ -70,8 +70,9 @@ class MortMyreGhastNPC : AbstractNPC {
                 val consumable = Consumables.getConsumableById(i.id)
                 if(consumable != null && consumable.consumable is Food) {
                     hasFood = true
-                    removeItem(player, i, Container.INVENTORY)
-                    addItem(player, Items.ROTTEN_FOOD_2959)
+                    if (removeItem(player, i, Container.INVENTORY)) {
+                        addItem(player, Items.ROTTEN_FOOD_2959)
+                    }
                     sendMessage(player, "You feel something attacking your backpack, and smell a terrible stench.")
                     break
                 }

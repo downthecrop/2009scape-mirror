@@ -36,7 +36,7 @@ class RoavarDialogue (player: Player? = null) : DialoguePlugin(player) {
 
             1 -> showTopics(
                     Topic<Int?>(FacialExpression.HALF_GUILTY, "Can I buy a beer?", 10, false),
-                    Topic<Int?>(FacialExpression.HALF_GUILTY, "Can I hear some gossip", 20, false),
+                    Topic<Int?>(FacialExpression.HALF_GUILTY, "Can I hear some gossip?", 20, false),
                     IfTopic<RoavarDialogueFile?>(FacialExpression.HALF_GUILTY, "Can I buy something to eat?", RoavarDialogueFile(1), player.getQuestRepository().getQuest(Quests.CREATURE_OF_FENKENSTRAIN).getStage(player) == 2, false),
                     Topic<Int?>(FacialExpression.HALF_GUILTY, "Nothing thanks.", 40, false)
             )
@@ -81,7 +81,7 @@ class RoavarDialogue (player: Player? = null) : DialoguePlugin(player) {
             }
 
             21 -> end()
-            30 -> stage = if (inInventory(player, 2963, 1)) {
+            30 -> stage = if (inInventory(player, Items.SILVER_SICKLEB_2963, 1)) {
                 npc(FacialExpression.HALF_GUILTY, "I don't have a spare lying around, sorry friend.", "Hopefully you'll find something else that can protect you", "against ghasts!")
                 31
             } else {
@@ -101,7 +101,7 @@ class RoavarDialogue (player: Player? = null) : DialoguePlugin(player) {
                     npc(FacialExpression.HALF_GUILTY, "Oh, nevermind. It seems your backpack is full.")
                 } else {
                     sendDialogue(player, "The bartender hands you a silver sickle.")
-                    addItem(player, 2963)
+                    addItemOrDrop(player, Items.SILVER_SICKLEB_2963)
                 }
                 stage = 31
             }

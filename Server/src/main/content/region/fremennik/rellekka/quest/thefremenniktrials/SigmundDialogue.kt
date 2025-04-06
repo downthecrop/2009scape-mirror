@@ -10,6 +10,7 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.Items
 import content.data.Quests
+import core.api.addItemOrDrop
 
 @Initializable
 class SigmundDialogue (player: Player? = null) : DialoguePlugin(player) {
@@ -109,8 +110,9 @@ class SigmundDialogue (player: Player? = null) : DialoguePlugin(player) {
             36 -> npcl(FacialExpression.ASKING,"I suggest you ask around the other Fremennik in the town. A good merchant will find exactly what their customer needs somewhere.").also { stage++ }
             37 -> playerl(FacialExpression.ASKING,"I was making some trades, but then I lost the goods...").also { stage++ }
             38 -> npcl(FacialExpression.THINKING,"Hmmm... well try and start again at the beginning. And try to be more careful of your wares in future.").also {
-                addItem(player, Items.PROMISSORY_NOTE_3709)
-                stage = 1000 }
+                addItemOrDrop(player, Items.PROMISSORY_NOTE_3709)
+                stage = 1000
+            }
 
             40 -> npcl(FacialExpression.HAPPY,"Hello again outerlander! I am amazed once more at your apparent skill at merchanting!").also { stage++ }
             41 -> playerl(FacialExpression.HAPPY,"So I can count on your vote at the council of elders?").also { stage++ }

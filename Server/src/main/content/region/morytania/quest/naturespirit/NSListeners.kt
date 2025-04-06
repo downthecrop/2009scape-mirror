@@ -132,8 +132,7 @@ class NSListeners : InteractionListener {
         }
 
         on(SPELLCARD, IntType.ITEM, "cast"){ player, node ->
-            if(NSUtils.castBloom(player)){
-                removeItem(player, node.asItem(), Container.INVENTORY)
+            if (NSUtils.castBloom(player) && removeItem(player, node.asItem(), Container.INVENTORY)) {
                 addItem(player, Items.A_USED_SPELL_2969)
             }
             return@on true

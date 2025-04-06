@@ -127,7 +127,7 @@ class NSTarlockDialogue(player: Player? = null) : DialoguePlugin(player) {
                 playerl(FacialExpression.NEUTRAL, "Could I have another bloom scroll please?").also { stage++ }
             } else end()
             74 -> npcl(FacialExpression.NEUTRAL, "Sure, but please look after this one.").also { stage++ }
-            75 -> sendDialogue("The spirit of Filliman Tarlock gives you","another bloom spell.").also { addItem(player, Items.DRUIDIC_SPELL_2968); stage = END_DIALOGUE }
+            75 -> sendDialogue("The spirit of Filliman Tarlock gives you","another bloom spell.").also { addItemOrDrop(player, Items.DRUIDIC_SPELL_2968); stage = END_DIALOGUE }
 
             //has fungus
             80 -> sendDialogue("You show the fungus to Filliman.").also { stage++ }
@@ -190,7 +190,7 @@ class NSTarlockDialogue(player: Player? = null) : DialoguePlugin(player) {
                 npcl(FacialExpression.NEUTRAL, "No, you've already got one!").also { stage = END_DIALOGUE }
             } else {
                 npcl(FacialExpression.NEUTRAL, "Sure, but look after this one.")
-                addItem(player, Items.DRUIDIC_SPELL_2968)
+                addItemOrDrop(player, Items.DRUIDIC_SPELL_2968)
                 stage = END_DIALOGUE
             }
 

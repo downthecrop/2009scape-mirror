@@ -8,18 +8,19 @@ import core.plugin.Initializable
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import content.data.Quests
+import org.rs09.consts.Items
 
 @Initializable
 class SwensenTheNavigator(player: Player? = null) : DialoguePlugin(player){
     val gender = if (player?.isMale == true){"brother"} else "sister"
     val fName = player?.getAttribute("fremennikname","doug hug'em")
     override fun open(vararg args: Any?): Boolean {
-        if(player?.inventory?.contains(3705,1) == true){
+        if(player?.inventory?.contains(Items.WEATHER_FORECAST_3705, 1) == true){
             playerl(FacialExpression.HAPPY,"I would like your map of fishing spots.")
             stage = 120
             return true
         }
-        else if(player?.inventory?.contains(3704,1) == true){
+        else if(player?.inventory?.contains(Items.SEA_FISHING_MAP_3704, 1) == true){
             playerl(FacialExpression.ASKING,"If this map of fishing spots is so valuable, why did you give it away to me so easily?")
             stage = 125
             return true
@@ -48,7 +49,7 @@ class SwensenTheNavigator(player: Player? = null) : DialoguePlugin(player){
             stage = 1000
             return true
         }
-        else if(player.questRepository.isComplete(Quests.THE_FREMENNIK_TRIALS)){
+        else if (player.questRepository.isComplete(Quests.THE_FREMENNIK_TRIALS)){
             playerl(FacialExpression.HAPPY,"Hello!")
             stage = 140
             return true
@@ -119,9 +120,9 @@ class SwensenTheNavigator(player: Player? = null) : DialoguePlugin(player){
             121 -> playerl(FacialExpression.HAPPY,"What, like this one I have here?").also { stage++ }
             122 -> npcl(FacialExpression.AMAZED,"W-what...? I don't believe it! How did you...?").also { stage++ }
             123 -> npcl(FacialExpression.HAPPY,"I suppose it doesn't matter, you have my gratitude outerlander! With this forecast I will be able to plan a safe course for our next raiding expedition!").also {
-                removeItem(player,3705)
-                addItem(player,3704)
-                stage++
+                if (removeItem(player,Items.WEATHER_FORECAST_3705) && addItem(player, Items.SEA_FISHING_MAP_3704)) {
+                    stage++
+                }
             }
             124 -> npcl(FacialExpression.HAPPY,"Here, outerlander; you may take my map of local fishing patterns with my gratitude!").also { stage = 1000 }
 

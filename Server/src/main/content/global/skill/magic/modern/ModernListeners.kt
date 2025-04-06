@@ -325,7 +325,10 @@ class ModernListeners : SpellListener("modern"){
                     }
                     visualizeSpell(player, CHARGE_ORB_ANIM, spell.graphics, spell.sound)
                     removeRunes(player)
-                    addItem(player, spell.chargedOrb)
+                    val success = addItem(player, spell.chargedOrb)
+                    if (!success) {
+                        return@queueScript stopExecuting(player)
+                    }
                     addXP(player, spell.experience)
                     setDelay(player, 3)
                     crafted++

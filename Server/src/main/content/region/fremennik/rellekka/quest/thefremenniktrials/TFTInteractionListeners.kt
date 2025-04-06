@@ -84,8 +84,7 @@ class TFTInteractionListeners : InteractionListener {
         }
 
         onUseWith(IntType.ITEM,TINDERBOX,CHERRY_BOMB){ player, _, _ ->
-            if(removeItem(player,CHERRY_BOMB)){
-                addItem(player,LIT_BOMB)
+            if (removeItem(player,CHERRY_BOMB) && addItem(player,LIT_BOMB)) {
                 sendMessage(player,"You light the strange object.")
             }
             return@onUseWith true

@@ -15,10 +15,11 @@ class OilFishingRodListener : InteractionListener {
                 override fun pulse(): Boolean {
                     when (counter++) {
                         1 -> {
-                            removeItem(player, used.asItem()) && removeItem(player, with.asItem())
-                            addItem(player, Items.VIAL_229)
-                            addItem(player, Items.OILY_FISHING_ROD_1585)
-                            sendMessage(player, "You rub the oil into the fishing rod.")
+                            if (removeItem(player, used.asItem()) && removeItem(player, with.asItem()) &&
+                                addItem(player, Items.VIAL_229) &&
+                                addItem(player, Items.OILY_FISHING_ROD_1585)) {
+                                sendMessage(player, "You rub the oil into the fishing rod.")
+                            }
                         }
                     }
                     return false
@@ -35,9 +36,10 @@ class OilFishingRodListener : InteractionListener {
                         when (counter++) {
                             0 -> player.animator.animate(Animation(364))
                             3 -> {
-                                removeItem(player, Items.THIN_SNAIL_3363)
-                                removeItem(player, Items.SAMPLE_BOTTLE_3377)
-                                addItem(player, Items.BLAMISH_SNAIL_SLIME_1581)
+                                if (removeItem(player, Items.THIN_SNAIL_3363) &&
+                                    removeItem(player, Items.SAMPLE_BOTTLE_3377)) {
+                                    addItem(player, Items.BLAMISH_SNAIL_SLIME_1581)
+                                }
                             }
                         }
                         return false

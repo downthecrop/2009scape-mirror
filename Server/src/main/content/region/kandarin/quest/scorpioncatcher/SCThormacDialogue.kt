@@ -61,8 +61,11 @@ class SCThormacDialogue(val questStage: Int) : DialogueFile() {
             WHY_SHOULD_I_START -> npcl(FacialExpression.WORRIED, "Well I suppose I can aid you with my skills as a staff sorcerer. " +
                     "Most battlestaffs around here are a bit puny. I can beef them up for you a bit.").also {
                         // Need to recheck the quest stage since it may have been changed in this dialogue
-                        if(getQuestStage(player!!, Quests.SCORPION_CATCHER) == 0) stage++
-                        else stage = END_DIALOGUE
+                        if (getQuestStage(player!!, Quests.SCORPION_CATCHER) == 0) {
+                            stage++
+                        } else {
+                            stage = END_DIALOGUE
+                        }
                     }
             WHY_SHOULD_I_START+1 -> showTopics(
                 Topic(FacialExpression.ASKING, "So how would I go about catching them then?", HOW_TO_CATCH),
@@ -77,7 +80,7 @@ class SCThormacDialogue(val questStage: Int) : DialogueFile() {
             HOW_TO_CATCH+1 -> {
                 sendItemDialogue(player!!, Items.SCORPION_CAGE_456, "Thormac gives you a cage.").also { stage++ }
                 startQuest(player!!, Quests.SCORPION_CATCHER)
-                addItem(player!!, Items.SCORPION_CAGE_456)
+                addItemOrDrop(player!!, Items.SCORPION_CAGE_456)
             }
             HOW_TO_CATCH+2 -> npcl(FacialExpression.WORRIED, "If you go up to the village of Seers, to the North of " +
                     "here, one of them will be able to tell you where the scorpions are now.").also { stage++ }
@@ -92,8 +95,7 @@ class SCThormacDialogue(val questStage: Int) : DialogueFile() {
                     Items.SCORPION_CAGE_459, Items.SCORPION_CAGE_460, Items.SCORPION_CAGE_461,
                     Items.SCORPION_CAGE_462), false).exists()){
                     playerl(FacialExpression.SAD, "I've lost my cage.").also { stage = GIVE_ANOTHER_CAGE }
-                }
-                else{
+                } else {
                     playerl(FacialExpression.NEUTRAL, "I've not caught all the scorpions yet.").also { stage++ }
                 }
             }

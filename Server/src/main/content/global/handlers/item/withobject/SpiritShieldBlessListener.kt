@@ -82,9 +82,11 @@ class SpiritShieldBlessListener : InteractionListener {
                 return@onUseWith false
             }
 
-            addItem(player, Items.BLESSED_SPIRIT_SHIELD_13736)
-            sendMessage(player, "You successfully bless the shield using the holy elixir.")
+            if (!addItem(player, Items.BLESSED_SPIRIT_SHIELD_13736)) {
+                return@onUseWith false
+            }
 
+            sendMessage(player, "You successfully bless the shield using the holy elixir.")
             return@onUseWith true
         }
 

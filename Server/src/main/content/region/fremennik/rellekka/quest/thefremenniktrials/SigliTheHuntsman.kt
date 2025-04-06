@@ -9,11 +9,12 @@ import core.plugin.Initializable
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import content.data.Quests
+import org.rs09.consts.Items
 
 @Initializable
 class SigliTheHuntsman(player: Player? = null) : DialoguePlugin(player){
     override fun open(vararg args: Any?): Boolean {
-        if(player?.inventory?.contains(3702,1) == true){
+        if(player?.inventory?.contains(Items.CUSTOM_BOW_STRING_3702, 1) == true){
             npcl(FacialExpression.HAPPY,"Greetings outerlander.")
             stage = 165
             return true
@@ -104,13 +105,13 @@ class SigliTheHuntsman(player: Player? = null) : DialoguePlugin(player){
 
             //Draugen killed
             100 -> player("Thanks!").also {
-                                                        player.removeAttribute("fremtrials:draugen-killed")
-                player.setAttribute("/save:fremtrials:sigli-vote",true)
-                                                        player?.setAttribute("/save:fremtrials:votes",player.getAttribute("fremtrials:votes",0) + 1)
-                                                        player?.inventory?.remove(Item(3697))
-                                                        stage = 1000
-                                                     }
-
+                if (player.inventory.remove(Item(Items.HUNTERS_TALISMAN_3697))) {
+                    player.removeAttribute("fremtrials:draugen-killed")
+                    player.setAttribute("/save:fremtrials:sigli-vote", true)
+                    player.setAttribute("/save:fremtrials:votes", player.getAttribute("fremtrials:votes", 0) + 1)
+                }
+                stage = 1000
+            }
             150 -> playerl(FacialExpression.ASKING,"I don't suppose you have any idea where I could find a map to unspoiled hunting grounds, do you?").also { stage++ }
             151 -> npcl(FacialExpression.HAPPY,"Well, of course I do. I wouldn't be much of a huntsman if I didn't know where to find my prey now, would I outerlander?").also { stage++ }
             152 -> playerl(FacialExpression.ASKING,"No, I guess not. So can I have it?").also { stage++ }
@@ -127,9 +128,10 @@ class SigliTheHuntsman(player: Player? = null) : DialoguePlugin(player){
             161 -> npcl(FacialExpression.ANNOYED,"If I knew I would not have asked you to go and get me one, now would I?").also { stage = 1000 }
 
             165 -> playerl(FacialExpression.HAPPY,"Here. I have your bowstring. Give me your map to the hunting grounds.").also {
-                removeItem(player,3702)
-                addItem(player,3701)
-                stage++
+                if (removeItem(player, Items.CUSTOM_BOW_STRING_3702)) {
+                    addItem(player, Items.TRACKING_MAP_3701)
+                    stage++
+                }
             }
             166 -> npcl(FacialExpression.HAPPY,"Well met, outerlander. I see some hunting potential within you. Here, take my map, I was getting too dependent on it for my skill anyway.").also { stage = 1000 }
 

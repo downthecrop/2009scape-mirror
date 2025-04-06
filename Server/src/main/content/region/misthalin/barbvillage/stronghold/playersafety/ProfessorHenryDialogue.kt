@@ -32,7 +32,7 @@ class ProfessorHenryDialogue(player : Player? = null) : DialoguePlugin(player){
                 }
                 else if (player.savedData.globalData.testStage >= 3){
                     // The player has already had their test marked and taken
-                    npcl(FacialExpression.HAPPY, "Good job ${player.name}, you completed the test!").also { stage = END_DIALOGUE }
+                    npcl(FacialExpression.HAPPY, "Good job ${player.username}, you completed the test!").also { stage = END_DIALOGUE }
                     return true
                 }
                 else{
@@ -83,7 +83,7 @@ class ProfessorHenryDialogue(player : Player? = null) : DialoguePlugin(player){
             GET_TEST + 1 -> playerl(FacialExpression.HALF_GUILTY, "Okay, thanks.").also { stage = END_DIALOGUE }
 
             HAND_IN_TEST -> npcl(FacialExpression.HAPPY,
-                "Ah, ${player.name}. How's the test going?").also { stage ++ }
+                "Ah, ${player.username}. How's the test going?").also { stage ++ }
             HAND_IN_TEST + 1 -> playerl(FacialExpression.NEUTRAL, "I think I've finished.").also { stage++ }
             HAND_IN_TEST + 2 -> npcl(FacialExpression.HAPPY, "Excellent! Let me just mark the paper for you then.").also { stage++ }
             HAND_IN_TEST + 3 -> npcl(FacialExpression.HAPPY, "Hmm. Uh-huh, yes I see. Good! Yes, that's right.").also{ stage++ }
@@ -118,8 +118,9 @@ class ProfessorHenryDialogue(player : Player? = null) : DialoguePlugin(player){
         setVarp(player, 1203, 1 shl 29, true)
         player.savedData.globalData.testStage = 3
 
-        removeItem(player, Items.TEST_PAPER_12626)
-        addItem(player, Items.ANTIQUE_LAMP_4447, 2)
+        if (removeItem(player, Items.TEST_PAPER_12626)) {
+            addItem(player, Items.ANTIQUE_LAMP_4447, 2)
+        }
         player.emoteManager.unlock(Emotes.SAFETY_FIRST)
 
         openInterface(player, iFace)
@@ -136,7 +137,6 @@ class ProfessorHenryDialogue(player : Player? = null) : DialoguePlugin(player){
         player.packetDispatch.sendString("Access to the Stronghold of", iFace, 10)
         player.packetDispatch.sendString("Player Safety Dungeon", iFace, 11)
         player.packetDispatch.sendString("The Safety First' emote", iFace, 12)
-
 
         sendItemZoomOnInterface(player, iFace, 5, Items.TEST_PAPER_12626)
 

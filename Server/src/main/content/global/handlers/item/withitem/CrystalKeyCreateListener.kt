@@ -24,9 +24,11 @@ class CrystalKeyCreateListener : InteractionListener {
                 return@onUseWith false
             }
 
-            addItem(player, Items.CRYSTAL_KEY_989)
-            sendMessage(player, "You join the loop half of a key and the tooth half of a key to make a crystal key.")
+            if (!addItem(player, Items.CRYSTAL_KEY_989)) {
+                return@onUseWith false
+            }
 
+            sendMessage(player, "You join the loop half of a key and the tooth half of a key to make a crystal key.")
             return@onUseWith true
         }
     }

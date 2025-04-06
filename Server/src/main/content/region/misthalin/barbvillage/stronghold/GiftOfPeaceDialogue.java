@@ -4,7 +4,6 @@ import core.api.Container;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.emote.Emotes;
-import core.game.node.item.Item;
 import org.rs09.consts.Items;
 
 import static core.api.ContentAPIKt.addItem;

@@ -35,12 +35,13 @@ class TutorialFurnaceListener : InteractionListener {
             animate(player, ANIMATION)
             submitIndividualPulse(player, object: Pulse(2) {
                 override fun pulse(): Boolean {
-                    removeItem(player, Items.TIN_ORE_438)
-                    removeItem(player, Items.COPPER_ORE_436)
-                    addItem(player, Items.BRONZE_BAR_2349)
-                    rewardXP(player, Skills.SMITHING, Bar.BRONZE.experience)
-                    player.dispatch(ResourceProducedEvent(Items.BRONZE_BAR_2349, 1, player, Items.COPPER_ORE_436))
-                    return true
+                    if (removeItem(player, Items.TIN_ORE_438) && removeItem(player, Items.COPPER_ORE_436)) {
+                        addItem(player, Items.BRONZE_BAR_2349)
+                        rewardXP(player, Skills.SMITHING, Bar.BRONZE.experience)
+                        player.dispatch(ResourceProducedEvent(Items.BRONZE_BAR_2349, 1, player, Items.COPPER_ORE_436))
+                        return true
+                    }
+                    return false
                 }
             })
 
