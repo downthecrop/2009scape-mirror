@@ -255,6 +255,7 @@ public final class ImpactHandler {
 		if (entity instanceof Player) {
 			return killer;
 		}
+		if (killer instanceof AIPlayer) return killer;
 
 		int damage = -1;
 		if (playerImpactLog.isEmpty()) {
