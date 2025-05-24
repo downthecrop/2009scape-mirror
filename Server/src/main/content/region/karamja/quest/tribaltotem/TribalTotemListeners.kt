@@ -26,7 +26,9 @@ class TribalTotemListeners : InteractionListener {
             if(player.questRepository.getStage(Quests.TRIBAL_TOTEM) >= 35){
                 core.game.global.action.DoorActionHandler.handleAutowalkDoor(player,door.asScenery())
             }
-            sendMessage(player,"The door is locked shut.")
+            else {
+                sendMessage(player,"The door is locked shut.")
+            }
             return@on true
         }
 
@@ -97,6 +99,7 @@ class TribalTotemListeners : InteractionListener {
             if(!player.inventory.containsAtLeastOneItem(Items.TOTEM_1857)){
                 sendDialogue(player,"Inside the chest you find the tribal totem.")
                 addItemOrDrop(player,Items.TOTEM_1857)
+                player.questRepository.getQuest(Quests.TRIBAL_TOTEM).setStage(player,35)
             }
             else{
                 sendDialogue(player,"Inside the chest you don't find anything because you already took the totem!")
