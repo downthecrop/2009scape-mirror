@@ -31660,7 +31660,7 @@
       {
         "minAmount": "1",
         "weight": "100.0",
-        "id": "532",
+        "id": "526",
         "maxAmount": "1"
       }
     ],
@@ -31693,26 +31693,6 @@
         "minAmount": "1",
         "weight": "13.9158",
         "id": "12163",
-        "maxAmount": "1"
-      }
-    ],
-    "tertiary": [
-      {
-        "minAmount": "1",
-        "weight": "9973.0",
-        "id": "0",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "25.0",
-        "id": "10976",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "2.0",
-        "id": "10977",
         "maxAmount": "1"
       }
     ],
