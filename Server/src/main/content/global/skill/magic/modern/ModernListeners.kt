@@ -313,7 +313,7 @@ class ModernListeners : SpellListener("modern"){
             create { _, amount ->
                 var crafted = 0
                 queueScript(player, 0) {
-                    if (!hasLevelDyn(player, Skills.CRAFTING, spell.level)) {
+                    if (!hasLevelDyn(player, Skills.MAGIC, spell.level)) {
                         sendMessage(player, "You need a magic level of ${spell.level} to cast this spell.")
                         return@queueScript stopExecuting(player)
                     }
