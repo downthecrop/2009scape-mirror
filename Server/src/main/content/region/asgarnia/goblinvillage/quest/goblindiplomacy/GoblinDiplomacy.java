@@ -82,7 +82,7 @@ public class GoblinDiplomacy extends Quest {
 				line(player, BLUE + "I have some " + RED + "Blue Goblin Armour. " + BLUE + "I should show it to the", 12+ 7);
 				line(player, BLUE + "generals.", 13+ 7);
 			} else {
-				line(player, BLUE + "I should bring the goblins s+ 7+ 7);e " + RED + "Blue Goblin Armour", 12+ 7);
+				line(player, BLUE + "I should bring the goblins some " + RED + "Blue Goblin Armour", 12+ 7);
 				line(player, BLUE + "Maybe the generals will know where to get some.", 13+ 7);
 			}
 			break;
