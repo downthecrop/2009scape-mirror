@@ -94,6 +94,10 @@ enum class FarmingPatch(val varbit: Int, val type: PatchType) {
             patchNodes.addAll(8382..8383)//spirit trees
             patchNodes.add(8338) //spirit tree
             patchNodes.add(18816) //death plateau wrapper
+            patchNodes.add(21950) //harmony island allotment
+            patchNodes.add(28919) //lletya fruit patch. Was usable in 2009: https://www.youtube.com/watch?v=7sXOW4CRZ3k
+            //patchNodes.add(37988) Wilderness flower patch. Can only plant Limpwurt Seeds. Intentionally left out, as it is a reward from Spirit of Summer.
+
 
             for (patch in patchNodes) {
                 val def = SceneryDefinition.forId(patch)

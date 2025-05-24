@@ -255,6 +255,10 @@ class UseWithPatchHandler : InteractionListener {
                         return@onUseWith true
                     }
 
+                    /*if (patch == FarmingPatch.WILDERNESS_FLOWER && plantable != Plantable.LIMPWURT_SEED){
+                        return@onUseWith true
+                    }*/
+
                     val requiredItem = when (patch.type) {
                         PatchType.TREE_PATCH, PatchType.FRUIT_TREE_PATCH -> Items.SPADE_952
                         PatchType.FLOWER_PATCH -> if (plantable == Plantable.SCARECROW) null else Items.SEED_DIBBER_5343
