@@ -46,9 +46,8 @@ class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: Shootin
         //checks if the star has been discovered and if not, awards the bonus xp. Xp can be awarded regardless of mining level as per the wiki.
         if (!star.isDiscovered && !player.isArtificial) {
             val bonusXp = 75 * player.skills.getStaticLevel(Skills.MINING)
-            player.incrementAttribute("/save:shooting-star:bonus-xp", bonusXp)
+            rewardXP(player, Skills.MINING, bonusXp.toDouble())
             Repository.sendNews(player.username + " is the discoverer of the crashed star near " + star.location + "!")
-            player.sendMessage("You have ${player.skills.experienceMultiplier * player.getAttribute("shooting-star:bonus-xp", 0).toDouble()} bonus xp towards mining stardust.")
             ShootingStarPlugin.submitScoreBoard(player)
             star.isDiscovered = true
             ShootingStarPlugin.getStoreFile()["isDiscovered"] = star.isDiscovered
@@ -88,6 +87,7 @@ class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: Shootin
         val bonusXp = player.getAttribute("shooting-star:bonus-xp", 0).toDouble()
         var xp = star.level.exp.toDouble()
         if(bonusXp > 0) {
+            // legacy: shooting star bonus xp used to be handed out in an inauthentic way; see GL !2092
             val delta = Math.min(bonusXp, xp)
             player.incrementAttribute("/save:shooting-star:bonus-xp", (-delta).toInt())
             xp += delta
