@@ -30,6 +30,14 @@ class DigUpPatchDialogue(player: Player? = null) : DialoguePlugin(player) {
                 return true
             }
         }
+        if (patch?.patch?.type == PatchType.FRUIT_TREE_PATCH) {
+            val isTreeStump = patch?.getCurrentState() == patch?.plantable!!.value + 25
+            if (patch!!.isGrown() && !isTreeStump) {
+                sendMessage(player, "You need to chop this tree down first.") // this message is not authentic
+                stage = 1000
+                return true
+            }
+        }
         sendDialogueOptions(player, "Are you sure you want to dig up this patch?", "Yes, I want to clear it for new crops.", "No, I want to leave it as it is.")
         stage = 0
         return true

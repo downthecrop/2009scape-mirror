@@ -29,7 +29,11 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             Plantable.WILLOW_SAPLING -> 0
             else -> 1
         }
-        if(plantable != null && plantable?.applicablePatch != PatchType.FLOWER_PATCH) {
+        if(plantable != null
+            && plantable?.applicablePatch != PatchType.FLOWER_PATCH
+            && plantable?.applicablePatch != PatchType.BELLADONNA_PATCH
+            && plantable?.applicablePatch != PatchType.MUSHROOM_PATCH
+            && plantable?.applicablePatch != PatchType.EVIL_TURNIP_PATCH) {
             harvestAmt += compostMod
         }
         cropLives = 3 + compostMod
@@ -70,8 +74,6 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             var chance = when(patch.type){
                 PatchType.ALLOTMENT -> 8 //average of 8 per life times 3 lives = average 24
                 PatchType.HOPS_PATCH -> 6 //average of 6 per life times 3 lives = 18
-                PatchType.BELLADONNA_PATCH -> 2 //average of 2 per life times 3 lives = 6
-                PatchType.EVIL_TURNIP_PATCH -> 2 //average 2 per, same as BELLADONNA
                 PatchType.CACTUS_PATCH -> 3 //average of 3 per life times 3 lives = 9
                 else -> 0 // nothing should go here, but if it does, do not give extra crops amd decrement cropLives
             }
@@ -86,6 +88,11 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
 
     fun isWeedy(): Boolean {
         return getCurrentState() in 0..2
+    }
+
+    fun isChoppedFruitTree(): Boolean {
+            return (patch.type == PatchType.FRUIT_TREE_PATCH)
+            && getCurrentState() == (plantable?.value ?: 0) + 25
     }
 
     fun isEmptyAndWeeded(): Boolean {
@@ -198,6 +205,10 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
                     else if(isDiseased && !isDead) setVisualState(getHerbDiseaseValue())
                     else setVisualState((plantable?.value ?: 0) + currentGrowthStage)
                 }
+                PatchType.MUSHROOM_PATCH -> {
+                    if(isDead) setVisualState(getMushroomDeathValue())
+                    else if(isDiseased && !isDead) setVisualState(getMushroomDiseaseValue())
+                }
                 else -> {}
             }
         }
@@ -221,16 +232,27 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
     private fun getBushDiseaseValue(): Int{
         if(plantable == Plantable.POISON_IVY_SEED){
             return (plantable?.value ?: 0) + currentGrowthStage + 12
-        } else {
+        }
+        else if (plantable == Plantable.REDBERRY_SEED
+            || plantable == Plantable.CADAVABERRY_SEED){
+            return (plantable?.value ?: 0) + currentGrowthStage + 65
+        }
+        else {
             return (plantable?.value ?: 0) + currentGrowthStage + 64
         }
     }
 
     private fun getBushDeathValue(): Int{
         if(plantable == Plantable.POISON_IVY_SEED){
-            return (plantable?.value ?: 0) + currentGrowthStage + 22
-        } else {
-            return (plantable?.value ?: 0) + currentGrowthStage + 126
+            return (plantable?.value ?: 0) + currentGrowthStage + 20
+        }
+        else if (plantable == Plantable.REDBERRY_SEED
+            || plantable == Plantable.CADAVABERRY_SEED
+            || plantable == Plantable.WHITEBERRY_SEED){
+            return (plantable?.value ?: 0) + currentGrowthStage + 129
+        }
+        else {
+            return (plantable?.value ?: 0) + currentGrowthStage + 128
         }
     }
 
@@ -258,6 +280,14 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
         return (plantable?.value ?: 0) + currentGrowthStage + 16
     }
 
+    private fun getMushroomDiseaseValue(): Int {
+        return (plantable?.value ?: 0) + currentGrowthStage + 11
+    }
+
+    private fun getMushroomDeathValue(): Int {
+        return (plantable?.value ?: 0) + currentGrowthStage + 16
+    }
+
     private fun getHerbDiseaseValue(): Int {
         return if (plantable?.value ?: -1 <= 103) {
             128 + (((plantable?.ordinal ?: 0) - Plantable.GUAM_SEED.ordinal) * 3) + currentGrowthStage - 1
@@ -275,7 +305,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
     }
 
     private fun grow(){
-        if((isWeedy() || isEmptyAndWeeded()) && getCurrentState() > 0) {
+        if((isWeedy() || isEmptyAndWeeded() || (plantable == Plantable.SCARECROW && !isGrown())) && getCurrentState() > 0) {
             nextGrowth = System.currentTimeMillis() + 60000
             setCurrentState(getCurrentState() - 1)
             currentGrowthStage--
@@ -294,7 +324,14 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             CompostType.SUPERCOMPOST -> 13
         }
 
-        if(patch != FarmingPatch.TROLL_STRONGHOLD_HERB && RandomFunction.random(128) <= (17 - diseaseMod) && !isWatered && !isGrown() && !protectionPaid && !isFlowerProtected() && patch.type != PatchType.EVIL_TURNIP_PATCH && currentGrowthStage != 0){
+        if(patch != FarmingPatch.TROLL_STRONGHOLD_HERB
+            && RandomFunction.random(128) <= (17 - diseaseMod)
+            && !isWatered && !isGrown()
+            && !protectionPaid
+            && !isFlowerProtected()
+            && patch.type != PatchType.EVIL_TURNIP_PATCH
+            && plantable != Plantable.POISON_IVY_SEED
+            && currentGrowthStage != 0){
             isDiseased = true
             // If we manually set disease mod reset it back to 0 so that crops can naturally grow after being treated/accidentally attempted to disease when they cannot be
             if (diseaseMod < 0) diseaseMod = 0
@@ -389,7 +426,9 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             else -> return false
         }.getPatchFor(player, false)
 
-        return (fpatch.plantable != null &&
+        if (fpatch.plantable == Plantable.SCARECROW && fpatch.plantable == plantable?.protectionFlower){
+            return true
+        } else return (fpatch.plantable != null &&
             (fpatch.plantable == plantable?.protectionFlower || fpatch.plantable == Plantable.forItemID(Items.WHITE_LILY_SEED_14589))
             && fpatch.isGrown())
     }

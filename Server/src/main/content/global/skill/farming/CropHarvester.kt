@@ -15,7 +15,7 @@ import core.plugin.Plugin
 import org.rs09.consts.Items
 import org.rs09.consts.Sounds
 
-val livesBased = arrayOf(PatchType.HERB_PATCH, PatchType.CACTUS_PATCH, PatchType.BELLADONNA_PATCH, PatchType.HOPS_PATCH, PatchType.ALLOTMENT, PatchType.EVIL_TURNIP_PATCH)
+val livesBased = arrayOf(PatchType.HERB_PATCH, PatchType.CACTUS_PATCH, PatchType.HOPS_PATCH, PatchType.ALLOTMENT)
 
 @Initializable
 class CropHarvester : OptionHandler() {
@@ -43,14 +43,16 @@ class CropHarvester : OptionHandler() {
                 override fun pulse(): Boolean {
                     var reward = Item(crop)
 
-                    val familiar = player.familiarManager.familiar
-                    if (familiar != null && familiar is GiantEntNPC) {
-                        familiar.modifyFarmingReward(fPatch, reward)
-                    }
                     if (!hasSpaceFor(player, reward)) {
                         sendMessage(player, "You have run out of inventory space.")
                         return true
                     }
+
+                    val familiar = player.familiarManager.familiar
+                    if (familiar != null && familiar is GiantEntNPC) {
+                        familiar.modifyFarmingReward(fPatch, reward)
+                    }
+
                     var requiredItem = when (fPatch.type) {
                         PatchType.TREE_PATCH -> Items.SECATEURS_5329
                         else -> Items.SPADE_952
@@ -92,7 +94,7 @@ class CropHarvester : OptionHandler() {
                     // TODO: If a flower patch is being harvested, delay the clearing of the
                     // patch until after the animation has played - https://youtu.be/lg4GktlVNUY?t=75
                     delay = 2
-                    addItem(player, reward.id)
+                    addItemOrDrop(player, reward.id,reward.amount)
                     rewardXP(player, Skills.FARMING, plantable.harvestXP)
                     if (patch.patch.type in livesBased) {
                         patch.rollLivesDecrement(
@@ -103,6 +105,9 @@ class CropHarvester : OptionHandler() {
                         patch.harvestAmt--
                         if (patch.harvestAmt <= 0 && crop == plantable.harvestItem) {
                             patch.clear()
+                        }
+                        else if (fPatch.type == PatchType.MUSHROOM_PATCH){
+                            patch.setCurrentState(patch.getCurrentState() + 1)
                         }
                     }
                     if (sendHarvestMessages && (patch.cropLives <= 0 || patch.harvestAmt <= 0)) {

@@ -14,7 +14,7 @@ enum class Plantable(val itemID: Int, val displayName: String, val value: Int, v
     WHITE_LILY_SEED(Items.WHITE_LILY_SEED_14589,"white lily seed",37,4,42.0,250.0,0.0,52,PatchType.FLOWER_PATCH,Items.WHITE_LILY_14583),
 
     // Flower (technically)
-    SCARECROW(Items.SCARECROW_6059,"scarecrow",33,3,0.0,0.0,0.0,23,PatchType.FLOWER_PATCH,Items.SCARECROW_6059),
+    SCARECROW(Items.SCARECROW_6059,"scarecrow",36,-3,0.0,0.0,0.0,23,PatchType.FLOWER_PATCH,Items.SCARECROW_6059),
 
     // Allotments
     POTATO_SEED(Items.POTATO_SEED_5318, "potato seed", 6, 4, 8.0, 9.0, 0.0, 1, PatchType.ALLOTMENT, Items.POTATO_1942,Item(Items.COMPOST_6032,2),MARIGOLD_SEED),
@@ -53,9 +53,9 @@ enum class Plantable(val itemID: Int, val displayName: String, val value: Int, v
     // Bushes
     REDBERRY_SEED(Items.REDBERRY_SEED_5101,"redberry bush seed",5,5,11.5,4.5,64.0,10,PatchType.BUSH_PATCH,Items.REDBERRIES_1951,Item(Items.CABBAGES10_5478,4)),
     CADAVABERRY_SEED(Items.CADAVABERRY_SEED_5102,"cadavaberry bush seed",15,6,18.0,7.0,102.5,22,PatchType.BUSH_PATCH,Items.CADAVA_BERRIES_753,Item(Items.TOMATOES5_5968,3)),
-    DWELLBERRY_SEED(Items.DWELLBERRY_SEED_5103,"dwellberry bush seed",26,27,31.5,12.0,177.5,36,PatchType.BUSH_PATCH,Items.DWELLBERRIES_2126,Item(Items.STRAWBERRIES5_5406,3)),
+    DWELLBERRY_SEED(Items.DWELLBERRY_SEED_5103,"dwellberry bush seed",26,7,31.5,12.0,177.5,36,PatchType.BUSH_PATCH,Items.DWELLBERRIES_2126,Item(Items.STRAWBERRIES5_5406,3)),
     JANGERBERRY_SEED(Items.JANGERBERRY_SEED_5104,"jangerberry bush seed",38,8,50.5,19.0,284.5,48,PatchType.BUSH_PATCH,Items.JANGERBERRIES_247,Item(Items.WATERMELON_5982,6)),
-    WHITEBERRY_SEED(Items.WHITEBERRY_SEED_5105,"whiteberry bush seed",51,8,78.0,29.0,437.5,59,PatchType.BUSH_PATCH,Items.WHITE_BERRIES_239,null),
+    WHITEBERRY_SEED(Items.WHITEBERRY_SEED_5105,"whiteberry bush seed",51,8,78.0,29.0,437.5,59,PatchType.BUSH_PATCH,Items.WHITE_BERRIES_239,Item(Items.MUSHROOM_6004,8)),
     POISON_IVY_SEED(Items.POISON_IVY_SEED_5106,"poison ivy bush seed",197,8,120.0,45.0,675.0,70,PatchType.BUSH_PATCH,Items.POISON_IVY_BERRIES_6018,null),
 
     // Herbs
@@ -78,7 +78,7 @@ enum class Plantable(val itemID: Int, val displayName: String, val value: Int, v
 
     // Special
     BELLADONNA_SEED(Items.BELLADONNA_SEED_5281, "belladonna seed", 4, 4, 91.0, 128.0, 0.0, 63, PatchType.BELLADONNA_PATCH, Items.CAVE_NIGHTSHADE_2398),
-    MUSHROOM_SPORE(Items.MUSHROOM_SPORE_5282, "mushroom spore", 6, 7, 61.5, 57.7, 0.0, 53, PatchType.MUSHROOM_PATCH, Items.MUSHROOM_6004),
+    MUSHROOM_SPORE(Items.MUSHROOM_SPORE_5282, "mushroom spore", 4, 6, 61.5, 57.7, 0.0, 53, PatchType.MUSHROOM_PATCH, Items.MUSHROOM_6004),
     CACTUS_SEED(Items.CACTUS_SEED_5280, "cactus seed", 8, 7, 66.5, 25.0, 374.0, 55, PatchType.CACTUS_PATCH, Items.CACTUS_SPINE_6016),
     EVIL_TURNIP_SEED(Items.EVIL_TURNIP_SEED_12148, "evil turnip seed", 4, 1, 41.0, 46.0, 0.0, 42, PatchType.EVIL_TURNIP_PATCH, Items.EVIL_TURNIP_12134)
     ;

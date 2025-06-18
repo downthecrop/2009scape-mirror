@@ -41,7 +41,7 @@ class CropGrowth : PersistTimer (500, "farming:crops", isSoft = true) {
             //Another more extreme example is if you planted something at 10:31 that takes 5 minutes to grow. 10:35 comes around, it hasn't been 5 minutes, so it doesn't grow, meaning
             //it actually grows at 10:40, an extra 4 minutes.
             //this code makes it so crops planted both at 10:31 and 10:34 grow at 10:35 if they are supposed to take 5 minutes for each stage.
-            if(patch.nextGrowth < (System.currentTimeMillis() + 240_000L) && !patch.isDead){
+            if(patch.nextGrowth < (System.currentTimeMillis() + 240_000L) && !patch.isDead && !patch.isChoppedFruitTree()){
                 patch.nextGrowth = System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(patch.getStageGrowthMinutes().toLong())
                 patch.update()
             }
@@ -58,7 +58,7 @@ class CropGrowth : PersistTimer (500, "farming:crops", isSoft = true) {
         for ((_, patch) in patchMap) {
             val type = patch.patch.type
             val shouldPlayCatchup = !patch.isGrown() || (type == PatchType.BUSH_PATCH && patch.getFruitOrBerryCount() < 4) || (type == PatchType.FRUIT_TREE_PATCH && patch.getFruitOrBerryCount() < 6)
-            if (shouldPlayCatchup && !patch.isDead) {
+            if (shouldPlayCatchup && !patch.isDead && !patch.isChoppedFruitTree()) {
                 var stagesToSimulate = if (!patch.isGrown()) {
                     if (patch.isWeedy() || patch.isEmptyAndWeeded()) patch.currentGrowthStage % 4
                     else patch.plantable!!.stages - patch.currentGrowthStage
