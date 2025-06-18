@@ -1,6 +1,6 @@
 package content.global.ame
 
-import content.global.ame.events.MysteriousOldManNPC
+import content.global.ame.events.surpriseexam.MysteriousOldManNPC
 import core.api.playGlobalAudio
 import core.api.poofClear
 import core.api.sendMessage

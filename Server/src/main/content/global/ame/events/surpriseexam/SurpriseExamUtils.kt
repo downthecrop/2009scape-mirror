@@ -26,10 +26,6 @@ object SurpriseExamUtils {
         intArrayOf(Items.FLY_FISHING_ROD_309,Items.BARBARIAN_ROD_11323,Items.SMALL_FISHING_NET_303,Items.HARPOON_311)
     )
 
-    fun teleport(player: Player) {
-        kidnapPlayer(player, Location.create(1886, 5025, 0), TeleportManager.TeleportType.INSTANT)
-    }
-
     fun cleanup(player: Player){
         returnPlayer(player)
         removeAttributes(player, SE_KEY_INDEX, SE_KEY_CORRECT)

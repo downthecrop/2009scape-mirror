@@ -1,7 +1,7 @@
 package content.global.ame
 
 import org.rs09.consts.Items
-import content.global.ame.events.MysteriousOldManNPC
+import content.global.ame.events.surpriseexam.MysteriousOldManNPC
 import content.global.ame.events.certer.CerterNPC
 import content.global.ame.events.drilldemon.SergeantDamienNPC
 import content.global.ame.events.drunkendwarf.DrunkenDwarfNPC

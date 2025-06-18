@@ -49,7 +49,7 @@ class AFURepairClimbHandler : InteractionListener {
                 ent.destinationUp?.withinDistance(player.location,2) == true){
                 return ent
             }
-        return null
+        return RepairClimbObject.GWD //the only one that does not have down/up destinations
     }
 
     private fun repair(player: Player,rco: RepairClimbObject){
@@ -95,6 +95,7 @@ class AFURepairClimbHandler : InteractionListener {
         val level = rco.levelRequirement?.second ?: 0
         if(player.skills.getLevel(skill) < level){
             player.dialogueInterpreter.sendDialogue("You need level $level ${Skills.SKILL_NAME[skill]} for this.")
+            return
         }
 
         var requiresNeedle = false
