@@ -26647,6 +26647,8 @@
   {
     "examine": "Hydro-power!",
     "combat_style": "2",
+    "start_gfx": "93",
+    "start_height": "80",
     "melee_animation": "414",
     "range_animation": "0",
     "magic_level": "14",
@@ -26662,6 +26664,7 @@
     "strength_level": "1",
     "id": "2710",
     "range_level": "1",
+    "projectile": "94",
     "attack_level": "1"
   },
   {
@@ -40355,6 +40358,7 @@
     "examine": "He works evil magic.",
     "start_gfx": "93",
     "combat_style": "2",
+    "start_height": "80",
     "melee_animation": "810",
     "range_animation": "0",
     "combat_audio": "511,513,512",
@@ -40379,6 +40383,7 @@
     "examine": "He works evil magic.",
     "start_gfx": "96",
     "combat_style": "2",
+    "start_height": "80",
     "melee_animation": "810",
     "range_animation": "0",
     "combat_audio": "511,513,512",
