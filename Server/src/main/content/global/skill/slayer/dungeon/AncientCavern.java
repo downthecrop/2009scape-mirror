@@ -152,7 +152,7 @@ public final class AncientCavern extends MapZone implements Plugin<Object> {
 						}
 
 					});
-					player.getInterfaceManager().open(c);
+					player.getInterfaceManager().openOverlay(c);
 					break;
 				case 3:
 					PacketRepository.send(MinimapState.class, new MinimapStateContext(player, 2));
