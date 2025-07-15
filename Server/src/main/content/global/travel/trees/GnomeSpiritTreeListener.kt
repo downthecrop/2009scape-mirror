@@ -1,9 +1,5 @@
 package content.global.travel.trees
 
-import core.api.isQuestComplete
-import core.api.openDialogue
-import core.api.sendDialogue
-import core.api.teleport
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
@@ -18,9 +14,10 @@ import core.game.interaction.IntType
 import core.game.world.GameWorld.Pulser
 import core.tools.END_DIALOGUE
 import content.data.Quests
+import core.api.*
 
 class GnomeSpiritTreeListener: InteractionListener {
-    val spiritTrees = intArrayOf(1317,1293,1294)
+    val spiritTrees = intArrayOf(1317,1293,1294,8355)
 
     override fun defineListeners() {
         on(spiritTrees, IntType.SCENERY, "talk-to"){ player, _ ->
@@ -39,7 +36,11 @@ class GnomeSpiritTreeTeleportDialogue: DialogueFile() {
         Location(2542, 3170, 0),
         Location(2461, 3444, 0),
         Location(2556, 3259, 0),
-        Location(3184, 3508, 0)
+        Location(3184, 3508, 0),
+        Location(3060, 3256, 0), //Port Sarim
+        Location(2613, 3856, 0), //Etceteria
+        Location(2800, 3203, 0) //Brimhaven
+
     )
 
     private val ANIMATIONS = arrayOf(Animation(7082), Animation(7084))
@@ -86,6 +87,15 @@ class GnomeSpiritTreeTeleportDialogue: DialogueFile() {
             stage = END_DIALOGUE
             return
         }
+
+        var plantedSpiritTreeLocation = when {
+            getVarbit(player!!, 720) == 20 -> "Port Sarim"
+            getVarbit(player!!, 722) == 20 -> "Etceteria"
+            getVarbit(player!!, 724) == 20 -> "Brimhaven"
+            else -> null
+            //There should never be a case where more than one spirit tree is planted.
+        }
+        if(plantedSpiritTreeLocation == null) {
         when (stage) {
             0 -> interpreter!!.sendOptions(
                     "Where would you like to go?",
@@ -100,6 +110,29 @@ class GnomeSpiritTreeTeleportDialogue: DialogueFile() {
                     3 -> sendTeleport(player!!, LOCATIONS[2])
                     4 -> sendTeleport(player!!, LOCATIONS[3])
                 }
+            }
+        }
+        else when (stage) {
+            0 -> interpreter!!.sendOptions(
+                "Where would you like to go?",
+                "Tree Gnome Village",
+                "Tree Gnome Stronghold",
+                "Battlefield of Khazard",
+                "Grand Exchange",
+                plantedSpiritTreeLocation
+            ).also { stage++ }
+            1 -> when (buttonID) {
+                1 -> sendTeleport(player!!, LOCATIONS[0])
+                2 -> sendTeleport(player!!, LOCATIONS[1])
+                3 -> sendTeleport(player!!, LOCATIONS[2])
+                4 -> sendTeleport(player!!, LOCATIONS[3])
+                5 -> when (plantedSpiritTreeLocation) {
+                        "Port Sarim" -> sendTeleport(player!!,LOCATIONS[4])
+                        "Etceteria" -> sendTeleport(player!!,LOCATIONS[5])
+                        "Brimhaven" -> sendTeleport(player!!,LOCATIONS[6])
+                        else -> stage = END_DIALOGUE
+                    }
+            }
         }
     }
 }

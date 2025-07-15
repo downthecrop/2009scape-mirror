@@ -3,7 +3,7 @@ package content.global.skill.farming
 import core.game.node.item.Item
 import org.rs09.consts.Items
 
-enum class Plantable(val itemID: Int, val displayName: String, val value: Int, val stages: Int, val plantingXP: Double, val harvestXP: Double, val checkHealthXP: Double, val requiredLevel: Int, val applicablePatch: PatchType, val harvestItem: Int, val protectionItem: Item? = null, val protectionFlower: Plantable? = null) {
+enum class Plantable(val itemID: Int, val displayName: String, val value: Int, val stages: Int, val plantingXP: Double, val harvestXP: Double, val checkHealthXP: Double, val requiredLevel: Int, val applicablePatch: PatchType, val harvestItem: Int, val protectionItem: Item? = null, val protectionFlower: Plantable? = null, val protectionItemSecondary: Item? = null, val protectionItemTertiary: Item? = null) {
 
     // Flowers
     MARIGOLD_SEED(Items.MARIGOLD_SEED_5096,"marigold seed",8,4,8.5,47.0,0.0,2,PatchType.FLOWER_PATCH,Items.MARIGOLDS_6010),
@@ -80,7 +80,8 @@ enum class Plantable(val itemID: Int, val displayName: String, val value: Int, v
     BELLADONNA_SEED(Items.BELLADONNA_SEED_5281, "belladonna seed", 4, 4, 91.0, 128.0, 0.0, 63, PatchType.BELLADONNA_PATCH, Items.CAVE_NIGHTSHADE_2398),
     MUSHROOM_SPORE(Items.MUSHROOM_SPORE_5282, "mushroom spore", 4, 6, 61.5, 57.7, 0.0, 53, PatchType.MUSHROOM_PATCH, Items.MUSHROOM_6004),
     CACTUS_SEED(Items.CACTUS_SEED_5280, "cactus seed", 8, 7, 66.5, 25.0, 374.0, 55, PatchType.CACTUS_PATCH, Items.CACTUS_SPINE_6016),
-    EVIL_TURNIP_SEED(Items.EVIL_TURNIP_SEED_12148, "evil turnip seed", 4, 1, 41.0, 46.0, 0.0, 42, PatchType.EVIL_TURNIP_PATCH, Items.EVIL_TURNIP_12134)
+    EVIL_TURNIP_SEED(Items.EVIL_TURNIP_SEED_12148, "evil turnip seed", 4, 1, 41.0, 46.0, 0.0, 42, PatchType.EVIL_TURNIP_PATCH, Items.EVIL_TURNIP_12134),
+    SPIRIT_SAPLING(Items.SPIRIT_SAPLING_5375, "spirit tree sapling", 8, 12, 199.5, 0.0, 19301.0, 83, PatchType.SPIRIT_TREE_PATCH, 0, Item(Items.MONKEY_NUTS_4012, 5), null, Item(Items.MONKEY_BAR_4014, 1), Item(Items.GROUND_TOOTH_9082, 1) )
     ;
 
     constructor(itemID: Int, displayName: String, value: Int, stages: Int, plantingXP: Double, harvestXP: Double, checkHealthXP: Double, requiredLevel: Int, applicablePatch: PatchType, harvestItem: Int, protectionFlower: Plantable)

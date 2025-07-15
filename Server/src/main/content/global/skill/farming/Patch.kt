@@ -16,6 +16,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
     var compost = CompostType.NONE
     var protectionPaid = false
     var cropLives = 3
+    val checkablePatches = arrayOf(PatchType.TREE_PATCH, PatchType.BUSH_PATCH, PatchType.FRUIT_TREE_PATCH, PatchType.SPIRIT_TREE_PATCH, PatchType.CACTUS_PATCH)
 
     fun setNewHarvestAmount() {
         val compostMod = when(compost) {
@@ -162,6 +163,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
                 PatchType.BUSH_PATCH -> setVarbit(player, patch.varbit, 250 + (plantable!!.ordinal - Plantable.REDBERRY_SEED.ordinal))
                 PatchType.CACTUS_PATCH -> setVarbit(player, patch.varbit, 31)
                 PatchType.TREE_PATCH -> setVarbit(player, patch.varbit, plantable!!.value + plantable!!.stages)
+                PatchType.SPIRIT_TREE_PATCH -> setVarbit(player, patch.varbit, plantable!!.value + plantable!!.stages + 24)
                 else -> log(this::class.java, Log.WARN,  "Invalid setting of isCheckHealth for patch type: " + patch.type.name + "at" + patch.name)
             }
         } else {
@@ -186,6 +188,10 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
 
                     if (state != getVarbit(player, patch.varbit))
                         setVisualState(state)
+                }
+                PatchType.SPIRIT_TREE_PATCH -> {
+                    if(isDead) setVisualState(getSpiritTreeDeathValue())
+                    else if(isDiseased && !isDead) setVisualState(getSpiritTreeDiseaseValue())
                 }
                 PatchType.FRUIT_TREE_PATCH -> {
                     if(isDead) setVisualState(getFruitTreeDeathValue())
@@ -254,6 +260,14 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
         else {
             return (plantable?.value ?: 0) + currentGrowthStage + 128
         }
+    }
+
+    private fun getSpiritTreeDiseaseValue(): Int {
+        return (plantable?.value ?: 0) + currentGrowthStage + 12
+    }
+
+    private fun getSpiritTreeDeathValue(): Int {
+        return (plantable?.value ?: 0) + currentGrowthStage + 24
     }
 
     private fun getFruitTreeDiseaseValue(): Int {
@@ -338,7 +352,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             return
         }
 
-        if((patch.type == PatchType.FRUIT_TREE_PATCH || patch.type == PatchType.TREE_PATCH || patch.type == PatchType.BUSH_PATCH || patch.type == PatchType.CACTUS_PATCH) && plantable != null && plantable?.stages == currentGrowthStage + 1){
+        if(isCheckable() && plantable != null && plantable?.stages == currentGrowthStage + 1){
             isCheckHealth = true
         }
 
@@ -431,5 +445,9 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
         } else return (fpatch.plantable != null &&
             (fpatch.plantable == plantable?.protectionFlower || fpatch.plantable == Plantable.forItemID(Items.WHITE_LILY_SEED_14589))
             && fpatch.isGrown())
+    }
+
+    fun isCheckable(): Boolean{
+        return (patch.type in checkablePatches)
     }
 }

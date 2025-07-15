@@ -38,6 +38,7 @@ class UseWithPatchHandler : InteractionListener {
         onUseWith(IntType.SCENERY, allowedNodes.toIntArray(), *FarmingPatch.patchNodes.toIntArray()) { player, used, with ->
             val patch = FarmingPatch.forObject(with.asScenery()) ?: return@onUseWith true
             val usedItem = used.asItem()
+            val trimmablePatches = arrayOf(PatchType.TREE_PATCH, PatchType.BUSH_PATCH, PatchType.FRUIT_TREE_PATCH, PatchType.SPIRIT_TREE_PATCH)
 
             if (patch == FarmingPatch.TROLL_STRONGHOLD_HERB) {
                 if (!hasRequirement(player, Quests.MY_ARMS_BIG_ADVENTURE))
@@ -79,7 +80,7 @@ class UseWithPatchHandler : InteractionListener {
                 }
                 SECATEURS, MAGIC_SECATEURS -> {
                     val p = patch.getPatchFor(player)
-                    if (patch.type == PatchType.TREE_PATCH) {
+                    if (patch.type in trimmablePatches) {
                         if (p.isDiseased && !p.isDead) {
                             submitIndividualPulse(player, object: Pulse() {
                                 override fun pulse(): Boolean {
@@ -131,7 +132,7 @@ class UseWithPatchHandler : InteractionListener {
                 Items.PLANT_CURE_6036 -> {
                     val p = patch.getPatchFor(player)
                     val patchName = p.patch.type.displayName()
-                    if (p.isDiseased && !p.isDead) {
+                    if (p.isDiseased && !p.isDead && patch.type !in trimmablePatches) {
                         sendMessage(player, "You treat the $patchName with the plant cure.")
                         queueScript(player, 0, QueueStrength.WEAK) { stage: Int ->
                             when (stage) {
@@ -260,12 +261,17 @@ class UseWithPatchHandler : InteractionListener {
                     }*/
 
                     val requiredItem = when (patch.type) {
-                        PatchType.TREE_PATCH, PatchType.FRUIT_TREE_PATCH -> Items.SPADE_952
+                        PatchType.TREE_PATCH, PatchType.FRUIT_TREE_PATCH, PatchType.SPIRIT_TREE_PATCH -> Items.SPADE_952
                         PatchType.FLOWER_PATCH -> if (plantable == Plantable.SCARECROW) null else Items.SEED_DIBBER_5343
                         else -> Items.SEED_DIBBER_5343
                     }
                     if (requiredItem != null && !inInventory(player, requiredItem)) {
-                        sendMessage(player, "You need ${prependArticle(requiredItem.asItem().name.lowercase())} to plant that.")
+                        sendDialogue(player, "You need ${prependArticle(requiredItem.asItem().name.lowercase())} to plant that.")
+                        return@onUseWith true
+                    }
+                    val spiritTreePlanted = (getVarbit(player, 720) > 3 || getVarbit(player, 722) > 3 || getVarbit(player, 724) > 3)
+                    if (plantable == Plantable.SPIRIT_SAPLING && spiritTreePlanted){
+                        sendDialogue(player, "You already have a spirit tree. You can't plant another one.")
                         return@onUseWith true
                     }
 
@@ -278,7 +284,7 @@ class UseWithPatchHandler : InteractionListener {
                                 }
                                 animate(player, anim)
                                 playAudio(player, sound)
-                                val delay = if (patch.type == PatchType.TREE_PATCH || patch.type == PatchType.FRUIT_TREE_PATCH || plantable == Plantable.SCARECROW) 3 else 0
+                                val delay = if (patch.type == PatchType.TREE_PATCH || patch.type == PatchType.FRUIT_TREE_PATCH || patch.type == PatchType.SPIRIT_TREE_PATCH || plantable == Plantable.SCARECROW) 3 else 0
                                 return@queueScript delayScript(player,anim.duration + delay)
                             }
                             1 -> {
@@ -289,12 +295,12 @@ class UseWithPatchHandler : InteractionListener {
                                     p.plant(plantable)
                                     rewardXP(player, Skills.FARMING, plantable.plantingXP)
                                     p.setNewHarvestAmount()
-                                    if (p.patch.type == PatchType.TREE_PATCH || p.patch.type == PatchType.FRUIT_TREE_PATCH) {
+                                    if (p.patch.type == PatchType.TREE_PATCH || p.patch.type == PatchType.FRUIT_TREE_PATCH || p.patch.type == PatchType.SPIRIT_TREE_PATCH) {
                                         addItem(player, Items.PLANT_POT_5350)
                                     }
 
                                     val itemAmount =
-                                        if (p.patch.type == PatchType.TREE_PATCH || p.patch.type == PatchType.FRUIT_TREE_PATCH) "the"
+                                        if (p.patch.type == PatchType.TREE_PATCH || p.patch.type == PatchType.FRUIT_TREE_PATCH || p.patch.type == PatchType.SPIRIT_TREE_PATCH) "the"
                                         else if (plantItem.amount == 1) "a"
                                         else plantItem.amount
                                     val itemName =

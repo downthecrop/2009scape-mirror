@@ -11,6 +11,14 @@ import org.rs09.consts.Items
 
 class FarmerPayOptionDialogue(val patch: Patch, val quickPay: Boolean = false): DialogueFile() {
     var item: Item? = null
+    var itemSecondary: Item? = null
+    var itemTertiary: Item? = null
+
+    fun hasAllItems(): Boolean {
+        return (inInventory(player!!, item!!.id, item!!.amount) || inInventory(player!!, note(item!!).id, note(item!!).amount))
+            && (inInventory(player!!, itemSecondary!!.id, itemSecondary!!.amount) || inInventory(player!!, note(itemSecondary!!).id, note(itemSecondary!!).amount))
+            && (inInventory(player!!, itemTertiary!!.id, itemTertiary!!.amount) || inInventory(player!!, note(itemTertiary!!).id, note(itemTertiary!!).amount))
+    }
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
             START_DIALOGUE -> {
@@ -33,6 +41,9 @@ class FarmerPayOptionDialogue(val patch: Patch, val quickPay: Boolean = false): 
                     npc("That patch is already fully grown!", "I don't know what you want me to do with it!").also { stage = END_DIALOGUE }
                 } else {
                     item = patch.plantable?.protectionItem
+                    itemSecondary = patch.plantable?.protectionItemSecondary
+                    itemTertiary = patch.plantable?.protectionItemTertiary
+
                     val protectionText = when (item?.id) {
                         Items.COMPOST_6032 -> if (item?.amount == 1) "bucket of compost" else "buckets of compost"
                         Items.POTATOES10_5438 -> if (item?.amount == 1) "sack of potatoes" else "sacks of potatoes"
@@ -51,10 +62,22 @@ class FarmerPayOptionDialogue(val patch: Patch, val quickPay: Boolean = false): 
                     }
                     if (item == null) {
                         npc("Sorry, I won't protect that.").also { stage = END_DIALOGUE }
+                    } else if (patch.patch.type == PatchType.SPIRIT_TREE_PATCH && quickPay
+                        && !hasAllItems()) {
+                        val amount = if (item?.amount == 1) "one" else item?.amount
+                        npc(FacialExpression.HAPPY, "I want $amount $protectionText, one monkey bar,", "and one ground tooth for that.")
+                        stage = 200
                     } else if (quickPay && !(inInventory(player!!, item!!.id, item!!.amount) || inInventory(player!!, note(item!!).id, note(item!!).amount))) {
                         val amount = if (item?.amount == 1) "one" else item?.amount
                         npc(FacialExpression.HAPPY, "I want $amount $protectionText for that.")
                         stage = 200
+                    } else if (patch.patch.type == PatchType.SPIRIT_TREE_PATCH && quickPay) {
+                        showTopics(
+                            //Found a 2011 source for quick-pay, but no earlier dialogue sources (https://www.youtube.com/watch?v=RdIcNH50v7I)
+                            Topic("Yes", 20, true),
+                            Topic("No", END_DIALOGUE, true),
+                            title = "Pay the gnome?"
+                        )
                     } else if (quickPay) {
                         val amount = if (item?.amount == 1) "one" else item?.amount
                         showTopics(
@@ -62,6 +85,10 @@ class FarmerPayOptionDialogue(val patch: Patch, val quickPay: Boolean = false): 
                             Topic("No", END_DIALOGUE, true),
                             title = "Pay $amount $protectionText?"
                         )
+                    } else if (patch.patch.type == PatchType.SPIRIT_TREE_PATCH) {
+                        val amount = if (item?.amount == 1) "one" else item?.amount
+                        npc("If you like, but I want $amount $protectionText,", "one monkey bar, and one ground tooth for that.")
+                        stage++
                     } else {
                         val amount = if (item?.amount == 1) "one" else item?.amount
                         npc("If you like, but I want $amount $protectionText for that.")
@@ -71,7 +98,9 @@ class FarmerPayOptionDialogue(val patch: Patch, val quickPay: Boolean = false): 
             }
 
             1 -> {
-                if (!(inInventory(player!!, item!!.id, item!!.amount) || inInventory(player!!, note(item!!).id, note(item!!).amount))) {
+                if (patch.patch.type == PatchType.SPIRIT_TREE_PATCH && !hasAllItems()) {
+                    player("I'm afraid I don't have any of those at the moment.").also { stage = 10 }
+                } else if (!(inInventory(player!!, item!!.id, item!!.amount) || inInventory(player!!, note(item!!).id, note(item!!).amount))) {
                     player("I'm afraid I don't have any of those at the moment.").also { stage = 10 }
                 } else {
                     showTopics(
@@ -84,7 +113,14 @@ class FarmerPayOptionDialogue(val patch: Patch, val quickPay: Boolean = false): 
             10 -> npc("Well, I'm not wasting my time for free.").also { stage = END_DIALOGUE }
 
             20 -> {
-                if (removeItem(player!!, item) || removeItem(player!!, note(item!!))) {
+                if (patch.patch.type == PatchType.SPIRIT_TREE_PATCH
+                    && (removeItem(player!!, item) || removeItem(player!!, note(item!!)))
+                    && (removeItem(player!!, itemSecondary) || removeItem(player!!, note(itemSecondary!!)))
+                    && (removeItem(player!!, itemTertiary) || removeItem(player!!, note(itemTertiary!!)))) {
+                    patch.protectionPaid = true
+                    npc("That'll do nicely, ${if (player!!.isMale) "sir" else "madam"}. Leave it with me - I'll make sure", "that tree grows up good and strong.").also { stage = END_DIALOGUE }
+                } else if (patch.patch.type != PatchType.SPIRIT_TREE_PATCH
+                    && removeItem(player!!, item) || removeItem(player!!, note(item!!))) {
                     patch.protectionPaid = true
                     // Note: A slight change in this dialogue was seen in a December 2009 video - https://youtu.be/7gVh42ylQ48?t=138
                     npc("That'll do nicely, ${if (player!!.isMale) "sir" else "madam"}. Leave it with me - I'll make sure", "those crops grow for you.").also { stage = END_DIALOGUE }

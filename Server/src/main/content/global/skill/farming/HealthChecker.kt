@@ -26,7 +26,7 @@ class HealthChecker : OptionHandler() {
         val patch = fPatch.getPatchFor(player)
         val type = patch.patch.type
 
-        if (type != PatchType.BUSH_PATCH && type != PatchType.FRUIT_TREE_PATCH && type != PatchType.TREE_PATCH && type != PatchType.CACTUS_PATCH) {
+        if (!patch.isCheckable()) {
             sendMessage(player, "This shouldn't be happening. Please report this.")
             return true
         }
@@ -42,6 +42,10 @@ class HealthChecker : OptionHandler() {
             }
             PatchType.FRUIT_TREE_PATCH -> {
                 patch.setCurrentState(patch.getCurrentState() - 14)
+                sendMessage(player, "You examine the tree for signs of disease and find that it is in perfect health.")
+            }
+            PatchType.SPIRIT_TREE_PATCH -> {
+                patch.setCurrentState(patch.getCurrentState() - 24)
                 sendMessage(player, "You examine the tree for signs of disease and find that it is in perfect health.")
             }
             PatchType.BUSH_PATCH -> {
