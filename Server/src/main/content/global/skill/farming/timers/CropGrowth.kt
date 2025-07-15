@@ -57,7 +57,7 @@ class CropGrowth : PersistTimer (500, "farming:crops", isSoft = true) {
     private fun runOfflineCatchupLogic() {
         for ((_, patch) in patchMap) {
             val type = patch.patch.type
-            val shouldPlayCatchup = !patch.isGrown() || (type == PatchType.BUSH_PATCH && patch.getFruitOrBerryCount() < 4) || (type == PatchType.FRUIT_TREE_PATCH && patch.getFruitOrBerryCount() < 6)
+            val shouldPlayCatchup = !patch.isGrown() || (type == PatchType.BUSH_PATCH && patch.getFruitOrBerryCount() < 4) || (type == PatchType.FRUIT_TREE_PATCH && patch.getFruitOrBerryCount() < 6) || (patch.plantable == Plantable.WILLOW_SAPLING && patch.harvestAmt < 6)
             if (shouldPlayCatchup && !patch.isDead && !patch.isChoppedFruitTree()) {
                 var stagesToSimulate = if (!patch.isGrown()) {
                     if (patch.isWeedy() || patch.isEmptyAndWeeded()) patch.currentGrowthStage % 4
@@ -69,6 +69,8 @@ class CropGrowth : PersistTimer (500, "farming:crops", isSoft = true) {
                         stagesToSimulate += Math.min(4, 4 - patch.getFruitOrBerryCount())
                     if (type == PatchType.FRUIT_TREE_PATCH)
                         stagesToSimulate += Math.min(6, 6 - patch.getFruitOrBerryCount())
+                    if (patch.plantable == Plantable.WILLOW_SAPLING)
+                        stagesToSimulate += Math.min(6, 6 - patch.harvestAmt)
                 }
 
                 val nowTime = System.currentTimeMillis()

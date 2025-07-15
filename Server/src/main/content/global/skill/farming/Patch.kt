@@ -426,6 +426,10 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             // restocking their fruit should take 40 minutes per fruit
             minutes = 40
         }
+        else if(plantable == Plantable.WILLOW_SAPLING && isGrown()) {
+            // Willow Branches grow back in only 5 minutes
+            minutes = 5
+        }
         return minutes
     }
 
