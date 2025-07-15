@@ -206,7 +206,7 @@ public class AchievementDiary {
 			}
 			if(complete){
 				completedLevels.add(level);
-			} else if(completedLevels.contains(level)) completedLevels.remove(level);
+			} else if(completedLevels.contains(level)) completedLevels.remove((Object) level);
 		}
 	}
 
