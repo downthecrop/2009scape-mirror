@@ -1,5 +1,6 @@
 package core.game.node.entity.player.link.prayer;
 
+import content.data.Quests;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.entity.skill.SkillBonus;
 import core.game.node.entity.skill.Skills;
@@ -221,10 +222,19 @@ public enum PrayerType {
 	 * @return <code>True</code> if it is permitted.
 	 */
 	public boolean permitted(final Player player) {
-		if (player.getSkills().getStaticLevel(Skills.PRAYER) < getLevel() || player.getSkills().getStaticLevel(Skills.DEFENCE) < defenceReq) {
-			playAudio(player, Sounds.PRAYER_OFF_2673);
-			player.getDialogueInterpreter().sendDialogue("You need a <col=08088A>Prayer level of " + getLevel() + (player.getSkills().getStaticLevel(Skills.DEFENCE) < defenceReq ? (" and a Defence level of " + defenceReq) : "") + " to use " + StringUtils.formatDisplayName(name().toLowerCase().replace("_", " ")) + ".");
+		if (!hasLevelStat(player, Skills.PRAYER, level) || !hasLevelStat(player, Skills.DEFENCE, defenceReq)) {
+			sendDialogue(player, "You need a <col=08088A>" + (!hasLevelStat(player, Skills.PRAYER, level) ? "Prayer level of " + level + (!hasLevelStat(player, Skills.DEFENCE, defenceReq) ? " and a " : "") : "") + (!hasLevelStat(player, Skills.DEFENCE, defenceReq) ? "Defence level of " + defenceReq : "") + " to use " + StringUtils.formatDisplayName(name().toLowerCase().replace("_", " ")) + ".");
 			return false;
+		}
+
+		if (defenceReq == 65 || defenceReq == 70) {
+			if (!hasRequirement(player, Quests.KINGS_RANSOM)) {
+				return false;
+			} else {
+				if (getVarbit(player, 3909) != 8) {
+					setVarbit(player, 3909, 8, false);
+				}
+			}
 		}
 		return true;
 	}
@@ -241,17 +251,12 @@ public enum PrayerType {
 			player.getPrayer().getActive().add(this);
 			iconify(player, getIcon(player, this));
 			playAudio(player, sound.id);
-
-			if (this == PrayerType.PIETY
-					&& new ZoneBorders(2732, 3467, 2739, 3471, 0).insideBorder(player)) {
-				player.getAchievementDiaryManager().finishTask(player, DiaryType.SEERS_VILLAGE, 2, 3);
-			}
-                        player.dispatch (new PrayerActivatedEvent(this));
+			player.dispatch (new PrayerActivatedEvent(this));
 		} else {
 			player.getPrayer().getActive().remove(this);
 			playAudio(player, Sounds.CANCEL_PRAYER_2663);
 			findNextIcon(player);
-                        player.dispatch (new PrayerDeactivatedEvent(this));
+			player.dispatch (new PrayerDeactivatedEvent(this));
 		}
 		return true;
 	}

@@ -1,4 +1,4 @@
-package content.global.handlers.iface;
+package content.global.handlers.iface.tabs;
 
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;

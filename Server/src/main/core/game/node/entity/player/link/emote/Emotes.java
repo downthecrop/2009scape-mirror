@@ -298,7 +298,7 @@ public enum Emotes {
     }
 
     /**
-     * Handles the reward button for an emote.
+     * Handles the button for an emote.
      *
      * @param player   the player.
      * @param buttonId the button id.

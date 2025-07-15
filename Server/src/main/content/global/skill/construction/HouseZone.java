@@ -3,12 +3,11 @@ package content.global.skill.construction;
 
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
-import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.RegionManager;
 import core.game.world.map.Region;
 import core.game.system.task.Pulse;
-import core.game.world.map.zone.ZoneRestriction;
+import core.game.world.map.zone.ZoneType;
 
 import static core.api.ContentAPIKt.*;
 
@@ -44,6 +43,7 @@ public final class HouseZone extends MapZone {
 
     @Override
     public void configure() {
+        setZoneType(ZoneType.P_O_H.getId());
         unregisterOldRegions();
         registerRegion(house.getHouseRegion().getId());
         if (house.getDungeonRegion() != null) {
@@ -82,7 +82,7 @@ public final class HouseZone extends MapZone {
         if (e instanceof Player) {
             Player p = (Player) e;
             HouseManager.leave(p);
-	    return true;
+	        return true;
         }
         return super.death(e, killer);
     }

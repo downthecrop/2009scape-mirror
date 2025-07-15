@@ -1918,7 +1918,7 @@ fun runTask(entity: Entity, delay: Int = 0, repeatTimes: Int = 1, task: () -> Un
     entity.pulseManager.run(object : Pulse(delay) {
         override fun pulse(): Boolean {
             task.invoke()
-            return --cycles == 0
+            return --cycles <= 0
         }
     })
 }

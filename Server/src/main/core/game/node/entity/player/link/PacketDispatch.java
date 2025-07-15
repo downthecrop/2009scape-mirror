@@ -3,7 +3,6 @@ package core.game.node.entity.player.link;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.tools.Log;
-import core.tools.SystemLogger;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -431,8 +430,11 @@ public final class PacketDispatch {
 		PacketRepository.send(CSConfigPacket.class, new CSConfigContext(player, id, value, type, params));
 	}
 
-	public void resetInterface(int id)
-	{
+	public void resetInterface(int id) {
 		PacketRepository.send(ResetInterface.class, new InterfaceContext(player, 0, 0, id, false));
+	}
+
+	public void sendLastLoginInfo() {
+		PacketRepository.send(LastLoginInfo.class, new PlayerContext(player));
 	}
 }

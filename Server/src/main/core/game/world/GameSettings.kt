@@ -88,17 +88,16 @@ class GameSettings
 
         /**"Lobby" interface
          * The message of the week models to display
-         * 15 & 22 = keys & lock || 16 = fly swat || 17 = person with question marks || 18 & 447 = wise old man
-         * 19 = man & woman with mouth closed || 20 = man & lock & key || 21 = closed chests
-         * 23 = snowmen || 405 = Construction houses || 622 = Two sets of 3 people range, mage, melee
-         * 623 = Woodcutting || 679 = Summoning || 715 = Easter || 800 = Halloween
-         * Any value that isn't one listed above = random selection
+         * 15 & 22 = Lock w/key & keys || 16 = Fly swatters || 17 = Man & woman with question marks
+         * 18 & 447 = Wise old man & woman || 19 = Man with mouth zipped & woman talking || 20 = Man & lock w/key
+         * 21 = Chests that open & close || 23 = Christmas || 405 = Construction houses
+         * 622 = Two sets 3 people range, mage, melee 623 = Woodcutting || 679 = Summoning || 715 = Easter || 800 = Halloween
          */
         var message_model: Int,
 
         /**"Lobby" interface
          * The message of the week text
-         * The "child" for writing text to these interfaces is located inside of LoginConfiguration.java
+         * The "child" for writing text to these interfaces is located inside LoginConfiguration.java
          * method: getMessageChild
          */
         var message_string: String

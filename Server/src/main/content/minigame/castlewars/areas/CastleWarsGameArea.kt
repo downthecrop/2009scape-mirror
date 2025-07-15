@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
+import core.game.world.map.zone.ZoneType
 import core.tools.Log
 import core.tools.ticksPerMinute
 import org.rs09.consts.Components
@@ -70,6 +71,7 @@ class CastleWarsGameArea : CastleWarsArea(), TickListener {
     override fun areaEnter(entity: Entity) {
         val player = entity as? Player ?: return
         super.areaEnter(player)
+        zone.zoneType = ZoneType.CASTLE_WARS.id
         registerTimer (player, spawnTimer("teleblock", (CastleWars.gameTimeMinutes)*60*2))
 
         if (saradominPlayers.contains(player)) {

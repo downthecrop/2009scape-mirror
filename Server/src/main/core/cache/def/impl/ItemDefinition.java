@@ -1545,27 +1545,6 @@ public class ItemDefinition extends Definition<Item> {
 	private static final String[] BONUS_NAMES = { "Stab: ", "Slash: ", "Crush: ", "Magic: ", "Ranged: ", "Stab: ", "Slash: ", "Crush: ", "Magic: ", "Ranged: ", "Summoning: ", "Strength: ", "Prayer: " };
 
 	/**
-	 * Updates the equipment stats interface.
-	 * @param player The player to update for.
-	 */
-	public static void statsUpdate(Player player) {
-		if (!player.getAttribute("equip_stats_open", false)) {
-			return;
-		}
-		int index = 0;
-		int[] bonuses = player.getProperties().getBonuses();
-		for (int i = 36; i < 50; i++) {
-			if (i == 47) {
-				continue;
-			}
-			int bonus = bonuses[index];
-			String bonusValue = bonus > -1 ? ("+" + bonus) : Integer.toString(bonus);
-			player.getPacketDispatch().sendString(BONUS_NAMES[index++] + bonusValue, 667, i);
-		}
-		player.getPacketDispatch().sendString("Attack bonus", 667, 34);
-	}
-
-	/**
 	 * Checks if it has a plugin.
 	 * @return {@code True} if so.
 	 */

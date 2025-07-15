@@ -9,6 +9,7 @@ import core.game.diary.DiaryLevel
 import core.game.event.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
+import core.game.node.entity.player.link.prayer.PrayerType
 import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
@@ -30,6 +31,7 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
         private val SEERS_VILLAGE_AREA = ZoneBorders(2687, 3455, 2742, 3507)
         private val SEERS_BANK_AREA = ZoneBorders(2721, 3490, 2730, 3493)
         private val SEERS_COAL_TRUCKS_AREA = ZoneBorders(2690, 3502, 2699, 3508)
+        private val SEERS_COURTHOUSE_AREA = ZoneBorders(2732, 3467, 2739, 3471)
 
         private val RANGING_GUILD_LOCATION = Location(2657, 3439)
 
@@ -350,6 +352,16 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
                         EasyTasks.PRAY_AT_ALTAR
                 )
             }
+        }
+    }
+
+    override fun onAreaVisited(player: Player) {
+        if (inBorders(player, SEERS_COURTHOUSE_AREA) && player.prayer.equals(PrayerType.PIETY)) {
+            finishTask(
+                player,
+                DiaryLevel.HARD,
+                    HardTasks.ENTER_SEERS_COURTHOUSE_WITH_PIETY
+            )
         }
     }
 }

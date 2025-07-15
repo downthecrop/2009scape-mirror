@@ -1,6 +1,5 @@
 package core.game.node.entity.player.info.login;
 
-import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.emote.Emotes;
@@ -49,20 +48,15 @@ public final class LoginConfiguration {
     private static final Component LOBBY_PANE = new Component(549);
 
     /**
+     * The lobby interface component.
+     */
+    private static final Component LOBBY_INTERFACE = new Component(378);
+
+    /**
      * The lobby message of the week models & constant to be set for auto selecting the models
      */
     private static final int[] MESSAGE_MODEL = {15, 16, 17, 18, 19, 20, 21, 22, 23, 405, 447, 622, 623, 679, 715, 800};
     private static int messModel;
-
-    /**
-     * The lobby interface close event.
-     */
-    private static final Component LOBBY_INTERFACE = new Component(378).setCloseEvent(new CloseEvent() {
-        @Override
-        public boolean close(Player player, Component c) {
-            return player.getLocks().isLocked("login");
-        }
-    });
 
     /**
      * Constructs a new {@Code LoginConfiguration} {@Code Object}
@@ -102,25 +96,25 @@ public final class LoginConfiguration {
             }
         }
         Repository.getLobbyPlayers().add(player);
-        player.getPacketDispatch().sendString(getLastLogin(player), 378, 116);
-        player.getPacketDispatch().sendString("Welcome to " + GameWorld.getSettings().getName(), 378, 115);
-        player.getPacketDispatch().sendString(" ", 378, 37);
-        player.getPacketDispatch().sendString("Want to stay up to date with the latest news and updates? Join our <br>discord by using the link below!", 378, 38);
-        player.getPacketDispatch().sendString(" ", 378, 39);
-        player.getPacketDispatch().sendString("Discord Invite", 378, 14);
-        player.getPacketDispatch().sendString("Discord Invite", 378, 129);
-        player.getPacketDispatch().sendString("Credits", 378, 94);
-        player.getPacketDispatch().sendString(player.getDetails().getCredits() + "", 378, 96);
-        player.getPacketDispatch().sendString(" ", 378, 229);
-        player.getPacketDispatch().sendString("Want to contribute to " + ServerConstants.SERVER_NAME + "? <br>Visit the GitLab using the link below!", 378, 230);
-        player.getPacketDispatch().sendString(" ", 378, 231);
-        player.getPacketDispatch().sendString("Github", 378, 240);
-        player.getPacketDispatch().sendString(GameWorld.getSettings().getMessage_string(), messModel, getMessageChild(messModel));
-        player.getPacketDispatch().sendString("You can gain more credits by voting, reporting bugs and various other methods of contribution.", 378, 93);
+        setInterfaceText(player, "Welcome to " + ServerConstants.SERVER_NAME, 378, 115);
+        setInterfaceText(player, getLastLogin(player), 378, 116);
+        setInterfaceText(player, "", 378, 37);
+        setInterfaceText(player, "Want to stay up to date with the latest news and updates? Join our discord by using the link on our website!", 378, 38);
+        setInterfaceText(player, "", 378, 39);
+        setInterfaceText(player, "Discord Invite", 378, 14);
+        setInterfaceText(player, "Discord Invite", 378, 129);
+        setInterfaceText(player, "You can gain more credits by reporting bugs and various other methods of contribution.", 378, 93);
+        setInterfaceText(player, player.getDetails().getCredits() + "", 378, 96);
+        setInterfaceText(player, "Credits", 378, 94);
+        setInterfaceText(player, "", 378, 229);
+        setInterfaceText(player, "Want to contribute to " + ServerConstants.SERVER_NAME + "? Visit the GitLab using the link on our website!", 378, 230);
+        setInterfaceText(player, "", 378, 231);
+        setInterfaceText(player, "Github", 378, 240);
+        setInterfaceText(player, GameWorld.getSettings().getMessage_string(), messModel, getMessageChild(messModel));
         player.getInterfaceManager().openWindowsPane(LOBBY_PANE);
         player.getInterfaceManager().setOpened(LOBBY_INTERFACE);
-        PacketRepository.send(Interface.class, new InterfaceContext(player, 549, 2, 378, true));
-        PacketRepository.send(Interface.class, new InterfaceContext(player, 549, 3, messModel, true));//UPDATE `configs` SET `value`=FLOOR(RAND()*(25-10)+10) WHERE key_="messageInterface"
+        PacketRepository.send(Interface.class, new InterfaceContext(player, LOBBY_PANE.getId(), 2, 378, true));
+        PacketRepository.send(Interface.class, new InterfaceContext(player, LOBBY_PANE.getId(), 3, messModel, true));//UPDATE `configs` SET `value`=FLOOR(RAND()*(25-10)+10) WHERE key_="messageInterface"
         player.getDetails().setLastLogin(System.currentTimeMillis());
     }
 
@@ -168,12 +162,11 @@ public final class LoginConfiguration {
 
         // 1050 is checked client-side for making piety/chivalry disallowed sfx, likely due to the minigame requirement.
         // Set it here unconditionally until the minigame is implemented.
-        setVarbit(player, 3909, 8, false);
+        if (hasRequirement(player, Quests.KINGS_RANSOM, false)) {
+            setVarbit(player, 3909, 8, false);
+        }
         if(ServerConstants.RULES_AND_INFO_ENABLED)
             RulesAndInfo.openFor(player);
-		/*if (GameWorld.getSettings().isPvp()) {
-			player.getPacketDispatch().sendString("", 226, 1);
-		}*/
         /*if (TutorialSession.getExtension(player).getStage() != 73) {
             TutorialStage.load(player, TutorialSession.getExtension(player).getStage(), true);
         }*/
@@ -206,21 +199,14 @@ public final class LoginConfiguration {
      * @param player the player. Fullscreen mode Object id:
      */
     public static final void welcome(final Player player) {
-        if (GameWorld.getSettings().isPvp()) {
-            player.getPacketDispatch().sendString("", 226, 0);
-        }
         if (player.isArtificial()) {
-
             return;
         }
-        player.getPacketDispatch().sendMessage("Welcome to " + GameWorld.getSettings().getName() + ".");
-        //player.getPacketDispatch().sendMessage("You are currently playing in beta version 1.2");
+        player.getPacketDispatch().sendMessage("Welcome to " + ServerConstants.SERVER_NAME + ".");
         if (player.getDetails().isMuted()) {
             player.getPacketDispatch().sendMessage("You are muted.");
             player.getPacketDispatch().sendMessage("To prevent further mutes please read the rules.");
         }
-//		ResourceAIPManager.get().load(player);
-//		ResourceAIPManager.get().save(player);
     }
 
     /**
@@ -240,7 +226,8 @@ public final class LoginConfiguration {
         player.getPacketDispatch().sendRunEnergy();
         player.getFamiliarManager().login();
         player.getInterfaceManager().openDefaultTabs();
-        player.getPacketDispatch().sendString("Friends List - World " + GameWorld.getSettings().getWorldId(), 550, 3);
+        setInterfaceText(player, "Friends List - " + ServerConstants.SERVER_NAME + " " + GameWorld.getSettings().getWorldId(), 550, 3);
+        setInterfaceText(player, "When you have finished playing " + ServerConstants.SERVER_NAME + ", always use the button below to logout safely.", 182, 0);
         player.getQuestRepository().syncronizeTab(player);
         player.getInterfaceManager().close();
         player.getEmoteManager().refresh();
@@ -260,11 +247,11 @@ public final class LoginConfiguration {
             return 8;
         } else if (interfaceId == 16) {
             return 6;
-        } else if (interfaceId == 17 || interfaceId == 15 || interfaceId == 18 || interfaceId == 19 || interfaceId == 21 || interfaceId == 22 || interfaceId == 447 || interfaceId == 405) {
-            return 4;
         } else if (interfaceId == 20 || interfaceId == 623) {
             return 5;
-        } else if (interfaceId == 23 || interfaceId == 800) {
+        } else if (interfaceId == 15 || interfaceId == 18 || interfaceId == 19 || interfaceId == 21 || interfaceId == 22 || interfaceId == 447 || interfaceId == 405) {
+            return 4;
+        } else if (interfaceId == 17 || interfaceId == 23 || interfaceId == 800) {
             return 3;
         } else if (interfaceId == 715) {
             return 2;
@@ -289,12 +276,8 @@ public final class LoginConfiguration {
      * @return the last login.
      */
     public static String getLastLogin(Player player) {
-        String lastIp = player.getDetails().accountInfo.getLastUsedIp();
-        if (lastIp.equals("")) {
-            lastIp = player.getDetails().getIpAddress();
-        }
-        player.getDetails().accountInfo.setLastUsedIp(player.getDetails().getIpAddress());
-        String string = "You last logged in @timeAgo from: " + lastIp;
+        player.getPacketDispatch().sendLastLoginInfo();
+        String string = "You last logged in @timeAgo from:";
         long time = player.getDetails().getLastLogin();
         Date lastLogin = new Date(time);
         Date current = new Date();

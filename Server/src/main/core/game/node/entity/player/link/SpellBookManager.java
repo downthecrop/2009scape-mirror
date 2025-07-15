@@ -4,9 +4,11 @@ import core.game.component.Component;
 import core.game.node.entity.combat.spell.MagicSpell;
 import core.game.node.entity.player.Player;
 
-
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+
+import static core.api.ContentAPIKt.setVarbit;
 
 /**
  * Represents a managing class of a players spell book.
@@ -15,7 +17,7 @@ import java.util.Map;
 public final class SpellBookManager {
 
 	/**
-	 * Represents the current interface if of the spellbook.
+	 * Represents the current interface if of the spell book.
 	 */
 	private int spellBook = SpellBook.MODERN.getInterfaceId();
 
@@ -23,25 +25,26 @@ public final class SpellBookManager {
 	 * Constructs a new {@code SpellBookManager} {@code Object}.
 	 */
 	public SpellBookManager() {
-		/**
+		/*
 		 * empty.
 		 */
 	}
 
 	/**
 	 * Sets the spell book.
-	 * @param book
+	 * @param book the spell book.
 	 */
 	public void setSpellBook(SpellBook book) {
 		this.spellBook = book.getInterfaceId();
 	}
 
 	/**
-	 * Updates the
-	 * @param player
+	 * Updates the spell book.
+	 * @param player the player.
 	 */
 	public void update(Player player) {
-		player.getInterfaceManager().openTab(new Component(SpellBook.forInterface(this.spellBook).getInterfaceId()));
+		player.getInterfaceManager().openTab(new Component(spellBook));
+		setVarbit(player, 357, Objects.requireNonNull(SpellBook.forInterface(spellBook)).ordinal());
 	}
 
 	/**
@@ -53,7 +56,7 @@ public final class SpellBookManager {
 	}
 
 	/**
-	 * Represents a characters spellbook.
+	 * Represents a characters spell book.
 	 * @author 'Vexia
 	 * @author Emperor
 	 */

@@ -16,6 +16,7 @@ import core.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
 import core.game.interaction.InteractionListeners;
 import core.game.system.config.ItemConfigParser;
+import org.rs09.consts.Components;
 
 import java.util.ArrayList;
 
@@ -303,11 +304,11 @@ public final class EquipmentContainer extends Container {
 				player.removeAttribute("dfs_spec");
 				player.getProperties().getCombatPulse().setHandler(null);
 				if (!player.getSettings().isSpecialToggled()) {
-                                        setVarp(player, 301, 0);
+					setVarp(player, 301, 0);
 				}
 			}
 			player.getAppearance().setAnimations();
-                        player.updateAppearance(); 
+			player.updateAppearance();
 			player.getSettings().updateWeight();
 			updateBonuses(player);
 		}
@@ -349,7 +350,9 @@ public final class EquipmentContainer extends Container {
 			bonuses[10] += increase;
 		}
 		player.getProperties().setBonuses(bonuses);
-		update(player);
+		if (player.getInterfaceManager().hasMainComponent(Components.EQUIP_SCREEN2_667)) {
+			update(player);
+		}
 	}
 
 	/**
@@ -357,9 +360,6 @@ public final class EquipmentContainer extends Container {
 	 * @param player The player to update for.
 	 */
 	public static void update(Player player) {
-		if (!player.getInterfaceManager().hasMainComponent(667)) {
-			return;
-		}
 		int index = 0;
 		int[] bonuses = player.getProperties().getBonuses();
 		for (int i = 36; i < 50; i++) {
@@ -370,6 +370,7 @@ public final class EquipmentContainer extends Container {
 			String bonusValue = bonus > -1 ? ("+" + bonus) : Integer.toString(bonus);
 			player.getPacketDispatch().sendString(BONUS_NAMES[index++] + bonusValue, 667, i);
 		}
+		player.getSettings().updateWeight();
 		player.getPacketDispatch().sendString("Attack bonus", 667, 34);
 	}
 }

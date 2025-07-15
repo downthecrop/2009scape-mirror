@@ -31,32 +31,13 @@ class MainGameInterface : InterfaceListener {
         }
 
         on(TOPLEVEL_FS){player, _, _, buttonID, _, _ ->
-            when (buttonID) {
-                12 -> setInterfaceText(player,
-                        "When you have finished playing " + settings!!.name + ", always use the button below to logout safely. ",
-                        182,
-                        0
-                )
-                49 -> setInterfaceText(player,
-                        "Friends List - " + settings!!.name + " " + settings!!.worldId,
-                        550,
-                        3
-                )
-                110 -> configureWorldMap(player)
-            }
+            if (buttonID == 110)
+                configureWorldMap(player)
             return@on true
         }
 
-
         on(TOPLEVEL){player, _, _, buttonID, _, _ ->
             when (buttonID) {
-                21 -> {
-                    player.packetDispatch.sendString(
-                        "Friends List -" + settings!!.name + " " + settings!!.worldId,
-                        550,
-                        3
-                    )
-                }
                 38 -> {
                     if (player.getExtension<Any>(WeaponInterface::class.java) === WeaponInterfaces.STAFF) {
                         val c = Component(WeaponInterfaces.STAFF.interfaceId)
@@ -67,12 +48,7 @@ class MainGameInterface : InterfaceListener {
                 }
                 40 -> player.questRepository.syncronizeTab(player)
                 41 -> player.inventory.refresh()
-                66, 110 -> configureWorldMap(player)
-                69 -> player.packetDispatch.sendString(
-                    "When you have finished playing " + settings!!.name + ", always use the button below to logout safely. ",
-                    182,
-                    0
-                )
+                66 -> configureWorldMap(player)
             }
             return@on true
         }
@@ -95,11 +71,11 @@ class MainGameInterface : InterfaceListener {
 
     private fun configureWorldMap(player: Player) {
         if (player.inCombat()) {
-            player.packetDispatch.sendMessage("It wouldn't be very wise opening the world map during combat.")
+            sendMessage(player, "It wouldn't be very wise opening the world map during combat.")
             return
         }
         if (player.locks.isInteractionLocked || player.locks.isMovementLocked) {
-            player.packetDispatch.sendMessage("You can't do this right now.")
+            sendMessage(player, "You can't do this right now.")
             return
         }
         player.interfaceManager.close()
