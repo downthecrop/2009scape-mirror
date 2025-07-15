@@ -319,6 +319,9 @@ class ServerConstants {
         var NEW_PLAYER_ANNOUNCEMENT = true
 
         @JvmField
+        var INAUTHENTIC_CANDLELIGHT_RANDOM = false
+
+        @JvmField
         var HOLIDAY_EVENT_RANDOMS = true
 
         @JvmField

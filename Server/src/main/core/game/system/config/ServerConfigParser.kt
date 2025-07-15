@@ -160,6 +160,7 @@ object ServerConfigParser {
         ServerConstants.GRAFANA_TTL_DAYS = data.getLong("integrations.grafana_log_ttl_days", 7L).toInt()
         ServerConstants.BETTER_DFS = data.getBoolean("world.better_dfs", true)
         ServerConstants.NEW_PLAYER_ANNOUNCEMENT = data.getBoolean("world.new_player_announcement", true)
+        ServerConstants.INAUTHENTIC_CANDLELIGHT_RANDOM = data.getBoolean("world.inauthentic_candlelight_random", false)
         ServerConstants.HOLIDAY_EVENT_RANDOMS = data.getBoolean("world.holiday_event_randoms", true)
         ServerConstants.FORCE_HALLOWEEN_EVENTS = data.getBoolean("world.force_halloween_randoms", false)
         ServerConstants.FORCE_CHRISTMAS_EVENTS = data.getBoolean("world.force_christmas_randoms", false)

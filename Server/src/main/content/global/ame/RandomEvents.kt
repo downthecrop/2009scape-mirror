@@ -10,6 +10,7 @@ import content.global.ame.events.evilchicken.EvilChickenNPC
 import content.global.ame.events.freakyforester.FreakyForesterNPC
 import content.global.ame.events.maze.MazeNPC
 import content.global.ame.events.genie.GenieNPC
+import content.global.ame.events.candlelight.PiousPeteNPC
 import content.global.ame.events.pillory.PilloryNPC
 import content.global.ame.events.rickturpentine.RickTurpentineNPC
 import content.global.ame.events.rivertroll.RiverTrollRENPC
@@ -21,6 +22,7 @@ import content.global.ame.events.strangeplant.StrangePlantNPC
 import content.global.ame.events.swarm.SwarmNPC
 import content.global.ame.events.treespirit.TreeSpiritRENPC
 import content.global.ame.events.zombie.ZombieRENPC
+import core.ServerConstants
 
 import core.api.utils.WeightBasedTable
 import core.api.utils.WeightedItem
@@ -29,6 +31,7 @@ import core.game.node.entity.skill.Skills
 enum class RandomEvents(val npc: RandomEventNPC, val loot: WeightBasedTable? = null, val skillIds: IntArray = intArrayOf(), val type: String = "") {
     SANDWICH_LADY(npc = SandwichLadyRENPC()),
     GENIE(npc = GenieNPC()),
+    CANDLELIGHT(npc = PiousPeteNPC(), skillIds = intArrayOf(Skills.PRAYER)),
     CERTER(npc = CerterNPC(), loot = WeightBasedTable.create(
         WeightedItem(Items.UNCUT_SAPPHIRE_1623,1,1,3.4),
         WeightedItem(Items.KEBAB_1971,1,1,1.7),
@@ -82,6 +85,9 @@ enum class RandomEvents(val npc: RandomEventNPC, val loot: WeightBasedTable? = n
 
         private fun populateMappings() {
             for (event in values()) {
+                if (!ServerConstants.INAUTHENTIC_CANDLELIGHT_RANDOM && event == CANDLELIGHT) {
+                    continue
+                }
                 for (id in event.skillIds) {
                     val list = skillMap[id] ?: ArrayList<RandomEvents>().also { skillMap[id] = it }
                     list.add (event)
