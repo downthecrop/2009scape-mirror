@@ -32,6 +32,11 @@ class FruitTreeChopper : OptionHandler() {
         val plantable = patch.plantable
         plantable ?: return false
 
+        if (SkillingTool.getHatchet(player) == null) {
+            sendMessage(player, "You do not have an axe to use.")
+            return true
+        }
+
         val animation = SkillingTool.getHatchet(player).animation
 
         submitIndividualPulse(player, object : Pulse(animation.duration) {
