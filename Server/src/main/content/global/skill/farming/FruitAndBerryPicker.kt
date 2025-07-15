@@ -5,6 +5,7 @@ import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import content.global.skill.summoning.familiar.GiantEntNPC
+import content.global.skill.summoning.familiar.WolpertingerNPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
@@ -76,8 +77,15 @@ class FruitAndBerryPicker : OptionHandler() {
 
                 animate(player, animation)
                 playAudio(player, Sounds.FARMING_PICK_2437)
-                addItemOrDrop(player, reward.id, reward.amount)
-                rewardXP(player, Skills.FARMING, plantable.harvestXP)
+
+                if (familiar != null && familiar is WolpertingerNPC && patch.patch.type == PatchType.BUSH_PATCH) {
+                    addItemOrDrop(player, reward.id, reward.amount * 2)
+                    rewardXP(player, Skills.FARMING, plantable.harvestXP * 2)
+                }
+                else {
+                    addItemOrDrop(player, reward.id, reward.amount)
+                    rewardXP(player, Skills.FARMING, plantable.harvestXP)
+                }
                 patch.setCurrentState(patch.getCurrentState() - 1)
 
                 if (patch.patch.type == PatchType.CACTUS_PATCH) {

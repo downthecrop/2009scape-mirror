@@ -5,7 +5,6 @@ import content.global.skill.summoning.familiar.Familiar;
 import content.global.skill.summoning.familiar.FamiliarSpecial;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.world.GameWorld;
 
 import static core.api.ContentAPIKt.*;
 
@@ -67,10 +66,13 @@ public final class Pet extends Familiar {
 	@Override
 	public void handleTickActions() {
 		final PetDetails petDetails = details;
-		if (getPet().getFood().length > 0) {
+		if (getPet().getFood().length > 0 && !pet.isGrownCat(itemId)) {
 			if(!SkillcapePerks.isActive(SkillcapePerks.PET_MASTERY, owner)) {
 				double amount = itemId == pet.getBabyItemId() ? 0.025 : 0.018;
-				if (GameWorld.getSettings().isDevMode()) {
+				if (owner.getAttribute("petrate",1) == 0) {
+					amount = 0 ;
+				}
+				else if (owner.getAttribute("petrate",1) == 2) {
 					amount *= 100;
 				}
 				petDetails.updateHunger(amount);
@@ -96,7 +98,10 @@ public final class Pet extends Familiar {
 		double growth = petDetails.getGrowth();
 		double growthrate = pet.getGrowthRate();
 		if (growthrate > 0.000) {
-			if (GameWorld.getSettings().isDevMode()) {
+			if (owner.getAttribute("petrate",1) == 0) {
+				growthrate = 0;
+			}
+			else if (owner.getAttribute("petrate",1) == 2) {
 				growthrate *= 100;
 			}
 			petDetails.updateGrowth(growthrate);

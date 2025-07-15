@@ -16,6 +16,7 @@ import core.game.node.item.Item;
 import core.game.world.map.Location;
 import core.game.world.map.zone.ZoneRestriction;
 import core.game.world.update.flag.context.Animation;
+import org.rs09.consts.Items;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -341,6 +342,9 @@ public final class FamiliarManager {
 		for (int food : pets.getFood()) {
 			if (food == foodId) {
 				player.getInventory().remove(new Item(foodId));
+				if (foodId == Items.BUCKET_OF_MILK_1927) {
+					player.getInventory().add(new Item(Items.BUCKET_1925));
+				}
 				player.getPacketDispatch().sendMessage("Your pet happily eats the " + ItemDefinition.forId(food).getName() + ".");
 				player.animate(new Animation(827));
 				npc.getDetails().updateHunger(-15.0);

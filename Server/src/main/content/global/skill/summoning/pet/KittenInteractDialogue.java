@@ -67,7 +67,7 @@ public final class KittenInteractDialogue extends DialoguePlugin {
 				interpreter.sendDialogues(player, null, "That cat sure loves to be stroked.");
 				stage = 99;
 				break;
-			case 2:// chase-vermine
+			case 2:// chase-vermin
 				end();
 				player.sendChat("Go on puss...kill that rat!");
 				boolean cant = true;

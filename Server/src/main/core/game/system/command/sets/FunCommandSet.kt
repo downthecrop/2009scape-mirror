@@ -217,6 +217,28 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
                 p.graphics(Graphics(369, 0))
             }
         }
+
+        /**
+         * Toggles pet hunger to off, normal, or dev
+         * 0 = No hunger/growth mode (hunger/growth does not progress)
+         * 1 = Normal hunger/growth mode (1x speed)
+         * 2 = Dev hunger/growth mode (100x speed)
+         */
+        define("petrate", Privilege.ADMIN, "petrate <lt>0-2<gt>", "Sets pet hunger and growth to off, normal, or dev."){ player, args ->
+            if(args.size < 2) {
+                notify(player, "Pet mode is currently ${player.getAttribute("petrate", 1)}")
+                return@define
+            }
+            val mode = args[1].toIntOrNull() ?: (-1).also { reject(player, "Please enter a valid number") }
+            if (mode in 0 .. 2) {
+                player.setAttribute("petrate", mode)
+                notify(player, "Setting pet mode to $mode")
+            }
+            else {
+                reject(player, "Only modes 0-2 are valid")
+            }
+        }
+
     }
 
     fun bury(player: Player){
