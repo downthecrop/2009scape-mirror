@@ -46,7 +46,7 @@ class ZogrePotionAndFletchingListeners  : InteractionListener {
 
             if(removeItem(player, used) && removeItem(player, with)) {
                 sendMessage(player, "You add the snake weed to the rogues purse solution and make Relicyms Balm.")
-                addItem(player, Items.RELICYMS_BALM4_4842)
+                addItem(player, Items.RELICYMS_BALM3_4844)
                 rewardXP(player, Skills.HERBLORE, 40.0)
             }
             return@onUseWith true

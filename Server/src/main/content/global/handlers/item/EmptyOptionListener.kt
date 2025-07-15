@@ -17,7 +17,7 @@ class EmptyOptionListener : InteractionListener {
     override fun defineListeners() {
 
         on(EmptyItem.emptyItemList.toIntArray(), IntType.ITEM, "empty", "empty bowl", "empty dish") { player, node ->
-            if (node.name.contains("brew") || node.name.contains("potion") || node.name.lowercase(Locale.getDefault()).contains("poison") || node.name.lowercase(Locale.getDefault()).contains("serum") || node.name.contains("cure") || node.name.contains("mix") || node.name.contains("balm")) {
+            if (node.name.contains("brew") || node.name.contains("potion") || node.name.lowercase(Locale.getDefault()).contains("poison") || node.name.lowercase(Locale.getDefault()).contains("serum") || node.name.contains("cure") || node.name.contains("mix") || node.name.contains("balm") || node.name.contains("Super ")) {
                 replaceSlot(player, node.asItem().slot, Item(EmptyItem.getEmpty(Items.POTION_195)!!), node.asItem())
                 playAudio(player, EmptyItem.getEmptyAudio(Items.POTION_195)!!)
                 return@on true
@@ -70,7 +70,7 @@ class EmptyOptionListener : InteractionListener {
                     emptyItemList.add(item.fullId)
                 }
                 for (item in ItemDefinition.getDefinitions().values)
-                    if (item.name.contains("potion") || item.name.contains("brew") || item.name.contains("poison") || item.name.lowercase(Locale.getDefault()).contains("serum") || item.name.contains("cure") || item.name.contains("mix") || item.name.contains("balm")) {
+                    if (item.name.contains("potion") || item.name.contains("brew") || item.name.contains("poison") || item.name.lowercase(Locale.getDefault()).contains("serum") || item.name.contains("cure") || item.name.contains("mix") || item.name.contains("balm") || item.name.contains("Super ")) {
                         emptyItemList.add(item.id)
                     }
             }
