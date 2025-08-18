@@ -437,7 +437,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
 
         if(playerEmpties.isEmpty()) {
             sendMessage(player, "You have nothing in your inventory that this spell can humidify.")
-            return
+            throw IllegalStateException()
         }
 
         removeRunes(player)
