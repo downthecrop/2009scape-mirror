@@ -8816,7 +8816,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "Big",
+    "examine": "Big, noisy, and scary looking!",
     "melee_animation": "0",
     "range_animation": "0",
     "defence_animation": "0",
@@ -73944,46 +73944,57 @@
     "id": "797"
   },
   {
+    "examine": "His job doesn't look very fun...",
     "name": "Pierre",
     "id": "807"
   },
   {
+    "examine": "He looks kind of stuck up...",
     "name": "Hobbes",
     "id": "808"
   },
   {
+    "examine": "She looks like she enjoys her job.",
     "name": "Louisa",
     "id": "809"
   },
   {
+    "examine": "She looks very nervous...",
     "name": "Mary",
     "id": "810"
   },
   {
+    "examine": "He looks like he spends a lot of time outdoor.",
     "name": "Stanford",
     "id": "811"
   },
   {
+    "examine": "She's dressed in a red top and green trousers.",
     "name": "Anna",
     "id": "814"
   },
   {
+    "examine": "He's dressed all in red.",
     "name": "Bob",
     "id": "815"
   },
   {
+    "examine": "She's wearing a blue top and red trousers.",
     "name": "Carol",
     "id": "816"
   },
   {
+    "examine": "He's dressed all in green.",
     "name": "David",
     "id": "817"
   },
   {
+    "examine": "She's wearing a green top and blue trousers.",
     "name": "Elizabeth",
     "id": "818"
   },
   {
+    "examine": "He's dressed all in blue.",
     "name": "Frank",
     "id": "819"
   },

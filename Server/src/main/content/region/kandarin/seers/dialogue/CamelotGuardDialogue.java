@@ -52,6 +52,6 @@ public final class CamelotGuardDialogue extends DialoguePlugin {
 
 	@Override
 	public int[] getIds() {
-		return new int[] { 812 };
+		return new int[] { 6183, 6184 };
 	}
 }

@@ -1,11 +1,18 @@
 package content.region.fremennik.rellekka.quest.thefremenniktrials
 
+import content.region.kandarin.quest.murdermystery.MurderMystery.Companion.attributePoisonClue
+import core.api.inInventory
+import core.api.setAttribute
 import core.game.dialogue.DialoguePlugin
+import core.game.dialogue.FacialExpression
+import core.game.dialogue.IfTopic
+import core.game.dialogue.Topic
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
+import org.rs09.consts.Items
 import content.data.Quests
 
 @Initializable
@@ -18,12 +25,18 @@ class PoisonSalesman(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        //val murderMysteryStage = player.questRepository.isComplete(Quests.MURDER_MYSTERY)
+        val murderMysteryStage = player.questRepository.getStage(Quests.MURDER_MYSTERY)
         val fremennikTrialsStage = player.questRepository.getStage(Quests.THE_FREMENNIK_TRIALS)
 
         when (stage) {
             START_DIALOGUE -> when (buttonId) {
-                1 -> { player("Err... nevermind"); stage = END_DIALOGUE }
+                1 -> {
+                    when (murderMysteryStage) {
+                        0 -> npcl(FacialExpression.NEUTRAL, "I'm afraid I'm all sold out of poison at the moment. People know a bargain when they see it!").also { stage = END_DIALOGUE }
+                        1 -> playerl(FacialExpression.NEUTRAL, "I'm investigating the murder at the Sinclair house.").also { stage = 50 }
+                        100 -> npcl(FacialExpression.NEUTRAL, "I hear you're pretty smart to have solved the Sinclair Murder!").also { stage = END_DIALOGUE }
+                    }
+                }
                 2 -> { player("Hello."); stage = 10 }
             }
 
@@ -88,6 +101,42 @@ class PoisonSalesman(player: Player? = null) : DialoguePlugin(player) {
                             stage++
                        }
                 45 -> { npc("Well come back when you do!"); stage = END_DIALOGUE }
+
+            //Murder Mystery
+            50 -> npcl(FacialExpression.NEUTRAL, "There was a murder at the Sinclair house??? That's terrible! And I was only there the other day too! They bought the last of my Patented Multi Purpose Poison!").also { stage++ }
+            51 -> showTopics(
+                Topic("Patented Multi Purpose Poison?", 52),
+                Topic("Who did you sell Poison to at the house?", 61),
+                Topic("Can I buy some Poison?", 65),
+                IfTopic("I have this pot I found at the murder scene...", 69, inInventory(player, Items.PUNGENT_POT_1812))
+            )
+            52 -> npcl(FacialExpression.NEUTRAL, "Aaaaah... a miracle of modern apothecaries!").also { stage++ }
+            53 -> npcl(FacialExpression.NEUTRAL, "This exclusive concoction has been tested on all known forms of life and been proven to kill them all in varying dilutions from cockroaches to king dragons!").also { stage++ }
+            54 -> npcl(FacialExpression.NEUTRAL, "So incredibly versatile, it can be used as pest control, a cleansing agent, drain cleaner, metal polish and washes whiter than white,").also { stage++ }
+            55 -> npcl(FacialExpression.NEUTRAL, "all with our uniquely fragrant concoction that is immediately recognisable across the land as Peter Potter's Patented Poison potion!!!").also { stage++ }
+            56 -> sendDialogue("The salesman stops for breath.").also { stage ++ }
+            57 -> npcl(FacialExpression.NEUTRAL, "I'd love to sell you some but I've sold out recently. That's just how good it is! Three hundred and twenty eight people in this area alone cannot be wrong!").also { stage++ }
+            58 -> npcl(FacialExpression.NEUTRAL, "Nine out of Ten poisoners prefer it in controlled tests!").also { stage++ }
+            59 -> npcl(FacialExpression.NEUTRAL, "Can I help you with anything else? Perhaps I can take your name and add it to our mailing list of poison users? We will only send you information related to the use of poison and other Peter Potter Products!").also { stage++ }
+            60 -> playerl(FacialExpression.NEUTRAL, "Uh... no, it's ok. Really.").also { stage = END_DIALOGUE }
+
+            61 -> npcl(FacialExpression.HAPPY, "Well, Peter Potter's Patented Multi Purpose Poison is a product of such obvious quality that I am glad to say I managed to sell a bottle to each of the Sinclairs!").also { stage++ }
+            62 -> npcl(FacialExpression.HAPPY, "Anna, Bob, Carol, David, Elizabeth and Frank all bought a bottle! In fact they bought the last of my supplies!").also { stage++ }
+            63 -> npcl(FacialExpression.HAPPY, "Maybe I can take your name and address and I will personally come and visit you when stocks return?").also { stage++ }
+            64 -> playerl(FacialExpression.THINKING, "Uh...no, it's ok.")
+                .also { setAttribute(player, attributePoisonClue, 1)}
+                .also { stage = END_DIALOGUE }
+
+            65 -> npcl(FacialExpression.NEUTRAL, "I'm afraid I am totally out of stock at the moment after my successful trip to the Sinclairs' House the other day.").also { stage++ }
+            66 -> npcl(FacialExpression.NEUTRAL, "But don't worry! Our factories are working overtime to produce Peter Potter's Patented Multi Purpose Poison!").also { stage++ }
+            67 -> npcl(FacialExpression.NEUTRAL, "Possibly the finest multi purpose poison and cleaner yet available to the general market.").also { stage++ }
+            68 -> npcl(FacialExpression.NEUTRAL, "And its unique fragrance makes it the number one choice for cleaners and exterminators the whole country over!").also { stage = END_DIALOGUE }
+
+            69 -> sendDialogue("You show the poison salesman the pot you found at the murder", "scene with the unusual smell.").also { stage ++ }
+            70 -> npcl(FacialExpression.THINKING, "Hmmm... yes, that smells exactly like my Patented Multi Purpose Poison, but I don't see how it could be. It quite clearly says on the label of all bottles").also { stage++ }
+            71 -> npcl(FacialExpression.THINKING, "'Not to be taken internally - EXTREMELY POISONOUS'.").also { stage++ }
+            72 -> playerl(FacialExpression.THINKING, "Perhaps someone else put it in his wine?").also { stage++ }
+            73 -> npcl(FacialExpression.THINKING, "Yes... I suppose that could have happened...").also { stage = END_DIALOGUE }
             END_DIALOGUE -> end()
         }
         return true

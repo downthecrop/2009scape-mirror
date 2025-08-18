@@ -161,7 +161,7 @@ abstract class DialogueFile {
             return true
         }
         else if (validTopics.size == 1) {
-            val topic = topics[0]
+            val topic = topics.filter { it.text  == validTopics[0] }[0]
             if(topic.toStage is DialogueFile) {
                 val topicFile = topic.toStage as DialogueFile
                 interpreter!!.dialogue.loadFile(topicFile)
