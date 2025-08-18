@@ -1,10 +1,13 @@
 package content.global.bots
 
+import content.data.Quests
 import core.game.bots.*
 import core.game.interaction.DestinationFlag
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListeners
 import core.game.interaction.MovementPulse
+import core.game.node.entity.skill.Skills
+import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
@@ -24,6 +27,11 @@ class VarrockEssenceMiner : Script(){
         when(state){
             State.TO_ESSENCE -> {
                 bot.interfaceManager.close()
+                if (bot.bank.getAmount(Items.PURE_ESSENCE_7936) > 500) {
+                    state = State.TELE_GE
+                    return
+                }
+
                 if(!auburyZone.insideBorder(bot))
                     scriptAPI.walkTo(auburyZone.randomLoc)
                 else {
@@ -99,7 +107,6 @@ class VarrockEssenceMiner : Script(){
                 scriptAPI.sellOnGE(Items.PURE_ESSENCE_7936)
                 state = State.TO_ESSENCE
             }
-
         }
 
     }
@@ -117,5 +124,11 @@ class VarrockEssenceMiner : Script(){
         val script = VarrockEssenceMiner()
         script.bot = SkillingBotAssembler().produce(SkillingBotAssembler.Wealth.POOR,bot.startLocation)
         return script
+    }
+
+    init {
+        quests.add(Quests.RUNE_MYSTERIES)
+        inventory.add(Item(Items.ADAMANT_PICKAXE_1271))
+        skills[Skills.MINING] = 31
     }
 }
