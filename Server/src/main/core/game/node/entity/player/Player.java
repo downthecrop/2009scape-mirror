@@ -617,10 +617,13 @@ public class Player extends Entity {
 		if (this.isArtificial() && killer instanceof NPC) {
 			return;
 		}
-		if (killer instanceof Player && killer.getName() != getName() /* happens if you died via typeless damage from an external cause, e.g. bugs in a dark cave without a light source */ && getWorldTicks() - killer.getAttribute("/save:last-murder-news", 0) >= 500) {
-			Item wep = getItemFromEquipment((Player) killer, EquipmentSlot.WEAPON);
-			sendNews(killer.getUsername() + " has murdered " + getUsername() + " with " + (wep == null ? "their fists." : (StringUtils.isPlusN(wep.getName()) ? "an " : "a ") + wep.getName()));
-			killer.setAttribute("/save:last-murder-news", getWorldTicks());
+		if (killer instanceof Player && killer.getName() != getName()) { // the latter happens if you died via typeless damage from an external cause, e.g. bugs in a dark cave without a light source
+            long unixSeconds = System.currentTimeMillis() / 1000L;
+            if (unixSeconds - killer.getAttribute("/save:last-murder-news", 0L) >= 300) {
+                Item wep = getItemFromEquipment((Player) killer, EquipmentSlot.WEAPON);
+                sendNews(killer.getUsername() + " has murdered " + getUsername() + " with " + (wep == null ? "their fists." : (StringUtils.isPlusN(wep.getName()) ? "an " : "a ") + wep.getName()));
+                killer.setAttribute("/save:last-murder-news", unixSeconds);
+            }
 		}
 		getPacketDispatch().sendMessage("Oh dear, you are dead!");
 		incrementAttribute("/save:"+STATS_BASE+":"+STATS_DEATHS);
