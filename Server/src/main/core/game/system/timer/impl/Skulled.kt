@@ -19,6 +19,11 @@ class Skulled : PersistTimer (1, "skulled", flags = arrayOf(TimerFlag.ClearOnDea
         return false
     }
 
+    override fun onRemoval (entity: Entity) {
+        if (entity !is Player) return
+        entity.skullManager.reset()
+    }
+
     override fun getTimer (vararg args: Any) : RSTimer {
         val t = Skulled()
         t.runInterval = args.getOrNull(0) as? Int ?: 500
