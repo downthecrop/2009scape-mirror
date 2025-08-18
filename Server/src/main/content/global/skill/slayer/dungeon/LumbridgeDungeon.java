@@ -28,7 +28,6 @@ import java.util.Map;
  * Handles the lumbridge dungeon.
  * @author Vexia
  */
-@Initializable
 public final class LumbridgeDungeon extends MapZone implements Plugin<Object> {
 
 	/**
