@@ -93,7 +93,9 @@ class WoodcuttingListener : InteractionListener {
                 ).send()
 
                 //add woodcutting experience
-                player.getSkills().addExperience(Skills.WOODCUTTING, resource.getExperience())
+                rewardAmount = calculateRewardAmount(player, reward) // calculate amount
+                val experience: Double = calculateExperience(player, resource, rewardAmount)
+                player.getSkills().addExperience(Skills.WOODCUTTING, experience, true)
 
                 //nullcheck the fire, and only if it exists award the firemaking XP
                 val fire = Log.forId(reward)

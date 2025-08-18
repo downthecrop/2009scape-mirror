@@ -9,7 +9,6 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
-import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import content.data.Quests
 
@@ -43,8 +42,7 @@ class ThormacDialogue(player: Player? = null) : DialoguePlugin(player) {
             )
 
             ENCHANT_DIALOGUE -> {
-                val cost = if (player.equipment.contains(Items.SEERS_HEADBAND_14631, 1)) 27 else 40
-                npcl(FacialExpression.HAPPY, "Yes, it'll cost you $cost,000 coins for the materials needed though. " +
+                npcl(FacialExpression.HAPPY, "Yes, it'll cost you 40,000 coins for the materials needed though. " +
                         "Which sort of staff did you want enchanting?").also { stage++ }
             }
             ENCHANT_DIALOGUE + 1 -> {

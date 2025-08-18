@@ -12,7 +12,6 @@ class MysticStaffEnchantInterface : InterfaceListener {
     override fun defineInterfaceListeners() {
         on(INTERFACE_332) { player, _, _, buttonID, _, _ ->
             val staff = buttonMap[buttonID] ?: return@on true
-            val price = if (inEquipment(player, Items.SEERS_HEADBAND_14631)) 27000 else 40000
 
             if (!inInventory(player, staff.basicID)) {
                 sendMessage(player, "You don't have a${if (StringUtils.isPlusN(getItemName(staff.basicID))) "n" else ""} ${getItemName(staff.basicID)} to enchant.")
@@ -21,12 +20,12 @@ class MysticStaffEnchantInterface : InterfaceListener {
 
             closeInterface(player)
 
-            if (!inInventory(player, Items.COINS_995, price)) {
-                sendNPCDialogue(player, NPCs.THORMAC_389, "I need ${String.format("%,d", price)} coins for materials. Come back when you have the money!", FacialExpression.NEUTRAL)
+            if (!inInventory(player, Items.COINS_995, 40000)) {
+                sendNPCDialogue(player, NPCs.THORMAC_389, "I need ${String.format("%,d", 40000)} coins for materials. Come back when you have the money!", FacialExpression.NEUTRAL)
                 return@on true
             }
 
-            if (removeItem(player, Item(staff.basicID, 1)) && removeItem(player, Item(Items.COINS_995, price))) {
+            if (removeItem(player, Item(staff.basicID, 1)) && removeItem(player, Item(Items.COINS_995, 40000))) {
                 sendNPCDialogue(player, NPCs.THORMAC_389, "Just a moment... hang on... hocus pocus abra-cadabra... there you go! Enjoy your enchanted staff!", FacialExpression.NEUTRAL)
                 addItem(player, staff.enchantedID, 1)
             }
