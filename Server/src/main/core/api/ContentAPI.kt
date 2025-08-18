@@ -2181,6 +2181,10 @@ fun dumpContainer(player: Player, container: core.game.container.Container): Int
     var dumpedCount = 0
 
     run beginDepositing@{
+        if (hasIronmanRestriction(player, IronmanMode.ULTIMATE)) {
+            return@beginDepositing
+        }
+
         container.toArray().filterNotNull().forEach { item ->
             if (!bank.hasSpaceFor(item)) {
                 sendMessage(player, "You have no more space in your bank.")
