@@ -3,6 +3,7 @@ package core.game.node.entity.combat
 import content.global.skill.skillcapeperks.SkillcapePerks
 import content.global.skill.slayer.SlayerEquipmentFlags
 import content.global.skill.slayer.SlayerManager
+import content.global.skill.slayer.Tasks
 import core.api.*
 import core.api.EquipmentSlot
 import core.game.container.impl.EquipmentContainer
@@ -156,7 +157,10 @@ open class MeleeSwingHandler (vararg flags: SwingHandlerFlag)
                 val amuletId = getItemFromEquipment(entity, EquipmentSlot.NECK)?.id ?: 0
                 if ((amuletId == Items.SALVE_AMULET_4081 || amuletId == Items.SALVE_AMULETE_10588) && checkUndead(victimName)) {
                     effectiveAttackLevel *= if (amuletId == Items.SALVE_AMULET_4081) 1.15 else 1.2
-                } else if (getSlayerTask(entity)?.ids?.contains((entity.properties.combatPulse?.getVictim()?.id ?: 0)) == true) {
+                } else if (getSlayerTask(entity)?.let { task ->
+                        val victimId = entity.properties.combatPulse?.getVictim()?.id ?: 0
+                        task.ids.contains(victimId) || (task == Tasks.KALPHITES && (victimId == 1158)) // Kalphite Queen phase 1
+                    } == true) {
                     effectiveAttackLevel *= SlayerEquipmentFlags.getDamAccBonus(entity) //Slayer Helm/ Black Mask/ Slayer cape
                     if (getSlayerTask(entity)?.dragon == true && inEquipment(entity, Items.DRAGON_SLAYER_GLOVES_12862))
                         effectiveAttackLevel *= 1.1
@@ -192,8 +196,12 @@ open class MeleeSwingHandler (vararg flags: SwingHandlerFlag)
                 if (!flags.contains(SwingHandlerFlag.IGNORE_STAT_BOOSTS_DAMAGE))
                     effectiveStrengthLevel *= styleStrengthBonus
                 else effectiveStrengthLevel *= 64
-                if (getSlayerTask(entity)?.ids?.contains((entity.properties.combatPulse?.getVictim()?.id ?: 0)) == true)
+                if (getSlayerTask(entity)?.let { task ->
+                    val victimId = entity.properties.combatPulse?.getVictim()?.id ?: 0
+                    task.ids.contains(victimId) || (task == Tasks.KALPHITES && (victimId == 1158)) // Kalphite Queen phase 1
+                } == true) {
                     effectiveStrengthLevel *= SlayerEquipmentFlags.getDamAccBonus(entity) //Slayer Helm/ Black Mask/ Slayer cape
+                }
 
                 return (floor((0.5 + (effectiveStrengthLevel / 640.0))) * modifier).toInt()
             }
