@@ -17,6 +17,10 @@ class BattlestaffListener : InteractionListener {
         onUseWith(IntType.ITEM, orbs, battlestaff) { player, used, with ->
             val product = BattlestaffProduct.productMap[used.id] ?: return@onUseWith true
 
+            fun getMaxAmount(_unused: Int = 0): Int {
+                return min(amountInInventory(player, with.id), amountInInventory(player, used.id))
+            }
+
             if (!hasLevelDyn(player, Skills.CRAFTING, product.minimumLevel)) {
                 sendMessage(player, "You need a Crafting level of ${product.minimumLevel} to make this.")
                 return@onUseWith true
@@ -41,7 +45,7 @@ class BattlestaffListener : InteractionListener {
                 withItems(product.producedItemId)
                 create { _, amount ->
 
-                    runTask(player, 2, amount) {
+                    runTask(player, 2, min(amount, getMaxAmount())) {
                         if (amount < 1) return@runTask
 
                         if (removeItem(player, product.requiredOrbItemId) && removeItem(player, Items.BATTLESTAFF_1391)) {
@@ -55,9 +59,7 @@ class BattlestaffListener : InteractionListener {
                     }
                 }
 
-                calculateMaxAmount { _ ->
-                    min(amountInInventory(player, with.id), amountInInventory(player, used.id))
-                }
+                calculateMaxAmount(::getMaxAmount)
             }
 
             return@onUseWith true
