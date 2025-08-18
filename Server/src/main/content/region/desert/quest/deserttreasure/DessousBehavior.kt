@@ -20,8 +20,7 @@ import core.tools.END_DIALOGUE
 import org.rs09.consts.NPCs
 
 class DessousMeleeBehavior : NPCBehavior(NPCs.DESSOUS_1914, NPCs.DESSOUS_1915) {
-
-    var clearTime = 0
+    private var disappearing = false;
 
     override fun canBeAttackedBy(self: NPC, attacker: Entity, style: CombatStyle, shouldSendMessage: Boolean): Boolean {
         if (attacker is Player) {
@@ -34,12 +33,24 @@ class DessousMeleeBehavior : NPCBehavior(NPCs.DESSOUS_1914, NPCs.DESSOUS_1915) {
     }
 
     override fun tick(self: NPC): Boolean{
+        if (disappearing) {
+            return true
+        }
+        val player: Player? = getAttribute<Player?>(self, "target", null)
+        if (player == null || !self.location.withinDistance(self.properties.spawnLocation, self.walkRadius)) {
+            if (player != null && !disappearing) {
+                disappearing = true
+                sendMessage(player, "Dessous returns to his grave, bored of toying with you.")
+                removeAttribute(player, DesertTreasure.attributeDessousInstance)
+            }
+            poofClear(self)
+        }
+
         // Dessous just continually hisses independently of projectile fires.
         if (self.id == NPCs.DESSOUS_1915 && self.properties.combatPulse.isInCombat) {
             animate(self, Animation(1914))
         }
         // This is probably the prayer flicking nonsense.
-        val player: Player? = getAttribute<Player?>(self, "target", null)
         if (self.id == NPCs.DESSOUS_1914 && player != null && player.prayer.get(PrayerType.PROTECT_FROM_MELEE)) {
             self.transform(NPCs.DESSOUS_1915)
             Graphics.send(Graphics(86), self.location)
@@ -47,16 +58,7 @@ class DessousMeleeBehavior : NPCBehavior(NPCs.DESSOUS_1914, NPCs.DESSOUS_1915) {
             self.transform(NPCs.DESSOUS_1914)
             Graphics.send(Graphics(86), self.location)
         }
-        if (clearTime++ > 800) {
-            self.transform(NPCs.DESSOUS_1914)
-            clearTime = 0
-            if (player != null) {
-                removeAttribute(player, DesertTreasure.attributeDessousInstance)
-                sendMessage(player, "Dessous returns to his grave, bored of toying with you.")
-            }
-            poofClear(self)
-        }
-        return false
+        return true
     }
 
     override fun getSwingHandlerOverride(self: NPC, original: CombatSwingHandler): CombatSwingHandler {

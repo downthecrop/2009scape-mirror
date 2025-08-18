@@ -14,8 +14,7 @@ import org.rs09.consts.NPCs
 // https://www.youtube.com/watch?v=xeu6Ncmt1fY
 
 class KamilBehavior : NPCBehavior(NPCs.KAMIL_1913) {
-
-    var clearTime = 0
+    private var disappearing = false
 
     override fun canBeAttackedBy(self: NPC, attacker: Entity, style: CombatStyle, shouldSendMessage: Boolean): Boolean {
         if (attacker is Player) {
@@ -28,10 +27,13 @@ class KamilBehavior : NPCBehavior(NPCs.KAMIL_1913) {
     }
 
     override fun tick(self: NPC): Boolean {
+        if (disappearing) {
+            return true
+        }
         val player: Player? = getAttribute<Player?>(self, "target", null)
-        if (clearTime++ > 800) {
-            clearTime = 0
-            if (player != null) {
+        if (player == null || !self.location.withinDistance(self.properties.spawnLocation, (self.walkRadius*1.5).toInt())) {
+            if (player != null && !disappearing) {
+                disappearing = true
                 sendMessage(player, "Kamil vanishes on an icy wind...")
                 removeAttribute(player, DesertTreasure.attributeKamilInstance)
             }
@@ -64,12 +66,15 @@ class KamilCombatHandler: MultiSwingHandler(
             // This is following RevenantCombatHandler.java, no idea if this is good.
             // I can't be bothered to fix fucking frozen. The player can hit through frozen. What the fuck is frozen for then, to glue his fucking legs???
             if (RandomFunction.roll(3) && !hasTimerActive(victim, "frozen") && !hasTimerActive(victim, "frozen:immunity")) {
+                sendChat(entity as NPC, "Sallamakar Ro!") // Salad maker roll.
+                impact(victim, 5)
+                impact(victim, 5)
                 registerTimer(victim, spawnTimer("frozen", 7, true))
                 sendMessage(victim, "You've been frozen!")
-                sendChat(entity as NPC, "Sallamakar Ro!") // Salad maker roll.
+                // FIXME: before the below vfx hits, there should be another one that looks kinda like a wind wave exploding at the player's feet. Hope somebody finds the id.
                 sendGraphics(539, victim.location)
                 victim.properties.combatPulse.stop() // Force the victim to stop fighting. Whatever.
-                // Audio?
+                // FIXME: sfx
             }else {
                 animate(entity!!, Animation(440))
             }

@@ -14,8 +14,23 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 
 class DamisBehavior : NPCBehavior(NPCs.DAMIS_1974, NPCs.DAMIS_1975) {
+    private var disappearing = false
 
-    var clearTime = 0
+    override fun tick(self: NPC): Boolean {
+        if (disappearing) {
+            return true
+        }
+        val player: Player? = getAttribute<Player?>(self, "target", null)
+        if (player == null || !self.location.withinDistance(self.properties.spawnLocation, self.walkRadius)) {
+            if (player != null && !disappearing) {
+                disappearing = true
+                sendMessage(player, "Damis has vanished once more into the shadows...")
+                removeAttribute(player, DesertTreasure.attributeDamisInstance)
+            }
+            poofClear(self)
+        }
+        return true
+    }
 
     override fun canBeAttackedBy(self: NPC, attacker: Entity, style: CombatStyle, shouldSendMessage: Boolean): Boolean {
         if (attacker is Player) {
@@ -25,19 +40,6 @@ class DamisBehavior : NPCBehavior(NPCs.DAMIS_1974, NPCs.DAMIS_1975) {
             sendMessage(attacker, "It's not after you...")
         }
         return false
-    }
-
-    override fun tick(self: NPC): Boolean {
-        val player: Player? = getAttribute<Player?>(self, "target", null)
-        if (clearTime++ > 800) {
-            clearTime = 0
-            if (player != null) {
-                sendMessage(player, "Damis has vanished once more into the shadows...")
-                removeAttribute(player, DesertTreasure.attributeDamisInstance)
-            }
-            poofClear(self)
-        }
-        return true
     }
 
     override fun beforeDamageReceived(self: NPC, attacker: Entity, state: BattleState) {
@@ -64,8 +66,6 @@ class DamisBehavior : NPCBehavior(NPCs.DAMIS_1974, NPCs.DAMIS_1975) {
             victim.skills.decrementPrayerPoints(5.0)
         }
     }
-
-
 
     override fun onDeathFinished(self: NPC, killer: Entity) {
         if (killer is Player) {

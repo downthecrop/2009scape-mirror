@@ -14,8 +14,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 
 class FareedBehavior : NPCBehavior(NPCs.FAREED_1977) {
-
-    var clearTime = 0
+    private var disappearing = false
 
     override fun canBeAttackedBy(self: NPC, attacker: Entity, style: CombatStyle, shouldSendMessage: Boolean): Boolean {
         if (attacker is Player) {
@@ -28,10 +27,13 @@ class FareedBehavior : NPCBehavior(NPCs.FAREED_1977) {
     }
 
     override fun tick(self: NPC): Boolean {
+        if (disappearing) {
+            return true
+        }
         val player: Player? = getAttribute<Player?>(self, "target", null)
-        if (clearTime++ > 800) {
-            clearTime = 0
-            if (player != null) {
+        if (player == null || !self.location.withinDistance(self.properties.spawnLocation, self.walkRadius)) {
+            if (player != null && !disappearing) {
+                disappearing = true
                 sendMessage(player, "Fareed has lost interest in you, and returned to his flames.")
                 removeAttribute(player, DesertTreasure.attributeFareedInstance)
             }
@@ -50,14 +52,14 @@ class FareedBehavior : NPCBehavior(NPCs.FAREED_1977) {
         if (victim is Player) {
             if (!inEquipment(victim, Items.ICE_GLOVES_1580)) {
                 val weapon = getItemFromEquipment(victim, EquipmentSlot.WEAPON)
-                if(weapon != null) {
+                if (weapon != null) {
                     EquipHandler.unequip(victim, EquipmentContainer.SLOT_WEAPON, weapon.id)
+                    sendMessage(victim, "The heat from the warrior causes you to drop your weapon.")
                 }
 //                val weapon = getItemFromEquipment(victim, EquipmentSlot.WEAPON)
 //                if(weapon != null && removeItem(victim, weapon.id, Container.EQUIPMENT)) {
 //                    addItemOrDrop(victim, weapon.id)
 //                }
-                sendMessage(victim, "The heat from the warrior causes you to drop your weapon.")
             }
         }
     }
@@ -72,5 +74,4 @@ class FareedBehavior : NPCBehavior(NPCs.FAREED_1977) {
             }
         }
     }
-
 }

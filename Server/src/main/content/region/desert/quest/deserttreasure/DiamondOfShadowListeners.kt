@@ -261,5 +261,4 @@ class ShadowDungeonAttack : MapArea {
             }
         }
     }
-
 }
