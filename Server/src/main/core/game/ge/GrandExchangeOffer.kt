@@ -146,10 +146,7 @@ class GrandExchangeOffer() {
                 visualize(player)
                 stmt.close()
 
-                val username = if (getAttribute(player ?: return@run, "ge-exclude", false)) "?????"
-                else player?.username ?: "?????"
-
-                Discord.postNewOffer(sell, itemID, offeredValue, amount, username)
+                Discord.postNewOffer(sell, itemID, offeredValue, amount, player?.username ?: return@run)
             }
         }
     }

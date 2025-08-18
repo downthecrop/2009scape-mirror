@@ -101,13 +101,6 @@ class GrandExchange : StartupListener, Commands {
             PriceIndex.allowItem(id)
             notify(player, "Allowed ${getItemName(id)} for GE trade.")
         }
-
-        define("geprivacy", Privilege.STANDARD) {player, _ ->
-            val current = getAttribute(player, "ge-exclude", false)
-            val new = !current
-            notify(player, "Your name is now ${if (new) colorize("%RHIDDEN") else colorize("%RSHOWN")}.")
-            setAttribute(player, "/save:ge-exclude", new)
-        }
     }
 
     companion object {
@@ -231,8 +224,7 @@ class GrandExchange : StartupListener, Commands {
             //GrandExchangeRecords.getInstance(player).update(offer)
 
             if (offer.sell && !player.isArtificial) {
-                val username = if (getAttribute(player, "ge-exclude", false)) "?????" else player.username
-                Repository.sendNews(username + " just offered " + offer.amount + " " + getItemName(offer.itemID) + " on the GE.")
+                sendNews(player.username + " just offered " + offer.amount + " " + getItemName(offer.itemID) + " on the GE.")
             }
 
             if (ServerConstants.I_AM_A_CHEATER) {
