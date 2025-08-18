@@ -131,13 +131,9 @@ class GrandExchange : StartupListener, Commands {
 
         @JvmStatic
         fun getRecommendedPrice(itemID: Int, from_bot: Boolean = false): Int {
-            var base = max(PriceIndex.getValue(itemID), getItemDefPrice(itemID))
+            var base = PriceIndex.getValue(itemID)
             if (from_bot) base = (max(BotPrices.getPrice(itemID), base) * 1.10).toInt()
             return base
-        }
-
-        private fun getItemDefPrice(itemID: Int): Int {
-            return max(itemDefinition(itemID).getConfiguration(ItemConfigParser.GE_PRICE) ?: 0, itemDefinition(itemID).value)
         }
 
         @JvmStatic
