@@ -7,6 +7,9 @@ import core.api.*
 import core.game.system.timer.impl.AntiMacro
 import core.game.world.map.Location
 import core.game.world.map.zone.impl.WildernessZone
+import content.region.wilderness.handlers.KingBlackDragonArea
+import core.game.world.map.zone.MapZone
+import core.game.world.map.zone.ZoneBuilder
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.rs09.consts.Items
@@ -129,6 +132,28 @@ class RandomEventTests {
             timer.nextExecution = getWorldTicks() + 5
             TestUtils.advanceTicks(10, false)
             Assertions.assertNull(AntiMacro.getEventNpc(p))
+        }
+    }
+
+    @Test fun randomEventShouldNotSpawnInKingBlackDragonLair() {
+        TestUtils.getMockPlayer("antimacronospawninkbdlair").use { p ->
+            val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer was null!")
+            TestUtils.advanceTicks(5, false)
+
+            // Manually configure KBD lair zone like ClassScanner does for MapArea instances
+            val kbdArea = KingBlackDragonArea()
+            val zone = object : MapZone(kbdArea.javaClass.simpleName + "MapArea", true, *kbdArea.getRestrictions()) {}
+            for(border in kbdArea.defineAreaBorders()) zone.register(border)
+            ZoneBuilder.configure(zone)
+            
+            val kbdLocation = Location.create(2273, 4698, 0) // KBD spawn location
+            p.location = kbdLocation
+
+            Assertions.assertEquals(kbdLocation, p.location)
+
+            timer.nextExecution = getWorldTicks() + 5
+            TestUtils.advanceTicks(10, false)
+            Assertions.assertNull(AntiMacro.getEventNpc(p), "Random event should not spawn in KBD lair but one was found!")
         }
     }
 
