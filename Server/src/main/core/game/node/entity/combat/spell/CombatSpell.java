@@ -1,5 +1,6 @@
 package core.game.node.entity.combat.spell;
 
+import content.global.skill.summoning.familiar.Familiar;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.combat.InteractionType;
@@ -13,6 +14,7 @@ import core.game.node.entity.player.link.SpellBookManager;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.Item;
 import core.game.world.map.RegionManager;
+import core.game.world.map.zone.impl.WildernessZone;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import org.rs09.consts.Sounds;
@@ -106,27 +108,42 @@ public abstract class CombatSpell extends MagicSpell {
 
 	}
 
-	/**
-	 * Gets a list of possible targets for a multihitting spell.
-	 * @param entity The caster of the spell.
-	 * @param target The victim.
-	 * @param max The max amount of victims.
-	 * @return The list of targets.
-	 */
-	public List<Entity> getMultihitTargets(Entity entity, Entity target, int max) {
-		List<Entity> list = new ArrayList<>(20);
-		list.add(target);
-		boolean npc = target instanceof NPC;
-		for (Entity e : npc ? RegionManager.getSurroundingNPCs(target) : RegionManager.getSurroundingPlayers(target)) {
-			if (e != target && e != entity && CombatStyle.MAGIC.getSwingHandler().canSwing(entity, e) != InteractionType.NO_INTERACT) {
-				list.add(e);
+    /**
+     * Gets a list of valid targets for a multihitting spell.
+     * @param entity The caster of the spell.
+     * @param target The primary victim.
+     * @param max    The maximum number of extra victims that may be hit.
+     * @return The list of targets (the primary target is always at index 0).
+     */
+    public List<Entity> getMultihitTargets(Entity entity, Entity target, int max) {
+		List<Entity> victims = new ArrayList<>(20);
+		victims.add(target);
+
+        List<Entity> surrounding = new ArrayList<>();
+        surrounding.addAll(RegionManager.getSurroundingPlayers(target));
+        surrounding.addAll(RegionManager.getSurroundingNPCs(target));
+
+        for (Entity e : surrounding) {
+            if (e == target || e == entity) {
+                continue;
+            }
+            if (CombatStyle.MAGIC.getSwingHandler().canSwing(entity, e) == InteractionType.NO_INTERACT) {
+				continue;
+			}
+            if (e instanceof Familiar) {
+				Player owner = ((Familiar) e).getOwner();
+				if (owner != entity && WildernessZone.getInstance().continueAttack(entity, owner, CombatStyle.MAGIC, true)) {
+					victims.add(e);
+				}
+			} else {
+				victims.add(e);
 			}
 			if (--max < 1) {
 				break;
 			}
 		}
-		return list;
-	}
+		return victims;
+    }
 
 	/**
 	 * Visualizes the impact.
