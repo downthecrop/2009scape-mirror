@@ -826,43 +826,53 @@ class TheDigSiteListeners : InteractionListener {
         }
 
         on(Items.UNIDENTIFIED_LIQUID_702, ITEM, "drop") { player, node ->
-            removeItem(player, node)
-            impact(player, 25)
-            sendChat(player, "Ow! The liquid exploded!")
-            sendMessage(player, "You were injured by the burning liquid.")
-            return@on true
+            if (removeItem(player, node)) {
+                impact(player, 25)
+                sendChat(player, "Ow! The liquid exploded!")
+                sendMessage(player, "You were injured by the burning liquid.")
+                return@on true
+            }
+            return@on false
         }
 
         on(Items.NITROGLYCERIN_703, ITEM, "drop") { player, node ->
-            removeItem(player, node)
-            impact(player, 35)
-            sendChat(player, "Ow! The nitroglycerin exploded!")
-            sendMessage(player, "You were injured by the burning liquid.")
-            return@on true
+            if (removeItem(player, node)) {
+                impact(player, 35)
+                sendChat(player, "Ow! The nitroglycerin exploded!")
+                sendMessage(player, "You were injured by the burning liquid.")
+                return@on true
+            }
+            return@on false
         }
 
         on(Items.MIXED_CHEMICALS_705, ITEM, "drop") { player, node ->
-            removeItem(player, node)
-            impact(player, 45)
-            sendChat(player, "Ow! The liquid exploded!")
-            sendMessage(player, "You were injured by the burning liquid.")
-            return@on true
+            if (removeItem(player, node)) {
+                impact(player, 45)
+                sendChat(player, "Ow! The liquid exploded!")
+                sendMessage(player, "You were injured by the burning liquid.")
+                return@on true
+            }
+            return@on false
         }
 
         on(Items.MIXED_CHEMICALS_706, ITEM, "drop") { player, node ->
-            removeItem(player, node)
-            impact(player, 55)
-            sendChat(player, "Ow! The liquid exploded!")
-            sendMessage(player, "You were injured by the burning liquid.")
-            return@on true
+            if (removeItem(player, node)) {
+                impact(player, 55)
+                sendChat(player, "Ow! The liquid exploded!")
+                sendMessage(player, "You were injured by the burning liquid.")
+                return@on true
+            }
+            return@on false
         }
 
         on(Items.CHEMICAL_COMPOUND_707, ITEM, "drop") { player, node ->
-            removeItem(player, node)
-            impact(player, 65)
-            sendChat(player, "Ow! The liquid exploded!")
-            sendMessage(player, "You were injured by the burning liquid.")
-            return@on true
+            if (removeItem(player, node)) {
+                impact(player, 65)
+                sendChat(player, "Ow! The liquid exploded!")
+                sendMessage(player, "You were injured by the burning liquid.")
+                return@on true
+            }
+            return@on false
         }
 
         // Scenery not tied to quest
