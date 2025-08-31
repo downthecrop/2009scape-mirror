@@ -16,7 +16,7 @@ class WaterfiendBehavior : NPCBehavior(*Tasks.WATERFIENDS.ids) {
             true,
             SwitchAttack(
                     CombatStyle.MAGIC.swingHandler,
-                    Animation(1581, Priority.HIGH),
+                    Animation(302, Priority.HIGH), // 299 = attack animation, 302 = idle animation. (authentic bug)
                     null,
                     null,
                     Projectile.create(
@@ -33,7 +33,7 @@ class WaterfiendBehavior : NPCBehavior(*Tasks.WATERFIENDS.ids) {
             ),
             SwitchAttack(
                     CombatStyle.RANGE.swingHandler,
-                    Animation(1581, Priority.HIGH),
+                    Animation(302, Priority.HIGH), // 299 = attack animation, 302 = idle animation. (authentic bug)
                     null,
                     null,
                     Projectile.create(
