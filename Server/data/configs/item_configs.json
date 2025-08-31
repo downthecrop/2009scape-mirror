@@ -89019,7 +89019,7 @@
     "id": "10383"
   },
   {
-    "requirements": "{1,70}-{4,40}",
+    "requirements": "{1,40}-{4,70}",
     "ge_buy_limit": "2",
     "examine": "Saradomin blessed dragonhide vambraces.",
     "durability": null,
@@ -90178,9 +90178,13 @@
     "weight": "1.1",
     "attack_speed": "5",
     "weapon_interface": "2",
+    "equip_audio": "2229",
     "render_anim": "2586",
+    "defence_anim": "397",
     "equipment_slot": "3",
+    "attack_anims": "395,395,401,395",
     "destroy_message": "I can obtain a replacement axe from the Burthorpe Slayer Master.",
+    "attack_audios": "2498,2498,2497,2498",
     "name": "Blessed axe",
     "tradeable": "false",
     "archery_ticket_price": "0",
@@ -130463,7 +130467,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "14497",
-    "bonuses": "0,0,0,20,0,0,0,0,20,0,20,0,0,2,0"
+    "bonuses": "0,0,0,20,0,0,0,0,20,0,20,0,2,0,0"
   },
   {
     "shop_price": "120000",
@@ -130519,7 +130523,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "14501",
-    "bonuses": "0,0,0,15,0,0,0,0,15,0,15,0,0,2,0"
+    "bonuses": "0,0,0,15,0,0,0,0,15,0,15,0,2,0,0"
   },
   {
     "shop_price": "80000",
