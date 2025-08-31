@@ -1,6 +1,5 @@
 package content.global.skill.hunter;
 
-import content.data.skill.SkillingPets;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.Skills;
@@ -121,10 +120,6 @@ public class TrapNode {
 	 */
 	public int[] getObjectIds() {
 		return objectIds;
-	}
-
-	public SkillingPets getPet() {
-		return null;
 	}
 
 }

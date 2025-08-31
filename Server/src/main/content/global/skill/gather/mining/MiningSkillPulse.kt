@@ -3,7 +3,6 @@ package content.global.skill.gather.mining
 import core.api.*
 import core.game.event.ResourceProducedEvent
 import core.cache.def.impl.ItemDefinition
-import content.data.skill.SkillingPets
 import core.game.node.Node
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.npc.drop.DropFrequency
@@ -132,7 +131,6 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
             rewardAmount = calculateRewardAmount(reward) // calculate amount
 
             player.dispatch(ResourceProducedEvent(reward, rewardAmount, node))
-            SkillingPets.checkPetDrop(player, SkillingPets.GOLEM) // roll for pet
 
             // Reward mining experience
             val experience = resource!!.experience * rewardAmount

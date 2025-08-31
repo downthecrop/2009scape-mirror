@@ -1,6 +1,5 @@
 package content.global.skill.gather.mining
 
-import content.data.skill.SkillingPets
 import content.data.skill.SkillingTool
 import content.global.skill.skillcapeperks.SkillcapePerks
 import content.global.activity.shootingstar.StarBonus
@@ -67,7 +66,6 @@ class MiningListener : InteractionListener {
             rewardAmount = calculateRewardAmount(player, isEssence, reward) // calculate amount
 
             player.dispatch(ResourceProducedEvent(reward, rewardAmount, node))
-            SkillingPets.checkPetDrop(player, SkillingPets.GOLEM) // roll for pet
 
             // Reward mining experience
             val experience = resource!!.experience * rewardAmount

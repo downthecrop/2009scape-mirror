@@ -1,6 +1,5 @@
 package content.global.skill.hunter;
 
-import content.data.skill.SkillingPets;
 import core.game.node.entity.skill.SkillPulse;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
@@ -95,13 +94,6 @@ public final class TrapDismantlePulse extends SkillPulse<Scenery> {
 		if (wrapper.getType().getSettings().clear(wrapper, 1)) {
 			instance.deregister(wrapper);
 			if (wrapper.isCaught()) {
-				if (wrapper.getType().equals(Traps.BOX_TRAP)) {
-					for (int i : wrapper.getReward().getNpcIds()) {
-						if (i == 5080 || i == 5079) {
-							SkillingPets.checkPetDrop(player, i == 5080 ? SkillingPets.BABY_RED_CHINCHOMPA : SkillingPets.BABY_GREY_CHINCHOMPA);
-						}
-					}
-				}
 				player.getSkills().addExperience(Skills.HUNTER, wrapper.getReward().getExperience(), true);
 			}			
 			player.getPacketDispatch().sendMessage("You dismantle the trap.");

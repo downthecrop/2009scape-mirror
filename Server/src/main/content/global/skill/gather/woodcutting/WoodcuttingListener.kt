@@ -1,6 +1,5 @@
 package content.global.skill.gather.woodcutting
 
-import content.data.skill.SkillingPets
 import content.data.skill.SkillingTool
 import content.data.tables.BirdNest
 import content.global.skill.farming.FarmingPatch.Companion.forObject
@@ -109,7 +108,6 @@ class WoodcuttingListener : InteractionListener {
 
             if (reward > 0) {
                 rewardAmount = calculateRewardAmount(player, reward) // calculate amount
-                SkillingPets.checkPetDrop(player, SkillingPets.BEAVER) // roll for pet
 
                 //add experience
                 val experience: Double = calculateExperience(player, resource, rewardAmount)

@@ -8,7 +8,6 @@ import core.game.event.ResourceProducedEvent;
 import core.cache.def.impl.ItemDefinition;
 import core.game.container.impl.EquipmentContainer;
 import core.game.dialogue.FacialExpression;
-import content.data.skill.SkillingPets;
 import core.game.node.entity.impl.Animator;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
@@ -157,7 +156,6 @@ public class WoodcuttingSkillPulse extends Pulse {
         if (reward > 0) {
             reward = calculateReward(reward); // calculate rewards
             rewardAmount = calculateRewardAmount(reward); // calculate amount
-            SkillingPets.checkPetDrop(player, SkillingPets.BEAVER); // roll for pet
 
             //add experience
             double experience = calculateExperience(resource.reward, rewardAmount);

@@ -1,6 +1,5 @@
 package content.global.skill.gather.fishing
 
-import content.data.skill.SkillingPets
 import content.global.skill.fishing.Fish
 import content.global.skill.fishing.FishingOption
 import content.global.skill.skillcapeperks.SkillcapePerks
@@ -124,7 +123,6 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
                     updateSkillTask()
                 }
                 player.dispatch(ResourceProducedEvent(fish!!.id, 1, node!!))
-                SkillingPets.checkPetDrop(player, SkillingPets.HERON)
                 val item = fish!!
                 if (isActive(SkillcapePerks.GREAT_AIM, player) && RandomFunction.random(100) <= 5) {
                     addItemOrDrop(player, item.id)
