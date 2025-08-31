@@ -2,6 +2,7 @@ package content.region.desert.bandits.handlers
 
 import core.api.God
 import core.api.hasGodItem
+import core.api.inEquipment
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.npc.AbstractNPC
@@ -9,6 +10,7 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.plugin.Initializable
+import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 
 @Initializable
@@ -28,7 +30,7 @@ class BanditNPC(id: Int = NPCs.BANDIT_1926, location: Location? = null) : Abstra
                     sendChat("Time to die, Saradominist filth!")
                     attack(player)
                     break
-                } else if (hasGodItem(player, God.ZAMORAK)) {
+                } else if (hasGodItem(player, God.ZAMORAK) || inEquipment(player, Items.DAGONHAI_HAT_14499) || inEquipment(player, Items.DAGONHAI_ROBE_TOP_14497) || inEquipment(player, Items.DAGONHAI_ROBE_BOTTOM_14501)) {
                     sendChat("Prepare to suffer, Zamorakian scum!")
                     attack(player)
                     break
