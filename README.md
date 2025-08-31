@@ -125,6 +125,78 @@ Start the game server with the included run script. Use `./run -h` for more info
 
 Start the game server with `run-server.bat`
 
+#### Docker
+
+Make sure [Docker Engine](https://docs.docker.com/engine/install/) & [Docker Compose](https://docs.docker.com/compose/install/) plugin are installed first:
+
+Go to the project root where the git repository is cloned into:
+
+```bash
+cd /path/to/project-dir
+```
+
+To configure the database, copy the mysql env file template to a env file in the project root:
+
+```bash
+cp mysql.env.example mysql.env
+```
+
+Customize the env file however necessary.
+
+Create a new directory called 'config' into the project root.
+
+```bash
+mkdir config
+```
+
+Copy the server config file template in the config directory:
+
+```bash
+cp Server/worldprops/default.conf config/default.conf
+```
+
+Edit the server configuration file as per needed.
+
+Go to the project root directory and execute:
+
+```bash
+docker compose up --build
+```
+
+Which will build the docker image using the local Dockerfile and starts the server and database containers.
+
+The previous up command should be run every time the server sources are modified to propagate the changes to the container.
+
+For the first time, the server compilation process takes a long time. Grab some coffee in the meanwhile.
+
+You can check (and follow) the containers logs by running the following in the project root directory (-f for follow and Ctrl+C to stop):
+
+```bash
+docker compose logs -f
+```
+
+Any compilation or runtime errors will be logged here.
+
+If you have already compiled the server and made no changes to the sources, you can simply run without the build option (however it will be cached anyways):
+
+```bash
+docker compose up
+```
+
+To later restart the server to apply simple configuration changes, in the project root directory run:
+
+```bash
+docker compose restart server
+```
+
+To shut down / take down the server, in the project root directory run:
+
+```bash
+docker compose up --build
+```
+
+The database files, build cache and config files will be persisted on the host filesystem for easy backup management.
+
 ### License
 
 We use the AGPL 3.0 license, which can be found [here](https://www.gnu.org/licenses/agpl-3.0.en.html). Please be sure to read and understand the license. Failure to follow the guidelines outlined in the license will result in legal action. If you know or hear of anyone breaking this license, please send a report, with proof, to Red Bracket#8151, ceikry#2724, or woahscam#8535 on discord or email woahscam@hotmail.com. **We WILL NOT change the license to fit your needs.**

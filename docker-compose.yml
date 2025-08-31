@@ -1,29 +1,33 @@
-version: '3.3'
 services:
-  app:
+  server:
     build: .
-    container_name: "2009scape_app"
     depends_on:
-      - database
-    restart: unless-stopped
-    volumes:
-      - "2009scape_app:/app"
-    ports:
-      - "43595:43595"
-
-  database:
-    image: mysql:5.7
-    container_name: "2009scape_db"
+      - db
     restart: always
-    ports:
-      - "3306:3306"
     volumes:
-      - "2009scape_db:/var/lib/mysql"
+      - "bcache:/app/Server/target"
+      - "mcache:/root/.m2"
+      - "./Server/data:/app/Server/data"
+      - "./config:/app/Server/worldprops"
+    ports:
+      - "43594-43600:43594-43600"
+
+  db:
+    # current LTS (Long-Term Support) version
+    image: mariadb:11.4-noble
+  healthcheck:
+    test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+    start_period: 30s
+    interval: 60s
+    timeout: 10s
+    retries: 3
+    restart: always
+    volumes:
+      - "./db:/var/lib/mysql"
       - "./Server/db_exports/global.sql:/docker-entrypoint-initdb.d/global.sql"
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_ROOT_PASSWORD: ""
-      MYSQL_ROOT_USER: "root"
+    env_file:
+      - mysql.env
+
 volumes:
-  2009scape_app:
-  2009scape_db:
+  bcache:
+  mcache:

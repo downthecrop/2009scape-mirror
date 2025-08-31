@@ -1,0 +1,30 @@
+# Local volumes
+/config
+/data
+/db
+
+# Updated through volumes
+Server/data
+Server/worldprops
+
+# Env files containing secrets
+/.env
+/*.env
+
+# Log files
+logs
+*.log
+
+# Git files
+.git
+.gitattributes
+.gitignore
+
+# Basic stuff
+*.md
+LICENSE
+.gitlab-ci.yml
+
+# Docker files
+docker-compose.yml
+Dockerfile

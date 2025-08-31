@@ -18,7 +18,8 @@ Server/data/global_kill_stats.json
 Server/ge_test.db
 Server/latestdump.txt
 Management-Server/managementprops/
-Server/worldprops/
+Server/worldprops/*
+!Server/worldprops/default.conf
 
 **/.idea/workspace.xml
 **/.idea/tasks.xml
@@ -32,3 +33,12 @@ gradle
 build/kotlin/sessions/
 **/*.iml
 Server/hasRan.txt
+
+# Local volumes
+/config
+/data
+/db
+
+# Env files containing secrets
+/.env
+/*.env

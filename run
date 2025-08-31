@@ -3,15 +3,11 @@ SCRIPT_DIR=$(cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P)
 LOG_DIR=$SCRIPT_DIR/logs
 BUILD_DIR=$SCRIPT_DIR/builddir
 GS_SRC=$SCRIPT_DIR/Server
-MS_SRC=$SCRIPT_DIR/Management-Server
 
 FORCE_REBUILD=0
 REFRESH_BUILD=1
 
-GAMESERVER_ONLY=1
-
 GS_EXEC="cd $GS_SRC && java -Dnashorn.args=--no-deprecation-warning -jar $BUILD_DIR/server.jar"
-MS_EXEC="cd $MS_SRC && java -Dnashorn.args=--no-deprecation-warning -jar $BUILD_DIR/ms.jar"
 
 # 0: parallel
 # 1: fancy tmux
@@ -20,13 +16,12 @@ RUN_MODE=0
 
 help()
 {
-    echo "Usage: $0 [-h] [-q] [-r] [-t] [-x] [-g] [-e <filename>] [-o <filename>]"
+    echo "Usage: $0 [-h] [-q] [-r] [-t] [-x] [-e <filename>] [-o <filename>]"
     echo "  -h: Display this message."
     echo "  -q: Don't perform the incremental build."
     echo "  -r: Force clean rebuild."
     echo "  -t: Only run tests, not the JARs."
     echo "  -x: Run in a fancy tmux session."
-    echo "  -g: Build + run only the game server (no management server)."
     echo "  -e: Write STDERR to 'logs/filename' as well as the terminal.";
     echo "  -o: Write STDOUT to 'logs/filename' as well as the terminal."
 }
@@ -39,31 +34,17 @@ error()
 
 rebuild_project()
 {
-    if [ $GAMESERVER_ONLY ]; then
-      $SCRIPT_DIR/build -qgcg
-    else
-      $SCRIPT_DIR/build -qmgcmg
-    fi
+    "$SCRIPT_DIR/build" -qgc
 }
 
 refresh_project()
 {
-    if [ $GAMESERVER_ONLY ]; then
-      $SCRIPT_DIR/build -qg
-    else
-      $SCRIPT_DIR/build -qmg
-    fi
+    "$SCRIPT_DIR/build" -qg
 }
 
 verify_binaries_exist()
 {
-    if ! [ $GAMESERVER_ONLY ]; then
-      if [ ! -f $SCRIPT_DIR/builddir/ms.jar ]; then
-          error "Management server binary does not exist.";
-      fi
-    fi
-
-    if [ ! -f $SCRIPT_DIR/build/server.jar ]; then
+    if [ ! -f "$SCRIPT_DIR/build/server.jar" ]; then
         error "Game server binary does not exist.";
     fi
 }
@@ -76,11 +57,7 @@ run_server_parallel()
 
     echo "Running in parallel. All logs redirected to proper files."
 
-    if [ $GAMESERVER_ONLY ]; then
-        sh -c "$GS_EXEC" & wait
-    else
-        sh -c "$MS_EXEC > $LOG_DIR/ms_stdout.log 2> $LOG_DIR/ms_stderr.log & $GS_EXEC" & wait
-    fi
+    sh -c "$GS_EXEC" & wait
 }
 
 run_server_tmux()
@@ -89,21 +66,16 @@ run_server_tmux()
         error "tmux is not installed. Install tmux or don't use this option."
     fi
 
-    if [ $GAMESERVER_ONLY ]; then
-        tmux new-session "$GS_EXEC"
-    else
-        tmux new-session "$MS_EXEC" \; \
-            split-window -h "$GS_EXEC"
-    fi
+    tmux new-session "$GS_EXEC"
 }
 
 run_server_tests()
 {
-    cd "$GS_SRC" || error "Could not change to GameServer source directory."
+    cd "$GS_SRC" || error "Could not change to game server source directory."
     sh mvnw test
 }
 
-while getopts ":ghqrtxe:o:" arg; do
+while getopts ":hqrtxe:o:" arg; do
     case $arg in
         h)
             help
@@ -126,9 +98,6 @@ while getopts ":ghqrtxe:o:" arg; do
             ;;
         x)
             RUN_MODE=1
-            ;;
-        g)
-            GAMESERVER_ONLY=0
             ;;
         *)
             error "Argument -$arg is not a known or valid argument."
