@@ -13,7 +13,6 @@ import org.rs09.consts.Items
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.api.*
-import java.util.*
 
 /**
  * Handles repairing and climbing of the 3 beacon shortcuts needed to access them
@@ -55,8 +54,8 @@ class AFURepairClimbHandler : InteractionListener {
     private fun repair(player: Player,rco: RepairClimbObject){
         if (rco == RepairClimbObject.TEMPLE){
             // You can do this 2 different ways
-            val hasSmithingLevel = getDynLevel(player, Skills.SMITHING) >= 70
-            val hasConstructionLevel = getDynLevel(player, Skills.CONSTRUCTION) >= 59
+            val hasSmithingLevel = getStatLevel(player, Skills.SMITHING) >= 70
+            val hasConstructionLevel = getStatLevel(player, Skills.CONSTRUCTION) >= 59
 
             if (!hasConstructionLevel && !hasSmithingLevel){
                 sendDialogue(player, "You need level 70 smithing or 59 construction for this.")
@@ -93,8 +92,8 @@ class AFURepairClimbHandler : InteractionListener {
         }
         val skill = rco.levelRequirement?.first ?: 0
         val level = rco.levelRequirement?.second ?: 0
-        if(player.skills.getLevel(skill) < level){
-            player.dialogueInterpreter.sendDialogue("You need level $level ${Skills.SKILL_NAME[skill]} for this.")
+        if(getStatLevel(player, skill) < level){
+            sendDialogue(player, "You need level $level ${Skills.SKILL_NAME[skill]} for this.")
             return
         }
 
@@ -102,40 +101,37 @@ class AFURepairClimbHandler : InteractionListener {
 
         val requiredItems = when(rco){
             RepairClimbObject.DEATH_PLATEAU -> {
-                arrayOf(Item(Items.PLANK_960,2))
+                Item(Items.PLANK_960,2)
             }
 
             RepairClimbObject.BURTHORPE -> {
-                arrayOf(Item(Items.IRON_BAR_2351,2))
+                Item(Items.IRON_BAR_2351,2)
             }
 
             RepairClimbObject.GWD -> {
                 requiresNeedle = true
-                arrayOf(Item(Items.JUTE_FIBRE_5931,3))
+                Item(Items.JUTE_FIBRE_5931,3)
             }
             else -> return
         }
 
         if(requiresNeedle){
-            if(player.inventory.containsItem(Item(Items.NEEDLE_1733)) && player.inventory.containItems(*requiredItems.map { it.id }.toIntArray())) {
-                player.inventory.remove(*requiredItems)
-                if (Random().nextBoolean()) player.inventory.remove(Item(Items.NEEDLE_1733))
-            } else {
-                player.dialogueInterpreter.sendDialogue("You need a needle and ${requiredItems.map { "${it.amount} ${it.name.lowercase()}s" }.toString().replace("[","").replace("]","")} for this.")
+            if (!inInventory(player, Items.NEEDLE_1733) || !removeItem(player, requiredItems)) {
+                sendDialogue(player, "You need a needle and ${requiredItems.amount} ${requiredItems.name.lowercase()}s for this.")
                 return
             }
         } else {
-            if(player.inventory.containsItem(Item(Items.HAMMER_2347)) && player.inventory.containItems(*requiredItems.map { it.id }.toIntArray())) {
+            if(inInventory(player, Items.HAMMER_2347) && inInventory(player, requiredItems.id, requiredItems.amount)) {
                 val nails = NailType.get(player,4)
                 if(nails == null && rco == RepairClimbObject.DEATH_PLATEAU){
-                    player.dialogueInterpreter.sendDialogue("You need 4 nails for this.")
+                    sendDialogue(player, "You need 4 nails for this.")
                     return
                 } else if (rco == RepairClimbObject.DEATH_PLATEAU){
-                    player.inventory.remove(Item(nails.itemId,4))
+                    removeItem(player, Item(nails.itemId,4))
                 }
-                player.inventory.remove(*requiredItems)
+                removeItem(player, requiredItems)
             } else {
-                player.dialogueInterpreter.sendDialogue("You need a hammer and ${requiredItems.map { "${it.amount} ${it.name.lowercase()}s" }.toString().replace("[","").replace("]","")} for this.")
+                sendDialogue(player, "You need a hammer and ${requiredItems.amount} ${requiredItems.name.lowercase()}s for this.")
                 return
             }
         }
