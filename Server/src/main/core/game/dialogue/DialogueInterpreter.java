@@ -328,7 +328,6 @@ public final class DialogueInterpreter {
     public Component sendItemMessage(int itemId, String... messages) {
         // Select interface based on number of messages - 241 (1 line) to 244 (4 lines)
         int interfaceId = 240 + messages.length;
-        player.getInterfaceManager().openChatbox(interfaceId);
         player.getPacketDispatch().sendInterfaceConfig(interfaceId, 1, false);
         player.getPacketDispatch().sendInterfaceConfig(interfaceId, 2, false);
         // Hide or empty the title, since double item messages do not have them. (Child 3)
@@ -344,6 +343,8 @@ public final class DialogueInterpreter {
         player.getPacketDispatch().sendRepositionOnInterface(interfaceId, 2, 45, 46);
         // Hide the second item which seems to be used for double items (child 1)
         player.getPacketDispatch().sendInterfaceConfig(interfaceId, 1, true);
+        // Open the chatbox only after everything is set to avoid lag and flashing default strings (Line 1, Title)
+        player.getInterfaceManager().openChatbox(interfaceId);
         // These are old interfaces which made no sense to use them.
 //        player.getPacketDispatch().sendString(message, 131, 1);
 //        player.getPacketDispatch().sendItemOnInterface(itemId, 1, 131, 2);
@@ -385,7 +386,6 @@ public final class DialogueInterpreter {
     public Component sendDoubleItemMessage(Item first, Item second, String... messages) {
         // Select interface based on number of messages - 241 (1 line) to 244 (4 lines)
         int interfaceId = 240 + messages.length;
-        player.getInterfaceManager().openChatbox(interfaceId);
         player.getPacketDispatch().sendInterfaceConfig(interfaceId, 1, false);
         player.getPacketDispatch().sendInterfaceConfig(interfaceId, 2, false);
         // Hide or empty the title, since double item messages do not have them.
@@ -404,7 +404,8 @@ public final class DialogueInterpreter {
         player.getPacketDispatch().sendItemOnInterface(second.getId(), second.getAmount(), interfaceId, 2);
         player.getPacketDispatch().sendAngleOnInterface(interfaceId, 2, (int)(itemDef2.getModelZoom() / 1.5), itemDef2.getModelRotationX(), itemDef2.getModelRotationY());
         player.getPacketDispatch().sendRepositionOnInterface(interfaceId, 2, 60, 65);
-
+        // Open the chatbox only after everything is set to avoid lag and flashing default strings (Line 1, Title)
+        player.getInterfaceManager().openChatbox(interfaceId);
         return player.getInterfaceManager().getChatbox();
     }
 
@@ -518,7 +519,6 @@ public final class DialogueInterpreter {
         if (expression == -1) {
             expression = FacialExpression.HALF_GUILTY.getAnimationId();
         }
-        player.getInterfaceManager().openChatbox(interfaceId);
         player.getPacketDispatch().sendInterfaceConfig(interfaceId, 1, true);
         player.getPacketDispatch().sendInterfaceConfig(interfaceId, 2, false);
         player.getPacketDispatch().sendAnimationInterface(expression, interfaceId, 2);
@@ -537,6 +537,8 @@ public final class DialogueInterpreter {
             player.getPacketDispatch().sendString(doSubstitutions(player, messages[i]), interfaceId, (i + 4));
         }
         player.getPacketDispatch().sendInterfaceConfig(player.getInterfaceManager().getChatbox().getId(), 3, false);
+        // Open the chatbox only after everything is set to avoid lag and flashing default strings (Line 1, Title)
+        player.getInterfaceManager().openChatbox(interfaceId);
         return player.getInterfaceManager().getChatbox();
     }
 
@@ -556,6 +558,7 @@ public final class DialogueInterpreter {
         for (int i = 0; i < options.length; i++) {
             player.getPacketDispatch().sendString(options[i].toString(), interfaceId, i + 2);
         }
+        // Open the chatbox only after everything is set to avoid lag and flashing default strings (Line 1, Title)
         player.getInterfaceManager().openChatbox(interfaceId);
         return player.getInterfaceManager().getChatbox();
     }
