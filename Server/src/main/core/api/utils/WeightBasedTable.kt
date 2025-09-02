@@ -42,27 +42,48 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
         return roll(receiver, 1)
     }
 
-    open fun roll(receiver: Entity? = null, times: Int = 1): ArrayList<Item>{
-        val items = ArrayList<WeightedItem>((guaranteedItems.size + 1) * times)
+    open fun roll(receiver: Entity?, times: Int = 1): ArrayList<Item> {
+        val weightedItemsToDrop = ArrayList<WeightedItem>()
 
-        for (i in 0 until times) {
-            items.addAll(guaranteedItems)
+        repeat(times) {
+            // Guaranteed items
+            for (item in guaranteedItems) {
+                if (isSpecialSlot(item.id)) {
+                    val rolls = RandomFunction.random(item.minAmt, item.maxAmt)
+                    repeat(rolls) {
+                        weightedItemsToDrop.add(item)
+                    }
+                } else {
+                    // Add just one instance with amount set by getItem()
+                    weightedItemsToDrop.add(item)
+                }
+            }
 
-            if (size == 1) {
-                items.add(get(0))
-            } else if (isNotEmpty()) {
+            // Weighted roll (one per table roll)
+            if (isNotEmpty()) {
                 var rngWeight = RandomFunction.randomDouble(totalWeight)
                 for (item in this) {
                     rngWeight -= item.weight
                     if (rngWeight <= 0) {
-                        items.add(item)
+                        if (isSpecialSlot(item.id)) {
+                            val rolls = RandomFunction.random(item.minAmt, item.maxAmt)
+                            repeat(rolls) {
+                                weightedItemsToDrop.add(item)
+                            }
+                        } else {
+                            weightedItemsToDrop.add(item)
+                        }
                         break
                     }
                 }
             }
         }
 
-        return convertWeightedItems(items, receiver)
+        return convertWeightedItems(weightedItemsToDrop, receiver)
+    }
+
+    private fun isSpecialSlot(id: Int): Boolean {
+        return id == SLOT_HDT || id == SLOT_USDT // extend this if a drop table is not dropping multiple times
     }
 
     fun convertWeightedItems(weightedItems: ArrayList<WeightedItem>, receiver: Entity?): ArrayList<Item> {
