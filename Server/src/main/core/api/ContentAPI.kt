@@ -3044,8 +3044,12 @@ fun applyPoison (entity: Entity, source: Entity, severity: Int) {
     val existingTimer = getTimer<Poison>(entity)
 
     if (existingTimer != null) {
-        existingTimer.severity = severity
-        existingTimer.damageSource = source
+        if (existingTimer.severity > severity) {
+            return
+        } else {
+            existingTimer.severity = severity
+            existingTimer.damageSource = source
+        }
     } else {
         registerTimer(entity, spawnTimer<Poison>(source, severity))
     }

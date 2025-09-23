@@ -73,7 +73,7 @@ public final class GWDTsutsarothSwingHandler extends CombatSwingHandler {
 			hit = RandomFunction.random(max);
 			state.setMaximumHit(max);
 			if (style == CombatStyle.MELEE) {
-                                applyPoison(victim, entity, 16);
+				applyPoison(victim, entity, 80);
 			}
 			if (special) {
 				((Player) victim).getSkills().decrementPrayerPoints((double) hit / 2);

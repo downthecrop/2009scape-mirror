@@ -115,15 +115,22 @@ open class MeleeSwingHandler (vararg flags: SwingHandlerFlag)
                 val name = entity.equipment.getNew(3).name
                 var damage = -1
                 if (name.contains("(p++") || name.contains("(s)") || name.contains("(kp)")) {
-                    damage = 68
+                    damage = 30
                 } else if (name.contains("(p+)")) {
-                    damage = 58
+                    damage = 25
                 } else if (name.contains("(p)")) {
-                    damage = 48
+                    damage = 20
                 }
                 if (damage > -1 && RandomFunction.random(10) < 4) {
                     applyPoison (victim, entity, damage)
                 }
+            }
+        } else if (entity is NPC) {
+            val poisonous = entity.isPoisonous
+            val damage = entity.poisonSeverity()
+
+            if (poisonous && damage > -1 && RandomFunction.random(10) < 4) {
+                applyPoison (victim, entity, damage)
             }
         }
         super.adjustBattleState(entity, victim, state)

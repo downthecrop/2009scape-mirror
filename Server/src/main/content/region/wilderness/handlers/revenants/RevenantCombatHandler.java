@@ -74,8 +74,10 @@ public class RevenantCombatHandler extends MultiSwingHandler {
 				}
 			}
 		}
-		if (!isPoisoned(victim) && (WildernessZone.getWilderness(entity) >= 50 || entity.getId() == 6998)) {
-                        applyPoison(victim, entity, 6);
+		if (entity.getId() == 6998) {
+			applyPoison(victim, entity, 40);
+		} else if (WildernessZone.getWilderness(entity) >= 50) {
+			applyPoison(victim, entity, 30);
 		}
 		super.impact(entity, victim, state);
 	}

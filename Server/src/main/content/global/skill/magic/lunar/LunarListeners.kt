@@ -21,6 +21,7 @@ import core.game.node.scenery.Scenery
 import core.game.system.command.Privilege
 import core.game.system.config.NPCConfigParser
 import core.game.system.task.Pulse
+import core.game.system.timer.impl.PoisonImmunity
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.repository.Repository
@@ -379,7 +380,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
         setInterfaceText(player, "Hitpoints : ${npc.definition.handlers[NPCConfigParser.LIFEPOINTS] ?: 0}", Components.DREAM_MONSTER_STAT_522, 2)
         setInterfaceText(player, "Max hit : ${npc.getSwingHandler(false).calculateHit(npc, player, 1.0)}", Components.DREAM_MONSTER_STAT_522, 3)
 
-        val poisonStatus = if(npc.definition.handlers.getOrDefault(NPCConfigParser.POISON_IMMUNE,false) == true){
+        val poisonStatus = if(npc.isPoisonImmune){
             "This creature is immune to poison."
         } else "This creature is not immune to poison."
 
@@ -818,7 +819,10 @@ class LunarListeners : SpellListener("lunar"), Commands {
                     return@define
                 }
                 if(dmg != null) {
-                    p.let { applyPoison(it, it, dmg) }
+                    p.let {
+                        removeTimer<PoisonImmunity>(it)
+                        applyPoison(it, it, dmg)
+                    }
                 } else {
                     sendMessage(player, "Damage must be an integer. Format:")
                     sendMessage(player, "::poison username damage")

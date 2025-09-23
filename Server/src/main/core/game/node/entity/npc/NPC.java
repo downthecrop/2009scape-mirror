@@ -563,6 +563,14 @@ public class NPC extends Entity {
 		return definition.getConfiguration(NPCConfigParser.POISON_IMMUNE, false);
 	}
 
+	public boolean isPoisonous() {
+		return definition.getConfiguration(NPCConfigParser.POISONOUS, false);
+	}
+
+	public int poisonSeverity() {
+		return definition.getConfiguration(NPCConfigParser.POISON_AMOUNT, 0);
+	}
+
 	@Override
 	public void finalizeDeath(Entity killer) {
 		super.finalizeDeath(killer);

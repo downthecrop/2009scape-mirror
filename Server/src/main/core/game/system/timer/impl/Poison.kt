@@ -20,14 +20,6 @@ class Poison : PersistTimer (30, "poison", flags = arrayOf(TimerFlag.ClearOnDeat
     lateinit var damageSource: Entity
 
     var severity = 0
-        set (value) {
-            if (value != field - 1 && value % 10 == 8) {//This was Arios's incorrect attempt at replicating severity, convert it to correct values.
-                (damageSource as? Player)?.debug ("[PoisonTimer] Warning: Converting suspect Arios severity into true severity. If numbers look wrong, this could be why.")
-                field = (value / 10) * 5
-                (damageSource as? Player)?.debug ("[PoisonTimer] Warning: New Severity: $field.")
-            } else field = value
-        }
-
     override fun save (root: JSONObject, entity: Entity) {
         root["source-uid"] = (damageSource as? Player)?.details?.uid ?: -1
         root["severity"] = severity.toString()

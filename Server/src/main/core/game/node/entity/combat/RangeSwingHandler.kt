@@ -134,6 +134,13 @@ open class RangeSwingHandler (vararg flags: SwingHandlerFlag) : CombatSwingHandl
             if (state.estimatedHit > 0 && damage > 8 && RandomFunction.random(10) < 4) {
                 applyPoison(victim, entity, damage)
             }
+        } else if (entity is NPC) {
+            val poisonous = entity.isPoisonous
+            val damage = entity.poisonSeverity()
+
+            if (poisonous && damage > -1 && RandomFunction.random(10) < 4) {
+                applyPoison (victim, entity, damage)
+            }
         }
         super.adjustBattleState(entity, victim, state)
     }
