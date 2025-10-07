@@ -19,6 +19,7 @@ import core.game.node.entity.player.info.Rights
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
+import core.game.system.command.Command
 import core.game.system.command.CommandMapping
 import core.game.system.command.Privilege
 import core.game.system.communication.CommunicationInfo
@@ -223,11 +224,8 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
          */
         define("commands", Privilege.STANDARD, "::commands <lt>page<gt>", "Lists all the commands (you are here.)"){player, args ->
             val page = if (args.size > 1) (args[1].toIntOrNull() ?: 1) - 1 else 0
-            var lineid = 11
-            var pages = CommandMapping.getPageIndices(player.rights.ordinal)
-            var end = if (page < (pages.size - 1)) pages[page + 1] else CommandMapping.getCommands().size
-
-            player.interfaceManager.close()
+            val pages = CommandMapping.getPageIndices(player.rights.ordinal)
+            val end = if (page < (pages.size - 1)) pages[page + 1] else CommandMapping.getCommands().size
 
             if (page < 0) {
                 reject(player, "Usage: ::commands <lt>page<gt>")
@@ -237,44 +235,106 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
                 reject(player, "That page number is too high, you don't have access to that many.")
             }
 
-            for (i in 0..310) {
-                player.packetDispatch.sendString("", Components.QUESTJOURNAL_SCROLL_275, i)
-            }
+            val title = "Commands" + if (pages.size > 1) " (${page + 1}/${pages.size})" else ""
+            var lineId = setupScrollInterface(player, title)
 
-            player.packetDispatch.sendString(
-                "Commands" + if (pages.size > 1) " (${page + 1}/${pages.size})" else "", 
-                Components.QUESTJOURNAL_SCROLL_275,
-                2
-            )
-
-            
             for(i in pages[page] until end) {
-                var command = CommandMapping.getCommands()[i]
-                var title = "${command.name}"
-                var rights = command.privilege.ordinal
-                var icon = rights - 1
+                val command = CommandMapping.getCommands()[i]
+                lineId = displayCommandInScroll(player, command, player.rights.ordinal, lineId)
 
-    
-                if (rights > player.rights.ordinal) continue
-
-                if (rights > 0)
-                    title = "(<img=$icon>) $title"
-
-                player.packetDispatch.sendString(title, Components.QUESTJOURNAL_SCROLL_275, lineid++)
-
-                if (command.usage.isNotEmpty())
-                    player.packetDispatch.sendString("Usage: ${command.usage}", Components.QUESTJOURNAL_SCROLL_275, lineid++)
-
-                if (command.description.isNotEmpty())
-                    player.packetDispatch.sendString(command.description, Components.QUESTJOURNAL_SCROLL_275, lineid++)
-                
-                player.packetDispatch.sendString("<str>-------------------------------</str>", Components.QUESTJOURNAL_SCROLL_275, lineid++)
-
-                if (lineid > 306) {
-                    player.packetDispatch.sendString("To view the next page, use ::commands ${page + 2}", Components.QUESTJOURNAL_SCROLL_275, lineid)
+                if (lineId > 306) {
+                    player.packetDispatch.sendString("To view the next page, use ::commands ${page + 2}", Components.QUESTJOURNAL_SCROLL_275, lineId)
                     break
                 }
+            }
+            player.interfaceManager.open(Component(Components.QUESTJOURNAL_SCROLL_275))
+        }
 
+        /*
+         * Search for commands
+         */
+        define("commandsearch", Privilege.STANDARD, "::commandsearch <lt>search term<gt> [--chat]", "Searches for commands containing the given term."){player, args ->
+            if (args.size < 2) {
+                reject(player, "Usage: ::commandsearch <search term> [--chat]")
+                return@define
+            }
+            val rawArguments = args.copyOfRange(1, args.size)
+            val chatMode = rawArguments.any { it.equals("--chat", ignoreCase = true) }
+            val searchRaw = rawArguments.filterNot { it.equals("--chat", ignoreCase = true) }
+            if (searchRaw.isEmpty()) {
+                reject(player, "Usage: ::commandsearch <search term> [--chat]")
+                return@define
+            }
+            val search = searchRaw.joinToString(" ").lowercase()
+            if (search.length < 2) {
+                reject(player, "Search term must be at least 2 characters long")
+                return@define
+            }
+            val playerRights = player.rights.ordinal
+            val allMatchingCommands = CommandMapping.getCommands()
+                .filter { command ->
+                    command.name.lowercase().contains(search) ||
+                    command.usage.lowercase().contains(search) ||
+                    command.description.lowercase().contains(search)
+                }
+            if (allMatchingCommands.isEmpty()) {
+                notify(player, "No commands found matching '$search'")
+                return@define
+            }
+            val accessibleCommands = allMatchingCommands
+                .filter { it.privilege.ordinal <= playerRights }
+                .sortedBy { it.name }
+            val inaccessibleCount = allMatchingCommands.count { it.privilege.ordinal > playerRights }
+            if (chatMode) {
+                for (command in accessibleCommands) {
+                    val cmdargs = if (command.usage.isNotEmpty()) {
+                        val parts = command.usage.split(" ", limit = 2)
+                        if (parts.size > 1) parts[1] else ""
+                    } else {
+                        ""
+                    }
+                    val formattedMessage = if (cmdargs.isNotEmpty()) {
+                        "CMD: ${command.name} ARGS: $cmdargs DESC: ${command.description}"
+                    } else {
+                        "CMD: ${command.name} DESC: ${command.description}"
+                    }
+                    val chunks = chunkText(formattedMessage, 70)
+                    chunks.forEach { notify(player, it) }
+                }
+                if (accessibleCommands.isEmpty()) {
+                    notify(player, "Found $inaccessibleCount command(s) matching '$search' but you don't have permission to use any of them")
+                } else {
+                    val summary = "Found ${accessibleCommands.size} accessible command(s) for '$search'"
+                    if (inaccessibleCount > 0) {
+                        notify(player, summary)
+                        notify(player, "($inaccessibleCount additional command(s) require higher privileges)")
+                    } else {
+                        notify(player, summary)
+                    }
+                }
+                return@define
+            }
+            var lineId = setupScrollInterface(player, "Command Search: '$search'")
+            if (accessibleCommands.isEmpty()) {
+                player.packetDispatch.sendString("No accessible commands found.", Components.QUESTJOURNAL_SCROLL_275, lineId++)
+            }
+            for (command in accessibleCommands) {
+                lineId = displayCommandInScroll(player, command, playerRights, lineId)
+                if (lineId > 306) {
+                    player.packetDispatch.sendString(
+                        "Results truncated. Use ::commandsearch $search --chat",
+                        Components.QUESTJOURNAL_SCROLL_275,
+                        lineId
+                    )
+                    break
+                }
+            }
+            if (inaccessibleCount > 0 && lineId <= 306) {
+                player.packetDispatch.sendString(
+                    "$inaccessibleCount more command(s) need higher privileges.",
+                    Components.QUESTJOURNAL_SCROLL_275,
+                    lineId
+                )
             }
             player.interfaceManager.open(Component(Components.QUESTJOURNAL_SCROLL_275))
         }
@@ -638,6 +698,63 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             notify(player, "Setting plaques read to: ${args[1]}")
 
         }
+    }
+
+    fun setupScrollInterface(player: Player, title: String): Int {
+        player.interfaceManager.close()
+        for (i in 0..310) {
+            player.packetDispatch.sendString("", Components.QUESTJOURNAL_SCROLL_275, i)
+        }
+        player.packetDispatch.sendString(title, Components.QUESTJOURNAL_SCROLL_275, 2)
+        return 11
+    }
+
+    fun displayCommandInScroll(player: Player, command: Command, playerRights: Int, lineId: Int): Int {
+        val privilegeLevel = command.privilege.ordinal
+        if (privilegeLevel > playerRights) return lineId
+        val titleIcon = privilegeLevel - 1
+        var title = command.name
+        if (privilegeLevel > 0) {
+            title = "(<img=$titleIcon>) $title"
+        }
+        var currentLineId = lineId
+        player.packetDispatch.sendString(title, Components.QUESTJOURNAL_SCROLL_275, currentLineId++)
+        if (command.usage.isNotEmpty()) {
+            val usageText = "Usage: ${command.usage}"
+            val usageChunks = chunkText(usageText, 70)
+            for (chunk in usageChunks) {
+                player.packetDispatch.sendString(chunk, Components.QUESTJOURNAL_SCROLL_275, currentLineId++)
+            }
+        }
+        if (command.description.isNotEmpty()) {
+            val descChunks = chunkText(command.description, 70)
+            for (chunk in descChunks) {
+                player.packetDispatch.sendString(chunk, Components.QUESTJOURNAL_SCROLL_275, currentLineId++)
+            }
+        }
+        player.packetDispatch.sendString("<str>-------------------------------</str>", Components.QUESTJOURNAL_SCROLL_275, currentLineId++)
+        return currentLineId
+    }
+
+    fun chunkText(text: String, maxLength: Int = 70): List<String> {
+        if (text.length <= maxLength) return listOf(text)
+        val chunks = mutableListOf<String>()
+        var remaining = text
+        while (remaining.length > maxLength) {
+            var breakPoint = maxLength
+            for (i in maxLength downTo 1) {
+                if (remaining[i - 1] == ' ') {
+                    breakPoint = i
+                    break
+                }
+            }
+            chunks.add(remaining.take(breakPoint).trim())
+            remaining = remaining.substring(breakPoint).trim()
+        }
+        if (remaining.isNotEmpty()) {
+            chunks.add(remaining)
+        }
+        return chunks
     }
 
     fun setPlaqueReadStatus(player: Player, status: Boolean){
