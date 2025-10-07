@@ -3,6 +3,7 @@ package content.global.skill.gather.woodcutting
 import content.data.skill.SkillingTool
 import content.data.tables.BirdNest
 import content.global.skill.farming.FarmingPatch.Companion.forObject
+import content.global.skill.farming.timers.StumpGrowth
 import content.global.skill.firemaking.Log
 import content.global.skill.skillcapeperks.SkillcapePerks
 import content.global.skill.skillcapeperks.SkillcapePerks.Companion.isActive
@@ -71,7 +72,7 @@ class WoodcuttingListener : InteractionListener {
 
         if (clockReady(player, Clocks.SKILLING)) {
             animateWoodcutting(player)
-            if (!checkReward(player, resource, tool))
+            if (!checkReward(player, resource, tool) && !getAttribute(player, "instachop", false))
                 return delayClock(player, Clocks.SKILLING, 3)
 
             val reward = resource.getReward()
@@ -156,7 +157,7 @@ class WoodcuttingListener : InteractionListener {
         //OSRS: https://oldschool.runescape.wiki/w/Woodcutting scroll down to the mechanics section
         //RS3 : https://runescape.wiki/w/Woodcutting scroll down to the mechanics section, and expand the tree felling chances table
         if (resource.getRespawnRate() > 0) {
-            if (RandomFunction.roll(8) || listOf(1, 2, 3, 4, 6).contains(resource.identifier.toInt())){
+            if (RandomFunction.roll(8) || listOf(1, 2, 3, 4, 6).contains(resource.identifier.toInt()) || getAttribute(player, "instachop", false)){
                 if (resource.isFarming()) {
                     val fPatch = forObject(node.asScenery())
                     if (fPatch != null) {
@@ -168,6 +169,8 @@ class WoodcuttingListener : InteractionListener {
                             node.isActive = true
                             return@queueScript stopExecuting(player)
                         }
+                        val stumps = getOrStartTimer <StumpGrowth> (player)
+                        stumps.addStump(fPatch.varbit, resource.respawnDuration)
                     }
                     return true
                 }

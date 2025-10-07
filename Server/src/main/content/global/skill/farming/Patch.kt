@@ -373,8 +373,6 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             setCurrentState(getCurrentState() + 1)
             isWatered = false
         }
-
-        regrowIfTreeStump()
     }
 
     fun regrowIfTreeStump() {

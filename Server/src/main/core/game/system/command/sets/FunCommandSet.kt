@@ -239,6 +239,14 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
             }
         }
 
+        /**
+         * Toggle instant woodcutting.
+         */
+        define("instachop", Privilege.ADMIN, "", "Fells trees after a single log is gathered."){ player, _ ->
+            player.setAttribute("instachop", !player.getAttribute("instachop", false))
+            notify(player,"Instachop mode " + if (player.getAttribute("instachop", false)) "on." else "off.")
+        }
+
     }
 
     fun bury(player: Player){
