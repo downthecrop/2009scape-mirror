@@ -21,6 +21,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import core.game.node.entity.player.link.diary.DiaryType
 import core.game.world.GameWorld
 import org.rs09.consts.Sounds
 
@@ -262,6 +263,7 @@ class PitfallListeners : InteractionListener {
         }
         on(GRAAHK_PIT, IntType.SCENERY, "dismantle") { player, node ->
             lootCorpse(player, node as Scenery, 240.0, Items.GRAAHK_FUR_10099, Items.TATTY_GRAAHK_FUR_10097)
+            player.achievementDiaryManager.finishTask(player, DiaryType.KARAMJA, 1, 13)
             sendMessage(player, "You've caught a horned graahk!")
             return@on true
         }

@@ -5,6 +5,7 @@ import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import core.plugin.Plugin
@@ -42,6 +43,9 @@ class HealthChecker : OptionHandler() {
             }
             PatchType.FRUIT_TREE_PATCH -> {
                 patch.setCurrentState(patch.getCurrentState() - 14)
+                if (fPatch == FarmingPatch.BRIMHAVEN_FRUIT_TREE) {
+                    player.achievementDiaryManager.finishTask(player, DiaryType.KARAMJA, 1, 12)
+                }
                 sendMessage(player, "You examine the tree for signs of disease and find that it is in perfect health.")
             }
             PatchType.SPIRIT_TREE_PATCH -> {

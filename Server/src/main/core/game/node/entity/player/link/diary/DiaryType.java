@@ -34,14 +34,14 @@ public enum DiaryType {
                             "Use Vigroy and Hajedy's cart service",
                             "Earn 100% favour in the village of Tai Bwo Wannai Cleanup", // todo tai bwo wannai cleanup
                             "Cook a spider on stick", // todo tai bwo wannai cleanup
-                            "Charter the Lady of the Waves from Cairn Isle to Port Khazard", // todo verify
+                            "Charter the Lady of the Waves from Cairn Isle to Port Khazard",
                             "Cut a log from a teak tree",
                             "Cut a log from a mahogany tree",
                             "Catch a karambwan", // todo need Tai Bwo Wannai Trio
                             "Exchange gems, a gout tuber, trading sticks for a machete", // todo
                             "Use the gnome glider to travel to Karamja",
-                            "Grow a healthy fruit tree in the patch near Brimhaven", // todo verify
-                            "Trap a Horned Graahk", // todo need to implement pitfall trapping
+                            "Grow a healthy fruit tree in the patch near Brimhaven",
+                            "Trap a Horned Graahk",
                             "Chop the vines to gain deeper access to Brimhaven Dungeon",
                             "Cross the lava using the stepping stones within Brimhaven<br><br>Dungeon",
                             "Climb the stairs within Brimhaven Dungeon",
