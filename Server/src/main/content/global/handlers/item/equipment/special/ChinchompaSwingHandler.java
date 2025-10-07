@@ -93,7 +93,7 @@ public final class ChinchompaSwingHandler extends RangeSwingHandler {
 			}
 		}
 		entity.getSkills().addExperience(Skills.HITPOINTS, hit * 1.33, true);
-		if (entity.getProperties().getAttackStyle().getStyle() == WeaponInterface.STYLE_DEFENSIVE) {
+		if (entity.getProperties().getAttackStyle().getStyle() == WeaponInterface.STYLE_LONG_RANGE) {
 			entity.getSkills().addExperience(Skills.RANGE, hit * 2, true);
 			entity.getSkills().addExperience(Skills.DEFENCE, hit * 2, true);
 		} else {
