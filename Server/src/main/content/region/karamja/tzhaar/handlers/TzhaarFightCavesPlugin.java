@@ -62,7 +62,7 @@ public final class TzhaarFightCavesPlugin extends ActivityPlugin {
 	 * @param player The player.
 	 */
 	public TzhaarFightCavesPlugin(Player player) {
-		super("fight caves", true, true, true, ZoneRestriction.CANNON, ZoneRestriction.RANDOM_EVENTS);
+		super("fight caves", true, true, true, ZoneRestriction.CANNON, ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.FOLLOWERS);
 		super.player = player;
 	}
 
