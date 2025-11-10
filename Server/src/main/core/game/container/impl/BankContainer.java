@@ -153,17 +153,16 @@ public final class BankContainer extends Container {
 			BankContainer.this.close();
 			return true;
 		});
-		refresh(listener);
 		player.getInterfaceManager().openSingleTab(new Component(763));
-		player.getInventory().getListeners().add(player.getBank().listener);
+		refresh(listener);
 		player.getInventory().refresh();
-                setVarp(player, 1249, lastAmountX);
+		player.getInventory().getListeners().add(player.getBank().listener);
+		setVarp(player, 1249, lastAmountX);
 		player.getPacketDispatch().sendIfaceSettings(1278, 73, 762, 0, SIZE);
 		int settings = new IfaceSettingsBuilder().enableOptions(new IntRange(0,5)).enableExamine().enableSlotSwitch().build();
 		player.getPacketDispatch().sendIfaceSettings(settings, 0, 763, 0, 27);
 		player.getPacketDispatch().sendRunScript(1451, "");
 		open = true;
-
 	}
 
 	/**
@@ -281,7 +280,7 @@ public final class BankContainer extends Container {
 	 */
 	public void updateLastAmountX(int amount) {
 		this.lastAmountX = amount;
-                setVarp(player, 1249, amount);
+		setVarp(player, 1249, amount);
 	}
 	
 	/**
@@ -414,7 +413,7 @@ public final class BankContainer extends Container {
 	 * @return If items have to be noted {@code true}.
 	 */
 	public boolean isNoteItems() {
-                return getVarbit(player, Vars.VARBIT_IFACE_BANK_NOTE_MODE) == 1;
+		return getVarbit(player, Vars.VARBIT_IFACE_BANK_NOTE_MODE) == 1;
 	}
 
 	/**
@@ -422,7 +421,7 @@ public final class BankContainer extends Container {
 	 * @param noteItems If items have to be noted {@code true}.
 	 */
 	public void setNoteItems(boolean noteItems) {
-                setVarbit(player, Vars.VARBIT_IFACE_BANK_NOTE_MODE, noteItems ? 1 : 0, true);
+		setVarbit(player, Vars.VARBIT_IFACE_BANK_NOTE_MODE, noteItems ? 1 : 0, true);
 	}
 
 	/**
@@ -456,7 +455,7 @@ public final class BankContainer extends Container {
 	 * @param insertItems The insert items value.
 	 */
 	public void setInsertItems(boolean insertItems) {
-                setVarbit(player, Vars.VARBIT_IFACE_BANK_INSERT_MODE, insertItems ? 1 : 0, true);
+		setVarbit(player, Vars.VARBIT_IFACE_BANK_INSERT_MODE, insertItems ? 1 : 0, true);
 	}
 	
 	/**
@@ -464,7 +463,7 @@ public final class BankContainer extends Container {
 	 * @return {@code True} if inserting items mode is enabled.
 	 */
 	public boolean isInsertItems() {
-                return getVarbit(player, Vars.VARBIT_IFACE_BANK_INSERT_MODE) == 1;
+		return getVarbit(player, Vars.VARBIT_IFACE_BANK_INSERT_MODE) == 1;
 	}
 	
 	/**
@@ -498,22 +497,22 @@ public final class BankContainer extends Container {
 		public void update(Container c, ContainerEvent event) {
 			if (c instanceof BankContainer) {
 				PacketRepository.send(ContainerPacket.class, new ContainerContext(player, 762, 64000, 95, event.getItems(), false, event.getSlots()));
+				player.getBank().setTabConfigurations();
+				player.getBank().sendBankSpace();
 			} else {
 				PacketRepository.send(ContainerPacket.class, new ContainerContext(player, 763, 64000, 93, event.getItems(), false, event.getSlots()));
 			}
-			player.getBank().setTabConfigurations();
-			player.getBank().sendBankSpace();
 		}
 
 		@Override
 		public void refresh(Container c) {
 			if (c instanceof BankContainer) {
 				PacketRepository.send(ContainerPacket.class, new ContainerContext(player, 762, 64000, 95, c.toArray(), c.capacity(), false));
+				player.getBank().setTabConfigurations();
+				player.getBank().sendBankSpace();
 			} else {
 				PacketRepository.send(ContainerPacket.class, new ContainerContext(player, 763, 64000, 93, c.toArray(), 28, false));
 			}
-			player.getBank().setTabConfigurations();
-			player.getBank().sendBankSpace();
 		}
 	}
 }
