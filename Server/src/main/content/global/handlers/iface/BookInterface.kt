@@ -1,5 +1,6 @@
 package content.global.handlers.iface
 
+import content.global.handlers.iface.BookInterface.Companion.FANCY_BOOK_2_27
 import core.api.closeInterface
 import core.api.getAttribute
 import core.api.openInterface
@@ -158,9 +159,22 @@ class BookInterface : InterfaceListener {
             if (pageSet == getAttribute(player, CURRENT_PAGE_ATTRIBUTE, 0)) {
                 player.packetDispatch.sendInterfaceConfig(componentId, enableLineId, false)
                 player.packetDispatch.sendModelOnInterface(modelId, componentId, drawLineId, 0)
-                player.packetDispatch.sendAngleOnInterface(componentId, drawLineId, zoom, pitch, yaw)
-            } else {
-                player.packetDispatch.sendInterfaceConfig(componentId, enableLineId, true)
+                 player.packetDispatch.sendAngleOnInterface(componentId, drawLineId, zoom, pitch, yaw)
+            }
+        }
+
+        /** Sets item on lineId of pageSet (0 index). Call this in the display function after pageSetup. */
+        fun setItemOnPage(player: Player, pageSet: Int, itemId: Int, componentId: Int, enableLineId: Int, drawLineId: Int, zoom: Int, pitch: Int, yaw: Int) {
+            if (pageSet == getAttribute(player, CURRENT_PAGE_ATTRIBUTE, 0)) {
+                player.packetDispatch.sendInterfaceConfig(componentId, enableLineId, false)
+                player.packetDispatch.sendItemOnInterface(itemId, 1, componentId, drawLineId)
+            }
+        }
+
+        /** Clears models(pictures) on lineId of pageSet (0 index). Call this in the display function after pageSetup. */
+        fun clearModelsOnPage(player: Player, componentId: Int) {
+            BookInterface.FANCY_BOOK_2_27_IMAGE_ENABLE_DRAW_IDS.forEach { drawId ->
+                player.packetDispatch.sendInterfaceConfig(componentId, drawId, true);
             }
         }
 
