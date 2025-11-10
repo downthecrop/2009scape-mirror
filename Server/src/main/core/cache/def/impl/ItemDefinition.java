@@ -1,6 +1,5 @@
 package core.cache.def.impl;
 
-import content.global.skill.summoning.familiar.BurdenBeast;
 import core.api.EquipmentSlot;
 import core.cache.Cache;
 import core.cache.def.Definition;
@@ -605,12 +604,11 @@ public class ItemDefinition extends Definition<Item> {
 	 * @return {@code True} if so.
 	 */
 	public static boolean canEnterEntrana(Player player) {
-		Container[] containers;
-		if (player.getFamiliarManager().hasFamiliar() && player.getFamiliarManager().getFamiliar().isBurdenBeast()) {
-			containers = new Container[] { player.getInventory(), player.getEquipment(), ((BurdenBeast) player.getFamiliarManager().getFamiliar()).getContainer() };
-		} else {
-			containers = new Container[] { player.getInventory(), player.getEquipment() };
+		Container[] containers = new Container[] { player.getInventory(), player.getEquipment() };
+		if (player.getFamiliarManager().hasFamiliar() && !player.getFamiliarManager().hasPet()) {
+			 return false;
 		}
+
 		for (Container c : containers) {
 			for (Item i : c.toArray()) {
 				if (i == null) {
@@ -650,6 +648,7 @@ public class ItemDefinition extends Definition<Item> {
 			Items.BOOK_OF_BALANCE_3844,
 			Items.DAMAGED_BOOK_3843,
 			Items.WIZARD_BOOTS_2579,
+			Items.COMBAT_BRACELET_11126,
 			Items.COMBAT_BRACELET1_11124,
 			Items.COMBAT_BRACELET2_11122,
 			Items.COMBAT_BRACELET3_11120,
@@ -665,10 +664,28 @@ public class ItemDefinition extends Definition<Item> {
 			Items.HAM_HOOD_4302,
 			Items.HAM_CLOAK_4304,
 			Items.HAM_LOGO_4306,
-			Items.GLOVES_4308,
-			Items.BOOTS_4310,
 			Items.ZAMORAK_ROBE_1033,
-			Items.ZAMORAK_ROBE_1035
+			Items.ZAMORAK_ROBE_1035,
+			Items.PRIEST_GOWN_426,
+			Items.PRIEST_GOWN_428,
+			Items.DRUIDS_ROBE_538,
+			Items.DRUIDS_ROBE_540,
+			Items.FLOWERS_2460,
+			Items.FLOWERS_2462,
+			Items.FLOWERS_2464,
+			Items.FLOWERS_2466,
+			Items.FLOWERS_2468,
+			Items.FLOWERS_2470,
+			Items.FLOWERS_2472,
+			Items.FLOWERS_2474,
+			Items.FLOWERS_2476,
+			Items.FIXED_DEVICE_6082,
+			Items.GHOSTLY_BOOTS_6106,
+			Items.GHOSTLY_ROBE_6107,
+			Items.GHOSTLY_ROBE_6108,
+			Items.GHOSTLY_HOOD_6109,
+			Items.GHOSTLY_GLOVES_6110,
+			Items.GHOSTLY_CLOAK_6111
 	));
 	private static final HashSet<Integer> entranaBannedItems = new HashSet(Arrays.asList(
 			/**Items.BUTTERFLY_NET_10010, easing the restriction until barehanded implementation**/
@@ -677,15 +694,10 @@ public class ItemDefinition extends Definition<Item> {
 			Items.CANNON_BASE_6,
 			Items.CANNON_STAND_8,
 			Items.CANNON_FURNACE_12,
-			Items.COOKING_GAUNTLETS_775,
-			Items.CHAOS_GAUNTLETS_777,
-			Items.GOLDSMITH_GAUNTLETS_776,
-			Items.KARAMJA_GLOVES_1_11136,
-			Items.KARAMJA_GLOVES_2_11138,
-			Items.KARAMJA_GLOVES_3_11140,
-			Items.VYREWATCH_TOP_9634,
-			Items.VYREWATCH_LEGS_9636,
-			Items.VYREWATCH_SHOES_9638
+			Items.ZAMORAK_STOLE_10474,
+			Items.EXPLORERS_RING_1_13560,
+			Items.EXPLORERS_RING_2_13561,
+			Items.EXPLORERS_RING_3_13562
 	));
 
 
@@ -700,11 +712,11 @@ public class ItemDefinition extends Definition<Item> {
 		if (entranaBannedItems.contains(getId())) {
 			return false;
 		}
-		if (equipSlot(getId()) == EquipmentSlot.AMMO) {
+		if (equipSlot(getId()) == EquipmentSlot.AMMO || equipSlot(getId()) == EquipmentSlot.NECK || equipSlot(getId()) == EquipmentSlot.RING) {
 			return true;
 		}
-		if (getName().toLowerCase().startsWith("ring") || getName().toLowerCase().startsWith("amulet")) {
-			return true;
+		if (hasAction("summon")) {
+			return false;
 		}
 		int[] bonuses = getConfiguration(ItemConfigParser.BONUS);
         return bonuses == null || Arrays.stream(bonuses).allMatch(x -> x == 0);
