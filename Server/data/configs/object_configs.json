@@ -20056,6 +20056,10 @@
     "ids": "15480"
   },
   {
+    "examine": "Baby bread.",
+    "ids": "15506,15507"
+  },
+  {
     "examine": "Home sweet home?",
     "ids": "15748"
   },
@@ -20182,6 +20186,18 @@
   {
     "examine": "A short longboat!",
     "ids": "21834"
+  },
+  {
+    "examine": "A place to sit and watch furniture grow.",
+    "ids": "28627"
+  },
+  {
+    "examine": "It's not rolling, but it seems to have gathered some moss.",
+    "ids": "28635"
+  },
+  {
+    "examine": "A thick metal gate.",
+    "ids": "28690,28691,28692,28693"
   },
   {
     "examine": "Contains traces of summoning energy.",
