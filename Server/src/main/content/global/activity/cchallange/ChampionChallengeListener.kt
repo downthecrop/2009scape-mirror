@@ -45,35 +45,35 @@ class ChampionChallengeListener : InteractionListener, MapArea {
 
     private val IMP_SCROLL_TEXT = arrayOf(
         "How about picking on someone your own size? I'll",
-        "see you at the Champion's Guild.",
+        "see you at the Champions' Guild.",
         "",
         "Champion of Imps"
     )
 
     private val GOBLIN_SCROLL_TEXT = arrayOf(
         "Fight me if you think you can human, I'll wait",
-        "for you in the Champion's Guild.",
+        "for you in the Champions' Guild.",
         "",
         "Champion of Goblins"
     )
 
     private val SKELETON_SCROLL_TEXT = arrayOf(
-        "I'll be waiting at the Champions' Guild to",
-        "collect your bones.",
+        "I'll be waiting at the Champions' Guild to collect",
+        "your bones.",
         "",
         "Champion of Skeletons"
     )
 
     private val ZOMBIE_SCROLL_TEXT = arrayOf(
-        "You come to Champions' Guild, you fight me,",
-        "I squish you, I get brains!",
+        "You come to Champions' Guild, you fight me, I",
+        "squish you, I get brains!",
         "",
         "Champion of Zombies"
     )
 
     private val GIANT_SCROLL_TEXT = arrayOf(
-        "Get yourself to the Champions' Guild, if you",
-        "dare to face me puny human.",
+        "Get yourself to the Champions' Guild, if you dare",
+        "to face me puny human.",
         "",
         "Champion of Giants"
     )
@@ -93,21 +93,22 @@ class ChampionChallengeListener : InteractionListener, MapArea {
     )
 
     private val EARTH_WARRIOR_TEXT = arrayOf(
-        "I challenge you to a duel, come to the arena beneath",
-        "the Champion's Guild and fight me if you dare.",
+        "I challenge you to a duel, come to the arena",
+        "beneath the Champions' Guild and fight me if you",
+        "dare.",
         "",
         "Champion of Earth Warriors"
     )
 
     private val JOGRE_SCROLL_TEXT = arrayOf(
         "You think you can defeat me? Come to the",
-        "Champion's Guild and prove it!",
+        "Champions' Guild and prove it!",
         "",
         "Champion of Jogres"
     )
 
     private val LESSER_DEMON_SCROLL_TEXT = arrayOf(
-        "Come to the Champion's Guild so I can banish",
+        "Come to the Champions' Guild so I can banish",
         "you mortal!",
         "",
         "Champion of Lesser Demons"

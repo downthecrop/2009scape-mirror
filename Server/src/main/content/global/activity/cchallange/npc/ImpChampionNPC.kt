@@ -3,8 +3,6 @@ package content.global.activity.cchallange.npc
 import core.api.*
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
-import core.game.node.entity.combat.CombatStyle
-import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
@@ -63,21 +61,11 @@ class ImpChampionNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, 
         super.checkImpact(state)
         val player = state.attacker
         if (player is Player) {
-            val w = player.getExtension<WeaponInterface>(WeaponInterface::class.java)
-            if (state.style == CombatStyle.MELEE || state.style == CombatStyle.MAGIC || state.style == CombatStyle.RANGE) {
+
+            //somehow the maximumHit is determined to be zero by this point if you're using a melee special attack.
+            if (state.maximumHit == 0) {
                 state.neutralizeHits()
-                state.estimatedHit = state.maximumHit
-            }
-            if (w.weaponInterface.interfaceId == 10) {
-                sendMessage(player, "You cannot use special attack in this challenge.")
-                if (state.estimatedHit > -1) {
-                    state.estimatedHit = 0
-                    return
-                }
-                if (state.secondaryHit > -1) {
-                    state.secondaryHit = 0
-                    return
-                }
+                sendMessage(player, "Larxus said you couldn't use special attacks in this duel.")
             }
         }
     }
