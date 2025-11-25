@@ -1,5 +1,6 @@
 package core.game.node.entity.player;
 
+import content.global.handlers.item.equipment.BarrowsEquipment;
 import content.global.handlers.item.equipment.special.SalamanderSwingHandler;
 import content.global.skill.runecrafting.PouchManager;
 import core.api.ContentAPIKt;
@@ -661,11 +662,13 @@ public class Player extends Entity {
 					if (item == null) continue;
 					if (killer instanceof Player)
 						itemsLost.append(getItemName(item.getId())).append("(").append(item.getAmount()).append("), ");
+					
 					if (GraveController.shouldCrumble(item.getId()))
 						continue;
 					if (GraveController.shouldRelease(item.getId()))
 						continue;
-					if (!item.getDefinition().isTradeable()) {
+
+					if (!BarrowsEquipment.isBarrowsItem(item.getId()) && !item.getDefinition().isTradeable()) {
 						if (killer instanceof Player) {
 							int value = item.getDefinition().getAlchemyValue(true);
 							if (getStatLevel(killer, Skills.MAGIC) < 55) value /= 2;
@@ -673,7 +676,14 @@ public class Player extends Entity {
 							continue;
 						} else stayPrivate = true;
 					}
-					item = GraveController.checkTransform(item);
+					if (BarrowsEquipment.isBarrowsItem(item.getId())) {
+						if (!BarrowsEquipment.isBroken(item.getId())) {
+                            int brokenItemId = Objects.requireNonNull(BarrowsEquipment.getDefinition(item.getId())).getBrokenId();
+                            item = new Item(brokenItemId, item.getAmount());
+                        }
+					} else {
+						item = GraveController.checkTransform(item);
+					}
 					GroundItem gi = GroundItemManager.create(item, location, killer instanceof Player ? (Player) killer : this);
 					gi.setRemainPrivate(stayPrivate);
 				}
