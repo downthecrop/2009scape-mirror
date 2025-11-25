@@ -1,7 +1,6 @@
 package content.global.skill.slayer;
 
 import core.cache.def.impl.SceneryDefinition;
-import core.game.global.action.ClimbActionHandler;
 import core.game.global.action.DigAction;
 import core.game.global.action.DigSpadeHandler;
 import core.game.interaction.OptionHandler;
@@ -34,8 +33,6 @@ public class SlayerPlugin extends OptionHandler {
 		SceneryDefinition.forId(15767).getHandlers().put("option:enter", this);
 		SceneryDefinition.forId(15811).getHandlers().put("option:exit", this);
 		SceneryDefinition.forId(15812).getHandlers().put("option:exit", this);
-		SceneryDefinition.forId(96).getHandlers().put("option:climb-up", this);
-		SceneryDefinition.forId(35121).getHandlers().put("option:climb-down", this);
 		for (Location loc : BRYNE_DIGS) {
 			DigSpadeHandler.register(loc, new DigAction() {
 				@Override
@@ -53,26 +50,24 @@ public class SlayerPlugin extends OptionHandler {
 	public boolean handle(Player player, Node node, String option) {
 		switch (node.getId()) {
 		case 8785:
+            // Outside of trap door in East Ardy
 			player.teleport(new Location(2543, 3327, 0));
 			break;
 		case 23158:
 		case 23157:
+            // Outside brine rat cave
 			player.teleport(new Location(2729, 3733, 0));
 			break;
 		case 15767:
                         if (!hasRequirement(player, Quests.CABIN_FEVER))
                             return true;
 			player.teleport(new Location(3748, 9373, 0));
+            // Cave horrors - inside of cave
 			break;
 		case 15811:
 		case 15812:
+            // Cave horrors - outside of cave
 			player.teleport(new Location(3749, 2973, 0));
-			break;
-		case 96:
-			ClimbActionHandler.climb(player, null, new Location(2649, 9804, 0));
-			break;
-		case 35121:
-			ClimbActionHandler.climb(player, null, new Location(2641, 9763, 0));
 			break;
 		}
 		return true;
@@ -81,10 +76,8 @@ public class SlayerPlugin extends OptionHandler {
 	@Override
 	public Location getDestination(Node node, Node n) {
 		if (n.getId() == 23158 || n.getId() == 23157) {
+            // Inside brine rate cave
 			return new Location(2690, 10124, 0);
-		}
-		if (n.getId() == 96) {
-			return new Location(2641, 9763, 0);
 		}
 		return null;
 	}

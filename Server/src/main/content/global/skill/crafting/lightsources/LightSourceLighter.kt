@@ -1,12 +1,16 @@
 package content.global.skill.crafting.lightsources
 
+import core.api.*
+import core.api.teleport
 import core.game.container.Container
 import core.game.event.LitLightSourceEvent
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler
+import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
+import core.game.world.map.Location
 import core.plugin.Initializable
 import core.plugin.Plugin
 
@@ -70,6 +74,14 @@ class LightSourceLighter : UseWithHandler(590,36,38){
         if(event.player.location.isInRegion(11059)) {
             event.player.sendMessage("Your tinderbox is damp from the sea crossing. It won't work here.")
             return true
+        }
+
+        // For Temple of Ikov - if you are in the dark basement and light a light source, switch to the light basement.
+        // For the listener that covers the firemaking cape perk, see content.global.skill.skillcapeperks.SkillcapePerks.kt
+        if(event.player.location.isInRegion(10648) && event.player.location.withinDistance(Location(2639,9738,0), 8)) {
+            teleport(event.player, Location.create(event.player.getLocation().getX(), event.player.getLocation().getY() + 23, event.player.getLocation().getZ()))
+            closeDialogue(event.player)
+            // Dark basement is region 10648, min 2639 9738 0, max 2643 9744 0. Add 23 to the Y loc to tele to light basement
         }
 
         if(!light(event.player,used,lightSource)){

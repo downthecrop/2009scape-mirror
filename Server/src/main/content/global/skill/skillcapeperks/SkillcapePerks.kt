@@ -131,8 +131,15 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
             player.setAttribute("/save:$attribute",true)
         }
         player.debug("Activated ${this.name}")
-        if(this == CONSTANT_GLOW)
+        if(this == CONSTANT_GLOW) {
             DarkZone.checkDarkArea(player)
+            // For Temple of Ikov - if you are in the dark basement and put on the firemaking cape with its 2009Scape light source perk, switch to the light basement.
+            // For the listener that teleports if you light a normal light source, see content.global.skill.crafting.lightsources.LightSourceLighter.kt
+            if(player.location.isInRegion(10648) && player.location.withinDistance(Location(2639,9738,0), 8)) {
+                teleport(player, Location.create(player.getLocation().getX(), player.getLocation().getY() + 23, player.getLocation().getZ()))
+                closeDialogue(player)
+            }
+        }
     }
 
     fun operate(player: Player){

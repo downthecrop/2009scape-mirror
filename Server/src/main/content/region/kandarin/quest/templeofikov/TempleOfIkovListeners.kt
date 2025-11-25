@@ -1,7 +1,9 @@
 package content.region.kandarin.quest.templeofikov
 
+import content.data.LightSource
 import content.data.Quests
 import content.global.skill.agility.AgilityHandler
+import content.global.skill.skillcapeperks.SkillcapePerks
 import core.api.*
 import core.game.global.action.DoorActionHandler
 import core.game.global.action.PickupHandler
@@ -114,6 +116,40 @@ class TempleOfIkovListeners : InteractionListener {
         // https://www.youtube.com/watch?v=6ZGpJNeGLJ0
         // sendDialogue("Hmm...bit dark down here! I'm not going to venture far!")
 
+        // Ikov dungeon top stairs to either boots of lightness or the dark room
+        on(Scenery.STAIRS_35121, SCENERY, "Climb-down") { player, node ->
+            if (LightSource.hasActiveLightSource(player) || SkillcapePerks.isActive(SkillcapePerks.CONSTANT_GLOW, player)) { // has light source
+                teleport(player, Location.create(2641, 9763, 0))
+            } else { // doesn't have light source
+                teleport(player, Location.create(2641, 9740, 0))
+                sendDialogueLines(player, "Hmm...bit dark down here! I'm not going to venture far!")
+            }
+            true
+        }
+
+        // Ikov dungeon bottom stairs (lit) to top stairs
+        on(Scenery.STAIRS_96, SCENERY, "Climb-up") { player, node ->
+            teleport(player, Location.create(2649, 9804, 0))
+        }
+
+        // Ikov dungeon bottom stairs (dark) to top stairs
+        on(Scenery.STAIRS_33232, SCENERY, "Climb-up") { player, node ->
+            teleport(player, Location.create(2649, 9804, 0))
+        }
+
+        // don't let light extinguish or cape take off
+        val lightSourceProducts = LightSource.values().map { it.product.id }.toIntArray()
+
+        on(lightSourceProducts, ITEM, "drop") { player, light ->
+            val active = LightSource.getActiveLightSource(player).product.id
+            if (player.location.isInRegion(10648) && light.id == active) {
+                sendMessage(player, "Dropping the " + LightSource.getActiveLightSource(player).product.name.lowercase() + " would leave you without a light source.")
+                return@on false
+            }
+            val removed = removeItem(player, light.id)
+            if (removed) produceGroundItem(player, light.id)
+            return@on true
+        }
 
         // B: Attach lever, authentic if you log out, the lever is lost, and you have to do that bridge again
         onUseWith(SCENERY, Items.LEVER_83, Scenery.LEVER_BRACKET_86) { player, used, with ->
