@@ -96,7 +96,7 @@ class ModernListeners : SpellListener("modern"){
             if (!hasRequirement(player, Quests.MONKEY_MADNESS))
                 return@onCast
             requires(player,64, arrayOf(Item(Items.FIRE_RUNE_554,2),Item(Items.WATER_RUNE_555,2),Item(Items.LAW_RUNE_563,2),Item(Items.BANANA_1963)))
-            sendTeleport(player,74.0, Location.create(2754, 2784, 0))
+            sendTeleport(player,74.0, Location.create(2795, 2798, 1))
         }
 
         onCast(Modern.TELEPORT_TO_HOUSE, NONE){ player, _ ->
