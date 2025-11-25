@@ -1,6 +1,8 @@
 package content.minigame.mta
 
 import content.minigame.mta.impl.EnchantingZone.Shapes
+import core.ServerConstants
+import core.api.replaceSlot
 import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.spell.SpellType
@@ -9,6 +11,8 @@ import core.game.node.entity.player.link.SpellBookManager.SpellBook
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.combat.spell.MagicSpell
 import core.game.node.entity.combat.spell.Runes
+import core.game.node.entity.player.info.LogType
+import core.game.node.entity.player.info.PlayerMonitor
 import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
@@ -47,7 +51,7 @@ class EnchantSpell : MagicSpell {
             return false
         }
         entity.interfaceManager.setViewedTab(6)
-        val enchanted = jewellery?.getOrDefault(target.id,null)
+        var enchanted = jewellery?.getOrDefault(target.id,null)
 
         if (enchanted == null) {
             entity.packetDispatch.sendMessage("You can't use this spell on this item.")
@@ -56,12 +60,15 @@ class EnchantSpell : MagicSpell {
         if (!meetsRequirements(entity, true, true)) {
             return false
         }
-
-        if (entity.inventory.remove(target)) {
-            visualize(entity, target)
-            entity.inventory.add(enchanted)
+        if (enchanted.id == Items.RING_OF_WEALTH_2572 && ServerConstants.RING_OF_WEALTH_TELEPORT) {
+            enchanted = Item(Items.RING_OF_WEALTH_14638)
         }
 
+        visualize(entity, target)
+        val ret = replaceSlot(entity, target.slot, enchanted)
+        if (ret != target) {
+            PlayerMonitor.log(entity, LogType.DUPE_ALERT, "Unknown slot-replacement problem when enchanting jewellery (adding $enchanted replaced $ret rather than $target)")
+        }
 
         //MTA-Specific Code
         if (entity.zoneMonitor.isInZone("Enchantment Chamber")) {
@@ -184,10 +191,10 @@ class EnchantSpell : MagicSpell {
         SpellBook.MODERN.register(51, EnchantSpell(68, 78.0,
                 mapOf(
                         //Begin Jewelry Enchantment
-                        Items.DRAGONSTONE_RING_1645 to Item(14646),
-                        Items.DRAGON_NECKLACE_1664 to Item(Items.SKILLS_NECKLACE4_11105),
-                        Items.DRAGONSTONE_AMMY_1702 to Item(Items.AMULET_OF_GLORY4_1712),
-                        Items.DRAGON_BRACELET_11115 to Item(Items.COMBAT_BRACELET4_11118),
+                        Items.DRAGONSTONE_RING_1645 to Item(Items.RING_OF_WEALTH_2572),
+                        Items.DRAGON_NECKLACE_1664 to Item(Items.SKILLS_NECKLACE_11113),
+                        Items.DRAGONSTONE_AMMY_1702 to Item(Items.AMULET_OF_GLORY_1704),
+                        Items.DRAGON_BRACELET_11115 to Item(Items.COMBAT_BRACELET_11126),
                         //Begin MTA-Specific Enchantments
                         Items.CUBE_6899 to Item(Items.ORB_6902),
                         Items.CYLINDER_6898 to Item(Items.ORB_6902),

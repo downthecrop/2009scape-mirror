@@ -68,7 +68,7 @@ class BookcaseEastDialogueFile : DialogueFile() {
 class ChimneySweepingOnABudgetBook {
     companion object {
 
-        private val TITLE = "Chimney Sweeping on a Budget "
+        private val TITLE = "Chimney Sweeping on a Budget"
         val CONTENTS = arrayOf(
                 PageSet(
                         Page(

@@ -246,7 +246,7 @@ package content.region.misthalin.barbvillage.stronghold.playersafety
                          addItem(player, Items.SAFETY_GLOVES_12629)
                          sendItemDialogue(
                              player, Items.SAFETY_GLOVES_12629,
-                             "You open the chest to find a pair of safety gloves. "
+                             "You open the chest to find a pair of safety gloves."
                          )
                      }
                  }

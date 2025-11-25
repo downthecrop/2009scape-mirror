@@ -2083,7 +2083,7 @@ fun runcs2 (player: Player, scriptId: Int, vararg arguments: Any) {
  * @param callback a callback to handle the selection. The parameters passed to the callback are the slot in the inventory of the selected item, and the 0-9 index of the option clicked.
 **/
 @JvmOverloads
-fun sendItemSelect (player: Player, vararg options: String, keepAlive: Boolean = false, callback: (slot: Int, optionIndex: Int) -> Unit) {
+fun sendItemSelect(player: Player, vararg options: String, keepAlive: Boolean = false, callback: (slot: Int, optionIndex: Int) -> Unit) {
     player.interfaceManager.openSingleTab(Component(12))
     val scriptArgs = arrayOf ((12 shl 16) + 18, 93, 4, 7, 0, -1, "", "", "", "", "", "", "", "", "")
     for (i in 0 until min(9, options.size))

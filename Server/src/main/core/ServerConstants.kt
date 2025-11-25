@@ -340,6 +340,24 @@ class ServerConstants {
         var ENHANCED_DEEP_WILDERNESS = false
 
         @JvmField
+        var WILDERNESS_EXCLUSIVE_LOOT = false
+
+        @JvmField
+        var SHOOTING_STAR_RING = false
+
+        @JvmField
+        var RING_OF_WEALTH_TELEPORT = false
+
+        @JvmField
+        var SECOND_BANK = false
+
+        @JvmField
+        var PLAYER_COMMANDS = false
+
+        @JvmField
+        var BOOSTED_TRAWLER_REWARDS = false
+
+        @JvmField
         var STARTUP_MOMENT = Calendar.getInstance()
 
         @JvmField

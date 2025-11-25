@@ -1,8 +1,10 @@
 package content.region.kandarin.dialogue
 
+import core.ServerConstants
 import core.api.*
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
+import core.game.dialogue.IfTopic
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.IronmanMode
 import core.plugin.Initializable
@@ -54,10 +56,15 @@ class EniolaDialogue(player: Player? = null) : DialoguePlugin(player) {
             4 -> showTopics(
                 Topic(FacialExpression.HALF_THINKING, "If you work for the bank, what are you doing here?", 10),
                 Topic(FacialExpression.NEUTRAL, "I'd like to access my bank account, please.", 30),
+                IfTopic(FacialExpression.NEUTRAL, "I'd like to open a secondary bank account.", 5, ServerConstants.SECOND_BANK && !hasActivatedSecondaryBankAccount(player)),
+                IfTopic(FacialExpression.NEUTRAL, "I'd like to switch to my ${getBankAccountName(player, true)} bank account.", 40, hasActivatedSecondaryBankAccount(player)),
                 Topic(FacialExpression.NEUTRAL, "I'd like to check my PIN settings.", 31),
                 Topic(FacialExpression.NEUTRAL, "I'd like to see my collection box.", 32),
-                Topic(FacialExpression.NEUTRAL, "Never mind.", END_DIALOGUE)
+                IfTopic(FacialExpression.NEUTRAL, "Never mind.", END_DIALOGUE, !ServerConstants.SECOND_BANK)
             )
+
+            5 -> npcl(FacialExpression.ASKING, "Sorry, ${if (player.isMale) "sir" else "ma'am"}, the bank didn't license me for that.").also { stage++ }
+            6 -> playerl(FacialExpression.HALF_GUILTY, "Oh, okay, I'll ask a banker who is stationed in an actual bank.").also { stage = END_DIALOGUE }
 
             10 -> npcl(
                 FacialExpression.NEUTRAL,
@@ -133,7 +140,7 @@ class EniolaDialogue(player: Player? = null) : DialoguePlugin(player) {
 
             22 -> npcl(
                 FacialExpression.NEUTRAL,
-                "I'm sorry to hear that, dear ${if (player.isMale) "sir" else "madam"}. "
+                "I'm sorry to hear that, dear ${if (player.isMale) "sir" else "madam"}."
             ).also { stage++ }
 
             23 -> npcl(
@@ -157,6 +164,11 @@ class EniolaDialogue(player: Player? = null) : DialoguePlugin(player) {
                 setAttribute(player, "zmi:bankaction", "collect")
                 openInterface(player, Components.BANK_CHARGE_ZMI_619)
                 end()
+            }
+
+            40 -> {
+                toggleBankAccount(player)
+                npcl( FacialExpression.NEUTRAL, "Your active bank account has been switched. You can now access your ${getBankAccountName(player)} account.").also { stage = END_DIALOGUE }
             }
         }
 

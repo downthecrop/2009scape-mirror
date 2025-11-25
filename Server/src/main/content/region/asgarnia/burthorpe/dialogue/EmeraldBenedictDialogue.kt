@@ -1,5 +1,6 @@
 package content.region.asgarnia.burthorpe.dialogue
 
+import core.ServerConstants
 import core.api.*
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
@@ -21,7 +22,7 @@ import core.tools.START_DIALOGUE
 class EmeraldBenedictDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            START_DIALOGUE -> if(hasIronmanRestriction(player, IronmanMode.ULTIMATE)) {
+            START_DIALOGUE -> if (hasIronmanRestriction(player, IronmanMode.ULTIMATE)) {
                 npcl(
                     FacialExpression.ANNOYED,
                     "Get lost, tin can."
@@ -53,6 +54,12 @@ class EmeraldBenedictDialogue(player: Player? = null) : DialoguePlugin(player) {
                     4,
                     hasActivatedSecondaryBankAccount(player)
                 ),
+                IfTopic(
+                    FacialExpression.ASKING,
+                    "Yes, but can you open a secondary bank account for me?",
+                    7,
+                    ServerConstants.SECOND_BANK && !hasActivatedSecondaryBankAccount(player)
+                ),
                 Topic(FacialExpression.ASKING, "Yes, but can you show me my PIN settings?", 5),
                 Topic(FacialExpression.ASKING, "Yes, but can you show me my collection box?", 6),
                 Topic(FacialExpression.ANNOYED, "Yes, thanks. And I'll keep hold of it too.", END_DIALOGUE)
@@ -68,7 +75,7 @@ class EmeraldBenedictDialogue(player: Player? = null) : DialoguePlugin(player) {
                 npcl(
                     FacialExpression.SUSPICIOUS,
                     "Sure thing. Feel free to rummage through whatever's in your ${getBankAccountName(player)} now."
-                ).also { stage = END_DIALOGUE }
+                ).also { stage = 2 }
             }
 
             5 -> {
@@ -79,6 +86,20 @@ class EmeraldBenedictDialogue(player: Player? = null) : DialoguePlugin(player) {
             6 -> {
                 openGrandExchangeCollectionBox(player)
                 end()
+            }
+
+            7 -> {
+                npcl(
+                    FacialExpression.SUSPICIOUS,
+                    "Sure, just give me five million in gold and I'll take care of it."
+                ).also { stage++ }
+            }
+
+            8 -> {
+                playerl(
+                    FacialExpression.SUSPICIOUS,
+                    "On second thought, I think I'll ask somebody more reputable..."
+                ).also { stage = END_DIALOGUE }
             }
         }
 

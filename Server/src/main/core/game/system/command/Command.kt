@@ -2,6 +2,7 @@ package core.game.system.command
 
 import core.game.node.entity.player.Player
 import core.ServerConstants
+import core.game.node.entity.player.info.Rights
 import core.game.world.GameWorld
 import kotlin.collections.ArrayList
 
@@ -12,7 +13,10 @@ import kotlin.collections.ArrayList
 class Command(val name: String, val privilege: Privilege, val usage: String = "UNDOCUMENTED", val description: String = "UNDOCUMENTED", val handle: (Player, Array<String>) -> Unit) {
     fun attemptHandling(player: Player, args: Array<String>?){
         args ?: return
-        if(player.rights.ordinal >= privilege.ordinal || GameWorld.settings?.isDevMode == true || ServerConstants.I_AM_A_CHEATER){
+        val hasRights = player.rights == Rights.ADMINISTRATOR || (ServerConstants.PLAYER_COMMANDS && player.rights.ordinal >= privilege.ordinal)
+        val isDev = GameWorld.settings?.isDevMode == true
+        val isCheater = ServerConstants.I_AM_A_CHEATER
+        if (hasRights || isDev || isCheater) {
             handle(player,args)
         }
     }

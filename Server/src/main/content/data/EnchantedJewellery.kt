@@ -20,7 +20,7 @@ import org.rs09.consts.Sounds
 import java.util.*
 
 /**
- * Represents an enchanted jewellery.
+ * Represents a piece of enchanted jewellery.
  * @author Vexia, downthecrop, Player Name
  */
 enum class EnchantedJewellery(

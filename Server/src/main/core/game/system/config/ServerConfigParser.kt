@@ -167,6 +167,12 @@ object ServerConfigParser {
         ServerConstants.FORCE_EASTER_EVENTS = data.getBoolean("world.force_easter_randoms", false)
         ServerConstants.RUNECRAFTING_FORMULA_REVISION = data.getLong("world.runecrafting_formula_revision", 581).toInt()
         ServerConstants.ENHANCED_DEEP_WILDERNESS = data.getBoolean("world.enhanced_deep_wilderness", false)
+        ServerConstants.WILDERNESS_EXCLUSIVE_LOOT = data.getBoolean("world.wilderness_exclusive_loot", false)
+        ServerConstants.SHOOTING_STAR_RING = data.getBoolean("world.shooting_star_ring", false)
+        ServerConstants.RING_OF_WEALTH_TELEPORT = data.getBoolean("world.ring_of_wealth_teleport", false)
+        ServerConstants.SECOND_BANK = data.getBoolean("world.second_bank", false)
+        ServerConstants.PLAYER_COMMANDS = data.getBoolean("world.player_commands", false)
+        ServerConstants.BOOSTED_TRAWLER_REWARDS = data.getBoolean("world.boosted_trawler_rewards", false)
         ServerConstants.CONNECTIVITY_CHECK_URL = data.getString("server.connectivity_check_url", "https://google.com,https://2009scape.org")
         ServerConstants.CONNECTIVITY_TIMEOUT = data.getLong("server.connectivity_timeout", 500L).toInt()
 

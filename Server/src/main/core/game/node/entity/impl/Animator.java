@@ -2,7 +2,6 @@ package core.game.node.entity.impl;
 
 import core.game.interaction.Clocks;
 import core.game.node.entity.Entity;
-import core.game.node.entity.npc.NPC;
 import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
