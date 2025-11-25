@@ -41,7 +41,7 @@ public final class Skills {
 	/**
 	 * Represents the constant modifier of experience.
 	 */
-	public double experienceMultiplier = 5.0;
+	public double experienceMultiplier = 1.0;
 
 	/**
 	 * The maximum experience multiplier.
@@ -397,6 +397,7 @@ public final class Skills {
 	}
 
 	public void correct(double divisor){
+		// XP squish for legacy x20 accounts
 		for(int i = 0; i < staticLevels.length; i++){
 			experience[i] /= divisor;
 			staticLevels[i] = getStaticLevelByExperience(i);

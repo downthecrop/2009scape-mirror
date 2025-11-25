@@ -9,10 +9,11 @@ import core.game.world.map.Location
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import content.region.misc.tutisland.handlers.TutorialStage
+import core.game.component.Component.setUnclosable
 
 /**
  * Handles Skippy's skip tutorial dialogue
- * @author Ceikry
+ * @author Ceikry, Player Name
  */
 @Initializable
 class SkipTutorialDialogue(player: Player? = null) : DialoguePlugin(player) {
@@ -21,13 +22,13 @@ class SkipTutorialDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun open(vararg args: Any?): Boolean {
-        npcl(FacialExpression.FRIENDLY, "Hey, would you like to skip to the end? Choose wisely! This is the only time you get this choice.")
+        setUnclosable(player, npcl(FacialExpression.FRIENDLY, "Hey, would you like to skip to the end? Choose wisely! This is the only time you get this choice."))
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            0 -> options("Yes, I'd like to skip the tutorial.", "No thanks.").also { stage++ }
+            0 -> options("Yes, I'd like to skip the tutorial.", "No, thanks.").also { stage++ }
             1 -> when(buttonId)
             {
                 1 -> {

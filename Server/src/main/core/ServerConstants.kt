@@ -161,7 +161,7 @@ class ServerConstants {
         var LOG_CUTSCENE = true
 
         @JvmField
-        var RULES_AND_INFO_ENABLED = true
+        var RULES_AND_INFO_ENABLED = false
 
         @JvmField
         var WATCHDOG_ENABLED = true
@@ -292,13 +292,16 @@ class ServerConstants {
         var DRAGON_AXE_USE_OSRS_SPEC = false
 
         @JvmField
-        var ENABLE_GLOBALCHAT = false
+        var ENABLE_GLOBAL_CHAT = false
 
         @JvmField
         var MAX_PATHFIND_DISTANCE = 25
 
         @JvmField
-        var IRONMAN_ICONS = false
+        var XP_RATES = false
+
+        @JvmField
+        var IRONMAN = false
 
         @JvmField
         var PLAYER_STOCK_CLEAR_INTERVAL = 1
@@ -310,19 +313,19 @@ class ServerConstants {
         var BOTSTOCK_LIMIT = 5000
 
         @JvmField
-        var BETTER_AGILITY_PYRAMID_GP = true
+        var BETTER_AGILITY_PYRAMID_GP = false
 
         @JvmField
-        var BETTER_DFS = true
+        var BETTER_DFS = false
 
         @JvmField
-        var NEW_PLAYER_ANNOUNCEMENT = true
+        var NEW_PLAYER_ANNOUNCEMENT = false
 
         @JvmField
         var INAUTHENTIC_CANDLELIGHT_RANDOM = false
 
         @JvmField
-        var HOLIDAY_EVENT_RANDOMS = true
+        var HOLIDAY_EVENT_RANDOMS = false
 
         @JvmField
         var FORCE_HALLOWEEN_EVENTS = false
@@ -334,7 +337,7 @@ class ServerConstants {
         var FORCE_EASTER_EVENTS = false
 
         @JvmField
-        var RUNECRAFTING_FORMULA_REVISION = 581
+        var RUNECRAFTING_FORMULA_REVISION = 530
 
         @JvmField
         var ENHANCED_DEEP_WILDERNESS = false

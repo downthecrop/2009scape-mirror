@@ -135,7 +135,7 @@ public class TeleportManager {
 	/**
 	 * Fires a random event.
 	 * @param entity The entity teleporting.
-	 * @param location The destination lcoation.
+	 * @param location The destination location.
 	 */
 	public static void fireRandom(Entity entity, Location location) {
 		if (entity instanceof Player && entity.getTeleporter().getTeleportType() == 0) {

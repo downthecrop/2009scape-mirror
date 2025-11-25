@@ -43,11 +43,6 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
     private static final Item HOLY_SYMBOL = new Item(1718);
 
     /**
-     * Represents the items to use.
-     */
-    private static final Item[] ITEMS = new Item[]{new Item(9813), new Item(9814)};
-
-    /**
      * Represents the coins item.
      */
     private static final Item COINS = new Item(995, 99000);
@@ -68,8 +63,6 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
     private boolean isDiary;
 
     private final int level = 2;
-
-    private int rerolls = 0;
 
     /**
      * Constructs a new {@code SlayerMasterDialogue} {@code Object}.
@@ -120,7 +113,6 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
 
     @Override
     public boolean handle(int interfaceId, int buttonId) {
-        rerolls = ServerStore.getInt(getStoreFile(), player.getUsername().toLowerCase(), 0);
         if (isDiary) {
             switch (stage) {
                 case 999:
@@ -482,36 +474,19 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
                     stage = 999;
                     break;
                 }
-                if (!SlayerManager.getInstance(player).hasTask()) {
+                boolean hasTask = SlayerManager.getInstance(player).hasTask();
+                boolean reroll = hasTask && master == Master.TURAEL && !Master.hasSameTask(master, player);
+                if (!hasTask || reroll) {
                     SlayerManager.getInstance(player).generate(master);
-                    if (SlayerManager.getInstance(player).getTask() == Tasks.JAD) {
-                        interpreter.sendDialogues(master.getNpc(), getExpression(master), "Excellent, you're doing great. Your new task is to", "defeat the almighty TzTok-Jad.");
-                    } else {
-                        interpreter.sendDialogues(master.getNpc(), getExpression(master), "Excellent, you're doing great. Your new task is to kill", "" + SlayerManager.getInstance(player).getAmount() + " " + SlayerUtils.pluralise(SlayerManager.getInstance(player).getTaskName()) + ".");
-                    }
+                    interpreter.sendDialogues(master.getNpc(), getExpression(master), "Excellent, you're doing great. Your new task is to kill", "" + SlayerManager.getInstance(player).getAmount() + " " + SlayerUtils.pluralise(SlayerManager.getInstance(player).getTaskName()) + ".");
                     stage = 844;
                     break;
                 }
-                if (Master.hasSameTask(master, player)) {
-                    interpreter.sendDialogues(master.getNpc(), getExpression(master), "You're still hunting something. But let me check something...");
-                    stage = 847;
-                } else {
-                    SlayerManager.getInstance(player).flags.setTaskStreak(0);
-                    SlayerManager.getInstance(player).generate(master);
-                    if (SlayerManager.getInstance(player).getTask() == Tasks.JAD) {
-                        interpreter.sendDialogues(master.getNpc(), getExpression(master), "Excellent, you're doing great. Your new task is to", "defeat the almighty TzTok-Jad.");
-                    } else {
-                        interpreter.sendDialogues(master.getNpc(), getExpression(master), "Excellent, you're doing great. Your new task is to kill", "" + SlayerManager.getInstance(player).getAmount() + " " + SlayerUtils.pluralise(SlayerManager.getInstance(player).getTaskName()) + ".");
-                    }
-                    stage = 844;
-                }
+                interpreter.sendDialogues(master.getNpc(), getExpression(master), "You're still hunting something. Come back when you've","finished your task.");
+                stage = END_DIALOGUE;
                 break;
             case 844:
-                if (GameWorld.getSettings().getAllow_slayer_reroll()) {
-                    options("Got any tips for me?", "Okay, great!", "I'd like to re-roll that task.");
-                } else {
-                    options("Got any tips for me?", "Okay, great!");
-                }
+                options("Got any tips for me?", "Okay, great!");
                 stage++;
                 break;
             case 845:
@@ -523,47 +498,6 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
                     case 2:
                         player("Okay, great!");
                         stage = 999;
-                        break;
-                    case 3:
-                        player("I'd like to re-roll this task.");
-                        if(rerolls == 10){
-                            stage++;
-                        } else {
-                            SlayerManager.getInstance(player).clear();
-                            getStoreFile().put(player.getUsername().toLowerCase(), rerolls + 1);
-                            stage = 701;
-                        }
-                }
-                break;
-            case 846:
-                npcl(FacialExpression.NEUTRAL, "Actually, you're out of free rerolls. You can buy a reroll from my reward store, though.");
-                stage = END_DIALOGUE;
-                break;
-            case 847:
-                if(rerolls < 10){
-                    npcl(FacialExpression.NEUTRAL, "You do have " + (10 - rerolls) + " rerolls left today, would you like to use one?");
-                    stage++;
-                }
-                else {
-                    npcl(FacialExpression.NEUTRAL, "And it also seems you're out of rerolls for today. That's unfortunate.");
-                    stage = END_DIALOGUE;
-                }
-                break;
-            case 848:
-                options("Yes, please.", "No, thanks.");
-                stage++;
-                break;
-            case 849:
-                switch(buttonId){
-                    case 1:
-                        playerl(FacialExpression.FRIENDLY, "Yes, please.");
-                        SlayerManager.getInstance(player).clear();
-                        getStoreFile().put(player.getUsername().toLowerCase(), rerolls + 1);
-                        stage = 701;
-                        break;
-                    case 2:
-                        playerl(FacialExpression.NEUTRAL, "No, thanks.");
-                        stage = END_DIALOGUE;
                         break;
                 }
                 break;
@@ -608,56 +542,6 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
                 }
                 stage = 999;
                 break;
-            case 906:
-                switch (buttonId) {
-                    case 1:
-                        player("May I buy a Quest Point cape?");
-                        stage = 907;
-                        break;
-                    case 2:
-                        interpreter.sendDialogues(master.getNpc(), FacialExpression.HALF_GUILTY, "'Ello, and what are you after, then?");
-                        stage = 0;
-                        break;
-                }
-                break;
-            case 907:
-                npc("You bet, " + player.getUsername() + "! Right when you give me 99000 coins.");
-                stage = 908;
-                break;
-            case 908:
-                options("Okay, here you go.", "No, thanks.");
-                stage = 909;
-                break;
-            case 909:
-                switch (buttonId) {
-                    case 1:
-                        player("Okay, here you go.");
-                        stage = 910;
-                        break;
-                    case 2:
-                        end();
-                        break;
-                }
-                break;
-            case 910:
-                if (player.getInventory().freeSlots() < 2) {
-                    player("I don't seem to have enough inventory space.");
-                    stage = 999;
-                    return true;
-                }
-                if (!player.getInventory().containsItem(COINS)) {
-                    player("I don't seem to have enough coins with", "me at this time.");
-                    stage = 999;
-                    return true;
-                }
-                if (player.getInventory().remove(COINS) && player.getInventory().add(ITEMS)) {
-                    npc("Have fun with it.");
-                    stage = 999;
-                } else {
-                    player("I don't seem to have enough coins with", "me at this time.");
-                    stage = 999;
-                }
-                break;
         }
         return true;
     }
@@ -698,9 +582,4 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
     public int[] getIds() {
         return new int[]{70, 1598, 1596, 1597, 1599, 7780, 8275, 8273, 8274, 8649};
     }
-
-    private JSONObject getStoreFile() {
-        return ServerStore.getArchive("daily-slayer-rerolls");
-    }
-
 }

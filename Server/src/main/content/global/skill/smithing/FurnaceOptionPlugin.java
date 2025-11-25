@@ -79,26 +79,6 @@ public final class FurnaceOptionPlugin extends OptionHandler {
 	}
 
 	/**
-	 * Method used to handle the tutorial island interaction.
-	 * @param player the player.
-	 */
-	private final void handleTutorialIsland(final Player player) {
-		if (player.getInventory().containItems(438, 436)) {
-			player.animate(ANIMATION);
-			GameWorld.getPulser().submit(new Pulse(2, player) {
-				@Override
-				public boolean pulse() {
-					player.getInventory().remove(ITEMS);
-					player.getInventory().add(Bar.BRONZE.getProduct());
-					player.getSkills().addExperience(Skills.SMITHING, Bar.BRONZE.getExperience());
-					return true;
-				}
-
-			});
-		}
-	}
-
-	/**
 	 * Represents the plugin used to handle the ore on the furance.
 	 * @author 'Vexia
 	 * @version 1.0

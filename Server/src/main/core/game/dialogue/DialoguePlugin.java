@@ -276,8 +276,8 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 	 * Method used to send options.
 	 * @param options the options.
 	 */
-	public void options(final String... options) {
-		interpreter.sendOptions("Select an Option", options);
+	public Component options(final String... options) {
+		return interpreter.sendOptions("Select an Option", options);
 	}
 
 	/**

@@ -208,7 +208,7 @@ object PacketProcessor {
                 if (pkt.player.details.isMuted)
                     pkt.player.sendMessage("You have been muted due to breaking a rule.")
                 else {
-                    if (ServerConstants.ENABLE_GLOBALCHAT && pkt.message.startsWith("//")) {
+                    if (ServerConstants.ENABLE_GLOBAL_CHAT && pkt.message.startsWith("//")) {
                         if (getAttribute(pkt.player, GlobalChat.ATTR_GLOBAL_MUTE, false))
                             return
 

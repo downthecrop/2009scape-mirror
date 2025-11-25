@@ -1,7 +1,6 @@
 package content.region.misc.tutisland.dialogue
 
 import core.api.setAttribute
-import core.game.component.Component
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
@@ -9,10 +8,12 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import content.region.misc.tutisland.handlers.TutorialStage
+import core.game.component.Component.setUnclosable
 
 /**
- * Handles the RuneSccape guide's dialogue
+ * Handles the 2009scape guide's dialogue
  * @author Ceikry
+ * @author Player Name
  */
 @Initializable
 class TutorialRSGuideDialogue(player: Player? = null) : DialoguePlugin(player) {
@@ -23,26 +24,12 @@ class TutorialRSGuideDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         val tutStage = player?.getAttribute("tutorial:stage", 0) ?: 0
-        if(tutStage < 2) {
-            end()
-            player.dialogueInterpreter.sendDialogues(npc,FacialExpression.HALF_GUILTY,"Greetings! Please follow the onscreen, instructions!")
-            return false
-        } else {
-            Component.setUnclosable(
-                player,
-                interpreter.sendDialogues(
-                    npc,
-                    FacialExpression.HALF_GUILTY,
-                    "Greetings! Please follow the onscreen",
-                    "instructions!"
-                )
-            )
-        }
-
-        if(tutStage == 2)
-        {
+        if (tutStage < 2) {
+            setUnclosable(player, player.dialogueInterpreter.sendDialogues(npc,FacialExpression.HALF_GUILTY,"Greetings! Please follow the onscreen instructions!"))
+            stage = 99
+        } else if (tutStage == 2) {
             player.lock()
-            Component.setUnclosable(
+            setUnclosable(
                 player,
                 interpreter.sendDialogues(
                     npc,
@@ -52,26 +39,17 @@ class TutorialRSGuideDialogue(player: Player? = null) : DialoguePlugin(player) {
                 )
             )
             stage = 0
-            return true
+        } else {
+            setUnclosable(player, player.dialogueInterpreter.sendDialogues(npc,FacialExpression.HALF_GUILTY,"Please follow the onscreen instructions!"))
+            stage = 99
         }
-        else
-        {
-            Component.setUnclosable(
-                player,
-                interpreter.sendDialogues(
-                    npc,
-                    FacialExpression.HALF_GUILTY,
-                    "Please follow the onscreen instructions!"
-                )
-            )
-            return false
-        }
+        return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage)
         {
-            0 -> Component.setUnclosable(
+            0 -> setUnclosable(
                 player,
                 interpreter.sendDialogues(
                     npc,
@@ -81,7 +59,7 @@ class TutorialRSGuideDialogue(player: Player? = null) : DialoguePlugin(player) {
                 )
             ).also { stage++ }
 
-            1 -> Component.setUnclosable(
+            1 -> setUnclosable(
                 player,
                 interpreter.sendDialogues(
                     npc,
@@ -92,7 +70,7 @@ class TutorialRSGuideDialogue(player: Player? = null) : DialoguePlugin(player) {
                 )
             ).also { stage++ }
 
-            2 -> Component.setUnclosable(
+            2 -> setUnclosable(
                 player,
                 interpreter.sendDialogues(
                     npc,
@@ -104,7 +82,7 @@ class TutorialRSGuideDialogue(player: Player? = null) : DialoguePlugin(player) {
                 )
             ).also { stage++ }
 
-            3 -> Component.setUnclosable(
+            3 -> setUnclosable(
                 player,
                 interpreter.sendDialogues(
                     npc,
@@ -114,7 +92,7 @@ class TutorialRSGuideDialogue(player: Player? = null) : DialoguePlugin(player) {
                 )
             ).also { stage++ }
 
-            4 -> Component.setUnclosable(
+            4 -> setUnclosable(
                     player,
                     interpreter.sendDialogues(
                         npc,
@@ -129,6 +107,11 @@ class TutorialRSGuideDialogue(player: Player? = null) : DialoguePlugin(player) {
                 player.unlock()
                 setAttribute(player, "tutorial:stage", 3)
                 TutorialStage.load(player, 3)
+            }
+            99 -> {
+                end()
+                val tutStage = player?.getAttribute("tutorial:stage", 0) ?: 0
+                TutorialStage.load(player, tutStage)
             }
         }
         return true

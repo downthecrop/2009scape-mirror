@@ -1,5 +1,6 @@
 package content.global.skill.cooking
 
+import content.region.misc.tutisland.handlers.TutorialStage
 import core.api.*
 import core.game.event.ResourceProducedEvent
 import core.game.node.entity.skill.Skills
@@ -24,7 +25,16 @@ class DoughMakingListener : InteractionListener {
             FULL_WATER_CONTAINERS_TO_EMPTY_CONTAINERS.keys.toIntArray(),
             Items.POT_OF_FLOUR_1933
         ) { player, waterContainer, flourContainer ->
-            openDialogue(player, DoughMakeDialogue(waterContainer.asItem(), flourContainer.asItem()))
+            if (getAttribute(player, "/save:tutorial:complete", false)) {
+                openDialogue(player, DoughMakeDialogue(waterContainer.asItem(), flourContainer.asItem()))
+                return@onUseWith true
+            }
+            // Continue the tutorial
+            replaceSlot(player, waterContainer.asItem().slot, Item(Items.BUCKET_1925), waterContainer.asItem())
+            replaceSlot(player, flourContainer.asItem().slot, Item(Items.EMPTY_POT_1931), flourContainer.asItem())
+            addItemOrDrop(player, Items.BREAD_DOUGH_2307)
+            setAttribute(player, "tutorial:stage", 20)
+            TutorialStage.load(player, 20)
             return@onUseWith true
         }
     }
@@ -73,7 +83,7 @@ class DoughMakingListener : InteractionListener {
 
                             sendMessage(
                                 player!!,
-                                "You mix the flower and the water to make some ${selectedDoughProduct.itemName.toLowerCase()}."
+                                "You mix the flour and the water to make some ${selectedDoughProduct.itemName.toLowerCase()}."
                             )
                         }
                     } else {

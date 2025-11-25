@@ -12,6 +12,7 @@ import core.plugin.Initializable
 import org.rs09.consts.Components
 import org.rs09.consts.NPCs
 import content.region.misc.tutisland.handlers.TutorialStage
+import core.game.component.Component.setUnclosable
 
 /**
  * Handles the quest guide's dialogue
@@ -27,7 +28,7 @@ class TutorialQuestGuideDialogue(player: Player? = null) : DialoguePlugin(player
         npc = args[0] as NPC
         when(getAttribute(player, "tutorial:stage", 0))
         {
-            27 -> Component.setUnclosable(
+            27 -> setUnclosable(
                 player,
                 interpreter.sendDialogues(
                     npc,
@@ -37,7 +38,7 @@ class TutorialQuestGuideDialogue(player: Player? = null) : DialoguePlugin(player
                 )
             )
 
-            28 -> Component.setUnclosable(
+            28 -> setUnclosable(
                 player,
                 interpreter.sendDialogues(
                     npc,
@@ -57,7 +58,7 @@ class TutorialQuestGuideDialogue(player: Player? = null) : DialoguePlugin(player
         when(getAttribute(player, "tutorial:stage", 0))
         {
             27 -> {
-                Component.setUnclosable(
+                setUnclosable(
                     player,
                     interpreter.sendPlaneMessageWithBlueTitle(
                         "Open the Quest Journal.",
@@ -72,7 +73,7 @@ class TutorialQuestGuideDialogue(player: Player? = null) : DialoguePlugin(player
             }
             28 -> when(stage)
             {
-                0 -> Component.setUnclosable(
+                0 -> setUnclosable(
                     player,
                     interpreter.sendDialogues(
                         npc,
@@ -83,7 +84,7 @@ class TutorialQuestGuideDialogue(player: Player? = null) : DialoguePlugin(player
                         "to begin."
                     )
                 ).also { stage++ }
-                1 -> Component.setUnclosable(
+                1 -> setUnclosable(
                     player,
                     interpreter.sendDialogues(
                         npc,
@@ -93,7 +94,7 @@ class TutorialQuestGuideDialogue(player: Player? = null) : DialoguePlugin(player
                         "see marking my house."
                     )
                 ).also { stage++ }
-                2 -> Component.setUnclosable(
+                2 -> setUnclosable(
                     player,
                     interpreter.sendDialogues(
                         npc,
@@ -118,5 +119,4 @@ class TutorialQuestGuideDialogue(player: Player? = null) : DialoguePlugin(player
     override fun getIds(): IntArray {
         return intArrayOf(NPCs.QUEST_GUIDE_949)
     }
-
 }

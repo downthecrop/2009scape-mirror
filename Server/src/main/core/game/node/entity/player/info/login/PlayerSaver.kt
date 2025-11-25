@@ -322,7 +322,6 @@ class PlayerSaver (val player: Player){
 
     fun saveGlobalData(root: JSONObject){
         val globalData = JSONObject()
-        globalData.put("tutorialStage",player.savedData.globalData.tutorialStage.toString())
         globalData.put("homeTeleportDelay",player.savedData.globalData.homeTeleportDelay.toString())
         globalData.put("lumbridgeRope",player.savedData.globalData.hasTiedLumbridgeRope())
         globalData.put("apprentice",player.savedData.globalData.hasSpokenToApprentice())

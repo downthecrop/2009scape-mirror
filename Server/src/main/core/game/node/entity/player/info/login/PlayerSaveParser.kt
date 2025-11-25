@@ -330,9 +330,6 @@ class PlayerSaveParser(val player: Player) {
         player.skills.parse(skillData)
         player.skills.experienceGained = saveFile!!["totalEXP"].toString().toDouble()
         player.skills.experienceMultiplier = saveFile!!["exp_multiplier"].toString().toDouble()
-        if (GameWorld.settings?.default_xp_rate != 5.0) {
-            player.skills.experienceMultiplier = GameWorld.settings?.default_xp_rate!!
-        }
         val divisor: Double
         if(player.skills.experienceMultiplier >= 10 && !player.attributes.containsKey("permadeath")){ //exclude permadeath HCIMs from XP squish
             divisor = player.skills.experienceMultiplier / 5.0

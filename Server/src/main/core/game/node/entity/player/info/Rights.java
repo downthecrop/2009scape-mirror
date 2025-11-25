@@ -25,11 +25,11 @@ public enum Rights {
 		if (c != Rights.REGULAR_PLAYER && c != null) {
 			return c.toInteger();
 		}
-                if (ServerConstants.IRONMAN_ICONS) {
-                    if (player.getIronmanManager().isIronman()) {
-                            return player.getIronmanManager().getMode().getIcon();
-                    }
-                }
+		if (ServerConstants.IRONMAN) {
+			if (player.getIronmanManager().isIronman()) {
+				return player.getIronmanManager().getMode().getIcon();
+			}
+		}
 		return 0;
 	}
 

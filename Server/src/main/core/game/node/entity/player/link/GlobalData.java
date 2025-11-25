@@ -10,12 +10,6 @@ import org.json.simple.JSONObject;
  * @author 'Vexia
  */
 public final class GlobalData {
-
-	/**
-	 * Represents the tutorial stage.
-	 */
-	private int tutorialStage;
-
 	/**
 	 * Represents the home teleport delay.
 	 */
@@ -298,7 +292,6 @@ public final class GlobalData {
 	private boolean macroDisabled = false;
 
 	public void parse(JSONObject data){
-		tutorialStage = Integer.parseInt( data.get("tutorialStage").toString());
 		homeTeleportDelay = Long.parseLong(data.get("homeTeleportDelay").toString());
 		lumbridgeRope = (boolean) data.get("lumbridgeRope");
 		apprentice = (boolean) data.get("apprentice");
@@ -465,22 +458,6 @@ public final class GlobalData {
 	 */
 	public void setTestStage(int stage) {
 		playerTestStage = stage;
-	}
-
-	/**
-	 * Gets the tutorialStage.
-	 * @return The tutorialStage.
-	 */
-	public int getTutorialStage() {
-		return tutorialStage;
-	}
-
-	/**
-	 * Sets the tutorialStage.
-	 * @param tutorialStage The tutorialStage to set.
-	 */
-	public void setTutorialStage(int tutorialStage) {
-		this.tutorialStage = tutorialStage;
 	}
 
 	/**

@@ -5,7 +5,7 @@ package core.game.node.entity.player.link;
  * @author Vexia
  */
 public enum IronmanMode {
-	// HARDCORE_DEAD has to be before Ultimate so that it does not adopt it's restrictions (on the basis of >= in IronmanManager.java?)
+	// HARDCORE_DEAD has to be before Ultimate so that it does not adopt its restrictions (on the basis of >= in IronmanManager.java)
 	NONE(-1), STANDARD(5), HARDCORE(6), ULTIMATE(7);
 
 	/**

@@ -7,13 +7,30 @@ import core.game.node.entity.player.Player
 import content.global.skill.fishing.FishingSpot
 import content.global.skill.gather.mining.MiningNode
 import content.global.skill.gather.woodcutting.WoodcuttingNode
+import core.api.animate
+import core.api.delayScript
+import core.api.forceWalk
+import core.api.inInventory
+import core.api.lock
+import core.api.lockInteractions
+import core.api.playAudio
+import core.api.queueScript
+import core.api.replaceSlot
+import core.api.stopExecuting
 import core.game.event.*
+import core.game.interaction.QueueStrength
+import core.game.node.entity.impl.Animator
+import core.game.node.item.Item
+import core.game.world.map.Location
+import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
+import org.rs09.consts.Scenery
+import org.rs09.consts.Sounds
 
 /**
  * Event receivers for tutorial island
- * @author Ceikry
+ * @author Ceikry, Player Name
  */
 object TutorialButtonReceiver : EventHook<ButtonClickEvent>
 {
@@ -77,7 +94,7 @@ object TutorialButtonReceiver : EventHook<ButtonClickEvent>
             }
 
             //Open equipment tab SD:548,42 HD:746,45
-            45 -> if((event.iface == 548 && event.buttonId == 42) || (event.iface == 746 && event.buttonId == 45)){
+            45, 46 -> if((event.iface == 548 && event.buttonId == 42) || (event.iface == 746 && event.buttonId == 45)){
                 setAttribute(entity, "tutorial:stage", 46)
                 TutorialStage.load(entity, 46)
             }
@@ -134,18 +151,6 @@ object TutorialInteractionReceiver : EventHook<InteractionEvent>
             {
                 setAttribute(entity, "tutorial:stage", 13)
                 TutorialStage.load(entity, 13)
-            }
-
-            //Prospect rock - Tin
-            31 -> if(MiningNode.forId(event.target.id)?.identifier?.equals(2.toByte()) == true && event.option == "prospect"){
-                setAttribute(entity, "tutorial:stage", 32)
-                TutorialStage.load(entity, 32)
-            }
-
-            //Prospect rock- Copper
-            33 -> if(MiningNode.forId(event.target.id)?.identifier?.equals(1.toByte()) == true && event.option == "prospect"){
-                setAttribute(entity, "tutorial:stage", 34)
-                TutorialStage.load(entity, 34)
             }
 
             //Mine rock - Tin
@@ -211,28 +216,10 @@ object TutorialResourceReceiver : EventHook<ResourceProducedEvent>
                 TutorialStage.load(entity, 14)
             }
 
-            //Cook a shrimp
-            14,15 -> if(event.itemId == Items.BURNT_SHRIMP_7954)
-            {
-                setAttribute(entity, "tutorial:stage", 15)
-                TutorialStage.load(entity, 15)
-            }
-            else if(event.itemId == Items.SHRIMPS_315)
-            {
-                setAttribute(entity, "tutorial:stage", 16)
-                TutorialStage.load(entity, 16)
-            }
-
             //Make some bread dough
             19 -> if(event.itemId == Items.BREAD_DOUGH_2307) {
                 setAttribute(entity, "tutorial:stage", 20)
                 TutorialStage.load(entity, 20)
-            }
-
-            //Bake some bread
-            20 -> if(event.itemId == Items.BREAD_2309 || event.itemId == Items.BURNT_BREAD_2311) {
-                setAttribute(entity, "tutorial:stage", 21)
-                TutorialStage.load(entity, 21)
             }
 
             //Mine some tin ore

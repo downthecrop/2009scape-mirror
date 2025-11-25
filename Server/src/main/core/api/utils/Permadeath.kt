@@ -3,6 +3,7 @@ package core.api.utils
 import content.global.skill.construction.HouseLocation
 import content.minigame.blastfurnace.BFPlayerState
 import content.minigame.blastfurnace.BlastFurnace
+import core.ServerConstants
 import core.api.isUsingSecondaryBankAccount
 import core.api.teleport
 import core.api.toggleBankAccount
@@ -90,6 +91,9 @@ fun permadeath(target: Player) {
             }
         }
     }
+
+    // Xp rate
+    target.skills.experienceMultiplier = 1.0
 
     // Ironman data
     target.ironmanManager.mode = IronmanMode.NONE

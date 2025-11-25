@@ -1842,8 +1842,8 @@ fun sendItemDialogue(player: Player, item: Any, message: String) {
  */
 fun sendDoubleItemDialogue(player: Player, item1: Any, item2: Any, message: String) {
     when (item1) {
-        is Item -> player.dialogueInterpreter.sendDoubleItemMessage(item1, item2 as Item,  *splitLines(message))
-        is Int -> player.dialogueInterpreter.sendDoubleItemMessage(item1, item2 as Int,  *splitLines(message))
+        is Item -> player.dialogueInterpreter.sendDoubleItemMessage(item1, item2 as Item, *splitLines(message))
+        is Int -> player.dialogueInterpreter.sendDoubleItemMessage(item1, item2 as Int, *splitLines(message))
     }
 }
 

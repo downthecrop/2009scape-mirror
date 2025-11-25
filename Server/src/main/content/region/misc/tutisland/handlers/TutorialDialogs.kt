@@ -1,0 +1,554 @@
+package content.region.misc.tutisland.handlers
+
+import core.api.getAttribute
+import core.api.inInventory
+import core.game.component.Component.setUnclosable
+import core.game.event.DialogueCloseEvent
+import core.game.event.EventHook
+import core.game.node.entity.Entity
+import core.game.node.entity.player.Player
+import core.game.world.GameWorld.settings
+import org.rs09.consts.Items
+import kotlin.also
+
+fun sendStageDialog(player: Player, stage: Int) {
+    val message = when (stage) {
+        0 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Getting started",
+            "To start the tutorial use your left mouse button to click on the",
+            "" + settings!!.name + " Guide in this room. He is indicated by a flashing",
+            "yellow arrow above his head. If you can't see him, use your",
+            "keyboard's arrow keys to rotate the view."
+        )
+        1 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "",
+            "",
+            "Game options",
+            "Please click on the flashing spanner icon found at the bottom",
+            "right of your screen. This will display your game options."
+        )
+        2 -> player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
+            "Game Options",
+            "In the interface, you can now see a variety of options such as",
+            "screen brightness, sound and music volume and whether you",
+            "want to accept aid from other player's or not. Don't worry",
+            "about these too much for now; they will become easier as you",
+            "explore the game. Talk to the " + settings!!.name + " Guide to continue."
+        )
+        3 -> player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
+            "Interacting with scenery",
+            "You can interact with many items of scenery by simply clicking",
+            "on them. Right clicking will also give more options. Feel free to",
+            "try it with the things in this room, then click on the door",
+            "indicated with the yellow arrow to go though to the next",
+            "instructor."
+        )
+        4 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Moving around",
+            "Follow the path to find the next instructor. Clicking on the",
+            "ground will walk you to that point. You can also navigate by",
+            "clicking on the minimap in the top-right corner of your screen.",
+            "Talk to Survival Expert by the pond to continue the tutorial."
+        )
+        5 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Viewing the items that you were given.",
+            "Click on the flashing backpack icon to the right-hand side of",
+            "the main window to view your inventory. Your inventory is a list",
+            "of everything you have in your backpack.",
+            ""
+        )
+        6 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Cut down a tree",
+            "You can click on the backpack icon at any time to view the",
+            "items that you currently have in your inventory. You will see",
+            "that you now have an axe in your inventory. Use this to get",
+            "some logs by clicking on one of the trees in the area."
+        )
+        7 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Please wait.",
+            "",
+            "Your character is now attempting to cut down the tree. Sit back",
+            "for a moment while " + (if (player.appearance.isMale) "he" else "she") + " does all the hard work.",
+            ""
+        )
+        8 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Making a fire",
+            "Well done! You managed to cut some logs from the tree! Next,",
+            "use the tinderbox in your inventory to light the logs.",
+            "First click on the tinderbox to 'use' it.",
+            "Then click on the logs in your inventory to light them."
+        )
+        9 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Please wait.",
+            "",
+            "Your character is now attempting to light the fire.",
+            "This should only take a few seconds.",
+            ""
+        )
+        10 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "You gained some experience.",
+            "",
+            "Click on the flashing bar graph icon near the inventory button",
+            "to see your skill state.",
+            ""
+        )
+        11 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Your skill stats",
+            "Here you will see how good your skills are. As you move your",
+            "mouse over any of the icons in this tab, the small yellow popup",
+            "box will show you the exact amount of experience you have",
+            "and how much is needed to get to the next level. Speak to the survival guide."
+        )
+        12 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Catch some shrimp",
+            "Click on the bubbling fishing spot, indicated by the flashing",
+            "arrow. Remember, you can check your inventory by clicking the",
+            "backpack icon.",
+            ""
+        )
+        13 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Please wait.",
+            "",
+            "This should only take a few seconds.",
+            "As you gain Fishing experience you'll find that there are many",
+            "types of fish and many ways to catch them."
+        )
+        14 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Cooking your shrimp",
+            "Now you have caught some shrimp, let's cook it. First light a",
+            "fire: chop down a tree and then use the tinderbox on the logs.",
+            "If you've lost your axe or tinderbox Brynna will give you",
+            "another."
+        ).also {
+            if (!inInventory(player, Items.RAW_SHRIMPS_317, 1)) {
+                setUnclosable(
+                    player,
+                    player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+                        "Cooking your shrimp",
+                        "Now right click on the shrimp and select the use option. Next,",
+                        "left click on the fire you just lit. If while doing this you look in",
+                        "the top left of the screen, you will see the instruction that",
+                        "you're giving your character."
+                    )
+                )
+            }
+        }
+        15 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Burning your shrimp",
+            "You have just burnt your first shrimp. This is normal. As you",
+            "get more experience in Cooking you will burn stuff less often.",
+            "Let's try cooking without burning it this time. First catch some",
+            "more shrimp, then use them on a fire."
+        )
+        16 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Well done, you've just cooked your first " + settings!!.name + " meal.",
+            "If you'd like a recap on anything you've learnt so far, speak to",
+            "the Survival Expert. You can now move on to the next",
+            "instructor. Click on the gate shown and follow the path.",
+            "Remember, you can move the camera with the arrow keys."
+        )
+        17 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Find your next instructor",
+            "Follow the path until you get to the door with the yellow arrow",
+            "above it. Click on the door to open it. Notice the mini map in the",
+            "top right; this shows a top down view of the area around you.",
+            "This can also be used for navigation."
+        )
+        18 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Find your next instructor",
+            "Talk to the chef indicated. He will teach you the more advanced",
+            "aspects of Cooking such as combining ingredients. He will also",
+            "teach you about your Music Player.",
+            ""
+        )
+        19 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Making dough",
+            "This is the base for many of the meals. To make dough we must",
+            "mix flour and water. First, right click the bucket of water and",
+            "select use, then left click on the pot of flour.",
+            ""
+        )
+        20 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Cooking dough",
+            "Now you have made dough, you can cook it. To cook the dough,",
+            "use it with the range shown by the arrow. If you lose your",
+            "dough, talk to Lev - he will give you more ingredients.",
+            ""
+        )
+        21 -> player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
+            "Cooking dough",
+            "Well done! Your first loaf of bread. As you gain experience in",
+            "Cooking, you will be able to make other things like pies, cakes",
+            "and even kebabs. Now you've got the hang of cooking, let's",
+            "move on. Click on the flashing icon in the bottom right to see",
+            "the flashing icon in the bottom right to see the Music Player."
+        )
+        22 -> player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
+            "The Music Player",
+            "From this interface you can control the music that is played.",
+            "As you explore the world and complete quests, more of the",
+            "tunes will become unlocked. Once you've examined this menu,",
+            "use the next door to continue. If you need a recap on anything",
+            "you've learnt so far, speak to the Master Chef."
+        )
+        23 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Emotes",
+            "",
+            "Now how about showing some feelings? You will see a flashing",
+            "icon in the shape of a person. Click on that to access your",
+            "emotes."
+        )
+        24 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Emotes",
+            "For those situations where words don't quite describe how you feel try",
+            "an emote. Go ahead try one out! You might notice that some of the",
+            "emotes are grey and cannot be used now. Don't worry! As you",
+            "progress further into the game you'll gain access to all sorts of things."
+        )
+        25 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Running",
+            "",
+            "It's only a short distance to the next guide.",
+            "Why not try running there? To do this, click on the run icon",
+            "next to the minimap."
+        )
+        26 -> player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
+            "Run to the next guide",
+            "Now that you have the run button turned on, follow the path",
+            "until you come to the end. You may notice that the number on",
+            "the button goes down. This is your run energy. If your run",
+            "energy reaches zero, you'll stop running. Click on the door to",
+            "pass through it."
+        )
+        27 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Talk with the Quest Guide.",
+            "",
+            "He will tell you all about quests.",
+            "",
+            ""
+        )
+        28 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Your Quest Journal",
+            "",
+            "This is your Quest Journal, a list of all the quests in the game.",
+            "Talk to the Quest Guide again for an explanation.",
+            ""
+        )
+        29 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "",
+            "Moving on",
+            "It's time to enter some caves. Click on the ladder to go down to",
+            "the next area.",
+            ""
+        )
+        30 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Mining and Smithing",
+            "",
+            "Next let's get you a weapon, or more to the point, you can",
+            "make your first weapon yourself. Don't panic, the Mining",
+            "Instructor will help you. Talk to him and he'll tell you all about it."
+        )
+        31 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Prospecting",
+            "To prospect a mineable rock, just right click it and select the",
+            "'prospect rock' option. This will tell you the type of ore you can",
+            "mine from it. Try it now on one of the rocks indicated.",
+            ""
+        )
+        32 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Please wait.",
+            "",
+            "Your character is now attempting to prospect the rock. This",
+            "should only take a few seconds.",
+            ""
+        )
+        33 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "It's tin.",
+            "",
+            "So now you know there's tin in the grey rocks, try prospecting the",
+            "brown ones next.",
+            ""
+        )
+        34 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "It's copper.",
+            "",
+            "Talk to the Mining Instructor to find out about these types of",
+            "ore and how you can mine them.",
+            "He'll even give you the required tools.",
+        )
+        35 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Mining",
+            "",
+            "It's quite simple really. All you need to do is right click on the",
+            "rock and select 'mine' You can only mine when you have a",
+            "pickaxe. So give it a try: first mine one tin ore.",
+        )
+        36 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Please wait.",
+            "",
+            "Your character is now attempting to mine the rock.",
+            "This should only take a few seconds.",
+            ""
+        )
+        37 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Mining",
+            "",
+            "Now you have some tin ore you just need some copper ore,",
+            "then you'll have all you need to create a bronze bar. As you",
+            "did before right click on the copper rock and select 'mine'."
+        )
+        38 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Smelting",
+            "You should now have both some copper and tin ore. So let's",
+            "smelt them to make a bronze bar. To do this, right click on",
+            "either tin or copper ore and select use then left click on the",
+            "furnace. Try it now."
+        )
+        39, 40 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "You've made a bronze bar!",
+            "",
+            "Speak to the Mining Instructor and he'll show you how to make",
+            "it into a weapon.",
+            ""
+        )
+        41 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Smithing a dagger",
+            "To smith you'll need a hammer - like the one you were given by",
+            "Dezzick - access to an anvil like the one with the arrow over it",
+            "and enough metal bars to make what you are trying to smith.",
+            "To start the process, use the bar on one of the anvils."
+        )
+        42 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Smithing a dagger.",
+            "Now you have the Smithing menu open, you will see a list of all",
+            "the things you can make. Only the dagger can be made at your",
+            "skill level; this is shown by the white text under it. You'll need",
+            "to select the dagger to continue."
+        )
+        43 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "You've finished in this area.",
+            "",
+            "So let's move on. Go through the gates shown by the arrow.",
+            "Remember, you may need to move the camera to see your",
+            "surroundings. Speak to the guide for a recap at any time.",
+        )
+        44 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Combat",
+            "",
+            "In this area you will find out about combat with swords and",
+            "bows. Speak to the guide and he will tell you all about it.",
+            ""
+        )
+        45 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Wielding weapons",
+            "",
+            "You now have access to a new interface. Click on the flashing",
+            "icon of a man, the one to the right of your backpack icon.",
+            ""
+        )
+        46 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "This is your worn inventory.",
+            "From here you can see what items you have equipped. Let's",
+            "get one of those slots filled, go back to your inventory and",
+            "right click your dagger, select wield from the menu.",
+            ""
+        )
+        47 -> player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
+            "You're now holding your dagger.",
+            "Clothes, armour, weapons and many other items are equipped",
+            "like this. You can unequip items by clicking on the item in the",
+            "worn equipment. You can close this window by clicking on the",
+            "small 'x' in the top-right hand corner. Speak to the Combat",
+            "Instructor."
+        )
+        48 -> player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
+            "Unequipping items.",
+            "In your worn inventory panel, right click on the dagger and",
+            "select the remove option from the drop down list. After you've",
+            "unequipped the dagger, wield the sword and shield. As you",
+            "pass the mouse over an item you will see its name appear at",
+            "the top left of the screen."
+        )
+        49 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Combat interface.",
+            "",
+            "Click on the flashing crossed swords icon to see the combat",
+            "interface.",
+            ""
+        )
+        50 -> player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
+            "This is your combat interface.",
+            "From this interface you can select the type of attack your",
+            "character will use. Different monsters have different",
+            "weaknesses. If you hover your mouse over the buttons, you",
+            "will see the type of XP you will receive when using each type of",
+            "attack. Now you have the tools needed for battle why not slay",
+            "some rats. Click on the gates indicated to continue."
+        )
+        51 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Attacking",
+            "To attack the rat, click it and select the attack option. You",
+            "will then walk over to it and start hitting it.",
+            "",
+            ""
+        )
+        52 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Sit back and watch.",
+            "While you are fighting you will see a bar over your head. The",
+            "bar shows how much health you have left. Your opponent will",
+            "have one too. You will continue to attack the rat until it's dead",
+            "or you do something else."
+        )
+        53 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Well done, you've made your first kill!",
+            "",
+            "Pass through the gate and talk to the Combat Instructor; he",
+            "will give you your next task.",
+            ""
+        )
+        54 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Rat ranging",
+            "Now you have a bow and some arrows. Before you can use",
+            "them you'll need to equip them. Once equipped with the",
+            "ranging gear try killing another rat. Remember: to attack, right",
+            "click on the monster and select attack."
+        )
+        55 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Moving on.",
+            "You have completed the tasks here. To move on, click on the",
+            "ladder shown. If you need to go over any of what you learnt",
+            "here, just talk to the Combat Instructor and he'll tell you what",
+            "he can."
+        )
+        56 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Banking.",
+            "Follow the path and you will come to the front of a building.",
+            "This is the 'Bank of " + settings!!.name + "' where you can store all your",
+            "most valued items. To open your bank box just right click on an",
+            "open booth indicated and select 'use'."
+        )
+        57 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "This is your bank box.",
+            "You can store stuff here for safekeeping. If you die, anything",
+            "in your bank will be saved. To deposit something, right click it",
+            "and select 'Deposit-1'. Once you've had a good look, close the",
+            "window and move on through the door indicated."
+        )
+        58 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Financial advice",
+            "",
+            "The guide here will tell you all about making cash. Just click on",
+            "him to hear what he's got to say.",
+            ""
+        )
+        59 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "",
+            "",
+            "Continue through the next door.",
+            "",
+            ""
+        )
+        60 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Prayer",
+            "Follow the path to the chapel and enter it.",
+            "Once inside talk to the monk. He'll tell you all about the Prayer",
+            "skill.",
+            ""
+        )
+        61 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Your Prayer List",
+            "",
+            "Click on the flashing icon to open the Prayer List.",
+            "",
+            ""
+        )
+        62 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "",
+            "Your Prayer List",
+            "",
+            "Talk with Brother Brace and he'll tell you all about prayers.",
+            ""
+        )
+        63 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "",
+            "Friends list",
+            "You should now see another new icon. Click on the flashing",
+            "smiling face to open your Friend List.",
+            ""
+        )
+        64 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "This is your Friends List.",
+            "",
+            "This will be explained by Brother Brace shortly, but first click",
+            "on the other flashing face in the interface.",
+            ""
+        )
+        65 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "This is your Ignore List.",
+            "The two lists, Friends and Ignore - can be very helpful for",
+            "keeping track of when your friends are online or for blocking",
+            "messages from people you simply don't like. Speak with",
+            "Brother Brace and he will tell you more."
+        )
+        66 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "",
+            "Your final instructor!",
+            "You're almost finished on tutorial island. Pass through the",
+            "door to find the path leading to your final instructor.",
+            ""
+        )
+        67 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Your final instructor!",
+            "Just follow the path to the Wizard's house, where you will be",
+            "shown how to cast spells. Just talk with the mage indicated to",
+            "find out more.",
+            ""
+        )
+        68 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "Open up your final tab.",
+            "",
+            "Open up the Magic Spellbook tab by clicking on the flashing",
+            "icon next to the Prayer List tab you just learned about.",
+            ""
+        )
+        69 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "",
+            "This is your spell list.",
+            "",
+            "Ask the mage about it.",
+            ""
+        )
+        70 -> player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
+            "Cast Wind Strike at a chicken.",
+            "Now you have the runes you should see the Wind Strike icon at the",
+            "top-left of your spellbook, second in from the left. Walk over",
+            "to the caged chickens, click the Wind Strike icon and then",
+            "select one of the chickens to cast it on. It may take several",
+            "tries."
+        )
+        71 -> player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+            "You have almost completed the tutorial!",
+            "",
+            "All you need to do now is teleport to the mainland. Just speak",
+            "with Terrova and he'll tell you how to do that.",
+            ""
+        )
+        else -> null
+    }
+    setUnclosable(player, message ?: return)
+}
+
+fun sendStageDialog(entity: Entity) {
+    val player = entity as Player
+    val stage = getAttribute(player, "tutorial:stage", 0)
+    sendStageDialog(player, stage)
+}
+
+// Because we don't have proper interface stacking, the above unclosable dialogs can still be closed, if a new dialog
+// opens up over it and that dialog *is* closable. This is the case for npc dialogs and the smelting interface. Fake the
+// authentic behavior by making sure we reopen our unclosable dialog when this happens.
+object TutorialDialogPreserver : EventHook<DialogueCloseEvent> {
+    override fun process(entity: Entity, event: DialogueCloseEvent) {
+        sendStageDialog(entity)
+    }
+}
