@@ -162,13 +162,8 @@ public class WoodcuttingSkillPulse extends Pulse {
 
             player.getSkills().addExperience(Skills.WOODCUTTING, experience, true);
 
-            //send the message for the resource reward, and in the case of the dramen tree, authentically abort the chopping action
-            if (resource == WoodcuttingNode.DRAMEN_TREE) {
-                player.getPacketDispatch().sendMessage("You cut a branch from the Dramen tree.");
-                stop();
-            } else {
-                player.getPacketDispatch().sendMessage("You get some " + ItemDefinition.forId(reward).getName().toLowerCase() + ".");
-            }
+            //send the message for the resource reward
+            player.getPacketDispatch().sendMessage("You get some " + ItemDefinition.forId(reward).getName().toLowerCase() + ".");
             //give the reward
             player.getInventory().add(new Item(reward, rewardAmount));
             player.dispatch(new ResourceProducedEvent(reward, rewardAmount, node, -1));

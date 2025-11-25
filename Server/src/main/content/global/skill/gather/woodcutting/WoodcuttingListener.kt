@@ -1,5 +1,6 @@
 package content.global.skill.gather.woodcutting
 
+import content.data.Quests
 import content.data.skill.SkillingTool
 import content.data.tables.BirdNest
 import content.global.skill.farming.FarmingPatch.Companion.forObject
@@ -72,6 +73,17 @@ class WoodcuttingListener : InteractionListener {
 
         if (clockReady(player, Clocks.SKILLING)) {
             animateWoodcutting(player)
+
+            if (resource == WoodcuttingNode.DRAMEN_TREE) {
+                // Reward after one chop and then abort chopping (this is authentic)
+                queueScript(player, 1, QueueStrength.STRONG) {
+                    sendMessage(player, "You cut a branch from the Dramen tree.")
+                    addItem(player, resource.getReward())
+                    return@queueScript clearScripts(player)
+                }
+                return delayClock(player, Clocks.SKILLING, 1)
+            }
+
             if (!checkReward(player, resource, tool) && !getAttribute(player, "instachop", false))
                 return delayClock(player, Clocks.SKILLING, 3)
 
@@ -115,9 +127,7 @@ class WoodcuttingListener : InteractionListener {
                 player.getSkills().addExperience(Skills.WOODCUTTING, experience, true)
 
                 //send the message for the resource reward
-                if (resource == WoodcuttingNode.DRAMEN_TREE) {
-                    player.packetDispatch.sendMessage("You cut a branch from the Dramen tree.")
-                } else if (reward == Items.BARK_3239 && rewardAmount == 0) {
+                if (reward == Items.BARK_3239 && rewardAmount == 0) {
                     player.packetDispatch.sendMessage("You chop away some bark, but it falls to pieces before you can pick it up.")
                 } else {
                     player.packetDispatch.sendMessage("You get some " + ItemDefinition.forId(reward).name.lowercase(Locale.getDefault()) + ".")
@@ -227,6 +237,10 @@ class WoodcuttingListener : InteractionListener {
         }
         if (SkillingTool.getHatchet(player) == null) {
             player.packetDispatch.sendMessage("You do not have an axe to use.")
+            return false
+        }
+        if (node.id == org.rs09.consts.Scenery.DRAMEN_TREE_1292 && getQuestStage(player, Quests.LOST_CITY) <= 20) {
+            //TODO: find out if there is any authentic message to be shown
             return false
         }
         if (player.inventory.freeSlots() < 1 && node.isActive) {

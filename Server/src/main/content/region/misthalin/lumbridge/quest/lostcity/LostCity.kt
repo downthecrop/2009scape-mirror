@@ -1,22 +1,29 @@
 package content.region.misthalin.lumbridge.quest.lostcity
 
+import core.api.Event
+import core.api.LoginListener
+import core.api.clearScripts
+import core.api.getQuestStage
+import core.game.event.EventHook
+import core.game.event.InteractionEvent
+import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
+import core.game.world.map.Location
 import core.plugin.Initializable
 import org.rs09.consts.Items
 import content.data.Quests
+import org.rs09.consts.NPCs
+import org.rs09.consts.Scenery
 
 /**
  * LostCity class for the Lost City quest
- * @author lila
- * @author Vexia
- * @author Aero
+ * @author lila, Vexia, Aero, Player Name
  */
 @Initializable
-class LostCity : Quest(Quests.LOST_CITY, 83, 82, 3, 147, 0, 1, 6) {
-
+class LostCity : Quest(Quests.LOST_CITY, 83, 82, 3, 147, 0, 1, 6), LoginListener {
     class SkillRequirement(val skill: Int?, val level: Int?)
 
     val requirements = arrayListOf<SkillRequirement>()
@@ -65,6 +72,42 @@ class LostCity : Quest(Quests.LOST_CITY, 83, 82, 3, 147, 0, 1, 6) {
             line(player, questRequirements[i], line++, hasRequirements[i])
         }
         line(player, BLUE + "and be able to defeat a " + RED + "Level 101 Spirit without weapons", line++)
+    }
+
+    private val DramenTreeHook = object : EventHook<InteractionEvent> {
+        override fun process(entity: Entity, event: InteractionEvent) {
+            if (event.target.id == Scenery.DRAMEN_TREE_1292 && event.option == "chop down") {
+                val player = entity as Player
+                val questStage = getQuestStage(player, Quests.LOST_CITY)
+                if (questStage == 20) {
+                    if (player.getAttribute("treeSpawned", false)) {
+                        return
+                    }
+                    val spirit = TreeSpiritNPC(NPCs.TREE_SPIRIT_655, Location(2862, 9734, 0))
+                    spirit.target = player
+                    spirit.init()
+                    spirit.attack(player)
+                    player.setAttribute("treeSpawned", true)
+                    spirit.sendChat("You must defeat me before touching the tree!")
+                }
+            }
+        }
+    }
+
+    override fun setStage(player: Player, stage: Int) {
+        super.setStage(player, stage)
+        if (stage <= 20) {
+            player.hook(Event.Interacted, DramenTreeHook)
+        }
+        if (stage == 21) {
+            player.unhook(DramenTreeHook)
+        }
+    }
+
+    override fun login(player: Player) {
+        if (getQuestStage(player, Quests.LOST_CITY) <= 20) {
+            player.hook(Event.Interacted, DramenTreeHook)
+        }
     }
 
     override fun newInstance(`object`: Any?): Quest {
