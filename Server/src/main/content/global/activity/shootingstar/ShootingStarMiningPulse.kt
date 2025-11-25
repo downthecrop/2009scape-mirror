@@ -13,6 +13,9 @@ import core.game.world.GameWorld
 import core.game.world.repository.Repository
 import core.tools.colorize
 
+// TODO: Shooting stars should roll for bonus gems while mining
+// See: https://youtu.be/6OqZ2TGc6fM?si=U8nB5IDQREhWXApD
+
 /**
  * The pulse used to handle mining shooting stars.
  */
@@ -53,7 +56,7 @@ class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: Shootin
             ShootingStarPlugin.getStoreFile()["isDiscovered"] = star.isDiscovered
             return player.skills.getLevel(Skills.MINING) >= star.miningLevel
         }
-        
+
         if (player.skills.getLevel(Skills.MINING) < star.miningLevel) {
             player.dialogueInterpreter.sendDialogue("You need a Mining level of at least " + star.miningLevel + " in order to mine this layer.")
             return false
@@ -130,7 +133,7 @@ class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: Shootin
 
     override fun message(type: Int) {
         when (type) {
-            0 -> player.packetDispatch.sendMessage("You swing your pickaxe at the rock...")
+            0 -> player.packetDispatch.sendMessage("You swing your pickaxe at the rock.")
         }
     }
 

@@ -26,11 +26,11 @@ import org.rs09.consts.Items
 class MiningListener : InteractionListener {
     override fun defineListeners() {
         defineInteraction(
-                IntType.SCENERY,
-                MiningNode.values().map { it.id }.toIntArray(),
-                "mine",
-                persistent = true, allowedDistance = 1,
-                handler = ::handleMining
+            IntType.SCENERY,
+            MiningNode.values().map { it.id }.toIntArray(),
+            "mine",
+            persistent = true, allowedDistance = 1,
+            handler = ::handleMining
         )
     }
     private val GEM_REWARDS = arrayOf(ChanceItem(1623, 1, DropFrequency.COMMON), ChanceItem(1621, 1, DropFrequency.COMMON), ChanceItem(1619, 1, DropFrequency.UNCOMMON), ChanceItem(1617, 1, DropFrequency.RARE))
@@ -38,25 +38,25 @@ class MiningListener : InteractionListener {
     private fun handleMining(player: Player, node: Node, state: Int) : Boolean {
         val resource = MiningNode.forId(node.id)
         val tool = SkillingTool.getPickaxe(player)
-        val isEssence = resource.id == 2491
+        val isEssence = resource == MiningNode.RUNE_ESSENCE
         val isGems = resource.identifier == MiningNode.GEM_ROCK_0.identifier
 
         if (!finishedMoving(player))
             return true
 
         if (state == 0) {
-             if (!checkRequirements(player, resource, node)) {
-                 player.scripts.reset()
-                 return true
-             }
+            if (!checkRequirements(player, resource, node)) {
+                player.scripts.reset()
+                return true
+            }
             anim(player, tool)
-            sendMessage(player, "You swing your pickaxe at the rock...")
-            return delayScript(player, getDelay(resource))
+            sendMessage(player, "You swing your pickaxe at the rock.")
+            return delayScript(player, getDelay(resource, tool))
         }
 
         anim(player, tool)
         if (!checkReward(player, resource, tool))
-            return delayScript(player, getDelay(resource))
+            return delayScript(player, getDelay(resource, tool))
 
         // Reward logic
         var reward = resource!!.reward
@@ -94,13 +94,23 @@ class MiningListener : InteractionListener {
             if (reward == Items.GOLD_ORE_444 && inBorders(player, familyCrestGoldOreArea)) {
                 reward = Items.PERFECT_GOLD_ORE_446
             }
-            val rewardName = getItemName(reward).lowercase()
+
+            // Prepare reward name - gems stay lowercase without "Uncut", others are lowercase
+            val rewardName = if (isGems) {
+                getItemName(reward).replace("Uncut ", "").lowercase()
+            } else {
+                getItemName(reward).substringBefore(" (").lowercase().removeSuffix(" ore")
+            }
 
             // Send the message for the resource reward
             if (isGems) {
-                sendMessage(player, "You get ${prependArticle(rewardName)}.")
-            } else {
-                sendMessage(player, "You get some ${rewardName.lowercase()}.")
+                val withArticle = prependArticle(rewardName)  // "an emerald" or "a red topaz"
+                val parts = withArticle.split(" ", limit = 2)  // ["an", "emerald"] or ["a", "red topaz"]
+                val article = parts[0]  // "an" or "a"
+                val gemName = parts[1].replaceFirstChar { it.uppercase() }  // "Emerald" or "Red topaz"
+                sendMessage(player, "You just mined $article $gemName!")
+            } else if (!isEssence) {
+                sendMessage(player, "You manage to mine some ${rewardName}.")
             }
 
             // Give the mining reward, increment 'rocks mined' attribute
@@ -124,7 +134,7 @@ class MiningListener : InteractionListener {
                 }
                 if (RandomFunction.roll(chance)) {
                     val gem = GEM_REWARDS.random()
-                    sendMessage(player,"You find a ${gem.name}!")
+                    sendMessage(player,"You just found ${prependArticle(gem.name.replace("Uncut ", "").lowercase())}!")
                     if (freeSlots(player) == 0) {
                         sendMessage(player,"You do not have enough space in your inventory, so you drop the gem on the floor.")
                     }
@@ -137,6 +147,14 @@ class MiningListener : InteractionListener {
                 SceneryBuilder.replace(node as Scenery, Scenery(resource!!.emptyId, node.getLocation(), node.type, node.rotation), resource!!.respawnDuration)
                 node.setActive(false)
                 return true
+            }
+
+            // For essence, check inventory and continue mining
+            if (isEssence) {
+                if (freeSlots(player) == 0) {
+                    return true
+                }
+                return delayScript(player, getDelay(resource, tool))
             }
         }
         return true
@@ -189,6 +207,10 @@ class MiningListener : InteractionListener {
     }
 
     private fun checkReward(player: Player, resource: MiningNode?, tool: SkillingTool): Boolean {
+        // Essence mining always succeeds
+        if (resource == MiningNode.RUNE_ESSENCE) {
+            return true
+        }
         val level = 1 + getDynLevel(player, Skills.MINING) + getFamiliarBoost(player, Skills.MINING)
         val hostRatio = Math.random() * (100.0 * resource!!.rate)
         var toolRatio = tool.ratio
@@ -199,8 +221,20 @@ class MiningListener : InteractionListener {
         return hostRatio < clientRatio
     }
 
-    fun getDelay(resource: MiningNode) : Int {
-        return if (resource.id == 2491) 3 else 4
+    fun getDelay(resource: MiningNode, tool: SkillingTool) : Int {
+        if (resource == MiningNode.RUNE_ESSENCE) {  // Essence mining - speed varies by pickaxe
+            return when (tool) {
+                SkillingTool.BRONZE_PICKAXE -> 7
+                SkillingTool.IRON_PICKAXE -> 6
+                SkillingTool.STEEL_PICKAXE -> 5
+                SkillingTool.MITHRIL_PICKAXE -> 4
+                SkillingTool.ADAMANT_PICKAXE -> 3
+                SkillingTool.RUNE_PICKAXE -> 2
+                SkillingTool.INFERNO_ADZE2 -> if (RandomFunction.random(2) == 0) 1 else 2 //https://www.youtube.com/watch?v=9XhjSdJ4qro
+                else -> 4  // fallback
+            }
+        }
+        return 4  // normal rocks
     }
 
     fun anim(player: Player, tool: SkillingTool) {
@@ -220,6 +254,10 @@ class MiningListener : InteractionListener {
         if (freeSlots(player) == 0) {
             if(resource.identifier == 13.toByte()) {
                 sendDialogue(player,"Your inventory is too full to hold any more gems.")
+                return false
+            }
+            if (resource == MiningNode.RUNE_ESSENCE) {
+                sendDialogue(player,"Your inventory is too full to hold any more essence.")
                 return false
             }
             sendDialogue(player,"Your inventory is too full to hold any more ${ItemDefinition.forId(resource!!.reward).name.lowercase()}.")
