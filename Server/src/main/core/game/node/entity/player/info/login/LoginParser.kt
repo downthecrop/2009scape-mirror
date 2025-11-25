@@ -41,6 +41,7 @@ class LoginParser(val details: PlayerDetails) {
                         loginListeners.forEach(Consumer { listener: LoginListener -> listener.login(player) }) //Run our login hooks
                         parser.runContentHooks() //Run our saved-content-parsing hooks
                         player.details.session.setObject(player)
+                        player.getDetails().accountInfo.lastUsedIp = player.getDetails().getIpAddress()
                         if (reconnect) {
                             reconnect(player)
                         } else {
