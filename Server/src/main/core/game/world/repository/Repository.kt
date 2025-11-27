@@ -6,6 +6,7 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.ServerConstants
+import core.api.sendMessage
 import core.game.world.update.UpdateSequence
 import java.util.*
 import java.util.concurrent.CopyOnWriteArrayList
@@ -55,20 +56,7 @@ object Repository {
      */
     @JvmStatic
     val disconnectionQueue = DisconnectionQueue()
-    /**
-     * Sends a market update message to all players.
-     * @param string The string.
-     * @param color The color.
-     */
-    @JvmOverloads
-    fun sendMarketUpdate(string: String, icon: Int = 12, color: String = "<col=CC6600>") {
-        val players: Array<Any> = playerNames.values.toTypedArray()
-        val size = players.size
-        for (i in 0 until size) {
-            val player = players[i] as Player ?: continue
-            player.sendMessage("<img=" + icon + ">" + color + "Market Update: " + string)
-        }
-    }
+
     /**
      * Send a news message to all players.
      * @param string The string.
@@ -76,11 +64,12 @@ object Repository {
      */
     @JvmStatic
     fun sendNews(string: String, icon: Int = 12, color: String = "CC6600") {
+        if (!ServerConstants.ENABLE_GLOBAL_CHAT) return
         val players: Array<Any> = playerNames.values.toTypedArray()
         val size = players.size
         for (i in 0 until size) {
             val player = players[i] as Player ?: continue
-            player.sendMessage("<img=$icon><col=$color>News: $string")
+            sendMessage(player, "<img=$icon><col=$color>News: $string")
         }
     }
 

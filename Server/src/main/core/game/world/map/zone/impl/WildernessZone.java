@@ -108,7 +108,8 @@ public final class WildernessZone extends MapZone {
 			byte glove = (byte) RandomFunction.random(1, 14);
 			Item reward = new Item(BrawlingGloves.forIndicator(glove).getId());
 			GroundItemManager.create(reward, e.asNpc().getDropLocation(), killer.asPlayer());
-			Repository.sendNews(killer.getUsername() + " has received " + reward.getName().toLowerCase() + " from a " + e.asNpc().getName() + "!");
+			String npcString = e.getId() == NPCs.CHAOS_ELEMENTAL_3200 ? "the Chaos Elemental" : ("a " + e.asNpc().getName().toLowerCase());
+			Repository.sendNews(killer.getUsername() + " has received " + reward.getName().toLowerCase() + " from " + npcString + "!");
 		}
 		for (int j : PVP_GEAR) {
 			boolean chance = RandomFunction.roll(pvpGearRate);
@@ -120,7 +121,8 @@ public final class WildernessZone extends MapZone {
 					reward = new Item(j);
 				}
 				GroundItemManager.create(reward, ((NPC) e).getDropLocation(), killer.asPlayer());
-				Repository.sendNews(killer.asPlayer().getUsername() + " has received a " + reward.getName() + " from a " + e.asNpc().getName() + "!");
+				String npcString = e.getId() == NPCs.CHAOS_ELEMENTAL_3200 ? "the Chaos Elemental" : ("a " + e.asNpc().getName().toLowerCase());
+				Repository.sendNews(killer.asPlayer().getUsername() + " has received a " + reward.getName() + " from " + npcString + "!");
 			}
 		}
 	}
