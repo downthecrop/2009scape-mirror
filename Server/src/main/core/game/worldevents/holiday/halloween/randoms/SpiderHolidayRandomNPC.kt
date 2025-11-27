@@ -15,7 +15,7 @@ class SpiderHolidayRandomNPC() : HolidayRandomEventNPC(61) {
         this.behavior = SpiderHolidayRandomBehavior()
         playGlobalAudio(this.location, Sounds.SPIDER_4375)
         var stomped = false
-        queueScript(this,4, QueueStrength.SOFT) { stage: Int ->
+        queueScript(this, 4, QueueStrength.SOFT) { stage: Int ->
         when (stage) {
             0 -> {
                 sendChat(player, "Eww a spider!")
@@ -32,7 +32,7 @@ class SpiderHolidayRandomNPC() : HolidayRandomEventNPC(61) {
             }
             2 -> {
                 if (stomped) {
-                    impact(this, 1, ImpactHandler.HitsplatType.NORMAL)
+                    impact(this, 2, ImpactHandler.HitsplatType.NORMAL)
                 } else {
                     sendMessage(player, "The spider runs away.")
                     playGlobalAudio(this.location, Sounds.SPIDER_4375)

@@ -153,17 +153,6 @@ public final class WildernessZone extends MapZone {
 				p.getSkullManager().setWilderness(true);
 				p.getSkullManager().setLevel(getWilderness(p));
 			}
-			for (int i = 0; i < 7; i++) {
-				if (i == 5 || i == 3) {
-					continue;
-				}
-				if(p.getAttributes().containsKey("overload") || p.getSkills().getLevel(i) > 118){
-					if (p.getSkills().getLevel(i) > p.getSkills().getStaticLevel(i)) {
-						p.getSkills().setLevel(i, p.getSkills().getStaticLevel(i));
-						p.removeAttribute("overload");
-					}
-				}
-			}
 			if (p.getFamiliarManager().hasFamiliar() && !p.getFamiliarManager().hasPet()) {
 				Familiar familiar = p.getFamiliarManager().getFamiliar();
 				familiar.transform();

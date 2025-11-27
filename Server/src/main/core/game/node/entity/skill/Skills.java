@@ -363,9 +363,6 @@ public final class Skills {
 			int staticLevel = getStaticLevel(i);
 			setLevel(i, staticLevel);
 		}
-		if (entity instanceof Player) {
-			playAudio(entity.asPlayer(), Sounds.PRAYER_RECHARGE_2674);
-		}
 		rechargePrayerPoints();
 	}
 

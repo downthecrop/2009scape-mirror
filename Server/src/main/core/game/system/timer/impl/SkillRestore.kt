@@ -48,7 +48,7 @@ class SkillRestore : RSTimer (1, "skillrestore", isAuto = true, isSoft = true) {
         (entity as? Player)?.debug("Registered skill restoration timer.")
     }
 
-    private fun getHealAmount (entity: Entity) : Int {
+    fun getHealAmount (entity: Entity) : Int {
         if (entity !is Player) return 1
 
         val gloves = getItemFromEquipment (entity, EquipmentSlot.HANDS)

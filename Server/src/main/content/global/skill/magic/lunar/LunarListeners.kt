@@ -23,6 +23,7 @@ import core.game.system.command.Privilege
 import core.game.system.config.NPCConfigParser
 import core.game.system.task.Pulse
 import core.game.system.timer.impl.PoisonImmunity
+import core.game.system.timer.impl.SkillRestore
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.repository.Repository
@@ -299,7 +300,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
 
         if(playerPies.isEmpty()){
             player.sendMessage("You have no pies which you have the level to cook.")
-            return
+            throw IllegalStateException()
         }
 
         player.pulseManager.run(object : Pulse(){
@@ -327,33 +328,33 @@ class LunarListeners : SpellListener("lunar"), Commands {
     fun curePlant(player: Player, obj: Scenery) {
         if (CompostBins.forObject(obj) != null) {
             sendMessage(player, "Bins don't often get diseased.")
-            return
+            throw IllegalStateException()
         }
         val fPatch = FarmingPatch.forObject(obj)
         if (fPatch == null) {
             sendMessage(player, "Umm... this spell won't cure that!")
-            return
+            throw IllegalStateException()
         }
         val patch = fPatch.getPatchFor(player)
         if (patch.isWeedy()) {
             sendMessage(player, "The weeds are healthy enough already.")
-            return
+            throw IllegalStateException()
         }
         if (patch.isEmptyAndWeeded()) {
             sendMessage(player, "There's nothing there to cure.")
-            return
+            throw IllegalStateException()
         }
         if (patch.isGrown()) {
             sendMessage(player, "That's not diseased.")
-            return
+            throw IllegalStateException()
         }
         if (patch.isDead) {
             sendMessage(player, "It says 'Cure' not 'Resurrect'. Although death may arise from disease, it is not in itself a disease and hence cannot be cured. So there.")
-            return
+            throw IllegalStateException()
         }
         if (!patch.isDiseased) {
             sendMessage(player, "It is growing just fine.")
-            return
+            throw IllegalStateException()
         }
 
         patch.cureDisease()
@@ -367,7 +368,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
     private fun monsterExamine(player: Player, npc: NPC){
         if(!npc.location.withinDistance(player.location)){
             sendMessage(player, "You must get closer to use this spell.")
-            return
+            throw IllegalStateException()
         }
         face(player, npc)
         visualizeSpell(player, Animations.LUNAR_SPELLBOOK_STATSPY_6293, Graphics.LUNAR_SPELLBOOK_STAT_SPY_OVER_PLAYER_1060, soundID = Sounds.LUNAR_STAT_SPY_3620)
@@ -403,20 +404,20 @@ class LunarListeners : SpellListener("lunar"), Commands {
     private fun cureOther(player: Player, target: Node) {
         if(!isPlayer(target)) {
             sendMessage(player, "You can only cast this spell on other players.")
-            return
+            throw IllegalStateException()
         }
         val p = target.asPlayer()
         if(!p.isActive || p.locks.isInteractionLocked) {
             sendMessage(player, "This player is busy.")
-            return
+            throw IllegalStateException()
         }
         if(!p.settings.isAcceptAid) {
             sendMessage(player, "This player is not accepting any aid.")
-            return
+            throw IllegalStateException()
         }
         if(!isPoisoned(p)) {
             sendMessage(player, "This player is not poisoned.")
-            return
+            throw IllegalStateException()
         }
         player.face(p)
         visualizeSpell(player, Animations.LUNAR_SPELLBOOK_CURE_OTHER_4411, Graphics.LUNAR_SPELLBOOK_CURE_OTHER_736, 130, Sounds.LUNAR_CURE_OTHER_2886)
@@ -461,7 +462,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
     private fun cureMe(player: Player) {
         if(!isPoisoned(player)) {
             sendMessage(player, "You are not poisoned.")
-            return
+            throw IllegalStateException()
         }
         removeRunes(player, true)
         visualizeSpell(player, Animations.LUNAR_SPELLBOOK_CURE_ME_4411, Graphics.LUNAR_SPELLBOOK_CURE_ME_742, 90, Sounds.LUNAR_CURE_2884)
@@ -504,7 +505,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
     private fun statSpy(player: Player, target: Node) {
         if(target !is Player) {
             sendMessage(player, "You can only cast this spell on players.")
-            return
+            throw IllegalStateException()
         }
         val stat = Components.DREAM_PLAYER_STATS_523
         val statCloseEvent = CloseEvent { p, _ ->
@@ -583,33 +584,36 @@ class LunarListeners : SpellListener("lunar"), Commands {
     private fun dream(player: Player) {
         if(player.skills.lifepoints >= getStatLevel(player, Skills.HITPOINTS)) {
             sendMessage(player, "You have no need to cast this spell since your hitpoints are already full.")
-            return
+            throw IllegalStateException()
         }
 
+        // https://runescape.wiki/w/Dream?oldid=880976 claims Dream makes you heal 1 hp every 20 seconds
+        // https://oldschool.runescape.wiki/w/Dream claims that Dream has its own timer, so the Dream heals don't need
+        // to align with the natural heals
+        val timer = getOrStartTimer<SkillRestore>(player)
         animate(player, Animations.LUNAR_SPELLBOOK_DREAM_START_6295)
+        removeRunes(player, true)
+        addXP(player, 82.0)
         delayEntity(player, 4)
         queueScript(player, 4, QueueStrength.WEAK) { stage: Int ->
-            when(stage) {
-                0 -> {
-                    animate(player, Animations.LUNAR_SPELLBOOK_DREAM_MID_6296)
-                    sendGraphics(Graphics.LUNAR_SPELLBOOK_DREAM_1056, player.location)
-                    playAudio(player, Sounds.LUNAR_SLEEP_3619)
-                    return@queueScript delayScript(player, 5)
-                }
-                else -> {
-                    sendGraphics(Graphics.LUNAR_SPELLBOOK_DREAM_1056, player.location)
-                    // This heals 2 HP every min. Naturally you heal 1 for a total of 3
-                    // The script steps every 5 ticks and we want 50 ticks before a heal
-                    if (stage.mod(10) == 0){
-                        heal(player, 1)
-                        if(player.skills.lifepoints >= getStatLevel(player, Skills.HITPOINTS)) {
-                            animate(player, Animations.LUNAR_SPELLBOOK_DREAM_END_6297)
-                            return@queueScript stopExecuting(player)
-                        }
-                    }
-                    return@queueScript delayScript(player, 5)
+            if (stage == 0) {
+                sendGraphics(Graphics.LUNAR_SPELLBOOK_DREAM_1056, player.location)
+                playAudio(player, Sounds.LUNAR_SLEEP_3619)
+                return@queueScript delayScript(player, 5)
+            }
+            animate(player, Animations.LUNAR_SPELLBOOK_DREAM_MID_6296)
+            sendGraphics(Graphics.LUNAR_SPELLBOOK_DREAM_1056, player.location)
+            // This heals 2 HP every min. Naturally you heal 1 for a total of 3
+            // The script steps every 5 ticks and we want 50 ticks before a heal
+            if (stage.mod(10) == 0) {
+                val amt = timer.getHealAmount(player) //accounts for regen brace
+                heal(player, amt)
+                if (player.skills.lifepoints >= getStatLevel(player, Skills.HITPOINTS)) {
+                    animate(player, Animations.LUNAR_SPELLBOOK_DREAM_END_6297)
+                    return@queueScript stopExecuting(player)
                 }
             }
+            return@queueScript delayScript(player, 5)
         }
     }
 
@@ -661,23 +665,23 @@ class LunarListeners : SpellListener("lunar"), Commands {
     private fun fertileSoil(player: Player, target: Scenery) {
         if (CompostBins.forObjectID(target.id) != null) {
             sendMessage(player, "No, that would be silly.")
-            return
+            throw IllegalStateException()
         }
 
         val fPatch = FarmingPatch.forObject(target)
         if(fPatch == null) {
             sendMessage(player, "Um... I don't want to fertilize that!")
-            return
+            throw IllegalStateException()
         }
 
         val patch = fPatch.getPatchFor(player)
         if (patch.isGrown()) {
             sendMessage(player, "Composting isn't going to make it get any bigger.")
-            return
+            throw IllegalStateException()
         }
         if (patch.isFertilized()) {
             sendMessage(player, "This patch has already been composted.")
-            return
+            throw IllegalStateException()
         }
         removeRunes(player, true)
         animate(player, Animations.LUNAR_SPELLBOOK_FERTILE_SOIL_4413)
@@ -698,11 +702,11 @@ class LunarListeners : SpellListener("lunar"), Commands {
         val plankType = PlankType.getForLog(item)
         if (plankType == null) {
             sendMessage(player, "You need to use this spell on logs.")
-            return
+            throw IllegalStateException()
         }
         if (amountInInventory(player, Items.COINS_995) < plankType.price || !removeItem(player, Item(Items.COINS_995, plankType.price))) {
             sendMessage(player, "You need ${plankType.price} coins to convert that log into a plank.")
-            return
+            throw IllegalStateException()
         }
         lock(player, 3)
         setDelay(player, false)
@@ -717,20 +721,20 @@ class LunarListeners : SpellListener("lunar"), Commands {
     private fun energyTransfer(player: Player, target: Node) {
         if(!isPlayer(target)) {
             sendMessage(player, "You can only cast this spell on other players.")
-            return
+            throw IllegalStateException()
         }
         val targetPlayer = target.asPlayer()
         if(!targetPlayer.isActive || targetPlayer.locks.isInteractionLocked) {
             sendMessage(player, "This player is busy.")
-            return
+            throw IllegalStateException()
         }
         if(!targetPlayer.settings.isAcceptAid) {
             sendMessage(player, "This player is not accepting any aid.")
-            return
+            throw IllegalStateException()
         }
         if(10 >= player.skills.lifepoints) {
             sendMessage(player, "You need more hitpoints to cast this spell.")
-            return
+            throw IllegalStateException()
         }
         player.face(targetPlayer)
         visualizeSpell(player, Animations.LUNAR_SPELLBOOK_ENERGY_TRANSFER_4411, Graphics.LUNAR_SPELLBOOK_ENERGY_TRANSFER_738, 90, Sounds.LUNAR_ENERGY_TRANSFER_2885)

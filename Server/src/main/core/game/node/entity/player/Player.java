@@ -4,10 +4,8 @@ import content.global.handlers.item.equipment.BarrowsEquipment;
 import content.global.handlers.item.equipment.special.SalamanderSwingHandler;
 import content.global.skill.runecrafting.PouchManager;
 import core.api.ContentAPIKt;
-import core.api.EquipmentSlot;
 import core.game.component.Component;
 import core.game.container.Container;
-import core.game.container.ContainerType;
 import core.game.container.impl.BankContainer;
 import core.game.container.impl.EquipmentContainer;
 import core.game.container.impl.InventoryListener;
@@ -616,13 +614,8 @@ public class Player extends Entity {
 		if (this.isArtificial() && killer instanceof NPC) {
 			return;
 		}
-		if (killer instanceof Player && killer.getName() != getName()) { // the latter happens if you died via typeless damage from an external cause, e.g. bugs in a dark cave without a light source
-            long unixSeconds = System.currentTimeMillis() / 1000L;
-            if (unixSeconds - killer.getAttribute("/save:last-murder-news", 0L) >= 300) {
-                Item wep = getItemFromEquipment((Player) killer, EquipmentSlot.WEAPON);
-                sendNews(killer.getUsername() + " has murdered " + getUsername() + " with " + (wep == null ? "their fists." : (StringUtils.isPlusN(wep.getName()) ? "an " : "a ") + wep.getName()));
-                killer.setAttribute("/save:last-murder-news", unixSeconds);
-            }
+		if (killer instanceof Player && !Objects.equals(killer.getName(), getName())) { // the latter happens if you died via typeless damage from an external cause, e.g. bugs in a dark cave without a light source
+			ContentAPIKt.sendMessage((Player) killer, "You have defeated " + getUsername() + ".");
 		}
 		getPacketDispatch().sendMessage("Oh dear, you are dead!");
 		incrementAttribute("/save:"+STATS_BASE+":"+STATS_DEATHS);
