@@ -6,6 +6,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.skill.SkillPulse
 import core.game.node.entity.skill.Skills
 import content.data.skill.SkillingTool
+import core.ServerConstants
 import core.game.node.item.Item
 import core.tools.RandomFunction
 import org.rs09.consts.Items
@@ -103,7 +104,7 @@ class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: Shootin
         if (ShootingStarPlugin.getStarDust(player) < 200) {
             player.inventory.add(Item(ShootingStarPlugin.STAR_DUST, 1))
         }
-        if(!inInventory(player, Items.ANCIENT_BLUEPRINT_14651) && !inBank(player, Items.ANCIENT_BLUEPRINT_14651)){
+        if (ServerConstants.SHOOTING_STAR_RING && hasAnItem(player, Items.ANCIENT_BLUEPRINT_14651).container == null) {
             rollBlueprint(player)
         }
 
