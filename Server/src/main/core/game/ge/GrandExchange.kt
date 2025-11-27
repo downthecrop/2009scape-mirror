@@ -6,14 +6,11 @@ import core.cache.def.impl.ItemDefinition
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.PlayerDetails
 import core.game.system.command.Privilege
-import core.game.system.config.ItemConfigParser
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.repository.Repository
 import core.tools.Log
 import core.tools.SystemLogger
-import core.tools.colorize
-import org.rs09.consts.Sounds
 import java.lang.Integer.max
 import java.util.concurrent.LinkedBlockingDeque
 
@@ -266,9 +263,6 @@ class GrandExchange : StartupListener, Commands {
             seller.completedAmount += amount
             buyer.completedAmount += amount
 
-            if(seller.amountLeft < 1 && seller.player != null)
-                playAudio(seller.player!!, Sounds.GE_COLLECT_COINS_4042)
-
             seller.addWithdrawItem(995, amount * if(sellerBias) buyer.offeredValue else seller.offeredValue)
             buyer.addWithdrawItem(seller.itemID, amount)
 
@@ -298,12 +292,13 @@ class GrandExchange : StartupListener, Commands {
             }
 */
 
-            seller.update()
-            val sellerPlayer = Repository.uid_map[seller.playerUID]
-            sellerPlayer?.let { GrandExchangeRecords.getInstance(sellerPlayer).visualizeRecords() }
-            buyer.update()
-            val buyerPlayer = Repository.uid_map[buyer.playerUID]
-            buyerPlayer?.let { GrandExchangeRecords.getInstance(buyerPlayer).visualizeRecords() }
+            for (entity in arrayOf(buyer, seller)) {
+                entity.update()
+                val player = Repository.uid_map[entity.playerUID] ?: continue
+                val records = GrandExchangeRecords.getInstance(player)
+                records.visualizeRecords()
+                records.updateNotification = true
+            }
         }
 
         private fun canUpdatePriceIndex(seller: GrandExchangeOffer, buyer: GrandExchangeOffer): Boolean {

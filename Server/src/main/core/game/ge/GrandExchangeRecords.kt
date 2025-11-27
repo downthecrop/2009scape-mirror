@@ -22,6 +22,7 @@ import java.util.*
 class GrandExchangeRecords(private val player: Player? = null) : PersistPlayer, LoginListener {
     var history = arrayOfNulls<GrandExchangeOffer>(5)
     val offerRecords = arrayOfNulls<OfferRecord>(6)
+    var updateNotification = false
 
     override fun login(player: Player) {
         val instance = GrandExchangeRecords(player)
