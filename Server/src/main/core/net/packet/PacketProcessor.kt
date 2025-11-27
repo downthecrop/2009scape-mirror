@@ -188,7 +188,7 @@ object PacketProcessor {
                 offer.itemID = pkt.itemId
                 offer.sell = false
                 if (!PriceIndex.canTrade(pkt.itemId)) {
-                    sendMessage(pkt.player, "That item is blacklisted from the grand exchange.")
+                    sendMessage(pkt.player, "That item is blacklisted from the Grand Exchange.")
                     return
                 }
                 offer.player = pkt.player
@@ -215,6 +215,7 @@ object PacketProcessor {
                         val messages = splitChatMessage(pkt.message.substring(2), pkt.player.name.length + 3, false)
                         for (message in messages) {
                             if (message.isNotBlank())
+                                PlayerMonitor.logChat(pkt.player, "global", message)
                                 GlobalChat.process(pkt.player.username, message, Rights.getChatIcon(pkt.player))
                         }
                         return
@@ -228,6 +229,7 @@ object PacketProcessor {
                             builder.clanName = pkt.player.communication.clan.owner.lowercase().replace(" ", "_")
                             builder.message = message
                             builder.rank = Rights.getChatIcon(pkt.player)
+                            PlayerMonitor.logChat(pkt.player, "clan", message)
                             ManagementEvents.publish(builder.build())
                         }
                         return
