@@ -5575,7 +5575,7 @@
     "id": "601"
   },
   {
-    "destroy_message": "You'll have to get another down in the Dungeon",
+    "destroy_message": "You'll have to get another down in the dungeon.",
     "examine": "An unusual clay mould in the shape of a disc.",
     "durability": null,
     "name": "Lens mould",

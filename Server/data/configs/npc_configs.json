@@ -6228,6 +6228,22 @@
     "attack_level": "1"
   },
   {
+    "examine": "A man, learned in the ways of the stars.",
+    "melee_animation": "0",
+    "range_animation": "0",
+    "defence_animation": "0",
+    "magic_animation": "0",
+    "death_animation": "0",
+    "name": "Observatory professor",
+    "defence_level": "1",
+    "safespot": null,
+    "lifepoints": "10",
+    "strength_level": "1",
+    "id": "488",
+    "range_level": "1",
+    "attack_level": "1"
+  },
+  {
     "examine": "He doesn't look like he'd trust his own mother.",
     "melee_animation": "6199",
     "range_animation": "0",
@@ -6237,13 +6253,13 @@
     "magic_animation": "0",
     "death_animation": "6190",
     "name": "Goblin guard",
-    "defence_level": "20",
+    "defence_level": "37",
     "safespot": null,
-    "lifepoints": "28",
-    "strength_level": "20",
+    "lifepoints": "43",
+    "strength_level": "37",
     "id": "489",
     "range_level": "1",
-    "attack_level": "20"
+    "attack_level": "32"
   },
   {
     "examine": "If the mummy is at school",
@@ -10518,13 +10534,13 @@
     "death_animation": "5329",
     "name": "Poison spider",
     "safespot": null,
-    "defence_level": "52",
-    "lifepoints": "64",
-    "strength_level": "65",
+    "defence_level": "28",
+    "lifepoints": "25",
+    "strength_level": "28",
     "id": "1009",
     "aggressive": "true",
     "range_level": "1",
-    "attack_level": "50"
+    "attack_level": "28"
   },
   {
     "examine": "A green skinned croaker",
@@ -53255,6 +53271,7 @@
     "attack_level": "1"
   },
   {
+    "examine": "An ugly green creature.",
     "name": "Goblin",
     "defence_level": "1",
     "safespot": null,
@@ -73516,10 +73533,6 @@
     "id": "486"
   },
   {
-    "name": "Observatory professor",
-    "id": "488"
-  },
-  {
     "name": "Hajedy",
     "id": "510"
   },
@@ -82651,6 +82664,7 @@
     "id": "6114"
   },
   {
+    "examine": "A man, learned in the ways of the stars.",
     "name": "Observatory professor",
     "id": "6119"
   },

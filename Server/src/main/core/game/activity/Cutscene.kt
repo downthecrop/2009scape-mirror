@@ -167,6 +167,18 @@ abstract class Cutscene(val player: Player) {
     }
 
     /**
+     * Sends a non-NPC dialogue to the player, which updates the cutscene stage by default when continued
+     * @param message the message to send
+     * @param onContinue (optional) a method that runs when the dialogue is "continued." Increments the cutscene stage by default.
+     */
+    fun dialogueLinesUpdate(vararg message: String, onContinue: () -> Unit = {incrementStage()})
+    {
+        logCutscene("Sending standard dialogue lines update.")
+        sendDialogueLines(player, *message)
+        player.dialogueInterpreter.addAction {_,_ -> onContinue.invoke()}
+    }
+
+    /**
      * Sends a player dialogue, which updates the cutscene stage by default when continued
      * @param expression the FacialExpression to use
      * @param message the message to send
