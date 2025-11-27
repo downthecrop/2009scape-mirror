@@ -29,6 +29,9 @@ class Frozen : PersistTimer (1, "frozen", flags = arrayOf(TimerFlag.ClearOnDeath
             removeTimer(entity, this)
             return
         }
+        if (entity is Player) {
+            sendMessage(entity as Player, "You have been frozen!")
+        }
     }
 
     override fun run (entity: Entity) : Boolean {

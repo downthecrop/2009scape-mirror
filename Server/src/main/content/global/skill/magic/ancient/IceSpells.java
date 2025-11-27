@@ -130,14 +130,12 @@ public final class IceSpells extends CombatSpell {
 		if (state.getEstimatedHit() == -1) {
 			return;
 		}
-		int ticks = (1 + (type.ordinal() - SpellType.RUSH.ordinal())) * 8;
-		if (state.getEstimatedHit() > -1) {
-			if (!hasTimerActive(victim, "frozen:immunity")) {
-                                registerTimer(victim, spawnTimer("frozen", ticks, true));
-			} else if (type == SpellType.BARRAGE) {
-				state.setFrozen(true);
-			}
-		}
+		int ticks = (type.ordinal() - 4) * 8;
+        if (hasTimerActive(victim, "frozen") || hasTimerActive(victim, "frozen:immunity")) {
+            if (type == SpellType.BARRAGE) { state.setFrozen(true); }
+            return;
+        }
+		registerTimer(victim, spawnTimer("frozen", ticks, true));
 	}
 
 	@Override
