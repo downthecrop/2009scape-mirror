@@ -3,12 +3,12 @@ package content.region.asgarnia.falador.dialogue
 import content.data.tables.BirdNest
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.diary.DiaryType
-import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.Items
-import core.game.diary.DiaryLevel
+import core.api.*
+import core.game.dialogue.DialoguePlugin
+import core.game.node.entity.player.link.diary.*
 
 /**
  * Represents the Wyson the gardener dialogue.
@@ -16,37 +16,37 @@ import core.game.diary.DiaryLevel
  * @version 1.0
  */
 @Initializable
-class WysonTheGardenerDialogue : core.game.dialogue.DialoguePlugin {
-    /**
-     * If its a bird nest reward.
-     */
-    private var birdNest = false
+class  WysonTheGardenerDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     /**
      * Constructs a new `WysonTheGardenerDialogue` `Object`.
-     */
-    constructor() {
-        /**
-         * empty.
-         */
-    }
-
-    /**
-     * Constructs a new `WysonTheGardenerDialogue` `Object`.
+     * Mole part dialogue source: https://www.youtube.com/watch?v=Dw-P9T7EhZk and https://www.youtube.com/watch?v=krZiIRupKbs
      * @param player the player.
      */
-    constructor(player: Player?) : super(player) {}
+    //constructor(player: Player?) : super(player) {}
 
-    override fun newInstance(player: Player): core.game.dialogue.DialoguePlugin {
+    override fun newInstance(player: Player): DialoguePlugin {
         return WysonTheGardenerDialogue(player)
     }
 
+    /**
+     * Choose greeting. Either you have mole parts or just the normal greeting.
+     */
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
-        birdNest = player.inventory.containsItem(MOLE_CLAW) || player.inventory.containsItem(MOLE_SKIN)
-        if (birdNest) {
-            npc("If I'm not mistaken, you've got some mole bits there!", "I'll trade 'em for bird nest if ye likes.")
+        if (inInventory(player, Items.MOLE_CLAW_7416, 1) && inInventory(player, Items.MOLE_SKIN_7418, 1)) {
+            npc("If I'm not mistaken, you've got some claws and skin", " from a big mole there! I'll trade 'em for bird nests if ye", "likes. Or was ye wantin' some woad leaves instead?")
+            stage = 102
+            return true
+        }
+        if (inInventory(player, Items.MOLE_SKIN_7418, 1)) {
+            npc("If I'm not mistaken, you've got some skin from a big", "mole there! I'll trade it for bird nests if ye likes. Or", "was ye wantin' some woad leaves instead?")
             stage = 100
+            return true
+        }
+        if (inInventory(player, Items.MOLE_CLAW_7416, 1)) {
+            npc("If I'm not mistaken, you've got some claws from a big", "mole there! I'll trade it for bird nests if ye likes. Or", "was ye wantin' some woad leaves instead?")
+            stage = 101
             return true
         }
         npc("I'm the head gardener around here.", "If you're looking for woad leaves, or if you need help", "with owt, I'm yer man.")
@@ -54,8 +54,15 @@ class WysonTheGardenerDialogue : core.game.dialogue.DialoguePlugin {
         return true
     }
 
+    /**
+     * Dialogue.
+     */
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
+
+            /**
+             * Dialogue options: woad leaves.
+             */
             0 -> {
                 options("Yes please, I need woad leaves.", "Sorry, but I'm not interested.")
                 stage = 1
@@ -105,15 +112,15 @@ class WysonTheGardenerDialogue : core.game.dialogue.DialoguePlugin {
                 npc("Mmmm... ok, that sounds fair.")
                 stage = 131
             }
-            131 -> if (player.inventory.contains(995, 15)) {
-                player.inventory.remove(COINS[0])
-                player.inventory.add(WOAD_LEAF)
+            131 -> if (removeItem(player,Item(Items.COINS_995, 15) ,Container.INVENTORY)) {
+                addItemOrDrop(player, Items.WOAD_LEAF_1793, 1)
+
                 player("Thanks.")
-                player.packetDispatch.sendMessage("You buy a woad leaf from Wyson.")
+                sendMessage(player, "You buy a woad leaf from Wyson.")
                 stage = 132
             } else {
                 end()
-                player.packetDispatch.sendMessage("You need 15 cold coins to buy a woad leaf.")
+                sendMessage(player, "You need 15 gold coins to buy a woad leaf.")
             }
             132 -> {
                 npc("I'll be around if you have any more gardening needs.")
@@ -124,32 +131,67 @@ class WysonTheGardenerDialogue : core.game.dialogue.DialoguePlugin {
                 npc("Thanks for being generous", "here's an extra woad leaf.")
                 stage = 141
             }
-            141 -> if (player.inventory.contains(995, 20)) {
-                player.inventory.remove(COINS[1])
-                var i = 0
-                while (i < 2) {
-                    player.inventory.add(WOAD_LEAF, player)
-                    i++
-                }
+            141 -> if (removeItem(player,Item(Items.COINS_995, 20) ,Container.INVENTORY)) {
+                addItemOrDrop(player, Items.WOAD_LEAF_1793, 2)
                 player("Thanks.")
-                player.packetDispatch.sendMessage("You buy two woad leaves from Wyson.")
+                sendMessage(player, "You buy two woad leaves from Wyson.")
                 stage = 132
             } else {
                 end()
-                player.packetDispatch.sendMessage("You need 15 cold coins to buy a woad leaf.")
+                sendMessage(player, "You need 20 gold coins to buy a woad leaf.")
             }
             200 -> {
                 npc("Fair enough.")
                 stage = 201
             }
             201 -> end()
+
+            /**
+             * Dialogue options: mole parts.
+             */
             100 -> {
-                options("Yes, I will trade the mole claws.", "Okay, I will trade the mole skin.", "I'd like to trade both.", "No, thanks.")
+                options("Ok, I will trade the mole skin.", "Yes please, I need woad leaves.", "Sorry, but I'm not interested.")
                 stage = 900
+            }
+            101 -> {
+                options("Yeah, I will trade the mole claws.", "Yes please, I need woad leaves.", "Sorry, but I'm not interested.")
+                stage = 901
+            }
+            102 -> {
+                options("Yeah, I will trade the mole claws.", "Okay, I will trade the mole skin.", "Alright, I'll trade the claws and skin.", "Yes please, I need woad leaves.", "Sorry, but I'm not interested.")
+                stage = 902
             }
             900 -> when (buttonId) {
                 1 -> {
-                    player("Yes, I will trade the mole claws.")
+                    player("Ok, I will trade the mole skin.")
+                    stage = 920
+                }
+                2 -> {
+                    player("Yes please, I need woad leaves.")
+                    stage = 10
+                }
+                3 -> {
+                    player("Sorry, but I'm not interested.")
+                    stage = 200
+                }
+            }
+            901 -> when (buttonId) {
+                1 -> {
+                    player("Yeah, I will trade the mole claws.")
+                    stage = 910
+                }
+                2 -> {
+                    player("Yes please, I need woad leaves.")
+                    stage = 10
+                }
+                3 -> {
+                    player("Sorry, but I'm not interested.")
+                    stage = 200
+                }
+            }
+            902 -> when (buttonId) {
+                1 -> {
+                    player("Yeah, I will trade the mole claws.")
                     stage = 910
                 }
                 2 -> {
@@ -157,37 +199,48 @@ class WysonTheGardenerDialogue : core.game.dialogue.DialoguePlugin {
                     stage = 920
                 }
                 3 -> {
-                    player("I'd like to trade both.")
+                    player("Alright, I'll trade the claws and skin.")
                     stage = 930
                 }
                 4 -> {
-                    player("No, thanks.")
-                    stage = 999
+                    player("Yes please, I need woad leaves.")
+                    stage = 10
+                }
+                5 -> {
+                    player("Sorry, but I'm not interested.")
+                    stage = 200
                 }
             }
             910 -> {
-                if (!player.inventory.containsItem(MOLE_CLAW)) {
+                if (!inInventory(player, Items.MOLE_CLAW_7416, 1)) {
                     player("Sorry, I don't have any mole claws.")
                     stage = 999
+                } else {
+                addClawRewards()
+                npc("Pleasure doing business with ya.")
+                stage = 999
                 }
-                end()
-                addRewards()
             }
             920 -> {
-                if (!player.inventory.containsItem(MOLE_SKIN)) {
+                if (!inInventory(player, Items.MOLE_SKIN_7418, 1)) {
                     player("Sorry, I don't have any mole skins.")
                     stage = 999
+                } else {
+                addSkinRewards()
+                npc("Pleasure doing business with ya.")
+                stage = 999
                 }
-                end()
-                addRewards()
             }
             930 -> {
-                if (!player.inventory.containsItem(MOLE_CLAW) && !player.inventory.containsItem(MOLE_SKIN)) {
+                if (!inInventory(player, Items.MOLE_CLAW_7416, 1) || !inInventory(player, Items.MOLE_SKIN_7418, 1)) {
                     player("Sorry, I don't have any.")
                     stage = 999
+                } else {
+                addClawRewards()
+                addSkinRewards()
+                npc("Pleasure doing business with ya.")
+                stage = 999
                 }
-                addRewards()
-                end()
             }
             999 -> end()
         }
@@ -196,26 +249,31 @@ class WysonTheGardenerDialogue : core.game.dialogue.DialoguePlugin {
 
     /**
      * Adds nests.
-     * @param nestAmount the amount.
      */
-    private fun addRewards() {
-        val moleClaws = player.inventory.getAmount(Items.MOLE_CLAW_7416)
-        val moleSkin = player.inventory.getAmount(Items.MOLE_SKIN_7418)
-        val nestAmount = moleClaws + moleSkin
-
-        //Remove claws and skins
-        player.inventory.remove(Item(Items.MOLE_CLAW_7416,moleClaws))
-        player.inventory.remove(Item(Items.MOLE_SKIN_7418, moleSkin))
-
-        //Add white lily seeds if the player has the hard diary done
-        if(moleSkin > 0 && player.achievementDiaryManager.getDiary(DiaryType.FALADOR).checkComplete(DiaryLevel.HARD)) {
-            player.inventory.add(Item(14589, moleSkin), player)
+    private fun addClawRewards() {
+        // count the number of claws
+        val nestAmount = amountInInventory(player, Items.MOLE_CLAW_7416)
+        // remove the counted number of skins
+        if(removeItem(player, Item(Items.MOLE_CLAW_7416, nestAmount), Container.INVENTORY)){
+            // add the counted number of nests. one by one so they each have random contents
+            for (i in 0 until nestAmount) {
+                addItemOrDrop(player, BirdNest.getRandomNest(true).nest.id, 1)
+            }
         }
+    }
 
-        //Add nests
-        for (i in 0 until nestAmount) {
-            if(!player.inventory.add(Item(BirdNest.getRandomNest(true).nest.id, 1), player)){
-                GroundItemManager.create(Item(BirdNest.getRandomNest(true).nest.id,1),player.location,player)
+    private fun addSkinRewards() {
+        // count the number of skins
+        val nestAmount = amountInInventory(player, Items.MOLE_SKIN_7418)
+        // remove the counted number of skins
+        if(removeItem(player, Item(Items.MOLE_SKIN_7418, nestAmount), Container.INVENTORY)) {
+            // add the counted number of nests. one by one so they each have random contents
+            // if Falador Hard diary is complete, add a white lilly seed
+            for (i in 0 until nestAmount) {
+                addItemOrDrop(player, BirdNest.getRandomNest(true).nest.id, 1)
+                if (player.achievementDiaryManager.getDiary(DiaryType.FALADOR).isComplete(2)) {
+                    addItemOrDrop(player, Items.WHITE_LILY_SEED_14589, 1)
+                }
             }
         }
     }
@@ -224,25 +282,4 @@ class WysonTheGardenerDialogue : core.game.dialogue.DialoguePlugin {
         return intArrayOf(36)
     }
 
-    companion object {
-        /**
-         * Represents the coins item that can be used.
-         */
-        private val COINS = arrayOf(Item(995, 15), Item(995, 20))
-
-        /**
-         * Represents the woad leaf item.
-         */
-        private val WOAD_LEAF = Item(1793, 1)
-
-        /**
-         * The mole claw item.
-         */
-        private val MOLE_CLAW = Item(7416)
-
-        /**
-         * The mole skin.
-         */
-        private val MOLE_SKIN = Item(7418)
-    }
 }
