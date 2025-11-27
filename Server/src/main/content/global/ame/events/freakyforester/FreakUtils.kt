@@ -1,13 +1,10 @@
 package content.global.ame.events.freakyforester
 
-import content.global.ame.kidnapPlayer
 import content.global.ame.returnPlayer
 import core.api.*
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.TeleportManager
-import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import core.tools.RandomFunction
 
@@ -26,10 +23,6 @@ object FreakUtils{
             else -> setAttribute(player, freakTask, NPCs.PHEASANT_2459)
         }
         player.dialogueInterpreter.open(FreakyForesterDialogue(), freakNpc)
-    }
-
-    fun teleport(player: Player) {
-        kidnapPlayer(player, Location.create(2599, 4777 ,0), TeleportManager.TeleportType.INSTANT)
     }
 
     fun cleanup(player: Player) {

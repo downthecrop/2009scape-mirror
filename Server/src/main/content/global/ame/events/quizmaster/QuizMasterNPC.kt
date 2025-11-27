@@ -4,14 +4,9 @@ import content.global.ame.RandomEventNPC
 import content.global.ame.kidnapPlayer
 import core.api.*
 import core.api.utils.WeightBasedTable
-import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
-import core.game.node.entity.player.link.TeleportManager
-import core.game.system.timer.impl.AntiMacro
 import core.game.world.map.Location
-import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.NPCs
-import org.rs09.consts.Sounds
 
 /**
  * Quiz Master NPC:
@@ -27,35 +22,14 @@ class QuizMasterNPC(var type: String = "", override var loot: WeightBasedTable? 
     override fun init() {
         super.init()
         sendChat("Hey ${player.username}! It's your lucky day!")
-        queueScript(player, 4, QueueStrength.SOFT) { stage: Int ->
-            when (stage) {
-                0 -> {
-                    lock(player, 6)
-                    sendGraphics(Graphics(1576, 0, 0), player.location)
-                    animate(player,8939)
-                    playAudio(player, Sounds.TELEPORT_ALL_200)
-                    return@queueScript delayScript(player, 3)
-                }
-                1 -> {
-                    kidnapPlayer(player, Location(1952, 4764, 1), TeleportManager.TeleportType.INSTANT)
-                    setAttribute(player, QuizMasterDialogueFile.QUIZMASTER_ATTRIBUTE_QUESTIONS_CORRECT, 0)
-                    AntiMacro.terminateEventNpc(player)
-                    sendGraphics(Graphics(1577, 0, 0), player.location)
-                    animate(player,8941)
-                    sendMessage(player, "Answer four questions correctly in a row to be teleported back where you came from.")
-                    sendMessage(player, "You will need to relog in if you lose the quiz dialog.") // Inauthentic, but there to notify the player in case.
-                    return@queueScript delayScript(player, 6)
-                }
-                2 -> {
-                    face(player, Location(1952, 4768, 1))
-                    animate(player,2378)
-                    // This is not needed as when you enter the QuizMasterBorders, it should fire off the dialogue
-                    // openDialogue(player, QuizMasterDialogueFile(), this.asNpc())
-                    return@queueScript stopExecuting(player)
-                }
-                else -> return@queueScript stopExecuting(player)
-            }
-
+        face(player)
+        kidnapPlayer(this, player, Location(1952, 4764, 0)) { player, _ ->
+            setAttribute(player, QuizMasterDialogueFile.QUIZMASTER_ATTRIBUTE_QUESTIONS_CORRECT, 0)
+            sendMessage(player, "Answer four questions correctly in a row to be teleported back where you came from.")
+            sendMessage(player, "You will need to relog in if you lose the quiz dialog.") // Inauthentic, but there to notify the player in case.
+            face(player, Location(1952, 4768, 1))
+            animate(player,2378)
+            // Quiz dialogue gets opened automatically on zone entry.
         }
     }
 

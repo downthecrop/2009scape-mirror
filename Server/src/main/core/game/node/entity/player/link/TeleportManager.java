@@ -27,16 +27,6 @@ public class TeleportManager {
 	public static final int WILDY_TELEPORT = 1 << 16 | 8;
 
 	/**
-	 * The animations used in the home teleport.
-	 */
-	private final static int[] HOME_ANIMATIONS = {1722, 1723, 1724, 1725, 2798, 2799, 2800, 3195, 4643, 4645, 4646, 4847, 4848, 4849, 4850, 4851, 4852, 65535};
-
-	/**
-	 * The graphics used in the home teleport.
-	 */
-	private final static int[] HOME_GRAPHICS = {775, 800, 801, 802, 803, 804, 1703, 1704, 1705, 1706, 1707, 1708, 1709, 1710, 1711, 1712, 1713, 65535};
-
-	/**
 	 * The entity being handled.
 	 */
 	private final Entity entity;
@@ -62,7 +52,6 @@ public class TeleportManager {
 	 */
 	public TeleportManager(Entity entity) {
 		this.entity = entity;
-		lastTeleport = TeleportType.HOME.getPulse(entity, ServerConstants.HOME_LOCATION);
 	}
 
 	/**
@@ -116,16 +105,11 @@ public class TeleportManager {
 		}
 		this.teleportType = teleportType;
 		entity.getWalkingQueue().reset();
-		lastTeleport = currentTeleport;
 		currentTeleport = type.getPulse(entity, location);
 		entity.getPulseManager().clear();
-		if (type == TeleportType.HOME) {
-			entity.getPulseManager().run(type.getPulse(entity, location));
-		} else {
-			entity.lock(12);
-			entity.getImpactHandler().setDisabledTicks(teleportType == -1 ? 5 : 12);
-			GameWorld.getPulser().submit(currentTeleport);
-		}
+		entity.lock(12);
+		entity.getImpactHandler().setDisabledTicks(teleportType == -1 ? 5 : 12);
+		GameWorld.getPulser().submit(currentTeleport);
 		if (entity instanceof Player) {
 			((Player) entity).getInterfaceManager().close();
 		}
@@ -144,35 +128,11 @@ public class TeleportManager {
 	}
 
 	/**
-	 * Get the home teleport audio based on tick count.
-	 * @param count
-	 */
-	private static int getAudio(int count){
-		switch(count){
-			case 0:
-				return 193;
-			case 4:
-				return 194;
-			case 11:
-				return 195;
-		}
-		return -1;
-	}
-
-	/**
 	 * Gets the entity.
 	 * @return the Entity
 	 */
 	public final Entity getEntity() {
 		return entity;
-	}
-
-	/**
-	 * Gets the last teleport pulse.
-	 * @return the Pulse
-	 */
-	public final Pulse getLastTeleport() {
-		return lastTeleport;
 	}
 
 	/**
@@ -182,7 +142,6 @@ public class TeleportManager {
 	public final Pulse getCurrentTeleport() {
 		return currentTeleport;
 	}
-
 
 	/**
 	 * Represents a NodeType for Teleporter
@@ -326,57 +285,6 @@ public class TeleportManager {
 						entity.graphics(new Graphics(-1));
 						entity.unlock();
 						entity.lock(2);
-					}
-				};
-			}
-		},
-		HOME(new TeleportSettings(4847, 4857, 800, 804)) {
-			@Override
-			public Pulse getPulse(final Entity entity, final Location location) {
-				return new TeleportPulse(entity) {
-					int count;
-					Player player;
-
-					@Override
-					public boolean pulse() {
-						switch (count) {
-							case 18:
-								player.getProperties().setTeleportLocation(location);
-								return true;
-							default:
-								playGlobalAudio(entity.getLocation(), getAudio(count));
-								player.getPacketDispatch().sendGraphic(HOME_GRAPHICS[count]);
-								player.getPacketDispatch().sendAnimation(HOME_ANIMATIONS[count]);
-								break;
-						}
-						count++;
-						return false;
-					}
-					@Override
-					public void start() {
-						player = ((Player) entity);
-						/*if (player.getSavedData().getGlobalData().getHomeTeleportDelay() > System.currentTimeMillis() && !player.isDonator()) {
-						    long milliseconds = player.getSavedData().getGlobalData().getHomeTeleportDelay() - System.currentTimeMillis();
-						    int minutes = (int) Math.round(milliseconds / 120000);
-						    if (minutes > 15) {
-						    	player.getSavedData().getGlobalData().setHomeTeleportDelay(System.currentTimeMillis() + 1200000);
-						    	milliseconds = player.getSavedData().getGlobalData().getHomeTeleportDelay() - System.currentTimeMillis();
-						    	minutes = (int) Math.round(milliseconds / 120000);
-						    }
-						    if (minutes != 0) {
-						    	player.getPacketDispatch().sendMessage("You need to wait another " + minutes + " " + (minutes == 1 ? "minute" : "minutes") + " to cast this spell.");
-						    	stop();
-						    	return;
-						    }
-						}*/
-						super.start();
-					}
-
-					@Override
-					public void stop() {
-						super.stop();
-						entity.getAnimator().forceAnimation(new Animation(-1));
-						player.graphics(new Graphics(-1));
 					}
 				};
 			}

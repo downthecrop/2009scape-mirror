@@ -5,6 +5,7 @@ import content.global.skill.farming.CompostBins
 import content.global.skill.farming.CompostType
 import content.global.skill.farming.FarmingPatch
 import content.global.skill.magic.SpellListener
+import content.global.skill.magic.homeTeleport
 import content.global.skill.magic.spellconsts.Lunar
 import core.api.*
 import core.game.component.CloseEvent
@@ -36,7 +37,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
         // Level 0
         onCast(Lunar.HOME_TELEPORT, NONE) { player, _ ->
             requires(player)
-            player.teleporter.send(Location.create(2100, 3914, 0),TeleportManager.TeleportType.HOME)
+            homeTeleport(player, Location.create(2100, 3914, 0))
             setDelay(player,true)
         }
 

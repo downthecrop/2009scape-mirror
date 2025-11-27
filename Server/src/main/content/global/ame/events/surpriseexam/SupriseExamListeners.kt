@@ -2,7 +2,6 @@ package content.global.ame.events.surpriseexam
 
 import core.game.component.Component
 import core.game.node.entity.player.Player
-import core.game.node.item.Item
 import core.game.world.map.Location
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
@@ -66,6 +65,6 @@ class SupriseExamListeners : InteractionListener, MapArea {
     }
 
     override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS, ZoneRestriction.OFF_MAP)
+        return arrayOf(ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS, ZoneRestriction.TELEPORT, ZoneRestriction.OFF_MAP)
     }
 }

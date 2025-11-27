@@ -12,6 +12,7 @@ import core.game.system.timer.impl.AntiMacro
 import core.game.worldevents.holiday.HolidayRandomEventNPC
 import core.game.worldevents.holiday.HolidayRandomEvents
 import core.game.worldevents.holiday.HolidayRandoms
+import org.rs09.consts.NPCs
 
 /**
  * Handles the NPC talk-to option.
@@ -37,11 +38,18 @@ class NPCTalkListener : InteractionListener {
             val npc = node.asNpc()
             if(RandomEvents.randomIDs.contains(node.id)){
                 if(AntiMacro.getEventNpc(player) == null || AntiMacro.getEventNpc(player) != node.asNpc() || AntiMacro.getEventNpc(player)?.finalized == true) {
-                    player.sendMessage("They aren't interested in talking to you.")
+                    // Why the fuck is this here of all places? Now look at what you've made me do:
+                    if (npc.id == NPCs.SANDWICH_LADY_3117) {
+                        // https://www.youtube.com/watch?v=ek8r3ZS929E
+                        player.dialogueInterpreter.sendDialogue("The sandwich lady doesn't seem interested in selling you any", "refreshments.")
+                    } else {
+                        sendMessage(player, "They aren't interested in talking to you.")
+                    }
                 } else {
                     AntiMacro.getEventNpc(player)?.talkTo(node.asNpc())
                 }
                 return@on true
+                //TODO bring sanity here
             }
             if (HolidayRandomEvents.holidayRandomIDs.contains(node.id) && node is HolidayRandomEventNPC) {
                 if(HolidayRandoms.getEventNpc(player) == null || HolidayRandoms.getEventNpc(player) != node.asNpc() || HolidayRandoms.getEventNpc(player)?.finalized == true) {

@@ -1,15 +1,12 @@
 package content.global.ame.events.surpriseexam
 
-import content.global.ame.kidnapPlayer
 import content.global.ame.returnPlayer
 import core.api.*
 import core.game.node.entity.impl.PulseType
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
-import core.game.world.map.Location
 import org.rs09.consts.Components
 import org.rs09.consts.Items
-import core.game.node.entity.player.link.TeleportManager
 
 object SurpriseExamUtils {
     val SE_KEY_INDEX = "supexam:index"

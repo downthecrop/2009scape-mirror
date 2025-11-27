@@ -4,10 +4,12 @@ import content.data.Quests
 import content.global.skill.magic.SpellListener
 import content.global.skill.magic.SpellUtils.hasRune
 import content.global.skill.magic.TeleportMethod
+import content.global.skill.magic.homeTeleport
 import content.global.skill.magic.spellconsts.Modern
 import content.global.skill.prayer.Bones
 import content.global.skill.smithing.smelting.Bar
 import content.global.skill.smithing.smelting.SmeltingPulse
+import content.region.kandarin.ardougne.quest.plaguecity.PlagueCityListeners
 import core.ServerConstants
 import core.api.*
 import core.game.event.ItemAlchemizationEvent
@@ -23,7 +25,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
-import content.region.kandarin.ardougne.quest.plaguecity.PlagueCityListeners
 import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
@@ -39,7 +40,7 @@ class ModernListeners : SpellListener("modern"){
                 return@onCast
             }
             requires(player)
-            player.teleporter.send(ServerConstants.HOME_LOCATION,TeleportManager.TeleportType.HOME)
+            homeTeleport(player, ServerConstants.HOME_LOCATION ?: Location(3222, 3218, 0))
             setDelay(player,true)
         }
 

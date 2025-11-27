@@ -1,5 +1,6 @@
 package content.global.skill.magic.ancient;
 
+import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.entity.combat.spell.MagicSpell;
 import core.game.node.entity.combat.spell.Runes;
@@ -13,7 +14,11 @@ import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import core.tools.Log;
 import core.tools.RandomFunction;
+
+import static content.global.skill.magic.HomeTeleportHelperKt.homeTeleport;
+import static core.api.ContentAPIKt.log;
 
 /**
  * Represents the plugin used to handle all ancient teleporting plugins.
@@ -55,7 +60,14 @@ public final class AncientTeleportPlugin extends MagicSpell {
 			entity.asPlayer().sendMessage("A magical force has stopped you from teleporting.");
 			return false;
 		}
-		if (entity.getTeleporter().send(location.transform(0, RandomFunction.random(3), 0), getSpellId() == 28 ? TeleportType.HOME : TeleportType.ANCIENT)) {
+		boolean isHomeTeleport = getSpellId() == 28;
+		if (isHomeTeleport) {
+			if (!entity.isPlayer()) {
+				log(this.getClass(), Log.ERR, "Why the fuck is a non-player entity trying to cast ancient-magick home teleport?!");
+				return false;
+			}
+			homeTeleport((Player) entity, Location.create(3087, 3495, 0));
+		} else if (entity.getTeleporter().send(location.transform(0, RandomFunction.random(3), 0), TeleportType.ANCIENT)) {
 			if (!super.meetsRequirements(entity, true, true)) {
 				entity.getTeleporter().getCurrentTeleport().stop();
 				return false;

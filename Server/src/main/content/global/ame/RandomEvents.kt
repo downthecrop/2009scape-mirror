@@ -97,5 +97,4 @@ enum class RandomEvents(val npc: RandomEventNPC, val loot: WeightBasedTable? = n
             }
         }
     }
-
 }

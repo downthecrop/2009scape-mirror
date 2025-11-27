@@ -1,12 +1,8 @@
 package content.global.ame.events.evilbob
 
-import content.global.ame.kidnapPlayer
-import content.global.ame.returnPlayer
 import core.api.*
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.skill.Skills
-import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
@@ -51,10 +47,6 @@ object EvilBobUtils {
             3 -> setAttribute(player, assignedFishingZone, westFishingZone.toString())
             else -> setAttribute(player, assignedFishingZone, northFishingZone.toString())
         }
-    }
-
-    fun teleport(player: Player) {
-        kidnapPlayer(player, Location.create(3419, 4776, 0), TeleportManager.TeleportType.INSTANT)
     }
 
     fun cleanup(player: Player) {

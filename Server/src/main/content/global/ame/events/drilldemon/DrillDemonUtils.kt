@@ -1,12 +1,9 @@
 package content.global.ame.events.drilldemon
 
-import content.global.ame.kidnapPlayer
 import content.global.ame.returnPlayer
 import core.api.*
 import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.TeleportManager
-import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
@@ -23,13 +20,6 @@ object DrillDemonUtils {
     val DD_CORRECT_COUNTER = "/save:drilldemon:numcorrect"
     val DD_AREA = ZoneBorders(3158, 4817, 3168, 4823)
     val DD_NPC = NPCs.SERGEANT_DAMIEN_2790
-
-    fun teleport(player: Player) {
-        kidnapPlayer(player, Location.create(3163, 4819, 0), TeleportManager.TeleportType.INSTANT)
-        player.interfaceManager.closeDefaultTabs()
-        setComponentVisibility(player, 548, 69, true)
-        setComponentVisibility(player, 746, 12, true)
-    }
 
     fun changeSignsAndAssignTask(player: Player) {
         setVarp(player, DD_SIGN_VARP, 0)
@@ -94,6 +84,5 @@ object DrillDemonUtils {
             }
             return@queueScript stopExecuting(player)
         }
-
     }
 }

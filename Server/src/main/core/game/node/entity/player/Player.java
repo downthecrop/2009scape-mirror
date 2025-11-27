@@ -468,15 +468,13 @@ public class Player extends Entity {
 
 		// Check if the player is on the map, runs only every 6 seconds for performance reasons.
 		// This is only a sanity check to detect improper usage of the 'original-loc' attribute, hence only do this work if the attribute is set.
-		// Only runs when the player is not movement/interaction-locked, so that original-loc does not get wiped e.g. in the middle of the player teleporting to their POH.
-		if (GameWorld.getTicks() % 10 == 0 && !getLocks().isMovementLocked() && !getLocks().isInteractionLocked()) {
-			if (ContentAPIKt.getAttribute(this, "/save:original-loc", null) != null) {
-				int rid = location.getRegionId();
-				Region r = RegionManager.forId(rid);
-				if (!(r instanceof DynamicRegion) && !getZoneMonitor().isRestricted(ZoneRestriction.OFF_MAP)) {
-					log(this.getClass(), Log.ERR, "Player " + getUsername() + " has the original-loc attribute set but isn't actually off-map! This indicates a bug in the code that set that attribute. The original-loc is " + getAttribute("/save:original-loc") + ", the current region is " + rid + ". Good luck debugging!");
-					ContentAPIKt.removeAttribute(this, "original-loc");
-				}
+		// Does not run if the player is currently in the middle of a kidnap sequence (to avoid false positives while the teleport is taking place).
+		if (GameWorld.getTicks() % 10 == 0 && ContentAPIKt.getAttribute(this, "/save:original-loc", null) != null && !ContentAPIKt.getAttribute(this, "kidnapped-by-random", false)) {
+			int rid = location.getRegionId();
+			Region r = RegionManager.forId(rid);
+			if (!(r instanceof DynamicRegion) && !getZoneMonitor().isRestricted(ZoneRestriction.OFF_MAP)) {
+				log(this.getClass(), Log.ERR, "Player " + getUsername() + " has the original-loc attribute set but isn't actually off-map! This indicates a bug in the code that set that attribute. The original-loc is " + getAttribute("/save:original-loc") + ", the current region is " + rid + ". Good luck debugging!");
+				ContentAPIKt.removeAttribute(this, "original-loc");
 			}
 		}
 	}

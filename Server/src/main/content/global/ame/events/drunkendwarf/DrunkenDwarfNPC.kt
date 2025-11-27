@@ -9,35 +9,27 @@ import org.rs09.consts.NPCs
 import org.rs09.consts.Sounds
 
 class DrunkenDwarfNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(NPCs.DRUNKEN_DWARF_956) {
-    private val phrases = arrayOf("Oi, are you der @name!","Dunt ignore your matey!","Aww comeon, talk to ikle me @name!")
-    private var attackPhrase = false
+    lateinit var phrases: Array<String>
     private var attackDelay = 0
-    private var lastPhraseTime = 0
-
-    private fun sendPhrases() {
-        if (getWorldTicks() > lastPhraseTime + 5) {
-            playGlobalAudio(this.location, Sounds.DWARF_WHISTLE_2297)
-            sendChat(this, phrases.random().replace("@name",player.username.capitalize()))
-            this.face(player)
-            lastPhraseTime = getWorldTicks()
-        }
-    }
 
     override fun init() {
         super.init()
-        playGlobalAudio(this.location, Sounds.DWARF_WHISTLE_2297)
-        sendChat(this, "'Ello der ${player.username.capitalize()}! *hic*")
+        phrases = arrayOf(
+            "'Ello der ${player.username}! *hic*",
+            "Oi, are you der ${player.username}!",
+            "Dunt ignore your matey!",
+            "Aww comeon, talk to ikle me ${player.username}!",
+            "I hates you, ${player.username}!"
+        )
     }
 
     override fun tick() {
-        if (RandomFunction.roll(20) && !attackPhrase)
-            sendPhrases()
+        sayLine(this, phrases, true, true)
         if (ticksLeft <= 10) {
             ticksLeft = 10
-            if (!attackPhrase)
-                sendChat("I hates you, ${player.username.capitalize()}!").also { attackPhrase = true }
-            if (attackDelay <= getWorldTicks())
+            if (attackDelay <= getWorldTicks()) {
                 this.attack(player)
+            }
         }
         super.tick()
     }
@@ -46,5 +38,11 @@ class DrunkenDwarfNPC(override var loot: WeightBasedTable? = null) : RandomEvent
         attackDelay = getWorldTicks() + 10
         this.pulseManager.clear()
         openDialogue(player, DrunkenDwarfDialogue(), this.asNpc())
+    }
+
+    override fun onTimeUp() {
+        if (attackDelay <= getWorldTicks()) {
+            this.attack(player)
+        }
     }
 }

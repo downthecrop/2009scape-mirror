@@ -4,6 +4,7 @@ import content.global.ame.events.surpriseexam.MysteriousOldManNPC
 import core.api.playGlobalAudio
 import core.api.poofClear
 import core.api.sendMessage
+import core.api.setAttribute
 import core.api.utils.WeightBasedTable
 import core.game.interaction.MovementPulse
 import core.game.node.entity.Entity
@@ -19,8 +20,10 @@ import core.game.world.map.RegionManager
 import core.game.world.map.path.Pathfinder
 import core.game.world.update.flag.context.Graphics
 import core.integrations.discord.Discord
+import core.tools.RandomFunction
 import core.tools.secondsToTicks
 import core.tools.ticksToCycles
+import org.rs09.consts.NPCs
 import org.rs09.consts.Sounds
 import kotlin.math.ceil
 import kotlin.math.min
@@ -43,6 +46,7 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
         event.loot = loot
         event.player = player
         event.spawnLocation = RegionManager.getSpawnLocation(player, this)
+        setAttribute(event, "spawned-by-ame", true)
         return event
     }
 
@@ -101,7 +105,6 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
     }
 
     open fun onTimeUp() {
-        noteAndTeleport()
         terminate()
     }
 
@@ -143,5 +146,24 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
     fun idForCombatLevel(ids: List<Int>, player: Player): Int {
         val index = min(ids.size, ceil(player.properties.currentCombatLevel / 20.0).toInt()) - 1
         return ids[index]
+    }
+
+    fun sayLine(npc: NPC, phrases: Array<String>, hasOpeningPhrase: Boolean, hasOverTimePhrase: Boolean) {
+        if (!timerPaused && (ticksLeft % 20 == 0 || ticksLeft <= 2)) { //unless the Certer interface is up, speak every 20 ticks, or in the 2nd-to-last tick before attack/note-&-teleport
+            var playDwarfWhistle = true
+            if (ticksLeft == secondsToTicks(180) && hasOpeningPhrase) {
+                sendChat(phrases[0])
+            } else if (ticksLeft <= 2 && hasOverTimePhrase) {
+                sendChat(phrases[phrases.size - 1])
+                playDwarfWhistle = false
+            } else {
+                val start = if (hasOpeningPhrase) 0 else 1
+                val end = if (hasOverTimePhrase) phrases.size - 2 else phrases.size - 1
+                sendChat(phrases[RandomFunction.random(start, end + 1)])
+            }
+            if (npc.id == NPCs.DRUNKEN_DWARF_956 && playDwarfWhistle) {
+                playGlobalAudio(this.location, Sounds.DWARF_WHISTLE_2297)
+            }
+        }
     }
 }
