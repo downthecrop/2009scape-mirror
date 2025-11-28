@@ -167,7 +167,12 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
             Items.TOKKUL_6529 -> item.definition.getConfiguration(ItemConfigParser.TOKKUL_PRICE, 1)
             Items.ARCHERY_TICKET_1464 -> item.definition.getConfiguration(ItemConfigParser.ARCHERY_TICKET_PRICE, 1)
             Items.CASTLE_WARS_TICKET_4067 -> item.definition.getConfiguration(ItemConfigParser.CASTLE_WARS_TICKET_PRICE, 1)
-            else -> getGPCost(Item(item.id, 1), if (isMainStock) stock[item.slot].amount else playerStock[slot].amount, if (isMainStock) item.amount else playerStock[slot].amount)
+            else -> {
+                val fixedPrice = fixedPriceItems[item.id]
+                fixedPrice ?: getGPCost(Item(item.id, 1),
+					if (isMainStock) stock[item.slot].amount else playerStock[slot].amount,
+					if (isMainStock) item.amount else playerStock[slot].amount)
+            }
         }
 
         return Item(currency, price)
@@ -210,13 +215,16 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
                     }
                 }
 
-        val price = when(currency)
-        {
-            Items.TOKKUL_6529 -> (item.definition.getConfiguration(ItemConfigParser.TOKKUL_PRICE, 1) / 10.0).toInt()  // selling items authentically return 10x less tokkul (floored/truncated) than the item's shop price
-            Items.ARCHERY_TICKET_1464 -> item.definition.getConfiguration(ItemConfigParser.ARCHERY_TICKET_PRICE, 1)
-            Items.CASTLE_WARS_TICKET_4067 -> item.definition.getConfiguration(ItemConfigParser.CASTLE_WARS_TICKET_PRICE, 1)
-            else -> getGPSell(Item(shopItemId, 1), stockAmt, currentAmt)
-        }
+		val price = when (currency) {
+			// selling items authentically return 10x less tokkul (floored/truncated) than the item's shop price
+			Items.TOKKUL_6529 -> (item.definition.getConfiguration(ItemConfigParser.TOKKUL_PRICE, 1) / 10.0).toInt()
+			Items.ARCHERY_TICKET_1464 -> item.definition.getConfiguration(ItemConfigParser.ARCHERY_TICKET_PRICE, 1)
+			Items.CASTLE_WARS_TICKET_4067 -> item.definition.getConfiguration(ItemConfigParser.CASTLE_WARS_TICKET_PRICE, 1)
+			else -> {
+				val fixedPrice = fixedPriceItems[shopItemId]
+				fixedPrice ?: getGPSell(Item(shopItemId, 1), stockAmt, currentAmt)
+			}
+		}
 
         if(!general && stockAmt == 0 && shopSlot == -1)
         {
@@ -293,10 +301,17 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         if(cost.id == -1) sendMessage(player, "This shop cannot sell that item.").also { return TransactionStatus.Failure("Shop cannot sell this item") }
 
         if(currency == Items.COINS_995){
-            var amt = item.amount
-            var inStockAmt = inStock.amount
-            while(amt-- > 1)
-                cost.amount += getGPCost(Item(item.id, 1), if (isMainStock) stock[slot].amount else playerStock[slot].amount, --inStockAmt)
+            val fixedPrice = fixedPriceItems[item.id]
+            if (fixedPrice != null) {
+                // Fixed price items: simple multiplication
+                cost.amount = fixedPrice * item.amount
+            } else {
+                // Dynamic pricing: calculate cost for each item as stock depletes
+                var amt = item.amount
+                var inStockAmt = inStock.amount
+                while(amt-- > 1)
+                    cost.amount += getGPCost(Item(item.id, 1), if (isMainStock) stock[slot].amount else playerStock[slot].amount, --inStockAmt)
+            }
         } else {
             cost.amount = cost.amount * item.amount
         }
@@ -379,7 +394,10 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
             return TransactionStatus.Failure("Attempt to sell to full shop.")
         }
 
-        if(currency == Items.COINS_995 && item.amount > 1){
+        val fixedPrice = fixedPriceItems[id]
+        if (fixedPrice != null) {
+            profit.amount = fixedPrice * item.amount
+        } else if(currency == Items.COINS_995 && item.amount > 1){
             var amt = item.amount
             var inStockAmt = container!![shopSlot]?.amount ?: playerStock.getAmount(id)
             while(amt-- > 1)
@@ -446,11 +464,17 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         return Pair(isPlayerStock, shopSlot)
     }
 
-    companion object {
-        //General stores globally share player stock (weird quirk, right?)
-        val generalPlayerStock = Container(40, ContainerType.SHOP)
-        val listenerInstances = HashMap<Int, ShopListener>()
-    }
+	companion object {
+		//General stores globally share player stock (weird quirk, right?)
+		val generalPlayerStock = Container(40, ContainerType.SHOP)
+		val listenerInstances = HashMap<Int, ShopListener>()
+
+		// Items with fixed prices that don't fluctuate based on stock (both buy & sell price)
+		val fixedPriceItems = mapOf(
+			Items.SPIRIT_SHARDS_12183 to 25,
+			Items.POUCH_12155 to 1
+		)
+	}
 
     sealed class TransactionStatus {
         class Success : TransactionStatus()
