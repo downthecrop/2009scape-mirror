@@ -56,7 +56,7 @@ public final class PotteryPlugin extends UseWithHandler {
 	@Override
 	public boolean handle(final NodeUsageEvent event) {
 		final Player player = event.getPlayer();
-		new SkillDialogueHandler(player, SkillDialogue.FIVE_OPTION, (Object[]) getPottery(false)) {
+		new SkillDialogueHandler(player, SkillDialogue.FIVE_OPTION, getPottery(false)) {
 
 			@Override
 			public void create(final int amount, int index) {
@@ -145,7 +145,7 @@ public final class PotteryPlugin extends UseWithHandler {
 		 * @return the dialogue handler.
 		 */
 		public SkillDialogueHandler getSkillHandler(final Player player) {
-			return new SkillDialogueHandler(player, SkillDialogue.FIVE_OPTION, (Object[]) getPottery(true)) {
+			return new SkillDialogueHandler(player, SkillDialogue.FIVE_OPTION, getPottery(true)) {
 
 				@Override
 				public void create(final int amount, final int index) {

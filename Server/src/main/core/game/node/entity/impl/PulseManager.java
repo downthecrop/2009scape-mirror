@@ -17,6 +17,12 @@ import java.util.HashMap;
  */
 public final class PulseManager {
 
+    private final Entity entity;
+
+    public PulseManager(Entity entity) {
+        this.entity = entity;
+    }
+
 	/**
 	 * The movement pulse.
 	 */
@@ -61,6 +67,9 @@ public final class PulseManager {
 	}
 
 	public void clear() {
+		entity.scripts.removeWeakScripts();
+		entity.scripts.removeNormalScripts();
+
 		currentPulses.forEach((type, pulse) -> {
 			if (type != PulseType.STRONG && pulse != null) pulse.stop();
 		});
@@ -70,6 +79,9 @@ public final class PulseManager {
 	 * Clears the pulses.
      */
 	public boolean clear(PulseType pulseType) {
+		entity.scripts.removeWeakScripts();
+		entity.scripts.removeNormalScripts();
+
 		Pulse pulse = currentPulses.get(pulseType);
 
 		if (pulse != null) {

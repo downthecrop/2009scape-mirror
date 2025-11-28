@@ -1,14 +1,14 @@
 package content.global.skill.magic
 
+import core.api.hasLineOfSight
+import core.api.log
 import core.game.event.SpellCastEvent
-import core.api.*
+import core.game.interaction.MovementPulse
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.SpellBookManager
-import core.tools.Log
-import core.tools.SystemLogger
-import core.game.interaction.*
 import core.game.world.map.path.Pathfinder
+import core.tools.Log
 
 object SpellListeners {
     val castMap = HashMap<String,(Player, Node?) -> Unit>()
@@ -44,7 +44,7 @@ object SpellListeners {
             range = next.first
             method = next.second ?: return
         }
-
+        player.scripts.removeWeakScripts()
         if (type in intArrayOf (SpellListener.NPC, SpellListener.OBJECT, SpellListener.PLAYER, SpellListener.GROUND_ITEM)) {
             player.pulseManager.run (object : MovementPulse (player, node, Pathfinder.SMART) {
                 override fun pulse() : Boolean {

@@ -19,25 +19,11 @@ open class SkillDialogueHandler(
         /**
          * Represents the skill dialogue type.
          */
-        val type: SkillDialogue?, vararg data: Any) {
-    /**
-     * Gets the player.
-     * @return The player.
-     */
-
-    /**
-     * Gets the type.
-     * @return The type.
-     */
-
-    /**
-     * Gets the passed data.
-     * @return the data.
-     */
-    /**
-     * Represents the object data passed through.
-     */
-    val data: Array<Any>
+        val type: SkillDialogue?,
+        /**
+         * The items that can be created through this dialog.
+         */
+        vararg val items: Item) {
 
     /**
      * Method used to open a skill dialogue.
@@ -70,7 +56,7 @@ open class SkillDialogueHandler(
      * @return the amount.
      */
     open fun getAll(index: Int): Int {
-        return player.inventory.getAmount(data[0] as Item)
+        return player.inventory.getAmount(items[0])
     }
 
     /**
@@ -107,7 +93,7 @@ open class SkillDialogueHandler(
             private val length: Int) {
         ONE_OPTION(309, 5, 1) {
             override fun display(player: Player, handler: SkillDialogueHandler) {
-                val item = handler.data[0] as Item
+                val item = handler.items[0]
                 player.packetDispatch.sendString("<br><br><br><br>" + item.name, 309, 6)
                 player.packetDispatch.sendItemZoomOnInterface(item.id, 160, 309, 2)
                 PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 309, 6, 60, 20))
@@ -125,7 +111,7 @@ open class SkillDialogueHandler(
         },
         MAKE_SET_ONE_OPTION(582, 4, 1) {
             override fun display(player: Player, handler: SkillDialogueHandler) {
-                val item = handler.data[0] as Item
+                val item = handler.items[0]
 
                 // Send item + item name to interface
                 player.packetDispatch.sendItemZoomOnInterface(item.id, 160, 582, 2)
@@ -163,8 +149,8 @@ open class SkillDialogueHandler(
             override fun display(player: Player, handler: SkillDialogueHandler) {
                 var item: Item
                 player.interfaceManager.openChatbox(306)
-                for (i in handler.data.indices) {
-                    item = handler.data[i] as Item
+                for (i in handler.items.indices) {
+                    item = handler.items[i]
                     player.packetDispatch.sendString("<br><br><br><br>" + handler.getName(item), 303, 7 + i)
                     player.packetDispatch.sendItemZoomOnInterface(item.id, 160, 303, 2 + i)
                 }
@@ -190,11 +176,11 @@ open class SkillDialogueHandler(
         },
         THREE_OPTION(304, 8, 3) {
             override fun display(player: Player, handler: SkillDialogueHandler) {
-                var item: Item? = null
+                var item: Item?
                 for (i in 0..2) {
-                    item = handler.data[i] as Item
+                    item = handler.items[i]
                     player.packetDispatch.sendItemZoomOnInterface(item.id, 135, 304, 2 + i)
-                    player.packetDispatch.sendString("<br><br><br><br>" + item!!.name, 304, 304 - 296 + i * 4)
+                    player.packetDispatch.sendString("<br><br><br><br>" + item.name, 304, 304 - 296 + i * 4)
                 }
             }
 
@@ -219,10 +205,10 @@ open class SkillDialogueHandler(
         },
         FOUR_OPTION(305, 9, 4) {
             override fun display(player: Player, handler: SkillDialogueHandler) {
-                var item: Item? = null
+                var item: Item?
                 for (i in 0..3) {
-                    item = handler.data[i] as Item
-                    player.packetDispatch.sendItemZoomOnInterface(item!!.id, 135, 305, 2 + i)
+                    item = handler.items[i]
+                    player.packetDispatch.sendItemZoomOnInterface(item.id, 135, 305, 2 + i)
                     player.packetDispatch.sendString("<br><br><br><br>" + item.name, 305, 305 - 296 + i * 4)
                 }
             }
@@ -255,8 +241,8 @@ open class SkillDialogueHandler(
             override fun display(player: Player, handler: SkillDialogueHandler) {
                 var item: Item
                 player.interfaceManager.openChatbox(306)
-                for (i in handler.data.indices) {
-                    item = handler.data[i] as Item
+                for (i in handler.items.indices) {
+                    item = handler.items[i]
                     player.packetDispatch.sendString("<br><br><br><br>" + handler.getName(item), 306, 10 + 4 * i)
                     player.packetDispatch.sendItemZoomOnInterface(item.id, 160, 306, 2 + i)
                     PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 306, 2 + i, positions[i][0], positions[i][1]))
@@ -360,15 +346,5 @@ open class SkillDialogueHandler(
          * Represents the skill dialogue id.
          */
         const val SKILL_DIALOGUE = 3 shl 16
-    }
-
-    /**
-     * Constructs a new `SkillDialogueHandler` `Object`.
-     * @param player the player.
-     * @param type the type.
-     * @param data the data.
-     */
-    init {
-        this.data = data as Array<Any>
     }
 }

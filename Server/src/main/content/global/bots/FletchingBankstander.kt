@@ -1,12 +1,12 @@
 package content.global.bots
 
+import content.global.skill.fletching.log.LogCraftInfo
+import content.global.skill.fletching.log.CraftItemWithLogScript
+import core.game.bots.Script
+import core.game.bots.SkillingBotAssembler
 import core.game.node.entity.skill.Skills
-import content.global.skill.fletching.Fletching
-import content.global.skill.fletching.FletchingPulse
 import core.game.node.item.Item
 import org.rs09.consts.Items
-import core.game.bots.SkillingBotAssembler
-import core.game.bots.Script
 
 class FletchingBankstander : Script(){
     var state = State.FLETCHING
@@ -17,7 +17,7 @@ class FletchingBankstander : Script(){
             State.FLETCHING -> {
                 bot.inventory.add(Item(Items.KNIFE_946))
                 bot.inventory.add(Item(Items.LOGS_1511,27))
-                bot.pulseManager.run(FletchingPulse(bot, Item(Items.LOGS_1511),27, Fletching.FletchingItems.ARROW_SHAFT))
+                CraftItemWithLogScript(bot, LogCraftInfo.ARROW_SHAFT, 27).invoke()
                 State.BANKING
             }
 

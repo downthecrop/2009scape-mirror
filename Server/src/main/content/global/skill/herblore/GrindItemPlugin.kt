@@ -61,8 +61,7 @@ class GrindItemPlugin : UseWithHandler(233) {
 
                     override fun reward(): Boolean {
                         if (node.id == Items.FISHING_BAIT_313) {
-                            var quantity = 0
-                            quantity = if (amountInInventory(player, FISHING_BAIT) >= 10) {
+                            val quantity: Int = if (amountInInventory(player, FISHING_BAIT) >= 10) {
                                 10
                             } else {
                                 amountInInventory(player, FISHING_BAIT)

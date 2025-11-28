@@ -164,6 +164,7 @@ object InteractionListeners {
 
     @JvmStatic
     fun run(id: Int, player: Player, node: Node, isEquip: Boolean): Boolean{
+        player.scripts.removeWeakScripts()
         player.dispatch(InteractionEvent(node, if(isEquip) "equip" else "unequip"))
         if(isEquip){
             return equipListeners["equip:$id"]?.invoke(player,node) ?: true
@@ -174,6 +175,7 @@ object InteractionListeners {
 
     @JvmStatic
     fun run(used: Node, with: Node, type: IntType, player: Player): Boolean{
+        player.scripts.removeWeakScripts()
         val flag = when(type){
             IntType.NPC, IntType.PLAYER -> DestinationFlag.ENTITY
             IntType.SCENERY -> DestinationFlag.OBJECT
@@ -224,6 +226,8 @@ object InteractionListeners {
 
     @JvmStatic
     fun run(id: Int, type: IntType, option: String, player: Player, node: Node): Boolean{
+        player.scripts.removeWeakScripts()
+
         val flag = when(type){
             IntType.PLAYER -> DestinationFlag.ENTITY
             IntType.GROUNDITEM -> DestinationFlag.ITEM

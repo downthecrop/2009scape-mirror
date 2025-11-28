@@ -34,7 +34,7 @@ public class SnakeSkinPlugin extends UseWithHandler {
 	@Override
 	public boolean handle(final NodeUsageEvent event) {
 		final Player player = event.getPlayer();
-		new SkillDialogueHandler(player, SkillDialogue.FIVE_OPTION, (Object[]) getSkins()) {
+		new SkillDialogueHandler(player, SkillDialogue.FIVE_OPTION, getSkins()) {
 
 			@Override
 			public void create(final int amount, int index) {

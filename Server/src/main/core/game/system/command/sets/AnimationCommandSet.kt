@@ -1,5 +1,10 @@
 package core.game.system.command.sets
 
+import core.api.animate
+import core.api.delayScript
+import core.api.queueScript
+import core.api.stopExecuting
+import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
 import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
@@ -27,23 +32,26 @@ class AnimationCommandSet : CommandSet(Privilege.ADMIN) {
             player.animate(animation)
         }
 
-        /**
-         * Force the player to play animation <Animation ID>
-         */
-        define("anims", Privilege.ADMIN, "::anim <lt>Animation ID<gt>", "Plays the animation with the given ID."){ player, args ->
+        define("anims", Privilege.ADMIN, "::anims <From Animation ID> <To Animation ID> <(opt) Duration Per Animation>", "Plays animations from the From ID to the To ID, with a delay of 3 between animations, unless specified otherwise"){ player, args ->
+
             if (args.size < 3) {
-                reject(player, "Syntax error: ::anim <Animation ID>")
+                reject(player, "Syntax error: ::anims <From Animation ID> <To Animation ID> <(opt) Duration Per Animation>")
             }
-            val animation = args[1].toInt()
+            val animationFrom = args[1].toInt()
             val animationTo = args[2].toInt()
-            GameWorld.Pulser.submit(object : Pulse(3, player) {
-                var someId = animation
-                override fun pulse(): Boolean {
-                    player.animate(Animation.create(someId))
-                    someId += 1
-                    return someId >= animationTo
+            val animationDelay = (args.getOrNull(3) ?: "3").toInt()
+
+            queueScript(player, 1, QueueStrength.STRONG) { stage: Int ->
+                val animationId = animationFrom + stage
+                animate(player, animationId, true)
+                notify(player, "Playing animation $animationId")
+
+                if (animationId == animationTo) {
+                    return@queueScript stopExecuting(player)
                 }
-            })
+
+                return@queueScript delayScript(player, animationDelay)
+            }
         }
 
         /**

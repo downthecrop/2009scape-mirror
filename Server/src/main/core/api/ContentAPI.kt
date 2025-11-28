@@ -6,6 +6,7 @@ import content.data.consumables.*
 import content.data.skill.SkillingTool
 import content.global.handlers.iface.ge.StockMarket
 import content.global.skill.slayer.SlayerEquipmentFlags
+import content.global.skill.slayer.SlayerFlags
 import content.global.skill.slayer.SlayerManager
 import content.global.skill.slayer.Tasks
 import content.global.skill.summoning.familiar.BurdenBeast
@@ -341,6 +342,24 @@ fun <T> removeItem(player: Player, item: T, container: Container = Container.INV
         Container.BANK -> player.bank.remove(it) || player.bankSecondary.remove(it)
         Container.EQUIPMENT -> player.equipment.remove(it)
     }
+}
+
+/**
+ * Remove items in a players inventory
+ * Checks that the player has enough first
+ * @param player
+ * @param items the items to remove
+ */
+fun removeItemsIfPlayerHasEnough(player: Player, vararg items: Item): Boolean {
+    for (item in items) {
+        if (amountInInventory(player, item.id) >= 1) continue
+        return false
+    }
+    for (item in items) {
+        if (removeItem(player, item)) continue
+        return false
+    }
+    return true
 }
 
 /**
@@ -1948,10 +1967,14 @@ fun setQuestStage(player: Player, quest: Quests, stage: Int) {
 }
 
 /**
- * Check if a quest is in progress
+ * Check if a quests' stage for a given player is (inclusively) between the provided start and end stage
  */
 fun isQuestInProgress(player: Player, quest: Quests, startStage: Int, endStage: Int): Boolean {
     return player.questRepository.getStage(quest) in startStage..endStage
+}
+
+fun isQuestStarted(player: Player, quest: Quests): Boolean {
+    return getQuestStage(player, quest) > 0
 }
 
 /**
@@ -2454,7 +2477,11 @@ fun getSlayerTip(player: Player): Array<out String> {
  * @return the task flags as Int.
  */
 fun getSlayerTaskFlags(player: Player): Int {
-    return SlayerManager.getInstance(player).flags.taskFlags
+    return getSlayerFlags(player).taskFlags
+}
+
+fun getSlayerFlags(player: Player): SlayerFlags {
+    return SlayerManager.getInstance(player).flags
 }
 
 /**
@@ -2982,10 +3009,14 @@ fun queueScript(entity: Entity, delay: Int = 1, strength: QueueStrength = QueueS
  * @param entity the entity whose clock we are updating
  * @param clock the clock we are updating. Please use [core.game.interaction.Clocks] for this argument. 
  * @param ticks the number of ticks to delay by
+ * @param delayScript whether to delay the script by the number of ticks passed in.
  * @return always returns false so this can be used as a script return value.
 **/
-fun delayClock(entity: Entity, clock: Int, ticks: Int) : Boolean {
+fun delayClock(entity: Entity, clock: Int, ticks: Int, delayScript: Boolean = false) : Boolean {
     entity.clocks[clock] = getWorldTicks() + ticks
+    if (delayScript) {
+        return delayScript(entity, ticks)
+    }
     return false
 }
 
