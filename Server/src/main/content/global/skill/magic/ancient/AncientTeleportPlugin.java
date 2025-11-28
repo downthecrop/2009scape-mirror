@@ -98,7 +98,7 @@ public final class AncientTeleportPlugin extends MagicSpell {
 		// dareeyak teleport
 		SpellBook.ANCIENT.register(24, new AncientTeleportPlugin(78, 88, Location.create(2966, 3696, 0), new Item(Runes.LAW_RUNE.getId(), 2), new Item(Runes.FIRE_RUNE.getId(), 3), new Item(Runes.AIR_RUNE.getId(), 2)));
 		// carralangar teleport
-		SpellBook.ANCIENT.register(25, new AncientTeleportPlugin(84, 82, Location.create(3163, 3664, 0), new Item(Runes.SOUL_RUNE.getId(), 2), new Item(Runes.LAW_RUNE.getId(), 2)));
+		SpellBook.ANCIENT.register(25, new AncientTeleportPlugin(84, 82, Location.create(3217, 3676, 0), new Item(Runes.SOUL_RUNE.getId(), 2), new Item(Runes.LAW_RUNE.getId(), 2)));
 		// annakarl teleport
 		SpellBook.ANCIENT.register(26, new AncientTeleportPlugin(90, 100, Location.create(3287, 3883, 0), new Item(Runes.BLOOD_RUNE.getId(), 2), new Item(Runes.LAW_RUNE.getId(), 2)));
 		// ghorrock teleport
