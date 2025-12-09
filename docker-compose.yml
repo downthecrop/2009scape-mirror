@@ -15,12 +15,12 @@ services:
   db:
     # current LTS (Long-Term Support) version
     image: mariadb:11.4-noble
-  healthcheck:
-    test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
-    start_period: 30s
-    interval: 60s
-    timeout: 10s
-    retries: 3
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 30s
+      interval: 60s
+      timeout: 10s
+      retries: 3
     restart: always
     volumes:
       - "./db:/var/lib/mysql"
