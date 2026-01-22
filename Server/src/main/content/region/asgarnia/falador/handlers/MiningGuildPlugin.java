@@ -30,12 +30,17 @@ public final class MiningGuildPlugin extends OptionHandler {
 		SceneryDefinition.forId(2113).getHandlers().put("option:climb-down", this);
 		SceneryDefinition.forId(30941).getHandlers().put("option:climb-up", this);
 		SceneryDefinition.forId(2112).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(35783).getHandlers().put("option:climb-down", this);
 		return this;
 	}
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
 		if (option.equals("climb-down")) {
+			if (player.getLocation().withinDistance(Location.create(3021, 3343, 1),2)) {
+				ClimbActionHandler.climb(player, new Animation(0), Location.create(3017, 3343, 0));
+				return true;
+			}
 			if (player.getLocation().withinDistance(Location.create(3019, 3339, 0), 4)) {
 				if (getDynLevel(player, Skills.MINING) < 60) {
 					player.getDialogueInterpreter().open(382, NPC.create(382, Location.create(0, 0, 0)), 1);
