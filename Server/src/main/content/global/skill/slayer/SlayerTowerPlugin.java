@@ -39,6 +39,8 @@ public final class SlayerTowerPlugin extends OptionHandler {
 		SceneryDefinition.forId(4490).getHandlers().put("option:open", this);
 		SceneryDefinition.forId(4487).getHandlers().put("option:open", this);
 		SceneryDefinition.forId(4492).getHandlers().put("option:close", this);
+		SceneryDefinition.forId(10527).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(10529).getHandlers().put("option:open", this);
 		return this;
 	}
 
@@ -47,6 +49,8 @@ public final class SlayerTowerPlugin extends OptionHandler {
 		switch (node.getId()) {
 		case 4490:
 		case 4487:
+		case 10527:
+		case 10529:
 			DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 			switchStatue();
 			return true;

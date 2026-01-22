@@ -16908,7 +16908,7 @@
     "lifepoints": "120",
     "strength_level": "45",
     "id": "1618",
-    "aggressive": "true",
+    "aggressive": "false",
     "clue_level": "2",
     "range_level": "1",
     "attack_level": "75"
