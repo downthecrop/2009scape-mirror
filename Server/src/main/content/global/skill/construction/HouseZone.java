@@ -1,6 +1,8 @@
 package content.global.skill.construction;
 
 
+import core.api.Container;
+import org.rs09.consts.Items;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.world.map.zone.MapZone;
@@ -91,6 +93,7 @@ public final class HouseZone extends MapZone {
     public boolean leave(Entity e, boolean logout) {
         if (e instanceof Player) {
             Player p = (Player) e;
+            remove_items(p);
             // The below tears down the house if the owner was the one who left
             if (house == p.getHouseManager()) {
                 house.expelGuests(p);
@@ -120,5 +123,12 @@ public final class HouseZone extends MapZone {
             return true;
         }
         return true;
+    }
+
+    private void remove_items(Player p) {
+        for (int item = Items.KETTLE_7688; item <= Items.CHEFS_DELIGHT_7755; item++) {//Removes all PoH versions of tea and beer barrel-related items
+            removeAll(p, item, Container.INVENTORY);
+            removeAll(p, item, Container.BoB);
+        }
     }
 }

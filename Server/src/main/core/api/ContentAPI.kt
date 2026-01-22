@@ -341,6 +341,12 @@ fun <T> removeItem(player: Player, item: T, container: Container = Container.INV
         Container.INVENTORY -> player.inventory.remove(it)
         Container.BANK -> player.bank.remove(it) || player.bankSecondary.remove(it)
         Container.EQUIPMENT -> player.equipment.remove(it)
+        Container.BoB -> {
+            if (player.familiarManager.hasFamiliar() && player.familiarManager.familiar.isBurdenBeast)
+                (player.familiarManager.familiar as BurdenBeast).container.remove(it)
+            else
+                false
+        }
     }
 }
 
@@ -375,6 +381,12 @@ fun addItem(player: Player, id: Int, amount: Int = 1, container: Container = Con
         Container.INVENTORY -> player.inventory
         Container.BANK -> player.bank
         Container.EQUIPMENT -> player.equipment
+        Container.BoB -> {
+            if(player.familiarManager.hasFamiliar() && player.familiarManager.familiar.isBurdenBeast)
+                (player.familiarManager.familiar as BurdenBeast).container
+            else
+                return false
+        }
     }
 
     return cont.add(Item(id, amount))
@@ -394,6 +406,7 @@ fun replaceSlot(player: Player, slot: Int, item: Item, currentItem: Item? = null
         Container.INVENTORY -> player.inventory
         Container.EQUIPMENT -> player.equipment
         Container.BANK -> player.bank
+        Container.BoB -> (player.familiarManager.familiar as BurdenBeast).container
     }
 
     if (item.id == 65535 || item.amount <= 0) {
@@ -1684,6 +1697,14 @@ fun <T> removeAll(player: Player, item: T, container: Container = Container.INVE
             player.bank.remove(Item(it, amountInPrimary)) && player.bankSecondary.remove(Item(it, amountInSecondary))
         }
         Container.INVENTORY -> player.inventory.remove(Item(it, amountInInventory(player, it)))
+        Container.BoB -> {
+            if (player.familiarManager.hasFamiliar() && player.familiarManager.familiar.isBurdenBeast){
+                val cont = (player.familiarManager.familiar as BurdenBeast).container
+                cont.remove(Item(it, cont.getAmount(it)))
+            }
+            else
+                false
+        }
     }
 }
 

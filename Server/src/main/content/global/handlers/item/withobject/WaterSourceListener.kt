@@ -129,6 +129,14 @@ class WaterSourceListener : InteractionListener {
         FISHBOWL(
                 inputs = intArrayOf(Items.FISHBOWL_6667),
                 output = Items.FISHBOWL_6668
+        ),
+        KETTLE(
+                inputs = intArrayOf(Items.KETTLE_7688),
+                output = Items.FULL_KETTLE_7690
+        ),
+        CUP(
+                inputs = intArrayOf(Items.EMPTY_CUP_1980),
+                output = Items.CUP_OF_WATER_4458
         );
 
         companion object

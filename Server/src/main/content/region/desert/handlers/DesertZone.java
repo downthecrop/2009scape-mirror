@@ -39,7 +39,7 @@ public final class DesertZone extends MapZone implements Plugin<Object> {
     /**
      * Represents data of water vessils to dry up.
      */
-    private static final int[][] VESSILS = new int[][] { { 1937, 1935 }, { 1929, 1925 }, { 1921, 1923 }, { 227, 229 } };
+    private static final int[][] VESSILS = new int[][] { { 1937, 1935 }, { 1929, 1925 }, { 1921, 1923 }, { 227, 229 }, { 4458, 1980} };
 
     /**
      * Represents the animation of drinking water.

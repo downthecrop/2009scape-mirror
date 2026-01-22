@@ -33,6 +33,7 @@ class CookingRewrite : InteractionListener {
         list.add(RAW_BEEF_2132)
         list.add(RAW_BEAR_MEAT_2136)
         list.add(SEAWEED_401)
+        list.add(Items.BOWL_OF_WATER_1921)
         RAW_FOODS = list.toIntArray()
     }
 
@@ -78,6 +79,10 @@ class CookingRewrite : InteractionListener {
                 BREAD_DOUGH_2307, UNCOOKED_CAKE_1889 -> if (!range) {
                     player.packetDispatch.sendMessage("You need to cook this on a range.")
                     return@onUseWith false
+                }
+                Items.BOWL_OF_WATER_1921 ->{
+                    cook(player, obj, Items.BOWL_OF_WATER_1921, Items.BOWL_OF_HOT_WATER_4456, 1)
+                    return@onUseWith true
                 }
             }
 
