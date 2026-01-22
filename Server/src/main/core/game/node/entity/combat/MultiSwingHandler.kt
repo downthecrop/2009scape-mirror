@@ -27,7 +27,7 @@ open class MultiSwingHandler(meleeDistance: Boolean, vararg attacks: SwitchAttac
     protected var current: SwitchAttack
 
     /**
-     * The current attack.
+     * The next attack.
      */
     protected var next: SwitchAttack
 
