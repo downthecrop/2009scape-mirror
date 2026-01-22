@@ -12,6 +12,7 @@ import content.global.skill.smithing.smelting.SmeltingPulse
 import content.region.kandarin.ardougne.quest.plaguecity.PlagueCityListeners
 import core.ServerConstants
 import core.api.*
+import core.game.diary.DiaryLevel
 import core.game.event.ItemAlchemizationEvent
 import core.game.event.ResourceProducedEvent
 import core.game.event.TeleportEvent
@@ -64,7 +65,11 @@ class ModernListeners : SpellListener("modern"){
         onCast(Modern.CAMELOT_TELEPORT, NONE){ player, _->
             requires(player,45, arrayOf(Item(Items.AIR_RUNE_556,5),Item(Items.LAW_RUNE_563)))
             player.achievementDiaryManager.finishTask(player, DiaryType.SEERS_VILLAGE, 1, 5)
-            sendTeleport(player,55.5, Location.create(2758, 3478, 0))
+            if (player.achievementDiaryManager.getDiary(DiaryType.SEERS_VILLAGE).level == 2
+                && (getItemFromEquipment(player, EquipmentSlot.HEAD)?.id ?: 0) == Items.SEERS_HEADBAND_14631)
+                sendTeleport(player,55.5,Location.create(2725, 3485, 0))
+            else
+                sendTeleport(player,55.5, Location.create(2758, 3478, 0))
         }
 
         onCast(Modern.ARDOUGNE_TELEPORT, NONE){ player, _ ->
