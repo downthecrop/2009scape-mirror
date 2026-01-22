@@ -347,6 +347,7 @@ public final class HouseManager {
 		Room room = rooms[0][4][3] = new Room(RoomProperties.GARDEN);
 		room.configure(style);
 		room.getHotspots()[0].setDecorationIndex(0);
+		redecorate(HousingStyle.BASIC_WOOD);
 		this.location = location;
 	}
 
