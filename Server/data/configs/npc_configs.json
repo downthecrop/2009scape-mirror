@@ -1175,7 +1175,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "A barely visible deadly jungle spider.",
+    "examine": "A barely visible deadly spider.",
     "melee_animation": "5327",
     "range_animation": "5327",
     "combat_audio": "537,539,538",
@@ -2949,7 +2949,7 @@
     "attack_level": "30"
   },
   {
-    "examine": "One of Gielinor's many citizens",
+    "examine": "One of Gielinor's many citizens.",
     "melee_animation": "422",
     "range_animation": "0",
     "combat_audio": "511,513,512",
@@ -3177,6 +3177,7 @@
     "attack_level": "1"
   },
   {
+    "examine": "This one's had too much to drink!",
     "melee_animation": "422",
     "combat_audio": "703,705,704",
     "respawn_delay": "60",
@@ -8581,7 +8582,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "Smartly dressed",
+    "examine": "Smartly dressed, and ready to deliver food.",
     "melee_animation": "0",
     "range_animation": "0",
     "defence_animation": "0",
@@ -25131,6 +25132,7 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
     "melee_animation": "5327",
     "combat_audio": "537,539,538",
     "respawn_delay": "60",
@@ -30870,6 +30872,7 @@
     "attack_level": "1"
   },
   {
+    "examine": "One of Gielinor's many citizens.",
     "name": "Woman",
     "defence_level": "1",
     "safespot": null,
@@ -56230,6 +56233,7 @@
     "attack_level": "48"
   },
   {
+    "examine": "This one's had too much to drink!",
     "melee_animation": "390",
     "combat_audio": "703,705,704",
     "respawn_delay": "60",
@@ -56246,6 +56250,7 @@
     "attack_level": "1"
   },
   {
+    "examine": "This one's had too much to drink!",
     "melee_animation": "390",
     "combat_audio": "703,705,704",
     "respawn_delay": "60",
@@ -56262,6 +56267,7 @@
     "attack_level": "1"
   },
   {
+    "examine": "This one's had too much to drink!",
     "melee_animation": "390",
     "combat_audio": "703,705,704",
     "respawn_delay": "60",
@@ -56278,6 +56284,7 @@
     "attack_level": "1"
   },
   {
+    "examine": "This one's had too much to drink!",
     "melee_animation": "390",
     "combat_audio": "703,705,704",
     "respawn_delay": "60",
@@ -56294,6 +56301,7 @@
     "attack_level": "1"
   },
   {
+    "examine": "This one's had too much to drink!",
     "melee_animation": "390",
     "combat_audio": "703,705,704",
     "respawn_delay": "60",
@@ -56620,6 +56628,7 @@
     "attack_level": "1"
   },
   {
+    "examine": "A barely visible deadly spider.",
     "melee_animation": "5327",
     "combat_audio": "537,539,538",
     "respawn_delay": "60",
@@ -56636,6 +56645,7 @@
     "attack_level": "1"
   },
   {
+    "examine": "A barely visible deadly spider.",
     "melee_animation": "5327",
     "combat_audio": "537,539,538",
     "respawn_delay": "60",
@@ -56747,6 +56757,7 @@
     "attack_level": "45"
   },
   {
+    "examine": "That stinger has to hurt...",
     "melee_animation": "7242",
     "attack_speed": "5",
     "respawn_delay": "60",
@@ -63380,7 +63391,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "It's a tiny",
+    "examine": "It's a tiny, cheeky monkey.",
     "melee_animation": "0",
     "range_animation": "0",
     "combat_audio": "629,631,630",
@@ -65404,7 +65415,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "It's a tiny",
+    "examine": "It's a tiny, cheeky monkey.",
     "melee_animation": "0",
     "range_animation": "0",
     "combat_audio": "629,631,630",
@@ -65421,7 +65432,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "It's a tiny",
+    "examine": "It's a tiny, cheeky monkey.",
     "melee_animation": "0",
     "range_animation": "0",
     "combat_audio": "629,631,630",
@@ -65438,7 +65449,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "It's a tiny",
+    "examine": "It's a tiny, cheeky monkey.",
     "melee_animation": "0",
     "range_animation": "0",
     "combat_audio": "629,631,630",
@@ -65455,7 +65466,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "It's a tiny",
+    "examine": "It's a tiny, cheeky monkey.",
     "melee_animation": "0",
     "range_animation": "0",
     "combat_audio": "629,631,630",
@@ -65472,7 +65483,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "It's a tiny",
+    "examine": "It's a tiny, cheeky monkey.",
     "melee_animation": "0",
     "range_animation": "0",
     "combat_audio": "629,631,630",
@@ -65489,7 +65500,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "It's a tiny",
+    "examine": "It's a tiny, cheeky monkey.",
     "melee_animation": "0",
     "range_animation": "0",
     "combat_audio": "629,631,630",
@@ -65506,6 +65517,7 @@
     "attack_level": "1"
   },
   {
+    "examine": "It's a tiny, cheeky monkey.",
     "name": "Baby monkey",
     "defence_level": "1",
     "safespot": null,
@@ -65517,6 +65529,7 @@
     "attack_level": "1"
   },
   {
+    "examine": "It's a tiny, cheeky monkey.",
     "name": "Baby monkey",
     "defence_level": "1",
     "safespot": null,
@@ -65528,6 +65541,7 @@
     "attack_level": "1"
   },
   {
+    "examine": "It's a tiny, cheeky monkey.",
     "name": "Baby monkey",
     "defence_level": "1",
     "safespot": null,
@@ -73432,6 +73446,7 @@
     "id": "366"
   },
   {
+    "examine": "Owner of the banana plantation.",
     "name": "Luthas",
     "id": "379"
   },
@@ -73540,18 +73555,22 @@
     "id": "486"
   },
   {
+    "examine": "A cart driver; it looks like he's quite experienced.",
     "name": "Hajedy",
     "id": "510"
   },
   {
+    "examine": "A cart driver; it looks like he's quite experienced.",
     "name": "Vigroy",
     "id": "511"
   },
   {
+    "examine": "This is Yohnus - he runs the local blacksmiths.",
     "name": "Yohnus",
     "id": "513"
   },
   {
+    "examine": "This is Seravel. He sells tickets for the 'Lady of the Waves.'",
     "name": "Seravel",
     "id": "514"
   },
@@ -73568,6 +73587,7 @@
     "id": "553"
   },
   {
+    "examine": "Goods for sale and trade.",
     "name": "Jiminua",
     "id": "560"
   },
@@ -73580,6 +73600,7 @@
     "id": "565"
   },
   {
+    "examine": "Appears slightly drunk.",
     "name": "Zambo",
     "id": "568"
   },
@@ -73604,6 +73625,7 @@
     "id": "585"
   },
   {
+    "examine": "An amulet trader.",
     "name": "Davon",
     "id": "588"
   },
@@ -73772,6 +73794,7 @@
     "id": "673"
   },
   {
+    "examine": "Builds ships for a living.",
     "name": "Shipyard worker",
     "id": "675"
   },
@@ -73860,6 +73883,7 @@
     "id": "725"
   },
   {
+    "examine": "A wise old witch doctor.",
     "name": "Trufitus",
     "id": "740"
   },
@@ -73960,10 +73984,12 @@
     "id": "784"
   },
   {
+    "examine": "A diligent guard.",
     "name": "Garv",
     "id": "788"
   },
   {
+    "examine": "A rough looking thief.",
     "name": "Grubor",
     "id": "789"
   },
@@ -73972,6 +73998,7 @@
     "id": "791"
   },
   {
+    "examine": "Looks like he's been in the wars.",
     "name": "Grip",
     "id": "792"
   },
@@ -74067,6 +74094,7 @@
     "id": "844"
   },
   {
+    "examine": "A happening kind of guy!",
     "name": "Kangai Mau",
     "id": "846"
   },
@@ -74343,14 +74371,17 @@
     "id": "1159"
   },
   {
+    "examine": "The imposing Chief of Tai Bwo Wannai.",
     "name": "Timfraku",
     "id": "1162"
   },
   {
+    "examine": "A rather depressed looking fisherman.",
     "name": "Tiadeche",
     "id": "1163"
   },
   {
+    "examine": "A rather depressed looking fisherman.",
     "name": "Tiadeche",
     "id": "1164"
   },
@@ -74363,6 +74394,7 @@
     "id": "1166"
   },
   {
+    "examine": "A hunter who long ago succumbed to blood lust.",
     "name": "Tamayu",
     "id": "1167"
   },
@@ -74379,6 +74411,7 @@
     "id": "1170"
   },
   {
+    "examine": "A crotchety old fisherman who doesn't like young whippersnappers.",
     "name": "Lubufu",
     "id": "1171"
   },
@@ -74403,10 +74436,12 @@
     "id": "1178"
   },
   {
+    "examine": "A sea bird.",
     "name": "Cormorant",
     "id": "1180"
   },
   {
+    "examine": "A sea bird.",
     "name": "Pelican",
     "id": "1181"
   },
@@ -75076,6 +75111,7 @@
     "id": "1581"
   },
   {
+    "examine": "Looks like he wants money.",
     "name": "Saniboch",
     "id": "1595"
   },
@@ -75420,6 +75456,7 @@
     "id": "1883"
   },
   {
+    "examine": "A well dressed thief.",
     "name": "Trobert",
     "id": "1884"
   },
@@ -76576,26 +76613,32 @@
     "id": "2590"
   },
   {
+    "examine": "Another one of those mystic-types.",
     "name": "TzHaar-Mej-Jal",
     "id": "2617"
   },
   {
+    "examine": "Another one of those mystic-types.",
     "name": "TzHaar-Mej-Kah",
     "id": "2618"
   },
   {
+    "examine": "Maybe it'll guard my possessions.",
     "name": "TzHaar-Ket-Zuh",
     "id": "2619"
   },
   {
+    "examine": "Wonder what it's making.",
     "name": "TzHaar-Hur-Tel",
     "id": "2620"
   },
   {
+    "examine": "Wonder what it's making.",
     "name": "TzHaar-Hur-Lek",
     "id": "2622"
   },
   {
+    "examine": "Another one of those mystic-types.",
     "name": "TzHaar-Mej-Roh",
     "id": "2623"
   },
@@ -80471,6 +80514,7 @@
     "id": "4577"
   },
   {
+    "examine": "He looks like he's a long way from home.",
     "name": "Penwie",
     "id": "4578"
   },
@@ -83372,10 +83416,12 @@
     "id": "6915"
   },
   {
+    "examine": "",
     "name": "Gecko",
     "id": "6916"
   },
   {
+    "examine": "How cute!",
     "name": "Gecko",
     "id": "6918"
   },
@@ -83964,6 +84010,7 @@
     "id": "7280"
   },
   {
+    "examine": "",
     "name": "Gecko",
     "id": "7281"
   },
@@ -83980,14 +84027,17 @@
     "id": "7284"
   },
   {
+    "examine": "It's so adorably tiny!",
     "name": "Baby gecko",
     "id": "7286"
   },
   {
+    "examine": "",
     "name": "Baby gecko",
     "id": "7287"
   },
   {
+    "examine": "It's so adorably tiny!",
     "name": "Baby gecko",
     "id": "7288"
   },
@@ -83996,6 +84046,7 @@
     "id": "7289"
   },
   {
+    "examine": "How cute!",
     "name": "Gecko",
     "id": "7290"
   },
@@ -84004,6 +84055,7 @@
     "id": "7291"
   },
   {
+    "examine": "How cute!",
     "name": "Gecko",
     "id": "7292"
   },
@@ -86756,6 +86808,7 @@
     "id": "8274"
   },
   {
+    "examine": "He looks dangerous!",
     "name": "Duradel",
     "id": "8275"
   },
@@ -87910,5 +87963,10 @@
     "examine": "He looks angry and smells drunk.",
     "name": "Skippy",
     "id": "2796"
+  },
+  {
+    "examine": "Angry and stressed, he doesn't seem to have time for anything other than sand.",
+    "name": "Sandy",
+    "id": "3112"
   }
 ]
