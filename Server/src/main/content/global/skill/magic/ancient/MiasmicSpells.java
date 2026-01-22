@@ -112,8 +112,8 @@ public final class MiasmicSpells extends CombatSpell {
 	@Override
 	public Plugin<SpellType> newInstance(SpellType arg) throws Throwable {
 		SpellBook.ANCIENT.register(16, new MiasmicSpells(SpellType.RUSH, 61, 36.0, 5368, 5365, new Animation(10513, Priority.HIGH), RUSH_START, null, RUSH_END, Runes.EARTH_RUNE.getItem(1), Runes.SOUL_RUNE.getItem(1), Runes.CHAOS_RUNE.getItem(2)));
-		SpellBook.ANCIENT.register(17, new MiasmicSpells(SpellType.BURST, 73, 42.0, 5366, 5372, new Animation(10516, Priority.HIGH), BURST_START, null, BURST_END, Runes.EARTH_RUNE.getItem(3), Runes.SOUL_RUNE.getItem(3), Runes.CHAOS_RUNE.getItem(4)));
-		SpellBook.ANCIENT.register(18, new MiasmicSpells(SpellType.BLITZ, 85, 48.0, 5370,  5367, new Animation(10524, Priority.HIGH), BLITZ_START, null, BLITZ_END, Runes.EARTH_RUNE.getItem(3), Runes.SOUL_RUNE.getItem(3), Runes.BLOOD_RUNE.getItem(2)));
+		SpellBook.ANCIENT.register(18, new MiasmicSpells(SpellType.BURST, 73, 42.0, 5366, 5372, new Animation(10516, Priority.HIGH), BURST_START, null, BURST_END, Runes.EARTH_RUNE.getItem(2), Runes.SOUL_RUNE.getItem(2), Runes.CHAOS_RUNE.getItem(4)));
+		SpellBook.ANCIENT.register(17, new MiasmicSpells(SpellType.BLITZ, 85, 48.0, 5370,  5367, new Animation(10524, Priority.HIGH), BLITZ_START, null, BLITZ_END, Runes.EARTH_RUNE.getItem(3), Runes.SOUL_RUNE.getItem(3), Runes.BLOOD_RUNE.getItem(2)));
 		SpellBook.ANCIENT.register(19, new MiasmicSpells(SpellType.BARRAGE, 97, 54.0, 5371,  5369, new Animation(10518, Priority.HIGH), BARRAGE_START, null, BARRAGE_END,  Runes.EARTH_RUNE.getItem(4), Runes.SOUL_RUNE.getItem(4), Runes.BLOOD_RUNE.getItem(4)));
 		return this;
 	}
