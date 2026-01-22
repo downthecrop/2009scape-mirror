@@ -64,7 +64,7 @@ public final class SweepSpecialHandler extends MeleeSwingHandler implements Plug
 		BattleState[] targets = getTargets(entity, victim, state);
 		state.setTargets(targets);
 		for (BattleState s : targets) {
-            s.setStyle(CombatStyle.MELEE);
+			s.setStyle(CombatStyle.MELEE);
 			int hit = 0;
 			if (isAccurateImpact(entity, s.getVictim(), CombatStyle.MELEE)) {
 				hit = RandomFunction.random(calculateHit(entity, s.getVictim(), 1.1) + 1);
@@ -90,7 +90,7 @@ public final class SweepSpecialHandler extends MeleeSwingHandler implements Plug
 	 */
 	private BattleState[] getTargets(Entity entity, Entity victim, BattleState state) {
 		if (!entity.getProperties().isMultiZone() || !victim.getProperties().isMultiZone()) {
-			return new BattleState[] { state };
+			return new BattleState[]{state};
 		}
 		Location vl = victim.getLocation();
 		int x = vl.getX();
@@ -100,6 +100,9 @@ public final class SweepSpecialHandler extends MeleeSwingHandler implements Plug
 		l.add(new BattleState(entity, victim));
 		for (Entity n : victim instanceof NPC ? RegionManager.getSurroundingNPCs(victim, 9, entity, victim) : RegionManager.getSurroundingPlayers(victim, 9, entity, victim)) {
 			if (n instanceof Familiar) {
+				continue;
+			}
+			if (!n.isAttackable(entity, CombatStyle.MELEE, false)) {
 				continue;
 			}
 			if (n.getLocation().equals(vl.transform(dir.getStepY(), dir.getStepX(), 0)) || n.getLocation().equals(vl.transform(-dir.getStepY(), -dir.getStepX(), 0))) {
@@ -127,7 +130,7 @@ public final class SweepSpecialHandler extends MeleeSwingHandler implements Plug
 
 	@Override
 	public void impact(Entity entity, Entity victim, BattleState state) {
-		if (state.getTargets() != null) {
+		if (state != null && state.getTargets() != null) {
 			for (BattleState s : state.getTargets()) {
 				if (s != null) {
 					s.getVictim().getImpactHandler().handleImpact(entity, s.getEstimatedHit(), CombatStyle.MELEE, s);
@@ -146,7 +149,7 @@ public final class SweepSpecialHandler extends MeleeSwingHandler implements Plug
 
 	@Override
 	public void visualizeImpact(Entity entity, Entity victim, BattleState state) {
-		if (state.getTargets() != null) {
+		if (state != null && state.getTargets() != null) {
 			for (BattleState s : state.getTargets()) {
 				if (s != null) {
 					s.getVictim().animate(victim.getProperties().getDefenceAnimation());

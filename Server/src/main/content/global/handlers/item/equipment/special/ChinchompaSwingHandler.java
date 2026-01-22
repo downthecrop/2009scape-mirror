@@ -13,6 +13,7 @@ import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,13 +55,15 @@ public final class ChinchompaSwingHandler extends RangeSwingHandler {
 			entity.getProperties().getCombatPulse().stop();
 			return -1;
 		}
-		@SuppressWarnings("rawtypes")
-		List list = victim instanceof NPC ? RegionManager.getSurroundingNPCs(victim, 14, entity) : RegionManager.getSurroundingPlayers(victim, 14, entity);
-		BattleState[] targets = new BattleState[list.size()];
+
+		// ! Initial capacity of 14, but has dynamic size? i.e. we are not restricting to a max of 14 targets hit here now
+		List<Entity> targetCandidates = new ArrayList<>(14);
+		targetCandidates.addAll(RegionManager.getSurroundingNPCs(victim, 14, entity));
+		targetCandidates.addAll(RegionManager.getSurroundingPlayers(victim, 14, entity));
+		BattleState[] targets = new BattleState[targetCandidates.size()];
 		int count = 0;
-		for (Object o : list) {
-			Entity e = (Entity) o;
-			if (canSwing(entity, e) != InteractionType.NO_INTERACT) {
+		for (Entity e : targetCandidates) {
+			if (canSwing(entity, e) != InteractionType.NO_INTERACT && e.isAttackable(entity, CombatStyle.RANGE, false)) {
 				BattleState s = targets[count++] = new BattleState(entity, e);
 				s.setStyle(CombatStyle.RANGE);
 				int hit = 0;

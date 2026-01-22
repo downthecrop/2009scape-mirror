@@ -49,7 +49,7 @@ public final class SpearWallSpecialHandler extends MeleeSwingHandler implements 
 
 	@Override
 	public void impact(Entity entity, Entity victim, BattleState state) {
-		if (state.getTargets() != null) {
+		if (state != null && state.getTargets() != null) {
 			for (BattleState s : state.getTargets()) {
 				if (s != null) {
 					s.getVictim().getImpactHandler().handleImpact(entity, s.getEstimatedHit(), CombatStyle.MELEE, s);
@@ -82,11 +82,11 @@ public final class SpearWallSpecialHandler extends MeleeSwingHandler implements 
 		int count = 0;
 		for (Object o : list) {
 			Entity e = (Entity) o;
-			if (CombatStyle.RANGE.getSwingHandler().canSwing(entity, e) != InteractionType.NO_INTERACT) {
+			if (CombatStyle.RANGE.getSwingHandler().canSwing(entity, e) != InteractionType.NO_INTERACT && e.isAttackable(entity, CombatStyle.RANGE, false)) {
 				BattleState s = targets[count++] = new BattleState(entity, e);
 				int hit = 0;
 				hit = RandomFunction.random(calculateHit(entity, e, 1.0) + 1);
-                s.setStyle(CombatStyle.MELEE);
+				s.setStyle(CombatStyle.MELEE);
 				s.setEstimatedHit(hit);
 			}
 		}
@@ -96,13 +96,13 @@ public final class SpearWallSpecialHandler extends MeleeSwingHandler implements 
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
-        playGlobalAudio(entity.getLocation(), Sounds.CLEAVE_2529);
-        entity.visualize(ANIMATION, GRAPHIC);
+		playGlobalAudio(entity.getLocation(), Sounds.CLEAVE_2529);
+		entity.visualize(ANIMATION, GRAPHIC);
 	}
 
 	@Override
 	public void visualizeImpact(Entity entity, Entity victim, BattleState state) {
-		if (state.getTargets() != null) {
+		if (state != null && state.getTargets() != null) {
 			for (BattleState s : state.getTargets()) {
 				if (s != null) {
 					s.getVictim().animate(victim.getProperties().getDefenceAnimation());

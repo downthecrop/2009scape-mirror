@@ -127,7 +127,7 @@ public abstract class CombatSpell extends MagicSpell {
             if (e == target || e == entity) {
                 continue;
             }
-            if (CombatStyle.MAGIC.getSwingHandler().canSwing(entity, e) == InteractionType.NO_INTERACT) {
+            if (CombatStyle.MAGIC.getSwingHandler().canSwing(entity, e) == InteractionType.NO_INTERACT || !e.isAttackable(entity, CombatStyle.MAGIC, false)) {
 				continue;
 			}
             if (e instanceof Familiar) {

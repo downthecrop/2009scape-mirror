@@ -400,14 +400,28 @@ public class NPC extends Entity {
 			return false;
 		}
 		if (task != null && entity instanceof Player && task.levelReq > entity.getSkills().getLevel(Skills.SLAYER)) {
-            if(message) {
-                ((Player) entity).getPacketDispatch().sendMessage("You need a higher slayer level to know how to wound this monster.");
-            }
+	           if(message) {
+	               ((Player) entity).getPacketDispatch().sendMessage("You need a higher slayer level to know how to wound this monster.");
+	           }
 		}
 		if (!behavior.canBeAttackedBy(this, entity, style, message))
 			return false;
 		return super.isAttackable(entity, style, message);
 	}
+
+	@Override
+	public boolean continueAttack(Entity target, CombatStyle style, boolean message) {
+		if (isInvisible()) {
+			return false;
+		}
+		if (task != null && target instanceof Player && task.levelReq > target.getSkills().getLevel(Skills.SLAYER)) {
+			if (message) {
+				((Player) target).getPacketDispatch().sendMessage("You need a higher slayer level to know how to wound this monster.");
+			}
+			return false;
+		}
+        return behavior.canBeAttackedBy(this, target, style, message);
+    }
 
 	@Override
 	public int getDragonfireProtection(boolean fire) {

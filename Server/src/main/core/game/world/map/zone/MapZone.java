@@ -130,12 +130,25 @@ public abstract class MapZone implements Zone {
 	}
 
 	/**
-	 * Checks if the entity is able to continue attacking the target.
-	 * @param e the attacking entity.
-	 * @param target The target.
-	 * @param style The combat style used.
-	 * @param message If a message should be send.
-	 * @return {@code True} if so.
+	 * Checks if the entity is able to continue attacking the target within this zone.
+	 *
+	 * <p>This method is called during attack validation to determine if zone-specific rules
+	 * allow the attack to proceed. It's invoked by
+	 * {@link core.game.world.map.zone.ZoneMonitor#continueAttack(Node, CombatStyle, boolean)}
+	 * for each zone the attacking entity is in.</p>
+     *
+	 * <p>The default implementation returns {@code true}, allowing the attack to proceed.
+	 * <b>Subclasses should override this method to implement zone-specific attack restrictions.</b></p>
+	 * <p>This method is part of the attack validation chain:
+	 * {@link Entity#isAttackable(Entity, CombatStyle, boolean)} ->
+	 * {@link core.game.world.map.zone.ZoneMonitor#continueAttack(Node, CombatStyle, boolean)} ->
+	 * {@code MapZone.continueAttack()} + {@link Entity#continueAttack(Entity, CombatStyle, boolean)}</p>
+	 *
+	 * @param e the attacking entity
+	 * @param target the target node being attacked
+	 * @param style the combat style being used
+	 * @param message whether to send a message to the player explaining why the attack cannot continue
+	 * @return {@code true} if the zone allows the attack to continue
 	 */
 	public boolean continueAttack(Entity e, Node target, CombatStyle style, boolean message) {
 		return true;

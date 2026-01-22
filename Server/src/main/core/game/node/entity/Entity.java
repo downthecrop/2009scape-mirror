@@ -490,9 +490,24 @@ public abstract class Entity extends Node {
 
 	/**
 	 * Checks if an entity can continue its attack.
-	 * @param target the target.
-	 * @param style the style.
-	 * @return {@code True} if so.
+	 *
+	 * <p>This method is called during attack validation to determine if the attacking entity should be
+	 * allowed to continue attacking the target. It's invoked by
+	 * {@link core.game.world.map.zone.ZoneMonitor#continueAttack(Node, CombatStyle, boolean)}
+	 * as part of the attack validation chain.</p>
+	 *
+	 * <p>The default implementation returns {@code true}, allowing the attack to proceed.
+	 * <b>Subclasses should override this method to implement entity-specific attack restrictions.</b></p>
+	 *
+	 * <p>This method is distinct from {@link #isAttackable(Entity, CombatStyle, boolean)}, which
+	 * checks if this entity can be attacked by another entity. The {@code continueAttack} method
+	 * checks if this entity can attack the given target.</p>
+	 *
+	 * @param target  the target entity being attacked
+	 * @param style   the combat style being used
+	 * @param message whether to send a message to the player explaining why the attack cannot continue
+	 *
+	 * @return {@code true} if the entity can continue attacking the target
 	 */
 	public boolean continueAttack(Entity target, CombatStyle style, boolean message) {
 		return true;

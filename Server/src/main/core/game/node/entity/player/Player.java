@@ -767,6 +767,30 @@ public class Player extends Entity {
 	}
 
 	@Override
+	public boolean continueAttack(Entity target, CombatStyle style, boolean message) {
+		if (target instanceof NPC
+                && !((NPC) target).getDefinition().hasAction("attack")
+                && !((NPC) target).isIgnoreAttackRestrictions(this)) {
+			return false;
+		}
+		if (target instanceof Player) {
+			Player p = (Player) target;
+			if (p.getSkullManager().isWilderness() && skullManager.isWilderness()) {
+				if (GameWorld.getSettings() == null || !GameWorld.getSettings().getWild_pvp_enabled()) {
+					return false;
+				}
+				if (p.getSkullManager().hasWildernessProtection()) {
+					return false;
+				}
+                return !skullManager.hasWildernessProtection();
+            } else {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	@Override
 	public boolean isPoisonImmune() {
 		return timers.getTimer("poison:immunity") != null;
 	}
