@@ -575,7 +575,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
         if(index == size && size != 0) {
             removeRunes(player, true)
             visualizeSpell(player, Animations.LUNAR_SPELLBOOK_SUPERGLASS_MAKE_4413, Graphics.LUNAR_SPELLBOOK_SUPERGLASS_MAKE_729, 120, Sounds.LUNAR_HEATGLASS_2896)
-            rewardXP(player, Skills.CRAFTING, 10.0)
+            rewardXP(player, Skills.CRAFTING, 10.0 * index)
             addXP(player, 78.0)
         }
     }
