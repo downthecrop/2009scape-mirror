@@ -247,7 +247,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
         return InteractionType.STILL_INTERACT
     }
 
-    private fun canStepTowards(entity: Entity, victim: Entity): InteractionType {
+    protected fun canStepTowards(entity: Entity, victim: Entity): InteractionType {
         val closestVictimTile = victim.getClosestOccupiedTile(entity.location)
         val closestEntityTile = entity.getClosestOccupiedTile(closestVictimTile)
         val dir = closestEntityTile.deriveDirection(closestVictimTile)

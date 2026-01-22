@@ -522,8 +522,23 @@ public final class Location extends Node {
 		int stepX = dir.getStepX();
 		int stepY = dir.getStepY();
 
-		if (stepX != 0) output.add(transform(stepX, 0, 0));
-		if (stepY != 0) output.add(transform(0, stepY, 0));
+		// alright ill break it down real simple
+		//
+		// we can move diagonally but theres no melee attacking diagonally. its gotta be from N, W, S or E.
+		// if we are moving diagonally, we then need to check if we can attack from one of the valid directions.
+		// in other words we need to check the two tiles that share a corner with our destination and make sure they can be attacked from
+		//
+		// picture this: you are at (0,0). im at (1,1). you want to strangle my head off so you gotta check
+		// 1. to the west of destination: (1,1) + (-1,0) = (0,1) or north from where you started
+		// 2. to the south of the destination: (1,1) + (0,-1) = (1,0) or east from where you started
+		// this function is used only by CombatSwingHandler.kt and assumes that we return the X tiles, west or east, FIRST
+		// and then the Y tiles South and North.
+		//
+		// idk what else to say, if youre reading this youre either crazy or crazy good at weird ass shit like this
+		// and dont even need letters to understand, theres just numbers and arrows and fking formulas or something in ur head (and a lot of work to do here)
+
+		if (stepX != 0) output.add(transform(-stepX, 0, 0)); // Ive never dealt with coordinate systems at this level, but it feels like Im in a cold, damp, deep and dark cave with fking goblins etc
+		if (stepY != 0) output.add(transform(0, -stepY, 0)); // and minotaurs
 		return output;
 	}
 
