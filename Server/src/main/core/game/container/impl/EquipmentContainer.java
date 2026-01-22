@@ -1,5 +1,6 @@
 package core.game.container.impl;
 
+import content.global.skill.skillcapeperks.SkillcapeEquipmentPlugin;
 import content.global.skill.skillcapeperks.SkillcapePerks;
 import core.game.container.Container;
 import core.game.container.ContainerEvent;
@@ -276,6 +277,8 @@ public final class EquipmentContainer extends Container {
 					updateDefenceAnimation = true;
 				} else if (slot == EquipmentContainer.SLOT_SHIELD) {
 					updateDefenceAnimation = true;
+				} else if (slot == EquipmentContainer.SLOT_CAPE) {
+					SkillcapeEquipmentPlugin.updateCapePerks(player, c, slot);
 				}
 			}
 			if (updateDefenceAnimation) {
