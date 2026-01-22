@@ -73,7 +73,7 @@ public class PrinceAliRescue extends Quest {
 			line(player, "<str>I should go and speak to Osman for details on the quest.", 6+ 7);
 			line(player, RED + "Prince Ali " + BLUE + "has been " + RED + "kidnapped " + BLUE + "but luckily the spy " + RED + "Leela " + BLUE + "has", 7+ 7);
 			line(player, BLUE + "found he is being held near " + RED + "Draynor village. " + BLUE + "I will need to", 8+ 7);
-			line(player, RED + "disguise " + BLUE + "the " + RED + "Price " + BLUE + "and " + RED + "tie " + BLUE + "up his " + RED + "captop " + BLUE + "to " + RED + "free " + BLUE + "him from", 9+ 7);
+			line(player, RED + "disguise " + BLUE + "the " + RED + "Price " + BLUE + "and " + RED + "tie " + BLUE + "up his " + RED + "captor " + BLUE + "to " + RED + "free " + BLUE + "him from", 9+ 7);
 			line(player, BLUE + "their " + RED + "clutches.", 10+ 7);
 			line(player, BLUE + "To do this I should:-", 11+ 7);
 			line(player, BLUE + "Talk to " + RED + "Leela " + BLUE + "near " + RED + "Draynor Village " + BLUE + "for advice.", 12+ 7);

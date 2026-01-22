@@ -820,7 +820,7 @@ class GardenObjectsPlugin : InteractionListener {
                             stage = 10
                         }
                         2 -> {
-                            interpreter.sendDialogues(player, null, "What is th second thing you need?")
+                            interpreter.sendDialogues(player, null, "What is the second thing you need?")
                             stage = 20
                         }
                         3 -> {
