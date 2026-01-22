@@ -68,7 +68,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             }
         }
 
-        define("cleardiary", Privilege.ADMIN) { player, _ ->
+        define("cleardiary", Privilege.ADMIN, description = "Resets all achievement diary progress.") { player, _ ->
             for (type in DiaryType.values()) {
                 val diary = player.achievementDiaryManager.getDiary(type)
                 for (level in 0 until diary.levelStarted.size) {
@@ -80,7 +80,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             sendMessage(player, "All achievement diaries cleared successfully.")
         }
 
-        define("clearjob", Privilege.ADMIN) { player, _ ->
+        define("clearjob", Privilege.ADMIN, description = "Clears your current job assignment.") { player, _ ->
             val playerJobManager = JobManager.getInstance(player)
             playerJobManager.job = null
             playerJobManager.jobAmount = -1
@@ -102,18 +102,18 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             player.spellBookManager.update(player)
         }
 
-        define("killme", Privilege.ADMIN, "", "Does exactly what it says on the tin.") { player, _ ->
+        define("killme", Privilege.ADMIN, description = "Literally kills you in-game even") { player, _ ->
             player.impactHandler.manualHit(player, player.skills.lifepoints, HitsplatType.NORMAL)
         }
 
-        define("struct") {player, args ->
+        define("struct", usage = "::struct <lt>struct-id<gt>", description = "Logs the struct definition for the given cache id.") {player, args ->
             val mapId = args[1].toIntOrNull() ?: return@define
 
             val def = Struct.get(mapId)
             log(this::class.java, Log.FINE,  def.toString())
         }
 
-        define("datamap") {player, args ->
+        define("datamap", usage = "::datamap <lt>data-map-id<gt>", description = "Logs the data map definition for the given cache id.") {player, args ->
             val mapId = args[1].toIntOrNull() ?: return@define
 
             val def = DataMap.get(mapId)
@@ -198,11 +198,11 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             }
         }
 
-        define("testpacket") { player, _ ->
+        define("testpacket", description = "Sends the reset-interface packet to the client.") { player, _ ->
             PacketWriteQueue.write(ResetInterface(), PlayerContext(player))
         }
 
-        define("npcsearch", Privilege.STANDARD, "npcsearch name", "Searches for NPCs that match the name either in main or children.") {player, strings ->
+        define("npcsearch", Privilege.STANDARD, "::npcsearch <lt>name<gt>", "Searches for NPCs that match the name either in main or children.") {player, strings ->
             val name = strings.slice(1 until strings.size).joinToString(" ").lowercase()
             for (id in 0 until 9000) {
                 val def = NPCDefinition.forId(id)
@@ -220,7 +220,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             }
         }
 
-        define("itemsearch", Privilege.STANDARD, "itemsearch name", "Searches for items that match the name.") {player, args ->
+        define("itemsearch", Privilege.STANDARD, "::itemsearch <lt>name<gt>", "Searches for items that match the name.") {player, args ->
             val itemName = args.copyOfRange(1, args.size).joinToString(" ").lowercase()
             for (i in 0 until 15000) {
                 val name = getItemName(i).lowercase()
@@ -229,7 +229,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             }
         }
 
-        define("runekit", Privilege.ADMIN, "", "Gives 1k of each Rune type" ) { player, args ->
+        define("runekit", Privilege.ADMIN, "", "Gives 1000 of each rune type. We love casting spells" ) { player, args ->
                     for(item in runeKitItems) {
                     addItem(player, item, 1000)
             }
@@ -251,23 +251,23 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             setAttribute (player, "routedraw", !getAttribute(player, "routedraw", false))
         }
 
-        define ("fmstart", Privilege.ADMIN, "", "") {player, _ -> 
+        define ("fmstart", Privilege.ADMIN, description = "Marks your current tile as the force-movement start point.") {player, _ -> 
             setAttribute(player, "fmstart", Location.create(player.location))
         }
 
-        define ("fmend", Privilege.ADMIN, "", "") {player, _ ->
+        define ("fmend", Privilege.ADMIN, description = "Marks your current tile as the force-movement destination.") {player, _ ->
             setAttribute(player, "fmend", Location.create(player.location))
         }
 
-        define ("fmspeed", Privilege.ADMIN, "", "") {player, args ->
+        define ("fmspeed", Privilege.ADMIN, "::fmspeed <lt>start-speed<gt>", "Sets the starting force-movement speed (client cycles between steps) used by ::testfm.") {player, args ->
             setAttribute(player, "fmspeed", args[1].toIntOrNull() ?: 10)
         }
 
-        define ("fmspeedend", Privilege.ADMIN, "", "") {player, args ->
+        define ("fmspeedend", Privilege.ADMIN, "::fmspeedend <lt>end-speed<gt>", "Sets the ending speed (client cycles between steps) used by ::testfm.") {player, args ->
             setAttribute(player, "fmspeedend", args[1].toIntOrNull() ?: 10)
         }
 
-        define("testfm", Privilege.ADMIN, "", "") { player, _ -> 
+        define("testfm", Privilege.ADMIN, description = "Runs the configured force-movement from the saved start to end point.") { player, _ -> 
             val start = getAttribute(player, "fmstart", Location.create(player.location))
             val end = getAttribute(player, "fmend", Location.create(player.location))
             val speed = getAttribute(player, "fmspeed", 10)
@@ -276,7 +276,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             forceMove(player, start, end, speed, speedEnd, anim = ani)    
         }
 
-        define("fmanim", Privilege.ADMIN, "", "") {player, args ->
+        define("fmanim", Privilege.ADMIN, "::fmanim <lt>animation-id<gt>", "Sets the animation id to play during ::testfm.") {player, args ->
             setAttribute(player, "fmanim", args[1].toIntOrNull() ?: -1)
         }
 
@@ -302,7 +302,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             }
         }
 
-        define("setpestpoints", Privilege.ADMIN, "::setpestpoints points player_name", "Sets your (or player_name's) Pest Control points to 'points'") { player, args ->
+        define("setpestpoints", Privilege.ADMIN, "::setpestpoints <lt>points<gt> player_name[optional]", "Sets your (or <lt>player_name<gt>s) Pest Control points to <lt>points<gt>") { player, args ->
             val target = getPlayerFromArgs(player, args, 2) ?: return@define
             val points = args[1].toIntOrNull()
             if (points == null) {
@@ -311,7 +311,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             target.savedData.activityData.pestPoints = points!!
         }
 
-        define("makeadmin", Privilege.ADMIN, "::makeadmin player_name", "Permanently gives admin rights to player_name (or self if empty)") { player, args ->
+        define("makeadmin", Privilege.ADMIN, "::makeadmin <lt>player_name<gt>", "Permanently gives admin rights to player_name (or self if empty)") { player, args ->
             val target = getPlayerFromArgs(player, args, 1) ?: return@define
             target.details.rights = Rights.ADMINISTRATOR
             sendMessage(player, "Gave admin rights to ${target.username}.")
@@ -323,7 +323,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             sendMessage(player, "Dropped admin rights.")
         }
 
-        define("max", Privilege.ADMIN, "::max player_name", "Gives all 99s to player_name (or self if empty)") { player, args ->
+        define("max", Privilege.ADMIN, "::max <lt>player_name<gt>", "Sets all skills to 99s for <lt>player_name<gt> (or self if empty)") { player, args ->
             val target = getPlayerFromArgs(player, args, 1) ?: return@define
             var index = 0
             Skills.SKILL_NAME.forEach {
@@ -334,7 +334,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             target.skills.updateCombatLevel()
         }
 
-        define("noobme", Privilege.ADMIN, "::noobme player_name", "Sets player_name (or self if empty) back to default stats") { player, args ->
+        define("noobme", Privilege.ADMIN, "::noobme <lt>player_name<gt>", "Sets <lt>player_name<gt> (or self if empty) back to default stats") { player, args ->
             val target = getPlayerFromArgs(player, args, 1) ?: return@define
             var index = 0
             Skills.SKILL_NAME.forEach {

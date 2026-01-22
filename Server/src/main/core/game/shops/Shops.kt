@@ -284,13 +284,13 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
     }
 
     override fun defineCommands() {
-        define("openshop", Privilege.ADMIN) { player, args ->
+        define("openshop", Privilege.ADMIN, "::openshop <lt>shop-id<gt>", "Opens the shop interface for <lt>shop-id<gt>.") { player, args ->
             if(args.size < 2) reject(player, "Usage: ::openshop shopId")
             val shopId = args[1].toInt()
             shopsById[shopId]?.openFor(player)
         }
 
-        define("shopscript") { player, args ->
+        define("shopscript", usage = "::shopscript <lt>object<gt>", description = "Runs CS2 script 25 with string \"vg\" and objects \"<lt>object<gt>, 92\"") { player, args ->
             val arg1 = args[1].toInt()
             player.packetDispatch.sendRunScript(25, "vg", arg1, 92) //Run CS2 script 25, with args 868? and 92(our container id)
         }

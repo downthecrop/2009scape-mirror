@@ -113,7 +113,7 @@ class ElementalWorkshopQuest : Quest(Quests.ELEMENTAL_WORKSHOP_I, 52, 51, 1), Co
     }
 
     override fun defineCommands() {
-        define("resetew", Privilege.ADMIN) { player, _ ->
+        define("resetew", Privilege.ADMIN, description = "Resets Elemental Workshop I progress and teleports you to the start.") { player, _ ->
             setAttribute(player, "/save:ew1:got_needle", false)
             setAttribute(player, "/save:ew1:got_leather", false)
             setAttribute(player, "/save:ew1:bellows_fixed", false)
@@ -129,7 +129,7 @@ class ElementalWorkshopQuest : Quest(Quests.ELEMENTAL_WORKSHOP_I, 52, 51, 1), Co
             addItem(player, Items.HAMMER_2347)
             addItem(player, Items.COAL_453, 4)
         }
-        define("readyew", Privilege.ADMIN) { player, _ ->
+        define("readyew", Privilege.ADMIN, description = "Sets Elemental Workshop I furnace as ready (queststage->95, changes all required attributes/varbits)") { player, _ ->
             val enabled = 1
             setAttribute(player, "/save:ew1:got_needle", true)
             setAttribute(player, "/save:ew1:got_leather", true)

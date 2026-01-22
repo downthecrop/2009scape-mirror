@@ -12,7 +12,7 @@ class ConfigCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Sets a range of configs to a maximum value
          */
-        define("sconfigrange"){player, args ->
+        define("sconfigrange", usage = "::sconfigrange <lt>start-id<gt> <lt>end-id<gt>", description = "Sets each varp from <lt>start-id<gt> (inclusive) up to <lt>end-id<gt> (exclusive) to Integer.MAX_VALUE."){player, args ->
             if (args.size < 3) {
                 reject(player, "usage: sconfigrange idlo idhi")
             }
@@ -27,7 +27,7 @@ class ConfigCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Sets a range of configs to 0
          */
-        define("sconfigrange0"){player, args ->
+        define("sconfigrange0", usage = "::sconfigrange0 <lt>start-id<gt> <lt>end-id<gt>", description = "Sets each varp from <lt>start-id<gt> (inclusive) up to <lt>end-id<gt> (exclusive) to 0."){player, args ->
             if (args.size < 3) {
                 reject(player, "usage: sconfigrange0 idlo idhi")
             }
@@ -44,7 +44,7 @@ class ConfigCommandSet : CommandSet(Privilege.ADMIN){
          */
         define("iface", Privilege.ADMIN, "::iface <lt>Interface ID<gt>", "Opens the interface with the given ID."){player, args ->
             if (args.size < 2) {
-                reject(player, "usage: iface id")
+                reject(player, "usage: ::iface <id>")
                 return@define
             }
             val id = args[1].toIntOrNull() ?: reject(player, "INVALID INTERFACE ID")

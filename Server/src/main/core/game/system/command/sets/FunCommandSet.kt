@@ -38,7 +38,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
          * Force animation + messages on all NPCs in a radius of 10 from the player.
          * Add an optional 3rd argument if cycling through a range of animation ids.
          */
-        define("npcanim", Privilege.ADMIN, "::npcanim <lt>Animation ID<gt> <lt>Optional: End Animation ID<gt>") { player, args ->
+        define("npcanim", Privilege.ADMIN, "::npcanim <lt>animation-id<gt> [end-animation-id]", "Makes nearby NPCs play <lt>animation-id<gt>, or loop that id up to <lt>end-animation-id<gt>.") { player, args ->
             if (args.size < 2) {
                 reject(player, "Syntax error: ::npcanim <Animation ID>")
             }
@@ -150,14 +150,14 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Opens up the makeover interface
          */
-        define("makeover", Privilege.MODERATOR){ player, _ ->
+        define("makeover", Privilege.MODERATOR, description = "Opens the makeover interface for your character."){ player, _ ->
             CharacterDesign.open(player)
         }
 
         /**
          * Copies your current appearance and equipment as JSON to the clipboard
          */
-        define("dumpappearance", Privilege.MODERATOR){ player, _ ->
+        define("dumpappearance", Privilege.MODERATOR, description = "Copies your appearance and equipment as JSON to the clipboard."){ player, _ ->
             val json = JSONObject()
             PlayerSaver(player).saveAppearance(json)
             val equipJson = PlayerSaver(player).saveContainer(player.equipment)
@@ -175,7 +175,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Bury inventory at current location
          */
-        define("bury"){player, _ ->
+        define("bury", description = "Buries your entire inventory at your current location."){player, _ ->
             if(player.inventory.isEmpty){
                 reject(player, "You have no items to bury.")
             }
@@ -203,7 +203,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
          * Cast a weakened version of ice barrage on nearby players within the defined radius.
          * This spell will never kill or freeze a player
          */
-        define("barrage", Privilege.ADMIN, "::barrage radius ", "Cast a weak barrage on all nearby players. Will never kill players") { player, args ->
+        define("barrage", Privilege.ADMIN, "::barrage <lt>radius<gt>", "Cast a weak Ice Barrage on all nearby players. Will never kill players") { player, args ->
             if (args.size != 2)
                 reject(player, "Usage: ::barrage radius[max = 50]")
             val radius = if (args[1].toInt() > 50) 50 else args[1].toInt()
@@ -224,7 +224,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
          * 1 = Normal hunger/growth mode (1x speed)
          * 2 = Dev hunger/growth mode (100x speed)
          */
-        define("petrate", Privilege.ADMIN, "petrate <lt>0-2<gt>", "Sets pet hunger and growth to off, normal, or dev."){ player, args ->
+        define("petrate", Privilege.ADMIN, "::petrate <lt>0-2<gt>", "Sets pet hunger and growth to off, normal, or dev."){ player, args ->
             if(args.size < 2) {
                 notify(player, "Pet mode is currently ${player.getAttribute("petrate", 1)}")
                 return@define

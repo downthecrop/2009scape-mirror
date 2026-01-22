@@ -815,7 +815,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
     }
 
     override fun defineCommands() {
-        define("poison", privilege = Privilege.ADMIN) { player, strings ->
+        define("poison", privilege = Privilege.ADMIN, usage = "::poison <lt>player<gt> <lt>damage<gt>", description = "Applies poison to <lt>player<gt> for <lt>damage<gt> initial damage.") { player, strings ->
             if(strings.size == 3) {
                 val dmg = strings[2].toIntOrNull()
                 val p = Repository.getPlayerByName(strings[1])
@@ -838,7 +838,7 @@ class LunarListeners : SpellListener("lunar"), Commands {
             }
         }
 
-        define("humidifykit", privilege = Privilege.ADMIN) { player, _ ->
+        define("humidifykit", privilege = Privilege.ADMIN, description = "Gives you the runes and items needed to test Humidify.") { player, _ ->
             if(freeSlots(player) < 24) {
                 sendMessage(player, "Not enough free space.")
                 return@define
@@ -853,8 +853,6 @@ class LunarListeners : SpellListener("lunar"), Commands {
         }
     }
 }
-
-
 
 
 

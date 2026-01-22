@@ -37,7 +37,7 @@ class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
          * Kick a player
          * =============================================================================================================
          */
-        define("kick", Privilege.MODERATOR){ player, args ->
+        define("kick", Privilege.MODERATOR, "::kick <player>", "Disconnects the specified player from the game."){ player, args ->
             val playerToKick: Player? = Repository.getPlayerByName(args[1])
             if (playerToKick != null) {
                 playerToKick.clear()

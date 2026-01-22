@@ -87,20 +87,19 @@ class RevenantController : TickListener, Commands {
     }
 
     override fun defineCommands() {
-        define("setrevcap", Privilege.ADMIN) {player, strings ->
+        define("setrevcap", Privilege.ADMIN, "::setrevcap <lt>amount<gt>", "Sets revenant spawn cap to <lt>amount<gt>") {player, strings ->
             val amt = strings[1].toInt()
             expectedRevAmount = amt
         }
 
-        define("listrevs", Privilege.ADMIN) {player, strings ->
+        define("listrevs", Privilege.ADMIN, description = "Logs the IDs and locations of all tracked revenants.") {player, strings ->
             for (rev in trackedRevenants) {
                 log(this::class.java, Log.FINE,  "REV ${rev.id}-${rev.name} @ ${rev.location.toString()}")
             }
-
             log(this::class.java, Log.FINE,  "Total of ${trackedRevenants.size} revenants spawned.")
         }
 
-        define("clearrevs", Privilege.ADMIN) {_, _ ->
+        define("clearrevs", Privilege.ADMIN, description = "Despawns all revenants.") {_, _ ->
             for (rev in trackedRevenants.toTypedArray()) rev.clear()
         }
     }

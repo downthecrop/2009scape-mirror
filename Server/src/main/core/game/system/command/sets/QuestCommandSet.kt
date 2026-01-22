@@ -13,7 +13,7 @@ class QuestCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Completes all quests
          */
-        define("allquest"){player,_->
+        define("allquest", description = "Instantly completes every quest for your account."){player,_->
             for (quest in QuestRepository.getQuests().values) {
                 quest.finish(player)
             }
@@ -22,7 +22,7 @@ class QuestCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Displays the currently implemented quests with debug information
          */
-        define("quest"){player,args ->
+        define("quest", usage = "::quest [player-name]", description = "Shows quest stages for you, or for [player-name] if provided."){player,args ->
             if (args.size < 3) {
                 val lookupP = if (args.size == 1) {
                     player
@@ -41,7 +41,7 @@ class QuestCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Sets stage of quest
          */
-        define("setqueststage"){player,args ->
+        define("setqueststage", usage = "::setqueststage <lt>quest-index<gt> <lt>stage<gt>", description = "Sets quest <lt>quest-index<gt> to stage <lt>stage<gt>; use ::quest to find indices."){player,args ->
             if (args.size < 3) {
                 reject(player,"You must specify the index# of a quest, and a stage number")
             }
@@ -64,7 +64,7 @@ class QuestCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Displays the currently implemented quests
          */
-        define("quests", Privilege.STANDARD){ player, _ ->
+        define("quests", Privilege.STANDARD, description = "Opens the quests interface listing current implementations."){ player, _ ->
             sendQuests(player)
         }
     }

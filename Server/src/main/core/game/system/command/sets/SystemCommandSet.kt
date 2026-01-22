@@ -20,7 +20,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Start an update countdown
          */
-        define("update") { player, args ->
+        define("update", usage = "::update [seconds]", description = "Flags the world for an update, optionally using [seconds] as the countdown.") { player, args ->
             if (args.size > 1) {
                 SystemManager.getUpdater().setCountdown(args[1].toInt())
             }
@@ -30,7 +30,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Cancel an update countdown
          */
-        define("cancelupdate") { player, _ ->
+        define("cancelupdate", description = "Cancels any active update countdown.") { player, _ ->
             SystemManager.getUpdater().cancel()
         }
 
@@ -230,7 +230,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
             player.inventory.add(Item(Items.ROTTEN_POTATO_5733))
         }
 
-        define("shutdown", Privilege.ADMIN) { player, _ ->
+        define("shutdown", Privilege.ADMIN, description = "Immediately terminates the server process. Do NOT test on a remote server you don't own.") { player, _ ->
             exitProcess(0)
         }
 

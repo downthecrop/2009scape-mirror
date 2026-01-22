@@ -80,20 +80,20 @@ class GrandExchange : StartupListener, Commands {
     }
 
     override fun defineCommands() {
-        define("addbotoffer", Privilege.ADMIN) {player, strings ->
+        define("addbotoffer", Privilege.ADMIN, "::addbotoffer <lt>item-id<gt> <lt>amount<gt>", "Adds a GE bot sell offer for the given item ID and amount.") {player, strings ->
             val id = strings[1].toInt()
             val amount = strings[2].toInt()
             addBotOffer(id, amount)
             notify(player, "Added ${amount}x ${getItemName(id)} to the bot offers.")
         }
 
-        define("bange", Privilege.ADMIN) {player, strings ->
+        define("bange", Privilege.ADMIN, "::bange <lt>item-id<gt>", "Bans/blacklists the specified item from GE trades.") {player, strings ->
             val id = strings[1].toInt()
             PriceIndex.banItem(id)
             notify(player, "Banned ${getItemName(id)} from GE trade.")
         }
 
-        define("allowge", Privilege.ADMIN) {player, strings ->
+        define("allowge", Privilege.ADMIN, "::allowge <lt>item-id<gt>", "Allows/whitelists the specified item to be traded on the GE.") {player, strings ->
             val id = strings[1].toInt()
             PriceIndex.allowItem(id)
             notify(player, "Allowed ${getItemName(id)} for GE trade.")

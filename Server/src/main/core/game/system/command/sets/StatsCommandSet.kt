@@ -167,7 +167,7 @@ class StatsCommandSet : CommandSet(Privilege.STANDARD) {
 
     }
     override fun defineCommands() {
-        define("stats"){ player, args ->
+        define("stats", usage = "::stats [player-name]", description = "Opens the statistics book for you or the specified player."){ player, args ->
 
             // Bad number of args
             if(args.size > 2){

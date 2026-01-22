@@ -133,16 +133,16 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
     }
 
     override fun defineCommands() {
-        define("tostar", Privilege.ADMIN) { player, _ ->
+        define("tostar", Privilege.ADMIN, description = "Teleports you adjacent to the currently active star.") { player, _ ->
             teleport(player, star.starObject.location.transform(1,1,0))
         }
 
-        define("submit", Privilege.ADMIN) { _, _ ->
+        define("submit", Privilege.ADMIN, description = "Rebuilds and fires the shooting star event immediately.") { _, _ ->
             star.rebuildVars()
             star.fire()
         }
 
-        define("resetsprite", Privilege.ADMIN) { player, _ ->
+        define("resetsprite", Privilege.ADMIN, description = "Resets your star sprite reward cooldown.") { player, _ ->
             player.savedData.globalData.starSpriteDelay = 0L
         }
     }

@@ -84,7 +84,7 @@ class ModelViewerCommandSet  : CommandSet(Privilege.ADMIN) {
         }
     }
     override fun defineCommands() {
-        define("models"){ player, args ->
+        define("models", description = "Opens the in-game model viewer toolkit."){ player, args ->
 
             // Bad number of args
             if(args.size > 2){
