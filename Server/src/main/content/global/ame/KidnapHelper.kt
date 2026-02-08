@@ -11,6 +11,7 @@ import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Sounds
 
 fun kidnapPlayer(npc: NPC, player: Player, dest: Location, playerLine: String? = null, callback: (player: Player, npc: NPC) -> Unit) {
+    clearScripts(player)
     val lockDuration = if (playerLine != null) 4 else 6
     lock(player, lockDuration)
     queueScript(player, 1, QueueStrength.SOFT) { stage: Int ->
