@@ -67,8 +67,8 @@ class KamilCombatHandler: MultiSwingHandler(
             // I can't be bothered to fix fucking frozen. The player can hit through frozen. What the fuck is frozen for then, to glue his fucking legs???
             if (RandomFunction.roll(3) && !hasTimerActive(victim, "frozen") && !hasTimerActive(victim, "frozen:immunity")) {
                 sendChat(entity as NPC, "Sallamakar Ro!") // Salad maker roll.
-                impact(victim, 5)
-                impact(victim, 5)
+                impact(victim, if (victim.hasProtectionPrayer(CombatStyle.MAGIC)) 0 else 5)
+                impact(victim, if (victim.hasProtectionPrayer(CombatStyle.RANGE)) 0 else 5)
                 registerTimer(victim, spawnTimer("frozen", 7, true))
                 sendMessage(victim, "You've been frozen!")
                 // FIXME: before the below vfx hits, there should be another one that looks kinda like a wind wave exploding at the player's feet. Hope somebody finds the id.

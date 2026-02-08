@@ -84,7 +84,7 @@ class DiamondOfIceListeners : InteractionListener {
         on(Scenery.ICE_LEDGE_6455, SCENERY, "use") { player, node ->
 
             if ((getQuestStage(player, DesertTreasure.questName) == 9 &&
-                            DesertTreasure.getSubStage(player, DesertTreasure.attributeIceStage) >= 3) ||
+                    DesertTreasure.getSubStage(player, DesertTreasure.attributeIceStage) >= 3) ||
                     getQuestStage(player, DesertTreasure.questName) >= 10) {
                 if (inEquipment(player, Items.SPIKED_BOOTS_3107)) {
                     teleport(player, Location(2838, 3803, 1))
