@@ -104,13 +104,19 @@ public enum FacialExpression {
     CHILD_SUSPICIOUS(7179),
     CHILD_SURPRISED(7180),
 
+	//Familiar Chatheads
+	GRAAHK_NOD(6551),
+	GHRAAK_SHAKE_MILD(6553),
+	GHRAAK_SHAKE_VIGOROUS(6555),
+
+
     ; //TODO: More?
 
     /*
      * From some sources: here's a potential list of chatheads.
      * // 667
      * Chat animation group: 1540; linked animations: [7, 8, 9, 6824]
-     * Chat animation group: 1489; linked animations: [225, 6550, 6551, 6552, 6553, 6555, 8372, 8373, 8374, 8375, 8581, 8582, 9178, 9179, 9180, 9181, 9183, 9187, 9189, 9190, 9192, 9202]
+     * Chat animation group: 1489; potentially all familiars; linked animations: [225, 6550, 6551, 6552, 6553, 6555, 8372, 8373, 8374, 8375, 8581, 8582, 9178, 9179, 9180, 9181, 9183, 9187, 9189, 9190, 9192, 9202]
      * Chat animation group: 82; linked animations: [554, 555, 556, 557, 562, 563, 564, 565, 567, 568, 569, 570, 571, 572, 573, 574, 575, 576, 577, 578, 588, 589, 590, 591, 592, 593, 594, 595, 596, 597, 598, 599, 600, 601, 602, 603, 610, 611, 612, 613, 614, 615, 616, 617]
      * Chat animation group: 84; linked animations: [558, 559, 560, 561]
      * Chat animation group: 80; linked animations: [584, 585, 586, 587]
