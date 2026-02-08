@@ -50,7 +50,7 @@ class WoodcuttingListener : InteractionListener {
         defineInteraction(
                 IntType.SCENERY,
                 ids = WoodcuttingNode.values().map { it.id }.toIntArray(),
-                "chop-down", "chop", "chop down", "cut down",
+                "chop-down", "chop", "chop down", "cut down", "cut-branch",
                 persistent = true,
                 allowedDistance = 1,
                 handler = ::handleWoodcutting
@@ -74,10 +74,10 @@ class WoodcuttingListener : InteractionListener {
         if (clockReady(player, Clocks.SKILLING)) {
             animateWoodcutting(player)
 
-            if (resource == WoodcuttingNode.DRAMEN_TREE) {
+            if (resource in arrayOf(WoodcuttingNode.DRAMEN_TREE, WoodcuttingNode.SWAYING_TREE)) {
                 // Reward after one chop and then abort chopping (this is authentic)
                 queueScript(player, 1, QueueStrength.STRONG) {
-                    sendMessage(player, "You cut a branch from the Dramen tree.")
+                    sendMessage(player, "You cut a branch from the ${if (resource == WoodcuttingNode.DRAMEN_TREE) "Dramen" else "strangely musical"} tree.")
                     addItem(player, resource.getReward())
                     return@queueScript clearScripts(player)
                 }

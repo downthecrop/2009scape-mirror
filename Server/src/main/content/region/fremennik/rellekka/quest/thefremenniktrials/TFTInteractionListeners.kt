@@ -260,11 +260,6 @@ class TFTInteractionListeners : InteractionListener {
             return@on true
         }
 
-        on(SWAYING_TREE, IntType.SCENERY, "cut-branch"){ player, node ->
-            player.pulseManager.run(WoodcuttingSkillPulse(player, node as Scenery))
-            return@on true
-        }
-
         on(SHOPNPCS, IntType.NPC, "Trade") { player, npc ->
             if(isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)){
                 npc.asNpc().openShop(player)
