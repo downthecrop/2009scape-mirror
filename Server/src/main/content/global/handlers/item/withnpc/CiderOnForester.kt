@@ -43,7 +43,7 @@ class CiderOnForesterDialogue : DialogueFile() {
                     end()
                 }
                 else if(player!!.getAttribute("seersCiderPub",-1) !in 0..3 && !player!!.achievementDiaryManager.hasCompletedTask(DiaryType.SEERS_VILLAGE,0,6)){
-                    player!!.setAttribute("seersCiderPub",0)
+                    player!!.setAttribute("seersCiderPub", 1)
                     end()
                 }else if(player!!.getAttribute("seersCiderPub",-1) in 0..3){
                     player!!.incrementAttribute("seersCiderPub",1)
