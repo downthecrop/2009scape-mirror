@@ -20,7 +20,7 @@ public class SnelmCraftPlugin extends UseWithHandler {
 	 * The snelm data.
 	 */
 	private static final int[][] DATA = new int[][] { { 3345, 3327 }, { 3355, 3337 },// blamish
-			{ 3349, 3341 }, { 3341, 3359 },// ochre
+			{ 3349, 3331 }, { 3359, 3341 },// ochre
 			{ 3347, 3329 }, { 3357, 3339 },// blood
 			{ 3351, 3333 }, { 3361, 3343 },// blue
 			{ 3353, 3335 },// bark
