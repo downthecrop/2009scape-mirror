@@ -212,7 +212,7 @@ public final class EquipmentContainer extends Container {
 		for(Item currentItem : currentItems) {
 			Plugin<Object> plugin = currentItem.getDefinition().getConfiguration("equipment", null);
 			if (plugin != null) {
-				Object object = plugin.fireEvent("unequip", player, currentItem, newItem);
+				Object object = plugin.fireEvent("unequip", player, currentItem);
 				if (object != null && !((Boolean) object)) {
 					canContinue = false;
 					break;

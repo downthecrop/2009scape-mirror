@@ -3,6 +3,7 @@ package core.game.node.entity.player;
 import content.global.handlers.item.equipment.BarrowsEquipment;
 import content.global.handlers.item.equipment.special.SalamanderSwingHandler;
 import content.global.skill.runecrafting.PouchManager;
+import content.global.skill.slayer.SlayerEquipmentFlags;
 import core.api.ContentAPIKt;
 import core.game.component.Component;
 import core.game.container.Container;
@@ -638,7 +639,7 @@ public class Player extends Entity {
 				if (i == null) continue;
 				InteractionListeners.run(i.getId(), this, i, false);
 				Plugin equipPlugin = i.getDefinition().getConfiguration("equipment", null);
-				if (equipPlugin != null) equipPlugin.fireEvent("unequip");
+				if (equipPlugin != null) equipPlugin.fireEvent("unequip", this, i);
 			}
 
 			boolean canCreateGrave = GraveController.allowGenerate(this);
@@ -669,9 +670,9 @@ public class Player extends Entity {
 					}
 					if (BarrowsEquipment.isBarrowsItem(item.getId())) {
 						if (!BarrowsEquipment.isBroken(item.getId())) {
-                            int brokenItemId = Objects.requireNonNull(BarrowsEquipment.getDefinition(item.getId())).getBrokenId();
-                            item = new Item(brokenItemId, item.getAmount());
-                        }
+							int brokenItemId = Objects.requireNonNull(BarrowsEquipment.getDefinition(item.getId())).getBrokenId();
+							item = new Item(brokenItemId, item.getAmount());
+						}
 					} else {
 						item = GraveController.checkTransform(item);
 					}
@@ -687,6 +688,7 @@ public class Player extends Entity {
 			}
 
 			equipment.clear();
+			SlayerEquipmentFlags.updateFlags(this);
 			inventory.clear();
 			inventory.addAll(c[0]);
 			familiarManager.dismiss();
