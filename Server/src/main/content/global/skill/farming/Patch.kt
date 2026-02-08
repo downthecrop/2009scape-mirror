@@ -209,7 +209,15 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
                 PatchType.HERB_PATCH -> {
                     if(isDead) setVisualState(getHerbDeathValue())
                     else if(isDiseased && !isDead) setVisualState(getHerbDiseaseValue())
-                    else setVisualState((plantable?.value ?: 0) + currentGrowthStage)
+                    else {
+                        var state = (plantable?.value ?: 0) + currentGrowthStage
+                        // Spirit Weed contains states with bits 0x40 and 0x80 set, which the disease-free patch scenery interprets as watered/dead
+                        // Visually transmogrifies Spirit Weed (204-208) into Guam (4-8) while it's planted in the disease-free patch
+                        if (patch == FarmingPatch.TROLL_STRONGHOLD_HERB && plantable == Plantable.SPIRIT_WEED_SEED) {
+                            state = 4 + currentGrowthStage
+                        }
+                        setVisualState(state)
+                    }
                 }
                 PatchType.MUSHROOM_PATCH -> {
                     if(isDead) setVisualState(getMushroomDeathValue())
