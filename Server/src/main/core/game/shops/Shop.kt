@@ -62,17 +62,18 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
 
     fun showTab(player: Player, main: Boolean)
     {
-        val cont = if (main) getAttribute<Container?>(player, "shop-cont", null) ?: return else playerStock
+        val mainCont = getAttribute<Container?>(player, "shop-cont", null) ?: return
+        val cont = if (main) mainCont else playerStock
 
         if(!main)
         {
-            cont.listeners.remove(listenerInstances[player.details.uid])
+            mainCont.listeners.remove(listenerInstances[player.details.uid])
             playerStock.listeners.add(listenerInstances[player.details.uid])
         }
         else
         {
             playerStock.listeners.remove(listenerInstances[player.details.uid])
-            cont.listeners.add(listenerInstances[player.details.uid])
+            mainCont.listeners.add(listenerInstances[player.details.uid])
         }
 
         val settings = IfaceSettingsBuilder()
