@@ -47,9 +47,17 @@ Top priorities:
 - Browser websocket login is restartable from the browser UI instead of being locked to query-string credentials.
 - Browser bootstrap now maps DOM mouse, wheel, and keyboard events into the existing `rt4.Mouse` and `rt4.Keyboard` queues.
 - `rt4.Mouse` and `rt4.Keyboard` are now browser-safe state holders; desktop AWT listeners live in `DesktopMouseInput` and `DesktopKeyboardInput`.
+- Browser in-game interface clicks now work through the shared widget/menu path.
+  - Important finding: hover-only behavior was not a hit-test bug once the browser reached in-game state.
+  - The missing pieces were fixed-tick browser input sampling plus browser-side mini-menu rebuilding for mounted interfaces.
 - The generated page now prefers the TeaVM WebAssembly GC target from `build/web/index.html`.
 - Runtime packaging is driven through TeaVM's `buildWasmGC` task and includes `build/web/wasm-gc/web-client.wasm-runtime.js`.
 - `?target=js` forces the JavaScript fallback when debugging browser issues.
+- Browser compatibility was validated on iOS.
+  - Mainline takeaway: the normal JavaScript target is sufficient for current iOS/Safari validation.
+  - Temporary finding from legacy-device testing: older WebKit failed first on missing `BigInt64Array`/`BigUint64Array`, not on websocket or canvas boot.
+  - A dedicated legacy-only `8082` host with a `BigInt64Array` shim was used to prove the client could still boot and log in on an older iPhone.
+  - Current project decision: do not treat that legacy host/shim as mainline work for now; it was a compatibility experiment, not the primary shipping path.
 - Shared runtime stubs now intentionally bias the codebase toward browser mode:
   - `Fonts.load(...)` is forced down the software-font path.
   - `Fonts.drawTextOnScreen(...)`, `Sprites.load(...)`, `TitleScreen.load(...)`, and `InterfaceList.method1596(...)` are now flattened to software/browser-safe behavior.
@@ -71,19 +79,34 @@ Top priorities:
     - `SceneGraph.method2954Software(...)`
     - `SceneGraph.method3292Software(...)`
     - `SceneGraph.method4245Software(...)`
-  - Current browser exclusion: the first visible world pass is terrain-only.
-    - Actor/entity draws are intentionally skipped in `method4245Software(...)`.
-    - Reason: shared entity renderers still reach desktop GL code through paths like `Player.render(...)`.
+  - Current browser exclusion: the first visible world pass is terrain plus static map content only.
+    - Static world objects now render in-browser:
+      - walls
+      - wall decor
+      - scenery locs
+      - ground decor
+    - Dynamic entities are still intentionally skipped in `method4245Software(...)`.
+    - Reason: shared entity renderers still need a browser-safe reintroduction path through methods like `Player.render(...)` and `Npc.render(...)`.
   - Current browser exclusion: in-game overhead rendering is disabled.
     - `drawOverheadsSoftware(...)` exists, but the browser viewport does not call it yet.
     - Reason: shared font rendering still reaches `GlRaster`, and overhead sprite loads still reach `GlAlphaSprite`.
   - Current browser exclusion: the post-login browser world pass does not yet draw:
     - players
     - NPCs
-    - scenery entities
     - object stacks
     - overhead chat/hit splats/headicons
+  - Current browser rebuild note:
+    - browser object decode now uses browser-only loc readers that force `lowmem=false`
+    - reason: TeaVM repeatedly broke on the lowmem wall-placement shadow/occlusion side writes during `addLoc(...)`
+    - practical consequence: scene object placement is stable again, but the old lowmem shadow/occlusion behavior is currently reduced/regressed in browser mode
   - Current fallback behavior: if the browser-safe in-game raster throws, `WebClientMain` logs the failure once and falls back to the connected placeholder instead of hard-crashing the page.
+  - Current compositor state:
+    - mounted top-level and subinterfaces now draw stably in-browser
+    - scene placement belongs behind the `clientCode == 1337` viewport widget, not as a normal interface component
+    - the raster path is still unstable and can disappear or invalidate sprites after redraws if the compositor/regional clip state regresses
+  - Current practical state:
+    - interface rendering and input are ahead of scene rendering
+    - if a future session needs a stable demo path, prefer interface-only composition over a broken raster pass
 - `GameShell` is no longer allowed to inherit from `Applet` or any other AWT host class.
   - Reason: TeaVM's JavaScript backend was emitting a bundle that crashed immediately on missing `java.applet.Applet` / `java.awt.Panel` / AWT listener symbols.
   - Current browser-first shape: `GameShell` is now a plain runtime host object with stubbed host-navigation/parameter helpers.
@@ -105,6 +128,7 @@ The original client is not browser-safe as-is:
     2. `Npc.render(...)`
     3. shared overhead/font rendering through `Font.render(...)`
     4. GL-backed sprite creation paths such as `GlAlphaSprite`
+    5. object stack visuals, which still reach GL-backed object model code
 
 The current approach is to lift usable subsystems first:
 
@@ -159,6 +183,18 @@ The current approach is to lift usable subsystems first:
 8. Optional login bootstrap:
    - `?username=your_name&password=your_pass`
 
+## Current handoff state
+
+- Browser login, mounted in-game interfaces, hover, and click handling are working on the JavaScript target.
+- The remaining major browser-facing gap is stable world raster compositing behind the already-correct interface tree.
+- The right mental model for the next session:
+  - interface/input path is mostly functioning
+  - websocket/game-state path is functioning through `gameState 30`
+  - scene/raster presentation is still the unstable seam
+- If revisiting old iOS/WebKit support later:
+  - start from the `BigInt64Array` compatibility finding first
+  - do not assume failure means the websocket or login stack is broken
+
 ## Immediate next steps
 
 1. Keep pushing the authentic cached login interface until the browser-managed panel can be removed.
@@ -171,6 +207,11 @@ The current approach is to lift usable subsystems first:
 8. Next major refactor: keep stripping `GameShell` and `SignLink` of desktop-only AWT ownership instead of reintroducing it through new shared hooks.
   - Attempting to force `InterfaceList.method1626(...)` through the current shell reached `ScriptRunner`, which immediately proved the remaining blockers are the shell/runtime abstractions themselves.
   - The last stable browser build still uses the browser-local login renderer; direct shared login-script activation was intentionally backed out after validation.
+9. Reintroduce dynamic scene entities in this order:
+  - players
+  - NPCs
+  - object stacks
+  - then overheads
 
 ## Guardrails
 
@@ -181,8 +222,11 @@ The current approach is to lift usable subsystems first:
 - When browser code replaces an auto-detect GL path with a software-only path, leave a note explaining that it is a temporary WebGL compatibility shim.
 - When browser code introduces a terrain-only or scene-only render path, document exactly which draw categories are being skipped and where they must be reintroduced.
   - Current tracked exclusions:
-    - `SceneGraph.method4245Software(...)` skips entity draws for the first browser world pass.
+    - `SceneGraph.method4245Software(...)` skips dynamic entity draws for the current browser world pass.
     - `ScriptRunner.browserRenderViewportSoftware(...)` does not call the shared in-game overhead path.
+    - Browser object decode currently uses browser-only loc readers with `lowmem=false`, so lowmem shadow/occlusion side effects are not yet faithfully reproduced in browser mode.
+- When doing browser compatibility experiments for older Safari/WebKit, keep them out of the mainline unless they are explicitly productized.
+  - Current recorded example: the temporary `BigInt64Array` shim used on the dedicated legacy-only host to validate an older iPhone.
 - Do not fork or globally stub the shared GL stack unless there is no smaller seam available.
   - Prefer browser-local software shims at the call site first.
   - Reason: broad GL stubbing in shared `rt4` code risks breaking the desktop client and makes a future WebGL backend harder to reintroduce cleanly.
