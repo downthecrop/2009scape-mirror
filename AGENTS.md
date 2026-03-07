@@ -61,6 +61,29 @@ Top priorities:
   - `client.browserMainLoad()` mirrors the safe subset of the desktop `mainLoad()` stages through login-screen activation.
   - `client.browserMainUpdate()` runs a software-only browser tick for interface/script progression without the desktop GL/login-camera path.
   - `BrowserClientRuntime` advances those shared states on fixed ticks and reports load/game-state transitions into the browser console.
+  - Browser bootstrap now seeds a real one-world `WorldList` entry instead of only flipping `WorldList.loaded = true`.
+    - Reason: the authentic login UI uses shared world-list opcodes for world labels and world selection.
+    - Current browser contract: the selected websocket endpoint and the seeded shared world metadata must describe the same world.
+  - Future multi-world note: if browser mode grows beyond one world, the websocket target must be derived from the selected shared `WorldList` entry instead of staying fixed.
+- Browser in-game protocol now reaches `gameState 30` and the browser host now attempts a real software viewport instead of always showing the placeholder.
+  - Current browser-safe render seam is intentionally incomplete:
+    - `ScriptRunner.browserRenderViewportSoftware(...)`
+    - `SceneGraph.method2954Software(...)`
+    - `SceneGraph.method3292Software(...)`
+    - `SceneGraph.method4245Software(...)`
+  - Current browser exclusion: the first visible world pass is terrain-only.
+    - Actor/entity draws are intentionally skipped in `method4245Software(...)`.
+    - Reason: shared entity renderers still reach desktop GL code through paths like `Player.render(...)`.
+  - Current browser exclusion: in-game overhead rendering is disabled.
+    - `drawOverheadsSoftware(...)` exists, but the browser viewport does not call it yet.
+    - Reason: shared font rendering still reaches `GlRaster`, and overhead sprite loads still reach `GlAlphaSprite`.
+  - Current browser exclusion: the post-login browser world pass does not yet draw:
+    - players
+    - NPCs
+    - scenery entities
+    - object stacks
+    - overhead chat/hit splats/headicons
+  - Current fallback behavior: if the browser-safe in-game raster throws, `WebClientMain` logs the failure once and falls back to the connected placeholder instead of hard-crashing the page.
 - `GameShell` is no longer allowed to inherit from `Applet` or any other AWT host class.
   - Reason: TeaVM's JavaScript backend was emitting a bundle that crashed immediately on missing `java.applet.Applet` / `java.awt.Panel` / AWT listener symbols.
   - Current browser-first shape: `GameShell` is now a plain runtime host object with stubbed host-navigation/parameter helpers.
@@ -75,6 +98,13 @@ The original client is not browser-safe as-is:
 - `GameShell` still contains a lot of desktop window/canvas logic, but it no longer inherits from `Applet`.
 - `GlRenderer` depends on JOGL/LWJGL and desktop GL context management.
 - `SignLink` owns desktop filesystem, socket, cursor, and fullscreen services.
+- Shared in-game rendering is still mixed, not cleanly software-isolated.
+  - `SceneGraph` traversal now has browser-safe software forks, but shared entity rendering is still GL-reachable.
+  - Known remaining exclusions to remove:
+    1. `Player.render(...)`
+    2. `Npc.render(...)`
+    3. shared overhead/font rendering through `Font.render(...)`
+    4. GL-backed sprite creation paths such as `GlAlphaSprite`
 
 The current approach is to lift usable subsystems first:
 
@@ -149,6 +179,10 @@ The current approach is to lift usable subsystems first:
 - Keep desktop client behavior unchanged unless a shared abstraction is necessary.
 - Use TeaVM's packaging tasks instead of hand-assembling wasm runtime files.
 - When browser code replaces an auto-detect GL path with a software-only path, leave a note explaining that it is a temporary WebGL compatibility shim.
+- When browser code introduces a terrain-only or scene-only render path, document exactly which draw categories are being skipped and where they must be reintroduced.
+  - Current tracked exclusions:
+    - `SceneGraph.method4245Software(...)` skips entity draws for the first browser world pass.
+    - `ScriptRunner.browserRenderViewportSoftware(...)` does not call the shared in-game overhead path.
 - Do not fork or globally stub the shared GL stack unless there is no smaller seam available.
   - Prefer browser-local software shims at the call site first.
   - Reason: broad GL stubbing in shared `rt4` code risks breaking the desktop client and makes a future WebGL backend harder to reintroduce cleanly.
