@@ -122,10 +122,43 @@ public class IoSession {
 	 * @param service The executor service.
 	 */
 	public IoSession(SelectionKey key, ExecutorService service) {
+		this(key, service, resolveRemoteAddress(key));
+	}
+
+	/**
+	 * Constructs a new {@code IoSession} with an explicit remote address.
+	 * @param key The selection key.
+	 * @param service The executor service.
+	 * @param remoteAddress The remote address.
+	 */
+	public IoSession(SelectionKey key, ExecutorService service, String remoteAddress) {
 		this.key = key;
 		this.service = service;
-		this.address = getRemoteAddress().replaceAll("/", "").split(":")[0];
+		this.address = normalizeRemoteAddress(remoteAddress);
 		this.js5Queue = new JS5Queue(this);
+	}
+
+	private static String resolveRemoteAddress(SelectionKey key) {
+		if (key == null || !(key.channel() instanceof SocketChannel)) {
+			return "127.0.0.1";
+		}
+		try {
+			return ((SocketChannel) key.channel()).getRemoteAddress().toString();
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
+		}
+	}
+
+	private static String normalizeRemoteAddress(String remoteAddress) {
+		if (remoteAddress == null || remoteAddress.isBlank()) {
+			return "127.0.0.1";
+		}
+		String normalized = remoteAddress.replace("/", "");
+		int separator = normalized.lastIndexOf(':');
+		if (separator > 0) {
+			return normalized.substring(0, separator);
+		}
+		return normalized;
 	}
 
 	/**
@@ -213,9 +246,11 @@ public class IoSession {
 				return;
 			}
 			active = false;
-			key.cancel();
-			SocketChannel channel = (SocketChannel) key.channel();
-			channel.socket().close();
+			if (key != null) {
+				key.cancel();
+				SocketChannel channel = (SocketChannel) key.channel();
+				channel.socket().close();
+			}
 			if (getPlayer() != null) {
 				try {
 					getPlayer().clear();

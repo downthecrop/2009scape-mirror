@@ -368,5 +368,11 @@ class ServerConstants {
 
         @JvmField
         var CONNECTIVITY_TIMEOUT = 500
+
+        @JvmField
+        var WEBSOCKET_ENABLED = false
+
+        @JvmField
+        var WEBSOCKET_PORT = 0
     }
 }

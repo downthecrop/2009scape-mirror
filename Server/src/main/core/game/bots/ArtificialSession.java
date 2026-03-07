@@ -19,7 +19,7 @@ public final class ArtificialSession extends IoSession {
 	 * Constructs a new {@code ArtificialSession} {@code Object}.
 	 */
 	private ArtificialSession() {
-		super(null, null);
+		super(null, null, "127.0.0.1");
 	}
 
 	@Override

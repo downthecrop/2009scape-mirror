@@ -6,6 +6,7 @@ import core.game.system.SystemState
 import core.game.system.config.ServerConfigParser
 import core.game.world.GameWorld
 import core.net.NioReactor
+import core.net.websocket.GameWebSocketServer
 import core.tools.Log
 import core.tools.NetworkReachability
 import core.tools.TimeStamp
@@ -44,6 +45,9 @@ object Server {
     @JvmStatic
     var reactor: NioReactor? = null
 
+    @JvmStatic
+    var webSocketServer: GameWebSocketServer? = null
+
     var networkReachability = NetworkReachability.Reachable
 
     /**
@@ -70,6 +74,15 @@ object Server {
         try {
             reactor = NioReactor.configure(43594 + GameWorld.settings?.worldId!!)
             reactor!!.start()
+            if (ServerConstants.WEBSOCKET_ENABLED) {
+                val websocketPort = if (ServerConstants.WEBSOCKET_PORT > 0) {
+                    ServerConstants.WEBSOCKET_PORT
+                } else {
+                    53594 + GameWorld.settings?.worldId!!
+                }
+                webSocketServer = GameWebSocketServer(websocketPort, 2)
+                webSocketServer!!.start()
+            }
         } catch (e: BindException) {
             log(this::class.java, Log.ERR, "Port " + (43594 + GameWorld.settings?.worldId!!) + " is already in use!")
             throw e
