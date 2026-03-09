@@ -29,7 +29,12 @@ Top priorities:
 ### Web client
 
 - Dedicated TeaVM module exists at `rt4-client/web-client`.
-- `./gradlew :web-client:generateJavaScript` succeeds.
+- Default browser build workflow is:
+  - `cd rt4-client`
+  - `./gradlew :web-client:assemble`
+  - `cd ../Server`
+  - `./mvnw -q -DskipTests compile`
+  - Reason: lighter tasks such as `:web-client:compileJava` or `:web-client:generateJavaScript` can leave stale JS/WASM assets in `build/web`, which is easy to miss when the browser keeps stable filenames cached.
 - `./gradlew :web-client:generateWasmGC` is currently blocked by a TeaVM wasmGC internal `NullPointerException` after the browser boot/state path was widened.
 - Browser bootstrap currently renders with `SoftwareRaster` and `Rasteriser`.
 - Browser bootstrap now talks to the server websocket for JS5/cache traffic.
@@ -50,6 +55,8 @@ Top priorities:
 - Browser in-game interface clicks now work through the shared widget/menu path.
   - Important finding: hover-only behavior was not a hit-test bug once the browser reached in-game state.
   - The missing pieces were fixed-tick browser input sampling plus browser-side mini-menu rebuilding for mounted interfaces.
+- Browser mounted child/subinterface clicks now work too.
+  - Practical result: dialogue/chatbox interfaces can advance through the real mounted interface tree instead of falling back to `Cancel`.
 - The generated page now prefers the TeaVM WebAssembly GC target from `build/web/index.html`.
 - Runtime packaging is driven through TeaVM's `buildWasmGC` task and includes `build/web/wasm-gc/web-client.wasm-runtime.js`.
 - `?target=js` forces the JavaScript fallback when debugging browser issues.
@@ -85,14 +92,14 @@ Top priorities:
       - wall decor
       - scenery locs
       - ground decor
-    - Dynamic entities are still intentionally skipped in `method4245Software(...)`.
-    - Reason: shared entity renderers still need a browser-safe reintroduction path through methods like `Player.render(...)` and `Npc.render(...)`.
+    - Dynamic pathing entities now render in-browser:
+      - players
+      - NPCs
+    - Inventory item grids now render through the browser interface walker using the real `type == 2` slot layout and `Inv.getObjectSprite(...)`.
   - Current browser exclusion: in-game overhead rendering is disabled.
     - `drawOverheadsSoftware(...)` exists, but the browser viewport does not call it yet.
     - Reason: shared font rendering still reaches `GlRaster`, and overhead sprite loads still reach `GlAlphaSprite`.
   - Current browser exclusion: the post-login browser world pass does not yet draw:
-    - players
-    - NPCs
     - object stacks
     - overhead chat/hit splats/headicons
   - Current browser rebuild note:
@@ -173,6 +180,10 @@ The current approach is to lift usable subsystems first:
 3. Build web output:
    - `cd rt4-client`
    - `./gradlew :web-client:assemble`
+   - `cd ../Server`
+   - `./mvnw -q -DskipTests compile`
+   - Use this full build path by default.
+   - Do not rely on `:web-client:compileJava` or `:web-client:generateJavaScript` alone when validating browser changes; they do not guarantee freshly packaged web assets.
 4. Serve the repo root or `rt4-client/web-client/build/web`.
 5. Open:
    - `/rt4-client/web-client/build/web/index.html`
@@ -186,32 +197,58 @@ The current approach is to lift usable subsystems first:
 ## Current handoff state
 
 - Browser login, mounted in-game interfaces, hover, and click handling are working on the JavaScript target.
-- The remaining major browser-facing gap is stable world raster compositing behind the already-correct interface tree.
+- Browser mounted child/subinterface interaction is working, including dialogue advance through chatbox interfaces.
+- Browser inventory item visuals now render through the shared interface data instead of leaving item grids empty.
+- Browser minimap movement, overheads, and right-click menu composition are working in the browser path.
+- The remaining browser-facing work is no longer just raw scene bring-up; it is now mostly parity, polish, and state-management cleanup across text, logout/relogin, region transitions, and media.
 - The right mental model for the next session:
-  - interface/input path is mostly functioning
+  - interface/input path is mostly functioning, but in-game text entry is still not solved
   - websocket/game-state path is functioning through `gameState 30`
-  - scene/raster presentation is still the unstable seam
+  - scene/raster presentation is usable, but region-change/loading transitions still regress presentation
+  - text/font fidelity is one of the biggest remaining authenticity gaps
 - If revisiting old iOS/WebKit support later:
   - start from the `BigInt64Array` compatibility finding first
   - do not assume failure means the websocket or login stack is broken
 
 ## Immediate next steps
 
-1. Keep pushing the authentic cached login interface until the browser-managed panel can be removed.
-2. Reintroduce post-login/shared login loops incrementally behind browser-safe wrappers instead of calling `LoginManager.loop()`/`CreateManager.loop()` directly.
-3. Isolate the current TeaVM wasmGC crash; the JavaScript target is the working validation target until that compiler bug is understood.
-4. Extract browser-safe host state for dimensions/timing/input instead of pulling `GameShell` into the web graph.
-5. Keep audio stubbed in browser mode until there is a real browser audio backend; do not route the current desktop `AudioSource` stack into TeaVM.
-6. Audit other desktop-only exception/reporting paths that may still leak `Applet`/AWT reachability into browser-only code.
-7. Decide whether world-list traffic should also move to websocket or be skipped entirely in browser mode.
-8. Next major refactor: keep stripping `GameShell` and `SignLink` of desktop-only AWT ownership instead of reintroducing it through new shared hooks.
-  - Attempting to force `InterfaceList.method1626(...)` through the current shell reached `ScriptRunner`, which immediately proved the remaining blockers are the shell/runtime abstractions themselves.
-  - The last stable browser build still uses the browser-local login renderer; direct shared login-script activation was intentionally backed out after validation.
-9. Reintroduce dynamic scene entities in this order:
-  - players
-  - NPCs
-  - object stacks
-  - then overheads
+1. Fix in-game text entry properly.
+  - Current browser keyboard shim is delivering DOM key events into `rt4.Keyboard`.
+  - The unsolved seam is widget activation/focus or `onKey` reachability for live in-game text-entry components.
+  - Keep the new browser key logging until the actual click-to-text-target path is proven.
+2. Correct text rendering and JagString presentation.
+  - Several browser text paths still show raw tags or approximated text treatment.
+  - Audit places where strings like `<col=ff0b00>` should be decoded or stripped before draw.
+  - Distinguish true drop-shadow/double-pass desktop text from accidental duplicate browser draw.
+3. Load and use the correct in-game fonts consistently.
+  - Some interface paths now use the right cached fonts, but others still fall back to browser-owned canvas text.
+  - Inventory counts, menu text, overhead text, and odd interface groups should converge on the same cached font data where possible.
+4. Fix logout/relogin recovery.
+  - Current bad path: logout returns to `gameState 10`, then browser mode hits `Unexpected Server Response. Please try a different world`.
+  - Practical requirement: returning to the login screen must fully reset browser/game protocol state without requiring a page reload.
+5. Fix region-change/loading presentation.
+  - During chunk/region loads, browser mode currently shows the stale loading-screen raster with progress bar instead of holding the last valid world frame.
+  - Prefer explicit double-buffering or last-frame retention over regressing to the title/loading raster.
+6. Add browser audio.
+  - Keep it browser-native.
+  - Do not route the desktop `AudioSource`/AWT ownership model into TeaVM.
+  - Start with effects/music playback parity, then refine latency and unlock behavior.
+7. Continue browser visual/authenticity cleanup.
+  - Audit remaining text sizing/alignment mismatches.
+  - Revisit menu and tooltip font fidelity.
+  - Reduce remaining browser-only approximations where cached assets already exist.
+8. Isolate the current TeaVM wasmGC crash.
+  - The JavaScript target remains the validation path.
+  - Keep browser work biased toward the JS target until wasmGC can survive the richer boot/runtime graph again.
+9. Keep extracting browser-safe host/runtime seams instead of re-coupling to desktop shell code.
+  - `GameShell` and `SignLink` should keep moving away from AWT ownership.
+  - New browser fixes should prefer explicit host adapters over pulling desktop classes into reachability.
+10. Audit and stabilize browser lifecycle/state transitions generally.
+  - login to game
+  - logout to login
+  - region load transitions
+  - reconnect/reload behavior
+  - cache reuse across reloads
 
 ## Guardrails
 
