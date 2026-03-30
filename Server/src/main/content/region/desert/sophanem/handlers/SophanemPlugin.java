@@ -30,6 +30,7 @@ public class SophanemPlugin extends OptionHandler {
 		SceneryDefinition.forId(20275).getHandlers().put("option:climb-down", this);
 		SceneryDefinition.forId(20391).getHandlers().put("option:open", this);
 		SceneryDefinition.forId(28514).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(20341).getHandlers().put("option:open", this);
 		return this;
 	}
 
@@ -52,6 +53,8 @@ public class SophanemPlugin extends OptionHandler {
 				break;
 			}
 			DoorActionHandler.handleDoor(player, (Scenery) node);
+			break;
+		case 20341:
 			break;
 		}
 		return true;
