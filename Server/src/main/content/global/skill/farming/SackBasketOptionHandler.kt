@@ -61,7 +61,7 @@ class SackBasketOptionHandler : OptionHandler() {
             appropriateProduce.amount = (max - specific)
         }
 
-        if(player.inventory.remove(item) && player.inventory.remove(appropriateProduce))
+        if(player.inventory.remove(appropriateProduce) && player.inventory.remove(item))
             player.inventory.add(Item(container.containers[specific + appropriateProduce.amount]))
     }
 
