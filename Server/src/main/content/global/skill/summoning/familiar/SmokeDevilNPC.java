@@ -3,6 +3,7 @@ package content.global.skill.summoning.familiar;
 import java.util.List;
 
 import core.cache.def.impl.NPCDefinition;
+import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.plugin.Initializable;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -36,7 +37,7 @@ public class SmokeDevilNPC extends Familiar {
 	 * @param id The id.
 	 */
 	public SmokeDevilNPC(Player owner, int id) {
-		super(owner, id, 4800, 12085, 6);
+		super(owner, id, 4800, 12085, 6, WeaponInterface.STYLE_CAST);
 	}
 
 	@Override
