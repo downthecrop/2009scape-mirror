@@ -35,6 +35,7 @@ public class RandomFunction {
 
 	/**
 	 * Method used to ease the access of the random class.
+	 * In certain cases, it is inclusive from the min value and exclusive from the max values specified.
 	 * @param a the minimum random value.
 	 * @param b the maximum random value.
 	 * @return the value as an {@link Integer}.

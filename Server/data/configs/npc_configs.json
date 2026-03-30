@@ -44609,7 +44609,9 @@
     "strength_level": "1",
     "id": "5079",
     "range_level": "1",
-    "attack_level": "1"
+    "attack_level": "1",
+    "death_animation": "5183",
+    "examine": "Handle with care."
   },
   {
     "examine": "It looks fluffy and cute; it's probably deadly.",
