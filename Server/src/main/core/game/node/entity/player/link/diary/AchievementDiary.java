@@ -224,18 +224,6 @@ public class AchievementDiary {
 		drawStatus(player);
 	}
 
-	public boolean checkComplete(DiaryLevel level){
-		if(type != DiaryType.LUMBRIDGE && level == DiaryLevel.BEGINNER){
-			return false;
-		}
-
-		if(level == DiaryLevel.BEGINNER){
-			return completedLevels.contains(level.ordinal());
-		}
-
-		return completedLevels.contains(level.ordinal() - 1);
-	}
-
 	/**
 	 * Sends a string on the diary interface.
 	 * @param player the player.
