@@ -52,9 +52,10 @@ public final class GrandExchangeClerk extends DialoguePlugin {
 
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
+		String salutation = player.isMale() ? "sir" : "madam";
 		switch (stage) {
 		case 0:
-			npc("Good day to you, sir, How can I help?");
+			npc("Good day to you, " + salutation + ", how can I help?");
 			stage = 1;
 			break;
 		case 1:
@@ -80,13 +81,13 @@ public final class GrandExchangeClerk extends DialoguePlugin {
 				stage = 40;
 				break;
 			case 5:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "I'm fine actually.");
+				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "I'm fine, actually.");
 				stage = 50;
 				break;
 			}
 			break;
 		case 10:
-			npc("Only too happy to help you, sir.");
+			npc("Only too happy to help you, " + salutation + ".");
 			stage = 11;
 			break;
 		case 11:
@@ -94,7 +95,7 @@ public final class GrandExchangeClerk extends DialoguePlugin {
 			StockMarket.openFor(player);
 			break;
 		case 20:
-			npc("As you wish, sir.");
+			npc("As you wish, " + salutation + ".");
 			stage = 21;
 			break;
 		case 21:
@@ -110,7 +111,7 @@ public final class GrandExchangeClerk extends DialoguePlugin {
 			GrandExchangeRecords.getInstance(player).openHistoryLog(player);
 			break;
 		case 40:
-			npc("It would be my pleasure, sir.");
+			npc("It would be my pleasure, " + salutation + ".");
 			stage = 41;
 			break;
 		case 41:
@@ -118,7 +119,7 @@ public final class GrandExchangeClerk extends DialoguePlugin {
 			ExchangeItemSets.openFor(player);
 			break;
 		case 50:
-			npc("If you say so, sir.");
+			npc("If you say so, " + salutation + ".");
 			stage = 51;
 			break;
 		case 51:
