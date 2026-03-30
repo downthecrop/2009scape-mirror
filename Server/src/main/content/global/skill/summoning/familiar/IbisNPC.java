@@ -40,7 +40,7 @@ public class IbisNPC extends Forager {
 	 * @param id The id.
 	 */
 	public IbisNPC(Player owner, int id) {
-		super(owner, id, 3800, 12531, 12, new Item(361), new Item(373));
+		super(owner, id, 3800, 12531, 12, new Item(359), new Item(371));
 		boosts.add(new SkillBonus(Skills.FISHING, 3));
 	}
 
@@ -54,7 +54,7 @@ public class IbisNPC extends Forager {
 	@Override
 	public boolean produceItem(Item item) {
 		if (super.produceItem(item)) {
-			if (item.getId() == 373) {
+			if (item.getId() == 371) {
 				owner.getSkills().addExperience(Skills.FISHING, 10);
 			}
 			return true;
