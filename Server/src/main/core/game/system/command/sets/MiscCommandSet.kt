@@ -27,6 +27,7 @@ import core.game.system.communication.CommunicationInfo
 import core.game.world.map.RegionManager
 import core.game.world.map.build.DynamicRegion
 import core.game.world.repository.Repository
+import core.game.node.entity.combat.equipment.WeaponInterface
 import core.plugin.Initializable
 import core.tools.Log
 import core.tools.StringUtils
@@ -129,6 +130,58 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             val swingHandler = player.getSwingHandler(false)
             val hit = swingHandler.calculateHit(player, player, 1.0)
             notify(player, "max hit: ${hit} (${(swingHandler as Object).getClass().getName()})")
+        }
+
+        define("calcdefence", Privilege.STANDARD, "::calcdefence <lt>NPC ID<gt>", "Calculates and prints your current raw defence values for Melee, Ranged and Magic against a given NPC.") { player, args ->
+            val meleeHandler = core.game.node.entity.combat.MeleeSwingHandler()
+            val rangeHandler = core.game.node.entity.combat.RangeSwingHandler()
+            val magicHandler = core.game.node.entity.combat.MagicSwingHandler()
+            var attacker: core.game.node.entity.Entity = player
+            if (args.size > 1) {
+                val npcId = args[1].toInt()
+                val npc = NPC(npcId)
+                npc.initConfig()
+                attacker = npc
+                notify(player, "Calculating defence against NPC: ${npc.name} (ID=$npcId)")
+                val bonuses = npc.properties.bonuses
+                var maxBonus = Int.MIN_VALUE
+                var maxIndex = 0
+                for (i in 0..4) {
+                    if (i in bonuses.indices) {
+                        val v = bonuses[i]
+                        if (v > maxBonus) {
+                            maxBonus = v
+                            maxIndex = i
+                        }
+                    }
+                }
+                if (maxBonus == Int.MIN_VALUE) {
+                    maxBonus = 0
+                    maxIndex = 0
+                }
+                npc.properties.attackStyle = WeaponInterface.AttackStyle(WeaponInterface.STYLE_CONTROLLED,maxIndex)
+            } else {
+                notify(player, "Calculating defence against yourself (no NPC specified).")
+            }
+            fun hitChance(accuracy: Int, defence: Int): Double {
+                return if (accuracy > defence) {
+                    1.0 - ((defence + 2.0) / (2.0 * (accuracy + 1.0)))
+                } else {
+                    accuracy / (2.0 * (defence + 1.0))
+                }
+            }
+            val meleeAccuracy = meleeHandler.calculateAccuracy(attacker)
+            val meleeDefence = meleeHandler.calculateDefence(player, attacker)
+            val meleeChance = hitChance(meleeAccuracy, meleeDefence)
+            notify(player, "Your melee defence: $meleeDefence; Attacker accuracy: $meleeAccuracy; Chance to be hit: $meleeChance")
+            val rangeAccuracy = rangeHandler.calculateAccuracy(attacker)
+            val rangeDefence = rangeHandler.calculateDefence(player, attacker)
+            val rangeChance = hitChance(rangeAccuracy, rangeDefence)
+            notify(player, "Your range defence: $rangeDefence; Attacker accuracy: $rangeAccuracy; Chance to be hit: $rangeChance")
+            val magicAccuracy = magicHandler.calculateAccuracy(attacker)
+            val magicDefence = magicHandler.calculateDefence(player, attacker)
+            val magicChance = hitChance(magicAccuracy, magicDefence)
+            notify(player, "Your magic defence: $magicDefence; Attacker accuracy: $magicAccuracy; Chance to be hit: $magicChance")
         }
 
         /**

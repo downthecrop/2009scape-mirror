@@ -4,6 +4,7 @@ import content.global.skill.skillcapeperks.SkillcapePerks
 import content.global.skill.slayer.SlayerEquipmentFlags
 import content.global.skill.slayer.SlayerManager
 import content.global.skill.slayer.Tasks
+import content.global.skill.summoning.SummoningPouch
 import core.api.*
 import core.api.EquipmentSlot
 import core.game.container.impl.EquipmentContainer
@@ -235,6 +236,7 @@ open class MeleeSwingHandler (vararg flags: SwingHandlerFlag)
                 else if (victim.properties.attackStyle.style == WeaponInterface.STYLE_CONTROLLED) effectiveDefenceLevel += 1
                 effectiveDefenceLevel += 8
                 effectiveDefenceLevel *= getSetMultiplier(victim, Skills.DEFENCE)
+                effectiveDefenceLevel *= familiarDefenceBonus(victim)
                 return effectiveDefenceLevel.toInt() * styleDefenceBonus
             }
             is NPC -> {
@@ -280,6 +282,25 @@ open class MeleeSwingHandler (vararg flags: SwingHandlerFlag)
     private fun checkUndead(name: String): Boolean {
         return (name == "Zombie" || name.contains("rmoured") || name == "Ankou" || name == "Crawling Hand" || name == "Banshee" || name == "Ghost" || name == "Ghast" || name == "Mummy" || name.contains("Revenant")
                 || name == "Skeleton" || name == "Zogre" || name == "Spiritual Mage")
+    }
+
+    /**
+     * Check to see whether the player is receiving a defensive bonus from an active familiar.
+     * - Iron Titan => +10%
+     * - Steel Titan => +15%
+     */
+    private fun familiarDefenceBonus(e: Entity?): Double {
+        if (e !is Player) return 1.0
+        val fam = try {
+            e.familiarManager?.familiar
+        } catch (ex: Exception) {
+            null
+        } ?: return 1.0
+        return when (fam.pouchId) {
+            SummoningPouch.IRON_TITAN_POUCH.pouchId -> 1.10
+            SummoningPouch.STEEL_TITAN_POUCH.pouchId -> 1.15
+            else -> 1.0
+        }
     }
 
     companion object {

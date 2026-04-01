@@ -1,6 +1,7 @@
 package core.game.node.entity.combat
 
 import content.global.skill.skillcapeperks.SkillcapePerks
+import content.global.skill.summoning.SummoningPouch
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.equipment.ArmourSet
 import core.game.node.entity.combat.spell.SpellType
@@ -200,6 +201,7 @@ open class MagicSwingHandler (vararg flags: SwingHandlerFlag)
                 effectiveMagicLevel = floor(effectiveMagicLevel + (victim.prayer.getSkillBonus(Skills.MAGIC) * effectiveMagicLevel))
 
                 effectiveDefenceLevel = effectiveDefenceLevel * 0.3 + effectiveMagicLevel * 0.7 + 8
+                effectiveDefenceLevel *= familiarDefenceBonus(victim)
                 return effectiveDefenceLevel.toInt() * styleDefenceBonus
             }
             is NPC -> {
@@ -218,6 +220,20 @@ open class MagicSwingHandler (vararg flags: SwingHandlerFlag)
             }
         }
         return 1.0
+    }
+
+    /**
+     * Check to see whether the player is receiving a defensive bonus from an active familiar.
+     * - Wolpertinger => +5%
+     */
+    private fun familiarDefenceBonus(e: Entity?): Double {
+        if (e !is Player) return 1.0
+        val fam = try {
+            e.familiarManager?.familiar
+        } catch (ex: Exception) {
+            null
+        } ?: return 1.0
+        return if (fam.pouchId == SummoningPouch.WOLPERTINGER_POUCH.pouchId) 1.05 else 1.0
     }
 
     override fun addExperience(entity: Entity?, victim: Entity?, state: BattleState?) {

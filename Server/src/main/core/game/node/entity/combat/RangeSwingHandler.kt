@@ -1,6 +1,7 @@
 package core.game.node.entity.combat
 
 import content.global.skill.skillcapeperks.SkillcapePerks
+import content.global.skill.summoning.SummoningPouch
 import core.api.*
 import core.game.container.impl.EquipmentContainer
 import core.game.node.entity.Entity
@@ -207,6 +208,7 @@ open class RangeSwingHandler (vararg flags: SwingHandlerFlag) : CombatSwingHandl
                     effectiveRangedLevel = floor(effectiveRangedLevel + (entity.prayer.getSkillBonus(Skills.RANGE) * effectiveRangedLevel))
                 if(entity.properties.attackStyle.style == WeaponInterface.STYLE_RANGE_ACCURATE) effectiveRangedLevel += 3
                 effectiveRangedLevel += 8
+                effectiveRangedLevel += familiarOffenceBonus(entity)
                 effectiveRangedLevel *= getSetMultiplier(entity, Skills.RANGE)
                 if(SkillcapePerks.isActive(SkillcapePerks.ACCURATE_MARKSMAN,entity)) effectiveRangedLevel *= 1.1
 
@@ -245,6 +247,7 @@ open class RangeSwingHandler (vararg flags: SwingHandlerFlag) : CombatSwingHandl
                     effectiveStrengthLevel = floor(effectiveStrengthLevel + (entity.prayer.getSkillBonus(Skills.RANGE) * effectiveStrengthLevel))
                 if(entity.properties.attackStyle.style == WeaponInterface.STYLE_RANGE_ACCURATE) effectiveStrengthLevel += 3
                 effectiveStrengthLevel += 8
+                effectiveStrengthLevel += familiarOffenceBonus(entity)
                 effectiveStrengthLevel *= getSetMultiplier(entity, Skills.RANGE)
                 effectiveStrengthLevel = floor(effectiveStrengthLevel)
                 if (!flags.contains(SwingHandlerFlag.IGNORE_STAT_BOOSTS_DAMAGE))
@@ -299,6 +302,22 @@ open class RangeSwingHandler (vararg flags: SwingHandlerFlag) : CombatSwingHandl
         return if (ArmourSet.KARIL.isUsing(e)) {
             ArmourSet.KARIL
         } else super.getArmourSet(e)
+    }
+
+    /**
+     * Check to see whether the player is receiving an offensive bonus from an active familiar.
+     * - Geyser Titan => 1 + 3% of ranged level
+     */
+    private fun familiarOffenceBonus(e: Entity?): Double {
+        if (e !is Player) return 0.0
+        val fam = try {
+            e.familiarManager?.familiar
+        } catch (ex: Exception) {
+            null
+        } ?: return 0.0
+        return if (fam.pouchId == SummoningPouch.GEYSER_TITAN_POUCH.pouchId) {
+            1.0 + ceil(e.skills.getLevel(Skills.RANGE) * 0.03)
+        } else 0.0
     }
 
     companion object {
