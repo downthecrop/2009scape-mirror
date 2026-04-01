@@ -150,7 +150,6 @@ class AllFiredUp : Quest(Quests.ALL_FIRED_UP, 157, 156, 1){
         player.skills.addExperience(Skills.FIREMAKING, 5500.0)
         player.inventory.add(Item(995,20000))
         AFUBeacon.resetAllBeacons(player)
-        setVarbit(player, 1283, 0)
         player.questRepository.syncronizeTab(player)
     }
 

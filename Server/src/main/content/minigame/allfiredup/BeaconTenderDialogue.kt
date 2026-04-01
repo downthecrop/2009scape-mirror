@@ -1,13 +1,13 @@
 package content.minigame.allfiredup
 
-import core.ServerConstants
 import core.game.dialogue.*
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.plugin.Initializable
-import content.region.wilderness.dialogue.*
+import core.api.getAttribute
+import core.api.setAttribute
 import org.rs09.consts.Items
 
 private val VALID_LOGS = arrayOf(Items.LOGS_1511, Items.OAK_LOGS_1521, Items.WILLOW_LOGS_1519, Items.MAPLE_LOGS_1517, Items.YEW_LOGS_1515, Items.MAGIC_LOGS_1513)
@@ -41,10 +41,9 @@ class BeaconTenderDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val beacon = AFUBeacon.values()[index]
         val logs = getLogs(player,5)
-        val session: AFUSession? = player.getAttribute("afu-session",null)
         when(stage){
             0 -> player("Hello!").also { stage++ }
-            1 -> if(beacon.getState(player) == BeaconState.LIT && session?.isWatched(index) == false){
+            1 -> if (beacon.getState(player) == BeaconState.LIT && getAttribute(player, "/save:beacon:${beacon.ordinal}:backupLogsId", 0) == 0) {
                     options("Can you watch this beacon for me?","Nevermind.").also { stage = 10 }
                  } else {
                     npc("Carry on, adventurer.").also { stage = 1000 }
@@ -62,7 +61,7 @@ class BeaconTenderDialogue(player: Player? = null) : DialoguePlugin(player) {
             13 -> npc("Great, hand them over.").also { stage++ }
             14 -> player("Here you go!").also {
                     player.inventory.remove(logs)
-                    session?.setWatcher(index,logs)
+                    setAttribute(player, "/save:beacon:${beacon.ordinal}:backupLogsId", logs.id)
                     stage = 1000
                   }
 
