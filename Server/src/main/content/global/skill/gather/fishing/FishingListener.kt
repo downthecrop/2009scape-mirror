@@ -152,7 +152,7 @@ class FishingListener : InteractionListener{
             }
             return false
         }
-        return node.isActive && node.location.withinDistance(player.location, 1)
+	return node.isActive && node.location.withinMaxnormDistance(player.location, 1)
     }
 
 
