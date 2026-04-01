@@ -3027,7 +3027,7 @@ fun queueScript(entity: Entity, delay: Int = 1, strength: QueueStrength = QueueS
 }
 
 /**
- * Sets the clock to the value of WORLD_TICSK + ticks.
+ * Sets the clock to the value of WORLD_TICKS + ticks.
  * @param entity the entity whose clock we are updating
  * @param clock the clock we are updating. Please use [core.game.interaction.Clocks] for this argument. 
  * @param ticks the number of ticks to delay by

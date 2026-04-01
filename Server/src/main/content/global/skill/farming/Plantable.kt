@@ -81,6 +81,7 @@ enum class Plantable(val itemID: Int, val displayName: String, val value: Int, v
     MUSHROOM_SPORE(Items.MUSHROOM_SPORE_5282, "mushroom spore", 4, 6, 61.5, 57.7, 0.0, 53, PatchType.MUSHROOM_PATCH, Items.MUSHROOM_6004),
     CACTUS_SEED(Items.CACTUS_SEED_5280, "cactus seed", 8, 7, 66.5, 25.0, 374.0, 55, PatchType.CACTUS_PATCH, Items.CACTUS_SPINE_6016),
     EVIL_TURNIP_SEED(Items.EVIL_TURNIP_SEED_12148, "evil turnip seed", 4, 1, 41.0, 46.0, 0.0, 42, PatchType.EVIL_TURNIP_PATCH, Items.EVIL_TURNIP_12134),
+    CALQUAT_SAPLING(Items.CALQUAT_SAPLING_5503, "calquat tree sapling",  4, 8, 130.5, 48.5, 12096.0, 72, PatchType.CALQUAT_TREE_PATCH, Items.CALQUAT_FRUIT_5980, Item(Items.POISON_IVY_BERRIES_6018, 8)),
     SPIRIT_SAPLING(Items.SPIRIT_SAPLING_5375, "spirit tree sapling", 8, 12, 199.5, 0.0, 19301.0, 83, PatchType.SPIRIT_TREE_PATCH, 0, Item(Items.MONKEY_NUTS_4012, 5), null, Item(Items.MONKEY_BAR_4014, 1), Item(Items.GROUND_TOOTH_9082, 1) )
     ;
 

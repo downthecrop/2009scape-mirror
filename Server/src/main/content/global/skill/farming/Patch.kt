@@ -16,7 +16,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
     var compost = CompostType.NONE
     var protectionPaid = false
     var cropLives = 3
-    val checkablePatches = arrayOf(PatchType.TREE_PATCH, PatchType.BUSH_PATCH, PatchType.FRUIT_TREE_PATCH, PatchType.SPIRIT_TREE_PATCH, PatchType.CACTUS_PATCH)
+    val checkablePatches = arrayOf(PatchType.TREE_PATCH, PatchType.BUSH_PATCH, PatchType.FRUIT_TREE_PATCH, PatchType.SPIRIT_TREE_PATCH, PatchType.CACTUS_PATCH, PatchType.CALQUAT_TREE_PATCH)
 
     fun setNewHarvestAmount() {
         val compostMod = when(compost) {
@@ -164,6 +164,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
                 PatchType.CACTUS_PATCH -> setVarbit(player, patch.varbit, 31)
                 PatchType.TREE_PATCH -> setVarbit(player, patch.varbit, plantable!!.value + plantable!!.stages)
                 PatchType.SPIRIT_TREE_PATCH -> setVarbit(player, patch.varbit, plantable!!.value + plantable!!.stages + 24)
+                PatchType.CALQUAT_TREE_PATCH -> setVarbit(player, patch.varbit, 34)
                 else -> log(this::class.java, Log.WARN,  "Invalid setting of isCheckHealth for patch type: " + patch.type.name + "at" + patch.name)
             }
         } else {
@@ -223,7 +224,13 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
                     if(isDead) setVisualState(getMushroomDeathValue())
                     else if(isDiseased && !isDead) setVisualState(getMushroomDiseaseValue())
                 }
-                else -> {}
+                PatchType.CALQUAT_TREE_PATCH -> {
+                    if(isDead) setVisualState(getCalquatDeathValue())
+                    else if(isDiseased && !isDead) setVisualState(getCalquatDiseaseValue())
+                }
+                else -> {
+                    log(this::class.java, Log.WARN,  "Invalid patch type attempted to be displayed: " + patch.type.name)
+                }
             }
         }
     }
@@ -310,6 +317,14 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
         return (plantable?.value ?: 0) + currentGrowthStage + 16
     }
 
+    private fun getCalquatDiseaseValue(): Int {
+        return (plantable?.value ?: 0) + currentGrowthStage + 14
+    }
+
+    private fun getCalquatDeathValue(): Int {
+        return (plantable?.value ?: 0) + currentGrowthStage + 21
+    }
+
     private fun getHerbDiseaseValue(): Int {
         return if (plantable?.value ?: -1 <= 103) {
             128 + (((plantable?.ordinal ?: 0) - Plantable.GUAM_SEED.ordinal) * 3) + currentGrowthStage - 1
@@ -364,8 +379,12 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             isCheckHealth = true
         }
 
-        if((patch.type == PatchType.FRUIT_TREE_PATCH || patch.type == PatchType.BUSH_PATCH || patch.type == PatchType.CACTUS_PATCH) && plantable?.stages == currentGrowthStage){
-            if((patch.type == PatchType.BUSH_PATCH && getFruitOrBerryCount() < 4) || (patch.type == PatchType.FRUIT_TREE_PATCH && getFruitOrBerryCount() < 6) || (patch.type == PatchType.CACTUS_PATCH && getFruitOrBerryCount() < 3)){
+        if(arrayOf(PatchType.FRUIT_TREE_PATCH, PatchType.BUSH_PATCH, PatchType.CACTUS_PATCH, PatchType.CALQUAT_TREE_PATCH).any{ patch.type == it} && plantable?.stages == currentGrowthStage){
+            if((patch.type == PatchType.BUSH_PATCH && getFruitOrBerryCount() < 4) ||
+                (patch.type == PatchType.FRUIT_TREE_PATCH && getFruitOrBerryCount() < 6) ||
+                (patch.type == PatchType.CACTUS_PATCH && getFruitOrBerryCount() < 3) ||
+                (patch.type == PatchType.CALQUAT_TREE_PATCH && getFruitOrBerryCount() < 6)
+                ){
                 setCurrentState(getCurrentState() + 1)
             }
         }
@@ -376,7 +395,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             }
         }
 
-        if(plantable?.stages ?: 0 > currentGrowthStage && !isGrown()){
+        if((plantable?.stages ?: 0) > currentGrowthStage && !isGrown()){
             currentGrowthStage++
             setCurrentState(getCurrentState() + 1)
             isWatered = false
@@ -427,7 +446,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
 
     fun getStageGrowthMinutes() : Int {
         var minutes = patch.type.stageGrowthTime
-        if(patch.type == PatchType.FRUIT_TREE_PATCH && isGrown()) {
+        if(arrayOf(PatchType.FRUIT_TREE_PATCH, PatchType.CALQUAT_TREE_PATCH).any{ it == patch.type }  && isGrown()) {
             // Fruit trees take 160 minutes per stage to grow, but
             // restocking their fruit should take 40 minutes per fruit
             minutes = 40

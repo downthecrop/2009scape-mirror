@@ -60,6 +60,10 @@ class HealthChecker : OptionHandler() {
                 patch.setCurrentState(patch.plantable!!.value + patch.plantable!!.stages + 3)
                 sendMessage(player, "You examine the cactus for signs of disease and find that it is in perfect health.")
             }
+            PatchType.CALQUAT_TREE_PATCH -> {
+                patch.setCurrentState(patch.plantable!!.value + patch.plantable!!.stages + 6)
+                sendMessage(player, "You examine the calquat tree for signs of disease and find that it is in perfect health.")
+            }
             else -> log(this::class.java, Log.ERR, "Unreachable patch type from when(type) switch in HealthChecker.kt")
         }
 

@@ -1,5 +1,6 @@
 package content.global.skill.farming
 
+import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
@@ -67,6 +68,8 @@ class FarmerPayOptionDialogue(val patch: Patch, val quickPay: Boolean = false): 
                         val amount = if (item?.amount == 1) "one" else item?.amount
                         npc(FacialExpression.HAPPY, "I want $amount $protectionText, one monkey bar,", "and one ground tooth for that.")
                         stage = 200
+                    } else if (patch.patch.type == PatchType.CALQUAT_TREE_PATCH && getQuestStage(player!!, Quests.JUNGLE_POTION) < 100) {
+                        npc("Sorry, I won't protect that.").also { stage = END_DIALOGUE } // Cannot confirm authenticity of this line just that there should be a rejection here
                     } else if (quickPay && !(inInventory(player!!, item!!.id, item!!.amount) || inInventory(player!!, note(item!!).id, note(item!!).amount))) {
                         val amount = if (item?.amount == 1) "one" else item?.amount
                         npc(FacialExpression.HAPPY, "I want $amount $protectionText for that.")

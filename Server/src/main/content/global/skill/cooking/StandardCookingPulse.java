@@ -200,6 +200,9 @@ public class StandardCookingPulse extends Pulse {
         if (product.getId() == Items.SODA_ASH_1781) {
             return "You burn the seaweed into soda ash.";
         }
+		if (product.getId() == Items.BARLEY_MALT_6008) {
+			return null; // Both live branches of Jagexscape lack a message for this and I can't find period evidence of a message
+		}
         if (CookableItems.intentionalBurn(food.getId())) {
             return "You deliberately burn the perfectly good piece of meat.";
         }

@@ -1,11 +1,13 @@
 package core.game.system.command.sets
 
+import core.api.log
 import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.QuestRepository
 import core.plugin.Initializable
 import core.game.system.command.Privilege
 import core.game.world.repository.Repository
+import core.tools.Log
 
 @Initializable
 class QuestCommandSet : CommandSet(Privilege.ADMIN){
@@ -15,7 +17,12 @@ class QuestCommandSet : CommandSet(Privilege.ADMIN){
          */
         define("allquest", description = "Instantly completes every quest for your account."){player,_->
             for (quest in QuestRepository.getQuests().values) {
-                quest.finish(player)
+                try {
+                    quest.finish(player)
+                } catch (e: Exception){
+                    e.message?.let { log(this.javaClass, Log.WARN, it) }
+                    continue
+                }
             }
         }
 

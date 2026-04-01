@@ -38,7 +38,7 @@ class UseWithPatchHandler : InteractionListener {
         onUseWith(IntType.SCENERY, allowedNodes.toIntArray(), *FarmingPatch.patchNodes.toIntArray()) { player, used, with ->
             val patch = FarmingPatch.forObject(with.asScenery()) ?: return@onUseWith true
             val usedItem = used.asItem()
-            val trimmablePatches = arrayOf(PatchType.TREE_PATCH, PatchType.BUSH_PATCH, PatchType.FRUIT_TREE_PATCH, PatchType.SPIRIT_TREE_PATCH)
+            val trimmablePatches = arrayOf(PatchType.TREE_PATCH, PatchType.BUSH_PATCH, PatchType.FRUIT_TREE_PATCH, PatchType.SPIRIT_TREE_PATCH, PatchType.CALQUAT_TREE_PATCH)
 
             if (patch == FarmingPatch.TROLL_STRONGHOLD_HERB) {
                 if (!hasRequirement(player, Quests.MY_ARMS_BIG_ADVENTURE))
@@ -261,7 +261,7 @@ class UseWithPatchHandler : InteractionListener {
                     }*/
 
                     val requiredItem = when (patch.type) {
-                        PatchType.TREE_PATCH, PatchType.FRUIT_TREE_PATCH, PatchType.SPIRIT_TREE_PATCH -> Items.SPADE_952
+                        PatchType.TREE_PATCH, PatchType.FRUIT_TREE_PATCH, PatchType.SPIRIT_TREE_PATCH, PatchType.CALQUAT_TREE_PATCH -> Items.SPADE_952
                         PatchType.FLOWER_PATCH -> if (plantable == Plantable.SCARECROW) null else Items.SEED_DIBBER_5343
                         else -> Items.SEED_DIBBER_5343
                     }
@@ -284,7 +284,8 @@ class UseWithPatchHandler : InteractionListener {
                                 }
                                 animate(player, anim)
                                 playAudio(player, sound)
-                                val delay = if (patch.type == PatchType.TREE_PATCH || patch.type == PatchType.FRUIT_TREE_PATCH || patch.type == PatchType.SPIRIT_TREE_PATCH || plantable == Plantable.SCARECROW) 3 else 0
+                                val delay = if (patch.type == PatchType.TREE_PATCH || patch.type == PatchType.FRUIT_TREE_PATCH || patch.type == PatchType.SPIRIT_TREE_PATCH ||
+                                    patch.type == PatchType.CALQUAT_TREE_PATCH || plantable == Plantable.SCARECROW) 3 else 0
                                 return@queueScript delayScript(player,anim.duration + delay)
                             }
                             1 -> {

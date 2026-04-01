@@ -48457,14 +48457,14 @@
   },
   {
     "shop_price": "200",
-    "examine": "An acorn has been sown and watered in this plant pot.",
+    "examine": "An acorn has been sown in this plant pot.",
     "durability": null,
     "name": "Oak seedling",
     "archery_ticket_price": "0",
     "id": "5358"
   },
   {
-    "examine": "A willow tree seed has been sown and watered in this plant pot",
+    "examine": "A willow tree seed has been sown in this plant pot.",
     "durability": null,
     "name": "Willow seedling",
     "weight": "0.9",
@@ -48472,7 +48472,7 @@
     "id": "5359"
   },
   {
-    "examine": "A maple tree has been sown (and watered) in this plant pot.",
+    "examine": "A maple tree seed has been sown in this plant pot.",
     "durability": null,
     "name": "Maple seedling",
     "weight": "0.9",
@@ -48480,7 +48480,7 @@
     "id": "5360"
   },
   {
-    "examine": "A yew seed has been sown in the plant pot",
+    "examine": "A yew tree seed has been sown in this plant pot.",
     "durability": null,
     "name": "Yew seedling",
     "weight": "1",
@@ -48488,7 +48488,7 @@
     "id": "5361"
   },
   {
-    "examine": "A magic tree seed has been sown and watered in this plant pot.",
+    "examine": "A magic tree seed has been sown in this plant pot.",
     "durability": null,
     "name": "Magic seedling",
     "weight": "0.9",
@@ -48496,7 +48496,7 @@
     "id": "5362"
   },
   {
-    "examine": "A spirit seedling is growing in this pot. It has been sown and watered.",
+    "examine": "A spirit tree seed has been sown in this plant pot.",
     "durability": null,
     "name": "Spirit seedling",
     "archery_ticket_price": "0",
@@ -48511,7 +48511,7 @@
     "id": "5364"
   },
   {
-    "examine": "A willow tree seed has been sown and watered in this plant pot",
+    "examine": "A willow tree seed has been sown and watered in this plant pot.",
     "durability": null,
     "name": "Willow seedling",
     "weight": "0.9",
@@ -48519,7 +48519,7 @@
     "id": "5365"
   },
   {
-    "examine": "A maple tree has been sown (and watered) in this plant pot.",
+    "examine": "A maple tree seed has been sown and watered in this plant pot.",
     "durability": null,
     "name": "Maple seedling",
     "weight": "0.9",
@@ -48527,7 +48527,7 @@
     "id": "5366"
   },
   {
-    "examine": "A yew seed has been sown in the plant pot",
+    "examine": "A yew tree seed has been sown and watered in this plant pot.",
     "durability": null,
     "name": "Yew seedling",
     "weight": "1",
@@ -48543,7 +48543,7 @@
     "id": "5368"
   },
   {
-    "examine": "A spirit seedling is growing in this pot. It has been sown and watered.",
+    "examine": "A spirit tree seed has been sown and watered in this plant pot.",
     "durability": null,
     "name": "Spirit seedling",
     "archery_ticket_price": "0",
@@ -49497,7 +49497,7 @@
     "id": "5479"
   },
   {
-    "examine": "An apple tree has been sown (and watered) in this plant pot.",
+    "examine": "An apple tree seed has been sown in this plant pot.",
     "durability": null,
     "name": "Apple seedling",
     "weight": "0.9",
@@ -49505,7 +49505,7 @@
     "id": "5480"
   },
   {
-    "examine": "A banana tree seed has been sown and watered in this plant pot.",
+    "examine": "A banana tree seed has been sown in this plant pot.",
     "durability": null,
     "name": "Banana seedling",
     "weight": "0.9",
@@ -49513,14 +49513,14 @@
     "id": "5481"
   },
   {
-    "examine": "An orange tree seed has been sown (and watered)in this plant pot.",
+    "examine": "An orange tree seed has been sown in this plant pot.",
     "durability": null,
     "name": "Orange seedling",
     "archery_ticket_price": "0",
     "id": "5482"
   },
   {
-    "examine": "A curry seed has been sown and watered in this plant pot.",
+    "examine": "A curry tree seed has been sown in this plant pot.",
     "durability": null,
     "name": "Curry seedling",
     "weight": "0.9",
@@ -49528,7 +49528,7 @@
     "id": "5483"
   },
   {
-    "examine": "A pineapple tree has been sown (and watered) in this plant pot.",
+    "examine": "A pineapple plant seed has been sown in this plant pot.",
     "durability": null,
     "name": "Pineapple seedling",
     "weight": "0.9",
@@ -49536,7 +49536,7 @@
     "id": "5484"
   },
   {
-    "examine": "This needs watering before it will grow.",
+    "examine": "A papaya tree seed has been sown in this plant pot.",
     "durability": null,
     "name": "Papaya seedling",
     "weight": "0.9",
@@ -49544,7 +49544,7 @@
     "id": "5485"
   },
   {
-    "examine": "This sapling is ready to be replanted in a fruit tree patch.",
+    "examine": "A palm tree seed has been sown in this plant pot.",
     "durability": null,
     "name": "Palm seedling",
     "weight": "0.66",
@@ -49552,7 +49552,7 @@
     "id": "5486"
   },
   {
-    "examine": "A calquat tree has been sown (and watered) in this plant pot.",
+    "examine": "A calquat tree seed has been sown in this plant pot.",
     "durability": null,
     "name": "Calquat seedling",
     "weight": "0.9",
@@ -49560,7 +49560,7 @@
     "id": "5487"
   },
   {
-    "examine": "An apple tree has been sown (and watered) in this plant pot.",
+    "examine": "An apple tree seed has been sown and watered in this plant pot.",
     "durability": null,
     "name": "Apple seedling",
     "weight": "0.9",
@@ -49576,14 +49576,14 @@
     "id": "5489"
   },
   {
-    "examine": "An orange tree seed has been sown (and watered)in this plant pot.",
+    "examine": "An orange tree seed has been sown and watered in this plant pot.",
     "durability": null,
     "name": "Orange seedling",
     "archery_ticket_price": "0",
     "id": "5490"
   },
   {
-    "examine": "A curry seed has been sown and watered in this plant pot.",
+    "examine": "A curry tree seed has been sown and watered in this plant pot.",
     "durability": null,
     "name": "Curry seedling",
     "weight": "0.9",
@@ -49591,7 +49591,7 @@
     "id": "5491"
   },
   {
-    "examine": "A pineapple tree has been sown (and watered) in this plant pot.",
+    "examine": "A pineapple plant seed has been sown and watered in this plant pot.",
     "durability": null,
     "name": "Pineapple seedling",
     "weight": "0.9",
@@ -49599,7 +49599,7 @@
     "id": "5492"
   },
   {
-    "examine": "This needs watering before it will grow.",
+    "examine": "A papaya tree seed has been sown and watered in this plant pot.",
     "durability": null,
     "name": "Papaya seedling",
     "weight": "0.9",
@@ -49607,7 +49607,7 @@
     "id": "5493"
   },
   {
-    "examine": "This sapling is ready to be replanted in a fruit tree patch.",
+    "examine": "A palm tree seed has been sown and watered in this plant pot.",
     "durability": null,
     "name": "Palm seedling",
     "weight": "0.66",
@@ -49615,7 +49615,7 @@
     "id": "5494"
   },
   {
-    "examine": "A calquat tree has been sown (and watered) in this plant pot.",
+    "examine": "A calquat tree seed has been sown and watered in this plant pot.",
     "durability": null,
     "name": "Calquat seedling",
     "weight": "0.9",
@@ -51571,9 +51571,9 @@
     "equip_audio": "2248",
     "render_anim": "2584",
     "equipment_slot": "3",
+    "attack_anims": "400,400,401,400",
     "grand_exchange_price": "483",
     "attack_audios": "2517,2517,2500,2517",
-    "attack_anims": "400,400,401,400",
     "name": "Iron dagger(p+)",
     "tradeable": "true",
     "archery_ticket_price": "0",
@@ -51600,9 +51600,9 @@
     "equip_audio": "2248",
     "render_anim": "2584",
     "equipment_slot": "3",
+    "attack_anims": "400,400,401,400",
     "grand_exchange_price": "350",
     "attack_audios": "2517,2517,2500,2517",
-    "attack_anims": "400,400,401,400",
     "name": "Bronze dagger(p+)",
     "tradeable": "true",
     "archery_ticket_price": "0",
@@ -51630,9 +51630,9 @@
     "equip_audio": "2248",
     "render_anim": "2584",
     "equipment_slot": "3",
+    "attack_anims": "400,400,401,400",
     "grand_exchange_price": "575",
     "attack_audios": "2517,2517,2500,2517",
-    "attack_anims": "400,400,401,400",
     "name": "Steel dagger(p+)",
     "tradeable": "true",
     "archery_ticket_price": "0",
@@ -51660,9 +51660,9 @@
     "equip_audio": "2248",
     "render_anim": "2584",
     "equipment_slot": "3",
+    "attack_anims": "400,400,401,400",
     "grand_exchange_price": "538",
     "attack_audios": "2517,2517,2500,2517",
-    "attack_anims": "400,400,401,400",
     "name": "Mithril dagger(p+)",
     "tradeable": "true",
     "archery_ticket_price": "0",
@@ -51686,9 +51686,9 @@
     "equip_audio": "2248",
     "render_anim": "2584",
     "equipment_slot": "3",
+    "attack_anims": "400,400,401,400",
     "grand_exchange_price": "800",
     "attack_audios": "2517,2517,2500,2517",
-    "attack_anims": "400,400,401,400",
     "name": "Adamant dagger(p+)",
     "tradeable": "true",
     "archery_ticket_price": "0",
@@ -51783,9 +51783,9 @@
     "equip_audio": "2248",
     "render_anim": "2584",
     "equipment_slot": "3",
+    "attack_anims": "400,400,401,400",
     "grand_exchange_price": "664",
     "attack_audios": "2517,2517,2500,2517",
-    "attack_anims": "400,400,401,400",
     "name": "Black dagger(p+)",
     "tradeable": "true",
     "archery_ticket_price": "0",
@@ -51831,9 +51831,9 @@
     "equip_audio": "2248",
     "render_anim": "2584",
     "equipment_slot": "3",
+    "attack_anims": "400,400,401,400",
     "grand_exchange_price": "4128",
     "attack_audios": "2517,2517,2500,2517",
-    "attack_anims": "400,400,401,400",
     "name": "Iron dagger(p++)",
     "tradeable": "true",
     "archery_ticket_price": "0",
@@ -51860,9 +51860,9 @@
     "equip_audio": "2248",
     "render_anim": "2584",
     "equipment_slot": "3",
+    "attack_anims": "400,400,401,400",
     "grand_exchange_price": "5088",
     "attack_audios": "2517,2517,2500,2517",
-    "attack_anims": "400,400,401,400",
     "name": "Br'ze dagger(p++)",
     "tradeable": "true",
     "archery_ticket_price": "0",
@@ -51890,9 +51890,9 @@
     "equip_audio": "2248",
     "render_anim": "2584",
     "equipment_slot": "3",
+    "attack_anims": "400,400,401,400",
     "grand_exchange_price": "4729",
     "attack_audios": "2517,2517,2500,2517",
-    "attack_anims": "400,400,401,400",
     "name": "Steel dagger(p++)",
     "tradeable": "true",
     "archery_ticket_price": "0",
@@ -51920,9 +51920,9 @@
     "equip_audio": "2248",
     "render_anim": "2584",
     "equipment_slot": "3",
+    "attack_anims": "400,400,401,400",
     "grand_exchange_price": "3476",
     "attack_audios": "2517,2517,2500,2517",
-    "attack_anims": "400,400,401,400",
     "name": "Mithril dagger(p++)",
     "tradeable": "true",
     "archery_ticket_price": "0",
@@ -51946,9 +51946,9 @@
     "equip_audio": "2248",
     "render_anim": "2584",
     "equipment_slot": "3",
+    "attack_anims": "400,400,401,400",
     "grand_exchange_price": "4612",
     "attack_audios": "2517,2517,2500,2517",
-    "attack_anims": "400,400,401,400",
     "name": "Adamant dagger(p++)",
     "tradeable": "true",
     "archery_ticket_price": "0",
@@ -51976,10 +51976,10 @@
     "equip_audio": "2248",
     "render_anim": "2584",
     "equipment_slot": "3",
+    "attack_anims": "400,400,401,400",
     "lendable": "true",
     "grand_exchange_price": "5061",
     "attack_audios": "2517,2517,2500,2517",
-    "attack_anims": "400,400,401,400",
     "name": "Rune dagger(p++)",
     "tradeable": "true",
     "archery_ticket_price": "0",
@@ -52043,9 +52043,9 @@
     "equip_audio": "2248",
     "render_anim": "2584",
     "equipment_slot": "3",
+    "attack_anims": "400,400,401,400",
     "grand_exchange_price": "4921",
     "attack_audios": "2517,2517,2500,2517",
-    "attack_anims": "400,400,401,400",
     "name": "Black dagger(p++)",
     "tradeable": "true",
     "archery_ticket_price": "0",
@@ -52751,7 +52751,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "This looks a good deal stronger than normal dwarven stout.",
+    "examine": "This looks a good deal stronger than normal Dwarven Stout.",
     "grand_exchange_price": "56400",
     "durability": null,
     "name": "Dwarven stout(m)",
@@ -53779,7 +53779,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "This looks a good deal stronger than normal dwarven stout.",
+    "examine": "This looks a good deal stronger than normal Dwarven Stout.",
     "grand_exchange_price": "44600",
     "durability": null,
     "name": "Dwarven stout(m1)",
@@ -53798,7 +53798,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "This looks a good deal stronger than normal dwarven stout.",
+    "examine": "This looks a good deal stronger than normal Dwarven Stout.",
     "grand_exchange_price": "68900",
     "durability": null,
     "name": "Dwarven stout(m2)",
@@ -53817,7 +53817,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "This looks a good deal stronger than normal dwarven stout.",
+    "examine": "This looks a good deal stronger than normal Dwarven Stout.",
     "grand_exchange_price": "98800",
     "durability": null,
     "name": "Dwarven stout(m3)",
@@ -53836,7 +53836,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "This looks a good deal stronger than normal dwarven stout.",
+    "examine": "This looks a good deal stronger than normal Dwarven Stout.",
     "grand_exchange_price": "237400",
     "durability": null,
     "name": "Dwarven stout(m4)",
@@ -60318,9 +60318,9 @@
     "equip_audio": "2248",
     "render_anim": "2584",
     "equipment_slot": "3",
+    "attack_anims": "400,400,401,400",
     "grand_exchange_price": "497",
     "attack_audios": "2517,2517,2500,2517",
-    "attack_anims": "400,400,401,400",
     "name": "White dagger(p)",
     "tradeable": "true",
     "archery_ticket_price": "0",
@@ -60348,9 +60348,9 @@
     "equip_audio": "2248",
     "render_anim": "2584",
     "equipment_slot": "3",
+    "attack_anims": "400,400,401,400",
     "grand_exchange_price": "982",
     "attack_audios": "2517,2517,2500,2517",
-    "attack_anims": "400,400,401,400",
     "name": "White dagger(p+)",
     "tradeable": "true",
     "archery_ticket_price": "0",
@@ -60378,9 +60378,9 @@
     "equip_audio": "2248",
     "render_anim": "2584",
     "equipment_slot": "3",
+    "attack_anims": "400,400,401,400",
     "grand_exchange_price": "8422",
     "attack_audios": "2517,2517,2500,2517",
-    "attack_anims": "400,400,401,400",
     "name": "White dagger(p++)",
     "tradeable": "true",
     "archery_ticket_price": "0",

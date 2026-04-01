@@ -67,7 +67,8 @@ enum class FarmingPatch(val varbit: Int, val type: PatchType) {
     DRAYNOR_BELLADONNA(748, PatchType.BELLADONNA_PATCH),
     CANIFIS_MUSHROOM(746, PatchType.MUSHROOM_PATCH),
     ALKHARID_CACTUS(744, PatchType.CACTUS_PATCH),
-    EVIL_TURNIP(4291, PatchType.EVIL_TURNIP_PATCH);
+    EVIL_TURNIP(4291, PatchType.EVIL_TURNIP_PATCH),
+    CALQUAT_TREE(726, PatchType.CALQUAT_TREE_PATCH);
 
 
     companion object {

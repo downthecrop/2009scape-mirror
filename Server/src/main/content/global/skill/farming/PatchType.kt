@@ -12,7 +12,8 @@ enum class PatchType(val stageGrowthTime: Int) {
     MUSHROOM_PATCH(30),
     BELLADONNA_PATCH(80),
     CACTUS_PATCH(60),
-    EVIL_TURNIP_PATCH(5);
+    EVIL_TURNIP_PATCH(5),
+    CALQUAT_TREE_PATCH(160);
 
     /**
      * Returns the display name of this PatchType.
