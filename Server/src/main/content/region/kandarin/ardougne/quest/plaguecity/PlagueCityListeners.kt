@@ -356,9 +356,8 @@ class PlagueCityListeners : InteractionListener {
 
         on(Scenery.DOOR_2054, IntType.SCENERY, "open"){ player, node ->
             if (isQuestComplete(player, Quests.PLAGUE_CITY)){
-                DoorActionHandler.handleDoor(player, node as SceneryNode)
-            }
-            else{
+                DoorActionHandler.handleAutowalkDoor(player, node as SceneryNode)
+            } else {
                 sendMessage(player, "This door is locked")
             }
             return@on true

@@ -343,7 +343,7 @@
   },
   {
     "id": "2054",
-    "replaceId": "24375",
+    "replaceId": "2055",
     "fence": "false",
     "metal": "false"
   },
@@ -418,18 +418,6 @@
     "replaceId": "35631",
     "fence": "false",
     "metal": "false"
-  },
-  {
-    "id": "2391",
-    "replaceId": "1561",
-    "fence": "false",
-    "metal": "true"
-  },
-  {
-    "id": "2392",
-    "replaceId": "1561",
-    "fence": "false",
-    "metal": "true"
   },
   {
     "id": "2397",
@@ -2169,7 +2157,7 @@
   },
   {
     "id": "24376",
-    "replaceId": "24377",
+    "replaceId": "24375",
     "fence": "false",
     "metal": "false"
   },
