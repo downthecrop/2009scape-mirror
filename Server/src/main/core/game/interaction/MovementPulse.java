@@ -221,6 +221,12 @@ public abstract class MovementPulse extends Pulse {
         clearInferiorScripts();
 
         mover.face(null);
+	if (canInteractWithoutMoving()) {
+	    if (interactImmediately()) {
+		stop();
+		return true;
+	    }
+	}
         updatePath();
 
         if (tryInteract()) {
@@ -237,7 +243,24 @@ public abstract class MovementPulse extends Pulse {
         int radius = destination instanceof Entity && ((Entity)destination).getWalkingQueue().hasPath() ? 1 : 0;
         if (interactLocation == null)
             return false;
-        if (Math.max(Math.abs(ml.getX() - interactLocation.getX()), Math.abs(ml.getY() - interactLocation.getY())) <= radius) {
+	boolean atInteractLocation = Math.max(Math.abs(ml.getX() - interactLocation.getX()), Math.abs(ml.getY() - interactLocation.getY())) <= radius;
+	// Check if already in a valid interaction position for entity destinations
+	boolean canInteractFromCurrentPosition = false;
+	if (!atInteractLocation && destination instanceof Entity) {
+	    Entity target = (Entity) destination;
+	    Location dl = target.getLocation();
+	    boolean onSameTile = ml.getX() == dl.getX() && ml.getY() == dl.getY() && ml.getZ() == dl.getZ();
+	    if (!onSameTile) {
+		canInteractFromCurrentPosition = Pathfinder.canInteract(
+			ml.getX(), ml.getY(), mover.size(),
+			dl.getX(), dl.getY(), target.size(), target.size(),
+			0, // walkFlag - "can interact from any unblocked direction"
+			ml.getZ(),
+			RegionManager::getClippingFlag
+		);
+	    }
+	}
+	if (atInteractLocation || canInteractFromCurrentPosition) {
             try {
                 if (near || pulse()) {
                     if (mover instanceof Player) {
@@ -255,6 +278,66 @@ public abstract class MovementPulse extends Pulse {
             }
         }
         return false;
+    }
+
+    /**
+     * Checks if the mover can interact with an entity destination from their
+     * current position without needing to move.
+     *
+     * @return true if the mover can interact without moving
+     */
+    private boolean canInteractWithoutMoving() {
+	if (!(destination instanceof Entity)) {
+	    return false;
+	}
+	Entity target = (Entity) destination;
+	Location ml = mover.getLocation();
+	Location dl = target.getLocation();
+	if (ml.getX() == dl.getX() && ml.getY() == dl.getY() && ml.getZ() == dl.getZ()) {
+	    return false;
+	}
+	if (isInsideEntity(mover.getLocation())) {
+	    return false;
+	}
+	if (target.getWalkingQueue().hasPath()) { // For moving entities, allow interaction from 1 tile away
+	    int distance = Math.max(
+		    Math.abs(ml.getX() - dl.getX()),
+		    Math.abs(ml.getY() - dl.getY())
+	    );
+	    if (distance <= target.size()) {
+		return true;
+	    }
+	}
+	return Pathfinder.canInteract(
+		ml.getX(), ml.getY(), mover.size(),
+		dl.getX(), dl.getY(), target.size(), target.size(),
+		0, // walkFlag - "can interact from any unblocked direction"
+		ml.getZ(),
+		RegionManager::getClippingFlag
+	);
+    }
+
+    /**
+     * Immediately performs the interaction without pathfinding.
+     * Called when the player is already in a valid interaction position.
+     *
+     * @return true if interaction was successful and pulse should stop
+     */
+    private boolean interactImmediately() {
+	if (destination instanceof Entity) {
+	    mover.face((Entity) destination);
+	}
+	try {
+	    if (pulse()) {
+		if (mover instanceof Player) {
+		    PacketRepository.send(ClearMinimapFlag.class, new PlayerContext((Player) mover));
+		}
+		return true;
+	    }
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+	return false;
     }
 
     private boolean validate() {
