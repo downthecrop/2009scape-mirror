@@ -49,7 +49,7 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
             "South-west Varrock mine" to Location.create(3176, 3362, 0), // South-west Varrock mine / Champion's Guild mine
             "Varrock east bank" to Location.create(3259, 3407, 0), // Varrock east bank / Rune shop
             "Lumbridge Swamp south-east mine" to Location.create(3227, 3150, 0), // Lumbridge Swamp south-east mine
-            //"Burgh de Rott bank" to Location.create(3500, 3219, 0), // Burgh de Rott bank (requires quest to enter)
+            "Burgh de Rott bank" to Location.create(3500, 3219, 0), // Burgh de Rott bank (requires quest to enter)
             "Canifis Bank" to Location.create(3504, 3487, 0), // Canifis bank
             "Mos Le'Harmless bank" to Location.create(3687, 2969, 0), // Mos Le'Harmless bank (requires quest to enter but is currently accessible for Slayer)
             "Gnome stronghold Bank" to Location.create(2460, 3432, 0), // Gnome stronghold bank

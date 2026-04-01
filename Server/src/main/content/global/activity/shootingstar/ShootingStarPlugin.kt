@@ -97,7 +97,7 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
                     fun teleportToStar(player: Player) {
                         val condition: (p: Player) -> Boolean = when (star.location.toLowerCase()) {
                             "canifis bank"              -> {p -> requireQuest(p, Quests.PRIEST_IN_PERIL, "to access this.")}
-                            //"burgh de rott bank"        -> {p -> hasRequirement(p, Quests.IN_AID_OF_THE_MYREQUE)} //disabled: crash
+                            "burgh de rott bank"        -> {p -> hasRequirement(p, Quests.IN_AID_OF_THE_MYREQUE)}
                             "crafting guild"            -> {p -> hasLevelStat(p, Skills.CRAFTING, 40)}
                             "lletya bank"               -> {p -> hasRequirement(p, Quests.MOURNINGS_END_PART_I)}
                             "jatizso mine"              -> {p -> hasRequirement(p, Quests.THE_FREMENNIK_ISLES)}
@@ -120,7 +120,7 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
                         1 -> dialogue("WARNING: The star is located in the wilderness.").also { stage++ }
                         2 -> player.dialogueInterpreter.sendOptions("Teleport to the star?", "Yes", "No").also { stage++ }
                         3 -> when (buttonID) {
-                            1 -> end().also { teleportToStar(player) }
+                            1 -> teleportToStar(player)
                             2 -> end()
                         }
                     }

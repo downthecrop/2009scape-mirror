@@ -212,7 +212,7 @@ public final class ImpactHandler {
 				int percentage = (int) (entity.getSkills().getStaticLevel(Skills.HITPOINTS) * 0.10);
 				if (p.getSkills().getLifepoints() <= percentage) {
 					Item rolItem = new Item(Items.RING_OF_LIFE_2570);
-					if (EnchantedJewellery.RING_OF_LIFE.attemptTeleport(p, rolItem, 0, true)) {
+					if (EnchantedJewellery.RING_OF_LIFE.attemptTeleport(p, rolItem, 0, true, true)) {
 						p.sendMessage("Your ring of life saves you and in the process is destroyed.");
 					}
 				}

@@ -90,8 +90,6 @@ public final class BuildingUtils {
 
 		for (int menuIndex = 0; menuIndex < 7; menuIndex++) {
 			int itemsStringOffset = 97 + (menuIndex * 5);
-
-			//97 +
 			if (menuIndex >= hotspot.getDecorations().length || (hotspot.getDecorations()[menuIndex] != null && hotspot.getDecorations()[menuIndex].isInvisibleNode())) {
 				for (int j = 0; j < 5; j++) {
 					player.getPacketDispatch().sendString("", 396, itemsStringOffset + j);
@@ -104,43 +102,24 @@ public final class BuildingUtils {
 			Decoration decoration = hotspot.getDecorations()[menuIndex];
 			items[BUILD_INDEXES[menuIndex]] = new Item(decoration.getInterfaceItem());
 			player.getPacketDispatch().sendString(ItemDefinition.forId(decoration.getInterfaceItem()).getName(), 396, itemsStringOffset);
-			boolean hasRequirements = player.getSkills().getLevel(Skills.CONSTRUCTION) >= decoration.getLevel();
+			boolean hasRequirements = player.getSkills().getLevel(Skills.CONSTRUCTION) >= decoration.getLevel(); //nails are checked in buildDecoration
+			Item[] reqItems = decoration.getItems();
+			String[] reqsText = decoration.getReqsText();
 			for (int j = 0; j < 4; j++) {
-				if (j >= decoration.getItems().length) {
-					if (j == decoration.getItems().length && decoration.getNailAmount() > 0) {
-						player.getPacketDispatch().sendString("Nails: " + decoration.getNailAmount(), 396, (itemsStringOffset + 1) + j);
-					} else {
-						player.getPacketDispatch().sendString("", 396, (itemsStringOffset + 1) + j);
-					}
-				} else {
-					Item item = decoration.getItems()[j];
-					if (!player.getInventory().containsItem(item)) {
-						hasRequirements = false;
-					}
-					String s = item.getName() + ": " + item.getAmount();
-                    /*if (j > 1 && (decoration == Decoration.RUNE_CASE1 || decoration == Decoration.RUNE_CASE2)) {
-                        if (j == 3) {
-                            offset--;
-                            item = decoration.getItems()[++j];
-                            s = item.getName() + ": " + item.getAmount();
-                        }
-                        item = decoration.getItems()[j + 1];
-                        s += ", " + item.getName() + ": " + item.getAmount();
-                        player.getPacketDispatch().sendString(s, 396, 15 + offset + j);
-                        continue;
-                    }*/
-					player.getPacketDispatch().sendString(s, 396, (itemsStringOffset + 1) + j);
+				if (j < reqItems.length && !player.getInventory().containsItem(reqItems[j])) {
+					hasRequirements = false;
 				}
+				player.getPacketDispatch().sendString(reqsText[j], 396, (itemsStringOffset + 1) + j);
 			}
 			if (hasRequirements) {
 				c261Value += (1 << (menuIndex + 1));
 			}
-                        setVarp(player, 1485 + menuIndex, hasRequirements || player.isStaff() ? 1 : 0);
+			setVarp(player, 1485 + menuIndex, hasRequirements || player.isStaff() ? 1 : 0);
 			player.getPacketDispatch().sendString("Level " + decoration.getLevel(), 396, 140 + menuIndex);
 			//player.getPacketDispatch().sendItemZoomOnInterface(items[i].protocol(), 50000, 396, 49 + i);
 		}
 
-                setVarp(player, 261, c261Value);
+		setVarp(player, 261, c261Value);
 		PacketRepository.send(ContainerPacket.class, new ContainerContext(player, 396, 132, 8, items, false));
 	}
 

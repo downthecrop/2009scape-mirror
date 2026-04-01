@@ -1,6 +1,7 @@
 package content.global.skill.construction.decoration.portalchamber;
 
 
+import content.data.Quests;
 import content.global.skill.construction.Hotspot;
 import content.global.skill.runecrafting.Rune;
 import core.cache.def.impl.SceneryDefinition;
@@ -18,6 +19,7 @@ import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 
 import static content.region.kandarin.ardougne.quest.plaguecity.PlagueCityListeners.ARDOUGNE_TELE_ATTRIBUTE;
+import static core.api.ContentAPIKt.*;
 
 /**
  * PortalChamberPlugin
@@ -89,15 +91,14 @@ public class PortalChamberPlugin extends OptionHandler {
 				}
 				for (Locations l : Locations.values()) {
 					if (l.name().contains(identifier)) {
-						if (l == Locations.ARDOUGNE){
-							if (!player.getAttribute(ARDOUGNE_TELE_ATTRIBUTE, false)) {
-								player.sendMessage("You do not have the requirements to direct the portal there");
-								return;
-							}
+						if ((l == Locations.ARDOUGNE && !getAttribute(player, ARDOUGNE_TELE_ATTRIBUTE, false)) ||
+						    (l == Locations.KHARYRLL && !isQuestComplete(player, Quests.DESERT_TREASURE))) {
+							sendMessage(player, "You do not have the requirements to direct the portal there.");
+							return;
 						}
 						Item[] runes = l.runes;
 						if (!player.getInventory().containsItems(runes)) {
-							player.sendMessage("You do not have the required runes to build this portal");
+							sendMessage(player, "You do not have the required runes to build this portal.");
 							return;
 						}	
 						player.getInventory().remove(runes);

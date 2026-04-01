@@ -418,7 +418,7 @@ fun replaceSlot(player: Player, slot: Int, item: Item, currentItem: Item? = null
     }
 
     if (cont.remove(currentItem, slot, true)) {
-        return cont.replace(item, slot)
+        return cont.replace(item, slot) ?: currentItem
     }
 
     PlayerMonitor.log(player, LogType.DUPE_ALERT, "Potential slot-replacement-based dupe attempt, slot: $slot, item: $item")
@@ -426,8 +426,9 @@ fun replaceSlot(player: Player, slot: Int, item: Item, currentItem: Item? = null
         Container.INVENTORY -> Container.EQUIPMENT
         else -> Container.INVENTORY
     }
-    if (removeItem(player, currentItem, other))
-        return cont.replace(item, slot)
+    if (removeItem(player, currentItem, other)) {
+        return cont.replace(item, slot) ?: currentItem
+    }
     return null
 }
 

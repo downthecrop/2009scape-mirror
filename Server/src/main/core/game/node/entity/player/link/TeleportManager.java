@@ -97,6 +97,7 @@ public class TeleportManager {
 		if (teleportType != -1) {
 			if (entity instanceof Player) {
 				Player p = (Player) entity;
+				p.scripts.setDelay(GameWorld.getTicks() + 12);
 				p.getDialogueInterpreter().close();
 			}
 		}

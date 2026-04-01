@@ -454,7 +454,7 @@ public enum Decoration {
 	 * Quest hall decorations.
 	 */
 	ANTIDRAGON_SHIELD(13522, 8282, 47, 280, new Item[] { new Item(Items.TEAK_PLANK_8780, 3), new Item(Items.ANTI_DRAGON_SHIELD_1540) }, new Item[] { new Item(Items.ANTI_DRAGON_SHIELD_1540) }),
-	AMULET_OF_GLORY  (13523, 8283, 47, 290, new Item[] { new Item(Items.TEAK_PLANK_8780, 3), new Item(Items.AMULET_OF_GLORY_1704) }, new Item[] { new Item(Items.AMULET_OF_GLORY_1704) }),
+	AMULET_OF_GLORY  (13523, 8283, 47, 290, new Item[] { new Item(Items.TEAK_PLANK_8780, 3), new Item(Items.AMULET_OF_GLORY_1704) }, new Item[] { new Item(Items.AMULET_OF_GLORY_1704) }, new String[] { "Teak plank: 3", "Amulet of Glory", "(uncharged): 1" }),
 	CAPE_OF_LEGENDS  (13524, 8284, 47, 300, new Item[] { new Item(Items.TEAK_PLANK_8780, 3), new Item(Items.CAPE_OF_LEGENDS_1052) }, new Item[] { new Item(Items.CAPE_OF_LEGENDS_1052) }),
 	KING_ARTHUR      (13510, 8285, 35, 211, new Item[] { new Item(Items.TEAK_PLANK_8780, 3), new Item(Items.ARTHUR_PORTRAIT_7995) }),
 	ELENA            (13511, 8286, 35, 211, new Item[] { new Item(Items.TEAK_PLANK_8780, 3), new Item(Items.ELENA_PORTRAIT_7996) }),
@@ -727,23 +727,42 @@ public enum Decoration {
 	private final int[] objectIds;
 
 	/**
-	 * If this node should be invisible to user build options
+	 * If this node should be invisible to user build options.
 	 */
 	private boolean invisibleNode;
 
 	/**
-	 * Constructs a new object, no items, no tools, no refund items.
+	 * The requirements text to show for this node.
+	 */
+	private String[] reqsText = {"", "", "", ""};
+
+	private String[] generateDefaultReqsText(Item[] items, int nailAmount) {
+		String[] ret = {"", "", "", ""};
+		for (int i = 0; i < 4; i++) {
+			if (i >= items.length) {
+				if (i == items.length && nailAmount > 0) {
+					ret[i] = "Nails: " + nailAmount;
+				}
+			} else {
+				ret[i] = items[i].getName() + ": " + items[i].getAmount();
+			}
+		}
+		return ret;
+	}
+
+	/**
+	 * Constructs a new object, default items, default tools, default refund items, default requirements text.
 	 * @param objectId The object id.
 	 * @param interfaceItem The item id for the building interface.
 	 * @param level The level required.
 	 * @param experience The experience gained.
 	 */
 	Decoration(int objectId, int interfaceItem, int level, int experience) {
-		this(objectId, interfaceItem, level, experience, new int[] { Items.HAMMER_2347, Items.SAW_8794 }, new Item[] {}, new Item[] {});
+		this(objectId, interfaceItem, level, experience, new int[] { Items.HAMMER_2347, Items.SAW_8794 }, new Item[] {}, new Item[] {}, new String[] {});
 	}
 
 	/**
-	 * Constructs a new object, no tools, no refund items.
+	 * Constructs a new object, default tools, default refund items, default requirements text.
 	 * @param objectId The object id.
 	 * @param interfaceItem The item id for the building interface.
 	 * @param level The level required.
@@ -751,11 +770,12 @@ public enum Decoration {
 	 * @param items The items required.
 	 */
 	Decoration(int objectId, int interfaceItem, int level, int experience, Item[] items) {
-		this(objectId, interfaceItem, level, experience, new int[] { Items.HAMMER_2347, Items.SAW_8794 }, items, new Item[] {});
+		this(objectId, interfaceItem, level, experience, new int[] { Items.HAMMER_2347, Items.SAW_8794 }, items, new Item[] {}, new String[] {});
+		this.reqsText = generateDefaultReqsText(items, getNailAmount());
 	}
 
 	/**
-	 * Constructs a new object, no refund items.
+	 * Constructs a new object, default refund items, default requirements text.
 	 * @param objectId The object id.
 	 * @param interfaceItem The item id for the building interface.
 	 * @param level The level required.
@@ -764,7 +784,8 @@ public enum Decoration {
 	 * @param items The items required.
 	 */
 	Decoration(int objectId, int interfaceItem, int level, int experience, int[] tools, Item[] items) {
-		this(objectId, interfaceItem, level, experience, tools, items, new Item[] {});
+		this(objectId, interfaceItem, level, experience, tools, items, new Item[] {}, new String[] {});
+		this.reqsText = generateDefaultReqsText(items, getNailAmount());
 	}
 
 	/**
@@ -777,7 +798,21 @@ public enum Decoration {
 	 * @param refundItems The items to be refunded when the item is removed.
 	 */
 	Decoration(int objectId, int interfaceItem, int level, int experience, Item[] items, Item[] refundItems) {
-		this(objectId, interfaceItem, level, experience, new int[] { Items.HAMMER_2347, Items.SAW_8794 }, items, refundItems);
+		this(objectId, interfaceItem, level, experience, new int[] { Items.HAMMER_2347, Items.SAW_8794 }, items, refundItems, new String[] {});
+		this.reqsText = generateDefaultReqsText(items, getNailAmount());
+	}
+
+	/**
+	 * Constructs a new object, default tools.
+	 * @param objectId The object id.
+	 * @param interfaceItem The item id for the building interface.
+	 * @param level The level required.
+	 * @param experience The experience gained.
+	 * @param items The items required.
+	 * @param refundItems The items to be refunded when the item is removed.
+	 */
+	Decoration(int objectId, int interfaceItem, int level, int experience, Item[] items, Item[] refundItems, String[] reqsText) {
+		this(objectId, interfaceItem, level, experience, new int[] { Items.HAMMER_2347, Items.SAW_8794 }, items, refundItems, reqsText);
 	}
 
 	/**
@@ -789,8 +824,9 @@ public enum Decoration {
 	 * @param tools The tools needed.
 	 * @param items The items required.
 	 * @param refundItems The items to be refunded when the item is removed.
+	 * @param reqsText The requirements text to be shown in the interface.
 	 */
-	Decoration(int objectId, int interfaceItem, int level, int experience, int[] tools, Item[] items, Item[] refundItems) {
+	Decoration(int objectId, int interfaceItem, int level, int experience, int[] tools, Item[] items, Item[] refundItems, String[] reqsText) {
 		this.objectId = objectId;
 		this.objectIds = null;
 		this.interfaceItem = interfaceItem;
@@ -799,6 +835,9 @@ public enum Decoration {
 		this.tools = tools;
 		this.items = items;
 		this.refundItems = refundItems;
+		if (reqsText.length > 0) {
+			System.arraycopy(reqsText, 0, this.reqsText, 0, reqsText.length);
+		}
 	}
 
 	/**
@@ -821,18 +860,6 @@ public enum Decoration {
 	 */
 	Decoration(int[] objectIds, int interfaceItem, int level, int experience, Item[] items) {
 		this(objectIds, interfaceItem, level, experience, new int[] { Items.HAMMER_2347, Items.SAW_8794 }, items, new Item[] {});
-	}
-	/**
-	 * Constructs a new object no refund items.
-	 * @param objectIds The object id.
-	 * @param interfaceItem The item id for the building interface.
-	 * @param level The level required.
-	 * @param experience The experience gained.
-	 * @param tools The tools needed.
-	 * @param items The items required.
-	 */
-	Decoration(int[] objectIds, int interfaceItem, int level, int experience, int[] tools, Item[] items) {
-		this(objectIds, interfaceItem, level, experience, tools, items, new Item[] {});
 	}
 
 	/**
@@ -999,5 +1026,13 @@ public enum Decoration {
 	 */
 	public boolean isInvisibleNode() {
 		return invisibleNode;
+	}
+
+	/**
+	 * Gets the requirements text.
+	 * @return The requirements text.
+	 */
+	public String[] getReqsText() {
+		return reqsText;
 	}
 }

@@ -50,15 +50,15 @@ class EnchantedJewelleryListener : InteractionListener {
                 jewellery.use(player, item, 0, isEquipped)
                 return
             }
-            openDialogue(player,EnchantedJewelleryDialogueFile(jewellery,item,isEquipped))
+            openDialogue(player,EnchantedJewelleryDialogueFile(jewellery, item, true, isEquipped))
         }
     }
 
-    class EnchantedJewelleryDialogueFile(val jewellery: EnchantedJewellery, val item: Item, val isEquipped: Boolean) : DialogueFile() {
+    class EnchantedJewelleryDialogueFile(val jewellery: EnchantedJewellery, val item: Item, val replace: Boolean, val isEquipped: Boolean) : DialogueFile() {
         override fun handle(componentID: Int, buttonID: Int) {
             when (stage) {
                 START_DIALOGUE -> {
-                    interpreter!!.sendOptions("Where would you like to go?", *jewellery.options)
+                    interpreter!!.sendOptions("Where would you like to teleport to?", *jewellery.options)
                     stage++
                 }
                 1 -> end().also { jewellery.use(player!!, item, buttonID - 1, isEquipped) }

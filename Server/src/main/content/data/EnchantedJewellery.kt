@@ -11,11 +11,13 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.item.Item
 import core.game.system.task.Pulse
+import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 import core.game.world.GameWorld.Pulser
+import core.tools.Log
 import org.rs09.consts.Sounds
 import java.util.*
 
@@ -73,17 +75,17 @@ enum class EnchantedJewellery(
     ),
     AMULET_OF_GLORY(
             arrayOf(
-                    "Edgeville.",
-                    "Karamja.",
-                    "Draynor Village.",
-                    "Al-Kharid.",
-                    "Nowhere."
+                    "Edgeville",
+                    "Karamja",
+                    "Draynor Village",
+                    "Al Kharid",
+                    "Nowhere"
             ),
             arrayOf(
                     Location.create(3087, 3495, 0),
                     Location.create(2919, 3175, 0),
                     Location.create(3104, 3249, 0),
-                    Location.create(3304, 3124, 0)
+                    Location.create(3292, 3175, 0)
             ),
             Items.AMULET_OF_GLORY4_1712,
             Items.AMULET_OF_GLORY3_1710,
@@ -209,7 +211,7 @@ enum class EnchantedJewellery(
     constructor(options: Array<String>, locations: Array<Location>, vararg ids: Int) : this(options, locations, false, *ids)
 
     /**
-     * Method used when the player "Use"s the jewellery piece.
+     * Method used when the player clicks one of the options in the jewellery piece's options dialog.
      * @param player the player.
      * @param item the used jewellery item.
      * @param buttonID the button id.
@@ -222,7 +224,7 @@ enum class EnchantedJewellery(
             }
             return
         }
-        attemptTeleport(player, item, buttonID, isEquipped)
+        attemptTeleport(player, item, buttonID, true, isEquipped)
     }
 
     /**
@@ -230,43 +232,69 @@ enum class EnchantedJewellery(
      * @param player the player.
      * @param item the used jewellery item.
      * @param buttonID the button id.
+     * @param replace Whether to attempt replacing the item with its lower-charge version. Always true unless you generated a fake item in code.
      * @param isEquipped If the player is operating.
      */
-    fun attemptTeleport(player: Player, item: Item, buttonID: Int, isEquipped: Boolean): Boolean {
+    fun attemptTeleport(player: Player, item: Item, buttonID: Int, replace: Boolean, isEquipped: Boolean): Boolean {
         val itemIndex = getItemIndex(item)
         val nextJewellery = Item(getNext(itemIndex))
         if (!canTeleport(player, nextJewellery)) {
             return false
         }
-        Pulser.submit(object : Pulse(0) {
-            private var count = 0
-            private var location = getLocation(buttonID)
-            override fun pulse(): Boolean {
-                when (count) {
-                    0 -> {
-                        lock(player,4)
-                        visualize(player, ANIMATION, GRAPHICS)
-                        playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
-                        player.impactHandler.disabledTicks = 4
-                        closeInterface(player)
+        val location = getLocation(buttonID)
+        player.scripts.delay = GameWorld.ticks + 4
+        queueScript(player, 0, QueueStrength.SOFT) { stage ->
+            when (stage) {
+                0 -> {
+                    lock(player, 4)
+                    visualize(player, ANIMATION, GRAPHICS)
+                    playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
+                    player.impactHandler.disabledTicks = 4
+                    closeInterface(player)
+                    return@queueScript delayScript(player, 3)
+                }
+                1 -> {
+                    teleport(player, location)
+                    resetAnimator(player)
+                    unlock(player)
+                    player.dispatch(TeleportEvent(TeleportManager.TeleportType.NORMAL, TeleportMethod.JEWELRY, item, location))
+                    if (!replace) {
+                        return@queueScript stopExecuting(player)
                     }
-                    3 -> {
-                        teleport(player,location)
-                        resetAnimator(player)
-                        if (isLastItemIndex(itemIndex)) {
-                            if (isCrumble) crumbleJewellery(player, item, isEquipped)
-                        } else {
-                            replaceJewellery(player, item, nextJewellery, isEquipped)
+                    if (isLastItemIndex(itemIndex)) {
+                        if (isSlayerRing(item)) {
+                            if (isEquipped) {
+                                // Remove it now, but only addItemOrDrop the gem after the teleport has procced
+                                if (removeItem(player, item, Container.EQUIPMENT)) {
+                                    return@queueScript delayScript(player, 1)
+                                }
+                                log(this.javaClass, Log.ERR, "Error replacing slayer ring with enchanted gem (removeItem from equipment)")
+                            }
+                            // Not equipped -> can replace fluently
+                            if (replaceSlot(player, item.slot, Item(Items.ENCHANTED_GEM_4155), item) == item) {
+                                return@queueScript stopExecuting(player)
+                            }
+                            log(this.javaClass, Log.ERR, "Error replacing slayer ring with enchanted gem (replaceSlot)")
                         }
-                        unlock(player)
-                        player.dispatch(TeleportEvent(TeleportManager.TeleportType.NORMAL, TeleportMethod.JEWELRY, item, location))
-                        return true
+                        // Not slayer ring
+                        if (isCrumble) {
+                            val removeFrom = if (isEquipped) Container.EQUIPMENT else Container.INVENTORY
+                            if (removeItem(player, item, removeFrom)) {
+                                return@queueScript stopExecuting(player)
+                            }
+                            log(this.javaClass, Log.ERR, "Error crumbling jewelry")
+                        }
+                    } else {
+                        replaceJewellery(player, item, nextJewellery, isEquipped)
                     }
                 }
-                count += 1
-                return false
+                2 -> {
+                    addItemOrDrop(player, Items.ENCHANTED_GEM_4155)
+                    sendMessage(player, "Your Ring of Slaying reverts back into a regular enchanted gem.")
+                }
             }
-        })
+            return@queueScript stopExecuting(player)
+        }
         return true
     }
 
@@ -275,21 +303,6 @@ enum class EnchantedJewellery(
             replaceSlot(player, item.slot, nextJewellery, item, Container.EQUIPMENT)
         } else {
             replaceSlot(player, item.slot, nextJewellery)
-        }
-    }
-
-    private fun crumbleJewellery(player: Player, item: Item, isEquipped: Boolean) {
-        if (isEquipped) {
-            removeItem(player, item, Container.EQUIPMENT)
-        } else {
-            removeItem(player, item)
-        }
-        if (isSlayerRing(item)) {
-            queueScript(player, 1, QueueStrength.SOFT) {
-                addItemOrDrop(player, Items.ENCHANTED_GEM_4155)
-                sendMessage(player, "Your Ring of Slaying reverts back into a regular enchanted gem.")
-                return@queueScript stopExecuting(player)
-            }
         }
     }
 
