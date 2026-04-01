@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static core.api.ContentAPIKt.*;
+import static core.api.ContentAPIKt.sendMessage;
 
 /**
  * Represents a familiar.
@@ -258,7 +259,10 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 			if (victim == null) {
 				victim = owner.getAttribute("combat-attacker");
 			}
-			if (combat.getVictim() != this && victim != null && !victim.isInvisible() && getProperties().isMultiZone() && owner.getProperties().isMultiZone() && isCombatFamiliar() && !isBurdenBeast() && !isPeacefulFamiliar()) {
+			if (combat.getVictim() != this && victim != null && !victim.isInvisible()
+					&& getProperties().isMultiZone() && owner.getProperties().isMultiZone()
+					&& victim.getProperties().isMultiZone() && isCombatFamiliar()
+					&& !isBurdenBeast() && !isPeacefulFamiliar()) { // Are you serious my brotha?
 				getProperties().getCombatPulse().attack(victim);
 			}
 		}
@@ -271,58 +275,120 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		}
 		handleFamiliarTick();
 	}
-
+	
 	@Override
 	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
-		if (isInvalidTarget(entity, style, message)) return false;
+		if (isAttackableBy(entity, style, message)) return false;
 		return super.isAttackable(entity, style, message);
 	}
-
+	
 	@Override
 	public boolean continueAttack(Entity target, CombatStyle style, boolean message) {
-		return !isInvalidTarget(target, style, message);
+		if (getProperties().getCombatPulse().getVictim() == target) {
+			return canAttackTarget(target, style, message);
+		}
+		if (target == owner) {
+			if (message) {
+				sendMessage(owner, "You can't just betray your own familiar like that!");
+			}
+			return false;
+		}
+		return true;
 	}
-
-	private boolean isInvalidTarget(Entity entity, CombatStyle style, boolean message) {
-		if (entity == owner) {
+	
+	/**
+	 * Checks if the familiar can attack the target (familiar as attacker).
+	 * Called from continueAttack() when familiar initiates combat.
+	 *
+	 * @param target The target to attack.
+	 * @param style The combat style.
+	 * @param message Whether to send messages.
+	 *
+	 * @return true if the familiar can attack the target.
+	 */
+	private boolean canAttackTarget(Entity target, CombatStyle style, boolean message) {
+		if (target == owner) {
+			if (message) {
+				sendMessage(owner, "You can't just betray your own familiar like that!");
+			}
+			return false;
+		}
+		if (target instanceof Player) {
+			Player targetPlayer = (Player) target;
+			if (!targetPlayer.getSkullManager().isWilderness()) {
+				if (message) {
+					sendMessage(owner, "You have to be in the wilderness to attack a player's familiar.");
+				}
+				return false;
+			}
+			if (!owner.getSkullManager().isWilderness()) {
+				if (message) {
+					sendMessage(owner, "This familiar's owner is not in the wilderness.");
+				}
+				return false;
+			}
+			if (!owner.isAttackable(target, style, false)) {
+				return false;
+			}
+			if (!owner.getProperties().isMultiZone()) {
+				if (message) {
+					sendMessage(owner, "You have to be in a multicombat zone to attack another player with your familiar.");
+				}
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	/**
+	 * Checks if the entity can attack this familiar (familiar as target).
+	 * Called from isAttackable() when someone attacks the familiar.
+	 *
+	 * @param attacker The entity trying to attack the familiar.
+	 * @param style The combat style.
+	 * @param message Whether to send messages.
+	 *
+	 * @return true if the attacker cannot attack the familiar (invalid target).
+	 */
+	private boolean isAttackableBy(Entity attacker, CombatStyle style, boolean message) {
+		if (attacker == owner) {
 			if (message) {
 				sendMessage(owner, "You can't just betray your own familiar like that!");
 			}
 			return true;
 		}
-		if (entity instanceof Player) {
-			if (!owner.isAttackable(entity, style, message)) {
-				return true;
-			}
-		}
-		if (!getProperties().isMultiZone()) {
-			if (entity instanceof Player && !((Player) entity).getProperties().isMultiZone()) {
+		if (attacker instanceof Player) {
+			Player attackingPlayer = (Player) attacker;
+			if (!attackingPlayer.getSkullManager().isWilderness()) {
 				if (message) {
-					sendMessage((Player) entity, "You have to be in multicombat to attack a player's familiar.");
-				}
-				return true;
-			}
-			if (entity instanceof Player) {
-				if (message) {
-					sendMessage((Player) entity, "This familiar is not in the a multicombat zone.");
-				}
-			}
-			return true;
-		}
-		if (entity instanceof Player) {
-			if (!((Player) entity).getSkullManager().isWilderness()) {
-				if (message) {
-					sendMessage((Player) entity, "You have to be in the wilderness to attack a player's familiar.");
+					sendMessage(attackingPlayer, "You have to be in the wilderness to attack a player's familiar.");
 				}
 				return true;
 			}
 			if (!owner.getSkullManager().isWilderness()) {
 				if (message) {
-					sendMessage((Player) entity, "This familiar's owner is not in the wilderness.");
+					sendMessage(attackingPlayer, "This familiar's owner is not in the wilderness.");
+				}
+				return true;
+			}
+			if (!owner.isAttackable(attackingPlayer, style, false)) {
+				return true;
+			}
+			if (!attackingPlayer.getProperties().isMultiZone()) {
+				if (message) {
+					sendMessage(attackingPlayer, "You have to be in a multicombat zone to attack a player's familiar.");
+				}
+				return true;
+			}
+			if (!this.getProperties().isMultiZone()) {
+				if (message) {
+					sendMessage(attackingPlayer, "This familiar is not in a multicombat zone.");
 				}
 				return true;
 			}
 		}
+		
 		return false;
 	}
 
@@ -440,9 +506,10 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	public void visualizeSpecialMove() {
 		owner.visualize(Animation.create(7660), Graphics.create(1316));
 	}
-
+	
 	/**
 	 * Sends a familiar hit.
+	 *
 	 * @param target the target.
 	 * @param maxHit the max hit.
 	 * @param graphics the graphics.
@@ -459,6 +526,13 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 					hit = RandomFunction.randomize(maxHit);
 				}
 				state.setEstimatedHit(hit);
+				if (target instanceof NPC && ((NPC) target).getTask() != null && ((NPC) target).getTask().levelReq > owner.getSkills().getLevel(Skills.SLAYER)) {
+					state.neutralizeHits();
+					state.setPoisonDamage(-1);
+					if (state.getStyle() == CombatStyle.MAGIC) {
+						state.setEstimatedHit(-1);
+					}
+				}
 				target.getImpactHandler().handleImpact(owner, hit, CombatStyle.MELEE, state);
 				if (graphics != null) {
 					target.graphics(graphics);
@@ -484,7 +558,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	public void sendFamiliarHit(final Entity target, final int maxHit) {
 		sendFamiliarHit(target, maxHit, null);
 	}
-
+	
 	/**
 	 * Checks if this familiar can attack the target (used mainly for special
 	 * moves).
@@ -495,11 +569,17 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		}
 		if (target.getLocation().getDistance(getLocation()) > 8) {
 			if (message) {
-				owner.getPacketDispatch().sendMessage("That target is too far.");
+				sendMessage(owner, "That target is too far.");
 			}
 			return false;
 		}
-		if (target.getLocks().isInteractionLocked() || !target.isAttackable(this, CombatStyle.MAGIC, true)) {
+		if (target instanceof Player && !owner.getProperties().isMultiZone()) {
+			if (message) {
+				sendMessage(owner, "You have to be in a multicombat zone to attack another player with your familiar.");
+			}
+			return false;
+		}
+		if (target.getLocks().isInteractionLocked() || !target.isAttackable(this, CombatStyle.MAGIC, message)) {
 			return false;
 		}
 		return isCombatFamiliar();
@@ -509,11 +589,13 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	public boolean canAttack(Entity target) {
 		return canAttack(target, true);
 	}
-
+	
 	/**
 	 * Checks if a familiar can perform a combat special attack.
+	 *
 	 * @param target the target.
 	 * @param message show message.
+	 *
 	 * @return {@code True} if so.
 	 */
 	public boolean canCombatSpecial(Entity target, boolean message) {
@@ -524,6 +606,10 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 			return false;
 		}
 		if (getAttribute("special-delay", 0) > GameWorld.getTicks()) {
+			return false;
+		}
+		// The special move probably should go through but with all harmful effects neutralized, but for now just block the damn thing
+		if (target instanceof NPC && ((NPC) target).getTask() != null && ((NPC) target).getTask().levelReq > owner.getSkills().getLevel(Skills.SLAYER)) {
 			return false;
 		}
 		return true;

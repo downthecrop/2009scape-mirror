@@ -177,14 +177,23 @@ public abstract class MapZone implements Zone {
 		if (multi || e.isIgnoreMultiBoundaries(t) || e.getZoneMonitor().isIgnoreMultiBoundaries(t)) {
 			return true;
 		}
+		Entity attacker = e instanceof Familiar ? ((Familiar) e).getOwner() : e;
 		Entity target = t.getAttribute("combat-attacker", e);
-		if (t.getAttribute("combat-time", -1L) > time && target != e && target.isActive()) {
+		if (target instanceof Familiar) {
+			target = ((Familiar) target).getOwner();
+		}
+		if (t.getAttribute("combat-time", -1L) > time && target != attacker && target.isActive()) {
 			if (message && e instanceof Player) {
 				((Player) e).getPacketDispatch().sendMessage("Someone else is already fighting this" + (t instanceof Player ? " player." : "."));
 			}
 			return false;
 		}
-		if (e.getAttribute("combat-time", -1L) > time && (target = e.getAttribute("combat-attacker", t)) != t && target.isActive()) {
+		Entity attackerOnE = e.getAttribute("combat-attacker", t);
+		if (attackerOnE instanceof Familiar) {
+			attackerOnE = ((Familiar) attackerOnE).getOwner();
+		}
+		Entity tResolved = t instanceof Familiar ? ((Familiar) t).getOwner() : t;
+		if (e.getAttribute("combat-time", -1L) > time && attackerOnE != tResolved && attackerOnE.isActive()) {
 			if (t.getId() == 1614 || t.getId() == 1613) {
 				return true;
 			}

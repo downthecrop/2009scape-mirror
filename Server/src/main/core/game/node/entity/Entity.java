@@ -450,6 +450,9 @@ public abstract class Entity extends Node {
 		if (!entity.getZoneMonitor().continueAttack(this, style, message)) {
 			return false;
 		}
+		if (!this.getZoneMonitor().continueAttack(entity, style, message)) {
+			return false;
+		}
 		return true;
 	}
 

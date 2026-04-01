@@ -226,14 +226,22 @@ public enum BoltEffect {
 			victim.graphics(graphics);
 		}
 	}
-
+	
 	/**
 	 * Checks if the effect can fire.
+	 *
 	 * @param state the state.
+	 *
 	 * @return {@code True} if so.
 	 */
 	public boolean canFire(BattleState state) {
-		return RandomFunction.random(13) == 5;
+		// Never fires on slayer monster that player lacks level requirement for. Inauthentic(?)
+		// and should be considered a TODO: temporary abuse prevention measure (bolt effect on slayer monsters)
+		boolean rollSuccess = RandomFunction.random(13) == 5;
+		if (!(state.getVictim() instanceof NPC)) return rollSuccess;
+		if (!(state.getAttacker() instanceof Player) && ((NPC) state.getVictim()).getTask() == null) return rollSuccess;
+		if (state.getVictim().asNpc().getTask().levelReq > state.getAttacker().asPlayer().getSkills().getLevel(Skills.SLAYER)) return false;
+		return rollSuccess;
 	}
 
 	/**

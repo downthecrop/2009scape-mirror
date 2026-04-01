@@ -762,7 +762,7 @@ public class Player extends Entity {
 					return false;
 				if (skullManager.hasWildernessProtection())
 					return false;
-				return true;
+				return super.isAttackable(entity, style, message);
 			} else return false;
 		}
 		return super.isAttackable(entity, style, message);

@@ -1,10 +1,13 @@
 package core.game.system.timer.impl
 
+import content.global.skill.summoning.familiar.Familiar
 import core.game.system.timer.*
 import core.api.*
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.entity.combat.ImpactHandler
+import core.game.node.entity.npc.NPC
+import core.game.node.entity.skill.Skills
 import core.game.world.repository.Repository
 import org.json.simple.*
 
@@ -30,15 +33,28 @@ class Poison : PersistTimer (30, "poison", flags = arrayOf(TimerFlag.ClearOnDeat
         damageSource = Repository.getPlayerByUid (uid) ?: entity
         severity = root["severity"].toString().toInt()
     }
-
-    override fun onRegister (entity: Entity) {
-        if (entity is Player) {
-            sendMessage(entity, "You have been poisoned.")
-            entity.debug ("[Poison] -> Received for $severity severity.")
-        }
-        if (damageSource is Player)
-            (damageSource as? Player)?.debug ("[Poison] -> Applied for $severity severity.")
-    }
+	
+	override fun onRegister(entity : Entity) {
+		if (entity is Player) {
+			sendMessage(entity, "You have been poisoned.")
+			entity.debug("[Poison] -> Received for $severity severity.")
+		}
+		if (damageSource is Player) {
+			(damageSource as? Player)?.debug("[Poison] -> Applied for $severity severity.")
+			// this is ass, and preventing poisoning slayer monster player lacks lv req for should be done but prob not here & not like this. same for familiars
+			if (entity is NPC && entity.task != null && entity.task.levelReq > damageSource.skills.getLevel(Skills.SLAYER)) {
+				(damageSource as? Player)?.debug("[Poison] -> Removed poison from ${entity.name} ${entity.location} due to Slayer reqs!")
+				removeTimer(entity, this)
+			}
+		}
+		if (damageSource is Familiar) {
+			val owner : Player? = (damageSource as Familiar).owner
+			if (owner != null && entity is NPC && entity.task != null && entity.task.levelReq > owner.skills.getLevel(Skills.SLAYER)) {
+				owner.debug("[Poison] -> Removed poison from ${entity.name} ${entity.location} due to Slayer reqs!")
+				removeTimer(entity, this)
+			}
+		}
+	}
 
     override fun run (entity: Entity) : Boolean {
         entity.impactHandler.manualHit (

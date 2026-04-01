@@ -263,6 +263,23 @@ public final class WildernessZone extends MapZone {
 				return false;
 			}
 		}
+		if (e instanceof Player && target instanceof NPC && ((NPC) target).getName().contains("Revenant")) {
+			Player p = (Player) e;
+			NPC npc = (NPC) target;
+			int level = p.getSkullManager().getLevel();
+			int npcWildLevel = getWilderness(npc);
+			if (npcWildLevel < level) {
+				level = npcWildLevel;
+			}
+			int combat = p.getProperties().getCurrentCombatLevel();
+			int npcCombat = npc.getDefinition().getCombatLevel();
+			if (combat - level > npcCombat || combat + level < npcCombat) {
+				if (message) {
+					p.getPacketDispatch().sendMessage("The level difference between you and your opponent is too great.");
+				}
+				return false;
+			}
+		}
 		return true;
 	}
 

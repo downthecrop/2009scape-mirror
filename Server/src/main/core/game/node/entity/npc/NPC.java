@@ -383,7 +383,7 @@ public class NPC extends Entity {
 		this.movementIndex = 0;
 		this.pathBoundMovement = true;
 	}
-
+	
 	@Override
 	public void checkImpact(BattleState state) {
 		super.checkImpact(state);
@@ -391,21 +391,31 @@ public class NPC extends Entity {
 		behavior.beforeDamageReceived(this, entity, state);
 		if (task != null && entity instanceof Player && task.levelReq > entity.getSkills().getLevel(Skills.SLAYER)) {
 			state.neutralizeHits();
+			state.setPoisonDamage(-1);
+			if (state.getStyle() == CombatStyle.MAGIC) {
+				state.setEstimatedHit(-1);
+			}
+		}
+		if (task != null && entity instanceof Familiar && task.levelReq > ((Familiar) entity).getOwner().getSkills().getLevel(Skills.SLAYER)) {
+			state.neutralizeHits();
+			state.setPoisonDamage(-1);
+			if (state.getStyle() == CombatStyle.MAGIC) {
+				state.setEstimatedHit(-1);
+			}
 		}
 	}
-
+	
 	@Override
 	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 		if (isInvisible()) {
 			return false;
 		}
 		if (task != null && entity instanceof Player && task.levelReq > entity.getSkills().getLevel(Skills.SLAYER)) {
-	           if(message) {
-	               ((Player) entity).getPacketDispatch().sendMessage("You need a higher slayer level to know how to wound this monster.");
-	           }
+			if (message) {
+				((Player) entity).getPacketDispatch().sendMessage("You need a higher slayer level to know how to wound this monster.");
+			}
 		}
-		if (!behavior.canBeAttackedBy(this, entity, style, message))
-			return false;
+		if (!behavior.canBeAttackedBy(this, entity, style, message)) return false;
 		return super.isAttackable(entity, style, message);
 	}
 
@@ -414,13 +424,7 @@ public class NPC extends Entity {
 		if (isInvisible()) {
 			return false;
 		}
-		if (task != null && target instanceof Player && task.levelReq > target.getSkills().getLevel(Skills.SLAYER)) {
-			if (message) {
-				((Player) target).getPacketDispatch().sendMessage("You need a higher slayer level to know how to wound this monster.");
-			}
-			return false;
-		}
-        return behavior.canBeAttackedBy(this, target, style, message);
+		return true;
     }
 
 	@Override
