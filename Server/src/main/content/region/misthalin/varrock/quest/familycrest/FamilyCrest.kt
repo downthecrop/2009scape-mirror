@@ -124,10 +124,4 @@ class FamilyCrest: Quest(Quests.FAMILY_CREST, 59, 58, 1, 148, 0, 1, 11) {
         }
         setAttribute(player, "/save:family-crest:gauntlets", Items.FAMILY_GAUNTLETS_778)
     }
-
-    /*override fun getConfig(player: Player?, stage: Int): IntArray {
-        if(stage == 100) return intArrayOf(1282, 90)
-        if(stage > 0) return intArrayOf(1282, 1)
-        else return intArrayOf(1282, 0)
-    }*/
 }

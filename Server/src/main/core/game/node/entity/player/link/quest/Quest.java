@@ -337,14 +337,6 @@ public abstract class Quest implements Plugin<Object> {
 		return questPoints;
 	}
 
-	/**
-	 * Gets the configs.
-	 * @return the configs.
-	 */
-	public int[] getConfigs() {
-		return configs;
-	}
-
 	@Override
 	public String toString() {
 		return "Quest [name=" + quest + ", index=" + index + ", buttonId=" + buttonId + ", questPoints=" + questPoints + ", configs=" + Arrays.toString(configs) + "]";

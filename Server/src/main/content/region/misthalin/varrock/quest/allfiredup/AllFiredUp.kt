@@ -15,7 +15,10 @@ import org.rs09.consts.Items
  * @author Ceikry
  */
 @Initializable
-class AllFiredUp : Quest(Quests.ALL_FIRED_UP, 157, 156, 1){
+class AllFiredUp : Quest(Quests.ALL_FIRED_UP, 157, 156, 1,
+    1282 /*this is actually unused*/,
+    5133 /*source: ::varbits 1282, after trial and error confirmed that I need ::setvarp 1282 0 QUEST_STAGE*/,
+    0, 1, 90) { //not started -- in progress -- completed
     override fun newInstance(`object`: Any?): Quest {
         return this
     }
@@ -151,11 +154,5 @@ class AllFiredUp : Quest(Quests.ALL_FIRED_UP, 157, 156, 1){
         player.inventory.add(Item(995,20000))
         AFUBeacon.resetAllBeacons(player)
         player.questRepository.syncronizeTab(player)
-    }
-
-    override fun getConfig(player: Player?, stage: Int): IntArray {
-        if(stage == 100) return intArrayOf(1282, 90)
-        if(stage > 0) return intArrayOf(1282, 1)
-        else return intArrayOf(1282, 0)
     }
 }
