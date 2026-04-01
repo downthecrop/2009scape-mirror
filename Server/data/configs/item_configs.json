@@ -17702,7 +17702,7 @@
   {
     "shop_price": "350",
     "ge_buy_limit": "5000",
-    "examine": "A plain gold amulet.",
+    "examine": "It needs a string so I can wear it.",
     "grand_exchange_price": "172",
     "durability": null,
     "name": "Gold amulet",
@@ -17722,7 +17722,7 @@
   {
     "shop_price": "810",
     "ge_buy_limit": "5000",
-    "examine": "I wonder if I can get this enchanted.",
+    "examine": "It needs a string so I can wear it.",
     "grand_exchange_price": "473",
     "durability": null,
     "name": "Sapphire amulet",
@@ -17742,7 +17742,7 @@
   {
     "shop_price": "1147",
     "ge_buy_limit": "5000",
-    "examine": "I wonder if I can get this enchanted.",
+    "examine": "It needs a string so I can wear it.",
     "grand_exchange_price": "695",
     "durability": null,
     "name": "Emerald amulet",
@@ -17762,7 +17762,7 @@
   {
     "shop_price": "2025",
     "ge_buy_limit": "5000",
-    "examine": "I wonder if I can get this enchanted.",
+    "examine": "It needs a string so I can wear it.",
     "grand_exchange_price": "1268",
     "durability": null,
     "name": "Ruby amulet",
@@ -17783,7 +17783,7 @@
   {
     "shop_price": "3307",
     "ge_buy_limit": "5000",
-    "examine": "I wonder if I can get this enchanted.",
+    "examine": "It needs a string so I can wear it.",
     "grand_exchange_price": "3359",
     "durability": null,
     "name": "Diamond amulet",
@@ -17802,7 +17802,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "I wonder if I can get this enchanted.",
+    "examine": "It needs a string so I can wear it.",
     "grand_exchange_price": "26900",
     "durability": null,
     "name": "Dragonstone ammy",
@@ -60136,7 +60136,7 @@
     "id": "6578"
   },
   {
-    "examine": "I wonder if I can get this enchanted.",
+    "examine": "It needs a string so I can wear it.",
     "grand_exchange_price": "9058124",
     "durability": null,
     "name": "Onyx amulet",
