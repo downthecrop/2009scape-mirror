@@ -6,14 +6,14 @@ import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.combat.CombatSwingHandler;
 import core.game.node.entity.combat.InteractionType;
 import core.game.node.entity.combat.equipment.ArmourSet;
-import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.impl.Animator.Priority;
+import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
 
-import static core.api.ContentAPIKt.*;
+import static core.api.ContentAPIKt.applyPoison;
 
 /**
  * Handles K'ril Tsutsaroth's combat.
@@ -62,11 +62,13 @@ public final class GWDTsutsarothSwingHandler extends CombatSwingHandler {
 		if (RandomFunction.randomize(10) < 4) {
 			ticks += (int) Math.ceil(entity.getLocation().getDistance(victim.getLocation()) * 0.3);
 			style = CombatStyle.MAGIC;
-		} else if (RandomFunction.randomize(10) == 0) {
-			if (special = (victim instanceof Player)) {
-				((Player) victim).getPacketDispatch().sendMessage("K'ril Tsutsaroth slams through your protection prayer, leaving you feeling drained.");
-			}
+		} else if (victim instanceof Player && RandomFunction.randomize(10) == 0) {
+		    Player player = (Player) victim;
+		    special = player.hasProtectionPrayer(CombatStyle.MELEE);
+		    if (special) {
+			player.getPacketDispatch().sendMessage("K'ril Tsutsaroth slams through your protection prayer, leaving you feeling drained.");
 			entity.sendChat("YARRRRRRR!");
+		    }
 		}
 		if (style.getSwingHandler().isAccurateImpact(entity, victim)) {
 			int max = style.getSwingHandler().calculateHit(entity, victim, special ? 1.08 : 1.0);
@@ -76,7 +78,7 @@ public final class GWDTsutsarothSwingHandler extends CombatSwingHandler {
 				applyPoison(victim, entity, 80);
 			}
 			if (special) {
-				((Player) victim).getSkills().decrementPrayerPoints((double) hit / 2);
+			    victim.getSkills().decrementPrayerPoints((double) hit / 2);
 			}
 		}
 		state.setEstimatedHit(hit);
