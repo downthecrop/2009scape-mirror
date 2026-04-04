@@ -71,6 +71,8 @@ abstract class DialogueLabeller : DialogueFile() {
     var jumpTo: Int? = null
     /** ButtonID on every click */
     var buttonID: Int? = null
+    /** Filtered options from option stage 1 for storing the order for option stage 2 and 3 */
+    var filteredOptions: List<DialogueOption> = listOf()
     /** ButtonID when user clicks on an option */
     var optButton: Int? = null
     /** Input value after a user enters a value */
@@ -80,7 +82,7 @@ abstract class DialogueLabeller : DialogueFile() {
     abstract fun addConversation()
 
     /** Helper functions to create an individual stage for each of the dialogue stages. */
-    private fun assignIndividualStage(callback: () -> Component?, unclosable: Boolean) {
+    private fun assignIndividualStage(unclosable: Boolean = false, callback: () -> Component?) {
         if (startingStage == null) { startingStage = 0 }
         if (stage == dialogueCounter && jumpTo == null) { // Run this stage when the stage equals to the dialogueCounter of this dialogue
             val component = callback() // CALLBACK FUNCTION
@@ -107,11 +109,11 @@ abstract class DialogueLabeller : DialogueFile() {
     /** Does absolutely nothing but to make it look like the other API. */
     fun assignToIds(npcid: Int) { /* super.npc = NPC(npcid) */ }
 
-    /** Marks the start of a series of dialogue that can be jumped to using a [goto]. */
-    fun label(label: String, nesting: () -> Unit = {}) {
+    /** Marks the start of a series of dialogue that can be jumped to using a [goto]. You can nest after label(...) with a {} purely for organization only. */
+    fun label(vararg label: String, nesting: () -> Unit = {}) {
         if (startingStage == null) { startingStage = 1 }
         dialogueCounter++
-        labelStageMap[label] = dialogueCounter
+        for (l in label) { labelStageMap[l] = dialogueCounter }
         nesting()
     }
 
@@ -141,12 +143,12 @@ abstract class DialogueLabeller : DialogueFile() {
 
     /** Manual stage. For custom creation of an individual stage. Must call interpreter in some form. **/
     fun manual(unclosable: Boolean = false, callback: (player: Player, npc: NPC) -> Component?) {
-        assignIndividualStage({ return@assignIndividualStage callback(player!!, npc!!) }, unclosable)
+        assignIndividualStage(unclosable) { return@assignIndividualStage callback(player!!, npc!!) }
     }
 
     /** Dialogue player/playerl. Shows player chathead with text. **/
     fun player(chatAnim: ChatAnim = ChatAnim.NEUTRAL, vararg messages: String, unclosable: Boolean = false) {
-        assignIndividualStage({ return@assignIndividualStage interpreter!!.sendDialogues(player, chatAnim, *formatMessages(messages)) }, unclosable)
+        assignIndividualStage(unclosable) { return@assignIndividualStage interpreter!!.sendDialogues(player, chatAnim, *formatMessages(messages)) }
     }
     /** Dialogue player/playerl. Shows player chathead with text. **/
     fun player(vararg messages: String) { player(ChatAnim.NEUTRAL, *messages) }
@@ -157,16 +159,15 @@ abstract class DialogueLabeller : DialogueFile() {
 
     /** Dialogue npc/npcl. Shows npc chathead with text. **/
     fun npc(chatAnim: ChatAnim = ChatAnim.NEUTRAL, vararg messages: String, unclosable: Boolean = false) {
-        val callback = callback@{ return@callback interpreter!!.sendDialogues(npc, chatAnim, *formatMessages(messages)) }
-        assignIndividualStage(callback, unclosable)
+        assignIndividualStage(unclosable) { return@assignIndividualStage interpreter!!.sendDialogues(npc, chatAnim, *formatMessages(messages)) }
     }
     /** Dialogue npc/npcl. Shows npcId chathead with text. **/
     fun npc(chatAnim: ChatAnim = ChatAnim.NEUTRAL, npcId: Int = npc!!.id, vararg messages: String, unclosable: Boolean = false) {
-        assignIndividualStage({ return@assignIndividualStage interpreter!!.sendDialogues(NPC(npcId), chatAnim, *formatMessages(messages)) }, unclosable)
+        assignIndividualStage(unclosable) { return@assignIndividualStage interpreter!!.sendDialogues(NPC(npcId), chatAnim, *formatMessages(messages)) }
     }
     /** Dialogue npc/npcl. Shows npcId chathead with text. **/
     fun npc(npcId: Int = npc!!.id, vararg messages: String, unclosable: Boolean = false) {
-        assignIndividualStage({ return@assignIndividualStage interpreter!!.sendDialogues(NPC(npcId), ChatAnim.NEUTRAL, *formatMessages(messages)) }, unclosable)
+        assignIndividualStage(unclosable) { return@assignIndividualStage interpreter!!.sendDialogues(NPC(npcId), ChatAnim.NEUTRAL, *formatMessages(messages)) }
     }
     /** Dialogue npc/npcl. Shows npc chathead with text. **/
     fun npc(vararg messages: String) { npc(ChatAnim.NEUTRAL, *messages) }
@@ -177,21 +178,19 @@ abstract class DialogueLabeller : DialogueFile() {
 
     /** Dialogue item/iteml. Shows item with text. **/
     fun item(item: Item, vararg messages: String, message: String = "", unclosable: Boolean = false) {
-        val callback = callback@{ return@callback interpreter!!.sendItemMessage(item, *formatMessages(messages, message)) }
-        assignIndividualStage(callback, unclosable)
+        assignIndividualStage(unclosable) { return@assignIndividualStage interpreter!!.sendItemMessage(item, *formatMessages(messages, message)) }
     }
     @Deprecated("Use item() instead.", ReplaceWith("item(item, *messages)"))
     fun iteml(item: Item, vararg messages: String) { throw Exception("Deprecated DialogueLabel: Use item() instead.") }
 
     /** Dialogue overloaded doubleItem/doubleIteml. Shows two items with text. **/
     fun item(item: Item, item2: Item, vararg messages: String, message: String = "", unclosable: Boolean = false) {
-        assignIndividualStage({ return@assignIndividualStage interpreter!!.sendDoubleItemMessage(item, item2, *formatMessages(messages, message)) }, unclosable)
+        assignIndividualStage(unclosable) { return@assignIndividualStage interpreter!!.sendDoubleItemMessage(item, item2, *formatMessages(messages, message)) }
     }
 
     /** Dialogue line/linel. Simply shows text. **/
     fun line(vararg messages: String, unclosable: Boolean = false) {
-        val callback = callback@{ return@callback interpreter!!.sendDialogue(*messages) }
-        assignIndividualStage(callback, unclosable)
+        assignIndividualStage(unclosable) { return@assignIndividualStage interpreter!!.sendDialogue(*messages) }
     }
     @Deprecated("Use line() instead.", ReplaceWith("line(*messages)"))
     fun linel(vararg messages: String) { throw Exception("Deprecated DialogueLabel: Use line() instead.") }
@@ -199,13 +198,18 @@ abstract class DialogueLabeller : DialogueFile() {
     /** Dialogue option. Shows the option dialogue with choices for the user to select. **/
     fun options(vararg options: DialogueOption, title: String = "Select an Option", unclosable: Boolean = false) {
         // Filter out options that aren't shown.
-        val filteredOptions = options.filter{ if (it.optionIf != null) { it.optionIf.invoke(player!!, npc!!) } else { true } }
         // Stage Part 1: Options List Dialogue
-        val callback = callback@{ return@callback interpreter!!.sendOptions(title, *filteredOptions.map{ it.option }.toTypedArray()) }
-        assignIndividualStage(callback, unclosable)
+        assignIndividualStage(unclosable) {
+            filteredOptions = options.filter{ if (it.optionIf != null) { it.optionIf.invoke(player!!, npc!!) } else { true } }
+            if (filteredOptions.size == 1) { // If there is only one option left, jump to that option.
+                jumpTo = labelStageMap[filteredOptions[0].goto]
+                return@assignIndividualStage null
+            }
+            return@assignIndividualStage interpreter!!.sendOptions(title, *filteredOptions.map{ it.option }.toTypedArray())
+        }
         // Stage Part 2: Show spoken text.
         val opt = if (buttonID != null && buttonID in 1..filteredOptions.size) { filteredOptions[buttonID!! - 1] } else { null }
-        assignIndividualStage({
+        assignIndividualStage(unclosable) {
             var component: Component? = null
             if (opt?.skipPlayer == true) {
                 jumpTo = stage + 1
@@ -214,7 +218,7 @@ abstract class DialogueLabeller : DialogueFile() {
             }
             optButton = buttonID // transfer the buttonID to a temp memory for the next stage
             return@assignIndividualStage component
-        }, unclosable)
+        }
         // Stage Part 3: Jump To goto
         if (stage == dialogueCounter && optButton != null && optButton in 1..filteredOptions.size) {
             jumpTo = labelStageMap[filteredOptions[optButton!! - 1].goto]
@@ -226,7 +230,7 @@ abstract class DialogueLabeller : DialogueFile() {
 
     /** Dialogue input. Shows the input dialogue with an input box for the user to type in. Read [optInput] for the value. **/
     fun input(type: InputType, prompt: String = "Enter the amount") {
-        assignIndividualStage({
+        assignIndividualStage {
             // These are similar to calling sendInputDialogue
             when (type) {
                 InputType.AMOUNT -> interpreter!!.sendInput(true, prompt)
@@ -246,7 +250,7 @@ abstract class DialogueLabeller : DialogueFile() {
             }
             player!!.setAttribute("input-type", type)
             return@assignIndividualStage null
-        }, false)
+        }
     }
     /** Dialogue input. Shows the input dialogue with an input box for the user to type in. Read [optInput] in an [exec] function for the value. **/
     fun input(numeric: Boolean, prompt: String = "Enter the amount") { input( if (numeric) { InputType.NUMERIC } else { InputType.STRING_SHORT }, prompt) }
@@ -265,11 +269,10 @@ abstract class DialogueLabeller : DialogueFile() {
 
     /** Calls another dialogue file. Always use this to open another dialogue file instead of calling openDialogue() in exec{} due to interfaces clashing. **/
     fun open(player: Player, dialogue: Any, vararg args: Any) {
-        val callback = callback@{
+        assignIndividualStage {
             core.api.openDialogue(player, dialogue, *args)
-            return@callback null
+            return@assignIndividualStage null
         }
-        assignIndividualStage(callback, false)
     }
 
     /** WARNING: DIALOGUE LABELLER WILL BREAK IN CERTAIN FUNCTIONS. USE open() instead. */
