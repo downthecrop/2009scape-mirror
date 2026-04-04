@@ -77673,6 +77673,7 @@
     "id": "3311"
   },
   {
+    "examine": "They're going to sing to you!",
     "name": "Zanaris choir",
     "id": "3312"
   },
@@ -83339,6 +83340,7 @@
     "id": "6741"
   },
   {
+    "examine": "A traditional snowman.",
     "name": "Snowman",
     "id": "6746"
   },
@@ -87576,6 +87578,7 @@
     "id": "8516"
   },
   {
+    "examine": "The rebellious teenage son of the Queen of Snow. Interesting outfit!",
     "name": "Jack Frost",
     "id": "8517"
   },
@@ -87608,6 +87611,7 @@
     "id": "8539"
   },
   {
+    "examine": "A jolly-looking present-distributor.",
     "name": "Santa Claus",
     "id": "8540"
   },
@@ -88007,5 +88011,10 @@
     "examine": "Angry and stressed, he doesn't seem to have time for anything other than sand.",
     "name": "Sandy",
     "id": "3112"
+  },
+  {
+    "examine": "I hope she can find all the ingredients!",
+    "name": "Cook",
+    "id": "4239"
   }
 ]
