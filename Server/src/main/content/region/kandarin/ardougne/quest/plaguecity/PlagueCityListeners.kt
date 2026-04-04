@@ -96,9 +96,15 @@ class PlagueCityListeners : InteractionListener {
                     addItem(player, Items.ASHES_592)
                 }
                 else{
-                    sendItemDialogue(player, Items.A_MAGIC_SCROLL_1505, "You memorise what is written on the scroll.")
-                    sendDialogue(player, "You can now cast the Ardougne Teleport spell provided you have the required runes and magic level.")
                     setAttribute(player, ARDOUGNE_TELE_ATTRIBUTE, true)
+                    openDialogue(player, object : DialogueFile() {
+                        override fun handle(componentID: Int, buttonID: Int) {
+                            when (stage) {
+                                0 -> sendItemDialogue(player, Items.A_MAGIC_SCROLL_1505, "You memorise what is written on the scroll.").also { stage++ }
+                                1 -> sendDialogue(player, "You can now cast the Ardougne Teleport spell provided you have the required runes and magic level.").also { stage = END_DIALOGUE }
+                            }
+                        }
+                    })
                 }
                 return@on true
             }
