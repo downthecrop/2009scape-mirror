@@ -10,6 +10,7 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import org.rs09.consts.Components
+import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 
 /**
@@ -130,10 +131,9 @@ class ToolLeprechaunOnVacationDialogue(player: Player? = null) : DialoguePlugin(
 }
 
 /**
- * Note:
- * Goth chatheads are unfortunately updated and have frozen FacialExpressions. Disabled talk-to for now.
+ * This Leprechaun Goth should appear once you have Spirit of Summer done, but is currently defaulted as not.
  */
-// @Initializable
+@Initializable
 class ToolLeprechaunGothDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
@@ -178,7 +178,7 @@ class ToolLeprechaunGothDialogue(player: Player? = null) : DialoguePlugin(player
     }
 
     override fun newInstance(player: Player?): DialoguePlugin {
-        return ToolLeprechaunDialogue(player)
+        return ToolLeprechaunGothDialogue(player)
     }
 
     override fun getIds(): IntArray {
