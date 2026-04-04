@@ -7,6 +7,7 @@ import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
 import org.rs09.consts.Items
 import content.data.Quests
+import core.api.*
 
 /**
  * Battered book handler for the Elemental Workshop I quest
@@ -31,8 +32,9 @@ class BatteredBookHandler : InteractionListener {
     }
 
     override fun defineListeners() {
-        on(Items.BATTERED_BOOK_2886, IntType.ITEM, "read") { player, _ ->
+        on(Items.BATTERED_BOOK_2886, IntType.ITEM, "read") { player, node ->
             BookInterface.openBook(player, BookInterface.FANCY_BOOK_3_49, ::display)
+            storeBookInHouse(player, node)
             return@on true
         }
     }

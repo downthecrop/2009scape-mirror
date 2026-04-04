@@ -2,6 +2,8 @@ package core.game.node.entity.player;
 
 import content.global.handlers.item.equipment.BarrowsEquipment;
 import content.global.handlers.item.equipment.special.SalamanderSwingHandler;
+import content.global.skill.construction.decoration.pohstorage.POHStorageProxyContainer;
+import content.global.skill.construction.decoration.pohstorage.StorageState;
 import content.global.skill.runecrafting.PouchManager;
 import content.global.skill.slayer.SlayerEquipmentFlags;
 import core.api.ContentAPIKt;
@@ -129,7 +131,22 @@ public class Player extends Entity {
 
 	public Boolean isAfkLogout;
 
-	/**
+    private StorageState POHStorageState;
+
+    public final Container POHStorageProxyContainer = new POHStorageProxyContainer(this);
+
+    public StorageState getPOHStorageState() {
+        if (POHStorageState == null) {
+            POHStorageState = new StorageState(this);
+        }
+        return POHStorageState;
+    }
+
+    public void setPOHStorageState(StorageState state) {
+        this.POHStorageState = state;
+    }
+
+    /**
 	 * The inventory.
 	 */
 	private final Container inventory = new Container(28).register(new InventoryListener(this));

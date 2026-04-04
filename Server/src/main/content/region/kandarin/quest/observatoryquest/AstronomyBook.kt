@@ -2,6 +2,7 @@ package content.region.kandarin.quest.observatoryquest
 
 import content.global.handlers.iface.*
 import core.ServerConstants
+import core.api.storeBookInHouse
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
@@ -161,8 +162,9 @@ class AstronomyBook  : InteractionListener {
     }
 
     override fun defineListeners() {
-        on(Items.ASTRONOMY_BOOK_600, IntType.ITEM, "read") { player, _ ->
+        on(Items.ASTRONOMY_BOOK_600, IntType.ITEM, "read") { player, node ->
             BookInterface.openBook(player, BookInterface.FANCY_BOOK_3_49, ::display)
+            storeBookInHouse(player, node)
             return@on true
         }
     }

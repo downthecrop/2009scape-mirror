@@ -5,6 +5,7 @@ import content.global.handlers.iface.BookLine
 import content.global.handlers.iface.Page
 import content.global.handlers.iface.PageSet
 import core.api.setAttribute
+import core.api.storeBookInHouse
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
@@ -192,10 +193,11 @@ class SinkethsDiary : InteractionListener {
     }
 
     override fun defineListeners() {
-        on(Items.SINKETHS_DIARY_11002, IntType.ITEM, "read") { player, _ ->
+        on(Items.SINKETHS_DIARY_11002, IntType.ITEM, "read") { player, node ->
             setAttribute(player, "bookInterfaceCallback", ::display)
             setAttribute(player, "bookInterfaceCurrentPage", 0)
             display(player, 0, 0)
+            storeBookInHouse(player, node)
             return@on true
         }
     }

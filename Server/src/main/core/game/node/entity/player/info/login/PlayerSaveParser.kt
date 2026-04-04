@@ -16,7 +16,6 @@ import core.ServerConstants
 import core.api.log
 import core.game.node.entity.combat.graves.GraveController
 import core.game.node.entity.combat.graves.GraveType
-import core.game.world.GameWorld
 import core.tools.Log
 import java.io.File
 import java.io.FileReader
@@ -74,6 +73,7 @@ class PlayerSaveParser(val player: Player) {
         parseStatistics()
         parseAchievements()
         parsePouches()
+        parsePOHStorable()
     }
 
     fun runContentHooks()
@@ -91,6 +91,12 @@ class PlayerSaveParser(val player: Player) {
     fun parsePouches() {
         if (saveFile!!.containsKey("pouches"))
             player.pouchManager.parse(saveFile!!["pouches"] as JSONArray)
+    }
+
+    fun parsePOHStorable() {
+        val storableRaw = saveFile?.get("pohstorage") ?: return
+        val storableJson = storableRaw as JSONObject
+        player.getPOHStorageState().readJson(storableJson)
     }
 
     fun parseAttributes() {

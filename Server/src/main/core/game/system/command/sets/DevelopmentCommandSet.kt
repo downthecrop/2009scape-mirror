@@ -1,6 +1,8 @@
 package core.game.system.command.sets
 
 import content.global.activity.jobs.JobManager
+import content.global.skill.construction.decoration.pohstorage.Storable
+import content.global.skill.construction.decoration.pohstorage.StorableFamily
 import core.api.*
 import core.cache.Cache
 import core.cache.def.impl.DataMap
@@ -52,6 +54,57 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             for(item in farmKitItems){
                 player.inventory.add(Item(item))
             }
+        }
+
+        /**
+         * Adds a subset of POH storable item takeIds to the player's bank, filtered by StorableFamily type. These are stored in the costume room or bookcase.
+         * Usage: ::pohstorableitems [TYPE]
+         * Example: ::pohstorableitems BOOKCASE
+         * Example: ::pohstorableitems TREASURE_CHEST_MED
+         */
+        define("pohstorableitems", Privilege.ADMIN, "::pohstorableitems TYPE", "Adds POH storable items to bank. To see TYPEs, use the command with no argument.") { player, args ->
+            // Check for the argument (StorableFamily type)
+            val typeArg = if (args.size > 1) args[1].uppercase() else null
+
+            val allStorables = Storable.values()
+
+            // Filter the list of items based on the provided argument
+            val itemsToProcess = if (typeArg != null) {
+                try {
+                    val targetFamily = StorableFamily.valueOf(typeArg)
+                    allStorables.filter { it.type == targetFamily }
+                } catch (e: IllegalArgumentException) {
+                    sendMessage(player, "Error: Unknown StorableFamily type '$typeArg'. Valid types are:")
+                    StorableFamily.values().forEach { family ->
+                        sendMessage(player, family.toString())
+                    }
+                    return@define
+                }
+            } else {
+                // If no argument is provided, default to all storables
+                sendMessage(player, "Valid types are:")
+                StorableFamily.values().forEach { family ->
+                    sendMessage(player, family.toString())
+                }
+                return@define
+            }
+
+            if (itemsToProcess.isEmpty()) {
+                sendMessage(player, "No storable items found for type: '$typeArg'.")
+                return@define
+            }
+
+            var totalItemsAdded = 0
+
+            // Process the filtered list of storables
+            itemsToProcess.forEach { storable ->
+                storable.takeIds.forEach { itemId ->
+                    if (player.bank.add(Item(itemId))) {
+                        totalItemsAdded++
+                    }
+                }
+            }
+            return@define
         }
 
         define("cs2", Privilege.ADMIN, "::cs2 id args", "Allows you to call arbitrary cs2 scripts during runtime") {player, args -> 

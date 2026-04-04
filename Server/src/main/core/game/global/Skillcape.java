@@ -1,5 +1,6 @@
 package core.game.global;
 
+import content.global.skill.construction.decoration.pohstorage.StorableFamily;
 import core.game.container.Container;
 import core.game.dialogue.FacialExpression;
 import core.game.dialogue.FacialExpression;
@@ -66,6 +67,25 @@ public final class Skillcape {
 				}
 			}
 		}
+
+        // trim any skillcapes in the player's POH storage
+        content.global.skill.construction.decoration.pohstorage.StorageState poh = player.getPOHStorageState();
+        content.global.skill.construction.decoration.pohstorage.StorageContainer rack = poh.getContainer(StorableFamily.CAPE_RACK_SKILL);
+
+        // count the capes
+        java.util.List<Integer> toReplace = new java.util.ArrayList<>();
+        for (int itemId : rack.getItems()) {
+            if (getCapeIndex(new Item(itemId)) != -1) {
+                toReplace.add(itemId);
+            }
+        }
+
+        // replace the untrimmed IDs with trimmed IDs
+        for (int oldId : toReplace) {
+            int skillIndex = getCapeIndex(new Item(oldId));
+            rack.withdraw(oldId);
+            rack.addItem(getTrimmed(skillIndex).getId());
+        }
 	}
 
 	/**

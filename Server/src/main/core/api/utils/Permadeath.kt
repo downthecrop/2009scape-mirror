@@ -81,6 +81,7 @@ fun permadeath(target: Player) {
 
     // House data
     target.houseManager.createNewHouseAt(HouseLocation.NOWHERE)
+    target.getPOHStorageState().clear()
 
     // Achievements
     for (type in DiaryType.values()) {

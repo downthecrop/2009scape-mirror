@@ -4,6 +4,7 @@ import core.plugin.Initializable
 import core.game.system.command.Command
 import core.game.system.command.Privilege
 import core.api.*
+import core.game.interaction.QueueStrength
 
 @Initializable
 class ConfigCommandSet : CommandSet(Privilege.ADMIN){
@@ -49,6 +50,28 @@ class ConfigCommandSet : CommandSet(Privilege.ADMIN){
             }
             val id = args[1].toIntOrNull() ?: reject(player, "INVALID INTERFACE ID")
             player.interfaceManager.openComponent(id as Int)
+        }
+
+        define("ifaces", Privilege.ADMIN, "::ifaces <From Interface ID> <To Interface ID> <(opt) Duration Per Interface>", "Opens interfaces from the From ID to the To ID, with a delay of 3 between each, unless specified otherwise"){ player, args ->
+
+            if (args.size < 3) {
+                reject(player, "Syntax error: ::anims <From Interface ID> <To Interface ID> <(opt) Duration Per Interface>")
+            }
+            val ifaceFrom = args[1].toInt()
+            val ifaceTo = args[2].toInt()
+            val ifaceDelay = (args.getOrNull(3) ?: "3").toInt()
+
+            queueScript(player, 1, QueueStrength.WEAK) { stage: Int ->
+                val ifaceId = ifaceFrom + stage
+                player.interfaceManager.openComponent(ifaceId)
+                notify(player, "Opening interface $ifaceId")
+
+                if (ifaceId == ifaceTo) {
+                    return@queueScript stopExecuting(player)
+                }
+
+                return@queueScript delayScript(player, ifaceDelay)
+            }
         }
     }
 }

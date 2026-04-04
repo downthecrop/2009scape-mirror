@@ -5,6 +5,7 @@ import content.global.handlers.iface.BookLine
 import content.global.handlers.iface.Page
 import content.global.handlers.iface.PageSet
 import core.api.setAttribute
+import core.api.storeBookInHouse
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.game.node.entity.player.Player
@@ -288,8 +289,9 @@ class VarmensNotes : InteractionListener {
     }
 
     override fun defineListeners() {
-        on(Items.VARMENS_NOTES_4616, IntType.ITEM, "read") { player, _ ->
+        on(Items.VARMENS_NOTES_4616, IntType.ITEM, "read") { player, node ->
             BookInterface.openBook(player, BookInterface.FANCY_BOOK_3_49, ::display)
+            storeBookInHouse(player, node)
             return@on true
         }
     }

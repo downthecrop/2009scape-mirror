@@ -13,6 +13,7 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import core.plugin.Plugin
 import org.rs09.consts.Items
+import core.api.*
 
 private val BOOK = Item(Items.GOBLIN_SYMBOL_BOOK_5009)
 @Initializable
@@ -38,7 +39,7 @@ class LostTribeOptionHandler : OptionHandler(){
         node ?: return false
         when(node.id){
             5008 -> player.interfaceManager.open(Component(50))
-            5009 -> player.interfaceManager.open(Component(183))
+            5009 -> player.interfaceManager.open(Component(183)).also { storeBookInHouse(player, node) }
             6916 -> {
                 if(!player.inventory.containsItem(BOOK) && !player.bank.containsItem(BOOK) && player.questRepository.getQuest(
                         Quests.THE_LOST_TRIBE).getStage(player) >= 41){

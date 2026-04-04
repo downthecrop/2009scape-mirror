@@ -10,10 +10,15 @@
 9	ahoy_runedraw
 10	ahoy_windspeed
 11	bank_deposit_box
+12  pulsing yellow rectangle
 13	bankpin_main
 14	bankpin_settings
 15	banner_padlock_keys
 16	banner_anti_virus
+17  nothing
+18  heads for the welcome screen?
+19  heads for the welcome screen?
+20  heads for the welcome screen?
 21	banner_scamming
 22	banner_security
 23	banner_xmas
@@ -85,6 +90,7 @@
 89 stab slash lunge block
 90 staff with autocast
 91 darts or knives
+92 nothing
 93 whip
 94	confirm_destroy
 95	sailing_transport_world_map
@@ -315,6 +321,7 @@
 320	stats
 321	swamp_boatjourney
 322	swamp_boatjourney_back
+323 tai bwo wannai parcel service
 324	tanner
 325	target
 326	teleport_other
@@ -458,7 +465,7 @@
 464	emotes
 465 ooglog ogress opens health spa
 466 switch diagram
-467 menu with big buttons
+467 POH_costume room
 468 diango item return
 469	zep_balloon_map
 470	zep_interface
@@ -511,6 +518,7 @@
 517 turn off black
 518 old follower inv?
 519	objbox
+520 dream_cyrisus's courage
 521	dream_cyrisus
 522	dream_monster_stat
 523	dream_player_stats
@@ -565,6 +573,7 @@
 572	cws_warning_13
 573	cws_warning_12
 574	cws_warning_1
+575 all fired up beacon status
 576	cws_warning_8
 577	cws_warning_18
 578	cws_warning_15
@@ -575,6 +584,8 @@
 583	cws_doomsayer
 584	kr_king_statue
 585	kr_pyramid_escape
+586 change of address form for the citizens of seers' village
+587 meet at camel left half
 588	kr_picklock
 589	clanjoin
 590	clansetup
@@ -694,7 +705,21 @@
 704 p safety 6
 705 p safety 7
 706 fuck this
+707 player safety
+708 player safety
+709 player safety
+710 player safety
+711 player safety
+712 meet at legend's guild from kent
+713 slight darkness overlay
+714 nothing
 715	banner_easter08
+716 summoning_chocatrice
+717 incubator controls
+718 select an option
+719 operating your incubator
+720 chocatrice hatching
+721 chocatrice hatching
 722	summoning_side
 723	carpet_info
 724	carpet_runesquares
@@ -703,6 +728,18 @@
 727	carpet_draughts
 728	carpet_main
 729	carpet_ticket
+730 bounty hunter?
+731 bounty hunter?
+732 fog rewards shop
+733 ivandis flail
+734 fairy ring main
+735 fairy ring log
+736 dragon hatchling forge
+737 pick a kitten
+738 dillo_tok-xil-im
+739 dillo_tzhaar numbers
+740 open your stats prompt
+741 congratulations!
 742	graphics_options
 743	sound_options
 744	loginscreen
@@ -714,42 +751,79 @@
 750	topstat_run
 751	filterbuttons
 752	chattop
+753 nothing
 754	pmchat
 755	worldmap
 756	boardgames_options
 757	npcchatlarge
 758	canoe_travel
+759 display mode prompt
 760	tutorial2_objbox
+761 tutorial2_sir vant's requests
 762	bank_v2_main
 763	bank_v2_side
+764 tutorial2_minimap tutorial
 765	tutorial2_switch_task
 766	tutorial2_death
 767	bank_v2_help
+768 nothing
 769	tutorial2_text
+770 black screen
+771 tutorial character creation
+772 returned items screen
+773 luc2?_guthix and swirling runes cutscene
+774 where do you want to rub the key
+775 sum1?_spooky overlay, spirit of summer?
+776 sum1?_spooky overlay fade to white
+777 sum1?_sepia overlay
 778	rcguild_side
 779	rcguild_rewards
 780	rcguild_map
 781	rcguild_overlay
+782 telescope star
 783	crcs_tightrope
 784	crcs_side
 785	crcs_rewards
 786	crcs_equipment
+787 star landing time discovered by board
 788	crcs_scoreboard
+789 set/clear caller
 790	clanwars_end
 791	clanwars_setup
 792	clanwars_setup_side
+793 clanwars_free for all safe
+794 varrock census
+795 black overlay
+796 ghostly mage
+797 ancient magicks
+798 warning you are currently carrying a lot of items
+799 holding pen
 800	banner_halloween
 801	quickchat_locked
 802	sc_tutorial_overlay
 803	sc_scores_border
+804 nothing
 805	sc_item_transfer
 806	sc_remaining_clay
+807 nothing
+808 yellow squares overlay
+809 sc_score overlay and timer
 810	sc_scores
 811	sc_reward_shop
+812 clan leader and allied leaders
 813	sc_processing
 814	luc2_chapter2
+815 luc2_door opening text
 816	luc2_telescope_view
+817 luc2_door opening
+818 luc2_descending cliff
+819 luc2_probably
+820 luc2_book pages
+821 luc2_swirling mass
 822	luc2_chapter3
+823 luc2_hand with opening orb
+824 luc2_pulsing black screen
+825 luc2_ascending cliff
 826	luc2_chapter1
 827	luc2_lucien_projectiles
 828 journal with map?
@@ -758,3 +832,8 @@
 831 drawings on ice again
 832 again
 833 again ALL SEEM TO BE FOR BARB ASSAULT
+834 nothing
+835 nothing
+836 nothing
+837 2009scape rewards shop
+838 anything beyond this is a crash

@@ -5,6 +5,8 @@ import content.data.Quests
 import content.data.consumables.*
 import content.data.skill.SkillingTool
 import content.global.handlers.iface.ge.StockMarket
+import content.global.skill.construction.decoration.pohstorage.StorableFamily
+import content.global.skill.construction.decoration.pohstorage.StorageInterface
 import content.global.skill.slayer.SlayerEquipmentFlags
 import content.global.skill.slayer.SlayerFlags
 import content.global.skill.slayer.SlayerManager
@@ -287,6 +289,7 @@ fun hasAnItem(player: Player, id: Int, checkSecondBank: Boolean): ContainerisedI
  * @return A ContainerisedItem containing the container and the item ID if found, otherwise ContainerisedItem(null, -1) if not found
  */
 fun hasAnItem(player: Player, ids: Array<Int>, checkSecondBank: Boolean): ContainerisedItem {
+    // Search bank/equip/inv and return if item is found there.
     val searchSpace = if (checkSecondBank) {
         arrayOf(player.inventory, player.equipment, player.bankPrimary, player.bankSecondary)
     } else {
@@ -299,6 +302,20 @@ fun hasAnItem(player: Player, ids: Array<Int>, checkSecondBank: Boolean): Contai
             }
         }
     }
+
+    // Check all costume storage containers and return if item is found there.
+    for (id in ids) {
+        if (StorableFamily.values().any { family ->
+                player.getPOHStorageState()
+                    .getContainer(family)
+                    .contains(id)
+            }) {
+            // Note that this proxy container is a fake container just used to get the correct return type.
+            return ContainerisedItem(player.POHStorageProxyContainer, id)
+        }
+    }
+
+    // Item is not found.
     return ContainerisedItem(null, -1)
 }
 
@@ -2375,6 +2392,68 @@ fun hasHouse(player: Player): Boolean {
 
 fun Player.getCutscene(): Cutscene? {
     return getAttribute<Cutscene?>(this, Cutscene.ATTRIBUTE_CUTSCENE, null)
+}
+
+/**
+ * Stores a book in the POH storage
+ * If this is the first time reading the book, store it in POH bookcase if eligible
+ * @param player the player
+ * @param itemID the ID of the book that was interacted with
+ * @return True if the item was identified and processed (whether read or not)
+ *         False if the node was not a book or did not have a bitIndex
+ */
+fun storeBookInHouse(player: Player, itemId: Int): Boolean {
+    // find the corresponding Storable object
+    val storable = StorageInterface.findStorableByDisplayId(itemId) ?: return false
+
+    // check if the storable is tracked
+    if (storable.bitIndex == -1) {
+        return true
+    }
+
+    // retrieve bitfields where the values of already-read books are stored, and if the book has been read previously
+    val bits = StorageInterface.BookcaseBitfields.get(player)
+    val isRead = StorageInterface.BookcaseBitfields.isBitSet(bits, storable.bitIndex)
+
+    // special check for games book. It isn't normally available and is only obtainable from the bookcase. You can't read it without first having it, and if you lose it you can't go back to somewhere else to get a new copy. Thus, it is always spawned in.
+    if(itemId == Items.GAME_BOOK_7681) {
+        val updatedBits = StorageInterface.BookcaseBitfields.setBit(bits, storable.bitIndex)
+        val container = StorageInterface.getStorageContainer(player, StorableFamily.BOOKCASE)
+        if (!isRead) {
+            StorageInterface.BookcaseBitfields.set(player, updatedBits)
+            container.addItem(itemId)
+        } else {
+            container.addItem(itemId)
+        }
+
+        return true
+    }
+
+    // if book is not read, store it in house
+    if (!isRead) {
+        // update bitfields
+        val updatedBits = StorageInterface.BookcaseBitfields.setBit(bits, storable.bitIndex)
+        StorageInterface.BookcaseBitfields.set(player, updatedBits)
+
+        // add to the POH container
+        val container = StorageInterface.getStorageContainer(player, StorableFamily.BOOKCASE)
+        container.addItem(itemId)
+    }
+    return true
+}
+
+/**
+ * Stores a book in the POH storage
+ * If this is the first time reading the book, store it in POH bookcase if eligible
+ * Used inside interaction listeners ("read") on nodes (books)
+ * @param player the player
+ * @param node the node (book) that was interacted with
+ * @return True if the item was identified and processed (whether read or not)
+ *         False if the node was not a book or did not have a bitIndex
+ */
+fun storeBookInHouse(player: Player, node: Node): Boolean {
+    val bookId = (node as? Item)?.id ?: return false
+    return storeBookInHouse(player, bookId)
 }
 
 fun Player.getCutsceneStage(): Int {

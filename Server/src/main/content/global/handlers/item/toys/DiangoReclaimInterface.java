@@ -1,5 +1,6 @@
 package content.global.handlers.item.toys;
 
+import content.global.skill.construction.decoration.pohstorage.StorableFamily;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -46,7 +47,7 @@ public class DiangoReclaimInterface extends ComponentPlugin {
         Item[] reclaimables = getEligibleItems(player);
         player.setAttribute("diango-reclaimables", reclaimables);
 
-        //filter out items the player already has in their bank, inventory, or equipped
+        //filter out items the player already has in their bank, POH, inventory, or equipped
 
         //only send items if there are some to send
         if(reclaimables.length > 0) {
@@ -90,7 +91,7 @@ public class DiangoReclaimInterface extends ComponentPlugin {
 
     public static Item[] getEligibleItems (Player player) {
         return ITEMS.stream().filter(Objects::nonNull)
-            .filter(item -> !player.getEquipment().containsItem(item) && !player.getInventory().containsItem(item) && !player.getBank().containsItem(item)
+            .filter(item -> !player.getEquipment().containsItem(item) && !player.getInventory().containsItem(item) && !player.getBank().containsItem(item) && !player.getPOHStorageState().getContainer(StorableFamily.TOY_BOX).contains(item.getId())
                     && (item.getId() != 14654
                     || (!(inInventory(player, 14655, 1) || inEquipment(player, 14656, 1)) && player.getAttribute("sotr:purchased",false))
                     ))

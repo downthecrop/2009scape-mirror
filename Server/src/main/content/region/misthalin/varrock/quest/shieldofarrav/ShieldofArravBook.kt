@@ -11,6 +11,7 @@ import org.rs09.consts.Items
 import content.data.Quests
 import core.api.getQuestStage
 import core.api.setQuestStage
+import core.api.storeBookInHouse
 
 /**
  * Shield of Arrav Book
@@ -97,8 +98,9 @@ class ShieldofArravBook : InteractionListener {
     }
 
     override fun defineListeners() {
-        on(Items.BOOK_757, IntType.ITEM, "read") { player, _ ->
+        on(Items.BOOK_757, IntType.ITEM, "read") { player, node ->
             BookInterface.openBook(player, BookInterface.FANCY_BOOK_3_49, ::display)
+            storeBookInHouse(player, node)
             return@on true
         }
     }

@@ -1,6 +1,7 @@
 package content.global.skill.construction
 
 import core.api.sendMessage
+import core.api.storeBookInHouse
 import core.game.dialogue.DialogueInterpreter
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -52,7 +53,7 @@ class ConstructionGuideBook : InteractionListener {
 
     override fun defineListeners() {
         // There is supposedly a book here.
-        on(Items.CONSTRUCTION_GUIDE_8463, IntType.ITEM, "read") { player, _ ->
+        on(Items.CONSTRUCTION_GUIDE_8463, IntType.ITEM, "read") { player, node ->
             if (settings!!.isDevMode && settings!!.isBeta) {
                 for (item in RESOURCES) {
                     if (!player.inventory.contains(item.id, item.amount)) {
@@ -60,6 +61,7 @@ class ConstructionGuideBook : InteractionListener {
                     }
                 }
             }
+            storeBookInHouse(player, node)
             sendMessage(player, "Upon reading the book you discover you're supposed to use these resources to test out construction. Report all bugs on the forums.")
             return@on true
         }
