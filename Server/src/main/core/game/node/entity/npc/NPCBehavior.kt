@@ -113,10 +113,8 @@ open class NPCBehavior(vararg val ids: Int = intArrayOf()) : ContentInterface {
      * @param shouldSendMessage whether the core combat code believes you should send a message e.g. "You can't attack this NPC with that weapon"
      * @return whether the attacker should be able to attack this NPC.
      */
-    open fun canBeAttackedBy(self: NPC, attacker: Entity, style: CombatStyle, shouldSendMessage: Boolean) : Boolean {
-        if (attacker is Player && !self.definition.hasAction("attack"))
-            return false
-        return true
+    open fun canBeAttackedBy(self: NPC, attacker: Entity, style: CombatStyle, shouldSendMessage: Boolean): Boolean {
+        return !(attacker is Player && !self.definition.hasAction("attack") && !self.definition.hasAction("smash-ice"))
     }
 
     /**

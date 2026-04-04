@@ -770,10 +770,14 @@ public class Player extends Entity {
 
 	@Override
 	public boolean continueAttack(Entity target, CombatStyle style, boolean message) {
-		if (target instanceof NPC
-                && !((NPC) target).getDefinition().hasAction("attack")
-                && !((NPC) target).isIgnoreAttackRestrictions(this)) {
-			return false;
+		if (target instanceof NPC) {
+			NPC npc = (NPC) target;
+			NPC shown = npc.getShownNPC(this);
+			boolean canAttack = shown.getDefinition().hasAction("attack")
+					|| shown.getDefinition().hasAction("smash-ice");
+			if (!canAttack && !npc.isIgnoreAttackRestrictions(this)) {
+				return false;
+			}
 		}
 		if (target instanceof Player) {
 			Player p = (Player) target;
