@@ -2,6 +2,7 @@ package content.global.skill.construction;
 
 
 import core.api.Container;
+import core.game.world.map.Location;
 import org.rs09.consts.Items;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
@@ -93,6 +94,28 @@ public final class HouseZone extends MapZone {
     public boolean leave(Entity e, boolean logout) {
         if (e instanceof Player) {
             Player p = (Player) e;
+
+            // if the player is moving between the dungeon and main house, don't trigger the leave sequence
+            if (!logout) {
+                // current loc
+                Location dest = p.getProperties().getTeleportLocation();
+                int currentRegionId = p.getLocation().getRegionId();
+                int houseId = house.getHouseRegion().getId();
+                int dungeonId = (house.getDungeonRegion() != null) ? house.getDungeonRegion().getId() : -1;
+
+                // check if still in house
+                boolean currentlyInHouse = (currentRegionId == houseId || currentRegionId == dungeonId);
+
+                // check if moving between house regions
+                int destRegionId = (dest != null) ? dest.getRegionId() : -1;
+                boolean movingToHouse = (destRegionId == houseId || destRegionId == dungeonId);
+
+                // if yes, return true and stop the leave sequence
+                if (currentlyInHouse || movingToHouse) {
+                    return true;
+                }
+            }
+
             remove_items(p);
             // The below tears down the house if the owner was the one who left
             if (house == p.getHouseManager()) {
@@ -105,11 +128,11 @@ public final class HouseZone extends MapZone {
                         Region dr = dungRemove != -1 ? RegionManager.forId(dungRemove) : null;
                         RegionManager.removeRegion(toRemove);
                         unregisterRegion(toRemove);
-                        r.setActive(false);
+                        r.flagInactive();
                         if (dungRemove != -1) {
                             RegionManager.removeRegion(dungRemove);
                             unregisterRegion(dungRemove);
-                            dr.setActive(false);
+                            dr.flagInactive();
                         }
                         return true;
                     }

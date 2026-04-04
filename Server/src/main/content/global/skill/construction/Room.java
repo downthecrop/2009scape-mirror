@@ -176,9 +176,10 @@ public final class Room {
 				for (int i = 0; i < BuildRegionChunk.ARRAY_SIZE; i++) {
 					Scenery object = chunk.get(x, y, i);
 					if (object != null) {
+                        int id = object.getId();
 						boolean isBuilt = object instanceof Constructed;
-						boolean isWall  = object.getId() == 13065 || object.getId() == house.getStyle().getWallId();
-						boolean isDoor  = object.getId() == house.getStyle().getDoorId() || object.getId() == house.getStyle().getSecondDoorId();
+                        boolean isWall  = HousingStyle.isDungeonWall(id) || id == house.getStyle().getWallId();
+                        boolean isDoor  = id == house.getStyle().getDoorId() || id == house.getStyle().getSecondDoorId();
 						if (!isBuilt && !isWall && !isDoor) {
 							SceneryBuilder.remove(object);
 							chunk.remove(object);
