@@ -323,9 +323,17 @@ public final class DialogueInterpreter {
 
     /**
      * Send a message with an item next to it.
-     * @param itemId The item id.
+     * Accepts item IDs.
      */
     public Component sendItemMessage(int itemId, String... messages) {
+        return sendItemMessage(new Item(itemId), messages);
+    }
+
+    /**
+     * Send a message with an item next to it.
+     * Accepts Items.
+     */
+    public Component sendItemMessage(final Item item, String... messages) {
         // Select interface based on number of messages - 241 (1 line) to 244 (4 lines)
         int interfaceId = 240 + messages.length;
         player.getPacketDispatch().sendInterfaceConfig(interfaceId, 1, false);
@@ -337,8 +345,8 @@ public final class DialogueInterpreter {
             player.getPacketDispatch().sendString(messages[i], interfaceId, 4+i);
         }
         // Set the first Item (child 1)
-        ItemDefinition itemDef = ItemDefinition.forId(itemId);
-        player.getPacketDispatch().sendItemOnInterface(itemId, 1, interfaceId, 2);
+        ItemDefinition itemDef = ItemDefinition.forId(item.getId());
+        player.getPacketDispatch().sendItemOnInterface(item.getId(), item.getAmount(), interfaceId, 2);
         player.getPacketDispatch().sendAngleOnInterface(interfaceId, 2, itemDef.getModelZoom() / 2, itemDef.getModelRotationX(), itemDef.getModelRotationY());
         player.getPacketDispatch().sendRepositionOnInterface(interfaceId, 2, 45, 46);
         // Hide the second item which seems to be used for double items (child 1)
@@ -362,15 +370,8 @@ public final class DialogueInterpreter {
     }
 
     /**
-     * Send a message with an item next to it.
-     */
-    public Component sendItemMessage(final Item item, String... messages) {
-        return sendItemMessage(item.getId(), messages);
-    }
-
-    /**
-     * Send a message with an item next to it.
-     * @param message The message.
+     * Send a message with two items next to it.
+     * Accepts item IDs.
      */
     public Component sendDoubleItemMessage(int first, int second, String... message) {
         return sendDoubleItemMessage(new Item(first), new Item(second), message);
@@ -378,6 +379,7 @@ public final class DialogueInterpreter {
 
     /**
      * Send a message with two items next to it.
+     * Accepts Items.
      * Note that interface 241 to 244 contains 2 childs for images, which is used for sendDoubleItemMessage.
      * @param first The first item to display.
      * @param second The second item to display.
