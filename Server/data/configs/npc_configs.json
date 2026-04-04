@@ -9386,6 +9386,7 @@
     "attack_level": "1"
   },
   {
+    "examine": "On special duty to protect the Canilleans.",
     "name": "Guard",
     "defence_level": "1",
     "safespot": null,
@@ -9398,18 +9399,19 @@
     "attack_level": "1"
   },
   {
+    "examine": "A member of the Hazeel cult.",
+    "melee_animation": "811",
+    "respawn_delay": "60",
+    "defence_animation": "425",
     "death_animation": "836",
     "name": "Clivet",
     "defence_level": "1",
     "safespot": null,
     "lifepoints": "25",
-    "melee_animation": "811",
     "strength_level": "1",
     "id": "893",
     "range_level": "1",
-    "respawn_delay": "60",
-    "attack_level": "1",
-    "defence_animation": "425"
+    "attack_level": "1"
   },
   {
     "examine": "A member of the Hazeel cult.",
@@ -74201,6 +74203,7 @@
     "id": "880"
   },
   {
+    "examine": "The Carnillean family chef.",
     "name": "Claus the chef",
     "id": "886"
   },
@@ -74209,14 +74212,17 @@
     "id": "888"
   },
   {
+    "examine": "Ceril Carnillean's wife.",
     "name": "Henryeta Carnillean",
     "id": "889"
   },
   {
+    "examine": "The Carnellian family butler.",
     "name": "Butler Jones",
     "id": "890"
   },
   {
+    "examine": "Leader of the Hazeel cult.",
     "name": "Alomone",
     "id": "891"
   },

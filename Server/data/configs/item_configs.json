@@ -132205,5 +132205,15 @@
     "examine": "Emperor of all he surveys.",
     "name": "Penguin",
     "id": "12764"
+  },
+  {
+    "examine": "This key opens a chest in the Carnillean household.",
+    "name": "Chest key",
+    "id": "709"
+  },
+  {
+    "examine": "This stuff looks nasty.",
+    "name": "Poison",
+    "id": "273"
   }
 ]
