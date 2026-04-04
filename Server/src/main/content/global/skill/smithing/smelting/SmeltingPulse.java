@@ -178,7 +178,7 @@ public class SmeltingPulse extends SkillPulse<Item> {
     }
 
     /**
-     * Checks if the forging is a succes.
+     * Checks if the forging is a success.
      *
      * @param player the player.
      * @return {@code True} if success.
@@ -190,7 +190,9 @@ public class SmeltingPulse extends SkillPulse<Item> {
                 if (charges <= 0) {
                     if (removeItem(player, Items.RING_OF_FORGING_2568, Container.EQUIPMENT)) {
                         charges = 140;
-                        sendMessage(player, "Your ring of forging uses up its last charge and disintegrates.");
+                        sendMessage(player, "Your Ring of forging uses up its last charge and disintegrates.");
+                        // stop the smelting queue
+                        stop();
                     } else {
                         log(this.getClass(), Log.ERR, "Failed to delete empty ring of forging for player " + player.getName());
                         return false; //unfair but prevents exploit if the impossible happens
