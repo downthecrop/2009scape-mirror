@@ -1,31 +1,37 @@
 package content.global.bots
 
+import content.global.skill.crafting.spinning.SpinningItem
+import content.global.skill.crafting.spinning.SpinningPulse
+import core.game.bots.*
 import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
 import core.game.node.entity.skill.Skills
-import content.global.skill.crafting.spinning.SpinningItem
-import content.global.skill.crafting.spinning.SpinningPulse
 import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.map.path.Pathfinder
 import org.rs09.consts.Items
-import core.game.bots.SkillingBotAssembler
-import core.game.bots.Script
 
+@PlayerCompatible
+@ScriptName("Seers' Village Flax Spinning")
+@ScriptDescription("Pick flax and spin it into string. Start in the flax field near Seers' Village.")
+@ScriptIdentifier("seers_flax")
 class SeersFlax : Script(){
+    val waypoint1 = Location(2730, 3460, 0) // South of Seers' Village
+    val waypoint2 = Location(2737, 3441, 0)  // Outside flax field
     var state = State.PICKING
     var stage = 0
     var doorOpen = false
     override fun tick() {
 
         when(state){
-
             State.PICKING -> {
-                val flax = scriptAPI.getNearestNode(2646,true)
-                flax?.interaction?.handle(bot,flax.interaction[1])
-                if(bot.inventory.getAmount(Items.FLAX_1779) > 25){
+                if (bot.inventory.freeSlots() == 0) {
                     state = State.TO_SPINNER
+                    return
                 }
+
+                val flax = scriptAPI.getNearestNode("Flax", true)
+                scriptAPI.interact(bot, flax, "Pick")
             }
 
             State.TO_SPINNER -> {
@@ -101,14 +107,13 @@ class SeersFlax : Script(){
             }
 
             State.RETURN_TO_FLAX -> {
-                if(bot.location == Location.create(2756, 3478, 0))
-                    Pathfinder.find(bot,Location.create(2726, 3486, 0)).walk(bot)
-                if(stage == 0)
-                    Pathfinder.find(bot,Location.create(2726, 3486, 0)).walk(bot).also { stage++ }
-                when(bot.location){
-                    Location.create(2726, 3486, 0) -> Pathfinder.find(bot,Location.create(2729, 3469, 0)).walk(bot)
-                    Location.create(2729, 3469, 0) -> Pathfinder.find(bot,Location.create(2734, 3447, 0)).walk(bot)
-                    Location.create(2734, 3447, 0) -> state = State.PICKING.also { stage = 0 }
+                val flax = scriptAPI.getNearestNode("Flax", true)
+                if (flax != null) {
+                    state = State.PICKING
+                } else if (bot.location.withinMaxnormDistance(waypoint1, 5)) {
+                    Pathfinder.find(bot, waypoint2).walk(bot)
+                } else {
+                    Pathfinder.find(bot, waypoint1).walk(bot)
                 }
             }
 
@@ -124,7 +129,6 @@ class SeersFlax : Script(){
 
             State.TELE_CAMELOT -> {
                 scriptAPI.teleport(Location.create(2756, 3478, 0))
-                stage = 0
                 state = State.RETURN_TO_FLAX
             }
 
