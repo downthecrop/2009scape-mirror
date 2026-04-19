@@ -81,6 +81,33 @@ class SpawnCommandSet : CommandSet(Privilege.ADMIN){
             player.inventory.add(item)
         }
 
+
+        /**
+         * Spawns multiple items with the given ID
+         */
+        define("items", usage = "::items <lt>start-id<gt> <lt>end-id<gt> [amount]", description = "Loops through item ids from 'start-id' to 'end-id' and spawns 'amount' of them in your inventory."){player,args ->
+            if (args.size < 3) {
+                reject(player,"You must specify start and end item ids.")
+                return@define
+            }
+            val start = args[1].toIntOrNull() ?: return@define
+            val end = args[2].toIntOrNull() ?: return@define
+            var amount = (args.getOrNull(3) ?: "1").toInt()
+            for (id in start..end) {
+                if (id > Cache.getItemDefinitionsSize()) {
+                    reject(player,"Item ID '$id' out of range.")
+                    return@define
+                }
+                val item = Item(id, amount)
+                val max = player.inventory.getMaximumAdd(item)
+                if (amount > max) {
+                    amount = max
+                }
+                item.setAmount(amount)
+                player.inventory.add(item)
+            }
+        }
+
         /**
          * Spawn object with given ID at the player's location
          */

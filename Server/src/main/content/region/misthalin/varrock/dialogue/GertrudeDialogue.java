@@ -420,7 +420,7 @@ public final class GertrudeDialogue extends DialoguePlugin {
 	 * @return the item.
 	 */
 	public Item getKitten() {
-		return new Item(RandomFunction.random(1555, 1560));
+		return new Item(RandomFunction.random(1555, 1561));
 	}
 
 	@Override

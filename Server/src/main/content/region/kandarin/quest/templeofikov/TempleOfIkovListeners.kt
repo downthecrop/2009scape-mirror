@@ -137,20 +137,6 @@ class TempleOfIkovListeners : InteractionListener {
             teleport(player, Location.create(2649, 9804, 0))
         }
 
-        // don't let light extinguish or cape take off
-        val lightSourceProducts = LightSource.values().map { it.product.id }.toIntArray()
-
-        on(lightSourceProducts, ITEM, "drop") { player, light ->
-            val active = LightSource.getActiveLightSource(player).product.id
-            if (player.location.isInRegion(10648) && light.id == active) {
-                sendMessage(player, "Dropping the " + LightSource.getActiveLightSource(player).product.name.lowercase() + " would leave you without a light source.")
-                return@on false
-            }
-            val removed = removeItem(player, light.id)
-            if (removed) produceGroundItem(player, light.id)
-            return@on true
-        }
-
         // B: Attach lever, authentic if you log out, the lever is lost, and you have to do that bridge again
         onUseWith(SCENERY, Items.LEVER_83, Scenery.LEVER_BRACKET_86) { player, used, with ->
             removeItem(player, used)
