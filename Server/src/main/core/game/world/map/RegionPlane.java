@@ -257,13 +257,21 @@ public final class RegionPlane {
 	public void add(GroundItem item) {
 		Location l = item.getLocation();
 		RegionChunk c = getRegionChunk(l.getLocalX() / RegionChunk.SIZE, l.getLocalY() / RegionChunk.SIZE);
+		// This adds it to the chunk to be interactable with.
 		if (!c.getItems().add(item)) {
 			return;
 		}
 		GroundItem g = (GroundItem) item;
 		if (g.isPrivate()) {
 			if (g.getDropper() != null) {
-				PacketRepository.send(ConstructGroundItem.class, new BuildItemContext(g.getDropper(), item));
+				// Limit it to the region(8x8 square) you are in +/-2 regions, as the chunk loader will load it all over again.
+				// This is based on MapChunkRenderer which seems to "update" 2 chunks away.
+				// Look at RegionChunk.java ConstructGroundItem.write(buffer, item);
+				if (Math.abs(g.getDropper().getLocation().getRegionX() - l.getRegionX()) <= 2 &&
+						Math.abs(g.getDropper().getLocation().getRegionY() - l.getRegionY()) <= 2 &&
+						g.getDropper().getLocation().getZ() == l.getZ()) {
+					PacketRepository.send(ConstructGroundItem.class, new BuildItemContext(g.getDropper(), item));
+				}
 			}
 			return;
 		}
