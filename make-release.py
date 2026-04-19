@@ -61,9 +61,9 @@ title: More changes in Gielinor
 tags: news
 layout: newspost
 date: {current_date} 00:00:00 +0000
-authors: ryannathans
+authors: "Update Bot"
 excerpt: "There have been some more changes in Gielinor..."
-modtype: "Lead Developer"
+modtype: "Bot"
 avatar: avatar8fa9.gif
 ---
 Greetings Explorers
