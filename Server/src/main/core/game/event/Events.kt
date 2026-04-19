@@ -6,6 +6,7 @@ import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.link.SpellBookManager.SpellBook
+import core.game.node.entity.player.link.SpellBookManager.SpellbookChangeSource
 import core.game.node.entity.player.link.TeleportManager.TeleportType
 import core.game.node.entity.player.link.prayer.PrayerType
 import core.game.node.item.Item
@@ -34,6 +35,7 @@ data class InterfaceCloseEvent(val component: Component) : Event
 data class AttributeSetEvent(val entity: Entity, val attribute: String, val value: Any) : Event
 data class AttributeRemoveEvent(val entity: Entity, val attribute: String) : Event
 data class SpellCastEvent(val spellBook: SpellBook, val spellId: Int, val target: Node? = null) : Event
+data class SpellbookChangeEvent(val oldSpellBook: SpellBook, val newSpellBook: SpellBook, val source: SpellbookChangeSource) : Event
 data class ItemAlchemizationEvent(val itemId: Int, val isHigh: Boolean) : Event
 data class ItemEquipEvent(val itemId: Int, val slotId: Int) : Event
 data class ItemUnequipEvent(val itemId: Int, val slotId: Int) : Event

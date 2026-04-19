@@ -1,14 +1,15 @@
 package content.global.skill.magic.ancient;
 
-import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.diary.DiaryType;
-import core.game.node.entity.combat.spell.MagicSpell;
-import core.game.node.entity.combat.spell.Runes;
+import core.game.event.SpellCastEvent;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
+import core.game.node.entity.combat.spell.MagicSpell;
+import core.game.node.entity.combat.spell.Runes;
 import core.game.node.entity.combat.spell.SpellType;
+import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.entity.player.link.TeleportManager.TeleportType;
+import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -67,6 +68,7 @@ public final class AncientTeleportPlugin extends MagicSpell {
 				return false;
 			}
 			homeTeleport((Player) entity, Location.create(3087, 3495, 0));
+		    entity.dispatch(new SpellCastEvent(SpellBook.ANCIENT, getSpellId(), target));
 		} else if (entity.getTeleporter().send(location.transform(0, RandomFunction.random(3), 0), TeleportType.ANCIENT)) {
 			if (!super.meetsRequirements(entity, true, true)) {
 				entity.getTeleporter().getCurrentTeleport().stop();

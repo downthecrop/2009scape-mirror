@@ -1,62 +1,61 @@
 package core.net.packet
 
-import core.game.event.ButtonClickEvent
+import content.global.ame.events.maze.MazeInterface
+import content.global.handlers.iface.ge.StockMarket
+import content.global.skill.magic.SpellListener
+import content.global.skill.magic.SpellListeners
+import content.global.skill.magic.SpellUtils
+import content.global.skill.summoning.familiar.FamiliarSpecial
+import core.ServerConstants
 import core.api.getAttribute
+import core.api.log
 import core.api.sendMessage
 import core.api.tryPop
+import core.api.utils.Vector
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.SceneryDefinition
 import core.game.container.Container
 import core.game.container.impl.BankContainer
-import core.game.node.Node
-import core.game.node.entity.player.Player
-import core.game.node.entity.player.info.Rights
-import core.game.node.entity.player.info.login.LoginConfiguration
-import core.game.node.entity.player.link.SpellBookManager
-import core.game.node.entity.combat.spell.MagicSpell
-import content.global.ame.events.maze.MazeInterface
-import content.global.skill.summoning.familiar.FamiliarSpecial
-import core.game.node.item.GroundItemManager
-import core.game.node.item.Item
-import core.game.node.scenery.Scenery
-import core.game.system.communication.ClanRank
-import core.game.system.communication.CommunicationInfo
-import core.game.system.task.Pulse
-import core.game.world.map.Location
-import core.game.world.map.RegionManager
-import core.game.world.update.flag.context.ChatMessage
-import core.game.world.update.flag.*
-import core.net.amsc.MSPacketRepository
-import core.net.packet.context.PlayerContext
-import core.net.packet.out.ClearMinimapFlag
-import org.rs09.consts.Components
-import proto.management.ClanMessage
-import proto.management.JoinClanRequest
-import proto.management.LeaveClanRequest
-import core.ServerConstants
+import core.game.event.ButtonClickEvent
 import core.game.ge.GrandExchange.Companion.getOfferStats
 import core.game.ge.GrandExchange.Companion.getRecommendedPrice
 import core.game.ge.GrandExchangeOffer
 import core.game.ge.PriceIndex
-import content.global.handlers.iface.ge.StockMarket
-import content.global.skill.magic.SpellListener
-import content.global.skill.magic.SpellListeners
-import content.global.skill.magic.SpellUtils
-import core.api.log
 import core.game.interaction.*
+import core.game.node.Node
+import core.game.node.entity.combat.spell.MagicSpell
+import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.LogType
 import core.game.node.entity.player.info.PlayerMonitor
-import core.tools.SystemLogger
+import core.game.node.entity.player.info.Rights
+import core.game.node.entity.player.info.login.LoginConfiguration
+import core.game.node.entity.player.link.SpellBookManager
+import core.game.node.item.GroundItemManager
+import core.game.node.item.Item
+import core.game.node.scenery.Scenery
 import core.game.system.command.CommandSystem
+import core.game.system.communication.ClanRank
+import core.game.system.communication.CommunicationInfo
 import core.game.system.communication.GlobalChat
+import core.game.system.task.Pulse
 import core.game.world.GameWorld
+import core.game.world.map.Location
+import core.game.world.map.RegionManager
 import core.game.world.repository.Repository
+import core.game.world.update.flag.EntityFlag
+import core.game.world.update.flag.context.ChatMessage
+import core.net.amsc.MSPacketRepository
+import core.net.packet.context.PlayerContext
 import core.net.packet.`in`.Packet
 import core.net.packet.`in`.RunScript
+import core.net.packet.out.ClearMinimapFlag
 import core.tools.Log
 import core.worker.ManagementEvents
-import core.api.utils.Vector
+import org.rs09.consts.Components
+import proto.management.ClanMessage
+import proto.management.JoinClanRequest
+import proto.management.LeaveClanRequest
 import java.io.PrintWriter
 import java.io.StringWriter
 import java.lang.Math.min
@@ -423,6 +422,11 @@ object PacketProcessor {
             return
         if (player.getAttribute("magic:delay", -1) > GameWorld.ticks)
             return
+	// Validate spell packet interface matches player's actual spellbook
+	// This is to prevent player being able to cast spells when client has stale interface (e.g. after Spellbook swap reverts)
+	if (iface in intArrayOf(192, 193, 430)) {
+	    if (!SpellUtils.validateSpellbookInterface(player, iface)) return
+	}
         val book = SpellUtils.getBookFromInterface(iface)
         if (book != "none")
             SpellListeners.run(child, type, book, player, target)

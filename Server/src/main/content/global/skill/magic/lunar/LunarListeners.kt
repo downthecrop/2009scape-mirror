@@ -24,12 +24,17 @@ import core.game.system.config.NPCConfigParser
 import core.game.system.task.Pulse
 import core.game.system.timer.impl.PoisonImmunity
 import core.game.system.timer.impl.SkillRestore
+import core.game.system.timer.impl.SpellbookSwap
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.repository.Repository
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
-import org.rs09.consts.*
+import org.rs09.consts.Animations
+import org.rs09.consts.Components
+import org.rs09.consts.Graphics
+import org.rs09.consts.Items
+import org.rs09.consts.Sounds
 import kotlin.math.floor
 
 class LunarListeners : SpellListener("lunar"), Commands {
@@ -280,9 +285,14 @@ class LunarListeners : SpellListener("lunar"), Commands {
          */
 
         // Level 96
-        /**
-         * Spellbook Swap
-         */
+        onCast(Lunar.SPELLBOOK_SWAP, NONE) { player, _ ->
+            requires(player, 96, arrayOf(
+                Item(Items.LAW_RUNE_563, 1),
+                Item(Items.COSMIC_RUNE_564, 2),
+                Item(Items.ASTRAL_RUNE_9075, 3)
+            ))
+            spellbookSwap(player)
+        }
     }
 
     // Spell handlers
@@ -783,11 +793,20 @@ class LunarListeners : SpellListener("lunar"), Commands {
     /**
      * Heal Group
      */
-
-    // Level 96
-    /**
-     * Spellbook Swap
-     */
+	
+	// Level 96
+	private fun spellbookSwap(player : Player) {
+		// Runes are removed on successful swap to another spellbook in SpellbookSwapDialogue.java
+		// removeRunes(player, true)
+		lock(player, 4)
+		visualizeSpell(player, 6299, 1062)
+		player.scripts.removeWeakScripts()
+		player.dialogueInterpreter.open(3264731)
+		registerTimer(player, SpellbookSwap())
+		// XP is awarded in SpellbookSwapDialogue.java similarly to rune removal handling
+		// addXP(player, 130.0)
+		setDelay(player, false)
+	}
 
     // Other/Multi spell use-case
     private fun sendTeleport(player: Player, xp: Double, loc: Location){

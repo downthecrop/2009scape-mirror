@@ -1,10 +1,21 @@
 package content.global.skill.magic;
 
+import content.data.Quests;
 import core.game.component.Component;
 import core.game.dialogue.DialoguePlugin;
+import core.game.event.SpellbookChangeEvent;
+import core.game.interaction.Listener;
 import core.game.node.entity.player.Player;
-import core.plugin.Initializable;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
+import core.game.node.entity.player.link.SpellBookManager.SpellbookChangeSource;
+import core.game.node.entity.skill.Skills;
+import core.game.node.item.Item;
+import core.plugin.Initializable;
+
+import java.util.ArrayList;
+
+import static core.api.ContentAPIKt.hasRequirement;
+
 
 /**
  * Handles the SpellbookSwapDialogue dialogue.
@@ -73,8 +84,27 @@ public class SpellbookSwapDialogue extends DialoguePlugin {
 				break;
 			}
 			final SpellBook book = type == 1 ? SpellBook.ANCIENT : SpellBook.MODERN;
+		    if (book == SpellBook.ANCIENT && !hasRequirement(player, Quests.DESERT_TREASURE)) {
+			player.getPacketDispatch().sendMessage("You need to complete Desert Treasure to use Ancient Magicks.");
+			end();
+			return true;
+		    }
+			// Remove runes for Spellbook Swap
+			ArrayList<Item> runes = player.getAttribute("spell:runes", new ArrayList<>());
+			if (!runes.isEmpty() && player.getInventory().remove(runes.toArray(new Item[0]))) {
+				player.removeAttribute("spell:runes");
+				player.removeAttribute("tablet-spell");
+			}
+			// Award XP
+			player.skills.addExperience(Skills.MAGIC, 130);
+			// Change book
+			player.dispatch(new SpellbookChangeEvent(
+					SpellBook.LUNAR,
+					book,
+					SpellbookChangeSource.SPELLBOOK_SWAP_CAST));
 			player.getSpellBookManager().setSpellBook(book);
 			player.getInterfaceManager().openTab(new Component(book.getInterfaceId()));
+		    player.getPacketDispatch().sendMessage("You have 2 minutes before your spellbook changes back to the Lunar Spellbook!");
 			end();
 			break;
 		}

@@ -1,23 +1,29 @@
 package content.global.skill.skillcapeperks
 
-import core.game.component.Component
-import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.SpellBookManager
-import core.game.node.entity.player.link.TeleportManager
+import content.data.Quests
+import content.global.skill.farming.PatchType
+import content.global.skill.farming.Plantable
 import content.global.skill.runecrafting.Altar
-import core.game.world.map.Location
-import core.game.world.map.zone.impl.DarkZone
-import core.plugin.Initializable
-import core.game.world.GameWorld
-import content.global.skill.farming.*
 import core.ServerStore
 import core.ServerStore.Companion.getBoolean
 import core.ServerStore.Companion.getInt
-import core.api.*
+import core.api.closeDialogue
+import core.api.getAttribute
+import core.api.hasRequirement
+import core.api.sendDialogue
+import core.api.sendMessage
+import core.api.teleport
 import core.cache.def.impl.ItemDefinition
-import core.tools.END_DIALOGUE
-import org.rs09.consts.Items
-import content.data.Quests
+import core.game.component.Component
+import core.game.event.SpellbookChangeEvent
+import core.game.node.entity.combat.equipment.WeaponInterface
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.SpellBookManager
+import core.game.node.entity.player.link.TeleportManager
+import core.game.world.GameWorld
+import core.game.world.map.Location
+import core.game.world.map.zone.impl.DarkZone
+import core.plugin.Initializable
 
 enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)? = null) {
     BAREFISTED_SMITHING("cape_perks:barefisted-smithing"),
@@ -157,70 +163,74 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
     }
 
     @Initializable
-    class MagicCapeDialogue(player: Player? = null): core.game.dialogue.DialoguePlugin(player){
-        override fun newInstance(player: Player?): core.game.dialogue.DialoguePlugin {
-            return MagicCapeDialogue(player)
-        }
+    class MagicCapeDialogue(player : Player? = null) : core.game.dialogue.DialoguePlugin(player) {
+	override fun newInstance(player : Player?) : core.game.dialogue.DialoguePlugin {
+	    return MagicCapeDialogue(player)
+	}
 
-        override fun open(vararg args: Any?): Boolean {
-            when(player.spellBookManager.spellBook){
-                SpellBookManager.SpellBook.ANCIENT.interfaceId -> options("Modern","Lunar")
-                SpellBookManager.SpellBook.MODERN.interfaceId -> options("Ancient","Lunar")
-                SpellBookManager.SpellBook.LUNAR.interfaceId -> options ("Modern","Ancient")
-            }
-            return true
-        }
+	override fun open(vararg args : Any?) : Boolean {
+	    when (player.spellBookManager.spellBook) {
+		SpellBookManager.SpellBook.ANCIENT.interfaceId -> options("Modern", "Lunar")
+		SpellBookManager.SpellBook.MODERN.interfaceId -> options("Ancient", "Lunar")
+		SpellBookManager.SpellBook.LUNAR.interfaceId -> options("Modern", "Ancient")
+	    }
+	    return true
+	}
 
-        override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-            val spellbook = when(player.spellBookManager.spellBook){
-                SpellBookManager.SpellBook.ANCIENT.interfaceId -> {
-                    when(buttonId){
-                        1 -> SpellBookManager.SpellBook.MODERN
-                        2 -> SpellBookManager.SpellBook.LUNAR
-                        else -> null
-                    }
-                }
+	override fun handle(interfaceId : Int, buttonId : Int) : Boolean {
+	    val spellbook = when (player.spellBookManager.spellBook) {
+		SpellBookManager.SpellBook.ANCIENT.interfaceId -> {
+		    when (buttonId) {
+			1 -> SpellBookManager.SpellBook.MODERN
+			2 -> SpellBookManager.SpellBook.LUNAR
+			else -> null
+		    }
+		}
 
-                SpellBookManager.SpellBook.MODERN.interfaceId -> {
-                    when(buttonId){
-                        1 -> SpellBookManager.SpellBook.ANCIENT
-                        2 -> SpellBookManager.SpellBook.LUNAR
-                        else -> null
-                    }
-                }
+		SpellBookManager.SpellBook.MODERN.interfaceId -> {
+		    when (buttonId) {
+			1 -> SpellBookManager.SpellBook.ANCIENT
+			2 -> SpellBookManager.SpellBook.LUNAR
+			else -> null
+		    }
+		}
 
-                SpellBookManager.SpellBook.LUNAR.interfaceId -> {
-                    when(buttonId){
-                        1 -> SpellBookManager.SpellBook.MODERN
-                        2 -> SpellBookManager.SpellBook.ANCIENT
-                        else -> null
-                    }
-                }
+		SpellBookManager.SpellBook.LUNAR.interfaceId -> {
+		    when (buttonId) {
+			1 -> SpellBookManager.SpellBook.MODERN
+			2 -> SpellBookManager.SpellBook.ANCIENT
+			else -> null
+		    }
+		}
 
-                else -> null
-            }
+		else -> null
+	    }
 
-            end()
-            if(spellbook != null){
-                if (spellbook == SpellBookManager.SpellBook.ANCIENT) {
-                    if (!hasRequirement(player, Quests.DESERT_TREASURE))
-                        return true
-                }
-                else if (spellbook == SpellBookManager.SpellBook.LUNAR) {
-                    if (!hasRequirement(player, Quests.LUNAR_DIPLOMACY))
-                        return true
-                }
-                player.spellBookManager.setSpellBook(spellbook)
-                player.interfaceManager.openTab(Component(spellbook.interfaceId))
-                player.incrementAttribute("/save:cape_perks:librarian-magus-charges",-1)
-            }
-            return true
-        }
+	    end()
+	    if (spellbook != null) {
+		if (spellbook == SpellBookManager.SpellBook.ANCIENT) {
+		    if (!hasRequirement(player, Quests.DESERT_TREASURE)) return true
+		} else if (spellbook == SpellBookManager.SpellBook.LUNAR) {
+		    if (!hasRequirement(player, Quests.LUNAR_DIPLOMACY)) return true
+		}
+		val weaponInterface = player.getExtension<WeaponInterface>(WeaponInterface::class.java)
+		if (weaponInterface != null && player.properties.autocastSpell != null) {
+		    weaponInterface.selectAutoSpell(-1, true)
+		}
+		player.dispatch(SpellbookChangeEvent(
+			SpellBookManager.SpellBook.forInterface(player.spellBookManager.spellBook),
+			spellbook,
+			SpellBookManager.SpellbookChangeSource.MAGIC_CAPE_PERK))
+		player.spellBookManager.setSpellBook(spellbook)
+		player.interfaceManager.openTab(Component(spellbook.interfaceId))
+		player.incrementAttribute("/save:cape_perks:librarian-magus-charges", -1)
+	    }
+	    return true
+	}
 
-        override fun getIds(): IntArray {
-            return intArrayOf(509871234)
-        }
-
+	override fun getIds() : IntArray {
+	    return intArrayOf(509871234)
+	}
     }
 
     @Initializable

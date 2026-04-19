@@ -23,6 +23,7 @@ object Event {
     @JvmStatic val AttributeSet = AttributeSetEvent::class.java
     @JvmStatic val AttributeRemoved = AttributeRemoveEvent::class.java
     @JvmStatic val SpellCast = SpellCastEvent::class.java
+    @JvmStatic val SpellbookChanged = SpellbookChangeEvent::class.java
     @JvmStatic val ItemAlchemized = ItemAlchemizationEvent::class.java
     @JvmStatic val ItemEquipped = ItemEquipEvent::class.java
     @JvmStatic val ItemUnequipped = ItemUnequipEvent::class.java

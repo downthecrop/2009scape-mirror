@@ -1,15 +1,23 @@
 package content.global.skill.magic
 
-import core.api.*
+import content.data.Quests
+import core.api.animate
+import core.api.hasLevelStat
+import core.api.hasRequirement
+import core.api.lock
+import core.api.playAudio
+import core.api.sendMessage
+import core.game.event.SpellbookChangeEvent
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.Node
+import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.entity.player.link.SpellBookManager.SpellBook
 import core.game.node.entity.skill.Skills
 import org.rs09.consts.Scenery
 import org.rs09.consts.Sounds
-import content.data.Quests
 
 class MagicAltarListener : InteractionListener {
     override fun defineListeners() {
@@ -36,26 +44,36 @@ class MagicAltarListener : InteractionListener {
 
         return true
     }
-
-    private fun swapSpellBook(player: Player, altar: Node) {
-        lock(player, 3)
-        playAudio(player, Sounds.PRAYER_RECHARGE_2674)
-        animate(player, 645)
-
-        if (altar.id == ANCIENT_ALTAR) {
-            player.skills.decrementPrayerPoints(player.skills.prayerPoints)
-        }
-
-        if (SpellBook.forInterface(player.spellBookManager.spellBook) == if (altar.id == ANCIENT_ALTAR) SpellBook.ANCIENT else SpellBook.LUNAR) {
-            sendMessage(player, if (altar.id == ANCIENT_ALTAR) "You feel a strange drain upon your memory..." else "Modern spells activated!")
-            player.spellBookManager.setSpellBook(SpellBook.MODERN)
-            player.spellBookManager.update(player)
-        } else {
-            sendMessage(player, if (altar.id == ANCIENT_ALTAR) "You feel a strange wisdom fill your mind..." else "Lunar spells activated!")
-            player.spellBookManager.setSpellBook(if (altar.id == ANCIENT_ALTAR) SpellBook.ANCIENT else SpellBook.LUNAR)
-            player.spellBookManager.update(player)
-        }
-    }
+	
+	private fun swapSpellBook(player : Player, altar : Node) {
+		lock(player, 3)
+		playAudio(player, Sounds.PRAYER_RECHARGE_2674)
+		animate(player, 645)
+		if (altar.id == ANCIENT_ALTAR) {
+			player.skills.decrementPrayerPoints(player.skills.prayerPoints)
+		}
+		val weaponInterface = player.getExtension<WeaponInterface>(WeaponInterface::class.java)
+		if (weaponInterface != null && player.properties.autocastSpell != null) {
+			weaponInterface.selectAutoSpell(-1, true)
+		}
+		if (SpellBook.forInterface(player.spellBookManager.spellBook) == if (altar.id == ANCIENT_ALTAR) SpellBook.ANCIENT else SpellBook.LUNAR) {
+			player.dispatch(SpellbookChangeEvent(
+				SpellBook.forInterface(player.spellBookManager.spellBook),
+				SpellBook.MODERN,
+				SpellBookManager.SpellbookChangeSource.ALTAR))
+			sendMessage(player, if (altar.id == ANCIENT_ALTAR) "You feel a strange drain upon your memory..." else "Modern spells activated!")
+			player.spellBookManager.setSpellBook(SpellBook.MODERN)
+			player.spellBookManager.update(player)
+		} else {
+			player.dispatch(SpellbookChangeEvent(
+				SpellBook.forInterface(player.spellBookManager.spellBook),
+				if (altar.id == ANCIENT_ALTAR) SpellBook.ANCIENT else SpellBook.LUNAR,
+				SpellBookManager.SpellbookChangeSource.ALTAR))
+			sendMessage(player, if (altar.id == ANCIENT_ALTAR) "You feel a strange wisdom fill your mind..." else "Lunar spells activated!")
+			player.spellBookManager.setSpellBook(if (altar.id == ANCIENT_ALTAR) SpellBook.ANCIENT else SpellBook.LUNAR)
+			player.spellBookManager.update(player)
+		}
+	}
 
     companion object {
         private const val ANCIENT_ALTAR = Scenery.ALTAR_6552

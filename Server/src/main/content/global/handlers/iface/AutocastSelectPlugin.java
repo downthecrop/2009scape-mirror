@@ -30,6 +30,17 @@ public final class AutocastSelectPlugin extends ComponentPlugin {
 		if (!player.getAttribute("autocast_select", false)) {
 			return true;
 		}
+	    if (player.timers.getTimer("spellbook:swap") != null) {
+		player.getPacketDispatch().sendMessage("You cannot autocast while using Spellbook Swap.");
+		player.removeAttribute("autocast_select");
+		player.removeAttribute("autocast_component");
+		final WeaponInterface w = player.getExtension(WeaponInterface.class);
+		if (w != null) {
+		    w.setAttackStyle(3);
+		    player.getInterfaceManager().openTab(w);
+		}
+		return true;
+	    }
 		player.removeAttribute("autocast_select");
 		final WeaponInterface w = player.getExtension(WeaponInterface.class);
 		if (w != null) {

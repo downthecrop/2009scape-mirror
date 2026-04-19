@@ -1,13 +1,25 @@
 package content.global.skill.magic
 
-import core.game.node.entity.npc.NPC
-import core.game.node.entity.player.Player
 import core.game.node.entity.combat.spell.CombinationRune
 import core.game.node.entity.combat.spell.MagicStaff
 import core.game.node.entity.combat.spell.Runes
+import core.game.node.entity.npc.NPC
+import core.game.node.entity.player.Player
 import core.game.node.item.Item
 
 object SpellUtils {
+    /**
+     * Validates that the spell packet's interface matches the player's actual server-side spellbook.
+     * This prevents exploits where the client has a stale spellbook interface (e.g., after Spellbook Swap reverts).
+     * @param player The player casting the spell
+     * @param packetInterfaceId The interface ID from the client's spell packet
+     * @return true if the interfaces match (valid), false if there's a client/server desync
+     */
+    @JvmStatic
+    fun validateSpellbookInterface(player : Player, packetInterfaceId : Int) : Boolean {
+	val actualSpellbook = player.spellBookManager.spellBook
+	return packetInterfaceId == actualSpellbook
+    }
     fun usingStaff(p: Player, rune: Int): Boolean {
         val weapon = p.equipment[3] ?: return false
         val staff = MagicStaff.forId(rune) ?: return false

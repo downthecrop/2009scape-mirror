@@ -1,8 +1,6 @@
 package core.game.node.entity.combat.spell;
 
-import core.game.component.Component;
 import core.game.event.SpellCastEvent;
-import core.game.node.entity.skill.Skills;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.CombatSwingHandler;
@@ -10,6 +8,7 @@ import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.entity.player.link.audio.Audio;
+import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
@@ -121,11 +120,6 @@ public abstract class MagicSpell implements Plugin<SpellType> {
 			p.faceTemporary((Entity) target, 1);
 		}
 		if (spell.cast(p, target)) {
-			if (book != SpellBook.LUNAR && p.getAttribute("spell:swap", 0) != 0) {
-				p.removeAttribute("spell:swap");
-				p.getSpellBookManager().setSpellBook(SpellBook.LUNAR);
-				p.getInterfaceManager().openTab(new Component(SpellBook.LUNAR.getInterfaceId()));
-			}
 			if (!combatSpell) {
 				p.getSkills().addExperience(Skills.MAGIC, spell.getExperience(p), true);
 			}

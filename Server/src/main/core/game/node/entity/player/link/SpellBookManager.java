@@ -56,6 +56,16 @@ public final class SpellBookManager {
 	}
 
 	/**
+	 * All the possible ways a SpellBook can get changed.
+	 */
+	public enum SpellbookChangeSource {
+		ALTAR,
+		MAGIC_CAPE_PERK,
+		SPELLBOOK_SWAP_CAST,
+		SPELLBOOK_SWAP_RESTORE
+	}
+
+	/**
 	 * Represents a characters spell book.
 	 * @author 'Vexia
 	 * @author Emperor
@@ -134,5 +144,4 @@ public final class SpellBookManager {
 			return spells.get(buttonId);
 		}
 	}
-
 }
