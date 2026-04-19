@@ -7,6 +7,7 @@ import core.api.utils.WeightBasedTable
 import core.api.utils.WeightedItem
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import content.global.activity.ttrail.TreasureTrailManager
 
 class ImplingJarListener : InteractionListener {
 
@@ -15,8 +16,14 @@ class ImplingJarListener : InteractionListener {
     override fun defineListeners() {
         on(JARS, IntType.ITEM, "loot"){ player, node ->
             val jar = node.asItem()
+            val table = ImplingLoot.forId(jar.id) ?: return@on false
+            val effectiveTable = if (TreasureTrailManager.getInstance(player).hasClue()) {
+                table.excluding(*WeightBasedTable.CLUE_SCROLL_SLOTS)
+            } else {
+                table
+            }
 
-            val loot = ImplingLoot.forId(jar.id)?.roll()?.firstOrNull() ?: return@on false
+            val loot = effectiveTable.roll().firstOrNull() ?: return@on false
 
             if(removeItem(player, jar, Container.INVENTORY)) {
                 addItemOrDrop(player, loot.id, loot.amount)

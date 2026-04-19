@@ -14,6 +14,7 @@ import core.game.interaction.IntType
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import org.rs09.consts.Sounds
+import content.global.activity.ttrail.TreasureTrailManager
 
 class ThievingListeners : InteractionListener {
 
@@ -66,7 +67,12 @@ class ThievingListeners : InteractionListener {
             }
 
             player.animator.animate(PICKPOCKET_ANIM)
-            val lootTable = pickpocketRoll(player, pickpocketData.low, pickpocketData.high, pickpocketData.table)
+            val effectiveTable = if (TreasureTrailManager.getInstance(player).hasClue()) {
+                pickpocketData.table.excluding(*WeightBasedTable.CLUE_SCROLL_SLOTS)
+            } else {
+                pickpocketData.table
+            }
+            val lootTable = pickpocketRoll(player, pickpocketData.low, pickpocketData.high, effectiveTable)
             if(lootTable == null){
                 node.asNpc().face(player)
                 node.asNpc().animator.animate(NPC_ANIM)

@@ -182,6 +182,22 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
         return this
     }
 
+    fun excluding(vararg ids: Int): WeightBasedTable {
+        val idSet = ids.toHashSet()
+        val filtered = WeightBasedTable()
+        for (item in this) {
+            if (item.id !in idSet) {
+                filtered.add(item)
+            }
+        }
+        for (item in guaranteedItems) {
+            if (item.id !in idSet) {
+                filtered.add(item)
+            }
+        }
+        return filtered
+    }
+
     companion object {
         @JvmStatic
         fun create(vararg items: WeightedItem): WeightBasedTable {
@@ -197,6 +213,7 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
         val SLOT_CLUE_EASY = Items.TOOLKIT_1
         val SLOT_CLUE_MEDIUM = Items.ROTTEN_POTATO_5733
         val SLOT_CLUE_HARD = Items.GRANITE_LOBSTER_POUCH_12070
+        val CLUE_SCROLL_SLOTS = intArrayOf(SLOT_CLUE_EASY, SLOT_CLUE_MEDIUM, SLOT_CLUE_HARD)
         val SLOT_CELEDT = Items.NULL_799
         val SLOT_USDT = Items.SACRED_CLAY_POUCH_CLASS_1_14422
         val SLOT_HDT = Items.SACRED_CLAY_POUCH_CLASS_2_14424
