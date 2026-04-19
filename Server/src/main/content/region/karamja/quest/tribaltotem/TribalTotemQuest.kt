@@ -22,11 +22,11 @@ class TribalTotem : Quest(Quests.TRIBAL_TOTEM,126,125,1,200,0,1,5){
         val started = player?.questRepository?.getStage(Quests.TRIBAL_TOTEM)!! > 0
 
         if(!started){
-            line(player,"I can start this quest by speaking to !!Kangai Mau?? in",line++)
-            line(player,"!!Shrimp & Parrot?? restaurant in Brimhaven.",line++)
+            line(player,"I can start this quest by speaking to !!Kangai Mau?? in !!the??",line++)
+            line(player,"!!Shrimp & Parrot?? restaurant in Brimhaven",line++)
             line += 1
             line(player,"To complete this quest I need:",line++)
-            line(player,"!!Level 21 Theiving??",line++, player?.skills?.getStaticLevel(Skills.THIEVING)!! >= 21)
+            line(player,"!!Level 21 Thieving??",line++, player?.skills?.getStaticLevel(Skills.THIEVING)!! >= 21)
         }
         else if(started && stage != 100){
             if(stage >= 10){
