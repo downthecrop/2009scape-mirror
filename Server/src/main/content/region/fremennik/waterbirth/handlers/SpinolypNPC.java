@@ -146,7 +146,7 @@ public final class SpinolypNPC extends AbstractNPC {
 			super.impact(entity, victim, state);
 			if (super.getType() == CombatStyle.MAGIC && state.getEstimatedHit() > 0) {
 				victim.getSkills().decrementPrayerPoints(1);
-			} else {
+			} else if (super.getType() == CombatStyle.RANGE && state.getEstimatedHit() > 0) {
 				if (RandomFunction.random(20) == 5) {
                                         applyPoison(victim, entity, 30);
 				}
