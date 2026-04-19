@@ -348,7 +348,7 @@ public final class DialogueInterpreter {
         ItemDefinition itemDef = ItemDefinition.forId(item.getId());
         player.getPacketDispatch().sendItemOnInterface(item.getId(), item.getAmount(), interfaceId, 2);
         player.getPacketDispatch().sendAngleOnInterface(interfaceId, 2, itemDef.getModelZoom() / 2, itemDef.getModelRotationX(), itemDef.getModelRotationY());
-        player.getPacketDispatch().sendRepositionOnInterface(interfaceId, 2, 45, 46);
+        player.getPacketDispatch().sendRepositionOnInterface(interfaceId, 2, 45, 45);
         // Hide the second item which seems to be used for double items (child 1)
         player.getPacketDispatch().sendInterfaceConfig(interfaceId, 1, true);
         // Open the chatbox only after everything is set to avoid lag and flashing default strings (Line 1, Title)
@@ -524,11 +524,12 @@ public final class DialogueInterpreter {
         player.getPacketDispatch().sendInterfaceConfig(interfaceId, 1, true);
         player.getPacketDispatch().sendInterfaceConfig(interfaceId, 2, false);
         player.getPacketDispatch().sendAnimationInterface(expression, interfaceId, 2);
-        player.getPacketDispatch().sendItemOnInterface(-1, 1, interfaceId, 1);
         if (npc) {
             player.getPacketDispatch().sendItemOnInterface(-1, 1, interfaceId, 1);
-            player.getPacketDispatch().sendRepositionOnInterface(interfaceId, 2, 45, 45);
+            player.getPacketDispatch().sendItemOnInterface(-1, 1, interfaceId, 2);
             player.getPacketDispatch().sendNpcOnInterface(npcId, interfaceId, 2);
+            player.getPacketDispatch().sendRepositionOnInterface(interfaceId, 2, 45, 45);
+            player.getPacketDispatch().sendAngleOnInterface(interfaceId, 2, 2150, 40, 1882);
             player.getPacketDispatch().sendString(NPCDefinition.forId(npcId).getName(), interfaceId, 3);
         } else {
             player.getPacketDispatch().sendRepositionOnInterface(interfaceId, 2, 426, 45); // 423 is 47 * 9

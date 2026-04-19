@@ -276,8 +276,7 @@ class PlagueCityListeners : InteractionListener {
                         }
                     }
                     1 -> playerl(FacialExpression.NEUTRAL, "I'm a friend of Jethick's, I have come to return a book he borrowed.").also { stage++ }
-                    // todo change this back after sendItemDialogue is fixed for having a single line before See #1885
-                    2 -> npc(FacialExpression.FRIENDLY, "", "Oh... why didn't you say, come in then.", "").also { stage++ }
+                    2 -> npc(FacialExpression.FRIENDLY, "Oh... why didn't you say, come in then.").also { stage++ }
                     3 -> sendItemDialogue(player!!, Items.BOOK_1509, "You hand the book to Ted as you enter.").also {
                         DoorActionHandler.handleAutowalkDoor(player, getScenery(2531, 3328, 0))
                         setQuestStage(player!!, Quests.PLAGUE_CITY, 9)
