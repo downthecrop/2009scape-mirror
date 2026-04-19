@@ -53,10 +53,23 @@ public final class RemovalDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		pos = (int[]) args[1];
-		plane = player.getLocation().getZ();
-		if (HouseManager.isInDungeon(player)) {
-			plane = 3;
-		}
+
+        if (args.length > 2 && args[2] instanceof Integer) {
+            plane = (Integer) args[2];
+        } else {
+            plane = player.getLocation().getZ();
+            if (HouseManager.isInDungeon(player)) {
+                plane = 3;
+            }
+        }
+
+        // check if room exists
+        room = player.getHouseManager().getRooms()[plane][pos[0]][pos[1]];
+        if (room == null || room.getProperties().isRoof()) {
+            interpreter.sendPlainMessage(false, "There is no room there to remove.");
+            return false;
+        }
+
 		room = player.getHouseManager().getRooms()[plane][pos[0]][pos[1]];
 		player.getDialogueInterpreter().sendOptions("Remove the " + (room != null ? room.getProperties().getName() : "room") + "?", "Yes", "No");
 		stage = 0;
