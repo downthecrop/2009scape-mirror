@@ -96,12 +96,12 @@ public final class HouseZone extends MapZone {
             Player p = (Player) e;
 
             // if the player is moving between the dungeon and main house, don't trigger the leave sequence
-            if (!logout) {
+            if (house.getDungeonRegion() != null && !logout) {
                 // current loc
                 Location dest = p.getProperties().getTeleportLocation();
                 int currentRegionId = p.getLocation().getRegionId();
                 int houseId = house.getHouseRegion().getId();
-                int dungeonId = (house.getDungeonRegion() != null) ? house.getDungeonRegion().getId() : -1;
+                int dungeonId = house.getDungeonRegion().getId();
 
                 // check if still in house
                 boolean currentlyInHouse = (currentRegionId == houseId || currentRegionId == dungeonId);
