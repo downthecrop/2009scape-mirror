@@ -317,6 +317,7 @@ public enum Consumables {
 	TCHIKI_MONKEY_PASTE(new Food(new int[] {7575}, new HealingEffect(5), "You eat the Tchiki monkey nut paste. It sticks to the roof of your mouth.")),
 	OOMLIE_WRAP(new Food(new int[] {Items.COOKED_OOMLIE_WRAP_2343}, new MultiEffect(new HealingEffect(14), new AchievementEffect(DiaryType.KARAMJA, 2, 2)))),
 	ROE(new Food(new int[]{11324}, new HealingEffect(3))),
+	CAVIAR(new Food(new int[]{11326}, new HealingEffect(5))),
 	EQUA_LEAVES(new Food(new int[]{2128}, new HealingEffect(1))),
 	CHOC_ICE(new Food(new int[]{6794}, new HealingEffect(7))),
 	EDIBLE_SEAWEED(new Food(new int[] {403}, new HealingEffect(4))),
