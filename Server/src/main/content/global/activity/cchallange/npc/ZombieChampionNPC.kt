@@ -63,8 +63,8 @@ class ZombieChampionNPC(id: Int = 0, location: Location? = null) : AbstractNPC(i
         val player = state.attacker
         if (player is Player) {
             if (state.style == CombatStyle.MELEE || state.style == CombatStyle.RANGE) {
-                state.estimatedHit = state.maximumHit
                 state.neutralizeHits()
+                state.estimatedHit = state.maximumHit
             }
             if (state.style == CombatStyle.MAGIC) {
                 sendMessage(player, "You cannot use spells in this challenge.")
