@@ -140,7 +140,7 @@ public enum DiaryType {
                             "Craft an air battlestaff",
                             "Give your player-owned house a tropical wood or fancy stone<br><br>finish at the Varrock estate agent's",
                             "Make a Varrock teleport tablet on a mahogany lectern",
-                            "Obtain a new set of Family Crest gauntlets from Dimintheis",  // TODO need family crest
+                            "Obtain a new set of Family Crest gauntlets from Dimintheis",
                             "Make a Waka Canoe near Edgeville",
                             "Use the Home Teleport spell in the Ancient Magicks spellbook<br><br>to teleport to Edgeville",
                             "Use the skull sceptre to teleport to Barbarian Village"

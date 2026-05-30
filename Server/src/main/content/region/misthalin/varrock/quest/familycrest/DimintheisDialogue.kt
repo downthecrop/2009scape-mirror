@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.Items
 import content.data.Quests
+import core.game.node.entity.player.link.diary.DiaryType
 
 
 @Initializable
@@ -173,6 +174,7 @@ class DimintheisDialogue(player: Player? = null): core.game.dialogue.DialoguePlu
             6000 -> npc("Not to worry, here they are").also {
                 stage = 1000
                 addItem(player, getAttribute(player, "family-crest:gauntlets", Items.FAMILY_GAUNTLETS_778))
+                player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 2, 9)
             }
 
             1000 -> end()
