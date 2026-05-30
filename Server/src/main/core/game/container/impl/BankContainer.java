@@ -1,13 +1,10 @@
 package core.game.container.impl;
 
-import core.api.IfaceSettingsBuilder;
-import core.game.container.access.InterfaceContainer;
-import kotlin.Unit;
-import kotlin.ranges.IntRange;
-import org.rs09.consts.Vars;
 import core.ServerConstants;
+import core.api.IfaceSettingsBuilder;
 import core.game.component.Component;
 import core.game.container.*;
+import core.game.container.access.InterfaceContainer;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.IronmanMode;
 import core.game.node.item.Item;
@@ -16,8 +13,8 @@ import core.game.world.GameWorld;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
-
-import java.nio.ByteBuffer;
+import kotlin.ranges.IntRange;
+import org.rs09.consts.Vars;
 
 import static core.api.ContentAPIKt.*;
 
@@ -201,14 +198,9 @@ public final class BankContainer extends Container {
 		}
 
 		item = new Item(item.getId(), amount, item.getCharge());
-		boolean unnote = !item.getDefinition().isUnnoted();
+		Item add = item.toUnnotedItem();
 
-		Item add = unnote ? new Item(item.getDefinition().getNoteId(), amount, item.getCharge()) : item;
-		if (unnote && !add.getDefinition().isUnnoted()) {
-			add = item;
-		}
-
-		int maxCount = super.getMaximumAdd(add);
+		int maxCount = getMaximumAdd(add);
 		if (amount > maxCount) {
 			add.setAmount(maxCount);
 			item.setAmount(maxCount);
@@ -472,6 +464,11 @@ public final class BankContainer extends Container {
 	 */
 	public boolean isOpen() {
 		return open;
+	}
+
+	@Override
+	public int getMaximumAdd(Item item) {
+		return super.getMaximumAdd(item.toUnnotedItem());
 	}
 
 	/**

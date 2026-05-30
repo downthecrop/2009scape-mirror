@@ -136,6 +136,19 @@ public class Item extends Node{
 	}
 
 	/**
+	 * Converts noted items into unnoted items.
+	 *
+	 * @return The unnoted version of the item. Returns the original Item if already unnoted.
+	 */
+	public Item toUnnotedItem() {
+		if (definition.isUnnoted()) {
+			return this;
+		} else {
+			return new Item(definition.getNoteId(), getAmount(), getCharge());
+		}
+	}
+
+	/**
 	 * @return the id
 	 */
 	public int getId() {
