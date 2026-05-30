@@ -1,12 +1,16 @@
 package core.game.consumable;
 
 import content.data.consumables.Consumables;
+import core.game.interaction.QueueStrength;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.Item;
+import core.game.system.task.Pulse;
+import core.game.world.GameWorld;
+import core.game.world.update.flag.context.Animation;
 import org.rs09.consts.Sounds;
 
-import static core.api.ContentAPIKt.playAudio;
+import static core.api.ContentAPIKt.*;
 
 public class Potion extends Drink {
 
@@ -15,7 +19,7 @@ public class Potion extends Drink {
     private static final Audio SOUND = new Audio(2401, 1, 1);
 
     public Potion(final int[] ids, final ConsumableEffect effect, final String... messages) {
-        super(ids, effect, messages);
+        super(ids, effect, new Animation(829), messages);
     }
 
     @Override
@@ -55,13 +59,17 @@ public class Potion extends Drink {
         }
         final int dosesLeft = ids.length - consumedDoses;
         player.getPacketDispatch().sendMessage("You drink some of your " + getFormattedName(item) + ".");
-        if (dosesLeft > 1) {
-            player.getPacketDispatch().sendMessage("You have " + dosesLeft + " doses of potion left.");
-        } else if (dosesLeft == 1) {
-            player.getPacketDispatch().sendMessage("You have 1 dose of potion left.");
-        } else {
-            player.getPacketDispatch().sendMessage("You have finished your potion.");
-        }
+        // Remaining dosages message should be delayed - https://youtu.be/n6CCf4Rj8Lg?t=79
+        queueScript(player, 2, QueueStrength.SOFT, false, (Integer stage) -> {
+            if (dosesLeft > 1) {
+                player.getPacketDispatch().sendMessage("You have " + dosesLeft + " doses of potion left.");
+            } else if (dosesLeft == 1) {
+                player.getPacketDispatch().sendMessage("You have 1 dose of potion left.");
+            } else {
+                player.getPacketDispatch().sendMessage("You have finished your potion.");
+            }
+            return stopExecuting(player);
+        });
     }
 
     public int getDose(Item potion){

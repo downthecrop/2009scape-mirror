@@ -523,8 +523,7 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
                     sendNPCDialogue(player, npc.id, "I can't do that, you're teleblocked!", core.game.dialogue.FacialExpression.OLD_ANGRY1)
                     return
                 }
-                npc.animate(Animation(437))
-                npc.faceTemporary(player, 1)
+                // https://youtu.be/61jVjmXf8tU?t=45
                 npc.graphics(Graphics(108))
                 player.lock()
                 playAudio(player, Sounds.CURSE_ALL_125, 0, 1)
