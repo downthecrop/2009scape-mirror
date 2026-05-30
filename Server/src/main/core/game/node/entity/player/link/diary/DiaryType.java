@@ -1,8 +1,8 @@
 package core.game.node.entity.player.link.diary;
 
 import core.game.node.entity.player.Player;
-import org.rs09.consts.Items;
 import core.game.node.item.Item;
+import org.rs09.consts.Items;
 
 /**
  * An achievement diary type.
@@ -118,7 +118,7 @@ public enum DiaryType {
                             "Select a colour for a new kitten", // TODO need ring of charos(a) and garden of tranquility to start
                             "Use the shortcut under the wall, north-west of the Grand<br><br>Exchange",
                             "Enter the A Soul's Bane rift",
-                            "Teleport to the Digsite using a Digsite pendant", // TODO need Digsite and museum
+                            "Teleport to the Digsite using a Digsite pendant",
                             "Craft an earth tiara on the Earth Altar",
                             "Pickpocket a guard in the Varrock Palace courtyard",
                             "Use the teleport to Varrock spell",

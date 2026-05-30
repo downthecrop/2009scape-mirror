@@ -9,15 +9,14 @@ import core.game.event.TeleportEvent
 import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
+import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
-import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
-import org.rs09.consts.Items
-import core.game.world.GameWorld.Pulser
 import core.tools.Log
+import org.rs09.consts.Items
 import org.rs09.consts.Sounds
 import java.util.*
 
@@ -258,6 +257,11 @@ enum class EnchantedJewellery(
                     resetAnimator(player)
                     unlock(player)
                     player.dispatch(TeleportEvent(TeleportManager.TeleportType.NORMAL, TeleportMethod.JEWELRY, item, location))
+
+                    if (DIGSITE_PENDANT.ids.contains(item.id)) {
+                        player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 1, 10)
+                    }
+
                     if (!replace) {
                         return@queueScript stopExecuting(player)
                     }
