@@ -6,6 +6,7 @@ import core.game.component.ComponentDefinition
 import core.game.component.ComponentPlugin
 import core.game.container.access.InterfaceContainer
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.plugin.Plugin
@@ -165,6 +166,10 @@ class FurClothingInterface : ComponentPlugin(){
         if (removeItem(player, requiredFur, Container.INVENTORY) &&
             removeItem(player, coins, Container.INVENTORY)) {
             addItem(player, clothing.product.id, amount)
+
+            if (clothing == FUR_CLOTHING.DASH_CAPE) {
+                player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 2, 2)
+            }
         }
     }
 
