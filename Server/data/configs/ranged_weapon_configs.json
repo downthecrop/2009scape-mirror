@@ -1546,5 +1546,41 @@
     "animation": "426",
     "drop_ammo": "true",
     "ammunition": "14202,14203,14204,14205,14206"
+  },
+  {
+    "itemId": "10149",
+    "name": "Swamp lizard",
+    "ammo_slot": "13",
+    "weapon_type": "0",
+    "animation": "5247",
+    "drop_ammo": "false",
+    "ammunition": "10142"
+  },
+  {
+    "itemId": "10146",
+    "name": "Orange salamander",
+    "ammo_slot": "13",
+    "weapon_type": "0",
+    "animation": "5247",
+    "drop_ammo": "false",
+    "ammunition": "10143"
+  },
+  {
+    "itemId": "10147",
+    "name": "Red salamander",
+    "ammo_slot": "13",
+    "weapon_type": "0",
+    "animation": "5247",
+    "drop_ammo": "false",
+    "ammunition": "10144"
+  },
+  {
+    "itemId": "10148",
+    "name": "Black salamander",
+    "ammo_slot": "13",
+    "weapon_type": "0",
+    "animation": "5247",
+    "drop_ammo": "false",
+    "ammunition": "10145"
   }
 ]
