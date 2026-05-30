@@ -247,7 +247,7 @@ public class RomilyWeaklaxDialogue extends DialoguePlugin {
 		@Override
 		public boolean handle(NodeUsageEvent event) {
     		if (!event.getPlayer().getAchievementDiaryManager().getDiary(DiaryType.VARROCK).isComplete(2,5)) {
-				event.getPlayer().getDialogueInterpreter().open(3205, event.getUsedItem());
+				event.getPlayer().getDialogueInterpreter().open(3205, event.getUsedWith().asNpc(), event.getUsedItem());
 			}
 			return true;
 		}
