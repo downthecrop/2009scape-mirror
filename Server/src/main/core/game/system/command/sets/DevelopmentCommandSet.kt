@@ -10,6 +10,7 @@ import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.VarbitDefinition
 import core.cache.def.impl.Struct
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.entity.player.link.diary.DiaryType
@@ -30,7 +31,19 @@ import core.tools.Log
 import core.game.node.entity.player.info.Rights
 import core.game.node.entity.skill.Skills
 import core.game.world.map.Location
+import core.game.world.map.RegionManager.getLocalEntitys
 import core.game.world.repository.Repository
+import org.json.simple.JSONArray
+import kotlin.collections.set
+import content.global.activity.penguinhns.Penguin
+import content.global.activity.penguinhns.PenguinHNSEvent
+import content.global.activity.penguinhns.PenguinManager
+import content.global.activity.penguinhns.PenguinManager.Companion.penguins
+import content.global.activity.penguinhns.PenguinManager.Companion.spawner
+import content.global.activity.penguinhns.PenguinManager.Companion.tagMapping
+import content.global.activity.penguinhns.PenguinManager.Companion.updateStoreFile
+import core.ServerStore.Companion.toJSONArray
+import org.rs09.consts.NPCs
 
 @Initializable
 class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
@@ -304,7 +317,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             setAttribute (player, "routedraw", !getAttribute(player, "routedraw", false))
         }
 
-        define ("fmstart", Privilege.ADMIN, description = "Marks your current tile as the force-movement start point.") {player, _ -> 
+        define ("fmstart", Privilege.ADMIN, description = "Marks your current tile as the force-movement start point.") {player, _ ->
             setAttribute(player, "fmstart", Location.create(player.location))
         }
 
@@ -320,7 +333,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             setAttribute(player, "fmspeedend", args[1].toIntOrNull() ?: 10)
         }
 
-        define("testfm", Privilege.ADMIN, description = "Runs the configured force-movement from the saved start to end point.") { player, _ -> 
+        define("testfm", Privilege.ADMIN, description = "Runs the configured force-movement from the saved start to end point.") { player, _ ->
             val start = getAttribute(player, "fmstart", Location.create(player.location))
             val end = getAttribute(player, "fmend", Location.create(player.location))
             val speed = getAttribute(player, "fmspeed", 10)
@@ -427,5 +440,54 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
 
             target.skills.addExperience(skill, xp!!)
         }
-    }
+
+        define("renewpenguins", Privilege.ADMIN, "", "Generates a fresh set of weekly penguins") { player, _ ->
+            val spawnedOrdinals = (PenguinHNSEvent.getStoreFile()["spawned-penguins"] as JSONArray).map { it.toString().toInt() }
+            val penguinNPCs = arrayListOf(NPCs.BARREL_8104, NPCs.BUSH_8105,NPCs.CACTUS_8107,NPCs.CRATE_8108,NPCs.ROCK_8109,NPCs.TOADSTOOL_8110)
+
+            spawnedOrdinals.forEach {
+                val peng = Penguin.values()[it]
+                val nearNPCs = getLocalEntitys(peng.location,1)
+                nearNPCs.forEach { npc ->
+                    if (npc.id in penguinNPCs) {
+                        poofClear(npc as NPC)
+                    }
+                }
+            }
+            penguins = spawner.spawnPenguins(10)
+            PenguinHNSEvent.getStoreFile()["spawned-penguins"] = penguins.toJSONArray()
+            tagMapping.clear()
+            for (p in penguins) {
+                tagMapping.put(p, JSONArray())
+                val pengCoord = Penguin.values()[p].location
+                player.debug("Penguin spawned at:$pengCoord")
+            }
+            updateStoreFile()
+            player.debug("Penguin positions have been renewed")
+        }
+
+        define("spawnpenguin",Privilege.ADMIN,"::spawnPenguin <lt>Ordinal<gt>","Adds a new Penguin spawn to this weeks list based on the ordinal provided 0-64"){player,args->
+            if (args.size!=2) reject (player,"Usage: ::spawnpenguin Ordinal")
+            val ordinal = args[1].toIntOrNull()
+            if (ordinal == null) reject(player,"Ordinal must be an integer.")
+            if (ordinal!! > 64 || ordinal < 0) reject(player,"Ordinal must be in the range 0-64 inclusive.")
+
+            val store = PenguinHNSEvent.getStoreFile()
+            val ordinals = (store["spawned-penguins"] as? JSONArray)
+                ?.map { it.toString().toInt() }
+                ?.toMutableList()
+                ?: mutableListOf()
+            val peng = Penguin.values()[ordinal]
+            NPC(peng.id,peng.location)
+                .also { PenguinManager.npcs.add(it); it.isNeverWalks = true; it.isWalks = false }.init()
+            tagMapping.clear()
+            for (p in ordinals) {
+                tagMapping.put(p, JSONArray())
+            }
+            updateStoreFile()
+            val pengCoords = peng.location
+            player.debug("Penguin spawned at:$pengCoords")
+        }
+
+        }
 }

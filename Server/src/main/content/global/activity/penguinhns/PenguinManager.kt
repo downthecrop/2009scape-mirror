@@ -30,7 +30,7 @@ class PenguinManager{
             return tagMapping[Penguin.forLocation(location)?.ordinal]?.contains(player.username.toLowerCase()) ?: false
         }
 
-        private fun updateStoreFile(){
+        fun updateStoreFile(){
             val jsonTags = JSONArray()
             tagMapping.filter { it.value.isNotEmpty() }.forEach { (ordinal,taggers) ->
                 log(this::class.java, Log.FINE, "$ordinal - ${taggers.first()}")
