@@ -6,6 +6,7 @@ import core.net.packet.IoBuffer;
 import core.net.packet.OutgoingPacket;
 import core.net.packet.PacketHeader;
 import core.net.packet.context.MessageContext;
+import core.tools.CP1252;
 import core.tools.StringUtils;
 import core.game.bots.AIPlayer;
 
@@ -21,20 +22,21 @@ public final class CommunicationMessage implements OutgoingPacket<MessageContext
 	public void send(MessageContext context) {
 		IoBuffer buffer = new IoBuffer(context.getOpcode(), PacketHeader.BYTE);
 		String message = context.getMessage();
+		byte[] encodedMessage = CP1252.toBytes(message);
 		Player player = context.getPlayer();
 		String other = context.getOther();
 		switch (context.getOpcode()) {
 		case MessageContext.SEND_MESSAGE:
 			byte[] bytes = new byte[256];
-			int length = StringUtils.encryptPlayerChat(bytes, 0, 0, message.length(), message.getBytes());
+			int length = StringUtils.encryptPlayerChat(bytes, 0, 0, encodedMessage.length, encodedMessage);
 			buffer.putLong(StringUtils.stringToLong(other));
-			buffer.put((byte) message.length());
+			buffer.put((byte) encodedMessage.length);
 			buffer.putBytes(bytes, 0, length);
 			break;
 		case MessageContext.RECIEVE_MESSAGE:
 			bytes = new byte[256];
-			bytes[0] = (byte) message.length();
-			length = 1 + StringUtils.encryptPlayerChat(bytes, 0, 1, message.length(), message.getBytes());
+			bytes[0] = (byte) encodedMessage.length;
+			length = 1 + StringUtils.encryptPlayerChat(bytes, 0, 1, encodedMessage.length, encodedMessage);
 			player.setAttribute("replyTo", other);
 			buffer.putLong(StringUtils.stringToLong(other)).putShort(new Random().nextInt(0xFFFF)).putTri(getMessageIndex(player)).put((byte) context.getChatIcon()).putBytes(bytes, 0, length);
 			break;
@@ -44,8 +46,8 @@ public final class CommunicationMessage implements OutgoingPacket<MessageContext
 				return;
 			}
 			bytes = new byte[256];
-			bytes[0] = (byte) context.getMessage().length();
-			length = 1 + StringUtils.encryptPlayerChat(bytes, 0, 1, message.length(), message.getBytes());
+			bytes[0] = (byte) encodedMessage.length;
+			length = 1 + StringUtils.encryptPlayerChat(bytes, 0, 1, encodedMessage.length, encodedMessage);
 			buffer.putLong(StringUtils.stringToLong(other));
 			buffer.put((byte) 0);// it's just read does nothing
 			buffer.putLong(StringUtils.stringToLong(clan.getName()));

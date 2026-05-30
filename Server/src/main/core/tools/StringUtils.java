@@ -502,7 +502,7 @@ public final class StringUtils {
 				return "";
 			int charsDecoded = 0;
 			int i_4_ = 0;
-			String s = "";
+			StringBuilder s = new StringBuilder(totalChars);
 			for (;;) {
 				byte i_7_ = (byte) buffer.get();
 				if (i_7_ >= 0)
@@ -511,7 +511,7 @@ public final class StringUtils {
 					i_4_ = anIntArray241[i_4_];
 				int i_8_;
 				if ((i_8_ = anIntArray241[i_4_]) < 0) {
-					s += (char) (byte) (i_8_ ^ 0xffffffff);
+					s.append(CP1252.getFromByte((byte) (i_8_ ^ 0xffffffff)));
 					if (totalChars <= ++charsDecoded)
 						break;
 					i_4_ = 0;
@@ -521,7 +521,7 @@ public final class StringUtils {
 				else
 					i_4_++;
 				if ((i_8_ = anIntArray241[i_4_]) < 0) {
-					s += (char) (byte) (i_8_ ^ 0xffffffff);
+					s.append(CP1252.getFromByte((byte) (i_8_ ^ 0xffffffff)));
 					if (++charsDecoded >= totalChars)
 						break;
 					i_4_ = 0;
@@ -531,7 +531,7 @@ public final class StringUtils {
 				else
 					i_4_ = anIntArray241[i_4_];
 				if ((i_8_ = anIntArray241[i_4_]) < 0) {
-					s += (char) (byte) (i_8_ ^ 0xffffffff);
+					s.append(CP1252.getFromByte((byte) (i_8_ ^ 0xffffffff)));
 					if (totalChars <= ++charsDecoded)
 						break;
 					i_4_ = 0;
@@ -541,7 +541,7 @@ public final class StringUtils {
 				else
 					i_4_ = anIntArray241[i_4_];
 				if ((i_8_ = anIntArray241[i_4_]) < 0) {
-					s += (char) (byte) (i_8_ ^ 0xffffffff);
+					s.append(CP1252.getFromByte((byte) (i_8_ ^ 0xffffffff)));
 					if (totalChars <= ++charsDecoded)
 						break;
 
@@ -552,7 +552,7 @@ public final class StringUtils {
 				else
 					i_4_++;
 				if ((i_8_ = anIntArray241[i_4_]) < 0) {
-					s += (char) (byte) (i_8_ ^ 0xffffffff);
+					s.append(CP1252.getFromByte((byte) (i_8_ ^ 0xffffffff)));
 					if (++charsDecoded >= totalChars)
 						break;
 					i_4_ = 0;
@@ -562,7 +562,7 @@ public final class StringUtils {
 				else
 					i_4_ = anIntArray241[i_4_];
 				if ((i_8_ = anIntArray241[i_4_]) < 0) {
-					s += (char) (byte) (i_8_ ^ 0xffffffff);
+					s.append(CP1252.getFromByte((byte) (i_8_ ^ 0xffffffff)));
 					if (totalChars <= ++charsDecoded)
 						break;
 					i_4_ = 0;
@@ -572,7 +572,7 @@ public final class StringUtils {
 				else
 					i_4_++;
 				if ((i_8_ = anIntArray241[i_4_]) < 0) {
-					s += (char) (byte) (i_8_ ^ 0xffffffff);
+					s.append(CP1252.getFromByte((byte) (i_8_ ^ 0xffffffff)));
 					if (totalChars <= ++charsDecoded)
 						break;
 					i_4_ = 0;
@@ -582,13 +582,13 @@ public final class StringUtils {
 				else
 					i_4_++;
 				if ((i_8_ = anIntArray241[i_4_]) < 0) {
-					s += (char) (byte) (i_8_ ^ 0xffffffff);
+					s.append(CP1252.getFromByte((byte) (i_8_ ^ 0xffffffff)));
 					if (++charsDecoded >= totalChars)
 						break;
 					i_4_ = 0;
 				}
 			}
-			return s;
+			return s.toString();
 		} catch (RuntimeException runtimeexception) {
 			runtimeexception.printStackTrace();
 		}
