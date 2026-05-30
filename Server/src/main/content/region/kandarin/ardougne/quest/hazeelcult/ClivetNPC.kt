@@ -1,6 +1,5 @@
 package content.region.kandarin.ardougne.quest.hazeelcult
 
-import core.api.*
 import core.game.node.entity.npc.AbstractNPC
 import core.game.world.map.Location
 import core.plugin.Initializable
@@ -16,16 +15,18 @@ class ClivetNPC(id: Int = 0, location: Location? = null, ) : AbstractNPC(id, loc
 
     override fun getIds(): IntArray = intArrayOf(NPCs.CLIVET_893)
 
-    private var invisibilityTimerRunning = false
+    private var invisTicks = 0
 
     override fun tick() {
+        if (isInvisible && invisTicks <= 0) {
+            invisTicks = 20
+        }
 
-        if (isInvisible && !invisibilityTimerRunning) {
-            invisibilityTimerRunning = true
+        if (invisTicks > 0) {
+            invisTicks--
 
-            runTask(this, 20) {
+            if (invisTicks == 0) {
                 isInvisible = false
-                invisibilityTimerRunning = false
             }
         }
 
