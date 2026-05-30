@@ -239,7 +239,7 @@ public enum BoltEffect {
 		// and should be considered a TODO: temporary abuse prevention measure (bolt effect on slayer monsters)
 		boolean rollSuccess = RandomFunction.random(13) == 5;
 		if (!(state.getVictim() instanceof NPC)) return rollSuccess;
-		if (!(state.getAttacker() instanceof Player) && ((NPC) state.getVictim()).getTask() == null) return rollSuccess;
+		if (!(state.getAttacker() instanceof Player) || ((NPC) state.getVictim()).getTask() == null) return rollSuccess;
 		if (state.getVictim().asNpc().getTask().levelReq > state.getAttacker().asPlayer().getSkills().getLevel(Skills.SLAYER)) return false;
 		return rollSuccess;
 	}
