@@ -1,15 +1,16 @@
 package core.game.world.repository
 
-import core.game.node.entity.npc.NPC
 import content.region.wilderness.handlers.revenants.RevenantNPC
+import core.ServerConstants
+import core.api.sendMessage
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
-import core.ServerConstants
-import core.api.sendMessage
 import core.game.world.update.UpdateSequence
-import java.util.*
 import java.util.concurrent.CopyOnWriteArrayList
+
+const val GE_NEWS_MUTE_ATTRIBUTE = "/save:ge:news-mute"
 
 /**
  * The repository holding all node lists, etc in the game world.
@@ -64,11 +65,22 @@ object Repository {
      */
     @JvmStatic
     fun sendNews(string: String, icon: Int = 12, color: String = "CC6600") {
+        sendNews(string, icon, color, false)
+    }
+
+    @JvmStatic
+    fun sendGrandExchangeNews(string: String, icon: Int = 12, color: String = "CC6600") {
+        sendNews(string, icon, color, true)
+    }
+
+    @JvmStatic
+    fun sendNews(string: String, icon: Int, color: String, isGeNews: Boolean) {
         if (!ServerConstants.ENABLE_GLOBAL_CHAT) return
         val players: Array<Any> = playerNames.values.toTypedArray()
         val size = players.size
         for (i in 0 until size) {
-            val player = players[i] as Player ?: continue
+            val player = players[i] as? Player ?: continue
+            if (isGeNews && player.getAttribute(GE_NEWS_MUTE_ATTRIBUTE, false)) continue
             sendMessage(player, "<img=$icon><col=$color>News: $string")
         }
     }

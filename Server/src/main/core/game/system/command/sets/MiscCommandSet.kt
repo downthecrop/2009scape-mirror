@@ -25,6 +25,7 @@ import core.game.system.command.CommandMapping
 import core.game.system.command.Privilege
 import core.game.system.communication.CommunicationInfo
 import core.game.world.map.RegionManager
+import core.game.world.repository.GE_NEWS_MUTE_ATTRIBUTE
 import core.game.world.map.build.DynamicRegion
 import core.game.world.repository.Repository
 import core.game.node.entity.combat.equipment.WeaponInterface
@@ -252,21 +253,38 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         }
 
         /**
-         * Shows the player a list of currently active GE sell offers
+         * Shows the player a list of currently active GE sell offers or toggles muting sell offer News announcements.
          */
-        define("ge", Privilege.STANDARD, "::ge <lt>MODE<gt> (Modes: buying, selling, search, bots, botsearch)", "Various commands for viewing GE offers.") { player, args ->
-            if(args.size < 2){
-                reject(player, "Usage: ::ge mode", "Available modes: buying, selling, search, bots, botsearch")
+        define(
+            "ge",
+            Privilege.STANDARD,
+            "::ge <lt>MODE<gt> (Modes: buying, selling, search, bots, botsearch, mute)",
+            "Various commands for viewing GE offers."
+        ) { player, args ->
+            if (args.size < 2) {
+                reject(player, "Usage: ::ge mode", "Available modes: buying, selling, search, bots, botsearch, mute")
             }
-
             val mode = args[1]
-            when(mode){
+            when (mode) {
                 "buying" -> showGeBuy(player)
                 "selling" -> showGeSell(player)
                 "search" -> showGeInputDialogue(player, args, ::showOffers)
                 "bots" -> showGeBots(player)
                 "botsearch" -> showGeInputDialogue(player, args, ::showGeBotsearch)
-                else -> reject(player, "Invalid mode used. Available modes are: buying, selling, search")
+                "mute" -> {
+                    val currentlyMuted = getAttribute(player, GE_NEWS_MUTE_ATTRIBUTE, false)
+                    if (currentlyMuted) {
+                        removeAttribute(player, GE_NEWS_MUTE_ATTRIBUTE)
+                    } else {
+                        setAttribute(player, GE_NEWS_MUTE_ATTRIBUTE, true)
+                    }
+                    sendMessage(player, "GE sell offer news is now ${if (currentlyMuted) "visible" else "hidden"}.")
+                }
+
+                else -> reject(
+                    player,
+                    "Invalid mode used. Available modes are: buying, selling, search, bots, botsearch, mute"
+                )
             }
         }
         /**

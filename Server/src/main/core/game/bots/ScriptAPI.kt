@@ -502,7 +502,10 @@ class ScriptAPI(private val bot: Player) {
                 }
                 val canSell = GrandExchange.addBotOffer(actualId, itemAmt)
                 if (canSell && saleIsBigNews(actualId, itemAmt)) {
-                    Repository.sendNews(SERVER_GE_NAME + " just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE.")
+                    Repository.sendGrandExchangeNews(
+                        SERVER_GE_NAME + " just offered " + itemAmt + " " +
+                                ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE."
+                    )
                 }
                 bot.bank.remove(Item(id, itemAmt))
                 bot.bank.refresh()
@@ -532,7 +535,10 @@ class ScriptAPI(private val bot: Player) {
                     }
                     val canSell = GrandExchange.addBotOffer(actualId, itemAmt)
                     if (canSell && saleIsBigNews(actualId, itemAmt)) {
-                        Repository.sendNews(SERVER_GE_NAME + " just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE.")
+                        Repository.sendGrandExchangeNews(
+                            SERVER_GE_NAME + " just offered " + itemAmt + " " +
+                                ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE."
+                        )
                     }
                     bot.bank.remove(item)
                     bot.bank.refresh()
@@ -568,7 +574,10 @@ class ScriptAPI(private val bot: Player) {
                             1517 -> continue
                             1519 -> continue
                             1521 -> continue
-                            else -> sendNews(SERVER_GE_NAME + " just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.lowercase() + " on the GE.")
+                            else -> Repository.sendGrandExchangeNews(
+                                SERVER_GE_NAME + " just offered " + itemAmt + " " +
+                                    ItemDefinition.forId(actualId).name.lowercase() + " on the GE."
+                            )
                         }
                     }
                     bot.bank.remove(item)

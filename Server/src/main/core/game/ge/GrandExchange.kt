@@ -221,7 +221,9 @@ class GrandExchange : StartupListener, Commands {
             //GrandExchangeRecords.getInstance(player).update(offer)
 
             if (offer.sell && !player.isArtificial) {
-                sendNews(player.username + " just offered " + offer.amount + " " + getItemName(offer.itemID) + " on the GE.")
+                Repository.sendGrandExchangeNews(
+                    player.username + " just offered " + offer.amount + " " + getItemName(offer.itemID) + " on the GE."
+                )
             }
 
             if (ServerConstants.I_AM_A_CHEATER) {
