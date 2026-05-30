@@ -20,6 +20,7 @@ import core.game.diary.DiaryEventHookBase
 import core.game.diary.DiaryLevel
 import core.game.event.*
 import content.data.Quests
+import core.game.node.entity.player.link.SpellBookManager
 
 class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
 
@@ -401,14 +402,12 @@ class LumbridgeAchivementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
     }
 
     override fun onSpellCast(player: Player, event: SpellCastEvent) {
-        when (event.spellId) {
-            Modern.LUMBRIDGE_TELEPORT -> {
-                finishTask(
-                    player,
-                    DiaryLevel.MEDIUM,
-                        MediumTasks.CAST_LUMBRIDGE_TELEPORT
-                )
-            }
+        if (event.spellBook == SpellBookManager.SpellBook.MODERN && event.spellId == Modern.LUMBRIDGE_TELEPORT) {
+            finishTask(
+                player,
+                DiaryLevel.MEDIUM,
+                MediumTasks.CAST_LUMBRIDGE_TELEPORT
+            )
         }
     }
 
