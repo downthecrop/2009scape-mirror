@@ -122,7 +122,7 @@ public final class HouseZone extends MapZone {
                 house.expelGuests(p);
                 int toRemove = previousRegion;
                 int dungRemove = previousDungeon;
-                submitWorldPulse(new Pulse(2) {
+                submitWorldPulse(new Pulse(1) {
                     public boolean pulse() {
                         Region r = RegionManager.forId(toRemove);
                         Region dr = dungRemove != -1 ? RegionManager.forId(dungRemove) : null;
