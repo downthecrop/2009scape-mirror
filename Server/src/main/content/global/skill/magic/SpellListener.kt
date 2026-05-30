@@ -47,11 +47,10 @@ abstract class SpellListener(val bookName: String) : Listener {
             player.sendMessage("You need a magic level of $magicLevel to cast this spell.")
             throw IllegalStateException()
         }
-        for(rune in runes){
-            if(!SpellUtils.hasRune(player,rune)){
-                player.sendMessage("You don't have enough ${rune.definition.name.lowercase()}s to cast this spell.")
-                throw IllegalStateException()
-            }
+        val missing = SpellUtils.hasRunes(player, runes)
+        if (missing != null) {
+            player.sendMessage("You don't have enough ${missing.definition.name.lowercase()}s to cast this spell.")
+            throw IllegalStateException()
         }
         for(item in specialEquipment){
             if(!player.equipment.contains(item,1)){

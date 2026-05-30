@@ -1,5 +1,6 @@
 package core.game.node.entity.combat.spell;
 
+import content.global.skill.magic.SpellUtils;
 import core.game.event.SpellCastEvent;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
@@ -17,7 +18,6 @@ import core.plugin.Plugin;
 import core.tools.RandomFunction;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static core.api.ContentAPIKt.playGlobalAudio;
 
@@ -223,16 +223,17 @@ public abstract class MagicSpell implements Plugin<SpellType> {
 			if (runes == null) {
 				return true;
 			}
-			List<Item> toRemove = new ArrayList<>(20);
-			for (Item item : runes) {
-				if (!hasRune(p, item, toRemove, message)) {
-					return false;
+			Item missing = SpellUtils.hasRunes(p, runes);
+			if (missing != null) {
+				if (message) {
+					p.getPacketDispatch().sendMessage("You don't have enough " + missing.getName() + "s to cast this spell.");
 				}
+				return false;
 			}
 			if (remove) {
-				toRemove.forEach(i -> {
-					p.getInventory().remove(i);
-				});
+				ArrayList<Item> toRemove = p.getAttribute("spell:runes", new ArrayList<>());
+				toRemove.forEach(i -> p.getInventory().remove(i));
+				p.removeAttribute("spell:runes");
 			}
 			return true;
 		}
@@ -251,49 +252,6 @@ public abstract class MagicSpell implements Plugin<SpellType> {
 				((Player) caster).getPacketDispatch().sendMessage("You need a Magic level of " + levelRequirement() + " to cast this spell.");
 			}
 			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Checks if the player has a rune to remove.
-	 * @param p the player.
-	 * @param item the item.
-	 * @param toRemove the list of items to remove.
-	 * @param message the message.
-	 * @return {@code True} if so.
-	 */
-	public boolean hasRune(Player p, Item item, List<Item> toRemove, boolean message) {
-		if (!usingStaff(p, item.getId())) {
-			boolean hasBaseRune = p.getInventory().contains(item.getId(),item.getAmount());
-			if(!hasBaseRune){
-				int baseAmt = p.getInventory().getAmount(item.getId());
-				if(baseAmt > 0){
-					toRemove.add(new Item(item.getId(),p.getInventory().getAmount(item.getId())));
-				}
-				int amtRemaining = item.getAmount() - baseAmt;
-				List<CombinationRune> possibleComboRunes = CombinationRune.eligibleFor(Runes.forId(item.getId()));
-				for(CombinationRune r : possibleComboRunes){
-					if(p.getInventory().containsItem(new Item(r.id)) && amtRemaining > 0){
-						int amt = p.getInventory().getAmount(r.id);
-						if(amtRemaining < amt){
-							toRemove.add(new Item(r.id,amtRemaining));
-							amtRemaining = 0;
-							continue;
-						}
-						amtRemaining -= p.getInventory().getAmount(r.id);
-						toRemove.add(new Item(r.id,p.getInventory().getAmount(r.id)));
-					}
-				}
-				if(amtRemaining <= 0){
-					return true;
-				} else {
-					p.getPacketDispatch().sendMessage("You don't have enough " + item.getName() + "s to cast this spell.");
-					return false;
-				}
-			}
-			toRemove.add(item);
-			return true;
 		}
 		return true;
 	}

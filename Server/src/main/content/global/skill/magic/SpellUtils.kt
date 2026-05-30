@@ -3,9 +3,9 @@ package content.global.skill.magic
 import core.game.node.entity.combat.spell.CombinationRune
 import core.game.node.entity.combat.spell.MagicStaff
 import core.game.node.entity.combat.spell.Runes
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
+import kotlin.math.min
 
 object SpellUtils {
     /**
@@ -32,70 +32,57 @@ object SpellUtils {
         return false
     }
 
-    fun hasRune(p:Player,rune:Item):Boolean{
-        val removeItems = p.getAttribute("spell:runes",ArrayList<Item>())
-        if(usingStaff(p,rune.id)) return true
-        if(p.inventory.containsItem(rune)){
-            removeItems.add(rune)
-            p.setAttribute("spell:runes",removeItems)
+    /**
+     * Validates if the player has the necessary runes to cast a spell.
+     *
+     * If the player is able to cast the spell, the "spell:runes" attribute will be set to the list of items that should
+     * be removed from the player's inventory after successfully casting the spell. This accounts for staves and
+     * combination runes.
+     *
+     * @param p The player casting the spell
+     * @param runes The runes and other items required to cast the spell
+     * @return null if the player can cast the spell or an Item representing at least one of the runes the player is missing
+     */
+    @JvmStatic
+    fun hasRunes(p: Player, runes: Array<Item>): Item? {
+        val cost = HashMap<Int, Int>()
+        // `runes` are mostly actual runes but occasionally other items like staves or unpowered orbs
+        for (rune in runes) {
+            if (usingStaff(p, rune.id)) continue
+            cost[rune.id] = cost.getOrDefault(rune.id, 0) + rune.amount
         }
 
-        val baseAmt = p.inventory.getAmount(rune.id)
-        var amtRemaining = rune.amount - baseAmt
-        val possibleComboRunes = CombinationRune.eligibleFor(Runes.forId(rune.id))
-        for (r in possibleComboRunes) {
-            if (p.inventory.containsItem(Item(r.id)) && amtRemaining > 0) {
-                val amt = p.inventory.getAmount(r.id)
-                if (amtRemaining <= amt) {
-                    removeItems.add(Item(r.id,amtRemaining))
-                    amtRemaining = 0
-                    break
-                }
-                removeItems.add(Item(r.id,p.inventory.getAmount(r.id)))
-                amtRemaining -= p.inventory.getAmount(r.id)
+        val toRemove = ArrayList<Item>()
+
+        // Combination runes are used before elemental runes.
+        // https://runescape.wiki/w/Runecrafting?oldid=2618332#Function_and_Usage_of_Combination_Runes:
+        for (combo in CombinationRune.values()) {
+            val available = p.inventory.getAmount(combo.id)
+            val maxUsage = combo.types.mapNotNull { cost[it.id] }.maxOrNull() ?: 0
+            if (maxUsage > 0 && available >= 0) {
+                val usage = min(maxUsage, available)
+
+                toRemove.add(Item(combo.id, usage))
+                // Even if a spell uses both parts of a combo rune, it should only consume a single rune. For example,
+                // a spell that requires an air rune and an earth rune should only consume a single dust rune.
+                // https://youtu.be/9gAiqEmF-Hc?t=67
+                combo.types.forEach { cost[it.id] = cost.getOrDefault(it.id, 0) - usage }
             }
         }
-        p.setAttribute("spell:runes",removeItems)
-        return amtRemaining <= 0
-    }
 
-    fun hasRune(p: Player, item: Item, toRemove: MutableList<Item?>, message: Boolean): Boolean {
-        if (!usingStaff(p, item.id)) {
-            val hasBaseRune = p.inventory.contains(item.id, item.amount)
-            if (!hasBaseRune) {
-                val baseAmt = p.inventory.getAmount(item.id)
-                if (baseAmt > 0) {
-                    toRemove.add(Item(item.id, p.inventory.getAmount(item.id)))
-                }
-                var amtRemaining = item.amount - baseAmt
-                val possibleComboRunes = CombinationRune.eligibleFor(Runes.forId(item.id))
-                for (r in possibleComboRunes) {
-                    if (p.inventory.containsItem(Item(r.id)) && amtRemaining > 0) {
-                        val amt = p.inventory.getAmount(r.id)
-                        if (amtRemaining < amt) {
-                            toRemove.add(Item(r.id, amtRemaining))
-                            amtRemaining = 0
-                            continue
-                        }
-                        amtRemaining -= p.inventory.getAmount(r.id)
-                        toRemove.add(Item(r.id, p.inventory.getAmount(r.id)))
-                    }
-                }
-                return if (amtRemaining <= 0) {
-                    true
-                } else {
-                    p.packetDispatch.sendMessage("You don't have enough " + item.name + "s to cast this spell.")
-                    false
-                }
+        for ((runeId, amount) in cost) {
+            if (amount <= 0) continue
+
+            val available = p.inventory.getAmount(runeId)
+            if (available < amount) {
+                return Item(runeId, amount)
             }
-            toRemove.add(item)
-            return true
-        }
-        return true
-    }
 
-    fun attackableNPC(npc: NPC): Boolean{
-        return npc.definition.hasAction("attack")
+            toRemove.add(Item(runeId, amount))
+        }
+
+        p.setAttribute("spell:runes", toRemove)
+        return null
     }
 
     @JvmStatic

@@ -2,7 +2,7 @@ package content.global.skill.magic.modern
 
 import content.data.Quests
 import content.global.skill.magic.SpellListener
-import content.global.skill.magic.SpellUtils.hasRune
+import content.global.skill.magic.SpellUtils.hasRunes
 import content.global.skill.magic.TeleportMethod
 import content.global.skill.magic.homeTeleport
 import content.global.skill.magic.spellconsts.Modern
@@ -323,11 +323,10 @@ class ModernListeners : SpellListener("modern"){
                         sendMessage(player, "You need a magic level of ${spell.level} to cast this spell.")
                         return@queueScript stopExecuting(player)
                     }
-                    for (rune in spell.requiredRunes) {
-                        if(!hasRune(player,rune)){
-                            sendMessage(player, "You don't have enough ${rune.name.lowercase()}s to cast this spell.")
-                            return@queueScript stopExecuting(player)
-                        }
+                    val missing = hasRunes(player, spell.requiredRunes)
+                    if (missing != null) {
+                        sendMessage(player, "You don't have enough ${missing.name.lowercase()}s to cast this spell.")
+                        return@queueScript stopExecuting(player)
                     }
                     visualizeSpell(player, CHARGE_ORB_ANIM, spell.graphics, spell.sound)
                     removeRunes(player)
