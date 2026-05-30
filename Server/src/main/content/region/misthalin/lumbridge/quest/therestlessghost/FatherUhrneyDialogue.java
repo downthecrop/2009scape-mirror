@@ -1,6 +1,7 @@
 package content.region.misthalin.lumbridge.quest.therestlessghost;
 
 import content.data.Quests;
+import core.game.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
@@ -41,7 +42,7 @@ public final class FatherUhrneyDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		npc("Go away! I'm meditating!");
+		npc(FacialExpression.ANGRY, "Go away! I'm meditating!");
 		stage = 0;
 		return true;
 	}
@@ -51,13 +52,13 @@ public final class FatherUhrneyDialogue extends DialoguePlugin {
 		switch (stage) {
 		case 0:
 			if (player.getQuestRepository().getQuest(Quests.THE_RESTLESS_GHOST).getStage(player) == 0) {
-				options("Well, that's friendly.", "I've come to respossess your house.");
+				options("Well, that's friendly.", "I've come to repossess your house.");
 				stage = 1;
 			} else if (player.getQuestRepository().getQuest(Quests.THE_RESTLESS_GHOST).getStage(player) == 10) {
-				options("Well, that's friendly.", "I've come to respossess your house.", "Father Aereck sent me to talk to you.");
+				options("Well, that's friendly.", "Father Aereck sent me to talk to you.", "I've come to repossess your house.");
 				stage = 500;
 			} else if (player.getGameAttributes().getAttributes().containsKey("restless-ghost:urhney") || player.getQuestRepository().isComplete(Quests.THE_RESTLESS_GHOST)) {
-				options("Well, that's friendly.", "I've come to respossess your house.", "I've lost the Amulet of Ghostspeak.");
+				options("Well, that's friendly.", "I've lost the Amulet of Ghostspeak.", "I've come to repossess your house.");
 				stage = 514;
 			}
 			break;
@@ -68,17 +69,17 @@ public final class FatherUhrneyDialogue extends DialoguePlugin {
 				stage = 10;
 				break;
 			case 2:
-				player("I've come to repossess your house.");
-				stage = 20;
-				break;
-			case 3:
 				player("Father Aereck sent me to talk to you.");
 				stage = 501;
+				break;
+			case 3:
+				player("I've come to repossess your house.");
+				stage = 20;
 				break;
 			}
 			break;
 		case 501:
-			npc("I suppose I'd better talk to you then. What problems", "has he got himself into this time?");
+			npc(FacialExpression.ANGRY, "I suppose I'd better talk to you then. What problems", "has he got himself into this time?");
 			stage = 502;
 			break;
 		case 502:
@@ -86,23 +87,23 @@ public final class FatherUhrneyDialogue extends DialoguePlugin {
 			stage = 503;
 			break;
 		case 503:
-			npc("Oh, the silly fool.");
+			npc(FacialExpression.ANGRY, "Oh, the silly fool.");
 			stage = 504;
 			break;
 		case 504:
-			npc("I leave town for just five months, and ALREADY he", "can't manage.");
+			npc(FacialExpression.ANGRY, "I leave town for just five months, and ALREADY he", "can't manage.");
 			stage = 505;
 			break;
 		case 505:
-			npc("(sigh)");
+			npc(FacialExpression.SAD, "(sigh)");
 			stage = 506;
 			break;
 		case 506:
-			npc("Well, I can't go back and exorcise it. I vowed not to", "leave this place. Until I had done a full two years of", "prayer and meditation.");
+			npc(FacialExpression.ANGRY, "Well, I can't go back and exorcise it. I vowed not to", "leave this place. Until I had done a full two years of", "prayer and meditation.");
 			stage = 507;
 			break;
 		case 507:
-			npc("Tell you what I can do though; take this amulet.");
+			npc(FacialExpression.NEUTRAL, "Tell you what I can do though; take this amulet.");
 			stage = 508;
 			break;
 		case 508:
@@ -118,15 +119,15 @@ public final class FatherUhrneyDialogue extends DialoguePlugin {
 			stage = 509;
 			break;
 		case 509:
-			npc("It is an Amulet of Ghostspeak.");
+			npc(FacialExpression.NEUTRAL, "It is an Amulet of Ghostspeak.");
 			stage = 510;
 			break;
 		case 510:
-			npc("So called, because when you wear it you can speak to", "ghosts. A lot of ghosts are doomed to be ghosts because", "they have left some important task uncompleted.");
+			npc(FacialExpression.NEUTRAL, "So called, because when you wear it you can speak to", "ghosts. A lot of ghosts are doomed to be ghosts because", "they have left some important task uncompleted.");
 			stage = 511;
 			break;
 		case 511:
-			npc("Maybe if you know what this task is, you can get rid of", "the ghost. I'm not making any gurantees mind you,", "but it is the best I can do right now.");
+			npc(FacialExpression.NEUTRAL, "Maybe if you know what this task is, you can get rid of", "the ghost. I'm not making any guarantees mind you,", "but it is the best I can do right now.");
 			stage = 512;
 			break;
 		case 512:
@@ -143,12 +144,12 @@ public final class FatherUhrneyDialogue extends DialoguePlugin {
 				stage = 10;
 				break;
 			case 2:
-				player("I've come to repossess your house.");
-				stage = 20;
+				player(FacialExpression.NEUTRAL, "I've lost the Amulet of Ghostspeak.");
+				stage = 515;
 				break;
 			case 3:
-				player("I've lost the Amulet of Ghostpeak.");
-				stage = 515;
+				player("I've come to repossess your house.");
+				stage = 20;
 				break;
 			}
 			break;
@@ -171,14 +172,14 @@ public final class FatherUhrneyDialogue extends DialoguePlugin {
 			stage = 518;
 			break;
 		case 517:
-			npc("What are you talking about? I can see you've got it", "in your bank!");
+			npc(FacialExpression.ANGRY, "You come here wasting my time... Has it even", "occurred to you to look in your bank? Now GO", "AWAY!");
 			stage = 518;
 			break;
 		case 518:
 			end();
 			break;
 		case 519:
-			npc("How careless can you get? Those things aren't easy to", "come by you know! It's a good job I've got a spare.");
+			npc(FacialExpression.ANGRY, "How careless can you get? Those things aren't easy to", "come by you know! It's a good job I've got a spare.");
 			stage = 520;
 			break;
 		case 520:
@@ -188,7 +189,7 @@ public final class FatherUhrneyDialogue extends DialoguePlugin {
 			stage = 521;
 			break;
 		case 521:
-			npc("Be more careful this time.");
+			npc(FacialExpression.ANGRY, "Be more careful this time.");
 			stage = 522;
 			break;
 		case 522:
@@ -252,7 +253,7 @@ public final class FatherUhrneyDialogue extends DialoguePlugin {
 			stage = 102;
 			break;
 		case 102:
-			player("Sorry. I mus thave got the wrong address. All the", "houses look the same around here.");
+			player("Sorry. I must have got the wrong address. All the", "houses look the same around here.");
 			stage = 103;
 			break;
 		case 103:
