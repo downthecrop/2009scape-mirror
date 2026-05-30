@@ -33,7 +33,7 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
         private val WAYNES_CHAINS_AREA = ZoneBorders(2969, 3310, 2975, 3314)
         private val SARAHS_FARMING_SHOP_AREA = ZoneBorders(3021, 3285, 3040, 3296)
         private val FALADOR_GENERAL_AREA = ZoneBorders(2934, 3399, 3399, 3307)
-        private val CHEMIST_AREA = ZoneBorders(2929, 3213, 2936, 3207)
+        private val CHEMIST_AREA = ZoneBorders(2925, 3213, 2939, 3207)
         private val PORT_SARIM_FLOWER_PATCH = ZoneBorders(3053, 3306, 3056, 3309)
 
 
