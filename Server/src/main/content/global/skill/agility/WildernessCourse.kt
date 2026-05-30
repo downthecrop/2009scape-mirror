@@ -2,6 +2,7 @@ package content.global.skill.agility
 
 import core.api.*
 import core.cache.def.impl.SceneryDefinition
+import core.game.interaction.QueueStrength
 import core.game.node.Node
 import core.game.node.scenery.Scenery
 import core.game.node.entity.player.Player
@@ -168,25 +169,27 @@ class WildernessCourse
     private fun handleSteppingStones(player: Player, `object`: Scenery) {
         lock(player, 50)
         val fail = AgilityHandler.hasFailed(player, 1, 0.3)
-        val origLoc = player.location
-        registerLogoutListener(player, "steppingstone"){p ->
-            player.location = origLoc
-        }
-        submitWorldPulse(object : Pulse(2, player){
-            var counter = 0
-            override fun pulse(): Boolean {
-                if (counter == 3 && fail) {
-                    AgilityHandler.fail(player, -1, Location.create(3001, 3963, 0), Animation.create(771), (player.skills.lifepoints * 0.26).toInt(), "...You lose your footing and fall into the lava.")
-                    return true
-                }
-                AgilityHandler.forceWalk(player, if (counter == 5) 2 else -1, player.location, player.location.transform(-1, 0, 0), Animation.create(741), 10, if (counter == 5) 20.0 else 0.0, if (counter != 0) null else "You carefully start crossing the stepping stones...")
-                if(++counter == 6){
-                    unlock(player)
-                    clearLogoutListener(player, "steppingstone")
-                }
-                return counter == 6
+        queueScript(player, 0, QueueStrength.SOFT) { stage ->
+            val courseIndex = if (stage == 5) 2 else -1
+            val start = player.location
+            val end = player.location.transform(-1, 0, 0)
+            val anim = Animation(741)
+            val xp = if (stage == 5) 20.0 else 0.0
+            val message = if (stage == 0) "You carefully start crossing the stepping stones..." else null
+            AgilityHandler.forceWalk(player, courseIndex, start, end, anim, 10, xp, message)
+            if (stage == 2 && fail) {
+                val dest = Location(3001, 3963, 0)
+                val failanim = Animation(771)
+                val hit = (player.skills.lifepoints * 0.26).toInt()
+                AgilityHandler.fail(player, -1, dest, failanim, hit, "... You lose your footing and fall into the lava.")
+                return@queueScript stopExecuting(player)
             }
-        })
+            if (stage == 5) {
+                unlock(player)
+                return@queueScript stopExecuting(player)
+            }
+            return@queueScript delayScript(player, 2)
+        }
     }
 
     /**
