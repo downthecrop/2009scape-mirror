@@ -1,8 +1,6 @@
 package content.global.activity.cchallange.npc
 
 import core.api.*
-import core.game.container.impl.EquipmentContainer
-import core.game.global.action.EquipHandler
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.npc.AbstractNPC
@@ -62,12 +60,11 @@ class LesserDemonChampionNPC(id: Int = 0, location: Location? = null) : Abstract
         super.checkImpact(state)
         val player = state.attacker
         if (player is Player) {
-            if (!player.equipment[3].hasItemPlugin()) {
+            if (player.equipment.isEmpty) {
                 state.neutralizeHits()
                 state.estimatedHit = state.maximumHit
             } else {
-                EquipHandler.unequip(player, EquipmentContainer.SLOT_WEAPON, id)
-                sendMessage(player, "You cannot use weapons in this challenge.")
+                sendMessage(player, "You cannot wear any equipment in this challenge.")
                 if (state.estimatedHit > -1) {
                     state.estimatedHit = 0
                     return
