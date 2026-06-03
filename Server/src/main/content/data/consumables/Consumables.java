@@ -118,6 +118,8 @@ public enum Consumables {
 	EGG_AND_TOMATO(new Food(new int[] {7064, 1923}, new HealingEffect(8))),
 	SWEET_CORN(new Food(new int[] {5988}, new MultiEffect(new HealingEffect(1), new PercentageHealthEffect(10)))),
 	SWEETCORN_BOWL(new Food(new int[] {7088, 1923}, new MultiEffect(new HealingEffect(1), new PercentageHealthEffect(10)))),
+	CHOPPED_TUNA(new Food(new int[] {7086, 1923}, new HealingEffect(10))),
+	CHOPPED_ONION(new Food(new int[] {1871, 1923}, new HealingEffect(1))),
 	POTATO_WITH_BUTTER(new Food(new int[] {6703}, new HealingEffect(7))),
 	CHILLI_POTATO(new Food(new int[] {7054}, new HealingEffect(14))),
 	FRIED_ONIONS(new Food(new int[] {7084, 1923}, new HealingEffect(5))),

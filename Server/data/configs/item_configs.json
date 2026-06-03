@@ -20859,8 +20859,10 @@
   {
     "ge_buy_limit": "200",
     "grand_exchange_price": "177",
+    "examine": "I need to add some meat too.",
     "durability": null,
     "name": "Incomplete stew",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "1997"
   },
@@ -20876,8 +20878,10 @@
   {
     "ge_buy_limit": "200",
     "grand_exchange_price": "210",
+    "examine": "I need to add some potato too.",
     "durability": null,
     "name": "Incomplete stew",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "1999"
   },
@@ -64514,7 +64518,7 @@
   },
   {
     "ge_buy_limit": "10000",
-    "examine": "Raw sweetcorn.",
+    "examine": "A bowl of cooked sweetcorn.",
     "grand_exchange_price": "110",
     "durability": null,
     "name": "Sweetcorn",
