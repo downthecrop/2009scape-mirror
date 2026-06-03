@@ -66,7 +66,7 @@ public final class CacheFile {
 			return null;
 		}
 		if (xteaKeys != null && (xteaKeys[0] != 0 || xteaKeys[1] != 0 || xteaKeys[2] != 0 || xteaKeys[3] != 0)) {
-			packedData = XTEACryption.decrypt(xteaKeys, ByteBuffer.wrap(packedData), 5, packedData.length).array();
+			packedData = XTEACryption.Companion.decrypt(xteaKeys, ByteBuffer.wrap(packedData), 5, packedData.length).array();
 		}
 		return ContainersInformation.unpackCacheContainer(packedData);
 	}

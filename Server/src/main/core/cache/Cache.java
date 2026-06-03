@@ -145,7 +145,7 @@ public final class Cache {
 				buffer.putInt(0);
 				continue;
 			}
-			buffer.putInt(cacheFileManagers[index].getInformation().getInformationContainer().getCrc());
+			buffer.putInt(cacheFileManagers[index].getInformation().informationContainer.getCrc());
 			buffer.putInt(cacheFileManagers[index].getInformation().getRevision());
 		}
 		return buffer.array();
