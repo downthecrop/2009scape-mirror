@@ -9,7 +9,7 @@ import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
 import core.ServerConstants
 import core.api.*
-import core.tools.SystemLogger
+import core.game.node.entity.combat.InteractionType
 import core.game.system.command.Privilege
 import core.game.world.GameWorld
 import core.game.world.map.path.Pathfinder
@@ -28,10 +28,21 @@ class RevenantController : TickListener, Commands {
         private var expectedRevAmount: Int = ServerConstants.REVENANT_POPULATION
         private var groupPatrolQueue = ArrayList<RevenantNPC>()
 
+        // Movement tracking for stuck detection
+        private val movementStartTick = HashMap<RevenantNPC, Int>()
+        private val lastKnownLocation = HashMap<RevenantNPC, Location>()
+        private val failedAttempts = HashMap<RevenantNPC, Int>()
+        // Stuck detector config
+        private const val STUCK_CHECK_INTERVAL = 10 // ticks
+        private const val MAX_FAILED_ATTEMPTS = 5
+
         @JvmStatic fun registerRevenant(revenantNPC: RevenantNPC) {
             trackedRevenants.add(revenantNPC)
             taskTimeRemaining[revenantNPC] = 0
             currentTask[revenantNPC] = RevenantTask.NONE
+            movementStartTick[revenantNPC] = GameWorld.ticks
+            lastKnownLocation[revenantNPC] = revenantNPC.location
+            failedAttempts[revenantNPC] = 0
             Repository.RENDERABLE_NPCS.add(revenantNPC)
         }
 
@@ -39,19 +50,188 @@ class RevenantController : TickListener, Commands {
             trackedRevenants.remove(revenantNPC)
             taskTimeRemaining.remove(revenantNPC)
             currentTask.remove(revenantNPC)
+            movementStartTick.remove(revenantNPC)
+            lastKnownLocation.remove(revenantNPC)
+            failedAttempts.remove(revenantNPC)
+            groupPatrolQueue.remove(revenantNPC)
             if (removeRender)
                 Repository.RENDERABLE_NPCS.remove(revenantNPC)
         }
 
+        private fun route(vararg coords: Pair<Int, Int>): Array<Location> =
+            Array(coords.size) { Location.create(coords[it].first, coords[it].second) }
+
+        // All routes that revs attempt to path through
         val routes = listOf(
-            arrayOf(Location.create(3070, 3651), Location.create(3083, 3640), Location.create(3106, 3645), Location.create(3133, 3647), Location.create(3149, 3642), Location.create(3160, 3654), Location.create(3171, 3665, 0), Location.create(3189, 3663, 0), Location.create(3202, 3675, 0), Location.create(3217, 3660, 0), Location.create(3235, 3661, 0), Location.create(3235, 3661, 0), Location.create(3279, 3650, 0), Location.create(3269, 3636, 0), Location.create(3253, 3632, 0), Location.create(3236, 3638, 0), Location.create(3220, 3637, 0), Location.create(3203, 3634, 0), Location.create(3187, 3631, 0), Location.create(3166, 3633, 0), Location.create(3160, 3616, 0), Location.create(3148, 3604, 0), Location.create(3134, 3596, 0), Location.create(3118, 3590, 0), Location.create(3104, 3597, 0)),
-            arrayOf(Location.create(3077, 3565, 0), Location.create(3093, 3559, 0), Location.create(3110, 3566, 0), Location.create(3127, 3574, 0), Location.create(3146, 3571, 0), Location.create(3164, 3575, 0), Location.create(3183, 3573, 0), Location.create(3197, 3587, 0), Location.create(3215, 3584, 0), Location.create(3233, 3576, 0), Location.create(3251, 3573, 0), Location.create(3269, 3577, 0), Location.create(3287, 3569, 0), Location.create(3305, 3568, 0), Location.create(3321, 3576, 0), Location.create(3338, 3584, 0), Location.create(3352, 3573, 0), Location.create(3354, 3554, 0), Location.create(3342, 3541, 0), Location.create(3324, 3536, 0), Location.create(3306, 3543, 0), Location.create(3290, 3544, 0), Location.create(3272, 3545, 0), Location.create(3255, 3546, 0), Location.create(3239, 3539, 0), Location.create(3222, 3543, 0), Location.create(3206, 3548, 0), Location.create(3189, 3549, 0), Location.create(3173, 3552, 0), Location.create(3157, 3549, 0), Location.create(3140, 3548, 0), Location.create(3122, 3548, 0), Location.create(3110, 3555, 0)),
-            arrayOf(Location.create(3318, 3691, 0), Location.create(3307, 3700, 0), Location.create(3290, 3696, 0), Location.create(3277, 3706, 0), Location.create(3260, 3706, 0), Location.create(3250, 3707, 0), Location.create(3245, 3723, 0), Location.create(3254, 3735, 0), Location.create(3251, 3754, 0), Location.create(3243, 3768, 0), Location.create(3253, 3780, 0), Location.create(3238, 3783, 0), Location.create(3224, 3793, 0), Location.create(3206, 3786, 0), Location.create(3192, 3780, 0), Location.create(3170, 3787, 0), Location.create(3156, 3800, 0), Location.create(3148, 3814, 0), Location.create(3148, 3814, 0), Location.create(3127, 3840, 0), Location.create(3124, 3856, 0), Location.create(3124, 3872, 0), Location.create(3116, 3892, 0)),
-            arrayOf(Location.create(2949, 3890, 0), Location.create(2965, 3899, 0), Location.create(2984, 3900, 0), Location.create(2998, 3895, 0), Location.create(3016, 3898, 0), Location.create(3032, 3893, 0), Location.create(3048, 3897, 0), Location.create(3068, 3894, 0), Location.create(3084, 3898, 0), Location.create(3101, 3895, 0), Location.create(3118, 3897, 0), Location.create(3136, 3893, 0), Location.create(3154, 3900, 0), Location.create(3172, 3895, 0), Location.create(3189, 3892, 0), Location.create(3206, 3897, 0), Location.create(3222, 3890, 0), Location.create(3240, 3897, 0), Location.create(3259, 3892, 0), Location.create(3278, 3895, 0), Location.create(3296, 3892, 0), Location.create(3313, 3899, 0), Location.create(3331, 3888, 0), Location.create(3345, 3880, 0)),
-            arrayOf(Location.create(3308, 3941, 0), Location.create(3301, 3925, 0), Location.create(3287, 3915, 0), Location.create(3276, 3922, 0), Location.create(3266, 3938, 0), Location.create(3267, 3952, 0), Location.create(3250, 3949, 0), Location.create(3235, 3944, 0), Location.create(3219, 3944, 0), Location.create(3206, 3938, 0), Location.create(3194, 3929, 0), Location.create(3182, 3921, 0), Location.create(3174, 3936, 0), Location.create(3180, 3952, 0), Location.create(3167, 3960, 0), Location.create(3155, 3959, 0), Location.create(3141, 3953, 0), Location.create(3126, 3954, 0), Location.create(3110, 3961, 0), Location.create(3093, 3962, 0), Location.create(3078, 3953, 0), Location.create(3066, 3942, 0), Location.create(3059, 3929, 0), Location.create(3049, 3916, 0), Location.create(3033, 3924, 0), Location.create(3020, 3921, 0), Location.create(3010, 3913, 0), Location.create(2993, 3906, 0), Location.create(2977, 3911, 0), Location.create(2970, 3928, 0))
+            route(
+                3070 to 3651, 3083 to 3640, 3106 to 3645, 3133 to 3647, 3149 to 3642,
+                3160 to 3654, 3171 to 3665, 3189 to 3663, 3202 to 3675, 3217 to 3660,
+                3235 to 3661, 3235 to 3661, 3279 to 3650, 3269 to 3636, 3253 to 3632,
+                3236 to 3638, 3220 to 3637, 3203 to 3634, 3187 to 3631, 3166 to 3633,
+                3160 to 3616, 3148 to 3604, 3134 to 3596, 3118 to 3590, 3104 to 3597,
+            ),
+            route(
+                3077 to 3565, 3093 to 3559, 3110 to 3566, 3127 to 3574, 3146 to 3571,
+                3164 to 3575, 3183 to 3573, 3197 to 3587, 3215 to 3584, 3233 to 3576,
+                3251 to 3573, 3269 to 3577, 3287 to 3569, 3305 to 3568, 3321 to 3576,
+                3338 to 3584, 3352 to 3573, 3354 to 3554, 3342 to 3541, 3324 to 3536,
+                3306 to 3543, 3290 to 3544, 3272 to 3545, 3255 to 3546, 3239 to 3539,
+                3222 to 3543, 3206 to 3548, 3189 to 3549, 3173 to 3552, 3157 to 3549,
+                3140 to 3548, 3122 to 3548, 3110 to 3555,
+            ),
+            route(
+                3318 to 3691, 3307 to 3700, 3290 to 3696, 3277 to 3706, 3260 to 3706,
+                3250 to 3707, 3245 to 3723, 3254 to 3735, 3251 to 3754, 3243 to 3768,
+                3253 to 3780, 3238 to 3783, 3224 to 3793, 3206 to 3786, 3192 to 3780,
+                3170 to 3787, 3156 to 3800, 3148 to 3814, 3148 to 3814, 3127 to 3840,
+                3124 to 3856, 3124 to 3872, 3116 to 3892,
+            ),
+            route(
+                2949 to 3890, 2965 to 3899, 2984 to 3900, 2998 to 3895, 3016 to 3898,
+                3032 to 3893, 3048 to 3897, 3068 to 3894, 3084 to 3898, 3101 to 3895,
+                3118 to 3897, 3136 to 3893, 3154 to 3900, 3172 to 3895, 3189 to 3892,
+                3206 to 3897, 3222 to 3890, 3240 to 3897, 3259 to 3892, 3278 to 3895,
+                3296 to 3892, 3313 to 3899, 3331 to 3888, 3345 to 3880,
+            ),
+            route(
+                3308 to 3941, 3301 to 3925, 3287 to 3915, 3276 to 3922, 3266 to 3938,
+                3267 to 3952, 3250 to 3949, 3235 to 3944, 3219 to 3944, 3206 to 3938,
+                3194 to 3929, 3182 to 3921, 3174 to 3936, 3180 to 3952, 3167 to 3960,
+                3155 to 3959, 3141 to 3953, 3126 to 3954, 3110 to 3961, 3093 to 3962,
+                3078 to 3953, 3066 to 3942, 3059 to 3929, 3049 to 3916, 3033 to 3924,
+                3020 to 3921, 3010 to 3913, 2993 to 3906, 2977 to 3911, 2970 to 3928,
+            ),
+            route(
+                3308 to 3941, 3301 to 3925, 3297 to 3914, 3286 to 3910, 3259 to 3912,
+                3267 to 3952, 3251 to 3921, 3236 to 3918, 3222 to 3922, 3209 to 3920,
+                3190 to 3933, 3177 to 3939, 3175 to 3951, 3167 to 3960, 3155 to 3959,
+                3135 to 3951, 3134 to 3921, 3126 to 3914, 3108 to 3907, 3087 to 3910,
+                3077 to 3925, 3076 to 3937, 3066 to 3942, 3059 to 3929, 3049 to 3916,
+                3033 to 3924, 3020 to 3921, 3010 to 3913, 2993 to 3906, 2977 to 3911,
+                2970 to 3928,
+            ),
         )
 
-        val spawnLocations = listOf(Location.create(3075, 3553, 0), Location.create(3077, 3563, 0), Location.create(3077, 3578, 0), Location.create(3093, 3581, 0), Location.create(3103, 3570, 0), Location.create(3101, 3564, 0), Location.create(3030, 3596, 0), Location.create(3015, 3598, 0), Location.create(3000, 3593, 0), Location.create(2986, 3588, 0), Location.create(2969, 3701, 0), Location.create(2982, 3689, 0), Location.create(2967, 3689, 0), Location.create(2953, 3711, 0), Location.create(2966, 3759, 0), Location.create(2989, 3759, 0), Location.create(2986, 3741, 0), Location.create(2961, 3763, 0), Location.create(2969, 3808, 0), Location.create(3004, 3816, 0))
+        // Routes that Dark Beasts are too fat for
+        private val largeNpcIncompatibleRoutes = setOf(4)
+
+        val spawnLocations = listOf(
+            3075 to 3553, 3077 to 3563, 3077 to 3578, 3093 to 3581, 3103 to 3570,
+            3101 to 3564, 3030 to 3596, 3015 to 3598, 3000 to 3593, 2986 to 3588,
+            2969 to 3701, 2982 to 3689, 2967 to 3689, 2953 to 3713, 2966 to 3759,
+            2989 to 3759, 2986 to 3741, 2961 to 3763, 2969 to 3808, 3004 to 3816,
+        ).map { (x, y) -> Location.create(x, y) }
+
+        /**
+         * Revenant stuck detector
+         * Makes sure Revenants are either moving, intentionally waiting to act, or are in legitimate combat
+         * If they aren't, they're passed to the stuck handler
+         */
+        private fun checkIfStuck(revenantNPC: RevenantNPC): Boolean {
+            val lastTick = movementStartTick[revenantNPC] ?: 0
+            val lastLoc = lastKnownLocation[revenantNPC] ?: revenantNPC.location
+
+            // Period between checks - configure above
+            if (lastTick == 0 || (GameWorld.ticks - lastTick) < STUCK_CHECK_INTERVAL) {
+                return false
+            }
+
+            // Check if positioned exactly at a patrol route start location (likely intentionally inactive)
+            val routeStartLocations = routes.map { it[0] }
+            val isAtRouteStart = routeStartLocations.any { it.equals(revenantNPC.location) }
+
+            // Check if in legitimate combat
+            val combatPulse = revenantNPC.properties.combatPulse
+            val victim = combatPulse.getVictim()
+            val isInLegitimateCombat = if (victim != null) {
+                val interactionType = combatPulse.canInteract()
+                interactionType == InteractionType.STILL_INTERACT // The merits of MOVE_INTERACT regarding establishing a legitimate combat state are covered by the distanceMoved check a few lines from now
+            } else {
+                false
+            }
+
+            if (isAtRouteStart || isInLegitimateCombat) { //If the Revenant has a good reason to not be moving, skip the movement check
+                movementStartTick[revenantNPC] = GameWorld.ticks
+                lastKnownLocation[revenantNPC] = revenantNPC.location
+                failedAttempts[revenantNPC] = 0
+                return false
+            }
+
+            // Check if the revenant has moved
+            val distanceMoved = revenantNPC.location.getDistance(lastLoc)
+            val isStuck = distanceMoved <= 2
+
+            // Reset the timer to check if they are stuck, since we are checking now
+            movementStartTick[revenantNPC] = GameWorld.ticks
+
+            // Clear the Revenant's demerits towards being timed out if it is not stuck
+            if (!isStuck) {
+                lastKnownLocation[revenantNPC] = revenantNPC.location
+                failedAttempts[revenantNPC] = 0
+            }
+
+            return isStuck
+        }
+
+        /**
+         * Revenant stuck handler
+         * Tries to help the Revenant escape after giving it a demerit
+         * If the Revenant gets too many demerits, it will be timed out instead
+         * NOTE: times out Revenants in unloaded regions as they have no land to path to and thus cannot move
+         */
+        private fun handleStuckRevenant(revenantNPC: RevenantNPC) {
+            val attempts = failedAttempts[revenantNPC] ?: 0
+            failedAttempts[revenantNPC] = attempts + 1
+
+            if (attempts + 1 > MAX_FAILED_ATTEMPTS) {
+                poofClear(revenantNPC)
+                revenantNPC.setAttribute("done", true)
+                return
+            }
+
+            // The stuck Revenant will attempt to unstick itself
+            val escapeLocation = getNextLocation(revenantNPC)
+            revenantNPC.pulseManager.run(object : MovementPulse(revenantNPC, escapeLocation, Pathfinder.SMART) {
+                override fun pulse(): Boolean {
+                    return true
+                }
+            })
+        }
+
+        /**
+         * Finds a random location to try to move to that is within the Wilderness
+         */
+        fun getNextLocation(revenantNPC: RevenantNPC): Location {
+            val rawNextX = RandomFunction.random(-revenantNPC.walkRadius, revenantNPC.walkRadius)
+            val nextX = maxOf(rawNextX, 2951)
+            val rawNextY = RandomFunction.random(-revenantNPC.walkRadius, revenantNPC.walkRadius)
+            val nextY = maxOf(rawNextY, 3523)
+            return revenantNPC.location.transform(nextX, nextY, 0)
+        }
+
+        /**
+         * Determines how far Revenants can deviate from their path
+         */
+        private fun getPathVariance(revenantNPC: RevenantNPC, isGroup: Boolean): Int {
+            return when {
+                isGroup -> 4
+                revenantNPC.size() >= 3 -> 2  // Dark Beasts are fat, so keep them close to their safe routes
+                else -> 10
+            }
+        }
+
+        /**
+         * Gets a random route for patrols
+         * Will not assign Dark Beasts to routes they are too fat for
+         */
+        private fun getSuitableRoute(revenantNPC: RevenantNPC): Array<Location> {
+            val availableRoutes = if (revenantNPC.size() >= 3) {
+                routes.filterIndexed { index, _ -> index !in largeNpcIncompatibleRoutes }
+            } else {
+                routes
+            }
+            return availableRoutes.random()
+        }
     }
 
     override fun tick() {
@@ -113,7 +293,13 @@ class RevenantController : TickListener, Commands {
             private val MAX_ROAM_TICKS: Int = 250
 
             override fun execute(revenantNPC: RevenantNPC) {
-                if (!canMove(revenantNPC)) return
+
+                if (checkIfStuck(revenantNPC)) {
+                    handleStuckRevenant(revenantNPC)
+                    return
+                }
+
+                if (!canMoveBasic(revenantNPC)) return
 
                 val nextLoc = getNextLocation(revenantNPC)
                 revenantNPC.pulseManager.run(object : MovementPulse(revenantNPC, nextLoc, Pathfinder.SMART) {
@@ -123,22 +309,15 @@ class RevenantController : TickListener, Commands {
                     }
                 })
             }
-
-            override fun assign(revenantNPC: RevenantNPC) {
-                taskTimeRemaining[revenantNPC] = RandomFunction.random(MAX_ROAM_TICKS)
-            }
-
-            fun canMove(revenantNPC: RevenantNPC) : Boolean {
-                return  !revenantNPC.walkingQueue.isMoving
+            private fun canMoveBasic(revenantNPC: RevenantNPC): Boolean {
+                return !revenantNPC.walkingQueue.isMoving
                         && !revenantNPC.pulseManager.hasPulseRunning()
                         && !revenantNPC.properties.combatPulse.isAttacking
                         && !revenantNPC.properties.combatPulse.isInCombat
             }
 
-            fun getNextLocation(revenantNPC: RevenantNPC) : Location {
-                val nextX = RandomFunction.random(-revenantNPC.walkRadius, revenantNPC.walkRadius)
-                val nextY = RandomFunction.random(-revenantNPC.walkRadius, revenantNPC.walkRadius)
-                return revenantNPC.location.transform(nextX, nextY, 0)
+            override fun assign(revenantNPC: RevenantNPC) {
+                taskTimeRemaining[revenantNPC] = RandomFunction.random(MAX_ROAM_TICKS)
             }
         },
         PATROLLING_ROUTE {
@@ -148,7 +327,7 @@ class RevenantController : TickListener, Commands {
                 if (canGroup(revenantNPC)) {
                     addToPatrolGroup(revenantNPC)
                 } else {
-                    revenantNPC.setAttribute("route", routes.random())
+                    revenantNPC.setAttribute("route", getSuitableRoute(revenantNPC))
                     revenantNPC.setAttribute("routeidx", -1)
                 }
             }
@@ -158,7 +337,9 @@ class RevenantController : TickListener, Commands {
                 groupPatrolQueue.add(revenantNPC)
 
                 if (groupPatrolQueue.size == 3) {
-                    val groupRoute = routes.random()
+                    // Gets a route suitable for the largest NPC in the group
+                    val largestNPC = groupPatrolQueue.maxByOrNull { it.size() } ?: revenantNPC
+                    val groupRoute = getSuitableRoute(largestNPC)
                     for (rev in groupPatrolQueue) {
                         rev.setAttribute("route", groupRoute)
                         rev.setAttribute("routeidx", -1)
@@ -175,7 +356,12 @@ class RevenantController : TickListener, Commands {
                 val route = revenantNPC.getAttribute<Array<Location>>("route", null)
                 val routeIdx = revenantNPC.getAttribute("routeidx", -1)
 
-                if (!canMove(revenantNPC)) return
+                if (checkIfStuck(revenantNPC)) {
+                    handleStuckRevenant(revenantNPC)
+                    return
+                }
+
+                if (!canMoveAdvanced(revenantNPC)) return
 
                 if (isGroup && route == null) { //if this is a grouped rev and we are waiting on more revs still
                     taskTimeRemaining[revenantNPC] = 50 //just to make sure it doesn't time out roaming...
@@ -198,7 +384,7 @@ class RevenantController : TickListener, Commands {
                         revenantNPC.setAttribute("done", true)
                         return
                     }
-                    val pathVariance = if (isGroup) 4 else 10
+                    val pathVariance = getPathVariance(revenantNPC, isGroup)
                     val nextLoc = route[routeIdx].transform(
                         RandomFunction.random(-pathVariance, pathVariance),
                         RandomFunction.random(-pathVariance, pathVariance),
@@ -212,9 +398,8 @@ class RevenantController : TickListener, Commands {
                     revenantNPC.setAttribute("routeidx", routeIdx + 1)
                 }
             }
-
-            fun canMove(revenantNPC: RevenantNPC) : Boolean {
-                return  !revenantNPC.walkingQueue.isMoving
+            private fun canMoveAdvanced(revenantNPC: RevenantNPC) : Boolean {
+                return !revenantNPC.walkingQueue.isMoving
                         && !revenantNPC.pulseManager.hasPulseRunning()
                         && !revenantNPC.properties.combatPulse.isAttacking
                         && !revenantNPC.properties.combatPulse.isInCombat
