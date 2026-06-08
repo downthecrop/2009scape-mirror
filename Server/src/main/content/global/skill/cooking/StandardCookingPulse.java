@@ -149,7 +149,6 @@ public class StandardCookingPulse extends Pulse {
     public boolean cook(final Player player, final Scenery object, final boolean burned, final int initial, final int product) {
         Item initialItem = new Item(initial);
         Item productItem = new Item(product);
-        animate();
 
         //handle special cooking results (spits, cake, etc) that don't justify separate plugin
         switch (initial) {
@@ -188,6 +187,7 @@ public class StandardCookingPulse extends Pulse {
             }
             player.getPacketDispatch().sendMessage(getMessage(initialItem, productItem, burned));
             playAudio(player, Sounds.FRY_2577);
+            animate();
             return true;
         }
         return false;

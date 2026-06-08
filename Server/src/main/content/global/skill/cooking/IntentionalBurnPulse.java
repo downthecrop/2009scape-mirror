@@ -43,7 +43,6 @@ public class IntentionalBurnPulse extends StandardCookingPulse {
 
     @Override
     public boolean cook(Player player, Scenery object, boolean burned, int initial, int product) {
-        super.animate();
         Item initialItem = new Item(initial);
         Item productItem = new Item(product);
 
@@ -51,6 +50,7 @@ public class IntentionalBurnPulse extends StandardCookingPulse {
             player.getInventory().add(productItem);
             player.getPacketDispatch().sendMessage(getMessage(initialItem, productItem, burned));
             playAudio(player, Sounds.FRY_2577);
+            super.animate();
             return true;
         }
         return false;
