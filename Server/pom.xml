@@ -6,6 +6,7 @@
   <version>1.0.0</version>
   <properties>
     <project.mainClassName>core.Server</project.mainClassName>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
     <kotlin.version>1.8.20</kotlin.version>
     <kotlin.compiler.jvmTarget>11</kotlin.compiler.jvmTarget>
