@@ -532,6 +532,12 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
     }
 
     /**
+     * Hook for operations that conceptually happen during swing but could mess with experience granting logic if they
+     * happened earlier.
+     */
+    open fun postSwing(entity: Entity?, victim: Entity?, state: BattleState?) {}
+
+    /**
      * Gets the formated hit.
      * @param attacker The attacking entity.
      * @param victim The victim.

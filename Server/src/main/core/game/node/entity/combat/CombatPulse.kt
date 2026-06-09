@@ -431,6 +431,7 @@ class CombatPulse(
             }
             handler.adjustBattleState(entity, victim!!, state)
             handler.addExperience(entity, victim, state)
+            handler.postSwing(entity, victim, state)
             handler.visualize(entity, victim, state)
             if (delay - 1 < 1) {
                 handler.visualizeImpact(entity, victim, state)

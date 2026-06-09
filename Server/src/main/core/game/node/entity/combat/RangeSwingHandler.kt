@@ -101,8 +101,13 @@ open class RangeSwingHandler (vararg flags: SwingHandlerFlag) : CombatSwingHandl
         }
         if(state.estimatedHit > victim.skills.lifepoints) state.estimatedHit = victim.skills.lifepoints
         if(state.estimatedHit + state.secondaryHit > victim.skills.lifepoints) state.secondaryHit -= ((state.estimatedHit + state.secondaryHit) - victim.skills.lifepoints)
-        useAmmo(entity, state, victim.location)
         return 1 + ceil(entity.location.getDistance(victim.location) * 0.3).toInt()
+    }
+
+    override fun postSwing(entity: Entity?, victim: Entity?, state: BattleState?) {
+        // Using the last piece of ammo in swing causes experience calculations to assume we're using unarmed combat
+        // which gives wrong experience values. Delay ammo consumption until later to avoid this problem.
+        useAmmo(entity!!, state!!, victim!!.location)
     }
 
     /**
