@@ -24,6 +24,8 @@ fun getAudio(count: Int): Int {
 }
 
 fun homeTeleport(player: Player, dest: Location) {
+    player.walkingQueue.reset()
+    player.pulseManager.clear()
     if (player.timers.getTimer("teleblock") != null) {
         sendMessage(player, "A magical force prevents you from teleporting.")
         return

@@ -296,10 +296,13 @@ class CombatPulse(
         }
         setVictim(victim)
         entity.onAttack(victim as Entity?)
-        victim.scripts.removeWeakScripts()
+        if (isAttacking) {
+            victim.scripts.removeWeakScripts()
+        }
 
-        if (!isAttacking)
+        if (!isAttacking) {
             entity.pulseManager.run(this)
+        }
     }
 
     /**

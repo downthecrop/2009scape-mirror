@@ -57,6 +57,7 @@ class Poison : PersistTimer (30, "poison", flags = arrayOf(TimerFlag.ClearOnDeat
 	}
 
     override fun run (entity: Entity) : Boolean {
+        entity.scripts.removeWeakScripts()
         entity.impactHandler.manualHit (
             damageSource, 
             getDamageFromSeverity (severity--), 
