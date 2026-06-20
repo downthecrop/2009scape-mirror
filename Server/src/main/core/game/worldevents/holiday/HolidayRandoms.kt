@@ -155,7 +155,7 @@ class HolidayRandoms() : PersistTimer(0, "holiday", isAuto = true), Commands {
 
         define("forcehrevents", Privilege.ADMIN, "::forcehrevents [eventname]", "Force enable holiday random events.") { player, args ->
             if (args.size == 1) {
-                notify(player, "Holidays: halloween, christmas")
+                notify(player, "Holidays: halloween, christmas, aprilfools")
                 return@define
             }
             val event = args[1]
@@ -181,6 +181,12 @@ class HolidayRandoms() : PersistTimer(0, "holiday", isAuto = true), Commands {
                         }
                         notify(p, colorize("%GChristmas Randoms are now enabled!"))
                         registerTimer(p, HolidayRandoms())
+                    }
+                }
+                "aprilfools" -> {
+                    ServerConstants.FORCE_APRIL_FOOLS = true
+                    for (p in Repository.players) {
+                        notify(p, colorize("%GApril Fools is now active!"))
                     }
                 }
                 else -> reject(player, "Invalid event!")

@@ -164,6 +164,8 @@ object ServerConfigParser {
         ServerConstants.FORCE_HALLOWEEN_EVENTS = data.getBoolean("world.force_halloween_randoms", false)
         ServerConstants.FORCE_CHRISTMAS_EVENTS = data.getBoolean("world.force_christmas_randoms", false)
         ServerConstants.FORCE_EASTER_EVENTS = data.getBoolean("world.force_easter_randoms", false)
+        ServerConstants.APRIL_FOOLS_EVENT = data.getBoolean("world.april_fools_event", false)
+        ServerConstants.FORCE_APRIL_FOOLS = data.getBoolean("world.force_april_fools", false)
         ServerConstants.RUNECRAFTING_FORMULA_REVISION = data.getLong("world.runecrafting_formula_revision", 530).toInt()
         ServerConstants.ENHANCED_DEEP_WILDERNESS = data.getBoolean("world.enhanced_deep_wilderness", false)
         ServerConstants.WILDERNESS_EXCLUSIVE_LOOT = data.getBoolean("world.wilderness_exclusive_loot", false)

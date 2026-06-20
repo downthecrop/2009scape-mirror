@@ -337,6 +337,12 @@ class ServerConstants {
         var FORCE_EASTER_EVENTS = false
 
         @JvmField
+        var APRIL_FOOLS_EVENT = false
+
+        @JvmField
+        var FORCE_APRIL_FOOLS = false
+
+        @JvmField
         var RUNECRAFTING_FORMULA_REVISION = 530
 
         @JvmField
