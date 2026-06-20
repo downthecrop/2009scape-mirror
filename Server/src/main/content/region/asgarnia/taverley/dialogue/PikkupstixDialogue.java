@@ -148,7 +148,11 @@ public final class PikkupstixDialogue extends DialoguePlugin {
 			}
 			break;
 		case 100:
-			npc("Welcome to my humble abode. How can I help", "you?");
+			if (player.getSkills().getStaticLevel(Skills.SUMMONING) == 99) {
+				npc(FacialExpression.AMAZED, "Why, I've never seen such raw Summoning power", "before! If anyone has the right to own a Skillcape of", "Summoning, then it is you!");
+			} else {
+				npc("Welcome to my humble abode. How can I help", "you?");
+			}
 			break;
 		}
 		return true;
@@ -631,7 +635,7 @@ public final class PikkupstixDialogue extends DialoguePlugin {
 			switch (stage) {
 			case 0:
 				if (player.getSkills().getStaticLevel(Skills.SUMMONING) == 99) {
-					options("So, what's Summoning all about, then?", "Can I buy some Summoning supplies?", "Can I buy a Summoning skillcape?");
+					options("Yes, please sell me a Skillcape of Summoning.", "So, what's Summoning all about then?", "Can I buy some Summoning supplies?", "Please tell me about skillcapes.");
 					stage = 600;
 				} else {
 					options("So, what's Summoning all about, then?", "Can I buy some Summoning supplies?", "Please tell me about skillcapes.");
@@ -756,35 +760,40 @@ public final class PikkupstixDialogue extends DialoguePlugin {
 			case 600:
 				switch (buttonId) {
 				case 1:
+					player(FacialExpression.ASKING, "May I buy a Skillcape of Summoning, please?");
+					stage = 599;
+					break;
+				case 2:
 					player("So, what's summoning all about, then?");
 					stage = 10;
 					break;
-				case 2:
+				case 3:
 					player("Can I buy some summoning supplies, please?");
 					stage = 34;
 					break;
-				case 3:
-					player("Can I buy a Skillcape of Summoning?");
-					stage = 599;
+				case 4:
+					player("Please tell me about skillcapes.");
+					stage = 400;
 					break;
 				}
 				break;
 			case 599:
-				npc("Why yes you can! I must warn you that they cost", "a total of 99000 coins. Do you wish to still", "buy a skillcape of Summoning?");
+				npc(FacialExpression.NEUTRAL, "That is a pretty tall order, even for someone with your", "skills, " + player.getUsername() + ". You'll have to pay a fee of 99000 coins", "to get the cape.");
 				stage = 601;
 				break;
 			case 601:
-				options("Yes.", "No.");
+				options("99000 coins? I think not!", "I'll take one!");
 				stage = 602;
 				break;
 			case 602:
 				switch (buttonId) {
 				case 1:
-					player("Yes, please.");
-					stage = 603;
+					player(FacialExpression.AMAZED, "99000 coins? I think not!");
+					stage = 605;
 					break;
 				case 2:
-					end();
+					player(FacialExpression.HAPPY, "I'll take one!");
+					stage = 603;
 					break;
 				}
 				break;
@@ -804,12 +813,16 @@ public final class PikkupstixDialogue extends DialoguePlugin {
 					return true;
 				}
 				if (player.getInventory().add(ITEMS[player.getSkills().getMasteredSkills() > 1 ? 1 : 0], ITEMS[2])) {
-					player("There you go, enjoy!");
+					npc(FacialExpression.HAPPY, "Excellent! Wear that cape with pride my friend.");
 					stage = 604;
 				}
 				break;
 			case 604:
 				end();
+				break;
+			case 605:
+				npc(FacialExpression.NEUTRAL, "Well, keep that in mind the next time you ask. These", "things are not cheap to make you know!");
+				stage = 604;
 				break;
 			}
 			break;
