@@ -76,6 +76,20 @@ class MazeInterface : InteractionListener, EventHook<TickEvent>, MapArea {
                 WeightedItem(Items.DEFENCE_POTION2_135,1,1,1.0),
         )
 
+        private val ONE_WAY_WALL = mapOf(
+            Location.create(2904, 4573, 0) to setOf( // Diagonal entries
+                Location.create(2904, 4573, 0),
+                Location.create(2904, 4572, 0),
+                Location.create(2904, 4574, 0),
+            ),
+            Location.create(2906, 4586, 0) to setOf(  // Diagonal entries
+                Location.create(2906, 4586, 0),
+                Location.create(2907, 4586, 0),
+            ),
+            Location.create(2902, 4575, 0) to setOf(Location.create(2903, 4575, 0)),
+            Location.create(2924, 4583, 0) to setOf(Location.create(2923, 4583, 0)),
+        )
+
         fun initMaze(player: Player) {
             setAttribute(player, MAZE_ATTRIBUTE_TICKS_LEFT, 300)
             setVarp(player, MAZE_TIMER_VARP, (getAttribute<Int>(player, MAZE_ATTRIBUTE_TICKS_LEFT, 0) / 3),false)
@@ -190,10 +204,25 @@ class MazeInterface : InteractionListener, EventHook<TickEvent>, MapArea {
             return@on true
         }
 
-        on(Scenery.WALL_3628, IntType.SCENERY, "open") { player, node ->
-            // Door opening workaround
-            // Ignore 3629(WALL_3629) and 3630(WALL_3630) in handleAutowalkDoor ignoreSecondDoor
-            DoorActionHandler.handleAutowalkDoor(player, node as core.game.node.scenery.Scenery)
+        on(
+            intArrayOf(
+                Scenery.WALL_3628,
+                Scenery.WALL_3629,
+                Scenery.WALL_3630,
+                Scenery.WALL_3631,
+                Scenery.WALL_3632,
+            ),
+            IntType.SCENERY,
+            "open"
+        ) { player, node ->
+            val scenery = node as core.game.node.scenery.Scenery
+
+            if (ONE_WAY_WALL[scenery.location]?.contains(player.location) == true) {
+                sendDialogue(player, "I don't think that's the right way.")
+            } else {
+                DoorActionHandler.handleAutowalkDoor(player, scenery)
+            }
+
             return@on true
         }
 
