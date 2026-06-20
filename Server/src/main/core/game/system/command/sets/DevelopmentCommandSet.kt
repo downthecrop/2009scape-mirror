@@ -232,18 +232,35 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             writer.close()
         }
 
-        define("rolldrops", Privilege.ADMIN, "::rolldrops <lt>NPC ID<gt> <lt>AMOUNT<gt>", "Rolls the given NPC drop table AMOUNT times.") { player: Player, args: Array<String> ->
-            if(args.size < 2){
-                reject(player,"Usage: ::rolldrops npcid amount")
+        define(
+            "rolldrops",
+            Privilege.ADMIN,
+            "::rolldrops <lt>NPC ID<gt> <lt>AMOUNT<gt> [true|false]",
+            "Rolls the given NPC drop table AMOUNT times. Add true to persist the items in your bank."
+        ) { player: Player, args: Array<String> ->
+            if (args.size < 3) {
+                reject(player, "Usage: ::rolldrops npcid amount [true|false]")
             }
 
-            val container = player.dropLog
             val npcId = args[1].toInt()
             val amount = args[2].toInt()
+            val container = when (args.getOrNull(3)) {
+                "true" -> player.bank
+                "false", null -> {
+                    player.dropLog.clear()
+                    player.dropLog
+                }
 
-            container.clear()
+                else -> {
+                    reject(player, "Usage: ::rolldrops npcid amount [true|false]")
+                    return@define
+                }
+
+            }
+
             val drops = NPCDefinition.forId(npcId).dropTables.table.roll(player, amount)
-            for(drop in drops) container.add(drop, false)
+
+            for (drop in drops) container.add(drop, false)
             container.open(player)
         }
 
