@@ -85881,6 +85881,12 @@
     "name": "Pumpkin"
   },
   {
+    "id": "8077",
+    "name": "Pumpkin",
+    "examine": "What's black and white and smells of pumpkin?",
+    "end_height": ""
+  },
+  {
     "id": "8078",
     "name": "Maggie"
   },
@@ -85982,11 +85988,13 @@
   },
   {
     "id": "8104",
-    "name": "Barrel"
+    "name": "Barrel",
+    "examine": "What's black and white and smells like beer?"
   },
   {
     "id": "8105",
-    "name": "Bush"
+    "name": "Bush",
+    "examine": "What's black and white and down to earth?"
   },
   {
     "id": "8106",
@@ -85994,19 +86002,23 @@
   },
   {
     "id": "8107",
-    "name": "Cactus"
+    "name": "Cactus",
+    "examine": "What's black and white and covered in spines?"
   },
   {
     "id": "8108",
-    "name": "Crate"
+    "name": "Crate",
+    "examine": "What's black and white and on a sneaking mission?"
   },
   {
     "id": "8109",
-    "name": "Rock"
+    "name": "Rock",
+    "examine": "What's black and white and looks like a rock hopper?"
   },
   {
     "id": "8110",
-    "name": "Toadstool"
+    "name": "Toadstool",
+    "examine": "What's black and white and covered in mushroom?"
   },
   {
     "id": "8111",
@@ -87755,43 +87767,53 @@
   },
   {
     "id": "8502",
-    "name": "Cactus"
+    "name": "Cactus",
+    "examine": "Are those spines or feathers? Either way, it looks delicious."
   },
   {
     "id": "8503",
-    "name": "Cactus"
+    "name": "Cactus",
+    "examine": "Prickly, but strangely tasty-looking..."
   },
   {
     "id": "8504",
-    "name": "Bush"
+    "name": "Bush",
+    "examine": "It rustles deliciously."
   },
   {
     "id": "8505",
-    "name": "Toadstool"
+    "name": "Toadstool",
+    "examine": "A horrible fungus, but there is something strangely tasty about it."
   },
   {
     "id": "8506",
-    "name": "Barrel"
+    "name": "Barrel",
+    "examine": "The most delicious barrel you have ever seen."
   },
   {
     "id": "8507",
-    "name": "Bush"
+    "name": "Bush",
+    "examine": "Who would have thought that leaves could smell so edible?"
   },
   {
     "id": "8508",
-    "name": "Crate"
+    "name": "Crate",
+    "examine": "A crate. But delicious."
   },
   {
     "id": "8509",
-    "name": "Bush"
+    "name": "Bush",
+    "examine": "You feel a strange urge to pour gravy on that bush."
   },
   {
     "id": "8510",
-    "name": "Rock"
+    "name": "Rock",
+    "examine": "Now that's a rock I'd try to make into soup!"
   },
   {
     "id": "8511",
-    "name": "Bush"
+    "name": "Bush",
+    "examine": "Did that bush just pour sauce on itself?"
   },
   {
     "id": "8512",
