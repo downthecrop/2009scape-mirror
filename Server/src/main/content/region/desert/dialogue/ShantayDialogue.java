@@ -47,11 +47,11 @@ public final class ShantayDialogue extends DialoguePlugin {
 		}
 		if (args.length == 2) {
 			player.getPacketDispatch().sendMessage("Shantay saunters over to talk with you.");
-			interpreter.sendDialogues(836, FacialExpression.HALF_GUILTY, "If you want to be let out, you have to pay a fine of", "five gold. Do you want to pay now?");
+			interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "If you want to be let out, you have to pay a fine of", "five gold. Do you want to pay now?");
 			stage = 703;
 			return true;
 		}
-		interpreter.sendDialogues(836, FacialExpression.HALF_GUILTY, "Hello effendi, I am Shantay.");
+		interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "Hello effendi, I am Shantay.");
 		stage = 0;
 		return true;
 	}
@@ -60,11 +60,11 @@ public final class ShantayDialogue extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 0:
-			interpreter.sendDialogues(836, FacialExpression.HALF_GUILTY, "I see you're new. Please read the billboard poster", "before going into the desert. It'll give yer details on the", "dangers you can face.");
+			interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "I see you're new. Please read the billboard poster", "before going into the desert. It'll give yer details on the", "dangers you can face.");
 			stage = 1;
 			break;
 		case 1:
-			interpreter.sendDialogues(836, FacialExpression.HALF_GUILTY, "There is a heartbroken mother just past the gates and", "in the desert. Her name is Irena and she mourns her", "lost daughter. Such a shame.");
+			interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "There is a heartbroken mother just past the gates and", "in the desert. Her name is Irena and she mourns her", "lost daughter. Such a shame.");
 			stage = 2;
 			break;
 		case 2:
@@ -74,19 +74,19 @@ public final class ShantayDialogue extends DialoguePlugin {
 		case 3:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "What is this place?");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "What is this place?");
 				stage = 10;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Can I see what you have to sell please?");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Can I see what you have to sell please?");
 				stage = 20;
 				break;
 			case 3:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "I must be going.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "I must be going.");
 				stage = 30;
 				break;
 			case 4:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "I want to buy a Shantay pass for 5 gold coins.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "I want to buy a Shantay pass for 5 gold coins.");
 				stage = 40;
 				break;
 
@@ -101,7 +101,7 @@ public final class ShantayDialogue extends DialoguePlugin {
 				player.getInventory().add(new Item(1854));
 				interpreter.sendItemMessage(1854, "You purchase a Shantay Pass.");
 			} else {
-				interpreter.sendDialogues(player, null, "Sorry, I don't seem to have enough money.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Sorry, I don't seem to have enough money.");
 			}
 			stage = 41;
 			break;
@@ -109,18 +109,18 @@ public final class ShantayDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 30:
-			interpreter.sendDialogues(836, FacialExpression.HALF_GUILTY, "So long...");
+			interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "So long...");
 			stage = 31;
 			break;
 		case 31:
 			end();
 			break;
 		case 10:
-			interpreter.sendDialogues(836, FacialExpression.HALF_GUILTY, "This is the pass of Shantay. I guard this area with my", "men. I am responsible for keeping this pass open and", "repaired.");
+			interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "This is the pass of Shantay. I guard this area with my", "men. I am responsible for keeping this pass open and", "repaired.");
 			stage = 11;
 			break;
 		case 11:
-			interpreter.sendDialogues(836, FacialExpression.HALF_GUILTY, "My men and I prevent outlaws from getting out of the", "desert. And we stop the inexeperienced from a dry death", "in the sands. Which would you say you were?");
+			interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "My men and I prevent outlaws from getting out of the", "desert. And we stop the inexeperienced from a dry death", "in the sands. Which would you say you were?");
 			stage = 12;
 			break;
 		case 12:
@@ -130,21 +130,21 @@ public final class ShantayDialogue extends DialoguePlugin {
 		case 13:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, null, "I am definitely an outlaw, prepare to die.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "I am definitely an outlaw, prepare to die.");
 				stage = 700;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, null, "I am a little inexperienced.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "I am a little inexperienced.");
 				stage = 710;
 				break;
 			case 3:
-				interpreter.sendDialogues(player, null, "Er, neither, I'm an adventurer.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Er, neither, I'm an adventurer.");
 				stage = 720;
 				break;
 			}
 			break;
 		case 20:
-			interpreter.sendDialogues(836, FacialExpression.HALF_GUILTY, "Absolutely Effendi!");
+			interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "Absolutely Effendi!");
 			stage = 21;
 			break;
 		case 21:
@@ -152,11 +152,11 @@ public final class ShantayDialogue extends DialoguePlugin {
 			npc.openShop(player);
 			break;
 		case 700:
-			interpreter.sendDialogues(836, null, "Ha, very funny.....");
+			interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "Ha, very funny.....");
 			stage = 701;
 			break;
 		case 701:
-			interpreter.sendDialogues(836, null, "Guards arrest him!");
+			interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "Guards arrest him!");
 			stage = 702;
 			break;
 		case 702:
@@ -168,7 +168,7 @@ public final class ShantayDialogue extends DialoguePlugin {
 				public boolean pulse() {
 					player.setAttribute("/save:shantay-jail", true);
 					player.getProperties().setTeleportLocation(Location.create(3298, 3123, 0));
-					interpreter.sendDialogues(836, null, "You'll have to stay in there until you pay the fine of", "five gold pieces. Do you want to pay now?");
+					interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "You'll have to stay in there until you pay the fine of", "five gold pieces. Do you want to pay now?");
 					stage = 703;
 					return true;
 				}
@@ -181,11 +181,11 @@ public final class ShantayDialogue extends DialoguePlugin {
 		case 704:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, null, "Yes, okay.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Yes, okay.");
 				stage = 705;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, null, "No thanks, you're not having my money.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "No thanks, you're not having my money.");
 				stage = 800;
 				break;
 			}
@@ -194,20 +194,20 @@ public final class ShantayDialogue extends DialoguePlugin {
 			if (player.getInventory().remove(new Item(995, 5))) {
 				player.getPacketDispatch().sendMessage("You hand over the five gold pieces to Shantay.");
 				player.getPacketDispatch().sendMessage("Shantay unlocks the door to the cell.");
-				interpreter.sendDialogues(836, null, "Great, Effendi, now please try to keep the peace.");
+				interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "Great, Effendi, now please try to keep the peace.");
 				player.removeAttribute("shantay-jail");
 				stage = 822;
 			} else {
-				interpreter.sendDialogues(player, null, "Sorry, I don't seem to have enough money.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Sorry, I don't seem to have enough money.");
 				stage = 825;
 			}
 			break;
 		case 800:
-			interpreter.sendDialogues(836, null, "You have a choice. You can either pay five gold pieces", "or... You can be transported to a maximum security", "prision in Port Sarim");
+			interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "You have a choice. You can either pay five gold pieces", "or... You can be transported to a maximum security", "prison in Port Sarim");
 			stage = 801;
 			break;
 		case 801:
-			interpreter.sendDialogues(836, null, "Will you pay the five gold pieces?");
+			interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "Will you pay the five gold pieces?");
 			stage = 802;
 			break;
 		case 802:
@@ -217,17 +217,17 @@ public final class ShantayDialogue extends DialoguePlugin {
 		case 803:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, null, "Yes, okay.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Yes, okay.");
 				stage = 820;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, null, "No, do your worst!");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "No, do your worst!");
 				stage = 804;
 				break;
 			}
 			break;
 		case 804:
-			interpreter.sendDialogues(836, null, "You are to be transported to a maximum security", "prision in Port Sarim. I hope you've learn an important", "lesson from this.");
+			interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "You are to be transported to a maximum security", "prison in Port Sarim. I hope you've learnt an important", "lesson from this.");
 			stage = 805;
 			break;
 		case 805:
@@ -237,17 +237,17 @@ public final class ShantayDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 820:
-			interpreter.sendDialogues(836, null, "Good, I see that you have come to your senses.");
+			interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "Good, I see that you have come to your senses.");
 			stage = 821;
 			break;
 		case 821:
 			if (player.getInventory().remove(new Item(995, 5))) {
 				player.getPacketDispatch().sendMessage("You hand over the five gold pieces to Shantay.");
 				player.getPacketDispatch().sendMessage("Shantay unlocks the door to the cell.");
-				interpreter.sendDialogues(836, null, "Great, Effendi, now please try to keep the peace.");
+				interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "Great, Effendi, now please try to keep the peace.");
 				stage = 822;
 			} else {
-				interpreter.sendDialogues(player, null, "Sorry, I don't seem to have enough money.");
+				interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "Sorry, I don't seem to have enough money.");
 				stage = 825;
 			}
 			break;
@@ -258,26 +258,26 @@ public final class ShantayDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 710:
-			interpreter.sendDialogues(836, null, "Can I recommend that you purchase a full waterskin", "and a knife! These items will no doubt save your life. A", "waterskin will keep water from evaporating in the desert.");
+			interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "Can I recommend that you purchase a full waterskin", "and a knife! These items will no doubt save your life. A", "waterskin will keep water from evaporating in the desert.");
 			stage = 711;
 			break;
 		case 711:
-			interpreter.sendDialogues(836, null, "And a keen woodsman with a knife can extract juice", "from a cactus. Before you go into the desert, it's", "advisable to wear desert clothes. It's very hot in the", "desert and you'll surely cook if you wear amour.");
+			interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "And a keen woodsman with a knife can extract juice", "from a cactus. Before you go into the desert, it's", "advisable to wear desert clothes. It's very hot in the", "desert and you'll surely cook if you wear amour.");
 			stage = 712;
 			break;
 		case 712:
 			end();
 			break;
 		case 720:
-			interpreter.sendDialogues(836, null, "Great, I have just the thing for you the desert adventurer.", "I sell desert clothes which will keep you cool in the heat", "of the desert. I also sell waterskins so that you won't", "die in the desert.");
+			interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "Great, I have just the thing for you the desert adventurer.", "I sell desert clothes which will keep you cool in the heat", "of the desert. I also sell waterskins so that you won't", "die in the desert.");
 			stage = 721;
 			break;
 		case 721:
-			interpreter.sendDialogues(836, null, "A waterskin and a knife help you survive from the juice", "of a cactus. Use the chest to store your items, we'll take", "them to the bank. It's hot in the desert, you'll bake in", "all that armour.");
+			interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "A waterskin and a knife help you survive from the juice", "of a cactus. Use the chest to store your items, we'll take", "them to the bank. It's hot in the desert, you'll bake in", "all that armour.");
 			stage = 722;
 			break;
 		case 722:
-			interpreter.sendDialogues(836, null, "To keep the pass open we ask for 5 gold pieces. And", "we give you a Shantay Pass, just ask to see what I sell", "to buy one.");
+			interpreter.sendDialogues(836, FacialExpression.NEUTRAL, "To keep the pass open we ask for 5 gold pieces. And", "we give you a Shantay Pass, just ask to see what I sell", "to buy one.");
 			stage = 723;
 			break;
 		case 723:
