@@ -2,6 +2,7 @@ package content.global.dialogue;
 
 import content.global.handlers.item.book.GeneralRuleBook;
 import core.game.dialogue.DialoguePlugin;
+import core.game.diary.DiaryLevel;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
@@ -10,6 +11,10 @@ import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import org.rs09.consts.NPCs;
+
+import static content.region.misthalin.lumbridge.diary.LumbridgeAchivementDiary.Companion.BeginnerTasks.DRAYNOR_TALK_TO_TOWNCRIER_ABOUT_RULES;
+import static core.api.ContentAPIKt.finishTask;
 
 /**
  * Represents the town crier dialogue plugin.
@@ -127,9 +132,8 @@ public final class TownCrierDialogue extends DialoguePlugin {
 					return true;
 				}
 			});
-			// Find out about the Rules of Conduct from the Draynor<br><br>Town Crier
-			if (npc.getId() == 6136) {
-				player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 0, 10);
+			if (npc.getId() == NPCs.TOWN_CRIER_6136) {
+				finishTask(player, DiaryType.LUMBRIDGE, DiaryLevel.BEGINNER, DRAYNOR_TALK_TO_TOWNCRIER_ABOUT_RULES);
 			}
 			stage = 71;
 			break;

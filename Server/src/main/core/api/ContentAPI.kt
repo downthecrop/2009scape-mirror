@@ -25,6 +25,7 @@ import core.game.consumable.*
 import core.game.container.impl.EquipmentContainer
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.SkillDialogueHandler
+import core.game.diary.DiaryLevel
 import core.game.ge.GrandExchangeRecords
 import core.game.interaction.*
 import core.game.node.Node
@@ -42,6 +43,7 @@ import core.game.node.entity.player.link.HintIconManager
 import core.game.node.entity.player.link.IronmanMode
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.audio.Audio
+import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.player.link.emote.Emotes
 import core.game.node.entity.player.link.prayer.PrayerType
 import core.game.node.entity.player.link.quest.Quest
@@ -3333,6 +3335,35 @@ fun calculateDragonfireMaxHit(entity: Entity, maxDamage: Int, wyvern: Boolean = 
  */
 fun openSingleTab(player: Player, component: Int) {
     player.interfaceManager.openSingleTab(Component(component))
+}
+
+/**
+ * Finish an achievement diary task for the player.
+ * @param player the player who just finished the task.
+ * @param diary the diary the task belongs to.
+ * @param level the level of the task.
+ * @param task The task that was just finished.
+ */
+fun finishTask(player: Player, diary: DiaryType, level: DiaryLevel, task: Int) {
+    player.achievementDiaryManager.finishTask(player, diary, getDiaryLevelIndex(diary, level), task)
+}
+
+/**
+ * Resolves a [DiaryLevel] to an index for a specific diary.
+ * @param diary The diary the task belongs to.
+ * @param level The task level in the diary.
+ * @throws IllegalArgumentException if the level is not present in the diary.
+ * @return the index of the level that can be used with [core.game.node.entity.player.link.diary.AchievementDiaryManager.finishTask].
+ */
+fun getDiaryLevelIndex(diary: DiaryType, level: DiaryLevel): Int {
+    val levelName = level.name.lowercase().replaceFirstChar { c -> c.uppercase() }
+    val levelIndex = diary.levelNames.indexOf(levelName)
+
+    if (levelIndex < 0) {
+        throw IllegalArgumentException("'$levelName' was not found in diary '$diary'.")
+    }
+
+    return levelIndex
 }
 
 private class ContentAPI

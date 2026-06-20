@@ -180,16 +180,7 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
         )
     }
 
-    private fun findIndexFor(level: DiaryLevel): Int {
-        val levelName = level.name.lowercase().replaceFirstChar { c -> c.uppercase() }
-        val levelIndex = diaryType.levelNames.indexOf(levelName)
-
-        if (levelIndex < 0) {
-            throw IllegalArgumentException("'$levelName' was not found in diary '$diaryType'.")
-        }
-
-        return levelIndex
-    }
+    private fun findIndexFor(level: DiaryLevel): Int = getDiaryLevelIndex(diaryType, level)
 
     protected open fun onAreaVisited(player: Player) {
         areaTasks.forEach {
