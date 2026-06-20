@@ -155,7 +155,7 @@ public final class ThuroDialogue extends DialoguePlugin {
 					stage = 14;
 					return true;
 				}
-				player.getInventory().add(player.getSkills().getMasteredSkills() >= 1 ? ITEMS[1] : ITEMS[0]);
+				player.getInventory().add(player.getSkills().getMasteredSkills() > 1 ? ITEMS[1] : ITEMS[0]);
 				player.getInventory().add(ITEMS[2]);
 				interpreter.sendDialogues(npc, FacialExpression.OLD_NORMAL, "There you go! You're truley a master of Smithing.");
 				stage = 16;
@@ -488,7 +488,7 @@ public final class ThuroDialogue extends DialoguePlugin {
 					stage = 14;
 					return true;
 				}
-				player.getInventory().add(player.getSkills().getMasteredSkills() >= 1 ? ITEMS[1] : ITEMS[0]);
+				player.getInventory().add(player.getSkills().getMasteredSkills() > 1 ? ITEMS[1] : ITEMS[0]);
 				player.getInventory().add(ITEMS[2]);
 				interpreter.sendDialogues(npc, FacialExpression.OLD_NORMAL, "There you go! You're truley a master of Smithing.");
 				stage = 16;

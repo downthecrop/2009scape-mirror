@@ -1,34 +1,32 @@
 package core.game.node.entity.skill;
 
+import content.global.handlers.item.equipment.brawling_gloves.BrawlingGloves;
+import content.global.handlers.item.equipment.brawling_gloves.BrawlingGlovesManager;
 import content.global.skill.skillcapeperks.SkillcapePerks;
 import core.ServerConstants;
 import core.game.event.DynamicSkillLevelChangeEvent;
 import core.game.event.XPGainEvent;
-import content.global.handlers.item.equipment.brawling_gloves.BrawlingGloves;
-import content.global.handlers.item.equipment.brawling_gloves.BrawlingGlovesManager;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.ImpactHandler;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.info.PlayerMonitor;
 import core.game.node.entity.player.link.request.assist.AssistSession;
 import core.game.node.item.Item;
+import core.game.world.GameWorld;
+import core.game.world.repository.Repository;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.SkillContext;
 import core.net.packet.out.SkillLevel;
+import core.plugin.CorePluginTypes.XPGainPlugins;
 import kotlin.Pair;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import core.game.node.entity.player.info.PlayerMonitor;
-import core.game.world.GameWorld;
-import core.game.world.repository.Repository;
-import core.plugin.CorePluginTypes.XPGainPlugins;
 import org.rs09.consts.Items;
-import org.rs09.consts.Sounds;
 
 import java.util.ArrayList;
 
 import static core.api.ContentAPIKt.getWorldTicks;
-import static core.api.ContentAPIKt.playAudio;
 import static java.lang.Math.floor;
 import static java.lang.Math.max;
 
@@ -828,7 +826,7 @@ public final class Skills {
 	 */
 	public int getMasteredSkills() {
 		int count = 0;
-		for (int i = 0; i < 23; i++) {
+		for (int i = 0; i < staticLevels.length; i++) {
 			if (getStaticLevel(i) >= 99) {
 				count++;
 			}
