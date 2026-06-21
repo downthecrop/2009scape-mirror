@@ -202,7 +202,7 @@ public final class TrollheimPlugin extends OptionHandler {
 			switch (id) {
 			case 32738:
 				if (loc.equals(new Location(2892, 10072, 0))) {
-					player.getProperties().setTeleportLocation(LOCATIONS[0]);
+					player.getProperties().setTeleportLocation(LOCATIONS[9]);
 					return true;
 				}
 				player.teleport(LOCATIONS[1]);
