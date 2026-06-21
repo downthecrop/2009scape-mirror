@@ -14,6 +14,8 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import kotlin.random.Random
 import content.data.Quests
+import core.game.interaction.InterfaceListener
+import org.rs09.consts.Components
 
 /**
  * File to be used for anything Morytania related.
@@ -40,12 +42,15 @@ class MorytaniaListeners : InteractionListener {
         on(SWAMP_GATES, IntType.SCENERY, "open"){ player, node ->
             if(player.location.y == 3457){
                 core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                sendMessage(player, "You skip gladly out of murky Mort Myre.")
+                removeTimer<SwampDecayTimer>(player)
                 GlobalScope.launch {
                     findLocalNPC(player, NPCs.ULIZIUS_1054)?.sendChat("Oh my! You're still alive!", 2)
                 }
             } else {
                 if (player.questRepository.hasStarted(Quests.NATURE_SPIRIT)) {
-                    core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                    setAttribute(player, "swampgate", node)
+                    openInterface(player, Components.CWS_WARNING_20_580)
                 } else {
                     sendNPCDialogue(
                         player,
@@ -94,6 +99,26 @@ class MorytaniaListeners : InteractionListener {
                 val end = if (fromGrotto) start.transform(0,-3,0) else start.transform(0,3,0)
                 AgilityHandler.forceWalk(player, -1, start, end, jumpAnim, 15, 15.0, null,0)
             }
+            return@on true
+        }
+    }
+}
+
+class warningInterface : InterfaceListener {
+    override fun defineInterfaceListeners() {
+        on(Components.CWS_WARNING_20_580) { player, _, _, buttonID, _, _ ->
+            when(buttonID) {
+                17 -> {
+                    val gate = getAttribute(player, "swampgate", null) as? core.game.node.scenery.Scenery
+                    if (gate != null) {
+                        core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, gate)
+                        sendMessage(player, "You walk into the gloomy atmosphere of Mort Myre.")
+                    }
+                    closeInterface(player)
+                }
+                18 -> closeInterface(player)
+            }
+            removeAttribute(player, "swampgate")
             return@on true
         }
     }
