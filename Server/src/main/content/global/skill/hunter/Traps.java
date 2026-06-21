@@ -9,6 +9,8 @@ import core.tools.Log;
 import core.tools.SystemLogger;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
+import org.rs09.consts.Items;
+import org.rs09.consts.NPCs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,16 +35,30 @@ public enum Traps {
 		}
 	}), 
 	BOX_TRAP(new TrapSetting(10008, new int[] { 19187 }, new int[] { 1963, 12579, 1869, 9996, 5972, 12535 }, "lay", 19192, Animation.create(5208), new Animation(9726), 27),
-			new BoxTrapNode(new int[] { 5081 }, 27, 100, new Item[] { new Item(10092) }, 1),
-			new BoxTrapNode(new int[] { 6918, 7289, 7290, 7291, 7292 }, 27, 100, new Item[] { new Item(12184) }, 10),
-			new BoxTrapNode(new int[] { 1487 }, 27, 100, new Item[] { new Item(4033, 1) }, 95),
-			new BoxTrapNode(new int[] { 7021, 7022, 7023 }, 48, 150, new Item[] { new Item(12551, 1) }, 1),
-			new BoxTrapNode(new int[] { 5079 }, 53, 198, new Item[] { new Item(10033, 1) }, 1),
-			new BoxTrapNode(new int[] { 5428, 5430, 5449, 5450, 5451 }, 56, 150, new Item[] { new Item(12188) }, 1),
-			new BoxTrapNode(new int[] { 5080 }, 63, 265, new Item[] { new Item(10034, 1) }, 1),
-			new BoxTrapNode(new int[] { 7012, 7014 }, 66, 400, new Item[] { new Item(12535) }, 1),
-			new BoxTrapNode(new int[] { 8654 }, 73, 315, new Item[] { new Item(14861) }, 1),
-			new BoxTrapNode(new int[] { 7010, 7011 }, 77, 0, new Item[] { new Item(12539, 1) }, 1) {
+			new BoxTrapNode(new int[] { 5081 }, 27, 100, new Item[] { new Item(10092) }, 1), // Ferret
+			new BoxTrapNode(new int[] {NPCs.BABY_GECKO_6917 }, 27, 100, new Item[] { new Item(Items.BABY_GECKO_12488) }, 10), // Gecko Orange
+			new BoxTrapNode(new int[] {NPCs.BABY_GECKO_7285 }, 27, 100, new Item[] { new Item(Items.BABY_GECKO_12738) }, 10), // Gecko Speckled
+			new BoxTrapNode(new int[] {NPCs.BABY_GECKO_7286 }, 27, 100, new Item[] { new Item(Items.BABY_GECKO_12739) }, 10), // Gecko Green
+			new BoxTrapNode(new int[] {NPCs.BABY_GECKO_7287 }, 27, 100, new Item[] { new Item(Items.BABY_GECKO_12740) }, 10), // Gecko Blue
+			new BoxTrapNode(new int[] {NPCs.BABY_GECKO_7288 }, 27, 100, new Item[] { new Item(Items.BABY_GECKO_12741) }, 10), // Gecko Red
+			new BoxTrapNode(new int[] {NPCs.BABY_RACCOON_6997 }, 27, 100, new Item[] { new Item(Items.BABY_RACCOON_12486) }, 80), // Raccoon Gray
+			new BoxTrapNode(new int[] {NPCs.BABY_RACCOON_7275 }, 27, 100, new Item[] { new Item(Items.BABY_RACCOON_12734) }, 80), // Raccoon Tan
+			new BoxTrapNode(new int[] {NPCs.BABY_RACCOON_7276 }, 27, 100, new Item[] { new Item(Items.BABY_RACCOON_12736) }, 80), // Raccoon Red
+			new BoxTrapNode(new int[] { NPCs.BABY_MONKEY_6944 }, 27, 100, new Item[] { new Item(Items.BABY_MONKEY_12496) }, 95), // Monkey
+			new BoxTrapNode(new int[] { NPCs.BABY_MONKEY_7228 }, 27, 100, new Item[] { new Item(Items.BABY_MONKEY_12682) }, 95), // Monkey
+			new BoxTrapNode(new int[] { NPCs.BABY_MONKEY_7229 }, 27, 100, new Item[] { new Item(Items.BABY_MONKEY_12684) }, 95), // Monkey
+			new BoxTrapNode(new int[] { NPCs.BABY_MONKEY_7230 }, 27, 100, new Item[] { new Item(Items.BABY_MONKEY_12686) }, 95), // Monkey
+			new BoxTrapNode(new int[] { NPCs.BABY_MONKEY_7231 }, 27, 100, new Item[] { new Item(Items.BABY_MONKEY_12688) }, 95), // Monkey
+			new BoxTrapNode(new int[] { NPCs.BABY_MONKEY_7232 }, 27, 100, new Item[] { new Item(Items.BABY_MONKEY_12690) }, 95), // Monkey
+			new BoxTrapNode(new int[] { NPCs.BABY_MONKEY_7233 }, 27, 100, new Item[] { new Item(Items.BABY_MONKEY_12692) }, 95), // Monkey
+			new BoxTrapNode(new int[] { NPCs.BABY_MONKEY_7234 }, 27, 100, new Item[] { new Item(Items.BABY_MONKEY_12694) }, 95), // Monkey
+			new BoxTrapNode(new int[] { NPCs.BABY_MONKEY_7235 }, 27, 100, new Item[] { new Item(Items.BABY_MONKEY_12696) }, 95), // Monkey
+			new BoxTrapNode(new int[] { NPCs.BABY_MONKEY_7236 }, 27, 100, new Item[] { new Item(Items.BABY_MONKEY_12698) }, 95), // Monkey
+			new BoxTrapNode(new int[] { 7021, 7022, 7023 }, 48, 150, new Item[] { new Item(12551, 1) }, 1), // Platypus
+			new BoxTrapNode(new int[] { 5079 }, 53, 198, new Item[] { new Item(10033, 1) }, 1),             // Chinchompa
+			new BoxTrapNode(new int[] { 5080 }, 63, 265, new Item[] { new Item(10034, 1) }, 1),             // Red Chinchompa
+			new BoxTrapNode(new int[] { 7012, 7014 }, 66, 400, new Item[] { new Item(12535) }, 1),                 // Pawya
+			new BoxTrapNode(new int[] { 7010, 7011 }, 77, 0, new Item[] { new Item(12539, 1) }, 1) {        // Grenwall
                             @Override
                             public boolean canCatch(TrapWrapper wrapper, final NPC npc) {
                                 //old xp: 726
@@ -59,11 +75,16 @@ public enum Traps {
 			new TrapNode(new int[] { 5086 }, 37, 204, new int[] { 19208, 19208, 19217 }, new Item[] { new Item(10105), new Item(526) }),
 			new TrapNode(new int[] { 7039 }, 44, 200, new int[] { 28939, 28940, 28941 }, new Item[] { new Item(12567), new Item(526) }),
 			new TrapNode(new int[] { 5087 }, 51, 200, new int[] { 19209, 19210, 19216 }, new Item[] { new Item(10109), new Item(526) })),
-	NET_TRAP(new NetTrapSetting(), new TrapNode(new int[] { 5117 }, 29, 152, new int[] {}, new Item[] { new Item(10149) }),
-			new TrapNode(new int[] { 5114 }, 47, 224, new int[] {}, new Item[] { new Item(10146) }),
-			new TrapNode(new int[] { 6921 }, 29, 152, new int[] {}, new Item[] { new Item(12130) }),
-			new TrapNode(new int[] { 5115 }, 59, 272, new int[] {}, new Item[] { new Item(10147) }),
-			new TrapNode(new int[] { 5116 }, 67, 304, new int[] {}, new Item[] { new Item(10148) }));
+	NET_TRAP(new NetTrapSetting(),
+			new NetTrapNode(new int[] { 5117 }, 29, 152, new Item[] { new Item(10149) }, 1), // Swamp Lizard
+			new NetTrapNode(new int[] { 5114 }, 47, 224, new Item[] { new Item(10146) }, 1), // Orange Salamander
+			new NetTrapNode(new int[] { NPCs.BABY_SQUIRREL_6921 }, 29, 152, new Item[] { new Item(Items.BABY_SQUIRREL_12490) }, 60), // Squirrel Gray
+			new NetTrapNode(new int[] { NPCs.BABY_SQUIRREL_7309 }, 29, 152, new Item[] { new Item(Items.BABY_SQUIRREL_12754) }, 60), // Squirrel Tan
+			new NetTrapNode(new int[] { NPCs.BABY_SQUIRREL_7310 }, 29, 152, new Item[] { new Item(Items.BABY_SQUIRREL_12756) }, 60), // Squirrel White
+			new NetTrapNode(new int[] { NPCs.BABY_SQUIRREL_7311 }, 29, 152, new Item[] { new Item(Items.BABY_SQUIRREL_12758) }, 60), // Squirrel Grayish/Brown w/e
+			new NetTrapNode(new int[] { NPCs.BABY_SQUIRREL_7312 }, 29, 152, new Item[] { new Item(Items.BABY_SQUIRREL_12760) }, 60), // Squirrel Brown
+			new NetTrapNode(new int[] { 5115 }, 59, 272, new Item[] { new Item(10147) }, 1), // Red Salamander
+			new NetTrapNode(new int[] { 5116 }, 67, 304, new Item[] { new Item(10148) }, 1)); // Black Salamander
 
 	/**
 	 * The location hooks for this node.

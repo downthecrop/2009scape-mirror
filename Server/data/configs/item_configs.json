@@ -77819,6 +77819,16 @@
     "weight": "1"
   },
   {
+    "id": "9721",
+    "name": "Scroll",
+    "examine": "A scroll with some writing on it."
+  },
+  {
+    "id": "9722",
+    "name": "Key",
+    "examine": "Quite a small key."
+  },
+  {
     "id": "9723",
     "name": "Pipe",
     "examine": "A pipe that belongs in a cannon stand.",
@@ -99252,7 +99262,7 @@
   {
     "id": "12184",
     "name": "Gecko",
-    "examine": "(Baby) It's so adorably tiny!  (Adult) How cute!",
+    "examine": "How cute!",
     "archery_ticket_price": "0",
     "durability": null
   },
@@ -100617,42 +100627,42 @@
   {
     "id": "12486",
     "name": "Baby raccoon",
-    "examine": "(Baby) A stripy little baby raccoon.(Adult) He can run with us.",
+    "examine": "A stripy little baby raccoon.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12487",
     "name": "Raccoon",
-    "examine": "(Baby) A stripy little baby raccoon.(Adult) He can run with us.",
+    "examine": "He can run with us.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12488",
     "name": "Baby gecko",
-    "examine": "(Baby) It's so adorably tiny!  (Adult) How cute!",
+    "examine": "It's so adorably tiny!",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12489",
     "name": "Gecko",
-    "examine": "(Baby) It's so adorably tiny!  (Adult) How cute!",
+    "examine": "How cute!",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12490",
     "name": "Baby squirrel",
-    "examine": "Adult: An experienced nut-thief.Baby: A tiny nut-thief.",
+    "examine": "A tiny nut-thief.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12491",
     "name": "Squirrel",
-    "examine": "Adult: An experienced nut-thief.Baby: A tiny nut-thief.",
+    "examine": "An experienced nut-thief.",
     "archery_ticket_price": "0",
     "durability": null
   },
@@ -100689,9 +100699,14 @@
   {
     "id": "12496",
     "name": "Baby monkey",
-    "examine": "(Baby) It's a tiny, cheeky monkey. (Adult) Hide the bananas!",
+    "examine": "It's a tiny, cheeky monkey.",
     "archery_ticket_price": "0",
     "durability": null
+  },
+  {
+    "id": "12497",
+    "name": "Monkey",
+    "examine": "Hide the bananas!"
   },
   {
     "id": "12498",
@@ -102382,65 +102397,110 @@
   {
     "id": "12682",
     "name": "Baby monkey",
-    "examine": "(Baby) It's a tiny, cheeky monkey. (Adult) Hide the bananas!",
+    "examine": "It's a tiny, cheeky monkey.",
     "archery_ticket_price": "0",
     "durability": null
+  },
+  {
+    "id": "12683",
+    "name": "Monkey",
+    "examine": "Hide the bananas!"
   },
   {
     "id": "12684",
     "name": "Baby monkey",
-    "examine": "(Baby) It's a tiny, cheeky monkey. (Adult) Hide the bananas!",
+    "examine": "It's a tiny, cheeky monkey.",
     "archery_ticket_price": "0",
     "durability": null
+  },
+  {
+    "id": "12685",
+    "name": "Monkey",
+    "examine": "Hide the bananas!"
   },
   {
     "id": "12686",
     "name": "Baby monkey",
-    "examine": "(Baby) It's a tiny, cheeky monkey. (Adult) Hide the bananas!",
+    "examine": "It's a tiny, cheeky monkey.",
     "archery_ticket_price": "0",
     "durability": null
+  },
+  {
+    "id": "12687",
+    "name": "Monkey",
+    "examine": "Hide the bananas!"
   },
   {
     "id": "12688",
     "name": "Baby monkey",
-    "examine": "(Baby) It's a tiny, cheeky monkey. (Adult) Hide the bananas!",
+    "examine": "It's a tiny, cheeky monkey.",
     "archery_ticket_price": "0",
     "durability": null
+  },
+  {
+    "id": "12689",
+    "name": "Monkey",
+    "examine": "Hide the bananas!"
   },
   {
     "id": "12690",
     "name": "Baby monkey",
-    "examine": "(Baby) It's a tiny, cheeky monkey. (Adult) Hide the bananas!",
+    "examine": "It's a tiny, cheeky monkey.",
     "archery_ticket_price": "0",
     "durability": null
+  },
+  {
+    "id": "12691",
+    "name": "Monkey",
+    "examine": "Hide the bananas!"
   },
   {
     "id": "12692",
     "name": "Baby monkey",
-    "examine": "(Baby) It's a tiny, cheeky monkey. (Adult) Hide the bananas!",
+    "examine": "It's a tiny, cheeky monkey.",
     "archery_ticket_price": "0",
     "durability": null
+  },
+  {
+    "id": "12693",
+    "name": "Monkey",
+    "examine": "Hide the bananas!"
   },
   {
     "id": "12694",
     "name": "Baby monkey",
-    "examine": "(Baby) It's a tiny, cheeky monkey. (Adult) Hide the bananas!",
+    "examine": "It's a tiny, cheeky monkey.",
     "archery_ticket_price": "0",
     "durability": null
+  },
+  {
+    "id": "12695",
+    "name": "Monkey",
+    "examine": "Hide the bananas!"
   },
   {
     "id": "12696",
     "name": "Baby monkey",
-    "examine": "(Baby) It's a tiny, cheeky monkey. (Adult) Hide the bananas!",
+    "examine": "It's a tiny, cheeky monkey.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
+    "id": "12697",
+    "name": "Monkey",
+    "examine": "Hide the bananas!"
+  },
+  {
     "id": "12698",
     "name": "Baby monkey",
-    "examine": "(Baby) It's a tiny, cheeky monkey. (Adult) Hide the bananas!",
+    "examine": "It's a tiny, cheeky monkey.",
     "archery_ticket_price": "0",
     "durability": null
+  },
+  {
+    "id": "12699",
+    "name": "Monkey",
+    "examine": "Hide the bananas!"
   },
   {
     "id": "12700",
@@ -102707,84 +102767,84 @@
   {
     "id": "12734",
     "name": "Baby raccoon",
-    "examine": "(Baby) A stripy little baby raccoon.(Adult) He can run with us.",
+    "examine": "A stripy little baby raccoon.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12735",
     "name": "Raccoon",
-    "examine": "(Baby) A stripy little baby raccoon.(Adult) He can run with us.",
+    "examine": "He can run with us.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12736",
     "name": "Baby raccoon",
-    "examine": "(Baby) A stripy little baby raccoon.(Adult) He can run with us.",
+    "examine": "A stripy little baby raccoon.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12737",
     "name": "Raccoon",
-    "examine": "(Baby) A stripy little baby raccoon.(Adult) He can run with us.",
+    "examine": "He can run with us.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12738",
     "name": "Baby gecko",
-    "examine": "(Baby) It's so adorably tiny!  (Adult) How cute!",
+    "examine": "It's so adorably tiny!",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12739",
     "name": "Baby gecko",
-    "examine": "(Baby) It's so adorably tiny!  (Adult) How cute!",
+    "examine": "It's so adorably tiny!",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12740",
     "name": "Baby gecko",
-    "examine": "(Baby) It's so adorably tiny!  (Adult) How cute!",
+    "examine": "It's so adorably tiny!",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12741",
     "name": "Baby gecko",
-    "examine": "(Baby) It's so adorably tiny!  (Adult) How cute!",
+    "examine": "It's so adorably tiny!",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12742",
     "name": "Gecko",
-    "examine": "(Baby) It's so adorably tiny!  (Adult) How cute!",
+    "examine": "How cute!",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12743",
     "name": "Gecko",
-    "examine": "(Baby) It's so adorably tiny!  (Adult) How cute!",
+    "examine": "How cute!",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12744",
     "name": "Gecko",
-    "examine": "(Baby) It's so adorably tiny!  (Adult) How cute!",
+    "examine": "How cute!",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12745",
     "name": "Gecko",
-    "examine": "(Baby) It's so adorably tiny!  (Adult) How cute!",
+    "examine": "How cute!",
     "archery_ticket_price": "0",
     "durability": null
   },
@@ -102855,56 +102915,56 @@
   {
     "id": "12754",
     "name": "Baby squirrel",
-    "examine": "Adult: An experienced nut-thief.Baby: A tiny nut-thief.",
+    "examine": "A tiny nut-thief.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12755",
     "name": "Squirrel",
-    "examine": "Adult: An experienced nut-thief.Baby: A tiny nut-thief.",
+    "examine": "An experienced nut-thief.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12756",
     "name": "Baby squirrel",
-    "examine": "Adult: An experienced nut-thief.Baby: A tiny nut-thief.",
+    "examine": "A tiny nut-thief.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12757",
     "name": "Squirrel",
-    "examine": "Adult: An experienced nut-thief.Baby: A tiny nut-thief.",
+    "examine": "An experienced nut-thief.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12758",
     "name": "Baby squirrel",
-    "examine": "Adult: An experienced nut-thief.Baby: A tiny nut-thief.",
+    "examine": "A tiny nut-thief.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12759",
     "name": "Squirrel",
-    "examine": "Adult: An experienced nut-thief.Baby: A tiny nut-thief.",
+    "examine": "An experienced nut-thief.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12760",
     "name": "Baby squirrel",
-    "examine": "Adult: An experienced nut-thief.Baby: A tiny nut-thief.",
+    "examine": "A tiny nut-thief.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "12761",
     "name": "Squirrel",
-    "examine": "Adult: An experienced nut-thief.Baby: A tiny nut-thief.",
+    "examine": "An experienced nut-thief.",
     "archery_ticket_price": "0",
     "durability": null
   },

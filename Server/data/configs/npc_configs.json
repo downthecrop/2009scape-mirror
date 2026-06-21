@@ -38057,11 +38057,13 @@
   },
   {
     "id": "3284",
-    "name": "Squirrel"
+    "name": "Squirrel",
+    "examine": "Bushy tail!"
   },
   {
     "id": "3285",
-    "name": "Squirrel"
+    "name": "Squirrel",
+    "examine": "Bushy tail!"
   },
   {
     "id": "3286",
@@ -38081,7 +38083,8 @@
   },
   {
     "id": "3287",
-    "name": "Raccoon"
+    "name": "Raccoon",
+    "examine": "A raccoon."
   },
   {
     "id": "3288",
@@ -77156,20 +77159,23 @@
   },
   {
     "id": "6913",
-    "name": "Baby raccoon"
+    "name": "Baby raccoon",
+    "examine": "A stripy little baby raccoon."
   },
   {
     "id": "6914",
-    "name": "Raccoon"
+    "name": "Raccoon",
+    "examine": "He can run with us."
   },
   {
     "id": "6915",
-    "name": "Baby gecko"
+    "name": "Baby gecko",
+    "examine": "It's so adorably tiny!"
   },
   {
     "id": "6916",
     "name": "Gecko",
-    "examine": ""
+    "examine": "How cute!"
   },
   {
     "id": "6917",
@@ -77194,11 +77200,13 @@
   },
   {
     "id": "6919",
-    "name": "Baby squirrel"
+    "name": "Baby squirrel",
+    "examine": "A tiny nut-thief."
   },
   {
     "id": "6920",
-    "name": "Squirrel"
+    "name": "Squirrel",
+    "examine": "An experienced nut-thief."
   },
   {
     "id": "6921",
@@ -77299,6 +77307,7 @@
   {
     "id": "6942",
     "name": "Baby monkey",
+    "examine": "It's a tiny, cheeky monkey.",
     "attack_level": "1",
     "combat_audio": "629,631,630",
     "defence_level": "1",
@@ -77310,6 +77319,7 @@
   {
     "id": "6943",
     "name": "Monkey",
+    "examine": "Hide the bananas!",
     "attack_level": "1",
     "combat_audio": "629,631,630",
     "defence_level": "1",
@@ -77461,7 +77471,8 @@
   },
   {
     "id": "6970",
-    "name": "Pikkupstix"
+    "name": "Pikkupstix",
+    "examine": "He's a very important druid."
   },
   {
     "id": "6971",
@@ -77805,6 +77816,16 @@
   },
   {
     "id": "6988",
+    "name": "Pikkupstix",
+    "examine": "He's a very important druid."
+  },
+  {
+    "id": "6989",
+    "name": "Pikkupstix",
+    "examine": "He's a very important druid."
+  },
+  {
+    "id": "6990",
     "name": "Giant wolpertinger"
   },
   {
@@ -79666,6 +79687,7 @@
   {
     "id": "7210",
     "name": "Baby monkey",
+    "examine": "It's a tiny, cheeky monkey.",
     "attack_level": "1",
     "combat_audio": "629,631,630",
     "defence_level": "1",
@@ -79677,6 +79699,7 @@
   {
     "id": "7211",
     "name": "Monkey",
+    "examine": "Hide the bananas!",
     "attack_level": "1",
     "combat_audio": "629,631,630",
     "defence_level": "1",
@@ -79688,6 +79711,7 @@
   {
     "id": "7212",
     "name": "Baby monkey",
+    "examine": "It's a tiny, cheeky monkey.",
     "attack_level": "1",
     "combat_audio": "629,631,630",
     "defence_level": "1",
@@ -79699,6 +79723,7 @@
   {
     "id": "7213",
     "name": "Monkey",
+    "examine": "Hide the bananas!",
     "attack_level": "1",
     "combat_audio": "629,631,630",
     "defence_level": "1",
@@ -79710,6 +79735,7 @@
   {
     "id": "7214",
     "name": "Baby monkey",
+    "examine": "It's a tiny, cheeky monkey.",
     "attack_level": "1",
     "combat_audio": "629,631,630",
     "defence_level": "1",
@@ -79721,6 +79747,7 @@
   {
     "id": "7215",
     "name": "Monkey",
+    "examine": "Hide the bananas!",
     "attack_level": "1",
     "combat_audio": "629,631,630",
     "defence_level": "1",
@@ -79732,6 +79759,7 @@
   {
     "id": "7216",
     "name": "Baby monkey",
+    "examine": "It's a tiny, cheeky monkey.",
     "attack_level": "1",
     "combat_audio": "629,631,630",
     "defence_level": "1",
@@ -79743,6 +79771,7 @@
   {
     "id": "7217",
     "name": "Monkey",
+    "examine": "Hide the bananas!",
     "attack_level": "1",
     "combat_audio": "629,631,630",
     "defence_level": "1",
@@ -79754,6 +79783,7 @@
   {
     "id": "7218",
     "name": "Baby monkey",
+    "examine": "It's a tiny, cheeky monkey.",
     "attack_level": "1",
     "combat_audio": "629,631,630",
     "defence_level": "1",
@@ -79765,6 +79795,7 @@
   {
     "id": "7219",
     "name": "Monkey",
+    "examine": "Hide the bananas!",
     "attack_level": "1",
     "combat_audio": "629,631,630",
     "defence_level": "1",
@@ -79776,6 +79807,7 @@
   {
     "id": "7220",
     "name": "Baby monkey",
+    "examine": "It's a tiny, cheeky monkey.",
     "attack_level": "1",
     "combat_audio": "629,631,630",
     "defence_level": "1",
@@ -79787,6 +79819,7 @@
   {
     "id": "7221",
     "name": "Monkey",
+    "examine": "Hide the bananas!",
     "attack_level": "1",
     "combat_audio": "629,631,630",
     "defence_level": "1",
@@ -79798,6 +79831,7 @@
   {
     "id": "7222",
     "name": "Baby monkey",
+    "examine": "It's a tiny, cheeky monkey.",
     "attack_level": "1",
     "combat_audio": "629,631,630",
     "defence_level": "1",
@@ -79809,6 +79843,7 @@
   {
     "id": "7223",
     "name": "Monkey",
+    "examine": "Hide the bananas!",
     "attack_level": "1",
     "combat_audio": "629,631,630",
     "defence_level": "1",
@@ -79820,6 +79855,7 @@
   {
     "id": "7224",
     "name": "Baby monkey",
+    "examine": "It's a tiny, cheeky monkey.",
     "attack_level": "1",
     "combat_audio": "629,631,630",
     "defence_level": "1",
@@ -79831,6 +79867,7 @@
   {
     "id": "7225",
     "name": "Monkey",
+    "examine": "Hide the bananas!",
     "attack_level": "1",
     "combat_audio": "629,631,630",
     "defence_level": "1",
@@ -79842,6 +79879,7 @@
   {
     "id": "7226",
     "name": "Baby monkey",
+    "examine": "It's a tiny, cheeky monkey.",
     "attack_level": "1",
     "combat_audio": "629,631,630",
     "defence_level": "1",
@@ -79853,6 +79891,7 @@
   {
     "id": "7227",
     "name": "Monkey",
+    "examine": "Hide the bananas!",
     "attack_level": "1",
     "combat_audio": "629,631,630",
     "defence_level": "1",
@@ -80161,19 +80200,23 @@
   },
   {
     "id": "7271",
-    "name": "Baby raccoon"
+    "name": "Baby raccoon",
+    "examine": "A stripy little baby raccoon."
   },
   {
     "id": "7272",
-    "name": "Raccoon"
+    "name": "Raccoon",
+    "examine": "He can run with us."
   },
   {
     "id": "7273",
-    "name": "Baby raccoon"
+    "name": "Baby raccoon",
+    "examine": "A stripy little baby raccoon."
   },
   {
     "id": "7274",
-    "name": "Raccoon"
+    "name": "Raccoon",
+    "examine": "He can run with us."
   },
   {
     "id": "7275",
@@ -80193,40 +80236,48 @@
   },
   {
     "id": "7276",
-    "name": "Baby raccoon"
+    "name": "Baby raccoon",
+    "examine": "A stripy little baby raccoon."
   },
   {
     "id": "7277",
-    "name": "Baby gecko"
+    "name": "Baby gecko",
+    "examine": "It's so adorably tiny!"
   },
   {
     "id": "7278",
-    "name": "Baby gecko"
+    "name": "Baby gecko",
+    "examine": "It's so adorably tiny!"
   },
   {
     "id": "7279",
-    "name": "Baby gecko"
+    "name": "Baby gecko",
+    "examine": "It's so adorably tiny!"
   },
   {
     "id": "7280",
-    "name": "Baby gecko"
+    "name": "Baby gecko",
+    "examine": "It's so adorably tiny!"
   },
   {
     "id": "7281",
     "name": "Gecko",
-    "examine": ""
+    "examine": "How cute!"
   },
   {
     "id": "7282",
-    "name": "Gecko"
+    "name": "Gecko",
+    "examine": "How cute!"
   },
   {
     "id": "7283",
-    "name": "Gecko"
+    "name": "Gecko",
+    "examine": "How cute!"
   },
   {
     "id": "7284",
-    "name": "Gecko"
+    "name": "Gecko",
+    "examine": "How cute!"
   },
   {
     "id": "7285",
@@ -80252,7 +80303,7 @@
   {
     "id": "7287",
     "name": "Baby gecko",
-    "examine": ""
+    "examine": "It's so adorably tiny!"
   },
   {
     "id": "7288",
@@ -80261,7 +80312,8 @@
   },
   {
     "id": "7289",
-    "name": "Gecko"
+    "name": "Gecko",
+    "examine": "How cute!"
   },
   {
     "id": "7290",
@@ -80270,7 +80322,8 @@
   },
   {
     "id": "7291",
-    "name": "Gecko"
+    "name": "Gecko",
+    "examine": "How cute!"
   },
   {
     "id": "7292",
@@ -80311,51 +80364,63 @@
   },
   {
     "id": "7301",
-    "name": "Baby squirrel"
+    "name": "Baby squirrel",
+    "examine": "A tiny nut-thief."
   },
   {
     "id": "7302",
-    "name": "Squirrel"
+    "name": "Squirrel",
+    "examine": "An experienced nut-thief."
   },
   {
     "id": "7303",
-    "name": "Baby squirrel"
+    "name": "Baby squirrel",
+    "examine": "A tiny nut-thief."
   },
   {
     "id": "7304",
-    "name": "Squirrel"
+    "name": "Squirrel",
+    "examine": "An experienced nut-thief."
   },
   {
     "id": "7305",
-    "name": "Baby squirrel"
+    "name": "Baby squirrel",
+    "examine": "A tiny nut-thief."
   },
   {
     "id": "7306",
-    "name": "Squirrel"
+    "name": "Squirrel",
+    "examine": "An experienced nut-thief."
   },
   {
     "id": "7307",
-    "name": "Baby squirrel"
+    "name": "Baby squirrel",
+    "examine": "A tiny nut-thief."
   },
   {
     "id": "7308",
-    "name": "Squirrel"
+    "name": "Squirrel",
+    "examine": "An experienced nut-thief."
   },
   {
     "id": "7309",
-    "name": "Baby squirrel"
+    "name": "Baby squirrel",
+    "examine": "A tiny nut-thief."
   },
   {
     "id": "7310",
-    "name": "Baby squirrel"
+    "name": "Baby squirrel",
+    "examine": "A tiny nut-thief."
   },
   {
     "id": "7311",
-    "name": "Baby squirrel"
+    "name": "Baby squirrel",
+    "examine": "A tiny nut-thief."
   },
   {
     "id": "7312",
-    "name": "Baby squirrel"
+    "name": "Baby squirrel",
+    "examine": "A tiny nut-thief."
   },
   {
     "id": "7313",
