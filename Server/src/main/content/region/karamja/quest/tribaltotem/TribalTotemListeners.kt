@@ -34,7 +34,7 @@ class TribalTotemListeners : InteractionListener {
 
         on(realCrate, IntType.SCENERY, "Investigate"){ player, node ->
             if(player.questRepository.getStage(Quests.TRIBAL_TOTEM) in 1..19 && !player.inventory.containsAtLeastOneItem(Items.ADDRESS_LABEL_1858)){
-                sendDialogue(player,"There is a label on this crate. It says; To Lord Handelmort, Handelmort Mansion Ardogune.You carefully peel it off and take it.")
+                sendDialogue(player,"There is a label on this crate. It says; To Lord Handelmort, Handelmort Mansion, Ardougne.You carefully peel it off and take it.")
                 addItemOrDrop(player,Items.ADDRESS_LABEL_1858,1)
             }
             else if(player.questRepository.getStage(Quests.TRIBAL_TOTEM) in 1..19 && player.inventory.containsAtLeastOneItem(Items.ADDRESS_LABEL_1858)){
