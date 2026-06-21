@@ -175,7 +175,7 @@ class MysteriousGhostViggoraDialogueFile : DialogueLabeller() {
             npc("Hello yourself.")
             player("I really liked your little story. Can you tell me another one?")
             player("Preferably something with a big fight and lots of explosions!")
-            npc("...You are a very strange young @g[man/woman].")
+            npc("...You are a very strange young @g[man,woman].")
 
         label("lostghostlything")
             player(ChatAnim.SAD, "Can I have that cloak back?")

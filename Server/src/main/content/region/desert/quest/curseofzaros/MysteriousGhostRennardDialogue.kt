@@ -74,7 +74,7 @@ class MysteriousGhostRennardDialogueFile : DialogueLabeller() {
             player("Why don't you tell me what happened? I might be able to help...")
             npc("Well, I was making me merry way along, having just pulled off a glorious jewellery heist from a bunch of stinking dwarves...")
             player("Hey, that's no way to talk about dwarves! Some of my best friends are short!")
-            npc("Ah, yer misunderstand me [lad/lass], I wasn't generalising about the whole dwarf species, I had just stolen a bundle of jewels from a very specific group of dwarves who happened to have an odious stench about them!")
+            npc("Ah, yer misunderstand me @g[lad,lass], I wasn't generalising about the whole dwarf species, I had just stolen a bundle of jewels from a very specific group of dwarves who happened to have an odious stench about them!")
             player("Oh. Well I guess that's okay then. Please continue.")
             npc("Well, as I headed on me merry way, hoping the foul odours that lingered in me nostrils would soon pass, I see in front of me this explorer fella, all decked out in in his fine clothing, and carrying some long package")
             npc("bundled in rags.")
