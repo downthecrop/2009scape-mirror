@@ -14,6 +14,7 @@ import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
@@ -127,7 +128,6 @@ public final class KingBlackDragonNPC extends AbstractNPC {
         @Override
         public void adjustBattleState(Entity entity, Entity victim, BattleState state) {
             if (style == CombatStyle.RANGE) {
-                fireType.getTask().exec(victim, entity);
                 state.setStyle(null);
                 DRAGONFIRE.adjustBattleState(entity, victim, state);
                 state.setStyle(CombatStyle.RANGE);
@@ -184,6 +184,9 @@ public final class KingBlackDragonNPC extends AbstractNPC {
 
         @Override
         public void impact(Entity entity, Entity victim, BattleState state) {
+            if (style != CombatStyle.MELEE && victim.getImpactHandler().getDisabledTicks() <= GameWorld.getTicks()) {
+                fireType.getTask().exec(victim, entity);
+            }
             style.getSwingHandler().impact(entity, victim, state);
         }
 
