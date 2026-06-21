@@ -246,7 +246,13 @@ enum class EnchantedJewellery(
             when (stage) {
                 0 -> {
                     lock(player, 4)
-                    visualize(player, ANIMATION, GRAPHICS)
+                    // This is an intentional teleport animation & graphics difference as these two jewellery
+                    // animations are authentic to 2009 while others are currently unknown.
+                    if (this == RING_OF_DUELING || this == GAMES_NECKLACE) {
+                        visualize(player, JEWELLERY_ANIMATION, JEWELLERY_GRAPHICS)
+                    } else {
+                        visualize(player, ANIMATION, GRAPHICS)
+                    }
                     playGlobalAudio(player.location, Sounds.TELEPORT_ALL_200)
                     player.impactHandler.disabledTicks = 4
                     closeInterface(player)
@@ -255,6 +261,9 @@ enum class EnchantedJewellery(
                 1 -> {
                     teleport(player, location)
                     resetAnimator(player)
+                    if (this == RING_OF_DUELING || this == GAMES_NECKLACE) {
+                        player.graphics(JEWELLERY_GRAPHICS)
+                    }
                     unlock(player)
                     player.dispatch(TeleportEvent(TeleportManager.TeleportType.NORMAL, TeleportMethod.JEWELRY, item, location))
 
@@ -370,6 +379,8 @@ enum class EnchantedJewellery(
     companion object {
         private val ANIMATION = Animation(714)
         private val GRAPHICS = Graphics(308, 100, 50)
+        private val JEWELLERY_ANIMATION = Animation(9603)
+        private val JEWELLERY_GRAPHICS = Graphics(1684)
         val idMap = HashMap<Int, EnchantedJewellery>()
 
         init {
