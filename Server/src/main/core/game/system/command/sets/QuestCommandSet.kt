@@ -29,20 +29,38 @@ class QuestCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Displays the currently implemented quests with debug information
          */
-        define("quest", usage = "::quest [player-name]", description = "Shows quest stages for you, or for [player-name] if provided."){player,args ->
-            if (args.size < 3) {
-                val lookupP = if (args.size == 1) {
-                    player
-                } else if (Repository.getPlayerByName(args[1]) != null) {
-                    Repository.getPlayerByName(args[1]) ?: return@define
+        define("quest",
+            usage = "::quest [-p username] [quest-filter]",
+            description = "Shows quest stages for you, or for [username] if -p is used. Add optional text to filter by quest name."
+        ) { player, args ->
+
+            var target = player
+            var filter: String? = null
+
+            if (args.size > 1) {
+                if (args[1].equals("-p", ignoreCase = true)) {
+                    // need at least 3 arguments if -p is used: command, -p, username
+                    if (args.size < 3) {
+                        reject(player, "ERROR: Missing player name. Usage: ::quest -p <username> [quest-filter]")
+                        return@define
+                    }
+
+                    val playerName = args[2]
+                    target = Repository.getPlayerByName(playerName) ?: run {
+                        reject(player, "ERROR: Username '$playerName' not found.")
+                        return@define
+                    }
+
+                    // arguments after the player name are the quest filter
+                    if (args.size > 3) {
+                        filter = args.drop(3).joinToString(" ")
+                    }
                 } else {
-                    reject(player, "ERROR: Username not found. Usage: ::quest <username>")
-                    return@define
+                    // no -p, so the arguments are the quest filter
+                    filter = args.drop(1).joinToString(" ")
                 }
-                sendQuestsDebug(player, lookupP)
-            } else {
-                reject(player, "Usage: ::quest || ::quest <username>")
             }
+            sendQuestsDebug(player, target, filter)
         }
 
         /**
@@ -96,24 +114,49 @@ class QuestCommandSet : CommandSet(Privilege.ADMIN){
     /**
      * Sends the list of quests with debug information
      * @param admin the player.
+     * @param lookupUser the target player to view quests for.
+     * @param questFilter optional string to filter quests by name.
      */
-    private fun sendQuestsDebug(admin: Player?, lookupUser: Player?) {
+    private fun sendQuestsDebug(admin: Player?, lookupUser: Player?, questFilter: String? = null) {
         admin!!.interfaceManager.open(Component(275))
+
+        // clear interface lines
         for (i in 0..310) {
             admin.packetDispatch.sendString("", 275, i)
         }
+
         var lineId = 11
+
+        // title
         admin.packetDispatch.sendString("<col=ecf0f1>${lookupUser!!.username}'s Quest Debug</col>", 275, 2)
-        for (q in QuestRepository.getQuests().values) {
-            // Add a space to beginning and end of string for the strikethrough
+
+        // filtered quests
+        val questsToDisplay = QuestRepository.getQuests().values.filter { q ->
+            questFilter.isNullOrBlank() || q.quest.toString().contains(questFilter, ignoreCase = true)
+        }
+
+        // no quests to filter
+        if (questsToDisplay.isEmpty()) {
+            admin.packetDispatch.sendString("<col=ff0000>No quests found matching: $questFilter</col>", 275, lineId++)
+            return
+        }
+
+        for (q in questsToDisplay) {
+            // can't display more than 308 lines
+            if (lineId >= 308) {
+                admin.packetDispatch.sendString("<col=ff0000>List truncated (too many results).</col>", 275, lineId)
+                break
+            }
+
             val stage = lookupUser.questRepository.getStage(q)
             val statusColor = when {
                 stage >= 100 -> "80ff00"
                 stage in 1..99 -> "ff8400"
                 else -> "ff0000"
             }
+
             admin.packetDispatch.sendString("<col=ecf0f1>${q.quest}</col>", 275, lineId++)
-            admin.packetDispatch.sendString("<col=ecf0f1>Index: </col><col=ff1f1f><shad=2>${q.index}</shad></col> | <col=ecf0f1>Stage:</col> <col=$statusColor><shad=2>${lookupUser.questRepository.getStage(q)}</shad></col>", 275, lineId++)
+            admin.packetDispatch.sendString("<col=ecf0f1>Index: </col><col=ff1f1f><shad=2>${q.index}</shad></col> | <col=ecf0f1>Stage:</col> <col=$statusColor><shad=2>${stage}</shad></col>", 275, lineId++)
             admin.packetDispatch.sendString("<str>          ", 275, lineId++)
         }
     }
