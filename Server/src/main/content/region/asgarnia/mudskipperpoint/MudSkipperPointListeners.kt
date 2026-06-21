@@ -14,6 +14,7 @@ import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import core.tools.RandomFunction
+import core.tools.colorize
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
@@ -119,9 +120,8 @@ class MudSkipperPointListeners : InteractionListener {
         }
 
         on(Scenery.SIGNPOST_10090, IntType.SCENERY, "read") { player, _ ->
-            setInterfaceText(player, "Mudskipper Point.", 220, 2)
-            setInterfaceText(player, "WARNING! BEWARE OF THE MUDSKIPPERS!", 220, 4)
-            openInterface(player, 220)
+            // https://runescape.wiki/w/Mudskipper_Point?oldid=969991
+            sendDialogue(player, colorize("%RBEWARE OF THE MUDSKIPPERS!"))
             return@on true
         }
 

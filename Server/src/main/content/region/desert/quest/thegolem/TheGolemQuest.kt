@@ -20,6 +20,8 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
 import core.game.world.GameWorld
 import content.data.Quests
+import content.global.handlers.iface.ScrollInterface
+import org.rs09.consts.Components
 
 @Initializable
 class TheGolemQuest : Quest(Quests.THE_GOLEM, 70, 69, 1, 437, 0, 1, 10) {
@@ -109,19 +111,6 @@ class ClayGolemNPC : AbstractNPC {
 
     override fun getIds(): IntArray {
         return intArrayOf(1907, NPCs.BROKEN_CLAY_GOLEM_1908, NPCs.DAMAGED_CLAY_GOLEM_1909, NPCs.CLAY_GOLEM_1910)
-    }
-}
-
-class LetterListener : InterfaceListener {
-    override fun defineInterfaceListeners() {
-        onOpen(220) { player, component ->
-            val lines: Array<String> = player.getAttribute("ifaces:220:lines", arrayOf())
-            for(i in 0 until Math.min(lines.size, 15)) {
-                setInterfaceText(player, lines[i], 220, i+1)
-                //setInterfaceText(player, "${i}", 220, i+1)
-            }
-            return@onOpen true
-        }
     }
 }
 
@@ -372,9 +361,8 @@ class TheGolemListeners : InteractionListener {
         on(34978, IntType.SCENERY, "climb-down") { player, node -> core.game.global.action.ClimbActionHandler.climb(player, core.game.global.action.ClimbActionHandler.CLIMB_DOWN, core.game.global.action.SpecialLadders.getDestination(node.location)); return@on true }
         on(6372, IntType.SCENERY, "climb-up") { player, node -> core.game.global.action.ClimbActionHandler.climb(player, core.game.global.action.ClimbActionHandler.CLIMB_UP, core.game.global.action.SpecialLadders.getDestination(node.location)); return@on true }
         on(4615, IntType.ITEM, "read") { player, node ->
-            player.setAttribute("ifaces:220:lines", LETTER_LINES)
             player.setAttribute("/save:the-golem:read-elissa-letter", true)
-            openInterface(player, 220)
+            ScrollInterface.scrollSetup(player, Components.MESSAGESCROLL_220, LETTER_LINES)
             return@on true
         }
         on(35226, IntType.SCENERY, "search") { player, node ->

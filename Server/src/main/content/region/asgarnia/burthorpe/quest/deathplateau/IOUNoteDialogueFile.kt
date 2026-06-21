@@ -4,6 +4,9 @@ import content.data.Quests
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListeners
+import core.game.node.item.Item
 import core.tools.END_DIALOGUE
 import org.rs09.consts.Items
 
@@ -26,10 +29,7 @@ class IOUNoteDialogueFile : DialogueFile() {
                     4 -> {
                         end()
                         stage = END_DIALOGUE
-                        openInterface(player!!, 220)
-                        setInterfaceText(player!!, "<col=3D1E00>Red is North of Blue. Yellow is South of Purple.", 220, 7)
-                        setInterfaceText(player!!, "<col=3D1E00>Green is North of Purple. Blue is West of", 220, 8)
-                        setInterfaceText(player!!, "<col=3D1E00>Yellow. Purple is East of Red.", 220, 9)
+                        InteractionListeners.run(Items.COMBINATION_3102, IntType.ITEM, "read", player!!, Item(Items.COMBINATION_3102))
                     }
                 }
             }

@@ -9,6 +9,7 @@ import org.rs09.consts.NPCs
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
 import content.data.Quests
+import content.global.handlers.iface.ScrollLine
 
 @Initializable
 public final class ClayGolemDialoguePlugin(player: Player? = null) : DialoguePlugin(player) {
@@ -107,19 +108,18 @@ class CuratorHaigHalenGolemDialogue : DialogueBuilderFile() {
     }
 }
 
+// https://youtu.be/owPSLUB9E8k?t=261
 val LETTER_LINES = arrayOf(
-    "",
-    "",
-    "Dearest Varmen,",
-    "I hope this finds you well. Here are the books you asked for",
-    "There has been an exciting development closer to home --",
-    "another city from the same period has been discovered east",
-    "of Varrock, and we are starting a huge excavation project",
-    "here. I don't know if the museum will be able to finance your",
-    "expedition as well as this one, so I fear your current trip will be",
-    "the last.",
-    "May Saradomin grant you a safe journey home",
-    "Your loving Elissa.",
+    ScrollLine("Dearest Varmen,", 3),
+    ScrollLine("I hope this finds you well. Here are the books you asked for", 4),
+    ScrollLine("There has been an exciting development closer to home --", 5),
+    ScrollLine("another city from the same period has been discovered east", 6),
+    ScrollLine("of Varrock, and we are starting a huge excavation project", 7),
+    ScrollLine("here. I don't know if the museum will be able to finance your", 8),
+    ScrollLine("expedition as well as this one, so I fear your current trip will be", 9),
+    ScrollLine("the last.", 10),
+    ScrollLine("May Saradomin grant you a safe journey home", 11),
+    ScrollLine("Your loving Elissa.", 12)
     )
 
 val DISPLAY_CASE_TEXT = arrayOf("3rd age - yr 3000-4000",

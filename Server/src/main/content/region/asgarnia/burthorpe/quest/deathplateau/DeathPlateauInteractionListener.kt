@@ -1,11 +1,13 @@
 package content.region.asgarnia.burthorpe.quest.deathplateau
 
 import content.data.Quests
+import content.global.handlers.iface.ScrollInterface
 import core.api.*
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.item.GroundItemManager
+import org.rs09.consts.Components
 import org.rs09.consts.Items
 import org.rs09.consts.Scenery
 
@@ -22,6 +24,11 @@ class DeathPlateauInteractionListener : InteractionListener {
         val stoneMechanisms = intArrayOf(
             Scenery.STONE_MECHANISM_3676, // 4 Outer stone plates
             Scenery.STONE_MECHANISM_3677 // 2 Inner stone plates
+        )
+        val combinationScroll = arrayOf(
+            "Red is North of Blue. Yellow is South of Purple.",
+            "Green is North of Purple. Blue is West of",
+            "Yellow. Purple is East of Red."
         )
     }
     override fun defineListeners() {
@@ -48,10 +55,10 @@ class DeathPlateauInteractionListener : InteractionListener {
         }
 
         on(Items.COMBINATION_3102, ITEM, "read") { player, _ ->
-            openInterface(player, 220)
-            setInterfaceText(player, "<col=3D1E00>Red is North of Blue. Yellow is South of Purple.", 220, 7)
-            setInterfaceText(player, "<col=3D1E00>Green is North of Purple. Blue is West of", 220, 8)
-            setInterfaceText(player, "<col=3D1E00>Yellow. Purple is East of Red.", 220, 9)
+            // https://youtu.be/C8n8Yi-J8wU?t=466
+            openInterface(player, 222)
+            setInterfaceText(player, combinationScroll.joinToString("<br>"), 222, 5)
+
             return@on true
         }
 

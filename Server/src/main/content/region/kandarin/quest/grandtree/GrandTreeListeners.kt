@@ -15,6 +15,9 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import org.rs09.consts.Sounds
 import content.data.Quests
+import content.global.handlers.iface.ScrollInterface
+import content.global.handlers.iface.ScrollLine
+import org.rs09.consts.Components
 
 class GrandTreeListeners: InteractionListener {
 
@@ -26,12 +29,11 @@ class GrandTreeListeners: InteractionListener {
         Location(2473,9897,0),
     )
 
-    val hazelmerescroll = Items.HAZELMERES_SCROLL_786
-
-    val hazelmerescrollText = arrayOf(
-    "<col=FFF900>Es lemanto meso pro eis prit ta Cinqo mond.</col>",
-    "<col=FFF900>Mi lovos ta lemanto Daconia arpos</col>",
-    "<col=FFF900>et Daconia arpos eto meriz ta priw!</col>",
+    // https://youtu.be/-jfueZpRhzU?t=184
+    val hazelmereScrollText = arrayOf(
+        ScrollLine("Es lemanto meso pro eis prit ta Cinqo mond.", 6),
+        ScrollLine("Mi lovos ta lemanto Daconia arpos", 7),
+        ScrollLine("et Daconia arpos eto meriz ta priw!", 8)
     )
 
     fun unlockTUZODoor(player: Player) {
@@ -84,8 +86,8 @@ class GrandTreeListeners: InteractionListener {
             openDialogue(player, AnitaDialogue(), npc)
             return@on true
         }
-        on(hazelmerescroll, IntType.ITEM, "read") { player, node ->
-            hazelmereScroll(player, node.asItem())
+        on(Items.HAZELMERES_SCROLL_786, IntType.ITEM, "read") { player, node ->
+            ScrollInterface.scrollSetup(player, Components.MESSAGESCROLL_220, hazelmereScrollText)
             return@on true
         }
 
@@ -207,15 +209,6 @@ class GrandTreeListeners: InteractionListener {
                 playAudio(player, Sounds.TANGLEVINE_APPEAR_2316)
             }
             return@on true
-        }
-    }
-
-    private fun hazelmereScroll(player: Player, item: Item) {
-        val id = item.id
-        openInterface(player, 222).also {
-            when (id) {
-                hazelmerescroll -> setInterfaceText(player, hazelmerescrollText.joinToString("<br>"), 222, 6)
-            }
         }
     }
 }
