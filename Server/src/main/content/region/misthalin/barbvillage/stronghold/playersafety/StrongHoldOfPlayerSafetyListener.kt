@@ -31,7 +31,7 @@ package content.region.misthalin.barbvillage.stronghold.playersafety
              SceneryConst.JAIL_DOOR_29601 to 698,
          )
 
-         private val creviceClimbedAttribute = "player_strong:crevice_climbed"
+         private val creviceClimbedAttribute = "/save:player_strong:crevice_climbed"
 
      }
      override fun defineListeners() {
