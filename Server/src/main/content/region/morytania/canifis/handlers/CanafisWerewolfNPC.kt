@@ -3,6 +3,7 @@ package content.region.morytania.canifis.handlers
 import core.api.*
 import core.game.interaction.QueueStrength
 import core.game.node.entity.Entity
+import core.game.node.entity.skill.Skills
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.DeathTask
 import core.game.node.entity.npc.NPC
@@ -38,7 +39,9 @@ class WerewolfBehavior : NPCBehavior(*HUMAN_NPCS) {
                             return@queueScript delayScript(self, WEREWOLF_IN_ANIMATION.duration)
                         }
                         1 -> {
-                            transformNpc(self, WEREWOLF_NPCS[self.id - 6026], 200)
+                            val humanMaxLp = self.getSkills().getMaximumLifepoints()
+                            transformNpcWithHpCarryover(self, WEREWOLF_NPCS[self.id - 6026], 200)
+                            self.getSkills().heal(self.getSkills().getMaximumLifepoints() - humanMaxLp)
                             return@queueScript delayScript(self, 1)
                         }
                         2 -> {

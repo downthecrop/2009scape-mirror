@@ -752,6 +752,18 @@ public class NPC extends Entity {
 	}
 
 	/**
+	 * Transforms this NPC with HP carried over from pre-transformed entity.
+	 * HP adjustments (ie healing/scaling HP to new maximum) should be done manually per-NPC
+	 * @param id The new NPC id.
+	 */
+	public NPC transformWithHpCarryover(int id) {
+		int lp = getSkills().getLifepoints();
+		this.transform(id);
+		getSkills().setLifepoints(lp);
+		return this;
+	}
+
+	/**
 	 * Transforms this NPC back to original.
 	 */
 	public void reTransform() {

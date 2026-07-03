@@ -1343,6 +1343,25 @@ fun transformNpc(npc: NPC, transformTo: Int, restoreTicks: Int) {
 }
 
 /**
+ * Transforms an NPC for the given number of ticks with hp carryover
+ * @param npc the NPC object to transform
+ * @param transformTo the ID of the NPC to turn into
+ * @param restoreTicks the number of ticks until the NPC returns to normal
+ */
+fun transformNpcWithHpCarryover(npc: NPC, transformTo: Int, restoreTicks: Int) {
+    npc.transformWithHpCarryover(transformTo)
+    queueScript(npc, 0, QueueStrength.SOFT) { stage: Int ->
+        when (stage) {
+            0 -> return@queueScript delayScript(npc, restoreTicks)
+            else -> {
+                npc.reTransform()
+                return@queueScript stopExecuting(npc)
+            }
+        }
+    }
+}
+
+/**
  * Produces a Location object using the given x,y,z values
  */
 fun location(x: Int, y: Int, z: Int): Location {

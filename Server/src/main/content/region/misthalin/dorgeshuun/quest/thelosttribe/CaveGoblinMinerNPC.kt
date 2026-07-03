@@ -29,7 +29,7 @@ class CaveGoblinMinerNPC(id: Int = 0, location: Location? = null) : AbstractNPC(
         mining = (id > 2074)
 
         if(properties.combatPulse.isAttacking && mining){
-            transform(id - 6)
+            transformWithHpCarryover(id - 6)
             this.isWalks = true
             this.walkRadius = 4
             this.isNeverWalks = false
