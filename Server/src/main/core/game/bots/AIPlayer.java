@@ -109,7 +109,7 @@ public class AIPlayer extends Player {
      * Generates bot stats/equipment/etc based on OSRScopyLine
      */
     public void updateRandomValues() {
-        this.getAppearance().setGender(RandomFunction.random(5) == 1 ? Gender.FEMALE : Gender.MALE);
+        this.getAppearance().setGender(RandomFunction.random(3) == 1 ? Gender.FEMALE : Gender.MALE);
         int setTo = RandomFunction.random(0,10);
         CharacterDesign.randomize(this,true);
         this.setDirection(Direction.values()[new Random().nextInt(Direction.values().length)]); //Random facing dir

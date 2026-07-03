@@ -91,7 +91,7 @@ public final class AIPBuilder {
 		//Varrock Ge bank
 		RandomAfkPlayer(new Location(3189, 3439));
 		
-		//Home Bank
+		// Lunar Island Bank
 		RandomAfkPlayer(new Location(2099, 3918));
 	}
 

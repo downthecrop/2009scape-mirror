@@ -5,6 +5,7 @@ import core.game.bots.SkillingBotAssembler
 import core.game.bots.Script
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListeners
+import core.game.node.entity.skill.Skills
 import java.util.*
 
 class ManThiever : Script() {
@@ -22,6 +23,6 @@ class ManThiever : Script() {
     }
 
     init {
-        equipment.addAll(Arrays.asList(Item(1103), Item(1139), Item(1265)))
+        skills[Skills.THIEVING] = 20
     }
 }

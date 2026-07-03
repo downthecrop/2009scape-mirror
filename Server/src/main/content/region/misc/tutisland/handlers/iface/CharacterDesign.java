@@ -178,8 +178,8 @@ public final class CharacterDesign {
 		case 40:
 			player.getSettings().toggleMouseButton();
 			break;
-		case 92://hair style
-		case 93:
+		case 92://hair style left arrow
+		case 93://hair style right arrow
 			changeLook(player, 0, buttonId == 93);
 			break;
 		case 97:
@@ -348,18 +348,23 @@ public final class CharacterDesign {
 	private static int getValue(Player player, String key, int index, int currentIndex, boolean increment) {
 		int[] array = player.getAttribute("male", player.getAppearance().isMale()) ? MALE_LOOK_IDS[index] : FEMALE_LOOK_IDS[index];
 		int val = 0;
-		if (increment && currentIndex + 1 > array.length -1) {
-			val = (int) array[0];
-			currentIndex = 0;
-		} else if (!increment && currentIndex -1 < 0) {
-			val = (int) array[array.length -1];
-			currentIndex = array.length -1;
-		} else if (increment) {
-			val = (int) array[currentIndex + 1];
-			currentIndex++;
+		if (player.isArtificial() && index <= 1) {
+			currentIndex = RandomFunction.random(array.length -1);
+			val = array[currentIndex];
 		} else {
-			val = (int) array[currentIndex - 1];
-			currentIndex--;
+			if (increment && currentIndex + 1 > array.length -1) {
+				val = (int) array[0];
+				currentIndex = 0;
+			} else if (!increment && currentIndex -1 < 0) {
+				val = (int) array[array.length -1];
+				currentIndex = array.length -1;
+			} else if (increment) {
+				val = (int) array[currentIndex + 1];
+				currentIndex++;
+			} else {
+				val = (int) array[currentIndex - 1];
+				currentIndex--;
+			}
 		}
 		player.setAttribute(key + ":" + index, currentIndex);
 		return val;
