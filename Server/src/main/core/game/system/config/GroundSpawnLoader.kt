@@ -67,6 +67,7 @@ class GroundSpawnLoader {
          * Method used to initialize this spawn.
          */
         fun init(): GroundItem {
+            if (respawnRate shr 16 == 0) respawnRate = respawnRate or (respawnRate shl 16)
             return GroundItemManager.create(this)
         }
 
