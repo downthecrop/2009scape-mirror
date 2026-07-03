@@ -107,7 +107,7 @@ object PlayerRenderer {
         if (offsetX < 0) {
             offsetX += 32
         }
-        val appearance = info.appearanceStamps[other.index and 0x800] != other.updateMasks.appearanceStamp
+        val appearance = info.appearanceStamps[other.index] != other.updateMasks.appearanceStamp
         val update = appearance || other.updateMasks.isUpdateRequired || other.updateMasks.hasSynced()
         buffer.putBits(1, if (update) 1 else 0)
         buffer.putBits(5, offsetX)
@@ -117,7 +117,7 @@ object PlayerRenderer {
         info.localPlayers.add(other)
         if (update) {
             if (appearance) {
-                info.appearanceStamps[other.index and 0x800] = other.updateMasks.appearanceStamp
+                info.appearanceStamps[other.index] = other.updateMasks.appearanceStamp
             }
             writeMaskUpdates(player, other, flags, appearance, true)
         }
