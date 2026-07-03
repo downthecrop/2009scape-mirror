@@ -24,6 +24,11 @@ public class WolfWhistle extends Quest {
 	public static final Item WOLF_BONES = new Item(2859, 2);
 
 	/**
+	 * Gates the visibility of the Summoning orb next to the minimap behind quest completion.
+	 */
+	private static final int VARBIT_SUMMONING_ORB_VISIBILITY = 4280;
+
+	/**
 	 * Constructs a new {@code WolfWhistle} {@code Object}.
      */
 	public WolfWhistle() {
@@ -164,6 +169,7 @@ public class WolfWhistle extends Quest {
 		player.getSkills().addExperience(Skills.SUMMONING, 276);
 		player.getInventory().add(new Item(12158, 275), player);
 		player.removeAttribute("searched-body");
+		setVarbit(player, VARBIT_SUMMONING_ORB_VISIBILITY, 1);
 		player.getQuestRepository().syncronizeTab(player);
 		player.getInterfaceManager().openInfoBars();
 	}

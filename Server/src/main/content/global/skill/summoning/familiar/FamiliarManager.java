@@ -1,5 +1,6 @@
 package content.global.skill.summoning.familiar;
 
+import content.data.Quests;
 import content.global.skill.summoning.pet.Pet;
 import content.global.skill.summoning.pet.Pets;
 import core.cache.def.impl.ItemDefinition;
@@ -30,6 +31,15 @@ import static core.api.ContentAPIKt.*;
  * @author Player Name
  */
 public final class FamiliarManager {
+
+	/**
+	 * These varbits are packed into varp 1160. Legacy code added 243269632 directly to the raw varp,
+	 * which toggled the Summoning orb visibility on every login.
+	 * They are now written as individual varbits, but two of them remain unknown.
+	 */
+	private static final int VARBIT_SUMMONING_ORB_VISIBILITY = 4280;
+	private static final int VARBIT_SUMMONING_UNKNOWN1 = 4281;
+	private static final int VARBIT_SUMMONING_UNKNOWN2 = 4282;
 
 	/**
 	 * The familiars mapping.
@@ -158,7 +168,11 @@ public final class FamiliarManager {
 		if (hasFamiliar()) {
 			familiar.init();
 		}
-		player.getFamiliarManager().setConfig(243269632);
+		boolean unlocked = player.getQuestRepository().isComplete(Quests.WOLF_WHISTLE);
+
+		setVarbit(player, VARBIT_SUMMONING_ORB_VISIBILITY, unlocked ? 1 : 0);
+		setVarbit(player, VARBIT_SUMMONING_UNKNOWN1, 0);
+		setVarbit(player, VARBIT_SUMMONING_UNKNOWN2, 7);
 	}
 
 	/**
@@ -454,16 +468,6 @@ public final class FamiliarManager {
 			return false;
 		}
 		return true;
-	}
-
-	/**
-	 * Sets a config value.
-	 * @param value the value.
-	 */
-	public void setConfig(int value) {
-		int current = getVarp(player, 1160);
-		int newVal = current + value;
-		setVarp(player, 1160, newVal);
 	}
 
 	/**
