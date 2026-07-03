@@ -767,7 +767,8 @@ public class NPC extends Entity {
 	 */
 	protected Location getMovementDestination() {
 		if (!pathBoundMovement || movementPath == null || movementPath.length < 1) {
-			Location returnToSpawnLocation = getProperties().getSpawnLocation().transform(-5 + RandomFunction.random(getWalkRadius()), -5 + RandomFunction.random(getWalkRadius()), 0);
+			int radius = getWalkRadius() / 2;
+			Location returnToSpawnLocation = getProperties().getSpawnLocation().transform(RandomFunction.random(-radius, radius+1), RandomFunction.random(-radius, radius+1), 0);
 			int dist = (int) Location.getDistance(location, returnToSpawnLocation);
 			int pathLimit = 14;
                         if (dist > pathLimit) {
