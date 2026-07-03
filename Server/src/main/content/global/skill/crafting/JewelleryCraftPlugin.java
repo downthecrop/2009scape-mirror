@@ -5,6 +5,7 @@ import content.global.skill.crafting.jewellery.JewelleryCrafting;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
 import core.plugin.Plugin;
+import org.rs09.consts.Scenery;
 
 /**
  * Represents the plugin used to craft jewellery.
@@ -17,7 +18,12 @@ public final class JewelleryCraftPlugin extends UseWithHandler {
 	/**
 	 * Represents the ids to use for this plugin.
 	 */
-	private static final int[] IDS = new int[] { 4304, 6189, 11010, 11666, 12100, 12809, 18497, 26814, 30021, 30510, 36956, 37651 };
+	private static final int[] IDS = new int[]{
+			Scenery.FURNACE_4304, Scenery.FURNACE_6189, Scenery.FURNACE_11010, Scenery.FURNACE_11666,
+			Scenery.FURNACE_12100, Scenery.FURNACE_12809, Scenery.FURNACE_18497, Scenery.CLAY_FORGE_21303,
+			Scenery.FURNACE_26814, Scenery.FURNACE_30021, Scenery.FURNACE_30510, Scenery.FURNACE_36956,
+			Scenery.FURNACE_37651
+	};
 
 	/**
 	 * Constructs a new {@code JewelleryCraftPlugin} {@code Object}.

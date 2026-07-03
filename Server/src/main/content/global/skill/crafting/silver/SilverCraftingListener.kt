@@ -31,7 +31,7 @@ class SilverCraftingListener : InterfaceListener, InteractionListener {
             Scenery.FURNACE_12100, Scenery.FURNACE_12809, Scenery.FURNACE_18497, Scenery.FURNACE_18525,
             Scenery.FURNACE_18526, Scenery.FURNACE_21879, Scenery.FURNACE_22721, Scenery.FURNACE_26814,
             Scenery.FURNACE_28433, Scenery.FURNACE_28434, Scenery.FURNACE_30021, Scenery.FURNACE_30510,
-            Scenery.FURNACE_36956, Scenery.FURNACE_37651
+            Scenery.FURNACE_36956, Scenery.FURNACE_37651, Scenery.CLAY_FORGE_21303
         )
 
         private const val ATTRIBUTE_FURNACE_ID = "crafting:silver:furnace_id"
