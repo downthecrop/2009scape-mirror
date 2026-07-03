@@ -184,7 +184,7 @@ public class TormentedDemonNPC extends AbstractNPC {
 		super.finalizeDeath(killer);
 		reTransform();
 		fireShield = true;
-		BossKillCounter.addtoKillcount((Player) killer, this.getId());
+		BossKillCounter.addToBossKillCount((Player) killer, this.getId());
 	}
 
 	@Override

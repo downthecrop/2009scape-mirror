@@ -78,7 +78,7 @@ object RewardChest {
 
         InterfaceContainer.generateItems(player, rewards.toTypedArray(), arrayOf("Examine"), 364, 4, 3, 4)
         player.interfaceManager.open(Component(Components.TRAIL_REWARD_364))
-        BossKillCounter.addtoBarrowsCount(player)
+        BossKillCounter.addToBarrowsChestCount(player)
         for (item in rewards) {
             announceIfRare(player, item)
             if (!player.inventory.add(item)) {

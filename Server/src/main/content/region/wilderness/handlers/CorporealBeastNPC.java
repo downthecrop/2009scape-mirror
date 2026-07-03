@@ -91,7 +91,7 @@ public final class CorporealBeastNPC extends NPCBehavior {
 
 	@Override
 	public void onDeathFinished(NPC self, Entity killer) {
-		BossKillCounter.addtoKillcount((Player) killer, NPCs.CORPOREAL_BEAST_8133);
+		BossKillCounter.addToBossKillCount((Player) killer, NPCs.CORPOREAL_BEAST_8133);
 		if (darkEnergyCore != null) {
 			darkEnergyCore.clear();
 			darkEnergyCore = null;

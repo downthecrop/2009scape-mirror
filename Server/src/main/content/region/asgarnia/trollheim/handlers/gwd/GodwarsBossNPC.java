@@ -231,7 +231,7 @@ public final class GodwarsBossNPC extends AbstractNPC {
 	public void finalizeDeath(Entity killer) {
 		super.finalizeDeath(killer);
 		if (getId() == 6222 || getId() == 6260 || getId() == 6247 || getId() == 6203) {
-			BossKillCounter.addtoKillcount((Player) killer, this.getId());
+			BossKillCounter.addToBossKillCount((Player) killer, this.getId());
 		}
 		if (minions == null) {
 			return;

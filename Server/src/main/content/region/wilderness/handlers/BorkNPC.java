@@ -118,7 +118,7 @@ public class BorkNPC extends AbstractNPC {
 	@Override
 	public void finalizeDeath(Entity killer){
 		super.finalizeDeath(killer);
-		BossKillCounter.addtoKillcount((Player) killer, this.getId());
+		BossKillCounter.addToBossKillCount((Player) killer, this.getId());
 	}
 
 	@Override

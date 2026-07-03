@@ -2,7 +2,6 @@ package content.global.handlers.item
 
 import content.global.skill.slayer.SlayerUtils
 import core.api.*
-import content.global.skill.slayer.Tasks
 import org.rs09.consts.Items
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.IfTopic
@@ -39,12 +38,7 @@ class EnchantedGemDialogue() : DialogueFile() {
                 if(!hasSlayerTask(player!!)) {
                     npcl(core.game.dialogue.FacialExpression.HALF_THINKING, "You need something new to hunt. Come and see me when you can and I'll give you a new task.").also { stage = 1 }
                 } else {
-                    if(getSlayerTask(player!!) == Tasks.JAD) {
-                        npcl(core.game.dialogue.FacialExpression.FRIENDLY, "You're currently assigned to kill TzTok-Jad!")
-                    } else {
-                        npcl(core.game.dialogue.FacialExpression.FRIENDLY, "You're currently assigned to kill ${SlayerUtils.pluralise(
-                            getSlayerTaskName(player!!))}; only ${getSlayerTaskKillsRemaining(player!!)} more to go.")
-                    }
+                    npcl(core.game.dialogue.FacialExpression.FRIENDLY, "You're currently assigned to kill ${SlayerUtils.pluralise(getSlayerTaskName(player!!))}; only ${getSlayerTaskKillsRemaining(player!!)} more to go.")
                     setVarp(player!!, 2502, getSlayerTaskFlags(player!!) shr 4)
                     stage = 1
                 }

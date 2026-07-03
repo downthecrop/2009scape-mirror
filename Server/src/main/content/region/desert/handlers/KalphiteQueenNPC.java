@@ -97,10 +97,10 @@ public final class KalphiteQueenNPC extends AbstractNPC {
 			removeAttribute("disable:drop");
 			super.finalizeDeath(killer);
 			reTransform();
-			BossKillCounter.addtoKillcount((Player) killer, 1160);
+			BossKillCounter.addToBossKillCount((Player) killer, 1160);
 			return;
 		}
-		BossKillCounter.addtoKillcount((Player) killer, this.getId());
+		BossKillCounter.addToBossKillCount((Player) killer, this.getId());
 		setAttribute("disable:drop", true);
 		super.finalizeDeath(killer);
 		super.setRespawnTick(-1);

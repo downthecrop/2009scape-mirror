@@ -97,7 +97,7 @@ public final class DagannothKingNPC extends AbstractNPC {
 	public void finalizeDeath(Entity killer) {
 		super.finalizeDeath(killer);
 		if (getId() == 2881 || getId() == 2882 || getId() == 2883) {
-			BossKillCounter.addtoKillcount((Player) killer, this.getId());
+			BossKillCounter.addToBossKillCount((Player) killer, this.getId());
 		}
 	}
 

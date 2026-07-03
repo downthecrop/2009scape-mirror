@@ -299,7 +299,7 @@ public final class GiantMoleNPC extends AbstractNPC {
 		super.finalizeDeath(killer);
 		if (killer instanceof Player) {
 			Player player = killer.asPlayer();
-			BossKillCounter.addtoKillcount(player, this.getId());
+			BossKillCounter.addToBossKillCount(player, this.getId());
 		}
 	}
 

@@ -1,6 +1,5 @@
 package content.region.karamja.tzhaar.handlers;
 
-import content.global.skill.slayer.SlayerManager;
 import core.game.event.NPCKillEvent;
 import core.game.activity.ActivityPlugin;
 import content.data.BossKillCounter;
@@ -10,8 +9,6 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
-import core.game.node.entity.skill.Skills;
-import content.global.skill.slayer.Tasks;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
@@ -23,6 +20,7 @@ import core.plugin.Initializable;
 import core.tools.RandomFunction;
 import core.game.world.GameWorld;
 import core.game.world.repository.Repository;
+import org.rs09.consts.NPCs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -167,12 +165,7 @@ public final class TzhaarFightCavesPlugin extends ActivityPlugin {
 			}
 			player.getPacketDispatch().sendMessage("You were victorious!");
 			if (!practice) {
-				BossKillCounter.addtoKillcount(player, 2745);
-				if (SlayerManager.getInstance(player).getTask() == Tasks.JAD) {
-					player.getSkills().addExperience(Skills.SLAYER, 25000);
-					SlayerManager.getInstance(player).clear();
-					player.sendMessage("You receive 25,000 slayer experience for defeating TzTok-Jad.");
-				}
+				BossKillCounter.addToBossKillCount(player, NPCs.TZTOK_JAD_2745);
 				player.getDialogueInterpreter().sendDialogues(2617, null, "You even defeated TzTok-Jad, I am most impressed!", "Please accept this gift as a reward.");
 				Repository.sendNews(player.getUsername() + " has been victorious in defeating TzTok-Jad for a firecape!");
 			} else {
