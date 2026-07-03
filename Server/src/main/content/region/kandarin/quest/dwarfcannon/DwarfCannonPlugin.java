@@ -44,6 +44,7 @@ public class DwarfCannonPlugin extends OptionHandler {
 		SceneryDefinition.forId(3).getHandlers().put("option:open", this);
 		SceneryDefinition.forId(5).getHandlers().put("option:inspect", this);
 		SceneryDefinition.forId(2).getHandlers().put("option:enter", this);
+		SceneryDefinition.forId(11).getHandlers().put("option:climb-up", this);
 		SceneryDefinition.forId(13).getHandlers().put("option:climb-over", this);
 		SceneryDefinition.forId(15601).getHandlers().put("option:inspect", this);
 		for (int i = 15; i < 21; i++) {
@@ -110,6 +111,13 @@ public class DwarfCannonPlugin extends OptionHandler {
 			player.animate(Animation.create(845));
 			player.teleport(new Location(2619, 9797, 0), 2);
 			break;
+		case 11:
+			if (node.getLocation().equals(new Location(2570, 3443, 1))
+					&& quest.getStage(player) == 20
+					&& !player.hasItem(DwarfCannon.DWARF_REMAINS)) {
+				setVarp(player, 0, 3, true);
+			}
+			return ClimbActionHandler.climbLadder(player, node.asScenery(), option);
 		case 13:
 			ClimbActionHandler.climb(player, new Animation(828), new Location(2623, 3391, 0));
 			break;

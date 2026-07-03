@@ -151,7 +151,6 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 			Player player = (Player) e;
 			PacketRepository.send(MinimapState.class, new MinimapStateContext(player, 2));
 			player.getInterfaceManager().openOverlay(OVERLAY);
-			setVarp(player, 0, 1);
 			if (getVarp(player, 452) == 0) {
 				shuffleCatacombs(player);
 			}
