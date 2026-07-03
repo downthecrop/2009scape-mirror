@@ -35942,6 +35942,7 @@
     "id": "4158",
     "name": "Leaf-bladed spear",
     "examine": "A spear with a leaf-shaped point.",
+    "alchemizable": "true",
     "archery_ticket_price": "0",
     "attack_anims": "2080,2081,2082,2080",
     "attack_speed": "5",
