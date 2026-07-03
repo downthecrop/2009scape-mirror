@@ -374,5 +374,20 @@ class ServerConstants {
 
         @JvmField
         var CONNECTIVITY_TIMEOUT = 500
+
+        @JvmField
+        var WEBSOCKET_ENABLED = false
+
+        @JvmField
+        var WEBSOCKET_PORT = 0
+
+        @JvmField
+        var WEBSOCKET_TLS_ENABLED = false
+
+        @JvmField
+        var WEBSOCKET_TLS_KEYSTORE_PATH = ""
+
+        @JvmField
+        var WEBSOCKET_TLS_KEYSTORE_PASSWORD = ""
     }
 }

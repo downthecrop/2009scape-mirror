@@ -29,6 +29,7 @@
   * [Prerequisites](#prerequisites)
   * [Project Setup](#project-setup)
   * [Running the project](#running-the-project)
+  * [Browser WebSocket Transport](#browser-websocket-transport)
 * [License](#license)
 * [Contact](#contact)
 
@@ -124,6 +125,40 @@ Start the game server with the included run script. Use `./run -h` for more info
 #### Windows
 
 Start the game server with `run-server.bat`
+
+#### Browser WebSocket Transport
+
+Enable the listener in `Server/worldprops/default.conf`:
+
+```properties
+websocket_enabled = true
+websocket_port = 0
+```
+
+When `websocket_port = 0`, the listener uses `53594 + world_id`. For world `1`, that is `53595`.
+
+Both plain WebSocket (`ws://`) and secure WebSocket (`wss://`) are supported. Use `ws://` for local HTTP testing. PWA requires HTTPS/WSS.
+
+Enable WSS with a Java keystore:
+
+```properties
+websocket_tls_enabled = true
+websocket_tls_keystore_path = "certs/dev-wss.p12"
+websocket_tls_keystore_password = "<keystore-password>"
+```
+
+The keystore password is optional. Leave `websocket_tls_keystore_password` blank when using a PKCS12 file exported with an empty password:
+
+```bash
+openssl pkcs12 -export \
+  -in fullchain.pem \
+  -inkey privkey.pem \
+  -out certs/dev-wss.p12 \
+  -name websocket \
+  -passout pass:
+```
+
+For local WSS development, create a certificate for your hostname or LAN IP that the browser will use, then point the server at a PKCS12 keystore. For production, use a normal certificate from certbot. Plain WS does not require a certificate.
 
 #### Docker
 

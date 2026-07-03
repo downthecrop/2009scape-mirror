@@ -176,6 +176,11 @@ object ServerConfigParser {
         ServerConstants.BOOSTED_TRAWLER_REWARDS = data.getBoolean("world.boosted_trawler_rewards", false)
         ServerConstants.CONNECTIVITY_CHECK_URL = data.getString("server.connectivity_check_url", "https://google.com,https://2009scape.org")
         ServerConstants.CONNECTIVITY_TIMEOUT = data.getLong("server.connectivity_timeout", 500L).toInt()
+        ServerConstants.WEBSOCKET_ENABLED = data.getBoolean("server.websocket_enabled", false)
+        ServerConstants.WEBSOCKET_PORT = data.getLong("server.websocket_port", 0L).toInt()
+        ServerConstants.WEBSOCKET_TLS_ENABLED = data.getBoolean("server.websocket_tls_enabled", false)
+        ServerConstants.WEBSOCKET_TLS_KEYSTORE_PATH = data.getString("server.websocket_tls_keystore_path", "")
+        ServerConstants.WEBSOCKET_TLS_KEYSTORE_PASSWORD = data.getString("server.websocket_tls_keystore_password", "")
 
         val logLevel = data.getString("server.log_level", "VERBOSE").uppercase()
         ServerConstants.LOG_LEVEL = parseEnumEntry<LogLevel>(logLevel) ?: LogLevel.VERBOSE

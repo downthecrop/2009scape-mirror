@@ -10,7 +10,6 @@ import core.ServerConstants
 import core.api.getAttribute
 import core.api.log
 import core.api.sendMessage
-import core.api.tryPop
 import core.api.utils.Vector
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
@@ -62,21 +61,35 @@ import java.lang.Math.min
 import java.util.*
 
 object PacketProcessor {
-    val queue = LinkedList<Packet>()
+    private var queue = LinkedList<Packet>()
+    private var processingQueue = LinkedList<Packet>()
+    private val queueLock = Any()
 
     @JvmStatic fun enqueue(pkt: Packet) {
-        queue.addLast(pkt)
+        synchronized(queueLock) {
+            queue.addLast(pkt)
+        }
     }
 
     @JvmStatic fun processQueue() {
-        var countThisCycle = queue.size
+        synchronized(queueLock) {
+            if (queue.isEmpty()) {
+                return
+            }
+            val queued = queue
+            queue = processingQueue
+            processingQueue = queued
+        }
         val sw = StringWriter()
         val pw = PrintWriter(sw)
         var pkt: Packet
-        while (countThisCycle-- > 0) {
-            pkt = queue.tryPop(Packet.NoProcess()) ?: return
+        while (processingQueue.isNotEmpty()) {
+            pkt = processingQueue.pollFirst() ?: return
             if (pkt is Packet.NoProcess) {
-                queue.clear()
+                synchronized(queueLock) {
+                    queue.clear()
+                }
+                processingQueue.clear()
                 return
             }
             try {

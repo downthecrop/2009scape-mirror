@@ -45,6 +45,10 @@ public final class SystemTermination {
 			log(this.getClass(), Log.INFO, "Stopping all bots...");
 			AIRepository.clearAllBots();
 			Server.getReactor().terminate();
+			if (Server.getWebSocketServer() != null) {
+				Server.getWebSocketServer().stop(1000, "Server shutting down");
+				Server.setWebSocketServer(null);
+			}
 			log(this.getClass(), Log.INFO, "Stopping all pulses...");
 			GameWorld.getMajorUpdateWorker().stop();
 			for (Iterator<Player> it = Repository.getPlayers().iterator(); it.hasNext();) {

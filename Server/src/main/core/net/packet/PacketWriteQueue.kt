@@ -1,18 +1,18 @@
 package core.net.packet
 
 import core.api.log
-import core.api.tryPop
 import core.net.packet.out.*
 import core.tools.Log
 import core.tools.SystemLogger
 import java.io.PrintWriter
 import java.io.StringWriter
 import java.util.*
-import java.util.concurrent.locks.ReentrantLock
 
 class PacketWriteQueue {
     companion object {
-        private val packetsToWrite = LinkedList<QueuedPacket<*>>()
+        private var packetsToWrite = LinkedList<QueuedPacket<*>>()
+        private var packetsToFlush = LinkedList<QueuedPacket<*>>()
+        private val queueLock = Any()
 
         @JvmStatic
         fun <T> handle(packet: OutgoingPacket<T>, context: T) {
@@ -34,16 +34,25 @@ class PacketWriteQueue {
                 log(this::class.java, Log.ERR,  "${packet::class.java.simpleName} tried to queue with a null context!")
                 return
             }
-            packetsToWrite.add(QueuedPacket(packet, context))
+            synchronized(queueLock) {
+                packetsToWrite.add(QueuedPacket(packet, context))
+            }
         }
 
         @JvmStatic
         fun flush() {
-            var countThisCycle = packetsToWrite.size
+            synchronized(queueLock) {
+                if (packetsToWrite.isEmpty()) {
+                    return
+                }
+                val queued = packetsToWrite
+                packetsToWrite = packetsToFlush
+                packetsToFlush = queued
+            }
             val sw = StringWriter()
             val pw = PrintWriter(sw)
-            while (countThisCycle-- > 0) {
-                val pkt = packetsToWrite.tryPop(null) ?: continue
+            while (packetsToFlush.isNotEmpty()) {
+                val pkt = packetsToFlush.pollFirst() ?: continue
                 try {
                     write(pkt.out, pkt.context)
                 } catch (e: Exception) {

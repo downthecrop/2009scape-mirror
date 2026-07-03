@@ -143,6 +143,21 @@ public final class NioReactor implements Runnable {
 	 */
 	public void terminate() {
 		running = false;
+		try {
+			if (channel != null) {
+				if (channel.getChannel() != null) {
+					channel.getChannel().close();
+				}
+				if (channel.getSocket() != null) {
+					channel.getSocket().close();
+				}
+				channel.getSelector().wakeup();
+				channel.getSelector().close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		service.shutdownNow();
 	}
 
 }
