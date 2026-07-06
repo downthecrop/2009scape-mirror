@@ -23,7 +23,7 @@ class QuizMasterNPC(var type: String = "", override var loot: WeightBasedTable? 
         super.init()
         sendChat("Hey ${player.username}! It's your lucky day!")
         face(player)
-        kidnapPlayer(this, player, Location(1952, 4764, 0)) { player, _ ->
+        kidnapPlayer(this, player, Location(1952, 4764, 1)) { player, _ ->
             setAttribute(player, QuizMasterDialogueFile.QUIZMASTER_ATTRIBUTE_QUESTIONS_CORRECT, 0)
             sendMessage(player, "Answer four questions correctly in a row to be teleported back where you came from.")
             sendMessage(player, "You will need to relog in if you lose the quiz dialog.") // Inauthentic, but there to notify the player in case.
