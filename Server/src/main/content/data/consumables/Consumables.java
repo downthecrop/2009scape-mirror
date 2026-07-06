@@ -353,7 +353,7 @@ public enum Consumables {
 	FISHING(new Potion(new int[] {2438, 151, 153, 155}, new SkillEffect(Skills.FISHING, 3, 0))),
 	PRAYER(new Potion(new int[] {2434, 139, 141, 143}, new PrayerEffect(7, 0.25))),
 	SUPER_RESTO(new Potion(new int[] {3024, 3026, 3028, 3030}, new RestoreEffect(8, 0.25, true))),
-	ZAMMY_BREW(new Potion(new int[] {2450, 189, 191, 193}, new MultiEffect(new DamageEffect(10, true), new SkillEffect(Skills.ATTACK, 0, 0.25), new SkillEffect(Skills.STRENGTH, 0, 0.15), new SkillEffect(Skills.DEFENCE, 0, -0.1)))),
+	ZAMMY_BREW(new Potion(new int[] {2450, 189, 191, 193}, new MultiEffect(new DamageEffect(10, true, 2), new SkillEffect(Skills.ATTACK, 2, 0.20), new SkillEffect(Skills.STRENGTH, 2, 0.12), new SkillEffect(Skills.DEFENCE, -2, -0.10), new PrayerEffect(0.0, 0.10, true)))),
 	ANTIFIRE(new Potion(new int[] {2452, 2454, 2456, 2458}, new AddTimerEffect("dragonfire:immunity", 600, true))),
 	GUTH_REST(new Potion(new int[] {4417, 4419, 4421, 4423}, new MultiEffect(new RemoveTimerEffect("poison"), new EnergyEffect(5), new HealingEffect(5)))),
 	MAGIC_ESS(new Potion(new int[] {9021, 9022, 9023, 9024}, new SkillEffect(Skills.MAGIC,3,0))),
@@ -363,7 +363,7 @@ public enum Consumables {
 
 	/** Barbarian Mixes */
 	PRAYERMIX(new BarbarianMix(new int[] {11465, 11467}, new MultiEffect(new PrayerEffect(7, 0.25), new HealingEffect(6)))),
-	ZAMMY_MIX(new BarbarianMix(new int[] {11521, 11523}, new MultiEffect(new DamageEffect(10, true), new SkillEffect(Skills.ATTACK, 0, 0.15), new SkillEffect(Skills.STRENGTH, 0, 0.25), new SkillEffect(Skills.DEFENCE, 0, -0.1)))),
+	ZAMMY_MIX(new BarbarianMix(new int[]{11521, 11523}, new MultiEffect(new ZamorakMixEffect(), new SkillEffect(Skills.ATTACK, 2, 0.20), new SkillEffect(Skills.STRENGTH, 2, 0.12), new SkillEffect(Skills.DEFENCE, -2, -0.10)))),
 	ATT_MIX(new BarbarianMix(new int[] {11429, 11431}, new MultiEffect(new SkillEffect(Skills.ATTACK, 3, 0.1), new HealingEffect(3)))),
 	ANTIP_MIX(new BarbarianMix(new int[] {11433, 11435}, new MultiEffect(new AddTimerEffect("poison:immunity", secondsToTicks(90)), new HealingEffect(3)))),
 	RELIC_MIX(new BarbarianMix(new int[] {11437, 11439}, new MultiEffect(new CureDiseaseEffect(), new HealingEffect(3)))),

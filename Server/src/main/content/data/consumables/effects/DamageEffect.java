@@ -7,15 +7,21 @@ import core.game.node.entity.player.Player;
 public class DamageEffect extends ConsumableEffect {
     final double amt;
     final boolean isPercent;
+    final int baseAmount;
 
-    public DamageEffect(double amt,boolean isPercent){
+    public DamageEffect(double amt, boolean isPercent) {
+        this(amt, isPercent, 0);
+    }
+
+    public DamageEffect(double amt, boolean isPercent, int baseAmount) {
         this.amt = amt;
         this.isPercent = isPercent;
+        this.baseAmount = baseAmount;
     }
 
     @Override
     public void activate(Player p) {
-        p.getImpactHandler().manualHit(p,-getHealthEffectValue(p), ImpactHandler.HitsplatType.NORMAL);
+        p.getImpactHandler().manualHit(p, -getHealthEffectValue(p), ImpactHandler.HitsplatType.NORMAL);
     }
 
     @Override
@@ -23,8 +29,8 @@ public class DamageEffect extends ConsumableEffect {
         double amount = amt;
         if (isPercent) {
             amount /= 100;
-            return (int) -(amount * player.getSkills().getLifepoints());
+            return (int) -(amount * player.getSkills().getLifepoints() + baseAmount);
         }
-        return (int) -amt;
+        return (int) -(amt + baseAmount);
     }
 }
