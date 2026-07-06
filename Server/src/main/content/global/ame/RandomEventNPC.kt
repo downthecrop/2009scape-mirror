@@ -39,6 +39,7 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
     var finalized = false
     var timerPaused = false
     var ticksLeft = secondsToTicks(180)
+    private val combatBracket = intArrayOf(10, 20, 40, 60, 90)
 
     open fun create(player: Player, loot: WeightBasedTable? = null, type: String = ""): RandomEventNPC {
         val event = this::class.createInstance()
@@ -144,7 +145,7 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
     }
 
     fun idForCombatLevel(ids: List<Int>, player: Player): Int {
-        val index = min(ids.size, ceil(player.properties.currentCombatLevel / 20.0).toInt()) - 1
+        val index = combatBracket.indexOfFirst { player.properties.currentCombatLevel <= it }.takeIf { it != -1 }?: ids.lastIndex
         return ids[index]
     }
 
