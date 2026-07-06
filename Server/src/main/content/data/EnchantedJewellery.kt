@@ -193,7 +193,7 @@ enum class EnchantedJewellery(
     ),
     RING_OF_LIFE(arrayOf<String>(),
             arrayOf(
-                Location.create(ServerConstants.HOME_LOCATION)
+                Location.create(ServerConstants.HOME_LOCATION!!)
             ),
             true,
             Items.RING_OF_LIFE_2570

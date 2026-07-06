@@ -197,7 +197,7 @@ class VisualCommand : CommandPlugin() {
                     return true
                 }
                 location = if (args.size > 2) Location.create(args[1]!!.toInt(), args[2]!!.toInt(), player!!.location.z) else player!!.location
-                `object` = RegionManager.getObject(location)
+                `object` = RegionManager.getObject(location!!)
                 if (`object` == null) {
                     player!!.debug("error: object not found in region cache.")
                     return true

@@ -18,7 +18,7 @@ class GardenerGhostDialogue (player: Player? = null) : DialoguePlugin(player) {
             if (gardenerGhost.location.withinDistance(gardenerGhost.graveLocation, 5)) {
                 sendChat(gardenerGhost, "Here is the place where I met me' maker.")
             } else {
-                sendChat(gardenerGhost, "Go " + gardenerGhost.location.deriveDirection(gardenerGhost.graveLocation).name.lowercase(Locale.getDefault()).replace('_', '-') + ", mate")
+                sendChat(gardenerGhost, "Go " + gardenerGhost.location.deriveDirection(gardenerGhost.graveLocation)!!.name.lowercase(Locale.getDefault()).replace('_', '-') + ", mate")
                 gardenerGhost.continueFollowing(player)
             }
         } else {

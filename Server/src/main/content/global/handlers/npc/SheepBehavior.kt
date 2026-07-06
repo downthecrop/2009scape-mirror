@@ -129,9 +129,9 @@ class SheepBehavior : NPCBehavior(*sheepIds), InteractionListener {
         val sheepDirection = Direction.getDirection(sheepLocation, playerLocation) // Get direction sheep is facing, from the player's location
         val sheepOppositeDirection = sheepDirection.getOpposite() // Switch to opposite direction
 
-        val xWalkLocation = sheepLocation.getX() + (sheepOppositeDirection.getStepX() * 3) // Gets x location, if set, 3 steps away from player
-        val yWalkLocation = sheepLocation.getY() + (sheepOppositeDirection.getStepY() * 3) // Gets y location, if set, 3 steps away from player
-        val sheepWalkToLocation = Location(xWalkLocation, yWalkLocation, sheepLocation.getZ()); // New location for pathfinding
+        val xWalkLocation = sheepLocation.x + (sheepOppositeDirection.getStepX() * 3) // Gets x location, if set, 3 steps away from player
+        val yWalkLocation = sheepLocation.y + (sheepOppositeDirection.getStepY() * 3) // Gets y location, if set, 3 steps away from player
+        val sheepWalkToLocation = Location(xWalkLocation, yWalkLocation, sheepLocation.z); // New location for pathfinding
 
         sendMessage(player, messagePlayer)
 

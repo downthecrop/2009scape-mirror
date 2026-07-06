@@ -31,10 +31,10 @@ class DraynorManorHouseZone : MapZone("Draynor Manor House", true), Plugin<Any?>
             if (n.shouldPreventStacking(e)) {
                 val s1 = e.size()
                 val s2 = n.size()
-                val x = destination.getX()
-                val y = destination.getY()
+                val x = destination.x
+                val y = destination.y
                 val l = n.getLocation()
-                if (Pathfinder.isStandingIn(x, y, s1, s1, l.getX(), l.getY(), s2, s2)) {
+                if (Pathfinder.isStandingIn(x, y, s1, s1, l.x, l.y, s2, s2)) {
                     return false
                 }
             }

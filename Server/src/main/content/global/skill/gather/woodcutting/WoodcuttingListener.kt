@@ -270,7 +270,7 @@ class WoodcuttingListener : InteractionListener {
         var amount = amount
         var experience: Double = resource.getExperience()
         val reward = resource.reward
-        if (player.getLocation().getRegionId() == 10300) {
+        if (player.getLocation().regionId == 10300) {
             return 1.0
         }
 

@@ -235,7 +235,7 @@ class PathfinderTests {
             TestUtils.advanceTicks(5, false)
             Assertions.assertEquals(true, npc.getAttribute("return-to-spawn", false))
             TestUtils.advanceTicks(50, false)
-            Assertions.assertEquals(true, npc.location.getDistance(ServerConstants.HOME_LOCATION) <= 9)
+            Assertions.assertEquals(true, npc.location.getDistance(ServerConstants.HOME_LOCATION!!) <= 9)
         }
     }
 
@@ -254,7 +254,7 @@ class PathfinderTests {
             RegionManager.forId(npc.location.regionId).flagInactive(true)
             TestUtils.advanceTicks(50, false)
             Assertions.assertEquals(false, npc.getAttribute("return-to-spawn", false))
-            Assertions.assertEquals(true, npc.location.getDistance(ServerConstants.HOME_LOCATION) <= 5)
+            Assertions.assertEquals(true, npc.location.getDistance(ServerConstants.HOME_LOCATION!!) <= 5)
         }
     }
 }
