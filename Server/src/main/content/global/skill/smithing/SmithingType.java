@@ -106,7 +106,7 @@ public enum SmithingType {
 	/**
 	 * Grapple Tips
 	 */
-	TYPE_GRAPPLE_TIP(1, 170, 171, new int[] { 175, 176, 175, 174, 173 }, 1),
+	TYPE_GRAPPLE_TIP(1, 170, 171, new int[] { 176, 175, 174, 173 }, 1),
 
 	/**
 	 * The studs type.
