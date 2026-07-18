@@ -254,9 +254,15 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
             ?: return InteractionType.STILL_INTERACT //if we cannot derive a direction, it's because both tiles are the same, so hand off control to the main logic which already handles this case
         var next = closestEntityTile
 
-        while (next.getDistance(closestVictimTile) > 3) { //skip the initial gap in distance if it exists, because standard pathfinding would already stop us before this point if something was between us and the NPC or vice versa
+        //Skip the initial gap in distance if it exists, because standard pathfinding would already stop us before this point if something was between us and the NPC or vice versa.
+        //A fixed-direction walk can only arrive within its starting distance in steps; on oblique approaches it
+        //passes beside the target and never converges, so the walk is hard-capped at that many steps.
+        val maxSkipSteps = next.getDistance(closestVictimTile).toInt() + 1
+        for (i in 0 until maxSkipSteps) {
+            if (next.getDistance(closestVictimTile) <= 3) break
             next = next.transform(dir)
         }
+        if (next.getDistance(closestVictimTile) > 3) return InteractionType.STILL_INTERACT //never converged (oblique approach), so defer to the range checks instead
 
         var result: InteractionType = InteractionType.STILL_INTERACT
         val maxIterations = next.getDistance(closestVictimTile).toInt()

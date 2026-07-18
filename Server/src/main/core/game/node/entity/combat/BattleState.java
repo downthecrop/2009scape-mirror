@@ -9,6 +9,7 @@ import core.game.node.entity.combat.spell.CombatSpell;
 
 /**
  * Represents an entity's current battle state.
+ *
  * @author Emperor
  */
 public final class BattleState {
@@ -99,6 +100,7 @@ public final class BattleState {
 
 	/**
 	 * Constructs a new {@code BattleState} {@Code Object}
+	 *
 	 * @param victim The victim entity.
 	 */
 	public BattleState(Entity entity, Entity victim) {
@@ -134,6 +136,7 @@ public final class BattleState {
 
 	/**
 	 * Gets the estimatedHit.
+	 *
 	 * @return The estimatedHit.
 	 */
 	public int getEstimatedHit() {
@@ -142,6 +145,7 @@ public final class BattleState {
 
 	/**
 	 * Sets the estimated hit.
+	 *
 	 * @param estimatedHit The estimated hit to set.
 	 */
 	public void setEstimatedHit(int estimatedHit) {
@@ -164,6 +168,7 @@ public final class BattleState {
 
 	/**
 	 * Gets the recoilDamage.
+	 *
 	 * @return The recoilDamage.
 	 */
 	public int getRecoilDamage() {
@@ -172,6 +177,7 @@ public final class BattleState {
 
 	/**
 	 * Sets the recoilDamage.
+	 *
 	 * @param recoilDamage The recoilDamage to set.
 	 */
 	public void setRecoilDamage(int recoilDamage) {
@@ -236,6 +242,7 @@ public final class BattleState {
 
 	/**
 	 * Gets the maximumHit.
+	 *
 	 * @return The maximumHit.
 	 */
 	public int getMaximumHit() {
@@ -244,6 +251,7 @@ public final class BattleState {
 
 	/**
 	 * Sets the maximumHit.
+	 *
 	 * @param maximumHit The maximumHit to set.
 	 */
 	public void setMaximumHit(int maximumHit) {
@@ -252,6 +260,7 @@ public final class BattleState {
 
 	/**
 	 * Gets the rangeWeapon.
+	 *
 	 * @return The rangeWeapon.
 	 */
 	public RangeWeapon getRangeWeapon() {
@@ -260,6 +269,7 @@ public final class BattleState {
 
 	/**
 	 * Sets the rangeWeapon.
+	 *
 	 * @param rangeWeapon The rangeWeapon to set.
 	 */
 	public void setRangeWeapon(RangeWeapon rangeWeapon) {
@@ -268,6 +278,7 @@ public final class BattleState {
 
 	/**
 	 * Gets the ammunition.
+	 *
 	 * @return The ammunition.
 	 */
 	public Ammunition getAmmunition() {
@@ -276,6 +287,7 @@ public final class BattleState {
 
 	/**
 	 * Sets the ammunition.
+	 *
 	 * @param ammunition The ammunition to set.
 	 */
 	public void setAmmunition(Ammunition ammunition) {
@@ -284,6 +296,7 @@ public final class BattleState {
 
 	/**
 	 * Gets the frozen.
+	 *
 	 * @return The frozen.
 	 */
 	public boolean isFrozen() {
@@ -292,6 +305,7 @@ public final class BattleState {
 
 	/**
 	 * Sets the frozen.
+	 *
 	 * @param frozen The frozen to set.
 	 */
 	public void setFrozen(boolean frozen) {
@@ -300,6 +314,7 @@ public final class BattleState {
 
 	/**
 	 * Gets the style.
+	 *
 	 * @return The style.
 	 */
 	public CombatStyle getStyle() {
@@ -308,6 +323,7 @@ public final class BattleState {
 
 	/**
 	 * Sets the style.
+	 *
 	 * @param style The style to set.
 	 */
 	public void setStyle(CombatStyle style) {
@@ -316,6 +332,7 @@ public final class BattleState {
 
 	/**
 	 * Gets the armourEffect.
+	 *
 	 * @return The armourEffect.
 	 */
 	public ArmourSet getArmourEffect() {
@@ -324,6 +341,7 @@ public final class BattleState {
 
 	/**
 	 * Sets the armourEffect.
+	 *
 	 * @param armourEffect The armourEffect to set.
 	 */
 	public void setArmourEffect(ArmourSet armourEffect) {
@@ -332,6 +350,7 @@ public final class BattleState {
 
 	/**
 	 * Gets the attacking entity.
+	 *
 	 * @return The entity.
 	 */
 	public Entity getAttacker() {
@@ -340,10 +359,9 @@ public final class BattleState {
 
 	public int getTotalDamage() {
 		int hit = Math.max(estimatedHit, 0) + Math.max(secondaryHit, 0);
-
 		if (targets != null) {
 			for (BattleState s : targets) {
-				if (s != null) {
+				if (s != null && s != this) {
 					hit += Math.max(s.getEstimatedHit(), 0) + Math.max(s.getSecondaryHit(), 0);
 				}
 			}
