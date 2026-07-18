@@ -8,6 +8,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
+import org.rs09.consts.Items;
 
 /**
  * Represents the types of armour sets.
@@ -129,6 +130,15 @@ public enum ArmourSet {
 			}
 			return super.isUsing(e);
 		}
+	},
+	/**
+	 * Berserker Necklace sets
+	 */
+	BERSERKER_NECKLACE_SETS(null, new int[][] { { Items.BERSERKER_NECKLACE_11128 }, { Items.TOKTZ_XIL_AK_6523, Items.TOKTZ_XIL_EK_6525, Items.TZHAAR_KET_EM_6527, Items.TZHAAR_KET_OM_6528 } }) {
+		@Override
+		public boolean isUsing(Entity e) {
+			return super.isUsing(e);
+		}
 	};
 
 	/**
@@ -148,8 +158,9 @@ public enum ArmourSet {
 	 */
 	private ArmourSet(Graphics endGraphic, int[][] set) {
 		this.endGraphic = endGraphic;
-		this.sets = new Item[4][5];
+		this.sets = new Item[set.length][];
 		for (int i = 0; i < set.length; i++) {
+			sets[i] = new Item[set[i].length];
 			for (int k = 0; k < sets[i].length; k++) {
 				sets[i][k] = new Item(set[i][k]);
 			}
@@ -197,7 +208,7 @@ public enum ArmourSet {
 				}
 			}
 		}
-		return hits == 4;
+		return hits == sets.length;
 	}
 
 }

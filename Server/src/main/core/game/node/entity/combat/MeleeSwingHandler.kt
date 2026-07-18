@@ -253,10 +253,14 @@ open class MeleeSwingHandler (vararg flags: SwingHandlerFlag)
 
             return 1.0 + (e!!.skills.maximumLifepoints - e.skills.lifepoints) * 0.01
         }
+        var multiplier = 1.0
         if(e is Player && e.isWearingVoid(CombatStyle.MELEE) && (skillId == Skills.ATTACK || skillId == Skills.STRENGTH)) {
-            return 1.1
+            multiplier += 0.1
         }
-        return 1.0
+        if (e is Player && e.properties.armourSet === ArmourSet.BERSERKER_NECKLACE_SETS && skillId == Skills.STRENGTH) {
+            multiplier += 0.2
+        }
+        return multiplier
     }
 
     override fun getArmourSet(e: Entity?): ArmourSet? {
@@ -268,6 +272,9 @@ open class MeleeSwingHandler (vararg flags: SwingHandlerFlag)
         }
         if (ArmourSet.VERAC.isUsing(e)) {
             return ArmourSet.VERAC
+        }
+        if (ArmourSet.BERSERKER_NECKLACE_SETS.isUsing(e)) {
+            return ArmourSet.BERSERKER_NECKLACE_SETS
         }
         return if (ArmourSet.TORAG.isUsing(e)) {
             ArmourSet.TORAG
