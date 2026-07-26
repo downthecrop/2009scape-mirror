@@ -145,11 +145,6 @@ public final class TzhaarFightCavesPlugin extends ActivityPlugin {
 	public void leave(Player player, int wave) {
 		activeNPCs.clear();
 		player.getProperties().setTeleportLocation(getSpawnLocation());
-		player.getSkills().restore();
-		player.timers.removeTimer("poison");
-		player.timers.removeTimer("disease");
-		player.timers.removeTimer("teleblock");
-		player.getSettings().updateRunEnergy(-100);
 		boolean practice = player.getAttribute("fc_practice_jad", false);
 		if (wave == 63) {
 			if (!practice) {
