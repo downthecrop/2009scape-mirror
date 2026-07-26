@@ -119,6 +119,8 @@ public final class BrimhavenCourse extends OptionHandler {
 		final Direction dir = direction;
 		final Direction faceDirection = Direction.get(object.getDirection().toInteger() - 1 & 3);
 		final Location start = player.getLocation();
+		player.setDirection(faceDirection);
+		player.faceLocation(start.transform(faceDirection));
 		player.getAppearance().setAnimations(Animation.create(1118 + m));
 		player.getAppearance().sync();
 		AgilityHandler.climb(player, -1, new Animation(1117 + m), start.transform(dir), 0.0, null);
@@ -143,12 +145,12 @@ public final class BrimhavenCourse extends OptionHandler {
 				} else if (count == 6) {
 					player.getAppearance().setAnimations();
 					player.getAppearance().sync();
-					AgilityHandler.forceWalk(player, -1, last, last.transform(dir), Animation.create(1120 + m), 5, getExp(player, 22.0), null).setDirection(faceDirection);
+					AgilityHandler.forceWalk(player, -1, last, last.transform(dir), Animation.create(1120 + m), 5, getExp(player, 22.0), null, faceDirection);
 					player.logoutListeners.remove("brimcourse");
 					return true;
 				}
 				player.logoutListeners.remove("brimcourse");
-				AgilityHandler.forceWalk(player, -1, last, last = last.transform(dir), Animation.create(1118 + m), 5, 0.0, null).setDirection(faceDirection);
+				AgilityHandler.forceWalk(player, -1, last, last = last.transform(dir), Animation.create(1118 + m), 5, 0.0, null, faceDirection);
 				return false;
 			}
 		});
@@ -272,7 +274,7 @@ public final class BrimhavenCourse extends OptionHandler {
 				public boolean pulse() {
 					if (!finish) {
 						setDelay(2);
-						AgilityHandler.fail(player, 1, player.getLocation().transform(0, 0, -3), Animation.create(189), getHitAmount(player), "You stepped on a broken piece of plank!");
+						AgilityHandler.fail(player, 1, player.getLocation().transform(0, 0, -3), Animation.create(768), getHitAmount(player), "You stepped on a broken piece of plank!");
 						finish = true;
 						return false;
 					}
@@ -282,7 +284,7 @@ public final class BrimhavenCourse extends OptionHandler {
 			});
 			return;
 		}
-		AgilityHandler.walk(player, -1, start, end, ForceMovement.WALK_ANIMATION, getExp(player, 6.0), null);
+		AgilityHandler.walk(player, -1, start, end, Animation.create(1426), getExp(player, 6.0), null);
 	}
 
 	/**
@@ -389,6 +391,7 @@ public final class BrimhavenCourse extends OptionHandler {
 			}
 			break;
 		case 3551:
+		case 3583:
 			return n.getLocation();
 		}
 		return null;

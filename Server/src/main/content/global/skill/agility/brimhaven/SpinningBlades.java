@@ -6,6 +6,9 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.system.task.MovementHook;
 import core.game.system.task.Pulse;
+import core.net.packet.PacketRepository;
+import core.net.packet.context.PlayerContext;
+import core.net.packet.out.ClearMinimapFlag;
 import kotlin.Unit;
 import core.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -24,6 +27,9 @@ public final class SpinningBlades implements MovementHook {
 		final Direction dir = e.getDirection();
 		final Player player = (Player) e;
 		final Location start = l.transform(-dir.getStepX(), -dir.getStepY(), 0);
+		player.getPulseManager().clear();
+		player.getWalkingQueue().reset();
+		PacketRepository.send(ClearMinimapFlag.class, new PlayerContext(player));
 		e.lock(5);
 		if(e.isPlayer())
 		{

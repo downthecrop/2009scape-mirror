@@ -139,6 +139,13 @@ public final class AgilityHandler {
 	 * @return The force movement instance, if force movement is used.
 	 */
 	public static ForceMovement forceWalk(final Player player, final int courseIndex, Location start, Location end, Animation animation, int speed, final double experience, final String message) {
+		return forceWalk(player, courseIndex, start, end, animation, speed, experience, message, null);
+	}
+
+	/**
+	 * Walks across an obstacle while using an explicit force-movement facing direction.
+	 */
+	public static ForceMovement forceWalk(final Player player, final int courseIndex, Location start, Location end, Animation animation, int speed, final double experience, final String message, Direction direction) {
 		player.logoutListeners.put("forcewalk", p -> {
 			p.setLocation(player.getLocation().transform(0,0,0));
 			return Unit.INSTANCE;
@@ -158,6 +165,9 @@ public final class AgilityHandler {
 				player.logoutListeners.remove("forcewalk");
 			}
 		};
+		if (direction != null) {
+			movement.setDirection(direction);
+		}
 		movement.start();
 		GameWorld.getPulser().submit(movement);
 		return movement;
