@@ -37,6 +37,10 @@ import org.rs09.consts.Items
 import org.rs09.consts.Sounds
 import kotlin.math.floor
 
+private const val DREAM_HEAL_INTERVAL_TICKS = 50
+private const val DREAM_HARD_RESET_INTERVAL_TICKS = 90
+private const val DREAM_HARD_RESET_DELAY_TICKS = 0
+
 class LunarListeners : SpellListener("lunar"), Commands {
 
     override fun defineListeners() {
@@ -592,32 +596,46 @@ class LunarListeners : SpellListener("lunar"), Commands {
 
     // Level 79
     private fun dream(player: Player) {
-        if(player.skills.lifepoints >= getStatLevel(player, Skills.HITPOINTS)) {
+        if (player.skills.lifepoints >= getStatLevel(player, Skills.HITPOINTS)) {
             sendMessage(player, "You have no need to cast this spell since your hitpoints are already full.")
             throw IllegalStateException()
         }
-
         // https://runescape.wiki/w/Dream?oldid=880976 claims Dream makes you heal 1 hp every 20 seconds
         // https://oldschool.runescape.wiki/w/Dream claims that Dream has its own timer, so the Dream heals don't need
         // to align with the natural heals
         val timer = getOrStartTimer<SkillRestore>(player)
+        val dreamStartAnimationTicks = animationDuration(Animation(Animations.LUNAR_SPELLBOOK_DREAM_START_6295))
+        var nextHealTick = getWorldTicks() + dreamStartAnimationTicks + DREAM_HEAL_INTERVAL_TICKS
+        var nextHardResetTick = -1
+        var waitingForHardReset = false
         animate(player, Animations.LUNAR_SPELLBOOK_DREAM_START_6295)
         removeRunes(player, true)
         addXP(player, 82.0)
-        delayEntity(player, 4)
-        queueScript(player, 4, QueueStrength.WEAK) { stage: Int ->
+        delayEntity(player, dreamStartAnimationTicks)
+        queueScript(player, dreamStartAnimationTicks, QueueStrength.WEAK) { stage: Int ->
             if (stage == 0) {
                 sendGraphics(Graphics.LUNAR_SPELLBOOK_DREAM_1056, player.location)
                 playAudio(player, Sounds.LUNAR_SLEEP_3619)
                 return@queueScript delayScript(player, 5)
             }
+            if (waitingForHardReset) {
+                waitingForHardReset = false
+                nextHardResetTick = getWorldTicks() + DREAM_HARD_RESET_INTERVAL_TICKS
+            } else if (nextHardResetTick != -1 && getWorldTicks() >= nextHardResetTick) {
+                // The 530 client eventually drops Dream back to idle if it only sees repeated 6296 updates
+                // Sending an explicit reset makes the next 6296 a full restart instead of a same-sequence refresh
+                resetAnimator(player)
+                waitingForHardReset = true
+                return@queueScript delayScript(player, DREAM_HARD_RESET_DELAY_TICKS)
+            } else if (nextHardResetTick == -1) {
+                nextHardResetTick = getWorldTicks() + DREAM_HARD_RESET_INTERVAL_TICKS
+            }
             animate(player, Animations.LUNAR_SPELLBOOK_DREAM_MID_6296)
             sendGraphics(Graphics.LUNAR_SPELLBOOK_DREAM_1056, player.location)
-            // This heals 2 HP every min. Naturally you heal 1 for a total of 3
-            // The script steps every 5 ticks and we want 50 ticks before a heal
-            if (stage.mod(10) == 0) {
+            if (getWorldTicks() >= nextHealTick) {
                 val amt = timer.getHealAmount(player) //accounts for regen brace
                 heal(player, amt)
+                nextHealTick += DREAM_HEAL_INTERVAL_TICKS
                 if (player.skills.lifepoints >= getStatLevel(player, Skills.HITPOINTS)) {
                     animate(player, Animations.LUNAR_SPELLBOOK_DREAM_END_6297)
                     return@queueScript stopExecuting(player)
@@ -872,6 +890,5 @@ class LunarListeners : SpellListener("lunar"), Commands {
         }
     }
 }
-
 
 
