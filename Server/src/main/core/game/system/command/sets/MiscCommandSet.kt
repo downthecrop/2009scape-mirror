@@ -1,6 +1,7 @@
 package core.game.system.command.sets
 
 import content.global.handlers.iface.*
+import content.global.skill.summoning.familiar.Familiar
 import content.global.skill.cooking.fermenting.BrewGrowth
 import content.global.skill.farming.timers.*
 import content.minigame.fishingtrawler.TrawlerLoot
@@ -39,6 +40,27 @@ import org.rs09.consts.Items
 import java.awt.HeadlessException
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
+
+private const val INFINITE_SPECIAL_ATTRIBUTE = "infinite-special"
+private const val ALLOW_ADMIN_AGGRESSION_ATTRIBUTE = "/save:allow_admin_aggression"
+
+private fun resolveBooleanToggle(player: Player, args: Array<String>, attribute: String): Boolean? {
+    return when {
+        args.size < 2 -> !player.getAttribute(attribute, false)
+        args[1].equals("true", ignoreCase = true) -> true
+        args[1].equals("false", ignoreCase = true) -> false
+        else -> null
+    }
+}
+
+private fun setBooleanAttribute(player: Player, attribute: String, enabled: Boolean, label: String) {
+    if (enabled) {
+        setAttribute(player, attribute, true)
+    } else {
+        removeAttribute(player, attribute)
+    }
+    sendMessage(player, "$label is now ${if (enabled) "enabled" else "disabled"}.")
+}
 
 @Initializable
 class MiscCommandSet : CommandSet(Privilege.ADMIN){
@@ -662,29 +684,49 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
                 notify(player,"No parent NPC found.")
             }
         }
-        define("infinitespecial", Privilege.ADMIN, "::infinitespecial <true|false>", "Turns the infinite special-attack flag on or off for your player."){ player, args ->
-            val usageStr = "Usage: ::infinitespecial true|false"
-            if(args.size < 2){
-                reject(player, usageStr)
-            }
-            when(args[1]){
-                "true" -> player.setAttribute("infinite-special", true)
-                "false" -> player.removeAttribute("infinite-special")
-                else -> reject(player, usageStr)
-            }
-        }
-        define("allowaggro", Privilege.ADMIN, "allowaggro true | false", "Toggle NPCs aggroing on you") { player, args ->
-            val usageStr = "Usage: ::allowaggro true | false"
-            if(args.size < 2) {
-                notify(player, "Allow admin aggression is currently ${player.getAttribute("/save:allow_admin_aggression", false)}")
+        define(
+            "infinitespecial",
+            Privilege.ADMIN,
+            "::infinitespecial [true|false]",
+            "Toggles infinite special attack energy for your player (special-attack flag)."
+        ) { player, args ->
+            val enabled = resolveBooleanToggle(player, args, INFINITE_SPECIAL_ATTRIBUTE)
+            if (enabled == null) {
+                reject(player, "Usage: ::infinitespecial [true|false]")
                 return@define
             }
-            when(args[1]) {
-                "true" -> player.setAttribute("/save:allow_admin_aggression", true)
-                "false" -> player.setAttribute("/save:allow_admin_aggression", false)
-                else -> reject(player, usageStr)
+            setBooleanAttribute(player, INFINITE_SPECIAL_ATTRIBUTE, enabled, "Infinite special attack")
+        }
+        define(
+            "infinitespecialmove",
+            Privilege.ADMIN,
+            "::infinitespecialmove [true|false]",
+            "Toggles infinite Summoning familiar special move points for your player."
+        ) { player, args ->
+            val enabled = resolveBooleanToggle(player, args, Familiar.INFINITE_SPECIAL_MOVE_ATTRIBUTE)
+            if (enabled == null) {
+                reject(player, "Usage: ::infinitespecialmove [true|false]")
+                return@define
             }
-            notify(player, "Setting aggro ${args[1]}")
+            setBooleanAttribute(
+                player,
+                Familiar.INFINITE_SPECIAL_MOVE_ATTRIBUTE,
+                enabled,
+                "Infinite familiar special move energy"
+            )
+        }
+        define(
+            "allowaggro",
+            Privilege.ADMIN,
+            "::allowaggro [true|false]",
+            "Toggles NPCs aggroing on you as an admin."
+        ) { player, args ->
+            val enabled = resolveBooleanToggle(player, args, ALLOW_ADMIN_AGGRESSION_ATTRIBUTE)
+            if (enabled == null) {
+                reject(player, "Usage: ::allowaggro [true|false]")
+                return@define
+            }
+            setBooleanAttribute(player, ALLOW_ADMIN_AGGRESSION_ATTRIBUTE, enabled, "Admin NPC aggression")
         }
 
         define("rules", Privilege.STANDARD, "", "Shows the rules."){ player, _ ->

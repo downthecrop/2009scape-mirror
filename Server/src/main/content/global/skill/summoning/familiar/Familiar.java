@@ -82,6 +82,8 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	 * The amount of special points left.
 	 */
 	protected int specialPoints = 60;
+	
+	public static final String INFINITE_SPECIAL_MOVE_ATTRIBUTE = "infinite-special-move";
 
 	/**
 	 * The pouch id.
@@ -494,7 +496,9 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 			owner.getInventory().remove(new Item(scroll.getItemId()));
 			playAudio(owner, Sounds.SPELL_4161);
 			visualizeSpecialMove();
-			updateSpecialPoints(specialCost);
+			if (!owner.getAttribute(INFINITE_SPECIAL_MOVE_ATTRIBUTE, false)) {
+				updateSpecialPoints(specialCost);
+			}
 			owner.getSkills().addExperience(Skills.SUMMONING, scroll.getExperience(), true);
 		}
 		return true;
