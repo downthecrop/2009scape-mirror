@@ -1,8 +1,10 @@
 package content.global.ame
 
 import content.global.ame.events.surpriseexam.MysteriousOldManNPC
+import core.api.getAttribute
 import core.api.playGlobalAudio
 import core.api.poofClear
+import core.api.removeAttribute
 import core.api.sendMessage
 import core.api.setAttribute
 import core.api.utils.WeightBasedTable
@@ -25,8 +27,6 @@ import core.tools.secondsToTicks
 import core.tools.ticksToCycles
 import org.rs09.consts.NPCs
 import org.rs09.consts.Sounds
-import kotlin.math.ceil
-import kotlin.math.min
 import kotlin.random.Random
 import kotlin.reflect.full.createInstance
 
@@ -37,7 +37,6 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
     val SMOKE_GRAPHICS = Graphics(86)
     var initialized = false
     var finalized = false
-    var timerPaused = false
     var ticksLeft = secondsToTicks(180)
     private val combatBracket = intArrayOf(10, 20, 40, 60, 90)
 
@@ -57,6 +56,7 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
             poofClear(this)
             playGlobalAudio(this.location, Sounds.SMOKEPUFF_1930, ticksToCycles(1))
         }
+        removeAttribute(player, "random:pause")
         finalized = true
     }
 
@@ -93,7 +93,6 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
     override fun init() {
         initialized = true
         finalized = false
-        timerPaused = false
         spawnLocation ?: terminate()
         location = spawnLocation
         player.setAttribute("re-npc", this)
@@ -150,7 +149,8 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
     }
 
     fun sayLine(npc: NPC, phrases: Array<String>, hasOpeningPhrase: Boolean, hasOverTimePhrase: Boolean) {
-        if (!timerPaused && (ticksLeft % 20 == 0 || ticksLeft <= 2)) { //unless the Certer interface is up, speak every 20 ticks, or in the 2nd-to-last tick before attack/note-&-teleport
+        val inInteraction = getAttribute(player, "random:pause", false) //used by Certer
+        if ((ticksLeft % 20 == 0 || ticksLeft <= 2) && !inInteraction) { //speak every 20 ticks, or in the 2nd-to-last tick before attack/note-&-teleport
             var playDwarfWhistle = true
             if (ticksLeft == secondsToTicks(180) && hasOpeningPhrase) {
                 sendChat(phrases[0])

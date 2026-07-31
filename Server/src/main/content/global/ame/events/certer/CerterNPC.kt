@@ -6,6 +6,7 @@ import org.rs09.consts.NPCs
 import content.global.ame.RandomEventNPC
 import core.api.animate
 import core.api.lock
+import core.api.setAttribute
 import core.api.utils.WeightBasedTable
 
 class CerterNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(NPCs.GILES_2538) {
@@ -33,8 +34,7 @@ class CerterNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(NP
             "It's really rude to ignore someone, ${player.username}!",
             "No-one ignores me!"
         )
-        player.setAttribute("random:pause", false)
-        player.setAttribute("certer:reward", false)
+        setAttribute(player, "certer:reward", false)
         animate(this, Emotes.BOW.animation, true)
     }
 
