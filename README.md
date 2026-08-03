@@ -81,6 +81,20 @@ There are many ways everyone can contribute! From the most seasoned programmers 
 
 * **Code Contributors**: As a remake, we have massive amounts of content that need to be implemented or corrected. If you know how to program or are willing to learn, this is where you could be extremely helpful! We need everything from quests, to dialogue, to mini-games, to skills that still need to be corrected or implemented. This is perhaps one of the most valuable ways someone could help out the project! If you are interested in developing content, reach out in the development channel of the Discord.
 
+
+### Policy on Use of AI Tools
+
+You, the contributor, agree to submit quality code to the best of your ability which you have tested yourself and confirmed that it works as intended, and if it doesn’t work, you agree to take constructive feedback and fix it. 
+
+You should be able to explain or defend how any part of your code works, without the use of AI or any other assistive tools. 
+
+2009scape reserves the right to reject your MR on grounds of poor quality, poor functionality, poor code style, poor attitudes or unethical over-reliance on assistive tools.  
+
+2009scape reserves the right to bar an individual from contributing due to patterns of aforementioned behavior, and close or delete all future MRs or issues or suggestions from said person without given explanation.
+
+AI may not be used to generate your MR description, your issue description, or any responses to any discourse present on the Gitlab at any time or in any fashion. If you use AI in any of these places, it will be assumed that your entire contribution is AI and that you have no clue how it functions, and the remainder of the policy outlined above will be applied to you immediately.
+
+
 ## Content Developers: Setting Up the Project.
 ### GitLab Setup
 **Note: This allows you to commit changes to the main repo (with approval)! Also, always stay up to date with the most recent updates by pulling into your copy when 2009Scape updates!**
