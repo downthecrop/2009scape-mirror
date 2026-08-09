@@ -14,6 +14,7 @@ import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
+import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.*;
 import content.data.Quests;
@@ -108,6 +109,7 @@ public final class StallThiefPulse extends SkillPulse<Scenery> {
 		}
 		final boolean success = success();
 		if (success) {
+			playAudio(player, Sounds.PICK_2581);
 			if (stall == Stall.SILK_STALL) {
 				player.getSavedData().getGlobalData().setSilkSteal(System.currentTimeMillis() + 1800000);
 			}
