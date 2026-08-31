@@ -257,6 +257,7 @@ abstract class DialogueLabeller : DialogueFile() {
 
     /** Runs arbitrary code when the dialogue closes, once. **/
     fun afterClose(callback: (player: Player) -> Unit) {
+        if (!stageHit || super.stage != dialogueCounter || jumpTo != null) return
         val hook = object : EventHook<DialogueCloseEvent> {
             override fun process(entity: Entity, event: DialogueCloseEvent) {
                 val you = entity as Player

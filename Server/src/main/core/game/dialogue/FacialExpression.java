@@ -17,22 +17,22 @@ public enum FacialExpression {
 
     //Chat heads from oldschool 2009scape?
     //Maybe for gnomes or dwarves? Chat heads are frozen when used on Human NPCs
-    OLD_HAPPY(588),
-    OLD_CALM_TALK1(589),
-    OLD_CALM_TALK2(590),
-    OLD_DEFAULT(591),
-    OLD_EVIL1(592),
-    OLD_EVIL2(593),
-    OLD_NORMAL(594),
-    OLD_SNEAKY(595),
-    OLD_DISTRESSED(596),
-    OLD_DISTRESSED2(597),
-    OLD_ALMOST_CRYING(598),
+    OLD_HAPPY(588), // head moves up and to the left
+    OLD_CALM_TALK1(589), // head moves to the left
+    OLD_CALM_TALK2(590), // head nods up and down
+    OLD_DEFAULT(591), // head moves to the left
+    OLD_EVIL1(592), // head moves down, then to the left
+    OLD_EVIL2(593), // head moves subtly down and to the right
+    OLD_NORMAL(594), // head tilts to the left
+    OLD_SNEAKY(595), // head moves down and to the right
+    OLD_DISTRESSED(596), // head shakes left and right, mouth open
+    OLD_DISTRESSED2(597), // head moves down
+    OLD_ALMOST_CRYING(598), // head moves to the right, then up
     OLD_BOWS_HEAD_SAD(599),
     OLD_DRUNK_LEFT(600),
     OLD_DRUNK_RIGHT(601),
     OLD_NOT_INTERESTED(602),
-    OLD_SLEEPY(603),
+    OLD_SLEEPY(603),  // head moves severely down and to the right
     OLD_PLAIN_EVIL(604),
     OLD_LAUGH1(605),
     OLD_LAUGH2(606),
@@ -72,6 +72,7 @@ public enum FacialExpression {
     SLEEPING(9802),
     SILENT(9804),
     NEUTRAL(9808),
+    NEUTRAL_FAST(9810), // Like neutral but mouth starts moving immediately
     THINKING(9812),
     HALF_THINKING(9814),
     DISGUSTED(9816),

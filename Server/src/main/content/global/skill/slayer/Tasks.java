@@ -14,6 +14,7 @@ import content.data.Quests;
  * A non-garbage way of representing tasks
  * Slayer level source: <a href="https://web.archive.org/web/20090202035813/http://runescape.com/kbase/viewarticle.ws?article_id=1933">...</a>
  * Combat level source: None
+ * ORDINAL BOUND
  * @author ceik
  * @author gregf
  */

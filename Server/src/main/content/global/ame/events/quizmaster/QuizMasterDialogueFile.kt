@@ -78,9 +78,6 @@ class QuizMasterDialogueFile : DialogueLabeller() {
 
     override fun addConversation() {
         assignToIds(NPCs.QUIZ_MASTER_2477)
-        afterClose { player ->
-            loadLabel(player, "question")
-        }
 
         npc(FacialExpression.FRIENDLY,"WELCOME to the GREATEST QUIZ SHOW in the", "whole of ${ServerConstants.SERVER_NAME}:", "<col=8A0808>O D D</col>  <col=8A088A>O N E</col>  <col=08088A>O U T</col>", unclosable = true)
         player(FacialExpression.THINKING, "I'm sure I didn't ask to take part in a quiz show...", unclosable = true)
