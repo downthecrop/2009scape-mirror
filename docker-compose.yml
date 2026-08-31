@@ -11,6 +11,9 @@ services:
       - "./config:/app/Server/worldprops"
     ports:
       - "43594-43600:43594-43600"
+      - "5005:5005"
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
 
   db:
     # current LTS (Long-Term Support) version
